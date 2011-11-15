@@ -6,16 +6,30 @@
 	icon_state = "console"
 	density = 1
 	anchored = 1
+	var id = ""
 	var/obj/machinery/mineral/processing_unit/machine = null
 
 /obj/machinery/mineral/processing_unit_console/New()
 	..()
 	spawn(7)
+		/**
 		src.machine = locate(/obj/machinery/mineral/processing_unit, get_step(src, EAST))
 		if (machine)
 			machine.CONSOLE = src
 		else
 			del(src)
+		*/
+		//Commented out for being Stupid and unwieldy. -Fastler
+
+		for(var/obj/machinery/mineral/processing_unit/M in world)
+			if(src.id == M.id)
+				src.machine = M
+		if (machine)
+			machine.CONSOLE = src
+		else
+			del(src)
+
+
 
 /obj/machinery/mineral/processing_unit_console/attack_hand(user as mob)
 
@@ -193,6 +207,7 @@
 	icon_state = "furnace"
 	density = 1
 	anchored = 1.0
+	var id = ""
 	var/obj/machinery/mineral/input = null
 	var/obj/machinery/mineral/output = null
 	var/obj/machinery/mineral/CONSOLE = null
