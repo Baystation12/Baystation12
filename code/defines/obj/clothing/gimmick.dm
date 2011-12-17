@@ -547,6 +547,7 @@ obj/item/clothing/suit/justice
 	icon_state = "justice"
 	item_state = "justice"
 	flags = FPRINT | TABLEPASS
+
 //stylish new hats
 
 /obj/item/clothing/head/bowlerhat
