@@ -74,7 +74,7 @@
 		var/burning = 0
 		if(istype(target, /turf/simulated))
 			var/turf/simulated/T = target
-			if(T.active_hotspot)
+			if(locate(/obj/fire) in T)
 				burning = 1
 
 		usr << "\blue @[target.x],[target.y] ([GM.group_multiplier]): O:[GM.oxygen] T:[GM.toxins] N:[GM.nitrogen] C:[GM.carbon_dioxide] w [GM.temperature] Kelvin, [GM.return_pressure()] kPa [(burning)?("\red BURNING"):(null)]"
