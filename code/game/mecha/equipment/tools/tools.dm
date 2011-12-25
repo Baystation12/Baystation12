@@ -26,6 +26,7 @@
 				if(cargo_holder.cargo.len < cargo_holder.cargo_capacity)
 					chassis.occupant_message("You lift [target] and start to load it into cargo compartment.")
 					chassis.visible_message("[chassis] lifts [target] and starts to load it into cargo compartment.")
+					playsound(chassis,'hydraulic.ogg',40,1)
 					set_ready_state(0)
 					chassis.use_power(energy_drain)
 					O.anchored = 1
@@ -76,6 +77,7 @@
 		chassis.use_power(energy_drain)
 		chassis.visible_message("<font color='red'><b>[chassis] starts to drill [target]</b></font>", "You hear the drill.")
 		chassis.occupant_message("<font color='red'><b>You start to drill [target]</b></font>")
+		playsound(chassis,'mechdrill.ogg',40,1)
 		chassis.use_power(energy_drain)
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete

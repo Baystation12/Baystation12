@@ -102,6 +102,8 @@
 					affecting.losebreath = min(affecting.losebreath + 1, 3)
 					last_suffocate = world.time
 					flick("disarm/killf", S)
+					if(istype(affecting,/mob/living/carbon/human))
+						affecting:autopsy_choked = 1
 		else
 	return
 
@@ -172,6 +174,8 @@
 							assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>")
 							assailant.next_move = world.time + 10
 							affecting.losebreath += 1
+							if(istype(affecting,/mob/living/carbon/human))
+								affecting:autopsy_choked = 1
 							hud1.icon_state = "disarm/kill1"
 						else
 							hud1.icon_state = "disarm/kill"

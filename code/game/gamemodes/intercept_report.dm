@@ -107,8 +107,6 @@
 
 
 /datum/intercept_text/proc/build_traitor(datum/mind/correct_person)
-	var/name_1 = pick(src.org_names_1)
-	var/name_2 = pick(src.org_names_2)
 	var/fingerprints
 	var/traitor_name
 	var/prob_right_dude = rand(prob_correct_person_lower, prob_correct_person_higher)
@@ -122,7 +120,7 @@
 	else
 		fingerprints = pick_fingerprints()
 
-	src.text += "<BR><BR>The <B>[name_1] [name_2]</B> implied an undercover operative was acting on their behalf on the station currently.<BR>"
+	src.text += "<BR><BR>The Syndicate implied an undercover operative was acting on their behalf on the station currently.<BR>"
 	src.text += "After some investigation, we "
 	if(traitor_name)
 		src.text += "are [prob_right_dude]% sure that [traitor_name] may have been involved, and should be closely observed."
@@ -133,8 +131,6 @@
 
 
 /datum/intercept_text/proc/build_cult(datum/mind/correct_person)
-	var/name_1 = pick(src.org_names_1)
-	var/name_2 = pick(src.org_names_2)
 	var/traitor_name
 	var/traitor_job
 	var/prob_right_dude = rand(prob_correct_person_lower, prob_correct_person_higher)
@@ -157,7 +153,7 @@
 	else
 		traitor_name = pick_mob()
 
-	src.text += "<BR><BR>It has been brought to our attention that the [name_1] [name_2] have stumbled upon some dark secrets. They apparently want to spread the dangerous knowledge on as many stations as they can.<BR>"
+	src.text += "<BR><BR>It has been brought to our attention that the Syndicate have stumbled upon some dark secrets. They apparently want to spread the dangerous knowledge on as many stations as they can.<BR>"
 	src.text += "Based on our intelligence, we are [prob_right_job]% sure that if true, someone doing the job of [traitor_job] on your station may have been converted "
 	src.text += "and instilled with the idea of the flimsiness of the real world, seeking to destroy it. "
 	if(prob(prob_right_dude))
@@ -167,8 +163,6 @@
 
 
 /datum/intercept_text/proc/build_rev(datum/mind/correct_person)
-	var/name_1 = pick(src.org_names_1)
-	var/name_2 = pick(src.org_names_2)
 	var/traitor_name
 	var/traitor_job
 	var/prob_right_dude = rand(prob_correct_person_lower, prob_correct_person_higher)
@@ -193,7 +187,7 @@
 	else
 		traitor_name = src.pick_mob()
 
-	src.text += "<BR><BR>It has been brought to our attention that the [name_1] [name_2] are attempting to stir unrest on one of our stations in your sector. <BR>"
+	src.text += "<BR><BR>It has been brought to our attention that the Syndicate are attempting to stir unrest on one of our stations in your sector. <BR>"
 	src.text += "Based on our intelligence, we are [prob_right_job]% sure that if true, someone doing the job of [traitor_job] on your station may have been brainwashed "
 	src.text += "at a recent conference, and their department should be closely monitored for signs of mutiny. "
 	if(prob(prob_right_dude))

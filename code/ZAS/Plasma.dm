@@ -1,11 +1,14 @@
 pl_control/var
 	PLASMA_DMG = 3
+	PLASMA_DMG_NAME = "Plasma Damage Multiplier"
 	PLASMA_DMG_DESC = "Multiplier on how much damage inhaling plasma can do."
 
 	OXY_TO_PLASMA = 1
+	OXY_TO_PLASMA_NAME = "O2/Plasma Ratio"
 	OXY_TO_PLASMA_DESC = "Multiplier for the ratio of oxygen to plasma required in fires."
 
 	CLOTH_CONTAMINATION = 1 //If this is on, plasma does damage by getting into cloth.
+	CLOTH_CONTAMINATION_NAME = "Plasma - Cloth Contamination"
 	CLOTH_CONTAMINATION_RANDOM = 60
 	CLOTH_CONTAMINATION_METHOD = "Toggle"
 	CLOTH_CONTAMINATION_DESC = "If set to nonzero, plasma will contaminate cloth items (uniforms, backpacks, etc.)\
@@ -14,11 +17,13 @@ pl_control/var
 
 	ALL_ITEM_CONTAMINATION = 0 //If this is on, any item can be contaminated, so suits and tools must be discarded or
 										  //decontaminated.
+	ALL_ITEM_CONTAMINATION_NAME = "Plasma - Full Contamination"
 	ALL_ITEM_CONTAMINATION_RANDOM = 10
 	ALL_ITEM_CONTAMINATION_METHOD = "Toggle"
-	ALL_ITEM_CONTAMINATION_DESC = "Like CLOTH_CONTAMINATION, but all item types are susceptible."
+	ALL_ITEM_CONTAMINATION_DESC = "Like Cloth Contamination, but all item types are susceptible."
 
 	PLASMAGUARD_ONLY = 0
+	PLASMAGUARD_ONLY_NAME = "Plasma - Biosuits/Spacesuits Only"
 	PLASMAGUARD_ONLY_RANDOM = 20
 	PLASMAGUARD_ONLY_METHOD = "Toggle"
 	PLASMAGUARD_ONLY_DESC = "If on, any suits that are not biosuits or space suits will not protect against contamination."
@@ -28,11 +33,13 @@ pl_control/var
 	//CANISTER_CORROSION_METHOD = "Toggle"
 
 	GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 10,000.
+	GENETIC_CORRUPTION_NAME = "Plasma - Genetic Corruption"
 	GENETIC_CORRUPTION_RANDOM = "PROB10/3d6"
 	GENETIC_CORRUPTION_METHOD = "Numeric"
 	GENETIC_CORRUPTION_DESC = "When set to a probability in 1000, any humans in plasma will have this chance to develop a random mutation."
 
 	SKIN_BURNS = 1       //Plasma has an effect similar to mustard gas on the un-suited.
+	SKIN_BURNS_NAME = "Plasma - Skin Burns"
 	SKIN_BURNS_RANDOM = 10
 	SKIN_BURNS_METHOD = "Toggle"
 	SKIN_BURNS_DESC = "When toggled, humans with exposed skin will suffer burns (similar to mustard gas) in plasma."
@@ -42,6 +49,7 @@ pl_control/var
 	//PLASMA_INJECTS_TOXINS_METHOD = "Toggle"
 
 	EYE_BURNS = 0 //Plasma burns the eyes of anyone not wearing eye protection.
+	EYE_BURNS_NAME = "Plasma - Eye Burns"
 	EYE_BURNS_RANDOM = 30
 	EYE_BURNS_METHOD = "Toggle"
 	EYE_BURNS_DESC = "When toggled, humans without masks that cover the eyes will suffer temporary blurriness and sight loss,\
@@ -59,12 +67,16 @@ pl_control/var
 	//PLASMA_DMG_QUOTIENT_RANDOM = "1d10+4"
 
 	CONTAMINATION_LOSS = 0.1
+	_NAME = "Plasma - Contamination Damage"
 	CONTAMINATION_LOSS_DESC = "A number representing the damage done per life cycle by contaminated items."
+
 	PLASMA_HALLUCINATION = 1
+	PLASMA_HALLUCINATION_NAME = "Plasma - Hallucination"
 	PLASMA_HALLUCINATION_METHOD = "Toggle"
 	PLASMA_HALLUCINATION_DESC = "If toggled, uses the remnants of the hallucination code to induce visions in those\
 	who breathe plasma."
 	N2O_HALLUCINATION = 1
+	N2O_HALLUCINATION_NAME = "Nitrous Oxide - Hallucination"
 	N2O_HALLUCINATION_METHOD = "Toggle"
 	N2O_HALLUCINATION_DESC = "If toggled, uses the remnants of the hallucination code to induce visions in those\
 	who breathe N2O."

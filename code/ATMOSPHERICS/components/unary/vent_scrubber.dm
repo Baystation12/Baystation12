@@ -127,6 +127,7 @@
 
 
 				//Remix the resulting gases
+				AirflowAttract(loc,filtered_out.return_pressure())
 				air_contents.merge(filtered_out)
 
 				loc.assume_air(removed)
@@ -141,6 +142,7 @@
 			var/transfer_moles = environment.total_moles()*(volume_rate/environment.volume)
 
 			var/datum/gas_mixture/removed = loc.remove_air(transfer_moles)
+			AirflowAttract(loc,removed.return_pressure())
 
 			air_contents.merge(removed)
 

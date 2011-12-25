@@ -137,6 +137,8 @@
 	src.stunned = max(src.stunned,10)//This should work for now, more is really silly and makes you lay there forever
 //	if(src.weakened < 20*siemens_coeff)	src.weakened = 20*siemens_coeff
 	src.weakened = max(src.weakened,10)
+	if(istype(src,/mob/living/carbon/human))
+		src:autopsy_shocked = 1
 	return shock_damage
 
 

@@ -40,7 +40,7 @@
 				active_tiles += group.members.len
 
 		var/hotspots = 0
-		for(var/obj/effect/hotspot/hotspot in world)
+		for(var/obj/fire/fire in world)
 			hotspots++
 
 		var/output = {"<B>AIR SYSTEMS REPORT</B><HR>

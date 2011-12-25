@@ -152,13 +152,13 @@ datum
 				var/start_time = world.timeofday
 
 				for(var/turf/simulated/S in world)
-					if(!S.blocks_air && !S.parent && S.z < 5) // Added last check to force skipping asteroid z-levels -- TLE
-						assemble_group_turf(S)
+					//if(!S.blocks_air && !S.parent && S.z < 5) // Added last check to force skipping asteroid z-levels -- TLE
+					//	assemble_group_turf(S)
 					if(!S.blocks_air && !S.zone && S.z < 5)
 						new/zone(S)
 				for(var/turf/simulated/S in world) //Update all pathing and border information as well
-					if(S.z > 4) // Skipping asteroids -- TLE
-						continue
+					//if(S.z > 4) // Skipping asteroids -- TLE
+					//	continue
 					S.update_air_properties()
 /*
 				for(var/obj/movable/floor/S in world)

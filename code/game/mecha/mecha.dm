@@ -38,6 +38,12 @@
 	var/lights = 0
 	var/lights_power = 6
 
+	var/snd_nominal = 'nominalnano.ogg'
+	var/snd_critical = 'critdestrnano.ogg'
+	var/snd_weapondestroyed = 'weapdestrnano.ogg'
+	var/snd_lowpower = 'lowpowernano.ogg'
+	var/snd_long_activation = 'LongNanoActivation.ogg'
+
 	//inner atmos machinery. Air tank mostly
 	var/use_internal_tank = 0
 
@@ -237,6 +243,25 @@
 		playsound(src,'mechstep.ogg',40,1)
 	return result
 
+//Used for mechs with thrusters.
+
+/obj/mecha/proc/mechspaceturn(direction)
+	dir = direction
+	playsound(src,'mechmove04.ogg',40,1)
+	return 1
+
+/obj/mecha/proc/mechboost(direction)
+	var/result = step(src,direction)
+	if(result)
+		playsound(src,'mechmove03.ogg',40,1)
+	return result
+
+/obj/mecha/proc/mechboostrand()
+	var/result = step_rand(src)
+	if(result)
+		playsound(src,'mechmove03.ogg',40,1)
+	return result
+
 
 /*
 /obj/mecha/proc/inertial_movement(direction)
@@ -311,12 +336,13 @@
 				src.internal_damage |= int_dam_flag
 				src.pr_internal_damage.start()
 				src.log_append_to_last("Internal damage of type [int_dam_flag].[ignore_threshold?"Ignoring damage threshold.":null]",1)
-				src.occupant << sound('warning-buzzer.ogg',wait=0)
+				src.occupant << sound(snd_critical,wait=0)
 	if(prob(5))
 		if(ignore_threshold || src.health*100/initial(src.health)<src.internal_damage_threshold)
 			var/obj/item/mecha_parts/mecha_equipment/destr = safepick(equipment)
 			if(destr)
 				destr.destroy()
+				src.occupant << sound(snd_weapondestroyed,wait=0)
 	return
 
 
@@ -699,7 +725,7 @@
 		dir = dir_in
 		playsound(src, 'windowdoor.ogg', 50, 1)
 		if(!internal_damage)
-			src.occupant << sound('nominal.ogg',volume=50)
+			src.occupant << sound(snd_nominal)
 		return 1
 	else
 		return 0
@@ -750,7 +776,7 @@
 		dir = dir_in
 		src.log_message("[mmi_as_oc] moved in as pilot.")
 		if(!internal_damage)
-			src.occupant << sound('nominal.ogg',volume=50)
+			src.occupant << sound(snd_nominal)
 		return 1
 	else
 		return 0
@@ -763,7 +789,7 @@
 	if(usr!=src.occupant)
 		return
 	//pr_update_stats.start()
-	src.occupant << browse(src.get_stats_html(), "window=exosuit")
+	src.occupant << browse(src.get_stats_html())
 	return
 
 /*
@@ -803,7 +829,7 @@
 		if(src.occupant.client)
 			src.occupant.client.eye = src.occupant.client.mob
 			src.occupant.client.perspective = MOB_PERSPECTIVE
-		src.occupant << browse(null, "window=exosuit")
+		src.occupant << browse(null)
 		if(istype(mob_container, /obj/item/device/mmi))
 			var/obj/item/device/mmi/mmi = mob_container
 			if(mmi.brainmob)
@@ -1163,7 +1189,7 @@
 /obj/mecha/Topic(href, href_list)
 	..()
 	if(href_list["update_content"])
-		send_byjax(src.occupant,"exosuit.browser","content",src.get_stats_part())
+		send_byjax(src.occupant,"browserwindow.browser","content",src.get_stats_part())
 		return
 	if (href_list["close"])
 		return
@@ -1176,7 +1202,7 @@
 			src.selected = equip
 			src.occupant_message("You switch to [equip]")
 			src.visible_message("[src] raises [equip]")
-			send_byjax(src.occupant,"exosuit.browser","eq_list",src.get_equipment_list())
+			send_byjax(src.occupant,"browserwindow.browser","eq_list",src.get_equipment_list())
 		return
 	if (href_list["eject"])
 		src.eject()
@@ -1189,18 +1215,18 @@
 		return
 	if(href_list["rmictoggle"])
 		radio.broadcasting = !radio.broadcasting
-		send_byjax(src.occupant,"exosuit.browser","rmicstate",(radio.broadcasting?"Engaged":"Disengaged"))
+		send_byjax(src.occupant,"browserwindow.browser","rmicstate",(radio.broadcasting?"Engaged":"Disengaged"))
 		return
 	if(href_list["rspktoggle"])
 		radio.listening = !radio.listening
-		send_byjax(src.occupant,"exosuit.browser","rspkstate",(radio.listening?"Engaged":"Disengaged"))
+		send_byjax(src.occupant,"browserwindow.browser","rspkstate",(radio.listening?"Engaged":"Disengaged"))
 		return
 	if(href_list["rfreq"])
 		var/new_frequency = (radio.frequency + filter.getNum("rfreq"))
 		if (!radio.freerange || (radio.frequency < 1200 || radio.frequency > 1600))
 			new_frequency = sanitize_frequency(new_frequency)
 		radio.set_frequency(new_frequency)
-		send_byjax(src.occupant,"exosuit.browser","rfreq","[format_frequency(radio.frequency)]")
+		send_byjax(src.occupant,"browserwindow.browser","rfreq","[format_frequency(radio.frequency)]")
 		return
 	if(href_list["port_disconnect"])
 		src.disconnect_from_port()
@@ -1221,14 +1247,14 @@
 		return
 	if (href_list["toggle_id_upload"])
 		add_req_access = !add_req_access
-		send_byjax(src.occupant,"exosuit.browser","t_id_upload","[add_req_access?"L":"Unl"]ock ID upload panel")
+		send_byjax(src.occupant,"browserwindow.browser","t_id_upload","[add_req_access?"L":"Unl"]ock ID upload panel")
 		return
 	if(href_list["toggle_maint_access"])
 		if(state)
 			occupant_message("<font color='red'>Maintenance protocols in effect</font>")
 			return
 		maint_access = !maint_access
-		send_byjax(src.occupant,"exosuit.browser","t_maint_access","[maint_access?"Forbid":"Permit"] maintenance protocols")
+		send_byjax(src.occupant,"browserwindow.browser","t_maint_access","[maint_access?"Forbid":"Permit"] maintenance protocols")
 		return
 	if(href_list["req_access"] && add_req_access)
 		output_access_dialog(filter.getObj("id_card"),filter.getMob("user"))
@@ -1356,6 +1382,8 @@
 /obj/mecha/proc/dynusepower(amount)
 	if(get_charge()>=amount)
 		cell.use(amount)
+		if(get_charge() < cell.maxcharge*0.15 && amount > step_energy_drain) //So as not to spam our pilot.
+			occupant << sound(snd_lowpower,wait=0)
 		return 1
 	return 0
 

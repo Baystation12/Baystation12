@@ -3,6 +3,7 @@ var/explosion_halt = 0
 zone
 	proc/process()
 		if(rebuild)
+			if(!contents) del src
 			var
 				turf/sample = pick(contents)
 				list/new_contents = FloodFill(sample)
@@ -39,10 +40,13 @@ zone
 			if(length(space_tiles))
 				space = space_tiles[1]
 
-		if(total_space)
+		if(total_space && space)
+			var/old_pressure = air.return_pressure()
 			air.temperature_mimic(space,OPEN_HEAT_TRANSFER_COEFFICIENT,total_space)
 			air.remove(MOLES_CELLSTANDARD * (air.group_multiplier/40) * total_space)
-			if(dbg_output) world << "Space removed [MOLES_CELLSTANDARD*(air.group_multiplier/20)*total_space] moles of air."
+			if(dbg_output) world << "Space removed [MOLES_CELLSTANDARD*(air.group_multiplier/40)*total_space] moles of air."
+			var/p_diff = old_pressure - air.return_pressure()
+			if(p_diff > vsc.AF_TINY_MOVEMENT_THRESHOLD) AirflowSpace(src,p_diff)
 
 		air.react(null,0)
 		var/check = air.check_tile_graphic()
@@ -68,6 +72,8 @@ zone
 					S.temperature_expose(air, air.temperature, CELL_VOLUME)
 		air.graphic_archived = air.graphic
 
+		air.temperature = max(TCMB,air.temperature)
+
 		if(length(connections))
 			for(var/connection/C in connections)
 				C.Cleanup()
@@ -75,6 +81,8 @@ zone
 					if(C.A.zone.air.compare(C.B.zone.air))
 						ZMerge(C.A.zone,C.B.zone)
 			for(var/zone/Z in connected_zones)
+				var/p_diff = (air.return_pressure()-Z.air.return_pressure())*connected_zones[Z]*(vsc.zone_share_percent/100)
+				if(p_diff > vsc.AF_TINY_MOVEMENT_THRESHOLD) Airflow(src,Z,p_diff)
 				air.share_ratio(Z.air,connected_zones[Z]*(vsc.zone_share_percent/100))
 
 

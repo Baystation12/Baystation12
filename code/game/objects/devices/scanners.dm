@@ -145,6 +145,12 @@ MASS SPECTROMETER
 		user << "\blue Blood type: [A.blood_type]\nDNA: [A.blood_DNA]"
 	else
 		user << "\blue No blood found on [A]."
+	if(!A.suit_fibers)
+		user << "\blue No Fibers/Materials Located."
+	else
+		user << "\blue Fibers/Materials Data Stored: Scan with Hi-Res Forensic Scanner to retrieve."
+		stored_fibers = A.suit_fibers
+		stored_name = A.name
 	if (!( A.fingerprints ))
 		user << "\blue Unable to locate any fingerprints on [A]!"
 		return 0

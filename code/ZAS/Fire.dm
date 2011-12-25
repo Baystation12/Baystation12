@@ -203,14 +203,17 @@ obj
 									if(enemy_tile.fire_protection)
 										firelevel -= vsc.IgnitionLevel
 										continue
-									if(!(locate(/obj/fire) in enemy_tile) && prob( firelevel/(vsc.IgnitionLevel*0.1) ) )
-										new/obj/fire(enemy_tile,firelevel)
-									//else
-									//	world << "There's a fire there bitch."
-								//else
-								//	world << "[enemy_tile] cannot be spread to."
+									if(!(locate(/obj/fire) in enemy_tile))
+										if( prob( firelevel/(vsc.IgnitionLevel*0.1) ) )
+											new/obj/fire(enemy_tile,firelevel)
+					//					else
+					//						world << "Spread Probability: [firelevel/(vsc.IgnitionLevel*0.1)]%."
+					//				else
+					//					world << "There's a fire there bitch."
+					//			else
+					//				world << "[enemy_tile] cannot be spread to."
 					//else
-					//	world << "Not enough firelevel to spread: [firelevel]/[IgnitionLevel*1.5]"
+					//	world << "Not enough firelevel to spread: [firelevel]/[vsc.IgnitionLevel*1.5]"
 
 					var/datum/gas_mixture/flow = air_contents.remove_ratio(0.5)
 					//n = PV/RT, taking the volume of a single tile from the gas.
@@ -296,7 +299,7 @@ datum/gas_mixture/proc/zburn(obj/liquid_fuel/liquid)
 			liquid_level = 0
 		if(fuel) fuel_level = fuel.moles
 		if(liquid) liquid_level = liquid.amount
-		if(liquid.amount <= 0)
+		if(liquid && liquid_level <= 0)
 			del liquid
 			liquid_level = 0
 		if(oxygen > 0.3 && (toxins || fuel_level || liquid_level))

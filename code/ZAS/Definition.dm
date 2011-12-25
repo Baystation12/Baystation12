@@ -14,7 +14,9 @@ zone_controller
 				for(var/zone/Z in zones)
 					if(Z.last_update < current_tick)
 						Z.process()
-						Z.last_update = current_tick
+						if(Z) Z.last_update = current_tick
+				for(var/obj/fire/F)
+					F.process()
 				//for(var/obj/z_hotspot/H in z_hotspots)
 				//	H.process()
 				sleep(max(5,vsc.zone_update_delay*tick_multiplier))

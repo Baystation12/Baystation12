@@ -126,6 +126,24 @@
 				parts -= part
 		return
 
+/obj/effect/decal/mecha_wreckage/aero
+	name = "Aero wreckage"
+	icon_state = "aero-broken"
+
+	New()
+		..()
+		var/list/parts = list(/obj/item/mecha_parts/part/ripley_torso,
+									/obj/item/mecha_parts/part/ripley_left_arm,
+									/obj/item/mecha_parts/part/ripley_right_arm,
+									/obj/item/mecha_parts/part/ripley_left_leg,
+									/obj/item/mecha_parts/part/ripley_right_leg)
+		for(var/i=0;i<2;i++)
+			if(!isemptylist(parts) && prob(40))
+				var/part = pick(parts)
+				welder_salvage += part
+				parts -= part
+		return
+
 /obj/effect/decal/mecha_wreckage/honker
 	name = "Honker wreckage"
 	icon_state = "honker-broken"

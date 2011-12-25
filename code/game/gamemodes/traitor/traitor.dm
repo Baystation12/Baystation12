@@ -150,6 +150,8 @@
 		killer << "Unfortunetly, the Syndicate did not provide you with a code response."
 	killer << "Use the code words in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe."
 	//End code phrase.
+	spawn(30)
+		killer << sound('AISyndiHack.ogg',volume=50)
 
 
 /datum/game_mode/proc/auto_declare_completion_traitor()
@@ -274,11 +276,13 @@
 			traitor_mob << "\red Code Phrase: \black [syndicate_code_phrase]"
 			traitor_mob.mind.store_memory("<b>Code Phrase</b>: [syndicate_code_phrase]")
 		else
-			traitor_mob << "Unfortunetly, the Syndicate did not provide you with a code phrase."
+			traitor_mob << "Unfortunately, the Syndicate did not provide you with a code phrase."
 		if(prob(80))
 			traitor_mob << "\red Code Response: \black [syndicate_code_response]"
 			traitor_mob.mind.store_memory("<b>Code Response</b>: [syndicate_code_response]")
 		else
-			traitor_mob << "Unfortunetly, the Syndicate did not provide you with a code response."
+			traitor_mob << "Unfortunately, the Syndicate did not provide you with a code response."
 		traitor_mob << "Use the code words in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe."
+		spawn(30)
+			traitor_mob << sound('syndicate intro.ogg',volume=50)
 	//End code phrase.

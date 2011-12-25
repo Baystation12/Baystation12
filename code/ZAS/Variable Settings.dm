@@ -4,10 +4,10 @@ vs_control
 		list/settings = list()
 		list/bitflags = list("1","2","4","8","16","32","64","128","256","512","1024")
 		pl_control/plc = new()
-		RPREV_REQUIRE_HEADS_ALIVE = 0
+		/*RPREV_REQUIRE_HEADS_ALIVE = 0
 		RPREV_REQUIRE_HEADS_ALIVE_DESC = "Require the heads to be captured alive in RP Rev, rather than either dead or captured."
 		RPREV_REQUIRE_REVS_ALIVE = 0
-		RPREV_REQUIRE_REVS_ALIVE_DESC = "Require the rev leaders to be captured alive in RP Rev, rather than either dead or captured."
+		RPREV_REQUIRE_REVS_ALIVE_DESC = "Require the rev leaders to be captured alive in RP Rev, rather than either dead or captured."*/
 	New()
 		. = ..()
 		settings = vars.Copy()
@@ -24,20 +24,23 @@ vs_control
 		settings -= "bitflags"
 		settings -= "plc"
 
-	proc/ChangeSettingDialog(mob/user,list/L)
+	proc/ChangeSettingsDialog(mob/user,list/L)
 		//var/which = input(user,"Choose a setting:") in L
 		var/dat = ""
 		for(var/ch in L)
-			if(findtextEx(ch,"_RANDOM") || findtextEx(ch,"_DESC") || findtextEx(ch,"_METHOD")) continue
+			if(findtextEx(ch,"_RANDOM") || findtextEx(ch,"_DESC") || findtextEx(ch,"_METHOD") || findtextEx(ch,"_NAME")) continue
 			var/vw
 			var/vw_desc = "No Description."
+			var/vw_name = ch
 			if(ch in plc.settings)
 				vw = plc.vars[ch]
 				if("[ch]_DESC" in plc.vars) vw_desc = plc.vars["[ch]_DESC"]
+				if("[ch]_NAME" in plc.vars) vw_name = plc.vars["[ch]_NAME"]
 			else
 				vw = vars[ch]
 				if("[ch]_DESC" in vars) vw_desc = vars["[ch]_DESC"]
-			dat += "<b>[ch] = [vw]</b> <A href='?src=\ref[src];changevar=[ch]'>\[Change\]</A><br>"
+				if("[ch]_NAME" in plc.vars) vw_name = vars["[ch]_NAME"]
+			dat += "<b>[vw_name] = [vw]</b> <A href='?src=\ref[src];changevar=[ch]'>\[Change\]</A><br>"
 			dat += "<i>[vw_desc]</i><br><br>"
 		user << browse(dat,"window=settings")
 	Topic(href,href_list)
@@ -91,9 +94,9 @@ vs_control
 		world << "\blue <b>[key_name(user)] changed the setting [ch] to [newvar].</b>"
 		//user << "[which] has been changed to [newvar]."
 		if(ch in plc.settings)
-			ChangeSettingDialog(user,plc.settings)
+			ChangeSettingsDialog(user,plc.settings)
 		else
-			ChangeSettingDialog(user,settings)
+			ChangeSettingsDialog(user,settings)
 	proc/RandomizeWithProbability()
 		for(var/V in settings)
 			var/newvalue

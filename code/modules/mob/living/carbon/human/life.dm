@@ -592,7 +592,7 @@
 					apply_damage(0.4*discomfort, BURN, "r_arm")
 
 		handle_chemicals_in_body()
-			if(reagents) reagents.metabolize(src)
+			if(reagents && stat != 2) reagents.metabolize(src)
 
 			if(mutantrace == "plant") //couldn't think of a better place to place it, since it handles nutrition -- Urist
 				var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
@@ -693,6 +693,7 @@
 						lying = 1
 						stat = 0
 					if (paralysis > 0)
+						handle_dreams()
 						paralysis--
 						blinded = 1
 						lying = 1
