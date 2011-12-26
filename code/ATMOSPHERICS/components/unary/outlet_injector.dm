@@ -40,6 +40,7 @@
 
 			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 
+			AirflowRepel(loc,removed.return_pressure())
 			loc.assume_air(removed)
 
 			if(network)
@@ -58,6 +59,7 @@
 
 			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 
+			AirflowRepel(loc,removed.return_pressure())
 			loc.assume_air(removed)
 
 			if(network)

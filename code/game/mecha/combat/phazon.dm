@@ -18,6 +18,13 @@
 	var/phasing_energy_drain = 200
 	max_equip = 4
 
+	//Technically not a Syndicate mech, but alien enough to have the low, raspy voice of one.
+	snd_nominal = 'nominalsyndi.ogg'
+	snd_critical = 'critdestrsyndi.ogg'
+	snd_weapondestroyed = 'weapdestrsyndi.ogg'
+	snd_lowpower = 'lowpowersyndi.ogg'
+	snd_long_activation = 'LongSyndiActivation.ogg'
+
 
 /obj/mecha/combat/phazon/New()
 	..()

@@ -144,7 +144,7 @@
 	protective_temperature = 800
 	heat_transfer_coefficient = 0.01
 	var/magpulse = 0
-//	flags = NOSLIP //disabled by default
+	//flags = NOSLIP
 
 /obj/item/clothing/shoes/clown_shoes
 	desc = "The prankster's standard-issue clowning shoes. Damn they're huge!"

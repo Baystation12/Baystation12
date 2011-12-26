@@ -1,6 +1,6 @@
 // DM Environment file for baystation12.dme.
-// All manual changes should be made outside the BEGIN_ and END_ blocks.
-// New source code should be placed in .dm files: choose File/New --> Code File.
+// All manual changes should be made outside the BEGIN_ and END_ blocks. 
+ // New source code should be placed in .dm files: choose File/New --> Code File. 
 // BEGIN_INTERNALS
 // END_INTERNALS
 // BEGIN_FILE_DIR
@@ -91,6 +91,8 @@
 #define FILE_DIR "code/modules/clothing/uniforms"
 #define FILE_DIR "code/modules/critters"
 #define FILE_DIR "code/modules/critters/hivebots"
+#define FILE_DIR "code/modules/detective"
+#define FILE_DIR "code/modules/flufftext"
 #define FILE_DIR "code/modules/food"
 #define FILE_DIR "code/modules/mining"
 #define FILE_DIR "code/modules/mob"
@@ -144,6 +146,7 @@
 #define FILE_DIR "code/WorkInProgress/SkyMarshal"
 #define FILE_DIR "code/WorkInProgress/virus2"
 #define FILE_DIR "code/WorkInProgress/virus2/Disease2"
+#define FILE_DIR "code/ZAS"
 #define FILE_DIR "html"
 #define FILE_DIR "icons"
 #define FILE_DIR "icons/effects"
@@ -176,9 +179,11 @@
 #define FILE_DIR "sound/voice"
 #define FILE_DIR "sound/weapons"
 // END_FILE_DIR
+
 // BEGIN_PREFERENCES
 #define DEBUG
 // END_PREFERENCES
+
 // BEGIN_INCLUDE
 #include "code\names.dm"
 #include "code\setup.dm"
@@ -327,7 +332,6 @@
 #include "code\defines\procs\syndicate_name.dm"
 #include "code\defines\procs\time_stamp.dm"
 #include "code\FEA\FEA_airgroup.dm"
-#include "code\FEA\FEA_fire.dm"
 #include "code\FEA\FEA_gas_mixture.dm"
 #include "code\FEA\FEA_group_helpers.dm"
 #include "code\FEA\FEA_system.dm"
@@ -527,6 +531,7 @@
 #include "code\game\mecha\equipment\mecha_equipment.dm"
 #include "code\game\mecha\equipment\tools\tools.dm"
 #include "code\game\mecha\equipment\weapons\weapons.dm"
+#include "code\game\mecha\working\aero.dm"
 #include "code\game\mecha\working\firefighter.dm"
 #include "code\game\mecha\working\ripley.dm"
 #include "code\game\mecha\working\working.dm"
@@ -763,6 +768,10 @@
 #include "code\modules\critters\critter_defenses.dm"
 #include "code\modules\critters\critters.dm"
 #include "code\modules\critters\hivebots\hivebot.dm"
+#include "code\modules\detective\Autopsy.dm"
+#include "code\modules\detective\DetectiveWork.dm"
+#include "code\modules\flufftext\Dreaming.dm"
+#include "code\modules\flufftext\TextFilters.dm"
 #include "code\modules\food\food.dm"
 #include "code\modules\food\recipes_microwave.dm"
 #include "code\modules\mining\datum_processing_recipe.dm"
@@ -977,7 +986,6 @@
 #include "code\modules\security levels\security levels.dm"
 #include "code\WorkInProgress\AI_Visibility.dm"
 #include "code\WorkInProgress\buildmode.dm"
-#include "code\WorkInProgress\detective_work.dm"
 #include "code\WorkInProgress\explosion_particles.dm"
 #include "code\WorkInProgress\mapload\dmm_suite.dm"
 #include "code\WorkInProgress\mapload\reader.dm"
@@ -993,7 +1001,16 @@
 #include "code\WorkInProgress\virus2\Disease2\dishincubator.dm"
 #include "code\WorkInProgress\virus2\Disease2\isolator.dm"
 #include "code\WorkInProgress\virus2\Disease2\monkeydispensor.dm"
+#include "code\ZAS\Airflow.dm"
+#include "code\ZAS\Connection.dm"
+#include "code\ZAS\Creation.dm"
+#include "code\ZAS\Debug.dm"
+#include "code\ZAS\Definition.dm"
+#include "code\ZAS\Fire.dm"
+#include "code\ZAS\Functions.dm"
+#include "code\ZAS\Plasma.dm"
+#include "code\ZAS\Processing.dm"
+#include "code\ZAS\Variable Settings.dm"
 #include "interface\skin.dmf"
 #include "maps\tgstation.2.0.8.dmm"
 // END_INCLUDE
-

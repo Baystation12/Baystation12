@@ -21,6 +21,8 @@
 		wanderer = 1
 	//Will open doors it bumps ignoring access
 		opensdoors = 0
+	//Can move in space
+		spacewalk = 0
 
 	//Internal tracking ignore
 		frustration = 0

@@ -1473,12 +1473,7 @@
 						return
 				if("schoolgirl")
 					if (src.rank in list("Badmin", "Game Admin", "Game Master"))
-						for(var/obj/item/clothing/under/W in world)
-							W.icon_state = "schoolgirl"
-							W.item_state = "w_suit"
-							W.color = "schoolgirl"
-						message_admins("[key_name_admin(usr)] activated Japanese Animes mode")
-						world << sound('animes.ogg')
+						alert("You cannot perform this action. It is unbelievably stupid.")
 					else
 						alert("You cannot perform this action. You must be of a higher administrative rank!")
 						return
@@ -1732,6 +1727,16 @@
 					message_admins("[key_name_admin(usr)] has removed the cap on security officers.")
 		return
 		//hahaha
+	if(href_list["vsc"])
+		if ((src.rank in list( "Moderator", "Temporary Admin", "Admin Candidate", "Trial Admin", "Badmin", "Game Admin", "Game Master" )))
+			if(href_list["vsc"] == "airflow")
+				vsc.ChangeSettingsDialog(usr,vsc.settings)
+			if(href_list["vsc"] == "plasma")
+				vsc.ChangeSettingsDialog(usr,vsc.plc.settings)
+			if(href_list["vsc"] == "load")
+				LoadTweaks()
+			if(href_list["vsc"] == "save")
+				SaveTweaks()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
@@ -2031,8 +2036,15 @@
 		dat += "<A href='?src=\ref[src];create_turf=1'>Create Turf</A><br>"
 	if(lvl >= 5)
 		dat += "<A href='?src=\ref[src];create_mob=1'>Create Mob</A><br>"
+
+	if(lvl >= 3 )
+		dat += "<br><A href='?src=\ref[src];vsc=airflow'>Edit Airflow Settings</A><br>"
+		dat += "<A href='?src=\ref[src];vsc=plasma'>Edit Plasma Settings</A><br>"
+
+		dat += "<br><A href='?src=\ref[src];vsc=load'>Load Settings</A><br>"
+		dat += "<A href='?src=\ref[src];vsc=save'>Save Settings</A><br>"
 //			if(lvl == 6 )
-	usr << browse(dat, "window=admin2;size=210x180")
+	usr << browse(dat, "window=admin2;size=210x340")
 	return
 /*
 /obj/admins/proc/goons()

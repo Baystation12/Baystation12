@@ -74,6 +74,7 @@ emp_act
 	var/hit_area = parse_zone(affecting.name)
 
 	visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [user]!</B>")
+	add_autopsy_weapon(I,hit_area)
 
 	if((user != src) && check_shields(I.force, "the [I.name]"))
 		return 0

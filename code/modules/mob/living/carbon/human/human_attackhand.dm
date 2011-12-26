@@ -19,6 +19,7 @@
 					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [M.name] ([M.ckey])</font>")
 					var/armorblock = run_armor_check(M.zone_sel.selecting, "energy")
 					apply_effects(5,5,0,0,5,0,0,armorblock)
+					autopsy_shocked = 1
 					return 1
 				else
 					M << "\red Not enough charge! "

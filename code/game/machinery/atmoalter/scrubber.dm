@@ -37,6 +37,7 @@
 			removed = environment.remove(transfer_moles)
 		else
 			removed = loc.remove_air(transfer_moles)
+			AirflowAttract(loc,removed.return_pressure())
 
 		//Filter it
 		if (removed)

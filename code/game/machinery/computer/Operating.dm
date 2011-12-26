@@ -41,6 +41,7 @@
 <B>Fire Damage:</B> [src.victim.getFireLoss()]<BR>
 <B>Suffocation Damage:</B> [src.victim.getOxyLoss()]<BR>
 <B>Patient Status:</B> [src.victim.stat ? "Non-responsive" : "Stable"]<BR>
+[src.victim.BiopsyInfo()]<BR>
 "}
 	else
 		src.victim = null
