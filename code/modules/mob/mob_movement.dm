@@ -222,6 +222,9 @@
 
 		else if(mob.confused)
 			step(mob, pick(cardinal))
+		else if((mob.disease_symptoms & DISEASE_STUMBLE) && prob(2))
+			step(mob, pick(cardinal))
+			mob.emote("me",1,"stumbles over their own feet.")
 		else
 			. = ..()
 			for(var/obj/effect/speech_bubble/S in range(1, mob))
