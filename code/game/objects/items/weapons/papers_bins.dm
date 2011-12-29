@@ -122,7 +122,6 @@ CLIPBOARDS
 		if(istype(P, /obj/item/weapon/stamp))
 			if ((!in_range(src, usr) && src.loc != user && !( istype(src.loc, /obj/item/weapon/clipboard) ) && src.loc.loc != user && user.equipped() != P))
 				return
-			src.infoold = src.info
 			src.info += text("<BR><i>This paper has been stamped with the [].</i><BR>", P.name)
 			switch(P.type)
 				if(/obj/item/weapon/stamp/captain)
