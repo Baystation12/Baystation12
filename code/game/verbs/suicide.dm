@@ -15,18 +15,19 @@
 		src << "You're already committing suicide! Be patient!"
 		return
 
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
+	src << "Suicide is disabled for humans."
+//	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
 
 	if(alien_egg_flag)
 		src << "The alien inside you forces you to breathe, preventing you from suiciding."
 		return
 
-	if(confirm == "Yes")
-		suiciding = 1
-		//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while
-		viewers(src) << "\red <b>[src] is attempting to bite \his tongue. It looks like \he's trying to commit suicide.</b>"
-		oxyloss = max(175 - getToxLoss() - getFireLoss() - getBruteLoss(), getOxyLoss())
-		updatehealth()
+//	if(confirm == "Yes")
+//		suiciding = 1
+//		//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while
+//		viewers(src) << "\red <b>[src] is attempting to bite \his tongue. It looks like \he's trying to commit suicide.</b>"
+//		oxyloss = max(175 - getToxLoss() - getFireLoss() - getBruteLoss(), getOxyLoss())
+//		updatehealth()
 
 /mob/living/carbon/brain/verb/suicide()
 	set hidden = 1
