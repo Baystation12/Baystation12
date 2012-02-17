@@ -17,7 +17,6 @@
 		H.equip_if_possible(new /obj/item/device/pda/heads/cmo(H), H.slot_belt)
 		H.equip_if_possible(new /obj/item/clothing/suit/storage/labcoat/cmo(H), H.slot_wear_suit)
 		H.equip_if_possible(new /obj/item/weapon/storage/firstaid/regular(H), H.slot_l_hand)
-		H.equip_if_possible(new /obj/item/device/flashlight/pen(H), H.slot_s_store)
 		return 1
 
 
@@ -42,7 +41,6 @@
 		H.equip_if_possible(new /obj/item/device/pda/medical(H), H.slot_belt)
 		H.equip_if_possible(new /obj/item/clothing/suit/storage/labcoat(H), H.slot_wear_suit)
 		H.equip_if_possible(new /obj/item/weapon/storage/firstaid/regular(H), H.slot_l_hand)
-		H.equip_if_possible(new /obj/item/device/flashlight/pen(H), H.slot_s_store)
 		return 1
 
 
@@ -65,7 +63,6 @@
 		H.equip_if_possible(new /obj/item/clothing/shoes/white(H), H.slot_shoes)
 		H.equip_if_possible(new /obj/item/device/pda/medical(H), H.slot_belt)
 		H.equip_if_possible(new /obj/item/clothing/suit/storage/labcoat/genetics(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/device/flashlight/pen(H), H.slot_s_store)
 		return 1
 
 
@@ -89,7 +86,6 @@
 		H.equip_if_possible(new /obj/item/clothing/mask/surgical(H), H.slot_wear_mask)
 		H.equip_if_possible(new /obj/item/clothing/shoes/white(H), H.slot_shoes)
 		H.equip_if_possible(new /obj/item/clothing/suit/storage/labcoat/virologist(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/device/flashlight/pen(H), H.slot_s_store)
 		return 1
 */
 
