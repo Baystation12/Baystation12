@@ -1028,6 +1028,7 @@
 #include "code\WorkInProgress\AI_Visibility.dm"
 #include "code\WorkInProgress\buildmode.dm"
 #include "code\WorkInProgress\explosion_particles.dm"
+#include "code\WorkInProgress\Apples\artifacts.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Tajara\examine.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Tajara\tajaran.dm"
 #include "code\WorkInProgress\mapload\dmm_suite.dm"

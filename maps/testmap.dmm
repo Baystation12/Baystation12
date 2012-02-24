@@ -1,0 +1,19 @@
+"a" = (/turf/simulated/wall,/area)
+"b" = (/obj/effect/landmark/start,/turf/unsimulated/floor,/area)
+"c" = (/turf/unsimulated/floor,/area/arrival/start)
+"d" = (/turf/unsimulated/floor,/area)
+"e" = (/mob/new_player,/turf/unsimulated/floor,/area)
+"f" = (/obj/item/changestone,/mob/new_player,/turf/unsimulated/floor,/area)
+
+(1,1,1) = {"
+aaaaaaaaaa
+abccccccda
+abceeeecda
+abceeeecda
+adcfeeecda
+adccccccda
+adddddddda
+adddddddda
+adddddddda
+aaaaaaaaaa
+"}
