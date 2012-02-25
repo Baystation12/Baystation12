@@ -775,8 +775,8 @@
 
 	// lol
 	var/fat = ""
-	/*if (mutations & FAT)
-		fat = "fat"*/
+	if (mutations & FAT)
+		fat = "fat"
 
 	if (mutations & HULK)
 		overlays += image("icon" = 'genetics.dmi', "icon_state" = "hulk[fat][!lying ? "_s" : "_l"]")
@@ -879,10 +879,10 @@
 			var/t1 = w_uniform.color
 			if (!t1)
 				t1 = icon_state
-			/*if (mutations & FAT)
+			if (mutations & FAT)
 				overlays += image("icon" = 'uniform_fat.dmi', "icon_state" = "[t1][!lying ? "_s" : "_l"]", "layer" = MOB_LAYER)
-			else*/
-			overlays += image("icon" = 'uniform.dmi', "icon_state" = text("[][]",t1, (!(lying) ? "_s" : "_l")), "layer" = MOB_LAYER)
+			else
+				overlays += image("icon" = 'uniform.dmi', "icon_state" = text("[][]",t1, (!(lying) ? "_s" : "_l")), "layer" = MOB_LAYER)
 			if (w_uniform.blood_DNA.len)
 				var/icon/stain_icon = icon('blood.dmi', "uniformblood[!lying ? "" : "2"]")
 				overlays += image("icon" = stain_icon, "layer" = MOB_LAYER)
@@ -1289,7 +1289,7 @@
 	lying_icon = new /icon('human.dmi', "torso_l")
 
 	var/husk = (mutations & HUSK)
-	//var/obese = (mutations & FAT)
+	var/obese = (mutations & FAT)
 
 	stand_icon.Blend(new /icon('human.dmi', "chest_[g]_s"), ICON_OVERLAY)
 	lying_icon.Blend(new /icon('human.dmi', "chest_[g]_l"), ICON_OVERLAY)
@@ -1326,9 +1326,9 @@
 
 		stand_icon.Blend(husk_s, ICON_OVERLAY)
 		lying_icon.Blend(husk_l, ICON_OVERLAY)
-	/*else if(obese)
+	else if(obese)
 		stand_icon.Blend(new /icon('human.dmi', "fatbody_s"), ICON_OVERLAY)
-		lying_icon.Blend(new /icon('human.dmi', "fatbody_l"), ICON_OVERLAY)*/
+		lying_icon.Blend(new /icon('human.dmi', "fatbody_l"), ICON_OVERLAY)
 
 	// Skin tone
 	if (s_tone >= 0)
@@ -1419,6 +1419,7 @@
 /obj/effect/equip_e/human/process()
 	if (item)
 		item.add_fingerprint(source)
+	var/item_loc = 0
 	if (!item)
 		switch(place)
 			if("mask")
@@ -1481,9 +1482,65 @@
 					//SN src = null
 					del(src)
 					return
+	else
+		switch(place)
+			if("mask")
+				if(target.wear_mask)
+					item_loc = 1
+			if("l_hand")
+				if(target.l_hand)
+					item_loc = 1
+			if("r_hand")
+				if(target.r_hand)
+					item_loc = 1
+			if("gloves")
+				if(target.gloves)
+					item_loc = 1
+			if("eyes")
+				if(target.glasses)
+					item_loc = 1
+			if("l_ear")
+				if(target.l_ear)
+					item_loc = 1
+			if("r_ear")
+				if(target.r_ear)
+					item_loc = 1
+			if("head")
+				if(target.head)
+					item_loc = 1
+			if("shoes")
+				if(target.shoes)
+					item_loc = 1
+			if("belt")
+				if(target.belt)
+					item_loc = 1
+			if("suit")
+				if(target.wear_suit)
+					item_loc = 1
+			if("back")
+				if(target.back)
+					item_loc = 1
+			if("uniform")
+				if(target.w_uniform)
+					item_loc = 1
+			if("s_store")
+				if(target.s_store)
+					item_loc = 1
+			if("h_store")
+				if(target.h_store)
+					item_loc = 1
+			if("id")
+				if(target.wear_id)
+					item_loc = 1
+			if("internal")
+				if (target.internal)
+					item_loc = 1
+			if("handcuff")
+				if (target.handcuffed)
+					item_loc = 1
 
 	var/list/L = list( "syringe", "pill", "drink", "dnainjector", "fuel")
-	if ((item && !( L.Find(place) )))
+	if (item && !L.Find(place) && !item_loc)
 		if(isrobot(source) && place != "handcuff")
 			del(src)
 			return
@@ -2451,7 +2508,11 @@ It can still be worn/put on as normal.
 		g_facial = hex2num(copytext(new_facial, 4, 6))
 		b_facial = hex2num(copytext(new_facial, 6, 8))
 
-
+	var/new_hair = input("Please select hair color.", "Character Generation") as color
+	if(new_facial)
+		r_hair = hex2num(copytext(new_hair, 2, 4))
+		g_hair = hex2num(copytext(new_hair, 4, 6))
+		b_hair = hex2num(copytext(new_hair, 6, 8))
 
 	var/new_eyes = input("Please select eye color.", "Character Generation") as color
 	if(new_eyes)
@@ -2461,21 +2522,57 @@ It can still be worn/put on as normal.
 
 	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
 
-	if (new_tone)
-		s_tone = max(min(round(text2num(new_tone)), 220), 1)
-		s_tone =  -s_tone + 35
+	if (!new_tone)
+		new_tone = 35
+	s_tone = max(min(round(text2num(new_tone)), 220), 1)
+	s_tone =  -s_tone + 35
 
-	var/new_style = input("Please select hair style", "Character Generation")  as null|anything in list( "Cut Hair", "Short Hair", "Long Hair", "Mohawk", "Balding", "Wave", "Bedhead", "Dreadlocks", "Ponytail", "Bald" )
+	// hair
+	var/list/all_hairs = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
+	var/list/hairs = list()
 
+	// loop through potential hairs
+	for(var/x in all_hairs)
+		var/datum/sprite_accessory/hair/H = new x // create new hair datum based on type x
+		hairs.Add(H.name) // add hair name to hairs
+		del(H) // delete the hair after it's all done
+
+	var/new_style = input("Please select hair style", "Character Generation")  as null|anything in hairs
+
+	// if new style selected (not cancel)
 	if (new_style)
 		h_style = new_style
 
-	new_style = input("Please select facial style", "Character Generation")  as null|anything in list("Watson", "Chaplin", "Selleck", "Full Beard", "Long Beard", "Neckbeard", "Van Dyke", "Elvis", "Abe", "Chinstrap", "Hipster", "Goatee", "Hogan", "Shaved")
+		for(var/x in all_hairs) // loop through all_hairs again. Might be slightly CPU expensive, but not significantly.
+			var/datum/sprite_accessory/hair/H = new x // create new hair datum
+			if(H.name == new_style)
+				hair_style = H // assign the hair_style variable a new hair datum
+				break
+			else
+				del(H) // if hair H not used, delete. BYOND can garbage collect, but better safe than sorry
 
-	if (new_style)
+	// facial hair
+	var/list/all_fhairs = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
+	var/list/fhairs = list()
+
+	for(var/x in all_fhairs)
+		var/datum/sprite_accessory/facial_hair/H = new x
+		fhairs.Add(H.name)
+		del(H)
+
+	new_style = input("Please select facial style", "Character Generation")  as null|anything in fhairs
+
+	if(new_style)
 		f_style = new_style
+		for(var/x in all_fhairs)
+			var/datum/sprite_accessory/facial_hair/H = new x
+			if(H.name == new_style)
+				facial_hair_style = H
+				break
+			else
+				del(H)
 
-	var/new_gender = input("Please select gender") as null|anything in list("Male","Female")
+	var/new_gender = alert(usr, "Please select gender.", "Character Generation", "Male", "Female")
 	if (new_gender)
 		if(new_gender == "Male")
 			gender = MALE
@@ -2484,6 +2581,7 @@ It can still be worn/put on as normal.
 	update_body()
 	update_face()
 	update_clothing()
+	check_dna()
 
 	for(var/mob/M in view())
 		M.show_message("[src.name] just morphed!")
@@ -2503,30 +2601,43 @@ It can still be worn/put on as normal.
 	if(target.mutations & mRemotetalk)
 		target.show_message("\blue You hear [src.real_name]'s voice: [say]")
 	else
-		target.show_message("\blue You hear a voice: [say]")
+		target.show_message("\blue You hear a voice that seems to echo around the room: [say]")
+		target << "\red This ain't an admin message, this is IC.  Act like it.  If someone's abusing it, pretending to be us, adminhelp it."
 	usr.show_message("\blue You project your mind into [target.real_name]: [say]")
 	for(var/mob/dead/observer/G in world)
 		G.show_message("<i>Telepathic message from <b>[src]</b> to <b>[target]</b>: [say]</i>")
+/mob/living/carbon/human
+	var/mob/remoteobserve
 
 /mob/living/carbon/human/proc/remoteobserve()
 	set name = "Remote View"
 	set category = "Superpower"
 
 	if(!(src.mutations & mRemote))
+		reset_view(0)
+		remoteobserve = null
 		src.verbs -= /mob/living/carbon/human/proc/remoteobserve
+		return
+
+	if(client.eye != client.mob)
+		reset_view(0)
+		remoteobserve = null
 		return
 
 	var/list/mob/creatures = list()
 
 	for(var/mob/living/carbon/h in world)
 		creatures += h
-	client.perspective = EYE_PERSPECTIVE
-
-
 
 	var/mob/target = input ("Who do you want to project your mind to ?") as mob in creatures
 
 	if (target)
-		client.eye = target
+		reset_view(target)
+		remoteobserve = target
 	else
-		client.eye = client.mob
+		reset_view(0)
+		remoteobserve = null
+
+/mob/living/carbon/human/proc/check_dna()
+	dna.check_integrity(src)
+	return
