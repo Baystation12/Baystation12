@@ -72,6 +72,8 @@ datum/controller/game_controller
 			new /obj/structure/closet/emcloset(loc)
 			emclosetcount--
 
+		setupnetwork()
+
 		world << "\red \b Initializations complete."
 
 

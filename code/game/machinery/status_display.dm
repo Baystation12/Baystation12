@@ -13,6 +13,7 @@
 	density = 0
 	use_power = 1
 	idle_power_usage = 10
+	networking = 2
 	var/mode = 0	// 0 = Blank
 					// 1 = Shuttle timer
 					// 2 = Arbitrary message(s)
@@ -274,6 +275,35 @@
 				if(supply_display)
 					mode = 4
 
+
+	call_function(var/datum/function/F)
+		if(F.name == "location")
+			var/datum/function/R = new()
+			R.name = "response"
+			R.arg1 = "[src] at [src.loc:loc:name]\n"
+			R.source_id = address
+			R.destination_id = F.source_id
+			send_packet(src,F.source_id,R)
+			update()
+		else if(F.arg1)
+			if(F.name == "mode")
+				var/value = mode
+				switch(F.arg1)
+					if("blank")
+						value = 0
+					if("shuttle")
+						value = 1
+					if("msg")
+						value = 2
+					if("alert")
+						value = 3
+					if("supply")
+						value = 4
+				mode = value
+			else if(F.name == "msg")
+				message1 = F.arg1
+				message2 = F.arg2
+				set_message(message1,message2)
 
 
 /obj/machinery/ai_status_display

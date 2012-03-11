@@ -161,6 +161,12 @@ Class Procs:
 	if ((!in_range(src, usr) || !istype(src.loc, /turf)) && !istype(usr, /mob/living/silicon))
 		return 1
 	src.add_fingerprint(usr)
+	if(href_list["function"])
+		var/datum/function/F = new
+		F.name = href_list["function"]
+		F.arg1 = href_list["arg1"]
+		F.arg2 = href_list["arg2"]
+		src.call_function(F)
 	return 0
 
 /obj/machinery/attack_ai(mob/user as mob)

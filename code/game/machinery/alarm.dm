@@ -115,6 +115,13 @@
 	if (!master_is_operating())
 		elect_master()
 
+/obj/machinery/alarm/call_function(var/datum/function/F)
+/*	if(F.name == "alarm")
+		air_doors_close(1)
+	else if(F.name == "dealarm")
+		air_doors_open(1)*/
+	..()
+
 /obj/machinery/alarm/proc/master_is_operating()
 	return alarm_area.master_air_alarm && !(alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN))
 

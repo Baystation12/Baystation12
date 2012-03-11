@@ -21,6 +21,7 @@
 	var/flushing = 0	// true if flushing in progress
 	var/timeleft = 0	//used to give a delay after the last item was put in before flushing
 	var/islarge = 0		//If there is a crate, lets not add a second.
+	networking = 2
 
 	// create a new disposal
 	// find the attached trunk (if present) and init gas resvr.
@@ -38,6 +39,22 @@
 			//gas.volume = 1.05 * CELLSTANDARD
 			update()
 
+
+	call_function(var/datum/function/F)
+		if(F.name == "pump")
+			if(F.arg1)
+				if(F.arg1 == "off")
+					mode = 0
+				if(F.arg1 == "on")
+					mode = 1
+		else if(F.name == "flush")
+			flush = !flush
+			update()
+
+		else if(F.name == "eject")
+			eject()
+		else
+			..()
 
 	// attack by item places it in to disposal
 	attackby(var/obj/item/I, var/mob/user)

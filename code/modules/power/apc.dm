@@ -58,6 +58,7 @@
 	var/mob/living/silicon/ai/occupant = null
 	var/crit = 0
 	var/eventoff = 0
+	networking = PROCESS_RPCS
 
 /proc/RandomAPCWires()
 	//to make this not randomize the wires, just set index to 1 and increment it in the flag for loop (after doing everything else).
@@ -87,6 +88,90 @@
 		if (M.client && M.machine == src)
 			src.interact(M)
 	AutoUpdateAI(src)
+
+/obj/machinery/power/apc/call_function(datum/function/F)
+	if(stat & BROKEN) return
+	if(F.name == "overload")
+		src.overload_lighting()
+		return
+	if (F.name == "breaker")
+		operating = !operating
+		src.update()
+		updateicon()
+	if(F.name == "charge")
+		chargemode = !chargemode
+		if(!chargemode)
+			charging = 0
+			updateicon()
+			update()
+	if(F.arg1)
+		if(F.name == "light")
+			var/value = lighting
+			switch(F.arg1)
+				if("off")
+					value = 0
+				if("autooff")
+					value = 1
+				if("on")
+					value = 2
+				if("autoon")
+					value = 3
+			lighting = value
+			updateicon()
+			update()
+		else if(F.name == "equip")
+			var/value = equipment
+			switch(F.arg1)
+				if("off")
+					value = 0
+				if("autooff")
+					value = 1
+				if("on")
+					value = 2
+				if("autoon")
+					value = 3
+			equipment = value
+			updateicon()
+			update()
+		else if(F.name == "environ")
+			var/value = environ
+			switch(F.arg1)
+				if("off")
+					value = 0
+				if("autooff")
+					value = 1
+				if("on")
+					value = 2
+				if("autoon")
+					value = 3
+			environ = value
+			updateicon()
+			update()
+	else if(F.name == "status")
+		var/datum/function/R = new()
+		R.name = "response"
+		R.arg1 += "[src.name]\n"
+		R.arg1 += "Main breaker : <B>[operating ? "On" : "Off"]</B><BR>"
+		R.arg1 += "External power : <B>[ main_status ? (main_status ==2 ? "<FONT COLOR=#004000>Good</FONT>" : "<FONT COLOR=#D09000>Low</FONT>") : "<FONT COLOR=#F00000>None</FONT>"]</B><BR>"
+		R.arg1 += "Power cell: <B>[cell ? "[round(cell.percent())]%" : "<FONT COLOR=red>Not connected.</FONT>"]</B>"
+		if(cell)
+			R.arg1 += " ([charging ? ( charging == 1 ? "Charging" : "Fully charged" ) : "Not charging"])"
+			R.arg1 += " ([chargemode ? "Auto" : "Off"])"
+
+		R.arg1 += "<BR><HR>Power channels<BR><PRE>"
+
+		var/list/L = list ("Off","Off (Auto)", "On", "On (Auto)")
+
+		R.arg1 += "Equipment:    [add_lspace(lastused_equip, 6)] W : <B>[L[equipment+1]]</B><BR>"
+		R.arg1 += "Lighting:     [add_lspace(lastused_light, 6)] W : <B>[L[lighting+1]]</B><BR>"
+		R.arg1 += "Environmental:[add_lspace(lastused_environ, 6)] W : <B>[L[environ+1]]</B><BR>"
+//		R.arg1 += "Shield generator: <B>[L[shielding+1]]</B><BR>"
+
+		R.arg1 += "<BR>Total load: [lastused_light + lastused_equip + lastused_environ] W</PRE>"
+		R.arg1 += "<HR>Cover lock: <B>[coverlocked ? "Engaged" : "Disengaged"]</B>"
+		R.source_id = address
+		R.destination_id = F.source_id
+		send_packet(src,F.source_id,R)
 
 /obj/machinery/power/apc/New(turf/loc, var/ndir, var/building=0)
 	..()

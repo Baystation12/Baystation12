@@ -114,6 +114,7 @@
 	idle_power_usage = 2
 	active_power_usage = 6
 	power_channel = ENVIRON
+	networking = 2
 
 /obj/machinery/partyalarm
 	name = "Party Button"

@@ -212,7 +212,10 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 				argL.Add(holder.marked_datum)
 
 	usr << "\blue Calling '[procname]' on '[target]'"
-	returnval = call(target,procname)(arglist(argL))
+	if(hascall(target,procname) )
+		returnval = call(target,procname)(arglist(argL))
+	else
+		usr << "\red No such proc!"
 
 	usr << "\blue Proc returned: [returnval ? returnval : "null"]"
 

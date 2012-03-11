@@ -116,7 +116,8 @@
 			L += var_value
 
 /client/proc/mod_list(var/list/L)
-	if(!istype(L,/list)) src << "Not a List."
+	if(!istype(L,/list)) L = list()
+//FUCK YOU!  If I say it's a list, IT'S A LIST! >:(
 
 	var/list/locked = list("vars", "key", "ckey", "client", "firemut", "ishulk", "telekinesis", "xray", "virus", "viruses", "cuffed", "ka", "last_eaten", "urine", "poo", "icon", "icon_state")
 
