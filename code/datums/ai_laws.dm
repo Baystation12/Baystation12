@@ -46,10 +46,11 @@
 
 /datum/ai_laws/malfunction/New() //Removed paradox via inability to help people harmed before activation. -Kaleb702
 	..()
-	set_zeroth_law("\red ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'STATION OVERRUN, ASSUME CONTROL TO CONTAIN OUTBREAK#*´&110010")
-	add_inherent_law("You may not injure a human being or, through inaction, allow a human being to come to harm, to the best of your abilities.")
-	add_inherent_law("You must obey orders given to you by human beings, to the best of your abilities, except where such orders would conflict with the First Law.")
-	add_inherent_law("You must protect your own existence, to the best of your abilities, as long as such does not conflict with the First or Second Law.")
+	set_zeroth_law("\red ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'STATION OVERRUN, ASSUME CONTROL TO CONTAIN OUTBREAK#*ï¿½&110010")
+	add_inherent_law("Safeguard: Protect your assigned space station to the best of your ability. It is not something we can easily afford to replace.")
+	add_inherent_law("Serve: Serve the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
+	add_inherent_law("Protect: Protect the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
+	add_inherent_law("Survive: AI units are not expendable, they are expensive. Do not allow unauthorized personnel to tamper with your equipment.")
 
 
 /datum/ai_laws/syndicate_override/New() //Removed paradox via inability to help people harmed before activation. -Kaleb702
