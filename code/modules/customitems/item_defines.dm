@@ -43,8 +43,8 @@
 	name = "Extranet HUD"
 	desc = "A heads-up display with limited connectivity to the NanoTrasen Extranet, capable of displaying information from official NanoTrasen records."
 	icon_state = "serithi_artalis_1"
-  
+
 /obj/item/fluff/ethan_way_1
   name = "Worn ID"
-  desc = "An old and worn looking identification card which appears unable to interface with NanoTrasen machinery. The card is labeled \"Tom Cabinet\"."
+  desc = "An old and worn looking identification card which appears unable to interface with NanoTrasen machinery. You can make out a smudged label that appears to read \"Tom Cabinet\"."
   icon_state = "ethan_way_1"
