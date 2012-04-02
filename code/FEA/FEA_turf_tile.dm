@@ -163,8 +163,7 @@ turf
 							var/turf/T = get_step(src,d)
 							if(!T || !T.zone) continue
 							if(!zone)
-								zone = T.zone
-								zone.AddTurf(src)
+								T.zone.AddTurf(src)
 							else if(T.zone != zone)
 								ZConnect(src,T)
 
@@ -259,18 +258,20 @@ turf
 						var/turf/simulated/T = get_step(src,direction)
 						if(T)
 							ZDisconnect(src,T)
-			else if(air)
+			else
 				// there's no zone here, but there's air
 				// if there are no zones nearby either make a new zone!
+
+				// Nice job breaking it, hero. --Aryn
 
 				for(var/direction in cardinal)
 					if(air_check_directions&direction)
 						var/turf/simulated/T = get_step(src,direction)
-						if(T.zone) goto ZoneNearby
-
-				new/zone(src)
-
-				ZoneNearby:
+						if(T.zone)
+							T.zone.AddTurf(src)
+							break
+				if(!zone)
+					new/zone(src)
 
 			if(parent)
 				if(parent.borders)
