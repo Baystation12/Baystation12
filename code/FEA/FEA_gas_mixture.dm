@@ -41,13 +41,13 @@ datum
 
 			temperature = 0 //in Kelvin, use calculate_temperature() to modify
 
-			var/group_multiplier = 1
+			group_multiplier = 1
 				//Size of the group this gas_mixture is representing.
 				//=1 for singletons
 
 			graphic
 
-			var/list/datum/gas/trace_gases = list()
+			list/datum/gas/trace_gases = list()
 
 			tmp
 				oxygen_archived
@@ -1030,6 +1030,8 @@ datum
 					var/heat = conduction_coefficient*delta_temperature* \
 						(self_heat_capacity*model.heat_capacity/(self_heat_capacity+model.heat_capacity))
 
+					ASSERT(self_heat_capacity != 0) // Trying to solve a runtime error - Abi79
+					ASSERT(group_multiplier != 0)
 					if(border_multiplier)
 						temperature -= heat*border_multiplier/(self_heat_capacity*group_multiplier)
 					else

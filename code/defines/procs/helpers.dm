@@ -643,7 +643,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	total = rand(1, total)
 	for (item in L)
-		total -=L [item]
+		total -= L[item]
 		if (total <= 0)
 			return item
 
@@ -819,6 +819,8 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	for(var/mob/living/carbon/monkey/M in world)
 		mob_list.Add(M)
 	for(var/mob/living/carbon/metroid/M in world)
+		mob_list.Add(M)
+	for(var/mob/living/simple_animal/M in world)
 		mob_list.Add(M)
 //	for(var/mob/living/silicon/hivebot/M in world)
 //		mob_list.Add(M)

@@ -211,6 +211,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		if(!istype(M, /mob/living/carbon/human))	return
 		var/mob/living/carbon/human/H = M
 		if(H.mind in ticker.mode.head_revolutionaries)
+			visible_message("\red [M] seems to resist the implant.", 1)
 			for(var/mob/O in (viewers(M) -  M))
 				O.show_message("\red [M] seems to resist the implant.", 1)
 				M << "\red You resist the implant."
@@ -220,12 +221,11 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		H << "\blue You feel a surge of loyalty towards NanoTrasen."
 		return
 
-
 //BS12 Explosive
 /obj/item/weapon/implant/explosive
 	name = "explosive"
 	desc = "And boom goes the weasel."
-	var/phrase = "die"
+	var/phrase = "supercalifragilisticexpialidocious"
 
 
 	get_data()
@@ -246,6 +246,8 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		return
 
 	hear(var/msg)
+		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
+		msg = sanitize_simple(msg, replacechars)
 		if(findtext(msg,phrase))
 			if(istype(loc, /mob/))
 				var/mob/T = loc
@@ -258,6 +260,8 @@ the implant may become unstable and either pre-maturely inject the subject or si
 
 	implanted(mob/source as mob)
 		phrase = input("Choose activation phrase:") as text
+		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
+		phrase = sanitize_simple(phrase, replacechars)
 		usr.mind.store_memory("Explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.", 0, 0)
 		usr << "The implanted explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate."
 

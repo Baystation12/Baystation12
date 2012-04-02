@@ -98,7 +98,7 @@
 				playsound(user, fire_sound, 10, 1)
 			else
 				playsound(user, fire_sound, 50, 1)
-			M.apply_damage(30+in_chamber.damage, BRUTE, used_weapon = "Point Blank Shot") //So we'll put him an inch from death.
+			M.apply_damage(30+in_chamber.damage, BRUTE, user.zone_sel.selecting, used_weapon = "Point Blank Shot") //So we'll put him an inch from death.
 			M.attack_log += text("\[[]\] <b>[]/[]</b> shot <b>[]/[]</b> point blank with a <b>[]</b>", time_stamp(), user, user.ckey, M, M.ckey, src)
 			user.attack_log += text("\[[]\] <b>[]/[]</b> shot <b>[]/[]</b> point blank with a <b>[]</b>", time_stamp(), user, user.ckey, M, M.ckey, src)
 			log_admin("ATTACK: [user] ([user.ckey]) shot [M] ([M.ckey]) point blank with [src].")
@@ -464,7 +464,7 @@ mob/proc
 	target_locked
 		icon = 'icons/effects/Targeted.dmi'
 		icon_state = "locked"
-		layer = 99
+		layer = 17.9
 //	captured
 //		icon = 'Captured.dmi'
 //		layer = 99
