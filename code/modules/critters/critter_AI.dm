@@ -80,6 +80,7 @@
 	patrol_step()
 		var/moveto = locate(src.x + rand(-1,1),src.y + rand(-1, 1),src.z)
 		if (istype(moveto, /turf/simulated/floor) || istype(moveto, /turf/simulated/shuttle/floor) || istype(moveto, /turf/unsimulated/floor)) step_towards(src, moveto)
+		if(spacewalk && istype(moveto,/turf/space)) step_towards(src, moveto)
 		if(src.aggressive) seek_target()
 		steps += 1
 		if (steps == rand(5,20)) src.task = "thinking"

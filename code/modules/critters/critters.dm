@@ -155,6 +155,7 @@
 	attack_speed = 10
 	speed = 8
 	var/stunchance = 10 // chance to tackle things down
+	spacewalk = 1
 
 
 

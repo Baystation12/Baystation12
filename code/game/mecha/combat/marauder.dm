@@ -40,6 +40,12 @@
 	operation_req_access = list(access_syndicate)
 	wreckage = /obj/effect/decal/mecha_wreckage/mauler
 
+	snd_nominal = 'nominalsyndi.ogg'
+	snd_critical = 'critdestrsyndi.ogg'
+	snd_weapondestroyed = 'weapdestrsyndi.ogg'
+	snd_lowpower = 'lowpowersyndi.ogg'
+	snd_long_activation = 'LongSyndiActivation.ogg'
+
 /obj/mecha/combat/marauder/New()
 	..()
 	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse
@@ -98,11 +104,20 @@
 	var/tmp_step_energy_drain = step_energy_drain
 	var/move_result = 0
 	if(internal_damage&MECHA_INT_CONTROL_LOST)
-		move_result = mechsteprand()
+		if(thrusters && istype(src.loc, /turf/space))
+			move_result = mechboostrand()
+		else
+			move_result = mechsteprand()
 	else if(src.dir!=direction)
-		move_result = mechturn(direction)
+		if(thrusters && istype(src.loc, /turf/space))
+			move_result = mechspaceturn(direction)
+		else
+			move_result = mechturn(direction)
 	else
-		move_result	= mechstep(direction)
+		if(thrusters & istype(src.loc, /turf/space))
+			move_result	= mechboost(direction)
+		else
+			move_result	= mechstep(direction)
 	if(move_result)
 		if(istype(src.loc, /turf/space))
 			if(!src.check_for_support())
@@ -161,7 +176,10 @@
 		src.occupant_message("<font color='[src.zoom?"blue":"red"]'>Zoom mode [zoom?"en":"dis"]abled.</font>")
 		if(zoom)
 			src.occupant.client.view = 12
-			src.occupant << sound('imag_enh.ogg',volume=50)
+			if(!istype(src,/obj/mecha/combat/marauder/mauler))
+				src.occupant << sound('imag_enhnano.ogg')
+			else
+				src.occupant << sound('imag_enhsyndi.ogg')
 		else
 			src.occupant.client.view = world.view//world.view - default mob view size
 	return

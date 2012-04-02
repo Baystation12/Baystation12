@@ -141,6 +141,8 @@
 	spawn(30)
 		killer << sound('AISyndiHack.ogg',volume=50)
 	//End code phrase.
+	spawn(30)
+		killer << sound('AISyndiHack.ogg',volume=50)
 
 
 /datum/game_mode/proc/auto_declare_completion_traitor()
