@@ -399,10 +399,9 @@
 		//New version pretends to call the shuttle but cause the shuttle to return after a random duration.
 		emergency_shuttle.fake_recall = rand(300,500)
 
-	if(ticker.mode.name == "blob")
-		if(ticker.mode:declared)
-			user << "Under directive 7-10, [station_name()] is quarantined until further notice."
-			return
+	if(ticker.mode.name == "blob" || ticker.mode.name == "epidemic")
+		user << "Under directive 7-10, [station_name()] is quarantined until further notice."
+		return
 
 	emergency_shuttle.incall()
 	log_game("[key_name(user)] has called the shuttle.")
