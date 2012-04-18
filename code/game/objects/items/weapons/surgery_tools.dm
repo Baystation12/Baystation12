@@ -664,7 +664,10 @@ CIRCULAR SAW
 	var/scan_data = ""
 
 	if(timeofdeath)
-		scan_data += "<b>Time since death:</b> [round((world.time - timeofdeath) / (60*10))] minutes<br><br>"
+		var/deathtime = world.timeofday - timeofdeath
+		if(deathtime < 0)
+			deathtime += 864000
+		scan_data += "<b>Time since death:</b> [time2text(deathtime,"mm:ss")] minutes<br><br>"
 
 	var/n = 1
 	for(var/wdata_idx in wdata)

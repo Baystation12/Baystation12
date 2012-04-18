@@ -104,7 +104,7 @@
 	return
 
 /mob/proc/death(gibbed)
-	timeofdeath = world.time
+	timeofdeath = world.timeofday
 
 	var/cancel = 0
 	for(var/mob/M in world)
@@ -458,6 +458,16 @@
 	if ((stat != 2 || !( ticker )))
 		usr << "\blue <B>You must be dead to use this!</B>"
 		return
+	if (ticker.mode.name == "AutoTraitor")
+		var/deathtime = world.timeofday - timeofdeath
+		if(deathtime < 0)
+			deathtime += 864000
+		usr << "You have been dead for [time2text(deathtime,"hh:mm:ss")] hours."
+		if (time2text(deathtime,"hh") == "00")
+			usr << "You must wait 60 minutes to respawn!"
+			return
+		else
+			usr << "You can respawn now, enjoy your new life! :-D"
 
 	log_game("[usr.name]/[usr.key] used abandon mob.")
 
