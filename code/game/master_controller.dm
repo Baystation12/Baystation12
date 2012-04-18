@@ -88,7 +88,7 @@ datum/controller/game_controller
 
 		tension_master.process()
 
-		sleep(1)
+//		sleep(1)
 
 		sun.calc_position()
 
@@ -110,7 +110,7 @@ datum/controller/game_controller
 
 
 		sleep(-1)
-		sleep(1)
+//		sleep(1)
 
 		for(var/obj/object in processing_objects)
 			object.process()
@@ -125,7 +125,7 @@ datum/controller/game_controller
 
 		ticker.process()
 
-		sleep(world.timeofday+10-start_time)
+		sleep((start_time - world.timeofday)+10)
 
 		spawn process()
 

@@ -20,7 +20,7 @@
 	var/last_found //There's a delay
 	var/frustration = 0
 //	var/emagged = 0 //Emagged Secbots view everyone as a criminal
-	var/idcheck = 0 //If false, all station IDs are authorized for weapons.
+	var/idcheck = 1 //If false, all station IDs are authorized for weapons.
 	var/check_records = 1 //Does it check security records?
 	var/arrest_type = 0 //If true, don't handcuff
 

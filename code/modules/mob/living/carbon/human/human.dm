@@ -135,7 +135,7 @@
 	vessel = new/datum/reagents(600)
 	vessel.my_atom = src
 	vessel.add_reagent("blood",560)
-	spawn(1) fixblood()
+	spawn(0) fixblood()
 
 	..()
 	/*var/known_languages = list()

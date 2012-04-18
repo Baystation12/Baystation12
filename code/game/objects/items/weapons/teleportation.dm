@@ -65,7 +65,7 @@ Frequency:
 					else
 						var/mob/M = W.loc
 						if (M.stat == 2)
-							if (M.timeofdeath + 6000 < world.time)
+							if (M.timeofdeath + 6000 < world.timeofday)
 								continue
 
 					var/turf/tr = get_turf(W)
