@@ -46,11 +46,13 @@
 
 /obj/item/clothing/head/fluff/greg_anderson_1
 	name = "old hard hat"
-	desc = "An old dented hard hat with the nametag \"Anderson\".  It seems to be backwards."
-	icon_state = "hardhat0_red"
+	desc = "An old dented hard hat with the nametag \Anderson\. It seems to be backwards."
+	icon_state = "hardhat0_dblue"
 	flags = FPRINT | TABLEPASS | SUITSPACE
-	item_state = "hardhat0_red"
-	color = "red"
+	item_state = "hardhat0_dblue"
+	var/brightness_on = 4
+	var/on = 0
+	color = "dblue"
 	armor = list(melee = 30, bullet = 5, laser = 20,energy = 10, bomb = 20, bio = 10, rad = 20)
 	flags_inv = 0
 
@@ -60,3 +62,24 @@
 	icon = 'custom_items.dmi'
 	icon_state = "ethan_way_1"
 	flags = FPRINT | TABLEPASS
+
+/obj/item/clothing/under/cdc_jumpsuit
+	name = "CDC Jumpsuit"
+	desc = "A modified standard-issue CDC jumpsuit made of a special fiber that gives special protection against biohazards.  It has a biohazard symbol sewn into the back."
+	icon = 'custom_items.dmi'
+	icon_state = "cdc_jumpsuit"
+	item_state = "cdc_jumpsuit"
+	color = "cdc"
+	permeability_coefficient = 0.50
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+
+/obj/item/clothing/suit/storage/labcoat/cdc_labcoat
+	name = "CDC Labcoat"
+	desc = "A standard-issue CDC labcoat that protects against minor chemical spills.  It has the name "Wiles" sewn on to the breast pocket."
+	icon_state = "cdc_labcoat_open"
+	item_state = "cdc_labcoat_open"
+	permeability_coefficient = 0.25
+	heat_transfer_coefficient = 0.75
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/dnainjector,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
