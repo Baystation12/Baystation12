@@ -46,7 +46,7 @@
 
 /obj/item/clothing/head/fluff/greg_anderson_1
 	name = "old hard hat"
-	desc = "An old dented hard hat with the nametag \Anderson\. It seems to be backwards."
+	desc = "An old dented hard hat with the nametag \"Anderson\". It seems to be backwards."
 	icon_state = "hardhat0_dblue"
 	flags = FPRINT | TABLEPASS | SUITSPACE
 	item_state = "hardhat0_dblue"
