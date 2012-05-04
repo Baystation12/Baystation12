@@ -39,7 +39,7 @@
 	pr_give_air = new /datum/global_iterator/vehicle_tank_give_air(list(src))
 
 
-//######################################### Specific datums for airtight vehicles #################################
+//######################################### Specific data for airtight vehicles #################################
 
 
 /datum/global_iterator/vehicle_preserve_temp  //normalizing cabin air temperature to 20 degrees celsium

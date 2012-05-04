@@ -29,7 +29,7 @@ world/New()
 proc/savefile_path(mob/user)
 	return "data/player_saves/[copytext(user.ckey, 1, 2)]/[user.ckey]/preferences.sav"
 
-// add a new news datums
+// add a new news data
 proc/make_news(title, body, author)
 	var/savefile/News = new("data/news.sav")
 	var/list/news

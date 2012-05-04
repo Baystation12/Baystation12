@@ -29,7 +29,7 @@ datum/preferences
 		// Generate list of all possible hairs via typesof(), subtract the parent type however
 		var/list/all_hairs = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
 
-		// List of hair datums. Used in pick() to select random hair
+		// List of hair data. Used in pick() to select random hair
 		var/list/hairs = list()
 
 		// Loop through potential hairs

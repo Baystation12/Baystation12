@@ -1,5 +1,5 @@
 
-// see code/datums/recipe.dm
+// see code/data/recipe.dm
 
 /datum/recipe/telebacon
 	items = list(

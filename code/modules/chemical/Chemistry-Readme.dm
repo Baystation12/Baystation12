@@ -6,12 +6,12 @@ Structure: ///////////////////          //////////////////////////
 		   ///////////////////          //////////////////////////
 		   			|				    			 |
     The object that holds everything.   			 V
-		   							      reagent_list var (list)   	A List of datums, each datum is a reagent.
+		   							      reagent_list var (list)   	A List of data, each datum is a reagent.
 
 		   							      |          |          |
 		   							      V          V          V
 
-		   							         reagents (datums)	    	Reagents. I.e. Water , antitoxins or mercury.
+		   							         reagents (data)	    	Reagents. I.e. Water , antitoxins or mercury.
 
 
 Random important notes:
@@ -103,7 +103,7 @@ About the Holder:
 
 			reagent_list
 				This is a list of all contained reagents. More specifically, references
-				to the reagent datums.
+				to the reagent data.
 
 			maximum_volume
 				This is the maximum volume of the holder.
@@ -177,7 +177,7 @@ About Reagents:
 
 About Recipes:
 
-	Recipes are simple datums that contain a list of required reagents and a result.
+	Recipes are simple data that contain a list of required reagents and a result.
 	They also have a proc that is called when the recipe is matched.
 
 		on_reaction(var/datum/reagents/holder, var/created_volume)

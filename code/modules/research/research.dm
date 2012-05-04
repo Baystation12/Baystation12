@@ -7,7 +7,7 @@ Variables:
 - possible_tech is a list of all the /datum/tech that can potentially be researched by the player. The RefreshResearch() proc
 (explained later) only goes through those when refreshing what you know. Generally, possible_tech contains ALL of the existing tech
 but it is possible to add tech to the game that DON'T start in it (example: Xeno tech). Generally speaking, you don't want to mess
-with these since they should be the default version of the datums. They're actually stored in a list rather then using typesof to
+with these since they should be the default version of the data. They're actually stored in a list rather then using typesof to
 refer to them since it makes it a bit easier to search through them for specific information.
 - know_tech is the companion list to possible_tech. It's the tech you can actually research and improve. Until it's added to this
 list, it can't be improved. All the tech in this list are visible to the player.
@@ -29,7 +29,7 @@ accidentally add "secret" tech to it.
 it finds it, it checks to see whether it can improve it at all. If the known_tech's level is less then or equal to
 the inputted level, it increases the known tech's level to the inputted level -1 or know tech's level +1 (whichever is higher).
 
-The tech datums are the actual "tech trees" that you improve through researching. Each one has five variables:
+The tech data are the actual "tech trees" that you improve through researching. Each one has five variables:
 - Name:		Pretty obvious. This is often viewable to the players.
 - Desc:		Pretty obvious. Also player viewable.
 - ID:		This is the unique ID of the tech that is used by the various procs to find and/or maniuplate it.
