@@ -275,7 +275,7 @@
 			src.pr_inertial_movement.start()
 	return
 
-//should try two directional iterator datums, one for vertical, one for horizontal movement.
+//should try two directional iterator data, one for vertical, one for horizontal movement.
 /datum/global_iterator/space_ship_inertial_movement
 	delay = 1
 	var/min_delay = 0

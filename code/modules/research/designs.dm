@@ -1503,7 +1503,7 @@ datum
 			build_path = "/obj/item/weapon/banhammer" */
 
 ////////////////////////////////////////
-//Disks for transporting design datums//
+//Disks for transporting design data//
 ////////////////////////////////////////
 
 /obj/item/weapon/disk/design_disk

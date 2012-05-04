@@ -115,7 +115,7 @@
 				return J.title
 		return ""
 
-	//This proc returns all the job datums of the workers whose boss has the alias provided. (IE Engineer under Chief Engineer, etc.)
+	//This proc returns all the job data of the workers whose boss has the alias provided. (IE Engineer under Chief Engineer, etc.)
 	proc/get_jobs_under(var/boss_alias)
 		var/boss_title = get_job_title(boss_alias)
 		var/list/datum/job/employees = list()

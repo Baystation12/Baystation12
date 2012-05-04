@@ -1,5 +1,5 @@
 ////////////////////////////////
-///// Construction datums //////
+///// Construction data //////
 ////////////////////////////////
 
 /datum/construction/mecha/custom_action(step, atom/used_atom, mob/user)
