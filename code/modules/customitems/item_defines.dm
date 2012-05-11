@@ -90,6 +90,12 @@
 	icon_state = "johann_erzatz_1"
 	volume = 50
 
+/obj/item/weapon/reagent_containers/food/drinks/flask/fluff/shinyflask //lexusjjss: Lexus Langg, Zachary Tomlinson
+	name = "shiny flask"
+	desc = "A shiny metal flask. It has some greek symbol on it."
+	icon = "custom_items.dmi"
+	icon_state = "shinyflask"
+
 /obj/item/weapon/lighter/zippo/fluff/li_tsun_1 //mangled: Li Tsun
 	name = "blue zippo lighter"
 	desc = "A zippo lighter made of some blue metal."

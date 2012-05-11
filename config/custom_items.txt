@@ -10,8 +10,8 @@ eternal248: Maximilian Haynes: /obj/item/weapon/paper/certificate
 erthilo: Farah Lants: /obj/item/clothing/under/rank/medical/fluff/short, /obj/item/clothing/suit/storage/labcoat/fluff/red
 gvazdas: Sarah Carbrokes: /obj/item/fluff/sarah_carbrokes_1
 leonheart11:  Johann Erzatz: /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/johann_erzatz_1
-lexusjjss: Lexus Langg: /obj/item/weapon/clipboard/fluff/smallnote
-lexusjjss: Zachary Tomlinson: /obj/item/weapon/clipboard/fluff/smallnote
+lexusjjss: Lexus Langg: /obj/item/weapon/clipboard/fluff/smallnote, /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/shinyflask
+lexusjjss: Zachary Tomlinson: /obj/item/weapon/clipboard/fluff/smallnote, /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/shinyflask
 madmalicemccrea: Alice McCrea: /obj/item/clothing/head/helmet/welding/fluff/alice_mccrea_1
 mangled: Li Tsun: /obj/item/weapon/lighter/zippo/fluff/li_tsun_1
 misterfox: Rashid Siraj: /obj/item/weapon/storage/bible/tajaran
