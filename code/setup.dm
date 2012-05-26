@@ -1,3 +1,5 @@
+#define PI 3.1415
+
 #define R_IDEAL_GAS_EQUATION	8.31 //kPa*L/(K*mol)
 #define ONE_ATMOSPHERE		101.325	//kPa
 
@@ -26,11 +28,22 @@
 #define WARNING_LOW_PRESSURE HAZARD_LOW_PRESSURE*2.5
 #define MAX_PRESSURE_DAMAGE 20
 
+#define SPECIFIC_HEAT_TOXIN		200
+#define SPECIFIC_HEAT_AIR		20
+#define SPECIFIC_HEAT_CDO		30
+#define HEAT_CAPACITY_CALCULATION(oxygen,carbon_dioxide,nitrogen,toxins) \
+	(carbon_dioxide*SPECIFIC_HEAT_CDO + (oxygen+nitrogen)*SPECIFIC_HEAT_AIR + toxins*SPECIFIC_HEAT_TOXIN)
+
+#define MINIMUM_HEAT_CAPACITY	0.003
+
+#define QUANTIZE(variable)		(round(variable,0.0001))
+#define TRANSFER_FRACTION 5 //What fraction (1/#) of the air difference to try and transfer
+
 // Doors!
 #define DOOR_CRUSH_DAMAGE 10
 
 // Factor of how fast mob nutrition decreases
-#define	HUNGER_FACTOR 0.1
+#define	HUNGER_FACTOR 0.05
 #define	REAGENTS_METABOLISM 0.05
 #define REAGENTS_OVERDOSE 30
 
@@ -100,7 +113,12 @@ var/MAX_EXPLOSION_RANGE = 14
 //FLAGS BITMASK
 #define ONBACK 1			// can be put in back slot
 #define TABLEPASS 2			// can pass by a table or rack
-#define HALFMASK 4			// mask only gets 1/2 of air supply from internals
+
+/********************************************************************************
+*	WOO WOO WOO	THIS IS UNUSED	WOO WOO WOO										*
+*	#define HALFMASK 4	// mask only gets 1/2 of air supply from internals		*
+*	WOO WOO WOO	THIS IS UNUSED	WOO WOO WOO										*
+********************************************************************************/
 
 #define HEADSPACE 4			// head wear protects against space
 
@@ -131,7 +149,7 @@ var/MAX_EXPLOSION_RANGE = 14
 
 #define BLOCKHAIR 32768			// temporarily removes the user's hair icon
 
-#define PLASMAGUARD 65536
+#define PLASMAGUARD 65536		//Does not get contaminated by plasma.
 
 //flags for pass_flags
 #define PASSTABLE 1
@@ -142,17 +160,6 @@ var/MAX_EXPLOSION_RANGE = 14
 //turf-only flags
 #define NOJAUNT 1
 
-//Bit flags for the flags_inv variable, which determine when a piece of clothing hides another. IE a helmet hiding glasses.
-#define HIDEGLOVES 1		//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDESUITSTORAGE 2	//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDEJUMPSUIT 4		//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDESHOES 8			//APPLIES ONLY TO THE EXTERIOR SUIT!!
-#define HIDEMASK 1			//APPLIES ONLY TO HELMETS!!
-#define HIDEEARS 2			//APPLIES ONLY TO HELMETS!!
-#define HIDEEYES 4			//APPLIES ONLY TO HELMETS!!
-
-//Cant seem to find a mob bitflags area other than the powers one
-#define NOGRAV 1
 
 //Bit flags for the flags_inv variable, which determine when a piece of clothing hides another. IE a helmet hiding glasses.
 #define HIDEGLOVES 1		//APPLIES ONLY TO THE EXTERIOR SUIT!!
@@ -289,3 +296,9 @@ var/static/list/scarySounds = list('thudswoosh.ogg','Taser.ogg','armbomb.ogg','h
 #define SEC_LEVEL_BLUE 1
 #define SEC_LEVEL_RED 2
 #define SEC_LEVEL_DELTA 3
+
+#define TRANSITIONEDGE 7 //Distance from edge to move to another z-level
+
+// Maximum and minimum character ages.
+var/const/minimum_age = 20
+var/const/maximum_age = 65

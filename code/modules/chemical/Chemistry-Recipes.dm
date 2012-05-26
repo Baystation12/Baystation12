@@ -34,13 +34,20 @@ datum
 
 				holder.clear_reagents()
 				return
-
+/*
 		silicate
 			name = "Silicate"
 			id = "silicate"
 			result = "silicate"
 			required_reagents = list("aluminum" = 1, "silicon" = 1, "oxygen" = 1)
 			result_amount = 3
+*/
+		stoxin
+			name = "Sleep Toxin"
+			id = "stoxin"
+			result = "stoxin"
+			required_reagents = list("chloralhydrate" = 1, "sugar" = 4)
+			result_amount = 5
 
 		sterilizine
 			name = "Sterilizine"
@@ -343,13 +350,12 @@ datum
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/turf/location = get_turf(holder.my_atom.loc)
 				for(var/turf/simulated/floor/target_tile in range(0,location))
-					if(target_tile.parent && target_tile.parent.group_processing)
-						target_tile.parent.suspend_group_processing()
 
 					var/datum/gas_mixture/napalm = new
 
 					napalm.toxins = created_volume*10
 					napalm.temperature = 400+T0C
+					napalm.update_values()
 
 					target_tile.assume_air(napalm)
 					spawn (0) target_tile.hotspot_expose(700, 400)
@@ -423,6 +429,14 @@ datum
 			result = "LSD"
 			required_reagents = list("silicon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
 			result_amount = 5
+
+		lipozine
+			name = "Lipozine"
+			id = "Lipozine"
+			result = "lipozine"
+			required_reagents = list("sodiumchloride" = 1, "ethanol" = 1, "radium" = 1)
+			result_amount = 3
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 // foam and foam precursor
@@ -464,7 +478,6 @@ datum
 				holder.clear_reagents()
 				return
 
-
 		metalfoam
 			name = "Metal Foam"
 			id = "metalfoam"
@@ -481,7 +494,7 @@ datum
 					M << "\red The solution spews out a metalic foam!"
 
 				var/datum/effect/effect/system/foam_spread/s = new()
-				s.set_up(created_volume/2, location, holder, 1)
+				s.set_up(created_volume, location, holder, 1)
 				s.start()
 				return
 
@@ -501,7 +514,7 @@ datum
 					M << "\red The solution spews out a metalic foam!"
 
 				var/datum/effect/effect/system/foam_spread/s = new()
-				s.set_up(created_volume/2, location, holder, 2)
+				s.set_up(created_volume, location, holder, 2)
 				s.start()
 				return
 
@@ -752,13 +765,14 @@ datum
 					if(M:eyecheck() <= 0)
 						flick("e_flash", M.flash)
 
-				for(var/i = 1, i <= created_volume, i++)
+				for(var/i = 1, i <= created_volume + rand(1,2), i++)
 					var/chosen = pick(borks)
 					var/obj/B = new chosen
-					B.loc = get_turf_loc(holder.my_atom)
-					if(prob(50))
-						for(var/j = 1, j <= rand(1, 3), j++)
-							step(B, pick(NORTH,SOUTH,EAST,WEST))
+					if(B)
+						B.loc = get_turf_loc(holder.my_atom)
+						if(prob(50))
+							for(var/j = 1, j <= rand(1, 3), j++)
+								step(B, pick(NORTH,SOUTH,EAST,WEST))
 
 
 
@@ -996,7 +1010,6 @@ datum
 			required_reagents = list("gin" = 2, "tonic" = 1)
 			result_amount = 3
 
-
 		cuba_libre
 			name = "Cuba Libre"
 			id = "cubalibre"
@@ -1018,12 +1031,11 @@ datum
 			required_reagents = list("vodka" = 2, "vermouth" = 1)
 			result_amount = 3
 
-
 		white_russian
 			name = "White Russian"
 			id = "whiterussian"
 			result = "whiterussian"
-			required_reagents = list("vodka" = 3, "cream" = 1, "kahlua" = 1)
+			required_reagents = list("blackrussian" = 3, "cream" = 2)
 			result_amount = 5
 
 		whiskey_cola
@@ -1205,15 +1217,15 @@ datum
 			name = "Singulo"
 			id = "singulo"
 			result = "singulo"
-			required_reagents = list("vodka" = 5, "radium" = 1, "acid" = 1, "wine" = 5)
+			required_reagents = list("vodka" = 5, "radium" = 1, "wine" = 5)
 			result_amount = 10
 
-/*		alliescocktail
+		alliescocktail
 			name = "Allies Cocktail"
 			id = "alliescocktail"
 			result = "alliescocktail"
-			required_reagents = list("gin" = 1, "vermouth" = 1)
-			result_amount = 2*/
+			required_reagents = list("martini" = 1, "vodka" = 1)
+			result_amount = 2
 
 		demonsblood
 			name = "Demons Blood"
@@ -1240,13 +1252,13 @@ datum
 			name = "Barefoot"
 			id = "barefoot"
 			result = "barefoot"
-			required_reagents = list("vodka" = 1, "cream" = 1, "vermouth" = 1, "whiskey" = 1)
-			result_amount = 4
+			required_reagents = list("berryjuice" = 1, "cream" = 1, "vermouth" = 1)
+			result_amount = 3
 
 
-////DRINKS THAT REQUIRE IMPROVED SPRITES BELOW:: -Agouri/////
+////DRINKS THAT REQUIRED IMPROVED SPRITES BELOW:: -Agouri/////
 
-/*		sbiten
+		sbiten
 			name = "Sbiten"
 			id = "sbiten"
 			result = "sbiten"
@@ -1328,7 +1340,7 @@ datum
 			name = "Aloe"
 			id = "aloe"
 			result = "aloe"
-			required_reagents = list("cream" = 1, "whiskey" = 1)
+			required_reagents = list("cream" = 1, "whiskey" = 1, "watermelonjuice" = 1)
 			result_amount = 2
 
 		andalusia
@@ -1356,15 +1368,15 @@ datum
 			name = "Irish Car Bomb"
 			id = "irishcarbomb"
 			result = "irishcarbomb"
-			required_reagents = list("ale" = 1, "cream" = 1, "whiskey" = 1)
-			result_amount = 3
+			required_reagents = list("ale" = 1, "irishcream" = 1)
+			result_amount = 2
 
 		syndicatebomb
 			name = "Syndicate Bomb"
 			id = "syndicatebomb"
 			result = "syndicatebomb"
-			required_reagents = list("beer" = 1, "cola" = 1, "whiskey" = 1)
-			result_amount = 3
+			required_reagents = list("beer" = 1, "whiskeycola" = 1)
+			result_amount = 2
 
 		erikasurprise
 			name = "Erika Surprise"
@@ -1372,7 +1384,6 @@ datum
 			result = "erikasurprise"
 			required_reagents = list("ale" = 1, "limejuice" = 1, "whiskey" = 1, "banana" = 1, "ice" = 1)
 			result_amount = 5
-
 
 		devilskiss
 			name = "Devils Kiss"
@@ -1400,8 +1411,12 @@ datum
 			id = "silencer"
 			result = "silencer"
 			required_reagents = list("nothing" = 1, "cream" = 1, "sugar" = 1)
-			result_amount = 3*/
+			result_amount = 3
 
-
-
+		driestmartini
+			name = "Driest Martini"
+			id = "driestmartini"
+			result = "driestmartini"
+			required_reagents = list("nothing" = 1, "gin" = 1)
+			result_amount = 2
 

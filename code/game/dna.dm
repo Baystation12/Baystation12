@@ -9,28 +9,29 @@
 	var/original_name = "Unknown"
 	var/b_type = "A+"
 
-/datum/dna/proc/check_integrity(var/mob/living/carbon/human/character)
-	if(character)
+/datum/dna/proc/check_integrity(var/mob/living/carbon/character)
+	if(character && ishuman(character))
 		if(length(uni_identity) != 39)
 			//Lazy.
+			var/mob/living/carbon/human/character2 = character
 			var/temp
 			var/hair = 0
 			var/beard
 
 			// determine DNA fragment from hairstyle
 			// :wtc:
-			// If the character doesn't have initialized hairstyles / beardstyles, initialize it for them!
-			if(!character.hair_style)
-				character.hair_style = new/datum/sprite_accessory/hair/short
+			// If the character2 doesn't have initialized hairstyles / beardstyles, initialize it for them!
+			if(!character2.hair_style)
+				character2.hair_style = new/datum/sprite_accessory/hair/short
 
-			if(!character.facial_hair_style)
-				character.facial_hair_style = new/datum/sprite_accessory/facial_hair/shaved
+			if(!character2.facial_hair_style)
+				character2.facial_hair_style = new/datum/sprite_accessory/facial_hair/shaved
 
 			var/list/styles = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
 			var/hrange = round(4095 / styles.len)
 
-			if(character.hair_style)
-				var/style = styles.Find(character.hair_style.type)
+			if(character2.hair_style)
+				var/style = styles.Find(character2.hair_style.type)
 				if(style)
 					hair = style * hrange - rand(1,hrange-1)
 
@@ -38,26 +39,26 @@
 			var/list/face_styles = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
 			var/f_hrange = round(4095 / face_styles.len)
 
-			var/f_style = face_styles.Find(character.facial_hair_style.type)
+			var/f_style = face_styles.Find(character2.facial_hair_style.type)
 			if(f_style)
 				beard = f_style * f_hrange - rand(1,f_hrange-1)
 			else
 				beard = 0
 
-			temp = add_zero2(num2hex((character.r_hair),1), 3)
-			temp += add_zero2(num2hex((character.b_hair),1), 3)
-			temp += add_zero2(num2hex((character.g_hair),1), 3)
-			temp += add_zero2(num2hex((character.r_facial),1), 3)
-			temp += add_zero2(num2hex((character.b_facial),1), 3)
-			temp += add_zero2(num2hex((character.g_facial),1), 3)
-			temp += add_zero2(num2hex(((character.s_tone + 220) * 16),1), 3)
-			temp += add_zero2(num2hex((character.r_eyes),1), 3)
-			temp += add_zero2(num2hex((character.g_eyes),1), 3)
-			temp += add_zero2(num2hex((character.b_eyes),1), 3)
+			temp = add_zero2(num2hex((character2.r_hair),1), 3)
+			temp += add_zero2(num2hex((character2.b_hair),1), 3)
+			temp += add_zero2(num2hex((character2.g_hair),1), 3)
+			temp += add_zero2(num2hex((character2.r_facial),1), 3)
+			temp += add_zero2(num2hex((character2.b_facial),1), 3)
+			temp += add_zero2(num2hex((character2.g_facial),1), 3)
+			temp += add_zero2(num2hex(((character2.s_tone + 220) * 16),1), 3)
+			temp += add_zero2(num2hex((character2.r_eyes),1), 3)
+			temp += add_zero2(num2hex((character2.g_eyes),1), 3)
+			temp += add_zero2(num2hex((character2.b_eyes),1), 3)
 
 			var/gender
 
-			if (character.gender == MALE)
+			if (character2.gender == MALE)
 				gender = add_zero2(num2hex((rand(1,(2050+BLOCKADD))),1), 3)
 			else
 				gender = add_zero2(num2hex((rand((2051+BLOCKADD),4094)),1), 3)
@@ -77,6 +78,21 @@
 			unique_enzymes = md5(character.real_name)
 		if(original_name == "Unknown")
 			original_name = character.real_name
+	else if(character && ismonkey(character))
+		uni_identity = "00600200A00E0110148FC01300B009"
+		struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
+		unique_enzymes = md5(character.name)
+				//////////blah
+		var/gendervar
+		if (character.gender == "male")
+			gendervar = add_zero2(num2hex((rand(1,2049)),1), 3)
+		else
+			gendervar = add_zero2(num2hex((rand(2051,4094)),1), 3)
+		uni_identity += gendervar
+		uni_identity += "12C"
+		uni_identity += "4E2"
+		b_type = "A+"
+		original_name = character.real_name
 	else
 		if(length(uni_identity) != 39) uni_identity = "00600200A00E0110148FC01300B0095BD7FD3F4"
 		if(length(struc_enzymes)!= 81) struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B02D6"
@@ -150,19 +166,44 @@
 /////////////////////////// DNA HELPER-PROCS
 /proc/getleftblocks(input,blocknumber,blocksize)
 	var/string
-	string = copytext(input,1,((blocksize*blocknumber)-(blocksize-1)))
+
 	if (blocknumber > 1)
+		string = copytext(input,1,((blocksize*blocknumber)-(blocksize-1)))
 		return string
 	else
 		return null
 
 /proc/getrightblocks(input,blocknumber,blocksize)
 	var/string
-	string = copytext(input,blocksize*blocknumber+1)
 	if (blocknumber < (length(input)/blocksize))
+		string = copytext(input,blocksize*blocknumber+1,length(input)+1)
 		return string
 	else
 		return null
+
+/proc/getblockstring(input,block,subblock,blocksize)
+	var/string
+	var/subpos = 1 // keeps track of the current sub block
+	var/blockpos = 1 // keeps track of the current block
+
+	for(var/i = 1, i <= length(input), i++) // loop through each letter
+
+		var/pushstring = copytext(input, i, i+1)
+
+		if(subpos == subblock && blockpos == block) // if the current block/subblock is selected, mark it
+			pushstring = "</font color><b>[copytext(input, i, i+1)]</b><font color='blue'>"
+
+		string += pushstring // push the string to the return string
+
+		if(subpos >= blocksize) // add a line break for every block
+			string += " </font color><font color='#285B5B'>|</font color><font color='blue'> "
+			subpos = 0
+			blockpos++
+
+		subpos++
+
+	return string
+
 
 /proc/getblock(input,blocknumber,blocksize)
 	var/result
@@ -204,9 +245,17 @@
 	if (!output) output = "5"
 	return output
 
-/proc/isblockon(hnumber, bnumber)
+/proc/isblockon(hnumber, bnumber , var/UI = 0)
+
 	var/temp2
 	temp2 = hex2num(hnumber)
+
+	if(UI)
+		if(temp2 >= 2050)
+			return 1
+		else
+			return 0
+
 	if (bnumber == HULKBLOCK || bnumber == TELEBLOCK)
 		if (temp2 >= 3500 + BLOCKADD)
 			return 1
@@ -296,7 +345,7 @@
 		H.g_eyes = hex2num(getblock(structure,9,3))
 		H.b_eyes = hex2num(getblock(structure,10,3))
 
-		if (isblockon(getblock(structure, 11,3),11))
+		if (isblockon(getblock(structure, 11,3),11 , 1))
 			H.gender = FEMALE
 		else
 			H.gender = MALE
@@ -344,28 +393,28 @@
 	if (!M) return
 	//mutations
 	/*
-	TK				=(1<<0)
-	COLD_RESISTANCE	=(1<<1)
-	XRAY			=(1<<2)
-	HULK			=(1<<3)
-	CLUMSY			=(1<<4)
-	//FAT				=(1<<5)
-	HUSK			=(1<<6)
-	LASER			=(1<<7)
-	HEAL			=(1<<8)
-	mNobreath		=(1<<9)
-	mRemote			=(1<<10)
-	mRegen			=(1<<11)
-	mRun			=(1<<12)
-	mRemotetalk		=(1<<13)
-	mMorph			=(1<<14)
-	mBlend			=(1<<15)
+	TK				=(1<<0)	1
+	COLD_RESISTANCE	=(1<<1)	2
+	XRAY			=(1<<2)	4
+	HULK			=(1<<3)	8
+	CLUMSY			=(1<<4)	16
+	//FAT				=(1<<5) 32
+	HUSK			=(1<<6)	64
+	LASER			=(1<<7)	128
+	HEAL			=(1<<8)	256
+	mNobreath		=(1<<9)	512
+	mRemote			=(1<<10)	1024
+	mRegen			=(1<<11)	2048
+	mRun			=(1<<12)	4096
+	mRemotetalk		=(1<<13)	8192
+	mMorph			=(1<<14)	16384
+	mBlend			=(1<<15)	32768
 
 	mutations2:
-	mHallucination	=(1<<0)
-	mFingerprints	=(1<<1)
-	mShock			=(1<<2)
-	mSmallsize		=(1<<3)
+	mHallucination	=(1<<0) 1
+	mFingerprints	=(1<<1) 2
+	mShock			=(1<<2) 4
+	mSmallsize		=(1<<3)	8
 	*/
 
 	//disabilities
@@ -493,13 +542,8 @@
 	// human > monkey
 		var/mob/living/carbon/human/H = M
 		H.monkeyizing = 1
-		var/list/implants = list() //Try to preserve implants.
-		for(var/obj/item/weapon/implant/W in H)
-			implants += W
-			W.loc = null
-
 		if(!connected)
-			for(var/obj/item/W in (H.contents-implants))
+			for(var/obj/item/W in (H.contents))
 				if (W==H.w_uniform) // will be teared
 					continue
 				H.drop_from_slot(W)
@@ -517,6 +561,13 @@
 			del(animation)
 
 		var/mob/living/carbon/monkey/O = new(src)
+		del(O.organs)
+		O.organs = H.organs
+		for(var/name in O.organs)
+			var/datum/organ/external/organ = O.organs[name]
+			organ.owner = O
+			for(var/obj/item/weapon/implant/implant in organ.implant)
+				implant.imp_in = O
 
 		if(M)
 			if (M.dna)
@@ -530,7 +581,7 @@
 			M.viruses -= D
 
 
-		for(var/obj/T in (M.contents-implants))
+		for(var/obj/T in (M.contents))
 			del(T)
 		//for(var/R in M.organs)
 		//	del(M.organs[text("[]", R)])
@@ -551,11 +602,9 @@
 		O.adjustOxyLoss(M.getOxyLoss())
 		O.stat = M.stat
 		O.a_intent = "hurt"
-		for (var/obj/item/weapon/implant/I in implants)
-			I.loc = O
-			I.implanted = O
 		O.flavor_text = M.flavor_text
 		O.warn_flavor_changed()
+		O.update_clothing()
 		del(M)
 		return
 
@@ -563,12 +612,8 @@
 	// monkey > human,
 		var/mob/living/carbon/monkey/Mo = M
 		Mo.monkeyizing = 1
-		var/list/implants = list() //Still preserving implants
-		for(var/obj/item/weapon/implant/W in Mo)
-			implants += W
-			W.loc = null
 		if(!connected)
-			for(var/obj/item/W in (Mo.contents-implants))
+			for(var/obj/item/W in (Mo.contents))
 				Mo.drop_from_slot(W)
 			M.update_clothing()
 			M.monkeyizing = 1
@@ -590,6 +635,13 @@
 			O.gender = MALE
 		O.dna = M.dna
 		M.dna = null
+		del(O.organs)
+		O.organs = M.organs
+		for(var/name in O.organs)
+			var/datum/organ/external/organ = O.organs[name]
+			organ.owner = O
+			for(var/obj/item/weapon/implant/implant in organ.implant)
+				implant.imp_in = O
 
 		for(var/datum/disease/D in M.viruses)
 			O.viruses += D
@@ -627,9 +679,6 @@
 		O.adjustToxLoss(M.getToxLoss())
 		O.adjustOxyLoss(M.getOxyLoss())
 		O.stat = M.stat
-		for (var/obj/item/weapon/implant/I in implants)
-			I.loc = O
-			I.implanted = O
 		O.flavor_text = M.flavor_text
 		O.warn_flavor_changed()
 		O.update_clothing()
@@ -733,7 +782,7 @@
 //		if (!M.client)
 //			for(var/mob/dead/observer/ghost in world)
 //				if(ghost.corpse == M && ghost.client)
-//					ghost << "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be ressurected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font color>"
+//					ghost << "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font color>"
 //					break
 	del(G)
 	return
@@ -752,6 +801,7 @@
 		src.occupant.client.eye = src.occupant.client.mob
 		src.occupant.client.perspective = MOB_PERSPECTIVE
 	src.occupant.loc = src.loc
+	src.occupant.update_clothing()
 	src.occupant = null
 	src.icon_state = "scanner_0"
 	return
@@ -825,14 +875,19 @@
 			src.icon_state = "c_unpowered"
 			stat |= NOPOWER
 
-/obj/machinery/scan_consolenew/New()
+/obj/machinery/computer/scan_consolenew/New()
 	..()
-	spawn( 5 )
-		src.connected = locate(/obj/machinery/dna_scannernew, get_step(src, WEST))
+	spawn(5)
+		for(dir in list(NORTH,EAST,SOUTH,WEST))
+			connected = locate(/obj/machinery/dna_scannernew, get_step(src, dir))
+			if(!isnull(connected))
+				break
+		spawn(250)
+			src.injectorready = 1
 		return
 	return
 
-/obj/machinery/scan_consolenew/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/computer/scan_consolenew/attackby(obj/item/W as obj, mob/user as mob)
 	if ((istype(W, /obj/item/weapon/disk/data)) && (!src.diskette))
 		user.drop_item()
 		W.loc = src
@@ -840,7 +895,7 @@
 		user << "You insert [W]."
 		src.updateUsrDialog()
 
-/obj/machinery/scan_consolenew/process() //not really used right now
+/obj/machinery/computer/scan_consolenew/process() //not really used right now
 	processing_objects.Remove(src) //Lets not have it waste CPU
 	if(stat & (NOPOWER|BROKEN))
 		return
@@ -848,13 +903,13 @@
 		return
 	return
 
-/obj/machinery/scan_consolenew/attack_paw(user as mob)
+/obj/machinery/computer/scan_consolenew/attack_paw(user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/scan_consolenew/attack_ai(user as mob)
+/obj/machinery/computer/scan_consolenew/attack_ai(user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/scan_consolenew/attack_hand(user as mob)
+/obj/machinery/computer/scan_consolenew/attack_hand(user as mob)
 	if(..())
 		return
 	if(!(user in message))
@@ -870,9 +925,9 @@
 		if (src.connected) //Is something connected?
 			var/mob/occupant = src.connected.occupant
 			dat = "<font color='blue'><B>Occupant Statistics:</B></FONT><BR>" //Blah obvious
-			if (occupant) //is there REALLY someone in there?
-				if(occupant.mutations & HUSK)
-					dat += "The occupant's DNA structure is of an unknown configuration, please insert a subject with a standard DNA structure.<BR><BR>" //NOPE. -Pete
+			if(occupant && occupant.dna) //is there REALLY someone in there?
+				if(occupant.mutations2 & NOCLONE)
+					dat += "The occupant's DNA structure is ruined beyond recognition, please insert a subject with an intact DNA structure.<BR><BR>" //NOPE. -Pete
 					dat += text("<A href='?src=\ref[];buffermenu=1'>View/Edit/Transfer Buffer</A><BR><BR>", src)
 					dat += text("<A href='?src=\ref[];radset=1'>Radiation Emitter Settings</A><BR><BR>", src)
 				else
@@ -915,7 +970,7 @@
 	onclose(user, "scannernew")
 	return
 
-/obj/machinery/scan_consolenew/Topic(href, href_list)
+/obj/machinery/computer/scan_consolenew/Topic(href, href_list)
 	if(..())
 		return
 	if(!istype(usr.loc, /turf))
@@ -979,13 +1034,17 @@
 		////////////////////////////////////////////////////////
 		if (href_list["unimenu"])
 			//src.temphtml = text("Unique Identifier: <font color='blue'>[]</FONT><BR><BR>", src.connected.occupant.dna.uni_identity)
-			src.temphtml = text("Unique Identifier: <font color='blue'>[getleftblocks(src.connected.occupant.dna.uni_identity,uniblock,3)][src.subblock == 1 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),1,1)+"</U></B>" : getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),1,1)][src.subblock == 2 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),2,1)+"</U></B>" : getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),2,1)][src.subblock == 3 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),3,1)+"</U></B>" : getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),3,1)][getrightblocks(src.connected.occupant.dna.uni_identity,uniblock,3)]</FONT><BR><BR>")
+			//src.temphtml = text("Unique Identifier: <font color='blue'>[getleftblocks(src.connected.occupant.dna.uni_identity,uniblock,3)][src.subblock == 1 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),1,1)+"</U></B>" : getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),1,1)][src.subblock == 2 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),2,1)+"</U></B>" : getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),2,1)][src.subblock == 3 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),3,1)+"</U></B>" : getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),3,1)][getrightblocks(src.connected.occupant.dna.uni_identity,uniblock,3)]</FONT><BR><BR>")
+
+			// New way of displaying DNA blocks
+			src.temphtml = text("Unique Identifier: <font color='blue'>[getblockstring(src.connected.occupant.dna.uni_identity,uniblock,subblock,3)]</FONT><br><br>")
+
 			src.temphtml += text("Selected Block: <font color='blue'><B>[]</B></FONT><BR>", src.uniblock)
 			src.temphtml += text("<A href='?src=\ref[];unimenuminus=1'><-</A> Block <A href='?src=\ref[];unimenuplus=1'>-></A><BR><BR>", src, src)
 			src.temphtml += text("Selected Sub-Block: <font color='blue'><B>[]</B></FONT><BR>", src.subblock)
 			src.temphtml += text("<A href='?src=\ref[];unimenusubminus=1'><-</A> Sub-Block <A href='?src=\ref[];unimenusubplus=1'>-></A><BR><BR>", src, src)
 			src.temphtml += "<B>Modify Block:</B><BR>"
-			src.temphtml += text("<A href='?src=\ref[];unipulse=1'>Radiation</A><BR>", src)
+			src.temphtml += text("<A href='?src=\ref[];unipulse=1'>Irradiate</A><BR>", src)
 			src.delete = 0
 		if (href_list["unimenuplus"])
 			if (src.uniblock < 13)
@@ -1004,41 +1063,42 @@
 				src.subblock--
 			dopage(src,"unimenu")
 		if (href_list["unipulse"])
-			var/block
-			var/newblock
-			var/tstructure2
-			block = getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),src.subblock,1)
-			src.delete = 1
-			src.temphtml = text("Working ... Please wait ([] Seconds)", src.radduration)
-			usr << browse(temphtml, "window=scannernew;size=550x650")
-			onclose(usr, "scannernew")
-			var/lock_state = src.connected.locked
-			src.connected.locked = 1//lock it
-			sleep(10*src.radduration)
-			if (!src.connected.occupant)
-				temphtml = null
-				delete = 0
-				return null
-			///
-			if (prob((80 + (src.radduration / 2))))
-				block = miniscramble(block, src.radstrength, src.radduration)
-				newblock = null
-				if (src.subblock == 1) newblock = block + getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),2,1) + getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),3,1)
-				if (src.subblock == 2) newblock = getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),1,1) + block + getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),3,1)
-				if (src.subblock == 3) newblock = getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),1,1) + getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),2,1) + block
-				tstructure2 = setblock(src.connected.occupant.dna.uni_identity, src.uniblock, newblock,3)
-				src.connected.occupant.dna.uni_identity = tstructure2
-				updateappearance(src.connected.occupant,src.connected.occupant.dna.uni_identity)
-				src.connected.occupant.radiation += (src.radstrength+src.radduration)
-			else
-				if	(prob(20+src.radstrength))
-					randmutb(src.connected.occupant)
-					domutcheck(src.connected.occupant,src.connected)
-				else
-					randmuti(src.connected.occupant)
+			if(src.connected.occupant)
+				var/block
+				var/newblock
+				var/tstructure2
+				block = getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),src.subblock,1)
+				src.delete = 1
+				src.temphtml = text("Working ... Please wait ([] Seconds)", src.radduration)
+				usr << browse(temphtml, "window=scannernew;size=550x650")
+				onclose(usr, "scannernew")
+				var/lock_state = src.connected.locked
+				src.connected.locked = 1//lock it
+				sleep(10*src.radduration)
+				if (!src.connected.occupant)
+					temphtml = null
+					delete = 0
+					return null
+				///
+				if (prob((80 + (src.radduration / 2))))
+					block = miniscramble(block, src.radstrength, src.radduration)
+					newblock = null
+					if (src.subblock == 1) newblock = block + getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),2,1) + getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),3,1)
+					if (src.subblock == 2) newblock = getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),1,1) + block + getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),3,1)
+					if (src.subblock == 3) newblock = getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),1,1) + getblock(getblock(src.connected.occupant.dna.uni_identity,src.uniblock,3),2,1) + block
+					tstructure2 = setblock(src.connected.occupant.dna.uni_identity, src.uniblock, newblock,3)
+					src.connected.occupant.dna.uni_identity = tstructure2
 					updateappearance(src.connected.occupant,src.connected.occupant.dna.uni_identity)
-				src.connected.occupant.radiation += ((src.radstrength*2)+src.radduration)
-			src.connected.locked = lock_state
+					src.connected.occupant.radiation += (src.radstrength+src.radduration)
+				else
+					if	(prob(20+src.radstrength))
+						randmutb(src.connected.occupant)
+						domutcheck(src.connected.occupant,src.connected)
+					else
+						randmuti(src.connected.occupant)
+						updateappearance(src.connected.occupant,src.connected.occupant.dna.uni_identity)
+					src.connected.occupant.radiation += ((src.radstrength*2)+src.radduration)
+				src.connected.locked = lock_state
 			dopage(src,"unimenu")
 			src.delete = 0
 		////////////////////////////////////////////////////////
@@ -1060,14 +1120,19 @@
 				var/temp2 = ""
 				for(var/i = 3, i <= length(temp_string2), i += 3)
 					temp2 += copytext(temp_string2, i-2, i+1) + " "
-				src.temphtml = text("Structural Enzymes: <font color='blue'>[temp1] [src.subblock == 1 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),1,1)+"</U></B>" : getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),1,1)][src.subblock == 2 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),2,1)+"</U></B>":getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),2,1)][src.subblock == 3 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),3,1)+"</U></B>":getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),3,1)] [temp2]</FONT><BR><BR>")
+				//src.temphtml = text("Structural Enzymes: <font color='blue'>[temp1] [src.subblock == 1 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),1,1)+"</U></B>" : getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),1,1)][src.subblock == 2 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),2,1)+"</U></B>":getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),2,1)][src.subblock == 3 ? "<U><B>"+getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),3,1)+"</U></B>":getblock(getblock(src.connected.occupant.dna.struc_enzymes,src.strucblock,3),3,1)] [temp2]</FONT><BR><BR>")
 				//src.temphtml = text("Structural Enzymes: <font color='blue'>[]</FONT><BR><BR>", src.connected.occupant.dna.struc_enzymes)
+
+				// New shit, it doesn't suck (as much)
+				src.temphtml = text("Structural Enzymes: <font color='blue'>[getblockstring(src.connected.occupant.dna.struc_enzymes,strucblock,subblock,3)]</FONT><br><br>")
+																							// SE of occupant,	selected block,	selected subblock,	block size (3 subblocks)
+
 				src.temphtml += text("Selected Block: <font color='blue'><B>[]</B></FONT><BR>", src.strucblock)
 				src.temphtml += text("<A href='?src=\ref[];strucmenuminus=1'><-</A> <A href='?src=\ref[];strucmenuchoose=1'>Block</A> <A href='?src=\ref[];strucmenuplus=1'>-></A><BR><BR>", src, src, src)
 				src.temphtml += text("Selected Sub-Block: <font color='blue'><B>[]</B></FONT><BR>", src.subblock)
 				src.temphtml += text("<A href='?src=\ref[];strucmenusubminus=1'><-</A> Sub-Block <A href='?src=\ref[];strucmenusubplus=1'>-></A><BR><BR>", src, src)
 				src.temphtml += "<B>Modify Block:</B><BR>"
-				src.temphtml += text("<A href='?src=\ref[];strucpulse=1'>Radiation</A><BR>", src)
+				src.temphtml += text("<A href='?src=\ref[];strucpulse=1'>Irradiate</A><BR>", src)
 				src.delete = 0
 		if (href_list["strucmenuplus"])
 			if (src.strucblock < 27)
@@ -1175,7 +1240,7 @@
 				src.temphtml += text("Data: <font color='blue'>[]</FONT><BR>", src.buffer2)
 				src.temphtml += text("By: <font color='blue'>[]</FONT><BR>", src.buffer2owner)
 				src.temphtml += text("Label: <font color='blue'>[]</FONT><BR>", src.buffer2label)
-			if (src.connected.occupant && !(src.connected.occupant.mutations & HUSK)) src.temphtml += text("Save : <A href='?src=\ref[];b2addui=1'>UI</A> - <A href='?src=\ref[];b2adduiue=1'>UI+UE</A> - <A href='?src=\ref[];b2addse=1'>SE</A><BR>", src, src, src)
+			if (src.connected.occupant && !(src.connected.occupant.mutations2 & NOCLONE)) src.temphtml += text("Save : <A href='?src=\ref[];b2addui=1'>UI</A> - <A href='?src=\ref[];b2adduiue=1'>UI+UE</A> - <A href='?src=\ref[];b2addse=1'>SE</A><BR>", src, src, src)
 			if (src.buffer2) src.temphtml += text("Transfer to: <A href='?src=\ref[];b2transfer=1'>Occupant</A> - <A href='?src=\ref[];b2injector=1'>Injector</A><BR>", src, src)
 			//if (src.buffer2) src.temphtml += text("<A href='?src=\ref[];b2iso=1'>Isolate Block</A><BR>", src)
 			if (src.buffer2) src.temphtml += "Disk: <A href='?src=\ref[src];save_disk=2'>Save To</a> | <A href='?src=\ref[src];load_disk=2'>Load From</a><br>"
@@ -1189,7 +1254,7 @@
 				src.temphtml += text("Data: <font color='blue'>[]</FONT><BR>", src.buffer3)
 				src.temphtml += text("By: <font color='blue'>[]</FONT><BR>", src.buffer3owner)
 				src.temphtml += text("Label: <font color='blue'>[]</FONT><BR>", src.buffer3label)
-			if (src.connected.occupant && !(src.connected.occupant.mutations & HUSK)) src.temphtml += text("Save : <A href='?src=\ref[];b3addui=1'>UI</A> - <A href='?src=\ref[];b3adduiue=1'>UI+UE</A> - <A href='?src=\ref[];b3addse=1'>SE</A><BR>", src, src, src)
+			if (src.connected.occupant && !(src.connected.occupant.mutations2 & NOCLONE)) src.temphtml += text("Save : <A href='?src=\ref[];b3addui=1'>UI</A> - <A href='?src=\ref[];b3adduiue=1'>UI+UE</A> - <A href='?src=\ref[];b3addse=1'>SE</A><BR>", src, src, src)
 			if (src.buffer3) src.temphtml += text("Transfer to: <A href='?src=\ref[];b3transfer=1'>Occupant</A> - <A href='?src=\ref[];b3injector=1'>Injector</A><BR>", src, src)
 			//if (src.buffer3) src.temphtml += text("<A href='?src=\ref[];b3iso=1'>Isolate Block</A><BR>", src)
 			if (src.buffer3) src.temphtml += "Disk: <A href='?src=\ref[src];save_disk=3'>Save To</a> | <A href='?src=\ref[src];load_disk=3'>Load From</a><br>"
@@ -1197,122 +1262,131 @@
 			if (src.buffer3) src.temphtml += text("<A href='?src=\ref[];b3clear=1'>Clear Buffer</A><BR><BR>", src)
 			if (!src.buffer3) src.temphtml += "<BR>"
 		if (href_list["b1addui"])
-			src.buffer1iue = 0
-			src.buffer1 = src.connected.occupant.dna.uni_identity
-			if (!istype(src.connected.occupant,/mob/living/carbon/human))
-				src.buffer1owner = src.connected.occupant.name
-			else
-				if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
-					src.buffer1owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+			if(src.connected.occupant && src.connected.occupant.dna)
+				src.buffer1iue = 0
+				src.buffer1 = src.connected.occupant.dna.uni_identity
+				if (!istype(src.connected.occupant,/mob/living/carbon/human))
+					src.buffer1owner = src.connected.occupant.name
 				else
-					src.buffer1owner = src.connected.occupant.real_name
-			src.buffer1label = "Unique Identifier"
-			src.buffer1type = "ui"
-			dopage(src,"buffermenu")
+					if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
+						src.buffer1owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+					else
+						src.buffer1owner = src.connected.occupant.real_name
+				src.buffer1label = "Unique Identifier"
+				src.buffer1type = "ui"
+				dopage(src,"buffermenu")
 		if (href_list["b1adduiue"])
-			src.buffer1 = src.connected.occupant.dna.uni_identity
-			if (!istype(src.connected.occupant,/mob/living/carbon/human))
-				src.buffer1owner = src.connected.occupant.name
-			else
-				if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
-					src.buffer1owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+			if(src.connected.occupant && src.connected.occupant.dna)
+				src.buffer1 = src.connected.occupant.dna.uni_identity
+				if (!istype(src.connected.occupant,/mob/living/carbon/human))
+					src.buffer1owner = src.connected.occupant.name
 				else
-					src.buffer1owner = src.connected.occupant.real_name
-			src.buffer1label = "Unique Identifier & Unique Enzymes"
-			src.buffer1type = "ui"
-			src.buffer1iue = 1
-			dopage(src,"buffermenu")
+					if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
+						src.buffer1owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+					else
+						src.buffer1owner = src.connected.occupant.real_name
+				src.buffer1label = "Unique Identifier & Unique Enzymes"
+				src.buffer1type = "ui"
+				src.buffer1iue = 1
+				dopage(src,"buffermenu")
 		if (href_list["b2adduiue"])
-			src.buffer2 = src.connected.occupant.dna.uni_identity
-			if (!istype(src.connected.occupant,/mob/living/carbon/human))
-				src.buffer2owner = src.connected.occupant.name
-			else
-				if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
-					src.buffer2owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+			if(src.connected.occupant && src.connected.occupant.dna)
+				src.buffer2 = src.connected.occupant.dna.uni_identity
+				if (!istype(src.connected.occupant,/mob/living/carbon/human))
+					src.buffer2owner = src.connected.occupant.name
 				else
-					src.buffer2owner = src.connected.occupant.real_name
-			src.buffer2label = "Unique Identifier & Unique Enzymes"
-			src.buffer2type = "ui"
-			src.buffer2iue = 1
-			dopage(src,"buffermenu")
+					if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
+						src.buffer2owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+					else
+						src.buffer2owner = src.connected.occupant.real_name
+				src.buffer2label = "Unique Identifier & Unique Enzymes"
+				src.buffer2type = "ui"
+				src.buffer2iue = 1
+				dopage(src,"buffermenu")
 		if (href_list["b3adduiue"])
-			src.buffer3 = src.connected.occupant.dna.uni_identity
-			if (!istype(src.connected.occupant,/mob/living/carbon/human))
-				src.buffer3owner = src.connected.occupant.name
-			else
-				if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
-					src.buffer3owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+			if(src.connected.occupant && src.connected.occupant.dna)
+				src.buffer3 = src.connected.occupant.dna.uni_identity
+				if (!istype(src.connected.occupant,/mob/living/carbon/human))
+					src.buffer3owner = src.connected.occupant.name
 				else
-					src.buffer3owner = src.connected.occupant.real_name
-			src.buffer3label = "Unique Identifier & Unique Enzymes"
-			src.buffer3type = "ui"
-			src.buffer3iue = 1
-			dopage(src,"buffermenu")
+					if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
+						src.buffer3owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+					else
+						src.buffer3owner = src.connected.occupant.real_name
+				src.buffer3label = "Unique Identifier & Unique Enzymes"
+				src.buffer3type = "ui"
+				src.buffer3iue = 1
+				dopage(src,"buffermenu")
 		if (href_list["b2addui"])
-			src.buffer2iue = 0
-			src.buffer2 = src.connected.occupant.dna.uni_identity
-			if (!istype(src.connected.occupant,/mob/living/carbon/human))
-				src.buffer2owner = src.connected.occupant.name
-			else
-				if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
-					src.buffer2owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+			if(src.connected.occupant && src.connected.occupant.dna)
+				src.buffer2iue = 0
+				src.buffer2 = src.connected.occupant.dna.uni_identity
+				if (!istype(src.connected.occupant,/mob/living/carbon/human))
+					src.buffer2owner = src.connected.occupant.name
 				else
-					src.buffer2owner = src.connected.occupant.real_name
-			src.buffer2label = "Unique Identifier"
-			src.buffer2type = "ui"
-			dopage(src,"buffermenu")
+					if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
+						src.buffer2owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+					else
+						src.buffer2owner = src.connected.occupant.real_name
+				src.buffer2label = "Unique Identifier"
+				src.buffer2type = "ui"
+				dopage(src,"buffermenu")
 		if (href_list["b3addui"])
-			src.buffer3iue = 0
-			src.buffer3 = src.connected.occupant.dna.uni_identity
-			if (!istype(src.connected.occupant,/mob/living/carbon/human))
-				src.buffer3owner = src.connected.occupant.name
-			else
-				if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
-					src.buffer3owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+			if(src.connected.occupant && src.connected.occupant.dna)
+				src.buffer3iue = 0
+				src.buffer3 = src.connected.occupant.dna.uni_identity
+				if (!istype(src.connected.occupant,/mob/living/carbon/human))
+					src.buffer3owner = src.connected.occupant.name
 				else
-					src.buffer3owner = src.connected.occupant.real_name
-			src.buffer3label = "Unique Identifier"
-			src.buffer3type = "ui"
-			dopage(src,"buffermenu")
+					if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
+						src.buffer3owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+					else
+						src.buffer3owner = src.connected.occupant.real_name
+				src.buffer3label = "Unique Identifier"
+				src.buffer3type = "ui"
+				dopage(src,"buffermenu")
 		if (href_list["b1addse"])
-			src.buffer1iue = 0
-			src.buffer1 = src.connected.occupant.dna.struc_enzymes
-			if (!istype(src.connected.occupant,/mob/living/carbon/human))
-				src.buffer1owner = src.connected.occupant.name
-			else
-				if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
-					src.buffer1owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+			if(src.connected.occupant && src.connected.occupant.dna)
+				src.buffer1iue = 0
+				src.buffer1 = src.connected.occupant.dna.struc_enzymes
+				if (!istype(src.connected.occupant,/mob/living/carbon/human))
+					src.buffer1owner = src.connected.occupant.name
 				else
-					src.buffer1owner = src.connected.occupant.real_name
-			src.buffer1label = "Structural Enzymes"
-			src.buffer1type = "se"
-			dopage(src,"buffermenu")
+					if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
+						src.buffer1owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+					else
+						src.buffer1owner = src.connected.occupant.real_name
+				src.buffer1label = "Structural Enzymes"
+				src.buffer1type = "se"
+				dopage(src,"buffermenu")
 		if (href_list["b2addse"])
-			src.buffer2iue = 0
-			src.buffer2 = src.connected.occupant.dna.struc_enzymes
-			if (!istype(src.connected.occupant,/mob/living/carbon/human))
-				src.buffer2owner = src.connected.occupant.name
-			else
-				if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
-					src.buffer2owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+			if(src.connected.occupant && src.connected.occupant.dna)
+				src.buffer2iue = 0
+				src.buffer2 = src.connected.occupant.dna.struc_enzymes
+				if (!istype(src.connected.occupant,/mob/living/carbon/human))
+					src.buffer2owner = src.connected.occupant.name
 				else
-					src.buffer2owner = src.connected.occupant.real_name
-			src.buffer2label = "Structural Enzymes"
-			src.buffer2type = "se"
-			dopage(src,"buffermenu")
+					if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
+						src.buffer2owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+					else
+						src.buffer2owner = src.connected.occupant.real_name
+				src.buffer2label = "Structural Enzymes"
+				src.buffer2type = "se"
+				dopage(src,"buffermenu")
 		if (href_list["b3addse"])
-			src.buffer3iue = 0
-			src.buffer3 = src.connected.occupant.dna.struc_enzymes
-			if (!istype(src.connected.occupant,/mob/living/carbon/human))
-				src.buffer3owner = src.connected.occupant.name
-			else
-				if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
-					src.buffer3owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+			if(src.connected.occupant && src.connected.occupant.dna)
+				src.buffer3iue = 0
+				src.buffer3 = src.connected.occupant.dna.struc_enzymes
+				if (!istype(src.connected.occupant,/mob/living/carbon/human))
+					src.buffer3owner = src.connected.occupant.name
 				else
-					src.buffer3owner = src.connected.occupant.real_name
-			src.buffer3label = "Structural Enzymes"
-			src.buffer3type = "se"
-			dopage(src,"buffermenu")
+					if(src.connected.occupant.real_name == "Unknown" && src.connected.occupant.dna.original_name != "Unknown")
+						src.buffer3owner = src.connected.occupant.dna.original_name  //Good god, is that unweildy
+					else
+						src.buffer3owner = src.connected.occupant.real_name
+				src.buffer3label = "Structural Enzymes"
+				src.buffer3type = "se"
+				dopage(src,"buffermenu")
 		if (href_list["b1clear"])
 			src.buffer1 = null
 			src.buffer1owner = null
@@ -1341,7 +1415,7 @@
 			src.buffer3label = sanitize(input("New Label:","Edit Label","Infos here"))
 			dopage(src,"buffermenu")
 		if (href_list["b1transfer"])
-			if (!src.connected.occupant || src.connected.occupant.mutations & HUSK)
+			if (!src.connected.occupant || src.connected.occupant.mutations2 & NOCLONE || !src.connected.occupant.dna)
 				return
 			if (src.buffer1type == "ui")
 				if (src.buffer1iue)
@@ -1357,7 +1431,7 @@
 			src.connected.occupant.radiation += rand(20,50)
 			src.delete = 0
 		if (href_list["b2transfer"])
-			if (!src.connected.occupant || src.connected.occupant.mutations & HUSK)
+			if (!src.connected.occupant || src.connected.occupant.mutations2 & NOCLONE || !src.connected.occupant.dna)
 				return
 			if (src.buffer2type == "ui")
 				if (src.buffer2iue)
@@ -1373,7 +1447,7 @@
 			src.connected.occupant.radiation += rand(20,50)
 			src.delete = 0
 		if (href_list["b3transfer"])
-			if (!src.connected.occupant || src.connected.occupant.mutations & HUSK)
+			if (!src.connected.occupant || src.connected.occupant.mutations2 & NOCLONE || !src.connected.occupant.dna)
 				return
 			if (src.buffer3type == "ui")
 				if (src.buffer3iue)

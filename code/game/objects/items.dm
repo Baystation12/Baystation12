@@ -8,6 +8,7 @@
 /obj/item/weapon/bedsheet/attack_self(mob/user as mob)
 	user.drop_item()
 	src.layer = 5
+	user.update_clothing()
 	add_fingerprint(user)
 	return
 
@@ -50,7 +51,10 @@
 			if(!M.handcuffed)
 				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
 				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [M.name] ([M.ckey])</font>")
+
 				log_admin("ATTACK: [user] ([user.ckey]) handcuffed [M] ([M.ckey]).")
+				log_attack("<font color='red'>[user.name] ([user.ckey]) Attempted to handcuff [M.name] ([M.ckey])</font>")
+
 				var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human(  )
 				O.source = user
 				O.target = M
@@ -60,7 +64,10 @@
 				O.place = "handcuff"
 				M.requests += O
 				spawn( 0 )
-					playsound(src.loc, 'handcuffs.ogg', 30, 1, -2)
+					if(istype(src, /obj/item/weapon/handcuffs/cable))
+						playsound(src.loc, 'cablecuff.ogg', 30, 1, -2)
+					else
+						playsound(src.loc, 'handcuffs.ogg', 30, 1, -2)
 					O.process()
 			return
 		else
@@ -74,7 +81,10 @@
 				O.place = "handcuff"
 				M.requests += O
 				spawn( 0 )
-					playsound(src.loc, 'handcuffs.ogg', 30, 1, -2)
+					if(istype(src, /obj/item/weapon/handcuffs/cable))
+						playsound(src.loc, 'cablecuff.ogg', 30, 1, -2)
+					else
+						playsound(src.loc, 'handcuffs.ogg', 30, 1, -2)
 					O.process()
 			return
 	return
@@ -88,6 +98,12 @@
 	reagents = R
 	R.my_atom = src
 	R.add_reagent("water", 50)
+
+/obj/item/weapon/extinguisher/mini/New()
+	var/datum/reagents/R = new/datum/reagents(30)
+	reagents = R
+	R.my_atom = src
+	R.add_reagent("water", 30)
 
 /obj/item/weapon/extinguisher/examine()
 	set src in usr
@@ -108,6 +124,7 @@
 
 	if (!safety)
 		if (src.reagents.total_volume < 1)
+			usr << "\red the [src] is empty."
 			return
 
 		if (world.time < src.last_use + 20)
@@ -118,6 +135,28 @@
 		playsound(src.loc, 'extinguish.ogg', 75, 1, -3)
 
 		var/direction = get_dir(src,target)
+
+		if(usr.buckled && isobj(usr.buckled) && !usr.buckled.anchored )
+			spawn(0)
+				var/obj/B = usr.buckled
+				var/movementdirection = turn(direction,180)
+				B.Move(get_step(usr,movementdirection), movementdirection)
+				sleep(1)
+				B.Move(get_step(usr,movementdirection), movementdirection)
+				sleep(1)
+				B.Move(get_step(usr,movementdirection), movementdirection)
+				sleep(1)
+				B.Move(get_step(usr,movementdirection), movementdirection)
+				sleep(2)
+				B.Move(get_step(usr,movementdirection), movementdirection)
+				sleep(2)
+				B.Move(get_step(usr,movementdirection), movementdirection)
+				sleep(3)
+				B.Move(get_step(usr,movementdirection), movementdirection)
+				sleep(3)
+				B.Move(get_step(usr,movementdirection), movementdirection)
+				sleep(3)
+				B.Move(get_step(usr,movementdirection), movementdirection)
 
 		var/turf/T = get_turf(target)
 		var/turf/T1 = get_step(T,turn(direction, 90))
@@ -145,10 +184,15 @@
 					if(W.loc == my_target) break
 					sleep(2)
 
-		if(istype(usr.loc, /turf/space)|| (user.flags & NOGRAV))
+		if((istype(usr.loc, /turf/space)) || (usr.lastarea.has_gravity == 0))
 			user.inertia_dir = get_dir(target, user)
 			step(user, user.inertia_dir)
 
+	/*
+		if(istype(usr.loc, /turf/space)|| (user.flags & NOGRAV))
+			user.inertia_dir = get_dir(target, user)
+			step(user, user.inertia_dir)
+	*/
 	else
 		return ..()
 	return
@@ -166,6 +210,19 @@
 		safety = 1
 	return
 
+/obj/item/weapon/extinguisher/mini/attack_self(mob/user as mob)
+	if (safety)
+		src.icon_state = "miniFE1"
+		src.desc = "The safety is off."
+		user << "The safety is off."
+		safety = 0
+	else
+		src.icon_state = "miniFE0"
+		src.desc = "The safety is on."
+		user << "The safety is on."
+		safety = 1
+	return
+
 /obj/item/weapon/pen/attack(mob/M as mob, mob/user as mob)
 	if(!ismob(M))
 		return
@@ -173,8 +230,12 @@
 //	M << "\red You feel a tiny prick!" //Removed to make tritor pens stealthier
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stabbed with [src.name]  by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to stab [M.name] ([M.ckey])</font>")
+
 	log_admin("ATTACK: [user] ([user.ckey]) used [src] on [M] ([M.ckey]).")
 	message_admins("ATTACK: [user] ([user.ckey]) used [src] on [M] ([M.ckey]).")
+	log_attack("<font color='red'>[user.name] ([user.ckey]) Used the [src.name] to stab [M.name] ([M.ckey])</font>")
+
+
 	return
 
 /obj/item/weapon/pen/sleepypen
@@ -239,11 +300,6 @@
 	P.name = "paper - 'Crew Manifest'"
 	//SN src = null
 	del(src)
-	return
-
-/obj/screen/close/DblClick()
-	if (src.master)
-		src.master:close(usr)
 	return
 
 
@@ -346,7 +402,7 @@
 
 	if(M:brain_op_stage == 4.0)
 		for(var/mob/O in viewers(M, null))
-			if(O == (user || M))
+			if(O == user || O == M)
 				continue
 			if(M == user)
 				O.show_message(text("\red [user] inserts [src] into his head!"), 1)
@@ -400,6 +456,7 @@
 	else if(temp_sides == 20 && result == 1)
 		comment = "Ouch, bad luck."
 	user << text("\red You throw a [src]. It lands on a [result]. [comment]")
+	icon_state = "[name][result]"
 	for(var/mob/O in viewers(user, null))
 		if(O == (user))
 			continue
@@ -455,12 +512,12 @@
 	if (is_sharp(W))
 		burst()
 
-/proc/is_sharp(obj/item/W as obj)
+/proc/is_sharp(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
 	return ( \
 		istype(W, /obj/item/weapon/screwdriver)                   || \
 		istype(W, /obj/item/weapon/pen)                           || \
 		istype(W, /obj/item/weapon/weldingtool)      && W:welding || \
-		istype(W, /obj/item/weapon/zippo)            && W:lit     || \
+		istype(W, /obj/item/weapon/lighter/zippo)            && W:lit     || \
 		istype(W, /obj/item/weapon/match)            && W:lit     || \
 		istype(W, /obj/item/clothing/mask/cigarette) && W:lit     || \
 		istype(W, /obj/item/weapon/wirecutters)                   || \
@@ -475,6 +532,7 @@
 		istype(W, /obj/item/weapon/shard)                         || \
 		istype(W, /obj/item/weapon/reagent_containers/syringe)    || \
 		istype(W, /obj/item/weapon/kitchen/utensil/fork) && W.icon_state != "forkloaded" || \
+		istype(W, /obj/item/weapon/twohanded/fireaxe)			  || \
 		istype(W,/obj/item/projectile)\
 	)
 
@@ -496,7 +554,7 @@
 /proc/is_burn(obj/item/W as obj)
 	return ( \
 		istype(W, /obj/item/weapon/weldingtool)      && W:welding || \
-		istype(W, /obj/item/weapon/zippo)            && W:lit     || \
+		istype(W, /obj/item/weapon/lighter/zippo)    && W:lit     || \
 		istype(W, /obj/item/weapon/match)            && W:lit     || \
 		istype(W, /obj/item/clothing/mask/cigarette) && W:lit	|| \
 		istype(W,/obj/item/projectile/beam)\

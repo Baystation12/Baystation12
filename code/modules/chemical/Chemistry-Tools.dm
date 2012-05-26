@@ -26,7 +26,7 @@
 	var/obj/item/weapon/circuitboard/circuit = null
 	var/list/allowed_containers = list("/obj/item/weapon/reagent_containers/glass/beaker", "/obj/item/weapon/reagent_containers/glass/dispenser", "/obj/item/weapon/reagent_containers/glass/bottle")
 	var/affected_area = 3
-
+	var/mob/attacher = "Unknown"
 
 	attackby(var/obj/item/weapon/W, var/mob/user)
 		if(path || !active)
@@ -65,6 +65,10 @@
 						W.loc = src
 						user << "\blue You attach the [W] to the grenade controls!"
 						W.master = src
+						bombers += "[key_name(user)] attached a [W] to a grenade casing."
+						message_admins("[key_name_admin(user)] attached a [W] to a grenade casing.")
+						log_game("[key_name_admin(user)] attached a [W] to a grenade casing.")
+						attacher = key_name(user)
 
 					else if(istype(W, /obj/item/weapon/screwdriver))
 						if(beaker_one && beaker_two && attached_device)
@@ -181,9 +185,10 @@
 							if(W:amount >= 1)
 								playsound(src.loc, 'Deconstruct.ogg', 50, 1)
 								if(do_after(user, 20))
-									W:use(1)
-									user << "\blue You put in the glass lens."
-									src.state = 5
+									if(W)
+										W:use(1)
+										user << "\blue You put in the glass lens."
+										src.state = 5
 					if(5)
 						if(istype(W, /obj/item/weapon/crowbar))
 							playsound(src.loc, 'Crowbar.ogg', 50, 1)
@@ -266,6 +271,12 @@
 				beaker_two.reagents.maximum_volume += beaker_one.reagents.maximum_volume // make sure everything can mix
 				beaker_one.reagents.update_total()
 				beaker_one.reagents.trans_to(beaker_two, beaker_one.reagents.total_volume)
+				var/turf/bombturf = get_turf(src)
+				var/bombarea = bombturf.loc.name
+				var/log_str = "Grenade detonated in [bombarea] with device attacher: [attacher]. Last touched by: [src.fingerprintslast]"
+				bombers += log_str
+				message_admins(log_str)
+				log_game(log_str)
 				if(beaker_one.reagents.total_volume) //The possible reactions didnt use up all reagents.
 					var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
 					steam.set_up(10, 0, get_turf(src))
@@ -358,8 +369,8 @@
 			var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 			var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-			B1.reagents.add_reagent("fluorosurfactant", 30)
-			B2.reagents.add_reagent("water", 10)
+			B1.reagents.add_reagent("fluorosurfactant", 40)
+			B2.reagents.add_reagent("water", 40)
 			B2.reagents.add_reagent("cleaner", 10)
 
 			beaker_two = B1
@@ -588,6 +599,8 @@
 				var/turf/trg = get_turf(target)
 				var/obj/effect/syringe_gun_dummy/D = new/obj/effect/syringe_gun_dummy(get_turf(src))
 				var/obj/item/weapon/reagent_containers/syringe/S = syringes[1]
+				if((!S) || (!S.reagents))	//ho boy! wot runtimes!
+					return
 				S.reagents.trans_to(D, S.reagents.total_volume)
 				syringes -= S
 				del(S)
@@ -604,10 +617,26 @@
 						for(var/mob/living/carbon/M in D.loc)
 							if(!istype(M,/mob/living/carbon)) continue
 							if(M == user) continue
+							//Syring gune attack logging by Yvarov
+							var/R
+							for(var/datum/reagent/A in D.reagents.reagent_list)
+								R += A.id + " ("
+								R += num2text(A.volume) + "),"
+							if (istype(M, /mob))
+								M.attack_log += "\[[time_stamp()]\] <b>[user]/[user.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>syringegun</b> ([R])"
+								user.attack_log += "\[[time_stamp()]\] <b>[user]/[user.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>syringegun</b> ([R])"
+								log_attack("<font color='red'>[user] ([user.ckey]) shot [M] ([M.ckey]) with a syringegun ([R])</font>")
+								log_admin("ATTACK: [user] ([user.ckey]) shot [M] ([M.ckey]) with a syringegun ([R]).")
+								message_admins("ATTACK: [user] ([user.ckey]) shot [M] ([M.ckey]) with a syringegun ([R]).")
+							else
+								M.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[M]/[M.ckey]</b> with a <b>syringegun</b> ([R])"
+								log_attack("<font color='red'>UNKNOWN shot [M] ([M.ckey]) with a <b>syringegun</b> ([R])</font>")
+								log_admin("ATTACK: UNKNOWN shot [M] ([M.ckey]) with a <b>syringegun</b> ([R]).")
+								message_admins("ATTACK: UNKNOWN shot [M] ([M.ckey]) with a <b>syringegun</b> ([R]).")
 							D.reagents.trans_to(M, 15)
 							M.take_organ_damage(5)
 							for(var/mob/O in viewers(world.view, D))
-								O.show_message(text("\red [] was hit by the syringe!", M), 1)
+								O.show_message(text("\red [] is hit by the syringe!", M.name), 1)
 
 							del(D)
 					if(D)
@@ -971,52 +1000,54 @@
 						if(ishuman(T))
 							if(T:vessel.get_reagent_amount("blood") < amount)
 								return
-							T:vessel.trans_to(src, amount)
-							on_reagent_change()
-						else
-							var/datum/reagent/B = new /datum/reagent/blood
-							B.holder = src
-							B.volume = amount
-							//set reagent data
-							B.data["donor"] = T
-							/*
-							if(T.virus && T.virus.spread_type != SPECIAL)
-								B.data["virus"] = new T.virus.type(0)
-							*/
+
+						var/datum/reagent/B = new /datum/reagent/blood
+						B.holder = src
+						B.volume = amount
+						//set reagent data
+						B.data["donor"] = T
+						/*
+						if(T.virus && T.virus.spread_type != SPECIAL)
+							B.data["virus"] = new T.virus.type(0)
+						*/
 
 
 
-							for(var/datum/disease/D in T.viruses)
-								if(!B.data["viruses"])
-									B.data["viruses"] = list()
+						for(var/datum/disease/D in T.viruses)
+							if(!B.data["viruses"])
+								B.data["viruses"] = list()
 
 
-								B.data["viruses"] += new D.type
+							B.data["viruses"] += new D.type
 
-							// not sure why it was checking if(B.data["virus2"]), but it seemed wrong
-							if(T.virus2)
-								B.data["virus2"] = T.virus2.getcopy()
+						// not sure why it was checking if(B.data["virus2"]), but it seemed wrong
+						if(T.virus2)
+							B.data["virus2"] = T.virus2.getcopy()
 
-							B.data["blood_DNA"] = copytext(T.dna.unique_enzymes,1,0)
-							if(T.resistances&&T.resistances.len)
-								B.data["resistances"] = T.resistances.Copy()
-							if(istype(target, /mob/living/carbon/human))//I wish there was some hasproperty operation...
-								B.data["blood_type"] = copytext(T.dna.b_type,1,0)
-							var/list/temp_chem = list()
-							for(var/datum/reagent/R in target.reagents.reagent_list)
-								temp_chem += R.name
-								temp_chem[R.name] = R.volume
-							B.data["trace_chem"] = list2params(temp_chem)
-							B.data["antibodies"] = T.antibodies
-							//debug
-							//for(var/D in B.data)
-							//	world << "Data [D] = [B.data[D]]"
-							//debug
+						B.data["blood_DNA"] = copytext(T.dna.unique_enzymes,1,0)
+						if(T.resistances&&T.resistances.len)
+							B.data["resistances"] = T.resistances.Copy()
+						if(istype(target, /mob/living/carbon/human))//I wish there was some hasproperty operation...
+							B.data["blood_type"] = copytext(T.dna.b_type,1,0)
+						var/list/temp_chem = list()
+						for(var/datum/reagent/R in target.reagents.reagent_list)
+							temp_chem += R.name
+							temp_chem[R.name] = R.volume
+						B.data["trace_chem"] = list2params(temp_chem)
+						B.data["antibodies"] = T.antibodies
+						//debug
+						//for(var/D in B.data)
+						//	world << "Data [D] = [B.data[D]]"
+						//debug
+						if(ishuman(T))
+							T:vessel.remove_reagent("blood",amount) // Removes blood if human
 
-							src.reagents.reagent_list += B
-							src.reagents.update_total()
-							src.on_reagent_change()
-							src.reagents.handle_reactions()
+						src.reagents.reagent_list += B
+						src.reagents.update_total()
+						src.on_reagent_change()
+						src.reagents.handle_reactions()
+//						T:vessel.trans_to(src, amount) // Virus2 and antibodies aren't in blood in the first place.
+
 						user << "\blue You take a blood sample from [target]"
 						for(var/mob/O in viewers(4, user))
 							O.show_message("\red [user] takes a blood sample from [target].", 1)
@@ -1298,7 +1329,7 @@
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to inject [M.name] ([M.ckey])</font>")
 		log_admin("ATTACK: [user] ([user.ckey]) injected [M] ([M.ckey]) with [src].")
 		message_admins("ATTACK: [user] ([user.ckey]) injected [M] ([M.ckey]) with [src].")
-//		log_attack("<font color='red'>[user.name] ([user.ckey]) injected [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
+		log_attack("<font color='red'>[user.name] ([user.ckey]) injected [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
 
 
 		src.reagents.reaction(M, INGEST)
@@ -1430,7 +1461,7 @@
 					log_admin("ATTACK: [user] ([user.ckey]) fed [M] ([M.ckey]) with [src].")
 					message_admins("ATTACK: [user] ([user.ckey]) fed [M] ([M.ckey]) with [src].")
 
-//					log_attack("<font color='red'>[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
+					log_attack("<font color='red'>[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
 
 					for(var/mob/O in viewers(world.view, user))
 						O.show_message("\red [user] feeds [M] [src].", 1)
@@ -1660,7 +1691,7 @@
 			log_admin("ATTACK: [user] ([user.ckey]) fed [M] ([M.ckey]) with [src].")
 			message_admins("ATTACK: [user] ([user.ckey]) fed [M] ([M.ckey]) with [src].")
 
-//			log_attack("<font color='red'>[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
+			log_attack("<font color='red'>[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
 
 
 			if(reagents.total_volume)
@@ -1754,7 +1785,23 @@
 			icon_state = "pill[rand(1,20)]"
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
-
+		if (istype(W, /obj/item/weapon/storage/pill_bottle))
+			var/obj/item/weapon/storage/pill_bottle/P = W
+			if (P.mode == 1)
+				for (var/obj/item/weapon/reagent_containers/pill/O in locate(src.x,src.y,src.z))
+					if(P.contents.len < P.storage_slots)
+						O.loc = P
+						P.orient2hud(user)
+					else
+						user << "\blue The pill bottle is full."
+						return
+				user << "\blue You pick up all the pills."
+			else
+				if (P.contents.len < P.storage_slots)
+					loc = P
+					P.orient2hud(user)
+				else
+					user << "\blue The pill bottle is full."
 		return
 	attack_self(mob/user as mob)
 		return
@@ -1786,7 +1833,7 @@
 			message_admins("ATTACK: [user] ([user.ckey]) fed [M] ([M.ckey]) with [src].")
 
 
-//			log_attack("<font color='red'>[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
+			log_attack("<font color='red'>[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
 
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
@@ -1857,6 +1904,17 @@
 			del(D)
 			del(src)
 
+/obj/item/weapon/reagent_containers/glass/bucket/wateringcan
+	name = "watering can"
+	desc = "A watering can, for all your watering needs."
+	icon = 'hydroponics.dmi'
+	icon_state = "watercan"
+	item_state = "bucket"
+
+	attackby(var/obj/D, mob/user as mob)
+		if(isprox(D))
+			return
+
 /obj/item/weapon/reagent_containers/glass/cantister
 	desc = "It's a canister. Mainly used for transporting fuel."
 	name = "canister"
@@ -1895,6 +1953,8 @@
 	icon = 'chemical.dmi'
 	icon_state = "beaker0"
 	item_state = "beaker"
+	m_amt = 0
+	g_amt = 500
 
 	pickup(mob/user)
 		on_reagent_change(user)
@@ -1974,6 +2034,8 @@
 	icon = 'chemical.dmi'
 	icon_state = "beakerlarge"
 	item_state = "beaker"
+	m_amt = 0
+	g_amt = 5000
 	volume = 100
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25,30,50,100)
@@ -2039,7 +2101,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,25,30)
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
-	volume = 30
+	volume = 50
 
 	New()
 		..()
@@ -2246,6 +2308,25 @@
 		var/datum/disease/F = new /datum/disease/wizarditis(0)
 		var/list/data = list("viruses"= list(F))
 		reagents.add_reagent("blood", 20, data)
+
+/obj/item/weapon/reagent_containers/glass/bottle/pacid
+	name = "Polytrinic Acid Bottle"
+	desc = "A small bottle. Contains a small amount of Polytrinic Acid"
+	icon = 'chemical.dmi'
+	icon_state = "bottle17"
+	New()
+		..()
+		reagents.add_reagent("pacid", 30)
+
+/obj/item/weapon/reagent_containers/glass/bottle/adminordrazine
+	name = "Adminordrazine Bottle"
+	desc = "A small bottle. Contains the liquid essence of the gods."
+	icon = 'drinks.dmi'
+	icon_state = "holyflask"
+	New()
+		..()
+		reagents.add_reagent("adminordrazine", 30)
+
 
 /obj/item/weapon/reagent_containers/glass/bottle/ert
 	name = "emergency medicine bottle"
@@ -2454,7 +2535,7 @@
 			message_admins("ATTACK: [user] ([user.ckey]) fed [M] ([M.ckey]) with [src].")
 
 
-//			log_attack("<font color='red'>[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
+			log_attack("<font color='red'>[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
 
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
@@ -3009,13 +3090,13 @@
 		..()
 		reagents.add_reagent("dexalin", 15)
 
-/obj/item/weapon/reagent_containers/pill/bicardine
-	name = "Bicardine pill"
+/obj/item/weapon/reagent_containers/pill/bicaridine
+	name = "Bicaridine pill"
 	desc = "Used to treat physical injuries."
 	icon_state = "pill18"
 	New()
 		..()
-		reagents.add_reagent("bicardine", 15)
+		reagents.add_reagent("bicaridine", 15)
 
 //Dispensers
 /obj/structure/reagent_dispensers/watertank
@@ -3306,14 +3387,6 @@
 					icon_state = "cubalibreglass"
 					name = "Cuba Libre"
 					desc = "A classic mix of rum and cola."
-				if("irishcream")
-					icon_state = "irishcreamglass"
-					name = "Irish Cream"
-					desc = "It's cream, mixed with whiskey. What else would you expect from the Irish?"
-				if("cubalibre")
-					icon_state = "cubalibreglass"
-					name = "Cuba Libre"
-					desc = "A classic mix of rum and cola."
 				if("b52")
 					icon_state = "b52glass"
 					name = "B-52"
@@ -3446,8 +3519,7 @@
 					icon_state = "booger"
 					name = "Booger"
 					desc = "Ewww..."
-
-				/*if("snowwhite")  /// Dumbly-sprited drinks below. If your drink is on the list, shame on you --Agouri
+				if("snowwhite")
 					icon_state = "snowwhite"
 					name = "Snow White"
 					desc = "A cold refreshment."
@@ -3521,7 +3593,7 @@
 					desc = "Creepy time!"
 				if("changelingsting")
 					icon_state = "changelingsting"
-					name = "Changeling sting"
+					name = "Changeling Sting"
 					desc = "A stingy drink."
 				if("irishcarbomb")
 					icon_state = "irishcarbomb"
@@ -3534,7 +3606,11 @@
 				if("erikasurprise")
 					icon_state = "erikasurprise"
 					name = "Erika Surprise"
-					desc = "A surprise of Erika"*/
+					desc = "The surprise is, it's green!"
+				if("driestmartini")
+					icon_state = "driestmartini"
+					name = "Driest Martini"
+					desc = "Only for the experienced. You think you see sand floating in the glass."
 				else
 					icon_state ="glass_brown"
 					name = "Glass of ..what?"
@@ -3585,3 +3661,126 @@
 			name = "empty jar"
 			desc = "A jar. You're not sure what it's supposed to hold."
 			return
+
+//////////////////
+//STYROFOAM CUPS//
+//////////////////
+/obj/item/weapon/reagent_containers/food/drinks/styrofoamcup
+	name = "styrofoam cup"
+	desc = "Cups for drinking."
+	icon_state = "styrocup-empty"
+	amount_per_transfer_from_this = 10
+	volume = 50
+
+	on_reagent_change()
+		if (reagents.reagent_list.len > 0)
+			switch(reagents.get_master_reagent_id())
+				if("water")
+					icon_state = "styrocup-clear"
+				else
+					icon_state ="styrocup-brown"
+		else
+			icon_state = "styrocup-empty"
+			return
+
+/*/obj/item/weapon/reagent_containers/food/drinks/styrofoamcuppile
+	name = "Styrofoam Cup Pile"
+	//desc = "A pile of styrofoam cups."
+	icon_state = "styrocup-stack6"
+	item_state = "styrocup-stack6"
+	w_class = 1
+	throwforce = 1
+	var/cupcount = 6
+	flags = TABLEPASS
+
+/obj/item/weapon/reagent_containers/food/drinks/styrofoamcuppile/update_icon()
+	src.icon_state = text("styrocup-stack[]", src.cupcount)
+	src.desc = text("There are [] cups left!", src.cupcount)
+	return
+
+/obj/item/weapon/reagent_containers/food/drinks/styrofoamcuppile/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/weapon/reagent_containers/food/drinks/styrofoamcup) && (cupcount < 6))
+		user.drop_item()
+		W.loc = src
+		usr << "You place a cup back onto the pile."
+		if (src.cupcount < 6)
+			src.cupcount++
+	src.update()
+	return
+
+
+/obj/item/weapon/reagent_containers/food/drinks/styrofoamcuppile/proc/update()
+	src.icon_state = text("styrocup-stack[]", src.cupcount)
+	return
+
+/obj/item/weapon/reagent_containers/food/drinks/styrofoamcuppile/MouseDrop(mob/user as mob)
+	if ((user == usr && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
+		if(ishuman(user))
+			if (usr.hand)
+				if (!( usr.l_hand ))
+					spawn( 0 )
+						src.attack_hand(usr, 1, 1)
+						return
+			else
+				if (!( usr.r_hand ))
+					spawn( 0 )
+						src.attack_hand(usr, 0, 1)
+						return
+	return
+
+/obj/item/weapon/reagent_containers/food/drinks/styrofoamcuppile/attack_paw(mob/user as mob)
+	return src.attack_hand(user)
+
+/obj/item/weapon/reagent_containers/food/drinks/styrofoamcuppile/attack_hand(mob/user as mob, unused, flag)
+	if (flag)
+		return ..()
+	src.add_fingerprint(user)
+	if (locate(/obj/item/weapon/reagent_containers/food/drinks/styrofoamcup, src))
+		for(var/obj/item/weapon/reagent_containers/food/drinks/styrofoamcup/P in src)
+			if (!usr.l_hand)
+				P.loc = usr
+				P.layer = 20
+				usr.l_hand = P
+				usr.update_clothing()
+				usr << "You take a cup from the pile."
+				break
+			else if (!usr.r_hand)
+				P.loc = usr
+				P.layer = 20
+				usr.r_hand = P
+				usr.update_clothing()
+				usr << "You take a cup from the pile."
+				break
+	else
+		if (src.cupcount >= 1)
+			src.cupcount--
+			var/obj/item/weapon/reagent_containers/food/drinks/styrofoamcup/D = new /obj/item/weapon/reagent_containers/food/drinks/styrofoamcup
+			D.loc = usr.loc
+			if(ishuman(usr))
+				if(!usr.get_active_hand())
+					usr.put_in_hand(D)
+					usr << "You take a cup from the pile."
+			else
+				D.loc = get_turf_loc(src)
+				usr << "You take a cup from the pile."
+
+	src.update()
+	return
+
+/obj/item/weapon/reagent_containers/food/drinks/styrofoamcuppile/examine()
+	set src in oview(1)
+
+	src.cupcount = round(src.cupcount)
+	var/n = src.cupcount
+	for(var/obj/item/weapon/reagent_containers/food/drinks/styrofoamcup/P in src)
+		n++
+	if (n <= 0)
+		n = 0
+		usr << "There are no cups left on this pile."
+	else
+		if (n == 1)
+			usr << "There is one cup left on this pile."
+		else
+			usr << text("There are [] cups on this pile.", n)
+	return
+*/

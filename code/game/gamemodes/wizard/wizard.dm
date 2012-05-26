@@ -5,7 +5,6 @@
 /datum/game_mode/wizard
 	name = "wizard"
 	config_tag = "wizard"
-	required_players = 0
 	required_enemies = 1
 	recommended_enemies = 1
 
@@ -183,15 +182,19 @@
 		for(var/datum/objective/objective in wizard.objectives)
 			if(objective.check_completion())
 				world << "<B>Objective #[count]</B>: [objective.explanation_text] \green <B>Success</B>"
+				//feedback_add_details("wizard_objective","[objective.type]|SUCCESS")
 			else
 				world << "<B>Objective #[count]</B>: [objective.explanation_text] \red Failed"
+				//feedback_add_details("wizard_objective","[objective.type]|FAIL")
 				wizardwin = 0
 			count++
 
 		if(wizard.current && wizard.current.stat!=2 && wizardwin)
 			world << "<B>The wizard was successful!<B>"
+			//feedback_add_details("wizard_success","SUCCESS")
 		else
 			world << "<B>The wizard has failed!<B>"
+			//feedback_add_details("wizard_success","FAIL")
 	return 1
 
 //OTHER PROCS

@@ -23,6 +23,7 @@
 		component_parts += new /obj/item/weapon/cable_coil(src)
 		component_parts += new /obj/item/weapon/cable_coil(src)
 		RefreshParts()
+		src.initialize(); //Agouri
 
 	RefreshParts()
 		var/tot_rating = 0
@@ -74,7 +75,7 @@
 					var/datum/gas_mixture/env = L.return_air()
 					if(env.temperature < (heat_amt+T0C))
 
-						var/transfer_moles = 0.25 * env.total_moles()
+						var/transfer_moles = 0.25 * env.total_moles
 
 						var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
@@ -216,7 +217,7 @@
 				temp_server.id_with_download += num
 
 		else if(href_list["reset_tech"])
-			var/choice = alert("Technology Data Rest", "Are you sure you want to reset this technology to it's default data? Data lost cannot be recovered.", "Continue", "Cancel")
+			var/choice = alert("Technology Data Rest", "Are you sure you want to reset this technology to its default data? Data lost cannot be recovered.", "Continue", "Cancel")
 			if(choice == "Continue")
 				for(var/datum/tech/T in temp_server.files.known_tech)
 					if(T.id == href_list["reset_tech"])
@@ -225,7 +226,7 @@
 			temp_server.files.RefreshResearch()
 
 		else if(href_list["reset_design"])
-			var/choice = alert("Design Data Deletion", "Are you sure you want to delete this design? If you still have the prerequisites for the design, it'll reset to it's base reliability. Data lost cannot be recovered.", "Continue", "Cancel")
+			var/choice = alert("Design Data Deletion", "Are you sure you want to delete this design? If you still have the prerequisites for the design, it'll reset to its base reliability. Data lost cannot be recovered.", "Continue", "Cancel")
 			if(choice == "Continue")
 				for(var/datum/design/D in temp_server.files.known_designs)
 					if(D.id == href_list["reset_design"])

@@ -4,6 +4,7 @@ CONTAINS:
 Plant-B-Gone
 Nettle
 Deathnettle
+Craftables (Cob pipes, potato batteries, pumpkinheads)
 
 */
 
@@ -82,9 +83,9 @@ Deathnettle
 /obj/item/weapon/grown/nettle/pickup(mob/living/carbon/human/user as mob)
 	if(!user.gloves)
 		user << "\red The nettle burns your bare hand!"
-		if(istype(user, /mob/living/carbon/human))
+		if(hasorgans(user))
 			var/organ = ((user.hand ? "l_":"r_") + "arm")
-			var/datum/organ/external/affecting = user.get_organ(organ)
+			var/datum/organ/external/affecting = user:get_organ(organ)
 			affecting.take_damage(0,force)
 		else
 			user.take_organ_damage(0,force)
@@ -96,14 +97,18 @@ Deathnettle
 		usr << "All the leaves have fallen off the nettle from violent whacking."
 		del(src)
 
+/obj/item/weapon/grown/nettle/changePotency(newValue) //-QualityVan
+	potency = newValue
+	force = round((5+potency/5), 1)
+
 
 // Deathnettle
 
 /obj/item/weapon/grown/deathnettle/pickup(mob/living/carbon/human/user as mob)
 	if(!user.gloves)
-		if(istype(user, /mob/living/carbon/human))
+		if(hasorgans(user))
 			var/organ = ((user.hand ? "l_":"r_") + "arm")
-			var/datum/organ/external/affecting = user.get_organ(organ)
+			var/datum/organ/external/affecting = user:get_organ(organ)
 			affecting.take_damage(0,force)
 		else
 			user.take_organ_damage(0,force)
@@ -117,8 +122,10 @@ Deathnettle
 		M << "\red You are stunned by the powerful acid of the Deathnettle!"
 		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had the [src.name] used on them by [user.name] ([user.ckey])</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] on [M.name] ([M.ckey])</font>")
+
 		log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
 		message_admins("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+		log_attack("<font color='red'> [user.name] ([user.ckey]) used the [src.name] on [M.name] ([M.ckey])</font>")
 
 		M.eye_blurry += force/7
 		if(prob(20))
@@ -133,3 +140,36 @@ Deathnettle
 	else
 		usr << "All the leaves have fallen off the deathnettle from violent whacking."
 		del(src)
+
+/obj/item/weapon/grown/deathnettle/changePotency(newValue) //-QualityVan
+	potency = newValue
+	force = round((5+potency/2.5), 1)
+
+//Crafting
+
+/obj/item/weapon/corncob/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || istype(W, /obj/item/weapon/kitchen/utensil/knife))
+		user << "<span class='notice'>You use [W] to fashion a pipe out of the corn cob!</span>"
+		new /obj/item/clothing/mask/pipe/cobpipe (user.loc)
+		del(src)
+		return
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/pumpkin/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || istype(W, /obj/item/weapon/twohanded/fireaxe) || istype(W, /obj/item/weapon/kitchen/utensil/knife) || istype(W, /obj/item/weapon/melee/energy))
+		user.show_message("<span class='notice'>You carve a face into [src]!</span>", 1)
+		new /obj/item/clothing/head/helmet/hardhat/pumpkinhead (user.loc)
+		del(src)
+		return
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/potato/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if(istype(W, /obj/item/weapon/cable_coil))
+		if(W:amount >= 5)
+			W:amount -= 5
+			if(!W:amount) del(W)
+			user << "<span class='notice'>You add some cable to the potato and slide it inside the battery encasing.</span>"
+			new /obj/item/weapon/cell/potato(user.loc)
+			del(src)
+			return

@@ -69,12 +69,11 @@ obj/machinery/door/airlock
 		. = ..()
 		if(!surpress_send) send_status()
 
-	proc
-		set_frequency(new_frequency)
-			radio_controller.remove_object(src, frequency)
-			if(new_frequency)
-				frequency = new_frequency
-				radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
+	proc/set_frequency(new_frequency)
+		radio_controller.remove_object(src, frequency)
+		if(new_frequency)
+			frequency = new_frequency
+			radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
 
 	initialize()
 		if(frequency)
@@ -140,11 +139,10 @@ obj/machinery/airlock_sensor
 
 		update_icon()
 
-	proc
-		set_frequency(new_frequency)
-			radio_controller.remove_object(src, frequency)
-			frequency = new_frequency
-			radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
+	proc/set_frequency(new_frequency)
+		radio_controller.remove_object(src, frequency)
+		frequency = new_frequency
+		radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
 
 	initialize()
 		set_frequency(frequency)
@@ -177,7 +175,10 @@ obj/machinery/access_button
 			icon_state = "access_button_off"
 
 	attack_hand(mob/user)
-		if(radio_connection)
+		if(!allowed(user))
+			user << "\red Access Denied"
+
+		else if(radio_connection)
 			var/datum/signal/signal = new
 			signal.transmission_method = 1 //radio signal
 			signal.data["tag"] = master_tag

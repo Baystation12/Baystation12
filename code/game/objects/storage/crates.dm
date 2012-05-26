@@ -29,6 +29,7 @@
 	icon_opened = "trashcartopen"
 	icon_closed = "trashcart"
 
+/*these aren't needed anymore
 /obj/structure/closet/crate/hat
 	desc = "A crate filled with Valuable Collector's Hats!."
 	name = "Hat Crate"
@@ -37,6 +38,16 @@
 	density = 1
 	icon_opened = "crateopen"
 	icon_closed = "crate"
+
+/obj/structure/closet/crate/contraband
+	name = "Poster crate"
+	desc = "A random assortment of posters manufactured by providers NOT listed under Nanotrasen's whitelist."
+	icon = 'storage.dmi'
+	icon_state = "crate"
+	density = 1
+	icon_opened = "crateopen"
+	icon_closed = "crate"
+*/
 
 /obj/structure/closet/crate/medical
 	desc = "A medical crate."
@@ -144,17 +155,6 @@
 	icon_opened = "hydrocrateopen"
 	icon_closed = "hydrocrate"
 	density = 1
-/*	New() // This stuff shouldn't be here, it should be in /datum/supply_packs/hydroponics
-		..()
-		new /obj/item/weapon/plantbgone(src)
-		new /obj/item/weapon/plantbgone(src)
-		new /obj/item/weapon/plantbgone(src)
-		new /obj/item/weapon/minihoe(src)
-		new /obj/item/weapon/weedspray(src)
-		new /obj/item/weapon/weedspray(src)
-		new /obj/item/weapon/pestspray(src)
-		new /obj/item/weapon/pestspray(src)
-		new /obj/item/weapon/pestspray(src) */
 
 /obj/structure/closet/crate/hydroponics/prespawned
 	//This exists so the prespawned hydro crates spawn with their contents.
@@ -170,6 +170,7 @@
 		new /obj/item/weapon/plantbgone(src)
 		new /obj/item/weapon/plantbgone(src)
 		new /obj/item/weapon/plantbgone(src)
+		new /obj/item/weapon/hatchet(src)
 		new /obj/item/weapon/minihoe(src)
 //		new /obj/item/weapon/weedspray(src)
 //		new /obj/item/weapon/weedspray(src)
@@ -205,18 +206,13 @@
 	..()
 	new /obj/item/clothing/suit/radiation(src)
 	new /obj/item/clothing/head/radiation(src)
-	new /obj/item/clothing/suit/radiation(src)
-	new /obj/item/clothing/head/radiation(src)
-	new /obj/item/clothing/suit/radiation(src)
-	new /obj/item/clothing/head/radiation(src)
-	new /obj/item/clothing/suit/radiation(src)
-	new /obj/item/clothing/head/radiation(src)
 
 /obj/structure/closet/crate/open()
 	playsound(src.loc, 'click.ogg', 15, 1, -3)
 
 	for(var/obj/O in src)
 		O.loc = get_turf(src)
+
 	for(var/mob/M in src)
 		M.loc = get_turf(src)
 
@@ -225,9 +221,11 @@
 
 /obj/structure/closet/crate/close()
 	playsound(src.loc, 'click.ogg', 15, 1, -3)
+
 	for(var/obj/O in get_turf(src))
 		if(O.density || O.anchored || O == src) continue
 		O.loc = src
+
 	icon_state = icon_closed
 	src.opened = 0
 
@@ -286,7 +284,7 @@
 		user.drop_item()
 		if(W)
 			W.loc = src.loc
-	else if(istype(W,/obj/item/weapon/packageWrap))
+	else if(istype(W, /obj/item/weapon/packageWrap))
 		return
 	else return attack_hand(user)
 

@@ -1,8 +1,26 @@
+var/list/forbidden_varedit_object_types = list(
+										/obj/admins,						//Admins editing their own admin-power object? Yup, sounds like a good idea.
+										/obj/machinery/blackbox_recorder,	//Prevents people messing with feedback gathering
+										/datum/feedback_variable			//Prevents people messing with feedback gathering
+									)
+
 /client/proc/cmd_modify_object_variables(obj/O as obj|mob|turf|area in world)
 	set category = "Debug"
 	set name = "Edit Variables"
 	set desc="(target) Edit a target item's variables"
 	src.modify_variables(O)
+	//feedback_add_details("admin_verb","EDITV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/cmd_modify_ref_variables(var/target as text)
+	set category = "Debug"
+	set name = "Edit Variables (Reference)"
+	set desc="(target) Edit a target item's variables"
+	var/obj/I = locate(target)
+	if(!I)
+		usr << "ERROR: Object could not be located!"
+		return
+	src.modify_variables(I)
+	//feedback_add_details("admin_verb","EDITV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_modify_ticker_variables()
 	set category = "Debug"
@@ -12,6 +30,7 @@
 		src << "Game hasn't started yet."
 	else
 		src.modify_variables(ticker)
+	//	feedback_add_details("admin_verb","ETV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/mod_list_add_ass() //haha
 
@@ -62,7 +81,7 @@
 					var_value = input("Select reference:","Reference") as null|mob|obj|turf|area in world
 
 		if("mob reference")
-			var_value = input("Select reference:","Reference") as null|mob in world
+			var_value = input("Select reference:","Reference") as null|mob in get_sorted_mobs()
 
 		if("file")
 			var_value = input("Pick file:","File") as null|file
@@ -99,10 +118,10 @@
 	switch(class)
 
 		if("text")
-			var_value = input("Enter new text:","Text") as text
+			var_value = input("Enter new text:","Text") as null|text
 
 		if("num")
-			var_value = input("Enter new number:","Num") as num
+			var_value = input("Enter new number:","Num") as null|num
 
 		if("type")
 			var_value = input("Enter type:","Type") in typesof(/obj,/mob,/area,/turf)
@@ -127,13 +146,13 @@
 					var_value = input("Select reference:","Reference") as null|mob|obj|turf|area in world
 
 		if("mob reference")
-			var_value = input("Select reference:","Reference") as mob in world
+			var_value = input("Select reference:","Reference") as null|mob in get_sorted_mobs()
 
 		if("file")
-			var_value = input("Pick file:","File") as file
+			var_value = input("Pick file:","File") as null|file
 
 		if("icon")
-			var_value = input("Pick icon:","Icon") as icon
+			var_value = input("Pick icon:","Icon") as null|icon
 
 		if("marked datum")
 			var_value = holder.marked_datum
@@ -162,6 +181,11 @@
 
 	if(!variable)
 		return
+
+	var/associative
+	if(istext(variable) && !isnull(L[variable]))
+		associative = variable
+		variable = L[variable]
 
 	var/default
 
@@ -252,22 +276,28 @@
 			mod_list(variable)
 
 		if("restore to default")
-			variable = initial(variable)
+			if(associative)
+				L[associative] = initial(L[associative])
+			else
+				variable = initial(variable)
 
 		if("edit referenced object")
 			modify_variables(variable)
 
 		if("(DELETE FROM LIST)")
-			L -= variable
+			if(associative)
+				L.Remove(associative)
+				return
+			L.Remove(variable)
 			return
 
 		if("text")
 			variable = input("Enter new text:","Text",\
-				variable) as text
+				variable) as null|text
 
 		if("num")
 			variable = input("Enter new number:","Num",\
-				variable) as num
+				variable) as null|num
 
 		if("type")
 			variable = input("Enter type:","Type",variable) \
@@ -276,7 +306,7 @@
 		if("reference")
 			switch(alert("Would you like to enter a specific object, or search for it from the world?","Choose!","Specifc UID (Hexadecimal number)", "Search"))
 				if("Specifc UID (Hexadecimal number)")
-					var/UID = input("Type in UID, without the leading 0x","Type in UID") as text|null
+					var/UID = input("Type in UID, without the leading 0x","Type in UID") as null|text
 					if(!UID) return
 					if(length(UID) != 7)
 						usr << "ERROR.  UID must be 7 digits"
@@ -294,18 +324,21 @@
 
 		if("mob reference")
 			variable = input("Select reference:","Reference",\
-				variable) as mob in world
+				variable) as null|mob in get_sorted_mobs()
 
 		if("file")
 			variable = input("Pick file:","File",variable) \
-				as file
+				as null|file
 
 		if("icon")
 			variable = input("Pick icon:","Icon",variable) \
-				as icon
+				as null|icon
 
 		if("marked datum")
 			variable = holder.marked_datum
+
+	if(associative)
+		L[associative] = variable
 
 /client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
 	var/list/locked = list("vars", "key", "ckey", "client", "firemut", "ishulk", "telekinesis", "xray", "virus", "cuffed", "ka", "last_eaten", "urine", "poo", "icon", "icon_state")
@@ -313,6 +346,11 @@
 	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
+
+	for(var/p in forbidden_varedit_object_types)
+		if( istype(O,p) )
+			usr << "\red It is forbidden to edit this object's variables."
+			return
 
 	var/class
 	var/variable
@@ -533,7 +571,7 @@
 			O.vars[variable] = var_new
 
 		if("mob reference")
-			var/var_new = input("Select reference:","Reference",O.vars[variable]) as null|mob in world
+			var/var_new = input("Select reference:","Reference",O.vars[variable]) as null|mob in get_sorted_mobs()
 			if(var_new==null) return
 			O.vars[variable] = var_new
 

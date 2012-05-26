@@ -26,6 +26,10 @@ obj/machinery/atmospherics/tvalve
 			icon_state = "tvalve[state]"
 
 	New()
+		initialize_directions()
+		..()
+
+	proc/initialize_directions()
 		switch(dir)
 			if(NORTH)
 				initialize_directions = SOUTH|NORTH|EAST
@@ -35,7 +39,6 @@ obj/machinery/atmospherics/tvalve
 				initialize_directions = WEST|EAST|SOUTH
 			if(WEST)
 				initialize_directions = EAST|WEST|NORTH
-		..()
 
 	network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 		if(reference == node1)
@@ -335,3 +338,96 @@ obj/machinery/atmospherics/tvalve
 				"You hear ratchet.")
 			new /obj/item/pipe(loc, make_from=src)
 			del(src)
+
+obj/machinery/atmospherics/tvalve/mirrored
+	icon_state = "tvalvem0"
+
+	initialize_directions()
+		switch(dir)
+			if(NORTH)
+				initialize_directions = SOUTH|NORTH|WEST
+			if(SOUTH)
+				initialize_directions = NORTH|SOUTH|EAST
+			if(EAST)
+				initialize_directions = WEST|EAST|NORTH
+			if(WEST)
+				initialize_directions = EAST|WEST|SOUTH
+
+	initialize()
+		var/node1_dir
+		var/node2_dir
+		var/node3_dir
+
+		node1_dir = turn(dir, 180)
+		node2_dir = turn(dir, 90)
+		node3_dir = dir
+
+		for(var/obj/machinery/atmospherics/target in get_step(src,node1_dir))
+			if(target.initialize_directions & get_dir(target,src))
+				node1 = target
+				break
+		for(var/obj/machinery/atmospherics/target in get_step(src,node2_dir))
+			if(target.initialize_directions & get_dir(target,src))
+				node2 = target
+				break
+		for(var/obj/machinery/atmospherics/target in get_step(src,node3_dir))
+			if(target.initialize_directions & get_dir(target,src))
+				node3 = target
+				break
+
+	update_icon(animation)
+		if(animation)
+			flick("tvalvem[src.state][!src.state]",src)
+		else
+			icon_state = "tvalvem[state]"
+
+	digital		// can be controlled by AI
+		name = "digital switching valve"
+		desc = "A digitally controlled valve."
+		icon = 'digital_valve.dmi'
+
+		attack_ai(mob/user as mob)
+			return src.attack_hand(user)
+
+		attack_hand(mob/user as mob)
+			if(!src.allowed(user))
+				user << "\red Access denied."
+				return
+			..()
+
+		//Radio remote control
+
+		proc
+			set_frequency(new_frequency)
+				radio_controller.remove_object(src, frequency)
+				frequency = new_frequency
+				if(frequency)
+					radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
+
+		var/frequency = 0
+		var/id = null
+		var/datum/radio_frequency/radio_connection
+
+		initialize()
+			..()
+			if(frequency)
+				set_frequency(frequency)
+
+		receive_signal(datum/signal/signal)
+			if(!signal.data["tag"] || (signal.data["tag"] != id))
+				return 0
+
+			switch(signal.data["command"])
+				if("valve_open")
+					if(!state)
+						go_to_side()
+
+				if("valve_close")
+					if(state)
+						go_straight()
+
+				if("valve_toggle")
+					if(state)
+						go_straight()
+					else
+						go_to_side()

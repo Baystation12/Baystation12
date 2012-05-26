@@ -19,7 +19,7 @@
 	//Secondary variables
 	var/scanmode = 0 //1 is medical scanner, 2 is forensics, 3 is reagent scanner.
 	var/fon = 0 //Is the flashlight function on?
-	var/f_lum = 4 //Luminosity for the flashlight function
+	var/f_lum = 3 //Luminosity for the flashlight function
 	var/silent = 0 //To beep or not to beep, that is the question
 	var/toff = 0 //If 1, messenger disabled
 	var/tnote = null //Current Texts
@@ -110,6 +110,9 @@
 	default_cartridge = /obj/item/weapon/cartridge/quartermaster
 	icon_state = "pda-q"
 
+/obj/item/device/pda/shaftminer
+	icon_state = "pda-miner"
+
 /obj/item/device/pda/syndicate
 	default_cartridge = /obj/item/weapon/cartridge/syndicate
 	icon_state = "pda-syn"
@@ -124,6 +127,21 @@
 /obj/item/device/pda/lawyer
 	icon_state = "pda-lawyer"
 	ttone = "objection"
+
+/obj/item/device/pda/botanist
+	//default_cartridge = /obj/item/weapon/cartridge/botanist
+	icon_state = "pda-hydro"
+
+/obj/item/device/pda/roboticist
+	icon_state = "pda-robot"
+	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a special edition with a transparent case."
+	note = "Congratulations, your station has chosen the Thinktronic 5230 Personal Data Assistant Deluxe Special Turbo Edition!"
+
+/obj/item/device/pda/librarian
+	icon_state = "pda-libb"
+	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a WGW-11 series e-reader."
+	note = "Congratulations, your station has chosen the Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant!"
+	silent = 1 //Quiet in the library!
 
 /*
  *	The Actual PDA
@@ -188,8 +206,8 @@
 			if (0)
 				dat += "<h2>PERSONAL DATA ASSISTANT v.1.2</h2>"
 				dat += "Owner: [owner], [ownjob]<br>"
-				dat += text("ID: <A href='?src=\ref[];choice=Authenticate'>[]</A><br>", src, (id ? "[id.registered_name], [id.assignment]" : "----------"))
-				dat += text("<A href='?src=\ref[];choice=UpdateInfo'>[]</A><br>", src, (id ? "Update PDA Info" : ""))
+				dat += text("ID: <A href='?src=\ref[src];choice=Authenticate'>[id ? "[id.registered_name], [id.assignment]" : "----------"]")
+				dat += text("<br><A href='?src=\ref[src];choice=UpdateInfo'>[id ? "Update PDA Info" : ""]</A><br>")
 
 				dat += "Station Time: [round(world.time / 36000)+12]:[(world.time / 600 % 60) < 10 ? add_zero(world.time / 600 % 60, 1) : world.time / 600 % 60]"//:[world.time / 100 % 6][world.time / 100 % 10]"
 
@@ -321,7 +339,7 @@
 					var/datum/gas_mixture/environment = T.return_air()
 
 					var/pressure = environment.return_pressure()
-					var/total_moles = environment.total_moles()
+					var/total_moles = environment.total_moles
 
 					dat += "Air Pressure: [round(pressure,0.1)] kPa<br>"
 
@@ -490,11 +508,15 @@
 						U << browse(null, "window=pda")
 						return
 				if("Message")
-					var/t = input(U, "Please enter message", name, null) as text
-					t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+					var/t
+					if(!href_list["pAI_mess"])
+						t = input(U, "Please enter message", name, null) as text
+						t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+					else
+						t = href_list["pAI_mess"]
 					if (!t)
 						return
-					if (!in_range(src, U) && loc != U)
+					if (!in_range(src, U) && loc != U && !href_list["pAI_mess"])
 						return
 
 					var/obj/item/device/pda/P = locate(href_list["target"])
@@ -510,17 +532,17 @@
 						last_text = world.time
 
 
-//						var/AnsweringMS = 0
+						var/AnsweringMS = 0
 						for (var/obj/machinery/message_server/MS in world)
 							MS.send_pda_message("[P.owner]","[owner]","[t]")
-//							if(MS.active)
-//								AnsweringMS++
+							if(MS.active)
+								AnsweringMS++
 
-//						if(!AnsweringMS)
-//							return
+						if(!AnsweringMS)
+							return
 
 						tnote += "<i><b>&rarr; To [P.owner]:</b></i><br>[t]<br>"
-						P.tnote += "<i><b>&larr; From <a href='byond://?src=\ref[P];choice=Message;target=\ref[src]'>[owner]</a>:</b></i><br>[t]<br>"
+						P.tnote += "<i><b>&larr; From <a href='byond://?src=\ref[P];choice=Message;target=\ref[src]'>[owner]</a> ([ownjob]):</b></i><br>[t]<br>"
 
 						// Give every ghost the ability to see all messages
 						for (var/mob/dead/observer/G in world)
@@ -537,6 +559,9 @@
 							playsound(P.loc, 'twobeep.ogg', 50, 1)
 							for (var/mob/O in hearers(3, P.loc))
 								O.show_message(text("\icon[P] *[P.ttone]*"))
+							if( P.loc && ishuman(P.loc) )
+								var/mob/living/carbon/human/H = P.loc
+								H << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[t]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
 
 						P.overlays = null
 						P.overlays += image('pda.dmi', "pda-r")
@@ -544,7 +569,7 @@
 					// pAI Message
 					else
 
-/*						var/AnsweringMS = 0
+						var/AnsweringMS = 0
 						for (var/obj/machinery/message_server/MS in world)
 							MS.send_pda_message("[P]","[src]","[t]")
 							if(MS.active)
@@ -552,7 +577,7 @@
 
 						if(!AnsweringMS)
 							return
-*/
+
 
 						tnote += "<i><b>&rarr; To [P]:</b></i><br>[t]<br>"
 						P.tnote += "<i><b>&larr; From <a href='byond://?src=\ref[P];soft=pdamessage;target=\ref[src]'>[src]</a>:</b></i><br>[t]<br>"
@@ -567,7 +592,7 @@
 
 						playsound(P.loc, 'twobeep.ogg', 50, 1)
 
-//					log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
+					log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
 
 
 				if("Send Honk")//Honk virus
@@ -620,6 +645,10 @@
 						var/obj/item/device/pda/P = locate(href_list["target"])
 						if(!isnull(P))
 							if (!P.toff && cartridge:shock_charges > 0)
+								log_admin("ATTACK: [U] ([U.ckey]) triggered a Detomatix Cartridge.")
+								message_admins("ATTACK: [U] ([U.ckey]) triggered a Detomatix Cartridge.")
+								log_attack("<font color='red'>[U.name] ([U.ckey]) triggered a Detomatix Cartridge.</font>")
+
 								cartridge:shock_charges--
 
 								var/difficulty = 0
@@ -683,26 +712,43 @@
 		honkamt--
 		playsound(loc, 'bikehorn.ogg', 30, 1)
 
-	if(U.machine == src)//Final safety.
+	if(U.machine == src && href_list["skiprefresh"]!="1")//Final safety.
 		attack_self(U)//It auto-closes the menu prior if the user is not in range and so on.
 	else
 		U.machine = null
 		U << browse(null, "window=pda")
 	return
 
+/obj/item/device/pda/proc/remove_id()
+	if (id)
+		if (istype(loc, /mob))
+			var/mob/M = loc
+			if(M.equipped() == null)
+				M.put_in_hand(id)
+				id = null
+				usr << "\blue You remove the ID from the [name]."
+				return
+		id.loc = get_turf(src)
+		id = null
+
+/obj/item/device/pda/verb/verb_remove_id()
+	set category = "Object"
+	set name = "Remove id"
+	set src in usr
+
+	if ( !(usr.stat || usr.restrained()) )
+		if(id)
+			remove_id()
+		else
+			usr << "\blue This PDA does not have an ID in it."
+	else
+		usr << "\blue You cannot do this while restrained."
+
+
 /obj/item/device/pda/proc/id_check(mob/user as mob, choice as num)//To check for IDs; 1 for in-pda use, 2 for out of pda use.
 	if(choice == 1)
 		if (id)
-			if (istype(loc, /mob))
-				var/obj/item/W = loc:equipped()
-				var/emptyHand = (W == null)
-				if(emptyHand)
-					id.DblClick()
-					if(!istype(id.loc, /obj/item/device/pda))
-						id = null
-			else
-				id.loc = loc
-				id = null
+			remove_id()
 		else
 			var/obj/item/I = user.equipped()
 			if (istype(I, /obj/item/weapon/card/id))
@@ -800,9 +846,8 @@
 				else
 					user << "\blue Blood found on [C]. Analysing..."
 					spawn(15)
-						for(var/i = 1, i < C:blood_DNA.len, i++)
-							var/list/templist = C:blood_DNA[i]
-							user << "\blue Blood type: [templist[2]]\nDNA: [templist[1]]"
+						for(var/blood in C:blood_DNA)
+							user << "\blue Blood type: [C:blood_DNA[blood]]\nDNA: [blood]"
 
 			if(4)
 				for (var/mob/O in viewers(C, null))
@@ -824,16 +869,15 @@
 				var/list/prints = A:fingerprints
 				var/list/complete_prints = list()
 				for(var/i in prints)
-					var/list/templist = params2list(i)
-					var/temp = stringpercent(templist["2"])
-					if(temp <= 6)
-						complete_prints += templist["2"]
+					var/print = prints[i]
+					if(stringpercent(print) <= FINGERPRINT_COMPLETE)
+						complete_prints += print
 				if(complete_prints.len < 1)
 					user << "\blue No intact prints found"
 				else
 					user << "\blue Found [complete_prints.len] intact prints"
 					for(var/i in complete_prints)
-						user << "\blue " + i
+						user << "\blue [i]"
 
 		if(3)
 			if(!isnull(A.reagents))

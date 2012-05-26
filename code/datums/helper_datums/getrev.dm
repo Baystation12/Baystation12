@@ -54,6 +54,8 @@ var/global/datum/getrev/revdata = new("config/svndir.txt")
 
 		if(svndirpath && fexists(svndirpath) && fexists("[svndirpath]/entries") && isfile(file("[svndirpath]/entries")))
 			var/list/filelist = dd_file2list("[svndirpath]/entries",null)
+			if(filelist.len < 4)
+				return abort()
 			revision = filelist[4]
 			commiter = filelist[12]
 			diary << "Revision info loaded succesfully"
@@ -83,5 +85,10 @@ client/verb/showrevinfo()
 	set name = "Show Server Revision"
 	var/output =  "Sorry, the revision info is unavailable."
 	output = file2text("/home/bay12/live/data/gitcommit")
+	output += "Current Infomational Settings: <br>"
+	output += "Tensioner Status: [config.Tensioner_Active]<br>"
+	//output += "Current Tension: [tension_master.score]<br>"
+	//output += "Tensioner Debug Data:  R1:[tension_master.round1] R2:[tension_master.round2] R3:[tension_master.round3] R4:[tension_master.round4] ES: [tension_master.eversupressed] CD: [tension_master.cooldown]<br>"
+	output += "Protect Authority Roles From Tratior: [config.protect_roles_from_antagonist]<br>"
 	usr << browse(output,"window=revdata");
 	return

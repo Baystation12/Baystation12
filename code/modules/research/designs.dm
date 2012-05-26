@@ -525,6 +525,7 @@ datum
 			build_path = "/obj/item/weapon/aiModule/tyrant"
 
 
+
 ///////////////////////////////////
 /////Subspace Telecomms////////////
 ///////////////////////////////////
@@ -538,7 +539,7 @@ datum
 			build_path = "/obj/item/weapon/circuitboard/telecomms/receiver"
 
 		telecomms_bus
-			name = "Circuit Design (Telecom Bus Mainframe)"
+			name = "Circuit Design (Bus Mainframe)"
 			desc = "Allows for the construction of Telecommunications Bus Mainframes."
 			id = "s-bus"
 			req_tech = list("programming" = 4, "engineering" = 4)
@@ -547,7 +548,7 @@ datum
 			build_path = "/obj/item/weapon/circuitboard/telecomms/bus"
 
 		telecomms_processor
-			name = "Circuit Design (Telecom Processor Unit)"
+			name = "Circuit Design (Processor Unit)"
 			desc = "Allows for the construction of Telecommunications Processor equipment."
 			id = "s-processor"
 			req_tech = list("programming" = 4, "engineering" = 4)
@@ -690,6 +691,7 @@ datum
 			materials = list("$glass" = 2000, "acid" = 20)
 			build_path = "/obj/item/weapon/circuitboard/mecha/durand/targeting"
 
+
 		honker_main
 			name = "Circuit Design (\"H.O.N.K\" Central Control module)"
 			desc = "Allows for the construction of a \"H.O.N.K\" Central Control module."
@@ -793,13 +795,13 @@ datum
 			req_tech = list("magnets" = 3, "programming" = 3, "engineering" = 3)
 			build_path = "/obj/item/mecha_parts/mecha_equipment/repair_droid"
 
-		mech_generator
+		mech_plasma_generator
 			name = "Exosuit Module Design (Plasma Converter Module)"
 			desc = "Exosuit-mounted plasma converter."
 			id = "mech_plasma_generator"
 			build_type = MECHFAB
 			req_tech = list("plasmatech" = 2, "powerstorage"= 2, "engineering" = 2)
-			build_path = "/obj/item/mecha_parts/mecha_equipment/generator"
+			build_path = "/obj/item/mecha_parts/mecha_equipment/plasma_generator"
 
 		mech_energy_relay
 			name = "Exosuit Module Design (Tesla Energy Relay)"
@@ -848,6 +850,7 @@ datum
 			build_type = MECHFAB
 			req_tech = list("powerstorage"= 3, "engineering" = 3, "materials" = 3)
 			build_path = "/obj/item/mecha_parts/mecha_equipment/generator/nuclear"
+
 
 ////////////////////////////////////////
 //////////Disk Construction Disks///////
@@ -1014,6 +1017,8 @@ datum
 			reliability_base = 75
 			build_path = "/obj/item/weapon/stock_parts/matter_bin/super"
 
+
+
 		subspace_ansible
 			name = "Subspace Ansible"
 			desc = "A compact module capable of sensing extradimensional activity."
@@ -1044,7 +1049,7 @@ datum
 		subspace_treatment
 			name = "Subspace Treatment Disk"
 			desc = "A compact micro-machine capable of stretching out hyper-compressed radio waves."
-			id = "s-amplifier"
+			id = "s-treatment"
 			req_tech = list("programming" = 3, "magnets" = 2, "materials" = 4, "bluespace" = 2)
 			build_type = PROTOLATHE
 			materials = list("$metal" = 10, "$silver" = 20)
@@ -1053,7 +1058,7 @@ datum
 		subspace_analyzer
 			name = "Subspace Treatment Disk"
 			desc = "A sophisticated analyzer capable of analyzing cryptic subspace wavelengths."
-			id = "s-amplifier"
+			id = "s-analyzer"
 			req_tech = list("programming" = 3, "magnets" = 4, "materials" = 4, "bluespace" = 2)
 			build_type = PROTOLATHE
 			materials = list("$metal" = 10, "$gold" = 15)
@@ -1062,7 +1067,7 @@ datum
 		subspace_crystal
 			name = "Ansible Crystal"
 			desc = "A sophisticated analyzer capable of analyzing cryptic subspace wavelengths."
-			id = "s-amplifier"
+			id = "s-crystal"
 			req_tech = list("magnets" = 4, "materials" = 4, "bluespace" = 2)
 			build_type = PROTOLATHE
 			materials = list("$glass" = 1000, "$silver" = 20, "$gold" = 20)
@@ -1071,7 +1076,7 @@ datum
 		subspace_transmitter
 			name = "Subspace Transmitter"
 			desc = "A large piece of equipment used to open a window into the subspace dimension."
-			id = "s-amplifier"
+			id = "s-transmitter"
 			req_tech = list("magnets" = 5, "materials" = 5, "bluespace" = 3)
 			build_type = PROTOLATHE
 			materials = list("$glass" = 100, "$silver" = 10, "$uranium" = 15)
@@ -1086,7 +1091,7 @@ datum
 			desc = "A basic power cell that holds 1000 units of energy"
 			id = "basic_cell"
 			req_tech = list("powerstorage" = 1)
-			build_type = PROTOLATHE | AUTOLATHE
+			build_type = PROTOLATHE | AUTOLATHE |MECHFAB
 			materials = list("$metal" = 700, "$glass" = 50)
 			build_path = "/obj/item/weapon/cell"
 
@@ -1095,7 +1100,7 @@ datum
 			desc = "A power cell that holds 10000 units of energy"
 			id = "high_cell"
 			req_tech = list("powerstorage" = 2)
-			build_type = PROTOLATHE | AUTOLATHE
+			build_type = PROTOLATHE | AUTOLATHE | MECHFAB
 			materials = list("$metal" = 700, "$glass" = 60)
 			build_path = "/obj/item/weapon/cell/high"
 
@@ -1105,7 +1110,7 @@ datum
 			id = "super_cell"
 			req_tech = list("powerstorage" = 3, "materials" = 2)
 			reliability_base = 90 //Else these things just fail all the time, goddamn. - Erthilo
-			build_type = PROTOLATHE
+			build_type = PROTOLATHE | MECHFAB
 			materials = list("$metal" = 700, "$glass" = 70)
 			build_path = "/obj/item/weapon/cell/super"
 
@@ -1113,9 +1118,9 @@ datum
 			name = "Hyper-Capacity Power Cell"
 			desc = "A power cell that holds 30000 units of energy"
 			id = "hyper_cell"
-			req_tech = list("powerstorage" = 6, "materials" = 4)
+			req_tech = list("powerstorage" = 5, "materials" = 4)
 			reliability_base = 85
-			build_type = PROTOLATHE
+			build_type = PROTOLATHE | MECHFAB
 			materials = list("$metal" = 400, "$gold" = 150, "$silver" = 150, "$glass" = 70)
 			build_path = "/obj/item/weapon/cell/hyper"
 
@@ -1221,6 +1226,16 @@ datum
 			materials = list("$glass" = 2000, "acid" = 20)
 			build_path = "/obj/item/weapon/circuitboard/pacman/mrs"
 
+		industrial
+			name = "Industrial PACMAN-type Generator Board"
+			desc = "The circuit board that for a Industrial PACMAN-type portable generator."
+			id = "industrial"
+			req_tech = list("programming" = 3, "powerstorage" = 4, "engineering" = 4)
+			build_type = IMPRINTER
+			reliability_base = 70
+			materials = list("$glass" = 2000, "acid" = 20)
+			build_path = "/obj/item/weapon/circuitboard/pacman/industrial"
+
 
 /////////////////////////////////////////
 ////////////Medical Tools////////////////
@@ -1265,6 +1280,16 @@ datum
 			materials = list("$metal" = 1200, "$glass" = 500)
 			reliability_base = 74
 			build_path = "/obj/item/device/mmi/radio_enabled"
+
+		synthetic_flash
+			name = "Synthetic Flash"
+			desc = "When a problem arises, SCIENCE is the solution."
+			id = "sflash"
+			req_tech = list("magnets" = 3, "combat" = 2)
+			build_type = MECHFAB
+			materials = list("$metal" = 750, "$glass" = 750)
+			reliability_base = 76
+			build_path = "/obj/item/device/flash/synthetic"
 
 /////////////////////////////////////////
 /////////////////Weapons/////////////////
@@ -1328,8 +1353,8 @@ datum
 			req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3, "biotech" = 2)
 			build_type = PROTOLATHE
 			materials = list("$metal" = 5000, "$glass" = 1000)
-			build_path = "/obj/item/weapon/gun/rapidsyringe"
-
+			build_path = "/obj/item/weapon/gun/syringe/rapidsyringe"
+/*
 		largecrossbow
 			name = "Energy Crossbow"
 			desc = "A weapon favoured by syndicate infiltration teams."
@@ -1338,7 +1363,7 @@ datum
 			build_type = PROTOLATHE
 			materials = list("$metal" = 5000, "$glass" = 1000, "$uranium" = 1000, "$silver" = 1000)
 			build_path = "/obj/item/weapon/gun/energy/crossbow/largecrossbow"
-
+*/
 		temp_gun
 			name = "Temperature Gun"
 			desc = "A gun that shoots temperature bullet energythings to change temperature."//Change it if you want
@@ -1348,6 +1373,15 @@ datum
 			materials = list("$metal" = 5000, "$glass" = 500, "$silver" = 3000)
 			build_path = "/obj/item/weapon/gun/energy/temperature"
 			locked = 1
+
+		flora_gun
+			name = "Floral Somatoray"
+			desc = "A tool that discharges controlled radiation which induces mutation in plant cells. Harmless to other organic life."
+			id = "flora_gun"
+			req_tech = list("materials" = 2, "biotech" = 3, "powerstorage" = 3)
+			build_type = PROTOLATHE
+			materials = list("$metal" = 2000, "$glass" = 500, "$uranium" = 500)
+			build_path = "/obj/item/weapon/gun/energy/floragun"
 
 		large_grenade
 			name = "Large Grenade"
@@ -1483,6 +1517,28 @@ datum
 				materials = list("$metal" = 50, "$glass" = 50)
 				build_path = "/obj/item/clothing/glasses/hud/security"
 				locked = 1
+
+/////////////////////////////////////////
+///////////////Secure Items//////////////
+/////////////////////////////////////////
+
+			lockbox
+				name = "Empty Lockbox"
+				desc = "A locked box"
+				id = "lockbox"
+				req_tech = list("materials" = 2, "engineering" = 3)
+				build_type = PROTOLATHE
+				materials = list("$metal" = 200, "$glass" = 20)
+				build_path = "/obj/item/weapon/storage/lockbox"
+
+			secbriefcase
+				name = "Secure Briefcase"
+				desc = "A large briefcase with a digital locking system."
+				id = "secbriefcase"
+				req_tech = list("materials" = 2, "engineering" = 3)
+				build_type = PROTOLATHE
+				materials = list("$metal" = 200, "$glass" = 20, "$silver" = 10)
+				build_path = "/obj/item/weapon/secstorage/sbriefcase"
 
 /////////////////////////////////////////
 //////////////////Test///////////////////

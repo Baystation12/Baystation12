@@ -126,6 +126,10 @@
 
 	if(istype(W, /obj/item/weapon/wirecutters))
 
+		if(power_switch)
+			user << "\red This piece of cable is tied to a power switch. Flip the switch to remove it."
+			return
+
 		if (shock(user, 50))
 			return
 
@@ -217,7 +221,7 @@
 
 /obj/item/weapon/cable_coil/proc/updateicon()
 	if (!color)
-		color = pick("red", "yellow", "blue", "green")
+		color = pick("red", "yellow", "blue", "green", "pink")
 	if(amount == 1)
 		icon_state = "coil_[color]1"
 		name = "cable piece"
@@ -237,6 +241,25 @@
 		usr << "A piece of power cable."
 	else
 		usr << "A coil of power cable. There are [amount] lengths of cable in the coil."
+
+/obj/item/weapon/cable_coil/verb/make_restraint()
+	set name = "Make Cable Restraints"
+	set category = "Object"
+	var/mob/M = usr
+	if (istype(M, /mob/dead/)) return
+	if (usr.stat) return
+	if(!istype(usr.loc,/turf)) return
+	if(src.amount <= 14)
+		usr << "\red You need at least 15 lengths to make restraints!"
+		return
+	var/obj/item/weapon/handcuffs/cable/B = new /obj/item/weapon/handcuffs/cable(usr.loc)
+	usr << "\blue You wind some cable together to make some restraints."
+	if(src.amount == 15)
+		del(src)
+	else
+		src.amount -= 15
+	B.layer = 20
+	..()
 
 /obj/item/weapon/cable_coil/attackby(obj/item/weapon/W, mob/user)
 	..()
@@ -505,16 +528,14 @@
 		PN.merge_powernets(TPN)
 
 	for(var/obj/machinery/power/apc/N in loc)
-
-		if(!N)
-			continue
+		if(!N)	continue
 
 		var/obj/machinery/power/M
 		M = N.terminal
+		if(!M)	continue
 
-		if(M.netnum == 0)
-			if(netnum == 0)
-				continue
+		if(!M.netnum)
+			if(!netnum)continue
 			var/datum/powernet/PN = powernets[netnum]
 			PN.nodes += M
 			M.netnum = netnum

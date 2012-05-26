@@ -100,6 +100,7 @@
 
 		var/turf/destturf
 		var/turf/curturf = get_turf(teleatom)
+		var/area/destarea = get_area(destination)
 		if(precision)
 			var/list/posturfs = circlerangeturfs(destination,precision)
 			destturf = safepick(posturfs)
@@ -111,12 +112,21 @@
 
 		playSpecials(curturf,effectin,soundin)
 
+		// Remove any luminosity etc.
+		var/prevlum = teleatom.luminosity
+		teleatom.luminosity = 0
+
 		if(force_teleport)
 			teleatom.forceMove(destturf)
 			playSpecials(destturf,effectout,soundout)
 		else
 			if(teleatom.Move(destturf))
 				playSpecials(destturf,effectout,soundout)
+
+		// Re-Apply lum
+		teleatom.sd_SetLuminosity(prevlum)
+
+		destarea.Entered(teleatom)
 
 		return 1
 

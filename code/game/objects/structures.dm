@@ -33,12 +33,14 @@ obj/structure
 			W:use(2)
 			user << "\blue You create a false wall! Push on it to open or close the passage."
 			new /obj/structure/falsewall (src.loc)
+			add_hiddenprint(usr)
 			del(src)
 
-		else if(istype(W, /obj/item/stack/sheet/r_metal) && istype(src,/obj/structure/girder/displaced))
+		else if(istype(W, /obj/item/stack/sheet/plasteel) && istype(src,/obj/structure/girder/displaced))
 			W:use(2)
 			user << "\blue You create a false r wall! Push on it to open or close the passage."
 			new /obj/structure/falserwall (src.loc)
+			add_hiddenprint(usr)
 			del(src)
 
 		else if(istype(W, /obj/item/weapon/screwdriver) && state == 2 && istype(src,/obj/structure/girder/reinforced))
@@ -82,11 +84,13 @@ obj/structure
 				Tsrc.ReplaceWithWall()
 				for(var/obj/machinery/atmospherics/pipe/P in Tsrc)
 					P.layer = 1
-				W:use(2)
+				for(var/turf/simulated/wall/X in Tsrc.loc)
+					if(X)	X.add_hiddenprint(usr)
+				if (W)	W:use(2)
 				del(src)
 			return
 
-		else if (istype(W, /obj/item/stack/sheet/r_metal))
+		else if (istype(W, /obj/item/stack/sheet/plasteel))
 			if (src.icon_state == "reinforced") //Time to finalize!
 				user << "\blue Now finalising reinforced wall."
 				if(do_after(user, 50))
@@ -97,6 +101,8 @@ obj/structure
 					Tsrc.ReplaceWithRWall()
 					for(var/obj/machinery/atmospherics/pipe/P in Tsrc)
 						P.layer = 1
+					for(var/turf/simulated/wall/r_wall/X in Tsrc.loc)
+						if(X)	X.add_hiddenprint(usr)
 					if (W)
 						W:use(1)
 					del(src)
@@ -154,6 +160,58 @@ obj/structure
 /obj/structure/girder/reinforced
 	icon_state = "reinforced"
 	state = 2
+
+/obj/structure/cultgirder
+	icon= 'cult.dmi'
+	icon_state= "cultgirder"
+	anchored = 1
+	density = 1
+	layer = 2
+
+	attackby(obj/item/W as obj, mob/user as mob)
+		if(istype(W, /obj/item/weapon/wrench))
+			playsound(src.loc, 'Ratchet.ogg', 100, 1)
+			user << "\blue Now disassembling the girder"
+			if(do_after(user,40))
+				user << "\blue You dissasembled the girder!"
+				new /obj/effect/decal/remains/human(get_turf(src))
+				del(src)
+
+		else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+			user << "\blue Now slicing apart the girder"
+			if(do_after(user,30))
+				user << "\blue You slice apart the girder!"
+			new /obj/effect/decal/remains/human(get_turf(src))
+			del(src)
+
+		else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
+			user << "\blue You drill through the girder!"
+			new /obj/effect/decal/remains/human(get_turf(src))
+			del(src)
+
+	blob_act()
+		if(prob(40))
+			del(src)
+
+
+	ex_act(severity)
+		switch(severity)
+			if(1.0)
+				del(src)
+				return
+			if(2.0)
+				if (prob(30))
+					new /obj/effect/decal/remains/human(loc)
+					del(src)
+				return
+			if(3.0)
+				if (prob(5))
+					new /obj/effect/decal/remains/human(loc)
+					del(src)
+				return
+			else
+		return
+
 // LATTICE
 
 
@@ -176,14 +234,9 @@ obj/structure
 
 /obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)
 
-	if (istype(C, /obj/item/stack/tile))
-
-		C:build(get_turf(src))
-		C:use(1)
-		playsound(src.loc, 'Genhit.ogg', 50, 1)
-		if (C)
-			C.add_fingerprint(user)
-		del(src)
+	if (istype(C, /obj/item/stack/tile/plasteel))
+		var/turf/T = get_turf(src)
+		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
 		return
 	if (istype(C, /obj/item/weapon/weldingtool) && C:welding)
 		user << "\blue Slicing lattice joints ..."

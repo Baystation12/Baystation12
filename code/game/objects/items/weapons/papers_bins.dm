@@ -202,32 +202,69 @@ NOTEBOOK
 			user << "\blue You stamp the paper with your rubber stamp."
 
 		if(istype(P, /obj/item/weapon/stamperaser))
-			if ((!in_range(src, usr) && src.loc != user && !( istype(src.loc, /obj/item/weapon/clipboard) ) && src.loc.loc != user && user.equipped() != P))
-				return
-			src.info = src.infoold
-			src.infoold = null
-			for(var/i, i <= stamped.len, i++)
-				switch(stamped[i])
-					if(/obj/item/weapon/stamp/captain)
-						src.overlays -= "paper_stamped_cap"
-					if(/obj/item/weapon/stamp/hop)
-						src.overlays -= "paper_stamped_hop"
-					if(/obj/item/weapon/stamp/hos)
-						src.overlays -= "paper_stamped_hos"
-					if(/obj/item/weapon/stamp/ce)
-						src.overlays -= "paper_stamped_ce"
-					if(/obj/item/weapon/stamp/rd)
-						src.overlays -= "paper_stamped_rd"
-					if(/obj/item/weapon/stamp/cmo)
-						src.overlays -= "paper_stamped_cmo"
-					if(/obj/item/weapon/stamp/denied)
-						src.overlays -= "paper_stamped_denied"
-					if(/obj/item/weapon/stamp/clown)
-						src.overlays -= "paper_stamped_clown"
-					else
-						src.overlays -= "paper_stamped"
-			stamped = list()
-			user << "\blue You sucessfully remove those pesky stamps."
+			switch(alert("Would you like to erase all stamps, or forge one?","Choose.","Erase","Forge"))
+				if("Erase")
+					if ((!in_range(src, usr) && src.loc != user && !( istype(src.loc, /obj/item/weapon/clipboard) ) && src.loc.loc != user && user.equipped() != P))
+						return
+					src.info = src.infoold
+					src.infoold = null
+					src.overlays -= "paper_stamped_cap"
+					src.overlays -= "paper_stamped_hop"
+					src.overlays -= "paper_stamped_hos"
+					src.overlays -= "paper_stamped_ce"
+					src.overlays -= "paper_stamped_rd"
+					src.overlays -= "paper_stamped_cmo"
+					src.overlays -= "paper_stamped_denied"
+					src.overlays -= "paper_stamped_clown"
+					src.overlays -= "paper_stamped"
+					stamped = list()
+					user << "\blue You sucessfully remove those pesky stamps."
+					return
+				if("Forge")
+					if ((!in_range(src, usr) && src.loc != user && !( istype(src.loc, /obj/item/weapon/clipboard) ) && src.loc.loc != user && user.equipped() != P))
+						return
+					if(!src.infoold)
+						src.infoold = src.info
+					var/forgename = ""
+					var/stamptype = ""
+					var/pathtype = ""
+					var/list/stamps = list("Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer", "DENIED")
+					stamptype = input("Select a stamp type.", null) in stamps
+					if(stamptype == "Captain")
+						src.overlays += "paper_stamped_cap"
+						forgename = "captain's rubber stamp"
+						pathtype = "/obj/item/weapon/stamp/captain"
+					else if(stamptype == "Head of Personnel")
+						src.overlays += "paper_stamped_hop"
+						forgename = "head of personnel's rubber stamp"
+						pathtype = "/obj/item/weapon/stamp/hop"
+					else if(stamptype == "Head of Security")
+						src.overlays += "paper_stamped_hos"
+						forgename = "head of security's rubber stamp"
+						pathtype = "/obj/item/weapon/stamp/hos"
+					else if(stamptype == "Chief Engineer")
+						src.overlays += "paper_stamped_ce"
+						forgename = "chief engineers's rubber stamp"
+						pathtype = "/obj/item/weapon/stamp/ce"
+					else if(stamptype == "Research Director")
+						src.overlays += "paper_stamped_rd"
+						forgename = "research director's rubber stamp"
+						pathtype = "/obj/item/weapon/stamp/rd"
+					else if(stamptype == "Chief Medical Officer")
+						src.overlays += "paper_stamped_cmo"
+						forgename = "chief medical officer's rubber stamp"
+						pathtype = "/obj/item/weapon/stamp/cmo"
+					else if(stamptype == "DENIED")
+						src.overlays += "paper_stamped_denied"
+						forgename = "\improper DENIED rubber stamp"
+						pathtype = "/obj/item/weapon/stamp/denied"
+					src.info += text("<BR><i>This paper has been stamped with the [].</i><BR>", forgename)
+					if(!stamped)
+						stamped = new
+					stamped += pathtype
+
+					user << "\blue You forge a stamp on the paper."
+					return
 
 	/*
 	else
@@ -432,6 +469,7 @@ NOTEBOOK
 			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to wrap [target.name] ([target.ckey])</font>")
 			log_admin("ATTACK: [user] ([user.ckey]) wrapped up [target] ([target.ckey]) with [src].")
 			message_admins("ATTACK: [user] ([user.ckey]) wrapped up [target] ([target.ckey]) with [src].")
+			log_attack("<font color='red'>[user.name] ([user.ckey]) used the [src.name] to wrap [target.name] ([target.ckey])</font>")
 
 		else
 			user << "/blue You need more paper."
@@ -700,7 +738,7 @@ NOTEBOOK
 			user.drop_item()
 			P.loc = src
 		else
-			user << "\blue Not enough space!!!"
+			user << "\blue Not enough space!"
 	else
 		if (istype(P, /obj/item/weapon/pen))
 			if (!src.pen)
@@ -713,7 +751,7 @@ NOTEBOOK
 	return
 
 /obj/item/weapon/clipboard/proc/update()
-	src.icon_state = text("clipboard[][]", (locate(/obj/item/weapon/paper, src) ? "1" : "0"), (locate(/obj/item/weapon/pen, src) ? "1" : "0"))
+	src.icon_state = text("[src.name][][]", (locate(/obj/item/weapon/paper, src) ? "1" : "0"), (locate(/obj/item/weapon/pen, src) ? "1" : "0"))
 	return
 
 
@@ -762,161 +800,4 @@ NOTEBOOK
 	if ((src.loc == user && user.stat == 0))
 		src.name = text("photo[]", (n_name ? text("- '[]'", n_name) : null))
 	src.add_fingerprint(user)
-	return
-
-// notebook
-
-/obj/item/weapon/notebook/attack_self(mob/user as mob)
-	var/dat = "<B>Notebook</B><BR>"
-	if (src.pen)
-		dat += text("<A href='?src=\ref[];pen=1'>Remove Pen</A><BR><HR>", src)
-	for(var/obj/item/weapon/paper/P in src)
-		dat += text("<A href='?src=\ref[];read=\ref[]'>[]</A> <A href='?src=\ref[];write=\ref[]'>Write</A> <A href='?src=\ref[];remove=\ref[]'>Remove</A><BR>", src, P, P.name, src, P, src, P)
-	user << browse(dat, "window=notebook")
-	onclose(user, "notebook")
-	return
-
-/obj/item/weapon/notebook/Topic(href, href_list)
-	..()
-	if ((usr.stat || usr.restrained()))
-		return
-	if (usr.contents.Find(src))
-		usr.machine = src
-		if (href_list["pen"])
-			if (src.pen)
-				if ((usr.hand && !( usr.l_hand )))
-					usr.l_hand = src.pen
-					src.pen.loc = usr
-					src.pen.layer = 20
-					src.pen = null
-					usr.update_clothing()
-				else
-					if (!( usr.r_hand ))
-						usr.r_hand = src.pen
-						src.pen.loc = usr
-						src.pen.layer = 20
-						src.pen = null
-						usr.update_clothing()
-				if (src.pen)
-					src.pen.add_fingerprint(usr)
-				src.add_fingerprint(usr)
-		if (href_list["remove"])
-			var/obj/item/P = locate(href_list["remove"])
-			if ((P && P.loc == src))
-				if ((usr.hand && !( usr.l_hand )))
-					usr.l_hand = P
-					P.loc = usr
-					P.layer = 20
-					usr.update_clothing()
-				else
-					if (!( usr.r_hand ))
-						usr.r_hand = P
-						P.loc = usr
-						P.layer = 20
-						usr.update_clothing()
-				P.add_fingerprint(usr)
-				src.add_fingerprint(usr)
-		if (href_list["write"])
-			var/obj/item/P = locate(href_list["write"])
-			if ((P && P.loc == src))
-				if (istype(usr.r_hand, /obj/item/weapon/pen))
-					P.attackby(usr.r_hand, usr)
-				else
-					if (istype(usr.l_hand, /obj/item/weapon/pen))
-						P.attackby(usr.l_hand, usr)
-					else
-						if (istype(src.pen, /obj/item/weapon/pen))
-							P.attackby(src.pen, usr)
-			src.add_fingerprint(usr)
-		if (href_list["read"])
-			var/obj/item/weapon/paper/P = locate(href_list["read"])
-			if ((P && P.loc == src))
-				if (!( istype(usr, /mob/living/carbon/human) ))
-					usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", P.name, stars(P.info)), text("window=[]", P.name))
-					onclose(usr, "[P.name]")
-				else
-					usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", P.name, P.info), text("window=[]", P.name))
-					onclose(usr, "[P.name]")
-		if (ismob(src.loc))
-			var/mob/M = src.loc
-			if (M.machine == src)
-				spawn( 0 )
-					src.attack_self(M)
-					return
-	return
-
-/obj/item/weapon/notebook/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/item/weapon/notebook/attack_hand(mob/user as mob)
-
-	if ((locate(/obj/item/weapon/paper, src) && (!( user.equipped() ) && (user.l_hand == src || user.r_hand == src))))
-		var/obj/item/weapon/paper/P
-		for(P in src)
-			break
-		if (P)
-			if (user.hand)
-				user.l_hand = P
-			else
-				user.r_hand = P
-			P.loc = user
-			P.layer = 20
-			P.add_fingerprint(user)
-			user.update_clothing()
-		src.add_fingerprint(user)
-	else
-		return ..()
-	return
-
-/obj/item/weapon/notebook/attackby(obj/item/weapon/P as obj, mob/user as mob)
-	..()
-	if (istype(P, /obj/item/weapon/paper))
-		if (src.contents.len < 15)
-			user.drop_item()
-			P.loc = src
-		else
-			user << "\blue Not enough space!!!"
-	else
-		if (istype(P, /obj/item/weapon/pen))
-			if (!src.pen)
-				user.drop_item()
-				P.loc = src
-				src.pen = P
-		else
-			return
-	src.update()
-	return
-
-/obj/item/weapon/notebook/proc/update()
-	src.icon_state = text("notebook[][]", (locate(/obj/item/weapon/paper, src) ? "1" : "0"), (locate(/obj/item/weapon/pen, src) ? "1" : "0"))
-	return
-
-
-/obj/item/weapon/notebook/MouseDrop(obj/over_object as obj) //Quick notebook fix. -Agouri
-	if (ishuman(usr) || ismonkey(usr)) //Can monkeys even place items in the pocket slots? Leaving this in just in case~
-		var/mob/M = usr
-		if (!( istype(over_object, /obj/screen) ))
-			return ..()
-		if ((!( M.restrained() ) && !( M.stat ) /*&& M.pocket == src*/))
-			if (over_object.name == "r_hand")
-				if (!( M.r_hand ))
-					M.u_equip(src)
-					M.r_hand = src
-			else
-				if (over_object.name == "l_hand")
-					if (!( M.l_hand ))
-						M.u_equip(src)
-						M.l_hand = src
-			M.update_clothing()
-			src.add_fingerprint(usr)
-			return //
-
-/obj/item/weapon/notebook/New()
-
-	..()
-	for(var/i = 1, i <= 3, i++)
-		var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(src)
-		P.loc = src
-	src.pen = new /obj/item/weapon/pen(src)
-	src.update()
 	return

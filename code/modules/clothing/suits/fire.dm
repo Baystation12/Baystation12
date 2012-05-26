@@ -8,7 +8,7 @@
 	permeability_coefficient = 0.50
 	heat_transfer_coefficient = 0.01
 	protective_temperature = 10000
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS|SUITSPACE
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/extinguisher)
 	slowdown = 1.0
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
@@ -28,6 +28,17 @@
 	protective_temperature = 10000
 	slowdown = 1.5
 
+/obj/item/clothing/head/helmet/space/fire_helmet
+	name = "Fire Helmet"
+	desc = "A helmet designed to protect against fires in sealed areas, which often create extreme pressures."
+	flags = FPRINT | TABLEPASS | HEADSPACE | HEADCOVERSEYES | BLOCKHAIR
+	see_face = 0.0
+	permeability_coefficient = 0.01
+	heat_transfer_coefficient = 0.01
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES
+	icon_state = "hazmat_fire"
+	item_state = "hazhat_fire"
 
 
 /obj/item/clothing/head/radiation

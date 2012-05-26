@@ -249,7 +249,7 @@
 			var/toxin_amount = reagents.get_reagent_amount("nutriment") * 3
 			reagents.add_reagent("toxin",toxin_amount)
 			processing_objects.Remove(src)
-*/
+
 /obj/item/weapon/reagent_containers/food/snacks/appendix //yes, this is the same as meat. I might do something different in future
 	name = "appendix"
 	desc = "An appendix which looks perfectly healthy."
@@ -267,7 +267,7 @@
 		..()
 		reagents.add_reagent("nutriment", 1)
 		src.bitesize = 1
-
+*/
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/meat/human
 	name = "-meat"
 	var/subjectname = ""
@@ -415,6 +415,19 @@
 	name = "brainburger"
 	desc = "A strange looking burger. It looks almost sentient."
 	icon_state = "brainburger"
+	New()
+		..()
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/ghostburger
+	name = "Ghost Burger"
+	desc = "Spooky! It doesn't look very filling."
+	icon_state = "ghostburger"
+	New()
+		..()
+		reagents.add_reagent("nutriment", 2)
+		bitesize = 2
+
 
 /obj/item/weapon/reagent_containers/food/snacks/human
 	var/hname = ""
@@ -483,7 +496,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/burger/mime
 	name = "Mime Burger"
-	desc = "It's taste defies language."
+	desc = "Its taste defies language."
 	icon_state = "mimeburger"
 
 /obj/item/weapon/reagent_containers/food/snacks/omelette
@@ -616,6 +629,7 @@
 			name = "exceptional plump pie"
 			desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump pie!"
 			reagents.add_reagent("nutriment", 15)
+			reagents.add_reagent("tricordrazine", 5)
 			bitesize = 2
 		else
 			reagents.add_reagent("nutriment", 10)
@@ -827,12 +841,13 @@
 		if(!reagents.total_volume)
 			var/mob/M = usr
 			var/obj/item/weapon/paper/paper = locate() in src
-			M.visible_message( \
-				"\blue [M] takes a piece of paper from the cookie!", \
-				"\blue You take a piece of paper from the cookie! Read it!" \
-			)
-			M.put_in_hand(paper)
-			paper.add_fingerprint(M)
+			if(paper)
+				M.visible_message( \
+					"\blue [M] takes a piece of paper from the cookie!", \
+					"\blue You take a piece of paper from the cookie! Read it!" \
+				)
+				M.put_in_hand(paper)
+				paper.add_fingerprint(M)
 
 /obj/item/weapon/reagent_containers/food/snacks/badrecipe
 	name = "Burned mess"
@@ -841,7 +856,7 @@
 	New()
 		..()
 		reagents.add_reagent("toxin", 1)
-		reagents.add_reagent("carbon", 1)
+		reagents.add_reagent("carbon", 3)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/meatsteak
@@ -892,17 +907,17 @@
 		reagents.add_reagent("amatoxin", 6)
 		reagents.add_reagent("psilocybin", 3)
 		bitesize = 3
-/*
+
 /obj/item/weapon/reagent_containers/food/snacks/poppypretzel
 	name = "Poppy pretzel"
-	desc = "" //TODO
+	desc = "It's all twisted up!"
 	icon_state = "poppypretzel"
 	bitesize = 2
 	New()
 		..()
 		reagents.add_reagent("nutriment", 5)
 		bitesize = 2
-*/
+
 
 /obj/item/weapon/reagent_containers/food/snacks/meatballsoup
 	name = "Meatball soup"
@@ -933,7 +948,7 @@
 		..()
 		reagents.add_reagent("nutriment", 2)
 		reagents.add_reagent("blood", 15)
-		reagents.add_reagent("water", 10)
+		reagents.add_reagent("water", 5)
 		bitesize = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/clownstears
@@ -942,7 +957,7 @@
 	icon_state = "clownstears"
 	New()
 		..()
-		reagents.add_reagent("nutriment", 1)
+		reagents.add_reagent("nutriment", 4)
 		reagents.add_reagent("banana", 5)
 		reagents.add_reagent("water", 10)
 		bitesize = 5
@@ -955,7 +970,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 10)
-		reagents.add_reagent("water", 10)
+		reagents.add_reagent("water", 5)
 		bitesize = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/nettlesoup
@@ -966,8 +981,8 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 10)
-		reagents.add_reagent("water", 7)
-		reagents.add_reagent("tricordrazine", 3)
+		reagents.add_reagent("water", 5)
+		reagents.add_reagent("tricordrazine", 5)
 		bitesize = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/mysterysoup
@@ -1024,7 +1039,7 @@
 		..()
 		reagents.add_reagent("water", 10)
 		bitesize = 5
-		if(prob(5))
+		if(prob(25))
 			src.desc = "A wish come true!"
 			reagents.add_reagent("nutriment", 10)
 
@@ -1191,6 +1206,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 12)
+		reagents.add_reagent("carbon", 2)
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/grilledcheese
@@ -1234,7 +1250,7 @@
 		reagents.add_reagent("nutriment", 20)
 		reagents.add_reagent("tomatojuice", 5)
 		reagents.add_reagent("imidazoline", 5)
-		reagents.add_reagent("water", 10)
+		reagents.add_reagent("water", 5)
 		bitesize = 10
 
 /obj/item/weapon/reagent_containers/food/snacks/metroidtoast
@@ -1266,7 +1282,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 12)
-		reagents.add_reagent("water", 20)
+		reagents.add_reagent("water", 5)
 		bitesize = 4
 
 /obj/item/weapon/reagent_containers/food/snacks/stewedsoymeat
@@ -1379,6 +1395,7 @@
 	name = "Metroid Sandwich"
 	desc = "A sandwich is green stuff."
 	icon_state = "metroidsandwich"
+	trash = "plate"
 	New()
 		..()
 		reagents.add_reagent("nutriment", 2)
@@ -1402,6 +1419,65 @@
 		..()
 		reagents.add_reagent("nutriment", 28)
 		bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/mushroomsoup
+	name = "chantrelle soup"
+	desc = "A delicious and hearty mushroom soup."
+	icon_state = "mushroomsoup"
+	trash = "snack_bowl"
+	New()
+		..()
+		reagents.add_reagent("nutriment", 10)
+		bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit
+	name = "plump helmet biscuit"
+	desc = "This is a finely-prepared plump helmet biscuit. The ingredients are exceptionally minced plump helmet, and well-minced dwarven wheat flour."
+	icon_state = "phelmbiscuit"
+	New()
+		..()
+		if(prob(10))
+			name = "exceptional plump helmet biscuit"
+			desc = "Microwave is taken by a fey mood! It has cooked an exceptional plump helmet biscuit!"
+			reagents.add_reagent("nutriment", 15)
+			reagents.add_reagent("tricordrazine", 5)
+			bitesize = 2
+		else
+			reagents.add_reagent("nutriment", 5)
+			bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/chawanmushi
+	name = "chawanmushi"
+	desc = "A legendary egg custard that makes friends out of enemies. Probably too hot for a cat to eat."
+	icon_state = "chawanmushi"
+	trash = "snack_bowl"
+	New()
+		..()
+		reagents.add_reagent("nutriment", 5)
+		bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/beetsoup
+	name = "beet soup"
+	desc = "Wait, how do you spell it, again..?"
+	icon_state = "beetsoup"
+	trash = "snack_bowl"
+	New()
+		..()
+		switch(rand(1,6))
+			if(1)
+				name = "borsch"
+			if(2)
+				name = "bortsch"
+			if(3)
+				name = "borstch"
+			if(4)
+				name = "borsh"
+			if(5)
+				name = "borshch"
+			if(6)
+				name = "borscht"
+		reagents.add_reagent("nutriment", 8)
+		bitesize = 2
 
 /////////////////////////////////////////////////Sliceable////////////////////////////////////////
 // All the food items that can be sliced into smaller bits like Meatbread and Cheesewheels
@@ -1706,6 +1782,21 @@
 	icon_state = "applecakeslice"
 	bitesize = 2
 
+/obj/item/weapon/reagent_containers/food/snacks/sliceable/pumpkinpie
+	name = "Pumpkin Pie"
+	desc = "A delicious treat for the autumn months."
+	icon_state = "pumpkinpie"
+	slice_path = /obj/item/weapon/reagent_containers/food/snacks/pumpkinpieslice
+	slices_num = 5
+	New()
+		..()
+		reagents.add_reagent("nutriment", 29)
+
+/obj/item/weapon/reagent_containers/food/snacks/pumpkinpieslice
+	name = "Pumpkin Pie slice"
+	desc = "A slice of pumpkin pie, with whipped cream on top. Perfection."
+	icon_state = "pumpkinpieslice"
+	bitesize = 2
 
 
 
@@ -1987,6 +2078,8 @@
 		new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(spawnloc)
 		user << "You cut the potato."
 		del(src)
+	else
+		..()
 
 /obj/item/weapon/reagent_containers/food/snacks/rawsticks
 	name = "raw potato sticks"

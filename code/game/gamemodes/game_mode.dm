@@ -22,7 +22,7 @@
 		list/datum/mind/modePlayer = new
 		list/restricted_jobs = list()	// Jobs it doesn't make sense to be.  I.E chaplain or AI cultist
 		list/protected_jobs = list()	// Jobs that can't be tratiors because
-		required_players = 0
+		required_players = 1
 		required_enemies = 0
 		recommended_enemies = 0
 		uplink_welcome
@@ -33,7 +33,7 @@
 /obj/item/weapon/gun/energy/crossbow:5:Energy Crossbow;
 /obj/item/weapon/melee/energy/sword:4:Energy Sword;
 /obj/item/weapon/storage/box/syndicate:10:Syndicate Bundle;
-/obj/item/weapon/storage/emp_kit:4:5 EMP Grenades;
+/obj/item/weapon/storage/emp_kit:3:5 EMP Grenades;
 Whitespace:Seperator;
 Stealthy and Inconspicuous Weapons;
 /obj/item/weapon/pen/sleepypen:3:Sleepy Pen;
@@ -45,9 +45,8 @@ Stealth and Camouflage Items;
 /obj/item/clothing/shoes/syndigaloshes:2:No-Slip Syndicate Shoes;
 /obj/item/weapon/card/id/syndicate:3:Agent ID card;
 /obj/item/clothing/mask/gas/voice:4:Voice Changer;
-/obj/item/clothing/glasses/thermal:4:Thermal Imaging Glasses;
 /obj/item/device/chameleon:4:Chameleon-Projector;
-/obj/item/weapon/stamperaser:1:Stamp Remover;
+/obj/item/weapon/stamperaser:1:Stamp Remover and Forger;
 Whitespace:Seperator;
 Devices and Tools;
 /obj/item/weapon/card/emag:4:Cryptographic Sequencer (Limited uses, almost full access);
@@ -56,12 +55,13 @@ Devices and Tools;
 /obj/item/device/encryptionkey/traitor:3:Traitor Radio Key;
 /obj/item/device/encryptionkey/binary:3:Binary Translator Key;
 /obj/item/weapon/storage/syndie_kit/space:3:Space Suit;
+/obj/item/clothing/glasses/thermal:3:Thermal Imaging Glasses;
 /obj/item/weapon/aiModule/syndicate:7:Hacked AI Upload Module;
 /obj/item/weapon/plastique:2:C-4 (Destroys walls);
 /obj/item/weapon/syndie/c4explosive:4:Low Power Explosive Charge, with Detonator;
 /obj/item/device/powersink:5:Powersink (DANGER!);
-/obj/machinery/singularity_beacon/syndicate:7:Singularity Beacon (DANGER!);
-/obj/item/weapon/circuitboard/teleporter:20:Teleporter Circuit Board;
+/obj/item/device/radio/beacon/syndicate:7:Singularity Beacon (DANGER!);
+/obj/item/weapon/circuitboard/teleporter:10:Teleporter Circuit Board;
 Whitespace:Seperator;
 Implants;
 /obj/item/weapon/storage/syndie_kit/imp_freedom:3:Freedom Implant;
@@ -70,8 +70,7 @@ Implants;
 /obj/item/weapon/storage/syndie_kit/imp_uplink:10:Uplink Implant (Contains 5 Telecrystals);
 Whitespace:Seperator;
 Badassery;
-/obj/item/toy/syndicateballoon:10:For showing that You Are The BOSS (Useless Balloon);
-Whitespace:Seperator;"}
+/obj/item/toy/syndicateballoon:10:For showing that You Are The BOSS (Useless Balloon);"}
 
 // Items removed from above:
 /*
@@ -232,11 +231,12 @@ Whitespace:Seperator;"}
 
 			comm.messagetitle.Add("Cent. Com. Status Summary")
 			comm.messagetext.Add(intercepttext)
+	world << sound('commandreport.ogg')
 
-	command_alert("Summary downloaded and printed out at all communications consoles.", "Enemy communication intercept. Security Level Elevated.")
+/*	command_alert("Summary downloaded and printed out at all communications consoles.", "Enemy communication intercept. Security Level Elevated.")
 	world << sound('intercept.ogg')
 	if(security_level < SEC_LEVEL_BLUE)
-		set_security_level(SEC_LEVEL_BLUE)
+		set_security_level(SEC_LEVEL_BLUE)*/
 
 
 /datum/game_mode/proc/get_players_for_role(var/role, override_jobbans=1)
@@ -252,6 +252,7 @@ Whitespace:Seperator;"}
 		if(BE_WIZARD)		roletext="wizard"
 		if(BE_REV)			roletext="revolutionary"
 		if(BE_CULTIST)		roletext="cultist"
+		if(BE_MEME)			roletext="meme"
 
 
 	for(var/mob/new_player/player in world)

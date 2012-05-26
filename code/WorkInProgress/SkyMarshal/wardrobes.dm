@@ -172,7 +172,7 @@
 		new /obj/item/weapon/storage/toolbox/mechanical(src)
 		new /obj/item/clothing/suit/storage/labcoat(src)
 		new /obj/item/clothing/gloves/black(src)
-		new /obj/item/device/radio/headset/headset_eng(src)
+		new /obj/item/device/radio/headset/headset_rob(src)
 		new /obj/item/clothing/shoes/black(src)
 		new /obj/item/clothing/under/rank/roboticist(src)
 
@@ -249,7 +249,7 @@
 		new /obj/item/device/flashlight/pen(src)
 		new /obj/item/clothing/gloves/latex(src)
 		new /obj/item/clothing/suit/bio_suit/cmo(src)
-		new /obj/item/clothing/head/bio_hood/general(src)
+		new /obj/item/clothing/head/bio_hood/cmo(src)
 		new /obj/item/clothing/suit/storage/labcoat/cmo(src)
 		new /obj/item/clothing/suit/storage/labcoat/cmoalt(src)
 		new /obj/item/clothing/shoes/brown(src)
@@ -420,9 +420,9 @@
 		new /obj/item/weapon/storage/box(BPK)
 		new /obj/item/weapon/fcardholder(src)
 		new /obj/item/weapon/clipboard(src)
-		new /obj/item/weapon/notebook(src)
+		new /obj/item/weapon/clipboard/notebook(src)
 		new /obj/item/device/detective_scanner(src)
-		new /obj/item/policetaperoll(src)
+		new /obj/item/taperoll/police(src)
 		new /obj/item/weapon/storage/box/evidence(src)
 		new /obj/item/device/pda/detective(src)
 		new /obj/item/clothing/suit/det_suit/armor(src)
@@ -432,6 +432,7 @@
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/clothing/shoes/brown(src)
 		new /obj/item/clothing/under/det(src)
+		new /obj/item/weapon/camera_film(src)
 
 /obj/item/wardrobe/officer
 	name = "\improper Security Officer Wardrobe"
@@ -445,7 +446,7 @@
 		new /obj/item/weapon/pepperspray(src)
 		new /obj/item/device/flash(src)
 		new /obj/item/weapon/melee/baton(src)
-		new /obj/item/policetaperoll(src)
+		new /obj/item/taperoll/police(src)
 		new /obj/item/weapon/flashbang(src)
 		new /obj/item/device/pda/security(src)
 		new /obj/item/clothing/suit/armor/vest(src)
@@ -538,7 +539,7 @@
 		new /obj/item/device/pda/quartermaster(src)
 		new /obj/item/device/radio/headset/headset_cargo(src)
 		new /obj/item/clothing/shoes/black(src)
-		new /obj/item/clothing/under/rank/cargo(src)
+		new /obj/item/clothing/under/rank/cargotech(src)
 
 /obj/item/wardrobe/mining
 	name = "\improper Shaft Miner Wardrobe"

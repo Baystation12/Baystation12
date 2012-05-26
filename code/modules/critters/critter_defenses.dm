@@ -13,7 +13,7 @@ Contains the procs that control attacking critters
 			if("fire") damage = W.force * firevuln
 			if("brute") damage = W.force * brutevuln
 		TakeDamage(damage)
-		if(src.defensive)	Target_Attacker(user)
+		if(src.defensive && alive)	Target_Attacker(user)
 		return
 
 
@@ -22,7 +22,12 @@ Contains the procs that control attacking critters
 		if (user.a_intent == "hurt")
 			TakeDamage(rand(1,2) * brutevuln)
 
-			if(istype(user, /mob/living/carbon/human))
+			if(istajaran(user))
+				for(var/mob/O in viewers(src, null))
+					O.show_message("\red <B>[user] has slashed at [src]!</B>", 1)
+				playsound(src.loc, 'slice.ogg', 25, 1, -1)
+
+			else if(istype(user, /mob/living/carbon/human))
 				for(var/mob/O in viewers(src, null))
 					O.show_message("\red <B>[user] has punched [src]!</B>", 1)
 				playsound(src.loc, pick('punch1.ogg','punch2.ogg','punch3.ogg','punch4.ogg'), 100, 1)
@@ -32,10 +37,7 @@ Contains the procs that control attacking critters
 					O.show_message("\red <B>[user] has slashed at [src]!</B>", 1)
 				playsound(src.loc, 'slice.ogg', 25, 1, -1)
 
-			else if(user.type == /mob/living/carbon/human/tajaran)
-				for(var/mob/O in viewers(src, null))
-					O.show_message("\red <B>[user] has slashed at [src]!</B>", 1)
-				playsound(src.loc, 'slice.ogg', 25, 1, -1)
+
 
 			else
 				for(var/mob/O in viewers(src, null))
@@ -51,9 +53,10 @@ Contains the procs that control attacking critters
 		if(!target)	return
 		src.target = target
 		src.oldtarget_name = target:name
-		if(task != "chasing" || task != "attacking")
-			for(var/mob/O in viewers(src, null))
-				O.show_message("\red <b>[src]</b> [src.angertext] at [target:name]!", 1)
+		if(task != "chasing" && task != "attacking")
+			if(angertext && angertext != "")
+				for(var/mob/O in viewers(src, null))
+					O.show_message("\red <b>[src]</b> [src.angertext] at [target:name]!", 1)
 			src.task = "chasing"
 		return
 
@@ -75,7 +78,7 @@ Contains the procs that control attacking critters
 		src.anchored = 0
 		src.density = 0
 		walk_to(src,0)
-		src.visible_message("<b>[src]</b> dies!")
+		src.visible_message("<b>[src]</b> [deathtext]")
 
 
 	Harvest(var/obj/item/weapon/W, var/mob/living/user)
@@ -119,4 +122,14 @@ Contains the procs that control attacking critters
 	blob_act()
 		if(prob(25))
 			src.Die()
+		return
+
+	attack_animal(mob/living/simple_animal/M as mob)
+		if(M.melee_damage_upper == 0)
+			M.emote("[M.friendly] [src]")
+		else
+			for(var/mob/O in viewers(src, null))
+				O.show_message("\red <B>[M]</B> [M.attacktext] [src]!", 1)
+			var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
+			TakeDamage(damage)
 		return

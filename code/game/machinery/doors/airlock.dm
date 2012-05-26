@@ -70,6 +70,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 	var
 		aiControlDisabled = 0 //If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
+		hackProof = 0 // if 1, this door can't be hacked by the AI
 		synDoorHacked = 0 // Has it been hacked? bool 1 = yes / 0 = no
 		synHacking = 0 // Is hack in process y/n?
 		secondsMainPowerLost = 0 //The number of seconds until power is restored.
@@ -195,6 +196,21 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 			glass = 1
 
 
+		glass_research
+			name = "Research Airlock"
+			icon = 'doorsciglass.dmi'
+			opacity = 0
+			doortype = 20
+			glass = 1
+
+
+		glass_mining
+			name = "Maintenance Hatch"
+			icon = 'doorminingglass.dmi'
+			opacity = 0
+			doortype = 22
+			glass = 1
+
 	centcom
 		name = "Airlock"
 		icon = 'Doorele.dmi'
@@ -238,32 +254,55 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 		doortype = 13
 
 
+	mining
+		name = "Mining Airlock"
+		icon = 'Doormining.dmi'
+		doortype = 18
+
+
+	atmos
+		name = "Atmospherics Airlock"
+		icon = 'Dooratmo.dmi'
+		doortype = 19
+
+
+	research
+		name = "Research Airlock"
+		icon = 'doorsci.dmi'
+		doortype = 21
+
 	New()
 		..()
 		if (src.closeOtherId != null)
 			spawn (5)
-				for (var/obj/machinery/door/airlock/A in machines)
+				for (var/obj/machinery/door/airlock/A in world)
 					if (A.closeOtherId == src.closeOtherId && A != src)
 						src.closeOther = A
 						break
 
 
 	open()
-		if (src.welded || src.locked || (!src.arePowerSystemsOn()) || (stat & NOPOWER) || src.isWireCut(AIRLOCK_WIRE_OPEN_DOOR))
+		if(src.welded || src.locked || (!src.arePowerSystemsOn()) || (stat & NOPOWER) || src.isWireCut(AIRLOCK_WIRE_OPEN_DOOR) || src.operating)
 			return 0
 		use_power(50)
-		playsound(src.loc, 'airlock.ogg', 30, 1)
+		if(istype(src, /obj/machinery/door/airlock/glass))
+			playsound(src.loc, 'windowdoor.ogg', 100, 1)
+		else
+			playsound(src.loc, 'airlock.ogg', 30, 1)
 		if (src.closeOther != null && istype(src.closeOther, /obj/machinery/door/airlock/) && !src.closeOther.density)
 			src.closeOther.close()
 		return ..()
 
 
 	close()
-		if (src.welded || src.locked || (!src.arePowerSystemsOn()) || (stat & NOPOWER) || src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
+		if(src.welded || src.locked || (!src.arePowerSystemsOn()) || (stat & NOPOWER) || src.isWireCut(AIRLOCK_WIRE_OPEN_DOOR) || src.operating)
 			return
 		..()
 		use_power(50)
-		playsound(src.loc, 'airlock.ogg', 30, 1)
+		if(istype(src, /obj/machinery/door/airlock/glass))
+			playsound(src.loc, 'windowdoor.ogg', 100, 1)
+		else
+			playsound(src.loc, 'airlock.ogg', 30, 1)
 		var/obj/structure/window/killthis = (locate(/obj/structure/window) in get_turf(src))
 		if(killthis)
 			killthis.ex_act(2)//Smashin windows
@@ -334,6 +373,8 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 		//world << text("airlock attackby src [] obj [] mob []", src, C, user)
 		if(istype(C, /obj/item/device/detective_scanner))
 			return
+		if(istype(C, /obj/item/taperoll/police))
+			return
 		if (!istype(usr, /mob/living/silicon))
 			if (src.isElectrified())
 				if(src.shock(user, 75))
@@ -365,15 +406,15 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 		else if (istype(C, /obj/item/weapon/pai_cable))	// -- TLE
 			var/obj/item/weapon/pai_cable/cable = C
 			cable.plugin(src, user)
-		else if (istype(C, /obj/item/weapon/crowbar) || istype(C, /obj/item/weapon/fireaxe) )
+		else if (istype(C, /obj/item/weapon/crowbar) || istype(C, /obj/item/weapon/twohanded/fireaxe) )
 			var/beingcrowbarred = null
 			if(istype(C, /obj/item/weapon/crowbar) )
 				beingcrowbarred = 1 //derp, Agouri
 			else
 				beingcrowbarred = 0
-			if ( ((src.density) && ( src.welded ) && !( src.operating ) && src.p_open && (!src.arePowerSystemsOn() || (stat & NOPOWER)) && !src.locked) && beingcrowbarred == 1 )
+			if( beingcrowbarred && (density && welded && !operating && src.p_open && (!src.arePowerSystemsOn() || stat & NOPOWER) && !src.locked) )
 				playsound(src.loc, 'Crowbar.ogg', 100, 1)
-				user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics into the airlock assembly.")
+				user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 				if(do_after(user,40))
 					user << "\blue You removed the airlock electronics!"
 					switch(src.doortype)
@@ -385,6 +426,15 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 						if(5) new/obj/structure/door_assembly/door_assembly_mai( src.loc )
 						if(6) new/obj/structure/door_assembly/door_assembly_ext( src.loc )
 						if(7) new/obj/structure/door_assembly/door_assembly_g( src.loc )
+						if(14) new/obj/structure/door_assembly/door_assembly_com/glass( src.loc )
+						if(15) new/obj/structure/door_assembly/door_assembly_eng/glass( src.loc )	//issue 301 -mysthic
+						if(16) new/obj/structure/door_assembly/door_assembly_sec/glass( src.loc )
+						if(17) new/obj/structure/door_assembly/door_assembly_med/glass( src.loc )
+						if(18) new/obj/structure/door_assembly/door_assembly_min( src.loc )
+						if(19) new/obj/structure/door_assembly/door_assembly_atmo( src.loc )
+						if(20) new/obj/structure/door_assembly/door_assembly_research( src.loc )
+						if(21) new/obj/structure/door_assembly/door_assembly_research( src.loc )
+						if(22) new/obj/structure/door_assembly/door_assembly_min/glass( src.loc )
 					var/obj/item/weapon/airlock_electronics/ae
 					if (!electronics)
 						ae = new/obj/item/weapon/airlock_electronics( src.loc )
@@ -403,8 +453,8 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 			if ((src.density) && (!( src.welded ) && !( src.operating ) && ((!src.arePowerSystemsOn()) || (stat & NOPOWER)) && !( src.locked )))
 
 				if(beingcrowbarred == 0) //being fireaxe'd
-					var/obj/item/weapon/fireaxe/F = C
-					if(F.wielded == 1)
+					var/obj/item/weapon/twohanded/fireaxe/F = C
+					if(F:wielded)
 						spawn( 0 )
 							src.operating = 1
 							animate("opening")
@@ -440,8 +490,8 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 			else
 				if ((!src.density) && (!( src.welded ) && !( src.operating ) && !( src.locked )))
 					if(beingcrowbarred == 0)
-						var/obj/item/weapon/fireaxe/F = C
-						if(F.wielded == 1)
+						var/obj/item/weapon/twohanded/fireaxe/F = C
+						if(F:wielded)
 							spawn( 0 )
 								src.operating = 1
 								animate("closing")
@@ -791,7 +841,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 
 		canAIHack()
-			return ((src.aiControlDisabled==1) && (!src.isAllPowerCut()));
+			return ((src.aiControlDisabled==1) && (!hackProof) && (!src.isAllPowerCut()));
 
 
 		canSynControl()
@@ -1044,8 +1094,9 @@ About the new airlock wires panel:
 
 
 
-/obj/machinery/door/airlock/Topic(href, href_list)
-	..()
+/obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
+	if(!nowindow)
+		..()
 	if (usr.stat || usr.restrained() )
 		return
 	if (href_list["close"])
@@ -1253,7 +1304,8 @@ About the new airlock wires panel:
 						src.holdopen = 1
 
 		src.update_icon()
-		src.updateUsrDialog()
+		if(!nowindow)
+			src.updateUsrDialog()
 		if((istype(usr.equipped(), /obj/item/device/hacktool)))
 			return attack_ai(usr, usr.equipped())
 		else if(issilicon(usr))
@@ -1541,7 +1593,7 @@ About the new airlock wires panel:
 								src.removal_step = 1
 						return
 					else if (istype(C, /obj/item/weapon/wrench))
-						user << "You start to unfasted the armor from the circuits..."
+						user << "You start to unfasten the armor from the circuits..."
 						if(do_after(user,40))
 							user << "Circuits exposed."
 							src.removal_step = 3
@@ -1560,7 +1612,7 @@ About the new airlock wires panel:
 		name = "CentCom Secure Airlock"
 		desc = "I hope you have insulated gloves...."
 		icon = 'Doorhatchele.dmi'
-		var/list/mob/morons
+		var/list/mob/morons = list()
 
 		pulse(var/wireColor)
 			if(prob(25))

@@ -11,11 +11,14 @@
 		updateicon()
 
 /obj/item/weapon/cell/proc/updateicon()
-
-	if(maxcharge <= 2500)
+	/*if(maxcharge < 10000)
 		icon_state = "cell"
+	if(maxcharge >= 10000 && maxcharge < 20000)
+		icon_state = "hcell"
+	if(maxcharge >= 20000 && maxcharge < 30000)
+		icon_state = "scell"
 	else
-		icon_state = "hpcell"
+		icon_state = "hpcell"*/
 
 	overlays = null
 
@@ -27,7 +30,9 @@
 		overlays += image('power.dmi', "cell-o1")
 
 /obj/item/weapon/cell/proc/percent()		// return % charge of cell
-	return 100.0*charge/maxcharge
+	if(maxcharge)
+		return 100.0*charge/maxcharge
+	return 0
 
 // use power from a cell
 /obj/item/weapon/cell/proc/use(var/amount)
@@ -63,9 +68,9 @@
 		if(maxcharge <= 2500)
 			usr << "[desc]\nThe manufacturer's label states this cell has a power rating of [maxcharge], and that you should not swallow it.\nThe charge meter reads [round(src.percent() )]%."
 		else
-			usr << "This power cell has an exciting chrome finish, as it is an uber-capacity cell type! It has a power rating of [maxcharge]!!!\nThe charge meter reads [round(src.percent() )]%."
+			usr << "This power cell has an exciting chrome finish, as it is an uber-capacity cell type! It has a power rating of [maxcharge]!\nThe charge meter reads [round(src.percent() )]%."
 	if(crit_fail)
-		usr << "\red This power cell seems to be faulty"
+		usr << "\red This power cell seems to be faulty."
 
 /obj/item/weapon/cell/attack_self(mob/user as mob)
 	src.add_fingerprint(user)
@@ -108,6 +113,10 @@
 		user << "You inject the solution into the power cell."
 
 		if(S.reagents.has_reagent("plasma", 5))
+
+			log_attack("<font color='red'>[user.name] ([user.ckey]) injected a power cell with plasma.</font>")
+			log_admin("ATTACK: [user] ([user.ckey]) injected a power cell with plasma.")
+			message_admins("ATTACK: [user] ([user.ckey]) injected a power cell with plasma.")
 
 			rigged = 1
 

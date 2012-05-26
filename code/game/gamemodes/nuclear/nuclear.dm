@@ -17,7 +17,7 @@
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
 
 	var/nukes_left = 1 // Call 3714-PRAY right now and order more nukes! Limited offer!
-	var/derp = 0 //Used for tracking if the syndies actually haul the nuke to the station
+	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
 	var/herp = 0 //Used for tracking if the syndies got the shuttle off of the z-level
 	//It is so hillarious so I wont rename those two variables --rastaf0
 
@@ -132,9 +132,9 @@
 		if(!leader_selected)
 			prepare_syndicate_leader(synd_mind, nuke_code)
 			leader_selected = 1
-		//else
-			//synd_mind.current.real_name = "[syndicate_name()] Operative #[agent_number]"
-			//agent_number++
+/*		else
+			synd_mind.current.real_name = "[syndicate_name()] Operative #[agent_number]"
+			agent_number++*/
 
 		equip_syndicate(synd_mind.current,freq)
 		update_synd_icons_added(synd_mind)
@@ -166,10 +166,10 @@
 
 
 /datum/game_mode/proc/prepare_syndicate_leader(var/datum/mind/synd_mind, var/nuke_code)
-	// var/leader_title = pick("Czar", "Boss", "Commander", "Chief", "Kingpin", "Director", "Overlord")
-	// spawn(1)	// don't change names anymore!
-	//	NukeNameAssign(nukelastname(synd_mind.current),syndicates) //allows time for the rest of the syndies to be chosen
-	//synd_mind.current.real_name = "[syndicate_name()] [leader_title]"
+/*	var/leader_title = pick("Czar", "Boss", "Commander", "Chief", "Kingpin", "Director", "Overlord")
+	spawn(1)
+		NukeNameAssign(nukelastname(synd_mind.current),syndicates) //allows time for the rest of the syndies to be chosen
+	synd_mind.current.real_name = "[syndicate_name()] [leader_title]"*/
 	if (nuke_code)
 		synd_mind.store_memory("<B>Syndicate Nuclear Bomb Code</B>: [nuke_code]", 0, 0)
 		synd_mind.current << "The nuclear authorization code is: <B>[nuke_code]</B>"
@@ -222,6 +222,7 @@
 /datum/game_mode/proc/equip_syndicate(mob/living/carbon/human/synd_mob,radio_freq)
 	var/obj/item/device/radio/R = new /obj/item/device/radio/headset/nuclear(synd_mob)
 	synd_mob.equip_if_possible(R, synd_mob.slot_ears)
+
 	synd_mob.equip_if_possible(new /obj/item/clothing/under/syndicate(synd_mob), synd_mob.slot_w_uniform)
 	synd_mob.equip_if_possible(new /obj/item/clothing/shoes/black(synd_mob), synd_mob.slot_shoes)
 	synd_mob.equip_if_possible(new /obj/item/clothing/suit/armor/vest(synd_mob), synd_mob.slot_wear_suit)
@@ -233,10 +234,12 @@
 	synd_mob.equip_if_possible(new /obj/item/ammo_magazine/a12mm(synd_mob), synd_mob.slot_in_backpack)
 	synd_mob.equip_if_possible(new /obj/item/weapon/reagent_containers/pill/cyanide(synd_mob), synd_mob.slot_in_backpack)
 	synd_mob.equip_if_possible(new /obj/item/weapon/gun/projectile/automatic/c20r(synd_mob), synd_mob.slot_belt)
-	var/obj/item/weapon/implant/dexplosive/E = new/obj/item/weapon/implant/dexplosive(synd_mob)
+	synd_mob.equip_if_possible(new /obj/item/weapon/storage/box/engineer(synd_mob.back), synd_mob.slot_in_backpack)
+	var/datum/organ/external/O = pick(synd_mob.organs)
+	var/obj/item/weapon/implant/dexplosive/E = new/obj/item/weapon/implant/dexplosive(O)
+	O.implant += E
 	E.imp_in = synd_mob
 	E.implanted = 1
-
 	return 1
 
 
@@ -273,7 +276,7 @@
 
 	if      (!disk_rescued &&  station_was_nuked &&          !herp)
 		feedback_set_details("round_end_result","win - syndicate nuke")
-		world << "<FONT size = 3><B>Syndicate Victory!</B></FONT>"
+		world << "<FONT size = 3><B>Syndicate Major Victory!</B></FONT>"
 		world << "<B>[syndicate_name()] operatives have destroyed [station_name()]!</B>"
 
 	else if (!disk_rescued &&  station_was_nuked &&           herp)
@@ -281,29 +284,34 @@
 		world << "<FONT size = 3><B>Total Annihilation</B></FONT>"
 		world << "<B>[syndicate_name()] operatives destroyed [station_name()] but did not leave the area in time and got caught in the explosion.</B> Next time, don't lose the disk!"
 
-	else if (!disk_rescued && !station_was_nuked &&  derp && !herp)
+	else if (!disk_rescued && !station_was_nuked &&  nuke_off_station && !herp)
 		feedback_set_details("round_end_result","halfwin - blew wrong station")
-		world << "<FONT size = 3><B>Neutral Victory</B></FONT>"
+		world << "<FONT size = 3><B>Crew Minor Victory</B></FONT>"
 		world << "<B>[syndicate_name()] operatives secured the authentication disk but blew up something that wasn't [station_name()].</B> Next time, don't lose the disk!"
 
-	else if (!disk_rescued && !station_was_nuked &&  derp &&  herp)
+	else if (!disk_rescued && !station_was_nuked &&  nuke_off_station &&  herp)
 		feedback_set_details("round_end_result","halfwin - blew wrong station - did not evacuate in time")
 		world << "<FONT size = 3><B>[syndicate_name()] operatives have earned Darwin Award!</B></FONT>"
 		world << "<B>[syndicate_name()] operatives blew up something that wasn't [station_name()] and got caught in the explosion.</B> Next time, don't lose the disk!"
 
+	else if ( disk_rescued                                         && is_operatives_are_dead())
+		feedback_set_details("round_end_result","loss - evacuation - disk secured - syndi team dead")
+		world << "<FONT size = 3><B>Crew Major Victory!</B></FONT>"
+		world << "<B>The Research Staff has saved the disc and killed the [syndicate_name()] Operatives</B>"
+
 	else if ( disk_rescued                                        )
 		feedback_set_details("round_end_result","loss - evacuation - disk secured")
-		world << "<FONT size = 3><B>Crew Victory</B></FONT>"
+		world << "<FONT size = 3><B>Crew Major Victory</B></FONT>"
 		world << "<B>The Research Staff has saved the disc and stopped the [syndicate_name()] Operatives!</B>"
 
 	else if (!disk_rescued                                         && is_operatives_are_dead())
 		feedback_set_details("round_end_result","loss - evacuation - disk not secured")
-		world << "<FONT size = 3><B>Crew Victory</B></FONT>"
-		world << "<B>The Research Staff has stopped the [syndicate_name()] Operatives!</B>"
+		world << "<FONT size = 3><B>Syndicate Minor Victory!</B></FONT>"
+		world << "<B>The Research Staff failed to secure the authentication disk but did manage to kill most of the [syndicate_name()] Operatives!</B>"
 
 	else if (!disk_rescued                                         &&  crew_evacuated)
 		feedback_set_details("round_end_result","halfwin - detonation averted")
-		world << "<FONT size = 3><B>Neutral Victory</B></FONT>"
+		world << "<FONT size = 3><B>Syndicate Minor Victory!</B></FONT>"
 		world << "<B>[syndicate_name()] operatives recovered the abandoned authentication disk but detonation of [station_name()] was averted.</B> Next time, don't lose the disk!"
 
 	else if (!disk_rescued                                         && !crew_evacuated)

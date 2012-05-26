@@ -145,38 +145,11 @@
 		var/turf/simulated/east = get_step(source,EAST)
 		var/turf/simulated/west = get_step(source,WEST)
 
-		if(need_rebuild)
-			if(istype(source)) //Rebuild/update nearby group geometry
-				if(source.parent)
-					air_master.groups_to_rebuild += source.parent
-				else
-					air_master.tiles_to_update += source
-			if(istype(north))
-				if(north.parent)
-					air_master.groups_to_rebuild += north.parent
-				else
-					air_master.tiles_to_update += north
-			if(istype(south))
-				if(south.parent)
-					air_master.groups_to_rebuild += south.parent
-				else
-					air_master.tiles_to_update += south
-			if(istype(east))
-				if(east.parent)
-					air_master.groups_to_rebuild += east.parent
-				else
-					air_master.tiles_to_update += east
-			if(istype(west))
-				if(west.parent)
-					air_master.groups_to_rebuild += west.parent
-				else
-					air_master.tiles_to_update += west
-		else
-			if(istype(source)) air_master.tiles_to_update += source
-			if(istype(north)) air_master.tiles_to_update += north
-			if(istype(south)) air_master.tiles_to_update += south
-			if(istype(east)) air_master.tiles_to_update += east
-			if(istype(west)) air_master.tiles_to_update += west
+		if(istype(source)) air_master.tiles_to_update += source
+		if(istype(north)) air_master.tiles_to_update += north
+		if(istype(south)) air_master.tiles_to_update += south
+		if(istype(east)) air_master.tiles_to_update += east
+		if(istype(west)) air_master.tiles_to_update += west
 
 		return 1
 
@@ -225,8 +198,8 @@
 
 	proc/TemperatureAct(temperature)
 		for(var/turf/simulated/floor/target_tile in range(2,loc))
-			if(target_tile.parent && target_tile.parent.group_processing)
-				target_tile.parent.suspend_group_processing()
+			//if(target_tile.parent && target_tile.parent.group_processing)
+			//	target_tile.parent.suspend_group_processing()
 
 			var/datum/gas_mixture/napalm = new
 
@@ -234,6 +207,7 @@
 
 			napalm.toxins = toxinsToDeduce
 			napalm.temperature = 400+T0C
+			napalm.update_values()
 
 			target_tile.assume_air(napalm)
 			spawn (0) target_tile.hotspot_expose(temperature, 400)
@@ -244,3 +218,64 @@
 /obj/structure/mineral_door/transparent/diamond
 	mineralType = "diamond"
 	hardness = 10
+
+/obj/structure/mineral_door/wood
+	mineralType = "wood"
+	hardness = 1
+
+	Open()
+		isSwitchingStates = 1
+		playsound(loc, 'doorcreaky.ogg', 100, 1)
+		flick("[mineralType]opening",src)
+		sleep(10)
+		density = 0
+		opacity = 0
+		state = 1
+		update_icon()
+		isSwitchingStates = 0
+
+	Close()
+		isSwitchingStates = 1
+		playsound(loc, 'doorcreaky.ogg', 100, 1)
+		flick("[mineralType]closing",src)
+		sleep(10)
+		density = 1
+		opacity = 1
+		state = 0
+		update_icon()
+		isSwitchingStates = 0
+
+	Dismantle(devastated = 0)
+		if(!devastated)
+			for(var/i = 1, i <= oreAmount, i++)
+				new/obj/item/stack/sheet/wood(get_turf(src))
+		del(src)
+
+/obj/structure/mineral_door/resin
+	mineralType = "resin"
+	hardness = 5
+
+	Open()
+		isSwitchingStates = 1
+		playsound(loc, 'attackblob.ogg', 100, 1)
+		flick("[mineralType]opening",src)
+		sleep(10)
+		density = 0
+		opacity = 0
+		state = 1
+		update_icon()
+		isSwitchingStates = 0
+
+	Close()
+		isSwitchingStates = 1
+		playsound(loc, 'attackblob.ogg', 100, 1)
+		flick("[mineralType]closing",src)
+		sleep(10)
+		density = 1
+		opacity = 1
+		state = 0
+		update_icon()
+		isSwitchingStates = 0
+
+	Dismantle(devastated = 0)
+		del(src)

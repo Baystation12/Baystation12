@@ -31,7 +31,7 @@
 	if(!A || !isarea(A) || !A.master)
 		return 0					// if not, then not powered
 
-	return A.master.powered(chan)	// return power status of the area
+	return A.master.powered(power_channel)	// return power status of the area
 
 // increment the power usage stats for an area
 
@@ -437,6 +437,8 @@
 //source is an object caused electrocuting (airlock, grille, etc)
 //No animations will be performed by this proc.
 /proc/electrocute_mob(mob/living/carbon/M as mob, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
+	if(istype(M.loc,/obj/mecha))
+		return 0
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		if(H.gloves)

@@ -1,5 +1,3 @@
-
-
 /atom/proc/MouseDrop_T()
 	return
 
@@ -39,8 +37,6 @@
 /atom/proc/attack_metroid(mob/user as mob)
 	return
 
-
-
 /atom/proc/hand_h(mob/user as mob)			//human (hand) - restrained
 	return
 
@@ -69,82 +65,107 @@
 	if (istype(W, /obj/item/device/detective_scanner))
 		for(var/mob/O in viewers(src, null))
 			if ((O.client && !( O.blinded )))
-				O << text("\red [src] has been scanned by [user] with the [W]")
+				O << "\red [src] has been scanned by [user] with the [W]"
 	else
-		if (!( istype(W, /obj/item/weapon/grab) ) && !(istype(W, /obj/item/weapon/plastique)) &&!(istype(W, /obj/item/weapon/cleaner)) &&!(istype(W, /obj/item/weapon/chemsprayer)) &&!(istype(W, /obj/item/weapon/pepperspray)) && !(istype(W, /obj/item/weapon/plantbgone)) )
+		if (!( istype(W, /obj/item/weapon/grab) ) && !(istype(W, /obj/item/weapon/plastique)) &&!(istype(W, /obj/item/weapon/cleaner)) &&!(istype(W, /obj/item/weapon/chemsprayer)) &&!(istype(W, /obj/item/weapon/pepperspray)) && !(istype(W, /obj/item/weapon/plantbgone)) && !(istype(W, /obj/item/weapon/reagent_containers/glass/rag)) )
 			for(var/mob/O in viewers(src, null))
 				if ((O.client && !( O.blinded )))
-					O << text("\red <B>[] has been hit by [] with []</B>", src, user, W)
+					O << "\red <B>[src] has been hit by [user] with [W]</B>"
+
 	return
 
+/atom/proc/add_hiddenprint(mob/living/M as mob)
+	if(isnull(M)) return
+	if(isnull(M.key)) return
+	if (!( src.flags ) & 256)
+		return
+	if (ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if (!istype(H.dna, /datum/dna))
+			return 0
+		if (H.gloves)
+			if(src.fingerprintslast != H.key)
+				src.fingerprintshidden += text("\[[time_stamp()]\] (Wearing gloves). Real name: [], Key: []",H.real_name, H.key)
+				src.fingerprintslast = H.key
+			return 0
+		if (!( src.fingerprints ))
+			if(src.fingerprintslast != H.key)
+				src.fingerprintshidden += text("\[[time_stamp()]\] Real name: [], Key: []",H.real_name, H.key)
+				src.fingerprintslast = H.key
+			return 1
+	else
+		if(src.fingerprintslast != M.key)
+			src.fingerprintshidden += text("\[[time_stamp()]\] Real name: [], Key: []",M.real_name, M.key)
+			src.fingerprintslast = M.key
+	return
 
 /atom/proc/add_fingerprint(mob/living/M as mob)
 	if(isnull(M)) return
 	if(isnull(M.key)) return
 	if (!( flags ) & 256)
 		return
+	//Smudge up dem prints some
+	for(var/P in fingerprints)
+		var/test_print = stars(fingerprints[P], rand(85,95))
+		if(stringpercent(test_print) == 32) //She's full of stars! (No actual print left)
+			fingerprints.Remove(P)
+		else
+			fingerprints[P] = test_print
 	if (ishuman(M))
+		//Add the list if it does not exist.
 		if(!fingerprintshidden)
 			fingerprintshidden = list()
+		//Fibers~
 		add_fibers(M)
+		//He has no prints!
 		if (M.mutations2 & mFingerprints)
 			if(fingerprintslast != M.key)
 				fingerprintshidden += "(Has no fingerprints) Real name: [M.real_name], Key: [M.key]"
 				fingerprintslast = M.key
 			return 0
+		//Now, lets get to the dirty work.
+		//First, make sure their DNA makes sense.
 		var/mob/living/carbon/human/H = M
 		if (!istype(H.dna, /datum/dna) || !H.dna.uni_identity || (length(H.dna.uni_identity) != 32))
 			if(!istype(H.dna, /datum/dna))
 				H.dna = new /datum/dna(null)
-			H.check_dna()
+		H.check_dna()
+		//Now, deal with gloves.
 		if (H.gloves && H.gloves != src)
 			if(fingerprintslast != H.key)
 				fingerprintshidden += text("(Wearing gloves). Real name: [], Key: []",H.real_name, H.key)
 				fingerprintslast = H.key
 			H.gloves.add_fingerprint(M)
+		//Deal with gloves the pass finger/palm prints.
 		if(H.gloves != src)
 			if(prob(75) && istype(H.gloves, /obj/item/clothing/gloves/latex))
 				return 0
-			else if(H.gloves && !istype(H.gloves, /obj/item/clothing/gloves/latex))
+			else if(H.gloves && !istype(H.gloves, /obj/item/clothing/gloves/latex) && !istype(H.gloves, /obj/item/clothing/gloves/fingerless))
 				return 0
+		//More adminstuffz
 		if(fingerprintslast != H.key)
 			fingerprintshidden += text("Real name: [], Key: []",H.real_name, H.key)
 			fingerprintslast = H.key
+		//Make the list if it does not exist.
 		if(!fingerprints)
 			fingerprints = list()
-		var/new_prints = 0
-		var/prints
-		for(var/i = 1, i <= fingerprints.len, i++)
-			var/list/L = params2list(fingerprints[i])
-			if(L[num2text(1)] == md5(H.dna.uni_identity))
-				new_prints = i
-				prints = L[num2text(2)]
-				break
-			else
-				var/test_print = stars(L[num2text(2)], rand(80,90))
-				if(stringpercent(test_print) == 32)
-					if(fingerprints.len == 1)
-						fingerprints = list()
-					else
-						fingerprints.Cut(i,i+1)
-				else
-					fingerprints[i] = "1=[L[num2text(1)]]&2=[test_print]"
-		if(new_prints)
-			fingerprints[new_prints] = text("1=[]&2=[]", md5(H.dna.uni_identity), stringmerge(prints,stars(md5(H.dna.uni_identity), (H.gloves ? rand(10,20) : rand(25,40)))))
+		//Hash this shit.
+		var/full_print = md5(H.dna.uni_identity)
+		var/print = fingerprints[full_print] //Find if the print is already there.
+		//It is not!  We need to add it!
+		if(!print)
+			fingerprints[full_print] = stars(full_print, H.gloves ? rand(10,20) : rand(25,40))
+		//It's there, lets merge this shit!
 		else
-			if(!fingerprints || !fingerprints.len)
-				fingerprints = list(text("1=[]&2=[]", md5(H.dna.uni_identity), stars(md5(H.dna.uni_identity), H.gloves ? rand(10,20) : rand(25,40))))
-			else
-				fingerprints += text("1=[]&2=[]", md5(H.dna.uni_identity), stars(md5(H.dna.uni_identity), H.gloves ? rand(10,20) : rand(25,40)))
-		for(var/i = 1, i <= fingerprints.len, i++)
-			if(length(fingerprints[i]) != 69)
-				fingerprints.Remove(fingerprints[i])
-		if(fingerprints && !fingerprints.len)	del(fingerprints)
+			fingerprints[full_print] = stringmerge(print, stars(full_print, (H.gloves ? rand(10,20) : rand(25,40))))
 		return 1
 	else
 		if(fingerprintslast != M.key)
 			fingerprintshidden += text("Real name: [], Key: []",M.real_name, M.key)
 			fingerprintslast = M.key
+	//Cleaning up shit.
+	if(fingerprints && !fingerprints.len)
+		del(fingerprints)
 	return
 
 //returns 1 if made bloody, returns 0 otherwise
@@ -179,11 +200,9 @@
 			O.overlays += O.blood_overlay
 
 		//if this blood isn't already in the list, add it
-		for(var/i = 1, i <= O.blood_DNA.len, i++)
-			if((O.blood_DNA[i][1] == M.dna.unique_enzymes) && (O.blood_DNA[i][2] == M.dna.b_type))
-				return 0 //already bloodied with this blood. Cannot add more.
-		O.blood_DNA.len++
-		O.blood_DNA[O.blood_DNA.len] = list(M.dna.unique_enzymes,M.dna.b_type)
+		if(blood_DNA[M.dna.unique_enzymes])
+			return 0 //already bloodied with this blood. Cannot add more.
+		blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 		return 1 //we applied blood to the item
 
 	//adding blood to turfs
@@ -192,9 +211,10 @@
 
 		//get one blood decal and infect it with virus from M.viruses
 		for(var/obj/effect/decal/cleanable/blood/B in T.contents)
-			B.blood_DNA.len++
-			B.blood_DNA[B.blood_DNA.len] = list(M.dna.unique_enzymes,M.dna.b_type)
-			B.virus2 += M.virus2
+			if(!B.blood_DNA[M.dna.unique_enzymes])
+				B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+			if(!B.virus2)
+				B.virus2 = M.virus2
 			for(var/datum/disease/D in M.viruses)
 				var/datum/disease/newDisease = new D.type
 				B.viruses += newDisease
@@ -203,7 +223,7 @@
 
 		//if there isn't a blood decal already, make one.
 		var/obj/effect/decal/cleanable/blood/newblood = new /obj/effect/decal/cleanable/blood(T)
-		newblood.blood_DNA =  list(list(M.dna.unique_enzymes, M.dna.b_type))
+		newblood.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 		newblood.blood_owner = M
 		newblood.virus2 = M.virus2
 		for(var/datum/disease/D in M.viruses)
@@ -216,20 +236,20 @@
 	else if (istype(src, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = src
 		//if this blood isn't already in the list, add it
-		for(var/i = 1, i <= H.blood_DNA.len, i++)
-			if((H.blood_DNA[i][1] == M.dna.unique_enzymes) && (H.blood_DNA[i][2] == M.dna.b_type))
-				return 0 //already bloodied with this blood. Cannot add more.
-		H.blood_DNA.len++
-		H.blood_DNA[H.blood_DNA.len] = list(M.dna.unique_enzymes,M.dna.b_type)
+		if(blood_DNA[H.dna.unique_enzymes])
+			return 0 //already bloodied with this blood. Cannot add more.
+		blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
 		return 1 //we applied blood to the item
 	return
 
 /atom/proc/add_vomit_floor(mob/living/carbon/M as mob, var/toxvomit = 0)
 	if( istype(src, /turf/simulated) )
 		var/obj/effect/decal/cleanable/vomit/this = new /obj/effect/decal/cleanable/vomit(src)
+
 		// Make toxins vomit look different
 		if(toxvomit)
 			this.icon_state = "vomittox_[pick(1,4)]"
+
 		for(var/datum/disease/D in M.viruses)
 			var/datum/disease/newDisease = new D.type
 			this.viruses += newDisease
@@ -241,7 +261,7 @@
 		if( istype(src, /turf/simulated) )
 			var/turf/simulated/source1 = src
 			var/obj/effect/decal/cleanable/blood/this = new /obj/effect/decal/cleanable/blood(source1)
-			this.blood_DNA = list(M.dna.unique_enzymes, M.dna.b_type)
+			this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 			this.OriginalMob = M.dna.original_name
 			for(var/datum/disease/D in M.viruses)
 				var/datum/disease/newDisease = new D.type
@@ -252,7 +272,7 @@
 		if( istype(src, /turf/simulated) )
 			var/turf/simulated/source2 = src
 			var/obj/effect/decal/cleanable/xenoblood/this = new /obj/effect/decal/cleanable/xenoblood(source2)
-			this.blood_DNA = list(list("UNKNOWN BLOOD","X*"))
+			this.blood_DNA["UNKNOWN BLOOD"] = "X*"
 			for(var/datum/disease/D in M.viruses)
 				var/datum/disease/newDisease = new D.type
 				this.viruses += newDisease
@@ -271,9 +291,9 @@
 
 /atom/proc/clean_blood()
 
-	if (!( src.flags ) & 256)
+	if (!flags & 256)
 		return
-	if ( src.blood_DNA )
+	if (blood_DNA )
 
 		//Cleaning blood off of mobs
 		if (istype (src, /mob/living/carbon))
@@ -303,27 +323,17 @@
 				T.icon = I
 			else
 				T.icon = initial(icon)
-	if(blood_DNA && !blood_DNA.len)
+
+	if(blood_DNA && istype(blood_DNA, /list) && !blood_DNA.len)
 		del(blood_DNA)
-	if(src.fingerprints && src.fingerprints.len)
-		var/done = 0
-		while(!done)
-			done = 1
-			for(var/i = 1, i < (src.fingerprints.len + 1), i++)
-				var/list/prints = params2list(src.fingerprints[i])
-				var/test_print = prints["2"]
-				var/new_print = stars(test_print, rand(1,20))
-				if(stringpercent(new_print) == 32)
-					if(src.fingerprints.len == 1)
-						src.fingerprints = list()
-					else
-						for(var/j = (i + 1), j < (src.fingerprints.len), j++)
-							src.fingerprints[j-1] = src.fingerprints[j]
-						src.fingerprints.len--
-						done = 0
-					break
-				else
-					src.fingerprints[i] = "1=" + prints["1"] + "&2=" + new_print
+	if(fingerprints && fingerprints.len)
+		//Smudge up dem prints some
+		for(var/P in fingerprints)
+			var/test_print = stars(fingerprints[P], rand(10,20))
+			if(stringpercent(test_print) == 32) //She's full of stars! (No actual print left)
+				fingerprints.Remove(P)
+			else
+				fingerprints[P] = test_print
 	if(fingerprints && !fingerprints.len)
 		del(fingerprints)
 	if(istype(src, /mob/living/carbon/human))
@@ -339,20 +349,15 @@
 	..()
 	return
 
+
 /atom/Click(location,control,params)
 	//world << "atom.Click() on [src] by [usr] : src.type is [src.type]"
 	if(!istype(src,/obj/item/weapon/gun))
 		usr.last_target_click = world.time
-	var/list/pram = params2list(params)
-	if((pram["alt"] != null && pram["ctrl"] != null && pram["left"] != null) && istype(src,/atom/movable))
-		src:pull()
-		return
-	if(pram["ctrl"] != null && pram["left"] != null)
-		src.examine()
-		return
 	if(usr.client.buildmode)
 		build_click(usr, usr.client.buildmode, location, control, params, src)
 		return
+
 	if(using_new_click_proc)  //TODO ERRORAGE (see message below)
 		return DblClickNew()
 	return DblClick(location, control, params)
@@ -661,6 +666,33 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 //		world << "atom.DblClick() on [src] by [usr] : src.type is [src.type]"
 		usr:lastDblClick = world.time
 
+	// ------- DIR CHANGING WHEN CLICKING (changes facting direction) ------
+
+	if( usr && iscarbon(usr) && !usr.buckled )
+		if( src.x && src.y && usr.x && usr.y )
+			var/dx = src.x - usr.x
+			var/dy = src.y - usr.y
+
+			if( dy > 0 && abs(dx) < dy ) //North
+				usr.dir = 1
+			if( dy < 0 && abs(dx) < abs(dy) ) //South
+				usr.dir = 2
+			if( dx > 0 && abs(dy) <= dx ) //East
+				usr.dir = 4
+			if( dx < 0 && abs(dy) <= abs(dx) ) //West
+				usr.dir = 8
+			if( dx == 0 && dy == 0 )
+				if(src.pixel_y > 16)
+					usr.dir = 1
+				if(src.pixel_y < -16)
+					usr.dir = 2
+				if(src.pixel_x > 16)
+					usr.dir = 4
+				if(src.pixel_x < -16)
+					usr.dir = 8
+
+
+
 
 	// ------- AI -------
 	if (istype(usr, /mob/living/silicon/ai))
@@ -673,6 +705,52 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 		var/mob/living/silicon/robot/bot = usr
 		if (bot.lockcharge) return
 	..()
+
+
+
+
+
+
+	// ------- SHIFT-CLICK -------
+
+	if(params)
+		var/parameters = params2list(params)
+
+		if(parameters["shift"]){
+			if(!isAI(usr))
+				ShiftClick(usr)
+			else
+				AIShiftClick(usr)
+			return
+		}
+
+		// ------- ALT-CLICK -------
+
+		if(parameters["alt"]){
+			if(!isAI(usr))
+				AltClick(usr)
+			else
+				AIAltClick(usr)
+			return
+		}
+
+		// ------- CTRL-CLICK -------
+
+		if(parameters["ctrl"]){
+			if(!isAI(usr))
+				CtrlClick(usr)
+			else
+				AICtrlClick(usr)
+			return
+			}
+
+		// ------- MIDDLE-CLICK -------
+
+		if(parameters["middle"]){
+			if(!isAI(usr))
+				MiddleClick(usr)
+				return
+		}
 
 	// ------- THROW -------
 	if(usr.in_throw_mode)
@@ -815,7 +893,18 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 				// ------- YOU DO NOT HAVE AN ITEM IN YOUR HAND -------
 				if (istype(usr, /mob/living/carbon/human))
 					// ------- YOU ARE HUMAN -------
+/*					if(usr.hand) // if he's using his left hand.
+						var/datum/organ/external/temp = usr:get_organ("l_hand")
+						if(temp.destroyed)
+							usr << "\blue You look at your stump."
+							return
+					else
+						var/datum/organ/external/temp = usr:get_organ("r_hand")
+						if(temp.destroyed)
+							usr << "\blue You look at your stump."
+							return*/
 					src.attack_hand(usr, usr.hand)
+//					usr:afterattack(src, usr, (t5 ? 1 : 0), params)
 				else
 					// ------- YOU ARE NOT HUMAN. WHAT ARE YOU - DETERMINED HERE AND PROPER ATTACK_MOBTYPE CALLED -------
 					if (istype(usr, /mob/living/carbon/monkey))
@@ -932,8 +1021,67 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 	del D
 	return 1
 
+/atom/proc/CtrlClick(var/mob/M as mob)
+	examine()
+	return
 
-/*/atom/proc/get_global_map_pos()
+/atom/proc/AltClick()
+	if(hascall(src,"pull"))
+		src:pull()
+	return
+
+/atom/proc/ShiftClick()
+	if(hascall(src,"pull"))
+		src:pull()
+	return
+
+/atom/proc/AIShiftClick() // Opens and closes doors!
+	if(istype(src , /obj/machinery/door/airlock))
+		if(src:density)
+			var/nhref = "src=\ref[src];aiEnable=7"
+			src.Topic(nhref, params2list(nhref), src, 1)
+		else
+			var/nhref = "src=\ref[src];aiDisable=7"
+			src.Topic(nhref, params2list(nhref), src, 1)
+
+	return
+
+/atom/proc/AIAltClick() // Eletrifies doors.
+	if(istype(src , /obj/machinery/door/airlock))
+		if(!src:secondsElectrified)
+			var/nhref = "src=\ref[src];aiEnable=6"
+			src.Topic(nhref, params2list(nhref), src, 1)
+		else
+			var/nhref = "src=\ref[src];aiDisable=5"
+			src.Topic(nhref, params2list(nhref), src, 1)
+
+
+	return
+
+/atom/proc/AICtrlClick() // Bolts doors, turns off APCs.
+	if(istype(src , /obj/machinery/door/airlock))
+		if(src:locked)
+			var/nhref = "src=\ref[src];aiEnable=4"
+			src.Topic(nhref, params2list(nhref), src, 1)
+		else
+			var/nhref = "src=\ref[src];aiDisable=4"
+			src.Topic(nhref, params2list(nhref), src, 1)
+
+	else if (istype(src , /obj/machinery/power/apc/))
+		var/nhref = "src=\ref[src];breaker=1"
+		src.Topic(nhref, params2list(nhref), 0)
+
+
+
+	return
+
+/atom/proc/MiddleClick(var/mob/M as mob) // switch hands
+	if(istype(M, /mob/living/carbon))
+		var/mob/living/carbon/U = M
+		U.swap_hand()
+
+/*
+/atom/proc/get_global_map_pos()
 	if(!islist(global_map) || isemptylist(global_map)) return
 	var/cur_x = null
 	var/cur_y = null
@@ -947,8 +1095,8 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 	if(cur_x && cur_y)
 		return list("x"=cur_x,"y"=cur_y)
 	else
-		return 0	*/
-
+		return 0
+*/ //Don't touch this either. DMTG
 /atom/proc/checkpass(passflag)
 	return pass_flags&passflag
 

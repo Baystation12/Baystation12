@@ -40,12 +40,6 @@
 	operation_req_access = list(access_syndicate)
 	wreckage = /obj/effect/decal/mecha_wreckage/mauler
 
-	snd_nominal = 'nominalsyndi.ogg'
-	snd_critical = 'critdestrsyndi.ogg'
-	snd_weapondestroyed = 'weapdestrsyndi.ogg'
-	snd_lowpower = 'lowpowersyndi.ogg'
-	snd_long_activation = 'LongSyndiActivation.ogg'
-
 /obj/mecha/combat/marauder/New()
 	..()
 	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse
@@ -105,17 +99,17 @@
 	var/move_result = 0
 	if(internal_damage&MECHA_INT_CONTROL_LOST)
 		if(thrusters && istype(src.loc, /turf/space))
-			move_result = mechboostrand()
+			move_result = mechsteprand()
 		else
 			move_result = mechsteprand()
 	else if(src.dir!=direction)
 		if(thrusters && istype(src.loc, /turf/space))
-			move_result = mechspaceturn(direction)
+			move_result = mechturn(direction)
 		else
 			move_result = mechturn(direction)
 	else
 		if(thrusters & istype(src.loc, /turf/space))
-			move_result	= mechboost(direction)
+			move_result	= mechstep(direction)
 		else
 			move_result	= mechstep(direction)
 	if(move_result)

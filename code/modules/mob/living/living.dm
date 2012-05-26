@@ -1,14 +1,30 @@
+/mob/living/Life()
+
+	..()
+
+	// While I'm doing a terriblly lazy way of initalizing things, why don't I make it so people's preferences tag along with them.  This could be useful in fixing the fucking cloned-as-unknown thing, making me not have to dynamically load them during tensioner, and of course, storing metadata.
+//Whoever wrote this should go suck a choad.  This was causing runtimes, asshat.  IN ADDITION, YOU PUT IT IN THE LIFE PROC YOU ASSHAT
+//	if(!src.storedpreferences)
+//		src.storedpreferences = new
+//		storedpreferences.savefile_load(src, 0)
+
+
+
+
+	return
+
+
 /mob/living/verb/succumb()
 	set hidden = 1
 	if ((src.health < 0 && src.health > -95.0))
-		src.oxyloss += src.health + 200
+		src.adjustOxyLoss(src.health + 200)
 		src.health = 100 - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss()
 		src << "\blue You have given up life and succumbed to death."
 
 
 /mob/living/proc/updatehealth()
 	if(!src.nodamage)
-		src.health = 100 - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss() - src.cloneloss - src.halloss
+		src.health = 100 - src.getOxyLoss() - src.getToxLoss() - src.getFireLoss() - src.getBruteLoss() - src.getCloneLoss() -src.halloss
 	else
 		src.health = 100
 		src.stat = 0
@@ -24,14 +40,15 @@
 			return 0
 		var/mob/living/carbon/human/H = src	//make this damage method divide the damage to be done among all the body parts, then burn each body part for that much damage. will have better effect then just randomly picking a body part
 		var/divided_damage = (burn_amount)/(H.organs.len)
-		var/extradam = 0	//added to when organ is at max dam
+		//var/extradam = 0	//added to when organ is at max dam
 		for(var/name in H.organs)
-			var/datum/organ/external/affecting = H.organs[name]
-			if(!affecting)	continue
-			if(affecting.take_damage(0, divided_damage+extradam, 0, used_weapon))
-				extradam = 0
-			else
-				extradam += divided_damage
+			apply_damage(divided_damage, BURN, name, 0, 0, "Skin Burns")
+			//var/datum/organ/external/affecting = H.organs[name]
+			//if(!affecting)	continue
+			//if(affecting.take_damage(0, divided_damage+extradam, 0, used_weapon))
+			//	extradam = 0
+			//else
+			//	extradam += divided_damage
 		H.UpdateDamageIcon()
 		H.updatehealth()
 		return 1
@@ -95,6 +112,13 @@
 		L |= E:contents
 	for(var/obj/item/smallDelivery/S in L)
 		L |= S.wrapped
+	if(hasorgans(src))
+		for(var/named in src:organs)
+			var/datum/organ/external/O = src:organs[named]
+			for(var/obj/item/weapon/implant/I in O.implant)
+				L |= I
+				if(istype(I, /obj/item/weapon/implant/compressed))
+					L |= I:scanned
 
 	for(var/obj/B in L)
 		if(B.type == A)
@@ -114,6 +138,13 @@
 		L |= E:contents
 	for(var/obj/item/smallDelivery/S in L)
 		L |= S.wrapped
+	if(hasorgans(src))
+		for(var/named in src:organs)
+			var/datum/organ/external/O = src:organs[named]
+			for(var/obj/item/weapon/implant/I in O.implant)
+				L |= I
+				if(istype(I, /obj/item/weapon/implant/compressed))
+					L |= I:scanned
 
 	for(var/obj/item/weapon/reagent_containers/B in L)
 		for(var/datum/reagent/R in B.reagents.reagent_list)
@@ -142,25 +173,25 @@
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/heal_organ_damage(var/brute, var/burn)
-	bruteloss = max(0, getBruteLoss()-brute)
+	adjustBruteLoss(-brute)
 	adjustFireLoss(-burn)
 	src.updatehealth()
 
 // damage ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/take_organ_damage(var/brute, var/burn)
-	bruteloss += brute
+	adjustBruteLoss(brute)
 	adjustFireLoss(burn)
 	src.updatehealth()
 
 // heal MANY external organs, in random order
 /mob/living/proc/heal_overall_damage(var/brute, var/burn)
-	bruteloss = max(0, getBruteLoss()-brute)
+	adjustBruteLoss(-brute)
 	adjustFireLoss(-burn)
 	src.updatehealth()
 
 // damage MANY external organs, in random order
 /mob/living/proc/take_overall_damage(var/brute, var/burn)
-	bruteloss += brute
+	adjustBruteLoss(brute)
 	adjustFireLoss(burn)
 	src.updatehealth()
 
@@ -187,16 +218,90 @@
 	SetParalysis(0)
 	SetStunned(0)
 	SetWeakened(0)
+	src.radiation = 0
+	src.nutrition = 400
+	src.bodytemperature = initial(src.bodytemperature)
 	//src.health = 100
+	if(ishuman(src))
+		src.heal_overall_damage(1000, 1000)
+		//M.updatehealth()
+		src.buckled = initial(src.buckled)
+		src.handcuffed = initial(src.handcuffed)
+		if(istype(src,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = src
+			for(var/name in H.organs)
+				var/datum/organ/external/e = H.organs[name]
+				e.brute_dam = 0.0
+				e.burn_dam = 0.0
+				e.bandaged = 0.0
+				e.max_damage = initial(e.max_damage)
+				e.bleeding = 0
+				e.open = 0
+				e.broken = 0
+				e.destroyed = 0
+				e.perma_injury = 0
+				e.update_icon()
+				for(var/datum/organ/wound/W in e.wounds)
+					if(W.bleeding || !W.is_healing)
+						W.stopbleeding()
+			del(H.vessel)
+			H.vessel = new/datum/reagents(560)
+			H.vessel.my_atom = H
+			H.vessel.add_reagent("blood",560)
+			spawn(1)
+				H.fixblood()
+			H.pale = 0
+			H.update_body()
+			H.update_face()
+			H.UpdateDamageIcon()
+		if (src.stat > 1)
+			src.stat=0
+		..()
 	src.heal_overall_damage(1000, 1000)
 	src.buckled = initial(src.buckled)
 	src.handcuffed = initial(src.handcuffed)
-	if(src.stat > 1) src.stat = CONSCIOUS
+	if(src.stat > 1)
+		src.stat = CONSCIOUS
 	..()
 	return
 
 /mob/living/proc/UpdateDamageIcon()
-	return
+		return
+
+/mob/living/proc/check_if_buckled()
+	if (buckled)
+		if(buckled == /obj/structure/stool/bed || istype(buckled, /obj/machinery/conveyor))
+			lying = 1
+		if(lying)
+			var/h = hand
+			hand = 0
+			drop_item()
+			hand = 1
+			drop_item()
+			hand = h
+		density = 1
+	else
+		density = !lying
+//Bullshit ERP horseshit causing runtimes.  Eat a dick.
+/*
+/mob/living/proc/Examine_OOC()
+	set name = "Examine Meta-Info (OOC)"
+	set category = "OOC"
+	set src in view()
+
+	if(config.allow_Metadata)
+		usr << "[src]'s Metainfo:"
+
+		if(src.storedpreferences)
+			usr << "[src]'s OOC Notes:  [src.storedpreferences.metadata]"
+
+		else
+			usr << "[src] does not have any stored infomation!"
+
+	else
+		usr << "OOC Metadata is not supported by this server!"
+
+	return*/
 
 /mob/living/attack_animal(mob/M)
 	attack_paw(M)	// treat it like a normal non-human attack

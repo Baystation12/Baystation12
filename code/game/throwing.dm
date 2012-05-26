@@ -25,7 +25,7 @@
 /mob/living/carbon/proc/throw_item(atom/target)
 	src.throw_mode_off()
 
-	if(usr.stat)
+	if(usr.stat || !target)
 		return
 	if(target.type == /obj/screen) return
 
@@ -33,19 +33,6 @@
 
 	if(!item) return
 
-	if(istype(item,/obj/item))
-		var/obj/item/IT = item
-		if(IT.twohanded)
-			if(IT.wielded)
-				if(hand)
-					var/obj/item/weapon/offhand/O = r_hand
-					del O
-				else
-					var/obj/item/weapon/offhand/O = l_hand
-					del O
-
-			IT.wielded = 0
-			IT.name = initial(IT.name)
 
 
 	u_equip(item)
@@ -64,10 +51,28 @@
 		item.layer = initial(item.layer)
 		src.visible_message("\red [src] has thrown [item].")
 
+		if(istype(item,/mob/living))
+			var/mob/living/M = item
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been thrown by [src.name] ([src.ckey])</font>")
+			src.attack_log += text("\[[time_stamp()]\] <font color='red'>Threw [M.name] ([M.ckey])</font>")
+			log_attack("<font color='red'>[src.name] ([src.ckey]) threw [M.name] ([M.ckey])</font>")
+			log_admin("ATTACK: [src.name] ([src.ckey]) threw [M.name] ([M.ckey])")
 
+		if(!src.lastarea)
+			src.lastarea = get_area(src.loc)
+		if((istype(src.loc, /turf/space)) || (src.lastarea.has_gravity == 0))
+			src.inertia_dir = get_dir(target, src)
+			step(src, inertia_dir)
+
+
+/*
 		if(istype(src.loc, /turf/space) || (src.flags & NOGRAV)) //they're in space, move em one space in the opposite direction
 			src.inertia_dir = get_dir(target, src)
 			step(src, inertia_dir)
+*/
+
+
+
 		item.throw_at(target, item.throw_range, item.throw_speed)
 
 
@@ -108,6 +113,10 @@
 		if(src.vars.Find("throwforce"))
 			M.take_organ_damage(src:throwforce)
 
+			log_attack("<font color='red'>[hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])</font>")
+			log_admin("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")
+			message_admins("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")
+
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
@@ -130,7 +139,7 @@
 	..()
 
 /atom/movable/proc/throw_at(atom/target, range, speed)
-	if(!target)	return 0
+	if(!target || !src)	return 0
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target
 	src.throwing = 1
 
@@ -150,10 +159,14 @@
 		dy = SOUTH
 	var/dist_travelled = 0
 	var/dist_since_sleep = 0
+	var/area/a = get_area(src.loc)
 	var/turf/target_turf = get_turf(target)
 	if(dist_x > dist_y)
 		var/error = dist_x/2 - dist_y
-		while(((((src.x < target.x && dx == EAST) || (src.x > target.x && dx == WEST)) && dist_travelled < range) || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
+
+
+
+		while(src && target &&((((src.x < target.x && dx == EAST) || (src.x > target.x && dx == WEST)) && dist_travelled < range) || (a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
 			// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
 			if(error < 0)
 				var/atom/step = get_step(src, dy)
@@ -179,9 +192,10 @@
 				if(dist_since_sleep >= speed)
 					dist_since_sleep = 0
 					sleep(1)
+			a = get_area(src.loc)
 	else
 		var/error = dist_y/2 - dist_x
-		while(src && target &&((((src.y < target.y && dy == NORTH) || (src.y > target.y && dy == SOUTH)) && dist_travelled < range) || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
+		while(src && target &&((((src.y < target.y && dy == NORTH) || (src.y > target.y && dy == SOUTH)) && dist_travelled < range) || (a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
 			// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
 			if(error < 0)
 				var/atom/step = get_step(src, dx)
@@ -207,6 +221,8 @@
 				if(dist_since_sleep >= speed)
 					dist_since_sleep = 0
 					sleep(1)
+
+			a = get_area(src.loc)
 
 	//done throwing, either because it hit something or it finished moving
 	src.throwing = 0

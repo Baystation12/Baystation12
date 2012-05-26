@@ -108,8 +108,8 @@
 	var/list/old_list = shufflelist.Copy()
 	while(old_list.len)
 		var/item = pick(old_list)
-		new_list += item
-		old_list -= item
+		new_list.Add(item)
+		old_list.Remove(item)
 	return new_list
 
 /proc/uniquelist(var/list/L)
@@ -127,8 +127,21 @@
 			index = findtext(t, char)
 	return t
 
+//For sanitizing user inputs
+/proc/reject_bad_text(var/text)
+	if(length(text) > 512)	return			//message too long
+	var/non_whitespace = 0
+	for(var/i=1, i<=length(text), i++)
+		switch(text2ascii(text,i))
+			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
+			if(127 to 255)	return			//rejects weird letters like ÿ
+			if(0 to 31)		return			//more weird stuff
+			if(32)							//whitespace
+			else			non_whitespace = 1
+	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
+
 /proc/strip_html_simple(var/t,var/limit=MAX_MESSAGE_LEN)
-	var/list/strip_chars = list("<",">")
+	var/list/strip_chars = list("<",">","&","'")
 	t = copytext(t,1,limit)
 	for(var/char in strip_chars)
 		var/index = findtext(t, char)
@@ -198,9 +211,18 @@
 	var/list/result = new()
 	while(Li <= L.len && Ri <= R.len)
 		if(sorttext(L[Li], R[Ri]) < 1)
-			result += R[Ri++]
+			var/item = R[Ri++]
+			if(istext(item) && !isnull(R[item]))
+				result[item] = R[item]
+			else
+				result += item
+
 		else
-			result += L[Li++]
+			var/item = L[Li++]
+			if(istext(item) && !isnull(L[item]))
+				result[item] = L[item]
+			else
+				result += item
 
 	if(Li <= L.len)
 		return (result + L.Copy(Li, 0))
@@ -220,6 +242,8 @@
 	return max(low,min(high,num))
 
 /proc/dd_replacetext(text, search_string, replacement_string)
+	if(!text || !istext(text) || !search_string || !istext(search_string) || !istext(replacement_string))
+		return null
 	var/textList = dd_text2list(text, search_string)
 	return dd_list2text(textList, replacement_string)
 
@@ -255,7 +279,12 @@
 	var/list/textList = new()
 	var/searchPosition = 1
 	var/findPosition = 1
+	var/loops = 0
 	while(1)
+		if(loops >= 1000)
+			break
+		loops++
+
 		findPosition = findtext(text, separator, searchPosition, 0)
 		var/buggyText = copytext(text, searchPosition, findPosition)
 		if(!withinList || (buggyText in withinList)) textList += "[buggyText]"
@@ -643,7 +672,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	total = rand(1, total)
 	for (item in L)
-		total -= L[item]
+		total -=L [item]
 		if (total <= 0)
 			return item
 
@@ -684,6 +713,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		newname = dd_replacetext(newname, ">", "'")
 		M.real_name = newname
 		M.name = newname
+		M.original_name = newname
 
 /*/proc/clname(var/mob/M as mob) //--All praise goes to NEO|Phyte, all blame goes to DH, and it was Cindi-Kate's idea
 	var/randomname = pick(clown_names)
@@ -715,6 +745,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		newname = dd_replacetext(newname, ">", "'")
 		M.real_name = newname
 		M.name = newname
+		M.original_name = newname
 
 	for (var/obj/item/device/pda/pda in M.contents)
 		if (pda.owner == oldname)
@@ -722,9 +753,9 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			pda.name = "PDA-[newname] ([pda.ownjob])"
 			break
 	for(var/obj/item/weapon/card/id/id in M.contents)
-		if(id.registered == oldname)
-			id.registered = newname
-			id.name = "[id.registered]'s ID Card ([id.assignment])"
+		if(id.registered_name == oldname)
+			id.registered_name = newname
+			id.name = "[id.registered_name]'s ID Card ([id.assignment])"
 			break*/
 
 /proc/ionnum()
@@ -772,12 +803,42 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		select = input("AI signals detected:", "AI selection") in ais
 		return ais[select]
 
+/proc/get_sorted_mobs()
+	var/list/old_list = getmobs()
+	var/list/AI_list = list()
+	var/list/Dead_list = list()
+	var/list/keyclient_list = list()
+	var/list/key_list = list()
+	var/list/logged_list = list()
+	for(var/named in old_list)
+		var/mob/M = old_list[named]
+		if(issilicon(M))
+			AI_list |= M
+		else if(isobserver(M) || M.stat == 2)
+			Dead_list |= M
+		else if(M.key && M.client)
+			keyclient_list |= M
+		else if(M.key)
+			key_list |= M
+		else
+			logged_list |= M
+		old_list.Remove(named)
+	var/list/new_list = list()
+	new_list += AI_list
+	new_list += keyclient_list
+	new_list += key_list
+	new_list += logged_list
+	new_list += Dead_list
+	return new_list
+
+
 /proc/getmobs()
 
 	var/list/mobs = sortmobs()
 	var/list/names = list()
 	var/list/creatures = list()
 	var/list/namecounts = list()
+
 	for(var/mob/M in mobs)
 		var/name = M.name
 		if (name in names)
@@ -786,47 +847,52 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		else
 			names.Add(name)
 			namecounts[name] = 1
+
 		if (M.real_name && M.real_name != M.name)
-			name += " \[[M.real_name]\]"
+			name += " \[[M.original_name? M.original_name : M.real_name]\]"
+
 		if (M.stat == 2)
 			if(istype(M, /mob/dead/observer/))
 				name += " \[ghost\]"
 			else
 				name += " \[dead\]"
+
 		creatures[name] = M
 
 	return creatures
 
 /proc/sortmobs()
 
-	var/list/mob_list = list()
+	var/list/temp_list = list()
 	for(var/mob/living/silicon/ai/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
 	for(var/mob/living/silicon/pai/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
 	for(var/mob/living/silicon/robot/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
 	for(var/mob/living/carbon/human/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
+		for(var/mob/living/parasite/P in M.parasites)
+			temp_list.Add(P)
 	for(var/mob/living/carbon/brain/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
 	for(var/mob/living/carbon/alien/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
 	for(var/mob/dead/observer/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
 	for(var/mob/new_player/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
 	for(var/mob/living/carbon/monkey/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
 	for(var/mob/living/carbon/metroid/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
 	for(var/mob/living/simple_animal/M in world)
-		mob_list.Add(M)
+		temp_list.Add(M)
 //	for(var/mob/living/silicon/hivebot/M in world)
 //		mob_list.Add(M)
 //	for(var/mob/living/silicon/hive_mainframe/M in world)
 //		mob_list.Add(M)
-	return mob_list
+	return temp_list
 
 /proc/convert2energy(var/M)
 	var/E = M*(SPEED_OF_LIGHT_SQ)
@@ -869,11 +935,21 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	if (!the_key)
 		text += "*no client*"
 	else
+		var/linked = 1
 		if (include_link && !isnull(the_mob))
 			if (istext(include_link))
-				text += "<a href=\"byond://?src=[include_link];priv_msg=\ref[the_mob]\">"
+				text += "<a href=\"byond://?src=[include_link];priv_msg=\ref[the_client]\">"
 			else
-				text += "<a href=\"byond://?src=\ref[include_link];priv_msg=\ref[the_mob]\">"
+				if(ismob(include_link))
+					var/mob/MM = include_link
+					if(MM.client)
+						text += "<a href=\"byond://?src=\ref[MM.client];priv_msg=\ref[the_client]\">"
+					else
+						linked = 0
+				else if (istype(include_link, /client))
+					text += "<a href=\"byond://?src=\ref[include_link];priv_msg=\ref[the_client]\">"
+				else
+					linked = 0
 
 		if (the_client && the_client.holder && the_client.stealth && !include_name)
 			text += "Administrator"
@@ -881,7 +957,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			text += "[the_key]"
 
 		if (!isnull(include_link) && !isnull(the_mob))
-			text += "</a>"
+			if(linked)
+				text += "</a>"
+			else
+				text += " (DC)"
 
 	if (include_name && !isnull(the_mob))
 		if (the_mob.real_name)
@@ -952,8 +1031,8 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		output += A
 	return output
 
-// Returns the turf a movable atom (obj or mob) is on
-/proc/get_turf_loc(var/atom/movable/M)
+/proc/get_turf_loc(var/atom/movable/M) //gets the location of the turf that the atom is on, or what the atom is in is on, etc
+	//in case they're in a closet or sleeper or something
 	var/atom/loc = M.loc
 	while(!istype(loc, /turf/))
 		loc = loc.loc
@@ -964,6 +1043,8 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/get_edge_target_turf(var/atom/A, var/direction)
 
 	var/turf/target = locate(A.x, A.y, A.z)
+	if(!A || !target)
+		return 0
 		//since NORTHEAST == NORTH & EAST, etc, doing it this way allows for diagonal mass drivers in the future
 		//and isn't really any more complicated
 
@@ -1250,13 +1331,16 @@ proc/listclearnulls(list/list)
 	var/target_loc = target.loc
 	var/holding = user.equipped()
 	sleep(time)
+	if(!user || !target) return 0
 	if ( user.loc == user_loc && target.loc == target_loc && user.equipped() == holding && !( user.stat ) && ( !user.stunned && !user.weakened && !user.paralysis && !user.lying ) )
 		return 1
 	else
 		return 0
-
+/*
 /proc/do_after(mob/M as mob, time as num)
-	var/turf/T = get_turf(M)
+	if(!M)
+		return 0
+	var/turf/T = M.loc
 	var/holding = M.equipped()
 	for(var/i=0, i<time)
 		if(M)
@@ -1265,6 +1349,24 @@ proc/listclearnulls(list/list)
 				sleep(1)
 			else
 				return 0
+	return 1
+*/
+
+/proc/do_after(var/mob/user as mob, delay as num, var/numticks = 5) 		// Replacing the upper one with this one because Byond keeps feeling that the upper one is an infinate loop
+	if(!user || isnull(user))												// This one should have less temptation
+		return 0
+	if(numticks == 0)
+		return 0
+
+	var/delayfraction = round(delay/numticks)
+	var/turf/T = user.loc
+	var/holding = user.equipped()
+
+	for(var/i = 0, i<numticks, i++)
+		sleep(delayfraction)
+		if(!user || user.stat || user.weakened || user.stunned || !(user.loc == T) || !(user.equipped() == holding))
+			return 0
+
 	return 1
 
 /proc/hasvar(var/datum/A, var/varname)
@@ -1329,7 +1431,7 @@ proc/listclearnulls(list/list)
 	var/y_pos = null
 	var/z_pos = null
 
-/area/proc/move_contents_to(var/area/A, var/turftoleave=null)
+/area/proc/move_contents_to(var/area/A, var/turftoleave=null, var/direction = null)
 	//Takes: Area. Optional: turf type to leave behind.
 	//Returns: Nothing.
 	//Notes: Attempts to move the contents of one area to another area.
@@ -1388,7 +1490,39 @@ proc/listclearnulls(list/list)
 					X.icon_state = old_icon_state1
 					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
 
+					/* Quick visual fix for some weird shuttle corner artefacts when on transit space tiles */
+					if(direction && findtext(X.icon_state, "swall_s"))
+
+						// Spawn a new shuttle corner object
+						var/obj/corner = new()
+						corner.loc = X
+						corner.density = 1
+						corner.anchored = 1
+						corner.icon = X.icon
+						corner.icon_state = dd_replacetext(X.icon_state, "_s", "_f")
+						corner.tag = "delete me"
+						corner.name = "wall"
+
+						// Find a new turf to take on the property of
+						var/turf/nextturf = get_step(corner, direction)
+						if(!nextturf || !istype(nextturf, /turf/space))
+							nextturf = get_step(corner, turn(direction, 180))
+
+
+						// Take on the icon of a neighboring scrolling space icon
+						X.icon = nextturf.icon
+						X.icon_state = nextturf.icon_state
+
+
 					for(var/obj/O in T)
+
+						// Reset the shuttle corners
+						if(O.tag == "delete me")
+							X.icon = 'shuttle.dmi'
+							X.icon_state = dd_replacetext(O.icon_state, "_f", "_s") // revert the turf to the old icon_state
+							X.name = "wall"
+							del(O) // prevents multiple shuttle corners from stacking
+							continue
 						if(!istype(O,/obj)) continue
 						O.loc = X
 					for(var/mob/M in T)
@@ -1427,26 +1561,179 @@ proc/listclearnulls(list/list)
 		for(var/turf/simulated/T1 in toupdate)
 			for(var/obj/machinery/door/D2 in T1)
 				doors += D2
-			if(T1.parent)
-				air_master.groups_to_rebuild += T1.parent
-			else
-				air_master.tiles_to_update += T1
-			if(T1.zone)
-				T1.zone.space_tiles.len = 0
+			air_master.tiles_to_update += T1
 
 	if(fromupdate.len)
 		for(var/turf/simulated/T2 in fromupdate)
 			for(var/obj/machinery/door/D2 in T2)
 				doors += D2
-			if(T2.parent)
-				air_master.groups_to_rebuild += T2.parent
-			else
-				air_master.tiles_to_update += T2
-			if(T2.zone)
-				T2.zone.space_tiles.len = 0
+			air_master.tiles_to_update += T2
 
 	for(var/obj/O in doors)
 		O:update_nearby_tiles(1)
+
+
+
+proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
+	if(!original)
+		return null
+
+	var/obj/O = null
+
+	if(sameloc)
+		O=new original.type(original.loc)
+	else
+		O=new original.type(locate(0,0,0))
+
+	if(perfectcopy)
+		if((O) && (original))
+			for(var/V in original.vars)
+				if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key")))
+					O.vars[V] = original.vars[V]
+	return O
+
+
+/area/proc/copy_contents_to(var/area/A , var/platingRequired = 0 )
+	//Takes: Area. Optional: If it should copy to areas that don't have plating
+	//Returns: Nothing.
+	//Notes: Attempts to move the contents of one area to another area.
+	//       Movement based on lower left corner. Tiles that do not fit
+	//		 into the new area will not be moved.
+
+	if(!A || !src) return 0
+
+	var/list/turfs_src = get_area_turfs(src.type)
+	var/list/turfs_trg = get_area_turfs(A.type)
+
+	var/src_min_x = 0
+	var/src_min_y = 0
+	for (var/turf/T in turfs_src)
+		if(T.x < src_min_x || !src_min_x) src_min_x	= T.x
+		if(T.y < src_min_y || !src_min_y) src_min_y	= T.y
+
+	var/trg_min_x = 0
+	var/trg_min_y = 0
+	for (var/turf/T in turfs_trg)
+		if(T.x < trg_min_x || !trg_min_x) trg_min_x	= T.x
+		if(T.y < trg_min_y || !trg_min_y) trg_min_y	= T.y
+
+	var/list/refined_src = new/list()
+	for(var/turf/T in turfs_src)
+		refined_src += T
+		refined_src[T] = new/datum/coords
+		var/datum/coords/C = refined_src[T]
+		C.x_pos = (T.x - src_min_x)
+		C.y_pos = (T.y - src_min_y)
+
+	var/list/refined_trg = new/list()
+	for(var/turf/T in turfs_trg)
+		refined_trg += T
+		refined_trg[T] = new/datum/coords
+		var/datum/coords/C = refined_trg[T]
+		C.x_pos = (T.x - trg_min_x)
+		C.y_pos = (T.y - trg_min_y)
+
+	var/list/toupdate = new/list()
+
+	var/copiedobjs = list()
+
+
+	moving:
+		for (var/turf/T in refined_src)
+			var/datum/coords/C_src = refined_src[T]
+			for (var/turf/B in refined_trg)
+				var/datum/coords/C_trg = refined_trg[B]
+				if(C_src.x_pos == C_trg.x_pos && C_src.y_pos == C_trg.y_pos)
+
+					var/old_dir1 = T.dir
+					var/old_icon_state1 = T.icon_state
+					var/old_icon1 = T.icon
+
+					if(platingRequired)
+						if(istype(B, /turf/space))
+							continue moving
+
+					var/turf/X = new T.type(B)
+					X.dir = old_dir1
+					X.icon_state = old_icon_state1
+					X.icon = old_icon1 //Shuttle floors are in shuttle.dmi while the defaults are floors.dmi
+
+
+					var/list/objs = new/list()
+					var/list/newobjs = new/list()
+					var/list/mobs = new/list()
+					var/list/newmobs = new/list()
+
+					for(var/obj/O in T)
+
+						if(!istype(O,/obj))
+							continue
+
+						objs += O
+
+
+					for(var/obj/O in objs)
+						newobjs += DuplicateObject(O , 1)
+
+
+					for(var/obj/O in newobjs)
+						O.loc = X
+
+					for(var/mob/M in T)
+
+						if(!istype(M,/mob))
+							continue
+
+						mobs += M
+
+					for(var/mob/M in mobs)
+						newmobs += DuplicateObject(M , 1)
+
+					for(var/mob/M in newmobs)
+						M.loc = X
+
+					copiedobjs += newobjs
+					copiedobjs += newmobs
+
+
+
+					for(var/V in T.vars)
+						if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key","x","y","z","contents", "luminosity", "sd_light_spill",)))
+							X.vars[V] = T.vars[V]
+
+					var/area/AR = X.loc
+
+					if(AR.sd_lighting)
+						X.opacity = !X.opacity
+						X.sd_SetOpacity(!X.opacity)
+
+					toupdate += X
+
+					refined_src -= T
+					refined_trg -= B
+					continue moving
+
+
+
+
+	var/list/doors = new/list()
+
+	if(toupdate.len)
+		for(var/turf/simulated/T1 in toupdate)
+			for(var/obj/machinery/door/D2 in T1)
+				doors += D2
+			air_master.tiles_to_update += T1
+
+	for(var/obj/O in doors)
+		O:update_nearby_tiles(1)
+
+
+
+
+	return copiedobjs
+
+
+
 
 
 
@@ -1551,3 +1838,29 @@ proc/get_opposite(var/checkdir)
 		if(a == character)
 			count++
 	return count
+
+proc/get_mob_with_client_list()
+	var/list/mobs = list()
+	for(var/mob/M in world)
+		if (M.client)
+			mobs += M
+	return mobs
+
+/proc/reverse_direction(var/dir)
+	switch(dir)
+		if(NORTH)
+			return SOUTH
+		if(NORTHEAST)
+			return SOUTHWEST
+		if(EAST)
+			return WEST
+		if(SOUTHEAST)
+			return NORTHWEST
+		if(SOUTH)
+			return NORTH
+		if(SOUTHWEST)
+			return NORTHEAST
+		if(WEST)
+			return EAST
+		if(NORTHWEST)
+			return SOUTHEAST

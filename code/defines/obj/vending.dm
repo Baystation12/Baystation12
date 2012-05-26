@@ -40,6 +40,33 @@
 	var/wires = 15
 	var/obj/item/weapon/coin/coin
 	var/charge_type
+/*
+
+/obj/machinery/vending/[vendors name here]   // --vending machine template   :)
+	name = ""
+	desc = ""
+	icon = ''
+	icon_state = ""
+	product_paths = ""
+	product_amounts = ""
+	vend_delay = 15
+	product_hidden = ""
+	product_hideamt = ""
+	product_slogans = ""
+	product_ads = ""
+
+*/
+
+/*
+/obj/machinery/vending/atmospherics //Commenting this out until someone ponies up some actual working, broken, and unpowered sprites - Quarxink
+	name = "Tank Vendor"
+	desc = "A vendor with a wide variety of masks and gas tanks."
+	icon = 'objects.dmi'
+	icon_state = "dispenser"
+	product_paths = "/obj/item/weapon/tank/oxygen;/obj/item/weapon/tank/plasma;/obj/item/weapon/tank/emergency_oxygen;/obj/item/weapon/tank/emergency_oxygen/engi;/obj/item/clothing/mask/breath"
+	product_amounts = "10;10;10;5;25"
+	vend_delay = 0
+*/
 
 /obj/machinery/vending/boozeomat
 	name = "Booze-O-Mat"
@@ -65,6 +92,7 @@
 	hidden_prices = "2;5"
 	points = 15
 	product_ads = "Only the finest!;Have some tools.;The most robust equipment.;The finest gear in space!"
+	charge_type = "engineering"
 
 /obj/machinery/vending/coffee
 	name = "Hot Drinks machine"
@@ -85,7 +113,7 @@
 	desc = "A snack machine courtesy of the Getmore Chocolate Corporation, based out of Mars"
 	icon_state = "snack"
 	product_paths = "/obj/item/weapon/reagent_containers/food/snacks/candy;/obj/item/weapon/reagent_containers/food/drinks/dry_ramen;/obj/item/weapon/reagent_containers/food/snacks/chips;/obj/item/weapon/reagent_containers/food/snacks/sosjerky;/obj/item/weapon/reagent_containers/food/snacks/no_raisin;/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie;/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers"
-//	product_amounts = "10;10;10;10;10;10;10"
+//	product_amounts = "6;6;6;6;6;6;6"
 	product_prices = "1;1;1;1;1;1;1"
 	product_slogans = "Try our new nougat bar!;Twice the calories for half the price!"
 	product_hidden = "/obj/item/weapon/reagent_containers/food/snacks/syndicake"
@@ -126,15 +154,15 @@
 	name = "cigarette machine"
 	desc = "If you want to get cancer, might as well do it in style"
 	icon_state = "cigs"
-	product_paths = "/obj/item/weapon/cigpacket;/obj/item/weapon/matchbox"
-//	product_amounts = "10;10"
-	product_prices = "1;1"
+	product_paths = "/obj/item/weapon/cigpacket;/obj/item/weapon/matchbox;/obj/item/weapon/lighter/random"
+//	product_amounts = "10;10;4"
+	product_prices = "1;1;2"
 	product_slogans = "Space cigs taste good like a cigarette should.;I'd rather toolbox than switch.;Smoke!;Don't believe the reports - smoke today!"
 	vend_delay = 34
-	product_hidden = "/obj/item/weapon/zippo"
+	product_hidden = "/obj/item/weapon/lighter/zippo"
 //	product_hideamt = "4"
 	hidden_prices = "2"
-	product_coin = "/obj/item/clothing/mask/cigarette/cigar/havanian"
+	product_coin = "/obj/item/clothing/mask/cigarette/cigar/havana"
 	product_coin_amt = "2"
 	product_ads = "Probably not bad for you!;Don't believe the scientists!;It's good for you!;Don't quit, buy more!;Smoke!;Nicotine heaven.;Best cigarettes since 2150.;Award-winning cigs."
 	charge_type = "cigarette"
@@ -279,8 +307,25 @@
 	product_hidden = "/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/cola"
 //	product_hideamt = "20"
 	hidden_prices = "1"
-	product_ads = "What the fuck is this shit?;Why would you buy this;holy shit help;i'm stuck;in;a;universe;factory;AAAAAARGH!;HEIL... Stalin?;CAPITALIST PIGS;FUCK THE WEST"
+	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
 	charge_type = "soda"
+
+/obj/machinery/vending/tool
+	name = "YouTool"
+	desc = "Tools for tools."
+	icon_state = "tool"
+	icon_deny = "tool-deny"
+	req_access_txt = "12" //Maintenance access
+	product_paths = "/obj/item/weapon/cable_coil/random;/obj/item/weapon/crowbar;/obj/item/weapon/weldingtool;/obj/item/weapon/wirecutters;/obj/item/weapon/wrench;/obj/item/device/analyzer;/obj/item/device/t_scanner"
+//	product_amounts = "10;5;3;5;5;5;5"
+	product_prices = "1;2;3;2;2;2;2"
+	product_prices = "1"
+	product_hidden = "/obj/item/weapon/weldingtool/largetank;/obj/item/device/multitool"
+//	product_hideamt = "2;2"
+	hidden_prices = "4;4"
+	product_coin = "/obj/item/clothing/gloves/yellow"
+	product_coin_amt = "1"
+	charge_type = "engineering"
 
 /obj/machinery/vending/genetics
 	name = "Genetics Dispenser"

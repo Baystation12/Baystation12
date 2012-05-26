@@ -7,10 +7,10 @@
 	var/name_part1
 	var/name_part2
 
-	name_action = pick("Defeat ", "Annihilate ", "Save ", "Strike ", "Stop ", "Destroy ", "Robust ", "Romance ", "Rape ", "Pwn ", "Own ")
+	name_action = pick("Defeat ", "Annihilate ", "Save ", "Strike ", "Stop ", "Destroy ", "Robust ", "Romance ", "Pwn ", "Own ")
 
-	name_part1 = pick("the Automatic ", "Farmer ", "Lord ", "Professor ", "the Cuban ", "the Evil ", "the Dread King ", "the Space ", "Lord ", "the Faggot ", "Duke ", "General ")
-	name_part2 = pick("Melonoid", "Murdertron", "Sorcerer", "Ruin", "Jeff", "Ectoplasm", "Crushulon", "Uhangoid", "Vhakoid", "Peteoid", "Metroid", "Griefer", "ERPer", "Homosexual", "Lizard Man", "Unicorn")
+	name_part1 = pick("the Automatic ", "Farmer ", "Lord ", "Professor ", "the Cuban ", "the Evil ", "the Dread King ", "the Space ", "Lord ", "the Great ", "Duke ", "General ")
+	name_part2 = pick("Melonoid", "Murdertron", "Sorcerer", "Ruin", "Jeff", "Ectoplasm", "Crushulon", "Uhangoid", "Vhakoid", "Peteoid", "Metroid", "Griefer", "ERPer", "Lizard Man", "Unicorn")
 
 	src.enemy_name = dd_replacetext((name_part1 + name_part2), "the ", "")
 	src.name = (name_action + name_part1 + name_part2)
@@ -143,9 +143,11 @@
 					new /obj/item/clothing/suit/syndicatefake(src.loc)
 					new /obj/item/clothing/head/syndicatefake(src.loc)
 				if(8)
-					new /obj/item/toy/crayonbox(src.loc)
+					new /obj/item/weapon/storage/crayonbox(src.loc)
 				if(9)
 					new /obj/item/toy/spinningtoy(src.loc)
+			//	if(10)									//Commented out on Urist-chan's orders~
+			//		new /obj/item/toy/balloon(src.loc)	//Until it gets a better sprite~
 		else
 			var/atom/movable/Prize = pick(contents)
 			Prize.loc = src.loc

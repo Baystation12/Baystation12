@@ -38,14 +38,6 @@
 	src.druggy.layer = 17
 	src.druggy.mouse_opacity = 0
 
-	// station explosion cinematic
-	src.station_explosion = new src.h_type( src )
-	src.station_explosion.icon = 'station_explosion.dmi'
-	src.station_explosion.icon_state = "start"
-	src.station_explosion.layer = 20
-	src.station_explosion.mouse_opacity = 0
-	src.station_explosion.screen_loc = "1,3"
-
 	var/obj/screen/using
 
 
@@ -61,6 +53,7 @@
 
 //Generic overlays
 
+/*
 	using = new src.h_type(src) //Right hud bar
 	using.dir = SOUTH
 	using.icon = 'screen1_robot.dmi'
@@ -80,7 +73,7 @@
 	using.icon = 'screen1_robot.dmi'
 	using.screen_loc = "EAST+1,SOUTH-1"
 	using.layer = 19
-	src.adding += using
+	src.adding += using*/
 
 
 //Module select
@@ -127,7 +120,7 @@
 	using.layer = 20
 	src.adding += using
 	action_intent = using
-
+/*
 	using = new src.h_type( src )
 	using.name = "arrowleft"
 	using.icon = 'screen1_robot.dmi'
@@ -144,7 +137,7 @@
 	using.dir = EAST
 	using.screen_loc = ui_iarrowright
 	using.layer = 19
-	src.adding += using
+	src.adding += using*/
 //End of Intent
 
 //Cell
@@ -159,7 +152,7 @@
 	mymob.healths.icon = 'screen1_robot.dmi'
 	mymob.healths.icon_state = "health0"
 	mymob.healths.name = "health"
-	mymob.healths.screen_loc = ui_health
+	mymob.healths.screen_loc = ui_borg_health
 
 //Installed Module
 	mymob.hands = new /obj/screen( null )
@@ -182,7 +175,7 @@
 	mymob.throw_icon.icon = 'screen1_robot.dmi'
 	mymob.throw_icon.icon_state = "store"
 	mymob.throw_icon.name = "store"
-	mymob.throw_icon.screen_loc = ui_hand
+	mymob.throw_icon.screen_loc = ui_borg_store
 
 //Temp
 	mymob.bodytemp = new /obj/screen( null )
@@ -226,6 +219,7 @@
 	mymob.flash.screen_loc = "1,1 to 15,15"
 	mymob.flash.layer = 17
 
+	/*
 	mymob.sleep = new /obj/screen( null )
 	mymob.sleep.icon = 'screen1_robot.dmi'
 	mymob.sleep.icon_state = "sleep0"
@@ -237,6 +231,7 @@
 	mymob.rest.icon_state = "rest0"
 	mymob.rest.name = "rest"
 	mymob.rest.screen_loc = ui_rest
+	*/
 
 
 	mymob.zone_sel = new /obj/screen/zone_sel( null )
@@ -247,7 +242,7 @@
 
 	mymob.client.screen = null
 
-	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, mymob.blind, mymob.flash, mymob.rest, mymob.sleep, mymob.gun_setting_icon) //, mymob.mach )
+	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.fire, mymob.hands, mymob.healths, mymob:cells, mymob.pullin, mymob.blind, mymob.flash, mymob.gun_setting_icon) //, mymob.rest, mymob.sleep, mymob.mach )
 	mymob.client.screen += src.adding + src.other
 
 	return

@@ -1,5 +1,46 @@
+/mob/living/silicon/robot/gib()
+	//robots don't die when gibbed. instead they drop their MMI'd brain
+	var/atom/movable/overlay/animation = null
+	monkeyizing = 1
+	canmove = 0
+	icon = null
+	invisibility = 101
+
+	animation = new(loc)
+	animation.icon_state = "blank"
+	animation.icon = 'mob.dmi'
+	animation.master = src
+
+	flick("gibbed-r", animation)
+	robogibs(loc, viruses)
+
+	spawn(15)
+		if(animation)	del(animation)
+		if(src)			del(src)
+
+/mob/living/silicon/robot/dust()
+	death(1)
+	var/atom/movable/overlay/animation = null
+	monkeyizing = 1
+	canmove = 0
+	icon = null
+	invisibility = 101
+
+	animation = new(loc)
+	animation.icon_state = "blank"
+	animation.icon = 'mob.dmi'
+	animation.master = src
+
+	flick("dust-r", animation)
+	new /obj/effect/decal/remains/robot(loc)
+	if(mmi)		del(mmi)	//Delete the MMI first so that it won't go popping out.
+
+	spawn(15)
+		if(animation)	del(animation)
+		if(src)			del(src)
+
+
 /mob/living/silicon/robot/death(gibbed)
-	var/cancel
 	if (!gibbed)
 		src.emote("deathgasp")
 	src.stat = 2
@@ -28,22 +69,6 @@
 
 	sql_report_cyborg_death(src)
 
-	for(var/mob/M in world)
-		if ((M.client && !( M.stat )))
-			cancel = 1
-			break
-	if (!( cancel ))
-		world << "<B>Everyone is dead! Resetting in 30 seconds!</B>"
-
-		feedback_set_details("end_error","no live players")
-		feedback_set_details("round_end","[time2text(world.realtime)]")
-		if(blackbox)
-			blackbox.save_all_data_to_sql()
-
-		spawn( 300 )
-			log_game("Rebooting because of no live players")
-			world.Reboot()
-			return
 	if (src.key)
 		spawn(50)
 			if(src.key && src.stat == 2)

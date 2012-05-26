@@ -8,6 +8,7 @@
 	var
 		list/modules = list()
 		obj/item/emag = null
+		obj/item/borg/upgrade/jetpack = null
 
 
 	emp_act(severity)
@@ -24,6 +25,8 @@
 		src.modules += new /obj/item/device/flash(src)
 		src.emag = new /obj/item/toy/sword(src)
 		src.emag.name = "Placeholder Emag Item"
+//		src.jetpack = new /obj/item/toy/sword(src)
+//		src.jetpack.name = "Placeholder Upgrade Item"
 		return
 
 
@@ -69,7 +72,7 @@
 		src.modules += new /obj/item/weapon/reagent_containers/pill/dexalin(src)
 		src.modules += new /obj/item/weapon/reagent_containers/pill/antitox(src)
 		src.modules += new /obj/item/weapon/reagent_containers/pill/kelotane(src)
-		src.modules += new /obj/item/weapon/reagent_containers/pill/bicardine(src)
+		src.modules += new /obj/item/weapon/reagent_containers/pill/bicaridine(src)
 		return
 
 
@@ -78,7 +81,7 @@
 			/obj/item/weapon/reagent_containers/pill/dexalin,
 			/obj/item/weapon/reagent_containers/pill/antitox,
 			/obj/item/weapon/reagent_containers/pill/kelotane,
-			/obj/item/weapon/reagent_containers/pill/bicardine
+			/obj/item/weapon/reagent_containers/pill/bicaridine
 		)
 		for (var/T in what)
 			if (!(locate(T) in src.modules))
@@ -152,7 +155,7 @@
 		src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 		src.modules += new /obj/item/weapon/melee/baton(src)
 		src.modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
-//		src.emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
+		src.emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
 		return
 
 
@@ -163,9 +166,7 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/weapon/cleaner(src)
-		src.modules += new /obj/item/weapon/mop(src)
-		src.modules += new /obj/item/weapon/reagent_containers/glass/bucket(src)
+		src.modules += new /obj/item/weapon/soap/nanotrasen(src)
 		src.modules += new /obj/item/weapon/trashbag(src)
 		src.emag = new /obj/item/weapon/cleaner(src)
 
@@ -193,7 +194,10 @@
 		src.modules += M
 
 		src.modules += new /obj/item/weapon/reagent_containers/robodropper(src)
-		src.modules += new /obj/item/weapon/zippo(src)
+
+		var/obj/item/weapon/lighter/zippo/L = new /obj/item/weapon/lighter/zippo(src)
+		L.lit = 1
+		src.modules += L
 
 		src.modules += new /obj/item/weapon/tray(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/shaker(src)
@@ -216,9 +220,10 @@
 		..()
 		src.modules += new /obj/item/borg/sight/meson(src)
 		src.emag = new /obj/item/borg/stun(src)
-		src.modules += new /obj/item/weapon/satchel(src)
-		src.modules += new /obj/item/weapon/pickaxe/jackhammer(src)
-		src.modules += new /obj/item/weapon/shovel(src)
+		src.modules += new /obj/item/weapon/satchel/borg(src)
+		src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
+//		src.modules += new /obj/item/weapon/shovel(src) Uneeded due to buffed drill
+//		src.jetpack += new/obj/item/weapon/tank/jetpack/carbondioxide(src)
 		return
 
 
@@ -227,5 +232,7 @@
 
 
 	New()
+		src.modules += new /obj/item/weapon/melee/energy/sword(src)
+		src.modules += new /obj/item/weapon/gun/energy/pulse_rifle/destroyer(src)
 		src.modules += new /obj/item/weapon/card/emag(src)
 		return

@@ -13,7 +13,7 @@ WELDINGTOOOL
 	desc = "A wrench with common uses. Can be found in your hand."
 	icon = 'items.dmi'
 	icon_state = "wrench"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = FPRINT | TABLEPASS| CONDUCT | ONBELT
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
@@ -44,7 +44,7 @@ WELDINGTOOOL
 	name = "Welding Tool"
 	icon = 'items.dmi'
 	icon_state = "welder"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = FPRINT | TABLEPASS| CONDUCT | ONBELT
 	force = 3.0
 	throwforce = 5.0
 	throw_speed = 1
@@ -256,9 +256,32 @@ WELDINGTOOOL
 			user.eye_blind = 5
 			user.eye_blurry = 5
 			user.disabilities |= 1
-			spawn(100)
-				user.disabilities &= ~1
+//			spawn(100)
+//				user.disabilities &= ~1 //Simpler to just leave them short sighted.
 		return
+
+	attack(mob/M as mob, mob/user as mob)
+		if(hasorgans(M))
+			var/datum/organ/external/S = M:organs[user.zone_sel.selecting]
+			if(S)
+				message_admins("It appears [M] has \"null\" where there should be a [user.zone_sel.selecting].  Check into this, and tell SkyMarshal: \"[M.type]\"")
+				return ..()
+			if(!S.robot || user.a_intent != "help")
+				return ..()
+			if(S.brute_dam)
+				S.heal_damage(15,0,0,1)
+				if(user != M)
+					user.visible_message("\red You patch some dents on \the [M]'s [S.display_name]",\
+					"\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src]",\
+					"You hear a welder.")
+				else
+					user.visible_message("\red You patch some dents on your [S.display_name]",\
+					"\red \The [user] patches some dents on their [S.display_name] with \the [src]",\
+					"You hear a welder.")
+			else
+				user << "Nothing to fix!"
+		else
+			return ..()
 
 
 /obj/item/weapon/weldingtool/largetank
@@ -290,7 +313,7 @@ WELDINGTOOOL
 	desc = "This cuts wires."
 	icon = 'items.dmi'
 	icon_state = "cutters"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = FPRINT | TABLEPASS| CONDUCT | ONBELT
 	force = 6.0
 	throw_speed = 2
 	throw_range = 9
@@ -301,3 +324,14 @@ WELDINGTOOOL
 	New()
 		if(prob(50))
 			icon_state = "cutters-y"
+
+/obj/item/weapon/wirecutters/attack(mob/M as mob, mob/user as mob)
+	if((M.handcuffed) && (istype(M:handcuffed, /obj/item/weapon/handcuffs/cable)))
+		M.visible_message("You cut \the [M]'s restraints with \the [src]!",\
+		"\The [usr] cuts \the [M]'s restraints with \the [src]!",\
+		"You hear cable being cut.")
+		M.handcuffed = null
+		M.update_clothing()
+		return
+	else
+		..()

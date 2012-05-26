@@ -1,5 +1,5 @@
 /obj/item/weapon/gun
-	name = "\improper Gun"
+	name = "gun"
 	desc = "Its a gun. It's pretty terrible, though."
 	icon = 'gun.dmi'
 	icon_state = "detective"
@@ -15,16 +15,17 @@
 
 	var
 		fire_sound = 'Gunshot.ogg'
-		obj/item/projectile/in_chamber = null
+		tmp/obj/item/projectile/in_chamber = null
 		caliber = ""
 		silenced = 0
 		recoil = 0
+		ejectshell = 1
 		tmp/list/mob/living/target //List of who yer targeting.
 		tmp/lock_time = -100
-		mouthshoot = 0 ///To stop people from suiciding twice... >.>
+		tmp/mouthshoot = 0 ///To stop people from suiciding twice... >.>
 		automatic = 0 //Used to determine if you can target multiple people.
-		mob/living/last_moved_mob //Used to fire faster at more than one person.
-		told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
+		tmp/mob/living/last_moved_mob //Used to fire faster at more than one person.
+		tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 
 	proc/load_into_chamber()
 		return 0
@@ -107,6 +108,11 @@
 			update_icon()
 			return
 		else if(user.a_intent != "hurt" && load_into_chamber() && istype(in_chamber,/obj/item/projectile/energy/electrode)) //Point blank tasering.
+			if (M.canstun == 0 || M.canweaken == 0)
+				user.visible_message("\red <B>[M] has been stunned with the taser gun by [user] to no effect!</B>")
+				del(in_chamber)
+				update_icon()
+				return
 			if (prob(50))
 				if (M.paralysis < 60 && (!(M.mutations & 8)) )
 					M.paralysis = 60
@@ -162,6 +168,8 @@
 		if(!special_check(user))	return
 		if(!load_into_chamber())
 			user.visible_message("*click click*", "\red <b>*click*</b>")
+			for(var/mob/K in viewers(usr))
+				K << 'empty.ogg'
 			return
 
 		if(!in_chamber)	return
@@ -187,6 +195,7 @@
 
 		in_chamber.original = targloc
 		in_chamber.loc = get_turf(user)
+		in_chamber.starting = get_turf(user)
 		user.next_move = world.time + 4
 		in_chamber.silenced = silenced
 		in_chamber.current = curloc
@@ -250,6 +259,8 @@
 					told_cant_shoot = 0
 		else
 			usr.visible_message("*click click*", "\red <b>*click*</b>")
+			for(var/mob/K in viewers(usr))
+				K << 'empty.ogg'
 		var/dir_to_fire = sd_get_approx_dir(M,T)
 		if(dir_to_fire != M.dir)
 			M.dir = dir_to_fire
@@ -392,7 +403,6 @@ mob/proc
 						m_intent = "walk"
 						hud_used.move_intent.icon_state = "walking"
 				while(targeted_by && T.client)
-					sleep(1)
 					if(last_move_intent > I.lock_time + 10 && !T.client.target_can_move) //If the target moved while targeted
 						I.TargetActed(src)
 						if(I.last_moved_mob == src) //If they were the last ones to move, give them more of a grace period, so that an automatic weapon can hold down a room better.
@@ -411,6 +421,7 @@ mob/proc
 							I.lock_time = world.time + 5
 						I.lock_time = world.time + 5
 						I.last_moved_mob = src
+					sleep(1)
 
 	NotTargeted(var/obj/item/weapon/gun/I)
 		if(!I.silenced)
@@ -518,7 +529,8 @@ client/verb
 						if(!target_can_run)
 							M << "\red Your move intent is now set to walk, as your targeter permits it."
 							M.m_intent = "walk"
-							M.hud_used.move_intent.icon_state = "walking"
+							if(M.hud_used.move_intent)
+								M.hud_used.move_intent.icon_state = "walking"
 					else
 						M << "\red <b>Your character will now be shot if they move.</b>"
 	AllowTargetRun()

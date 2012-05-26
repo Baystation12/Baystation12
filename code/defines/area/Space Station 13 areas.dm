@@ -144,12 +144,15 @@ proc/process_ghost_teleport_locs()
 	music = "music/escape.ogg"
 
 /area/shuttle/escape/station
+	name = "Emergency Shuttle Station"
 	icon_state = "shuttle2"
 
 /area/shuttle/escape/centcom
+	name = "Emergency Shuttle Centcom"
 	icon_state = "shuttle"
 
 /area/shuttle/escape/transit // the area to pass through for 3 minute transit
+	name = "Emergency Shuttle Transit"
 	icon_state = "shuttle"
 
 /area/shuttle/escape_pod1
@@ -383,6 +386,24 @@ proc/process_ghost_teleport_locs()
 	icon_state = "cave"
 	requires_power = 0
 
+/area/asteroid/artifactroom
+	name = "Asteroid - Artifact"
+	icon_state = "cave"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /area/planet/clown
 	name = "Clown Planet"
 	icon_state = "honk"
@@ -441,7 +462,31 @@ proc/process_ghost_teleport_locs()
 	icon_state = "yellow"
 	requires_power = 0
 
+
+
+/area/borg_deathsquad
+	name = "Borg Deathsquad"
+	icon_state = "yellow"
+	requires_power = 0
+
+/area/borg_deathsquad/start
+	name = "Borg Deathsquad - Ready"
+
+
+/area/borg_deathsquad/station
+	name = "Borg Deathsquad - Arrived"
+
+
+
+
+
+
+
+
 //PRISON
+/area/prison
+	name = "Prison Station"
+	icon_state = "brig"
 
 /area/prison/arrival_airlock
 	name = "Prison Station Airlock"
@@ -797,14 +842,12 @@ proc/process_ghost_teleport_locs()
 //Engineering
 
 /area/engine
+	engineering
+
 	engine_smes
 		name = "Engineering SMES"
 		icon_state = "engine_smes"
 		requires_power = 0//This area only covers the batteries and they deal with their own power
-
-	engineering
-		name = "Engineering"
-		icon_state = "engine"
 
 	particle_accelerator
 		name = "Particle Accelerator"
@@ -814,7 +857,10 @@ proc/process_ghost_teleport_locs()
 		name = "Chief Engineers office"
 		icon_state = "engine_ce"
 
-//new engine areas
+	engineering_break_room
+		name = "Engineering Breakroom"
+		icon_state = "engine_breakroom"
+
 	control
 		name = "Engineering Control"
 		icon_state = "engine_control"
@@ -859,13 +905,51 @@ proc/process_ghost_teleport_locs()
 		name = "Engineering Foyer"
 		icon_state = "engine_foyer"
 
-	breakroom
-		name = "Engineering Break Room"
-		icon_state = "engine_breakroom"
-
 	core
 		name = "Engineering Core"
 		icon_state = "engine_core"
+
+//reactor areas
+
+	reactor_core
+		name = "Reactor Core"
+		icon_state = "engine_core"
+
+	reactor_gas
+		name = "Reactor Gas Storage"
+		icon_state = "engine_atmos"
+
+	aux_control
+		name = "Reactor Auxiliary Control"
+		icon_state = "engine_aux"
+
+	turbine_control
+		name = "Turbine Control"
+		icon_state = "engine_turbine"
+
+	reactor_airlock
+		name = "Reactor Primary Entrance"
+		icon_state = "engine_airlock"
+
+	reactor_fuel_storage
+		name = "Reactor Fuel Storage"
+		icon_state = "engine_fuel"
+
+	reactor_fuel_ports
+		name = "Reactor Fuel Ports"
+		icon_state = "engine_port"
+
+	generators
+		name = "Generator Room"
+		icon_state = "engine_generators"
+
+	port_gyro_bay
+		name = "Port Gyrotron Bay"
+		icon_state = "engine_starboardgyro"
+
+	starboard_gyro_bay
+		name = "Starboard Gyrotron Bay"
+		icon_state = "engine_portgyro"
 
 //Solars
 
@@ -934,6 +1018,11 @@ proc/process_ghost_teleport_locs()
 	icon_state = "teleporter"
 	music = "signal"
 
+/area/teleporter/gateway
+	name = "Secure Construction Area"
+	icon_state = "teleporter"
+	music = "signal"
+
 /area/AIsattele
 	name = "AI Satellite Teleporter Room"
 	icon_state = "teleporter"
@@ -993,7 +1082,7 @@ proc/process_ghost_teleport_locs()
 //Security
 
 /area/security/main
-	name = "Security"
+	name = "Security Office"
 	icon_state = "security"
 
 /area/security/lobby
@@ -1003,6 +1092,10 @@ proc/process_ghost_teleport_locs()
 /area/security/brig
 	name = "Brig"
 	icon_state = "brig"
+
+/area/security/prison
+	name = "Prison Wing"
+	icon_state = "security"
 
 /area/security/warden
 	name = "Warden"
@@ -1146,6 +1239,10 @@ proc/process_ghost_teleport_locs()
 /area/toxins/server
 	name = "Server Room"
 	icon_state = "server"
+
+/area/toxins/supermatter
+	name = "Supermatter Laboratory"
+	icon_state = "supermatter"
 
 //Storage
 
@@ -1454,6 +1551,21 @@ proc/process_ghost_teleport_locs()
 	name = "Telecommunications Satellite Lounge"
 	icon_state = "tcomsatlounge"
 
+
+
+
+
+
+
+
+
+
+
+
+/area/turret_protected/AssistantRoom
+	name = "Assistant Room"
+	icon_state = "storage"
+	sd_lighting = 0
 
 /////////////////////////////////////////////////////////////////////
 /*

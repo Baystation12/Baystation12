@@ -13,14 +13,11 @@
 	///Chemistry.
 	var/datum/reagents/reagents = null
 
-	//Detective Work, used for the duplicate data points kept in the scanners
-	var/list/original_atom
-
 	//var/chem_is_open_container = 0
 	// replaced by OPENCONTAINER flags and atom/proc/is_open_container()
 	///Chemistry.
 
-	proc/assume_air(datum/air_group/giver)
+	proc/assume_air(datum/gas_mixture/giver)
 		del(giver)
 		return null
 
@@ -28,7 +25,11 @@
 		return null
 
 	proc/return_air()
-		return null
+		if(loc)
+			return loc.return_air()
+		else
+			return null
+
 
 
 // Convenience proc to see if a container is open for chemistry handling
@@ -47,7 +48,7 @@
 */
 
 obj
-	assume_air(datum/air_group/giver)
+	assume_air(datum/gas_mixture/giver)
 		if(loc)
 			return loc.assume_air(giver)
 		else
@@ -165,7 +166,6 @@ obj
 	src.m_flag = 1
 	if ((A != src.loc && A && A.z == src.z))
 		src.last_move = get_dir(A, src.loc)
-		src.moved_recently = 1
 	return
 
 /*

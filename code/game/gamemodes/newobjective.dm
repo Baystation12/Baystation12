@@ -56,6 +56,11 @@
 /proc/PickObjectiveFromList(var/list/objectivesArray)
 	var/list/datum/objectives = objectivesArray[1]
 	var/pick_index = text2num(pickweight(objectivesArray[2]))
+	if (pick_index > objectives.len || pick_index < 1)
+		log_admin("Objective picking failed. Error logged. One or more traitors will need to be manually-assigned objectives. Pick_index was [pick_index].  Tell Sky.")
+		message_admins("Objective picking failed. Error logged. One or more traitors will need to be manually-assigned objectives. Pick_index was [pick_index]. Tell Sky.")
+		CRASH("Objective picking failed. Pick_index was [pick_index].")
+
 	return objectives[pick_index]
 
 /proc/RemoveObjectiveFromList(var/list/objectiveArray, var/datum/objective/objective)
@@ -92,7 +97,7 @@
 			if(1 to 55)		//Theft Objectives (55% chance)
 				var/datum/objective/objective = PickObjectiveFromList(theftobjectives)
 				for(1 to 10)
-					if(objective.points + totalweight <= 110)
+					if(objective.points + totalweight <= 100)
 						break
 					objective = PickObjectiveFromList(theftobjectives)
 				chosenobjectives += objective
@@ -102,7 +107,7 @@
 				var/datum/objective/assassinate/objective = PickObjectiveFromList(killobjectives)
 				world << objective
 				for(1 to 10)
-					if(objective.points + totalweight <= 110)
+					if(objective.points + totalweight <= 100)
 						break
 					objective = PickObjectiveFromList(killobjectives)
 				if(!objective)
@@ -123,7 +128,7 @@
 			if(93 to 95)	//Framing Objectives (3% chance)
 				var/datum/objective/objective = PickObjectiveFromList(frameobjectives)
 				for(1 to 10)
-					if(objective.points + totalweight <= 110)
+					if(objective.points + totalweight <= 100)
 						break
 					objective = PickObjectiveFromList(frameobjectives)
 				if(!objective)
@@ -144,7 +149,7 @@
 			if(96 to 100)	//Protection Objectives (5% chance)
 				var/datum/objective/protection/objective = PickObjectiveFromList(protectobjectives)
 				for(1 to 10)
-					if(objective.points + totalweight <= 110)
+					if(objective.points + totalweight <= 100)
 						break
 					objective = PickObjectiveFromList(protectobjectives)
 				if(!objective)
@@ -647,8 +652,8 @@ datum
 
 
 			jetpack
-				steal_target = /obj/item/weapon/tank/jetpack
-				explanation_text = "Steal a jetpack."
+				steal_target = /obj/item/weapon/tank/jetpack/oxygen
+				explanation_text = "Steal a blue oxygen jetpack."
 				weight = 20
 
 				get_points(var/job)
@@ -1162,6 +1167,10 @@ datum
 				return 1
 
 		decapitate
+			New(var/text,var/joba,var/datum/mind/targeta)
+				target = targeta
+				job = joba
+				explanation_text = "Remove and recover the head of [target.current.real_name], the [target.assigned_role]."
 			proc/find_target()
 				..()
 				if(target && target.current)
@@ -1217,6 +1226,20 @@ datum
 				else
 					return 0
 
+		meme_attune
+			var/target_amount
+			proc/gen_amount_goal(var/lowbound = 4, var/highbound = 6)
+				target_amount = rand (lowbound,highbound)
+
+				explanation_text = "Attune [target_amount] humanoid brains."
+				return target_amount
+
+			check_completion()
+				if(owner && owner.current && istype(owner.current,/mob/living/parasite/meme) && (owner.current:indoctrinated.len >= target_amount))
+					return 1
+				else
+					return 0
+
 		download
 			var/target_amount
 			proc/gen_amount_goal()
@@ -1244,6 +1267,11 @@ datum
 
 
 		debrain//I want braaaainssss
+			New(var/text,var/joba,var/datum/mind/targeta)
+				target = targeta
+				job = joba
+				explanation_text = "Remove and recover the brain of [target.current.real_name], the [target.assigned_role]."
+
 			proc/find_target()
 				..()
 				if(target && target.current)
@@ -1342,3 +1370,33 @@ datum
 				if(captured_amount<target_amount)
 					return 0
 				return 1
+
+datum/objective/silence
+	explanation_text = "Do not allow anyone to escape the station.  Only allow the shuttle to be called when everyone is dead and your story is the only one left."
+
+	check_completion()
+		if(emergency_shuttle.location<2)
+			return 0
+
+		var/area/shuttle = locate(/area/shuttle/escape/centcom)
+		var/area/pod1 =    locate(/area/shuttle/escape_pod1/centcom)
+		var/area/pod2 =    locate(/area/shuttle/escape_pod2/centcom)
+		var/area/pod3 =    locate(/area/shuttle/escape_pod3/centcom)
+		var/area/pod4 =    locate(/area/shuttle/escape_pod5/centcom)
+
+		for(var/mob/living/player in world)
+			if (player == owner.current)
+				continue
+			if (player.mind)
+				if (player.stat != 2)
+					if (get_turf(player) in shuttle)
+						return 0
+					if (get_turf(player) in pod1)
+						return 0
+					if (get_turf(player) in pod2)
+						return 0
+					if (get_turf(player) in pod3)
+						return 0
+					if (get_turf(player) in pod4)
+						return 0
+		return 1

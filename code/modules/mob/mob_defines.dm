@@ -29,6 +29,7 @@
 	var/maxHealth = 100 //Living
 	//Vars that should only be accessed via procs ++END
 
+
 //	var/uses_hud = 0
 	var/obj/screen/pain = null
 	var/obj/screen/flash = null
@@ -69,6 +70,7 @@
 	var/obj/screen/zone_sel/zone_sel = null
 
 	var/emote_allowed = 1
+	var/speech_allowed = 1
 	var/computer_id = null
 	var/lastattacker = null
 	var/lastattacked = null
@@ -112,6 +114,7 @@
 	var/canmove = 1.0
 	var/eye_stat = null//Living, potentially Carbon
 	var/lastpuke = 0
+	var/unacidable = 0
 
 	var/name_archive //For admin things like possession
 
@@ -127,6 +130,7 @@
 	var/jitteriness = 0//Carbon
 	var/charges = 0.0
 	var/nutrition = 400.0//Carbon
+
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 	var/paralysis = 0.0
 	var/stunned = 0.0
@@ -199,6 +203,7 @@
 	//clumsy = 16
 	//obese = 32
 	//husk = 64
+	var/tkdisable = 0//For remote viewing and stuff. Disables TK.
 
 	var/voice_name = "unidentifiable voice"
 	var/voice_message = null // When you are not understood by others (replaced with just screeches, hisses, chimpers etc.)
@@ -252,19 +257,11 @@
 	var/robot_talk_understand = 0
 	var/alien_talk_understand = 0
 	var/taj_talk_understand = 0
+
 	//You can guess what these are for.  --SkyMarshal
 	var/list/atom/hallucinations = list()
 	var/halloss = 0
 	var/hallucination = 0
-
-// TG Porting Variables
-	var/canstun = 1 	// determines if this mob can be stunned by things
-	var/canweaken = 1	// determines if this mob can be weakened/knocked down by things
-	var/nopush = 0 //Can they be shoved?
-
-	var/area/lastarea = null
-
-	var/digitalcamo = 0 // Can they be tracked by the AI?
 
 /*For ninjas and others. This variable is checked when a mob moves and I guess it was supposed to allow the mob to move
 through dense areas, such as walls. Setting density to 0 does the same thing. The difference here is that
@@ -279,250 +276,19 @@ the mob is also allowed to move without any sort of restriction. For instance, i
 	var/UI = 'screen1_old.dmi' // For changing the UI from preferences
 
 //	var/obj/effect/organstructure/organStructure = null //for dem organs
-	var/list/organs = list(  )	//List of organs.
-	var/list/organs2 = list()
 
+	var/canstun = 1 	// determines if this mob can be stunned by things
+	var/canweaken = 1	// determines if this mob can be weakened/knocked down by things
+	var/nopush = 0 //Can they be shoved?
+
+	var/area/lastarea = null
+
+	var/digitalcamo = 0 // Can they be tracked by the AI?
+
+	var/list/organs = list(  )	//List of organs.
+//	var/list/organs2 = list()
 //Singularity wants you!
 	var/grav_delay = 0
 	var/being_strangled = 0
 
-/mob/proc/contract_disease(var/datum/disease/virus, var/skip_this = 0, var/force_species_check=1)
-//	world << "Contract_disease called by [src] with virus [virus]"
-	if(stat >=2) return
-	if(virus.type in resistances)
-		if(prob(99.9)) return
-		resistances.Remove(virus.type)//the resistance is futile
-
-	for(var/datum/disease/D in viruses)
-		if(istype(D, virus.type))
-			return // two viruses of the same kind can't infect a body at once!!
-
-
-	if(force_species_check)
-		var/fail = 1
-		for(var/name in virus.affected_species)
-			var/mob_type = text2path("/mob/living/carbon/[lowertext(name)]")
-			if(mob_type && istype(src, mob_type))
-				fail = 0
-				break
-		if(fail) return
-
-	if(skip_this == 1)
-		//if(src.virus)				< -- this used to replace the current disease. Not anymore!
-			//src.virus.cure(0)
-
-		var/datum/disease/v = new virus.type
-		src.viruses += v
-		v.affected_mob = src
-		v.strain_data = v.strain_data.Copy()
-		v.holder = src
-		if(prob(5))
-			v.carrier = 1
-		return
-
-	//if(src.virus) //
-		//return //
-
-
-/*
-	var/list/clothing_areas	= list()
-	var/list/covers = list(UPPER_TORSO,LOWER_TORSO,LEGS,FEET,ARMS,HANDS)
-	for(var/Covers in covers)
-		clothing_areas[Covers] = list()
-
-	for(var/obj/item/clothing/Clothing in src)
-		if(Clothing)
-			for(var/Covers in covers)
-				if(Clothing&Covers)
-					clothing_areas[Covers] += Clothing
-
-*/
-	if(prob(15/virus.permeability_mod)) return //the power of immunity compels this disease!
-
-	var/obj/item/clothing/Cl = null
-	var/passed = 1
-
-	//chances to target this zone
-	var/head_ch
-	var/body_ch
-	var/hands_ch
-	var/feet_ch
-
-	switch(virus.spread_type)
-		if(CONTACT_HANDS)
-			head_ch = 0
-			body_ch = 0
-			hands_ch = 100
-			feet_ch = 0
-		if(CONTACT_FEET)
-			head_ch = 0
-			body_ch = 0
-			hands_ch = 0
-			feet_ch = 100
-		else
-			head_ch = 100
-			body_ch = 100
-			hands_ch = 25
-			feet_ch = 25
-
-
-	var/target_zone = pick(head_ch;1,body_ch;2,hands_ch;3,feet_ch;4)//1 - head, 2 - body, 3 - hands, 4- feet
-
-	if(istype(src, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = src
-
-		switch(target_zone)
-			if(1)
-				if(isobj(H.head))
-					Cl = H.head
-					passed = prob(Cl.permeability_coefficient*100*virus.permeability_mod)
-//					world << "Head pass [passed]"
-				if(passed && isobj(H.wear_mask))
-					Cl = H.wear_mask
-					passed = prob(Cl.permeability_coefficient*100*virus.permeability_mod)
-//					world << "Mask pass [passed]"
-			if(2)//arms and legs included
-				if(isobj(H.wear_suit))
-					Cl = H.wear_suit
-					passed = prob(Cl.permeability_coefficient*100*virus.permeability_mod)
-//					world << "Suit pass [passed]"
-				if(passed && isobj(H.slot_w_uniform))
-					Cl = H.slot_w_uniform
-					passed = prob(Cl.permeability_coefficient*100*virus.permeability_mod)
-//					world << "Uniform pass [passed]"
-			if(3)
-				if(isobj(H.wear_suit) && H.wear_suit.body_parts_covered&HANDS)
-					Cl = H.wear_suit
-					passed = prob(Cl.permeability_coefficient*100*virus.permeability_mod)
-//					world << "Suit pass [passed]"
-
-				if(passed && isobj(H.gloves))
-					Cl = H.gloves
-					passed = prob(Cl.permeability_coefficient*100*virus.permeability_mod)
-//					world << "Gloves pass [passed]"
-			if(4)
-				if(isobj(H.wear_suit) && H.wear_suit.body_parts_covered&FEET)
-					Cl = H.wear_suit
-					passed = prob(Cl.permeability_coefficient*100*virus.permeability_mod)
-//					world << "Suit pass [passed]"
-
-				if(passed && isobj(H.shoes))
-					Cl = H.shoes
-					passed = prob(Cl.permeability_coefficient*100*virus.permeability_mod)
-//					world << "Shoes pass [passed]"
-			else
-				src << "Something strange's going on, something's wrong."
-
-			/*if("feet")
-				if(H.shoes && istype(H.shoes, /obj/item/clothing/))
-					Cl = H.shoes
-					passed = prob(Cl.permeability_coefficient*100)
-					//
-					world << "Shoes pass [passed]"
-			*/		//
-	else if(istype(src, /mob/living/carbon/monkey))
-		var/mob/living/carbon/monkey/M = src
-		switch(target_zone)
-			if(1)
-				if(M.wear_mask && isobj(M.wear_mask))
-					Cl = M.wear_mask
-					passed = prob(Cl.permeability_coefficient*100+virus.permeability_mod)
-					//world << "Mask pass [passed]"
-
-	if(passed && virus.spread_type == AIRBORNE && internals)
-		passed = (prob(50*virus.permeability_mod))
-
-	if(passed)
-		//world << "Infection in the mob [src]. YAY"
-
-
-/*
-	var/score = 0
-	if(istype(src, /mob/living/carbon/human))
-		if(src:gloves) score += 5
-		if(istype(src:wear_suit, /obj/item/clothing/suit/space)) score += 10
-		if(istype(src:wear_suit, /obj/item/clothing/suit/bio_suit)) score += 10
-		if(istype(src:head, /obj/item/clothing/head/helmet/space)) score += 5
-		if(istype(src:head, /obj/item/clothing/head/bio_hood)) score += 5
-	if(wear_mask)
-		score += 5
-		if((istype(src:wear_mask, /obj/item/clothing/mask) || istype(src:wear_mask, /obj/item/clothing/mask/surgical)) && !internal)
-			score += 5
-		if(internal)
-			score += 5
-	if(score > 20)
-		return
-	else if(score == 20 && prob(95))
-		return
-	else if(score >= 15 && prob(75))
-		return
-	else if(score >= 10 && prob(55))
-		return
-	else if(score >= 5 && prob(35))
-		return
-	else if(prob(15))
-		return
-	else*/
-		var/datum/disease/v = new virus.type
-		src.viruses += v
-		v.affected_mob = src
-		v.strain_data = v.strain_data.Copy()
-		v.holder = src
-		if(prob(5))
-			v.carrier = 1
-		return
-	return
-
-
-// ++++ROCKDTBEN++++ MOB PROCS
-
-/mob/proc/getBruteLoss()
-	return bruteloss
-
-/mob/proc/adjustBruteLoss(var/amount)
-	bruteloss = max(bruteloss + amount, 0)
-
-/mob/proc/getOxyLoss()
-	return oxyloss
-
-/mob/proc/adjustOxyLoss(var/amount)
-	oxyloss = max(oxyloss + amount, 0)
-
-/mob/proc/setOxyLoss(var/amount)
-	oxyloss = amount
-
-/mob/proc/getToxLoss()
-	return toxloss
-
-/mob/proc/adjustToxLoss(var/amount)
-	toxloss = max(toxloss + amount, 0)
-
-/mob/proc/setToxLoss(var/amount)
-	toxloss = amount
-
-/mob/proc/getFireLoss()
-	return fireloss
-
-/mob/proc/adjustFireLoss(var/amount)
-	fireloss = max(fireloss + amount, 0)
-
-/mob/proc/getCloneLoss()
-	return cloneloss
-
-/mob/proc/adjustCloneLoss(var/amount)
-	cloneloss = max(cloneloss + amount, 0)
-
-/mob/proc/setCloneLoss(var/amount)
-	cloneloss = amount
-
-/mob/proc/getBrainLoss()
-	return brainloss
-
-/mob/proc/adjustBrainLoss(var/amount)
-	brainloss = max(brainloss + amount, 0)
-
-/mob/proc/setBrainLoss(var/amount)
-	brainloss = amount
-
-// ++++ROCKDTBEN++++ MOB PROCS //END
 

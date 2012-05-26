@@ -33,13 +33,17 @@
 ///////////////////////////
 /datum/game_mode/revolution/announce()
 	world << "<B>The current game mode is - Revolution!</B>"
-	world << "<B>Some crewmembers are attempting to start a revolution!<BR>\nRevolutionaries - Kill the Captain, HoP, HoS, CE, RD and CMO. Convert other crewmembers (excluding the heads of staff, and security officers) to your cause by flashing them. Protect your leaders.<BR>\nPersonnel - Protect the heads of staff. Kill the leaders of the revolution, and brainwash the other revolutionaries (by beating them in the head).</B>"
+	world << "<B>Some crewmembers are attempting to start a revolution!<BR>\nRevolutionaries - Kill the Captain, HoP, HoS, CE, RD and CMO. Convert other crewmembers (excluding the heads of staff, and security officers) to your cause by convincing and then flashing them. Protect your leaders.<BR>\nPersonnel - Protect the heads of staff. Kill the leaders of the revolution, and brainwash the other revolutionaries (by beating them in the head).</B>"
 
 
 ///////////////////////////////////////////////////////////////////////////////
 //Gets the round setup, cancelling if there's not enough players at the start//
 ///////////////////////////////////////////////////////////////////////////////
 /datum/game_mode/revolution/pre_setup()
+
+	if(config.protect_roles_from_antagonist)
+		restricted_jobs += protected_jobs
+
 	var/list/datum/mind/possible_headrevs = get_players_for_role(BE_REV)
 
 	var/head_check = 0
@@ -71,7 +75,7 @@
 
 	for(var/datum/mind/rev_mind in head_revolutionaries)
 		for(var/datum/mind/head_mind in heads)
-			var/datum/objective/assassinate/rev_obj = new
+			var/datum/objective/mutiny/rev_obj = new
 			rev_obj.owner = rev_mind
 			rev_obj.target = head_mind
 			rev_obj.explanation_text = "Assassinate [head_mind.current.real_name], the [head_mind.role_alt_title ? head_mind.role_alt_title : head_mind.assigned_role]."
@@ -91,7 +95,7 @@
 
 /datum/game_mode/revolution/process()
 	checkwin_counter++
-	if(checkwin_counter >= 20)
+	if(checkwin_counter >= 5)
 		if(!finished)
 			ticker.mode.check_win()
 		checkwin_counter = 0
@@ -135,7 +139,8 @@
 	if (!where)
 		mob << "The Syndicate were unfortunately unable to get you a flash."
 	else
-		mob << "The flash in your [where] will implant a memory engram to convert others to our cause."
+		mob << "The flash in your [where] can be used to mark a crew member as revolutionist. Use this only on those true to your cause, to ensure that everyone bearing the mark can be trusted."
+		mob << "\red Do not use the flash on players who haven't agreed to join your cause. This is known as 'LOLFLASHING' and can get you banned."
 		return 1
 
 //////////////////////////////////////
@@ -365,7 +370,7 @@
 	var/list/heads = get_all_heads()
 	var/list/targets = new
 	for (var/datum/mind/i in head_revolutionaries)
-		for (var/datum/objective/assassinate/o in i.objectives)
+		for (var/datum/objective/mutiny/o in i.objectives)
 			targets |= o.target
 	if (head_revolutionaries.len!=0                      || \
 		revolutionaries.len!=0                           || \

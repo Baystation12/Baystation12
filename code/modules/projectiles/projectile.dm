@@ -10,7 +10,7 @@
 */
 
 /obj/item/projectile
-	name = "\improper Projectile"
+	name = "projectile"
 	icon = 'projectiles.dmi'
 	icon_state = "bullet"
 	density = 1
@@ -27,7 +27,8 @@
 		yo = null
 		xo = null
 		current = null
-		turf/original = null
+		turf/original = null // the original turf clicked
+		turf/starting = null // the projectile's starting turf
 
 		p_x = 16
 		p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
@@ -51,6 +52,7 @@
 		if(blocked >= 2)	return 0//Full block
 		if(!isliving(target))	return 0
 		var/mob/living/L = target
+		if(istype(L, /mob/living/simple_animal)) return 0
 		L.apply_effects(stun, weaken, paralyze, irradiate, stutter, eyeblur, drowsy, blocked)
 		return 1
 
@@ -58,13 +60,11 @@
 	proc/check_fire(var/mob/living/target as mob, var/mob/living/user as mob)  //Checks if you can hit them or not.
 		if(!istype(target) || !istype(user))
 			return 0
-		var/obj/item/projectile/test/in_chamber = new /obj/item/projectile/test(get_turf(src)) //Making the test....
-		var/turf/curloc = get_turf(user)
-		var/turf/targloc = get_turf(target)
-		in_chamber.yo = targloc.y - curloc.y
-		in_chamber.xo = targloc.x - curloc.x
+		var/obj/item/projectile/test/in_chamber = new /obj/item/projectile/test(get_step_to(user,target)) //Making the test....
+		in_chamber.target = target
 		in_chamber.flags = flags //Set the flags...
 		in_chamber.pass_flags = pass_flags //And the pass flags to that of the real projectile...
+		in_chamber.firer = user
 		var/output = in_chamber.fired() //Test it!
 		del(in_chamber) //No need for it anymore
 		return output //Send it back to the gun!
@@ -84,18 +84,23 @@
 				return // nope.avi
 
 			if(!silenced)
-				visible_message("\red [A] is hit by the [src]!")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
+				visible_message("\red [A.name] is hit by the [src.name] in the [def_zone]!")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
 			else
-				M << "\red You've been shot!"
+				M << "\red You've been shot in the [def_zone] by the [src.name]!"
 			if(istype(firer, /mob))
-				M.attack_log += text("\[[]\] <b>[]/[]</b> shot <b>[]/[]</b> with a <b>[]</b>", time_stamp(), firer, firer.ckey, M, M.ckey, src)
-				firer.attack_log += text("\[[]\] <b>[]/[]</b> shot <b>[]/[]</b> with a <b>[]</b>", time_stamp(), firer, firer.ckey, M, M.ckey, src)
+				M.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src]</b>"
+				firer.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src]</b>"
 				log_admin("ATTACK: [firer] ([firer.ckey]) shot [M] ([M.ckey]) with [src].")
 				message_admins("ATTACK: [firer] ([firer.ckey]) shot [M] ([M.ckey]) with [src].")
+				log_attack("<font color='red'>[firer] ([firer.ckey]) shot [M] ([M.ckey]) with a [src]</font>")
+
 			else
-				M.attack_log += text("\[[]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[]/[]</b> with a <b>[]</b>", time_stamp(), M, M.ckey, src)
+				M.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[M]/[M.ckey]</b> with a <b>[src]</b>"
 				log_admin("ATTACK: UNKNOWN (no longer exists) shot [M] ([M.ckey]) with [src].")
 				message_admins("ATTACK: UNKNOWN (no longer exists) shot [M] ([M.ckey]) with [src].")
+				log_attack("<font color='red'>UNKNOWN shot [M] ([M.ckey]) with a [src]</font>")
+
+
 
 		spawn(0)
 			if(A)
@@ -150,24 +155,39 @@
 	yo = null
 	xo = null
 	var
-		turf/target = null
+		target = null
 		result = 0 //To pass the message back to the gun.
 
 	Bump(atom/A as mob|obj|turf|area)
+		if(A == firer)
+			loc = A.loc
+			return //cannot shoot yourself
+		if(istype(A, /obj/item/projectile))
+			return
 		if(istype(A, /mob/living))
 			result = 2 //We hit someone, return 1!
-		return ..()
+			return
+		result = 1
+		return
 
 	fired()
-		target = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z) //Finding the target turf at map edge
-		while(!result) //Loop on through!
-			if(!step_towards(src,target)) //If we hit something...
-				if(!result) //And the var is not already set....
-					result = 1 //Return 0
-				break
+		var/turf/curloc = get_turf(src)
+		var/turf/targloc = get_turf(target)
+		if(!curloc || !targloc)
+			return 0
+		yo = targloc.y - curloc.y
+		xo = targloc.x - curloc.x
+		target = targloc
+		while(src) //Loop on through!
+			if(result)
+				return (result - 1)
+			if((!( target ) || loc == target))
+				target = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z) //Finding the target turf at map edge
+			step_towards(src, target)
+			var/mob/living/M = locate() in get_turf(src)
+			if(istype(M)) //If there is someting living...
+				return 1 //Return 1
 			else
-				var/mob/living/M = locate() in get_turf(src)
-				if(istype(M)) //If there is someting living...
-					result = 2 //Return 1
-					break
-		return (result-1)
+				M = locate() in get_step(src,target)
+				if(istype(M))
+					return 1

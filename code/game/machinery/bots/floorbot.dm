@@ -99,8 +99,8 @@
 
 
 /obj/machinery/bot/floorbot/attackby(var/obj/item/W , mob/user as mob)
-	if(istype(W, /obj/item/stack/tile/steel))
-		var/obj/item/stack/tile/steel/T = W
+	if(istype(W, /obj/item/stack/tile/plasteel))
+		var/obj/item/stack/tile/plasteel/T = W
 		if(src.amount >= 50)
 			return
 		var/loaded = min(50-src.amount, T.amount)
@@ -163,32 +163,30 @@
 	if(src.repairing)
 		return
 	var/list/floorbottargets = list()
-	if(!src.target || src.target == null)
+	if(!src.target)
 		for(var/obj/machinery/bot/floorbot/bot in world)
 			if(bot != src)
 				floorbottargets += bot.target
-	if(src.amount <= 0 && ((src.target == null) || !src.target))
+	if(src.amount <= 0 && !src.target)
 		if(src.eattiles)
-			for(var/obj/item/stack/tile/steel/T in view(7, src))
+			for(var/obj/item/stack/tile/plasteel/T in view(7, src))
 				if(T != src.oldtarget && !(target in floorbottargets))
 					src.oldtarget = T
 					src.target = T
 					break
-		if(src.target == null || !src.target)
-			if(src.maketiles)
-				if(src.target == null || !src.target)
-					for(var/obj/item/stack/sheet/metal/M in view(7, src))
-						if(!(M in floorbottargets) && M != src.oldtarget && M.amount == 1 && !(istype(M.loc, /turf/simulated/wall)))
-							src.oldtarget = M
-							src.target = M
-							break
+		if(!src.target && src.maketiles)
+			for(var/obj/item/stack/sheet/metal/M in view(7, src))
+				if(!(M in floorbottargets) && M != src.oldtarget && M.amount == 1 && !(istype(M.loc, /turf/simulated/wall)))
+					src.oldtarget = M
+					src.target = M
+					break
 		else
 			return
 	if(prob(5))
 		for(var/mob/O in viewers(src, null))
 			O.show_message(text("[src] makes an excited booping beeping sound!"), 1)
 
-	if(!src.target || src.target == null)
+	if(!src.target == null)
 		if(targetdirection != null)
 			/*
 			for (var/turf/space/D in view(7,src))
@@ -202,31 +200,31 @@
 			if(istype(T, /turf/space))
 				src.oldtarget = T
 				src.target = T
-		if(!src.target || src.target == null)
+		if(!src.target)
 			for (var/turf/space/D in view(7,src))
 				if(!(D in floorbottargets) && D != src.oldtarget && (D.loc.name != "Space") && !istype(D.loc, /area/shuttle))
 					src.oldtarget = D
 					src.target = D
 					break
-		if((!src.target || src.target == null ) && src.improvefloors)
+		if(!src.target && src.improvefloors)
 			for (var/turf/simulated/floor/F in view(7,src))
 				if(!(F in floorbottargets) && F != src.oldtarget && F.icon_state == "Floor1" && !(istype(F, /turf/simulated/floor/plating)))
 					src.oldtarget = F
 					src.target = F
 					break
-		if((!src.target || src.target == null) && src.eattiles)
-			for(var/obj/item/stack/tile/steel/T in view(7, src))
+		if(!src.target && src.eattiles)
+			for(var/obj/item/stack/tile/plasteel/T in view(7, src))
 				if(!(T in floorbottargets) && T != src.oldtarget)
 					src.oldtarget = T
 					src.target = T
 					break
 
-	if(!src.target || src.target == null)
+	if(!src.target)
 		if(src.loc != src.oldloc)
 			src.oldtarget = null
 		return
 
-	if(src.target && (src.target != null) && src.path.len == 0)
+	if(src.target && src.path.len == 0)
 		spawn(0)
 			if(!istype(src.target, /turf/))
 				src.path = AStar(src.loc, src.target.loc, /turf/proc/AdjacentTurfsSpace, /turf/proc/Distance, 0, 30)
@@ -237,7 +235,7 @@
 				src.oldtarget = src.target
 				src.target = null
 		return
-	if(src.path.len > 0 && src.target && (src.target != null))
+	if(src.path.len > 0 && src.target)
 		step_to(src, src.path[1])
 		src.path -= src.path[1]
 	else if(src.path.len == 1)
@@ -245,7 +243,7 @@
 		src.path = new()
 
 	if(src.loc == src.target || src.loc == src.target.loc)
-		if(istype(src.target, /obj/item/stack/tile/steel))
+		if(istype(src.target, /obj/item/stack/tile/plasteel))
 			src.eattile(src.target)
 		else if(istype(src.target, /obj/item/stack/sheet/metal))
 			src.maketile(src.target)
@@ -270,7 +268,7 @@
 	if(istype(target, /turf/space/))
 		for(var/mob/O in viewers(src, null))
 			O.show_message(text("\red [src] begins to repair the hole"), 1)
-		var/obj/item/stack/tile/steel/T = new /obj/item/stack/tile/steel
+		var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
 		src.repairing = 1
 		spawn(50)
 			T.build(src.loc)
@@ -291,8 +289,8 @@
 			src.anchored = 0
 			src.target = null
 
-/obj/machinery/bot/floorbot/proc/eattile(var/obj/item/stack/tile/steel/T)
-	if(!istype(T, /obj/item/stack/tile/steel))
+/obj/machinery/bot/floorbot/proc/eattile(var/obj/item/stack/tile/plasteel/T)
+	if(!istype(T, /obj/item/stack/tile/plasteel))
 		return
 	for(var/mob/O in viewers(src, null))
 		O.show_message(text("\red [src] begins to collect tiles."), 1)
@@ -326,7 +324,7 @@
 			src.target = null
 			src.repairing = 0
 			return
-		var/obj/item/stack/tile/steel/T = new /obj/item/stack/tile/steel
+		var/obj/item/stack/tile/plasteel/T = new /obj/item/stack/tile/plasteel
 		T.amount = 4
 		T.loc = M.loc
 		del(M)
@@ -353,7 +351,7 @@
 		new /obj/item/robot_parts/l_arm(Tsec)
 
 	if (amount)
-		new /obj/item/stack/tile/steel(Tsec) // only one tile, yes
+		new /obj/item/stack/tile/plasteel(Tsec) // only one tile, yes
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
@@ -362,8 +360,8 @@
 	return
 
 
-/obj/item/weapon/storage/toolbox/mechanical/attackby(var/obj/item/stack/tile/steel/T, mob/user as mob)
-	if(!istype(T, /obj/item/stack/tile/steel))
+/obj/item/weapon/storage/toolbox/mechanical/attackby(var/obj/item/stack/tile/plasteel/T, mob/user as mob)
+	if(!istype(T, /obj/item/stack/tile/plasteel))
 		..()
 		return
 	if(src.contents.len >= 1)

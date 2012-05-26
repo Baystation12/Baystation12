@@ -1,28 +1,19 @@
 /**********************Mineral stacking unit console**************************/
 
 /obj/machinery/mineral/stacking_unit_console
-	name = "Stacking machine console"
+	name = "stacking machine console"
 	icon = 'mining_machines.dmi'
 	icon_state = "console"
 	density = 1
 	anchored = 1
 	var/id = ""
 	var/obj/machinery/mineral/stacking_machine/machine = null
+	var/machinedir = SOUTHEAST
 
 /obj/machinery/mineral/stacking_unit_console/New()
 	..()
 	spawn(7)
-		/**
-		src.machine = locate(/obj/machinery/mineral/stacking_machine, get_step(src, SOUTHEAST))
-		if (machine)
-			machine.CONSOLE = src
-		else
-			del(src)
-			*/
-		//Commented out for being horrible for mappers. -Fastler
-		for(var/obj/machinery/mineral/stacking_machine/M in world)
-			if(M.id == src.id)
-				src.machine = M
+		src.machine = locate(/obj/machinery/mineral/stacking_machine, get_step(src, machinedir))
 		if (machine)
 			machine.CONSOLE = src
 		else
@@ -36,8 +27,8 @@
 
 	if(machine.ore_iron)
 		dat += text("Iron: [machine.ore_iron] <A href='?src=\ref[src];release=iron'>Release</A><br>")
-	if(machine.ore_steel)
-		dat += text("Steel: [machine.ore_steel] <A href='?src=\ref[src];release=steel'>Release</A><br>")
+	if(machine.ore_plasteel)
+		dat += text("Plasteel: [machine.ore_plasteel] <A href='?src=\ref[src];release=plasteel'>Release</A><br>")
 	if(machine.ore_glass)
 		dat += text("Glass: [machine.ore_glass] <A href='?src=\ref[src];release=glass'>Release</A><br>")
 	if(machine.ore_rglass)
@@ -53,11 +44,13 @@
 	if(machine.ore_diamond)
 		dat += text("Diamond: [machine.ore_diamond] <A href='?src=\ref[src];release=diamond'>Release</A><br>")
 	if(machine.ore_clown)
-		dat += text("Bananium: [machine.ore_clown] <A href='?src=\ref[src];release=clown'>Release</A><br><br>")
+		dat += text("Bananium: [machine.ore_clown] <A href='?src=\ref[src];release=clown'>Release</A><br>")
 	if(machine.ore_adamantine)
-		dat += text ("Adamantine: [machine.ore_adamantine] <A href='?src=\ref[src];release=adamantine'>Release</A><br><br>")
+		dat += text ("Adamantine: [machine.ore_adamantine] <A href='?src=\ref[src];release=adamantine'>Release</A><br>")
+	if(machine.ore_mythril)
+		dat += text ("Mythril: [machine.ore_mythril] <A href='?src=\ref[src];release=adamantine'>Release</A><br>")
 
-	dat += text("Stacking: [machine.stack_amt]<br><br>")
+	dat += text("<br>Stacking: [machine.stack_amt]<br><br>")
 
 	user << browse("[dat]", "window=console_stacking_machine")
 
@@ -116,12 +109,12 @@
 					G.amount = machine.ore_iron
 					G.loc = machine.output.loc
 					machine.ore_iron = 0
-			if ("steel")
-				if (machine.ore_steel > 0)
-					var/obj/item/stack/sheet/r_metal/G = new /obj/item/stack/sheet/r_metal
-					G.amount = machine.ore_steel
+			if ("plasteel")
+				if (machine.ore_plasteel > 0)
+					var/obj/item/stack/sheet/plasteel/G = new /obj/item/stack/sheet/plasteel
+					G.amount = machine.ore_plasteel
 					G.loc = machine.output.loc
-					machine.ore_steel = 0
+					machine.ore_plasteel = 0
 			if ("clown")
 				if (machine.ore_clown > 0)
 					var/obj/item/stack/sheet/clown/G = new /obj/item/stack/sheet/clown
@@ -134,6 +127,12 @@
 					G.amount = machine.ore_adamantine
 					G.loc = machine.output.loc
 					machine.ore_adamantine = 0
+			if ("mythril")
+				if (machine.ore_mythril > 0)
+					var/obj/item/stack/sheet/mythril/G = new /obj/item/stack/sheet/mythril
+					G.amount = machine.ore_mythril
+					G.loc = machine.output.loc
+					machine.ore_mythril = 0
 	src.updateUsrDialog()
 	return
 
@@ -142,7 +141,7 @@
 
 
 /obj/machinery/mineral/stacking_machine
-	name = "Stacking machine"
+	name = "stacking machine"
 	icon = 'mining_machines.dmi'
 	icon_state = "stacker"
 	density = 1
@@ -162,8 +161,9 @@
 	var/ore_clown = 0;
 	var/ore_glass = 0;
 	var/ore_rglass = 0;
-	var/ore_steel = 0;
+	var/ore_plasteel = 0;
 	var/ore_adamantine = 0;
+	var/ore_mythril = 0;
 	var/stack_amt = 50; //ammount to stack before releassing
 
 /obj/machinery/mineral/stacking_machine/New()
@@ -220,12 +220,16 @@
 				ore_rglass+= O:amount
 				del(O)
 				continue
-			if (istype(O,/obj/item/stack/sheet/r_metal))
-				ore_steel+= O:amount
+			if (istype(O,/obj/item/stack/sheet/plasteel))
+				ore_plasteel+= O:amount
 				del(O)
 				continue
 			if (istype(O,/obj/item/stack/sheet/adamantine))
 				ore_adamantine+= O:amount
+				del(O)
+				continue
+			if (istype(O,/obj/item/stack/sheet/mythril))
+				ore_mythril+= O:amount
 				del(O)
 				continue
 			if (istype(O,/obj/item/weapon/ore/slag))
@@ -286,16 +290,22 @@
 		G.loc = output.loc
 		ore_rglass -= stack_amt
 		return
-	if (ore_steel >= stack_amt)
-		var/obj/item/stack/sheet/r_metal/G = new /obj/item/stack/sheet/r_metal
+	if (ore_plasteel >= stack_amt)
+		var/obj/item/stack/sheet/plasteel/G = new /obj/item/stack/sheet/plasteel
 		G.amount = stack_amt
 		G.loc = output.loc
-		ore_steel -= stack_amt
+		ore_plasteel -= stack_amt
 		return
 	if (ore_adamantine >= stack_amt)
 		var/obj/item/stack/sheet/adamantine/G = new /obj/item/stack/sheet/adamantine
 		G.amount = stack_amt
 		G.loc = output.loc
 		ore_adamantine -= stack_amt
+		return
+	if (ore_mythril >= stack_amt)
+		var/obj/item/stack/sheet/mythril/G = new /obj/item/stack/sheet/mythril
+		G.amount = stack_amt
+		G.loc = output.loc
+		ore_mythril -= stack_amt
 		return
 	return

@@ -20,6 +20,9 @@
 	for(var/obj/item/I in src)
 		I.loc = src.loc
 
+	for(var/obj/mecha/working/ripley/deathripley/I in src)
+		I.loc = src.loc
+
 	for(var/mob/M in src)
 		M.loc = src.loc
 		if(M.client)
@@ -37,7 +40,10 @@
 
 	src.icon_state = src.icon_opened
 	src.opened = 1
-	playsound(src.loc, 'click.ogg', 15, 1, -3)
+	if(istype(src, /obj/structure/closet/body_bag))
+		playsound(src.loc, 'zip.ogg', 15, 1, -3)
+	else
+		playsound(src.loc, 'click.ogg', 15, 1, -3)
 	density = 0
 	return 1
 
@@ -50,6 +56,9 @@
 	for(var/obj/item/I in src.loc)
 		if(!I.anchored)
 			I.loc = src
+
+	for(var/obj/mecha/working/ripley/deathripley/I in src.loc)
+		I.loc = src
 
 	for(var/mob/M in src.loc)
 		if(istype (M, /mob/dead/observer))
@@ -64,7 +73,10 @@
 		M.loc = src
 	src.icon_state = src.icon_closed
 	src.opened = 0
-	playsound(src.loc, 'click.ogg', 15, 1, -3)
+	if(istype(src, /obj/structure/closet/body_bag))
+		playsound(src.loc, 'zip.ogg', 15, 1, -3)
+	else
+		playsound(src.loc, 'click.ogg', 15, 1, -3)
 	density = 1
 	return 1
 
@@ -121,7 +133,7 @@
 		if(istype(W, /obj/item/weapon/grab))
 			src.MouseDrop_T(W:affecting, user)      //act like they were dragged onto the closet
 
-		if(istype(W, /obj/item/weapon/weldingtool) && W:welding)
+		if(istype(W, /obj/item/weapon/weldingtool) && W:welding )
 			if(!W:remove_fuel(0,user))
 				user << "\blue You need more welding fuel to complete this task."
 				return
@@ -142,20 +154,24 @@
 		if(W)
 			W.loc = src.loc
 
-	else if(istype(W, /obj/item/weapon/weldingtool) && W:welding)
+	else if(istype(W, /obj/item/weapon/packageWrap))
+		return
+	else if(istype(W, /obj/item/weapon/weldingtool) && W:welding )
 		if(!W:remove_fuel(0,user))
 			user << "\blue You need more welding fuel to complete this task."
 			return
 		src.welded =! src.welded
 		for(var/mob/M in viewers(src))
 			M.show_message("\red [src] has been [welded?"welded shut":"unwelded"] by [user.name].", 3, "\red You hear welding.", 2)
-	else if(istype(W,/obj/item/weapon/packageWrap))
-		return
 	else
 		src.attack_hand(user)
 	return
 
 /obj/structure/closet/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
+	if(istype(O, /obj/screen) || istype(O, /obj/hud))	//fix for HUD elements making their way into the world	-Pete
+		return
+	if(O.loc == user)
+		return
 	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
 		return
 	if((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src)))
@@ -170,7 +186,7 @@
 		return
 	step_towards(O, src.loc)
 	if(user != O)
-		user.show_viewers(text("\red [] stuffs [] into []!", user, O, src))
+		user.show_viewers("\red [user] stuffs [O] into [src]!")
 	src.add_fingerprint(user)
 	return
 

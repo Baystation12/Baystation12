@@ -1,3 +1,13 @@
+//Instead of setting real_name = "Unknown", use this when necessary.
+//It will prevent the cloned-as-unknown bug and various other derpy things.
+/mob/living/carbon/human/proc/disfigure_face()
+	var/datum/organ/external/head/head = get_organ("head")
+	if(head && !head.disfigured)
+		head.disfigured = 1
+		name = get_visible_name()
+		src << "\red Your face has become disfigured."
+		warn_flavor_changed()
+
 /mob/living/carbon/human/proc/HealDamage(zone, brute, burn)
 	var/datum/organ/external/E = get_organ(zone)
 	if(istype(E, /datum/organ/external))
@@ -28,15 +38,6 @@
 			DI.Blend(new /icon('dam_mask.dmi', "[O.icon_name]2"), ICON_MULTIPLY)
 		//		world << "[O.r_name]2 [O.d_i_state]-2 \icon[DI]"
 			body_lying += DI
-
-
-/mob/living/carbon/human/proc/get_organ(var/zone)
-	if(!zone)	zone = "chest"
-	for(var/name in organs)
-		var/datum/organ/external/O = organs[name]
-		if(O.name == zone)
-			return O
-	return null
 
 
 /mob/living/carbon/human/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/used_weapon = null)

@@ -62,11 +62,11 @@
 	return
 
 //This proc draws out the inventory and places the items on it. tx and ty are the upper left tile and mx, my are the bottm right.
-//The numbers are calculated from the bottom-left (Right hand slot on the map) being 1,1.
+//The numbers are calculated from the bottom-left The bottom-left slot being 1,1.
 /obj/item/weapon/storage/proc/orient_objs(tx, ty, mx, my)
 	var/cx = tx
 	var/cy = ty
-	src.boxes.screen_loc = text("[tx],[ty] to [mx],[my]")
+	src.boxes.screen_loc = text("[tx]:,[ty] to [mx],[my]")
 	for(var/obj/O in src.contents)
 		O.screen_loc = text("[cx],[cy]")
 		O.layer = 20
@@ -77,23 +77,29 @@
 	src.closer.screen_loc = text("[mx+1],[my]")
 	return
 
+//This proc draws out the inventory and places the items on it. It uses the standard position.
+/obj/item/weapon/storage/proc/standard_orient_objs(var/rows,var/cols)
+	var/cx = 4
+	var/cy = 2+rows
+	src.boxes.screen_loc = text("4:16,2:16 to [4+cols]:16,[2+rows]:16")
+	for(var/obj/O in src.contents)
+		O.screen_loc = text("[cx]:16,[cy]:16")
+		O.layer = 20
+		cx++
+		if (cx > (4+cols))
+			cx = 4
+			cy--
+	src.closer.screen_loc = text("[4+cols+1]:16,2:16")
+	return
+
 //This proc determins the size of the inventory to be displayed. Please touch it only if you know what you're doing.
 /obj/item/weapon/storage/proc/orient2hud(mob/user as mob)
-	var/mob/living/carbon/human/H = user
-	var/col_num = 0
-	var/row_count = min(7,storage_slots) -1 //For belts, the meanings of the two variables are inverted, so we don't have to declare new ones
+	//var/mob/living/carbon/human/H = user
+	var/row_num = 0
+	var/col_count = min(7,storage_slots) -1
 	if (contents.len > 7)
-		col_num = round((contents.len-1) / 7) // 7 is the maximum allowed column height for r_hand, l_hand and back storage items.
-	if (src == user.l_hand)
-		src.orient_objs(3-col_num, 3+row_count, 3, 3)
-	else if(src == user.r_hand)
-		src.orient_objs(1, 3+row_count, 1+col_num, 3)
-	else if(src == user.back)
-		src.orient_objs(4-col_num, 3+row_count, 4, 3)
-	else if(istype(user, /mob/living/carbon/human) && src == H.belt)//only humans have belts
-		src.orient_objs(1, 3+col_num, 1+row_count, 3)
-	else
-		src.orient_objs(5, 10+col_num, 5 + row_count, 10)
+		row_num = round((contents.len-1) / 7) // 7 is the maximum allowed width.
+	src.standard_orient_objs(row_num,col_count)
 	return
 
 //This proc is called when you want to place an item into the storage item.
@@ -129,7 +135,7 @@
 			return
 
 	if (W.w_class > max_w_class)
-		user << "\red This [W] is too big for this [src]"
+		user << "\red This [W] is too big for \the [src]"
 		return
 
 	if(istype(W, /obj/item/weapon/tray))
@@ -176,21 +182,21 @@
 			src.icon_state = "giftbag2"
 
 	if (istype(W, /obj/item/weapon/gun/energy/crossbow)) return //STEALTHY
-	for(var/mob/O in viewers(user, null))
-		O.show_message(text("\blue [user] has added [W] to [src]!"))
-		//Foreach goto(139)
+	for(var/mob/M in viewers(user, null))
+		if (M == user)
+			user << "\blue You put the [W] into [src]."
+		else if (M in range(1)) //If someone is standing close enough, they can tell what it is...
+			M.show_message(text("\blue [user] puts [W] into [src]."))
+		else if (W.w_class >= 3.0) //Otherwise they can only see large or normal items from a distance...
+			M.show_message(text("\blue [user] puts [W] into [src]."))
 	return
 
 /obj/item/weapon/storage/dropped(mob/user as mob)
-	var/col_num = 0
-	var/row_count = min(7,storage_slots) -1
-	if (contents.len > 7)
-		col_num = round((contents.len-1) / 7) // 7 is the maximum allowed column height for r_hand, l_hand and back storage items.
-	src.orient_objs(5, 10+col_num, 5 + row_count, 10)
 	return
 
 /obj/item/weapon/storage/MouseDrop(over_object, src_location, over_location)
 	..()
+	orient2hud(usr)
 	if ((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
 		if (usr.s_active)
 			usr.s_active.close(usr)
@@ -203,6 +209,19 @@
 
 /obj/item/weapon/storage/attack_hand(mob/user as mob)
 	playsound(src.loc, "rustle", 50, 1, -5)
+
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.l_store == src && !H.get_active_hand())
+			H.put_in_hand(src)
+			H.l_store = null
+			return
+		if(H.r_store == src && !H.get_active_hand())
+			H.put_in_hand(src)
+			H.r_store = null
+			return
+
+	src.orient2hud(user)
 	if (src.loc == user)
 		if (user.s_active)
 			user.s_active.close(user)
@@ -212,7 +231,6 @@
 		for(var/mob/M in range(1))
 			if (M.s_active == src)
 				src.close(M)
-	src.orient2hud(user)
 	src.add_fingerprint(user)
 	return
 
@@ -228,14 +246,7 @@
 	src.closer.master = src
 	src.closer.icon_state = "x"
 	src.closer.layer = 20
-	spawn( 5 )
-		var/col_num = 0
-		var/row_count = min(7,storage_slots) -1
-		if (contents.len > 7)
-			if(contents.len % 7)
-				col_num = round(contents.len / 7) // 7 is the maximum allowed column height for r_hand, l_hand and back storage items.
-		src.orient_objs(5, 10+col_num, 5 + row_count, 10)
-		return
+	orient2hud()
 	return
 
 /obj/item/weapon/storage/emp_act(severity)
@@ -244,9 +255,6 @@
 			O.emp_act(severity)
 	..()
 
-/obj/screen/storage/attackby(W, mob/user as mob)
-	src.master.attackby(W, user)
-	return
 // BubbleWrap - A box can be folded up to make card
 /obj/item/weapon/storage/attack_self(mob/user as mob)
 	if ( contents.len )
@@ -291,7 +299,7 @@
 	..()
 	contents = list()
 	sleep(1)
-	new /obj/item/clothing/mask/medical( src )
+	new /obj/item/clothing/mask/breath/medical( src )
 	new /obj/item/weapon/tank/emergency_oxygen/anesthetic( src )
 	new /obj/item/weapon/tank/emergency_oxygen/anesthetic( src )
 	new /obj/item/weapon/tank/emergency_oxygen/anesthetic( src )
@@ -315,7 +323,7 @@
 
 /obj/item/weapon/storage/box/syndicate/New()
 	..()
-	switch (pickweight(list("bloodyspai" = 1, "stealth" = 1, "screwed" = 1, "guns" = 1, "freedom" = 1)))
+	switch (pickweight(list("bloodyspai" = 1, "stealth" = 1, "screwed" = 1, "guns" = 1, "freedom" = 1, "hacker" = 1, "lordsingulo" = 1)))
 		if ("bloodyspai")
 			new /obj/item/clothing/under/chameleon(src)
 			new /obj/item/clothing/mask/gas/voice(src)
@@ -349,6 +357,19 @@
 			O.imp = new /obj/item/weapon/implant/freedom(O)
 			var/obj/item/weapon/implanter/U = new /obj/item/weapon/implanter(src)
 			U.imp = new /obj/item/weapon/implant/uplink(U)
+			return
+
+		if ("hacker")
+			new /obj/item/weapon/aiModule/syndicate(src)
+			new /obj/item/weapon/card/emag(src)
+			new /obj/item/device/encryptionkey/binary(src)
+			return
+
+		if ("lordsingulo")
+			new /obj/item/device/radio/beacon/syndicate(src)
+			new /obj/item/clothing/suit/space/syndicate(src)
+			new /obj/item/clothing/head/helmet/space/syndicate(src)
+			new /obj/item/weapon/card/emag(src)
 			return
 
 /obj/item/weapon/storage/dice/New()
@@ -392,6 +413,18 @@
 			src.show_to(usr)
 			return
 	return   ///////////////////////////////////////////////////////Alright, that should do it. *MARKER* for any possible runtimes
+
+
+/obj/item/weapon/storage/pill_bottle/verb/toggle_mode()
+	set name = "Switch Pill Bottle Method"
+	set category = "Object"
+
+	mode = !mode
+	switch (mode)
+		if(1)
+			usr << "The pill bottle now picks up all pills in a tile at once."
+		if(0)
+			usr << "The pill bottle now picks up one pill at a time."
 
 /obj/item/weapon/storage/pillbottlebox/New()
 	new /obj/item/weapon/storage/pill_bottle( src )

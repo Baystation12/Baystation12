@@ -6,7 +6,6 @@
 	desc = "Has a valve and pump attached to it"
 
 	level = 1
-	layer = TURF_LAYER
 
 	var/id_tag = null
 	var/frequency = 1439
@@ -99,7 +98,7 @@
 
 		if(scrubbing)
 			if((environment.toxins>0) || (environment.carbon_dioxide>0) || (environment.trace_gases.len>0))
-				var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles()
+				var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles
 
 				//Take a gas sample
 				var/datum/gas_mixture/removed = loc.remove_air(transfer_moles)
@@ -118,17 +117,14 @@
 
 				if(removed.trace_gases.len>0)
 					for(var/datum/gas/trace_gas in removed.trace_gases)
-						if(istype(trace_gas, /datum/gas/oxygen_agent_b))
-							removed.trace_gases -= trace_gas
-							filtered_out.trace_gases += trace_gas
-						else if(istype(trace_gas, /datum/gas/sleeping_agent) && scrub_N2O)
+						if(istype(trace_gas, /datum/gas/sleeping_agent) && scrub_N2O)
 							removed.trace_gases -= trace_gas
 							filtered_out.trace_gases += trace_gas
 
 
 				//Remix the resulting gases
-				if(istype(removed))
-					AirflowAttract(loc,filtered_out.return_pressure())
+				filtered_out.update_values()
+				removed.update_values()
 				air_contents.merge(filtered_out)
 
 				loc.assume_air(removed)
@@ -140,12 +136,9 @@
 			if (air_contents.return_pressure()>=50*ONE_ATMOSPHERE)
 				return
 
-			var/transfer_moles = environment.total_moles()*(volume_rate/environment.volume)
+			var/transfer_moles = environment.total_moles*(volume_rate/environment.volume)
 
 			var/datum/gas_mixture/removed = loc.remove_air(transfer_moles)
-
-			if(istype(removed))
-				AirflowAttract(loc,removed.return_pressure())
 
 			air_contents.merge(removed)
 

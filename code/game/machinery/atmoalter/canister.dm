@@ -10,7 +10,7 @@
 	var/release_pressure = ONE_ATMOSPHERE
 
 	var/color = "yellow"
-	var/is_labeled = 0
+	var/can_label = 1
 	var/filled = 0.5
 	pressure_resistance = 7*ONE_ATMOSPHERE
 	var/temperature_resistance = 1000 + T0C
@@ -22,32 +22,32 @@
 	name = "Canister: \[N2O\]"
 	icon_state = "redws"
 	color = "redws"
-	is_labeled = 1
+	can_label = 0
 /obj/machinery/portable_atmospherics/canister/nitrogen
 	name = "Canister: \[N2\]"
 	icon_state = "red"
 	color = "red"
-	is_labeled = 1
+	can_label = 0
 /obj/machinery/portable_atmospherics/canister/oxygen
 	name = "Canister: \[O2\]"
 	icon_state = "blue"
 	color = "blue"
-	is_labeled = 1
+	can_label = 0
 /obj/machinery/portable_atmospherics/canister/toxins
 	name = "Canister \[Toxin (Bio)\]"
 	icon_state = "orange"
 	color = "orange"
-	is_labeled = 1
+	can_label = 0
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide
 	name = "Canister \[CO2\]"
 	icon_state = "black"
 	color = "black"
-	is_labeled = 1
+	can_label = 0
 /obj/machinery/portable_atmospherics/canister/air
 	name = "Canister \[Air\]"
 	icon_state = "grey"
 	color = "grey"
-	is_labeled = 1
+	can_label = 0
 
 /obj/machinery/portable_atmospherics/canister/update_icon()
 	src.overlays = 0
@@ -58,10 +58,10 @@
 	else
 		icon_state = "[color]"
 		if(holding)
-			overlays += image('atmos.dmi', "can-open")
+			overlays += "can-open"
 
 		if(connected_port)
-			overlays += image('atmos.dmi', "can-connector")
+			overlays += "can-connector"
 
 		var/tank_pressure = air_contents.return_pressure()
 
@@ -78,6 +78,7 @@
 /obj/machinery/portable_atmospherics/canister/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > temperature_resistance)
 		health -= 5
+		if(prob(10)) health = 0 //It's no fun if they all explode at one predictable time.
 		healthcheck()
 
 /obj/machinery/portable_atmospherics/canister/proc/healthcheck()
@@ -86,7 +87,6 @@
 
 	if (src.health <= 10)
 		var/atom/location = src.loc
-		AirflowRepel(location,air_contents.return_pressure())
 		location.assume_air(air_contents)
 
 		src.destroyed = 1
@@ -129,10 +129,13 @@
 			if(holding)
 				environment.merge(removed)
 			else
-				if(istype(removed))
-					AirflowRepel(loc,removed.return_pressure())
 				loc.assume_air(removed)
 			src.update_icon()
+
+	if(air_contents.return_pressure() < 1)
+		can_label = 1
+	else
+		can_label = 0
 
 	src.updateDialog()
 	return
@@ -153,7 +156,7 @@
 	return 0
 
 /obj/machinery/portable_atmospherics/canister/blob_act()
-	src.health -= 1
+	src.health -= 200
 	healthcheck()
 	return
 
@@ -169,6 +172,20 @@
 		src.health -= W.force
 		src.add_fingerprint(user)
 		healthcheck()
+
+	if(istype(user, /mob/living/silicon/robot) && istype(W, /obj/item/weapon/tank/jetpack))
+		var/datum/gas_mixture/thejetpack = W:air_contents
+		var/env_pressure = thejetpack.return_pressure()
+		var/pressure_delta = min(10*ONE_ATMOSPHERE - env_pressure, (air_contents.return_pressure() - env_pressure)/2)
+		//Can not have a pressure delta that would cause environment pressure > tank pressure
+		var/transfer_moles = 0
+		if((air_contents.temperature > 0) && (pressure_delta > 0))
+			transfer_moles = pressure_delta*thejetpack.volume/(air_contents.temperature * R_IDEAL_GAS_EQUATION)//Actually transfer the gas
+			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
+			thejetpack.merge(removed)
+			user << "You pulse-pressurize your jetpack from the tank."
+		return
+
 	..()
 
 /obj/machinery/portable_atmospherics/canister/attack_ai(var/mob/user as mob)
@@ -187,7 +204,7 @@
 		holding_text = {"<BR><B>Tank Pressure</B>: [holding.air_contents.return_pressure()] KPa<BR>
 <A href='?src=\ref[src];remove_tank=1'>Remove Tank</A><BR>
 "}
-	var/output_text = {"<TT><B>[name]</B>[!is_labeled?" <A href='?src=\ref[src];relabel=1'><small>relabel</small></a>":""]<BR>
+	var/output_text = {"<TT><B>[name]</B>[can_label?" <A href='?src=\ref[src];relabel=1'><small>relabel</small></a>":""]<BR>
 Pressure: [air_contents.return_pressure()] KPa<BR>
 Port Status: [(connected_port)?("Connected"):("Disconnected")]
 [holding_text]
@@ -235,7 +252,7 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 				release_pressure = max(ONE_ATMOSPHERE/10, release_pressure+diff)
 
 		if (href_list["relabel"])
-			if (!is_labeled)
+			if (can_label)
 				var/list/colors = list(\
 					"\[N2O\]" = "redws", \
 					"\[N2\]" = "red", \
@@ -250,7 +267,6 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 					src.color = colors[label]
 					src.icon_state = colors[label]
 					src.name = "Canister: [label]"
-					is_labeled = 1
 		src.updateUsrDialog()
 		src.add_fingerprint(usr)
 		update_icon()
@@ -274,6 +290,7 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 	..()
 
 	src.air_contents.toxins = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.update_values()
 
 	src.update_icon()
 	return 1
@@ -283,7 +300,7 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 	..()
 
 	src.air_contents.oxygen = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
-
+	air_contents.update_values()
 	src.update_icon()
 	return 1
 
@@ -294,6 +311,7 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 	var/datum/gas/sleeping_agent/trace_gas = new
 	air_contents.trace_gases += trace_gas
 	trace_gas.moles = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.update_values()
 
 	src.update_icon()
 	return 1
@@ -317,6 +335,7 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 	..()
 
 	src.air_contents.nitrogen = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.update_values()
 
 	src.update_icon()
 	return 1
@@ -325,6 +344,7 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 
 	..()
 	src.air_contents.carbon_dioxide = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.update_values()
 
 	src.update_icon()
 	return 1
@@ -335,6 +355,7 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 	..()
 	src.air_contents.oxygen = (O2STANDARD*src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
 	src.air_contents.nitrogen = (N2STANDARD*src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	air_contents.update_values()
 
 	src.update_icon()
 	return 1

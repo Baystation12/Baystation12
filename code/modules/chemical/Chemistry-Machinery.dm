@@ -173,6 +173,7 @@
 	var/condi = 0
 	var/bottlesprite = "1" //yes, strings
 	var/pillsprite = "1"
+	var/client/has_sprites = list()
 
 	New()
 		var/datum/reagents/R = new/datum/reagents(100)
@@ -225,6 +226,7 @@
 		if(usr.stat || usr.restrained()) return
 		if(!in_range(src, usr)) return
 
+		src.add_fingerprint(usr)
 		usr.machine = src
 		if(!beaker) return
 		var/datum/reagents/R = beaker:reagents
@@ -289,9 +291,9 @@
 			reagents.clear_reagents()
 			icon_state = "mixer0"
 		else if (href_list["createpill"])
-			var/name = input(usr,"Name:","Name your pill!",reagents.get_master_reagent_name())
+			var/name = reject_bad_text(input(usr,"Name:","Name your pill!",reagents.get_master_reagent_name()))
 			var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
-			if(!name || name == " ") name = reagents.get_master_reagent_name()
+			if(!name) name = reagents.get_master_reagent_name()
 			P.name = "[name] pill"
 			P.pixel_x = rand(-7, 7) //random position
 			P.pixel_y = rand(-7, 7)
@@ -299,9 +301,9 @@
 			reagents.trans_to(P,50)
 		else if (href_list["createbottle"])
 			if(!condi)
-				var/name = input(usr,"Name:","Name your bottle!",reagents.get_master_reagent_name())
+				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!",reagents.get_master_reagent_name()))
 				var/obj/item/weapon/reagent_containers/glass/bottle/P = new/obj/item/weapon/reagent_containers/glass/bottle(src.loc)
-				if(!name || name == " ") name = reagents.get_master_reagent_name()
+				if(!name) name = reagents.get_master_reagent_name()
 				P.name = "[name] bottle"
 				P.pixel_x = rand(-7, 7) //random position
 				P.pixel_y = rand(-7, 7)
@@ -314,7 +316,6 @@
 			#define MAX_PILL_SPRITE 20 //max icon state of the pill sprites
 			var/dat = "<table>"
 			for(var/i = 1 to MAX_PILL_SPRITE)
-				usr << browse_rsc(icon('chemical.dmi', "pill" + num2text(i)), "pill[i].png")
 				dat += "<tr><td><a href=\"?src=\ref[src]&pill_sprite=[i]\"><img src=\"pill[i].png\" /></a></td></tr>"
 			dat += "</table>"
 			usr << browse(dat, "window=chem_master")
@@ -323,7 +324,6 @@
 			#define MAX_BOTTLE_SPRITE 20 //max icon state of the bottle sprites
 			var/dat = "<table>"
 			for(var/i = 1 to MAX_BOTTLE_SPRITE)
-				usr << browse_rsc(icon('chemical.dmi', "bottle" + num2text(i)), "bottle[i].png")
 				dat += "<tr><td><a href=\"?src=\ref[src]&bottle_sprite=[i]\"><img src=\"bottle[i].png\" /></a></td></tr>"
 			dat += "</table>"
 			usr << browse(dat, "window=chem_master")
@@ -335,7 +335,6 @@
 		else
 			usr << browse(null, "window=chem_master")
 		src.updateUsrDialog()
-		src.add_fingerprint(usr)
 		return
 
 	attack_ai(mob/user as mob)
@@ -346,13 +345,34 @@
 
 	attack_hand(mob/user as mob)
 		if(stat & BROKEN)
+			spawn()
+			if(!(user.client in has_sprites))	//yes, it's in three places, so they get downloaded even when they arent going to be shown, because they could be in the future
+				spawn()
+					has_sprites += user.client
+					for(var/i = 1 to MAX_PILL_SPRITE)
+						usr << browse_rsc(icon('chemical.dmi', "pill" + num2text(i)), "pill[i].png")
+					for(var/i = 1 to MAX_BOTTLE_SPRITE)
+						usr << browse_rsc(icon('chemical.dmi', "bottle" + num2text(i)), "bottle[i].png")
 			return
 		user.machine = src
 		var/dat = ""
 		if(!beaker)
 			dat = "Please insert beaker.<BR>"
 			dat += "<A href='?src=\ref[src];close=1'>Close</A>"
+			if(!(user.client in has_sprites))
+				spawn()
+					has_sprites += user.client
+					for(var/i = 1 to MAX_PILL_SPRITE)
+						usr << browse_rsc(icon('chemical.dmi', "pill" + num2text(i)), "pill[i].png")
+					for(var/i = 1 to MAX_BOTTLE_SPRITE)
+						usr << browse_rsc(icon('chemical.dmi', "bottle" + num2text(i)), "bottle[i].png")
 		else
+			if(!(user.client in has_sprites))
+				has_sprites += user.client
+				for(var/i = 1 to MAX_PILL_SPRITE)
+					usr << browse_rsc(icon('chemical.dmi', "pill" + num2text(i)), "pill[i].png")
+				for(var/i = 1 to MAX_BOTTLE_SPRITE)
+					usr << browse_rsc(icon('chemical.dmi', "bottle" + num2text(i)), "bottle[i].png")
 			var/datum/reagents/R = beaker:reagents
 			dat += "<A href='?src=\ref[src];eject=1'>Eject beaker and Clear Buffer</A><BR><BR>"
 			if(!R.total_volume)
@@ -381,10 +401,8 @@
 			else
 				dat += "Empty<BR>"
 			if(!condi)
-				usr << browse_rsc(icon('chemical.dmi', "pill" + pillsprite), "pill.png")
-				dat += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (50 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill.png\" /></a><BR>"
-				usr << browse_rsc(icon('chemical.dmi', "bottle" + bottlesprite), "bottle.png")
-				dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (30 units max)</A><a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"bottle.png\" /></a>"
+				dat += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (50 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
+				dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (30 units max)</A><a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"bottle[bottlesprite].png\" /></a>"
 			else
 				dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (50 units max)</A>"
 		if(!condi)
@@ -444,23 +462,23 @@
 		if (href_list["create_vaccine"])
 			if(!src.wait)
 				var/obj/item/weapon/reagent_containers/glass/bottle/B = new/obj/item/weapon/reagent_containers/glass/bottle(src.loc)
-				var/vaccine_type = text2path(href_list["create_vaccine"])//the path is received as string - converting
-				var/datum/disease/D = new vaccine_type
-				var/name = input(usr,"Name:","Name the vaccine",D.name)
-				if(!name || name == " ") name = D.name
-				B.name = "[name] vaccine bottle"
-				B.reagents.add_reagent("vaccine",15,vaccine_type)
-				del(D)
-				wait = 1
-				var/datum/reagents/R = beaker.reagents
-				var/datum/reagent/blood/Blood = null
-				for(var/datum/reagent/blood/L in R.reagent_list)
-					if(L)
-						Blood = L
-						break
-				var/list/res = Blood.data["resistances"]
-				spawn(res.len*500)
-					src.wait = null
+				if(B)
+					var/vaccine_type = text2path(href_list["create_vaccine"])//the path is received as string - converting
+					var/datum/disease/D = new vaccine_type
+					if(D)
+						B.name = "[D.name] vaccine bottle"
+						B.reagents.add_reagent("vaccine",15,vaccine_type)
+						del(D)
+						wait = 1
+						var/datum/reagents/R = beaker.reagents
+						var/datum/reagent/blood/Blood = null
+						for(var/datum/reagent/blood/L in R.reagent_list)
+							if(L)
+								Blood = L
+								break
+						var/list/res = Blood.data["resistances"]
+						spawn(res.len*500)
+							src.wait = null
 			else
 				src.temphtml = "The replicator is not ready yet."
 			src.updateUsrDialog()

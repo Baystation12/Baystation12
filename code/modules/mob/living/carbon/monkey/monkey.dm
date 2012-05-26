@@ -2,6 +2,10 @@
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
+	if(name == "monkey")
+		name = text("monkey ([rand(1, 1000)])")
+	real_name = name
+
 	if (!(dna))
 		if(gender == NEUTER)
 			gender = pick(MALE, FEMALE)
@@ -18,55 +22,56 @@
 		dna.uni_identity += gendervar
 		dna.uni_identity += "12C"
 		dna.uni_identity += "4E2"
+		dna.b_type = "A+"
+		dna.original_name = real_name
 
-	if(name == "monkey")
-		name = text("monkey ([rand(1, 1000)])")
-	real_name = name
-	var/datum/organ/external/chest/chest = new /datum/organ/external/chest( src )
-	chest.owner = src
-	organs2 += chest
-	var/datum/organ/external/groin/groin = new /datum/organ/external/groin( src )
-	groin.owner = src
-	organs2 += groin
-	var/datum/organ/external/head/head = new /datum/organ/external/head( src )
-	head.owner = src
-	organs2 += head
-	var/datum/organ/external/l_arm/l_arm = new /datum/organ/external/l_arm( src )
-	l_arm.owner = src
-	organs2 += l_arm
-	var/datum/organ/external/r_arm/r_arm = new /datum/organ/external/r_arm( src )
-	r_arm.owner = src
-	organs2 += r_arm
-	var/datum/organ/external/l_hand/l_hand = new /datum/organ/external/l_hand( src )
-	l_hand.owner = src
-	organs2 += l_hand
-	var/datum/organ/external/r_hand/r_hand = new /datum/organ/external/r_hand( src )
-	r_hand.owner = src
-	organs2 += r_hand
-	var/datum/organ/external/l_leg/l_leg = new /datum/organ/external/l_leg( src )
-	l_leg.owner = src
-	organs2 += l_leg
-	var/datum/organ/external/r_leg/r_leg = new /datum/organ/external/r_leg( src )
-	r_leg.owner = src
-	organs2 += r_leg
-	var/datum/organ/external/l_foot/l_foot = new /datum/organ/external/l_foot( src )
-	l_foot.owner = src
-	organs2 += l_foot
-	var/datum/organ/external/r_foot/r_foot = new /datum/organ/external/r_foot( src )
-	r_foot.owner = src
-	organs2 += r_foot
+		new /datum/organ/external/chest(src)
+	new /datum/organ/external/groin(src)
+	new /datum/organ/external/head(src)
+	new /datum/organ/external/l_arm(src)
+	new /datum/organ/external/r_arm(src)
+	new /datum/organ/external/r_leg(src)
+	new /datum/organ/external/l_leg(src)
+	new /datum/organ/external/l_hand(src)
+	new /datum/organ/external/l_foot(src)
+	new /datum/organ/external/r_hand(src)
+	new /datum/organ/external/r_foot(src)
+	var/datum/organ/external/part = organs["chest"]
+	part.children = list(organs["r_leg"],organs["l_leg"],organs["r_arm"],organs["l_arm"],organs["groin"],organs["head"])
+	part = organs["head"]
+	part.parent = organs["chest"]
+	part = organs["groin"]
+	part.parent = organs["chest"]
+	part = organs["r_leg"]
+	part.children = list(organs["r_foot"])
+	part.parent = organs["chest"]
+	part = organs["l_leg"]
+	part.children = list(organs["l_foot"])
+	part.parent = organs["chest"]
+	part = organs["r_arm"]
+	part.children = list(organs["r_hand"])
+	part.parent = organs["chest"]
+	part = organs["l_arm"]
+	part.children = list(organs["l_hand"])
+	part.parent = organs["chest"]
+	part = organs["r_foot"]
+	part.parent = organs["r_leg"]
+	part = organs["l_foot"]
+	part.parent = organs["l_leg"]
+	part = organs["r_hand"]
+	part.parent = organs["r_arm"]
+	part = organs["l_hand"]
+	part.parent = organs["l_arm"]
 
-	organs["chest"] = chest
-	organs["groin"] = groin
-	organs["head"] = head
-	organs["l_arm"] = l_arm
-	organs["r_arm"] = r_arm
-	organs["l_hand"] = l_hand
-	organs["r_hand"] = r_hand
-	organs["l_leg"] = l_leg
-	organs["r_leg"] = r_leg
-	organs["l_foot"] = l_foot
-	organs["r_foot"] = r_foot
+	spawn (1)
+		if(!stand_icon)
+			stand_icon = new /icon('monkey.dmi', "monkey1")
+		if(!lying_icon)
+			lying_icon = new /icon('monkey.dmi', "monkey0")
+		icon = stand_icon
+		update_clothing()
+		src << "\blue Your icons have been generated!"
+
 	..()
 	return
 
@@ -92,13 +97,16 @@
 		now_pushing = 1
 		if(ismob(AM))
 			var/mob/tmob = AM
-			/*if(istype(tmob, /mob/living/carbon/human) && tmob.mutations & FAT)
+/*
+			if(istype(tmob, /mob/living/carbon/human) && tmob.mutations & FAT)
 				if(prob(70))
-					for(var/mob/M in viewers(src, null))
-						if(M.client)
-							M << "\red <B>[src] fails to push [tmob]'s fat ass out of the way.</B>"
+					usr << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
 					now_pushing = 0
-					return*/
+					return
+*/
+			if(tmob.nopush)
+				now_pushing = 0
+				return
 
 			tmob.LAssailant = src
 		now_pushing = 0
@@ -145,7 +153,7 @@
 		M.show_message(text("\red [] has been hit by []", src, O), 1)
 	if (health > 0)
 		var/shielded = 0
-		bruteloss += 30
+		adjustBruteLoss(30)
 		if ((O.icon_state == "flaming" && !( shielded )))
 			adjustFireLoss(40)
 		health = 100 - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss()
@@ -160,7 +168,7 @@
 				O.show_message(text("\red <B>[M.name] has bit []!</B>", src), 1)
 			var/damage = rand(1, 5)
 			if (mutations & HULK) damage += 10
-			bruteloss += damage
+			adjustBruteLoss(damage)
 			updatehealth()
 
 			for(var/datum/disease/D in M.viruses)
@@ -183,7 +191,7 @@
 				for(var/mob/O in viewers(src, null))
 					O.show_message("\red <B>[M.name] has bit [name]!</B>", 1)
 				var/damage = rand(1, 5)
-				bruteloss += damage
+				adjustBruteLoss(damage)
 				health = 100 - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss()
 				for(var/datum/disease/D in M.viruses)
 					if(istype(D, /datum/disease/jungle_fever))
@@ -256,7 +264,7 @@
 								if ((O.client && !( O.blinded )))
 									O.show_message(text("\red <B>[] has knocked out [name]!</B>", M), 1)
 							return
-				bruteloss += damage
+				adjustBruteLoss(damage)
 				updatehealth()
 				react_to_attack(M)
 			else
@@ -339,7 +347,7 @@
 					for(var/mob/O in viewers(src, null))
 						if ((O.client && !( O.blinded )))
 							O.show_message(text("\red <B>[] has slashed [name]!</B>", M), 1)
-				bruteloss += damage
+				adjustBruteLoss(damage)
 				updatehealth()
 				react_to_attack(M)
 			else
@@ -381,11 +389,20 @@
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[] has disarmed [name]!</B>", M), 1)
-			bruteloss += damage
+			adjustBruteLoss(damage)
 			react_to_attack(M)
 			updatehealth()
 	return
 
+/mob/living/carbon/monkey/attack_animal(mob/living/simple_animal/M as mob)
+	if(M.melee_damage_upper == 0)
+		M.emote("[M.friendly] [src]")
+	else
+		for(var/mob/O in viewers(src, null))
+			O.show_message("\red <B>[M]</B> [M.attacktext] [src]!", 1)
+		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
+		adjustBruteLoss(damage)
+		updatehealth()
 
 
 /mob/living/carbon/monkey/attack_metroid(mob/living/carbon/metroid/M as mob)
@@ -408,7 +425,7 @@
 		else
 			damage = rand(5, 35)
 
-		bruteloss += damage
+		adjustBruteLoss(damage)
 
 		if(M.powerlevel > 0)
 			var/stunprob = 10
@@ -461,6 +478,10 @@
 				stat("Genetic Damage Time", changeling.geneticdamage)
 	return
 
+
+
+/mob/living/carbon/monkey/var/icon/stand_icon = null
+/mob/living/carbon/monkey/var/icon/lying_icon = null
 /mob/living/carbon/monkey/update_clothing()
 	if(buckled)
 		if(istype(buckled, /obj/structure/stool/bed/chair))
@@ -468,14 +489,18 @@
 		else
 			lying = 1
 
+	if(!stand_icon || !lying_icon)
+		update_body()
+
 	if(update_icon) // Skie
 		..()
 		overlays = null
 
-		if (!( lying ))
-			icon_state = "monkey1"
-		else
-			icon_state = "monkey0"
+	if (lying)
+		icon = lying_icon
+
+	else
+		icon = stand_icon
 
 	if(client && client.admin_invis)
 		invisibility = 100
@@ -486,7 +511,7 @@
 		if (istype(wear_mask, /obj/item/clothing/mask))
 			var/t1 = wear_mask.icon_state
 			overlays += image("icon" = 'monkey.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = layer)
-			wear_mask.screen_loc = ui_mask
+			wear_mask.screen_loc = ui_monkey_mask
 
 	if (r_hand)
 		if(update_icon)
@@ -501,7 +526,7 @@
 	if (back)
 		var/t1 = back.icon_state //apparently tables make me upset and cause my dreams to shatter
 		overlays += image("icon" = 'back.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = layer)
-		back.screen_loc = ui_back
+		back.screen_loc = ui_monkey_back
 
 	if (handcuffed && update_icon)
 		pulling = null
@@ -548,6 +573,35 @@
 				show_inv(M)
 				return
 	return
+
+/mob/living/carbon/monkey/proc/update_body()
+
+	stand_icon = new /icon('monkey.dmi', "torso_s")
+	lying_icon = new /icon('monkey.dmi', "torso_l")
+
+	stand_icon.Blend(new /icon('monkey.dmi', "chest_s"), ICON_OVERLAY)
+	lying_icon.Blend(new /icon('monkey.dmi', "chest_l"), ICON_OVERLAY)
+
+	var/datum/organ/external/head = organs["head"]
+	if(!head.destroyed)
+		stand_icon.Blend(new /icon('monkey.dmi', "head_s"), ICON_OVERLAY)
+		lying_icon.Blend(new /icon('monkey.dmi', "head_l"), ICON_OVERLAY)
+
+	for(var/name in organs)
+		var/datum/organ/external/part = organs[name]
+		if(!istype(part, /datum/organ/external/groin) \
+			&& !istype(part, /datum/organ/external/chest) \
+			&& !istype(part, /datum/organ/external/head) \
+			&& !part.destroyed)
+			var/icon/temp = new /icon('monkey.dmi', "[part.icon_name]_s")
+			if(part.robot) temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
+			stand_icon.Blend(temp, ICON_OVERLAY)
+			temp = new /icon('monkey.dmi', "[part.icon_name]_l")
+			if(part.robot) temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
+			lying_icon.Blend(temp , ICON_OVERLAY)
+
+	stand_icon.Blend(new /icon('monkey.dmi', "groin_s"), ICON_OVERLAY)
+	lying_icon.Blend(new /icon('monkey.dmi', "groin_l"), ICON_OVERLAY)
 
 /mob/living/carbon/monkey/Move()
 	if ((!( buckled ) || buckled.loc != loc))
@@ -623,6 +677,14 @@
 
 /mob/living/carbon/monkey/ex_act(severity)
 	flick("flash", flash)
+/*	if (stat == 2 && client)
+		gib()
+		return
+
+	if (stat == 2 && !client)
+		gibs(loc, viruses)
+		del(src)
+		return*/
 	switch(severity)
 		if(1.0)
 			if (stat != 2)
@@ -630,7 +692,7 @@
 				health = 100 - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss()
 		if(2.0)
 			if (stat != 2)
-				bruteloss += 60
+				adjustBruteLoss(60)
 				adjustFireLoss(60)
 				health = 100 - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss()
 		if(3.0)
@@ -838,3 +900,161 @@
 	if(!ticker.mode.name == "monkey")	return 0
 	return 1
 
+/mob/living/carbon/monkey/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/used_weapon = null)
+	if((damagetype != BRUTE) && (damagetype != BURN))
+		..(damage, damagetype, def_zone, blocked)
+		return 1
+
+	if(blocked >= 2)	return 0
+
+	var/datum/organ/external/organ = null
+	if(isorgan(def_zone))
+		organ = def_zone
+	else
+		if(!def_zone)	def_zone = ran_zone(def_zone)
+		organ = get_organ(check_zone(def_zone))
+	if(!organ || organ.destroyed)	return 0
+	if(blocked)
+		damage = (damage/(blocked+1))
+
+	switch(damagetype)
+		if(BRUTE)
+			organ.take_damage(damage, 0, sharp, used_weapon)
+		if(BURN)
+			organ.take_damage(0, damage, sharp, used_weapon)
+
+	if(used_weapon)
+		organ.add_wound(used_weapon, damage)
+
+	UpdateDamageIcon()
+	updatehealth()
+	update_clothing()
+	return 1
+
+/*/mob/living/carbon/monkey/UpdateDamageIcon()
+	del(body_standing)
+	body_standing = list()
+	del(body_lying)
+	body_lying = list()
+
+	for(var/name in organs)
+		var/datum/organ/external/O = organs[name]
+		if(!O.destroyed)
+			O.update_icon()
+			var/icon/DI = new /icon('dam_human.dmi', O.damage_state)			// the damage icon for whole human
+			DI.Blend(new /icon('dam_mask.dmi', O.icon_name), ICON_MULTIPLY)		// mask with this organ's pixels
+		//		world << "[O.icon_name] [O.damage_state] \icon[DI]"
+			body_standing += DI
+			DI = new /icon('dam_human.dmi', "[O.damage_state]-2")				// repeat for lying icons
+			DI.Blend(new /icon('dam_mask.dmi', "[O.icon_name]2"), ICON_MULTIPLY)
+		//		world << "[O.r_name]2 [O.d_i_state]-2 \icon[DI]"
+			body_lying += DI*/
+
+/mob/living/carbon/monkey/proc/HealDamage(zone, brute, burn)
+	var/datum/organ/external/E = get_organ(zone)
+	if(istype(E, /datum/organ/external))
+		if (E.heal_damage(brute, burn))
+			UpdateDamageIcon()
+	else
+		return 0
+	return
+
+/mob/living/carbon/monkey/proc/get_damaged_organs(var/brute, var/burn)
+	var/list/datum/organ/external/parts = list()
+	for(var/name in organs)
+		var/datum/organ/external/organ = organs[name]
+		if((brute && organ.brute_dam) || (burn && organ.burn_dam))
+			parts += organ
+	return parts
+
+/mob/living/carbon/monkey/proc/get_damageable_organs()
+	var/list/datum/organ/external/parts = list()
+	for(var/name in organs)
+		var/datum/organ/external/organ = organs[name]
+		if(organ.brute_dam + organ.burn_dam < organ.max_damage)
+			parts += organ
+	return parts
+
+// heal ONE external organ, organ gets randomly selected from damaged ones.
+/mob/living/carbon/monkey/heal_organ_damage(var/brute, var/burn)
+	var/list/datum/organ/external/parts = get_damaged_organs(brute,burn)
+	if(!parts.len)
+		return
+	var/datum/organ/external/picked = pick(parts)
+	picked.heal_damage(brute,burn)
+	updatehealth()
+	UpdateDamageIcon()
+
+// damage ONE external organ, organ gets randomly selected from damaged ones.
+/mob/living/carbon/monkey/take_organ_damage(var/brute, var/burn)
+	var/list/datum/organ/external/parts = get_damageable_organs()
+	if(!parts.len)
+		return
+	var/datum/organ/external/picked = pick(parts)
+	picked.take_damage(brute,burn)
+	updatehealth()
+	UpdateDamageIcon()
+
+// heal MANY external organs, in random order
+/mob/living/carbon/monkey/heal_overall_damage(var/brute, var/burn)
+	var/list/datum/organ/external/parts = get_damaged_organs(brute,burn)
+
+	while(parts.len && (brute>0 || burn>0) )
+		var/datum/organ/external/picked = pick(parts)
+
+		var/brute_was = picked.brute_dam
+		var/burn_was = picked.burn_dam
+
+		picked.heal_damage(brute,burn)
+
+		brute -= (brute_was-picked.brute_dam)
+		burn -= (burn_was-picked.burn_dam)
+
+		parts -= picked
+	updatehealth()
+	UpdateDamageIcon()
+
+// damage MANY external organs, in random order
+/mob/living/carbon/monkey/take_overall_damage(var/brute, var/burn, var/used_weapon = null)
+	var/list/datum/organ/external/parts = get_damageable_organs()
+
+	while(parts.len && (brute>0 || burn>0) )
+		var/datum/organ/external/picked = pick(parts)
+
+		var/brute_was = picked.brute_dam
+		var/burn_was = picked.burn_dam
+
+		picked.take_damage(brute,burn, 0, used_weapon)
+
+		brute -= (picked.brute_dam-brute_was)
+		burn -= (picked.burn_dam-burn_was)
+
+		parts -= picked
+	updatehealth()
+	UpdateDamageIcon()
+
+/mob/living/carbon/monkey/getBruteLoss()
+	var/amount = 0.0
+	for(var/name in organs)
+		var/datum/organ/external/O = organs[name]
+		if(!O.robot) amount+= O.brute_dam
+	return amount
+
+/mob/living/carbon/monkey/adjustBruteLoss(var/amount, var/used_weapon = null)
+	if(amount > 0)
+		take_overall_damage(amount, 0, used_weapon)
+	else
+		heal_overall_damage(-amount, 0)
+
+/mob/living/carbon/monkey/getFireLoss()
+	var/amount = 0.0
+	for(var/name in organs)
+		var/datum/organ/external/O = organs[name]
+		if(!O.robot) amount+= O.burn_dam
+	return amount
+
+/mob/living/carbon/monkey/adjustFireLoss(var/amount,var/used_weapon = null)
+	if(amount > 0)
+		take_overall_damage(0, amount, used_weapon)
+	else
+		heal_overall_damage(0, -amount)

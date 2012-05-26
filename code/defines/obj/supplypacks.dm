@@ -1,6 +1,7 @@
 //SUPPLY PACKS
 //NOTE: only secure crate types use the access var (and are lockable)
 //NOTE: hidden packs only show up when the computer has been hacked.
+//ANOTER NOTE: Contraband is obtainable through modified supplycomp circuitboards.
 //BIG NOTE: Don't add living things to crates, that's bad, it will break the shuttle.
 /datum/supply_packs/specialops
 	name = "Special Ops supplies"
@@ -73,8 +74,10 @@
 
 /datum/supply_packs/artscrafts
 	name = "Arts and Crafts supplies"
-	contains = list("/obj/item/toy/crayonbox",
+	contains = list("/obj/item/weapon/storage/crayonbox",
 	"/obj/item/weapon/camera_test",
+	"/obj/item/weapon/camera_film",
+	"/obj/item/weapon/camera_film",
 	"/obj/item/weapon/storage/photo_album",
 	"/obj/item/weapon/packageWrap",
 	"/obj/item/weapon/reagent_containers/glass/paint/red",
@@ -114,12 +117,12 @@
 	contains = list("/obj/item/weapon/vending_charge/chemistry")
 	containername = "Chemistry charge crate"
 
-/* removed these for now, as to not confuse people (the machines are in the tg map)
 /datum/supply_packs/charge/toxins
 	name = "Toxins Research Charge"
 	contains = list("/obj/item/weapon/vending_charge/toxins")
 	containername = "Toxins Reasearch charge crate"
 
+/* removed these for now, as to not confuse people (the machines are in the tg map)
 /datum/supply_packs/charge/genetics
 	name = "Genetics Research Charge"
 	contains = list("/obj/item/weapon/vending_charge/genetics")
@@ -183,11 +186,12 @@
 	contains = list("/obj/item/weapon/vending_charge/hydroponics")
 	containername = "Hydroponics charge crate"
 
+/* Wrong toxins charge!
 /datum/supply_packs/charge/tl
 	name = "Toxins Lab Charge"
 	contains = list("/obj/item/weapon/vending_charge/toxinslab")
 	containername = "Toxins Lab charge crate"
-
+*/
 
 /datum/supply_packs/food
 	name = "Food crate"
@@ -312,18 +316,11 @@
 	containertype = "/obj/structure/closet/crate"
 	containername = "Janitorial supplies"
 
-/obj/item/weapon/storage/lightbox/tubes
-
 /datum/supply_packs/lightbulbs
 	name = "Replacement lights"
-	contains = list("/obj/item/weapon/storage/lightbox/tubes",
-					"/obj/item/weapon/storage/lightbox/tubes",
-					"/obj/item/weapon/storage/lightbox/tubes",
-					"/obj/item/weapon/storage/lightbox/tubes",
-					"/obj/item/weapon/storage/lightbox/tubes",
-					"/obj/item/weapon/storage/lightbox/tubes",
-					"/obj/item/weapon/storage/lightbox/bulbs",
-					"/obj/item/weapon/storage/lightbox/bulbs")
+	contains = list("/obj/item/weapon/storage/lightbox/mixed",
+					"/obj/item/weapon/storage/lightbox/mixed",
+					"/obj/item/weapon/storage/lightbox/mixed")
 	cost = 5
 	containertype = "/obj/structure/closet/crate"
 	containername = "Replacement lights"
@@ -372,6 +369,7 @@
 					"/obj/item/weapon/plantbgone",
 					"/obj/item/weapon/plantbgone",
 					"/obj/item/weapon/plantbgone",
+					"/obj/item/weapon/hatchet",
 					"/obj/item/weapon/minihoe",
 					"/obj/item/device/analyzer/plant_analyzer",
 					"/obj/item/clothing/gloves/botanic_leather",
@@ -394,7 +392,8 @@
 					"/obj/item/seeds/carrotseed",
 					"/obj/item/seeds/sunflowerseed",
 					"/obj/item/seeds/chantermycelium",
-					"/obj/item/seeds/potatoseed")
+					"/obj/item/seeds/potatoseed",
+					"/obj/item/seeds/sugarcaneseed")
 	cost = 10
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Seeds crate"
@@ -562,12 +561,12 @@
 	contains = list("/obj/item/weapon/book/manual/ripley_build_and_repair",
 					"/obj/item/weapon/circuitboard/mecha/ripley/main", //TEMPORARY due to lack of circuitboard printer
 					"/obj/item/weapon/circuitboard/mecha/ripley/peripherals") //TEMPORARY due to lack of circuitboard printer
-	cost = 40
+	cost = 30
 	containertype = "/obj/structure/closet/crate/secure"
 	containername = "APLU \"Ripley\" Circuit Crate"
 	access = access_robotics
 	group = "Robotics"
-	
+
 /datum/supply_packs/surgery
 	name = "Surgery crate"
 	contains = list("/obj/item/weapon/cautery",
@@ -583,6 +582,18 @@
 	containername = "Surgery crate"
 	access = access_medical
 	group = "Medical / Science"
+
+/datum/supply_packs/mecha_odysseus
+	name = "Circuit Crate (\"Odysseus\")"
+	contains = list(
+						"/obj/item/weapon/circuitboard/mecha/odysseus/peripherals", //TEMPORARY due to lack of circuitboard printer
+						"/obj/item/weapon/circuitboard/mecha/odysseus/main" //TEMPORARY due to lack of circuitboard printer
+						)
+	cost = 25
+	containertype = "/obj/structure/closet/crate/secure"
+	containername = "\"Odysseus\" Circuit Crate"
+	access = access_robotics
+	group = "Robotics"
 
 /datum/supply_packs/robotics
 	name = "Robotics Assembly Crate"
@@ -704,8 +715,8 @@
 	name = "Ballistic gear crate"
 	contains = list("/obj/item/clothing/suit/armor/bulletproof",
 					"/obj/item/clothing/suit/armor/bulletproof",
-					"/obj/item/weapon/gun/projectile/shotgun/combat2",
-					"/obj/item/weapon/gun/projectile/shotgun/combat2")
+					"/obj/item/weapon/gun/projectile/shotgun/pump/combat",
+					"/obj/item/weapon/gun/projectile/shotgun/pump/combat")
 	cost = 50
 	containertype = "/obj/structure/closet/crate/secure"
 	containername = "Ballistic gear crate"
@@ -747,7 +758,8 @@
 	containername = "Secruity Barriers crate"
 	group = "Security"
 
-/datum/supply_packs/hats/
+/datum/supply_packs/randomised
+	var/num_contained = 3 //number of items picked to be contained in a randomised crate
 	contains = list("/obj/item/clothing/head/collectable/chef",
 					"/obj/item/clothing/head/collectable/paper",
 					"/obj/item/clothing/head/collectable/tophat",
@@ -772,19 +784,24 @@
 					"/obj/item/clothing/head/collectable/xenom",
 					"/obj/item/clothing/head/collectable/xenom",
 					"/obj/item/clothing/head/collectable/petehat")
-	name = "Collectable Hat Crate!"
+	name = "Collectable hat crate!"
 	cost = 200
-	containertype = "/obj/structure/closet/crate/hat"
-	containername = "Collectable Hats Crate! Brought to you by Bass.inc!"
-	group = "Clothing"
+	containertype = "/obj/structure/closet/crate"
+	containername = "Collectable hats crate! Brought to you by Bass.inc!"
 
-/datum/supply_packs/hats/New()
+/datum/supply_packs/randomised/New()
 	var/list/tempContains = list()
-	for(var/i = 0,i<min(3,contains.len),i++)
+	for(var/i = 0,i<num_contained,i++)
 		tempContains += pick(contains)
 	contains = tempContains
 	..()
 
 
-
-//SUPPLY PACKS
+/datum/supply_packs/randomised/contraband
+	num_contained = 5
+	contains = list("/obj/item/weapon/contraband/poster","/obj/item/weapon/cigpacket/dromedaryco") //We randomly pick 5 items from this list through the constructor, look below
+	name = "Contraband crate"
+	cost = 30
+	containertype = "/obj/structure/closet/crate"
+	containername = "Contraband crate"
+	contraband = 1

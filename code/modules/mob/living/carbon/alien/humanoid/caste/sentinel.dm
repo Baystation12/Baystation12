@@ -9,6 +9,8 @@
 		src.verbs += /mob/living/carbon/alien/humanoid/proc/corrode_target
 		src.stand_icon = new /icon('alien.dmi', "aliens_s")
 		src.lying_icon = new /icon('alien.dmi', "aliens_l")
+		src.resting_icon = new /icon('alien.dmi', "aliens_sleep")
+		src.running_icon = new /icon('alien.dmi', "aliens_running")
 		src.icon = src.stand_icon
 		update_clothing()
 		src << "\blue Your icons have been generated!"
@@ -27,25 +29,7 @@
 
 	handle_regular_hud_updates()
 
-		if (src.stat == 2 || src.mutations & XRAY)
-			src.sight |= SEE_TURFS
-			src.sight |= SEE_MOBS
-			src.sight |= SEE_OBJS
-			src.see_in_dark = 8
-			src.see_invisible = 2
-		else if (src.stat != 2)
-			src.sight |= SEE_MOBS
-			src.sight &= SEE_TURFS
-			src.sight &= ~SEE_OBJS
-			src.see_in_dark = 7
-			src.see_invisible = 3
-
-		if (src.sleep)
-			src.sleep.icon_state = text("sleep[]", src.sleeping > 0 ? 1 : 0)
-			src.sleep.overlays = null
-			if(src.sleeping_willingly)
-				src.sleep.overlays += icon(src.sleep.icon, "sleep_willing")
-		if (src.rest) src.rest.icon_state = text("rest[]", src.resting)
+		..() //-Yvarov
 
 		if (src.healths)
 			if (src.stat != 2)
@@ -85,12 +69,15 @@
 
 		if(src.sleeping)
 			Paralyse(3)
-			if (prob(10) && health) spawn(0) emote("snore")
+			//if (prob(10) && health) spawn(0) emote("snore") Invalid Emote
 			if(!src.sleeping_willingly)
 				src.sleeping--
 
 		if(src.resting)
 			Weaken(5)
+
+		if(move_delay_add > 0)
+			move_delay_add = max(0, move_delay_add - rand(1, 2))
 
 		if(health < config.health_threshold_dead || src.brain_op_stage == 4.0)
 			death()
@@ -98,7 +85,7 @@
 			if(src.health <= 20 && prob(1)) spawn(0) emote("gasp")
 
 			//if(!src.rejuv) src.oxyloss++
-			if(!src.reagents.has_reagent("inaprovaline")) src.oxyloss++
+			if(!src.reagents.has_reagent("inaprovaline")) src.adjustOxyLoss(1)
 
 			if(src.stat != 2)	src.stat = 1
 			Paralyse(5)

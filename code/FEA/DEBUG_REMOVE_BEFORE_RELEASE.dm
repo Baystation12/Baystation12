@@ -33,7 +33,7 @@ turf/space
 		create_meteor(direction as num)
 			set src in world
 
-			var/obj/meteor/M = new( src )
+			var/obj/effect/meteor/M = new( src )
 			walk(M, direction,10)
 
 
@@ -116,7 +116,7 @@ obj/machinery/portable_atmospherics/canister
 
 		valve_open = 1
 		release_pressure = 1000
-
+/*
 obj/machinery/atmospherics
 	unary
 		heat_reservoir
@@ -352,6 +352,7 @@ obj/machinery/atmospherics
 					usr << "[x],[y] is in a pipeline with [parent.members.len] members ([parent.edges.len] edges)! Volume: [parent.air.volume]"
 					usr << "Pressure: [parent.air.return_pressure()], Temperature: [parent.air.temperature]"
 					usr << "[parent.air.oxygen], [parent.air.toxins], [parent.air.nitrogen], [parent.air.carbon_dioxide] .. [parent.alert_pressure]"
+*/
 mob
 	verb
 		flag_all_pipe_networks()
@@ -441,6 +442,7 @@ turf/simulated
 				trace_gas.moles = amount
 				adding.trace_gases += trace_gas
 				adding.temperature = T20C
+				adding.update_values()
 
 				assume_air(adding)
 
@@ -474,11 +476,12 @@ obj/indicator
 					return "error"
 				return "[round(GM.nitrogen/MOLES_CELLSTANDARD*10+0.5)]"
 			else
-				return "[round((GM.total_moles())/MOLES_CELLSTANDARD*10+0.5)]"
+				return "[round((GM.total_moles)/MOLES_CELLSTANDARD*10+0.5)]"
 
 
 	Click()
 		process()
+
 
 obj/window
 	verb
@@ -514,10 +517,10 @@ mob
 		fire_report()
 			set category = "Debug"
 			usr << "\b \red Fire Report"
-			for(var/obj/hotspot/flame in world)
+			for(var/obj/effect/hotspot/flame in world)
 				usr << "[flame.x],[flame.y]: [flame.temperature]K, [flame.volume] L - [flame.loc:air:temperature]"
 
-		process_cycle()
+/*		process_cycle()
 			set category = "Debug"
 			if(!master_controller)
 				usr << "Cannot find master_controller"
@@ -549,6 +552,52 @@ mob
 
 			air_master.process_update_tiles()
 			air_master.process_rebuild_select_groups()
+
+		mark_group_delay()
+			set category = "Debug"
+			if(!air_master)
+				usr << "Cannot find air_system"
+				return
+
+			for(var/datum/air_group/group in air_master.air_groups)
+				group.marker = 0
+
+			for(var/turf/simulated/floor/S in world)
+				S.icon = 'turf_analysis.dmi'
+				if(S.parent)
+					if(S.parent.group_processing)
+						if (S.parent.check_delay < 2)
+							S.parent.marker=1
+						else if (S.parent.check_delay < 5)
+							S.parent.marker=2
+						else if (S.parent.check_delay < 15)
+							S.parent.marker=3
+						else if (S.parent.check_delay < 30)
+							S.parent.marker=4
+						else
+							S.parent.marker=5
+						if(S.parent.borders && S.parent.borders.Find(S))
+							S.icon_state = "on[S.parent.marker]_border"
+						else
+							S.icon_state = "on[S.parent.marker]"
+
+					else
+						if (S.check_delay < 2)
+							S.icon_state= "on1_border"
+						else if (S.check_delay < 5)
+							S.icon_state= "on2_border"
+						else if (S.check_delay < 15)
+							S.icon_state= "on3_border"
+						else if (S.check_delay < 30)
+							S.icon_state= "on4_border"
+						else
+							S.icon_state = "suspended"
+				else
+					if(S.processing)
+						S.icon_state = "individual_on"
+					else
+						S.icon_state = "individual_off"*/
+
 
 		mark_groups()
 			set category = "Debug"
@@ -582,23 +631,16 @@ mob
 			set category = "Debug"
 			getbrokeninhands()
 
-/*
-			for(var/obj/movable/floor/S in world)
-				S.icon = 'turf_analysis.dmi'
-				if(S.parent)
-					if(S.parent.group_processing)
-						if(S.parent.marker == 0)
-							S.parent.marker = rand(1,5)
-						if(S.parent.borders && S.parent.borders.Find(S))
-							S.icon_state = "on[S.parent.marker]_border"
-						else
-							S.icon_state = "on[S.parent.marker]"
 
-					else
-						S.icon_state = "suspended"
-				else
-					if(S.processing)
-						S.icon_state = "individual_on"
-					else
-						S.icon_state = "individual_off"
-*/
+/*		jump_to_dead_group() Currently in the normal admin commands but fits here
+			set category = "Debug"
+			if(!air_master)
+				usr << "Cannot find air_system"
+				return
+
+			var/datum/air_group/dead_groups = list()
+			for(var/datum/air_group/group in air_master.air_groups)
+				if (!group.group_processing)
+					dead_groups += group
+			var/datum/air_group/dest_group = pick(dead_groups)
+			usr.loc = pick(dest_group.members)*/

@@ -87,8 +87,8 @@
 		if(ticker && ticker.mode)
 			world <<"\red <B>World will reboot in 10 seconds</B>"
 
-			feedback_set_details("end_error","mode vote - [winner]")
-			feedback_set_details("round_end","[time2text(world.realtime)]")
+			//feedback_set_details("end_error","mode vote - [winner]")
+
 			if(blackbox)
 				blackbox.save_all_data_to_sql()
 
@@ -108,8 +108,8 @@
 
 		world <<"\red <B>World will reboot in 5 seconds</B>"
 
-		feedback_set_details("end_error","restart vote")
-		feedback_set_details("round_end","[time2text(world.realtime)]")
+		//feedback_set_details("end_error","restart vote")
+
 		if(blackbox)
 			blackbox.save_all_data_to_sql()
 
@@ -408,7 +408,7 @@
 
 		for(var/mob/CM in world)
 			if(CM.client)
-				if(config.vote_no_default || (config.vote_no_dead && CM.stat == 2))
+				if( config.vote_no_default || (config.vote_no_dead && CM.stat == 2) )
 					CM.client.vote = "none"
 				else
 					CM.client.vote = "default"

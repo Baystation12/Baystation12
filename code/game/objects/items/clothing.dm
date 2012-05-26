@@ -254,21 +254,39 @@ THERMAL GLASSES
 /obj/item/clothing/head/helmet/welding/verb/toggle()
 	set category = "Object"
 	set name = "Adjust welding mask"
-	if(src.up)
-		src.up = !src.up
-		src.see_face = !src.see_face
-		src.flags |= HEADCOVERSEYES
-		flags_inv |= HIDEMASK|HIDEEARS|HIDEEYES
-		icon_state = "welding"
-		usr << "You flip the mask down to protect your eyes."
+	if(usr.canmove && usr.stat != 2 && !usr.restrained())
+		if(src.up)
+			src.up = !src.up
+			src.see_face = !src.see_face
+			src.flags |= HEADCOVERSEYES
+			flags_inv |= HIDEMASK|HIDEEARS|HIDEEYES
+			icon_state = "[initial(icon_state)]"
+			usr << "You flip the mask down to protect your eyes."
+		else
+			src.up = !src.up
+			src.see_face = !src.see_face
+			src.flags &= ~HEADCOVERSEYES
+			flags_inv &= ~(HIDEMASK|HIDEEARS|HIDEEYES)
+			icon_state = "[initial(icon_state)]up"
+			usr << "You push the mask up out of your face."
+		usr.update_clothing()
+
+/obj/item/clothing/head/cargosoft/dropped()
+	src.icon_state = "cargosoft"
+	src.flipped=0
+	..()
+
+/obj/item/clothing/head/cargosoft/verb/flip()
+	set category = "Object"
+	set name = "Flip cap"
+	src.flipped = !src.flipped
+	if(src.flipped)
+		icon_state = "cargosoft_flipped"
+		usr << "You flip the hat backwards."
 	else
-		src.up = !src.up
-		src.see_face = !src.see_face
-		src.flags &= ~HEADCOVERSEYES
-		flags_inv &= ~(HIDEMASK|HIDEEARS|HIDEEYES)
-		icon_state = "weldingup"
-		usr << "You push the mask up out of your face."
-	usr.update_clothing()
+		icon_state = "cargosoft"
+		usr << "You flip the hat back in normal position."
+
 
 /obj/item/clothing/shoes/magboots/verb/toggle()
 	set name = "Toggle Magboots"
@@ -366,13 +384,18 @@ THERMAL GLASSES
 	else if(src.icon_state == "labcoat_pink")
 		src.icon_state = "labcoat_pink_open"
 		usr << "You unbutton the labcoat."
-	else if(src.icon_state == "labcoat_sleeve_open")
-		src.icon_state = "labcoat_sleeve"
+	else if(src.icon_state == "labcoat_red_open")
+		src.icon_state = "labcoat_red"
 		usr << "You button up the labcoat."
-	else if(src.icon_state == "labcoat_sleeve")
-		src.icon_state = "labcoat_sleeve_open"
+	else if(src.icon_state == "labcoat_red")
+		src.icon_state = "labcoat_red_open"
 		usr << "You unbutton the labcoat."
-
+	else if(src.icon_state == "labcoat_cdc_open")
+		src.icon_state = "labcoat_cdc"
+		usr << "You button up the labcoat."
+	else if(src.icon_state == "labcoat_cdc")
+		src.icon_state = "labcoat_cdc_open"
+		usr << "You unbutton the labcoat."
 	else
 		usr << "Sorry! The suit you're wearing doesn't have buttons!"
 	usr.update_clothing()
@@ -386,7 +409,6 @@ THERMAL GLASSES
 		src.icon_state = "ushankadown"
 		src.item_state = "ushankadown"
 		user << "You lower the ear flaps on the ushanka."
-
 
 /obj/item/clothing/glasses/thermal/emp_act(severity)
 	if(istype(src.loc, /mob/living/carbon/human))
@@ -406,16 +428,59 @@ THERMAL GLASSES
 /obj/item/clothing/head/helmet/space/rig/engspace_helmet/verb/toggle()
 	set category = "Object"
 	set name = "Toggle Helmet Visor"
-	if(src.up)
-		src.up = !src.up
-		src.see_face = !src.see_face
-		src.flags |= HEADCOVERSEYES
-		icon_state = "engspace_helmet"
-		usr << "You toggle the reflective tint on."
-	else
-		src.up = !src.up
-		src.see_face = !src.see_face
-		src.flags &= ~HEADCOVERSEYES
-		icon_state = "engspace_helmet_clear"
-		usr << "You toggle the reflective tint off."
+	if(usr.canmove && usr.stat != 2 && !usr.restrained())
+		if(src.up)
+			src.up = !src.up
+			src.see_face = !src.see_face
+			src.flags |= HEADCOVERSEYES
+			icon_state = "engspace_helmet"
+			usr << "You toggle the reflective tint on."
+		else
+			src.up = !src.up
+			src.see_face = !src.see_face
+			src.flags &= ~HEADCOVERSEYES
+			icon_state = "engspace_helmet_clear"
+			usr << "You toggle the reflective tint off."
+	usr.update_clothing()
+
+/obj/item/clothing/head/helmet/space/rig/cespace_helmet/attack_self()
+	toggle()
+
+/obj/item/clothing/head/helmet/space/rig/cespace_helmet/verb/toggle()
+	set category = "Object"
+	set name = "Toggle Helmet Visor"
+	if(usr.canmove && usr.stat != 2 && !usr.restrained())
+		if(src.up)
+			src.up = !src.up
+			src.see_face = !src.see_face
+			src.flags |= HEADCOVERSEYES
+			icon_state = "cespace_helmet"
+			usr << "You toggle the reflective tint on."
+		else
+			src.up = !src.up
+			src.see_face = !src.see_face
+			src.flags &= ~HEADCOVERSEYES
+			icon_state = "cespace_helmet_clear"
+			usr << "You toggle the reflective tint off."
+	usr.update_clothing()
+
+/obj/item/clothing/mask/breath/verb/toggle()
+	set name = "Adjust Mask"
+	set category = "Object"
+	if(usr.canmove && usr.stat != 2 && !usr.restrained())
+		if(src.icon_state == "medical")
+			usr << "You can't seem to adjust this mask."
+			return
+		if(src.icon_state == "breath_low")
+			src.icon_state = "breath"
+			src.item_state = "breath"
+			src.flags |= SUITSPACE|HEADSPACE|MASKCOVERSMOUTH
+			protective_temperature = 420
+			usr << "You are now breathing through your mask."
+		else if(src.icon_state == "breath")
+			src.icon_state = "breath_low"
+			src.item_state = "breath_low"
+			src.flags &= ~(SUITSPACE|HEADSPACE|MASKCOVERSMOUTH)
+			protective_temperature = 270
+			usr << "Your mask is now hanging on your neck."
 	usr.update_clothing()

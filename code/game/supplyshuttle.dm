@@ -7,7 +7,7 @@
 #define SUPPLY_POINTSPERCRATE 5	//Points per crate sent back.
 #define SUPPLY_STATION_AREATYPE "/area/supply/station" //Type of the supply shuttle area for station
 #define SUPPLY_DOCK_AREATYPE "/area/supply/dock"	//Type of the supply shuttle area for dock
-#define SUPPLY_POINTSPERSLIP 1 //points per packing slip sent back stamped.
+#define SUPPLY_POINTSPERSLIP 2 //points per packing slip sent back stamped.
 
 var/supply_shuttle_moving = 0
 var/supply_shuttle_at_station = 0
@@ -37,7 +37,7 @@ var/list/supply_groups = new()
 //SUPPLY PACKS MOVED TO /code/defines/obj/supplypacks.dm
 
 /obj/structure/plasticflaps //HOW DO YOU CALL THOSE THINGS ANYWAY
-	name = "Plastic flaps"
+	name = "\improper Plastic flaps"
 	desc = "Durable plastic flaps."
 	icon = 'stationobjs.dmi' //Change this.
 	icon_state = "plasticflaps"
@@ -65,6 +65,23 @@ var/list/supply_groups = new()
 			if (prob(5))
 				del(src)
 
+/obj/structure/plasticflaps/mining //A specific type for mining that doesn't allow airflow because of them damn crates
+	name = "\improper Airtight plastic flaps"
+	desc = "Heavy duty, airtight, plastic flaps."
+
+	New() //set the turf below the flaps to block air
+		var/turf/T = get_turf(src.loc)
+		if(T)
+			T.blocks_air = 1
+		..()
+
+	Del() //lazy hack to set the turf to allow air to pass if it's a simulated floor
+		var/turf/T = get_turf(src.loc)
+		if(T)
+			if(istype(T, /turf/simulated/floor))
+				T.blocks_air = 0
+		..()
+
 /area/supplyshuttle
 	name = "Supply Shuttle"
 	icon_state = "supply"
@@ -78,6 +95,7 @@ var/list/supply_groups = new()
 	circuit = "/obj/item/weapon/circuitboard/supplycomp"
 	var/temp = null
 	var/hacked = 0
+	var/can_order_contraband = 0
 
 /obj/machinery/computer/supplycomp/New()
 	// add the supply pack groups, if they haven't already been added
@@ -124,6 +142,7 @@ var/list/supply_groups = new()
 	var/containername = null
 	var/access = null
 	var/hidden = 0
+	var/contraband = 0
 	var/group = "Miscellaneous"
 
 /proc/supply_ticker()
@@ -145,8 +164,46 @@ var/list/supply_groups = new()
 	supply_shuttle_moving = 0
 	send_supply_shuttle()
 
+
 /proc/supply_can_move()
 	if(supply_shuttle_moving) return 0
+
+	//Check for carbon mobs - Allows simple animals.
+	for(var/mob/living/carbon/M in world)
+		var/area/A = get_area(M)
+		if(!A || !A.type) continue
+		if(A.type == /area/supply/station)
+			return 0
+	//Check for silicon mobs - Allows simple animals.
+	for(var/mob/living/silicon/M in world)
+		var/area/A = get_area(M)
+		if(!A || !A.type) continue
+		if(A.type == /area/supply/station)
+			return 0
+	//Check for beacons
+	for(var/obj/item/device/radio/beacon/B in world)
+		var/area/A = get_area(B)
+		if(!A || !A.type) continue
+		if(A.type == /area/supply/station)
+			return 0
+	//Check for mechs. I think this was added because people were somehow on centcomm and bringing back centcomm mechs.
+	for(var/obj/mecha/Mech in world)
+		var/area/A = get_area(Mech)
+		if(!A || !A.type) continue
+		if(A.type == /area/supply/station)
+			return 0
+	//Check for nuke disk This also prevents multiple nuke disks from being made -Nodrak
+	for(var/obj/item/weapon/disk/nuclear/N)
+		var/area/A = get_area(N)
+		if(!A || !A.type) continue
+		if(A.type == /area/supply/station)
+			return 0
+	return 1
+/*
+Teleport beacon -> wrapping paper -> backpack -> bodybag -> crate -> wrapping paper -> loaded on a mulebot
+That would be a teleport beacon inside of 6-layers deep in contents. Meaning you would have to add more loops or more checks.
+This method wont take into account storage items developed in the future and doesn't take into account the storage items we have currently.
+-Nodrak
 
 	var/shuttleat = supply_shuttle_at_station ? SUPPLY_STATION_AREATYPE : SUPPLY_DOCK_AREATYPE
 
@@ -168,7 +225,7 @@ var/list/supply_groups = new()
 				if((locate(/obj/mecha ) in ATMM)) return 0
 				if((locate(/obj/structure/closet/body_bag) in ATMM)) return 0
 	return 1
-
+*/
 /proc/sell_crates()
 	var/shuttleat = supply_shuttle_at_station ? SUPPLY_STATION_AREATYPE : SUPPLY_DOCK_AREATYPE
 
@@ -293,7 +350,7 @@ var/list/supply_groups = new()
 		src.temp = "Supply points: [supply_shuttle_points]<BR><HR><BR>Request what?<BR><BR>"
 		for(var/S in (typesof(/datum/supply_packs) - /datum/supply_packs - /datum/supply_packs/charge) )
 			var/datum/supply_packs/N = new S()
-			if(N.hidden) continue																	//Have to send the type instead of a reference to
+			if(N.hidden || N.contraband) continue																	//Have to send the type instead of a reference to
 			if(N.group != G) continue																//correct group?
 			src.temp += "<A href='?src=\ref[src];doorder=[N.type]'>[N.name]</A> Cost: [N.cost] "    //the obj because it would get caught by the garbage
 			src.temp += "<A href='?src=\ref[src];printform=[N.type]'>Print Requisition</A><br>"     //collector. oh well.
@@ -435,6 +492,8 @@ var/list/supply_groups = new()
 				user << "\blue You disconnect the monitor."
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 				var/obj/item/weapon/circuitboard/supplycomp/M = new /obj/item/weapon/circuitboard/supplycomp( A )
+				if(src.can_order_contraband)
+					M.contraband_enabled = 1
 				for (var/obj/C in src)
 					C.loc = src.loc
 				A.circuit = M
@@ -457,7 +516,7 @@ var/list/supply_groups = new()
 		if(!supply_shuttle_at_station || supply_shuttle_moving) return
 
 		if (!supply_can_move())
-			usr << "\red The supply shuttle can not transport station employees, exosuits, or homing beacons."
+			usr << "\red The supply shuttle can not transport station employees, exosuits, classified nuclear codes or homing beacons."
 			return
 
 		src.temp = "Shuttle sent.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
@@ -468,13 +527,21 @@ var/list/supply_groups = new()
 		supply_shuttle_shoppinglist = new/list()
 
 		sell_crates()
+
+		//Remove anything or anyone that was either left behind or that bypassed supply_can_move() -Nodrak
+		for(var/area/supply/station/A in world)
+			for(var/obj/item/I in A.contents)
+				del(I)
+			for(var/mob/living/M in A.contents)
+				del(M)
+
 		send_supply_shuttle()
 
 	else if (href_list["sendtostation"])
 		if(supply_shuttle_at_station || supply_shuttle_moving) return
 
 		if (!supply_can_move())
-			usr << "\red The supply shuttle can not transport station employees or homing beacons."
+			usr << "\red The supply shuttle can not transport station employees, exosuits, classified nuclear codes or homing beacons."
 			return
 
 		post_signal("supply")
@@ -504,6 +571,7 @@ var/list/supply_groups = new()
 		for(var/S in (typesof(/datum/supply_packs) - /datum/supply_packs - /datum/supply_packs/charge) )
 			var/datum/supply_packs/N = new S()
 			if(N.hidden && !src.hacked) continue													//Have to send the type instead of a reference to
+			if(N.contraband && !src.can_order_contraband){continue;} //Agouri -Kavalamarker
 			if(N.group != G) continue																//correct group?
 			src.temp += "<A href='?src=\ref[src];doorder=[N.type]'>[N.name]</A> Cost: [N.cost]<BR>" //the obj because it would get caught by the garbage
 		src.temp += "<BR><A href='?src=\ref[src];order=1'>Back</A>"								//collector. oh well.

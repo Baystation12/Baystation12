@@ -66,6 +66,8 @@
 			continue
 		else if (M == usr)
 			continue
+		if(M.digitalcamo)
+			continue
 		var/turf/temp_turf = get_turf(M)
 		if(temp_turf.z != 1 && temp_turf.z != 5) //Not on mining or the station.
 			continue
@@ -96,19 +98,15 @@
 
 	usr:cameraFollow = target
 	usr << "Now tracking target on camera." //Unidentifieds are no longer screamed at you.
-	if (usr.machine == null)
+
+	if (usr.machine == null && client.eye != eyeobj)
 		usr.machine = usr
 
 	spawn (0)
-		if(client.eye == eyeobj)
-			if(checkcameravis(target))
-				eyeobj.loc = target.loc
-			else
-				usr << "Target is not on or near any active cameras on the station."
-			return
 		while (usr:cameraFollow == target)
 			if (usr:cameraFollow == null)
 				return
+
 			else if (istype(target, /mob/living/carbon/human))
 				if(istype(target:wear_id, /obj/item/weapon/card/id/syndicate))
 					usr << "Follow camera mode terminated."
@@ -118,6 +116,11 @@
 		 			usr << "Follow camera mode terminated."
 					usr:cameraFollow = null
 					return
+				if(target.digitalcamo)
+					usr << "Follow camera mode terminated."
+					usr:cameraFollow = null
+					return
+
 			else if(istype(target.loc,/obj/effect/dummy))
 				usr << "Follow camera mode ended."
 				usr:cameraFollow = null
@@ -127,36 +130,52 @@
 				sleep(40) //because we're sleeping another second after this (a few lines down)
 				continue
 
+			if(client.eye == eyeobj)
+				if(checkcameravis(target))
+					eyeobj.loc = target.loc
+					sleep(50)
+					continue
+
+				else
+					usr << "Target is not on or near any active cameras on the station."
+					usr:cameraFollow = null
+					return
+
 			var/obj/machinery/camera/C = usr:current
 			if ((C && istype(C, /obj/machinery/camera)) || C==null)
 
-				var/closestDist = -1
-				if (C!=null)
-					if (C.status)
-						closestDist = get_dist(C, target)
-				//usr << text("Dist = [] for camera []", closestDist, C.name)
-				var/zmatched = 0
-				if (closestDist > 7 || closestDist == -1)
-					//check other cameras
-					var/obj/machinery/camera/closest = C
-					for(var/obj/machinery/camera/C2 in world)
-						if (C2.network in src.networks)
-							if (C2.z == target.z)
-								zmatched = 1
-								if (C2.status)
-									var/dist = get_dist(C2, target)
-									if ((dist < closestDist) || (closestDist == -1))
-										closestDist = dist
-										closest = C2
-					//usr << text("Closest camera dist = [], for camera []", closestDist, closest.area.name)
+				if(isrobot(target))
+					C = target:camera
+					usr:current = C
+					usr.reset_view(C)
+				else
+					var/closestDist = -1
+					if (C!=null)
+						if (C.status)
+							closestDist = get_dist(C, target)
+					//usr << text("Dist = [] for camera []", closestDist, C.name)
+					var/zmatched = 0
+					if (closestDist > 7 || closestDist == -1)
+						//check other cameras
+						var/obj/machinery/camera/closest = C
+						for(var/obj/machinery/camera/C2 in world)
+							if (C2.network in src.networks)
+								if (C2.z == target.z)
+									zmatched = 1
+									if (C2.status)
+										var/dist = get_dist(C2, target)
+										if ((dist < closestDist) || (closestDist == -1))
+											closestDist = dist
+											closest = C2
+						//usr << text("Closest camera dist = [], for camera []", closestDist, closest.area.name)
 
-					if (closest != C)
-						usr:current = closest
-						usr.reset_view(closest)
-						//use_power(50)
-					if (zmatched == 0)
-						usr << "Target is not on or near any active cameras on the station. We'll check again in 5 seconds (unless you use the cancel-camera verb)."
-						sleep(40) //because we're sleeping another second after this (a few lines down)
+						if (closest != C)
+							usr:current = closest
+							usr.reset_view(closest)
+							//use_power(50)
+						if (zmatched == 0)
+							usr << "Target is not on or near any active cameras on the station. We'll check again in 5 seconds (unless you use the cancel-camera verb)."
+							sleep(40) //because we're sleeping another second after this (a few lines down)
 			else
 				usr << "Follow camera mode ended."
 				usr:cameraFollow = null
@@ -258,6 +277,9 @@
 					O << "The screen bursts into static."
 		..()
 
+/obj/machinery/camera/emp_proof/emp_act(severity)
+	return
+
 /obj/machinery/camera/ex_act(severity)
 	if(src.invuln)
 		return
@@ -356,11 +378,13 @@
 				O.show_message(text("\red [] has deactivated []!", user, src), 1)
 				playsound(src.loc, 'Wirecutter.ogg', 100, 1)
 			icon_state = "camera1"
+			add_hiddenprint(user)
 		else
 			for(var/mob/O in viewers(user, null))
 				O.show_message(text("\red [] has reactivated []!", user, src), 1)
 				playsound(src.loc, 'Wirecutter.ogg', 100, 1)
 			icon_state = "camera"
+			add_hiddenprint(user)
 	// now disconnect anyone using the camera
 	//Apparently, this will disconnect anyone even if the camera was re-activated.
 	//I guess that doesn't matter since they can't use it anyway?

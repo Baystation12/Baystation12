@@ -14,6 +14,8 @@
 	if (monkeyizing)
 		return
 
+	..()
+
 	if (stat != 2) //still breathing
 
 		//First, resolve location and get a breath
@@ -156,7 +158,7 @@
 			if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
 
 			var/datum/gas_mixture/environment = loc.return_air()
-			var/datum/air_group/breath
+			var/datum/gas_mixture/breath
 			// HACK NEED CHANGING LATER
 			if(health < 0)
 				losebreath++
@@ -184,7 +186,7 @@
 							breath_moles = (ONE_ATMOSPHERE*BREATH_VOLUME/R_IDEAL_GAS_EQUATION*environment.temperature)
 						else*/
 							// Not enough air around, take a percentage of what's there to model this properly
-						breath_moles = environment.total_moles()*BREATH_PERCENTAGE
+						breath_moles = environment.total_moles*BREATH_PERCENTAGE
 
 						breath = loc.remove_air(breath_moles)
 
@@ -232,15 +234,15 @@
 			if(nodamage)
 				return
 
-			if(!breath || (breath.total_moles() == 0))
+			if(!breath || (breath.total_moles == 0))
 				//Aliens breathe in vaccuum
 				return 0
 
 			var/toxins_used = 0
-			var/breath_pressure = (breath.total_moles()*R_IDEAL_GAS_EQUATION*breath.temperature)/BREATH_VOLUME
+			var/breath_pressure = (breath.total_moles*R_IDEAL_GAS_EQUATION*breath.temperature)/BREATH_VOLUME
 
 			//Partial pressure of the toxins in our breath
-			var/Toxins_pp = (breath.toxins/breath.total_moles())*breath_pressure
+			var/Toxins_pp = (breath.toxins/breath.total_moles)*breath_pressure
 
 			if(Toxins_pp) // Detect toxins in air
 
@@ -274,7 +276,7 @@
 				if(health >= 25)
 					adjustToxLoss(5)
 				else
-					bruteloss -= 5
+					adjustBruteLoss(-5)
 					adjustFireLoss(-5)
 
 			return
@@ -301,7 +303,7 @@
 				drowsyness--
 				eye_blurry = max(2, eye_blurry)
 				if (prob(5))
-					sleeping = 1
+					sleeping += 1
 					Paralyse(5)
 
 			confused = max(0, confused - 1)
@@ -325,12 +327,15 @@
 
 			if(sleeping)
 				Paralyse(3)
-				if (prob(10) && health) spawn(0) emote("snore")
+				//if (prob(10) && health) spawn(0) emote("snore") Invalid Emote
 				if(!src.sleeping_willingly)
 					src.sleeping--
 
 			if(resting)
 				Weaken(5)
+
+			if(move_delay_add > 0)
+				move_delay_add = max(0, move_delay_add - rand(1, 2))
 
 			if(health < config.health_threshold_dead || brain_op_stage == 4.0)
 				death()
@@ -338,7 +343,7 @@
 				if(health <= 20 && prob(1)) spawn(0) emote("gasp")
 
 				//if(!rejuv) oxyloss++
-				if(!reagents.has_reagent("inaprovaline")) oxyloss++
+				if(!reagents.has_reagent("inaprovaline")) adjustOxyLoss(1)
 
 				if(stat != 2)	stat = 1
 				Paralyse(5)
@@ -491,15 +496,6 @@
 					D.cure()
 			return
 
-		check_if_buckled()
-			if (buckled)
-				lying = (istype(buckled, /obj/structure/stool/bed) ? 1 : 0)
-				if(lying)
-					drop_item()
-				density = 1
-			else
-				density = !lying
-
 		handle_stomach()
 			spawn(0)
 				for(var/mob/M in stomach_contents)
@@ -514,5 +510,5 @@
 							continue
 						if(air_master.current_cycle%3==1)
 							if(!M.nodamage)
-								M.bruteloss += 5
+								M.adjustBruteLoss(5)
 							nutrition += 10

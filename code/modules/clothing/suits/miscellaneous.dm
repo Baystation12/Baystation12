@@ -15,6 +15,24 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 
 
+/obj/item/clothing/suit/bluetag
+	name = "blue laser tag armour"
+	desc = "Blue Pride, Station Wide"
+	icon_state = "bluetag"
+	item_state = "bluetag"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	allowed = list (/obj/item/weapon/gun/energy/laser/bluetag)
+
+
+/obj/item/clothing/suit/redtag
+	name = "red laser tag armour"
+	desc = "Pew pew pew"
+	icon_state = "redtag"
+	item_state = "redtag"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	allowed = list (/obj/item/weapon/gun/energy/laser/redtag)
+
+
 /obj/item/clothing/suit/storage/apron
 	name = "apron"
 	desc = "A basic blue apron. It has a large pocket you can store things in."
@@ -25,7 +43,7 @@
 
 
 /obj/item/clothing/suit/storage/chef
-	name = "Chef's apron"
+	name = "chef's apron"
 	desc = "An apron used by a high class chef. Has a few pockets for nic-naks."
 	icon_state = "chef"
 	item_state = "chef"
@@ -38,7 +56,7 @@
 
 
 /obj/item/clothing/suit/storage/chef/classic
-	name = "A classic chef's apron."
+	name = "classic chef's apron"
 	desc = "A basic, dull, white chef's apron."
 	icon_state = "apronchef"
 	item_state = "apronchef"
@@ -103,7 +121,7 @@
 
 
 /obj/item/clothing/suit/hastur
-	name = "Hastur's Robes"
+	name = "\improper Hastur's robes"
 	desc = "Robes not meant to be worn by man"
 	icon_state = "hastur"
 	item_state = "hastur"
@@ -112,7 +130,7 @@
 
 
 /obj/item/clothing/suit/imperium_monk
-	name = "Imperium monk"
+	name = "imperium monk robes"
 	desc = "A set of strange robes."
 	icon_state = "imperium_monk"
 	item_state = "imperium_monk"
@@ -121,7 +139,7 @@
 
 
 /obj/item/clothing/suit/chickensuit
-	name = "Chicken Suit"
+	name = "chicken suit"
 	desc = "Bwak!"
 	icon_state = "chickensuit"
 	item_state = "chickensuit"
@@ -130,7 +148,7 @@
 
 
 /obj/item/clothing/suit/monkeysuit
-	name = "Monkey Suit"
+	name = "monkey suit"
 	desc = "A suit that looks like a primate"
 	icon_state = "monkeysuit"
 	item_state = "monkeysuit"
@@ -139,7 +157,7 @@
 
 
 /obj/item/clothing/suit/holidaypriest
-	name = "Holiday Priest"
+	name = "holiday priest"
 	desc = "This is a nice holiday my son."
 	icon_state = "holidaypriest"
 	item_state = "holidaypriest"
@@ -147,3 +165,27 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 
 
+// BubbleWrap - Nothing to see here
+
+/obj/item/clothing/suit/cardborg
+	name = "cardborg suit"
+	desc = "An ordinary cardboard box with holes cut in the sides."
+	icon_state = "cardborg"
+	item_state = "cardborg"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	flags_inv = HIDEJUMPSUIT
+
+/obj/item/clothing/suit/patientgown
+	name = "patient gown"
+	desc = "A sterile gown for patient wear."
+	icon_state = "patientgown"
+	item_state = "patientgown"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+
+/obj/item/clothing/suit/weddingdress
+	name = "wedding dress"
+	desc = "Here comes the bride."
+	icon_state = "weddingdress"
+	item_state = "weddingdress"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
+	flags_inv = HIDESHOES

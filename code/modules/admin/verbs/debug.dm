@@ -17,6 +17,7 @@
 	else
 		alert("Coders only baby")
 		return
+//	feedback_add_details("admin_verb","DG2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 
@@ -32,106 +33,108 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 /client/proc/callproc()
 	set category = "Debug"
 	set name = "Advanced ProcCall (TG Version)"
+
 	if(!holder)
 		src << "Only administrators may use this command."
 		return
-	var/target = null
-	var/lst[] // List reference
-	lst = new/list() // Make the list
-	var/returnval = null
-	var/class = null
 
-	switch(alert("Proc owned by something?",,"Yes","No"))
-		if("Yes")
-			class = input("Proc owned by...","Owner") in list("Obj","Mob","Area or Turf","Client","CANCEL ABORT STOP")
+	spawn(0)
+		var/target = null
+		var/targetselected = 0
+		var/lst[] // List reference
+		lst = new/list() // Make the list
+		var/returnval = null
+		var/class = null
+
+		switch(alert("Proc owned by something?",,"Yes","No"))
+			if("Yes")
+				targetselected = 1
+				class = input("Proc owned by...","Owner",null) as null|anything in list("Obj","Mob","Area or Turf","Client")
+				switch(class)
+					if("Obj")
+						target = input("Enter target:","Target",usr) as obj in world
+					if("Mob")
+						target = input("Enter target:","Target",usr) as mob in world
+					if("Area or Turf")
+						target = input("Enter target:","Target",usr.loc) as area|turf in world
+					if("Client")
+						var/list/keys = list()
+						for(var/client/C)
+							keys += C
+						target = input("Please, select a player!", "Selection", null, null) as null|anything in keys
+					else
+						return
+			if("No")
+				target = null
+				targetselected = 0
+
+		var/procname = input("Proc path, eg: /proc/fake_blood","Path:", null) as text|null
+		if(!procname)	return
+
+		var/argnum = input("Number of arguments","Number:",0) as num|null
+		if(!argnum && (argnum!=0))	return
+
+		lst.len = argnum // Expand to right length
+		//TODO: make a list to store whether each argument was initialised as null.
+		//Reason: So we can abort the proccall if say, one of our arguments was a mob which no longer exists
+		//this will protect us from a fair few errors ~Carn
+
+		var/i
+		for(i=1, i<argnum+1, i++) // Lists indexed from 1 forwards in byond
+
+			// Make a list with each index containing one variable, to be given to the proc
+			class = input("What kind of variable?","Variable Type") in list("text","num","type","reference","mob reference","icon","file","client","mob's area","CANCEL")
 			switch(class)
-				if("CANCEL ABORT STOP")
+				if("CANCEL")
 					return
-				if("Obj")
-					target = input("Enter target:","Target",usr) as obj in world
-				if("Mob")
-					target = input("Enter target:","Target",usr) as mob in world
-				if("Area or Turf")
-					target = input("Enter target:","Target",usr.loc) as area|turf in world
-				if("Client")
+
+				if("text")
+					lst[i] = input("Enter new text:","Text",null) as text
+
+				if("num")
+					lst[i] = input("Enter new number:","Num",0) as num
+
+				if("type")
+					lst[i] = input("Enter type:","Type") in typesof(/obj,/mob,/area,/turf)
+
+				if("reference")
+					lst[i] = input("Select reference:","Reference",src) as mob|obj|turf|area in world
+
+				if("mob reference")
+					lst[i] = input("Select reference:","Reference",usr) as mob in world
+
+				if("file")
+					lst[i] = input("Pick file:","File") as file
+
+				if("icon")
+					lst[i] = input("Pick icon:","Icon") as icon
+
+				if("client")
 					var/list/keys = list()
 					for(var/mob/M in world)
 						keys += M.client
-					target = input("Please, select a player!", "Selection", null, null) as null|anything in keys
-		if("No")
-			target = null
+					lst[i] = input("Please, select a player!", "Selection", null, null) as null|anything in keys
 
-	var/procname = input("Proc path, eg: /proc/fake_blood","Path:", null)
+				if("mob's area")
+					var/mob/temp = input("Select mob", "Selection", usr) as mob in world
+					lst[i] = temp.loc
 
-	var/argnum = input("Number of arguments","Number:",0) as num
-
-	lst.len = argnum // Expand to right length
-
-	var/i
-	for(i=1, i<argnum+1, i++) // Lists indexed from 1 forwards in byond
-
-		// Make a list with each index containing one variable, to be given to the proc
-		class = input("What kind of variable?","Variable Type") in list("text","num","type","reference","mob reference","icon","file","client","mob's area","CANCEL")
-		switch(class)
-			if("CANCEL")
+		if(targetselected)
+			if(!target)
+				usr << "<font color='red'>Error: callproc(): owner of proc no longer exists.</font>"
 				return
-
-			if("text")
-				lst[i] = input("Enter new text:","Text",null) as text
-
-			if("num")
-				lst[i] = input("Enter new number:","Num",0) as num
-
-			if("type")
-				lst[i] = input("Enter type:","Type") in typesof(/obj,/mob,/area,/turf)
-
-			if("reference")
-				switch(alert("Would you like to enter a specific object, or search for it from the world?","Choose!","Specifc UID (Hexadecimal number)", "Search"))
-					if("Specifc UID (Hexadecimal number)")
-						var/UID = input("Type in UID, without the leading 0x","Type in UID") as text|null
-						if(!UID) return
-						if(length(UID) != 7)
-							usr << "ERROR.  UID must be 7 digits"
-						var/temp_variable = locate("\[0x[UID]\]")
-						if(!temp_variable)
-							usr << "ERROR.  Could not locate referenced object."
-							return
-						switch(alert("You have chosen [temp_variable], in [get_area(temp_variable)].  Are you sure?","You sure?","Yes","NONOCANCEL!"))
-							if("Yes")
-								lst[i] = temp_variable
-							if("NONOCANCEL!")
-								return
-					if("Search")
-						lst[i] = input("Select reference:","Reference") as null|mob|obj|turf|area in world
-
-			if("mob reference")
-				lst[i] = input("Select reference:","Reference",usr) as mob in world
-
-			if("file")
-				lst[i] = input("Pick file:","File") as file
-
-			if("icon")
-				lst[i] = input("Pick icon:","Icon") as icon
-
-			if("client")
-				var/list/keys = list()
-				for(var/mob/M in world)
-					keys += M.client
-				lst[i] = input("Please, select a player!", "Selection", null, null) as null|anything in keys
-
-			if("mob's area")
-				var/mob/temp = input("Select mob", "Selection", usr) as mob in world
-				lst[i] = temp.loc
-
-
-	spawn(0)
-		if(target)
+			if(!hascall(target,procname))
+				usr << "<font color='red'>Error: callproc(): target has no such call [procname].</font>"
+				return
 			log_admin("[key_name(src)] called [target]'s [procname]() with [lst.len ? "the arguments [list2params(lst)]":"no arguments"].")
 			returnval = call(target,procname)(arglist(lst)) // Pass the lst as an argument list to the proc
 		else
+			//this currently has no hascall protection. wasn't able to get it working.
 			log_admin("[key_name(src)] called [procname]() with [lst.len ? "the arguments [list2params(lst)]":"no arguments"].")
 			returnval = call(procname)(arglist(lst)) // Pass the lst as an argument list to the proc
-	usr << "\blue Proc returned: [returnval ? returnval : "null"]"
+
+		usr << "<font color='blue'>[procname] returned: [returnval ? returnval : "null"]</font>"
+		//feedback_add_details("admin_verb","APC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/callprocgen()
 	set category = "Debug"
@@ -284,6 +287,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	t+= "CO2: [env.carbon_dioxide]\n"
 
 	usr.show_message(t, 1)
+	//feedback_add_details("admin_verb","ASL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_robotize(var/mob/M in world)
 	set category = "Fun"
@@ -325,6 +329,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for(var/datum/paiCandidate/candidate in paiController.pai_candidates)
 		if(candidate.key == choice.key)
 			paiController.pai_candidates.Remove(candidate)
+	//feedback_add_details("admin_verb","MPAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_alienize(var/mob/M in world)
 	set category = "Fun"
@@ -337,6 +342,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		log_admin("[key_name(src)] has alienized [M.key].")
 		spawn(10)
 			M:Alienize()
+			//feedback_add_details("admin_verb","MKAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		log_admin("[key_name(usr)] made [key_name(M)] into an alien.")
+		message_admins("\blue [key_name_admin(usr)] made [key_name(M)] into an alien.", 1)
 	else
 		alert("Invalid mob")
 
@@ -351,6 +359,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		log_admin("[key_name(src)] has metroidized [M.key].")
 		spawn(10)
 			M:Metroidize()
+			//feedback_add_details("admin_verb","MKMET") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		log_admin("[key_name(usr)] made [key_name(M)] into a metroid.")
+		message_admins("\blue [key_name_admin(usr)] made [key_name(M)] into a metroid.", 1)
 	else
 		alert("Invalid mob")
 
@@ -450,7 +461,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set name = "Del-All"
 
 	// to prevent REALLY stupid deletions
-	var/blocked = list(/obj, /mob, /mob/living, /mob/living/carbon, /mob/living/carbon/human)
+	var/blocked = list(/obj, /mob, /mob/living, /mob/living/carbon, /mob/living/carbon/human, /mob/dead, /mob/dead/observer, /mob/living/silicon, /mob/living/silicon/robot, /mob/living/silicon/ai)
 	var/hsbitem = input(usr, "Choose an object to delete.", "Delete:") as null|anything in typesof(/obj) + typesof(/mob) - blocked
 	if(hsbitem)
 		for(var/atom/O in world)
@@ -458,6 +469,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 				del(O)
 		log_admin("[key_name(src)] has deleted all instances of [hsbitem].")
 		message_admins("[key_name_admin(src)] has deleted all instances of [hsbitem].", 0)
+//	feedback_add_details("admin_verb","DELA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_debug_make_powernets()
 	set category = "Debug"
@@ -465,6 +477,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	makepowernets()
 	log_admin("[key_name(src)] has remade the powernet. makepowernets() called.")
 	message_admins("[key_name_admin(src)] has remade the powernets. makepowernets() called.", 0)
+//	feedback_add_details("admin_verb","MPWN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_debug_tog_aliens()
 	set category = "Server"
@@ -473,6 +486,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	aliens_allowed = !aliens_allowed
 	log_admin("[key_name(src)] has turned aliens [aliens_allowed ? "on" : "off"].")
 	message_admins("[key_name_admin(src)] has turned aliens [aliens_allowed ? "on" : "off"].", 0)
+//	feedback_add_details("admin_verb","TAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_grantfullaccess(var/mob/M in world)
 	set category = "Admin"
@@ -488,12 +502,10 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			if(istype(H.wear_id, /obj/item/device/pda))
 				var/obj/item/device/pda/pda = H.wear_id
 				id = pda.id
-			log_admin("[key_name(src)] has granted [M.key] full access.")
 			id.icon_state = "gold"
 			id:access = get_all_accesses()+get_all_centcom_access()+get_all_syndicate_access()
 		else
 			var/obj/item/weapon/card/id/id = new/obj/item/weapon/card/id(M);
-			log_admin("[key_name(src)] has granted [M.key] full access.")
 			id.icon_state = "gold"
 			id:access = get_all_accesses()+get_all_centcom_access()+get_all_syndicate_access()
 			id.registered_name = H.real_name
@@ -503,6 +515,29 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			H.update_clothing()
 	else
 		alert("Invalid mob")
+	//feedback_add_details("admin_verb","GFA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	log_admin("[key_name(src)] has granted [M.key] full access.")
+	message_admins("\blue [key_name_admin(usr)] has granted [M.key] full access.", 1)
+
+/client/proc/cmd_assume_direct_control(var/mob/M in world)
+	set category = "Admin"
+	set name = "Assume direct control"
+	set desc = "Direct intervention"
+
+	if(M.ckey)
+		if(alert("This mob is being controlled by [M.ckey]. Are you sure you wish to assume control of it? [M.ckey] will be made a ghost.",,"Yes","No") != "Yes")
+			return
+		else
+			var/mob/dead/observer/ghost = new/mob/dead/observer()
+			ghost.ckey = M.ckey;
+	var/mob/adminmob = src.mob
+	M.ckey = src.ckey;
+	if( isobserver(adminmob) )
+		del(adminmob)
+	//feedback_add_details("admin_verb","ADC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	log_admin("[key_name(usr)] assumed direct control of [M].")
+	message_admins("\blue [key_name_admin(usr)] assumed direct control of [M].", 1)
+
 
 
 /client/proc/cmd_admin_dress(var/mob/living/carbon/human/M in world)
@@ -539,6 +574,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/dresscode = input("Select dress for [M]", "Robust quick dress shop") as null|anything in dresspacks
 	if (isnull(dresscode))
 		return
+	//feedback_add_details("admin_verb","SEQ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	for (var/obj/item/I in M)
 		if (istype(I, /obj/item/weapon/implant))
 			continue
@@ -552,7 +588,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_if_possible(new /obj/item/clothing/under/color/grey(M), M.slot_w_uniform)
 			M.equip_if_possible(new /obj/item/clothing/suit/space(M), M.slot_wear_suit)
 			M.equip_if_possible(new /obj/item/clothing/head/helmet/space(M), M.slot_head)
-			var /obj/item/weapon/tank/jetpack/oxygen/J = new /obj/item/weapon/tank/jetpack/oxygen(M)
+			var /obj/item/weapon/tank/jetpack/J = new /obj/item/weapon/tank/jetpack/oxygen(M)
 			M.equip_if_possible(J, M.slot_back)
 			J.toggle()
 			M.equip_if_possible(new /obj/item/clothing/mask/breath(M), M.slot_wear_mask)
@@ -611,13 +647,13 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 			M.equip_if_possible(new /obj/item/weapon/chem_grenade/cleaner(M), M.slot_r_store)
 			M.equip_if_possible(new /obj/item/weapon/chem_grenade/cleaner(M), M.slot_l_store)
-			M.equip_if_possible(new /obj/item/stack/tile/steel(M), M.slot_in_backpack)
-			M.equip_if_possible(new /obj/item/stack/tile/steel(M), M.slot_in_backpack)
-			M.equip_if_possible(new /obj/item/stack/tile/steel(M), M.slot_in_backpack)
-			M.equip_if_possible(new /obj/item/stack/tile/steel(M), M.slot_in_backpack)
-			M.equip_if_possible(new /obj/item/stack/tile/steel(M), M.slot_in_backpack)
-			M.equip_if_possible(new /obj/item/stack/tile/steel(M), M.slot_in_backpack)
-			M.equip_if_possible(new /obj/item/stack/tile/steel(M), M.slot_in_backpack)
+			M.equip_if_possible(new /obj/item/stack/tile/plasteel(M), M.slot_in_backpack)
+			M.equip_if_possible(new /obj/item/stack/tile/plasteel(M), M.slot_in_backpack)
+			M.equip_if_possible(new /obj/item/stack/tile/plasteel(M), M.slot_in_backpack)
+			M.equip_if_possible(new /obj/item/stack/tile/plasteel(M), M.slot_in_backpack)
+			M.equip_if_possible(new /obj/item/stack/tile/plasteel(M), M.slot_in_backpack)
+			M.equip_if_possible(new /obj/item/stack/tile/plasteel(M), M.slot_in_backpack)
+			M.equip_if_possible(new /obj/item/stack/tile/plasteel(M), M.slot_in_backpack)
 
 		if ("pirate")
 			M.equip_if_possible(new /obj/item/clothing/under/pirate(M), M.slot_w_uniform)
@@ -661,8 +697,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			W.registered_name = M.real_name
 			M.equip_if_possible(W, M.slot_wear_id)
 
-			var/obj/item/weapon/fireaxe/fire_axe = new(M)
-			fire_axe.name = "Fire Axe (Unwielded)"
+			var/obj/item/weapon/twohanded/fireaxe/fire_axe = new(M)
 			M.equip_if_possible(fire_axe, M.slot_r_hand)
 
 		if("masked killer")
@@ -677,8 +712,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_if_possible(new /obj/item/weapon/kitchenknife(M), M.slot_l_store)
 			M.equip_if_possible(new /obj/item/weapon/scalpel(M), M.slot_r_store)
 
-			var/obj/item/weapon/fireaxe/fire_axe = new(M)
-			fire_axe.name = "Fire Axe (Unwielded)"
+			var/obj/item/weapon/twohanded/fireaxe/fire_axe = new(M)
 			M.equip_if_possible(fire_axe, M.slot_r_hand)
 
 			for(var/obj/item/carried_item in M.contents)
@@ -699,7 +733,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			for(var/obj/item/briefcase_item in sec_briefcase)
 				del(briefcase_item)
 			for(var/i=3, i>0, i--)
-				sec_briefcase.contents += new /obj/item/weapon/spacecash/c1000
+				sec_briefcase.contents += new /obj/item/weapon/money/c1000
 			sec_briefcase.contents += new /obj/item/weapon/gun/energy/crossbow
 			sec_briefcase.contents += new /obj/item/weapon/gun/projectile/mateba
 			sec_briefcase.contents += new /obj/item/ammo_magazine/a357
@@ -771,7 +805,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_if_possible(new /obj/item/clothing/mask/cigarette/cigar/cohiba(M), M.slot_wear_mask)
 			M.equip_if_possible(new /obj/item/clothing/head/centhat(M), M.slot_head)
 			M.equip_if_possible(new /obj/item/weapon/gun/projectile/mateba(M), M.slot_s_store)
-			M.equip_if_possible(new /obj/item/weapon/zippo(M), M.slot_r_store)
+			M.equip_if_possible(new /obj/item/weapon/lighter/zippo(M), M.slot_r_store)
 			M.equip_if_possible(new /obj/item/ammo_magazine/a357(M), M.slot_l_store)
 
 			var/obj/item/weapon/card/id/W = new(M)
@@ -791,10 +825,10 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_if_possible(new /obj/item/clothing/gloves/combat(M), M.slot_gloves)
 			M.equip_if_possible(new /obj/item/device/radio/headset/heads/captain(M), M.slot_ears)
 			M.equip_if_possible(new /obj/item/clothing/glasses/thermal/eyepatch(M), M.slot_glasses)
-			M.equip_if_possible(new /obj/item/clothing/mask/cigarette/cigar/havanian(M), M.slot_wear_mask)
+			M.equip_if_possible(new /obj/item/clothing/mask/cigarette/cigar/havana(M), M.slot_wear_mask)
 			M.equip_if_possible(new /obj/item/clothing/head/deathsquad/beret(M), M.slot_head)
 			M.equip_if_possible(new /obj/item/weapon/gun/energy/pulse_rifle/M1911(M), M.slot_belt)
-			M.equip_if_possible(new /obj/item/weapon/zippo(M), M.slot_r_store)
+			M.equip_if_possible(new /obj/item/weapon/lighter/zippo(M), M.slot_r_store)
 			M.equip_if_possible(new /obj/item/weapon/storage/backpack/satchel(M), M.slot_back)
 
 			var/obj/item/weapon/card/id/W = new(M)
@@ -861,4 +895,58 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_if_possible(W, M.slot_wear_id)
 
 	M.update_clothing()
+
+	log_admin("[key_name(usr)] changed the equipment of [key_name(M)] to [dresscode].")
+	message_admins("\blue [key_name_admin(usr)] changed the equipment of [key_name_admin(M)] to [dresscode].", 1)
 	return
+
+/client/proc/startSinglo()
+
+	set category = "Debug"
+	set name = "Start Singularity"
+	set desc = "Sets up the singularity and all machines to get power flowing through the station"
+
+	if(alert("Are you sure? This will start up the engine. Should only be used during debug!",,"Yes","No") != "Yes")
+		return
+
+	for(var/obj/machinery/emitter/E in world)
+		if(E.anchored)
+			E.active = 1
+
+	for(var/obj/machinery/field_generator/F in world)
+		if(F.anchored)
+			F.Varedit_start = 1
+	spawn(30)
+		for(var/obj/machinery/the_singularitygen/G in world)
+			if(G.anchored)
+				var/obj/machinery/singularity/S = new /obj/machinery/singularity(get_turf(G), 50)
+				spawn(0)
+					del(G)
+				S.energy = 1750
+				S.current_size = 7
+				S.icon = '224x224.dmi'
+				S.icon_state = "singularity_s7"
+				S.pixel_x = -96
+				S.pixel_y = -96
+				S.grav_pull = 0
+				//S.consume_range = 3
+				S.dissipate = 0
+				//S.dissipate_delay = 10
+				//S.dissipate_track = 0
+				//S.dissipate_strength = 10
+
+	for(var/obj/machinery/power/rad_collector/Rad in world)
+		if(Rad.anchored)
+			if(!Rad.P)
+				var/obj/item/weapon/tank/plasma/Plasma = new/obj/item/weapon/tank/plasma(Rad)
+				Plasma.air_contents.toxins = 70
+				Rad.drainratio = 0
+				Rad.P = Plasma
+				Plasma.loc = Rad
+
+			if(!Rad.active)
+				Rad.toggle_power()
+
+	for(var/obj/machinery/power/smes/SMES in world)
+		if(SMES.anchored)
+			SMES.chargemode = 1

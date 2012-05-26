@@ -4,9 +4,71 @@
 	throw_range = 20
 	force = 0
 
+
+/////////Toy Mechs/////////
+
+/obj/item/toy/prize
+	icon = 'toy.dmi'
+	icon_state = "ripleytoy"
+
+/obj/item/toy/prize/ripley
+	name = "toy ripley"
+	desc = "Mini-Mecha action figure! Collect them all! 1/11"
+
+/obj/item/toy/prize/fireripley
+	name = "toy firefighting ripley"
+	desc = "Mini-Mecha action figure! Collect them all! 2/11"
+	icon_state = "fireripleytoy"
+
+/obj/item/toy/prize/deathripley
+	name = "toy deathsquad ripley"
+	desc = "Mini-Mecha action figure! Collect them all! 3/11"
+	icon_state = "deathripleytoy"
+
+/obj/item/toy/prize/gygax
+	name = "toy gygax"
+	desc = "Mini-Mecha action figure! Collect them all! 4/11"
+	icon_state = "gygaxtoy"
+
+/obj/item/toy/prize/durand
+	name = "toy gygax"
+	desc = "Mini-Mecha action figure! Collect them all! 5/11"
+	icon_state = "durandprize"
+
+/obj/item/toy/prize/honk
+	name = "toy H.O.N.K."
+	desc = "Mini-Mecha action figure! Collect them all! 6/11"
+	icon_state = "honkprize"
+
+/obj/item/toy/prize/marauder
+	name = "toy marauder"
+	desc = "Mini-Mecha action figure! Collect them all! 7/11"
+	icon_state = "marauderprize"
+
+/obj/item/toy/prize/seraph
+	name = "toy seraph"
+	desc = "Mini-Mecha action figure! Collect them all! 8/11"
+	icon_state = "seraphprize"
+
+/obj/item/toy/prize/mauler
+	name = "toy mauler"
+	desc = "Mini-Mecha action figure! Collect them all! 9/11"
+	icon_state = "maulerprize"
+
+/obj/item/toy/prize/odysseus
+	name = "toy odysseus"
+	desc = "Mini-Mecha action figure! Collect them all! 10/11"
+	icon_state = "odysseusprize"
+
+/obj/item/toy/prize/phazon
+	name = "toy phazon"
+	desc = "Mini-Mecha action figure! Collect them all! 11/11"
+	icon_state = "phazonprize"
+
+
 /obj/item/toy/syndicateballoon
-	name = "syndicate balloon"
-	desc = "There is a tag on the back that reads \"FUK NT!11!\"."
+	name = "red balloon"
+	desc = "Looks like a red balloon with a large \"S\" on it."
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
@@ -110,6 +172,8 @@
 		src.add_fingerprint(user)
 		if (src.bullets < 1)
 			user.show_message("\red *click* *click*", 2)
+			for(var/mob/K in viewers(usr))
+				K << 'empty.ogg'
 			return
 		playsound(user, 'Gunshot.ogg', 100, 1)
 		src.bullets--
@@ -239,12 +303,16 @@
 			user.Weaken(5)
 		return
 
-/obj/item/toy/crayonbox
+/obj/item/weapon/storage/crayonbox
 	name = "box of crayons"
-	desc = "A box of crayons for all your drawing needs."
+	desc = "A box of crayons for all your rune drawing needs."
 	icon = 'crayons.dmi'
 	icon_state = "crayonbox"
 	w_class = 2.0
+	storage_slots = 6
+	can_hold = list(
+		"/obj/item/toy/crayon"
+	)
 
 /obj/item/toy/crayon
 	name = "crayon"
@@ -386,3 +454,63 @@
         usr << text("\icon[] [] units of water left!", src, src.reagents.total_volume)
         ..()
         return
+
+/obj/item/toy/balloon
+	name = "water balloon"
+	desc = "A translucent balloon. There's nothing in it."
+	icon = 'toy.dmi'
+	icon_state = "waterballoon-e"
+	item_state = "balloon-empty"
+
+/obj/item/toy/balloon/New()
+	var/datum/reagents/R = new/datum/reagents(10)
+	reagents = R
+	R.my_atom = src
+
+/obj/item/toy/balloon/attack(mob/living/carbon/human/M as mob, mob/user as mob)
+	return
+
+/obj/item/toy/balloon/afterattack(atom/A as mob|obj, mob/user as mob)
+	if (istype(A, /obj/structure/reagent_dispensers/watertank) && get_dist(src,A) <= 1)
+		A.reagents.trans_to(src, 10)
+		user << "\blue You fill the balloon with the contents of [A]."
+		src.desc = "A translucent balloon with some form of liquid sloshing around in it."
+		src.update_icon()
+	return
+
+/obj/item/toy/balloon/attackby(obj/O as obj, mob/user as mob)
+	if(istype(O, /obj/item/weapon/reagent_containers/glass))
+		if(O.reagents)
+			if(O.reagents.total_volume < 1)
+				user << "The [O] is empty."
+			else if(O.reagents.total_volume >= 1)
+				if(O.reagents.has_reagent("pacid", 1))
+					user << "The acid chews through the balloon!"
+					O.reagents.reaction(user)
+					del(src)
+				else
+					src.desc = "A translucent balloon with some form of liquid sloshing around in it."
+					user << "\blue You fill the balloon with the contents of [O]."
+					O.reagents.trans_to(src, 10)
+	src.update_icon()
+	return
+
+/obj/item/toy/balloon/throw_impact(atom/hit_atom)
+	if(src.reagents.total_volume >= 1)
+		src.visible_message("\red The [src] bursts!","You hear a pop and a splash.")
+		src.reagents.reaction(get_turf(hit_atom))
+		for(var/atom/A in get_turf(hit_atom))
+			src.reagents.reaction(A)
+		src.icon_state = "burst"
+		spawn(5)
+			if(src)
+				del(src)
+	return
+
+/obj/item/toy/balloon/update_icon()
+	if(src.reagents.total_volume >= 1)
+		icon_state = "waterballoon"
+		item_state = "balloon"
+	else
+		icon_state = "waterballoon-e"
+		item_state = "balloon-empty"

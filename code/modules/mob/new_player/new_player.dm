@@ -3,6 +3,8 @@
 		datum/preferences/preferences = null
 		ready = 0
 		spawning = 0//Referenced when you want to delete the new_player later on in the code.
+		totalPlayers = 0		 //Player counts for the Lobby tab
+		totalPlayersReady = 0
 
 	invisibility = 101
 
@@ -24,6 +26,8 @@
 		var/starting_loc = pick(newplayer_start)
 		if(!starting_loc)	starting_loc = locate(1,1,1)
 		loc = starting_loc
+		lastarea = starting_loc
+
 		sight |= SEE_TURFS
 
 		var/list/watch_locations = list()
@@ -155,8 +159,8 @@
 	Stat()
 		..()
 
-		statpanel("Game")
-		if(client.statpanel=="Game" && ticker)
+		statpanel("Lobby")
+		if(client.statpanel=="Lobby" && ticker)
 			if(ticker.hide_mode)
 				stat("Game Mode:", "Secret")
 			else
@@ -166,14 +170,15 @@
 				stat("Time To Start:", ticker.pregame_timeleft)
 			if((ticker.current_state == GAME_STATE_PREGAME) && !going)
 				stat("Time To Start:", "DELAYED")
-			if((ticker.current_state == GAME_STATE_PLAYING) && going)
-				stat("Round Duration:", "[round(world.time / 36000)]:[(((world.time / 600 % 60)/10) > 1 ? world.time / 600 % 60 : add_zero(world.time / 600 % 60, 2))]:[world.time / 100 % 6][world.time / 100 % 10]")
 
-		statpanel("Lobby")
-		if(client.statpanel=="Lobby" && ticker)
 			if(ticker.current_state == GAME_STATE_PREGAME)
+				stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
+				totalPlayers = 0
+				totalPlayersReady = 0
 				for(var/mob/new_player/player in world)
 					stat("[player.key]", (player.ready)?("(Playing)"):(null))
+					totalPlayers++
+					if(player.ready)totalPlayersReady++
 
 	Topic(href, href_list[])
 		if(!client)	return 0
@@ -183,7 +188,6 @@
 			return 1
 
 		if(href_list["ready"])
-
 			if(!ready)
 				ready = 1
 			else
@@ -211,6 +215,8 @@
 				observer.name = preferences.real_name
 				observer.real_name = observer.name
 				observer.original_name = observer.name //Original name is only used in ghost chat! It is not to be edited by anything!
+
+				preferences.copy_to_observer(observer)
 
 				del(src)
 				return 1
@@ -245,6 +251,9 @@
 		else if(!href_list["late_join"])
 			new_player_panel()
 
+		if(href_list["priv_msg"])
+			..()	//pass PM calls along to /mob/Topic
+			return
 
 	proc/IsJobAvailable(rank)
 		var/datum/job/job = job_master.GetJob(rank)
@@ -265,6 +274,7 @@
 		job_master.EquipRank(character, rank, 1)
 		EquipCustomItems(character)
 		character.loc = pick(latejoin)
+		character.lastarea = get_area(loc)
 		if(character.client)
 			character.client.be_syndicate = preferences.be_special
 		ticker.mode.latespawn(character)
@@ -357,18 +367,37 @@
 
 
 	proc/LateChoices()
-		var/dat = "<html><body>"
+		var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
+		//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
+		var/mins = (mills % 36000) / 600
+		var/hours = mills / 36000
+
+		var/dat = "<html><body><center>"
+		dat += "Round Duration: [round(hours)]h [round(mins)]m<br>"
+
+		if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.
+			if(emergency_shuttle.direction == 2) //Shuttle is going to centcomm, not recalled
+				dat += "<font color='red'><b>The station has been evacuated.</b></font><br>"
+			if(emergency_shuttle.direction == 1 && emergency_shuttle.timeleft() < 300) //Shuttle is past the point of no recall
+				dat += "<font color='red'>The station is currently undergoing evacuation procedures.</font><br>"
+
 		dat += "Choose from the following open positions:<br>"
 		for(var/datum/job/job in job_master.occupations)
 			if(job && IsJobAvailable(job.title))
 				dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title]</a><br>"
 
-		src << browse(dat, "window=latechoices;size=300x640;can_close=0")
+		dat += "</center>"
+		src << browse(dat, "window=latechoices;size=300x640;can_close=1")
 
 
 	proc/create_character()
 		spawning = 1
-		var/mob/living/carbon/human/new_character = new(loc)
+		var/mob/living/carbon/human/new_character //	var/path/to/object/varname
+		if((preferences.species == "Tajaran") && (is_alien_whitelisted(src, "Tajaran")))
+			new_character = new /mob/living/carbon/human/tajaran(loc)	//	varname = new /path/to/object(location_to_spawn_at)
+		else
+			new_character = new /mob/living/carbon/human(loc)
+		new_character.lastarea = get_area(loc)
 
 		close_spawn_windows()
 
@@ -378,9 +407,9 @@
 			preferences.randomize_appearance_for(new_character)
 		else
 			preferences.copy_to(new_character)
-
-		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
-
+			if((preferences.species == "Soghun") && (is_alien_whitelisted(src, "Soghun"))) //This probably shouldn't be here, but I can't think of any other way
+				new_character.mutantrace = "lizard"
+		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1)
 
 		new_character.dna.ready_dna(new_character)
 		preferences.copydisabilities(new_character)

@@ -23,10 +23,10 @@
 		return
 
 	update_icon()
+		overlays = null
+		icon_state = "sheater[on]"
 		if(open)
-			icon_state = "sheater-open"
-		else
-			icon_state = "sheater[on]"
+			overlays  += "sheater-open"
 		return
 
 	examine()
@@ -166,7 +166,7 @@
 					var/datum/gas_mixture/env = L.return_air()
 					if(env.temperature < (set_temperature+T0C))
 
-						var/transfer_moles = 0.25 * env.total_moles()
+						var/transfer_moles = 0.25 * env.total_moles
 
 						var/datum/gas_mixture/removed = env.remove(transfer_moles)
 

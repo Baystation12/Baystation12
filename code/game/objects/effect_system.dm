@@ -411,11 +411,16 @@ steam.start() -- spawns the effect
 	var/obj/R = new /obj()
 	R.reagents = new/datum/reagents(500)
 	R.reagents.my_atom = R
-	reagents.trans_to(R, reagents.total_volume/divisor)
-	for(var/atom/A in view(1, src))
-		R.reagents.reaction(A)
-	del(R)
-
+	if(reagents)
+		reagents.trans_to(R, reagents.total_volume/divisor)
+		for(var/atom/A in view(1, src))
+			if(reagents.has_reagent("radium")||reagents.has_reagent("uranium")||reagents.has_reagent("carbon")||reagents.has_reagent("thermite"))//Prevents unholy radium spam by reducing the number of 'greenglows' down to something reasonable -Sieve
+				if(prob(5))
+					R.reagents.reaction(A)
+				del(R)
+			else if(R && R.reagents)
+				R.reagents.reaction(A)
+			del(R)
 	return
 
 /obj/effect/effect/chem_smoke/HasEntered(mob/living/carbon/M as mob )
@@ -910,7 +915,7 @@ steam.start() -- spawns the effect
 
 
 	set_up(amt=5, loca, var/datum/reagents/carry = null, var/metalfoam = 0)
-		amount = round(amt/5, 1)
+		amount = round(sqrt(amt / 3), 1)
 		if(istype(loca, /turf/))
 			location = loca
 		else
@@ -1029,7 +1034,8 @@ steam.start() -- spawns the effect
 			user << "\blue You hit the metal foam to no effect."
 
 	CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
-		if(air_group) return 0
+		if(!istype(mover))
+			return 0
 		return !density
 
 
@@ -1044,38 +1050,11 @@ steam.start() -- spawns the effect
 		var/turf/simulated/east = get_step(source,EAST)
 		var/turf/simulated/west = get_step(source,WEST)
 
-		if(need_rebuild)
-			if(istype(source)) //Rebuild/update nearby group geometry
-				if(source.parent)
-					air_master.groups_to_rebuild += source.parent
-				else
-					air_master.tiles_to_update += source
-			if(istype(north))
-				if(north.parent)
-					air_master.groups_to_rebuild += north.parent
-				else
-					air_master.tiles_to_update += north
-			if(istype(south))
-				if(south.parent)
-					air_master.groups_to_rebuild += south.parent
-				else
-					air_master.tiles_to_update += south
-			if(istype(east))
-				if(east.parent)
-					air_master.groups_to_rebuild += east.parent
-				else
-					air_master.tiles_to_update += east
-			if(istype(west))
-				if(west.parent)
-					air_master.groups_to_rebuild += west.parent
-				else
-					air_master.tiles_to_update += west
-		else
-			if(istype(source)) air_master.tiles_to_update += source
-			if(istype(north)) air_master.tiles_to_update += north
-			if(istype(south)) air_master.tiles_to_update += south
-			if(istype(east)) air_master.tiles_to_update += east
-			if(istype(west)) air_master.tiles_to_update += west
+		if(istype(source)) air_master.tiles_to_update += source
+		if(istype(north)) air_master.tiles_to_update += north
+		if(istype(south)) air_master.tiles_to_update += south
+		if(istype(east)) air_master.tiles_to_update += east
+		if(istype(west)) air_master.tiles_to_update += west
 
 		return 1
 

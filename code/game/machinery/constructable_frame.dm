@@ -163,7 +163,7 @@ to destroy them and players will be able to make replacements.
 	build_path = "/obj/machinery/r_n_d/destructive_analyzer"
 	board_type = "machine"
 	origin_tech = "magnets=2;engineering=2;programming=2"
-	frame_desc = "Requires 2 Scanning Modules, 1 Manipulator, and 1 Micro-Laser."
+	frame_desc = "Requires 1 Scanning Module, 1 Manipulator, and 1 Micro-Laser."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/scanning_module" = 1,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
@@ -224,6 +224,11 @@ to destroy them and players will be able to make replacements.
 	name = "Circuit Board (MRSPACMAN-type Generator)"
 	build_path = "/obj/machinery/power/port_gen/pacman/mrs"
 	origin_tech = "programming=3;powerstorage=5;engineering=5"
+
+/obj/item/weapon/circuitboard/pacman/industrial
+	name = "Circuit Board (Industrial PACMAN-type Generator)"
+	build_path = "/obj/machinery/power/port_gen/pacman/industrial"
+	origin_tech = "programming=3;powerstorage=4;engineering=4"
 
 /obj/item/weapon/circuitboard/pacman2
 	name = "Circuit Board (PACMANII-type Generator)"
@@ -348,7 +353,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/subspace/filter" = 1)
 
 /obj/item/weapon/circuitboard/telecomms/broadcaster
-	name = "Circuit Board (Bus Mainframe)"
+	name = "Circuit Board (Subspace Broadcaster)"
 	build_path = "/obj/machinery/telecomms/broadcaster"
 	board_type = "machine"
 	origin_tech = "programming=4;engineering=4;bluespace=2"
@@ -361,3 +366,7 @@ obj/item/weapon/circuitboard/rdserver
 							"/obj/item/weapon/stock_parts/subspace/transmitter" = 1,
 							"/obj/item/weapon/stock_parts/subspace/amplifier" = 1,
 							"/obj/item/weapon/stock_parts/micro_laser/high" = 4)
+
+
+
+

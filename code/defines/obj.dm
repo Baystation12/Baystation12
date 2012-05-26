@@ -23,28 +23,28 @@
 
 	proc/initialize()
 
-/obj/item/policetaperoll
-	name = "police tape roll"
-	desc = "A roll of police tape used to block off crime scenes from the public."
+//Define all tape types in policetape.dm
+/obj/item/taperoll
+	name = "tape roll"
 	icon = 'policetape.dmi'
 	icon_state = "rollstart"
 	flags = FPRINT
 	w_class = 1.0
-	var/tapestartx = 0
-	var/tapestarty = 0
-	var/tapestartz = 0
-	var/tapeendx = 0
-	var/tapeendy = 0
-	var/tapeendz = 0
+	var
+		turf/start
+		turf/end
+		tape_type = /obj/item/tape
+		icon_base
 
-/obj/item/policetape
-	name = "police tape"
-	desc = "A length of police tape.  Do not cross."
+/obj/item/tape
+	name = "tape"
 	icon = 'policetape.dmi'
 	anchored = 1
 	density = 1
-	req_access = list(access_security)
+	var/icon_base
+/*
 
+*/
 /obj/structure/signpost
 	icon = 'stationobjs.dmi'
 	icon_state = "signpost"
@@ -88,7 +88,7 @@
 
 /obj/structure/bedsheetbin
 	name = "linen bin"
-	desc = "A bin for containing bedsheets. It looks rather cosy."
+	desc = "A small wire mesh bin full of extra bedsheets and cleaning supplies for the beds.  Smells of lilacs and has a faint undertone of disinfectant."
 	icon = 'items.dmi'
 	icon_state = "bedbin"
 	var/amount = 23.0
@@ -232,7 +232,7 @@
 	var/mob/living/carbon/monkey/target = null
 
 /obj/effect/sign/securearea
-	desc = "A warning sign which reads 'SECURE AREA'"
+	desc = "A large yellow warning sign which reads 'SECURE AREA', it appears to have been painted onto the wall like that."
 	name = "SECURE AREA"
 	icon = 'decals.dmi'
 	icon_state = "securearea"
@@ -250,7 +250,7 @@
 	density = 0
 
 /obj/effect/sign/biohazard
-	desc = "A warning sign which reads 'BIOHAZARD'"
+	desc = "A warning sign which reads 'BIOHAZARD', you think it'd be a good idea to ensure you have a properly sealed hazardsuit on."
 	name = "BIOHAZARD"
 	icon = 'decals.dmi'
 	icon_state = "bio"
@@ -259,7 +259,7 @@
 	density = 0
 
 /obj/effect/sign/electricshock
-	desc = "A warning sign which reads 'HIGH VOLTAGE'"
+	desc = "A warning sign which reads 'HIGH VOLTAGE', it looks like it'd be a wise decision to stay away from here."
 	name = "HIGH VOLTAGE"
 	icon = 'decals.dmi'
 	icon_state = "shock"
@@ -383,7 +383,6 @@
 	opacity = 0
 	density = 0
 
-
 /obj/hud
 	name = "hud"
 	unacidable = 1
@@ -400,9 +399,12 @@
 	var/obj/screen/g_dither = null
 	var/obj/screen/blurry = null
 	var/list/darkMask = null
-	var/obj/screen/station_explosion = null
+	var/obj/screen/r_hand_hud_object = null
+	var/obj/screen/l_hand_hud_object = null
+	var/list/obj/screen/intent_small_hud_objects = null
+	var/show_intent_icons = 0
 
-	var/h_type = /obj/screen
+	var/h_type = /obj/screen		//this is like...the most pointless thing ever. Use a god damn define!
 
 /obj/item
 	name = "item"
@@ -418,10 +420,6 @@
 	var/burning = null
 	var/hitsound = null
 	var/w_class = 3.0
-	var/wielded = 0 // 1 if item is two handed and grabbed with two hands
-	var/twohanded = 0 // Two handed and wielded off by default, nyoro~n -Agouri
-	var/force_unwielded = 0
-	var/force_wielded = 0
 	var/protective_temperature = 0 // Placing this here to avoid runtime errors, due to tiny items being allowed on ears and being queried for this variable
 	flags = FPRINT | TABLEPASS
 	pass_flags = PASSTABLE
@@ -640,6 +638,10 @@
 	color="blue"
 	icon = 'power_cond_blue.dmi'
 
+/obj/structure/cable/pink
+	color="pink"
+	icon = 'power_cond_pink.dmi'
+
 /obj/effect/manifest
 	name = "manifest"
 	icon = 'screen1.dmi'
@@ -759,7 +761,6 @@
 	desc = "Apply butt."
 	icon = 'objects.dmi'
 	icon_state = "stool"
-	anchored = 1.0
 	flags = FPRINT
 	pressure_resistance = 3*ONE_ATMOSPHERE
 
@@ -768,6 +769,7 @@
 	desc = "This is used to lie in, sleep in or strap on."
 	icon_state = "bed"
 	var/mob/living/buckled_mob
+	anchored = 1.0
 
 /obj/structure/stool/bed/alien
 	name = "Resting contraption"
@@ -779,6 +781,7 @@
 	name = "chair"
 	desc = "You sit in this. Either by will or force."
 	icon_state = "chair"
+	anchored = 0
 
 /obj/structure/stool/bed/chair/comfy
 	name = "comfy chair"
@@ -793,11 +796,27 @@
 /obj/structure/stool/bed/chair/comfy/teal
 	icon_state = "comfychair_teal"
 
+/obj/structure/stool/bed/chair/office
+	anchored = 0
+
 /obj/structure/stool/bed/chair/comfy/black
 	icon_state = "comfychair_black"
 
 /obj/structure/stool/bed/chair/comfy/lime
 	icon_state = "comfychair_lime"
+
+/obj/structure/stool/bed/chair/office/Move()
+	..()
+	if(buckled_mob)
+		if(buckled_mob.buckled == src)
+			buckled_mob.loc = src.loc
+			buckled_mob.dir = src.dir
+
+/obj/structure/stool/bed/chair/office/light
+	icon_state = "officechair_white"
+
+/obj/structure/stool/bed/chair/office/dark
+	icon_state = "officechair_dark"
 
 /obj/structure/table
 	name = "table"
@@ -807,6 +826,7 @@
 	density = 1
 	anchored = 1.0
 	layer = 2.8
+	var/dented = 0
 
 	New()
 		..()
@@ -1313,31 +1333,6 @@
 	throwforce = 14.0
 	flags = FPRINT | TABLEPASS | CONDUCT
 
-/obj/item/stack/sheet/r_metal
-	name = "steel"
-	singular_name = "steel sheet"
-	desc = "This sheet is an alloy of iron and plasma."
-	icon_state = "sheet-r_metal"
-	item_state = "sheet-metal"
-	m_amt = 7500
-	throwforce = 15.0
-	flags = FPRINT | TABLEPASS | CONDUCT
-	origin_tech = "materials=2"
-
-/obj/item/stack/tile/steel
-	name = "Metal floor tile"
-	singular_name = "Steel floor tile"
-	desc = "Those could work as a pretty decent throwing weapon"
-	icon_state = "tile"
-	w_class = 3.0
-	force = 6.0
-	m_amt = 937.5
-	throwforce = 15.0
-	throw_speed = 5
-	throw_range = 20
-	flags = FPRINT | TABLEPASS | CONDUCT
-	max_amount = 60
-
 /obj/item/stack/sheet/plasteel
 	name = "plasteel"
 	singular_name = "plasteel sheet"
@@ -1494,9 +1489,19 @@
 	var/list/list3 = list()
 	var/list/list4 = list()
 	var/list/list5 = list()
+	var/list/list6 = list()
 
 	var/var1 = null
 	var/var2 = null
 	var/var3 = null
 	var/var4 = null
 	var/var5 = null
+
+/obj/item/rubberduck
+	name = "rubber duck"
+	desc = "A rubber duck. Quack."
+	icon = 'objects.dmi'
+	icon_state = "rduck"
+	item_state = "rduck"
+	flags = FPRINT
+	w_class = 1.0

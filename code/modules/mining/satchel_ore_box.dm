@@ -34,6 +34,12 @@
 		if(0)
 			usr << "The satchel now picks up one ore at a time."
 
+/obj/item/weapon/satchel/borg
+	icon = 'mining.dmi'
+	icon_state = "satchel"
+	name = "Cyborg Mining Satchel"
+	mode = 1;  //0 = pick one at a time, 1 = pick all on tile
+	capacity = 200; //the number of ore pieces it can carry.
 
 /**********************Ore box**************************/
 
@@ -65,7 +71,6 @@
 	var/amt_plasma = 0
 	var/amt_uranium = 0
 	var/amt_clown = 0
-	var/amt_adamantine = 0
 
 	for (var/obj/item/weapon/ore/C in contents)
 		if (istype(C,/obj/item/weapon/ore/diamond))
@@ -84,8 +89,6 @@
 			amt_uranium++;
 		if (istype(C,/obj/item/weapon/ore/clown))
 			amt_clown++;
-		if (istype(C,/obj/item/weapon/ore/adamantine))
-			amt_adamantine++;
 
 	var/dat = text("<b>The contents of the ore box reveal...</b><br>")
 	if (amt_gold)
@@ -104,8 +107,6 @@
 		dat += text("Uranium ore: [amt_uranium]<br>")
 	if (amt_clown)
 		dat += text("Bananium ore: [amt_clown]<br>")
-	if (amt_adamantine)
-		dat += text("Adamantine ore: [amt_adamantine]<br>")
 
 	dat += text("<br><br><A href='?src=\ref[src];removeall=1'>Empty box</A>")
 	user << browse("[dat]", "window=orebox")

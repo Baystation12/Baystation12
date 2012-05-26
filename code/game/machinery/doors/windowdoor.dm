@@ -1,23 +1,22 @@
+/obj/machinery/door/window
+	name = "interior door"
+	desc = "A door made from a window, yet it can not break nor be depowered."
+	icon = 'windoor.dmi'
+	icon_state = "left"
+	var/base_state = "left"
+	visible = 0.0
+	flags = ON_BORDER
+	opacity = 0
+
+
 /obj/machinery/door/window/update_nearby_tiles(need_rebuild)
 	if(!air_master) return 0
 
 	var/turf/simulated/source = loc
 	var/turf/simulated/target = get_step(source,dir)
 
-	if(need_rebuild)
-		if(istype(source)) //Rebuild/update nearby group geometry
-			if(source.parent)
-				air_master.groups_to_rebuild += source.parent
-			else
-				air_master.tiles_to_update += source
-		if(istype(target))
-			if(target.parent)
-				air_master.groups_to_rebuild += target.parent
-			else
-				air_master.tiles_to_update += target
-	else
-		if(istype(source)) air_master.tiles_to_update += source
-		if(istype(target)) air_master.tiles_to_update += target
+	if(istype(source)) air_master.tiles_to_update += source
+	if(istype(target)) air_master.tiles_to_update += target
 
 	return 1
 
@@ -148,3 +147,80 @@
 	else if (src.density)
 		flick(text("[]deny", src.base_state), src)
 	return
+
+
+
+/obj/machinery/door/window/brigdoor
+	name = "Brig Door"
+	icon = 'windoor.dmi'
+	icon_state = "leftsecure"
+	base_state = "leftsecure"
+	req_access = list(access_security)
+	var/id = null
+
+
+/obj/machinery/door/window/northleft
+	dir = NORTH
+
+/obj/machinery/door/window/eastleft
+	dir = EAST
+
+/obj/machinery/door/window/westleft
+	dir = WEST
+
+/obj/machinery/door/window/southleft
+	dir = SOUTH
+
+/obj/machinery/door/window/northright
+	dir = NORTH
+	icon_state = "right"
+	base_state = "right"
+
+/obj/machinery/door/window/eastright
+	dir = EAST
+	icon_state = "right"
+	base_state = "right"
+
+/obj/machinery/door/window/westright
+	dir = WEST
+	icon_state = "right"
+	base_state = "right"
+
+/obj/machinery/door/window/southright
+	dir = SOUTH
+	icon_state = "right"
+	base_state = "right"
+
+
+/obj/machinery/door/window/brigdoor/northleft
+	dir = NORTH
+
+/obj/machinery/door/window/brigdoor/eastleft
+	dir = EAST
+
+/obj/machinery/door/window/brigdoor/westleft
+	dir = WEST
+
+/obj/machinery/door/window/brigdoor/southleft
+	dir = SOUTH
+
+/obj/machinery/door/window/brigdoor/northright
+	dir = NORTH
+	icon_state = "rightsecure"
+	base_state = "rightsecure"
+
+/obj/machinery/door/window/brigdoor/eastright
+	dir = EAST
+	icon_state = "rightsecure"
+	base_state = "rightsecure"
+
+/obj/machinery/door/window/brigdoor/westright
+	dir = WEST
+	icon_state = "rightsecure"
+	base_state = "rightsecure"
+
+/obj/machinery/door/window/brigdoor/southright
+	dir = SOUTH
+	icon_state = "rightsecure"
+	base_state = "rightsecure"
+

@@ -1,6 +1,10 @@
 /mob/living/carbon/human/emote(var/act,var/m_type=1,var/message = null)
 	var/param = null
 
+	if(!emote_allowed && usr == src)
+		usr << "You are unable to emote."
+		return
+
 	if (findtext(act, " ", 1, null))
 		var/t1 = findtext(act, " ", 1, null)
 		param = copytext(act, t1 + 1, length(act) + 1)
@@ -9,9 +13,11 @@
 	var/muzzled = istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
 	//var/m_type = 1
 
-	for (var/obj/item/weapon/implant/I in src)
-		if (I.implanted)
-			I.trigger(act, src)
+	for(var/named in organs)
+		var/datum/organ/external/F = organs[named]
+		for (var/obj/item/weapon/implant/I in F.implant)
+			if (I.implanted)
+				I.trigger(act, src)
 
 	if(src.stat == 2.0 && (act != "deathgasp"))
 		return
@@ -162,7 +168,9 @@
 
 		if ("faint")
 			message = "<B>[src]</B> faints."
-			src.sleeping = 1
+			if(src.sleeping)
+				return //Can't faint while asleep
+			src.sleeping += 10 //Short-short nap
 			m_type = 1
 
 		if ("cough")
@@ -507,10 +515,36 @@
 		else
 			src << "\blue Unusable emote '[act]'. Say *help for a list."
 
+
+
+
+
 	if (message)
+		log_emote("[name]/[key] : [message]")
+
+ //Hearing gasp and such every five seconds is not good emotes were not global for a reason.
+ // Maybe some people are okay with that.
+
+		for(var/mob/M in world)
+			if (!M.client)
+				continue //skip monkeys and leavers
+			if (istype(M, /mob/new_player))
+				continue
+			if(findtext(message," snores.")) //Because we have so many sleeping people.
+				continue
+			if(M.stat == 2 && M.client.ghost_sight && !(M in viewers(src,null)))
+				M.show_message(message)
+
+
 		if (m_type & 1)
 			for (var/mob/O in viewers(src, null))
+				if(istype(O,/mob/living/carbon/human))
+					for(var/mob/living/parasite/P in O:parasites)
+						P.show_message(message, m_type)
 				O.show_message(message, m_type)
 		else if (m_type & 2)
 			for (var/mob/O in hearers(src.loc, null))
+				if(istype(O,/mob/living/carbon/human))
+					for(var/mob/living/parasite/P in O:parasites)
+						P.show_message(message, m_type)
 				O.show_message(message, m_type)

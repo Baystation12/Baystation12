@@ -31,6 +31,7 @@
 
 	real_name = pickedName
 	name = real_name
+	original_name = real_name
 	anchored = 1
 	canmove = 0
 	loc = loc
@@ -46,15 +47,8 @@
 
 	verbs += /mob/living/silicon/ai/proc/show_laws_verb
 
-	if (istype(loc, /turf))
-		verbs += /mob/living/silicon/ai/proc/ai_call_shuttle
-		verbs += /mob/living/silicon/ai/proc/ai_camera_track
-		verbs += /mob/living/silicon/ai/proc/ai_camera_list
-		//Added ai_network_change by Mord_Sith
-		verbs += /mob/living/silicon/ai/proc/ai_network_change
-		verbs += /mob/living/silicon/ai/proc/ai_statuschange
-		//Hologram verb./N
-		verbs += /mob/living/silicon/ai/proc/ai_hologram_change
+	if (istype(loc, /turf)) //If you add a verb here, make sure to add it to transform_procs.dm too.
+		verbs += AI_VERB_LIST
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -126,26 +120,20 @@
 
 		//if(icon_state == initial(icon_state))
 	var/icontype = ""
-	var/list/icons = list("Blue", "HAL9000", "Monochrome", "Rainbow", "HAL9000 Mark2", "Inverted", "Firewall", "Green", "Text", "Smiley", "Angry", "Dorf", "Matrix")
+	var/list/icons = list("Blue", "Monochrome", "Rainbow", "Inverted", "Firewall", "Green", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Red", "Static")
 	if (src.name == "B.A.N.N.E.D." && src.ckey == "spaceman96")
 		icons += "B.A.N.N.E.D."
 	icontype = input("Please, select a display!", "AI", null/*, null*/) in icons
 	if(icontype == "Blue")
 		icon_state = "ai"
-	else if(icontype == "HAL9000")
-		icon_state = "ai-hal9000-2"
 	else if(icontype == "Monochrome")
 		icon_state = "ai-mono"
 	else if(icontype == "Rainbow")
 		icon_state = "ai-clown"
-	else if(icontype == "HAL9000 Mark2")
-		icon_state = "ai-hal9000-3"
 	else if(icontype == "Inverted")
 		icon_state = "ai-u"
 	else if(icontype == "Firewall")
 		icon_state = "ai-magma"
-	else if(icontype == "Funny")
-		icon_state = "ai-yesman"
 	else if(icontype == "Green")
 		icon_state = "ai-wierd"
 	else if(icontype == "Text")
@@ -156,8 +144,14 @@
 		icon_state = "ai-angryface"
 	else if(icontype == "Dorf")
 		icon_state = "ai-dorf"
+	else if(icontype == "Bliss")
+		icon_state = "ai-bliss"
 	else if(icontype == "B.A.N.N.E.D.")
 		icon_state = "ai-banned"
+	else if(icontype == "Red")
+		icon_state = "ai-malf"
+	else if(icontype == "Static")
+		icon_state = "ai-static"
 	else//(icontype == "Matrix")
 		icon_state = "ai-matrix"
 
@@ -252,7 +246,7 @@
 
 /mob/living/silicon/ai/blob_act()
 	if (stat != 2)
-		bruteloss += 60
+		adjustBruteLoss(60)
 		updatehealth()
 		return 1
 	return 0
@@ -301,6 +295,14 @@
 	if (href_list["showalerts"])
 		ai_alerts()
 
+	//Carn: holopad requests
+	if (href_list["jumptoholopad"])
+		var/obj/machinery/hologram/holopad/H = locate(href_list["jumptoholopad"])
+		if(stat == CONSCIOUS)
+			if(H)
+				H.attack_ai(src) //may as well recycle
+			else
+				src << "<span class='notice'>Unable to locate the holopad.</span>"
 
 	if (href_list["lawc"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
 		var/L = text2num(href_list["lawc"])
@@ -321,6 +323,30 @@
 	if (href_list["laws"]) // With how my law selection code works, I changed statelaws from a verb to a proc, and call it through my law selection panel. --NeoFite
 		statelaws()
 
+	if (href_list["track"])
+		var/mob/target = locate(href_list["track"])
+		var/mob/living/silicon/ai/A = locate(href_list["track2"])
+		if(A && target)
+			A.ai_actual_track(target)
+		return
+
+	else if (href_list["faketrack"])
+		var/mob/target = locate(href_list["track"])
+		var/mob/living/silicon/ai/A = locate(href_list["track2"])
+		if(A && target)
+
+			A:cameraFollow = target
+			A << text("Now tracking [] on camera.", target.name)
+			if (usr.machine == null)
+				usr.machine = usr
+
+			while (usr:cameraFollow == target)
+				usr << "Target is not on or near any active cameras on the station. We'll check again in 5 seconds (unless you use the cancel-camera verb)."
+				sleep(40)
+				continue
+
+		return
+
 	return
 
 /mob/living/silicon/ai/meteorhit(obj/O as obj)
@@ -328,7 +354,7 @@
 		M.show_message(text("\red [] has been hit by []", src, O), 1)
 		//Foreach goto(19)
 	if (health > 0)
-		bruteloss += 30
+		adjustBruteLoss(30)
 		if ((O.icon_state == "flaming"))
 			adjustFireLoss(40)
 		updatehealth()
@@ -364,7 +390,7 @@
 						O.show_message(text("\red <B>[] has slashed at []!</B>", M, src), 1)
 				if(prob(8))
 					flick("noise", flash)
-				bruteloss += damage
+				adjustBruteLoss(damage)
 				updatehealth()
 			else
 				playsound(loc, 'slashmiss.ogg', 25, 1, -1)
@@ -382,6 +408,19 @@
 				M << "\red <b>ERROR</b>: \black Remote access channel disabled."
 	return
 
+
+/mob/living/silicon/ai/attack_animal(mob/living/simple_animal/M as mob)
+	if(M.melee_damage_upper == 0)
+		M.emote("[M.friendly] [src]")
+	else
+		for(var/mob/O in viewers(src, null))
+			O.show_message("\red <B>[M]</B> [M.attacktext] [src]!", 1)
+		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
+		adjustBruteLoss(damage)
+		updatehealth()
+
+
+
 /mob/living/silicon/ai/proc/switchCamera(var/obj/machinery/camera/C)
 	usr:cameraFollow = null
 	if (!C)
@@ -394,6 +433,7 @@
 
 	if(client.eye == eyeobj)
 		eyeobj.loc = C.loc
+		cameranet.visibility(eyeobj)
 	else
 		machine = src
 		src:current = C
@@ -531,7 +571,9 @@
 		if(C.network == newnet)
 			cameralist.Add(C)
 
-	switchCamera( pick(cameralist) )
+	if(length(cameralist))
+		switchCamera( pick(cameralist) )
+
 	src << "\blue Jumped to [newnet] camera network."
 //End of code by Mord_Sith
 //cael - with the multiple onstation networks all linked together, changing networks is legacy functionality
@@ -544,7 +586,7 @@
 
 	malf_picker.use(src)
 
-//I am the icon meister. Bow fefore me.
+//I am the icon meister. Bow fefore me.	//>fefore
 /mob/living/silicon/ai/proc/ai_hologram_change()
 	set name = "Change Hologram"
 	set desc = "Change the default hologram available to AI to something else."

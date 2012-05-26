@@ -12,7 +12,7 @@ var/global
 
 	defer_powernet_rebuild = 0		// true if net rebuild will be called manually after an event
 
-//	list/global_map = null
+	//list/global_map = null //Borked, do not touch. DMTG
 	//list/global_map = list(list(1,5),list(4,3))//an array of map Z levels.
 	//Resulting sector map looks like
 	//|_1_|_4_|
@@ -64,6 +64,7 @@ var
 	///////////////
 
 	diary = null
+	diaryofmeanpeople = null
 	station_name = null
 	game_version = "Baystation 12"
 
@@ -93,6 +94,7 @@ var
 	list/lastsignalers = list(	)	//keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
 	list/lawchanges = list(  ) //Stores who uploaded laws to which silicon-based lifeform, and what the law was
 	list/admins = list(  )
+	list/alien_whitelist = list(  )
 	list/shuttles = list(  )
 	list/reg_dna = list(  )
 //	list/traitobj = list(  )
@@ -150,9 +152,7 @@ var
 	shuttlecoming = 0
 
 	join_motd = null
-	auth_motd = null
 	rules = null
-	no_auth_motd = null
 	forceblob = 0
 
 	custom_event_msg = null
@@ -219,10 +219,33 @@ var
 	// These are all default values that will load should the forumdbconfig.txt
 	// file fail to read for whatever reason.
 
-	/*forumsqladdress = "localhost"
+/*	forumsqladdress = "localhost"
 	forumsqlport = "3306"
 	forumsqldb = "tgstation"
 	forumsqllogin = "root"
 	forumsqlpass = ""
 	forum_activated_group = "2"
 	forum_authenticated_group = "10"*/
+
+	// For FTP requests. (i.e. downloading runtime logs.)
+	// However it'd be ok to use for accessing attack logs and such too, which are even laggier.
+	fileaccess_timer = 1800 //Cannot access files by ftp until the game is finished setting up and stuff.
+
+// It turns out that /var/const can't handle lists, because lists use
+// an initializer.  Sigh.  That's no reason that we shouldn't make
+// actual "constant" lists explicit via naming convention and a
+// separate location, though, so: below are all lists that should not
+// ever be changed in code.
+
+/var/global
+	AI_VERB_LIST = list(
+		/mob/living/silicon/ai/proc/ai_call_shuttle,
+		/mob/living/silicon/ai/proc/show_laws_verb,
+		/mob/living/silicon/ai/proc/ai_camera_track,
+		/mob/living/silicon/ai/proc/ai_alerts,
+		/mob/living/silicon/ai/proc/ai_camera_list,
+		/mob/living/silicon/ai/proc/ai_network_change,
+		/mob/living/silicon/ai/proc/ai_statuschange,
+		/mob/living/silicon/ai/proc/ai_hologram_change,
+		/mob/living/silicon/ai/proc/ai_roster,
+	)

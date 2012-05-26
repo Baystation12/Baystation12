@@ -1,9 +1,51 @@
+/mob/living/carbon/human/gib()
+	death(1)
+	var/atom/movable/overlay/animation = null
+	monkeyizing = 1
+	canmove = 0
+	icon = null
+	invisibility = 101
+
+	animation = new(loc)
+	animation.icon_state = "blank"
+	animation.icon = 'mob.dmi'
+	animation.master = src
+
+	flick("gibbed-h", animation)
+	hgibs(loc, viruses, dna)
+
+	spawn(15)
+		if(animation)	del(animation)
+		if(src)			del(src)
+
+/mob/living/carbon/human/dust()
+	death(1)
+	var/atom/movable/overlay/animation = null
+	monkeyizing = 1
+	canmove = 0
+	icon = null
+	invisibility = 101
+
+	animation = new(loc)
+	animation.icon_state = "blank"
+	animation.icon = 'mob.dmi'
+	animation.master = src
+
+	flick("dust-h", animation)
+	new /obj/effect/decal/remains/human(loc)
+
+	spawn(15)
+		if(animation)	del(animation)
+		if(src)			del(src)
+
+
 /mob/living/carbon/human/death(gibbed)
 	if(halloss > 0 && (!gibbed))
 		//hallucination = 0
 		halloss = 0
 		// And the suffocation was a hallucination (lazy)
 		//oxyloss = 0
+		updatehealth()
 		return
 	if(src.stat == 2)
 		return
@@ -55,39 +97,16 @@
 		message_admins("\red Traitor [key_name_admin(src)] has died.")
 		log_game("Traitor [key_name(src)] has died.")
 
-	var/cancel
-	for (var/mob/M in world)
-		if (M.client && !M.stat)
-			cancel = 1
-			break
-
-	if (!cancel && !abandon_allowed)
-		spawn (50)
-			cancel = 0
-			for (var/mob/M in world)
-				if (M.client && !M.stat)
-					cancel = 1
-					break
-
-			if (!cancel && !abandon_allowed)
-				world << "<B>Everyone is dead! Resetting in 30 seconds!</B>"
-
-				feedback_set_details("end_error","no live players")
-				feedback_set_details("round_end","[time2text(world.realtime)]")
-				if(blackbox)
-					blackbox.save_all_data_to_sql()
-
-				spawn (300)
-					log_game("Rebooting because of no live players")
-					world.Reboot()
-
 	return ..(gibbed)
 
 /mob/living/carbon/human/proc/ChangeToHusk()
 	if(mutations & HUSK)
 		return
+	var/datum/organ/external/head/head = get_organ("head")
+	if(head)
+		head.disfigured = 1
+	name = get_visible_name()
 	mutations |= HUSK
-	real_name = "Unknown"
 	update_body()
 	return
 

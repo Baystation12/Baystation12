@@ -126,9 +126,8 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			user << "You retrace your steps, carefully undoing the lines of the rune."
 			del(src)
 			return
-		else if(istype(I, /obj/item/weapon/storage/bible) && usr.mind && (usr.mind.assigned_role == "Chaplain"))
-			var/obj/item/weapon/storage/bible/bible = I
-			user << "\blue You banish the vile magic with the blessing of [bible.deity_name]!"
+		else if(istype(I, /obj/item/weapon/nullrod))
+			user << "\blue You disrupt the vile magic with the deadening field of the null rod!"
 			del(src)
 			return
 		return
@@ -343,12 +342,13 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				<b>Create a wall: </b>Destroy Travel Self<br>
 				<b>Summon cultist: </b>Join Other Self<br>
 				<b>Free a cultist: </b>Travel technology other<br>
-				<b>Deafen: </b>Hide other see<br>
+				<b>Deafen: </b>Hide Other See<br>
 				<b>Blind: </b>Destroy See Other<br>
 				<b>Blood Boil: </b>Destroy See Blood<br>
-				<b>Communicate: </b>Self other technology<br>
-				<b>Stun: </b>Join hide technology<br>
-				<b>Summon Cultist Armor: </b>Hell destroy other<br>
+				<b>Communicate: </b>Self Other Technology<br>
+				<b>Stun: </b>Join Hide Technology<br>
+				<b>Summon Cultist Armor: </b>Hell Destroy Other<br>
+				<b>See Invisible: </b>See Hell Join<br>
 				</p>
 				<h2>Rune Descriptions</h2>
 				<h3>Teleport self</h3>
@@ -396,7 +396,9 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				<h3>Stun</h3>
 				Unlike other runes, this ons is supposed to be used in talisman form. When invoked directly, it simply releases some dark energy, briefly stunning everyone around. When imbued into a talisman, you can force all of its energy into one person, stunning him so hard he cant even speak. However, effect wears off rather fast.<br>
 				<h3>Equip Armor</h3>
-				When this rune is invoked, either from a rune or a talisman, it will equip the user with the armor of the followers of Nar-Sie. To use this rune to it's fullest extent, make sure you are not wearing any form of headgear, armor, gloves or shoes, and make sure you are not holding anything in your hands.<br>
+				When this rune is invoked, either from a rune or a talisman, it will equip the user with the armor of the followers of Nar-Sie. To use this rune to its fullest extent, make sure you are not wearing any form of headgear, armor, gloves or shoes, and make sure you are not holding anything in your hands.<br>
+				<h3>See Invisible</h3>
+				When invoked when standing on it, this rune allows the user to see the the world beyond as long as he does not move.<br>
 				</body>
 				</html>
 				"}
@@ -456,8 +458,11 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	attack(mob/living/M as mob, mob/living/user as mob)
 		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had the [name] used on him by [user.name] ([user.ckey])</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used [name] on [M.name] ([M.ckey])</font>")
+
 		log_admin("ATTACK: [user] ([user.ckey]) used the [name] on [M] ([M.ckey]).")
 		message_admins("ATTACK: [user] ([user.ckey]) used the [name] on [M] ([M.ckey]).")
+		log_attack("<font color='red'>[user.name] ([user.ckey]) used [name] on [M.name] ([M.ckey])</font>")
+
 
 		if(istype(M,/mob/dead))
 			M.invisibility = 0
@@ -496,7 +501,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 						if(prob(C*5-105-(runedec-ticker.mode.cult.len)*5)) //including the useless rune at the secret room, shouldn't count against the limit - Urist
 							usr.emote("scream")
 							user << "\red A tear momentarily appears in reality. Before it closes, you catch a glimpse of that which lies beyond. That proves to be too much for your mind."
-							usr.gib(1)
+							usr.gib()
 							return
 					if("No")
 						return
@@ -557,7 +562,9 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				R.word2 = w2
 				R.word3 = w3
 				R.check_icon()
-				R.blood_DNA = list(list(H.dna.unique_enzymes, H.dna.b_type))
+				if(!R.blood_DNA)
+					R.blood_DNA = list()
+				R.blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
 			return
 		else
 			user << "The book seems full of illegible scribbles. Is this a joke?"
@@ -602,7 +609,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			var/obj/effect/rune/R = new /obj/effect/rune
 			if(istype(user, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = user
-				R.blood_DNA = list(list(H.dna.unique_enzymes, H.dna.b_type))
+				R.blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
 			switch(r)
 				if("teleport")
 					var/list/words = list("ire", "ego", "nahlizet", "certum", "veri", "jatkaa", "balaq", "mgar", "karazet", "geeri")

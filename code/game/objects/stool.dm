@@ -19,6 +19,13 @@
 		del(src)
 
 /obj/structure/stool/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if (src.anchored)
+			src.anchored = 0
+			user << "\blue You unfasten [src] from the floor."
+		else
+			src.anchored = 1
+			user << "\blue You fasten [src] to the floor."
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'Ratchet.ogg', 50, 1)
 		new /obj/item/stack/sheet/metal(src.loc)
@@ -64,7 +71,7 @@
 					"You hear metal clanking")
 			else
 				buckled_mob.visible_message(\
-					"\blue [buckled_mob.name] unbuckled himself!",\
+					"\blue [buckled_mob.name] unbuckles!",\
 					"You unbuckle yourself from [src].",\
 					"You hear metal clanking")
 			unbuckle()
@@ -111,7 +118,8 @@
 	return
 
 /obj/structure/stool/bed/chair/New()
-	src.verbs -= /atom/movable/verb/pull
+	if(anchored)
+		src.verbs -= /atom/movable/verb/pull
 	if(src.dir == NORTH)
 		src.layer = FLY_LAYER
 	..()
@@ -145,11 +153,32 @@
 	icon_state = "down"
 	anchored = 0
 
-/obj/structure/stool/bed/roller/Move()
+/obj/item/roller
+	name = "roller bed"
+	desc = "A collapsed roller bed that can be carried around."
+	icon = 'rollerbed.dmi'
+	icon_state = "folded"
+	w_class = 4.0 // Can't be put in backpacks. Oh well.
+
+	attack_self(mob/user)
+		var/obj/structure/stool/bed/roller/R = new /obj/structure/stool/bed/roller(user.loc)
+		R.add_fingerprint(user)
+		del(src)
+
+//obj/structure/stool/bed/roller/Move()
+/obj/structure/stool/bed/Move()
 	..()
 	if(buckled_mob)
 		if(buckled_mob.buckled == src)
 			buckled_mob.loc = src.loc
+			buckled_mob.dir = src.dir
+
+/obj/structure/stool/bed/chair/Move()
+	..()
+	if(src.dir == NORTH)
+		src.layer = FLY_LAYER
+	else
+		src.layer = OBJ_LAYER
 
 /obj/structure/stool/bed/roller/buckle_mob(mob/M as mob, mob/user as mob)
 	if ((!( istype(M, /mob) ) || get_dist(src, user) > 1 || M.loc != src.loc || user.restrained() || usr.stat || M.buckled || istype(usr, /mob/living/silicon/pai)))
@@ -166,7 +195,20 @@
 		buckled_mob.pixel_y = 0
 		buckled_mob.anchored = 0
 		buckled_mob.buckled = null
+		buckled_mob = null
 	density = 0
 	icon_state = "down"
 	..()
 	return
+
+/obj/structure/stool/bed/roller/MouseDrop(over_object, src_location, over_location)
+	..()
+	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
+		if(!ishuman(usr))	return
+		if(buckled_mob)	return 0
+		visible_message("[usr] collapses \the [src.name]")
+		new/obj/item/roller(get_turf(src))
+		spawn(0)
+			del(src)
+		return
+

@@ -93,6 +93,7 @@ FLASHBANG
 	var
 		active = 0
 		det_time = 30
+		banglet = 0
 	proc
 		bang(var/turf/T , var/mob/living/carbon/M)
 		prime()
@@ -124,6 +125,11 @@ FLASHBANG
 		if (istype(target, /obj/item/weapon/gun/grenadelauncher)) return ..()
 		if((user.equipped() == src)&&(!active)&&(clown_check(user)))
 			user << "\red You prime the flashbang! [det_time/10] seconds!"
+
+			log_attack("<font color='red'>[user.name] ([user.ckey]) primed a flashbang.</font>")
+			log_admin("ATTACK: [user] ([user.ckey]) primed a flashbang.")
+			message_admins("ATTACK: [user] ([user.ckey]) primed a flashbang.")
+
 			src.active = 1
 			src.icon_state = "flashbang1"
 			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
@@ -206,19 +212,22 @@ FLASHBANG
 		if (M.eye_stat >= 20)
 			M << "\red Your eyes start to burn badly!"
 			M.disabilities |= 1
-			if (prob(M.eye_stat - 20 + 1))
-				M << "\red You can't see anything!"
-				M.disabilities |= 128
+			if(!banglet && !(istype(src , /obj/item/weapon/flashbang/clusterbang)))
+				if (prob(M.eye_stat - 20 + 1))
+					M << "\red You can't see anything!"
+					M.disabilities |= 128
 		if (M.ear_damage >= 15)
 			M << "\red Your ears start to ring badly!"
-			if (prob(M.ear_damage - 10 + 5))
-				M << "\red You can't hear anything!"
-				M.disabilities |= 32
+			if(!banglet && !(istype(src , /obj/item/weapon/flashbang/clusterbang)))
+				if (prob(M.ear_damage - 10 + 5))
+					M << "\red You can't hear anything!"
+					M.disabilities |= 32
 		else
 			if (M.ear_damage >= 5)
 				M << "\red Your ears start to ring!"
 
 	prime()													// Prime now just handles the two loops that query for people in lockers and people who can see it.
+
 		var/turf/T = get_turf(src)
 		if(T)
 			T.hotspot_expose(700,125)
@@ -232,9 +241,7 @@ FLASHBANG
 		for(var/mob/living/carbon/M in viewers(T, null))
 			bang(T, M)
 
-
-//Blob damage here
-		for(var/obj/effect/blob/B in view(8,T))
+		for(var/obj/effect/blob/B in view(8,T))       		//Blob damage here
 			var/damage = round(30/(get_dist(B,T)+1))
 			B.health -= damage
 			B.update()
@@ -245,6 +252,9 @@ FLASHBANG
 	attack_self(mob/user as mob)
 		if(!active)
 			if(clown_check(user))
+				log_attack("<font color='red'>[user.name] ([user.ckey]) primed a flashbang.</font>")
+				log_admin("ATTACK: [user] ([user.ckey]) primed a flashbang.")
+				message_admins("ATTACK: [user] ([user.ckey]) primed a flashbang.")
 				user << "\red You prime the flashbang! [det_time/10] seconds!"
 				src.active = 1
 				src.icon_state = "flashbang1"
@@ -252,6 +262,12 @@ FLASHBANG
 				spawn( src.det_time )
 					prime()
 					return
+		return
+
+
+	attack_hand()
+		walk(src, null, null)
+		..()
 		return
 
 
@@ -266,12 +282,83 @@ FLASHBANG
 			return 0
 		return 1
 
+/obj/item/weapon/flashbang/clusterbang
+	desc = "Use of this weapon may constiute a war crime in your area, consult your local captain."
+	name = "Clusterbang"
+	icon = 'grenade.dmi'
+	icon_state = "clusterbang"
+	var/child = 0
 
+	attack_self(mob/user as mob)
+		if(!active)
+			//world << "cluster attack self"
+			user << "\red You prime the clusterbang! [det_time/10] seconds!"
+			log_attack("<font color='red'>[user.name] ([user.ckey]) primed a [src].</font>")
+			log_admin("ATTACK: [user] ([user.ckey]) primed a [src].")
+			message_admins("ATTACK: [user] ([user.ckey]) primed a [src].")
+			src.active = 1
+			src.icon_state = "clusterbang1"
+			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
+			spawn(src.det_time)
+				arm(user)
+		return
 
+	afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
+		if (istype(target, /obj/item/weapon/storage)) return ..() // Trying to put it in a full container
+		if (istype(target, /obj/item/weapon/gun/grenadelauncher)) return ..()
+		if((user.equipped() == src)&&(!active))
+			//world << "cluster after attack"
+			arm(user)
+			user.dir = get_dir(user, target)
+			user.drop_item()
+			var/t = (isturf(target) ? target : target.loc)
+			walk_towards(src, t, 3)
+		return
 
+/obj/item/weapon/flashbang/clusterbang/proc/arm(mob/user as mob)
 
+	//world << "Armed!"
+	var/numspawned = rand(4,8)
+//	world << numspawned
+	var/again = 0
+	if(!child)
+		for(var/more = numspawned,more > 0,more--)
+			if(prob(35))
+				again++
+				numspawned --
 
+	for(,numspawned > 0, numspawned--)
+		//world << "Spawned Flashbang!"
+		spawn(0)
+			var/obj/item/weapon/flashbang/F = new /obj/item/weapon/flashbang(src)
+			F.loc = src.loc
+			F.icon_state = "flashbang1"
+			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
+			F.active = 1
+			F.banglet = 1
+			var/stepdist = rand(1,3)
+			walk_away(F,src,stepdist)
+			var/dettime = rand(15,60)
+			spawn(dettime)
+				F.prime()
 
+	for(,again > 0, again--)
+		//world << "Spawned CFlashbang!"
+		spawn(0)
+			var/obj/item/weapon/flashbang/clusterbang/F = new /obj/item/weapon/flashbang/clusterbang(src)
+			F.loc = src.loc
+			F.active = 1
+			F.child = 1
+			F.icon_state = "clusterbang1"
+			var/stepdist = rand(1,4)
+			walk_away(F,src,stepdist)
+			spawn(30)
+				F.arm()
+
+	spawn(70)
+		prime()
+
+	return
 
 
 

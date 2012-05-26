@@ -1,3 +1,25 @@
+/obj/machinery/computer/secure_data
+	name = "Security Records"
+	desc = "Used to view and edit personnel's security records"
+	icon_state = "security"
+	req_access = list(access_security)
+	circuit = "/obj/item/weapon/circuitboard/secure_data"
+	var
+		obj/item/weapon/card/id/scan = null
+		obj/item/weapon/disk/records/disk = null
+		authenticated = null
+		rank = null
+		screen = null
+		datum/data/record/active1 = null
+		datum/data/record/active2 = null
+		a_id = null
+		temp = null
+		printing = null
+		can_change_id = 0
+		list/Perp
+		tempname = null
+
+
 /obj/machinery/computer/secure_data/attackby(obj/item/O as obj, user as mob)
 	if(istype(O, /obj/item/weapon/card/id) && !scan)
 		usr.drop_item()
@@ -64,6 +86,8 @@
 								background = "'background-color:#CD853F;'"
 							if("Released")
 								background = "'background-color:#3BB9FF;'"
+							if("Deceased")
+								background = "'background-color:#CD853F;'"
 							if("None")
 								background = "'background-color:#00FF7F;'"
 							if("")
@@ -149,6 +173,8 @@
 									background = "'background-color:#CD853F;'"
 								if("Released")
 									background = "'background-color:#3BB9FF;'"
+								if("Deceased")
+									background = "'background-color:#CD853F;'"
 								if("None")
 									background = "'background-color:#00FF7F;'"
 								if("")
@@ -328,7 +354,7 @@ What a mess.*/
 				var/counter = 1
 				while(active2.fields[text("com_[]", counter)])
 					counter++
-				active2.fields[text("com_[]", counter)] = text("Made by [] ([]) on [], 2053<BR>[]", authenticated, rank, time2text(world.realtime, "DDD MMM DD hh:mm:ss"), t1)
+				active2.fields[text("com_[]", counter)] = text("Made by [] ([]) on [], 2556<BR>[]", authenticated, rank, time2text(world.realtime, "DDD MMM DD hh:mm:ss"), t1)
 
 			if ("Delete Record (ALL)")
 				if (active1)
@@ -450,6 +476,7 @@ What a mess.*/
 							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=incarcerated'>Incarcerated</a></li>"
 							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=parolled'>Parolled</a></li>"
 							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=released'>Released</a></li>"
+							temp += "<li><a href='?src=\ref[src];choice=Change Criminal Status;criminal2=deceased'>Deceased</a></li>"
 							temp += "</ul>"
 					if("rank")
 						var/list/L = list( "Head of Personnel", "Captain", "AI" )
@@ -458,7 +485,7 @@ What a mess.*/
 							temp = "<h5>Rank:</h5>"
 							temp += "<ul>"
 							for(var/rank in get_all_jobs())
-								temp += "<li><a href='?src=\ref[src];choice=Change Rank;rank=[rank]'>[rank]</a></li>"
+								temp += "<li><a href='?src=\ref[src];choice=Change Rank;rank=[rank];real_rank=[rank]'>[rank]</a></li>"
 							temp += "</ul>"
 						else
 							alert(usr, "You do not have the required rank to do this!")
@@ -503,6 +530,8 @@ What a mess.*/
 									active2.fields["criminal"] = "Parolled"
 								if("released")
 									active2.fields["criminal"] = "Released"
+								if("deceased")
+									active2.fields["criminal"] = "Deceased"
 
 					if ("Delete Record (Security) Execute")
 						if (active2)
@@ -522,6 +551,10 @@ What a mess.*/
 	add_fingerprint(usr)
 	updateUsrDialog()
 	return
+
+/obj/machinery/computer/secure_data/detective_computer
+	icon = 'computer.dmi'
+	icon_state = "messyfiles"
 
 /obj/item/weapon/disk/records
 	name = "Crew Records Disk"

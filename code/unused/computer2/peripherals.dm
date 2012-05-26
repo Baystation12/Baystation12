@@ -154,7 +154,7 @@
 
 		switch(prizeselect)
 			if(1)
-				prize = new /obj/item/weapon/spacecash( prize_location )
+				prize = new /obj/item/weapon/money( prize_location )
 				prize.name = "space ticket"
 				prize.desc = "It's almost like actual currency!"
 			if(2)
@@ -162,7 +162,7 @@
 				prize.name = "electronic blink toy game"
 				prize.desc = "Blink.  Blink.  Blink."
 			if(3)
-				prize = new /obj/item/weapon/zippo( prize_location )
+				prize = new /obj/item/weapon/lighter/zippo( prize_location )
 				prize.name = "Burno Lighter"
 				prize.desc = "Almost like a decent lighter!"
 			if(4)

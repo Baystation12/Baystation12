@@ -1,25 +1,35 @@
 /mob/living/carbon/human/proc/Tajaraize()
 	if (monkeyizing)
 		return
-	for(var/obj/item/W in src)
-		drop_from_slot(W)
-	update_clothing()
 	monkeyizing = 1
 	canmove = 0
 	icon = null
 	invisibility = 101
-	for(var/name in organs)
-		del(organs[name])
+	overlays = list()
 
 	var/atom/movable/overlay/animation = new /atom/movable/overlay( loc )
 	animation.icon_state = "blank"
 	animation.icon = 'mob.dmi'
 	animation.master = src
 	flick("h2monkey", animation)
-	sleep(48)
+	sleep(18)
 	//animation = null
 	var/mob/living/carbon/human/tajaran/O = new /mob/living/carbon/human/tajaran( loc )
 	del(animation)
+	del(O.organs)
+	O.organs = organs
+	for(var/name in O.organs) //Ensuring organ trasnfer
+		var/datum/organ/external/organ = O.organs[name]
+		organ.owner = O
+		for(var/obj/item/weapon/implant/implant in organ.implant)
+			implant.imp_in = O
+	for(var/obj/hud/H in contents) //Lets not get a duplicate hud
+		del(H)
+	for(var/named in vars) //Making them keep their crap.
+		if(istype(vars[named], /obj/item))
+			O.vars[named] = vars[named]
+		else if (named == "contents")
+			O.vars[named] = vars[named]
 
 	O.real_name = real_name
 	O.name = name
@@ -27,6 +37,7 @@
 	updateappearance(O,O.dna.uni_identity)
 	O.loc = loc
 	O.viruses = viruses
+	O.s_tone = s_tone
 	viruses = list()
 	for(var/datum/disease/D in O.viruses)
 		D.affected_mob = O
@@ -38,6 +49,13 @@
 	if(mind)
 		mind.transfer_to(O)
 
+	del(O.stand_icon)  //Force it to update.
+	del(O.lying_icon)
+
+	O.update_body()
+	O.update_face()
+	spawn(1)
+		O.update_clothing()
 	O << "<B>You are now a Tajara.</B>"
 	spawn(0)//To prevent the proc from returning null.
 		del(src)

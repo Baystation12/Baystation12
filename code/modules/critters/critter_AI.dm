@@ -1,4 +1,3 @@
-
 /obj/effect/critter
 
 	New()
@@ -9,78 +8,89 @@
 	process()
 		set background = 1
 		if (!src.alive)	return
-		switch(task)
-			if("thinking")
-				src.attack = 0
-				src.target = null
-				sleep(15)
-				walk_to(src,0)
-				if (src.aggressive) seek_target()
-				if (src.wanderer && !src.target) src.task = "wandering"
-			if("chasing")
-				if (src.frustration >= max_frustration)
+
+		// use a loop to avoid weird benchmarking phenomenons caused by
+		// recursion
+		while(1)
+			switch(task)
+				if("thinking")
+					src.attack = 0
 					src.target = null
-					src.last_found = world.time
-					src.frustration = 0
-					src.task = "thinking"
+					sleep(thinkspeed)
 					walk_to(src,0)
-				if (target)
-					if (get_dist(src, src.target) <= 1)
-						var/mob/living/carbon/M = src.target
-						ChaseAttack()
-						src.task = "attacking"
-						src.anchored = 1
-						src.target_lastloc = M.loc
-					else
-						var/turf/olddist = get_dist(src, src.target)
-						walk_to(src, src.target,1,speed)
-						if ((get_dist(src, src.target)) >= (olddist))
-							src.frustration++
+					if (src.aggressive) seek_target()
+					if (src.wanderer && !src.target) src.task = "wandering"
+				if("chasing")
+					if (src.frustration >= max_frustration)
+						src.target = null
+						src.last_found = world.time
+						src.frustration = 0
+						src.task = "thinking"
+						walk_to(src,0)
+					if (target)
+						if (get_dist(src, src.target) <= 1)
+							var/mob/living/carbon/M = src.target
+							ChaseAttack()
+							src.task = "attacking"
+							if(chasestate)
+								icon_state = chasestate
+							src.anchored = 1
+							src.target_lastloc = M.loc
 						else
-							src.frustration = 0
-						sleep(5)
-				else src.task = "thinking"
-			if("attacking")
-				// see if he got away
-				if ((get_dist(src, src.target) > 1) || ((src.target:loc != src.target_lastloc)))
-					src.anchored = 0
-					src.task = "chasing"
-				else
-					if (get_dist(src, src.target) <= 1)
-						var/mob/living/carbon/M = src.target
-						if(!src.attacking)	RunAttack()
-						if(!src.aggressive)
-							src.task = "thinking"
-							src.target = null
-							src.anchored = 0
-							src.last_found = world.time
-							src.frustration = 0
-							src.attacking = 0
-						else
-							if(M!=null)
-								if(M.health < 0)
-									src.task = "thinking"
-									src.target = null
-									src.anchored = 0
-									src.last_found = world.time
-									src.frustration = 0
-									src.attacking = 0
-					else
+							var/turf/olddist = get_dist(src, src.target)
+							walk_to(src, src.target,1,chasespeed)
+							if ((get_dist(src, src.target)) >= (olddist))
+								src.frustration++
+							else
+								src.frustration = 0
+							sleep(5)
+					else src.task = "thinking"
+				if("attacking")
+					// see if he got away
+					if ((get_dist(src, src.target) > 1) || ((src.target:loc != src.target_lastloc)))
 						src.anchored = 0
-						src.attacking = 0
 						src.task = "chasing"
-			if("wandering")
-				patrol_step()
-				sleep(10)
-		spawn(8)
-			process()
-		return
+						if(chasestate)
+							icon_state = chasestate
+					else
+						if (get_dist(src, src.target) <= 1)
+							var/mob/living/carbon/M = src.target
+							if(!src.attacking)	RunAttack()
+							if(!src.aggressive)
+								src.task = "thinking"
+								src.target = null
+								src.anchored = 0
+								src.last_found = world.time
+								src.frustration = 0
+								src.attacking = 0
+							else
+								if(M!=null)
+									if(ismob(src.target))
+										if(M.health < config.health_threshold_crit)
+											src.task = "thinking"
+											src.target = null
+											src.anchored = 0
+											src.last_found = world.time
+											src.frustration = 0
+											src.attacking = 0
+						else
+							src.anchored = 0
+							src.attacking = 0
+							src.task = "chasing"
+							if(chasestate)
+								icon_state = chasestate
+				if("wandering")
+					if(chasestate)
+						icon_state = initial(icon_state)
+					patrol_step()
+					sleep(wanderspeed)
+			sleep(8)
 
 
 	patrol_step()
 		var/moveto = locate(src.x + rand(-1,1),src.y + rand(-1, 1),src.z)
 		if (istype(moveto, /turf/simulated/floor) || istype(moveto, /turf/simulated/shuttle/floor) || istype(moveto, /turf/unsimulated/floor)) step_towards(src, moveto)
-		if(spacewalk && istype(moveto,/turf/space)) step_towards(src, moveto)
+		if(istype(moveto,/turf/space)) step_towards(src, moveto)
 		if(src.aggressive) seek_target()
 		steps += 1
 		if (steps == rand(5,20)) src.task = "thinking"
@@ -108,35 +118,63 @@
 
 	seek_target()
 		if(!prob(aggression)) return // make them attack depending on aggression levels
-	
+
 		src.anchored = 0
 		var/T = null
 		for(var/mob/living/C in view(src.seekrange,src))//TODO: mess with this
 			if (src.target)
 				src.task = "chasing"
 				break
+
+			// Ignore syndicates and traitors if specified
+			if(!atksynd && C.mind)
+				var/datum/mind/synd_mind = C.mind
+				if( synd_mind.special_role == "Syndicate" || synd_mind.special_role == "traitor" )
+					continue
 			if((C.name == src.oldtarget_name) && (world.time < src.last_found + 100)) continue
 			if(istype(C, /mob/living/carbon/) && !src.atkcarbon) continue
 			if(istype(C, /mob/living/silicon/) && !src.atksilicon) continue
-			if(C.health < 0) continue
+			if(atkreq)
+				if(src.allowed(C)) continue
+			if(C.health < config.health_threshold_crit) continue
 			if(istype(C, /mob/living/carbon/) && src.atkcarbon)	src.attack = 1
 			if(istype(C, /mob/living/silicon/) && src.atksilicon)	src.attack = 1
+			if(atkreq)
+				if(!src.allowed(C)) src.attack = 1
 			if(src.attack)
 				T = C
 				break
 
 		if(!src.attack)
 			for(var/obj/effect/critter/C in view(src.seekrange,src))
-				if(istype(C, /obj/effect/critter) && !src.atkcritter) continue
-				if(istype(C, /obj/mecha) && !src.atkmech) continue
-				if(C.health <= 0) continue
-				if(istype(C, /obj/effect/critter) && src.atkcritter)
+				if(!src.atkcritter) continue
+				if(C.health <= config.health_threshold_crit) continue
+				if(src.atkcritter)
 					if((istype(C, src.type) && !src.atksame) || (C == src))	continue
 					src.attack = 1
-				if(istype(C, /obj/mecha) && src.atkmech)	src.attack = 1
 				if(src.attack)
 					T = C
 					break
+
+			if(!src.attack)
+				for(var/obj/mecha/C in view(src.seekrange,src))
+					if(!C.occupant) continue
+
+					if(atkreq && C.occupant)
+						if(src.allowed(C.occupant)) continue
+
+					if(!atksynd && C.occupant)
+						if(C.occupant.mind)
+							var/datum/mind/synd_mind = C.occupant.mind
+							if( synd_mind.special_role == "Syndicate" || synd_mind.special_role == "traitor" )
+								continue
+
+					if(!src.atkmech) continue
+					if(C.health <= config.health_threshold_crit) continue
+					if(src.atkmech)	src.attack = 1
+					if(src.attack)
+						T = C
+						break
 
 		if(src.attack)
 			src.target = T
@@ -153,9 +191,10 @@
 
 	RunAttack()
 		src.attacking = 1
-		for(var/mob/O in viewers(src, null))
-			O.show_message("\red <B>[src]</B> [src.attacktext] [src.target]!", 1)
 		if(ismob(src.target))
+
+			for(var/mob/O in viewers(src, null))
+				O.show_message("\red <B>[src]</B> [src.attacktext] [src.target]!", 1)
 
 			var/damage = rand(melee_damage_lower, melee_damage_upper)
 
@@ -175,7 +214,8 @@
 
 		if(isobj(src.target))
 			if(istype(target, /obj/mecha))
-				src.target:take_damage(rand(melee_damage_lower,melee_damage_upper))
+				//src.target:take_damage(rand(melee_damage_lower,melee_damage_upper))
+				src.target:attack_critter(src)
 			else
 				src.target:TakeDamage(rand(melee_damage_lower,melee_damage_upper))
 		spawn(attack_speed)

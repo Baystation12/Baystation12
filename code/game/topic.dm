@@ -13,7 +13,9 @@
 		s["players"] = list()
 		s["admins"] = 0
 		var/n = 0
+
 		for(var/client/C)
+
 			n++
 			if(C.holder && C.holder.level >= 0) //not retired admin
 				if(!C.stealth) //stealthmins dont count as admins
@@ -25,4 +27,7 @@
 				s["player[n]"] = "[C.key]"
 		s["players"] = n
 		s["end"] = "#end"
+
+		// 7 + s["players"] + 1 = index of s["revinfo"]
+
 		return list2params(s)

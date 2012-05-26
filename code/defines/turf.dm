@@ -1,6 +1,6 @@
 /turf
 	icon = 'floors.dmi'
-	var/intact = 1 //for floors, use is_plating(), is_steel_floor() and is_light_floor()
+	var/intact = 1 //for floors, use is_plating(), is_plasteel_floor() and is_light_floor()
 
 	level = 1.0
 
@@ -26,7 +26,7 @@
 		return 0
 	proc/is_asteroid_floor()
 		return 0
-	proc/is_steel_floor()
+	proc/is_plasteel_floor()
 		return 0
 	proc/is_light_floor()
 		return 0
@@ -37,17 +37,97 @@
 
 /turf/space
 	icon = 'space.dmi'
-	name = "space"
+	name = "\proper space"
 	icon_state = "placeholder"
 
 	temperature = TCMB
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	heat_capacity = 700000
 
+	transit
+
+		var/pushdirection // push things that get caught in the transit tile this direction
+
+		north // moving to the north
+
+			pushdirection = SOUTH  // south because the space tile is scrolling south
+
+			//IF ANYONE KNOWS A MORE EFFICIENT WAY OF MANAGING THESE SPRITES, BE MY GUEST.
+			shuttlespace_ns1
+				icon_state = "speedspace_ns_1"
+			shuttlespace_ns2
+				icon_state = "speedspace_ns_2"
+			shuttlespace_ns3
+				icon_state = "speedspace_ns_3"
+			shuttlespace_ns4
+				icon_state = "speedspace_ns_4"
+			shuttlespace_ns5
+				icon_state = "speedspace_ns_5"
+			shuttlespace_ns6
+				icon_state = "speedspace_ns_6"
+			shuttlespace_ns7
+				icon_state = "speedspace_ns_7"
+			shuttlespace_ns8
+				icon_state = "speedspace_ns_8"
+			shuttlespace_ns9
+				icon_state = "speedspace_ns_9"
+			shuttlespace_ns10
+				icon_state = "speedspace_ns_10"
+			shuttlespace_ns11
+				icon_state = "speedspace_ns_11"
+			shuttlespace_ns12
+				icon_state = "speedspace_ns_12"
+			shuttlespace_ns13
+				icon_state = "speedspace_ns_13"
+			shuttlespace_ns14
+				icon_state = "speedspace_ns_14"
+			shuttlespace_ns15
+				icon_state = "speedspace_ns_15"
+
+		east // moving to the east
+
+			pushdirection = WEST
+
+			shuttlespace_ew1
+				icon_state = "speedspace_ew_1"
+			shuttlespace_ew2
+				icon_state = "speedspace_ew_2"
+			shuttlespace_ew3
+				icon_state = "speedspace_ew_3"
+			shuttlespace_ew4
+				icon_state = "speedspace_ew_4"
+			shuttlespace_ew5
+				icon_state = "speedspace_ew_5"
+			shuttlespace_ew6
+				icon_state = "speedspace_ew_6"
+			shuttlespace_ew7
+				icon_state = "speedspace_ew_7"
+			shuttlespace_ew8
+				icon_state = "speedspace_ew_8"
+			shuttlespace_ew9
+				icon_state = "speedspace_ew_9"
+			shuttlespace_ew10
+				icon_state = "speedspace_ew_10"
+			shuttlespace_ew11
+				icon_state = "speedspace_ew_11"
+			shuttlespace_ew12
+				icon_state = "speedspace_ew_12"
+			shuttlespace_ew13
+				icon_state = "speedspace_ew_13"
+			shuttlespace_ew14
+				icon_state = "speedspace_ew_14"
+			shuttlespace_ew15
+				icon_state = "speedspace_ew_15"
+
+
+
+
+
 /turf/space/New()
 //	icon = 'space.dmi'
-	..()
-	icon_state = "[rand(1,25)]"
+	if(!istype(src, /turf/space/transit))
+		..()
+		icon_state = "[rand(1,25)]"
 
 /turf/simulated
 	name = "station"
@@ -82,15 +162,31 @@
 	blocks_air = 1
 
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
-	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m steel wall
+	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
 	var/walltype = "wall"
+
+/turf/simulated/wall/heatshield
+	thermal_conductivity = 0
+	opacity = 0
+	name = "Heat Shielding"
+	icon_state = "thermal"
+	heat_capacity = 625000 //twice the cap of a normal wall
+	walltype = "thermal"
+	blocks_air = 1
+
+/turf/simulated/wall/cult
+	name = "wall"
+	desc = "The patterns engraved on the wall seem to shift as you try to focus on them. You feel sick"
+	icon_state = "cult"
+	walltype = "cult"
 
 /turf/simulated/shuttle
 	name = "shuttle"
 	icon = 'shuttle.dmi'
 	thermal_conductivity = 0.05
 	heat_capacity = 0
+	layer = 2
 
 /turf/simulated/shuttle/wall
 	name = "wall"
@@ -136,13 +232,11 @@
 				if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
 					L.Add(t)
 		return L
-
 	Distance(turf/t)
 		if(get_dist(src,t) == 1)
 			var/cost = (src.x - t.x) * (src.x - t.x) + (src.y - t.y) * (src.y - t.y)
 			cost *= (pathweight+t.pathweight)/2
 			return cost
-
 		else
 			return get_dist(src,t)
 
@@ -247,8 +341,6 @@
 
 	proc/TemperatureAct(temperature)
 		for(var/turf/simulated/floor/target_tile in range(2,loc))
-			if(target_tile.parent && target_tile.parent.group_processing)
-				target_tile.parent.suspend_group_processing()
 
 			var/datum/gas_mixture/napalm = new
 
@@ -256,6 +348,7 @@
 
 			napalm.toxins = toxinsToDeduce
 			napalm.temperature = 400+T0C
+			napalm.update_values()
 
 			target_tile.assume_air(napalm)
 			spawn (0) target_tile.hotspot_expose(temperature, 400)

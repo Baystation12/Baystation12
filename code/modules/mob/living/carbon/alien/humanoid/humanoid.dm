@@ -10,6 +10,8 @@
 		if(!istype(src, /mob/living/carbon/alien/humanoid/queen))
 			stand_icon = new /icon('alien.dmi', "alien_s")
 			lying_icon = new /icon('alien.dmi', "alien_l")
+			resting_icon = new /icon('alien.dmi', "alienh_sleep")
+			running_icon = new /icon('alien.dmi', "alienh_running")
 		icon = stand_icon
 		update_clothing()
 		src << "\blue Your icons have been generated!"
@@ -58,7 +60,9 @@
 		tally += 2
 	if (istype(src, /mob/living/carbon/alien/humanoid/sentinel))
 		tally += 1
-	return tally
+	if (istype(src, /mob/living/carbon/alien/humanoid/hunter))
+		tally = -1 // hunters go supersuperfast
+	return tally + move_delay_add
 
 //This needs to be fixed
 /mob/living/carbon/alien/humanoid/Stat()
@@ -87,7 +91,7 @@
 	flick("flash", flash)
 
 //	if (stat == 2 && client)
-//		gib(1)
+//		gib()
 //		return
 
 //	else if (stat == 2 && !client)
@@ -102,7 +106,7 @@
 	switch (severity)
 		if (1.0)
 			b_loss += 500
-			gib(1)
+			gib()
 			return
 
 		if (2.0)
@@ -121,7 +125,7 @@
 			ear_damage += 15
 			ear_deaf += 60
 
-	bruteloss += b_loss
+	adjustBruteLoss(b_loss)
 	adjustFireLoss(f_loss)
 
 	updatehealth()
@@ -224,7 +228,7 @@
 		if ((M.client && !( M.blinded )))
 			M.show_message(text("\red [] has been hit by []", src, O), 1)
 	if (health > 0)
-		bruteloss += (istype(O, /obj/effect/meteor/small) ? 10 : 25)
+		adjustFireLoss((istype(O, /obj/effect/meteor/small) ? 10 : 25))
 		adjustFireLoss(30)
 
 		updatehealth()
@@ -328,7 +332,17 @@
 
 	if (lying)
 		if(update_icon)
-			icon = lying_icon
+			if(!resting)
+				icon = lying_icon
+			else
+				icon = resting_icon
+
+	else if(!lying)
+		if(update_icon)
+			if(m_intent == "run")
+				icon = running_icon
+			else
+				icon = stand_icon
 
 		overlays += body_lying
 
@@ -384,7 +398,7 @@
 				overlays += image("icon" = 'blood.dmi', "icon_state" = "armorblood[!lying ? "" : "2"]", "layer" = MOB_LAYER)
 			else
 				overlays += image("icon" = 'blood.dmi', "icon_state" = "suitblood[!lying ? "" : "2"]", "layer" = MOB_LAYER)
-		wear_suit.screen_loc = ui_iclothing
+		wear_suit.screen_loc = ui_alien_oclothing
 		if (istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
 			if (handcuffed)
 				handcuffed.loc = loc
@@ -406,7 +420,7 @@
 		overlays += image("icon" = 'mob.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = MOB_LAYER)
 		if (head.blood_DNA)
 			overlays += image("icon" = 'blood.dmi', "icon_state" = "helmetblood[!lying ? "" : "2"]", "layer" = MOB_LAYER)
-		head.screen_loc = ui_oclothing
+		head.screen_loc = ui_alien_head
 
 	if (l_store)
 		l_store.screen_loc = ui_storage1
@@ -421,12 +435,12 @@
 	if (r_hand)
 		overlays += image("icon" = 'items_righthand.dmi', "icon_state" = r_hand.item_state ? r_hand.item_state : r_hand.icon_state, "layer" = MOB_LAYER+1)
 
-		r_hand.screen_loc = ui_id
+		r_hand.screen_loc = ui_rhand
 
 	if (l_hand)
 		overlays += image("icon" = 'items_lefthand.dmi', "icon_state" = l_hand.item_state ? l_hand.item_state : l_hand.icon_state, "layer" = MOB_LAYER+1)
 
-		l_hand.screen_loc = ui_belt
+		l_hand.screen_loc = ui_lhand
 
 
 
@@ -472,7 +486,7 @@
 			for(var/mob/O in viewers(src, null))
 				if ((O.client && !( O.blinded )))
 					O.show_message(text("\red <B>[M.name] has bit []!</B>", src), 1)
-			bruteloss  += rand(1, 3)
+			adjustBruteLoss(rand(1, 3))
 
 			updatehealth()
 	return
@@ -501,7 +515,7 @@
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[M.name] has bit [src]!</B>"), 1)
-				bruteloss  += rand(1, 3)
+				adjustBruteLoss(rand(1, 3))
 				updatehealth()
 	return
 
@@ -526,7 +540,7 @@
 		else
 			damage = rand(5, 35)
 
-		bruteloss += damage
+		adjustBruteLoss(damage)
 
 		if(M.powerlevel > 0)
 			var/stunprob = 10
@@ -565,6 +579,16 @@
 		updatehealth()
 
 	return
+
+/mob/living/carbon/alien/humanoid/attack_animal(mob/living/simple_animal/M as mob)
+	if(M.melee_damage_upper == 0)
+		M.emote("[M.friendly] [src]")
+	else
+		for(var/mob/O in viewers(src, null))
+			O.show_message("\red <B>[M]</B> [M.attacktext] [src]!", 1)
+		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
+		adjustBruteLoss(damage)
+		updatehealth()
 
 /mob/living/carbon/alien/humanoid/attack_hand(mob/living/carbon/human/M as mob)
 	if (!ticker)
@@ -672,7 +696,7 @@
 					for(var/mob/O in viewers(M, null))
 						if ((O.client && !( O.blinded )))
 							O.show_message(text("\red <B>[] has weakened []!</B>", M, src), 1, "\red You hear someone fall.", 2)
-				bruteloss += damage
+				adjustBruteLoss(damage)
 				updatehealth()
 			else
 				if(M.type != /mob/living/carbon/human/tajaran)
@@ -725,7 +749,7 @@ In all, this is a lot like the monkey code. /N
 
 		if ("help")
 			if(!sleeping_willingly)
-				sleeping = 0
+				sleeping = max(0,sleeping-5)
 			resting = 0
 			AdjustParalysis(-3)
 			AdjustStunned(-3)
@@ -741,7 +765,7 @@ In all, this is a lot like the monkey code. /N
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[M.name] has bit []!</B>", src), 1)
-				bruteloss += damage
+				adjustBruteLoss(damage)
 				updatehealth()
 			else
 				M << "\green <B>[name] is too injured for that.</B>"
@@ -767,7 +791,7 @@ In all, this is a lot like the monkey code. /N
 	<BR><B>Right Hand:</B> <A href='?src=\ref[src];item=r_hand'>[(r_hand ? text("[]", r_hand) : "Nothing")]</A>
 	<BR><B>Head:</B> <A href='?src=\ref[src];item=head'>[(head ? text("[]", head) : "Nothing")]</A>
 	<BR><B>(Exo)Suit:</B> <A href='?src=\ref[src];item=suit'>[(wear_suit ? text("[]", wear_suit) : "Nothing")]</A>
-	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
+	<BR><A href='?src=\ref[src];item=pockets'>Empty Pouches</A>
 	<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>
 	<BR>"}
 	user << browse(dat, text("window=mob[name];size=340x480"))

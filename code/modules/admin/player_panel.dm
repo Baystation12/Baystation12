@@ -5,7 +5,7 @@
 	dat += "<body><table border=1 cellspacing=5><B><tr><th>Name/Real Name</th><th>Type</th><th>Assigned Job</th><th>Info</th><th>Options</th><th>Traitor?</th></tr></B>"
 	//add <th>IP:</th> to this if wanting to add back in IP checking
 	//add <td>(IP: [M.lastKnownIP])</td> if you want to know their ip to the lists below
-	var/list/mobs = sortmobs()
+	var/list/mobs = get_sorted_mobs()
 	var/i = 1
 
 	for(var/mob/M in mobs)
@@ -14,10 +14,10 @@
 			i++
 			if(i%2 == 0)
 				color = "#f2f2f2"
-			var/real = (M.real_name == M.original_name ? M.real_name : "[M.original_name] (as [M.real_name])")
+			var/real = (M.real_name == M.original_name ? "<b>[M.name]/[M.real_name]</b>" : "<b>[M.original_name] (as [M.name]/[M.real_name])</b>")
 			var/turf/T = get_turf(M)
 			var/client_key = (M.key? M.key : "No key")
-			dat += "<tr align='center' bgcolor='[color]'><td>[M.name] \[[real]\] <br>[M.client ? M.client : "No client ([client_key])"] at ([T.x], [T.y], [T.z])</td>" // Adds current name
+			dat += "<tr align='center' bgcolor='[color]'><td>[real] <br>[M.client ? M.client : "No client ([client_key])"] at ([T.x], [T.y], [T.z])</td>" // Adds current name
 			if(isobserver(M))
 				dat += "<td>Ghost</td>"
 			else if(isalien(M))
@@ -45,7 +45,7 @@
 			else if(istype(M,/mob/new_player))
 				dat += "<td>New Player</td>"
 			else
-				dat += "<td>ERROR</td>"
+				dat += "<td>\red ERROR</td>\black"
 
 			if(M.mind && M.mind.assigned_role && istype(M, /mob/living/carbon/human))	// Adds a column to Player Panel that shows their current job.
 				var/mob/living/carbon/human/H = M
@@ -65,8 +65,11 @@
 						dat += "<td>[M.mind.assigned_role] (No ID)</td>"
 
 					else if(isnull(id.assignment))		// Preventing runtime errors blocking the player panel
-						usr << "<font color=red>ERROR:</font> Inform the coders that an [id.name] was checked for its assignment variable, and it was null."
-						dat += "<td><font color=red>ERROR</font></td>"
+						if(istype(id, /obj/item/weapon/card/id/syndicate))
+							dat += "<td><font color=purple>Antagonist</font></td>"
+						else
+							usr << "<font color=red>ERROR:</font> Inform the coders that an [id.name] was checked for its assignment variable, and it was null."
+							dat += "<td><font color=red>ERROR</font></td>"
 
 					else
 						if(M.mind.assigned_role == id.assignment)			// Polymorph
@@ -91,6 +94,7 @@
 			<td><A href='?src=\ref[usr];priv_msg=\ref[M]'><b>PM</b></A> |
 			<A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>PP</A> |
 			<A HREF='?src=\ref[src];adminplayervars=\ref[M]'>VV</A> |
+			<A HREF='?src=\ref[src];traitor_panel_pp=\ref[M]'>TP</A> |
 			<A HREF='?src=\ref[src];adminplayersubtlemessage=\ref[M]'>SM</A> |
 			<A HREF='?src=\ref[src];adminplayerobservejump=\ref[M]'>JMP</A></font>
 			<br><font size="2">[muting]</font><br>
@@ -117,7 +121,7 @@
 	dat += "<body><table border=1 cellspacing=5><B><tr><th>Name</th><th>Real Name</th><th>Assigned Job</th><th>Key</th><th>Options</th><th>PM</th><th>Traitor?</th></tr></B>"
 	//add <th>IP:</th> to this if wanting to add back in IP checking
 	//add <td>(IP: [M.lastKnownIP])</td> if you want to know their ip to the lists below
-	var/list/mobs = sortmobs()
+	var/list/mobs = get_sorted_mobs()
 
 	for(var/mob/M in mobs)
 		if(!M.ckey)	continue
@@ -166,3 +170,146 @@
 	dat += "</table></body></html>"
 
 	usr << browse(dat, "window=players;size=640x480")
+
+
+
+/obj/admins/proc/check_antagonists()
+	if (ticker && ticker.current_state >= GAME_STATE_PLAYING)
+		var/dat = "<html><head><title>Round Status</title></head><body><h1><B>Round Status</B></h1>"
+		dat += "Current Game Mode: <B>[ticker.mode.name]</B><BR>"
+		dat += "Round Duration: <B>[round(world.time / 36000)]:[add_zero(world.time / 600 % 60, 2)]:[world.time / 100 % 6][world.time / 100 % 10]</B><BR>"
+		dat += "<B>Emergency shuttle</B><BR>"
+		if (!emergency_shuttle.online)
+			dat += "<a href='?src=\ref[src];call_shuttle=1'>Call Shuttle</a><br>"
+		else
+			var/timeleft = emergency_shuttle.timeleft()
+			switch(emergency_shuttle.location)
+				if(0)
+					dat += "ETA: <a href='?src=\ref[src];edit_shuttle_time=1'>[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]</a><BR>"
+					dat += "<a href='?src=\ref[src];call_shuttle=2'>Send Back</a><br>"
+				if(1)
+					dat += "ETA: <a href='?src=\ref[src];edit_shuttle_time=1'>[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]</a><BR>"
+
+		if(ticker.mode.syndicates.len)
+			dat += "<br><table cellspacing=5><tr><td><B>Syndicates</B></td><td></td></tr>"
+			for(var/datum/mind/N in ticker.mode.syndicates)
+				var/mob/M = N.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td></tr>"
+				else
+					dat += "<tr><td><i>Nuclear Operative not found!</i></td></tr>"
+			dat += "</table><br><table><tr><td><B>Nuclear Disk(s)</B></td></tr>"
+			for(var/obj/item/weapon/disk/nuclear/N in world)
+				dat += "<tr><td>[N.name], "
+				var/atom/disk_loc = N.loc
+				while(!istype(disk_loc, /turf))
+					if(istype(disk_loc, /mob))
+						var/mob/M = disk_loc
+						dat += "carried by <a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a> "
+					if(istype(disk_loc, /obj))
+						var/obj/O = disk_loc
+						dat += "in \a [O.name] "
+					disk_loc = disk_loc.loc
+				dat += "in [disk_loc.loc] at ([disk_loc.x], [disk_loc.y], [disk_loc.z])</td></tr>"
+			dat += "</table>"
+
+		if(ticker.mode.head_revolutionaries.len || ticker.mode.revolutionaries.len)
+			dat += "<br><table cellspacing=5><tr><td><B>Revolutionaries</B></td><td></td></tr>"
+			for(var/datum/mind/N in ticker.mode.head_revolutionaries)
+				var/mob/M = N.current
+				if(!M)
+					dat += "<tr><td><i>Head Revolutionary not found!</i></td></tr>"
+				else
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a> <b>(Leader)</b>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td></tr>"
+			for(var/datum/mind/N in ticker.mode.revolutionaries)
+				var/mob/M = N.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td></tr>"
+			dat += "</table><table cellspacing=5><tr><td><B>Target(s)</B></td><td></td><td><B>Location</B></td></tr>"
+			for(var/datum/mind/N in ticker.mode.get_living_heads())
+				var/mob/M = N.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
+					var/turf/mob_loc = get_turf_loc(M)
+					dat += "<td>[mob_loc.loc]</td></tr>"
+				else
+					dat += "<tr><td><i>Head not found!</i></td></tr>"
+			dat += "</table>"
+
+		if(ticker.mode.changelings.len > 0)
+			dat += "<br><table cellspacing=5><tr><td><B>Changelings</B></td><td></td><td></td></tr>"
+			for(var/datum/mind/changeling in ticker.mode.changelings)
+				var/mob/M = changeling.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
+					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
+				else
+					dat += "<tr><td><i>Changeling not found!</i></td></tr>"
+			dat += "</table>"
+
+		if(ticker.mode.memes.len > 0)
+			dat += "<br><table cellspacing=5><tr><td><B>Memes</B></td><td></td><td></td></tr>"
+			for(var/datum/mind/meme in ticker.mode.memes)
+				// BUG: For some reason, the memes themselves aren't showing up, even though the list isn't empty
+				// and the "Meme" header is displayed
+				var/mob/living/parasite/meme/M = meme.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.key]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
+					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
+
+					// need this check because the meme may be possessing someone right now
+					if(istype(M))
+						dat += "\t<td>Attuned: "
+						for(var/mob/attuned in M.indoctrinated)
+							if(attuned.key)
+								dat += "[attuned.real_name]([attuned.key]) "
+							else
+								dat += "[attuned.real_name] "
+				else
+					dat += "<tr><td><i>Changeling not found!</i></td></tr>"
+			dat += "</table>"
+
+
+		if(ticker.mode.wizards.len > 0)
+			dat += "<br><table cellspacing=5><tr><td><B>Wizards</B></td><td></td><td></td></tr>"
+			for(var/datum/mind/wizard in ticker.mode.wizards)
+				var/mob/M = wizard.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
+					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
+				else
+					dat += "<tr><td><i>Wizard not found!</i></td></tr>"
+			dat += "</table>"
+
+		if(ticker.mode.cult.len)
+			dat += "<br><table cellspacing=5><tr><td><B>Cultists</B></td><td></td></tr>"
+			for(var/datum/mind/N in ticker.mode.cult)
+				var/mob/M = N.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td></tr>"
+			dat += "</table>"
+
+		if(ticker.mode.traitors.len > 0)
+			dat += "<br><table cellspacing=5><tr><td><B>Traitors</B></td><td></td><td></td></tr>"
+			for(var/datum/mind/traitor in ticker.mode.traitors)
+				var/mob/M = traitor.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
+					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
+				else
+					dat += "<tr><td><i>Traitor not found!</i></td></tr>"
+			dat += "</table>"
+
+		dat += "</body></html>"
+		usr << browse(dat, "window=roundstatus;size=400x500")
+	else
+		alert("The game hasn't started yet!")

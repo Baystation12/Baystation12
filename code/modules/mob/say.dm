@@ -17,7 +17,7 @@
 
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 
-	usr.emote("me",1,message)
+	src.emote("me",1,message)
 
 /mob/proc/say_dead(var/message)
 	var/name = src.real_name
@@ -29,7 +29,6 @@
 			alt_name = " (died as [src.real_name])"
 
 	message = src.say_quote(message)
-
 	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] <span class='message'>[message]</span></span>"
 
 	for (var/mob/M in world)
@@ -53,6 +52,8 @@
 	return 0
 
 /mob/proc/say_quote(var/text)
+	if(!text)
+		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 	var/ending = copytext(text, length(text))
 	if (src.disease_symptoms & DISEASE_HOARSE)
 		return "rasps, \"[text]\"";
@@ -60,11 +61,11 @@
 		return "stammers, \"[text]\"";
 	if (src.slurring)
 		return "slurrs, \"[text]\"";
-	if (src.brainloss >= 60)
+	if (src.getBrainLoss() >= 60)
 		return "gibbers, \"[text]\"";
 	if (ending == "?")
 		return "asks, \"[text]\"";
-	else if (ending == "!")
+	if (ending == "!")
 		return "exclaims, \"[text]\"";
 
 	return "says, \"[text]\"";

@@ -89,6 +89,8 @@
 
 
 /obj/item/weapon/grab/proc/s_click(obj/screen/S as obj)
+	if (!affecting)
+		return
 	if (assailant.next_move > world.time)
 		return
 	if ((!( assailant.canmove ) || assailant.lying))
@@ -108,8 +110,6 @@
 					affecting.losebreath = min(affecting.losebreath + 1, 3)
 					last_suffocate = world.time
 					flick("disarm/killf", S)
-					if(istype(affecting,/mob/living/carbon/human))
-						affecting:autopsy_choked = 1
 		else
 	return
 
@@ -168,6 +168,7 @@
 						affecting.loc = assailant.loc
 					affecting.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their neck grabbed by [assailant.name] ([assailant.ckey])</font>")
 					assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Grabbed the neck of [affecting.name] ([affecting.ckey])</font>")
+					log_attack("<font color='red'>[assailant.name] ([assailant.ckey]) grabbed the neck of [affecting.name] ([affecting.ckey])</font>")
 					hud1.icon_state = "disarm/kill"
 					hud1.name = "disarm/kill"
 				else
@@ -180,16 +181,15 @@
 							assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>")
 							log_admin("ATTACK: [assailant] ([assailant.ckey]) strangled [affecting] ([affecting.ckey]).")
 							message_admins("ATTACK: [assailant] ([assailant.ckey]) strangled [affecting] ([affecting.ckey]).")
+							log_attack("<font color='red'>[assailant.name] ([assailant.ckey]) Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>")
+
 							assailant.next_move = world.time + 10
 							affecting.losebreath += 1
-							if(istype(affecting,/mob/living/carbon/human))
-								affecting:autopsy_choked = 1
 							hud1.icon_state = "disarm/kill1"
 						else
 							hud1.icon_state = "disarm/kill"
 							for(var/mob/O in viewers(assailant, null))
 								O.show_message(text("\red [] has loosened the grip on []'s neck!", assailant, affecting), 1)
-		else
 	return
 
 
@@ -211,7 +211,7 @@
 			s_click(hud1)
 		return
 	if(M == assailant && state >= 2)
-		if( ( ishuman(user) /*&& (user.mutations & FAT)*/ && ismonkey(affecting) ) || ( isalien(user) && iscarbon(affecting) ) )
+		if( ( ishuman(user) && (user.mutations & FAT) && ismonkey(affecting) ) || ( isalien(user) && iscarbon(affecting) ) )
 			var/mob/living/carbon/attacker = user
 			for(var/mob/N in viewers(user, null))
 				if(N.client)

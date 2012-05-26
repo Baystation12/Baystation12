@@ -42,11 +42,10 @@
 
 	// attack by item places it in to disposal
 	attackby(var/obj/item/I, var/mob/user)
-		if(stat & BROKEN)
+		if(stat & BROKEN || !I || !user)
 			return
 
-		//robots shouldn't be able to grab/carry stuff anyway
-		if(isrobot(user))
+		if(isrobot(user) && !istype(I, /obj/item/weapon/trashbag))
 			return
 
 		if(istype(I, /obj/item/weapon/melee/energy/blade))
@@ -103,6 +102,11 @@
 						GM.client.eye = src
 					GM.loc = src
 					for (var/mob/C in viewers(src))
+
+						log_attack("<font color='red'>[usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit.</font>")
+						log_admin("ATTACK: [usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit.")
+		//				message_admins("ATTACK: [usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit.")
+
 						C.show_message("\red [GM.name] has been placed in the [src] by [user].", 3)
 					del(G)
 		else
@@ -144,9 +148,19 @@
 			if(!do_after(usr, 20))
 				return
 			if(target == user && !user.stat && !user.weakened && !user.stunned && !user.paralysis)	// if drop self, then climbed in										// must be awake, not stunned or whatever
+
+				log_attack("<font color='red'>[user] ([user.ckey]) climbed into a disposals unit.</font>")
+				log_admin("ATTACK: [user] ([user.ckey]) climbed into in a disposals unit.")
+				//message_admins("ATTACK: [user] ([user.ckey]) climbed into in a disposals unit.")
+
 				msg = "[user.name] climbs into the [src]."
 				user << "You climb into the [src]."
 			else if(target != user && !user.restrained() && !user.stat && !user.weakened && !user.stunned && !user.paralysis)
+
+				log_attack("<font color='red'>[user] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit.</font>")
+				log_admin("ATTACK: [user] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit.")
+				//message_admins("ATTACK: [user] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit.")
+
 				msg = "[user.name] stuffs [target.name] into the [src]!"
 				user << "You stuff [target.name] into the [src]!"
 			else
@@ -239,10 +253,14 @@
 
 	// human interact with machine
 	attack_hand(mob/user as mob)
+		if(user && user.loc == src)
+			usr << "\red You cannot reach the controls from inside."
+			return
 		interact(user, 0)
 
 	// user interaction
 	proc/interact(mob/user, var/ai=0)
+
 		src.add_fingerprint(user)
 		if(stat & BROKEN)
 			user.machine = null
@@ -277,6 +295,9 @@
 	// handle machine interaction
 
 	Topic(href, href_list)
+		if(usr.loc == src)
+			usr << "\red You cannot reach the controls from inside."
+			return
 		..()
 		src.add_fingerprint(usr)
 		if(stat & BROKEN)
@@ -400,7 +421,7 @@
 	proc/flush()
 
 		flushing = 1
-		flick("disposal-flush", src)
+		flick("[icon_state]-flush", src)
 
 		var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
 											// travels through the pipes.
@@ -442,23 +463,24 @@
 			playsound(src, 'hiss.ogg', 50, 0, 0)
 			spawn(20)
 				playing_sound = 0
-		for(var/atom/movable/AM in H)
-			target = get_offset_target_turf(src.loc, rand(5)-rand(5), rand(5)-rand(5))
+		if(H) // Somehow, someone managed to flush a window which broke mid-transit and caused the disposal to go in an infinite loop trying to expel null, hopefully this fixes it
+			for(var/atom/movable/AM in H)
+				target = get_offset_target_turf(src.loc, rand(5)-rand(5), rand(5)-rand(5))
 
-			AM.loc = src.loc
-			AM.pipe_eject(0)
-			spawn(1)
-				if(AM)
-					AM.throw_at(target, 5, 1)
+				AM.loc = src.loc
+				AM.pipe_eject(0)
+				spawn(1)
+					if(AM)
+						AM.throw_at(target, 5, 1)
 
-		H.vent_gas(loc)
-		del(H)
+			H.vent_gas(loc)
+			del(H)
 
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-		if (istype(mover,/obj/item))
+		if (istype(mover,/obj/item) && mover.throwing)
 			var/obj/item/I = mover
-			if(!mover.throwing)
-				return ..()
+			if(istype(I, /obj/item/weapon/dummy) || istype(I, /obj/item/projectile))
+				return
 			if(prob(75))
 				I.loc = src
 				for(var/mob/M in viewers(src))
@@ -489,7 +511,7 @@
 						for (var/mob/V in viewers(usr))
 							V.show_message("[user] dunks [GM.name] into the toilet!", 3)
 						if(do_after(user, 30))
-							if(G.state>1&&!GM.internal)
+							if(G && G.state>1 && !GM.internal)
 								GM.oxyloss += 5
 
 			else if(I.w_class < 4)
@@ -517,6 +539,9 @@
 		return
 
 	interact(mob/user)
+		if(isAI(user) || isrobot(user))
+			return
+
 		add_fingerprint(user)
 		for (var/mob/V in viewers(user))
 			V.show_message("[user] eagerly drinks the toilet water!", 3)//Yum yum yum
@@ -570,6 +595,7 @@
 	var/count = 1000	//*** can travel 1000 steps before going to the mail room (in case of loops)
 	var/destinationTag = null // changes if contains a delivery container
 	var/tomail = 0 //changes if contains wrapped package
+	var/hasmob = 0 //If it contains a mob
 
 
 	// initialize a holder from the contents of a disposal unit
@@ -586,10 +612,10 @@
 				if(H.mutations & FAT)		// is a human and fat?
 					has_fat_guy = 1			// set flag on holder
 			*/
-			if(istype(AM, /obj/structure/bigDelivery))
+			if(istype(AM, /obj/structure/bigDelivery))// && !hasmob) Already have a check for this.
 				var/obj/structure/bigDelivery/T = AM
 				src.destinationTag = T.sortTag
-			else if(istype(AM, /obj/item/smallDelivery))
+			if(istype(AM, /obj/item/smallDelivery))// && !hasmob) And that. DMTG
 				var/obj/item/smallDelivery/T = AM
 				src.destinationTag = T.sortTag
 			else if (!src.destinationTag)
@@ -624,7 +650,7 @@
 			//
 			if(!(count--))
 				tomail = 1 //So loops end up in the mail room.
-				destinationTag = "Mail Office"
+				destinationTag = null
 		return
 
 
@@ -717,7 +743,8 @@
 				return
 
 			// otherwise, do normal expel from turf
-			expel(H, T, 0)
+			if(H)
+				expel(H, T, 0)
 		..()
 
 	// returns the direction of the next pipe object, given the entrance dir
@@ -833,14 +860,15 @@
 				playsound(src, 'hiss.ogg', 50, 0, 0)
 				spawn(20)
 					playing_sound = 0
-			for(var/atom/movable/AM in H)
-				AM.loc = T
-				AM.pipe_eject(direction)
-				spawn(1)
-					if(AM)
-						AM.throw_at(target, 100, 1)
-			H.vent_gas(T)
-			del(H)
+			if(H)
+				for(var/atom/movable/AM in H)
+					AM.loc = T
+					AM.pipe_eject(direction)
+					spawn(1)
+						if(AM)
+							AM.throw_at(target, 100, 1)
+				H.vent_gas(T)
+				del(H)
 
 		else	// no specified direction, so throw in random direction
 
@@ -849,17 +877,18 @@
 				playsound(src, 'hiss.ogg', 50, 0, 0)
 				spawn(20)
 					playing_sound = 0
-			for(var/atom/movable/AM in H)
-				target = get_offset_target_turf(T, rand(5)-rand(5), rand(5)-rand(5))
+			if(H)
+				for(var/atom/movable/AM in H)
+					target = get_offset_target_turf(T, rand(5)-rand(5), rand(5)-rand(5))
 
-				AM.loc = T
-				AM.pipe_eject(0)
-				spawn(1)
-					if(AM)
-						AM.throw_at(target, 5, 1)
+					AM.loc = T
+					AM.pipe_eject(0)
+					spawn(1)
+						if(AM)
+							AM.throw_at(target, 5, 1)
 
-			H.vent_gas(T)	// all gas vent to turf
-			del(H)
+				H.vent_gas(T)	// all gas vent to turf
+				del(H)
 
 		return
 
@@ -891,7 +920,8 @@
 				return
 
 			// otherwise, do normal expel from turf
-			expel(H, T, 0)
+			if(H)
+				expel(H, T, 0)
 
 		spawn(2)	// delete pipe after 2 ticks to ensure expel proc finished
 			del(src)
@@ -1058,6 +1088,31 @@
 		screen = 0
 		icon_state_old = null
 
+	nonsorting
+		NE
+			dir = 1
+			icon_state = "pipe-j1s"
+		NW
+			dir = 1
+			icon_state = "pipe-j2s"
+		ES
+			dir = 4
+			icon_state = "pipe-j1s"
+		EN
+			dir = 4
+			icon_state = "pipe-j2s"
+		SW
+			dir = 2
+			icon_state = "pipe-j1s"
+		SE
+			dir = 2
+			icon_state = "pipe-j2s"
+		WN
+			dir = 8
+			icon_state = "pipe-j1s"
+		WS
+			dir = 81
+			icon_state = "pipe-j2s"
 
 	New()
 		..()
@@ -1085,22 +1140,15 @@
 		if(service)
 			return posdir //If it's being worked on, it isn't sorting.
 		if(sortTag)
-			for(var/i, i <= backType.len, i++)
-				if(sortTag == src.backType[i])
-					return negdir
+			if(sortTag in backType)
+				return negdir
 		else if (!sortTag && mailsort)
 			return sortdir
 		else if (!sortTag && !mailsort)
 			return posdir
 
 		if(fromdir != sortdir)	// probably came from the negdir
-
-			var/issort = 0
-			for(var/i, i <= sortType.len, i++)
-				if(sortTag == src.sortType[i])
-					issort = 1
-
-			if(issort) //if destination matches filtered type...
+			if(sortTag in sortType)
 				return sortdir		// exit through sortdirection
 			else
 				return posdir
@@ -1196,6 +1244,68 @@
 					sortType -= variable
 		updateUsrDialog()
 
+//a three-way junction that sorts objects
+/obj/structure/disposalpipe/mailjunction
+	name = "\improper Package Discrimination Unit"
+	desc = "An underfloor disposal pipe that is racist against packages."
+	icon_state = "pipe-j1s"
+	var
+		posdir = 0
+		negdir = 0
+		sortdir = 0
+		screen = 0
+
+
+	New()
+		..()
+		posdir = dir
+		if(icon_state == "pipe-j1s")
+			sortdir = turn(posdir, -90)
+			negdir = turn(posdir, 180)
+		else
+			icon_state = "pipe-j2s"
+			sortdir = turn(posdir, 90)
+			negdir = turn(posdir, 180)
+		dpdir = sortdir | posdir | negdir
+
+		update()
+		return
+
+
+	// next direction to move
+	// if coming in from negdir, then next is primary dir or sortdir
+	// if coming in from posdir, then flip around and go back to posdir
+	// if coming in from sortdir, go to posdir
+
+	nextdir(var/package)
+		//var/flipdir = turn(fromdir, 180)
+		if(package)
+			return sortdir
+		else
+			return posdir	// so go with the flow to positive direction
+
+	transfer(var/obj/structure/disposalholder/H)
+		var/package = locate(/obj/structure/bigDelivery) in H
+		if(!package)
+			package = locate(/obj/item/smallDelivery) in H
+		var/nextdir = nextdir(package)
+		H.dir = nextdir
+		var/turf/T = H.nextloc()
+		var/obj/structure/disposalpipe/P = H.findpipe(T)
+
+		if(P)
+			// find other holder in next loc, if inactive merge it with current
+			var/obj/structure/disposalholder/H2 = locate() in P
+			if(H2 && !H2.active)
+				H.merge(H2)
+
+			H.loc = P
+		else			// if wasn't a pipe, then set loc to turf
+			H.loc = T
+			return null
+
+		return P
+
 //a trunk joining to a disposal bin or outlet on the same turf
 /obj/structure/disposalpipe/trunk
 	icon_state = "pipe-t"
@@ -1236,13 +1346,15 @@
 		// otherwise, go to the linked object
 		if(linked)
 			var/obj/structure/disposaloutlet/O = linked
-			if(istype(O))
+			if(istype(O) && (H))
 				O.expel(H)	// expel at outlet
 			else
 				var/obj/machinery/disposal/D = linked
-				D.expel(H)	// expel at disposal
+				if(H)
+					D.expel(H)	// expel at disposal
 		else
-			src.expel(H, src.loc, 0)	// expel at turf
+			if(H)
+				src.expel(H, src.loc, 0)	// expel at turf
 		return null
 
 	// nextdir
@@ -1312,13 +1424,14 @@
 				playing_sound = 0
 
 
-		for(var/atom/movable/AM in H)
-			AM.loc = src.loc
-			AM.pipe_eject(dir)
-			spawn(1)
-				AM.throw_at(target, 3, 1)
-		H.vent_gas(src.loc)
-		del(H)
+		if(H)
+			for(var/atom/movable/AM in H)
+				AM.loc = src.loc
+				AM.pipe_eject(dir)
+				spawn(1)
+					AM.throw_at(target, 3, 1)
+			H.vent_gas(src.loc)
+			del(H)
 
 		return
 

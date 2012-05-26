@@ -5,7 +5,6 @@
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
 	var/const/meteordelay = 2000
 	var/nometeors = 1
-	required_players = 0
 
 	uplink_welcome = "EVIL METEOR Uplink Console:"
 	uplink_uses = 10
@@ -52,8 +51,8 @@
 				else
 					survivors[player.real_name] = "alive"
 
-	feedback_set_details("round_end_result","end - evacuation")
-	feedback_set("round_end_result",survivors.len)
+	//feedback_set_details("round_end_result","end - evacuation")
+	//feedback_set("round_end_result",survivors.len)
 
 	if (survivors.len)
 		world << "\blue <B>The following survived the meteor attack!</B>"

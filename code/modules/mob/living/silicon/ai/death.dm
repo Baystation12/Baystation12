@@ -1,5 +1,4 @@
 /mob/living/silicon/ai/death(gibbed)
-	var/cancel
 	stat = 2
 	canmove = 0
 	if(blind)
@@ -35,7 +34,7 @@
 		emergency_shuttle.incall(2)
 		log_game("All the AIs, comm consoles and boards are destroyed. Shuttle called.")
 		message_admins("All the AIs, comm consoles and boards are destroyed. Shuttle called.", 1)
-		world << "\blue <B>Alert: The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.</B>"
+		captain_announce("The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.")
 		world << sound('shuttlecalled.ogg')
 
 	if(explosive)
@@ -49,24 +48,8 @@
 			loc.icon_state = "aicard-404"
 
 	var/tod = time2text(world.realtime,"hh:mm:ss") //weasellos time of death patch
-	mind.store_memory("Time of death: [tod]", 0)
+	if(mind)	mind.store_memory("Time of death: [tod]", 0)
 
-	for(var/mob/M in world)
-		if ((M.client && !( M.stat )))
-			cancel = 1
-			break
-	if (!( cancel ))
-		world << "<B>Everyone is dead! Resetting in 30 seconds!</B>"
-
-		feedback_set_details("end_error","no live players")
-		feedback_set_details("round_end","[time2text(world.realtime)]")
-		if(blackbox)
-			blackbox.save_all_data_to_sql()
-
-		spawn( 300 )
-			log_game("Rebooting because of no live players")
-			world.Reboot()
-			return
 	if (key)
 		spawn(50)
 			if(key && stat == 2)

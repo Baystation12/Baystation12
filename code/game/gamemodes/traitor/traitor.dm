@@ -6,7 +6,7 @@
 	name = "traitor"
 	config_tag = "traitor"
 	restricted_jobs = list("Cyborg", "AI")//Approved by headmins for a week test, if you see this it would be nice if you didn't spread it everywhere
-	required_players = 0
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain")
 	required_enemies = 1
 	recommended_enemies = 4
 
@@ -29,6 +29,10 @@
 
 
 /datum/game_mode/traitor/pre_setup()
+
+	if(config.protect_roles_from_antagonist)
+		restricted_jobs += protected_jobs
+
 	var/list/possible_traitors = get_players_for_role(BE_TRAITOR)
 
 	// stop setup if no possible traitors
@@ -90,7 +94,7 @@
 			traitor.objectives += block_objective
 
 	else
-		for(var/datum/objective/o in SelectObjectives((traitor.current:wear_id ? traitor.current:wear_id:assignment : traitor.assigned_role), traitor))
+		for(var/datum/objective/o in SelectObjectives((istype(traitor.current:wear_id, /obj/item/weapon/card/id) ? traitor.current:wear_id:assignment : traitor.assigned_role), traitor))
 			o.owner = traitor
 			traitor.objectives += o
 	return
@@ -118,6 +122,7 @@
 
 
 /datum/game_mode/traitor/declare_completion()
+	..()
 	return//Traitors will be checked as part of check_extra_completion. Leaving this here as a reminder.
 
 
@@ -168,15 +173,19 @@
 			for(var/datum/objective/objective in traitor.objectives)
 				if(objective.check_completion())
 					world << "<B>Objective #[count]</B>: [objective.explanation_text] \green <B>Success</B>"
+					//feedback_add_details("traitor_objective","[objective.type]|SUCCESS")
 				else
 					world << "<B>Objective #[count]</B>: [objective.explanation_text] \red Failed"
+					//feedback_add_details("traitor_objective","[objective.type]|FAIL")
 					traitorwin = 0
 				count++
 
 			if(traitorwin)
 				world << "<B>The [special_role_text] was successful!<B>"
+				//feedback_add_details("traitor_success","SUCCESS")
 			else
 				world << "<B>The [special_role_text] has failed!<B>"
+				//feedback_add_details("traitor_success","FAIL")
 	return 1
 
 
@@ -231,7 +240,7 @@
 	if (!R && traitor_mob.w_uniform && istype(traitor_mob.belt, /obj/item/device/radio))
 		R = traitor_mob.belt
 		loc = "on your belt"
-	if (!R && istype(traitor_mob.l_ear, /obj/item/device/radio) || prob(10))
+	if (!R && istype(traitor_mob.l_ear, /obj/item/device/radio))
 		R = traitor_mob.l_ear
 		loc = "on your head"
 	if (!R && istype(traitor_mob.r_ear, /obj/item/device/radio))

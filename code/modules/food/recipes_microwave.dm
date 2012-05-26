@@ -109,6 +109,12 @@
 		/obj/item/weapon/reagent_containers/food/snacks/tofu
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/burger/tofu
+/datum/recipe/ghostburger
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/flour,
+		/obj/item/weapon/ectoplasm
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/ghostburger
 
 /datum/recipe/clownburger
 	items = list(
@@ -989,6 +995,46 @@
 		/obj/item/weapon/reagent_containers/food/snacks/cheesewedge,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/mysterysoup
+
+/datum/recipe/pumpkinpie
+	reagents = list("milk" = 5, "sugar" = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/grown/pumpkin,
+		/obj/item/weapon/reagent_containers/food/snacks/flour,
+		/obj/item/weapon/reagent_containers/food/snacks/egg,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pumpkinpie
+
+/datum/recipe/plumphelmetbiscuit
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/flour,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/plumphelmet,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit
+
+/datum/recipe/mushroomsoup
+	reagents = list("water" = 5, "milk" = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chanterelle,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/mushroomsoup
+
+/datum/recipe/chawanmushi
+	reagents = list("water" = 5, "soysauce" = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/egg,
+		/obj/item/weapon/reagent_containers/food/snacks/egg,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/chanterelle,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/chawanmushi
+
+/datum/recipe/beetsoup
+	reagents = list("water" = 10)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/grown/whitebeet,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/cabbage,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/beetsoup
 
 //////////////////////////////////////////
 // bs12 food port stuff

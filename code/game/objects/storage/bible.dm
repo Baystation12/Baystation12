@@ -2,9 +2,9 @@
 	..()
 	new /obj/item/weapon/reagent_containers/food/drinks/beer(src)
 	new /obj/item/weapon/reagent_containers/food/drinks/beer(src)
-	new /obj/item/weapon/spacecash(src)
-	new /obj/item/weapon/spacecash(src)
-	new /obj/item/weapon/spacecash(src)
+	new /obj/item/weapon/money(src)
+	new /obj/item/weapon/money(src)
+	new /obj/item/weapon/money(src)
 
 /obj/item/weapon/storage/bible/tajaran/New()
 	..()
@@ -16,6 +16,7 @@
 	new /obj/item/weapon/reagent_containers/pill/antitox/tajaran(src)
 	new /obj/item/clothing/suit/monk(src)
 
+/* // All cult functionality moved to Null Rod
 /obj/item/weapon/storage/bible/proc/bless(mob/living/carbon/M as mob)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -35,8 +36,10 @@
 
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
+
 	log_admin("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
 	message_admins("ATTACK: [user] ([user.ckey]) attacked [M] ([M.ckey]) with [src].")
+	log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
 
 	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		user << "\red You don't have the dexterity to do this!"
@@ -56,6 +59,9 @@
 //		return
 
 	if (M.stat !=2)
+		if(M.mind && (M.mind.assigned_role == "Chaplain"))
+			user << "\red You can't heal yourself!"
+			return
 		if((M.mind in ticker.mode.cult) && (prob(20)))
 			M << "\red The power of [src.deity_name] clears your mind of heresy!"
 			user << "\red You see how [M]'s eyes become clear, the cult no longer holds control over him!"
@@ -78,12 +84,12 @@
 			O.show_message(text("\red <B>[] smacks []'s lifeless corpse with [].</B>", user, M, src), 1)
 		playsound(src.loc, "punch", 25, 1, -1)
 	return
-
+*/
 /obj/item/weapon/storage/bible/afterattack(atom/A, mob/user as mob)
-	if (istype(A, /turf/simulated/floor))
-		user << "\blue You hit the floor with the bible."
-		if(user.mind && (user.mind.assigned_role == "Chaplain"))
-			call(/obj/effect/rune/proc/revealrunes)(src)
+//	if (istype(A, /turf/simulated/floor))
+//		user << "\blue You hit the floor with the bible."
+//		if(user.mind && (user.mind.assigned_role == "Chaplain"))
+//			call(/obj/effect/rune/proc/revealrunes)(src)
 	if(user.mind && (user.mind.assigned_role == "Chaplain"))
 		if(A.reagents && A.reagents.has_reagent("water")) //blesses all the water in the holder
 			user << "\blue You bless [A]."
@@ -94,3 +100,29 @@
 /obj/item/weapon/storage/bible/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	playsound(src.loc, "rustle", 50, 1, -5)
 	..()
+
+/obj/item/weapon/storage/bible/MouseDrop(obj/over_object as obj)
+
+	if (ishuman(usr) || ismonkey(usr))
+		var/mob/M = usr
+		if (!( istype(over_object, /obj/screen) ))
+			return ..()
+		if ((!( M.restrained() ) && !( M.stat )))
+			if (over_object.name == "r_hand")
+				if (!( M.r_hand ))
+					M.u_equip(src)
+					M.r_hand = src
+			else
+				if (over_object.name == "l_hand")
+					if (!( M.l_hand ))
+						M.u_equip(src)
+						M.l_hand = src
+			M.update_clothing()
+			src.add_fingerprint(usr)
+			return
+		if(over_object == usr && in_range(src, usr) || usr.contents.Find(src))
+			if (usr.s_active)
+				usr.s_active.close(usr)
+			src.show_to(usr)
+			return
+	return

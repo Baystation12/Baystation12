@@ -11,14 +11,28 @@ Possible to do for anyone motivated enough:
 	Give an AI variable for different hologram icons.
 	Itegrate EMP effect to disable the unit.
 */
+/obj/machinery/hologram/holopad/attack_hand(var/mob/living/carbon/human/user) //Carn: Hologram requests.
+	if(!istype(user))
+		return
+	if(alert(user,"Would you like to request an AI's presence?",,"Yes","No") == "Yes")
+		if(last_request + 200 < world.time) //don't spam the AI with requests you jerk!
+			last_request = world.time
+			user << "<span class='notice'>You request an AI's presence.</span>"
+			var/area/area = get_area(src)
+			for(var/mob/living/silicon/ai/AI in world)
+				if(!AI.client)	continue
+				AI << "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area]</a>.</span>"
+		else
+			user << "<span class='notice'>A request for AI presence was already sent recently.</span>"
+
 /obj/machinery/hologram/holopad/attack_ai(mob/living/silicon/ai/user)
 	if (!istype(user))
 		return
 	/*There are pretty much only three ways to interact here.
 	I don't need to check for client since they're clicking on an object.
 	This may change in the future but for now will suffice.*/
-	if(user.client.eye!=src)//Set client eye on the object if it's not already.
-		user.current = src
+	if(user.eyeobj.loc!=src.loc)//Set client eye on the object if it's not already.
+		user.eyeobj.loc = src.loc
 		user.reset_view(src)
 	else if(!hologram)//If there is no hologram, possibly make one.
 		activate_holo(user)
@@ -27,7 +41,7 @@ Possible to do for anyone motivated enough:
 	return
 
 /obj/machinery/hologram/holopad/proc/activate_holo(mob/living/silicon/ai/user)
-	if(!(stat & NOPOWER)&&user.client.eye==src)//If the projector has power and client eye is on it.
+	if(!(stat & NOPOWER)&&user.eyeobj.loc==src.loc)//If the projector has power and client eye is on it.
 		if(!hologram)//If there is not already a hologram.
 			create_holo(user)//Create one.
 			for(var/mob/M in viewers())
@@ -77,7 +91,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 /obj/machinery/hologram/holopad/process()
 	if(hologram)//If there is a hologram.
-		if(master&&!master.stat&&master.client&&master.client.eye==src)//If there is an AI attached, it's not incapacitated, it has a client, and the client eye is centered on the projector.
+		if(master&&!master.stat&&master.client&&master.eyeobj.loc==src.loc)//If there is an AI attached, it's not incapacitated, it has a client, and the client eye is centered on the projector.
 			if( !(get_dist(src,hologram.loc)>3||stat & NOPOWER) )//If the hologram is not out of bounds and the machine has power.
 				return 1
 		clear_holo()//If not, we want to get rid of the hologram.

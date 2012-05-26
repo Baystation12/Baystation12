@@ -3,17 +3,6 @@
 //	Library SQL Configuration
 //
 //*******************************
-
-// Deprecated! See global.dm for new SQL config vars -- TLE
-/*
-#define SQL_ADDRESS ""
-#define SQL_DB ""
-#define SQL_PORT "3306"
-#define SQL_LOGIN ""
-#define SQL_PASS ""
-*/
-
-//*******************************
 // Requires Dantom.DB library ( http://www.byond.com/developer/Dantom/DB )
 
 
@@ -61,6 +50,12 @@
 //  - Books shouldn't print straight from the library computer. Make it synch with a machine like the book binder to print instead. This should consume some sort of resource.
 
 
+// Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
+/proc/sanitizeSQL(var/t as text)
+	var/sanitized_text = dd_replacetext(t, "'", "\\'")
+	sanitized_text = dd_replacetext(sanitized_text, "\"", "\\\"")
+	return sanitized_text
+
 
 
 /obj/structure/bookcase
@@ -89,7 +84,7 @@
 				// if 3 or less books, fill shelf with that
 				for(var/datum/archived_book/AB in catbooks)
 					var/obj/item/weapon/book/B = new(src)
-					B.name = "Book: [AB.title]"
+					B.name = "[AB.title]"
 					B.title = AB.title
 					B.author = AB.author
 					B.dat = AB.dat
@@ -108,7 +103,7 @@
 				for(var/i = 1 to 3)
 					var/datum/archived_book/AB = pick(catbooks)
 					var/obj/item/weapon/book/B = new(src)
-					B.name = "Book: [AB.title]"
+					B.name = "[AB.title]"
 					B.title = AB.title
 					B.author = AB.author
 					B.dat = AB.dat
@@ -132,7 +127,7 @@
 			if(!newname)
 				return
 			else
-				src.setname(sanitize(newname))
+				setname(sanitize(newname))
 		else
 			..()
 	attack_hand(var/mob/user as mob)
@@ -140,7 +135,7 @@
 		for(var/obj/item/weapon/book/b in src.contents)
 			books.Add(b)
 		if(books.len)
-			var/obj/item/weapon/book/choice = input("Which book would you like to remove from the shelf?") in books|null as obj|null
+			var/obj/item/weapon/book/choice = input("Which book would you like to remove from the shelf?") as null|anything in books
 			if(choice)
 				choice.loc = src.loc
 			else
@@ -499,7 +494,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			dat += "<A href='?src=\ref[src];setauthor=1'>Filter by Author: [author]</A><BR>"
 			dat += "<A href='?src=\ref[src];search=1'>\[Start Search\]</A><BR>"
 		if(1)
-			if(config.sql_enabled)
+			if(BOOKS_USE_SQL && config.sql_enabled)
 				var/DBConnection/dbcon = new()
 				dbcon.Connect("dbi:mysql:[sqldb]:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
 				if(!dbcon.IsConnected())
@@ -563,7 +558,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			author = null
 		author = dd_replacetext(author, "'", "''")
 	if(href_list["search"])
-		if(config.sql_enabled)
+		if(BOOKS_USE_SQL && config.sql_enabled)
 			SQLquery = "SELECT author, title, category, id FROM library WHERE "
 			if(category == "Any")
 				SQLquery += "author LIKE '%[author]%' AND title LIKE '%[title]%'"
@@ -659,7 +654,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			dat += "<A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"
 		if(4)
 			dat += "<h3>External Archive</h3>"
-			if(config.sql_enabled)
+			if(BOOKS_USE_SQL && config.sql_enabled)
 				var/DBConnection/dbcon = new()
 				dbcon.Connect("dbi:mysql:[sqldb]:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
 				if(!dbcon.IsConnected())
@@ -762,23 +757,21 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 						B.icon_state = ticker.Bible_icon_state
 						B.item_state = ticker.Bible_item_state
 						B.name = ticker.Bible_name
+						B.deity_name = ticker.Bible_deity_name
 
-					bibledelay = 60
-					spawn(0)
-						while(bibledelay >= 1 && src)
-							sleep(10)
-							bibledelay -- // subtract one second to countdown
-
+					bibledelay = 1
+					spawn(60)
 						bibledelay = 0
 
 				else
 					for (var/mob/V in hearers(src))
-						V.show_message("<b>[src]</b>'s monitor flashes, \"[bibledelay] seconds remaining until the bible printer is ready for use.\"")
+						V.show_message("<b>[src]</b>'s monitor flashes, \"Bible printer currently unavailable, please wait a moment.\"")
 
 			if("7")
 				screenstate = 7
 	if(href_list["arccheckout"])
-		src.arcanecheckout = 1
+		if(src.emagged)
+			src.arcanecheckout = 1
 		src.screenstate = 0
 	if(href_list["increasetime"])
 		checkoutperiod += 1
@@ -821,7 +814,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			if(scanner.cache)
 				var/choice = input("Are you certain you wish to upload this title to the Archive?") in list("Confirm", "Abort")
 				if(choice == "Confirm")
-					if(config.sql_enabled)
+					if(BOOKS_USE_SQL && config.sql_enabled)
 						var/DBConnection/dbcon = new()
 						dbcon.Connect("dbi:mysql:[sqldb]:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
 						if(!dbcon.IsConnected())
@@ -868,13 +861,20 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 						log_game("[usr.name]/[usr.key] has uploaded the book titled [scanner.cache.name], [length(scanner.cache.dat)] signs")
 						alert("Upload Complete.")
 	if(href_list["targetid"])
-		if(config.sql_enabled)
+
+		if(BOOKS_USE_SQL && config.sql_enabled)
 			var/sqlid = href_list["targetid"]
 			var/DBConnection/dbcon = new()
 			dbcon.Connect("dbi:mysql:[sqldb]:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
 			if(!dbcon.IsConnected())
 				alert("Connection to Archive has been severed. Aborting.")
+			if(bibledelay)
+				for (var/mob/V in hearers(src))
+					V.show_message("<b>[src]</b>'s monitor flashes, \"Printer unavailable. Please allow a short time before attempting to print.\"")
 			else
+				bibledelay = 1
+				spawn(60)
+					bibledelay = 0
 				var/DBQuery/query = dbcon.NewQuery("SELECT * FROM library WHERE id=[sqlid]")
 				query.Execute()
 

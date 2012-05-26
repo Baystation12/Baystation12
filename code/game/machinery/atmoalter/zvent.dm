@@ -10,7 +10,6 @@
 	var/volume_rate = 800
 
 /obj/machinery/zvent/process()
-	..()
 
 	//all this object does, is make its turf share air with the ones above and below it, if they have a vent too.
 	if (istype(loc,/turf/simulated)) //if we're not on a valid turf, forget it
@@ -24,7 +23,7 @@
 					var/datum/gas_mixture/conn_air = zturf_conn.air //TODO: pop culture reference
 					var/datum/gas_mixture/my_air = myturf.air
 					if (istype(conn_air) && istype(my_air))
-						//if (!my_air.compare(conn_air))
-						//	myturf.reset_delay()
-						//	zturf_conn.reset_delay()
+//						if (!my_air.compare(conn_air))
+//							myturf.reset_delay()
+//							zturf_conn.reset_delay()
 						my_air.share(conn_air)

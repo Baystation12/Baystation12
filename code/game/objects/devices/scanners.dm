@@ -85,7 +85,7 @@ MASS SPECTROMETER
 				src.amount += W.amount
 				//W = null
 				del(W)
-			src.add_fingerprint(user)
+			add_fingerprint(user)
 			if (W)
 				W.add_fingerprint(user)
 		return
@@ -110,19 +110,16 @@ MASS SPECTROMETER
 		else
 			if (src.amount < 1)
 				user << text("\blue Fingerprints scanned on [M]. Need more cards to print.")
-//				src.printing = 0
-//			src.icon_state = text("forensic[]", src.printing)
-//			if (src.printing)
 			else
 				src.amount--
 				var/obj/item/weapon/f_card/F = new /obj/item/weapon/f_card( user.loc )
 				F.amount = 1
-				F.fingerprints += md5(M.dna.uni_identity)
+				F.add_fingerprint(M)
 				F.icon_state = "fingerprint1"
 				F.name = text("FPrintC- '[M.name]'")
 
 				user << "\blue Done printing."
-			user << text("\blue [M]'s Fingerprints: [md5(M.dna.uni_identity)]")
+			user << "\blue [M]'s Fingerprints: [md5(M.dna.uni_identity)]"
 		if ( !M.blood_DNA || !M.blood_DNA.len )
 			user << "\blue No blood found on [M]"
 			if(M.blood_DNA)
@@ -130,16 +127,15 @@ MASS SPECTROMETER
 		else
 			user << "\blue Blood found on [M]. Analysing..."
 			spawn(15)
-				for(var/i = 1, i <= M.blood_DNA.len, i++)
-					var/list/templist = M.blood_DNA[i]
-					user << "\blue Blood type: [templist[2]]\nDNA: [templist[1]]"
+				for(var/blood in M.blood_DNA)
+					user << "\blue Blood type: [M.blood_DNA[blood]]\nDNA: [blood]"
 		return
 
 	afterattack(atom/A as obj|turf|area, mob/user as mob)
 		if(!(locate(A) in oview(1,user)))
 			return
 		if(src.loc != user)
-			return 0
+			return
 		if(istype(A,/obj/machinery/computer/forensic_scanning)) //breaks shit.
 			return
 		if(istype(A,/obj/item/weapon/f_card))
@@ -147,17 +143,21 @@ MASS SPECTROMETER
 			return
 		if(!A.fingerprints)
 			A.fingerprints = list()
-		src.add_fingerprint(user)
+		add_fingerprint(user)
+
+		//Special case for blood splaters.
 		if (istype(A, /obj/effect/decal/cleanable/blood) || istype(A, /obj/effect/rune))
 			if(!isnull(A.blood_DNA))
-				for(var/i = 1, i <= A.blood_DNA.len, i++)
-					var/list/templist = A.blood_DNA[i]
-					user << "\blue Blood type: [templist[2]]\nDNA: [templist[1]]"
+				for(var/blood in A.blood_DNA)
+					user << "\blue Blood type: [A.blood_DNA[blood]]\nDNA: [blood]"
 			return
 		var/duplicate = 0
+		//General
 		if ((!A.fingerprints || !A.fingerprints.len) && !A.suit_fibers && !A.blood_DNA)
 			user << "\blue Unable to locate any fingerprints, materials, fibers, or blood on [A]!"
 			return 0
+
+		//BLOOD
 		else if (A.blood_DNA)
 			user << "\blue Blood found on [A]. Analysing..."
 			sleep(15)
@@ -166,11 +166,12 @@ MASS SPECTROMETER
 				var/i = add_data(A)
 				if(i)
 					user << "\blue Blood already in memory."
-			for(var/i = 1, i < (A.blood_DNA.len + 1), i++)
-				var/list/templist = A.blood_DNA[i]
-				user << "\blue Blood type: [templist[2]]\nDNA: [templist[1]]"
+			for(var/blood in A.blood_DNA)
+				user << "\blue Blood type: [A.blood_DNA[blood]]\nDNA: [blood]"
 		else
 			user << "\blue No Blood Located"
+
+		//PRINTS
 		if(!A.fingerprints || !A.fingerprints.len)
 			user << "\blue No Fingerprints Located."
 			if(A.fingerprints)
@@ -182,6 +183,8 @@ MASS SPECTROMETER
 				var/i = add_data(A)
 				if(i)
 					user << "\blue Fingerprints already in memory."
+
+		//FIBERS
 		if(!A.suit_fibers)
 			user << "\blue No Fibers/Materials Located."
 		else
@@ -192,78 +195,44 @@ MASS SPECTROMETER
 				var/i = add_data(A)
 				if(i)
 					user << "\blue Fibers/Materials already in memory."
-	//	else
-	//		if ((src.amount < 1 && src.printing))
-	//			user << "\blue Fingerprints found. Need more cards to print."
-	//			src.printing = 0
-	//	src.icon_state = text("forensic[]", src.printing)
-	//	if (src.printing)
-	//		src.amount--
-	//		var/obj/item/weapon/f_card/F = new /obj/item/weapon/f_card( user.loc )
-	//		F.amount = 1
-	//		F.fingerprints = A.fingerprints
-	//		F.icon_state = "fingerprint1"
-	//		user << "\blue Done printing."
-	//	for(var/i in L)
-	//		user << text("\blue \t [i]")
-	//		//Foreach goto(186)
 		return
 
 	proc/add_data(atom/A as mob|obj|turf|area)
-		var/merged = 0
-		for(var/i = 1, i < (stored.len + 1), i++)	//Lets see if the object is already in there!
-			var/list/temp = stored[i]
-			var/atom/checker = temp[1]
-			var/atom_checker_scan = (A.original_atom ? checker.original_atom[1] == A.original_atom[1] : 0)
-			if(checker.original_atom[1] == A || atom_checker_scan)	//It is!  Merge!
-				merged = 1
-				var/list/prints = temp[2]
-				if(!prints)
-					prints = list()
-				if(A.fingerprints && A.fingerprints.len)
-					for(var/j = 1, j <= A.fingerprints.len, j++)	//Fingerprints~~~
-						var/list/print_test1 = params2list(A.fingerprints[j])
-						var/test_print1 = print_test1[num2text(1)]
-						var/found = 0
-						for(var/k = 1, k <= prints.len, k++)	//Lets see if the print is already in there
-							var/list/print_test2 = params2list(prints[k])
-							var/test_print2 = print_test2[num2text(1)]
-							if(test_print2 == test_print1)	//It is!  Merge!
-								prints[k] = test_print2 + "&" + stringmerge(print_test2[num2text(2)],print_test1[num2text(2)])
-								found = 1
-								break	//We found it, we're done here.
-						if(!found)	//It isn't!  Add!
-							prints += A.fingerprints[j]
-				var/list/fibers = temp[3]
-				if(!fibers)
-					fibers = list()
-				if(A.suit_fibers && A.suit_fibers.len)
-					for(var/j = 1, j <= A.suit_fibers.len, j++)	//Fibers~~~
-						if(!fibers.Find(A.suit_fibers[j]))	//It isn't!  Add!
-							fibers += A.suit_fibers[j]
-				var/list/blood = temp[4]
-				if(!blood)
-					blood = list()
-				if(A.blood_DNA && A.blood_DNA.len)
-					for(var/j = 1, j <= A.blood_DNA.len, j++)	//Blood~~~
-						if(!blood.Find(A.blood_DNA[j]))	//It isn't!  Add!
-							blood += A.blood_DNA[j]
-				var/list/sum_list[4]	//Pack it back up!
-				sum_list[1] = checker
-				sum_list[2] = prints
-				sum_list[3] = fibers
-				sum_list[4] = blood
-				stored[i] = sum_list	//Store it!
-				break	//We found it, we're done here.
-		if(!merged)	//Uh, oh!  New data point!
-			var/list/sum_list[4]	//Pack it back up!
-			sum_list[1] = A.get_duplicate(src)
-			sum_list[2] = A.fingerprints
-			sum_list[3] = A.suit_fibers
-			sum_list[4] = A.blood_DNA
-			stored.len++
-			stored[stored.len] = sum_list
-		return merged
+		//I love hashtables.
+		var/list/data_entry = stored["\ref [A]"]
+		if(islist(data_entry)) //Yay, it was already stored!
+			//Merge the fingerprints.
+			var/list/data_prints = data_entry[1]
+			for(var/print in A.fingerprints)
+				var/merged_print = data_prints[print]
+				if(!merged_print)
+					data_prints[print] = A.fingerprints[print]
+				else
+					data_prints[print] = stringmerge(data_prints[print],A.fingerprints[print])
+
+			//Now the fibers
+			var/list/fibers = data_entry[2]
+			if(!fibers)
+				fibers = list()
+			if(A.suit_fibers && A.suit_fibers.len)
+				for(var/j = 1, j <= A.suit_fibers.len, j++)	//Fibers~~~
+					if(!fibers.Find(A.suit_fibers[j]))	//It isn't!  Add!
+						fibers += A.suit_fibers[j]
+			var/list/blood = data_entry[3]
+			if(!blood)
+				blood = list()
+			if(A.blood_DNA && A.blood_DNA.len)
+				for(var/main_blood in A.blood_DNA)
+					if(!blood[main_blood])
+						blood[main_blood] = A.blood_DNA[blood]
+			return 1
+		var/list/sum_list[4]	//Pack it back up!
+		sum_list[1] = A.fingerprints
+		sum_list[2] = A.suit_fibers
+		sum_list[3] = A.blood_DNA
+		sum_list[4] = "\The [A] in [get_area(A)]"
+		stored["\ref [A]"] = sum_list
+		return 0
 
 
 /obj/item/device/healthanalyzer
@@ -278,55 +247,66 @@ MASS SPECTROMETER
 	throw_range = 10
 	m_amt = 200
 	origin_tech = "magnets=1;biotech=1"
+	var/mode = 1;
 
-proc/analyze_health_less_info(mob/living/carbon/M as mob, mob/user as mob)
-	var/fake_oxy = max(rand(1,40), M.getOxyLoss(), (300 - (M.getToxLoss() + M.getFireLoss() + M.getBruteLoss())))
-	if((M.reagents && M.reagents.has_reagent("zombiepowder")) || (M.changeling && M.changeling.changeling_fakedeath))
-		user.show_message(text("\blue Analyzing Results for []:\n\t Overall Status: []", M, "dead"), 1)
-		user.show_message(text("\blue \t Damage Specifics: []-[]-[]-[]", fake_oxy < 50 ? "\red [fake_oxy]" : fake_oxy , M.getToxLoss() > 50 ? "\red [M.getToxLoss()]" : M.getToxLoss(), M.getFireLoss() > 50 ? "\red[M.getFireLoss()]" : M.getFireLoss(), M.getBruteLoss() > 50 ? "\red[M.getBruteLoss()]" : M.getBruteLoss()), 1)
-	else
-		user.show_message(text("\blue Analyzing Results for []:\n\t Overall Status: []", M, (M.stat > 1 ? "dead" : text("[]% healthy", M.health))), 1)
-		user.show_message(text("\blue \t Damage Specifics: []-[]-[]-[]", M.getOxyLoss() > 50 ? "\red [M.getOxyLoss()]" : M.getOxyLoss(), M.getToxLoss() > 50 ? "\red [M.getToxLoss()]" : M.getToxLoss(), M.getFireLoss() > 50 ? "\red[M.getFireLoss()]" : M.getFireLoss(), M.getBruteLoss() > 50 ? "\red[M.getBruteLoss()]" : M.getBruteLoss()), 1)
-	user.show_message("\blue Key: Suffocation/Toxin/Burns/Brute", 1)
-	user.show_message("\blue Body Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)", 1)
-	if((M.changeling && M.changeling.changeling_fakedeath) ||  (M.reagents && M.reagents.has_reagent("zombiepowder")))
-		user.show_message(text("\blue [] | [] | [] | []", fake_oxy > 50 ? "\red Severe oxygen deprivation detected\blue" : "Subject bloodstream oxygen level normal", M.getToxLoss() > 50 ? "\red Dangerous amount of toxins detected\blue" : "Subject bloodstream toxin level minimal", M.getFireLoss() > 50 ? "\red Severe burn damage detected\blue" : "Subject burn injury status O.K", M.getBruteLoss() > 50 ? "\red Severe anatomical damage detected\blue" : "Subject brute-force injury status O.K"), 1)
-	else
-		user.show_message(text("\blue [] | [] | [] | []", M.getOxyLoss() > 50 ? "\red Severe oxygen deprivation detected\blue" : "Subject bloodstream oxygen level normal", M.getToxLoss() > 50 ? "\red Dangerous amount of toxins detected\blue" : "Subject bloodstream toxin level minimal", M.getFireLoss() > 50 ? "\red Severe burn damage detected\blue" : "Subject burn injury status O.K", M.getBruteLoss() > 50 ? "\red Severe anatomical damage detected\blue" : "Subject brute-force injury status O.K"), 1)
-	if (M.getCloneLoss())
-		user.show_message(text("\red Subject appears to have been imperfectly cloned."), 1)
-	for(var/datum/disease/D in M.viruses)
-		if(!D.hidden[SCANNER])
-			user.show_message(text("\red <b>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]"))
-	if (M.reagents && M.reagents.get_reagent_amount("inaprovaline"))
-		user.show_message(text("\blue Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals."), 1)
-	if (M.getBrainLoss() >= 100 || istype(M, /mob/living/carbon/human) && M:brain_op_stage == 4.0)
-		user.show_message(text("\red Subject is brain dead."), 1)
-	else if (M.getBrainLoss() >= 60)
-		user.show_message(text("\red Severe brain damage detected. Subject likely to have mental retardation."), 1)
-	else if (M.getBrainLoss() >= 10)
-		user.show_message(text("\red Significant brain damage detected. Subject may have had a concussion."), 1)
-	if (M.virus2 || M.reagents.reagent_list.len > 0)
-		user.show_message(text("\red Unknown substance detected in blood."), 1)
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		for(var/name in H.organs)
-			var/datum/organ/external/e = H.organs[name]
-			if(e.broken)
-				user.show_message(text("\red Bone fractures detected. Advanced scanner required for location."), 1)
-				break
-	if(ishuman(M))
-		if(M:vessel)
-			var/blood_volume = round(M:vessel.get_reagent_amount("blood"))
-			var/blood_percent =  blood_volume / 560
-			blood_percent *= 100
-			if(blood_volume <= 448)
-				user.show_message("\red <b>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl")
-			else if(blood_volume <= 336)
-				user.show_message("\red <b>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl")
+	proc
+		analyze_health_less_info(mob/living/carbon/M as mob, mob/user as mob)
+			var/fake_oxy = max(rand(1,40), M.getOxyLoss(), (300 - (M.getToxLoss() + M.getFireLoss() + M.getBruteLoss())))
+			if((M.reagents && M.reagents.has_reagent("zombiepowder")) || (M.changeling && M.changeling.changeling_fakedeath))
+				user.show_message(text("\blue Analyzing Results for []:\n\t Overall Status: []", M, "dead"), 1)
+				user.show_message(text("\blue \t Damage Specifics: []-[]-[]-[]", fake_oxy < 50 ? "\red [fake_oxy]" : fake_oxy , M.getToxLoss() > 50 ? "\red [M.getToxLoss()]" : M.getToxLoss(), M.getFireLoss() > 50 ? "\red[M.getFireLoss()]" : M.getFireLoss(), M.getBruteLoss() > 50 ? "\red[M.getBruteLoss()]" : M.getBruteLoss()), 1)
 			else
-				user.show_message("\blue Blood Level Normal: [blood_percent]% [blood_volume]cl")
-	return
+				user.show_message(text("\blue Analyzing Results for []:\n\t Overall Status: []", M, (M.stat > 1 ? "dead" : text("[]% healthy", M.health - M.halloss))), 1)
+				user.show_message(text("\blue \t Damage Specifics: []-[]-[]-[]", M.getOxyLoss() > 50 ? "\red [M.getOxyLoss()]" : M.getOxyLoss(), M.getToxLoss() > 50 ? "\red [M.getToxLoss()]" : M.getToxLoss(), M.getFireLoss() > 50 ? "\red[M.getFireLoss()]" : M.getFireLoss(), M.getBruteLoss() > 50 ? "\red[M.getBruteLoss()]" : M.getBruteLoss()), 1)
+			user.show_message("\blue Key: Suffocation/Toxin/Burns/Brute", 1)
+			user.show_message("\blue Body Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)", 1)
+			if(mode == 1 && istype(M, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				var/list/damaged = H.get_damaged_organs(1,1)
+				user.show_message("\blue Localized Damage, Brute/Burn:",1)
+				if(length(damaged)>0)
+					for(var/datum/organ/external/org in damaged)
+						user.show_message(text("\blue \t []: []\blue-[]",capitalize(org.getDisplayName()),(org.brute_dam > 0)?"\red [org.brute_dam]":0,(org.burn_dam > 0)?"\red [org.burn_dam]":0),1)
+				else
+					user.show_message("\blue \t Limbs are OK.",1)
+			if((M.changeling && M.changeling.changeling_fakedeath) ||  (M.reagents && M.reagents.has_reagent("zombiepowder")))
+				user.show_message(text("\blue [] | [] | [] | []", fake_oxy > 50 ? "\red Severe oxygen deprivation detected\blue" : "Subject bloodstream oxygen level normal", M.getToxLoss() > 50 ? "\red Dangerous amount of toxins detected\blue" : "Subject bloodstream toxin level minimal", M.getFireLoss() > 50 ? "\red Severe burn damage detected\blue" : "Subject burn injury status O.K", M.getBruteLoss() > 50 ? "\red Severe anatomical damage detected\blue" : "Subject brute-force injury status O.K"), 1)
+			else
+				user.show_message(text("\blue [] | [] | [] | []", M.getOxyLoss() > 50 ? "\red Severe oxygen deprivation detected\blue" : "Subject bloodstream oxygen level normal", M.getToxLoss() > 50 ? "\red Dangerous amount of toxins detected\blue" : "Subject bloodstream toxin level minimal", M.getFireLoss() > 50 ? "\red Severe burn damage detected\blue" : "Subject burn injury status O.K", M.getBruteLoss() > 50 ? "\red Severe anatomical damage detected\blue" : "Subject brute-force injury status O.K"), 1)
+			if (M.getCloneLoss())
+				user.show_message(text("\red Subject appears to have been imperfectly cloned."), 1)
+			for(var/datum/disease/D in M.viruses)
+				if(!D.hidden[SCANNER])
+					user.show_message(text("\red <b>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]"))
+			if (M.reagents && M.reagents.get_reagent_amount("inaprovaline"))
+				user.show_message(text("\blue Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals."), 1)
+			if (M.getBrainLoss() >= 100 || istype(M, /mob/living/carbon/human) && M:brain_op_stage == 4.0)
+				user.show_message(text("\red Subject is brain dead."), 1)
+			else if (M.getBrainLoss() >= 60)
+				user.show_message(text("\red Severe brain damage detected. Subject likely to have mental retardation."), 1)
+			else if (M.getBrainLoss() >= 10)
+				user.show_message(text("\red Significant brain damage detected. Subject may have had a concussion."), 1)
+			if (M.virus2 || M.reagents.reagent_list.len > 0)
+				user.show_message(text("\red Unknown substance detected in blood."), 1)
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				for(var/name in H.organs)
+					var/datum/organ/external/e = H.organs[name]
+					if(e.broken)
+						user.show_message(text("\red Bone fractures detected. Advanced scanner required for location."), 1)
+						break
+			if(ishuman(M))
+				if(M:vessel)
+					var/blood_volume = round(M:vessel.get_reagent_amount("blood"))
+					var/blood_percent =  blood_volume / 560
+					blood_percent *= 100
+					if(blood_volume <= 448)
+						user.show_message("\red <b>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl")
+					else if(blood_volume <= 336)
+						user.show_message("\red <b>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl")
+					else
+						user.show_message("\blue Blood Level Normal: [blood_percent]% [blood_volume]cl")
+			return
 
 /obj/item/device/healthanalyzer/attack(mob/M as mob, mob/user as mob)
 	if ((user.mutations & CLUMSY || user.getBrainLoss() >= 60) && prob(50))
@@ -347,6 +327,17 @@ proc/analyze_health_less_info(mob/living/carbon/M as mob, mob/user as mob)
 	analyze_health_less_info(M, user)
 	src.add_fingerprint(user)
 	return
+
+/obj/item/device/healthanalyzer/verb/toggle_mode()
+	set name = "Switch Verbosity"
+	set category = "Object"
+
+	mode = !mode
+	switch (mode)
+		if(1)
+			usr << "The scanner now shows specific limb damage."
+		if(0)
+			usr << "The scanner no longer shows limb damage."
 
 
 /obj/item/device/analyzer
@@ -378,7 +369,7 @@ proc/analyze_health_less_info(mob/living/carbon/M as mob, mob/user as mob)
 	var/datum/gas_mixture/environment = location.return_air()
 
 	var/pressure = environment.return_pressure()
-	var/total_moles = environment.total_moles()
+	var/total_moles = environment.total_moles
 
 	user.show_message("\blue <B>Results:</B>", 1)
 	if(abs(pressure - ONE_ATMOSPHERE) < 10)

@@ -6,11 +6,15 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
+	selection_color = "#ffdddd"
+	idtype = /obj/item/weapon/card/id/silver
 
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack/security (H), H.slot_back)
+		if(H.backbag == 2) H.equip_if_possible(new /obj/item/weapon/storage/backpack/security (H), H.slot_back)
+		if(H.backbag == 3) H.equip_if_possible(new /obj/item/weapon/storage/backpack/satchel(H), H.slot_back)
+		if(H.backbag == 4) H.equip_if_possible(new /obj/item/weapon/storage/backpack/satchel_sec(H), H.slot_back)
 		H.equip_if_possible(new /obj/item/device/radio/headset/heads/hos(H), H.slot_ears)
 		H.equip_if_possible(new /obj/item/clothing/under/rank/head_of_security(H), H.slot_w_uniform)
 		H.equip_if_possible(new /obj/item/clothing/suit/storage/armourrigvest(H), H.slot_wear_suit)
@@ -23,7 +27,9 @@
 		H.equip_if_possible(new /obj/item/clothing/glasses/sunglasses/sechud(H), H.slot_glasses)
 		H.equip_if_possible(new /obj/item/weapon/handcuffs(H), H.slot_in_backpack)
 		H.equip_if_possible(new /obj/item/weapon/gun/energy/gun(H), H.slot_s_store)
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
+		var/datum/organ/external/O = H.organs[pick(H.organs)]
+		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(O)
+		O.implant += L
 		L.imp_in = H
 		L.implanted = 1
 		return 1
@@ -38,22 +44,27 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of security"
+	selection_color = "#ffeeee"
 
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_if_possible(new /obj/item/device/radio/headset/headset_sec(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack/security(H), H.slot_back)
+		if(H.backbag == 2) H.equip_if_possible(new /obj/item/weapon/storage/backpack/security(H), H.slot_back)
+		if(H.backbag == 3) H.equip_if_possible(new /obj/item/weapon/storage/backpack/satchel(H), H.slot_back)
+		if(H.backbag == 4) H.equip_if_possible(new /obj/item/weapon/storage/backpack/satchel_sec(H), H.slot_back)
 		H.equip_if_possible(new /obj/item/clothing/under/rank/warden(H), H.slot_w_uniform)
 		H.equip_if_possible(new /obj/item/clothing/shoes/jackboots(H), H.slot_shoes)
 		H.equip_if_possible(new /obj/item/device/pda/security(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/suit/armor/vest(H), H.slot_wear_suit)
+		H.equip_if_possible(new /obj/item/clothing/suit/armor/vest/warden(H), H.slot_wear_suit)
 		H.equip_if_possible(new /obj/item/clothing/head/helmet/warden(H), H.slot_head)
 		H.equip_if_possible(new /obj/item/clothing/gloves/red(H), H.slot_gloves)
 		H.equip_if_possible(new /obj/item/clothing/glasses/sunglasses/sechud(H), H.slot_glasses)
 		H.equip_if_possible(new /obj/item/weapon/handcuffs(H), H.slot_in_backpack)
 		H.equip_if_possible(new /obj/item/device/flash(H), H.slot_l_store)
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
+		var/datum/organ/external/O = H.organs[pick(H.organs)]
+		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(O)
+		O.implant += L
 		L.imp_in = H
 		L.implanted = 1
 		return 1
@@ -68,13 +79,16 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of security"
+	selection_color = "#ffeeee"
 	alt_titles = list("Forensic Technician")
 
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_if_possible(new /obj/item/device/radio/headset/headset_sec(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack(H), H.slot_back)
+		if(H.backbag == 2) H.equip_if_possible(new /obj/item/weapon/storage/backpack(H), H.slot_back)
+		if(H.backbag == 3) H.equip_if_possible(new /obj/item/weapon/storage/backpack/satchel(H), H.slot_back)
+		if(H.backbag == 4) H.equip_if_possible(new /obj/item/weapon/storage/backpack/satchel_norm(H), H.slot_back)
 		H.equip_if_possible(new /obj/item/clothing/under/det(H), H.slot_w_uniform)
 		H.equip_if_possible(new /obj/item/clothing/suit/storage/det_suit(H), H.slot_wear_suit)
 		H.equip_if_possible(new /obj/item/clothing/shoes/brown(H), H.slot_shoes)
@@ -89,10 +103,10 @@
 		H.equip_if_possible(new /obj/item/weapon/fcardholder(H), H.slot_in_backpack)
 		H.equip_if_possible(new /obj/item/device/detective_scanner(H), H.slot_in_backpack)
 		H.equip_if_possible(new /obj/item/weapon/reagent_containers/food/drinks/dflask(H.back), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/weapon/zippo(H), H.slot_l_store)
-//		H.equip_if_possible(new /obj/item/weapon/reagent_containers/food/snacks/candy_corn(H), H.slot_h_store)
-//		No... just no. --SkyMarshal
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
+		H.equip_if_possible(new /obj/item/weapon/lighter/zippo(H), H.slot_l_store)
+		var/datum/organ/external/O = H.organs[pick(H.organs)]
+		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(O)
+		O.implant += L
 		L.imp_in = H
 		L.implanted = 1
 		return 1
@@ -107,12 +121,15 @@
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the head of security"
+	selection_color = "#ffeeee"
 
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_if_possible(new /obj/item/device/radio/headset/headset_sec(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack/security(H), H.slot_back)
+		if(H.backbag == 2) H.equip_if_possible(new /obj/item/weapon/storage/backpack/security(H), H.slot_back)
+		if(H.backbag == 3) H.equip_if_possible(new /obj/item/weapon/storage/backpack/satchel(H), H.slot_back)
+		if(H.backbag == 4) H.equip_if_possible(new /obj/item/weapon/storage/backpack/satchel_sec(H), H.slot_back)
 		H.equip_if_possible(new /obj/item/clothing/under/rank/security(H), H.slot_w_uniform)
 		H.equip_if_possible(new /obj/item/clothing/shoes/jackboots(H), H.slot_shoes)
 		H.equip_if_possible(new /obj/item/device/pda/security(H), H.slot_belt)
@@ -122,7 +139,9 @@
 		H.equip_if_possible(new /obj/item/clothing/gloves/red(H), H.slot_gloves)
 		H.equip_if_possible(new /obj/item/weapon/handcuffs(H), H.slot_s_store)
 		H.equip_if_possible(new /obj/item/device/flash(H), H.slot_l_store)
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
+		var/datum/organ/external/O = H.organs[pick(H.organs)]
+		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(O)
+		O.implant += L
 		L.imp_in = H
 		L.implanted = 1
 		return 1

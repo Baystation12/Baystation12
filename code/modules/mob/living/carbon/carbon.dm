@@ -35,7 +35,7 @@
 				if(prob(src.getBruteLoss() - 50))
 					src.gib()
 
-/mob/living/carbon/gib(give_medal)
+/mob/living/carbon/gib()
 	for(var/mob/M in src)
 		if(M in src.stomach_contents)
 			src.stomach_contents.Remove(M)
@@ -43,9 +43,22 @@
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
 				N.show_message(text("\red <B>[M] bursts out of [src]!</B>"), 2)
-	. = ..(give_medal)
+	. = ..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
+	if (M.hand)
+		if(ishuman(M) || ismonkey(M))
+			var/datum/organ/external/temp = M:organs["l_hand"]
+			if(temp.destroyed)
+				M << "\red Yo- wait a minute."
+				return
+	else
+		if(ishuman(M) || ismonkey(M))
+			var/datum/organ/external/temp = M:organs["r_hand"]
+			if(temp.destroyed)
+				M << "\red Yo- wait a minute."
+				return
+
 	if(!istype(M, /mob/living/carbon)) return
 
 	for(var/datum/disease/D in viruses)
@@ -84,6 +97,18 @@
 
 /mob/living/carbon/attack_paw(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
+	if (M.hand)
+		if(ishuman(M) || ismonkey(M))
+			var/datum/organ/external/temp = M:organs["l_hand"]
+			if(temp.destroyed)
+				M << "\red Yo- wait a minute."
+				return
+	else
+		if(ishuman(M) || ismonkey(M))
+			var/datum/organ/external/temp = M:organs["r_hand"]
+			if(temp.destroyed)
+				M << "\red Yo- wait a minute."
+				return
 
 
 	for(var/datum/disease/D in viruses)
@@ -143,38 +168,100 @@
 /mob/living/carbon/proc/swap_hand()
 	var/obj/item/item_in_hand = src.get_active_hand()
 	if(item_in_hand) //this segment checks if the item in your hand is twohanded.
-		if(item_in_hand.twohanded == 1)
-			if(item_in_hand.wielded == 1)
-				usr << text("Your other hand is too busy holding the []",item_in_hand.name)
+		if(istype(item_in_hand,/obj/item/weapon/twohanded))
+			if(item_in_hand:wielded == 1)
+				usr << "<span class='warning'>Your other hand is too busy holding the [item_in_hand.name]</span>"
 				return
 	src.hand = !( src.hand )
-	if (!( src.hand ))
+	if(hud_used.l_hand_hud_object && hud_used.r_hand_hud_object)
+		if(hand)	//This being 1 means the left hand is in use
+			hud_used.l_hand_hud_object.icon_state = "hand_active"
+			hud_used.r_hand_hud_object.icon_state = "hand_inactive"
+		else
+			hud_used.l_hand_hud_object.icon_state = "hand_inactive"
+			hud_used.r_hand_hud_object.icon_state = "hand_active"
+	/*if (!( src.hand ))
 		src.hands.dir = NORTH
 	else
-		src.hands.dir = SOUTH
+		src.hands.dir = SOUTH*/
 	return
+
+/mob/living/carbon/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
+
+	if(istext(selhand))
+		selhand = lowertext(selhand)
+
+	if(selhand == "right" || selhand == "r")
+		selhand = 0
+	if(selhand == "left" || selhand == "l")
+		selhand = 1
+
+	if(selhand != src.hand)
+		swap_hand()
 
 /mob/living/carbon/proc/help_shake_act(mob/living/carbon/M)
 	if (src.health > 0)
-		var/t_him = "it"
-		if (src.gender == MALE)
-			t_him = "him"
-		else if (src.gender == FEMALE)
-			t_him = "her"
-		if (istype(src,/mob/living/carbon/human) && src:w_uniform)
-			var/mob/living/carbon/human/H = src
-			H.w_uniform.add_fingerprint(M)
-		if(!src.sleeping_willingly)
-			src.sleeping = 0
-		src.resting = 0
-		AdjustParalysis(-3)
-		AdjustStunned(-3)
-		AdjustWeakened(-3)
-		playsound(src.loc, 'thudswoosh.ogg', 50, 1, -1)
-		M.visible_message( \
-			"\blue [M] shakes [src] trying to wake [t_him] up!", \
-			"\blue You shake [src] trying to wake [t_him] up!", \
-			)
+		if(src == M && istype(src, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			var/list/damaged = H.get_damaged_organs(1,1)
+			src.visible_message( \
+				text("\blue [src] examines [].",src.gender==MALE?"himself":"herself"), \
+				"\blue You check yourself for injuries." \
+				)
+
+			for(var/datum/organ/external/org in damaged)
+				var/status = ""
+				var/brutedamage = org.brute_dam
+				var/burndamage = org.burn_dam
+				if(halloss > 0)
+					if(prob(30))
+						brutedamage += halloss
+					if(prob(30))
+						burndamage += halloss
+
+				if(brutedamage > 0)
+					status = "bruised"
+				if(brutedamage > 20)
+					status = "bleeding"
+				if(brutedamage > 40)
+					status = "mangled"
+				if(brutedamage > 0 && burndamage > 0)
+					status += " and "
+				if(burndamage > 40)
+					status += "peeling away"
+
+				else if(burndamage > 10)
+					status += "blistered"
+				else if(burndamage > 0)
+					status += "numb"
+				if(org.destroyed)
+					status = "MISSING!"
+
+				if(status == "")
+					status = "OK"
+				src.show_message(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.getDisplayName(),status),1)
+			src.show_message(text("\blue You finish checking yourself."),1)
+		else
+			var/t_him = "it"
+			if (src.gender == MALE)
+				t_him = "him"
+			else if (src.gender == FEMALE)
+				t_him = "her"
+			if (istype(src,/mob/living/carbon/human) && src:w_uniform)
+				var/mob/living/carbon/human/H = src
+				H.w_uniform.add_fingerprint(M)
+			if(!src.sleeping_willingly)
+				src.sleeping = max(0,src.sleeping-5)
+			if(src.sleeping == 0)
+				src.resting = 0
+			AdjustParalysis(-3)
+			AdjustStunned(-3)
+			AdjustWeakened(-3)
+			playsound(src.loc, 'thudswoosh.ogg', 50, 1, -1)
+			M.visible_message( \
+				"\blue [M] shakes [src] trying to wake [t_him] up!", \
+				"\blue You shake [src] trying to wake [t_him] up!", \
+				)
 
 /mob/living/carbon/proc/eyecheck()
 	return 0
@@ -195,6 +282,12 @@
 	if(src.sleeping_willingly)
 		src.sleeping = 0
 		src.sleeping_willingly = 0
+/*	// Update the hands-indicator on re-join.
+	if (!( src.hand ))
+		src.hands.dir = NORTH
+	else
+		src.hands.dir = SOUTH
+*/
 
 /mob/living/carbon/human/proc/GetOrgans()
 	var/list/L = list(  )
@@ -217,3 +310,15 @@
 		bruteloss += O.get_damage_brute()
 		fireloss += O.get_damage_fire()
 	return
+
+/mob/living/carbon/proc/check_dna()
+	dna.check_integrity(src)
+	return
+
+/mob/living/carbon/proc/get_organ(var/zone)
+	if(!zone)	zone = "chest"
+	for(var/name in organs)
+		var/datum/organ/external/O = organs[name]
+		if(O.name == zone)
+			return O
+	return null

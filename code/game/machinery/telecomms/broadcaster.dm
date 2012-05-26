@@ -281,12 +281,24 @@ var
 	var/list/heard_garbled	= list() // garbled message (ie "f*c* **u, **i*er!")
 	var/list/heard_gibberish= list() // completely screwed over message (ie "F%! (O*# *#!<>&**%!")
 
+	// Make sure everyone only hears the message once
+	var/list/already_heard  = list()
+
 	for (var/mob/R in receive)
 
 	  /* --- Loop through the receivers and categorize them --- */
 
 		if (R.client && R.client.STFU_radio) //Adminning with 80 people on can be fun when you're trying to talk and all you can hear is radios.
 			continue
+
+		if(istype(M, /mob/new_player)) // we don't want new players to hear messages. rare but generates runtimes.
+			continue
+
+		// We'll skip those guys who have already heard the message
+		if (R in already_heard)
+			continue
+
+		already_heard += R
 
 
 		// --- Check for compression ---
@@ -316,8 +328,13 @@ var
 			// - Just display a garbled message -
 			else
 				heard_garbled += R
-		for(var/obj/item/weapon/implant/imp in R)
-			imp.hear(message,M)
+		if(hasorgans(R))
+			for(var/datum/organ/external/O in R:organs)
+				for(var/obj/item/weapon/implant/imp in O.implant)
+					imp.hear(message,M)
+		else
+			for(var/obj/item/weapon/implant/imp in R)
+				imp.hear(message,M)
 
 
   /* ###### Begin formatting and sending the message ###### */
@@ -595,8 +612,13 @@ var
 			// - Just display a garbled message -
 
 			heard_garbled += R
-		for(var/obj/item/weapon/implant/imp in R)
-			imp.hear(text,M)
+		if(hasorgans(R))
+			for(var/datum/organ/external/O in R:organs)
+				for(var/obj/item/weapon/implant/imp in O.implant)
+					imp.hear(text,M)
+		else
+			for(var/obj/item/weapon/implant/imp in R)
+				imp.hear(text,M)
 
 
   /* ###### Begin formatting and sending the message ###### */

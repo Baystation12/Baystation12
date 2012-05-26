@@ -9,10 +9,35 @@ emp_act
 */
 
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
+
+	if(wear_suit && istype(wear_suit, /obj/item/clothing/suit/armor/laserproof))
+		if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
+			var/reflectchance = 40 - round(P.damage/3)
+			if(!(def_zone in list("chest", "groin")))
+				reflectchance /= 2
+			if(prob(reflectchance))
+				visible_message("\red <B>The [P.name] gets reflected by [src]'s [wear_suit.name]!</B>")
+
+				// Find a turf near or on the original location to bounce to
+				if(P.starting)
+					var/new_x = P.starting.x + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
+					var/new_y = P.starting.y + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
+					var/turf/curloc = get_turf(src)
+
+					// redirect the projectile
+					P.original = locate(new_x, new_y, P.z)
+					P.starting = curloc
+					P.current = curloc
+					P.firer = src
+					P.yo = new_y - curloc.y
+					P.xo = new_x - curloc.x
+
+				return -1 // complete projectile permutation
+
 	if(check_shields(P.damage, "the [P.name]"))
 		P.on_hit(src, 2)
 		return 2
-	return (..())
+	return (..(P , def_zone))
 
 
 /mob/living/carbon/human/getarmor(var/def_zone, var/type)
@@ -83,6 +108,10 @@ emp_act
 	for(var/obj/O in src)
 		if(!O)	continue
 		O.emp_act(severity)
+	for(var/named in organs)
+		var/datum/organ/external/O = organs[named]
+		if(O.destroyed)	continue
+		O.emp_act(severity)
 	..()
 
 
@@ -90,7 +119,11 @@ emp_act
 	if(!I || !user)	return 0
 
 	var/datum/organ/external/affecting = get_organ(ran_zone(user.zone_sel.selecting))
+
 	var/hit_area = affecting.display_name
+
+	if((user != src) && check_shields(I.force, "the [I.name]"))
+		return 0
 
 	if(!affecting.destroyed)
 		visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [user]!</B>")
@@ -98,8 +131,6 @@ emp_act
 		user << "What [affecting]?"
 		return
 
-	if((user != src) && check_shields(I.force, "the [I.name]"))
-		return 0
 	var/armor = run_armor_check(affecting, "melee", "Your armor has protected you from a hit to the [hit_area].", "Your armor has softened hit to your [hit_area].")
 	if(armor >= 2)	return 0
 	if(!I.force)	return 0
@@ -111,8 +142,8 @@ emp_act
 	apply_damage(power, I.damtype, affecting, armor, is_cut(I), I.name)
 
 	var/bloody = 0
-	if((I.damtype == BRUTE) && prob(25 + is_sharp(I) * 50 + (I.force * 2)))
-		I.add_blood(src)
+	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + is_sharp(I) * 50 + (I.force * 2)))
+		I.add_blood(src)	//Make the weapon bloody, not the person.
 		bloody = 1
 		var/turf/location = loc
 		if(istype(location, /turf/simulated))

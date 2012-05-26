@@ -1,8 +1,9 @@
 /obj/machinery/particle_accelerator/control_box
-	name = "Particle Accelerator Control Box"
-	desc = "Part of a Particle Accelerator."
+	name = "Particle Accelerator Control Computer"
+	desc = "This controls the density of the particles."
 	icon = 'particle_accelerator.dmi'
 	icon_state = "control_box"
+	reference = "control_box"
 	anchored = 0
 	density = 1
 	use_power = 0
@@ -13,7 +14,7 @@
 	var
 		list/obj/structure/particle_accelerator/connected_parts
 		assembled = 0
-		strength = 0
+		parts = null
 
 
 	New()
@@ -34,12 +35,43 @@
 			connected_parts = list()
 			return
 		if(!part_scan())
-			assembled = 0
+			use_power = 1
+			active = 0
+			connected_parts = list()
+
 		return
 
+	update_icon()
+		if(active)
+			icon_state = "[reference]p1"
+		else
+			if(use_power)
+				icon_state = "[reference]p"
+			else
+				icon_state = "[reference]c"
+				switch(construction_state)
+					if(0)
+						icon_state = "[reference]"
+					if(1)
+						icon_state = "[reference]"
+					if(2)
+						icon_state = "[reference]w"
+					if(3)
+						icon_state = "[reference]c"
+		return
+
+	update_icon()
+		..()
+		return
 
 	Topic(href, href_list)
 		..()
+		//Ignore input if we are broken, !silicon guy cant touch us, or nonai controlling from super far away
+		if(stat & (BROKEN|NOPOWER) || (get_dist(src, usr) > 1 && !istype(usr, /mob/living/silicon)) || (get_dist(src, usr) > 8 && !istype(usr, /mob/living/silicon/ai)))
+			usr.machine = null
+			usr << browse(null, "window=pacontrol")
+			return
+
 		if( href_list["close"] )
 			usr << browse(null, "window=pacontrol")
 			usr.machine = null
@@ -52,17 +84,31 @@
 			src.part_scan()
 		if(href_list["strengthup"])
 			src.strength++
+			for(var/obj/structure/particle_accelerator/part in connected_parts)
+				part.strength++
+				part.update_icon()
 			if(src.strength > 2)
 				src.strength = 2
+				for(var/obj/structure/particle_accelerator/part in connected_parts)
+					part.strength = 2
+					part.update_icon()
 			message_admins("[usr] increased particle accelerator power to [strength].")
 			log_admin("[usr] increased particle accelerator power to [strength].")
 		if(href_list["strengthdown"])
 			src.strength--
+			for(var/obj/structure/particle_accelerator/part in connected_parts)
+				part.strength--
+				part.update_icon()
 			if(src.strength < 0)
 				src.strength = 0
+				for(var/obj/structure/particle_accelerator/part in connected_parts)
+					part.strength = 0
+					part.update_icon()
 			message_admins("[usr] decreased particle accelerator power to [strength].")
 			log_admin("[usr] decreased particle accelerator power to [strength].")
 		src.updateDialog()
+		src.update_icon()
+		return
 
 
 	power_change()
@@ -70,9 +116,10 @@
 		if(stat & NOPOWER)
 			active = 0
 			use_power = 0
-		else if(!stat)
+		else if(!stat && construction_state == 3)
 			use_power = 1
 		return
+
 
 	process()
 		if(src.active)
@@ -139,14 +186,22 @@
 			src.active = !src.active
 			if(src.active)
 				src.use_power = 2
+				for(var/obj/structure/particle_accelerator/part in connected_parts)
+					part.strength = src.strength
+					part.powered = 1
+					part.update_icon()
 			else
 				src.use_power = 1
+				for(var/obj/structure/particle_accelerator/part in connected_parts)
+					part.strength = null
+					part.powered = 0
+					part.update_icon()
 			return 1
 
 
 		interact(mob/user)
-			if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
-				if (!istype(user, /mob/living/silicon))
+			if((get_dist(src, user) > 1) || (stat & (BROKEN|NOPOWER)))
+				if(!istype(user, /mob/living/silicon))
 					user.machine = null
 					user << browse(null, "window=pacontrol")
 					return
@@ -172,3 +227,4 @@
 
 			user << browse(dat, "window=pacontrol;size=420x500")
 			onclose(user, "pacontrol")
+			return

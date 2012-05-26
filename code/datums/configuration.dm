@@ -2,10 +2,7 @@
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
 
-	var/medal_hub = null				// medal hub name
-	var/medal_password = null			// medal hub password
-
-	var/log_ooc = 0						// log OOC channek
+	var/log_ooc = 0						// log OOC channel
 	var/log_access = 0					// log login/logout
 	var/log_say = 0						// log client say
 	var/log_admin = 0					// log admin actions
@@ -27,12 +24,16 @@
 	var/vote_period = 60				// length of voting period (seconds, default 1 minute)
 	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
-	var/enable_authentication = 0		// goon authentication
+//	var/enable_authentication = 0		// goon authentication
 	var/del_new_on_log = 1				// del's new players if they log before they spawn in
 	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
-	var/traitor_scaling = 0 //if amount of traitors scales based on amount of players
+	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
 	var/protect_roles_from_antagonist = 0// If security and such can be tratior/cult/other
 	var/Tensioner_Active = 0			// If the tensioner is running.
+	var/allow_Metadata = 0				// Metadata is supported.
+	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
+	var/Ticklag = 0.9
+	var/Tickcomp = 0
 
 	var/list/mode_names = list()
 	var/list/modes = list()				// allowed modes
@@ -46,9 +47,12 @@
 	var/usewhitelist = 0
 	var/kick_inactive = 0				//force disconnect for inactive players
 	var/load_jobs_from_txt = 0
+	var/usealienwhitelist = 0
 
 	var/server
 	var/banappeals
+	var/wikiurl
+	var/forumurl
 
 	//Alert level description
 	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
@@ -70,6 +74,8 @@
 	var/revival_cloning = 1
 	var/revival_brain_life = -1
 	var/require_heads_alive = 0 //For Rev.
+
+	var/appeal_address = ""
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -195,8 +201,8 @@
 				if ("allow_ai")
 					config.allow_ai = 1
 
-				if ("authentication")
-					config.enable_authentication = 1
+//				if ("authentication")
+//					config.enable_authentication = 1
 
 				if ("norespawn")
 					config.respawn = 0
@@ -207,12 +213,6 @@
 				if ("serversuffix")
 					config.server_suffix = 1
 
-				if ("medalhub")
-					config.medal_hub = value
-
-				if ("medalpass")
-					config.medal_password = value
-
 				if ("hostedby")
 					config.hostedby = value
 
@@ -222,14 +222,26 @@
 				if ("banappeals")
 					config.banappeals = value
 
+				if ("wikiurl")
+					config.wikiurl = value
+
+				if ("forumurl")
+					config.forumurl = value
+
 				if ("guest_jobban")
 					config.guest_jobban = 1
 
 				if ("usewhitelist")
 					config.usewhitelist = 1
 
+				if ("usealienwhitelist")
+					config.usealienwhitelist = 1
+
 				if ("feature_object_spell_system")
 					config.feature_object_spell_system = 1
+
+				if ("allow_metadata")
+					config.allow_Metadata = 1
 
 				if ("traitor_scaling")
 					config.traitor_scaling = 1
@@ -285,11 +297,22 @@
 				if("forbid_singulo_possession")
 					forbid_singulo_possession = 1
 
+				if("popup_admin_pm")
+					config.popup_admin_pm = 1
 				if("useircbot")
 					useircbot = 1
 
+				if("ticklag")
+					Ticklag = text2num(value)
+
+				if("tickcomp")
+					Tickcomp = 1
+
 				if("require_heads_alive")
 					config.require_heads_alive = value
+
+				if("appeal_address")
+					config.appeal_address = value
 
 				else
 					diary << "Unknown setting in configuration: '[name]'"
@@ -369,8 +392,8 @@
 				sqllogging = 1
 			else
 				diary << "Unknown setting in configuration: '[name]'"
-
-/*/datum/configuration/proc/loadforumsql(filename)  // -- TLE
+/* //Don't touch this, we don't use it. DMTG
+/datum/configuration/proc/loadforumsql(filename)  // -- TLE
 	var/text = file2text(filename)
 
 	if (!text)
@@ -421,8 +444,8 @@
 			if ("authenticatedgroup")
 				forum_authenticated_group = value
 			else
-				diary << "Unknown setting in configuration: '[name]'"*/
-
+				diary << "Unknown setting in configuration: '[name]'"
+*/
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up
 	// their information, but it is the only way (at least that I know of).

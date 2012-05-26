@@ -9,6 +9,8 @@
 
 	var/icon/stand_icon = null
 	var/icon/lying_icon = null
+	var/icon/resting_icon = null
+	var/icon/running_icon = null
 
 	var/last_b_state = 1.0
 
@@ -45,7 +47,7 @@
 
 	health = 250
 	icon_state = "queen_s"
-
+	nopush = 1
 /mob/living/carbon/alien/humanoid/rpbody
 	update_icon = 0
 

@@ -13,8 +13,13 @@
 			loc = pick(latejoin)
 		if(!istype(body,/mob))	return//This needs to be recoded sometime so it has loc as its first arg
 		real_name = body.name
+		if(!body.original_name)
+			body.original_name = real_name
 		original_name = body.original_name
 		name = body.original_name
+		if(!name)
+			name = capitalize(pick(first_names_male) + " " + capitalize(pick(last_names)))
+			real_name = name
 		if(!safety)
 			corpse = body
 			verbs += /mob/dead/observer/proc/reenter_corpse
@@ -66,6 +71,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(key)
 		var/mob/dead/observer/ghost = new(src)
 		ghost.key = key
+		if(timeofdeath)
+			ghost.timeofdeath = timeofdeath
 		verbs -= /mob/proc/ghost
 		if (ghost.client)
 			ghost.client.eye = ghost
@@ -79,7 +86,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/Move(NewLoc, direct)
 	if(NewLoc)
 		loc = NewLoc
+		for(var/obj/step_trigger/S in NewLoc)
+			S.HasEntered(src)
+
 		return
+	loc = get_turf(src) //Get out of closets and such as a ghost
 	if((direct & NORTH) && y < world.maxy)
 		y++
 	if((direct & SOUTH) && y > 1)
@@ -88,6 +99,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		x++
 	if((direct & WEST) && x > 1)
 		x--
+
+	for(var/obj/step_trigger/S in locate(x, y, z))
+		S.HasEntered(src)
 
 /mob/dead/observer/examine()
 	if(usr)
@@ -142,7 +156,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/proc/dead_tele()
 	set category = "Ghost"
 	set name = "Teleport"
-	set desc= "Teleport"
+	set desc= "Teleport to a location"
 	if((usr.stat != 2) || !istype(usr, /mob/dead/observer))
 		usr << "Not when you're not dead!"
 		return
@@ -157,6 +171,33 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	for(var/turf/T in get_area_turfs(thearea.type))
 		L+=T
 	usr.loc = pick(L)
+
+/mob/dead/observer/verb/jumptomob() //Moves the ghost instead of just changing the ghosts's eye -Nodrak
+	set category = "Ghost"
+	set name = "Jump to Mob"
+	set desc = "Teleport to a mob"
+
+	if(istype(usr, /mob/dead/observer)) //Make sure they're an observer!
+
+
+		var/list/dest = list() //List of possible destinations (mobs)
+		var/target = null	   //Chosen target.
+
+		dest += getmobs() //Fill list, prompt user with list
+		target = input("Please, select a player!", "Jump to Mob", null, null) as null|anything in dest
+
+		if (!target)//Make sure we actually have a target
+			return
+		else
+			var/mob/M = dest[target] //Destination mob
+			var/mob/A = src			 //Source mob
+			var/turf/T = get_turf(M) //Turf of the destination mob
+
+			if(T && isturf(T))	//Make sure the turf exists, then move the source to that destination.
+				A.loc = T
+			else
+				A << "This mob is not located in the game world."
+
 
 /mob/dead/observer/verb/toggle_alien_candidate()
 	set name = "Toggle Be Alien Candidate"

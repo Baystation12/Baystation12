@@ -37,15 +37,39 @@
 		return
 
 	if(config.allow_admin_jump)
-		log_admin("[key_name(usr)] jumped to [key_name(M)]")
-		message_admins("[key_name_admin(usr)] jumped to [key_name_admin(M)]", 1)
+		if(!M || !istype(M))
+			var/mobs = getmobs()
+			var/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in mobs
+			if(!selection)
+				return
+
+			M = mobs[selection]
+		var/mob/A = src.mob
+		var/turf/T = get_turf(M)
+		if(T && isturf(T))
+			A.loc = T
+			log_admin("[key_name(usr)] jumped to [key_name(M)]")
+			message_admins("[key_name_admin(usr)] jumped to [key_name_admin(M)]", 1)
+		else
+			A << "This mob is not located in the game world."
+
+/client/proc/jumptocoord(tx as num, ty as num, tz as num)
+	set category = "Admin"
+	set name = "Jump to Coordinate"
+
+	if (!holder)
+		src << "Only administrators may use this command."
+		return
+
+	if (config.allow_admin_jump)
 		if(src.mob)
 			var/mob/A = src.mob
-			var/turf/T = get_turf(M)
-			if(T && isturf(T))
-				A.loc = T
-			else
-				A << "This mob is not located in the game world."
+			A.x = tx
+			A.y = ty
+			A.z = tz
+			feedback_add_details("admin_verb","JC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+		message_admins("[key_name_admin(usr)] jumped to coordinates [tx], [ty], [tz]")
+
 	else
 		alert("Admin jumping disabled")
 
@@ -75,13 +99,28 @@
 	set category = "Admin"
 	set name = "Get Mob"
 	set desc = "Mob to teleport"
+
 	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
+
 	if(config.allow_admin_jump)
-		log_admin("[key_name(usr)] teleported [key_name(M)]")
-		message_admins("[key_name_admin(usr)] teleported [key_name_admin(M)]", 1)
-		M.loc = get_turf(usr)
+		if(!M || !istype(M))
+			var/mobs = getmobs()
+			var/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in mobs
+			if(!selection)
+				return
+
+			M = mobs[selection]
+
+		var/mob/A = src.mob
+		var/turf/T = get_turf(A)
+		if(T && isturf(T))
+			M.loc = T
+			log_admin("[key_name(usr)] teleported [key_name(M)]")
+			message_admins("[key_name_admin(usr)] teleported [key_name_admin(M)]", 1)
+		else
+			A << "You are not located in the game world."
 	else
 		alert("Admin jumping disabled")
 

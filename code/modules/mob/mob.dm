@@ -103,10 +103,6 @@
 /mob/proc/update_clothing()
 	return
 
-/mob/proc/death(gibbed)
-	timeofdeath = world.time
-	return ..(gibbed)
-
 /mob/proc/restrained()
 	if (handcuffed)
 		return 1
@@ -163,28 +159,16 @@
 	var/obj/item/W = equipped()
 
 	if (W)
-		if(W.twohanded)
-			if(W.wielded)
-				if(hand)
-					var/obj/item/weapon/offhand/O = r_hand
-					del O
-				else
-					var/obj/item/weapon/offhand/O = l_hand
-					del O
-			W.wielded = 0          //Kinda crude, but gets the job done with minimal pain -Agouri
-			W.name = "[initial(W.name)]" //name reset so people don't see world fireaxes with (unwielded) or (wielded) tags
-			W.update_icon()
 		u_equip(W)
 		if (client)
 			client.screen -= W
 		if (W)
+			W.layer = initial(W.layer)
 			if(target)
 				W.loc = target.loc
 			else
 				W.loc = loc
 			W.dropped(src)
-			if (W)
-				W.layer = initial(W.layer)
 		var/turf/T = get_turf(loc)
 		if (istype(T))
 			T.Entered(W)
@@ -207,7 +191,7 @@
 		return r_hand
 
 /mob/proc/get_inactive_hand()
-	if ( ! hand)
+	if (!hand)
 		return l_hand
 	else
 		return r_hand
@@ -290,9 +274,9 @@
 
 //Attemps to remove an object on a mob.  Will not move it to another area or such, just removes from the mob.
 /mob/proc/remove_from_mob(var/obj/O)
-	src.u_equip(O)
-	if (src.client)
-		src.client.screen -= O
+	u_equip(O)
+	if (client)
+		client.screen -= O
 	O.layer = initial(O.layer)
 	O.screen_loc = null
 	return 1
@@ -392,16 +376,16 @@
 	set src in usr
 	if(usr != src)
 		usr << "No."
-	var/msg = input(usr,"Set the flavor text in your 'examine' verb. Don't metagame!","Flavor Text",html_decode(flavor_text)) as message|null
+	var/msg = input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null
 
 	if(msg != null)
 		msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 		msg = html_encode(msg)
 
-		src.flavor_text = msg
+		flavor_text = msg
 
 /mob/proc/warn_flavor_changed()
-	if(src.flavor_text && src.flavor_text != "") // don't spam people that don't use it!
+	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
 		src << "<h2 class='alert'>OOC Warning:</h2>"
 		src << "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>"
 
@@ -409,9 +393,9 @@
 	if (flavor_text && flavor_text != "")
 		var/msg = dd_replacetext(flavor_text, "\n", " ")
 		if(lentext(msg) <= 40)
-			usr << "\blue [msg]"
+			return "\blue [msg]"
 		else
-			usr << "\blue [copytext(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>"
+			return "\blue [copytext(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>"
 
 
 /*
@@ -426,14 +410,35 @@
 	set category = "OOC"
 
 	if (!( abandon_allowed ))
+		usr << "\blue Respawn is disabled."
 		return
 	if ((stat != 2 || !( ticker )))
 		usr << "\blue <B>You must be dead to use this!</B>"
 		return
+	if (ticker.mode.name == "meteor" || ticker.mode.name == "epidemic")
+		usr << "\blue Respawn is disabled."
+		return
+	else
+		var/deathtime = world.time - src.timeofdeath
+		var/deathtimeminutes = round(deathtime / 600)
+		var/pluralcheck = "minute"
+		if(deathtimeminutes == 0)
+			pluralcheck = ""
+		else if(deathtimeminutes == 1)
+			pluralcheck = " [deathtimeminutes] minute and"
+		else if(deathtimeminutes > 1)
+			pluralcheck = " [deathtimeminutes] minutes and"
+		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
+		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
+		if (deathtime < 18000)
+			usr << "You must wait 30 minutes to respawn!"
+			return
+		else
+			usr << "You can respawn now, enjoy your new life!"
 
 	log_game("[usr.name]/[usr.key] used abandon mob.")
 
-	usr << "\blue <B>Please roleplay correctly!</B>"
+	usr << "\blue <B>Make sure to play a different character, and please roleplay correctly!</B>"
 
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
@@ -487,6 +492,19 @@
 		usr << "\blue Now you hear all speech in the world"
 	else
 		usr << "\blue Now you hear speech only from nearest creatures."
+
+/client/var/ghost_sight = 1
+/client/verb/toggle_ghost_sight()
+	set name = "Ghost sight"
+	set category = "OOC"
+	set desc = "Hear emotes from everywhere"
+	ghost_sight = !ghost_sight
+	if (ghost_sight)
+		usr << "\blue Now you hear all emotes in the world"
+	else
+		usr << "\blue Now you hear emotes only from nearest creatures."
+
+
 
 /mob/verb/observe()
 	set name = "Observe"
@@ -588,10 +606,11 @@
 						for (var/mob/living/silicon/decoy/D in world)
 							if (eye)
 								eye = D
-		if (eye)
-			client.eye = eye
-		else
-			client.eye = client.mob
+		if (client)
+			if (eye)
+				client.eye = eye
+			else
+				client.eye = client.mob
 
 /mob/verb/cancel_camera()
 	set name = "Cancel Camera View"
@@ -602,7 +621,6 @@
 		if(src:cameraFollow)
 			src:cameraFollow = null
 
-
 /mob/Topic(href, href_list)
 	if(href_list["mach_close"])
 		var/t1 = text("window=[href_list["mach_close"]]")
@@ -610,7 +628,7 @@
 		src << browse(null, t1)
 
 	if(href_list["teleto"])
-		src.client.jumptoturf(locate(href_list["teleto"]))
+		client.jumptoturf(locate(href_list["teleto"]))
 
 	if(href_list["priv_msg"])
 		var/mob/M = locate(href_list["priv_msg"])
@@ -648,20 +666,20 @@
 					if(K.client && K.client.holder && K.key != usr.key && K.key != M.key)
 						K << "<b><font color='blue'>PM: [key_name(usr, K)]->[key_name(M, K)]:</b> \blue [t]</font>"
 	if(href_list["flavor_more"])
-		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, dd_replacetext(src.flavor_text, "\n", "<BR>")), text("window=[];size=500x200", src.name))
-		onclose(usr, "[src.name]")
+		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, dd_replacetext(flavor_text, "\n", "<BR>")), text("window=[];size=500x200", name))
+		onclose(usr, "[name]")
 	if(href_list["flavor_change"])
 		update_flavor_text()
-	..()
+//	..()
 	return
 
 /mob/proc/get_damage()
 	return health
 
 /mob/proc/UpdateLuminosity()
-	if(src.total_luminosity == src.last_luminosity)	return 0//nothing to do here
-	src.last_luminosity = src.total_luminosity
-	sd_SetLuminosity(min(src.total_luminosity,7))//Current hardcode max at 7, should likely be a const somewhere else
+	if(total_luminosity == last_luminosity)	return 0//nothing to do here
+	last_luminosity = total_luminosity
+	sd_SetLuminosity(min(total_luminosity,7))//Current hardcode max at 7, should likely be a const somewhere else
 	return 1
 
 /mob/MouseDrop(mob/M as mob)
@@ -678,8 +696,21 @@
 	set category = "IC"
 	set src in oview(1)
 
-	if (!( usr ))
+	if ( !usr || usr==src || !istype(src.loc,/turf) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
+
+	if(ishuman(usr))
+		if(usr.hand) // if he's using his left hand.
+			var/datum/organ/external/temp = usr:get_organ("l_hand")
+			if(temp.destroyed)
+				usr << "\blue You look at your stump."
+				return
+		else
+			var/datum/organ/external/temp = usr:get_organ("r_hand")
+			if(temp.destroyed)
+				usr << "\blue You look at your stump."
+				return
+
 	if (!( anchored ))
 		usr.pulling = src
 		if(ismob(src))
@@ -697,7 +728,7 @@
 
 	if (!( usr ))
 		return
-	usr << "This is \an [name]."
+	usr << "That's \a [src]." //changed to "That's" from "This is" because "This is some metal sheets" sounds dumb compared to "That's some metal sheets" ~Carn
 	usr << desc
 	// *****RM
 	//usr << "[name]: Dn:[density] dir:[dir] cont:[contents] icon:[icon] is:[icon_state] loc:[loc]"
@@ -707,11 +738,7 @@
 	if(findtextEx(key, "Telnet @"))
 		src << "Sorry, this game does not support Telnet."
 		del(src)
-	var/isbanned = CheckBan(src)
-	if (isbanned)
-		log_access("Failed Login: [src] - Banned")
-		message_admins("\blue Failed Login: [src] - Banned")
-		alert(src,"You have been banned.\nReason : [isbanned]","Ban","Ok")
+	if (CheckBan(src))
 		del(src)
 
 /*
@@ -722,7 +749,7 @@
 		del(src)
 */
 
-	if(IsGuestKey(src.key))
+	if(IsGuestKey(key))
 		alert(src,"Baystation12 doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
 		del(src)
 
@@ -759,7 +786,7 @@
 /mob/proc/can_use_hands()
 	if(handcuffed)
 		return 0
-	if(buckled && istype(buckled, /obj/structure/stool/bed)) // buckling does not restrict hands
+	if(buckled && ! istype(buckled, /obj/structure/stool/bed/chair)) // buckling does not restrict hands
 		return 0
 	return ..()
 
@@ -775,108 +802,6 @@
 /mob/proc/show_viewers(message)
 	for(var/mob/M in viewers())
 		M.see(message)
-
-//This is the proc for gibbing a mob. Cannot gib ghosts. Removed the medal reference,
-//added different sort of gibs and animations. N
-/mob/proc/gib()
-
-	if (istype(src, /mob/dead/observer))
-		gibs(loc, viruses)
-		return
-	if(!isrobot(src))//Cyborgs no-longer "die" when gibbed.
-		death(1)
-	var/atom/movable/overlay/animation = null
-	monkeyizing = 1
-	canmove = 0
-	icon = null
-	invisibility = 101
-
-	animation = new(loc)
-	animation.icon_state = "blank"
-	animation.icon = 'mob.dmi'
-	animation.master = src
-	if(ishuman(src))
-		flick("gibbed-h", animation)
-	else if(ismonkey(src))
-		flick("gibbed-m", animation)
-	else if(ismetroid(src))
-		flick("gibbed-m", animation)
-	else if(iscrab(src))
-		flick("gibbed-m", animation)
-	else if(iscorgi(src))
-		flick("gibbed-m", animation)
-	else if(iscat(src))
-		flick("gibbed-m", animation)   //New-has monkey gib effect versus robogib
-	else if(isalien(src))
-		flick("gibbed-a", animation)
-	else
-		flick("gibbed-r", animation)
-
-	spawn()
-		if(key)
-			if(istype(src, /mob/living/silicon))
-				robogibs(loc, viruses)
-			else if (istype(src, /mob/living/carbon/alien))
-				xgibs(loc, viruses)
-			else
-				gibs(loc, viruses, dna)
-
-/*		else if(key)
-			if(istype(src, /mob/living/simple_animals))     //Should gib all simple_animals like a monkey
-				gibs(loc, viruses)
-			else if (istype(src, /mob/living/simple_animals))
-				gibs(loc, viruses)
-Currently doesn't work, but should be useful later or at least as a template
-*/
-
-		else
-			if(istype(src, /mob/living/silicon))
-				robogibs(loc, viruses)
-			else if(istype(src, /mob/living/carbon/alien))
-				xgibs(loc, viruses)
-			else
-				gibs(loc, viruses, dna)
-		sleep(15)
-		for(var/obj/item/I in src.contents)
-			I.loc = get_turf(src)
-		del(src)
-
-/*
-This is the proc for turning a mob into ash. Mostly a copy of gib code (above).
-Originally created for wizard disintegrate. I've removed the virus code since it's irrelevant here.
-Dusting robots does not eject the MMI, so it's a bit more powerful than gib() /N
-*/
-/mob/proc/dust()
-	death(1)
-	var/atom/movable/overlay/animation = null
-	monkeyizing = 1
-	canmove = 0
-	icon = null
-	invisibility = 101
-
-	animation = new(loc)
-	animation.icon_state = "blank"
-	animation.icon = 'mob.dmi'
-	animation.master = src
-	if(ishuman(src))
-		flick("dust-h", animation)
-		new /obj/effect/decal/remains/human(loc)
-	else if(ismonkey(src))
-		flick("dust-m", animation)
-		new /obj/effect/decal/remains/human(loc)
-	else if(isalien(src))
-		flick("dust-a", animation)
-		new /obj/effect/decal/remains/xeno(loc)
-	else
-		flick("dust-r", animation)
-		new /obj/effect/decal/remains/robot(loc)
-
-	sleep(15)
-	if(isrobot(src)&&src:mmi)//Is a robot and it has an mmi.
-		del(src:mmi)//Delete the MMI first so that it won't go popping out.
-	for(var/obj/item/I in src.contents)
-		I.loc = get_turf(src)
-	del(src)
 
 /*
 adds a dizziness amount to a mob
@@ -960,8 +885,8 @@ note dizziness decrements automatically in the mob's Life() proc.
 		stat(null, "([x], [y], [z])")
 		stat(null, "CPU: [world.cpu]")
 		stat(null, "Controller: [controllernum]")
-		//if (master_controller)
-		//	stat(null, "Loop: [master_controller.loop_freq]")
+		if (master_controller)
+			stat(null, "Current Iteration: [controller_iteration]")
 
 	if (spell_list.len)
 
@@ -973,84 +898,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 					statpanel("Spells","[S.charge_counter]/[S.charge_max]",S)
 				if("holdervar")
 					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
-#if 1
-/client/proc/station_explosion_cinematic(var/derp)
-	if(mob)
-		var/mob/M = mob
-		M.loc = null // HACK, but whatever, this works
-
-		if (M.client&&M.hud_used)//They may some times not have a hud, apparently.
-			var/obj/screen/boom = M.hud_used.station_explosion
-			M.client.screen += boom
-			if(ticker)
-				switch(ticker.mode.name)
-					if("nuclear emergency")
-						flick("start_nuke", boom)
-					if("AI malfunction")
-						flick("start_malf", boom)
-					else
-						boom.icon_state = "start"
-			sleep(40)
-			M << sound('explosionfar.ogg')
-			boom.icon_state = "end"
-			if(!derp) flick("explode", boom)
-			else flick("explode2", boom)
-			sleep(40)
-			if(ticker)
-				switch(ticker.mode.name)
-					if("nuclear emergency")
-						if (!derp) boom.icon_state = "loss_nuke"
-						else boom.icon_state = "loss_nuke2"
-					if("malfunction")
-						boom.icon_state = "loss_malf"
-					if("blob")
-						return//Nothin here yet and the general one does not fit.
-					else
-						boom.icon_state = "loss_general"
-#elif
-/client/proc/station_explosion_cinematic(var/derp)
-	if(!src.mob)
-		return
-
-	var/mob/M = src.mob
-	M.loc = null // HACK, but whatever, this works
-
-	if(!M.hud_used)
-		return
-
-	var/obj/screen/boom = M.hud_used.station_explosion
-	src.screen += boom
-	if(ticker)
-		switch(ticker.mode.name)
-			if("nuclear emergency")
-				flick("start_nuke", boom)
-			if("AI malfunction")
-				flick("start_malf", boom)
-			else
-				boom.icon_state = "start"
-	sleep(40)
-	M << sound('explosionfar.ogg')
-	boom.icon_state = "end"
-	if(!derp)
-		flick("explode", boom)
-	else
-		flick("explode2", boom)
-	sleep(40)
-	if(ticker)
-		switch(ticker.mode.name)
-			if("nuclear emergency")
-				if (!derp)
-					boom.icon_state = "loss_nuke"
-				else
-					boom.icon_state = "loss_nuke2"
-			if("AI malfunction")
-				boom.icon_state = "loss_malf"
-			else
-				boom.icon_state = "loss_general"
-#endif
-
-
-
 
 
 
@@ -1100,39 +947,184 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/IsAdvancedToolUser()//This might need a rename but it should replace the can this mob use things check
 	return 0
+/*
+/mob/proc/createGeas()
+
+	var/obj/effect/stop/S
+	for(var/obj/effect/stop/temp in loc)
+		if(temp.victim == src)
+			S = temp
+
+	if(!S)
+		S = new /obj/effect/stop
+		S.victim = src
+		S.loc = src.loc
+		geaslist += S
+
+	return
+*/
 
 /mob/proc/Stun(amount)
-	stunned = max(max(stunned,amount),0) //can't go below 0, getting a low amount of stun doesn't lower your current stun
+	if(canstun)
+		stunned = max(max(stunned,amount),0) //can't go below 0, getting a low amount of stun doesn't lower your current stun
+//		if(stunned)
+//			createGeas()
+	else
+		if(istype(src, /mob/living/carbon/alien))	// add some movement delay
+			var/mob/living/carbon/alien/Alien = src
+			Alien.move_delay_add = min(Alien.move_delay_add + round(amount / 2), 10) // a maximum delay of 10
 	return
 
 /mob/proc/SetStunned(amount) //if you REALLY need to set stun to a set amount without the whole "can't go below current stunned"
-	stunned = max(amount,0)
+	if(canstun)
+		stunned = max(amount,0)
+//		if(stunned)
+//			createGeas()
 	return
 
 /mob/proc/AdjustStunned(amount)
-	stunned = max(stunned + amount,0)
+	if(canstun)
+		stunned = max(stunned + amount,0)
+//		if(stunned)
+//			createGeas()
 	return
 
 /mob/proc/Weaken(amount)
-	weakened = max(max(weakened,amount),0)
+	if(canweaken)
+		weakened = max(max(weakened,amount),0)
+//		if(weakened)
+//			createGeas()
 	return
 
 /mob/proc/SetWeakened(amount)
-	weakened = max(amount,0)
+	if(canweaken)
+		weakened = max(amount,0)
+//		if(weakened)
+//			createGeas()
 	return
 
 /mob/proc/AdjustWeakened(amount)
-	weakened = max(weakened + amount,0)
+	if(canweaken)
+		weakened = max(weakened + amount,0)
+//		if(weakened)
+//			createGeas()
 	return
 
 /mob/proc/Paralyse(amount)
 	paralysis = max(max(paralysis,amount),0)
+//	if(paralysis)
+//		createGeas()
 	return
 
 /mob/proc/SetParalysis(amount)
 	paralysis = max(amount,0)
 	return
+//	if(paralysis)
+//		createGeas()
 
 /mob/proc/AdjustParalysis(amount)
 	paralysis = max(paralysis + amount,0)
+//	if(paralysis)
+//		createGeas()
 	return
+
+/mob/proc/Sleeping(amount)
+	sleeping = max(max(sleeping,amount),0)
+//	if(sleeping)
+//		createGeas()
+	return
+
+/mob/proc/SetSleeping(amount)
+	sleeping = max(amount,0)
+	return
+//	if(sleeping)
+//		createGeas()
+
+
+/mob/proc/AdjustSleeping(amount)
+	sleeping = max(sleeping + amount,0)
+//	if(sleeping)
+//		createGeas()
+	return
+
+/mob/proc/Resting(amount)
+	resting = max(max(resting,amount),0)
+//	if(resting)
+//		createGeas()
+	return
+
+/mob/proc/SetResting(amount)
+	resting = max(amount,0)
+	return
+//	if(resting)
+//		createGeas()
+
+/mob/proc/AdjustResting(amount)
+	resting = max(resting + amount,0)
+//	if(resting)
+//		createGeas()
+	return
+
+
+// ++++ROCKDTBEN++++ MOB PROCS -- Ask me before touching
+
+/mob/proc/getBruteLoss()
+	return bruteloss
+
+/mob/proc/adjustBruteLoss(var/amount)
+	bruteloss = max(bruteloss + amount, 0)
+
+/mob/proc/getOxyLoss()
+	return oxyloss
+
+/mob/proc/adjustOxyLoss(var/amount)
+	oxyloss = max(oxyloss + amount, 0)
+
+/mob/proc/setOxyLoss(var/amount)
+	oxyloss = amount
+
+/mob/proc/getToxLoss()
+	return toxloss
+
+/mob/proc/adjustToxLoss(var/amount)
+	toxloss = max(toxloss + amount, 0)
+
+/mob/proc/setToxLoss(var/amount)
+	toxloss = amount
+
+/mob/proc/getFireLoss()
+	return fireloss
+
+/mob/proc/adjustFireLoss(var/amount)
+	fireloss = max(fireloss + amount, 0)
+
+/mob/proc/getCloneLoss()
+	return cloneloss
+
+/mob/proc/adjustCloneLoss(var/amount)
+	cloneloss = max(cloneloss + amount, 0)
+
+/mob/proc/setCloneLoss(var/amount)
+	cloneloss = amount
+
+/mob/proc/getHalLoss()
+	return halloss
+
+/mob/proc/adjustHalLoss(var/amount)
+	halloss = max(halloss + amount, 0)
+
+/mob/proc/setHalLoss(var/amount)
+	halloss = amount
+
+
+
+/mob/proc/getBrainLoss()
+	return brainloss
+
+/mob/proc/adjustBrainLoss(var/amount)
+	brainloss = max(brainloss + amount, 0)
+
+/mob/proc/setBrainLoss(var/amount)
+	brainloss = amount
+
+// ++++ROCKDTBEN++++ MOB PROCS //END

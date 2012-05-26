@@ -311,7 +311,7 @@ ________________________________________________________________________________
 				var/datum/gas_mixture/environment = T.return_air()
 
 				var/pressure = environment.return_pressure()
-				var/total_moles = environment.total_moles()
+				var/total_moles = environment.total_moles
 
 				dat += "Air Pressure: [round(pressure,0.1)] kPa"
 
@@ -1121,7 +1121,7 @@ ________________________________________________________________________________
 					else	break
 				U << "\blue Gained <B>[totaldrain]</B> energy from [src]."
 			else
-				U << "\red The exosuit's battery has run dry of power. You must find another source."
+				U << "\red The exosuit's battery has run dry. You must find another source of power."
 
 		if("CYBORG")
 			var/mob/living/silicon/robot/A = target

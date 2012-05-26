@@ -30,14 +30,15 @@
 
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
-			if(target.parent)
-				target.parent.suspend_group_processing()
+			//if(target.parent)
+			//	target.parent.suspend_group_processing()
 
 			var/datum/gas_mixture/payload = new
 			var/datum/gas/sleeping_agent/trace_gas = new
 
 			trace_gas.moles = 30
 			payload += trace_gas
+			payload.update_values()
 
 			target.air.merge(payload)
 
@@ -47,12 +48,11 @@
 /obj/effect/mine/proc/triggerplasma(obj)
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
-			if(target.parent)
-				target.parent.suspend_group_processing()
 
 			var/datum/gas_mixture/payload = new
 
 			payload.toxins = 30
+			payload.update_values()
 
 			target.air.merge(payload)
 
@@ -132,12 +132,12 @@
 			if("feet")
 				if(!H.shoes)
 					affecting = H.get_organ(pick("l_leg", "r_leg"))
-					H.Weaken(3)
+					if(!affecting.robot) H.Weaken(3)
 			if("l_hand", "r_hand")
 				if(!H.gloves)
 					affecting = H.get_organ(type)
-					H.Stun(3)
-		if(affecting)
+					if(!affecting.robot) H.Stun(3)
+		if(affecting && !affecting.robot)
 			affecting.take_damage(1, 0)
 			H.UpdateDamageIcon()
 			H.updatehealth()
@@ -203,17 +203,3 @@
 	for(var/mob/O in viewers(src, null))
 		O.show_message(text("\red <B>The mousetrap is triggered by [A].</B>"), 1)
 	src.triggered(null)
-
-/obj/item/weapon/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob)
-	..()
-	if(A && wielded && (istype(A,/obj/structure/window) || istype(A,/obj/structure/grille))) //destroys windows and grilles in one hit
-		if(istype(A,/obj/structure/window)) //should just make a window.Break() proc but couldn't bother with it
-			var/obj/structure/window/W = A
-
-			new /obj/item/weapon/shard( W.loc )
-			if(W.reinf) new /obj/item/stack/rods( W.loc)
-
-			if (W.dir == SOUTHWEST)
-				new /obj/item/weapon/shard( W.loc )
-				if(W.reinf) new /obj/item/stack/rods( W.loc)
-		del(A)

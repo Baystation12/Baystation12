@@ -6,7 +6,6 @@
 	desc = "Has a valve and pump attached to it"
 
 	level = 1
-	layer = TURF_LAYER
 	var/area_uid
 	var/id_tag = null
 	power_channel = ENVIRON
@@ -94,9 +93,6 @@
 
 					var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 
-					if(istype(removed))
-						AirflowRepel(loc,removed.return_pressure())
-
 					loc.assume_air(removed)
 
 					if(network)
@@ -112,10 +108,8 @@
 			if(pressure_delta > 0)
 				if(environment.temperature > 0)
 					var/transfer_moles = pressure_delta*air_contents.volume/(environment.temperature * R_IDEAL_GAS_EQUATION)
-					var/datum/gas_mixture/removed = loc.remove_air(transfer_moles)
-					if(istype(removed))
-						AirflowAttract(loc,removed.return_pressure())
 
+					var/datum/gas_mixture/removed = loc.remove_air(transfer_moles)
 					if (isnull(removed)) //in space
 						return
 

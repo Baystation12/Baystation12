@@ -154,9 +154,16 @@
 	attack_sound = 'bite.ogg'
 	attack_speed = 10
 	speed = 8
+	chasespeed = 8
 	var/stunchance = 10 // chance to tackle things down
-	spacewalk = 1
 
+
+//TEMPORARY
+	New()
+		..()
+		spawn(0)
+			del(src)
+//TEMPORARY
 
 
 	Harvest(var/obj/item/weapon/W, var/mob/living/user)
@@ -211,6 +218,7 @@
 	atksilicon = 0
 	firevuln = 2
 	brutevuln = 1
+	wanderspeed = 1
 
 
 	Harvest(var/obj/item/weapon/W, var/mob/living/user)

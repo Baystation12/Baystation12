@@ -38,14 +38,72 @@
 
 
 /client/Southwest()
-	toggle_throw_mode()
+	if(iscarbon(usr))
+		var/mob/living/carbon/C = usr
+		if(!C.get_active_hand())
+			usr << "\red You have nothing in your hand to throw."
+			return
+		toggle_throw_mode()
+	else
+		usr << "\red This mob type cannot throw items."
 	return
 
 
 /client/Northwest()
-	drop_item()
+	if(iscarbon(usr))
+		var/mob/living/carbon/C = usr
+		if(!C.get_active_hand())
+			usr << "\red You have nothing to drop in your hand."
+			return
+		drop_item()
+	else
+		usr << "\red This mob type cannot drop items."
 	return
 
+//This gets called when you press the insert button.
+/client/verb/insert_key_pressed()
+	set hidden = 1
+
+	if(!src.mob)
+		return
+	var/mob/M = src.mob
+	if(ishuman(M) || isrobot(usr) || ismonkey(M) || istype(M,/mob/living/carbon/alien/humanoid) || islarva(M))
+		switch(M.a_intent)
+			if("help")
+				if(issilicon(usr))
+					usr.a_intent = "hurt"
+					usr.hud_used.action_intent.icon_state = "harm"
+				else
+					usr.a_intent = "disarm"
+					usr.hud_used.action_intent.icon_state = "disarm"
+
+			if("disarm")
+				usr.a_intent = "hurt"
+				usr.hud_used.action_intent.icon_state = "harm"
+
+			if("hurt")
+				if(issilicon(usr))
+					usr.a_intent = "help"
+					usr.hud_used.action_intent.icon_state = "help"
+				else
+					usr.a_intent = "grab"
+					usr.hud_used.action_intent.icon_state = "grab"
+
+			if("grab")
+				usr.a_intent = "help"
+				usr.hud_used.action_intent.icon_state = "help"
+		usr << "\blue Your intent is now \"[usr.a_intent]\"."
+	else
+		usr << "\red This mob type does not use intents."
+
+//This gets called when you press the delete button.
+/client/verb/delete_key_pressed()
+	set hidden = 1
+
+	if(!usr.pulling)
+		usr << "\blue You are not pulling anything."
+		return
+	usr.pulling = null
 
 /client/verb/swap_hand()
 	set hidden = 1
@@ -133,6 +191,7 @@
 
 
 /client/Move(n, direct)
+
 	if(mob.control_object)	Move_object(direct)
 
 	if(isobserver(mob))	return mob.Move(n,direct)
@@ -142,6 +201,11 @@
 	if(world.time < move_delay)	return
 
 	if(!mob)	return
+
+	if(locate(/obj/effect/stop/, mob.loc))
+		for(var/obj/effect/stop/S in mob.loc)
+			if(S.victim == mob)
+				return
 
 	if(mob.stat==2)	return
 
@@ -154,6 +218,7 @@
 		return
 
 	if(Process_Grab())	return
+	if(!mob.canmove)	return
 
 //Making mob movememnt changes instant.
 	if(mob.paralysis || mob.stunned || mob.resting || mob.weakened || mob.buckled || (mob.changeling && mob.changeling.changeling_fakedeath))
@@ -162,8 +227,16 @@
 	else
 		mob.canmove = 1
 
-	if(istype(mob.loc, /turf/space) || (mob.flags & NOGRAV))
+
+	//if(istype(mob.loc, /turf/space) || (mob.flags & NOGRAV))
+	//	if(!mob.Process_Spacemove(0))	return 0
+
+	if(!mob.lastarea)
+		mob.lastarea = get_area(mob.loc)
+
+	if((istype(mob.loc, /turf/space)) || (mob.lastarea.has_gravity == 0))
 		if(!mob.Process_Spacemove(0))	return 0
+
 
 	if(isobj(mob.loc) || ismob(mob.loc))//Inside an object, tell it we moved
 		var/atom/O = mob.loc
@@ -193,6 +266,14 @@
 		move_delay += mob.movement_delay()
 		move_delay += mob.grav_delay
 
+		if(config.Tickcomp)
+			move_delay -= 1.3
+			var/tickcomp = ((1/(world.tick_lag))*1.3)
+			move_delay = move_delay + tickcomp
+
+
+
+
 		//We are now going to move
 		moving = 1
 		//Something with pulling things
@@ -203,16 +284,17 @@
 				if(L.len == 2)
 					L -= mob
 					var/mob/M = L[1]
-					if ((get_dist(mob, M) <= 1 || M.loc == mob.loc))
-						var/turf/T = mob.loc
-						. = ..()
-						if (isturf(M.loc))
-							var/diag = get_dir(mob, M)
-							if ((diag - 1) & diag)
-							else
-								diag = null
-							if ((get_dist(mob, M) > 1 || diag))
-								step(M, get_dir(M.loc, T))
+					if(M)
+						if ((get_dist(mob, M) <= 1 || M.loc == mob.loc))
+							var/turf/T = mob.loc
+							. = ..()
+							if (isturf(M.loc))
+								var/diag = get_dir(mob, M)
+								if ((diag - 1) & diag)
+								else
+									diag = null
+								if ((get_dist(mob, M) > 1 || diag))
+									step(M, get_dir(M.loc, T))
 				else
 					for(var/mob/M in L)
 						M.other_mobs = 1
@@ -234,6 +316,7 @@
 			for(var/obj/effect/speech_bubble/S in range(1, mob))
 				if(S.parent == mob)
 					S.loc = mob.loc
+
 		moving = 0
 
 		return .
@@ -326,14 +409,37 @@
 ///Return 1 for movement 0 for none
 /mob/proc/Process_Spacemove(var/check_drift = 0)
 	//First check to see if we can do things
-	if(restrained())	return 0
+	if(restrained())
+		return 0
+
+	/*
+	if(istype(src,/mob/living/carbon))
+		if(src.l_hand && src.r_hand)
+			return 0
+	*/
 
 	var/dense_object = 0
 	for(var/turf/turf in oview(1,src))
 		if(istype(turf,/turf/space))
 			continue
+
+		if(istype(src,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
+			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0) && !(istype(src:shoes, /obj/item/clothing/shoes/magboots) && (src:shoes:flags & NOSLIP)))
+				continue
+
+
+		else
+			if((istype(turf,/turf/simulated/floor)) && (src.lastarea.has_gravity == 0)) // No one else gets a chance.
+				continue
+
+
+
+		/*
 		if(istype(turf,/turf/simulated/floor) && (src.flags & NOGRAV))
 			continue
+		*/
+
+
 		dense_object++
 		break
 
@@ -350,7 +456,10 @@
 				break
 
 	//Nothing to push off of so end here
-	if(!dense_object)	return 0
+	if(!dense_object)
+		return 0
+
+
 
 	//Check to see if we slipped
 	if(prob(Process_Spaceslipping(5)))
@@ -366,7 +475,8 @@
 /mob/proc/Process_Spaceslipping(var/prob_slip = 5)
 	//Setup slipage
 	//If knocked out we might just hit it and stop.  This makes it possible to get dead bodies and such.
-	if(stat)	prob_slip += 50
+	if(stat)
+		prob_slip = 0  // Changing this to zero to make it line up with the comment.
 
 	prob_slip = round(prob_slip)
 	return(prob_slip)

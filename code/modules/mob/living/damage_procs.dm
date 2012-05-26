@@ -8,7 +8,7 @@
 	Returns
 	standard 0 if fail
 */
-/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/slash = 0, var/used_weapon = null)
+/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/used_weapon = null)
 	if(!damage || (blocked >= 2))	return 0
 	switch(damagetype)
 		if(BRUTE)
@@ -21,25 +21,28 @@
 		if(OXY)
 			adjustOxyLoss(damage/(blocked+1))
 		if(CLONE)
-			cloneloss += (damage/(blocked+1))
+			adjustCloneLoss(damage/(blocked+1))
+		if(HALLOSS)
+			adjustHalLoss(damage/(blocked+1))
 	UpdateDamageIcon()
 	updatehealth()
 	return 1
 
 
-/mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/def_zone = null, var/blocked = 0)
+/mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/def_zone = null, var/blocked = 0, var/halloss = 0)
 	if(blocked >= 2)	return 0
 	if(brute)	apply_damage(brute, BRUTE, def_zone, blocked)
 	if(burn)	apply_damage(burn, BURN, def_zone, blocked)
 	if(tox)		apply_damage(tox, TOX, def_zone, blocked)
 	if(oxy)		apply_damage(oxy, OXY, def_zone, blocked)
 	if(clone)	apply_damage(clone, CLONE, def_zone, blocked)
+	if(halloss) apply_damage(halloss, HALLOSS, def_zone, blocked)
 	return 1
 
 
 
 /mob/living/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
-	if(!effect || (blocked >= 2))	return 0
+	if(!effect || (blocked))	return 0
 	switch(effecttype)
 		if(STUN)
 			Stun((effect - (min(effect*getarmor(null, "laser"), effect*(0.75 + (blocked*0.05))))))
@@ -50,7 +53,8 @@
 		if(IRRADIATE)
 			radiation += max((effect - (effect*getarmor(null, "rad"))), 0)//Rads auto check armor
 		if(STUTTER)
-			stuttering = max(stuttering,(effect/(blocked+1)))
+			if(canstun) // stun is usually associated with stutter
+				stuttering = max(stuttering,(effect/(blocked+1)))
 		if(SLUR)
 			slurring = max(slurring, (effect/(blocked+1)))
 		if(EYE_BLUR)

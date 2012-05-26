@@ -1,7 +1,6 @@
 /datum/game_mode/sandbox
 	name = "sandbox"
 	config_tag = "sandbox"
-	required_players = 0
 	votable = 0
 
 	uplink_welcome = "Syndicate Uplink Console:"
@@ -15,9 +14,6 @@
 	for(var/mob/M in world)
 		if(M.client)
 			M.CanBuild()
-
-//	setup_sectors()
-//	spawn_exporation_packs()
 	return 1
 
 /datum/game_mode/sandbox/check_finished()

@@ -200,6 +200,10 @@
 	var/disabled = 0 //malf
 
 	action(atom/target)
+		if(istype(target,/area/shuttle)||istype(target, /turf/space/transit))//>implying these are ever made -Sieve
+			disabled = 1
+		else
+			disabled = 0
 		if(!istype(target, /turf) && !istype(target, /obj/machinery/door/airlock))
 			target = get_turf(target)
 		if(!action_checks(target) || disabled || get_dist(chassis, target)>3) return
@@ -849,8 +853,9 @@
 			destroy()
 		else
 			GM.toxins += 5
-			GM.temperature = istype(T) ? T.air.return_temperature() : T20C
+			GM.temperature = istype(T) ? T.air.temperature : T20C
 			T.visible_message("The [src] suddenly disgorges a cloud of plasma.")
+		GM.update_values()
 		T.assume_air(GM)
 		return
 
@@ -980,6 +985,12 @@
 				occupant_message("<font color=\"red\"><B>The sleeper is already occupied!</B></font>")
 				return
 			target.forceMove(src)
+			if(target.buckled)
+				var/obj/structure/stool/bed/S = target.buckled
+				target.buckled = null
+				target.anchored = 0
+				target.lying = 0
+				S.buckled_mob = null
 			occupant = target
 			target.reset_view(src)
 			/*
