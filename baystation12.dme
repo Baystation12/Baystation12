@@ -1000,6 +1000,7 @@
 #include "code\ZAS\Variable Settings.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
+#include "maps\tgstation.2.0.8.dmm"
 // END_INCLUDE
 // BEGIN_FILE_DIR
 #define FILE_DIR .
