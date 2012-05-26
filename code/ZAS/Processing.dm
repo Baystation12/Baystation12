@@ -40,7 +40,8 @@ zone
 
 		if(total_space) // SPAAAAAAAAAACE
 			//var/old_pressure = air.pressure
-			ShareSpace(air,total_space*(vsc.zone_share_percent/100))
+			if(abs(air.total_moles) > 0.1)
+				ShareSpace(air,total_space*(vsc.zone_share_percent/100))
 			//var/p_diff = old_pressure - air.pressure
 			//if(p_diff > vsc.AF_TINY_MOVEMENT_THRESHOLD) AirflowSpace(src,p_diff)
 
@@ -71,9 +72,10 @@ zone
 					if(C.A.zone.air.compare(C.B.zone.air) || total_space)
 						ZMerge(C.A.zone,C.B.zone)
 			for(var/zone/Z in connected_zones)
-				//var/p_diff = (air.return_pressure()-Z.air.return_pressure())*connected_zones[Z]*(vsc.zone_share_percent/100)
-				//if(p_diff > vsc.AF_TINY_MOVEMENT_THRESHOLD) Airflow(src,Z,p_diff)
-				ShareRatio(air,Z.air,connected_zones[Z]*(vsc.zone_share_percent/100))
+				if(abs(air.total_moles - Z.air.total_moles) >= 0.1 || abs(air.temperature - Z.air.temperature) >= 0.1)
+					//var/p_diff = (air.return_pressure()-Z.air.return_pressure())*connected_zones[Z]*(vsc.zone_share_percent/100)
+					//if(p_diff > vsc.AF_TINY_MOVEMENT_THRESHOLD) Airflow(src,Z,p_diff)
+					ShareRatio(air,Z.air,connected_zones[Z]*(vsc.zone_share_percent/100))
 
 proc/ShareRatio(datum/gas_mixture/A, datum/gas_mixture/B, ratio)
 	var
