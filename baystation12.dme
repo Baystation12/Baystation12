@@ -1000,7 +1000,6 @@
 #include "code\ZAS\Variable Settings.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\tgstation.2.0.8.dmm"
 // END_INCLUDE
 // BEGIN_FILE_DIR
 #define FILE_DIR .
@@ -1099,7 +1098,6 @@
 #define FILE_DIR "code/modules/critters"
 #define FILE_DIR "code/modules/critters/hivebots"
 #define FILE_DIR "code/modules/customitems"
-#define FILE_DIR "code/modules/detective"
 #define FILE_DIR "code/modules/DetectiveWork"
 #define FILE_DIR "code/modules/flufftext"
 #define FILE_DIR "code/modules/food"
