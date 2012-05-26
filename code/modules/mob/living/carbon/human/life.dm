@@ -359,7 +359,7 @@
 			if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
 
 			var/datum/gas_mixture/environment = loc.return_air()
-			var/datum/air_group/breath
+			var/datum/gas_mixture/breath
 
 			// HACK NEED CHANGING LATER
 			if(isbreathing && health < config.health_threshold_crit)
@@ -368,7 +368,7 @@
 
 			if(holdbreath)
 				isbreathing = 0
-			else if(health >= config.health_threshold_crit && !isbreathing)
+			if(health >= config.health_threshold_crit && !isbreathing)
 				if(holdbreath)
 					// we're simply holding our breath, see if we can hold it longer
 					if(health < 30)
@@ -419,6 +419,14 @@
 										if(smoke)
 											smoke.reagents.copy_to(src, 10) // I dunno, maybe the reagents enter the blood stream through the lungs?
 									break // If they breathe in the nasty stuff once, no need to continue checking
+
+					if(istype(wear_mask, /obj/item/clothing/mask/gas))
+						var/datum/gas_mixture/filtered = new()
+						filtered.toxins = breath.toxins
+						filtered.trace_gases = breath.trace_gases.Copy()
+						breath.toxins = 0
+						breath.trace_gases = list()
+						loc.assume_air(filtered)
 
 				else //Still give containing object the chance to interact
 					if(istype(loc, /obj/))
@@ -537,7 +545,7 @@
 
 			if(Toxins_pp > safe_toxins_max) // Too much toxins
 				var/ratio = breath.toxins/safe_toxins_max
-				adjustToxLoss(min(ratio, 10))	//Limit amount of damage toxin exposure can do per second
+				adjustToxLoss(min(ratio, 20))	//Limit amount of damage toxin exposure can do per second
 				toxins_alert = max(toxins_alert, 1)
 			else
 				toxins_alert = 0
@@ -663,7 +671,7 @@
 
 			//Account for massive pressure differences.  Done by Polymorph
 			var/pressure = environment.return_pressure()
-			if(!istype(wear_suit, /obj/item/clothing/suit/space))
+			if(!istype(wear_suit, /obj/item/clothing/suit/space) && !istype(wear_suit,/obj/item/clothing/suit/fire))
 					/*if(pressure < 20)
 						if(prob(25))
 							src << "You feel the splittle on your lips and the fluid on your eyes boiling away, the capillteries in your skin breaking."
@@ -671,6 +679,11 @@
 					*/
 				if(pressure > HAZARD_HIGH_PRESSURE)
 					adjustBruteLoss(min((10+(round(pressure/(HIGH_STEP_PRESSURE)-2)*5)),MAX_PRESSURE_DAMAGE))
+
+			//Account for plasma.
+			if(environment.toxins > MOLES_PLASMA_VISIBLE + 1)
+				pl_effects()
+
 
 			return //TODO: DEFERRED
 

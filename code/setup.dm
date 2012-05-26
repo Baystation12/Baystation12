@@ -3,7 +3,7 @@
 #define R_IDEAL_GAS_EQUATION	8.31 //kPa*L/(K*mol)
 #define ONE_ATMOSPHERE		101.325	//kPa
 
-#define CELL_VOLUME 2500	//liters in a cell
+#define CELL_VOLUME 2500//25	//liters in a cell
 #define MOLES_CELLSTANDARD (ONE_ATMOSPHERE*CELL_VOLUME/(T20C*R_IDEAL_GAS_EQUATION))	//moles in a 2.5 m^3 cell at 101.325 Pa and 20 degC
 
 #define O2STANDARD 0.21
@@ -14,7 +14,7 @@
 
 #define MOLES_PLASMA_VISIBLE	0.5 //Moles in a standard cell after which plasma is visible
 
-#define BREATH_VOLUME 0.5	//liters in a normal breath
+#define BREATH_VOLUME 0.5 //0.5	//liters in a normal breath
 #define BREATH_PERCENTAGE BREATH_VOLUME/CELL_VOLUME
 	//Amount of air to take a from a tile
 #define HUMAN_NEEDED_OXYGEN	MOLES_CELLSTANDARD*BREATH_PERCENTAGE*0.16
@@ -27,6 +27,17 @@
 #define HAZARD_LOW_PRESSURE 20
 #define WARNING_LOW_PRESSURE HAZARD_LOW_PRESSURE*2.5
 #define MAX_PRESSURE_DAMAGE 20
+
+#define SPECIFIC_HEAT_TOXIN		200
+#define SPECIFIC_HEAT_AIR		20
+#define SPECIFIC_HEAT_CDO		30
+#define HEAT_CAPACITY_CALCULATION(oxygen,carbon_dioxide,nitrogen,toxins) \
+	(carbon_dioxide*SPECIFIC_HEAT_CDO + (oxygen+nitrogen)*SPECIFIC_HEAT_AIR + toxins*SPECIFIC_HEAT_TOXIN)
+
+#define MINIMUM_HEAT_CAPACITY	0.003
+
+#define QUANTIZE(variable)		(round(variable,0.0001))
+#define TRANSFER_FRACTION 5 //What fraction (1/#) of the air difference to try and transfer
 
 // Doors!
 #define DOOR_CRUSH_DAMAGE 10

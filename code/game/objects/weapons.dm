@@ -30,8 +30,8 @@
 
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
-			if(target.parent)
-				target.parent.suspend_group_processing()
+			//if(target.parent)
+			//	target.parent.suspend_group_processing()
 
 			var/datum/gas_mixture/payload = new
 			var/datum/gas/sleeping_agent/trace_gas = new
@@ -48,8 +48,6 @@
 /obj/effect/mine/proc/triggerplasma(obj)
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
-			if(target.parent)
-				target.parent.suspend_group_processing()
 
 			var/datum/gas_mixture/payload = new
 

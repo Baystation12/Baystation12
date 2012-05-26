@@ -190,7 +190,6 @@
 							hud1.icon_state = "disarm/kill"
 							for(var/mob/O in viewers(assailant, null))
 								O.show_message(text("\red [] has loosened the grip on []'s neck!", assailant, affecting), 1)
-		else
 	return
 
 

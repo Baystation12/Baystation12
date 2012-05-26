@@ -78,6 +78,7 @@
 /obj/machinery/portable_atmospherics/canister/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > temperature_resistance)
 		health -= 5
+		if(prob(10)) health = 0 //It's no fun if they all explode at one predictable time.
 		healthcheck()
 
 /obj/machinery/portable_atmospherics/canister/proc/healthcheck()
