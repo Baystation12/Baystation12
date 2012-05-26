@@ -134,7 +134,7 @@ datum
 				var/start_time = world.timeofday
 
 				for(var/turf/simulated/S in world)
-					if(S.z < 5)
+					if(S.z < 4)
 						if(!S.blocks_air && !S.zone && S.z < 5) // Added last check to force skipping asteroid z-levels -- TLE
 							new/zone(S)
 
