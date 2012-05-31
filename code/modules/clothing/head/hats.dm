@@ -72,7 +72,7 @@
 
 /obj/item/clothing/head/plaguedoctorhat
 	name = "plague doctor's hat"
-	desc = "These were once used by Plague doctors. They're pretty much useless."
+	desc = "These were once used by plague doctors. They're pretty much useless."
 	icon_state = "plaguedoctor"
 	flags = FPRINT | TABLEPASS
 	permeability_coefficient = 0.01
@@ -96,7 +96,7 @@
 
 /obj/item/clothing/head/secsoft
 	name = "soft cap"
-	desc = "It's baseball hat in tasteful red colour."
+	desc = "It's a baseball hat in a tasteful red colour."
 	icon_state = "secsoft"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES
 	item_state = "helmet"
@@ -126,7 +126,7 @@
 
 /obj/item/clothing/head/hasturhood
 	name = "hastur's hood"
-	desc = "It's unspeakably stylish"
+	desc = "It's unspeakably stylish!"
 	icon_state = "hasturhood"
 	flags = FPRINT|TABLEPASS|HEADSPACE|HEADCOVERSEYES|BLOCKHAIR
 
