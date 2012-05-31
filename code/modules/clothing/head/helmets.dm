@@ -11,7 +11,7 @@
 
 /obj/item/clothing/head/helmet/warden
 	name = "warden's hat"
-	desc = "It's a special hat issued to the Warden of a securiy force. Protects the head from impacts."
+	desc = "It's a special hat issued to the Warden of a security force. Protects the head from impacts."
 	icon_state = "wardencap"
 	flags_inv = 0
 
