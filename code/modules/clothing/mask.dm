@@ -41,7 +41,7 @@
 
 /obj/item/clothing/mask/balaclava
 	name = "balaclava"
-	desc = "LOADSAMONEY"
+	desc = "Keeps your face nice and warm."
 	icon_state = "balaclava"
 	item_state = "balaclava"
 	flags = FPRINT|TABLEPASS|SUITSPACE|HEADSPACE|MASKCOVERSMOUTH|BLOCKHAIR

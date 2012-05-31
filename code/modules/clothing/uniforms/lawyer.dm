@@ -3,7 +3,7 @@
 
 /obj/item/clothing/under/lawyer
 	desc = "Slick threads."
-	name = "Lawyer suit"
+	name = "lawyer's suit"
 	flags = FPRINT | TABLEPASS
 	flags_inv = HIDEJUMPSUIT
 
@@ -27,14 +27,14 @@
 
 
 /obj/item/clothing/under/lawyer/bluesuit
-	name = "Blue Suit"
+	name = "blue suit"
 	desc = "A classy suit and tie"
 	icon_state = "bluesuit"
 	item_state = "bluesuit"
 	color = "bluesuit"
 
 /obj/item/clothing/suit/lawyer/bluejacket
-	name = "Blue Suit Jacket"
+	name = "blue suit jacket"
 	desc = "A snappy dress jacket."
 	icon_state = "suitjacket_blue_open"
 	item_state = "suitjacket_blue_open"
@@ -42,13 +42,13 @@
 
 
 /obj/item/clothing/under/lawyer/purpsuit
-	name = "Purple Suit"
+	name = "purple suit"
 	icon_state = "lawyer_purp"
 	item_state = "lawyer_purp"
 	color = "lawyer_purp"
 
 /obj/item/clothing/suit/lawyer/purpjacket
-	name = "Purple Suit Jacket"
+	name = "purple suit jacket"
 	desc = "A snappy dress jacket."
 	icon_state = "suitjacket_purp"
 	item_state = "suitjacket_purp"

@@ -98,7 +98,7 @@
 
 /obj/item/clothing/gloves/swat
 	desc = "These tactical gloves are somewhat fire and impact-resistant."
-	name = "\improper SWAT Gloves"
+	name = "\improper SWAT gloves"
 	icon_state = "black"
 	item_state = "swat_gl"
 	siemens_coefficient = 0
@@ -132,7 +132,7 @@
 //BEEP BEEP IT'S THE COMMENT BRIGADE -Pete (gloves overhaul)
 /*
 /obj/item/clothing/gloves/stungloves/
-	name = "Stungloves"
+	name = "stungloves"
 	desc = "These gloves are electrically charged."
 	icon_state = "yellow"
 	item_state = "ygloves"
