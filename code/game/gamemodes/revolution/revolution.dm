@@ -216,27 +216,25 @@
 				if(head_rev_mind.current.client)
 					for(var/image/I in head_rev_mind.current.client.images)
 						if(I.icon_state == "rev" || I.icon_state == "rev_head")
-							head_rev_mind.current.client.images -= I
+							del(I)
 
 		for(var/datum/mind/rev_mind in revolutionaries)
 			if(rev_mind.current)
 				if(rev_mind.current.client)
 					for(var/image/I in rev_mind.current.client.images)
 						if(I.icon_state == "rev" || I.icon_state == "rev_head")
-							rev_mind.current.client.images -= I
+							del(I)
 
 		for(var/datum/mind/head_rev in head_revolutionaries)
 			if(head_rev.current)
 				if(head_rev.current.client)
 					for(var/datum/mind/rev in revolutionaries)
 						if(rev.current)
-							var/image/I = rev.current.antag_img
-							I.icon_state = "rev"
+							var/I = image('mob.dmi', loc = rev.current, icon_state = "rev")
 							head_rev.current.client.images += I
 					for(var/datum/mind/head_rev_1 in head_revolutionaries)
 						if(head_rev_1.current)
-							var/image/I = head_rev_1.current.antag_img
-							I.icon_state = "rev_head"
+							var/I = image('mob.dmi', loc = head_rev_1.current, icon_state = "rev_head")
 							head_rev.current.client.images += I
 
 		for(var/datum/mind/rev in revolutionaries)
@@ -244,13 +242,11 @@
 				if(rev.current.client)
 					for(var/datum/mind/head_rev in head_revolutionaries)
 						if(head_rev.current)
-							var/image/I = head_rev.current.antag_img
-							I.icon_state = "rev_head"
+							var/I = image('mob.dmi', loc = head_rev.current, icon_state = "rev_head")
 							rev.current.client.images += I
 					for(var/datum/mind/rev_1 in revolutionaries)
 						if(rev_1.current)
-							var/image/I = rev_1.current.antag_img
-							I.icon_state = "rev"
+							var/I = image('mob.dmi', loc = rev_1.current, icon_state = "rev")
 							rev.current.client.images += I
 
 ////////////////////////////////////////////////////
@@ -262,26 +258,22 @@
 		for(var/datum/mind/head_rev_mind in head_revolutionaries)
 			if(head_rev_mind.current)
 				if(head_rev_mind.current.client)
-					var/image/I = rev_mind.current.antag_img
-					I.icon_state = "rev"
+					var/I = image('mob.dmi', loc = rev_mind.current, icon_state = "rev")
 					head_rev_mind.current.client.images += I
 			if(rev_mind.current)
 				if(rev_mind.current.client)
-					var/image/I = head_rev_mind.current.antag_img
-					I.icon_state = "rev_head"
-					rev_mind.current.client.images += I
+					var/image/J = image('mob.dmi', loc = head_rev_mind.current, icon_state = "rev_head")
+					rev_mind.current.client.images += J
 
 		for(var/datum/mind/rev_mind_1 in revolutionaries)
 			if(rev_mind_1.current)
 				if(rev_mind_1.current.client)
-					var/image/I = rev_mind.current.antag_img
-					I.icon_state = "rev"
+					var/I = image('mob.dmi', loc = rev_mind.current, icon_state = "rev")
 					rev_mind_1.current.client.images += I
 			if(rev_mind.current)
 				if(rev_mind.current.client)
-					var/image/I = rev_mind_1.current.antag_img
-					I.icon_state = "rev"
-					rev_mind.current.client.images += I
+					var/image/J = image('mob.dmi', loc = rev_mind_1.current, icon_state = "rev")
+					rev_mind.current.client.images += J
 
 ///////////////////////////////////
 //Keeps track of deconverted revs//
@@ -293,20 +285,20 @@
 				if(head_rev_mind.current.client)
 					for(var/image/I in head_rev_mind.current.client.images)
 						if((I.icon_state == "rev" || I.icon_state == "rev_head") && I.loc == rev_mind.current)
-							head_rev_mind.current.client.images -= I
+							del(I)
 
 		for(var/datum/mind/rev_mind_1 in revolutionaries)
 			if(rev_mind_1.current)
 				if(rev_mind_1.current.client)
 					for(var/image/I in rev_mind_1.current.client.images)
 						if((I.icon_state == "rev" || I.icon_state == "rev_head") && I.loc == rev_mind.current)
-							rev_mind_1.current.client.images -= I
+							del(I)
 
 		if(rev_mind.current)
 			if(rev_mind.current.client)
 				for(var/image/I in rev_mind.current.client.images)
 					if(I.icon_state == "rev" || I.icon_state == "rev_head")
-						rev_mind.current.client.images -= I
+						del(I)
 
 //////////////////////////
 //Checks for rev victory//
