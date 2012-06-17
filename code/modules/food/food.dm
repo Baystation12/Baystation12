@@ -420,7 +420,7 @@
 	New()
 		..()
 		bitesize = 2
-
+/*
 /obj/item/weapon/reagent_containers/food/snacks/ghostburger
 	name = "Ghost Burger"
 	desc = "Spooky! It doesn't look very filling."
@@ -429,7 +429,7 @@
 		..()
 		reagents.add_reagent("nutriment", 2)
 		bitesize = 2
-
+*/
 
 /obj/item/weapon/reagent_containers/food/snacks/human
 	var/hname = ""
@@ -483,23 +483,24 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 2)
-
+/*
 /obj/item/weapon/reagent_containers/food/snacks/burger/clown
 	name = "Clown Burger"
 	desc = "This tastes funny..."
 	icon_state = "clownburger"
-/*	New()
+	New()
 		..()
 
 		var/datum/disease/F = new /datum/disease/pierrot_throat(0)
 		var/list/data = list("viruses"= list(F))
 		reagents.add_reagent("blood", 4, data)
-*/
+
 
 /obj/item/weapon/reagent_containers/food/snacks/burger/mime
 	name = "Mime Burger"
 	desc = "Its taste defies language."
 	icon_state = "mimeburger"
+*/
 
 /obj/item/weapon/reagent_containers/food/snacks/omelette
 	name = "Omelette Du Fromage"
@@ -1076,22 +1077,6 @@
 		reagents.add_reagent("tomatojuice", 2)
 		bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/telebacon
-	name = "Tele Bacon"
-	desc = "It tastes a little odd but it is still delicious."
-	icon_state = "bacon"
-	var/obj/item/device/radio/beacon/bacon/baconbeacon
-	bitesize = 2
-	New()
-		..()
-		reagents.add_reagent("nutriment", 4)
-		baconbeacon = new /obj/item/device/radio/beacon/bacon(src)
-	On_Consume()
-		if(!reagents.total_volume)
-			baconbeacon.loc = usr
-			baconbeacon.digest_delay()
-
-
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube
 	name = "monkey cube"
 	desc = "Just add water!"
@@ -1131,16 +1116,6 @@
 		desc = "Still wrapped in some paper."
 		icon_state = "monkeycubewrap"
 		wrapped = 1
-
-
-/obj/item/weapon/reagent_containers/food/snacks/spellburger
-	name = "Spell Burger"
-	desc = "This is absolutely Ei Nath."
-	icon_state = "spellburger"
-	New()
-		..()
-		reagents.add_reagent("nutriment", 6)
-		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/bigbiteburger
 	name = "Big Bite Burger"
