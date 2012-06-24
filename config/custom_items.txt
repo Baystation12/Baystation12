@@ -13,6 +13,7 @@ fastler: Fastler Greay: /obj/item/weapon/card/id/fluff/lifetime
 fniff: Sarah Calvera: /obj/item/fluff/sarah_calvera_1
 fniff: Angleo Wilkerson: /obj/item/fluff/angelo_wilkerson_1
 gvazdas: Sarah Carbrokes: /obj/item/fluff/sarah_carbrokes_1
+jamini: Edwin Atweeke: /obj/item/clothing/suit/storage/labcoat/fluff/burnt
 leonheart11:  Johann Erzatz: /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/johann_erzatz_1
 lexusjjss: Lexus Langg: /obj/item/weapon/clipboard/fluff/smallnote, /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/shinyflask
 lexusjjss: Zachary Tomlinson: /obj/item/weapon/clipboard/fluff/smallnote, /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/shinyflask

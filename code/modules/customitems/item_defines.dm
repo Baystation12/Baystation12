@@ -245,6 +245,13 @@
 	icon = 'custom_items.dmi'
 	icon_state = "labcoat_pink_open"
 
+/obj/item/clothing/suit/storage/labcoat/fluff/burnt //jamini: Edwin Atweeke
+	name = "burnt labcoat"
+	desc = "This lab coat has clearly seen better, less burnt, days."
+	icon = 'custom_items.dmi'
+	icon_state = "labcoat_tox_open"
+	item_state = "labcoat_tox"
+
 /obj/item/clothing/suit/storage/det_suit/fluff/graycoat //vinceluk: Seth Sealis
 	name = "gray coat"
 	desc = "Old, worn out coat. It's seen better days."
