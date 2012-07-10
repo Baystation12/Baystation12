@@ -69,12 +69,23 @@ proc/load_reports()
 
 // check if there are any unhandled reports
 client/proc/unhandled_reports()
+	if(!src.holder) return 0
 	var/list/reports = load_reports()
 
 	for(var/datum/admin_report/N in reports)
 		if(N.done)
 			continue
 		else return 1
+
+	return 0
+
+// checks if the player has an unhandled report against him
+client/proc/is_reported()
+	var/list/reports = load_reports()
+
+	for(var/datum/admin_report/N in reports) if(!N.done)
+		if(N.offender_key == src.key)
+			return 1
 
 	return 0
 
