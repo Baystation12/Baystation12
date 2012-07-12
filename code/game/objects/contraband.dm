@@ -83,6 +83,7 @@ obj/effect/decal/poster/New(var/serial)
 
 	src.serial_number = serial
 
+	restart_proc:
 	if(serial_number==src.loc)
 		//add an increased chance for BS12 specific posters to spawn
 		if(prob(10))
@@ -173,7 +174,7 @@ obj/effect/decal/poster/New(var/serial)
 			desc += " A safety poster starring a clueless looking redhead with frazzled hair. \"Every year, hundreds of NT employees expose themselves to electric shock. Play it safe. Avoid suspicious doors after electrical storms, and always wear protection when doing electric maintenance.\""
 		if(26)
 			name += " - Responsible medbay habits, No #259"
-			desc += " A poster with a nervous looking geneticist on it states; \"Friends Don't Tell Friends They're Clones. It can cause severe and irreparable emotion trauma. Always do the right thing and never tell them that they were dead.\""
+			desc += " A poster with a nervous looking geneticist on it states; \"Friends Don't Tell Friends They're Clones. It can cause severe and irreparable emotional trauma. Always do the right thing and never tell them that they were dead.\""
 		if(27)
 			name += " - Irresponsible medbay habits, No #2"
 			desc += " This is a safety poster starring a perverted looking naked doctor. \"Sexual harassment is never okay. REPORT any acts of sexual deviance or harassment that disrupt a healthy working environment.\""
@@ -181,12 +182,10 @@ obj/effect/decal/poster/New(var/serial)
 			name += " - the Disabled Triptarch: Ironfoot, Seber and Ore"
 			desc += " This poster depicts a genetics researcher, a chemist and a medical doctor in various states of miscommunication."*/
 		else
-			new /obj/effect/decal/poster(src.loc)	//not sure if this will work, but worth a try
-			del src
-			//slight chance it will get stuck in an infinite loop and crash the server
-
-			//name = "This shit just bugged. Report it to Agouri - polyxenitopalidou@gmail.com"
-			//desc = "Why are you still here?"
+			//properly handle unhinged logic states
+			//l2code agouri pls
+			src.serial_number = src.loc
+			goto restart_proc
 	..()
 
 obj/effect/decal/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
