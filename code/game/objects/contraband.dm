@@ -164,7 +164,7 @@ obj/effect/decal/poster/New(var/serial)
 			desc += " This poster depicts a mysteriously inscrutable, alien scene. Numerous Skrell can be seen conversing amidst great, crystalline towers rising above crashing waves"
 		if(23)
 			name += " - Join the Fuzz!"
-			desc += " It's a nice recruitment poster of a white haired Chinese woman that says; "Big Guns, Hot Women, Good Times. Security. We get it done.""
+			desc += " It's a nice recruitment poster of a white haired Chinese woman that says; \"Big Guns, Hot Women, Good Times. Security. We get it done.\""
 		if(24)
 			name += " - Looking for a career with excitement?"
 			desc += " A recruitment poster starring a dark haired woman with glasses and a purple shirt that has \"Got Brains? Got Talent? Not afraid of electric flying monsters that want to suck the soul out of you? Then Xenobiology could use someone like you!\" written on the bottom."
@@ -181,7 +181,7 @@ obj/effect/decal/poster/New(var/serial)
 			name += " - the Disabled Triptarch: Ironfoot, Seber and Ore"
 			desc += " This poster depicts a genetics researcher, a chemist and a medical doctor in various states of miscommunication."*/
 		else
-			new obj/effect/decal/poster(src.loc)	//not sure if this will work, but worth a try
+			new /obj/effect/decal/poster(src.loc)	//not sure if this will work, but worth a try
 			del src
 			//slight chance it will get stuck in an infinite loop and crash the server
 
