@@ -102,7 +102,7 @@
 		if (istype(C,/obj/item/weapon/ore/clown))
 			amt_clown++;
 			quantity_inside++
-		if (istype(C,/obj/item/weapon/ore/archaeo))
+		if (istype(C,/obj/item/weapon/ore/strangerock))
 			amt_archaeo++;
 			quantity_inside++
 
@@ -124,7 +124,7 @@
 	if (amt_clown)
 		dat += text("Bananium ore: [amt_clown]<br>")
 	if (amt_archaeo)
-		dat += text("Archaeological samples: [amt_archaeo]<br>")
+		dat += text("Strange rocks: [amt_archaeo]<br>")
 	dat += text("Total ore quantity: [quantity_inside]<br>")
 
 	dat += text("<br><br><A href='?src=\ref[src];removeall=1'>Empty box</A>")

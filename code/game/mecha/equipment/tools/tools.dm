@@ -95,7 +95,7 @@
 						if(ore_box)
 							for(var/obj/item/weapon/ore/ore in range(chassis,1))
 								if(get_dir(chassis,ore)&chassis.dir)
-									if(ore_box.quantity_inside < ore_box.max_quantity)
+									if(ore_box.quantity_inside < ore_box.quantity_max)
 										ore.Move(ore_box)
 										ore_box.quantity_inside++
 									else if(!warning)
