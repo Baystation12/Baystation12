@@ -50,6 +50,8 @@
 	name = "Ore Box"
 	desc = "It's heavy"
 	density = 1
+	var/quantity_inside = 0
+	var/quantity_max = 50
 
 	New()
 		if(prob(50))
@@ -72,24 +74,37 @@
 	var/amt_plasma = 0
 	var/amt_uranium = 0
 	var/amt_clown = 0
+	var/amt_archaeo = 0
 
+	quantity_inside = 0
 	for (var/obj/item/weapon/ore/C in contents)
 		if (istype(C,/obj/item/weapon/ore/diamond))
 			amt_diamond++;
+			quantity_inside++
 		if (istype(C,/obj/item/weapon/ore/glass))
 			amt_glass++;
+			quantity_inside++
 		if (istype(C,/obj/item/weapon/ore/plasma))
 			amt_plasma++;
+			quantity_inside++
 		if (istype(C,/obj/item/weapon/ore/iron))
 			amt_iron++;
+			quantity_inside++
 		if (istype(C,/obj/item/weapon/ore/silver))
 			amt_silver++;
+			quantity_inside++
 		if (istype(C,/obj/item/weapon/ore/gold))
 			amt_gold++;
+			quantity_inside++
 		if (istype(C,/obj/item/weapon/ore/uranium))
 			amt_uranium++;
+			quantity_inside++
 		if (istype(C,/obj/item/weapon/ore/clown))
 			amt_clown++;
+			quantity_inside++
+		if (istype(C,/obj/item/weapon/ore/strangerock))
+			amt_archaeo++;
+			quantity_inside++
 
 	var/dat = text("<b>The contents of the ore box reveal...</b><br>")
 	if (amt_gold)
@@ -108,6 +123,9 @@
 		dat += text("Uranium ore: [amt_uranium]<br>")
 	if (amt_clown)
 		dat += text("Bananium ore: [amt_clown]<br>")
+	if (amt_archaeo)
+		dat += text("Strange rocks: [amt_archaeo]<br>")
+	dat += text("Total ore quantity: [quantity_inside]<br>")
 
 	dat += text("<br><br><A href='?src=\ref[src];removeall=1'>Empty box</A>")
 	user << browse("[dat]", "window=orebox")

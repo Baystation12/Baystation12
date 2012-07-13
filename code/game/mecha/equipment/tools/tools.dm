@@ -70,6 +70,7 @@
 	equip_cooldown = 30
 	energy_drain = 10
 	force = 15
+	var/warning = 0
 
 	action(atom/target)
 		if(!action_checks(target)) return
@@ -79,6 +80,7 @@
 		occupant_message("<font color='red'><b>You start to drill [target]</b></font>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
+							//i do - hyper.spaaaaaaaaaaaaaaaaaaaaaaaccee.com
 		if(do_after_cooldown(target))
 			if(T == chassis.loc && src == chassis.selected)
 				if(istype(target, /turf/simulated/wall/r_wall))
@@ -93,7 +95,16 @@
 						if(ore_box)
 							for(var/obj/item/weapon/ore/ore in range(chassis,1))
 								if(get_dir(chassis,ore)&chassis.dir)
-									ore.Move(ore_box)
+									if(ore_box.quantity_inside < ore_box.quantity_max)
+										ore.Move(ore_box)
+										ore_box.quantity_inside++
+									else if(!warning)
+										occupant_message("<font color='red'><b>Warning, the ore box is full!</b></font>")
+										//give it a 10 sec timer, so it doesn't spam unnecessarily
+										warning = 1
+										spawn(100)
+											warning = 0
+										break
 				else if(target.loc == C)
 					log_message("Drilled through [target]")
 					target.ex_act(2)
