@@ -81,6 +81,8 @@ var/list/science_positions = list(
 	"Research Director",
 	"Scientist",
 	"Chemist"
+	"Anomalist"
+	"Xenoarchaeologist"
 )
 
 
