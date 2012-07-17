@@ -965,6 +965,7 @@
 	set category = "Object"
 	set name = "Enter Exosuit"
 	set src in oview(1)
+
 	if (usr.stat || !ishuman(usr))
 		return
 	src.log_message("[usr] tries to move in.")
