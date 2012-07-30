@@ -1,6 +1,6 @@
 /obj/item/radio/integrated
 	name = "PDA radio module"
-	desc = "An electronic radio system of nanotrasen origin."
+	desc = "An electronic radio system of NanoTrasen origin."
 	icon = 'module.dmi'
 	icon_state = "power_mod"
 	var/obj/item/device/pda/hostpda = null
