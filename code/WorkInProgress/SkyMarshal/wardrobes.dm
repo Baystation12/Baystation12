@@ -410,6 +410,8 @@
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/clothing/shoes/jackboots(src)
 		new /obj/item/clothing/under/rank/warden(src)
+		new /obj/item/clothing/suit/armor/vest/warden(src)
+		new /obj/item/weapon/pepperspray(src)
 
 /obj/item/wardrobe/detective
 	name = "\improper Detective Wardrobe"
@@ -541,6 +543,7 @@
 		new /obj/item/device/radio/headset/headset_cargo(src)
 		new /obj/item/clothing/shoes/black(src)
 		new /obj/item/clothing/under/rank/cargotech(src)
+		new /obj/item/clothing/gloves/fingerless/black(src)
 
 /obj/item/wardrobe/mining
 	name = "\improper Shaft Miner Wardrobe"
@@ -561,6 +564,7 @@
 		new /obj/item/device/radio/headset/headset_mine(src)
 		new /obj/item/clothing/shoes/black(src)
 		new /obj/item/clothing/under/rank/miner(src)
+		new /obj/item/clothing/gloves/fingerless/black(src)
 
 /obj/item/wardrobe/janitor
 	name = "\improper Janitor Wardrobe"
