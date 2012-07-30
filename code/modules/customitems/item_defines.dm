@@ -183,26 +183,27 @@
 	body_parts_covered = null
 	flags = FPRINT|TABLEPASS
 
-/obj/item/weapon/reagent_containers/hypospray/fluff/strangepenlight //Nerezza: Asher Spock
+//Strange penlight, Nerezza: Asher Spock
+
+/obj/item/weapon/reagent_containers/hypospray/fluff/asher_spock_1
 	name = "strange penlight"
 	desc = "Besides the coloring, this penlight looks rather normal and innocent. However, you get a nagging feeling whenever you see it..."
 	icon = 'custom_items.dmi'
 	icon_state = "asher_spock_1"
 	amount_per_transfer_from_this = 5
-	volume = 20
+	volume = 15
 
-/obj/item/weapon/reagent_containers/hypospray/fluff/strangepenlight/New()
+/obj/item/weapon/reagent_containers/hypospray/fluff/asher_spock_1/New()
 	..()
 	reagents.remove_reagent("tricordrazine", 30)
-	reagents.add_reagent("oxycodone", 20)
+	reagents.add_reagent("oxycodone", 15)
 	update_icon()
 	return
 
-/obj/item/weapon/reagent_containers/hypospray/fluff/strangepenlight/attack_self(mob/user as mob)
+/obj/item/weapon/reagent_containers/hypospray/fluff/asher_spock_1/attack_self(mob/user as mob)
 	user << "\blue You click \the [src] but get no reaction. Must be dead."
 
-/obj/item/weapon/reagent_containers/hypospray/fluff/strangepenlight/attack(mob/M as mob, mob/user as mob)
-	var/reagent_names
+/obj/item/weapon/reagent_containers/hypospray/fluff/asher_spock_1/attack(mob/M as mob, mob/user as mob)
 	if (user.ckey != "nerezza") //Because this can end up in the wrong hands, let's make it useless for them!
 		user << "\blue You click \the [src] but get no reaction. Must be dead."
 		return
@@ -215,36 +216,31 @@
 		if (M == user && user.ckey == "nerezza") //Make sure this is being used by the right person, for the right reason (self injection)
 			visible_message("\blue [user] presses [user.get_visible_gender() == MALE ? "his" : user.get_visible_gender() == FEMALE ? "her" : "their"] \
 				penlight against [user.get_visible_gender() == MALE ? "his" : user.get_visible_gender() == FEMALE ? "her" : "their"] skin, quickly clicking the button once.", \
-				"\blue You press the disguised hypo against your skin and click the button. You feel a sharp pain at the injection site that rapidly fades.", \
+				"\blue You press the disguised autoinjector against your skin and click the button. There's a sharp pain at the injection site that rapidly fades.", \
 				"You hear a rustle as someone moves nearby, then a sharp click.")
-		if (M != user && user.ckey == "nerezza") //Woah now, you better be careful partner, those admins are watching. Make sure you only use it for a legit, IC reason!
-			visible_message("\blue [user] presses [user.get_visible_gender() == MALE ? "his" : user.get_visible_gender() == FEMALE ? "her" : "their"] \
-				penlight against [M]'s skin, quickly clicking the button once.", \
-				"\blue You press the disguised hypo against M's skin and click the button.", \
-				"You hear a rustle as people move nearby, then a sharp click.")
-			M << "\red You feel a tiny prick!"
-			for(var/datum/reagent/R in reagents.reagent_list) //Yes, you are going on the log for entering a grey area, and yes they know what was in it. Talking to myself in comments.
-				reagent_names += R.name + ", "
-			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with ([reagent_names]) using [src.name] by [user.name] ([user.ckey])</font>")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to inject [M.name] ([M.ckey]) with ([reagent_names])</font>")
-			log_admin("ATTACK: [user] ([user.ckey]) injected [M] ([M.ckey]) with ([reagent_names]) using [src].")
-			message_admins("ATTACK: [user] ([user.ckey]) injected [M] ([M.ckey]) with ([reagent_names]) using [src].")
-			log_attack("<font color='red'>[user.name] ([user.ckey]) injected [M.name] ([M.ckey]) with ([reagent_names]) using [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
-		else return //This is an extra just in case. I really don't want people to be able to abuse this.
+		if (M != user && user.ckey == "nerezza") //Woah now, you better be careful partner
+			user << "\blue You don't want to contaminate the autoinjector."
+			return
 		src.reagents.reaction(M, INGEST)
 		if(M.reagents)
 			var/trans = reagents.trans_to(M, amount_per_transfer_from_this)
 			user << "\blue [trans] units injected. [reagents.total_volume] units remaining in \the [src]."
 	return
 
-/obj/item/weapon/reagent_containers/hypospray/fluff/strangepenlight/examine(mob/user as mob)
+/obj/item/weapon/reagent_containers/hypospray/fluff/asher_spock_1/examine(mob/user as mob)
 	..()
 	if(user.ckey != "nerezza") return //Only the owner knows how to examine the contents.
 	if(reagents && reagents.reagent_list.len)
 		for(var/datum/reagent/R in reagents.reagent_list)
-			usr << "\blue You examine the penlight closesly and see that it has [R.volume] units of [R.name] stored."
+			usr << "\blue You examine the penlight closely and see that it has [R.volume] units of [R.name] stored."
 	else
-		usr << "\blue You examine the penlight closesly and see that it is currently empty."
+		usr << "\blue You examine the penlight closely and see that it is currently empty."
+
+/obj/item/weapon/card/id/fluff/asher_spock_2 //Nerezza: Asher Spock
+	name = "Odysses Specialist ID card"
+	desc = "A special identification card with a red cross signifying an emergency physician has specialised in Odysseus operations and maintenance.\nIt grants the owner recharge bay access."
+	icon = 'custom_items.dmi'
+	icon_state = "odysseus_spec_id"
 
 //////////////////////////////////
 //////////// Clothing ////////////
