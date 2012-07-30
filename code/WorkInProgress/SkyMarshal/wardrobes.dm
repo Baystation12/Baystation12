@@ -527,7 +527,7 @@
 		new /obj/item/device/pda/quartermaster(src)
 		new /obj/item/clothing/glasses/sunglasses(src)
 		new /obj/item/device/radio/headset/heads/qm(src)
-		new /obj/item/clothing/shoes/black(src)
+		new /obj/item/clothing/shoes/brown(src)
 		new /obj/item/clothing/under/rank/cargo(src)
 
 /obj/item/wardrobe/cargo_tech
