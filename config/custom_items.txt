@@ -41,3 +41,5 @@ whitellama: Ethan Way: /obj/item/fluff/ethan_way_1
 whitewolf41: Jeremy Wolf: /obj/item/clothing/under/rank/security/fluff/jeremy_wolf_1
 jamini: Edwin Atweeke: /obj/item/clothing/suit/storage/labcoat/fluff/burnt
 cubejackal: Barry Sharke: /obj/item/clothing/mask/fluff/electriccig
+nerezza: Asher Spock: /obj/item/weapon/reagent_containers/hypospray/fluff/asher_spock_1
+nerezza: Asher Spock: /obj/item/weapon/card/id/fluff/asher_spock_2
