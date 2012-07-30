@@ -578,6 +578,7 @@
 		new /obj/item/device/pda/janitor(src)
 		new /obj/item/clothing/shoes/black(src)
 		new /obj/item/clothing/under/rank/janitor(src)
+		new /obj/item/device/portalathe(src)
 
 /obj/item/wardrobe/librarian
 	name = "\improper Librarian Wardrobe"
