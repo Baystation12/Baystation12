@@ -57,7 +57,8 @@
 		"/obj/item/device/analyzer",
 		"/obj/item/device/pda",
 		"/obj/item/weapon/lighter",
-		"/obj/item/weapon/cigpacket"
+		"/obj/item/weapon/cigpacket",
+		"/obj/item/weapon/matchbox"
 	)
 
 
@@ -107,6 +108,7 @@
 		"/obj/item/weapon/reagent_containers/hypospray",
 		"/obj/item/weapon/lighter",
 		"/obj/item/weapon/cigpacket",
+		"/obj/item/weapon/matchbox",
 		"/obj/item/weapon/storage/pill_bottle",
 		"/obj/item/stack/medical",
 		"/obj/item/device/flashlight/pen",
@@ -147,6 +149,7 @@
 		"/obj/item/weapon/camera_film",
 		"/obj/item/weapon/cigpacket",
 		"/obj/item/weapon/lighter",
+		"/obj/item/weapon/matchbox",
 		"/obj/item/device/taperecorder",
 		"/obj/item/weapon/evidencebag",
 		"/obj/item/taperoll/police",
