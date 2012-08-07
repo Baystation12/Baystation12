@@ -168,3 +168,9 @@ SOCKET_TALK 0
 
 ## Uncomment to restrict non-admins using humanoid alien races
 USEALIENWHITELIST
+
+## Uncomment to write a json info file to the requested path.
+## This file is updated when players log in and out from the server.
+## You can for example see what the current game mode is and what players are online.
+## The file could for example be used together with javascript to display the info on a website.
+#JSON_INFO_FILE info.json

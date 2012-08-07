@@ -1,3 +1,6 @@
+
+var/makejson = 1 // temp
+
 //This looks to be the traitor win tracker code.
 client/proc/add_roundsjoined()
 	if(!makejson)

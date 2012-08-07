@@ -50,6 +50,7 @@
 	var/kick_inactive = 0				//force disconnect for inactive players
 	var/load_jobs_from_txt = 0
 	var/usealienwhitelist = 0
+	var/json_info_file = ""
 
 	var/server
 	var/banappeals
@@ -241,6 +242,9 @@
 
 				if ("usealienwhitelist")
 					config.usealienwhitelist = 1
+
+				if ("json_info_file")
+					config.json_info_file = value
 
 				if ("feature_object_spell_system")
 					config.feature_object_spell_system = 1
