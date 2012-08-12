@@ -4,3 +4,5 @@
 *.dmb
 *.lk
 info.json
+/deletions
+/statistics

@@ -1,23 +1,14 @@
+var/dmepath = "/home/bay12/git/baystation12.dme" // What is this for? Is it even used?
 
-var/jsonpath = "/home/bay12/public_html"
-var/dmepath = "/home/bay12/git/baystation12.dme"
-var/makejson = 1 //temp
 proc/makejson()
+	if(length(config.json_info_file) == 0)
+		return
 
-	if(!makejson)
-		return
-	fdel("[jsonpath]/info.json")
-		//usr << "Error cant delete json"
-	//else
-		//usr << "Deleted json in public html"
-	fdel("info.json")
-		//usr << "error cant delete local json"
-	//else
-		//usr << "Deleted local json"
-	var/F = file("info.json")
-	if(!isfile(F))
-		return
+	var/playerscount = 0
+	var/players = ""
+	var/admins = "false"
 	var/mode
+
 	if(ticker)
 		if(ticker.current_state == 1)
 			mode = "Round Setup"
@@ -25,21 +16,33 @@ proc/makejson()
 			mode = "SECRET"
 		else
 			mode = master_mode
-	var/playerscount = 0
-	var/players = ""
-	var/admins = "no"
+
+	players += "\["
 	for(var/client/C)
+		players += "\""
 		playerscount++
 		if(C.holder && C.holder.level >= 0)		// make sure retired admins don't make nt think admins are on
 			if(!C.stealth)
-				admins = "yes"
-				players += "[C.key];"
+				admins = "true"
+				players += C.key
 			else
-				players += "[C.fakekey];"
+				players += C.fakekey
 		else
-			players += "[C.key];"
-	F << "{\"mode\":\"[mode]\",\"players\" : \"[players]\",\"playercount\" : \"[playerscount]\",\"admin\" : \"[admins]\",\"time\" : \"[time2text(world.realtime,"MM/DD - hh:mm")]\"}"
-	fcopy("info.json","[jsonpath]/info.json")
+			players += C.key
+		players += "\", "
+	if (length(players) > 1)
+		players = copytext(players, 1, length(players)-1) // remove the trailing comma and space
+	players += "\]"
+
+
+	fdel(config.json_info_file)
+	var/F = file(config.json_info_file)
+	if(!isfile(F))
+		return
+	F << "{\"mode\": \"[mode]\", \"players\": [players], \"playercount\": [playerscount], \"admin\": [admins], \"time\": \"[time2text(world.realtime,"MM/DD - hh:mm")]\"}"
+
+// TODO: These "sitchmap" and "mapinfo" procs have nothing to do with json at all.
+// TODO: Those procs should be moved to another file!
 
 /proc/switchmap(newmap,newpath)
 	var/oldmap
