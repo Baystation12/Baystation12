@@ -3,7 +3,6 @@ arcalane - Game Admin
 bobbehluvspropane - Game Admin
 cacophony - Retired Admin
 cajoes - Game Admin
-cayorion - Game Master
 cib - Game Master
 compactninja - Retired Admin
 duntadaman - Game Admin
@@ -25,3 +24,4 @@ spaceman96 - Retired Admin
 strumpetplaya - Retired Admin
 tastyfish - Retired Admin
 uristqwerty - Game Master
+wrongnumber - Game Admin
