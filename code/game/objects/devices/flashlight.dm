@@ -12,6 +12,53 @@
 	var/brightness_on = 4 //luminosity when on
 	var/icon_on = "flight1"
 	var/icon_off = "flight0"
+	var/cell
+	New()
+		var/obj/item/weapon/battery/B = new /obj/item/weapon/battery(src)
+		cell = B
+
+	proc/Lighting()
+		update_brightness(src.loc)
+		if(cell:charge <= 0)
+			usr << "Battery is out."
+			on = 0
+			update_brightness(src.loc)
+			return
+		spawn()
+			while(src)
+				cell:charge -= 50
+				if(cell:charge <= 0)
+					on = !on
+					update_brightness(src.loc)
+					return
+				if(!on)
+					return
+				sleep(50)
+
+/obj/item/device/flashlight/attackby(var/obj/B, var/mob/user)
+	if(istype(B ,/obj/item/weapon/battery))
+		if(cell)
+			user << "Battery already inserted"
+		else
+			src.cell =  B
+			user.drop_item()
+			B.loc = src
+			user << "You insert battery"
+			src.verbs += remove_battery()
+	else if (istype(B, /obj/item/weapon/storage/toolbox))
+		user << "You are silly? You can't insert this massive toolbox into flashlight."
+	return
+
+/obj/item/device/flashlight/verb/remove_battery()
+	if(cell)
+		if(on)
+			usr << "Switch off the light first"
+		else
+			var/obj/item/weapon/battery/B = src.cell
+			B.loc = src.loc.loc
+			src.cell = null
+			src.verbs -= remove_battery()
+	return
 
 /obj/item/device/flashlight/initialize()
 	..()
