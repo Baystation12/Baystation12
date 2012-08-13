@@ -98,7 +98,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an", "monkey", "ali
 	src << "<font color='blue'>PM to-<b>Admins</b>: [original_msg]</font>"
 	log_admin("HELP: [key_name(src)]: [original_msg]")
 	var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
-	msg = sanitize_simple(msg, replacechars)
+	msg = sanitize_ya(msg, replacechars)
 	if(tension_master)
 		tension_master.new_adminhelp()
 	send2adminirc("#bs12admin","HELP: \"[src.key]: [original_msg]\"")
