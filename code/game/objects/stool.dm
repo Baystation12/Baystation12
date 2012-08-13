@@ -45,6 +45,8 @@
 		W.layer = initial(W.layer)
 		del(src)
 		return
+	if(istype(W, /obj/item/weapon/wrench) && istype(src , /obj/structure/stool/bed/chair/schair))
+		usr << "\blue Bolts, which hold this chair, are immovable."
 	return
 
 /obj/structure/stool/bed/Del()
@@ -132,7 +134,12 @@
 	set name = "Rotate Chair"
 	set category = "Object"
 	set src in oview(1)
-
+	if(istype (src , /obj/structure/stool/bed/chair/schair))
+		usr << "\blue This chair is immovable."
+		return
+	if(istype (src , /obj/structure/stool/bed/chair/wooden_chair))
+		usr << "\blue It's so massive to rotate."
+		return
 	src.dir = turn(src.dir, 90)
 	if(src.dir == NORTH)
 		src.layer = FLY_LAYER
