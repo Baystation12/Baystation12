@@ -437,14 +437,11 @@ ZIPPO
 
 	attack(var/mob/M)
 		if(M != usr)
-			..()
-			return
+			return ..()
 		if(!istype(M, /mob/living/carbon/human))
-			..()
-			return
+			return ..()
 		if(M.wear_mask)
-			..()
-			return
+			return ..()
 		if(cigcount == 0)
 			M << "\red You're out of cigs, shit! How you gonna get through the rest of the day..."
 			return

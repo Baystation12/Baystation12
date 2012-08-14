@@ -38,15 +38,13 @@
 		return
 
 	update_icon()
-		..()
-		return
+		return ..()
 
 	Fire()
 		if(!ready)
 			usr << "\red Click. Click."
 			return
-		..()
-		return
+		return ..()
 
 	attack_self(var/mob/M)
 		if(!ready && loaded.len)
