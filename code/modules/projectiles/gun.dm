@@ -180,8 +180,14 @@
 		in_chamber.def_zone = user.zone_sel.selecting
 
 		if(targloc == curloc)
-			user.bullet_act(in_chamber)
+			if(silenced)
+				playsound(user, fire_sound, 10, 1)
+			else
+				playsound(user, fire_sound, 50, 1)
+			user.visible_message("\red \The [user] fires \the [src] upwards!", "\red You fire \the [src] upwards!", "\blue You hear a [istype(in_chamber, /obj/item/projectile/beam) ? "laser blast" : "gunshot"]!")
+//			user.bullet_act(in_chamber)
 			del(in_chamber)
+			attack_self()
 			update_icon()
 			return
 
