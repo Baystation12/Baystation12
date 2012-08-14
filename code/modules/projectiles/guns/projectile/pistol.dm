@@ -52,7 +52,7 @@
 			ready = 1
 			for(var/mob/living/D in oview())
 				D.show_message(text("\red [] twitched slide of []", M,src), 1)
-		return
+		return ..()
 
 /obj/item/weapon/gun/projectile/deagle/gold
 	name = "\improper Desert Eagle"
