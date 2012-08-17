@@ -39,20 +39,24 @@
 	if(istype(B ,/obj/item/weapon/battery))
 		if(cell)
 			user << "Battery already inserted"
+			return
 		else
 			src.cell =  B
 			user.drop_item()
 			B.loc = src
 			user << "You insert battery"
 			src.verbs += remove_battery()
+			return
 	else if (istype(B, /obj/item/weapon/storage/toolbox))
 		user << "You are silly? You can't insert this massive toolbox into flashlight."
+		return
 	return
 
 /obj/item/device/flashlight/verb/remove_battery()
 	if(cell)
 		if(on)
 			usr << "Switch off the light first"
+			return
 		else
 			var/obj/item/weapon/battery/B = src.cell
 			B.loc = src.loc.loc
