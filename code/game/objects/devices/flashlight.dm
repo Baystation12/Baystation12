@@ -18,12 +18,11 @@
 		cell = B
 
 	proc/Lighting()
-		update_brightness(src.loc)
 		if(cell:charge <= 0)
 			usr << "Battery is out."
 			on = 0
-			update_brightness(src.loc)
 			return
+		update_brightness(src.loc)
 		spawn()
 			while(src)
 				cell:charge -= 50
@@ -92,8 +91,7 @@
 //	if(!isturf(user.loc))
 //		user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
 //		return
-	on = !on
-	update_brightness(user)
+	Lighting()
 	return
 
 
