@@ -3,7 +3,7 @@
 
 /obj/machinery/powermonitor
 
-	icon = 'objects.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "navbeacon0-f"
 	name = "power monitor"
 	desc = "A monitoring device used to track power in a cable network."

@@ -1,5 +1,5 @@
 obj/machinery/atmospherics/trinary/filter
-	icon = 'filter.dmi'
+	icon = 'icons/obj/atmospherics/filter.dmi'
 	icon_state = "intact_off"
 	density = 1
 
@@ -141,7 +141,7 @@ Filter types:
 			user << "\red You cannot unwrench this [src], it too exerted due to internal pressure."
 			add_fingerprint(user)
 			return 1
-		playsound(src.loc, 'Ratchet.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		user << "\blue You begin to unfasten \the [src]..."
 		if (do_after(user, 40))
 			user.visible_message( \

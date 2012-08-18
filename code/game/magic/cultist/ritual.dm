@@ -59,7 +59,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 /obj/effect/rune
 	desc = ""
 	anchored = 1
-	icon = 'rune.dmi'
+	icon = 'icons/obj/rune.dmi'
 	icon_state = "1"
 	var/visibility = 0
 	unacidable = 1
@@ -102,7 +102,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		..()
 		for(var/mob/living/silicon/ai/AI in world)
 			if(AI.client)
-				var/image/blood = image('blood.dmi', loc = src, icon_state = "floor[rand(1,7)]")
+				var/image/blood = image('icons/effects/blood.dmi', loc = src, icon_state = "floor[rand(1,7)]")
 				blood.override = 1
 				AI.client.images += blood
 

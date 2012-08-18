@@ -375,7 +375,7 @@ datum
 				var/datum/effect/system/bad_smoke_spread/S = new /datum/effect/system/bad_smoke_spread
 				S.attach(location)
 				S.set_up(10, 0, location)
-				playsound(location, 'smoke.ogg', 50, 1, -3)
+				playsound(location, 'sound/effects/smoke.ogg', 50, 1, -3)
 				spawn(0)
 					S.start()
 					sleep(10)
@@ -401,7 +401,7 @@ datum
 				var/datum/effect/effect/system/chem_smoke_spread/S = new /datum/effect/effect/system/chem_smoke_spread
 				S.attach(location)
 				S.set_up(holder, 10, 0, location)
-				playsound(location, 'smoke.ogg', 50, 1, -3)
+				playsound(location, 'sound/effects/smoke.ogg', 50, 1, -3)
 				spawn(0)
 					S.start()
 					sleep(10)
@@ -687,7 +687,7 @@ datum
 					var/turf/FROM = get_turf_loc(holder.my_atom) // the turf of origin we're travelling FROM
 					var/turf/TO = get_turf_loc(chosen)			 // the turf of origin we're travelling TO
 
-					playsound(TO, 'phasein.ogg', 100, 1)
+					playsound(TO, 'sound/effects/phasein.ogg', 100, 1)
 
 					var/list/flashers = list()
 					for(var/mob/living/carbon/human/M in viewers(TO, null))
@@ -712,7 +712,7 @@ datum
 								if(M.client)
 									var/obj/blueeffect = new /obj(src)
 									blueeffect.screen_loc = "WEST,SOUTH to EAST,NORTH"
-									blueeffect.icon = 'effects.dmi'
+									blueeffect.icon = 'icons/effects/effects.dmi'
 									blueeffect.icon_state = "shieldsparkles"
 									blueeffect.layer = 17
 									blueeffect.mouse_opacity = 0
@@ -733,7 +733,7 @@ datum
 
 				var/list/critters = typesof(/obj/effect/critter) - /obj/effect/critter // list of possible critters
 
-				playsound(get_turf_loc(holder.my_atom), 'phasein.ogg', 100, 1)
+				playsound(get_turf_loc(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 
 				for(var/mob/living/carbon/human/M in viewers(get_turf_loc(holder.my_atom), null))
 					if(M:eyecheck() <= 0)
@@ -759,7 +759,7 @@ datum
 				var/list/borks = typesof(/obj/item/weapon/reagent_containers/food/snacks) - /obj/item/weapon/reagent_containers/food/snacks
 				// BORK BORK BORK
 
-				playsound(get_turf_loc(holder.my_atom), 'phasein.ogg', 100, 1)
+				playsound(get_turf_loc(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 
 				for(var/mob/living/carbon/human/M in viewers(get_turf_loc(holder.my_atom), null))
 					if(M:eyecheck() <= 0)

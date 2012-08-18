@@ -3,7 +3,7 @@
 	desc = "A basic weapon designed kill with concentrated energy bolts."
 	icon_state = "laser"
 	item_state = "laser100"
-	fire_sound = 'Laser.ogg'
+	fire_sound = 'sound/weapons/Laser.ogg'
 	w_class = 3.0
 	m_amt = 2000
 	force = 7
@@ -73,7 +73,7 @@ obj/item/weapon/gun/energy/laser/retro
 	desc = "With the L.A.S.E.R. cannon, the lasing medium is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
 	icon_state = "lasercannon"
 	item_state = "laser100"
-	fire_sound = 'lasercannonfire.ogg'
+	fire_sound = 'sound/weapons/lasercannonfire.ogg'
 	origin_tech = "combat=4;materials=3;powerstorage=3"
 	projectile_type = "/obj/item/projectile/beam/heavylaser"
 

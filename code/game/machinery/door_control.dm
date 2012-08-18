@@ -1,7 +1,7 @@
 /obj/machinery/door_control
 	name = "remote door-control"
 	desc = "It controls doors, remotely."
-	icon = 'stationobjs.dmi'
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "doorctrl0"
 	desc = "A remote control-switch for a door."
 	var/id = null

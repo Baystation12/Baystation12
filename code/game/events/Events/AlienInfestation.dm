@@ -35,4 +35,4 @@
 
 		spawn(rand(3000, 6000)) //Delayed announcements to keep the crew on their toes.
 			command_alert("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert")
-			world << sound('aliens.ogg')
+			world << sound('sound/announcer/aliens.ogg')

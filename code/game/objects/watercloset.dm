@@ -3,7 +3,7 @@
 /obj/structure/toilet
 	name = "toilet"
 	desc = "The HT-451, a torque rotation-based, waste disposal unit for small matter. This one seems remarkably clean."
-	icon = 'watercloset.dmi'
+	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "toilet0"
 	density = 0
 	anchored = 1
@@ -50,7 +50,7 @@
 /obj/structure/urinal
 	name = "urinal"
 	desc = "The HU-452, an experimental urinal."
-	icon = 'watercloset.dmi'
+	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "urinal"
 	density = 0
 	anchored = 1
@@ -71,7 +71,7 @@
 /obj/machinery/shower
 	name = "shower"
 	desc = "The HS-451. Installed in the 2550s by the Nanotrasen Hygiene Division."
-	icon = 'watercloset.dmi'
+	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "shower"
 	density = 0
 	anchored = 1
@@ -85,7 +85,7 @@
 
 /obj/effect/mist
 	name = "mist"
-	icon = 'watercloset.dmi'
+	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mist"
 	layer = MOB_LAYER + 1
 	mouse_opacity = 0
@@ -118,7 +118,7 @@
 		del(mymist)
 
 	if(on)
-		overlays += image('watercloset.dmi', src, "water", MOB_LAYER + 1, dir)
+		overlays += image('icons/obj/watercloset.dmi', src, "water", MOB_LAYER + 1, dir)
 		if(watertemp == "freezing")
 			return
 		if(!ismist)
@@ -214,7 +214,7 @@
 /obj/item/weapon/bikehorn/rubberducky
 	name = "rubber ducky"
 	desc = "Rubber ducky you're so fine, you make bathtime lots of fuuun. Rubber ducky I'm awfully fooooond of yooooouuuu~"	//thanks doohl
-	icon = 'watercloset.dmi'
+	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "rubberducky"
 	item_state = "rubberducky"
 
@@ -222,7 +222,7 @@
 
 /obj/structure/sink
 	name = "sink"
-	icon = 'watercloset.dmi'
+	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "sink"
 	desc = "A sink used for washing one's hands and face."
 	anchored = 1

@@ -35,7 +35,7 @@
 	anchored = 1
 	canmove = 0
 	loc = loc
-	holo_icon = getHologramIcon(icon('AI.dmi',"holo1"))
+	holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
 
 	proc_holder_list = new()
 
@@ -84,7 +84,7 @@
 
 	if(client)
 		for(var/obj/effect/rune/rune in world)
-			var/image/blood = image('blood.dmi', loc = rune, icon_state = "floor[rand(1,7)]")
+			var/image/blood = image('icons/effects/blood.dmi', loc = rune, icon_state = "floor[rand(1,7)]")
 			blood.override = 1
 			client.images += blood
 
@@ -384,7 +384,7 @@
 		else //harm
 			var/damage = rand(10, 20)
 			if (prob(90))
-				playsound(loc, 'slash.ogg', 25, 1, -1)
+				playsound(loc, 'sound/weapons/slash.ogg', 25, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[] has slashed at []!</B>", M, src), 1)
@@ -393,7 +393,7 @@
 				adjustBruteLoss(damage)
 				updatehealth()
 			else
-				playsound(loc, 'slashmiss.ogg', 25, 1, -1)
+				playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[] took a swipe at []!</B>", M, src), 1)
@@ -619,9 +619,9 @@
 			del(holo_icon)
 			switch(input)
 				if("default")
-					holo_icon = getHologramIcon(icon('AI.dmi',"holo1"))
+					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
 				if("floating face")
-					holo_icon = getHologramIcon(icon('AI.dmi',"holo2"))
+					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo2"))
 	return
 
 /mob/living/silicon/ai/proc/corereturn()

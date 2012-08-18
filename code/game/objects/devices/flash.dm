@@ -63,9 +63,9 @@
 		else	//can only use it  5 times a minute
 			user.show_message("<span class='warning'>*click* *click*</span>", 2)
 			for(var/mob/K in viewers(usr))
-				K << 'empty.ogg'
+				K << 'sound/weapons/empty.ogg'
 			return
-	playsound(src.loc, 'flash.ogg', 100, 1)
+	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 	var/flashfail = 0
 
 	if(iscarbon(M))
@@ -112,7 +112,7 @@
 			var/atom/movable/overlay/animation = new(user.loc)
 			animation.layer = user.layer + 1
 			animation.icon_state = "blank"
-			animation.icon = 'mob.dmi'
+			animation.icon = 'icons/mob/mob.dmi'
 			animation.master = user
 			flick("blspell", animation)
 			sleep(5)
@@ -151,16 +151,16 @@
 		else	//can only use it  5 times a minute
 			user.show_message("<span class='warning'>*click* *click*</span>", 2)
 			for(var/mob/K in viewers(usr))
-				K << 'empty.ogg'
+				K << 'sound/weapons/empty.ogg'
 			return
-	playsound(src.loc, 'flash.ogg', 100, 1)
+	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 	flick("flash2", src)
 	if(user && isrobot(user))
 		spawn(0)
 			var/atom/movable/overlay/animation = new(user.loc)
 			animation.layer = user.layer + 1
 			animation.icon_state = "blank"
-			animation.icon = 'mob.dmi'
+			animation.icon = 'icons/mob/mob.dmi'
 			animation.master = user
 			flick("blspell", animation)
 			sleep(5)

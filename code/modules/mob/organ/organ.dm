@@ -389,9 +389,9 @@
 					if(ismonkey(owner))
 						H.icon_state = "l_foot_l"
 			if(ismonkey(owner))
-				H.icon = 'monkey.dmi'
+				H.icon = 'icons/mob/monkey.dmi'
 			if(istajaran(owner))
-				H.icon = 'tajaran.dmi'
+				H.icon = 'code/WorkInProgress/Cael_Aislinn/Tajara/tajaran.dmi'
 			var/lol = pick(cardinal)
 			step(H,lol)
 			destspawn = 1

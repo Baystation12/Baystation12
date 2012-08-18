@@ -8,7 +8,7 @@
 /////////Toy Mechs/////////
 
 /obj/item/toy/prize
-	icon = 'toy.dmi'
+	icon = 'icons/obj/toy.dmi'
 	icon_state = "ripleytoy"
 
 /obj/item/toy/prize/ripley
@@ -73,7 +73,7 @@
 	throw_speed = 4
 	throw_range = 20
 	force = 0
-	icon = 'weapons.dmi'
+	icon = 'icons/obj/weapons.dmi'
 	icon_state = "syndballoon"
 	item_state = "syndballoon"
 	w_class = 4.0
@@ -81,20 +81,20 @@
 /obj/item/toy/blink
 	name = "electronic blink toy game"
 	desc = "Blink.  Blink.  Blink. Ages 8 and up."
-	icon = 'radio.dmi'
+	icon = 'icons/obj/radio.dmi'
 	icon_state = "beacon"
 	item_state = "signaler"
 
 /obj/item/toy/spinningtoy
 	name = "Gravitational Singularity"
 	desc = "\"Singulo\" brand spinning toy."
-	icon = 'singularity.dmi'
+	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
 
 /obj/item/toy/ammo/gun
 	name = "ammo-caps"
 	desc = "There are 7 caps left! Make sure to recyle the box in an autolathe when it gets empty."
-	icon = 'ammo.dmi'
+	icon = 'icons/obj/ammo.dmi'
 	icon_state = "357-7"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	w_class = 1.0
@@ -110,7 +110,7 @@
 /obj/item/toy/ammo/crossbow
 	name = "foam dart"
 	desc = "It's nerf or nothing! Ages 8 and up."
-	icon = 'toy.dmi'
+	icon = 'icons/obj/toy.dmi'
 	icon_state = "foamdart"
 	flags = FPRINT | TABLEPASS
 	w_class = 1.0
@@ -118,7 +118,7 @@
 /obj/effect/foam_dart_dummy
 	name = ""
 	desc = ""
-	icon = 'toy.dmi'
+	icon = 'icons/obj/toy.dmi'
 	icon_state = "null"
 	anchored = 1
 	density = 0
@@ -126,7 +126,7 @@
 /obj/item/toy/gun
 	name = "cap gun"
 	desc = "There are 0 caps left. Looks almost like the real thing! Ages 8 and up. Please recycle in an autolathe when you're out of caps!"
-	icon = 'gun.dmi'
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "revolver"
 	item_state = "gun"
 	flags =  FPRINT | TABLEPASS | CONDUCT | USEDELAY
@@ -174,9 +174,9 @@
 		if (src.bullets < 1)
 			user.show_message("\red *click* *click*", 2)
 			for(var/mob/K in viewers(usr))
-				K << 'empty.ogg'
+				K << 'sound/weapons/empty.ogg'
 			return
-		playsound(user, 'Gunshot.ogg', 100, 1)
+		playsound(user, 'sound/weapons/Gunshot.ogg', 100, 1)
 		src.bullets--
 		for(var/mob/O in viewers(user, null))
 			O.show_message(text("\red <B>[] fires a cap gun at []!</B>", user, target), 1, "\red You hear a gunshot", 2)
@@ -184,7 +184,7 @@
 /obj/item/toy/sword
 	name = "toy sword"
 	desc = "A cheap, plastic replica of an energy sword. Realistic sounds! Ages 8 and up."
-	icon = 'weapons.dmi'
+	icon = 'icons/obj/weapons.dmi'
 	icon_state = "sword0"
 	item_state = "sword0"
 	var/active = 0.0
@@ -195,13 +195,13 @@
 		src.active = !( src.active )
 		if (src.active)
 			user << "\blue You extend the plastic blade with a quick flick of your wrist."
-			playsound(user, 'saberon.ogg', 50, 1)
+			playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 			src.icon_state = "swordblue"
 			src.item_state = "swordblue"
 			src.w_class = 4
 		else
 			user << "\blue You push the plastic blade back down into the handle."
-			playsound(user, 'saberoff.ogg', 50, 1)
+			playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 			src.icon_state = "sword0"
 			src.item_state = "sword0"
 			src.w_class = 2
@@ -211,7 +211,7 @@
 /obj/item/toy/crossbow
 	name = "foam dart crossbow"
 	desc = "A weapon favored by many overactive children. Ages 8 and up."
-	icon = 'gun.dmi'
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "crossbow"
 	item_state = "crossbow"
 	flags = FPRINT | TABLEPASS | USEDELAY
@@ -247,7 +247,7 @@
 			bullets--
 			D.icon_state = "foamdart"
 			D.name = "foam dart"
-			playsound(user.loc, 'syringeproj.ogg', 50, 1)
+			playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
 
 			for(var/i=0, i<6, i++)
 				if (D)
@@ -295,7 +295,7 @@
 					O.show_message(text("\red <B>[] casually lines up a shot with []'s head and pulls the trigger!</B>", user, M), 1, "\red You hear the sound of foam against skull", 2)
 					O.show_message(text("\red [] was hit in the head by the foam dart!", M), 1)
 
-			playsound(user.loc, 'syringeproj.ogg', 50, 1)
+			playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
 			new /obj/item/toy/ammo/crossbow(M.loc)
 			src.bullets--
 		else if (M.lying && src.bullets == 0)
@@ -307,7 +307,7 @@
 /obj/item/weapon/storage/crayonbox
 	name = "box of crayons"
 	desc = "A box of crayons for all your rune drawing needs."
-	icon = 'crayons.dmi'
+	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonbox"
 	w_class = 2.0
 	storage_slots = 6
@@ -318,7 +318,7 @@
 /obj/item/toy/crayon
 	name = "crayon"
 	desc = "A colourful crayon. Looks tasty. Mmmm..."
-	icon = 'crayons.dmi'
+	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonred"
 	w_class = 1.0
 	var/colour = "#FF0000" //RGB
@@ -330,7 +330,7 @@
 /obj/item/toy/snappop
 	name = "snap pop"
 	desc = "Wow!"
-	icon = 'toy.dmi'
+	icon = 'icons/obj/toy.dmi'
 	icon_state = "snappop"
 
 	throw_impact(atom/hit_atom)
@@ -340,7 +340,7 @@
 		s.start()
 		new /obj/effect/decal/ash(src.loc)
 		src.visible_message("\red The [src.name] explodes!","\red You hear a snap!")
-		playsound(src, 'snap.ogg', 50, 1)
+		playsound(src, 'sound/effects/snap.ogg', 50, 1)
 		del(src)
 
 /obj/item/toy/snappop/HasEntered(H as mob|obj)
@@ -354,13 +354,13 @@
 			s.start()
 			new /obj/effect/decal/ash(src.loc)
 			src.visible_message("\red The [src.name] explodes!","\red You hear a snap!")
-			playsound(src, 'snap.ogg', 50, 1)
+			playsound(src, 'sound/effects/snap.ogg', 50, 1)
 			del(src)
 
 /obj/item/toy/snappopbox
 	name = "snap pop box"
 	desc = "Eight wrappers of fun! Ages 8 and up. Not suitable for children."
-	icon = 'toy.dmi'
+	icon = 'icons/obj/toy.dmi'
 	icon_state = "spbox"
 	var/amount = 8
 
@@ -392,7 +392,7 @@
 /obj/item/toy/waterflower
 	name = "Water Flower"
 	desc = "A seemingly innocent sunflower...with a twist."
-	icon = 'harvest.dmi'
+	icon = 'icons/obj/harvest.dmi'
 	icon_state = "sunflower"
 	item_state = "sunflower"
 	var/empty = 0
@@ -431,11 +431,11 @@
 
 		var/obj/effect/decal/D = new/obj/effect/decal/(get_turf(src))
 		D.name = "water"
-		D.icon = 'chemical.dmi'
+		D.icon = 'icons/obj/chemical.dmi'
 		D.icon_state = "chempuff"
 		D.create_reagents(5)
 		src.reagents.trans_to(D, 1)
-		playsound(src.loc, 'spray3.ogg', 50, 1, -6)
+		playsound(src.loc, 'sound/effects/spray3.ogg', 50, 1, -6)
 
 		spawn(0)
 			for(var/i=0, i<1, i++)
@@ -459,7 +459,7 @@
 /obj/item/toy/balloon
 	name = "water balloon"
 	desc = "A translucent balloon. There's nothing in it."
-	icon = 'toy.dmi'
+	icon = 'icons/obj/toy.dmi'
 	icon_state = "waterballoon-e"
 	item_state = "balloon-empty"
 

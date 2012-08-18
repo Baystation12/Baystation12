@@ -30,7 +30,7 @@
 				for(var/mob/M in viewers(user, null))
 					if(M.client)
 						M.show_message(text("\red <B>[user] attacks [src]'s stomach wall with the [I.name]!"), 2)
-				playsound(user.loc, 'attackblob.ogg', 50, 1)
+				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 
 				if(prob(src.getBruteLoss() - 50))
 					src.gib()
@@ -253,7 +253,7 @@
 			AdjustParalysis(-3)
 			AdjustStunned(-3)
 			AdjustWeakened(-3)
-			playsound(src.loc, 'thudswoosh.ogg', 50, 1, -1)
+			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			M.visible_message( \
 				"\blue \The [M] shakes \the [src] trying to wake [get_gender_form("it")] up!", \
 				"\blue You shake \the [src] trying to wake [get_gender_form("it")] up!", \
@@ -329,7 +329,7 @@
 	// Make the human vomit on the floor
 	for(var/mob/O in viewers(world.view, src))
 		O.show_message(text("<b>\red [] throws up!</b>", src), 1)
-	playsound(src.loc, 'splat.ogg', 50, 1)
+	playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
 
 	var/turf/location = loc
 	if (istype(location, /turf/simulated))

@@ -43,7 +43,7 @@ max volume of plasma storeable by the field = the total volume of a number of ti
 /obj/machinery/rust/core
 	name = "Tokamak core"
 	desc = "Enormous solenoid for generating extremely high power electromagnetic fields"
-	icon = 'core.dmi'
+	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/core.dmi'
 	icon_state = "core0"
 	anchored = 1
 	var/on = 0

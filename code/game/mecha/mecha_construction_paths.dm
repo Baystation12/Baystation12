@@ -6,17 +6,17 @@
 	if(istype(used_atom, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/W = used_atom
 		if (W:remove_fuel(0, user))
-			playsound(holder, 'Welder2.ogg', 50, 1)
+			playsound(holder, 'sound/items/Welder2.ogg', 50, 1)
 		else
 			return 0
 	else if(istype(used_atom, /obj/item/weapon/wrench))
-		playsound(holder, 'Ratchet.ogg', 50, 1)
+		playsound(holder, 'sound/items/Ratchet.ogg', 50, 1)
 
 	else if(istype(used_atom, /obj/item/weapon/screwdriver))
-		playsound(holder, 'Screwdriver.ogg', 50, 1)
+		playsound(holder, 'sound/items/Screwdriver.ogg', 50, 1)
 
 	else if(istype(used_atom, /obj/item/weapon/wirecutters))
-		playsound(holder, 'Wirecutter.ogg', 50, 1)
+		playsound(holder, 'sound/items/Wirecutter.ogg', 50, 1)
 
 	else if(istype(used_atom, /obj/item/weapon/cable_coil))
 		var/obj/item/weapon/cable_coil/C = used_atom
@@ -25,7 +25,7 @@
 			return 0
 		else
 			C.use(4)
-			playsound(holder, 'Deconstruct.ogg', 50, 1)
+			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
 	else if(istype(used_atom, /obj/item/stack))
 		var/obj/item/stack/S = used_atom
 		if(S.amount < 5)
@@ -39,17 +39,17 @@
 	if(istype(used_atom, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/W = used_atom
 		if (W:remove_fuel(0, user))
-			playsound(holder, 'Welder2.ogg', 50, 1)
+			playsound(holder, 'sound/items/Welder2.ogg', 50, 1)
 		else
 			return 0
 	else if(istype(used_atom, /obj/item/weapon/wrench))
-		playsound(holder, 'Ratchet.ogg', 50, 1)
+		playsound(holder, 'sound/items/Ratchet.ogg', 50, 1)
 
 	else if(istype(used_atom, /obj/item/weapon/screwdriver))
-		playsound(holder, 'Screwdriver.ogg', 50, 1)
+		playsound(holder, 'sound/items/Screwdriver.ogg', 50, 1)
 
 	else if(istype(used_atom, /obj/item/weapon/wirecutters))
-		playsound(holder, 'Wirecutter.ogg', 50, 1)
+		playsound(holder, 'sound/items/Wirecutter.ogg', 50, 1)
 
 	else if(istype(used_atom, /obj/item/weapon/cable_coil))
 		var/obj/item/weapon/cable_coil/C = used_atom
@@ -58,7 +58,7 @@
 			return 0
 		else
 			C.use(4)
-			playsound(holder, 'Deconstruct.ogg', 50, 1)
+			playsound(holder, 'sound/items/Deconstruct.ogg', 50, 1)
 	else if(istype(used_atom, /obj/item/stack))
 		var/obj/item/stack/S = used_atom
 		if(S.amount < 5)
@@ -89,7 +89,7 @@
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/reversible/mecha/ripley(const_holder)
-		const_holder.icon = 'mech_construction.dmi'
+		const_holder.icon = 'icons/mecha/mech_construction.dmi'
 		const_holder.icon_state = "ripley0"
 		const_holder.density = 1
 		const_holder.overlays.len = 0
@@ -300,7 +300,7 @@
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/reversible/mecha/gygax(const_holder)
-		const_holder.icon = 'mech_construction.dmi'
+		const_holder.icon = 'icons/mecha/mech_construction.dmi'
 		const_holder.icon_state = "gygax0"
 		const_holder.density = 1
 		spawn()
@@ -580,7 +580,7 @@
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/reversible/mecha/firefighter(const_holder)
-		const_holder.icon = 'mech_construction.dmi'
+		const_holder.icon = 'icons/mecha/mech_construction.dmi'
 		const_holder.icon_state = "fireripley0"
 		const_holder.density = 1
 		spawn()
@@ -834,7 +834,7 @@
 			return 0
 
 		if(istype(used_atom, /obj/item/weapon/bikehorn))
-			playsound(holder, 'bikehorn.ogg', 50, 1)
+			playsound(holder, 'sound/items/bikehorn.ogg', 50, 1)
 			user.visible_message("HONK!")
 
 		//TODO: better messages.
@@ -882,7 +882,7 @@
 	spawn_result()
 		var/obj/item/mecha_parts/chassis/const_holder = holder
 		const_holder.construct = new /datum/construction/reversible/mecha/durand(const_holder)
-		const_holder.icon = 'mech_construction.dmi'
+		const_holder.icon = 'icons/mecha/mech_construction.dmi'
 		const_holder.icon_state = "durand0"
 		const_holder.density = 1
 		spawn()

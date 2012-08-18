@@ -20,7 +20,7 @@
 //	name = "Xenoburger"													//Name that displays in the UI.
 //	desc = "Smells caustic. Tastes like heresy."						//Duh
 //	icon_state = "xburger"												//Refers to an icon in food.dmi
-//	eatsound = 'eatfood.ogg'											//Don't touch this if you want your food to have a crunch sound.
+//	eatsound = 'sound/items/eatfood.ogg'											//Don't touch this if you want your food to have a crunch sound.
 //  trash = "plate"														//Refers to the trash item.
 //	New()																//Don't mess with this.
 //		..()															//Same here.
@@ -946,7 +946,7 @@
 	name = "Meatball soup"
 	desc = "Smells like copper"
 	icon_state = "meatballsoup"
-	eatsound = 'drink.ogg'
+	eatsound = 'sound/items/drink.ogg'
 	New()
 		..()
 		reagents.add_reagent("nutriment", 2)
@@ -957,7 +957,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/clownstears
 	name = "Clown's Tears"
 	desc = "Not very funny."
-	eatsound = 'drink.ogg'
+	eatsound = 'sound/items/drink.ogg'
 	icon_state = "clownstears"
 	New()
 		..()
@@ -971,7 +971,7 @@
 	desc = "A true vegan meal" //TODO
 	icon_state = "vegetablesoup"
 	trash = "snack_bowl"
-	eatsound = 'drink.ogg'
+	eatsound = 'sound/items/drink.ogg'
 	New()
 		..()
 		reagents.add_reagent("nutriment", 10)
@@ -982,7 +982,7 @@
 	name = "Nettle soup"
 	desc = "To think, the botanist would've beat you to death with one of these."
 	icon_state = "nettlesoup"
-	eatsound = 'drink.ogg'
+	eatsound = 'sound/items/drink.ogg'
 	trash = "snack_bowl"
 	New()
 		..()
@@ -995,7 +995,7 @@
 	name = "Mystery soup"
 	desc = "The mystery is, why aren't you eating it?"
 	icon_state = "mysterysoup"
-	eatsound = 'drink.ogg'
+	eatsound = 'sound/items/drink.ogg'
 	trash = "snack_bowl"
 	New()
 		..()
@@ -1042,7 +1042,7 @@
 	desc = "I wish this was soup."
 	icon_state = "wishsoup"
 	trash = "snack_bowl"
-	eatsound = 'drink.ogg'
+	eatsound = 'sound/items/drink.ogg'
 	New()
 		..()
 		reagents.add_reagent("water", 10)
@@ -1232,7 +1232,7 @@
 	desc = "Drinking this feels like being a vampire! A tomato vampire..."
 	icon_state = "tomatosoup"
 	trash = "snack_bowl"
-	eatsound = 'drink.ogg'
+	eatsound = 'sound/items/drink.ogg'
 	New()
 		..()
 		reagents.add_reagent("nutriment", 5)
@@ -1254,7 +1254,7 @@
 	name = "Stew"
 	desc = "A nice and warm stew. Healthy and strong."
 	icon_state = "stew"
-	eatsound = 'drink.ogg'
+	eatsound = 'sound/items/drink.ogg'
 	New()
 		..()
 		reagents.add_reagent("nutriment", 20)
@@ -1426,7 +1426,7 @@
 	name = "chantrelle soup"
 	desc = "A delicious and hearty mushroom soup."
 	icon_state = "mushroomsoup"
-	eatsound = 'drink.ogg'
+	eatsound = 'sound/items/drink.ogg'
 	trash = "snack_bowl"
 	New()
 		..()
@@ -1486,7 +1486,7 @@
 	name = "\improper \"LiquidFood\" ration"
 	icon_state = "liquidfood"
 	desc = "A bland, tasteless pulp of what you need to survive. Packaged in a airtight bag, which you can drink through a straw. Strangely crunchy."
-	eatsound = 'drink.ogg'
+	eatsound = 'sound/items/drink.ogg'
 	trash = "liquidfood"
 	var/flavored = 0
 	New()
@@ -1927,7 +1927,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/dough
 	name = "dough"
 	desc = "A dough."
-	icon = 'food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "dough"
 	bitesize = 2
 	New()
@@ -1946,7 +1946,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
 	name = "flat dough"
 	desc = "A flattened dough."
-	icon = 'food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flat dough"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/doughslice
 	slices_num = 3
@@ -1957,7 +1957,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/doughslice
 	name = "dough slice"
 	desc = "Make your magic."
-	icon = 'food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "doughslice"
 	New()
 		..()
@@ -1967,7 +1967,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/bun
 	name = "bun"
 	desc = "A base for any self-respecting burger."
-	icon = 'food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "bun"
 	bitesize = 2
 	New()
@@ -2080,7 +2080,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/rawcutlet
 	name = "raw cutlet"
 	desc = "A thin piece of meat."
-	icon = 'food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawcutlet"
 	bitesize = 1
 	New()
@@ -2090,7 +2090,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/cutlet
 	name = "cutlet"
 	desc = "A tasty meat slice - 'Bacon'."
-	icon = 'food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "cutlet"
 	bitesize = 2
 	New()
@@ -2100,7 +2100,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/rawfaggot
 	name = "raw meatball"
 	desc = "A raw meatball."
-	icon = 'food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawmeatball"
 	bitesize = 2
 	New()
@@ -2119,7 +2119,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/flatbread
 	name = "flatbread"
 	desc = "Bland but filling."
-	icon = 'food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flatbread"
 	bitesize = 2
 	New()
@@ -2139,7 +2139,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/rawsticks
 	name = "raw potato sticks"
 	desc = "Maybe you should cook it first?"
-	icon = 'food_ingredients.dmi'
+	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "rawsticks"
 	bitesize = 2
 	New()

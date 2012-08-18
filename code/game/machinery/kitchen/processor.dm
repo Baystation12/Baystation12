@@ -1,7 +1,7 @@
 
 /obj/machinery/processor
 	name = "Food Processor"
-	icon = 'kitchen.dmi'
+	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "processor"
 	layer = 2.9
 	density = 1
@@ -152,7 +152,7 @@
 		user.visible_message("\blue [user] turns on \a [src].", \
 			"You turn on \a [src].", \
 			"You hear a food processor")
-		playsound(src.loc, 'blender.ogg', 50, 1)
+		playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
 		use_power(500)
 		sleep(P.time)
 		P.process(src.loc, O)

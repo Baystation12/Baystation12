@@ -1,5 +1,5 @@
 /obj/multiz
-	icon = 'multiz.dmi'
+	icon = 'code/WorkInProgress/Cael_Aislinn/multiz.dmi'
 	density = 0
 	opacity = 0
 	anchored = 1
@@ -181,7 +181,7 @@
 	density = 0
 	anchored = 1
 	layer = 2
-	icon = 'blood.dmi'
+	icon = 'icons/effects/blood.dmi'
 	icon_state = "floor1"
 	random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6", "floor7")
 	var/list/viruses = list()
@@ -218,10 +218,10 @@
 		src.addoverlay(floorbelow)
 		for(var/obj/o in floorbelow.contents)
 			src.addoverlay(image(o, dir=o.dir, layer = TURF_LAYER+0.05*o.layer))
-		var/image/I = image('ULIcons.dmi', "[min(max(floorbelow.LightLevelRed - 4, 0), 7)]-[min(max(floorbelow.LightLevelGreen - 4, 0), 7)]-[min(max(floorbelow.LightLevelBlue - 4, 0), 7)]")
+		var/image/I = image('icons/effects/ULIcons.dmi', "[min(max(floorbelow.LightLevelRed - 4, 0), 7)]-[min(max(floorbelow.LightLevelGreen - 4, 0), 7)]-[min(max(floorbelow.LightLevelBlue - 4, 0), 7)]")
 		I.layer = TURF_LAYER + 0.2
 		src.addoverlay(I)
-		I = image('ULIcons.dmi', "1-1-1")
+		I = image('icons/effects/ULIcons.dmi', "1-1-1")
 		I.layer = TURF_LAYER + 0.2
 		src.addoverlay(I)*/
 

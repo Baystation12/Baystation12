@@ -197,12 +197,12 @@
 		icon_state = "apc0"
 		// if closed, update overlays for channel status
 		if (!(stat & (BROKEN|MAINT)))
-			overlays += image('power.dmi', "apcox-[locked]")	// 0=blue 1=red
-			overlays += image('power.dmi', "apco3-[charging]") // 0=red, 1=yellow/black 2=green
+			overlays += image('icons/obj/power.dmi', "apcox-[locked]")	// 0=blue 1=red
+			overlays += image('icons/obj/power.dmi', "apco3-[charging]") // 0=red, 1=yellow/black 2=green
 			if(operating)
-				overlays += image('power.dmi', "apco0-[equipment]")	// 0=red, 1=green, 2=blue
-				overlays += image('power.dmi', "apco1-[lighting]")
-				overlays += image('power.dmi', "apco2-[environ]")
+				overlays += image('icons/obj/power.dmi', "apco0-[equipment]")	// 0=red, 1=green, 2=blue
+				overlays += image('icons/obj/power.dmi', "apco1-[lighting]")
+				overlays += image('icons/obj/power.dmi', "apco2-[environ]")
 
 //attack with an item - open/close cover, insert cell, or (un)lock interface
 
@@ -215,7 +215,7 @@
 			if (terminal)
 				user << "\red You need to cut the wires first."
 				return
-			playsound(src.loc, 'Crowbar.ogg', 50, 1)
+			playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 			user << "You try to remove the power control board..."
 			if(do_after(user, 50))
 				has_electronics = 0
@@ -277,12 +277,12 @@
 				if (has_electronics==1 && terminal)
 					has_electronics = 2
 					stat &= ~MAINT
-					playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+					playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 					user << "You screw the circuit electronics into place."
 				else if (has_electronics==2)
 					has_electronics = 1
 					stat |= MAINT
-					playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+					playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 					user << "You unfasten the electronics."
 				else /* has_electronics==0 */
 					user << "\red There's nothing to secure here."
@@ -352,7 +352,7 @@
 			user << "\red You need more wires."
 			return
 		user << "You start adding cables to the APC frame..."
-		playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 20) && C.amount >= 10)
 			var/turf/T = get_turf_loc(src)
 			var/obj/structure/cable/N = T.get_cable_node()
@@ -372,7 +372,7 @@
 			user << "\red You have to remove the floor plating in front of the APC first."
 			return
 		user << "You begin to cut cables..."
-		playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 50))
 			if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -386,7 +386,7 @@
 			del(terminal)
 	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && !((stat & BROKEN) || malfhack))
 		user << "You start to insert the power control board into the frame..."
-		playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 10))
 			has_electronics = 1
 			user << "You place the power control board inside the frame."
@@ -401,7 +401,7 @@
 		user << "You start welding APC frame..."
 		if(W:remove_fuel(0,user))
 			W:welding = 2
-			playsound(src.loc, 'Welder.ogg', 50, 1)
+			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			if(do_after(user, 50))
 
 				if (emagged || malfhack || (stat & BROKEN) || opened==2)

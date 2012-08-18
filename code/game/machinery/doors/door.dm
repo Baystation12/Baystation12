@@ -3,7 +3,7 @@
 /obj/machinery/door
 	name = "Door"
 	desc = "It opens and closes."
-	icon = 'doorint.dmi'
+	icon = 'icons/obj/doors/doorint.dmi'
 	icon_state = "door1"
 	anchored = 1
 	opacity = 1
@@ -134,7 +134,7 @@
 					var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 					spark_system.set_up(5, 0, src.loc)
 					spark_system.start()
-					playsound(src.loc, 'blade1.ogg', 50, 1)
+					playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 					playsound(src.loc, "sparks", 50, 1)
 					for(var/mob/O in viewers(user, 3))
 						O.show_message(text("\blue The door has been sliced open by [] with an energy blade!", user), 1, text("\red You hear metal being sliced and sparks flying."), 2)

@@ -50,29 +50,29 @@ mob/living/carbon/proc/handle_hallucinations()
 						halitem.layer = 50
 						switch(rand(1,6))
 							if(1) //revolver
-								halitem.icon = 'gun.dmi'
+								halitem.icon = 'icons/obj/gun.dmi'
 								halitem.icon_state = "revolver"
 								halitem.name = "Revolver"
 							if(2) //c4
-								halitem.icon = 'syndieweapons.dmi'
+								halitem.icon = 'icons/obj/syndieweapons.dmi'
 								halitem.icon_state = "c4small_0"
 								halitem.name = "Mysterious Package"
 								if(prob(25))
 									halitem.icon_state = "c4small_1"
 							if(3) //sword
-								halitem.icon = 'weapons.dmi'
+								halitem.icon = 'icons/obj/weapons.dmi'
 								halitem.icon_state = "sword1"
 								halitem.name = "Sword"
 							if(4) //stun baton
-								halitem.icon = 'weapons.dmi'
+								halitem.icon = 'icons/obj/weapons.dmi'
 								halitem.icon_state = "stunbaton"
 								halitem.name = "Stun Baton"
 							if(5) //emag
-								halitem.icon = 'card.dmi'
+								halitem.icon = 'icons/obj/card.dmi'
 								halitem.icon_state = "emag"
 								halitem.name = "Cryptographic Sequencer"
 							if(6) //flashbang
-								halitem.icon = 'grenade.dmi'
+								halitem.icon = 'icons/obj/grenade.dmi'
 								halitem.icon_state = "flashbang1"
 								halitem.name = "Flashbang"
 						if(client) client.screen += halitem
@@ -91,13 +91,13 @@ mob/living/carbon/proc/handle_hallucinations()
 						switch(rand(1,3))
 							if(1)
 								//src << "Space"
-								halimage = image('space.dmi',target,"[rand(1,25)]",TURF_LAYER)
+								halimage = image('icons/turf/space.dmi',target,"[rand(1,25)]",TURF_LAYER)
 							if(2)
 								//src << "Fire"
-								halimage = image('fire.dmi',target,"1",TURF_LAYER)
+								halimage = image('icons/effects/fire.dmi',target,"1",TURF_LAYER)
 							if(3)
 								//src << "C4"
-								halimage = image('syndieweapons.dmi',target,"c4small_1",OBJ_LAYER+0.01)
+								halimage = image('icons/obj/syndieweapons.dmi',target,"c4small_1",OBJ_LAYER+0.01)
 
 
 						if(client) client.images += halimage
@@ -110,35 +110,35 @@ mob/living/carbon/proc/handle_hallucinations()
 				//Strange audio
 				//src << "Strange Audio"
 				switch(rand(1,12))
-					if(1) src << 'airlock.ogg'
+					if(1) src << 'sound/machines/airlock.ogg'
 					if(2)
-						if(prob(50))src << 'Explosion1.ogg'
-						else src << 'Explosion2.ogg'
-					if(3) src << 'explosionfar.ogg'
-					if(4) src << 'Glassbr1.ogg'
-					if(5) src << 'Glassbr2.ogg'
-					if(6) src << 'Glassbr3.ogg'
-					if(7) src << 'twobeep.ogg'
-					if(8) src << 'windowdoor.ogg'
+						if(prob(50))src << 'sound/effects/Explosion1.ogg'
+						else src << 'sound/effects/Explosion2.ogg'
+					if(3) src << 'sound/effects/explosionfar.ogg'
+					if(4) src << 'sound/effects/Glassbr1.ogg'
+					if(5) src << 'sound/effects/Glassbr2.ogg'
+					if(6) src << 'sound/effects/Glassbr3.ogg'
+					if(7) src << 'sound/machines/twobeep.ogg'
+					if(8) src << 'sound/machines/windowdoor.ogg'
 					if(9)
 						//To make it more realistic, I added two gunshots (enough to kill)
-						src << 'Gunshot.ogg'
+						src << 'sound/weapons/Gunshot.ogg'
 						spawn(rand(10,30))
-							src << 'Gunshot.ogg'
-					if(10) src << 'smash.ogg'
+							src << 'sound/weapons/Gunshot.ogg'
+					if(10) src << 'sound/weapons/smash.ogg'
 					if(11)
 						//Same as above, but with tasers.
-						src << 'Taser.ogg'
+						src << 'sound/weapons/Taser.ogg'
 						spawn(rand(10,30))
-							src << 'Taser.ogg'
+							src << 'sound/weapons/Taser.ogg'
 				//Rare audio
 					if(12)
 //These sounds are (mostly) taken from Hidden: Source
-						var/list/creepyasssounds = list('ghost.ogg', 'ghost2.ogg', 'Heart Beat.ogg', 'screech.ogg',\
-							'behind_you1.ogg', 'behind_you2.ogg', 'far_noise.ogg', 'growl1.ogg', 'growl2.ogg',\
-							'growl3.ogg', 'im_here1.ogg', 'im_here2.ogg', 'i_see_you1.ogg', 'i_see_you2.ogg',\
-							'look_up1.ogg', 'look_up2.ogg', 'over_here1.ogg', 'over_here2.ogg', 'over_here3.ogg',\
-							'turn_around1.ogg', 'turn_around2.ogg', 'veryfar_noise.ogg', 'wail.ogg')
+						var/list/creepyasssounds = list('sound/effects/ghost.ogg', 'sound/effects/ghost2.ogg', 'sound/effects/Heart Beat.ogg', 'sound/effects/screech.ogg',\
+							'sound/hallucinations/behind_you1.ogg', 'sound/hallucinations/behind_you2.ogg', 'sound/hallucinations/far_noise.ogg', 'sound/hallucinations/growl1.ogg', 'sound/hallucinations/growl2.ogg',\
+							'sound/hallucinations/growl3.ogg', 'sound/hallucinations/im_here1.ogg', 'sound/hallucinations/im_here2.ogg', 'sound/hallucinations/i_see_you1.ogg', 'sound/hallucinations/i_see_you2.ogg',\
+							'sound/hallucinations/look_up1.ogg', 'sound/hallucinations/look_up2.ogg', 'sound/hallucinations/over_here1.ogg', 'sound/hallucinations/over_here2.ogg', 'sound/hallucinations/over_here3.ogg',\
+							'sound/hallucinations/turn_around1.ogg', 'sound/hallucinations/turn_around2.ogg', 'sound/hallucinations/veryfar_noise.ogg', 'sound/hallucinations/wail.ogg')
 						src << pick(creepyasssounds)
 			if(66 to 70)
 				//Flashes of danger
@@ -151,13 +151,13 @@ mob/living/carbon/proc/handle_hallucinations()
 						var/turf/simulated/floor/target = pick(possible_points)
 						switch(rand(1,4))
 							if(1)
-								halbody = image('human.dmi',target,"husk_l",TURF_LAYER)
+								halbody = image('icons/mob/human.dmi',target,"husk_l",TURF_LAYER)
 							if(2,3)
-								halbody = image('human.dmi',target,"husk_s",TURF_LAYER)
+								halbody = image('icons/mob/human.dmi',target,"husk_s",TURF_LAYER)
 							if(4)
-								halbody = image('alien.dmi',target,"alienother",TURF_LAYER)
+								halbody = image('icons/mob/alien.dmi',target,"alienother",TURF_LAYER)
 							if(5)
-								halbody = image('xcomalien.dmi',target,"chryssalid",TURF_LAYER)
+								halbody = image('icons/mob/xcomalien.dmi',target,"chryssalid",TURF_LAYER)
 
 						if(client) client.images += halbody
 						spawn(rand(50,80)) //Only seen for a brief moment.
@@ -299,7 +299,7 @@ proc/check_panel(mob/M)
 			else
 				if(prob(15))
 					if(weapon_name)
-						my_target << sound(pick('genhit1.ogg', 'genhit2.ogg', 'genhit3.ogg'))
+						my_target << sound(pick('sound/weapons/genhit1.ogg', 'sound/weapons/genhit2.ogg', 'sound/weapons/genhit3.ogg'))
 						my_target.show_message("\red <B>[my_target] has been attacked with [weapon_name] by [src.name] </B>", 1)
 						my_target.halloss += 8
 						if(prob(20)) my_target.eye_blurry += 3
@@ -307,7 +307,7 @@ proc/check_panel(mob/M)
 							if(!locate(/obj/effect/overlay) in my_target.loc)
 								fake_blood(my_target)
 					else
-						my_target << sound(pick('punch1.ogg','punch2.ogg','punch3.ogg','punch4.ogg'))
+						my_target << sound(pick('sound/weapons/punch1.ogg','sound/weapons/punch2.ogg','sound/weapons/punch3.ogg','sound/weapons/punch4.ogg'))
 						my_target.show_message("\red <B>[src.name] has punched [my_target]!</B>", 1)
 						my_target.halloss += 4
 						if(prob(33))
@@ -324,7 +324,7 @@ proc/check_panel(mob/M)
 /proc/fake_blood(var/mob/target)
 	var/obj/effect/overlay/O = new/obj/effect/overlay(target.loc)
 	O.name = "blood"
-	var/image/I = image('blood.dmi',O,"floor[rand(1,7)]",O.dir,1)
+	var/image/I = image('icons/effects/blood.dmi',O,"floor[rand(1,7)]",O.dir,1)
 	target << I
 	spawn(300)
 		del(O)

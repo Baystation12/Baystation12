@@ -39,7 +39,7 @@
 	anchored = 1
 	layer = 20
 	dir = NORTH
-	icon = 'buildmode.dmi'
+	icon = 'icons/misc/buildmode.dmi'
 	var/obj/bmode/buildholder/master = null
 
 /obj/bmode/builddir
@@ -60,7 +60,7 @@
 		return
 
 /obj/bmode/buildhelp
-	icon = 'buildmode.dmi'
+	icon = 'icons/misc/buildmode.dmi'
 	icon_state = "buildhelp"
 	screen_loc = "NORTH,WEST+1"
 	Click()

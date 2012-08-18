@@ -1,7 +1,7 @@
 /obj/machinery/computer/arcade
 	name = "arcade machine"
 	desc = "Does not support Pinball."
-	icon = 'computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	icon_state = "arcade"
 	circuit = "/obj/item/weapon/circuitboard/arcade"
 	var/enemy_name = "Space Villian"
@@ -240,7 +240,7 @@
 
 		src.updateUsrDialog()
 	else if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 			var/obj/item/weapon/circuitboard/arcade/M = new /obj/item/weapon/circuitboard/arcade( A )

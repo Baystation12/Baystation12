@@ -9,7 +9,7 @@
 //1: use labeller on item
 //2: select label to remove (if there is >1 label anyway, if there is only one it will just remove that one)
 /obj/item/weapon/hand_labeler
-	icon = 'items.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "labeler"
 	item_state = "flight"
 	name = "Hand labeler"
@@ -60,7 +60,7 @@
 	A.name += " - '[str]'"
 
 /obj/item/weapon/label
-	icon = 'items.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "label"
 	name = "Label"
 	w_class = 2

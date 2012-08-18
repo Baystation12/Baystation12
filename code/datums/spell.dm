@@ -28,7 +28,7 @@ var/list/spells = typesof(/obj/effect/proc_holder/spell) //needed for the badmin
 	var/selection_type = "view" //can be "range" or "view"
 
 	var/overlay = 0
-	var/overlay_icon = 'wizard.dmi'
+	var/overlay_icon = 'icons/obj/wizard.dmi'
 	var/overlay_icon_state = "spell"
 	var/overlay_lifespan = 0
 
@@ -91,9 +91,9 @@ var/list/spells = typesof(/obj/effect/proc_holder/spell) //needed for the badmin
 		if("shout")
 			usr.say(invocation)
 			if(usr.gender=="male")
-				playsound(usr.loc, pick('null.ogg','null.ogg'), 100, 1)
+				playsound(usr.loc, pick('sound/misc/null.ogg','sound/misc/null.ogg'), 100, 1)
 			else
-				playsound(usr.loc, pick('null.ogg','null.ogg'), 100, 1)
+				playsound(usr.loc, pick('sound/misc/null.ogg','sound/misc/null.ogg'), 100, 1)
 		if("whisper")
 			usr.whisper(invocation)
 

@@ -1,7 +1,7 @@
 /obj/machinery/shieldgen
 		name = "Shield generator"
 		desc = "Used to seal minor hull breaches."
-		icon = 'objects.dmi'
+		icon = 'icons/obj/objects.dmi'
 		icon_state = "shieldoff"
 		var/active = 0
 		var/health = 100
@@ -15,7 +15,7 @@
 /obj/machinery/shieldwallgen
 		name = "Shield Generator"
 		desc = "A shield generator."
-		icon = 'stationobjs.dmi'
+		icon = 'icons/obj/stationobjs.dmi'
 		icon_state = "Shield_Gen"
 		anchored = 0
 		density = 1
@@ -39,7 +39,7 @@
 /obj/machinery/shield
 		name = "shield"
 		desc = "An energy shield."
-		icon = 'effects.dmi'
+		icon = 'icons/effects/effects.dmi'
 		icon_state = "shieldsparkles"
 		density = 1
 		opacity = 1
@@ -49,7 +49,7 @@
 /obj/machinery/shieldwall
 		name = "Shield"
 		desc = "An energy shield."
-		icon = 'effects.dmi'
+		icon = 'icons/effects/effects.dmi'
 		icon_state = "shieldwall"
 		anchored = 1
 		density = 1
@@ -325,14 +325,14 @@
 
 		else if(state == 0)
 			state = 1
-			playsound(src.loc, 'Ratchet.ogg', 75, 1)
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			user << "You secure the external reinforcing bolts to the floor."
 			src.anchored = 1
 			return
 
 		else if(state == 1)
 			state = 0
-			playsound(src.loc, 'Ratchet.ogg', 75, 1)
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			user << "You undo the external reinforcing bolts."
 			src.anchored = 0
 			return

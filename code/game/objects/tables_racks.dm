@@ -184,7 +184,7 @@ TABLE AND RACK OBJECT INTERATIONS
 					"\red You hear the nauseating crunch of bone and gristle on solid metal.")
 				H.UpdateDamageIcon()
 				H.updatehealth()
-				playsound(src.loc, 'tablehit1.ogg', 50, 1, -3)
+				playsound(src.loc, 'sound/weapons/tablehit1.ogg', 50, 1, -3)
 			return
 		G.affecting.loc = src.loc
 		G.affecting.Weaken(5)
@@ -196,10 +196,10 @@ TABLE AND RACK OBJECT INTERATIONS
 
 	if (istype(W, /obj/item/weapon/wrench))
 		user << "\blue Now disassembling table"
-		playsound(src.loc, 'Ratchet.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user,50))
 			new /obj/item/weapon/table_parts( src.loc )
-			playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			//SN src = null
 			del(src)
 		return
@@ -211,7 +211,7 @@ TABLE AND RACK OBJECT INTERATIONS
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, src.loc)
 		spark_system.start()
-		playsound(src.loc, 'blade1.ogg', 50, 1)
+		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		playsound(src.loc, "sparks", 50, 1)
 		for(var/mob/O in viewers(user, 4))
 			O.show_message("\blue The table was sliced apart by [user]!", 1, "\red You hear metal coming apart.", 2)
@@ -241,10 +241,10 @@ TABLE AND RACK OBJECT INTERATIONS
 		return
 	if (istype(W, /obj/item/weapon/wrench))
 		user << "\blue Now disassembling the wooden table"
-		playsound(src.loc, 'Ratchet.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		sleep(50)
 		new /obj/item/weapon/table_parts/wood( src.loc )
-		playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		del(src)
 		return
 	if(isrobot(user))
@@ -253,7 +253,7 @@ TABLE AND RACK OBJECT INTERATIONS
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, src.loc)
 		spark_system.start()
-		playsound(src.loc, 'blade1.ogg', 50, 1)
+		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		playsound(src.loc, "sparks", 50, 1)
 		for(var/mob/O in viewers(user, 4))
 			O.show_message("\blue The wooden table was sliced apart by [user]!", 1, "\red You hear wood coming apart.", 2)
@@ -287,7 +287,7 @@ TABLE AND RACK OBJECT INTERATIONS
 			if(src.status == 2)
 				W:welding = 2
 				user << "\blue Now weakening the reinforced table"
-				playsound(src.loc, 'Welder.ogg', 50, 1)
+				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 				if (do_after(user, 50))
 					user << "\blue Table weakened"
 					src.status = 1
@@ -295,7 +295,7 @@ TABLE AND RACK OBJECT INTERATIONS
 			else
 				W:welding = 2
 				user << "\blue Now strengthening the reinforced table"
-				playsound(src.loc, 'Welder.ogg', 50, 1)
+				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 				if (do_after(user, 50))
 					user << "\blue Table strengthened"
 					src.status = 2
@@ -310,10 +310,10 @@ TABLE AND RACK OBJECT INTERATIONS
 	if (istype(W, /obj/item/weapon/wrench))
 		if(src.status == 1)
 			user << "\blue Now disassembling the reinforced table"
-			playsound(src.loc, 'Ratchet.ogg', 50, 1)
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if (do_after(user, 50))
 				new /obj/item/weapon/table_parts/reinforced( src.loc )
-				playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 				del(src)
 			return
 	if(isrobot(user))
@@ -323,7 +323,7 @@ TABLE AND RACK OBJECT INTERATIONS
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, src.loc)
 		spark_system.start()
-		playsound(src.loc, 'blade1.ogg', 50, 1)
+		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		playsound(src.loc, "sparks", 50, 1)
 		for(var/mob/O in viewers(user, 4))
 			O.show_message("\blue The reinforced table was sliced apart by [user]!", 1, "\red You hear metal coming apart.", 2)
@@ -381,7 +381,7 @@ TABLE AND RACK OBJECT INTERATIONS
 /obj/structure/rack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/wrench))
 		new /obj/item/weapon/rack_parts( src.loc )
-		playsound(src.loc, 'Ratchet.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		//SN src = null
 		del(src)
 		return

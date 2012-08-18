@@ -595,7 +595,7 @@ CIRCULAR SAW
 						implant.loc = (get_turf(H))
 						implant.implanted = 0
 						S.implant = null
-						playsound(user, 'squelch1.ogg', 50, 1)
+						playsound(user, 'sound/effects/squelch1.ogg', 50, 1)
 						if(istype(implant, /obj/item/weapon/implant/explosive) || istype(implant, /obj/item/weapon/implant/uplink) || istype(implant, /obj/item/weapon/implant/dexplosive) || istype(implant, /obj/item/weapon/implant/explosive) || istype(implant, /obj/item/weapon/implant/compressed))
 							usr << "The implant disintegrates into nothing..."
 							del(implant)
@@ -1743,7 +1743,7 @@ CIRCULAR SAW
 
 /obj/item/weapon/surgical_tool/bonegel
 	name = "bone gel"
-	icon = 'surgery.dmi'
+	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone gel"
 
 /obj/item/weapon/surgical_tool/bonegel/New()
@@ -1769,7 +1769,7 @@ CIRCULAR SAW
 
 /obj/item/weapon/surgical_tool/bonesetter
 	name = "bone setter"
-	icon = 'surgery.dmi'
+	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone setter"
 
 /obj/item/weapon/surgical_tool/bonesetter/New()
@@ -1796,7 +1796,7 @@ CIRCULAR SAW
 /obj/item/weapon/boneinjector
 	name = "Bone-repairing Nanites Injector"
 	desc = "This injects the person with nanites that repair bones."
-	icon = 'items.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "implanter1"
 	throw_speed = 1
 	throw_range = 5

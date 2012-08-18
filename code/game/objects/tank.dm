@@ -1,7 +1,7 @@
 
 /obj/item/weapon/tank
 	name = "tank"
-	icon = 'tank.dmi'
+	icon = 'icons/obj/tank.dmi'
 
 	var/datum/gas_mixture/air_contents = null
 	var/distribute_pressure = ONE_ATMOSPHERE
@@ -36,7 +36,7 @@
 		..()
 		if(air_contents.oxygen < 1 && loc==usr)
 			usr << "\red <B>The meter on the [src.name] indicates you are almost out of air!</B>"
-			usr << sound('alert.ogg')
+			usr << sound('sound/effects/alert.ogg')
 
 
 /obj/item/weapon/tank/plasma

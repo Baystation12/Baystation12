@@ -2,7 +2,7 @@
 /obj/effect/new_year_tree
 	name = "The fir"
 	desc = "This is a fir. Real fir on dammit spess station. You smell pine-needles."
-	icon = '160x160.dmi'
+	icon = 'icons/effects/160x160.dmi'
 	icon_state = "new-year-tree"
 	anchored = 1
 	opacity = 1
@@ -47,7 +47,7 @@
 /obj/item/weapon/firbang
 	desc = "It is set to detonate in 10 seconds."
 	name = "firbang"
-	icon = 'grenade.dmi'
+	icon = 'icons/obj/grenade.dmi'
 	icon_state = "flashbang"
 	var/state = null
 	var/det_time = 100.0
@@ -64,7 +64,7 @@
 			user << "\red Huh? How does this thing work?!"
 			src.state = 1
 			src.icon_state = "flashbang1"
-			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
+			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 			spawn( 5 )
 				prime()
 				return
@@ -72,7 +72,7 @@
 			user << "\red You prime the [src]! [det_time/10] seconds!"
 			src.state = 1
 			src.icon_state = "flashbang1"
-			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
+			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 			spawn( src.det_time )
 				prime()
 				return
@@ -92,7 +92,7 @@
 	return
 
 /obj/item/weapon/firbang/proc/prime()
-	playsound(src.loc, 'bang.ogg', 25, 1)
+	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 	var/turf/T = get_turf(src)
 	if(T)
 		var/datum/effect/effect/system/harmless_smoke_spread/smoke = new

@@ -13,7 +13,7 @@
 	invisibility = 101
 	var/atom/movable/overlay/animation = new /atom/movable/overlay( loc )
 	animation.icon_state = "blank"
-	animation.icon = 'mob.dmi'
+	animation.icon = 'icons/mob/mob.dmi'
 	animation.master = src
 	flick("h2monkey", animation)
 	sleep(48)
@@ -144,7 +144,7 @@
 		world << text("<b>[O.real_name] is the AI!</b>")
 
 		spawn(50)
-			world << sound('newAI.ogg')
+			world << sound('sound/announcer/newAI.ogg')
 
 		del(src)
 

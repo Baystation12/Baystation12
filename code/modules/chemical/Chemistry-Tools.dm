@@ -7,7 +7,7 @@
 /obj/item/weapon/chem_grenade
 	name = "Grenade Casing"
 	icon_state = "chemg"
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	item_state = "flashbang"
 	w_class = 2.0
 	force = 2.0
@@ -74,7 +74,7 @@
 					else if(istype(W, /obj/item/weapon/screwdriver))
 						if(beaker_one && beaker_two && attached_device)
 							user << "\blue You lock the assembly."
-							playsound(src.loc, 'Screwdriver.ogg', 25, -3)
+							playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)
 							name = "grenade"
 							icon_state = initial(icon_state) + "_locked"
 							active = 2
@@ -84,7 +84,7 @@
 				if(2)
 					if(istype(W, /obj/item/weapon/screwdriver))
 						user << "\blue You disarm the [src]!"
-						playsound(src.loc, 'Screwdriver.ogg', 25, -3)
+						playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)
 						name = "grenade casing"
 						icon_state = initial(icon_state) +"_ass"
 						active = 1
@@ -97,7 +97,7 @@
 				switch(state)
 					if(0)
 						if(istype(W, /obj/item/weapon/wrench))
-							playsound(src.loc, 'Ratchet.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 							if(do_after(user, 20))
 								user << "\blue You wrench the canister in place."
 								src.name = "Camera Assembly"
@@ -106,7 +106,7 @@
 								path = 2
 					if(1)
 						if(istype(W, /obj/item/weapon/wrench))
-							playsound(src.loc, 'Ratchet.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 							if(do_after(user, 20))
 								user << "\blue You unfasten the canister."
 								src.name = "Grenade Casing"
@@ -114,29 +114,29 @@
 								src.state = 0
 								path = 0
 						if(istype(W, /obj/item/device/multitool))
-							playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 							user << "\blue You place the electronics inside the canister."
 							src.circuit = W
 							user.drop_item()
 							W.loc = src
 						if(istype(W, /obj/item/weapon/screwdriver) && circuit)
-							playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 							user << "\blue You screw the circuitry into place."
 							src.state = 2
 						if(istype(W, /obj/item/weapon/crowbar) && circuit)
-							playsound(src.loc, 'Crowbar.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 							user << "\blue You remove the circuitry."
 							src.state = 1
 							circuit.loc = src.loc
 							src.circuit = null
 					if(2)
 						if(istype(W, /obj/item/weapon/screwdriver) && circuit)
-							playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 							user << "\blue You unfasten the circuitry."
 							src.state = 1
 						if(istype(W, /obj/item/weapon/cable_coil))
 							if(W:amount >= 1)
-								playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+								playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 								if(do_after(user, 20))
 									W:amount -= 1
 									if(!W:amount) del(W)
@@ -144,20 +144,20 @@
 									src.state = 3
 					if(3)
 						if(istype(W, /obj/item/weapon/wirecutters))
-							playsound(src.loc, 'wirecutter.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 							user << "\blue You remove the cabling."
 							src.state = 2
 							var/obj/item/weapon/cable_coil/A = new /obj/item/weapon/cable_coil( src.loc )
 							A.amount = 1
 						if(issignaler(W))
-							playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 							user << "\blue You attach the wireless signaller unit to the circutry."
 							user.drop_item()
 							W.loc = src
 							src.state = 4
 					if(4)
 						if(istype(W, /obj/item/weapon/crowbar) && !motion)
-							playsound(src.loc, 'Crowbar.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 							user << "\blue You remove the remote signalling device."
 							src.state = 3
 							var/obj/item/device/assembly/signaler/S = locate() in src
@@ -167,14 +167,14 @@
 								new /obj/item/device/assembly/signaler( src.loc, 1 )
 						if(isprox(W) && motion == 0)
 //							if(W:amount >= 1)
-							playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 //								W:use(1)
 							user << "\blue You attach the proximity sensor."
 							user.drop_item()
 							W.loc = src
 							motion = 1
 						if(istype(W, /obj/item/weapon/crowbar) && motion)
-							playsound(src.loc, 'Crowbar.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 							user << "\blue You remove the proximity sensor."
 							var/obj/item/device/assembly/prox_sensor/S = locate() in src
 							if(S)
@@ -184,7 +184,7 @@
 							motion = 0
 						if(istype(W, /obj/item/stack/sheet/glass))
 							if(W:amount >= 1)
-								playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+								playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 								if(do_after(user, 20))
 									if(W)
 										W:use(1)
@@ -192,12 +192,12 @@
 										src.state = 5
 					if(5)
 						if(istype(W, /obj/item/weapon/crowbar))
-							playsound(src.loc, 'Crowbar.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 							user << "\blue You remove the glass lens."
 							src.state = 4
 							new /obj/item/stack/sheet/glass( src.loc, 2 )
 						if(istype(W, /obj/item/weapon/screwdriver))
-							playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+							playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 							user << "\blue You connect the lense."
 							var/B
 							if(motion == 1)
@@ -268,7 +268,7 @@
 			exploding = 1
 
 			if(reliability)
-				playsound(src.loc, 'bamf.ogg', 50, 1)
+				playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
 				beaker_two.reagents.maximum_volume += beaker_one.reagents.maximum_volume // make sure everything can mix
 				beaker_one.reagents.update_total()
 				beaker_one.reagents.trans_to(beaker_two, beaker_one.reagents.total_volume)
@@ -381,7 +381,7 @@
 /obj/effect/syringe_gun_dummy
 	name = ""
 	desc = ""
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "null"
 	anchored = 1
 	density = 0
@@ -393,7 +393,7 @@
 
 /obj/item/weapon/gun/grenadelauncher
 	name = "grenade launcher"
-	icon = 'gun.dmi'
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "riotgun"
 	item_state = "riotgun"
 	w_class = 4.0
@@ -453,7 +453,7 @@
 				log_game("[key_name_admin(user)] used a chemistry grenade ([src.name]).")
 				F.state = 1
 				F.icon_state = initial(icon_state)+"_armed"
-				playsound(user.loc, 'armbomb.ogg', 75, 1, -3)
+				playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 				spawn(15)
 					F.explode()
 			else if (istype(grenades[1], /obj/item/weapon/flashbang))
@@ -463,7 +463,7 @@
 				F.throw_at(target, 30, 2)
 				F.active = 1
 				F.icon_state = "flashbang1"
-				playsound(user.loc, 'armbomb.ogg', 75, 1, -3)
+				playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 				spawn(15)
 					F.prime()
 			else if (istype(grenades[1], /obj/item/weapon/smokebomb))
@@ -472,7 +472,7 @@
 				F.loc = user.loc
 				F.throw_at(target, 30, 2)
 				F.icon_state = "flashbang1"
-				playsound(user.loc, 'armbomb.ogg', 75, 1, -3)
+				playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 				spawn(15)
 					F.prime()
 			else if (istype(grenades[1], /obj/item/weapon/mustardbomb))
@@ -481,7 +481,7 @@
 				F.loc = user.loc
 				F.throw_at(target, 30, 2)
 				F.icon_state = "flashbang1"
-				playsound(user.loc, 'armbomb.ogg', 75, 1, -3)
+				playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 				spawn(15)
 					F.prime()
 			else if (istype(grenades[1], /obj/item/weapon/empgrenade))
@@ -491,7 +491,7 @@
 				F.throw_at(target, 30, 2)
 				F.active = 1
 				F.icon_state = "empar"
-				playsound(user.loc, 'armbomb.ogg', 75, 1, -3)
+				playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 				spawn(15)
 					F.prime()
 			if (locate (/obj/structure/table, src.loc) || locate (/obj/item/weapon/storage, src.loc))
@@ -509,7 +509,7 @@
 					log_game("[key_name_admin(user)] used a chemistry grenade ([src.name]).")
 					F.state = 1
 					F.icon_state = initial(icon_state)+"_armed"
-					playsound(user.loc, 'armbomb.ogg', 75, 1, -3)
+					playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 					spawn(15)
 						F.explode()
 				else if (istype(grenades[1], /obj/item/weapon/flashbang))
@@ -519,7 +519,7 @@
 					F.throw_at(target, 30, 2)
 					F.active = 1
 					F.icon_state = "flashbang1"
-					playsound(user.loc, 'armbomb.ogg', 75, 1, -3)
+					playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 					spawn(15)
 						F.prime()
 				else if (istype(grenades[1], /obj/item/weapon/smokebomb))
@@ -528,7 +528,7 @@
 					F.loc = user.loc
 					F.throw_at(target, 30, 2)
 					F.icon_state = "flashbang1"
-					playsound(user.loc, 'armbomb.ogg', 75, 1, -3)
+					playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 					spawn(15)
 						F.prime()
 				else if (istype(grenades[1], /obj/item/weapon/mustardbomb))
@@ -537,7 +537,7 @@
 					F.loc = user.loc
 					F.throw_at(target, 30, 2)
 					F.icon_state = "flashbang1"
-					playsound(user.loc, 'armbomb.ogg', 75, 1, -3)
+					playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 					spawn(15)
 						F.prime()
 				else if (istype(grenades[1], /obj/item/weapon/empgrenade))
@@ -547,7 +547,7 @@
 					F.throw_at(target, 30, 2)
 					F.active = 1
 					F.icon_state = "empar"
-					playsound(user.loc, 'armbomb.ogg', 75, 1, -3)
+					playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 					spawn(15)
 						F.prime()
 
@@ -555,7 +555,7 @@
 /obj/item/weapon/gun/syringe
 	name = "syringe gun"
 	desc = "A spring loaded rifle designed to fit syringes, designed to incapacitate unruly patients from a distance."
-	icon = 'gun.dmi'
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "syringegun"
 	item_state = "syringegun"
 	w_class = 3.0
@@ -607,7 +607,7 @@
 				del(S)
 				D.icon_state = "syringeproj"
 				D.name = "syringe"
-				playsound(user.loc, 'syringeproj.ogg', 50, 1)
+				playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
 
 				for(var/i=0, i<6, i++)
 					if(!D) break
@@ -660,7 +660,7 @@
 /obj/structure/reagent_dispensers
 	name = "Dispenser"
 	desc = "..."
-	icon = 'objects.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
 	density = 1
 	anchored = 0
@@ -728,7 +728,7 @@
 /obj/item/weapon/reagent_containers
 	name = "Container"
 	desc = "..."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = null
 	w_class = 1
 	var/amount_per_transfer_from_this = 5
@@ -770,7 +770,7 @@
 /obj/item/weapon/reagent_containers/glass
 	name = " "
 	desc = " "
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "null"
 	item_state = "null"
 	amount_per_transfer_from_this = 10
@@ -867,7 +867,7 @@
 /obj/item/weapon/reagent_containers/dropper
 	name = "Dropper"
 	desc = "A dropper. Transfers 5 units."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dropper0"
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(1,2,3,4,5)
@@ -930,7 +930,7 @@
 /obj/item/weapon/reagent_containers/syringe
 	name = "Syringe"
 	desc = "A syringe."
-	icon = 'syringe.dmi'
+	icon = 'icons/obj/syringe.dmi'
 	item_state = "syringe_0"
 	icon_state = "0"
 	amount_per_transfer_from_this = 5
@@ -1140,7 +1140,7 @@
 		item_state = "syringe_[rounded_vol]"
 		if(reagents.total_volume)
 			var/obj/effect/overlay = new/obj
-			overlay.icon = 'syringefilling.dmi'
+			overlay.icon = 'icons/obj/syringefilling.dmi'
 			switch(rounded_vol)
 				if(5)	overlay.icon_state = "5"
 				if(10)	overlay.icon_state = "10"
@@ -1172,7 +1172,7 @@
 /obj/item/weapon/reagent_containers/ld50_syringe
 	name = "Lethal Injection Syringe"
 	desc = "A syringe used for lethal injections."
-	icon = 'syringe.dmi'
+	icon = 'icons/obj/syringe.dmi'
 	item_state = "syringe_0"
 	icon_state = "0"
 	amount_per_transfer_from_this = 50
@@ -1299,7 +1299,7 @@
 /obj/item/weapon/reagent_containers/hypospray
 	name = "hypospray"
 	desc = "The DeForest Medical Corporation hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients."
-	icon = 'syringe.dmi'
+	icon = 'icons/obj/syringe.dmi'
 	item_state = "hypo"
 	icon_state = "hypo"
 	amount_per_transfer_from_this = 5
@@ -1343,7 +1343,7 @@
 /obj/item/weapon/reagent_containers/borghypo
 	name = "Cyborg Hypospray"
 	desc = "An advanced chemical synthesizer and injection system, designed for heavy-duty medical equipment."
-	icon = 'syringe.dmi'
+	icon = 'icons/obj/syringe.dmi'
 	item_state = "hypo"
 	icon_state = "borghypo"
 	amount_per_transfer_from_this = 5
@@ -1401,7 +1401,7 @@
 	return
 
 /obj/item/weapon/reagent_containers/borghypo/attack_self(mob/user as mob)
-	playsound(src.loc, 'pop.ogg', 50, 0)		//Change the mode
+	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)		//Change the mode
 	if(mode == 1)
 		mode = 2
 		charge_tick = 0 //Prevents wasted chems/cell charge if you're cycling through modes.
@@ -1462,11 +1462,11 @@
 /obj/item/weapon/reagent_containers/food/snacks		//Food items that are eaten normally and don't leave anything behind.
 	name = "snack"
 	desc = "yummy"
-	icon = 'food.dmi'
+	icon = 'icons/obj/food.dmi'
 	icon_state = null
 	var/bitesize = 1
 	var/bitecount = 0
-	var/eatsound = 'eatfood.ogg'
+	var/eatsound = 'sound/items/eatfood.ogg'
 	var/trash = null
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
@@ -1651,7 +1651,7 @@
 							spawn(2)
 								user.update_clothing()
 							del(src)
-				playsound(M.loc,'eatfood.ogg', rand(10,50), 1)
+				playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
 				return 1
 		return 0
 
@@ -1749,7 +1749,7 @@
 /obj/item/weapon/reagent_containers/food/drinks
 	name = "drink"
 	desc = "yummy"
-	icon = 'drinks.dmi'
+	icon = 'icons/obj/drinks.dmi'
 	icon_state = null
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 	var/gulp_size = 5 //This is now officially broken ... need to think of a nice way to fix it.
@@ -1778,7 +1778,7 @@
 				spawn(5)
 					reagents.trans_to(M, gulp_size)
 
-			playsound(M.loc,'drink.ogg', rand(10,50), 1)
+			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
 		else if( istype(M, /mob/living/carbon/human) )
 
@@ -1809,7 +1809,7 @@
 					R.add_reagent(refill, fillevel)
 
 
-			playsound(M.loc,'drink.ogg', rand(10,50), 1)
+			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
 
 		return 0
@@ -1875,7 +1875,7 @@
 /obj/item/weapon/reagent_containers/pill
 	name = "pill"
 	desc = "a pill."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = null
 	item_state = "pill"
 	possible_transfer_amounts = null
@@ -1976,7 +1976,7 @@
 /obj/item/weapon/reagent_containers/glass/bucket
 	desc = "It's a bucket."
 	name = "bucket"
-	icon = 'janitor.dmi'
+	icon = 'icons/obj/janitor.dmi'
 	icon_state = "bucket"
 	item_state = "bucket"
 	m_amt = 200
@@ -1998,7 +1998,7 @@
 /obj/item/weapon/reagent_containers/glass/bucket/wateringcan
 	name = "watering can"
 	desc = "A watering can, for all your watering needs."
-	icon = 'hydroponics.dmi'
+	icon = 'icons/obj/hydroponics.dmi'
 	icon_state = "watercan"
 	item_state = "bucket"
 
@@ -2009,7 +2009,7 @@
 /obj/item/weapon/reagent_containers/glass/cantister
 	desc = "It's a canister. Mainly used for transporting fuel."
 	name = "canister"
-	icon = 'tank.dmi'
+	icon = 'icons/obj/tank.dmi'
 	icon_state = "canister"
 	item_state = "canister"
 	m_amt = 300
@@ -2025,7 +2025,7 @@
 /obj/item/weapon/reagent_containers/glass/dispenser
 	name = "reagent glass"
 	desc = "A reagent glass."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beaker0"
 	amount_per_transfer_from_this = 10
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
@@ -2041,7 +2041,7 @@
 /obj/item/weapon/reagent_containers/glass/beaker
 	name = "beaker"
 	desc = "A beaker. Can hold up to 50 units."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beaker0"
 	item_state = "beaker"
 	m_amt = 0
@@ -2064,7 +2064,7 @@
 
 		if(reagents.total_volume)
 			var/obj/effect/overlay = new/obj
-			overlay.icon = 'beaker1.dmi'
+			overlay.icon = 'icons/obj/beaker1.dmi'
 			var/percent = round((reagents.total_volume / volume) * 100)
 			switch(percent)
 				if(0 to 9)		overlay.icon_state = "-10"
@@ -2106,7 +2106,7 @@
 /obj/item/weapon/reagent_containers/glass/blender_jug
 	name = "Blender Jug"
 	desc = "A blender jug, part of a blender."
-	icon = 'kitchen.dmi'
+	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "blender_jug_e"
 	volume = 100
 
@@ -2122,7 +2122,7 @@
 /obj/item/weapon/reagent_containers/glass/large
 	name = "large reagent glass"
 	desc = "A large reagent glass. Can hold up to 100 units."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beakerlarge"
 	item_state = "beaker"
 	m_amt = 0
@@ -2145,7 +2145,7 @@
 		if(reagents.total_volume)
 
 			var/obj/effect/overlay = new/obj
-			overlay.icon = 'beaker2.dmi'
+			overlay.icon = 'icons/obj/beaker2.dmi'
 			var/percent = round((reagents.total_volume / volume) * 100)
 			switch(percent)
 				if(0 to 9)		overlay.icon_state = "-10"
@@ -2186,7 +2186,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle
 	name = "bottle"
 	desc = "A small bottle."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = null
 	item_state = "atoxinbottle"
 	amount_per_transfer_from_this = 10
@@ -2202,7 +2202,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline
 	name = "inaprovaline bottle"
 	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle16"
 
 	New()
@@ -2212,7 +2212,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/toxin
 	name = "toxin bottle"
 	desc = "A small bottle of toxins. Do not drink, it is poisonous."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle12"
 
 	New()
@@ -2222,7 +2222,7 @@
 /*/obj/item/weapon/reagent_containers/glass/bottle/cyanide
 	name = "cyanide bottle"
 	desc = "A small bottle of cyanide. Bitter almonds?"
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle12"
 
 	New()
@@ -2232,7 +2232,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/stoxin
 	name = "sleep-toxin bottle"
 	desc = "A small bottle of sleep toxins. Just the fumes make you sleepy."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle20"
 
 	New()
@@ -2242,7 +2242,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate
 	name = "Chloral Hydrate Bottle"
 	desc = "A small bottle of Choral Hydrate. Mickey's Favorite!"
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle20"
 
 	New()
@@ -2252,7 +2252,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/antitoxin
 	name = "anti-toxin bottle"
 	desc = "A small bottle of Anti-toxins. Counters poisons, and repairs damage, a wonder drug."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle17"
 
 	New()
@@ -2262,7 +2262,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/ammonia
 	name = "ammonia bottle"
 	desc = "A small bottle."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle20"
 
 	New()
@@ -2272,7 +2272,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/diethylamine
 	name = "diethylamine bottle"
 	desc = "A small bottle."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle17"
 
 	New()
@@ -2282,7 +2282,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/flu_virion
 	name = "Flu virion culture bottle"
 	desc = "A small bottle. Contains H13N1 flu virion culture in synthblood medium."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	New()
 		..()
@@ -2293,7 +2293,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/pierrot_throat
 	name = "Pierrot's Throat culture bottle"
 	desc = "A small bottle. Contains H0NI<42 virion culture in synthblood medium."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	New()
 		..()
@@ -2304,7 +2304,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/cold
 	name = "Rhinovirus culture bottle"
 	desc = "A small bottle. Contains XY-rhinovirus culture in synthblood medium."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	New()
 		..()
@@ -2315,7 +2315,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/retrovirus
 	name = "Retrovirus culture bottle"
 	desc = "A small bottle. Contains a retrovirus culture in a synthblood medium."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	New()
 		..()
@@ -2327,7 +2327,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/gbs
 	name = "GBS culture bottle"
 	desc = "A small bottle. Contains Gravitokinetic Bipotential SADS+ culture in synthblood medium."//Or simply - General BullShit
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	amount_per_transfer_from_this = 5
 
@@ -2342,7 +2342,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/fake_gbs
 	name = "GBS culture bottle"
 	desc = "A small bottle. Contains Gravitokinetic Bipotential SADS- culture in synthblood medium."//Or simply - General BullShit
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	New()
 		..()
@@ -2353,7 +2353,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/rhumba_beat
 	name = "Rhumba Beat culture bottle"
 	desc = "A small bottle. Contains The Rhumba Beat culture in synthblood medium."//Or simply - General BullShit
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	amount_per_transfer_from_this = 5
 
@@ -2369,7 +2369,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/brainrot
 	name = "Brainrot culture bottle"
 	desc = "A small bottle. Contains Cryptococcus Cosmosis culture in synthblood medium."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	New()
 		..()
@@ -2380,7 +2380,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/magnitis
 	name = "Magnitis culture bottle"
 	desc = "A small bottle. Contains a small dosage of Fukkos Miracos."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	New()
 		..()
@@ -2392,7 +2392,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/wizarditis
 	name = "Wizarditis culture bottle"
 	desc = "A small bottle. Contains a sample of Rincewindus Vulgaris."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	New()
 		..()
@@ -2403,7 +2403,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/pacid
 	name = "Polytrinic Acid Bottle"
 	desc = "A small bottle. Contains a small amount of Polytrinic Acid"
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle17"
 	New()
 		..()
@@ -2412,7 +2412,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/adminordrazine
 	name = "Adminordrazine Bottle"
 	desc = "A small bottle. Contains the liquid essence of the gods."
-	icon = 'drinks.dmi'
+	icon = 'icons/obj/drinks.dmi'
 	icon_state = "holyflask"
 	New()
 		..()
@@ -2422,7 +2422,7 @@
 /obj/item/weapon/reagent_containers/glass/bottle/ert
 	name = "emergency medicine bottle"
 	desc = "A large bottle."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle3"
 	item_state = "atoxinbottle"
 	amount_per_transfer_from_this = 50
@@ -2474,7 +2474,7 @@
 /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone
 	name = "beaker"
 	desc = "A beaker. Can hold up to 50 units."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beaker0"
 	item_state = "beaker"
 
@@ -2485,7 +2485,7 @@
 /obj/item/weapon/reagent_containers/glass/beaker/tricordrazine
 	name = "beaker"
 	desc = "A beaker. Can hold up to 50 units."
-	icon = 'chemical.dmi'
+	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beaker0"
 	item_state = "beaker"
 
@@ -2585,7 +2585,7 @@
 /obj/item/weapon/reagent_containers/food/condiment	//Food items that aren't eaten normally and leave an empty container behind.
 	name = "Condiment Container"
 	desc = "Just your average condiment container."
-	icon = 'food.dmi'
+	icon = 'icons/obj/food.dmi'
 	icon_state = "emptycondiment"
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 	possible_transfer_amounts = list(1,5,10)
@@ -2610,7 +2610,7 @@
 				spawn(5)
 					reagents.trans_to(M, 10)
 
-			playsound(M.loc,'drink.ogg', rand(10,50), 1)
+			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
 		else if( istype(M, /mob/living/carbon/human) )
 
@@ -2633,7 +2633,7 @@
 				spawn(5)
 					reagents.trans_to(M, 10)
 
-			playsound(M.loc,'drink.ogg', rand(10,50), 1)
+			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
 		return 0
 
@@ -3120,7 +3120,7 @@
 /obj/item/weapon/reagent_containers/pill/antitox/tajaran
 	name = "peacebody plant powder"
 	desc = "A powder ingested to rid the body of poisons."
-	icon = 'food.dmi'
+	icon = 'icons/obj/food.dmi'
 	icon_state = "nettlesoup"
 	New()
 		..()
@@ -3202,7 +3202,7 @@
 /obj/structure/reagent_dispensers/watertank
 	name = "watertank"
 	desc = "A watertank"
-	icon = 'objects.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
 	amount_per_transfer_from_this = 10
 	New()
@@ -3212,7 +3212,7 @@
 /obj/structure/reagent_dispensers/fueltank
 	name = "fueltank"
 	desc = "A fueltank"
-	icon = 'objects.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "weldtank"
 	amount_per_transfer_from_this = 10
 	New()
@@ -3241,7 +3241,7 @@
 /obj/structure/reagent_dispensers/peppertank
 	name = "Pepper Spray Refiller"
 	desc = "Refill pepper spray canisters."
-	icon = 'objects.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "peppertank"
 	anchored = 1
 	density = 0
@@ -3255,7 +3255,7 @@
 	name = "Water-Cooler"
 	desc = "A machine that dispenses water to drink"
 	amount_per_transfer_from_this = 5
-	icon = 'vending.dmi'
+	icon = 'icons/obj/vending.dmi'
 	icon_state = "water_cooler"
 	possible_transfer_amounts = null
 	anchored = 1
@@ -3267,7 +3267,7 @@
 /obj/structure/reagent_dispensers/beerkeg
 	name = "beer keg"
 	desc = "A beer keg"
-	icon = 'objects.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "beertankTEMP"
 	amount_per_transfer_from_this = 10
 	New()

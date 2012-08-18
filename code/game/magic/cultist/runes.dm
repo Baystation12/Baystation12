@@ -154,7 +154,7 @@ var/list/sacrificed = list()
 				usr.say("Ta'gh fara'qha fel d'amar det!")
 			else
 				usr.whisper("Ta'gh fara'qha fel d'amar det!")
-			playsound(U, 'Welder2.ogg', 25, 1)
+			playsound(U, 'sound/items/Welder2.ogg', 25, 1)
 			var/turf/T = get_turf(U)
 			if(T)
 				T.hotspot_expose(700,125)

@@ -11,7 +11,7 @@
 
 /obj/machinery/porta_turret
 	name = "turret"
-	icon = 'turrets.dmi'
+	icon = 'icons/obj/turrets.dmi'
 	icon_state = "grey_target_prism"
 	anchored = 1
 	layer = 3
@@ -480,7 +480,7 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 		A = new /obj/item/projectile/energy/electrode( loc )
 		if(!emagged) use_power(200)
 		else use_power(400)
-		playsound(src.loc, 'Taser.ogg', 75, 1)
+		playsound(src.loc, 'sound/weapons/Taser.ogg', 75, 1)
 		icon_state = "target_prism"
 	else
 		// Shooting Code:
@@ -588,7 +588,7 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 
 /obj/machinery/porta_turret_construct
 	name = "turret frame"
-	icon = 'turrets.dmi'
+	icon = 'icons/obj/turrets.dmi'
 	icon_state = "turret_frame"
 	density=1
 	var/build_step = 0 // the current step in the building process
@@ -604,14 +604,14 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 	switch(build_step)
 		if(0) // first step
 			if(istype(W, /obj/item/weapon/wrench) && !anchored)
-				playsound(src.loc, 'Ratchet.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 				user << "\blue You secure the external bolts."
 				anchored = 1
 				build_step = 1
 				return
 
 			else if(istype(W, /obj/item/weapon/crowbar) && !anchored)
-				playsound(src.loc, 'Crowbar.ogg', 75, 1)
+				playsound(src.loc, 'sound/items/Crowbar.ogg', 75, 1)
 				user << "You dismantle the turret construction."
 				new /obj/item/stack/sheet/metal( loc, 5)
 				del(src)
@@ -629,7 +629,7 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 					return
 
 			else if(istype(W, /obj/item/weapon/wrench))
-				playsound(src.loc, 'Ratchet.ogg', 75, 1)
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user << "You unfasten the external bolts."
 				anchored = 0
 				build_step = 0
@@ -638,14 +638,14 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 
 		if(2)
 			if(istype(W, /obj/item/weapon/wrench))
-				playsound(src.loc, 'Ratchet.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 				user << "\blue You bolt the metal armor into place."
 				build_step = 3
 				return
 
 			else if(istype(W, /obj/item/weapon/weldingtool))
 				if (W:remove_fuel(5,user)) // uses up 5 fuel.
-					playsound(src.loc, pick('Welder.ogg', 'Welder2.ogg'), 50, 1)
+					playsound(src.loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 					if(do_after(user, 20))
 						build_step = 1
 						user << "You remove the turret's interior metal armor."
@@ -665,7 +665,7 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 				return
 
 			else if(istype(W, /obj/item/weapon/wrench))
-				playsound(src.loc, 'Ratchet.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 				user << "You remove the turret's metal armor bolts."
 				build_step = 2
 				return
@@ -681,7 +681,7 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 
 		if(5)
 			if(istype(W, /obj/item/weapon/screwdriver))
-				playsound(src.loc, 'Screwdriver.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				build_step = 6
 				user << "\blue You close the internal access hatch."
 				return
@@ -699,7 +699,7 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 					return
 
 			else if(istype(W, /obj/item/weapon/screwdriver))
-				playsound(src.loc, 'Screwdriver.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				build_step = 5
 				user << "You open the internal access hatch."
 				return
@@ -707,7 +707,7 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 		if(7)
 			if(istype(W, /obj/item/weapon/weldingtool))
 				if (W:remove_fuel(5,user))
-					playsound(src.loc, pick('Welder.ogg', 'Welder2.ogg'), 50, 1)
+					playsound(src.loc, pick('sound/items/Welder.ogg', 'sound/items/Welder2.ogg'), 50, 1)
 					if(do_after(user, 30))
 						build_step = 8
 						user << "\blue You weld the turret's armor down."
@@ -724,7 +724,7 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 						del(src)
 
 			else if(istype(W, /obj/item/weapon/crowbar))
-				playsound(src.loc, 'Crowbar.ogg', 75, 1)
+				playsound(src.loc, 'sound/items/Crowbar.ogg', 75, 1)
 				user << "You pry off the turret's exterior armor."
 				new /obj/item/stack/sheet/metal( loc, 2)
 				build_step = 6
@@ -775,7 +775,7 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 
 /obj/machinery/porta_turret_cover
 	name = "turret"
-	icon = 'turrets.dmi'
+	icon = 'icons/obj/turrets.dmi'
 	icon_state = "turretCover"
 	anchored = 1
 	layer = 3.5

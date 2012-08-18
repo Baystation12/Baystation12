@@ -27,7 +27,7 @@
 			src.anchored = 1
 			user << "\blue You fasten [src] to the floor."
 	if(istype(W, /obj/item/weapon/wrench))
-		playsound(src.loc, 'Ratchet.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		new /obj/item/stack/sheet/metal(src.loc)
 		del(src)
 	return
@@ -36,7 +36,7 @@
 	..()
 	if(istype(W, /obj/item/assembly/shock_kit))
 		var/obj/structure/stool/bed/chair/e_chair/E = new /obj/structure/stool/bed/chair/e_chair(src.loc)
-		playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.dir = src.dir
 		E.part1 = W
 		W.loc = E
@@ -149,14 +149,14 @@
 
 /obj/structure/stool/bed/roller
 	name = "roller bed"
-	icon = 'rollerbed.dmi'
+	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
 
 /obj/item/roller
 	name = "roller bed"
 	desc = "A collapsed roller bed that can be carried around."
-	icon = 'rollerbed.dmi'
+	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "folded"
 	w_class = 4.0 // Can't be put in backpacks. Oh well.
 

@@ -14,9 +14,9 @@ CRAYONS
 
 /obj/item/weapon/storage/crayonbox/proc/updateIcon()
 	overlays = list() //resets list
-	overlays += image('crayons.dmi',"crayonbox")
+	overlays += image('icons/obj/crayons.dmi',"crayonbox")
 	for(var/obj/item/toy/crayon/crayon in contents)
-		overlays += image('crayons.dmi',crayon.colourName)
+		overlays += image('icons/obj/crayons.dmi',crayon.colourName)
 
 /obj/item/weapon/storage/crayonbox/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/toy/crayon))
@@ -172,7 +172,7 @@ CRAYONS
 /obj/effect/decal/cleanable/crayon
 	name = "rune"
 	desc = "A rune drawn in crayon."
-	icon = 'rune.dmi'
+	icon = 'icons/obj/rune.dmi'
 	layer = 2.1
 	anchored = 1
 	var/client/who_drew_this
@@ -198,8 +198,8 @@ CRAYONS
 			if("graffiti")
 				type = pick("amyjon","face","matt","revolution","engie","guy","end","dwarf","uboa")
 
-		var/icon/mainOverlay = new/icon('crayondecal.dmi',"[type]",2.1)
-		var/icon/shadeOverlay = new/icon('crayondecal.dmi',"[type]s",2.1)
+		var/icon/mainOverlay = new/icon('icons/obj/crayondecal.dmi',"[type]",2.1)
+		var/icon/shadeOverlay = new/icon('icons/obj/crayondecal.dmi',"[type]s",2.1)
 
 		mainOverlay.Blend(main,ICON_ADD)
 		shadeOverlay.Blend(shade,ICON_ADD)

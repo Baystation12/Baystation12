@@ -3,7 +3,7 @@
 /obj/item/weapon/implant
 	name = "implant"
 	desc = "An implant. Not usually seen outside a body."
-	icon = 'items.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "implant"
 	var/implanted = null
 	var/mob/imp_in = null

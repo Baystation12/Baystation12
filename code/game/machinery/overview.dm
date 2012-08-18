@@ -26,8 +26,8 @@
 #ifdef AMAP
 
 	for(var/i = 0; i<icount; i++)
-		imap += icon('imap.dmi', "blank")
-		imap += icon('imap.dmi', "blank")
+		imap += icon('icons/misc/imap.dmi', "blank")
+		imap += icon('icons/misc/imap.dmi', "blank")
 
 	//world << "[icount] images in list"
 
@@ -186,7 +186,7 @@
 #else
 
 	for(var/i = 0; i<icount; i++)
-		imap += icon('imap.dmi', "blank")
+		imap += icon('icons/misc/imap.dmi', "blank")
 
 	for(var/wx = 1 ; wx <= world.maxx; wx++)
 

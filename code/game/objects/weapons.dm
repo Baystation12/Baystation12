@@ -139,7 +139,7 @@
 			affecting.take_damage(1, 0)
 			H.UpdateDamageIcon()
 			H.updatehealth()
-	playsound(target.loc, 'snap.ogg', 50, 1)
+	playsound(target.loc, 'sound/effects/snap.ogg', 50, 1)
 	icon_state = "mousetrap"
 	armed = 0
 /*
@@ -166,7 +166,7 @@
 			return
 		user << "\blue You disarm the mousetrap."
 	armed = !armed
-	playsound(user.loc, 'handcuffs.ogg', 30, 1, -3)
+	playsound(user.loc, 'sound/weapons/handcuffs.ogg', 30, 1, -3)
 
 /obj/item/weapon/mousetrap/attack_hand(mob/user as mob)
 	if(armed)

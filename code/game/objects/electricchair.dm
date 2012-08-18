@@ -12,7 +12,7 @@
 /obj/structure/stool/bed/chair/e_chair/New()
 
 	src.overl = new /atom/movable/overlay( src.loc )
-	src.overl.icon = 'objects.dmi'
+	src.overl.icon = 'icons/obj/objects.dmi'
 	src.overl.icon_state = "e_chairo0"
 	src.overl.layer = 5
 	src.overl.name = "electrified chair"
@@ -31,7 +31,7 @@
 
 	if (istype(W, /obj/item/weapon/wrench))
 		var/obj/structure/stool/bed/chair/C = new /obj/structure/stool/bed/chair( src.loc )
-		playsound(src.loc, 'Ratchet.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		C.dir = src.dir
 		src.part1.loc = src.loc
 		src.part1.master = null
@@ -66,7 +66,7 @@
 /obj/structure/stool/bed/chair/e_chair/rotate()
 	..()
 	overlays = null
-	overlays += image('objects.dmi', src, "echair_over", MOB_LAYER + 1, dir)	//there's probably a better way of handling this, but eh. -Pete
+	overlays += image('icons/obj/objects.dmi', src, "echair_over", MOB_LAYER + 1, dir)	//there's probably a better way of handling this, but eh. -Pete
 	return
 
 /obj/structure/stool/bed/chair/e_chair/proc/shock()

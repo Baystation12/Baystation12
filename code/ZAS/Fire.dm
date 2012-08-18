@@ -52,7 +52,7 @@ obj
 
 		//luminosity = 3
 
-		icon = 'fire.dmi'
+		icon = 'icons/effects/fire.dmi'
 		icon_state = "1"
 
 		layer = TURF_LAYER

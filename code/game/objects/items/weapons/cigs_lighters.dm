@@ -17,7 +17,7 @@ ZIPPO
 /obj/item/weapon/match
 	name = "Match"
 	desc = "A simple match stick, used for lighting tobacco"
-	icon = 'cigarettes.dmi'
+	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "match_unlit"
 	var/lit = 0
 	var/smoketime = 5
@@ -61,7 +61,7 @@ ZIPPO
 /obj/item/weapon/matchbox
 	name = "Matchbox"
 	desc = "A small box of Almost But Not Quite Plasma Premium Matches."
-	icon = 'cigarettes.dmi'
+	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"
 	w_class = 1
@@ -223,7 +223,7 @@ ZIPPO
 /obj/item/weapon/cigbutt
 	name = "cigarette butt"
 	desc = "A manky old cigarette butt."
-	icon = 'masks.dmi'
+	icon = 'icons/obj/clothing/masks.dmi'
 	icon_state = "cigbutt"
 	w_class = 1
 	throwforce = 1
@@ -334,7 +334,7 @@ ZIPPO
 /obj/item/weapon/cigpacket
 	name = "cigarette packet"
 	desc = "The most popular brand of Space Cigarettes, sponsors of the Space Olympics."
-	icon = 'cigarettes.dmi'
+	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpacket"
 	item_state = "cigpacket"
 	w_class = 1
@@ -377,7 +377,7 @@ ZIPPO
 /obj/item/weapon/lighter
 	name = "cheap lighter"
 	desc = "A cheap-as-free lighter."
-	icon = 'items.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "lighter-g"
 	item_state = "lighter-g"
 	var/icon_on = "lighter-g-on"

@@ -1091,13 +1091,13 @@ datum/preferences
 
 		switch(UI_style)
 			if("Midnight")
-				character.UI = 'screen1_Midnight.dmi'
+				character.UI = 'icons/mob/screen1_Midnight.dmi'
 			if("Orange")
-				character.UI = 'screen1_Orange.dmi'
+				character.UI = 'icons/mob/screen1_Orange.dmi'
 			if("old")
-				character.UI = 'screen1_old.dmi'
+				character.UI = 'icons/mob/screen1_old.dmi'
 			else
-				character.UI = 'screen1_Midnight.dmi'
+				character.UI = 'icons/mob/screen1_Midnight.dmi'
 
 		character.hair_style = hair_style
 		character.facial_hair_style = facial_hair_style

@@ -34,7 +34,7 @@ var/datum/roundinfo/roundinfo = new()
 
 
 /datum/controller/gameticker/proc/pregame()
-	login_music = pick('title1.ogg', 'title2.ogg') // choose title music!
+	login_music = pick('sound/ambience/title1.ogg', 'sound/ambience/title2.ogg') // choose title music!
 
 	do
 		pregame_timeleft = 180
@@ -116,7 +116,7 @@ var/datum/roundinfo/roundinfo = new()
 				del(S)
 		spawn(-1)
 			world << "<FONT color='blue'><B>Enjoy the game!</B></FONT>"
-			world << sound('welcome.ogg') // Skie
+			world << sound('sound/announcer/welcome.ogg') // Skie
 
 	spawn() supply_ticker() // Added to kick-off the supply shuttle regenerating points -- TLE
 
@@ -152,7 +152,7 @@ var/datum/roundinfo/roundinfo = new()
 
 		//initialise our cinematic screen object
 		cinematic = new(src)
-		cinematic.icon = 'station_explosion.dmi'
+		cinematic.icon = 'icons/effects/station_explosion.dmi'
 		cinematic.icon_state = "station_intact"
 		cinematic.layer = 20
 		cinematic.mouse_opacity = 0
@@ -189,19 +189,19 @@ var/datum/roundinfo/roundinfo = new()
 					if("nuclear emergency") //Nuke wasn't on station when it blew up
 						flick("intro_nuke",cinematic)
 						sleep(35)
-						world << sound('explosionfar.ogg')
+						world << sound('sound/effects/explosionfar.ogg')
 						flick("station_intact_fade_red",cinematic)
 						cinematic.icon_state = "summary_nukefail"
 					else
 						flick("intro_nuke",cinematic)
 						sleep(35)
-						world << sound('explosionfar.ogg')
+						world << sound('sound/effects/explosionfar.ogg')
 						//flick("end",cinematic)
 
 
 			if(2)	//nuke was nowhere nearby	//TODO: a really distant explosion animation
 				sleep(50)
-				world << sound('explosionfar.ogg')
+				world << sound('sound/effects/explosionfar.ogg')
 
 
 			else	//station was destroyed
@@ -212,25 +212,25 @@ var/datum/roundinfo/roundinfo = new()
 						flick("intro_nuke",cinematic)
 						sleep(35)
 						flick("station_explode_fade_red",cinematic)
-						world << sound('explosionfar.ogg')
+						world << sound('sound/effects/explosionfar.ogg')
 						cinematic.icon_state = "summary_nukewin"
 					if("AI malfunction") //Malf (screen,explosion,summary)
 						flick("intro_malf",cinematic)
 						sleep(76)
 						flick("station_explode_fade_red",cinematic)
-						world << sound('explosionfar.ogg')
+						world << sound('sound/effects/explosionfar.ogg')
 						cinematic.icon_state = "summary_malf"
 					if("blob") //Station nuked (nuke,explosion,summary)
 						flick("intro_nuke",cinematic)
 						sleep(35)
 						flick("station_explode_fade_red",cinematic)
-						world << sound('explosionfar.ogg')
+						world << sound('sound/effects/explosionfar.ogg')
 						cinematic.icon_state = "summary_selfdes"
 					else //Station nuked (nuke,explosion,summary)
 						flick("intro_nuke",cinematic)
 						sleep(35)
 						flick("station_explode_fade_red", cinematic)
-						world << sound('explosionfar.ogg')
+						world << sound('sound/effects/explosionfar.ogg')
 						cinematic.icon_state = "summary_selfdes"
 
 		//If its actually the end of the round, wait for it to end.

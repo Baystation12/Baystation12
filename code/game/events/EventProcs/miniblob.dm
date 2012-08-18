@@ -21,7 +21,7 @@
 		blobevent = 0
 	spawn(rand(600, 1800)) //Delayed announcements to keep the crew on their toes.
 		command_alert("Confirmed outbreak of level 5 biohazard aboard [station_name()].", "Biohazard Alert")
-		world << sound('outbreak5.ogg')
+		world << sound('sound/announcer/outbreak5.ogg')
 
 /proc/dotheblobbaby()
 	if (blobevent)

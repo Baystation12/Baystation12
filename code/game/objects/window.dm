@@ -75,7 +75,7 @@
 	else
 		tforce = AM:throwforce
 	if(reinf) tforce /= 4.0
-	playsound(src.loc, 'Glasshit.ogg', 100, 1)
+	playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
 	src.health = max(0, src.health - tforce)
 	if (src.health <= 7 && !reinf)
 		src.anchored = 0
@@ -105,7 +105,7 @@
 		del(src)
 		return
 	else
-		playsound(src.loc, 'Glassknock.ogg', 80, 1)
+		playsound(src.loc, 'sound/effects/glassknock.ogg', 80, 1)
 		usr.visible_message("[usr.name] knocks on the [src.name].", \
 							"You knock on the [src.name].", \
 							"You hear a knocking sound.")
@@ -132,7 +132,7 @@
 	for(var/mob/O in oviewers())
 		if ((O.client && !( O.blinded )))
 			O << "\red [usr] smashes against the window."
-	playsound(src.loc, 'Glasshit.ogg', 100, 1)
+	playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
 	src.health -= 15
 	if(src.health <= 0)
 		usr << "\green You smash through the window."
@@ -156,7 +156,7 @@
 	for(var/mob/O in viewers(src, null))
 		if ((O.client && !( O.blinded )))
 			O << "\red [M] smashes against the window."
-	playsound(src.loc, 'Glasshit.ogg', 100, 1)
+	playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
 	src.health -= M.melee_damage_upper
 	if(src.health <= 0)
 		M << "\green You smash through the window."
@@ -180,7 +180,7 @@
 	for(var/mob/O in oviewers())
 		if ((O.client && !( O.blinded )))
 			O << "\red [usr] smashes against the window."
-	playsound(src.loc, 'Glasshit.ogg', 100, 1)
+	playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
 	src.health -= rand(10,15)
 	if(src.health <= 0)
 		usr << "\green You smash through the window."
@@ -200,21 +200,21 @@
 	if (istype(W, /obj/item/weapon/screwdriver))
 		if(reinf && state >= 1)
 			state = 3 - state
-			playsound(src.loc, 'Screwdriver.ogg', 75, 1)
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			usr << ( state==1? "You have unfastened the window from the frame." : "You have fastened the window to the frame." )
 		else if(reinf && state == 0)
 			anchored = !anchored
 			update_nearby_icons()
-			playsound(src.loc, 'Screwdriver.ogg', 75, 1)
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			user << (src.anchored ? "You have fastened the frame to the floor." : "You have unfastened the frame from the floor.")
 		else if(!reinf)
 			src.anchored = !( src.anchored )
 			update_nearby_icons()
-			playsound(src.loc, 'Screwdriver.ogg', 75, 1)
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			user << (src.anchored ? "You have fastened the window to the floor." : "You have unfastened the window.")
 	else if(istype(W, /obj/item/weapon/crowbar) && reinf && state <=1)
 		state = 1-state;
-		playsound(src.loc, 'Crowbar.ogg', 75, 1)
+		playsound(src.loc, 'sound/items/Crowbar.ogg', 75, 1)
 		user << (state ? "You have pried the window into the frame." : "You have pried the window out of the frame.")
 	else
 
@@ -222,7 +222,7 @@
 		if(reinf) aforce /= 2.0
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			src.health = max(0, src.health - aforce)
-		playsound(src.loc, 'Glasshit.ogg', 75, 1)
+		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		if (src.health <= 7)
 			src.anchored = 0
 			update_nearby_icons()

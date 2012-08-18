@@ -68,11 +68,11 @@ Pod/Blast Doors computer
 				if (O.occupant)
 					switch (O.occupant.stat)
 						if (0)
-							overlays += image('computer.dmi', "ai-fixer-full")
+							overlays += image('icons/obj/computer.dmi', "ai-fixer-full")
 						if (2)
-							overlays += image('computer.dmi', "ai-fixer-404")
+							overlays += image('icons/obj/computer.dmi', "ai-fixer-404")
 				else
-					overlays += image('computer.dmi', "ai-fixer-empty")
+					overlays += image('icons/obj/computer.dmi', "ai-fixer-empty")
 		else
 			spawn(rand(0, 15))
 				//icon_state = "c_unpowered"
@@ -94,7 +94,7 @@ Pod/Blast Doors computer
 
 /obj/machinery/computer/attackby(I as obj, user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
-		playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 			var/obj/item/weapon/circuitboard/M = new circuit( A )

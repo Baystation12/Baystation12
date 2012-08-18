@@ -123,7 +123,7 @@
 //Warning, uncommenting this can have concequences. For example, deconstructing the computer may cause holographic eswords to never derez
 
 /*		if(istype(D, /obj/item/weapon/screwdriver))
-			playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			if(do_after(user, 20))
 				if (src.stat & BROKEN)
 					user << "\blue The broken glass falls out."
@@ -151,7 +151,7 @@
 
 */
 	if(istype(D, /obj/item/weapon/card/emag) && !emagged)
-		playsound(src.loc, 'sparks4.ogg', 75, 1)
+		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
 		safety = 0
 		user << "\blue You vastly increase projector power and override the safety and security protocols."
@@ -365,7 +365,7 @@
 /obj/structure/table/holotable
 	name = "table"
 	desc = "A square piece of metal standing on four metal legs. It can not move."
-	icon = 'structures.dmi'
+	icon = 'icons/obj/structures.dmi'
 	icon_state = "table"
 	density = 1
 	anchored = 1.0
@@ -409,7 +409,7 @@
 						"\red You hear a whine as \the [src]'s is hit by something dense.")
 					H.UpdateDamageIcon()
 					H.updatehealth()
-					playsound(src.loc, 'tablehit1.ogg', 50, 1, -3)
+					playsound(src.loc, 'sound/weapons/tablehit1.ogg', 50, 1, -3)
 				else //Lets do REAL DAMAGE, YEAH!
 					G.affecting.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been smashed on a table by [G.assailant.name] ([G.assailant.ckey])</font>")
 					G.assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Smashed [G.affecting.name] ([G.affecting.ckey]) on a table.</font>")
@@ -448,7 +448,7 @@
 						"\red You hear the nauseating crunch of bone and gristle on solid metal.")
 					H.UpdateDamageIcon()
 					H.updatehealth()
-					playsound(src.loc, 'tablehit1.ogg', 50, 1, -3)
+					playsound(src.loc, 'sound/weapons/tablehit1.ogg', 50, 1, -3)
 			return
 		G.affecting.loc = src.loc
 		G.affecting.Weaken(5)
@@ -475,7 +475,7 @@
 
 /obj/structure/holowindow
 	name = "reinforced window"
-	icon = 'structures.dmi'
+	icon = 'icons/obj/structures.dmi'
 	icon_state = "rwindow"
 	desc = "A window."
 	density = 1
@@ -508,7 +508,7 @@
 /obj/machinery/readybutton
 	name = "Ready Declaration Device"
 	desc = "This device is used to declare ready.  If all devices in an area are ready, the event will begin!"
-	icon = 'monitors.dmi'
+	icon = 'icons/obj/monitors.dmi'
 	icon_state = "auth_off"
 	var/ready = 0
 	var/area/currentarea = null

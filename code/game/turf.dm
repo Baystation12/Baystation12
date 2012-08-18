@@ -222,7 +222,7 @@
 						M.pulling = null
 						step(M, M.dir)
 						M << "\blue You slipped on the wet floor!"
-						playsound(src.loc, 'slip.ogg', 50, 1, -3)
+						playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 						M.Stun(8)
 						M.Weaken(5)
 					else
@@ -233,7 +233,7 @@
 						M.pulling = null
 						step(M, M.dir)
 						M << "\blue You slipped on the wet floor!"
-						playsound(src.loc, 'slip.ogg', 50, 1, -3)
+						playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 						M.Stun(8)
 						M.Weaken(5)
 					else
@@ -250,7 +250,7 @@
 					spawn(4) step(M, M.dir)
 					M.take_organ_damage(2) // Was 5 -- TLE
 					M << "\blue You slipped on the floor!"
-					playsound(src.loc, 'slip.ogg', 50, 1, -3)
+					playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 					M.Weaken(10)
 
 	..()
@@ -296,7 +296,7 @@
 /turf/simulated/wall/proc/dismantle_wall(devastated=0, explode=0)
 	if(istype(src,/turf/simulated/wall/r_wall))
 		if(!devastated)
-			playsound(src.loc, 'Welder.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 			new /obj/structure/girder/reinforced(src)
 			new /obj/item/stack/sheet/plasteel( src )
 		else
@@ -305,7 +305,7 @@
 			new /obj/item/stack/sheet/plasteel( src )
 	else if(istype(src,/turf/simulated/wall/cult))
 		if(!devastated)
-			playsound(src.loc, 'Welder.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 			new /obj/effect/decal/cleanable/blood(src)
 			new /obj/structure/cultgirder(src)
 		else
@@ -314,7 +314,7 @@
 
 	else
 		if(!devastated)
-			playsound(src.loc, 'Welder.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 			new /obj/structure/girder(src)
 			new /obj/item/stack/sheet/metal( src )
 			new /obj/item/stack/sheet/metal( src )
@@ -405,7 +405,7 @@
 			return
 
 	user << "\blue You push the wall but nothing happens!"
-	playsound(src.loc, 'Genhit.ogg', 25, 1)
+	playsound(src.loc, 'sound/weapons/Genhit.ogg', 25, 1)
 	src.add_fingerprint(user)
 	return
 
@@ -436,7 +436,7 @@
 			EB.spark_system.start()
 			user << "<span class='notice'>You slash \the [src] with \the [EB]; the thermite ignites!</span>"
 			playsound(src.loc, "sparks", 50, 1)
-			playsound(src.loc, 'blade1.ogg', 50, 1)
+			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 
 			thermitemelt(user)
 			return
@@ -450,7 +450,7 @@
 			WT.welding = 2
 
 			user << "<span class='notice'>You begin slicing through the outer plating.</span>"
-			playsound(src.loc, 'Welder.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 
 			sleep(100)
 			if( !istype(src, /turf/simulated/wall) || !user || !WT || !T )	return
@@ -466,7 +466,7 @@
 	else if( istype(W, /obj/item/weapon/pickaxe/plasmacutter) )
 
 		user << "<span class='notice'>You begin slicing through the outer plating.</span>"
-		playsound(src.loc, 'Welder.ogg', 100, 1)
+		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 
 		sleep(60)
 		if( !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
@@ -506,7 +506,7 @@
 		if( user.loc == T && user.equipped() == W )
 			EB.spark_system.start()
 			playsound(src.loc, "sparks", 50, 1)
-			playsound(src.loc, 'blade1.ogg', 50, 1)
+			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			dismantle_wall(1)
 			for(var/mob/O in viewers(user, 5))
 				O.show_message("<span class='warning'>The wall was sliced apart by [user]!</span>", 1, "<span class='warning'>You hear metal being sliced apart and sparks flying.</span>", 2)
@@ -554,7 +554,7 @@
 			EB.spark_system.start()
 			user << "<span class='notice'>You slash \the [src] with \the [EB]; the thermite ignites!</span>"
 			playsound(src.loc, "sparks", 50, 1)
-			playsound(src.loc, 'blade1.ogg', 50, 1)
+			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 
 			thermitemelt(user)
 			return
@@ -569,7 +569,7 @@
 	switch(d_state)
 		if(0)
 			if (istype(W, /obj/item/weapon/wirecutters))
-				playsound(src.loc, 'Wirecutter.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 				src.d_state = 1
 				src.icon_state = "r_wall-1"
 				new /obj/item/stack/rods( src )
@@ -579,7 +579,7 @@
 		if(1)
 			if (istype(W, /obj/item/weapon/screwdriver))
 				user << "<span class='notice'>You begin removing the support lines.</span>"
-				playsound(src.loc, 'Screwdriver.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 
 				sleep(40)
 				if( !istype(src, /turf/simulated/wall/r_wall) || !user || !W || !T )	return
@@ -610,7 +610,7 @@
 					WT.welding = 2
 
 					user << "<span class='notice'>You begin slicing through the metal cover.</span>"
-					playsound(src.loc, 'Welder.ogg', 100, 1)
+					playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 
 					sleep(60)
 					if( !istype(src, /turf/simulated/wall/r_wall) || !user || !WT || !T )	return
@@ -627,7 +627,7 @@
 			if( istype(W, /obj/item/weapon/pickaxe/plasmacutter) )
 
 				user << "<span class='notice'>You begin slicing through the metal cover.</span>"
-				playsound(src.loc, 'Welder.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 
 				sleep(40)
 				if( !istype(src, /turf/simulated/wall/r_wall) || !user || !W || !T )	return
@@ -642,7 +642,7 @@
 			if (istype(W, /obj/item/weapon/crowbar))
 
 				user << "<span class='notice'>You struggle to pry off the cover.</span>"
-				playsound(src.loc, 'Crowbar.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 
 				sleep(100)
 				if( !istype(src, /turf/simulated/wall/r_wall) || !user || !W || !T )	return
@@ -657,7 +657,7 @@
 			if (istype(W, /obj/item/weapon/wrench))
 
 				user << "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>"
-				playsound(src.loc, 'Ratchet.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 
 				sleep(40)
 				if( !istype(src, /turf/simulated/wall/r_wall) || !user || !W || !T )	return
@@ -675,7 +675,7 @@
 					WT.welding = 2
 
 					user << "<span class='notice'>You begin slicing through the support rods.</span>"
-					playsound(src.loc, 'Welder.ogg', 100, 1)
+					playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 
 					sleep(100)
 					if( !istype(src, /turf/simulated/wall/r_wall) || !user || !WT || !T )	return
@@ -693,7 +693,7 @@
 			if( istype(W, /obj/item/weapon/pickaxe/plasmacutter) )
 
 				user << "<span class='notice'>You begin slicing through the support rods.</span>"
-				playsound(src.loc, 'Welder.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 
 				sleep(70)
 				if( !istype(src, /turf/simulated/wall/r_wall) || !user || !W || !T )	return
@@ -709,7 +709,7 @@
 			if( istype(W, /obj/item/weapon/crowbar) )
 
 				user << "<span class='notice'>You struggle to pry off the outer sheath.</span>"
-				playsound(src.loc, 'Crowbar.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 
 				sleep(100)
 				if( !istype(src, /turf/simulated/wall/r_wall) || !user || !W || !T )	return
@@ -771,7 +771,7 @@
 	var/obj/effect/overlay/O = new/obj/effect/overlay( src )
 	O.name = "Thermite"
 	O.desc = "Looks hot."
-	O.icon = 'fire.dmi'
+	O.icon = 'icons/effects/fire.dmi'
 	O.icon_state = "2"
 	O.anchored = 1
 	O.density = 1
@@ -815,7 +815,7 @@ var/list/plating_icons = list("plating","platingdmg1","platingdmg2","platingdmg3
 	//Note to coders, the 'intact' var can no longer be used to determine if the floor is a plating or not.
 	//Use the is_plating(), is_plasteel_floor() and is_light_floor() procs instead. --Errorage
 	name = "floor"
-	icon = 'floors.dmi'
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "floor"
 	var/icon_regular_floor = "floor" //used to remember what icon the tile should have by default
 	var/icon_plating = "plating"
@@ -931,7 +931,7 @@ var/list/plating_icons = list("plating","platingdmg1","platingdmg2","platingdmg3
 		name = "plating"
 
 /turf/simulated/floor/grid
-	icon = 'floors.dmi'
+	icon = 'icons/turf/floors.dmi'
 	icon_state = "circuit"
 
 /turf/simulated/floor/New()
@@ -1061,7 +1061,7 @@ turf/simulated/floor/return_siding_icon_state()
 		return
 	if(istype(C, /obj/item/weapon/wrench))
 		user << "\blue Removing rods..."
-		playsound(src.loc, 'Ratchet.ogg', 80, 1)
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 80, 1)
 		if(do_after(user, 30))
 			new /obj/item/stack/rods(src, 2)
 			ReplaceWithFloor()
@@ -1246,7 +1246,7 @@ turf/simulated/floor/return_siding_icon_state()
 			new floor_tile.type(src)
 
 		make_plating()
-		playsound(src.loc, 'Crowbar.ogg', 80, 1)
+		playsound(src.loc, 'sound/items/Crowbar.ogg', 80, 1)
 
 		return
 
@@ -1257,7 +1257,7 @@ turf/simulated/floor/return_siding_icon_state()
 				user << "\blue Reinforcing the floor..."
 				if(do_after(user, 30) && R && R.amount >= 2 && is_plating())
 					ReplaceWithEngineFloor()
-					playsound(src.loc, 'Deconstruct.ogg', 80, 1)
+					playsound(src.loc, 'sound/items/Deconstruct.ogg', 80, 1)
 					R.use(2)
 					return
 			else
@@ -1285,7 +1285,7 @@ turf/simulated/floor/return_siding_icon_state()
 				T.use(1)
 				update_icon()
 				levelupdate()
-				playsound(src.loc, 'Genhit.ogg', 50, 1)
+				playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 			else
 				user << "\blue This section is too damaged to support a tile. Use a welder to fix the damage."
 
@@ -1312,7 +1312,7 @@ turf/simulated/floor/return_siding_icon_state()
 			if(broken || burnt)
 				if(welder.remove_fuel(0,user))
 					user << "\red You fix some dents on the broken plating."
-					playsound(src.loc, 'Welder.ogg', 80, 1)
+					playsound(src.loc, 'sound/items/Welder.ogg', 80, 1)
 					icon_state = "plating"
 					burnt = 0
 					broken = 0
@@ -1369,7 +1369,7 @@ turf/simulated/floor/return_siding_icon_state()
 			return
 		var/obj/item/stack/rods/R = C
 		user << "\blue Constructing support lattice ..."
-		playsound(src.loc, 'Genhit.ogg', 50, 1)
+		playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 		ReplaceWithLattice()
 		R.use(1)
 		return
@@ -1379,7 +1379,7 @@ turf/simulated/floor/return_siding_icon_state()
 		if(L)
 			var/obj/item/stack/tile/plasteel/S = C
 			del(L)
-			playsound(src.loc, 'Genhit.ogg', 50, 1)
+			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 			S.build(src)
 			S.use(1)
 			return
@@ -1594,4 +1594,4 @@ turf/simulated/floor/return_siding_icon_state()
 	if(flags & NOJAUNT)
 		return
 	flags |= NOJAUNT
-	overlays += image('water.dmi',src,"holywater")
+	overlays += image('icons/effects/water.dmi',src,"holywater")

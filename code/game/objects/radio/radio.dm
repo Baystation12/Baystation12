@@ -6,7 +6,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 
 
 /obj/item/device/radio
-	icon = 'radio.dmi'
+	icon = 'icons/obj/radio.dmi'
 	name = "station bounced radio"
 	suffix = "\[3\]"
 	icon_state = "walkietalkie"
@@ -518,7 +518,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 					heard_garbled += R
 
 		if (length(heard_masked) || length(heard_normal) || length(heard_voice) || length(heard_garbled))
-			var/part_a = "<span class='radio'><span class='name'>"
+			var/part_a = "<span class='code/game/objects/radio'><span class='name'>"
 			//var/part_b = "</span><b> \icon[src]\[[format_frequency(frequency)]\]</b> <span class='message'>"
 			var/freq_text
 			switch(display_freq)

@@ -1,7 +1,7 @@
 var/const/max_assembly_amount = 300
 
 /obj/machinery/rust/fuel_compressor
-	icon = 'fuel_compressor.dmi'
+	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/fuel_compressor.dmi'
 	icon_state = "fuel_compressor"
 	name = "Fuel Compressor"
 	var/list/new_assembly_quantities

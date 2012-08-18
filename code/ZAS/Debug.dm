@@ -8,19 +8,19 @@ client/verb/Zone_Info(turf/T as null|turf)
 			mob << "No zone here."
 	else
 		for(T in world)
-			T.overlays -= 'debug_space.dmi'
-			T.overlays -= 'debug_group.dmi'
-			T.overlays -= 'debug_connect.dmi'
+			T.overlays -= 'icons/misc/debug_space.dmi'
+			T.overlays -= 'icons/misc/debug_group.dmi'
+			T.overlays -= 'icons/misc/debug_connect.dmi'
 
 zone/proc
 	DebugDisplay(mob/M)
 		if(!dbg_output)
 			dbg_output = 1 //Don't want to be spammed when someone investigates a zone...
 			for(var/turf/T in contents)
-				T.overlays += 'debug_group.dmi'
+				T.overlays += 'icons/misc/debug_group.dmi'
 
 			for(var/turf/space/S in space_tiles)
-				S.overlays += 'debug_space.dmi'
+				S.overlays += 'icons/misc/debug_space.dmi'
 
 			M << "<u>Zone Air Contents</u>"
 			M << "Oxygen: [air.oxygen]"
@@ -37,11 +37,11 @@ zone/proc
 
 			for(var/connection/C in connections)
 				M << "[C.A] --> [C.B] [(C.indirect?"Indirect":"Direct")]"
-				C.A.overlays += 'debug_connect.dmi'
-				C.B.overlays += 'debug_connect.dmi'
+				C.A.overlays += 'icons/misc/debug_connect.dmi'
+				C.B.overlays += 'icons/misc/debug_connect.dmi'
 				spawn(50)
-					C.A.overlays -= 'debug_connect.dmi'
-					C.B.overlays -= 'debug_connect.dmi'
+					C.A.overlays -= 'icons/misc/debug_connect.dmi'
+					C.B.overlays -= 'icons/misc/debug_connect.dmi'
 			for(var/C in connections)
 				if(!istype(C,/connection))
 					M << "[C] (Not Connection!)"
@@ -50,10 +50,10 @@ zone/proc
 			dbg_output = 0
 
 			for(var/turf/T in contents)
-				T.overlays -= 'debug_group.dmi'
+				T.overlays -= 'icons/misc/debug_group.dmi'
 
 			for(var/turf/space/S in space_tiles)
-				S.overlays -= 'debug_space.dmi'
+				S.overlays -= 'icons/misc/debug_space.dmi'
 		for(var/zone/Z in zones)
 			if(Z.air == air && Z != src)
 				var/turf/zloc = pick(Z.contents)

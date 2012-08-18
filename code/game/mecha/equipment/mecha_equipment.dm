@@ -4,7 +4,7 @@
 
 /obj/item/mecha_parts/mecha_equipment
 	name = "mecha equipment"
-	icon = 'mecha_equipment.dmi'
+	icon = 'icons/mecha/mecha_equipment.dmi'
 	icon_state = "mecha_equip"
 	force = 5
 	origin_tech = "materials=2"
@@ -54,9 +54,9 @@
 		chassis.occupant_message("<font color='red'>The [src] is destroyed!</font>")
 		chassis.log_append_to_last("[src] is destroyed.",1)
 		if(istype(src, /obj/item/mecha_parts/mecha_equipment/weapon))
-			chassis.occupant << sound('weapdestr.ogg',volume=50)
+			chassis.occupant << sound('sound/mecha/weapdestr.ogg',volume=50)
 		else
-			chassis.occupant << sound('critdestr.ogg',volume=50)
+			chassis.occupant << sound('sound/mecha/critdestr.ogg',volume=50)
 	spawn
 		del src
 	return

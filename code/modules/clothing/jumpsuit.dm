@@ -1,7 +1,7 @@
 // UNDERS AND BY THAT, NATURALLY I MEAN UNIFORMS/JUMPSUITS
 
 /obj/item/clothing/under
-	icon = 'uniforms.dmi'
+	icon = 'icons/obj/clothing/uniforms.dmi'
 	name = "under"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	protective_temperature = T0C + 50
@@ -557,7 +557,7 @@
 /obj/item/clothing/under/cheerleader
 	name = "cheerleader uniform"
 	desc = "Looks breezy."
-	icon = 'uniforms.dmi'
+	icon = 'icons/obj/clothing/uniforms.dmi'
 	icon_state = "purple_cheer"
 	color = "purple_cheer"
 	flags = FPRINT | TABLEPASS

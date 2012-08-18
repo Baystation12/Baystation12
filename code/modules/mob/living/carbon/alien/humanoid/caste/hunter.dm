@@ -7,10 +7,10 @@
 	src.real_name = src.name
 	spawn (1)
 		src.verbs -= /mob/living/carbon/alien/humanoid/verb/corrode
-		src.stand_icon = new /icon('alien.dmi', "alienh_s")
-		src.lying_icon = new /icon('alien.dmi', "alienh_l")
-		src.resting_icon = new /icon('alien.dmi', "alienh_sleep")
-		src.running_icon = new /icon('alien.dmi', "alienh_running")
+		src.stand_icon = new /icon('icons/mob/alien.dmi', "alienh_s")
+		src.lying_icon = new /icon('icons/mob/alien.dmi', "alienh_l")
+		src.resting_icon = new /icon('icons/mob/alien.dmi', "alienh_sleep")
+		src.running_icon = new /icon('icons/mob/alien.dmi', "alienh_running")
 		src.icon = src.stand_icon
 		rebuild_appearance()
 		src << "\blue Your icons have been generated!"

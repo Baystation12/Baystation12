@@ -8,14 +8,14 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect
 	name = "effect"
-	icon = 'effects.dmi'
+	icon = 'icons/effects/effects.dmi'
 	mouse_opacity = 0
 	unacidable = 1//So effect are not targeted by alien acid.
 	flags = TABLEPASS
 
 /obj/effect/effect/water
 	name = "water"
-	icon = 'effects.dmi'
+	icon = 'icons/effects/effects.dmi'
 	icon_state = "extinguish"
 	var/life = 15.0
 	flags = TABLEPASS
@@ -23,7 +23,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/smoke
 	name = "smoke"
-	icon = 'water.dmi'
+	icon = 'icons/effects/water.dmi'
 	icon_state = "smoke"
 	opacity = 1
 	anchored = 0.0
@@ -103,7 +103,7 @@ steam.start() -- spawns the effect
 /////////////////////////////////////////////
 /obj/effect/effect/steam
 	name = "steam"
-	icon = 'effects.dmi'
+	icon = 'icons/effects/effects.dmi'
 	icon_state = "extinguish"
 	density = 0
 
@@ -224,7 +224,7 @@ steam.start() -- spawns the effect
 	mouse_opacity = 0
 	var/amount = 6.0
 	//Remove this bit to use the old smoke
-	icon = '96x96.dmi'
+	icon = 'icons/effects/96x96.dmi'
 	pixel_x = -32
 	pixel_y = -32
 
@@ -291,7 +291,7 @@ steam.start() -- spawns the effect
 	mouse_opacity = 0
 	var/amount = 6.0
 	//Remove this bit to use the old smoke
-	icon = '96x96.dmi'
+	icon = 'icons/effects/96x96.dmi'
 	pixel_x = -32
 	pixel_y = -32
 
@@ -392,7 +392,7 @@ steam.start() -- spawns the effect
 	var/amount = 6.0
 	var/divisor = 1
 
-	icon = 'chemsmoke.dmi'
+	icon = 'icons/effects/chemsmoke.dmi'
 	pixel_x = -32
 	pixel_y = -32
 
@@ -509,7 +509,7 @@ steam.start() -- spawns the effect
 					smoke.icon += finalcolor // give the smoke color, if it has any to begin with
 				else
 					// if no color, just use the old smoke icon
-					smoke.icon = '96x96.dmi'
+					smoke.icon = 'icons/effects/96x96.dmi'
 					smoke.icon_state = "smoke"
 
 				for(i=0, i<iterator, i++)
@@ -533,7 +533,7 @@ steam.start() -- spawns the effect
 	mouse_opacity = 0
 	var/amount = 6.0
 	//Remove this bit to use the old smoke
-	icon = '96x96.dmi'
+	icon = 'icons/effects/96x96.dmi'
 	pixel_x = -32
 	pixel_y = -32
 
@@ -824,7 +824,7 @@ steam.start() -- spawns the effect
 	..(loc)
 	icon_state = "[ismetal ? "m":""]foam"
 	metal = ismetal
-	playsound(src, 'bubbles2.ogg', 80, 1, -3)
+	playsound(src, 'sound/effects/bubbles2.ogg', 80, 1, -3)
 	spawn(3 + metal*3)
 		process()
 	spawn(120)
@@ -901,7 +901,7 @@ steam.start() -- spawns the effect
 
 		M.pulling = null
 		M << "\blue You slipped on the foam!"
-		playsound(src.loc, 'slip.ogg', 50, 1, -3)
+		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
 		M.Stun(5)
 		M.Weaken(2)
 
@@ -957,7 +957,7 @@ steam.start() -- spawns the effect
 // dense and opaque, but easy to break
 
 /obj/structure/foamedmetal
-	icon = 'effects.dmi'
+	icon = 'icons/effects/effects.dmi'
 	icon_state = "metalfoam"
 	density = 1
 	opacity = 0 	// changed in New()

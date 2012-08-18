@@ -1,7 +1,7 @@
 /obj/machinery/nuclearbomb
 	desc = "Uh oh. RUN!!!!"
 	name = "Nuclear Fission Explosive"
-	icon = 'stationobjs.dmi'
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "nuclearbomb0"
 	density = 1
 	var/deployable = 0.0
@@ -169,7 +169,7 @@
 	src.yes_code = 0
 	src.safety = 1
 	src.icon_state = "nuclearbomb3"
-	playsound(src,'Alarm.ogg',100,0,5)
+	playsound(src,'sound/machines/Alarm.ogg',100,0,5)
 	if (ticker && ticker.mode)
 		ticker.mode.explosion_in_progress = 1
 	sleep(100)

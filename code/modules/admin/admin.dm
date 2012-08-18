@@ -2091,7 +2091,7 @@ var/global/BSACooldown = 0
 						meteor_wave()
 						message_admins("[key_name_admin(usr)] has spawned meteors", 1)
 						command_alert("Meteors have been detected on collision course with the station.", "Meteor Alert")
-						world << sound('meteors.ogg')
+						world << sound('sound/announcer/meteors.ogg')
 					else
 						alert("You cannot perform this action. You must be of a higher administrative rank!", null, null, null, null, null)
 						return
@@ -2099,7 +2099,7 @@ var/global/BSACooldown = 0
 					//feedback_inc("admin_secrets_fun_used",1)
 					//feedback_add_details("admin_secrets_fun_used","GA")
 					command_alert("Gravitational anomalies detected on the station. There is no additional data.", "Anomaly Alert")
-					world << sound('granomalies.ogg')
+					world << sound('sound/announcer/granomalies.ogg')
 					var/turf/T = pick(blobstart)
 					var/obj/effect/bhole/bh = new /obj/effect/bhole( T.loc, 30 )
 					spawn(rand(100, 600))
@@ -2207,7 +2207,7 @@ var/global/BSACooldown = 0
 						for(var/obj/item/W in world)
 							if(istype(W, /obj/item/clothing) || istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/weapon/disk) || istype(W, /obj/item/weapon/tank))
 								continue
-							W.icon = 'gun.dmi'
+							W.icon = 'icons/obj/gun.dmi'
 							W.icon_state = "revolver"
 							W.item_state = "gun"
 						message_admins("[key_name_admin(usr)] made every item look like a gun")
@@ -2240,7 +2240,7 @@ var/global/BSACooldown = 0
 						var/show_log = alert(usr, "Show ion message?", "Message", "Yes", "No")
 						if(show_log == "Yes")
 							command_alert("Ion storm detected near the station. Please check all AI-controlled equipment for errors.", "Anomaly Alert")
-							world << sound('ionstorm.ogg')
+							world << sound('sound/announcer/ionstorm.ogg')
 					else
 						alert("You cannot perform this action. You must be of a higher administrative rank!")
 						return

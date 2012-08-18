@@ -1,7 +1,7 @@
 /obj/machinery/door
 	name = "Door"
 	desc = "It opens and closes."
-	icon = 'doorint.dmi'
+	icon = 'icons/obj/doors/doorint.dmi'
 	icon_state = "door1"
 	opacity = 1
 	density = 1
@@ -20,7 +20,7 @@
 /obj/machinery/door/firedoor
 	name = "Firelock"
 	desc = "Apply crowbar to open."
-	icon = 'Doorfire.dmi'
+	icon = 'icons/obj/doors/Doorfire.dmi'
 	icon_state = "door0"
 	var/blocked = null
 	opacity = 0
@@ -30,13 +30,13 @@
 /obj/machinery/door/firedoor/border_only
 	name = "Firelock"
 	desc = "Apply crowbar to open."
-	icon = 'door_fire2.dmi'
+	icon = 'icons/obj/doors/door_fire2.dmi'
 	icon_state = "door0"
 
 /obj/machinery/door/poddoor
 	name = "Podlock"
 	desc = "A type of powerful blast door."
-	icon = 'rapid_pdoor.dmi'
+	icon = 'icons/obj/doors/rapid_pdoor.dmi'
 	icon_state = "pdoor1"
 	var/id = 1.0
 	var/networkTag = ""
@@ -44,7 +44,7 @@
 /obj/machinery/door/poddoor/two_tile_hor
 	var/obj/machinery/door/poddoor/filler_object/f1
 	var/obj/machinery/door/poddoor/filler_object/f2
-	icon = '1x2blast_hor.dmi'
+	icon = 'icons/obj/doors/1x2blast_hor.dmi'
 
 	New()
 		..()
@@ -63,7 +63,7 @@
 /obj/machinery/door/poddoor/two_tile_ver
 	var/obj/machinery/door/poddoor/filler_object/f1
 	var/obj/machinery/door/poddoor/filler_object/f2
-	icon = '1x2blast_vert.dmi'
+	icon = 'icons/obj/doors/1x2blast_vert.dmi'
 
 	New()
 		..()
@@ -84,7 +84,7 @@
 	var/obj/machinery/door/poddoor/filler_object/f2
 	var/obj/machinery/door/poddoor/filler_object/f3
 	var/obj/machinery/door/poddoor/filler_object/f4
-	icon = '1x4blast_hor.dmi'
+	icon = 'icons/obj/doors/1x4blast_hor.dmi'
 
 	New()
 		..()
@@ -113,7 +113,7 @@
 	var/obj/machinery/door/poddoor/filler_object/f2
 	var/obj/machinery/door/poddoor/filler_object/f3
 	var/obj/machinery/door/poddoor/filler_object/f4
-	icon = '1x4blast_vert.dmi'
+	icon = 'icons/obj/doors/1x4blast_vert.dmi'
 
 	New()
 		..()
@@ -144,7 +144,7 @@
 /obj/machinery/door/window
 	name = "interior door"
 	desc = "A door made from a window, yet it can not break nor be depowered."
-	icon = 'windoor.dmi'
+	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "left"
 	var/base_state = "left"
 	visible = 0.0
@@ -154,7 +154,7 @@
 /obj/machinery/door/window/brigdoor
 	name = "Brig Door"
 	desc = "A stronger door made from window, even though it can not break."
-	icon = 'windoor.dmi'
+	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
 	req_access = list(access_security)

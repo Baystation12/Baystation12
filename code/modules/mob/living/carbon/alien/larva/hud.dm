@@ -44,7 +44,7 @@
 	using = new src.h_type( src )
 	using.name = "act_intent"
 	using.dir = SOUTHWEST
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = (mymob.a_intent == "hurt" ? "harm" : mymob.a_intent)
 	using.screen_loc = ui_acti
 	using.layer = 20
@@ -54,7 +54,7 @@
 	using = new src.h_type( src )
 	using.name = "mov_intent"
 	using.dir = SOUTHWEST
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = (mymob.m_intent == "run" ? "running" : "walking")
 	using.screen_loc = ui_acti
 	using.layer = 20
@@ -64,21 +64,21 @@
 /*
 	using = new src.h_type(src) //Right hud bar
 	using.dir = SOUTH
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.screen_loc = "EAST+1,SOUTH to EAST+1,NORTH"
 	using.layer = 19
 	src.adding += using
 
 	using = new src.h_type(src) //Lower hud bar
 	using.dir = EAST
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.screen_loc = "WEST,SOUTH-1 to EAST,SOUTH-1"
 	using.layer = 19
 	src.adding += using
 
 	using = new src.h_type(src) //Corner Button
 	using.dir = NORTHWEST
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.screen_loc = "EAST+1,SOUTH-1"
 	using.layer = 19
 	src.adding += using
@@ -87,7 +87,7 @@
 /*
 	using = new src.h_type( src )
 	using.name = "arrowleft"
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = "s_arrow"
 	using.dir = WEST
 	using.screen_loc = ui_iarrowleft
@@ -96,7 +96,7 @@
 
 	using = new src.h_type( src )
 	using.name = "arrowright"
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = "s_arrow"
 	using.dir = EAST
 	using.screen_loc = ui_iarrowright
@@ -105,7 +105,7 @@
 
 	using = new src.h_type( src )
 	using.name = "resist"
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = "act_resist"
 	using.screen_loc = ui_resist
 	using.layer = 19
@@ -115,7 +115,7 @@
 
 	using = new src.h_type( src )
 	using.name = null
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = "dither50"
 	using.screen_loc = "1,1 to 5,15"
 	using.layer = 17
@@ -124,7 +124,7 @@
 
 	using = new src.h_type( src )
 	using.name = null
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = "dither50"
 	using.screen_loc = "5,1 to 10,5"
 	using.layer = 17
@@ -133,7 +133,7 @@
 
 	using = new src.h_type( src )
 	using.name = null
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = "dither50"
 	using.screen_loc = "6,11 to 10,15"
 	using.layer = 17
@@ -142,7 +142,7 @@
 
 	using = new src.h_type( src )
 	using.name = null
-	using.icon = 'screen1_alien.dmi'
+	using.icon = 'icons/mob/screen1_alien.dmi'
 	using.icon_state = "dither50"
 	using.screen_loc = "11,1 to 15,15"
 	using.layer = 17
@@ -150,39 +150,39 @@
 	src.vimpaired += using
 
 	mymob.oxygen = new /obj/screen( null )
-	mymob.oxygen.icon = 'screen1_alien.dmi'
+	mymob.oxygen.icon = 'icons/mob/screen1_alien.dmi'
 	mymob.oxygen.icon_state = "oxy0"
 	mymob.oxygen.name = "oxygen"
 	mymob.oxygen.screen_loc = ui_oxygen
 
 	mymob.toxin = new /obj/screen( null )
-	mymob.toxin.icon = 'screen1_alien.dmi'
+	mymob.toxin.icon = 'icons/mob/screen1_alien.dmi'
 	mymob.toxin.icon_state = "tox0"
 	mymob.toxin.name = "toxin"
 	mymob.toxin.screen_loc = ui_toxin
 
 
 	mymob.fire = new /obj/screen( null )
-	mymob.fire.icon = 'screen1_alien.dmi'
+	mymob.fire.icon = 'icons/mob/screen1_alien.dmi'
 	mymob.fire.icon_state = "fire0"
 	mymob.fire.name = "fire"
 	mymob.fire.screen_loc = ui_fire
 
 
 	mymob.healths = new /obj/screen( null )
-	mymob.healths.icon = 'screen1_alien.dmi'
+	mymob.healths.icon = 'icons/mob/screen1_alien.dmi'
 	mymob.healths.icon_state = "health0"
 	mymob.healths.name = "health"
 	mymob.healths.screen_loc = ui_alien_health
 
 	mymob.pullin = new /obj/screen( null )
-	mymob.pullin.icon = 'screen1_alien.dmi'
+	mymob.pullin.icon = 'icons/mob/screen1_alien.dmi'
 	mymob.pullin.icon_state = "pull0"
 	mymob.pullin.name = "pull"
 	mymob.pullin.screen_loc = ui_pull_old
 
 	mymob.blind = new /obj/screen( null )
-	mymob.blind.icon = 'screen1_alien.dmi'
+	mymob.blind.icon = 'icons/mob/screen1_alien.dmi'
 	mymob.blind.icon_state = "blackanimate"
 	mymob.blind.name = " "
 	mymob.blind.screen_loc = "1,1 to 15,15"
@@ -190,7 +190,7 @@
 	mymob.blind.mouse_opacity = 0
 
 	mymob.flash = new /obj/screen( null )
-	mymob.flash.icon = 'screen1_alien.dmi'
+	mymob.flash.icon = 'icons/mob/screen1_alien.dmi'
 	mymob.flash.icon_state = "blank"
 	mymob.flash.name = "flash"
 	mymob.flash.screen_loc = "1,1 to 15,15"
@@ -198,13 +198,13 @@
 
 /*
 	mymob.sleep = new /obj/screen( null )
-	mymob.sleep.icon = 'screen1_alien.dmi'
+	mymob.sleep.icon = 'icons/mob/screen1_alien.dmi'
 	mymob.sleep.icon_state = "sleep0"
 	mymob.sleep.name = "sleep"
 	mymob.sleep.screen_loc = ui_sleep
 
 	mymob.rest = new /obj/screen( null )
-	mymob.rest.icon = 'screen1_alien.dmi'
+	mymob.rest.icon = 'icons/mob/screen1_alien.dmi'
 	mymob.rest.icon_state = "rest0"
 	mymob.rest.name = "rest"
 	mymob.rest.screen_loc = ui_rest
@@ -212,7 +212,7 @@
 
 	mymob.zone_sel = new /obj/screen/zone_sel( null )
 	mymob.zone_sel.overlays = null
-	mymob.zone_sel.overlays += image("icon" = 'zone_sel.dmi', "icon_state" = text("[]", mymob.zone_sel.selecting))
+	mymob.zone_sel.overlays += image("icon" = 'icons/mob/zone_sel.dmi', "icon_state" = text("[]", mymob.zone_sel.selecting))
 
 	mymob.client.screen = null
 

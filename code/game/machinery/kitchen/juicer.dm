@@ -1,7 +1,7 @@
 
 /obj/machinery/juicer
 	name = "Juicer"
-	icon = 'kitchen.dmi'
+	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "juicer1"
 	layer = 2.9
 	density = 0
@@ -149,7 +149,7 @@
 		return
 	if (!beaker || beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 		return
-	playsound(src.loc, 'juicer.ogg', 50, 1)
+	playsound(src.loc, 'sound/machines/juicer.ogg', 50, 1)
 	for (var/obj/item/weapon/reagent_containers/food/snacks/O in src.contents)
 		var/r_id = get_juice_id(O)
 		beaker.reagents.add_reagent(r_id,get_juice_amount(O))

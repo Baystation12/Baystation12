@@ -2,7 +2,7 @@
 	name = "Flag"
 	desc = "Its a flag"
 	w_class = 5
-	icon = 'flags.dmi'
+	icon = 'icons/misc/flags.dmi'
 	icon_state = "flag_neutral"
 	item_state = "paper"
 
@@ -60,7 +60,7 @@
 	density = 1
 	var/score = 0
 	var/operating = 0
-	icon = 'flags.dmi'
+	icon = 'icons/misc/flags.dmi'
 	icon_state = "red_injector"
 /*
 /obj/machinery/red_injector/ex_act(severity)
@@ -102,7 +102,7 @@
 	density = 1
 	var/operating = 0
 	var/score = 0
-	icon = 'flags.dmi'
+	icon = 'icons/misc/flags.dmi'
 	icon_state = "green_injector"
 
 /obj/machinery/green_injector/ex_act(severity)

@@ -10,7 +10,7 @@
 	if (usr.client && (usr.client.muted || usr.client.muted_complete))
 		return
 
-	var/icon/cross = icon('storage.dmi',"bible")
+	var/icon/cross = icon('icons/obj/storage.dmi',"bible")
 
 	for (var/mob/M in world)
 		if (M.client && M.client.holder && M.client.seeprayers)

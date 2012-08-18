@@ -322,7 +322,7 @@ area/proc/ul_Light(var/Red = LightLevelRed, var/Green = LightLevelGreen, var/Blu
 
 	luminosity = ul_IsLuminous(LightLevelRed, LightLevelGreen, LightLevelBlue)
 
-	ul_Overlay = image('ULIcons.dmi', , num2text(LightLevelRed) + "-" + num2text(LightLevelGreen) + "-" + num2text(LightLevelBlue), ul_Layer)
+	ul_Overlay = image('icons/effects/ULIcons.dmi', , num2text(LightLevelRed) + "-" + num2text(LightLevelGreen) + "-" + num2text(LightLevelBlue), ul_Layer)
 
 	overlays += ul_Overlay
 

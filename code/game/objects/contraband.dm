@@ -6,7 +6,7 @@
 /obj/item/weapon/contraband
 	name = "contraband item"
 	desc = "You probably shouldn't be holding this."
-	icon = 'contraband.dmi'
+	icon = 'icons/obj/contraband.dmi'
 	force = 0
 
 
@@ -68,7 +68,7 @@
 obj/effect/decal/poster
 	name = "poster"
 	desc = "A large piece of space-resistant printed paper. It's considered contraband."
-	icon = 'contraband.dmi'
+	icon = 'icons/obj/contraband.dmi'
 	anchored = 1
 	var/serial_number //Will hold the value of src.loc if nobody initialises it
 	var/ruined = 0
@@ -141,7 +141,7 @@ obj/effect/decal/poster/New(var/serial)
 
 obj/effect/decal/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if( istype(W, /obj/item/weapon/wirecutters) )
-		playsound(src.loc, 'Wirecutter.ogg', 100, 1)
+		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		if(src.ruined)
 			user << "<FONT COLOR='BLUE'>You remove the remnants of the poster.</FONT>"
 			del(src)
@@ -161,7 +161,7 @@ obj/effect/decal/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
 				return
 			for (var/mob/O in hearers(5, src.loc))
 				O.show_message("<FONT COLOR='RED'>[user.name] rips the [src.name] in a single, decisive motion!</FONT>" )
-				playsound(src.loc, 'poster_ripped.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
 				src.ruined = 1
 				src.icon_state = "poster_ripped"
 				src.name = "Ripped poster"
@@ -200,7 +200,7 @@ obj/effect/decal/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	flick("poster_being_set",D)
 	D.loc = src
 	del(P)	//delete it now to cut down on sanity checks afterwards. Agouri's code supports rerolling it anyway
-	playsound(D.loc, 'poster_being_created.ogg', 100, 1)
+	playsound(D.loc, 'sound/items/poster_being_created.ogg', 100, 1)
 
 	sleep(17)
 	if(!D)	return

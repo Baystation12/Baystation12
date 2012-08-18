@@ -2,7 +2,7 @@
 
 /obj/item/weapon/cleaner
 	desc = "A chemical that cleans messes."
-	icon = 'janitor.dmi'
+	icon = 'icons/obj/janitor.dmi'
 	name = "space cleaner"
 	icon_state = "cleaner"
 	item_state = "cleaner"
@@ -72,11 +72,11 @@
 			// If you add brighter colors to it it'll eventually get lighter, though.
 
 	D.name = "chemicals"
-	D.icon = 'chempuff.dmi'
+	D.icon = 'icons/obj/chempuff.dmi'
 
 	D.icon += finalcolor
 
-	playsound(src.loc, 'spray2.ogg', 50, 1, -6)
+	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 
 	spawn(0)
 		for(var/i=0, i<3, i++)
@@ -114,7 +114,7 @@
 
 /obj/item/weapon/chemsprayer//Another copy paste with a tiny change it seems
 	desc = "A utility used to spray large amounts of reagent in a given area."
-	icon = 'gun.dmi'
+	icon = 'icons/obj/gun.dmi'
 	name = "chem sprayer"
 	icon_state = "chemsprayer"
 	item_state = "chemsprayer"
@@ -144,14 +144,14 @@
 		user << "\blue [src] is empty!"
 		return
 
-	playsound(src.loc, 'spray2.ogg', 50, 1, -6)
+	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 
 	var/Sprays[3]
 	for(var/i=1, i<=3, i++) // intialize sprays
 		if(src.reagents.total_volume < 1) break
 		var/obj/effect/decal/D = new/obj/effect/decal(get_turf(src))
 		D.name = "chemicals"
-		D.icon = 'chempuff.dmi'
+		D.icon = 'icons/obj/chempuff.dmi'
 		D.create_reagents(5)
 		src.reagents.trans_to(D, 5)
 
@@ -218,7 +218,7 @@
 //Pepper spray, set up to make the 2 different types
 /obj/item/weapon/pepperspray //This is riot control
 	desc = "Manufactured by UhangInc., used to blind and down an opponent quickly."
-	icon = 'weapons.dmi'
+	icon = 'icons/obj/weapons.dmi'
 	name = "pepperspray"
 	icon_state = "pepperspray"
 	item_state = "pepperspray"
@@ -234,7 +234,7 @@
 
 /obj/item/weapon/pepperspray/small //And this is for personal defense.
 	desc = "This appears to be a small, nonlethal, single use personal defense weapon.  Hurts like a bitch, though."
-	icon = 'weapons.dmi'
+	icon = 'icons/obj/weapons.dmi'
 	name = "mace"
 	icon_state = "pepperspray"
 	item_state = "pepperspray"
@@ -278,7 +278,7 @@
 		if(src.reagents.total_volume < ReagentAmount)
 			A.reagents.trans_to(src, ReagentAmount - src.reagents.total_volume)
 			user << "\blue Pepper spray refilled"
-			playsound(src.loc, 'refill.ogg', 50, 1, -6)
+			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 			return
 		else
 			user << "\blue Pepper spray is already full!"
@@ -289,7 +289,7 @@
 	else if (src.reagents.total_volume < 1)
 		user << "\blue [src] is empty!"
 		return
-	playsound(src.loc, 'spray2.ogg', 50, 1, -6)
+	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 
 	var/SprayNum = 0 //Setting up the differentiation for the 2 bottles.   --SkyMarshal
 	var/SprayAmt = 0
@@ -305,7 +305,7 @@
 		if(src.reagents.total_volume < 1) break
 		var/obj/effect/decal/D = new/obj/effect/decal(get_turf(src))
 		D.name = "chemicals"
-		D.icon = 'chempuff.dmi'
+		D.icon = 'icons/obj/chempuff.dmi'
 		D.create_reagents(SprayAmt)
 		src.reagents.trans_to(D, SprayAmt)
 
@@ -382,7 +382,7 @@
 /obj/item/weapon/mop
 	desc = "The world of the janitor wouldn't be complete without a mop."
 	name = "mop"
-	icon = 'janitor.dmi'
+	icon = 'icons/obj/janitor.dmi'
 	icon_state = "mop"
 	var/mopping = 0
 	var/mopcount = 0

@@ -1,7 +1,7 @@
 /obj/machinery/computer/scan_consolenew
 	name = "DNA Modifier Access Console"
 	desc = "Scans DNA."
-	icon = 'computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	icon_state = "scanner"
 	density = 1
 	var/uniblock = 1.0
@@ -39,7 +39,7 @@
 
 /obj/machinery/computer/scan_consolenew/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			if (src.stat & BROKEN)
 				user << "\blue The broken glass falls out."
@@ -78,7 +78,7 @@
 
 /obj/machinery/computer/cloning
 	name = "Cloning console"
-	icon = 'computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	icon_state = "dna"
 	circuit = "/obj/item/weapon/circuitboard/cloning"
 	req_access = list(access_heads) //Only used for record deletion right now.
@@ -361,7 +361,7 @@
 		//Look for that player! They better be dead!
 		if(C)
 			var/mob/selected = find_dead_player("[C.fields["ckey"]]")
-			selected << 'chime.ogg'	//probably not the best sound but I think it's reasonable
+			selected << 'sound/machines/chime.ogg'	//probably not the best sound but I think it's reasonable
 			var/answer = alert(selected,"Do you want to return to life?","Cloning","Yes","No")
 			if(answer == "No")
 				selected = null

@@ -5,7 +5,7 @@
 	spark_system.attach(src)
 	spawn (1)
 		src << "\blue Your icons have been generated!"
-		playsound(loc, 'liveagain.ogg', 50, 1, -3)
+		playsound(loc, 'sound/voice/liveagain.ogg', 50, 1, -3)
 		modtype = "robot"
 		updateicon()
 //		syndicate = syndie
@@ -642,7 +642,7 @@
 			G.affecting = src
 			grabbed_by += G
 			G.synch()
-			playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			for(var/mob/O in viewers(src, null))
 				if ((O.client && !( O.blinded )))
 					O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
@@ -658,7 +658,7 @@
 						stunned = max(stunned,4)
 				What is this?*/
 
-				playsound(loc, 'slash.ogg', 25, 1, -1)
+				playsound(loc, 'sound/weapons/slash.ogg', 25, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					O.show_message(text("\red <B>[] has slashed at []!</B>", M, src), 1)
 				if(prob(8))
@@ -666,7 +666,7 @@
 				adjustBruteLoss(damage)
 				updatehealth()
 			else
-				playsound(loc, 'slashmiss.ogg', 25, 1, -1)
+				playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[] took a swipe at []!</B>", M, src), 1)
@@ -677,12 +677,12 @@
 					Stun(5)
 					step(src,get_dir(M,src))
 					spawn(5) step(src,get_dir(M,src))
-					playsound(loc, 'pierce.ogg', 50, 1, -1)
+					playsound(loc, 'sound/weapons/pierce.ogg', 50, 1, -1)
 					for(var/mob/O in viewers(src, null))
 						if ((O.client && !( O.blinded )))
 							O.show_message(text("\red <B>[] has forced back []!</B>", M, src), 1)
 				else
-					playsound(loc, 'slashmiss.ogg', 25, 1, -1)
+					playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 					for(var/mob/O in viewers(src, null))
 						if ((O.client && !( O.blinded )))
 							O.show_message(text("\red <B>[] attempted to force back []!</B>", M, src), 1)

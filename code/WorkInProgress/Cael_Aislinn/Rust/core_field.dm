@@ -9,7 +9,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 /obj/machinery/rust/em_field
 	name = "EM Field"
 	desc = "A coruscating, barely visible field of energy. It is shaped like a slightly flattened torus."
-	icon = 'emfield.dmi'
+	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/emfield.dmi'
 	icon_state = "emfield_s1"
 	density = 0
 	layer = 3.1
@@ -269,7 +269,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 		switch(newsize)
 			if(1)
 				size = 1
-				icon = 'emfield.dmi'
+				icon = 'code/WorkInProgress/Cael_Aislinn/Rust/emfield.dmi'
 				icon_state = "emfield_s1"
 				//
 				src.loc = get_turf(owned_core)
@@ -277,7 +277,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 				changed = 1
 			if(3)
 				size = 3
-				icon = '96x96.dmi'
+				icon = 'icons/effects/96x96.dmi'
 				icon_state = "emfield_s3"
 				//
 				var/turf/newloc = get_turf(owned_core)
@@ -287,7 +287,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 				changed = 3
 			if(5)
 				size = 5
-				icon = '160x160.dmi'
+				icon = 'icons/effects/160x160.dmi'
 				icon_state = "emfield_s5"
 				//
 				var/turf/newloc = get_turf(owned_core)
@@ -298,7 +298,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 				changed = 5
 			if(7)
 				size = 7
-				icon = '224x224.dmi'
+				icon = 'icons/effects/224x224.dmi'
 				icon_state = "emfield_s7"
 				//
 				var/turf/newloc = get_turf(owned_core)

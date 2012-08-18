@@ -3,7 +3,7 @@
 //byond multitiles are basically... shit
 /obj/machinery/rust/particle_catcher
 	invisibility = 101
-	icon = 'effects.dmi'
+	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
 	density = 0
 	anchored = 1

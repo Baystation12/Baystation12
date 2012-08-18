@@ -4,7 +4,7 @@
 /obj/item/device/laser_pointer
 	name = "laser pointer"
 	desc = "A portable low-power laser used for optical system alignment. The label reads: 'Danger: Class IIIa laser device. Avoid direct eye exposure."
-	icon = 'optics.dmi'
+	icon = 'icons/obj/optics.dmi'
 	icon_state = "pointer0"
 	var/on = 0	// true if operating
 	var/wavelength = 632	// operation wavelength (nm)

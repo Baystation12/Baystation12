@@ -34,7 +34,7 @@ ENERGY SHIELD (where else should i even put this)
 		else
 			icon_state = "sword[color]"
 		w_class = 4
-		playsound(user, 'saberon.ogg', 50, 1)
+		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		user << "\blue [src] is now active."
 	else
 		force = 3
@@ -43,7 +43,7 @@ ENERGY SHIELD (where else should i even put this)
 		else
 			icon_state = "sword0"
 		w_class = 2
-		playsound(user, 'saberoff.ogg', 50, 1)
+		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "\blue [src] can now be concealed."
 	add_fingerprint(user)
 	user.update_clothing()
@@ -160,7 +160,7 @@ ENERGY SHIELD (where else should i even put this)
 		flick("baton_active", src)
 		if (user.a_intent == "hurt")
 			if(!..()) return
-			playsound(src.loc, 'Genhit.ogg', 50, 1, -1)
+			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1, -1)
 			if(isrobot(user))
 				var/mob/living/silicon/robot/R = user
 				R.cell.charge -= 20
@@ -171,7 +171,7 @@ ENERGY SHIELD (where else should i even put this)
 			M.Stun(1)
 			M.Weaken(1)
 		else
-			playsound(src.loc, 'Egloves.ogg', 50, 1, -1)
+			playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 			if(isrobot(user))
 				var/mob/living/silicon/robot/R = user
 				R.cell.charge -= 20
@@ -223,7 +223,7 @@ ENERGY SHIELD (where else should i even put this)
 		for(var/mob/O in viewers(M))
 			if (O.client)	O.show_message("\red <B>[M] has been beaten with the police baton by [user]!</B>", 1, "\red You hear someone fall", 2)
 	else
-		playsound(src.loc, 'Genhit.ogg', 50, 1, -1)
+		playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1, -1)
 		M.Stun(5)
 		M.Weaken(5)
 		for(var/mob/O in viewers(M))
@@ -244,13 +244,13 @@ ENERGY SHIELD (where else should i even put this)
 		force = 10
 		icon_state = "eshield[active]"
 		w_class = 4
-		playsound(user, 'saberon.ogg', 50, 1)
+		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		user << "\blue [src] is now active."
 	else
 		force = 3
 		icon_state = "eshield[active]"
 		w_class = 1
-		playsound(user, 'saberoff.ogg', 50, 1)
+		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "\blue [src] can now be concealed."
 	add_fingerprint(user)
 	return

@@ -233,10 +233,10 @@ Badassery;
 
 			comm.messagetitle.Add("Cent. Com. Status Summary")
 			comm.messagetext.Add(intercepttext)
-	world << sound('commandreport.ogg')
+	world << sound('sound/announcer/commandreport.ogg')
 
 /*	command_alert("Summary downloaded and printed out at all communications consoles.", "Enemy communication intercept. Security Level Elevated.")
-	world << sound('intercept.ogg')
+	world << sound('sound/announcer/intercept.ogg')
 	if(security_level < SEC_LEVEL_BLUE)
 		set_security_level(SEC_LEVEL_BLUE)*/
 

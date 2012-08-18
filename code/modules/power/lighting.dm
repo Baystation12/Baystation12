@@ -13,7 +13,7 @@
 
 /obj/machinery/light
 	name = "light fixture"
-	icon = 'lighting.dmi'
+	icon = 'icons/effects/lighting.dmi'
 	var/base_state = "tube"		// base description and icon_state
 	icon_state = "tube1"
 	desc = "A lighting fixture."
@@ -200,7 +200,7 @@
 	// attempt to take light apart
 	else if(istype(W, /obj/item/weapon/wirecutters))
 		if(status == LIGHT_EMPTY)
-			playsound(src.loc, 'Wirecutter.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			var/turf/T = get_turf(user)
 			user.visible_message("[user] cuts the light's wiring.", "You start to cut the light's wiring.")
 			sleep(40)
@@ -342,7 +342,7 @@
 
 	if(!skip_sound_and_sparks)
 		if(status == LIGHT_OK || status == LIGHT_BURNED)
-			playsound(src.loc, 'Glasshit.ogg', 75, 1)
+			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		if(on)
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
@@ -452,7 +452,7 @@
 // will fit into empty /obj/machinery/light of the corresponding type
 
 /obj/item/weapon/light
-	icon = 'lighting.dmi'
+	icon = 'icons/effects/lighting.dmi'
 	flags = FPRINT | TABLEPASS
 	force = 2
 	throwforce = 5
@@ -549,7 +549,7 @@
 			return
 		if(istype(I, /obj/item/weapon/screwdriver) && repair_state == 1)
 			user << "You attach the new wiring."
-			playsound(src.loc, 'Screwdriver.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			if(status == LIGHT_BURNED)
 				repair_state = 0
 				status = LIGHT_OK
@@ -585,7 +585,7 @@
 		user << "The [name] shatters!"
 		status = LIGHT_BROKEN
 		force = 5
-		playsound(src.loc, 'Glasshit.ogg', 75, 1)
+		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		update()
 
 
@@ -594,7 +594,7 @@
 
 /obj/item/weapon/storage/lightbox
 	name = "replacement bulbs"
-	icon = 'storage.dmi'
+	icon = 'icons/obj/storage.dmi'
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
 	item_state = "syringe_kit"
@@ -630,7 +630,7 @@
 
 /obj/structure/light_frame
 	name = "Light Fixture Frame"
-	icon = 'lighting.dmi'
+	icon = 'icons/effects/lighting.dmi'
 	icon_state = "tube-empty"
 	desc = "A lighting fixture frame."
 	anchored = 0
@@ -649,7 +649,7 @@
 
 /obj/structure/light_frame/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/weapon/wrench) && !anchored)
-		playsound(src.loc, 'Ratchet.ogg', 100, 1)
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		var/turf/T = get_turf(user)
 		user.visible_message("[user] secures the light fixture.", "You start to secure the light fixture.")
 		sleep(40)
@@ -658,7 +658,7 @@
 			anchored = 1
 			name = "Secured Light Fixture Frame"
 	else if(istype(W, /obj/item/weapon/wrench) && anchored)
-		playsound(src.loc, 'Ratchet.ogg', 100, 1)
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		var/turf/T = get_turf(user)
 		user.visible_message("[user] unsecures the light fixture.", "You start to unsecure the light fixture.")
 		sleep(40)
@@ -680,7 +680,7 @@
 			L.update()
 			del(src)
 	else if(istype(W, /obj/item/weapon/screwdriver) && !anchored)
-		playsound(src.loc, 'Screwdriver.ogg', 100, 1)
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		usr << "\blue You take apart the light fixture."
 		new /obj/item/stack/sheet/metal(loc)
 		del(src)

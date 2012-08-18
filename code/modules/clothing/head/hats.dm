@@ -1,7 +1,7 @@
 // HATS. OH MY WHAT A FINE CHAPEAU, GOOD SIR.
 /obj/item/clothing/head
 	name = "head"
-	icon = 'hats.dmi'
+	icon = 'icons/obj/clothing/hats.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 

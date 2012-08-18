@@ -554,10 +554,10 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	color = color_n
 	switch(colorC)
 		if("red")
-			icon = 'power_cond_red.dmi'
+			icon = 'icons/obj/power_cond_red.dmi'
 		if("yellow")
-			icon = 'power_cond_yellow.dmi'
+			icon = 'icons/obj/power_cond_yellow.dmi'
 		if("green")
-			icon = 'power_cond_green.dmi'
+			icon = 'icons/obj/power_cond_green.dmi'
 		if("blue")
-			icon = 'power_cond_blue.dmi'
+			icon = 'icons/obj/power_cond_blue.dmi'

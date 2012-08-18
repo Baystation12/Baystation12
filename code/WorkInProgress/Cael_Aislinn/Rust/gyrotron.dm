@@ -3,7 +3,7 @@
 /obj/item/projectile/beam/ehf_beam
 
 /obj/machinery/rust/gyrotron
-	icon = 'gyrotron.dmi'
+	icon = 'code/WorkInProgress/Cael_Aislinn/Rust/gyrotron.dmi'
 	icon_state = "emitter-off"
 	name = "Gyrotron"
 	anchored = 1
@@ -95,7 +95,7 @@
 		A.damage = mega_energy * 500
 		//
 		A.icon_state = "emitter"
-		playsound(src.loc, 'emitter.ogg', 25, 1)
+		playsound(src.loc, 'sound/weapons/emitter.ogg', 25, 1)
 		use_power(100 * mega_energy + 500)
 		/*if(prob(35))
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

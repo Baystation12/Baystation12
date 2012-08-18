@@ -84,7 +84,7 @@
 /obj/machinery/computer/aistatus
 	name = "AI Status Panel"
 	desc = "This shows the status of the AI."
-	icon = 'mainframe.dmi'
+	icon = 'icons/obj/mainframe.dmi'
 	icon_state = "left"
 //	brightnessred = 0
 //	brightnessgreen = 2
@@ -106,20 +106,20 @@
 
 /obj/machinery/computer/aiupload/mainframe
 	name = "AI Mainframe Upload"
-	icon = 'mainframe.dmi'
+	icon = 'icons/obj/mainframe.dmi'
 	icon_state = "aimainframe"
 
 
 /obj/machinery/computer/borgupload/mainframe
 	name = "Borg Mainframe Upload"
-	icon = 'mainframe.dmi'
+	icon = 'icons/obj/mainframe.dmi'
 	icon_state = "aimainframe"
 
 
 /*Module Storage Unit/Closet!  Solid, only modules fit in it.*/
 /obj/structure/aiuploadcloset
 	name = "AI Mainframe Module Storage Unit"
-	icon = 'mainframe.dmi'
+	icon = 'icons/obj/mainframe.dmi'
 	icon_state = "right-closed"
 	density = 1
 

@@ -11,4 +11,4 @@
 		//sleep(100)
 		spawn(rand(3000, 6000)) //Delayed announcements to keep the crew on their toes.
 			command_alert("Unknown biological entities have been detected near [station_name()], please stand-by.", "Lifesign Alert")
-			world << sound('commandreport.ogg')
+			world << sound('sound/announcer/commandreport.ogg')

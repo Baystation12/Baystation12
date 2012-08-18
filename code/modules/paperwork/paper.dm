@@ -1,7 +1,7 @@
 /obj/item/weapon/paper
 	name = "paper"
 	gender = PLURAL
-	icon = 'bureaucracy.dmi'
+	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"
 	throwforce = 0
 	w_class = 1.0
@@ -73,7 +73,7 @@
 	if(rigged && (Holiday == "April Fool's Day"))
 		if(spam_flag == 0)
 			spam_flag = 1
-			playsound(src.loc, 'bikehorn.ogg', 50, 1)
+			playsound(src.loc, 'sound/items/bikehorn.ogg', 50, 1)
 			spawn(20)
 				spam_flag = 0
 	return

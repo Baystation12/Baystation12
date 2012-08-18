@@ -258,7 +258,7 @@ SHARDS
 		if (istype(M, /mob/living/carbon/metroid)) //I mean they float, seriously. - Erthilo
 			return
 		M << "\red <B>You step in the broken glass!</B>"
-		playsound(src.loc, 'glass_step.ogg', 50, 1)
+		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(!((H.shoes) || (H.wear_suit && H.wear_suit.body_parts_covered & FEET)))

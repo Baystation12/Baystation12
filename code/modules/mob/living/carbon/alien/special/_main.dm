@@ -19,8 +19,8 @@
 			name = "[name] ([rand(1, 1000)])"
 			real_name = name
 
-			src.stand_icon = new /icon('xcomalien.dmi', xcom_state)
-			src.lying_icon = new /icon('xcomalien.dmi', xcom_state)
+			src.stand_icon = new /icon('icons/mob/xcomalien.dmi', xcom_state)
+			src.lying_icon = new /icon('icons/mob/xcomalien.dmi', xcom_state)
 			src.icon = src.stand_icon
 
 			remove_special_verbs()

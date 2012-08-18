@@ -1,6 +1,6 @@
 /obj/machinery/pipedispenser
 	name = "Pipe Dispenser"
-	icon = 'stationobjs.dmi'
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
 	density = 1
 	anchored = 1
@@ -73,7 +73,7 @@
 		return
 	else if (istype(W, /obj/item/weapon/wrench))
 		if (unwrenched==0)
-			playsound(src.loc, 'Ratchet.ogg', 50, 1)
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			user << "\blue You begin to unfasten \the [src] from the floor..."
 			if (do_after(user, 40))
 				user.visible_message( \
@@ -86,7 +86,7 @@
 				if (usr.machine==src)
 					usr << browse(null, "window=pipedispenser")
 		else /*if (unwrenched==1)*/
-			playsound(src.loc, 'Ratchet.ogg', 50, 1)
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			user << "\blue You begin to fasten \the [src] to the floor..."
 			if (do_after(user, 20))
 				user.visible_message( \
@@ -103,7 +103,7 @@
 
 /obj/machinery/pipedispenser/disposal
 	name = "Disposal Pipe Dispenser"
-	icon = 'stationobjs.dmi'
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
 	density = 1
 	anchored = 1.0

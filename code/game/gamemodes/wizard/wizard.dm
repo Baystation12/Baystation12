@@ -253,6 +253,6 @@ Made a proc here so it's not repeated several times.*/
 /mob/proc/spellvoice()
 //	if(!usr.miming)No longer necessary.
 //	if(usr.gender=="male")
-//		playsound(usr.loc, pick('null.ogg','null.ogg'), 100, 1)
+//		playsound(usr.loc, pick('sound/misc/null.ogg','sound/misc/null.ogg'), 100, 1)
 //	else
-//		playsound(usr.loc, pick('null.ogg','null.ogg'), 100, 1)
+//		playsound(usr.loc, pick('sound/misc/null.ogg','sound/misc/null.ogg'), 100, 1)

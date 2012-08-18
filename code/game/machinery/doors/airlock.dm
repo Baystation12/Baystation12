@@ -65,7 +65,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 /obj/machinery/door/airlock
 	name = "Airlock"
-	icon = 'doorint.dmi'
+	icon = 'icons/obj/doors/doorint.dmi'
 	icon_state = "door_closed"
 
 	var
@@ -122,43 +122,43 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 	command
 		name = "Airlock"
-		icon = 'Doorcom.dmi'
+		icon = 'icons/obj/doors/Doorcom.dmi'
 		doortype = 1
 		holdopen = 0
 
 
 	security
 		name = "Airlock"
-		icon = 'Doorsec.dmi'
+		icon = 'icons/obj/doors/Doorsec.dmi'
 		doortype = 2
 
 
 	engineering
 		name = "Airlock"
-		icon = 'Dooreng.dmi'
+		icon = 'icons/obj/doors/Dooreng.dmi'
 		doortype = 3
 
 
 	medical
 		name = "Airlock"
-		icon = 'Doormed.dmi'
+		icon = 'icons/obj/doors/doormed.dmi'
 		doortype = 4
 
 
 	maintenance
 		name = "Maintenance Access"
-		icon = 'Doormaint.dmi'
+		icon = 'icons/obj/doors/Doormaint.dmi'
 		doortype = 5
 
 	external
 		name = "External Airlock"
-		icon = 'Doorext.dmi'
+		icon = 'icons/obj/doors/Doorext.dmi'
 		doortype = 6
 
 
 	glass
 		name = "Glass Airlock"
-		icon = 'Doorglass.dmi'
+		icon = 'icons/obj/doors/Doorglass.dmi'
 		opacity = 0
 		doortype = 7
 		glass = 1
@@ -166,7 +166,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 		glass_command
 			name = "Maintenance Hatch"
-			icon = 'Doorcomglass.dmi'
+			icon = 'icons/obj/doors/Doorcomglass.dmi'
 			opacity = 0
 			doortype = 14
 			glass = 1
@@ -174,7 +174,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 		glass_engineering
 			name = "Maintenance Hatch"
-			icon = 'Doorengglass.dmi'
+			icon = 'icons/obj/doors/Doorengglass.dmi'
 			opacity = 0
 			doortype = 15
 			glass = 1
@@ -182,7 +182,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 		glass_security
 			name = "Maintenance Hatch"
-			icon = 'Doorsecglass.dmi'
+			icon = 'icons/obj/doors/Doorsecglass.dmi'
 			opacity = 0
 			doortype = 16
 			glass = 1
@@ -190,7 +190,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 		glass_medical
 			name = "Maintenance Hatch"
-			icon = 'doormedglass.dmi'
+			icon = 'icons/obj/doors/doormedglass.dmi'
 			opacity = 0
 			doortype = 17
 			glass = 1
@@ -198,7 +198,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 		glass_research
 			name = "Research Airlock"
-			icon = 'doorsciglass.dmi'
+			icon = 'icons/obj/doors/doorsciglass.dmi'
 			opacity = 0
 			doortype = 20
 			glass = 1
@@ -206,35 +206,35 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 		glass_mining
 			name = "Maintenance Hatch"
-			icon = 'doorminingglass.dmi'
+			icon = 'icons/obj/doors/Doorminingglass.dmi'
 			opacity = 0
 			doortype = 22
 			glass = 1
 
 		glass_atmos
 			name = "Maintenance Hatch"
-			icon = 'dooratmoglass.dmi'
+			icon = 'icons/obj/doors/Dooratmoglass.dmi'
 			opacity = 0
 			doortype = 23
 			glass = 1
 
 	centcom
 		name = "Airlock"
-		icon = 'Doorele.dmi'
+		icon = 'icons/obj/doors/Doorele.dmi'
 		opacity = 0
 		doortype = 8
 
 
 	vault
 		name = "Vault"
-		icon = 'vault.dmi'
+		icon = 'icons/obj/doors/vault.dmi'
 		opacity = 1
 		doortype = 9
 
 
 	glass_large
 		name = "Glass Airlock"
-		icon = 'Door2x1glassfull.dmi'
+		icon = 'icons/obj/doors/Door2x1glassfull.dmi'
 		opacity = 0
 		doortype = 10
 		glass = 1
@@ -242,40 +242,40 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 
 	freezer
 		name = "Freezer Airlock"
-		icon = 'Doorfreezer.dmi'
+		icon = 'icons/obj/doors/Doorfreezer.dmi'
 		opacity = 1
 		doortype = 11
 
 
 	hatch
 		name = "Airtight Hatch"
-		icon = 'Doorhatchele.dmi'
+		icon = 'icons/obj/doors/Doorhatchele.dmi'
 		opacity = 1
 		doortype = 12
 
 
 	maintenance_hatch
 		name = "Maintenance Hatch"
-		icon = 'Doorhatchmaint2.dmi'
+		icon = 'icons/obj/doors/Doorhatchmaint2.dmi'
 		opacity = 1
 		doortype = 13
 
 
 	mining
 		name = "Mining Airlock"
-		icon = 'Doormining.dmi'
+		icon = 'icons/obj/doors/Doormining.dmi'
 		doortype = 18
 
 
 	atmos
 		name = "Atmospherics Airlock"
-		icon = 'Dooratmo.dmi'
+		icon = 'icons/obj/doors/Dooratmo.dmi'
 		doortype = 19
 
 
 	research
 		name = "Research Airlock"
-		icon = 'doorsci.dmi'
+		icon = 'icons/obj/doors/doorsci.dmi'
 		doortype = 21
 
 	New()
@@ -293,9 +293,9 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 			return 0
 		use_power(50)
 		if(istype(src, /obj/machinery/door/airlock/glass))
-			playsound(src.loc, 'windowdoor.ogg', 100, 1)
+			playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 		else
-			playsound(src.loc, 'airlock.ogg', 30, 1)
+			playsound(src.loc, 'sound/machines/airlock.ogg', 30, 1)
 		if (src.closeOther != null && istype(src.closeOther, /obj/machinery/door/airlock/) && !src.closeOther.density)
 			src.closeOther.close()
 		return ..()
@@ -307,9 +307,9 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 		..()
 		use_power(50)
 		if(istype(src, /obj/machinery/door/airlock/glass))
-			playsound(src.loc, 'windowdoor.ogg', 100, 1)
+			playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 		else
-			playsound(src.loc, 'airlock.ogg', 30, 1)
+			playsound(src.loc, 'sound/machines/airlock.ogg', 30, 1)
 		var/obj/structure/window/killthis = (locate(/obj/structure/window) in get_turf(src))
 		if(killthis)
 			killthis.ex_act(2)//Smashin windows
@@ -420,7 +420,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 			else
 				beingcrowbarred = 0
 			if( beingcrowbarred && (density && welded && !operating && src.p_open && (!src.arePowerSystemsOn() || stat & NOPOWER) && !src.locked) )
-				playsound(src.loc, 'Crowbar.ogg', 100, 1)
+				playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 				user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 				if(do_after(user,40))
 					user << "\blue You removed the airlock electronics!"
@@ -545,7 +545,7 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 		if (ishuman(user) && prob(40) && src.density)
 			var/mob/living/carbon/human/H = user
 			if(H.getBrainLoss() >= 60)
-				playsound(src.loc, 'bang.ogg', 25, 1)
+				playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 				if(!istype(H.head, /obj/item/clothing/head/helmet))
 					for(var/mob/M in viewers(src, null))
 						M << "\red [user] headbutts the airlock."
@@ -1326,7 +1326,7 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/secure
 	name = "Secure Airlock"
 	desc = "Good lord, at least they left out the overcomplicated death traps.  Looks to be a layer of armor plate you might be able to remove with a wrench."
-	icon = 'Doorhatchele.dmi'
+	icon = 'icons/obj/doors/Doorhatchele.dmi'
 
 	wires = 65535
 	wirenum = 16
@@ -1619,7 +1619,7 @@ About the new airlock wires panel:
 	centcom
 		name = "CentCom Secure Airlock"
 		desc = "I hope you have insulated gloves...."
-		icon = 'Doorhatchele.dmi'
+		icon = 'icons/obj/doors/Doorhatchele.dmi'
 		var/list/mob/morons = list()
 
 		pulse(var/wireColor)

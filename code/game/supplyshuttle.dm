@@ -39,7 +39,7 @@ var/list/supply_groups = new()
 /obj/structure/plasticflaps //HOW DO YOU CALL THOSE THINGS ANYWAY
 	name = "\improper Plastic flaps"
 	desc = "Durable plastic flaps."
-	icon = 'stationobjs.dmi' //Change this.
+	icon = 'icons/obj/stationobjs.dmi' //Change this.
 	icon_state = "plasticflaps"
 	density = 0
 	anchored = 1
@@ -89,7 +89,7 @@ var/list/supply_groups = new()
 
 /obj/machinery/computer/supplycomp
 	name = "Supply shuttle console"
-	icon = 'computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	icon_state = "supply"
 	req_access = list(access_cargo)
 	circuit = "/obj/item/weapon/circuitboard/supplycomp"
@@ -107,7 +107,7 @@ var/list/supply_groups = new()
 
 /obj/machinery/computer/ordercomp
 	name = "Supply ordering console"
-	icon = 'computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	icon_state = "request"
 	circuit = "/obj/item/weapon/circuitboard/ordercomp"
 	var/temp = null
@@ -122,7 +122,7 @@ var/list/supply_groups = new()
 
 /obj/effect/marker/supplymarker
 	icon_state = "X"
-	icon = 'mark.dmi'
+	icon = 'icons/misc/mark.dmi'
 	name = "X"
 	invisibility = 101
 	anchored = 1
@@ -476,7 +476,7 @@ This method wont take into account storage items developed in the future and doe
 		src.hacked = 1
 		return
 	if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			if (src.stat & BROKEN)
 				user << "\blue The broken glass falls out."

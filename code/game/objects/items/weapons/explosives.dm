@@ -27,7 +27,7 @@
 			log_admin("ATTACK: [user] ([user.ckey]) planted [src] on [target] ([target:ckey]).")
 			message_admins("ATTACK: [user] ([user.ckey]) planted [src] on [target] ([target:ckey]).")
 			log_attack("<font color='red'> [user.real_name] ([user.ckey]) tried planting [name] on [target:real_name] ([target:ckey])</font>")
-		target.overlays += image('assemblies.dmi', "plastic-explosive2")
+		target.overlays += image('icons/obj/assemblies.dmi', "plastic-explosive2")
 		user << "Bomb has been planted. Timer counting down from [timer]."
 		spawn(timer*10)
 			if(target)

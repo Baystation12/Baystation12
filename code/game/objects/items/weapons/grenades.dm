@@ -9,7 +9,7 @@ FLASHBANG
 	desc = "It is set to detonate in 5 seconds."
 	name = "emp grenade"
 	w_class = 2.0
-	icon = 'device.dmi'
+	icon = 'icons/obj/device.dmi'
 	icon_state = "emp"
 	item_state = "emp"
 	throw_speed = 4
@@ -33,7 +33,7 @@ FLASHBANG
 			user << "\red You prime the emp grenade! [det_time/10] seconds!"
 			src.active = 1
 			src.icon_state = "empar"
-			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
+			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 			spawn( src.det_time )
 				prime()
 				return
@@ -58,7 +58,7 @@ FLASHBANG
 
 
 	prime()
-		playsound(src.loc, 'Welder2.ogg', 25, 1)
+		playsound(src.loc, 'sound/items/Welder2.ogg', 25, 1)
 		var/turf/T = get_turf(src)
 		if(T)
 			T.hotspot_expose(700,125)
@@ -72,7 +72,7 @@ FLASHBANG
 			user << "\red Huh? How does this thing work?!"
 			src.active = 1
 			src.icon_state = "empar"
-			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
+			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 			spawn( 5 )
 				prime()
 			return 0
@@ -84,7 +84,7 @@ FLASHBANG
 /obj/item/weapon/flashbang
 	desc = "It is set to detonate in 3 seconds."
 	name = "flashbang"
-	icon = 'grenade.dmi'
+	icon = 'icons/obj/grenade.dmi'
 	icon_state = "flashbang"
 	w_class = 2.0
 	item_state = "flashbang"
@@ -138,7 +138,7 @@ FLASHBANG
 
 			src.active = 1
 			src.icon_state = "flashbang1"
-			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
+			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 			spawn(src.det_time)
 				prime()
 				return
@@ -165,7 +165,7 @@ FLASHBANG
 				S.icon_state = "shield0"
 
 		M << "\red <B>BANG</B>"
-		playsound(src.loc, 'bang.ogg', 25, 1)
+		playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 
 //Checking for protections
 		var/eye_safety = 0
@@ -281,7 +281,7 @@ FLASHBANG
 			user << "\red Huh? How does this thing work?!"
 			src.active = 1
 			src.icon_state = "flashbang1"
-			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
+			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 			spawn( 5 )
 				prime()
 			return 0
@@ -290,7 +290,7 @@ FLASHBANG
 /obj/item/weapon/flashbang/clusterbang
 	desc = "Use of this weapon may constiute a war crime in your area, consult your local captain."
 	name = "Clusterbang"
-	icon = 'grenade.dmi'
+	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang"
 	var/child = 0
 
@@ -303,7 +303,7 @@ FLASHBANG
 			message_admins("ATTACK: [user] ([user.ckey]) primed a [src].")
 			src.active = 1
 			src.icon_state = "clusterbang1"
-			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
+			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 			spawn(src.det_time)
 				arm(user)
 		return
@@ -338,7 +338,7 @@ FLASHBANG
 			var/obj/item/weapon/flashbang/F = new /obj/item/weapon/flashbang(src)
 			F.loc = src.loc
 			F.icon_state = "flashbang1"
-			playsound(src.loc, 'armbomb.ogg', 75, 1, -3)
+			playsound(src.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 			F.active = 1
 			F.banglet = 1
 			var/stepdist = rand(1,3)

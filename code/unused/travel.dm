@@ -2,7 +2,7 @@
 /obj/machinery/travel
 	name = "travel thingie"
 	desc = "it is used for travel idunno"
-	icon = 'travel.dmi'
+	icon = 'icons/obj/travel.dmi'
 	density = 1
 	anchored = 1
 

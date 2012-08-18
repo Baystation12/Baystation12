@@ -1,6 +1,6 @@
 /proc/power_failure()
 	command_alert("Abnormal activity detected in [station_name()]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure")
-	world << sound('poweroff.ogg')
+	world << sound('sound/announcer/poweroff.ogg')
 	for(var/obj/machinery/power/apc/C in world)
 		if(C.cell && C.z == 1)
 			C.cell.charge = 0
@@ -21,7 +21,7 @@
 
 /proc/power_restore()
 	command_alert("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal")
-	world << sound('poweron.ogg')
+	world << sound('sound/announcer/poweron.ogg')
 	for(var/obj/machinery/power/apc/C in world)
 		if(C.cell && C.z == 1)
 			C.cell.charge = C.cell.maxcharge

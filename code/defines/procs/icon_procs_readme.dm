@@ -122,19 +122,19 @@ Get Flat Icon DEMO by DarkCampainger
 This is a test for the get flat icon proc, modified approprietly for icons and their states.
 Probably not a good idea to run this unless you want to see how the proc works in detail.
 mob
-	icon = 'old_or_unused.dmi'
+	icon = 'icons/misc/old_or_unused.dmi'
 	icon_state = "green"
 
 	Login()
 		// Testing image underlays
-		underlays += image(icon='old_or_unused.dmi',icon_state="red")
-		underlays += image(icon='old_or_unused.dmi',icon_state="red", pixel_x = 32)
-		underlays += image(icon='old_or_unused.dmi',icon_state="red", pixel_x = -32)
+		underlays += image(icon='icons/misc/old_or_unused.dmi',icon_state="red")
+		underlays += image(icon='icons/misc/old_or_unused.dmi',icon_state="red", pixel_x = 32)
+		underlays += image(icon='icons/misc/old_or_unused.dmi',icon_state="red", pixel_x = -32)
 
 		// Testing image overlays
-		overlays += image(icon='old_or_unused.dmi',icon_state="green", pixel_x = 32, pixel_y = -32)
-		overlays += image(icon='old_or_unused.dmi',icon_state="green", pixel_x = 32, pixel_y = 32)
-		overlays += image(icon='old_or_unused.dmi',icon_state="green", pixel_x = -32, pixel_y = -32)
+		overlays += image(icon='icons/misc/old_or_unused.dmi',icon_state="green", pixel_x = 32, pixel_y = -32)
+		overlays += image(icon='icons/misc/old_or_unused.dmi',icon_state="green", pixel_x = 32, pixel_y = 32)
+		overlays += image(icon='icons/misc/old_or_unused.dmi',icon_state="green", pixel_x = -32, pixel_y = -32)
 
 		// Testing icon file overlays (defaults to mob's state)
 		overlays += '_flat_demoIcons2.dmi'
@@ -143,7 +143,7 @@ mob
 		overlays += "white"
 
 		// Testing dynamic icon overlays
-		var/icon/I = icon('old_or_unused.dmi', icon_state="aqua")
+		var/icon/I = icon('icons/misc/old_or_unused.dmi', icon_state="aqua")
 		I.Shift(NORTH,16,1)
 		overlays+=I
 
@@ -182,7 +182,7 @@ mob
 
 		Add_Overlay()
 			set name = "4. Add Overlay"
-			overlays += image(icon='old_or_unused.dmi',icon_state="yellow",pixel_x = rand(-64,32), pixel_y = rand(-64,32))
+			overlays += image(icon='icons/misc/old_or_unused.dmi',icon_state="yellow",pixel_x = rand(-64,32), pixel_y = rand(-64,32))
 
 		Stress_Test()
 			set name = "5. Stress Test"
@@ -200,7 +200,7 @@ mob
 			Browse_Icon()
 
 obj/effect/overlayTest
-	icon = 'old_or_unused.dmi'
+	icon = 'icons/misc/old_or_unused.dmi'
 	icon_state = "blue"
 	pixel_x = -24
 	pixel_y = 24

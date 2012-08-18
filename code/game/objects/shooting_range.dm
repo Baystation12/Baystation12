@@ -5,7 +5,7 @@
 /obj/structure/target_stake
 	name = "target stake"
 	desc = "A thin platform with negatively-magnetized wheels."
-	icon = 'objects.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_stake"
 	density = 1
 	flags = CONDUCT
@@ -63,7 +63,7 @@
 /obj/item/target
 	name = "shooting target"
 	desc = "A shooting target."
-	icon = 'objects.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_h"
 	density = 0
 	var/hp = 1800
@@ -163,7 +163,7 @@
 		var/obj/bmark = new
 		bmark.pixel_x = p_x
 		bmark.pixel_y = p_y
-		bmark.icon = 'effects.dmi'
+		bmark.icon = 'icons/effects/effects.dmi'
 		bmark.layer = 3.5
 		bmark.icon_state = "scorch"
 

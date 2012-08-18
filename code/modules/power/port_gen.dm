@@ -44,7 +44,7 @@ display round(lastgen) and plasmatank amount
 /obj/machinery/power/port_gen
 	name = "Portable Generator"
 	desc = "A portable generator for emergency backup power"
-	icon = 'power.dmi'
+	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
 	density = 1
 	anchored = 0
@@ -207,7 +207,7 @@ display round(lastgen) and plasmatank amount
 		else if(!active)
 			if(istype(O, /obj/item/weapon/wrench))
 				anchored = !anchored
-				playsound(src.loc, 'Deconstruct.ogg', 50, 1)
+				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 				if(anchored)
 					user << "\blue You secure the generator to the floor."
 				else
@@ -215,7 +215,7 @@ display round(lastgen) and plasmatank amount
 				makepowernets()
 			else if(istype(O, /obj/item/weapon/screwdriver))
 				open = !open
-				playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				if(open)
 					user << "\blue You open the access panel."
 				else

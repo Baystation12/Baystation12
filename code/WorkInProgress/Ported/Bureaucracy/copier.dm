@@ -2,7 +2,7 @@
 
 /obj/machinery/copier
 	name = "Copy Machine"
-	icon = 'bureaucracy.dmi'
+	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "copier_o"
 	density = 1
 	anchored = 1
@@ -115,7 +115,7 @@
 
 			// fx
 			flick("copier_s", src)
-			playsound(src, 'polaroid1.ogg', 50, 1)
+			playsound(src, 'sound/items/polaroid1.ogg', 50, 1)
 
 			// dup the file
 			if(istype(template, /obj/item/weapon/paper))

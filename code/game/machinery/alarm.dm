@@ -53,7 +53,7 @@
 
 /obj/machinery/alarm
 	name = "alarm"
-	icon = 'monitors.dmi'
+	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
 	anchored = 1
 	use_power = 1
@@ -1223,7 +1223,7 @@ table tr:first-child th:first-child { border: none;}
 	else
 		for(var/area/RA in A.related)
 			RA.firealert()
-	//playsound(src.loc, 'signal.ogg', 75, 0)
+	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
 	return
 
 /obj/machinery/partyalarm/attack_paw(mob/user as mob)

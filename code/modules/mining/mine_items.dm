@@ -85,7 +85,7 @@ proc/move_mining_shuttle()
 
 /obj/machinery/computer/mining_shuttle
 	name = "Mining Shuttle Console"
-	icon = 'computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
 	req_access = list(access_mining)
 	circuit = "/obj/item/weapon/circuitboard/mining_shuttle"
@@ -128,7 +128,7 @@ proc/move_mining_shuttle()
 		usr << "You fried the consoles ID checking system. It's now available to everyone!"
 
 	else if(istype(W, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 			var/obj/item/weapon/circuitboard/mining_shuttle/M = new /obj/item/weapon/circuitboard/mining_shuttle( A )
@@ -175,7 +175,7 @@ proc/move_mining_shuttle()
 
 /obj/item/weapon/pickaxe
 	name = "Miner's pickaxe"
-	icon = 'items.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "pickaxe"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	slot_flags = SLOT_BELT
@@ -261,7 +261,7 @@ proc/move_mining_shuttle()
 
 /obj/item/weapon/shovel
 	name = "Shovel"
-	icon = 'items.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "shovel"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	slot_flags = SLOT_BELT
@@ -284,7 +284,7 @@ proc/move_mining_shuttle()
 /obj/structure/closet/crate/miningcar
 	desc = "A mining car. This one doesn't work on rails, but has to be dragged."
 	name = "Mining car (not for rails)"
-	icon = 'storage.dmi'
+	icon = 'icons/obj/storage.dmi'
 	icon_state = "miningcar"
 	density = 1
 	icon_opened = "miningcaropen"

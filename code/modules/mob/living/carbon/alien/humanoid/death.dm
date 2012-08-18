@@ -7,7 +7,7 @@
 
 	if (!gibbed)
 //		emote("deathgasp") // Dead -- Skie // Doesn't work due to stat == 2 -- Urist
-		playsound(src.loc, 'hiss6.ogg', 80, 1, 1)
+		playsound(src.loc, 'sound/voice/hiss6.ogg', 80, 1, 1)
 		for(var/mob/O in viewers(src, null))
 			O.show_message("<B>[src]</B> lets out a waning guttural screech, green blood bubbling from its maw...", 1)
 

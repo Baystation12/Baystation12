@@ -43,7 +43,7 @@
 /obj/item/clothing/ears/offear
 	name = "Other ear"
 	w_class = 5.0
-	icon = 'screen1_old.dmi'
+	icon = 'icons/mob/screen1_old.dmi'
 	icon_state = "block"
 	twoeared = 1
 

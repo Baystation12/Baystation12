@@ -8,10 +8,10 @@
 	real_name = name
 	spawn (1)
 		if(!istype(src, /mob/living/carbon/alien/humanoid/queen))
-			stand_icon = new /icon('alien.dmi', "alien_s")
-			lying_icon = new /icon('alien.dmi', "alien_l")
-			resting_icon = new /icon('alien.dmi', "alienh_sleep")
-			running_icon = new /icon('alien.dmi', "alienh_running")
+			stand_icon = new /icon('icons/mob/alien.dmi', "alien_s")
+			lying_icon = new /icon('icons/mob/alien.dmi', "alien_l")
+			resting_icon = new /icon('icons/mob/alien.dmi', "alienh_sleep")
+			running_icon = new /icon('icons/mob/alien.dmi', "alienh_running")
 		icon = stand_icon
 		rebuild_appearance()
 		src << "\blue Your icons have been generated!"
@@ -328,7 +328,7 @@
 	if (zone_sel)
 		zone_sel.overlays = null
 		zone_sel.overlays += damageicon_standing
-		zone_sel.overlays += image("icon" = 'zone_sel.dmi', "icon_state" = text("[]", zone_sel.selecting))
+		zone_sel.overlays += image("icon" = 'icons/mob/zone_sel.dmi', "icon_state" = text("[]", zone_sel.selecting))
 
 	if (lying)
 		if(update_icon)
@@ -392,12 +392,12 @@
 		var/t1 = wear_suit.item_state
 		if (!t1)
 			t1 = wear_suit.icon_state
-		overlays += image("icon" = 'mob.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = SUIT_LAYER)
+		overlays += image("icon" = 'icons/mob/mob.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = SUIT_LAYER)
 		if (wear_suit.blood_DNA)
 			if (istype(wear_suit, /obj/item/clothing/suit/armor))
-				overlays += image("icon" = 'blood.dmi', "icon_state" = "armorblood[!lying ? "" : "2"]", "layer" = B_SUIT_LAYER)
+				overlays += image("icon" = 'icons/effects/blood.dmi', "icon_state" = "armorblood[!lying ? "" : "2"]", "layer" = B_SUIT_LAYER)
 			else
-				overlays += image("icon" = 'blood.dmi', "icon_state" = "suitblood[!lying ? "" : "2"]", "layer" = B_SUIT_LAYER)
+				overlays += image("icon" = 'icons/effects/blood.dmi', "icon_state" = "suitblood[!lying ? "" : "2"]", "layer" = B_SUIT_LAYER)
 		wear_suit.screen_loc = ui_alien_oclothing
 		if (istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
 			if (handcuffed)
@@ -417,9 +417,9 @@
 		var/t1 = head.item_state
 		if (!t1)
 			t1 = head.icon_state
-		overlays += image("icon" = 'mob.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = HEAD_LAYER)
+		overlays += image("icon" = 'icons/mob/mob.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = HEAD_LAYER)
 		if (head.blood_DNA)
-			overlays += image("icon" = 'blood.dmi', "icon_state" = "helmetblood[!lying ? "" : "2"]", "layer" = B_HEAD_LAYER)
+			overlays += image("icon" = 'icons/effects/blood.dmi', "icon_state" = "helmetblood[!lying ? "" : "2"]", "layer" = B_HEAD_LAYER)
 		head.screen_loc = ui_alien_head
 
 	if (l_store)
@@ -433,12 +433,12 @@
 		client.screen += contents
 
 	if (r_hand)
-		overlays += image("icon" = 'items_righthand.dmi', "icon_state" = r_hand.item_state ? r_hand.item_state : r_hand.icon_state, "layer" = INHANDS_LAYER)
+		overlays += image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = r_hand.item_state ? r_hand.item_state : r_hand.icon_state, "layer" = INHANDS_LAYER)
 
 		r_hand.screen_loc = ui_rhand
 
 	if (l_hand)
-		overlays += image("icon" = 'items_lefthand.dmi', "icon_state" = l_hand.item_state ? l_hand.item_state : l_hand.icon_state, "layer" = INHANDS_LAYER)
+		overlays += image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = l_hand.item_state ? l_hand.item_state : l_hand.icon_state, "layer" = INHANDS_LAYER)
 
 		l_hand.screen_loc = ui_lhand
 
@@ -511,7 +511,7 @@
 			if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
 				return
 			if (health > 0)
-				playsound(loc, 'bite.ogg', 50, 1, -1)
+				playsound(loc, 'sound/weapons/bite.ogg', 50, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[M.name] has bit [src]!</B>"), 1)
@@ -658,7 +658,7 @@
 
 			LAssailant = M
 
-			playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			for(var/mob/O in viewers(src, null))
 				if ((O.client && !( O.blinded )))
 					O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
@@ -690,7 +690,7 @@
 					playsound(loc, "punch", 25, 1, -1)
 				else if (M.type == /mob/living/carbon/human/tajaran)
 					damage += 10
-					playsound(loc, 'slice.ogg', 25, 1, -1)
+					playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 				visible_message("\red <B>[M] has [attack_verb]ed [src]!</B>")
 				if (damage > 9||prob(5))//Regular humans have a very small chance of weakening an alien.
 					Weaken(1,5)
@@ -701,9 +701,9 @@
 				updatehealth()
 			else
 				if(M.type != /mob/living/carbon/human/tajaran)
-					playsound(loc, 'punchmiss.ogg', 25, 1, -1)
+					playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				else if (M.type == /mob/living/carbon/human/tajaran)
-					playsound(loc, 'slashmiss.ogg', 25, 1, -1)
+					playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[] has attempted to [attack_verb] []!</B>", M, src), 1)
@@ -712,19 +712,19 @@
 			if (!lying)
 				if (prob(5))//Very small chance to push an alien down.
 					Weaken(2)
-					playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+					playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 					for(var/mob/O in viewers(src, null))
 						if ((O.client && !( O.blinded )))
 							O.show_message(text("\red <B>[] has pushed down []!</B>", M, src), 1)
 				else
 					if (prob(50))
 						drop_item()
-						playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 						for(var/mob/O in viewers(src, null))
 							if ((O.client && !( O.blinded )))
 								O.show_message(text("\red <B>[] has disarmed []!</B>", M, src), 1)
 					else
-						playsound(loc, 'punchmiss.ogg', 25, 1, -1)
+						playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 						for(var/mob/O in viewers(src, null))
 							if ((O.client && !( O.blinded )))
 								O.show_message(text("\red <B>[] has attempted to disarm []!</B>", M, src), 1)
@@ -761,7 +761,7 @@ In all, this is a lot like the monkey code. /N
 
 		else
 			if (health > 0)
-				playsound(loc, 'bite.ogg', 50, 1, -1)
+				playsound(loc, 'sound/weapons/bite.ogg', 50, 1, -1)
 				var/damage = rand(1, 3)
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))

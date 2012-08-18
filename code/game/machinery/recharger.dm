@@ -2,7 +2,7 @@
 
 obj/machinery/recharger
 	anchored = 1
-	icon = 'stationobjs.dmi'
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "recharger0"
 	name = "recharger"
 	use_power = 1
@@ -48,7 +48,7 @@ obj/machinery/recharger
 				return
 			anchored = !anchored
 			user << "You [anchored ? "attach" : "detach"] the recharger [anchored ? "to" : "from"] the ground"
-			playsound(src.loc, 'Ratchet.ogg', 75, 1)
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 
 	attack_hand(mob/user as mob)
 		src.add_fingerprint(user)

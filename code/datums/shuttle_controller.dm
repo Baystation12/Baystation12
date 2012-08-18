@@ -56,7 +56,7 @@ datum/shuttle_controller
 				if(timeleft >= 600)
 					return
 				captain_announce("The emergency shuttle has been recalled.")
-				world << sound('shuttlerecalled.ogg')
+				world << sound('sound/announcer/shuttlerecalled.ogg')
 				setdirection(-1)
 				online = 1
 				for(var/area/A in world)
@@ -108,7 +108,7 @@ datum/shuttle_controller
 				timeleft = 0
 		//	if (sound_siren && (direction == 1))	//playing siren every 90 seconds
 		//		sound_siren = 0						//No siren, people hat it
-		//		world << sound('siren.ogg')
+		//		world << sound('sound/effects/siren.ogg')
 		//		spawn(900)
 		//			sound_siren = 1
 			switch(location)
@@ -204,7 +204,7 @@ datum/shuttle_controller
 						settimeleft(SHUTTLELEAVETIME)
 						if(alert == 0)
 							captain_announce("The Emergency Shuttle has docked with the station. You have [timeleft()/60] minutes to board the Emergency Shuttle.")
-							world << sound('shuttledock.ogg')
+							world << sound('sound/announcer/shuttledock.ogg')
 						else
 							captain_announce("The shuttle has docked with the station. You have [timeleft()/60] minutes to board the shuttle.")
 						return 1

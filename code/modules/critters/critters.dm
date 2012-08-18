@@ -1,7 +1,7 @@
 /obj/effect/critter/creature
 	name = "creature"
 	desc = "A sanity-destroying otherthing."
-	icon = 'otherthing.dmi'
+	icon = 'icons/obj/otherthing.dmi'
 	icon_state = "otherthing"
 	health = 80
 	max_health = 80
@@ -20,7 +20,7 @@
 	melee_damage_upper = 50
 	angertext = "runs"
 	attacktext = "chomps"
-	attack_sound = 'bite.ogg'
+	attack_sound = 'sound/weapons/bite.ogg'
 
 
 /obj/effect/critter/roach
@@ -123,7 +123,7 @@
 	melee_damage_upper = 8
 	angertext = "charges"
 	attacktext = "hits"
-	attack_sound = 'genhit1.ogg'
+	attack_sound = 'sound/weapons/genhit1.ogg'
 
 	Die()
 		..()
@@ -151,7 +151,7 @@
 	melee_damage_upper = 15
 	angertext = "lunges"
 	attacktext = "bites"
-	attack_sound = 'bite.ogg'
+	attack_sound = 'sound/weapons/bite.ogg'
 	attack_speed = 10
 	speed = 8
 	chasespeed = 8
@@ -189,7 +189,7 @@
 				target.Weaken(rand(10, 15))
 				for(var/mob/O in viewers(src, null))
 					O.show_message("\red <B>[src]</B> knocks down [target]!", 1)
-				playsound(loc, 'pierce.ogg', 25, 1, -1)
+				playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
 
 
 

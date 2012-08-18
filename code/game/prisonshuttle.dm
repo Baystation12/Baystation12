@@ -12,7 +12,7 @@ var/prison_shuttle_timeleft = 0
 
 /obj/machinery/computer/prison_shuttle
 	name = "Prison Shuttle Console"
-	icon = 'computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
 	req_access = list(access_security)
 	circuit = "/obj/item/weapon/circuitboard/prison_shuttle"
@@ -36,7 +36,7 @@ var/prison_shuttle_timeleft = 0
 
 	attackby(I as obj, user as mob)
 		if(istype(I, /obj/item/weapon/screwdriver))
-			playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			if(do_after(user, 20))
 				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 				var/obj/item/weapon/circuitboard/prison_shuttle/M = new /obj/item/weapon/circuitboard/prison_shuttle( A )

@@ -65,9 +65,9 @@
 
 	spawn (1)
 		if(!stand_icon)
-			stand_icon = new /icon('monkey.dmi', "monkey1")
+			stand_icon = new /icon('icons/mob/monkey.dmi', "monkey1")
 		if(!lying_icon)
-			lying_icon = new /icon('monkey.dmi', "monkey0")
+			lying_icon = new /icon('icons/mob/monkey.dmi', "monkey0")
 		icon = stand_icon
 		rebuild_appearance()
 		src << "\blue Your icons have been generated!"
@@ -187,7 +187,7 @@
 	else
 		if ((M.a_intent == "hurt" && !( istype(wear_mask, /obj/item/clothing/mask/muzzle) )))
 			if ((prob(75) && health > 0))
-				playsound(loc, 'bite.ogg', 50, 1, -1)
+				playsound(loc, 'sound/weapons/bite.ogg', 50, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					O.show_message("\red <B>[M.name] has bit [name]!</B>", 1)
 				var/damage = rand(1, 5)
@@ -256,7 +256,7 @@
 					playsound(loc, "punch", 25, 1, -1)
 				else if(M.type == /mob/living/carbon/human/tajaran)
 					damage += 10
-					playsound(loc, 'slice.ogg', 25, 1, -1)
+					playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 				if (prob(40))
 					damage = rand(10, 15)
 					if (paralysis < 5)
@@ -271,9 +271,9 @@
 				react_to_attack(M)
 			else
 				if(M.type != /mob/living/carbon/human/tajaran)
-					playsound(loc, 'punchmiss.ogg', 25, 1, -1)
+					playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				else if(M.type == /mob/living/carbon/human/tajaran)
-					playsound(loc, 'slashmiss.ogg', 25, 1, -1)
+					playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[] has attempted to [attack_verb] [name]!</B>", M), 1)
@@ -296,7 +296,7 @@
 
 				LAssailant = M
 
-				playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					O.show_message(text("\red [] has grabbed [name] passively!", M), 1)
 
@@ -305,14 +305,14 @@
 				if (!( paralysis ))
 					if (prob(25))
 						Paralyse(2)
-						playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 						for(var/mob/O in viewers(src, null))
 							if ((O.client && !( O.blinded )))
 								O.show_message(text("\red <B>[] has pushed down [name]!</B>", M), 1)
 						react_to_attack(M)
 					else
 						drop_item()
-						playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 						for(var/mob/O in viewers(src, null))
 							if ((O.client && !( O.blinded )))
 								O.show_message(text("\red <B>[] has disarmed [name]!</B>", M), 1)
@@ -336,7 +336,7 @@
 
 		if ("hurt")
 			if ((prob(95) && health > 0))
-				playsound(loc, 'slice.ogg', 25, 1, -1)
+				playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 				var/damage = rand(15, 30)
 				if (damage >= 25)
 					damage = rand(20, 40)
@@ -353,7 +353,7 @@
 				updatehealth()
 				react_to_attack(M)
 			else
-				playsound(loc, 'slashmiss.ogg', 25, 1, -1)
+				playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[] has attempted to lunge at [name]!</B>", M), 1)
@@ -374,12 +374,12 @@
 
 			LAssailant = M
 
-			playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			for(var/mob/O in viewers(src, null))
 				O.show_message(text("\red [] has grabbed [name] passively!", M), 1)
 
 		if ("disarm")
-			playsound(loc, 'pierce.ogg', 25, 1, -1)
+			playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
 			var/damage = 5
 			if(prob(95))
 				Weaken(rand(10,15))
@@ -512,30 +512,30 @@
 	if (wear_mask)
 		if (istype(wear_mask, /obj/item/clothing/mask))
 			var/t1 = wear_mask.icon_state
-			overlays += image("icon" = 'monkey.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = layer)
+			overlays += image("icon" = 'icons/mob/monkey.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = layer)
 			wear_mask.screen_loc = ui_monkey_mask
 
 	if (r_hand)
 		if(update_icon)
-			overlays += image("icon" = 'items_righthand.dmi', "icon_state" = r_hand.item_state ? r_hand.item_state : r_hand.icon_state, "layer" = layer)
+			overlays += image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = r_hand.item_state ? r_hand.item_state : r_hand.icon_state, "layer" = layer)
 		r_hand.screen_loc = ui_rhand
 
 	if (l_hand)
 		if(update_icon)
-			overlays += image("icon" = 'items_lefthand.dmi', "icon_state" = l_hand.item_state ? l_hand.item_state : l_hand.icon_state, "layer" = layer)
+			overlays += image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = l_hand.item_state ? l_hand.item_state : l_hand.icon_state, "layer" = layer)
 		l_hand.screen_loc = ui_lhand
 
 	if (back)
 		var/t1 = back.icon_state //apparently tables make me upset and cause my dreams to shatter
-		overlays += image("icon" = 'back.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = layer)
+		overlays += image("icon" = 'icons/mob/back.dmi', "icon_state" = text("[][]", t1, (!( lying ) ? null : "2")), "layer" = layer)
 		back.screen_loc = ui_monkey_back
 
 	if (handcuffed && update_icon)
 		pulling = null
 		if (!( lying ))
-			overlays += image("icon" = 'monkey.dmi', "icon_state" = "handcuff1", "layer" = layer)
+			overlays += image("icon" = 'icons/mob/monkey.dmi', "icon_state" = "handcuff1", "layer" = layer)
 		else
-			overlays += image("icon" = 'monkey.dmi', "icon_state" = "handcuff2", "layer" = layer)
+			overlays += image("icon" = 'icons/mob/monkey.dmi', "icon_state" = "handcuff2", "layer" = layer)
 
 	if (client)
 		client.screen -= contents
@@ -578,16 +578,16 @@
 
 /mob/living/carbon/monkey/proc/update_body()
 
-	stand_icon = new /icon('monkey.dmi', "torso_s")
-	lying_icon = new /icon('monkey.dmi', "torso_l")
+	stand_icon = new /icon('icons/mob/monkey.dmi', "torso_s")
+	lying_icon = new /icon('icons/mob/monkey.dmi', "torso_l")
 
-	stand_icon.Blend(new /icon('monkey.dmi', "chest_s"), ICON_OVERLAY)
-	lying_icon.Blend(new /icon('monkey.dmi', "chest_l"), ICON_OVERLAY)
+	stand_icon.Blend(new /icon('icons/mob/monkey.dmi', "chest_s"), ICON_OVERLAY)
+	lying_icon.Blend(new /icon('icons/mob/monkey.dmi', "chest_l"), ICON_OVERLAY)
 
 	var/datum/organ/external/head = organs["head"]
 	if(!head.destroyed)
-		stand_icon.Blend(new /icon('monkey.dmi', "head_s"), ICON_OVERLAY)
-		lying_icon.Blend(new /icon('monkey.dmi', "head_l"), ICON_OVERLAY)
+		stand_icon.Blend(new /icon('icons/mob/monkey.dmi', "head_s"), ICON_OVERLAY)
+		lying_icon.Blend(new /icon('icons/mob/monkey.dmi', "head_l"), ICON_OVERLAY)
 
 	for(var/name in organs)
 		var/datum/organ/external/part = organs[name]
@@ -595,15 +595,15 @@
 			&& !istype(part, /datum/organ/external/chest) \
 			&& !istype(part, /datum/organ/external/head) \
 			&& !part.destroyed)
-			var/icon/temp = new /icon('monkey.dmi', "[part.icon_name]_s")
+			var/icon/temp = new /icon('icons/mob/monkey.dmi', "[part.icon_name]_s")
 			if(part.robot) temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
 			stand_icon.Blend(temp, ICON_OVERLAY)
-			temp = new /icon('monkey.dmi', "[part.icon_name]_l")
+			temp = new /icon('icons/mob/monkey.dmi', "[part.icon_name]_l")
 			if(part.robot) temp.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
 			lying_icon.Blend(temp , ICON_OVERLAY)
 
-	stand_icon.Blend(new /icon('monkey.dmi', "groin_s"), ICON_OVERLAY)
-	lying_icon.Blend(new /icon('monkey.dmi', "groin_l"), ICON_OVERLAY)
+	stand_icon.Blend(new /icon('icons/mob/monkey.dmi', "groin_s"), ICON_OVERLAY)
+	lying_icon.Blend(new /icon('icons/mob/monkey.dmi', "groin_l"), ICON_OVERLAY)
 
 /mob/living/carbon/monkey/Move()
 	if ((!( buckled ) || buckled.loc != loc))
@@ -942,12 +942,12 @@
 		var/datum/organ/external/O = organs[name]
 		if(!O.destroyed)
 			O.update_icon()
-			var/icon/DI = new /icon('dam_human.dmi', O.damage_state)			// the damage icon for whole human
-			DI.Blend(new /icon('dam_mask.dmi', O.icon_name), ICON_MULTIPLY)		// mask with this organ's pixels
+			var/icon/DI = new /icon('icons/mob/dam_human.dmi', O.damage_state)			// the damage icon for whole human
+			DI.Blend(new /icon('icons/mob/dam_mask.dmi', O.icon_name), ICON_MULTIPLY)		// mask with this organ's pixels
 		//		world << "[O.icon_name] [O.damage_state] \icon[DI]"
 			body_standing += DI
-			DI = new /icon('dam_human.dmi', "[O.damage_state]-2")				// repeat for lying icons
-			DI.Blend(new /icon('dam_mask.dmi', "[O.icon_name]2"), ICON_MULTIPLY)
+			DI = new /icon('icons/mob/dam_human.dmi', "[O.damage_state]-2")				// repeat for lying icons
+			DI.Blend(new /icon('icons/mob/dam_mask.dmi', "[O.icon_name]2"), ICON_MULTIPLY)
 		//		world << "[O.r_name]2 [O.d_i_state]-2 \icon[DI]"
 			body_lying += DI*/
 

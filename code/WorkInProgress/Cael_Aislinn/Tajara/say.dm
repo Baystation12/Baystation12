@@ -409,7 +409,7 @@
 			heard_b += M
 
 	var/speech_bubble_test = say_test(message)
-	var/image/speech_bubble = image('talk.dmi',src,"h[speech_bubble_test]")
+	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
 
 	var/rendered = null
 	if (length(heard_a))
@@ -430,7 +430,7 @@
 /*
 		// Create speech bubble
 		var/obj/effect/speech_bubble/B = new/obj/effect/speech_bubble
-		B.icon = 'speechbubble.dmi'
+		B.icon = 'icons/effects/speechbubble.dmi'
 		B.parent = src
 		B.mouse_opacity = 0
 		B.invisibility = invisibility
@@ -456,7 +456,7 @@
 
 				// If this client has bubbles disabled, obscure the bubble
 				if(!M.client.bubbles || M == src)
-					var/image/I = image('speechbubble.dmi', B, "override")
+					var/image/I = image('icons/effects/speechbubble.dmi', B, "override")
 					I.override = 1
 					M << I
 			*/
@@ -499,7 +499,7 @@
 		/*
 		// Create speech bubble
 		var/obj/effect/speech_bubble/B = new/obj/effect/speech_bubble
-		B.icon = 'speechbubble.dmi'
+		B.icon = 'icons/effects/speechbubble.dmi'
 		B.parent = src
 		B.mouse_opacity = 0
 		B.invisibility = invisibility
@@ -524,7 +524,7 @@
 			if(M.client)
 
 				if(!M.client.bubbles || M == src)
-					var/image/I = image('speechbubble.dmi', B, "override")
+					var/image/I = image('icons/effects/speechbubble.dmi', B, "override")
 					I.override = 1
 					M << I
 

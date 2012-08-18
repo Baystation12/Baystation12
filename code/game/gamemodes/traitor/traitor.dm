@@ -155,7 +155,7 @@
 		killer << "Unfortunately, the Syndicate did not provide you with a code response."
 	killer << "Use the code words in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe."
 	spawn(30)
-		killer << sound('AISyndiHack.ogg',volume=50)
+		killer << sound('sound/voice/AISyndiHack.ogg',volume=50)
 	//End code phrase.
 
 
@@ -315,5 +315,5 @@
 			traitor_mob << "Unfortunately, the Syndicate did not provide you with a code response."
 		traitor_mob << "Use the code words in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe."
 		spawn(30)
-			traitor_mob << sound('syndicate intro.ogg',volume=50)
+			traitor_mob << sound('sound/voice/syndicate intro.ogg',volume=50)
 	//End code phrase.

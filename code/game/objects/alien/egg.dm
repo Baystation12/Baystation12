@@ -84,7 +84,7 @@
 
 		if(WT.welding)
 			damage = 15
-			playsound(src.loc, 'Welder.ogg', 100, 1)
+			playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 
 	src.health -= damage
 	src.healthcheck()

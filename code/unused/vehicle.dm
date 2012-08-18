@@ -1,6 +1,6 @@
 /obj/machinery/vehicle
 	name = "Vehicle Pod"
-	icon = 'escapepod.dmi'
+	icon = 'icons/obj/escapepod.dmi'
 	icon_state = "podfire"
 	density = 1
 	flags = FPRINT
@@ -15,7 +15,7 @@
 /obj/machinery/vehicle/pod
 	name = "Escape Pod"
 	desc = "A pod, for, moving in space"
-	icon = 'escapepod.dmi'
+	icon = 'icons/obj/escapepod.dmi'
 	icon_state = "pod"
 	can_rotate = 0
 	var/id = 1.0
@@ -23,7 +23,7 @@
 /obj/machinery/vehicle/recon
 	name = "Reconaissance Pod"
 	desc = "A fast moving pod."
-	icon = 'escapepod.dmi'
+	icon = 'icons/obj/escapepod.dmi'
 	icon_state = "recon"
 	speed = 1.0
 	maximum_speed = 30.0
@@ -179,7 +179,7 @@
 
 
 /obj/machinery/vehicle/space_ship
-	icon = 'escapepod.dmi'
+	icon = 'icons/obj/escapepod.dmi'
 	icon_state = "pod"
 	var/datum/global_iterator/space_ship_inertial_movement/pr_inertial_movement
 	var/datum/global_iterator/space_ship_speed_increment/pr_speed_increment

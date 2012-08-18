@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 29/05/2012 15:03:06
 
 /obj/machinery/shipcore
-	icon = 'craft.dmi'
+	icon = 'icons/obj/craft.dmi'
 	icon_state = "core"
 	density = 1
 
@@ -194,7 +194,7 @@ obj/machinery/shipcore/Topic(href, href_list)
 
 obj/machinery/ship_component
 	name = "ship component"
-	icon = 'craft.dmi'
+	icon = 'icons/obj/craft.dmi'
 	var/obj/machinery/shipcore/core
 	var/required_draw = 0
 	var/active = 1
@@ -299,7 +299,7 @@ obj/machinery/ship_component/control_panel
 
 
 /obj/ship_builder
-	icon = 'craft.dmi'
+	icon = 'icons/obj/craft.dmi'
 	icon_state = "builder"
 	density = 0
 	opacity = 0
@@ -326,11 +326,11 @@ obj/machinery/ship_component/control_panel
 
 
 /obj/ship_overlay
-	icon = 'craft.dmi'
+	icon = 'icons/obj/craft.dmi'
 	icon_state = "ship_overlay"
 
 /obj/effect/ship_landing_beacon
-	icon = 'craft.dmi'
+	icon = 'icons/obj/craft.dmi'
 	icon_state = "beacon"
 	name = "Beacon"
 	var/active = 0

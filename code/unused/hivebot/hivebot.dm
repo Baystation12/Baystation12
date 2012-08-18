@@ -207,7 +207,7 @@
 		G.affecting = src
 		src.grabbed_by += G
 		G.synch()
-		playsound(src.loc, 'thudswoosh.ogg', 50, 1, -1)
+		playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		for(var/mob/O in viewers(src, null))
 			O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
 
@@ -221,7 +221,7 @@
 					src.weakened = max(src.weakened,4)
 					src.stunned = max(src.stunned,4)
 		*/
-			playsound(src.loc, 'slash.ogg', 25, 1, -1)
+			playsound(src.loc, 'sound/weapons/slash.ogg', 25, 1, -1)
 			for(var/mob/O in viewers(src, null))
 				O.show_message(text("\red <B>[] has slashed at []!</B>", M, src), 1)
 			if(prob(8))
@@ -229,7 +229,7 @@
 			src.adjustBruteLoss(damage)
 			src.updatehealth()
 		else
-			playsound(src.loc, 'slashmiss.ogg', 25, 1, -1)
+			playsound(src.loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 			for(var/mob/O in viewers(src, null))
 				O.show_message(text("\red <B>[] took a swipe at []!</B>", M, src), 1)
 			return
@@ -241,11 +241,11 @@
 				src.stunned = 5
 				step(src,get_dir(M,src))
 				spawn(5) step(src,get_dir(M,src))
-				playsound(src.loc, 'slash.ogg', 50, 1, -1)
+				playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					O.show_message(text("\red <B>[] has pushed back []!</B>", M, src), 1)
 			else
-				playsound(src.loc, 'slashmiss.ogg', 25, 1, -1)
+				playsound(src.loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 				for(var/mob/O in viewers(src, null))
 					O.show_message(text("\red <B>[] attempted to push back []!</B>", M, src), 1)
 	return

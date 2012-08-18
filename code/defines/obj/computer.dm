@@ -1,6 +1,6 @@
 /obj/machinery/computer
 	name = "computer"
-	icon = 'computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	density = 1
 	anchored = 1.0
 	var/obj/item/weapon/circuitboard/circuit = null //if circuit==null, computer can't disassemble
@@ -93,7 +93,7 @@
 /obj/machinery/computer/security/telescreen
 	name = "Telescreen"
 	desc = "Used for watching an empty arena."
-	icon = 'stationobjs.dmi'
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "telescreen"
 	department = ""
 	network = "Thunderdome"
@@ -118,7 +118,7 @@
 /*/obj/machinery/computer/scan_consolenew    //Coming Soon, I highly doubt this but Ill leave it here anyways
 	name = "DNA Modifier Access Console"
 	desc = "Scand DNA."
-	icon = 'computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	icon_state = "scanner"
 	density = 1
 	var/uniblock = 1.0

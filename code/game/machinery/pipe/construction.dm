@@ -28,7 +28,7 @@ Buildable meters
 	//var/pipe_dir = 0
 	var/pipename
 	force = 7
-	icon = 'pipe-item.dmi'
+	icon = 'icons/obj/pipe-item.dmi'
 	icon_state = "simple"
 	item_state = "buildpipe"
 	flags = TABLEPASS|FPRINT
@@ -527,7 +527,7 @@ Buildable meters
 				C.node.initialize()
 				C.node.build_network()
 
-	playsound(src.loc, 'Ratchet.ogg', 50, 1)
+	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	user.visible_message( \
 		"[user] fastens the [src].", \
 		"\blue You have fastened the [src].", \
@@ -544,7 +544,7 @@ Buildable meters
 /obj/item/pipe_meter
 	name = "meter"
 	desc = "A meter that can be laid on pipes"
-	icon = 'pipe-item.dmi'
+	icon = 'icons/obj/pipe-item.dmi'
 	icon_state = "meter"
 	item_state = "buildpipe"
 	flags = TABLEPASS|FPRINT
@@ -559,7 +559,7 @@ Buildable meters
 		user << "\red You need to fasten it to a pipe"
 		return 1
 	new/obj/machinery/meter( src.loc )
-	playsound(src.loc, 'Ratchet.ogg', 50, 1)
+	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	user << "\blue You have fastened the meter to the pipe"
 	del(src)
 

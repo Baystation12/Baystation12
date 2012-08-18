@@ -21,18 +21,18 @@
 // now constructs damage icon for each organ from mask * damage field
 
 /mob/living/carbon/human/UpdateDamageIcon()
-	var/icon/standing = new /icon('dam_human.dmi', "00")
-	var/icon/lying = new /icon('dam_human.dmi', "00-2")
+	var/icon/standing = new /icon('icons/mob/dam_human.dmi', "00")
+	var/icon/lying = new /icon('icons/mob/dam_human.dmi', "00-2")
 	for(var/name in organs)
 		var/datum/organ/external/O = organs[name]
 		if(!O.destroyed)
 			O.update_icon()
-			var/icon/DI = new /icon('dam_human.dmi', O.damage_state)			// the damage icon for whole human
-			DI.Blend(new /icon('dam_mask.dmi', O.icon_name), ICON_MULTIPLY)		// mask with this organ's pixels
+			var/icon/DI = new /icon('icons/mob/dam_human.dmi', O.damage_state)			// the damage icon for whole human
+			DI.Blend(new /icon('icons/mob/dam_mask.dmi', O.icon_name), ICON_MULTIPLY)		// mask with this organ's pixels
 		//		world << "[O.icon_name] [O.damage_state] \icon[DI]"
 			standing.Blend(DI,ICON_OVERLAY)
-			DI = new /icon('dam_human.dmi', "[O.damage_state]-2")				// repeat for lying icons
-			DI.Blend(new /icon('dam_mask.dmi', "[O.icon_name]2"), ICON_MULTIPLY)
+			DI = new /icon('icons/mob/dam_human.dmi', "[O.damage_state]-2")				// repeat for lying icons
+			DI.Blend(new /icon('icons/mob/dam_mask.dmi', "[O.icon_name]2"), ICON_MULTIPLY)
 		//		world << "[O.r_name]2 [O.d_i_state]-2 \icon[DI]"
 			lying.Blend(DI,ICON_OVERLAY)
 	damageicon_standing = new /image("icon" = standing, "layer" = DAMAGE_LAYER)

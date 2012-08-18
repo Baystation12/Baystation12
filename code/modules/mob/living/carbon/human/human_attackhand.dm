@@ -38,7 +38,7 @@
 
 			var/damage = rand(0, 9)
 			if(!damage)
-				playsound(loc, 'punchmiss.ogg', 25, 1, -1)
+				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				visible_message("\red <B>[M] has attempted to punch [src]!</B>")
 				return 0
 			var/datum/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
@@ -100,7 +100,7 @@
 			G.synch()
 			LAssailant = M
 
-			playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			visible_message("\red [M] has grabbed [src] passively!")
 			return 1
 
@@ -156,9 +156,9 @@
 			if(!damage)
 				switch(attack_verb)
 					if(("slash") || ("scratch"))
-						playsound(loc, 'slashmiss.ogg', 25, 1, -1)
+						playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 					else
-						playsound(loc, 'punchmiss.ogg', 25, 1, -1)
+						playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
 				visible_message("\red <B>[M] has attempted to [attack_verb] [src]!</B>")
 				return 0
@@ -173,7 +173,7 @@
 			switch(attack_verb)
 				if(("slash") || ("scratch"))
 					damage += 10
-					playsound(loc, 'slice.ogg', 25, 1, -1)
+					playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 				else
 					playsound(loc, "punch", 25, 1, -1)
 
@@ -199,7 +199,7 @@
 			var/randn = rand(1, 100)
 			if (randn <= 25)
 				apply_effect(5, WEAKEN, run_armor_check(affecting, "melee"))
-				playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				visible_message("\red <B>[M] has pushed [src]!</B>")
 				return
 
@@ -232,11 +232,11 @@
 				if(!talked)	//BubbleWrap
 					drop_item()
 					visible_message("\red <B>[M] has disarmed [src]!</B>")
-				playsound(loc, 'thudswoosh.ogg', 50, 1, -1)
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				return
 
 
-			playsound(loc, 'punchmiss.ogg', 25, 1, -1)
+			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 			visible_message("\red <B>[M] attempted to disarm [src]!</B>")
 	return
 

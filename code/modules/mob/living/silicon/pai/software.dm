@@ -72,7 +72,7 @@
 			<html>
 			<head>
 				<style type=\"text/css\">
-					body { background-image:url('paigrid.png'); }
+					body { background-image:url('html/paigrid.png'); }
 
 					#header { text-align:center; color:white; font-size: 30px; height: 35px; width: 100%; letter-spacing: 2px; z-index: 5}
 					#content {position: relative; left: 10px; height: 400px; width: 100%; z-index: 0}
@@ -190,12 +190,12 @@
 							ai.show_message("<i>Intercepted message from <b>[who]</b>: [t]</i>")
 
 					if(!P.silent)
-						playsound(P.loc, 'twobeep.ogg', 50, 1)
+						playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
 						for (var/mob/O in hearers(3, P.loc))
 							O.show_message(text("\icon[P] *[P.ttone]*"))
 
 					P.overlays = null
-					P.overlays += image('pda.dmi', "pda-r")
+					P.overlays += image('icons/obj/pda.dmi', "pda-r")
 
 				// pAI Message
 				else
@@ -221,7 +221,7 @@
 						for (var/mob/living/silicon/ai/ai in world)
 							ai.show_message("<i>Intercepted message from <b>[who]</b>: [t]</i>")
 
-					playsound(P.loc, 'twobeep.ogg', 50, 1)
+					playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
 
 		// Accessing medical records
 		if("medicalrecord")
