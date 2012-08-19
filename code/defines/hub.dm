@@ -1,8 +1,8 @@
 
 world
-	hub = "Exadv1.spacestation13"
-	hub_password = "kMZy3U5jJHSiBQjr"
-	name = "Baystation 12"
+	//hub = "Exadv1.spacestation13"
+	//hub_password = "kMZy3U5jJHSiBQjr"
+	name = "NanodesuStation 13"
 
 /*
 This is for any host that would like their server to appear on the main SS13 hub.
