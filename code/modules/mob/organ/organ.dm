@@ -458,6 +458,9 @@
 
 	process()
 		// process wounds, doing healing etc., only do this every 4 ticks to save processing power
+		// sometimes it is NULL - nanodesu
+		if(!owner)
+			return
 		if(owner.life_tick % 4 == 0)
 			update_wounds()
 		if(status & ORGAN_DESTROYED)
@@ -659,6 +662,9 @@
 
 			// check whether we can add the wound to an existing wound
 			for(var/datum/wound/other in wounds)
+				// nanodesu
+				if(!other)
+					return
 				if(other.desc == W.desc)
 					// okay, add it!
 					other.damage += W.damage
