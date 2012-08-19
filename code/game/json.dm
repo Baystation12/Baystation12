@@ -1,12 +1,14 @@
 
-var/jsonpath = "/home/bay12/public_html"
-var/dmepath = "/home/bay12/git/baystation12.dme"
-var/makejson = 1 //temp
+var/jsonpath = "/ss13"
+var/dmepath = "/ss13/git/baystation12.dme"
+var/makejson = 0 //temp
+var/makejsonlocal = 1 //temp
+
 proc/makejson()
 
-	if(!makejson)
+	if(!makejsonlocal)
 		return
-	fdel("[jsonpath]/info.json")
+	//fdel("[jsonpath]/info.json")
 		//usr << "Error cant delete json"
 	//else
 		//usr << "Deleted json in public html"
@@ -39,7 +41,7 @@ proc/makejson()
 		else
 			players += "[C.key];"
 	F << "{\"mode\":\"[mode]\",\"players\" : \"[players]\",\"playercount\" : \"[playerscount]\",\"admin\" : \"[admins]\",\"time\" : \"[time2text(world.realtime,"MM/DD - hh:mm")]\"}"
-	fcopy("info.json","[jsonpath]/info.json")
+	//fcopy("info.json","[jsonpath]/info.json")
 
 /proc/switchmap(newmap,newpath)
 	var/oldmap
