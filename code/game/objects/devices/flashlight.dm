@@ -212,18 +212,56 @@
 		ul_SetLuminosity(brightness_on, brightness_on - 1, 0)
 
 //RIG helmet light
-/obj/item/clothing/head/helmet/space/rig/attack_self(mob/user)
-	if(!isturf(user.loc))
-		user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
-		return
-	on = !on
-	icon_state = "rig[on]-[color]"
-	item_state = "rig[on]-[color]"
+/obj/item/clothing/head/helmet/space/rig/verb/turn_light()
+	set category = "Object"
+	set name = "Turn helmet light"
+	set src in usr
 
-	if(on)
-		user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
-	else
-		user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
+	if ( !(usr.stat || usr.restrained()) )
+		if(!isturf(usr.loc))
+			usr << "You cannot turn the light on while in this [usr.loc]" //To prevent some lighting anomalities.
+			return
+		Turning(usr)
+
+/obj/item/clothing/head/helmet/space/rig/proc/Turning(mob/user)
+	if(!on && charge >= 0 || on)
+		on = !on
+		icon_state = "rig[on]-[color]"
+		item_state = "rig[on]-[color]"
+
+		UpdateLuminosity(user)
+
+/obj/item/clothing/head/helmet/space/rig/proc/Lighting()
+	spawn()
+		while(src)
+			if(brightness_on)
+				sleep(10)
+				if(on)
+					charge -= 1 // one unit per sec
+					if(charge <= 0)
+						Turning(src)
+				else
+					if(charge < 600)
+						sleep(10) // 5 units per 2 sec
+						charge += 5
+					else
+						charge = 600
+
+/obj/item/clothing/head/helmet/space/rig/New()
+	Lighting()
+
+/obj/item/clothing/head/helmet/space/rig/proc/UpdateLuminosity(mob/user)
+	if(brightness_on)
+		if(on)
+			if(src.loc == user)
+				user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
+			else if(isturf(src.loc))
+				src.ul_SetLuminosity(src.LuminosityRed + brightness_on, src.LuminosityGreen + (brightness_on - 1), src.LuminosityBlue)
+		else
+			if(src.loc == user)
+				user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
+			else if(isturf(src.loc))
+				src.ul_SetLuminosity(src.LuminosityRed - brightness_on, src.LuminosityGreen - (brightness_on - 1), src.LuminosityBlue)
 
 /obj/item/clothing/head/helmet/space/rig/pickup(mob/user)
 	if(on)
