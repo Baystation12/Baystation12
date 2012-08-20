@@ -115,6 +115,12 @@
 						return
 				else
 					spawn( 0 )
+//						switch(M.id)
+//							if("Secure Gate")
+//								if(security_level <= 1)
+//									a.autosay("\"WARNING: Attempt to access in armory, but prevented till red alert is not declared.\"","Station Security System")
+//									used = 1
+//									return
 						M.close()
 						return
 
