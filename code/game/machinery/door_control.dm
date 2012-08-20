@@ -106,6 +106,7 @@
 
 
 	else
+		var/used = 0
 		for(var/obj/machinery/door/poddoor/M in world)
 			if ( M.network == src.network || (!M.network && src.network == M.id))
 				//if the network tags match or the door id tag matcehes the control network tag, go ahead
@@ -115,12 +116,13 @@
 						return
 				else
 					spawn( 0 )
-//						switch(M.id)
-//							if("Secure Gate")
-//								if(security_level <= 1)
-//									a.autosay("\"WARNING: Attempt to access in armory, but prevented till red alert is not declared.\"","Station Security System")
-//									used = 1
-//									return
+						if(!used)
+//							switch(M.id)
+//								if("Secure Gate")
+//									if(security_level <= 1)
+//										a.autosay("\"WARNING: Attempt to access in armory, but prevented till red alert is not declared.\"","Station Security System")
+//										used = 1
+//										return
 						M.close()
 						return
 
