@@ -79,6 +79,7 @@
 <B>No Patient Detected</B>
 "}
 	user << browse(dat, "window=op")
+	user << sound(on_sound)
 	onclose(user, "op")
 
 

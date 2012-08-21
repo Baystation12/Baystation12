@@ -107,6 +107,7 @@
 		t += "<A href='?src=\ref[src];refresh=1'>Refresh</A><BR>"
 		t += "<A href='?src=\ref[src];close=1'>Close</A><BR>"
 		user << browse(t, "window=lockdown;size=550x600")
+		user << sound(on_sound)
 		onclose(user, "lockdown")
 
 	Topic(href, href_list)

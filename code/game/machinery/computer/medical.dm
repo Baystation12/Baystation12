@@ -206,6 +206,7 @@
 		else
 			dat += text("<A href='?src=\ref[];login=1'>{Log In}</A>", src)
 	user << browse(text("<HEAD><TITLE>Medical Records</TITLE></HEAD><TT>[]</TT>", dat), "window=med_rec;size=600x400")
+	user << sound(on_sound)
 	onclose(user, "med_rec")
 	return
 

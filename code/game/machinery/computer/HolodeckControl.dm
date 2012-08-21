@@ -54,6 +54,7 @@
 			dat += "Safety Protocols are <font color=green> ENABLED </font><BR>"
 
 		user << browse(dat, "window=computer;size=400x500")
+		user << sound(on_sound)
 		onclose(user, "computer")
 
 

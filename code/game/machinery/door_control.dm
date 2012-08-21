@@ -112,11 +112,11 @@
 				//if the network tags match or the door id tag matcehes the control network tag, go ahead
 				if (M.density)
 					spawn( 0 )
-						M.open()
+						M.open(
 						return
 				else
 					spawn( 0 )
-						if(!used)
+//						if(!used)
 //							switch(M.id)
 //								if("Secure Gate")
 //									if(security_level <= 1)

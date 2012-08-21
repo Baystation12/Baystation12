@@ -94,6 +94,7 @@
 			dat += "<A href='?src=\ref[src];screen=0'>(Return to Main Menu)</A><BR>"
 
 	user << browse(dat, "window=computer;size=400x500")
+	user << sound(on_sound)
 	onclose(user, "computer")
 	return
 

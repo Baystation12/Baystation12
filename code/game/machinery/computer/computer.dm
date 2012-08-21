@@ -5,6 +5,8 @@ Comm Computer
 ID Computer
 Pod/Blast Doors computer
 */
+/obj/machinery/computer
+	var/on_sound = "computer.ogg"
 
 /obj/machinery/computer/New()
 	..()

@@ -42,6 +42,7 @@ Atmos alert computer
 			dat += "-- All Systems Nominal<BR>\n"
 		dat += "<BR>\n"
 	user << browse(dat, "window=alerts")
+	user << sound(on_sound)
 	onclose(user, "alerts")
 
 /obj/machinery/computer/station_alert/Topic(href, href_list)
