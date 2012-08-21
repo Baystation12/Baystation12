@@ -353,6 +353,7 @@
 			if(n > locationList.len)
 				var/t1 = input("Which tag?","Tag") as null|text
 				if(t1)
+					t1 = sanitize_uni(t1)
 					currTag = t1
 			else
 				currTag = locationList[n]

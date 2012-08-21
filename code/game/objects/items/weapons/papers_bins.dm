@@ -100,7 +100,7 @@ NOTEBOOK
 		usr << text("\red You cut yourself on the paper.")
 		return
 	var/n_name = input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text
-	n_name = copytext(n_name, 1, 32)
+	n_name = sanitize_uni(copytext(n_name, 1, 32))
 	//loc.loc check is for making possible renaming papers in clipboards
 	if ((src.loc == usr || (src.loc.loc && src.loc.loc == usr) && usr.stat == 0))
 		src.name = n_name && n_name != "" ? n_name : "Untitled paper"
@@ -134,9 +134,10 @@ NOTEBOOK
 
 		for(var/mob/O in viewers(user))
 			O.show_message("\blue [user] starts writing on the paper with [P].", 1)
-		var/t = "[src.info]"
+		var/t = sanitize_uni("[src.info]")
 		do
 			t = input(user, "What text do you wish to add?", text("[]", src.name), t)  as message
+			t = sanitize_uni(t)
 			if ((!in_range(src, usr) && src.loc != user && !( istype(src.loc, /obj/item/weapon/clipboard) ) && src.loc.loc != user && user.equipped() != P))
 				return
 
@@ -835,7 +836,7 @@ NOTEBOOK
 /obj/item/weapon/paper/photograph/attack_self(mob/user as mob)
 
 	var/n_name = input(user, "What would you like to label the photo?", "Paper Labelling", null)  as text
-	n_name = copytext(n_name, 1, 32)
+	n_name = sanitize_uni(copytext(n_name, 1, 32))
 	if ((src.loc == user && user.stat == 0))
 		src.name = text("photo[]", (n_name ? text("- '[]'", n_name) : null))
 	src.add_fingerprint(user)

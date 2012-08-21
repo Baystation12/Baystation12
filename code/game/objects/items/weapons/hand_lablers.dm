@@ -54,6 +54,7 @@
 	if(length(str) > 64)
 		usr << "\red Text too long."
 		return
+	str = sanitize_uni(str)
 	var/obj/item/weapon/label/A = new/obj/item/weapon/label
 	A.label = str
 	A.loc = user.loc

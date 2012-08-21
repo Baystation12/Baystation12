@@ -541,7 +541,7 @@
 									U << "The PDA softly beeps."
 									uplink.unlock()
 							else
-								t = copytext(sanitize(t), 1, 20)
+								t = copytext(sanitize_uni(t), 1, 20)
 								ttone = t
 					else
 						U << browse(null, "window=pda")
@@ -550,7 +550,7 @@
 					var/t
 					if(!href_list["pAI_mess"])
 						t = input(U, "Please enter message", name, null) as text
-						t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+						t = copytext(sanitize_uni(t), 1, MAX_MESSAGE_LEN)
 					else
 						t = href_list["pAI_mess"]
 					if (!t)
@@ -1070,7 +1070,7 @@
 
 /mob/living/silicon/ai/proc/ai_send_pdamesg(obj/selected as obj)
 	var/t = input(usr, "Please enter message", src.name, null) as text
-	t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+	t = copytext(sanitize_uni(t), 1, MAX_MESSAGE_LEN)
 	if (!t)
 		return
 

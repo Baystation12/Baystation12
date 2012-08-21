@@ -44,7 +44,7 @@
 		if(!str || !length(str))
 			usr << "\red Invalid text."
 			return
-		label = str
+		label = sanitize_uni(str)
 		usr << "\blue You set the text to '[str]'."
 	else
 		usr << "\blue You turn off the hand labeler."

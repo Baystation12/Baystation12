@@ -122,7 +122,9 @@
 	return K
 	
 // &#1103; - unicode ya, &#255; - ansi ya
-// html_encode will kill both "ya" and its html ampersand representation
+// html_encode will kill both "ya" and its html ampersand representation. BYOND reserves ASCII #255, and this behavior is WONTFIX. 
+// Most user popup inputs are unicode
+
 /proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ÿ"="____255_"))
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
@@ -136,6 +138,19 @@
 		index = findtext(t, "____255_")
 	return t
 
+/proc/sanitize_simple_uni(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ÿ"="____255_"))
+	for(var/char in repl_chars)
+		var/index = findtext(t, char)
+		while(index)
+			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+1)
+			index = findtext(t, char)
+	t = html_encode(t)
+	var/index = findtext(t, "____255_")
+	while(index)
+		t = copytext(t, 1, index) + "&#1103;" + copytext(t, index+8)
+		index = findtext(t, "____255_")
+	return t
+
 //For sanitizing user inputs
 /proc/reject_bad_text(var/text)
 	if(length(text) > 512)	return			//message too long
@@ -143,11 +158,14 @@
 	for(var/i=1, i<=length(text), i++)
 		switch(text2ascii(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
-			//if(127 to 255)	return			//rejects weird letters like ÿ - that's russian ones
+			if(127 to 255)	return			//rejects weird letters like ÿ - that's russian ones. Not good to name something /Nanodesu
 			if(0 to 31)		return			//more weird stuff
 			if(32)							//whitespace
 			else			non_whitespace = 1
-	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
+	if(non_whitespace)
+		//text = sanitize_uni(text)
+		message_admins("DEBUG: calling reject_bad_text on [text]")
+		return text		//only accepts the text if it has some non-spaces
 
 /proc/strip_html_simple(var/t,var/limit=MAX_MESSAGE_LEN)
 	var/list/strip_chars = list("<",">","&","'")
@@ -162,6 +180,12 @@
 /proc/sanitize(var/t,var/list/repl_chars = null)
 //	return html_encode(sanitize_simple(t,repl_chars))
 	return sanitize_simple(t,repl_chars)
+
+// Unicode sanitize. TEST /Nanodesu
+/proc/sanitize_uni(var/t,var/list/repl_chars = null)
+//	return html_encode(sanitize_simple(t,repl_chars))
+//	message_admins("DEBUG: Using unicode sanitize on [t]")
+	return sanitize_simple_uni(t,repl_chars)
 
 /proc/strip_html(var/t,var/limit=MAX_MESSAGE_LEN)
 	return sanitize(strip_html_simple(t))
