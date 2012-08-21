@@ -645,6 +645,7 @@
 			var/t = input("Message:", text("Private message to [recipient_name]"))  as text|null
 			if (!t || !usr || !usr.client)
 				return
+			t = sanitize(t)
 			if (usr.client && usr.client.holder)
 				M << "\red Admin PM from-<b>[key_name(usr, M, 0)]</b>: [t]"
 				usr << "\blue Admin PM to-<b>[key_name(M, usr, 1)]</b>: [t]"
