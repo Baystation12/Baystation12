@@ -5,6 +5,8 @@ Comm Computer
 ID Computer
 Pod/Blast Doors computer
 */
+/obj/machinery/computer
+	var/on_sound = "computer.ogg"
 
 /obj/machinery/computer/New()
 	..()
@@ -63,6 +65,7 @@ Pod/Blast Doors computer
 		else if(powered())
 			icon_state = initial(icon_state)
 			stat &= ~NOPOWER
+			ul_SetLuminosity(1, 0, 2)
 			if (istype(src,/obj/machinery/computer/aifixer))
 				var/obj/machinery/computer/aifixer/O = src
 				if (O.occupant)
@@ -75,6 +78,7 @@ Pod/Blast Doors computer
 					overlays += image('computer.dmi', "ai-fixer-empty")
 		else
 			spawn(rand(0, 15))
+				ul_SetLuminosity(0, 0, 0)
 				//icon_state = "c_unpowered"
 				icon_state = initial(icon_state)
 				icon_state += "0"

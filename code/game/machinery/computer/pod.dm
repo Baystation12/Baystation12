@@ -145,6 +145,7 @@
 	//*****
 	dat += text("<BR><BR><A href='?src=\ref[];mach_close=computer'>Close</A></TT></BODY></HTML>", user)
 	user << browse(dat, "window=computer;size=400x500")
+	user << sound(on_sound)
 	onclose(user, "computer")
 	return
 

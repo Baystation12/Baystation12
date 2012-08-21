@@ -90,6 +90,7 @@
 			t += "</table>"
 			t += "</FONT></PRE></TT>"
 			user << browse(t, "window=crewcomp;size=900x600")
+			user << sound(on_sound)
 			onclose(user, "crewcomp")
 
 

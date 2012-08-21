@@ -165,6 +165,7 @@
 			body += "<a href='?src=\ref[src];choice=mode;mode_target=1'>Access Crew Manifest</a>"
 		dat = "<tt>[header][body]<hr><br></tt>"
 	user << browse(dat, "window=id_com;size=900x520")
+	user << sound(on_sound)
 	onclose(user, "id_com")
 	return
 

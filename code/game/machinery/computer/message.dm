@@ -112,6 +112,7 @@
 
 	dat += "</body>"
 	user << browse(dat, "window=message;size=500x700")
+	user << sound(on_sound)
 	onclose(user, "message")
 	return
 

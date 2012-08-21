@@ -13,6 +13,7 @@
 	var/ammo_type = "/obj/item/ammo_casing/a357"
 	var/list/loaded = list()
 	var/max_shells = 7
+	var/ready = 1
 	var/load_method = 0 //0 = Single shells or quick loader, 1 = box, 2 = magazine
 	var/obj/item/ammo_magazine/empty_mag = null
 

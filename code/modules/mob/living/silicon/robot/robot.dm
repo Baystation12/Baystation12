@@ -187,12 +187,17 @@
 	updateicon()
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
-	if( length(real_name) < 7 || !prefix )	return
+//	if( length(real_name) < 7 || !prefix )	return
 	//not really necessary but just to avoid annoying people with
 	//unique names seeming as nobody could give me a straight answer as
 	//to whether to remove custom borg names completely.
-	if(copytext(real_name, 1, 7) == "Cyborg")
-		real_name = "[prefix] [real_name]"
+//	if(copytext(real_name, 1, 7) == "Cyborg")
+	if(prefix)
+		real_name = "[prefix] Cyborg-[ident]"
+		name = real_name
+		return
+	else
+		real_name = "Cyborg-[ident]"
 		name = real_name
 
 /mob/living/silicon/robot/verb/cmd_robot_alerts()
@@ -584,30 +589,6 @@
 	else
 		spark_system.start()
 		return ..()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1207,6 +1188,7 @@ Frequency:
 	updateicon()
 	channels = list()
 	radio.config(channels)
+	updatename()
 	uneq_all()
 	del(module)
 

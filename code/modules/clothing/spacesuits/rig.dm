@@ -7,6 +7,7 @@
 	allowed = list(/obj/item/device/flashlight)
 	var/brightness_on = 4 //luminosity when on
 	var/on = 0
+	var/charge = 600 // 10 min
 	color = "engineering" //Determines used sprites: rig[on]-[color] and rig[on]-[color]2 (lying down sprite)
 
 /obj/item/clothing/head/helmet/space/rig/mining

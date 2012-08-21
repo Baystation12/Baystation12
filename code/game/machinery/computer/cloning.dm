@@ -254,6 +254,7 @@
 
 
 	user << browse(dat, "window=cloning")
+	user << sound(on_sound)
 	onclose(user, "cloning")
 	return
 

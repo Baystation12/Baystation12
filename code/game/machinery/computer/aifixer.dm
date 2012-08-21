@@ -104,6 +104,7 @@
 	dat += {" <A href='?src=\ref[user];mach_close=computer'>Close</A>"}
 
 	user << browse(dat, "window=computer;size=400x500")
+	user << sound(on_sound)
 	onclose(user, "computer")
 	return
 

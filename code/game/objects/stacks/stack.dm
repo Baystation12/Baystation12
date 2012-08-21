@@ -14,7 +14,8 @@
 	..()
 	if (amount)
 		src.amount=amount
-
+	pixel_x = rand(-5,5)
+	pixel_y = rand (-4,4)
 	return
 
 /obj/item/stack/examine()

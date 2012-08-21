@@ -58,6 +58,7 @@
 			dat += "<HR><A href='?src=\ref[src];lock=1'>Lock Console</A>"
 
 		user << browse(dat, "window=computer;size=400x500")
+		user << sound(on_sound)
 		onclose(user, "computer")
 		return
 

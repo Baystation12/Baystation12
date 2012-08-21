@@ -18,6 +18,7 @@ em						{font-style: normal;	font-weight: bold;}
 .adminooc				{color: #b82e00;	font-weight: bold;}
 
 .adminobserver			{color: #996600;	font-weight: bold;}
+.adminchat				{color: #885500;	font-weight: bold;}
 .admin					{color: #386aff;	font-weight: bold;}
 
 .mod				{color: #735638;	font-weight: bold;}

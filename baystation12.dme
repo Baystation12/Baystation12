@@ -693,6 +693,7 @@
 #include "code\game\objects\closets\secure\secure_closets.dm"
 #include "code\game\objects\closets\secure\security.dm"
 #include "code\game\objects\devices\aicard.dm"
+#include "code\game\objects\devices\battery.dm"
 #include "code\game\objects\devices\chameleonproj.dm"
 #include "code\game\objects\devices\flash.dm"
 #include "code\game\objects\devices\flashlight.dm"

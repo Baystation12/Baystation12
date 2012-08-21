@@ -297,6 +297,7 @@
 		if(dat2)
 			dat +=  dat2
 			user << browse(dat, "window=communications;size=400x500")
+			user << sound(on_sound)
 			onclose(user, "communications")
 		return
 
@@ -375,6 +376,7 @@
 
 	dat += "<BR>\[ [(src.state != STATE_DEFAULT) ? "<A HREF='?src=\ref[src];operation=main'>Main Menu</A> | " : ""]<A HREF='?src=\ref[user];mach_close=communications'>Close</A> \]"
 	user << browse(dat, "window=communications;size=400x500")
+	user << sound(on_sound)
 	onclose(user, "communications")
 
 

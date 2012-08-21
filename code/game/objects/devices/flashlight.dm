@@ -12,6 +12,56 @@
 	var/brightness_on = 4 //luminosity when on
 	var/icon_on = "flight1"
 	var/icon_off = "flight0"
+	var/cell
+	New()
+		var/obj/item/weapon/battery/B = new /obj/item/weapon/battery(src)
+		cell = B
+
+	proc/Lighting()
+		if(cell:charge <= 0)
+			usr << "Battery is out."
+			on = 0
+			return
+		update_brightness(src.loc)
+		spawn()
+			while(src)
+				cell:charge -= 50
+				if(cell:charge <= 0)
+					on = !on
+					update_brightness(src.loc)
+					return
+				if(!on)
+					return
+				sleep(50)
+
+/obj/item/device/flashlight/attackby(var/obj/B, var/mob/user)
+	if(istype(B ,/obj/item/weapon/battery))
+		if(cell)
+			user << "Battery already inserted"
+			return
+		else
+			src.cell =  B
+			user.drop_item()
+			B.loc = src
+			user << "You insert battery"
+			src.verbs += remove_battery()
+			return
+	else if (istype(B, /obj/item/weapon/storage/toolbox))
+		user << "You are silly? You can't insert this massive toolbox into flashlight."
+		return
+	return
+
+/obj/item/device/flashlight/verb/remove_battery()
+	if(cell)
+		if(on)
+			usr << "Switch off the light first"
+			return
+		else
+			var/obj/item/weapon/battery/B = src.cell
+			B.loc = src.loc.loc
+			src.cell = null
+			src.verbs -= remove_battery()
+	return
 
 /obj/item/device/flashlight/initialize()
 	..()
@@ -41,8 +91,7 @@
 //	if(!isturf(user.loc))
 //		user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
 //		return
-	on = !on
-	update_brightness(user)
+	Lighting()
 	return
 
 
@@ -163,18 +212,56 @@
 		ul_SetLuminosity(brightness_on, brightness_on - 1, 0)
 
 //RIG helmet light
-/obj/item/clothing/head/helmet/space/rig/attack_self(mob/user)
-	if(!isturf(user.loc))
-		user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
-		return
-	on = !on
-	icon_state = "rig[on]-[color]"
-	item_state = "rig[on]-[color]"
+/obj/item/clothing/head/helmet/space/rig/verb/turn_light()
+	set category = "Object"
+	set name = "Turn helmet light"
+	set src in usr
 
-	if(on)
-		user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
-	else
-		user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
+	if ( !(usr.stat || usr.restrained()) )
+		if(!isturf(usr.loc))
+			usr << "You cannot turn the light on while in this [usr.loc]" //To prevent some lighting anomalities.
+			return
+		Turning(usr)
+
+/obj/item/clothing/head/helmet/space/rig/proc/Turning(mob/user)
+	if(!on && charge >= 0 || on)
+		on = !on
+		icon_state = "rig[on]-[color]"
+		item_state = "rig[on]-[color]"
+
+		UpdateLuminosity(user)
+
+/obj/item/clothing/head/helmet/space/rig/proc/Lighting()
+	spawn()
+		while(src)
+			if(brightness_on)
+				sleep(10)
+				if(on)
+					charge -= 1 // one unit per sec
+					if(charge <= 0)
+						Turning(src)
+				else
+					if(charge < 600)
+						sleep(10) // 5 units per 2 sec
+						charge += 5
+					else
+						charge = 600
+
+/obj/item/clothing/head/helmet/space/rig/New()
+	Lighting()
+
+/obj/item/clothing/head/helmet/space/rig/proc/UpdateLuminosity(mob/user)
+	if(brightness_on)
+		if(on)
+			if(src.loc == user)
+				user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
+			else if(isturf(src.loc))
+				src.ul_SetLuminosity(src.LuminosityRed + brightness_on, src.LuminosityGreen + (brightness_on - 1), src.LuminosityBlue)
+		else
+			if(src.loc == user)
+				user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
+			else if(isturf(src.loc))
+				src.ul_SetLuminosity(src.LuminosityRed - brightness_on, src.LuminosityGreen - (brightness_on - 1), src.LuminosityBlue)
 
 /obj/item/clothing/head/helmet/space/rig/pickup(mob/user)
 	if(on)

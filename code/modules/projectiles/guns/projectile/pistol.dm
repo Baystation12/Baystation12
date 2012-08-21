@@ -32,28 +32,39 @@
 		if(!loaded.len && empty_mag)
 			empty_mag.loc = get_turf(src.loc)
 			empty_mag = null
+			ready = 0
 			playsound(user, 'smg_empty_alarm.ogg', 40, 1)
 			update_icon()
 		return
 
 	update_icon()
-		..()
-		return
+		return ..()
+
+	Fire()
+		if(!ready)
+			usr << "\red Click. Click."
+			return
+		return ..()
+
+	attack_self(var/mob/M)
+		if(!ready && loaded.len)
+			usr << "You prepare gun to fire"
+			ready = 1
+			for(var/mob/living/D in oview())
+				D.show_message(text("\red [] twitched slide of []", M,src), 1)
+		return ..()
+
 /obj/item/weapon/gun/projectile/deagle/gold
 	name = "\improper Desert Eagle"
 	desc = "A gold plated gun folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
 	icon_state = "deagleg"
 	item_state = "deagleg"
 
-
-
 /obj/item/weapon/gun/projectile/deagle/camo
 	name = "\improper Desert Eagle"
 	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
 	icon_state = "deaglecamo"
 	item_state = "deagleg"
-
-
 
 /obj/item/weapon/gun/projectile/gyropistol
 	name = "\improper Gyrojet Pistol"
