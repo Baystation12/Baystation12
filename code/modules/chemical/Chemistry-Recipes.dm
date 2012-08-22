@@ -448,6 +448,14 @@ datum
 			required_reagents = list("sodiumchloride" = 1, "ethanol" = 1, "radium" = 1)
 			result_amount = 3
 
+		condensedcapsaicin
+			name = "Condensed Capsaicin"
+			id = "condensedcapsaicin"
+			result = "condensedcapsaicin"
+			required_reagents = list("capsaicin" = 2)
+			required_catalysts = list("plasma" = 5)
+			result_amount = 1
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 // foam and foam precursor
