@@ -1,2 +1,20 @@
+<<<<<<< HEAD
 ; just add the ckey (lowercase) of every moderator on a separate line
 ; lines starting with ; are comments and will be ignored
+=======
+; just add the ckey (lowercase) of every moderator on a separate line
+; lines starting with ; are comments and will be ignored
+chinsky
+cubejackal
+dakonic
+themij
+sparklysheep
+botanistpower
+asanadas
+deusdactyl
+densane
+bowlsoldier
+fenrisian
+madmalicemccrea
+roaper
+>>>>>>> caf88d81eb4ba61466414c5fa0609be06c932803
