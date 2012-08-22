@@ -121,7 +121,7 @@
 	var/lum = 6
 	if(source)
 		lum = source.luminosity
-	source.luminosity = 6
+		source.luminosity = 6
 	var/list/heard = view(range, source)
 	if(source)
 		source.luminosity = lum
