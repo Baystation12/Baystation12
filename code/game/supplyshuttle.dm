@@ -50,7 +50,9 @@ var/list/supply_groups = new()
 		return prob(60)
 	else if(istype(A, /mob/living)) // You Shall Not Pass!
 		var/mob/living/M = A
-		if(!M.lying || istype(M, /mob/living/carbon/monkey) || istype(M, /mob/living/carbon/metroid))	// unless you're lying down, or a small creature
+		if(M.lying || istype(M, /mob/living/carbon/monkey) || istype(M, /mob/living/carbon/metroid)|| istype(M, /mob/living/simple_animal))	// unless you're lying down, or a small creature
+			return 1
+		else
 			return 0
 	return ..()
 
