@@ -226,7 +226,6 @@
 #define FILE_DIR "sound/weapons"
 // END_FILE_DIR
 // BEGIN_PREFERENCES
-#define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "code\access_defines.dm"

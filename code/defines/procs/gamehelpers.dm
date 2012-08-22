@@ -117,14 +117,12 @@
 
 // Like view but bypasses luminosity check
 /proc/hear(var/range, var/atom/source)
-	// Runtime error quickfix - Nanodesu
-	var/lum = 6
-	if(source)
-		lum = source.luminosity
+
+	var/lum = source.luminosity
 	source.luminosity = 6
+
 	var/list/heard = view(range, source)
-	if(source)
-		source.luminosity = lum
+	source.luminosity = lum
 
 	return heard
 

@@ -5,7 +5,6 @@
 *.lk
 info.json
 /config/admins.txt
-/config/moderators.txt
 /config/dbconfig.txt
 /statistics
 /deletions
