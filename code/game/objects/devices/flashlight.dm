@@ -217,7 +217,6 @@
 	set name = "Turn helmet light"
 	set src in usr
 
-<<<<<<< HEAD
 	if ( !(usr.stat || usr.restrained()) )
 		if(!isturf(usr.loc))
 			usr << "You cannot turn the light on while in this [usr.loc]" //To prevent some lighting anomalities.
@@ -254,21 +253,9 @@
 /obj/item/clothing/head/helmet/space/rig/proc/UpdateLuminosity(mob/user)
 	if(brightness_on)
 		if(on)
-			if(src.loc == user)
-				user.ul_SetLuminosity(user.LuminosityRed + brightness_on, user.LuminosityGreen + (brightness_on - 1), user.LuminosityBlue)
-			else if(isturf(src.loc))
-				src.ul_SetLuminosity(src.LuminosityRed + brightness_on, src.LuminosityGreen + (brightness_on - 1), src.LuminosityBlue)
+			src.ul_SetLuminosity(user.ul_Red - brightness_on, user.ul_Green - (brightness_on - 1), user.ul_Blue)
 		else
-			if(src.loc == user)
-				user.ul_SetLuminosity(user.LuminosityRed - brightness_on, user.LuminosityGreen - (brightness_on - 1), user.LuminosityBlue)
-			else if(isturf(src.loc))
-				src.ul_SetLuminosity(src.LuminosityRed - brightness_on, src.LuminosityGreen - (brightness_on - 1), src.LuminosityBlue)
-=======
-	if(on)
-		user.ul_SetLuminosity(user.ul_Red + brightness_on, user.ul_Green + (brightness_on - 1), user.ul_Blue)
-	else
-		user.ul_SetLuminosity(user.ul_Red - brightness_on, user.ul_Green - (brightness_on - 1), user.ul_Blue)
->>>>>>> 7508c64fbf81c7e1c3fe7986a5659a0acd1973c0
+			src.ul_SetLuminosity(user.ul_Red + brightness_on, user.ul_Green + (brightness_on - 1), user.ul_Blue)
 
 /obj/item/clothing/head/helmet/space/rig/pickup(mob/user)
 	if(on)
