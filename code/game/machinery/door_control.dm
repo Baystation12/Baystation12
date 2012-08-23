@@ -106,7 +106,7 @@
 
 
 	else
-		var/used = 0
+//		var/used = 0
 		for(var/obj/machinery/door/poddoor/M in world)
 			if ( M.network == src.network || (!M.network && src.network == M.id))
 				//if the network tags match or the door id tag matcehes the control network tag, go ahead
