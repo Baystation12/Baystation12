@@ -18,8 +18,10 @@ forsamori - Tajaran
 forsamori - Soghun
 galenus - Soghun
 galenus - Skrell
+kersh - Skrell
 masterofstuff - Skrell
 mangled - Skrell
+mcgulliver - Skrell
 nerezza - Skrell
 philphil123 - Soghun
 quilan - Tajaran
