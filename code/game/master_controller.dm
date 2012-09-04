@@ -89,6 +89,8 @@ datum/controller/game_controller
 
 		spawn keepalive()
 
+		spawn physics_sim.Setup()
+
 		spawn
 			ticker.pregame()
 

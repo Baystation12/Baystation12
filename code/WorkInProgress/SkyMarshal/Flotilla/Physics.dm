@@ -13,7 +13,8 @@
 #define lorentz_factor(velocity) (1/sqrt(1 - ((velocity)**2)/SPEED_OF_LIGHT_SQ))
 
 #define STAR_MASS 1.631062e24
-#define STAR_DEVIATION 1.59128e23
+#define STAR_DEVIATION 1.59128
+#define STAR_DEVIATION_EXPONENT 1e23
 #define NUMBER_OF_PLANETS_MIN 2
 #define NUMBER_OF_PLANETS_MAX 15
 #define PLANET_MASS_MIN 3.3e17
@@ -27,10 +28,14 @@
 
 #define PROJECTILE_DELETE_DISTANCE 3
 
-var/physics/physics_sim
+var/physics/physics_sim = new
 var/halt_physics = 0
 var/list/solar_descriptions = ("A small orange-yellow star, cooler than Sol.  It looks... wrong.")
 var/list/planetary_descriptions = ("A rocky body, totally uninteresting.")
+
+mob/verb/get_physics_reference()
+	set src = usr
+	usr << "\ref[physics_sim]"
 
 physics
 	var
@@ -39,21 +44,23 @@ physics
 			all_frames = list() //All simulated reference frames
 			projectiles = list() //Holds projectile datums to be simulated
 			frames_with_considerable_mass = list() //We only compute the gravitational attraction of these frames.
+			z_levels = list() //Frames associated with Z-levels.
+		frame/spawn_point //Will be the space station
 		failed_ticks = 0
 
 	#define CLOCKWISE 1
 	#define ANTICLOCKWISE -1
 
-	New()
-		..()
+	proc/Setup()
 		world << "\blue <B>Initializing physics simulation... </B>"
 
 		//Make the sun
-		var/frame/sun = new(SOLAR_SYSTEM_NAME, pick(solar_descriptions), 0, 0, 0, 0, 0, 1, STAR_MASS + rand(-STAR_DEVIATION, STAR_DEVIATION), 0)
+		var/frame/sun = new(SOLAR_SYSTEM_NAME, pick(solar_descriptions), 0, 0, 0, 0, 0, 1, STAR_MASS + rand(-STAR_DEVIATION, STAR_DEVIATION) * STAR_DEVIATION_EXPONENT, 0)
 
 		for(var/i = 1 to rand(NUMBER_OF_PLANETS_MIN, NUMBER_OF_PLANETS_MAX))
 			var/name = "[SOLAR_SYSTEM_NAME] [i]"
 			var/mass = rand(PLANET_MASS_MIN, PLANET_MASS_MAX)
+			world.log << mass
 			var/stealth = mass/PLANET_MASS_MAX
 			var/distance = rand(PLANET_CLOSEST_ORBIT, PLANET_FARTHEST_ORBIT)
 			var/bearing = rand(0, 360)
@@ -61,8 +68,10 @@ physics
 			var/y = distance*sin(bearing)
 			var/list/orbit = GetVectorToOrbit(sun, x, y, pick(CLOCKWISE, ANTICLOCKWISE) )
 			new /frame(name, pick(planetary_descriptions), x, y, orbit["x"], orbit["y"], 0, rand(0, 2), mass, stealth)
+		world << "\blue <B>Solar System Created.  Physics simulation ready.</B>"
 
 		//TODO: MAKE SPAWN STATION HERE
+		//spawn_point= new(
 		spawn Start()
 
 	proc/GetVectorToOrbit(var/frame/orbited_mass, x, y, orbital_direction = CLOCKWISE)
@@ -91,10 +100,10 @@ physics
 					if(failed_ticks >= 10) //10 seconds of failure!
 						world << "<font color='red'><b>RUNTIME(S) in PHYSICS SIMULATION.  Killing <I>ISSAC NEWTON</I>!</font></b>"
 			var/time_difference = world.realtime - start_time
-			sleep( min( 1, max( 0, 10 - time_difference ) ) )
+			sleep( min( 10, max( 0, 10 - time_difference ) ) )
 
 	proc/Tick()
-		.=0
+		. = 0
 		//Process new gravitational attraction
 		for(var/frame/frame in all_frames)
 			//Acceleration for the frame
@@ -143,9 +152,15 @@ physics
 		for(var/frame/frame in all_frames)
 			frame.x += frame.delta_x
 			frame.y += frame.delta_y
+			frame.bearing += frame.angular_velocity
 		for(var/projectile/projectile in projectiles)
 			projectile.Tick()
-		.=1
+		. = 1
+
+	proc/AddLevel(z, spawn_point = 1)
+
+
+	proc/RemoveLevel(z)
 
 //The frame representing an object for the physics simulation
 frame
@@ -166,10 +181,18 @@ frame
 		lorentz_factor = 1	//The closer to lightspeed you get, the higher this number.  It represents the time dilation experienced by the crew.  Will likely go unused.
 
 		list/z_levels		//If null, this is just a point mass simulation.  Otherwise, it has real-game world stuff.
+		list/propulsive_units
+		min_x = 0	//Handles how small the world can be shrunk.
+		min_y = 0
+		min_z = 0
+		list/contents = list()
+		list/crewmembers
+
 
 	New(new_name, new_desc, position_x, position_y, velocity_x, velocity_y, new_bearing, new_angular_velocity, new_mass, new_stealth, list/associated_levels)
 		. = ..()
 		if(!physics_sim)  //OHGOD
+			world.log <<"Deleting as no physics_sim"
 			del src
 
 		name = new_name
@@ -191,6 +214,18 @@ frame
 			physics_sim.frames_with_considerable_mass += src
 
 		return
+
+
+	Del()
+		if(physics_sim)  //OHGOD
+			physics_sim.all_frames -= src
+			physics_sim.frames_with_considerable_mass -= src
+		. = ..()
+
+//	proc/GetNearbyFrames()
+//		if(!physics_sim)
+//			del src
+
 
 proc/lines_intersect(var/x1, var/y1, var/x2, var/y2, var/x3, var/y3, var/x4, var/y4)
 	var/x12 = x1 - x2
@@ -261,3 +296,5 @@ projectile
 		x = new_x
 		y = new_y
 		return
+
+
