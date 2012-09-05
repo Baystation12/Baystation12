@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-tehdrama - Game Master
-nanodesu - Game Master
-heroin84 - Game Master
-yumitsunya - Game Master
-Yumitsunya - Game Master
-=======
+abi79 - Game Master
 arcalane - Game Admin
 bobbehluvspropane - Game Admin
-cacophony - Retired Admin
+cacophony - Game Admin
 cajoes - Game Admin
+cib - Retired Admin
 compactninja - Retired Admin
 duntadaman - Game Admin
 dysthymia - Retired Admin
@@ -29,4 +24,3 @@ strumpetplaya - Retired Admin
 tastyfish - Retired Admin
 uristqwerty - Game Master
 wrongnumber - Game Admin
->>>>>>> upstream/master
