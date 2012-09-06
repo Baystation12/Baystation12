@@ -1,22 +1,32 @@
 //The physics datum, that controls movement of the "local space" around ships and their contents as they move through space.
 //Distances are in 10^9th meters
-//Acceleration is in km/s^2
-//Velocity is in Mm/s
+//Acceleration is in 10^9th meters/s^2
+//Velocity is in 10^9th meters/s
 //Mass is in Yottagrams, 10^24th grams
 //Force in Yottanewtons.  10^21 kgm/s^2
 //Bearings are in degrees.
 
+//Important shit.  Increase this number to increase the force of graivty universally.
 #define GRAVITATIONAL_CONSTANT (6.67384e-11) //(m^3)/kg(s^2)
+
+
 //Function to add two velocities in accordance with relativity.  Sanity is goood.  .6c +.5c = ~.85c
 #define vel_add(x,y) ((x + y)/(1 + ((x*y*1e18)/SPEED_OF_LIGHT_SQ)))
-#define gravity(attractor, distance)  ((GRAVITATIONAL_CONSTANT*attractor.mass)/(((distance)**2)*1e6)) //Source is a frame, distance is... self-explanatory
+
+
+#define gravity(mass, distance)  ((GRAVITATIONAL_CONSTANT*mass)/(((distance)**2)*1e6)) //Source is a frame, distance is... self-explanatory
 #define dist(x,y) sqrt((x)**2 + (y)**2)
 #define orbital_velocity(orbited_mass, distance) sqrt((orbited_mass * GRAVITATIONAL_CONSTANT)/(distance*1e6))
 #define lorentz_factor(dx, dy) (1/sqrt(1 - (dist(dx,dy)**2)/SPEED_OF_LIGHT_SQ))
 #define momentum(mass,dx,dy) ((1e9)*mass*dist(dx,dy)*lorentz_factor(dx, dy))
 
+
+//Defines related to optimizing gravity computerations.  Used to skip gravity computation if the force applied is too low.
 #define MINUMUM_ATTRACTION_TO_CONSIDER 1e-21
-#define inverse_gravity(mass) sqrt((GRAVITATIONAL_CONSTANT*mass)/(MINUMUM_ATTRACTION_TO_CONSIDER*1e6))
+#define inverse_gravity(mass) sqrt((GRAVITATIONAL_CONSTANT*mass)/(MINUMUM_ATTRACTION_TO_CONSIDER*1e6))	//Takes: Mass in Yottagrams.  Outputs: Distance from said mass where the applied force is equal to MINUMUM_ATTRACTION_TO_CONSIDER
+
+//Minimum mass to attract other frames, in yottagrams.
+#define MINIMUM_MASS_TO_CONSIDER_ATTRACTION 1
 
 #define STAR_MASS (1.631062e9)
 #define STAR_DEVIATION (1.59128e8)
@@ -37,7 +47,10 @@
 #define ORBITAL_VECTOR_DEVATION 0.005 //Percent from "circular"
 #define SOLAR_SYSTEM_NAME "Epsilon Erandi"
 
-#define PROJECTILE_DELETE_DISTANCE 3
+#define CLOCKWISE 1
+#define ANTICLOCKWISE -1
+
+//#define PROJECTILE_DELETE_DISTANCE 3
 
 var/physics/physics_sim = new
 var/halt_physics = 0
@@ -47,7 +60,7 @@ var/list/planetary_descriptions = ("A rocky body, totally uninteresting.")
 mob/verb/get_physics_reference()
 	set src = usr
 	for(var/frame/frame in physics_sim.all_frames)
-		world << "[frame.name] Velocity: [sqrt(frame.delta_x**2 + frame.delta_y**2)*1e6]km/s"
+		world << "[frame.name] Velocity: [dist(frame.delta_x,frame.delta_y)*1e6]km/s"
 
 mob/verb/debug_variables_reference()
 	set src = usr
@@ -63,6 +76,23 @@ proc/get_rand(LB=0,UB=0)
 		return UB + (LB-UB)*rand()
 	return LB //They are equal.
 
+proc/GetVectorToOrbit(var/frame/orbited_mass, x, y, mass, orbital_direction = CLOCKWISE)
+	var/dx = orbited_mass.x - x
+	var/dy = orbited_mass.y - y
+	var/distance = dist(dx, dy)
+	var/attraction = orbital_velocity(orbited_mass.mass, distance) //* (1 + get_rand(-ORBITAL_VECTOR_DEVATION,ORBITAL_VECTOR_DEVATION))
+	world.log << "Attraction = [orbital_velocity(orbited_mass.mass, distance)*1e6] km/s.  Mass = [orbited_mass.mass] Yg, distance = [dist(dx,dy)*1e9] m"
+
+	if(orbital_direction == ANTICLOCKWISE)
+		attraction *= -1
+
+	var/list/vector = list()
+	vector["y"] = (attraction/distance)*dx
+	vector["x"] = -(attraction/distance)*dy
+
+	return vector
+
+
 physics
 	var
 		real_time = 0 //Time according to the simulation. (I know, Absolute time is baaad)
@@ -73,9 +103,6 @@ physics
 			z_levels = list() //Frames associated with Z-levels.
 		frame/spawn_point //Will be the space station
 		failed_ticks = 0
-
-	#define CLOCKWISE 1
-	#define ANTICLOCKWISE -1
 
 	proc/Setup()
 		world << "\red <B>Initializing physics simulation... </B>"
@@ -91,9 +118,7 @@ physics
 			var/bearing = rand(0, 360)
 			var/x = distance*cos(bearing)
 			var/y = distance*sin(bearing)
-			var/list/orbit = GetVectorToOrbit(sun, x, y, mass, pick(CLOCKWISE, ANTICLOCKWISE) )
-			world.log << "[name] Velocity = [sqrt(orbit["x"]**2 + orbit["y"]**2)]"
-			var/frame/planet = new(name, pick(planetary_descriptions), x, y, orbit["x"], orbit["y"], 0, get_rand(-1,1), mass, stealth)
+			var/frame/planet = new(name, pick(planetary_descriptions), x, y, 0, 0, 0, get_rand(-1,1), mass, stealth, sun)
 			if(prob(MOON_CHANCE))
 				name += "A"
 				mass = get_rand(MOON_MIN_SIZE, MOON_MAX_SIZE)
@@ -102,30 +127,13 @@ physics
 				bearing = rand(0, 360)
 				x += distance*cos(bearing)
 				y += distance*sin(bearing)
-				var/list/new_orbit = GetVectorToOrbit(planet, x, y, mass, pick(CLOCKWISE, ANTICLOCKWISE) )
-				new /frame(name, pick(planetary_descriptions), x, y, orbit["x"]+new_orbit["x"], orbit["y"]+new_orbit["y"], 0, get_rand(-1,1), mass, stealth)
+				new /frame(name, pick(planetary_descriptions), x, y, 0, 0, 0, get_rand(-1,1), mass, stealth, planet)
 
 		world << "\blue <B>Solar System Created.  Physics simulation ready.</B>"
 
 		//TODO: MAKE SPAWN STATION HERE
 		//spawn_point= new(
 		spawn Start()
-
-	proc/GetVectorToOrbit(var/frame/orbited_mass, x, y, mass, orbital_direction = CLOCKWISE)
-		var/dx = orbited_mass.x - x
-		var/dy = orbited_mass.y - y
-		var/distance = dist(dx, dy)
-		var/attraction = orbital_velocity(orbited_mass.mass, distance) //* (1 + get_rand(-ORBITAL_VECTOR_DEVATION,ORBITAL_VECTOR_DEVATION))
-		world.log << "Attraction = [orbital_velocity(orbited_mass.mass, distance)*1e6] km/s.  Mass = [orbited_mass.mass] Yg, distance = [dist(dx,dy)*1e9] m"
-
-		if(orbital_direction == ANTICLOCKWISE)
-			attraction *= -1
-
-		var/list/vector = list()
-		vector["y"] = (attraction/distance)*dx
-		vector["x"] = -(attraction/distance)*dy
-
-		return vector
 
 	proc/Start() //The physics ticker.
 		set background = 1
@@ -157,7 +165,7 @@ physics
 				var/dx = massive_body.x - frame.x
 				var/dy = massive_body.y - frame.y
 				var/distance = dist(dx, dy)
-				var/attraction = gravity(massive_body, distance)
+				var/attraction = gravity(massive_body.mass, distance)
 				delta_x += dx*attraction/distance
 				delta_y += dy*attraction/distance
 
@@ -166,6 +174,12 @@ physics
 
 			frame.delta_x = (frame.delta_x + delta_x)*total_additive/total_relativistic
 			frame.delta_y = (frame.delta_y + delta_y)*total_additive/total_relativistic
+
+			if(real_time == 0)
+				var/offset_string
+				if(frame.orbited_body)
+					offset_string = "  Offset ([dist(frame.x,frame.orbited_body.x)*1e6],[dist(frame.y,frame.orbited_body.y)*1e6]) km"
+				world.log << "[frame.name]'s acceleration: ([delta_x*1e9],[delta_y*1e9]) meters  Velocity ([frame.delta_x*1e6],[frame.delta_y*1e6]) kilometers.[offset_string]"
 
 /*		for(var/projectile/projectile in projectiles)
 			var/closest_frame = SPEED_OF_LIGHT //Stupid hack, finding closest frame
@@ -222,9 +236,7 @@ frame
 		bearing = 0			//In degrees.  The Y+ axis is 0, increasing clockwise.
 		angular_velocity	//Degrees/second
 		mass = 1e-18			//No runtimes, kthx.  In Yottagrams, mass of the frame.  (Approximated, mobs and crap do not affect mass.)
-		stealth = 0.01		//Feh.  0-1 on how difficult to detect.  Higher numbers are stealthier.
-		time_delta = 0		//Relativity~  Difference of time on the ship from "realtime" by the server's standards.
-		lorentz_factor = 1	//The closer to lightspeed you get, the higher this number.  It represents the time dilation experienced by the crew.  Will likely go unused.
+
 
 		list/z_levels		//If null, this is just a point mass simulation.  Otherwise, it has real-game world stuff.
 		list/propulsive_units
@@ -233,9 +245,11 @@ frame
 		min_z = 0
 		list/contents = list()
 		list/crewmembers
+		frame/orbited_body
+		list/frame/orbiting_bodies
 
 
-	New(new_name, new_desc, position_x, position_y, velocity_x, velocity_y, new_bearing, new_angular_velocity, new_mass, new_stealth, list/associated_levels)
+	New(new_name, new_desc, position_x, position_y, velocity_x, velocity_y, new_bearing, new_angular_velocity, new_mass, new_stealth, frame/new_orbited_body, list/associated_levels)
 		. = ..()
 		if(!physics_sim)  //OHGOD
 			world.log <<"Deleting as no physics_sim"
@@ -250,8 +264,17 @@ frame
 		bearing = new_bearing
 		angular_velocity = new_angular_velocity
 		mass = new_mass
-		stealth = new_stealth
-		lorentz_factor = lorentz_factor(delta_x, delta_y)
+
+		if(istype(new_orbited_body))
+			orbited_body = new_orbited_body
+			var/list/orbit = GetVectorToOrbit(orbited_body, x, y, mass, pick(CLOCKWISE, ANTICLOCKWISE) )
+			delta_x += orbit["x"]
+			delta_y += orbit["y"]
+			if(!orbited_body.orbiting_bodies)
+				orbited_body.orbiting_bodies = list(src)
+			else
+				orbited_body.orbiting_bodies += src
+
 		if(islist(associated_levels) && associated_levels.len)
 			z_levels = associated_levels
 
