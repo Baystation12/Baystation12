@@ -126,7 +126,7 @@
 
 /obj/item/device/radio/headset/heads/hop
 	name = "head of personnel's headset"
-	desc = "The headset of the guy who will one day be captain. Channels are as follows: :c - command, :s - security, :q - cargo, :d - mining."
+	desc = "The headset of the guy who will one day be captain. Channels are as follows: :c - command,  :q - cargo, :d - mining." /* :s - security */
 	icon_state = "com_headset"
 	item_state = "headset"
 	keyslot2 = new /obj/item/device/encryptionkey/heads/hop
