@@ -287,6 +287,12 @@
 	icon = 'custom_items.dmi'
 	icon_state = "serithi_artalis_1"
 
+/obj/item/clothing/glasses/fluff/arjun_chopra_1 //mindphyre: Arjun Chopra
+	name = "safety goggles"
+	desc = "A used pair of leather safety goggles."
+	icon = 'custom_items.dmi'
+	icon_state = "arjun_chopra_1"
+
 //////////// Hats ////////////
 //Removed by request
 /*
