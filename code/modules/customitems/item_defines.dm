@@ -259,14 +259,6 @@
 	icon_state = "mcreary_journal"
 	item_state = "mcreary_journal"
 
-/* CURRENTLY BROKEN BECAUSE I'M A PIECE OF SHIT
-/obj/item/weapon/fluff/ripleykit //morrinn: Butcher Royce
-	name = "ripley customization kit"
-	desc = "A kit containing all the needed tools and parts to turn an APLU Ripley into a Titan's Fist worker mech."
-	icon = 'custom_items.dmi'
-	icon_state = "ripleykit"
-*/
-
 //////////////////////////////////
 //////////// Clothing ////////////
 //////////////////////////////////
@@ -294,12 +286,6 @@
 	desc = "A heads-up display with limited connectivity to the NanoTrasen Extranet, capable of displaying information from official NanoTrasen records."
 	icon = 'custom_items.dmi'
 	icon_state = "serithi_artalis_1"
-
-/obj/item/clothing/glasses/fluff/arjun_chopra_1 //mindphyre: Arjun Chopra
-	name = "safety goggles"
-	desc = "A used pair of leather safety goggles."
-	icon = 'custom_items.dmi'
-	icon_state = "arjun_chopra_1"
 
 //////////// Hats ////////////
 //Removed by request
@@ -512,4 +498,3 @@
 	icon = 'custom_items.dmi'
 	icon_state = "retpoluniform"
 	color = "retpoluniform"
-
