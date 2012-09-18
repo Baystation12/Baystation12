@@ -97,14 +97,35 @@
 		TLV["pressure"] =		list(ONE_ATMOSPHERE*0.50,ONE_ATMOSPHERE*0.70,ONE_ATMOSPHERE*1.40,ONE_ATMOSPHERE*1.60) /* kpa */
 		TLV["temperature"] =	list(40, 60, 100, 120) // K
 
-	New()
+	New(turf/loc, var/ndir, var/building=0)
 		..()
+
+		//if (radio_controller)
+		//	set_frequency(frequency)
+		// offset 24 pixels in direction of dir
+		// this allows the Air Alarm to be embedded in a wall, yet still inside an area
+		if (building)
+			dir = ndir
+			pixel_x = (dir & 3)? 0 : (dir == 4 ? 24 : -24)
+			pixel_y = (dir & 3)? (dir ==1 ? 24 : -24) : 0
+			if (ndir == SOUTH)
+				dir = NORTH
+			if (ndir == NORTH)
+				dir = SOUTH
+			if (ndir == EAST)
+				dir = WEST
+			if (ndir == WEST)
+				dir = EAST
 		alarm_area = get_area(src)
+		if (!alarm_area.powered(ENVIRON))
+			src.stat |= NOPOWER
+			icon_state = "alarmp"
 		if (alarm_area.master)
 			alarm_area = alarm_area.master
 		area_uid = alarm_area.uid
 		if (name == "alarm")
 			name = "[alarm_area.name] Air Alarm"
+		//if (building)
 
 		// breathable air according to human/Life()
 		TLV["oxygen"] =			list(16, 19, 135, 140) // Partial pressure, kpa
@@ -113,9 +134,10 @@
 		TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
 		TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.10,ONE_ATMOSPHERE*1.20) /* kpa */
 		TLV["temperature"] =	list(T0C, T0C+10, T0C+40, T0C+66) // K
-
+		initialize()
 	initialize()
-		set_frequency(frequency)
+		if (radio_controller)
+			set_frequency(frequency)
 		if (!master_is_operating())
 			elect_master()
 
@@ -186,10 +208,15 @@
 
 
 	proc/master_is_operating()
-		return alarm_area.master_air_alarm && !(alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN))
+		if (!alarm_area)
+			return 0
+		else
+			return alarm_area.master_air_alarm && !(alarm_area.master_air_alarm.stat & (NOPOWER|BROKEN))
 
 
 	proc/elect_master()
+		if (!alarm_area)
+			return 0
 		for (var/area/A in alarm_area.related)
 			for (var/obj/machinery/alarm/AA in A)
 				if (!(AA.stat & (NOPOWER|BROKEN)))
@@ -328,10 +355,23 @@
 
 	proc/apply_danger_level(var/new_danger_level)
 		alarm_area.atmosalm = new_danger_level
+		if (new_danger_level==2)
+			var/list/cameras = list()
+			for(var/obj/machinery/camera/C in alarm_area)
+				cameras += C
+			for(var/mob/living/silicon/aiPlayer in world)
+				aiPlayer.triggerAlarm("Atmosphere", src, cameras, src)
+			for(var/obj/machinery/computer/station_alert/a in world)
+				a.triggerAlarm("Atmosphere", src, cameras, src)
+		else
+			for(var/mob/living/silicon/aiPlayer in world)
+				aiPlayer.cancelAlarm("Atmosphere", src, src)
+			for(var/obj/machinery/computer/station_alert/a in world)
+				a.cancelAlarm("Atmosphere", src, src)
 
 		for (var/area/A in alarm_area.related)
 			for (var/obj/machinery/alarm/AA in A)
-				if ( !(AA.stat & (NOPOWER|BROKEN)) && !AA.shorted && AA.danger_level != new_danger_level)
+				if (!(AA.stat & (NOPOWER|BROKEN)) && !AA.shorted && AA.danger_level != new_danger_level)
 					AA.update_icon()
 
 		if(danger_level > 1)
@@ -354,18 +394,17 @@
 							spawn(0)
 								E.close()
 					continue
-
-/*				if(istype(E, /obj/machinery/door/airlock))
-					if((!E:arePowerSystemsOn()) || (E.stat & NOPOWER) || E:air_locked) continue
+				if(istype(E, /obj/machinery/door/airlock))
+					if((!E:arePowerSystemsOn()) || (E.stat & NOPOWER)) continue
 					if(!E.density)
 						spawn(0)
 							E.close()
-							spawn(10)
-								if(E.density)
-									E:air_locked = E.req_access
-									E:req_access = list(ACCESS_ENGINE, ACCESS_ATMOSPHERICS)
-									E.update_icon()
-					else if(E.operating)
+							sleep(10)
+							if(E.density)
+								E:air_locked = E.req_access
+								E:req_access = list(ACCESS_ENGINE, ACCESS_ATMOSPHERICS)
+								E.update_icon()
+					if(E.operating)
 						spawn(10)
 							E.close()
 							if(E.density)
@@ -375,7 +414,7 @@
 					else if(!E:locked) //Don't lock already bolted doors.
 						E:air_locked = E.req_access
 						E:req_access = list(ACCESS_ENGINE, ACCESS_ATMOSPHERICS)
-						E.update_icon()*/
+						E.update_icon()
 
 	proc/air_doors_open(manual)
 		var/area/A = get_area(loc)
@@ -390,13 +429,13 @@
 							spawn(0)
 								E.open()
 					continue
-
-/*				if(istype(E, /obj/machinery/door/airlock))
+				if(istype(E, /obj/machinery/door/airlock))
 					if((!E:arePowerSystemsOn()) || (E.stat & NOPOWER)) continue
-					if(!isnull(E:air_locked)) //Don't mess with doors locked for other reasons.
-						E:req_access = E:air_locked
-						E:air_locked = null
-						E.update_icon()*/
+					if(E:air_locked) //Don't mess with doors locked for other reasons.
+						if(E.density)
+							E:req_access = E:air_locked
+							E:air_locked = null
+							E.update_icon()
 
 ///////////
 //HACKING//
