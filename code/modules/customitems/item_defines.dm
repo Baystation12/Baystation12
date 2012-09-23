@@ -115,6 +115,14 @@
 	icon_on = "blackzippoon"
 	icon_off = "blackzippo"
 
+/obj/item/weapon/lighter/zippo/fluff/sniperyeti_1 //sniperyeti: Patrick Harris/Susan Harris
+	name = "red black zippo"
+	desc = "A shiny red zippo lighter that looks like it's in perfect condition."
+	icon = 'custom_items.dmi'
+	icon_state = "redzippo"
+	icon_on = "redzippoon"
+	icon_off = "redzippo"
+
 /obj/item/weapon/fluff/cado_keppel_1 //sparklysheep: Cado Keppel
 	name = "purple comb"
 	desc = "A pristine purple comb made from flexible plastic. It has a small K etched into its side."
