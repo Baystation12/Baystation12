@@ -70,7 +70,7 @@ proc/GeneratePlanetName(var/system_name, var/planet_number, var/moon_number)
 	if(moon_number)
 		if(moon_number > 26)
 			var/moon_primary = round(moon_number/26, 1)
-			var/moon_secondary = moon_number%26 + 1
+			var/moon_secondary = (moon_number%26) + 1
 			return "[system_name] [planet_number][alphabet[moon_primary]][alphabet[moon_secondary]]"
 		else
 			return "[system_name] [planet_number][alphabet[moon_number]]"

@@ -24,6 +24,7 @@ physics
 	var/frame/spawn_point //Will be the space station
 	var/failed_ticks = 0
 	var/debugging_file
+	var/theta = 0.5 //Value that determines accuracy of the Barnes-Hut simulation.
 
 	proc/Setup()
 		world << "\red <B>Initializing physics simulation... </B>"
@@ -39,7 +40,7 @@ physics
 	proc/Start() //The physics ticker.
 		set background = 1
 		while(1)
-//			var/start_time = world.realtime
+			var/start_time = world.realtime
 			if(!halt_physics)
 				var/result = Tick()
 				if(!result)
@@ -50,13 +51,11 @@ physics
 					debugging_file << "Simulation halted, due to runtimes."
 					#endif
 					halt_physics = 1
-		//	var/time_difference = world.realtime - start_time
-		//	sleep( min( 10, max( 0, 10 - time_difference ) ) )
-			sleep(prob(1))
+			var/time_difference = world.realtime - start_time
+			sleep( min( 10, max( 0, 10 - time_difference ) ) )
 
 	proc/Tick()
 		. = 0
-		var/list/delta_v
 		for(var/frame/frame in all_frames)
 			//Acceleration for the frame
 			var/delta_y = 0
@@ -65,12 +64,70 @@ physics
 				delta_x = frame.acceleration_x*cos(frame.bearing) + frame.acceleration_y*sin(frame.bearing)
 				delta_y = -frame.acceleration_x*sin(frame.bearing) + frame.acceleration_y*cos(frame.bearing)
 
-			if(frame.solar_system) //traverse the tree the frame is in, and calculate the gravitation.
-				delta_v = frame.solar_system.quadtree.TraverseGravity(frame)
-			else
-				delta_v = quadtree.TraverseGravity(frame)
-			delta_y += delta_v[2]
-			delta_x += delta_v[1]
+			if(frame.mass)
+				var/physics_tree/tree
+				var/physics_node/current_node
+				if(frame.solar_system) //traverse the tree the frame is in, and calculate the gravitation.
+					tree = frame.solar_system.quadtree
+				else
+					tree = quadtree
+
+				for(var/physics_node/node in tree.nodes)
+					current_node = node
+					do
+						current_node.ReturnCenterOfMass()
+
+						var/recurse_further = 0
+						if(current_node.center_of_mass[1])
+							var/dx = frame.x - current_node.center_of_mass[2]
+							var/dy = frame.y - current_node.center_of_mass[3]
+							var/distance = Dist(dx, dy)
+							if(distance)
+
+								if(current_node.side_length/distance < theta)
+									var/attraction = Gravity(current_node.center_of_mass[1], distance)
+									delta_x += dx*attraction/distance
+									delta_y += dy*attraction/distance
+
+								else if (current_node.contents)
+									if(current_node.frames_with_considerable_mass && current_node.frames_with_considerable_mass.len)
+										for(var/frame/massive_body in current_node.frames_with_considerable_mass)
+											if(massive_body == frame)
+												continue
+											dx = frame.x - massive_body.x
+											dy = frame.y - massive_body.y
+											distance = Dist(dx, dy)
+											var/attraction = Gravity(massive_body.mass, distance)
+											delta_x += dx*attraction/distance
+											delta_y += dy*attraction/distance
+
+								else if(current_node.nodes)
+									recurse_further = 1
+
+								else
+									current_node.SoftDelete() //No contents, no nothing!  REMOVE IT!
+
+						if(recurse_further)
+							for(var/i = 1 to 4)
+								if(istype(current_node.nodes[i], /physics_node))
+									current_node = current_node.nodes[i]
+									break
+						else
+							while(istype(current_node.root))
+								var/current_position = current_node.root.nodes.Find(current_node)
+								var/new_node_found = 0
+								if(current_position < 4)
+									for(var/i = (current_position + 1) to 4)
+										if(istype(current_node.root.nodes[i], /physics_node))
+											current_node = current_node.root.nodes[i]
+											new_node_found = 1
+											break
+								if(new_node_found)
+									break
+								else
+									current_node = current_node.root
+					while(istype(current_node.root))
+
 			#ifdef PHYSICS_DEBUG
 			if(prob(prob(1)))
 				debugging_file << "[frame.name] is being adjusted by [Dist(delta_x, delta_y)*1e9] m/s"

@@ -243,59 +243,6 @@ physics_tree
 		node.Insert(frame)
 
 
-	proc/TraverseGravity(var/frame/frame, var/theta = 0.5)
-		var/list/delta_v = list(0,0)
-		for(var/physics_node/node in nodes)
-			node.ReturnCenterOfMass()
-			var/list/subnode_delta_v = node.TraverseGravity(frame, theta)
-			if(subnode_delta_v)
-				delta_v[1] += subnode_delta_v[1]
-				delta_v[2] += subnode_delta_v[2]
-		return delta_v
-
-//Function to adjust the delta_v of an object such as would be expected
-	proc/TraverseGravity(var/frame/frame, theta)
-		if(!center_of_mass[1])
-			return
-		var/list/delta_v
-		var/dx = frame.x - center_of_mass[2]
-		var/dy = frame.y - center_of_mass[3]
-		var/distance = Dist(dx, dy)
-
-		if(!distance)
-			return //Only thing there.  It's not going to act upon itself.
-
-		if(side_length/distance < theta)
-			var/attraction = Gravity(center_of_mass[1], distance)
-			delta_v = list(dx*attraction/distance, dy*attraction/distance)
-
-		else if(contents)
-			if(frames_with_considerable_mass && frames_with_considerable_mass.len)
-				for(var/frame/massive_body in frames_with_considerable_mass)
-					if(massive_body == frame)
-						continue
-					dx = frame.x - massive_body.x
-					dy = frame.y - massive_body.y
-					distance = Dist(dx, dy)
-					var/attraction = Gravity(massive_body.mass, distance)
-					if(!delta_v)
-						delta_v = list(dx*attraction/distance, dy*attraction/distance)
-					else
-						delta_v[1] += dx*attraction/distance
-						delta_v[2] += dy*attraction/distance
-
-		else
-			for(var/physics_node/node in nodes)
-				var/temp_dv = node.TraverseGravity(frame, theta)
-				if(temp_dv)
-					if(!delta_v)
-						delta_v = temp_dv
-					else
-						delta_v[1] += temp_dv[1]
-						delta_v[2] += temp_dv[2]
-
-		return delta_v
-
 
 
 physics_node
@@ -327,7 +274,7 @@ physics_node
 		side_length = _side_length
 
 
-//Function to add a frame to a node.  Handles everything from subdividing the node to properly setting variables.
+	//Function to add a frame to a node.  Handles everything from subdividing the node to properly setting variables.
 	proc/Insert(var/frame/frame)
 
 		if(src in frame.nodes)
@@ -510,7 +457,7 @@ physics_node
 		node.Insert(frame)
 
 
-//Function to remove a frame from a node.  Handles removal, as well as deletion of a node if it is now empty, and merging of child nodes into the parent node if the child nodes are now empty enough.
+	//Function to remove a frame from a node.  Handles removal, as well as deletion of a node if it is now empty, and merging of child nodes into the parent node if the child nodes are now empty enough.
 	proc/Remove(var/frame/frame)
 
 	//First, we check if the frame is in the node.  We are using an ASSERT since LOL, LEMME MAKE MY CODE DIRECTLY MODIFY THE FRAME'S ASSOCIATED NODE.
@@ -547,7 +494,7 @@ physics_node
 			root = null
 
 
-//Function to handle merging of children back into the parent node.
+	//Function to handle merging of children back into the parent node.
 	proc/ConsiderMerge()
 		if(last_merge_attempt == physics_sim.real_time)
 			return
@@ -574,7 +521,7 @@ physics_node
 				Insert(frame)
 
 
-//Function to handle gathering the total number of frames contained within a child.  Returns an interger.
+	//Function to handle gathering the total number of frames contained within a child.  Returns an interger.
 	proc/TotalContents()
 
 	//Totals up the contents of each child and returns it.
@@ -587,7 +534,7 @@ physics_node
 		return total
 
 
-//Function to gather then return the contents of the node and any children.  Returns a list of frames.
+	//Function to gather then return the contents of the node and any children.  Returns a list of frames.
 	proc/ReturnContents()
 		if(contents)
 			return contents
@@ -598,7 +545,7 @@ physics_node
 		return total
 
 
-//Function to compute the center of mass.  Returns a list in for format of list(mass, x, y)
+	//Function to compute the center of mass.  Returns a list in for format of list(mass, x, y)
 	proc/ReturnCenterOfMass()
 		if(center_of_mass_updated == physics_sim.real_time)
 			return center_of_mass
@@ -629,7 +576,7 @@ physics_node
 		return center_of_mass
 
 
-//Function to delete the node via garbage collector.
+	//Function to delete the node via garbage collector.
 	proc/SoftDelete()
 		for(var/frame in contents)
 			Remove(frame)
