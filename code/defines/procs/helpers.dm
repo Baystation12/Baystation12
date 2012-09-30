@@ -895,12 +895,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/M = E/(SPEED_OF_LIGHT_SQ)
 	return M
 
-/proc/modulus(var/M)
-	if(M >= 0)
-		return M
-	if(M < 0)
-		return -M
-
 
 /proc/key_name(var/whom, var/include_link = null, var/include_name = 1)
 	var/mob/the_mob = null

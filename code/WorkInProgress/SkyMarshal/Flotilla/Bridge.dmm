@@ -1,0 +1,28 @@
+"a" = (/turf/simulated/wall/r_wall,/area)
+"b" = (/obj/structure/table,/obj/structure/extinguisher_cabinet{pixel_x = -26},/obj/item/weapon/storage/firstaid/fire{pixel_x = 4; pixel_y = 4},/obj/item/weapon/storage/firstaid/toxin,/obj/item/weapon/storage/firstaid/o2{pixel_x = -4; pixel_y = -4},/turf/simulated/floor{icon_state = "grimy"},/area)
+"c" = (/obj/machinery/computer/artifact_database,/turf/simulated/floor/bluegrid,/area)
+"d" = (/obj/machinery/computer/teleporter,/obj/machinery/newscaster/security_unit{pixel_x = 0; pixel_y = 30},/turf/simulated/floor/bluegrid,/area)
+"e" = (/obj/machinery/computer/turbine_computer,/turf/simulated/floor/bluegrid,/area)
+"f" = (/obj/structure/closet/emcloset,/turf/simulated/floor{icon_state = "grimy"},/area)
+"g" = (/obj/structure/table,/obj/machinery/newscaster/security_unit{pixel_x = -28},/obj/item/weapon/storage/deathalarm_kit,/turf/simulated/floor{icon_state = "grimy"},/area)
+"h" = (/turf/simulated/floor{icon_state = "vault"; dir = 1},/area)
+"i" = (/obj/structure/stool/bed/chair/comfy/lime{dir = 1},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area)
+"j" = (/obj/machinery/computer/atmoscontrol,/obj/machinery/newscaster/security_unit{pixel_x = 28},/turf/simulated/floor/bluegrid,/area)
+"k" = (/obj/machinery/computer/telecomms/monitor,/turf/simulated/floor/bluegrid,/area)
+"l" = (/obj/structure/stool/bed/chair/comfy/lime{tag = "icon-comfychair_lime (WEST)"; icon_state = "comfychair_lime"; dir = 8},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area)
+"m" = (/obj/structure/table,/obj/machinery/hologram/holopad,/turf/simulated/floor/greengrid,/area)
+"n" = (/obj/structure/stool/bed/chair/comfy/lime{tag = "icon-comfychair_lime (EAST)"; icon_state = "comfychair_lime"; dir = 4},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area)
+"o" = (/obj/machinery/computer/Borg_station,/turf/simulated/floor/bluegrid,/area)
+"p" = (/obj/machinery/computer/communications,/turf/simulated/floor/bluegrid,/area)
+"q" = (/obj/structure/stool/bed/chair/comfy/brown{dir = 1},/turf/simulated/floor{icon_state = "carpetside"},/area)
+"r" = (/obj/machinery/computer/lasercon,/turf/simulated/floor/bluegrid,/area)
+"s" = (/obj/machinery/door/airlock/glass/glass_command,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area)
+
+(1,1,1) = {"
+aaaaaaa
+abcdefa
+aghihja
+aklmnoa
+aphqhra
+aasasaa
+"}

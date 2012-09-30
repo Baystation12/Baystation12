@@ -94,6 +94,8 @@ map_handler
 		x = 0 //Please calculate these and set them, so that the system can easier manage the world.
 		y = 0
 		z = 0
+		density = 0.25 //g/cm^3
+		mass = 1
 
 		is_voteable = 0
 		is_flotilla = 0

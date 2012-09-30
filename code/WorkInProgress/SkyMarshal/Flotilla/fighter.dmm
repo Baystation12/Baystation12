@@ -1,0 +1,89 @@
+"aa" = (/turf/space,/area)
+"ab" = (/obj/machinery/turretcover,/turf/simulated/floor/airless{icon_state = "circuit"},/area/shuttle/specops/centcom)
+"ac" = (/turf/simulated/wall/heatshield,/area/shuttle/specops/centcom)
+"ad" = (/turf/simulated/floor,/area/shuttle/specops/centcom)
+"ae" = (/turf/simulated/wall/r_wall,/area/shuttle/specops/centcom)
+"af" = (/obj/machinery/atmospherics/mains_pipe/manifold/visible{tag = "icon-manifold (WEST)"; icon_state = "manifold"; dir = 8},/turf/space,/area)
+"ag" = (/obj/machinery/computer/Borg_station,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"ah" = (/obj/structure/table,/obj/machinery/hologram/holopad,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"ai" = (/obj/machinery/computer/teleporter,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aj" = (/obj/machinery/atmospherics/mains_pipe/manifold/visible{tag = "icon-manifold (EAST)"; icon_state = "manifold"; dir = 4},/turf/space,/area)
+"ak" = (/obj/machinery/computer/lockdown,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"al" = (/obj/structure/stool/bed/chair/comfy/beige{tag = "icon-comfychair_beige (NORTH)"; icon_state = "comfychair_beige"; dir = 1},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"am" = (/obj/machinery/computer/general_air_control,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"an" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{icon_state = "intact"; dir = 6},/turf/space,/area)
+"ao" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{icon_state = "intact"; dir = 10},/turf/space,/area)
+"ap" = (/obj/machinery/atmospherics/unary/vent_pump,/obj/machinery/computer/communications,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aq" = (/obj/machinery/atmospherics/pipe/vent,/obj/machinery/computer/rust/energy_monitor,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"ar" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{icon_state = "intact"; dir = 1},/turf/space,/area)
+"as" = (/turf/simulated/wall,/area/shuttle/specops/centcom)
+"at" = (/obj/machinery/atmospherics/pipe/simple/supply/visible{tag = "icon-intact-b (NORTH)"; icon_state = "intact-b"; dir = 1},/turf/simulated/wall,/area/shuttle/specops/centcom)
+"au" = (/obj/machinery/door/airlock/glass/glass_security,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"av" = (/obj/structure/table,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aw" = (/obj/machinery/atmospherics/pipe/simple/supply/visible{tag = "icon-intact-b (NORTH)"; icon_state = "intact-b"; dir = 1},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"ax" = (/obj/machinery/atmospherics/pipe/simple/supply/visible{icon_state = "intact-b"; dir = 6},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"ay" = (/obj/machinery/atmospherics/pipe/simple/supply/visible{tag = "icon-intact-b (NORTHWEST)"; icon_state = "intact-b"; dir = 9},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"az" = (/obj/machinery/atmospherics/pipe/manifold/supply/visible{icon_state = "manifold-b"; dir = 8},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aA" = (/obj/machinery/atmospherics/trinary/filter{dir = 2; filter_type = 1; icon_state = "intact_on"; name = "Gas filter (O2 tank)"; on = 1},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aB" = (/obj/machinery/atmospherics/trinary/filter{dir = 2; filter_type = 2; icon_state = "intact_on"; name = "Gas filter (N2 tank)"; on = 1},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aC" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{icon_state = "intact"; dir = 5},/turf/space,/area)
+"aD" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{tag = "icon-exposed01 (WEST)"; icon_state = "exposed01"; dir = 8},/turf/space,/area)
+"aE" = (/obj/machinery/atmospherics/pipe/manifold/scrubbers/visible{tag = "icon-manifold-r (NORTH)"; icon_state = "manifold-r"; dir = 1},/turf/simulated/wall/r_wall,/area/shuttle/specops/centcom)
+"aF" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 4},/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 1},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aG" = (/obj/machinery/atmospherics/pipe/manifold/scrubbers/visible{tag = "icon-manifold-r (NORTH)"; icon_state = "manifold-r"; dir = 1},/obj/machinery/atmospherics/pipe/vent{dir = 1},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aH" = (/obj/machinery/atmospherics/pipe/manifold/scrubbers/visible{tag = "icon-manifold-r (NORTH)"; icon_state = "manifold-r"; dir = 1},/obj/structure/closet/emcloset,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aI" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{tag = "icon-exposed01 (EAST)"; icon_state = "exposed01"; dir = 4},/turf/space,/area)
+"aJ" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{icon_state = "intact"; dir = 9},/turf/space,/area)
+"aK" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 9},/turf/simulated/wall/r_wall,/area/shuttle/specops/centcom)
+"aL" = (/obj/machinery/atmospherics/pipe/tank/carbon_dioxide,/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aM" = (/obj/machinery/atmospherics/unary/generator_input{dir = 1},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aN" = (/obj/machinery/atmospherics/pipe/tank/carbon_dioxide{dir = 1},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aO" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 5},/turf/simulated/wall/r_wall,/area/shuttle/specops/centcom)
+"aP" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 6},/turf/simulated/wall/r_wall,/area/shuttle/specops/centcom)
+"aQ" = (/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/machinery/power/terminal{dir = 8},/obj/machinery/power/apc{dir = 8},/obj/machinery/atmospherics/pipe/manifold/scrubbers/visible{dir = 4; icon_state = "manifold-r"; tag = "icon-manifold-r (WEST)"},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aR" = (/obj/machinery/power/generator_type2{dir = 8},/obj/machinery/atmospherics/pipe/simple/supply/visible{tag = "icon-intact-b (WEST)"; icon_state = "intact-b"; dir = 8},/obj/structure/cable{d2 = 8; icon_state = "0-8"; pixel_y = 1},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aS" = (/obj/machinery/atmospherics/pipe/tank/oxygen{volume = 3200},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aT" = (/obj/machinery/power/generator_type2{dir = 8},/turf/space,/area/shuttle/specops/centcom)
+"aU" = (/obj/machinery/atmospherics/pipe/manifold/scrubbers/visible{dir = 4; icon_state = "manifold-r"; tag = "icon-manifold-r (WEST)"},/turf/simulated/wall/r_wall,/area/shuttle/specops/centcom)
+"aV" = (/obj/machinery/atmospherics/trinary/filter{dir = 1; filter_type = 1; icon_state = "intact_on"; name = "Gas filter (O2 tank)"; on = 1; pressure_resistance = 4500},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aW" = (/obj/machinery/atmospherics/unary/generator_input{layer = 2.5},/obj/machinery/atmospherics/pipe/simple/supply/visible{tag = "icon-intact-b (WEST)"; icon_state = "intact-b"; dir = 8},/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 4},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aX" = (/obj/machinery/atmospherics/pipe/manifold/scrubbers/visible{dir = 4; icon_state = "manifold-r"; tag = "icon-manifold-r (WEST)"},/turf/simulated/floor,/area/shuttle/specops/centcom)
+"aY" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 1},/turf/simulated/wall/r_wall,/area/shuttle/specops/centcom)
+"aZ" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible,/turf/simulated/wall/heatshield,/area/shuttle/specops/centcom)
+"ba" = (/obj/machinery/atmospherics/pipe/manifold/general/visible{tag = "icon-manifold-r (WEST)"; icon_state = "manifold-r"; dir = 8},/turf/simulated/wall/heatshield,/area/shuttle/specops/centcom)
+"bb" = (/obj/machinery/atmospherics/binary/pump{dir = 2; icon_state = "intact_on"; layer = 2.5; on = 1; pressure_resistance = 4500},/obj/machinery/atmospherics/pipe/tank/carbon_dioxide{dir = 8; icon_state = "intact"; layer = 2.6; tag = "icon-intact (WEST)"},/turf/simulated/wall/heatshield,/area/shuttle/specops/centcom)
+"bc" = (/turf/space,/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 1},/turf/simulated/shuttle/wall{dir = 2; icon_state = "heater"; layer = 2.6; tag = "icon-heater"},/area/shuttle/specops/centcom)
+"bd" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 5},/turf/simulated/wall/heatshield,/area/shuttle/specops/centcom)
+"be" = (/obj/machinery/atmospherics/unary/thermal_plate{dir = 1},/obj/machinery/power/supermatter/shard,/obj/machinery/atmospherics/pipe/vent{tag = "icon-intact (WEST)"; icon_state = "intact"; dir = 8},/obj/machinery/atmospherics/pipe/vent{tag = "icon-intact (EAST)"; icon_state = "intact"; dir = 4},/turf/simulated/floor/engine{name = "vacuum floor"; nitrogen = 0.01; oxygen = 0.01},/area/shuttle/specops/centcom)
+"bf" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 9},/turf/simulated/wall/heatshield,/area/shuttle/specops/centcom)
+"bg" = (/turf/space,/turf/simulated/shuttle/wall{tag = "icon-propulsion"; icon_state = "propulsion"; dir = 2},/area/shuttle/specops/centcom)
+"bh" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 4},/turf/simulated/wall/r_wall,/area/shuttle/specops/centcom)
+"bi" = (/obj/machinery/door/poddoor,/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{icon_state = "intact-r"; dir = 4},/turf/simulated/floor/engine{name = "vacuum floor"; nitrogen = 0.01; oxygen = 0.01},/area/shuttle/specops/centcom)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaabacabaaaaaaaaaaaaaa
+aaaaaaaaaaacadacaaaaaaaaaaaaaa
+aaaaaaaaaeacadacaeaaaaaaaaaaaa
+aaaaaaafaeagahaiaeajaaaaaaaaaa
+aaaaaaaaaeakalamaeaaaaaaaaaaaa
+aaanaoaeaeapadaqaeaeanaoaaaaaa
+aaararaeasatauatasaeararaaaaaa
+aaararaeavawaxayavaeararaaaaaa
+aaararaeavazaAadavaeararaaaaaa
+aaararaeaeazaBadaeaeararaaaaaa
+aaaraCaDaEaFaGaHaEaIaJaraaaaaa
+aaaranaDaKaLaMaNaOaIaoaraaaaaa
+aaararaaaPaQaRaSaeaaararaaaaaa
+aaararaTaUaVaWaXaPaTararaaaaaa
+aaararaTaYaZbabbaYaTararaaaaaa
+aaararbcaYbdbebfaYbcararaaaaaa
+aaaCaJbgaObhbibhaKbgaCaJaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
