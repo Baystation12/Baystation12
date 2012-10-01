@@ -1817,6 +1817,9 @@ var/list/grind_products = list()
 			return 0
 		if(istype(M, /mob/living/carbon))
 			if(M == user)								//If you're eating it yourself.
+				if(istype(M.wear_mask, /obj/item/clothing/mask) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/mime) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/clown_hat) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexyclown) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexymime))
+					user << "\red You can't eat [src] through mask."
+					return 0
 				var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
 				if (fullness <= 50)
 					M << "\red You hungrily chew out a piece of [src] and gobble it!"
@@ -1882,6 +1885,9 @@ var/list/grind_products = list()
 				return 1
 		else if(istype(M, /mob/living/simple_animal/livestock))
 			if(M == user)								//If you're eating it yourself.
+				if(istype(M.wear_mask, /obj/item/clothing/mask) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/mime) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/clown_hat) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexyclown) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexymime))
+					user << "\red You can't eat [src] through mask."
+					return 0
 				var/fullness = (M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)) / M:max_nutrition
 				if (fullness <= 0.1)
 					M << "\red You hungrily chew out a piece of [src] and gobble it!"
@@ -1895,6 +1901,9 @@ var/list/grind_products = list()
 					M << "\red You cannot force any more of [src] to go down your throat."
 					return 0
 			else
+				if(istype(M.wear_mask, /obj/item/clothing/mask) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/mime) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/clown_hat) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexyclown) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexymime))
+					user << "\red You can't feed [M] with [src] through mask."
+					return 0
 				var/fullness = (M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)) / M:max_nutrition
 				if (fullness <= 1)
 					for(var/mob/O in viewers(world.view, user))
@@ -2056,6 +2065,9 @@ var/list/grind_products = list()
 			return 0
 
 		if(M == user)
+			if(istype(M.wear_mask, /obj/item/clothing/mask) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/mime) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/clown_hat) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexyclown) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexymime))
+				user << "\red You can't drink [src] through mask."
+				return 0
 			M << "\blue You swallow a gulp of [src]."
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
@@ -2065,7 +2077,9 @@ var/list/grind_products = list()
 			playsound(M.loc,'drink.ogg', rand(10,50), 1)
 			return 1
 		else if( istype(M, /mob/living/carbon/human) )
-
+			if(istype(M.wear_mask, /obj/item/clothing/mask) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/mime) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/clown_hat) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexyclown) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexymime))
+				user << "\red You can't forced [M] to drink [src] through mask."
+				return 0
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message("\red [user] attempts to feed [M] [src].", 1)
 			if(!do_mob(user, M)) return
