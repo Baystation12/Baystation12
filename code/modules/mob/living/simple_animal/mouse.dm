@@ -115,6 +115,17 @@
 			if ((O.client && !( O.blinded )))
 				O << text("[] slowly peaks up from the ground...", src)
 
+
+/mob/living/simple_animal/mouse/verb/eat(var/obj/item/weapon/reagent_containers/food/M)
+	set name = "Eat"
+	set desc = "Eat something"
+	set category = "Mouse"
+
+	del M
+	src << text("\blue You eat the [M]")
+	for (var/mob/O in oviewers(7, usr))
+		O << text("[] munches [M]", src)
+
 //make mice fit under tables etc? this was hacky, and not working
 /*
 /mob/living/simple_animal/mouse/Move(var/dir)
