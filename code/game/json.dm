@@ -1,14 +1,12 @@
 
-var/jsonpath = "/ss13"
-var/dmepath = "/ss13/git/baystation12.dme"
-var/makejson = 0 //temp
-var/makejsonlocal = 1 //temp
-
+var/jsonpath = "/home/bay12/public_html"
+var/dmepath = "/home/bay12/git/baystation12.dme"
+var/makejson = 1 //temp
 proc/makejson()
 
-	if(!makejsonlocal)
+	if(!makejson)
 		return
-	//fdel("[jsonpath]/info.json")
+	fdel("[jsonpath]/info.json")
 		//usr << "Error cant delete json"
 	//else
 		//usr << "Deleted json in public html"
@@ -41,7 +39,7 @@ proc/makejson()
 		else
 			players += "[C.key];"
 	F << "{\"mode\":\"[mode]\",\"players\" : \"[players]\",\"playercount\" : \"[playerscount]\",\"admin\" : \"[admins]\",\"time\" : \"[time2text(world.realtime,"MM/DD - hh:mm")]\"}"
-	//fcopy("info.json","[jsonpath]/info.json")
+	fcopy("info.json","[jsonpath]/info.json")
 
 /proc/switchmap(newmap,newpath)
 	var/oldmap
@@ -97,8 +95,6 @@ client/proc/ChangeMap(var/X as text)
 	set name = "Change Map"
 	set category  = "Admin"
 	switchmap(X,X)
-proc/send2irc(msg,msg2)
- 	shell("python nudge.py [msg] [msg2]")
 proc/send2adminirc(channel,msg)
 	world << channel << " "<< msg
 	shell("python nudge.py '[channel]' [msg]")

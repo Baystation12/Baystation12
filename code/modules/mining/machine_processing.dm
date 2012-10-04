@@ -2,11 +2,10 @@
 
 /obj/machinery/mineral/processing_unit_console
 	name = "production machine console"
-	icon = 'mining_machines.dmi'
+	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "console"
 	density = 1
 	anchored = 1
-	var/id = ""
 	var/obj/machinery/mineral/processing_unit/machine = null
 	var/machinedir = EAST
 
@@ -176,11 +175,10 @@
 
 /obj/machinery/mineral/processing_unit
 	name = "furnace"
-	icon = 'mining_machines.dmi'
+	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "furnace"
 	density = 1
 	anchored = 1.0
-	var/id = ""
 	var/obj/machinery/mineral/input = null
 	var/obj/machinery/mineral/output = null
 	var/obj/machinery/mineral/CONSOLE = null
@@ -313,27 +311,37 @@
 					continue*/
 
 
-				// A non valid combination was selected
+				//if a non valid combination is selected
+
 				var/b = 1 //this part checks if all required ores are available
 
-				if (!(selected_gold || selected_silver || selected_diamond || selected_uranium || selected_plasma || selected_iron || selected_glass || selected_clown))
+				if (!(selected_gold || selected_silver ||selected_diamond || selected_uranium | selected_plasma || selected_iron || selected_iron))
 					b = 0
-				else if (selected_gold == 1 && ore_gold <= 0)
-					b = 0
-				else if (selected_silver == 1 && ore_silver <= 0)
-					b = 0
-				else if (selected_diamond == 1 && ore_diamond <= 0)
-					b = 0
-				else if (selected_uranium == 1 && ore_uranium <= 0)
-					b = 0
-				else if (selected_plasma == 1 && ore_plasma <= 0)
-					b = 0
-				else if (selected_iron == 1 && ore_iron <= 0)
-					b = 0
-				else if (selected_glass == 1 && ore_glass <= 0)
-					b = 0
-				else if (selected_clown == 1 && ore_clown <= 0)
-					b = 0
+
+				if (selected_gold == 1)
+					if (ore_gold <= 0)
+						b = 0
+				if (selected_silver == 1)
+					if (ore_silver <= 0)
+						b = 0
+				if (selected_diamond == 1)
+					if (ore_diamond <= 0)
+						b = 0
+				if (selected_uranium == 1)
+					if (ore_uranium <= 0)
+						b = 0
+				if (selected_plasma == 1)
+					if (ore_plasma <= 0)
+						b = 0
+				if (selected_iron == 1)
+					if (ore_iron <= 0)
+						b = 0
+				if (selected_glass == 1)
+					if (ore_glass <= 0)
+						b = 0
+				if (selected_clown == 1)
+					if (ore_clown <= 0)
+						b = 0
 
 				if (b) //if they are, deduct one from each, produce slag and shut the machine off
 					if (selected_gold == 1)
@@ -351,12 +359,13 @@
 					if (selected_clown == 1)
 						ore_clown--
 					new /obj/item/weapon/ore/slag(output.loc)
-
-				on = 0
-
-			else // on == 0
+					on = 0
+				else
+					on = 0
+					break
 				break
-
+			else
+				break
 		for (i = 0; i < 10; i++)
 			var/obj/item/O
 			O = locate(/obj/item, input.loc)

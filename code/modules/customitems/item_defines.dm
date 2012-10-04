@@ -139,17 +139,17 @@
 	icon_state = "purplecomb"
 	item_state = "purplecomb"
 
+	attack_self(mob/user)
+		if(user.r_hand == src || user.l_hand == src)
+			for(var/mob/O in viewers(user, null))
+				O.show_message(text("\red [] uses [] to comb their hair with incredible style and sophistication. What a guy.", user, src), 1)
+		return
+
 /obj/item/weapon/fluff/hugo_cinderbacth_1 //thatoneguy: Hugo Cinderbatch
 	name = "Old Cane"
 	desc = "An old brown cane made from wood. It has a a large, itallicized H on it's handle."
 	icon = 'custom_items.dmi'
 	icon_state = "special_cane"
-
-	attack_self(mob/user)
-		if(user.r_hand == src || user.l_hand == src)
-			for(var/mob/O in viewers(user, null))
-				O.show_message(text("\red [] uses their [] to comb their hair with incredible style and sophistication. What a guy.", user, src), 1)
-		return
 
 /obj/item/weapon/camera_test/fluff/orange //chinsky: Summer Springfield
 	name = "orange camera"
@@ -236,8 +236,8 @@
 		return
 	if (reagents.total_volume)
 		if (M == user && user.ckey == "nerezza") //Make sure this is being used by the right person, for the right reason (self injection)
-			visible_message("\blue [user] presses [user.get_visible_gender() == MALE ? "his" : user.get_visible_gender() == FEMALE ? "her" : "their"] \
-				penlight against [user.get_visible_gender() == MALE ? "his" : user.get_visible_gender() == FEMALE ? "her" : "their"] skin, quickly clicking the button once.", \
+			visible_message("\blue [user] presses their \
+				penlight against their skin, quickly clicking the button once.", \
 				"\blue You press the disguised autoinjector against your skin and click the button. There's a sharp pain at the injection site that rapidly fades.", \
 				"You hear a rustle as someone moves nearby, then a sharp click.")
 		if (M != user && user.ckey == "nerezza") //Woah now, you better be careful partner
