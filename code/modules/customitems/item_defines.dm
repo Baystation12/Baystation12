@@ -139,6 +139,12 @@
 	icon_state = "purplecomb"
 	item_state = "purplecomb"
 
+/obj/item/weapon/fluff/hugo_cinderbacth_1 //thatoneguy: Hugo Cinderbatch
+	name = "Old Cane"
+	desc = "An old brown cane made from wood. It has a a large, itallicized H on it's handle."
+	icon = 'custom_items.dmi'
+	icon_state = "special_cane"
+
 	attack_self(mob/user)
 		if(user.r_hand == src || user.l_hand == src)
 			for(var/mob/O in viewers(user, null))
@@ -262,9 +268,9 @@
 
 /obj/item/weapon/card/id/fluff/ian_colmid //Roaper: Ian Colm
 	name = "Technician"
-	desc = "a ID with the name 'Ian Colm' on it"
-	icon = 'card.dmi'
-	icon_state = "id"
+	desc = "An old ID with the words 'Ian Colm's Technician ID' printed on it.."
+	icon = 'custom_items.dmi'
+	icon_state = "technician_id"
 
 
 /obj/item/weapon/clipboard/fluff/mcreary_journal //sirribbot: James McReary
@@ -529,3 +535,4 @@
 	icon = 'custom_items.dmi'
 	icon_state = "retpoluniform"
 	color = "retpoluniform"
+
