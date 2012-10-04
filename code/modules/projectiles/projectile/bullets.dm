@@ -41,3 +41,12 @@
 	stun = 10
 	weaken = 10
 	stutter = 10
+
+/obj/item/projectile/bullet/lead
+	name ="lead"
+	icon_state= "lead"
+	damage = 10
+
+	on_hit(var/atom/target, var/blocked = 0)
+		explosion(target, -1, -1, 1, -1)
+		return 1
