@@ -33,6 +33,17 @@
 	var/owner = "God Emperor of Mankind"
 	var/read_only = 0 //Well,it's still a floppy disk
 
+/obj/item/weapon/disk/verb/rename()
+	set name = "Rename disk"
+	set category = "Object"
+	set src in usr
+	var/n_name = input(usr, "What would you like to label the disk?", "Disk Labelling", null)  as text
+	n_name = copytext(n_name, 1, 32)
+	if ((loc == usr && usr.stat == 0))
+		name = "disk[(n_name ? text("- '[n_name]'") : null)]"
+	add_fingerprint(usr)
+	return
+
 /obj/item/weapon/disk/data/demo
 	name = "data disk - 'God Emperor of Mankind'"
 	data = "066000033000000000AF00330660FF4DB002690"
