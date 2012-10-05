@@ -12,6 +12,10 @@
 	var/status = 0
 	origin_tech = "combat=2"
 
+/obj/item/weapon/melee/baton/examine()
+	set src in usr
+	usr << text("A stun baton for incapacitating people with.\n \blue The [src] have [charges] charges.")
+	return
 
 /obj/item/weapon/melee/baton/update_icon()
 	if(status)
@@ -30,7 +34,7 @@
 		return
 	if(charges > 0)
 		status = !status
-		user << "<span class='notice'>\The [src] is now [status ? "on" : "off"].</span>"
+		user << "<span class='notice'>\The [src] is now [status ? "on" : "off"]. There are [charges] charges</span>"
 		playsound(src.loc, "sparks", 75, 1, -1)
 		update_icon()
 	else
@@ -86,6 +90,8 @@
 		if(charges < 1)
 			status = 0
 			update_icon()
+		else
+			user << "<span class='notice'>\The [src] have [charges] charges.</span>"
 
 	add_fingerprint(user)
 
