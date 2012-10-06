@@ -51,6 +51,8 @@
 	icon_living = "mouse_[color]"
 	icon_dead = "mouse_[color]_dead"
 	desc = "It's a small [color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
+	if(!(pass_flags & PASSTABLE))
+		pass_flags |= PASSTABLE
 
 /mob/living/simple_animal/mouse/proc/splat()
 	src.health = 0
