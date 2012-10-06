@@ -24,6 +24,8 @@
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 
 /mob/living/simple_animal/cat/Life()
+	if(!(pass_flags & PASSTABLE))
+		pass_flags |= PASSTABLE
 	//MICE!
 	if((src.loc) && isturf(src.loc))
 		if(!stat && !resting && !buckled)
