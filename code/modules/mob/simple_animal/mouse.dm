@@ -21,6 +21,7 @@
 	var/color	//brown, gray and white
 	layer = 2.5		//so they can hide under objects
 	swap_on_mobbump = 0
+	emote_allowed = 1
 	min_oxy = 16 //Require atleast 16kPA oxygen
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
@@ -50,6 +51,8 @@
 	icon_living = "mouse_[color]"
 	icon_dead = "mouse_[color]_dead"
 	desc = "It's a small [color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
+	if(!(pass_flags & PASSTABLE))
+		pass_flags |= PASSTABLE
 
 /mob/living/simple_animal/mouse/proc/splat()
 	src.health = 0

@@ -394,24 +394,31 @@
 					src.status |= ORGAN_BLEEDING
 					var/list/size_names = list(/datum/wound/cut, /datum/wound/deep_cut, /datum/wound/flesh_wound, /datum/wound/gaping_wound, /datum/wound/big_gaping_wound, /datum/wound/massive_wound)
 					wound_type = size_names[size]
-
 					W = new wound_type(damage)
-
+					//message_admins("DEBUG: Wound type CUT: [type]")
 				if(BRUISE)
 					var/list/size_names = list(/datum/wound/bruise/tiny_bruise, /datum/wound/bruise/small_bruise, /datum/wound/bruise/moderate_bruise, /datum/wound/bruise/large_bruise, /datum/wound/bruise/huge_bruise, /datum/wound/bruise/monumental_bruise)
 					wound_type = size_names[size]
-
 					W = new wound_type(damage)
+					//message_admins("DEBUG: Wound type BRUISE: [type]")
 				if(BURN)
 					var/list/size_names = list(/datum/wound/moderate_burn, /datum/wound/large_burn, /datum/wound/severe_burn, /datum/wound/deep_burn, /datum/wound/carbonised_area)
 					wound_type = size_names[size]
-
 					W = new wound_type(damage)
-
+					//message_admins("DEBUG: Wound type BURN: [type]")
+				else
+					message_admins("DEBUG: Unknown wound type: [type] with damage [damage] size [size]")
+					log_admin("DEBUG: Unknown wound type: [type] with damage [damage] size [size]")
+					var/list/size_names = list(/datum/wound/moderate_burn, /datum/wound/large_burn, /datum/wound/severe_burn, /datum/wound/deep_burn, /datum/wound/carbonised_area)
+					wound_type = size_names[size]
+					W = new wound_type(damage)
 
 
 			// check whether we can add the wound to an existing wound
 			for(var/datum/wound/other in wounds)
+				// nanodesu
+				//if(!(other && W))
+				//	return
 				if(other.desc == W.desc)
 					// okay, add it!
 					other.damage += W.damage

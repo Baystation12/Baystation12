@@ -5,3 +5,11 @@
 *.lk
 info.json
 /config/admins.txt
+/config/moderators.txt
+/config/dbconfig.txt
+/statistics
+/deletions
+/data/logs
+/data/player_saves
+/data/ban_unban_log.txt
+/data/investigate

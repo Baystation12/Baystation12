@@ -56,6 +56,7 @@
 
 	if (!msg)
 		return
+	msg = sanitize(msg)
 	if(usr)
 		if (usr.client)
 			if(usr.client.holder)
@@ -77,6 +78,7 @@
 
 	if (!msg)
 		return
+	msg = sanitize(msg)
 	world << "[msg]"
 	log_admin("GlobalNarrate: [key_name(usr)] : [msg]")
 	message_admins("\blue \bold GlobalNarrate: [key_name_admin(usr)] : [msg]<BR>", 1)
@@ -100,7 +102,7 @@
 
 	if( !msg )
 		return
-
+	msg = sanitize(msg)
 	M << msg
 	log_admin("DirectNarrate: [key_name(usr)] to ([M.name]/[M.key]): [msg]")
 	message_admins("\blue \bold DirectNarrate: [key_name(usr)] to ([M.name]/[M.key]): [msg]<BR>", 1)
@@ -493,6 +495,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/customname = input(usr, "Pick a title for the report.", "Title") as text|null
 	if(!input)
 		return
+	input = sanitize(input)
 	if(!customname)
 		customname = "NanoTrasen Update"
 	for (var/obj/machinery/computer/communications/C in machines)

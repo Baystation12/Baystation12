@@ -1811,6 +1811,14 @@ var/list/grind_products = list()
 	attack_self(mob/user as mob)
 		return
 	attack(mob/M as mob, mob/user as mob, def_zone)
+		if(M == user)
+			if(istype(M.wear_mask, /obj/item/clothing/mask) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/mime) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/clown_hat) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexyclown) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexymime))
+				user << "\red You can't eat [src] through mask."
+				return 0
+		else
+			if(istype(M.wear_mask, /obj/item/clothing/mask) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/mime) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/clown_hat) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexyclown) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexymime))
+				user << "\red You can't feed [M] with [src] through mask."
+				return 0
 		if(!reagents.total_volume)						//Shouldn't be needed but it checks to see if it has anything left in it.
 			user << "\red None of [src] left, oh no!"
 			del(src)
@@ -2051,6 +2059,14 @@ var/list/grind_products = list()
 		var/datum/reagents/R = src.reagents
 		var/fillevel = gulp_size
 
+		if(M == user)
+			if(istype(M.wear_mask, /obj/item/clothing/mask) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/mime) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/clown_hat) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexyclown) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexymime))
+				user << "\red You can't drink [src] through mask."
+				return 0
+		else
+			if(istype(M.wear_mask, /obj/item/clothing/mask) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/mime) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/clown_hat) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexyclown) && !istype(M.wear_mask, /obj/item/clothing/mask/gas/sexymime))
+				user << "\red You can't forced to drink [M] with [src] through mask."
+				return 0
 		if(!R.total_volume || !R)
 			user << "\red None of [src] left, oh no!"
 			return 0

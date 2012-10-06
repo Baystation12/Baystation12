@@ -2,9 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
-CREATE SCHEMA IF NOT EXISTS `tgstation` DEFAULT CHARACTER SET latin1 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `tgstation` DEFAULT CHARACTER SET utf8 ;
 USE `tgstation` ;
 
 -- -----------------------------------------------------
@@ -28,8 +26,7 @@ CREATE  TABLE IF NOT EXISTS `tgstation`.`death` (
   `oxyloss` INT(11) NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = MyISAM
-AUTO_INCREMENT = 3409
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -48,8 +45,7 @@ CREATE  TABLE IF NOT EXISTS `tgstation`.`karma` (
   `time` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = MyISAM
-AUTO_INCREMENT = 943
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -61,8 +57,7 @@ CREATE  TABLE IF NOT EXISTS `tgstation`.`karmatotals` (
   `karma` INT(11) NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = MyISAM
-AUTO_INCREMENT = 244
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -76,8 +71,7 @@ CREATE  TABLE IF NOT EXISTS `tgstation`.`library` (
   `category` TEXT NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = MyISAM
-AUTO_INCREMENT = 184
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -90,8 +84,7 @@ CREATE  TABLE IF NOT EXISTS `tgstation`.`population` (
   `time` DATETIME NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = MyISAM
-AUTO_INCREMENT = 2544
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8;
 
 
 
