@@ -55,6 +55,7 @@
 	spawn(0)//this prevents the collapse of space-time continuum
 		user.drop_from_inventory(src)
 		del(src)
+	M:update_body()
 	return uses
 
 /obj/item/weapon/dnainjector/attack(mob/M as mob, mob/user as mob)
