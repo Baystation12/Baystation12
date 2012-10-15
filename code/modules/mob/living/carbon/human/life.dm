@@ -123,6 +123,78 @@
 
 /mob/living/carbon/human
 
+	proc/handle_blood()
+		// take care of blood and blood loss
+		if(stat < 2)
+			var/blood_volume = round(vessel.get_reagent_amount("blood"))
+			if(blood_volume < 560 && blood_volume)
+				var/datum/reagent/blood/B = locate() in vessel.reagent_list //Grab some blood
+				if(B) // Make sure there's some blood at all
+					if(B.data["donor"] != src) //If it's not theirs, then we look for theirs
+						for(var/datum/reagent/blood/D in vessel.reagent_list)
+							if(D.data["donor"] == src)
+								B = D
+								break
+					var/datum/reagent/nutriment/F = locate() in vessel.reagent_list
+					if(F != null)
+						if(F.volume >= 1)
+							// nutriment speeds it up quite a bit
+							B.volume += 0.4
+							F.volume -= 0.1
+					else
+						//At this point, we dun care which blood we are adding to, as long as they get more blood.
+						B.volume = B.volume + 0.1 // regenerate blood VERY slowly
+
+
+			switch(blood_volume)
+				if(501 to 10000)
+					if(pale)
+						pale = 0
+						update_body()
+				if(336 to 500)
+					if(!pale)
+						pale = 1
+						update_body()
+						var/word = pick("dizzy","woosey","faint")
+						src << "\red You feel [word]"
+					if(prob(1))
+						var/word = pick("dizzy","woosey","faint")
+						src << "\red You feel [word]"
+					if(oxyloss < 20)
+						// hint that they're getting close to suffocation
+						oxyloss += 3
+				if(224 to 335)
+					if(!pale)
+						pale = 1
+						update_body()
+					eye_blurry += 6
+					if(oxyloss < 50)
+						oxyloss += 10
+					oxyloss += 1
+					if(prob(15))
+						Paralyse(rand(1,3))
+						var/word = pick("dizzy","woosey","faint")
+						src << "\red You feel extremely [word]"
+				if(122 to 244)
+					oxyloss += 5
+					toxloss += 5
+					if(prob(15))
+						var/word = pick("dizzy","woosey","faint")
+						src << "\red You feel extremely [word]"
+				if(0 to 122)
+					death()
+
+
+			var/blood_max = 0
+			for(var/datum/organ/external/temp in organs)
+				if(!(temp.status & ORGAN_BLEEDING) || temp.status & ORGAN_ROBOT)
+					continue
+				for(var/datum/wound/W in temp.wounds) if(W.bleeding())
+					blood_max += W.damage / 4
+				if(temp.status & ORGAN_DESTROYED && !(temp.status & ORGAN_GAUZED))
+					blood_max += 20 //Yer missing a fucking limb.
+			drip(blood_max)
+
 	proc/handle_disabilities()
 		if (disabilities & EPILEPSY)
 			if ((prob(1) && paralysis < 1))
@@ -165,7 +237,7 @@
 					if(1)
 						say(pick("IM A PONY NEEEEEEIIIIIIIIIGH", "without oxigen blob don't evoluate?", "CAPTAINS A COMDOM", "[pick("", "that faggot traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!", "can u give me [pick("telikesis","halk","eppilapse")]?", "THe saiyans screwed", "Bi is THE BEST OF BOTH WORLDS>", "I WANNA PET TEH monkeyS", "stop grifing me!!!!", "SOTP IT#"))
 					if(2)
-						say(pick("FUS RO DAH","fucking 4rries!", "stat me", ">my face", "roll it easy!", "waaaaaagh!!!", "red wonz go fasta", "FOR TEH EMPRAH", "lol2cat", "dem dwarfs man, dem dwarfs", "SPESS MAHREENS", "hwee did eet fhor khayosss", "lifelike texture ;_;", "luv can bloooom"))
+						say(pick("FUS RO DAH","fucking 4rries!", "stat me", ">my face", "roll it easy!", "waaaaaagh!!!", "red wonz go fasta", "FOR TEH EMPRAH", "lol2cat", "dem dwarfs man, dem dwarfs", "SPESS MAHREENS", "hwee did eet fhor khayosss", "lifelike texture ;_;", "luv can bloooom", "PACKETS!!!"))
 					if(3)
 						emote("drool")
 
@@ -888,6 +960,7 @@
 		else				//ALIVE. LIGHTS ARE ON
 			updatehealth()	//TODO
 			handle_organs()
+			handle_blood()
 			if(health <= config.health_threshold_dead || brain_op_stage == 4.0)
 				death()
 				blinded = 1
@@ -953,7 +1026,7 @@
 			else if(eye_blind)			//blindness, heals slowly over time
 				eye_blind = max(eye_blind-1,0)
 				blinded = 1
-			else if(istype(glasses, /obj/item/clothing/glasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
+			else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
 				eye_blurry = max(eye_blurry-3, 0)
 				blinded = 1
 			else if(eye_blurry)	//blurry eyes heal slowly
@@ -994,64 +1067,78 @@
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				del(hud)
 
-		client.screen.Remove(hud_used.blurry, hud_used.druggy, hud_used.vimpaired, hud_used.darkMask)
+		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
 
 		update_action_buttons()
 
-		if(!src.oxyloss)
-			damageoverlay.icon_state = "oxydamageoverlay0"
-		else
-			switch(oxyloss)
-				if(0 to 10)
-					damageoverlay.icon_state = "oxydamageoverlay0"
-				if(10 to 20)
-					damageoverlay.icon_state = "oxydamageoverlay1"
-				if(20 to 25)
-					damageoverlay.icon_state = "oxydamageoverlay2"
-				if(25 to 30)
-					damageoverlay.icon_state = "oxydamageoverlay3"
-				if(30 to 35)
-					damageoverlay.icon_state = "oxydamageoverlay4"
-				if(35 to 40)
-					damageoverlay.icon_state = "oxydamageoverlay5"
-				if(40 to 45)
-					damageoverlay.icon_state = "oxydamageoverlay6"
-				if(45 to INFINITY)
-					damageoverlay.icon_state = "oxydamageoverlay7"
-
 		if(damageoverlay.overlays)
 			damageoverlay.overlays = list()
-		var/hurtdamage = src.getBruteLoss() + src.getFireLoss()
-		if(hurtdamage)
-			var/image/I
-			switch(hurtdamage)
-				if(10 to 20)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay1")
-				if(20 to 30)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay2")
-				if(30 to 40)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay3")
-				if(40 to 45)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay4")
-				if(45 to 50)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay5")
-				if(50 to 56)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay6")
-				if(56 to 62)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay7")
-				if(62 to 68)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay8")
-				if(68 to 74)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay9")
-				if(74 to 80)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay10")
-				if(80 to 86)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay11")
-				if(86 to 92)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay12")
-				if(92 to INFINITY)
-					I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay13")
-			damageoverlay.overlays += I
+
+		if(stat == UNCONSCIOUS)
+			//Critical damage passage overlay
+			if(health <= 0)
+				var/image/I
+				switch(health)
+					if(-20 to -10)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "passage1")
+					if(-30 to -20)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "passage2")
+					if(-40 to -30)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "passage3")
+					if(-50 to -40)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "passage4")
+					if(-60 to -50)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "passage5")
+					if(-70 to -60)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "passage6")
+					if(-80 to -70)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "passage7")
+					if(-90 to -80)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "passage8")
+					if(-95 to -90)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "passage9")
+					if(-INFINITY to -95)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "passage10")
+				damageoverlay.overlays += I
+		else
+			//Oxygen damage overlay
+			if(oxyloss)
+				var/image/I
+				switch(oxyloss)
+					if(10 to 20)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay1")
+					if(20 to 25)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay2")
+					if(25 to 30)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay3")
+					if(30 to 35)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay4")
+					if(35 to 40)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay5")
+					if(40 to 45)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay6")
+					if(45 to INFINITY)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "oxydamageoverlay7")
+				damageoverlay.overlays += I
+
+			//Fire and Brute damage overlay (BSSR)
+			var/hurtdamage = src.getBruteLoss() + src.getFireLoss()
+			if(hurtdamage)
+				var/image/I
+				switch(hurtdamage)
+					if(10 to 25)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay1")
+					if(25 to 40)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay2")
+					if(40 to 55)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay3")
+					if(55 to 70)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay4")
+					if(70 to 85)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay5")
+					if(85 to INFINITY)
+						I = image("icon" = 'icons/mob/screen1_full.dmi', "icon_state" = "brutedamageoverlay6")
+				damageoverlay.overlays += I
 
 		if( stat == DEAD )
 			sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
@@ -1145,8 +1232,6 @@
 			else
 				see_invisible = SEE_INVISIBLE_LIVING
 
-			if(sleep && !hal_crit)	sleep.icon_state = "sleep[sleeping]"	//used?
-
 			if(healths)
 				switch(hal_screwyhud)
 					if(1)	healths.icon_state = "health6"
@@ -1215,18 +1300,18 @@
 				else			blind.layer = 0
 
 			if( disabilities & NEARSIGHTED && !istype(glasses, /obj/item/clothing/glasses/regular) )
-				client.screen += hud_used.vimpaired
-			if(eye_blurry)			client.screen += hud_used.blurry
-			if(druggy)				client.screen += hud_used.druggy
+				client.screen += global_hud.vimpaired
+			if(eye_blurry)			client.screen += global_hud.blurry
+			if(druggy)				client.screen += global_hud.druggy
 
 			if( istype(head, /obj/item/clothing/head/welding) )
 				var/obj/item/clothing/head/welding/O = head
 				if(!O.up && tinted_weldhelh)
-					client.screen += hud_used.darkMask
+					client.screen += global_hud.darkMask
 
 			if(eye_stat > 20)
-				if(eye_stat > 30)	client.screen += hud_used.darkMask
-				else				client.screen += hud_used.vimpaired
+				if(eye_stat > 30)	client.screen += global_hud.darkMask
+				else				client.screen += global_hud.vimpaired
 
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)

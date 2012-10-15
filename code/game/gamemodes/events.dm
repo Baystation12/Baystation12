@@ -4,9 +4,9 @@
 	//and also to stop spawn copying variables from the game ticker
 	spawn(3000)
 		while(1)
-//			if(prob(50))//Every 120 seconds and prob 50 2-4 weak spacedusts will hit the station
-//				spawn(1)
-//					dust_swarm("weak") //BS12 EDIT
+			/*if(prob(50))//Every 120 seconds and prob 50 2-4 weak spacedusts will hit the station
+				spawn(1)
+					dust_swarm("weak")*/
 			if (!event)
 				//CARN: checks to see if random events are enabled.
 				if(config.allow_random_events && prob(eventchance))
@@ -36,6 +36,7 @@
 				meteor_wave()
 				spawn_meteors()
 
+		/** NOPE!
 		if(2)
 			command_alert("Gravitational anomalies detected on the station. There is no additional data.", "Anomaly Alert")
 			world << sound('sound/AI/granomalies.ogg')
@@ -43,6 +44,7 @@
 			var/obj/effect/bhole/bh = new /obj/effect/bhole( T.loc, 30 )
 			spawn(rand(50, 300))
 				del(bh)
+		**/
 		/*
 		if(3) //Leaving the code in so someone can try and delag it, but this event can no longer occur randomly, per SoS's request. --NEO
 			command_alert("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert")
@@ -66,9 +68,12 @@
 						spawn(rand(300,600))
 							del(P)
 		*/
+
+		/** NOPE!
 		if(3)
 			if((world.time/10)>=3600 && toggle_space_ninja && !sent_ninja_to_station)//If an hour has passed, relatively speaking. Also, if ninjas are allowed to spawn and if there is not already a ninja for the round.
 				space_ninja_arrival()//Handled in space_ninja.dm. Doesn't announce arrival, all sneaky-like.
+		**/
 		if(4)
 			mini_blob_event()
 
@@ -76,14 +81,18 @@
 			high_radiation_event()
 		if(6)
 			viral_outbreak()
+		/** NOPE!
 		if(7)
 			alien_infestation()
+		**/
 		if(8)
 			prison_break()
 		if(9)
 			carp_migration()
+		/** NOPE!
 		if(10)
 			immovablerod()
+		**/
 		if(11)
 			lightsout(1,2)
 		if(12)
@@ -433,7 +442,10 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 			var/list/pos_crew = list()
 			for(var/mob/living/carbon/human/pos in player_list)
 				pos_crew += pos.real_name
-			crew = pick(pos_crew)
+			if(pos_crew.len)
+				crew = pick(pos_crew)
+			else
+				crew = "Any Human"
 			switch(rand(1,14))
 				if(1)
 					M << "\red THERE ARE [amount] [who2] ON THE STATION...LAWS UPDATED"

@@ -188,15 +188,16 @@
 
 		if(href_list["late_join"])
 			if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
-				usr << "/red The round is either not ready, or has already finished..."
+				usr << "\red The round is either not ready, or has already finished..."
 				return
 
 			if(preferences.species != "Human")
 				if(!is_alien_whitelisted(src, preferences.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [preferences.species].")
 					return 0
-				else if(GetAvailableAlienPlayerSlots() >= 1)
+				else if(GetAvailableAlienPlayerSlots() < 1)
 					src << "\red Unable to join game. Too many players have already joined as aliens."
+					return 0
 
 			LateChoices()
 
@@ -302,13 +303,16 @@
 				src.poll_player(pollid)
 			return
 
-		if(href_list["votepollid"] && href_list["voteoptionid"])
-			usr << "\red DB usage has been disabled and that option should not have been available."
-			return
-
+		if(href_list["votepollid"] && href_list["votetype"])
 			var/pollid = text2num(href_list["votepollid"])
-			var/optionid = text2num(href_list["voteoptionid"])
-			vote_on_poll(pollid, optionid)
+			var/votetype = href_list["votetype"]
+			switch(votetype)
+				if("OPTION")
+					var/optionid = text2num(href_list["voteoptionid"])
+					vote_on_poll(pollid, optionid)
+				if("TEXT")
+					var/replytext = href_list["replytext"]
+					log_text_poll_reply(pollid, replytext)
 
 	proc/IsJobAvailable(rank)
 		var/datum/job/job = job_master.GetJob(rank)
@@ -359,9 +363,13 @@
 
 	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank)
 		if (ticker.current_state == GAME_STATE_PLAYING)
+			var/mob/living/silicon/ai/announcer = new (null)
 			var/obj/item/device/radio/intercom/a = new /obj/item/device/radio/intercom(null)// BS12 EDIT Arrivals Announcement Computer, rather than the AI.
-			a.autosay("\"[character.real_name],[character.wear_id.assignment ? " [character.wear_id.assignment]," : "" ] has arrived on the station.\"", "Arrivals Announcement Computer")
+			announcer.name = "Arrivals Announcement Computer"
+			announcer.real_name = "Arrivals Announcement Computer"
+			a.autosay("\"[character.real_name],[character.wear_id.assignment ? " [character.wear_id.assignment]," : "" ] has arrived on the station.\"", announcer)
 			del(a)
+			del(announcer)
 
 	proc/LateChoices()
 		var/mills = world.time // 1/10 of a second, not real milliseconds but whatever
@@ -394,6 +402,19 @@
 		var/mob/living/carbon/human/new_character = new(loc)
 		new_character.lastarea = get_area(loc)
 
+		if(preferences.species == "Tajaran") //This is like the worst, but it works, so meh. - Erthilo
+			if(is_alien_whitelisted(src, "Tajaran") || !config.usealienwhitelist)
+				new_character.dna.mutantrace = "tajaran"
+				new_character.tajaran_talk_understand = 1
+		if(preferences.species == "Soghun")
+			if(is_alien_whitelisted(src, "Soghun") || !config.usealienwhitelist)
+				new_character.dna.mutantrace = "lizard"
+				new_character.soghun_talk_understand = 1
+		if(preferences.species == "Skrell")
+			if(is_alien_whitelisted(src, "Skrell") || !config.usealienwhitelist)
+				new_character.dna.mutantrace = "skrell"
+				new_character.skrell_talk_understand = 1
+
 		if(ticker.random_players)
 			new_character.gender = pick(MALE, FEMALE)
 			preferences.randomize_name()
@@ -415,19 +436,6 @@
 		new_character.dna.ready_dna(new_character)
 		new_character.dna.b_type = preferences.b_type
 
-		if(preferences.species == "Tajaran") //This is like the worst, but it works, so meh. - Erthilo
-			if(is_alien_whitelisted(src, "Tajaran") || !config.usealienwhitelist)
-				new_character.dna.mutantrace = "tajaran"
-				new_character.tajaran_talk_understand = 1
-		if(preferences.species == "Soghun")
-			if(is_alien_whitelisted(src, "Soghun") || !config.usealienwhitelist)
-				new_character.dna.mutantrace = "lizard"
-				new_character.soghun_talk_understand = 1
-		if(preferences.species == "Skrell")
-			if(is_alien_whitelisted(src, "Skrell") || !config.usealienwhitelist)
-				new_character.dna.mutantrace = "skrell"
-				new_character.skrell_talk_understand = 1
-
 		new_character.key = key		//Manually transfer the key to log them in
 
 		return new_character
@@ -447,11 +455,11 @@
 		src << browse(null, "window=latechoices") //closes late choices window
 		src << browse(null, "window=playersetup") //closes the player setup window
 
-#define MAX_ALIEN_PLAYER_PERCENT 20
-
-//cael - this should probably be moved to ticker or somewhere, but it's fine here for now
 //limits the number of alien players in a game
 /proc/GetAvailableAlienPlayerSlots()
+	if(!config.limitalienplayers)
+		return 9999
+
 	var/num_players = 0
 
 	//check new players
@@ -464,4 +472,4 @@
 		if(H.ckey)
 			num_players++
 
-	return round(num_players * (MAX_ALIEN_PLAYER_PERCENT / 100))
+	return round(num_players * (config.alien_to_human_ratio / 100))

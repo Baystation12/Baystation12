@@ -60,20 +60,6 @@
 		tally = -1 // hunters go supersuperfast
 	return (tally + move_delay_add + config.alien_delay)
 
-//This needs to be fixed
-/mob/living/carbon/alien/humanoid/Stat()
-	..()
-
-	statpanel("Status")
-	if (client && client.holder)
-		stat(null, "([x], [y], [z])")
-
-	stat(null, "Intent: [a_intent]")
-	stat(null, "Move Mode: [m_intent]")
-
-	if (client.statpanel == "Status")
-		stat(null, "Plasma Stored: [getPlasma()]")
-
 ///mob/living/carbon/alien/humanoid/bullet_act(var/obj/item/projectile/Proj) taken care of in living
 
 /mob/living/carbon/alien/humanoid/emp_act(severity)
@@ -427,7 +413,7 @@
 				if ((HULK in M.mutations) || (SUPRSTR in M.augmentations))//HULK SMASH
 					damage += 14
 					spawn(0)
-						Paralyse(5)
+						Weaken(damage) // Why can a hulk knock an alien out but not knock out a human? Damage is robust enough.
 						step_away(src,M,15)
 						sleep(3)
 						step_away(src,M,15)

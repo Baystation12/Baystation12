@@ -68,7 +68,7 @@
 		if (istype(L, /datum/ai_laws))
 			laws = L
 	else
-		laws = new /datum/ai_laws/asimov
+		laws = new base_law_type
 
 	verbs += /mob/living/silicon/ai/proc/show_laws_verb
 
@@ -294,6 +294,8 @@
 
 
 /mob/living/silicon/ai/Topic(href, href_list)
+	if(usr != src)
+		return
 	..()
 	if (href_list["mach_close"])
 		if (href_list["mach_close"] == "aialerts")

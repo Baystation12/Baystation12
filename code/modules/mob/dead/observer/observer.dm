@@ -9,6 +9,7 @@
 	canmove = 0
 	blinded = 0
 	anchored = 1	//  don't get pushed around
+	invisibility = INVISIBILITY_OBSERVER
 	var/can_reenter_corpse
 	var/datum/hud/living/carbon/hud = null // hud
 	var/bootime = 0
@@ -17,7 +18,6 @@
 							//Note that this is not a reliable way to determine if admins started as observers, since they change mobs a lot.
 
 /mob/dead/observer/New(mob/body)
-	invisibility = INVISIBILITY_OBSERVER
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
@@ -178,7 +178,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(istype(usr, /mob/dead/observer))
 		var/list/mobs = getmobs()
-		var/input = input("Please, select a mob!", "Follow Mob", null, null) as null|anything in mobs
+		var/input = input("Please, select a mob!", "Haunt", null, null) as null|anything in mobs
 		var/mob/target = mobs[input]
 		if(target && target != usr)
 			spawn(0)
@@ -186,6 +186,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				while(src.loc == pos)
 					var/turf/T = get_turf(target)
 					if(!T)
+						break
+					if(!client)
 						break
 					src.loc = T
 					pos = src.loc

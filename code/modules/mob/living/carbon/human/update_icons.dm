@@ -219,7 +219,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	if(stand_icon)	del(stand_icon)
 	if(lying_icon)	del(lying_icon)
-//	if(dna && dna.mutantrace)	return
+	if(dna && dna.mutantrace)	return
 
 	var/g = "m"
 	if(gender == FEMALE)	g = "f"
@@ -240,6 +240,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 		stand_icon = new /icon('icons/mob/human.dmi', "torso_[g]_s")
 		lying_icon = new /icon('icons/mob/human.dmi', "torso_[g]_l")
 	// Otherwise just draw the full body.
+	else if(SKELETON in src.mutations)
+		stand_icon = new /icon('icons/mob/human.dmi', "skeleton_s")
+		lying_icon = new /icon('icons/mob/human.dmi', "skeleton_l")
 	else
 		stand_icon = new /icon('icons/mob/human.dmi', "body_[g]_s")
 		lying_icon = new /icon('icons/mob/human.dmi', "body_[g]_l")
@@ -286,14 +289,22 @@ proc/get_damage_icon_part(damage_state, body_part)
 		lying_icon.Blend(husk_l, ICON_OVERLAY)
 
 	//Skin tone
-	if(s_tone >= 0)
-		stand_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
-		lying_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
-	else
-		stand_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
-		lying_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
+	if((SKELETON in src.mutations) == 0)
+		if(s_tone >= 0)
+			stand_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
+			lying_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
+		else
+			stand_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
+			lying_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 
 	//Eyes
+	if((SKELETON in src.mutations) == 0)
+		var/icon/eyes_s = new/icon('icons/mob/human_face.dmi', "eyes_s")
+		var/icon/eyes_l = new/icon('icons/mob/human_face.dmi', "eyes_l")
+		eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
+		eyes_l.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
+		stand_icon.Blend(eyes_s, ICON_OVERLAY)
+		lying_icon.Blend(eyes_l, ICON_OVERLAY)
 	// Note: These used to be in update_face(), and the fact they're here will make it difficult to create a disembodied head
 	var/icon/eyes_s = new/icon('icons/mob/human_face.dmi', "eyes_s")
 	var/icon/eyes_l = new/icon('icons/mob/human_face.dmi', "eyes_l")
@@ -303,17 +314,17 @@ proc/get_damage_icon_part(damage_state, body_part)
 	lying_icon.Blend(eyes_l, ICON_OVERLAY)
 
 	//Mouth	(lipstick!)
-	if(lip_style)
+	if(lip_style && (SKELETON in src.mutations) == 0)
 		stand_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[lip_style]_s"), ICON_OVERLAY)
 		lying_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[lip_style]_l"), ICON_OVERLAY)
 
 	//Underwear
-	if(underwear < 6 && underwear > 0)
+	if(underwear >0 && underwear < 12)
 		if(!obese)
 			stand_icon.Blend(new /icon('human.dmi', "underwear[underwear]_[g]_s"), ICON_OVERLAY)
 			lying_icon.Blend(new /icon('human.dmi', "underwear[underwear]_[g]_l"), ICON_OVERLAY)
+	if(update_icons)	update_icons()
 	//tail	update_tail_showing(0)
-	if(update_icons)   update_icons()
 
 
 //HAIR OVERLAY
@@ -327,10 +338,10 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(update_icons)   update_icons()
 		return
 
-	//mutantraces (xeno crew) can have hair. masks and helmets can obscure our hair too.
+	//masks and helmets can obscure our hair.
 	if( (head && (head.status & BLOCKHAIR)) || (wear_mask && (wear_mask.flags & BLOCKHAIR)))
-		if(update_icons)
-			update_icons()
+		if(update_icons)   update_icons()
+
 		return
 
 	//base icons
@@ -713,6 +724,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)
+		drop_r_hand()
+		drop_l_hand()
 		stop_pulling()	//TODO: should be handled elsewhere
 		overlays_lying[HANDCUFF_LAYER]		= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff2")
 		overlays_standing[HANDCUFF_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff1")
@@ -742,6 +755,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		var/t_state = r_hand.item_state
 		if(!t_state)	t_state = r_hand.icon_state
 		overlays_standing[R_HAND_LAYER] = image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = "[t_state]")
+		if (handcuffed) drop_r_hand()
 	else
 		overlays_standing[R_HAND_LAYER] = null
 	if(update_icons)   update_icons()
@@ -753,9 +767,26 @@ proc/get_damage_icon_part(damage_state, body_part)
 		var/t_state = l_hand.item_state
 		if(!t_state)	t_state = l_hand.icon_state
 		overlays_standing[L_HAND_LAYER] = image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = "[t_state]")
+		if (handcuffed) drop_l_hand()
 	else
 		overlays_standing[L_HAND_LAYER] = null
 	if(update_icons)   update_icons()
+
+/mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
+	overlays_lying[TAIL_LAYER] = null
+	overlays_standing[TAIL_LAYER] = null
+	var/cur_species = get_species()
+	if( cur_species == "Tajaran")
+		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
+			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "tajtail_l")
+			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "tajtail_s")
+	else if( cur_species == "Soghun")
+		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
+			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "sogtail_l")
+			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "sogtail_s")
+
+	if(update_icons)
+		update_icons()
 
 // Used mostly for creating head items
 /mob/living/carbon/human/proc/generate_head_icon()
@@ -791,22 +822,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	var/image/face_lying_image = new /image(icon = face_lying)
 	return face_lying_image
-
-/mob/living/carbon/human/proc/update_tail_showing(var/update_icons=1)
-	overlays_lying[TAIL_LAYER] = null
-	overlays_standing[TAIL_LAYER] = null
-	var/cur_species = get_species()
-	if( cur_species == "Tajaran")
-		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
-			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "tajtail_l")
-			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "tajtail_s")
-	else if( cur_species == "Soghun")
-		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
-			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "sogtail_l")
-			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "sogtail_s")
-
-	if(update_icons)
-		update_icons()
 
 //Human Overlays Indexes/////////
 #undef MUTANTRACE_LAYER
