@@ -1,5 +1,0 @@
-"The Abandoned Ship",21.8366,82.1472,0,0,293.15,2500
-"Robotics Maintenance",21.8366,82.1472,0,0,293.15,7500
-"Arrivals North Maintenance",21.8366,82.1472,0,0,293.15,15000
-"Anomaly Hallway",21.8366,82.1472,0,0,293.15,7500
-"Mining Station Port Wing",21.8366,82.1472,0,0,293.15,115000
