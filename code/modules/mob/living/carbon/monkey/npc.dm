@@ -69,7 +69,7 @@ mob/living/carbon/monkey/proc/npc_act()
 				else
 					emote(pick("scratch","jump","roll","tail"))
 
-mob/living/carbon/monkey/react_to_attack(mob/M)
+mob/living/carbon/monkey/proc/react_to_attack(mob/M)
 	if(npc_fleeing == M)
 		fleeing_duration += 30
 		return

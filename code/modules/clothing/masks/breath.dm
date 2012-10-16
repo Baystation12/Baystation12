@@ -12,12 +12,12 @@
 	desc = "A close-fitting mask that can be connected to an air supply."
 	name = "breath mask"
 	icon_state = "breath"
-	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | HEADCOVERSMOUTH
+	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | HEADCOVERSMOUTH | MASKCOVERSMOUTH | MASKINTERNALS
 	item_state = "breath"
 	w_class = 2
 	gas_transfer_coefficient = 0.10
 	permeability_coefficient = 0.50
-	var/hanging = 1
+	var/hanging = 0
 
 	attack_self()
 		toggle()
@@ -30,17 +30,18 @@
 		if(usr.canmove && !usr.stat && !usr.restrained())
 			if(!src.hanging)
 				src.hanging = !src.hanging
-				gas_transfer_coefficient = 0.90
+				gas_transfer_coefficient = 0.10
 				src.flags |= MASKCOVERSMOUTH | MASKINTERNALS
 				icon_state = "breath"
 				usr << "You pull the mask up to cover your mouth."
 			else
 				src.hanging = !src.hanging
-				gas_transfer_coefficient = 0.10
-				src.flags &= ~MASKCOVERSMOUTH | MASKINTERNALS
+				gas_transfer_coefficient = 1 		//air is released into surrounding turf, or at least supposed to
+				src.flags |= ~MASKCOVERSMOUTH | ~MASKINTERNALS
 				icon_state = "breathdown"
 				usr << "You pull the mask down to hang on your neck."
-			usr.update_inv_head()
+			usr.update_inv_wear_mask()
+
 
 
 /obj/item/clothing/mask/breath/medical
