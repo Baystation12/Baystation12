@@ -25,7 +25,7 @@
 	var/b_type = "A+"	//Player's bloodtype (Not currently used, just character fluff)
 
 	var/underwear = 1	//Which underwear the player wants
-	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
+	var/backbag = 2		//Which backpack type the player has chosen. Nothing, backpack, satchel and alt satchel.
 
 	//Equipment slots
 	var/obj/item/wear_suit = null
