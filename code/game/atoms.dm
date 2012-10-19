@@ -335,6 +335,7 @@ its easier to just keep the beam vertical.
 
 /atom/proc/add_fingerprint(mob/living/M as mob)
 	if(isnull(M)) return
+	if(isAI(M)) return
 	if(isnull(M.key)) return
 	if (!( src.flags ) & FPRINT)
 		return

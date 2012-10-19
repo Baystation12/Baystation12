@@ -185,6 +185,8 @@ Class Procs:
 	return src.attack_hand(user)
 
 /obj/machinery/attack_hand(mob/user as mob)
+	src.add_fingerprint(user)
+
 	if(stat & (NOPOWER|BROKEN|MAINT))
 		return 1
 	if(user.lying || user.stat)
@@ -209,7 +211,6 @@ Class Procs:
 			user << "\red You momentarily forget how to use [src]."
 			return 1
 
-	src.add_fingerprint(user)
 	return 0
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.

@@ -63,8 +63,7 @@
 		attack_hand(user)
 
 	attack_hand(mob/user)
-		add_fingerprint(user)
-		if(stat & (BROKEN|NOPOWER))
+		if(..())
 			return
 
 		if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )

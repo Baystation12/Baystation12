@@ -8,16 +8,14 @@
 
 
 	attack_ai(mob/user)
-		add_fingerprint(user)
-		if(stat & (BROKEN|NOPOWER))
+		if(..())
 			return
 		interact(user)
 		return
 
 
 	attack_hand(mob/user)
-		add_fingerprint(user)
-		if(stat & (BROKEN|NOPOWER))
+		if(..())
 			return
 		interact(user)
 		return
