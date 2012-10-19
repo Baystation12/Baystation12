@@ -75,6 +75,7 @@ obj/machinery/door/airlock
 		if(new_frequency)
 			frequency = new_frequency
 			radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
+			send_status()
 
 	initialize()
 		if(frequency)
