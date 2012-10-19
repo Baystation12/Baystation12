@@ -40,6 +40,9 @@
 
 
 	attack_hand(mob/user)
+		if(..())
+			return
+
 		user << browse(return_text(),"window=computer")
 		user.machine = src
 		onclose(user, "computer")
