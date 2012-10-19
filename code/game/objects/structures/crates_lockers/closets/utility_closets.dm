@@ -25,7 +25,7 @@
 	if (prob(40))
 		new /obj/item/weapon/storage/toolbox/emergency(src)
 
-	switch (pickweight(list("small" = 40, "aid" = 25, "tank" = 20, "both" = 10, "nothing" = 4, "delete" = 1)))
+	switch (pickweight(list("small" = 30, "aid" = 25, "tank" = 20, "both" = 20, "nothing" = 4, "delete" = 1)))
 		if ("small")
 			new /obj/item/weapon/tank/emergency_oxygen(src)
 			new /obj/item/weapon/tank/emergency_oxygen(src)
