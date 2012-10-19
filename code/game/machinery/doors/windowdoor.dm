@@ -192,6 +192,12 @@
 		open()
 		return 1
 
+	if (src.density && istype(I, /obj/item/weapon/crowbar))
+		src.add_fingerprint(user)
+		sleep(5)
+		open()
+		return 1
+
 	//If it's a weapon, smash windoor. Unless it's an id card, agent card, ect.. then ignore it (Cards really shouldnt damage a door anyway)
 	if(src.density && istype(I, /obj/item/weapon) && !istype(I, /obj/item/weapon/card))
 		var/aforce = I.force
