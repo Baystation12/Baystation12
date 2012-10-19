@@ -11,11 +11,13 @@ datum/computer/file/embedded_program/airlock_controller
 	var/interior_door_tag
 	var/airpump_tag
 	var/sensor_tag
+	var/sensor_tag_int
 	var/sanitize_external
 
 	state = AIRLOCK_STATE_CLOSED
 	var/target_state = AIRLOCK_STATE_CLOSED
 	var/sensor_pressure = null
+	var/int_sensor_pressure = null
 
 	receive_signal(datum/signal/signal, receive_method, receive_param)
 		var/receive_tag = signal.data["tag"]
@@ -24,12 +26,19 @@ datum/computer/file/embedded_program/airlock_controller
 		if(receive_tag==sensor_tag)
 			if(signal.data["pressure"])
 				sensor_pressure = text2num(signal.data["pressure"])
+		else if(receive_tag==sensor_tag_int)
+			if(signal.data["pressure"])
+				int_sensor_pressure = text2num(signal.data["pressure"])
 
 		else if(receive_tag==exterior_door_tag)
 			memory["exterior_status"] = signal.data["door_status"]
+			if(signal.data["bumped_with_access"])
+				target_state = AIRLOCK_STATE_OUTOPEN
 
 		else if(receive_tag==interior_door_tag)
 			memory["interior_status"] = signal.data["door_status"]
+			if(signal.data["bumped_with_access"])
+				target_state = AIRLOCK_STATE_INOPEN
 
 		else if(receive_tag==airpump_tag)
 			if(signal.data["power"])
@@ -39,6 +48,10 @@ datum/computer/file/embedded_program/airlock_controller
 
 		else if(receive_tag==id_tag)
 			switch(signal.data["command"])
+				if("cycle_exterior")
+					target_state = AIRLOCK_STATE_OUTOPEN
+				if("cycle_interior")
+					target_state = AIRLOCK_STATE_INOPEN
 				if("cycle")
 					if(state < AIRLOCK_STATE_CLOSED)
 						target_state = AIRLOCK_STATE_OUTOPEN
@@ -83,7 +96,7 @@ datum/computer/file/embedded_program/airlock_controller
 
 				if(AIRLOCK_STATE_PRESSURIZE)
 					if(target_state < state)
-						if(sensor_pressure >= ONE_ATMOSPHERE*0.95)
+						if(sensor_pressure >= int_sensor_pressure*0.95)
 							if(memory["interior_status"] == "open")
 								state = AIRLOCK_STATE_INOPEN
 								process_again = 1
@@ -138,7 +151,7 @@ datum/computer/file/embedded_program/airlock_controller
 							post_signal(signal)
 
 				if(AIRLOCK_STATE_DEPRESSURIZE)
-					var/target_pressure = ONE_ATMOSPHERE*0.05
+					var/target_pressure = ONE_ATMOSPHERE*0.04
 					if(sanitize_external)
 						target_pressure = ONE_ATMOSPHERE*0.01
 
@@ -195,6 +208,7 @@ datum/computer/file/embedded_program/airlock_controller
 							post_signal(signal)
 
 		memory["sensor_pressure"] = sensor_pressure
+		memory["int_sensor_pressure"] = int_sensor_pressure
 		memory["processing"] = state != target_state
 		//sensor_pressure = null //not sure if we can comment this out. Uncomment in case of problems -rastaf0
 
@@ -217,6 +231,7 @@ obj/machinery/embedded_controller/radio/airlock_controller
 	var/interior_door_tag
 	var/airpump_tag
 	var/sensor_tag
+	var/sensor_tag_int
 	var/sanitize_external
 
 	initialize()
@@ -229,6 +244,7 @@ obj/machinery/embedded_controller/radio/airlock_controller
 		new_prog.interior_door_tag = interior_door_tag
 		new_prog.airpump_tag = airpump_tag
 		new_prog.sensor_tag = sensor_tag
+		new_prog.sensor_tag_int = sensor_tag_int
 		new_prog.sanitize_external = sanitize_external
 
 		new_prog.master = src
@@ -249,12 +265,14 @@ obj/machinery/embedded_controller/radio/airlock_controller
 
 		var/state = 0
 		var/sensor_pressure = "----"
+		var/int_sensor_pressure = "----"
 		var/exterior_status = "----"
 		var/interior_status = "----"
 		var/pump_status = "----"
 		if(program)
 			state = program.state
 			sensor_pressure = program.memory["sensor_pressure"]
+			int_sensor_pressure = program.memory["int_sensor_pressure"]
 			exterior_status = program.memory["exterior_status"]
 			interior_status = program.memory["interior_status"]
 			pump_status = program.memory["pump_status"]
@@ -277,6 +295,7 @@ obj/machinery/embedded_controller/radio/airlock_controller
 		var/output = {"<B>Airlock Control Console</B><HR>
 [state_options]<HR>
 <B>Chamber Pressure:</B> [sensor_pressure] kPa<BR>
+<B>Internal Pressure:</B> [int_sensor_pressure] kPa<BR>
 <B>Exterior Door: </B> [exterior_status]<BR>
 <B>Interior Door: </B> [interior_status]<BR>
 <B>Control Pump: </B> [pump_status]<BR>"}
