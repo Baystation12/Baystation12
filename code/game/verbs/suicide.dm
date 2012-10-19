@@ -1,7 +1,9 @@
 /mob/var/suiciding = 0
 
 /mob/living/carbon/human/verb/suicide()
-	set hidden = 1
+	set category = "Special Verbs"
+	set desc = "Kill yourself and become a ghost (You will receive a confirmation prompt)"
+	set name = "Suicide"
 
 	if (stat == DEAD)
 		src << "You're already dead!"
@@ -28,7 +30,9 @@
 		updatehealth()
 
 /mob/living/carbon/brain/verb/suicide()
-	set hidden = 1
+	set category = "Special Verbs"
+	set desc = "Kill yourself and become a ghost (You will receive a confirmation prompt)"
+	set name = "Suicide"
 
 	if (stat == 2)
 		src << "You're already dead!"
@@ -52,7 +56,9 @@
 			suiciding = 0
 
 /mob/living/carbon/monkey/verb/suicide()
-	set hidden = 1
+	set category = "Special Verbs"
+	set desc = "Kill yourself and become a ghost (You will receive a confirmation prompt)"
+	set name = "Suicide"
 
 	if (stat == 2)
 		src << "You're already dead!"
@@ -79,7 +85,9 @@
 		updatehealth()
 
 /mob/living/silicon/ai/verb/suicide()
-	set hidden = 1
+	set category = "Special Verbs"
+	set desc = "Kill yourself and become a ghost (You will receive a confirmation prompt)"
+	set name = "Suicide"
 
 	if (stat == 2)
 		src << "You're already dead!"
@@ -99,7 +107,9 @@
 		updatehealth()
 
 /mob/living/silicon/robot/verb/suicide()
-	set hidden = 1
+	set category = "Special Verbs"
+	set desc = "Kill yourself and become a ghost (You will receive a confirmation prompt)"
+	set name = "Suicide"
 
 	if (stat == 2)
 		src << "You're already dead!"
@@ -134,7 +144,9 @@
 		src << "Aborting suicide attempt."
 
 /mob/living/carbon/alien/humanoid/verb/suicide()
-	set hidden = 1
+	set category = "Special Verbs"
+	set desc = "Kill yourself and become a ghost (You will receive a confirmation prompt)"
+	set name = "Suicide"
 
 	if (stat == 2)
 		src << "You're already dead!"
@@ -155,7 +167,9 @@
 
 
 /mob/living/carbon/metroid/verb/suicide()
-	set hidden = 1
+	set category = "Special Verbs"
+	set desc = "Kill yourself and become a ghost (You will receive a confirmation prompt)"
+	set name = "Suicide"
 	if (stat == 2)
 		src << "You're already dead!"
 		return
