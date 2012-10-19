@@ -88,6 +88,25 @@ obj/machinery/door/airlock
 		if(radio_controller)
 			set_frequency(frequency)
 
+	Bumped(atom/AM)
+		..(AM)
+		if(istype(AM, /obj/mecha))
+			var/obj/mecha/mecha = AM
+			if(density && radio_connection && mecha.occupant && (src.allowed(mecha.occupant) || src.check_access_list(mecha.operation_req_access)))
+				var/datum/signal/signal = new
+				signal.transmission_method = 1 //radio signal
+				signal.data["tag"] = id_tag
+				signal.data["timestamp"] = world.time
+
+				signal.data["door_status"] = density?("closed"):("open")
+				signal.data["lock_status"] = locked?("locked"):("unlocked")
+
+				signal.data["bumped_with_access"] = 1
+
+				radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
+		return
+
+
 obj/machinery/airlock_sensor
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "airlock_sensor_off"
