@@ -81,7 +81,7 @@
 		if(charging)
 			if(excess >= 0)		// if there's power available, try to charge
 
-				var/load = min((capacity-charge)/SMESRATE, min(excess,chargelevel))		// charge at set rate, limited to spare capacity
+				var/load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
 
 				charge += load * SMESRATE	// increase the charge
 
@@ -97,7 +97,7 @@
 					charging = 1
 					chargecount = 0
 
-				if(excess > chargelevel*0.01)
+				if(excess > chargelevel)
 					chargecount++
 				else
 					chargecount = 0

@@ -330,12 +330,12 @@ datum
 
 						if(current.air_check_directions&target_dir && !stepped_back)
 							next = get_step(current, target_dir)
-							if(!next.HasDoor())
+							if(!next.HasDoor() && istype(next, /turf/simulated))
 								current = next
 
 						if(current.air_check_directions&test_dir && current != next)
 							next = get_step(current, test_dir)
-							if(!next.HasDoor())
+							if(!next.HasDoor() && istype(next, /turf/simulated))
 								current = next
 
 						if(current == NT)
@@ -355,12 +355,12 @@ datum
 
 						if(current.air_check_directions&target_dir && !stepped_back)
 							next = get_step(current, target_dir)
-							if(!next.HasDoor())
+							if(!next.HasDoor() && istype(next, /turf/simulated))
 								current = next
 
 						if(current.air_check_directions&test_dir && current != next)
 							next = get_step(current, test_dir)
-							if(!next.HasDoor())
+							if(!next.HasDoor() && istype(next, /turf/simulated))
 								current = next
 
 						if(current == NT)
