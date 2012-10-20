@@ -102,3 +102,23 @@
 	slowdown = 1
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	allowed = list(/obj/item/weapon/gun/energy/laser, /obj/item/weapon/gun/energy/pulse_rifle, /obj/item/device/flashlight, /obj/item/weapon/tank/emergency_oxygen, /obj/item/weapon/gun/energy/taser, /obj/item/weapon/melee/baton)
+
+//Atmos Rig
+/obj/item/clothing/head/helmet/space/rig/atmos
+	name = "atmospherics pressure suit helmet"
+	icon_state = "rig0-atmos"
+	item_state = "atmos_helm"
+	protective_temperature = 15000 //For being great in a full inferno
+	flags = STOPSPRESSUREDMAGE
+	armor = list(melee = 40, bullet = 0, laser = 0, energy = 0, bomb = 25, bio = 100, rad = 60)
+	heat_transfer_coefficient = 0.01
+
+/obj/item/clothing/suit/space/rig/atmos
+	icon_state = "rig-atmos"
+	name = "atmospherics pressure suit"
+	item_state = "atmos_hardsuit"
+	protective_temperature = 15000 //For being great in a full inferno
+	flags = STOPSPRESSUREDMAGE	
+	armor = list(melee = 40, bullet = 0, laser = 0, energy = 0, bomb = 25, bio = 100, rad = 60)
+	slowdown = 1
+	heat_transfer_coefficient = 0.01
