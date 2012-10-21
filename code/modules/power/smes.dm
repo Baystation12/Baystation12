@@ -111,8 +111,8 @@
 
 		add_avail(lastout)				// add output to powernet (smes side)
 
-		if(charge < 0.0001)
-			online = 0					// stop output if charge falls to zero
+//		if(charge < 0.0001)
+//			online = 0					// stop output if charge falls to zero
 
 	// only update icon if state changed
 	if(last_disp != chargedisplay() || last_chrg != charging || last_onln != online)
