@@ -107,6 +107,14 @@
 				return 0
 	return 1
 
+///////////////////////////
+//Announces the game type//
+///////////////////////////
+/datum/game_mode/revolution/rp_revolution/announce()
+	world << "<B>The current game mode is - Revolution!</B>"
+	world << "<B>Some crewmembers are attempting to start a revolution!</B>"
+
+
 //////////////////////////////////////////////////////////////////////
 //Announces the end of the game with all relavent information stated//
 //////////////////////////////////////////////////////////////////////
@@ -129,6 +137,7 @@
 
 /mob/living/carbon/human/proc/RevConvert(mob/M as mob in oview(src))
 	set name = "Rev-Convert"
+	set category = "IC"
 	if(((src.mind in ticker.mode:head_revolutionaries) || (src.mind in ticker.mode:revolutionaries)))
 		if((M.mind in ticker.mode:head_revolutionaries) || (M.mind in ticker.mode:revolutionaries))
 			src << "\red <b>[M] is already be a revolutionary!</b>"
