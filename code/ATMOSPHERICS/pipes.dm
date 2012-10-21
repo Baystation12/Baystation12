@@ -530,6 +530,20 @@ obj/machinery/atmospherics/pipe
 			initialize_directions = dir
 			..()
 
+		high_volume
+			name = "Larger vent"
+			volume = 1000
+			process()
+				if(!parent)
+					if(build_killswitch <= 0)
+						. = PROCESS_KILL
+					else
+						build_killswitch--
+					..()
+					return
+				else
+					parent.mingle_with_turf(loc, 1000)
+
 		process()
 			if(!parent)
 				if(build_killswitch <= 0)
