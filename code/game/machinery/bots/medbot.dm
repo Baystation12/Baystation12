@@ -350,6 +350,8 @@
 	return 0
 
 /obj/machinery/bot/medbot/proc/medicate_patient(mob/living/carbon/C as mob)
+	if(!C)	return
+
 	if(!src.on)
 		return
 
@@ -393,7 +395,7 @@
 		reagent_id = "toxin"
 
 	if(reagent_id == "internal_beaker" && \
-		src.patient.reagents.has_reagent(src.reagent_glass.reagents.get_master_reagent_id()) )
+		C.reagents.has_reagent(src.reagent_glass.reagents.get_master_reagent_id()) )
 		if(prob(10))
 			var/message = pick("Oops, that's an overdose!", "You're going to be just fine!")
 			src.speak(message)
