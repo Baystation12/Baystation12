@@ -8,7 +8,7 @@ var/global/floorIsLava = 0
 	var/rendered = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[text]</span></span>"
 	log_adminwarn(rendered)
 	for (var/client/C in admin_list)
-		if (C)
+		if (C && !C.STFU_log)
 			if (C.holder.level >= 1)
 				var/msg = rendered
 				if (admin_ref)
@@ -24,7 +24,7 @@ var/global/floorIsLava = 0
 	for (var/client/C in admin_list)
 		if (C)
 			if (C.holder.level >= 1)
-				if(!C.STFU_atklog)
+				if(!C.STFU_atklog && !C.STFU_log)
 					var/msg = rendered
 					C << msg
 

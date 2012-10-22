@@ -30,6 +30,7 @@
 	var/STFU_ghosts				//80+ people rounds are fun to admin when text flies faster than airport security
 	var/STFU_radio				//80+ people rounds are fun to admin when text flies faster than airport security
 	var/STFU_atklog		= 0
+	var/STFU_log		= 0
 
 		///////////////
 		//SOUND STUFF//

@@ -151,6 +151,7 @@
 			verbs += /client/proc/cmd_admin_create_centcom_report
 			verbs += /client/proc/toggle_hear_deadcast
 			verbs += /client/proc/toggle_hear_radio
+			verbs += /client/proc/toggle_hear_logs
 			verbs += /client/proc/deadmin_self
 			verbs += /client/proc/player_panel_new
 			verbs += /client/proc/cmd_admin_change_custom_event
@@ -399,6 +400,7 @@
 		/client/proc/toggle_clickproc,		/*TODO ERRORAGE (Temporary proc while the enw clickproc is being tested)*/
 		/client/proc/toggle_hear_deadcast,
 		/client/proc/toggle_hear_radio,
+		/client/proc/toggle_hear_logs,
 		/client/proc/player_panel_new,
 		/client/proc/toggle_gravity_on,
 		/client/proc/toggle_gravity_off,
@@ -952,3 +954,12 @@
 	if(holder)
 		holder.PlayerNotes()
 	return
+
+/client/proc/toggle_hear_logs()
+	set name = "Toggle Hear Logs"
+	set category = "Admin"
+
+	if(!holder) return
+	STFU_log = !STFU_log
+	usr << "You will now [STFU_log ? "not hear" : "hear"] logs"
+	feedback_add_details("admin_verb","THLOGS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

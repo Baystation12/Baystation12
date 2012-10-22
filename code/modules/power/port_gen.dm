@@ -66,6 +66,9 @@ display round(lastgen) and plasmatank amount
 	proc/handleInactive()
 		return
 
+	power_change()
+		stat &= ~NOPOWER
+		
 	process()
 		if(active && HasFuel() && !crit_fail && anchored)
 			if(prob(reliability))
