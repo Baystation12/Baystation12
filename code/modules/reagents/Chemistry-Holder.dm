@@ -198,7 +198,7 @@ datum
 				update_total()
 
 			handle_reactions()
-				if(my_atom.flags & NOREACT) return //Yup, no reactions here. No siree.
+				if(!isliving(my_atom) && (my_atom.flags & NOREACT)) return //Yup, no reactions here. No siree.
 
 				var/reaction_occured = 0
 				do
@@ -251,8 +251,9 @@ datum
 								multiplier = max(multiplier, 1) //this shouldnt happen ...
 								add_reagent(C.result, C.result_amount*multiplier)
 
-							for(var/mob/M in viewers(4, get_turf(my_atom)) )
-								M << "\blue \icon[my_atom] The solution begins to bubble."
+							if(!isliving(my_atom))
+								for(var/mob/M in viewers(4, get_turf(my_atom)) )
+									M << "\blue \icon[my_atom] The solution begins to bubble."
 
 							if(istype(my_atom, /obj/item/metroid_core))
 								var/obj/item/metroid_core/ME = my_atom
