@@ -439,9 +439,23 @@
 
 /obj/machinery/alarm/proc/return_text()
 	if(!(istype(usr, /mob/living/silicon)) && locked)
-		return "<html><head><title>[src]</title></head><body>[return_status()]<hr><i>(Swipe ID card to unlock interface)</i></body></html>"
+		return "<html><head><title>[src]</title></head><body><div id='status'>[return_status()]</div><hr><i>(Swipe ID card to unlock interface)</i>[autoupdate()]</body></html>"
 	else
-		return "<html><head><title>[src]</title></head><body>[return_status()]<hr>[return_controls()]</body></html>"
+		return "<html><head><title>[src]</title></head><body><div id='status'>[return_status()]</div><hr>[return_controls()][autoupdate()]</body></html>"
+
+/obj/machinery/alarm/proc/autoupdate()
+	var/output = {"<script language='javascript' type='text/javascript'>
+			[js_byjax]
+			function ticker() {
+				setInterval(function(){
+					window.location='byond://?src=\ref[src]&update_content=1';
+				}, 1000);
+			}
+			window.onload = function() {
+				ticker();
+			}
+			</script>"}
+	return output
 
 /obj/machinery/alarm/proc/return_status()
 	var/turf/location = src.loc
@@ -713,8 +727,13 @@ table tr:first-child th:first-child { border: none;}
 	return output
 
 /obj/machinery/alarm/Topic(href, href_list)
+	if(href_list["update_content"])
+		send_byjax(usr,"air_alarm.browser","status",return_status())
+		return
+
 	if(..())
 		return
+
 	src.add_fingerprint(usr)
 	usr.machine = src
 

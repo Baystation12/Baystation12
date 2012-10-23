@@ -45,7 +45,7 @@ LOG_PDA
 # LOG_HREFS
 
 ## log admin warning messages
-##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
+LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
 ## sql switching
 SQL_ENABLED 0

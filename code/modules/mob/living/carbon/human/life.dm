@@ -316,25 +316,49 @@
 		// Make nanoregen heal youu, -3 all damage types
 		if(NANOREGEN in augmentations)
 			var/healed = 0
-			if(getToxLoss())
-				adjustToxLoss(-3)
-				healed = 1
-			if(getOxyLoss())
-				adjustOxyLoss(-3)
-				healed = 1
-			if(getCloneLoss())
-				adjustCloneLoss(-3)
-				healed = 1
-			if(getBruteLoss())
-				heal_organ_damage(3,0)
-				healed = 1
-			if(getFireLoss())
-				heal_organ_damage(0,3)
-				healed = 1
-			if(halloss > 0)
-				halloss -= 3
-				if(halloss < 0) halloss = 0
-				healed = 1
+			var/hptoreg = 3
+			if(stat==UNCONSCIOUS) hptoreg=1
+			if(stat==DEAD) hptoreg=0
+			for(var/i=0; i<hptoreg; i++)
+				var/list/damages
+				if(getToxLoss())
+					damages+="tox"
+				if(getOxyLoss())
+					damages+="oxy"
+				if(getCloneLoss())
+					damages+="clone"
+				if(getBruteLoss())
+					damages+="brute"
+				if(getFireLoss())
+					damages+="burn"
+				if(halloss != 0)
+					damages+="hal"
+
+				switch(pick(damages))
+					if("tox")
+						adjustToxLoss(-1)
+						healed = 1
+					if("oxy")
+						adjustOxyLoss(-1)
+						healed = 1
+					if("clone")
+						adjustCloneLoss(-1)
+						healed = 1
+					if("brute")
+						heal_organ_damage(1,0)
+						healed = 1
+					if("burn")
+						heal_organ_damage(0,1)
+						healed = 1
+					if("hal")
+						if(halloss > 0)
+							halloss -= 1
+						if(halloss < 0)
+							halloss = 0
+						healed = 1
+					else
+						i=5
+
 			if(healed)
 				if(prob(5))
 					src << "\blue You feel your wounds mending..."
