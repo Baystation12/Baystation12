@@ -83,33 +83,7 @@
 				break
 
 		//shh ;)
-		switch(src.key)
-			if("caelaislinn")
-				src << sound('sound/music/drive_me_closer.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("daneesh")
-				src << sound('sound/music/ill_make_a_man_out_of_you.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("doughnuts")
-				src << sound('sound/music/ultimate_showdown.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("themij")
-				src << sound('sound/music/pegasus.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("searif")
-				src << sound('sound/music/pegasus.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("danny220")
-				src << sound('sound/music/dirty_hands.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("sparklysheep")
-				src << sound('sound/music/dirty_hands.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("pobiega")
-				src << sound('sound/music/the_gabber_robots.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("chinsky")
-				src << sound('sound/music/cotton_eye_joe.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("russkisam")
-				src << sound('sound/music/elektronik_supersonik.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("duntadaman")
-				src << sound('sound/music/spinmeround.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("misterbook")
-				src << sound('sound/music/down_with_the_sickness.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			else
-				src << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS
+		src << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS
 
 	proc/Stopmusic()
 		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // stop the jamsz
