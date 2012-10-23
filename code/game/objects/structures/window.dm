@@ -69,7 +69,7 @@
 /obj/structure/window/meteorhit()
 
 	//*****RM
-	//world << "glass at [x],[y],[z] Mhit"
+//	log_adminwarn("glass at [x],[y],[z] meteor killed")
 	src.health = 0
 	new /obj/item/weapon/shard( src.loc )
 	if(reinf) new /obj/item/stack/rods( src.loc)
