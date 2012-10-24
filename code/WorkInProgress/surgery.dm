@@ -876,6 +876,8 @@ proc/build_surgery_steps_list()
 		affected.status |= ORGAN_CUT_AWAY
 		affected.status |= ORGAN_DESTROYED
 		affected.status |= ORGAN_BLEEDING
+		affected.amputated=1
+		affected.setAmputatedTree()
 		affected.createwound(CUT, 10)
 		affected.droplimb()
 
@@ -937,6 +939,8 @@ proc/build_surgery_steps_list()
 		affected.bandage()
 		affected.status &= ~ORGAN_BLEEDING
 		affected.status |= ORGAN_GAUZED
+		affected.amputated=1
+		affected.setAmputatedTree()
 
 	fail_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)

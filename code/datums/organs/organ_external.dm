@@ -289,6 +289,11 @@
 			return 1
 		return 0
 
+	proc/setAmputatedTree()
+		for(var/datum/organ/external/O in owner.organs)
+			if(O.parent == src)
+				O.amputated=amputated
+
 	proc/droplimb(var/override = 0,var/no_explode = 0)
 		if(override)
 			status |= ORGAN_DESTROYED
