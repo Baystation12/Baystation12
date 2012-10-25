@@ -989,7 +989,7 @@ proc/build_surgery_steps_list()
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] is beginning to cauterize the incision on [target]'s lost [affected.display_name] with \the [tool]." , \
-		"You are beginning to cauterize the incision on [target]'s lost [affected.display_name] with \the [tool].")
+		"You begin to cauterize the incision on [target]'s lost [affected.display_name] with \the [tool].")
 
 	end_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
