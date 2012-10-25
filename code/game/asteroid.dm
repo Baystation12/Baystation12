@@ -4,18 +4,19 @@ var/global/list/space_surprises = list(		/obj/item/clothing/mask/facehugger				=
 											/obj/item/weapon/pickaxe/drill					=4,
 											/obj/item/weapon/pickaxe/jackhammer				=4,
 											//mob/living/simple_animal/hostile/carp			=3,
-											/obj/item/weapon/pickaxe/diamond				=3,
-											/obj/item/weapon/pickaxe/diamonddrill			=3,
+											/obj/item/weapon/pickaxe/diamond				=2,
+											/obj/item/weapon/pickaxe/diamonddrill			=2,
 											/obj/item/weapon/pickaxe/gold					=3,
 											/obj/item/weapon/pickaxe/plasmacutter			=2,
 											/obj/structure/closet/syndicate/resources		=2,
 											/obj/item/weapon/melee/energy/sword/pirate		=1,
-											/obj/mecha/working/ripley/mining				=1
+											/obj/mecha/working/ripley/mining				=1,
+											/obj/machinery/artifact					=3
 											)
 
 var/global/list/spawned_surprises = list()
 
-var/global/max_secret_rooms = 6
+var/global/max_secret_rooms = 12
 
 proc/spawn_room(var/atom/start_loc,var/x_size,var/y_size,var/wall,var/floor , var/clean = 0 , var/name)
 	var/list/room_turfs = list("walls"=list(),"floors"=list())
