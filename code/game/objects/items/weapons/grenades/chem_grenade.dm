@@ -7,7 +7,7 @@
 	var/stage = 0
 	var/state = 0
 	var/path = 0
-	var/obj/item/weapon/circuitboard/circuit = null
+	var/obj/item/device/assembly_holder/detonator = null
 	var/list/beakers = new/list()
 	var/list/allowed_containers = list(/obj/item/weapon/reagent_containers/glass/beaker, /obj/item/weapon/reagent_containers/glass/bottle)
 	var/affected_area = 3
@@ -21,15 +21,31 @@
 		if(stage > 1)
 			..()
 
+	attack_hand()
+		if(stage==1)
+			detonator.loc=src.loc
+			detonator=null
+			stage=0
+			icon_state = initial(icon_state)
+		return
+
 	attackby(obj/item/weapon/W as obj, mob/user as mob)//TODO:Have grenades use the new assembly things
 
-		if(istype(W,/obj/item/device/assembly_holder) && !stage && path != 2)
+		if(istype(W,/obj/item/device/assembly_holder) && (!stage || stage==1) && path != 2)
+			var/obj/item/device/assembly_holder/det = W
+			if(istype(det.a_left,det.a_right.type) || (!istype(det.a_left,/obj/item/device/assembly/igniter) && !istype(det.a_right,/obj/item/device/assembly/igniter)))
+				user << "\red Assembly must contain one igniter."
+				return
+			if(det.secured)	
+				user << "\red Assembly must be secured with screwdriver."
+				return
 			path = 1
 			user << "\blue You add [W] to the metal casing."
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 25, -3)
-			del(W) //Okay so we're not really adding anything here. cheating.
+			det.loc = src
+			detonator = det
 			icon_state = initial(icon_state) +"_ass"
-			name = "unsecured grenade"
+			name = "unsecured grenade with [beakers.len] containers[stage?" and detonator":""]"
 			stage = 1
 		else if(istype(W,/obj/item/weapon/screwdriver) && stage == 1 && path != 2)
 			path = 1
@@ -41,7 +57,7 @@
 				stage = 2
 			else
 				user << "\red You need to add at least one beaker before locking the assembly."
-		else if(is_type_in_list(W, allowed_containers) && stage == 1 && path != 2)
+		else if(is_type_in_list(W, allowed_containers) && (!stage || stage==1) && path != 2)
 			path = 1
 			if(beakers.len == 2)
 				user << "\red The grenade can not hold more containers."
@@ -52,8 +68,23 @@
 					user.drop_item()
 					W.loc = src
 					beakers += W
+					name = "unsecured grenade with [beakers.len] containers[stage?" and detonator":""]"
 				else
 					user << "\red \the [W] is empty."
+
+	activate()
+		if(active) return
+		if(detonator)
+			if(!istype(detonator.a_left,/obj/item/device/assembly/igniter))
+				detonator.a_left.activate()
+				active = 1
+			if(!istype(detonator.a_right,/obj/item/device/assembly/igniter))
+				detonator.a_left.activate()
+				active = 1
+		if(active)
+			icon_state = initial(icon_state) + "_active"
+
+		return
 
 	prime()
 		//if(prob(reliability))
@@ -61,9 +92,9 @@
 		for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
 			if(G.reagents.total_volume) has_reagents = 1
 
+		active = 0
 		if(!has_reagents)
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 50, 1)
-			state = 0
 			return
 
 		playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
