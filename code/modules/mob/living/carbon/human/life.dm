@@ -258,6 +258,12 @@
 			number_wounds += E.number_wounds
 
 		var/leg_tally = 2
+		var/canstand_l = 1
+		var/canstand_r = 1
+		var/hasleg_l = 1
+		var/hasleg_r = 1
+		var/hasarm_l = 1
+		var/hasarm_r = 1
 		for(var/datum/organ/external/E in organs)
 			E.process()
 			if(E.status & ORGAN_ROBOT && prob(E.brute_dam + E.burn_dam))
@@ -305,11 +311,37 @@
 					|| E.name == "r_leg" || E.name == "r_foot" && !lying)
 					if(!(E.status & ORGAN_SPLINTED))
 						leg_tally--									// let it fail even if just foot&leg
+
+		var/datum/organ/external/E
+		E = get_organ("l_leg")
+		if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED))
+			canstand_l = 0
+			hasleg_l = 0
+		E = get_organ("r_leg")
+		if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED))
+			canstand_r = 0
+			hasleg_r = 0
+		E = get_organ("l_foot")
+		if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED))
+			canstand_l = 0
+		E = get_organ("r_foot")
+		if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED))
+			canstand_r = 0
+		E = get_organ("l_arm")
+		if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED))
+			hasarm_l = 0
+		E = get_organ("r_arm")
+		if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED))
+			hasarm_r = 0
+
 		// standing is poor
 		if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(5))
 			emote("scream")
 			emote("collapse")
 			paralysis = 10
+
+		can_stand = canstand_l||canstand_r
+		has_limbs = hasleg_l||hasleg_r||hasarm_l||hasarm_r
 
 
 	proc/handle_mutations_and_radiation()
