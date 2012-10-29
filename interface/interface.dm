@@ -35,6 +35,7 @@
 	set name = "hotkeys-help"
 	set category = "OOC"
 
+/*
 	var/hotkey_mode = {"<font color='purple'>
 Hotkey-Mode: (hotkey-mode must be on)
 \tTAB = toggle hotkey-mode
@@ -56,6 +57,7 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t4 = harm-intent
 </font>"}
 
+*/
 	var/other = {"<font color='purple'>
 Any-Mode: (hotkey doesn't need to be on)
 \tCtrl+a = left
@@ -89,7 +91,7 @@ Admin:
 \tF8 = Invisimin
 </font>"}
 
-	src << hotkey_mode
+//	src << hotkey_mode
 	src << other
 	if(holder)
 		src << admin
