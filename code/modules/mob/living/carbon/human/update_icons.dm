@@ -241,28 +241,27 @@ proc/get_damage_icon_part(damage_state, body_part)
 		stand_icon = new /icon('icons/mob/human.dmi', "skeleton_s")
 		lying_icon = new /icon('icons/mob/human.dmi', "skeleton_l")
 	else
-		stand_icon = new /icon('icons/mob/human.dmi', "torso_[g]_s")
-		lying_icon = new /icon('icons/mob/human.dmi', "torso_[g]_l")
+		stand_icon = new /icon('icons/mob/human.dmi', "chest_[g]_s")
+		lying_icon = new /icon('icons/mob/human.dmi', "chest_[g]_l")
 		individual_limbs = 1
 
-	//remove destroyed limbs from base icon
-	for(var/datum/organ/external/part in organs)
-		if(!istype(part, /datum/organ/external/groin) \
-		&& !istype(part, /datum/organ/external/chest) \
-		&& (part.status & ORGAN_DESTROYED))
-			var/icon/temp = new /icon('dam_mask.dmi', "[part.icon_name]")
-			temp.MapColors(-1,0,0,0, 0,-1,0,0, 0,0,-1,0, 0,0,0,-1, 1,1,1,1)
-			stand_icon.AddAlphaMask(temp)
+	//remove destroyed limbs from base icon (if individual_limbs -> we do not have them already)
+	if(!individual_limbs)
+		for(var/datum/organ/external/part in organs)
+			if(!istype(part, /datum/organ/external/groin) \
+			&& !istype(part, /datum/organ/external/chest) \
+			&& (part.status & ORGAN_DESTROYED))
+				var/icon/temp = new /icon('dam_mask.dmi', "[part.icon_name]")
+				temp.MapColors(-1,0,0,0, 0,-1,0,0, 0,0,-1,0, 0,0,0,-1, 1,1,1,1)
+				stand_icon.AddAlphaMask(temp)
 
-			temp = new /icon('dam_mask.dmi', "[part.icon_name]2")
-			temp.MapColors(-1,0,0,0, 0,-1,0,0, 0,0,-1,0, 0,0,0,-1, 1,1,1,1)
-			lying_icon.AddAlphaMask(temp)
+				temp = new /icon('dam_mask.dmi', "[part.icon_name]2")
+				temp.MapColors(-1,0,0,0, 0,-1,0,0, 0,0,-1,0, 0,0,0,-1, 1,1,1,1)
+				lying_icon.AddAlphaMask(temp)
 
-	// Draw each individual limb (AterIgnis: not sure why this is needed at all - base icon have all of these, but that was before me)
-	if(!husk && individual_limbs)
-		stand_icon.Blend(new /icon('icons/mob/human.dmi', "chest_[g]_s"), ICON_OVERLAY)
-		lying_icon.Blend(new /icon('icons/mob/human.dmi', "chest_[g]_l"), ICON_OVERLAY)
-
+	// Draw head and groin if we are assembling standart body from parts - they are not interchangeable for
+	// robotic limbs and are uncutoffable parts of limbless standard body
+	else
 		var/datum/organ/external/head = get_organ("head")
 		if(head && !(head.status & ORGAN_DESTROYED))
 			stand_icon.Blend(new /icon('icons/mob/human.dmi', "head_[g]_s"), ICON_OVERLAY)
@@ -271,7 +270,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		stand_icon.Blend(new /icon('human.dmi', "groin_[g]_s"), ICON_OVERLAY)
 		lying_icon.Blend(new /icon('human.dmi', "groin_[g]_l"), ICON_OVERLAY)
 
-	// Draw nondestroyed robotic limbs grayscale
+	// Draw [nondestroyed robotic limbs grayscale] and [other non-destroyed limbs if we are assembling an icon from parts]
 	for(var/datum/organ/external/part in organs)
 		if(!istype(part, /datum/organ/external/groin) \
 			&& !istype(part, /datum/organ/external/chest) \
@@ -279,13 +278,17 @@ proc/get_damage_icon_part(damage_state, body_part)
 			&& !(part.status & ORGAN_DESTROYED))
 			var/icon/temp = new /icon('human.dmi', "[part.icon_name]_s")
 			if(part.status & ORGAN_ROBOT)
-				temp.MapColors(rgb(77,77,77,0), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
-			stand_icon.Blend(temp, ICON_OVERLAY)
+				temp.GrayScale()
+				stand_icon.Blend(temp, ICON_OVERLAY)
+			else if(individual_limbs)
+				stand_icon.Blend(temp, ICON_OVERLAY)
 
 			temp = new /icon('human.dmi', "[part.icon_name]_l")
 			if(part.status & ORGAN_ROBOT)
-				temp.MapColors(rgb(77,77,77,0), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
-			lying_icon.Blend(temp, ICON_OVERLAY)
+				temp.GrayScale()
+				lying_icon.Blend(temp, ICON_OVERLAY)
+			else if(individual_limbs)
+				lying_icon.Blend(temp, ICON_OVERLAY)
 
 	//Skin tone
 	if(!skeleton)
