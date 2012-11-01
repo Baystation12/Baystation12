@@ -241,8 +241,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 		stand_icon = new /icon('icons/mob/human.dmi', "skeleton_s")
 		lying_icon = new /icon('icons/mob/human.dmi', "skeleton_l")
 	else
-		stand_icon = new /icon('icons/mob/human.dmi', "chest_[g]_s")
-		lying_icon = new /icon('icons/mob/human.dmi', "chest_[g]_l")
+		stand_icon = new /icon('icons/mob/human.dmi', "torso_[g]_s")
+		lying_icon = new /icon('icons/mob/human.dmi', "torso_[g]_l")
 		individual_limbs = 1
 
 	//remove destroyed limbs from base icon (if individual_limbs -> we do not have them already)
