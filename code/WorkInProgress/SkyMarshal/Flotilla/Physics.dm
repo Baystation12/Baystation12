@@ -128,10 +128,7 @@ physics
 									current_node = current_node.root
 					while(istype(current_node.root))
 
-			#ifdef PHYSICS_DEBUG
-			if(prob(prob(1)))
-				debugging_file << "[frame.name] is being adjusted by [Dist(delta_x, delta_y)*1e9] m/s"
-			#endif
+			//Compute the velocity change per axis
 			var/magnitude = Dist(frame.delta_x + delta_x, frame.delta_y + delta_y)
 			var/new_velocity = VelocityAdd(Dist(frame.delta_x, frame.delta_y), Dist(delta_x, delta_y))
 			delta_x += frame.delta_x
@@ -140,32 +137,64 @@ physics
 			frame.delta_x = new_velocity*delta_x/magnitude
 			frame.delta_y = new_velocity*delta_y/magnitude
 
+			//Compute the nodes the frame will be in for collision detection
+			frame.last_collision_check = real_time
+			frame.x += frame.delta_x
+			frame.y += frame.delta_y
+			var/list/nodes_backup
 
-/*		for(var/projectile/projectile in projectiles)
-			var/closest_frame = SPEED_OF_LIGHT //Stupid hack, finding closest frame
-			//Acceleration for the frame
-			var/delta_x = projectile.acceleration_x
-			var/delta_y = projectile.acceleration_y
-			if(!projectile.mass && (projectile.ticks_to_consider_deletion > projectile.processing_ticks || projectile.defer_next_consideration))
-				continue
-			for(var/frame/massive_body in frames_with_considerable_mass)  //I KNOW THIS IS HORRIBLE, BUT I AM TIRED AND CAN OPTIMMIZE LATER.
-				var/dx = massive_body.x - projectile.x
-				var/dy = massive_body.y - projectile.y
-				var/distance = dist(dx, dy)
-				closest_frame = min(closest_frame, distance)
-				var/attraction = gravity(massive_body, distance)
-				delta_x += dx*attraction/distance
-				delta_y += dy*attraction/distance
-			if(!projectile.mass)
-				continue
-			projectile.delta_x = vel_add(delta_x, projectile.delta_x)
-			projectile.delta_y = vel_add(delta_y, projectile.delta_y)
-			if(projectile.ticks_to_consider_deletion <= projectile.processing_ticks && !projectile.defer_next_consideration)
-				if(closest_frame > PROJECTILE_DELETE_DISTANCE)
-					del projectile
-				else
-					projectile.defer_next_consideration = 5*/
-		//On to the movement phase!
+			//See if we are outside any node.  If so, we must compute the new nodes it will be in.
+			for(var/physics_node/node in frame.nodes)
+				if( frame.x + frame.delta_x >= node.x + node.side_length - frame.radius || frame.x + frame.delta_x < node.x + frame.radius \
+				||  frame.y + frame.delta_y >= node.y + node.side_length - frame.radius || frame.y + frame.delta_y < node.y + frame.radius)
+					nodes_backup = frame.nodes.Copy()
+
+					//Determine if you are outside the current solar system (if any) for re-insertion into a quadtree.
+					if(solar_system)
+						if( frame.x < frame.solar_system.x + frame.solar_system.size_of_quadtree/2 - radius && x >= solar_system.x - solar_system.size_of_quadtree/2 + radius\
+						&&  y < solar_system.y + solar_system.size_of_quadtree/2 - radius && y >= solar_system.y - solar_system.size_of_quadtree/2 + radius )
+							frame.solar_system.quadtree.Insert(frame)
+						else
+							frame.solar_system = null
+					if(!solar_system)
+						physics_sim.quadtree.Insert(frame)
+
+					frame.nodes_to_remove = backup_nodes - frame.nodes
+					frame.nodes |= backup_nodes
+
+			//We've computed all the new nodes, so reset positions.
+			frame.x -= frame.delta_x
+			frame.y -= frame.delta_y
+
+		//Now, lets begin checking for collision.
+		for(var/frame/frame in all_nodes)
+			for(var/physics_node/node in frame.nodes)
+				if(!node.contents || node.contents.len <= 1) //Only one frame, that's gotta be us!
+					continue
+				for(var/frame/collider in node.contents)
+					//If the other one has already been checked, continue.
+					if(collider.last_collision_check == real_time || collider == frame)
+						continue
+
+					//compute the edges of a rectangle containing the space the frame has traversed.
+					var/frame_x1 = (frame.delta_x >= 0 ? frame.x - frame.radius : frame.x + frame.delta_x - frame.radius)
+					var/frame_x2 = (frame.delta_x >= 0 ? frame.x + frame.delta_x + frame.radius : frame.x + frame.radius)
+					var/frame_y1 = (frame.delta_y >= 0 ? frame.y - frame.radius : frame.y + frame.delta_y - frame.radius)
+					var/frame_y2 = (frame.delta_y >= 0 ? frame.y + frame.delta_y + frame.radius : frame.y + frame.radius)
+
+					var/collider_x1 = (collider.delta_x >= 0 ? collider.x - collider.radius : collider.x + collider.delta_x - collider.radius)
+					var/collider_x2 = (collider.delta_x >= 0 ? collider.x + collider.delta_x + collider.radius : collider.x + collider.radius)
+					var/collider_y1 = (collider.delta_y >= 0 ? collider.y - collider.radius : collider.y + collider.delta_y - collider.radius)
+					var/collider_y2 = (collider.delta_y >= 0 ? collider.y + collider.delta_y + collider.radius : collider.y + collider.radius)
+
+					if( frame_x1 > collider_x2 || collider_x1 > frame_x2 || frame_y1 > collider_y2 || collider_y1 > frame_y2 ) //If there is no overlap, move on to the next frame!
+						continue
+
+					//Now, Near phase!
+
+
+
+		//Finally, preform the actual movement.
 		for(var/frame/frame in all_frames)
 			frame.x += frame.delta_x
 			frame.y += frame.delta_y
@@ -174,14 +203,12 @@ physics
 				frame.bearing -= 360
 			else if(frame.bearing < 0)
 				frame.bearing += 360
-			for(var/physics_node/node in frame.nodes)
-				if( frame.x >= node.x + node.side_length - frame.radius || frame.x < node.x + frame.radius \
-				||  frame.y >= node.y + node.side_length - frame.radius || frame.y < node.y + frame.radius)
-					frame.ReInsert()
-					break
+			if(frame.nodes_to_remove)
+				for(var/physics_node/node in frame.nodes_to_remove)
+					node.Remove(frame)
+				frame.nodes -= frame.nodes_to_remove
+				frame.nodes_to_remove = null
 
-		for(var/projectile/projectile in projectiles)
-			projectile.Tick()
 		real_time++
 		. = 1
 

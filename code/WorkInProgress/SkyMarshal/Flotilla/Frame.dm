@@ -8,8 +8,6 @@ frame
 		acceleration_y = 0	//Ditto
 		delta_x = 0			//In kilometers per second, relative to the central station.  Used for constant velocity.
 		delta_y = 0			//ditto
-		x = 0				//In gigameters from the star it is orbiting.  IDK.  Will be determined when implemented.
-		y = 0				//Ditto
 
 		bearing = 0			//In degrees.  The Y+ axis is 0, increasing clockwise.
 		angular_velocity = 0//Degrees/second
@@ -24,12 +22,23 @@ frame
 		luminosity = 0
 
 		incorporeal = 0
+		last_collision_check = 0
 
-		ship/ship
+
 		frame/orbited_body
 		list/frame/orbiting_bodies
+
 		list/nodes
+		list/nodes_to_remove
+
 		solar_system/solar_system
+
+	celestial_body
+
+	projectile
+
+	vessel
+		var/ship/ship
 
 
 	New(new_name, new_desc, position_x, position_y, velocity_x, velocity_y, new_angular_velocity, new_mass, new_density, frame/new_orbited_body, list/associated_levels)
@@ -100,14 +109,14 @@ frame
 		. = ..()
 
 
-	proc/ReInsert()
-		for(var/physics_node/node in nodes)
+	proc/Insert(var/list/insertion_nodes)
+		if(!insertion_nodes || !insertion_nodes.len)
+			return
+		for(var/physics_node/node in insertion_nodes)
+			node.Insert(src)
+
+	proc/Remove(var/list/removal_nodes)
+		if(!removal_nodes || !removal_nodes.len)
+			return
+		for(var/physics_node/node in removal_nodes)
 			node.Remove(src)
-		if(solar_system)
-			if( x < solar_system.x + solar_system.size_of_quadtree/2 - radius && x >= solar_system.x - solar_system.size_of_quadtree/2 + radius\
-			&&  y < solar_system.y + solar_system.size_of_quadtree/2 - radius && y >= solar_system.y - solar_system.size_of_quadtree/2 + radius )
-				solar_system.quadtree.Insert(src)
-				return
-			else
-				solar_system = null
-		physics_sim.quadtree.Insert(src)
