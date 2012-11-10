@@ -115,7 +115,7 @@
 	icon_on = "blackzippoon"
 	icon_off = "blackzippo"
 
-/obj/item/weapon/lighter/zippo/fluff/Furohman_1 //Furohman: Fay Sellivan
+/obj/item/weapon/lighter/zippo/fluff/Fay_Sullivan_1 //Furohman: Fay Sullivan
 	name = "Graduation Lighter"
 	desc = " A silver engraved lighter with 41 on one side and Tharsis University on the other. The lid reads Fay Sullivan, Cybernetic Engineering, 2541"
 	icon = 'custom_items.dmi'
