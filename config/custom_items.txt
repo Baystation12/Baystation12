@@ -32,6 +32,7 @@ orangebottle: Lillian Levett: /obj/item/weapon/pen/fluff/fancypen
 orangebottle: Lilliana Reade: /obj/item/weapon/pen/fluff/fancypen
 phaux: Tian Krieger: /obj/item/clothing/under/fluff/tian_dress
 rawrtaicho: Riley Rohtin: /obj/item/weapon/lighter/zippo/fluff/riley_rohtin_1
+rawrtaicho: Wyatt Engstrom: /obj/item/clothing/under/rank/engineering/fluff/wyatt_engstrom_1
 roaper: Enos Adlai: /obj/item/clothing/head/fluff/enos_adlai_1
 searif: Yuki Matsuda: /obj/item/clothing/under/fluff/jumpsuitdown, /obj/item/clothing/head/welding/fluff/yuki_matsuda_1
 searif: Ara Al-Jazari: /obj/item/clothing/under/rank/bartender/fluff/classy

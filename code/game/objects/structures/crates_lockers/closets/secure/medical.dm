@@ -115,6 +115,7 @@
 		new /obj/item/clothing/head/bio_hood/cmo(src)
 		new /obj/item/clothing/under/rank/chief_medical_officer(src)
 		new /obj/item/clothing/suit/labcoat/cmo(src)
+		new /obj/item/clothing/suit/labcoat/cmoalt(src)
 		new /obj/item/weapon/cartridge/cmo(src)
 		new /obj/item/clothing/gloves/latex(src)
 		new /obj/item/clothing/shoes/brown	(src)

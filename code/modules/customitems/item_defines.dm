@@ -463,6 +463,14 @@
 	item_state = "ara_bar_uniform"
 	color = "ara_bar_uniform"
 
+/obj/item/clothing/under/rank/engineering/fluff/wyatt_engstrom_1 //rawrtaicho: Wyatt Engstrom
+	name = "Wyatt's Ex-Commander Jumpsuit"
+	desc = "A standard Central Command Engineering Commander jumpsuit tailored to fight the wearer tightly. It has a Medal of Service pinned onto the left side of it."
+	icon = 'custom_items.dmi'
+	icon_state = "wyatt_engstrom_1"
+	item_state = "wyatt_engstrom_1"
+	color = "wyatt_engstrom_1"
+
 //////////// Masks ////////////
 
 /*
