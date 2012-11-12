@@ -28,10 +28,10 @@
 			if("labcoat_cmo")
 				src.icon_state = "labcoat_cmo_open"
 				usr << "You unbutton the labcoat."
-			if("labcoat_cmo_open")
+			if("labcoat_cmoalt_open")
 				src.icon_state = "labcoat_cmoalt"
 				usr << "You button up the labcoat."
-			if("labcoat_cmo")
+			if("labcoat_cmoalt")
 				src.icon_state = "labcoat_cmoalt_open"
 				usr << "You unbutton the labcoat."
 			if("labcoat_gen_open")
