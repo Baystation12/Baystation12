@@ -115,13 +115,13 @@
 	icon_on = "blackzippoon"
 	icon_off = "blackzippo"
 
-/obj/item/weapon/lighter/zippo/fluff/fay_sullivan_1 //furohman: Fay Sullivan
-	name = "Graduation Lighter"
-	desc = "A silver engraved lighter with 41 on one side and Tharsis University on the other. The lid reads Fay Sullivan, Cybernetic Engineering, 2541"
+/obj/item/weapon/lighter/zippo/fluff/sniperyeti_1 //sniperyeti: Patrick Harris/Susan Harris
+	name = "red black zippo"
+	desc = "A shiny red zippo lighter that looks like it's in perfect condition."
 	icon = 'custom_items.dmi'
-	icon_state = "gradzippo"
-	icon_on = "gradzippoon"
-	icon_off = "gradzippo"
+	icon_state = "redzippo"
+	icon_on = "redzippoon"
+	icon_off = "redzippo"
 
 /obj/item/weapon/lighter/zippo/fluff/executivekill_1 //executivekill: Hunter Duke
 	name = "Gonzo Fist zippo"
@@ -462,6 +462,14 @@
 	icon_state = "ara_bar_uniform"
 	item_state = "ara_bar_uniform"
 	color = "ara_bar_uniform"
+
+/obj/item/clothing/under/rank/engineering/fluff/wyatt_engstrom_1 //rawrtaicho: Wyatt Engstrom
+	name = "Wyatt's Ex-Commander Jumpsuit"
+	desc = "A standard Central Command Engineering Commander jumpsuit tailored to fight the wearer tightly. It has a Medal of Service pinned onto the left side of it."
+	icon = 'custom_items.dmi'
+	icon_state = "wyatt_engstrom_1"
+	item_state = "wyatt_engstrom_1"
+	color = "wyatt_engstrom_1"
 
 //////////// Masks ////////////
 

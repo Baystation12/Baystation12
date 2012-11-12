@@ -26,7 +26,7 @@
 	icon_state = "santa"
 	item_state = "santa"
 	slowdown = 0
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	allowed = list(/obj/item) //for stuffing exta special presents
 
 

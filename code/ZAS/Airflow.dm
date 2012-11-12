@@ -69,6 +69,9 @@ mob/living/carbon/metroid/airflow_stun()
 mob/living/carbon/human/airflow_stun()
 	if(last_airflow_stun > world.time - vsc.airflow_stun_cooldown)	return 0
 	if(buckled) return 0
+	//skytodo:
+	/*if(wear_suit)
+		if(wear_suit.flags & SUITSPACE) return 0*/
 	if(shoes)
 		if(shoes.flags & NOSLIP) return 0
 	if(!(status_flags & CANSTUN) && !(status_flags & CANWEAKEN))
@@ -244,6 +247,9 @@ atom/movable
 			if(istype(src, /mob/living/carbon/human))
 				if(istype(src, /mob/living/carbon/human))
 					if(src:buckled) return
+					//skytodo: tg handles suits differently
+					/*if(src:wear_suit)
+						if(src:wear_suit.flags & SUITSPACE) return*/
 					if(src:shoes)
 						if(src:shoes.type == /obj/item/clothing/shoes/magboots && src:shoes.flags & NOSLIP) return
 			src << "\red You are sucked away by airflow!"
@@ -299,6 +305,9 @@ atom/movable
 			if(istype(src, /mob/living/carbon/human))
 				if(istype(src, /mob/living/carbon/human))
 					if(src:buckled) return
+					//skytodo:
+					/*if(src:wear_suit)
+						if(src:wear_suit.flags & SUITSPACE) return*/
 					if(src:shoes)
 						if(src:shoes.type == /obj/item/clothing/shoes/magboots && src:shoes.flags & NOSLIP) return
 			src << "\red You are pushed away by airflow!"
@@ -398,6 +407,7 @@ zone/proc/movables()
 	. = list()
 	for(var/turf/T in contents)
 		for(var/atom/A in T)
-			if(istype(A, /obj/effect) || istype(A, /mob/aiEye))
+			//skytodo: add check for ai eye, tg seems to have done away with it
+			if(istype(A, /obj/effect))
 				continue
 			. += A
