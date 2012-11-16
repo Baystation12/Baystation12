@@ -11,7 +11,8 @@
 		if ("swing_hit") soundin = pick('sound/weapons/genhit1.ogg', 'sound/weapons/genhit2.ogg', 'sound/weapons/genhit3.ogg')
 		if ("hiss") soundin = pick('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
 		if ("pageturn") soundin = pick('sound/effects/pageturn1.ogg', 'sound/effects/pageturn2.ogg','sound/effects/pageturn3.ogg')
-
+		if ("erikafootsteps") soundin = pick('sound/effects/tile1.wav','sound/effects/tile2.wav','sound/effects/tile3.wav',/*'sound/effects/tile4.wav'*/)
+		//if ("erikafootsteps") soundin = pick('sound/effects/footsteps.ogg','sound/effects/footsteps2.ogg')
 	var/sound/S = sound(soundin)
 	S.wait = 0 //No queue
 	S.channel = 0 //Any channel
@@ -71,7 +72,7 @@
 		if ("clownstep") soundin = pick('sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
 		if ("swing_hit") soundin = pick('sound/weapons/genhit1.ogg', 'sound/weapons/genhit2.ogg', 'sound/weapons/genhit3.ogg')
 		if ("hiss") soundin = pick('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
-
+		if ("erikafootsteps") soundin = pick('sound/effects/footsteps.ogg','sound/effects/footsteps2.ogg')
 	var/sound/S = sound(soundin)
 	S.wait = 0 //No queue
 	S.channel = 0 //Any channel
@@ -82,7 +83,6 @@
 	if(isturf(source))
 		var/dx = source.x - src.x
 		S.pan = max(-100, min(100, dx/8.0 * 100))
-
 	src << S
 
 client/verb/Toggle_Soundscape() //All new ambience should be added here so it works with this verb until someone better at things comes up with a fix that isn't awful
