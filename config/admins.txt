@@ -26,4 +26,3 @@ tastyfish - Retired Admin
 uristqwerty - Game Master
 wrongnumber - Game Admin
 mij - Game Admin
-nernums - Game Admin
