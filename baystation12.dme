@@ -237,6 +237,7 @@
 #define FILE_DIR "icons/mecha"
 #define FILE_DIR "icons/misc"
 #define FILE_DIR "icons/mob"
+#define FILE_DIR "icons/mob/human_races"
 #define FILE_DIR "icons/obj"
 #define FILE_DIR "icons/obj/assemblies"
 #define FILE_DIR "icons/obj/atmospherics"
