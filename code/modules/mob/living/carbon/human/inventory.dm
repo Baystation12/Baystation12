@@ -153,6 +153,7 @@
 	else
 		return 0
 
+	/*
 	if(success)
 		if (W)
 			if (client)
@@ -161,7 +162,7 @@
 			W.dropped(src)
 			if(W)
 				W.layer = initial(W.layer)
-
+	*/
 	update_action_buttons()
 	return 1
 
