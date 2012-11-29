@@ -121,6 +121,9 @@
 	var/list/icons = list("Blue", "Monochrome", "Rainbow", "Inverted", "Firewall", "Green", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Red", "Static")
 	if (src.name == "B.A.N.N.E.D." && src.ckey == "spaceman96")
 		icons += "B.A.N.N.E.D."
+	 if (src.name == "TRIBUNAL" && src.ckey == "serithi")	
+		icons += "Tribunal"
+		icons += "Tribunal Malfunctioning"
 	if (src.name == "M00X-BC" && src.ckey == "searif")
 		icons += "M00X-BC"
 	if (src.name == "Skuld" && src.ckey == "ravensdale")
@@ -160,6 +163,10 @@
 		icon_state = "ai-static"
 	else if(icontype == "Skuld")
 		icon_state = "ai-ravensdale"
+	else if(icontype == "Tribunal")
+		icon_state = "ai-tribunal"
+	else if(icontype == "Tribunal Malfunctioning")
+		icon_state = "ai-tribunal-malf"
 	else//(icontype == "Matrix")
 		icon_state = "ai-matrix"
 	//else
