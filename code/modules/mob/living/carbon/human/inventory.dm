@@ -57,13 +57,13 @@
 /mob/living/carbon/human/u_equip(obj/item/W as obj)
 	if(!W)	return 0
 
-	var/success
+	//var/success
 
 	if (W == wear_suit)
 		if(s_store)
 			u_equip(s_store)
-		if(W)
-			success = 1
+		//if(W)
+			//success = 1
 		wear_suit = null
 		update_inv_wear_suit()
 	else if (W == w_uniform)
@@ -76,37 +76,37 @@
 		if (belt)
 			u_equip(belt)
 		w_uniform = null
-		success = 1
+		//success = 1
 		update_inv_w_uniform()
 	else if (W == gloves)
 		gloves = null
-		success = 1
+		//success = 1
 		update_inv_gloves()
 	else if (W == glasses)
 		glasses = null
-		success = 1
+		//success = 1
 		update_inv_glasses()
 	else if (W == head)
 		head = null
 		if(W.flags & BLOCKHAIR)
 			update_hair(0)	//rebuild hair
-		success = 1
+		//success = 1
 		update_inv_head()
 	else if (W == ears)
 		ears = null
-		success = 1
+		//success = 1
 		update_inv_ears()
 	else if (W == shoes)
 		shoes = null
-		success = 1
+		//success = 1
 		update_inv_shoes()
 	else if (W == belt)
 		belt = null
-		success = 1
+		//success = 1
 		update_inv_belt()
 	else if (W == wear_mask)
 		wear_mask = null
-		success = 1
+		//success = 1
 		if(W.flags & BLOCKHAIR)
 			update_hair(0)	//rebuild hair
 		if(internal)
@@ -116,43 +116,44 @@
 		update_inv_wear_mask()
 	else if (W == wear_id)
 		wear_id = null
-		success = 1
+		//success = 1
 		update_inv_wear_id()
 	else if (W == r_store)
 		r_store = null
-		success = 1
+		//success = 1
 		update_inv_pockets()
 	else if (W == l_store)
 		l_store = null
-		success = 1
+		//success = 1
 		update_inv_pockets()
 	else if (W == s_store)
 		s_store = null
-		success = 1
+		//success = 1
 		update_inv_s_store()
 	else if (W == back)
 		back = null
-		success = 1
+		//success = 1
 		update_inv_back()
 	else if (W == handcuffed)
 		handcuffed = null
-		success = 1
+		//success = 1
 		update_inv_handcuffed()
 	else if (W == legcuffed)
 		legcuffed = null
-		success = 1
+		//success = 1
 		update_inv_legcuffed()
 	else if (W == r_hand)
 		r_hand = null
-		success = 1
+		//success = 1
 		update_inv_r_hand()
 	else if (W == l_hand)
 		l_hand = null
-		success = 1
+		//success = 1
 		update_inv_l_hand()
 	else
 		return 0
 
+	/*
 	if(success)
 		if (W)
 			if (client)
@@ -161,7 +162,7 @@
 			W.dropped(src)
 			if(W)
 				W.layer = initial(W.layer)
-
+	*/
 	update_action_buttons()
 	return 1
 
