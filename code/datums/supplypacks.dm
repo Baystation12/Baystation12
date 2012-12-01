@@ -202,6 +202,13 @@
 	containertype = /obj/structure/largecrate/mule
 	containername = "MULEbot Crate"
 
+/datum/supply_packs/lisa
+	name = "Corgi Crate"
+	contains = list()
+	cost = 50
+	containertype = /obj/structure/largecrate/lisa
+	containername = "Corgi Crate"
+
 /datum/supply_packs/hydroponics // -- Skie
 	name = "Hydroponics Supply Crate"
 	contains = list(/obj/item/weapon/reagent_containers/spray/plantbgone,
@@ -237,6 +244,16 @@
 	containername = "Seeds crate"
 	access = access_hydroponics
 
+/datum/supply_packs/weedcontrol
+	name = "Weed Control Crate"
+	contains = list(/obj/item/weapon/scythe,
+					/obj/item/clothing/mask/gas,
+					/obj/item/weapon/grenade/chem_grenade/antiweed,
+					/obj/item/weapon/grenade/chem_grenade/antiweed)
+	cost = 20
+	containertype = /obj/structure/closet/crate/secure/hydrosec
+	containername = "Weed control crate"
+	access = access_hydroponics
 
 /datum/supply_packs/exoticseeds
 	name = "Exotic Seeds Crate"
@@ -281,18 +298,15 @@
 /*	VIRUS2 4LIFE
 					/obj/item/weapon/reagent_containers/glass/bottle/flu_virion,
 					/obj/item/weapon/reagent_containers/glass/bottle/cold,
+					/obj/item/weapon/reagent_containers/glass/bottle/epiglottis_virion,
+					/obj/item/weapon/reagent_containers/glass/bottle/liver_enhance_virion,
 					/obj/item/weapon/reagent_containers/glass/bottle/fake_gbs,
 					/obj/item/weapon/reagent_containers/glass/bottle/magnitis,
-					/obj/item/weapon/reagent_containers/glass/bottle/wizarditis, worse than GBS if anything
-					/obj/item/weapon/reagent_containers/glass/bottle/gbs, No. Just no.
-					/obj/item/weapon/reagent_containers/glass/bottle/pierrot_throat,
+//					/obj/item/weapon/reagent_containers/glass/bottle/wizarditis, worse than GBS if anything//					/obj/item/weapon/reagent_containers/glass/bottle/gbs, No. Just no.					/obj/item/weapon/reagent_containers/glass/bottle/pierrot_throat,
 					/obj/item/weapon/reagent_containers/glass/bottle/brainrot,
+					/obj/item/weapon/reagent_containers/glass/bottle/hullucigen_virion,
 					/obj/item/weapon/storage/syringes,
-					/obj/item/weapon/storage/beakerbox
-*/
-					)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure/weapon
+					/obj/item/weapon/storage/beakerbox,					/obj/item/weapon/reagent_containers/glass/bottle/mutagen)	cost = 25	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "Virus crate"
 	access = access_cmo
 
@@ -583,7 +597,7 @@
 					/obj/item/clothing/head/collectable/HoS,
 					/obj/item/clothing/head/collectable/thunderdome,
 					/obj/item/clothing/head/collectable/swat,
-					/obj/item/clothing/head/collectable/metroid,
+					/obj/item/clothing/head/collectable/slime,
 					/obj/item/clothing/head/collectable/police,
 					/obj/item/clothing/head/collectable/slime,
 					/obj/item/clothing/head/collectable/xenom,

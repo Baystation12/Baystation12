@@ -26,7 +26,7 @@
 	var/yo = null
 	var/xo = null
 	var/current = null
-	var/turf/original = null // the original turf clicked
+	var/atom/original = null // the original target clicked
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
 
@@ -82,9 +82,9 @@
 				var/distance = get_dist(original,loc)
 				def_zone = ran_zone(def_zone, 100-(5*distance)) //Lower accurancy/longer range tradeoff.
 				if(silenced)
-					M << "\red You've been shot in the [def_zone] by the [src.name]!"
+					M << "\red You've been shot in the [parse_zone(def_zone)] by the [src.name]!"
 				else
-					visible_message("\red [A.name] is hit by the [src.name] in the [def_zone]!")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
+					visible_message("\red [A.name] is hit by the [src.name] in the [parse_zone(def_zone)]!")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
 
 			if(istype(firer, /mob))
 				M.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src]</b>"
@@ -146,10 +146,9 @@
 				return
 			step_towards(src, current)
 			sleep(1)
-			if(!bumped)
-				if(loc == original)
-					for(var/mob/living/M in original)
-						if(!(M in permutated))
-							Bump(M)
-							sleep(1)
+			if(!bumped && !isturf(original))
+				if(loc == get_turf(original))
+					if(!(original in permutated))
+						Bump(original)
+						sleep(1)
 		return

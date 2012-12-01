@@ -1,7 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
 /mob/new_player
-	var/datum/preferences/preferences = null
 	var/ready = 0
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
 	var/totalPlayers = 0		 //Player counts for the Lobby tab
@@ -16,19 +15,15 @@
 
 	anchored = 1	//  don't get pushed around
 
+	New()
+		mob_list += src
+
 	verb/new_player_panel()
 		set src = usr
 		new_player_panel_proc()
 
 
 	proc/new_player_panel_proc()
-		//no db for now
-		/*var/user = sqlfdbklogin
-		var/pass = sqlfdbkpass
-		var/db = sqlfdbkdb
-		var/address = sqladdress
-		var/port = sqlport*/
-
 		var/output = "<B>New Player Options</B>"
 		output +="<hr>"
 		output += "<br><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A><br><br>"
@@ -47,8 +42,7 @@
 		output += "<a href='byond://?src=\ref[src];pregame_music=1'>Lobby Music</A>"
 
 		/*if(!IsGuestKey(src.key))
-			var/DBConnection/dbcon = new()
-			dbcon.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
+			establish_db_connection()
 
 			if(dbcon.IsConnected())
 				var/isadmin = 0
@@ -65,52 +59,9 @@
 					output += "<p><b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b></p>"
 				else
 					output += "<p><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A></p>"
-			dbcon.Disconnect()*/
-
 		src << browse(output,"window=playersetup;size=250x258;can_close=0")
 		return
 
-	proc/Playmusic()
-		while(!ticker) // wait for ticker to be created
-			sleep(1)
-
-		var/waits = 0
-		var/maxwaits = 100
-		while(!ticker.login_music)
-			sleep(2)
-
-			waits++ // prevents DDoSing the server via badminery
-			if(waits >= maxwaits)
-				break
-
-		//shh ;)
-		switch(src.key)
-			if("caelaislinn")
-				src << sound('sound/music/drive_me_closer.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("daneesh")
-				src << sound('sound/music/ill_make_a_man_out_of_you.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("doughnuts")
-				src << sound('sound/music/ultimate_showdown.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("themij")
-				src << sound('sound/music/pegasus.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("searif")
-				src << sound('sound/music/pegasus.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("danny220")
-				src << sound('sound/music/dirty_hands.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("sparklysheep")
-				src << sound('sound/music/dirty_hands.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("pobiega")
-				src << sound('sound/music/the_gabber_robots.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("chinsky")
-				src << sound('sound/music/cotton_eye_joe.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("russkisam")
-				src << sound('sound/music/elektronik_supersonik.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("duntadaman")
-				src << sound('sound/music/spinmeround.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			if("misterbook")
-				src << sound('sound/music/down_with_the_sickness.ogg', repeat = 0, wait = 0, volume = 85, channel = 1)
-			else
-				src << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS
 
 	proc/Stopmusic()
 		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // stop the jamsz
@@ -143,7 +94,7 @@
 		if(!client)	return 0
 
 		if(href_list["show_preferences"])
-			preferences.ShowChoices(src)
+			client.prefs.ShowChoices(src)
 			return 1
 
 		if(href_list["ready"])
@@ -156,6 +107,7 @@
 		if(href_list["observe"])
 
 			if(alert(src,"Are you sure you wish to observe? You will not be able to play this round!","Player Setup","Yes","No") == "Yes")
+				if(!client)	return 1
 				var/mob/dead/observer/observer = new()
 
 				spawning = 1
@@ -166,15 +118,12 @@
 				var/obj/O = locate("landmark*Observer-Start")
 				src << "\blue Now teleporting."
 				observer.loc = O.loc
+				if(client.prefs.be_random_name)
+					client.prefs.real_name = random_name()
+				observer.real_name = client.prefs.real_name
+				observer.name = observer.real_name
 				observer.key = key
-				if(preferences.be_random_name)
-					preferences.randomize_name()
-				observer.name = preferences.real_name
-				observer.real_name = observer.name
 
-				observer.timeofdeath = world.time //So you can't just observe than respawn
-
-				preferences.copy_to_observer(observer)
 
 				del(src)
 				return 1
@@ -216,19 +165,7 @@
 			F["pregame_music"] << preferences.pregame_music
 
 		if(href_list["privacy_poll"])
-			usr << "\red DB usage has been disabled and that option should not have been available."
-			return
-
-			var/user = sqlfdbklogin
-			var/pass = sqlfdbkpass
-			var/db = sqlfdbkdb
-			var/address = sqladdress
-			var/port = sqlport
-
-			var/DBConnection/dbcon = new()
-
-			dbcon.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
-			if(!dbcon.IsConnected())
+			establish_db_connection()			if(!dbcon.IsConnected())
 				return
 			var/voted = 0
 
@@ -264,16 +201,11 @@
 				usr << "<b>Thank you for your vote!</b>"
 				usr << browse(null,"window=privacypoll")
 
-			dbcon.Disconnect()
-
 		if(!ready && href_list["preference"])
-			preferences.process_link(src, href_list)
+			if(client)
+				client.prefs.process_link(src, href_list)
 		else if(!href_list["late_join"])
 			new_player_panel()
-
-		if(href_list["priv_msg"])
-			..()	//pass PM calls along to /mob/Topic
-			return
 
 		if(href_list["showpoll"])
 			usr << "\red DB usage has been disabled and that option should not have been available."
@@ -422,10 +354,10 @@
 
 		if(ticker.random_players)
 			new_character.gender = pick(MALE, FEMALE)
-			preferences.randomize_name()
-			preferences.randomize_appearance_for(new_character)
+			client.prefs.real_name = random_name()
+			client.prefs.randomize_appearance_for(new_character)
 		else
-			preferences.copy_to(new_character)
+			client.prefs.copy_to(new_character)
 
 		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
 
@@ -439,7 +371,7 @@
 
 		new_character.name = real_name
 		new_character.dna.ready_dna(new_character)
-		new_character.dna.b_type = preferences.b_type
+		new_character.dna.b_type = client.prefs.b_type
 
 		new_character.key = key		//Manually transfer the key to log them in
 

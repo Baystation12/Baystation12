@@ -5,20 +5,24 @@ datum/preferences
 			gender = MALE
 		else
 			gender = FEMALE
-		randomize_skin_tone()
-		randomize_hair(gender)
-		randomize_hair_color("hair")
-		if(gender == MALE)//only for dudes.
-			randomize_facial()
-			randomize_hair_color("facial")
-		randomize_eyes_color()
-		underwear = 1
+		s_tone = random_skin_tone()
+		h_style = random_hair_style(gender)
+		f_style = random_facial_hair_style(gender)
+		r_hair = rand(0,255)
+		g_hair = rand(0,255)
+		b_hair = rand(0,255)
+		r_facial = r_hair
+		g_facial = g_hair
+		b_facial = b_hair
+		r_eyes = rand(0,255)
+		g_eyes = rand(0,255)
+		b_eyes = rand(0,255)
+		underwear = rand(1,underwear_m.len)
 		backbag = 2
 		b_type = pick("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
-		age = rand(MIN_PLAYER_AGE,MAX_PLAYER_AGE)
+		age = rand(AGE_MIN,AGE_MAX)
 		copy_to(H,1)
-
-	proc/randomize_name()
+/*	proc/randomize_name()
 		if(gender == MALE)
 			real_name = capitalize(pick(first_names_male) + " " + capitalize(pick(last_names)))
 		else
@@ -196,15 +200,15 @@ datum/preferences
 		r_eyes = red
 		g_eyes = green
 		b_eyes = blue
+*/
 
-	proc/update_preview_icon()
-		del(preview_icon_front)
-		del(preview_icon_side)
+	proc/update_preview_icon()		//seriously. This is horrendous.
+		del(preview_icon_front)		del(preview_icon_side)
 		var/icon/preview_icon = null
 
 		var/g = "m"
-		if (gender == FEMALE)
-			g = "f"
+		if (gender == FEMALE)	g = "f"
+		if(gender == FEMALE)	g = "f"
 
 		if(species == "Tajaran")
 			preview_icon = new /icon('icons/effects/species.dmi', "tajaran_[g]_s")
@@ -642,5 +646,3 @@ datum/preferences
 		del(preview_icon)
 		del(eyes_s)
 		del(clothes_s)
-
-

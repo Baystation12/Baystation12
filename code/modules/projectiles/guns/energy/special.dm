@@ -66,13 +66,9 @@ obj/item/weapon/gun/energy/staff
 		charge_tick = 0
 		if(!power_supply) return 0
 		power_supply.give(200)
-		update_icon()
 		return 1
 
-	isHandgun()
-		return 0
-
-/obj/item/weapon/gun/energy/floragun
+	update_icon()		return	isHandgun()		return 0/obj/item/weapon/gun/energy/floragun
 	name = "floral somatoray"
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	icon_state = "floramut100"
@@ -161,3 +157,11 @@ obj/item/weapon/gun/energy/staff
 	icon_state = "pen"
 	item_state = "pen"
 	w_class = 1
+
+
+/obj/item/weapon/gun/energy/mindflayer
+	name = "mind flayer"
+	desc = "A prototype weapon recovered from the ruins of Research-Station Epsilon."
+	icon_state = "xray"
+	projectile_type = "/obj/item/projectile/beam/mindflayer"
+	fire_sound = 'sound/weapons/Laser.ogg'

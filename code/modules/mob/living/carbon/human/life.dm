@@ -8,23 +8,24 @@
 #define HEAT_DAMAGE_LEVEL_2 4 //Amount of damage applied when your body temperature passes the 400K point
 #define HEAT_DAMAGE_LEVEL_3 8 //Amount of damage applied when your body temperature passes the 1000K point
 
-#define COLD_DAMAGE_LEVEL_1 1 //Amount of damage applied when your body temperature just passes the 260.15k safety point
-#define COLD_DAMAGE_LEVEL_2 2 //Amount of damage applied when your body temperature passes the 200K point
-#define COLD_DAMAGE_LEVEL_3 4 //Amount of damage applied when your body temperature passes the 120K point
+#define COLD_DAMAGE_LEVEL_1 0.5 //Amount of damage applied when your body temperature just passes the 260.15k safety point
+#define COLD_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when your body temperature passes the 200K point
+#define COLD_DAMAGE_LEVEL_3 3 //Amount of damage applied when your body temperature passes the 120K point
 
 //Note that gas heat damage is only applied once every FOUR ticks.
 #define HEAT_GAS_DAMAGE_LEVEL_1 2 //Amount of damage applied when the current breath's temperature just passes the 360.15k safety point
 #define HEAT_GAS_DAMAGE_LEVEL_2 4 //Amount of damage applied when the current breath's temperature passes the 400K point
 #define HEAT_GAS_DAMAGE_LEVEL_3 8 //Amount of damage applied when the current breath's temperature passes the 1000K point
 
-#define COLD_GAS_DAMAGE_LEVEL_1 1 //Amount of damage applied when the current breath's temperature just passes the 260.15k safety point
-#define COLD_GAS_DAMAGE_LEVEL_2 2 //Amount of damage applied when the current breath's temperature passes the 200K point
-#define COLD_GAS_DAMAGE_LEVEL_3 4 //Amount of damage applied when the current breath's temperature passes the 120K point
+#define COLD_GAS_DAMAGE_LEVEL_1 0.5 //Amount of damage applied when the current breath's temperature just passes the 260.15k safety point
+#define COLD_GAS_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when the current breath's temperature passes the 200K point
+#define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
 
 /mob/living/carbon/human
 	var/oxygen_alert = 0
 	var/toxins_alert = 0
 	var/fire_alert = 0
+	var/pressure_alert = 0
 	var/prev_gender = null // Debug for plural genders
 	var/temperature_alert = 0
 
@@ -44,7 +45,7 @@
 	if(prev_gender != gender)
 		prev_gender = gender
 		if(gender in list(PLURAL, NEUTER))
-			message_admins("[src] ([ckey]) gender has been changed to plural or neuter. Please record what has happened recently to the person and then notify coders. (<A HREF='?src=%holder_ref%;adminmoreinfo=\ref[src]'>?</A>)  (<A HREF='?src=%holder_ref%;adminplayervars=\ref[src]'>VV</A>) (<A HREF='?src=%admin_ref%;priv_msg=\ref[src]'>PM</A>) (<A HREF='?src=%holder_ref%;adminplayerobservejump=\ref[src]'>JMP</A>)",1,1) //The 1,1 at the end is there to make '%holder_ref%' get replaced with the actual ref object
+			message_admins("[src] ([ckey]) gender has been changed to plural or neuter. Please record what has happened recently to the person and then notify coders. (<A HREF='?_src_=holder;adminmoreinfo=\ref[src]'>?</A>)  (<A HREF='?_src_=vars;Vars=\ref[src]'>VV</A>) (<A HREF='?priv_msg=\ref[src]'>PM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>)")
 	*/
 	//Apparently, the person who wrote this code designed it so that
 	//blinded get reset each cycle and then get activated later in the
@@ -67,9 +68,6 @@
 			if(istype(loc, /obj/))
 				var/obj/location_as_object = loc
 				location_as_object.handle_internal_lifeform(src, 0)
-
-		//Disease Check
-		handle_virus_updates()
 
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
@@ -241,7 +239,7 @@
 			if (prob(10))
 				stuttering = max(10, stuttering)
 		if (getBrainLoss() >= 60 && stat != 2)
-			if (prob(7))
+			if (prob(3))
 				switch(pick(1,2,3))
 					if(1)
 						say(pick("IM A PONY NEEEEEEIIIIIIIIIGH", "without oxigen blob don't evoluate?", "CAPTAINS A COMDOM", "[pick("", "that faggot traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!", "can u give me [pick("telikesis","halk","eppilapse")]?", "THe saiyans screwed", "Bi is THE BEST OF BOTH WORLDS>", "I WANNA PET TEH monkeyS", "stop grifing me!!!!", "SOTP IT#"))
@@ -597,7 +595,11 @@
 
 
 	proc/handle_breath(datum/gas_mixture/breath)
+<<<<<<< HEAD
 		if(nodamage || (REBREATHER in augmentations) || (mNobreath in mutations))
+=======
+		if((status_flags & GODMODE) || REBREATHER in augmentations)
+>>>>>>> remotes/git-svn
 			return
 
 		if(!breath || (breath.total_moles() == 0) || suiciding)
@@ -755,15 +757,15 @@
 			//Place is colder than we are
 			var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 			if(thermal_protection < 1)
-				bodytemperature += (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR)
+				bodytemperature += min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
 		else
 			//Place is hotter than we are
 			var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 			if(thermal_protection < 1)
-				bodytemperature += (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
+				bodytemperature += min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
-		if(bodytemperature > 360.15)
+		if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
 			//Body temperature is too hot.
 			fire_alert = max(fire_alert, 1)
 			switch(bodytemperature)
@@ -777,7 +779,7 @@
 					apply_damage(HEAT_DAMAGE_LEVEL_3, BURN)
 					fire_alert = max(fire_alert, 2)
 
-		else if(bodytemperature < 260.15)
+		else if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT)
 			fire_alert = max(fire_alert, 1)
 			if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 				switch(bodytemperature)
@@ -795,10 +797,24 @@
 		// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
 
 		var/pressure = environment.return_pressure()
-		if(pressure > HAZARD_HIGH_PRESSURE)
-			var/adjusted_pressure = calculate_affecting_pressure(pressure) //Returns how much pressure actually affects the mob.
-			if(adjusted_pressure > HAZARD_HIGH_PRESSURE)
-				adjustBruteLoss( min( (adjusted_pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT , MAX_PRESSURE_DAMAGE) )
+		var/adjusted_pressure = calculate_affecting_pressure(pressure) //Returns how much pressure actually affects the mob.
+		switch(adjusted_pressure)
+			if(HAZARD_HIGH_PRESSURE to INFINITY)
+				adjustBruteLoss( min( ( (adjusted_pressure / HAZARD_HIGH_PRESSURE) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE) )
+				pressure_alert = 2
+			if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
+				pressure_alert = 1
+			if(WARNING_LOW_PRESSURE to WARNING_HIGH_PRESSURE)
+				pressure_alert = 0
+			if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
+				pressure_alert = -1
+			else
+				if( !(COLD_RESISTANCE in mutations) )
+					adjustBruteLoss( LOW_PRESSURE_DAMAGE )
+					pressure_alert = -2
+				else
+					pressure_alert = -1
+
 		return
 
 	/*
@@ -1029,6 +1045,18 @@
 				heal_overall_damage(1,1)
 				adjustToxLoss(-1)
 				adjustOxyLoss(-1)
+		if(dna && dna.mutantrace == "shadow")
+			var/light_amount = 0
+			if(isturf(loc))
+				var/turf/T = loc
+				var/area/A = T.loc
+				if(A)
+					if(A.lighting_use_dynamic)	light_amount = T.lighting_lumcount
+					else						light_amount =  10
+			if(light_amount > 2) //if there's enough light, start dying
+				take_overall_damage(1,1)
+			else if (light_amount < 2) //heal in the dark
+				heal_overall_damage(1,1)
 
 /*		//The fucking FAT mutation is the dumbest shit ever. It makes the code so difficult to work with
 		if(FAT in mutations)
@@ -1279,7 +1307,8 @@
 				damageoverlay.overlays += I
 
 			//Fire and Brute damage overlay (BSSR)
-			var/hurtdamage = src.getBruteLoss() + src.getFireLoss()
+			var/hurtdamage = src.getBruteLoss() + src.getFireLoss() + damageoverlaytemp
+			damageoverlaytemp = 0 // We do this so we can detect if someone hits us or not.
 			if(hurtdamage)
 				var/image/I
 				switch(hurtdamage)
@@ -1306,12 +1335,19 @@
 			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
 			if(dna)
 				switch(dna.mutantrace)
+<<<<<<< HEAD
 					if("metroid")
 						see_in_dark = 3
 						see_invisible = SEE_INVISIBLE_LEVEL_ONE
 					if("lizard")
 						see_in_dark = 3
 					if("tajaran")
+=======
+					if("lizard","slime")
+						see_in_dark = 3
+						see_invisible = SEE_INVISIBLE_LEVEL_ONE
+					if("shadow")
+>>>>>>> remotes/git-svn
 						see_in_dark = 8
 					else
 						see_in_dark = 2
@@ -1416,17 +1452,7 @@
 					else							nutrition_icon.icon_state = "nutrition4"
 
 			if(pressure)
-				if(istype(wear_suit, /obj/item/clothing/suit/space)||istype(wear_suit, /obj/item/clothing/suit/armor/captain))
-					pressure.icon_state = "pressure0"
-				else
-					var/datum/gas_mixture/environment = loc.return_air()
-					if(environment)
-						switch(environment.return_pressure())
-							if(HAZARD_HIGH_PRESSURE to INFINITY)				pressure.icon_state = "pressure2"
-							if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)	pressure.icon_state = "pressure1"
-							if(WARNING_LOW_PRESSURE to WARNING_HIGH_PRESSURE)	pressure.icon_state = "pressure0"
-							if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)		pressure.icon_state = "pressure-1"
-							else												pressure.icon_state = "pressure-2"
+				pressure.icon_state = "pressure[pressure_alert]"
 
 			if(pullin)
 				if(pulling)								pullin.icon_state = "pull1"
@@ -1506,6 +1532,7 @@
 			if(!currentTurf.lighting_lumcount)
 				playsound_local(src,pick(scarySounds),50, 1, -1)
 
+<<<<<<< HEAD
 	proc/handle_virus_updates()
 		if(bodytemperature > 406)
 			for(var/datum/disease/D in viruses)
@@ -1533,6 +1560,8 @@
 
 			return
 
+=======
+>>>>>>> remotes/git-svn
 	proc/handle_stomach()
 		spawn(0)
 			for(var/mob/living/M in stomach_contents)
@@ -1546,7 +1575,7 @@
 						del(M)
 						continue
 					if(air_master.current_cycle%3==1)
-						if(!M.nodamage)
+						if(!(M.status_flags & GODMODE))
 							M.adjustBruteLoss(5)
 						nutrition += 10
 

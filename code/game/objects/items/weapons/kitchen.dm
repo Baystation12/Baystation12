@@ -239,7 +239,6 @@
 	return val
 
 /obj/item/weapon/tray/pickup(mob/user)
-	overlays = null
 
 	if(!isturf(loc))
 		return
@@ -261,6 +260,11 @@
 			overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer)
 
 /obj/item/weapon/tray/dropped(mob/user)
+
+	var/mob/living/M
+	for(M in src.loc) //to handle hand switching
+		return
+
 	var/foundtable = 0
 	for(var/obj/structure/table/T in loc)
 		foundtable = 1

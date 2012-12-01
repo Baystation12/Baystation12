@@ -124,7 +124,7 @@ Maintenance panel panel is [src.open ? "opened" : "closed"]"},
 
 "<A href='?src=\ref[src];power=1'>[src.on ? "On" : "Off"]</A>" )
 
-	if(!src.locked)
+	if(!src.locked || issilicon(user))
 		if(!lasercolor)
 			dat += text({"<BR>
 Check for Weapon Authorization: []<BR>
@@ -150,7 +150,7 @@ Auto Patrol: []"},
 /obj/machinery/bot/ed209/Topic(href, href_list)
 	if (..())
 		return
-	usr.machine = src
+	usr.set_machine(src)
 	src.add_fingerprint(usr)
 	if(lasercolor && (istype(usr,/mob/living/carbon/human)))
 		var/mob/living/carbon/human/H = usr
@@ -194,11 +194,12 @@ Auto Patrol: []"},
 				user << "<span class='notice'>Access denied.</span>"
 	else
 		..()
-		if (!istype(W, /obj/item/weapon/screwdriver) && (W.force) && (!src.target))
-			src.target = user
-			if(lasercolor)//To make up for the fact that lasertag bots don't hunt
-				src.shootAt(user)
-			src.mode = SECBOT_HUNT
+		if (!istype(W, /obj/item/weapon/screwdriver) && (!src.target))
+			if(hasvar(W,"force") && W.force)//If force is defined and non-zero
+				src.target = user
+				if(lasercolor)//To make up for the fact that lasertag bots don't hunt
+					src.shootAt(user)
+				src.mode = SECBOT_HUNT
 
 /obj/machinery/bot/ed209/Emag(mob/user as mob)
 	..()
@@ -889,7 +890,7 @@ Auto Patrol: []"},
 	..()
 
 	if(istype(W, /obj/item/weapon/pen))
-		var/t = stripped_input(user, "Enter new robot name", src.name, src.created_name)
+		var/t = copytext(stripped_input(user, "Enter new robot name", src.name, src.created_name),1,MAX_NAME_LEN)
 		if(!t)	return
 		if(!in_range(src, usr) && src.loc != usr)	return
 		created_name = t

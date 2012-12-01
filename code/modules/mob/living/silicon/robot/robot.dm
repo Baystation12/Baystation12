@@ -106,7 +106,6 @@
 //Improved /N
 /mob/living/silicon/robot/Del()
 	if(mmi)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
-		add_to_mob_list(mmi.brainmob)
 		var/turf/T = get_turf(loc)//To hopefully prevent run time errors.
 		if(T)	mmi.loc = T
 		if(mind)	mind.transfer_to(mmi.brainmob)
@@ -158,7 +157,7 @@
 			hands.icon_state = "medical"
 			icon_state = "surgeon"
 			modtype = "Med"
-			nopush = 1
+			status_flags &= ~CANPUSH
 			feedback_inc("cyborg_medical",1)
 			channels = list("Medical" = 1)
 
@@ -169,7 +168,7 @@
 			icon_state = "bloodhound"
 			modtype = "Sec"
 			//speed = -1 Secborgs have nerfed tasers now, so the speed boost is not necessary
-			nopush = 1
+			status_flags &= ~CANPUSH
 			feedback_inc("cyborg_security",1)
 			channels = list("Security" = 1)
 
@@ -326,7 +325,7 @@
 					usr << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
 					now_pushing = 0
 					return
-			if(tmob.nopush)
+			if(!(tmob.status_flags & CANPUSH))
 				now_pushing = 0
 				return
 		now_pushing = 0
@@ -621,7 +620,7 @@
 		if ("disarm")
 			if(!(lying))
 				if (rand(1,100) <= 85)
-					Stun(10)
+					Stun(7)
 					step(src,get_dir(M,src))
 					spawn(5) step(src,get_dir(M,src))
 					playsound(loc, 'sound/weapons/pierce.ogg', 50, 1, -1)
@@ -637,7 +636,7 @@
 
 
 
-/mob/living/silicon/robot/attack_metroid(mob/living/carbon/metroid/M as mob)
+/mob/living/silicon/robot/attack_slime(mob/living/carbon/slime/M as mob)
 	if (!ticker)
 		M << "You cannot attack people before the game has started."
 		return
@@ -652,7 +651,7 @@
 
 		var/damage = rand(1, 3)
 
-		if(istype(src, /mob/living/carbon/metroid/adult))
+		if(istype(src, /mob/living/carbon/slime/adult))
 			damage = rand(20, 40)
 		else
 			damage = rand(5, 35)
@@ -838,7 +837,7 @@
 	..()
 	if (href_list["mach_close"])
 		var/t1 = text("window=[href_list["mach_close"]]")
-		machine = null
+		unset_machine()
 		src << browse(null, t1)
 		return
 
@@ -971,7 +970,7 @@
 		s_active.close(src)
 
 	if(module)
-		if(module.type == /obj/item/weapon/robot_module/janitor)	//you'd think checking the module would work
+		if(module.type == /obj/item/weapon/robot_module/janitor)
 			var/turf/tile = loc
 			if(isturf(tile))
 				tile.clean_blood()
@@ -1033,3 +1032,14 @@
 		R.UnlinkSelf()
 		R << "Buffers flushed and reset. Camera system shutdown.  All systems operational."
 		src.verbs -= /mob/living/silicon/robot/proc/ResetSecurityCodes
+
+/mob/living/silicon/robot/mode()
+	set name = "Activate Held Object"
+	set category = "IC"
+	set src = usr
+
+	var/obj/item/W = get_active_hand()
+	if (W)
+		W.attack_self(src)
+
+	return

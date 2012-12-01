@@ -1,22 +1,17 @@
 /client/proc/Debug2()
 	set category = "Debug"
 	set name = "Debug-Game"
-	if(!holder)
-		src << "Only administrators may use this command."
-		return
-	if(holder.rank == "Game Admin")
-		Debug2 = !Debug2
+	if(!check_rights(R_DEBUG))	return
 
-		world << "Debugging [Debug2 ? "On" : "Off"]"
-		log_admin("[key_name(src)] toggled debugging to [Debug2]")
-	else if(holder.rank == "Game Master")
-		Debug2 = !Debug2
-
-		world << "Debugging [Debug2 ? "On" : "Off"]"
-		log_admin("[key_name(src)] toggled debugging to [Debug2]")
+	if(Debug2)
+		Debug2 = 0
+		message_admins("[key_name(src)] toggled debugging off.")
+		log_admin("[key_name(src)] toggled debugging off.")
 	else
-		alert("Coders only baby")
-		return
+		Debug2 = 1
+		message_admins("[key_name(src)] toggled debugging on.")
+		log_admin("[key_name(src)] toggled debugging on.")
+
 	feedback_add_details("admin_verb","DG2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -34,9 +29,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set category = "Debug"
 	set name = "Advanced ProcCall"
 
-	if(!holder)
-		src << "Only administrators may use this command."
-		return
+	if(!check_rights(R_DEBUG)) return
 
 	spawn(0)
 		var/target = null
@@ -237,20 +230,20 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	else
 		alert("Invalid mob")
 
-/client/proc/cmd_admin_metroidize(var/mob/M in mob_list)
+/client/proc/cmd_admin_slimeize(var/mob/M in mob_list)
 	set category = "Fun"
-	set name = "Make Metroid"
+	set name = "Make slime"
 
 	if(!ticker)
 		alert("Wait until the game starts")
 		return
 	if(ishuman(M))
-		log_admin("[key_name(src)] has metroidized [M.key].")
+		log_admin("[key_name(src)] has slimeized [M.key].")
 		spawn(10)
-			M:Metroidize()
+			M:slimeize()
 			feedback_add_details("admin_verb","MKMET") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		log_admin("[key_name(usr)] made [key_name(M)] into a metroid.")
-		message_admins("\blue [key_name_admin(usr)] made [key_name(M)] into a metroid.", 1)
+		log_admin("[key_name(usr)] made [key_name(M)] into a slime.")
+		message_admins("\blue [key_name_admin(usr)] made [key_name(M)] into a slime.", 1)
 	else
 		alert("Invalid mob")
 
@@ -345,6 +338,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			src << "Made [M] a cultist."
 */
 
+//TODO: merge the vievars version into this or something maybe mayhaps
 /client/proc/cmd_debug_del_all()
 	set category = "Debug"
 	set name = "Del-All"
@@ -419,13 +413,13 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		else
 			var/mob/dead/observer/ghost = new/mob/dead/observer(M,1)
 			ghost.ckey = M.ckey
+	message_admins("\blue [key_name_admin(usr)] assumed direct control of [M].", 1)
+	log_admin("[key_name(usr)] assumed direct control of [M].")
 	var/mob/adminmob = src.mob
 	M.ckey = src.ckey
 	if( isobserver(adminmob) )
 		del(adminmob)
 	feedback_add_details("admin_verb","ADC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_admin("[key_name(usr)] assumed direct control of [M].")
-	message_admins("\blue [key_name_admin(usr)] assumed direct control of [M].", 1)
 
 
 
@@ -937,7 +931,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		if("Players")
 			usr << dd_list2text(player_list,",")
 		if("Admins")
-			usr << dd_list2text(admin_list,",")
+			usr << dd_list2text(admins,",")
 		if("Mobs")
 			usr << dd_list2text(mob_list,",")
 		if("Living Mobs")
@@ -945,4 +939,4 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		if("Dead Mobs")
 			usr << dd_list2text(dead_mob_list,",")
 		if("Clients")
-			usr << dd_list2text(client_list,",")
+			usr << dd_list2text(clients,",")

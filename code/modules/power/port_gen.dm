@@ -100,7 +100,7 @@ display round(lastgen) and plasmatank amount
 	name = "P.A.C.M.A.N.-type Portable Generator"
 	var/sheets = 0
 	var/max_sheets = 100
-	var/sheet_path = /obj/item/stack/sheet/plasma
+	var/sheet_path = /obj/item/stack/sheet/mineral/plasma
 	var/board_path = "/obj/item/weapon/circuitboard/pacman"
 	var/sheet_left = 0 // How much is left of the sheet
 	var/time_per_sheet = 10
@@ -236,14 +236,14 @@ display round(lastgen) and plasmatank amount
 /obj/machinery/power/port_gen/pacman/attack_paw(mob/user as mob)
 	interact(user)
 
-/obj/machinery/power/port_gen/pacman/proc/interact(mob/user)
+/obj/machinery/power/port_gen/pacman/interact(mob/user)
 	if (get_dist(src, user) > 1 )
 		if (!istype(user, /mob/living/silicon/ai))
-			user.machine = null
+			user.unset_machine()
 			user << browse(null, "window=port_gen")
 			return
 
-	user.machine = src
+	user.set_machine(src)
 
 	var/dat = text("<b>[name]</b><br>")
 	if (active)
@@ -284,12 +284,12 @@ display round(lastgen) and plasmatank amount
 				src.updateUsrDialog()
 		if (href_list["action"] == "close")
 			usr << browse(null, "window=port_gen")
-			usr.machine = null
+			usr.unset_machine()
 
 /obj/machinery/power/port_gen/pacman/super
 	name = "S.U.P.E.R.P.A.C.M.A.N.-type Portable Generator"
 	icon_state = "portgen1"
-	sheet_path = /obj/item/stack/sheet/uranium
+	sheet_path = /obj/item/stack/sheet/mineral/uranium
 	power_gen = 15000
 	time_per_sheet = 25
 	board_path = "/obj/item/weapon/circuitboard/pacman/super"
@@ -299,7 +299,7 @@ display round(lastgen) and plasmatank amount
 /obj/machinery/power/port_gen/pacman/mrs
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
 	icon_state = "portgen2"
-	sheet_path = /obj/item/stack/sheet/diamond
+	sheet_path = /obj/item/stack/sheet/mineral/diamond
 	power_gen = 40000
 	time_per_sheet = 30
 	board_path = "/obj/item/weapon/circuitboard/pacman/mrs"

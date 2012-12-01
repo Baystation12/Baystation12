@@ -45,7 +45,13 @@ var/global/datum/controller/gameticker/ticker
 	var/list/vermin_spawn_turfs
 
 /datum/controller/gameticker/proc/pregame()
+<<<<<<< HEAD
 	login_music = pick('sound/music/title1.ogg','sound/music/title2.ogg') // choose title music!
+=======
+	login_music = pick('sound/ambience/title2.ogg') // choose title music!
+	for(var/mob/new_player/M in mob_list)
+		if(M.client)	M.client.playtitlemusic()
+>>>>>>> remotes/git-svn
 
 	do
 		pregame_timeleft = 180
@@ -254,7 +260,9 @@ var/global/datum/controller/gameticker/ticker
 						flick("station_explode_fade_red", cinematic)
 						world << sound('sound/effects/explosionfar.ogg')
 						cinematic.icon_state = "summary_selfdes"
-
+				for(var/mob/living/M in living_mob_list)
+					if(M.loc.z == 1)
+						M.death()//No mercy
 		//If its actually the end of the round, wait for it to end.
 		//Otherwise if its a verb it will continue on afterwards.
 		sleep(300)

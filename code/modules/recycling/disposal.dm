@@ -139,6 +139,7 @@
 		if (!istype(target) || target.buckled || get_dist(user, src) > 1 || get_dist(user, target) > 1 || user.stat || istype(user, /mob/living/silicon/ai))
 			return
 		src.add_fingerprint(user)
+		var/target_loc = target.loc
 		var/msg
 		for (var/mob/V in viewers(usr))
 			if(target == user && !user.stat && !user.weakened && !user.stunned && !user.paralysis)
@@ -147,6 +148,8 @@
 				if(target.anchored) return
 				V.show_message("[usr] starts stuffing [target.name] into the disposal.", 3)
 		if(!do_after(usr, 20))
+			return
+		if(target_loc != target.loc)
 			return
 		if(target == user && !user.stat && !user.weakened && !user.stunned && !user.paralysis)	// if drop self, then climbed in
 												// must be awake, not stunned or whatever
@@ -221,11 +224,11 @@
 		interact(user, 0)
 
 	// user interaction
-	proc/interact(mob/user, var/ai=0)
+	interact(mob/user, var/ai=0)
 
 		src.add_fingerprint(user)
 		if(stat & BROKEN)
-			user.machine = null
+			user.unset_machine()
 			return
 
 		var/dat = "<head><title>Waste Disposal Unit</title></head><body><TT><B>Waste Disposal Unit</B><HR>"
@@ -250,7 +253,7 @@
 		dat += "Pressure: [round(per, 1)]%<BR></body>"
 
 
-		user.machine = src
+		user.set_machine(src)
 		user << browse(dat, "window=disposal;size=360x170")
 		onclose(user, "disposal")
 
@@ -272,10 +275,10 @@
 			return
 
 		if (in_range(src, usr) && istype(src.loc, /turf))
-			usr.machine = src
+			usr.set_machine(src)
 
 			if(href_list["close"])
-				usr.machine = null
+				usr.unset_machine()
 				usr << browse(null, "window=disposal")
 				return
 
@@ -294,7 +297,7 @@
 				eject()
 		else
 			usr << browse(null, "window=disposal")
-			usr.machine = null
+			usr.unset_machine()
 			return
 		return
 

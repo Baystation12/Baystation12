@@ -113,7 +113,7 @@
 //Clonepod
 
 //Start growing a human clone in the pod!
-/obj/machinery/clonepod/proc/growclone(var/ckey, var/clonename, var/ui, var/se, var/mindref, var/mrace, var/UI)
+/obj/machinery/clonepod/proc/growclone(var/ckey, var/clonename, var/ui, var/se, var/mindref, var/mrace)
 	if(mess || attempting)
 		return 0
 	var/datum/mind/clonemind = locate(mindref)
@@ -144,7 +144,6 @@
 
 	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src)
 	occupant = H
-	H.UI = UI // set interface preference
 
 	if(!clonename)	//to prevent null names
 		clonename = "clone ([rand(0,999)])"
@@ -152,7 +151,7 @@
 
 	src.icon_state = "pod_1"
 	//Get the clone body ready
-	H.adjustCloneLoss(190) //new damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
+	H.adjustCloneLoss(src.heal_level + 100) //new damage var so you can't eject a clone early then stab them to abuse the current damage system --NeoFite
 	H.adjustBrainLoss(heal_level)
 	H.Paralyse(4)
 
@@ -192,6 +191,13 @@
 	H.f_style = "Shaved"
 	if(mrace == "none") //no more xenos losing ears/tentacles
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
+	else if(mrace == "tajaran")
+		H.h_style = "Tajaran Ears"
+	else if(mrace == "skrell")
+		if(H.gender == "female")
+			H.h_style = "Skrell Female Tentacles"
+		else
+			H.h_style = "Skrell Male Tentacles"
 
 	if(H.dna)
 		H.dna.mutantrace = mrace

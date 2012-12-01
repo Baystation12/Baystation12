@@ -8,9 +8,7 @@
 	origin_tech = "magnets=1"
 
 	wires = WIRE_RECEIVE
-
 	secured = 1
-
 
 	activate()
 		if(!..())	return 0//Cooldown check

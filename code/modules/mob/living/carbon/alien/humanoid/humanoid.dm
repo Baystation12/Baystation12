@@ -6,7 +6,6 @@
 	var/obj/item/clothing/head/head = null			//
 	var/obj/item/weapon/r_store = null
 	var/obj/item/weapon/l_store = null
-//	var/alien_invis = 0
 	var/caste = ""
 	update_icon = 1
 
@@ -205,7 +204,7 @@
 	if ((s_active && !( s_active in contents ) ))
 		s_active.close(src)
 
-	for(var/mob/living/carbon/metroid/M in view(1,src))
+	for(var/mob/living/carbon/slime/M in view(1,src))
 		M.UpdateFeed(src)
 
 	return
@@ -257,7 +256,7 @@
 	return
 
 
-/mob/living/carbon/alien/humanoid/attack_metroid(mob/living/carbon/metroid/M as mob)
+/mob/living/carbon/alien/humanoid/attack_slime(mob/living/carbon/slime/M as mob)
 	if (!ticker)
 		M << "You cannot attack people before the game has started."
 		return
@@ -272,7 +271,7 @@
 
 		var/damage = rand(1, 3)
 
-		if(istype(M, /mob/living/carbon/metroid/adult))
+		if(istype(M, /mob/living/carbon/slime/adult))
 			damage = rand(10, 40)
 		else
 			damage = rand(5, 35)
@@ -500,7 +499,7 @@ In all, this is a lot like the monkey code. /N
 
 /mob/living/carbon/alien/humanoid/show_inv(mob/user as mob)
 
-	user.machine = src
+	user.set_machine(src)
 	var/dat = {"
 	<B><HR><FONT size=3>[name]</FONT></B>
 	<BR><HR>

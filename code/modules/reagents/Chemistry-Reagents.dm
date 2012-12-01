@@ -13,7 +13,7 @@ datum
 		var/description = ""
 		var/datum/reagents/holder = null
 		var/reagent_state = SOLID
-		var/data = null
+		var/list/data = null
 		var/volume = 0
 		var/nutriment_factor = 0
 		//var/list/viruses = list()
@@ -74,9 +74,9 @@ datum
 			on_update(var/atom/A)
 				return
 
-		rorojelly
-			name = "Roro Jelly"
-			id = "rorojelly"
+		slimejelly
+			name = "slime Jelly"
+			id = "slimejelly"
 			description = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence. SO REAL."
 			reagent_state = LIQUID
 			color = "#801E28" // rgb: 128, 30, 40
@@ -100,13 +100,16 @@ datum
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				var/datum/reagent/blood/self = src
 				src = null
-				for(var/datum/disease/D in self.data["viruses"])
-					var/datum/disease/virus = new D.type
-					if(method == TOUCH)
-						M.contract_disease(virus)
+				if(self.data && self.data["viruses"])
+					for(var/datum/disease/D in self.data["viruses"])
+						//var/datum/disease/virus = new D.type(0, D, 1)
+						// We don't spread.
+						if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS) continue
 
-					else //injected
-						M.contract_disease(virus, 1, 0)
+						if(method == TOUCH)
+							M.contract_disease(D)
+						else //injected
+							M.contract_disease(D, 1, 0)
 
 				if(self.data["virus2"])
 					if(method == TOUCH)
@@ -114,26 +117,7 @@ datum
 					else
 						infect_virus2(M,self.data["virus2"],1)
 
-				if(istype(M,/mob/living/carbon))
-					// add the host's antibodies to their blood
-					self.data["antibodies"] |= M:antibodies
-
-					// check if the blood has antibodies that cure our disease
-					if (M:virus2) if((self.data["antibodies"] & M:virus2.antigen) && prob(10))
-						M:virus2.dead = 1
-
-				/*
-				if(self.data["virus"])
-					var/datum/disease/V = self.data["virus"]
-					if(M.resistances.Find(V.type)) return
-					if(method == TOUCH)//respect all protective clothing...
-						M.contract_disease(V)
-					else //injected
-						M.contract_disease(V, 1, 0)
-				return
-				*/
-
-
+				if(istype(M,/mob/living/carbon))					// add the host's antibodies to their blood					self.data["antibodies"] |= M:antibodies					// check if the blood has antibodies that cure our disease					if (M:virus2) if((self.data["antibodies"] & M:virus2.antigen) && prob(10))						M:virus2.dead = 1				/*				if(self.data["virus"])					var/datum/disease/V = self.data["virus"]					if(M.resistances.Find(V.type)) return					if(method == TOUCH)//respect all protective clothing...						M.contract_disease(V)					else //injected						M.contract_disease(V, 1, 0)				return				*/
 			reaction_turf(var/turf/simulated/T, var/volume)//splash the blood all over the place
 				if(!istype(T)) return
 				var/datum/reagent/blood/self = src
@@ -147,7 +131,7 @@ datum
 						blood_prop.blood_DNA[self.data["blood_DNA"]] = self.data["blood_type"]
 
 					for(var/datum/disease/D in self.data["viruses"])
-						var/datum/disease/newVirus = new D.type
+						var/datum/disease/newVirus = D.Copy(1)
 						blood_prop.viruses += newVirus
 						newVirus.holder = blood_prop
 
@@ -158,16 +142,9 @@ datum
 						blood_prop = new(T)
 						blood_prop.blood_DNA["Non-Human DNA"] = "A+"
 					for(var/datum/disease/D in self.data["viruses"])
-						var/datum/disease/newVirus = new D.type
+						var/datum/disease/newVirus = D.Copy(1)
 						blood_prop.viruses += newVirus
 						newVirus.holder = blood_prop
-
-						/*
-						if(T.density==0)
-							newVirus.spread_type = CONTACT_FEET
-						else
-							newVirus.spread_type = CONTACT_HANDS
-						*/
 
 				else if(istype(self.data["donor"], /mob/living/carbon/alien))
 					var/obj/effect/decal/cleanable/xenoblood/blood_prop = locate() in T
@@ -175,15 +152,9 @@ datum
 						blood_prop = new(T)
 						blood_prop.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 					for(var/datum/disease/D in self.data["viruses"])
-						var/datum/disease/newVirus = new D.type
+						var/datum/disease/newVirus = D.Copy(1)
 						blood_prop.viruses += newVirus
 						newVirus.holder = blood_prop
-						/*
-						if(T.density==0)
-							newVirus.spread_type = CONTACT_FEET
-						else
-							newVirus.spread_type = CONTACT_HANDS
-						*/
 				return
 
 /* Must check the transfering of reagents and their data first. They all can point to one disease datum.
@@ -206,8 +177,13 @@ datum
 				src = null
 				if(self.data&&method == INGEST)
 					for(var/datum/disease/D in M.viruses)
-						if(D.type == self.data)
-							D.cure()
+						if(istype(D, /datum/disease/advance))
+							var/datum/disease/advance/A = D
+							if(A.GetDiseaseID() == self.data)
+								D.cure()
+						else
+							if(D.type == self.data)
+								D.cure()
 
 					M.resistances += self.data
 				return
@@ -240,7 +216,7 @@ datum
 							T.overlays -= T.wet_overlay
 							T.wet_overlay = null
 
-				for(var/mob/living/carbon/metroid/M in T)
+				for(var/mob/living/carbon/slime/M in T)
 					M.adjustToxLoss(rand(15,20))
 
 				var/hotspot = (locate(/obj/fire) in T)
@@ -1083,7 +1059,7 @@ datum
 					for(var/obj/effect/decal/cleanable/C in src)
 						del(C)
 
-					for(var/mob/living/carbon/metroid/M in T)
+					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
@@ -1166,8 +1142,8 @@ datum
 				return
 			reaction_obj(var/obj/O, var/volume)
 				src = null
-				if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/roro_egg))
-					var/obj/item/weapon/reagent_containers/food/snacks/roro_egg/egg = O
+				if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/egg/slime))
+					var/obj/item/weapon/reagent_containers/food/snacks/egg/slime/egg = O
 					if (egg.grown)
 						egg.Hatch()
 				if((!O) || (!volume))	return 0
@@ -1983,15 +1959,15 @@ datum
 						M.bodytemperature += 5 * TEMPERATURE_DAMAGE_COEFFICIENT
 						if(holder.has_reagent("frostoil"))
 							holder.remove_reagent("frostoil", 5)
-						if(istype(M, /mob/living/carbon/metroid))
+						if(istype(M, /mob/living/carbon/slime))
 							M.bodytemperature += rand(5,20)
 					if(15 to 25)
 						M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
-						if(istype(M, /mob/living/carbon/metroid))
+						if(istype(M, /mob/living/carbon/slime))
 							M.bodytemperature += rand(10,20)
 					if(25 to INFINITY)
 						M.bodytemperature += 15 * TEMPERATURE_DAMAGE_COEFFICIENT
-						if(istype(M, /mob/living/carbon/metroid))
+						if(istype(M, /mob/living/carbon/slime))
 							M.bodytemperature += rand(15,20)
 				data++
 				..()
@@ -2069,23 +2045,23 @@ datum
 						M.bodytemperature -= 5 * TEMPERATURE_DAMAGE_COEFFICIENT
 						if(holder.has_reagent("capsaicin"))
 							holder.remove_reagent("capsaicin", 5)
-						if(istype(M, /mob/living/carbon/metroid))
+						if(istype(M, /mob/living/carbon/slime))
 							M.bodytemperature -= rand(5,20)
 					if(15 to 25)
 						M.bodytemperature -= 10 * TEMPERATURE_DAMAGE_COEFFICIENT
-						if(istype(M, /mob/living/carbon/metroid))
+						if(istype(M, /mob/living/carbon/slime))
 							M.bodytemperature -= rand(10,20)
 					if(25 to INFINITY)
 						M.bodytemperature -= 15 * TEMPERATURE_DAMAGE_COEFFICIENT
 						if(prob(1)) M.emote("shiver")
-						if(istype(M, /mob/living/carbon/metroid))
+						if(istype(M, /mob/living/carbon/slime))
 							M.bodytemperature -= rand(15,20)
 				data++
 				..()
 				return
 
 			reaction_turf(var/turf/simulated/T, var/volume)
-				for(var/mob/living/carbon/metroid/M in T)
+				for(var/mob/living/carbon/slime/M in T)
 					M.adjustToxLoss(rand(15,30))
 
 
