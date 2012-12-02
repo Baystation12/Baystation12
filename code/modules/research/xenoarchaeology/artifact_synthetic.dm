@@ -35,7 +35,7 @@
 	var/s = round(p,25)
 	icon_state = "anodev[s]"
 
-/obj/item/weapon/anodevice/proc/interact(var/mob/user)
+/obj/item/weapon/anodevice/interact(var/mob/user)
 	user.machine = src
 	var/dat = "<b>Anomalous Materials Energy Utiliser</b><br>"
 	if(activated)

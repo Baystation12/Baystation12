@@ -3,10 +3,6 @@
 	if(join_motd)
 		src << "<div class=\"motd\">[join_motd]</div>"
 
-
-	if(!preferences)
-		preferences = new
-
 	if(!mind)
 		mind = new /datum/mind(key)
 		mind.active = 1

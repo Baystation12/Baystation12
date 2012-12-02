@@ -74,7 +74,8 @@
 
 				var/mob/living/carbon/human/H = new_mob
 				if(H.dna)
-					H.dna.mutantrace = pick("skrell","tajaran","lizard","golem","slime","plant",4;"")			else
+					H.dna.mutantrace = pick("skrell","tajaran","lizard","golem","slime","plant",4;"")
+			else
 				return
 
 		for (var/obj/effect/proc_holder/spell/S in M.spell_list)

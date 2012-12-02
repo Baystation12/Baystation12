@@ -11,6 +11,8 @@
 	slot_flags = SLOT_BELT
 	var/scanning = 0
 	var/list/log = list()
+	var/amount = 20.0
+	var/list/stored = list()
 
 /obj/item/device/detective_scanner/attack_self(var/mob/user)
 	if(log.len && !scanning)
@@ -120,5 +122,24 @@
 				for(var/blood in A.blood_DNA)
 					add_log(user, "Type: <font color='red'>[A.blood_DNA[blood]]</font> DNA: <font color='red'>[blood]</font>")
 
-			//General			if ((!A.fingerprints || !A.fingerprints.len) && (!A.suit_fibers || !A.suit_fibers.len) && (!A.blood_DNA || !A.blood_DNA.len))				add_log(null, "<I># No forensic traces found #</I>")				user.visible_message("\The [user] scans \the [A] with \a [src], the air around [user.gender == MALE ? "him" : "her"] humming[prob(70) ? " gently." : "."]" ,\				"<span class='notice'>Unable to locate any fingerprints, materials, fibers, or blood on [A]!</span>",\				"You hear a faint hum of electrical equipment.")			else				user.visible_message("\The [user] scans \the [A] with \a [src], the air around [user.gender == MALE ? "him" : "her"] humming[prob(70) ? " gently." : "."]" ,\				"<span class='notice'>You finish analysing \the [A].</span>",\				"You hear a faint hum of electrical equipment.")
-			add_log(null, "---------------------------------------------------------")			scanning = 0			return 0/obj/item/device/detective_scanner/proc/add_log(var/mob/user, var/msg)	if(scanning)		if(user)			user << msg		log += "&nbsp;&nbsp;[msg]"	else		CRASH("[src] \ref[src] is adding a log when it was never put in scanning mode!")
+			//General
+			if ((!A.fingerprints || !A.fingerprints.len) && (!A.suit_fibers || !A.suit_fibers.len) && (!A.blood_DNA || !A.blood_DNA.len))
+				add_log(null, "<I># No forensic traces found #</I>")
+				user.visible_message("\The [user] scans \the [A] with \a [src], the air around [user.gender == MALE ? "him" : "her"] humming[prob(70) ? " gently." : "."]" ,\
+				"<span class='notice'>Unable to locate any fingerprints, materials, fibers, or blood on [A]!</span>",\
+				"You hear a faint hum of electrical equipment.")
+			else
+				user.visible_message("\The [user] scans \the [A] with \a [src], the air around [user.gender == MALE ? "him" : "her"] humming[prob(70) ? " gently." : "."]" ,\
+				"<span class='notice'>You finish analysing \the [A].</span>",\
+				"You hear a faint hum of electrical equipment.")
+			add_log(null, "---------------------------------------------------------")
+			scanning = 0
+			return 0
+
+/obj/item/device/detective_scanner/proc/add_log(var/mob/user, var/msg)
+	if(scanning)
+		if(user)
+			user << msg
+		log += "&nbsp;&nbsp;[msg]"
+	else
+		CRASH("[src] \ref[src] is adding a log when it was never put in scanning mode!")

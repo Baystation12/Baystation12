@@ -9,7 +9,6 @@
 	var/last_bumped = 0
 	var/pass_flags = 0
 	var/throwpass = 0
-	var/germ_level = 0 // The higher the germ level, the more germ on the atom.
 
 	///Chemistry.
 	var/datum/reagents/reagents = null
@@ -21,12 +20,14 @@
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
 
+	var/germ_level = 0 // The higher the germ level, the more germ on the atom.
+
 /atom/proc/throw_impact(atom/hit_atom)
 	if(istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
 		M.hitby(src)
 
-			log_attack("<font color='red'>[hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])</font>")			log_admin("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")			msg_admin_attack("ATTACK: [hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])")	else if(isobj(hit_atom))
+	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
 			step(O, src.dir)
@@ -41,7 +42,7 @@
 				var/mob/living/M = src
 				M.take_organ_damage(20)
 
-
+//skytodo
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	del(giver)
 	return null
@@ -116,7 +117,7 @@
  * Recursevly searches all atom contens (including contents contents and so on).
  *
  * ARGS: path - search atom contents for atoms of this type
- *	   list/filter_path - if set, contents of atoms not of types in this list are excluded from search.
+ *       list/filter_path - if set, contents of atoms not of types in this list are excluded from search.
  *
  * RETURNS: list of found atoms
  */
@@ -330,7 +331,6 @@ its easier to just keep the beam vertical.
 
 /atom/proc/add_fingerprint(mob/living/M as mob)
 	if(isnull(M)) return
-	if(isAI(M)) return
 	if(isnull(M.key)) return
 	if (!( src.flags ) & FPRINT)
 		return
@@ -341,7 +341,8 @@ its easier to just keep the beam vertical.
 
 		//Fibers~
 		add_fibers(M)
-		//He has no prints!		if (mFingerprints in M.mutations)			if(fingerprintslast != M.key)				fingerprintshidden += "(Has no fingerprints) Real name: [M.real_name], Key: [M.key]"				fingerprintslast = M.key			return 0		//Now, lets get to the dirty work.
+
+		//Now, lets get to the dirty work.
 		//First, make sure their DNA makes sense.
 		var/mob/living/carbon/human/H = M
 		if (!istype(H.dna, /datum/dna) || !H.dna.uni_identity || (length(H.dna.uni_identity) != 32))
@@ -397,7 +398,11 @@ its easier to just keep the beam vertical.
 		A.fingerprints = list()
 	if(!istype(A.fingerprintshidden,/list))
 		A.fingerprintshidden = list()
-	if(fingerprints)		A.fingerprints |= fingerprints.Copy()            //detective	if(fingerprintshidden)		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin	A.fingerprintslast = fingerprintslast
+	if(fingerprints)
+		A.fingerprints |= fingerprints.Copy()            //detective
+	if(fingerprintshidden)
+		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin
+	A.fingerprintslast = fingerprintslast
 
 
 //returns 1 if made bloody, returns 0 otherwise
@@ -514,7 +519,6 @@ its easier to just keep the beam vertical.
 			new /obj/effect/decal/cleanable/oil(source2)
 
 /atom/proc/clean_blood()
-	src.germ_level = 0
 	if(istype(blood_DNA, /list))
 		del(blood_DNA)
 		return 1

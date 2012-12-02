@@ -349,7 +349,7 @@ var/list/slot_equipment_priority = list( \
 
 /mob/proc/print_flavor_text()
 	if (flavor_text && flavor_text != "")
-		var/msg = dd_replacetext(flavor_text, "\n", " ")
+		var/msg = replacetext(flavor_text, "\n", " ")
 		if(lentext(msg) <= 40)
 			return "\blue [msg]"
 		else
@@ -418,7 +418,34 @@ var/list/slot_equipment_priority = list( \
 /client/verb/changes()
 	set name = "Changelog"
 	set category = "OOC"
-	getFiles(		'html/postcardsmall.jpg',		'html/somerights20.png',		'html/88x31.png',		'html/bug-minus.png',		'html/cross-circle.png',		'html/hard-hat-exclamation.png',		'html/image-minus.png',		'html/image-plus.png',		'html/music-minus.png',		'html/music-plus.png',		'html/tick-circle.png',		'html/wrench-screwdriver.png',		'html/spell-check.png',		'html/burn-exclamation.png',		'html/chevron.png',		'html/chevron-expand.png',		'html/changelog.css',		'html/changelog.js',		'html/changelog.html'		)	src << browse('html/changelog.html', "window=changes;size=675x650")	if(prefs.lastchangelog != changelog_hash)		prefs.lastchangelog = changelog_hash		prefs.save_preferences()		winset(src, "rpane.changelog", "background-color=none;font-style=;")/mob/verb/observe()
+	getFiles(
+		'html/postcardsmall.jpg',
+		'html/somerights20.png',
+		'html/88x31.png',
+		'html/bug-minus.png',
+		'html/cross-circle.png',
+		'html/hard-hat-exclamation.png',
+		'html/image-minus.png',
+		'html/image-plus.png',
+		'html/music-minus.png',
+		'html/music-plus.png',
+		'html/tick-circle.png',
+		'html/wrench-screwdriver.png',
+		'html/spell-check.png',
+		'html/burn-exclamation.png',
+		'html/chevron.png',
+		'html/chevron-expand.png',
+		'html/changelog.css',
+		'html/changelog.js',
+		'html/changelog.html'
+		)
+	src << browse('html/changelog.html', "window=changes;size=675x650")
+	if(prefs.lastchangelog != changelog_hash)
+		prefs.lastchangelog = changelog_hash
+		prefs.save_preferences()
+		winset(src, "rpane.changelog", "background-color=none;font-style=;")
+
+/mob/verb/observe()
 	set name = "Observe"
 	set category = "OOC"
 	var/is_admin = 0
@@ -517,7 +544,7 @@ var/list/slot_equipment_priority = list( \
 		src << browse(null, t1)
 
 	if(href_list["flavor_more"])
-		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, dd_replacetext(flavor_text, "\n", "<BR>")), text("window=[];size=500x200", name))
+		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, replacetext(flavor_text, "\n", "<BR>")), text("window=[];size=500x200", name))
 		onclose(usr, "[name]")
 	if(href_list["flavor_change"])
 		update_flavor_text()
@@ -848,4 +875,18 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/AdjustResting(amount)
 	resting = max(resting + amount,0)
-	return/* * Sends resource files to client cache *//mob/proc/getFiles()	if(!isemptylist(args))		for(var/file in args)			src << browse_rsc(file)		return 1	return 0/mob/proc/get_species()	return ""/mob/proc/flash_weak_pain()	flick("weak_pain",pain)
+	return
+
+/* * Sends resource files to client cache */
+/mob/proc/getFiles()
+	if(!isemptylist(args))
+		for(var/file in args)
+			src << browse_rsc(file)
+		return 1
+	return 0
+
+/mob/proc/get_species()
+	return ""
+
+/mob/proc/flash_weak_pain()
+	flick("weak_pain",pain)

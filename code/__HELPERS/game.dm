@@ -275,4 +275,144 @@ proc/isInSight(var/atom/A, var/atom/B)
 		if(M.ckey == lowertext(key))
 			return M
 	return null
-// Will return a list of active candidates. It increases the buffer 5 times until it finds a candidate which is active within the buffer./proc/get_active_candidates(var/buffer = 1)	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn	var/i = 0	while(candidates.len <= 0 && i < 5)		for(var/mob/dead/observer/G in player_list)			if(((G.client.inactivity/10)/60) <= buffer + i) // the most active players are more likely to become an alien				if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))					candidates += G.key		i++	return candidates// Same as above but for alien candidates./proc/get_alien_candidates()	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn	var/i = 0	while(candidates.len <= 0 && i < 5)		for(var/mob/dead/observer/G in player_list)			if(G.client.prefs.be_special & BE_ALIEN)				if(((G.client.inactivity/10)/60) <= ALIEN_SELECT_AFK_BUFFER + i) // the most active players are more likely to become an alien					if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))						candidates += G.key		i++	return candidates/proc/ScreenText(obj/O, maptext="", screen_loc="CENTER-7,CENTER-7", maptext_height=480, maptext_width=480)	if(!isobj(O))	O = new /obj/screen/text()	O.maptext = maptext	O.maptext_height = maptext_height	O.maptext_width = maptext_width	O.screen_loc = screen_loc	return O/proc/Show2Group4Delay(obj/O, list/group, delay=0)	if(!isobj(O))	return	if(!group)	group = clients	for(var/client/C in group)		C.screen += O	if(delay)		spawn(delay)			for(var/client/C in group)				C.screen -= Oproc/check_can_reach(atom/user, atom/target)	if(!in_range(user,target))		return 0	return CanReachThrough(get_turf(user), get_turf(target), target)//dummy caching, used to speed up reach checksvar/list/DummyCache = list()/proc/CanReachThrough(turf/srcturf, turf/targetturf, atom/target)	var/obj/item/weapon/dummy/D = locate() in DummyCache	if(!D)		D = new /obj/item/weapon/dummy( srcturf )	else		DummyCache.Remove(D)		D.loc = srcturf	if(targetturf.density && targetturf != get_turf(target))		return 0	//Now, check objects to block exit that are on the border	for(var/obj/border_obstacle in srcturf)		if(border_obstacle.flags & ON_BORDER)			if(!border_obstacle.CheckExit(D, targetturf))				D.loc = null				DummyCache.Add(D)				return 0	//Next, check objects to block entry that are on the border	for(var/obj/border_obstacle in targetturf)		if((border_obstacle.flags & ON_BORDER) && (target != border_obstacle))			if(!border_obstacle.CanPass(D, srcturf, 1, 0))				D.loc = null				DummyCache.Add(D)				return 0	D.loc = null	DummyCache.Add(D)	return 1
+
+// Will return a list of active candidates. It increases the buffer 5 times until it finds a candidate which is active within the buffer.
+
+/proc/get_active_candidates(var/buffer = 1)
+
+	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
+	var/i = 0
+	while(candidates.len <= 0 && i < 5)
+		for(var/mob/dead/observer/G in player_list)
+			if(((G.client.inactivity/10)/60) <= buffer + i) // the most active players are more likely to become an alien
+				if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
+					candidates += G.key
+		i++
+	return candidates
+
+// Same as above but for alien candidates.
+
+/proc/get_alien_candidates()
+
+	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
+	var/i = 0
+	while(candidates.len <= 0 && i < 5)
+		for(var/mob/dead/observer/G in player_list)
+			if(G.client.prefs.be_special & BE_ALIEN)
+				if(((G.client.inactivity/10)/60) <= ALIEN_SELECT_AFK_BUFFER + i) // the most active players are more likely to become an alien
+					if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
+						candidates += G.key
+		i++
+	return candidates
+
+/proc/ScreenText(obj/O, maptext="", screen_loc="CENTER-7,CENTER-7", maptext_height=480, maptext_width=480)
+	if(!isobj(O))
+		O = new /obj/screen/text()
+	O.maptext = maptext
+	O.maptext_height = maptext_height
+	O.maptext_width = maptext_width
+	O.screen_loc = screen_loc
+	return O
+
+/proc/Show2Group4Delay(obj/O, list/group, delay=0)
+	if(!isobj(O))	return
+	if(!group)	group = clients
+	for(var/client/C in group)
+		C.screen += O
+	if(delay)
+		spawn(delay)
+			for(var/client/C in group)
+				C.screen -= O
+
+proc/check_can_reach(atom/user, atom/target)
+	if(!in_range(user,target))
+		return 0
+	return CanReachThrough(get_turf(user), get_turf(target), target)
+
+//dummy caching, used to speed up reach checks
+var/list/DummyCache = list()
+
+/proc/CanReachThrough(turf/srcturf, turf/targetturf, atom/target)
+
+	var/obj/item/weapon/dummy/D = locate() in DummyCache
+	if(!D)
+		D = new /obj/item/weapon/dummy( srcturf )
+	else
+		DummyCache.Remove(D)
+		D.loc = srcturf
+
+	if(targetturf.density && targetturf != get_turf(target))
+		return 0
+
+	//Now, check objects to block exit that are on the border
+	for(var/obj/border_obstacle in srcturf)
+		if(border_obstacle.flags & ON_BORDER)
+			if(!border_obstacle.CheckExit(D, targetturf))
+				D.loc = null
+				DummyCache.Add(D)
+				return 0
+
+	//Next, check objects to block entry that are on the border
+	for(var/obj/border_obstacle in targetturf)
+		if((border_obstacle.flags & ON_BORDER) && (target != border_obstacle))
+			if(!border_obstacle.CanPass(D, srcturf, 1, 0))
+				D.loc = null
+				DummyCache.Add(D)
+				return 0
+
+	D.loc = null
+	DummyCache.Add(D)
+	return 1
+
+/proc/reverse_direction(var/dir)
+	switch(dir)
+		if(NORTH)
+			return SOUTH
+		if(NORTHEAST)
+			return SOUTHWEST
+		if(EAST)
+			return WEST
+		if(SOUTHEAST)
+			return NORTHWEST
+		if(SOUTH)
+			return NORTH
+		if(SOUTHWEST)
+			return NORTHEAST
+		if(WEST)
+			return EAST
+		if(NORTHWEST)
+			return SOUTHEAST
+
+//Is this even used for anything besides balloons? Yes I took out the W:lit stuff because : really shouldnt be used.
+/proc/is_sharp(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
+	return ( \
+		istype(W, /obj/item/weapon/screwdriver)                   || \
+		istype(W, /obj/item/weapon/pen)                           || \
+		istype(W, /obj/item/weapon/weldingtool)					  || \
+		istype(W, /obj/item/weapon/lighter/zippo)				  || \
+		istype(W, /obj/item/weapon/match)            		      || \
+		istype(W, /obj/item/clothing/mask/cigarette) 		      || \
+		istype(W, /obj/item/weapon/wirecutters)                   || \
+		istype(W, /obj/item/weapon/circular_saw)                  || \
+		istype(W, /obj/item/weapon/melee/energy/sword)            || \
+		istype(W, /obj/item/weapon/melee/energy/blade)            || \
+		istype(W, /obj/item/weapon/shovel)                        || \
+		istype(W, /obj/item/weapon/kitchenknife)                  || \
+		istype(W, /obj/item/weapon/butch)						  || \
+		istype(W, /obj/item/weapon/scalpel)                       || \
+		istype(W, /obj/item/weapon/kitchen/utensil/knife)         || \
+		istype(W, /obj/item/weapon/shard)                         || \
+		istype(W, /obj/item/weapon/broken_bottle)				  || \
+		istype(W, /obj/item/weapon/reagent_containers/syringe)    || \
+		istype(W, /obj/item/weapon/kitchen/utensil/fork) && W.icon_state != "forkloaded" || \
+		istype(W, /obj/item/weapon/twohanded/fireaxe) \
+	)
+/proc/is_surgery_tool(obj/item/W as obj)
+	return (	\
+	istype(W, /obj/item/weapon/scalpel)			||	\
+	istype(W, /obj/item/weapon/hemostat)		||	\
+	istype(W, /obj/item/weapon/retractor)		||	\
+	istype(W, /obj/item/weapon/cautery)			||	\
+	istype(W, /obj/item/weapon/bonegel)			||	\
+	istype(W, /obj/item/weapon/bonesetter)
+	)

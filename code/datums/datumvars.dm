@@ -603,7 +603,10 @@ client
 				log_admin("[key_name(usr)] deleted all objects of type or subtype of [O_type] ([i] objects deleted) ")
 				message_admins("\blue [key_name(usr)] deleted all objects of type or subtype of [O_type] ([i] objects deleted) ")
 
-	else if(href_list["explode"])		if(!check_rights(0))	return		var/atom/A = locate(href_list["explode"])
+	else if(href_list["explode"])
+		if(!check_rights(0))
+			return
+		var/atom/A = locate(href_list["explode"])
 		if(!isobj(A) && !ismob(A) && !isturf(A))
 			usr << "This can only be done to instances of type /obj, /mob and /turf"
 			return

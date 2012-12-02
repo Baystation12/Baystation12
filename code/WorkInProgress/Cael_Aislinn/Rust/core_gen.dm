@@ -113,7 +113,7 @@ max volume of plasma storeable by the field = the total volume of a number of ti
 			Shutdown()
 
 	bullet_act(var/obj/item/projectile/Proj)
-		if(Proj.flag != "bullet" && owned_field)
-			var/obj/item/projectile/beam/laserbeam = Proj
+		if(istype(Proj, /obj/item/projectile/beam/emitter) && owned_field)
+			var/obj/item/projectile/beam/emitter/laserbeam = Proj
 			owned_field.AddEnergy(0, laserbeam.damage / 5000, laserbeam.frequency)
 		return 0

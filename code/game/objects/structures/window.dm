@@ -361,10 +361,5 @@
 	opacity = 1
 
 /obj/structure/window/reinforced/tinted/frosted
-<<<<<<< HEAD
-	icon_state = "fwindow"
-	name = "frosted window"
-=======
 	name = "frosted window"
 	icon_state = "fwindow"
->>>>>>> remotes/git-svn

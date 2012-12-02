@@ -20,10 +20,9 @@
 					M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stungloved [src.name] ([src.ckey])</font>")
 					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [M.name] ([M.ckey])</font>")
 
-					log_admin("ATTACK: [M.name] ([M.ckey]) stungloved [src.name] ([src.ckey])")
-					msg_admin_attack("ATTACK: [M.name] ([M.ckey]) stungloved [src.name] ([src.ckey])") //BS12 EDIT ALG
 
 					log_attack("<font color='red'>[M.name] ([M.ckey]) stungloved [src.name] ([src.ckey])</font>")
+
 
 					var/armorblock = run_armor_check(M.zone_sel.selecting, "energy")
 					apply_effects(5,5,0,0,5,0,0,armorblock)
@@ -60,11 +59,10 @@
 
 	switch(M.a_intent)
 		if("help")
-			if(health > config.health_threshold_crit)
-				diary << "\[[time2text(world.timeofday, "hh:mm.ss")]\] CPR BUGHINTING: [M] shakes [src]: health - [health], threshold - [config.health_threshold_crit]. Health details: OX [getOxyLoss()] TX [getToxLoss()] BU [getFireLoss()] BR [getBruteLoss()]  Blood: [round(vessel.get_reagent_amount("blood"))] out of 560"
+			if(health > 0)
 				help_shake_act(M)
 				return 1
-//			if(M.health < -75)	return 0
+			if(M.health < -75)	return 0
 
 			if((M.head && (M.head.flags & HEADCOVERSMOUTH)) || (M.wear_mask && (M.wear_mask.flags & MASKCOVERSMOUTH)))
 				M << "\blue <B>Remove your mask!</B>"
@@ -112,42 +110,35 @@
 				M.attack_log += text("\[[time_stamp()]\] <font color='red'>Used Electric Hands nanoaug power on [src.name] ([src.ckey])</font>")
 				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been shocked by [M.name] with the Electric Hands nanoaug ([M.ckey])</font>")
 
-				log_admin("ATTACK: [M.name] ([M.ckey]) used Electric Hands nanoaug on [src.name] ([src.ckey]), shocking them")
-				msg_admin_attack("ATTACK: [M.name] ([M.ckey]) used Electric Hands nanoaug on [src.name] ([src.ckey]), shocking them") //BS12 EDIT ALG
+				log_attack("<font color='red'>[M.name] ([M.ckey]) used Electric Hands nanoaug on [src.name], shocking them ([src.ckey])</font>")
 
-				log_attack("<font color='red'>[M.name] ([M.ckey]) used Electric Hands nanoaug on [src.name]([src.ckey]), shocking them </font>")
 
 				var/armorblock = run_armor_check(M.zone_sel.selecting, "energy")
 				apply_effects(5,5,0,0,5,0,0,armorblock)
 
 				return
 
+			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Punched [src.name] ([src.ckey])</font>")
+			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been punched by [M.name] ([M.ckey])</font>")
+
+			log_attack("<font color='red'>[M.name] ([M.ckey]) punched [src.name] ([src.ckey])</font>")
+
+
 			var/attack_verb
 			if(M.dna)
 				switch(M.dna.mutantrace)
 					if("lizard")
-						attack_verb = "scratch"
-					if("tajaran")
 						attack_verb = "scratch"
 					if("plant")
 						attack_verb = "slash"
 					else
 						attack_verb = "punch"
 
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[attack_verb]ed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [attack_verb]ed by [M.name] ([M.ckey])</font>")
 
-			log_admin("ATTACK: [M.name] ([M.ckey]) [attack_verb]ed [src.name] ([src.ckey])")
-			msg_admin_attack("ATTACK: [M.name] ([M.ckey]) [attack_verb]ed [src.name] ([src.ckey])") //BS12 EDIT ALG
-
-			log_attack("<font color='red'>[M.name] ([M.ckey]) [attack_verb]ed [src.name] ([src.ckey])</font>")
-
-			var/damage = rand(0, 5)//BS12 EDIT
+			var/damage = rand(0, 9)
 			if(!damage)
 				switch(attack_verb)
 					if("slash")
-						playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
-					if("scratch")
 						playsound(loc, 'sound/weapons/slashmiss.ogg', 25, 1, -1)
 					else
 						playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
@@ -162,60 +153,33 @@
 			if(HULK in M.mutations)			damage += 5
 			if(SUPRSTR in M.augmentations) 	damage += 5
 
-
 			switch(attack_verb)
 				if("slash")
-					playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
-				if("scratch")
 					playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 				else
 					playsound(loc, "punch", 25, 1, -1)
 
 			visible_message("\red <B>[M] has [attack_verb]ed [src]!</B>")
-//Rearranged, so claws don't increase weaken chance.
-			if(damage >= 5 && prob(50))
-				visible_message("\red <B>[M] has weakened [src]!</B>")
-				apply_effect(2, WEAKEN, armor_block)
 
-			if(attack_verb == "scratch")	damage += 5
 			apply_damage(damage, BRUTE, affecting, armor_block)
-
+			if(damage >= 9)
+				visible_message("\red <B>[M] has weakened [src]!</B>")
+				apply_effect(4, WEAKEN, armor_block)
 
 		if("disarm")
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
 
-			log_admin("ATTACK: [M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])")
+
 			log_attack("<font color='red'>[M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])</font>")
 
 
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)
 			var/datum/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
-
-			if (istype(r_hand,/obj/item/weapon/gun) || istype(l_hand,/obj/item/weapon/gun))
-				var/obj/item/weapon/gun/W = null
-				var/chance = 0
-
-				if (istype(l_hand,/obj/item/weapon/gun))
-					W = l_hand
-					chance = hand ? 40 : 20
-
-				if (istype(r_hand,/obj/item/weapon/gun))
-					W = r_hand
-					chance = !hand ? 40 : 20
-
-				if (prob(chance))
-					visible_message("<spawn class=danger>[src]'s [W] goes off during struggle!")
-					var/list/turfs = list()
-					for(var/turf/T in view())
-						turfs += T
-					var/turf/target = pick(turfs)
-					return W.afterattack(target,src)
-
 			var/randn = rand(1, 100)
 			if (randn <= 25)
-				apply_effect(4, WEAKEN, run_armor_check(affecting, "melee"))
+				apply_effect(2, WEAKEN, run_armor_check(affecting, "melee"))
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				visible_message("\red <B>[M] has pushed [src]!</B>")
 				return

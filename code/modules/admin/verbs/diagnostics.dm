@@ -1,16 +1,15 @@
-/client/proc
-	general_report()
-		set category = "Debug"
-		set name = "Show General Report"
+/client/proc/general_report()
+	set category = "Debug"
+	set name = "Show General Report"
 
-		if(!master_controller)
-			usr << alert("Master_controller not found.")
+	if(!master_controller)
+		usr << alert("Master_controller not found.")
 
-		var/mobs = 0
-		for(var/mob/M in mob_list)
-			mobs++
+	var/mobs = 0
+	for(var/mob/M in mob_list)
+		mobs++
 
-		var/output = {"<B>GENERAL SYSTEMS REPORT</B><HR>
+	var/output = {"<B>GENERAL SYSTEMS REPORT</B><HR>
 <B>General Processing Data</B><BR>
 <B># of Machines:</B> [machines.len]<BR>
 <B># of Pipe Networks:</B> [pipe_networks.len]<BR>
@@ -18,15 +17,18 @@
 <B># of Power Nets:</B> [powernets.len]<BR>
 <B># of Mobs:</B> [mobs]<BR>
 "}
+	usr << browse(output,"window=generalreport")
+	feedback_add_details("admin_verb","SGR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-		usr << browse(output,"window=generalreport")
-		feedback_add_details("admin_verb","SGR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-//------------------ actual mergesection star
+//skytodo
 /client/proc/air_report()
 	set category = "Debug"
 	set name = "Show Air Report"
 
+	usr << "\red This proc has been disabled."
+	return
+
+	/*
 	if(!master_controller || !air_master)
 		alert(usr,"Master_controller or air_master not found.","Air Report")
 		return 0
@@ -65,11 +67,16 @@
 
 	usr << browse(output,"window=airreport")
 	feedback_add_details("admin_verb","SAR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+*/
 
+//skytodo
 /client/proc/air_status(turf/target as turf)
 	set category = "Debug"
 	set name = "Display Air Status"
 
+	usr << "\red This proc has been disabled."
+	return
+	/*
 	if(!isturf(target))
 		return
 
@@ -84,6 +91,7 @@
 	for(var/datum/gas/trace_gas in GM.trace_gases)
 		usr << "[trace_gas.type]: [trace_gas.moles]"
 	feedback_add_details("admin_verb","DAST") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+*/
 
 /client/proc/fix_next_move()
 	set category = "Debug"
@@ -161,18 +169,56 @@
 
 	message_admins("[usr] manually reloaded admins")
 	load_admins()
-	feedback_add_details("admin_verb","RLDA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	load_mods()
+	feedback_add_details("admin_verb","RLDA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-//todo:
-/client/proc/jump_to_dead_group()	set name = "Jump to dead group"	set category = "Debug"	if(!holder)		src << "Only administrators may use this command."		return
+//skytodo:
+/client/proc/jump_to_dead_group()
+	set name = "Jump to dead group"
+	set category = "Debug"
+
+	usr << "\red This proc has been disabled."
+	return
+
+	/*
+	if(!holder)
+		src << "Only administrators may use this command."
+		return
 	if(!air_master)
 		usr << "Cannot find air_system"
 		return
-	var/datum/air_group/dead_groups = list()	for(var/datum/air_group/group in air_master.air_groups)		if (!group.group_processing)			dead_groups += group	var/datum/air_group/dest_group = pick(dead_groups)	usr.loc = pick(dest_group.members)	feedback_add_details("admin_verb","JDAG") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!	return
-/client/proc/kill_airgroup()	set name = "Kill Local Airgroup"	set desc = "Use this to allow manual manupliation of atmospherics."	set category = "Debug"	if(!holder)		src << "Only administrators may use this command."		return
+	var/datum/air_group/dead_groups = list()
+	for(var/datum/air_group/group in air_master.air_groups)
+		if (!group.group_processing)
+			dead_groups += group
+	var/datum/air_group/dest_group = pick(dead_groups)
+	usr.loc = pick(dest_group.members)
+	feedback_add_details("admin_verb","JDAG") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!	return
+	*/
+
+//skytodo
+/client/proc/kill_airgroup()
+	set name = "Kill Local Airgroup"
+	set desc = "Use this to allow manual manupliation of atmospherics."
+	set category = "Debug"
+
+	usr << "\red This proc has been disabled."
+	return
+
+	/*
+	if(!holder)
+		src << "Only administrators may use this command."
+		return
 	if(!air_master)
 		usr << "Cannot find air_system"
 		return
 
-	var/turf/T = get_turf(usr)	if(istype(T, /turf/simulated))		var/datum/air_group/AG = T:parent		AG.next_check = 30		AG.group_processing = 0	else		usr << "Local airgroup is unsimulated!"	feedback_add_details("admin_verb","KLAG") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	var/turf/T = get_turf(usr)
+	if(istype(T, /turf/simulated))
+		var/datum/air_group/AG = T:parent
+		AG.next_check = 30
+		AG.group_processing = 0
+	else
+		usr << "Local airgroup is unsimulated!"
+	feedback_add_details("admin_verb","KLAG") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	*/

@@ -381,10 +381,6 @@ var/list/department_radio_keys = list(
 
 		for (var/M in heard_a)
 			if(hascall(M,"show_message"))
-<<<<<<< HEAD
-				M:show_message(rendered, 2)
-				M << speech_bubble
-=======
 				var/deaf_message = ""
 				var/deaf_type = 1
 				if(M != src)
@@ -393,7 +389,7 @@ var/list/department_radio_keys = list(
 					deaf_message = "<span class='notice'>You cannot hear yourself!</span>"
 					deaf_type = 2 // Since you should be able to hear yourself without looking
 				M:show_message(rendered, 2, deaf_message, deaf_type)
->>>>>>> remotes/git-svn
+				M << speech_bubble
 
 	if (length(heard_b))
 		var/message_b

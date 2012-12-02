@@ -378,7 +378,12 @@
 				temp = "Error: Clonepod malfunction."
 			else if(!config.revival_cloning)
 				temp = "Error: Unable to initiate cloning cycle."
-			else if(pod1.growclone(C.fields["ckey"], C.fields["name"], C.fields["UI"], C.fields["SE"], C.fields["mind"], C.fields["mrace"]))				temp = "Initiating cloning cycle..."				records.Remove(C)				del(C)				menu = 1			else
+			else if(pod1.growclone(C.fields["ckey"], C.fields["name"], C.fields["UI"], C.fields["SE"], C.fields["mind"], C.fields["mrace"]))
+				temp = "Initiating cloning cycle..."
+				records.Remove(C)
+				del(C)
+				menu = 1
+			else
 				var/mob/selected = find_dead_player("[C.fields["ckey"]]")
 				selected << 'chime.ogg'	//probably not the best sound but I think it's reasonable
 				var/answer = alert(selected,"Do you want to return to life?","Cloning","Yes","No")

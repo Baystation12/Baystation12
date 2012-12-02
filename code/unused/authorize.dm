@@ -118,7 +118,7 @@ var/list/beta_tester_keylist
 	if (!text)
 		diary << "Failed to load config/testers.txt\n"
 	else
-		var/list/lines = dd_text2list(text, "\n")
+		var/list/lines = text2list(text, "\n")
 		for(var/line in lines)
 			if (!line)
 				continue

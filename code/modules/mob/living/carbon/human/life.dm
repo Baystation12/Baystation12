@@ -595,11 +595,7 @@
 
 
 	proc/handle_breath(datum/gas_mixture/breath)
-<<<<<<< HEAD
-		if(nodamage || (REBREATHER in augmentations) || (mNobreath in mutations))
-=======
 		if((status_flags & GODMODE) || REBREATHER in augmentations)
->>>>>>> remotes/git-svn
 			return
 
 		if(!breath || (breath.total_moles() == 0) || suiciding)
@@ -1335,19 +1331,12 @@
 			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
 			if(dna)
 				switch(dna.mutantrace)
-<<<<<<< HEAD
-					if("metroid")
-						see_in_dark = 3
-						see_invisible = SEE_INVISIBLE_LEVEL_ONE
-					if("lizard")
-						see_in_dark = 3
 					if("tajaran")
-=======
-					if("lizard","slime")
+						see_in_dark = 3
+					if("slime")
 						see_in_dark = 3
 						see_invisible = SEE_INVISIBLE_LEVEL_ONE
 					if("shadow")
->>>>>>> remotes/git-svn
 						see_in_dark = 8
 					else
 						see_in_dark = 2
@@ -1532,8 +1521,7 @@
 			if(!currentTurf.lighting_lumcount)
 				playsound_local(src,pick(scarySounds),50, 1, -1)
 
-<<<<<<< HEAD
-	proc/handle_virus_updates()
+/*	proc/handle_virus_updates()
 		if(bodytemperature > 406)
 			for(var/datum/disease/D in viruses)
 				D.cure()
@@ -1555,13 +1543,8 @@
 			if(!virus2) return
 
 			// check if we're immune
-			if(virus2.antigen & src.antibodies) virus2.dead = 1
+			if(virus2.antigen & src.antibodies) virus2.dead = 1*/
 
-
-			return
-
-=======
->>>>>>> remotes/git-svn
 	proc/handle_stomach()
 		spawn(0)
 			for(var/mob/living/M in stomach_contents)

@@ -71,7 +71,7 @@
 	log_attack("<font color='red'>[user.name] ([user.ckey]) used the [name] to inject [M.name] ([M.ckey])</font>")
 
 	log_admin("ATTACK: [user.name] ([user.ckey]) used the [name] to inject [M.name] ([M.ckey])")
-	msg_admin_attack("ATTACK: [user.name] ([user.ckey]) used the [name] to inject [M.name] ([M.ckey])") //BS12 EDIT ALG
+	//msg_admin_attack("ATTACK: [user.name] ([user.ckey]) used the [name] to inject [M.name] ([M.ckey])") //BS12 EDIT ALG
 
 	if (user)
 		if (istype(M, /mob/living/carbon/human))

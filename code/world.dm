@@ -25,7 +25,10 @@
 	load_configuration()
 	load_mode()
 	load_motd()
+
 	load_admins()
+	load_mods()
+
 	LoadBansjob()
 	if(config.usewhitelist)
 		load_whitelist()
@@ -39,7 +42,13 @@
 
 	src.load_mods()
 	investigate_reset()
-	if (config.usewhitelist)		load_whitelist()	if (config.usealienwhitelist)		load_alienwhitelist()	LoadBansjob()	Get_Holiday()	//~Carn, needs to be here when the station is named so :P
+	if (config.usewhitelist)
+		load_whitelist()
+	if (config.usealienwhitelist)
+		load_alienwhitelist()
+	LoadBansjob()
+	Get_Holiday()
+	//~Carn, needs to be here when the station is named so :P
 
 	src.update_status()
 
@@ -201,7 +210,7 @@
 		if (!text)
 			diary << "Failed to load config/mods.txt\n"
 		else
-			var/list/lines = dd_text2list(text, "\n")
+			var/list/lines = text2list(text, "\n")
 			for(var/line in lines)
 				if (!line)
 					continue

@@ -26,8 +26,8 @@
 	regenerate_icons()
 
 /mob/living/simple_animal/corgi/show_inv(mob/user as mob)
-	user.machine = src
-	/*	user.machine = src	if(user.stat) return
+	user.set_machine(src)
+	if(user.stat) return
 
 	var/dat = 	"<div align='center'><b>Inventory of [name]</b></div><p>"
 	if(inventory_head)
@@ -41,7 +41,6 @@
 
 	user << browse(dat, text("window=mob[];size=325x500", name))
 	onclose(user, "mob[real_name]")
-	*/
 	return
 
 /mob/living/simple_animal/corgi/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -318,10 +317,6 @@
 					dir = i
 					sleep(1)
 
-/obj/item/weapon/reagent_containers/food/snacks/meat/corgi
-	name = "Corgi meat"
-	desc = "Tastes like... well you know..."
-
 /mob/living/simple_animal/corgi/Ian/Bump(atom/movable/AM as mob|obj, yes)
 
 	spawn( 0 )
@@ -409,4 +404,59 @@
 	if(href_list["remove_inv"] || href_list["add_inv"])
 		usr << "\red You can't fit this on [src]"
 		return
-	..()//LISA! SQUEEEEEEEEE~/mob/living/simple_animal/corgi/Lisa	name = "Lisa"	real_name = "Lisa"	gender = FEMALE	desc = "It's a corgi with a cute pink bow."	icon_state = "lisa"	icon_living = "lisa"	icon_dead = "lisa_dead"	response_help  = "pets"	response_disarm = "bops"	response_harm   = "kicks"	var/turns_since_scan = 0	var/puppies = 0//Lisa already has a cute bow!/mob/living/simple_animal/corgi/Lisa/Topic(href, href_list)	if(href_list["remove_inv"] || href_list["add_inv"])		usr << "\red [src] already has a cute bow!"		return	..()/mob/living/simple_animal/corgi/Lisa/Life()	..()	if(!stat && !resting && !buckled)		turns_since_scan++		if(turns_since_scan > 15)			turns_since_scan = 0			var/alone = 1			var/ian = 0			for(var/mob/M in oviewers(7, src))				if(istype(M, /mob/living/simple_animal/corgi/Ian))					if(M.client)						alone = 0						break					else						ian = M				else					alone = 0					break			if(alone && ian && puppies < 4)				if(near_camera(src) || near_camera(ian))					return				new /mob/living/simple_animal/corgi/puppy(loc)		if(prob(1))			emote(pick("dances around","chases her tail"))			spawn(0)				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))					dir = i					sleep(1)
+	..()
+
+
+//LISA! SQUEEEEEEEEE~
+/mob/living/simple_animal/corgi/Lisa
+	name = "Lisa"
+	real_name = "Lisa"
+	gender = FEMALE
+	desc = "It's a corgi with a cute pink bow."
+	icon_state = "lisa"
+	icon_living = "lisa"
+	icon_dead = "lisa_dead"
+	response_help  = "pets"
+	response_disarm = "bops"
+	response_harm   = "kicks"
+	var/turns_since_scan = 0
+	var/puppies = 0
+
+//Lisa already has a cute bow!
+/mob/living/simple_animal/corgi/Lisa/Topic(href, href_list)
+	if(href_list["remove_inv"] || href_list["add_inv"])
+		usr << "\red [src] already has a cute bow!"
+		return
+	..()
+
+/mob/living/simple_animal/corgi/Lisa/Life()
+	..()
+
+	if(!stat && !resting && !buckled)
+		turns_since_scan++
+		if(turns_since_scan > 15)
+			turns_since_scan = 0
+			var/alone = 1
+			var/ian = 0
+			for(var/mob/M in oviewers(7, src))
+				if(istype(M, /mob/living/simple_animal/corgi/Ian))
+					if(M.client)
+						alone = 0
+						break
+					else
+						ian = M
+				else
+					alone = 0
+					break
+			if(alone && ian && puppies < 4)
+				if(near_camera(src) || near_camera(ian))
+					return
+				new /mob/living/simple_animal/corgi/puppy(loc)
+
+
+		if(prob(1))
+			emote(pick("dances around","chases her tail"))
+			spawn(0)
+				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
+					dir = i
+					sleep(1)

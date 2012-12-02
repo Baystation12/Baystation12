@@ -20,7 +20,7 @@
 		gid++;
 
 //Same text2list, but 20000 cap instead of 1000
-/proc/dd_text2list_highcap(text, separator, var/list/withinList)
+/proc/text2list_highcap(text, separator, var/list/withinList)
 	var/textlength = length(text)
 	var/separatorlength = length(separator)
 	if(withinList && !withinList.len) withinList = null
@@ -299,7 +299,7 @@
 			statusmsg("Playback Error: Compile it first!")
 			return
 
-		var/list/tokens = dd_text2list_highcap(currentsong.compiledstring, "¤")
+		var/list/tokens = text2list_highcap(currentsong.compiledstring, "¤")
 
 		//Remove last token
 		tokens.Cut(tokens.len-1)

@@ -843,7 +843,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	..()
 	if(istype(C, /obj/item/weapon/cartridge) && !cartridge)
 		cartridge = C
-		user.drop_item()		cartridge.loc = src		user << "<span class='notice'>You insert [cartridge] into [src].</span>"		if(cartridge.radio)			cartridge.radio.hostpda = src
+		user.drop_item()
+		cartridge.loc = src
+		user << "<span class='notice'>You insert [cartridge] into [src].</span>"
+		if(cartridge.radio)
+			cartridge.radio.hostpda = src
 	else if(istype(C, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/idcard = C
 		if(!idcard.registered_name)

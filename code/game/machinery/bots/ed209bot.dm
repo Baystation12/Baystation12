@@ -87,7 +87,7 @@
 			shot_delay = 6//Longer shot delay because JESUS CHRIST
 			check_records = 0//Don't actively target people set to arrest
 			arrest_type = 1//Don't even try to cuff
-			req_access = list(access_maint_tunnels)
+			req_access = list(access_maint_tunnels,access_clown,access_mime)
 			arrest_type = 1
 			if((lasercolor == "b") && (name == "ED-209 Security Robot"))//Picks a name if there isn't already a custome one
 				name = pick("BLUE BALLER","SANIC","BLUE KILLDEATH MURDERBOT")
@@ -821,14 +821,14 @@ Auto Patrol: []"},
 				projectile = /obj/item/projectile/energy/electrode
 		else if(lasercolor == "b")
 			if (src.emagged == 2)
-				projectile = /obj/item/projectile/beam/lastertag/omni
+				projectile = /obj/item/projectile/omnitag
 			else
-				projectile = /obj/item/projectile/beam/lastertag/blue
+				projectile = /obj/item/projectile/bluetag
 		else if(lasercolor == "r")
 			if (src.emagged == 2)
-				projectile = /obj/item/projectile/beam/lastertag/omni
+				projectile = /obj/item/projectile/omnitag
 			else
-				projectile = /obj/item/projectile/beam/lastertag/red
+				projectile = /obj/item/projectile/redtag
 
 	if (!( istype(U, /turf) ))
 		return
@@ -1012,7 +1012,7 @@ Auto Patrol: []"},
 
 /obj/machinery/bot/ed209/bullet_act(var/obj/item/projectile/Proj)
 	if((src.lasercolor == "b") && (src.disabled == 0))
-		if(istype(Proj, /obj/item/projectile/beam/lastertag/red))
+		if(istype(Proj, /obj/item/projectile/redtag))
 			src.disabled = 1
 			del (Proj)
 			sleep(100)
@@ -1020,7 +1020,7 @@ Auto Patrol: []"},
 		else
 			..()
 	else if((src.lasercolor == "r") && (src.disabled == 0))
-		if(istype(Proj, /obj/item/projectile/beam/lastertag/blue))
+		if(istype(Proj, /obj/item/projectile/bluetag))
 			src.disabled = 1
 			del (Proj)
 			sleep(100)

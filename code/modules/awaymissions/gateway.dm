@@ -1,5 +1,3 @@
-var/global/announced_gateway_activation = 0
-
 /obj/machinery/gateway
 	name = "gateway"
 	desc = "A mysterious gateway built by unknown hands, it allows for faster than light travel to far-flung locations."
@@ -21,6 +19,8 @@ var/global/announced_gateway_activation = 0
 		icon_state = "on"
 		return
 	icon_state = "off"
+
+
 
 //this is da important part wot makes things go
 /obj/machinery/gateway/centerstation
@@ -47,6 +47,7 @@ var/global/announced_gateway_activation = 0
 	icon_state = "offcenter"
 
 
+
 obj/machinery/gateway/centerstation/process()
 	if(stat & (NOPOWER))
 		if(active) toggleoff()
@@ -54,8 +55,6 @@ obj/machinery/gateway/centerstation/process()
 
 	if(active)
 		use_power(5000)
-		if(!announced_gateway_activation && world.time >= wait && awaygate)
-			Announce()
 
 
 /obj/machinery/gateway/centerstation/proc/detect()
@@ -113,7 +112,9 @@ obj/machinery/gateway/centerstation/process()
 		return
 	toggleoff()
 
-//okay, here's the good teleporting stuff/obj/machinery/gateway/centerstation/Bumped(atom/movable/M as mob|obj)
+
+//okay, here's the good teleporting stuff
+/obj/machinery/gateway/centerstation/Bumped(atom/movable/M as mob|obj)
 	if(!ready)		return
 	if(!active)		return
 	if(!awaygate)	return
@@ -128,21 +129,6 @@ obj/machinery/gateway/centerstation/process()
 			use_power(5000)
 		return
 
-/obj/machinery/gateway/centerstation/proc/Announce()
-	announced_gateway_activation = 1
-	for (var/obj/machinery/computer/communications/C in machines)
-		if(! (C.stat & (BROKEN|NOPOWER) ) )
-			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( C.loc )
-			P.name = "'Gateway Systems Update.'"
-			P.info = "Gateway automated navigation subsystem's triangulation process has been completed and a viable destination address has been loaded into the pattern buffer."
-			P.update_icon()
-			C.messagetitle.Add("Gateway Systems Update")
-			C.messagetext.Add(P.info)
-
-	world << "\red New subsystems update available at all communication consoles."
-	world << sound('commandreport.ogg')
-	log_admin("The gateway has automatically activated.")
-	message_admins("The gateway has automatically activated and is ready for use. Warning: some trips may be one way, and others may be EXTREMELY hazardous.", 1)
 
 /obj/machinery/gateway/centerstation/attackby(obj/item/device/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/multitool))

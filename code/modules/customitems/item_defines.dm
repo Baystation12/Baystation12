@@ -176,11 +176,12 @@
 	icon = 'custom_items.dmi'
 	icon_state = "special_cane"
 
-/obj/item/weapon/camera_test/fluff/orange //chinsky: Summer Springfield
+/obj/item/device/camera/fluff/orange //chinsky: Summer Springfield
 	name = "orange camera"
 	icon = 'custom_items.dmi'
 	desc = "A modified detective's camera, painted in bright orange. On the back you see \"Have fun\" written in small accurate letters with something black."
 	icon_state = "orangecamera"
+	pictures_max = 30
 	pictures_left = 30
 
 /obj/item/weapon/card/id/fluff/lifetime	//fastler: Fastler Greay; it seemed like something multiple people would have
@@ -529,22 +530,6 @@
 	desc = "A colorful pair of magboots with the name Susan Harris clearly written on the back."
 	icon = 'custom_items.dmi'
 	icon_state = "atmosmagboots0"
-	verb/toggle()
-		set name = "Toggle Magboots"
-		set category = "Object"
-		set src in usr
-		if(src.magpulse)
-			src.flags &= ~NOSLIP
-			src.slowdown = SHOES_SLOWDOWN
-			src.magpulse = 0
-			icon_state = "atmosmagboots0"
-			usr << "You disable the mag-pulse traction system."
-		else
-			src.flags |= NOSLIP
-			src.slowdown = 2
-			src.magpulse = 1
-			icon_state = "atmosmagboots1"
-			usr << "You enable the mag-pulse traction system."
 
 //////////// Sets ////////////
 

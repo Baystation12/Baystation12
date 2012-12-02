@@ -326,13 +326,7 @@ Whitespace:Seperator;
 							//			recommended_enemies if the number of people with that role set to yes is less than recomended_enemies,
 							//			Less if there are not enough valid players in the game entirely to make recommended_enemies.
 
-<<<<<<< HEAD
-
-/datum/game_mode/proc/latespawn(var/mob)
-
-=======
 /*
->>>>>>> remotes/git-svn
 /datum/game_mode/proc/check_player_role_pref(var/role, var/mob/new_player/player)
 	if(player.preferences.be_special & role)
 		return 1

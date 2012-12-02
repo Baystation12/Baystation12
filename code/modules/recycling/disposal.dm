@@ -116,7 +116,7 @@
 					del(G)
 					log_attack("<font color='red'>[usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit.</font>")
 					log_admin("ATTACK: [usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit.")
-					msg_admin_attack("ATTACK: [usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit.")
+					//msg_admin_attack("ATTACK: [usr] ([usr.ckey]) placed [GM] ([GM.ckey]) in a disposals unit.")
 			return
 
 		if(!I)	return
@@ -160,7 +160,7 @@
 			user << "You stuff [target.name] into the [src]!"
 			log_attack("<font color='red'>[user] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit.</font>")
 			log_admin("ATTACK: [usr] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit.")
-			msg_admin_attack("ATTACK: [user] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit.")
+			//msg_admin_attack("ATTACK: [user] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit.")
 		else
 			return
 		if (target.client)

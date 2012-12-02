@@ -39,7 +39,7 @@ var/global/datum/controller/occupations/job_master
 		return null
 
 	proc/GetAltTitle(mob/new_player/player, rank)
-		return player.preferences.GetAltTitle(GetJob(rank))
+		return player.client.prefs.GetAltTitle(GetJob(rank))
 
 	proc/AssignRole(var/mob/new_player/player, var/rank, var/latejoin = 0)
 		Debug("Running AR, Player: [player], Rank: [rank], LJ: [latejoin]")
@@ -338,7 +338,9 @@ var/global/datum/controller/occupations/job_master
 
 		H << "<B>You are the [rank].</B>"
 		H << "<b>As the [rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
-		if(job.req_admin_notify)			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"		spawnId(H,rank)
+		if(job.req_admin_notify)
+			H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
+		spawnId(H,rank)
 		if(H.mind.assigned_role == rank && H.mind.role_alt_title)
 			spawnId(H, rank, H.mind.role_alt_title)
 		else

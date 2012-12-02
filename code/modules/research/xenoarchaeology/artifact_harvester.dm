@@ -52,7 +52,7 @@
 			icon_state = "incubator"
 	return
 
-/obj/machinery/artifact_harvester/proc/interact(var/mob/user as mob)
+/obj/machinery/artifact_harvester/interact(var/mob/user as mob)
 	if(stat & (NOPOWER|BROKEN))
 		return
 	user.machine = src

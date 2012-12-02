@@ -824,19 +824,19 @@ proc/spread_germs_to_organ(datum/organ/external/E, mob/living/carbon/human/user)
 	min_duration = 30
 	max_duration = 50
 
-	can_use(mob/user, mob/living/carbon/metroid/target, target_zone, obj/item/tool)
+	can_use(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 		return ..() && target.brain_op_stage == 1
 
-	begin_step(mob/user, mob/living/carbon/metroid/target, target_zone, obj/item/tool)
+	begin_step(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts cutting [target]'s silky innards apart with \the [tool].", \
 		"You start cutting [target]'s silky innards apart with \the [tool].")
 
-	end_step(mob/user, mob/living/carbon/metroid/target, target_zone, obj/item/tool)
+	end_step(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 		user.visible_message("\blue [user] cuts [target]'s innards apart with \the [tool], exposing the cores",	\
 		"\blue You cut [target]'s innards apart with \the [tool], exposing the cores")
 		target.brain_op_stage = 2
 
-	fail_step(mob/user, mob/living/carbon/metroid/target, target_zone, obj/item/tool)
+	fail_step(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 		user.visible_message("\red [user]'s hand slips, tearing [target]'s innards with \the [tool]!", \
 		"\red Your hand slips, tearing [target]'s innards with \the [tool]!")
 
@@ -846,23 +846,23 @@ proc/spread_germs_to_organ(datum/organ/external/E, mob/living/carbon/human/user)
 	min_duration = 50
 	max_duration = 70
 
-	can_use(mob/user, mob/living/carbon/metroid/target, target_zone, obj/item/tool)
+	can_use(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 		return ..() && target.brain_op_stage == 2 && target.cores > 0
 
-	begin_step(mob/user, mob/living/carbon/metroid/target, target_zone, obj/item/tool)
+	begin_step(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts cutting out one of [target]'s cores with \the [tool].", \
 		"You start cutting out one of [target]'s cores with \the [tool].")
 
-	end_step(mob/user, mob/living/carbon/metroid/target, target_zone, obj/item/tool)
+	end_step(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 		target.cores--
 		user.visible_message("\blue [user] cuts out one of [target]'s cores with \the [tool].",,	\
 		"\blue You cut out one of [target]'s cores with \the [tool]. [target.cores] cores left.")
 		if(target.cores >= 0)
-			new/obj/item/metroid_core(target.loc)
+			new/obj/item/slime_core(target.loc)
 		if(target.cores <= 0)
 			target.icon_state = "baby roro dead-nocore"
 
-	fail_step(mob/user, mob/living/carbon/metroid/target, target_zone, obj/item/tool)
+	fail_step(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
 		user.visible_message("\red [user]'s hand slips, failing to cut core out!", \
 		"\red Your hand slips, failing to cut core out!")
 

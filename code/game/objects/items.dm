@@ -101,13 +101,6 @@
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
-	if (hasorgans(user))
-		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
-		if (user.hand)
-			temp = user:organs_by_name["l_hand"]
-		if(temp && temp.status & ORGAN_DESTROYED)
-			user << "<span class = 'warning'> Yo- wait a minute."
-			return
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
 		S.remove_from_storage(src)
@@ -186,23 +179,6 @@
 
 	if (!istype(M)) // not sure if this is the right thing...
 		return
-	if (can_operate(M))	//Checks if mob is lying down on table for surgery
-		if(istype(M,/mob/living/carbon))
-			if (user.a_intent != "harm")
-				if(surgery_steps == null) build_surgery_steps_list()
-				for(var/datum/surgery_step/S in surgery_steps)
-					//check if tool is right or close enough
-					if(istype(src, S.required_tool) || (S.allowed_tools && src.type in S.allowed_tools ))
-						if(S.can_use(user, M, user.zone_sel.selecting, src))	//is this step possible?
-							S.begin_step(user, M, user.zone_sel.selecting, src)
-							if(do_mob(user, M, rand(S.min_duration, S.max_duration)))
-								S.end_step(user, M, user.zone_sel.selecting, src)
-							else
-								S.fail_step(user, M, user.zone_sel.selecting, src)
-							return		  //don't want to do weapony things after surgery
-		if (is_surgery_tool(src))
-			return
-
 	var/messagesource = M
 
 	if (istype(M,/mob/living/carbon/brain))
@@ -217,11 +193,7 @@
 	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
 	log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>" )
 
-	log_admin("ATTACK: [user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])")
-	msg_admin_attack("ATTACK: [user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])") //BS12 EDIT ALG
-
-
-	//spawn(1800)			// this wont work right
+	//spawn(1800)            // this wont work right
 	//	M.lastattacker = null
 	/////////////////////////
 
@@ -391,6 +363,13 @@
 	if(ishuman(M))
 		//START HUMAN
 		var/mob/living/carbon/human/H = M
+
+		if(istype(src, /obj/item/clothing/under) || istype(src, /obj/item/clothing/suit))
+			if(FAT in H.mutations)
+				if(!(flags & ONESIZEFITSALL))
+					if(!disable_warning)
+						H << "\red You're too fat to wear the [name]."
+					return 0
 
 		switch(slot)
 			if(slot_l_hand)
@@ -571,35 +550,20 @@
 	set category = "Object"
 	set name = "Pick up"
 
-	if(!(usr)) //BS12 EDIT
+	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(src, usr))
 		return
-	if((!istype(usr, /mob/living/carbon)) || (istype(usr, /mob/living/carbon/brain)))//Is humanoid, and is not a brain
-		usr << "\red You can't pick things up!"
-		return
-	if( usr.stat || usr.restrained() )//Is not asleep/dead and is not restrained
-		usr << "\red You can't pick things up!"
-		return
-	if(src.anchored) //Object isn't anchored
-		usr << "\red You can't pick that up!"
-		return
-	if(!usr.hand && usr.r_hand) //Right hand is not full
-		usr << "\red Your right hand is full."
-		return
-	if(usr.hand && usr.l_hand) //Left hand is not full
-		usr << "\red Your left hand is full."
-		return
-	if(!istype(src.loc, /turf)) //Object is on a turf
-		usr << "\red You can't pick that up!"
-		return
-	//All checks are done, time to pick it up!
-	if(istype(usr, /mob/living/carbon/human))
-		src.attack_hand(usr)
-	if(istype(usr, /mob/living/carbon/alien))
-		src.attack_alien(usr)
-	if(istype(usr, /mob/living/carbon/monkey))
-		src.attack_paw(usr)
-	return
 
+	if(ishuman(usr))
+		if(usr.get_active_hand() == null)
+			src.Click() // Let me know if this has any problems -Giacom
+		/*
+		if(usr.get_active_hand() == null)
+			src.attack_hand(usr)
+		else
+			usr << "\red You already have something in your hand."
+		*/
+	else
+		usr << "\red This mob type can't use this verb."
 
 //This proc is executed when someone clicks the on-screen UI button. To make the UI button show, set the 'icon_action_button' to the icon_state of the image of the button in screen1_action.dmi
 //The default action is attack_self().
@@ -632,16 +596,14 @@
 		user << "\red You're going to need to remove that mask/helmet/glasses first."
 		return
 
-	if(istype(M, /mob/living/carbon/alien) || istype(M, /mob/living/carbon/slime))//Aliens don't have eyes./N     slimes also don't have eyes!		user << "\red You cannot locate any eyes on this creature!"
+	if(istype(M, /mob/living/carbon/alien) || istype(M, /mob/living/carbon/slime))//Aliens don't have eyes./N     slimes also don't have eyes!
+		user << "\red You cannot locate any eyes on this creature!"
 		return
 
 	user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 
 	log_attack("<font color='red'> [user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
-
-	log_admin("ATTACK: [user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
-	msg_admin_attack("ATTACK: [user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])") //BS12 EDIT ALG
 
 	src.add_fingerprint(user)
 	//if((CLUMSY in user.mutations) && prob(50))

@@ -77,7 +77,7 @@ datum/preferences/proc/savefile_save(mob/user)
 	F["job_engsec_med"] << src.job_engsec_med
 	F["job_engsec_low"] << src.job_engsec_low
 
-	F["job_alt_titles"] << job_alt_titles //BS12 Edit
+	//F["job_alt_titles"] << job_alt_titles //BS12 Edit
 
 	F["userandomjob"] << src.userandomjob
 

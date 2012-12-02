@@ -144,7 +144,7 @@
 	//
 	updateDialog()
 
-/obj/machinery/shield_capacitor/proc/interact(mob/user)
+/obj/machinery/shield_capacitor/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
 		if (!istype(user, /mob/living/silicon))
 			user.machine = null

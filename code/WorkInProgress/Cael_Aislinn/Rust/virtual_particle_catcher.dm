@@ -38,8 +38,8 @@
 			//invisibility = 101
 
 	bullet_act(var/obj/item/projectile/Proj)
-		if(Proj.flag != "bullet" && parent)
-			var/obj/item/projectile/beam/laserbeam = Proj
+		if(istype(Proj, /obj/item/projectile/beam/emitter) && parent)
+			var/obj/item/projectile/beam/emitter/laserbeam = Proj
 			parent.AddEnergy(0, laserbeam.damage / 5000, laserbeam.frequency)
 		return 0
 

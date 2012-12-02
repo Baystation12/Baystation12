@@ -14,7 +14,6 @@
 	var/mineralAmt = 0
 	var/spread = 0 //will the seam spread?
 	var/spreadChance = 0 //the percentual chance of an ore spreading to the neighbouring tiles
-	var/artifactChance = 0.3	//percent chance to spawn a xenoarchaelogical artifact
 	var/last_act = 0
 
 /turf/simulated/mineral/Del()
@@ -71,8 +70,8 @@
 
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
-	var/mineralAmtList = list("Uranium" = 5, "Iron" = 5, "Diamond" = 5, "Gold" = 5, "Silver" = 5, "Plasma" = 5, "Archaeo" = 3/*, "Adamantine" = 5*/)
-	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25, "Archaeo" = 5/*, "Adamantine" =5*/)//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	var/mineralAmtList = list("Uranium" = 5, "Iron" = 5, "Diamond" = 5, "Gold" = 5, "Silver" = 5, "Plasma" = 5/*, "Adamantine" = 5*/)
+	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25/*, "Adamantine" =5*/)//Currently, Adamantine won't spawn as it has no uses. -Durandan
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
@@ -95,21 +94,16 @@
 					M = new/turf/simulated/mineral/silver(src)
 				if("Plasma")
 					M = new/turf/simulated/mineral/plasma(src)
-				if("Archaeo")
-					M = new/turf/simulated/mineral/archaeo(src)
 				/*if("Adamantine")
 					M = new/turf/simulated/mineral/adamantine(src)*/
 			if(M)
 				src = M
 				M.levelupdate()
-	else if (prob(artifactChance))
-		//spawn a rare, xeno-arch artifact here
-		new/obj/machinery/artifact(src)
 	return
 
 /turf/simulated/mineral/random/high_chance
 	mineralChance = 25
-	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 25, "Archaeo" = 2)
+	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 25)
 
 /turf/simulated/mineral/random/Del()
 	return
@@ -165,15 +159,6 @@
 	icon_state = "rock_Plasma"
 	mineralName = "Plasma"
 	mineralAmt = 5
-	spreadChance = 25
-	spread = 1
-
-
-/turf/simulated/mineral/archaeo
-	name = "Strange rock formation"
-	icon_state = "rock_Archaeo"
-	mineralName = "Archaeo"
-	mineralAmt = 3
 	spreadChance = 25
 	spread = 1
 
@@ -248,7 +233,6 @@ commented out in r5061, I left it because of the shroom thingies
 	return
 
 /turf/simulated/mineral/proc/gets_drilled()
-	var/destroyed = 0 //used for breaking strange rocks
 	if ((src.mineralName != "") && (src.mineralAmt > 0) && (src.mineralAmt < 11))
 		var/i
 		for (i=0;i<mineralAmt;i++)
@@ -264,17 +248,10 @@ commented out in r5061, I left it because of the shroom thingies
 				new /obj/item/weapon/ore/plasma(src)
 			if (src.mineralName == "Diamond")
 				new /obj/item/weapon/ore/diamond(src)
-			if (src.mineralName == "Archaeo")
-				//spawn strange rocks here
-				//if(prob(10) || delicate)
-				if(prob(50)) //Don't have delicate tools (hand pick/excavation tool) yet, temporarily change to 50% instead of 10% -Mij
-					new /obj/item/weapon/ore/strangerock(src)
-				else
-					destroyed = 1
 			if (src.mineralName == "Clown")
 				new /obj/item/weapon/ore/clown(src)
-	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)	N.fullUpdateMineralOverlays()	if (prob(src.artifactChance))		//spawn a rare, xeno-archaelogical artifact here		new /obj/machinery/artifact(src)	ReplaceWithFloor()	if(destroyed)  //Display message about being a terrible miner
-		usr << "\red You destroy some of the rocks!"
+	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
+	N.fullUpdateMineralOverlays()
 	return
 
 /*

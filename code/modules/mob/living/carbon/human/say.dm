@@ -21,15 +21,9 @@
 	if(src.dna)
 		/*if(src.dna.mutantrace == "lizard") //Soghun stutterss-s-ss-sss.
 			if(copytext(message, 1, 2) != "*")
-<<<<<<< HEAD
-				message = dd_replacetext(message, "s", stutter("ss"))
-*/
-		if(src.dna.mutantrace == "metroid" && prob(5))
-=======
-				message = replacetext(message, "s", stutter("ss"))
+				message = replacetext(message, "s", stutter("ss"))*/
 
 		if(src.dna.mutantrace == "slime" && prob(5))
->>>>>>> remotes/git-svn
 			if(copytext(message, 1, 2) != "*")
 				if(copytext(message, 1, 2) == ";")
 					message = ";"

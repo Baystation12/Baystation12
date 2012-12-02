@@ -76,12 +76,12 @@
 					// All energy-based weapons are applicable
 			switch(E.type)
 				if(/obj/item/weapon/gun/energy/laser/bluetag)
-					projectile = /obj/item/projectile/beam/lastertag/blue
-					eprojectile = /obj/item/projectile/beam/lastertag/omni//This bolt will stun ERRYONE with a vest
+					projectile = /obj/item/projectile/bluetag
+					eprojectile = /obj/item/projectile/omnitag//This bolt will stun ERRYONE with a vest
 					iconholder = null
 					reqpower = 100
 					lasercolor = "b"
-					req_access = list(access_maint_tunnels)
+					req_access = list(access_maint_tunnels,access_clown,access_mime)
 					check_records = 0
 					criminals = 0
 					auth_weapons = 1
@@ -90,12 +90,12 @@
 					shot_delay = 30
 
 				if(/obj/item/weapon/gun/energy/laser/redtag)
-					projectile = /obj/item/projectile/beam/lastertag/red
-					eprojectile = /obj/item/projectile/beam/lastertag/omni
+					projectile = /obj/item/projectile/redtag
+					eprojectile = /obj/item/projectile/omnitag
 					iconholder = null
 					reqpower = 100
 					lasercolor = "r"
-					req_access = list(access_maint_tunnels)
+					req_access = list(access_maint_tunnels,access_clown,access_mime)
 					check_records = 0
 					criminals = 0
 					auth_weapons = 1
@@ -104,7 +104,7 @@
 					shot_delay = 30
 
 				if(/obj/item/weapon/gun/energy/laser/practice)
-					projectile = /obj/item/projectile/beam/practice
+					projectile = /obj/item/projectile/practice
 					eprojectile = /obj/item/projectile/beam
 					iconholder = null
 					reqpower = 100
@@ -375,13 +375,13 @@ Status: []<BR>"},
 	if (src.health <= 0)
 		src.die() // the death process :(
 	if((src.lasercolor == "b") && (src.disabled == 0))
-		if(istype(Proj, /obj/item/projectile/beam/lastertag/red))
+		if(istype(Proj, /obj/item/projectile/redtag))
 			src.disabled = 1
 			del (Proj)
 			sleep(100)
 			src.disabled = 0
 	if((src.lasercolor == "r") && (src.disabled == 0))
-		if(istype(Proj, /obj/item/projectile/beam/lastertag/blue))
+		if(istype(Proj, /obj/item/projectile/bluetag))
 			src.disabled = 1
 			del (Proj)
 			sleep(100)

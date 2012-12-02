@@ -102,7 +102,7 @@
 	log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [target.name] with a bottle. ([target.ckey])</font>")
 
 	log_admin("ATTACK: [user.name] ([user.ckey]) attacked [target.name] with a bottle. ([target.ckey])")
-	msg_admin_attack("ATTACK: [user.name] ([user.ckey]) attacked [target.name] with a bottle. ([target.ckey])") //BS12 EDIT ALG
+	//msg_admin_attack("ATTACK: [user.name] ([user.ckey]) attacked [target.name] with a bottle. ([target.ckey])") //BS12 EDIT ALG
 
 
 	//The reagents in the bottle splash all over the target, thanks for the idea Nodrak

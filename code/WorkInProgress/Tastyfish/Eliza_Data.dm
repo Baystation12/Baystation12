@@ -303,7 +303,7 @@
 			if(final_punc == "." || final_punc == "?" || final_punc == "!")
 				object = copytext(object, 1, lentext(object))
 
-		return dd_text2list(object, ",")
+		return text2list(object, ",")
 
 /datum/text_parser/keyword/setparam/username
 	process(object)

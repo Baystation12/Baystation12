@@ -45,13 +45,10 @@ var/global/datum/controller/gameticker/ticker
 	var/list/vermin_spawn_turfs
 
 /datum/controller/gameticker/proc/pregame()
-<<<<<<< HEAD
-	login_music = pick('sound/music/title1.ogg','sound/music/title2.ogg') // choose title music!
-=======
-	login_music = pick('sound/ambience/title2.ogg') // choose title music!
+	login_music = pick('sound/ambience/title1.ogg','sound/ambience/title2.ogg') // choose title music!
 	for(var/mob/new_player/M in mob_list)
-		if(M.client)	M.client.playtitlemusic()
->>>>>>> remotes/git-svn
+		if(M.client)
+			M.client.playtitlemusic()
 
 	do
 		pregame_timeleft = 180

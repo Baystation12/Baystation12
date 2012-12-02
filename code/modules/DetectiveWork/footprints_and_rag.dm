@@ -49,7 +49,12 @@
 			user.visible_message("\red \The [target] has been smothered with \the [src] by \the [user]!", "\red You smother \the [target] with \the [src]!", "You hear some struggling and muffled cries of surprise")
 			src.reagents.reaction(target, INGEST)
 			spawn(5) src.reagents.clear_reagents()
-		else if(istype(target) && src in user)			user.visible_message("[user] starts to wipe down [A] with [src]!")			if(do_after(user,30))				user.visible_message("[user] finishes wiping off the [A]!")				A.clean_blood()		return
+		else if(istype(target) && src in user)
+			user.visible_message("[user] starts to wipe down [target] with [src]!")
+			if(do_after(user,30))
+				user.visible_message("[user] finishes wiping off the [target]!")
+				target.clean_blood()
+		return
 	else
 		..()
 

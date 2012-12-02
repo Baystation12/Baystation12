@@ -221,15 +221,10 @@
 			if(4)
 				A = new /obj/item/projectile/change( loc )
 			if(5)
-				A = new /obj/item/projectile/beam/lastertag/blue( loc )
+				A = new /obj/item/projectile/bluetag( loc )
 			if(6)
-<<<<<<< HEAD
-				A = new /obj/item/projectile/beam/lastertag/red( loc )
-		A.original = target.loc
-=======
 				A = new /obj/item/projectile/redtag( loc )
 		A.original = target
->>>>>>> remotes/git-svn
 		use_power(500)
 	else
 		A = new /obj/item/projectile/energy/electrode( loc )

@@ -85,7 +85,7 @@
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
 
 	log_admin("ATTACK: [user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
-	msg_admin_attack("ATTACK: [user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])") //BS12 EDIT ALG
+	//msg_admin_attack("ATTACK: [user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])") //BS12 EDIT ALG
 
 	log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
 
@@ -293,7 +293,7 @@
 /obj/item/weapon/spacecash/attack_self(var/mob/user)
 	interact(user)
 
-/obj/item/weapon/spacecash/proc/interact(var/mob/user)
+/obj/item/weapon/spacecash/interact(var/mob/user)
 
 	user.machine = src
 
@@ -1946,6 +1946,26 @@
 	flags = FPRINT | TABLEPASS | CONDUCT
 	w_class = 1.0
 	origin_tech = "materials=1;biotech=1"
+
+/obj/item/weapon/f_card
+	name = "finger print card"
+	desc = "Used to take fingerprints."
+	icon = 'icons/obj/card.dmi'
+	icon_state = "fingerprint0"
+	var/amount = 10.0
+	item_state = "paper"
+	throwforce = 1
+	w_class = 1.0
+	throw_speed = 3
+	throw_range = 5
+
+
+/obj/item/weapon/fcardholder
+	name = "fingerprint card case"
+	desc = "Apply finger print card."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "fcardholder0"
+	item_state = "clipboard"
 
 /obj/item/weapon/autopsy_scanner/var/list/datum/autopsy_data_scanner/wdata = list()
 /obj/item/weapon/autopsy_scanner/var/list/datum/autopsy_data_scanner/chemtraces = list()

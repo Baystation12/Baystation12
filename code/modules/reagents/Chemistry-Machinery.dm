@@ -643,7 +643,17 @@
 					for(var/datum/disease/D in Blood.data["viruses"])
 						if(!D.hidden[PANDEMIC])
 
-							var/disease_creation = D.type							if(istype(D, /datum/disease/advance))								var/datum/disease/advance/A = D								D = archive_diseases[A.GetDiseaseID()]								disease_creation = A.GetDiseaseID()								if(D.name == "Unknown")									dat += "<b><a href='?src=\ref[src];name_disease=[A.GetDiseaseID()]'>Name Disease</a></b><BR>"							if(!D)								CRASH("We weren't able to get the advance disease from the archive.")							dat += "<b>Disease Agent:</b> [D?"[D.agent] - <A href='?src=\ref[src];create_virus_culture=[disease_creation]'>Create virus culture bottle</A>":"none"]<BR>"							dat += "<b>Common name:</b> [(D.name||"none")]<BR>"
+							var/disease_creation = D.type
+							if(istype(D, /datum/disease/advance))
+								var/datum/disease/advance/A = D
+								D = archive_diseases[A.GetDiseaseID()]
+								disease_creation = A.GetDiseaseID()
+								if(D.name == "Unknown")
+									dat += "<b><a href='?src=\ref[src];name_disease=[A.GetDiseaseID()]'>Name Disease</a></b><BR>"
+							if(!D)
+								CRASH("We weren't able to get the advance disease from the archive.")
+							dat += "<b>Disease Agent:</b> [D?"[D.agent] - <A href='?src=\ref[src];create_virus_culture=[disease_creation]'>Create virus culture bottle</A>":"none"]<BR>"
+							dat += "<b>Common name:</b> [(D.name||"none")]<BR>"
 							dat += "<b>Description: </b> [(D.desc||"none")]<BR>"
 							dat += "<b>Spread:</b> [(D.spread||"none")]<BR>"
 							dat += "<b>Possible cure:</b> [(D.cure||"none")]<BR><BR>"

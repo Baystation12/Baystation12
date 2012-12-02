@@ -617,10 +617,9 @@ var/list/admin_verbs_hideable = list(
 	set name = "Edit Appearance"
 	set category = "Fun"
 
-	usr << "\red This proc has been temporarily disabled."
+	usr << "\red This proc has been disabled."
 	return
 
-	//some random errors here, cbb fixing them right now
 	//todo
 	/*if(!istype(M, /mob/living/carbon/human))
 		usr << "\red You can only do this to humans!"
@@ -708,9 +707,11 @@ var/list/admin_verbs_hideable = list(
 	M.check_dna(M)
 	*/
 
+/*
 /client/proc/playernotes()
 	set name = "Show Player Info"
 	set category = "Admin"
 	if(holder)
 		holder.PlayerNotes()
 	return
+*/

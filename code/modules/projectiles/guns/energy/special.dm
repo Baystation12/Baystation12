@@ -68,7 +68,13 @@ obj/item/weapon/gun/energy/staff
 		power_supply.give(200)
 		return 1
 
-	update_icon()		return	isHandgun()		return 0/obj/item/weapon/gun/energy/floragun
+	update_icon()
+		return
+
+	isHandgun()
+		return 0
+
+/obj/item/weapon/gun/energy/floragun
 	name = "floral somatoray"
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	icon_state = "floramut100"

@@ -4,17 +4,11 @@ var/global/floorIsLava = 0
 
 
 ////////////////////////////////
-/proc/message_admins(var/msg)	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"	log_adminwarn(msg)	admins << msg
+/proc/message_admins(var/msg)
+	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
+	log_adminwarn(msg)
+	admins << msg
 
-/proc/msg_admin_attack(var/text) //Toggleable Attack Messages
-	var/rendered = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[text]</span></span>"
-	log_adminwarn(rendered)
-	for (var/client/C in admin_list)
-		if (C)
-			if (C.holder.level >= 1)
-				if(!C.STFU_atklog)
-					var/msg = rendered
-					C << msg
 
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
@@ -153,83 +147,6 @@ var/global/floorIsLava = 0
 
 	usr << browse(body, "window=adminplayeropts;size=550x515")
 	feedback_add_details("admin_verb","SPP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-
-/datum/player_info/var/author // admin who authored the information
-/datum/player_info/var/rank //rank of admin who made the notes
-/datum/player_info/var/content // text content of the information
-/datum/player_info/var/timestamp // Because this is bloody annoying
-
-/datum/admins/proc/PlayerNotes()
-	set category = "Admin"
-	set name = "Player Notes"
-	var/dat = "<B>Player notes</B><HR><table>"
-	if (!istype(src,/datum/admins))
-		src = usr.client.holder
-	if (!istype(src,/datum/admins))
-		usr << "Error: you are not an admin!"
-		return
-
-	var/savefile/S=new("data/player_notes.sav")
-	var/list/note_keys
-	S >> note_keys
-	if(!note_keys)
-		dat += "No notes found."
-	else
-		sortList(note_keys)
-		for(var/t in note_keys)
-			dat += "<tr><td><a href='?src=\ref[src];notes=show;ckey=[t]'>[t]</a></td></tr>"
-	dat += "</table>"
-	usr << browse(dat, "window=player_notes;size=400x400")
-
-
-/datum/admins/proc/player_has_info(var/key as text)
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
-	var/list/infos
-	info >> infos
-	if(!infos || !infos.len) return 0
-	else return 1
-
-
-/datum/admins/proc/show_player_info(var/key as text)
-	set category = "Admin"
-	set name = "Show Player Info"
-	if (!istype(src,/datum/admins))
-		src = usr.client.holder
-	if (!istype(src,/datum/admins))
-		usr << "Error: you are not an admin!"
-		return
-	var/dat = "<html><head><title>Info on [key]</title></head>"
-	dat += "<body>"
-
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
-	var/list/infos
-	info >> infos
-	if(!infos)
-		dat += "No information found on the given key.<br>"
-	else
-		var/update_file = 0
-		var/i = 0
-		for(var/datum/player_info/I in infos)
-			i += 1
-			if(!I.timestamp)
-				I.timestamp = "Pre-4/3/2012"
-				update_file = 1
-			if(!I.rank)
-				I.rank = "N/A"
-				update_file = 1
-			dat += "<font color=#008800>[I.content]</font> <i>by [I.author] ([I.rank])</i> on <i><font color=blue>[I.timestamp]</i></font> "
-			if(I.author == usr.key)
-				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
-			dat += "<br><br>"
-		if(update_file) info << infos
-
-	dat += "<br>"
-	dat += "<A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
-
-	dat += "</body></html>"
-	usr << browse(dat, "window=adminplayerinfo;size=480x480")
-
 
 
 /datum/admins/proc/access_news_network() //MARKER
@@ -453,9 +370,6 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];quick_create_object=1'>Quick Create Object</A><br>
 		<A href='?src=\ref[src];create_turf=1'>Create Turf</A><br>
 		<A href='?src=\ref[src];create_mob=1'>Create Mob</A><br>
-		<br><A href='?src=\ref[src];vsc=airflow'>Edit Airflow Settings</A><br>
-		<A href='?src=\ref[src];vsc=plasma'>Edit Plasma Settings</A><br>
-		<A href='?src=\ref[src];vsc=default'>Choose a default ZAS setting</A><br>
 		"}
 
 	usr << browse(dat, "window=admin2;size=210x180")
@@ -946,32 +860,6 @@ var/global/floorIsLava = 0
 			S.laws.show_laws(usr)
 	if(!ai_number)
 		usr << "<b>No AIs located</b>" //Just so you know the thing is actually working and not just ignoring you.
-
-/datum/admins/proc/show_skills(var/mob/living/carbon/human/M as mob in world)
-	set category = "Admin"
-	set name = "Show Skills"
-
-	if (!istype(src,/datum/admins))
-		src = usr.client.holder
-	if (!istype(src,/datum/admins))
-		usr << "Error: you are not an admin!"
-		return
-
-	show_skill_window(usr, M)
-
-	return
-
-/client/proc/update_mob_sprite(mob/living/carbon/human/H as mob)
-	set category = "Admin"
-	set name = "Update Mob Sprite"
-	set desc = "Should fix any mob sprite update errors."
-
-	if (!holder)
-		src << "Only administrators may use this command."
-		return
-
-	if(istype(H))
-		H.regenerate_icons()
 
 //
 //

@@ -111,12 +111,12 @@
 			killing = 0
 			hud1.icon_state = "disarm/kill"
 			return
-            
+
 		if(ishuman(affecting))
 			var/mob/living/carbon/human/H = affecting
 			var/datum/organ/external/head = H.get_organ("head")
 			head.add_autopsy_data("Strangulation", 0)
-            
+
 		affecting.Weaken(5) // Should keep you down unless you get help.
 		affecting.Stun(5) // It will hamper your voice, being choked and all.
 		affecting.losebreath = min(affecting.losebreath + 2, 3)
@@ -236,7 +236,7 @@
 							log_attack("<font color='red'>[assailant.name] ([assailant.ckey]) Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>")
 
 							log_admin("ATTACK: [assailant.name] ([assailant.ckey]) Strangled (kill intent) [affecting.name] ([affecting.ckey])")
-							msg_admin_attack("ATTACK: [assailant.name] ([assailant.ckey]) Strangled (kill intent) [affecting.name] ([affecting.ckey])")
+							//msg_admin_attack("ATTACK: [assailant.name] ([assailant.ckey]) Strangled (kill intent) [affecting.name] ([affecting.ckey])")
 
 							assailant.next_move = world.time + 10
 							affecting.losebreath += 1

@@ -40,7 +40,7 @@
 	log_attack("<font color='red'>[user.name] ([user.ckey]) Used the [src.name] to flash [M.name] ([M.ckey])</font>")
 
 	log_admin("ATTACK: [user.name] ([user.ckey]) Used the [src.name] to flash [M.name] ([M.ckey])")
-	msg_admin_attack("ATTACK: [user.name] ([user.ckey]) Used the [src.name] to flash [M.name] ([M.ckey])") //BS12 EDIT ALG
+	//msg_admin_attack("ATTACK: [user.name] ([user.ckey]) Used the [src.name] to flash [M.name] ([M.ckey])") //BS12 EDIT ALG
 
 	if(!clown_check(user))	return
 	if(broken)

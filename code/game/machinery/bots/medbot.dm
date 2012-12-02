@@ -532,11 +532,24 @@
 	..()
 	if(istype(W, /obj/item/weapon/pen))
 		var/t = copytext(stripped_input(user, "Enter new robot name", src.name, src.created_name),1,MAX_NAME_LEN)
-
-	if((istype(W, /obj/item/device/healthanalyzer)) && (!src.build_step))		src.build_step++		user << "You add the health sensor to [src]!"		src.name = "First aid/robot arm/health analyzer assembly"		src.overlays += image('aibots.dmi', "na_scanner")		del(W)	else if((isprox(W)) && (src.build_step == 1))		src.build_step++		user << "You complete the Medibot! Beep boop."		var/obj/machinery/bot/medbot/S = new /obj/machinery/bot/medbot		S.skin = src.skin		S.loc = get_turf(src)		S.name = src.created_name		del(W)		del(src)		if (!t)
+		if (!t)
 			return
 		if (!in_range(src, usr) && src.loc != usr)
 			return
-
 		src.created_name = t
 
+	if((istype(W, /obj/item/device/healthanalyzer)) && (!src.build_step))
+		src.build_step++
+		user << "You add the health sensor to [src]!"
+		src.name = "First aid/robot arm/health analyzer assembly"
+		src.overlays += image('aibots.dmi', "na_scanner")
+		del(W)
+	else if((isprox(W)) && (src.build_step == 1))
+		src.build_step++
+		user << "You complete the Medibot! Beep boop."
+		var/obj/machinery/bot/medbot/S = new /obj/machinery/bot/medbot
+		S.skin = src.skin
+		S.loc = get_turf(src)
+		S.name = src.created_name
+		del(W)
+		del(src)

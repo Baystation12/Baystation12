@@ -398,34 +398,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		else		. = pick(ais)
 	return .
 
-/proc/get_sorted_mobs()
-	var/list/old_list = getmobs()
-	var/list/AI_list = list()
-	var/list/Dead_list = list()
-	var/list/keyclient_list = list()
-	var/list/key_list = list()
-	var/list/logged_list = list()
-	for(var/named in old_list)
-		var/mob/M = old_list[named]
-		if(issilicon(M))
-			AI_list |= M
-		else if(isobserver(M) || M.stat == 2)
-			Dead_list |= M
-		else if(M.key && M.client)
-			keyclient_list |= M
-		else if(M.key)
-			key_list |= M
-		else
-			logged_list |= M
-		old_list.Remove(named)
-	var/list/new_list = list()
-	new_list += AI_list
-	new_list += keyclient_list
-	new_list += key_list
-	new_list += logged_list
-	new_list += Dead_list
-	return new_list
-
 //Returns a list of all mobs with their name
 /proc/getmobs()
 
@@ -987,20 +959,21 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 
 	var/list/doors = new/list()
 
-	if(toupdate.len)
+	//skytodo
+	/*if(toupdate.len)
 		for(var/turf/simulated/T1 in toupdate)
 			for(var/obj/machinery/door/D2 in T1)
 				doors += D2
-			/*if(T1.parent)
+			if(T1.parent)
 				air_master.groups_to_rebuild += T1.parent
 			else
-				air_master.tiles_to_update += T1*/
+				air_master.tiles_to_update += T1
 
 	if(fromupdate.len)
 		for(var/turf/simulated/T2 in fromupdate)
 			for(var/obj/machinery/door/D2 in T2)
 				doors += D2
-			/*if(T2.parent)
+			if(T2.parent)
 				air_master.groups_to_rebuild += T2.parent
 			else
 				air_master.tiles_to_update += T2*/
@@ -1147,22 +1120,20 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 					refined_trg -= B
 					continue moving
 
-
-
-
-	var/list/doors = new/list()
+	//skytodo
+	/*var/list/doors = new/list()
 
 	if(toupdate.len)
 		for(var/turf/simulated/T1 in toupdate)
 			for(var/obj/machinery/door/D2 in T1)
 				doors += D2
-			/*if(T1.parent)
+			if(T1.parent)
 				air_master.groups_to_rebuild += T1.parent
 			else
-				air_master.tiles_to_update += T1*/
+				air_master.tiles_to_update += T1
 
 	for(var/obj/O in doors)
-		O:update_nearby_tiles(1)
+		O:update_nearby_tiles(1)*/
 
 
 
@@ -1211,10 +1182,6 @@ proc/get_mob_with_client_list()
 	else if (zone == "r_arm") return "right arm"
 	else if (zone == "l_leg") return "left leg"
 	else if (zone == "r_leg") return "right leg"
-	else if (zone == "l_foot") return "left foot"
-	else if (zone == "r_foot") return "right foot"
-	else if (zone == "l_hand") return "left hand"
-	else if (zone == "r_hand") return "right hand"
 	else if (zone == "l_foot") return "left foot"
 	else if (zone == "r_foot") return "right foot"
 	else return zone
@@ -1313,27 +1280,46 @@ proc/is_hot(obj/item/W as obj)
 
 	return 0
 
-//Is this even used for anything besides balloons? Yes I took out the W:lit stuff because : really shouldnt be used.
-/proc/is_sharp(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
-	return ( \
-		istype(W, /obj/item/weapon/screwdriver)                   || \
-		istype(W, /obj/item/weapon/pen)                           || \
-		istype(W, /obj/item/weapon/weldingtool)					  || \
-		istype(W, /obj/item/weapon/lighter/zippo)				  || \
-		istype(W, /obj/item/weapon/match)            		      || \
-		istype(W, /obj/item/clothing/mask/cigarette) 		      || \
-		istype(W, /obj/item/weapon/wirecutters)                   || \
-		istype(W, /obj/item/weapon/circular_saw)                  || \
-		istype(W, /obj/item/weapon/melee/energy/sword)            || \
-		istype(W, /obj/item/weapon/melee/energy/blade)            || \
-		istype(W, /obj/item/weapon/shovel)                        || \
-		istype(W, /obj/item/weapon/kitchenknife)                  || \
-		istype(W, /obj/item/weapon/butch)						  || \
-		istype(W, /obj/item/weapon/scalpel)                       || \
-		istype(W, /obj/item/weapon/kitchen/utensil/knife)         || \
-		istype(W, /obj/item/weapon/shard)                         || \
-		istype(W, /obj/item/weapon/broken_bottle)				  || \
-		istype(W, /obj/item/weapon/reagent_containers/syringe)    || \
-		istype(W, /obj/item/weapon/kitchen/utensil/fork) && W.icon_state != "forkloaded" || \
-		istype(W, /obj/item/weapon/twohanded/fireaxe) \
-	)/proc/is_surgery_tool(obj/item/W as obj)	return (	\	istype(W, /obj/item/weapon/scalpel)			||	\	istype(W, /obj/item/weapon/hemostat)		||	\	istype(W, /obj/item/weapon/retractor)		||	\	istype(W, /obj/item/weapon/cautery)			||	\	istype(W, /obj/item/weapon/bonegel)			||	\	istype(W, /obj/item/weapon/bonesetter)	)/proc/reverse_direction(var/dir)	switch(dir)		if(NORTH)			return SOUTH		if(NORTHEAST)			return SOUTHWEST		if(EAST)			return WEST		if(SOUTHEAST)			return NORTHWEST		if(SOUTH)			return NORTH		if(SOUTHWEST)			return NORTHEAST		if(WEST)			return EAST		if(NORTHWEST)			return SOUTHEAST/*Checks if that loc and dir has a item on the wall*/var/list/WALLITEMS = list(	"/obj/machinery/power/apc", "/obj/machinery/alarm", "/obj/item/device/radio/intercom",	"/obj/structure/extinguisher_cabinet", "/obj/structure/reagent_dispensers/peppertank",	"/obj/machinery/status_display", "/obj/machinery/requests_console", "/obj/machinery/light_switch", "/obj/effect/sign",	"/obj/machinery/newscaster", "/obj/machinery/firealarm", "/obj/structure/noticeboard", "/obj/machinery/door_control",	"/obj/machinery/computer/security/telescreen", "/obj/machinery/embedded_controller/radio/simple_vent_controller",	"/obj/item/weapon/secstorage/ssafe", "/obj/machinery/door_timer", "/obj/machinery/flasher", "/obj/machinery/keycard_auth",	"/obj/structure/mirror", "/obj/structure/closet/fireaxecabinet", "/obj/machinery/computer/security/telescreen/entertainment"	)/proc/gotwallitem(loc, dir)	for(var/obj/O in loc)		for(var/item in WALLITEMS)			if(istype(O, text2path(item)))				//Direction works sometimes				if(O.dir == dir)					return 1				//Some stuff doesn't use dir properly, so we need to check pixel instead				switch(dir)					if(SOUTH)						if(O.pixel_y > 10)							return 1					if(NORTH)						if(O.pixel_y < -10)							return 1					if(WEST)						if(O.pixel_x > 10)							return 1					if(EAST)						if(O.pixel_x < -10)							return 1	//Some stuff is placed directly on the wallturf (signs)	for(var/obj/O in get_step(loc, dir))		for(var/item in WALLITEMS)			if(istype(O, text2path(item)))				if(O.pixel_x == 0 && O.pixel_y == 0)					return 1	return 0
+/*
+Checks if that loc and dir has a item on the wall
+*/
+var/list/WALLITEMS = list(
+	"/obj/machinery/power/apc", "/obj/machinery/alarm", "/obj/item/device/radio/intercom",
+	"/obj/structure/extinguisher_cabinet", "/obj/structure/reagent_dispensers/peppertank",
+	"/obj/machinery/status_display", "/obj/machinery/requests_console", "/obj/machinery/light_switch", "/obj/effect/sign",
+	"/obj/machinery/newscaster", "/obj/machinery/firealarm", "/obj/structure/noticeboard", "/obj/machinery/door_control",
+	"/obj/machinery/computer/security/telescreen", "/obj/machinery/embedded_controller/radio/simple_vent_controller",
+	"/obj/item/weapon/secstorage/ssafe", "/obj/machinery/door_timer", "/obj/machinery/flasher", "/obj/machinery/keycard_auth",
+	"/obj/structure/mirror", "/obj/structure/closet/fireaxecabinet", "/obj/machinery/computer/security/telescreen/entertainment"
+	)
+/proc/gotwallitem(loc, dir)
+	for(var/obj/O in loc)
+		for(var/item in WALLITEMS)
+			if(istype(O, text2path(item)))
+				//Direction works sometimes
+				if(O.dir == dir)
+					return 1
+
+				//Some stuff doesn't use dir properly, so we need to check pixel instead
+				switch(dir)
+					if(SOUTH)
+						if(O.pixel_y > 10)
+							return 1
+					if(NORTH)
+						if(O.pixel_y < -10)
+							return 1
+					if(WEST)
+						if(O.pixel_x > 10)
+							return 1
+					if(EAST)
+						if(O.pixel_x < -10)
+							return 1
+
+
+	//Some stuff is placed directly on the wallturf (signs)
+	for(var/obj/O in get_step(loc, dir))
+		for(var/item in WALLITEMS)
+			if(istype(O, text2path(item)))
+				if(O.pixel_x == 0 && O.pixel_y == 0)
+					return 1
+	return 0

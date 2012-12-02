@@ -373,7 +373,7 @@
 			if (intent)
 				client.screen += hud_used.intents
 
-				var/list/L = dd_text2list(intent, ",")
+				var/list/L = text2list(intent, ",")
 				L[1] += ":-11"
 				i_select.screen_loc = dd_list2text(L,",") //ICONS4
 			else
@@ -382,7 +382,7 @@
 			if (m_int)
 				client.screen += hud_used.mov_int
 
-				var/list/L = dd_text2list(m_int, ",")
+				var/list/L = text2list(m_int, ",")
 				L[1] += ":-11"
 				m_select.screen_loc = dd_list2text(L,",") //ICONS4
 			else

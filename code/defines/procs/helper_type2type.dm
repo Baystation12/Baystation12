@@ -83,7 +83,7 @@
 	return hex
 
 //Text 'text' will be added as elements of a list when seperated by 'seperator'
-/proc/dd_text2list(text, separator, var/list/withinList)
+/proc/text2list(text, separator, var/list/withinList)
 	var/textlength = length(text)
 	var/separatorlength = length(separator)
 	if(withinList && !withinList.len) withinList = null
@@ -104,7 +104,7 @@
 	return
 
 //Text 'text' will be added as elements of a list when seperated by 'seperator'. The separator is case sensitive.
-/proc/dd_text2list_case(text, separator, var/list/withinList)
+/proc/text2list_case(text, separator, var/list/withinList)
 	var/textlength = length(text)
 	var/separatorlength = length(separator)
 	if(withinList && !withinList.len) withinList = null
@@ -138,7 +138,7 @@
 		count++
 	return newText
 
-//tg_text2list is faster then dd_text2list
+//tg_text2list is faster then text2list
 //not case sensitive version
 proc/tg_text2list(string, separator=",")
 	if(!string)
@@ -197,7 +197,7 @@ proc/tg_list2text(list/list, glue=",")
 		file = file_path
 	else
 		file = file(file_path)
-	return dd_text2list(file2text(file), separator)
+	return text2list(file2text(file), separator)
 
 //Turns a direction into text
 /proc/dir2text(direction)

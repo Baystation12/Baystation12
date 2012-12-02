@@ -156,14 +156,9 @@
 		if(!loc) return //probably ought to make a proper fix for this, but :effort: --NeoFite
 
 		var/datum/gas_mixture/environment = loc.return_air()
-<<<<<<< HEAD
 		var/datum/gas_mixture/breath
-
-=======
-		var/datum/air_group/breath
 		if(health < 0)
 			losebreath++
->>>>>>> remotes/git-svn
 		if(losebreath>0) //Suffocating so do not take a breath
 			losebreath--
 			if (prob(75)) //High chance of gasping for air

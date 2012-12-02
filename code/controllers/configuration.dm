@@ -358,7 +358,16 @@
 				if("automute_on")
 					automute_on = 1
 
-				if("assistant_maint")					config.assistant_maint = 1				if("gateway_delay")					config.gateway_delay = text2num(value)				if("usealienwhitelist")					usealienwhitelist = 1				if("alien_player_ratio")					limitalienplayers = 1					alien_to_human_ratio = text2num(value)				else
+				if("assistant_maint")
+					config.assistant_maint = 1
+				if("gateway_delay")
+					config.gateway_delay = text2num(value)
+				if("usealienwhitelist")
+					usealienwhitelist = 1
+				if("alien_player_ratio")
+					limitalienplayers = 1
+					alien_to_human_ratio = text2num(value)
+				else
 					diary << "Unknown setting in configuration: '[name]'"
 
 

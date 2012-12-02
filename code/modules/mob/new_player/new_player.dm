@@ -41,7 +41,7 @@
 		output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A><br><br>"
 		output += "<a href='byond://?src=\ref[src];pregame_music=1'>Lobby Music</A>"
 
-		/*if(!IsGuestKey(src.key))
+		if(!IsGuestKey(src.key))
 			establish_db_connection()
 
 			if(dbcon.IsConnected())
@@ -124,7 +124,6 @@
 				observer.name = observer.real_name
 				observer.key = key
 
-
 				del(src)
 				return 1
 
@@ -133,9 +132,9 @@
 				usr << "\red The round is either not ready, or has already finished..."
 				return
 
-			if(preferences.species != "Human")
-				if(!is_alien_whitelisted(src, preferences.species) && config.usealienwhitelist)
-					src << alert("You are currently not whitelisted to play [preferences.species].")
+			if(client.prefs.species != "Human")
+				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
+					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
 			LateChoices()
@@ -153,19 +152,20 @@
 			return
 
 		if(href_list["pregame_music"])
-			preferences.pregame_music = !preferences.pregame_music
+			usr << "\red Disabled. Tell someone about this."
+			/*client.prefs.pregame_music = !client.prefs.pregame_music
 
-
-			if(preferences.pregame_music)
+			if(client.prefs.pregame_music)
 				Playmusic()
 			else
 				Stopmusic()
 			// only save this 1 pref, so current slot doesn't get saved w/o user's knowledge
 			var/savefile/F = new(preferences.savefile_path(src))
-			F["pregame_music"] << preferences.pregame_music
+			F["pregame_music"] << preferences.pregame_music*/
 
 		if(href_list["privacy_poll"])
-			establish_db_connection()			if(!dbcon.IsConnected())
+			establish_db_connection()
+			if(!dbcon.IsConnected())
 				return
 			var/voted = 0
 
@@ -268,9 +268,9 @@
 			src << alert("[rank] is not available. Please try another.")
 			return 0
 
-		if(preferences.species != "Human")
-			if(!is_alien_whitelisted(src, preferences.species) && config.usealienwhitelist)
-				src << alert("You are currently not whitelisted to play [preferences.species].")
+		if(client.prefs.species != "Human")
+			if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
+				src << alert("You are currently not whitelisted to play [client.prefs.species].")
 				return 0
 
 		job_master.AssignRole(src, rank, 1)
@@ -281,16 +281,12 @@
 		character.loc = pick(latejoin)
 		character.lastarea = get_area(loc)
 
-		if(character.client)
-			character.client.be_syndicate = preferences.be_special
-
-		ticker.mode.latespawn(character)
+		//ticker.mode.latespawn(character)
 
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 			AnnounceArrival(character, rank)
-
 		else
 			character.Robotize()
 		del(src)
@@ -339,15 +335,15 @@
 		var/mob/living/carbon/human/new_character = new(loc)
 		new_character.lastarea = get_area(loc)
 
-		if(preferences.species == "Tajaran") //This is like the worst, but it works, so meh. - Erthilo
+		if(client.prefs.species == "Tajaran") //This is like the worst, but it works, so meh. - Erthilo
 			if(is_alien_whitelisted(src, "Tajaran") || !config.usealienwhitelist)
 				new_character.dna.mutantrace = "tajaran"
 				new_character.tajaran_talk_understand = 1
-		if(preferences.species == "Soghun")
+		if(client.prefs.species == "Soghun")
 			if(is_alien_whitelisted(src, "Soghun") || !config.usealienwhitelist)
 				new_character.dna.mutantrace = "lizard"
 				new_character.soghun_talk_understand = 1
-		if(preferences.species == "Skrell")
+		if(client.prefs.species == "Skrell")
 			if(is_alien_whitelisted(src, "Skrell") || !config.usealienwhitelist)
 				new_character.dna.mutantrace = "skrell"
 				new_character.skrell_talk_understand = 1

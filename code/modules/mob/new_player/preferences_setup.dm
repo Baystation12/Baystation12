@@ -22,6 +22,7 @@ datum/preferences
 		b_type = pick("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
 		age = rand(AGE_MIN,AGE_MAX)
 		copy_to(H,1)
+
 /*	proc/randomize_name()
 		if(gender == MALE)
 			real_name = capitalize(pick(first_names_male) + " " + capitalize(pick(last_names)))
@@ -203,7 +204,8 @@ datum/preferences
 */
 
 	proc/update_preview_icon()		//seriously. This is horrendous.
-		del(preview_icon_front)		del(preview_icon_side)
+		del(preview_icon_front)
+		del(preview_icon_side)
 		var/icon/preview_icon = null
 
 		var/g = "m"
