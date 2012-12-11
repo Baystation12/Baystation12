@@ -213,12 +213,20 @@ display round(lastgen) and plasmatank amount
 				user << "\blue You open the access panel."
 			else
 				user << "\blue You close the access panel."
-		else if(istype(O, /obj/item/weapon/crowbar) && !open)
+		else if(istype(O, /obj/item/weapon/crowbar) && open)
 			var/obj/machinery/constructable_frame/machine_frame/new_frame = new /obj/machinery/constructable_frame/machine_frame(src.loc)
 			for(var/obj/item/I in component_parts)
 				if(I.reliability < 100)
 					I.crit_fail = 1
 				I.loc = src.loc
+			while ( sheets >= 1 && ispath(sheet_path) )
+				var/obj/item/stack/sheet/S = new sheet_path(src.loc)
+				if ( sheets < 50 )
+					S.amount = sheets
+				else
+					S.amount = 50
+				sheets -= S.amount
+
 			new_frame.state = 2
 			new_frame.icon_state = "box_1"
 			del(src)
