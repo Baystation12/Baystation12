@@ -1,3 +1,4 @@
+hi
 // Add custom items you give to people here, and put their icons in custom_items.dmi
 // Remember to change 'icon = 'custom_items.dmi'' for items not using /obj/item/fluff as a base
 // Clothing item_state doesn't use custom_items.dmi. Just add them to the normal clothing files.
@@ -593,3 +594,37 @@
 	icon_state = "retpoluniform"
 	color = "retpoluniform"
 
+/////// NT-SID Suit //Zuhayr: Jane Doe
+
+/obj/item/clothing/under/fluff/sidsuit
+	name = "NT-SID jumpsuit"
+	desc = "A NanoTrasen Synthetic Intelligence Division jumpsuit, issued to 'volunteers'. On other people it looks fine, but right here a scientist has noted: on you it looks stupid."
+
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "sid_suit"
+	item_state = "sid_suit"
+	color = "sid_suit"
+	has_sensor = 2
+	sensor_mode = 3
+	flags = FPRINT | TABLEPASS
+
+
+//Suit roll-down toggle.
+/obj/item/clothing/under/fluff/sidsuit/verb/toggle_zipper()
+	set name = "Toggle Jumpsuit Zipper"
+	set category = "Object"
+	set src in usr
+
+	if(!usr.canmove || usr.stat || usr.restrained())
+		return 0
+
+	if(src.icon_state == "sid_suit_down")
+		src.color = "sid_suit"
+		usr << "You zip up the [src]."
+	else
+		src.color = "sid_suit_down"
+		usr << "You unzip and roll down the [src]."
+
+	src.icon_state = "[color]"
+	src.item_state = "[color]"
+	usr.update_inv_w_uniform()
