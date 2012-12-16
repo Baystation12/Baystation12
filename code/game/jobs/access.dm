@@ -222,10 +222,6 @@
 			return list(access_medical, access_chemistry)
 		if("Janitor")
 			return list(access_janitor, access_maint_tunnels)
-		if("Clown")
-			return list(access_clown, access_theatre)
-		if("Mime")
-			return list(access_mime, access_theatre)
 		if("Chef")
 			return list(access_kitchen, access_morgue)
 		if("Roboticist")
@@ -482,7 +478,7 @@
 
 /proc/get_all_jobs()
 	return list("Assistant", "Captain", "Head of Personnel", "Bartender", "Chef", "Botanist", "Quartermaster", "Cargo Technician",
-				"Shaft Miner", /*"Clown", "Mime", */"Janitor", "Librarian", "Lawyer", "Chaplain", "Chief Engineer", "Station Engineer",
+				"Shaft Miner", "Janitor", "Librarian", "Lawyer", "Chaplain", "Chief Engineer", "Station Engineer",
 				"Atmospheric Technician", "Roboticist", "Chief Medical Officer", "Medical Doctor", "Chemist", "Geneticist", "Virologist",
 				"Research Director", "Scientist", "Head of Security", "Warden", "Detective", "Security Officer")
 

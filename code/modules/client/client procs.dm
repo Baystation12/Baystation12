@@ -101,6 +101,8 @@
 		del(src)
 		return
 
+	message_admins("LOGIN: [src] | [address] | [byond_version]")
+
 	client_list += src
 	if ( (world.address == address || !address) && !host )
 		host = key
