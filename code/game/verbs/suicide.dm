@@ -1,4 +1,5 @@
 /mob/var/suiciding = 0
+mob/var/suicidepermitted = 0
 
 /mob/living/carbon/human/verb/suicide()
 	set hidden = 1
@@ -15,18 +16,26 @@
 		src << "You're already committing suicide! Be patient!"
 		return
 
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
+	var/list/allowed = list("Syndicate","traitor","Wizard","Head Revolutionary","Cultist","Changeling")
+	for(var/T in allowed)
+		if(mind.special_role == T)
+			permitted = 1
+			break
+	if(permitted)
+		var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
 
-	if(confirm == "Yes")
-		if(!canmove || restrained())	//just while I finish up the new 'fun' suiciding verb. This is to prevent metagaming via suicide
-			src << "You can't commit suicide whilst restrained! ((You can type Ghost instead however.))"
-			return
-		suiciding = 1
-		//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while
-		viewers(src) << "\red <b>[src] is attempting to bite \his tongue. It looks like \he's trying to commit suicide.</b>"
-		adjustOxyLoss(max(175 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
-		updatehealth()
-
+		if(confirm == "Yes")
+			if(!canmove || restrained())	//just while I finish up the new 'fun' suiciding verb. This is to prevent metagaming via suicide
+				src << "You can't commit suicide whilst restrained! ((You can type Ghost instead however.))"
+				return
+			suiciding = 1
+			//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while
+			viewers(src) << "\red <b>[src] is attempting to bite \his tongue. It looks like \he's trying to commit suicide.</b>"
+			adjustOxyLoss(max(175 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
+			updatehealth()
+			message_admins("[src] has just suicided."
+	else
+		alert("This server has suicide disabled, please adminhelp if there is a reason.", "Suicide Disabled")
 /mob/living/carbon/brain/verb/suicide()
 	set hidden = 1
 
@@ -46,6 +55,7 @@
 
 	if(confirm == "Yes")
 		suiciding = 1
+		message_admins("[src] has just suicided.")
 		viewers(loc) << "\red <b>[src]'s brain is growing dull and lifeless. It looks like it's lost the will to live.</b>"
 		spawn(50)
 			death(0)
@@ -73,6 +83,7 @@
 			src << "You can't commit suicide whilst restrained! ((You can type Ghost instead however.))"
 			return
 		suiciding = 1
+		message_admins("[src] has just suicided.")
 		//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while
 		viewers(src) << "\red <b>[src] is attempting to bite \his tongue. It looks like \he's trying to commit suicide.</b>"
 		adjustOxyLoss(max(175 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
@@ -93,6 +104,7 @@
 
 	if(confirm == "Yes")
 		suiciding = 1
+		message_admins("[src] has just suicided.")
 		viewers(src) << "\red <b>[src] is powering down. It looks like \he's trying to commit suicide.</b>"
 		//put em at -175
 		adjustOxyLoss(max(175 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
@@ -113,6 +125,7 @@
 
 	if(confirm == "Yes")
 		suiciding = 1
+		message_admins("[src] has just suicided.")
 		viewers(src) << "\red <b>[src] is powering down. It looks like \he's trying to commit suicide.</b>"
 		//put em at -175
 		adjustOxyLoss(max(475 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
@@ -148,6 +161,7 @@
 
 	if(confirm == "Yes")
 		suiciding = 1
+		message_admins("[src] has just suicided.")
 		viewers(src) << "\red <b>[src] is thrashing wildly! It looks like \he's trying to commit suicide.</b>"
 		//put em at -175
 		adjustOxyLoss(max(100 - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
@@ -168,6 +182,7 @@
 
 	if(confirm == "Yes")
 		suiciding = 1
+		message_admins("[src] has just suicided.")
 		setOxyLoss(100)
 		adjustBruteLoss(100 - getBruteLoss())
 		setToxLoss(100)
