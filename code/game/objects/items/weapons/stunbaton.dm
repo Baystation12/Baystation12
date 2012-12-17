@@ -11,7 +11,7 @@
 	var/charges = 10
 	var/status = 0
 	origin_tech = "combat=2"
-
+	dir = NORTH
 
 /obj/item/weapon/melee/baton/update_icon()
 	if(status)

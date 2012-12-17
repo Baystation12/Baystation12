@@ -13,22 +13,59 @@
 	..()
 	levelupdate()
 
+
+//Cleaned up my footsteps code to no longer contain references to butts and the like -Nernums
 /turf/simulated/Entered(atom/A, atom/OL)
+	var/footstepsound
 	if (istype(A,/mob/living/carbon))
 		var/mob/living/carbon/M = A
-		if(M.lying)	return
-		if(istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(istype(H.shoes, /obj/item/clothing/shoes/clown_shoes))
-				if(H.m_intent == "run")
-					if(H.footstep >= 2)
-						H.footstep = 0
+		if(M.lying)
+			return
+		if(istype(M, /mob/living/carbon/human))			// Split this into two seperate if checks, when non-humans were being checked it would throw a null error -- TLE
+			//clown shoes
+			if(istype(M:shoes, /obj/item/clothing/shoes/clown_shoes))
+				if(M.m_intent == "run")
+					if(M.footstep >= 2)
+						M.footstep = 0
 					else
-						H.footstep++
-					if(H.footstep == 0)
-						playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
+						M.footstep++
+					if(M.footstep == 0)
+						playsound(src, "clownstep", 30, 1) // this will get annoying very fast.
 				else
-					playsound(src, "clownstep", 20, 1)
+					playsound(src, "clownstep", 10, 1)
+
+
+			//shoes
+			if(istype(src, /turf/space))
+				footstepsound = "silent"
+			/*else if(istype(src, /turf/simulated/floor/spacedome/grass))
+				footstepsound = "grassfootsteps"
+			else if(istype(src, /turf/simulated/floor/spacedome/sand))
+				footstepsound = "sandfootsteps"
+			else if(istype(src, /turf/simulated/floor/spacedome/water))
+				footstepsound = "waterfootsteps"
+			else if(istype(src, /turf/simulated/floor/spacedome/concrete))
+				footstepsound = "concretefootsteps"
+			else
+				if(icon == "natureicons.dmi")
+					footstepsound = "concretefootsteps"
+				else
+					footstepsound = "erikafootsteps"*/
+			else
+				footstepsound = "erikafootsteps"
+
+			if(istype(M:shoes, /obj/item/clothing/shoes))
+				if(M.m_intent == "run")
+					if(M.footstep >= 2)
+						M.footstep = 0
+					else
+						M.footstep++
+					if(M.footstep == 0)
+						playsound(src, footstepsound, 30, 1) // this will get annoying very fast.
+				else
+					playsound(src, footstepsound, 10, 1)
+
+
 
 		switch (src.wet)
 			if(1)

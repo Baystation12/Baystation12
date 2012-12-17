@@ -84,6 +84,8 @@
 		"/obj/item/device/healthanalyzer",
 		"/obj/item/weapon/dnainjector",
 		"/obj/item/weapon/reagent_containers/dropper",
+		"/obj/item/weapon/reagent_containers/hypospray",
+		"/obj/item/weapon/reagent_containers/hypospray/autoinjector",
 		"/obj/item/weapon/reagent_containers/glass/beaker",
 		"/obj/item/weapon/reagent_containers/glass/bottle",
 		"/obj/item/weapon/reagent_containers/pill",
@@ -118,12 +120,16 @@
 		"/obj/item/weapon/reagent_containers/food/snacks/donut/jelly",
 		"/obj/item/weapon/melee/baton",
 		"/obj/item/weapon/gun/energy/taser",
+		"/obj/item/weapon/gun/energy/laser",
+		"/obj/item/weapon/gun/energy",
+		"/obj/item/weapon/melee/baton",
 		"/obj/item/weapon/lighter/zippo",
 		"/obj/item/weapon/cigpacket",
 		"/obj/item/clothing/glasses/hud/security",
 		"/obj/item/device/flashlight",
 		"/obj/item/device/pda",
-		"/obj/item/device/radio/headset"
+		"/obj/item/device/radio/headset",
+		"/obj/item/weapon/gun/projectile/detective"
 		)
 
 /obj/item/weapon/storage/belt/soulstone
