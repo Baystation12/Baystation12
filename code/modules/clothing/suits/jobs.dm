@@ -14,7 +14,7 @@
 //Captain
 /obj/item/clothing/suit/captunic
 	name = "captain's parade tunic"
-	desc = "Worn by a Captain to show their class."
+	desc = "Worn by a captain to show their class."
 	icon_state = "captunic"
 	item_state = "bio_suit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -39,7 +39,7 @@
 
 //Chef
 /obj/item/clothing/suit/chef
-	name = "Chef's apron"
+	name = "chef's apron"
 	desc = "An apron used by a high class chef."
 	icon_state = "chef"
 	item_state = "chef"
@@ -50,7 +50,7 @@
 
 //Chef
 /obj/item/clothing/suit/chef/classic
-	name = "A classic chef's apron."
+	name = "classic chef's apron."
 	desc = "A basic, dull, white chef's apron."
 	icon_state = "apronchef"
 	item_state = "apronchef"
@@ -58,7 +58,7 @@
 
 //Detective
 /obj/item/clothing/suit/det_suit
-	name = "coat"
+	name = "detective's coat"
 	desc = "An 18th-century multi-purpose trenchcoat. Someone who wears this means serious business."
 	icon_state = "detective"
 	item_state = "det_suit"
@@ -68,7 +68,7 @@
 
 //Forensics
 /obj/item/clothing/suit/forensics
-	name = "jacket"
+	name = "forensics jacket"
 	desc = "A forensics technician jacket."
 	item_state = "det_suit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
@@ -76,12 +76,12 @@
 	armor = list(melee = 10, bullet = 10, laser = 15, energy = 10, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/forensics/red
-	name = "red jacket"
+	name = "red forensics jacket"
 	desc = "A red forensics technician jacket."
 	icon_state = "forensics_red"
 
 /obj/item/clothing/suit/forensics/blue
-	name = "blue jacket"
+	name = "blue forensics jacket"
 	desc = "A blue forensics technician jacket."
 	icon_state = "forensics_blue"
 
@@ -94,14 +94,14 @@
 
 //Lawyer
 /obj/item/clothing/suit/lawyer/bluejacket
-	name = "Blue Suit Jacket"
+	name = "blue suit jacket"
 	desc = "A snappy dress jacket."
 	icon_state = "suitjacket_blue_open"
 	item_state = "suitjacket_blue_open"
 	body_parts_covered = UPPER_TORSO|ARMS
 
 /obj/item/clothing/suit/lawyer/purpjacket
-	name = "Purple Suit Jacket"
+	name = "purple suit jacket"
 	desc = "A snappy dress jacket."
 	icon_state = "suitjacket_purp"
 	item_state = "suitjacket_purp"

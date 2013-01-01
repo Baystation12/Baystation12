@@ -1,7 +1,7 @@
 
 
 /obj/item/clothing/head/centhat
-	name = "\improper CentComm. hat"
+	name = "\improper CentCom. hat"
 	icon_state = "centcom"
 	desc = "It's good to be emperor."
 	flags = FPRINT|TABLEPASS
@@ -14,7 +14,7 @@
 	item_state = "pwig"
 
 /obj/item/clothing/head/that
-	name = "top-hat"
+	name = "top hat"
 	desc = "It's an amish looking hat."
 	icon_state = "tophat"
 	item_state = "that"
@@ -34,14 +34,14 @@
 
 /obj/item/clothing/head/plaguedoctorhat
 	name = "plague doctor's hat"
-	desc = "These were once used by Plague doctors. They're pretty much useless."
+	desc = "These were once used by plague doctors. They're pretty much useless."
 	icon_state = "plaguedoctor"
 	flags = FPRINT | TABLEPASS
 	permeability_coefficient = 0.01
 
 /obj/item/clothing/head/hasturhood
-	name = "hastur's hood"
-	desc = "It's unspeakably stylish"
+	name = "Hastur's hood"
+	desc = "It's unspeakably stylish!"
 	icon_state = "hasturhood"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
 
@@ -68,7 +68,7 @@
 	flags_inv = 0
 
 /obj/item/clothing/head/that
-	name = "sturdy top-hat"
+	name = "sturdy top hat"
 	desc = "It's an amish looking armored top hat."
 	icon_state = "tophat"
 	item_state = "that"
@@ -93,7 +93,7 @@
 
 /obj/item/clothing/head/justice
 	name = "justice hat"
-	desc = "fight for what's righteous!"
+	desc = "Fight for what's righteous!"
 	icon_state = "justicered"
 	item_state = "justicered"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR

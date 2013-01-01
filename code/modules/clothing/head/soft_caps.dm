@@ -82,6 +82,6 @@
 
 /obj/item/clothing/head/soft/sec
 	name = "security cap"
-	desc = "It's baseball hat in tasteful red colour."
+	desc = "It's a baseball hat in a tasteful red colour."
 	icon_state = "secsoft"
 	color = "sec"

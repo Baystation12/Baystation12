@@ -11,7 +11,7 @@
 	name = "combat turtleneck"
 
 /obj/item/clothing/under/syndicate/tacticool
-	name = "\improper Tacticool turtleneck"
+	name = "\improper tacticool turtleneck"
 	desc = "Just looking at it makes you want to buy an SKS, go into the woods, and -operate-."
 	icon_state = "tactifool"
 	item_state = "bl_suit"

@@ -28,7 +28,7 @@
 
 /obj/item/clothing/head/helmet/swat
 	name = "\improper SWAT helmet"
-	desc = "They're often used by highly trained Swat Members."
+	desc = "They're often used by highly trained SWAT officers."
 	icon_state = "swat"
 	flags = FPRINT | TABLEPASS | HEADCOVERSEYES
 	item_state = "swat"

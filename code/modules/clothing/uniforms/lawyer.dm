@@ -3,7 +3,7 @@
 
 /obj/item/clothing/under/lawyer
 	desc = "Slick threads."
-	name = "Lawyer suit"
+	name = "lawyer suit"
 	flags = FPRINT | TABLEPASS
 	flags_inv = HIDEJUMPSUIT
 
