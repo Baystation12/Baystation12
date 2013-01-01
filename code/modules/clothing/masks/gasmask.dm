@@ -73,11 +73,11 @@
 	item_state = "sexymime"
 
 /obj/item/clothing/mask/gas/death_commando
-	name = "Death Commando Mask"
+	name = "death commando mask"
 	icon_state = "death_commando_mask"
 	item_state = "death_commando_mask"
 
 /obj/item/clothing/mask/gas/cyborg
 	name = "cyborg visor"
-	desc = "Beep boop"
+	desc = "Beep boop."
 	icon_state = "death"

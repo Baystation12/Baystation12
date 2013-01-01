@@ -11,7 +11,7 @@
 	var/prescription = 0
 
 /obj/item/clothing/glasses/meson
-	name = "Optical Meson Scanner"
+	name = "optical meson scanners"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
 	item_state = "glasses"
@@ -22,13 +22,13 @@
 	prescription = 1
 
 /obj/item/clothing/glasses/science
-	name = "Science Goggles"
-	desc = "nothing"
+	name = "science goggles"
+	desc = "My eyes!  The goggles do nothing!"
 	icon_state = "purple"
 	item_state = "glasses"
 
 /obj/item/clothing/glasses/night
-	name = "Night Vision Goggles"
+	name = "night vision goggles"
 	desc = "You can totally see in the dark now!."
 	icon_state = "night"
 	item_state = "glasses"
@@ -49,7 +49,7 @@
 	item_state = "headset" // lol
 
 /obj/item/clothing/glasses/material
-	name = "Optical Material Scanner"
+	name = "optical material scanners"
 	desc = "Very confusing glasses."
 	icon_state = "material"
 	item_state = "glasses"
@@ -57,19 +57,19 @@
 	vision_flags = SEE_OBJS
 
 /obj/item/clothing/glasses/regular
-	name = "Prescription Glasses"
+	name = "prescription glasses"
 	desc = "Made by Nerd. Co."
 	icon_state = "glasses"
 	item_state = "glasses"
 
 /obj/item/clothing/glasses/regular/hipster
-	name = "Prescription Glasses"
+	name = "prescription glasses"
 	desc = "Made by Uncool. Co."
 	icon_state = "hipster_glasses"
 	item_state = "hipster_glasses"
 
 /obj/item/clothing/glasses/gglasses
-	name = "Green Glasses"
+	name = "green glasses"
 	desc = "Forest green glasses, like the kind you'd wear when hatching a nasty scheme."
 	icon_state = "gglasses"
 	item_state = "gglasses"
@@ -141,7 +141,7 @@
 		return
 
 /obj/item/clothing/glasses/thermal
-	name = "Optical Thermal Scanner"
+	name = "optical thermal scanners"
 	desc = "Thermals in the shape of glasses."
 	icon_state = "thermal"
 	item_state = "glasses"
@@ -152,7 +152,7 @@
 	emp_act(severity)
 		if(istype(src.loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/M = src.loc
-			M << "\red The Optical Thermal Scanner overloads and blinds you!"
+			M << "\red The optical thermal scanners overload and blinds you!"
 			if(M.glasses == src)
 				M.eye_blind = 3
 				M.eye_blurry = 5
@@ -162,25 +162,25 @@
 		..()
 
 /obj/item/clothing/glasses/thermal/syndi	//These are now a traitor item, concealed as mesons.	-Pete
-	name = "Optical Meson Scanner"
+	name = "optical meson scanners"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
 	origin_tech = "magnets=3;syndicate=4"
 
 /obj/item/clothing/glasses/thermal/monocle
-	name = "Thermoncle"
+	name = "thermoncle"
 	desc = "A monocle thermal."
 	icon_state = "thermoncle"
 	flags = null //doesn't protect eyes because it's a monocle, duh
 
 /obj/item/clothing/glasses/thermal/eyepatch
-	name = "Optical Thermal Eyepatch"
-	desc = "An eyepatch with built-in thermal optics"
+	name = "optical thermal eyepatch"
+	desc = "An eyepatch with built-in thermal optics."
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
 
 /obj/item/clothing/glasses/thermal/jensen
-	name = "Optical Thermal Implants"
-	desc = "A set of implantable lenses designed to augment your vision"
+	name = "optical thermal implants"
+	desc = "A set of implantable lenses designed to augment your vision."
 	icon_state = "thermalimplants"
 	item_state = "syringe_kit"

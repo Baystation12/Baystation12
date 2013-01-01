@@ -21,7 +21,7 @@
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECITON_TEMPERATURE
 
 /obj/item/clothing/gloves/cyborg
-	desc = "beep boop borp"
+	desc = "Beep boop borp."
 	name = "cyborg gloves"
 	icon_state = "black"
 	item_state = "r_hands"

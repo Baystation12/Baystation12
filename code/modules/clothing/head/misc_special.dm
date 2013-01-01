@@ -53,7 +53,7 @@
  * Cakehat
  */
 /obj/item/clothing/head/cakehat
-	name = "cake-hat"
+	name = "cake hat"
 	desc = "It's tasty looking!"
 	icon_state = "cake0"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES

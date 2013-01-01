@@ -10,7 +10,7 @@
  */
 /obj/item/clothing/suit/bluetag
 	name = "blue laser tag armour"
-	desc = "Blue Pride, Station Wide"
+	desc = "Blue pride, station wide."
 	icon_state = "bluetag"
 	item_state = "bluetag"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -18,7 +18,7 @@
 
 /obj/item/clothing/suit/redtag
 	name = "red laser tag armour"
-	desc = "Pew pew pew"
+	desc = "Pew pew pew!"
 	icon_state = "redtag"
 	item_state = "redtag"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -56,7 +56,7 @@
 
 /obj/item/clothing/suit/greatcoat
 	name = "great coat"
-	desc = "A Nazi great coat"
+	desc = "A Nazi great coat."
 	icon_state = "nazi"
 	item_state = "nazi"
 	flags = FPRINT | TABLEPASS
@@ -72,7 +72,7 @@
 
 /obj/item/clothing/suit/justice
 	name = "justice suit"
-	desc = "this pretty much looks ridiculous"
+	desc = "This pretty much looks ridiculous."
 	icon_state = "justice"
 	item_state = "justice"
 	flags = FPRINT | TABLEPASS
@@ -118,8 +118,8 @@
 
 
 /obj/item/clothing/suit/hastur
-	name = "Hastur's Robes"
-	desc = "Robes not meant to be worn by man"
+	name = "Hastur's robes"
+	desc = "Robes not meant to be worn by man."
 	icon_state = "hastur"
 	item_state = "hastur"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -127,8 +127,8 @@
 
 
 /obj/item/clothing/suit/imperium_monk
-	name = "Imperium monk"
-	desc = "Have YOU killed a xenos today?"
+	name = "imperium monk's suit"
+	desc = "Have YOU killed a xeno today?"
 	icon_state = "imperium_monk"
 	item_state = "imperium_monk"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -136,7 +136,7 @@
 
 
 /obj/item/clothing/suit/chickensuit
-	name = "Chicken Suit"
+	name = "chicken suit"
 	desc = "A suit made long ago by the ancient empire KFC."
 	icon_state = "chickensuit"
 	item_state = "chickensuit"
@@ -145,8 +145,8 @@
 
 
 /obj/item/clothing/suit/monkeysuit
-	name = "Monkey Suit"
-	desc = "A suit that looks like a primate"
+	name = "monkey suit"
+	desc = "A suit that looks like a primate."
 	icon_state = "monkeysuit"
 	item_state = "monkeysuit"
 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS|FEET|HANDS
@@ -154,7 +154,7 @@
 
 
 /obj/item/clothing/suit/holidaypriest
-	name = "Holiday Priest"
+	name = "holiday priest"
 	desc = "This is a nice holiday my son."
 	icon_state = "holidaypriest"
 	item_state = "holidaypriest"

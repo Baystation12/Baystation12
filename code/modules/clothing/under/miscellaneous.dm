@@ -210,7 +210,7 @@
 
 /obj/item/clothing/under/kilt
 	name = "kilt"
-	desc = "Includes shoes and plaid"
+	desc = "Includes shoes and plaid."
 	icon_state = "kilt"
 	item_state = "kilt"
 	color = "kilt"

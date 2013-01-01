@@ -27,7 +27,7 @@
 
 
 /obj/item/clothing/suit/armor/riot
-	name = "Riot Suit"
+	name = "riot suit"
 	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
 	icon_state = "riot"
 	item_state = "swat_suit"
@@ -38,7 +38,7 @@
 
 
 /obj/item/clothing/suit/armor/bulletproof
-	name = "Bulletproof Vest"
+	name = "bulletproof vest"
 	desc = "A vest that excels in protecting the wearer against high-velocity solid projectiles."
 	icon_state = "bulletproof"
 	item_state = "armor"
@@ -46,7 +46,7 @@
 
 
 /obj/item/clothing/suit/armor/laserproof
-	name = "Ablative Armor Vest"
+	name = "ablative armor vest"
 	desc = "A vest that excels in protecting the wearer against energy projectiles."
 	icon_state = "armor_reflec"
 	item_state = "armor_reflec"
@@ -54,7 +54,7 @@
 
 
 /obj/item/clothing/suit/armor/swat
-	name = "swat suit"
+	name = "SWAT suit"
 	desc = "A heavily armored suit that protects against moderate damage. Used in special operations."
 	icon_state = "deathsquad"
 	item_state = "swat_suit"
@@ -71,7 +71,7 @@
 
 
 /obj/item/clothing/suit/armor/swat/officer
-	name = "officer jacket"
+	name = "officer's jacket"
 	desc = "An armored jacket used in special operations."
 	icon_state = "detective"
 	item_state = "det_suit"
@@ -79,7 +79,7 @@
 
 
 /obj/item/clothing/suit/armor/det_suit
-	name = "armor"
+	name = "detective's armor"
 	desc = "An armored vest with a detective's badge on it."
 	icon_state = "detective-armor"
 	item_state = "armor"
@@ -91,8 +91,8 @@
 //Reactive armor
 //When the wearer gets hit, this armor will teleport the user a short distance away (to safety or to more danger, no one knows. That's the fun of it!)
 /obj/item/clothing/suit/armor/reactive
-	name = "Reactive Teleport Armor"
-	desc = "Someone seperated our Research Director from his own head!"
+	name = "reactive teleport armor"
+	desc = "NanoTrasen's gift."
 	var/active = 0.0
 	icon_state = "reactiveoff"
 	item_state = "reactiveoff"

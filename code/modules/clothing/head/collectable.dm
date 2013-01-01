@@ -7,28 +7,28 @@
 
 /obj/item/clothing/head/collectable/petehat
 	name = "ultra rare Pete's hat!"
-	desc = "It smells faintly of plasma"
+	desc = "It smells faintly of plasma."
 	icon_state = "petehat"
 
 /obj/item/clothing/head/collectable/metroid
-	name = "collectable metroid cap!"
+	name = "collectable metroid cap"
 	desc = "It just latches right in place!"
 	icon_state = "metroid"
 
 /obj/item/clothing/head/collectable/xenom
-	name = "collectable xenomorph helmet!"
+	name = "collectable xenomorph helmet"
 	desc = "Hiss hiss hiss!"
 	icon_state = "xenom"
 
 /obj/item/clothing/head/collectable/chef
 	name = "collectable chef's hat"
-	desc = "A rare Chef's Hat meant for hat collectors!"
+	desc = "A rare chef's hat meant for hat collectors!"
 	icon_state = "chef"
 	item_state = "chef"
 
 /obj/item/clothing/head/collectable/paper
 	name = "collectable paper hat"
-	desc = "What looks like an ordinary paper hat, is actually a rare and valuable collector's edition paper hat. Keep away from water, fire and Librarians."
+	desc = "What looks like an ordinary paper hat is actually a rare and valuable collector's edition paper hat. Keep away from water, fire and Librarians."
 	icon_state = "paper"
 
 /obj/item/clothing/head/collectable/tophat
@@ -39,35 +39,35 @@
 
 /obj/item/clothing/head/collectable/captain
 	name = "collectable captain's hat"
-	desc = "A Collectable Hat that'll make you look just like a real comdom!"
+	desc = "A collectable hat that'll make you look just like a real comdom!"
 	icon_state = "captain"
 	item_state = "caphat"
 
 /obj/item/clothing/head/collectable/police
 	name = "collectable police officer's hat"
-	desc = "A Collectable Police Officer's Hat. This hat emphasizes that you are THE LAW."
+	desc = "A collectable police officer's hat. This hat emphasizes that you are THE LAW."
 	icon_state = "policehelm"
 
 /obj/item/clothing/head/collectable/beret
 	name = "collectable beret"
-	desc = "A Collectable red Beret. It smells faintly of Garlic."
+	desc = "A collectable red beret. It smells faintly of garlic."
 	icon_state = "beret"
 
 /obj/item/clothing/head/collectable/welding
 	name = "collectable welding helmet"
-	desc = "A Collectable Welding Helmet. Now with 80% less lead! Not for actual welding. Any welding done while wearing this Helmet is done so at the owner's own risk!"
+	desc = "A collectable welding helmet. Now with 80% less lead! Not for actual welding. Any welding done while wearing this helmet is done so at the owner's own risk!"
 	icon_state = "welding"
 	item_state = "welding"
 
 /obj/item/clothing/head/collectable/slime
 	name = "collectable slime hat"
-	desc = "Just like a real Brain Slug!"
+	desc = "Just like a real brain slug!"
 	icon_state = "headslime"
 	item_state = "headslime"
 
 /obj/item/clothing/head/collectable/flatcap
 	name = "collectable flat cap"
-	desc = "A Collectible farmer's Flat Cap!"
+	desc = "A collectible farmer's flat cap!"
 	icon_state = "flat_cap"
 	item_state = "detective"
 
@@ -101,12 +101,12 @@
 	item_state = "hardhat0_yellow"
 
 /obj/item/clothing/head/collectable/HoS
-	name = "collectable HoS hat"
+	name = "collectable head of security hat"
 	desc = "Now you can beat prisoners, set silly sentences and arrest for no reason too!"
 	icon_state = "hoscap"
 
 /obj/item/clothing/head/collectable/thunderdome
-	name = "collectable Thunderdome helmet"
+	name = "collectable thunderdome helmet"
 	desc = "Go Red! I mean Green! I mean Red! No Green!"
 	icon_state = "thunderdome"
 	item_state = "thunderdome"
