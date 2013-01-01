@@ -789,7 +789,7 @@
 	desc = "A cane used by a true gentlemen."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cane"
-	item_state = "cane"
+	item_state = "stick"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	force = 5.0
 	throwforce = 7.0
@@ -1490,6 +1490,7 @@
 	m_amt = 12000
 	origin_tech = "materials=1"
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	sharp = 1
 
 /obj/item/weapon/butch/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
