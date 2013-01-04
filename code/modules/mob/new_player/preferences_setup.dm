@@ -214,6 +214,13 @@ datum/preferences
 			preview_icon.Blend(new /icon('icons/effects/species.dmi', "sogtail_s"), ICON_OVERLAY)
 		else if(species == "Skrell")
 			preview_icon = new /icon('icons/effects/species.dmi', "skrell_[g]_s")
+		else if(species == "Vox")
+			preview_icon = new /icon('icons/effects/species.dmi', "vox_[g]_s")
+			preview_icon.Blend(new /icon('icons/effects/species.dmi', "voxtail_s"), ICON_OVERLAY)
+			preview_icon.Blend(new /icon('icons/effects/species.dmi', "voxbeak_s"), ICON_OVERLAY)
+		else if(species == "Drone")
+			preview_icon = new /icon('icons/effects/species.dmi', "drone_[g]_s")
+			preview_icon.Blend(new /icon('icons/effects/species.dmi', "dronetail_s"), ICON_OVERLAY)
 		else
 			preview_icon = new /icon('human.dmi', "torso_[g]_s")
 

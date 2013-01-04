@@ -216,7 +216,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		choose_female = 1 // shaved is the only facial hair on women because why would chicks have beards???
-		species_allowed = list("Human","Soghun","Tajaran","Skrell")
+		species_allowed = list("Human","Soghun","Tajaran","Skrell","Vox","Drone")
 
 	watson
 		name = "Watson Mustache"
@@ -332,6 +332,16 @@
 		icon_state = "tajears"
 		species_allowed = list("Tajaran")
 
+	vox_quills
+		name = "Vox quills"
+		icon_state = "vox_plain"
+		species_allowed = list("Vox")
+
+	drone_antennae
+		name = "Drone antennae"
+		icon_state = "drone_plain"
+		species_allowed = list("Drone")
+
 //skin styles - WIP
 
 /datum/sprite_accessory/skin
@@ -357,3 +367,13 @@
 		name = "Default skrell skin"
 		icon = "skrell"
 		species_allowed = list("Skrell")
+
+	vox
+		name = "Default vox skin"
+		icon = "vox"
+		species_allowed = list("Vox")
+
+	drone
+		name = "Default drone skin"
+		icon = "drone"
+		species_allowed = list("Drone")

@@ -822,6 +822,12 @@ datum/preferences
 							if(is_alien_whitelisted(user, "Skrell")) //Check for Skrell and admins
 								new_species += "Skrell"
 								whitelisted = 1
+							if(is_alien_whitelisted(user, "Vox")) //Check for Vox and admins
+								new_species += "Vox"
+								whitelisted = 1
+							if(is_alien_whitelisted(user, "Drone")) //Check for Vox and admins
+								new_species += "Drone"
+								whitelisted = 1
 
 							if(!whitelisted)
 								alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
@@ -829,6 +835,9 @@ datum/preferences
 							new_species += "Tajaran"
 							new_species += "Soghun"
 							new_species += "Skrell"
+							new_species += "Vox"
+							new_species += "Drone"
+
 						species = input("Please select a species", "Character Generation", null) in new_species
 						if(prev_species != species)
 							//grab one of the valid hair styles for the newly chosen species

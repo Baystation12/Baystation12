@@ -775,6 +775,10 @@
 				return "Mobile vegetation"
 			if("golem")
 				return "Animated Construct"
+			if("vox")
+				return "Vox"
+			if("drone")
+				return "Drone"
 			else
 				return "Human"
 
@@ -786,6 +790,10 @@
 			return "Skrell"
 		else if(src.dna.mutantrace == "tajaran")
 			return "Tajaran"
+		else if(src.dna.mutantrace == "vox")
+			return "Vox"
+		else if(src.dna.mutantrace == "drone")
+			return "Drone"
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)

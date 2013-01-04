@@ -423,6 +423,13 @@
 			if(is_alien_whitelisted(src, "Skrell") || !config.usealienwhitelist)
 				new_character.dna.mutantrace = "skrell"
 				new_character.skrell_talk_understand = 1
+		if(preferences.species == "Vox")
+			if(is_alien_whitelisted(src, "Vox") || !config.usealienwhitelist)
+				new_character.dna.mutantrace = "vox"
+				new_character.vox_talk_understand = 1
+		if(preferences.species == "Drone")
+			if(is_alien_whitelisted(src, "Drone") || !config.usealienwhitelist)
+				new_character.dna.mutantrace = "drone"
 
 		if(ticker.random_players)
 			new_character.gender = pick(MALE, FEMALE)

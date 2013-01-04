@@ -129,6 +129,8 @@
 						attack_verb = "scratch"
 					if("tajaran")
 						attack_verb = "scratch"
+					if("vox")
+						attack_verb = "slash"
 					if("plant")
 						attack_verb = "slash"
 					else

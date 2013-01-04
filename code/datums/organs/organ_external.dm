@@ -419,6 +419,10 @@
 							I = new('icons/mob/human_races/r_lizard.dmi')
 						if("skrell")
 							I = new('icons/mob/human_races/r_skrell.dmi')
+						if("vox")
+							I = new('icons/mob/human_races/r_vox.dmi')
+						if("drone")
+							I = new('icons/mob/human_races/r_drone.dmi')
 						else
 							I = new('icons/mob/human_races/r_human.dmi')
 					if(I)
@@ -441,7 +445,7 @@
 			if(H)
 				var/lol = pick(cardinal)
 				step(H,lol)
-				
+
 			destspawn = 1
 			if(status & ORGAN_ROBOT)
 				owner.visible_message("\red \The [owner]'s [display_name] explodes violently!",\

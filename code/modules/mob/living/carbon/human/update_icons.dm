@@ -243,6 +243,10 @@ proc/get_damage_icon_part(damage_state, body_part)
 				icobase = 'icons/mob/human_races/r_lizard.dmi'
 			if("skrell")
 				icobase = 'icons/mob/human_races/r_skrell.dmi'
+			if("vox")
+				icobase = 'icons/mob/human_races/r_vox.dmi'
+			if("drone")
+				icobase = 'icons/mob/human_races/r_drone.dmi'
 			else
 				icobase = 'icons/mob/human_races/r_human.dmi'
 	else
@@ -789,6 +793,14 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
 			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "sogtail_l")
 			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "sogtail_s")
+	else if( cur_species == "Vox")
+		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
+			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "voxtail_l")
+			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "voxtail_s")
+	else if( cur_species == "Drone")
+		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
+			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "dronetail_l")
+			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "dronetail_s")
 
 	if(update_icons)
 		update_icons()
@@ -800,7 +812,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 //	if (gender == FEMALE)	g = "f"
 
 	//base icons
-	var/icon/face_lying		= new /icon('icons/mob/human_face.dmi',"bald_l")
+	var/icon/face_lying	= new /icon('icons/mob/human_face.dmi',"bald_l")
 
 	if(f_style)
 		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[f_style]

@@ -59,7 +59,7 @@
 		return 1
 	return 0
 
-/mob/proc/say_quote(var/text,var/is_speaking_soghun,var/is_speaking_skrell,var/is_speaking_tajaran)
+/mob/proc/say_quote(var/text,var/is_speaking_soghun,var/is_speaking_skrell,var/is_speaking_tajaran,var/is_speaking_vox)
 	if(!text)
 		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 		//tcomms code is still runtiming somewhere here
@@ -70,6 +70,8 @@
 		return "warbles, \"<span class='species'>[text]</span>\"";
 	if (is_speaking_tajaran)
 		return "mrowls, \"<span class='species'>[text]</span>\"";
+	if (is_speaking_vox)
+		return "jabbers, \"<span class='species'>[text]</span>\"";
 //Needs Virus2
 //	if (src.disease_symptoms & DISEASE_HOARSE)
 //		return "rasps, \"[text]\"";

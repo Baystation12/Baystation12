@@ -163,6 +163,13 @@ var/list/department_radio_keys = list(
 		if(tajaran_talk_understand || universal_speak)
 			is_speaking_taj = 1
 
+	//work out if we're speaking vox or not
+	var/is_speaking_vox = 0
+	if(copytext(message, 1, 3) == ":v" || copytext(message, 1, 3) == ":V")
+		message = copytext(message, 3)
+		if(vox_talk_understand || universal_speak)
+			is_speaking_vox = 1
+
 	// :downs:
 	if (getBrainLoss() >= 60)
 		message = dd_replacetext(message, " am ", " ")
@@ -359,7 +366,7 @@ var/list/department_radio_keys = list(
 
 	for (var/M in listening)
 		if(hascall(M,"say_understands"))
-			if (M:say_understands(src) && !is_speaking_skrell && !is_speaking_soghun && !is_speaking_taj)
+			if (M:say_understands(src) && !is_speaking_skrell && !is_speaking_soghun && !is_speaking_taj && !is_speaking_vox)
 				heard_a += M
 			else if(ismob(M))
 				if(is_speaking_skrell && (M:skrell_talk_understand || M:universal_speak))
@@ -367,6 +374,8 @@ var/list/department_radio_keys = list(
 				else if(is_speaking_soghun && (M:soghun_talk_understand || M:universal_speak))
 					heard_a += M
 				else if(is_speaking_taj && (M:tajaran_talk_understand || M:universal_speak))
+					heard_a += M
+				else if(is_speaking_vox && (M:vox_talk_understand || M:universal_speak))
 					heard_a += M
 				else
 					heard_b += M
@@ -379,7 +388,7 @@ var/list/department_radio_keys = list(
 
 	var/rendered = null
 	if (length(heard_a))
-		var/message_a = say_quote(message,is_speaking_soghun,is_speaking_skrell,is_speaking_taj)
+		var/message_a = say_quote(message,is_speaking_soghun,is_speaking_skrell,is_speaking_taj,is_speaking_vox)
 
 		if (italics)
 			message_a = "<i>[message_a]</i>"
