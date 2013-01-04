@@ -253,7 +253,12 @@ datum/preferences
 			else
 				preview_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 
-		var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "eyes_s")
+		var/icon/eyes_s = ""
+		if(species == "Vox")
+			eyes_s = new/icon('icons/mob/human_races/r_vox.dmi', "icon_state" = "eyes_s")
+		else
+			eyes_s = new/icon('icons/mob/human_face.dmi', "icon_state" = "eyes_s")
+
 		eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
 
 		var/datum/sprite_accessory/hair_style = hair_styles_list[h_style]

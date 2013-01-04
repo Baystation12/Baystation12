@@ -334,7 +334,13 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(has_head)
 		//Eyes
 		if(!skeleton)
-			var/icon/eyes_s = new/icon('icons/mob/human_face.dmi', "eyes_s")
+
+			var/icon/eyes_s = ""
+			if(src.get_species() == "Vox")
+				eyes_s = new/icon('icons/mob/human_races/r_vox.dmi', "icon_state" = "eyes_s")
+			else
+				eyes_s = new/icon('icons/mob/human_face.dmi', "icon_state" = "eyes_s")
+
 			eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
 			stand_icon.Blend(eyes_s, ICON_OVERLAY)
 
