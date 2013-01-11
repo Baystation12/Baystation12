@@ -1053,6 +1053,10 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Firing Range"
 	icon_state = "firingrange"
 
+/area/security/forensics
+	name= "\improper Forensics Lab"
+	icon_state = "detective"
+
 /*
 	New()
 		..()
