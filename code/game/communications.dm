@@ -106,11 +106,10 @@ var/list/radiochannels = list(
 	"Security" = 1359,
 	"Deathsquad" = 1441,
 	"Syndicate" = 1213,
-	"Mining" = 1349,
-	"Cargo" = 1347,
+	"Supply" = 1347,
 )
 //depenging helpers
-var/list/DEPT_FREQS = list(1351,1355,1357,1359,1213,1441,1349,1347)
+var/list/DEPT_FREQS = list(1351,1355,1357,1359,1213,1441,1347)
 var/const/COMM_FREQ = 1353 //command, colored gold in chat window
 var/const/SYND_FREQ = 1213
 
@@ -287,3 +286,7 @@ datum/signal
 			. = "signal = {source = '[source]' ()\n"
 		for (var/i in data)
 			. += "data\[\"[i]\"\] = \"[data[i]]\"\n"
+			if(islist(data[i]))
+				var/list/L = data[i]
+				for(var/t in L)
+					. += "data\[\"[i]\"\] list has: [t]"

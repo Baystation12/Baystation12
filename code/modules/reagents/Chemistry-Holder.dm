@@ -231,10 +231,15 @@ datum
 							matching_other = 1
 
 						else
-							if(istype(my_atom, /obj/item/metroid_core))
-								var/obj/item/metroid_core/M = my_atom
+							/*if(istype(my_atom, /obj/item/slime_core))
+								var/obj/item/slime_core/M = my_atom
 
-								if(M.POWERFLAG == C.required_other && M.Uses > 0) // added a limit to metroid cores -- Muskets requested this
+								if(M.POWERFLAG == C.required_other && M.Uses > 0) // added a limit to slime cores -- Muskets requested this
+									matching_other = 1*/
+							if(istype(my_atom, /obj/item/slime_extract))
+								var/obj/item/slime_extract/M = my_atom
+
+								if(M.Uses > 0) // added a limit to slime cores -- Muskets requested this
 									matching_other = 1
 
 
@@ -255,12 +260,21 @@ datum
 								for(var/mob/M in viewers(4, get_turf(my_atom)) )
 									M << "\blue \icon[my_atom] The solution begins to bubble."
 
-							if(istype(my_atom, /obj/item/metroid_core))
-								var/obj/item/metroid_core/ME = my_atom
+						/*	if(istype(my_atom, /obj/item/slime_core))
+								var/obj/item/slime_core/ME = my_atom
 								ME.Uses--
-								if(ME.Uses <= 0) // give the notification that the metroid core is dead
+								if(ME.Uses <= 0) // give the notification that the slime core is dead
 									for(var/mob/M in viewers(4, get_turf(my_atom)) )
 										M << "\blue \icon[my_atom] The innards begin to boil!"
+							*/
+							if(istype(my_atom, /obj/item/slime_extract))
+								var/obj/item/slime_extract/ME2 = my_atom
+								ME2.Uses--
+								if(ME2.Uses <= 0) // give the notification that the slime core is dead
+									for(var/mob/M in viewers(4, get_turf(my_atom)) )
+										M << "\blue \icon[my_atom] The [my_atom]'s power is consumed in the reaction."
+										ME2.name = "used slime extract"
+										ME2.desc = "This extract has been used up."
 
 							playsound(get_turf(my_atom), 'sound/effects/bubbles.ogg', 80, 1)
 
@@ -340,12 +354,13 @@ datum
 									else R.reaction_obj(A, R.volume+volume_modifier)
 				return
 
-			add_reagent(var/reagent, var/amount, var/data=null)
+			add_reagent(var/reagent, var/amount, var/list/data=null)
 				if(!isnum(amount)) return 1
 				update_total()
 				if(total_volume + amount > maximum_volume) amount = (maximum_volume - total_volume) //Doesnt fit in. Make it disappear. Shouldnt happen. Will happen.
 
 				for(var/A in reagent_list)
+
 					var/datum/reagent/R = A
 					if (R.id == reagent)
 						R.volume += amount
@@ -355,28 +370,40 @@ datum
 						// mix dem viruses
 						if(R.id == "blood" && reagent == "blood")
 							if(R.data && data)
-								if(R.data && R.data["viruses"] || data && data["viruses"])
-									var/list/this = R.data["viruses"]
-									var/list/that = data["viruses"]
-									this += that // combine the two
 
-									/* -- Turns out this code was buggy and unnecessary ---- Doohl
-									for(var/datum/disease/D in this) // makes sure no two viruses are in the reagent at the same time
-										for(var/datum/disease/d in this)//Something in here can cause an inf loop and I am tired so someone else will have to fix it.
-											if(d != D)
-												D.cure(0)
-									*/
+								if(R.data["viruses"] || data["viruses"])
+
+									var/list/mix1 = R.data["viruses"]
+									var/list/mix2 = data["viruses"]
+
+									// Stop issues with the list changing during mixing.
+									var/list/to_mix = list()
+
+									for(var/datum/disease/advance/AD in mix1)
+										to_mix += AD
+									for(var/datum/disease/advance/AD in mix2)
+										to_mix += AD
+
+									var/datum/disease/advance/AD = Advance_Mix(to_mix)
+									if(AD)
+										var/list/preserve = list(AD)
+										for(var/D in R.data["viruses"])
+											if(!istype(D, /datum/disease/advance))
+												preserve += D
+										R.data["viruses"] = preserve
 
 						handle_reactions()
 						return 0
 
 				var/datum/reagent/D = chemical_reagents_list[reagent]
 				if(D)
+
 					var/datum/reagent/R = new D.type()
 					reagent_list += R
 					R.holder = src
 					R.volume = amount
-					R.data = data
+					SetViruses(R, data) // Includes setting data
+
 					//debug
 					//world << "Adding data"
 					//for(var/D in R.data)
@@ -386,6 +413,8 @@ datum
 					my_atom.on_reagent_change()
 					handle_reactions()
 					return 0
+				else
+					warning("[my_atom] attempted to add a reagent called '[reagent]' which doesn't exist. ([usr])")
 
 				handle_reactions()
 

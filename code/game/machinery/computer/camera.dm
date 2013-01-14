@@ -34,7 +34,7 @@
 		if(stat & (NOPOWER|BROKEN))	return
 
 		if(!isAI(user))
-			user.machine = src
+			user.set_machine(src)
 
 		var/list/L = list()
 		for (var/obj/machinery/camera/C in cameranet.cameras)
@@ -50,13 +50,13 @@
 
 		var/t = input(user, "Which camera should you change to?") as null|anything in D
 		if(!t)
-			user.machine = null
+			user.unset_machine()
 			return 0
 
 		var/obj/machinery/camera/C = D[t]
 
 		if(t == "Cancel")
-			user.machine = null
+			user.unset_machine()
 			return 0
 
 		if(C)
@@ -87,6 +87,12 @@
 	network = "thunder"
 	density = 0
 	circuit = null
+
+/obj/machinery/computer/security/telescreen/update_icon()
+	icon_state = initial(icon_state)
+	if(stat & BROKEN)
+		icon_state += "b"
+	return
 
 /obj/machinery/computer/security/telescreen/entertainment
 	name = "entertainment monitor"

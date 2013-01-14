@@ -20,9 +20,6 @@
 					M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stungloved [src.name] ([src.ckey])</font>")
 					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [M.name] ([M.ckey])</font>")
 
-					log_admin("ATTACK: [M.name] ([M.ckey]) stungloved [src.name] ([src.ckey])")
-					msg_admin_attack("ATTACK: [M.name] ([M.ckey]) stungloved [src.name] ([src.ckey])") //BS12 EDIT ALG
-
 					log_attack("<font color='red'>[M.name] ([M.ckey]) stungloved [src.name] ([src.ckey])</font>")
 
 					var/armorblock = run_armor_check(M.zone_sel.selecting, "energy")
@@ -60,8 +57,7 @@
 
 	switch(M.a_intent)
 		if("help")
-			if(health > config.health_threshold_crit)
-				diary << "\[[time2text(world.timeofday, "hh:mm.ss")]\] CPR BUGHINTING: [M] shakes [src]: health - [health], threshold - [config.health_threshold_crit]. Health details: OX [getOxyLoss()] TX [getToxLoss()] BU [getFireLoss()] BR [getBruteLoss()]  Blood: [round(vessel.get_reagent_amount("blood"))] out of 560"
+			if(health >= config.health_threshold_crit)
 				help_shake_act(M)
 				return 1
 //			if(M.health < -75)	return 0
@@ -112,9 +108,6 @@
 				M.attack_log += text("\[[time_stamp()]\] <font color='red'>Used Electric Hands nanoaug power on [src.name] ([src.ckey])</font>")
 				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been shocked by [M.name] with the Electric Hands nanoaug ([M.ckey])</font>")
 
-				log_admin("ATTACK: [M.name] ([M.ckey]) used Electric Hands nanoaug on [src.name] ([src.ckey]), shocking them")
-				msg_admin_attack("ATTACK: [M.name] ([M.ckey]) used Electric Hands nanoaug on [src.name] ([src.ckey]), shocking them") //BS12 EDIT ALG
-
 				log_attack("<font color='red'>[M.name] ([M.ckey]) used Electric Hands nanoaug on [src.name]([src.ckey]), shocking them </font>")
 
 				var/armorblock = run_armor_check(M.zone_sel.selecting, "energy")
@@ -136,9 +129,6 @@
 
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[attack_verb]ed [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [attack_verb]ed by [M.name] ([M.ckey])</font>")
-
-			log_admin("ATTACK: [M.name] ([M.ckey]) [attack_verb]ed [src.name] ([src.ckey])")
-			msg_admin_attack("ATTACK: [M.name] ([M.ckey]) [attack_verb]ed [src.name] ([src.ckey])") //BS12 EDIT ALG
 
 			log_attack("<font color='red'>[M.name] ([M.ckey]) [attack_verb]ed [src.name] ([src.ckey])</font>")
 

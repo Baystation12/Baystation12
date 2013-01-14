@@ -10,7 +10,7 @@
 	g_amt = 300
 
 	//	Motion, EMP-Proof, X-Ray
-	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/sheet/plasma, /obj/item/weapon/reagent_containers/food/snacks/grown/carrot)
+	var/list/obj/item/possible_upgrades = list(/obj/item/device/assembly/prox_sensor, /obj/item/stack/sheet/mineral/plasma, /obj/item/weapon/reagent_containers/food/snacks/grown/carrot)
 	var/list/upgrades = list()
 	var/state = 0
 	var/busy = 0
@@ -85,6 +85,8 @@
 
 				C.network = "SS13"
 				C.network = input(usr, "Which network would you like to connect this camera to?", "Set Network", "SS13")
+
+				C.c_tag = "[get_area_name(src)] ([rand(1, 999)]"
 
 				for(var/i = 5; i >= 0; i -= 1)
 					var/direct = input(user, "Direction?", "Assembling Camera", null) in list("LEAVE IT", "NORTH", "EAST", "SOUTH", "WEST" )
