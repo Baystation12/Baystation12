@@ -138,10 +138,11 @@ datum/controller/game_controller/proc/process()
 
 				sleep(breather_ticks)
 
-				//SUN
+				//SUN AND LIQUID
 				timer = world.timeofday
 				last_thing_processed = sun.type
 				sun.calc_position()
+				process_liquid()
 				sun_cost = (world.timeofday - timer) / 10
 
 				sleep(breather_ticks)
@@ -158,6 +159,14 @@ datum/controller/game_controller/proc/process()
 				process_diseases()
 				diseases_cost = (world.timeofday - timer) / 10
 
+				//AIR (Faster atmos 1!)
+				if(config.fast_atmos_1)
+					if(!air_processing_killed)
+						timer = world.timeofday
+						last_thing_processed = air_master.type
+						air_master.process()
+						air_cost += (world.timeofday - timer) / 10
+
 				sleep(breather_ticks)
 
 				//MACHINES
@@ -171,6 +180,14 @@ datum/controller/game_controller/proc/process()
 				timer = world.timeofday
 				process_objects()
 				objects_cost = (world.timeofday - timer) / 10
+
+				//AIR (Faster atmos 2!)
+				if(config.fast_atmos_2)
+					if(!air_processing_killed)
+						timer = world.timeofday
+						last_thing_processed = air_master.type
+						air_master.process()
+						air_cost += (world.timeofday - timer) / 10
 
 				sleep(breather_ticks)
 
@@ -188,6 +205,14 @@ datum/controller/game_controller/proc/process()
 				powernets_cost = (world.timeofday - timer) / 10
 
 				sleep(breather_ticks)
+
+				//AIR (Faster atmos 3!)
+				if(config.fast_atmos_3)
+					if(!air_processing_killed)
+						timer = world.timeofday
+						last_thing_processed = air_master.type
+						air_master.process()
+						air_cost += (world.timeofday - timer) / 10
 
 				//EVENTS
 				timer = world.timeofday
@@ -209,6 +234,17 @@ datum/controller/game_controller/proc/process()
 				sleep( round(minimum_ticks - (end_time - start_time),1) )
 			else
 				sleep(10)
+
+datum/controller/game_controller/proc/process_liquid()
+	last_thing_processed = /datum/puddle
+	var/i = 1
+	while(i<=puddles.len)
+		var/datum/puddle/Puddle = puddles[i]
+		if(Puddle)
+			Puddle.process()
+			i++
+			continue
+		puddles.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_mobs()
 	var/i = 1
@@ -304,4 +340,3 @@ datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 				else
 					msg += "\t [varname] = [varval]\n"
 	world.log << msg
-
