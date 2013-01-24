@@ -1438,6 +1438,14 @@ datum
 			required_catalysts = list("enzyme" = 5)
 			result_amount = 10
 
+		grapewine
+			name = "Grape Wine"
+			id = "grapewine"
+			result = "wine"
+			required_reagents = list("grape" = 10)
+			required_catalysts = list("enzyme" = 5)
+			result_amount = 10
+
 		spacebeer
 			name = "Space Beer"
 			id = "spacebeer"

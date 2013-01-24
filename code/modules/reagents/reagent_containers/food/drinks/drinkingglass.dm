@@ -276,8 +276,21 @@
 					desc = "A glass of deadly juice."
 				if("carrotjuice")
 					icon_state = "carrotjuice"
-					name = "Glass of  carrot juice"
+					name = "Glass of carrot juice"
 					desc = "It is just like a carrot but without crunching."
+				if("watermelonjuice")
+					icon_state = "glass_red"
+					name = "Glass of watermelon juice"
+					desc = "Delicious juice made from watermelon."
+				if("apple")
+					icon_state = "glass_yellow"
+					name = "Glass of apple juice"
+					desc = "Not a low calorie drink."
+				if("grape")
+					icon_state = "berryjuice"
+					name = "Glass of grape juice"
+					desc = "Tangy and sweet."
+
 				if("banana")
 					icon_state = "banana"
 					name = "Glass of banana juice"

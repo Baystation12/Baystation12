@@ -2327,6 +2327,32 @@ datum
 				..()
 				return
 
+		apple_juice
+			name = "Apple Juice"
+			id = "apple"
+			description = "Not a low calorie drink."
+			reagent_state = LIQUID
+			nutriment_factor = 1 * REAGENTS_METABOLISM
+			color = "#302000" // rgb: 48, 32, 0
+
+			on_mob_life(var/mob/living/M as mob)
+				M.nutrition += nutriment_factor
+				..()
+				return
+
+		grape_juice
+			name = "Grape Juice"
+			id = "grape"
+			description = "Tangy and sweet."
+			reagent_state = LIQUID
+			nutriment_factor = 1 * REAGENTS_METABOLISM
+			color = "#863333" // rgb: 134, 51, 51
+
+			on_mob_life(var/mob/living/M as mob)
+				M.nutrition += nutriment_factor
+				..()
+				return
+
 		banana
 			name = "Banana Juice"
 			id = "banana"
@@ -2374,6 +2400,8 @@ datum
 				M.nutrition += nutriment_factor
 				..()
 				return
+
+
 
 		milk
 			name = "Milk"
