@@ -26,7 +26,12 @@ em						{font-style: normal;	font-weight: bold;}
 .deadsay				{color: #5c00e6;}
 .radio					{color: #008000;}
 .deptradio				{color: #993399;}
+<<<<<<< HEAD
 .comradio				{color: #885500;}
+=======
+.comradio				{color: #ACA82D;}
+.secradio				{color: #3182ac;}
+>>>>>>> Security frequency chatter now appears in cyan (Similar to how command is gold)
 .syndradio				{color: #6D3F40;}
 
 .alert					{color: #ff0000;}
