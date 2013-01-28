@@ -66,10 +66,6 @@
 	var/wikiurl = "http://baystation12.net/wiki/index.php?title=Main_Page"
 	var/forumurl = "http://baystation12.net/forums/"
 
-	var/fast_atmos_1 = 0
-	var/fast_atmos_2 = 0
-	var/fast_atmos_3 = 0
-
 	//Alert level description
 	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
 	var/alert_desc_blue_upto = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
