@@ -414,6 +414,13 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 							Weaken(3)
 							src << "\red You feel weak."
 							emote("collapse")
+						if(prob(15))
+							if(!(f_style == "Shaved") || !(h_style == "Bald"))
+								src << "\red Your hair starts to fall out in clumps..."
+								spawn(50)
+									f_style = "Shaved"
+									h_style = "Bald"
+									update_hair()
 						updatehealth()
 
 					if(75 to 100)
