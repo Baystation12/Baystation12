@@ -497,7 +497,7 @@ proc/airborne_can_reach(turf/source, turf/target)
 	name = "Disarming Syndrome"
 	stage = 4
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		var/datum/organ/external/org = mob.organs["r_arm"]
+		var/datum/limb/org = mob.organs["r_arm"]
 		org.take_damage(3,0,0,0)
 		mob << "\red You feel a sting in your right arm."*/
 

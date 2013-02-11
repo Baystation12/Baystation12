@@ -797,7 +797,7 @@ datum
 					if(!M.unacidable)
 						if(prob(15) && istype(M, /mob/living/carbon/human) && volume >= 30)
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/external/affecting = H.get_organ("head")
+							var/datum/limb/affecting = H.get_organ("head")
 							if(affecting)
 								if(affecting.take_damage(10, 5))
 									H.UpdateDamageIcon()
@@ -861,7 +861,7 @@ datum
 							return
 
 						if(!H.unacidable)
-							var/datum/organ/external/affecting = H.get_organ("head")
+							var/datum/limb/affecting = H.get_organ("head")
 							if(affecting.take_damage(rand(10,20), rand(0,10)))
 								H.UpdateDamageIcon()
 							if(prob(25))
@@ -889,7 +889,7 @@ datum
 					if(!M.unacidable)
 						if(ishuman(M))
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/external/affecting = H.get_organ("head")
+							var/datum/limb/affecting = H.get_organ("head")
 							if(affecting.take_damage(rand(10,20), rand(0,10)))
 								H.UpdateDamageIcon()
 							if(prob(25))
