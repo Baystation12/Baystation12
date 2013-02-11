@@ -171,3 +171,25 @@
 		deadman = 1
 		processing_objects.Add(src)
 		usr.visible_message("\red [usr] moves their finger over [src]'s signal button...")
+
+
+// Embedded signaller used in grenade construction.
+// It's necessary because the signaler doens't have an off state.
+// Generated during grenade construction.  -Sayu
+/obj/item/device/assembly/signaler/reciever
+	var/on = 0
+
+	proc/toggle_safety()
+		on = !on
+
+	activate()
+		toggle_safety()
+		return 1
+
+	describe()
+		return "The radio reciever is [on?"on":"off"]."
+
+	receive_signal(datum/signal/signal)
+		if(!on) return
+		return ..(signal)
+
