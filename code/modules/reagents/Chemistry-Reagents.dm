@@ -775,7 +775,7 @@ datum
 							return
 
 						if(H.head)
-							if(prob(15) && !H.head.unacidable)
+							if(prob(10) && !H.head.unacidable)
 								del(H.head)
 								H.update_inv_head()
 								H << "\red Your helmet melts away but protects you from the acid"
@@ -852,7 +852,7 @@ datum
 							return
 
 						if(H.head)
-							if(prob(25) && !H.head.unacidable)
+							if(prob(20) && !H.head.unacidable)
 								del(H.head)
 								H.update_inv_head()
 								H << "\red Your helmet melts away but protects you from the acid"
