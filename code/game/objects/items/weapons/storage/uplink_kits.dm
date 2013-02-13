@@ -80,7 +80,7 @@
 	..()
 	var/obj/item/weapon/implanter/O = new(src)
 	O.imp = new /obj/item/weapon/implant/freedom(O)
-	O.update()
+	O.update_icon()
 	return
 
 /obj/item/weapon/storage/box/syndie_kit/imp_compress
@@ -106,7 +106,7 @@
 	..()
 	var/obj/item/weapon/implanter/O = new(src)
 	O.imp = new /obj/item/weapon/implant/uplink(O)
-	O.update()
+	O.update_icon()
 	return
 
 /obj/item/weapon/storage/box/syndie_kit/space
