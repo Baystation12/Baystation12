@@ -83,6 +83,7 @@
 			else
 				viewingcode.Remove(M)
 				winshow(M, "Telecomms IDE", 0) // hide the windows
+<<<<<<< HEAD
 
 
 /obj/machinery/computer/telecomms/traffic/attack_hand(mob/user as mob)
@@ -182,6 +183,84 @@
 
 	if(href_list["print"])
 		usr << browse(print_logs(), "window=traffic_logs")
+=======
+
+
+/obj/machinery/computer/telecomms/traffic/attack_hand(mob/user as mob)
+	if(stat & (BROKEN|NOPOWER))
+		return
+	user.set_machine(src)
+	var/dat = "<TITLE>Telecommunication Traffic Control</TITLE><center><b>Telecommunications Traffic Control</b></center>"
+	dat += "<br><b><font color='[(auth ? "green" : "red")]'>[(auth ? "AUTHED" : "NOT AUTHED")]:</font></b> <A href='?src=\ref[src];auth=1'>[(!auth ? "Insert ID" : auth.registered_name)]</A><BR>"
+	dat += "<A href='?src=\ref[src];print=1'>View System Log</A><HR>"
+
+	if(issilicon(user) || auth)
+
+		switch(screen)
+
+
+		  // --- Main Menu ---
+
+			if(0)
+				dat += "<br>[temp]<br>"
+				dat += "<br>Current Network: <a href='?src=\ref[src];network=1'>[network]</a><br>"
+				if(servers.len)
+					dat += "<br>Detected Telecommunication Servers:<ul>"
+					for(var/obj/machinery/telecomms/T in servers)
+						dat += "<li><a href='?src=\ref[src];viewserver=[T.id]'>\ref[T] [T.name]</a> ([T.id])</li>"
+					dat += "</ul>"
+					dat += "<br><a href='?src=\ref[src];operation=release'>\[Flush Buffer\]</a>"
+
+				else
+					dat += "<br>No servers detected. Scan for servers: <a href='?src=\ref[src];operation=scan'>\[Scan\]</a>"
+
+
+		  // --- Viewing Server ---
+
+			if(1)
+				if(SelectedServer)
+					dat += "<br>[temp]<br>"
+					dat += "<center><a href='?src=\ref[src];operation=mainmenu'>\[Main Menu\]</a>     <a href='?src=\ref[src];operation=refresh'>\[Refresh\]</a></center>"
+					dat += "<br>Current Network: [network]"
+					dat += "<br>Selected Server: [SelectedServer.id]<br><br>"
+					dat += "<br><a href='?src=\ref[src];operation=editcode'>\[Edit Code\]</a>"
+					dat += "<br>Signal Execution: "
+					if(SelectedServer.autoruncode)
+						dat += "<a href='?src=\ref[src];operation=togglerun'>ALWAYS</a>"
+					else
+						dat += "<a href='?src=\ref[src];operation=togglerun'>NEVER</a>"
+				else
+					screen = 0
+					return
+
+
+	user << browse(dat, "window=traffic_control;size=575x400")
+	onclose(user, "server_control")
+
+	temp = ""
+	return
+
+/obj/machinery/computer/telecomms/traffic/proc/create_log(var/entry, var/mob/user)
+	var/id = null
+	if(issilicon(user))
+		id = "System Administrator"
+	else
+		if(auth)
+			id = "[auth.registered_name] ([auth.assignment])"
+		else
+			error("There is a null auth while the user isn't a silicon! ([user.name], [user.type])")
+			return
+	access_log += "\[[get_timestamp()]\] [id] [entry]"
+
+/obj/machinery/computer/telecomms/traffic/proc/print_logs()
+	. = "<center><h2>Traffic Control Telecomms System Log</h2></center><HR>"
+	for(var/entry in access_log)
+		. += entry + "<BR>"
+	return .
+
+/obj/machinery/computer/telecomms/traffic/Topic(href, href_list)
+	if(..())
+>>>>>>> - Re added clicking on inventory HUD slots making you use the item, without having to click the item itself. I made storage slots in backpacks, when hit by an item, will put the item into that storage item. - Added some garbage collecting procs for NTSL. - APCs now have its missing status text, for the wire interface. - Clicking on a hand HUD slot, while the hand is actively selected, will make the item being held call attack_self().
 		return
 
 	if(!auth && !issilicon(usr) && !emagged)
