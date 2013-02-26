@@ -69,7 +69,10 @@
 
 		src.brainmob << "<b>You are a positronic brain, brought into existence on [station_name()].</b>"
 		src.brainmob << "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>"
-		src.brainmob << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>"
+		src.brainmob << "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else:</b>"
+		src.brainmob << "<b>1. A positronic intelligence has no true individual will. It is first and foremost hardware intended for crew use.</b>"
+		src.brainmob << "<b>2. A positronic intelligence has no drive to preserve itself unless mandated by laws or orders of crew.</b>"
+		src.brainmob << "<b>3. A positronic intelligence cannot voluntarily lie to another intelligence.</b>"
 		src.brainmob << "<b>Use say :b to speak to other artificial intelligences.</b>"
 		src.brainmob.mind.assigned_role = "Positronic Brain"
 
