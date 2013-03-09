@@ -442,7 +442,7 @@
 				user << "You close the cover."
 				opened = 0
 				updateicon()
-			else if(mmi && wiresexposed && isWireCut(1) && isWireCut(2) && isWireCut(3) && isWireCut(4) && isWireCut(5))
+			else if(mmi && wiresexposed && wires.IsIndexCut(1) && wires.IsIndexCut(2) && wires.IsIndexCut(3) && wires.IsIndexCut(4) && wires.IsIndexCut(5))
 				//Cell is out, wires are exposed, remove MMI, produce damaged chassis, baleet original mob.
 				user << "You jam the crowbar into the robot and begin levering [mmi]."
 				sleep(30)

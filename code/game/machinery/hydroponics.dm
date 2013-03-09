@@ -547,7 +547,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 			user.visible_message("\red [user] starts uprooting the weeds.", "\red You remove the weeds from [src].")
 			weedlevel = 0
 			update_icon()
-			src.updateicon()
+			update_icon()
 		else
 			user << "\red This plot is completely devoid of weeds. It doesn't need uprooting."
 

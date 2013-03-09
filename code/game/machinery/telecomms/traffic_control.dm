@@ -293,3 +293,6 @@
 	if(issilicon(user) || in_range(user, src))
 		return 1
 	return 0
+
+/obj/machinery/computer/telecomms/traffic/proc/get_timestamp()
+	return time2text(world.time + 432000, "hh:mm:ss")
