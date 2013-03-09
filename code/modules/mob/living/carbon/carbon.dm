@@ -187,7 +187,7 @@
 					status = "MISSING!"
 				if(status == "")
 					status = "OK"
-				src << "\t [status == "OK" ? "\blue" : "\red"] My [org.display_name)] is [status]."
+				src << "\t [status == "OK" ? "\blue" : "\red"] My [org.display_name] is [status]."
 			if(SKELETON in H.mutations && !H.w_uniform && !H.wear_suit)
 				H.play_xylophone()
 		else

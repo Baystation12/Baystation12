@@ -1,4 +1,4 @@
-
+/*
 
 //TODO: put these somewhere else
 /client/proc/mimewall()
@@ -44,3 +44,4 @@
 		spawn(3000)
 			H.miming = 1
 	return
+*/
