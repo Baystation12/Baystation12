@@ -182,7 +182,9 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	add_fingerprint(usr)
 
 /obj/item/device/radio/proc/isWireCut(var/index)
-	return wires.IsIndexCut(index)/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
+	return wires.IsIndexCut(index)
+
+/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
 	if(channel && channels && channels.len > 0)
 		if (channel == "department")
