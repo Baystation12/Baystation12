@@ -61,7 +61,7 @@
 				M << "<span class='notice'>Remove your mask!</span>"
 				return 0
 			if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
-				M << "<span class='notice'>Remove \his mask!</span>"
+				M << "<span class='notice'>Remove his mask!</span>"
 				return 0
 
 			var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human()
