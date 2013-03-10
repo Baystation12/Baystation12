@@ -15,7 +15,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	var/traitor_frequency = 0 //tune to frequency to unlock traitor supplies
 	var/canhear_range = 3 // the range which mobs can hear this radio from
 	var/obj/item/device/radio/patch_link = null
-	var/wires = WIRE_SIGNAL | WIRE_RECEIVE | WIRE_TRANSMIT
+	var/datum/wires/radio/wires = null
 	var/b_stat = 0
 	var/broadcasting = 0
 	var/listening = 1
@@ -32,9 +32,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	w_class = 2
 	g_amt = 25
 	m_amt = 75
-	var/const/WIRE_SIGNAL = 1 //sends a signal, like to set off a bomb or electrocute someone
-	var/const/WIRE_RECEIVE = 2
-	var/const/WIRE_TRANSMIT = 4
+
 	var/const/TRANSMISSION_DELAY = 5 // only 2/second/radio
 	var/const/FREQ_LISTENING = 1
 		//FREQ_BROADCASTING = 2
@@ -49,6 +47,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
 /obj/item/device/radio/New()
+	wires = new(src)
 	..()
 	if(radio_controller)
 		initialize()
@@ -104,14 +103,9 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	return
 
 /obj/item/device/radio/proc/text_wires()
-	if (!b_stat)
-		return ""
-	return {"
-			<hr>
-			Green Wire: <A href='byond://?src=\ref[src];wires=4'>[(wires & 4) ? "Cut" : "Mend"] Wire</A><BR>
-			Red Wire:   <A href='byond://?src=\ref[src];wires=2'>[(wires & 2) ? "Cut" : "Mend"] Wire</A><BR>
-			Blue Wire:  <A href='byond://?src=\ref[src];wires=1'>[(wires & 1) ? "Cut" : "Mend"] Wire</A><BR>
-			"}
+	if (b_stat)
+		return "<BR>" + wires.GetInteractWindow(0, 0)
+	return
 
 
 /obj/item/device/radio/proc/text_sec_channel(var/chan_name, var/chan_stat)
@@ -175,14 +169,6 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 				channels[chan_name] &= ~FREQ_LISTENING
 			else
 				channels[chan_name] |= FREQ_LISTENING
-	else if (href_list["wires"])
-		var/t1 = text2num(href_list["wires"])
-		if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
-			return
-		if (wires & t1)
-			wires &= ~t1
-		else
-			wires |= t1
 	if (!( master ))
 		if (istype(loc, /mob))
 			interact(loc)
@@ -194,6 +180,9 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 		else
 			updateDialog()
 	add_fingerprint(usr)
+
+/obj/item/device/radio/proc/isWireCut(var/index)
+	return wires.IsIndexCut(index)
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel) //BS12 EDIT
 	var/datum/radio_frequency/connection = null
@@ -223,7 +212,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 
 	//  Uncommenting this. To the above comment:
 	// 	The permacell radios aren't suppose to be able to transmit, this isn't a bug and this "fix" is just making radio wires useless. -Giacom
-	if(!(src.wires & WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
+	if(isWireCut(WIRE_TRANSMIT)) // The device has to have all its wires and shit intact
 		return
 
 
@@ -450,7 +439,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 		else
 			eqjobname = "Unknown"
 
-		if (!(wires & WIRE_TRANSMIT))
+		if (isWireCut(WIRE_TRANSMIT))
 			return
 
 		var/list/receive = list()
@@ -495,7 +484,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 					freq_text = "Medical"
 				if(1357)
 					freq_text = "Engineering"
-				if(1359)
+				if(SEC_FREQ)
 					freq_text = "Security"
 //				if(1349)
 //					freq_text = "Mining"
@@ -513,6 +502,8 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 				part_a = "<span class='syndradio'><span class='name'>"
 			else if (display_freq==COMM_FREQ)
 				part_a = "<span class='comradio'><span class='name'>"
+			else if (display_freq==SEC_FREQ)
+				part_a = "<span class='secradio'><span class='name'>"
 			else if (display_freq in DEPT_FREQS)
 				part_a = "<span class='deptradio'><span class='name'>"
 
@@ -615,7 +606,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	// what the range is in which mobs will hear the radio
 	// returns: -1 if can't receive, range otherwise
 
-	if (!(wires & WIRE_RECEIVE))
+	if (isWireCut(WIRE_RECEIVE))
 		return -1
 	if(!listening)
 		return -1

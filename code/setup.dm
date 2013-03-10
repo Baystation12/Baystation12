@@ -141,7 +141,10 @@ var/turf/space/Space_Tile = locate(/turf/space) // A space tile to reference whe
 								// was 2 atm
 
 //This was a define, but I changed it to a variable so it can be changed in-game.(kept the all-caps definition because... code...) -Errorage
-var/MAX_EXPLOSION_RANGE = 14
+var/MAX_EX_DEVESTATION_RANGE = 3
+var/MAX_EX_HEAVY_RANGE = 7
+var/MAX_EX_LIGHT_RANGE = 14
+var/MAX_EX_FLASH_RANGE = 14
 //#define MAX_EXPLOSION_RANGE		14					// Defaults to 12 (was 8) -- TLE
 
 #define HUMAN_STRIP_DELAY 40 //takes 40ds = 4s to strip someone.
@@ -518,11 +521,11 @@ var/list/liftable_structures = list(\
 #define INVISIBILITY_MAXIMUM 100
 
 //Object specific defines
-#define CANDLE_LUM 3 //For how bright candles are
+#define CANDLE_LUM 2 //For how bright candles are
 
 
 //Some mob defines below
-#define AI_CAMERA_LUMINOSITY 6
+#define AI_CAMERA_LUMINOSITY 5
 
 #define BORGMESON 1
 #define BORGTHERM 2

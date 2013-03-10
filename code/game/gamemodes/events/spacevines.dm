@@ -163,7 +163,7 @@
 	if(!energy)
 		src.icon_state = pick("Med1", "Med2", "Med3")
 		energy = 1
-		src.opacity = 1
+		SetOpacity(1)
 		layer = 5
 	else
 		src.icon_state = pick("Hvy1", "Hvy2", "Hvy3")
@@ -246,13 +246,13 @@
 /proc/spacevine_infestation()
 
 	spawn() //to stop the secrets panel hanging
-		var/list/turf/simulated/floor/turfs = list() //list of all the empty floor turfs in the hallway areas
-		for(var/areapath in typesof(/area/hallway))
-			var/area/A = locate(areapath)
-			for(var/area/B in A.related)
-				for(var/turf/simulated/floor/F in B.contents)
-					if(!F.contents.len)
-						turfs += F
+
+		var/list/turfs = list() //list of all the empty floor turfs in the hallway areas
+
+		for(var/area/hallway/A in world)
+			for(var/turf/simulated/floor/F in A)
+				if(!F.contents.len)
+					turfs += F
 
 		if(turfs.len) //Pick a turf to spawn at if we can
 			var/turf/simulated/floor/T = pick(turfs)

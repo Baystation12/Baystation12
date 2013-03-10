@@ -2,95 +2,164 @@
 	name = "Grenade Casing"
 	icon_state = "chemg"
 	item_state = "flashbang"
-	desc = "A hand made chemical grenade."
 	w_class = 2.0
 	force = 2.0
 	var/stage = 0
 	var/state = 0
 	var/path = 0
-	var/obj/item/device/assembly_holder/detonator = null
+	var/obj/item/weapon/circuitboard/circuit = null
 	var/list/beakers = new/list()
 	var/list/allowed_containers = list(/obj/item/weapon/reagent_containers/glass/beaker, /obj/item/weapon/reagent_containers/glass/bottle)
 	var/affected_area = 3
+	var/obj/item/device/assembly/trigger = null // Grenade assemblies by Sayu
 
 	New()
 		var/datum/reagents/R = new/datum/reagents(1000)
 		reagents = R
 		R.my_atom = src
+		verbs -= /obj/item/weapon/grenade/chem_grenade/verb/rotate // only used for infrared beam grenades
+
+	// When constructing a grenade in code rather than by hand
+	// Pass in the path to an assembly -Sayu
+	proc/CreateDefaultTrigger(var/type)
+		if(!ispath(type,/obj/item/device/assembly) || (type in list(/obj/item/device/assembly,/obj/item/device/assembly/igniter)))
+			return
+		if(trigger) del trigger
+		if(type == /obj/item/device/assembly/signaler) type = /obj/item/device/assembly/signaler/reciever
+		if(type == /obj/item/device/assembly/infra)
+			verbs += /obj/item/weapon/grenade/chem_grenade/verb/rotate
+
+		trigger = new type(src)
+		if(!trigger.secured) 		// some assemblies require this
+			trigger.toggle_secure()	// so they can add themselves to processing_objects()
 
 	attack_self(mob/user as mob)
-		if(!stage || stage==1)
-			if(detonator)
-//				detonator.loc=src.loc
-				detonator.detached()
-				usr.put_in_hands(detonator)
-				detonator=null
-				stage=0
-				icon_state = initial(icon_state)
-			else if(beakers.len)
-				for(var/obj/B in beakers)
-					if(istype(B))
-						beakers -= B
-						user.put_in_hands(B)
-			name = "unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]"
-		if(stage > 1 && !active && clown_check(user))
-			user << "<span class='warning'>You prime \the [name]!</span>"
+		if(stage > 1 &&  !active && trigger)
+			if(clown_check(user))
+				trigger.activate()
+				user << "<span class='warning'>You prime the [name]!  [trigger.describe()]</span>"
 
-			log_attack("<font color='red'>[user.name] ([user.ckey]) primed \a [src].</font>")
-			log_admin("ATTACK: [user] ([user.ckey]) primed \a [src].")
-			message_admins("ATTACK: [user] ([user.ckey]) primed \a [src].")
+				active = 1
+				icon_state = initial(icon_state) + "_active"
+				add_fingerprint(user)
+				if(iscarbon(user))
+					var/mob/living/carbon/C = user
+					C.throw_mode_on()
 
-			activate()
-			add_fingerprint(user)
-			if(iscarbon(user))
-				var/mob/living/carbon/C = user
-				C.throw_mode_on()
+	HasEntered(AM as mob|obj)
+		if(trigger && trigger.secured)
+			trigger.HasEntered(AM)
+
+	HasProximity(atom/movable/AM as mob|obj)
+		if(trigger && trigger.secured)
+			trigger.HasProximity(AM)
+
+	examine()
+		set src in usr
+		usr << desc
+		if(trigger)
+			if(trigger.secured)
+				usr << trigger.describe()
+			else
+				usr << "The [trigger] is not properly secured."
+		if(/obj/item/weapon/grenade/chem_grenade/verb/rotate in verbs)
+			usr << "The sensor is rigged to face [dir2text(dir)]"
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 
-		if(istype(W,/obj/item/device/assembly_holder) && (!stage || stage==1) && path != 2)
-			var/obj/item/device/assembly_holder/det = W
-			if(istype(det.a_left,det.a_right.type) || (!isigniter(det.a_left) && !isigniter(det.a_right)))
-				user << "\red Assembly must contain one igniter."
+		if(istype(W,/obj/item/device/assembly_holder) && !stage && path != 2)
+
+			var/obj/item/device/assembly/igniter/I = locate() in W
+
+			if(!I)
+				user << "You need an igniter if you're going to make any sort of bomb!"
 				return
-			if(!det.secured)
-				user << "\red Assembly must be secured with screwdriver."
+
+			I.loc = src				// make the igniter no longer [in W]
+			trigger = locate() in W // should be one other assembly
+
+			if(!trigger)
+				warning("Could not find trigger assembly in assembly holder: [W]")
+				user << "You attempt to fit the [W] to the [src], but fail.  It seems something is wrong with the [W]."
+				I.loc = W
+				trigger = null
 				return
+
+			//If you add a new assembly, create a new effective grenade type here
+			//If you don't, grenade construction will fail.
+			switch(trigger.type)
+				if(/obj/item/device/assembly/infra)
+					name = "unsecured tripwire mine"
+					desc = "A grenade casing with an infrared tripwire assembly."
+					verbs += /obj/item/weapon/grenade/chem_grenade/verb/rotate
+				if(/obj/item/device/assembly/mousetrap,/obj/item/device/assembly/mousetrap/armed)
+					name = "unsecured contact mine"
+					desc = "A grenade casing with a pressure switch assembly."
+					var/obj/item/device/assembly/mousetrap/M = trigger
+					M.armed = 0 // Make it safe
+				if(/obj/item/device/assembly/prox_sensor)
+					name = "unsecured proximity mine"
+					desc = "A grenade casing with a short-range sensor assembly."
+				if(/obj/item/device/assembly/signaler)
+					name = "unsecured remote mine"
+					desc = "A grenade casing with a radio tranciever assembly."
+					var/obj/item/device/assembly/signaler/reciever/R = new (src)
+					var/obj/item/device/assembly/signaler/S = trigger
+					R.frequency = S.frequency
+					R.code = S.code
+					trigger = R
+					del S
+				if(/obj/item/device/assembly/timer)
+					name = "unsecured grenade"
+					desc = "A grenade casing with a timer assembly."
+				else
+					user << "You need some sort of trigger mechanism!"
+					I.loc = W
+					trigger = null
+					return //  Cancel construction
+
+			trigger.loc = src	// Take the trigger mechanism for safe keeping
+
+			del I // The igniter assembly doesn't *actually* do anything
+			del W // The assembly holder is no longer needed
+
+			icon_state = initial(icon_state) +"_ass"
+			stage = 1
 			path = 1
 			user << "\blue You add [W] to the metal casing."
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 25, -3)
-			user.remove_from_mob(det)
-			det.loc = src
-			detonator = det
-			icon_state = initial(icon_state) +"_ass"
-			name = "unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]"
-			stage = 1
-		else if(istype(W,/obj/item/weapon/screwdriver) && path != 2)
-			if(stage == 1)
-				path = 1
-				if(beakers.len)
-					user << "\blue You lock the assembly."
-					name = "grenade"
-				else
-//					user << "\red You need to add at least one beaker before locking the assembly."
-					user << "\blue You lock the empty assembly."
-					name = "fake grenade"
+
+		else if(istype(W,/obj/item/device/multitool) && trigger && trigger.secured)
+			trigger.interact(user) // Set trigger options
+
+		else if(istype(W,/obj/item/weapon/screwdriver) && stage == 1 && path != 2)
+			path = 1
+			if(beakers.len)
+				switch(trigger.type)
+					if(/obj/item/device/assembly/infra)
+						name = "tripwire mine"
+					if(/obj/item/device/assembly/mousetrap,/obj/item/device/assembly/mousetrap/armed)
+						name = "contact mine"
+					if(/obj/item/device/assembly/prox_sensor)
+						name = "proximity mine"
+					if(/obj/item/device/assembly/signaler/reciever)
+						name = "remote mine"
+					if(/obj/item/device/assembly/timer)
+						name = "grenade"
+					else
+						warning("Bad trigger in grenade during final construction: [trigger]")
+
+				if(!trigger.secured)
+					trigger.toggle_secure() // Necessary for some assemblies
+
+				user << "\blue You lock the assembly."
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)
 				icon_state = initial(icon_state) +"_locked"
 				stage = 2
-			else if(stage == 2)
-				if(active && prob(95))
-					user << "\red You trigger the assembly!"
-					prime()
-					return
-				else
-					user << "\blue You unlock the assembly."
-					playsound(src.loc, 'sound/items/Screwdriver.ogg', 25, -3)
-					name = "unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]"
-					icon_state = initial(icon_state) + (detonator?"_ass":"")
-					stage = 1
-					active = 0
-		else if(is_type_in_list(W, allowed_containers) && (!stage || stage==1) && path != 2)
+			else
+				user << "\red You need to add at least one beaker before locking the assembly."
+
+		else if(is_type_in_list(W, allowed_containers) && stage == 1 && path != 2)
 			path = 1
 			if(beakers.len == 2)
 				user << "\red The grenade can not hold more containers."
@@ -101,53 +170,18 @@
 					user.drop_item()
 					W.loc = src
 					beakers += W
-					stage = 1
-					name = "unsecured grenade with [beakers.len] containers[detonator?" and detonator":""]"
 				else
 					user << "\red \the [W] is empty."
 
-	examine()
-		set src in usr
-		usr << desc
-		if(detonator)
-			usr << "With attached [detonator.name]"
-
-	activate(mob/user as mob)
-		if(active) return
-	
-		if(detonator)
-			if(!isigniter(detonator.a_left))
-				detonator.a_left.activate()
-				active = 1
-			if(!isigniter(detonator.a_right))
-				detonator.a_right.activate()
-				active = 1
-		if(active)
-			icon_state = initial(icon_state) + "_active"
-
-			if(user)
-				log_attack("<font color='red'>[user.name] ([user.ckey]) primed \a [src]</font>")
-				log_admin("ATTACK: [user] ([user.ckey]) primed \a [src]")
-				message_admins("ATTACK: [user] ([user.ckey]) primed \a [src]")
-
-		return
-
-	proc/primed(var/primed = 1)
-		if(active)
-			icon_state = initial(icon_state) + (primed?"_primed":"_active")
-
 	prime()
-		if(!stage || stage<2) return
-
 		//if(prob(reliability))
 		var/has_reagents = 0
 		for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
 			if(G.reagents.total_volume) has_reagents = 1
 
-		active = 0
 		if(!has_reagents)
-			icon_state = initial(icon_state) +"_locked"
 			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 50, 1)
+			state = 0
 			return
 
 		playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
@@ -175,14 +209,77 @@
 			for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
 				G.loc = get_turf(src.loc)*/
 
+	//This hack is necessary for infrared beam grenades.
+	//That said, you don't come across infrared sensors much...
+	verb/rotate()
+		set name = "Rotate Grenade"
+		set category = "Object"
+		set src in usr
 
+		dir = turn(dir, 90)
+		usr << "The grenade is now facing [dir2text(dir)]"
+		trigger.dir = dir
+		return
+
+// Large chem grenades accept slime cores and use the appropriately.
 /obj/item/weapon/grenade/chem_grenade/large
 	name = "Large Chem Grenade"
 	desc = "An oversized grenade that affects a larger area."
 	icon_state = "large_grenade"
-	allowed_containers = list(/obj/item/weapon/reagent_containers/glass)
+	allowed_containers = list(/obj/item/weapon/reagent_containers/glass,/obj/item/weapon/reagent_containers/food/condiment,
+								/obj/item/weapon/reagent_containers/food/drinks, /obj/item/slime_extract)
 	origin_tech = "combat=3;materials=3"
 	affected_area = 4
+	prime()
+		if(stage < 2)
+			return // Signaller on an incomplete grenade, probably
+
+		var/has_reagents = 0
+		var/obj/item/slime_extract/valid_core = null
+
+		for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
+			if(!istype(G)) continue
+			if(G.reagents.total_volume) has_reagents = 1
+		for(var/obj/item/slime_extract/E in beakers)
+			if(!istype(E)) continue
+			if(E.Uses) valid_core = E
+			if(E.reagents.total_volume) has_reagents = 1
+
+		if(!has_reagents)
+			playsound(src.loc, 'sound/items/Screwdriver2.ogg', 50, 1)
+			state = 0
+			if(trigger)
+				trigger.toggle_secure()
+			return
+
+		playsound(src.loc, 'sound/effects/bamf.ogg', 50, 1)
+
+		if(valid_core)
+			for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
+				G.reagents.trans_to(valid_core, G.reagents.total_volume)
+
+			// If there is still a core (sometimes it's used up)
+			// and there are reagents left, behave normally
+
+			if(valid_core && valid_core.reagents && valid_core.reagents.total_volume)
+				valid_core.reagents.trans_to(src,valid_core.reagents.total_volume)
+		else
+			for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
+				G.reagents.trans_to(src, G.reagents.total_volume)
+
+		if(src.reagents.total_volume) //The possible reactions didnt use up all reagents.
+			var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
+			steam.set_up(10, 0, get_turf(src))
+			steam.attach(src)
+			steam.start()
+
+			for(var/atom/A in view(affected_area, src.loc))
+				if( A == src ) continue
+				src.reagents.reaction(A, 1, 10)
+
+		invisibility = INVISIBILITY_MAXIMUM //Why am i doing this?
+		spawn(50)		   //To make sure all reagents can work
+			del(src)	   //correctly before deleting the grenade.
 
 /obj/item/weapon/grenade/chem_grenade/metalfoam
 	name = "Metal-Foam Grenade"
@@ -199,11 +296,11 @@
 		B2.reagents.add_reagent("foaming_agent", 10)
 		B2.reagents.add_reagent("pacid", 10)
 
-		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
-
 		beakers += B1
 		beakers += B2
-		icon_state = initial(icon_state) +"_locked"
+		icon_state = "grenade"
+
+		CreateDefaultTrigger(/obj/item/device/assembly/timer)
 
 /obj/item/weapon/grenade/chem_grenade/incendiary
 	name = "Incendiary Grenade"
@@ -220,11 +317,11 @@
 		B2.reagents.add_reagent("plasma", 25)
 		B2.reagents.add_reagent("sacid", 25)
 
-		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
-
 		beakers += B1
 		beakers += B2
-		icon_state = initial(icon_state) +"_locked"
+		icon_state = "grenade"
+
+		CreateDefaultTrigger(/obj/item/device/assembly/timer)
 
 /obj/item/weapon/grenade/chem_grenade/antiweed
 	name = "weedkiller grenade"
@@ -246,6 +343,8 @@
 		beakers += B2
 		icon_state = "grenade"
 
+		CreateDefaultTrigger(/obj/item/device/assembly/timer)
+
 /obj/item/weapon/grenade/chem_grenade/cleaner
 	name = "Cleaner Grenade"
 	desc = "BLAM!-brand foaming space cleaner. In a special applicator for rapid cleaning of wide areas."
@@ -261,8 +360,8 @@
 		B2.reagents.add_reagent("water", 40)
 		B2.reagents.add_reagent("cleaner", 10)
 
-		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
-
 		beakers += B1
 		beakers += B2
-		icon_state = initial(icon_state) +"_locked"
+		icon_state = "grenade"
+
+		CreateDefaultTrigger(/obj/item/device/assembly/timer)
