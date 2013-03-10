@@ -1,10 +1,10 @@
 // All mobs should have custom emote, really..
 mob/proc/custom_emote(var/m_type=1,var/message = null)
 
-/*	if(!emote_allowed && usr == src)
+	if(!use_me && usr == src)
 		usr << "You are unable to emote."
 		return
-*/
+
 	var/muzzled = istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
 	if(m_type == 2 && muzzled) return
 
@@ -32,19 +32,19 @@ mob/proc/custom_emote(var/m_type=1,var/message = null)
 				continue
 			if(findtext(message," snores.")) //Because we have so many sleeping people.
 				break
-			if(M.stat == 2 && (M.client.prefs.toggles & CHAT_GHOSTSIGHT) && !(M in viewers(src,null)))
+			if(M.stat == 2 && M.client.ghost_sight && !(M in viewers(src,null)))
 				M.show_message(message)
 
 
 		if (m_type & 1)
 			for (var/mob/O in viewers(src, null))
-//				if(istype(O,/mob/living/carbon/human))
-//					for(var/mob/living/parasite/P in O:parasites)
-//						P.show_message(message, m_type)
+				if(istype(O,/mob/living/carbon/human))
+					for(var/mob/living/parasite/P in O:parasites)
+						P.show_message(message, m_type)
 				O.show_message(message, m_type)
 		else if (m_type & 2)
 			for (var/mob/O in hearers(src.loc, null))
-//				if(istype(O,/mob/living/carbon/human))
-//					for(var/mob/living/parasite/P in O:parasites)
-//						P.show_message(message, m_type)
+				if(istype(O,/mob/living/carbon/human))
+					for(var/mob/living/parasite/P in O:parasites)
+						P.show_message(message, m_type)
 				O.show_message(message, m_type)
