@@ -218,10 +218,10 @@
 			src.occupant.Paralyse(4)
 
 			 //Slowly get that clone healed and finished.
-			src.occupant.adjustCloneLoss(-heal_level/50)
+			src.occupant.adjustCloneLoss(-2)
 
 			//Premature clones may have brain damage.
-			src.occupant.adjustBrainLoss(-heal_level/100)
+			src.occupant.adjustBrainLoss(-1)
 
 			//So clones don't die of oxyloss in a running pod.
 			if (src.occupant.reagents.get_reagent_amount("inaprovaline") < 30)
