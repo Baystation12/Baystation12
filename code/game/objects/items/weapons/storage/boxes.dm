@@ -4,7 +4,7 @@
  *
  *	Contains:
  *		Empty box, starter boxes (survival/engineer),
- *		Latex glove and sterile mask boxes,
+ *		Medical glove and sterile mask boxes,
  *		Syringe, beaker, dna injector boxes,
  *		Blanks, flashbangs, and EMP grenade boxes,
  *		Tracking and chemical implant boxes,
@@ -46,8 +46,8 @@
 
 
 /obj/item/weapon/storage/box/gloves
-	name = "box of latex gloves"
-	desc = "Contains white gloves."
+	name = "box of medical gloves"
+	desc = "Contains sterile purple medical gloves."
 	New()
 		..()
 		new /obj/item/clothing/gloves/latex(src)

@@ -53,13 +53,13 @@
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECITON_TEMPERATURE
 
 /obj/item/clothing/gloves/latex
-	name = "latex gloves"
-	desc = "Sterile latex gloves."
+	name = "medical gloves"
+	desc = "Sterile medical gloves, designed to protect against blood-borne pathogens."
 	icon_state = "latex"
 	item_state = "lgloves"
 	siemens_coefficient = 0.30
 	permeability_coefficient = 0.01
-	color="white"
+	color="purple"
 
 	cmo
 		color = "medical"		//Exists for washing machines. Is not different from latex gloves in any way.
