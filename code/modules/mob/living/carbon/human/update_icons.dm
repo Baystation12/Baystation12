@@ -124,7 +124,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	var/list/overlays_lying[TOTAL_LAYERS]
 	var/list/overlays_standing[TOTAL_LAYERS]
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
-
+	var/race_icon
 
 //UPDATES OVERLAYS FROM OVERLAYS_LYING/OVERLAYS_STANDING
 //this proc is messy as I was forced to include some old laggy cloaking code to it so that I don't break cloakers
@@ -222,6 +222,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
 	var/plant_color_mod = rgb(144,224,144)
+	var/necrosis_color_mod = rgb(10,50,0)
 
 	var/husk = (HUSK in src.mutations)  //100% unnecessary -Agouri	//nope, do you really want to iterate through src.mutations repeatedly? -Pete
 	var/fat = (FAT in src.mutations)
@@ -232,24 +233,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 	var/g = "m"
 	if(gender == FEMALE)	g = "f"
 
-	var/icon/icobase
-	if(skeleton)
-		icobase = 'icons/mob/human_races/r_skeleton.dmi'
-	else if(dna)
-		switch(dna.mutantrace)
-			if("tajaran")
-				icobase = 'icons/mob/human_races/r_tajaran.dmi'
-			if("lizard")
-				icobase = 'icons/mob/human_races/r_lizard.dmi'
-			if("skrell")
-				icobase = 'icons/mob/human_races/r_skrell.dmi'
-			else
-				icobase = 'icons/mob/human_races/r_human.dmi'
-	else
-		icobase = 'icons/mob/human_races/r_human.dmi'
-
 	if(!skeleton)
-		stand_icon = new /icon(icobase, "torso_[g][fat?"_fat":""]")
+		stand_icon = new /icon(race_icon, "torso_[g][fat?"_fat":""]")
 		if(husk)
 			stand_icon.ColorTone(husk_color_mod)
 		else if(hulk)
@@ -259,7 +244,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		else if(plant)
 			stand_icon.ColorTone(plant_color_mod)
 	else
-		stand_icon = new /icon(icobase, "torso")
+		stand_icon = new /icon(race_icon, "torso")
 
 	var/datum/organ/external/head = get_organ("head")
 	var/has_head = 0
@@ -271,18 +256,21 @@ proc/get_damage_icon_part(damage_state, body_part)
 			var/icon/temp
 			if(istype(part, /datum/organ/external/groin))
 				if(skeleton)
-					temp = new /icon(icobase, "groin")
+					temp = new /icon(race_icon, "groin")
 				else
-					temp = new /icon(icobase, "groin_[g]")
+					temp = new /icon(race_icon, "groin_[g]")
 			else if(istype(part, /datum/organ/external/head))
 				if(skeleton)
-					temp = new /icon(icobase, "head")
+					temp = new /icon(race_icon, "head")
 				else
-					temp = new /icon(icobase, "head_[g]")
+					temp = new /icon(race_icon, "head_[g]")
 			else
-				temp = new /icon(icobase, "[part.icon_name]")
+				temp = new /icon(race_icon, "[part.icon_name]")
 			if(part.status & ORGAN_ROBOT)
 				temp.GrayScale()
+			if(part.status & ORGAN_DEAD)
+				temp.ColorTone(necrosis_color_mod)
+				temp.SetIntensity(0.7)
 			else if(!skeleton)
 				if(husk)
 					temp.ColorTone(husk_color_mod)
@@ -322,7 +310,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	if(husk)
 		var/icon/mask = new(stand_icon)
-		var/icon/husk_over = new(icobase,"overlay_husk")
+		var/icon/husk_over = new(race_icon,"overlay_husk")
 		mask.MapColors(0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,1, 0,0,0,0)
 		husk_over.Blend(mask, ICON_ADD)
 		stand_icon.Blend(husk_over, ICON_OVERLAY)
@@ -446,14 +434,30 @@ proc/get_damage_icon_part(damage_state, body_part)
 //	var/g = "m"
 //	if (gender == FEMALE)	g = "f"
 //BS12 EDIT
+	var/skeleton = (SKELETON in src.mutations)
+	if(skeleton)
+		race_icon = 'icons/mob/human_races/r_skeleton.dmi'
+	else if(dna)
+		switch(dna.mutantrace)
+			if("tajaran")
+				race_icon = 'icons/mob/human_races/r_tajaran.dmi'
+			if("lizard")
+				race_icon = 'icons/mob/human_races/r_lizard.dmi'
+			if("skrell")
+				race_icon = 'icons/mob/human_races/r_skrell.dmi'
+			else
+				race_icon = 'icons/mob/human_races/r_human.dmi'
+	else
+		icon = 'icons/mob/human_races/r_human.dmi'
+
 	if(dna)
 		switch(dna.mutantrace)
-			if("lizard","golem","slime","shadow","adamantine")
+			if("golem","slime","shadow","adamantine")
 				overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_l")
 				overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_s")
-			if("lizard","tajaran","skrell")
-				overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/species.dmi', "icon_state" = "[dna.mutantrace]_[gender]_l")
-				overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/species.dmi', "icon_state" = "[dna.mutantrace]_[gender]_s")
+		//	if("lizard","tajaran","skrell")
+		//		overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/species.dmi', "icon_state" = "[dna.mutantrace]_[gender]_l")
+		//		overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/species.dmi', "icon_state" = "[dna.mutantrace]_[gender]_s")
 			if("plant")
 				if(stat == DEAD)	//TODO
 					overlays_lying[MUTANTRACE_LAYER] = image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace]_d")
@@ -789,7 +793,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
 			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "tajtail_l")
 			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "tajtail_s")
-	else if( cur_species == "Soghun")
+	else if( cur_species == "Unathi")
 		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
 			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "sogtail_l")
 			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "sogtail_s")
