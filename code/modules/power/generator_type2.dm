@@ -4,6 +4,7 @@
 	icon_state = "teg"
 	anchored = 1
 	density = 1
+	use_power = 0
 
 	var/obj/machinery/atmospherics/unary/generator_input/input1
 	var/obj/machinery/atmospherics/unary/generator_input/input2
@@ -25,9 +26,9 @@
 /obj/machinery/power/generator_type2/proc/updateicon()
 
 	if(stat & (NOPOWER|BROKEN))
-		overlays = null
+		overlays.Cut()
 	else
-		overlays = null
+		overlays.Cut()
 
 		if(lastgenlev != 0)
 			overlays += image('icons/obj/power.dmi', "teg-op[lastgenlev]")
@@ -68,7 +69,7 @@
 			hot_air.temperature = hot_air.temperature - energy_transfer/hot_air_heat_capacity
 			cold_air.temperature = cold_air.temperature + heat/cold_air_heat_capacity
 
-			world << "POWER: [lastgen] W generated at [efficiency*100]% efficiency and sinks sizes [cold_air_heat_capacity], [hot_air_heat_capacity]"
+			//world << "POWER: [lastgen] W generated at [efficiency*100]% efficiency and sinks sizes [cold_air_heat_capacity], [hot_air_heat_capacity]"
 
 			if(input1.network)
 				input1.network.update = 1
@@ -98,13 +99,13 @@
 	interact(user)
 
 
-/obj/machinery/power/generator_type2/proc/interact(mob/user)
+/obj/machinery/power/generator_type2/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) && (!istype(user, /mob/living/silicon/ai)))
-		user.machine = null
+		user.unset_machine()
 		user << browse(null, "window=teg")
 		return
 
-	user.machine = src
+	user.set_machine(src)
 
 	var/t = "<PRE><B>Thermo-Electric Generator</B><HR>"
 
@@ -131,7 +132,7 @@
 
 	if( href_list["close"] )
 		usr << browse(null, "window=teg")
-		usr.machine = null
+		usr.unset_machine()
 		return 0
 
 	return 1

@@ -1,5 +1,4 @@
 /mob/living/carbon/human
-
 	//Hair colour and style
 	var/r_hair = 0
 	var/g_hair = 0
@@ -36,7 +35,7 @@
 	var/obj/item/glasses = null
 	var/obj/item/head = null
 	var/obj/item/ears = null
-	var/obj/item/weapon/card/id/wear_id = null
+	var/obj/item/wear_id = null
 	var/obj/item/r_store = null
 	var/obj/item/l_store = null
 	var/obj/item/s_store = null
@@ -48,10 +47,8 @@
 	var/icon/stand_icon = null
 	var/icon/lying_icon = null
 
-	var/list/organs = list() //Gets filled up in the constructor (human.dm, New() proc, line 24. I'm sick and tired of missing comments. -Agouri
-	var/list/organs_by_name = list() // map organ names to organs
-
 	var/miming = null //Toggle for the mime's abilities.
+	var/special_voice = "" // For changing our voice. Used by a symptom.
 
 	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
 

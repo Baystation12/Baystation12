@@ -40,6 +40,7 @@
 /obj/item/weapon/circuitboard/aicore
 	name = "Circuit board (AI core)"
 	origin_tech = "programming=4;biotech=2"
+	board_type = "other"
 /obj/item/weapon/circuitboard/aiupload
 	name = "Circuit board (AI Upload)"
 	build_path = "/obj/machinery/computer/aiupload"
@@ -192,6 +193,10 @@
 /obj/item/weapon/circuitboard/mining_shuttle
 	name = "Circuit board (Mining Shuttle)"
 	build_path = "/obj/machinery/computer/mining_shuttle"
+	origin_tech = "programming=2"
+/obj/item/weapon/circuitboard/research_shuttle
+	name = "Circuit board (Research Shuttle)"
+	build_path = "/obj/machinery/computer/research_shuttle"
 	origin_tech = "programming=2"
 /obj/item/weapon/circuitboard/HolodeckControl // Not going to let people get this, but it's just here for future
 	name = "Circuit board (Holodeck Control)"

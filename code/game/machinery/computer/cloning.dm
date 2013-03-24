@@ -31,7 +31,7 @@
 	var/delete = 0
 	var/injectorready = 0	//Quick fix for issue 286 (screwdriver the screen twice to restore injector)	-Pete
 	var/temphtml = null
-	var/obj/machinery/dna_scanner/connected = null
+	var/obj/machinery/dna_scannernew/connected = null
 	var/obj/item/weapon/disk/data/diskette = null
 	anchored = 1.0
 	use_power = 1
@@ -155,7 +155,7 @@
 	return attack_hand(user)
 
 /obj/machinery/computer/cloning/attack_hand(mob/user as mob)
-	user.machine = src
+	user.set_machine(src)
 	add_fingerprint(user)
 
 	if(stat & (BROKEN|NOPOWER))
@@ -202,6 +202,9 @@
 
 				dat += "Lock status: <a href='byond://?src=\ref[src];lock=1'>[src.scanner.locked ? "Locked" : "Unlocked"]</a><br>"
 
+			if (!isnull(src.pod1))
+				dat += "Biomass: <i>[src.pod1.biomass]</i><br>"
+
 			// Database
 			dat += "<h4>Database Functions</h4>"
 			dat += "<a href='byond://?src=\ref[src];menu=2'>View Records</a><br>"
@@ -243,8 +246,12 @@
 					dat += "<br>" //Keeping a line empty for appearances I guess.
 
 				dat += {"<b>UI:</b> [src.active_record.fields["UI"]]<br>
-				<b>SE:</b> [src.active_record.fields["SE"]]<br><br>
-				<a href='byond://?src=\ref[src];clone=\ref[src.active_record]'>Clone</a><br>"}
+				<b>SE:</b> [src.active_record.fields["SE"]]<br><br>"}
+
+				if(pod1 && pod1.biomass >= CLONE_BIOMASS)
+					dat += {"<a href='byond://?src=\ref[src];clone=\ref[src.active_record]'>Clone</a><br>"}
+				else
+					dat += {"<b>Unsufficient biomass</b><br>"}
 
 		if(4)
 			if (!src.active_record)
@@ -289,11 +296,15 @@
 
 	else if (href_list["view_rec"])
 		src.active_record = locate(href_list["view_rec"])
-		if ((isnull(src.active_record.fields["ckey"])) || (src.active_record.fields["ckey"] == ""))
-			del(src.active_record)
-			src.temp = "ERROR: Record Corrupt"
+		if(istype(src.active_record,/datum/data/record))
+			if ((isnull(src.active_record.fields["ckey"])) || (src.active_record.fields["ckey"] == ""))
+				del(src.active_record)
+				src.temp = "ERROR: Record Corrupt"
+			else
+				src.menu = 3
 		else
-			src.menu = 3
+			src.active_record = null
+			src.temp = "Record missing."
 
 	else if (href_list["del_rec"])
 		if ((!src.active_record) || (src.menu < 3))
@@ -374,11 +385,20 @@
 				temp = "Error: No Clonepod detected."
 			else if(pod1.occupant)
 				temp = "Error: Clonepod is currently occupied."
+			else if(pod1.biomass < CLONE_BIOMASS)
+				temp = "Error: Not enough biomass."
 			else if(pod1.mess)
 				temp = "Error: Clonepod malfunction."
 			else if(!config.revival_cloning)
 				temp = "Error: Unable to initiate cloning cycle."
+
+			else if(pod1.growclone(C.fields["ckey"], C.fields["name"], C.fields["UI"], C.fields["SE"], C.fields["mind"], C.fields["mrace"]))
+				temp = "Initiating cloning cycle..."
+				records.Remove(C)
+				del(C)
+				menu = 1
 			else
+
 				var/mob/selected = find_dead_player("[C.fields["ckey"]]")
 				selected << 'chime.ogg'	//probably not the best sound but I think it's reasonable
 				var/answer = alert(selected,"Do you want to return to life?","Cloning","Yes","No")
@@ -410,9 +430,9 @@
 	if (subject.suiciding == 1)
 		scantemp = "Error: Subject's brain is not responding to scanning stimuli."
 		return
-//	if ((!subject.ckey) || (!subject.client))
-//		scantemp = "Error: Mental interface failure."
-//		return
+	if ((!subject.ckey) || (!subject.client))
+		scantemp = "Error: Mental interface failure."
+		return
 	if (NOCLONE in subject.mutations)
 		scantemp = "Error: Mental interface failure."
 		return
@@ -432,11 +452,6 @@
 	R.fields["id"] = copytext(md5(subject.real_name), 2, 6)
 	R.fields["UI"] = subject.dna.uni_identity
 	R.fields["SE"] = subject.dna.struc_enzymes
-
-	// Preferences stuff
-	R.fields["interface"] = subject.UI
-
-
 
 	//Add an implant if needed
 	var/obj/item/weapon/implant/health/imp = locate(/obj/item/weapon/implant/health, subject)
@@ -463,15 +478,14 @@
 			break
 	return selected_record
 
-/obj/machinery/computer/cloning/power_change()
+/obj/machinery/computer/cloning/update_icon()
 
 	if(stat & BROKEN)
 		icon_state = "commb"
 	else
-		if( powered() )
+		if(stat & NOPOWER)
+			src.icon_state = "c_unpowered"
+			stat |= NOPOWER
+		else
 			icon_state = initial(icon_state)
 			stat &= ~NOPOWER
-		else
-			spawn(rand(0, 15))
-				src.icon_state = "c_unpowered"
-				stat |= NOPOWER

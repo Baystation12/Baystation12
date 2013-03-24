@@ -54,7 +54,7 @@ There are several things that need to be remembered:
 
 	All of these are named after the variable they update from. They are defined at the mob/ level like
 	update_clothing was, so you won't cause undefined proc runtimes with usr.update_inv_wear_id() if the usr is a
-	metroid etc. Instead, it'll just return without doing any work. So no harm in calling it for metroids and such.
+	slime etc. Instead, it'll just return without doing any work. So no harm in calling it for slimes and such.
 
 
 >	There are also these special cases:
@@ -64,6 +64,7 @@ There are several things that need to be remembered:
 		update_body()	//Handles updating your mob's icon to reflect their gender/race/complexion etc
 		update_hair()	//Handles updating your hair overlay (used to be update_face, but mouth and
 																			...eyes were merged into update_body)
+		update_targeted() // Updates the target overlay when someone points a gun at you
 
 >	All of these procs update our overlays_lying and overlays_standing, and then call update_icons() by default.
 	If you wish to update several overlays at once, you can set the argument to 0 to disable the update and call
@@ -117,7 +118,8 @@ Please contact me on #coderbus IRC. ~Carn x
 #define L_HAND_LAYER			19
 #define R_HAND_LAYER			20
 #define TAIL_LAYER				21		//bs12 specific. this hack is probably gonna come back to haunt me
-#define TOTAL_LAYERS			21
+#define TARGETED_LAYER			22		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			22
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -130,10 +132,9 @@ Please contact me on #coderbus IRC. ~Carn x
 //this proc is messy as I was forced to include some old laggy cloaking code to it so that I don't break cloakers
 //I'll work on removing that stuff by rewriting some of the cloaking stuff at a later date.
 /mob/living/carbon/human/update_icons()
-
 	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
 	update_hud()		//TODO: remove the need for this
-	overlays = null
+	overlays.Cut()
 
 	if(lying)		//can't be cloaked when lying. (for now)
 		icon = lying_icon
@@ -222,6 +223,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
 	var/plant_color_mod = rgb(144,224,144)
+	var/necrosis_color_mod = rgb(10,50,0)
 
 	var/husk = (HUSK in src.mutations)  //100% unnecessary -Agouri	//nope, do you really want to iterate through src.mutations repeatedly? -Pete
 	var/fat = (FAT in src.mutations)
@@ -283,6 +285,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 				temp = new /icon(icobase, "[part.icon_name]")
 			if(part.status & ORGAN_ROBOT)
 				temp.GrayScale()
+			if(part.status & ORGAN_DEAD)
+				temp.ColorTone(necrosis_color_mod)
+				temp.SetIntensity(0.7)
 			else if(!skeleton)
 				if(husk)
 					temp.ColorTone(husk_color_mod)
@@ -448,19 +453,18 @@ proc/get_damage_icon_part(damage_state, body_part)
 //BS12 EDIT
 	if(dna)
 		switch(dna.mutantrace)
-			if("golem","metroid")
-				var/icon/I = new('icons/effects/genetics.dmi',"[dna.mutantrace][fat]_s")
-				overlays_standing[MUTANTRACE_LAYER]	= image(I)
-				overlays_lying[MUTANTRACE_LAYER]	= image(I.MakeLying())
-//			if("lizard", "tajaran", "skrell")
-//				overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/species.dmi', "icon_state" = "[dna.mutantrace]_[g]_l")
-//				overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/species.dmi', "icon_state" = "[dna.mutantrace]_[g]_s")
-//			if("plant")
-//				if(stat == DEAD)	//TODO
-//					overlays_lying[MUTANTRACE_LAYER] = image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace]_d")
-//				else
-//					overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_l")
-//					overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_s")
+			if("lizard","golem","slime","shadow","adamantine")
+				overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_l")
+				overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_s")
+			if("lizard","tajaran","skrell")
+				overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/species.dmi', "icon_state" = "[dna.mutantrace]_[gender]_l")
+				overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/species.dmi', "icon_state" = "[dna.mutantrace]_[gender]_s")
+			if("plant")
+				if(stat == DEAD)	//TODO
+					overlays_lying[MUTANTRACE_LAYER] = image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace]_d")
+				else
+					overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_l")
+					overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_s")
 			else
 				overlays_lying[MUTANTRACE_LAYER]	= null
 				overlays_standing[MUTANTRACE_LAYER]	= null
@@ -468,6 +472,19 @@ proc/get_damage_icon_part(damage_state, body_part)
 		update_body(0)
 	update_hair(0)
 	if(update_icons)   update_icons()
+
+//Call when target overlay should be added/removed
+/mob/living/carbon/human/update_targeted(var/update_icons=1)
+	if (targeted_by && target_locked)
+		overlays_lying[TARGETED_LAYER]		= target_locked
+		overlays_standing[TARGETED_LAYER]	= target_locked
+	else if (!targeted_by && target_locked)
+		del(target_locked)
+	if (!targeted_by)
+		overlays_lying[TARGETED_LAYER]		= null
+		overlays_standing[TARGETED_LAYER]	= null
+	if(update_icons)		update_icons()
+
 
 /* --------------------------------------- */
 //For legacy support.
@@ -667,12 +684,17 @@ proc/get_damage_icon_part(damage_state, body_part)
 			var/t_state
 			if( istype(wear_suit, /obj/item/clothing/suit/armor/vest || /obj/item/clothing/suit/wcoat) )
 				t_state = "armor"
-			else if( istype(wear_suit, /obj/item/clothing/suit/det_suit || /obj/item/clothing/suit/labcoat) )
+			else if( istype(wear_suit, /obj/item/clothing/suit/storage/det_suit || /obj/item/clothing/suit/storage/labcoat) )
 				t_state = "coat"
 			else
 				t_state = "suit"
 			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[t_state]blood2")
 			standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[t_state]blood")
+
+			if(wear_suit.blood_DNA)
+				var/obj/item/clothing/suit/S = wear_suit
+				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood2")
+				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood")
 
 		overlays_lying[SUIT_LAYER]		= lying
 		overlays_standing[SUIT_LAYER]	= standing
@@ -785,7 +807,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
 			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "tajtail_l")
 			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "tajtail_s")
-	else if( cur_species == "Soghun")
+	else if( cur_species == "Unathi")
 		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
 			overlays_lying[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "sogtail_l")
 			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "sogtail_s")
@@ -850,4 +872,5 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef L_HAND_LAYER
 #undef R_HAND_LAYER
 #undef TAIL_LAYER
+#undef TARGETED_LAYER
 #undef TOTAL_LAYERS

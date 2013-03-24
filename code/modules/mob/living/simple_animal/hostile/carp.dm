@@ -13,8 +13,7 @@
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
-	speed = -1
-	stop_automated_movement_when_pulled = 0
+	speed = 4
 	maxHealth = 25
 	health = 25
 
@@ -35,8 +34,12 @@
 	max_n2 = 0
 	minbodytemp = 0
 
+	break_stuff_probability = 2
+
+	faction = "carp"
+
 /mob/living/simple_animal/hostile/carp/Process_Spacemove(var/check_drift = 0)
-	return	//No drifting in space for space carp!	//original comments do not steal
+	return 1	//No drifting in space for space carp!	//original comments do not steal
 
 /mob/living/simple_animal/hostile/carp/FindTarget()
 	. = ..()

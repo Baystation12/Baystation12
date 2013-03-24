@@ -4,7 +4,9 @@
 	anchored = 0
 	density = 1
 
+
 /obj/machinery/iv_drip/var/mob/living/carbon/human/attached = null
+/obj/machinery/iv_drip/var/mode = "give" // mode can be "give" or "take"
 /obj/machinery/iv_drip/var/obj/item/weapon/reagent_containers/beaker = null
 
 /obj/machinery/iv_drip/update_icon()
@@ -67,8 +69,7 @@
 /obj/machinery/iv_drip/process()
 	set background = 1
 
-	..()
-	if(src.attached && src.beaker && src.beaker.volume > 0)
+	if(src.attached)
 		if(!(get_dist(src, src.attached) <= 1))
 			visible_message("The needle is ripped out of [src.attached], doesn't that hurt?")
 			src.attached:apply_damage(3, BRUTE, pick("r_arm", "l_arm"))
@@ -76,12 +77,45 @@
 			src.update_icon()
 			return
 
-		var/transfer_amount = REAGENTS_METABOLISM
-		if(istype(src.beaker, /obj/item/weapon/reagent_containers/blood))
-			// speed up transfer on blood packs
-			transfer_amount = 4
-		src.beaker.reagents.trans_to(src.attached, transfer_amount)
-		update_icon()
+	if(src.attached && src.beaker)
+		// Give blood
+		if(mode == "give" && src.beaker.volume > 0)
+			var/transfer_amount = REAGENTS_METABOLISM
+			if(istype(src.beaker, /obj/item/weapon/reagent_containers/blood))
+				// speed up transfer on blood packs
+				transfer_amount = 4
+			attached.inject_blood(beaker,transfer_amount)
+			update_icon()
+
+		// Take blood
+		else if(mode == "take")
+			var/amount = beaker.reagents.maximum_volume - beaker.reagents.total_volume
+			amount = min(amount, 4)
+			// If the beaker is full, ping
+			if(amount == 0)
+				if(prob(5)) visible_message("\The [src] pings.")
+				return
+
+			var/mob/living/carbon/human/T = attached
+
+			if(!istype(T)) return
+			if(!T.dna)
+				return
+			if(NOCLONE in T.mutations)
+				return
+
+			// If the human is losing too much blood, beep.
+			if(T.vessel.get_reagent_amount("blood") < BLOOD_VOLUME_SAFE) if(prob(5))
+				visible_message("\The [src] beeps loudly.")
+
+			var/datum/reagent/B = T.take_blood(beaker,amount)
+
+			if (B)
+				beaker.reagents.reagent_list |= B
+				beaker.reagents.update_total()
+				beaker.on_reagent_change()
+				beaker.reagents.handle_reactions()
+				update_icon()
 
 /obj/machinery/iv_drip/attack_hand(mob/user as mob)
 	if(src.beaker)
@@ -91,10 +125,31 @@
 	else
 		return ..()
 
+
+/obj/machinery/iv_drip/verb/toggle_mode()
+	set name = "Toggle Mode"
+	set src in view(1)
+
+	if(!istype(usr, /mob/living))
+		usr << "\red You can't do that."
+		return
+
+	if(mode == "give")
+		mode = "take"
+		usr << "The IV drip is now taking blood."
+	else if(mode == "take")
+		mode = "give"
+		usr << "The IV drip is now giving blood."
+
 /obj/machinery/iv_drip/examine()
 	set src in view()
 	..()
 	if (!(usr in view(2)) && usr!=src.loc) return
+
+	if(mode == "take")
+		usr << "The IV drip is taking blood."
+	else if(mode == "give")
+		usr << "The IV drip is injecting."
 
 	if(beaker)
 		usr << "\blue Attached is \a [beaker] with:"

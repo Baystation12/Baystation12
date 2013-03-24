@@ -64,7 +64,7 @@ datum/controller/vote
 				greatest_votes = votes
 		//default-vote for everyone who didn't vote
 		if(!config.vote_no_default && choices.len)
-			var/non_voters = (client_list.len - total_votes)
+			var/non_voters = (clients.len - total_votes)
 			if(non_voters > 0)
 				if(mode == "restart")
 					choices["Continue Playing"] += non_voters
@@ -75,6 +75,24 @@ datum/controller/vote
 						choices[master_mode] += non_voters
 						if(choices[master_mode] >= greatest_votes)
 							greatest_votes = choices[master_mode]
+				else if(mode == "crew_transfer")
+					var/factor = 0.5
+					switch(world.time / (10 * 60)) // minutes
+						if(0 to 60)
+							factor = 0.5
+						if(61 to 120)
+							factor = 0.8
+						if(121 to 240)
+							factor = 1
+						if(241 to 300)
+							factor = 1.2
+						else
+							factor = 1.4
+					choices["Initiate Crew Transfer"] = round(choices["Initiate Crew Transfer"] * factor)
+					world << "<font color='purple'>Crew Transfer Factor: [factor]</font>"
+					greatest_votes = max(choices["Initiate Crew Transfer"], choices["Continue The Round"])
+
+
 		//get all options with that many votes and return them in a list
 		. = list()
 		if(greatest_votes)
@@ -174,6 +192,8 @@ datum/controller/vote
 			initiator = initiator_key
 			started_time = world.time
 			var/text = "[capitalize(mode)] vote started by [initiator]."
+			if(mode == "custom")
+				text += "\n[question]"
 			log_vote(text)
 			world << "<font color='purple'><b>[text]</b>\nType vote to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
 			time_remaining = round(config.vote_period/10)
@@ -186,7 +206,7 @@ datum/controller/vote
 		var/trialmin = 0
 		if(C.holder)
 			admin = 1
-			if (C.holder.level >= 3)
+			if(C.holder.rights & R_ADMIN)
 				trialmin = 1
 		voting |= C
 

@@ -36,17 +36,10 @@ var/global/datum/controller/gameticker/ticker
 
 	var/triai = 0//Global holder for Triumvirate
 
-	//automated spawning of mice and roaches
-	var/spawn_vermin = 1
-	var/vermin_min_spawntime = 3000		//between 5 (3000) and 15 (9000) minutes interval
-	var/vermin_max_spawntime = 9000
-	var/spawning_vermin = 0
-	var/max_vermin = 30
-	var/list/vermin_spawn_turfs
-
 /datum/controller/gameticker/proc/pregame()
-	login_music = pick('sound/music/title1.ogg','sound/music/title2.ogg') // choose title music!
-
+	login_music = pick(\
+	'sound/music/space.ogg',\
+	'sound/music/traitor.ogg')
 	do
 		pregame_timeleft = 180
 		world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"
@@ -112,11 +105,21 @@ var/global/datum/controller/gameticker/ticker
 	else
 		src.mode.announce()
 
+	//setup the money accounts
+	if(!centcomm_account_db)
+		for(var/obj/machinery/account_database/check_db in world)
+			if(check_db.z == 2)
+				centcomm_account_db = check_db
+				break
+
 	create_characters() //Create player characters and transfer them
 	collect_minds()
 	equip_characters()
 	data_core.manifest()
 	current_state = GAME_STATE_PLAYING
+
+	//here to initialize the random events nicely at round start
+	setup_economy()
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup()
@@ -130,7 +133,8 @@ var/global/datum/controller/gameticker/ticker
 		//Holiday Round-start stuff	~Carn
 		Holiday_Game_Start()
 
-	start_events() //handles random events and space dust.
+	//start_events() //handles random events and space dust.
+	//new random event system is handled from the MC.
 
 	var/admins_number = 0
 	for(var/client/C)
@@ -147,18 +151,6 @@ var/global/datum/controller/gameticker/ticker
 	if(config.sql_enabled)
 		spawn(3000)
 		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
-
-	//setup vermin spawn areas
-	var/list/vermin_spawn_areas = list("/area/maintenance","/area/mine/maintenance","/area/crew_quarters/locker/locker_toilet","/area/crew_quarters/toilet")
-	vermin_spawn_turfs = new/list()
-	for(var/area_text in vermin_spawn_areas)
-		var/area_base_type = text2path(area_text)
-		for(var/area in typesof(area_base_type))
-			var/list/area_turfs = get_area_turfs(area)
-			for(var/turf/T in area_turfs)
-				if(T.density)
-					area_turfs -= T
-				vermin_spawn_turfs.Add(area_turfs)
 
 	return 1
 
@@ -254,7 +246,9 @@ var/global/datum/controller/gameticker/ticker
 						flick("station_explode_fade_red", cinematic)
 						world << sound('sound/effects/explosionfar.ogg')
 						cinematic.icon_state = "summary_selfdes"
-
+				for(var/mob/living/M in living_mob_list)
+					if(M.loc.z == 1)
+						M.death()//No mercy
 		//If its actually the end of the round, wait for it to end.
 		//Otherwise if its a verb it will continue on afterwards.
 		sleep(300)
@@ -291,7 +285,9 @@ var/global/datum/controller/gameticker/ticker
 					job_master.EquipRank(player, player.mind.assigned_role, 0)
 					EquipCustomItems(player)
 		if(captainless)
-			world << "Captainship not forced on anyone."
+			for(var/mob/M in player_list)
+				if(!istype(M,/mob/new_player))
+					M << "Captainship not forced on anyone."
 
 
 	proc/process()
@@ -325,7 +321,10 @@ var/global/datum/controller/gameticker/ticker
 
 				if(!delay_end)
 					sleep(restart_timeout)
-					world.Reboot()
+					if(!delay_end)
+						world.Reboot()
+					else
+						world << "\blue <B>An admin has delayed the round end</B>"
 				else
 					world << "\blue <B>An admin has delayed the round end</B>"
 

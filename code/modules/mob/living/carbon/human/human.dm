@@ -5,14 +5,10 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 
-	var/datum/reagents/vessel
-	// TODO: make this actually affect the way the mob is rendered
-	var/pale = 0
-
 
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
-	nodamage = 1
+	status_flags = GODMODE|CANPUSH
 
 
 
@@ -24,101 +20,14 @@
 	if(!dna)
 		dna = new /datum/dna(null)
 
-	//initialise organs
-	organs = list()
-	organs_by_name["chest"] = new/datum/organ/external/chest()
-	organs_by_name["groin"] = new/datum/organ/external/groin(organs_by_name["chest"])
-	organs_by_name["head"] = new/datum/organ/external/head(organs_by_name["chest"])
-	organs_by_name["l_arm"] = new/datum/organ/external/l_arm(organs_by_name["chest"])
-	organs_by_name["r_arm"] = new/datum/organ/external/r_arm(organs_by_name["chest"])
-	organs_by_name["r_leg"] = new/datum/organ/external/r_leg(organs_by_name["groin"])
-	organs_by_name["l_leg"] = new/datum/organ/external/l_leg(organs_by_name["groin"])
-	organs_by_name["l_hand"] = new/datum/organ/external/l_hand(organs_by_name["l_arm"])
-	organs_by_name["r_hand"] = new/datum/organ/external/r_hand(organs_by_name["r_arm"])
-	organs_by_name["l_foot"] = new/datum/organ/external/l_foot(organs_by_name["l_leg"])
-	organs_by_name["r_foot"] = new/datum/organ/external/r_foot(organs_by_name["r_leg"])
-
-
-	// connect feet to legs and hands to arms
-/*	var/datum/organ/external/organ = organs_by_name["l_hand"]
-	organ.parent = organs_by_name["l_arm"]
-	organ = organs_by_name["r_hand"]
-	organ.parent = organs_by_name["r_arm"]
-	organ = organs_by_name["l_foot"]
-	organ.parent = organs_by_name["l_leg"]
-	organ = organs_by_name["r_foot"]
-	organ.parent = organs_by_name["r_leg"]
-	organ = organs_by_name["r_foot"]
-	organ.parent = organs_by_name["r_leg"]
-	organ = organs_by_name["head"]
-	organ.parent = organs_by_name["chest"]
-	organ = organs_by_name["groin"]
-	organ.parent = organs_by_name["chest"]
-	organ = organs_by_name["r_leg"]
-	organ.parent = organs_by_name["groin"]
-	organ = organs_by_name["l_leg"]
-	organ.parent = organs_by_name["groin"]
-	organ = organs_by_name["r_arm"]
-	organ.parent = organs_by_name["chest"]
-	organ = organs_by_name["l_arm"]
-	organ.parent = organs_by_name["chest"]
-	*/
-	for(var/name in organs_by_name)
-		organs += organs_by_name[name]
-
-	for(var/datum/organ/external/O in organs)
-		O.owner = src
-
 	..()
 
 	if(dna)
 		dna.real_name = real_name
 
 	prev_gender = gender // Debug for plural genders
-
-
-	vessel = new/datum/reagents(600)
-	vessel.my_atom = src
-	vessel.add_reagent("blood",560)
-	spawn(1)
-		fixblood()
-
-/mob/living/carbon/human/proc/drip(var/amt as num)
-	if(!amt)
-		return
-
-	var/amm = 0.1 * amt
-	var/turf/T = get_turf(src)
-	var/list/obj/effect/decal/cleanable/blood/drip/nums = list()
-	var/list/iconL = list("1","2","3","4","5")
-
-	vessel.remove_reagent("blood",amm)
-
-	for(var/obj/effect/decal/cleanable/blood/drip/G in T)
-		nums += G
-		iconL.Remove(G.icon_state)
-		if(nums.len >= 3)
-			var/obj/effect/decal/cleanable/blood/drip/D = pick(nums)
-			D.blood_DNA[dna.unique_enzymes] = dna.b_type
-			return
-
-	var/obj/effect/decal/cleanable/blood/drip/this = new(T)
-	this.icon_state = pick(iconL)
-	this.blood_DNA = list()
-	this.blood_DNA[dna.unique_enzymes] = dna.b_type
-
-	// replace many drips with something larger
-	if(nums.len > 3)
-		for(var/obj/effect/decal/cleanable/blood/drip/G in nums)
-			del G
-		T.add_blood(src)
-
-
-/mob/living/carbon/human/proc/fixblood()
-	for(var/datum/reagent/blood/B in vessel.reagent_list)
-		if(B.id == "blood")
-			B.data = list("donor"=src,"viruses"=null,"blood_DNA"=dna.unique_enzymes,"blood_type"=dna.b_type,"resistances"=null,"trace_chem"=null, "virus2" = null, "antobodies" = null)
-
+	make_organs()
+	make_blood()
 
 /mob/living/carbon/human/Bump(atom/movable/AM as mob|obj, yes)
 	if ((!( yes ) || now_pushing))
@@ -149,9 +58,9 @@
 			loc = tmob.loc
 			tmob.loc = oldloc
 			now_pushing = 0
-			for(var/mob/living/carbon/metroid/Metroid in view(1,tmob))
-				if(Metroid.Victim == tmob)
-					Metroid.UpdateFeed()
+			for(var/mob/living/carbon/slime/slime in view(1,tmob))
+				if(slime.Victim == tmob)
+					slime.UpdateFeed()
 			return
 
 		if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
@@ -167,7 +76,7 @@
 			if(prob(99))
 				now_pushing = 0
 				return
-		if(tmob.nopush)
+		if(!(tmob.status_flags & CANPUSH))
 			now_pushing = 0
 			return
 
@@ -250,17 +159,19 @@
 
 			f_loss += 60
 
-			if (!prob(getarmor(null, "bomb")))
+			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/1.5
 				f_loss = f_loss/1.5
 
 			if (!istype(ears, /obj/item/clothing/ears/earmuffs))
 				ear_damage += 30
 				ear_deaf += 120
+			if (prob(70) && !shielded)
+				Paralyse(10)
 
 		if(3.0)
 			b_loss += 30
-			if (!prob(getarmor(null, "bomb")))
+			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/2
 			if (!istype(ears, /obj/item/clothing/ears/earmuffs))
 				ear_damage += 15
@@ -329,110 +240,6 @@
 		updatehealth()
 	return
 
-/mob/living/carbon/human/Move(a, b, flag)
-
-	if (buckled)
-		return
-
-	if (restrained())
-		stop_pulling()
-
-
-	var/t7 = 1
-	if (restrained())
-		for(var/mob/living/M in range(src, 1))
-			if ((M.pulling == src && M.stat == 0 && !( M.restrained() )))
-				t7 = null
-	if ((t7 && (pulling && ((get_dist(src, pulling) <= 1 || pulling.loc == loc) && (client && client.moving)))))
-		var/turf/T = loc
-		. = ..()
-
-		if (pulling && pulling.loc)
-			if(!( isturf(pulling.loc) ))
-				stop_pulling()
-				return
-			else
-				if(Debug)
-					diary <<"pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]"
-					diary <<"REPORT THIS"
-
-		/////
-		if(pulling && pulling.anchored)
-			stop_pulling()
-			return
-
-		if (!restrained())
-			var/diag = get_dir(src, pulling)
-			if ((diag - 1) & diag)
-			else
-				diag = null
-			if ((get_dist(src, pulling) > 1 || diag))
-				if (isliving(pulling))
-					var/mob/living/M = pulling
-					var/ok = 1
-					if (locate(/obj/item/weapon/grab, M.grabbed_by))
-						if (prob(75))
-							var/obj/item/weapon/grab/G = pick(M.grabbed_by)
-							if (istype(G, /obj/item/weapon/grab))
-								for(var/mob/O in viewers(M, null))
-									O.show_message(text("\red [] has been pulled from []'s grip by []", G.affecting, G.assailant, src), 1)
-								//G = null
-								del(G)
-						else
-							ok = 0
-						if (locate(/obj/item/weapon/grab, M.grabbed_by.len))
-							ok = 0
-					if (ok)
-						var/atom/movable/t = M.pulling
-						M.stop_pulling()
-
-						//this is the gay blood on floor shit -- Added back -- Skie
-						if (M.lying && (prob(M.getBruteLoss() / 6)))
-							var/turf/location = M.loc
-							if (istype(location, /turf/simulated))
-								location.add_blood(M)
-								if(ishuman(M))
-									var/mob/living/carbon/H = M
-									var/blood_volume = round(H:vessel.get_reagent_amount("blood"))
-									if(blood_volume > 0)
-										H:vessel.remove_reagent("blood",1)
-							if(prob(5))
-								M.adjustBruteLoss(1)
-								visible_message("\red \The [M]'s wounds open more from being dragged!")
-						if(M.pull_damage())
-							if(prob(25))
-								M.adjustBruteLoss(2)
-								visible_message("\red \The [M]'s wounds worsen terribly from being dragged!")
-								var/turf/location = M.loc
-								if (istype(location, /turf/simulated))
-									location.add_blood(M)
-									if(ishuman(M))
-										var/mob/living/carbon/H = M
-										var/blood_volume = round(H:vessel.get_reagent_amount("blood"))
-										if(blood_volume > 0)
-											H:vessel.remove_reagent("blood",1)
-
-
-						step(pulling, get_dir(pulling.loc, T))
-						M.start_pulling(t)
-				else
-					if (pulling)
-						if (istype(pulling, /obj/structure/window))
-							if(pulling:ini_dir == NORTHWEST || pulling:ini_dir == NORTHEAST || pulling:ini_dir == SOUTHWEST || pulling:ini_dir == SOUTHEAST)
-								for(var/obj/structure/window/win in get_step(pulling,get_dir(pulling.loc, T)))
-									stop_pulling()
-					if (pulling)
-						step(pulling, get_dir(pulling.loc, T))
-	else
-		stop_pulling()
-		. = ..()
-	if ((s_active && !( s_active in contents ) ))
-		s_active.close(src)
-
-	for(var/mob/living/carbon/metroid/M in view(1,src))
-		M.UpdateFeed(src)
-	return
-
 
 /mob/living/carbon/human/hand_p(mob/M as mob)
 	var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
@@ -469,18 +276,18 @@
 		if(armor >= 2)	return
 
 
-/mob/living/carbon/human/attack_metroid(mob/living/carbon/metroid/M as mob)
+/mob/living/carbon/human/attack_slime(mob/living/carbon/slime/M as mob)
 	if(M.Victim) return // can't attack while eating!
 
 	if (health > -100)
 
 		for(var/mob/O in viewers(src, null))
 			if ((O.client && !( O.blinded )))
-				O.show_message(text("\red <B>The [M.name] has [pick("bit","slashed")] []!</B>", src), 1)
+				O.show_message(text("\red <B>The [M.name] glomps []!</B>", src), 1)
 
 		var/damage = rand(1, 3)
 
-		if(istype(M, /mob/living/carbon/metroid/adult))
+		if(istype(M, /mob/living/carbon/slime/adult))
 			damage = rand(10, 35)
 		else
 			damage = rand(5, 25)
@@ -547,7 +354,7 @@
 
 /mob/living/carbon/human/show_inv(mob/user as mob)
 
-	user.machine = src
+	user.set_machine(src)
 	var/dat = {"
 	<B><HR><FONT size=3>[name]</FONT></B>
 	<BR><HR>
@@ -671,7 +478,7 @@
 
 	if (href_list["mach_close"])
 		var/t1 = text("window=[]", href_list["mach_close"])
-		machine = null
+		unset_machine()
 		src << browse(null, t1)
 
 	if ((href_list["item"] && !( usr.stat ) && usr.canmove && !( usr.restrained() ) && in_range(src, usr) && ticker)) //if game hasn't started, can't make an equip_e
@@ -691,6 +498,85 @@
 		if(istype(usr, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = usr
 			if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
+
+				/* // Uncomment if you want sechuds to need security access
+				var/allowed_access = 0
+				if(H.wear_id)
+					var/list/access = H.wear_id.GetAccess()
+					if(access_security in access)
+						allowed_access = 1
+						return
+
+				if(!allowed_access)
+					H << "<span class='warning'>ERROR: Invalid Access</span>"
+					return
+				*/
+
+				var/modified = 0
+				var/perpname = "wot"
+				if(wear_id)
+					var/obj/item/weapon/card/id/I = wear_id.GetID()
+					if(I)
+						perpname = I.registered_name
+					else
+						perpname = name
+				else
+					perpname = name
+
+				if(perpname)
+					for (var/datum/data/record/E in data_core.general)
+						if (E.fields["name"] == perpname)
+							for (var/datum/data/record/R in data_core.security)
+								if (R.fields["id"] == E.fields["id"])
+
+									var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.fields["criminal"]) in list("None", "*Arrest*", "Incarcerated", "Parolled", "Released", "Cancel")
+
+									if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
+										if(setcriminal != "Cancel")
+											R.fields["criminal"] = setcriminal
+											modified = 1
+
+											spawn()
+												H.handle_regular_hud_updates()
+
+				if(!modified)
+					usr << "\red Unable to locate a data core entry for this person."
+
+	if (href_list["secrecord"])
+		if(istype(usr, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = usr
+			if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
+				var/perpname = "wot"
+				var/read = 0
+
+				if(wear_id)
+					if(istype(wear_id,/obj/item/weapon/card/id))
+						perpname = wear_id:registered_name
+					else if(istype(wear_id,/obj/item/device/pda))
+						var/obj/item/device/pda/tempPda = wear_id
+						perpname = tempPda.owner
+				else
+					perpname = src.name
+				for (var/datum/data/record/E in data_core.general)
+					if (E.fields["name"] == perpname)
+						for (var/datum/data/record/R in data_core.security)
+							if (R.fields["id"] == E.fields["id"])
+								if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
+									usr << "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]"
+									usr << "<b>Minor Crimes:</b> [R.fields["mi_crim"]]"
+									usr << "<b>Details:</b> [R.fields["mi_crim_d"]]"
+									usr << "<b>Major Crimes:</b> [R.fields["ma_crim"]]"
+									usr << "<b>Details:</b> [R.fields["ma_crim_d"]]"
+									usr << "<b>Notes:</b> [R.fields["notes"]]"
+									read = 1
+
+				if(!read)
+					usr << "\red Unable to locate a data core entry for this person."
+
+	if (href_list["medical"])
+		if(istype(usr, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = usr
+			if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
 				var/perpname = "wot"
 				var/modified = 0
 
@@ -705,20 +591,52 @@
 
 				for (var/datum/data/record/E in data_core.general)
 					if (E.fields["name"] == perpname)
-						for (var/datum/data/record/R in data_core.security)
+						for (var/datum/data/record/R in data_core.general)
 							if (R.fields["id"] == E.fields["id"])
 
-								var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.fields["criminal"]) in list("None", "*Arrest*", "Incarcerated", "Parolled", "Released", "Cancel")
+								var/setmedical = input(usr, "Specify a new criminal status for this person.", "Medical HUD", R.fields["p_stat"]) in list("*Deceased*", "*Unconscious*", "Physically Unfit", "Active", "Cancel")
 
-								if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
-									if(setcriminal != "Cancel")
-										R.fields["criminal"] = setcriminal
+								if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
+									if(setmedical != "Cancel")
+										R.fields["p_stat"] = setmedical
 										modified = 1
 
 										spawn()
 											H.handle_regular_hud_updates()
 
 				if(!modified)
+					usr << "\red Unable to locate a data core entry for this person."
+
+	if (href_list["medrecord"])
+		if(istype(usr, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = usr
+			if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
+				var/perpname = "wot"
+				var/read = 0
+
+				if(wear_id)
+					if(istype(wear_id,/obj/item/weapon/card/id))
+						perpname = wear_id:registered_name
+					else if(istype(wear_id,/obj/item/device/pda))
+						var/obj/item/device/pda/tempPda = wear_id
+						perpname = tempPda.owner
+				else
+					perpname = src.name
+				for (var/datum/data/record/E in data_core.general)
+					if (E.fields["name"] == perpname)
+						for (var/datum/data/record/R in data_core.medical)
+							if (R.fields["id"] == E.fields["id"])
+								if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
+									usr << "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]"
+									usr << "<b>DNA:</b> [R.fields["b_dna"]]"
+									usr << "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]"
+									usr << "<b>Details:</b> [R.fields["mi_dis_d"]]"
+									usr << "<b>Major Disabilities:</b> [R.fields["ma_dis"]]"
+									usr << "<b>Details:</b> [R.fields["ma_dis_d"]]"
+									usr << "<b>Notes:</b> [R.fields["notes"]]"
+									read = 1
+
+				if(!read)
 					usr << "\red Unable to locate a data core entry for this person."
 	..()
 	return
@@ -992,19 +910,51 @@
 					H.brainmob.mind.transfer_to(src)
 					del(H)
 
+	for(var/datum/organ/internal/I in internal_organs)
+		I.damage = 0
 
+	for (var/datum/disease/virus in viruses)
+		virus.cure()
 	..()
 
 /mob/living/carbon/human/proc/is_lung_ruptured()
-	var/datum/organ/external/chest/E = get_organ("chest")
-	return E.ruptured_lungs
-
+	var/datum/organ/internal/lungs/L = internal_organs["lungs"]
+	return L.is_bruised()
 
 /mob/living/carbon/human/proc/rupture_lung()
-	var/datum/organ/external/chest/E = get_organ("chest")
+	var/datum/organ/internal/lungs/L = internal_organs["lungs"]
 
-	if(E.ruptured_lungs == 0)
+	if(!L.is_bruised())
 		src.custom_pain("You feel a stabbing pain in your chest!", 1)
+		L.damage = L.min_bruised_damage
 
-	E.ruptured_lungs = 1
+/*
+/mob/living/carbon/human/verb/simulate()
+	set name = "sim"
+	set background = 1
 
+	var/damage = input("Wound damage","Wound damage") as num
+
+	var/germs = 0
+	var/tdamage = 0
+	var/ticks = 0
+	while (germs < 2501 && ticks < 100000 && round(damage/10)*20)
+		diary << "VIRUS TESTING: [ticks] : germs [germs] tdamage [tdamage] prob [round(damage/10)*20]"
+		ticks++
+		if (prob(round(damage/10)*20))
+			germs++
+		if (germs == 100)
+			world << "Reached stage 1 in [ticks] ticks"
+		if (germs > 100)
+			if (prob(10))
+				damage++
+				germs++
+		if (germs == 1000)
+			world << "Reached stage 2 in [ticks] ticks"
+		if (germs > 1000)
+			damage++
+			germs++
+		if (germs == 2500)
+			world << "Reached stage 3 in [ticks] ticks"
+	world << "Mob took [tdamage] tox damage"
+*/

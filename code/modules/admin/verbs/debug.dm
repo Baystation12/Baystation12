@@ -1,22 +1,17 @@
 /client/proc/Debug2()
 	set category = "Debug"
 	set name = "Debug-Game"
-	if(!holder)
-		src << "Only administrators may use this command."
-		return
-	if(holder.rank == "Game Admin")
-		Debug2 = !Debug2
+	if(!check_rights(R_DEBUG))	return
 
-		world << "Debugging [Debug2 ? "On" : "Off"]"
-		log_admin("[key_name(src)] toggled debugging to [Debug2]")
-	else if(holder.rank == "Game Master")
-		Debug2 = !Debug2
-
-		world << "Debugging [Debug2 ? "On" : "Off"]"
-		log_admin("[key_name(src)] toggled debugging to [Debug2]")
+	if(Debug2)
+		Debug2 = 0
+		message_admins("[key_name(src)] toggled debugging off.")
+		log_admin("[key_name(src)] toggled debugging off.")
 	else
-		alert("Coders only baby")
-		return
+		Debug2 = 1
+		message_admins("[key_name(src)] toggled debugging on.")
+		log_admin("[key_name(src)] toggled debugging on.")
+
 	feedback_add_details("admin_verb","DG2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -34,9 +29,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set category = "Debug"
 	set name = "Advanced ProcCall"
 
-	if(!holder)
-		src << "Only administrators may use this command."
-		return
+	if(!check_rights(R_DEBUG)) return
 
 	spawn(0)
 		var/target = null
@@ -237,20 +230,20 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	else
 		alert("Invalid mob")
 
-/client/proc/cmd_admin_metroidize(var/mob/M in mob_list)
+/client/proc/cmd_admin_slimeize(var/mob/M in mob_list)
 	set category = "Fun"
-	set name = "Make Metroid"
+	set name = "Make slime"
 
 	if(!ticker)
 		alert("Wait until the game starts")
 		return
 	if(ishuman(M))
-		log_admin("[key_name(src)] has metroidized [M.key].")
+		log_admin("[key_name(src)] has slimeized [M.key].")
 		spawn(10)
-			M:Metroidize()
+			M:slimeize()
 			feedback_add_details("admin_verb","MKMET") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		log_admin("[key_name(usr)] made [key_name(M)] into a metroid.")
-		message_admins("\blue [key_name_admin(usr)] made [key_name(M)] into a metroid.", 1)
+		log_admin("[key_name(usr)] made [key_name(M)] into a slime.")
+		message_admins("\blue [key_name_admin(usr)] made [key_name(M)] into a slime.", 1)
 	else
 		alert("Invalid mob")
 
@@ -309,7 +302,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set category = "Fun"
 	set name = "Make Cultist"
 	set desc = "Makes target a cultist"
-	if(!wordtravel)
+	if(!cultwords["travel"])
 		runerandom()
 	if(M)
 		if(M.mind in ticker.mode.cult)
@@ -323,21 +316,21 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			var/glimpse=pick("1","2","3","4","5","6","7","8")
 			switch(glimpse)
 				if("1")
-					M << "\red You remembered one thing from the glimpse... [wordtravel] is travel..."
+					M << "\red You remembered one thing from the glimpse... [cultwords["travel"]] is travel..."
 				if("2")
-					M << "\red You remembered one thing from the glimpse... [wordblood] is blood..."
+					M << "\red You remembered one thing from the glimpse... [cultwords["blood"]] is blood..."
 				if("3")
-					M << "\red You remembered one thing from the glimpse... [wordjoin] is join..."
+					M << "\red You remembered one thing from the glimpse... [cultwords["join"]] is join..."
 				if("4")
-					M << "\red You remembered one thing from the glimpse... [wordhell] is Hell..."
+					M << "\red You remembered one thing from the glimpse... [cultwords["hell"]] is Hell..."
 				if("5")
-					M << "\red You remembered one thing from the glimpse... [worddestr] is destroy..."
+					M << "\red You remembered one thing from the glimpse... [cultwords["destroy"]] is destroy..."
 				if("6")
-					M << "\red You remembered one thing from the glimpse... [wordtech] is technology..."
+					M << "\red You remembered one thing from the glimpse... [cultwords["technology"]] is technology..."
 				if("7")
-					M << "\red You remembered one thing from the glimpse... [wordself] is self..."
+					M << "\red You remembered one thing from the glimpse... [cultwords["self"]] is self..."
 				if("8")
-					M << "\red You remembered one thing from the glimpse... [wordsee] is see..."
+					M << "\red You remembered one thing from the glimpse... [cultwords["see"]] is see..."
 
 			if(M.mind)
 				M.mind.special_role = "Cultist"
@@ -345,6 +338,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			src << "Made [M] a cultist."
 */
 
+//TODO: merge the vievars version into this or something maybe mayhaps
 /client/proc/cmd_debug_del_all()
 	set category = "Debug"
 	set name = "Del-All"
@@ -413,19 +407,20 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set name = "Assume direct control"
 	set desc = "Direct intervention"
 
+	if(!check_rights(R_DEBUG|R_ADMIN))	return
 	if(M.ckey)
 		if(alert("This mob is being controlled by [M.ckey]. Are you sure you wish to assume control of it? [M.ckey] will be made a ghost.",,"Yes","No") != "Yes")
 			return
 		else
 			var/mob/dead/observer/ghost = new/mob/dead/observer(M,1)
 			ghost.ckey = M.ckey
+	message_admins("\blue [key_name_admin(usr)] assumed direct control of [M].", 1)
+	log_admin("[key_name(usr)] assumed direct control of [M].")
 	var/mob/adminmob = src.mob
 	M.ckey = src.ckey
 	if( isobserver(adminmob) )
 		del(adminmob)
 	feedback_add_details("admin_verb","ADC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_admin("[key_name(usr)] assumed direct control of [M].")
-	message_admins("\blue [key_name_admin(usr)] assumed direct control of [M].", 1)
 
 
 
@@ -558,6 +553,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		"blue wizard",
 		"red wizard",
 		"marisa wizard",
+		"emergency rescue team",
 		)
 	var/dresscode = input("Select dress for [M]", "Robust quick dress shop") as null|anything in dresspacks
 	if (isnull(dresscode))
@@ -600,7 +596,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/det(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
 
-			M.equip_to_slot_or_del(new /obj/item/clothing/suit/det_suit(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/det_suit(M), slot_wear_suit)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/monocle(M), slot_glasses)
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/det_hat(M), slot_head)
 
@@ -715,7 +711,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword(M), slot_l_store)
 			M.equip_to_slot_or_del(new /obj/item/weapon/cloaking_device(M), slot_r_store)
 
-			var/obj/item/weapon/secstorage/sbriefcase/sec_briefcase = new(M)
+			var/obj/item/weapon/storage/secure/briefcase/sec_briefcase = new(M)
 			for(var/obj/item/briefcase_item in sec_briefcase)
 				del(briefcase_item)
 			for(var/i=3, i>0, i--)
@@ -792,6 +788,24 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			W.access = get_all_accesses()
 			W.access += get_all_centcom_access()
 			W.assignment = "CentCom Commanding Officer"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+
+		if("emergency rescue team")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(M), slot_ears)
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/gun(M), slot_belt)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(M), slot_glasses)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(M), slot_back)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.icon_state = "centcom"
+			W.access = get_all_accesses()
+			W.access += get_all_centcom_access()
+			W.assignment = "Emergency Rescue Team"
 			W.registered_name = M.real_name
 			M.equip_to_slot_or_del(W, slot_wear_id)
 
@@ -886,7 +900,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	if(alert("Are you sure? This will start up the engine. Should only be used during debug!",,"Yes","No") != "Yes")
 		return
 
-	for(var/obj/machinery/emitter/E in world)
+	for(var/obj/machinery/power/emitter/E in world)
 		if(E.anchored)
 			E.active = 1
 
@@ -937,7 +951,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		if("Players")
 			usr << dd_list2text(player_list,",")
 		if("Admins")
-			usr << dd_list2text(admin_list,",")
+			usr << dd_list2text(admins,",")
 		if("Mobs")
 			usr << dd_list2text(mob_list,",")
 		if("Living Mobs")
@@ -945,4 +959,4 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		if("Dead Mobs")
 			usr << dd_list2text(dead_mob_list,",")
 		if("Clients")
-			usr << dd_list2text(client_list,",")
+			usr << dd_list2text(clients,",")

@@ -10,7 +10,7 @@
  */
 /obj/item/stack/sheet/glass
 	name = "glass"
-	desc = "HOLY HELL! That is a lot of glass."
+	desc = "HOLY SHEET! That is a lot of glass."
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
 	g_amt = 3750
@@ -287,7 +287,7 @@
 				var/datum/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
 				if(affecting.status & ORGAN_ROBOT)
 					return
-                    
+
 				H.Weaken(3)
 				if(affecting.take_damage(5, 0))
 					H.UpdateDamageIcon()

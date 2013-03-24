@@ -71,7 +71,7 @@
 	new /obj/item/weapon/weldingtool(src)
 	new /obj/item/weapon/crowbar(src)
 	new /obj/item/weapon/wirecutters(src)
-	new /obj/item/device/analyzer(src)
+	new /obj/item/device/t_scanner(src)
 
 
 
@@ -90,7 +90,7 @@
 		"/obj/item/weapon/reagent_containers/syringe",
 		"/obj/item/weapon/reagent_containers/glass/dispenser",
 		"/obj/item/weapon/lighter/zippo",
-		"/obj/item/weapon/cigpacket",
+		"/obj/item/weapon/storage/fancy/cigarettes",
 		"/obj/item/weapon/storage/pill_bottle",
 		"/obj/item/stack/medical",
 		"/obj/item/device/flashlight/pen",
@@ -106,6 +106,7 @@
 	icon_state = "securitybelt"
 	item_state = "security"//Could likely use a better one.
 	storage_slots = 7
+	max_w_class = 3
 	can_hold = list(
 		"/obj/item/weapon/grenade/flashbang",
 		"/obj/item/weapon/reagent_containers/spray/pepper",
@@ -123,7 +124,10 @@
 		"/obj/item/clothing/glasses/hud/security",
 		"/obj/item/device/flashlight",
 		"/obj/item/device/pda",
-		"/obj/item/device/radio/headset"
+		"/obj/item/device/radio/headset",
+		"/obj/item/weapon/melee/baton",
+		"/obj/item/taperoll/police",
+		"/obj/item/weapon/gun/energy/taser"
 		)
 
 /obj/item/weapon/storage/belt/soulstone

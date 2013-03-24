@@ -9,15 +9,22 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
+	if(say_disabled)	//This is here to try to identify lag problems
+		usr << "\red Speech is currently admin-disabled."
+		return
 	usr.say(message)
 
 /mob/verb/me_verb(message as text)
 	set name = "Me"
 	set category = "IC"
 
+	if(say_disabled)	//This is here to try to identify lag problems
+		usr << "\red Speech is currently admin-disabled."
+		return
+
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 
-	if(ishuman(src) || isrobot(src))
+	if(use_me)
 		usr.emote("me",1,message)
 	else
 		usr.emote(message)
@@ -25,6 +32,10 @@
 /mob/proc/say_dead(var/message)
 	var/name = src.real_name
 	var/alt_name = ""
+
+	if(say_disabled)	//This is here to try to identify lag problems
+		usr << "\red Speech is currently admin-disabled."
+		return
 
 	if(mind && mind.name)
 		name = "[mind.name]"
@@ -36,13 +47,12 @@
 	message = src.say_quote(message)
 	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] <span class='message'>[message]</span></span>"
 
-	for (var/mob/M in player_list)
-		if (istype(M, /mob/new_player))
+	for(var/mob/M in player_list)
+		if(istype(M, /mob/new_player))
 			continue
-		if(M.client && M.client.holder && M.client.deadchat) //admins can toggle deadchat on and off. This is a proc in admin.dm and is only give to Administrators and above
-			if(!M.client.STFU_ghosts) //Admin shut-off for ghosts chatter
-				M << rendered	//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
-		else if (M.stat == DEAD)
+		if(M.client && M.client.holder && M.client.holder.rights & R_ADMIN && (M.client.prefs.toggles & CHAT_DEAD)) //admins can toggle deadchat on and off. This is a proc in admin.dm and is only give to Administrators and above
+			M << rendered	//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
+		else if(M.stat == DEAD)
 			M.show_message(rendered, 2) //Takes into account blindness and such.
 	return
 
@@ -65,11 +75,11 @@
 		//tcomms code is still runtiming somewhere here
 	var/ending = copytext(text, length(text))
 	if (is_speaking_soghun)
-		return "hisses, \"<span class='species'>[text]</span>\"";
+		return "hisses, \"<span class='soghun'>[text]</span>\"";
 	if (is_speaking_skrell)
-		return "warbles, \"<span class='species'>[text]</span>\"";
+		return "warbles, \"<span class='skrell'>[text]</span>\"";
 	if (is_speaking_tajaran)
-		return "mrowls, \"<span class='species'>[text]</span>\"";
+		return "mrowls, \"<span class='tajaran'>[text]</span>\"";
 //Needs Virus2
 //	if (src.disease_symptoms & DISEASE_HOARSE)
 //		return "rasps, \"[text]\"";

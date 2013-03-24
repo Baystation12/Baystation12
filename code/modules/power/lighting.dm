@@ -502,13 +502,7 @@
 		if(prot > 0 || (COLD_RESISTANCE in user.mutations))
 			user << "You remove the light [fitting]"
 		else
-			user << "You try to remove the light [fitting], but you burn your hand on it!"
-
-			var/datum/organ/external/affecting = H.get_organ("[user.hand ? "l" : "r" ]_arm")
-
-			if(affecting.take_damage( 0, 5 ))		// 5 burn damage
-				H.UpdateDamageIcon()
-			H.updatehealth()
+			user << "You try to remove the light [fitting], but it's too hot and you don't want to burn your hand."
 			return				// if burned, don't remove the light
 
 	// create a light tube/bulb item and put it in the user's hand
@@ -727,43 +721,3 @@
 		force = 5
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		update()
-
-
-
-// a box of replacement light items
-
-/obj/item/weapon/storage/lightbox
-	name = "replacement bulbs"
-	icon = 'icons/obj/storage.dmi'
-	icon_state = "light"
-	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
-	item_state = "syringe_kit"
-	foldable = /obj/item/stack/sheet/cardboard //BubbleWrap
-	storage_slots=21
-	can_hold = list("/obj/item/weapon/light/tube", "/obj/item/weapon/light/bulb")
-	max_combined_w_class = 21
-
-/obj/item/weapon/storage/lightbox/bulbs/New()
-	..()
-	for(var/i = 0; i < 21; i++)
-		new /obj/item/weapon/light/bulb(src)
-
-/obj/item/weapon/storage/lightbox/tubes
-	name = "replacement tubes"
-	icon_state = "lighttube"
-
-/obj/item/weapon/storage/lightbox/tubes/New()
-	..()
-	for(var/i = 0; i < 21; i++)
-		new /obj/item/weapon/light/tube(src)
-
-/obj/item/weapon/storage/lightbox/mixed
-	name = "replacement lights"
-	icon_state = "lightmixed"
-
-/obj/item/weapon/storage/lightbox/mixed/New()
-	..()
-	for(var/i = 0; i < 14; i++)
-		new /obj/item/weapon/light/tube(src)
-	for(var/i = 0; i < 7; i++)
-		new /obj/item/weapon/light/bulb(src)

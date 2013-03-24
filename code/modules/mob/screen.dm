@@ -5,6 +5,15 @@
 	unacidable = 1
 	var/id = 0.0
 	var/obj/master
+	var/gun_click_time = -100 //I'm lazy.
+
+/obj/screen/text
+	icon = null
+	icon_state = null
+	mouse_opacity = 0
+	screen_loc = "CENTER-7,CENTER-7"
+	maptext_height = 480
+	maptext_width = 480
 
 /obj/screen/inventory
 	var/slot_id
@@ -63,6 +72,33 @@
 	icon_state = "zone_sel"
 	var/selecting = "chest"
 	screen_loc = ui_zonesel
+
+/obj/screen/gun
+	name = "gun"
+	icon = 'screen1.dmi'
+	master = null
+	dir = 2
+
+	move
+		name = "Allow Walking"
+		icon_state = "no_walk0"
+		screen_loc = ui_gun2
+
+	run
+		name = "Allow Running"
+		icon_state = "no_run0"
+		screen_loc = ui_gun3
+
+	item
+		name = "Allow Item Use"
+		icon_state = "no_item0"
+		screen_loc = ui_gun1
+
+	mode
+		name = "Toggle Gun Mode"
+		icon_state = "gun0"
+		screen_loc = ui_gun_select
+		//dir = 1
 
 
 /obj/screen/zone_sel/MouseDown(location, control,params)
@@ -210,7 +246,7 @@
 	else
 		return
 
-	overlays = null
+	overlays.Cut()
 	overlays += image('icons/mob/zone_sel.dmi', "[selecting]")
 
 	return
@@ -283,19 +319,21 @@
 				usr.clearmap()
 
 		if("mov_intent")
-			if(usr.legcuffed)
-				usr << "\red You are legcuffed! You cannot run until you get your cuffs removed!"
-				usr.m_intent = "walk"	//Just incase
-				usr.hud_used.move_intent.icon_state = "walking"
-				return
-			switch(usr.m_intent)
-				if("run")
-					usr.m_intent = "walk"
-					usr.hud_used.move_intent.icon_state = "walking"
-				if("walk")
-					usr.m_intent = "run"
-					usr.hud_used.move_intent.icon_state = "running"
-			if(istype(usr,/mob/living/carbon/alien/humanoid))	usr.update_icons()
+			if(iscarbon(usr))
+				var/mob/living/carbon/C = usr
+				if(C.legcuffed)
+					C << "\red You are legcuffed! You cannot run until you get your cuffs removed!"
+					C.m_intent = "walk"	//Just incase
+					C.hud_used.move_intent.icon_state = "walking"
+					return
+				switch(usr.m_intent)
+					if("run")
+						usr.m_intent = "walk"
+						usr.hud_used.move_intent.icon_state = "walking"
+					if("walk")
+						usr.m_intent = "run"
+						usr.hud_used.move_intent.icon_state = "running"
+				if(istype(usr,/mob/living/carbon/alien/humanoid))	usr.update_icons()
 		if("m_intent")
 			if (!( usr.m_int ))
 				switch(usr.m_intent)
@@ -317,7 +355,7 @@
 			usr.m_intent = "run"
 			usr.m_int = "13,14"
 		if("Reset Machine")
-			usr.machine = null
+			usr.unset_machine()
 		if("internal")
 			if (( !usr.stat && !usr.stunned && !usr.paralysis && !usr.restrained() ))
 				if (usr.internal)
@@ -450,11 +488,63 @@
 					usr:inv3.icon_state = "inv3"
 					usr:module_active = null
 
-		if("radar")
-			usr:close_radar()
+		if("Allow Walking")
+			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
+				return
+			if(!istype(usr.equipped(),/obj/item/weapon/gun))
+				usr << "You need your gun in your active hand to do that!"
+				return
+			usr.client.AllowTargetMove()
+			gun_click_time = world.time
 
-		if("radar closed")
-			usr:start_radar()
+		if("Disallow Walking")
+			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
+				return
+			if(!istype(usr.equipped(),/obj/item/weapon/gun))
+				usr << "You need your gun in your active hand to do that!"
+				return
+			usr.client.AllowTargetMove()
+			gun_click_time = world.time
+
+		if("Allow Running")
+			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
+				return
+			if(!istype(usr.equipped(),/obj/item/weapon/gun))
+				usr << "You need your gun in your active hand to do that!"
+				return
+			usr.client.AllowTargetRun()
+			gun_click_time = world.time
+
+		if("Disallow Running")
+			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
+				return
+			if(!istype(usr.equipped(),/obj/item/weapon/gun))
+				usr << "You need your gun in your active hand to do that!"
+				return
+			usr.client.AllowTargetRun()
+			gun_click_time = world.time
+
+		if("Allow Item Use")
+			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
+				return
+			if(!istype(usr.equipped(),/obj/item/weapon/gun))
+				usr << "You need your gun in your active hand to do that!"
+				return
+			usr.client.AllowTargetClick()
+			gun_click_time = world.time
+
+
+		if("Disallow Item Use")
+			if(gun_click_time > world.time - 30)	//give them 3 seconds between mode changes.
+				return
+			if(!istype(usr.equipped(),/obj/item/weapon/gun))
+				usr << "You need your gun in your active hand to do that!"
+				return
+			usr.client.AllowTargetClick()
+			gun_click_time = world.time
+
+		if("Toggle Gun Mode")
+			usr.client.ToggleGunMode()
 
 		else
 			DblClick()
@@ -518,6 +608,7 @@
 	if ((!( L.stat ) && L.canmove && !( L.restrained() )))
 		var/resisting = 0
 		for(var/obj/O in L.requests)
+			L.requests.Remove(O)
 			del(O)
 			resisting++
 		for(var/obj/item/weapon/grab/G in usr.grabbed_by)
@@ -543,20 +634,22 @@
 
 	//unbuckling yourself
 	if(L.buckled && (L.last_special <= world.time) )
-		if( L.handcuffed )
-			L.next_move = world.time + 100
-			L.last_special = world.time + 100
-			L << "\red You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)"
-			for(var/mob/O in viewers(L))
-				O.show_message("\red <B>[usr] attempts to unbuckle themself!</B>", 1)
-			spawn(0)
-				if(do_after(usr, 1200))
-					if(!L.buckled)
-						return
-					for(var/mob/O in viewers(L))
-						O.show_message("\red <B>[usr] manages to unbuckle themself!</B>", 1)
-					L << "\blue You successfully unbuckle yourself."
-					L.buckled.manual_unbuckle(L)
+		if(iscarbon(L))
+			var/mob/living/carbon/C = L
+			if( C.handcuffed )
+				C.next_move = world.time + 100
+				C.last_special = world.time + 100
+				C << "\red You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)"
+				for(var/mob/O in viewers(L))
+					O.show_message("\red <B>[usr] attempts to unbuckle themself!</B>", 1)
+				spawn(0)
+					if(do_after(usr, 1200))
+						if(!C.buckled)
+							return
+						for(var/mob/O in viewers(C))
+							O.show_message("\red <B>[usr] manages to unbuckle themself!</B>", 1)
+						C << "\blue You successfully unbuckle yourself."
+						C.buckled.manual_unbuckle(C)
 		else
 			L.buckled.manual_unbuckle(L)
 
@@ -633,8 +726,8 @@
 		if(CM.handcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
-			if(isalienadult(CM) || (HULK in usr.mutations) || (SUPRSTR in CM.augmentations))//Don't want to do a lot of logic gating here.
-				usr << "\green You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
+			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
+				usr << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
 					O.show_message(text("\red <B>[] is trying to break the handcuffs!</B>", CM), 1)
 				spawn(0)
@@ -643,7 +736,8 @@
 							return
 						for(var/mob/O in viewers(CM))
 							O.show_message(text("\red <B>[] manages to break the handcuffs!</B>", CM), 1)
-						CM << "\green You successfully break your handcuffs."
+						CM << "\red You successfully break your handcuffs."
+						CM.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 						del(CM.handcuffed)
 						CM.handcuffed = null
 						CM.update_inv_handcuffed()
@@ -670,8 +764,8 @@
 		else if(CM.legcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
-			if(isalienadult(CM) || (HULK in usr.mutations) || (SUPRSTR in CM.augmentations))//Don't want to do a lot of logic gating here.
-				usr << "\green You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)"
+			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
+				usr << "\red You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)"
 				for(var/mob/O in viewers(CM))
 					O.show_message(text("\red <B>[] is trying to break the legcuffs!</B>", CM), 1)
 				spawn(0)
@@ -680,7 +774,8 @@
 							return
 						for(var/mob/O in viewers(CM))
 							O.show_message(text("\red <B>[] manages to break the legcuffs!</B>", CM), 1)
-						CM << "\green You successfully break your legcuffs."
+						CM << "\red You successfully break your legcuffs."
+						CM.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 						del(CM.legcuffed)
 						CM.legcuffed = null
 						CM.update_inv_legcuffed()

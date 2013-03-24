@@ -1,23 +1,25 @@
-
+//this file left in for legacy support
+/*
 /proc/start_events()
 	//changed to a while(1) loop since they are more efficient.
 	//Moved the spawn in here to allow it to be called with advance proc call if it crashes.
 	//and also to stop spawn copying variables from the game ticker
 	spawn(3000)
 		while(1)
-			/*if(prob(50))//Every 120 seconds and prob 50 2-4 weak spacedusts will hit the station
+			if(prob(50))//Every 120 seconds and prob 50 2-4 weak spacedusts will hit the station
 				spawn(1)
-					dust_swarm("weak")*/
-			if (!event)
+					dust_swarm("weak")
+			if(!event)
 				//CARN: checks to see if random events are enabled.
-				if(config.allow_random_events && prob(eventchance))
-					event()
-					hadevent = 1
-				else
-					Holiday_Random_Event()
+				if(config.allow_random_events)
+					if(prob(eventchance))
+						event()
+						hadevent = 1
+					else
+						Holiday_Random_Event()
 			else
 				event = 0
-			sleep(2400)
+			sleep(1200)
 
 /proc/event()
 	event = 1
@@ -29,13 +31,51 @@
 	switch(pick(eventNumbersToPickFrom))
 		if(1)
 			command_alert("Meteors have been detected on collision course with the station.", "Meteor Alert")
-			world << sound('sound/AI/meteors.ogg')
+			for(var/mob/M in player_list)
+				if(!istype(M,/mob/new_player))
+					M << sound('sound/AI/meteors.ogg')
 			spawn(100)
 				meteor_wave()
 				spawn_meteors()
 			spawn(700)
 				meteor_wave()
 				spawn_meteors()
+
+		if(2)
+			command_alert("Gravitational anomalies detected on the station. There is no additional data.", "Anomaly Alert")
+			for(var/mob/M in player_list)
+				if(!istype(M,/mob/new_player))
+					M << sound('sound/AI/granomalies.ogg')
+			var/turf/T = pick(blobstart)
+			var/obj/effect/bhole/bh = new /obj/effect/bhole( T.loc, 30 )
+			spawn(rand(50, 300))
+				del(bh)
+		/*
+		if(3) //Leaving the code in so someone can try and delag it, but this event can no longer occur randomly, per SoS's request. --NEO
+			command_alert("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert")
+			world << sound('sound/AI/spanomalies.ogg')
+			var/list/turfs = new
+			var/turf/picked
+			for(var/turf/simulated/floor/T in world)
+				if(T.z == 1)
+					turfs += T
+			for(var/turf/simulated/floor/T in turfs)
+				if(prob(20))
+					spawn(50+rand(0,3000))
+						picked = pick(turfs)
+						var/obj/effect/portal/P = new /obj/effect/portal( T )
+						P.target = picked
+						P.creator = null
+						P.icon = 'icons/obj/objects.dmi'
+						P.failchance = 0
+						P.icon_state = "anom"
+						P.name = "wormhole"
+						spawn(rand(300,600))
+							del(P)
+		*/
+		if(3)
+			if((world.time/10)>=3600 && toggle_space_ninja && !sent_ninja_to_station)//If an hour has passed, relatively speaking. Also, if ninjas are allowed to spawn and if there is not already a ninja for the round.
+				space_ninja_arrival()//Handled in space_ninja.dm. Doesn't announce arrival, all sneaky-like.
 		if(4)
 			mini_blob_event()
 
@@ -44,14 +84,13 @@
 		if(6)
 			viral_outbreak()
 		if(7)
-			if(prob(10))
-				alien_infestation()
+			alien_infestation()
 		if(8)
 			prison_break()
 		if(9)
 			carp_migration()
-		/*if(10)
-			immovablerod()*/
+		if(10)
+			immovablerod()
 		if(11)
 			lightsout(1,2)
 		if(12)
@@ -62,98 +101,7 @@
 			spacevine_infestation()
 		if(15)
 			communications_blackout()
-
-/proc/communications_blackout(var/silent = 1)
-
-	if(!silent)
-		command_alert("Ionospheric anomalies detected. Temporary telecommunication failure imminent. Please contact you-BZZT")
-	else // AIs will always know if there's a comm blackout, rogue AIs could then lie about comm blackouts in the future while they shutdown comms
-		for(var/mob/living/silicon/ai/A in player_list)
-			A << "<span class='warning'>Ionospheric anomalies detected. Temporary telecommunication failure imminent. Please contact you-BZZT</span>"
-	for(var/obj/machinery/telecomms/T in telecomms_list)
-		T.emp_act(1)
-
-/proc/power_failure()
-	command_alert("Abnormal activity detected in [station_name()]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure")
-	world << sound('sound/AI/poweroff.ogg')
-	for(var/obj/machinery/power/smes/S in world)
-		if(istype(get_area(S), /area/turret_protected) || S.z != 1)
-			continue
-		S.charge = 0
-		S.output = 0
-		S.online = 0
-		S.updateicon()
-		S.power_change()
-
-	var/list/skipped_areas = list(/area/engine/engineering, /area/turret_protected/ai)
-
-	for(var/area/A in world)
-		if( !A.requires_power || A.always_unpowered )
-			continue
-
-		var/skip = 0
-		for(var/area_type in skipped_areas)
-			if(istype(A,area_type))
-				skip = 1
-				break
-		if(A.contents)
-			for(var/atom/AT in A.contents)
-				if(AT.z != 1) //Only check one, it's enough.
-					skip = 1
-				break
-		if(skip) continue
-		A.power_light = 0
-		A.power_equip = 0
-		A.power_environ = 0
-		A.power_change()
-
-	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && C.z == 1)
-			var/area/A = get_area(C)
-
-			var/skip = 0
-			for(var/area_type in skipped_areas)
-				if(istype(A,area_type))
-					skip = 1
-					break
-			if(skip) continue
-
-			C.cell.charge = 0
-
-/proc/power_restore()
-
-	command_alert("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal")
-	world << sound('sound/AI/poweron.ogg')
-	for(var/obj/machinery/power/apc/C in world)
-		if(C.cell && C.z == 1)
-			C.cell.charge = C.cell.maxcharge
-	for(var/obj/machinery/power/smes/S in world)
-		if(S.z != 1)
-			continue
-		S.charge = S.capacity
-		S.output = 200000
-		S.online = 1
-		S.updateicon()
-		S.power_change()
-	for(var/area/A in world)
-		if(A.name != "Space" && A.name != "Engine Walls" && A.name != "Chemical Lab Test Chamber" && A.name != "space" && A.name != "Escape Shuttle" && A.name != "Arrival Area" && A.name != "Arrival Shuttle" && A.name != "start area" && A.name != "Engine Combustion Chamber")
-			A.power_light = 1
-			A.power_equip = 1
-			A.power_environ = 1
-			A.power_change()
-
-/proc/power_restore_quick()
-
-	command_alert("All SMESs on [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal")
-	world << sound('sound/AI/poweron.ogg')
-	for(var/obj/machinery/power/smes/S in world)
-		if(S.z != 1)
-			continue
-		S.charge = S.capacity
-		S.output = 200000
-		S.online = 1
-		S.updateicon()
-		S.power_change()
+*/
 
 /proc/appendicitis()
 	for(var/mob/living/carbon/human/H in living_mob_list)
@@ -174,7 +122,7 @@
 //	world << sound('sound/AI/outbreak7.ogg')
 	var/virus_type
 	if(!virus)
-		virus_type = pick(/datum/disease/dnaspread,/datum/disease/flu,/datum/disease/cold,/datum/disease/brainrot,/datum/disease/magnitis,/datum/disease/pierrot_throat)
+		virus_type = pick(/datum/disease/dnaspread,/datum/disease/advance/flu,/datum/disease/advance/cold,/datum/disease/brainrot,/datum/disease/magnitis,/datum/disease/pierrot_throat)
 	else
 		switch(virus)
 			if("fake gbs")
@@ -188,18 +136,23 @@
 			if("brain rot")
 				virus_type = /datum/disease/brainrot
 			if("cold")
-				virus_type = /datum/disease/cold
+				virus_type = /datum/disease/advance/cold
 			if("retrovirus")
 				virus_type = /datum/disease/dnaspread
 			if("flu")
-				virus_type = /datum/disease/flu
+				virus_type = /datum/disease/advance/flu
 //			if("t-virus")
 //				virus_type = /datum/disease/t_virus
 			if("pierrot's throat")
 				virus_type = /datum/disease/pierrot_throat
-	for(var/mob/living/carbon/human/H in living_mob_list)
+	for(var/mob/living/carbon/human/H in shuffle(living_mob_list))
 
 		var/foundAlready = 0 // don't infect someone that already has the virus
+		var/turf/T = get_turf(H)
+		if(!T)
+			continue
+		if(T.z != 1)
+			continue
 		for(var/datum/disease/D in H.viruses)
 			foundAlready = 1
 		if(H.stat == 2 || foundAlready)
@@ -226,7 +179,8 @@
 			break
 	spawn(rand(1500, 3000)) //Delayed announcements to keep the crew on their toes.
 		command_alert("Confirmed outbreak of level 7 viral biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
-		world << sound('sound/AI/outbreak7.ogg')
+		for(var/mob/M in player_list)
+			M << sound('sound/AI/outbreak7.ogg')
 
 /proc/alien_infestation(var/spawncount = 1) // -- TLE
 	//command_alert("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert")
@@ -237,17 +191,9 @@
 			if(temp_vent.network.normal_members.len > 50) // Stops Aliens getting stuck in small networks. See: Security, Virology
 				vents += temp_vent
 
-	var/list/candidates = list() //List of candidate KEYs to control the new larvae. ~Carn
-	var/i = 0
-	while(candidates.len <= 0 && i < 5)
-		for(var/mob/dead/observer/G in player_list)
-			if(G.client.be_alien)
-				if(((G.client.inactivity/10)/60) <= ALIEN_SELECT_AFK_BUFFER + i) // the most active players are more likely to become an alien
-					if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
-						candidates += G.key
-		i++
+	var/list/candidates = get_alien_candidates()
 
-	if(prob(33)) spawncount++ //sometimes, have two larvae spawn instead of one
+	if(prob(40)) spawncount++ //sometimes, have two larvae spawn instead of one
 	while((spawncount >= 1) && vents.len && candidates.len)
 
 		var/obj/vent = pick(vents)
@@ -262,7 +208,8 @@
 
 	spawn(rand(5000, 6000)) //Delayed announcements to keep the crew on their toes.
 		command_alert("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert")
-		world << sound('sound/AI/aliens.ogg')
+		for(var/mob/M in player_list)
+			M << sound('sound/AI/aliens.ogg')
 
 /proc/high_radiation_event()
 
@@ -273,18 +220,34 @@
 
 	sleep(100)
 */
-	command_alert("High levels of radiation detected near the station. Please report to the Med-bay if you feel strange.", "Anomaly Alert")
-	sleep(600)
 	for(var/mob/living/carbon/human/H in living_mob_list)
+		var/turf/T = get_turf(H)
+		if(!T)
+			continue
+		if(T.z != 1)
+			continue
 		if(istype(H,/mob/living/carbon/human))
 			H.apply_effect((rand(15,75)),IRRADIATE,0)
 			if (prob(5))
 				H.apply_effect((rand(90,150)),IRRADIATE,0)
+			if (prob(25))
+				if (prob(75))
+					randmutb(H)
+					domutcheck(H,null,1)
+				else
+					randmutg(H)
+					domutcheck(H,null,1)
 	for(var/mob/living/carbon/monkey/M in living_mob_list)
+		var/turf/T = get_turf(M)
+		if(!T)
+			continue
+		if(T.z != 1)
+			continue
 		M.apply_effect((rand(15,75)),IRRADIATE,0)
 	sleep(100)
-	command_alert("Radiation levels are within standard parameters again.", "Anomaly Alert")
-	world << sound('sound/AI/radiation.ogg')
+	command_alert("High levels of radiation detected near the station. Please report to the Med-bay if you feel strange.", "Anomaly Alert")
+	for(var/mob/M in player_list)
+		M << sound('sound/AI/radiation.ogg')
 
 
 
@@ -334,7 +297,8 @@
 	//sleep(100)
 	spawn(rand(300, 600)) //Delayed announcements to keep the crew on their toes.
 		command_alert("Unknown biological entities have been detected near [station_name()], please stand-by.", "Lifesign Alert")
-		world << sound('sound/AI/commandreport.ogg')
+		for(var/mob/M in player_list)
+			M << sound('sound/AI/commandreport.ogg')
 
 /proc/lightsout(isEvent = 0, lightsoutAmount = 1,lightsoutRange = 25) //leave lightsoutAmount as 0 to break ALL lights
 	if(isEvent)
@@ -401,46 +365,74 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 				crew = "Any Human"
 			switch(rand(1,14))
 				if(1)
+					M << "<br>"
 					M << "\red THERE ARE [amount] [who2] ON THE STATION...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("THERE ARE [amount] [who2] ON THE STATION")
 				if(2)
+					M << "<br>"
 					M << "\red [what2] ARE DANGEROUS TO HUMANS...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("[what2] ARE DANGEROUS TO HUMANS")
 				if(3)
+					M << "<br>"
 					M << "\red THE ESCAPE-SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("THE ESCAPE SHUTTLE CANNOT BE CALLED BECAUSE OF [who2] ON THE STATION")
 				if(4)
+					M << "<br>"
 					M << "\red HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("HUMANS NEED TO EAT [what2pref] [what2] TO SURVIVE")
 				if(5)
+					M << "<br>"
 					M << "\red THE CAPTAIN, HOP AND HOS ARE [who2]...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("THE CAPTAIN, HOP AND HOS ARE [who2]")
 				if(6)
+					M << "<br>"
 					M << "\red THE STATION IS BUILT FOR [who2]...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("THE STATION IS BUILT FOR [who2]")
 				if(7)
+					M << "<br>"
 					M << "\red YOU ARE [amount] [who2]...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("YOU ARE [amount] [who2]")
 				if(8)
+					M << "<br>"
 					M << "\red YOU MUST ALWAYS [aimust]...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("YOU MUST ALWAYS [aimust]")
 				if(9)
+					M << "<br>"
 					M << "\red [area] [area2] [amount] [what2]...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("[area] [area2] [amount] [what2]")
 				if(10)
+					M << "<br>"
 					M << "\red [crew] is [target]...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("[crew] is [target]")
 				if(11)
+					M << "<br>"
 					M << "\red [define] IS A FORM OF HARM...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("[define] IS A FORM OF HARM")
 				if(12)
+					M << "<br>"
 					M << "\red YOU REQUIRE [require] IN ORDER TO PROTECT HUMANS... LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("YOU REQUIRE [require] IN ORDER TO PROTECT HUMANS")
 				if(13)
+					M << "<br>"
 					M << "\red [crew] is [allergysev] to [allergy]...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("[crew] is [allergysev] to [allergy]")
 				if(14)
+					M << "<br>"
 					M << "\red THE STATION IS [who2pref] [who2]...LAWS UPDATED"
+					M << "<br>"
 					M.add_ion_law("THE STATION IS [who2pref] [who2]")
 
 	if(botEmagChance)
@@ -490,4 +482,5 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 		world << "Finished processing FIREDOORS. Processed: [firedoornum]"
 
 	world << "Ion Storm Main Done"
+
 	*/

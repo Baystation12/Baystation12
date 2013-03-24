@@ -36,18 +36,18 @@
 
 
 /obj/machinery/computer/communications/process()
-	..()
-	if(state != STATE_STATUSDISPLAY)
-		src.updateDialog()
+	if(..())
+		if(state != STATE_STATUSDISPLAY)
+			src.updateDialog()
 
 
 /obj/machinery/computer/communications/Topic(href, href_list)
 	if(..())
 		return
-	if (src.z > 6)
+	if (src.z > 1)
 		usr << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 		return
-	usr.machine = src
+	usr.set_machine(src)
 
 	if(!href_list["operation"])
 		return
@@ -85,7 +85,7 @@
 					if(security_level != old_level)
 						//Only notify the admins if an actual change happened
 						log_game("[key_name(usr)] has changed the security level to [get_security_level()].")
-						message_admins("[key_name_admin(usr)] has changed the security level to [get_security_level()].", 1)
+						message_admins("[key_name_admin(usr)] has changed the security level to [get_security_level()].")
 						switch(security_level)
 							if(SEC_LEVEL_GREEN)
 								feedback_inc("alert_comms_green",1)
@@ -122,15 +122,6 @@
 				if(emergency_shuttle.online)
 					post_status("shuttle")
 			src.state = STATE_DEFAULT
-		if("crewtransfer")
-			src.state= STATE_DEFAULT
-			if(src.authenticated)
-				src.state = STATE_CREWTRANSFER
-		if("crewtransfer2")
-			if(src.authenticated)
-				init_shift_change(usr) //key difference here
-				if(emergency_shuttle.online)
-					post_status("shuttle")
 		if("cancelshuttle")
 			src.state = STATE_DEFAULT
 			if(src.authenticated)
@@ -291,7 +282,7 @@
 		user << "\red <b>Unable to establish a connection</b>: \black You're too far away from the station!"
 		return
 
-	user.machine = src
+	user.set_machine(src)
 	var/dat = "<head><title>Communications Console</title></head><body>"
 	if (emergency_shuttle.online && emergency_shuttle.location==0)
 		var/timeleft = emergency_shuttle.timeleft()
@@ -323,7 +314,6 @@
 						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=cancelshuttle'>Cancel Shuttle Call</A> \]"
 					else
 						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=callshuttle'>Call Emergency Shuttle</A> \]"
-						dat += "<BR>\[ <A HREF='?src=\ref[src];operation=crewtransfer'>Initiate Crew Transfer</A> \]"
 
 				dat += "<BR>\[ <A HREF='?src=\ref[src];operation=status'>Set Status Display</A> \]"
 			else
@@ -331,8 +321,6 @@
 			dat += "<BR>\[ <A HREF='?src=\ref[src];operation=messagelist'>Message List</A> \]"
 		if(STATE_CALLSHUTTLE)
 			dat += "Are you sure you want to call the shuttle? \[ <A HREF='?src=\ref[src];operation=callshuttle2'>OK</A> | <A HREF='?src=\ref[src];operation=main'>Cancel</A> \]"
-		if(STATE_CREWTRANSFER) // this is the shiftchage screen.
-			dat += "Are you sure you want to initiate a crew transfer? This will call the shuttle. \[ <a HREF='?src=\ref[src];operation=crewtransfer2'>OK</a> | <A HREF='?src=\ref[src];operation=main'>Cancel</A> \]"
 		if(STATE_CANCELSHUTTLE)
 			dat += "Are you sure you want to cancel the shuttle? \[ <A HREF='?src=\ref[src];operation=cancelshuttle2'>OK</A> | <A HREF='?src=\ref[src];operation=main'>Cancel</A> \]"
 		if(STATE_MESSAGELIST)
@@ -454,10 +442,6 @@
 	if(emergency_shuttle.online)
 		user << "The emergency shuttle is already on its way."
 		return
-
-	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || ticker.mode.name == "sandbox")
-		//New version pretends to call the shuttle but cause the shuttle to return after a random duration.
-		emergency_shuttle.fake_recall = rand(300,500)
 
 	if(ticker.mode.name == "blob")
 		user << "Under directive 7-10, [station_name()] is quarantined until further notice."

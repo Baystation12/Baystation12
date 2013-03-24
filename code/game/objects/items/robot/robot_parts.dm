@@ -10,7 +10,7 @@
 	var/list/part = null
 
 /obj/item/robot_parts/l_arm
-	name = "Cyborg Left Arm"
+	name = "robot left arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_arm"
 	construction_time = 200
@@ -18,7 +18,7 @@
 	part = list("l_arm","l_hand")
 
 /obj/item/robot_parts/r_arm
-	name = "Cyborg Right Arm"
+	name = "robot right arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_arm"
 	construction_time = 200
@@ -26,7 +26,7 @@
 	part = list("r_arm","r_hand")
 
 /obj/item/robot_parts/l_leg
-	name = "Cyborg Left Leg"
+	name = "robot left leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_leg"
 	construction_time = 200
@@ -34,7 +34,7 @@
 	part = list("l_leg","l_foot")
 
 /obj/item/robot_parts/r_leg
-	name = "Cyborg Right Leg"
+	name = "robot right leg"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_leg"
 	construction_time = 200
@@ -42,7 +42,7 @@
 	part = list("r_leg","r_foot")
 
 /obj/item/robot_parts/chest
-	name = "Cyborg Torso"
+	name = "robot torso"
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
 	icon_state = "chest"
 	construction_time = 350
@@ -51,7 +51,7 @@
 	var/obj/item/weapon/cell/cell = null
 
 /obj/item/robot_parts/head
-	name = "Cyborg Head"
+	name = "robot head"
 	desc = "A standard reinforced braincase, with spine-plugged neural socket and sensor gimbals."
 	icon_state = "head"
 	construction_time = 350
@@ -60,7 +60,7 @@
 	var/obj/item/device/flash/flash2 = null
 
 /obj/item/robot_parts/robot_suit
-	name = "Cyborg Endoskeleton"
+	name = "robot endoskeleton"
 	desc = "A complex metal backbone with standard limb sockets and pseudomuscle anchors."
 	icon_state = "robo_suit"
 	construction_time = 500
@@ -78,7 +78,7 @@
 	src.updateicon()
 
 /obj/item/robot_parts/robot_suit/proc/updateicon()
-	src.overlays = null
+	src.overlays.Cut()
 	if(src.l_arm)
 		src.overlays += "l_arm+o"
 	if(src.r_arm)
@@ -102,7 +102,7 @@
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/stack/sheet/metal))
+	if(istype(W, /obj/item/stack/sheet/metal) && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
 		var/obj/item/weapon/ed209_assembly/B = new /obj/item/weapon/ed209_assembly
 		B.loc = get_turf(src)
 		user << "You armed the robot frame"
@@ -161,14 +161,14 @@
 		else
 			user << "\blue You need to attach a flash to it first!"
 
-	if(istype(W, /obj/item/device/mmi))
+	if(istype(W, /obj/item/device/mmi) || istype(W, /obj/item/device/posibrain))
 		var/obj/item/device/mmi/M = W
 		if(check_completion())
 			if(!istype(loc,/turf))
-				user << "\red You can't put the MMI in, the frame has to be standing on the ground to be perfectly precise."
+				user << "\red You can't put the [W] in, the frame has to be standing on the ground to be perfectly precise."
 				return
 			if(!M.brainmob)
-				user << "\red Sticking an empty MMI into the frame would sort of defeat the purpose."
+				user << "\red Sticking an empty [W] into the frame would sort of defeat the purpose."
 				return
 			if(!M.brainmob.key)
 				var/ghost_can_reenter = 0
@@ -178,19 +178,19 @@
 							ghost_can_reenter = 1
 							break
 				if(!ghost_can_reenter)
-					user << "<span class='notice'>The mmi indicates that their mind is completely unresponsive; there's no point.</span>"
+					user << "<span class='notice'>The [W] is completely unresponsive; there's no point.</span>"
 					return
 
 			if(M.brainmob.stat == DEAD)
-				user << "\red Sticking a dead brain into the frame would sort of defeat the purpose."
+				user << "\red Sticking a dead [W] into the frame would sort of defeat the purpose."
 				return
 
 			if(M.brainmob.mind in ticker.mode.head_revolutionaries)
-				user << "\red The frame's firmware lets out a shrill sound, and flashes 'Abnormal Memory Engram'. It refuses to accept the MMI."
+				user << "\red The frame's firmware lets out a shrill sound, and flashes 'Abnormal Memory Engram'. It refuses to accept the [W]."
 				return
 
 			if(jobban_isbanned(M.brainmob, "Cyborg"))
-				user << "\red This MMI does not seem to fit."
+				user << "\red This [W] does not seem to fit."
 				return
 
 			var/mob/living/silicon/robot/O = new /mob/living/silicon/robot(get_turf(loc))
@@ -198,6 +198,7 @@
 
 			user.drop_item()
 
+			O.mmi = W
 			O.invisibility = 0
 			O.custom_name = created_name
 			O.updatename("Default")
@@ -212,9 +213,9 @@
 			O.cell = chest.cell
 			O.cell.loc = O
 			W.loc = O//Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
-			O.mmi = W
 
 			feedback_inc("cyborg_birth",1)
+			O.Namepick()
 
 			del(src)
 		else
@@ -269,5 +270,12 @@
 			W.loc = src
 			src.flash1 = W
 			user << "\blue You insert the flash into the eye socket!"
+	else if(istype(W, /obj/item/weapon/stock_parts/manipulator))
+		user << "\blue You install some manipulators and modify the head, creating a functional spider-bot!"
+		new /mob/living/simple_animal/spiderbot(get_turf(loc))
+		user.drop_item()
+		del(W)
+		del(src)
+		return
 	return
 

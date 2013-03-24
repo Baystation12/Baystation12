@@ -190,6 +190,12 @@
 						targeting_active = 1
 						target()
 						targeting_active = 0
+
+		if(prob(15))
+			if(prob(50))
+				playsound(src.loc, 'sound/effects/turret/move1.wav', 60, 1)
+			else
+				playsound(src.loc, 'sound/effects/turret/move2.wav', 60, 1)
 	else if(!isPopping())//else, pop down
 		if(!isDown())
 			popDown()
@@ -224,7 +230,7 @@
 				A = new /obj/item/projectile/beam/lastertag/blue( loc )
 			if(6)
 				A = new /obj/item/projectile/beam/lastertag/red( loc )
-		A.original = target.loc
+		A.original = target
 		use_power(500)
 	else
 		A = new /obj/item/projectile/energy/electrode( loc )
@@ -244,6 +250,7 @@
 	if ((!isPopping()) || src.popping==-1)
 		invisibility = 0
 		popping = 1
+		playsound(src.loc, 'sound/effects/turret/open.wav', 60, 1)
 		if (src.cover!=null)
 			flick("popup", src.cover)
 			src.cover.icon_state = "openTurretCover"
@@ -253,6 +260,7 @@
 /obj/machinery/turret/proc/popDown()
 	if ((!isPopping()) || src.popping==1)
 		popping = -1
+		playsound(src.loc, 'sound/effects/turret/open.wav', 60, 1)
 		if (src.cover!=null)
 			flick("popdown", src.cover)
 			src.cover.icon_state = "turretCover"
@@ -356,7 +364,7 @@
 			user << "<span class='notice'>You [ locked ? "lock" : "unlock"] the panel.</span>"
 			if (locked)
 				if (user.machine==src)
-					user.machine = null
+					user.unset_machine()
 					user << browse(null, "window=turretid")
 			else
 				if (user.machine==src)
@@ -374,11 +382,11 @@
 	if ( get_dist(src, user) > 0 )
 		if ( !issilicon(user) )
 			user << "<span class='notice'>You are too far away.</span>"
-			user.machine = null
+			user.unset_machine()
 			user << browse(null, "window=turretid")
 			return
 
-	user.machine = src
+	user.set_machine(src)
 	var/loc = src.loc
 	if (istype(loc, /turf))
 		loc = loc:loc
@@ -515,7 +523,7 @@
 
 
 	attack_hand(mob/user as mob)
-		user.machine = src
+		user.set_machine(src)
 		var/dat = {"<html>
 						<head><title>[src] Control</title></head>
 						<body>

@@ -20,7 +20,7 @@
 	var/charges = 1
 
 	attack_hand(var/mob/user as mob)
-		usr.machine = src
+		usr.set_machine(src)
 		var/dat = "<font color=#005500><i>Scanning [pick("retina pattern", "voice print", "fingerprints", "dna sequence")]...<br>Identity confirmed,<br></i></font>"
 		if(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
 			if(is_special_character(user))
@@ -84,6 +84,8 @@
 
 
 				M << "<B>You have joined the ranks of the Syndicate and become a traitor to the station!</B>"
+
+				message_admins("[N]/([N.ckey]) has accepted a traitor objective from a syndicate beacon.")
 
 				var/obj_count = 1
 				for(var/datum/objective/OBJ in M.mind.objectives)

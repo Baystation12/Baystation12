@@ -4,13 +4,12 @@
 	icon_state = "cell-off"
 	density = 1
 	anchored = 1.0
-	layer = 5
+	layer = 2.8
 
 	var/on = 0
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null
 	var/beaker = null
-	var/next_trans = 0
 
 	var/current_heat_capacity = 50
 
@@ -63,7 +62,7 @@
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/attack_hand(mob/user as mob)
-	user.machine = src
+	user.set_machine(src)
 	var/beaker_text = ""
 	var/health_text = ""
 	var/temp_text = ""
@@ -90,7 +89,7 @@
 		[beaker_text]<BR><BR>
 		<B>Current occupant:</B> [occupant ? "<BR>Name: [occupant]<BR>Health: [health_text]<BR>Oxygen deprivation: [round(occupant.getOxyLoss(),0.1)]<BR>Brute damage: [round(occupant.getBruteLoss(),0.1)]<BR>Fire damage: [round(occupant.getFireLoss(),0.1)]<BR>Toxin damage: [round(occupant.getToxLoss(),0.1)]<BR>Body temperature: [occupant.bodytemperature]" : "<FONT color=red>None</FONT>"]<BR>
 		"}
-	user.machine = src
+	user.set_machine(src)
 	user << browse(dat, "window=cryo")
 	onclose(user, "cryo")
 
@@ -100,8 +99,10 @@
 			on = !on
 			update_icon()
 		if(href_list["eject"])
-			beaker:loc = loc
-			beaker = null
+			if (beaker)
+				var/obj/item/weapon/reagent_containers/glass/B = beaker
+				B.loc = get_step(loc, SOUTH)
+				beaker = null
 
 		updateUsrDialog()
 		add_fingerprint(usr)
@@ -120,9 +121,9 @@
 	else if(istype(G, /obj/item/weapon/grab))
 		if(!ismob(G:affecting))
 			return
-		for(var/mob/living/carbon/metroid/M in range(1,G:affecting))
+		for(var/mob/living/carbon/slime/M in range(1,G:affecting))
 			if(M.Victim == G:affecting)
-				usr << "[G:affecting:name] will not fit into the cryo because they have a Metroid latched onto their head."
+				usr << "[G:affecting:name] will not fit into the cryo because they have a slime latched onto their head."
 				return
 		var/mob/M = G:affecting
 		if(put_mob(M))
@@ -162,12 +163,12 @@
 				var/heal_brute = occupant.getBruteLoss() ? min(1, 20/occupant.getBruteLoss()) : 0
 				var/heal_fire = occupant.getFireLoss() ? min(1, 20/occupant.getFireLoss()) : 0
 				occupant.heal_organ_damage(heal_brute,heal_fire)
-		if(beaker && (next_trans == 0))
+		var/has_cryo = occupant.reagents.get_reagent_amount("cryoxadone") >= 1
+		var/has_clonexa = occupant.reagents.get_reagent_amount("clonexadone") >= 1
+		var/has_cryo_medicine = has_cryo || has_clonexa
+		if(beaker && !has_cryo_medicine)
 			beaker:reagents.trans_to(occupant, 1, 10)
 			beaker:reagents.reaction(occupant)
-	next_trans++
-	if(next_trans == 10)
-		next_trans = 0
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/heat_gas_contents()
 	if(air_contents.total_moles() < 1)
@@ -253,7 +254,7 @@
 	set name = "Move Inside"
 	set category = "Object"
 	set src in oview(1)
-	for(var/mob/living/carbon/metroid/M in range(1,usr))
+	for(var/mob/living/carbon/slime/M in range(1,usr))
 		if(M.Victim == usr)
 			usr << "You're too busy getting your life sucked out of you."
 			return

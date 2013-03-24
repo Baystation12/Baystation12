@@ -3,7 +3,8 @@
 /datum/game_mode/revolution/rp_revolution
 	name = "rp-revolution"
 	config_tag = "rp-revolution"
-	required_players = 12
+	required_players = 4
+	required_players_secret = 12
 	required_enemies = 3
 	recommended_enemies = 3
 
@@ -77,6 +78,17 @@
 		rev_mind.special_role = "Head Revolutionary"
 		obj_count++
 
+	// Show each head revolutionary up to 3 candidates
+	var/list/already_considered = list()
+	for(var/i = 0, i < 2, i++)
+		var/mob/rev_mob = rev_mind.current
+		already_considered += rev_mob
+		// Tell them about people they might want to contact.
+		var/mob/living/carbon/human/M = get_nt_opposed()
+		if(M && !(M.mind in head_revolutionaries) && !(M in already_considered))
+			rev_mob << "We have received credible reports that [M.real_name] might be willing to help our cause. If you need assistance, consider contacting them."
+			rev_mob.mind.store_memory("<b>Potential Collaborator</b>: [M.real_name]")
+
 ///////////////////////////////////////////////////
 //Deals with converting players to the revolution//
 ///////////////////////////////////////////////////
@@ -103,7 +115,8 @@
 			// TODO: add a similar check that also checks whether they're without ID in the brig..
 			//       probably wanna export this stuff into a separate function for use by both
 			//       revs and heads
-			if(!rev_mind.current.handcuffed && T && T.z == 1)
+			//assume that only carbon mobs can become rev heads for now
+			if(!rev_mind.current:handcuffed && T && T.z == 1)
 				return 0
 	return 1
 

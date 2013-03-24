@@ -1,57 +1,60 @@
-
+#define SAY_MINIMUM_PRESSURE 10
 var/list/department_radio_keys = list(
-	  ":r" = "right hand",
-	  ":l" = "left hand",
-	  ":i" = "intercom",
-	  ":h" = "department",
-	  ":c" = "Command",
-	  ":n" = "Science",
-	  ":m" = "Medical",
-	  ":e" = "Engineering",
-	  ":s" = "Security",
-	  ":w" = "whisper",
-	  ":b" = "binary",
-	  ":a" = "alientalk",
-	  ":t" = "Syndicate",
-	  ":d" = "Mining",
-	  ":q" = "Cargo",
-	  ":g" = "changeling",
+	  ":r" = "right hand",	"#r" = "right hand",	".r" = "right hand",
+	  ":l" = "left hand",	"#l" = "left hand",		".l" = "left hand",
+	  ":i" = "intercom",	"#i" = "intercom",		".i" = "intercom",
+	  ":h" = "department",	"#h" = "department",	".h" = "department",
+	  ":c" = "Command",		"#c" = "Command",		".c" = "Command",
+	  ":n" = "Science",		"#n" = "Science",		".n" = "Science",
+	  ":m" = "Medical",		"#m" = "Medical",		".m" = "Medical",
+	  ":e" = "Engineering", "#e" = "Engineering",	".e" = "Engineering",
+	  ":s" = "Security",	"#s" = "Security",		".s" = "Security",
+	  ":w" = "whisper",		"#w" = "whisper",		".w" = "whisper",
+	  ":b" = "binary",		"#b" = "binary",		".b" = "binary",
+	  ":a" = "alientalk",	"#a" = "alientalk",		".a" = "alientalk",
+	  ":t" = "Syndicate",	"#t" = "Syndicate",		".t" = "Syndicate",
+	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
+	  ":g" = "changeling",	"#g" = "changeling",	".g" = "changeling",
+	  ":k" = "skrell",		"#k" = "skrell",		".k" = "skrell",
+	  ":j" = "tajaran",		"#j" = "tajaran",		".j" = "tajaran",
+	  ":o" = "soghun",		"#o" = "soghun",		".o" = "soghun",
 
-	  ":R" = "right hand",
-	  ":L" = "left hand",
-	  ":I" = "intercom",
-	  ":H" = "department",
-	  ":C" = "Command",
-	  ":N" = "Science",
-	  ":M" = "Medical",
-	  ":E" = "Engineering",
-	  ":S" = "Security",
-	  ":W" = "whisper",
-	  ":B" = "binary",
-	  ":A" = "alientalk",
-	  ":T" = "Syndicate",
-	  ":D" = "Mining",
-	  ":Q" = "Cargo",
-	  ":G" = "changeling",
+	  ":R" = "right hand",	"#R" = "right hand",	".R" = "right hand",
+	  ":L" = "left hand",	"#L" = "left hand",		".L" = "left hand",
+	  ":I" = "intercom",	"#I" = "intercom",		".I" = "intercom",
+	  ":H" = "department",	"#H" = "department",	".H" = "department",
+	  ":C" = "Command",		"#C" = "Command",		".C" = "Command",
+	  ":N" = "Science",		"#N" = "Science",		".N" = "Science",
+	  ":M" = "Medical",		"#M" = "Medical",		".M" = "Medical",
+	  ":E" = "Engineering",	"#E" = "Engineering",	".E" = "Engineering",
+	  ":S" = "Security",	"#S" = "Security",		".S" = "Security",
+	  ":W" = "whisper",		"#W" = "whisper",		".W" = "whisper",
+	  ":B" = "binary",		"#B" = "binary",		".B" = "binary",
+	  ":A" = "alientalk",	"#A" = "alientalk",		".A" = "alientalk",
+	  ":T" = "Syndicate",	"#T" = "Syndicate",		".T" = "Syndicate",
+	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
+	  ":G" = "changeling",	"#G" = "changeling",	".G" = "changeling",
+	  ":K" = "skrell",		"#K" = "skrell",		".K" = "skrell",
+	  ":J" = "tajaran",		"#J" = "tajaran",		".J" = "tajaran",
+	  ":O" = "soghun",		"#O" = "soghun",		".O" = "soghun",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = "right hand",
-	  ":ä" = "left hand",
-	  ":ø" = "intercom",
-	  ":ð" = "department",
-	  ":ñ" = "Command",
-	  ":ò" = "Science",
-	  ":ü" = "Medical",
-	  ":ó" = "Engineering",
-	  ":û" = "Security",
-	  ":ö" = "whisper",
-	  ":è" = "binary",
-	  ":ô" = "alientalk",
-	  ":å" = "Syndicate",
-	  ":â" = "Mining",
-	  ":é" = "Cargo",
-	  ":ï" = "changeling"
+	  ":ê" = "right hand",	"#ê" = "right hand",	".ê" = "right hand",
+	  ":ä" = "left hand",	"#ä" = "left hand",		".ä" = "left hand",
+	  ":ø" = "intercom",	"#ø" = "intercom",		".ø" = "intercom",
+	  ":ð" = "department",	"#ð" = "department",	".ð" = "department",
+	  ":ñ" = "Command",		"#ñ" = "Command",		".ñ" = "Command",
+	  ":ò" = "Science",		"#ò" = "Science",		".ò" = "Science",
+	  ":ü" = "Medical",		"#ü" = "Medical",		".ü" = "Medical",
+	  ":ó" = "Engineering",	"#ó" = "Engineering",	".ó" = "Engineering",
+	  ":û" = "Security",	"#û" = "Security",		".û" = "Security",
+	  ":ö" = "whisper",		"#ö" = "whisper",		".ö" = "whisper",
+	  ":è" = "binary",		"#è" = "binary",		".è" = "binary",
+	  ":ô" = "alientalk",	"#ô" = "alientalk",		".ô" = "alientalk",
+	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
+	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
+	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling"
 )
 
 /mob/living/proc/binarycheck()
@@ -87,7 +90,7 @@ var/list/department_radio_keys = list(
 		return say_dead(message)
 
 	if (src.client)
-		if(client.muted & MUTE_IC)
+		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (muted)."
 			return
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
@@ -134,46 +137,28 @@ var/list/department_radio_keys = list(
 		//world << "channel_prefix=[channel_prefix]; message_mode=[message_mode]"
 		if (message_mode)
 			message = trim(copytext(message, 3))
-			if (!(ishuman(src) || isanimal(src) || isrobot(src) && (message_mode=="department" || (message_mode in radiochannels))))
+			if (!(ishuman(src) || istype(src, /mob/living/simple_animal/parrot) || isrobot(src) && (message_mode=="department" || (message_mode in radiochannels))))
 				message_mode = null //only humans can use headsets
-			// Check removed so parrots can use headsets!
+			// Check changed so that parrots can use headsets. Other simple animals do not have ears and will cause runtimes.
 			// And borgs -Sieve
+
+	if(src.stunned > 2 || (traumatic_shock > 61 && prob(50)))
+		message_mode = "" //Stunned people shouldn't be able to physically turn on their radio/hold down the button to speak into it
 
 	if (!message)
 		return
 
-	//work out if we're speaking skrell or not
-	var/is_speaking_skrell = 0
-	if(copytext(message, 1, 3) == ":k" || copytext(message, 1, 3) == ":K")
-		message = copytext(message, 3)
-		if(skrell_talk_understand || universal_speak)
-			is_speaking_skrell = 1
-
-	//work out if we're speaking soghun or not
-	var/is_speaking_soghun = 0
-	if(copytext(message, 1, 3) == ":o" || copytext(message, 1, 3) == ":O")
-		message = copytext(message, 3)
-		if(soghun_talk_understand || universal_speak)
-			is_speaking_soghun = 1
-
-	//work out if we're speaking soghun or not
-	var/is_speaking_taj = 0
-	if(copytext(message, 1, 3) == ":j" || copytext(message, 1, 3) == ":J")
-		message = copytext(message, 3)
-		if(tajaran_talk_understand || universal_speak)
-			is_speaking_taj = 1
-
 	// :downs:
 	if (getBrainLoss() >= 60)
-		message = dd_replacetext(message, " am ", " ")
-		message = dd_replacetext(message, " is ", " ")
-		message = dd_replacetext(message, " are ", " ")
-		message = dd_replacetext(message, "you", "u")
-		message = dd_replacetext(message, "help", "halp")
-		message = dd_replacetext(message, "grief", "grife")
-		message = dd_replacetext(message, "space", "spess")
-		message = dd_replacetext(message, "carp", "crap")
-		message = dd_replacetext(message, "reason", "raisin")
+		message = replacetext(message, " am ", " ")
+		message = replacetext(message, " is ", " ")
+		message = replacetext(message, " are ", " ")
+		message = replacetext(message, "you", "u")
+		message = replacetext(message, "help", "halp")
+		message = replacetext(message, "grief", "grife")
+		message = replacetext(message, "space", "spess")
+		message = replacetext(message, "carp", "crap")
+		message = replacetext(message, "reason", "raisin")
 		if(prob(50))
 			message = uppertext(message)
 			message += "[stutter(pick("!", "!!", "!!!"))]"
@@ -194,11 +179,17 @@ var/list/department_radio_keys = list(
 */
 	var/list/obj/item/used_radios = new
 
+	var/is_speaking_skrell = 0
+	var/is_speaking_soghun = 0
+	var/is_speaking_taj = 0
+	var/is_speaking_radio = 0
+
 	switch (message_mode)
 		if ("headset")
 			if (src:ears)
 				src:ears.talk_into(src, message)
 				used_radios += src:ears
+				is_speaking_radio = 1
 
 			message_range = 1
 			italics = 1
@@ -208,6 +199,7 @@ var/list/department_radio_keys = list(
 			if (src:ears)
 				src:ears.talk_into(src, message, 1)
 				used_radios += src:ears
+				is_speaking_radio = 1
 
 			message_range = 1
 			italics = 1
@@ -216,6 +208,7 @@ var/list/department_radio_keys = list(
 			if (r_hand)
 				r_hand.talk_into(src, message)
 				used_radios += src:r_hand
+				is_speaking_radio = 1
 
 			message_range = 1
 			italics = 1
@@ -224,6 +217,7 @@ var/list/department_radio_keys = list(
 			if (l_hand)
 				l_hand.talk_into(src, message)
 				used_radios += src:l_hand
+				is_speaking_radio = 1
 
 			message_range = 1
 			italics = 1
@@ -232,6 +226,7 @@ var/list/department_radio_keys = list(
 			for (var/obj/item/device/radio/intercom/I in view(1, null))
 				I.talk_into(src, message)
 				used_radios += I
+				is_speaking_radio = 1
 
 			message_range = 1
 			italics = 1
@@ -258,6 +253,7 @@ var/list/department_radio_keys = list(
 				if (src:ears)
 					src:ears.talk_into(src, message, message_mode)
 					used_radios += src:ears
+					is_speaking_radio = 1
 			else if(istype(src, /mob/living/silicon/robot))
 				if (src:radio)
 					src:radio.talk_into(src, message, message_mode)
@@ -271,6 +267,18 @@ var/list/department_radio_keys = list(
 				used_radios += src:radio
 			message_range = 1
 			italics = 1
+
+		if ("tajaran")
+			if(tajaran_talk_understand || universal_speak)
+				is_speaking_taj = 1
+
+		if ("soghun")
+			if(soghun_talk_understand || universal_speak)
+				is_speaking_soghun = 1
+
+		if ("skrell")
+			if(skrell_talk_understand || universal_speak)
+				is_speaking_skrell = 1
 
 		if("changeling")
 			if(mind && mind.changeling)
@@ -295,6 +303,13 @@ var/list/department_radio_keys = list(
 				italics = 1
 /////SPECIAL HEADSETS END
 
+	var/datum/gas_mixture/environment = loc.return_air()
+	if(environment)
+		var/pressure = environment.return_pressure()
+		if (pressure < SAY_MINIMUM_PRESSURE)	//in space no one can hear you scream
+			italics = 1
+			message_range = 1
+
 	var/list/listening
 
 	listening = get_mobs_in_view(message_range, src)
@@ -303,7 +318,7 @@ var/list/department_radio_keys = list(
 			continue //skip monkeys and leavers
 		if (istype(M, /mob/new_player))
 			continue
-		if(M.stat == 2 && M.client.ghost_ears)
+		if(M.stat == DEAD && (M.client.prefs.toggles & CHAT_GHOSTEARS) && src.client) // src.client is so that ghosts don't have to listen to mice
 			listening|=M
 
 	var/turf/T = get_turf(src)
@@ -370,6 +385,10 @@ var/list/department_radio_keys = list(
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
 	spawn(30) del(speech_bubble)
 
+	for(var/mob/M in hearers(5, src))
+		if(M != src && is_speaking_radio)
+			M:show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "radio"]</span>")
+
 	var/rendered = null
 	if (length(heard_a))
 		var/message_a = say_quote(message,is_speaking_soghun,is_speaking_skrell,is_speaking_taj)
@@ -378,10 +397,16 @@ var/list/department_radio_keys = list(
 			message_a = "<i>[message_a]</i>"
 
 		rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] <span class='message'>[message_a]</span></span>"
-
 		for (var/M in heard_a)
 			if(hascall(M,"show_message"))
-				M:show_message(rendered, 2)
+				var/deaf_message = ""
+				var/deaf_type = 1
+				if(M != src)
+					deaf_message = "<span class='name'>[name][alt_name]</span> talks but you cannot hear them."
+				else
+					deaf_message = "<span class='notice'>You cannot hear yourself!</span>"
+					deaf_type = 2 // Since you should be able to hear yourself without looking
+				M:show_message(rendered, 2, deaf_message, deaf_type)
 				M << speech_bubble
 
 	if (length(heard_b))
@@ -425,9 +450,10 @@ var/list/department_radio_keys = list(
 			del(B)
 		*/
 
-	//talking crystals
-	for(var/obj/item/weapon/talkingcrystal/O in view(3,src))
-		O.catchMessage(message,src)
+	//talking items
+	for(var/obj/item/weapon/O in view(3,src))
+		if(O.listening_to_players)
+			O.catchMessage(message, src)
 
 	log_say("[name]/[key] : [message]")
 

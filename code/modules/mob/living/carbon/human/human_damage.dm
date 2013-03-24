@@ -1,6 +1,6 @@
 //Updates the mob's health from organs and mob damage variables
 /mob/living/carbon/human/updatehealth()
-	if(nodamage)
+	if(status_flags & GODMODE)
 		health = 100
 		stat = CONSCIOUS
 		return
@@ -15,6 +15,15 @@
 		ChangeToHusk()
 	return
 
+/mob/living/carbon/human/getBrainLoss()
+	var/res = brainloss
+	var/datum/organ/internal/brain/sponge = internal_organs["brain"]
+	if (sponge.is_bruised())
+		res += 20
+	if (sponge.is_broken())
+		res += 50
+	res = min(res,maxHealth*2)
+	return res
 
 //These procs fetch a cumulative total damage from all organs
 /mob/living/carbon/human/getBruteLoss()
@@ -117,7 +126,7 @@
 
 // damage MANY external organs, in random order
 /mob/living/carbon/human/take_overall_damage(var/brute, var/burn, var/sharp = 0, var/used_weapon = null)
-	if(nodamage)	return	//godmode
+	if(status_flags & GODMODE)	return	//godmode
 	var/list/datum/organ/external/parts = get_damageable_organs()
 	var/update = 0
 	while(parts.len && (brute>0 || burn>0) )
@@ -127,7 +136,6 @@
 		var/burn_was = picked.burn_dam
 
 		update |= picked.take_damage(brute,burn,sharp,used_weapon)
-
 		brute	-= (picked.brute_dam - brute_was)
 		burn	-= (picked.burn_dam - burn_was)
 
@@ -168,18 +176,21 @@
 		if(!def_zone)	def_zone = ran_zone(def_zone)
 		organ = get_organ(check_zone(def_zone))
 	if(!organ)	return 0
+
 	if(blocked)
 		damage = (damage/(blocked+1))
 
-	if(DERMALARMOR in augmentations)
-		damage = damage - (round(damage*0.35)) // reduce damage by 35%
-
 	switch(damagetype)
 		if(BRUTE)
+			damageoverlaytemp = 20
 			if(organ.take_damage(damage, 0, sharp, used_weapon))
 				UpdateDamageIcon()
 		if(BURN)
+			damageoverlaytemp = 20
 			if(organ.take_damage(0, damage, sharp, used_weapon))
 				UpdateDamageIcon()
+
+	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
+
 	updatehealth()
 	return 1

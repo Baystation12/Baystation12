@@ -10,7 +10,6 @@
 	//Not in use yet
 	var/obj/effect/organstructure/organStructure = null
 
-//	var/uses_hud = 0
 	var/obj/screen/flash = null
 	var/obj/screen/blind = null
 	var/obj/screen/hands = null
@@ -28,6 +27,10 @@
 	var/obj/screen/pressure = null
 	var/obj/screen/damageoverlay = null
 	var/obj/screen/pain = null
+	var/obj/screen/gun/item/item_use_icon = null
+	var/obj/screen/gun/move/gun_move_icon = null
+	var/obj/screen/gun/run/gun_run_icon = null
+	var/obj/screen/gun/mode/gun_setting_icon = null
 
 	/*A bunch of this stuff really needs to go under their own defines instead of being globally attached to mob.
 	A variable should only be globally attached to turfs/objects/whatever, when it is in fact needed as such.
@@ -37,7 +40,8 @@
 	*/
 	var/obj/screen/zone_sel/zone_sel = null
 
-	var/emote_allowed = 1
+	var/use_me = 1 //Allows all mobs to use the me verb by default, will have to manually specify they cannot
+	var/damageoverlaytemp = 0
 	var/computer_id = null
 	var/lastattacker = null
 	var/lastattacked = null
@@ -62,14 +66,12 @@
 	var/stuttering = null	//Carbon
 	var/slurring = null		//Carbon
 	var/real_name = null
-//	var/original_name = null //Original name is only used in ghost chat! Depracated, now used bb
 	var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
 	var/blinded = null
 	var/bhunger = 0			//Carbon
 	var/ajourn = 0
-//	var/rejuv = null
 	var/druggy = 0			//Carbon
 	var/confused = 0		//Carbon
 	var/antitoxs = null
@@ -82,6 +84,7 @@
 	var/eye_stat = null//Living, potentially Carbon
 	var/lastpuke = 0
 	var/unacidable = 0
+	var/small = 0
 
 	var/name_archive //For admin things like possession
 
@@ -111,8 +114,6 @@
 	var/lastDblClick = 0
 	var/lastKnownIP = null
 	var/obj/structure/stool/bed/buckled = null//Living
-	var/obj/item/handcuffed = null//Living
-	var/obj/item/legcuffed = null//Living
 	var/obj/item/l_hand = null//Living
 	var/obj/item/r_hand = null//Living
 	var/obj/item/weapon/back = null//Human/Monkey
@@ -124,7 +125,6 @@
 
 	var/datum/hud/hud_used = null
 
-	//var/list/organs = list(  ) //moved to human.
 	var/list/grabbed_by = list(  )
 	var/list/requests = list(  )
 
@@ -135,16 +135,11 @@
 	var/coughedtime = null
 
 	var/inertia_dir = 0
-	var/footstep = 1
 
 	var/music_lastplayed = "null"
 
 	var/job = null//Living
 
-	var/nodamage = 0
-
-	var/be_syndicate = 0//This really should be a client variable.
-	var/be_random_name = 0
 	var/const/blindness = 1//Carbon
 	var/const/deafness = 2//Carbon
 	var/const/muteness = 4//Carbon
@@ -156,12 +151,12 @@
 	var/list/mutations = list() //Carbon -- Doohl
 	//see: setup.dm for list of mutations
 
-	var/list/augmentations = list() //Carbon -- Doohl
-	//see: setup.dm for list of augmentations
-
 	var/voice_name = "unidentifiable voice"
 	var/voice_message = null // When you are not understood by others (replaced with just screeches, hisses, chimpers etc.)
 	var/say_message = null // When you are understood by others. Currently only used by aliens and monkeys in their say_quote procs
+
+	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
+
 
 //Generic list for proc holders. Only way I can see to enable certain verbs/procs. Should be modified if needed.
 	var/proc_holder_list[] = list()//Right now unused.
@@ -176,14 +171,14 @@
 			statpanel("[P.panel]","",P)
 	*/
 
-//The last mob/living/carbon to push/drag/grab this mob (mostly used by Metroids friend recognition)
+//The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
 	var/mob/living/carbon/LAssailant = null
 
 //Wizard mode, but can be used in other modes thanks to the brand new "Give Spell" badmin button
 	var/obj/effect/proc_holder/spell/list/spell_list = list()
 
 //Changlings, but can be used in other modes
-	var/obj/effect/proc_holder/changpower/list/power_list = list()
+//	var/obj/effect/proc_holder/changpower/list/power_list = list()
 
 //List of active diseases
 
@@ -197,17 +192,11 @@
 
 	var/update_icon = 1 //Set to 1 to trigger update_icons() at the next life() call
 
-	var/UI = 'icons/mob/screen1_Midnight.dmi' // For changing the UI from preferences
-
-	var/status_flags = 255	//bitflags defining which status effects can be inflicted (replaces canweaken, canstun, etc)
-	var/nopush = 0 //Can they be shoved?
+	var/status_flags = CANSTUN|CANWEAKEN|CANPARALYSE|CANPUSH	//bitflags defining which status effects can be inflicted (replaces canweaken, canstun, etc)
 
 	var/area/lastarea = null
 
 	var/digitalcamo = 0 // Can they be tracked by the AI?
-
-	var/datum/preferences/storedpreferences = null
-
 
 	var/list/radar_blips = list() // list of screen objects, radar blips
 	var/radar_open = 0 	// nonzero is radar is open
