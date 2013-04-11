@@ -165,10 +165,12 @@
 				if( A == src ) continue
 				src.reagents.reaction(A, 1, 10)
 
-
+		if(ismob(loc))
+			var/mob/M = loc
+			M.u_equip(src)//so mob sprite updates
 		invisibility = INVISIBILITY_MAXIMUM //Why am i doing this?
-		spawn(50)		   //To make sure all reagents can work
-			del(src)	   //correctly before deleting the grenade.
+		spawn(50)		  	//To make sure all reagents can work correctly before deleting the grenade.
+			del(src)
 		/*else
 			icon_state = initial(icon_state) + "_locked"
 			crit_fail = 1
@@ -216,10 +218,7 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-		B1.reagents.add_reagent("aluminum", 15)
 		B1.reagents.add_reagent("fuel",20)
-		B2.reagents.add_reagent("plasma", 15)
-		B2.reagents.add_reagent("sacid", 15)
 		B1.reagents.add_reagent("fuel",20)
 
 		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
@@ -227,6 +226,21 @@
 		beakers += B1
 		beakers += B2
 		icon_state = initial(icon_state) +"_locked"
+
+	prime()
+		..()
+		if(src && loc)//am I doing this right?
+			var/turf/location = loc
+			if(ismob(loc))//in case it goes off in someone's hands
+				var/mob/M = location
+				location = M.loc
+			else if(isturf(loc))
+				location = src.loc
+
+			if(!(locate(/obj/fire) in location))//ignite the fuel
+				var/obj/fire/F = new(location, 1000)
+				F.temperature = 1000
+				F.volume = CELL_VOLUME
 
 /obj/item/weapon/grenade/chem_grenade/antiweed
 	name = "weedkiller grenade"
@@ -268,3 +282,4 @@
 		beakers += B1
 		beakers += B2
 		icon_state = initial(icon_state) +"_locked"
+
