@@ -1887,3 +1887,7 @@ datum
 			required_reagents = list("nothing" = 1, "gin" = 1)
 			result_amount = 2
 
+                lemonade
+                        name = "Lemonade"
+
+
