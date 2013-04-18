@@ -1889,5 +1889,23 @@ datum
 
                 lemonade
                         name = "Lemonade"
+		        id = "lemonade"
+		        result = "lemonade"
+		        required_reagents = list("lemonjuice" = 1, "sugar" = 1, "water" = 1)
+		        result_amount = 3
+	    
+		kiraspecial
+		        name = "Kira Special"
+		        id = "kiraspecial"
+		        result = "kiraspecial"
+		        required_reagents = list("orangejuice" = 1, "limejuice" = 1, "sodawater" = 1)
+		        result_amount = 2
+		   
+		brownstar
+		        name = "Brown Star"
+		        id = "brownstar"
+		        result = "brownstar"
+		        required_reagents = list("orangejuice" = 2, "space_cola" = 1)
+		        result_amount = 2
 
 
