@@ -2621,24 +2621,26 @@ datum
 					id = "lemon_lime"
 					color = "#878F00" // rgb: 135, 40, 0
 					adj_temp = -8
-                                brownstar
-				        name = "Brown Star"
-				        description = "Its not what you think it is..."
-				        id = "brownstar"
-				        color = "#7B1000" // rgb: 123, 16, 0
-				        adj_temp = -3
-					
+
+				brownstar
+					name = "Brown Star"
+					description = "Its not what you think it is..."
+					id = "brownstar"
+					color = "#7B1000" // rgb: 123, 16, 0
+					adj_temp = -3
+
 				kiraspecial
 					name = "Kira Special"
-			        	description = "Long live the guy who everyone had mistaken for a girl"
+					description = "Long live the guy who everyone had mistaken for a girl"
 					id = "kiraspecial"
 					color = "#CCCC99" // rgb: 204, 204, 153
-					
+
 				lemonade
 					name = "Lemonade"
-			        	description = "Oh the nostalgia..."
+					description = "Oh the nostalgia..."
 					id = "lemonade"
 					color = "#FFFF66" // rgb: 255, 255, 102                                             
+                                                                        
 
 		hippies_delight
 			name = "Hippie's Delight"
