@@ -5,7 +5,7 @@
 # Ranks can be anything defined in admin_ranks.txt           ~Carn   #
 ######################################################################
 
-abi79 - Game Master
+starkiller92591- Game Master
 arcalane - Game Admin
 asanadas - Game Admin
 bobbehluvspropane - Game Admin
@@ -16,7 +16,7 @@ compactninja - Retired Admin
 duntadaman - Game Admin
 dysthymia - Retired Admin
 doughnuts - Game Admin
-erthilo - Game Master
+starkiller92591 - Game Master
 hawkv3 - Game Master
 headswe - Game Master
 iaryni - Game Master
