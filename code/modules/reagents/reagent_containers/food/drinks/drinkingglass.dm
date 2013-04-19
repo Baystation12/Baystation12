@@ -429,11 +429,11 @@
 					name = "Iced Tea"
 					desc = "No relation to a certain rap artist/ actor."
 				if("milkshake")
-					iconstate = "milkshake"
+					icon_state = "milkshake"
 					name = "Milkshake"
 					desc = "Glorious brainfreezing mixture."
 				if("lemonade")
-					iconstate = "lemonade"
+					icon_state = "lemonade"
 					name = "Lemonade"
 					desc = "Oh the nostalgia..."
 				else
