@@ -2631,7 +2631,7 @@ datum
 
 				kiraspecial
 					name = "Kira Special"
-					description = "Long live the guy who everyone had mistaken for a girl"
+					description = "Long live the guy who everyone had mistaken for a girl."
 					id = "kiraspecial"
 					color = "#CCCC99" // rgb: 204, 204, 153
 
@@ -2639,8 +2639,15 @@ datum
 					name = "Lemonade"
 					description = "Oh the nostalgia..."
 					id = "lemonade"
-					color = "#FFFF66" // rgb: 255, 255, 102                                             
-                                                                        
+					color = "#FFFF66" // rgb: 255, 255, 102
+
+				milkshake
+					name = "Milkshake"
+					description = "Glorious brainfreezing mixture."
+					id = "milkshake"
+					color = "#FFFFFF" // rgb:255, 255, 102
+					adj_temp = -8
+
 
 		hippies_delight
 			name = "Hippie's Delight"

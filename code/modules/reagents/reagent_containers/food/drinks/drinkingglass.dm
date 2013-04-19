@@ -421,13 +421,21 @@
 					name = "Glass of welder fuel"
 					desc = "Unless you are an industrial tool, this is probably not safe for consumption."
 				if("brownstar")
-					icon_state = "glass_brown"
+					icon_state = "brownstar"
 					name = "Brown Star"
-					desc = "Its not what it sounds like...
-				if(icetea")
-					icon_state = "glass_brown"
+					desc = "Its not what it sounds like..."
+				if("icetea")
+					icon_state = "icetea"
 					name = "Iced Tea"
 					desc = "No relation to a certain rap artist/ actor."
+				if("milkshake")
+					iconstate = "milkshake"
+					name = "Milkshake"
+					desc = "Glorious brainfreezing mixture."
+				if("lemonade")
+					iconstate = "lemonade"
+					name = "Lemonade"
+					desc = "Oh the nostalgia..."
 				else
 					icon_state ="glass_brown"
 					name = "Glass of ..what?"
