@@ -1,5 +1,4 @@
 
-
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass
 	name = "glass"
 	desc = "Your standard drinking glass."
@@ -422,6 +421,10 @@
 					icon_state = "dr_gibb_glass"
 					name = "Glass of welder fuel"
 					desc = "Unless you are an industrial tool, this is probably not safe for consumption."
+				if("brownstar")
+					icon_state = "glass_brown"
+					name = "Brown Star"
+					desc = "Its not what it sounds like...
 				else
 					icon_state ="glass_brown"
 					name = "Glass of ..what?"
