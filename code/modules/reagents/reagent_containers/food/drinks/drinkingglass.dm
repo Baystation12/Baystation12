@@ -1,4 +1,3 @@
-
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass
 	name = "glass"
 	desc = "Your standard drinking glass."
@@ -425,6 +424,10 @@
 					icon_state = "glass_brown"
 					name = "Brown Star"
 					desc = "Its not what it sounds like...
+				if(icetea")
+					icon_state = "glass_brown"
+					name = "Iced Tea"
+					desc = "No relation to a certain rap artist/ actor."
 				else
 					icon_state ="glass_brown"
 					name = "Glass of ..what?"
