@@ -2631,7 +2631,7 @@ datum
 
 				kiraspecial
 					name = "Kira Special"
-					description = "Long live the guy who everyone had mistaken for a girl."
+					description = "Long live the guy who everyone had mistaken for a girl.Baka!"
 					id = "kiraspecial"
 					color = "#CCCC99" // rgb: 204, 204, 153
 

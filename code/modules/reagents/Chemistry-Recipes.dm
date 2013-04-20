@@ -1905,13 +1905,13 @@ datum
 			name = "Brown Star"
 			id = "brownstar"
 			result = "brownstar"
-			required_reagents = list("orangejuice" = 2, "space_cola" = 1)
+			required_reagents = list("orangejuice" = 2, "cola" = 1)
 			result_amount = 2
 
 		milkshake
 			name = "Milkshake"
 			id = "milkshake"
 			result = "milkshake"
-			required_reagents = list("cream" = 2, "ice" = 3, "milk" = 4)
+			required_reagents = list("cream" = 1, "ice" = 2, "milk" = 2)
 			result_amount = 5
 

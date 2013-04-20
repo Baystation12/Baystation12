@@ -436,6 +436,10 @@
 					icon_state = "lemonade"
 					name = "Lemonade"
 					desc = "Oh the nostalgia..."
+				if("kiraspecial")
+					icon_state = "kiraspecial"
+					name = "Kira Special"
+					desc = "Long live the guy who everyone had mistaken for a girl.Baka!"
 				else
 					icon_state ="glass_brown"
 					name = "Glass of ..what?"
