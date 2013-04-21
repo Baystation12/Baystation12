@@ -111,7 +111,11 @@
 
 
 /obj/mecha/working/ripley/attackby(obj/item/weapon/W as obj, mob/user as mob)
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 52d0217df1f3a5aede96d6422575c8005a85a2cf
   if(istype(W, /obj/item/weapon/fluff/sven_fjeltson_1))
     src.icon_state = "earth"
     src.initial_icon = "earth"
