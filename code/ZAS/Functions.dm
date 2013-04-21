@@ -109,6 +109,7 @@ proc/ZMerge(zone/A,zone/B)
 proc/ZConnect(turf/simulated/A,turf/simulated/B)
 	//Connects two zones by forming a connection object representing turfs A and B.
 
+
 	//Make sure that if it's space, it gets added to unsimulated_tiles instead.
 	if(!istype(B))
 		if(A.zone)
@@ -126,8 +127,11 @@ proc/ZConnect(turf/simulated/A,turf/simulated/B)
 	if(!A.zone || !B.zone) return
 	if(A.zone == B.zone) return
 
+<<<<<<< HEAD
 	if(!A.CanPass(null,B,0,0)) return
 
+=======
+>>>>>>> 5e653633327672b900b86610d72ff561038a4d31
 	if(A.CanPass(null,B,0,1))
 		return ZMerge(A.zone,B.zone)
 

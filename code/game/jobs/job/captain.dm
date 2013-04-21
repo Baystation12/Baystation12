@@ -24,6 +24,10 @@
 		U.hastie = new /obj/item/clothing/tie/medal/gold/captain(U)
 		H.equip_to_slot_or_del(U, slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/captain(H), slot_belt)
+<<<<<<< HEAD
+=======
+		//H.equip_to_slot_or_del(new /obj/item/clothing/suit/armor/captain(H), slot_wear_suit)
+>>>>>>> 5e653633327672b900b86610d72ff561038a4d31
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/clothing/head/caphat(H), slot_head)
 		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(H), slot_glasses)
