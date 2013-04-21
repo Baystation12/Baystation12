@@ -14,7 +14,11 @@ client/proc/Zone_Info(turf/T as null|turf)
 
 
 
+<<<<<<< HEAD
+client/verb/Test_ZAS_Connection(var/turf/simulated/T as turf)
+=======
 client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
+>>>>>>> 5e653633327672b900b86610d72ff561038a4d31
 	set category = "Debug"
 	if(!istype(T))
 		return
