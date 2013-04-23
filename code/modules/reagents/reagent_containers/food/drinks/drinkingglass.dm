@@ -1,5 +1,3 @@
-
-
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass
 	name = "glass"
 	desc = "Your standard drinking glass."
@@ -422,6 +420,26 @@
 					icon_state = "dr_gibb_glass"
 					name = "Glass of welder fuel"
 					desc = "Unless you are an industrial tool, this is probably not safe for consumption."
+				if("brownstar")
+					icon_state = "brownstar"
+					name = "Brown Star"
+					desc = "Its not what it sounds like..."
+				if("icetea")
+					icon_state = "icetea"
+					name = "Iced Tea"
+					desc = "No relation to a certain rap artist/ actor."
+				if("milkshake")
+					icon_state = "milkshake"
+					name = "Milkshake"
+					desc = "Glorious brainfreezing mixture."
+				if("lemonade")
+					icon_state = "lemonade"
+					name = "Lemonade"
+					desc = "Oh the nostalgia..."
+				if("kiraspecial")
+					icon_state = "kiraspecial"
+					name = "Kira Special"
+					desc = "Long live the guy who everyone had mistaken for a girl.Baka!"
 				else
 					icon_state ="glass_brown"
 					name = "Glass of ..what?"

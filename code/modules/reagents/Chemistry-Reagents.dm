@@ -2622,6 +2622,32 @@ datum
 					color = "#878F00" // rgb: 135, 40, 0
 					adj_temp = -8
 
+				lemonade
+					name = "Lemonade"
+					description = "Oh the nostalgia..."
+					id = "lemonade"
+					color = "#FFFF00" // rgb: 255, 255, 0
+
+				kiraspecial
+					name = "Kira Special"
+					description = "Long live the guy who everyone had mistaken for a girl.Baka!"
+					id = "kiraspecial"
+					color = "#CCCC99" // rgb: 204, 204, 153
+
+				brownstar
+					name = "Brown Star"
+					description = "Its not what it sounds like..."
+					id = "brownstar"
+					color = "#9F3400" // rgb: 159, 052, 000
+					adj_temp = - 2
+
+				milkshake
+					name = "Milkshake"
+					description = "Glorious brainfreezing mixture."
+					id = "milkshake"
+					color = "#AEE5E4" // rgb" 174, 229, 228
+					adj_temp = -13
+
 		hippies_delight
 			name = "Hippie's Delight"
 			id = "hippiesdelight"
