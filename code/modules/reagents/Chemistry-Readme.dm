@@ -172,7 +172,7 @@ About Reagents:
 			you define it as "#RRGGBB", or, red green blue. You can also define it using the
 			rgb() proc, which returns a hexadecimal value too. The color is black by default.
 
-			A good website for color calculations:/
+			A good website for color calculations: http://www.psyclops.com/tools/rgb/
 
 
 
