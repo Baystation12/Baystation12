@@ -83,7 +83,7 @@
 	update_icon()
 	return
 
-/obj/item/weapon/implanter/compressed/update()
+/obj/item/weapon/implanter/compressed/update_icon()
 	if (imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if(!c.scanned)

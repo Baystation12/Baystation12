@@ -73,10 +73,9 @@
 	name = "plastellium mycelium"
 	desc = "This mycelium grows into Plastellium"
 	icon_state = "mycelium-plast"
-	mypath = "/obj/item/seeds/plastiseed"
 	species = "plastellium"
 	plantname = "Plastellium"
-	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/plastellium"
+	product = /obj/item/weapon/reagent_containers/food/snacks/grown/plastellium
 	lifespan = 15
 	endurance = 17
 	maturation = 5
@@ -426,10 +425,9 @@
 	name = "pack of rice seeds"
 	desc = "These seeds grow into rice stalks."
 	icon_state = "seed-rice"
-	mypath = "/obj/item/seeds/riceseed"
 	species = "rice"
 	plantname = "Rice Stalks"
-	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/ricestalk"
+	product = /obj/item/weapon/reagent_containers/food/snacks/grown/ricestalk
 	lifespan = 25
 	endurance = 15
 	maturation = 6

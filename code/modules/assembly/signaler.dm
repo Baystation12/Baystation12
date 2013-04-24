@@ -134,15 +134,10 @@
 		if(signal.encryption != code)	return 0
 		if(!(src.wires & WIRE_RADIO_RECEIVE))	return 0
 		pulse(1)
-<<<<<<< HEAD
 
 		if(!holder)
 			for(var/mob/O in hearers(1, src.loc))
 				O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
-=======
-		for(var/mob/O in hearers(1, src.loc))
-			O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
->>>>>>> NTSL Update: - You can now send signals with signal(freq, code). Added a cooldown to limit spamming. - You can now use "elseif" in your scripts to create a chain. - You can now use "return" in the global scope to end the script from running.
 		return
 
 
