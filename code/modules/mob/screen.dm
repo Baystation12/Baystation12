@@ -49,6 +49,8 @@
 				usr.update_inv_glasses()
 			if("action_jetpack")
 				usr.update_inv_back()
+			if("action_magboots")
+				usr.update_inv_shoes()
 
 //This is the proc used to update all the action buttons. It just returns for all mob types except humans.
 /mob/proc/update_action_buttons()

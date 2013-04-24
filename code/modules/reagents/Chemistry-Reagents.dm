@@ -756,7 +756,6 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				M.adjustToxLoss(1*REM)
-				M.take_organ_damage(0, 1*REM)
 				..()
 				return
 			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
@@ -800,10 +799,14 @@ datum
 							var/mob/living/carbon/human/H = M
 							var/datum/organ/external/affecting = H.get_organ("head")
 							if(affecting)
-								if(affecting.take_damage(25, 0))
+								if(affecting.take_damage(10, 5))
 									H.UpdateDamageIcon()
-								H.status_flags |= DISFIGURED
-								H.emote("scream")
+								if(prob(15))
+									H.emote("scream")
+									H.f_style = "Shaved"
+									H.h_style = "Bald"
+									H.update_hair(0)
+									H.status_flags |= DISFIGURED
 						else
 							M.take_organ_damage(min(15, volume * 2)) // uses min() and volume to make sure they aren't being sprayed in trace amounts (1 unit != insta rape) -- Doohl
 				else
@@ -828,7 +831,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.adjustToxLoss(1*REM)
+				M.adjustToxLoss(2*REM)
 				..()
 				return
 
@@ -849,7 +852,7 @@ datum
 							return
 
 						if(H.head)
-							if(prob(15) && !H.head.unacidable)
+							if(prob(25) && !H.head.unacidable)
 								del(H.head)
 								H.update_inv_head()
 								H << "\red Your helmet melts away but protects you from the acid"
@@ -859,9 +862,15 @@ datum
 
 						if(!H.unacidable)
 							var/datum/organ/external/affecting = H.get_organ("head")
-							if(affecting.take_damage(15, 0))
+							if(affecting.take_damage(rand(10,20), rand(0,10)))
 								H.UpdateDamageIcon()
-							H.emote("scream")
+							if(prob(25))
+								H.emote("scream")
+								H.f_style = "Shaved"
+								H.h_style = "Bald"
+								H.update_hair()
+								H.status_flags |= DISFIGURED
+
 					else if(ismonkey(M))
 						var/mob/living/carbon/monkey/MK = M
 
@@ -875,18 +884,22 @@ datum
 							return
 
 						if(!MK.unacidable)
-							MK.take_organ_damage(min(15, volume * 4)) // same deal as sulphuric acid
+							MK.take_organ_damage(min(20, volume * 4)) // same deal as sulphuric acid
 				else
 					if(!M.unacidable)
 						if(ishuman(M))
 							var/mob/living/carbon/human/H = M
 							var/datum/organ/external/affecting = H.get_organ("head")
-							if(affecting.take_damage(15, 0))
+							if(affecting.take_damage(rand(10,20), rand(0,10)))
 								H.UpdateDamageIcon()
-							H.emote("scream")
-							H.status_flags |= DISFIGURED
+							if(prob(25))
+								H.emote("scream")
+								H.f_style = "Shaved"
+								H.h_style = "Bald"
+								H.update_hair()
+								H.status_flags |= DISFIGURED
 						else
-							M.take_organ_damage(min(15, volume * 4))
+							M.take_organ_damage(min(20, volume * 4))
 
 			reaction_obj(var/obj/O, var/volume)
 				if((istype(O,/obj/item) || istype(O,/obj/effect/glowshroom)))
@@ -1643,6 +1656,7 @@ datum
 					M.adjustOxyLoss(-3)
 					M.heal_organ_damage(3,3)
 					M.adjustToxLoss(-3)
+					M.status_flags &= ~DISFIGURED
 				..()
 				return
 

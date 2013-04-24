@@ -14,7 +14,7 @@
 	var/code = 30
 	var/frequency = 1457
 	var/delay = 0
-	var/airlock_wire = null
+	var/datum/wires/connected = null
 	var/datum/radio_frequency/radio_connection
 	var/deadman = 0
 
@@ -120,9 +120,8 @@
 
 
 	pulse(var/radio = 0)
-		if(istype(src.loc, /obj/machinery/door/airlock) && src.airlock_wire && src.wires)
-			var/obj/machinery/door/airlock/A = src.loc
-			A.pulse(src.airlock_wire)
+		if(src.connected && src.wires)
+			connected.Pulse(src)
 		else if(holder)
 			holder.process_activation(src, 1, 0)
 		else
@@ -172,3 +171,25 @@
 		deadman = 1
 		processing_objects.Add(src)
 		usr.visible_message("\red [usr] moves their finger over [src]'s signal button...")
+
+
+// Embedded signaller used in grenade construction.
+// It's necessary because the signaler doens't have an off state.
+// Generated during grenade construction.  -Sayu
+/obj/item/device/assembly/signaler/reciever
+	var/on = 0
+
+	proc/toggle_safety()
+		on = !on
+
+	activate()
+		toggle_safety()
+		return 1
+
+	describe()
+		return "The radio reciever is [on?"on":"off"]."
+
+	receive_signal(datum/signal/signal)
+		if(!on) return
+		return ..(signal)
+

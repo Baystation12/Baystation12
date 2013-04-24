@@ -161,7 +161,6 @@ datum/controller/game_controller/proc/process()
 				timer = world.timeofday
 				process_diseases()
 				diseases_cost = (world.timeofday - timer) / 10
-
 				sleep(breather_ticks)
 
 				//MACHINES
@@ -175,7 +174,6 @@ datum/controller/game_controller/proc/process()
 				timer = world.timeofday
 				process_objects()
 				objects_cost = (world.timeofday - timer) / 10
-
 				sleep(breather_ticks)
 
 				//PIPENETS
@@ -213,6 +211,19 @@ datum/controller/game_controller/proc/process()
 				sleep( round(minimum_ticks - (end_time - start_time),1) )
 			else
 				sleep(10)
+
+/*
+datum/controller/game_controller/proc/process_liquid()
+	last_thing_processed = /datum/puddle
+	var/i = 1
+	while(i<=puddles.len)
+		var/datum/puddle/Puddle = puddles[i]
+		if(Puddle)
+			Puddle.process()
+			i++
+			continue
+		puddles.Cut(i,i+1)
+*/
 
 datum/controller/game_controller/proc/process_mobs()
 	var/i = 1
@@ -308,4 +319,3 @@ datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 				else
 					msg += "\t [varname] = [varval]\n"
 	world.log << msg
-

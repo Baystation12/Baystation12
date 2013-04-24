@@ -134,7 +134,7 @@ var/list/mechtoys = list(
 	var/points_per_process = 1
 	var/points_per_slip = 2
 	var/points_per_crate = 5
-	var/plasma_per_point = 2 // 2 plasma for 1 point
+	var/plasma_per_point = 5 // 2 plasma for 1 point
 	//control
 	var/ordernum
 	var/list/shoppinglist = list()
