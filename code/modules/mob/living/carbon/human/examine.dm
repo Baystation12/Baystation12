@@ -195,6 +195,11 @@
 
 	if(mSmallsize in mutations)
 		msg += "[t_He] [t_is] small halfling!\n"
+	if(gender_ambiguous) //someone fucked up a gender reassignment surgery
+		if (gender == MALE)
+			msg += "[t_He] has a strange feminine quality to [t_him].\n"
+		else
+			msg += "[t_He] has a strange masculine quality to [t_him].\n"
 
 	var/distance = get_dist(usr,src)
 	if(istype(usr, /mob/dead/observer) || usr.stat == 2) // ghosts can see anything

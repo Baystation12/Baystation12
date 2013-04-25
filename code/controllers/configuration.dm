@@ -41,6 +41,7 @@
 	var/Ticklag = 0.9
 	var/Tickcomp = 0
 	var/socket_talk	= 0					// use socket_talk to communicate with other processes
+	var/allow_holidays = 0				//toggles whether holiday-specific content should be used
 
 	var/list/mode_names = list()
 	var/list/modes = list()				// allowed modes
@@ -362,7 +363,7 @@
 					config.popup_admin_pm = 1
 
 				if("allow_holidays")
-					Holiday = 1
+					config.allow_holidays = 1
 
 				if("useircbot")
 					useircbot = 1

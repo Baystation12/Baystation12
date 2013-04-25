@@ -89,6 +89,16 @@
 	var/regulating_temperature = 0
 
 	var/datum/radio_frequency/radio_connection
+/obj/machinery/alarm/server
+	//req_access = list(access_rd) //no, let departaments to work together
+	TLV = list(
+		"oxygen"         = new/datum/tlv(-1.0, -1.0,-1.0,-1.0), // Partial pressure, kpa
+		"carbon dioxide" = new/datum/tlv(-1.0, -1.0,-1.0,-1.0), // Partial pressure, kpa
+		"plasma"         = new/datum/tlv(-1.0, -1.0,-1.0,-1.0), // Partial pressure, kpa
+		"other"          = new/datum/tlv(-1.0, -1.0,-1.0,-1.0), // Partial pressure, kpa
+		"pressure"       = new/datum/tlv(-1.0, -1.0,-1.0,-1.0), /* kpa */
+		"temperature"    = new/datum/tlv(-1.0, -1.0,-1.0,-1.0), // K
+	)
 
 	var/list/TLV = list()
 

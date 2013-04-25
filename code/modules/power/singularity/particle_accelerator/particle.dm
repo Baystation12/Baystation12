@@ -30,9 +30,11 @@
 	movement_range = 20
 	energy = 50
 
+
 /obj/effect/accelerated_particle/New(loc, dir = 2)
 	src.loc = loc
 	src.dir = dir
+
 	if(movement_range > 20)
 		movement_range = 20
 	spawn(0)
@@ -70,7 +72,7 @@
 
 
 /obj/effect/accelerated_particle/ex_act(severity)
-	del(src)
+	loc = null
 	return
 
 
@@ -90,21 +92,13 @@
 
 
 /obj/effect/accelerated_particle/proc/move(var/lag)
-	if(target)
-		if(movetotarget)
-			if(!step_towards(src,target))
-				src.loc = get_step(src, get_dir(src,target))
-			if(get_dist(src,target) < 1)
-				movetotarget = 0
-		else
-			if(!step(src, get_step_away(src,source)))
-				src.loc = get_step(src, get_step_away(src,source))
-	else
-		if(!step(src,dir))
-			src.loc = get_step(src,dir)
+	if(loc == null)
+		return
+	if(!step(src,dir))
+		src.loc = get_step(src,dir)
 	movement_range--
 	if(movement_range <= 0)
-		del(src)
+		loc = null
 	else
 		sleep(lag)
 		move(lag)

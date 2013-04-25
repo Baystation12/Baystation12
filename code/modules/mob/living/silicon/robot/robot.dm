@@ -57,6 +57,9 @@
 	var/braintype = "Cyborg"
 	var/pose
 
+	var/obj/item/weapon/tank/internal = null	//Hatred. Used if a borg has a jetpack.
+
+
 /mob/living/silicon/robot/New(loc,var/syndie = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)

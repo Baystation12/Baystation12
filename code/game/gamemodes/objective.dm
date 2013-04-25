@@ -586,6 +586,14 @@ datum/objective/steal
 							return 1
 						if(istype(check_area, /area/shuttle/escape_pod5/centcom))
 							return 1
+			if("the station blueprints")
+				for(var/obj/item/I in all_items)	//the actual blueprints are good too!
+					if(istype(I, /obj/item/blueprints))
+						return 1
+					if(istype(I, /obj/item/weapon/photo))
+						var/obj/item/weapon/photo/P = I
+						if(P.blueprints)	//if the blueprints are in frame
+							return 1
 			else
 				for(var/obj/I in all_items) //Check for items
 					if(istype(I, steal_target))

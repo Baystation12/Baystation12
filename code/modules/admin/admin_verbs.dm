@@ -84,8 +84,6 @@ var/list/admin_verbs_fun = list(
 	/client/proc/drop_bomb,
 	/client/proc/cinematic,
 	/client/proc/one_click_antag,
-	/datum/admins/proc/toggle_aliens,
-	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/send_space_ninja,
 	/client/proc/cmd_admin_add_freeform_ai_law,
 	/client/proc/cmd_admin_add_random_ai_law,
@@ -99,7 +97,6 @@ var/list/admin_verbs_spawn = list(
 	/client/proc/respawn_character
 	)
 var/list/admin_verbs_server = list(
-	/client/proc/Set_Holiday,
 	/client/proc/ToRban,
 	/datum/admins/proc/startnow,
 	/datum/admins/proc/restart,
@@ -114,8 +111,6 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/adrev,
 	/datum/admins/proc/adspawn,
 	/datum/admins/proc/adjump,
-	/datum/admins/proc/toggle_aliens,
-	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/toggle_random_events,
 	/client/proc/check_customitem_activity
 	)
@@ -129,7 +124,6 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_admin_delete,
 	/client/proc/cmd_debug_del_all,
-	/client/proc/cmd_debug_tog_aliens,
 	/client/proc/air_report,
 	/client/proc/reload_admins,
 	/client/proc/restart_controller,
@@ -177,8 +171,6 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
 	/client/proc/cinematic,
-	/datum/admins/proc/toggle_aliens,
-	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/send_space_ninja,
 	/client/proc/cmd_admin_add_freeform_ai_law,
 	/client/proc/cmd_admin_add_random_ai_law,
@@ -186,7 +178,6 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/make_sound,
 	/client/proc/toggle_random_events,
 	/client/proc/cmd_admin_add_random_ai_law,
-	/client/proc/Set_Holiday,
 	/client/proc/ToRban,
 	/datum/admins/proc/startnow,
 	/datum/admins/proc/restart,
@@ -211,7 +202,6 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/startSinglo,
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_debug_del_all,
-	/client/proc/cmd_debug_tog_aliens,
 	/client/proc/air_report,
 	/client/proc/enable_debug_verbs,
 	/proc/possess,

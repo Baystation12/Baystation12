@@ -614,15 +614,15 @@
 			reagents.add_reagent("blood", 1+round((potency / 5), 1))
 			bitesize = 1+round(reagents.total_volume / 2, 1)
 
-	throw_impact(atom/hit_atom)
-		..()
-		new/obj/effect/decal/cleanable/blood/splatter(src.loc)
-		src.visible_message("<span class='notice'>The [src.name] has been squashed.</span>","<span class='moderate'>You hear a smack.</span>")
-		src.reagents.reaction(get_turf(hit_atom))
-		for(var/atom/A in get_turf(hit_atom))
-			src.reagents.reaction(A)
-		del(src)
-		return
+/obj/item/weapon/reagent_containers/food/snacks/grown/bloodtomato/throw_impact(atom/hit_atom)
+	..()
+	new/obj/effect/decal/cleanable/blood/splatter(src.loc)
+	src.visible_message("<span class='notice'>The [src.name] has been squashed.</span>","<span class='moderate'>You hear a smack.</span>")
+	src.reagents.reaction(get_turf(hit_atom))
+	for(var/atom/A in get_turf(hit_atom))
+		src.reagents.reaction(A)
+	del(src)
+	return
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/bluetomato
 	seed = "/obj/item/seeds/bluetomatoseed"
@@ -637,15 +637,15 @@
 			reagents.add_reagent("lube", 1+round((potency / 5), 1))
 			bitesize = 1+round(reagents.total_volume / 2, 1)
 
-	throw_impact(atom/hit_atom)
-		..()
-		new/obj/effect/decal/cleanable/oil(src.loc)
-		src.visible_message("<span class='notice'>The [src.name] has been squashed.</span>","<span class='moderate'>You hear a smack.</span>")
-		src.reagents.reaction(get_turf(hit_atom))
-		for(var/atom/A in get_turf(hit_atom))
-			src.reagents.reaction(A)
-		del(src)
-		return
+/obj/item/weapon/reagent_containers/food/snacks/grown/bluetomato/throw_impact(atom/hit_atom)
+	..()
+	new/obj/effect/decal/cleanable/oil(src.loc)
+	src.visible_message("<span class='notice'>The [src.name] has been squashed.</span>","<span class='moderate'>You hear a smack.</span>")
+	src.reagents.reaction(get_turf(hit_atom))
+	for(var/atom/A in get_turf(hit_atom))
+		src.reagents.reaction(A)
+	del(src)
+	return
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/bluetomato/HasEntered(AM as mob|obj)
 	if (istype(AM, /mob/living/carbon))
@@ -915,12 +915,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/mushroom/glowshroom/dropped(mob/user)
 	user.SetLuminosity(round(user.luminosity + (potency/10),1))
 	SetLuminosity(round(potency/10,1))
-
-
-// *************************************
-// Complex Grown Object Defines -
-// Putting these at the bottom so they don't clutter the list up. -Cheridan
-// *************************************
 
 //This object is just a transition object. All it does is make dosh and delete itself. -Cheridan
 /obj/item/weapon/reagent_containers/food/snacks/grown/money

@@ -3,7 +3,7 @@
 	turf = /turf/space
 	area = /area
 	view = "15x15"
-	cache_lifespan = 30	//stops player uploaded stuff from being kept in the rsc past the current session
+	cache_lifespan = 1
 
 
 
@@ -37,15 +37,11 @@
 	jobban_loadbanfile()
 	jobban_updatelegacybans()
 	LoadBans()
+	investigate_reset()
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
-
-	investigate_reset()
-	Get_Holiday()	//~Carn, needs to be here when the station is named so :P
-
-	src.update_status()
 
 	makepowernets()
 
@@ -76,8 +72,6 @@
 	slmaster.layer = FLY_LAYER
 	slmaster.mouse_opacity = 0
 
-	src.update_status()
-
 	. = ..()
 
 	sleep_offline = 1
@@ -85,6 +79,8 @@
 	master_controller = new /datum/controller/game_controller()
 	spawn(1)
 		master_controller.setup()
+
+	src.update_status()
 
 	process_teleport_locs()			//Sets up the wizard teleport locations
 	process_ghost_teleport_locs()	//Sets up ghost teleport locations.
@@ -155,6 +151,15 @@
 
 
 /world/Reboot(var/reason)
+#ifdef dellogging
+	var/log = file("data/logs/del.log")
+	log << time2text(world.realtime)
+	//mergeSort(del_counter, /proc/cmp_descending_associative)	//still testing the sorting procs. Use notepad++ to sort the resultant logfile for now.
+	for(var/index in del_counter)
+		var/count = del_counter[index]
+		if(count > 10)
+			log << "#[count]\t[index]"
+#endif
 	spawn(0)
 		world << sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')) // random end sounds!! - LastyBatsy
 

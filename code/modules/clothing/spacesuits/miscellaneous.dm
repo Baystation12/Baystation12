@@ -41,6 +41,23 @@
 	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
 	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | BLOCKHAIR | STOPSPRESSUREDMAGE
 
+
+//NASA Voidsuit
+/obj/item/clothing/head/helmet/space/nasavoid
+	name = "NASA Void Helmet"
+	desc = "An old, NASA Centcom branch designed, dark red space suit helmet."
+	icon_state = "void"
+	item_state = "void"
+
+/obj/item/clothing/suit/space/nasavoid
+	name = "NASA Voidsuit"
+	icon_state = "void"
+	item_state = "void"
+	desc = "An old, NASA Centcom branch designed, dark red Space suit."
+	slowdown = 2
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/multitool)
+
+
 //Space santa outfit suit
 /obj/item/clothing/head/helmet/space/santahat
 	name = "Santa's hat"

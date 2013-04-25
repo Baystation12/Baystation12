@@ -1,4 +1,15 @@
-//This file was auto-corrected by findeclaration.exe on 29/05/2012 15:03:04
+/datum/event_control/ion_storm
+	name = "Ion Storm"
+	typepath = /datum/event/ion_storm
+	weight = 15
+
+/datum/event/ion_storm
+	var/botEmagChance = 10
+
+/datum/event/ion_storm/announce()
+	if(prob(33))
+		command_alert("Ion storm detected near the station. Please check all AI-controlled equipment for errors.", "Anomaly Alert")
+		world << sound('sound/AI/ionstorm.ogg')
 
 /datum/event/ionstorm
 	var/botEmagChance = 0.5

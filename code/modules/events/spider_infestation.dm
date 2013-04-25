@@ -1,8 +1,12 @@
 /var/global/sent_spiders_to_station = 0
+/datum/event_control/spider_infestation
+	name = "Spider Infestation"
+	typepath = /datum/event/spider_infestation
+	weight = 5
+	max_occurrences = 1
 
 /datum/event/spider_infestation
 	announceWhen	= 400
-	oneShot			= 1
 
 	var/spawncount = 1
 

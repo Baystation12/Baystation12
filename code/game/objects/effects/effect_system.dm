@@ -602,9 +602,6 @@ steam.start() -- spawns the effect
 					del(smoke)
 					src.total_smoke--
 
-/////////////////////////////////////////////
-// Mustard Gas
-/////////////////////////////////////////////
 
 
 /obj/effect/effect/mustard_gas
