@@ -202,6 +202,9 @@
 		interpreter.SetProc("rand", /proc/rand_chance)
 		// End of Donkie~
 
+		// Time
+		interpreter.SetProc("time", /proc/time)
+		interpreter.SetProc("timestamp", /proc/timestamp)
 
 		// Run the compiled code
 		interpreter.Run()
