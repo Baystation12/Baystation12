@@ -1547,7 +1547,7 @@ datum
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 				feedback_add_details("slime_cores_used","[name]")
-				var/list/paints = typesof(/obj/item/weapon/paint) - /obj/item/weapon/paint
+				var/list/paints = typesof(/obj/item/weapon/reagent_containers/glass/paint) - /obj/item/weapon/reagent_containers/glass/paint
 				var/chosen = pick(paints)
 				var/obj/P = new chosen
 				if(P)
