@@ -27,7 +27,7 @@
 		// Queen check
 		var/no_queen = 1
 		for(var/mob/living/carbon/alien/humanoid/queen/Q in living_mob_list)
-			if(!Q.key || !getbrain(Q))
+			if(!Q.key && Q.brain_op_stage != 4)
 				continue
 			no_queen = 0
 
