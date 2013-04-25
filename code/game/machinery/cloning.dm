@@ -60,7 +60,7 @@
 		if ((M.stat != 2) || (!M.client))
 			continue
 		//They need a brain!
-		if (!getbrain(M))
+		if ((istype(M, /mob/living/carbon/human)) && (M:brain_op_stage >= 4.0))
 			continue
 
 		if (M.ckey == find_key)

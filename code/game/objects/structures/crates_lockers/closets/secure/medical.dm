@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/medical1
-	name = "medicine closet"
+	name = "Medicine Closet"
 	desc = "Filled with medical junk."
 	icon_state = "medical1"
 	icon_closed = "medical"
@@ -27,7 +27,7 @@
 
 
 /obj/structure/closet/secure_closet/medical2
-	name = "anesthetic closet"
+	name = "Anesthetic"
 	desc = "Used to knock people out."
 	icon_state = "medical1"
 	icon_closed = "medical"
@@ -52,7 +52,7 @@
 
 
 /obj/structure/closet/secure_closet/medical3
-	name = "medical doctor's locker"
+	name = "Medical Doctor's Locker"
 	req_access = list(access_surgery)
 	icon_state = "securemed1"
 	icon_closed = "securemed"
@@ -104,7 +104,7 @@
 
 
 /obj/structure/closet/secure_closet/CMO
-	name = "chief medical officer's locker"
+	name = "Chief Medical Officer's Locker"
 	req_access = list(access_cmo)
 	icon_state = "cmosecure1"
 	icon_closed = "cmosecure"
@@ -136,7 +136,7 @@
 
 
 /obj/structure/closet/secure_closet/animal
-	name = "animal control"
+	name = "Animal Control"
 	req_access = list(access_surgery)
 
 
@@ -152,7 +152,7 @@
 
 
 /obj/structure/closet/secure_closet/chemical
-	name = "chemical closet"
+	name = "Chemical Closet"
 	desc = "Store dangerous chemicals in here."
 	icon_state = "medical1"
 	icon_closed = "medical"
@@ -171,7 +171,7 @@
 		return
 
 /obj/structure/closet/secure_closet/medical_wall
-	name = "first aid closet"
+	name = "First Aid Closet"
 	desc = "It's a secure wall-mounted storage unit for first aid supplies."
 	icon_state = "medical_wall_locked"
 	icon_closed = "medical_wall_unlocked"
