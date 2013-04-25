@@ -416,7 +416,7 @@
 	if(override)
 		status |= ORGAN_DESTROYED
 	if(status & ORGAN_DESTROYED)
-		if(body_part == UPPER_TORSO)
+		if(body_part == CHEST)
 			return
 
 		src.status &= ~ORGAN_BROKEN
@@ -432,7 +432,7 @@
 
 		var/obj/organ	//Dropped limb object
 		switch(body_part)
-			if(LOWER_TORSO)
+			if(GROIN)
 				owner << "\red You are now sterile."
 			if(HEAD)
 				organ= new /obj/item/weapon/organ/head(owner.loc, owner)
@@ -566,7 +566,7 @@
 	display_name = "chest"
 	max_damage = 150
 	min_broken_damage = 75
-	body_part = UPPER_TORSO
+	body_part = CHEST
 
 /datum/organ/external/groin
 	name = "groin"
@@ -574,7 +574,7 @@
 	display_name = "groin"
 	max_damage = 115
 	min_broken_damage = 70
-	body_part = LOWER_TORSO
+	body_part = GROIN
 
 /datum/organ/external/l_arm
 	name = "l_arm"

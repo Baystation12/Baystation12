@@ -273,9 +273,9 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 		if( C.max_heat_protection_temperature >= last_temperature )
 			if(C.body_parts_covered & HEAD)
 				head_exposure = 0
-			if(C.body_parts_covered & UPPER_TORSO)
+			if(C.body_parts_covered & CHEST)
 				chest_exposure = 0
-			if(C.body_parts_covered & LOWER_TORSO)
+			if(C.body_parts_covered & GROIN)
 				groin_exposure = 0
 			if(C.body_parts_covered & LEGS)
 				legs_exposure = 0

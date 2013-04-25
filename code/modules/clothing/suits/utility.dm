@@ -24,7 +24,7 @@
 	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	cold_protection = CHEST | GROIN | LEGS | FEET | ARMS | HANDS
 
 
 /obj/item/clothing/suit/fire/firefighter

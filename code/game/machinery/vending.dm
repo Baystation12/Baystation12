@@ -46,7 +46,7 @@
 	var/panel_open = 0 //Hacking that vending machine. Gonna get a free candy bar.
 	var/obj/item/weapon/coin/coin
 	var/datum/wires/vending/wires = null
-
+	var/scan_id = 1
 	var/obj/machinery/account_database/linked_db
 	var/datum/money_account/linked_account
 
@@ -349,7 +349,7 @@
 		usr << browse(null, "window=vending")
 
 /obj/machinery/vending/proc/vend(datum/data/vending_product/R, mob/user)
-	if ((!src.allowed(user)) && (!src.emagged) && (src.wires & WIRE_SCANID)) //For SECURE VENDING MACHINES YEAH
+	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 		user << "\red Access denied." //Unless emagged of course
 		flick(src.icon_deny,src)
 		return
