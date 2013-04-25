@@ -1525,10 +1525,10 @@
 				if(!check_rights(R_FUN,0))
 					removed_paths += dirty_path
 					continue
-			else if(ispath(path, /obj/effect/bhole))
+			/*else if(ispath(path, /obj/effect/bhole))
 				if(!check_rights(R_FUN,0))
 					removed_paths += dirty_path
-					continue
+					continue*/
 			paths += path
 
 		if(!paths)
@@ -1931,7 +1931,7 @@
 				for(var/turf/station/wall/Wall in world)
 					spawn(0)
 						sleep(rand(30,400))
-						Wall.ex_act(rand(2,1)) */
+						Wall.ex_act(rand(2,1))
 			if("wave")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","MW")
@@ -1980,7 +1980,7 @@
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SN")
 				message_admins("[key_name_admin(usr)] has sent in a space ninja", 1)
-				new /datum/event/ninja(list(overrides))
+				new /datum/event/ninja(list(overrides))*/
 			if("carp")
 				new /datum/event/carp_migration(overrides)
 				feedback_inc("admin_secrets_fun_used",1)
@@ -1991,11 +1991,12 @@
 				feedback_add_details("admin_secrets_fun_used","R")
 				message_admins("[key_name_admin(usr)] has has irradiated the station", 1)
 				new /datum/event/radiation_storm(overrides)
-			if("immovable")
+/*			if("immovable")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","IR")
 				message_admins("[key_name_admin(usr)] has sent an immovable rod to the station", 1)
 				new /datum/event/immovable_rod(overrides)
+*/
 			if("prison_break")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","PB")

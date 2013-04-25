@@ -92,10 +92,7 @@ var/secret_force_mode = "secret" // if this is anything but "secret", the secret
 
 var/datum/engine_eject/engine_eject_control = null
 var/host = null
-<<<<<<< HEAD
 var/aliens_allowed = 0
-=======
->>>>>>> 504342b4a77a6f93dfd5358461222b782e366c0c
 var/ooc_allowed = 1
 var/dooc_allowed = 1
 var/traitor_scaling = 1

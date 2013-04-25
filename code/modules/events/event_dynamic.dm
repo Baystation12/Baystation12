@@ -62,8 +62,8 @@
 	possibleEvents[/datum/event/grid_check] = 25 + 10 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/electrical_storm] = 75 + 25 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
 
-	if(!spacevines_spawned)
-		possibleEvents[/datum/event/spacevine] = 5 + 10 * active_with_role["Engineer"]
+	//if(!spacevines_spawned)
+	possibleEvents[/datum/event/spacevine] = 5 + 10 * active_with_role["Engineer"]
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 20 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/meteor_shower] = 80 * active_with_role["Engineer"]
@@ -81,8 +81,8 @@
 			possibleEvents[/datum/event/spider_infestation] = max(active_with_role["Security"], 5) + 5
 		if(aliens_allowed && !sent_aliens_to_station)
 			possibleEvents[/datum/event/alien_infestation] = max(active_with_role["Security"], 5) + 2.5
-		if(!sent_ninja_to_station && toggle_space_ninja)
-			possibleEvents[/datum/event/space_ninja] = max(active_with_role["Security"], 5)
+//		if(!sent_ninja_to_station && toggle_space_ninja)
+//			possibleEvents[/datum/event/space_ninja] = max(active_with_role["Security"], 5)
 
 	// Debug code below here, very useful for testing so don't delete please.
 	/*var/debug_message = "Firing random event. "

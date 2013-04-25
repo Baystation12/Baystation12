@@ -12,8 +12,8 @@
 	qnty = rand(1,5)
 
 /datum/event/dust/start()
-	while(qnty-- > 0)
-		new /obj/effect/space_dust/weak()
+	//while(qnty-- > 0)
+	//	new /obj/effect/space_dust/weak()
 
 
 /obj/effect/space_dust

@@ -55,10 +55,10 @@
 					<B>Fire Damage:</B> [round(patient.getFireLoss())]<BR>
 					<B>Suffocation Damage:</B> [round(patient.getOxyLoss())]<BR>
 					"}
-			if(patient.surgeries.len)
-				dat += "<BR><B>Initiated Procedures:</B><BR>"
-				for(var/datum/surgery/procedure in patient.surgeries)
-					dat += "[procedure.name]<BR>"
+//			if(patient.surgeries.len)
+//				dat += "<BR><B>Initiated Procedures:</B><BR>"
+//				for(var/datum/surgery/procedure in patient.surgeries)
+//					dat += "[procedure.name]<BR>"
 		else
 			patient = null
 			dat += "<B>No patient detected</B>"

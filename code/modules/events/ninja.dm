@@ -1,6 +1,9 @@
 //Note to future generations: I didn't write this god-awful code I just ported it to the event system and tried to make it less moon-speaky.
 //Don't judge me D; ~Carn
 
+/var/global/toggle_space_ninja = 1//If ninjas can spawn or not.
+/var/global/sent_ninja_to_station = 0//If a ninja is already on the station.
+
 /datum/event_control/ninja
 	name = "Space Ninja"
 	typepath = /datum/event/ninja
@@ -169,6 +172,7 @@
 	if(Ninja.mind != Mind)			//something has gone wrong!
 		error("The ninja wasn't assigned the right mind. ;(")
 
+	sent_ninja_to_station = 1
 	success_spawn = 1
 
 /*

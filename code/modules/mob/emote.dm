@@ -5,9 +5,6 @@ mob/proc/custom_emote(var/m_type=1,var/message = null)
 		usr << "You are unable to emote."
 		return
 
-	var/muzzled = istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
-	if(m_type == 2 && muzzled) return
-
 	var/input
 	if(!message)
 		input = copytext(sanitize(input(src,"Choose an emote to display.") as text|null),1,MAX_MESSAGE_LEN)

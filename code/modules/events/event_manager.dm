@@ -70,7 +70,7 @@ var/eventTimeUpper = 25000	//30 minutes
 		sum_of_weights += E.weight
 
 	sum_of_weights = rand(0,sum_of_weights)	//reusing this variable. It now represents the 'weight' we want to select
-*/
+
 
 	for(var/datum/event_control/E in control)
 		if(E.occurrences >= E.max_occurrences)	continue

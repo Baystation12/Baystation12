@@ -1,4 +1,6 @@
-/var/global/sent_aliens_to_station = 0/datum/event_control/alien_infestation
+/var/global/sent_aliens_to_station = 0
+
+/datum/event_control/alien_infestation
 	name = "Alien Infestation"
 	typepath = /datum/event/alien_infestation
 	weight = 5
