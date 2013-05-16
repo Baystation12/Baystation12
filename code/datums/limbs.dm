@@ -9,64 +9,64 @@
 	var/burn_dam = 0
 	var/max_damage = 0
 
-/datum/limb/chest
+/datum/organ/external/chest
 	name = "chest"
 	icon_name = "chest"
 	max_damage = 150
 	body_part = CHEST
 
-/datum/limb/head
+/datum/organ/external/head
 	name = "head"
 	icon_name = "head"
 	max_damage = 125
 	body_part = HEAD
 
-/datum/limb/l_arm
+/datum/organ/external/l_arm
 	name = "l_arm"
 	icon_name = "l_arm"
 	max_damage = 75
 	body_part = ARM_LEFT
 
-/datum/limb/l_leg
+/datum/organ/external/l_leg
 	name = "l_leg"
 	icon_name = "l_leg"
 	max_damage = 75
 	body_part = LEG_LEFT
 
-/datum/limb/r_arm
+/datum/organ/external/r_arm
 	name = "r_arm"
 	icon_name = "r_arm"
 	max_damage = 75
 	body_part = ARM_RIGHT
 
-/datum/limb/r_leg
+/datum/organ/external/r_leg
 	name = "r_leg"
 	icon_name = "r_leg"
 	max_damage = 75
 	body_part = LEG_RIGHT
 
 /*Leaving these here in case we want to use them later
-/datum/limb/l_foot
+/datum/organ/external/l_foot
 	name = "l foot"
 	icon_name = "l_foot"
 	body_part = FOOT_LEFT
 
-/datum/limb/r_foot
+/datum/organ/external/r_foot
 	name = "r foot"
 	icon_name = "r_foot"
 	body_part = FOOT_RIGHT
 
-/datum/limb/r_hand
+/datum/organ/external/r_hand
 	name = "r hand"
 	icon_name = "r_hand"
 	body_part = HAND_RIGHT
 
-/datum/limb/l_hand
+/datum/organ/external/l_hand
 	name = "l hand"
 	icon_name = "l_hand"
 	body_part = HAND_LEFT
 
-/datum/limb/groin
+/datum/organ/external/groin
 	name = "groin"
 	icon_name = "groin"
 	body_part = GROIN
@@ -75,7 +75,7 @@
 //Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
 //Damage will not exceed max_damage using this proc
 //Cannot apply negative damage
-/datum/limb/proc/take_damage(brute, burn)
+/datum/organ/external/proc/take_damage(brute, burn)
 	if(owner && (owner.status_flags & GODMODE))	return 0	//godmode
 	brute	= max(brute,0)
 	burn	= max(burn,0)
@@ -106,7 +106,7 @@
 //Heals brute and burn damage for the organ. Returns 1 if the damage-icon states changed at all.
 //Damage cannot go below zero.
 //Cannot remove negative damage (i.e. apply damage)
-/datum/limb/proc/heal_damage(brute, burn)
+/datum/organ/external/proc/heal_damage(brute, burn)
 	brute	= max(brute, 0)
 	burn	= max(burn, 0)
 	brute_dam	= max(brute_dam - brute, 0)
@@ -115,13 +115,13 @@
 
 
 //Returns total damage...kinda pointless really
-/datum/limb/proc/get_damage()
+/datum/organ/external/proc/get_damage()
 	return brute_dam + burn_dam
 
 
 //Updates an organ's brute/burn states for use by updateDamageIcon()
 //Returns 1 if we need to update overlays. 0 otherwise.
-/datum/limb/proc/update_icon()
+/datum/organ/external/proc/update_icon()
 	var/tbrute	= round( (brute_dam/max_damage)*3, 1 )
 	var/tburn	= round( (burn_dam/max_damage)*3, 1 )
 	if((tbrute != brutestate) || (tburn != burnstate))
@@ -131,7 +131,7 @@
 	return 0
 
 //Returns a display name for the organ
-/datum/limb/proc/getDisplayName()
+/datum/organ/external/proc/getDisplayName()
 	switch(name)
 		if("l_leg")		return "left leg"
 		if("r_leg")		return "right leg"
