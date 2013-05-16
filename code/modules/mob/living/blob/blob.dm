@@ -186,7 +186,7 @@
 	return
 
 
-///mob/proc/Blobize()
+/mob/proc/Blobize()
 /client/proc/Blobcount()
 	set category = "Debug"
 	set name = "blobreport"
