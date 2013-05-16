@@ -73,7 +73,7 @@
 
 /obj/item/weapon/grown/novaflower
 	name = "novaflower"
-	desc = "These beautiful flowers have a crisp smokey scent, like a summer bonfire."
+	desc = "It's beautiful! A certain person might beat you to death if you trample these."
 	icon = 'icons/obj/harvest.dmi'
 	icon_state = "novaflower"
 	damtype = "fire"
@@ -86,12 +86,6 @@
 	plant_type = 0
 	seed = "/obj/item/seeds/novaflower"
 	attack_verb = list("seared", "heated", "whacked", "steamed")
-	New()
-		..()
-		spawn(5)	//So potency can be set in the proc that creates these crops
-			reagents.add_reagent("nutriment", 1)
-			reagents.add_reagent("capsaicin", round(potency, 1))
-			force = round((5+potency/5), 1)
 
 /obj/item/weapon/grown/nettle // -- Skie
 	desc = "It's probably <B>not</B> wise to touch it with bare hands..."
@@ -111,7 +105,7 @@
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
-			reagents.add_reagent("nutriment", 1)
+			reagents.add_reagent("nutriment", 1+round((potency / 50), 1))
 			reagents.add_reagent("sacid", round(potency, 1))
 			force = round((5+potency/5), 1)
 
@@ -134,7 +128,7 @@
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
-			reagents.add_reagent("nutriment", 1)
+			reagents.add_reagent("nutriment", 1+round((potency / 50), 1))
 			reagents.add_reagent("pacid", round(potency, 1))
 			force = round((5+potency/2.5), 1)
 
