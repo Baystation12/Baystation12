@@ -1,11 +1,11 @@
 /obj/item/brain
 	name = "brain"
-	desc = "A piece of juicy meat found in a persons head."
+	desc = "A piece of juicy meat found in a person's head."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "brain2"
 	flags = TABLEPASS
 	force = 1.0
-	w_class = 1.0
+	w_class = 2.0
 	throwforce = 1.0
 	throw_speed = 3
 	throw_range = 5
@@ -22,29 +22,29 @@
 			if(brainmob && brainmob.client)
 				brainmob.client.screen.len = null //clear the hud
 
-	proc
-		transfer_identity(var/mob/living/carbon/H)
-			name = "[H]'s brain"
-			brainmob = new(src)
-			brainmob.name = H.real_name
-			brainmob.real_name = H.real_name
-			brainmob.dna = H.dna
-			brainmob.timeofhostdeath = H.timeofdeath
-			if(H.mind)
-				H.mind.transfer_to(brainmob)
-			brainmob << "\blue You feel slightly disoriented. That's normal when you're just a brain."
-			return
 
-/obj/item/brain/examine() // -- TLE
+/obj/item/brain/proc/transfer_identity(mob/living/carbon/H)
+	name = "[H]'s brain"
+	brainmob = new(src)
+	brainmob.name = H.real_name
+	brainmob.real_name = H.real_name
+	brainmob.dna = H.dna
+	brainmob.timeofhostdeath = H.timeofdeath
+	if(H.mind)
+		H.mind.transfer_to(brainmob)
+	brainmob << "<span class='notice'>You feel slightly disoriented. That's normal when you're just a brain.</span>"
+
+
+/obj/item/brain/examine()
 	set src in oview(12)
 	if (!( usr ))
 		return
-	usr << "This is \icon[src] \an [name]."
 
-	if(brainmob && brainmob.client)//if thar be a brain inside... the brain.
+	..()
+	if(brainmob && brainmob.client)
 		usr << "You can feel the small spark of life still left in this one."
 	else
-		usr << "This one seems particularly lifeless. Perhaps it will regain some of its luster later.."
+		usr << "This one seems particularly lifeless. Perhaps it will regain some of it's luster later.."
 
 /obj/item/brain/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))
@@ -95,4 +95,9 @@
 		del(src)
 	else
 		..()
-	return
+
+/obj/item/brain/alien
+	name = "alien brain"
+	desc = "We barely understand the brains of terrestial animals. Who knows what we may find in the brain of such an advanced species?"
+	icon_state = "brain-alien"
+	origin_tech = "biotech=7"
