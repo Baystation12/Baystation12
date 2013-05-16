@@ -48,12 +48,12 @@
 
 /mob/living/carbon/attack_hand(mob/user)
 	if(!iscarbon(user)) return
-	if (hasorgans(M))
-		var/datum/organ/external/temp = M:organs_by_name["r_hand"]
-		if (M.hand)
-			temp = M:organs_by_name["l_hand"]
+	if (hasorgans(user))
+		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
+		if (user.hand)
+			temp = user:organs_by_name["l_hand"]
 		if(temp && temp.status & ORGAN_DESTROYED)
-			M << "\red Yo- wait a minute."
+			user << "\red Yo- wait a minute."
 			return
 
 	for(var/datum/disease/D in viruses)

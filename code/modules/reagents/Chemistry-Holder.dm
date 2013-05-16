@@ -502,6 +502,12 @@ datum
 
 				return res
 
+			delete()
+				for(var/datum/reagent/R in reagent_list)
+					R.holder = null
+				if(my_atom)
+					my_atom.reagents = null
+
 			//two helper functions to preserve data across reactions (needed for xenoarch)
 			get_data(var/reagent_id)
 				for(var/datum/reagent/D in reagent_list)
