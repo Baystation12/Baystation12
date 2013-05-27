@@ -37,6 +37,13 @@
 		dna.uni_identity += "12C"
 		dna.uni_identity += "4E2"
 	..()
+//		switch(dna.mutantrace) //On monkey spawn, check the DNA of the mob. If alien, change to appropriate alien monkey sprite
+//		if("tajaran")
+//			icon_state = "tajkey1"
+//		if(lizard)
+//			icon_state = "lizkey1"
+//		if(skrell)
+//			icon_state = "squikey1"
 	return
 
 /mob/living/carbon/monkey/movement_delay()
