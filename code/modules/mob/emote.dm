@@ -5,6 +5,9 @@ mob/proc/custom_emote(var/m_type=1,var/message = null)
 		usr << "You are unable to emote."
 		return
 
+//	var/muzzled = istype(src.wear_mask, /obj/item/clothing/mask/muzzle)
+//	if(m_type == 2 && muzzled) return
+
 	var/input
 	if(!message)
 		input = copytext(sanitize(input(src,"Choose an emote to display.") as text|null),1,MAX_MESSAGE_LEN)
@@ -35,13 +38,7 @@ mob/proc/custom_emote(var/m_type=1,var/message = null)
 
 		if (m_type & 1)
 			for (var/mob/O in viewers(src, null))
-				/*if(istype(O,/mob/living/carbon/human))
-					for(var/mob/living/parasite/P in O:parasites)
-						P.show_message(message, m_type)*/
 				O.show_message(message, m_type)
 		else if (m_type & 2)
 			for (var/mob/O in hearers(src.loc, null))
-				/*if(istype(O,/mob/living/carbon/human))
-					for(var/mob/living/parasite/P in O:parasites)
-						P.show_message(message, m_type)*/
 				O.show_message(message, m_type)

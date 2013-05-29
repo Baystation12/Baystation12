@@ -1,8 +1,8 @@
 var/datum/controller/event/events
 //var/list/potentialRandomEvents = typesof(/datum/event) - /datum/event - /datum/event/spider_infestation - /datum/event/alien_infestation
 
-var/eventTimeLower = 10000	//15 minutes
-var/eventTimeUpper = 25000	//30 minutes
+var/eventTimeLower = 6000	//10 minutes
+var/eventTimeUpper = 12000	//15 minutes
 /datum/controller/event
 	var/list/control = list()	//list of all datum/event_control. Used for selecting events based on weight and occurrences.
 	var/list/running = list()	//list of all existing /datum/event
@@ -41,6 +41,7 @@ var/eventTimeUpper = 25000	//30 minutes
 			continue
 		running.Cut(i,i+1)
 
+
 //checks if we should select a random event yet, and reschedules if necessary
 /datum/controller/event/proc/checkEvent()
 	if(scheduled <= world.time)
@@ -49,7 +50,22 @@ var/eventTimeUpper = 25000	//30 minutes
 
 //decides which world.time we should select another random event at.
 /datum/controller/event/proc/reschedule()
-	scheduled = world.time + rand(frequency_lower, min(frequency_lower,frequency_upper))
+	//more players = more time between events, less players = less time between events
+	var/playercount_modifier = 1
+	switch(player_list.len)
+		if(0 to 10)
+			playercount_modifier = 1.2
+		if(11 to 15)
+			playercount_modifier = 1.1
+		if(16 to 25)
+			playercount_modifier = 1
+		if(26 to 35)
+			playercount_modifier = 0.9
+		if(36 to 100000)
+			playercount_modifier = 0.8
+	var/next_event_delay = rand(eventTimeLower, eventTimeUpper) * playercount_modifier
+	scheduled = world.timeofday + next_event_delay
+	log_debug("Next event in [next_event_delay/600] minutes.")
 
 //selects a random event based on whether it can occur and it's 'weight'(probability)
 /datum/controller/event/proc/spawnEvent()

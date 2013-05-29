@@ -277,6 +277,8 @@
 		character.loc = pick(latejoin)
 		character.lastarea = get_area(loc)
 
+		ticker.mode.latespawn(character)
+
 		//ticker.mode.latespawn(character)
 
 		if(character.mind.assigned_role != "Cyborg")
@@ -365,6 +367,10 @@
 		new_character.dna.ready_dna(new_character)
 		new_character.dna.b_type = client.prefs.b_type
 
+		if(client.prefs.disabilities)
+			new_character.dna.struc_enzymes = setblock(new_character.dna.struc_enzymes,GLASSESBLOCK,toggledblock(getblock(new_character.dna.struc_enzymes,GLASSESBLOCK,3)),3)
+			new_character.disabilities |= NEARSIGHTED
+
 		new_character.key = key		//Manually transfer the key to log them in
 
 		return new_character
@@ -374,7 +380,7 @@
 		dat += "<h4>Crew Manifest</h4>"
 		dat += data_core.get_manifest()
 
-		src << browse(dat, "window=manifest;size=300x420;can_close=1")
+		src << browse(dat, "window=manifest;size=370x420;can_close=1")
 
 	Move()
 		return 0

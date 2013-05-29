@@ -52,8 +52,8 @@
 		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
 		if (user.hand)
 			temp = user:organs_by_name["l_hand"]
-		if(temp && temp.status & ORGAN_DESTROYED)
-			user << "\red Yo- wait a minute."
+		if(temp && !temp.is_usable())
+			user << "\red You can't use your [temp.display_name]"
 			return
 
 	for(var/datum/disease/D in viruses)
@@ -69,14 +69,6 @@
 /mob/living/carbon/attack_paw(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
 
-	if (hasorgans(M))
-		var/datum/organ/external/temp = M:organs_by_name["r_hand"]
-		if (M.hand)
-			temp = M:organs_by_name["l_hand"]
-		if(temp && temp.status & ORGAN_DESTROYED)
-			M << "\red Yo- wait a minute."
-			return
-
 	for(var/datum/disease/D in viruses)
 
 		if(D.spread_by_touch())
@@ -90,6 +82,7 @@
 	return
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
+	if(status_flags & GODMODE)	return 0	//godmode
 	shock_damage *= siemens_coeff
 	if (shock_damage<1)
 		return 0
@@ -180,6 +173,8 @@
 					status += "numb"
 				if(org.status & ORGAN_DESTROYED)
 					status = "MISSING!"
+				if(org.status & ORGAN_MUTATED)
+					status = "weirdly shapen."
 				if(status == "")
 					status = "OK"
 				src << "\t [status == "OK" ? "\blue" : "\red"] My [org.display_name] is [status]."
@@ -381,13 +376,13 @@
 	item.layer = initial(item.layer)
 	u_equip(item)
 	update_icons()
-	//if(src.client)
-		//src.client.screen -= item
 
-	//item.loc = src.loc
-
-	//if(istype(item, /obj/item))
-		//item:dropped(src) // let it know it's been dropped
+	if (istype(usr, /mob/living/carbon/monkey)) //Check if a monkey is throwing. Modify/remove this line as required.
+		item.loc = src.loc
+		if(src.client)
+			src.client.screen -= item
+		if(istype(item, /obj/item))
+			item:dropped(src) // let it know it's been dropped
 
 	//actually throw it!
 	if (item)

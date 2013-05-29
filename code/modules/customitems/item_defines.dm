@@ -135,6 +135,14 @@ hi
 	icon_on = "bluezippoon"
 	icon_off = "bluezippo"
 
+/obj/item/weapon/lighter/zippo/fluff/michael_guess_1 //Dragor23: Michael Guess
+	name = "engraved lighter"
+	desc = "A golden lighter, engraved with some ornaments and a G."
+	icon = 'custom_items.dmi'
+	icon_state = "guessip"
+	icon_on = "guessipon"
+	icon_off = "guessip"
+
 /obj/item/weapon/lighter/zippo/fluff/riley_rohtin_1 //rawrtaicho: Riley Rohtin
 	name = "Riley's black zippo"
 	desc = "A black zippo lighter, which holds some form of sentimental value."
@@ -192,6 +200,8 @@ hi
 	icon = 'custom_items.dmi'
 	desc = "A modified detective's camera, painted in bright orange. On the back you see \"Have fun\" written in small accurate letters with something black."
 	icon_state = "orangecamera"
+	icon_on = "orangecamera"
+	icon_off = "camera_off"
 	pictures_left = 30
 
 /obj/item/device/camera/fluff/oldcamera //magmaram: Maria Crash
@@ -199,6 +209,8 @@ hi
 	icon = 'custom_items.dmi'
 	desc = "An old, slightly beat-up digital camera, with a cheap photo printer taped on. It's a nice shade of blue."
 	icon_state = "oldcamera"
+	icon_on = "oldcamera"
+	icon_off = "oldcamera_off"
 	pictures_left = 30
 
 /obj/item/weapon/card/id/fluff/lifetime	//fastler: Fastler Greay; it seemed like something multiple people would have
@@ -466,6 +478,12 @@ hi
 	desc = "Much safer than a hard helmet."
 	icon = 'custom_items.dmi'
 	icon_state = "neilpatterson0_hat"
+
+/obj/item/clothing/head/fluff/krinnhat //Shirotyrant: Krinn Seeskale
+	name = "saucepan hat"
+	desc = "This hat is the shiniest shiny Krinn has ever owned."
+	icon = 'custom_items.dmi'
+	icon_state = "krinn_hat"
 //////////// Suits ////////////
 
 /obj/item/clothing/suit/storage/labcoat/fluff/pink //spaceman96: Trenna Seber
@@ -502,6 +520,14 @@ hi
 	icon = 'custom_items.dmi'
 	icon_state = "deus_blueshield"
 	item_state = "deus_blueshield"
+
+/obj/item/clothing/suit/fluff/oldscarf //Writerer2: Javaria Zara
+	name = "old scarf"
+	desc = "An old looking scarf, it seems to be fairly worn."
+	icon = 'clothing/suits.dmi'
+	icon_state = "mantle-unathi"
+	item_state = "mantle-unathi"
+	body_parts_covered = CHEST
 
 //////////// Uniforms ////////////
 
