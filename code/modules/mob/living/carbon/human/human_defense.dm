@@ -9,6 +9,14 @@ emp_act
 */
 
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
+// BEGIN TASER NERF
+	if(wear_suit && istype(wear_suit, /obj/item/clothing/suit/armor))
+		if(istype(P, /obj/item/projectile/energy/electrode))
+			visible_message("\red <B>The [P.name] gets deflected by [src]'s [wear_suit.name]!</B>")
+			del P
+		return -1
+
+// END TASER NERF
 
 	if(wear_suit && istype(wear_suit, /obj/item/clothing/suit/armor/laserproof))
 		if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
@@ -33,6 +41,7 @@ emp_act
 					P.xo = new_x - curloc.x
 
 				return -1 // complete projectile permutation
+
 
 	if(check_shields(P.damage, "the [P.name]"))
 		P.on_hit(src, 2)
@@ -117,7 +126,7 @@ emp_act
 	if(!target_zone)
 		visible_message("\red <B>[user] misses [src] with \the [I]!")
 		return
-		
+
 	var/datum/organ/external/affecting = get_organ(target_zone)
 	if (!affecting)
 		return
