@@ -30,6 +30,12 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	mouse_opacity = 0
 	var/amount = 8.0
 
+/obj/effect/effect/proc/delete()
+	loc = null
+	if(reagents)
+		reagents.delete()
+	return
+
 
 /obj/effect/effect/water/New()
 	..()
@@ -37,7 +43,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	//if (istype(T, /turf))
 	//	T.firelevel = 0 //TODO: FIX
 	spawn( 70 )
-		del(src)
+		delete()
 		return
 	return
 
@@ -54,7 +60,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	//	T.firelevel = 0 //TODO: FIX
 	if (--src.life < 1)
 		//SN src = null
-		del(src)
+		delete()
 	if(newloc.density)
 		return 0
 	.=..()
@@ -132,7 +138,7 @@ steam.start() -- spawns the effect
 					sleep(5)
 					step(steam,direction)
 				spawn(20)
-					del(steam)
+					steam.delete()
 
 /////////////////////////////////////////////
 //SPARK SYSTEM (like steam system)
@@ -155,7 +161,7 @@ steam.start() -- spawns the effect
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 	spawn (100)
-		del(src)
+		delete()
 	return
 
 /obj/effect/effect/sparks/Del()
@@ -204,7 +210,7 @@ steam.start() -- spawns the effect
 					sleep(5)
 					step(sparks,direction)
 				spawn(20)
-					del(sparks)
+					sparks.delete()
 					src.total_sparks--
 
 
@@ -231,7 +237,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/harmless_smoke/New()
 	..()
 	spawn (100)
-		del(src)
+		delete()
 	return
 
 /obj/effect/effect/harmless_smoke/Move()
@@ -275,7 +281,7 @@ steam.start() -- spawns the effect
 					sleep(10)
 					step(smoke,direction)
 				spawn(75+rand(10,30))
-					del(smoke)
+					smoke.delete()
 					src.total_smoke--
 
 
@@ -298,7 +304,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/bad_smoke/New()
 	..()
 	spawn (200+rand(10,30))
-		del(src)
+		delete()
 	return
 
 /obj/effect/effect/bad_smoke/Move()
@@ -375,7 +381,7 @@ steam.start() -- spawns the effect
 					sleep(10)
 					step(smoke,direction)
 				spawn(150+rand(10,30))
-					del(smoke)
+					smoke.delete()
 					src.total_smoke--
 
 
@@ -402,7 +408,7 @@ steam.start() -- spawns the effect
 	R.my_atom = src
 
 	spawn (200+rand(10,30))
-		del(src)
+		delete()
 	return
 
 /obj/effect/effect/chem_smoke/Move()
@@ -504,7 +510,7 @@ steam.start() -- spawns the effect
 					sleep(10)
 					step(smoke,direction)
 				spawn(150+rand(10,30))
-					del(smoke)
+					smoke.delete()
 					src.total_smoke--
 
 
@@ -528,7 +534,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/sleep_smoke/New()
 	..()
 	spawn (200+rand(10,30))
-		del(src)
+		delete()
 	return
 
 /obj/effect/effect/sleep_smoke/Move()
@@ -599,12 +605,9 @@ steam.start() -- spawns the effect
 					sleep(10)
 					step(smoke,direction)
 				spawn(150+rand(10,30))
-					del(smoke)
+					smoke.delete()
 					src.total_smoke--
 
-/////////////////////////////////////////////
-// Mustard Gas
-/////////////////////////////////////////////
 
 
 /obj/effect/effect/mustard_gas
@@ -624,7 +627,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/mustard_gas/Move()
 	..()
 	for(var/mob/living/carbon/human/R in get_turf(src))
-		if (R.internal != null && usr.wear_mask && (R.wear_mask.flags & MASKINTERNALS) && R.wear_suit != null && !istype(R.wear_suit, /obj/item/clothing/suit/storage/labcoat) && !istype(R.wear_suit, /obj/item/clothing/suit/straight_jacket) && !istype(R.wear_suit, /obj/item/clothing/suit/straight_jacket && !istype(R.wear_suit, /obj/item/clothing/suit/armor)))
+		if (R.internal != null && R.wear_mask && (R.wear_mask.flags & MASKINTERNALS) && R.wear_suit != null && !istype(R.wear_suit, /obj/item/clothing/suit/storage/labcoat) && !istype(R.wear_suit, /obj/item/clothing/suit/straight_jacket) && !istype(R.wear_suit, /obj/item/clothing/suit/straight_jacket && !istype(R.wear_suit, /obj/item/clothing/suit/armor)))
 		else
 			R.burn_skin(0.75)
 			if (R.coughedtime != 1)
@@ -638,7 +641,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/mustard_gas/HasEntered(mob/living/carbon/human/R as mob )
 	..()
 	if (istype(R, /mob/living/carbon/human))
-		if (R.internal != null && usr.wear_mask && (R.wear_mask.flags & MASKINTERNALS) && R.wear_suit != null && !istype(R.wear_suit, /obj/item/clothing/suit/storage/labcoat) && !istype(R.wear_suit, /obj/item/clothing/suit/straight_jacket) && !istype(R.wear_suit, /obj/item/clothing/suit/straight_jacket && !istype(R.wear_suit, /obj/item/clothing/suit/armor)))
+		if (R.internal != null && R.wear_mask && (R.wear_mask.flags & MASKINTERNALS) && R.wear_suit != null && !istype(R.wear_suit, /obj/item/clothing/suit/storage/labcoat) && !istype(R.wear_suit, /obj/item/clothing/suit/straight_jacket) && !istype(R.wear_suit, /obj/item/clothing/suit/straight_jacket && !istype(R.wear_suit, /obj/item/clothing/suit/armor)))
 			return
 		R.burn_skin(0.75)
 		if (R.coughedtime != 1)
@@ -727,7 +730,7 @@ steam.start() -- spawns the effect
 						flick("ion_fade", I)
 						I.icon_state = "blank"
 						spawn( 20 )
-							del(I)
+							I.delete()
 					spawn(2)
 						if(src.on)
 							src.processing = 1
@@ -772,7 +775,7 @@ steam.start() -- spawns the effect
 					src.oldposition = get_turf(holder)
 					I.dir = src.holder.dir
 					spawn(10)
-						del(I)
+						I.delete()
 						src.number--
 					spawn(2)
 						if(src.on)
@@ -800,7 +803,7 @@ steam.start() -- spawns the effect
 	opacity = 0
 	anchored = 1
 	density = 0
-	layer = OBJ_LAYER + 0.9
+	layer = TURF_LAYER + 0.1
 	mouse_opacity = 0
 	var/amount = 3
 	var/expand = 1
@@ -826,7 +829,7 @@ steam.start() -- spawns the effect
 
 		flick("[icon_state]-disolve", src)
 		sleep(5)
-		del(src)
+		delete()
 	return
 
 // on delete, transfer any reagents to the floor
@@ -872,7 +875,7 @@ steam.start() -- spawns the effect
 		flick("[icon_state]-disolve", src)
 
 		spawn(5)
-			del(src)
+			delete()
 
 
 /obj/effect/effect/foam/HasEntered(var/atom/movable/AM)
@@ -1078,13 +1081,13 @@ steam.start() -- spawns the effect
 
 			// Clamp all values to MAX_EXPLOSION_RANGE
 			if (round(amount/12) > 0)
-				devastation = min (MAX_EXPLOSION_RANGE, devastation + round(amount/12))
+				devastation = min (MAX_EX_DEVESTATION_RANGE, devastation + round(amount/12))
 
 			if (round(amount/6) > 0)
-				heavy = min (MAX_EXPLOSION_RANGE, heavy + round(amount/6))
+				heavy = min (MAX_EX_HEAVY_RANGE, heavy + round(amount/6))
 
 			if (round(amount/3) > 0)
-				light = min (MAX_EXPLOSION_RANGE, light + round(amount/3))
+				light = min (MAX_EX_LIGHT_RANGE, light + round(amount/3))
 
 			if (flash && flashing_factor)
 				flash += (round(amount/4) * flashing_factor)

@@ -1,6 +1,12 @@
+/datum/event_control/carp_migration
+	name = "Carp Migration"
+	typepath = /datum/event/carp_migration
+	weight = 15
+	earliest_start = 6000
+	max_occurrences = 6
+
 /datum/event/carp_migration
 	announceWhen	= 50
-	oneShot			= 1
 	endWhen = 900
 	var/list/spawned_carp = list()
 

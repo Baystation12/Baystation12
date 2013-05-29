@@ -1,6 +1,7 @@
 
 /obj/machinery/processor
 	name = "Food Processor"
+	desc = "An industrial grinder used to process meat and other foods. Keep hands clear of intake area while operating."
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "processor"
 	layer = 2.9
@@ -61,9 +62,21 @@
 
 
 		slime
-			input = /mob/living/carbon/slime
-			output = /obj/item/weapon/reagent_containers/glass/beaker/slime
 
+			process(loc, what)
+
+				var/mob/living/carbon/slime/S = what
+				var/C = S.cores
+				if(S.stat != DEAD)
+					S.loc = loc
+					S.visible_message("\blue [C] crawls free of the processor!")
+					return
+				for(var/i = 1, i <= C, i++)
+					new S.coretype(loc)
+					feedback_add_details("slime_core_harvested","[S.colour]")
+				..()
+			input = /mob/living/carbon/slime
+			output = null
 		monkey
 			process(loc, what)
 				var/mob/living/carbon/monkey/O = what
@@ -71,7 +84,7 @@
 					O.loc = loc
 					O.visible_message("\blue Suddenly [O] jumps out from the processor!", \
 							"You jump out from the processor", \
-							"You hear chimp")
+							"You hear chimpering")
 					return
 				var/obj/item/weapon/reagent_containers/glass/bucket/bucket_of_blood = new(loc)
 				var/datum/reagent/blood/B = new()
@@ -149,7 +162,6 @@
 		sleep(P.time)
 		P.process(src.loc, O)
 		src.processing = 0
-	src.visible_message("\blue \the [src] finished processing.", \
-		"You hear food processor stops")
+	src.visible_message("\blue \the [src] finished processing.")
 
 

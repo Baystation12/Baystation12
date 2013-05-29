@@ -21,6 +21,10 @@
 		toggle_scan()
 		sense()
 
+	describe()
+		if(timing)
+			return "\blue The proximity sensor is arming."
+		return "The proximity sensor is [scanning?"armed":"disarmed"]."
 
 	activate()
 		if(!..())	return 0//Cooldown check
@@ -102,9 +106,9 @@
 			attached_overlays += "prox_scanning"
 		if(holder)
 			holder.update_icon()
-		if(holder && istype(holder.loc,/obj/item/weapon/grenade/chem_grenade))
-			var/obj/item/weapon/grenade/chem_grenade/grenade = holder.loc
-			grenade.primed(scanning)
+//		if(holder && istype(holder.loc,/obj/item/weapon/grenade/chem_grenade))
+//			var/obj/item/weapon/grenade/chem_grenade/grenade = holder.loc
+//			grenade.primed(scanning)
 		return
 
 

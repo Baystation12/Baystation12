@@ -231,12 +231,12 @@
 	if (health > 0)
 		var/datum/organ/external/affecting = get_organ(pick("chest", "chest", "chest", "head"))
 		if(!affecting)	return
-		if (istype(O, /obj/effect/immovablerod))
+		/*if (istype(O, /obj/effect/immovablerod))
 			if(affecting.take_damage(101, 0))
 				UpdateDamageIcon()
-		else
-			if(affecting.take_damage((istype(O, /obj/effect/meteor/small) ? 10 : 25), 30))
-				UpdateDamageIcon()
+		else*/
+		if(affecting.take_damage((istype(O, /obj/effect/meteor/small) ? 10 : 25), 30))
+			UpdateDamageIcon()
 		updatehealth()
 	return
 
@@ -439,7 +439,7 @@
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name()
 	var/datum/organ/external/head/head = get_organ("head")
-	if( !head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
+	if( !head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || cloneloss>50 || (HUSK in mutations) )	//disfigured. use id-name if possible
 		return "Unknown"
 	return real_name
 

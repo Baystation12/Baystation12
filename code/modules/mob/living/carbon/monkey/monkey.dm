@@ -36,8 +36,8 @@
 		dna.uni_identity += gendervar
 		dna.uni_identity += "12C"
 		dna.uni_identity += "4E2"
+
 	..()
-	return
 
 /mob/living/carbon/monkey/movement_delay()
 	var/tally = 0
@@ -170,6 +170,9 @@
 
 	if (istype(loc, /turf) && istype(loc.loc, /area/start))
 		M << "No attacking people at spawn, you jackass."
+		return
+
+	if(..())	//To allow surgery to return properly.
 		return
 
 	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))

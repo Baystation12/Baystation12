@@ -17,11 +17,10 @@
 	if(type == /area)	// override defaults for space. TODO: make space areas of type /area/space rather than /area
 		requires_power = 1
 		always_unpowered = 1
-		lighting_use_dynamic = 1
+		lighting_use_dynamic = 0
 		power_light = 0
 		power_equip = 0
 		power_environ = 0
-//		lighting_state = 4
 		//has_gravity = 0    // Space has gravity.  Because.. because.
 
 	if(requires_power)
@@ -53,7 +52,7 @@
 						aiPlayer.cancelAlarm("Power", src, source)
 					else
 						aiPlayer.triggerAlarm("Power", src, cameras, source)
-			for(var/obj/machinery/computer/station_alert/a in world)
+			for(var/obj/machinery/computer/station_alert/a in machines)
 				if(a.z == source.z)
 					if(state == 1)
 						a.cancelAlarm("Power", src, source)
@@ -75,12 +74,12 @@
 					cameras += C
 			for(var/mob/living/silicon/aiPlayer in player_list)
 				aiPlayer.triggerAlarm("Atmosphere", src, cameras, src)
-			for(var/obj/machinery/computer/station_alert/a in world)
+			for(var/obj/machinery/computer/station_alert/a in machines)
 				a.triggerAlarm("Atmosphere", src, cameras, src)
 		else if (atmosalm == 2)
 			for(var/mob/living/silicon/aiPlayer in player_list)
 				aiPlayer.cancelAlarm("Atmosphere", src, src)
-			for(var/obj/machinery/computer/station_alert/a in world)
+			for(var/obj/machinery/computer/station_alert/a in machines)
 				a.cancelAlarm("Atmosphere", src, src)
 		atmosalm = danger_level
 		return 1
@@ -105,7 +104,7 @@
 			cameras += C
 		for (var/mob/living/silicon/ai/aiPlayer in player_list)
 			aiPlayer.triggerAlarm("Fire", src, cameras, src)
-		for (var/obj/machinery/computer/station_alert/a in world)
+		for (var/obj/machinery/computer/station_alert/a in machines)
 			a.triggerAlarm("Fire", src, cameras, src)
 
 /area/proc/firereset()
@@ -122,7 +121,7 @@
 					D.open()
 		for (var/mob/living/silicon/ai/aiPlayer in player_list)
 			aiPlayer.cancelAlarm("Fire", src, src)
-		for (var/obj/machinery/computer/station_alert/a in world)
+		for (var/obj/machinery/computer/station_alert/a in machines)
 			a.cancelAlarm("Fire", src, src)
 
 /area/proc/readyalert()
@@ -293,16 +292,16 @@
 				if(L.&& L.client)
 					L.client.played = 0
 
-/area/proc/gravitychange(var/gravitystate = 0, var/area/A)
+/area/proc/gravitychange(var/gravitystate = 0)
 
-	A.has_gravity = gravitystate
+	has_gravity = gravitystate
 
-	for(var/area/SubA in A.related)
-		SubA.has_gravity = gravitystate
+	if(gravitystate)
+		for(var/mob/living/carbon/human/M in contents)
+			thunk(M)
 
-		if(gravitystate)
-			for(var/mob/living/carbon/human/M in SubA)
-				thunk(M)
+/area/proc/mob_activate(var/mob/living/L)
+	return
 
 /area/proc/thunk(mob)
 	if(istype(mob,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.

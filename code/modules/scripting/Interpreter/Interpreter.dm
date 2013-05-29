@@ -55,6 +55,14 @@
 		if(program)Load(program)
 
 	proc
+
+/*
+	Set ourselves to Garbage Collect
+*/
+		GC()
+			..()
+			container = null
+
 /*
 	Proc: RaiseError
 	Raises a runtime error.
@@ -223,10 +231,21 @@
 	Checks a condition and runs either the if block or else block.
 */
 		RunIf(node/statement/IfStatement/stmt)
-			if(Eval(stmt.cond))
-				RunBlock(stmt.block)
-			else if(stmt.else_block)
-				RunBlock(stmt.else_block)
+			if(!stmt.skip)
+				if(Eval(stmt.cond))
+					RunBlock(stmt.block)
+					// Loop through the if else chain and tell them to be skipped.
+					var/node/statement/IfStatement/i = stmt.else_if
+					var/fail_safe = 800
+					while(i && fail_safe)
+						fail_safe -= 1
+						i.skip = 1
+						i = i.else_if
+
+				else if(stmt.else_block)
+					RunBlock(stmt.else_block)
+			// We don't need to skip you anymore.
+			stmt.skip = 0
 
 /*
 	Proc: RunWhile

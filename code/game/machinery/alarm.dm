@@ -58,6 +58,8 @@
 	var/list/air_vent_info = list()
 	var/list/air_scrub_info = list()
 
+
+
 /obj/machinery/alarm
 	name = "alarm"
 	icon = 'monitors.dmi'
@@ -90,19 +92,9 @@
 	var/regulating_temperature = 0
 
 	var/datum/radio_frequency/radio_connection
-
 	var/list/TLV = list()
 
-	server/New()
-		..()
-		req_access = list(access_rd, access_atmospherics, access_engine_equip)
-		TLV["oxygen"] =			list(-1.0, -1.0,-1.0,-1.0) // Partial pressure, kpa
-		TLV["carbon dioxide"] = list(-1.0, -1.0,   5,  10) // Partial pressure, kpa
-		TLV["plasma"] =			list(-1.0, -1.0, 0.2, 0.5) // Partial pressure, kpa
-		TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
-		TLV["pressure"] =		list(0,ONE_ATMOSPHERE*0.10,ONE_ATMOSPHERE*1.40,ONE_ATMOSPHERE*1.60) /* kpa */
-		TLV["temperature"] =	list(20, 40, 140, 160) // K
-		target_temperature = 90
+
 
 	New()
 		..()
@@ -1050,6 +1042,17 @@ table tr:first-child th:first-child { border: none;}
 		stat |= NOPOWER
 	spawn(rand(0,15))
 		update_icon()
+
+/obj/machinery/alarm/server/New()
+	..()
+	req_access = list(access_rd, access_atmospherics, access_engine_equip)
+	TLV["oxygen"] =			list(-1.0, -1.0,-1.0,-1.0) // Partial pressure, kpa
+	TLV["carbon dioxide"] = list(-1.0, -1.0,   5,  10) // Partial pressure, kpa
+	TLV["plasma"] =			list(-1.0, -1.0, 0.2, 0.5) // Partial pressure, kpa
+	TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
+	TLV["pressure"] =		list(0,ONE_ATMOSPHERE*0.10,ONE_ATMOSPHERE*1.40,ONE_ATMOSPHERE*1.60) /* kpa */
+	TLV["temperature"] =	list(20, 40, 140, 160) // K
+	target_temperature = 90
 
 /*
 AIR ALARM CIRCUIT

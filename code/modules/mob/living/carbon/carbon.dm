@@ -40,37 +40,30 @@
 
 /mob/living/carbon/gib()
 	for(var/mob/M in src)
-		if(M in src.stomach_contents)
-			src.stomach_contents.Remove(M)
-		M.loc = src.loc
-		for(var/mob/N in viewers(src, null))
-			if(N.client)
-				N.show_message(text("\red <B>[M] bursts out of [src]!</B>"), 2)
+		if(M in stomach_contents)
+			stomach_contents.Remove(M)
+		M.loc = loc
+		visible_message("<span class='danger'>[M] bursts out of [src]!</span>")
 	. = ..()
 
-/mob/living/carbon/attack_hand(mob/M as mob)
-	if(!istype(M, /mob/living/carbon)) return
-	if (hasorgans(M))
-		var/datum/organ/external/temp = M:organs_by_name["r_hand"]
-		if (M.hand)
-			temp = M:organs_by_name["l_hand"]
+/mob/living/carbon/attack_hand(mob/user)
+	if(!iscarbon(user)) return
+	if (hasorgans(user))
+		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
+		if (user.hand)
+			temp = user:organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			M << "\red You can't use your [temp.display_name]"
+			user << "\red You can't use your [temp.display_name]"
 			return
 
 	for(var/datum/disease/D in viruses)
-
 		if(D.spread_by_touch())
+			user.contract_disease(D, 0, 1, CONTACT_HANDS)
 
-			M.contract_disease(D, 0, 1, CONTACT_HANDS)
-
-	for(var/datum/disease/D in M.viruses)
-
+	for(var/datum/disease/D in user.viruses)
 		if(D.spread_by_touch())
-
 			contract_disease(D, 0, 1, CONTACT_HANDS)
 
-	return
 
 
 /mob/living/carbon/attack_paw(mob/M as mob)
@@ -142,15 +135,16 @@
 
 	if(selhand != src.hand)
 		swap_hand()
+	else
+		mode() // Activate held item
 
 /mob/living/carbon/proc/help_shake_act(mob/living/carbon/M)
-	if (src.health >= config.health_threshold_crit)
+	if(health >= config.health_threshold_crit)
 		if(src == M && istype(src, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = src
-			src.visible_message( \
-				text("\blue [src] examines [].",src.gender==MALE?"himself":"herself"), \
-				"\blue You check yourself for injuries." \
-				)
+			visible_message( \
+				"<span class='notice'>[src] examines \himself.", \
+				"<span class='notice'>You check yourself for injuries.</span>")
 
 			for(var/datum/organ/external/org in H.organs)
 				var/status = ""
@@ -183,29 +177,32 @@
 					status = "weirdly shapen."
 				if(status == "")
 					status = "OK"
-				src.show_message(text("\t []My [] is [].",status=="OK"?"\blue ":"\red ",org.display_name,status),1)
-			if((SKELETON in H.mutations) && (!H.w_uniform) && (!H.wear_suit))
+				src << "\t [status == "OK" ? "\blue" : "\red"] My [org.display_name] is [status]."
+			if(SKELETON in H.mutations && !H.w_uniform && !H.wear_suit)
 				H.play_xylophone()
 		else
-			var/t_him = "it"
-			if (src.gender == MALE)
-				t_him = "him"
-			else if (src.gender == FEMALE)
-				t_him = "her"
-			if (istype(src,/mob/living/carbon/human) && src:w_uniform)
+			if(istype(src, /mob/living/carbon/human) && src:w_uniform)
 				var/mob/living/carbon/human/H = src
 				H.w_uniform.add_fingerprint(M)
-			src.sleeping = max(0,src.sleeping-5)
-			if(src.sleeping == 0)
-				src.resting = 0
+
+			if(lying)
+				sleeping = max(0, sleeping - 5)
+				if(sleeping == 0)
+					resting = 0
+				M.visible_message( \
+					"<span class='notice'>[M] shakes [src] trying to get \him up!</span>", \
+					"<span class='notice'>You shake [src] trying to get \him up!</span>")
+			else
+				M.visible_message( \
+					"<span class='notice'>[M] hugs [src] to make \him feel better!</span>", \
+					"<span class='notice'>You hug [src] to make \him feel better!</span>")
+
 			AdjustParalysis(-3)
 			AdjustStunned(-3)
 			AdjustWeakened(-3)
-			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			M.visible_message( \
-				"\blue [M] shakes [src] trying to wake [t_him] up!", \
-				"\blue You shake [src] trying to wake [t_him] up!", \
-				)
+
+			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+
 
 /mob/living/carbon/proc/eyecheck()
 	return 0
@@ -426,17 +423,25 @@
 /mob/living/carbon/u_equip(obj/item/W as obj)
 	if(!W)	return 0
 
-	else if (W == handcuffed)
+	else if(W == back)
+		back = null
+		update_inv_back(0)
+
+	else if(W == wear_mask)
+		wear_mask = null
+		update_inv_wear_mask(0)
+
+	else if(W == handcuffed)
 		handcuffed = null
 		update_inv_handcuffed()
 
-	else if (W == legcuffed)
+	else if(W == legcuffed)
 		legcuffed = null
 		update_inv_legcuffed()
-	else
-	 ..()
 
-	return
+	else
+		..()
+
 
 /mob/living/carbon/show_inv(mob/living/carbon/user as mob)
 	user.set_machine(src)
@@ -456,3 +461,8 @@
 	user << browse(dat, text("window=mob[];size=325x500", name))
 	onclose(user, "mob[name]")
 	return
+/mob/living/carbon/say(var/message)
+	if(istype(wear_mask, /obj/item/clothing/mask/muzzle))
+		return
+
+	..(message)

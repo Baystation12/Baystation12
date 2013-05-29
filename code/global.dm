@@ -1,4 +1,16 @@
 //#define TESTING
+#define KILL 26
+
+//#define dellogging		//Uncomment to compile with dellogging code (will slow down the game slightly)
+#ifdef dellogging
+#warn compiling del logging
+var/list/del_counter = list()
+/proc/log_del(datum/X)
+	if(istype(X)){del_counter[X.type]++;}
+	del(X)
+#define del(X) log_del(X)
+#endif
+
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 var/global/obj/effect/datacore/data_core = null
@@ -9,7 +21,6 @@ var/global/obj/effect/overlay/slmaster = null
 var/global/list/machines = list()
 var/global/list/processing_objects = list()
 var/global/list/active_diseases = list()
-var/global/list/events = list()
 		//items that ask to be called every cycle
 
 var/global/defer_powernet_rebuild = 0		// true if net rebuild will be called manually after an event
@@ -157,7 +168,6 @@ var/datum/debug/debugobj
 var/datum/moduletypes/mods = new()
 
 var/wavesecret = 0
-var/gravity_is_on = 1
 
 var/shuttlecoming = 0
 
@@ -167,18 +177,11 @@ var/forceblob = 0
 	//airlockWireColorToIndex takes a number representing the wire color, e.g. the orange wire is always 1, the dark red wire is always 2, etc. It returns the index for whatever that wire does.
 	//airlockIndexToWireColor does the opposite thing - it takes the index for what the wire does, for example AIRLOCK_WIRE_IDSCAN is 1, AIRLOCK_WIRE_POWER1 is 2, etc. It returns the wire color number.
 	//airlockWireColorToFlag takes the wire color number and returns the flag for it (1, 2, 4, 8, 16, etc)
-var/list/airlockWireColorToFlag = RandomAirlockWires()
-var/list/airlockIndexToFlag
-var/list/airlockIndexToWireColor
-var/list/airlockWireColorToIndex
+
 var/list/APCWireColorToFlag = RandomAPCWires()
 var/list/APCIndexToFlag
 var/list/APCIndexToWireColor
 var/list/APCWireColorToIndex
-var/list/BorgWireColorToFlag = RandomBorgWires()
-var/list/BorgIndexToFlag
-var/list/BorgIndexToWireColor
-var/list/BorgWireColorToIndex
 var/list/AAlarmWireColorToFlag = RandomAAlarmWires()
 var/list/AAlarmIndexToFlag
 var/list/AAlarmIndexToWireColor
@@ -195,6 +198,7 @@ var/list/AAlarmWireColorToIndex
 #define MAX_PAPER_MESSAGE_LEN 3072
 #define MAX_BOOK_MESSAGE_LEN 9216
 #define MAX_NAME_LEN 26
+#define MAX_BROADCAST_LEN 512
 
 #define shuttle_time_in_station 1800 // 3 minutes in the station
 #define shuttle_time_to_arrive 6000 // 10 minutes to arrive

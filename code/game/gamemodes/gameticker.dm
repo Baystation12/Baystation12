@@ -110,7 +110,11 @@ var/global/datum/controller/gameticker/ticker
 		for(var/obj/machinery/account_database/check_db in world)
 			if(check_db.z == 2)
 				centcomm_account_db = check_db
-				break
+				break	supply_shuttle.process() 		//Start the supply shuttle regenerating points -- TLE
+	master_controller.process()		//Start master_controller.process()
+	lighting_controller.process()	//Start processing DynamicAreaLighting updates
+
+	sleep(10)
 
 	create_characters() //Create player characters and transfer them
 	collect_minds()
@@ -131,7 +135,9 @@ var/global/datum/controller/gameticker/ticker
 		world << "<FONT color='blue'><B>Enjoy the game!</B></FONT>"
 		world << sound('sound/AI/welcome.ogg') // Skie
 		//Holiday Round-start stuff	~Carn
-		Holiday_Game_Start()
+		if(events.holiday)
+			world << "<font color='blue'>and...</font>"
+			world << "<h4>Happy [events.holiday] Everybody!</h4>"
 
 	//start_events() //handles random events and space dust.
 	//new random event system is handled from the MC.
@@ -143,14 +149,9 @@ var/global/datum/controller/gameticker/ticker
 	if(admins_number == 0)
 		send2irc("Server", "Round just started with no admins online!")
 
-	supply_shuttle.process() 		//Start the supply shuttle regenerating points -- TLE
-	master_controller.process()		//Start master_controller.process()
-	lighting_controller.process()	//Start processing DynamicAreaLighting updates
-
-
 	if(config.sql_enabled)
 		spawn(3000)
-		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
+			statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
 
 	return 1
 

@@ -20,8 +20,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	use_power = 1
 	idle_power_usage = 25
 	machinetype = 5
-	heatgen = 0
-	delay = 7
+	/*heatgen = 0
+	delay = 7*/
 	circuitboard = "/obj/item/weapon/circuitboard/telecomms/broadcaster"
 
 /obj/machinery/telecomms/broadcaster/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
@@ -30,6 +30,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		return
 
 	if(signal.data["message"])
+
 
 		// Prevents massive radio spam
 		signal.data["done"] = 1 // mark the signal as being broadcasted
@@ -117,7 +118,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	use_power = 0
 	idle_power_usage = 0
 	machinetype = 6
-	heatgen = 0
+	//heatgen = 0
 	var/intercept = 0 // if nonzero, broadcasts all messages to syndicate channel
 
 /obj/machinery/telecomms/allinone/receive_signal(datum/signal/signal)
@@ -235,6 +236,12 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	var/list/obj/item/device/radio/radios = list()
 
+	// Cut down on the message sizes.
+
+	message = copytext(message, 1, MAX_BROADCAST_LEN)
+	vmessage = copytext(vmessage, 1, MAX_BROADCAST_LEN)
+
+
 	// --- Broadcast only to intercom devices ---
 
 	if(data == 1)
@@ -348,7 +355,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 				freq_text = "Medical"
 			if(1357)
 				freq_text = "Engineering"
-			if(1359)
+			if(SEC_FREQ)
 				freq_text = "Security"
 //			if(1349)
 //				freq_text = "Mining"
@@ -374,6 +381,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			part_a = "<span class='syndradio'><span class='name'>"
 		else if (display_freq==COMM_FREQ)
 			part_a = "<span class='comradio'><span class='name'>"
+		else if (display_freq==SEC_FREQ)
+			part_a = "<span class='secradio'><span class='name'>"
 		else if (display_freq in DEPT_FREQS)
 			part_a = "<span class='deptradio'><span class='name'>"
 
@@ -632,7 +641,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 				freq_text = "Medical"
 			if(1357)
 				freq_text = "Engineering"
-			if(1359)
+			if(SEC_FREQ)
 				freq_text = "Security"
 //			if(1349)
 //				freq_text = "Mining"
@@ -662,6 +671,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			part_a = "<span class='syndradio'><span class='name'>"
 		else if (display_freq==COMM_FREQ)
 			part_a = "<span class='comradio'><span class='name'>"
+		else if (display_freq==SEC_FREQ)
+			part_a = "<span class='secradio'><span class='name'>"
 		else if (display_freq in DEPT_FREQS)
 			part_a = "<span class='deptradio'><span class='name'>"
 

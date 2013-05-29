@@ -5,7 +5,7 @@ var/global/list/uneatable = list(
 	/obj/effect/overlay
 	)
 
-/obj/machinery/singularity/
+/obj/machinery/singularity
 	name = "Gravitational Singularity"
 	desc = "A Gravitational Singularity."
 	icon = 'icons/obj/singularity.dmi'

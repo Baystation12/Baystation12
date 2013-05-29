@@ -245,7 +245,7 @@
 		new /obj/item/weapon/storage/box/evidence(src)
 		new /obj/item/device/radio/headset/headset_sec(src)
 		new /obj/item/device/detective_scanner(src)
-		new /obj/item/clothing/suit/armor/det_suit(src)
+		new /obj/item/clothing/suit/armor/vest/det_suit(src)
 		new /obj/item/ammo_magazine/c38(src)
 		new /obj/item/ammo_magazine/c38(src)
 		new /obj/item/weapon/gun/projectile/detective(src)
@@ -272,6 +272,9 @@
 	New()
 		..()
 		sleep(2)
+		new /obj/item/weapon/reagent_containers/ld50_syringe/choral(src)
+		new /obj/item/weapon/reagent_containers/ld50_syringe/choral(src)
+		new /obj/item/weapon/reagent_containers/ld50_syringe/choral(src)
 		new /obj/item/weapon/reagent_containers/ld50_syringe/choral(src)
 		new /obj/item/weapon/reagent_containers/ld50_syringe/choral(src)
 		return
