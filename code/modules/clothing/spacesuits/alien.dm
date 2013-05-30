@@ -12,6 +12,7 @@
 	heat_protection = HEAD
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
 
+
 /obj/item/clothing/suit/space/unathi/rig_cheap
 	name = "NT breacher chassis"
 	desc = "A cheap NT knock-off of a Unathi battle-rig. Looks like a fish, moves like a fish, steers like a cow."

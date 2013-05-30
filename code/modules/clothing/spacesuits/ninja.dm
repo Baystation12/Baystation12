@@ -5,6 +5,7 @@
 	item_state = "s-ninja_mask"
 	allowed = list(/obj/item/weapon/cell)
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 25)
+	siemens_coefficient = 0
 
 
 /obj/item/clothing/suit/space/space_ninja
@@ -57,3 +58,4 @@
 	var/obj/effect/overlay/hologram//Is the AI hologram on or off? Visible only to the wearer of the suit. This works by attaching an image to a blank overlay.
 	var/flush = 0//If an AI purge is in progress.
 	var/s_control = 1//If user in control of the suit.
+	siemens_coefficient = 0

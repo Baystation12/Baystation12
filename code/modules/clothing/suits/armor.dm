@@ -8,7 +8,7 @@
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECITON_TEMPERATURE
 	heat_protection = UPPER_TORSO|LOWER_TORSO
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECITON_TEMPERATURE
-
+	siemens_coefficient = 0
 
 /obj/item/clothing/suit/armor/vest
 	name = "armor"
@@ -19,11 +19,13 @@
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
+
 /obj/item/clothing/suit/armor/vest/security
 	name = "security armor"
 	desc = "An armored vest that protects against some damage. This one has NanoTrasen corporate badge."
 	icon_state = "armorsec"
 	item_state = "armor"
+
 
 /obj/item/clothing/suit/armor/vest/warden
 	name = "Warden's jacket"
@@ -171,9 +173,11 @@
 	desc = "Reddish armor."
 	icon_state = "tdred"
 	item_state = "tdred"
+	siemens_coefficient = 1
 
 /obj/item/clothing/suit/armor/tdome/green
 	name = "Thunderdome suit (green)"
 	desc = "Pukish armor."
 	icon_state = "tdgreen"
 	item_state = "tdgreen"
+	siemens_coefficient = 1
