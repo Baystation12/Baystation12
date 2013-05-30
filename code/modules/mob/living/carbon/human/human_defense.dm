@@ -11,22 +11,14 @@ emp_act
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
 // BEGIN TASER NERF
 	if(istype(P, /obj/item/projectile/energy/electrode))
-		visible_message("\red taser bolt!")
 		var/datum/organ/external/select_area = get_organ(def_zone) // We're checking the outside, buddy!
-		visible_message("\red SELECTING!")
 		var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
-		visible_message("\red Made some inventory checks!")
 		for(var/bp in body_parts) //Make an unregulated var to pass around.
-			visible_message("\red In the for loop!")
 			if(!bp)
 				continue //Does this thing we're shooting even exist?
-				visible_message("\red BP check!")
 			if(bp && istype(bp ,/obj/item/clothing)) // If it exists, and it's clothed
-				visible_message("\red In the if BP and clothing check!")
 				var/obj/item/clothing/C = bp // Then call an argument C to be that clothing!
-				visible_message("\red Making variable C!")
 				if(C.body_parts_covered & select_area.body_part) // Is that body part being targeted covered?
-					visible_message("\red It has clothes!")
 					if(C.siemens_coefficient == 0) //If so, is that clothing shock proof?
 						visible_message("\red <B>The [P.name] gets deflected by [src]'s [C.name]!</B>") //DEFLECT!
 						del P
