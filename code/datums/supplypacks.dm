@@ -66,6 +66,13 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Monkey crate"
 	group = "Hydroponics"
 
+/datum/supply_packs/farwa
+	name = "Farwa crate"
+	contains = list (/obj/item/weapon/storage/box/farwacubes)
+	cost = 30
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "Farwa crate"
+	group = "Hydroponics"
 
 /datum/supply_packs/beanbagammo
 	name = "Beanbag shells"
