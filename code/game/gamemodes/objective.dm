@@ -563,12 +563,16 @@ datum/objective/steal
 					for(var/obj/item/weapon/coin/C in B)
 						found_amount++
 					return found_amount>=target
-
+			if("the station blueprints")
+				for(var/obj/item/weapon/photo/P in all_items)
+					if(P.blueprints)	//if it has the blueprints in it
+						return 1
 			if("a functional AI")
 				for(var/obj/item/device/aicard/C in all_items) //Check for ai card
 					for(var/mob/living/silicon/ai/M in C)
 						if(istype(M, /mob/living/silicon/ai) && M.stat != 2) //See if any AI's are alive inside that card.
 							return 1
+
 				for(var/mob/living/silicon/ai/ai in world)
 					if(istype(ai.loc, /turf))
 						var/area/check_area = get_area(ai)
@@ -582,8 +586,15 @@ datum/objective/steal
 							return 1
 						if(istype(check_area, /area/shuttle/escape_pod5/centcom))
 							return 1
+			if("the station blueprints")
+				for(var/obj/item/I in all_items)	//the actual blueprints are good too!
+					if(istype(I, /obj/item/blueprints))
+						return 1
+					if(istype(I, /obj/item/weapon/photo))
+						var/obj/item/weapon/photo/P = I
+						if(P.blueprints)	//if the blueprints are in frame
+							return 1
 			else
-
 				for(var/obj/I in all_items) //Check for items
 					if(istype(I, steal_target))
 						return 1

@@ -349,14 +349,11 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 	return 0
 
 
-/mob/proc/abiotic(var/full_body = 0)
-	if(full_body && ((src.l_hand && !( src.l_hand.abstract )) || (src.r_hand && !( src.r_hand.abstract )) || (src.back || src.wear_mask)))
+/mob/proc/abiotic(full_body = 0)
+	if(l_hand && !l_hand.abstract || r_hand && !r_hand.abstract)
 		return 1
-
-	if((src.l_hand && !( src.l_hand.abstract )) || (src.r_hand && !( src.r_hand.abstract )))
-		return 1
-
 	return 0
+
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
 /mob/verb/button_pressed_F12()
@@ -454,3 +451,10 @@ var/list/intents = list("help","disarm","grab","hurt")
 				hud_used.action_intent.icon_state = "harm"
 			else
 				hud_used.action_intent.icon_state = "help"
+
+proc/is_blind(A)
+	if(istype(A, /mob/living/carbon))
+		var/mob/living/carbon/C = A
+		if(C.blinded != null)
+			return 1
+	return 0

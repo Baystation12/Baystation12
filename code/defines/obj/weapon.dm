@@ -575,19 +575,6 @@
 
 	var/obj/machinery/machine
 
-/obj/item/weapon/plastique
-	name = "plastic explosives"
-	desc = "Used to put holes in specific areas without too much extra hole."
-	gender = PLURAL
-	icon = 'icons/obj/assemblies.dmi'
-	icon_state = "plastic-explosive0"
-	item_state = "plasticx"
-	flags = FPRINT | TABLEPASS | USEDELAY
-	w_class = 2.0
-	origin_tech = "syndicate=2"
-	var/timer = 10
-	var/atom/target = null
-
 ///////////////////////////////////////Stock Parts /////////////////////////////////
 
 /obj/item/weapon/stock_parts
@@ -741,7 +728,7 @@
 	name = "subspace ansible"
 	icon_state = "subspace_ansible"
 	desc = "A compact module capable of sensing extradimensional activity."
-	origin_tech = "programming=3;magnets=5;materials=4;bluespace=2"
+	origin_tech = "programming=2;magnets=3;materials=2;bluespace=1"
 	m_amt = 30
 	g_amt = 10
 
@@ -749,7 +736,7 @@
 	name = "hyperwave filter"
 	icon_state = "hyperwave_filter"
 	desc = "A tiny device capable of filtering and converting super-intense radiowaves."
-	origin_tech = "programming=4;magnets=2"
+	origin_tech = "programming=2;magnets=1"
 	m_amt = 30
 	g_amt = 10
 
@@ -757,7 +744,7 @@
 	name = "subspace amplifier"
 	icon_state = "subspace_amplifier"
 	desc = "A compact micro-machine capable of amplifying weak subspace transmissions."
-	origin_tech = "programming=3;magnets=4;materials=4;bluespace=2"
+	origin_tech = "programming=2;magnets=2;materials=2;bluespace=1"
 	m_amt = 30
 	g_amt = 10
 
@@ -765,7 +752,7 @@
 	name = "subspace treatment disk"
 	icon_state = "treatment_disk"
 	desc = "A compact micro-machine capable of stretching out hyper-compressed radio waves."
-	origin_tech = "programming=3;magnets=2;materials=5;bluespace=2"
+	origin_tech = "programming=2;magnets=1;materials=3;bluespace=1"
 	m_amt = 30
 	g_amt = 10
 
@@ -773,7 +760,7 @@
 	name = "subspace wavelength analyzer"
 	icon_state = "wavelength_analyzer"
 	desc = "A sophisticated analyzer capable of analyzing cryptic subspace wavelengths."
-	origin_tech = "programming=3;magnets=4;materials=4;bluespace=2"
+	origin_tech = "programming=2;magnets=2;materials=2;bluespace=1"
 	m_amt = 30
 	g_amt = 10
 
@@ -781,14 +768,14 @@
 	name = "ansible crystal"
 	icon_state = "ansible_crystal"
 	desc = "A crystal made from pure glass used to transmit laser databursts to subspace."
-	origin_tech = "magnets=4;materials=4;bluespace=2"
+	origin_tech = "magnets=2;materials=2;bluespace=1"
 	g_amt = 50
 
 /obj/item/weapon/stock_parts/subspace/transmitter
 	name = "subspace transmitter"
 	icon_state = "subspace_transmitter"
 	desc = "A large piece of equipment used to open a window into the subspace dimension."
-	origin_tech = "magnets=5;materials=5;bluespace=3"
+	origin_tech = "magnets=3;materials=3;bluespace=2"
 	m_amt = 50
 
 /obj/item/weapon/ectoplasm

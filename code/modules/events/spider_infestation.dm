@@ -1,8 +1,12 @@
 /var/global/sent_spiders_to_station = 0
+/datum/event_control/spider_infestation
+	name = "Spider Infestation"
+	typepath = /datum/event/spider_infestation
+	weight = 5
+	max_occurrences = 1
 
 /datum/event/spider_infestation
 	announceWhen	= 400
-	oneShot			= 1
 
 	var/spawncount = 1
 
@@ -26,6 +30,8 @@
 
 	while((spawncount >= 1) && vents.len)
 		var/obj/vent = pick(vents)
-		new /obj/effect/spider/spiderling(vent.loc)
+		var/obj/effect/spider/spiderling/S = new(vent.loc)
+		if(prob(66))
+			S.grow_as = /mob/living/simple_animal/hostile/giant_spider/nurse
 		vents -= vent
 		spawncount--

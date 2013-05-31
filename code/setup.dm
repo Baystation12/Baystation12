@@ -3,6 +3,7 @@
 #define DEBUG
 
 #define PI 3.1415
+#define MIDNIGHT_ROLLOVER 864000
 
 #define R_IDEAL_GAS_EQUATION	8.31 //kPa*L/(K*mol)
 #define ONE_ATMOSPHERE		101.325	//kPa
@@ -142,7 +143,10 @@ var/turf/space/Space_Tile = locate(/turf/space) // A space tile to reference whe
 								// was 2 atm
 
 //This was a define, but I changed it to a variable so it can be changed in-game.(kept the all-caps definition because... code...) -Errorage
-var/MAX_EXPLOSION_RANGE = 14
+var/MAX_EX_DEVESTATION_RANGE = 3
+var/MAX_EX_HEAVY_RANGE = 7
+var/MAX_EX_LIGHT_RANGE = 14
+var/MAX_EX_FLASH_RANGE = 14
 //#define MAX_EXPLOSION_RANGE		14					// Defaults to 12 (was 8) -- TLE
 
 #define HUMAN_STRIP_DELAY 40 //takes 40ds = 4s to strip someone.
@@ -251,30 +255,30 @@ var/MAX_EXPLOSION_RANGE = 14
 //Cant seem to find a mob bitflags area other than the powers one
 
 // bitflags for clothing parts
-#define HEAD			1
-#define UPPER_TORSO		2
-#define LOWER_TORSO		4
-#define LEG_LEFT		8
-#define LEG_RIGHT		16
-#define LEGS			24
-#define FOOT_LEFT		32
-#define FOOT_RIGHT		64
-#define FEET			96
-#define ARM_LEFT		128
-#define ARM_RIGHT		256
-#define ARMS			384
-#define HAND_LEFT		512
-#define HAND_RIGHT		1024
-#define HANDS			1536
-#define FULL_BODY		2047
+#define HEAD		1
+#define CHEST		2
+#define GROIN		4
+#define LEG_LEFT	8
+#define LEG_RIGHT	16
+#define LEGS		24
+#define FOOT_LEFT	32
+#define FOOT_RIGHT	64
+#define FEET		96
+#define ARM_LEFT	128
+#define ARM_RIGHT	256
+#define ARMS		384
+#define HAND_LEFT	512
+#define HAND_RIGHT	1024
+#define HANDS		1536
+#define FULL_BODY	2047
 
 // bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
 // Used with human/proc/get_heat_protection() and human/proc/get_cold_protection()
 // The values here should add up to 1.
 // Hands and feet have 2.5%, arms and legs 7.5%, each of the torso parts has 15% and the head has 30%
 #define THERMAL_PROTECTION_HEAD			0.3
-#define THERMAL_PROTECTION_UPPER_TORSO	0.15
-#define THERMAL_PROTECTION_LOWER_TORSO	0.15
+#define THERMAL_PROTECTION_CHEST	0.15
+#define THERMAL_PROTECTION_GROIN	0.15
 #define THERMAL_PROTECTION_LEG_LEFT		0.075
 #define THERMAL_PROTECTION_LEG_RIGHT	0.075
 #define THERMAL_PROTECTION_FOOT_LEFT	0.025
@@ -463,7 +467,7 @@ var/list/liftable_structures = list(\
 	/obj/machinery/constructable_frame, \
 	/obj/machinery/hydroponics, \
 	/obj/machinery/computer, \
-	/obj/machinery/optable, \
+	/obj/structure/optable, \
 	/obj/structure/dispenser, \
 	/obj/machinery/gibber, \
 	/obj/machinery/microwave, \
@@ -520,11 +524,11 @@ var/list/liftable_structures = list(\
 #define INVISIBILITY_MAXIMUM 100
 
 //Object specific defines
-#define CANDLE_LUM 3 //For how bright candles are
+#define CANDLE_LUM 2 //For how bright candles are
 
 
 //Some mob defines below
-#define AI_CAMERA_LUMINOSITY 6
+#define AI_CAMERA_LUMINOSITY 5
 
 #define BORGMESON 1
 #define BORGTHERM 2

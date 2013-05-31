@@ -7,7 +7,7 @@
 
 	protective_temperature = 1000
 	flags = FPRINT | TABLEPASS
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
+	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
 	slowdown = 9

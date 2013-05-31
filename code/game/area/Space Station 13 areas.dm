@@ -128,6 +128,7 @@ proc/process_ghost_teleport_locs()
 	requires_power = 0
 	luminosity = 1
 	lighting_use_dynamic = 0
+	var/push_dir = SOUTH
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
@@ -167,6 +168,9 @@ proc/process_ghost_teleport_locs()
 /area/shuttle/escape_pod1/transit
 	icon_state = "shuttle"
 
+	mob_activate(var/mob/living/L)
+		push_mob_back(L, push_dir)
+
 /area/shuttle/escape_pod2
 	name = "\improper Escape Pod Two"
 	music = "music/escape.ogg"
@@ -180,9 +184,13 @@ proc/process_ghost_teleport_locs()
 /area/shuttle/escape_pod2/transit
 	icon_state = "shuttle"
 
+	mob_activate(var/mob/living/L)
+		push_mob_back(L, push_dir)
+
 /area/shuttle/escape_pod3
 	name = "\improper Escape Pod Three"
 	music = "music/escape.ogg"
+	push_dir = WEST
 
 /area/shuttle/escape_pod3/station
 	icon_state = "shuttle2"
@@ -193,9 +201,13 @@ proc/process_ghost_teleport_locs()
 /area/shuttle/escape_pod3/transit
 	icon_state = "shuttle"
 
+	mob_activate(var/mob/living/L)
+		push_mob_back(L, push_dir)
+
 /area/shuttle/escape_pod5 //Pod 4 was lost to meteors
 	name = "\improper Escape Pod Five"
 	music = "music/escape.ogg"
+	push_dir = WEST
 
 /area/shuttle/escape_pod5/station
 	icon_state = "shuttle2"
@@ -205,6 +217,9 @@ proc/process_ghost_teleport_locs()
 
 /area/shuttle/escape_pod5/transit
 	icon_state = "shuttle"
+
+	mob_activate(var/mob/living/L)
+		push_mob_back(L, push_dir)
 
 /area/shuttle/mining
 	name = "\improper Mining Shuttle"
@@ -1505,7 +1520,7 @@ proc/process_ghost_teleport_locs()
 	icon_state = "tcomsatentrance"
 
 /area/tcommsat/chamber
-	name = "\improper Telecoms Central Compartment"
+	name = "\improper Abandoned Satellite"
 	icon_state = "tcomsatcham"
 
 /area/turret_protected/tcomsat
@@ -1527,6 +1542,10 @@ proc/process_ghost_teleport_locs()
 /area/tcommsat/computer
 	name = "\improper Telecoms Control Room"
 	icon_state = "tcomsatcomp"
+
+/area/tcommsat/server
+	name = "\improper Telecoms Server Room"
+	icon_state = "tcomsatcham"
 
 /area/tcommsat/lounge
 	name = "\improper Telecommunications Satellite Lounge"
@@ -1710,7 +1729,7 @@ var/list/the_station_areas = list (
 	/area/shuttle/escape_pod5/station,
 	/area/shuttle/mining/station,
 	/area/shuttle/transport1/station,
-	// /area/shuttle/transport2/station,
+//	/area/shuttle/transport2/station,	//not present on map
 	/area/shuttle/prison/station,
 	/area/shuttle/administration/station,
 	/area/shuttle/specops/station,
@@ -1720,7 +1739,7 @@ var/list/the_station_areas = list (
 	/area/bridge,
 	/area/crew_quarters,
 	/area/holodeck,
-	/area/mint,
+//	/area/mint,		//not present on map
 	/area/library,
 	/area/chapel,
 	/area/lawoffice,
@@ -1737,8 +1756,8 @@ var/list/the_station_areas = list (
 	/area/storage,
 	/area/construction,
 	/area/ai_monitored/storage/eva, //do not try to simplify to "/area/ai_monitored" --rastaf0
-	/area/ai_monitored/storage/secure,
-	/area/ai_monitored/storage/emergency,
+//	/area/ai_monitored/storage/secure,	//not present on map
+//	/area/ai_monitored/storage/emergency,	//not present on map
 	/area/turret_protected/ai_upload, //do not try to simplify to "/area/turret_protected" --rastaf0
 	/area/turret_protected/ai_upload_foyer,
 	/area/turret_protected/ai,

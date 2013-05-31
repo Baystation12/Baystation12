@@ -20,3 +20,8 @@
 	var/datum/surgery_status/op_stage = new/datum/surgery_status
 	//Active emote/pose
 	var/pose = null
+
+//inventory slots
+	var/obj/item/weapon/back = null
+	var/obj/item/clothing/mask/wear_mask = null
+	var/obj/item/weapon/tank/internal = null

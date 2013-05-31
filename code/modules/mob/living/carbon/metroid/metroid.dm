@@ -45,12 +45,9 @@
 
 	var/colour = "grey"
 	var/primarytype = /mob/living/carbon/slime
-	var/mutationone = /mob/living/carbon/slime/orange
-	var/mutationtwo = /mob/living/carbon/slime/metal
-	var/mutationthree = /mob/living/carbon/slime/blue
-	var/mutationfour = /mob/living/carbon/slime/purple
 	var/adulttype = /mob/living/carbon/slime/adult
 	var/coretype = /obj/item/slime_extract/grey
+	var/list/slime_mutation[4]
 
 /mob/living/carbon/slime/adult
 	name = "adult slime"
@@ -68,10 +65,7 @@
 	var/datum/reagents/R = new/datum/reagents(100)
 	reagents = R
 	R.my_atom = src
-	if(name == "baby slime")
-		name = text("[colour] baby slime ([rand(1, 1000)])")
-	else
-		name = text("[colour] adult slime ([rand(1,1000)])")
+	name = text("[colour] baby slime ([rand(1, 1000)])")
 	real_name = name
 	spawn (1)
 		regenerate_icons()
@@ -81,6 +75,11 @@
 /mob/living/carbon/slime/adult/New()
 	//verbs.Remove(/mob/living/carbon/slime/verb/ventcrawl)
 	..()
+	name = text("[colour] adult slime ([rand(1,1000)])")
+	slime_mutation[1] = /mob/living/carbon/slime/orange
+	slime_mutation[2] = /mob/living/carbon/slime/metal
+	slime_mutation[3] = /mob/living/carbon/slime/blue
+	slime_mutation[4] = /mob/living/carbon/slime/purple
 
 /mob/living/carbon/slime/movement_delay()
 	var/tally = 0
@@ -524,7 +523,7 @@
 
 		if ("hurt")
 
-			if ((prob(95) && health > 0))
+			if (prob(95))
 				attacked += 10
 				playsound(loc, 'sound/weapons/slice.ogg', 25, 1, -1)
 				var/damage = rand(15, 30)
@@ -731,6 +730,20 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 	throw_range = 6
 	origin_tech = "biotech=4"
 	var/Uses = 1 // uses before it goes inert
+	var/enhanced = 0 //has it been enhanced before?
+
+	attackby(obj/item/O as obj, mob/user as mob)
+		if(istype(O, /obj/item/weapon/slimesteroid2))
+			if(enhanced == 1)
+				user << "\red This extract has already been enhanced!"
+				return ..()
+			if(Uses == 0)
+				user << "\red You can't enhance a used extract!"
+				return ..()
+			user <<"You apply the enhancer. It now has triple the amount of uses."
+			Uses = 3
+			enhanced = 1
+			del (O)
 
 /obj/item/slime_extract/New()
 		..()
@@ -805,6 +818,23 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 /obj/item/slime_extract/adamantine
 	name = "adamantine slime extract"
 	icon_state = "adamantine slime extract"
+
+/obj/item/slime_extract/bluespace
+	name = "bluespace slime extract"
+	icon_state = "bluespace slime extract"
+
+/obj/item/slime_extract/pyrite
+	name = "pyrite slime extract"
+	icon_state = "pyrite slime extract"
+
+/obj/item/slime_extract/cerulean
+	name = "cerulean slime extract"
+	icon_state = "cerulean slime extract"
+
+/obj/item/slime_extract/sepia
+	name = "sepia slime extract"
+	icon_state = "sepia slime extract"
+
 
 ////Pet Slime Creation///
 
@@ -892,6 +922,24 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 		M.cores = 3
 		del (src)
 
+/obj/item/weapon/slimesteroid2
+	name = "extract enhancer"
+	desc = "A potent chemical mix that will give a slime extract three uses."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle17"
+
+	/*afterattack(obj/target, mob/user , flag)
+		if(istype(target, /obj/item/slime_extract))
+			if(target.enhanced == 1)
+				user << "\red This extract has already been enhanced!"
+				return ..()
+			if(target.Uses == 0)
+				user << "\red You can't enhance a used extract!"
+				return ..()
+			user <<"You apply the enhancer. It now has triple the amount of uses."
+			target.Uses = 3
+			target.enahnced = 1
+			del (src)*/
 
 ////////Adamantine Golem stuff I dunno where else to put it
 
@@ -913,13 +961,13 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 	w_class = 4//bulky item
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS|HEAD
+	body_parts_covered = FULL_BODY
 	slowdown = 1.0
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL | STOPSPRESSUREDMAGE
-	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS | HEAD
+	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS | HEAD
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS | HEAD
+	cold_protection = CHEST | GROIN | LEGS | FEET | ARMS | HANDS | HEAD
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE
 	canremove = 0
 	armor = list(melee = 80, bullet = 20, laser = 20, energy = 10, bomb = 0, bio = 0, rad = 0)

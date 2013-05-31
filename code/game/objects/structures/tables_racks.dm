@@ -300,6 +300,8 @@
 					user << "\red You need a better grip to do that!"
 					return
 			else
+				if(!G.update())
+					return
 				G.affecting.loc = src.loc
 				G.affecting.Weaken(5)
 				visible_message("\red [G.assailant] puts [G.affecting] on \the [src].")

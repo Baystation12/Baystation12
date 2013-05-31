@@ -527,7 +527,7 @@ hi
 	icon = 'clothing/suits.dmi'
 	icon_state = "mantle-unathi"
 	item_state = "mantle-unathi"
-	body_parts_covered = UPPER_TORSO
+	body_parts_covered = CHEST
 
 //////////// Uniforms ////////////
 

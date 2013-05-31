@@ -65,8 +65,8 @@ var/list/event_last_fired = list()
 	possibleEvents[/datum/event/electrical_storm] = 10 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Botanist"]
 
-	if(!spacevines_spawned)
-		possibleEvents[/datum/event/spacevine] = 5 + 5 * active_with_role["Engineer"]
+	//if(!spacevines_spawned)
+	//	possibleEvents[/datum/event/spacevine] = 5 + 5 * active_with_role["Engineer"]
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/meteor_shower] = 40 * active_with_role["Engineer"]
@@ -85,14 +85,14 @@ var/list/event_last_fired = list()
 			possibleEvents[/datum/event/spider_infestation] = max(active_with_role["Security"], 5) + 5
 		if(aliens_allowed && !sent_aliens_to_station)
 			possibleEvents[/datum/event/alien_infestation] = max(active_with_role["Security"], 5) + 2.5
-		if(!sent_ninja_to_station && toggle_space_ninja)
-			possibleEvents[/datum/event/space_ninja] = max(active_with_role["Security"], 5)
+//		if(!sent_ninja_to_station && toggle_space_ninja)
+//			possibleEvents[/datum/event/space_ninja] = max(active_with_role["Security"], 5)
 
 	for(var/event_type in event_last_fired) if(possibleEvents[event_type])
 		var/time_passed = world.time - event_last_fired[event_type]
 		var/full_recharge_after = 60 * 60 * 10 * 3 // 3 hours
 		var/weight_modifier = max(0, (full_recharge_after - time_passed) / 300)
-		
+
 		possibleEvents[event_type] = max(possibleEvents[event_type] - weight_modifier, 0)
 
 	var/picked_event = pickweight(possibleEvents)

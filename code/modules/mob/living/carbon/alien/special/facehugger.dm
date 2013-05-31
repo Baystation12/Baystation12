@@ -47,12 +47,6 @@ var/const/MAX_ACTIVE_TIME = 400
 	user.drop_from_inventory(src)
 	Attach(M)
 
-/obj/item/clothing/mask/facehugger/New()
-	if(aliens_allowed)
-		..()
-	else
-		del(src)
-
 /obj/item/clothing/mask/facehugger/examine()
 	..()
 	switch(stat)
@@ -86,13 +80,13 @@ var/const/MAX_ACTIVE_TIME = 400
 
 /obj/item/clothing/mask/facehugger/on_found(mob/finder as mob)
 	if(stat == CONSCIOUS)
-		HasProximity(finder)
-		return 1
-	return
+		return HasProximity(finder)
+	return 0
 
 /obj/item/clothing/mask/facehugger/HasProximity(atom/movable/AM as mob|obj)
 	if(CanHug(AM))
-		Attach(AM)
+		return Attach(AM)
+	return 0
 
 /obj/item/clothing/mask/facehugger/throw_at(atom/target, range, speed)
 	..()
@@ -110,9 +104,9 @@ var/const/MAX_ACTIVE_TIME = 400
 
 /obj/item/clothing/mask/facehugger/proc/Attach(M as mob)
 	if( (!iscorgi(M) && !iscarbon(M)) || isalien(M))
-		return
+		return 0
 	if(attached)
-		return
+		return 0
 	else
 		attached++
 		spawn(MAX_IMPREGNATION_TIME)
@@ -120,8 +114,8 @@ var/const/MAX_ACTIVE_TIME = 400
 
 	var/mob/living/L = M //just so I don't need to use :
 
-	if(loc == L) return
-	if(stat != CONSCIOUS)	return
+	if(loc == L) return 0
+	if(stat != CONSCIOUS)	return 0
 	if(!sterile) L.take_organ_damage(strength,0) //done here so that even borgs and humans in helmets take damage
 
 	L.visible_message("\red \b [src] leaps at [L]'s face!")
@@ -131,39 +125,44 @@ var/const/MAX_ACTIVE_TIME = 400
 		if(H.head && H.head.flags & HEADCOVERSMOUTH)
 			H.visible_message("\red \b [src] smashes against [H]'s [H.head]!")
 			Die()
-			return
+			return 0
 
 	if(iscarbon(M))
 		var/mob/living/carbon/target = L
 
 		if(target.wear_mask)
-			if(prob(20))	return
+			if(prob(20))	return 0
 			var/obj/item/clothing/W = target.wear_mask
-			if(!W.canremove)	return
+			if(!W.canremove)	return 0
 			target.drop_from_inventory(W)
 
 			target.visible_message("\red \b [src] tears [W] off of [target]'s face!")
 
+		src.loc = target
 		target.equip_to_slot(src, slot_wear_mask)
+		target.update_inv_wear_mask() // Equip to slot doesn't seem to always update :/
 
 		if(!sterile) L.Paralyse(MAX_IMPREGNATION_TIME/6) //something like 25 ticks = 20 seconds with the default settings
 	else if (iscorgi(M))
 		var/mob/living/simple_animal/corgi/C = M
-		src.loc = C
+		loc = C
 		C.facehugger = src
-		C.wear_mask = src
-		//C.regenerate_icons()
 
 	GoIdle() //so it doesn't jump the people that tear it off
 
 	spawn(rand(MIN_IMPREGNATION_TIME,MAX_IMPREGNATION_TIME))
 		Impregnate(L)
 
-	return
+	return 1
 
 /obj/item/clothing/mask/facehugger/proc/Impregnate(mob/living/target as mob)
-	if(!target || target.wear_mask != src || target.stat == DEAD) //was taken off or something
+	if(!target || target.stat == DEAD) //was taken off or something
 		return
+
+	if(iscarbon(target))
+		var/mob/living/carbon/C = target
+		if(C.wear_mask != src)
+			return
 
 	if(!sterile)
 		//target.contract_disease(new /datum/disease/alien_embryo(0)) //so infection chance is same as virus infection chance

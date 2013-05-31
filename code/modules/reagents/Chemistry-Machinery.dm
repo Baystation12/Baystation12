@@ -10,8 +10,8 @@
 	icon_state = "dispenser"
 	use_power = 0
 	idle_power_usage = 40
-	var/energy = 100
-	var/max_energy = 100
+	var/energy = 50
+	var/max_energy = 50
 	var/amount = 30
 	var/beaker = null
 	var/recharged = 0
@@ -38,7 +38,7 @@
 
 	if(recharged < 0)
 		recharge()
-		recharged = 15
+		recharged = 30
 	else
 		recharged -= 1
 
@@ -505,9 +505,8 @@
 
 
 /obj/machinery/computer/pandemic/Topic(href, href_list)
-	if(stat & (NOPOWER|BROKEN)) return
-	if(usr.stat || usr.restrained()) return
-	if(!in_range(src, usr)) return
+	if(..())
+		return
 
 	usr.set_machine(src)
 	if(!beaker) return
@@ -587,9 +586,8 @@
 		return
 	else if(href_list["name_disease"])
 		var/new_name = stripped_input(usr, "Name the Disease", "New Name", "", MAX_NAME_LEN)
-		if(stat & (NOPOWER|BROKEN)) return
-		if(usr.stat || usr.restrained()) return
-		if(!in_range(src, usr)) return
+		if(..())
+			return
 		var/id = href_list["name_disease"]
 		if(archive_diseases[id])
 			var/datum/disease/advance/A = archive_diseases[id]
@@ -614,7 +612,7 @@
 	return src.attack_hand(user)
 
 /obj/machinery/computer/pandemic/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
+	if(..())
 		return
 	user.set_machine(src)
 	var/dat = ""

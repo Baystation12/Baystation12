@@ -253,6 +253,13 @@
 							Weaken(3)
 							src << "\red You feel weak."
 							emote("collapse")
+						if(prob(15))
+							if(!(f_style == "Shaved") || !(h_style == "Bald"))
+								src << "<span class='danger'>Your hair starts to fall out in clumps...<span>"
+								spawn(50)
+									f_style = "Shaved"
+									h_style = "Bald"
+									update_hair()
 						updatehealth()
 
 					if(75 to 100)
@@ -623,7 +630,7 @@
 				var/body_temperature_difference = 310.15 - bodytemperature
 				bodytemperature += min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
 
-	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, UPPER_TORSO, LOWER_TORSO, etc. See setup.dm for the full list)
+	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, CHEST, GROIN, etc. See setup.dm for the full list)
 	proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
 		var/thermal_protection_flags = 0
 		//Handle normal clothing
@@ -655,10 +662,10 @@
 		if(thermal_protection_flags)
 			if(thermal_protection_flags & HEAD)
 				thermal_protection += THERMAL_PROTECTION_HEAD
-			if(thermal_protection_flags & UPPER_TORSO)
-				thermal_protection += THERMAL_PROTECTION_UPPER_TORSO
-			if(thermal_protection_flags & LOWER_TORSO)
-				thermal_protection += THERMAL_PROTECTION_LOWER_TORSO
+			if(thermal_protection_flags & CHEST)
+				thermal_protection += THERMAL_PROTECTION_CHEST
+			if(thermal_protection_flags & GROIN)
+				thermal_protection += THERMAL_PROTECTION_GROIN
 			if(thermal_protection_flags & LEG_LEFT)
 				thermal_protection += THERMAL_PROTECTION_LEG_LEFT
 			if(thermal_protection_flags & LEG_RIGHT)
@@ -717,10 +724,10 @@
 		if(thermal_protection_flags)
 			if(thermal_protection_flags & HEAD)
 				thermal_protection += THERMAL_PROTECTION_HEAD
-			if(thermal_protection_flags & UPPER_TORSO)
-				thermal_protection += THERMAL_PROTECTION_UPPER_TORSO
-			if(thermal_protection_flags & LOWER_TORSO)
-				thermal_protection += THERMAL_PROTECTION_LOWER_TORSO
+			if(thermal_protection_flags & CHEST)
+				thermal_protection += THERMAL_PROTECTION_CHEST
+			if(thermal_protection_flags & GROIN)
+				thermal_protection += THERMAL_PROTECTION_GROIN
 			if(thermal_protection_flags & LEG_LEFT)
 				thermal_protection += THERMAL_PROTECTION_LEG_LEFT
 			if(thermal_protection_flags & LEG_RIGHT)
@@ -788,7 +795,7 @@
 		switch(body_part)
 			if(HEAD)
 				apply_damage(2.5*discomfort, BURN, "head")
-			if(UPPER_TORSO)
+			if(CHEST)
 				apply_damage(2.5*discomfort, BURN, "chest")
 			if(LEGS)
 				apply_damage(0.6*discomfort, BURN, "l_leg")
@@ -1022,7 +1029,7 @@
 
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
-				del(hud)
+				client.images.Remove(hud)
 
 		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
 

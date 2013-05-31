@@ -38,6 +38,15 @@ datum/controller/game_controller/New()
 			del(master_controller)
 		master_controller = src
 
+	createRandomZlevel()			//probably shouldn't be here!
+
+	if(!events)
+		new /datum/controller/event()
+
+	if(!air_master)
+		air_master = new /datum/controller/air_system()
+		air_master.setup()
+
 	if(!job_master)
 		job_master = new /datum/controller/occupations()
 		job_master.SetupOccupations()
@@ -163,7 +172,6 @@ datum/controller/game_controller/proc/process()
 				timer = world.timeofday
 				process_diseases()
 				diseases_cost = (world.timeofday - timer) / 10
-
 				sleep(breather_ticks)
 
 				//MACHINES
@@ -177,7 +185,6 @@ datum/controller/game_controller/proc/process()
 				timer = world.timeofday
 				process_objects()
 				objects_cost = (world.timeofday - timer) / 10
-
 				sleep(breather_ticks)
 
 				//PIPENETS
@@ -197,7 +204,8 @@ datum/controller/game_controller/proc/process()
 
 				//EVENTS
 				timer = world.timeofday
-				process_events()
+				last_thing_processed = /datum/event
+				events.process()
 				events_cost = (world.timeofday - timer) / 10
 
 				//TICKER
@@ -215,6 +223,19 @@ datum/controller/game_controller/proc/process()
 				sleep( round(minimum_ticks - (end_time - start_time),1) )
 			else
 				sleep(10)
+
+/*
+datum/controller/game_controller/proc/process_liquid()
+	last_thing_processed = /datum/puddle
+	var/i = 1
+	while(i<=puddles.len)
+		var/datum/puddle/Puddle = puddles[i]
+		if(Puddle)
+			Puddle.process()
+			i++
+			continue
+		puddles.Cut(i,i+1)
+*/
 
 datum/controller/game_controller/proc/process_mobs()
 	var/i = 1
@@ -285,18 +306,6 @@ datum/controller/game_controller/proc/process_powernets()
 			continue
 		powernets.Cut(i,i+1)
 
-datum/controller/game_controller/proc/process_events()
-	last_thing_processed = /datum/event
-	var/i = 1
-	while(i<=events.len)
-		var/datum/event/Event = events[i]
-		if(Event)
-			Event.process()
-			i++
-			continue
-		events.Cut(i,i+1)
-	checkEvent()
-
 datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"
 	for(var/varname in master_controller.vars)
@@ -310,4 +319,3 @@ datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 				else
 					msg += "\t [varname] = [varval]\n"
 	world.log << msg
-

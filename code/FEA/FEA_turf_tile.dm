@@ -157,7 +157,7 @@ turf/simulated
 				air_master.active_singletons.Remove(src)
 		if(active_hotspot)
 			active_hotspot.Kill()
-		if(blocks_air)
+		if(air_master && blocks_air)
 			for(var/direction in list(NORTH, SOUTH, EAST, WEST))
 				var/turf/simulated/tile = get_step(src,direction)
 				if(istype(tile) && !tile.blocks_air)
@@ -198,6 +198,14 @@ turf/simulated
 
 	proc/mimic_air_with_tile(turf/T)
 		return air.mimic(T)
+
+	proc/copy_air_with_tile(turf/simulated/T)
+		if(istype(T) && T.air && air)
+			air.copy_from(T.air)
+
+	proc/copy_air(datum/gas_mixture/copy)
+		if(air && copy)
+			air.copy_from(copy)
 
 	return_air()
 		if(air)

@@ -12,6 +12,8 @@
 	var/log_game = 0					// log game events
 	var/log_vote = 0					// log voting
 	var/log_whisper = 0					// log client whisper
+	var/log_prayer = 0					// log prayers
+	var/log_law = 0						// log lawchanges
 	var/log_emote = 0					// log emotes
 	var/log_attack = 0					// log attack messages
 	var/log_adminchat = 0				// log admin chat messages
@@ -40,6 +42,7 @@
 	var/Ticklag = 0.9
 	var/Tickcomp = 0
 	var/socket_talk	= 0					// use socket_talk to communicate with other processes
+	var/allow_holidays = 0				//toggles whether holiday-specific content should be used
 
 	var/list/mode_names = list()
 	var/list/modes = list()				// allowed modes
@@ -113,6 +116,7 @@
 	var/simultaneous_pm_warning_timeout = 100
 
 	var/use_recursive_explosions //Defines whether the server uses recursive or circular explosions.
+	var/roundstart_station_randomization = 1	//Enable this to have some randomization happen on the station.
 
 	var/assistant_maint = 0 //Do assistants get maint access?
 	var/gateway_delay = 18000 //How long the gateway takes before it activates. Default is half an hour.
@@ -193,6 +197,12 @@
 
 				if ("log_admin")
 					config.log_admin = 1
+
+				if ("log_prayer")
+					config.log_prayer = 1
+
+				if ("log_law")
+					config.log_law = 1
 
 				if ("log_debug")
 					config.log_debug = text2num(value)
@@ -357,7 +367,7 @@
 					config.popup_admin_pm = 1
 
 				if("allow_holidays")
-					Holiday = 1
+					config.allow_holidays = 1
 
 				if("useircbot")
 					useircbot = 1

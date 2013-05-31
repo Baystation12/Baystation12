@@ -134,7 +134,7 @@ var/list/mechtoys = list(
 	var/points_per_process = 1
 	var/points_per_slip = 2
 	var/points_per_crate = 5
-	var/plasma_per_point = 2 // 2 plasma for 1 point
+	var/plasma_per_point = 5 // 2 plasma for 1 point
 	//control
 	var/ordernum
 	var/list/shoppinglist = list()
@@ -654,11 +654,10 @@ var/list/mechtoys = list(
 					supply_shuttle.points -= P.cost
 					supply_shuttle.shoppinglist += O
 					temp = "Thanks for your order.<BR>"
-					temp += "<BR><A href='?src=\ref[src];viewrequests=1'>Back</A> <A href='?src=\ref[src];mainmenu=1'>Main Menu</A>"
 				else
 					temp = "Not enough supply points.<BR>"
-					temp += "<BR><A href='?src=\ref[src];viewrequests=1'>Back</A> <A href='?src=\ref[src];mainmenu=1'>Main Menu</A>"
 				break
+		temp += "<BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 
 	else if (href_list["vieworders"])
 		temp = "Current approved orders: <BR><BR>"

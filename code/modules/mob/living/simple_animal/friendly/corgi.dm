@@ -251,7 +251,7 @@
 			name = "Rudolph the Red-Nosed Corgi"
 			emote_hear = list("barks christmas songs", "yaps")
 			desc = "He has a very shiny nose."
-			SetLuminosity(6)
+			SetLuminosity(4)
 		if(/obj/item/clothing/head/soft)
 			name = "Corgi Tech [real_name]"
 			desc = "The reason your yellow gloves have chew-marks."
