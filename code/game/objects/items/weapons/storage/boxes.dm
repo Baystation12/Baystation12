@@ -277,7 +277,17 @@
 		..()
 		for(var/i = 1; i <= 5; i++)
 			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped(src)
-
+/obj/item/weapon/storage/box/farwacubes
+	name = "farwa cube box"
+	desc = "Drymate brand farwa cubes. Just add water!"
+	icon = 'icons/obj/food.dmi'
+	icon_state = "monkeycubebox"
+	storage_slots = 7
+	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/farwacube")
+	New()
+		..()
+		for(var/i = 1; i <= 5; i++)
+			new /obj/item/weapon/reagent_containers/food/snacks/farwacube/wrapped(src)
 
 /obj/item/weapon/storage/box/ids
 	name = "spare IDs"
