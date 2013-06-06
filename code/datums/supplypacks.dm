@@ -951,3 +951,39 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Beekeeping crate"
 	access = access_hydroponics
 	group = "Hydroponics"
+
+/datum/supply_packs/chemistry
+	name = "Chemistry Crate"
+	contains = list(/obj/item/weapon/storage/box/beakers
+					/obj/item/weapon/storage/box/beakers
+					/obj/item/weapon/storage/box/syringes
+					/obj/item/weapon/reagent_containers/dropper
+					/obj/item/weapon/reagent_containers/dropper
+					/obj/item/weapon/reagent_containers/glass/beaker/large
+					/obj/item/device/assembly/timer
+					/obj/item/weapon/grenade/chem_grenade
+					/obj/item/device/assembly/igniter
+					/obj/item/device/assembly/timer
+					/obj/item/weapon/grenade/chem_grenade
+					/obj/item/device/assembly/igniter
+					/obj/item/device/assembly/timer
+					/obj/item/weapon/grenade/chem_grenade
+					/obj/item/device/assembly/igniter
+					/obj/item/weapon/storage/box/pillbottles
+					/obj/item/weapon/storage/box/pillbottles
+					/obj/item/clothing/mask/gas)
+	cost = 30
+	containertype = "/obj/structure/closet/crate/secure"
+	containername = "Chemistry crate"
+	access = access_cmo
+		     access_chemistry
+	group = "Medical / Science"
+
+/datum/supply_packs/empty
+	name = "Empty Crate"
+	contains = list(
+					)
+	cost = 5
+	containertype = /obj/structure/closet/crate
+	containername = "Empty Crate"
+	group = "Operations"
