@@ -50,7 +50,7 @@
 			dish = null
 			icon_state = "analyser"
 
-			M.state("\The [src.name] prints a sheet of paper")
+			src.state("\The [src.name] prints a sheet of paper")
 
 	else if(dish && !scanning && !pause)
 		if(dish.virus2 && dish.growth > 50)
@@ -62,6 +62,6 @@
 			spawn(25)
 				dish.loc = src.loc
 				dish = null
-				M.state("\The [src.name] buzzes")
+				src.state("\The [src.name] buzzes")
 				pause = 0
 	return
