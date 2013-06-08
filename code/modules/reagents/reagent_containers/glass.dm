@@ -218,6 +218,16 @@
 			user.drop_from_inventory(src)
 			del(src)
 
+/obj/item/weapon/reagent_containers/glass/beaker/vial
+	name = "vial"
+	desc = "Small glass vial. Can hold up to 20 units."
+	icon_state = "vial"
+	g_amt = 500
+	volume = 15
+	amount_per_transfer_from_this = 5
+	possible_transfer_amounts = list(1,5,15)
+	flags = FPRINT | TABLEPASS | OPENCONTAINER
+
 /*
 /obj/item/weapon/reagent_containers/glass/blender_jug
 	name = "Blender Jug"
