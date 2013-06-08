@@ -14,19 +14,14 @@
 	if(istype(I,/obj/item/weapon/virusdish))
 		var/mob/living/carbon/c = user
 		if(!dish)
-
 			dish = I
 			c.drop_item()
 			I.loc = src
 			for(var/mob/M in viewers(src))
 				if(M == user)	continue
 				M.show_message("\blue [user.name] inserts the [dish.name] in the [src.name]", 3)
-
-
 		else
 			user << "There is already a dish inserted"
-
-	//else
 	return
 
 
@@ -34,8 +29,6 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	use_power(500)
-	//src.updateDialog()
-
 
 	if(scanning)
 		scanning -= 1
@@ -46,10 +39,8 @@
 			r += "<BR>Progress Speed : [dish.virus2.stageprob * 10]"
 			for(var/datum/disease2/effectholder/E in dish.virus2.effects)
 				r += "<BR>Effect:[E.effect.name]. Strength : [E.multiplier * 8]. Verosity : [E.chance * 15]. Type : [5-E.stage]."
-			// display the antigens
-			var/code = ""
-			for(var/V in ANTIGENS) if(text2num(V) & dish.virus2.antigen) code += ANTIGENS[V]
-			r += "<BR>Antigen pattern: [code]"
+
+			r += "<BR>Antigen pattern: [antigens2string(dish.virus2.antigen)]"
 
 			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(src.loc)
 			P.info = r
@@ -59,8 +50,8 @@
 			dish = null
 			icon_state = "analyser"
 
-			for(var/mob/O in hearers(src, null))
-				O.show_message("\icon[src] \blue The [src.name] prints a sheet of paper", 3)
+			M.state("\The [src.name] prints a sheet of paper")
+
 	else if(dish && !scanning && !pause)
 		if(dish.virus2 && dish.growth > 50)
 			dish.growth -= 10
@@ -71,8 +62,6 @@
 			spawn(25)
 				dish.loc = src.loc
 				dish = null
-				for(var/mob/M in viewers(src))
-					M.show_message("\icon[src] \blue The [src.name] buzzes", 2)
+				M.state("\The [src.name] buzzes")
 				pause = 0
-
 	return

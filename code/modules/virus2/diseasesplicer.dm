@@ -13,31 +13,7 @@
 
 /obj/machinery/computer/diseasesplicer/attackby(var/obj/I as obj, var/mob/user as mob)
 	if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			if (src.stat & BROKEN)
-				user << "\blue The broken glass falls out."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				new /obj/item/weapon/shard( src.loc )
-				//var/obj/item/weapon/circuitboard/diseasesplicer/M = new /obj/item/weapon/circuitboard/diseasesplicer( A )
-				for (var/obj/C in src)
-					C.loc = src.loc
-				//A.circuit = M
-				A.state = 3
-				A.icon_state = "3"
-				A.anchored = 1
-				del(src)
-			else
-				user << "\blue You disconnect the monitor."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				//var/obj/item/weapon/circuitboard/diseasesplicer/M = new /obj/item/weapon/circuitboard/diseasesplicer( A )
-				for (var/obj/C in src)
-					C.loc = src.loc
-				//A.circuit = M
-				A.state = 4
-				A.icon_state = "4"
-				A.anchored = 1
-				del(src)
+		return ..(I,user)
 	if(istype(I,/obj/item/weapon/virusdish))
 		var/mob/living/carbon/c = user
 		if(!dish)
@@ -49,8 +25,6 @@
 		user << "You upload the contents of the disk into the buffer"
 		memorybank = I:effect
 
-
-	//else
 	src.attack_hand(user)
 	return
 
@@ -117,7 +91,6 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	use_power(500)
-	//src.updateDialog()
 
 	if(scanning)
 		scanning -= 1
@@ -143,44 +116,29 @@
 /obj/machinery/computer/diseasesplicer/Topic(href, href_list)
 	if(..())
 		return
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
-		usr.machine = src
 
-		if (href_list["grab"])
-			memorybank = locate(href_list["grab"])
-			analysed = dish.analysed
-			del(dish)
-			dish = null
-			scanning = 10
+	if (href_list["grab"])
+		memorybank = locate(href_list["grab"])
+		analysed = dish.analysed
+		del(dish)
+		dish = null
+		scanning = 10
 
-		else if(href_list["eject"])
-			dish.loc = src.loc
-			dish = null
+	else if(href_list["eject"])
+		dish.loc = src.loc
+		dish = null
 
-		else if(href_list["splice"])
-			if(dish)
-				for(var/datum/disease2/effectholder/e in dish.virus2.effects)
-					if(e.stage == memorybank.stage)
-						e.effect = memorybank.effect
-				splicing = 10
-				dish.virus2.spreadtype = "Blood"
+	else if(href_list["splice"])
+		if(dish)
+			for(var/datum/disease2/effectholder/e in dish.virus2.effects)
+				if(e.stage == memorybank.stage)
+					e.effect = memorybank.effect
+			splicing = 10
+			dish.virus2.spreadtype = "Blood"
 
-		else if(href_list["disk"])
-			burning = 10
+	else if(href_list["disk"])
+		burning = 10
 
-		src.add_fingerprint(usr)
+	src.add_fingerprint(usr)
 	src.updateUsrDialog()
 	return
-
-/obj/item/weapon/diseasedisk
-	name = "Blank GNA disk"
-	icon = 'cloning.dmi'
-	icon_state = "datadisk0"
-	var/datum/disease2/effectholder/effect = null
-	var/stage = 1
-
-/obj/item/weapon/diseasedisk/premade/New()
-	name = "Blank GNA disk (stage: [5-stage])"
-	effect = new /datum/disease2/effectholder
-	effect.effect = new /datum/disease2/effect/invisible
-	effect.stage = stage
