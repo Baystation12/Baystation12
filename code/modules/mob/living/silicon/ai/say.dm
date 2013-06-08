@@ -30,6 +30,7 @@
 
 var/announcing_vox = 0
 var/const/VOX_CHANNEL = 200
+var/const/VOX_VOLUME = 75
 
 /mob/living/silicon/ai/verb/announcement_help()
 
@@ -88,7 +89,7 @@ var/const/VOX_CHANNEL = 200
 	if(vox_sounds[word])
 
 		var/sound_file = vox_sounds[word]
-		var/sound/voice = sound(sound_file, wait = 1, channel = VOX_CHANNEL)
+		var/sound/voice = sound(sound_file, wait = 1, channel = VOX_CHANNEL, volume = VOX_VOLUME)
 		voice.status = SOUND_STREAM
 
 		// Play voice for all mobs in the z level
