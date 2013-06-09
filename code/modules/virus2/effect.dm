@@ -126,6 +126,7 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.bodytemperature = max(mob.bodytemperature, 350)
 		scramble(0,mob,10)
+		mob.apply_damage(10, CLONE)
 
 /datum/disease2/effect/organs
 	name = "Shutdown Syndrome"
@@ -144,6 +145,26 @@
 			var/mob/living/carbon/human/H = mob
 			for (var/datum/organ/external/E in H.organs)
 				E.status ^= ORGAN_DEAD
+
+/datum/disease2/effect/immortal
+	name = "Longevity Syndrome"
+	stage = 4
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			for (var/datum/organ/external/E in H.organs)
+				if (E.status & ORGAN_BROKEN && prob(30))
+					E.status ^= ORGAN_BROKEN
+		var/heal_amt = -5*multiplier
+		mob.apply_damages(heal_amt,heal_amt,heal_amt,heal_amt)
+
+	deactivate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			H << "<span class='notice'>You suddenly feel hurt and old...</span>"
+			H.age += 8
+		var/backlash_amt = 5*multiplier
+		mob.apply_damages(backlash_amt,backlash_amt,backlash_amt,backlash_amt)
 
 ////////////////////////STAGE 3/////////////////////////////////
 
@@ -220,6 +241,13 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.confused += 10
 
+/datum/disease2/effect/mutation
+	name = "DNA Degradation"
+	stage = 3
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		mob.apply_damage(2, CLONE)
+
+
 /datum/disease2/effect/groan
 	name = "Groaning Syndrome"
 	stage = 3
@@ -245,7 +273,7 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*collapse")
 
-/datum/disease2/effect/sleepy
+/datum/disease2/effect/blind
 	name = "Blackout Syndrome"
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
@@ -273,6 +301,28 @@
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*shiver")
+
+/datum/disease2/effect/hair
+	name = "Hair Loss"
+	stage = 2
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(!(H.h_style == "Bald") && !(H.h_style == "Balding Hair"))
+			H << "<span class='danger'>Your hair starts to fall out in clumps...</span>"
+			spawn(50)
+				H.h_style = "Balding Hair"
+				H.update_hair()
+
+/datum/disease2/effect/stimulant
+	name = "Adrenaline Extra"
+	stage = 2
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		mob << "<span class='notice'>You feel a rush of energy inside you!</span>"
+		if (mob.reagents.get_reagent_amount("hyperzine") < 30)
++          mob.reagents.add_reagent("hyperzine", 10)
+		if (prob(30))
+			mob.jitteriness += 10
 
 ////////////////////////STAGE 1/////////////////////////////////
 
@@ -303,3 +353,8 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*twitch")
 
+/datum/disease2/effect/headache
+	name = "Headache"
+	stage = 1
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		mob << "<span class = 'notice'> Your head hurts a bit</span>"
