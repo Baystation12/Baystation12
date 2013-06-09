@@ -11,14 +11,18 @@
 	var/antigen = 0 // 16 bits describing the antigens, when one bit is set, a cure with that bit can dock here
 	var/max_stage = 4
 
+/datum/disease2/disease/New()
+	uniqueID = rand(0,10000)
+	..()
+
 /datum/disease2/disease/proc/makerandom(var/greater=0)
 	for(var/i=1 ; i <= max_stage ; i++ )
 		var/datum/disease2/effectholder/holder = new /datum/disease2/effectholder
 		holder.stage = i
 		if(greater)
-			holder.getrandomeffect_greater()
+			holder.getrandomeffect(2)
 		else
-			holder.getrandomeffect_lesser()
+			holder.getrandomeffect()
 		effects += holder
 	uniqueID = rand(0,10000)
 	infectionchance = rand(1,10)
@@ -76,6 +80,7 @@
 	disease.spreadtype = spreadtype
 	disease.stageprob = stageprob
 	disease.antigen   = antigen
+	disease.uniqueID = uniqueID
 	for(var/datum/disease2/effectholder/holder in effects)
 		var/datum/disease2/effectholder/newholder = new /datum/disease2/effectholder
 		newholder.effect = new holder.effect.type
