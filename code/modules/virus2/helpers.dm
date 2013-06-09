@@ -29,7 +29,6 @@ proc/get_infection_chance(var/mob/living/carbon/M)
 		return 0
 	else if(score == 5 && prob(35))
 		return 0
-
 	return 1
 
 //Checks if table-passing table can reach target (5 tile radius)
@@ -46,37 +45,37 @@ proc/airborne_can_reach(turf/source, turf/target)
 
 //Attemptes to infect mob M with virus. Set forced to 1 to ignore protective clothnig
 /proc/infect_virus2(var/mob/living/carbon/M,var/datum/disease2/disease/disease,var/forced = 0)
-	if(M.virus2)
+	if(!istype(disease))
 		return
-	if(!disease)
+	if(!istype(M))
 		return
-
+	if (disease in M.virus2)
+		return
 	// if one of the antibodies in the mob's body matches one of the disease's antigens, don't infect
-	if(M.antibodies & disease.antigen != 0) return
+	if(M.antibodies & disease.antigen != 0)
+		return
 
 	if(prob(disease.infectionchance) || forced)
-		if(M.virus2)
+		// certain clothes can prevent an infection
+		if(!forced && !get_infection_chance(M))
 			return
-		else
-			// certain clothes can prevent an infection
-			if(!forced && !M.get_infection_chance())
-				return
 
-			M.virus2 = disease.getcopy()
-			M.virus2.minormutate()
+		var/datum/disease2/disease/D = disease.getcopy()
+		D.minormutate()
+		M.virus2 += D
 
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)
-	if(!M.virus2)
-		M.virus2 = new /datum/disease2/disease
-		M.virus2.makerandom()
-		M.virus2.infectionchance = 1
+	var/datum/disease2/disease/D = new /datum/disease2/disease
+	D.makerandom()
+	D.infectionchance = 1
+	M.virus2 += D
 
 //Infects mob M with random greated disease, if he doesn't have one
 /proc/infect_mob_random_greater(var/mob/living/carbon/M)
-	if(!M.virus2)
-		M.virus2 = new /datum/disease2/disease
-		M.virus2.makerandom(1)
+	var/datum/disease2/disease/D = new /datum/disease2/disease
+	D.makerandom(1)
+	M.virus2 += D
 
 //Fancy prob() function.
 /proc/dprob(var/p)

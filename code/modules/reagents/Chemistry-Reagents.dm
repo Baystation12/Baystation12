@@ -929,11 +929,14 @@ datum
 				M.apply_effect(2*REM,IRRADIATE,0)
 				// radium may increase your chances to cure a disease
 				if(istype(M,/mob/living/carbon)) // make sure to only use it on carbon mobs
-					if(M:virus2 && prob(5))
-						if(prob(50))
-							M.radiation += 50 // curing it that way may kill you instead
-							M.adjustToxLoss(100)
-						M:antibodies |= M:virus2.antigen
+					var/mob/living/carbon/C = M
+					if(C.virus2)
+						for (var/datum/disease2/disease/V in C.virus2)
+							if(prob(5))
+								if(prob(50))
+									M.radiation += 50 // curing it that way may kill you instead
+									M.adjustToxLoss(100)
+								M:antibodies |= V.antigen
 				..()
 				return
 

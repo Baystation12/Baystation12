@@ -37,6 +37,7 @@
 			chance = rand(0,effect.chance_maxm)
 		if(2)
 			multiplier = rand(1,effect.maxm)
+
 /datum/disease2/effectholder/proc/majormutate()
 	getrandomeffect_greater()
 
@@ -76,7 +77,7 @@
 	maxm = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.radiation += (2*multiplier)
-
+u
 /datum/disease2/effect/greater/toxins
 	name = "Hyperacid Syndrome"
 	stage = 3
@@ -134,6 +135,9 @@
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*sneeze")
+		if (prob(50))
+			var/obj/effect/decal/cleanable/mucus/M = new(get_turf(mob))
+			M.virus2 = mob.virus2.Copy()
 
 /datum/disease2/effect/greater/gunck
 	name = "Flemmingtons"

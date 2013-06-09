@@ -1253,7 +1253,6 @@
 #include "code\modules\surgery\surgery.dm"
 #include "code\modules\virus2\analyser.dm"
 #include "code\modules\virus2\antibodies.dm"
-#include "code\modules\virus2\base.dm"
 #include "code\modules\virus2\curer.dm"
 #include "code\modules\virus2\disease2.dm"
 #include "code\modules\virus2\diseasesplicer.dm"
