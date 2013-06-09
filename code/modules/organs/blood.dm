@@ -201,7 +201,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		vessel.add_reagent("blood", amount, injected.data)
 		vessel.update_total()
 	var/list/viruses = injected.data["virus2"]
-	if (viruses.len)
+	if (viruses && viruses.len)
 		virus2 |= viruses
 	if (injected.data["antibodies"] && prob(5))
 		antibodies |= injected.data["antibodies"]

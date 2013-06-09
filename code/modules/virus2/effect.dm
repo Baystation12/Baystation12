@@ -87,7 +87,7 @@
 		mob.radiation += (2*multiplier)
 
 /datum/disease2/effect/deaf
-	name = "Hard of hearing syndrome"
+	name = "Dead Ear syndrome"
 	stage = 4
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.ear_deaf += 20
@@ -140,7 +140,10 @@
 	name = "Telepathy Syndrome"
 	stage = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob.mutations |= 512
+		mob.dna.check_integrity()
+		var/newdna = setblock(mob.dna.struc_enzymes,REMOTETALKBLOCK,toggledblock(getblock(mob.dna.struc_enzymes,REMOTETALKBLOCK,3)),3)
+		mob.dna.struc_enzymes = newdna
+		domutcheck(mob, null)
 
 /datum/disease2/effect/mind
 	name = "Lazy mind syndrome"
@@ -171,6 +174,12 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*giggle")
 
+/datum/disease2/effect/confusion
+	name = "Topographical Cretinism Syndrome"
+	stage = 3
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		mob.confused += 10
+
 /datum/disease2/effect/groan
 	name = "Groaning Syndrome"
 	stage = 3
@@ -179,7 +188,7 @@
 ////////////////////////STAGE 2/////////////////////////////////
 
 /datum/disease2/effect/scream
-	name = "Random screaming syndrome"
+	name = "Loudness syndrome"
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*scream")
@@ -190,23 +199,28 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.drowsyness += 10
 
-/datum/disease2/effect/drowsy
-	name = "Bedroom Syndrome"
-	stage = 2
-	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob.drowsyness = 5
-
 /datum/disease2/effect/sleepy
 	name = "Resting syndrome"
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*collapse")
 
+/datum/disease2/effect/sleepy
+	name = "Blackout Syndrome"
+	stage = 2
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		mob.eye_blind = max(mob.eye_blind, 4)
+
 /datum/disease2/effect/cough
 	name = "Anima Syndrome"
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*cough")
+		for(var/mob/living/carbon/M in view(1,mob))
+			if(airborne_can_reach(get_turf(mob), get_turf(M)))
+				for (var/datum/disease2/disease/V in mob.virus2)
+					if(V.spreadtype == "Airborne")
+						infect_virus2(M,V)
 
 /datum/disease2/effect/hungry
 	name = "Appetiser Effect"
