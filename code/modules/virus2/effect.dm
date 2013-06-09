@@ -80,20 +80,20 @@
 		mob.gib()
 
 /datum/disease2/effect/radian
-	name = "Radian's syndrome"
+	name = "Radian's Syndrome"
 	stage = 4
 	maxm = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.radiation += (2*multiplier)
 
 /datum/disease2/effect/deaf
-	name = "Dead Ear syndrome"
+	name = "Dead Ear Syndrome"
 	stage = 4
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.ear_deaf += 20
 
 /datum/disease2/effect/monkey
-	name = "Monkism syndrome"
+	name = "Monkism Syndrome"
 	stage = 4
 	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
@@ -102,7 +102,7 @@
 			h.monkeyize()
 
 /datum/disease2/effect/suicide
-	name = "Suicidal syndrome"
+	name = "Suicidal Syndrome"
 	stage = 4
 	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
@@ -115,22 +115,23 @@
 			mob.suiciding = 0
 
 /datum/disease2/effect/killertoxins
-	name = "Toxification syndrome"
+	name = "Toxification Syndrome"
 	stage = 4
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.adjustToxLoss(15*multiplier)
 
+
 ////////////////////////STAGE 3/////////////////////////////////
 
 /datum/disease2/effect/toxins
-	name = "Hyperacid Syndrome"
+	name = "Hyperacidity"
 	stage = 3
 	maxm = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.adjustToxLoss((2*multiplier))
 
 /datum/disease2/effect/shakey
-	name = "World Shaking syndrome"
+	name = "World Shaking Syndrome"
 	stage = 3
 	maxm = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
@@ -139,14 +140,14 @@
 /datum/disease2/effect/telepathic
 	name = "Telepathy Syndrome"
 	stage = 3
-	activate(var/mob/living/carbon/mob,var/multiplier)
+	activate(var/mob/living/carbon/mob,var/multiplier)")
 		mob.dna.check_integrity()
 		var/newdna = setblock(mob.dna.struc_enzymes,REMOTETALKBLOCK,toggledblock(getblock(mob.dna.struc_enzymes,REMOTETALKBLOCK,3)),3)
 		mob.dna.struc_enzymes = newdna
 		domutcheck(mob, null)
 
 /datum/disease2/effect/mind
-	name = "Lazy mind syndrome"
+	name = "Lazy Mind Syndrome"
 	stage = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
@@ -163,7 +164,7 @@
 		mob.hallucination += 25
 
 /datum/disease2/effect/deaf
-	name = "Hard of hearing syndrome"
+	name = "Hard of Hearing Syndrome"
 	stage = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.ear_deaf = 5
@@ -175,7 +176,7 @@
 		mob.say("*giggle")
 
 /datum/disease2/effect/confusion
-	name = "Topographical Cretinism Syndrome"
+	name = "Topographical Cretinism"
 	stage = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.confused += 10
@@ -188,19 +189,19 @@
 ////////////////////////STAGE 2/////////////////////////////////
 
 /datum/disease2/effect/scream
-	name = "Loudness syndrome"
+	name = "Loudness Syndrome"
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*scream")
 
 /datum/disease2/effect/drowsness
-	name = "Automated sleeping syndrome"
+	name = "Automated Sleeping Syndrome"
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.drowsyness += 10
 
 /datum/disease2/effect/sleepy
-	name = "Resting syndrome"
+	name = "Resting Syndrome"
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*collapse")
