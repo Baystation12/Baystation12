@@ -120,8 +120,47 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.adjustToxLoss(15*multiplier)
 
+/datum/disease2/effect/dna
+	name = "Reverse Pattern Syndrome"
+	stage = 4
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		mob.bodytemperature = max(mob.bodytemperature, 350)
+		scramble(0,mob,10)
+
+/datum/disease2/effect/organs
+	name = "Shutdown Syndrome"
+	stage = 4
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			var/datum/organ/external/E = pick(H.organs)
+			if (!(E.status & ORGAN_DEAD))
+				E.status |= ORGAN_DEAD
+				H << "<span class='notice'>You can't feel your [E.display_name] anymore...</span>"
+		mob.adjustToxLoss(15*multiplier)
+
+	deactivate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			for (var/datum/organ/external/E in H.organs)
+				E.status ^= ORGAN_DEAD
 
 ////////////////////////STAGE 3/////////////////////////////////
+
+/datum/disease2/effect/bones
+	name = "Fragile Bones Syndrome"
+	stage = 4
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			for (var/datum/organ/external/E in H.organs)
+				E.min_broken_damage = max(5, E.min_broken_damage - 30)
+
+	deactivate(var/mob/living/carbon/mob,var/multiplier)
+		if(istype(mob, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
+			for (var/datum/organ/external/E in H.organs)
+				E.min_broken_damage = initial(E.min_broken_damage)
 
 /datum/disease2/effect/toxins
 	name = "Hyperacidity"
@@ -140,7 +179,7 @@
 /datum/disease2/effect/telepathic
 	name = "Telepathy Syndrome"
 	stage = 3
-	activate(var/mob/living/carbon/mob,var/multiplier)")
+	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.dna.check_integrity()
 		var/newdna = setblock(mob.dna.struc_enzymes,REMOTETALKBLOCK,toggledblock(getblock(mob.dna.struc_enzymes,REMOTETALKBLOCK,3)),3)
 		mob.dna.struc_enzymes = newdna
