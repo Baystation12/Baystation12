@@ -44,11 +44,17 @@
 	if(mob.radiation > 50)
 		if(prob(1))
 			majormutate()
+
+	//Space antibiotics stop disease completely (temporary)
 	if(mob.reagents.has_reagent("spaceacillin"))
 		return
+
+	//Virus food speeds up disease progress
 	if(mob.reagents.has_reagent("virusfood"))
 		mob.reagents.remove_reagent("virusfood",0.1)
 		clicks += 10
+
+	//Moving to the next stage
 	if(clicks > stage*100 && prob(10))
 		if(stage == max_stage)
 			src.cure(mob)
@@ -57,8 +63,12 @@
 			del src
 		stage++
 		clicks = 0
+	//Do nasty effects
 	for(var/datum/disease2/effectholder/e in effects)
 		e.runeffect(mob,stage)
+
+	//fever
+	mob.bodytemperature += max(mob.bodytemperature, min(310+5*stage ,mob.bodytemperature+5*stage))
 	clicks+=speed
 
 /datum/disease2/disease/proc/cure(var/mob/living/carbon/mob)
