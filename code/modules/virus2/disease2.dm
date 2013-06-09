@@ -83,6 +83,9 @@
 /datum/disease2/disease/proc/majormutate()
 	var/datum/disease2/effectholder/holder = pick(effects)
 	holder.majormutate()
+	if (prob(5))
+		antigen = text2num(pick(ANTIGENS))
+		antigen |= text2num(pick(ANTIGENS))
 
 /datum/disease2/disease/proc/getcopy()
 	var/datum/disease2/disease/disease = new /datum/disease2/disease
