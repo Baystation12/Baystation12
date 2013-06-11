@@ -62,7 +62,6 @@
 	return absorb
 
 /mob/living/hitby(atom/movable/AM as mob|obj,var/speed)//Standardization and logging -Sieve
-	src << "Hit by [AM] with speed [speed]."
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 		var/zone = ran_zone("chest",75)//Hits a random part of the body, geared towards the chest
