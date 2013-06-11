@@ -5,9 +5,10 @@
 	icon_state = "pneumatic"
 	item_state = "pneumatic"
 	w_class = 4.0
-	flags = FPRINT|TABLEPASS
+	flags =  FPRINT | TABLEPASS | CONDUCT |  USEDELAY
+	slot_flags = SLOT_BELT
 	max_w_class = 3
-	max_combined_w_class = 21
+	max_combined_w_class = 20
 
 	var/obj/item/weapon/tank/tank = null                // Tank of gas for use in firing the cannon.
 	var/obj/item/weapon/storage/tank_container = new()  // Something to hold the tank item so we don't accidentally fire it.
@@ -68,7 +69,7 @@
 	else
 		usr << "Nothing is attached to the tank valve!"
 
-/obj/item/weapon/storage/pneumatic/afterattack(obj/target, mob/user, flag)
+/obj/item/weapon/storage/pneumatic/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
 	if (istype(target, /obj/item/weapon/storage/backpack ))
 		return
 
@@ -85,9 +86,19 @@
 		user << "There's nothing in [src] to fire!"
 		return 0
 	else
-		spawn(0) fire_item(target,user)
+		spawn(0) Fire(target,user,params)
 
-/obj/item/weapon/storage/pneumatic/proc/fire_item(mob/living/target as mob, mob/living/user as mob)
+/obj/item/weapon/storage/pneumatic/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
+	if (length(contents) > 0)
+		if(user.a_intent == "hurt")
+			user.visible_message("\red <b> \The [user] fires \the [src] point blank at [M]!</b>")
+			Fire(M,user)
+			return
+		else
+			Fire(M,user)
+			return
+
+/obj/item/weapon/storage/pneumatic/proc/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)
 
 	if (!tank)
 		user << "There is no gas tank in [src]!"
@@ -96,6 +107,13 @@
 	if (cooldown)
 		user << "The chamber hasn't built up enough pressure yet!"
 		return 0
+
+	add_fingerprint(user)
+
+	var/turf/curloc = get_turf(user)
+	var/turf/targloc = get_turf(target)
+	if (!istype(targloc) || !istype(curloc))
+		return
 
 	var/fire_pressure = (tank.air_contents.return_pressure()/100)*pressure_setting
 
