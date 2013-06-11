@@ -551,7 +551,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		"blue wizard",
 		"red wizard",
 		"marisa wizard",
-		"emergency rescue team",
+		"emergency response team",
 		"nanotrasen representative",
 		"nanotrasen officer",
 		"nanotrasen captain"
