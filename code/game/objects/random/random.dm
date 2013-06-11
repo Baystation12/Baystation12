@@ -39,17 +39,6 @@
 					/obj/item/device/flashlight)
 					
 					
-/obj/random/technical_gloves
-	name = "Random Glove"
-	desc = "This is a random useful glove."
-	icon = 'icons/obj/clothing/gloves.dmi'
-	icon_state = "yellow"
-	item_to_spawn()
-		return pick(prob(3);/obj/item/clothing/gloves/yellow,\
-					prob(5);/obj/item/clothing/gloves/fyellow,\
-					prob(2);/obj/item/clothing/gloves/black)
-					
-					
 /obj/random/technology_scanner
 	name = "Random Scanner"
 	desc = "This is a random technology scanner."
@@ -72,6 +61,7 @@
 					prob(40);/obj/item/weapon/cell/high,\
 					prob(9);/obj/item/weapon/cell/super,\
 					prob(1);/obj/item/weapon/cell/hyper)
+					
 					
 /obj/random/bomb_supply
 	name = "Bomb Supply"
@@ -107,7 +97,8 @@
 					prob(1);/obj/item/weapon/packageWrap,\
 					prob(2);/obj/random/bomb_supply,\
 					prob(1);/obj/item/weapon/extinguisher,\
-					prob(1);/obj/random/technical_gloves,\
+					prob(1);/obj/item/clothing/gloves/fyellow,\
 					prob(3);/obj/item/weapon/cable_coil,\
 					prob(2);/obj/random/toolbox,\
+					prob(2);/obj/item/weapon/storage/belt/utility,\
 					prob(5);/obj/random/tool)
