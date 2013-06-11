@@ -1099,6 +1099,7 @@
 #include "code\modules\projectiles\guns\energy\temperature.dm"
 #include "code\modules\projectiles\guns\projectile\automatic.dm"
 #include "code\modules\projectiles\guns\projectile\pistol.dm"
+#include "code\modules\projectiles\guns\projectile\pneumatic.dm"
 #include "code\modules\projectiles\guns\projectile\revolver.dm"
 #include "code\modules\projectiles\guns\projectile\shotgun.dm"
 #include "code\modules\projectiles\projectile\animate.dm"
