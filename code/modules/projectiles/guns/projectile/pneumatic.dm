@@ -1,8 +1,9 @@
 /obj/item/weapon/storage/pneumatic
 	name = "pneumatic cannon"
 	desc = "A large gas-powered cannon."
-	icon_state = "backpack"
-	item_state = "backpack"
+	icon = 'icons/obj/gun.dmi'
+	icon_state = "pneumatic"
+	item_state = "pneumatic"
 	w_class = 4.0
 	flags = FPRINT|TABLEPASS
 	max_w_class = 3
@@ -39,6 +40,9 @@
 		usr << "You twist the valve and pop the tank out of [src]."
 		tank.loc = usr.loc
 		tank = null
+		icon_state = "pneumatic"
+		item_state = "pneumatic"
+		usr.update_icons()
 	else
 		usr << "There's no tank in [src]."
 
@@ -48,6 +52,9 @@
 		tank = W
 		tank.loc = src.tank_container
 		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")
+		icon_state = "pneumatic-tank"
+		item_state = "pneumatic-tank"
+		user.update_icons()
 	else
 		..()
 
@@ -86,6 +93,10 @@
 		user << "There is no gas tank in [src]!"
 		return 0
 
+	if (cooldown)
+		user << "The chamber hasn't built up enough pressure yet!"
+		return 0
+
 	var/fire_pressure = (tank.air_contents.return_pressure()/100)*pressure_setting
 
 	if (fire_pressure < minimum_tank_pressure)
@@ -100,6 +111,10 @@
 
 	src.remove_from_storage(object,user.loc)
 	object.throw_at(target,10,speed)
+
+	var/lost_gas_amount = tank.air_contents.total_moles*(pressure_setting/100)
+	var/datum/gas_mixture/removed = tank.air_contents.remove(lost_gas_amount)
+	user.loc.assume_air(removed)
 
 	cooldown = 1
 	spawn(cooldown_time)
