@@ -1,13 +1,13 @@
 //STRIKE TEAMS
 
 var/list/response_team_members = list()
-var/send_emergency_team = 0
+var/global/sent_emergency_team = 0
 
 client/verb/JoinResponseTeam()
 	set category = "IC"
 
 	if(istype(usr,/mob/dead/observer) || istype(usr,/mob/new_player))
-		if(!send_emergency_team)
+		if(!sent_emergency_team)
 			usr << "No emergency response team is currently being sent."
 			return
 		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Security Officer"))
@@ -64,7 +64,7 @@ proc/percentage_antagonists()
 
 
 proc/trigger_armed_response_team(var/force = 0)
-	if(send_emergency_team)
+	if(sent_emergency_team)
 		return
 
 	var/send_team_chance = 20 // base chance that a team will be sent
@@ -79,7 +79,7 @@ proc/trigger_armed_response_team(var/force = 0)
 
 	command_alert("According to our sensors, [station_name()] has entered code red. We will prepare and dispatch an emergency response team to deal with the situation.", "Command Report")
 
-	send_emergency_team = 1
+	sent_emergency_team = 1
 
 	var/area/security/nuke_storage/nukeloc = locate()//To find the nuke in the vault
 	var/obj/machinery/nuclearbomb/nuke = locate() in nukeloc
