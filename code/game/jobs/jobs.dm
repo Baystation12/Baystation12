@@ -9,9 +9,8 @@ var/const/OFFICER			=(1<<4)
 var/const/CHIEF				=(1<<5)
 var/const/ENGINEER			=(1<<6)
 var/const/ATMOSTECH			=(1<<7)
-var/const/ROBOTICIST		=(1<<8)
-var/const/AI				=(1<<9)
-var/const/CYBORG			=(1<<10)
+var/const/AI				=(1<<8)
+var/const/CYBORG			=(1<<9)
 
 
 var/const/MEDSCI			=(1<<1)
@@ -24,6 +23,8 @@ var/const/DOCTOR			=(1<<4)
 var/const/GENETICIST		=(1<<5)
 var/const/VIROLOGIST		=(1<<6)
 var/const/PSYCHIATRIST		=(1<<7)
+var/const/ROBOTICIST		=(1<<8)
+var/const/XENOBIOLOGIST		=(1<<9)
 
 
 var/const/CIVILIAN			=(1<<2)
@@ -78,7 +79,8 @@ var/list/science_positions = list(
 	"Research Director",
 	"Scientist",
 	"Geneticist",	//Part of both medical and science
-	"Roboticist"
+	"Roboticist",
+	"Xenobiologist"
 )
 
 //BS12 EDIT
