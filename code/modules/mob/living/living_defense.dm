@@ -57,7 +57,7 @@
 		P.on_hit(src,2)
 		return 2
 	if(!P.nodamage)
-		apply_damage((P.damage/(absorb+1)), P.damage_type, def_zone, used_weapon = "Projectile([P.name])")
+		apply_damage((P.damage/(absorb+1)), P.damage_type, def_zone, absorb, 0, P)
 	P.on_hit(src, absorb)
 	return absorb
 
@@ -72,7 +72,7 @@
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(zone, "melee", "Your armor has protected your [zone].", "Your armor has softened hit to your [zone].")
 		if(armor < 2)
-			apply_damage(O.throwforce*(speed/5), dtype, zone, armor, O)
+			apply_damage(O.throwforce*(speed/5), dtype, zone, armor, O.sharp, O)
 		if(!O.fingerprintslast)
 			return
 		var/client/assailant = directory[ckey(O.fingerprintslast)]
