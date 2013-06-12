@@ -179,13 +179,16 @@
 
 			if (prob(find_prob))
 				user.visible_message("\blue [user] takes something out of incision on [target]'s [affected.display_name] with \the [tool].", \
-				"\blue You take something out of incision on [target]'s [affected.display_name]s with \the [tool]." )
+				"\blue You take [obj] out of incision on [target]'s [affected.display_name]s with \the [tool]." )
 				affected.implants -= obj
 				obj.loc = get_turf(target)
 				if(istype(obj,/obj/item/weapon/implant))
 					var/obj/item/weapon/implant/imp = obj
 					imp.imp_in = null
 					imp.implanted = 0
+			else
+				user.visible_message("\blue [user] removes \the [tool] from [target]'s [affected.display_name].", \
+				"\blue There's something inside [target]'s [affected.display_name], but you just missed it this time." )
 		else if (affected.hidden)
 			user.visible_message("\blue [user] takes something out of incision on [target]'s [affected.display_name] with \the [tool].", \
 			"\blue You take something out of incision on [target]'s [affected.display_name]s with \the [tool]." )
