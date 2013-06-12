@@ -213,3 +213,7 @@ ALIEN_PLAYER_RATIO 0.2
 
 ##Remove the # to let ghosts spin chairs
 #GHOST_INTERACTION
+
+## Uncomment this to enable external .rsc downloads. URLs must be separated by no more than one space.
+## The linked .zip file should contain the required .rsc
+#resource_urls http://firstserver.org/myresource.zip http://secondserver.org/myresource.zip  http://10.22.11.1/myresource.zip
