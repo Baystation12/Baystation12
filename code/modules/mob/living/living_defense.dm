@@ -57,11 +57,11 @@
 		P.on_hit(src,2)
 		return 2
 	if(!P.nodamage)
-		apply_damage((P.damage/(absorb+1)), P.damage_type, def_zone, used_weapon = "Projectile([P.name])")
+		apply_damage((P.damage/(absorb+1)), P.damage_type, def_zone, absorb, 0, P)
 	P.on_hit(src, absorb)
 	return absorb
 
-/mob/living/hitby(atom/movable/AM as mob|obj)//Standardization and logging -Sieve
+/mob/living/hitby(atom/movable/AM as mob|obj,var/speed)//Standardization and logging -Sieve
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 		var/zone = ran_zone("chest",75)//Hits a random part of the body, geared towards the chest
@@ -72,7 +72,7 @@
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(zone, "melee", "Your armor has protected your [zone].", "Your armor has softened hit to your [zone].")
 		if(armor < 2)
-			apply_damage(O.throwforce, dtype, zone, armor, O)
+			apply_damage(O.throwforce*(speed/5), dtype, zone, armor, O.sharp, O)
 		if(!O.fingerprintslast)
 			return
 		var/client/assailant = directory[ckey(O.fingerprintslast)]

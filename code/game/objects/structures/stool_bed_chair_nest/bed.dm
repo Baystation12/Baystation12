@@ -13,6 +13,12 @@
 	icon_state = "bed"
 	var/mob/living/buckled_mob
 
+/obj/structure/stool/psychbed
+	name = "psych bed"
+	desc = "For prime comfort during psychiatric evaluations."
+	icon_state = "psychbed"
+	var/mob/living/buckled_mob
+
 /obj/structure/stool/bed/alien
 	name = "resting contraption"
 	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"

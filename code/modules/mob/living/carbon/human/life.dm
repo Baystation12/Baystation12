@@ -394,6 +394,7 @@
 		var/oxygen_used = 0
 		var/nitrogen_used = 0
 		var/breath_pressure = (breath.total_moles()*R_IDEAL_GAS_EQUATION*breath.temperature)/BREATH_VOLUME
+		var/vox_oxygen_max = 1 // For vox.
 
 		//Partial pressure of the O2 in our breath
 		var/O2_pp = (breath.oxygen/breath.total_moles())*breath_pressure
@@ -436,6 +437,7 @@
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 				failed_last_breath = 1
 			oxygen_alert = max(oxygen_alert, 1)
+
 		else								// We're in safe limits
 			failed_last_breath = 0
 			adjustOxyLoss(-5)
@@ -466,6 +468,10 @@
 			//adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))	//Limit amount of damage toxin exposure can do per second
 			if(reagents)
 				reagents.add_reagent("plasma", Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
+			toxins_alert = max(toxins_alert, 1)
+		else if(O2_pp > vox_oxygen_max && src.dna.mutantrace=="vox") //Oxygen is toxic to vox.
+			var/ratio = (breath.oxygen/vox_oxygen_max) * 10
+			adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
 		else
 			toxins_alert = 0
@@ -596,7 +602,7 @@
 			if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
 				pressure_alert = -1
 			else
-				if( !(COLD_RESISTANCE in mutations) )
+				if( !(COLD_RESISTANCE in mutations) && src.dna.mutantrace!="vox")
 					adjustBruteLoss( LOW_PRESSURE_DAMAGE )
 					pressure_alert = -2
 				else
@@ -961,19 +967,21 @@
 					del a
 
 				if(halloss > 100)
-					src << "<span class='notice'>You're too tired to keep going...</span>"
+					src << "<span class='notice'>You're in too much pain to keep going...</span>"
 					for(var/mob/O in oviewers(src, null))
-						O.show_message("<B>[src]</B> slumps to the ground panting, too weak to continue fighting.", 1)
-					Paralyse(3)
+						O.show_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.", 1)
+					Paralyse(10)
 					setHalLoss(99)
 
 			if(paralysis)
 				AdjustParalysis(-1)
 				blinded = 1
 				stat = UNCONSCIOUS
+				if(halloss > 0)
+					adjustHalLoss(-6)
 			else if(sleeping)
 				handle_dreams()
-				adjustHalLoss(-5)
+				adjustHalLoss(-6)
 				if (mind)
 					if((mind.active && client != null) || immune_to_ssd) //This also checks whether a client is connected, if not, sleep is not reduced.
 						sleeping = max(sleeping-1, 0)
@@ -982,9 +990,14 @@
 				if( prob(10) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
+			else if(resting)
+				if(halloss > 0)
+					adjustHalLoss(-6)
 			//CONSCIOUS
 			else
 				stat = CONSCIOUS
+				if(halloss > 0)
+					adjustHalLoss(-2)
 
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
