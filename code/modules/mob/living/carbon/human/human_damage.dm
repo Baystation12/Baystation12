@@ -227,8 +227,8 @@
 	if(!organ) return
 	if(istype(used_weapon,/obj/item/weapon))
 		var/obj/item/weapon/W = used_weapon
-		if(damage > 20 && (prob(damage/W.w_class) || sharp)) //The larger it is, the harder it needs to hit to stick.
-			W.loc = organ
+		if(damage > (5*W.w_class) && (prob(damage/W.w_class) || sharp)) //The larger it is, the harder it needs to hit to stick.
+			W.loc = organ                                               //Sharp objects will always embed if they do enough damage.
 			organ.implants += W
 			visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
 			W.add_blood(src)
