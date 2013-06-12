@@ -1112,3 +1112,40 @@
 	if(istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
 		del(feet_blood_DNA)
 		return 1
+
+/mob/living/carbon/human/verb/yank_out_object()
+	set name = "Yank out object"
+	set desc = "Remove an embedded item at the cost of bleeding and pain."
+	set category = "Object"
+
+	if(!isliving(usr) || usr.next_move > world.time)
+		return
+	usr.next_move = world.time + 20
+
+	var/list/valid_objects = get_visible_implants(1)
+
+	if(!valid_objects.len)
+		src << "You have nothing stuck in your wounds that is large enough to remove without surgery."
+		return
+
+	var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
+	visible_message("<span class='warning'><b>You rip [selection] out of your body in a welter of blood.</b></span>")
+	bloody_hands(src)
+	selection.loc = get_turf(src)
+
+	for(var/datum/organ/external/organ in src.organs)
+		for(var/obj/item/weapon/O in organ.implants)
+			if(O == selection)
+				organ.implants -= selection
+
+	return 1
+
+/mob/living/carbon/human/proc/get_visible_implants(var/class = 0)
+
+	var/list/visible_implants = list()
+	for(var/datum/organ/external/organ in src.organs)
+		for(var/obj/item/weapon/O in organ.implants)
+			if(!istype(O,/obj/item/weapon/implant) && O.w_class > class)
+				visible_implants += O
+
+	return(visible_implants)
