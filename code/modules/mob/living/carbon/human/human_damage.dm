@@ -223,13 +223,20 @@
 	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
 	updatehealth()
 
+	//Embedded projectile code.
 	if(!organ) return
-	if(!istype(used_weapon,/obj/item/weapon)) return
-
-	var/obj/item/weapon/W = used_weapon
-	if(damage > 20 && (prob(damage/W.w_class) || sharp))
-		W.loc = organ
-		organ.implants += W
-		visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
-		W.add_blood(src)
+	if(istype(used_weapon,/obj/item/weapon))
+		var/obj/item/weapon/W = used_weapon
+		if(damage > 20 && (prob(damage/W.w_class) || sharp)) //The larger it is, the harder it needs to hit to stick.
+			W.loc = organ
+			organ.implants += W
+			visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+			W.add_blood(src)
+	else if(istype(used_weapon,/obj/item/projectile)) //We don't want to use the actual projectile item, so we spawn some shrapnel.
+		if(prob(50) && damagetype == BRUTE)
+			var/obj/item/weapon/shard/shrapnel/S = new()
+			S.loc = organ
+			organ.implants += S
+			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
+			S.add_blood(src)
 	return 1
