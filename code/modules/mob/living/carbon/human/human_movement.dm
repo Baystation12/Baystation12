@@ -7,6 +7,8 @@
 
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 
+	handle_embedded_objects() //Moving with objects stuck in you can cause bad times.
+
 	var/health_deficiency = (100 - health - halloss)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
