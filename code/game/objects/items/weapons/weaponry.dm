@@ -140,10 +140,11 @@
 
 /obj/item/weapon/harpoon
 	name = "harpoon"
+	sharp = 1
 	desc = "Tharr she blows!"
 	icon_state = "harpoon"
 	item_state = "harpoon"
 	force = 20
 	throwforce = 15
 	w_class = 2
-	attack_verb = list("jab","stabbed","ripped")
+	attack_verb = list("jabbed","stabbed","ripped")

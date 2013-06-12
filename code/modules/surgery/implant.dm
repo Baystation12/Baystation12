@@ -163,19 +163,29 @@
 		var/datum/organ/external/chest/affected = target.get_organ(target_zone)
 
 		var/find_prob = 0
+
 		if (affected.implants.len)
-			var/obj/item/weapon/implant/imp = affected.implants[1]
-			if (imp.islegal())
-				find_prob +=60
+
+			var/obj/item/weapon/obj = affected.implants[1]
+
+			if(istype(obj,/obj/item/weapon/implant))
+				var/obj/item/weapon/implant/imp = obj
+				if (imp.islegal())
+					find_prob +=60
+				else
+					find_prob +=40
 			else
-				find_prob +=40
+				find_prob +=50
+
 			if (prob(find_prob))
 				user.visible_message("\blue [user] takes something out of incision on [target]'s [affected.display_name] with \the [tool].", \
 				"\blue You take something out of incision on [target]'s [affected.display_name]s with \the [tool]." )
-				affected.implants -= imp
-				imp.loc = get_turf(target)
-				imp.imp_in = null
-				imp.implanted = 0
+				affected.implants -= obj
+				obj.loc = get_turf(target)
+				if(istype(obj,/obj/item/weapon/implant))
+					var/obj/item/weapon/implant/imp = obj
+					imp.imp_in = null
+					imp.implanted = 0
 		else if (affected.hidden)
 			user.visible_message("\blue [user] takes something out of incision on [target]'s [affected.display_name] with \the [tool].", \
 			"\blue You take something out of incision on [target]'s [affected.display_name]s with \the [tool]." )
