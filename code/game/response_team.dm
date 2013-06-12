@@ -1,7 +1,7 @@
 //STRIKE TEAMS
 
 var/list/response_team_members = list()
-var/send_emergency_team = 0
+var/global/send_emergency_team = 0
 
 client/verb/JoinResponseTeam()
 	set category = "IC"
