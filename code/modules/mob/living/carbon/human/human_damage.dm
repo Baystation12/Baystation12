@@ -190,7 +190,9 @@
 		zone = "head"
 	return organs_by_name[zone]
 
-/mob/living/carbon/human/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/used_weapon = null)
+/mob/living/carbon/human/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/sharp = 0, var/obj/used_weapon = null)
+
+	//visible_message("Hit debug. [damage] | [damagetype] | [def_zone] | [blocked] | [sharp] | [used_weapon]")
 	if((damagetype != BRUTE) && (damagetype != BURN))
 		..(damage, damagetype, def_zone, blocked)
 		return 1
@@ -219,6 +221,22 @@
 				UpdateDamageIcon()
 
 	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
-
 	updatehealth()
+
+	//Embedded projectile code.
+	if(!organ) return
+	if(istype(used_weapon,/obj/item/weapon))
+		var/obj/item/weapon/W = used_weapon
+		if(damage > (5*W.w_class) && (prob(damage/W.w_class) || sharp)) //The larger it is, the harder it needs to hit to stick.
+			W.loc = organ                                               //Sharp objects will always embed if they do enough damage.
+			organ.implants += W
+			visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+			W.add_blood(src)
+	else if(istype(used_weapon,/obj/item/projectile)) //We don't want to use the actual projectile item, so we spawn some shrapnel.
+		if(prob(50) && damagetype == BRUTE)
+			var/obj/item/weapon/shard/shrapnel/S = new()
+			S.loc = organ
+			organ.implants += S
+			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
+			S.add_blood(src)
 	return 1

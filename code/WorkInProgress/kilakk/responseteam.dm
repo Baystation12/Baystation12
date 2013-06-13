@@ -98,7 +98,7 @@ var/sent_emergency_team = 0
 		if(L.name == "Response Team")
 			leader_selected = member_number == 1?1:0 // The last person selected will be the leader
 
-			var/mob/living/carbon/human/new_member = create_response_team(L, leader_selected)
+			var/mob/living/carbon/human/new_member = spawn_response_team(L, leader_selected)
 
 			new_member.age = !leader_selected ? rand(23,35) : rand(35,45)
 
@@ -188,7 +188,7 @@ var/sent_emergency_team = 0
 	return 1
 
 // Mob creation
-/client/proc/create_response_team(obj/spawn_location, leader_selected = 0)
+/client/proc/spawn_response_team(obj/spawn_location, leader_selected = 0)
 	var/mob/living/carbon/human/new_member = new(spawn_location.loc)
 
 	return new_member

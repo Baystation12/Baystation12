@@ -104,6 +104,10 @@
 			new /obj/item/weapon/storage/backpack/industrial(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_eng(src)
+		if (prob(70))
+			new /obj/item/clothing/tie/storage/brown_vest(src)
+		else
+			new /obj/item/clothing/tie/storage/webbing(src)
 		new /obj/item/clothing/under/rank/engineer(src)
 		new /obj/item/clothing/shoes/orange(src)
 		new /obj/item/weapon/storage/toolbox/mechanical(src)
