@@ -228,14 +228,14 @@
 	if(istype(used_weapon,/obj/item/weapon))
 		var/obj/item/weapon/W = used_weapon
 		if(damage > (5*W.w_class) && (prob(damage/W.w_class) || sharp)) //The larger it is, the harder it needs to hit to stick.
-			W.loc = organ                                               //Sharp objects will always embed if they do enough damage.
+			W.loc = src                                                 //Sharp objects will always embed if they do enough damage.
 			organ.implants += W
 			visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
 			W.add_blood(src)
 	else if(istype(used_weapon,/obj/item/projectile)) //We don't want to use the actual projectile item, so we spawn some shrapnel.
 		if(prob(50) && damagetype == BRUTE)
 			var/obj/item/weapon/shard/shrapnel/S = new()
-			S.loc = organ
+			S.loc = src
 			organ.implants += S
 			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
 			S.add_blood(src)
