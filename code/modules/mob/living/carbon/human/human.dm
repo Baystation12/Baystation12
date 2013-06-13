@@ -1187,4 +1187,4 @@
 
 				organ.status |= ORGAN_BLEEDING
 				organ.take_damage(rand(1,3), 0, 0)
-				organ.adjustToxLoss(rand(1,3))
+				src.adjustToxLoss(rand(1,3))
