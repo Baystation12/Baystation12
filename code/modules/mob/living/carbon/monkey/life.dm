@@ -439,20 +439,36 @@
 					adjustOxyLoss(1)
 				Paralyse(3)
 
+// BEGIN
+			if(halloss > 100)
+				src << "<span class='notice'>You're in too much pain to keep going...</span>"
+				for(var/mob/O in oviewers(src, null))
+					O.show_message("<B>[src]</B> slumps to the ground, too weak to continue fighting.", 1)
+				Paralyse(10)
+				setHalLoss(99)
+
 			if(paralysis)
 				AdjustParalysis(-1)
 				blinded = 1
 				stat = UNCONSCIOUS
+				if(halloss > 0)
+					adjustHalLoss(-6)
 			else if(sleeping)
-				sleeping = max(sleeping-1, 0)
+				adjustHalLoss(-6)
 				blinded = 1
 				stat = UNCONSCIOUS
-				if( prob(10) && health )
+				if( prob(10) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
+			else if(resting)
+				if(halloss > 0)
+					adjustHalLoss(-6)
 			//CONSCIOUS
 			else
 				stat = CONSCIOUS
+				if(halloss > 0)
+					adjustHalLoss(-2)
+//END
 
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own

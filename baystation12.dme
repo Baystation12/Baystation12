@@ -52,6 +52,7 @@
 #define FILE_DIR "sound/violin"
 #define FILE_DIR "sound/voice"
 #define FILE_DIR "sound/voice/Serithi"
+#define FILE_DIR "sound/vox"
 #define FILE_DIR "sound/weapons"
 // END_FILE_DIR
 // BEGIN_PREFERENCES
