@@ -28,7 +28,7 @@
 	return 1
 
 
-/mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/def_zone = null, var/blocked = 0, var/halloss = 0)
+/mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/halloss = 0, var/def_zone = null, var/blocked = 0)
 	if(blocked >= 2)	return 0
 	if(brute)	apply_damage(brute, BRUTE, def_zone, blocked)
 	if(burn)	apply_damage(burn, BURN, def_zone, blocked)
