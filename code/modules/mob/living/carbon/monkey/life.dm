@@ -458,6 +458,7 @@
 					adjustHalLoss(-6)
 				blinded = 1
 				stat = UNCONSCIOUS
+				sleeping = max(sleeping-1, 0)
 				if( prob(10) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
