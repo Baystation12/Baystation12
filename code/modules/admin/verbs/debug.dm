@@ -551,7 +551,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		"blue wizard",
 		"red wizard",
 		"marisa wizard",
-		"emergency rescue team",
+		"emergency response team",
 		"nanotrasen representative",
 		"nanotrasen officer",
 		"nanotrasen captain"
@@ -817,7 +817,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			W.registered_name = M.real_name
 			M.equip_if_possible(W, slot_wear_id)
 
-		if("emergency rescue team")
+		if("emergency response team")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(M), slot_gloves)
@@ -831,7 +831,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			W.icon_state = "centcom"
 			W.access = get_all_accesses()
 			W.access += get_all_centcom_access()
-			W.assignment = "Emergency Rescue Team"
+			W.assignment = "Emergency Response Team"
 			W.registered_name = M.real_name
 			M.equip_to_slot_or_del(W, slot_wear_id)
 
