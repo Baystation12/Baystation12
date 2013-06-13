@@ -63,6 +63,7 @@
 				spawn
 					sleep(100)
 					if(security_level == SEC_LEVEL_RED) trigger_armed_response_team()
+
 			if(SEC_LEVEL_DELTA)
 				world << "<font size=4 color='red'>Attention! Delta security level reached!</font>"
 				world << "<font color='red'>[config.alert_desc_delta]</font>"
