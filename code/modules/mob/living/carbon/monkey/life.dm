@@ -454,7 +454,8 @@
 				if(halloss > 0)
 					adjustHalLoss(-6)
 			else if(sleeping)
-				adjustHalLoss(-6)
+				if(halloss > 0)
+					adjustHalLoss(-6)
 				blinded = 1
 				stat = UNCONSCIOUS
 				if( prob(10) && health && !hal_crit )
