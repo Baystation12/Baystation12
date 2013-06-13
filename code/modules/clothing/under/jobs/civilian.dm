@@ -69,6 +69,14 @@
 	color = "hop"
 	flags = FPRINT | TABLEPASS
 
+/obj/item/clothing/under/rank/head_of_personnel_whimsy
+	desc = "A blue jacket and red tie, with matching red cuffs! Snazzy. Wearing this makes you feel more important than your job title does."
+	name = "head of personnel's suit"
+	icon_state = "hopwhimsy"
+	item_state = "hopwhimsy"
+	color = "hopwhimsy"
+	flags = FPRINT | TABLEPASS
+
 
 /obj/item/clothing/under/rank/hydroponics
 	desc = "It's a jumpsuit designed to protect against minor plant-related hazards."
