@@ -45,7 +45,7 @@
 		if(istype(tmob, /mob/living/carbon/human))
 
 			for(var/mob/M in range(tmob, 1))
-				if( ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
+				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
 					if ( !(world.time % 5) )
 						src << "\red [tmob] is restrained, you cannot push past"
 					now_pushing = 0
@@ -1152,6 +1152,11 @@
 		selection.loc = get_turf(src)
 		affected.implants -= selection
 		shock_stage+=10
+
+		for(var/obj/item/weapon/O in pinned)
+			if(O == selection)
+				pinned -= O
+			src.anchored = 0
 
 		if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new (15)

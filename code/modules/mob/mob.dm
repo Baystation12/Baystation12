@@ -583,24 +583,31 @@ var/list/slot_equipment_priority = list( \
 		pulling = null
 
 /mob/proc/start_pulling(var/atom/movable/AM)
+
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
-	if (!( AM.anchored ))
-		if(pulling)
-			var/pulling_old = pulling
-			stop_pulling()
-			// Are we pulling the same thing twice? Just stop pulling.
-			if(pulling_old == AM)
-				return
-		src.pulling = AM
-		AM.pulledby = src
-		if(ismob(AM))
-			var/mob/M = AM
-			if(!iscarbon(src))
-				M.LAssailant = null
-			else
-				M.LAssailant = usr
 
+	if (AM.anchored)
+		return
+
+	var/mob/M = AM
+	if(ismob(AM))
+		if(!iscarbon(src))
+			M.LAssailant = null
+		else
+			M.LAssailant = usr
+		if (M.pinned.len)
+			usr << "They're pinned, gtfo."
+			return
+
+	if(pulling)
+		var/pulling_old = pulling
+		stop_pulling()
+		// Are we pulling the same thing twice? Just stop pulling.
+		if(pulling_old == AM)
+			return
+	src.pulling = AM
+	AM.pulledby = src
 
 /mob/proc/can_use_hands()
 	return

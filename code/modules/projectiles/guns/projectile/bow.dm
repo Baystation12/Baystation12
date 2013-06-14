@@ -7,7 +7,7 @@
 	item_state = "bolt"
 	flags =  FPRINT | TABLEPASS
 	throwforce = 12
-	w_class = 2.0
+	w_class = 3.0
 	sharp = 1
 
 /obj/item/weapon/arrow/proc/removed() //Helper for metal rods falling apart..
@@ -33,7 +33,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "crossbow"
 	item_state = "crossbow-solid"
-	w_class = 4.0
+	w_class = 5.0
 	flags =  FPRINT | TABLEPASS | CONDUCT |  USEDELAY
 	slot_flags = SLOT_BELT | SLOT_BACK
 
@@ -59,6 +59,7 @@
 			var/obj/item/stack/rods/R = W
 			R.use(1)
 			arrow = new /obj/item/weapon/arrow/rod(src)
+			arrow.fingerprintslast = src.fingerprintslast
 			arrow.loc = src
 			user.visible_message("[user] haphazardly jams [arrow] into [src].","You jam [arrow] into [src].")
 			if(cell)
@@ -155,6 +156,10 @@
 
 	else if(target == user)
 		return
+
+	if(!tension)
+		user << "You haven't drawn back the bolt!"
+		return 0
 
 	if (!arrow)
 		user << "You have no arrow nocked to [src]!"
