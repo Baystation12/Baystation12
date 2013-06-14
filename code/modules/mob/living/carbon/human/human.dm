@@ -1154,7 +1154,7 @@ mob/living/carbon/human/verb/yank_out_object()
 		src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected] with bloody fingers.</span>"
 		bloody_hands(S)
 
-		if(!do_after(80))
+		if(!do_after(U, 80))
 			return
 
 		if(!selection || !affected || !S || !U)
@@ -1193,7 +1193,7 @@ mob/living/carbon/human/verb/yank_out_object()
 		U << "<span class='warning'>You attempt to get a good grip on the [selection] in [S]'s [affected] with bloody fingers.</span>"
 		U.bloody_hands(S)
 
-		if(!do_after(80))
+		if(!do_after(U, 80))
 			return
 
 		if(!selection || !affected || !S || !U)
