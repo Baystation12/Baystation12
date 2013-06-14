@@ -61,6 +61,7 @@
 			arrow = new /obj/item/weapon/arrow/rod(src)
 			arrow.fingerprintslast = src.fingerprintslast
 			arrow.loc = src
+			icon_state = "crossbow-nocked"
 			user.visible_message("[user] haphazardly jams [arrow] into [src].","You jam [arrow] into [src].")
 			if(cell)
 				if(cell.charge >= 500)
