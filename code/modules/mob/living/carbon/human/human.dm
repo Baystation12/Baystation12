@@ -1154,24 +1154,26 @@ mob/living/carbon/human/verb/yank_out_object()
 		src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected] with bloody fingers.</span>"
 		bloody_hands(S)
 
-		do_after(80)
-			if(!selection || !affected || !S || !U)
-				return
+		if(!do_after(80))
+			return
 
-			visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
-			selection.loc = get_turf(src)
-			affected.implants -= selection
-			shock_stage+=10
+		if(!selection || !affected || !S || !U)
+			return
 
-			for(var/obj/item/weapon/O in pinned)
-				if(O == selection)
-					pinned -= O
-					anchored = 0
+		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
+		selection.loc = get_turf(src)
+		affected.implants -= selection
+		shock_stage+=10
 
-			if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
-				var/datum/wound/internal_bleeding/I = new (15)
-				affected.wounds += I
-				custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+		for(var/obj/item/weapon/O in pinned)
+			if(O == selection)
+				pinned -= O
+				anchored = 0
+
+		if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
+			var/datum/wound/internal_bleeding/I = new (15)
+			affected.wounds += I
+			custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
 		return 1
 
 	else // Removing something from someone else.
@@ -1191,24 +1193,26 @@ mob/living/carbon/human/verb/yank_out_object()
 		U << "<span class='warning'>You attempt to get a good grip on the [selection] in [S]'s [affected] with bloody fingers.</span>"
 		U.bloody_hands(S)
 
-		do_after(80)
-			if(!selection || !affected || !S || !U)
-				return
+		if(!do_after(80))
+			return
 
-			visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected] in a welter of blood.</b></span>","<span class='warning'><b>[src] rips [selection] out of your [affected] in a welter of blood.</b></span>")
-			selection.loc = get_turf(usr)
-			affected.implants -= selection
-			src.shock_stage+=10
+		if(!selection || !affected || !S || !U)
+			return
 
-			for(var/obj/item/weapon/O in S.pinned)
-				if(O == selection)
-					S.pinned -= O
-					S.anchored = 0
+		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected] in a welter of blood.</b></span>","<span class='warning'><b>[src] rips [selection] out of your [affected] in a welter of blood.</b></span>")
+		selection.loc = get_turf(usr)
+		affected.implants -= selection
+		src.shock_stage+=10
 
-			if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
-				var/datum/wound/internal_bleeding/I = new (15)
-				affected.wounds += I
-				custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+		for(var/obj/item/weapon/O in S.pinned)
+			if(O == selection)
+				S.pinned -= O
+				S.anchored = 0
+
+		if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
+			var/datum/wound/internal_bleeding/I = new (15)
+			affected.wounds += I
+			custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
 		return 1
 
 /mob/living/carbon/human/proc/get_visible_implants(var/class = 0)
