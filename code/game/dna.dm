@@ -548,7 +548,17 @@
 			sleep(48)
 			del(animation)
 
-		var/mob/living/carbon/monkey/O = new(src)
+
+		var/mob/living/carbon/monkey/O = null
+		switch(M.dna.mutantrace)
+			if("tajaran")
+				O = new /mob/living/carbon/monkey/tajara(src)
+			if("lizard")
+				O = new /mob/living/carbon/monkey/unathi(src)
+			if("skrell")
+				O = new /mob/living/carbon/monkey/skrell(src)
+			else
+				O = new /mob/living/carbon/monkey(src)
 
 		if(M)
 			if (M.dna)
