@@ -1113,9 +1113,9 @@
 		del(feet_blood_DNA)
 		return 1
 
-mob/living/carbon/human/verb/yank_out_object_test()
+mob/living/carbon/human/verb/yank_out_object()
 	set category = "IC"
-	set name = "Yank out object (test)"
+	set name = "Yank out object"
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
@@ -1154,7 +1154,10 @@ mob/living/carbon/human/verb/yank_out_object_test()
 		src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected] with bloody fingers.</span>"
 		bloody_hands(S)
 
-		spawn(80)
+		do_after(80)
+			if(!selection || !affected || !S || !U)
+				return
+
 			visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
 			selection.loc = get_turf(src)
 			affected.implants -= selection
@@ -1188,7 +1191,10 @@ mob/living/carbon/human/verb/yank_out_object_test()
 		U << "<span class='warning'>You attempt to get a good grip on the [selection] in [S]'s [affected] with bloody fingers.</span>"
 		U.bloody_hands(S)
 
-		spawn(80)
+		do_after(80)
+			if(!selection || !affected || !S || !U)
+				return
+
 			visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected] in a welter of blood.</b></span>","<span class='warning'><b>[src] rips [selection] out of your [affected] in a welter of blood.</b></span>")
 			selection.loc = get_turf(usr)
 			affected.implants -= selection
