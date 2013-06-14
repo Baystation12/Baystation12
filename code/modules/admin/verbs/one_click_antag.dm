@@ -462,8 +462,8 @@ client/proc/one_click_antag()
 			candidates.Remove(G)
 
 	if(candidates.len)
-		var/raiders = 1
-		//Spawns vox raiders and equips them. Two raiders, two engineers.
+		var/raiders = 4
+		//Spawns vox raiders and equips them.
 		for (var/obj/effect/landmark/L in world)
 			if(L.name == "Response Team")
 				if(raiders<=0)
