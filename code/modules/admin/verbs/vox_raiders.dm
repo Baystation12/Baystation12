@@ -5,8 +5,8 @@
 	equip_to_slot_or_del(R, slot_ears)
 
 	equip_to_slot_or_del(new /obj/item/clothing/under/vox/vox_robes(src), slot_w_uniform)
-	equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(src), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
-	equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(src), slot_gloves) // AS ABOVE.
+	equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(src), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
+	equip_to_slot_or_del(new /obj/item/clothing/gloves/yellow/vox(src), slot_gloves) // AS ABOVE.
 
 	switch(rand(1,4)) // Come up with a better way of doing this - ticker of some sort maybe.
 		if(1) // Vox raider!

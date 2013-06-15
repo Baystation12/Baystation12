@@ -517,9 +517,7 @@ client/proc/one_click_antag()
 	new_vox.mind.assigned_role = "MODE"
 	new_vox.mind.special_role = "Vox Raider"
 
-	//Adds them to current traitor list. Which is really the extra antagonist list.
 	ticker.mode.traitors += new_vox.mind
 	new_vox.equip_vox_raider()
 
-	usr << "\red Returning vox."
 	return new_vox

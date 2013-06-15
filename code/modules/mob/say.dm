@@ -81,7 +81,7 @@
 	if (is_speaking_tajaran)
 		return "<span class='say_quote'>mrowls</span>, \"<span class='tajaran'>[text]</span>\"";
 	if (is_speaking_vox)
-		return "<span class='say_quote'>chirps</span>, \"<span class='vox'>[text]</span>\"";
+		return "<span class='say_quote'>shrieks</span>, \"<span class='vox'>[text]</span>\"";
 //Needs Virus2
 //	if (src.disease_symptoms & DISEASE_HOARSE)
 //		return "rasps, \"[text]\"";
