@@ -45,7 +45,7 @@
 		if(istype(tmob, /mob/living/carbon/human))
 
 			for(var/mob/M in range(tmob, 1))
-				if( ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
+				if(tmob.pinned.len ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, tmob.grabbed_by.len)) )
 					if ( !(world.time % 5) )
 						src << "\red [tmob] is restrained, you cannot push past"
 					now_pushing = 0
@@ -1119,51 +1119,107 @@
 		del(feet_blood_DNA)
 		return 1
 
-/mob/living/carbon/human/verb/yank_out_object()
+mob/living/carbon/human/verb/yank_out_object()
+	set category = "IC"
 	set name = "Yank out object"
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
-	set category = "Object"
+	set src in view(1)
 
 	if(!isliving(usr) || usr.next_move > world.time)
 		return
 	usr.next_move = world.time + 20
 
-	var/list/valid_objects = get_visible_implants(1)
+	if(usr.stat == 1)
+		usr << "You are unconcious and cannot do that!"
+		return
+
+	if(usr.restrained())
+		usr << "You are restrained and cannot do that!"
+		return
+
+//	/*
+	var/list/valid_objects = list()
 	var/datum/organ/external/affected = null
+	var/mob/living/carbon/human/S = src
+	var/mob/living/carbon/human/U = usr
 
-	if(!valid_objects.len)
-		src << "You have nothing stuck in your wounds that is large enough to remove without surgery."
-		return
+	if(S == U) // Removing something from yourself.
+		valid_objects = get_visible_implants(1)
 
-	if(src.stat == 1)
-		src << "You are unconcious and cannot do that!"
-		return
+		if(!valid_objects.len)
+			src << "You have nothing stuck in your wounds that is large enough to remove without surgery."
+			return
 
-	if(src.restrained())
-		src << "You are restrained and cannot do that!"
-		return
+		var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
 
-	var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
+		for(var/datum/organ/external/organ in organs) //Grab the organ holding the implant. Messy as Hell, TBD: fix.
+			for(var/obj/item/weapon/O in organ.implants)
+				if(O == selection)
+					affected = organ
 
-	for(var/datum/organ/external/organ in src.organs) //Grab the organ holding the implant. Messy as Hell, TBD: fix.
-		for(var/obj/item/weapon/O in organ.implants)
-			if(O == selection)
-				affected = organ
+		src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected] with bloody fingers.</span>"
+		bloody_hands(S)
 
-	src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected] with bloody fingers.</span>"
-	bloody_hands(src)
+		if(!do_after(U, 80))
+			return
 
-	spawn(80)
+		if(!selection || !affected || !S || !U)
+			return
+
 		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
 		selection.loc = get_turf(src)
 		affected.implants -= selection
 		shock_stage+=10
 
+		for(var/obj/item/weapon/O in pinned)
+			if(O == selection)
+				pinned -= O
+				anchored = 0
+
 		if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
 			var/datum/wound/internal_bleeding/I = new (15)
 			affected.wounds += I
-			src.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
-	return 1
+			custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+		return 1
+
+	else // Removing something from someone else.
+		valid_objects = src.get_visible_implants(1)
+
+		if(!valid_objects.len)
+			U << "[src] has nothing stuck in their wounds that is large enough to remove without surgery."
+			return
+
+		var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
+
+		for(var/datum/organ/external/organ in src.organs) //Grab the organ holding the implant. Messy as Hell, TBD: fix.
+			for(var/obj/item/weapon/O in organ.implants)
+				if(O == selection)
+					affected = organ
+
+		U << "<span class='warning'>You attempt to get a good grip on the [selection] in [S]'s [affected] with bloody fingers.</span>"
+		U.bloody_hands(S)
+
+		if(!do_after(U, 80))
+			return
+
+		if(!selection || !affected || !S || !U)
+			return
+
+		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected] in a welter of blood.</b></span>","<span class='warning'><b>[src] rips [selection] out of your [affected] in a welter of blood.</b></span>")
+		selection.loc = get_turf(usr)
+		affected.implants -= selection
+		src.shock_stage+=10
+
+		for(var/obj/item/weapon/O in S.pinned)
+			if(O == selection)
+				S.pinned -= O
+				S.anchored = 0
+
+		if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
+			var/datum/wound/internal_bleeding/I = new (15)
+			affected.wounds += I
+			custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+		return 1
 
 /mob/living/carbon/human/proc/get_visible_implants(var/class = 0)
 

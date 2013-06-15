@@ -792,9 +792,6 @@ datum/preferences
 							if(is_alien_whitelisted(user, "Skrell")) //Check for Skrell and admins
 								new_species += "Skrell"
 								whitelisted = 1
-							if(is_alien_whitelisted(user, "Vox")) //Check for Vox and admins
-								new_species += "Vox"
-								whitelisted = 1
 							if(is_alien_whitelisted(user, "Kidan")) // Check for Kidan and admins
 								new_species += "Kidan"
 								whitelisted = 1
@@ -806,7 +803,6 @@ datum/preferences
 							new_species += "Tajaran"
 							new_species += "Unathi"
 							new_species += "Skrell"
-							new_species += "Vox"
 							new_species += "Kidan"
 						species = input("Please select a species", "Character Generation", null) in new_species
 
