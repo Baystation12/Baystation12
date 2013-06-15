@@ -211,7 +211,7 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 		ninja_selection_active = 0
 
 		//The ninja will be created on the right spawn point or at late join.
-		var/mob/living/carbon/human/new_ninja = create_space_ninja(pick(spawn_list.len ? spawn_list : latejoin ))
+		var/mob/living/carbon/human/new_ninja = create_space_ninja(pick(ninjastart))
 		new_ninja.key = ninja_key
 		new_ninja.wear_suit:randomize_param()//Give them a random set of suit parameters.
 		new_ninja.internal = new_ninja.s_store //So the poor ninja has something to breath when they spawn in spess.
@@ -491,8 +491,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 //=======//NINJA CREATION PROCS//=======//
 
-/proc/create_space_ninja(obj/spawn_point)
-	var/mob/living/carbon/human/new_ninja = new(spawn_point.loc)
+/proc/create_space_ninja(var/loc/spawnpoint)
+	var/mob/living/carbon/human/new_ninja = new(spawnpoint)
 	var/ninja_title = pick(ninja_titles)
 	var/ninja_name = pick(ninja_names)
 	new_ninja.gender = pick(MALE, FEMALE)
