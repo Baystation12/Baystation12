@@ -349,12 +349,8 @@
 			if(is_alien_whitelisted(src, "Skrell"|| !config.usealienwhitelist))
 				new_character.dna.mutantrace = "skrell"
 				new_character.skrell_talk_understand = 1
-		if(client.prefs.species == "Vox")
-			if(is_alien_whitelisted(src, "Vox"|| !config.usealienwhitelist))
-				new_character.dna.mutantrace = "vox"
-				new_character.vox_talk_understand = 1
 		if(client.prefs.species == "Kidan")
-			if(is_alien_whitelisted(src, "Vox"|| !config.usealienwhitelist))
+			if(is_alien_whitelisted(src, "Kidan"|| !config.usealienwhitelist))
 				new_character.dna.mutantrace = "kidan"
 				new_character.kidan_talk_understand = 1
 

@@ -105,3 +105,55 @@
 	icon_state = "vox-casual-2"
 	color = "vox-casual-2"
 	item_state = "vox-casual-2"
+
+/obj/item/clothing/gloves/yellow/vox
+	desc = "These bizarre gauntlets seem to be fitted for... bird claws?"
+	name = "insulated gauntlets"
+	icon_state = "gloves-vox"
+	item_state = "gloves-vox"
+	siemens_coefficient = 0
+	permeability_coefficient = 0.05
+	color="gloves-vox"
+
+/obj/item/clothing/gloves/yellow/vox/mob_can_equip(M as mob, slot)
+	var/mob/living/carbon/human/U = M
+	if(U.dna.mutantrace != "vox")
+		U << "<span class='warning'>This clearly isn't designed for your species!</span>"
+		return 0
+	return ..()
+
+/obj/item/clothing/shoes/magboots/vox
+
+	desc = "A pair of heavy, jagged armoured foot pieces, seemingly suitable for a velociraptor."
+	name = "vox boots"
+	item_state = "boots-vox"
+	icon_state = "boots-vox"
+
+	toggle()
+		name = "Toggle Floor Grip"
+
+		if(src.magpulse)
+			src.flags &= ~NOSLIP
+			src.magpulse = 0
+			usr << "You relax your deathgrip on the flooring."
+		else
+			src.flags |= NOSLIP
+			src.magpulse = 1
+			usr << "You dig your claws deeply into the flooring, bracing yourself."
+
+
+	examine()
+		set src in view()
+		..()
+		var/state = "loosely"
+		if(src.flags&NOSLIP)
+			state = "tightly"
+		usr << "The wearer seems to be gripping the floor [state]."
+
+
+/obj/item/clothing/shoes/magboots/vox/mob_can_equip(M as mob, slot)
+	var/mob/living/carbon/human/U = M
+	if(U.dna.mutantrace != "vox")
+		U << "<span class='warning'>This clearly isn't designed for your species!</span>"
+		return 0
+	return ..()
