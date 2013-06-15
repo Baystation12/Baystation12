@@ -13,6 +13,15 @@
 /obj/item/weapon/arrow/proc/removed() //Helper for metal rods falling apart..
 	return
 
+/obj/item/weapon/arrow/quill
+
+	name = "vox quill"
+	desc = "A wickedly barbed quill from some bizarre animal."
+	icon = 'icons/mob/vox.dmi'
+	icon_state = "quill"
+	item_state = "quill"
+	throwforce = 15
+
 /obj/item/weapon/arrow/rod
 
 	name = "metal rod"
