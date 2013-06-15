@@ -69,7 +69,7 @@
 		return 1
 	return 0
 
-/mob/proc/say_quote(var/text,var/is_speaking_soghun,var/is_speaking_skrell,var/is_speaking_tajaran,var/is_speaking_vox)
+/mob/proc/say_quote(var/text,var/is_speaking_soghun,var/is_speaking_skrell,var/is_speaking_tajaran,var/is_speaking_vox,var/is_speaking_kidan)
 	if(!text)
 		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 		//tcomms code is still runtiming somewhere here
@@ -81,7 +81,9 @@
 	if (is_speaking_tajaran)
 		return "<span class='say_quote'>mrowls</span>, \"<span class='tajaran'>[text]</span>\"";
 	if (is_speaking_vox)
-		return "<span class='say_quote'>shrieks</span>, \"<span class='vox'>[text]</span>\"";
+		return "<span class='say_quote'>chirps</span>, \"<span class='vox'>[text]</span>\"";
+	if (is_speaking_kidan)
+		return "<span class='say_quote'>chitters</span>, \"<span class='kidan'>[text]</span>\"";
 //Needs Virus2
 //	if (src.disease_symptoms & DISEASE_HOARSE)
 //		return "rasps, \"[text]\"";
