@@ -4,7 +4,7 @@
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "pneumatic"
 	item_state = "pneumatic"
-	w_class = 4.0
+	w_class = 5.0
 	flags =  FPRINT | TABLEPASS | CONDUCT |  USEDELAY
 	slot_flags = SLOT_BELT
 	max_w_class = 3

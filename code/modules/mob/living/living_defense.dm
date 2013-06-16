@@ -61,7 +61,7 @@
 	P.on_hit(src, absorb)
 	return absorb
 
-/mob/living/hitby(atom/movable/AM as mob|obj,var/speed)//Standardization and logging -Sieve
+/mob/living/hitby(atom/movable/AM as mob|obj,var/speed = 5)//Standardization and logging -Sieve
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 		var/zone = ran_zone("chest",75)//Hits a random part of the body, geared towards the chest
@@ -73,11 +73,49 @@
 		var/armor = run_armor_check(zone, "melee", "Your armor has protected your [zone].", "Your armor has softened hit to your [zone].")
 		if(armor < 2)
 			apply_damage(O.throwforce*(speed/5), dtype, zone, armor, O.sharp, O)
+
 		if(!O.fingerprintslast)
 			return
+
 		var/client/assailant = directory[ckey(O.fingerprintslast)]
 		if(assailant && assailant.mob && istype(assailant.mob,/mob))
 			var/mob/M = assailant.mob
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with [O], last touched by [M.name] ([assailant.ckey])</font>")
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Hit [src.name] ([src.ckey]) with [O]</font>")
 			log_attack("<font color='red'>[src.name] ([src.ckey]) was hit by [O], last touched by [M.name] ([assailant.ckey])</font>")
+
+			// Begin BS12 momentum-transfer code.
+
+			if(speed >= 20)
+				var/obj/item/weapon/W = O
+				var/momentum = speed/2
+				var/dir = get_dir(M,src)
+				visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
+
+				src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+
+				if(near_wall(dir,2) && W.w_class >= 3 && W.sharp) //If they're close to a wall and the projectile is suitable.
+					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
+					if(!istype(src,/mob/living/carbon/human))
+						O.loc = src
+						src.embedded += O
+						src.anchored = 1
+						src.pinned += O
+					else
+						src.anchored = 1
+						src.pinned += O
+
+
+/mob/living/proc/near_wall(var/direction,var/distance=1)
+	var/turf/T = get_step(get_turf(src),direction)
+	var/i = 1
+	while(i>0 && i<=distance)
+		if(T.density) //Turf is a wall!
+			return 1
+		i++
+		T = get_step(T,direction)
+
+	return 0
+
+
+// End BS12 momentum-transfer code.

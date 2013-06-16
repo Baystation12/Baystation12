@@ -6,12 +6,21 @@
 	icon_state = "bolt"
 	item_state = "bolt"
 	flags =  FPRINT | TABLEPASS
-	throwforce = 12
-	w_class = 2.0
+	throwforce = 8
+	w_class = 3.0
 	sharp = 1
 
-/obj/item/weapon/arrow/proc/removed() //Helper for metal rods falling apart..
+/obj/item/weapon/arrow/proc/removed() //Helper for metal rods falling apart.
 	return
+
+/obj/item/weapon/arrow/quill
+
+	name = "vox quill"
+	desc = "A wickedly barbed quill from some bizarre animal."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "quill"
+	item_state = "quill"
+	throwforce = 5
 
 /obj/item/weapon/arrow/rod
 
@@ -20,7 +29,7 @@
 	icon_state = "metal-rod"
 
 /obj/item/weapon/arrow/rod/removed(mob/user)
-	if(throwforce == 20) // The rod has been superheated - we don't want it to be useable when removed from the bow.
+	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
 		user  << "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow."
 		var/obj/item/weapon/shard/shrapnel/S = new()
 		S.loc = get_turf(src)
@@ -33,7 +42,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "crossbow"
 	item_state = "crossbow-solid"
-	w_class = 4.0
+	w_class = 5.0
 	flags =  FPRINT | TABLEPASS | CONDUCT |  USEDELAY
 	slot_flags = SLOT_BELT | SLOT_BACK
 
@@ -59,14 +68,16 @@
 			var/obj/item/stack/rods/R = W
 			R.use(1)
 			arrow = new /obj/item/weapon/arrow/rod(src)
+			arrow.fingerprintslast = src.fingerprintslast
 			arrow.loc = src
+			icon_state = "crossbow-nocked"
 			user.visible_message("[user] haphazardly jams [arrow] into [src].","You jam [arrow] into [src].")
 			if(cell)
 				if(cell.charge >= 500)
 					user << "<span class='notice'>[arrow] plinks and crackles as it begins to glow red-hot.</span>"
-					arrow.throwforce = 20
+					arrow.throwforce = 15
 					arrow.icon_state = "metal-rod-superheated"
-
+					cell.charge -= 500
 			return
 
 	if(istype(W, /obj/item/weapon/cell))
@@ -78,7 +89,7 @@
 			if(arrow)
 				if(istype(arrow,/obj/item/weapon/arrow/rod) && cell.charge >= 500)
 					user << "<span class='notice'>[arrow] plinks and crackles as it begins to glow red-hot.</span>"
-					arrow.throwforce = 20
+					arrow.throwforce = 15
 					arrow.icon_state = "metal-rod-superheated"
 					cell.charge -= 500
 		else
@@ -155,6 +166,10 @@
 
 	else if(target == user)
 		return
+
+	if(!tension)
+		user << "You haven't drawn back the bolt!"
+		return 0
 
 	if (!arrow)
 		user << "You have no arrow nocked to [src]!"
