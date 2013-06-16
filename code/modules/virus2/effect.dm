@@ -239,6 +239,7 @@
 	name = "Topographical Cretinism"
 	stage = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
+		mob << "<span class='notice'>You have trouble telling right and left apart all of a sudden.</span>"
 		mob.confused += 10
 
 /datum/disease2/effect/mutation
@@ -306,13 +307,13 @@
 	name = "Hair Loss"
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		if(istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
+		if(istype(mob, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = mob
 			if(!(H.h_style == "Bald") && !(H.h_style == "Balding Hair"))
-			H << "<span class='danger'>Your hair starts to fall out in clumps...</span>"
-			spawn(50)
-				H.h_style = "Balding Hair"
-				H.update_hair()
+				H << "<span class='danger'>Your hair starts to fall out in clumps...</span>"
+				spawn(50)
+					H.h_style = "Balding Hair"
+					H.update_hair()
 
 /datum/disease2/effect/stimulant
 	name = "Adrenaline Extra"
@@ -320,7 +321,7 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob << "<span class='notice'>You feel a rush of energy inside you!</span>"
 		if (mob.reagents.get_reagent_amount("hyperzine") < 30)
-+          mob.reagents.add_reagent("hyperzine", 10)
+			mob.reagents.add_reagent("hyperzine", 10)
 		if (prob(30))
 			mob.jitteriness += 10
 
@@ -333,7 +334,7 @@
 		mob.say("*sneeze")
 		if (prob(50))
 			var/obj/effect/decal/cleanable/mucus/M = new(get_turf(mob))
-			M.virus2 = mob.virus2.Copy()
+			M.virus2 = get_copy_viruses(mob.virus2)
 
 /datum/disease2/effect/gunck
 	name = "Flemmingtons"
