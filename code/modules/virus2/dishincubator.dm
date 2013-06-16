@@ -14,6 +14,7 @@
 	var/foodsupply = 0
 	var/toxins = 0
 
+	var/virusing
 
 /obj/machinery/disease2/incubator/attackby(var/obj/B as obj, var/mob/user as mob)
 	if(istype(B, /obj/item/weapon/reagent_containers/glass) || istype(B,/obj/item/weapon/reagent_containers/syringe))
@@ -74,6 +75,22 @@
 		toxins = 0
 		foodsupply = 0
 
+	if(href_list["virus"])
+		if (!dish)
+			state("\The [src.name] buzzes, \"No viral culture sample detected.\"", "blue")
+			return
+
+		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in beaker.reagents.reagent_list
+		if (!B)
+			state("\The [src.name] buzzes, \"No suitable breeding enviroment detected.\"", "blue")
+			return
+
+		var/list/virus = list(dish.virus2.getcopy())
+		B.data["virus2"] |= virus
+
+		state("\The [src.name] pings, \"Injection complete.\"", "blue")
+
+
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()
 
@@ -101,6 +118,9 @@
 	if(dish)
 		dat += "Eject Virus dish : <A href='?src=\ref[src];ejectdish=1'> Eject</a>"
 		dat += "<BR>"
+		if(beaker)
+			dat += "Breed viral culture in beaker : <A href='?src=\ref[src];virus=1'> Start</a>"
+			dat += "<BR>"
 	dat += "<BR><BR>"
 	dat += "<A href='?src=\ref[src];flush=1'>Flush system</a><BR>"
 	dat += "<A href='?src=\ref[src];close=1'>Close</A><BR>"
