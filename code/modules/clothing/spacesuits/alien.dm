@@ -1,6 +1,20 @@
 /obj/item/clothing/head/helmet/space/unathi
 
 	var/up = 0 //So Unathi helmets play nicely with the weldervision check.
+	mob_can_equip(M as mob, slot)
+		var/mob/living/carbon/human/U = M
+		if(U.dna.mutantrace != "lizard")
+			U << "<span class='warning'>This clearly isn't designed for your species!</span>"
+			return 0
+		return ..()
+
+/obj/item/clothing/suit/space/unathi/mob_can_equip(M as mob, slot)
+	var/mob/living/carbon/human/U = M
+	if(U.dna.mutantrace != "lizard")
+		U << "<span class='warning'>This clearly isn't designed for your species!</span>"
+		return 0
+
+	return ..()
 
 /obj/item/clothing/head/helmet/space/unathi/helmet_cheap
 	name = "NT breacher helmet"
@@ -39,9 +53,11 @@
 	item_state = "vox-pressure"
 	desc = "A huge, armoured, pressurized suit, designed for distinctly nonhuman proportions."
 	w_class = 3
-	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
+	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank)
 	slowdown = 2
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
+	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
 
 /obj/item/clothing/head/helmet/space/vox/carapace
 	name = "alien visor"
@@ -49,6 +65,7 @@
 	item_state = "vox-carapace"
 	desc = "A glowing visor, perhaps stolen from a depressed Cylon."
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 30, rad = 30)
+	flags = HEADCOVERSEYES|STOPSPRESSUREDMAGE
 
 /obj/item/clothing/suit/space/vox/carapace
 	name = "alien carapace armour"
@@ -56,7 +73,7 @@
 	item_state = "vox-carapace"
 	desc = "An armoured, segmented carapace with glowing purple lights. It looks pretty run-down."
 	w_class = 3
-	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
+	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank)
 	slowdown = 1
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 

@@ -22,7 +22,6 @@ emp_act
 				var/obj/item/clothing/C = bp // Then call an argument C to be that clothing!
 				if(C.body_parts_covered & select_area.body_part) // Is that body part being targeted covered?
 					P.agony=P.agony*C.siemens_coefficient
-					visible_message("\red [src]'s [C.name] absorbs some of the shock from the [P.name]!</B></red>")
 		apply_effect(P.agony,AGONY,0)
 		del P
 					/* Commenting out new-old taser nerf.
@@ -171,7 +170,7 @@ emp_act
 	if(armor >= 2)	return 0
 	if(!I.force)	return 0
 
-	apply_damage(I.force, I.damtype, affecting, armor , is_sharp(I), I.name)
+	apply_damage(I.force, I.damtype, affecting, armor , is_sharp(I), I)
 
 	var/bloody = 0
 	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (I.force * 2)))

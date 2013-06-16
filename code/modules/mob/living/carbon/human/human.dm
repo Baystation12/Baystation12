@@ -817,6 +817,8 @@
 				return "Mobile vegetation"
 			if("golem")
 				return "Animated Construct"
+			if("kidan")
+				return "Kidan"
 			else
 				return "Human"
 
@@ -829,7 +831,9 @@
 		else if(src.dna.mutantrace == "tajaran")
 			return "Tajaran"
 		else if(src.dna.mutantrace == "vox")
-			return "vox"
+			return "Vox"
+		else if(src.dna.mutantrace == "kidan")
+			return "Kidan"
 
 /mob/living/carbon/proc/update_mutantrace_languages()
 	if(src.dna)
@@ -841,6 +845,8 @@
 			src.tajaran_talk_understand = 1
 		else if(src.dna.mutantrace == "vox")
 			src.vox_talk_understand = 1
+		else if(src.dna.mutantrace == "kidan")
+			src.kidan_talk_understand = 1
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
@@ -1112,3 +1118,79 @@
 	if(istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
 		del(feet_blood_DNA)
 		return 1
+
+/mob/living/carbon/human/verb/yank_out_object()
+	set name = "Yank out object"
+	set desc = "Remove an embedded item at the cost of bleeding and pain."
+	set category = "Object"
+
+	if(!isliving(usr) || usr.next_move > world.time)
+		return
+	usr.next_move = world.time + 20
+
+	var/list/valid_objects = get_visible_implants(1)
+	var/datum/organ/external/affected = null
+
+	if(!valid_objects.len)
+		src << "You have nothing stuck in your wounds that is large enough to remove without surgery."
+		return
+
+	if(src.stat == 1)
+		src << "You are unconcious and cannot do that!"
+		return
+
+	if(src.restrained())
+		src << "You are restrained and cannot do that!"
+		return
+
+	var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
+
+	for(var/datum/organ/external/organ in src.organs) //Grab the organ holding the implant. Messy as Hell, TBD: fix.
+		for(var/obj/item/weapon/O in organ.implants)
+			if(O == selection)
+				affected = organ
+
+	src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected] with bloody fingers.</span>"
+	bloody_hands(src)
+
+	spawn(80)
+		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
+		selection.loc = get_turf(src)
+		affected.implants -= selection
+		shock_stage+=10
+
+		if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
+			var/datum/wound/internal_bleeding/I = new (15)
+			affected.wounds += I
+			src.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+	return 1
+
+/mob/living/carbon/human/proc/get_visible_implants(var/class = 0)
+
+	var/list/visible_implants = list()
+	for(var/datum/organ/external/organ in src.organs)
+		for(var/obj/item/weapon/O in organ.implants)
+			if(!istype(O,/obj/item/weapon/implant) && O.w_class > class)
+				visible_implants += O
+
+	return(visible_implants)
+
+/mob/living/carbon/human/proc/handle_embedded_objects()
+
+	for(var/datum/organ/external/organ in src.organs)
+		for(var/obj/item/weapon/O in organ.implants)
+			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
+				// All kinds of embedded objects cause bleeding.
+				var/msg = null
+				switch(rand(1,3))
+					if(1)
+						msg ="<span class='warning'>A spike of pain jolts your [organ] as you bump [O] inside.</span>"
+					if(2)
+						msg ="<span class='warning'>Your movement jostles [O] in your [organ] painfully.</span>"
+					if(3)
+						msg ="<span class='warning'>[O] in your [organ] twists painfully as you move.</span>"
+				src << msg
+
+				organ.status |= ORGAN_BLEEDING
+				organ.take_damage(rand(1,3), 0, 0)
+				src.adjustToxLoss(rand(1,3))
