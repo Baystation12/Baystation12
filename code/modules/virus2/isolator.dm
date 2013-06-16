@@ -39,11 +39,13 @@
 			if(B)
 				Blood = B
 				break
-
-		if(Blood.data["virus2"])
-			virus2 = Blood.data["virus2"]
-			isolating = 40
-			icon_state = "isolator_processing"
+		var/list/virus = get_copy_viruses(Blood.data["virus2"])
+		var/choice = text2num(href_list["isolate"]);
+		for (var/datum/disease2/disease/V in virus)
+			if (V.uniqueID == choice)
+				virus2 = virus
+				isolating = 40
+				icon_state = "isolator_processing"
 		src.updateUsrDialog()
 		return
 
@@ -76,7 +78,9 @@
 			dat += "Contained reagents:<BR>"
 			for(var/datum/reagent/blood/G in R.reagent_list)
 				if(G.data["virus2"])
-					dat += "    [G.name]: <A href='?src=\ref[src];isolate=[G.id]'>Isolate</a>"
+					var/list/virus = G.data["virus2"]
+					for (var/datum/disease2/disease/V in virus)
+						dat += " <br>  [G.name]: <A href='?src=\ref[src];isolate=[V.uniqueID]'>Isolate pathogen #[V.uniqueID]</a>"
 				else
 					dat += "    <b>No pathogen</b>"
 	user << browse("<TITLE>Pathogenic Isolator</TITLE>Isolator menu:<BR><BR>[dat]", "window=isolator;size=575x400")
