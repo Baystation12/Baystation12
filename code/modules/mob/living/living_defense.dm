@@ -86,7 +86,7 @@
 
 			// Begin BS12 momentum-transfer code.
 
-			if(speed > 20)
+			if(speed >= 20)
 				var/obj/item/weapon/W = O
 				var/momentum = speed/2
 				var/dir = get_dir(M,src)

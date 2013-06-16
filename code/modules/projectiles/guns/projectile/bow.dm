@@ -6,7 +6,7 @@
 	icon_state = "bolt"
 	item_state = "bolt"
 	flags =  FPRINT | TABLEPASS
-	throwforce = 12
+	throwforce = 8
 	w_class = 3.0
 	sharp = 1
 
@@ -20,7 +20,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "quill"
 	item_state = "quill"
-	throwforce = 15
+	throwforce = 5
 
 /obj/item/weapon/arrow/rod
 
@@ -29,7 +29,7 @@
 	icon_state = "metal-rod"
 
 /obj/item/weapon/arrow/rod/removed(mob/user)
-	if(throwforce == 20) // The rod has been superheated - we don't want it to be useable when removed from the bow.
+	if(throwforce == 15) // The rod has been superheated - we don't want it to be useable when removed from the bow.
 		user  << "[src] shatters into a scattering of overstressed metal shards as it leaves the crossbow."
 		var/obj/item/weapon/shard/shrapnel/S = new()
 		S.loc = get_turf(src)
@@ -75,7 +75,7 @@
 			if(cell)
 				if(cell.charge >= 500)
 					user << "<span class='notice'>[arrow] plinks and crackles as it begins to glow red-hot.</span>"
-					arrow.throwforce = 20
+					arrow.throwforce = 15
 					arrow.icon_state = "metal-rod-superheated"
 					cell.charge -= 500
 			return
@@ -89,7 +89,7 @@
 			if(arrow)
 				if(istype(arrow,/obj/item/weapon/arrow/rod) && cell.charge >= 500)
 					user << "<span class='notice'>[arrow] plinks and crackles as it begins to glow red-hot.</span>"
-					arrow.throwforce = 20
+					arrow.throwforce = 15
 					arrow.icon_state = "metal-rod-superheated"
 					cell.charge -= 500
 		else
