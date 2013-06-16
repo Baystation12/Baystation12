@@ -596,8 +596,6 @@ var/list/slot_equipment_priority = list( \
 			M.LAssailant = null
 		else
 			M.LAssailant = usr
-		if (M.pinned.len)
-			usr << "They're pinned, gtfo."
 			return
 
 	if(pulling)
