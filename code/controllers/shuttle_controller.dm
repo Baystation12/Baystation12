@@ -67,6 +67,7 @@ datum/shuttle_controller
 				captain_announce("The shuttle has been recalled.")
 				setdirection(-1)
 				online = 1
+				alert = 0 // set alert back to 0 after an admin recall
 				return
 
 	// returns the time (in seconds) before shuttle arrival
