@@ -67,9 +67,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggledebuglogs,
 	/datum/admins/proc/show_skills,
 	/client/proc/check_customitem_activity,
-	/* Currently unticked.
-	/client/proc/response_team
-	*/
+	///client/proc/response_team
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -649,7 +647,7 @@ var/list/admin_verbs_mod = list(
 	if(!istype(M, /mob/living/carbon/human))
 		usr << "\red You can only do this to humans!"
 		return
-	switch(alert("Are you sure you wish to edit this mob's appearance? Skrell, Unathi, Vox and Tajaran can result in unintended consequences.",,"Yes","No"))
+	switch(alert("Are you sure you wish to edit this mob's appearance? Skrell, Unathi, Vox, Kida, and Tajara can result in unintended consequences.",,"Yes","No"))
 		if("No")
 			return
 	var/new_facial = input("Please select facial hair color.", "Character Generation") as color

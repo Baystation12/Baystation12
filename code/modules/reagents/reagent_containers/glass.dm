@@ -220,7 +220,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial
 	name = "vial"
-	desc = "Small glass vial. Can hold up to 20 units."
+	desc = "Small glass vial. Looks fragile."
 	icon_state = "vial"
 	g_amt = 500
 	volume = 15

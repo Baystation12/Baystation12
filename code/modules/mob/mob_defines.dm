@@ -206,12 +206,13 @@
 
 	//Whether or not mobs can understand other mobtypes. These stay in /mob so that ghosts can hear everything.
 	var/universal_speak = 0 // Set to 1 to enable the mob to speak to everyone -- TLE
-	var/robot_talk_understand = 0
-	var/alien_talk_understand = 0
-	var/tajaran_talk_understand = 0
-	var/soghun_talk_understand = 0
-	var/skrell_talk_understand = 0
-	var/vox_talk_understand = 0
+	var/robot_talk_understand		= 0
+	var/alien_talk_understand		= 0
+	var/tajaran_talk_understand		= 0
+	var/soghun_talk_understand		= 0
+	var/skrell_talk_understand		= 0
+	var/vox_talk_understand			= 0
+	var/kidan_talk_understand		= 0
 
 	var/has_limbs = 1 //Whether this mob have any limbs he can move with
 	var/can_stand = 1 //Whether this mob have ability to stand

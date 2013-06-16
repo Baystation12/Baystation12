@@ -284,10 +284,10 @@
 						var/internal_bleeding = ""
 						var/lung_ruptured = ""
 						for(var/datum/wound/W in e.wounds) if(W.internal)
-							internal_bleeding = "<br>Internal Bleeding"
+							internal_bleeding = "<br>Internal bleeding"
 							break
 						if(istype(e, /datum/organ/external/chest) && occupant.is_lung_ruptured())
-							lung_ruptured = "Lung Ruptured:"
+							lung_ruptured = "Lung ruptured:"
 						if(e.status & ORGAN_SPLINTED)
 							splint = "Splinted:"
 						if(e.status & ORGAN_BLEEDING)
@@ -297,7 +297,7 @@
 						if(e.open)
 							open = "Open:"
 						if(e.implants.len)
-							imp = "Implanted:"
+							imp = "Unknown body present:"
 						if(!AN && !open && !infected & !imp)
 							AN = "None:"
 						if(!(e.status & ORGAN_DESTROYED))

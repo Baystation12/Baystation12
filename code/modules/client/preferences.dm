@@ -364,7 +364,7 @@ datum/preferences
 
 		user << browse(dat, "window=preferences;size=560x580")
 
-	proc/SetChoices(mob/user, limit = 17, list/splitJobs = list("Chief Engineer"), width = 550, height = 550)
+	proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 550)
 		if(!job_master)
 			return
 
@@ -436,7 +436,7 @@ datum/preferences
 			else
 				HTML += " <font color=red>\[NEVER]</font>"
 			if(job.alt_titles)
-				HTML += "</a><br> <a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
+				HTML += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
 			HTML += "</a></td></tr>"
 
 		HTML += "</td'></tr></table>"
@@ -449,7 +449,7 @@ datum/preferences
 			if(BE_ASSISTANT)
 				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=red>Be assistant if preference unavailable</font></a></u></center><br>"
 			if(RETURN_TO_LOBBY)
-				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=purple>Return to lobby if prefernce unavailable</font></a></u></center><br>"
+				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=purple>Return to lobby if preference unavailable</font></a></u></center><br>"
 
 		HTML += "<center><a href='?_src_=prefs;preference=job;task=reset'>\[Reset\]</a></center>"
 		HTML += "</tt>"
@@ -792,18 +792,22 @@ datum/preferences
 							if(is_alien_whitelisted(user, "Skrell")) //Check for Skrell and admins
 								new_species += "Skrell"
 								whitelisted = 1
-							if(is_alien_whitelisted(user, "Vox")) //Check for Skrell and admins
+							if(is_alien_whitelisted(user, "Vox")) //Check for Vox and admins
 								new_species += "Vox"
 								whitelisted = 1
-
+							if(is_alien_whitelisted(user, "Kidan")) // Check for Kidan and admins
+								new_species += "Kidan"
+								whitelisted = 1
 
 							if(!whitelisted)
 								alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
+
 						else //Not using the whitelist? Aliens for everyone!
 							new_species += "Tajaran"
 							new_species += "Unathi"
 							new_species += "Skrell"
 							new_species += "Vox"
+							new_species += "Kidan"
 						species = input("Please select a species", "Character Generation", null) in new_species
 
 						if(prev_species != species)
