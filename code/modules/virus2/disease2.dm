@@ -118,4 +118,7 @@
 	for(var/type in types)
 		if(!(type in types2))
 			equal = 0
+
+	if (antigen != disease.antigen)
+		equal = 0
 	return equal
