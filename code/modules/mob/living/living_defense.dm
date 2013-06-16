@@ -77,8 +77,10 @@
 		if(!O.fingerprintslast)
 			return
 
+		visible_message("Debug: checking client for [O.fingerprintslast]")
 		var/client/assailant = directory[ckey(O.fingerprintslast)]
 		if(assailant && assailant.mob && istype(assailant.mob,/mob))
+			visible_message("Assailant has client: [assailant]")
 			var/mob/M = assailant.mob
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with [O], last touched by [M.name] ([assailant.ckey])</font>")
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Hit [src.name] ([src.ckey]) with [O]</font>")
@@ -96,8 +98,14 @@
 
 				if(near_wall(dir,2) && W.w_class >= 3 && W.sharp) //If they're close to a wall and the projectile is suitable.
 					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
-					src.anchored = 1
-					src.pinned += O
+					if(!istype(src,/mob/living/carbon/human))
+						O.loc = src
+						src.embedded += O
+						src.anchored = 1
+						src.pinned += O
+					else
+						src.anchored = 1
+						src.pinned += O
 
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)

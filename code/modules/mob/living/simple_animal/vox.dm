@@ -8,7 +8,7 @@
 	icon_living = "armalis"
 	maxHealth = 500
 	health = 500
-	response_harm   = "flails ineffectually at the"
+	response_harm = "flails ineffectually at the"
 	harm_intent_damage = 0
 	melee_damage_lower = 30
 	melee_damage_upper = 40
@@ -50,5 +50,35 @@
 			O << "\red [src] launches a razor-sharp quill at [target]!"
 
 	var/obj/item/weapon/arrow/quill/Q = new(loc)
-	Q.fingerprintslast = src
+	Q.fingerprintslast = src.ckey
 	Q.throw_at(target,10,15)
+
+/mob/living/simple_animal/vox/armalis/verb/message_mob()
+	set category = "Alien"
+	set name = "Commune with creature"
+	set desc = "Send a telepathic message to an unlucky recipient."
+
+	var/list/targets = list()
+	var/target = null
+	var/text = null
+
+	targets += getmobs() //Fill list, prompt user with list
+	target = input("Select a creature!", "Speak to creature", null, null) as null|anything in targets
+	text = input("What would you like to say?", "Speak to creature", null, null)
+
+	if (!target || !text)
+		return
+
+	var/mob/M = targets[target]
+
+	if(istype(M, /mob/dead/observer) || M.stat == DEAD)
+		src << "Not even the armalis can speak to the dead."
+		return
+
+	M << "\blue Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]"
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		if(H.dna.mutantrace == "vox")
+			return
+		H << "\red Your nose begins to bleed..."
+		H.drip(1)
