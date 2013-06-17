@@ -219,7 +219,11 @@ obj/structure/windoor_assembly/Del()
 						windoor.dir = src.dir
 						windoor.density = 0
 
-						windoor.req_access = src.electronics.conf_access
+						if(src.electronics.one_access)
+							windoor.req_access = null
+							windoor.req_one_access = src.electronics.conf_access
+						else
+							windoor.req_access = src.electronics.conf_access
 						windoor.electronics = src.electronics
 						src.electronics.loc = windoor
 					else
@@ -233,7 +237,11 @@ obj/structure/windoor_assembly/Del()
 						windoor.dir = src.dir
 						windoor.density = 0
 
-						windoor.req_access = src.electronics.conf_access
+						if(src.electronics.one_access)
+							windoor.req_access = null
+							windoor.req_one_access = src.electronics.conf_access
+						else
+							windoor.req_access = src.electronics.conf_access
 						windoor.electronics = src.electronics
 						src.electronics.loc = windoor
 
