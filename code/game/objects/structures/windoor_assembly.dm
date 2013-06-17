@@ -107,17 +107,17 @@ obj/structure/windoor_assembly/Del()
 						src.name = "Windoor Assembly"
 
 			//Adding plasteel makes the assembly a secure windoor assembly. Step 2 (optional) complete.
-			else if(istype(W, /obj/item/stack/sheet/plasteel) && !secure)
-				var/obj/item/stack/sheet/plasteel/P = W
-				if(P.amount < 2)
-					user << "\red You need more plasteel to do this."
+			else if(istype(W, /obj/item/stack/rods) && !secure)
+				var/obj/item/stack/rods/R = W
+				if(R.amount < 4)
+					user << "\red You need more rods to do this."
 					return
-				user << "\blue You start to reinforce the windoor with plasteel."
+				user << "\blue You start to reinforce the windoor with rods."
 
 				if(do_after(user,40))
 					if(!src) return
 
-					P.use(2)
+					R.use(4)
 					user << "\blue You reinforce the windoor."
 					src.secure = "secure_"
 					if(src.anchored)
@@ -145,7 +145,7 @@ obj/structure/windoor_assembly/Del()
 		if("02")
 
 			//Removing wire from the assembly. Step 5 undone.
-			if(istype(W, /obj/item/weapon/wirecutters))
+			if(istype(W, /obj/item/weapon/wirecutters) && !src.electronics)
 				playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 				user.visible_message("[user] cuts the wires from the airlock assembly.", "You start to cut the wires from airlock assembly.")
 
@@ -156,12 +156,12 @@ obj/structure/windoor_assembly/Del()
 					new/obj/item/weapon/cable_coil(get_turf(user), 1)
 					src.state = "01"
 					if(src.secure)
-						src.name = "Secure Wired Windoor Assembly"
+						src.name = "Secure Anchored Windoor Assembly"
 					else
-						src.name = "Wired Windoor Assembly"
+						src.name = "Anchored Windoor Assembly"
 
 			//Adding airlock electronics for access. Step 6 complete.
-			else if(istype(W, /obj/item/weapon/airlock_electronics))
+			else if(istype(W, /obj/item/weapon/airlock_electronics) && W:icon_state != "door_electronics_smoked")
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				user.visible_message("[user] installs the electronics into the airlock assembly.", "You start to install electronics into the airlock assembly.")
 
@@ -177,22 +177,20 @@ obj/structure/windoor_assembly/Del()
 					W.loc = src.loc
 
 			//Screwdriver to remove airlock electronics. Step 6 undone.
-			else if(istype(W, /obj/item/weapon/screwdriver))
+			else if(istype(W, /obj/item/weapon/screwdriver) && src.electronics)
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to uninstall electronics from the airlock assembly.")
 
 				if(do_after(user, 40))
-					if(!src) return
+					if(!src || !src.electronics) return
 					user << "\blue You've removed the airlock electronics!"
-					src.name = "Wired Windoor Assembly"
-					var/obj/item/weapon/airlock_electronics/ae
-					if (!electronics)
-						ae = new/obj/item/weapon/airlock_electronics( src.loc )
+					if(src.secure)
+						src.name = "Secure Wired Windoor Assembly"
 					else
-						ae = electronics
-						electronics = null
-						ae.loc = src.loc
-
+						src.name = "Wired Windoor Assembly"
+					var/obj/item/weapon/airlock_electronics/ae = electronics
+					electronics = null
+					ae.loc = src.loc
 
 			//Crowbar to complete the assembly, Step 7 complete.
 			else if(istype(W, /obj/item/weapon/crowbar))
