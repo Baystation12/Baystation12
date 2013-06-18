@@ -21,7 +21,6 @@
 			insults--
 		else
 			user << "\red *BZZZZcuntZZZZT*"
-			return
 	else
 		playsound(get_turf(src), 'sound/voice/halt.ogg', 100, 1, vary = 0)
 		user.visible_message("<span class='warning'>[user]'s [name] rasps, \"Halt! Security!\"</span>")
