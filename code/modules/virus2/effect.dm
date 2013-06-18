@@ -334,7 +334,7 @@
 		mob.say("*sneeze")
 		if (prob(50))
 			var/obj/effect/decal/cleanable/mucus/M = new(get_turf(mob))
-			M.virus2 = get_copy_viruses(mob.virus2)
+			M.virus2 = virus_copylist(mob.virus2)
 
 /datum/disease2/effect/gunck
 	name = "Flemmingtons"

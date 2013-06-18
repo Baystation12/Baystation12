@@ -144,4 +144,4 @@
 	icon = 'blood.dmi'
 	icon_state = "mucus"
 	random_icon_states = list("mucus")
-	var/list/datum/disease2/disease/virus2 = null
+	var/list/datum/disease2/disease/virus2 = list()

@@ -155,18 +155,23 @@
 		if(bodytemperature > 406)
 			for(var/datum/disease/D in viruses)
 				D.cure()
-			for (var/datum/disease2/disease/V in virus2)
+			for (var/ID in virus2)
+				var/datum/disease2/disease/V = virus2[ID]
 				V.cure(src)
+
 		for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
 			if(B.virus2.len && get_infection_chance(src))
-				for (var/datum/disease2/disease/V in B.virus2)
+				for (var/ID in B.virus2)
+					var/datum/disease2/disease/V = virus2[ID]
 					infect_virus2(src,V)
 		for(var/obj/effect/decal/cleanable/mucus/M in view(1,src))
 			if(M.virus2.len && get_infection_chance(src))
-				for (var/datum/disease2/disease/V in M.virus2)
+				for (var/ID in M.virus2)
+					var/datum/disease2/disease/V = virus2[ID]
 					infect_virus2(src,V)
 
-		for (var/datum/disease2/disease/V in virus2)
+		for (var/ID in virus2)
+			var/datum/disease2/disease/V = virus2[ID]
 			if(isnull(V)) // Trying to figure out a runtime error that keeps repeating
 				CRASH("virus2 nulled before calling activate()")
 			else
@@ -175,7 +180,8 @@
 			if(!V) continue
 
 			// check if we're immune
-			if(V.antigen & src.antibodies) V.dead = 1
+			if(V.antigen & src.antibodies)
+				V.dead = 1
 
 		return
 

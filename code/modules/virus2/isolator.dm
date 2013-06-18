@@ -39,7 +39,7 @@
 			if(B)
 				Blood = B
 				break
-		var/list/virus = get_copy_viruses(Blood.data["virus2"])
+		var/list/virus = virus_copylist(Blood.data["virus2"])
 		var/choice = text2num(href_list["isolate"]);
 		for (var/datum/disease2/disease/V in virus)
 			if (V.uniqueID == choice)

@@ -33,8 +33,8 @@
 /datum/disease2/disease/proc/activate(var/mob/living/carbon/mob)
 	if(dead)
 		cure(mob)
-		mob.virus2 -= src
 		return
+
 	if(mob.stat == 2)
 		return
 	if(stage <= 1 && clicks == 0) 	// with a certain chance, the mob may become immune to the disease before it starts properly
@@ -68,7 +68,7 @@
 		e.runeffect(mob,stage)
 
 	//fever
-	mob.bodytemperature += max(mob.bodytemperature, min(310+5*stage ,mob.bodytemperature+5*stage))
+	mob.bodytemperature = max(mob.bodytemperature, min(310+5*stage ,mob.bodytemperature+5*stage))
 	clicks+=speed
 
 /datum/disease2/disease/proc/cure(var/mob/living/carbon/mob)
@@ -122,3 +122,19 @@
 	if (antigen != disease.antigen)
 		equal = 0
 	return equal
+
+/proc/virus_copylist(var/list/datum/disease2/disease/viruses)
+	var/list/res = list()
+	for (var/ID in viruses)
+		var/datum/disease2/disease/V = viruses[ID]
+		res["[V.uniqueID]"] = V.getcopy()
+	return res
+/*
+/proc/virus_mergelist(var/list/datum/disease2/disease/viruses1, var/list/datum/disease2/disease/viruses2)
+	var/list/res = virus_copylist(viruses1)
+	for (var/ID in viruses2)
+		var/datum/disease2/disease/V = viruses2[ID]
+		if(!res["[V.uniqueID]"])
+			res["[V.uniqueID]"] = V.getcopy()
+	return res
+*/

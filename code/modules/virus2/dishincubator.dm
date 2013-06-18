@@ -85,8 +85,10 @@
 			state("\The [src.name] buzzes, \"No suitable breeding enviroment detected.\"", "blue")
 			return
 
-		var/list/virus = list(dish.virus2.getcopy())
-		B.data["virus2"] |= virus
+		if (!B.data["virus2"])
+			B.data["virus2"] = list()
+		var/list/virus = list("[dish.virus2.uniqueID]" = dish.virus2.getcopy())
+		B.data["virus2"] = virus
 
 		state("\The [src.name] pings, \"Injection complete.\"", "blue")
 

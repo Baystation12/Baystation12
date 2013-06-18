@@ -108,14 +108,14 @@
 		if(!B.blood_DNA[M.dna.unique_enzymes])
 			B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 		if (M.virus2.len)
-			B.virus2 |= M.virus2
+			B.virus2 |= virus_copylist(M.virus2)
 		return 1 //we bloodied the floor
 
 	//if there isn't a blood decal already, make one.
 	var/obj/effect/decal/cleanable/blood/newblood = new /obj/effect/decal/cleanable/blood(src)
 	newblood.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 	if (M.virus2.len)
-		newblood.virus2 = M.virus2.Copy()
+		newblood.virus2 |= virus_copylist(M.virus2)
 	return 1 //we bloodied the floor
 
 
@@ -125,7 +125,7 @@
 		var/obj/effect/decal/cleanable/blood/this = new /obj/effect/decal/cleanable/blood(src)
 		this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 		if (M.virus2.len)
-			this.virus2 = M.virus2.Copy()
+			this.virus2 = virus_copylist(M.virus2)
 
 	else if( istype(M, /mob/living/carbon/alien ))
 		var/obj/effect/decal/cleanable/xenoblood/this = new /obj/effect/decal/cleanable/xenoblood(src)

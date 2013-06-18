@@ -49,7 +49,7 @@ proc/airborne_can_reach(turf/source, turf/target)
 		return
 	if(!istype(M))
 		return
-	if (disease in M.virus2)
+	if ("[disease.uniqueID]" in M.virus2)
 		return
 	// if one of the antibodies in the mob's body matches one of the disease's antigens, don't infect
 	if(M.antibodies & disease.antigen != 0)
@@ -62,20 +62,20 @@ proc/airborne_can_reach(turf/source, turf/target)
 
 		var/datum/disease2/disease/D = disease.getcopy()
 		D.minormutate()
-		M.virus2 += D
+		M.virus2["[D.uniqueID]"] = D
 
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 	D.makerandom()
 	D.infectionchance = 1
-	M.virus2 += D
+	M.virus2["[D.uniqueID]"] = D
 
 //Infects mob M with random greated disease, if he doesn't have one
 /proc/infect_mob_random_greater(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 	D.makerandom(1)
-	M.virus2 += D
+	M.virus2["[D.uniqueID]"] = D
 
 //Fancy prob() function.
 /proc/dprob(var/p)
