@@ -31,7 +31,8 @@
 		/obj/machinery/disposal,
 		/obj/machinery/apiary,
 		/mob/living/simple_animal/cow,
-		/mob/living/simple_animal/hostile/retaliate/goat	)
+		/mob/living/simple_animal/hostile/retaliate/goat,
+		/obj/machinery/computer/centrifuge	)
 
 	examine()
 		set src in view()
