@@ -146,5 +146,5 @@
 	item_state = "harpoon"
 	force = 20
 	throwforce = 15
-	w_class = 2
+	w_class = 3
 	attack_verb = list("jabbed","stabbed","ripped")

@@ -470,7 +470,7 @@
 				reagents.add_reagent("plasma", Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
 		else if(O2_pp > vox_oxygen_max && src.dna.mutantrace=="vox") //Oxygen is toxic to vox.
-			var/ratio = (breath.oxygen/vox_oxygen_max) * 10
+			var/ratio = (breath.oxygen/vox_oxygen_max) * 1000
 			adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
 		else
@@ -490,7 +490,7 @@
 
 		if( (abs(310.15 - breath.temperature) > 50) && !(COLD_RESISTANCE in mutations)) // Hot air hurts :(
 			if(status_flags & GODMODE)	return 1	//godmode
-			if(breath.temperature < 260.15)
+			if(breath.temperature < 260.15 && dna.mutantrace != "vox") //Vox are resistant to cold.
 				if(prob(20))
 					src << "\red You feel your face freezing and an icicle forming in your lungs!"
 			else if(breath.temperature > 360.15)
@@ -501,10 +501,10 @@
 				if(-INFINITY to 120)
 					apply_damage(COLD_GAS_DAMAGE_LEVEL_3, BURN, "head", used_weapon = "Excessive Cold")
 					fire_alert = max(fire_alert, 1)
-				if(120 to 200)
+				if(120 to 200 && dna.mutantrace != "vox")  //Vox are resistant to cold.
 					apply_damage(COLD_GAS_DAMAGE_LEVEL_2, BURN, "head", used_weapon = "Excessive Cold")
 					fire_alert = max(fire_alert, 1)
-				if(200 to 260)
+				if(200 to 260 && dna.mutantrace != "vox")  //Vox are resistant to cold.
 					apply_damage(COLD_GAS_DAMAGE_LEVEL_1, BURN, "head", used_weapon = "Excessive Cold")
 					fire_alert = max(fire_alert, 1)
 				if(360 to 400)
@@ -602,7 +602,7 @@
 			if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
 				pressure_alert = -1
 			else
-				if( !(COLD_RESISTANCE in mutations) && src.dna.mutantrace!="vox")
+				if( !(COLD_RESISTANCE in mutations) && src.dna.mutantrace!="vox") //Vox are resistant to pressure loss.
 					adjustBruteLoss( LOW_PRESSURE_DAMAGE )
 					pressure_alert = -2
 				else
