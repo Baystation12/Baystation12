@@ -81,6 +81,7 @@
 		new /obj/item/clothing/shoes/black(src)
 		new /obj/item/clothing/shoes/leather(src)
 		new /obj/item/clothing/shoes/white(src)
+		new /obj/item/clothing/under/rank/head_of_personnel_whimsy(src)
 		return
 
 
@@ -187,6 +188,7 @@
 		new /obj/item/clothing/glasses/sunglasses/sechud(src)
 		new /obj/item/taperoll/police(src)
 		new /obj/item/device/hailer(src)
+		new /obj/item/clothing/tie/storage/black_vest(src)
 		return
 
 

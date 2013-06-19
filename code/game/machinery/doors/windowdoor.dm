@@ -130,6 +130,21 @@
 		new /obj/item/weapon/shard(src.loc)
 		var/obj/item/weapon/cable_coil/CC = new /obj/item/weapon/cable_coil(src.loc)
 		CC.amount = 2
+		var/obj/item/weapon/airlock_electronics/ae
+		if(!electronics)
+			ae = new/obj/item/weapon/airlock_electronics( src.loc )
+			if(src.req_access.len)
+				ae.conf_access = src.req_access
+			else if (src.req_one_access.len)
+				ae.conf_access = src.req_one_access
+				ae.one_access = 1
+		else
+			ae = electronics
+			electronics = null
+			ae.loc = src.loc
+		if(operating == -1)
+			ae.icon_state = "door_electronics_smoked"
+			operating = 0
 		src.density = 0
 		del(src)
 		return
@@ -162,15 +177,9 @@
 	if(istype(user, /mob/living/carbon/alien/humanoid) || istype(user, /mob/living/carbon/slime/adult))
 		if(src.operating)
 			return
-		src.health = max(0, src.health - 25)
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("\red <B>[user] smashes against the [src.name].</B>", 1)
-		if (src.health <= 0)
-			new /obj/item/weapon/shard(src.loc)
-			var/obj/item/weapon/cable_coil/CC = new /obj/item/weapon/cable_coil(src.loc)
-			CC.amount = 2
-			src.density = 0
-			del(src)
+		take_damage(25)
 	else
 		return src.attack_hand(user)
 
@@ -181,7 +190,7 @@
 /obj/machinery/door/window/attackby(obj/item/weapon/I as obj, mob/user as mob)
 
 	//If it's in the process of opening/closing, ignore the click
-	if (src.operating)
+	if (src.operating == 1)
 		return
 
 	//Emags and ninja swords? You may pass.
@@ -199,19 +208,50 @@
 		open()
 		return 1
 
+	//If it's emagged, crowbar can pry electronics out.
+	if (src.operating == -1 && istype(I, /obj/item/weapon/crowbar))
+		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
+		user.visible_message("[user] removes the electronics from the windoor.", "You start to remove electronics from the windoor.")
+		if (do_after(user,40))
+			user << "\blue You removed the windoor electronics!"
+
+			var/obj/structure/windoor_assembly/wa = new/obj/structure/windoor_assembly(src.loc)
+			if (istype(src, /obj/machinery/door/window/brigdoor))
+				wa.secure = "secure_"
+				wa.name = "Secure Wired Windoor Assembly"
+			else
+				wa.name = "Wired Windoor Assembly"
+			if (src.base_state == "right" || src.base_state == "rightsecure")
+				wa.facing = "r"
+			wa.dir = src.dir
+			wa.state = "02"
+			wa.update_icon()
+
+			var/obj/item/weapon/airlock_electronics/ae
+			if(!electronics)
+				ae = new/obj/item/weapon/airlock_electronics( src.loc )
+				if(src.req_access.len)
+					ae.conf_access = src.req_access
+				else if (src.req_one_access.len)
+					ae.conf_access = src.req_one_access
+					ae.one_access = 1
+			else
+				ae = electronics
+				electronics = null
+				ae.loc = src.loc
+			ae.icon_state = "door_electronics_smoked"
+
+			operating = 0
+			del(src)
+			return
+
 	//If it's a weapon, smash windoor. Unless it's an id card, agent card, ect.. then ignore it (Cards really shouldnt damage a door anyway)
 	if(src.density && istype(I, /obj/item/weapon) && !istype(I, /obj/item/weapon/card))
 		var/aforce = I.force
-		if(I.damtype == BRUTE || I.damtype == BURN)
-			src.health = max(0, src.health - aforce)
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("\red <B>[src] was hit by [I].</B>")
-		if (src.health <= 0)
-			new /obj/item/weapon/shard(src.loc)
-			var/obj/item/weapon/cable_coil/CC = new /obj/item/weapon/cable_coil(src.loc)
-			CC.amount = 2
-			src.density = 0
-			del(src)
+		if(I.damtype == BRUTE || I.damtype == BURN)
+			take_damage(aforce)
 		return
 
 

@@ -314,8 +314,10 @@
 		if(emergency_shuttle) //In case Nanotrasen decides reposess CentComm's shuttles.
 			if(emergency_shuttle.direction == 2) //Shuttle is going to centcomm, not recalled
 				dat += "<font color='red'><b>The station has been evacuated.</b></font><br>"
-			if(emergency_shuttle.direction == 1 && emergency_shuttle.timeleft() < 300) //Shuttle is past the point of no recall
+			if(emergency_shuttle.direction == 1 && emergency_shuttle.timeleft() < 300 && emergency_shuttle.alert == 0) // Emergency shuttle is past the point of no recall
 				dat += "<font color='red'>The station is currently undergoing evacuation procedures.</font><br>"
+			if(emergency_shuttle.direction == 1 && emergency_shuttle.alert == 1) // Crew transfer initiated
+				dat += "<font color='red'>The station is currently undergoing crew transfer procedures.</font><br>"
 
 		dat += "Choose from the following open positions:<br>"
 		for(var/datum/job/job in job_master.occupations)
@@ -349,10 +351,10 @@
 			if(is_alien_whitelisted(src, "Skrell"|| !config.usealienwhitelist))
 				new_character.dna.mutantrace = "skrell"
 				new_character.skrell_talk_understand = 1
-		if(client.prefs.species == "Vox")
-			if(is_alien_whitelisted(src, "Vox"|| !config.usealienwhitelist))
-				new_character.dna.mutantrace = "vox"
-				new_character.vox_talk_understand = 1
+		if(client.prefs.species == "Kidan")
+			if(is_alien_whitelisted(src, "Kidan"|| !config.usealienwhitelist))
+				new_character.dna.mutantrace = "kidan"
+				new_character.kidan_talk_understand = 1
 
 		if(ticker.random_players)
 			new_character.gender = pick(MALE, FEMALE)
