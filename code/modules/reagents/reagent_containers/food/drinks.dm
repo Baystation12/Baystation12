@@ -203,7 +203,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/tea
 	name = "Duke Purple Tea"
 	desc = "An insult to Duke Purple is an insult to the Space Queen! Any proper gentleman will fight you, if you sully this tea."
-	icon_state = "tea"
+	icon_state = "teacup"
 	item_state = "coffee"
 	New()
 		..()
@@ -224,7 +224,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate
 	name = "Dutch Hot Coco"
 	desc = "Made in Space South America."
-	icon_state = "tea"
+	icon_state = "hot_coco"
 	item_state = "coffee"
 	New()
 		..()
