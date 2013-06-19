@@ -1333,10 +1333,10 @@ It is possible to destroy the net by the occupant or someone else.
 			return
 
 	process(var/mob/living/carbon/M as mob)
-		var/check = 30//30 seconds before teleportation. Could be extended I guess.
+		var/check = 60//30 seconds before teleportation. Could be extended I guess. - Extended to one minute
 		var/mob_name = affecting.name//Since they will report as null if terminated before teleport.
 		//The person can still try and attack the net when inside.
-		while(!isnull(M)&&!isnull(src)&&check>0)//While M and net exist, and 30 seconds have not passed.
+		while(!isnull(M)&&!isnull(src)&&check>0)//While M and net exist, and 60 seconds have not passed.
 			check--
 			sleep(10)
 
