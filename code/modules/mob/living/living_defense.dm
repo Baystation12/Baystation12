@@ -90,32 +90,37 @@
 				var/obj/item/weapon/W = O
 				var/momentum = speed/2
 				var/dir = get_dir(M,src)
-				visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 
+				visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 				src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
-				if(near_wall(dir,2) && W.w_class >= 3 && W.sharp) //If they're close to a wall and the projectile is suitable.
-					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
-					if(!istype(src,/mob/living/carbon/human))
-						O.loc = src
-						src.embedded += O
-						src.anchored = 1
-						src.pinned += O
-					else
-						src.anchored = 1
-						src.pinned += O
+				if(W.w_class >= 3 && W.sharp && armor < 2) //Projectile is suitable, armour is bypassable.
+					var/turf/T = near_wall(dir,2)
+					if(T)
+						src.loc = T
+						visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
+						if(!istype(src,/mob/living/carbon/human))
+							O.loc = src
+							src.embedded += O
+							src.anchored = 1
+							src.pinned += O
+						else
+							src.anchored = 1
+							src.pinned += O
 
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
 	var/turf/T = get_step(get_turf(src),direction)
+	var/turf/last_turf = src.loc
 	var/i = 1
+
 	while(i>0 && i<=distance)
 		if(T.density) //Turf is a wall!
-			return 1
+			return last_turf
 		i++
+		last_turf = T
 		T = get_step(T,direction)
 
 	return 0
-
 
 // End BS12 momentum-transfer code.
