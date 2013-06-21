@@ -380,7 +380,7 @@
 	u_equip(item)
 	update_icons()
 
-	if (istype(usr, /mob/living/carbon/monkey)) //Check if a monkey is throwing. Modify/remove this line as required.
+	if (istype(usr, /mob/living/carbon)) //Check if a carbon mob is throwing. Modify/remove this line as required.
 		item.loc = src.loc
 		if(src.client)
 			src.client.screen -= item
