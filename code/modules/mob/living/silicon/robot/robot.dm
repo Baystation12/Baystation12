@@ -132,12 +132,21 @@
 			module = new /obj/item/weapon/robot_module/standard(src)
 			hands.icon_state = "standard"
 			var/icontype
-			if (src.name == "Lucy" && src.ckey == "rowtree") icontype = ("Lucy")
-			else icontype = input("Select an icon!", "Robot", null, null) in list("Basic", "Standard")
-			switch(icontype)
-				if("Basic")	icon_state = "robot_old"
-				if("Lucy") icon_state = "rowtree-lucy"
-				else		icon_state = "robot"
+			var/triesleft = 6
+			while (triesleft)
+				triesleft--
+				if (src.name == "Lucy" && src.ckey == "rowtree")
+					icontype = ("Lucy")
+					triesleft = 0
+				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Standard")
+				switch(icontype)
+					if("Basic")	icon_state = "robot_old"
+					if("Lucy") icon_state = "rowtree-lucy"
+					else		icon_state = "robot"
+				if(triesleft)
+					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
+						if("Yes")
+							triesleft = 0
 			modtype = "Stand"
 			feedback_inc("cyborg_standard",1)
 
@@ -146,15 +155,24 @@
 			module = new /obj/item/weapon/robot_module/butler(src)
 			hands.icon_state = "service"
 			var/icontype
-			if (src.name == "Lucy" && src.ckey == "rowtree") icontype = ("Lucy")
-			else icontype = input("Select an icon!", "Robot", null, null) in list("Waitress", "Bro", "Butler", "Kent", "Rich")
-			switch(icontype)
-				if("Waitress")	icon_state = "Service"
-				if("Kent")		icon_state = "toiletbot"
-				if("Bro")		icon_state = "Brobot"
-				if("Rich")		icon_state = "maximillion"
-				if("Lucy")		icon_state = "rowtree-lucy"
-				else				icon_state = "Service2"
+			var/triesleft = 6
+			while (triesleft)
+				triesleft--
+				if (src.name == "Lucy" && src.ckey == "rowtree")
+					icontype = ("Lucy")
+					triesleft = 0
+				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Waitress", "Bro", "Butler", "Kent", "Rich")
+				switch(icontype)
+					if("Waitress")	icon_state = "Service"
+					if("Kent")		icon_state = "toiletbot"
+					if("Bro")		icon_state = "Brobot"
+					if("Rich")		icon_state = "maximillion"
+					if("Lucy")		icon_state = "rowtree-lucy"
+					else				icon_state = "Service2"
+				if(triesleft)
+					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
+						if("Yes")
+							triesleft = 0
 			modtype = "Butler"
 			feedback_inc("cyborg_service",1)
 
@@ -163,13 +181,22 @@
 			module = new /obj/item/weapon/robot_module/miner(src)
 			hands.icon_state = "miner"
 			var/icontype
-			if (src.name == "Lucy" && src.ckey == "rowtree") icontype = ("Lucy")
-			else icontype = input("Select an icon!", "Robot", null, null) in list("Basic", "Advanced Droid", "Treadhead")
-			switch(icontype)
-				if("Basic")	icon_state = "Miner_old"
-				if("Advanced Droid")	icon_state = "droid-miner"
-				if("Lucy")		icon_state = "rowtree-lucy"
-				else		icon_state = "Miner"
+			var/triesleft = 6
+			while (triesleft)
+				triesleft--
+				if (src.name == "Lucy" && src.ckey == "rowtree")
+					icontype = ("Lucy")
+					triesleft = 0
+				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Advanced Droid", "Treadhead")
+				switch(icontype)
+					if("Basic")	icon_state = "Miner_old"
+					if("Advanced Droid")	icon_state = "droid-miner"
+					if("Lucy")		icon_state = "rowtree-lucy"
+					else		icon_state = "Miner"
+				if(triesleft)
+					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
+						if("Yes")
+							triesleft = 0
 			modtype = "Miner"
 			feedback_inc("cyborg_miner",1)
 			channels = list("Mining" = 1)
@@ -179,14 +206,23 @@
 			module = new /obj/item/weapon/robot_module/medical(src)
 			hands.icon_state = "medical"
 			var/icontype
-			if (src.name == "Lucy" && src.ckey == "rowtree") icontype = ("Lucy")
-			else icontype = input("Select an icon!", "Robot", null, null) in list("Basic", "Advanced Droid", "Needles", "Hoverbot")
-			switch(icontype)
-				if("Basic")	icon_state = "Medbot"
-				if("Advanced Droid")	icon_state = "droid-medical"
-				if("Needles")	icon_state = "medicalrobot"
-				if("Lucy")		icon_state = "rowtree-medical"
-				else		icon_state = "surgeon"
+			var/triesleft = 6
+			while (triesleft)
+				triesleft--
+				if (src.name == "Lucy" && src.ckey == "rowtree")
+					icontype = ("Lucy")
+					triesleft = 0
+				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Advanced Droid", "Needles", "Hoverbot")
+				switch(icontype)
+					if("Basic")	icon_state = "Medbot"
+					if("Advanced Droid")	icon_state = "droid-medical"
+					if("Needles")	icon_state = "medicalrobot"
+					if("Lucy")		icon_state = "rowtree-medical"
+					else		icon_state = "surgeon"
+				if(triesleft)
+					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
+						if("Yes")
+							triesleft = 0
 			modtype = "Med"
 			status_flags &= ~CANPUSH
 			feedback_inc("cyborg_medical",1)
@@ -197,14 +233,23 @@
 			module = new /obj/item/weapon/robot_module/security(src)
 			hands.icon_state = "security"
 			var/icontype
-			if (src.name == "Lucy" && src.ckey == "rowtree") icontype = ("Lucy")
-			else icontype = input("Select an icon!", "Robot", null, null) in list("Basic", "Red Knight", "Black Knight", "Bloodhound")
-			switch(icontype)
-				if("Basic")	icon_state = "secborg"
-				if("Red Knight")	icon_state = "Security"
-				if("Black Knight")	icon_state = "securityrobot"
-				if("Lucy")		icon_state = "rowtree-security"
-				else		icon_state = "bloodhound"
+			var/triesleft = 6
+			while (triesleft)
+				triesleft--
+				if (src.name == "Lucy" && src.ckey == "rowtree")
+					icontype = ("Lucy")
+					triesleft = 0
+				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Red Knight", "Black Knight", "Bloodhound")
+				switch(icontype)
+					if("Basic")	icon_state = "secborg"
+					if("Red Knight")	icon_state = "Security"
+					if("Black Knight")	icon_state = "securityrobot"
+					if("Lucy")		icon_state = "rowtree-security"
+					else		icon_state = "bloodhound"
+				if(triesleft)
+					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
+						if("Yes")
+							triesleft = 0
 			modtype = "Sec"
 			//speed = -1 Secborgs have nerfed tasers now, so the speed boost is not necessary
 			status_flags &= ~CANPUSH
@@ -216,13 +261,22 @@
 			module = new /obj/item/weapon/robot_module/engineering(src)
 			hands.icon_state = "engineer"
 			var/icontype
-			if (src.name == "Lucy" && src.ckey == "rowtree") icontype = ("Lucy")
-			else icontype = input("Select an icon!", "Robot", null, null) in list("Basic", "Antique", "Landmate")
-			switch(icontype)
-				if("Basic")	icon_state = "Engineering"
-				if("Antique") icon_state = "engineerrobot"
-				if("Lucy")		icon_state = "rowtree-engineering"
-				else		icon_state = "landmate"
+			var/triesleft = 6
+			while (triesleft)
+				triesleft--
+				if (src.name == "Lucy" && src.ckey == "rowtree")
+					icontype = ("Lucy")
+					triesleft = 0
+				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Antique", "Landmate")
+				switch(icontype)
+					if("Basic")	icon_state = "Engineering"
+					if("Antique") icon_state = "engineerrobot"
+					if("Lucy")		icon_state = "rowtree-engineering"
+					else		icon_state = "landmate"
+				if(triesleft)
+					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
+						if("Yes")
+							triesleft = 0
 			modtype = "Eng"
 			feedback_inc("cyborg_engineering",1)
 			channels = list("Engineering" = 1)
@@ -232,13 +286,22 @@
 			module = new /obj/item/weapon/robot_module/janitor(src)
 			hands.icon_state = "janitor"
 			var/icontype
-			if (src.name == "Lucy" && src.ckey == "rowtree") icontype = ("Lucy")
-			else icontype = input("Select an icon!", "Robot", null, null) in list("Basic", "Mopbot", "Zamboni")
-			switch(icontype)
-				if("Basic")	icon_state = "JanBot2"
-				if("Mopbot") icon_state = "janitorrobot"
-				if("Lucy")		icon_state = "rowtree-lucy"
-				else		icon_state = "mopgearrex"
+			var/triesleft = 6
+			while (triesleft)
+				triesleft--
+				if (src.name == "Lucy" && src.ckey == "rowtree")
+					icontype = ("Lucy")
+					triesleft = 0
+				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Mopbot", "Zamboni")
+				switch(icontype)
+					if("Basic")	icon_state = "JanBot2"
+					if("Mopbot") icon_state = "janitorrobot"
+					if("Lucy")		icon_state = "rowtree-lucy"
+					else		icon_state = "mopgearrex"
+				if(triesleft)
+					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
+						if("Yes")
+							triesleft = 0
 			modtype = "Jan"
 			feedback_inc("cyborg_janitor",1)
 
@@ -262,9 +325,13 @@
 		changed_name = "[(prefix ? "[prefix] " : "")][braintype]-[num2text(ident)]"
 	real_name = changed_name
 	name = real_name
-	
+
 	// if we've changed our name, we also need to update the display name for our PDA
 	setup_PDA()
+
+	//We also need to update name of internal camera.
+	if (camera)
+		camera.c_tag = changed_name
 
 /mob/living/silicon/robot/verb/Namepick()
 	if(custom_name)
@@ -498,6 +565,9 @@
 		return
 
 	if (istype(W, /obj/item/weapon/weldingtool))
+		if (!getBruteLoss())
+			user << "Nothing to fix here!"
+			return
 		var/obj/item/weapon/weldingtool/WT = W
 		if (WT.remove_fuel(0))
 			adjustBruteLoss(-30)
@@ -510,6 +580,9 @@
 			return
 
 	else if(istype(W, /obj/item/weapon/cable_coil) && wiresexposed)
+		if (!getFireLoss())
+			user << "Nothing to fix here!"
+			return
 		var/obj/item/weapon/cable_coil/coil = W
 		adjustFireLoss(-30)
 		updatehealth()
