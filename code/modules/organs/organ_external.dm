@@ -591,8 +591,8 @@
 	name = "chest"
 	icon_name = "torso"
 	display_name = "chest"
-	max_damage = 150
-	min_broken_damage = 75
+	max_damage = 75
+	min_broken_damage = 40
 	body_part = UPPER_TORSO
 
 
@@ -600,24 +600,24 @@
 	name = "groin"
 	icon_name = "groin"
 	display_name = "groin"
-	max_damage = 115
-	min_broken_damage = 70
+	max_damage = 50
+	min_broken_damage = 30
 	body_part = LOWER_TORSO
 
 /datum/organ/external/l_arm
 	name = "l_arm"
 	display_name = "left arm"
 	icon_name = "l_arm"
-	max_damage = 75
-	min_broken_damage = 30
+	max_damage = 50
+	min_broken_damage = 20
 	body_part = ARM_LEFT
 
 /datum/organ/external/l_leg
 	name = "l_leg"
 	display_name = "left leg"
 	icon_name = "l_leg"
-	max_damage = 75
-	min_broken_damage = 30
+	max_damage = 50
+	min_broken_damage = 20
 	body_part = LEG_LEFT
 	icon_position = LEFT
 
@@ -625,16 +625,16 @@
 	name = "r_arm"
 	display_name = "right arm"
 	icon_name = "r_arm"
-	max_damage = 75
-	min_broken_damage = 30
+	max_damage = 50
+	min_broken_damage = 20
 	body_part = ARM_RIGHT
 
 /datum/organ/external/r_leg
 	name = "r_leg"
 	display_name = "right leg"
 	icon_name = "r_leg"
-	max_damage = 75
-	min_broken_damage = 30
+	max_damage = 50
+	min_broken_damage = 20
 	body_part = LEG_RIGHT
 	icon_position = RIGHT
 
@@ -642,7 +642,7 @@
 	name = "l_foot"
 	display_name = "left foot"
 	icon_name = "l_foot"
-	max_damage = 40
+	max_damage = 30
 	min_broken_damage = 15
 	body_part = FOOT_LEFT
 	icon_position = LEFT
@@ -651,7 +651,7 @@
 	name = "r_foot"
 	display_name = "right foot"
 	icon_name = "r_foot"
-	max_damage = 40
+	max_damage = 30
 	min_broken_damage = 15
 	body_part = FOOT_RIGHT
 	icon_position = RIGHT
@@ -660,7 +660,7 @@
 	name = "r_hand"
 	display_name = "right hand"
 	icon_name = "r_hand"
-	max_damage = 40
+	max_damage = 30
 	min_broken_damage = 15
 	body_part = HAND_RIGHT
 
@@ -668,7 +668,7 @@
 	name = "l_hand"
 	display_name = "left hand"
 	icon_name = "l_hand"
-	max_damage = 40
+	max_damage = 30
 	min_broken_damage = 15
 	body_part = HAND_LEFT
 
