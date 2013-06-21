@@ -59,8 +59,6 @@
 		if(stage == max_stage)
 			src.cure(mob)
 			mob.antibodies |= src.antigen
-			mob.virus2 -= src
-			del src
 		stage++
 		clicks = 0
 	//Do nasty effects
@@ -74,6 +72,7 @@
 /datum/disease2/disease/proc/cure(var/mob/living/carbon/mob)
 	for(var/datum/disease2/effectholder/e in effects)
 		e.effect.deactivate(mob)
+	mob.virus2.Remove("[uniqueID]")
 
 /datum/disease2/disease/proc/minormutate()
 	var/datum/disease2/effectholder/holder = pick(effects)
