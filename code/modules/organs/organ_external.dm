@@ -35,6 +35,7 @@
 	var/open = 0
 	var/stage = 0
 	var/cavity = 0
+	var/sabotaged = 0 //If a prosthetic limb is emagged, it will detonate when it fails.
 
 	var/obj/item/hidden = null
 	var/list/implants = list()
@@ -482,8 +483,8 @@
 				owner.u_equip(owner.shoes)
 		if(organ)
 			destspawn = 1
-			//Robotic limbs explode until specified otherwise
-			if(status & ORGAN_ROBOT && !no_explode)
+			//Robotic limbs explode if sabotaged.
+			if(status & ORGAN_ROBOT && !no_explode && sabotaged)
 				owner.visible_message("\red \The [owner]'s [display_name] explodes violently!",\
 				"\red <b>Your [display_name] explodes!</b>",\
 				"You hear an explosion followed by a scream!")
@@ -494,10 +495,10 @@
 				spark_system.start()
 				spawn(10)
 					del(spark_system)
-			else
-				owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
-				"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
-				"You hear a terrible sound of ripping tendons and flesh.")
+
+			owner.visible_message("\red [owner.name]'s [display_name] flies off in an arc.",\
+			"<span class='moderate'><b>Your [display_name] goes flying off!</b></span>",\
+			"You hear a terrible sound of ripping tendons and flesh.")
 
 			//Throw organs around
 			var/lol = pick(cardinal)
