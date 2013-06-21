@@ -217,11 +217,11 @@ datum/controller/vote
 			world << "<font color='purple'><b>[text]</b>\nType vote to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
 			switch(vote_type)
 				if("crew_transfer")
-					world << sound('sound/voice/Serithi/Shuttlehere.ogg')
+					world << sound('sound/ambience/alarm4.ogg')
 				if("gamemode")
-					world << sound('sound/voice/Serithi/pretenddemoc.ogg')
+					world << sound('sound/ambience/alarm4.ogg')
 				if("custom")
-					world << sound('sound/voice/Serithi/weneedvote.ogg')
+					world << sound('sound/ambience/alarm4.ogg')
 			if(mode == "gamemode" && going)
 				going = 0
 				world << "<font color='red'><b>Round start has been delayed.</b></font>"
@@ -231,6 +231,20 @@ datum/controller/vote
 				world << "<b>The OOC channel has been automatically disabled due to the crew transfer vote.</b>"
 				log_admin("OOC was toggled automatically due to crew_transfer vote.")
 				message_admins("OOC has been toggled off automatically.")
+			if(mode == "gamemode" && ooc_allowed)
+				auto_muted = 1
+				ooc_allowed = !( ooc_allowed )
+				world << "<b>The OOC channel has been automatically disabled due to the gamemode vote.</b>"
+				log_admin("OOC was toggled automatically due to gamemode vote.")
+				message_admins("OOC has been toggled off automatically.")
+			if(mode == "custom" && ooc_allowed)
+				auto_muted = 1
+				ooc_allowed = !( ooc_allowed )
+				world << "<b>The OOC channel has been automatically disabled due to the custom vote.</b>"
+				log_admin("OOC was toggled automatically due to custom vote.")
+				message_admins("OOC has been toggled off automatically.")
+
+
 
 
 			time_remaining = round(config.vote_period/10)
