@@ -8,6 +8,7 @@
 	var/construction_time = 100
 	var/list/construction_cost = list("metal"=20000,"glass"=5000)
 	var/list/part = null
+	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
 
 /obj/item/robot_parts/l_arm
 	name = "robot left arm"
@@ -278,3 +279,13 @@
 		del(src)
 		return
 	return
+
+/obj/item/robot_parts/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/card/emag))
+		if(sabotaged)
+			user << "\red [src] is already sabotaged!"
+		else
+			user << "\red You slide [W] into the dataport on [src] and short out the safeties."
+			sabotaged = 1
+		return
+	..()
