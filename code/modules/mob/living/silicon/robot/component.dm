@@ -16,10 +16,6 @@
 // The wrapped device(e.g. radio), only set if external_type isn't null
 /datum/robot_component/var/obj/item/wrapped = null
 
-
-/datum/robot_component/proc/is_functioning()
-	return brute_damage + electronics_damage < 30
-
 /datum/robot_component/New(mob/living/silicon/robot/R)
 	src.owner = R
 
@@ -46,8 +42,8 @@
 	if(brute_damage + electronics_damage > max_damage) destroy()
 
 /datum/robot_component/proc/heal_damage(brute, electronics)
-	if(!is_functioning())
-		// If it's not functioning, it's beyond repairing without taking it out.
+	if(installed != 1)
+		// If it's not installed, can't repair it.
 		return 0
 
 	brute_damage = max(0, brute_damage - brute)

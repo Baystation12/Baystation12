@@ -2,14 +2,14 @@
 	var/amount = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
-		amount += C.brute_damage
+		if(C.installed == 1) amount += C.brute_damage
 	return amount
 
 /mob/living/silicon/robot/getFireLoss()
 	var/amount = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
-		amount += C.electronics_damage
+		if(C.installed == 1) amount += C.electronics_damage
 	return amount
 
 
@@ -29,7 +29,7 @@
 	var/list/datum/robot_component/parts = list()
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
-		if((brute && C.brute_damage) || (burn && C.electronics_damage))
+		if(C.installed == 1) if((brute && C.brute_damage) || (burn && C.electronics_damage))
 			parts += C
 	return parts
 
@@ -53,16 +53,13 @@
 /mob/living/silicon/robot/heal_overall_damage(var/brute, var/burn)
 	var/list/datum/robot_component/parts = get_damaged_components(brute,burn)
 
-	log_debug("Healing [brute] brute and [burn] burn with [parts.len] parts")
 	while(parts.len && (brute>0 || burn>0) )
 		var/datum/robot_component/picked = pick(parts)
 
 		var/brute_was = picked.brute_damage
 		var/burn_was = picked.electronics_damage
 
-		log_debug("Healing [picked.name]")
 		picked.heal_damage(brute,burn)
-		log_debug("[brute] brute and [burn] burn left to heal")
 
 		brute -= (brute_was-picked.brute_damage)
 		burn -= (burn_was-picked.electronics_damage)
