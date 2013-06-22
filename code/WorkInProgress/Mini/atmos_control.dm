@@ -297,13 +297,12 @@ Nitrous Oxide
 			output += {"
 <a href='?src=\ref[src];alarm=\ref[current];screen=[AALARM_SCREEN_MAIN]'>Main menu</a><br>
 <b>Air machinery mode for the area:</b><ul>"}
-			var/list/modes = list(
-					AALARM_MODE_SCRUBBING   = "Filtering",
-					AALARM_MODE_REPLACEMENT = "<font color='red'>REPLACE AIR</font>",
-					AALARM_MODE_PANIC       = "<font color='red'>PANIC</font>",
-					AALARM_MODE_CYCLE		= "<font color='red'>CYCLE</font>",
-					AALARM_MODE_FILL = "<font color='red'>FILL</font>",\
-					AALARM_MODE_OFF         = "<font color='blue'>OFFF</font>",)
+			var/list/modes = list(AALARM_MODE_SCRUBBING   = "Filtering - Scrubs out contaminants",\
+					AALARM_MODE_REPLACEMENT = "<font color='blue'>Replace Air - Siphons out air while replacing</font>",\
+					AALARM_MODE_PANIC       = "<font color='red'>Panic - Siphons air out of the room</font>",\
+					AALARM_MODE_CYCLE       = "<font color='red'>Cycle - Siphons air before replacing</font>",\
+					AALARM_MODE_FILL        = "<font color='green'>Fill - Shuts off scrubbers and opens vents</font>",\
+					AALARM_MODE_OFF         = "<font color='blue'>Off - Shuts off vents and scrubbers</font>",)
 			for (var/m=1,m<=modes.len,m++)
 				if (current.mode==m)
 					output += {"<li><A href='?src=\ref[src];alarm=\ref[current];mode=[m]'><b>[modes[m]]</b></A> (selected)</li>"}
