@@ -45,6 +45,7 @@
 	var/soghun_talk_understand = 1
 	var/skrell_talk_understand = 1
 	var/vox_talk_understand = 1
+	var/tajaran_talk_understand = 1
 	var/lower_mod = 0
 	var/jetpack = 0
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
