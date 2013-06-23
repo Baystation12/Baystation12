@@ -337,6 +337,10 @@ var/list/ai_list = list()
 			else
 				src << "<span class='notice'>Unable to locate the holopad.</span>"
 
+	if(href_list["say_word"])
+		src.announcement(href_list["say_word"])
+		return
+
 	if (href_list["lawc"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
 		var/L = text2num(href_list["lawc"])
 		switch(lawcheck[L+1])

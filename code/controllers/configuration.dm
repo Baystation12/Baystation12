@@ -40,6 +40,7 @@
 	var/Ticklag = 0.9
 	var/Tickcomp = 0
 	var/socket_talk	= 0					// use socket_talk to communicate with other processes
+	var/list/resource_urls = null
 
 	var/list/mode_names = list()
 	var/list/modes = list()				// allowed modes
@@ -164,6 +165,9 @@
 
 		if(type == "config")
 			switch (name)
+				if ("resource_urls")
+					config.resource_urls = stringsplit(value, " ")
+			
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
 

@@ -850,7 +850,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		P.overlays.Cut()
 		P.overlays += image('icons/obj/pda.dmi', "pda-r")
 	else
-		U << "<span class='notice'>ERROR: Server isn't responding.</span>"
+		U << "<span class='notice'>ERROR: Messaging server is not responding.</span>"
 
 
 /obj/item/device/pda/verb/verb_remove_id()
@@ -1162,7 +1162,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		plist[text("[name]")] = P
 	return plist
-	
+
 
 //Some spare PDAs in a box
 /obj/item/weapon/storage/box/PDAs

@@ -350,7 +350,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 	//masks and helmets can obscure our hair.
 	if( (head && (head.flags & BLOCKHAIR)) || (wear_mask && (wear_mask.flags & BLOCKHAIR)))
 		if(update_icons)   update_icons()
-
 		return
 
 	//base icons
@@ -367,7 +366,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 			face_standing.Blend(facial_s, ICON_OVERLAY)
 			face_lying.Blend(facial_l, ICON_OVERLAY)
 
-	if(h_style)
+	if(h_style && !(head && (head.flags & BLOCKHEADHAIR)))
 		var/datum/sprite_accessory/hair_style = hair_styles_list[h_style]
 		if(hair_style)
 			var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
@@ -444,10 +443,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 			if("skrell")
 				race_icon = 'icons/mob/human_races/r_skrell.dmi'
 				deform_icon = 'icons/mob/human_races/r_def_skrell.dmi'
-
 			if("vox")
 				race_icon = 'icons/mob/human_races/r_vox.dmi'
 				deform_icon = 'icons/mob/human_races/r_def_vox.dmi'
+			if("kidan")
+				race_icon = 'icons/mob/human_races/r_kidan.dmi'
+				deform_icon = 'icons/mob/human_races/r_def_kidan.dmi'
 
 			else
 				race_icon = 'icons/mob/human_races/r_human.dmi'

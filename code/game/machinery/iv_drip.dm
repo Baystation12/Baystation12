@@ -84,7 +84,7 @@
 			if(istype(src.beaker, /obj/item/weapon/reagent_containers/blood))
 				// speed up transfer on blood packs
 				transfer_amount = 4
-			attached.inject_blood(beaker,transfer_amount)
+			src.beaker.reagents.trans_to(src.attached, transfer_amount)
 			update_icon()
 
 		// Take blood
@@ -112,7 +112,8 @@
 
 			if (B)
 				beaker.reagents.reagent_list |= B
-				beaker.reagents.update_total()
+				beaker.reagents.del_reagent("clonexadone")	//Fix for infinite meat spawning when taking blood from human
+				beaker.reagents.update_total()				//to an IV drip full of clonex
 				beaker.on_reagent_change()
 				beaker.reagents.handle_reactions()
 				update_icon()
