@@ -178,6 +178,16 @@
 	possible_transfer_amounts = list(5,10,15,25,30,50,100)
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 
+/obj/item/weapon/reagent_containers/glass/beaker/vial
+	name = "vial"
+	desc = "A small glass vial. Can hold up to 25 units."
+	icon_state = "vial"
+	g_amt = 250
+	volume = 25
+	amount_per_transfer_from_this = 10
+	possible_transfer_amounts = list(5,10,15,25)
+	flags = FPRINT | TABLEPASS | OPENCONTAINER
+
 /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone
 	New()
 		..()
