@@ -1,4 +1,3 @@
-hi
 // Add custom items you give to people here, and put their icons in custom_items.dmi
 // Remember to change 'icon = 'custom_items.dmi'' for items not using /obj/item/fluff as a base
 // Clothing item_state doesn't use custom_items.dmi. Just add them to the normal clothing files.
@@ -359,19 +358,29 @@ hi
 
 ////// Ripley customisation kit - Butchery Royce - MayeDay
 
-/obj/item/weapon/fluff/butcher_royce_1
+/obj/item/weapon/paintkit/fluff/butcher_royce_1
 	name = "Ripley customisation kit"
 	desc = "A kit containing all the needed tools and parts to turn an APLU Ripley into a Titan's Fist worker mech."
 	icon = 'custom_items.dmi'
 	icon_state = "royce_kit"
 
+	new_name = "APLU \"Titan's Fist\""
+	new_desc = "This ordinary mining Ripley has been customized to look like a unit of the Titans Fist."
+	new_icon = "titan"
+	allowed_types = list("ripley","firefighter")
+
 ////// Ripley customisation kit - Sven Fjeltson - Mordeth221
 
-/obj/item/weapon/fluff/sven_fjeltson_1
-  name = "Mercenary APLU kit"
-  desc = "A kit containing all the needed tools and parts to turn an APLU Ripley into an old Mercenaries APLU."
-  icon = 'custom_items.dmi'
-  icon_state = "sven_kit"
+/obj/item/weapon/paintkit/fluff/sven_fjeltson_1
+	name = "Mercenary APLU kit"
+	desc = "A kit containing all the needed tools and parts to turn an APLU Ripley into an old Mercenaries APLU."
+	icon = 'custom_items.dmi'
+	icon_state = "sven_kit"
+
+	new_name = "APLU \"Strike the Earth!\""
+	new_desc = "Looks like an over worked, under maintained Ripley with some horrific damage."
+	new_icon = "earth"
+	allowed_types = list("ripley","firefighter")
 
 //////////////////////////////////
 //////////// Clothing ////////////
