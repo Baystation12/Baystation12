@@ -19,7 +19,7 @@
 	m_amt = 10000
 	g_amt = 5000
 	flags = FPRINT | TABLEPASS | CONDUCT
-	w_class = 1.0
+	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
 
 /*HAHA, SUCK IT, 2000 LINES OF SPAGHETTI CODE!
@@ -133,7 +133,7 @@ LOOK FOR SURGERY.DM*/
 	m_amt = 5000
 	g_amt = 2500
 	flags = FPRINT | TABLEPASS | CONDUCT
-	w_class = 1.0
+	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("attacked", "pinched")
 
@@ -268,7 +268,7 @@ LOOK FOR SURGERY.DM*/
 	m_amt = 5000
 	g_amt = 2500
 	flags = FPRINT | TABLEPASS | CONDUCT
-	w_class = 1.0
+	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("burnt")
 
@@ -360,13 +360,13 @@ LOOK FOR SURGERY.DM*/
 	g_amt = 10000
 	flags = FPRINT | TABLEPASS | CONDUCT
 	force = 15.0
-	w_class = 1.0
+	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("drilled")
 
 	suicide_act(mob/user)
-		viewers(user) << pick("/red <b>[user] is pressing the [src.name] to \his temple and activating it! It looks like \he's trying to commit suicide.</b>", \
-							"/red <b>[user] is pressing [src.name] to \his chest and activating it! It looks like \he's trying to commit suicide.</b>")
+		viewers(user) << pick("\red <b>[user] is pressing the [src.name] to \his temple and activating it! It looks like \he's trying to commit suicide.</b>", \
+							"\red <b>[user] is pressing [src.name] to \his chest and activating it! It looks like \he's trying to commit suicide.</b>")
 		return (BRUTELOSS)
 
 /*
@@ -379,7 +379,7 @@ LOOK FOR SURGERY.DM*/
 	icon_state = "scalpel"
 	flags = FPRINT | TABLEPASS | CONDUCT
 	force = 10.0
-	w_class = 1.0
+	w_class = 2.0
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
@@ -631,7 +631,7 @@ LOOK FOR SURGERY.DM*/
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	flags = FPRINT | TABLEPASS | CONDUCT
 	force = 15.0
-	w_class = 1.0
+	w_class = 2.0
 	throwforce = 9.0
 	throw_speed = 3
 	throw_range = 5
@@ -797,6 +797,7 @@ LOOK FOR SURGERY.DM*/
 	icon = 'surgery.dmi'
 	icon_state = "bone-gel"
 	force = 0
+	w_class = 2.0
 	throwforce = 1.0
 
 /obj/item/weapon/FixOVein
@@ -806,6 +807,7 @@ LOOK FOR SURGERY.DM*/
 	force = 0
 	throwforce = 1.0
 	origin_tech = "materials=1;biotech=3"
+	w_class = 2.0
 	var/usage_amount = 10
 
 /obj/item/weapon/bonesetter
@@ -816,4 +818,5 @@ LOOK FOR SURGERY.DM*/
 	throwforce = 9.0
 	throw_speed = 3
 	throw_range = 5
+	w_class = 2.0
 	attack_verb = list("attacked", "hit", "bludgeoned")

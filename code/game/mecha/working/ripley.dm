@@ -2,6 +2,7 @@
 	desc = "Autonomous Power Loader Unit. The workhorse of the exosuit world."
 	name = "APLU \"Ripley\""
 	icon_state = "ripley"
+	initial_icon = "ripley"
 	step_in = 6
 	max_temperature = 20000
 	health = 200
@@ -19,6 +20,7 @@
 	desc = "Standart APLU chassis was refitted with additional thermal protection and cistern."
 	name = "APLU \"Firefighter\""
 	icon_state = "firefighter"
+	initial_icon = "firefighter"
 	max_temperature = 65000
 	health = 250
 	lights_power = 8
@@ -108,17 +110,3 @@
 		step_rand(A)
 	..()
 	return
-
-
-/obj/mecha/working/ripley/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/fluff/sven_fjeltson_1))//this shit broke ripleys
-		src.icon_state = "earth"
-		src.initial_icon = "earth"
-		src.name = "APLU \"Strike the Earth!\""
-		src.desc = "Looks like an over worked, under maintained Ripley with some horrific damage."
-		user << "You pick up your old \"Strike the Earth!\" APLU."
-		user.drop_item()
-		del(W)
-		return
-	else
-		..()

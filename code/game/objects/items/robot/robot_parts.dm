@@ -8,6 +8,7 @@
 	var/construction_time = 100
 	var/list/construction_cost = list("metal"=20000,"glass"=5000)
 	var/list/part = null
+	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
 
 /obj/item/robot_parts/l_arm
 	name = "robot left arm"
@@ -161,7 +162,7 @@
 		else
 			user << "\blue You need to attach a flash to it first!"
 
-	if(istype(W, /obj/item/device/mmi) || istype(W, /obj/item/device/mmi/posibrain))
+	if(istype(W, /obj/item/device/mmi))
 		var/obj/item/device/mmi/M = W
 		if(check_completion())
 			if(!istype(loc,/turf))
@@ -193,7 +194,7 @@
 				user << "\red This [W] does not seem to fit."
 				return
 
-			var/mob/living/silicon/robot/O = new /mob/living/silicon/robot(get_turf(loc))
+			var/mob/living/silicon/robot/O = new /mob/living/silicon/robot(get_turf(loc), unfinished = 1)
 			if(!O)	return
 
 			user.drop_item()
@@ -278,3 +279,13 @@
 		del(src)
 		return
 	return
+
+/obj/item/robot_parts/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/weapon/card/emag))
+		if(sabotaged)
+			user << "\red [src] is already sabotaged!"
+		else
+			user << "\red You slide [W] into the dataport on [src] and short out the safeties."
+			sabotaged = 1
+		return
+	..()

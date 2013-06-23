@@ -24,6 +24,14 @@
 				return ..(message)
 			message = copytext(message, 3)
 			message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+
+			// TODO: move the component system up to silicon so we don't have to use this ugly hack..
+			if(istype(src, /mob/living/silicon/robot))
+				var/mob/living/silicon/robot/R = src
+				if(!R.is_component_functioning("comms"))
+					src << "\red Your binary communications component isn't functional."
+					return
+
 			robot_talk(message)
 		else if (department_radio_keys[prefix] == "department")
 			if(isAI(src)&&client)//For patching directly into AI holopads.

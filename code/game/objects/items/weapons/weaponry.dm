@@ -137,3 +137,14 @@
 /obj/item/weapon/katana/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return ..()
+
+/obj/item/weapon/harpoon
+	name = "harpoon"
+	sharp = 1
+	desc = "Tharr she blows!"
+	icon_state = "harpoon"
+	item_state = "harpoon"
+	force = 20
+	throwforce = 15
+	w_class = 3
+	attack_verb = list("jabbed","stabbed","ripped")

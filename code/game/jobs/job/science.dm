@@ -12,11 +12,11 @@
 	access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload,
-			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway)
+			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
 	minimal_access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
 			            access_tox_storage, access_teleporter, access_sec_doors,
 			            access_research, access_robotics, access_xenobiology, access_ai_upload,
-			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway)
+			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
 	minimal_player_age = 7
 
 	equip(var/mob/living/carbon/human/H)
@@ -44,9 +44,9 @@
 	spawn_positions = 3
 	supervisors = "the research director"
 	selection_color = "#ffeeff"
-	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology)
-	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenobiology)
-	alt_titles = list("Xenoarcheologist", "Anomalist", "Plasma Researcher", "Xenobiologist")
+	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
+	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
+	alt_titles = list("Xenoarcheologist", "Anomalist", "Plasma Researcher")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -61,6 +61,32 @@
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 		return 1
 
+
+
+/datum/job/xenobiologist
+	title = "Xenobiologist"
+	flag = XENOBIOLOGIST
+	department_flag = MEDSCI
+	faction = "Station"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the research director"
+	selection_color = "#ffeeff"
+	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology)
+	minimal_access = list(access_research, access_xenobiology)
+
+	equip(var/mob/living/carbon/human/H)
+		if(!H) return 0
+		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sci(H), slot_ears)
+		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/scientist(H), slot_w_uniform)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(H), slot_shoes)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/toxins(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/science(H), slot_wear_suit)
+		if(H.backbag == 1)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+		else
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+		return 1
 
 
 /datum/job/roboticist

@@ -174,3 +174,56 @@
 	desc = "A handgun holster. Made of expensive leather."
 	icon_state = "holster"
 	color = "holster_low"
+
+/obj/item/clothing/tie/storage
+	name = "load beearing equipment"
+	desc = "Used to hold things when you don't have enough hands for that."
+	icon_state = "webbing"
+	color = "webbing"
+	var/slots = 3
+	var/obj/item/weapon/storage/pockets/hold
+
+/obj/item/clothing/tie/storage/New()
+	hold = new /obj/item/weapon/storage/pockets(src)
+	hold.master_item = src
+	hold.storage_slots = slots
+
+/obj/item/clothing/tie/storage/attack_self(mob/user as mob)
+	user << "<span class='notice'>You empty [src].</span>"
+	var/turf/T = get_turf(src)
+	hold.hide_from(usr)
+	for(var/obj/item/I in hold.contents)
+		hold.remove_from_storage(I, T)
+	src.add_fingerprint(user)
+
+/obj/item/clothing/tie/storage/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	hold.attackby(W,user)
+	src.add_fingerprint(user)
+
+/obj/item/weapon/storage/pockets
+	name = "webbing pockets"
+	var/master_item		//item it belongs to
+
+/obj/item/weapon/storage/pockets/close(mob/user as mob)
+	..()
+	loc = master_item
+
+/obj/item/clothing/tie/storage/webbing
+	name = "webbing"
+	desc = "Strudy mess of synthcotton belts and buckles, ready to share your burden."
+	icon_state = "webbing"
+	color = "webbing"
+
+/obj/item/clothing/tie/storage/black_vest
+	name = "black webbing vest"
+	desc = "Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands."
+	icon_state = "vest_black"
+	color = "vest_black"
+	slots = 5
+
+/obj/item/clothing/tie/storage/brown_vest
+	name = "black webbing vest"
+	desc = "Worn brownish synthcotton vest with lots of pockets to unload your hands."
+	icon_state = "vest_brown"
+	color = "vest_brown"
+	slots = 5
