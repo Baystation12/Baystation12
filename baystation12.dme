@@ -54,6 +54,9 @@
 #define FILE_DIR "sound/voice/Serithi"
 #define FILE_DIR "sound/vox"
 #define FILE_DIR "sound/weapons"
+#define FILE_DIR "tools"
+#define FILE_DIR "tools/AddToChangelog"
+#define FILE_DIR "tools/AddToChangelog/AddToChangelog"
 // END_FILE_DIR
 // BEGIN_PREFERENCES
 #define DEBUG
@@ -788,7 +791,7 @@
 #include "code\modules\DetectiveWork\detective_work.dm"
 #include "code\modules\DetectiveWork\evidence.dm"
 #include "code\modules\DetectiveWork\footprints_and_rag.dm"
-#include "code\modules\detectivework\scanner.dm"
+#include "code\modules\DetectiveWork\scanner.dm"
 #include "code\modules\events\alien_infestation.dm"
 #include "code\modules\events\blob.dm"
 #include "code\modules\events\brand_intelligence.dm"
