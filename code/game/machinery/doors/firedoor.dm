@@ -273,3 +273,24 @@
 		if(istype(destination)) air_master.tiles_to_update += destination
 		return 1
 */
+
+/obj/machinery/door/firedoor/multi_tile
+	icon = 'DoorHazard2x1.dmi'
+	bound_width = 64
+
+
+	update_nearby_tiles(need_rebuild)
+		if(!.)
+			return
+
+		. = ..()
+		var/turf/simulated/second_turf = get_step(src, EAST)
+		var/turf/simulated/north = get_step(second_turf, NORTH)
+		var/turf/simulated/east = get_step(second_turf, EAST)
+		var/turf/simulated/south = get_step(second_turf, SOUTH)
+
+		update_heat_protection(second_turf)
+
+		if(istype(north)) air_master.tiles_to_update |= north
+		if(istype(south)) air_master.tiles_to_update |= south
+		if(istype(east)) air_master.tiles_to_update |= east

@@ -3,16 +3,15 @@ client/proc/Zone_Info(turf/T as null|turf)
 	set category = "Debug"
 	if(T)
 		if(T.zone)
-			T.zone.DebugDisplay(mob)
+			T.zone.DebugDisplay(src)
 		else
 			mob << "No zone here."
 	else
-		for(T in world)
-			T.overlays -= 'debug_space.dmi'
-			T.overlays -= 'debug_group.dmi'
-			T.overlays -= 'debug_connect.dmi'
+		if(zone_debug_images)
+			images -= zone_debug_images
+			zone_debug_images = null
 
-
+client/var/list/zone_debug_images
 
 client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
 	set category = "Debug"
@@ -57,50 +56,60 @@ client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
 
 
 zone/proc
-	DebugDisplay(mob/M)
+	DebugDisplay(client/client)
+		if(!istype(client))
+			return
+
 		if(!dbg_output)
 			dbg_output = 1 //Don't want to be spammed when someone investigates a zone...
+
+			if(!client.zone_debug_images)
+				client.zone_debug_images = list()
 			for(var/turf/T in contents)
-				T.overlays += 'debug_group.dmi'
+				client.zone_debug_images += image('debug_group.dmi', T)
 
 			for(var/turf/space/S in unsimulated_tiles)
-				S.overlays += 'debug_space.dmi'
+				client.zone_debug_images += image('debug_space.dmi', S)
 
-			M << "<u>Zone Air Contents</u>"
-			M << "Oxygen: [air.oxygen]"
-			M << "Nitrogen: [air.nitrogen]"
-			M << "Plasma: [air.toxins]"
-			M << "Carbon Dioxide: [air.carbon_dioxide]"
-			M << "Temperature: [air.temperature]"
-			M << "Heat Energy: [air.temperature * air.heat_capacity()]"
-			M << "Pressure: [air.return_pressure()]"
-			M << ""
-			M << "Space Tiles: [length(unsimulated_tiles)]"
-			M << "Movable Objects: [length(movables())]"
-			M << "<u>Connections: [length(connections)]</u>"
+			client << "<u>Zone Air Contents</u>"
+			client << "Oxygen: [air.oxygen]"
+			client << "Nitrogen: [air.nitrogen]"
+			client << "Plasma: [air.toxins]"
+			client << "Carbon Dioxide: [air.carbon_dioxide]"
+			client << "Temperature: [air.temperature] K"
+			client << "Heat Energy: [air.temperature * air.heat_capacity()] J"
+			client << "Pressure: [air.return_pressure()] KPa"
+			client << ""
+			client << "Space Tiles: [length(unsimulated_tiles)]"
+			client << "Movable Objects: [length(movables())]"
+			client << "<u>Connections: [length(connections)]</u>"
 
 			for(var/connection/C in connections)
-				M << "[C.A] --> [C.B] [(C.indirect?"Open":"Closed")]"
-				C.A.overlays += 'debug_connect.dmi'
-				C.B.overlays += 'debug_connect.dmi'
+				client << "\ref[C] [C.A] --> [C.B] [(C.indirect?"Open":"Closed")]"
+				client.zone_debug_images += image('debug_connect.dmi', C.A)
+				client.zone_debug_images += image('debug_connect.dmi', C.B)
+
+			client << "Connected Zones:"
+			for(var/zone/zone in connected_zones)
+				client << "\ref[zone] [zone] - [connected_zones[zone]] (Connected)"
+
+			for(var/zone/zone in closed_connection_zones)
+				client << "\ref[zone] [zone] - [closed_connection_zones[zone]] (Unconnected)"
+
 			for(var/C in connections)
 				if(!istype(C,/connection))
-					M << "[C] (Not Connection!)"
+					client << "[C] (Not Connection!)"
+
+			client.images += client.zone_debug_images
 
 		else
 			dbg_output = 0
 
-			for(var/turf/T in contents)
-				T.overlays -= 'debug_group.dmi'
+			client.images -= client.zone_debug_images
+			client.zone_debug_images = null
 
-			for(var/turf/space/S in unsimulated_tiles)
-				S.overlays -= 'debug_space.dmi'
-
-			for(var/connection/C in connections)
-				C.A.overlays -= 'debug_connect.dmi'
-				C.B.overlays -= 'debug_connect.dmi'
 		for(var/zone/Z in zones)
 			if(Z.air == air && Z != src)
 				var/turf/zloc = pick(Z.contents)
-				M << "\red Illegal air datum shared by: [zloc.loc.name]"
+				client << "\red Illegal air datum shared by: [zloc.loc.name]"
 
