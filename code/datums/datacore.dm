@@ -7,8 +7,9 @@
 			manifest_inject(H)
 		return
 
-/obj/effect/datacore/proc/manifest_modify(var/name, var/assignment, var/alt_title = null)
+/obj/effect/datacore/proc/manifest_modify(var/name, var/assignment)
 	var/datum/data/record/foundrecord
+	var/real_title = assignment
 
 	for(var/datum/data/record/t in data_core.general)
 		if (t)
@@ -16,14 +17,18 @@
 				foundrecord = t
 				break
 
+	var/list/all_jobs = get_job_datums()
+
+	for(var/datum/job/J in all_jobs)
+		var/list/alttitles = get_alternate_titles(J.title)
+		if(!J)	continue
+		if(assignment in alttitles)
+			real_title = J.title
+			break
+
 	if(foundrecord)
 		foundrecord.fields["rank"] = assignment
-		if(alt_title)
-			foundrecord.fields["real_rank"] = alt_title
-		else
-			foundrecord.fields["real_rank"] = assignment
-
-
+		foundrecord.fields["real_rank"] = real_title
 
 /obj/effect/datacore/proc/manifest_inject(var/mob/living/carbon/human/H)
 	if(H.mind && (H.mind.assigned_role != "MODE"))
