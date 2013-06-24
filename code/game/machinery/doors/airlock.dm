@@ -145,7 +145,25 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	name = "Glass Airlock"
 	icon = 'icons/obj/doors/Door2x1glassfull.dmi'
 	opacity = 0
+	bound_width = 64
 	glass = 1
+
+	update_nearby_tiles(need_rebuild)
+		. = ..()
+
+		if(!.)
+			return
+
+		var/turf/simulated/second_turf = get_step(src, EAST)
+		var/turf/simulated/north = get_step(second_turf, NORTH)
+		var/turf/simulated/east = get_step(second_turf, EAST)
+		var/turf/simulated/south = get_step(second_turf, SOUTH)
+
+		update_heat_protection(second_turf)
+
+		if(istype(north)) air_master.tiles_to_update |= north
+		if(istype(south)) air_master.tiles_to_update |= south
+		if(istype(east)) air_master.tiles_to_update |= east
 
 /obj/machinery/door/airlock/freezer
 	name = "Freezer Airlock"
@@ -1280,29 +1298,31 @@ About the new airlock wires panel:
 		if( !arePowerSystemsOn() || (stat & NOPOWER) || isWireCut(AIRLOCK_WIRE_DOOR_BOLTS) )
 			return
 	if(safe)
-		if(locate(/mob/living) in get_turf(src))
-		//	playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)	//THE BUZZING IT NEVER STOPS	-Pete
-			spawn (60)
-				close()
-			return
+		for(var/turf/turf in locs)
+			if(locate(/mob/living) in turf)
+			//	playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)	//THE BUZZING IT NEVER STOPS	-Pete
+				spawn (60)
+					close()
+				return
 
-	for(var/mob/living/M in get_turf(src))
-		if(isrobot(M))
-			M.adjustBruteLoss(DOOR_CRUSH_DAMAGE)
-		else
-			M.adjustBruteLoss(DOOR_CRUSH_DAMAGE)
-			M.SetStunned(5)
-			M.SetWeakened(5)
-			var/obj/effect/stop/S
-			S = new /obj/effect/stop
-			S.victim = M
-			S.loc = src.loc
-			spawn(20)
-				del(S)
-			M.emote("scream")
-		var/turf/location = src.loc
-		if(istype(location, /turf/simulated))
-			location.add_blood(M)
+	for(var/turf/turf in locs)
+		for(var/mob/living/M in turf)
+			if(isrobot(M))
+				M.adjustBruteLoss(DOOR_CRUSH_DAMAGE)
+			else
+				M.adjustBruteLoss(DOOR_CRUSH_DAMAGE)
+				M.SetStunned(5)
+				M.SetWeakened(5)
+				var/obj/effect/stop/S
+				S = new /obj/effect/stop
+				S.victim = M
+				S.loc = src.loc
+				spawn(20)
+					del(S)
+				M.emote("scream")
+			var/turf/location = src.loc
+			if(istype(location, /turf/simulated))
+				location.add_blood(M)
 
 	use_power(50)
 	if(istype(src, /obj/machinery/door/airlock/glass))
@@ -1311,9 +1331,10 @@ About the new airlock wires panel:
 		playsound(src.loc, 'sound/items/bikehorn.ogg', 30, 1)
 	else
 		playsound(src.loc, 'sound/machines/airlock.ogg', 30, 1)
-	var/obj/structure/window/killthis = (locate(/obj/structure/window) in get_turf(src))
-	if(killthis)
-		killthis.ex_act(2)//Smashin windows
+	for(var/turf/turf in locs)
+		var/obj/structure/window/killthis = (locate(/obj/structure/window) in turf)
+		if(killthis)
+			killthis.ex_act(2)//Smashin windows
 	..()
 	return
 
