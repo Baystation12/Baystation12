@@ -484,7 +484,7 @@ client/proc/one_click_antag()
 				new_vox << "\red Don't forget to turn on your nitrogen internals!"
 
 				raiders--
-			if(raiders >= 4)
+			if(raiders > 4)
 				return 0
 	else
 		return 0

@@ -1193,7 +1193,8 @@ About the new airlock wires panel:
 				da.anchored = 1
 				if(mineral)
 					da.glass = mineral
-				else if(glass)
+				//else if(glass)
+				else if(glass && !da.glass)
 					da.glass = 1
 				da.state = 1
 				da.created_name = src.name
