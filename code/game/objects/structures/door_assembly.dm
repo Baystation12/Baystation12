@@ -106,10 +106,13 @@ obj/structure/door_assembly
 		dir = EAST
 		var/width = 1
 
-//Temporary until we get sprites.
-//		airlock_type = "/multi_tile/maint"
-		glass = 1
+/*Temporary until we get sprites.
 		glass_type = "/multi_tile/glass"
+		airlock_type = "/multi_tile/maint"
+		glass = 1*/
+		base_icon_state = "g" //Remember to delete this line when reverting "glass" var to 1.
+		airlock_type = "/multi_tile/glass"
+		glass = -1 //To prevent bugs in deconstruction process.
 
 		New()
 			if(dir in list(EAST, WEST))
@@ -118,6 +121,7 @@ obj/structure/door_assembly
 			else
 				bound_width = world.icon_size
 				bound_height = width * world.icon_size
+			update_state()
 
 		Move()
 			. = ..()
