@@ -14,7 +14,6 @@ obj/item/changestone/attack_hand(var/mob/user as mob)
 				H.gender = FEMALE
 			H.dna.ready_dna(H)
 			H.update_body()
-			H.update_face()
 	..()
 
 

@@ -21,10 +21,10 @@
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
 
-/atom/proc/throw_impact(atom/hit_atom)
+/atom/proc/throw_impact(atom/hit_atom, var/speed)
 	if(istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
-		M.hitby(src)
+		M.hitby(src,speed)
 
 		log_attack("<font color='red'>[hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])</font>")
 
@@ -32,7 +32,7 @@
 		var/obj/O = hit_atom
 		if(!O.anchored)
 			step(O, src.dir)
-		O.hitby(src)
+		O.hitby(src,speed)
 
 	else if(isturf(hit_atom))
 		var/turf/T = hit_atom
