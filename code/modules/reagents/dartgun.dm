@@ -54,6 +54,8 @@
 			var/obj/item/weapon/reagent_containers/glass/beaker/vial/B = new(src)
 			B.reagents.add_reagent(chem, 25)
 			beakers += B
+	cartridge = new /obj/item/weapon/dart_cartridge(src)
+	update_icon()
 
 /obj/item/weapon/gun/dartgun/examine()
 	set src in view()
@@ -207,7 +209,9 @@
 /obj/item/weapon/gun/dartgun/can_hit(var/mob/living/target as mob, var/mob/living/user as mob)
 	return 1
 
-/obj/item/weapon/gun/dartgun/attack_self(user as mob)
+/obj/item/weapon/gun/dartgun/attack_self(mob/user)
+
+	user.set_machine(src)
 	var/dat = "<b>[src] mixing control:</b><br><br>"
 
 	if (beakers.len)
@@ -235,7 +239,8 @@
 			dat += "<font color='red'>The dart cartridge is empty!</font>"
 		dat += " \[<A href='?src=\ref[src];eject_cart=1'>Eject</A>\]"
 
-	user << browse("[dat]", "window=dartgun_mixing_window")
+	user << browse(dat, "window=dartgun")
+	onclose(user, "dartgun", src)
 
 /obj/item/weapon/gun/dartgun/proc/check_beaker_mixing(var/obj/item/B)
 	if(!mixing || !beakers)

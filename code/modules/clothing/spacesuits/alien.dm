@@ -145,11 +145,6 @@
 	examine()
 		set src in view()
 		..()
-		var/state = "loosely"
-		if(src.flags&NOSLIP)
-			state = "tightly"
-		usr << "The wearer seems to be gripping the floor [state]."
-
 
 /obj/item/clothing/shoes/magboots/vox/mob_can_equip(M as mob, slot)
 	var/mob/living/carbon/human/U = M
