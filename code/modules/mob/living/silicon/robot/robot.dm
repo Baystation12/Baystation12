@@ -5,6 +5,8 @@
 	icon_state = "robot"
 	maxHealth = 300
 	health = 300
+	universal_speak = 1
+
 	var/sight_mode = 0
 	var/custom_name = ""
 
