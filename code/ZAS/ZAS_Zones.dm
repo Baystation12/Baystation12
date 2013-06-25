@@ -282,10 +282,14 @@ zone/proc/process()
 					unsimulated_boost = max(0, min(3, unsimulated_boost))
 					ShareRatio( air , Z.air , connected_zones[Z] + unsimulated_boost)
 
+		/* Sadly there are too many problems with this. Until we have a way to insulate
+		   airlocks and reduce the rate at which temperature is shared through these,
+		   please leave this commented out.
 		for(var/zone/Z in closed_connection_zones)
 			if(air && Z.air)
 				if( abs(air.temperature - Z.air.temperature) > 10 )
 					ShareHeat(air, Z.air, closed_connection_zones[Z])
+		*/
 
 	progress = "all components completed successfully, the problem is not here"
 
