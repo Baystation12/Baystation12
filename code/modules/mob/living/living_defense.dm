@@ -94,7 +94,7 @@
 				visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 				src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
-				if(W.w_class >= 3 && W.sharp && armor < 2) //Projectile is suitable, armour is bypassable.
+				if(istype(W.loc,/mob/living) && W.sharp) //Projectile is embedded and suitable for pinning.
 					var/turf/T = near_wall(dir,2)
 					if(T)
 						src.loc = T
