@@ -141,30 +141,6 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	opacity = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
 
-/obj/machinery/door/airlock/glass_large
-	name = "Glass Airlock"
-	icon = 'icons/obj/doors/Door2x1glassfull.dmi'
-	opacity = 0
-	bound_width = 64
-	glass = 1
-
-	update_nearby_tiles(need_rebuild)
-		. = ..()
-
-		if(!.)
-			return
-
-		var/turf/simulated/second_turf = get_step(src, EAST)
-		var/turf/simulated/north = get_step(second_turf, NORTH)
-		var/turf/simulated/east = get_step(second_turf, EAST)
-		var/turf/simulated/south = get_step(second_turf, SOUTH)
-
-		update_heat_protection(second_turf)
-
-		if(istype(north)) air_master.tiles_to_update |= north
-		if(istype(south)) air_master.tiles_to_update |= south
-		if(istype(east)) air_master.tiles_to_update |= east
-
 /obj/machinery/door/airlock/freezer
 	name = "Freezer Airlock"
 	icon = 'icons/obj/doors/Doorfreezer.dmi'
@@ -1217,7 +1193,8 @@ About the new airlock wires panel:
 				da.anchored = 1
 				if(mineral)
 					da.glass = mineral
-				else if(glass)
+				//else if(glass)
+				else if(glass && !da.glass)
 					da.glass = 1
 				da.state = 1
 				da.created_name = src.name
@@ -1316,7 +1293,7 @@ About the new airlock wires panel:
 				var/obj/effect/stop/S
 				S = new /obj/effect/stop
 				S.victim = M
-				S.loc = src.loc
+				S.loc = M.loc
 				spawn(20)
 					del(S)
 				M.emote("scream")
