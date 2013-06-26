@@ -54,6 +54,8 @@
 			var/obj/item/weapon/reagent_containers/glass/beaker/vial/B = new(src)
 			B.reagents.add_reagent(chem, 25)
 			beakers += B
+	cartridge = new /obj/item/weapon/dart_cartridge(src)
+	update_icon()
 
 /obj/item/weapon/gun/dartgun/examine()
 	set src in view()
