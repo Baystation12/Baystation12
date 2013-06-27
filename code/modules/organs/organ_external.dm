@@ -96,7 +96,7 @@
 	if(status & ORGAN_BROKEN && prob(40) && brute)
 		owner.emote("scream")	//getting hit on broken hand hurts
 	if(used_weapon)
-		add_autopsy_data(used_weapon, brute + burn)
+		add_autopsy_data("[used_weapon]", brute + burn)
 
 	var/can_cut = (prob(brute*2) || sharp) && !(status & ORGAN_ROBOT)
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
@@ -365,6 +365,7 @@
 			burn_dam += W.damage
 
 		if(!(status & ORGAN_ROBOT) && W.bleeding())
+			W.bleed_timer--
 			status |= ORGAN_BLEEDING
 
 		clamped |= W.clamped
