@@ -53,14 +53,13 @@
 	world << "POST SETUP CALLED"
 	for(var/datum/mind/ninja in ninjas)
 		if(ninja.current && !(istype(ninja.current,/mob/living/carbon/human))) return 0
-		forge_ninja_objectives(ninja)
+		//forge_ninja_objectives(ninja)
 		var/mob/living/carbon/human/N = ninja.current
 		N.internal = N.s_store
 		N.internals.icon_state = "internal1"
 		if(N.wear_suit && istype(N.wear_suit,/obj/item/clothing/suit/space/space_ninja))
 			var/obj/item/clothing/suit/space/space_ninja/S = N.wear_suit
 			S:randomize_param()
-			S:ninitialize(3, N)
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()
 	return ..()
