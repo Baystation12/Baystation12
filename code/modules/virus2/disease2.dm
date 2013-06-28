@@ -147,6 +147,7 @@ var/global/list/virusDB = list()
 		r += "<BR>Effect:[E.effect.name]. Strength : [E.multiplier * 8]. Verosity : [E.chance * 15]. Type : [5-E.stage]."
 
 	r += "<BR>Antigen pattern: [antigens2string(antigen)]"
+	return r
 
 /datum/disease2/disease/proc/addToDB()
 	if ("[uniqueID]" in virusDB)

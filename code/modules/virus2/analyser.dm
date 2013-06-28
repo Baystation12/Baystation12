@@ -39,11 +39,11 @@
 			P.info = r
 			dish.info = r
 			dish.analysed = 1
+			if (dish.virus2.addToDB())
+				src.state("\The [src.name] states, \"Added new pathogen to database.\"")
 			dish.loc = src.loc
 			dish = null
 			icon_state = "analyser"
-			if (dish.virus2.addToDB())
-				src.state("\The [src.name] states, \"Added new pathogen to database.\"")
 
 			src.state("\The [src.name] prints a sheet of paper")
 
