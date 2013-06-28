@@ -139,7 +139,7 @@
 						if(time == 30)
 							O.show_message(text("\red <B>[] is trying to inject []!</B>", user, target), 1)
 						else
-							O.show_message(text("\red <B>[] begins hunting for an injection port on []'s hardsuit!</B>", user, target), 1)
+							O.show_message(text("\red <B>[] begins hunting for an injection port on []'s suit!</B>", user, target), 1)
 
 					if(!do_mob(user, target, time)) return
 

@@ -36,11 +36,11 @@
 
 		if(affecting.display_name == "head")
 			if(H.head && istype(H.head,/obj/item/clothing/head/helmet/space))
-				user << "\red You can't apply [src] through a hardsuit helmet!"
+				user << "\red You can't apply [src] through [H.head]!"
 				return 1
 		else
 			if(H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space))
-				user << "\red You can't apply [src] through a hardsuit!"
+				user << "\red You can't apply [src] through [H.wear_suit]!"
 				return 1
 
 		if(affecting.status & ORGAN_ROBOT)
