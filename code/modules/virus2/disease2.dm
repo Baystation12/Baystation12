@@ -128,12 +128,34 @@
 		var/datum/disease2/disease/V = viruses[ID]
 		res["[V.uniqueID]"] = V.getcopy()
 	return res
-/*
-/proc/virus_mergelist(var/list/datum/disease2/disease/viruses1, var/list/datum/disease2/disease/viruses2)
-	var/list/res = virus_copylist(viruses1)
-	for (var/ID in viruses2)
-		var/datum/disease2/disease/V = viruses2[ID]
-		if(!res["[V.uniqueID]"])
-			res["[V.uniqueID]"] = V.getcopy()
-	return res
-*/
+
+
+var/global/list/virusDB = list()
+
+/datum/disease2/disease/proc/name()
+	.= "stamm #[add_zero("[uniqueID]", 4)]"
+	if ("[uniqueID]" in virusDB)
+		var/datum/data/record/V = virusDB["[uniqueID]"]
+		.= V.fields["name"]
+
+/datum/disease2/disease/proc/get_info()
+	var/r = "GNAv2 based virus lifeform - [name()], #[add_zero("[uniqueID]", 4)]"
+	r += "<BR>Infection rate : [infectionchance * 10]"
+	r += "<BR>Spread form : [spreadtype]"
+	r += "<BR>Progress Speed : [stageprob * 10]"
+	for(var/datum/disease2/effectholder/E in effects)
+		r += "<BR>Effect:[E.effect.name]. Strength : [E.multiplier * 8]. Verosity : [E.chance * 15]. Type : [5-E.stage]."
+
+	r += "<BR>Antigen pattern: [antigens2string(antigen)]"
+
+/datum/disease2/disease/proc/addToDB()
+	if ("[uniqueID]" in virusDB)
+		return 0
+	var/datum/data/record/v = new()
+	v.fields["id"] = uniqueID
+	v.fields["name"] = name()
+	v.fields["description"] = get_info()
+	v.fields["antigen"] = antigens2string(antigen)
+	v.fields["spread type"] = spreadtype
+	virusDB["[uniqueID]"] = v
+	return 1

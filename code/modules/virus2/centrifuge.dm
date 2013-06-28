@@ -52,7 +52,7 @@
 				var/list/virus = B.data["virus2"]
 				for (var/ID in virus)
 					var/datum/disease2/disease/V = virus[ID]
-					dat += " </td></tr><tr><td> pathogen #[V.uniqueID]"
+					dat += " </td></tr><tr><td> pathogen [V.name()]"
 					dat += "</td><td><A href='?src=\ref[src];action=isolate;isolate=[V.uniqueID]'>Isolate</a>"
 			else
 				dat += "Please check container contents."
