@@ -5,6 +5,8 @@
 	icon_state = "robot"
 	maxHealth = 300
 	health = 300
+	universal_speak = 1
+
 	var/sight_mode = 0
 	var/custom_name = ""
 
@@ -114,12 +116,12 @@
 			cell.maxcharge = 7500
 			cell.charge = 7500
 
+	..()
+
 	if(cell)
 		var/datum/robot_component/cell_component = components["power cell"]
 		cell_component.wrapped = cell
 		cell_component.installed = 1
-
-	..()
 
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
@@ -723,7 +725,7 @@
 		var/datum/robot_component/C = components["power cell"]
 		if(wiresexposed)
 			user << "Close the panel first."
-		else if(cell || C.installed)
+		else if(cell)
 			user << "There is a power cell already installed."
 		else
 			user.drop_item()
@@ -1013,6 +1015,8 @@
 			user.put_in_active_hand(cell)
 			user << "You remove \the [cell]."
 			cell = null
+			cell_component.wrapped = null
+			cell_component.installed = 0
 			updateicon()
 		else if(cell_component.installed == -1)
 			cell_component.installed = 0

@@ -37,7 +37,7 @@
 
 /mob/living/silicon/robot/proc/use_power()
 
-	if (is_component_functioning("power cell"))
+	if (is_component_functioning("power cell") && cell)
 		if(src.cell.charge <= 0)
 			uneq_all()
 			src.stat = 1

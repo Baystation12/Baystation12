@@ -54,9 +54,6 @@
 #define FILE_DIR "sound/voice/Serithi"
 #define FILE_DIR "sound/vox"
 #define FILE_DIR "sound/weapons"
-#define FILE_DIR "tools"
-#define FILE_DIR "tools/AddToChangelog"
-#define FILE_DIR "tools/AddToChangelog/AddToChangelog"
 // END_FILE_DIR
 // BEGIN_PREFERENCES
 #define DEBUG
@@ -260,8 +257,6 @@
 #include "code\game\gamemodes\nuclear\pinpointer.dm"
 #include "code\game\gamemodes\revolution\revolution.dm"
 #include "code\game\gamemodes\revolution\rp_revolution.dm"
-#include "code\game\gamemodes\sandbox\h_sandbox.dm"
-#include "code\game\gamemodes\sandbox\sandbox.dm"
 #include "code\game\gamemodes\traitor\traitor.dm"
 #include "code\game\gamemodes\wizard\rightandwrong.dm"
 #include "code\game\gamemodes\wizard\soulstone.dm"
@@ -391,6 +386,7 @@
 #include "code\game\machinery\doors\checkForMultipleDoors.dm"
 #include "code\game\machinery\doors\door.dm"
 #include "code\game\machinery\doors\firedoor.dm"
+#include "code\game\machinery\doors\multi_tile.dm"
 #include "code\game\machinery\doors\poddoor.dm"
 #include "code\game\machinery\doors\shutters.dm"
 #include "code\game\machinery\doors\unpowered.dm"
@@ -1128,6 +1124,7 @@
 #include "code\modules\reagents\Chemistry-Reagents-Antidepressants.dm"
 #include "code\modules\reagents\Chemistry-Reagents.dm"
 #include "code\modules\reagents\Chemistry-Recipes.dm"
+#include "code\modules\reagents\dartgun.dm"
 #include "code\modules\reagents\grenade_launcher.dm"
 #include "code\modules\reagents\reagent_containers.dm"
 #include "code\modules\reagents\reagent_dispenser.dm"

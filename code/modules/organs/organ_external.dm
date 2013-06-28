@@ -365,6 +365,7 @@
 			burn_dam += W.damage
 
 		if(!(status & ORGAN_ROBOT) && W.bleeding())
+			W.bleed_timer--
 			status |= ORGAN_BLEEDING
 
 		clamped |= W.clamped

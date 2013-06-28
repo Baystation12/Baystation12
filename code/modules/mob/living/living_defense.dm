@@ -94,19 +94,19 @@
 				visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 				src.throw_at(get_edge_target_turf(src,dir),1,momentum)
 
-				if(W.w_class >= 3 && W.sharp && armor < 2) //Projectile is suitable, armour is bypassable.
+				if(istype(W.loc,/mob/living) && W.sharp) //Projectile is embedded and suitable for pinning.
+
+					if(!istype(src,/mob/living/carbon/human)) //Handles embedding for non-humans and simple_animals.
+						O.loc = src
+						src.embedded += O
+
 					var/turf/T = near_wall(dir,2)
+
 					if(T)
 						src.loc = T
 						visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
-						if(!istype(src,/mob/living/carbon/human))
-							O.loc = src
-							src.embedded += O
-							src.anchored = 1
-							src.pinned += O
-						else
-							src.anchored = 1
-							src.pinned += O
+						src.anchored = 1
+						src.pinned += O
 
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
