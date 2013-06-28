@@ -153,6 +153,7 @@
 	icon_state = "knife"
 	desc = "A general purpose Chef's Knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come."
 	flags = FPRINT | TABLEPASS | CONDUCT
+	sharp = 1
 	force = 10.0
 	w_class = 3.0
 	throwforce = 6.0

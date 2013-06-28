@@ -20,29 +20,104 @@
 	flick("h2monkey", animation)
 	sleep(48)
 	//animation = null
-	var/mob/living/carbon/monkey/O = new /mob/living/carbon/monkey( loc )
-	del(animation)
 
-	O.name = "monkey"
-	O.dna = dna
-	dna = null
-	O.dna.uni_identity = "00600200A00E0110148FC01300B009"
-	//O.dna.struc_enzymes = "0983E840344C39F4B059D5145FC5785DC6406A4BB8"
-	O.dna.struc_enzymes = "[copytext(O.dna.struc_enzymes,1,1+3*(STRUCDNASIZE-1))]BB8"
-	O.loc = loc
-	O.viruses = viruses
-	viruses = list()
-	for(var/datum/disease/D in O.viruses)
-		D.affected_mob = O
+	var/mob/living/carbon/monkey/O = null
 
-	if (client)
-		client.mob = O
-	if(mind)
-		mind.transfer_to(O)
-	O.a_intent = "hurt"
-	O << "<B>You are now a monkey.</B>"
-	spawn(0)//To prevent the proc from returning null.
-		del(src)
+	switch(dna.mutantrace)
+		if("tajara")
+			O = new /mob/living/carbon/monkey/tajara( loc )
+			O.name = "farwa"
+			O.dna = dna
+			dna = null
+			O.dna.uni_identity = "000000000000000000DC00000660004DA0A0E00"
+			//O.dna.struc_enzymes = "0983E840344C39F4B059D5145FC5785DC6406A4BB8"
+			O.dna.struc_enzymes = "[copytext(O.dna.struc_enzymes,1,1+3*(STRUCDNASIZE-1))]BB8"
+			O.loc = loc
+			O.viruses = viruses
+			viruses = list()
+			for(var/datum/disease/D in O.viruses)
+				D.affected_mob = O
+
+			if (client)
+				client.mob = O
+			if(mind)
+				mind.transfer_to(O)
+			O << "<B>You are now a farwa. </B>"
+			O.a_intent = "hurt"
+			spawn(0)//To prevent the proc from returning null.
+				del(src)
+			del(animation)
+		if("lizard")
+			O = new /mob/living/carbon/monkey/unathi( loc )
+			O.name = "stok"
+			O.dna = dna
+			dna = null
+			O.dna.uni_identity = "000000000000000000DC00000660002A8044C5D"
+			//O.dna.struc_enzymes = "0983E840344C39F4B059D5145FC5785DC6406A4BB8"
+			O.dna.struc_enzymes = "[copytext(O.dna.struc_enzymes,1,1+3*(STRUCDNASIZE-1))]BB8"
+			O.loc = loc
+			O.viruses = viruses
+			viruses = list()
+			for(var/datum/disease/D in O.viruses)
+				D.affected_mob = O
+
+			if (client)
+				client.mob = O
+			if(mind)
+				mind.transfer_to(O)
+			O << "<B>You are now a stok. </B>"
+			O.a_intent = "hurt"
+			spawn(0)//To prevent the proc from returning null.
+				del(src)
+			del(animation)
+		if("skrell")
+			O = new /mob/living/carbon/monkey/unathi( loc )
+			O.name = "neaera"
+			O.dna = dna
+			dna = null
+			O.dna.uni_identity = "000000000000000000DC00000660002A8044C5D"
+			//O.dna.struc_enzymes = "0983E840344C39F4B059D5145FC5785DC6406A4BB8"
+			O.dna.struc_enzymes = "[copytext(O.dna.struc_enzymes,1,1+3*(STRUCDNASIZE-1))]BB8"
+			O.loc = loc
+			O.viruses = viruses
+			viruses = list()
+			for(var/datum/disease/D in O.viruses)
+				D.affected_mob = O
+
+			if (client)
+				client.mob = O
+			if(mind)
+				mind.transfer_to(O)
+			O << "<B>You are now a neaera. </B>"
+			O.a_intent = "hurt"
+			spawn(0)//To prevent the proc from returning null.
+				del(src)
+			del(animation)
+		else
+			O = new /mob/living/carbon/monkey( loc )
+			O.name = "monkey"
+			O.dna = dna
+			dna = null
+			O.dna.uni_identity = "00600200A00E0110148FC01300B009"
+			//O.dna.struc_enzymes = "0983E840344C39F4B059D5145FC5785DC6406A4BB8"
+			O.dna.struc_enzymes = "[copytext(O.dna.struc_enzymes,1,1+3*(STRUCDNASIZE-1))]BB8"
+			O.loc = loc
+			O.viruses = viruses
+			viruses = list()
+			for(var/datum/disease/D in O.viruses)
+				D.affected_mob = O
+
+			if (client)
+				client.mob = O
+			if(mind)
+				mind.transfer_to(O)
+			O << "<B>You are now a monkey.</B>"
+			O.a_intent = "hurt"
+			spawn(0)//To prevent the proc from returning null.
+				del(src)
+			del(animation)
+
+
 	return O
 
 /mob/new_player/AIize()
