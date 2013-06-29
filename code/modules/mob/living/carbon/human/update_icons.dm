@@ -323,7 +323,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		stand_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[lip_style]_s"), ICON_OVERLAY)
 
 	//Underwear
-	if(underwear >0 && underwear < 12)
+	if(underwear >0 && underwear < 12 && (src.dna.mutantrace != "vox" && src.dna.mutantrace != "kidan"))
 		if(!fat && !skeleton)
 			stand_icon.Blend(new /icon('icons/mob/human.dmi', "underwear[underwear]_[g]_s"), ICON_OVERLAY)
 
