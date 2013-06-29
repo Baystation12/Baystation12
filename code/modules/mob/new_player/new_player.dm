@@ -356,6 +356,20 @@
 				new_character.dna.mutantrace = "kidan"
 				new_character.kidan_talk_understand = 1
 
+		if(client.prefs.language == "Tajaran")
+			if(is_alien_whitelisted(src, "Language_Tajaran") || !config.usealienwhitelist)
+				new_character.tajaran_talk_understand = 1
+		if(client.prefs.language == "Unathi")
+			if(is_alien_whitelisted(src, "Language_Soghun") || !config.usealienwhitelist)
+				new_character.soghun_talk_understand = 1
+		if(client.prefs.language == "Skrell")
+			if(is_alien_whitelisted(src, "Language_Skrell") || !config.usealienwhitelist)
+				new_character.skrell_talk_understand = 1
+		if(client.prefs.language == "Kidan")
+			if(is_alien_whitelisted(src, "Language_Kidan") || !config.usealienwhitelist)
+				new_character.kidan_talk_understand = 1
+
+
 		if(ticker.random_players)
 			new_character.gender = pick(MALE, FEMALE)
 			client.prefs.real_name = random_name()
