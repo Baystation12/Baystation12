@@ -1,5 +1,5 @@
 #define SAVEFILE_VERSION_MIN	8
-#define SAVEFILE_VERSION_MAX	9
+#define SAVEFILE_VERSION_MAX	10
 
 //handles converting savefiles to new formats
 //MAKE SURE YOU KEEP THIS UP TO DATE!
@@ -103,6 +103,7 @@
 	S["gender"]				>> gender
 	S["age"]				>> age
 	S["species"]			>> species
+	S["language"]			>> language
 
 	//colors to be consolidated into hex strings (requires some work with dna code)
 	S["hair_red"]			>> r_hair
@@ -152,6 +153,7 @@
 	metadata		= sanitize_text(metadata, initial(metadata))
 	real_name		= reject_bad_name(real_name)
 	if(isnull(species)) species = "Human"
+	if(isnull(language)) language = "None"
 	if(isnull(nanotrasen_relation)) nanotrasen_relation = initial(nanotrasen_relation)
 	if(!real_name) real_name = random_name()
 	be_random_name	= sanitize_integer(be_random_name, 0, 1, initial(be_random_name))
@@ -206,6 +208,7 @@
 	S["gender"]				<< gender
 	S["age"]				<< age
 	S["species"]			<< species
+	S["language"]			<< language
 	S["hair_red"]			<< r_hair
 	S["hair_green"]			<< g_hair
 	S["hair_blue"]			<< b_hair
