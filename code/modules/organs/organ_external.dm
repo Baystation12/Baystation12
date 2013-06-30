@@ -96,7 +96,7 @@
 	if(status & ORGAN_BROKEN && prob(40) && brute)
 		owner.emote("scream")	//getting hit on broken hand hurts
 	if(used_weapon)
-		add_autopsy_data(used_weapon, brute + burn)
+		add_autopsy_data("[used_weapon]", brute + burn)
 
 	var/can_cut = (prob(brute*2) || sharp) && !(status & ORGAN_ROBOT)
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
@@ -308,6 +308,10 @@
 
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /datum/organ/external/proc/update_wounds()
+
+	if((status & ORGAN_ROBOT)) //Robotic limbs don't heal or get worse.
+		return
+
 	for(var/datum/wound/W in wounds)
 		// wounds can disappear after 10 minutes at the earliest
 		if(W.damage == 0 && W.created + 10 * 10 * 60 <= world.time)
@@ -361,6 +365,7 @@
 			burn_dam += W.damage
 
 		if(!(status & ORGAN_ROBOT) && W.bleeding())
+			W.bleed_timer--
 			status |= ORGAN_BLEEDING
 
 		clamped |= W.clamped

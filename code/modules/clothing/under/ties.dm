@@ -227,3 +227,79 @@
 	icon_state = "vest_brown"
 	color = "vest_brown"
 	slots = 5
+/*
+	Holobadges are worn on the belt or neck, and can be used to show that the holder is an authorized
+	Security agent - the user details can be imprinted on the badge with a Security-access ID card,
+	or they can be emagged to accept any ID for use in disguises.
+*/
+
+/obj/item/clothing/tie/holobadge
+
+	name = "holobadge"
+	desc = "This glowing blue badge marks the holder as THE LAW."
+	icon_state = "holobadge"
+	color = "holobadge"
+	slot_flags = SLOT_BELT
+
+	var/emagged = 0 //Emagging removes Sec check.
+	var/stored_name = null
+
+/obj/item/clothing/tie/holobadge/cord
+	icon_state = "holobadge-cord"
+	color = "holobadge-cord"
+	slot_flags = SLOT_MASK
+
+/obj/item/clothing/tie/holobadge/attack_self(mob/user as mob)
+	if(!stored_name)
+		user << "Waving around a badge before swiping an ID would be pretty pointless."
+		return
+	if(isliving(user))
+		user.visible_message("\red [user] displays their NanoTrasen Internal Security Legal Authorization Badge.\nIt reads: [stored_name], NT Security.","\red You display your NanoTrasen Internal Security Legal Authorization Badge.\nIt reads: [stored_name], NT Security.")
+
+/obj/item/clothing/tie/holobadge/attackby(var/obj/item/O as obj, var/mob/user as mob)
+
+	if (istype(O, /obj/item/weapon/card/emag))
+		if (emagged)
+			user << "\red [src] is already cracked."
+			return
+		else
+			emagged = 1
+			user << "\red You swipe [O] and crack the holobadge security checks."
+			return
+
+	else if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/device/pda))
+
+		var/obj/item/weapon/card/id/id_card = null
+
+		if(istype(O, /obj/item/weapon/card/id))
+			id_card = O
+		else
+			var/obj/item/device/pda/pda = O
+			id_card = pda.id
+
+		if(access_security in id_card.access || emagged)
+			user << "You imprint your ID details onto the badge."
+			stored_name = id_card.registered_name
+			name = "holobadge ([stored_name])"
+			desc = "This glowing blue badge marks [stored_name] as THE LAW."
+		else
+			user << "[src] rejects your insufficient access rights."
+		return
+	..()
+
+/obj/item/clothing/tie/holobadge/attack(mob/living/carbon/human/M, mob/living/user)
+	if(isliving(user))
+		user.visible_message("\red [user] invades [M]'s personal space, thrusting [src] into their face insistently.","\red You invade [M]'s personal space, thrusting [src] into their face insistently. You are the law.")
+
+/obj/item/weapon/storage/box/holobadge
+	name = "holobadge box"
+	desc = "A box claiming to contain holobadges."
+	New()
+		new /obj/item/clothing/tie/holobadge(src)
+		new /obj/item/clothing/tie/holobadge(src)
+		new /obj/item/clothing/tie/holobadge(src)
+		new /obj/item/clothing/tie/holobadge(src)
+		new /obj/item/clothing/tie/holobadge/cord(src)
+		new /obj/item/clothing/tie/holobadge/cord(src)
+		..()
+		return

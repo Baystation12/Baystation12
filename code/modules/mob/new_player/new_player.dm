@@ -340,21 +340,35 @@
 		new_character.lastarea = get_area(loc)
 
 		if(client.prefs.species == "Tajaran") //This is like the worst, but it works, so meh. - Erthilo
-			if(is_alien_whitelisted(src, "Tajaran"|| !config.usealienwhitelist))
+			if(is_alien_whitelisted(src, "Tajaran") || !config.usealienwhitelist)
 				new_character.dna.mutantrace = "tajaran"
 				new_character.tajaran_talk_understand = 1
 		if(client.prefs.species == "Unathi")
-			if(is_alien_whitelisted(src, "Soghun"|| !config.usealienwhitelist))
+			if(is_alien_whitelisted(src, "Soghun") || !config.usealienwhitelist)
 				new_character.dna.mutantrace = "lizard"
 				new_character.soghun_talk_understand = 1
 		if(client.prefs.species == "Skrell")
-			if(is_alien_whitelisted(src, "Skrell"|| !config.usealienwhitelist))
+			if(is_alien_whitelisted(src, "Skrell") || !config.usealienwhitelist)
 				new_character.dna.mutantrace = "skrell"
 				new_character.skrell_talk_understand = 1
 		if(client.prefs.species == "Kidan")
-			if(is_alien_whitelisted(src, "Kidan"|| !config.usealienwhitelist))
+			if(is_alien_whitelisted(src, "Kidan") || !config.usealienwhitelist)
 				new_character.dna.mutantrace = "kidan"
 				new_character.kidan_talk_understand = 1
+
+		if(client.prefs.language == "Tajaran")
+			if(is_alien_whitelisted(src, "Language_Tajaran") || !config.usealienwhitelist)
+				new_character.tajaran_talk_understand = 1
+		if(client.prefs.language == "Unathi")
+			if(is_alien_whitelisted(src, "Language_Soghun") || !config.usealienwhitelist)
+				new_character.soghun_talk_understand = 1
+		if(client.prefs.language == "Skrell")
+			if(is_alien_whitelisted(src, "Language_Skrell") || !config.usealienwhitelist)
+				new_character.skrell_talk_understand = 1
+		if(client.prefs.language == "Kidan")
+			if(is_alien_whitelisted(src, "Language_Kidan") || !config.usealienwhitelist)
+				new_character.kidan_talk_understand = 1
+
 
 		if(ticker.random_players)
 			new_character.gender = pick(MALE, FEMALE)
