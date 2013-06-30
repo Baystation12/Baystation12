@@ -152,7 +152,6 @@
 
 	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
 	var/channels = list()
-	var/type = null
 
 	if(module)
 		return
