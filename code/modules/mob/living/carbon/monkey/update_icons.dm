@@ -33,9 +33,9 @@
 		if("tajaran")
 			ico = "tajkey"
 		if("lizard")
-			ico = "stok"
+			ico = "stokkey"
 		if("skrell")
-			icon_state = "skrellkey"
+			ico = "skrellkey"
 	if(lying)
 		icon_state = ico + "0"
 		for(var/image/I in overlays_lying)
