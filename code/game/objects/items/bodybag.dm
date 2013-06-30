@@ -74,7 +74,10 @@
 			if(opened)	return 0
 			if(contents.len)	return 0
 			visible_message("[usr] folds up the [src.name]")
-			new/obj/item/bodybag(get_turf(src))
+			if(istype(src,/obj/structure/closet/body_bag/cryobag))
+				new/obj/item/bodybag/cryobag(get_turf(src))
+			else
+				new/obj/item/bodybag(get_turf(src))
 			spawn(0)
 				del(src)
 			return
@@ -91,7 +94,6 @@
 	desc = "A folded, non-reusable bag designed for the preservation of an occupant's brain by stasis."
 	icon = 'icons/obj/cryobag.dmi'
 	icon_state = "bodybag_folded"
-
 
 	attack_self(mob/user)
 		var/obj/structure/closet/body_bag/cryobag/R = new /obj/structure/closet/body_bag/cryobag(user.loc)
