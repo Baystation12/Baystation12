@@ -144,194 +144,104 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
-	var/mod = input("Please, select a module!", "Robot", null, null) in list("Standard", "Engineering", "Medical", "Miner", "Janitor","Service", "Security")
+	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor","Service", "Security","Combat")
+	if(emagged || security_level > SEC_LEVEL_BLUE)
+		src << "\red Crisis mode active. Combat module available."
+		modules+="Combat"
+	var/mod = input("Please, select a module!", "Robot", null, null) in modules
+
+	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
 	var/channels = list()
+	var/type = null
+
 	if(module)
 		return
+
 	switch(mod)
 		if("Standard")
-			updatename(mod)
 			module = new /obj/item/weapon/robot_module/standard(src)
-			hands.icon_state = "standard"
-			var/icontype
-			var/triesleft = 6
-			while (triesleft)
-				triesleft--
-				if (src.name == "Lucy" && src.ckey == "rowtree")
-					icontype = ("Lucy")
-					triesleft = 0
-				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Standard")
-				switch(icontype)
-					if("Basic")	icon_state = "robot_old"
-					if("Lucy") icon_state = "rowtree-lucy"
-					else		icon_state = "robot"
-				if(triesleft)
-					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
-						if("Yes")
-							triesleft = 0
 			modtype = "Stand"
-			feedback_inc("cyborg_standard",1)
+			module_sprites["Basic"] = "robot_old"
+			module_sprites["Android"] = "droid"
+			module_sprites["Default"] = "robot"
 
 		if("Service")
-			updatename(mod)
 			module = new /obj/item/weapon/robot_module/butler(src)
-			hands.icon_state = "service"
-			var/icontype
-			var/triesleft = 6
-			while (triesleft)
-				triesleft--
-				if (src.name == "Lucy" && src.ckey == "rowtree")
-					icontype = ("Lucy")
-					triesleft = 0
-				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Waitress", "Bro", "Butler", "Kent", "Rich")
-				switch(icontype)
-					if("Waitress")	icon_state = "Service"
-					if("Kent")		icon_state = "toiletbot"
-					if("Bro")		icon_state = "Brobot"
-					if("Rich")		icon_state = "maximillion"
-					if("Lucy")		icon_state = "rowtree-lucy"
-					else				icon_state = "Service2"
-				if(triesleft)
-					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
-						if("Yes")
-							triesleft = 0
 			modtype = "Butler"
-			feedback_inc("cyborg_service",1)
+			module_sprites["Waitress"] = "Service"
+			module_sprites["Kent"] = "toiletbot"
+			module_sprites["Bro"] = "Brobot"
+			module_sprites["Rich"] = "maximillion"
+			module_sprites["Default"] = "Service2"
 
 		if("Miner")
-			updatename(mod)
 			module = new /obj/item/weapon/robot_module/miner(src)
-			hands.icon_state = "miner"
-			var/icontype
-			var/triesleft = 6
-			while (triesleft)
-				triesleft--
-				if (src.name == "Lucy" && src.ckey == "rowtree")
-					icontype = ("Lucy")
-					triesleft = 0
-				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Advanced Droid", "Treadhead")
-				switch(icontype)
-					if("Basic")	icon_state = "Miner_old"
-					if("Advanced Droid")	icon_state = "droid-miner"
-					if("Lucy")		icon_state = "rowtree-lucy"
-					else		icon_state = "Miner"
-				if(triesleft)
-					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
-						if("Yes")
-							triesleft = 0
 			modtype = "Miner"
-			feedback_inc("cyborg_miner",1)
 			channels = list("Mining" = 1)
+			module_sprites["Basic"] = "Miner_old"
+			module_sprites["Advanced Droid"] = "droid-miner"
+			module_sprites["Default"] = "Miner"
 
 		if("Medical")
-			updatename(mod)
 			module = new /obj/item/weapon/robot_module/medical(src)
-			hands.icon_state = "medical"
-			var/icontype
-			var/triesleft = 6
-			while (triesleft)
-				triesleft--
-				if (src.name == "Lucy" && src.ckey == "rowtree")
-					icontype = ("Lucy")
-					triesleft = 0
-				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Advanced Droid", "Needles", "Hoverbot")
-				switch(icontype)
-					if("Basic")	icon_state = "Medbot"
-					if("Advanced Droid")	icon_state = "droid-medical"
-					if("Needles")	icon_state = "medicalrobot"
-					if("Lucy")		icon_state = "rowtree-medical"
-					else		icon_state = "surgeon"
-				if(triesleft)
-					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
-						if("Yes")
-							triesleft = 0
 			modtype = "Med"
-			status_flags &= ~CANPUSH
-			feedback_inc("cyborg_medical",1)
 			channels = list("Medical" = 1)
+			module_sprites["Basic"] = "Medbot"
+			module_sprites["Advanced Droid"] = "droid-medical"
+			module_sprites["Needles"] = "medicalrobot"
+			module_sprites["Standard"] = "surgeon"
 
 		if("Security")
-			updatename(mod)
 			module = new /obj/item/weapon/robot_module/security(src)
-			hands.icon_state = "security"
-			var/icontype
-			var/triesleft = 6
-			while (triesleft)
-				triesleft--
-				if (src.name == "Lucy" && src.ckey == "rowtree")
-					icontype = ("Lucy")
-					triesleft = 0
-				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Red Knight", "Black Knight", "Bloodhound")
-				switch(icontype)
-					if("Basic")	icon_state = "secborg"
-					if("Red Knight")	icon_state = "Security"
-					if("Black Knight")	icon_state = "securityrobot"
-					if("Lucy")		icon_state = "rowtree-security"
-					else		icon_state = "bloodhound"
-				if(triesleft)
-					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
-						if("Yes")
-							triesleft = 0
 			modtype = "Sec"
-			//speed = -1 Secborgs have nerfed tasers now, so the speed boost is not necessary
-			status_flags &= ~CANPUSH
-			feedback_inc("cyborg_security",1)
 			channels = list("Security" = 1)
+			module_sprites["Basic"] = "secborg"
+			module_sprites["Red Knight"] = "Security"
+			module_sprites["Black Knight"] = "securityrobot"
+			module_sprites["Bloodhound"] = "bloodhound"
 
 		if("Engineering")
-			updatename(mod)
 			module = new /obj/item/weapon/robot_module/engineering(src)
-			hands.icon_state = "engineer"
-			var/icontype
-			var/triesleft = 6
-			while (triesleft)
-				triesleft--
-				if (src.name == "Lucy" && src.ckey == "rowtree")
-					icontype = ("Lucy")
-					triesleft = 0
-				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Antique", "Landmate")
-				switch(icontype)
-					if("Basic")	icon_state = "Engineering"
-					if("Antique") icon_state = "engineerrobot"
-					if("Lucy")		icon_state = "rowtree-engineering"
-					else		icon_state = "landmate"
-				if(triesleft)
-					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
-						if("Yes")
-							triesleft = 0
 			modtype = "Eng"
-			feedback_inc("cyborg_engineering",1)
 			channels = list("Engineering" = 1)
+			module_sprites["Basic"] = "Engineering"
+			module_sprites["Antique"] = "engineerrobot"
+			module_sprites["Landmate"] = "landmate"
 
 		if("Janitor")
-			updatename(mod)
 			module = new /obj/item/weapon/robot_module/janitor(src)
-			hands.icon_state = "janitor"
-			var/icontype
-			var/triesleft = 6
-			while (triesleft)
-				triesleft--
-				if (src.name == "Lucy" && src.ckey == "rowtree")
-					icontype = ("Lucy")
-					triesleft = 0
-				else icontype = input("Select an icon! [triesleft ? "You would have [triesleft] more tries." : "This is your last try."]", "Robot", null, null) in list("Basic", "Mopbot", "Zamboni")
-				switch(icontype)
-					if("Basic")	icon_state = "JanBot2"
-					if("Mopbot") icon_state = "janitorrobot"
-					if("Lucy")		icon_state = "rowtree-lucy"
-					else		icon_state = "mopgearrex"
-				if(triesleft)
-					switch(input("Look at your icon - is this what you want?") in list("Yes","No"))
-						if("Yes")
-							triesleft = 0
 			modtype = "Jan"
-			feedback_inc("cyborg_janitor",1)
+			module_sprites["Basic"] = "JanBot2"
+			module_sprites["Mopbot"]  = "janitorrobot"
+			module_sprites["Mop Gear Rex"] = "mopgearrex"
 
-	overlays -= "eyes" //Takes off the eyes that it started with
+		if("Combat")
+			module = new /obj/item/weapon/robot_module/combat(src)
+			modtype = "Com"
+			module_sprites["Combat Android"] = "droid-combat"
+			channels = list("Security" = 1)
+
+	//Begin awful custom item checks.
+	if (src.name == "Lucy"  && src.ckey == "rowtree")
+		switch(mod)
+			if("Medical")
+				module_sprites["Lucy"] = "rowtree-medical"
+			if("Security" || "Combat")
+				module_sprites["Lucy"] = "rowtree-security"
+			if("Engineering")
+				module_sprites["Lucy"] = "rowtree-engineering"
+			else
+				module_sprites["Lucy"] = "rowtree-lucy"
+
+	hands.icon_state = lowertext(mod)
+	feedback_inc("cyborg_[lowertext(mod)]",1)
+	updatename(mod)
+
+	if(mod == "Medical" || mod == "Security" || mod == "Combat")
+		status_flags &= ~CANPUSH
+
+	choose_icon(6,module_sprites)
 	radio.config(channels)
-	updateicon()
-
-/
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 
@@ -1287,3 +1197,35 @@
 	set category = "IC"
 
 	flavor_text =  copytext(sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text), 1)
+
+/mob/living/silicon/robot/proc/choose_icon(var/triesleft, var/list/module_sprites)
+
+	if(triesleft<1 || !module_sprites.len)
+		return
+	else
+		triesleft--
+
+	var/icontype
+
+	if (src.name == "Lucy" && src.ckey == "rowtree")
+		icontype = "Lucy"
+		triesleft = 0
+	else
+		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chances." : "This is your last try."]", "Robot", null, null) in module_sprites
+
+	if(icontype)
+		icon_state = module_sprites[icontype]
+	else
+		src << "Something is badly wrong with the sprite selection. Harass a coder."
+		icon_state = module_sprites[1]
+		return
+
+	overlays -= "eyes"
+	updateicon()
+
+	var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
+	if(choice=="No")
+		choose_icon(triesleft, module_sprites)
+	else
+		triesleft = 0
+		return
