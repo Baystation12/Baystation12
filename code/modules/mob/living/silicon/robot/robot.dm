@@ -698,7 +698,7 @@
 				for(var/V in components)
 					if(V == "power cell") continue
 					var/datum/robot_component/C = components[V]
-					if(C.installed == 1)
+					if(C.installed == 1 || C.installed == -1)
 						removable_components += V
 
 				var/remove = input(user, "Which component do you want to pry out?", "Remove Component") as null|anything in removable_components
