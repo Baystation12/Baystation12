@@ -44,7 +44,12 @@
 						/obj/item/robot_parts/l_arm,
 						/obj/item/robot_parts/r_arm,
 						/obj/item/robot_parts/l_leg,
-						/obj/item/robot_parts/r_leg
+						/obj/item/robot_parts/r_leg,
+						/obj/item/robot_parts/robot_component/binary_communication_device,
+						/obj/item/robot_parts/robot_component/radio,
+						/obj/item/robot_parts/robot_component/actuator,
+						/obj/item/robot_parts/robot_component/diagnosis_unit,
+						/obj/item/robot_parts/robot_component/camera
 					),
 	"Ripley"=list(
 						/obj/item/mecha_parts/chassis/ripley,

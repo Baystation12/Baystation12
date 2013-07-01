@@ -596,7 +596,6 @@ var/list/slot_equipment_priority = list( \
 			M.LAssailant = null
 		else
 			M.LAssailant = usr
-			return
 
 	if(pulling)
 		var/pulling_old = pulling
@@ -604,6 +603,7 @@ var/list/slot_equipment_priority = list( \
 		// Are we pulling the same thing twice? Just stop pulling.
 		if(pulling_old == AM)
 			return
+
 	src.pulling = AM
 	AM.pulledby = src
 

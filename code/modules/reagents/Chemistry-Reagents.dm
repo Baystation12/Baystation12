@@ -2792,7 +2792,7 @@ datum
 
 				// make all the beverages work together
 				for(var/datum/reagent/ethanol/A in holder.reagent_list)
-					if(A.data) d += A.data
+					if(isnum(A.data)) d += A.data
 
 				M.dizziness +=dizzy_adj.
 				if(d >= slur_start && d < pass_out)
@@ -3453,14 +3453,14 @@ datum
 				nutriment_factor = 1 * FOOD_METABOLISM
 				color = "#2E6671" // rgb: 46, 102, 113
 
-			on_mob_life(var/mob/living/M as mob)
-				if(!data) data = 1
-				data++
-				M.dizziness +=10
-				if(data >= 55 && data <115)
-					if (!M.stuttering) M.stuttering = 1
-					M.stuttering += 10
-				else if(data >= 115 && prob(33))
-					M.confused = max(M.confused+15,15)
-				..()
-				return
+				on_mob_life(var/mob/living/M as mob)
+					if(!data) data = 1
+					data++
+					M.dizziness +=10
+					if(data >= 55 && data <115)
+						if (!M.stuttering) M.stuttering = 1
+						M.stuttering += 10
+					else if(data >= 115 && prob(33))
+						M.confused = max(M.confused+15,15)
+					..()
+					return
