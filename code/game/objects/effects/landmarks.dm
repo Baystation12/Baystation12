@@ -69,6 +69,10 @@
 			xeno_spawn += loc
 			del(src)
 
+		if("ninjastart")
+			ninjastart += loc
+			del(src)
+
 	landmarks_list += src
 	return 1
 
