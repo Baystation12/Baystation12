@@ -10,6 +10,7 @@
 	update_icon = 0		///no need to call regenerate_icon
 
 	var/obj/item/weapon/card/id/wear_id = null // Fix for station bounced radios -- Skie
+
 /mob/living/carbon/monkey/tajara
 	name = "farwa"
 	voice_name = "farwa"
@@ -28,7 +29,7 @@
 	voice_name = "stok"
 	voice_message = "hisses"
 	say_message = "hisses"
-	icon_state = "stok1"
+	icon_state = "stokkey1"
 
 /mob/living/carbon/monkey/unathi/New()
 	var/datum/reagents/R = new/datum/reagents(1000)

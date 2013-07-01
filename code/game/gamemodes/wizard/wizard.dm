@@ -45,7 +45,6 @@
 /datum/game_mode/wizard/pre_setup()
 	for(var/datum/mind/wizard in wizards)
 		wizard.current.loc = pick(wizardstart)
-
 	return 1
 
 

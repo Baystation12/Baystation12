@@ -290,3 +290,16 @@
 /obj/item/clothing/tie/holobadge/attack(mob/living/carbon/human/M, mob/living/user)
 	if(isliving(user))
 		user.visible_message("\red [user] invades [M]'s personal space, thrusting [src] into their face insistently.","\red You invade [M]'s personal space, thrusting [src] into their face insistently. You are the law.")
+
+/obj/item/weapon/storage/box/holobadge
+	name = "holobadge box"
+	desc = "A box claiming to contain holobadges."
+	New()
+		new /obj/item/clothing/tie/holobadge(src)
+		new /obj/item/clothing/tie/holobadge(src)
+		new /obj/item/clothing/tie/holobadge(src)
+		new /obj/item/clothing/tie/holobadge(src)
+		new /obj/item/clothing/tie/holobadge/cord(src)
+		new /obj/item/clothing/tie/holobadge/cord(src)
+		..()
+		return

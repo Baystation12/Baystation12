@@ -36,6 +36,18 @@
 	isHandgun()
 		return 0
 
+/obj/item/weapon/gun/energy/pulse_rifle/cyborg/load_into_chamber()
+	if(in_chamber)
+		return 1
+	if(isrobot(src.loc))
+		var/mob/living/silicon/robot/R = src.loc
+		if(R && R.cell)
+			R.cell.use(charge_cost)
+			in_chamber = new/obj/item/projectile/beam(src)
+			return 1
+	return 0
+
+
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer
 	name = "pulse destroyer"
 	desc = "A heavy-duty, pulse-based energy weapon."
@@ -54,5 +66,3 @@
 
 	isHandgun()
 		return 1
-
-
