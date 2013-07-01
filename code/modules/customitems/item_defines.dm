@@ -147,6 +147,12 @@
 	icon = 'custom_items.dmi'
 	icon_state = "maye_daye_1"
 
+/obj/item/weapon/storage/firstaid/fluff/asus_rose //Kerbal22 - Asus Rose
+	name = "rugged medkit"
+	desc = "A dinged up medkit, it seems to have seen quite a bit of use."
+	icon = 'custom_items.dmi'
+	icon_state = "asusrose"
+
 /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/johann_erzatz_1 //leonheart11:  Johann Erzatz
 	name = "vintage thermos"
 	desc = "An older thermos with a faint shine."
@@ -267,6 +273,13 @@
 	icon_state = "beakerlarge"
 	g_amt = 5000
 	volume = 100
+
+/obj/item/weapon/reagent_containers/glass/beaker/fluff/eleanor_stone //Rkf45: Eleanor Stone
+	name = "teapot"
+	desc = "An elegant teapot. The engraving on the bottom reads 'ENS'"
+	icon = 'custom_items.dmi'
+	icon_state = "eleanorstone"
+	item_state = "eleanorstone"
 
 /obj/item/weapon/storage/pill_bottle/fluff/listermedbottle //compactninja: Lister Black
 	name = "Pill bottle (anti-depressants)"
@@ -510,17 +523,18 @@
 	icon = 'custom_items.dmi'
 	icon_state = "edvin_telephosphor_1"
 
-/obj/item/clothing/head/hardhat/fluff/neil_patterson_1 //superboredguy: Neil Patterson
-	name = "Engineering Cap"
-	desc = "Much safer than a hard helmet."
-	icon = 'custom_items.dmi'
-	icon_state = "neilpatterson0_hat"
-
 /obj/item/clothing/head/fluff/krinnhat //Shirotyrant: Krinn Seeskale
 	name = "saucepan hat"
 	desc = "This hat is the shiniest shiny Krinn has ever owned."
 	icon = 'custom_items.dmi'
 	icon_state = "krinn_hat"
+
+/obj/item/clothing/head/fluff/bruce_hachert //Stup1dg33kz: Bruce Hachert
+	name = "worn hat"
+	desc = "A worn-looking hat. It is slightly faded in color."
+	icon = 'custom_items.dmi'
+	icon_state = "brucehachert"
+
 //////////// Suits ////////////
 
 /obj/item/clothing/suit/storage/labcoat/fluff/pink //spaceman96: Trenna Seber
@@ -544,12 +558,6 @@
 	icon_state = "leatherjack"
 	item_state = "leatherjack"
 	color = "leatherjack"
-
-/obj/item/clothing/suit/storage/labcoat/fluff/burnt //Jamini: Edwin Atweeke
-	name = "burnt labcoat"
-	desc = "This lab coat has clearly seen better, less burnt, days."
-	icon = 'custom_items.dmi'
-	icon_state = "labcoat_burnt_open"
 
 /obj/item/clothing/suit/armor/vest/fluff/deus_blueshield //deusdactyl
 	name = "blue shield security armor"
@@ -802,3 +810,24 @@
 /obj/item/weapon/melee/baton/fluff/oeng_baton
 	name = "well-used stun baton"
 	desc = "A stun baton used for incapacitating targets; there seems to be a bunch of tally marks set into the handle."
+
+///// Deckard .44 - Callum Leamas - Roaper
+/obj/item/weapon/gun/projectile/detective/fluff/callum_leamas
+	name = "Deckard .44"
+	desc = "A custom built revolver, based off the semi-popular Detective Special model."
+	icon = 'custom_items.dmi'
+	icon_state = "leamas-empty"
+
+/obj/item/weapon/gun/projectile/detective/fluff/callum_leamas/update_icon()
+
+	..()
+	if(loaded.len)
+		icon_state = "leamas-loaded"
+	else
+		icon_state = "leamas-empty"
+
+/obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
+
+	if(istype(A, /obj/item/ammo_magazine))
+		flick("leamas-reloading",src)
+	..()
