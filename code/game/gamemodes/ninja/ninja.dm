@@ -15,7 +15,6 @@
 	world << "<B>The current game mode is Ninja!</B>"
 
 /datum/game_mode/ninja/can_start()
-	world << "CAN START CALLED"
 	if(!..())
 		return 0
 	var/list/datum/mind/possible_ninjas = get_players_for_role(BE_NINJA)
@@ -42,7 +41,6 @@
 	return 1
 
 /datum/game_mode/ninja/pre_setup()
-	world << "PRE SETUP CALLED"
 	for(var/datum/mind/ninja in ninjas)
 		ninja.current << browse(null, "window=playersetup")
 		ninja.current = create_space_ninja(pick(ninjastart.len ? ninjastart : latejoin))
@@ -50,7 +48,6 @@
 	return 1
 
 /datum/game_mode/ninja/post_setup()
-	world << "POST SETUP CALLED"
 	for(var/datum/mind/ninja in ninjas)
 		if(ninja.current && !(istype(ninja.current,/mob/living/carbon/human))) return 0
 		//forge_ninja_objectives(ninja)
@@ -81,7 +78,6 @@
 		return 1
 
 /datum/game_mode/ninja/proc/forge_ninja_objectives(var/datum/mind/ninja)
-	world << "NINJA OBJECTIVES FORGED"
 	var/objective_list[] = list(1,2,3,4,5)
 	for(var/i=rand(2,4),i>0,i--)
 		switch(pick(objective_list))
