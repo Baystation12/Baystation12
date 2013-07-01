@@ -128,3 +128,9 @@ obj/machinery/recharger/wallcharger/process()
 				use_power(150)
 			else
 				icon_state = "wrecharger2"
+
+obj/machinery/recharger/wallcharger/update_icon()
+	if(charging)
+		icon_state = "wrecharger1"
+	else
+		icon_state = "wrecharger0"

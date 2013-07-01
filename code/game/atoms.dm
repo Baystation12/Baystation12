@@ -214,7 +214,7 @@ its easier to just keep the beam vertical.
 /atom/verb/examine()
 	set name = "Examine"
 	set category = "IC"
-	set src in oview(12)	//make it work from farther away
+	set src in view(usr.client) //If it can be seen, it can be examined.
 
 	if (!( usr ))
 		return

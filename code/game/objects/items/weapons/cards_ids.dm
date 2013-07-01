@@ -80,6 +80,14 @@
 	var/rank = null			//actual job
 	var/dorm = 0		// determines if this ID has claimed a dorm already
 
+/obj/item/weapon/card/id/New()
+	..()
+	spawn(30)
+	if(istype(loc, /mob/living/carbon/human))
+		blood_type = loc:dna:b_type
+		dna_hash = loc:dna:unique_enzymes
+		fingerprint_hash = md5(loc:dna:uni_identity)
+
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
 	for(var/mob/O in viewers(user, null))
 		O.show_message(text("[] shows you: \icon[] []: assignment: []", user, src, src.name, src.assignment), 1)
@@ -92,6 +100,17 @@
 
 /obj/item/weapon/card/id/GetID()
 	return src
+
+/obj/item/weapon/card/id/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if(istype(W,/obj/item/weapon/id_wallet))
+		user << "You slip [src] into [W]."
+		src.name = "[src.registered_name]'s [W.name] ([src.assignment])"
+		src.desc = W.desc
+		src.icon = W.icon
+		src.icon_state = W.icon_state
+		del(W)
+		return
 
 /obj/item/weapon/card/id/verb/read()
 	set name = "Read ID Card"
