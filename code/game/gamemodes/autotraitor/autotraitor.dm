@@ -81,7 +81,7 @@
 		var/playercount = 0
 		var/traitorcount = 0
 		var/possible_traitors[0]
-		for(var/mob/living/player in world)
+		for(var/mob/living/player in mob_list)
 
 			if (player.client && player.stat != 2)
 				playercount += 1
@@ -153,7 +153,7 @@
 		//message_admins("Checking number of players")
 		var/playercount = 0
 		var/traitorcount = 0
-		for(var/mob/living/player in world)
+		for(var/mob/living/player in mob_list)
 
 			if (player.client && player.stat != 2)
 				playercount += 1
