@@ -64,6 +64,7 @@ datum/preferences
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
 	var/species = "Human"
+	var/language = "None"				//Secondary language
 
 		//Mob preview
 	var/icon/preview_icon_front = null
@@ -251,6 +252,7 @@ datum/preferences
 		dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 		dat += "<br>"
 		dat += "Species: <a href='byond://?src=\ref[user];preference=species;task=input'>[species]</a><br>"
+		dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
 		dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
 		dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 		//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
@@ -851,6 +853,32 @@ datum/preferences
 
 							s_tone = 0
 
+					if("language")
+						var/list/new_language = list("None")
+						var/language_whitelisted = 0
+						if(config.usealienwhitelist)
+							if(is_alien_whitelisted(user, "Language_Soghun"))
+								new_language += "Unathi"
+								language_whitelisted = 1
+							if(is_alien_whitelisted(user, "Language_Tajaran"))
+								new_language += "Tajaran"
+								language_whitelisted = 1
+							if(is_alien_whitelisted(user, "Language_Skrell"))
+								new_language += "Skrell"
+								language_whitelisted = 1
+							if(is_alien_whitelisted(user, "Language_Kidan"))
+								new_language += "Kidan"
+								language_whitelisted = 1
+
+							if(!language_whitelisted)
+								alert(user, "You cannot select a secondary language as you need to be whitelisted.  If you wish to enable a language, post in the Alien Whitelist forums.")
+
+						else
+							new_language += "Unathi"
+							new_language += "Tajaran"
+							new_language += "Skrell"
+							new_language += "Kidan"
+						language = input("Please select a secondary language", "Character Generation", null) in new_language
 
 					if("metadata")
 						var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null

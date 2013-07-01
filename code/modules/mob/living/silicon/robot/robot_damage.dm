@@ -47,7 +47,11 @@
 	picked.heal_damage(brute,burn)
 
 /mob/living/silicon/robot/take_organ_damage(var/brute, var/burn, var/sharp = 0)
-	var/datum/robot_component/C = pick(get_damageable_components())
+	var/list/components = get_damageable_components()
+	if(components.len)
+		return
+
+	var/datum/robot_component/C = pick(components)
 	C.take_damage(brute,burn,sharp)
 
 /mob/living/silicon/robot/heal_overall_damage(var/brute, var/burn)

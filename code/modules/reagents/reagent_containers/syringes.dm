@@ -129,9 +129,20 @@
 					return
 
 				if(ismob(target) && target != user)
+					var/time = 30 //Injecting through a hardsuit takes longer due to needing to find a port.
+					if(istype(target,/mob/living/carbon/human))
+						var/mob/living/carbon/human/H = target
+						if(H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space))
+							time = 60
+
 					for(var/mob/O in viewers(world.view, user))
-						O.show_message(text("\red <B>[] is trying to inject []!</B>", user, target), 1)
-					if(!do_mob(user, target)) return
+						if(time == 30)
+							O.show_message(text("\red <B>[] is trying to inject []!</B>", user, target), 1)
+						else
+							O.show_message(text("\red <B>[] begins hunting for an injection port on []'s suit!</B>", user, target), 1)
+
+					if(!do_mob(user, target, time)) return
+
 					for(var/mob/O in viewers(world.view, user))
 						O.show_message(text("\red [] injects [] with the syringe!", user, target), 1)
 					src.reagents.reaction(target, INGEST)

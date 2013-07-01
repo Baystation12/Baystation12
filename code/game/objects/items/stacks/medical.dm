@@ -33,6 +33,16 @@
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
+
+		if(affecting.display_name == "head")
+			if(H.head && istype(H.head,/obj/item/clothing/head/helmet/space))
+				user << "\red You can't apply [src] through [H.head]!"
+				return 1
+		else
+			if(H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space))
+				user << "\red You can't apply [src] through [H.wear_suit]!"
+				return 1
+
 		if(affecting.status & ORGAN_ROBOT)
 			user << "\red This isn't useful at all on a robotic limb.."
 			return 1
