@@ -176,11 +176,11 @@
 
 			if(href_list["vir"])
 				var/datum/data/record/v = locate(href_list["vir"])
-				src.temp = "<center>GNAv2 based virus lifeform V-[v.fields["id"]]</center><A></A>"
-				src.temp += "<br><b>Name:</b> <A href='?src=\ref[src];field=vir_name;edit_vir=\ref[v]>[v.fields["name"]]</A>"
+				src.temp = "<center>GNAv2 based virus lifeform V-[v.fields["id"]]</center>"
+				src.temp += "<br><b>Name:</b> <A href='?src=\ref[src];field=vir_name;edit_vir=\ref[v]'>[v.fields["name"]]</A>"
 				src.temp += "<br><b>Antigen:</b> [v.fields["antigen"]]"
 				src.temp += "<br><b>Spread:</b> [v.fields["spread type"]] "
-				src.temp += "<br><b>Details:</b><br> <A href='?src=\ref[src];field=vir_desc;edit_vir=\ref[v]>[v.fields["description"]]</A>"
+				src.temp += "<br><b>Details:</b><br> <A href='?src=\ref[src];field=vir_desc;edit_vir=\ref[v]'>[v.fields["description"]]</A>"
 
 			if (href_list["del_all"])
 				src.temp = text("Are you sure you wish to delete all records?<br>\n\t<A href='?src=\ref[];temp=1;del_all2=1'>Yes</A><br>\n\t<A href='?src=\ref[];temp=1'>No</A><br>", src, src)
@@ -284,15 +284,15 @@
 								return
 							src.active1.fields["dna"] = t1
 					if("vir_name")
-						var/datum/data/record/v = locate(href_list["vir"])
-						if (istype(v, /datum/data/record))
+						var/datum/data/record/v = locate(href_list["edit_vir"])
+						if (v)
 							var/t1 = copytext(sanitize(input("Please input pathogen name:", "VirusDB", v.fields["name"], null)  as text),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!in_range(src, usr) && (!istype(usr, /mob/living/silicon))) || src.active1 != a1))
 								return
 							v.fields["name"] = t1
 					if("vir_desc")
-						var/datum/data/record/v = locate(href_list["vir"])
-						if (istype(v, /datum/data/record))
+						var/datum/data/record/v = locate(href_list["edit_vir"])
+						if (v)
 							var/t1 = copytext(sanitize(input("Please input information about pathogen:", "VirusDB", v.fields["description"], null)  as message),1,MAX_MESSAGE_LEN)
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!in_range(src, usr) && (!istype(usr, /mob/living/silicon))) || src.active1 != a1))
 								return
