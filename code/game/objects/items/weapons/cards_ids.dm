@@ -101,6 +101,17 @@
 /obj/item/weapon/card/id/GetID()
 	return src
 
+/obj/item/weapon/card/id/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if(istype(W,/obj/item/weapon/id_wallet))
+		user << "You slip [src] into [W]."
+		src.name = "[src.registered_name]'s [W.name] ([src.assignment])"
+		src.desc = W.desc
+		src.icon = W.icon
+		src.icon_state = W.icon_state
+		del(W)
+		return
+
 /obj/item/weapon/card/id/verb/read()
 	set name = "Read ID Card"
 	set category = "Object"
