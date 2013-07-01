@@ -261,7 +261,7 @@ Implants;
 		set_security_level(SEC_LEVEL_BLUE)*/
 
 
-/datum/game_mode/proc/get_players_for_role(var/role, override_jobbans=1)
+/datum/game_mode/proc/get_players_for_role(var/role, override_jobbans=0)
 	var/list/players = list()
 	var/list/candidates = list()
 	var/list/drafted = list()
@@ -275,7 +275,7 @@ Implants;
 		if(BE_WIZARD)		roletext="wizard"
 		if(BE_REV)			roletext="revolutionary"
 		if(BE_CULTIST)		roletext="cultist"
-
+		if(BE_NINJA)		roletext="ninja"
 
 	// Ultimate randomizing code right here
 	for(var/mob/new_player/player in player_list)

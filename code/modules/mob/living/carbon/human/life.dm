@@ -978,10 +978,10 @@
 				blinded = 1
 				stat = UNCONSCIOUS
 				if(halloss > 0)
-					adjustHalLoss(-6)
+					adjustHalLoss(-3)
 			else if(sleeping)
 				handle_dreams()
-				adjustHalLoss(-6)
+				adjustHalLoss(-3)
 				if (mind)
 					if((mind.active && client != null) || immune_to_ssd) //This also checks whether a client is connected, if not, sleep is not reduced.
 						sleeping = max(sleeping-1, 0)
@@ -992,12 +992,12 @@
 						emote("snore")
 			else if(resting)
 				if(halloss > 0)
-					adjustHalLoss(-6)
+					adjustHalLoss(-3)
 			//CONSCIOUS
 			else
 				stat = CONSCIOUS
 				if(halloss > 0)
-					adjustHalLoss(-2)
+					adjustHalLoss(-1)
 
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
