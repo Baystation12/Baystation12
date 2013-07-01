@@ -6,9 +6,12 @@ Scorpion
 Zero
 Ermac
 Saibot
+Sun
+Moon
 Cyrax
 Raphael
 Michaelangelo
+Cloud
 Donatello
 Leonardo
 Splinter
@@ -20,7 +23,6 @@ Ryu
 Hayabusa
 Midnight
 Seven
-McNinja
 Hanzo
 Blood
 Iga
@@ -32,7 +34,6 @@ Baki
 Ogre
 Daemon
 Goemon
-McAwesome
 Throat
 Death
 Aria
