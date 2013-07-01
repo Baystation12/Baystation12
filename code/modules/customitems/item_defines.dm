@@ -79,6 +79,11 @@
 ////////// Usable Items //////////
 //////////////////////////////////
 
+/obj/item/weapon/folder/blue/fluff/matthew_riebhardt //Matthew Riebhardt - ZekeSulastin
+	name = "academic journal"
+	desc = "An academic journal, seemingly pertaining to medical genetics. This issue is for the second quarter of 2557. Paper flags demarcate some articles the owner finds interesting."
+	icon = 'custom_items.dmi'
+	icon_state = "matthewriebhardt"
 
 /obj/item/weapon/pen/fluff/multi //spaceman96: Trenna Seber
 	name = "multicolor pen"
@@ -146,6 +151,12 @@
 	desc = "A pristine stainless steel lunch box. The initials M.D. are engraved on the inside of the lid."
 	icon = 'custom_items.dmi'
 	icon_state = "maye_daye_1"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/fluff/william_hackett
+	name = "handmade flask"
+	desc = "A wooden flask with a silver lid and bottom. It has a matte, dark blue paint on it with the initials \"W.H.\" etched in black."
+	icon = 'custom_items.dmi'
+	icon_state = "williamhackett"
 
 /obj/item/weapon/storage/firstaid/fluff/asus_rose //Kerbal22 - Asus Rose
 	name = "rugged medkit"
@@ -576,6 +587,14 @@
 
 //////////// Uniforms ////////////
 
+/obj/item/clothing/under/fluff/milo_hachert //Field Dress Uniform - Milo Hachert - Commissar_Drew
+	name = "field dress uniform"
+	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacket’s shoulder bar."
+	icon = 'custom_items.dmi'
+	icon_state = "milohachert"
+	item_state = "milohachert"
+	color = "milohachert"
+
 /obj/item/clothing/under/fluff/jumpsuitdown //searif: Yuki Matsuda
 	name = "rolled down jumpsuit"
 	desc = "A rolled down jumpsuit. Great for mechanics."
@@ -722,6 +741,20 @@
 	icon_state = "altair_locket"
 	item_state = "altair_locket"
 	color = "altair_locket"
+	slot_flags = 0
+	flags = FPRINT|TABLEPASS
+	w_class = 1
+	slot_flags = SLOT_MASK
+
+////// Silver locket - Konaa Hirano - Konaa_Hirano
+
+/obj/item/clothing/tie/fluff/konaa_hirano
+	name = "silver locket"
+	desc = "This oval shaped, argentium sterling silver locket hangs on an incredibly fine, refractive string, almost thin as hair and microweaved from links to a deceptive strength, of similar material. The edges are engraved very delicately with an elegant curving design, but overall the main is unmarked and smooth to the touch, leaving room for either remaining as a stolid piece or future alterations. There is an obvious internal place for a picture or lock of some sort, but even behind that is a very thin compartment unhinged with the pinch of a thumb and forefinger."
+	icon = 'custom_items.dmi'
+	icon_state = "konaahirano"
+	item_state = "konaahirano"
+	color = "konaahirano"
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 1
