@@ -69,6 +69,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			icon_state = "req_comp0"
 
 /obj/machinery/requests_console/New()
+	..()
 	name = "[department] Requests Console"
 	allConsoles += src
 	//req_console_departments += department

@@ -19,7 +19,7 @@ client/verb/JoinResponseTeam()
 		var/leader_selected = (response_team_members.len == 0)
 
 
-		for (var/obj/effect/landmark/L in world) if (L.name == "Commando")
+		for (var/obj/effect/landmark/L in landmarks_list) if (L.name == "Commando")
 
 			var/new_name = input(usr, "Pick a name","Name") as null|text
 			if(!new_name) return
@@ -43,9 +43,10 @@ client/verb/JoinResponseTeam()
 proc/percentage_dead()
 	var/total = 0
 	var/deadcount = 0
-	for(var/mob/living/carbon/human/H in world) if(H.mind) // I *think* monkeys gone human don't have a mind
-		if(H.stat == 2) deadcount++
-		total++
+	for(var/mob/living/carbon/human/H in mob_list)
+		if(H.client) // Monkeys and mice don't have a client, amirite?
+			if(H.stat == 2) deadcount++
+			total++
 
 	if(total == 0) return 0
 	else return round(100 * deadcount / total)
@@ -54,7 +55,7 @@ proc/percentage_dead()
 proc/percentage_antagonists()
 	var/total = 0
 	var/antagonists = 0
-	for(var/mob/living/carbon/human/H in world)
+	for(var/mob/living/carbon/human/H in mob_list)
 		if(is_special_character(H) >= 1)
 			antagonists++
 		total++
