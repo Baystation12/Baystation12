@@ -10,6 +10,25 @@
 ////////// Fluff Items ///////////
 //////////////////////////////////
 
+/obj/item/weapon/paper/fluff/sue_donem // aikasan: Sue Donem
+	name = "cyborgification waiver"
+	desc = "It's some kind of official-looking contract."
+
+/obj/item/weapon/paper/fluff/sue_donem/New()
+	..()
+
+	info = "<B>Organic Carrier AIA and Standard Cyborgification Agreement</B><BR>\n<BR>\nUnder the authority of Nanotrasen Synthetic Intelligence Division, this document hereby authorizes an accredited Roboticist of the NSS Exodus or a deputized authority to perform a regulation lobotomisation upon the person of one '<I>Sue Donem</I>' (hereafter referred to as the Subject) with intent to enact a live Artificial Intelligence Assimilation (AIA) or live Cyborgification proceedure.<BR>\n<BR>\nNo further station authorization is required, and the Subject waives all rights as a human under Nanotrasen internal and external legal protocol. This document is subject to amendment under Nanotrasen internal protocol \[REDACTED\].<BR>\n<BR>\nSigned: <I>Sue Donem</I><BR>\n"
+
+	stamps = (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the NanoTrasen Synthetic Intelligence Division rubber stamp.</i>"
+
+	var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+	stampoverlay.pixel_x = rand(-2, 2)
+	stampoverlay.pixel_y = rand(-3, 2)
+	stampoverlay.icon_state = "paper_stamp-rd"
+	overlays += stampoverlay
+
+	update_icon()
+
 /obj/item/fluff/wes_solari_1 //tzefa: Wes Solari
 	name = "family photograph"
 	desc = "A family photograph of a couple and a young child, Written on the back it says \"See you soon Dad -Roy\"."
@@ -547,6 +566,12 @@
 	icon_state = "brucehachert"
 
 //////////// Suits ////////////
+
+/obj/item/clothing/suit/storage/labcoat/fluff/aeneas_rinil //Robotics Labcoat - Aeneas Rinil [APPR]
+	name = "Robotics labcoat"
+	desc = "A labcoat with a few markings denoting it as the labcoat of roboticist."
+	icon = 'custom_items.dmi'
+	icon_state = "aeneasrinil_open"
 
 /obj/item/clothing/suit/storage/labcoat/fluff/pink //spaceman96: Trenna Seber
 	name = "pink labcoat"
