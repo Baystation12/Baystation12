@@ -27,7 +27,7 @@ var/global/datum/money_account/vendor_account
 
 		//add the account
 		station_account.transaction_log.Add(T)
-		for(var/obj/machinery/account_database/A in world)
+		for(var/obj/machinery/account_database/A in machines)
 			A.accounts.Add(station_account)
 
 /proc/create_department_account(department)
@@ -50,7 +50,7 @@ var/global/datum/money_account/vendor_account
 
 	//add the account
 	department_account.transaction_log.Add(T)
-	for(var/obj/machinery/account_database/A in world)
+	for(var/obj/machinery/account_database/A in machines)
 		A.accounts.Add(department_account)
 
 	department_accounts[department] = department_account
@@ -194,7 +194,7 @@ var/global/datum/money_account/vendor_account
 	if(href_list["choice"])
 		switch(href_list["choice"])
 			if("sync_accounts")
-				for(var/obj/machinery/account_database/A in world)
+				for(var/obj/machinery/account_database/A in machines)
 					for(var/datum/money_account/M in src.accounts)
 						if(!A.accounts.Find(M))
 							A.accounts.Add(M)
@@ -257,7 +257,7 @@ var/global/datum/money_account/vendor_account
 
 /obj/machinery/account_database/proc/add_account_across_all(var/new_owner_name = "Default user", var/starting_funds = 0, var/pre_existing = 0)
 	var/datum/money_account/M = add_account(new_owner_name, starting_funds, pre_existing)
-	for(var/obj/machinery/account_database/D in world)
+	for(var/obj/machinery/account_database/D in machines)
 		if(D == src)
 			continue
 		D.accounts.Add(M)
