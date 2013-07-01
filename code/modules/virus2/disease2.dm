@@ -75,11 +75,13 @@
 	mob.virus2.Remove("[uniqueID]")
 
 /datum/disease2/disease/proc/minormutate()
+	uniqueID = rand(0,10000)
 	var/datum/disease2/effectholder/holder = pick(effects)
 	holder.minormutate()
 	infectionchance = min(10,infectionchance + rand(0,1))
 
 /datum/disease2/disease/proc/majormutate()
+	uniqueID = rand(0,10000)
 	var/datum/disease2/effectholder/holder = pick(effects)
 	holder.majormutate()
 	if (prob(5))
