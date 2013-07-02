@@ -226,9 +226,10 @@
 
 	New()
 		src.modules += new /obj/item/borg/sight/thermal(src)
-		src.modules += new /obj/item/weapon/melee/energy/sword(src)
 		src.modules += new /obj/item/weapon/gun/energy/lasercannon/cyborg(src)
 		src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
+		src.modules += new /obj/item/borg/combat/shield(src)
+		src.modules += new /obj/item/borg/combat/mobility(src)
 		src.modules += new /obj/item/weapon/wrench(src) //Is a combat android really going to be stopped by a chair?
 		src.emag = new /obj/item/weapon/gun/energy/pulse_rifle/cyborg(src)
 		return

@@ -127,7 +127,7 @@
 		"/obj/item/device/flashlight",
 		"/obj/item/device/pda",
 		"/obj/item/device/radio/headset",
-		"/obj/item/weapon/melee/baton",
+		"/obj/item/weapon/melee",
 		"/obj/item/taperoll/police",
 		"/obj/item/weapon/gun/energy/taser"
 		)

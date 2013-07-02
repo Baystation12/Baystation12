@@ -569,6 +569,7 @@ datum/objective/steal
 					for(var/mob/living/silicon/ai/M in C)
 						if(istype(M, /mob/living/silicon/ai) && M.stat != 2) //See if any AI's are alive inside that card.
 							return 1
+
 				for(var/obj/item/clothing/suit/space/space_ninja/S in all_items) //Let an AI downloaded into a space ninja suit count
 					if(S.AI && S.AI.stat != 2)
 						return 1

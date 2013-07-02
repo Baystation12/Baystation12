@@ -243,7 +243,7 @@ Implants;
 			else
 				intercepttext += "<b>[M.name]</b>, the <b>[M.mind.assigned_role]</b> <br>"
 
-	for (var/obj/machinery/computer/communications/comm in world)
+	for (var/obj/machinery/computer/communications/comm in machines)
 		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
 			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
 			intercept.name = "paper- 'Cent. Com. Status Summary'"
