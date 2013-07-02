@@ -9,6 +9,7 @@
 
 	var/sight_mode = 0
 	var/custom_name = ""
+	var/base_icon
 
 //Hud stuff
 
@@ -241,6 +242,7 @@
 
 	choose_icon(6,module_sprites)
 	radio.config(channels)
+	base_icon = icon_state
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 
@@ -985,7 +987,16 @@
 			overlays += "ov-openpanel +c"
 		else
 			overlays += "ov-openpanel -c"
-	return
+
+	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
+		overlays += "[icon_state]-shield"
+
+	if(base_icon)
+		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
+			icon_state = "[base_icon]-roll"
+		else
+			icon_state = base_icon
+		return
 
 //Call when target overlay should be added/removed
 /mob/living/silicon/robot/update_targeted()

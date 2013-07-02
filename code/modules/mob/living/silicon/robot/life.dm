@@ -5,7 +5,6 @@
 	if (src.monkeyizing)
 		return
 
-
 	src.blinded = null
 
 	//Status updates, death etc.
@@ -20,9 +19,6 @@
 		process_killswitch()
 		process_locks()
 	update_canmove()
-
-
-
 
 /mob/living/silicon/robot/proc/clamp_values()
 
@@ -286,7 +282,7 @@
 		src.module_state_2:screen_loc = ui_inv2
 	if(src.module_state_3)
 		src.module_state_3:screen_loc = ui_inv3
-
+	updateicon()
 
 /mob/living/silicon/robot/proc/process_killswitch()
 	if(killswitch)
