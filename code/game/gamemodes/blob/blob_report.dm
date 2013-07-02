@@ -19,7 +19,7 @@
 			intercepttext += "Message ends."
 		if(2)
 			var/nukecode = "ERROR"
-			for(var/obj/machinery/nuclearbomb/bomb in world)
+			for(var/obj/machinery/nuclearbomb/bomb in machines)
 				if(bomb && bomb.r_code)
 					if(bomb.z == 1)
 						nukecode = bomb.r_code
@@ -39,7 +39,7 @@
 					aiPlayer.set_zeroth_law(law)
 					aiPlayer << "Laws Updated: [law]"
 
-	for(var/obj/machinery/computer/communications/comm in world)
+	for(var/obj/machinery/computer/communications/comm in machines)
 		comm.messagetitle.Add(interceptname)
 		comm.messagetext.Add(intercepttext)
 		if(!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
