@@ -80,17 +80,7 @@
 			var/name = t.fields["name"]
 			var/rank = t.fields["rank"]
 			var/real_rank = t.fields["real_rank"]
-
-			var/active = 0
-			for(var/mob/M in player_list) if(M.name == name)
-				// For dead ones, have a chance to get their status wrong
-				if(M.stat == 2)
-					active = M.x % 2 // Should be good enough, avoids their status flipping constantly
-					break
-				else if(M.client && M.client.inactivity <= 10 * 60 * 10)
-					active = 1
-					break
-			isactive[name] = active ? "Active" : "SSD"
+			isactive[name] = t.fields["p_stat"]
 
 			//world << "[name]: [rank]"
 
