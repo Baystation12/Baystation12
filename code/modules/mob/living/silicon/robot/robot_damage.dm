@@ -1,3 +1,11 @@
+/mob/living/silicon/robot/updatehealth()
+	if(status_flags & GODMODE)
+		health = 100
+		stat = CONSCIOUS
+		return
+	health = 100 - getBruteLoss() - getFireLoss()
+	return
+
 /mob/living/silicon/robot/getBruteLoss()
 	var/amount = 0
 	for(var/V in components)
@@ -44,6 +52,7 @@
 	if(!parts.len)	return
 	var/datum/robot_component/picked = pick(parts)
 	picked.heal_damage(brute,burn)
+	updatehealth()
 
 /mob/living/silicon/robot/take_organ_damage(var/brute, var/burn, var/sharp = 0)
 	var/list/components = get_damageable_components()
@@ -52,6 +61,7 @@
 
 	var/datum/robot_component/C = pick(components)
 	C.take_damage(brute,burn,sharp)
+	updatehealth()
 
 /mob/living/silicon/robot/heal_overall_damage(var/brute, var/burn)
 	var/list/datum/robot_component/parts = get_damaged_components(brute,burn)
@@ -68,6 +78,7 @@
 		burn -= (burn_was-picked.electronics_damage)
 
 		parts -= picked
+		updatehealth()
 
 /mob/living/silicon/robot/take_overall_damage(var/brute = 0, var/burn = 0, var/sharp = 0, var/used_weapon = null)
 	if(status_flags & GODMODE)	return	//godmode
@@ -102,3 +113,5 @@
 		burn	-= (picked.electronics_damage - burn_was)
 
 		parts -= picked
+
+	updatehealth()
