@@ -77,7 +77,6 @@
 	var/alert_desc_delta = "The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
 
 	var/forbid_singulo_possession = 0
-	var/useircbot = 0
 
 	//game_options.txt configs
 
@@ -118,6 +117,11 @@
 	var/assistant_maint = 0 //Do assistants get maint access?
 	var/gateway_delay = 18000 //How long the gateway takes before it activates. Default is half an hour.
 	var/ghost_interaction = 0
+
+	var/use_irc_bot = 0
+	var/main_irc = ""
+	var/admin_irc = ""
+	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 
 
 /datum/configuration/New()
@@ -363,8 +367,8 @@
 				if("allow_holidays")
 					Holiday = 1
 
-				if("useircbot")
-					useircbot = 1
+				if("use_irc_bot")
+					use_irc_bot = 1
 
 				if("ticklag")
 					Ticklag = text2num(value)
@@ -402,6 +406,21 @@
 
 				if("ghost_interaction")
 					config.ghost_interaction = 1
+
+				if("main_irc")
+					config.main_irc = value
+
+				if("admin_irc")
+					config.admin_irc = value
+
+				if("python_path")
+					if(value)
+						config.python_path = value
+					else
+						if(world.system_type == UNIX)
+							config.python_path = "/usr/bin/env python2"
+						else //probably windows, if not this should work anyway
+							config.python_path = "python"
 
 				else
 					diary << "Unknown setting in configuration: '[name]'"

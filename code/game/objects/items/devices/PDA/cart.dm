@@ -11,7 +11,6 @@
 	var/access_engine = 0
 	var/access_atmos = 0
 	var/access_medical = 0
-	var/access_manifest = 1 // Make all jobs able to access the manifest
 	var/access_clown = 0
 	var/access_mime = 0
 	var/access_janitor = 0
@@ -68,7 +67,6 @@
 		icon_state = "cart-s"
 		access_security = 1
 		access_medical = 1
-		access_manifest = 1
 
 
 	janitor
@@ -132,13 +130,11 @@
 	head
 		name = "Easy-Record DELUXE"
 		icon_state = "cart-h"
-		access_manifest = 1
 		access_status_display = 1
 
 	hop
 		name = "HumanResources9001"
 		icon_state = "cart-h"
-		access_manifest = 1
 		access_status_display = 1
 		access_quartermaster = 1
 		access_janitor = 1
@@ -152,7 +148,6 @@
 	hos
 		name = "R.O.B.U.S.T. DELUXE"
 		icon_state = "cart-hos"
-		access_manifest = 1
 		access_status_display = 1
 		access_security = 1
 
@@ -164,7 +159,6 @@
 	ce
 		name = "Power-On DELUXE"
 		icon_state = "cart-ce"
-		access_manifest = 1
 		access_status_display = 1
 		access_engine = 1
 		access_atmos = 1
@@ -172,7 +166,6 @@
 	cmo
 		name = "Med-U DELUXE"
 		icon_state = "cart-cmo"
-		access_manifest = 1
 		access_status_display = 1
 		access_reagent_scanner = 1
 		access_medical = 1
@@ -180,7 +173,6 @@
 	rd
 		name = "Signal Ace DELUXE"
 		icon_state = "cart-rd"
-		access_manifest = 1
 		access_status_display = 1
 		access_reagent_scanner = 1
 		access_atmos = 1
@@ -194,7 +186,6 @@
 		name = "Value-PAK Cartridge"
 		desc = "Now with 200% more value!"
 		icon_state = "cart-c"
-		access_manifest = 1
 		access_engine = 1
 		access_security = 1
 		access_medical = 1
@@ -276,14 +267,6 @@ Code:
 [radio:code]
 <a href='byond://?src=\ref[src];choice=Signal Code;scode=1'>+</a>
 <a href='byond://?src=\ref[src];choice=Signal Code;scode=5'>+</a><br>"}
-			if (41) //crew manifest
-
-				menu = "<h4><img src=pda_notes.png> Crew Manifest</h4>"
-				menu += "Entries cannot be modified from this terminal.<br><br>"
-				if(data_core)
-					menu += data_core.get_manifest(1) // make it monochrome
-				menu += "<br>"
-
 
 			if (42) //status displays
 				menu = "<h4><img src=pda_status.png> Station Status Display Interlink</h4>"
