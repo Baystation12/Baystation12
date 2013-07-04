@@ -1218,3 +1218,43 @@ mob/living/carbon/human/yank_out_object()
 				organ.status |= ORGAN_BLEEDING
 				organ.take_damage(rand(1,3), 0, 0)
 				src.adjustToxLoss(rand(1,3))
+
+/mob/living/carbon/human/verb/check_pulse()
+	set category = "Object"
+	set name = "Check pulse"
+	set desc = "Approximately count somebody's pulse. Requires you to stand still at least 6 seconds."
+	set src in view(1)
+
+	if(usr.stat == 1 || usr.restrained() || !isliving(usr)) return
+
+	usr.visible_message("\blue [usr] kneels down, puts \his hand on [src]'s wrist and begins counting their pulse.",\
+	"\blue Don't move until counting is finished.")
+	if(src.pulse)
+		usr << "\blue [src] has pulse! Counting..."
+	else
+		usr << "\red [src] has no pulse!"
+		return
+
+	sleep(60)
+	if(usr.move_speed >= 60)
+		usr << "\blue [src]'s pulse is [src.get_pulse(0)]."
+
+/mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
+	var/temp = 0
+	switch(src.pulse)
+		if(PULSE_NONE)
+			return "0"
+		if(PULSE_SLOW)
+			temp = rand(40, 60)
+			return method ? num2text(temp) : temp + rand(-10, 10)
+		if(PULSE_NORM)
+			temp = rand(60, 90)
+			return method ? num2text(temp) : temp + rand(-10, 10)
+		if(PULSE_FAST)
+			temp = rand(90, 120)
+			return method ? num2text(temp) : temp + rand(-10, 10)
+		if(PULSE_2FAST)
+			temp = rand(120, 160)
+			return method ? num2text(temp) : temp + rand(-10, 10)
+		if(PULSE_THREADY)
+			return method ? ">250" : "extremely weak and fast, patient's artery feels like a thread"
