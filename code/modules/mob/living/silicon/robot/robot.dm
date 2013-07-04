@@ -10,6 +10,7 @@
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/base_icon
+	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 
 //Hud stuff
 
@@ -145,7 +146,7 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
-	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor","Service", "Security","Combat")
+	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security", "Combat")
 	if(emagged || security_level > SEC_LEVEL_BLUE)
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
@@ -156,7 +157,7 @@
 
 	if(module)
 		return
-
+		
 	switch(mod)
 		if("Standard")
 			module = new /obj/item/weapon/robot_module/standard(src)
@@ -177,10 +178,10 @@
 		if("Miner")
 			module = new /obj/item/weapon/robot_module/miner(src)
 			modtype = "Miner"
-			channels = list("Mining" = 1)
+			channels = list("Supply" = 1)
 			module_sprites["Basic"] = "Miner_old"
 			module_sprites["Advanced Droid"] = "droid-miner"
-			module_sprites["Default"] = "Miner"
+			module_sprites["Treadhead"] = "Miner"
 
 		if("Medical")
 			module = new /obj/item/weapon/robot_module/medical(src)
@@ -221,18 +222,10 @@
 			module_sprites["Combat Android"] = "droid-combat"
 			channels = list("Security" = 1)
 
-	//Begin awful custom item checks.
-	if (src.name == "Lucy"  && src.ckey == "rowtree")
-		switch(mod)
-			if("Medical")
-				module_sprites["Lucy"] = "rowtree-medical"
-			if("Security" || "Combat")
-				module_sprites["Lucy"] = "rowtree-security"
-			if("Engineering")
-				module_sprites["Lucy"] = "rowtree-engineering"
-			else
-				module_sprites["Lucy"] = "rowtree-lucy"
-
+	//Custom_sprite check and entry
+	if (custom_sprite == 1)
+		module_sprites["Custom"] = "[src.ckey]-[mod]"
+		
 	hands.icon_state = lowertext(mod)
 	feedback_inc("cyborg_[lowertext(mod)]",1)
 	updatename(mod)
@@ -265,6 +258,23 @@
 	//We also need to update name of internal camera.
 	if (camera)
 		camera.c_tag = changed_name
+		
+	if(!custom_sprite) //Check for custom sprite
+		var/file = file2text("config/custom_sprites.txt")
+		var/lines = text2list(file, "\n")
+
+		for(var/line in lines)
+		// split & clean up
+			var/list/Entry = text2list(line, "-")
+			for(var/i = 1 to Entry.len)
+				Entry[i] = trim(Entry[i])
+
+			if(Entry.len < 2)
+				continue;
+					
+			if(Entry[1] == src.ckey && Entry[2] == src.real_name) //They're in the list? Custom sprite time, var and icon change required
+				custom_sprite = 1 
+				icon = 'icons/mob/custom-synthetic.dmi' 
 
 /mob/living/silicon/robot/verb/Namepick()
 	if(custom_name)
@@ -979,6 +989,14 @@
 		overlays += "eyes-[icon_state]"
 	else
 		overlays -= "eyes"
+	
+	if(opened && custom_sprite == 1) //Custom borgs also have custom panels, heh
+		if(wiresexposed)
+			overlays += "[src.ckey]-openpanel +w"
+		else if(cell)
+			overlays += "[src.ckey]-openpanel +c"
+		else
+			overlays += "[src.ckey]-openpanel -c"
 
 	if(opened)
 		if(wiresexposed)
