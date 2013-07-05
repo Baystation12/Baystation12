@@ -213,8 +213,6 @@
 			// Next, the method to induce stasis has some adverse side-effects, manifesting
 			// as cloneloss
 			adjustCloneLoss(0.1)
-			//no pulse in stasis
-			pulse = PULSE_NONE
 
 	proc/handle_mutations_and_radiation()
 		if(getFireLoss())
