@@ -1437,7 +1437,7 @@
 				if(temp <= PULSE_THREADY && temp >= PULSE_NORM)
 					temp--
 					break		//one reagent is enough
-
+								//comment out the breaks to make med effects stack
 		for(var/R in tachycardics)				//handles different chems' influence on pulse
 			if(reagents.get_reagent_amount(R))
 				if(temp <= PULSE_FAST && temp >= PULSE_NONE)
