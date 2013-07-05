@@ -162,6 +162,12 @@ var/syndicate_elite_shuttle_timeleft = 0
 		if(istype(T, /turf/simulated))
 			del(T)
 
+	for(var/mob/living/carbon/bug in end_location) // If someone somehow is still in the shuttle's docking area...
+		bug.gib()
+
+	for(var/mob/living/simple_animal/pest in end_location) // And for the other kind of bug...
+		pest.gib()
+
 	start_location.move_contents_to(end_location)
 
 	for(var/turf/T in get_area_turfs(end_location) )
