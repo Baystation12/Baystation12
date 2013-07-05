@@ -25,34 +25,52 @@
 	return
 
 
-/obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)
-	if(istype(tool, /obj/item/weapon/screwdriver))
+/obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
+	if(istype(tool, /obj/item/weapon/screwdriver) && !istype(src, /obj/structure/sign/double))
 		user << "You unfasten the sign with your [tool]."
 		var/obj/item/sign/S = new(src.loc)
 		S.name = name
 		S.desc = desc
-		S.icon_state = icon_state
+		var/icon/I = icon('icons/obj/decals.dmi', "[icon_state]")
+		S.icon = I.Scale(24, 24)
+		//S.sign_state = icon_state
+		S.sign_type = type
 		del(src)
-	else
-		..()
+	else ..()
 
 /obj/item/sign
 	name = "sign"
-	desc = "if you see this, it's a bug"
-	icon = 'icons/obj/decals.dmi'
-	icon_state = "securearea"
+	desc = ""
+	//var/sign_state = ""
+	var/sign_type
 
-/obj/structure/sign/map
+/obj/item/sign/attackby(obj/item/tool as obj, mob/user as mob)	//construction
+	if(istype(tool, /obj/item/weapon/screwdriver) && isturf(user.loc))
+		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
+		if(direction == "Cancel") return
+		var/obj/S = new sign_type
+		//S.name = name
+		//S.desc = desc
+		//S.icon_state = sign_state
+		switch(direction)
+			if("North")
+				S.pixel_y = -32
+			if("East")
+				S.pixel_x = 32
+			if("South")
+				S.pixel_y = 32
+			if("West")
+				S.pixel_x = -32
+	else ..()
+
+/obj/structure/sign/double/map
 	name = "station map"
 	desc = "A framed picture of the station."
 
-/obj/structure/sign/map/attackby()
-	return ..()
-
-/obj/structure/sign/map/left
+/obj/structure/sign/double/map/left
 	icon_state = "map-left"
 
-/obj/structure/sign/map/right
+/obj/structure/sign/double/map/right
 	icon_state = "map-right"
 
 /obj/structure/sign/securearea
@@ -132,17 +150,14 @@
 	desc = "This plaque commemorates the fall of the Atmos FEA division. For all the charred, dizzy, and brittle men who have died in its hands."
 	icon_state = "atmosplaque"
 
-/obj/structure/sign/maltesefalcon	//The sign is 64x32, so it needs two tiles. ;3
+/obj/structure/sign/double/maltesefalcon	//The sign is 64x32, so it needs two tiles. ;3
 	name = "The Maltese Falcon"
 	desc = "The Maltese Falcon, Space Bar and Grill."
 
-/obj/structure/sign/maltesefalcon/attackby()
-	return ..()
-
-/obj/structure/sign/maltesefalcon/left
+/obj/structure/sign/double/maltesefalcon/left
 	icon_state = "maltesefalcon-left"
 
-/obj/structure/sign/maltesefalcon/right
+/obj/structure/sign/double/maltesefalcon/right
 	icon_state = "maltesefalcon-right"
 
 /obj/structure/sign/science			//These 3 have multiple types, just var-edit the icon_state to whatever one you want on the map
