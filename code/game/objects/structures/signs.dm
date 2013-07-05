@@ -25,9 +25,29 @@
 	return
 
 
+/obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)
+	if(istype(tool, /obj/item/weapon/screwdriver))
+		user << "You unfasten the sign with your [tool]."
+		var/obj/item/sign/S = new(src.loc)
+		S.name = name
+		S.desc = desc
+		S.icon_state = icon_state
+		del(src)
+	else
+		..()
+
+/obj/item/sign
+	name = "sign"
+	desc = "if you see this, it's a bug"
+	icon = 'icons/obj/decals.dmi'
+	icon_state = "securearea"
+
 /obj/structure/sign/map
 	name = "station map"
 	desc = "A framed picture of the station."
+
+/obj/structure/sign/map/attackby()
+	return ..()
 
 /obj/structure/sign/map/left
 	icon_state = "map-left"
@@ -115,6 +135,9 @@
 /obj/structure/sign/maltesefalcon	//The sign is 64x32, so it needs two tiles. ;3
 	name = "The Maltese Falcon"
 	desc = "The Maltese Falcon, Space Bar and Grill."
+
+/obj/structure/sign/maltesefalcon/attackby()
+	return ..()
 
 /obj/structure/sign/maltesefalcon/left
 	icon_state = "maltesefalcon-left"
