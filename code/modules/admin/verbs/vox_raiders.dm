@@ -43,6 +43,10 @@ var/global/vox_tick = 1
 			W.cell.charge = 500
 			equip_to_slot_or_del(W, slot_r_hand)
 
+			var/obj/item/stack/rods/A = new(src)
+			A.amount = 20
+			equip_to_slot_or_del(A, slot_l_hand)
+
 		if(4) // Vox medic!
 			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/pressure(src), slot_wear_suit)
 			equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/pressure(src), slot_head)
