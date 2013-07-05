@@ -56,7 +56,7 @@
 
 /mob/living/silicon/robot/take_organ_damage(var/brute = 0, var/burn = 0, var/sharp = 0)
 	var/list/components = get_damageable_components()
-	if(components.len)
+	if(!components.len)
 		return
 
 	 //Combat shielding absorbs a percentage of damage directly into the cell.
