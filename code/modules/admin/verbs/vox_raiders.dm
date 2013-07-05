@@ -1,3 +1,5 @@
+var/global/vox_tick = 1
+
 /mob/living/carbon/human/proc/equip_vox_raider()
 
 	var/obj/item/device/radio/R = new /obj/item/device/radio/headset/syndicate(src)
@@ -8,7 +10,7 @@
 	equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(src), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
 	equip_to_slot_or_del(new /obj/item/clothing/gloves/yellow/vox(src), slot_gloves) // AS ABOVE.
 
-	switch(rand(1,4)) // Come up with a better way of doing this - ticker of some sort maybe.
+	switch(vox_tick)
 		if(1) // Vox raider!
 			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/carapace(src), slot_wear_suit)
 			equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/carapace(src), slot_head)
@@ -41,14 +43,16 @@
 			W.cell.charge = 500
 			equip_to_slot_or_del(W, slot_r_hand)
 
+			var/obj/item/stack/rods/A = new(src)
+			A.amount = 20
+			equip_to_slot_or_del(A, slot_l_hand)
+
 		if(4) // Vox medic!
 			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/pressure(src), slot_wear_suit)
 			equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/pressure(src), slot_head)
 			equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(src), slot_belt) // Who needs actual surgical tools?
 			equip_to_slot_or_del(new /obj/item/clothing/glasses/hud/health(src), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
-			equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/hypospray(src), slot_l_store)
-
-			equip_to_slot_or_del(new /obj/item/weapon/circular_saw(src), slot_l_hand)
+			equip_to_slot_or_del(new /obj/item/weapon/circular_saw(src), slot_l_store)
 			equip_to_slot_or_del(new /obj/item/weapon/gun/dartgun/vox/medical, slot_r_hand)
 
 	equip_to_slot_or_del(new /obj/item/clothing/mask/breath/vox(src), slot_wear_mask)
@@ -62,5 +66,8 @@
 	W.assignment = "Trader"
 	W.registered_name = real_name
 	equip_to_slot_or_del(W, slot_wear_id)
+
+	vox_tick++
+	if (vox_tick > 4) vox_tick = 1
 
 	return 1
