@@ -1,25 +1,18 @@
 var/global/vs_control/vsc = new
 
 vs_control/var
-	IgnitionLevel = 0.5
-	IgnitionLevel_DESC = "Determines point at which fire can ignite"
-
 	fire_consuption_rate = 0.25
 	fire_consuption_rate_NAME = "Fire - Air Consumption Ratio"
 	fire_consuption_rate_DESC = "Ratio of air removed and combusted per tick."
 
 	fire_firelevel_multiplier = 25
 	fire_firelevel_multiplier_NAME = "Fire - Firelevel Constant"
-	fire_firelevel_multiplier_DESC = "Multiplied by the equation for firelevel, affects the combustion and ignition of gas mixes."
+	fire_firelevel_multiplier_DESC = "Multiplied by the equation for firelevel, affects mainly the extingiushing of fires."
 
-	fire_temperature_multiplier = 1700
-	fire_temperature_multiplier_NAME = "Fire - Temperature Multiplier"
-	fire_temperature_multiplier_DESC = "Base value for fire temperatures."
-
-	fire_gas_combustion_ratio = 0.25
-	fire_gas_combustion_ratio_NAME = "Fire - Gas Conversion Ratio"
-	fire_gas_combustion_ratio_DESC = "The rate at which oxygen and plasma are converted to CO2, expressed in terms of the firelevel."
-
+	fire_fuel_energy_release = 397000
+	fire_fuel_energy_release_NAME = "Fire - Fuel energy release"
+	fire_fuel_energy_release_DESC = "The energy in joule released when burning one mol of a burnable substance"
+	
 
 	airflow_lightest_pressure = 20
 	airflow_lightest_pressure_NAME = "Airflow - Small Movement Threshold %"
@@ -229,7 +222,6 @@ vs_control
 				plc.CONTAMINATION_LOSS = 0.075
 
 			if("ZAS - Normal")
-				IgnitionLevel = 0.5
 				airflow_lightest_pressure = 20
 				airflow_light_pressure = 35
 				airflow_medium_pressure = 50
@@ -244,7 +236,6 @@ vs_control
 				airflow_mob_slowdown = 1
 
 			if("ZAS - Forgiving")
-				IgnitionLevel = 1
 				airflow_lightest_pressure = 45
 				airflow_light_pressure = 60
 				airflow_medium_pressure = 120
@@ -259,7 +250,6 @@ vs_control
 				airflow_mob_slowdown = 0
 
 			if("ZAS - Dangerous")
-				IgnitionLevel = 0.4
 				airflow_lightest_pressure = 15
 				airflow_light_pressure = 30
 				airflow_medium_pressure = 45
@@ -274,7 +264,6 @@ vs_control
 				airflow_mob_slowdown = 2
 
 			if("ZAS - Hellish")
-				IgnitionLevel = 0.3
 				airflow_lightest_pressure = 20
 				airflow_light_pressure = 30
 				airflow_medium_pressure = 40
