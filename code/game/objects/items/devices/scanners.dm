@@ -174,6 +174,8 @@ MASS SPECTROMETER
 				user.show_message("\red <b>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl")
 			else
 				user.show_message("\blue Blood Level Normal: [blood_percent]% [blood_volume]cl")
+		if(H.pulse)
+			user.show_message("\blue Subject's pulse: [H.get_pulse(GETPULSE_TOOL)] bpm.")
 	src.add_fingerprint(user)
 	return
 

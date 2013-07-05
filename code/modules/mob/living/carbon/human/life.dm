@@ -113,6 +113,8 @@
 
 	handle_regular_hud_updates()
 
+	pulse = handle_pulse()
+
 	// Grabbing
 	for(var/obj/item/weapon/grab/G in src)
 		G.process()
@@ -1413,6 +1415,35 @@
 
 		if (shock_stage > 80)
 			Paralyse(rand(15,28))
+
+	proc/handle_pulse()
+		//if(life_tick % 100) return pulse	//update pulse every 100 life ticks
+
+		if(stat == DEAD)
+			return PULSE_NONE	//that's it, you're dead, nothing can influence your pulse
+
+		var/temp = PULSE_NORM
+
+		if(round(vessel.get_reagent_amount("blood")) <= BLOOD_VOLUME_BAD)	//how much blood do we have
+			temp = PULSE_THREADY	//not enough :(
+
+		if(reagents.get_reagent_amount("zombiepowder"))
+			temp = PULSE_NONE		//pretend that we're dead. unlike actual death, can be inflienced by meds
+
+		for(var/R in bradycardics)
+			if(reagents.get_reagent_amount(R))
+				if(temp <= PULSE_THREADY && temp >= PULSE_NORM)
+					temp--
+					break		//one reagent is enough
+								//comment out the breaks to make med effects stack
+		for(var/R in tachycardics)				//handles different chems' influence on pulse
+			if(reagents.get_reagent_amount(R))
+				if(temp <= PULSE_FAST && temp >= PULSE_NONE)
+					temp++
+					break
+
+		return temp
+
 
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS
