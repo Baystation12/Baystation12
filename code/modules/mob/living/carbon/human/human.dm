@@ -1224,20 +1224,32 @@ mob/living/carbon/human/yank_out_object()
 	set name = "Check pulse"
 	set desc = "Approximately count somebody's pulse. Requires you to stand still at least 6 seconds."
 	set src in view(1)
+	var/self = 0
 
 	if(usr.stat == 1 || usr.restrained() || !isliving(usr)) return
 
-	usr.visible_message("\blue [usr] kneels down, puts \his hand on [src]'s wrist and begins counting their pulse.",\
-	"\blue Don't move until counting is finished.")
+	if(usr == src)
+		self = 1
+	if(!self)
+		usr.visible_message("\blue [usr] kneels down, puts \his hand on [src]'s wrist and begins counting their pulse.",\
+		"You begin counting [src]'s pulse")
+	else
+		usr.visible_message("\blue [usr] begins counting their pulse.",\
+		"You begin counting your pulse.")
+
 	if(src.pulse)
-		usr << "\blue [src] has pulse! Counting..."
+		usr << "\blue [self ? "I have" : "[src] has"] pulse! Counting..."
 	else
 		usr << "\red [src] has no pulse!"
 		return
 
+	usr << "Don't move until counting is finished."
+	var/time = world.timeofday
 	sleep(60)
-	if(usr.move_speed >= 60)
-		usr << "\blue [src]'s pulse is [src.get_pulse(0)]."
+	if(usr.l_move_time >= time)	//checks if our mob has moved during the sleep()
+		usr << "You moved while counting. Try again."
+	else
+		usr << "\blue [src]'s pulse is [src.get_pulse(GETPULSE_HAND)]."
 
 /mob/living/carbon/human/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
 	var/temp = 0
@@ -1246,15 +1258,16 @@ mob/living/carbon/human/yank_out_object()
 			return "0"
 		if(PULSE_SLOW)
 			temp = rand(40, 60)
-			return method ? num2text(temp) : temp + rand(-10, 10)
+			return num2text(method ? temp : temp + rand(-10, 10))
 		if(PULSE_NORM)
 			temp = rand(60, 90)
-			return method ? num2text(temp) : temp + rand(-10, 10)
+			return num2text(method ? temp : temp + rand(-10, 10))
 		if(PULSE_FAST)
 			temp = rand(90, 120)
-			return method ? num2text(temp) : temp + rand(-10, 10)
+			return num2text(method ? temp : temp + rand(-10, 10))
 		if(PULSE_2FAST)
 			temp = rand(120, 160)
-			return method ? num2text(temp) : temp + rand(-10, 10)
+			return num2text(method ? temp : temp + rand(-10, 10))
 		if(PULSE_THREADY)
 			return method ? ">250" : "extremely weak and fast, patient's artery feels like a thread"
+//			output for machines^	^^^^^^^output for people^^^^^^^^^
