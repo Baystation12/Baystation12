@@ -146,7 +146,7 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
-	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security", "Combat")
+	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
 	if(emagged || security_level > SEC_LEVEL_BLUE)
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
@@ -216,13 +216,13 @@
 
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
-		module_sprites["Custom"] = "[src.ckey]-[mod]"
+		module_sprites["Custom"] = "[src.ckey]-[modtype]"
 
 	hands.icon_state = lowertext(modtype)
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
 	updatename()
 
-	if(mod == "Medical" || mod == "Security" || mod == "Combat")
+	if(modtype == "Medical" || modtype == "Security" || modtype == "Combat")
 		status_flags &= ~CANPUSH
 
 	choose_icon(6,module_sprites)
