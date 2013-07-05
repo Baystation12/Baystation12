@@ -50,7 +50,7 @@
 	electronics_damage = max(0, electronics_damage - electronics)
 
 /datum/robot_component/proc/is_powered()
-	return installed == 1 && (!energy_consumption || powered)
+	return (installed == 1) && (brute_damage + electronics_damage < max_damage) && (!energy_consumption || powered)
 
 
 /datum/robot_component/proc/consume_power()
