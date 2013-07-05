@@ -48,7 +48,10 @@
 #define RCON_YES	3
 
 //1000 joules equates to about 1 degree every 2 seconds for a single tile of air.
-#define MAX_ENERGY_CHANGE 2000
+#define MAX_ENERGY_CHANGE 1000
+
+#define MAX_TEMPERATURE 90
+#define MIN_TEMPERATURE -40
 
 //all air alarms in area are connected via magic
 /area
@@ -137,18 +140,21 @@
 		var/datum/gas_mixture/environment = location.return_air()
 
 		//Handle temperature adjustment here.
-		if(environment.temperature < target_temperature - 10 || environment.temperature > target_temperature + 10 || regulating_temperature)
+		if(environment.temperature < target_temperature - 2 || environment.temperature > target_temperature + 2 || regulating_temperature)
 			//If it goes too far, we should adjust ourselves back before stopping.
+			if(get_danger_level(target_temperature, TLV["temperature"]))
+				return
+
 			if(!regulating_temperature)
 				regulating_temperature = 1
 				visible_message("\The [src] clicks as it starts [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
 				"You hear a click and a faint electronic hum.")
 
-			if(target_temperature > T0C + 90)
-				target_temperature = T0C + 90
+			if(target_temperature > T0C + MAX_TEMPERATURE)
+				target_temperature = T0C + MAX_TEMPERATURE
 
-			if(target_temperature < T0C - 40)
-				target_temperature = T0C - 40
+			if(target_temperature < T0C + MIN_TEMPERATURE)
+				target_temperature = T0C + MIN_TEMPERATURE
 
 			var/datum/gas_mixture/gas = location.remove_air(0.25*environment.total_moles)
 			var/heat_capacity = gas.heat_capacity()
@@ -709,7 +715,7 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 		else if (other_dangerlevel==1)
 			output += "Notice: <span class='dl1'>Low Concentration of Unknown Particles Detected</span><br>"
 
-		output += "Temperature: <span class='dl[temperature_dangerlevel]'>[environment.temperature]</span>K<br>"
+		output += "Temperature: <span class='dl[temperature_dangerlevel]'>[environment.temperature]</span>K ([round(environment.temperature - T0C, 0.1)]C)<br>"
 
 		//Overall status
 		output += "Local Status: "
@@ -727,7 +733,7 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 		return output
 
 	proc/rcon_text()
-		var/dat = "<b>Remote Control:</b><br>"
+		var/dat = "<table width=\"100%\"><td align=\"center\"><b>Remote Control:</b><br>"
 		if(rcon_setting == RCON_NO)
 			dat += "<b>Off</b>"
 		else
@@ -741,7 +747,11 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 		if(rcon_setting == RCON_YES)
 			dat += "<b>On</b>"
 		else
-			dat += "<a href='?src=\ref[src];rcon=[RCON_YES]'>On</a>"
+			dat += "<a href='?src=\ref[src];rcon=[RCON_YES]'>On</a></td>"
+
+		//Hackish, I know.  I didn't feel like bothering to rework all of this.
+		dat += "<td align=\"center\"><b>Thermostat:</b><br><a href='?src=\ref[src];temperature=1'>[target_temperature - T0C]C</a></td></table>"
+
 		return dat
 
 	proc/return_controls()
@@ -985,10 +995,6 @@ table tr:first-child th:first-child { border: none;}
 						if(selected[3] > selected[4])
 							selected[3] = selected[4]
 
-					//Sets the temperature the built-in heater/cooler tries to maintain.
-					if(env == "temperature")
-						target_temperature = (selected[2] + selected[3])/2
-
 					apply_mode()
 
 		if(href_list["screen"])
@@ -1014,6 +1020,16 @@ table tr:first-child th:first-child { border: none;}
 		if(href_list["mode"])
 			mode = text2num(href_list["mode"])
 			apply_mode()
+
+		if(href_list["temperature"])
+			var/list/selected = TLV["temperature"]
+			var/max_temperature = min(selected[3] - T0C, MAX_TEMPERATURE)
+			var/min_temperature = max(selected[2] - T0C, MIN_TEMPERATURE)
+			var/input_temperature = input("What temperature would you like the system to mantain? (Capped between [min_temperature]C and [max_temperature]C)", "Thermostat Controls") as num|null
+			if(!input_temperature || input_temperature > max_temperature || input_temperature < min_temperature)
+				usr << "Temperature must be between [min_temperature]C and [max_temperature]C"
+			else
+				target_temperature = input_temperature + T0C
 
 		if (href_list["AAlarmwires"])
 			var/t1 = text2num(href_list["AAlarmwires"])

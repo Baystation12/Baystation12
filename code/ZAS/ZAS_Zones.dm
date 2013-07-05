@@ -385,7 +385,7 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 		// slowly than small rooms, preserving our good old "hollywood-style"
 		// oh-shit effect when large rooms get breached, but still having small
 		// rooms remain pressurized for long enough to make escape possible.
-		share_size = max(1, max(size - 5, 1) + unsimulated_tiles.len)
+		share_size = max(1, max(size + 3, 1) + unsimulated_tiles.len)
 		correction_ratio = share_size / unsimulated_tiles.len
 
 	for(var/turf/T in unsimulated_tiles)
