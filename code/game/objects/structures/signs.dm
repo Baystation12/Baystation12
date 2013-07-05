@@ -19,11 +19,9 @@
 		else
 	return
 
-
 /obj/structure/sign/blob_act()
 	del(src)
 	return
-
 
 /obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
 	if(istype(tool, /obj/item/weapon/screwdriver) && !istype(src, /obj/structure/sign/double))
@@ -31,36 +29,40 @@
 		var/obj/item/sign/S = new(src.loc)
 		S.name = name
 		S.desc = desc
-		var/icon/I = icon('icons/obj/decals.dmi', "[icon_state]")
-		S.icon = I.Scale(24, 24)
-		//S.sign_state = icon_state
-		S.sign_type = type
+		S.icon_state = icon_state
+		//var/icon/I = icon('icons/obj/decals.dmi', icon_state)
+		//S.icon = I.Scale(24, 24)
+		S.sign_state = icon_state
 		del(src)
 	else ..()
 
 /obj/item/sign
 	name = "sign"
 	desc = ""
-	//var/sign_state = ""
-	var/sign_type
+	icon = 'icons/obj/decals.dmi'
+	w_class = 3		//big
+	var/sign_state = ""
 
 /obj/item/sign/attackby(obj/item/tool as obj, mob/user as mob)	//construction
 	if(istype(tool, /obj/item/weapon/screwdriver) && isturf(user.loc))
 		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
 		if(direction == "Cancel") return
-		var/obj/S = new sign_type
-		//S.name = name
-		//S.desc = desc
-		//S.icon_state = sign_state
+		var/obj/structure/sign/S = new(user.loc)
 		switch(direction)
 			if("North")
-				S.pixel_y = -32
+				S.pixel_y = 32
 			if("East")
 				S.pixel_x = 32
 			if("South")
-				S.pixel_y = 32
+				S.pixel_y = -32
 			if("West")
 				S.pixel_x = -32
+			else return
+		S.name = name
+		S.desc = desc
+		S.icon_state = sign_state
+		user << "You fasten \the [S] with your [tool]."
+		del(src)
 	else ..()
 
 /obj/structure/sign/double/map
@@ -113,12 +115,10 @@
 	desc = "A warning sign which reads 'DANGER: FIRE'"
 	icon_state = "fire"
 
-
 /obj/structure/sign/nosmoking_1
 	name = "\improper NO SMOKING"
 	desc = "A warning sign which reads 'NO SMOKING'"
 	icon_state = "nosmoking"
-
 
 /obj/structure/sign/nosmoking_2
 	name = "\improper NO SMOKING"
