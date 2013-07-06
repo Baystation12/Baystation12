@@ -636,6 +636,9 @@
 	interact(mob/user)
 		user.set_machine(src)
 
+		if(buildstage!=2)
+			return
+
 		if ( (get_dist(src, user) > 1 ))
 			if (!istype(user, /mob/living/silicon))
 				user.machine = null
@@ -1142,6 +1145,7 @@ table tr:first-child th:first-child { border: none;}
 					circuit.loc = user.loc
 					buildstage = 0
 					update_icon()
+			return
 		if(0)
 			if(istype(W, /obj/item/weapon/airalarm_electronics))
 				user << "You insert the circuit!"
