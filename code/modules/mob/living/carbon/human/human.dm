@@ -1166,10 +1166,11 @@ mob/living/carbon/human/yank_out_object()
 	if(!do_after(U, 80))
 		return
 
-		if(!selection || !affected || !S || !U)
-			return
+	if(!selection || !affected || !S || !U)
+		return
+
 	if(self)
-		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected].display_name in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
+		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected.display_name] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
 	else
 		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected.display_name] in a welter of blood.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your [affected] in a welter of blood.</b></span>")
 
