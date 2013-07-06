@@ -1,5 +1,7 @@
 var/datum/controller/vote/vote = new()
 
+var/global/list/round_voters = list() //Keeps track of the individuals voting for a given round, for use in forcedrafting.
+
 datum/controller/vote
 	var/initiator = null
 	var/started_time = null
@@ -119,6 +121,11 @@ datum/controller/vote
 				for(var/option in winners)
 					text += "\t[option]\n"
 			. = pick(winners)
+
+			for(var/key in current_votes)
+				if(choices[current_votes[key]] == .)
+					round_voters += key // Keep track of who voted for the winning round.
+
 			text += "<b>Vote Result: [.]</b>"
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
@@ -270,9 +277,9 @@ datum/controller/vote
 				var/votes = choices[choices[i]]
 				if(!votes)	votes = 0
 				if(current_votes[C.ckey] == i)
-					. += "<li><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a> ([votes] votes)</b></li>"
+					. += "<li><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></li>"
 				else
-					. += "<li><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a> ([votes] votes)</li>"
+					. += "<li><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></li>"
 
 			. += "</ul><hr>"
 			if(admin)
