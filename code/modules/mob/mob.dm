@@ -946,7 +946,7 @@ mob/verb/yank_out_object()
 	if(self)
 		visible_message("<span class='warning'><b>[src] rips [selection] out of their body.</b></span>","<span class='warning'><b>You rip [selection] out of your body.</b></span>")
 	else
-		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s body.</b></span>","<span class='warning'><b>[src] rips [selection] out of your body.</b></span>")
+		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s body.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your body.</b></span>")
 
 	selection.loc = get_turf(src)
 

@@ -1157,9 +1157,9 @@ mob/living/carbon/human/yank_out_object()
 			if(O == selection)
 				affected = organ
 	if(self)
-		src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected] with bloody fingers.</span>"
+		src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected.display_name] with bloody fingers.</span>"
 	else
-		U << "<span class='warning'>You attempt to get a good grip on the [selection] in [S]'s [affected] with bloody fingers.</span>"
+		U << "<span class='warning'>You attempt to get a good grip on the [selection] in [S]'s [affected.display_name] with bloody fingers.</span>"
 
 	if(istype(U,/mob/living/carbon/human/)) U.bloody_hands(S)
 
@@ -1169,9 +1169,9 @@ mob/living/carbon/human/yank_out_object()
 		if(!selection || !affected || !S || !U)
 			return
 	if(self)
-		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
+		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected].display_name in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
 	else
-		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected] in a welter of blood.</b></span>","<span class='warning'><b>[src] rips [selection] out of your [affected] in a welter of blood.</b></span>")
+		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected.display_name] in a welter of blood.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your [affected] in a welter of blood.</b></span>")
 
 	selection.loc = get_turf(src)
 	affected.implants -= selection
