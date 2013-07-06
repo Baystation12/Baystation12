@@ -10,7 +10,7 @@
 	var/amount = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
-		if(C.installed != 1) amount += C.brute_damage
+		if(C.installed != 0) amount += C.brute_damage
 	return amount
 
 /mob/living/silicon/robot/getFireLoss()
