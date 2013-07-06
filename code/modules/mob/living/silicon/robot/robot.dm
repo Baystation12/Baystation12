@@ -157,7 +157,7 @@
 
 	if(module)
 		return
-		
+
 	switch(mod)
 		if("Standard")
 			module = new /obj/item/weapon/robot_module/standard(src)
@@ -225,7 +225,7 @@
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
 		module_sprites["Custom"] = "[src.ckey]-[mod]"
-		
+
 	hands.icon_state = lowertext(mod)
 	feedback_inc("cyborg_[lowertext(mod)]",1)
 	updatename(mod)
@@ -258,7 +258,7 @@
 	//We also need to update name of internal camera.
 	if (camera)
 		camera.c_tag = changed_name
-		
+
 	if(!custom_sprite) //Check for custom sprite
 		var/file = file2text("config/custom_sprites.txt")
 		var/lines = text2list(file, "\n")
@@ -271,10 +271,10 @@
 
 			if(Entry.len < 2)
 				continue;
-					
+
 			if(Entry[1] == src.ckey && Entry[2] == src.real_name) //They're in the list? Custom sprite time, var and icon change required
-				custom_sprite = 1 
-				icon = 'icons/mob/custom-synthetic.dmi' 
+				custom_sprite = 1
+				icon = 'icons/mob/custom-synthetic.dmi'
 
 /mob/living/silicon/robot/verb/Namepick()
 	if(custom_name)
@@ -989,7 +989,7 @@
 		overlays += "eyes-[icon_state]"
 	else
 		overlays -= "eyes"
-	
+
 	if(opened && custom_sprite == 1) //Custom borgs also have custom panels, heh
 		if(wiresexposed)
 			overlays += "[src.ckey]-openpanel +w"
@@ -1251,9 +1251,12 @@
 	overlays -= "eyes"
 	updateicon()
 
-	var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
-	if(choice=="No")
-		choose_icon(triesleft, module_sprites)
+	if (triesleft >= 1)
+		var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
+		if(choice=="No")
+			choose_icon(triesleft, module_sprites)
+		else
+			triesleft = 0
+			return
 	else
-		triesleft = 0
-		return
+		src << "Your icon has been set. You now require a module reset to change it."

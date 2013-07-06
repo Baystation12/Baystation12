@@ -1209,11 +1209,11 @@ mob/living/carbon/human/yank_out_object()
 				var/msg = null
 				switch(rand(1,3))
 					if(1)
-						msg ="<span class='warning'>A spike of pain jolts your [organ] as you bump [O] inside.</span>"
+						msg ="<span class='warning'>A spike of pain jolts your [organ.display_name] as you bump [O] inside.</span>"
 					if(2)
-						msg ="<span class='warning'>Your movement jostles [O] in your [organ] painfully.</span>"
+						msg ="<span class='warning'>Your movement jostles [O] in your [organ.display_name] painfully.</span>"
 					if(3)
-						msg ="<span class='warning'>[O] in your [organ] twists painfully as you move.</span>"
+						msg ="<span class='warning'>[O] in your [organ.display_name] twists painfully as you move.</span>"
 				src << msg
 
 				organ.status |= ORGAN_BLEEDING
