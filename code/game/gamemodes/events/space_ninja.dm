@@ -521,7 +521,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	mind.assigned_role = "MODE"
 	mind.special_role = "Ninja"
 
-	ticker.mode.ninjas |= mind
+	//ticker.mode.ninjas |= mind
 	return 1
 
 /mob/living/carbon/human/proc/equip_space_ninja(safety=0)//Safety in case you need to unequip stuff for existing characters.
