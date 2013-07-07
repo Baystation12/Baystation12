@@ -791,6 +791,25 @@
 	flags = FPRINT|TABLEPASS
 	w_class = 1
 	slot_flags = SLOT_MASK
+	var/obj/item/held //Item inside locket.
+
+/obj/item/clothing/tie/fluff/konaa_hirano/attack_self(mob/user as mob)
+	if(held)
+		user << "You open [src] and [held] falls out."
+		held.loc = get_turf(user)
+		src.held = null
+
+/obj/item/clothing/tie/fluff/konaa_hirano/attackby(var/obj/item/O as obj, mob/user as mob)
+	if(istype(O,/obj/item/weapon/paper))
+		if(held)
+			usr << "[src] already has something inside it."
+		else
+			usr << "You slip [O] into [src]."
+			user.drop_item()
+			O.loc = src
+			src.held = O
+		return
+	..()
 
 //////  Medallion - Nasir Khayyam - Jamini
 
