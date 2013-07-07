@@ -1,5 +1,7 @@
 var/datum/controller/vote/vote = new()
 
+var/global/list/round_voters = list() //Keeps track of the individuals voting for a given round, for use in forcedrafting.
+
 datum/controller/vote
 	var/initiator = null
 	var/started_time = null
@@ -119,6 +121,11 @@ datum/controller/vote
 				for(var/option in winners)
 					text += "\t[option]\n"
 			. = pick(winners)
+
+			for(var/key in current_votes)
+				if(choices[current_votes[key]] == .)
+					round_voters += key // Keep track of who voted for the winning round.
+
 			text += "<b>Vote Result: [.]</b>"
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
