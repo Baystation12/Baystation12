@@ -14,7 +14,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"pAI candidate" = 1, // -- TLE                       // 7
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
-	"space ninja" = "true",								 // 10
+	"ninja" = "true",									 // 10
 )
 
 var/const/MAX_SAVE_SLOTS = 10
@@ -64,6 +64,7 @@ datum/preferences
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
 	var/species = "Human"
+	var/language = "None"				//Secondary language
 
 		//Mob preview
 	var/icon/preview_icon_front = null
@@ -251,6 +252,7 @@ datum/preferences
 		dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 		dat += "<br>"
 		dat += "Species: <a href='byond://?src=\ref[user];preference=species;task=input'>[species]</a><br>"
+		dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
 		dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
 		dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 		//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
@@ -364,7 +366,7 @@ datum/preferences
 
 		user << browse(dat, "window=preferences;size=560x580")
 
-	proc/SetChoices(mob/user, limit = 17, list/splitJobs = list("Chief Engineer"), width = 550, height = 550)
+	proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 550)
 		if(!job_master)
 			return
 
@@ -436,7 +438,7 @@ datum/preferences
 			else
 				HTML += " <font color=red>\[NEVER]</font>"
 			if(job.alt_titles)
-				HTML += "</a><br> <a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
+				HTML += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
 			HTML += "</a></td></tr>"
 
 		HTML += "</td'></tr></table>"
@@ -449,7 +451,7 @@ datum/preferences
 			if(BE_ASSISTANT)
 				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=red>Be assistant if preference unavailable</font></a></u></center><br>"
 			if(RETURN_TO_LOBBY)
-				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=purple>Return to lobby if prefernce unavailable</font></a></u></center><br>"
+				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=purple>Return to lobby if preference unavailable</font></a></u></center><br>"
 
 		HTML += "<center><a href='?_src_=prefs;preference=job;task=reset'>\[Reset\]</a></center>"
 		HTML += "</tt>"
@@ -792,18 +794,18 @@ datum/preferences
 							if(is_alien_whitelisted(user, "Skrell")) //Check for Skrell and admins
 								new_species += "Skrell"
 								whitelisted = 1
-							if(is_alien_whitelisted(user, "Vox")) //Check for Skrell and admins
-								new_species += "Vox"
+							if(is_alien_whitelisted(user, "Kidan")) // Check for Kidan and admins
+								new_species += "Kidan"
 								whitelisted = 1
-
 
 							if(!whitelisted)
 								alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
+
 						else //Not using the whitelist? Aliens for everyone!
 							new_species += "Tajaran"
 							new_species += "Unathi"
 							new_species += "Skrell"
-							new_species += "Vox"
+							new_species += "Kidan"
 						species = input("Please select a species", "Character Generation", null) in new_species
 
 						if(prev_species != species)
@@ -851,6 +853,32 @@ datum/preferences
 
 							s_tone = 0
 
+					if("language")
+						var/list/new_language = list("None")
+						var/language_whitelisted = 0
+						if(config.usealienwhitelist)
+							if(is_alien_whitelisted(user, "Language_Soghun"))
+								new_language += "Unathi"
+								language_whitelisted = 1
+							if(is_alien_whitelisted(user, "Language_Tajaran"))
+								new_language += "Tajaran"
+								language_whitelisted = 1
+							if(is_alien_whitelisted(user, "Language_Skrell"))
+								new_language += "Skrell"
+								language_whitelisted = 1
+							if(is_alien_whitelisted(user, "Language_Kidan"))
+								new_language += "Kidan"
+								language_whitelisted = 1
+
+							if(!language_whitelisted)
+								alert(user, "You cannot select a secondary language as you need to be whitelisted.  If you wish to enable a language, post in the Alien Whitelist forums.")
+
+						else
+							new_language += "Unathi"
+							new_language += "Tajaran"
+							new_language += "Skrell"
+							new_language += "Kidan"
+						language = input("Please select a secondary language", "Character Generation", null) in new_language
 
 					if("metadata")
 						var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null

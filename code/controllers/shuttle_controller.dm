@@ -67,6 +67,7 @@ datum/shuttle_controller
 				captain_announce("The shuttle has been recalled.")
 				setdirection(-1)
 				online = 1
+				alert = 0 // set alert back to 0 after an admin recall
 				return
 
 	// returns the time (in seconds) before shuttle arrival
@@ -130,7 +131,7 @@ datum/shuttle_controller
 
 							start_location.move_contents_to(end_location, null, NORTH)
 
-							for(var/obj/machinery/door/unpowered/D in world)
+							for(var/obj/machinery/door/unpowered/D in machines)
 								if( get_area(D) == end_location )
 									spawn(0)
 										D.locked = 0
@@ -152,7 +153,7 @@ datum/shuttle_controller
 							end_location = locate(/area/shuttle/escape_pod1/centcom)
 							start_location.move_contents_to(end_location, null, NORTH)
 
-							for(var/obj/machinery/door/D in world)
+							for(var/obj/machinery/door/D in machines)
 								if( get_area(D) == end_location )
 									spawn(0)
 										D.open()
@@ -172,7 +173,7 @@ datum/shuttle_controller
 							end_location = locate(/area/shuttle/escape_pod2/centcom)
 							start_location.move_contents_to(end_location, null, NORTH)
 
-							for(var/obj/machinery/door/D in world)
+							for(var/obj/machinery/door/D in machines)
 								if( get_area(D) == end_location )
 									spawn(0)
 										D.open()
@@ -192,7 +193,7 @@ datum/shuttle_controller
 							end_location = locate(/area/shuttle/escape_pod3/centcom)
 							start_location.move_contents_to(end_location, null, NORTH)
 
-							for(var/obj/machinery/door/D in world)
+							for(var/obj/machinery/door/D in machines)
 								if( get_area(D) == end_location )
 									spawn(0)
 										D.open()
@@ -212,7 +213,7 @@ datum/shuttle_controller
 							end_location = locate(/area/shuttle/escape_pod5/centcom)
 							start_location.move_contents_to(end_location, null, EAST)
 
-							for(var/obj/machinery/door/D in world)
+							for(var/obj/machinery/door/D in machines)
 								if( get_area(D) == end_location )
 									spawn(0)
 										D.open()

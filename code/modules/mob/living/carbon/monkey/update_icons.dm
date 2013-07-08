@@ -28,12 +28,20 @@
 	update_hud()
 	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
 	overlays.Cut()
+	var/ico = "monkey"
+	switch(src.dna.mutantrace) //On monkey spawn, check the DNA of the mob. If alien, change to appropriate alien monkey sprite
+		if("tajaran")
+			ico = "tajkey"
+		if("lizard")
+			ico = "stokkey"
+		if("skrell")
+			ico = "skrellkey"
 	if(lying)
-		icon_state = "monkey0"
+		icon_state = ico + "0"
 		for(var/image/I in overlays_lying)
 			overlays += I
 	else
-		icon_state = "monkey1"
+		icon_state = ico + "1"
 		for(var/image/I in overlays_standing)
 			overlays += I
 

@@ -49,7 +49,7 @@ var/sent_emergency_team = 0
 	// Shamelessly stolen nuke code
 	var/nuke_code
 	var/temp_code
-	for(var/obj/machinery/nuclearbomb/N in world)
+	for(var/obj/machinery/nuclearbomb/N in machines)
 		temp_code = text2num(N.r_code)
 		if(temp_code)
 			nuke_code = N.r_code
@@ -94,11 +94,11 @@ var/sent_emergency_team = 0
 
 	command_alert("Sensors indicate that [station_name()] has entered Code Red and is in need of assistance. We will prepare and dispatch an emergency response team to deal with the situation.", "NMV Icarus Command")
 
-	for(var/obj/effect/landmark/L in world)
+	for(var/obj/effect/landmark/L in landmarks_list)
 		if(L.name == "Response Team")
 			leader_selected = member_number == 1?1:0 // The last person selected will be the leader
 
-			var/mob/living/carbon/human/new_member = create_response_team(L, leader_selected)
+			var/mob/living/carbon/human/new_member = spawn_response_team(L, leader_selected)
 
 			new_member.age = !leader_selected ? rand(23,35) : rand(35,45)
 
@@ -188,7 +188,7 @@ var/sent_emergency_team = 0
 	return 1
 
 // Mob creation
-/client/proc/create_response_team(obj/spawn_location, leader_selected = 0)
+/client/proc/spawn_response_team(obj/spawn_location, leader_selected = 0)
 	var/mob/living/carbon/human/new_member = new(spawn_location.loc)
 
 	return new_member

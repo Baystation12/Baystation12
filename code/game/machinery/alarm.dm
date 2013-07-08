@@ -48,7 +48,10 @@
 #define RCON_YES	3
 
 //1000 joules equates to about 1 degree every 2 seconds for a single tile of air.
-#define MAX_ENERGY_CHANGE 2000
+#define MAX_ENERGY_CHANGE 1000
+
+#define MAX_TEMPERATURE 90
+#define MIN_TEMPERATURE -40
 
 //all air alarms in area are connected via magic
 /area
@@ -85,6 +88,7 @@
 	var/area_uid
 	var/area/alarm_area
 	var/danger_level = 0
+	var/buildstage = 2 //2 is built, 1 is building, 0 is frame.
 
 	var/target_temperature = T0C+20
 	var/regulating_temperature = 0
@@ -104,8 +108,26 @@
 		TLV["temperature"] =	list(20, 40, 140, 160) // K
 		target_temperature = 90
 
-	New()
+	New(var/loc, var/dir, var/building = 0)
 		..()
+
+		if(building)
+			if(loc)
+				src.loc = loc
+
+			if(dir)
+				src.dir = dir
+
+			buildstage = 0
+			wiresexposed = 1
+			pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
+			pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
+			update_icon()
+			return
+
+		first_run()
+
+	proc/first_run()
 		alarm_area = get_area(src)
 		if (alarm_area.master)
 			alarm_area = alarm_area.master
@@ -128,7 +150,7 @@
 
 
 	process()
-		if((stat & (NOPOWER|BROKEN)) || shorted)
+		if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
 			return
 
 		var/turf/simulated/location = loc
@@ -137,18 +159,21 @@
 		var/datum/gas_mixture/environment = location.return_air()
 
 		//Handle temperature adjustment here.
-		if(environment.temperature < target_temperature - 10 || environment.temperature > target_temperature + 10 || regulating_temperature)
+		if(environment.temperature < target_temperature - 2 || environment.temperature > target_temperature + 2 || regulating_temperature)
 			//If it goes too far, we should adjust ourselves back before stopping.
+			if(get_danger_level(target_temperature, TLV["temperature"]))
+				return
+
 			if(!regulating_temperature)
 				regulating_temperature = 1
 				visible_message("\The [src] clicks as it starts [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
 				"You hear a click and a faint electronic hum.")
 
-			if(target_temperature > T0C + 90)
-				target_temperature = T0C + 90
+			if(target_temperature > T0C + MAX_TEMPERATURE)
+				target_temperature = T0C + MAX_TEMPERATURE
 
-			if(target_temperature < T0C - 40)
-				target_temperature = T0C - 40
+			if(target_temperature < T0C + MIN_TEMPERATURE)
+				target_temperature = T0C + MIN_TEMPERATURE
 
 			var/datum/gas_mixture/gas = location.remove_air(0.25*environment.total_moles)
 			var/heat_capacity = gas.heat_capacity()
@@ -480,6 +505,14 @@
 		var/wireFlag = AAlarmIndexToFlag[wireIndex]
 		return ((AAlarmwires & wireFlag) == 0)
 
+	proc/allWiresCut()
+		var/i = 1
+		while(i<=5)
+			if(AAlarmwires & AAlarmIndexToFlag[i])
+				return 0
+			i++
+		return 1
+
 	proc/cut(var/wireColor)
 		var/wireFlag = AAlarmWireColorToFlag[wireColor]
 		var/wireIndex = AAlarmWireColorToIndex[wireColor]
@@ -603,6 +636,9 @@
 	interact(mob/user)
 		user.set_machine(src)
 
+		if(buildstage!=2)
+			return
+
 		if ( (get_dist(src, user) > 1 ))
 			if (!istype(user, /mob/living/silicon))
 				user.machine = null
@@ -709,7 +745,7 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 		else if (other_dangerlevel==1)
 			output += "Notice: <span class='dl1'>Low Concentration of Unknown Particles Detected</span><br>"
 
-		output += "Temperature: <span class='dl[temperature_dangerlevel]'>[environment.temperature]</span>K<br>"
+		output += "Temperature: <span class='dl[temperature_dangerlevel]'>[environment.temperature]</span>K ([round(environment.temperature - T0C, 0.1)]C)<br>"
 
 		//Overall status
 		output += "Local Status: "
@@ -727,7 +763,7 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 		return output
 
 	proc/rcon_text()
-		var/dat = "<b>Remote Control:</b><br>"
+		var/dat = "<table width=\"100%\"><td align=\"center\"><b>Remote Control:</b><br>"
 		if(rcon_setting == RCON_NO)
 			dat += "<b>Off</b>"
 		else
@@ -741,7 +777,11 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 		if(rcon_setting == RCON_YES)
 			dat += "<b>On</b>"
 		else
-			dat += "<a href='?src=\ref[src];rcon=[RCON_YES]'>On</a>"
+			dat += "<a href='?src=\ref[src];rcon=[RCON_YES]'>On</a></td>"
+
+		//Hackish, I know.  I didn't feel like bothering to rework all of this.
+		dat += "<td align=\"center\"><b>Thermostat:</b><br><a href='?src=\ref[src];temperature=1'>[target_temperature - T0C]C</a></td></table>"
+
 		return dat
 
 	proc/return_controls()
@@ -985,10 +1025,6 @@ table tr:first-child th:first-child { border: none;}
 						if(selected[3] > selected[4])
 							selected[3] = selected[4]
 
-					//Sets the temperature the built-in heater/cooler tries to maintain.
-					if(env == "temperature")
-						target_temperature = (selected[2] + selected[3])/2
-
 					apply_mode()
 
 		if(href_list["screen"])
@@ -1014,6 +1050,16 @@ table tr:first-child th:first-child { border: none;}
 		if(href_list["mode"])
 			mode = text2num(href_list["mode"])
 			apply_mode()
+
+		if(href_list["temperature"])
+			var/list/selected = TLV["temperature"]
+			var/max_temperature = min(selected[3] - T0C, MAX_TEMPERATURE)
+			var/min_temperature = max(selected[2] - T0C, MIN_TEMPERATURE)
+			var/input_temperature = input("What temperature would you like the system to mantain? (Capped between [min_temperature]C and [max_temperature]C)", "Thermostat Controls") as num|null
+			if(!input_temperature || input_temperature > max_temperature || input_temperature < min_temperature)
+				usr << "Temperature must be between [min_temperature]C and [max_temperature]C"
+			else
+				target_temperature = input_temperature + T0C
 
 		if (href_list["AAlarmwires"])
 			var/t1 = text2num(href_list["AAlarmwires"])
@@ -1048,28 +1094,74 @@ table tr:first-child th:first-child { border: none;}
 		update_icon()
 		return
 */
-	if(istype(W, /obj/item/weapon/screwdriver))  // Opening that Air Alarm up.
-		//user << "You pop the Air Alarm's maintence panel open."
-		wiresexposed = !wiresexposed
-		user << "The wires have been [wiresexposed ? "exposed" : "unexposed"]"
-		update_icon()
-		return
+	src.add_fingerprint(user)
 
-	if (wiresexposed && ((istype(W, /obj/item/device/multitool) || istype(W, /obj/item/weapon/wirecutters))))
-		return attack_hand(user)
+	switch(buildstage)
+		if(2)
+			if(istype(W, /obj/item/weapon/screwdriver))  // Opening that Air Alarm up.
+				//user << "You pop the Air Alarm's maintence panel open."
+				wiresexposed = !wiresexposed
+				user << "The wires have been [wiresexposed ? "exposed" : "unexposed"]"
+				update_icon()
+				return
 
+			if (wiresexposed && ((istype(W, /obj/item/device/multitool) || istype(W, /obj/item/weapon/wirecutters))))
+				return attack_hand(user)
 
-	else if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
-		if(stat & (NOPOWER|BROKEN))
-			user << "It does nothing"
-		else
-			if(allowed(usr) && !isWireCut(AALARM_WIRE_IDSCAN))
-				locked = !locked
-				user << "\blue You [ locked ? "lock" : "unlock"] the Air Alarm interface."
-				updateUsrDialog()
-			else
-				user << "\red Access denied."
-		return
+			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
+				if(stat & (NOPOWER|BROKEN))
+					user << "It does nothing"
+					return
+				else
+					if(allowed(usr) && !isWireCut(AALARM_WIRE_IDSCAN))
+						locked = !locked
+						user << "\blue You [ locked ? "lock" : "unlock"] the Air Alarm interface."
+						updateUsrDialog()
+					else
+						user << "\red Access denied."
+			return
+
+		if(1)
+			if(istype(W, /obj/item/weapon/cable_coil))
+				var/obj/item/weapon/cable_coil/coil = W
+				if(coil.amount < 5)
+					user << "You need more cable for this!"
+					return
+
+				user << "You wire \the [src]!"
+				coil.amount -= 5
+				if(!coil.amount)
+					del(coil)
+
+				buildstage = 2
+				update_icon()
+				first_run()
+
+			else if(istype(W, /obj/item/weapon/crowbar))
+				user << "You pry out the circuit!"
+				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+				spawn(20)
+					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
+					circuit.loc = user.loc
+					buildstage = 0
+					update_icon()
+			return
+		if(0)
+			if(istype(W, /obj/item/weapon/airalarm_electronics))
+				user << "You insert the circuit!"
+				del(W)
+				buildstage = 1
+				update_icon()
+
+				/* Commented out due to RUNTIMES, RUNTIMES EVERYWHERE.
+				else if(istype(W, /obj/item/weapon/wrench))
+					user << "You remove the fire alarm assembly from the wall!"
+					var/obj/item/firealarm_frame/frame = new /obj/item/firealarm_frame()
+					frame.loc = user.loc
+					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+					del(src) */
+			return
+
 	return ..()
 
 /obj/machinery/alarm/power_change()
@@ -1218,15 +1310,6 @@ FIRE ALARM
 						user.visible_message("\red [user] has reconnected [src]'s detecting unit!", "You have reconnected [src]'s detecting unit.")
 					else
 						user.visible_message("\red [user] has disconnected [src]'s detecting unit!", "You have disconnected [src]'s detecting unit.")
-
-				else if (istype(W, /obj/item/weapon/wirecutters))
-					buildstage = 1
-					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil()
-					coil.amount = 5
-					coil.loc = user.loc
-					user << "You cut the wires from \the [src]"
-					update_icon()
 			if(1)
 				if(istype(W, /obj/item/weapon/cable_coil))
 					var/obj/item/weapon/cable_coil/coil = W

@@ -323,7 +323,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		stand_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[lip_style]_s"), ICON_OVERLAY)
 
 	//Underwear
-	if(underwear >0 && underwear < 12)
+	if(underwear >0 && underwear < 12 && (src.dna.mutantrace != "vox" && src.dna.mutantrace != "kidan"))
 		if(!fat && !skeleton)
 			stand_icon.Blend(new /icon('icons/mob/human.dmi', "underwear[underwear]_[g]_s"), ICON_OVERLAY)
 
@@ -443,10 +443,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 			if("skrell")
 				race_icon = 'icons/mob/human_races/r_skrell.dmi'
 				deform_icon = 'icons/mob/human_races/r_def_skrell.dmi'
-
 			if("vox")
 				race_icon = 'icons/mob/human_races/r_vox.dmi'
 				deform_icon = 'icons/mob/human_races/r_def_vox.dmi'
+			if("kidan")
+				race_icon = 'icons/mob/human_races/r_kidan.dmi'
+				deform_icon = 'icons/mob/human_races/r_def_kidan.dmi'
 
 			else
 				race_icon = 'icons/mob/human_races/r_human.dmi'
@@ -723,7 +725,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 
 /mob/living/carbon/human/update_inv_wear_mask(var/update_icons=1)
-	if( wear_mask && istype(wear_mask, /obj/item/clothing/mask) )
+	if( wear_mask && ( istype(wear_mask, /obj/item/clothing/mask) || istype(wear_mask, /obj/item/clothing/tie) ) )
 		wear_mask.screen_loc = ui_mask	//TODO
 		var/image/lying		= image("icon" = 'icons/mob/mask.dmi', "icon_state" = "[wear_mask.icon_state]2")
 		var/image/standing	= image("icon" = 'icons/mob/mask.dmi', "icon_state" = "[wear_mask.icon_state]")

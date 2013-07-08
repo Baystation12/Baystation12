@@ -108,7 +108,7 @@ var/global/datum/controller/gameticker/ticker
 
 	//setup the money accounts
 	if(!centcomm_account_db)
-		for(var/obj/machinery/account_database/check_db in world)
+		for(var/obj/machinery/account_database/check_db in machines)
 			if(check_db.z == 2)
 				centcomm_account_db = check_db
 				break

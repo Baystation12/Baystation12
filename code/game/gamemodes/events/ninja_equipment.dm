@@ -243,7 +243,7 @@ ________________________________________________________________________________
 	var/mob/living/silicon/ai/A = AI
 	var/display_to = s_control ? U : A//Who do we want to display certain messages to?
 
-	var/dat = "<html><head><title>SpiderOS</title></head><body bgcolor=\"#3D5B43\" text=\"#DB2929\"><style>a, a:link, a:visited, a:active, a:hover { color: #DB2929; }img {border-style:none;}</style>"
+	var/dat = "<html><head><title>SpiderOS</title></head><body bgcolor=\"#3D5B43\" text=\"#B65B5B\"><style>a, a:link, a:visited, a:active, a:hover { color: #B65B5B; }img {border-style:none;}</style>"
 	dat += "<a href='byond://?src=\ref[src];choice=Refresh'><img src=sos_7.png> Refresh</a>"
 	if(spideros)
 		dat += " | <a href='byond://?src=\ref[src];choice=Return'><img src=sos_1.png> Return</a>"
@@ -1209,7 +1209,7 @@ ________________________________________________________________________________
 					U.client.images += image(tempHud,target,"hudoperative")
 				if("Death Commando")
 					U.client.images += image(tempHud,target,"huddeathsquad")
-				if("Space Ninja")
+				if("Ninja")
 					U.client.images += image(tempHud,target,"hudninja")
 				else//If we don't know what role they have but they have one.
 					U.client.images += image(tempHud,target,"hudunknown1")
@@ -1333,10 +1333,10 @@ It is possible to destroy the net by the occupant or someone else.
 			return
 
 	process(var/mob/living/carbon/M as mob)
-		var/check = 30//30 seconds before teleportation. Could be extended I guess.
+		var/check = 60//30 seconds before teleportation. Could be extended I guess. - Extended to one minute
 		var/mob_name = affecting.name//Since they will report as null if terminated before teleport.
 		//The person can still try and attack the net when inside.
-		while(!isnull(M)&&!isnull(src)&&check>0)//While M and net exist, and 30 seconds have not passed.
+		while(!isnull(M)&&!isnull(src)&&check>0)//While M and net exist, and 60 seconds have not passed.
 			check--
 			sleep(10)
 

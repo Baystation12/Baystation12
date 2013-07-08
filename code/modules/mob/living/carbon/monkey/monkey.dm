@@ -3,13 +3,114 @@
 	voice_name = "monkey"
 	voice_message = "chimpers"
 	say_message = "chimpers"
-	icon = 'icons/mob/monkey.dmi'
 	icon_state = "monkey1"
+	icon = 'icons/mob/monkey.dmi'
 	gender = NEUTER
 	pass_flags = PASSTABLE
 	update_icon = 0		///no need to call regenerate_icon
 
 	var/obj/item/weapon/card/id/wear_id = null // Fix for station bounced radios -- Skie
+
+/mob/living/carbon/monkey/tajara
+	name = "farwa"
+	voice_name = "farwa"
+	voice_message = "mews"
+	say_message = "mews"
+	icon_state = "tajkey1"
+
+/mob/living/carbon/monkey/skrell
+	name = "neaera"
+	voice_name = "neaera"
+	voice_message = "squicks"
+	say_message = "squicks"
+	icon_state = "skrellkey1"
+/mob/living/carbon/monkey/unathi
+	name = "stok"
+	voice_name = "stok"
+	voice_message = "hisses"
+	say_message = "hisses"
+	icon_state = "stokkey1"
+
+/mob/living/carbon/monkey/unathi/New()
+	var/datum/reagents/R = new/datum/reagents(1000)
+	reagents = R
+	R.my_atom = src
+
+	if(name == "stok")
+		name = text("stok ([rand(1, 1000)])")
+	real_name = name
+	if (!(dna))
+		if(gender == NEUTER)
+			gender = pick(MALE, FEMALE)
+		dna = new /datum/dna( null )
+		dna.real_name = real_name
+		dna.uni_identity = "000000000000000000DC0000066000"
+		dna.struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
+		dna.unique_enzymes = md5(name)
+		dna.mutantrace = "lizard"
+				//////////blah
+		var/gendervar
+		if (gender == MALE)
+			gendervar = add_zero2(num2hex((rand(1,2049)),1), 3)
+		else
+			gendervar = add_zero2(num2hex((rand(2051,4094)),1), 3)
+		dna.uni_identity += gendervar
+		dna.uni_identity += "044"
+		dna.uni_identity += "C5D"
+	..()
+/mob/living/carbon/monkey/skrell/New()
+	var/datum/reagents/R = new/datum/reagents(1000)
+	reagents = R
+	R.my_atom = src
+	if(name == "neaera")
+		name = text("neaera ([rand(1, 1000)])")
+	real_name = name
+	if (!(dna))
+		if(gender == NEUTER)
+			gender = pick(MALE, FEMALE)
+		dna = new /datum/dna( null )
+		dna.real_name = real_name
+		dna.uni_identity = "000000000000000000DC0000066000"
+		dna.struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
+		dna.unique_enzymes = md5(name)
+		dna.mutantrace = "skrell"
+				//////////blah
+		var/gendervar
+		if (gender == MALE)
+			gendervar = add_zero2(num2hex((rand(1,2049)),1), 3)
+		else
+			gendervar = add_zero2(num2hex((rand(2051,4094)),1), 3)
+		dna.uni_identity += gendervar
+		dna.uni_identity += "01C"
+		dna.uni_identity += "C92"
+	..()
+/mob/living/carbon/monkey/tajara/New()
+	var/datum/reagents/R = new/datum/reagents(1000)
+	reagents = R
+	R.my_atom = src
+
+	if(name == "farwa")
+		name = text("farwa ([rand(1, 1000)])")
+	real_name = name
+	if (!(dna))
+		if(gender == NEUTER)
+			gender = pick(MALE, FEMALE)
+		dna = new /datum/dna( null )
+		dna.real_name = real_name
+		dna.uni_identity = "000000000000000000DC0000066000"
+		dna.struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
+		dna.unique_enzymes = md5(name)
+		dna.mutantrace = "tajaran"
+				//////////blah
+		var/gendervar
+		if (gender == MALE)
+			gendervar = add_zero2(num2hex((rand(1,2049)),1), 3)
+		else
+			gendervar = add_zero2(num2hex((rand(2051,4094)),1), 3)
+		dna.uni_identity += gendervar
+		dna.uni_identity += "0A0"
+		dna.uni_identity += "E00"
+	..()
 
 /mob/living/carbon/monkey/New()
 	var/datum/reagents/R = new/datum/reagents(1000)

@@ -1,7 +1,7 @@
 //STRIKE TEAMS
 
 var/list/response_team_members = list()
-var/send_emergency_team = 0
+var/global/send_emergency_team = 0
 
 client/verb/JoinResponseTeam()
 	set category = "IC"
@@ -19,7 +19,7 @@ client/verb/JoinResponseTeam()
 		var/leader_selected = (response_team_members.len == 0)
 
 
-		for (var/obj/effect/landmark/L in world) if (L.name == "Commando")
+		for (var/obj/effect/landmark/L in landmarks_list) if (L.name == "Commando")
 
 			var/new_name = input(usr, "Pick a name","Name") as null|text
 			if(!new_name) return
@@ -43,9 +43,10 @@ client/verb/JoinResponseTeam()
 proc/percentage_dead()
 	var/total = 0
 	var/deadcount = 0
-	for(var/mob/living/carbon/human/H in world) if(H.mind) // I *think* monkeys gone human don't have a mind
-		if(H.stat == 2) deadcount++
-		total++
+	for(var/mob/living/carbon/human/H in mob_list)
+		if(H.client) // Monkeys and mice don't have a client, amirite?
+			if(H.stat == 2) deadcount++
+			total++
 
 	if(total == 0) return 0
 	else return round(100 * deadcount / total)
@@ -54,7 +55,7 @@ proc/percentage_dead()
 proc/percentage_antagonists()
 	var/total = 0
 	var/antagonists = 0
-	for(var/mob/living/carbon/human/H in world)
+	for(var/mob/living/carbon/human/H in mob_list)
 		if(is_special_character(H) >= 1)
 			antagonists++
 		total++
@@ -81,7 +82,7 @@ proc/trigger_armed_response_team(var/force = 0)
 
 	send_emergency_team = 1
 
-	var/area/security/nuke_storage/nukeloc = locate()//To find the nuke in the vault
+/*	var/area/security/nuke_storage/nukeloc = locate()//To find the nuke in the vault
 	var/obj/machinery/nuclearbomb/nuke = locate() in nukeloc
 	if(!nuke)
 		nuke = locate() in world
@@ -93,6 +94,7 @@ proc/trigger_armed_response_team(var/force = 0)
 			P.loc = A.loc
 			del(A)
 			continue
+*/
 
 /client/proc/create_response_team(obj/spawn_location, leader_selected = 0, commando_name)
 
@@ -223,6 +225,16 @@ proc/trigger_armed_response_team(var/force = 0)
 	camera.network = "CREED"
 	camera.c_tag = real_name
 
+	//Replaced with new ERT uniform
+	equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(src), slot_w_uniform)
+	equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(src), slot_shoes)
+	equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(src), slot_gloves)
+	equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(src), slot_ears)
+	equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(src), slot_glasses)
+	equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(src), slot_back)
+/*
+
+	//Old ERT Uniform
 	//Basic Uniform
 	equip_to_slot_or_del(new /obj/item/clothing/under/syndicate/tacticool(src), slot_w_uniform)
 	equip_to_slot_or_del(new /obj/item/device/flashlight(src), slot_l_store)
@@ -245,7 +257,7 @@ proc/trigger_armed_response_team(var/force = 0)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(src), slot_back)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(src), slot_in_backpack)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(src), slot_in_backpack)
-
+*/
 	var/obj/item/weapon/card/id/W = new(src)
 	W.name = "[real_name]'s ID Card (Emergency Response Team)"
 	W.icon_state = "centcom"
@@ -264,8 +276,8 @@ proc/trigger_armed_response_team(var/force = 0)
 
 	return 1
 
-/*//debug verb
-client/verb/ResponseTeam()
+//debug verb (That is horribly coded, LEAVE THIS OFF UNLESS PRIVATELY TESTING. Seriously.
+/*client/verb/ResponseTeam()
 	set category = "Admin"
 	if(!send_emergency_team)
 		send_emergency_team = 1*/

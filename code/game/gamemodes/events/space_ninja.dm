@@ -52,7 +52,7 @@ ________________________________________________________________________________
 	How to do that:
 	Make sure your character has a mind.
 	Change their assigned_role to "MODE", no quotes. Otherwise, the suit won't initialize.
-	Change their special_role to "Space Ninja", no quotes. Otherwise, the character will be gibbed.
+	Change their special_role to "Ninja", no quotes. Otherwise, the character will be gibbed.
 	Spawn ninja gear, put it on, hit initialize. Let the suit do the rest. You are now a space ninja.
 	I don't recommend messing with suit variables unless you really know what you're doing.
 
@@ -140,15 +140,10 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 */
 
 	//Here we pick a location and spawn the ninja.
-	var/list/spawn_list = list()
-	for(var/obj/effect/landmark/L in landmarks_list)
-		if(L.name == "ninjaspawn")
-			spawn_list.Add(L)
-
-	if(!spawn_list.len)
+	if(ninjastart.len == 0)
 		for(var/obj/effect/landmark/L in landmarks_list)
 			if(L.name == "carpspawn")
-				spawn_list.Add(L)
+				ninjastart.Add(L)
 
 	var/ninja_key = null
 	var/mob/candidate_mob
@@ -211,7 +206,7 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 		ninja_selection_active = 0
 
 		//The ninja will be created on the right spawn point or at late join.
-		var/mob/living/carbon/human/new_ninja = create_space_ninja(pick(spawn_list.len ? spawn_list : latejoin ))
+		var/mob/living/carbon/human/new_ninja = create_space_ninja(pick(ninjastart.len ? ninjastart : latejoin))
 		new_ninja.key = ninja_key
 		new_ninja.wear_suit:randomize_param()//Give them a random set of suit parameters.
 		new_ninja.internal = new_ninja.s_store //So the poor ninja has something to breath when they spawn in spess.
@@ -241,8 +236,8 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 				if(xeno_queen_list.len&&side=="face")//If there are queen about and the probability is 50.
 					for(var/mob/living/carbon/alien/humanoid/queen/xeno_queen in xeno_queen_list)
 						var/datum/objective/assassinate/ninja_objective = new
-						//We'll do some manual overrides to properly set it up.
 						ninja_objective.owner = ninja_mind
+						//We'll do some manual overrides to properly set it up.
 						ninja_objective.target = xeno_queen.mind
 						ninja_objective.explanation_text = "Kill \the [xeno_queen]."
 						ninja_mind.objectives += ninja_objective
@@ -307,6 +302,7 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 							hostile_targets -= current_mind//Remove them from the list.
 						if(2)//Steal
 							var/datum/objective/steal/ninja_objective = new
+							ninja_objective.owner = ninja_mind
 							var/target_item = pick(ninja_objective.possible_items_special)
 							ninja_objective.set_target(target_item)
 							ninja_mind.objectives += ninja_objective
@@ -342,12 +338,14 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 							hostile_targets -= current_mind//Remove them from the list.
 						if(5)//Download research
 							var/datum/objective/download/ninja_objective = new
+							ninja_objective.owner = ninja_mind
 							ninja_objective.gen_amount_goal()
 							ninja_mind.objectives += ninja_objective
 
 							objective_list -= 5
 						if(6)//Capture
 							var/datum/objective/capture/ninja_objective = new
+							ninja_objective.owner = ninja_mind
 							ninja_objective.gen_amount_goal()
 							ninja_mind.objectives += ninja_objective
 
@@ -394,17 +392,17 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 */
 /proc/generate_ninja_directive(side)
 	var/directive = "[side=="face"?"Nanotrasen":"The Syndicate"] is your employer. "//Let them know which side they're on.
-	switch(rand(1,13))
+	switch(rand(1,19))
 		if(1)
-			directive += "The Spider Clan must not be linked to this operation. Remain as hidden and covert as possible."
+			directive += "The Spider Clan must not be linked to this operation. Remain hidden and covert when possible."
 		if(2)
-			directive += "[station_name] is financed by an enemy of the Spider Clan. Cause as much structural damage as possible."
+			directive += "[station_name] is financed by an enemy of the Spider Clan. Cause as much structural damage as desired."
 		if(3)
 			directive += "A wealthy animal rights activist has made a request we cannot refuse. Prioritize saving animal lives whenever possible."
 		if(4)
-			directive += "The Spider Clan absolutely cannot be linked to this operation. Eliminate all witnesses using most extreme prejudice."
+			directive += "The Spider Clan absolutely cannot be linked to this operation. Eliminate witnesses at your discretion."
 		if(5)
-			directive += "We are currently negotiating with Nanotrasen command. Prioritize saving human lives over ending them."
+			directive += "We are currently negotiating with NanoTrasen Central Command. Prioritize saving human lives over ending them."
 		if(6)
 			directive += "We are engaged in a legal dispute over [station_name]. If a laywer is present on board, force their cooperation in the matter."
 		if(7)
@@ -414,11 +412,24 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		if(9)
 			directive += "A free agent has proposed a lucrative business deal. Implicate Nanotrasen involvement in the operation."
 		if(10)
-			directive += "Our reputation is on the line. Harm as few civilians or innocents as possible."
+			directive += "Our reputation is on the line. Harm as few civilians and innocents as possible."
 		if(11)
 			directive += "Our honor is on the line. Utilize only honorable tactics when dealing with opponents."
 		if(12)
-			directive += "We are currently negotiating with a Syndicate leader. Disguise assassinations as suicide or another natural cause."
+			directive += "We are currently negotiating with a Syndicate leader. Disguise assassinations as suicide or other natural causes."
+		if(13)
+			directive += "Some disgruntled NanoTrasen employees have been supportive of our operations. Be wary of any mistreatment by command staff."
+		if(14)
+			var/xenorace = pick("Unathi","Tajaran", "Skrellian")
+			directive += "A group of [xenorace] radicals have been loyal supporters of the Spider Clan. Favor [xenorace] crew whenever possible."
+		if(15)
+			directive += "The Spider Clan has recently been accused of religious insensitivity. Attempt to speak with the Chaplain and prove these accusations false."
+		if(16)
+			directive += "The Spider Clan has been bargaining with a competing prosthetics manufacturer. Try to shine NanoTrasen prosthetics in a bad light."
+		if(17)
+			directive += "The Spider Clan has recently begun recruiting outsiders. Consider suitable candidates and assess their behavior amongst the crew."
+		if(18)
+			directive += "A cyborg liberation group has expressed interest in our serves. Prove the Spider Clan merciful towards law-bound synthetics."
 		else
 			directive += "There are no special supplemental instructions at this time."
 	return directive
@@ -508,10 +519,9 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 /mob/living/carbon/human/proc/create_mind_space_ninja()
 	mind_initialize()
 	mind.assigned_role = "MODE"
-	mind.special_role = "Space Ninja"
+	mind.special_role = "Ninja"
 
-	//Adds them to current traitor list. Which is really the extra antagonist list.
-	ticker.mode.traitors |= mind
+	//ticker.mode.ninjas |= mind
 	return 1
 
 /mob/living/carbon/human/proc/equip_space_ninja(safety=0)//Safety in case you need to unequip stuff for existing characters.
@@ -559,7 +569,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		U:gloves.icon_state = "s-ninjan"
 		U:gloves.item_state = "s-ninjan"
 	else
-		if(U.mind.special_role!="Space Ninja")
+		if(U.mind.special_role!="Ninja")
 			U << "\red <B>fÄTaL ÈÈRRoR</B>: 382200-*#00CÖDE <B>RED</B>\nUNAU†HORIZED USÈ DETÈC†††eD\nCoMMÈNCING SUB-R0U†IN3 13...\nTÈRMInATING U-U-USÈR..."
 			U.gib()
 			return 0
@@ -656,7 +666,6 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 /obj/item/clothing/suit/space/space_ninja/proc/grant_ninja_verbs()
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjasmoke
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjaboost
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
@@ -669,8 +678,6 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 /obj/item/clothing/suit/space/space_ninja/proc/remove_ninja_verbs()
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjasmoke
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjaboost
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjablade
@@ -681,11 +688,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 /obj/item/clothing/suit/space/space_ninja/proc/grant_kamikaze(mob/living/carbon/U)
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
-	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
-
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjaslayer
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjawalk
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjamirage
@@ -710,11 +713,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 /obj/item/clothing/suit/space/space_ninja/proc/remove_kamikaze(mob/living/carbon/U)
 	if(kamikaze)
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
-		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
-		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
-
 		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjaslayer
 		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjawalk
 		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjamirage

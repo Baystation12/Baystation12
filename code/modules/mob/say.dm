@@ -50,7 +50,7 @@
 	for(var/mob/M in player_list)
 		if(istype(M, /mob/new_player))
 			continue
-		if(M.client && M.client.holder && M.client.holder.rights & R_ADMIN && (M.client.prefs.toggles & CHAT_DEAD)) //admins can toggle deadchat on and off. This is a proc in admin.dm and is only give to Administrators and above
+		if(M.client && M.client.holder && (M.client.holder.rights & R_ADMIN|R_MOD) && (M.client.prefs.toggles & CHAT_DEAD)) //admins can toggle deadchat on and off. This is a proc in admin.dm and is only give to Administrators and above
 			M << rendered	//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
 		else if(M.stat == DEAD)
 			M.show_message(rendered, 2) //Takes into account blindness and such.
@@ -69,7 +69,7 @@
 		return 1
 	return 0
 
-/mob/proc/say_quote(var/text,var/is_speaking_soghun,var/is_speaking_skrell,var/is_speaking_tajaran,var/is_speaking_vox)
+/mob/proc/say_quote(var/text,var/is_speaking_soghun,var/is_speaking_skrell,var/is_speaking_tajaran,var/is_speaking_vox,var/is_speaking_kidan)
 	if(!text)
 		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 		//tcomms code is still runtiming somewhere here
@@ -81,7 +81,9 @@
 	if (is_speaking_tajaran)
 		return "<span class='say_quote'>mrowls</span>, \"<span class='tajaran'>[text]</span>\"";
 	if (is_speaking_vox)
-		return "<span class='say_quote'>chirps</span>, \"<span class='vox'>[text]</span>\"";
+		return "<span class='say_quote'>shrieks</span>, \"<span class='vox'>[text]</span>\"";
+	if (is_speaking_kidan)
+		return "<span class='say_quote'>chitters</span>, \"<span class='kidan'>[text]</span>\"";
 //Needs Virus2
 //	if (src.disease_symptoms & DISEASE_HOARSE)
 //		return "rasps, \"[text]\"";
