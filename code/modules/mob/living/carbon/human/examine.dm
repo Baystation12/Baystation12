@@ -209,20 +209,13 @@
 			spawn(15)
 				usr << "\blue [t_He] has a pulse!"
 
-	if (src.stat == 2 || (status_flags & FAKEDEATH))
-		if(distance <= 1)
-			if(istype(usr, /mob/living/carbon/human) && usr.stat == 0)
-				for(var/mob/O in viewers(usr.loc, null))
-					O.show_message("[usr] checks [src]'s pulse.", 1)
+	if(distance <= 1)
+		if(istype(usr, /mob/living/carbon/human) && usr.stat == 0)
 			spawn(15)
-				var/foundghost = 0
-				if(src.client)
-					foundghost = 1
-				if(!foundghost)
-					usr << "<span class='deadsay'>[t_He] has no pulse and [t_his] soul has departed...</span>"
+				if(pulse == PULSE_NONE)
+					usr << "<span class='deadsay'>[t_He] has no pulse [src.client ? "" : "and [t_his] soul has departed"]...</span>"
 				else
-					usr << "<span class='deadsay'>[t_He] has no pulse...</span>"
-
+					usr << "<span class='deadsay'>[t_He] has a pulse!</span>"
 
 	msg += "<span class='warning'>"
 
