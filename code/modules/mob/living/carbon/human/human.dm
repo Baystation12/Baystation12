@@ -1238,9 +1238,9 @@ mob/living/carbon/human/yank_out_object()
 		"You begin counting your pulse.")
 
 	if(src.pulse)
-		usr << "\blue [self ? "I have" : "[src] has"] pulse! Counting..."
+		usr << "\blue [self ? "You have a" : "[src] has a"] pulse! Counting..."
 	else
-		usr << "\red [src] has no pulse!"
+		usr << "\red [src] has no pulse!"	//it is REALLY UNLIKELY that a dead person would check his own pulse
 		return
 
 	usr << "Don't move until counting is finished."
@@ -1249,5 +1249,5 @@ mob/living/carbon/human/yank_out_object()
 	if(usr.l_move_time >= time)	//checks if our mob has moved during the sleep()
 		usr << "You moved while counting. Try again."
 	else
-		usr << "\blue [self ? "My" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
+		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
