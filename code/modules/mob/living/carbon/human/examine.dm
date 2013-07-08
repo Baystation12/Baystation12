@@ -213,7 +213,7 @@
 		if(istype(usr, /mob/living/carbon/human) && usr.stat == 0)
 			spawn(15)
 				if(pulse == PULSE_NONE)
-					usr << "<span class='deadsay'>[t_He] has no pulse [src.client ? "" : "and [t_his] soul has departed"]...</span>"
+					usr << "<span class='deadsay'>[t_He] has no pulse[src.client ? "" : " and [t_his] soul has departed"]...</span>"
 				else
 					usr << "<span class='deadsay'>[t_He] has a pulse!</span>"
 

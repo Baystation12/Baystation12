@@ -1238,7 +1238,7 @@ mob/living/carbon/human/yank_out_object()
 		"You begin counting your pulse.")
 
 	if(src.pulse)
-		usr << "\blue [self ? "You have a" : "[src] has"] pulse! Counting..."
+		usr << "\blue [self ? "You have a" : "[src] has a"] pulse! Counting..."
 	else
 		usr << "\red [src] has no pulse!"	//it is REALLY UNLIKELY that a dead person would check his own pulse
 		return
