@@ -36,6 +36,8 @@
 	contents = list()
 	new /obj/item/clothing/suit/bio_suit/virology( src )
 	new /obj/item/clothing/head/bio_hood/virology( src )
+	new /obj/item/clothing/mask/breath(src)
+	new /obj/item/weapon/tank/oxygen(src)
 
 
 /obj/structure/closet/l3closet/security
