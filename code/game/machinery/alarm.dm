@@ -88,6 +88,7 @@
 	var/area_uid
 	var/area/alarm_area
 	var/danger_level = 0
+	var/buildstage = 2 //2 is built, 1 is building, 0 is frame.
 
 	var/target_temperature = T0C+20
 	var/regulating_temperature = 0
@@ -107,8 +108,26 @@
 		TLV["temperature"] =	list(20, 40, 140, 160) // K
 		target_temperature = 90
 
-	New()
+	New(var/loc, var/dir, var/building = 0)
 		..()
+
+		if(building)
+			if(loc)
+				src.loc = loc
+
+			if(dir)
+				src.dir = dir
+
+			buildstage = 0
+			wiresexposed = 1
+			pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
+			pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
+			update_icon()
+			return
+
+		first_run()
+
+	proc/first_run()
 		alarm_area = get_area(src)
 		if (alarm_area.master)
 			alarm_area = alarm_area.master
@@ -131,7 +150,7 @@
 
 
 	process()
-		if((stat & (NOPOWER|BROKEN)) || shorted)
+		if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
 			return
 
 		var/turf/simulated/location = loc
@@ -486,6 +505,14 @@
 		var/wireFlag = AAlarmIndexToFlag[wireIndex]
 		return ((AAlarmwires & wireFlag) == 0)
 
+	proc/allWiresCut()
+		var/i = 1
+		while(i<=5)
+			if(AAlarmwires & AAlarmIndexToFlag[i])
+				return 0
+			i++
+		return 1
+
 	proc/cut(var/wireColor)
 		var/wireFlag = AAlarmWireColorToFlag[wireColor]
 		var/wireIndex = AAlarmWireColorToIndex[wireColor]
@@ -608,6 +635,9 @@
 
 	interact(mob/user)
 		user.set_machine(src)
+
+		if(buildstage!=2)
+			return
 
 		if ( (get_dist(src, user) > 1 ))
 			if (!istype(user, /mob/living/silicon))
@@ -1064,28 +1094,74 @@ table tr:first-child th:first-child { border: none;}
 		update_icon()
 		return
 */
-	if(istype(W, /obj/item/weapon/screwdriver))  // Opening that Air Alarm up.
-		//user << "You pop the Air Alarm's maintence panel open."
-		wiresexposed = !wiresexposed
-		user << "The wires have been [wiresexposed ? "exposed" : "unexposed"]"
-		update_icon()
-		return
+	src.add_fingerprint(user)
 
-	if (wiresexposed && ((istype(W, /obj/item/device/multitool) || istype(W, /obj/item/weapon/wirecutters))))
-		return attack_hand(user)
+	switch(buildstage)
+		if(2)
+			if(istype(W, /obj/item/weapon/screwdriver))  // Opening that Air Alarm up.
+				//user << "You pop the Air Alarm's maintence panel open."
+				wiresexposed = !wiresexposed
+				user << "The wires have been [wiresexposed ? "exposed" : "unexposed"]"
+				update_icon()
+				return
 
+			if (wiresexposed && ((istype(W, /obj/item/device/multitool) || istype(W, /obj/item/weapon/wirecutters))))
+				return attack_hand(user)
 
-	else if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
-		if(stat & (NOPOWER|BROKEN))
-			user << "It does nothing"
-		else
-			if(allowed(usr) && !isWireCut(AALARM_WIRE_IDSCAN))
-				locked = !locked
-				user << "\blue You [ locked ? "lock" : "unlock"] the Air Alarm interface."
-				updateUsrDialog()
-			else
-				user << "\red Access denied."
-		return
+			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
+				if(stat & (NOPOWER|BROKEN))
+					user << "It does nothing"
+					return
+				else
+					if(allowed(usr) && !isWireCut(AALARM_WIRE_IDSCAN))
+						locked = !locked
+						user << "\blue You [ locked ? "lock" : "unlock"] the Air Alarm interface."
+						updateUsrDialog()
+					else
+						user << "\red Access denied."
+			return
+
+		if(1)
+			if(istype(W, /obj/item/weapon/cable_coil))
+				var/obj/item/weapon/cable_coil/coil = W
+				if(coil.amount < 5)
+					user << "You need more cable for this!"
+					return
+
+				user << "You wire \the [src]!"
+				coil.amount -= 5
+				if(!coil.amount)
+					del(coil)
+
+				buildstage = 2
+				update_icon()
+				first_run()
+
+			else if(istype(W, /obj/item/weapon/crowbar))
+				user << "You pry out the circuit!"
+				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+				spawn(20)
+					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
+					circuit.loc = user.loc
+					buildstage = 0
+					update_icon()
+			return
+		if(0)
+			if(istype(W, /obj/item/weapon/airalarm_electronics))
+				user << "You insert the circuit!"
+				del(W)
+				buildstage = 1
+				update_icon()
+
+				/* Commented out due to RUNTIMES, RUNTIMES EVERYWHERE.
+				else if(istype(W, /obj/item/weapon/wrench))
+					user << "You remove the fire alarm assembly from the wall!"
+					var/obj/item/firealarm_frame/frame = new /obj/item/firealarm_frame()
+					frame.loc = user.loc
+					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+					del(src) */
+			return
+
 	return ..()
 
 /obj/machinery/alarm/power_change()
@@ -1234,15 +1310,6 @@ FIRE ALARM
 						user.visible_message("\red [user] has reconnected [src]'s detecting unit!", "You have reconnected [src]'s detecting unit.")
 					else
 						user.visible_message("\red [user] has disconnected [src]'s detecting unit!", "You have disconnected [src]'s detecting unit.")
-
-				else if (istype(W, /obj/item/weapon/wirecutters))
-					buildstage = 1
-					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
-					var/obj/item/weapon/cable_coil/coil = new /obj/item/weapon/cable_coil()
-					coil.amount = 5
-					coil.loc = user.loc
-					user << "You cut the wires from \the [src]"
-					update_icon()
 			if(1)
 				if(istype(W, /obj/item/weapon/cable_coil))
 					var/obj/item/weapon/cable_coil/coil = W

@@ -1157,21 +1157,22 @@ mob/living/carbon/human/yank_out_object()
 			if(O == selection)
 				affected = organ
 	if(self)
-		src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected] with bloody fingers.</span>"
+		src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected.display_name] with bloody fingers.</span>"
 	else
-		U << "<span class='warning'>You attempt to get a good grip on the [selection] in [S]'s [affected] with bloody fingers.</span>"
+		U << "<span class='warning'>You attempt to get a good grip on the [selection] in [S]'s [affected.display_name] with bloody fingers.</span>"
 
 	if(istype(U,/mob/living/carbon/human/)) U.bloody_hands(S)
 
 	if(!do_after(U, 80))
 		return
 
-		if(!selection || !affected || !S || !U)
-			return
+	if(!selection || !affected || !S || !U)
+		return
+
 	if(self)
-		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
+		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected.display_name] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
 	else
-		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected] in a welter of blood.</b></span>","<span class='warning'><b>[src] rips [selection] out of your [affected] in a welter of blood.</b></span>")
+		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected.display_name] in a welter of blood.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your [affected] in a welter of blood.</b></span>")
 
 	selection.loc = get_turf(src)
 	affected.implants -= selection
@@ -1208,11 +1209,11 @@ mob/living/carbon/human/yank_out_object()
 				var/msg = null
 				switch(rand(1,3))
 					if(1)
-						msg ="<span class='warning'>A spike of pain jolts your [organ] as you bump [O] inside.</span>"
+						msg ="<span class='warning'>A spike of pain jolts your [organ.display_name] as you bump [O] inside.</span>"
 					if(2)
-						msg ="<span class='warning'>Your movement jostles [O] in your [organ] painfully.</span>"
+						msg ="<span class='warning'>Your movement jostles [O] in your [organ.display_name] painfully.</span>"
 					if(3)
-						msg ="<span class='warning'>[O] in your [organ] twists painfully as you move.</span>"
+						msg ="<span class='warning'>[O] in your [organ.display_name] twists painfully as you move.</span>"
 				src << msg
 
 				organ.status |= ORGAN_BLEEDING

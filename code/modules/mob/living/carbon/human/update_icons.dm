@@ -143,14 +143,11 @@ Please contact me on #coderbus IRC. ~Carn x
 			overlays += I
 	else
 		var/stealth = 0
-		if(istype(wear_suit, /obj/item/clothing/suit/space/space_ninja) && wear_suit:s_active)
-			stealth = 1
-		else
-			//cloaking devices. //TODO: get rid of this :<
-			for(var/obj/item/weapon/cloaking_device/S in list(l_hand,r_hand,belt,l_store,r_store))
-				if(S.active)
-					stealth = 1
-					break
+		//cloaking devices. //TODO: get rid of this :<
+		for(var/obj/item/weapon/cloaking_device/S in list(l_hand,r_hand,belt,l_store,r_store))
+			if(S.active)
+				stealth = 1
+				break
 		if(stealth)
 			icon = 'icons/mob/human.dmi'
 			icon_state = "body_cloaked"
@@ -725,7 +722,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 
 /mob/living/carbon/human/update_inv_wear_mask(var/update_icons=1)
-	if( wear_mask && istype(wear_mask, /obj/item/clothing/mask) )
+	if( wear_mask && ( istype(wear_mask, /obj/item/clothing/mask) || istype(wear_mask, /obj/item/clothing/tie) ) )
 		wear_mask.screen_loc = ui_mask	//TODO
 		var/image/lying		= image("icon" = 'icons/mob/mask.dmi', "icon_state" = "[wear_mask.icon_state]2")
 		var/image/standing	= image("icon" = 'icons/mob/mask.dmi', "icon_state" = "[wear_mask.icon_state]")
