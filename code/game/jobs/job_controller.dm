@@ -134,7 +134,7 @@ var/global/datum/controller/occupations/job_master
 				if(!job)	continue
 				var/list/candidates = FindOccupationCandidates(job, level)
 				if(!candidates.len)	continue
-				
+
 				// Build a weighted list, weight by age.
 				var/list/weightedCandidates = list()
 
@@ -144,7 +144,7 @@ var/global/datum/controller/occupations/job_master
 				if(command_position == "Captain")
 					good_age_minimal = 30
 					good_age_maximal = 70 // Old geezer captains ftw
-				
+
 				for(var/mob/V in candidates)
 					// Log-out during round-start? What a bad boy, no head position for you!
 					if(!V.client) continue
@@ -164,9 +164,9 @@ var/global/datum/controller/occupations/job_master
 							weightedCandidates[V] = 3 // Geezer.
 						else
 							// If there's ABSOLUTELY NOBODY ELSE
-							if(candidates.len == 1) weightedCandidates[V] = 1 
-							
-				
+							if(candidates.len == 1) weightedCandidates[V] = 1
+
+
 				var/mob/new_player/candidate = pickweight(weightedCandidates)
 				if(AssignRole(candidate, command_position))
 					return 1
@@ -340,6 +340,7 @@ var/global/datum/controller/occupations/job_master
 		//For ones returning to lobby
 		for(var/mob/new_player/player in unassigned)
 			if(player.client.prefs.alternate_option == RETURN_TO_LOBBY)
+				player.ready = 0
 				unassigned -= player
 		return 1
 
