@@ -87,8 +87,8 @@
 			for(var/datum/disease/D in patient.viruses)
 				if(!D.hidden[SCANNER])
 					foundVirus++
-			//if(patient.virus2)
-			//	foundVirus++
+			if(patient.virus2)
+				foundVirus++
 
 			holder = patient.hud_list[HEALTH_HUD]
 			if(patient.stat == 2)
