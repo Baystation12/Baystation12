@@ -212,8 +212,19 @@ NUDGE_SCRIPT_PATH nudge.py
 ALIEN_PLAYER_RATIO 0.2
 
 ##Remove the # to let ghosts spin chairs
-#GHOST_INTERACTION
-
 ## Uncomment this to enable external .rsc downloads. URLs must be separated by no more than one space.
 ## The linked .zip file should contain the required .rsc
 #resource_urls http://firstserver.org/myresource.zip http://secondserver.org/myresource.zip  http://10.22.11.1/myresource.zip
+
+## Uncomment to enable sending data to the IRC bot.
+#USE_IRC_BOT
+
+## IRC channel to send information to.  Leave blank to disable.
+#MAIN_IRC #main
+
+## IRC channel to send adminhelps to.  Leave blank to disable adminhelps-to-irc.
+#ADMIN_IRC #admin
+
+## Path to the python executable on the system.  Leave blank for default.
+## Default is "python" on Windows, "/usr/bin/env python2" on UNIX.
+PYTHON_PATH

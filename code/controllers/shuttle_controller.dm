@@ -280,9 +280,12 @@ datum/shuttle_controller
 						for(var/mob/living/carbon/bug in end_location) // If someone somehow is still in the shuttle's docking area...
 							bug.gib()
 
+						for(var/mob/living/simple_animal/pest in end_location) // And for the other kind of bug...
+							pest.gib()
+
 						start_location.move_contents_to(end_location)
 						settimeleft(SHUTTLELEAVETIME)
-						send2irc("Server", "The Emergency Shuttle has docked with the station.")
+						//send2irc("Server", "The Emergency Shuttle has docked with the station.")
 						captain_announce("The Emergency Shuttle has docked with the station. You have [round(timeleft()/60,1)] minutes to board the Emergency Shuttle.")
 						world << sound('sound/AI/shuttledock.ogg')
 

@@ -1244,9 +1244,12 @@
 	overlays -= "eyes"
 	updateicon()
 
-	var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
-	if(choice=="No")
-		choose_icon(triesleft, module_sprites)
+	if (triesleft >= 1)
+		var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
+		if(choice=="No")
+			choose_icon(triesleft, module_sprites)
+		else
+			triesleft = 0
+			return
 	else
-		triesleft = 0
-		return
+		src << "Your icon has been set. You now require a module reset to change it."
