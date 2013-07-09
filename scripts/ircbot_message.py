@@ -3,7 +3,7 @@
 # Two arguments, channel and message.
 # EG: "ircbot_message.py #adminchannel ADMINHELP, people are killing me!"
 
-import sys,pickle,socket
+import sys,cPickle,socket
 
 def pack():
     ip = sys.argv[1]
@@ -12,7 +12,7 @@ def pack():
     except:
         data = "NO DATA SPECIFIED"
     dictionary = {"ip":ip,"data":["PASSWORD"] + data}
-    pickled = pickle.dumps(dictionary)
+    pickled = cPickle.dumps(dictionary)
     nudge(pickled)
 def nudge(data):
     HOST = "IRCBOT IP"
