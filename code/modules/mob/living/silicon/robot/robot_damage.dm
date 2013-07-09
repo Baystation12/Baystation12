@@ -1,15 +1,23 @@
+/mob/living/silicon/robot/updatehealth()
+	if(status_flags & GODMODE)
+		health = 100
+		stat = CONSCIOUS
+		return
+	health = 100 - (getBruteLoss() + getFireLoss())
+	return
+
 /mob/living/silicon/robot/getBruteLoss()
 	var/amount = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
-		if(C.installed == 1) amount += C.brute_damage
+		if(C.installed != 0) amount += C.brute_damage
 	return amount
 
 /mob/living/silicon/robot/getFireLoss()
 	var/amount = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
-		if(C.installed == 1) amount += C.electronics_damage
+		if(C.installed != 0) amount += C.electronics_damage
 	return amount
 
 /mob/living/silicon/robot/adjustBruteLoss(var/amount)
@@ -45,10 +53,27 @@
 	var/datum/robot_component/picked = pick(parts)
 	picked.heal_damage(brute,burn)
 
-/mob/living/silicon/robot/take_organ_damage(var/brute, var/burn, var/sharp = 0)
+/mob/living/silicon/robot/take_organ_damage(var/brute = 0, var/burn = 0, var/sharp = 0)
 	var/list/components = get_damageable_components()
-	if(components.len)
+	if(!components.len)
 		return
+
+	 //Combat shielding absorbs a percentage of damage directly into the cell.
+	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
+		var/obj/item/borg/combat/shield/shield = module_active
+		//Shields absorb a certain percentage of damage based on their power setting.
+		var/absorb_brute = brute*shield.shield_level
+		var/absorb_burn = burn*shield.shield_level
+		var/cost = (absorb_brute+absorb_burn)*100
+
+		cell.charge -= cost
+		if(cell.charge <= 0)
+			cell.charge = 0
+			src << "\red Your shield has overloaded!"
+		else
+			brute -= absorb_brute
+			burn -= absorb_burn
+			src << "\red Your shield absorbs some of the impact!"
 
 	var/datum/robot_component/C = pick(components)
 	C.take_damage(brute,burn,sharp)

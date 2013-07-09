@@ -66,9 +66,7 @@
 		else
 			src.camera.status = 1
 
-	health = 200 - (getOxyLoss() + getFireLoss() + getBruteLoss())
-
-	if(getOxyLoss() > 50) Paralyse(3)
+	updatehealth()
 
 	if(src.sleeping)
 		Paralyse(3)
