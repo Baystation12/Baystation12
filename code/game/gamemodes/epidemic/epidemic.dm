@@ -127,7 +127,7 @@
 		if(lethal.uniqueID in H.virus2)
 			i--
 			continue
-		H.virus2["[lethal.uniqueID]"] += lethal.getcopy()
+		H.virus2["[lethal.uniqueID]"] = lethal.getcopy()
 		infectees += H
 
 	var/mob/living/carbon/human/patient_zero = pick(infectees)
