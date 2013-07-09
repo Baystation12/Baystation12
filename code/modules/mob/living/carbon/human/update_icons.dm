@@ -143,14 +143,11 @@ Please contact me on #coderbus IRC. ~Carn x
 			overlays += I
 	else
 		var/stealth = 0
-		if(istype(wear_suit, /obj/item/clothing/suit/space/space_ninja) && wear_suit:s_active)
-			stealth = 1
-		else
-			//cloaking devices. //TODO: get rid of this :<
-			for(var/obj/item/weapon/cloaking_device/S in list(l_hand,r_hand,belt,l_store,r_store))
-				if(S.active)
-					stealth = 1
-					break
+		//cloaking devices. //TODO: get rid of this :<
+		for(var/obj/item/weapon/cloaking_device/S in list(l_hand,r_hand,belt,l_store,r_store))
+			if(S.active)
+				stealth = 1
+				break
 		if(stealth)
 			icon = 'icons/mob/human.dmi'
 			icon_state = "body_cloaked"
