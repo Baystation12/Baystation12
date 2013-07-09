@@ -683,6 +683,10 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Arrival Shuttle Hallway"
 	icon_state = "entry"
 
+/area/hallway/secondary/aft
+	name = "\improper Aft Secondary Hallway"
+	icon_state = "hallA"
+
 //Command
 
 /area/bridge
