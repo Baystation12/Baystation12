@@ -146,7 +146,7 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
-	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security", "Combat")
+	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
 	if(emagged || security_level > SEC_LEVEL_BLUE)
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
