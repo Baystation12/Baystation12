@@ -1,3 +1,6 @@
+/*
+
+
 /datum/intercept_text
 	var/text
 	/*
@@ -234,3 +237,6 @@
 	*/
 	src.text += "These lifeforms are assosciated with the [orgname1] [orgname2] and may be attempting to acquire sensitive materials on their behalf.  "
 	src.text += "Please take care not to alarm the crew, as [cname] may take advantage of a panic situation. Remember, they can be anybody, suspect everybody!"
+
+
+*/
