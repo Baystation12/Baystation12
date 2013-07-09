@@ -32,7 +32,6 @@
 	R.icon_state = "robot"
 	del(R.module)
 	R.module = null
-	R.modtype = "robot"
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
 	R.updateicon()
@@ -52,6 +51,7 @@
 /obj/item/borg/upgrade/rename/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
 	R.name = heldname
+	R.custom_name = heldname
 	R.real_name = heldname
 
 	return 1
@@ -147,7 +147,7 @@
 		R.module.modules += new/obj/item/weapon/tank/jetpack/carbondioxide
 		for(var/obj/item/weapon/tank/jetpack/carbondioxide in R.module.modules)
 			R.internals = src
-		R.icon_state="Miner+j"
+		//R.icon_state="Miner+j"
 		return 1
 
 

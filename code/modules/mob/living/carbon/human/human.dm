@@ -499,267 +499,258 @@
 			return
 
 	if (href_list["criminal"])
-		if(istype(usr, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = usr
-			if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
+		if(hasHUD(usr,"security"))
 
-				/* // Uncomment if you want sechuds to need security access
-				var/allowed_access = 0
-				if(H.wear_id)
-					var/list/access = H.wear_id.GetAccess()
-					if(access_security in access)
-						allowed_access = 1
-						return
-
-				if(!allowed_access)
-					H << "<span class='warning'>ERROR: Invalid Access</span>"
-					return
-				*/
-
-				var/modified = 0
-				var/perpname = "wot"
-				if(wear_id)
-					var/obj/item/weapon/card/id/I = wear_id.GetID()
-					if(I)
-						perpname = I.registered_name
-					else
-						perpname = name
+			var/modified = 0
+			var/perpname = "wot"
+			if(wear_id)
+				var/obj/item/weapon/card/id/I = wear_id.GetID()
+				if(I)
+					perpname = I.registered_name
 				else
 					perpname = name
+			else
+				perpname = name
 
-				if(perpname)
-					for (var/datum/data/record/E in data_core.general)
-						if (E.fields["name"] == perpname)
-							for (var/datum/data/record/R in data_core.security)
-								if (R.fields["id"] == E.fields["id"])
-
-									var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.fields["criminal"]) in list("None", "*Arrest*", "Incarcerated", "Parolled", "Released", "Cancel")
-
-									if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
-										if(setcriminal != "Cancel")
-											R.fields["criminal"] = setcriminal
-											modified = 1
-
-											spawn()
-												H.handle_regular_hud_updates()
-
-				if(!modified)
-					usr << "\red Unable to locate a data core entry for this person."
-
-	if (href_list["secrecord"])
-		if(istype(usr, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = usr
-			if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
-				var/perpname = "wot"
-				var/read = 0
-
-				if(wear_id)
-					if(istype(wear_id,/obj/item/weapon/card/id))
-						perpname = wear_id:registered_name
-					else if(istype(wear_id,/obj/item/device/pda))
-						var/obj/item/device/pda/tempPda = wear_id
-						perpname = tempPda.owner
-				else
-					perpname = src.name
+			if(perpname)
 				for (var/datum/data/record/E in data_core.general)
 					if (E.fields["name"] == perpname)
 						for (var/datum/data/record/R in data_core.security)
 							if (R.fields["id"] == E.fields["id"])
-								if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
-									usr << "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]"
-									usr << "<b>Minor Crimes:</b> [R.fields["mi_crim"]]"
-									usr << "<b>Details:</b> [R.fields["mi_crim_d"]]"
-									usr << "<b>Major Crimes:</b> [R.fields["ma_crim"]]"
-									usr << "<b>Details:</b> [R.fields["ma_crim_d"]]"
-									usr << "<b>Notes:</b> [R.fields["notes"]]"
-									usr << "<a href='?src=\ref[src];secrecordComment=`'>\[View Comment Log\]</a>"
-									read = 1
 
-				if(!read)
-					usr << "\red Unable to locate a data core entry for this person."
+								var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.fields["criminal"]) in list("None", "*Arrest*", "Incarcerated", "Parolled", "Released", "Cancel")
 
-	if (href_list["secrecordComment"])
-		if(istype(usr, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = usr
-			if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
-				var/perpname = "wot"
-				var/read = 0
-
-				if(wear_id)
-					if(istype(wear_id,/obj/item/weapon/card/id))
-						perpname = wear_id:registered_name
-					else if(istype(wear_id,/obj/item/device/pda))
-						var/obj/item/device/pda/tempPda = wear_id
-						perpname = tempPda.owner
-				else
-					perpname = src.name
-				for (var/datum/data/record/E in data_core.general)
-					if (E.fields["name"] == perpname)
-						for (var/datum/data/record/R in data_core.security)
-							if (R.fields["id"] == E.fields["id"])
-								if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
-									read = 1
-									var/counter = 1
-									while(R.fields[text("com_[]", counter)])
-										usr << text("[]", R.fields[text("com_[]", counter)])
-										counter++
-									if (counter == 1)
-										usr << "No comment found"
-									usr << "<a href='?src=\ref[src];secrecordadd=`'>\[Add comment\]</a>"
-
-				if(!read)
-					usr << "\red Unable to locate a data core entry for this person."
-
-	if (href_list["secrecordadd"])
-		if(istype(usr, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = usr
-			if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
-				var/perpname = "wot"
-				if(wear_id)
-					if(istype(wear_id,/obj/item/weapon/card/id))
-						perpname = wear_id:registered_name
-					else if(istype(wear_id,/obj/item/device/pda))
-						var/obj/item/device/pda/tempPda = wear_id
-						perpname = tempPda.owner
-				else
-					perpname = src.name
-				for (var/datum/data/record/E in data_core.general)
-					if (E.fields["name"] == perpname)
-						for (var/datum/data/record/R in data_core.security)
-							if (R.fields["id"] == E.fields["id"])
-								if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))
-									var/t1 = copytext(sanitize(input("Add Comment:", "Sec. records", null, null)  as message),1,MAX_MESSAGE_LEN)
-									if ((!( t1 ) || src.stat || src.restrained() || !(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud))))
-										return
-									var/counter = 1
-									while(R.fields[text("com_[]", counter)])
-										counter++
-									R.fields[text("com_[]", counter)] = text("Made by [] ([]) on [], 2053<BR>[]",H.get_authentification_name(), H.get_assignment(), time2text(world.realtime, "DDD MMM DD hh:mm:ss"), t1)
-
-	if (href_list["medical"])
-		if(istype(usr, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = usr
-			if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
-				var/perpname = "wot"
-				var/modified = 0
-
-				if(wear_id)
-					if(istype(wear_id,/obj/item/weapon/card/id))
-						perpname = wear_id:registered_name
-					else if(istype(wear_id,/obj/item/device/pda))
-						var/obj/item/device/pda/tempPda = wear_id
-						perpname = tempPda.owner
-				else
-					perpname = src.name
-
-				for (var/datum/data/record/E in data_core.general)
-					if (E.fields["name"] == perpname)
-						for (var/datum/data/record/R in data_core.general)
-							if (R.fields["id"] == E.fields["id"])
-
-								var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", R.fields["p_stat"]) in list("*Deceased*", "*Unconscious*", "Physically Unfit", "Active", "Cancel")
-
-								if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
-									if(setmedical != "Cancel")
-										R.fields["p_stat"] = setmedical
+								if(hasHUD(usr, "security"))
+									if(setcriminal != "Cancel")
+										R.fields["criminal"] = setcriminal
 										modified = 1
 
 										spawn()
-											H.handle_regular_hud_updates()
+											if(istype(usr,/mob/living/carbon/human))
+												var/mob/living/carbon/human/U = usr
+												U.handle_regular_hud_updates()
+											if(istype(usr,/mob/living/silicon/robot))
+												var/mob/living/silicon/robot/U = usr
+												U.handle_regular_hud_updates()
 
-				if(!modified)
-					usr << "\red Unable to locate a data core entry for this person."
+			if(!modified)
+				usr << "\red Unable to locate a data core entry for this person."
+
+	if (href_list["secrecord"])
+		if(hasHUD(usr,"security"))
+			var/perpname = "wot"
+			var/read = 0
+
+			if(wear_id)
+				if(istype(wear_id,/obj/item/weapon/card/id))
+					perpname = wear_id:registered_name
+				else if(istype(wear_id,/obj/item/device/pda))
+					var/obj/item/device/pda/tempPda = wear_id
+					perpname = tempPda.owner
+			else
+				perpname = src.name
+			for (var/datum/data/record/E in data_core.general)
+				if (E.fields["name"] == perpname)
+					for (var/datum/data/record/R in data_core.security)
+						if (R.fields["id"] == E.fields["id"])
+							if(hasHUD(usr,"security"))
+								usr << "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]"
+								usr << "<b>Minor Crimes:</b> [R.fields["mi_crim"]]"
+								usr << "<b>Details:</b> [R.fields["mi_crim_d"]]"
+								usr << "<b>Major Crimes:</b> [R.fields["ma_crim"]]"
+								usr << "<b>Details:</b> [R.fields["ma_crim_d"]]"
+								usr << "<b>Notes:</b> [R.fields["notes"]]"
+								usr << "<a href='?src=\ref[src];secrecordComment=`'>\[View Comment Log\]</a>"
+								read = 1
+
+			if(!read)
+				usr << "\red Unable to locate a data core entry for this person."
+
+	if (href_list["secrecordComment"])
+		if(hasHUD(usr,"security"))
+			var/perpname = "wot"
+			var/read = 0
+
+			if(wear_id)
+				if(istype(wear_id,/obj/item/weapon/card/id))
+					perpname = wear_id:registered_name
+				else if(istype(wear_id,/obj/item/device/pda))
+					var/obj/item/device/pda/tempPda = wear_id
+					perpname = tempPda.owner
+			else
+				perpname = src.name
+			for (var/datum/data/record/E in data_core.general)
+				if (E.fields["name"] == perpname)
+					for (var/datum/data/record/R in data_core.security)
+						if (R.fields["id"] == E.fields["id"])
+							if(hasHUD(usr,"security"))
+								read = 1
+								var/counter = 1
+								while(R.fields[text("com_[]", counter)])
+									usr << text("[]", R.fields[text("com_[]", counter)])
+									counter++
+								if (counter == 1)
+									usr << "No comment found"
+								usr << "<a href='?src=\ref[src];secrecordadd=`'>\[Add comment\]</a>"
+
+			if(!read)
+				usr << "\red Unable to locate a data core entry for this person."
+
+	if (href_list["secrecordadd"])
+		if(hasHUD(usr,"security"))
+			var/perpname = "wot"
+			if(wear_id)
+				if(istype(wear_id,/obj/item/weapon/card/id))
+					perpname = wear_id:registered_name
+				else if(istype(wear_id,/obj/item/device/pda))
+					var/obj/item/device/pda/tempPda = wear_id
+					perpname = tempPda.owner
+			else
+				perpname = src.name
+			for (var/datum/data/record/E in data_core.general)
+				if (E.fields["name"] == perpname)
+					for (var/datum/data/record/R in data_core.security)
+						if (R.fields["id"] == E.fields["id"])
+							if(hasHUD(usr,"security"))
+								var/t1 = copytext(sanitize(input("Add Comment:", "Sec. records", null, null)  as message),1,MAX_MESSAGE_LEN)
+								if ( !(t1) || usr.stat || usr.restrained() || !(hasHUD(usr,"security")) )
+									return
+								var/counter = 1
+								while(R.fields[text("com_[]", counter)])
+									counter++
+								if(istype(usr,/mob/living/carbon/human))
+									var/mob/living/carbon/human/U = usr
+									R.fields[text("com_[counter]")] = text("Made by [U.get_authentification_name()] ([U.get_assignment()]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], 2557<BR>[t1]")
+								if(istype(usr,/mob/living/silicon/robot))
+									var/mob/living/silicon/robot/U = usr
+									R.fields[text("com_[counter]")] = text("Made by [U.name] ([U.braintype]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], 2557<BR>[t1]")
+
+	if (href_list["medical"])
+		if(hasHUD(usr,"medical"))
+			var/perpname = "wot"
+			var/modified = 0
+
+			if(wear_id)
+				if(istype(wear_id,/obj/item/weapon/card/id))
+					perpname = wear_id:registered_name
+				else if(istype(wear_id,/obj/item/device/pda))
+					var/obj/item/device/pda/tempPda = wear_id
+					perpname = tempPda.owner
+			else
+				perpname = src.name
+
+			for (var/datum/data/record/E in data_core.general)
+				if (E.fields["name"] == perpname)
+					for (var/datum/data/record/R in data_core.general)
+						if (R.fields["id"] == E.fields["id"])
+
+							var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", R.fields["p_stat"]) in list("*Deceased*", "*Unconscious*", "Physically Unfit", "Active", "Cancel")
+
+							if(hasHUD(usr,"medical"))
+								if(setmedical != "Cancel")
+									R.fields["p_stat"] = setmedical
+									modified = 1
+
+									spawn()
+										if(istype(usr,/mob/living/carbon/human))
+											var/mob/living/carbon/human/U = usr
+											U.handle_regular_hud_updates()
+										if(istype(usr,/mob/living/silicon/robot))
+											var/mob/living/silicon/robot/U = usr
+											U.handle_regular_hud_updates()
+
+			if(!modified)
+				usr << "\red Unable to locate a data core entry for this person."
 
 	if (href_list["medrecord"])
-		if(istype(usr, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = usr
-			if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
-				var/perpname = "wot"
-				var/read = 0
+		if(hasHUD(usr,"medical"))
+			var/perpname = "wot"
+			var/read = 0
 
-				if(wear_id)
-					if(istype(wear_id,/obj/item/weapon/card/id))
-						perpname = wear_id:registered_name
-					else if(istype(wear_id,/obj/item/device/pda))
-						var/obj/item/device/pda/tempPda = wear_id
-						perpname = tempPda.owner
-				else
-					perpname = src.name
-				for (var/datum/data/record/E in data_core.general)
-					if (E.fields["name"] == perpname)
-						for (var/datum/data/record/R in data_core.medical)
-							if (R.fields["id"] == E.fields["id"])
-								if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
-									usr << "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]"
-									usr << "<b>DNA:</b> [R.fields["b_dna"]]"
-									usr << "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]"
-									usr << "<b>Details:</b> [R.fields["mi_dis_d"]]"
-									usr << "<b>Major Disabilities:</b> [R.fields["ma_dis"]]"
-									usr << "<b>Details:</b> [R.fields["ma_dis_d"]]"
-									usr << "<b>Notes:</b> [R.fields["notes"]]"
-									usr << "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>"
-									read = 1
+			if(wear_id)
+				if(istype(wear_id,/obj/item/weapon/card/id))
+					perpname = wear_id:registered_name
+				else if(istype(wear_id,/obj/item/device/pda))
+					var/obj/item/device/pda/tempPda = wear_id
+					perpname = tempPda.owner
+			else
+				perpname = src.name
+			for (var/datum/data/record/E in data_core.general)
+				if (E.fields["name"] == perpname)
+					for (var/datum/data/record/R in data_core.medical)
+						if (R.fields["id"] == E.fields["id"])
+							if(hasHUD(usr,"medical"))
+								usr << "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]"
+								usr << "<b>DNA:</b> [R.fields["b_dna"]]"
+								usr << "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]"
+								usr << "<b>Details:</b> [R.fields["mi_dis_d"]]"
+								usr << "<b>Major Disabilities:</b> [R.fields["ma_dis"]]"
+								usr << "<b>Details:</b> [R.fields["ma_dis_d"]]"
+								usr << "<b>Notes:</b> [R.fields["notes"]]"
+								usr << "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>"
+								read = 1
 
-				if(!read)
-					usr << "\red Unable to locate a data core entry for this person."
+			if(!read)
+				usr << "\red Unable to locate a data core entry for this person."
 
 	if (href_list["medrecordComment"])
-		if(istype(usr, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = usr
-			if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
-				var/perpname = "wot"
-				var/read = 0
+		if(hasHUD(usr,"medical"))
+			var/perpname = "wot"
+			var/read = 0
 
-				if(wear_id)
-					if(istype(wear_id,/obj/item/weapon/card/id))
-						perpname = wear_id:registered_name
-					else if(istype(wear_id,/obj/item/device/pda))
-						var/obj/item/device/pda/tempPda = wear_id
-						perpname = tempPda.owner
-				else
-					perpname = src.name
-				for (var/datum/data/record/E in data_core.general)
-					if (E.fields["name"] == perpname)
-						for (var/datum/data/record/R in data_core.medical)
-							if (R.fields["id"] == E.fields["id"])
-								if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
-									read = 1
-									var/counter = 1
-									while(R.fields[text("com_[]", counter)])
-										usr << text("[]", R.fields[text("com_[]", counter)])
-										counter++
-									if (counter == 1)
-										usr << "No comment found"
-									usr << "<a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a>"
+			if(wear_id)
+				if(istype(wear_id,/obj/item/weapon/card/id))
+					perpname = wear_id:registered_name
+				else if(istype(wear_id,/obj/item/device/pda))
+					var/obj/item/device/pda/tempPda = wear_id
+					perpname = tempPda.owner
+			else
+				perpname = src.name
+			for (var/datum/data/record/E in data_core.general)
+				if (E.fields["name"] == perpname)
+					for (var/datum/data/record/R in data_core.medical)
+						if (R.fields["id"] == E.fields["id"])
+							if(hasHUD(usr,"medical"))
+								read = 1
+								var/counter = 1
+								while(R.fields[text("com_[]", counter)])
+									usr << text("[]", R.fields[text("com_[]", counter)])
+									counter++
+								if (counter == 1)
+									usr << "No comment found"
+								usr << "<a href='?src=\ref[src];medrecordadd=`'>\[Add comment\]</a>"
 
-				if(!read)
-					usr << "\red Unable to locate a data core entry for this person."
+			if(!read)
+				usr << "\red Unable to locate a data core entry for this person."
 
 	if (href_list["medrecordadd"])
-		if(istype(usr, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = usr
-			if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
-				var/perpname = "wot"
-				if(wear_id)
-					if(istype(wear_id,/obj/item/weapon/card/id))
-						perpname = wear_id:registered_name
-					else if(istype(wear_id,/obj/item/device/pda))
-						var/obj/item/device/pda/tempPda = wear_id
-						perpname = tempPda.owner
-				else
-					perpname = src.name
-				for (var/datum/data/record/E in data_core.general)
-					if (E.fields["name"] == perpname)
-						for (var/datum/data/record/R in data_core.medical)
-							if (R.fields["id"] == E.fields["id"])
-								if(istype(H.glasses, /obj/item/clothing/glasses/hud/health))
-									var/t1 = copytext(sanitize(input("Add Comment:", "Med. records", null, null)  as message),1,MAX_MESSAGE_LEN)
-									if ((!( t1 ) || src.stat || src.restrained() || !(istype(H.glasses, /obj/item/clothing/glasses/hud/health))))
-										return
-									var/counter = 1
-									while(R.fields[text("com_[]", counter)])
-										counter++
-									R.fields[text("com_[]", counter)] = text("Made by [] ([]) on [], 2053<BR>[]",H.get_authentification_name(), H.get_assignment(), time2text(world.realtime, "DDD MMM DD hh:mm:ss"), t1)
+		if(hasHUD(usr,"medical"))
+			var/perpname = "wot"
+			if(wear_id)
+				if(istype(wear_id,/obj/item/weapon/card/id))
+					perpname = wear_id:registered_name
+				else if(istype(wear_id,/obj/item/device/pda))
+					var/obj/item/device/pda/tempPda = wear_id
+					perpname = tempPda.owner
+			else
+				perpname = src.name
+			for (var/datum/data/record/E in data_core.general)
+				if (E.fields["name"] == perpname)
+					for (var/datum/data/record/R in data_core.medical)
+						if (R.fields["id"] == E.fields["id"])
+							if(hasHUD(usr,"medical"))
+								var/t1 = copytext(sanitize(input("Add Comment:", "Med. records", null, null)  as message),1,MAX_MESSAGE_LEN)
+								if ( !(t1) || usr.stat || usr.restrained() || !(hasHUD(usr,"medical")) )
+									return
+								var/counter = 1
+								while(R.fields[text("com_[]", counter)])
+									counter++
+								if(istype(usr,/mob/living/carbon/human))
+									var/mob/living/carbon/human/U = usr
+									R.fields[text("com_[counter]")] = text("Made by [U.get_authentification_name()] ([U.get_assignment()]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], 2557<BR>[t1]")
+								if(istype(usr,/mob/living/silicon/robot))
+									var/mob/living/silicon/robot/U = usr
+									R.fields[text("com_[counter]")] = text("Made by [U.name] ([U.braintype]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], 2557<BR>[t1]")
 	..()
 	return
 
@@ -1166,21 +1157,22 @@ mob/living/carbon/human/yank_out_object()
 			if(O == selection)
 				affected = organ
 	if(self)
-		src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected] with bloody fingers.</span>"
+		src << "<span class='warning'>You attempt to get a good grip on the [selection] in your [affected.display_name] with bloody fingers.</span>"
 	else
-		U << "<span class='warning'>You attempt to get a good grip on the [selection] in [S]'s [affected] with bloody fingers.</span>"
+		U << "<span class='warning'>You attempt to get a good grip on the [selection] in [S]'s [affected.display_name] with bloody fingers.</span>"
 
 	if(istype(U,/mob/living/carbon/human/)) U.bloody_hands(S)
 
 	if(!do_after(U, 80))
 		return
 
-		if(!selection || !affected || !S || !U)
-			return
+	if(!selection || !affected || !S || !U)
+		return
+
 	if(self)
-		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
+		visible_message("<span class='warning'><b>[src] rips [selection] out of their [affected.display_name] in a welter of blood.</b></span>","<span class='warning'><b>You rip [selection] out of your [affected] in a welter of blood.</b></span>")
 	else
-		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected] in a welter of blood.</b></span>","<span class='warning'><b>[src] rips [selection] out of your [affected] in a welter of blood.</b></span>")
+		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s [affected.display_name] in a welter of blood.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your [affected] in a welter of blood.</b></span>")
 
 	selection.loc = get_turf(src)
 	affected.implants -= selection
@@ -1217,13 +1209,46 @@ mob/living/carbon/human/yank_out_object()
 				var/msg = null
 				switch(rand(1,3))
 					if(1)
-						msg ="<span class='warning'>A spike of pain jolts your [organ] as you bump [O] inside.</span>"
+						msg ="<span class='warning'>A spike of pain jolts your [organ.display_name] as you bump [O] inside.</span>"
 					if(2)
-						msg ="<span class='warning'>Your movement jostles [O] in your [organ] painfully.</span>"
+						msg ="<span class='warning'>Your movement jostles [O] in your [organ.display_name] painfully.</span>"
 					if(3)
-						msg ="<span class='warning'>[O] in your [organ] twists painfully as you move.</span>"
+						msg ="<span class='warning'>[O] in your [organ.display_name] twists painfully as you move.</span>"
 				src << msg
 
 				organ.status |= ORGAN_BLEEDING
 				organ.take_damage(rand(1,3), 0, 0)
 				src.adjustToxLoss(rand(1,3))
+
+/mob/living/carbon/human/verb/check_pulse()
+	set category = "Object"
+	set name = "Check pulse"
+	set desc = "Approximately count somebody's pulse. Requires you to stand still at least 6 seconds."
+	set src in view(1)
+	var/self = 0
+
+	if(usr.stat == 1 || usr.restrained() || !isliving(usr)) return
+
+	if(usr == src)
+		self = 1
+	if(!self)
+		usr.visible_message("\blue [usr] kneels down, puts \his hand on [src]'s wrist and begins counting their pulse.",\
+		"You begin counting [src]'s pulse")
+	else
+		usr.visible_message("\blue [usr] begins counting their pulse.",\
+		"You begin counting your pulse.")
+
+	if(src.pulse)
+		usr << "\blue [self ? "You have a" : "[src] has a"] pulse! Counting..."
+	else
+		usr << "\red [src] has no pulse!"	//it is REALLY UNLIKELY that a dead person would check his own pulse
+		return
+
+	usr << "Don't move until counting is finished."
+	var/time = world.timeofday
+	sleep(60)
+	if(usr.l_move_time >= time)	//checks if our mob has moved during the sleep()
+		usr << "You moved while counting. Try again."
+	else
+		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
+

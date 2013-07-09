@@ -39,7 +39,7 @@
 	brute_damage += brute
 	electronics_damage += electronics
 
-	if(brute_damage + electronics_damage > max_damage) destroy()
+	if(brute_damage + electronics_damage >= max_damage) destroy()
 
 /datum/robot_component/proc/heal_damage(brute, electronics)
 	if(installed != 1)
@@ -50,7 +50,7 @@
 	electronics_damage = max(0, electronics_damage - electronics)
 
 /datum/robot_component/proc/is_powered()
-	return installed == 1 && (!energy_consumption || powered)
+	return (installed == 1) && (brute_damage + electronics_damage < max_damage) && (!energy_consumption || powered)
 
 
 /datum/robot_component/proc/consume_power()

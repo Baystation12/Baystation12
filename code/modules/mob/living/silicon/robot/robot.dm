@@ -9,6 +9,8 @@
 
 	var/sight_mode = 0
 	var/custom_name = ""
+	var/base_icon
+	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 
 //Hud stuff
 
@@ -45,7 +47,7 @@
 	//var/list/laws = list()
 	var/alarms = list("Motion"=list(), "Fire"=list(), "Atmosphere"=list(), "Power"=list(), "Camera"=list())
 	var/viewalerts = 0
-	var/modtype = "robot"
+	var/modtype = "Default"
 	var/lower_mod = 0
 	var/jetpack = 0
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
@@ -84,7 +86,7 @@
 		module = new /obj/item/weapon/robot_module/syndicate(src)
 		hands.icon_state = "standard"
 		icon_state = "secborg"
-		modtype = "Synd"
+		modtype = "Security"
 	else
 		laws = new /datum/ai_laws/nanotrasen()
 		connected_ai = select_active_ai_with_fewest_borgs()
@@ -144,11 +146,11 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
-	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor","Service", "Security","Combat")
+	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
 	if(emagged || security_level > SEC_LEVEL_BLUE)
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
-	var/mod = input("Please, select a module!", "Robot", null, null) in modules
+	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
 	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
 	var/channels = list()
@@ -156,17 +158,15 @@
 	if(module)
 		return
 
-	switch(mod)
+	switch(modtype)
 		if("Standard")
 			module = new /obj/item/weapon/robot_module/standard(src)
-			modtype = "Stand"
 			module_sprites["Basic"] = "robot_old"
 			module_sprites["Android"] = "droid"
 			module_sprites["Default"] = "robot"
 
 		if("Service")
 			module = new /obj/item/weapon/robot_module/butler(src)
-			modtype = "Butler"
 			module_sprites["Waitress"] = "Service"
 			module_sprites["Kent"] = "toiletbot"
 			module_sprites["Bro"] = "Brobot"
@@ -175,15 +175,13 @@
 
 		if("Miner")
 			module = new /obj/item/weapon/robot_module/miner(src)
-			modtype = "Miner"
-			channels = list("Mining" = 1)
+			channels = list("Supply" = 1)
 			module_sprites["Basic"] = "Miner_old"
 			module_sprites["Advanced Droid"] = "droid-miner"
-			module_sprites["Default"] = "Miner"
+			module_sprites["Treadhead"] = "Miner"
 
 		if("Medical")
 			module = new /obj/item/weapon/robot_module/medical(src)
-			modtype = "Med"
 			channels = list("Medical" = 1)
 			module_sprites["Basic"] = "Medbot"
 			module_sprites["Advanced Droid"] = "droid-medical"
@@ -192,7 +190,6 @@
 
 		if("Security")
 			module = new /obj/item/weapon/robot_module/security(src)
-			modtype = "Sec"
 			channels = list("Security" = 1)
 			module_sprites["Basic"] = "secborg"
 			module_sprites["Red Knight"] = "Security"
@@ -201,7 +198,6 @@
 
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
-			modtype = "Eng"
 			channels = list("Engineering" = 1)
 			module_sprites["Basic"] = "Engineering"
 			module_sprites["Antique"] = "engineerrobot"
@@ -209,41 +205,33 @@
 
 		if("Janitor")
 			module = new /obj/item/weapon/robot_module/janitor(src)
-			modtype = "Jan"
 			module_sprites["Basic"] = "JanBot2"
 			module_sprites["Mopbot"]  = "janitorrobot"
 			module_sprites["Mop Gear Rex"] = "mopgearrex"
 
 		if("Combat")
 			module = new /obj/item/weapon/robot_module/combat(src)
-			modtype = "Com"
 			module_sprites["Combat Android"] = "droid-combat"
 			channels = list("Security" = 1)
 
-	//Begin awful custom item checks.
-	if (src.name == "Lucy"  && src.ckey == "rowtree")
-		switch(mod)
-			if("Medical")
-				module_sprites["Lucy"] = "rowtree-medical"
-			if("Security" || "Combat")
-				module_sprites["Lucy"] = "rowtree-security"
-			if("Engineering")
-				module_sprites["Lucy"] = "rowtree-engineering"
-			else
-				module_sprites["Lucy"] = "rowtree-lucy"
+	//Custom_sprite check and entry
+	if (custom_sprite == 1)
+		module_sprites["Custom"] = "[src.ckey]-[modtype]"
 
-	hands.icon_state = lowertext(mod)
-	feedback_inc("cyborg_[lowertext(mod)]",1)
-	updatename(mod)
+	hands.icon_state = lowertext(modtype)
+	feedback_inc("cyborg_[lowertext(modtype)]",1)
+	updatename()
 
-	if(mod == "Medical" || mod == "Security" || mod == "Combat")
+	if(modtype == "Medical" || modtype == "Security" || modtype == "Combat")
 		status_flags &= ~CANPUSH
 
 	choose_icon(6,module_sprites)
 	radio.config(channels)
+	base_icon = icon_state
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
-
+	if(prefix)
+		modtype = prefix
 	if(istype(mmi, /obj/item/device/mmi/posibrain))
 		braintype = "Android"
 	else
@@ -253,7 +241,7 @@
 	if(custom_name)
 		changed_name = custom_name
 	else
-		changed_name = "[(prefix ? "[prefix] " : "")][braintype]-[num2text(ident)]"
+		changed_name = "[modtype] [braintype]-[num2text(ident)]"
 	real_name = changed_name
 	name = real_name
 
@@ -263,6 +251,23 @@
 	//We also need to update name of internal camera.
 	if (camera)
 		camera.c_tag = changed_name
+
+	if(!custom_sprite) //Check for custom sprite
+		var/file = file2text("config/custom_sprites.txt")
+		var/lines = text2list(file, "\n")
+
+		for(var/line in lines)
+		// split & clean up
+			var/list/Entry = text2list(line, "-")
+			for(var/i = 1 to Entry.len)
+				Entry[i] = trim(Entry[i])
+
+			if(Entry.len < 2)
+				continue;
+
+			if(Entry[1] == src.ckey && Entry[2] == src.real_name) //They're in the list? Custom sprite time, var and icon change required
+				custom_sprite = 1
+				icon = 'icons/mob/custom-synthetic.dmi'
 
 /mob/living/silicon/robot/verb/Namepick()
 	if(custom_name)
@@ -274,7 +279,7 @@
 		if (newname != "")
 			custom_name = newname
 
-		updatename("Default")
+		updatename()
 		updateicon()
 
 /mob/living/silicon/robot/verb/cmd_robot_alerts()
@@ -978,6 +983,14 @@
 	else
 		overlays -= "eyes"
 
+	if(opened && custom_sprite == 1) //Custom borgs also have custom panels, heh
+		if(wiresexposed)
+			overlays += "[src.ckey]-openpanel +w"
+		else if(cell)
+			overlays += "[src.ckey]-openpanel +c"
+		else
+			overlays += "[src.ckey]-openpanel -c"
+
 	if(opened)
 		if(wiresexposed)
 			overlays += "ov-openpanel +w"
@@ -985,7 +998,16 @@
 			overlays += "ov-openpanel +c"
 		else
 			overlays += "ov-openpanel -c"
-	return
+
+	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
+		overlays += "[icon_state]-shield"
+
+	if(base_icon)
+		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
+			icon_state = "[base_icon]-roll"
+		else
+			icon_state = base_icon
+		return
 
 //Call when target overlay should be added/removed
 /mob/living/silicon/robot/update_targeted()
@@ -1222,9 +1244,12 @@
 	overlays -= "eyes"
 	updateicon()
 
-	var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
-	if(choice=="No")
-		choose_icon(triesleft, module_sprites)
+	if (triesleft >= 1)
+		var/choice = input("Look at your icon - is this what you want?") in list("Yes","No")
+		if(choice=="No")
+			choose_icon(triesleft, module_sprites)
+		else
+			triesleft = 0
+			return
 	else
-		triesleft = 0
-		return
+		src << "Your icon has been set. You now require a module reset to change it."

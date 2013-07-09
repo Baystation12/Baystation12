@@ -269,6 +269,14 @@
 
 
 	proc/AttemptLateSpawn(rank)
+		if (src != usr)
+			return 0
+		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
+			usr << "\red The round is either not ready, or has already finished..."
+			return 0
+		if(!enter_allowed)
+			usr << "\blue There is an administrative lock on entering the game!"
+			return 0
 		if(!IsJobAvailable(rank))
 			src << alert("[rank] is not available. Please try another.")
 			return 0

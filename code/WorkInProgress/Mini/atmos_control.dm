@@ -35,7 +35,7 @@
 	if(current)
 		dat += specific()
 	else
-		for(var/obj/machinery/alarm/alarm in world)
+		for(var/obj/machinery/alarm/alarm in machines)
 			dat += "<a href='?src=\ref[src]&alarm=\ref[alarm]'>"
 			switch(max(alarm.danger_level, alarm.alarm_area.atmosalm))
 				if (0)
@@ -141,7 +141,10 @@
 
 					//Sets the temperature the built-in heater/cooler tries to maintain.
 					if(env == "temperature")
-						current.target_temperature = (selected[2] + selected[3])/2
+						if(current.target_temperature < selected[2])
+							current.target_temperature = selected[2]
+						if(current.target_temperature > selected[3])
+							current.target_temperature = selected[3]
 
 					spawn(1)
 						updateUsrDialog()
