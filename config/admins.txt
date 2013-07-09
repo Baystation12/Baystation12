@@ -5,31 +5,17 @@
 # Ranks can be anything defined in admin_ranks.txt           ~Carn   #
 ######################################################################
 
-abi79 - Game Master
-arcalane - Game Admin
-asanadas - Game Admin
-bobbehluvspropane - Game Admin
-cacophony - Game Admin
-cajoes - Game Admin
-cib - Retired Admin
-compactninja - Retired Admin
-duntadaman - Game Admin
-dysthymia - Retired Admin
-doughnuts - Game Admin
-erthilo - Game Master
-hawkv3 - Game Master
-headswe - Game Master
-iaryni - Game Master
-masterofapples - Game Admin
-megacaesar - Retired Admin
-miniature - Game Master
-misterbook - Game Admin
-misterfox - Retired Admin
-mloc - Game Master
-skymarshal - Game Master
-spaceman96 - Retired Admin
-strumpetplaya - Retired Admin
-tastyfish - Retired Admin
-uristqwerty - Game Master
-wrongnumber - Game Admin
-mij - Game Admin
+9lives - Game Admin
+rocket2guns - Game Master
+Sergeant Teddy - Badmin
+shannonzkiller - Host
+sacriel42 - Game Master
+abby1234 - Game Master
+mrkonc - Badmin
+42nd LogiHack - Badmin
+Fengshen - Badmin
+ZomgPonies - Game Admin
+ProstasisX - Trial Admin
+stevezgaming - Trial Admin
+dylanco - Trial Admin
+MoXFluffy - Trial Admin

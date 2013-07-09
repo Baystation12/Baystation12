@@ -5,3 +5,8 @@
 *.lk
 info.json
 /config/admins.txt
+/config/adminranks.txt
+/config/game_options.txt
+/config/jobs.txt
+/config/motd.txt
+/config/rules.html

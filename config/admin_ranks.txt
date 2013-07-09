@@ -30,8 +30,8 @@
 Admin Observer
 Retired Admin		+MOD +ADMIN
 Moderator		+MOD
-Admin Candidate	+ADMIN
-Trial Admin		+@ +SPAWN +REJUV +VAREDIT +BAN
+Admin Candidate		+ADMIN
+Trial Admin		+@ +SPAWN +REJUV +VAREDIT +BAN +SERVER
 Badmin			+@ +POSSESS +BUILDMODE +SERVER +FUN
 Game Admin		+@ +STEALTH +SOUNDS +DEBUG
 Game Master		+EVERYTHING
