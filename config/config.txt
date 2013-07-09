@@ -75,23 +75,24 @@ LOG_PDA
 ## default probablity is 1, increase to make that mode more likely to be picked
 ## set to 0 to disable that mode
 ## Cult mode is in alpha test, enable at your own risk
-PROBABILITY EXTENDED 0
-PROBABILITY TRAITOR 2
+PROBABILITY EXTENDED 1
+PROBABILITY TRAITOR 0
 PROBABILITY METEOR 0
-PROBABILITY MALFUNCTION 2
+PROBABILITY MALFUNCTION 1
 PROBABILITY BLOB 0
-PROBABILITY NUCLEAR 0
+PROBABILITY NUCLEAR 1
 PROBABILITY SANDBOX 0
-PROBABILITY WIZARD 0
+PROBABILITY WIZARD 1
 PROBABILITY RESTRUCTURING 0
-PROBABILITY REVOLUTION 5
-PROBABILITY CHANGELING 0
+PROBABILITY REVOLUTION 0
+PROBABILITY CHANGELING 1
 PROBABILITY CULT 1
 PROBABILITY MONKEY 0
 PROBABILITY TRAITORCHAN 0
-PROBABILITY EXTEND-A-TRAITORMONGOUS 0
-PROBABILITY EPIDEMIC 1
+PROBABILITY EXTEND-A-TRAITORMONGOUS 6
+PROBABILITY EPIDEMIC 0
 PROBABILITY MEME 0
+PROBABILITY RP-REVOLUTION 0
 
 ## Hash out to disable random events during the round.
 ALLOW_RANDOM_EVENTS
@@ -109,10 +110,10 @@ ALLOW_ADMIN_OOCCOLOR
 # ALLOW_METADATA
 
 ## allow players to initiate a restart vote
-#ALLOW_VOTE_RESTART
+ALLOW_VOTE_RESTART
 
 ## allow players to initate a mode-change start
-#ALLOW_VOTE_MODE
+ALLOW_VOTE_MODE
 
 ## min delay (deciseconds) between voting sessions (default 10 minutes)
 VOTE_DELAY 6000
@@ -121,7 +122,7 @@ VOTE_DELAY 6000
 VOTE_PERIOD 600
 
 ## prevents dead players from voting or starting votes
-# NO_DEAD_VOTE
+#NO_DEAD_VOTE
 
 ## players' votes default to "No vote" (otherwise,  default to "No change")
 DEFAULT_NO_VOTE
@@ -137,7 +138,7 @@ ALLOW_AI
 # DONT_DEL_NEWMOB
 
 ## set a hosted by name for unix platforms
-HOSTEDBY Yournamehere
+HOSTEDBY yournamehere
 
 ## Set to jobban "Guest-" accounts from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
 ## Set to 1 to jobban them from those positions, set to 0 to allow them.
@@ -150,7 +151,7 @@ GUEST_BAN
 # USEWHITELIST
 
 ## set a server location for world reboot. Don't include the byond://, just give the address and port.
-# SERVER ss13.example.com:2506
+#SERVER server.net:port
 
 ## forum address
 # FORUMURL http://example.com
@@ -205,16 +206,10 @@ GATEWAY_DELAY 18000
 ## Uncomment to restrict non-admins from using humanoid alien races
 USEALIENWHITELIST
 
-## Location of the nudge.py script
-NUDGE_SCRIPT_PATH nudge.py
-
 ## Comment this to unrestrict the number of alien players allowed in the round. The number represents the number of alien players for every human player.
-ALIEN_PLAYER_RATIO 0.2
-
+#ALIEN_PLAYER_RATIO 0.2
 ##Remove the # to let ghosts spin chairs
-## Uncomment this to enable external .rsc downloads. URLs must be separated by no more than one space.
-## The linked .zip file should contain the required .rsc
-#resource_urls http://firstserver.org/myresource.zip http://secondserver.org/myresource.zip  http://10.22.11.1/myresource.zip
+#GHOST_INTERACTION
 
 ## Uncomment to enable sending data to the IRC bot.
 #USE_IRC_BOT
