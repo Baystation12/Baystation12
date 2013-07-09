@@ -681,7 +681,7 @@
 		if("uranium")
 			type = /obj/item/stack/sheet/mineral/uranium
 		if("bananium")
-			type = /obj/item/stack/sheet/mineral/clown Sorry, but no more clown mechs, even if you do manage to get to the clown planet.
+			type = /obj/item/stack/sheet/mineral/clown
 		else
 			return 0
 	var/result = 0
@@ -741,7 +741,7 @@
 				G.amount = round(src.resources["diamond"] / G.perunit)
 			if(src.resources["bananium"] >= 2000)
 				var/obj/item/stack/sheet/mineral/clown/G = new /obj/item/stack/sheet/mineral/clown(src.loc)
-				G.amount = round(src.resources["bananium"] / G.perunit) Sorry, but no bananium allowed
+				G.amount = round(src.resources["bananium"] / G.perunit)
 			del(src)
 			return 1
 		else
