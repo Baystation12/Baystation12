@@ -85,6 +85,8 @@ var/global/datum/getrev/revdata = new("config/svndir.txt")
 					</body>
 					<html>"}
 
+/*
+
 client/verb/showrevinfo()
 	set category = "OOC"
 	set name = "Show Server Revision"
@@ -94,3 +96,6 @@ client/verb/showrevinfo()
 	output += "Protect Authority Roles From Tratior: [config.protect_roles_from_antagonist]<br>"
 	usr << browse(output,"window=revdata");
 	return
+
+
+*/

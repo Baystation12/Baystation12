@@ -343,10 +343,10 @@
 			return "Chief Medical Officer"
 		if(access_qm)
 			return "Quartermaster"
-/*		if(access_clown)
+		if(access_clown)
 			return "HONK! Access"
 		if(access_mime)
-			return "Silent Access"*/
+			return "Silent Access"
 		if(access_surgery)
 			return "Surgery"
 		if(access_theatre)
@@ -413,7 +413,7 @@
 
 /proc/get_all_jobs()
 	return list("Assistant", "Captain", "Head of Personnel", "Bartender", "Chef", "Botanist", "Quartermaster", "Cargo Technician",
-				"Shaft Miner", /*"Clown", "Mime", */"Janitor", "Librarian", "Lawyer", "Chaplain", "Chief Engineer", "Station Engineer",
+				"Shaft Miner", "Clown", "Mime", "Janitor", "Librarian", "Lawyer", "Chaplain", "Chief Engineer", "Station Engineer",
 				"Atmospheric Technician", "Chief Medical Officer", "Medical Doctor", "Chemist", "Geneticist", "Virologist",
 				"Research Director", "Scientist", "Xenobiologist", "Roboticist", "Head of Security", "Warden", "Detective", "Security Officer")
 
