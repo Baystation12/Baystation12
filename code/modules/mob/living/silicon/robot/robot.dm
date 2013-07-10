@@ -11,6 +11,7 @@
 	var/custom_name = ""
 	var/base_icon
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
+	var/crisis //Admin-settable for combat module use.
 
 //Hud stuff
 
@@ -146,8 +147,8 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
-	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security", "Combat")
-	if(emagged || security_level > SEC_LEVEL_BLUE)
+	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
+	if(crisis) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	var/mod = input("Please, select a module!", "Robot", null, null) in modules
