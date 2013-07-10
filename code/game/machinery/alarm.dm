@@ -693,7 +693,7 @@
 	else
 		return "<html><head><title>\The [src]</title></head><body>[return_status()]<hr>[rcon_text()]<hr>[return_controls()]</body></html>"
 
-proc/return_status()
+/obj/machinery/alarm/proc/return_status()
 	var/turf/location = get_turf(src)
 	var/datum/gas_mixture/environment = location.return_air()
 	var/total = environment.oxygen + environment.carbon_dioxide + environment.toxins + environment.nitrogen
@@ -1074,6 +1074,11 @@ table tr:first-child th:first-child { border: none;}
 			mend(t1)
 		else
 			cut(t1)
+			if (AAlarmwires == 0)
+				usr << "<span class='notice'>You cut last of wires inside [src]</span>"
+				update_icon()
+				buildstage = 1
+			return
 
 	else if (href_list["pulse"])
 		var/t1 = text2num(href_list["pulse"])
@@ -1140,31 +1145,32 @@ table tr:first-child th:first-child { border: none;}
 				buildstage = 2
 				update_icon()
 				first_run()
+				return
 
 			else if(istype(W, /obj/item/weapon/crowbar))
-				user << "You pry out the circuit!"
+				user << "You start prying out the circuit."
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-				spawn(20)
+				if(do_after(user,20))
+					user << "You pry out the circuit!"
 					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
 					circuit.loc = user.loc
 					buildstage = 0
 					update_icon()
-			return
+				return
 		if(0)
 			if(istype(W, /obj/item/weapon/airalarm_electronics))
 				user << "You insert the circuit!"
 				del(W)
 				buildstage = 1
 				update_icon()
+				return
 
-				/* Commented out due to RUNTIMES, RUNTIMES EVERYWHERE.
-				else if(istype(W, /obj/item/weapon/wrench))
-					user << "You remove the fire alarm assembly from the wall!"
-					var/obj/item/firealarm_frame/frame = new /obj/item/firealarm_frame()
-					frame.loc = user.loc
-					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-					del(src) */
-			return
+			else if(istype(W, /obj/item/weapon/wrench))
+				user << "You remove the fire alarm assembly from the wall!"
+				var/obj/item/alarm_frame/frame = new /obj/item/alarm_frame()
+				frame.loc = user.loc
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+				del(src)
 
 	return ..()
 
@@ -1176,6 +1182,12 @@ table tr:first-child th:first-child { border: none;}
 	spawn(rand(0,15))
 		update_icon()
 
+/obj/machinery/alarm/examine()
+	..()
+	if (buildstage < 2)
+		usr << "It is not wired."
+	if (buildstage < 1)
+		usr << "The circuit is missing."
 /*
 AIR ALARM CIRCUIT
 Just a object used in constructing air alarms
@@ -1231,7 +1243,6 @@ Code shamelessly copied from apc_frame
 		return
 
 	new /obj/machinery/alarm(loc, ndir, 1)
-
 	del(src)
 
 /*
