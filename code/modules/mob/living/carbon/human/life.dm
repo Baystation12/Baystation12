@@ -544,17 +544,20 @@
 		if(stat != 2)
 			stabilize_temperature_from_calories()
 
+//		log_debug("Adjusting to atmosphere.")
 		//After then, it reacts to the surrounding atmosphere based on your thermal protection
-		if(loc_temp < bodytemperature)
-			//Place is colder than we are
+		if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
 			var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 			if(thermal_protection < 1)
-				bodytemperature += min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
-		else
-			//Place is hotter than we are
+				var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
+//				log_debug("[loc_temp] is Cold. Cooling by [amt]")
+				bodytemperature += amt
+		else if (loc_temp > BODYTEMP_HEAT_DAMAGE_LIMIT)			//Place is hotter than we are
 			var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 			if(thermal_protection < 1)
-				bodytemperature += min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
+				var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
+//				log_debug("[loc_temp] is Heat. Heating up by [amt]")
+				bodytemperature += amt
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 		if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
@@ -634,19 +637,25 @@
 	*/
 
 	proc/stabilize_temperature_from_calories()
+		var/body_temperature_difference = 310.15 - bodytemperature
+		if (abs(body_temperature_difference) < 0.01)
+			return //fuck this precision
 		switch(bodytemperature)
 			if(-INFINITY to 260.15) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
 				if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
 					nutrition -= 2
-				var/body_temperature_difference = 310.15 - bodytemperature
-				bodytemperature += max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
+				var/recovery_amt = max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
+//				log_debug("Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
+				bodytemperature += recovery_amt
 			if(260.15 to 360.15)
-				var/body_temperature_difference = 310.15 - bodytemperature
-				bodytemperature += body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR
+				var/recovery_amt = body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR
+//				log_debug("Norm. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
+				bodytemperature += recovery_amt
 			if(360.15 to INFINITY) //360.15 is 310.15 + 50, the temperature where you start to feel effects.
 				//We totally need a sweat system cause it totally makes sense...~
-				var/body_temperature_difference = 310.15 - bodytemperature
-				bodytemperature += min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
+				var/recovery_amt = min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
+//				log_debug("Hot. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
+				bodytemperature += recovery_amt
 
 	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, UPPER_TORSO, LOWER_TORSO, etc. See setup.dm for the full list)
 	proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
@@ -1334,28 +1343,35 @@
 		if(bodytemperature > 406)
 			for(var/datum/disease/D in viruses)
 				D.cure()
-			if(virus2)	virus2.cure(src)
-		if(!virus2)
-			for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
-				if(B.virus2 && get_infection_chance())
-					infect_virus2(src,B.virus2)
-			for(var/obj/effect/decal/cleanable/mucus/M in view(1,src))
-				if(M.virus2 && get_infection_chance())
-					infect_virus2(src,M.virus2)
-		else
-			if(isnull(virus2)) // Trying to figure out a runtime error that keeps repeating
+			for (var/ID in virus2)
+				var/datum/disease2/disease/V = virus2[ID]
+				V.cure(src)
+
+		for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
+			if(B.virus2.len && get_infection_chance(src))
+				for (var/ID in B.virus2)
+					var/datum/disease2/disease/V = virus2[ID]
+					infect_virus2(src,V)
+		for(var/obj/effect/decal/cleanable/mucus/M in view(1,src))
+			if(M.virus2.len && get_infection_chance(src))
+				for (var/ID in M.virus2)
+					var/datum/disease2/disease/V = virus2[ID]
+					infect_virus2(src,V)
+
+		for (var/ID in virus2)
+			var/datum/disease2/disease/V = virus2[ID]
+			if(isnull(V)) // Trying to figure out a runtime error that keeps repeating
 				CRASH("virus2 nulled before calling activate()")
 			else
-				virus2.activate(src)
-
+				V.activate(src)
 			// activate may have deleted the virus
-			if(!virus2) return
+			if(!V) continue
 
 			// check if we're immune
-			if(virus2.antigen & src.antibodies) virus2.dead = 1
+			if(V.antigen & src.antibodies)
+				V.dead = 1
 
-
-			return
+		return
 
 	proc/handle_stomach()
 		spawn(0)

@@ -83,6 +83,7 @@
 					dat += text("\n<A href='?src=\ref[];print_p=1'>Print Record</A><BR>\n<A href='?src=\ref[];screen=2'>Back</A><BR>", src, src)
 				if(5.0)
 					dat += "<CENTER><B>Virus Database</B></CENTER>"
+					/*	Advanced diseases is weak! Feeble! Glory to virus2!
 					for(var/Dt in typesof(/datum/disease/))
 						var/datum/disease/Dis = new Dt(0)
 						if(istype(Dis, /datum/disease/advance))
@@ -90,6 +91,11 @@
 						if(!Dis.desc)
 							continue
 						dat += "<br><a href='?src=\ref[src];vir=[Dt]'>[Dis.name]</a>"
+					*/
+					for (var/ID in virusDB)
+						var/datum/data/record/v = virusDB[ID]
+						dat += "<br><a href='?src=\ref[src];vir=\ref[v]'>[v.fields["name"]]</a>"
+
 					dat += "<br><a href='?src=\ref[src];screen=1'>Back</a>"
 				if(6.0)
 					dat += "<center><b>Medical Robot Monitor</b></center>"
@@ -176,20 +182,12 @@
 				src.active2 = null
 
 			if(href_list["vir"])
-				var/type = href_list["vir"]
-				var/datum/disease/Dis = new type(0)
-				var/AfS = ""
-				for(var/Str in Dis.affected_species)
-					AfS += " [Str];"
-				src.temp = {"<b>Name:</b> [Dis.name]
-<BR><b>Number of stages:</b> [Dis.max_stages]
-<BR><b>Spread:</b> [Dis.spread] Transmission
-<BR><b>Possible Cure:</b> [(Dis.cure||"none")]
-<BR><b>Affected Species:</b>[AfS]
-<BR>
-<BR><b>Notes:</b> [Dis.desc]
-<BR>
-<BR><b>Severity:</b> [Dis.severity]"}
+				var/datum/data/record/v = locate(href_list["vir"])
+				src.temp = "<center>GNAv2 based virus lifeform V-[v.fields["id"]]</center>"
+				src.temp += "<br><b>Name:</b> <A href='?src=\ref[src];field=vir_name;edit_vir=\ref[v]'>[v.fields["name"]]</A>"
+				src.temp += "<br><b>Antigen:</b> [v.fields["antigen"]]"
+				src.temp += "<br><b>Spread:</b> [v.fields["spread type"]] "
+				src.temp += "<br><b>Details:</b><br> <A href='?src=\ref[src];field=vir_desc;edit_vir=\ref[v]'>[v.fields["description"]]</A>"
 
 			if (href_list["del_all"])
 				src.temp = text("Are you sure you wish to delete all records?<br>\n\t<A href='?src=\ref[];temp=1;del_all2=1'>Yes</A><br>\n\t<A href='?src=\ref[];temp=1'>No</A><br>", src, src)
@@ -292,6 +290,20 @@
 							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!in_range(src, usr) && (!istype(usr, /mob/living/silicon))) || src.active1 != a1))
 								return
 							src.active1.fields["dna"] = t1
+					if("vir_name")
+						var/datum/data/record/v = locate(href_list["edit_vir"])
+						if (v)
+							var/t1 = copytext(sanitize(input("Please input pathogen name:", "VirusDB", v.fields["name"], null)  as text),1,MAX_MESSAGE_LEN)
+							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!in_range(src, usr) && (!istype(usr, /mob/living/silicon))) || src.active1 != a1))
+								return
+							v.fields["name"] = t1
+					if("vir_desc")
+						var/datum/data/record/v = locate(href_list["edit_vir"])
+						if (v)
+							var/t1 = copytext(sanitize(input("Please input information about pathogen:", "VirusDB", v.fields["description"], null)  as message),1,MAX_MESSAGE_LEN)
+							if ((!( t1 ) || !( src.authenticated ) || usr.stat || usr.restrained() || (!in_range(src, usr) && (!istype(usr, /mob/living/silicon))) || src.active1 != a1))
+								return
+							v.fields["description"] = t1
 					else
 
 			if (href_list["p_stat"])
