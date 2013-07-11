@@ -31,7 +31,8 @@
 		/obj/machinery/disposal,
 		/obj/machinery/apiary,
 		/mob/living/simple_animal/cow,
-		/mob/living/simple_animal/hostile/retaliate/goat	)
+		/mob/living/simple_animal/hostile/retaliate/goat,
+		/obj/machinery/computer/centrifuge	)
 
 	examine()
 		set src in view()
@@ -227,6 +228,16 @@
 			user.put_in_hands(new /obj/item/weapon/bucket_sensor)
 			user.drop_from_inventory(src)
 			del(src)
+
+/obj/item/weapon/reagent_containers/glass/beaker/vial
+	name = "vial"
+	desc = "Small glass vial. Looks fragile."
+	icon_state = "vial"
+	g_amt = 500
+	volume = 15
+	amount_per_transfer_from_this = 5
+	possible_transfer_amounts = list(1,5,15)
+	flags = FPRINT | TABLEPASS | OPENCONTAINER
 
 /*
 /obj/item/weapon/reagent_containers/glass/blender_jug
