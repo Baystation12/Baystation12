@@ -103,8 +103,8 @@ var/global/normal_ooc_colour = "#002eb8"
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)	return
 
-	if(!(prefs.toggles & CHAT_OOC))
-		src << "\red You have OOC muted."
+	if(!(prefs.toggles & CHAT_LOOC))
+		src << "\red You have LOOC muted."
 		return
 
 	if(!holder)
@@ -127,14 +127,15 @@ var/global/normal_ooc_colour = "#002eb8"
 
 	log_ooc("(LOCAL) [mob.name]/[key] : [msg]")
 
-	for(var/mob/M in hearers())
+	var/list/heard = get_mobs_in_view(7, src.mob)
+	for(var/mob/M in heard)
 		if(!M.client)
 			continue
 		var/client/C = M.client
 		if (C in admins)
 			continue //they are handled after that
 
-		if(C.prefs.toggles & CHAT_OOC)
+		if(C.prefs.toggles & CHAT_LOOC)
 			var/display_name = src.key
 			if(holder)
 				if(holder.fakekey)
@@ -144,5 +145,8 @@ var/global/normal_ooc_colour = "#002eb8"
 						display_name = holder.fakekey
 			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>LOOC:</span> <EM>[display_name]:</EM> <span class='message'>[msg]</span></span></font>"
 	for(var/client/C in admins)
-		if(C.prefs.toggles & CHAT_OOC)
-			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>LOOC:</span> <EM>[src.key]:</EM> <span class='message'>[msg]</span></span></font>"
+		if(C.prefs.toggles & CHAT_LOOC)
+			var/prefix = "(R)LOOC"
+			if (C.mob in heard)
+				prefix = "LOOC"
+			C << "<font color='#6699CC'><span class='ooc'><span class='prefix'>[prefix]:</span> <EM>[src.key]:</EM> <span class='message'>[msg]</span></span></font>"
