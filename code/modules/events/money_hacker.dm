@@ -14,7 +14,7 @@
 				affected_db = DB
 				break
 	if(affected_db)
-		affected_account = pick(all_money_accounts.len)
+		affected_account = pick(all_money_accounts)
 	else
 		kill()
 		return
