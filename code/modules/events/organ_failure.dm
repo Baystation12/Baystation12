@@ -22,7 +22,8 @@ datum/event/organ_failure/start()
 		var/mob/living/carbon/human/C = candidates[1]
 
 		// Bruise one of their organs
-		var/datum/organ/internal/I = pick(C.internal_organs)
+		var/O = pick(C.internal_organs)
+		var/datum/organ/internal/I = C.internal_organs[O]
 		I.damage = I.min_bruised_damage
 		candidates.Remove(C)
 		severity--
