@@ -369,7 +369,7 @@ var/global/datum/controller/occupations/job_master
 
 		//give them an account in the station database
 		if(centcomm_account_db)
-			var/datum/money_account/M = centcomm_account_db.add_account_across_all(H.real_name, starting_funds = rand(50,500)*10, pre_existing = 1)
+			var/datum/money_account/M = create_account(H.real_name, rand(50,500)*10, null)
 			if(H.mind)
 				var/remembered_info = ""
 				remembered_info += "<b>Your account number is:</b> #[M.account_number]<br>"

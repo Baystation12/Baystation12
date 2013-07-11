@@ -21,6 +21,30 @@
 	spawn(0)
 		print_reference()
 
+		//create a short manual as well
+		var/obj/item/weapon/paper/R = new(src.loc)
+		R.name = "Steps to success: Correct EFTPOS Usage"
+		R.info += "<b>When first setting up your EFTPOS device:</b>"
+		R.info += "1. Memorise your EFTPOS command code (provided with all EFTPOS devices).<br>"
+		R.info += "2. Confirm that your EFTPOS device is connected to your local accounts database. For additional assistance with this step, contact NanoTrasen IT Support<br>"
+		R.info += "3. Confirm that your EFTPOS device has been linked to the account that you wish to recieve funds for all transactions processed on this device.<br>"
+		R.info += "<b>When starting a new transaction with your EFTPOS device:</b>"
+		R.info += "1. Ensure the device is UNLOCKED so that new data may be entered.<br>"
+		R.info += "2. Enter a sum of money and reference message for the new transaction.<br>"
+		R.info += "3. Lock the transaction, it is now ready for your customer.<br>"
+		R.info += "4. If at this stage you wish to modify or cancel your transaction, you may simply reset (unlock) your EFTPOS device.<br>"
+		R.info += "5. Give your EFTPOS device to the customer, they must authenticate the transaction by swiping their ID card and entering their PIN number.<br>"
+		R.info += "6. If done correctly, the transaction will be logged to both accounts with the reference you have entered, the terminal ID of your EFTPOS device and the money transferred across accounts.<br>"
+
+		//stamp the paper
+		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+		stampoverlay.icon_state = "paper_stamp-cent"
+		if(!R.stamped)
+			R.stamped = new
+		R.stamped += /obj/item/weapon/stamp
+		R.overlays += stampoverlay
+		R.stamps += "<HR><i>This paper has been stamped by the EFTPOS device.</i>"
+
 	//by default, connect to the station account
 	//the user of the EFTPOS device can change the target account though, and no-one will be the wiser (except whoever's being charged)
 	linked_account = station_account
