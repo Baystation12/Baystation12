@@ -148,7 +148,7 @@ datum/preferences
 			if("Vox")
 				icobase = 'icons/mob/human_races/r_vox.dmi'
 			if("Kidan")
-				icobase = 'icons/mob/human_races/r_kidan.dmi'
+				icobase = 'icons/mob/human_races/r_vox.dmi'
 
 			else
 				icobase = 'icons/mob/human_races/r_human.dmi'
