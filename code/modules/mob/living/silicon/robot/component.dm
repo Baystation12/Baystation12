@@ -63,16 +63,21 @@
 	else
 		powered = 0
 
+/datum/robot_component/armour
+	name = "armour plating"
+	energy_consumption = 0
+	external_type = /obj/item/robot_parts/robot_component/armour
+	max_damage = 60
 
 /datum/robot_component/actuator
 	name = "actuator"
 	energy_consumption = 2
 	external_type = /obj/item/robot_parts/robot_component/actuator
-	max_damage = 60
+	max_damage = 50
 
 /datum/robot_component/cell
 	name = "power cell"
-	max_damage = 60
+	max_damage = 50
 
 /datum/robot_component/cell/destroy()
 	..()
@@ -81,8 +86,8 @@
 /datum/robot_component/radio
 	name = "radio"
 	external_type = /obj/item/robot_parts/robot_component/radio
-	energy_consumption = 3
-	max_damage = 10
+	energy_consumption = 1
+	max_damage = 40
 
 /datum/robot_component/binary_communication
 	name = "binary communication device"
@@ -93,8 +98,8 @@
 /datum/robot_component/camera
 	name = "camera"
 	external_type = /obj/item/robot_parts/robot_component/camera
-	energy_consumption = 2
-	max_damage = 20
+	energy_consumption = 1
+	max_damage = 40
 
 /datum/robot_component/diagnosis_unit
 	name = "self-diagnosis unit"
@@ -111,6 +116,7 @@
 	components["diagnosis unit"] = new/datum/robot_component/diagnosis_unit(src)
 	components["camera"] = new/datum/robot_component/camera(src)
 	components["comms"] = new/datum/robot_component/binary_communication(src)
+	components["armour"] = new/datum/robot_component/armour(src)
 
 /mob/living/silicon/robot/proc/is_component_functioning(module_name)
 	var/datum/robot_component/C = components[module_name]
@@ -134,6 +140,9 @@
 
 /obj/item/robot_parts/robot_component/actuator
 	name = "actuator"
+
+/obj/item/robot_parts/robot_component/armour
+	name = "armour plating"
 
 /obj/item/robot_parts/robot_component/camera
 	name = "camera"

@@ -3,8 +3,8 @@
 	real_name = "Cyborg"
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "robot"
-	maxHealth = 300
-	health = 300
+	maxHealth = 200
+	health = 200
 	universal_speak = 1
 
 	var/sight_mode = 0
@@ -107,17 +107,17 @@
 			camera.status = 0
 
 	initialize_components()
-	if(!unfinished)
-		// Create all the robot parts.
-		for(var/V in components) if(V != "power cell")
-			var/datum/robot_component/C = components[V]
-			C.installed = 1
-			C.wrapped = new C.external_type
+	//if(!unfinished)
+	// Create all the robot parts.
+	for(var/V in components) if(V != "power cell")
+		var/datum/robot_component/C = components[V]
+		C.installed = 1
+		C.wrapped = new C.external_type
 
-		if(!cell)
-			cell = new /obj/item/weapon/cell(src)
-			cell.maxcharge = 7500
-			cell.charge = 7500
+	if(!cell)
+		cell = new /obj/item/weapon/cell(src)
+		cell.maxcharge = 7500
+		cell.charge = 7500
 
 	..()
 

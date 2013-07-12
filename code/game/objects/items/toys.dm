@@ -570,6 +570,7 @@
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 
+/* NYET.
 /obj/item/weapon/toddler
 	icon_state = "toddler"
 	name = "toddler"
@@ -577,3 +578,4 @@
 	force = 5
 	w_class = 4.0
 	slot_flags = SLOT_BACK
+*/
