@@ -484,7 +484,7 @@
 		species_allowed = list("Tajaran")
 
 	taj_ears_spiky
-		name = "Tajara  Spiky"
+		name = "Tajara Spiky"
 		icon_state = "hair_tajspiky"
 		species_allowed = list("Tajaran")
 
