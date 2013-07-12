@@ -19,7 +19,6 @@ var/list/department_radio_keys = list(
 	  ":j" = "tajaran",		"#j" = "tajaran",		".j" = "tajaran",
 	  ":o" = "soghun",		"#o" = "soghun",		".o" = "soghun",
 	  ":v" = "vox",			"#v" = "vox",			".v" = "vox",
-	  ":q" = "kidan",		"#q" = "kidan",			".q" = "kidan",
 
 	  ":R" = "right hand",	"#R" = "right hand",	".R" = "right hand",
 	  ":L" = "left hand",	"#L" = "left hand",		".L" = "left hand",
@@ -40,7 +39,6 @@ var/list/department_radio_keys = list(
 	  ":J" = "tajaran",		"#J" = "tajaran",		".J" = "tajaran",
 	  ":O" = "soghun",		"#O" = "soghun",		".O" = "soghun",
 	  ":V" = "vox",			"#V" = "vox",			".V" = "vox",
-	  ":Q" = "kidan",		"#Q" = "kidan",			".Q" = "kidan",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -190,7 +188,6 @@ var/list/department_radio_keys = list(
 	var/is_speaking_soghun = 0
 	var/is_speaking_taj = 0
 	var/is_speaking_vox = 0
-	var/is_speaking_kidan = 0
 	var/is_speaking_radio = 0
 
 	switch (message_mode)
@@ -293,10 +290,6 @@ var/list/department_radio_keys = list(
 			if(vox_talk_understand || universal_speak)
 				is_speaking_vox = 1
 
-		if ("kidan")
-			if(kidan_talk_understand || universal_speak)
-				is_speaking_kidan = 1
-
 		if("changeling")
 			if(mind && mind.changeling)
 				for(var/mob/Changeling in mob_list)
@@ -395,8 +388,6 @@ var/list/department_radio_keys = list(
 					heard_a += M
 				else if(is_speaking_vox && (M:vox_talk_understand || M:universal_speak))
 					heard_a += M
-				else if(is_speaking_kidan && (M:kidan_talk_understand || M:universal_speak))
-					heard_a += M
 				else
 					heard_b += M
 			else
@@ -412,7 +403,7 @@ var/list/department_radio_keys = list(
 
 	var/rendered = null
 	if (length(heard_a))
-		var/message_a = say_quote(message,is_speaking_soghun,is_speaking_skrell,is_speaking_taj,is_speaking_vox,is_speaking_kidan)
+		var/message_a = say_quote(message,is_speaking_soghun,is_speaking_skrell,is_speaking_taj,is_speaking_vox)
 
 		if (italics)
 			message_a = "<i>[message_a]</i>"
@@ -437,7 +428,7 @@ var/list/department_radio_keys = list(
 			message_b = voice_message
 		else
 			message_b = stars(message)
-			message_b = say_quote(message_b,is_speaking_soghun,is_speaking_skrell,is_speaking_taj,is_speaking_vox,is_speaking_kidan)
+			message_b = say_quote(message_b,is_speaking_soghun,is_speaking_skrell,is_speaking_taj,is_speaking_vox)
 
 		if (italics)
 			message_b = "<i>[message_b]</i>"

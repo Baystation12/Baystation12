@@ -808,8 +808,6 @@
 				return "Mobile vegetation"
 			if("golem")
 				return "Animated Construct"
-			if("kidan")
-				return "Kidan"
 			else
 				return "Human"
 
@@ -822,9 +820,7 @@
 		else if(src.dna.mutantrace == "tajaran")
 			return "Tajaran"
 		else if(src.dna.mutantrace == "vox")
-			return "Vox"
-		else if(src.dna.mutantrace == "kidan")
-			return "Kidan"
+			return "vox"
 
 /mob/living/carbon/proc/update_mutantrace_languages()
 	if(src.dna)
@@ -836,8 +832,6 @@
 			src.tajaran_talk_understand = 1
 		else if(src.dna.mutantrace == "vox")
 			src.vox_talk_understand = 1
-		else if(src.dna.mutantrace == "kidan")
-			src.kidan_talk_understand = 1
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
