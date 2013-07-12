@@ -800,7 +800,6 @@ datum/preferences
 
 							if(!whitelisted)
 								alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
-
 						else //Not using the whitelist? Aliens for everyone!
 							new_species += "Tajaran"
 							new_species += "Unathi"
