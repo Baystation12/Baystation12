@@ -69,7 +69,7 @@
 		return 1
 	return 0
 
-/mob/proc/say_quote(var/text,var/is_speaking_soghun,var/is_speaking_skrell,var/is_speaking_tajaran,var/is_speaking_vox,var/is_speaking_kidan)
+/mob/proc/say_quote(var/text,var/is_speaking_soghun,var/is_speaking_skrell,var/is_speaking_tajaran,var/is_speaking_vox)
 	if(!text)
 		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 		//tcomms code is still runtiming somewhere here
