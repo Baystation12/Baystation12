@@ -1,9 +1,9 @@
 /mob/living/silicon/robot/updatehealth()
 	if(status_flags & GODMODE)
-		health = 100
+		health = 200
 		stat = CONSCIOUS
 		return
-	health = 100 - (getBruteLoss() + getFireLoss())
+	health = 200 - (getBruteLoss() + getFireLoss())
 	return
 
 /mob/living/silicon/robot/getBruteLoss()
@@ -47,6 +47,14 @@
 		if(C.installed == 1) rval += C
 	return rval
 
+/mob/living/silicon/robot/proc/get_armour()
+
+	if(!components.len) return 0
+	var/datum/robot_component/C = components["armour"]
+	if(C && C.installed == 1)
+		return C
+	return 0
+
 /mob/living/silicon/robot/heal_organ_damage(var/brute, var/burn)
 	var/list/datum/robot_component/parts = get_damaged_components(brute,burn)
 	if(!parts.len)	return
@@ -74,6 +82,11 @@
 			brute -= absorb_brute
 			burn -= absorb_burn
 			src << "\red Your shield absorbs some of the impact!"
+
+	var/datum/robot_component/armour/A = get_armour()
+	if(A)
+		A.take_damage(brute,burn,sharp)
+		return
 
 	var/datum/robot_component/C = pick(components)
 	C.take_damage(brute,burn,sharp)
@@ -114,6 +127,11 @@
 			brute -= absorb_brute
 			burn -= absorb_burn
 			src << "\red Your shield absorbs some of the impact!"
+
+	var/datum/robot_component/armour/A = get_armour()
+	if(A)
+		A.take_damage(brute,burn,sharp)
+		return
 
 	while(parts.len && (brute>0 || burn>0) )
 		var/datum/robot_component/picked = pick(parts)

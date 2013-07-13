@@ -3,8 +3,8 @@
 	real_name = "Cyborg"
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "robot"
-	maxHealth = 300
-	health = 300
+	maxHealth = 200
+	health = 200
 	universal_speak = 1
 
 	var/sight_mode = 0
