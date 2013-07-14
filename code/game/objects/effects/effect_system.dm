@@ -39,25 +39,25 @@ would spawn and follow the beaker, even if it is carried or thrown.
 
 /obj/effect/effect/water/New()
 	..()
-	//var/turf/T = src.loc
-	//if (istype(T, /turf))
-	//	T.firelevel = 0 //TODO: FIX
+	var/turf/simulated/floor/T = src.loc
+	if (istype(T, /turf/simulated/floor))
+		T.fire_protection = world.time
 	spawn( 70 )
 		delete()
 		return
 	return
 
 /obj/effect/effect/water/Del()
-	//var/turf/T = src.loc
-	//if (istype(T, /turf))
-	//	T.firelevel = 0 //TODO: FIX
+	var/turf/simulated/floor/T = src.loc
+	if (istype(T, /turf/simulated/floor))
+		T.fire_protection = world.time
 	..()
 	return
 
 /obj/effect/effect/water/Move(turf/newloc)
-	//var/turf/T = src.loc
-	//if (istype(T, /turf))
-	//	T.firelevel = 0 //TODO: FIX
+	var/turf/simulated/floor/T = src.loc
+	if (istype(T, /turf/simulated/floor))
+		T.fire_protection = world.time
 	if (--src.life < 1)
 		//SN src = null
 		delete()

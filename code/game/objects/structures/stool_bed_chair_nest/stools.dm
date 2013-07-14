@@ -6,6 +6,10 @@
 	anchored = 1.0
 	flags = FPRINT
 	pressure_resistance = 15
+	m_amt = 3750
+	fire_min_burn_temp = 600
+	fire_burn_multiplier = 1
+	fire_fuel_worth = 2
 
 /obj/structure/stool/ex_act(severity)
 	switch(severity)

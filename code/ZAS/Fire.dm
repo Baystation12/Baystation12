@@ -30,7 +30,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 	var/igniting = 0
 	var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in src
-	
+
 	if(air_contents.check_combustability(liquid))
 		igniting = 1
 
@@ -55,28 +55,87 @@ obj
 		icon = 'fire.dmi'
 		icon_state = "1"
 
-		layer = TURF_LAYER
+		layer = TURF_LAYER + 0.2
 
 		var
 			firelevel = 10000 //Calculated by gas_mixture.calculate_firelevel()
 
 		process()
 			. = 1
-			
+
 			//get location and check if it is in a proper ZAS zone
 			var/turf/simulated/floor/S = loc
 			if(!S.zone)
 				del src
-			
+
 			if(!istype(S))
 				del src
-				
+
 			var/datum/gas_mixture/air_contents = S.return_air()
 			//get liquid fuels on the ground.
 			var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in S
 			//and the volatile stuff from the air
 			var/datum/gas/volatile_fuel/fuel = locate() in air_contents.trace_gases
-			
+			//get scorchmarks
+			var/obj/effect/decal/cleanable/scorchmark/scorch = locate() in S
+
+			//check if it found a scorchmark and add one if there isnt one already
+			if (!scorch)
+				scorch = new/obj/effect/decal/cleanable/scorchmark(S,0)
+
+			//try to burn the floor
+			//initialize the temperature needed for burning the floor
+			//initialize the fuel gained by burning this floor
+			//initialize the speed modifier for the floor to catch on fire
+			var/floor_target_temp = 0
+			var/floor_fuel = 1
+			var/floor_speed_modifier = 1
+			if(S.is_plasteel_floor())
+				floor_target_temp = 800
+			else if (S.is_light_floor())
+				floor_target_temp = 600
+			else if (S.is_grass_floor())
+				floor_target_temp = 500
+				floor_fuel = 2
+				floor_speed_modifier = 1.5
+			else if (S.is_wood_floor())
+				floor_target_temp = 500
+				floor_fuel = 3
+				floor_speed_modifier = 1.25
+			else if (S.is_carpet_floor())
+				floor_target_temp = 500
+				floor_fuel = 3
+				floor_speed_modifier = 1.5
+			else
+				floor_target_temp = 1200
+				floor_speed_modifier = 0.8
+
+			//check if the floor is burnable
+			if(floor_target_temp > 0)
+				//calculate a random factor for the equation
+				var/turf_burn_random = max( min(floor_speed_modifier * 5 * ( ( max(air_contents.temperature - floor_target_temp,0) / floor_target_temp )^2 ), 100), 0)
+				//check if the random check is passed
+				if (prob(turf_burn_random))
+					//check if the tile has already been damaged once
+					if (S.burnt || S.broken)
+						//check if the tile is plating, if not break it and release some fuel, also some randomness to slow down the process
+						if (!S.is_plating() && prob(10))
+							scorch.amount += floor_fuel
+							S.break_tile_to_plating()
+
+					//damage it and release fuel
+					else
+						scorch.amount += floor_fuel
+						S.burn_tile()
+
+			//now burn some items!
+			for(var/obj/o in loc)
+				if(o.fire_min_burn_temp)
+					var/obj_burn_random = max( min(o.fire_burn_multiplier * 5 * ( ( max(air_contents.temperature - o.fire_min_burn_temp,0) / o.fire_min_burn_temp )^2 ), 100), 0)
+					if(prob(obj_burn_random))
+						scorch.amount += fire_fuel_worth
+						o.fire_burn()
+
 			//since the air is processed in fractions, we need to make sure not to have any minuscle residue or
 			//the amount of moles might get to low for some functions to catch them and thus result in wonky behaviour
 			if(air_contents.oxygen < 0.001)
@@ -86,29 +145,29 @@ obj
 			if(fuel)
 				if(fuel.moles < 0.001)
 					air_contents.trace_gases.Remove(fuel)
-			
+
 			//check if there is something to combust
-			if(!air_contents.check_combustability(liquid))
+			if(!air_contents.check_combustability(liquid,scorch))
 				del src
-			
+
 			//get a firelevel and set the icon
-			firelevel = air_contents.calculate_firelevel(liquid)
-			
-			if(firelevel > 6)
+			firelevel = air_contents.calculate_firelevel(liquid,scorch)
+
+			if(firelevel > 3)
 				icon_state = "3"
 				SetLuminosity(7)
-			else if(firelevel > 2.5)
+			else if(firelevel > 2)
 				icon_state = "2"
 				SetLuminosity(5)
 			else
 				icon_state = "1"
 				SetLuminosity(3)
-				
+
 			//im not sure how to implement a version that works for every creature so for now monkeys are firesafe
 			for(var/mob/living/carbon/human/M in loc)
 				M.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure() ) //Burn the humans!
 
-			
+
 			//spread!
 			for(var/direction in cardinal)
 				if(S.air_check_directions&direction) //Grab all valid bordering tiles
@@ -118,7 +177,7 @@ obj
 					if(istype(enemy_tile))
 						//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
 						//reduce firelevel.
-						if(enemy_tile.fire_protection > world.time-30)
+						if(prob( 100 * (1 - min( max( ( (world.time - 30) - enemy_tile.fire_protection ), 0 ) / 30, 1) ) ) )
 							firelevel -= 1.5
 							continue
 
@@ -126,29 +185,29 @@ obj
 						if(!(locate(/obj/fire) in enemy_tile))
 							if( prob( 50 + 50 * (firelevel/vsc.fire_firelevel_multiplier) ) && S.CanPass(null, enemy_tile, 0,0) && enemy_tile.CanPass(null, S, 0,0))
 								new/obj/fire(enemy_tile,firelevel)
-			
+
 			//seperate part of the present gas
 			//this is done to prevent the fire burning all gases in a single pass
 			var/datum/gas_mixture/flow = air_contents.remove_ratio(vsc.fire_consuption_rate)
-			
+
 ///////////////////////////////// FLOW HAS BEEN CREATED /// DONT DELETE THE FIRE UNTIL IT IS MERGED BACK OR YOU WILL DELETE AIR ///////////////////////////////////////////////
-			
+
 			if(flow)
-				if(flow.check_combustability(liquid))
+				if(flow.check_combustability(liquid,scorch))
 					//Ensure flow temperature is higher than minimum fire temperatures.
 						//this creates some energy ex nihilo but is necessary to get a fire started
 						//lets just pretend this energy comes from the ignition source and dont mention this again
 					//flow.temperature = max(PLASMA_MINIMUM_BURN_TEMPERATURE+0.1,flow.temperature)
-					
+
 					//burn baby burn!
-					flow.zburn(liquid,1)
-				
+					flow.zburn(liquid,scorch,1)
+
 				//merge the air back
 				S.assume_air(flow)
 
 ///////////////////////////////// FLOW HAS BEEN REMERGED /// feel free to delete the fire again from here on //////////////////////////////////////////////////////////////////
 
-					
+
 		New(newLoc,fl)
 			..()
 
@@ -178,15 +237,15 @@ turf/simulated/apply_fire_protection()
 	fire_protection = world.time
 
 
-datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid,force_burn)
+datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, obj/effect/decal/cleanable/scorchmark/scorch, force_burn)
 	var/value = 0
-	
-	if((temperature > PLASMA_MINIMUM_BURN_TEMPERATURE || force_burn) && check_combustability(liquid) )
-		var/total_fuel = 0 
+
+	if((temperature > PLASMA_MINIMUM_BURN_TEMPERATURE || force_burn) && check_combustability(liquid,scorch) )
+		var/total_fuel = 0
 		var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
 
 		total_fuel += toxins
-		
+
 		if(fuel)
 		//Volatile Fuel
 			total_fuel += fuel.moles
@@ -198,8 +257,12 @@ datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid,force
 			else
 				total_fuel += liquid.amount
 
+		if(scorch)
+		//fuel created by destroying objects and turfs
+			total_fuel += scorch.amount
+
 		//Calculate the firelevel.
-		var/firelevel = calculate_firelevel(liquid)
+		var/firelevel = calculate_firelevel(liquid, scorch)
 
 		//get the current inner energy of the gas mix
 		//this must be taken here to prevent the addition or deletion of energy by a changing heat capacity
@@ -207,7 +270,7 @@ datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid,force
 
 		//determine the amount of oxygen used
 		var/total_oxygen = min(oxygen, 2 * total_fuel)
-		
+
 		//determine the amount of fuel actually used
 		var/used_fuel_ratio = min(oxygen / 2 , total_fuel) / total_fuel
 		total_fuel = total_fuel * used_fuel_ratio
@@ -232,33 +295,39 @@ datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid,force
 			liquid.amount -= liquid.amount * used_fuel_ratio * used_reactants_ratio
 			if(liquid.amount <= 0) del liquid
 
+		if(scorch)
+			scorch.amount -= min(scorch.amount, scorch.amount * used_fuel_ratio * used_reactants_ratio)
+
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
 		temperature = (starting_energy + vsc.fire_fuel_energy_release * total_fuel) / heat_capacity()
-		
+
 		update_values()
 		value = total_reactants * used_reactants_ratio
 	return value
 
-datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fuel/liquid)
+datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fuel/liquid, obj/effect/decal/cleanable/scorchmark/scorch)
 	//this check comes up very often and is thus centralized here to ease adding stuff
-	
-	var/datum/gas/volatile_fuel/fuel = locate() in trace_gases	
+
+	var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
 	var/value = 0
-	
+
 	if(oxygen && (toxins || fuel || liquid))
 		value = 1
-	
+	else if (scorch)
+		if (oxygen && scorch.amount > 0)
+			value = 1
+
 	return value
 
-datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fuel/liquid)
+datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fuel/liquid, obj/effect/decal/cleanable/scorchmark/scorch)
 	//Calculates the firelevel based on one equation instead of having to do this multiple times in different areas.
-	
+
 	var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
 	var/total_fuel = 0
 	var/firelevel = 0
-	
+
 	if(check_combustability(liquid))
-	
+
 		total_fuel += toxins
 
 		if(liquid)
@@ -267,17 +336,20 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 		if(fuel)
 			total_fuel += fuel.moles
 
+		if(scorch)
+			total_fuel += scorch.amount
+
 		var/total_combustables = (total_fuel + oxygen)
-		
+
 		if(total_fuel > 0 && oxygen > 0)
-			
+
 			//slows down the burning when the concentration of the reactants is low
 			var/dampening_multiplier = total_combustables / (total_combustables + nitrogen + carbon_dioxide)
 			//calculates how close the mixture of the reactants is to the optimum
 			var/mix_multiplier = 1 / (1 + (5 * ((oxygen / total_combustables) ^2)))
 			//toss everything together
 			firelevel = vsc.fire_firelevel_multiplier * mix_multiplier * dampening_multiplier
-			
+
 	return max( 0, firelevel)
 
 
@@ -324,5 +396,3 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 	apply_damage(0.6*mx*legs_exposure, BURN, "r_leg", 0, 0, "Fire")
 	apply_damage(0.4*mx*arms_exposure, BURN, "l_arm", 0, 0, "Fire")
 	apply_damage(0.4*mx*arms_exposure, BURN, "r_arm", 0, 0, "Fire")
-
-	//flash_pain()
