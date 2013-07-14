@@ -16,6 +16,11 @@
 	var/integrity = 3
 	var/volume = 70
 
+	m_amt = 3750
+	fire_min_burn_temp = 800
+	fire_burn_multiplier = 0.75
+	fire_fuel_worth = 0
+
 /obj/item/weapon/tank/New()
 	..()
 
@@ -262,3 +267,10 @@
 
 	else if(integrity < 3)
 		integrity++
+
+/obj/item/weapon/tank/fire_burn()
+	//get location and check if it is in a proper ZAS zone
+	var/turf/simulated/floor/S = loc
+	if(S.zone)
+		S.assume_air(air_contents)
+	..()
