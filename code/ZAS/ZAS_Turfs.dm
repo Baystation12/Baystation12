@@ -134,7 +134,6 @@ turf
 				return ..()
 
 		proc/update_air_properties()
-			. = 1
 			var/air_directions_archived = air_check_directions
 			air_check_directions = 0
 
@@ -259,7 +258,7 @@ turf
 							//The unsimulated turf is adjacent to another one of our zone's turfs,
 							//  better rebuild to be sure we didn't get cut in twain
 							if(consider_rebuild)
-								NT.zone.rebuild = 1
+								zone.rebuild = 1
 
 							//Not adjacent to anything, and unsimulated.  Goodbye~
 							else
@@ -269,6 +268,7 @@ turf
 				processing = 1
 			else
 				processing = 0
+			return 1
 
 
 
