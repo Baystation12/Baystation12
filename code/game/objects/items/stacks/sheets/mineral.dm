@@ -103,6 +103,9 @@ var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	origin_tech = "plasmatech=2;materials=2"
 	perunit = 2000
 	sheettype = "plasma"
+	fire_min_burn_temp = 500
+	fire_burn_multiplier = 3 //made of burnium
+	fire_fuel_worth = 0
 
 var/global/list/datum/stack_recipe/plasma_recipes = list ( \
 	new/datum/stack_recipe("plasma door", /obj/structure/mineral_door/transparent/plasma, 10, one_per_turf = 1, on_floor = 1), \
@@ -113,6 +116,18 @@ var/global/list/datum/stack_recipe/plasma_recipes = list ( \
 	pixel_x = rand(0,4)-4
 	pixel_y = rand(0,4)-4
 	..()
+
+/obj/item/stack/sheet/mineral/plasma/fire_burn()
+	//get location and check if it is in a proper ZAS zone
+	var/turf/simulated/floor/S = loc
+	if(S.zone)
+		var/datum/gas_mixture/air_contents = S.return_air()
+		if(air_contents)
+			air_contents.toxins += 20
+			air_contents.update_values()
+			amount -= 1
+			if(amount <= 0)
+				del src
 
 /obj/item/stack/sheet/mineral/plastic
 	name = "Plastic"
