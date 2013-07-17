@@ -29,8 +29,16 @@
 	name = "Mining Station Port Wing"
 	icon_state = "mining_living"
 
-/area/mine/eva
-	name = "Mining Station EVA"
+/area/mine/eva_east
+	name = "Mining Station East EVA"
+	icon_state = "mining_eva"
+
+/area/mine/eva_middle
+	name = "Mining Station Middle EVA"
+	icon_state = "mining_eva"
+
+/area/mine/eva_west
+	name = "Mining Station West EVA"
 	icon_state = "mining_eva"
 
 /area/mine/maintenance

@@ -10,8 +10,8 @@
 #define RECOMMENDED_VERSION 495
 /world/New()
 	//logs
-	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
-	log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM")].log")		//funtimelog
+	var/date_string = time2text(world.realtime, "YYYY")
+	log = file("data/logs/runtime/[time2text(world.realtime,"YYYY")].log")		//funtimelog
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
 	diaryofmeanpeople = file("data/logs/[date_string] Attack.log")
@@ -37,10 +37,6 @@
 	jobban_loadbanfile()
 	jobban_updatelegacybans()
 	LoadBans()
-
-	if(config && config.server_name != null && config.server_suffix && world.port > 0)
-		// dumb and hardcoded but I don't care~
-		config.server_name += " #[(world.port % 1000) / 100]"
 
 	investigate_reset()
 	Get_Holiday()	//~Carn, needs to be here when the station is named so :P
