@@ -285,6 +285,7 @@
 		icon_state = "hair_e"
 		gender = MALE // turnoff!
 
+
 	bald
 		name = "Bald"
 		icon_state = "bald"
@@ -305,7 +306,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajaran","Skrell","Vox","Kidan")
+		species_allowed = list("Human","Unathi","Tajaran","Skrell","Vox")
 
 	watson
 		name = "Watson Mustache"
