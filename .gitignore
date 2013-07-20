@@ -5,7 +5,7 @@
 *.lk
 info.json
 /config/admins.txt
+/config/dbconfig.txt
 maploader_debug.txt
 /data/investigate/*.html
 /data/ban_unban_log.txt
-/config/dbconfig.txt
