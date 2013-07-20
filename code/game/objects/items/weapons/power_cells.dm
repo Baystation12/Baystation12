@@ -112,11 +112,3 @@
 	maxcharge = 10000
 	m_amt = 0
 	g_amt = 0
-
-/obj/item/weapon/cell/fire_burn()
-	viewers(src) << "\red <b>Charge: [src.charge]</b>"
-	var/radius = round( (sqrt(charge)/30)+0.5, 1 )
-	viewers(src) << "\red <b>Radius: [radius]</b>"
-	if (radius >= 1)
-		explosion(src.loc,0,0,radius)
-	..()
