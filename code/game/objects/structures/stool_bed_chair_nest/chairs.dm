@@ -76,19 +76,11 @@
 	icon_state = "wooden_chair"
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
-	fire_min_burn_temp = 500
-	fire_burn_multiplier = 1.25
-	fire_fuel_worth = 5
-	m_amt = 0
 
 /obj/structure/stool/bed/chair/wood/wings
 	icon_state = "wooden_chair_wings"
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
-	fire_min_burn_temp = 500
-	fire_burn_multiplier = 1.25
-	fire_fuel_worth = 5
-	m_amt = 0
 
 /obj/structure/stool/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
@@ -101,9 +93,6 @@
 /obj/structure/stool/bed/chair/comfy
 	name = "comfy chair"
 	desc = "It looks comfy."
-	fire_min_burn_temp = 500
-	fire_burn_multiplier = 1.25
-	fire_fuel_worth = 4
 
 /obj/structure/stool/bed/chair/comfy/brown
 	icon_state = "comfychair_brown"

@@ -20,10 +20,6 @@
 	var/construction_cost = list("metal"=750,"glass"=75)
 	var/construction_time=100
 
-	fire_min_burn_temp = 1000
-	fire_burn_multiplier = 0.75
-	fire_fuel_worth = 0
-
 	suicide_act(mob/user)
 		viewers(user) << "\red <b>[user] is licking the electrodes of the [src.name]! It looks like \he's trying to commit suicide.</b>"
 		return (FIRELOSS)
@@ -118,7 +114,9 @@
 	g_amt = 0
 
 /obj/item/weapon/cell/fire_burn()
+	viewers(src) << "\red <b>Charge: [src.charge]</b>"
 	var/radius = round( (sqrt(charge)/30)+0.5, 1 )
+	viewers(src) << "\red <b>Radius: [radius]</b>"
 	if (radius >= 1)
 		explosion(src.loc,0,0,radius)
 	..()

@@ -373,9 +373,8 @@
 		return
 
 /obj/structure/window/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	//Since glasslocks are the only thing you can do to prevent spreading atmos issues, this was disabled for the time being
-	//if(exposed_temperature > T0C + 800)
-	//	hit(round(exposed_volume / 100), 0)
+	if(exposed_temperature > T0C + 800)
+		hit(round(exposed_volume / 100), 0)
 	..()
 
 

@@ -1,3 +1,5 @@
+
+
 /obj/structure/reagent_dispensers
 	name = "Dispenser"
 	desc = "..."
@@ -64,6 +66,12 @@
 			new /obj/effect/effect/water(src.loc)
 			del(src)
 
+
+
+
+
+
+
 //Dispensers
 /obj/structure/reagent_dispensers/watertank
 	name = "watertank"
@@ -71,38 +79,9 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
 	amount_per_transfer_from_this = 10
-
-	m_amt = 7500
-	g_amt = 3750
-	fire_min_burn_temp = 800
-	fire_burn_multiplier = 0.75
-	fire_fuel_worth = 0
-
 	New()
 		..()
 		reagents.add_reagent("water",1000)
-
-/obj/structure/reagent_dispensers/watertank/fire_burn()
-	src.reagents.update_total()
-	var/number_of_gusts = src.reagents.total_volume / 50
-	for(var/a=0, a < number_of_gusts , a++)
-		var/obj/effect/effect/water/W = new /obj/effect/effect/water( get_turf(src) )
-		var/turf/my_target = get_step(get_step(get_step(get_step(get_step(get_turf(src),pick(cardinal)),pick(cardinal)),pick(cardinal)),pick(cardinal)),pick(cardinal))
-		var/datum/reagents/R = new/datum/reagents(50)
-		if(!W) return
-		W.reagents = R
-		R.my_atom = W
-		if(!W || !src) return
-		src.reagents.trans_to(W,50)
-		for(var/b=0, b<5, b++)
-			step_towards(W,my_target)
-			if(!W) return
-			W.reagents.reaction(get_turf(W))
-			for(var/atom/atm in get_turf(W))
-				if(!W) return
-				W.reagents.reaction(atm)
-			if(W.loc == my_target) break
-	..()
 
 /obj/structure/reagent_dispensers/fueltank
 	name = "fueltank"
@@ -112,13 +91,6 @@
 	amount_per_transfer_from_this = 10
 	var/modded = 0
 	var/obj/item/device/assembly_holder/rig = null
-
-	m_amt = 7500
-	g_amt = 3750
-	fire_min_burn_temp = 800
-	fire_burn_multiplier = 1
-	fire_fuel_worth = 0
-
 	New()
 		..()
 		reagents.add_reagent("fuel",1000)
@@ -191,11 +163,6 @@
 			explosion(src.loc,-1,1,2)
 		if(src)
 			del(src)
-
-/obj/structure/reagent_dispensers/fueltank/fire_burn()
-	src.reagents.update_total()
-	new/obj/effect/decal/cleanable/liquid_fuel(src.loc, src.reagents.total_volume)
-	..()
 
 /obj/structure/reagent_dispensers/peppertank
 	name = "Pepper Spray Refiller"
