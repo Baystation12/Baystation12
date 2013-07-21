@@ -89,7 +89,7 @@ goto :qm_error
 echo ...
 echo That wasn't a valid response, or you didn't choose anything!
 echo Valid responses: y, n, yes, no
-goto :quitmayber
+goto :quitmaybe
 
 :exit
 pause
