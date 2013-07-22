@@ -68,7 +68,7 @@ var/list/admin_verbs_admin = list(
 	/datum/admins/proc/show_skills,
 	/client/proc/check_customitem_activity,
 	/client/proc/man_up,
-	/client/proc/global_man_up
+	/client/proc/global_man_up,
 	/client/proc/response_team // Response Teams admin verb
 )
 var/list/admin_verbs_ban = list(
