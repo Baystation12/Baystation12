@@ -124,14 +124,15 @@
 
 	for(var/i = 0, i < lethal_amount, i++)
 		var/mob/living/carbon/human/H = pick(crew)
-		if(H.virus2)
+		if(lethal.uniqueID in H.virus2)
 			i--
 			continue
-		H.virus2 = lethal.getcopy()
+		H.virus2["[lethal.uniqueID]"] = lethal.getcopy()
 		infectees += H
 
 	var/mob/living/carbon/human/patient_zero = pick(infectees)
-	patient_zero.virus2.stage = 3
+	var/datum/disease2/disease/V = patient_zero.virus2["[lethal.uniqueID]"]
+	V.stage = 3
 
 	cruiser_arrival = world.time + (10 * 90 * 60)
 	stage = 1
@@ -169,7 +170,7 @@
 	var/sick = 0
 	for(var/mob/living/carbon/human/H in world)
 		if(H.key && H.stat != 2) alive++
-		if(H.virus2 && H.stat != 2) sick++
+		if(H.virus2.len && H.stat != 2) sick++
 
 	if(alive == 0)
 		finished = 2

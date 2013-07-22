@@ -679,3 +679,18 @@ var/list/be_special_flags = list(
 #define IMPLOYAL_HUD	5 // loyality implant
 #define IMPCHEM_HUD		6 // chemical implant
 #define IMPTRACK_HUD	7 // tracking implant
+
+//Pulse levels, very simplified
+#define PULSE_NONE		0	//so !M.pulse checks would be possible
+#define PULSE_SLOW		1	//<60 bpm
+#define PULSE_NORM		2	//60-90 bpm
+#define PULSE_FAST		3	//90-120 bpm
+#define PULSE_2FAST		4	//>120 bpm
+#define PULSE_THREADY	5	//occurs during hypovolemic shock
+//feel free to add shit to lists below
+var/list/tachycardics = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine")	//increase heart rate
+var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")					//decrease heart rate
+
+//proc/get_pulse methods
+#define GETPULSE_HAND	0	//less accurate (hand)
+#define GETPULSE_TOOL	1	//more accurate (med scanner, sleeper, etc)
