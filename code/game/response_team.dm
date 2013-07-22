@@ -1,7 +1,8 @@
 //STRIKE TEAMS
 
 var/list/response_team_members = list()
-var/global/send_emergency_team = 0
+var/global/send_emergency_team = 0 // Used for automagic response teams
+// 'admin_emergency_team' for admin-spawned response teams
 
 client/verb/JoinResponseTeam()
 	set category = "IC"
@@ -9,6 +10,9 @@ client/verb/JoinResponseTeam()
 	if(istype(usr,/mob/dead/observer) || istype(usr,/mob/new_player))
 		if(!send_emergency_team)
 			usr << "No emergency response team is currently being sent."
+			return
+		if(admin_emergency_team)
+			usr << "An emergency response team has already been sent."
 			return
 		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Security Officer"))
 			usr << "<font color=red><b>You are jobbanned from the emergency reponse team!"
@@ -65,7 +69,7 @@ proc/percentage_antagonists()
 
 
 proc/trigger_armed_response_team(var/force = 0)
-	if(send_emergency_team)
+	if(send_emergency_team || admin_emergency_team)
 		return
 
 	var/send_team_chance = 20 // base chance that a team will be sent
@@ -78,7 +82,7 @@ proc/trigger_armed_response_team(var/force = 0)
 	// there's only a certain chance a team will be sent
 	if(!prob(send_team_chance)) return
 
-	command_alert("According to our sensors, [station_name()] has entered code red. We will prepare and dispatch an emergency response team to deal with the situation.", "Command Report")
+	command_alert("Sensors indicate that [station_name()] has entered Code Red and is in need of assistance. We will prepare and dispatch an emergency response team to deal with the situation.", "NMV Icarus Command")
 
 	send_emergency_team = 1
 
