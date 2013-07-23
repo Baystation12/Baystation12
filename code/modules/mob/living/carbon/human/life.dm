@@ -987,7 +987,7 @@
 						sleeping = max(sleeping-1, 0)
 				blinded = 1
 				stat = UNCONSCIOUS
-				if( prob(10) && health && !hal_crit )
+				if( prob(2) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
 			else if(resting)
