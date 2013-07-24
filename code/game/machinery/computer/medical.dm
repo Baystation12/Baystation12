@@ -127,36 +127,56 @@
 /obj/machinery/computer/med_data/Topic(href, href_list)
 	if(..())
 		return
+
 	if (!( data_core.general.Find(src.active1) ))
 		src.active1 = null
+
 	if (!( data_core.medical.Find(src.active2) ))
 		src.active2 = null
+
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
+
 		if (href_list["temp"])
 			src.temp = null
+
 		if (href_list["scan"])
 			if (src.scan)
-				src.scan.loc = src.loc
-				src.scan = null
+
+				if(ishuman(usr))
+					scan.loc = usr.loc
+
+					if(!usr.get_active_hand())
+						usr.put_in_hands(scan)
+
+					scan = null
+
+				else
+					src.scan.loc = src.loc
+					src.scan = null
+
 			else
 				var/obj/item/I = usr.get_active_hand()
 				if (istype(I, /obj/item/weapon/card/id))
 					usr.drop_item()
 					I.loc = src
 					src.scan = I
+
 		else if (href_list["logout"])
 			src.authenticated = null
 			src.screen = null
 			src.active1 = null
 			src.active2 = null
+
 		else if (href_list["login"])
+
 			if (istype(usr, /mob/living/silicon/ai))
 				src.active1 = null
 				src.active2 = null
 				src.authenticated = usr.name
 				src.rank = "AI"
 				src.screen = 1
+
 			else if (istype(usr, /mob/living/silicon/robot))
 				src.active1 = null
 				src.active2 = null
@@ -164,13 +184,16 @@
 				var/mob/living/silicon/robot/R = usr
 				src.rank = R.braintype
 				src.screen = 1
+
 			else if (istype(src.scan, /obj/item/weapon/card/id))
 				src.active1 = null
 				src.active2 = null
+
 				if (src.check_access(src.scan))
 					src.authenticated = src.scan.registered_name
 					src.rank = src.scan.assignment
 					src.screen = 1
+
 		if (src.authenticated)
 
 			if(href_list["screen"])
@@ -277,7 +300,7 @@
 							src.active2.fields["notes"] = t1
 					if("p_stat")
 						if (istype(src.active1, /datum/data/record))
-							src.temp = text("<B>Physical Condition:</B><BR>\n\t<A href='?src=\ref[];temp=1;p_stat=deceased'>*Deceased*</A><BR>\n\t<A href='?src=\ref[];temp=1;p_stat=unconscious'>*Unconscious*</A><BR>\n\t<A href='?src=\ref[];temp=1;p_stat=active'>Active</A><BR>\n\t<A href='?src=\ref[];temp=1;p_stat=unfit'>Physically Unfit</A><BR>", src, src, src, src)
+							src.temp = text("<B>Physical Condition:</B><BR>\n\t<A href='?src=\ref[];temp=1;p_stat=deceased'>*Deceased*</A><BR>\n\t<A href='?src=\ref[];temp=1;p_stat=ssd'>*SSD*</A><BR>\n\t<A href='?src=\ref[];temp=1;p_stat=active'>Active</A><BR>\n\t<A href='?src=\ref[];temp=1;p_stat=unfit'>Physically Unfit</A><BR>\n\t<A href='?src=\ref[];temp=1;p_stat=disabled'>Disabled</A><BR>", src, src, src, src, src)
 					if("m_stat")
 						if (istype(src.active1, /datum/data/record))
 							src.temp = text("<B>Mental Condition:</B><BR>\n\t<A href='?src=\ref[];temp=1;m_stat=insane'>*Insane*</A><BR>\n\t<A href='?src=\ref[];temp=1;m_stat=unstable'>*Unstable*</A><BR>\n\t<A href='?src=\ref[];temp=1;m_stat=watch'>*Watch*</A><BR>\n\t<A href='?src=\ref[];temp=1;m_stat=stable'>Stable</A><BR>", src, src, src, src)
@@ -311,12 +334,14 @@
 					switch(href_list["p_stat"])
 						if("deceased")
 							src.active1.fields["p_stat"] = "*Deceased*"
-						if("unconscious")
-							src.active1.fields["p_stat"] = "*Unconscious*"
+						if("ssd")
+							src.active1.fields["p_stat"] = "*SSD*"
 						if("active")
 							src.active1.fields["p_stat"] = "Active"
 						if("unfit")
 							src.active1.fields["p_stat"] = "Physically Unfit"
+						if("disabled")
+							src.active1.fields["p_stat"] = "Disabled"
 
 			if (href_list["m_stat"])
 				if (src.active1)
@@ -478,7 +503,7 @@
 				if(4)
 					R.fields["b_type"] = pick("A-", "B-", "AB-", "O-", "A+", "B+", "AB+", "O+")
 				if(5)
-					R.fields["p_stat"] = pick("*Unconcious*", "Active", "Physically Unfit")
+					R.fields["p_stat"] = pick("*SSD*", "Active", "Physically Unfit", "Disabled")
 				if(6)
 					R.fields["m_stat"] = pick("*Insane*", "*Unstable*", "*Watch*", "Stable")
 			continue

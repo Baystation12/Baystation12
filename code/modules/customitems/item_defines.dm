@@ -318,6 +318,10 @@
 	icon_state = "eleanorstone"
 	item_state = "eleanorstone"
 
+	volume = 150
+	amount_per_transfer_from_this = 10
+	possible_transfer_amounts = list(5,10,15,25,30,50,150)
+
 /obj/item/weapon/storage/pill_bottle/fluff/listermedbottle //compactninja: Lister Black
 	name = "Pill bottle (anti-depressants)"
 	desc = "Contains pills used to deal with depression. They appear to be prescribed to Lister Black"
