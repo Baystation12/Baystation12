@@ -14,7 +14,6 @@
 	m_amt = 90
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 	var/max_water = 50
-	var/last_use = 1.0
 	var/safety = 1
 	var/sprite_name = "fire_extinguisher"
 
@@ -66,11 +65,6 @@
 		if (src.reagents.total_volume < 1)
 			usr << "\red \The [src] is empty."
 			return
-
-		if (world.time < src.last_use + 20)
-			return
-
-		src.last_use = world.time
 
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
 
