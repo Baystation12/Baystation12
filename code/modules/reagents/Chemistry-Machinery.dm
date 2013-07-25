@@ -332,7 +332,8 @@
 				reagents.clear_reagents()
 				icon_state = "mixer0"
 		else if (href_list["createpill"])
-			var/name = reject_bad_text(input(usr,"Name:","Name your pill!",reagents.get_master_reagent_name()))
+			var/volume = reagents.get_master_reagent_volume()
+			var/name = reject_bad_text(input(usr,"Name:","Name your pill!",reagents.get_master_reagent_name()+" x[volume]"))
 			var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
 			if(!name) name = reagents.get_master_reagent_name()
 			P.name = "[name] pill"

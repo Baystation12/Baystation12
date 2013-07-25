@@ -82,6 +82,14 @@ datum
 
 				return the_name
 
+			get_master_reagent_volume()
+				var/the_volume = 0
+				for(var/datum/reagent/A in reagent_list)
+					if(A.volume > the_volume)
+						the_volume = A.volume
+
+				return the_volume
+
 			get_master_reagent_id()
 				var/the_id = null
 				var/the_volume = 0

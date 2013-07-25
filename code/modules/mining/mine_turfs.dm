@@ -584,7 +584,7 @@ commented out in r5061, I left it because of the shroom thingies
 			mineralAmt = 5
 	return*/
 
-/turf/simulated/mineral/Bumped(AM as mob|obj)
+/turf/simulated/mineral/Bumped(atom/AM)
 	..()
 	if(istype(AM,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = AM
@@ -598,12 +598,11 @@ commented out in r5061, I left it because of the shroom thingies
 		if(istype(R.module_active,/obj/item/weapon/pickaxe))
 			src.attackby(R.module_active,R)
 			return
-/*	else if(istype(AM,/obj/mecha))
-		var/obj/mecha/M = AM
-		if(istype(M.selected,/obj/item/mecha_parts/mecha_equipment/tool/drill))
-			src.attackby(M.selected,M)
-			return*/
-//Aparantly mechs are just TOO COOL to call Bump(), so fuck em (for now)
+	else if(istype(AM, /obj/mecha))
+		var/obj/mecha/mecha = AM
+		if(istype(mecha.selected,/obj/item/mecha_parts/mecha_equipment/tool/drill))
+			mecha.selected.action(src)
+			return
 	else
 		return
 

@@ -217,7 +217,7 @@ var/sqlfdbkdb = "test"
 var/sqlfdbklogin = "root"
 var/sqlfdbkpass = ""
 
-var/sqllogging = 0 // Should we log deaths, population stats, etc?
+var/sqllogging = 1 // Should we log deaths, population stats, etc?
 
 
 

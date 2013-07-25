@@ -42,7 +42,7 @@ REVIVAL_BRAIN_LIFE -1
 
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied. 
-RUN_SPEED 2
+RUN_SPEED 3
 WALK_SPEED 5
 
 
