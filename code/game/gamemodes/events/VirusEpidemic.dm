@@ -8,7 +8,7 @@
 	Announce()
 		if(!virus)
 			for(var/mob/living/carbon/human/H in world)
-				if((H.virus2) || (H.stat == 2) || prob(30))
+				if((H.virus2.len) || (H.stat == 2) || prob(30))
 					continue
 				if(prob(100))	// no lethal diseases outside virus mode!
 					infect_mob_random_lesser(H)
