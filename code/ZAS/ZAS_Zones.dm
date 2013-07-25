@@ -108,7 +108,12 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 /zone/proc/RemoveTurf(turf/T)
 	//Same, but in reverse.
-	if(istype(T, /turf/simulated))
+	if(istype(T, /turf/simulated) && T in unsimulated_tiles) //It happens.  Gods know why.
+		unsimulated_tiles -= T
+		if(!unsimulated_tiles.len)
+			unsimulated_tiles = null
+		src.AddTurf(T) //Make sure it gets onto the simulated list.
+	else if(istype(T, /turf/simulated))
 		if(!(T in contents))
 			return
 		contents -= T
@@ -160,11 +165,10 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	progress = "problem with: ShareSpace()"
 
 
-	if(unsimulated_tiles)
-		if(locate(/turf/simulated) in unsimulated_tiles)
-			for(var/turf/simulated/T in unsimulated_tiles)
-				RemoveTurf(T)
-		if(unsimulated_tiles)
+	if(unsimulated_tiles && length(unsimulated_tiles))
+		for(var/turf/simulated/T in unsimulated_tiles)
+			RemoveTurf(T)
+		if(unsimulated_tiles && length(unsimulated_tiles))
 			var/moved_air = ShareSpace(air,unsimulated_tiles)
 
 			if(moved_air > vsc.airflow_lightest_pressure)
