@@ -80,6 +80,9 @@
 /obj/item/weapon/circuitboard/secure_data
 	name = "Circuit board (Security Records)"
 	build_path = "/obj/machinery/computer/secure_data"
+/obj/item/weapon/circuitboard/skills
+	name = "Circuit board (Employment Records)"
+	build_path = "/obj/machinery/computer/skills"
 /obj/item/weapon/circuitboard/stationalert
 	name = "Circuit board (Station Alerts)"
 	build_path = "/obj/machinery/computer/station_alert"
