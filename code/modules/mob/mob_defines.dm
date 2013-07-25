@@ -69,6 +69,7 @@
 	var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
+	var/gen_record = ""
 	var/blinded = null
 	var/bhunger = 0			//Carbon
 	var/ajourn = 0
