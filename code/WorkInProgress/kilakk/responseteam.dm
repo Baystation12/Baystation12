@@ -119,6 +119,7 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 				break
 
 			spawn(0)
+
 				switch(alert(new_member, "You are an Emergency Response Team member! Are you a boy or a girl?",,"Male","Female"))
 					if("Male")
 						new_member.gender = MALE
@@ -130,9 +131,12 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 				if(!new_name)
 					new_member.real_name = "Agent [pick("Red","Yellow","Orange","Silver","Gold", "Pink", "Purple", "Rainbow")]" // Choose a "random" agent name
 					new_member.name = usr.real_name
+					new_member.mind.name = usr.real_name
+
 				else
 					new_member.real_name = new_name
 					new_member.name = new_name
+					new_member.mind.name = new_name
 
 				// -- CHANGE APPEARANCE --
 				var/new_tone = input(new_member, "Please select your new skin tone: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation") as num
@@ -179,9 +183,10 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 				new_member.update_hair(1)
 
 				new_member.mind_initialize()
+
 				new_member.mind.assigned_role = "Emergency Response Team"
 				new_member.mind.special_role = "Emergency Response Team"
-				ticker.mode.traitors += new_member.mind // ERTs will show up at the end of the round on the "traitor" list
+				ticker.mode.traitors |= new_member.mind // ERTs will show up at the end of the round on the "traitor" list
 
 				// Join message
 				new_member << "\blue You are the <b>Emergency Response Team[!leader_selected?"!</b>":" Leader!</b>"] \nAs a response team [!leader_selected?"member":"<b>leader</b>"] you answer directly to [!leader_selected?"your team leader.":"Central Command."] \nYou have been deployed by NanoTrasen Central Command in Tau Ceti to resolve a Code Red alert aboard [station_name()], and have been provided with the following instructions and information regarding your mission: \red [situation]"
@@ -244,6 +249,8 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 		E.assignment = "Emergency Response Team"
 	E.registered_name = real_name
 	equip_to_slot_or_del(E, slot_wear_id)
+
+	update_icons()
 
 	return 1
 
