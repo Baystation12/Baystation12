@@ -104,16 +104,19 @@
 		new /obj/item/weapon/shard(loc)
 		if(reinf) new /obj/item/stack/rods(loc)
 		del(src)
+		usr.delay_click(10)
 	else if (usr.a_intent == "hurt")
 		playsound(src.loc, 'glassknock.ogg', 80, 1)
 		usr.visible_message("\red [usr.name] bangs against the [src.name]!", \
 							"\red You bang against the [src.name]!", \
 							"You hear a banging sound.")
+		usr.delay_click(5)
 	else
 		playsound(src.loc, 'glassknock.ogg', 80, 1)
 		usr.visible_message("[usr.name] knocks on the [src.name].", \
 							"You knock on the [src.name].", \
 							"You hear a knocking sound.")
+		usr.delay_click(5)
 	return
 
 
@@ -128,9 +131,11 @@
 		new /obj/item/weapon/shard(loc)
 		if(reinf) new /obj/item/stack/rods(loc)
 		del(src)
+		user.delay_click(10)
 	else	//for nicer text~
 		user.visible_message("<span class='danger'>[user] smashes into [src]!</span>")
 		playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
+		user.delay_click(10)
 
 
 /obj/structure/window/attack_alien(mob/user as mob)
@@ -158,6 +163,7 @@
 			var/mob/living/M = G.affecting
 			var/state = G.state
 			del(W)	//gotta delete it here because if window breaks, it won't get deleted
+			user.delay_click(10)
 			switch (state)
 				if(1)
 					M.apply_damage(7)
@@ -197,6 +203,7 @@
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			hit(W.force)
+			user.delay_click(10)
 			if(health <= 7)
 				anchored = 0
 				update_nearby_icons()
