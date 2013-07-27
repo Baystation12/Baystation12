@@ -148,7 +148,7 @@
 	if(module)
 		return
 	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
-	if(crisis) //Leaving this in until it's balanced appropriately.
+	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	var/mod = input("Please, select a module!", "Robot", null, null) in modules
