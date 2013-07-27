@@ -228,7 +228,7 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 
 	// Put stuff into their backpacks
 	equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(src), slot_in_backpack)
-	equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid(src), slot_in_backpack) // Not sure about this
+	// equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(src), slot_in_backpack) // Regular medkit
 
 	// Loyalty implants
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(src)
