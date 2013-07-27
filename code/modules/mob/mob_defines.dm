@@ -54,8 +54,8 @@
 	var/sdisabilities = 0	//Carbon
 	var/disabilities = 0	//Carbon
 	var/atom/movable/pulling = null
-	var/next_move = null
-	var/prev_move = null
+	var/last_click = null
+	var/click_delay = 0
 	var/monkeyizing = null	//Carbon
 	var/other = 0.0
 	var/hand = null
@@ -69,6 +69,7 @@
 	var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
+	var/gen_record = ""
 	var/blinded = null
 	var/bhunger = 0			//Carbon
 	var/ajourn = 0
