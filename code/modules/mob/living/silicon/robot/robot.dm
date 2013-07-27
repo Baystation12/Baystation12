@@ -148,7 +148,7 @@
 	if(module)
 		return
 	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
-	if(emagged || security_level > SEC_LEVEL_BLUE)
+	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
@@ -1240,9 +1240,11 @@
 	else
 		src << "Something is badly wrong with the sprite selection. Harass a coder."
 		icon_state = module_sprites[1]
+		base_icon = icon_state
 		return
 
 	overlays -= "eyes"
+	base_icon = icon_state
 	updateicon()
 
 	if (triesleft >= 1)
