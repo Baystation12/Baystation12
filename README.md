@@ -11,7 +11,7 @@ Click [here](https://github.com/Baystation12/Baystation12/archive/master.zip) to
 
 The more complicated and easier to update method is using git.  You'll need to download git or some client from [here](http://git-scm.com/).  When that's installed, right click in any folder and click on "Git Bash".  When that opens, type in:
 
-    git clone git@github.com:Baystation12/Baystation12.git
+    git clone https://github.com/Baystation12/Baystation12.git
 
 (hint: hold down ctrl and press insert to paste into git bash)
 
