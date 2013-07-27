@@ -128,7 +128,7 @@
 		return
 	if(killing)
 		return
-	if (assailant.next_move > world.time)
+	if (assailant.last_click + assailant.click_delay < world.time)
 		return
 	if ((!( assailant.canmove ) || assailant.lying))
 		//SN src = null
@@ -140,7 +140,7 @@
 				if (!( killing ))
 					assailant.visible_message("\red [assailant] has temporarily tightened \his grip on [affecting]!")
 						//Foreach goto(97)
-					assailant.next_move = world.time + 10
+					assailant.delay_click(10)
 					//affecting.stunned = max(2, affecting.stunned)
 					//affecting.paralysis = max(1, affecting.paralysis)
 					affecting.losebreath = min(affecting.losebreath + 1, 3)
@@ -235,7 +235,7 @@
 							assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>")
 							log_attack("<font color='red'>[assailant.name] ([assailant.ckey]) Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>")
 
-							assailant.next_move = world.time + 10
+							assailant.delay_click(10)
 							affecting.losebreath += 1
 						else
 							assailant.visible_message("\red [assailant] was unable to tighten \his grip on [affecting]'s neck!")
