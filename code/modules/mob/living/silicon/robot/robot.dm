@@ -201,6 +201,7 @@
 			module_sprites["Red Knight"] = "Security"
 			module_sprites["Black Knight"] = "securityrobot"
 			module_sprites["Bloodhound"] = "bloodhound"
+			module_sprites["Mark II"] = "droid-combat"
 
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
@@ -1247,9 +1248,11 @@
 	else
 		src << "Something is badly wrong with the sprite selection. Harass a coder."
 		icon_state = module_sprites[1]
+		base_icon = icon_state
 		return
 
 	overlays -= "eyes"
+	base_icon = icon_state
 	updateicon()
 
 	if (triesleft >= 1)
