@@ -694,3 +694,9 @@ var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_d
 //proc/get_pulse methods
 #define GETPULSE_HAND	0	//less accurate (hand)
 #define GETPULSE_TOOL	1	//more accurate (med scanner, sleeper, etc)
+
+var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accessed by preexisting terminals. AIs and new terminals can't use them.
+	"thunder",
+	"ERT",
+	"NUKE"
+	)
