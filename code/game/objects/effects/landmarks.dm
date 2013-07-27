@@ -73,10 +73,6 @@
 			ninjastart += loc
 			del(src)
 
-		if("voxstart")
-			voxstart += loc
-			del(src)
-
 	landmarks_list += src
 	return 1
 
