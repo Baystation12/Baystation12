@@ -54,6 +54,14 @@
 	dizziness = 0
 	jitteriness = 0
 
+	//Check for heist mode kill count.
+	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist) ) )
+		//Check for last assailant's mutantrace.
+		/*if( LAssailant && ( istype( LAssailant,/mob/living/carbon/human ) ) )
+			var/mob/living/carbon/human/V = LAssailant
+			if (V.dna && (V.dna.mutantrace == "vox"))*/ //Not currently feasible due to terrible LAssailant tracking.
+		vox_kills++ //Bad vox. Shouldn't be killing humans.
+
 	if(!gibbed)
 		emote("deathgasp") //let the world KNOW WE ARE DEAD
 
