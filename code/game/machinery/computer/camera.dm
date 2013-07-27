@@ -141,3 +141,9 @@
 	desc = "Used to access the various cameras on the outpost."
 	icon_state = "miningcameras"
 	network = list("MINE")
+
+/obj/machinery/computer/security/engineering
+	name = "Engineering Cameras"
+	desc = "Used to monitor fires and breaches."
+	icon_state = "engineeringcameras"
+	network = list("Power Alarms","Atmosphere Alarms","Fire Alarms")
