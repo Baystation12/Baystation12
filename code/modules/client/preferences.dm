@@ -1135,7 +1135,7 @@ datum/preferences
 
 	proc/copy_to(mob/living/carbon/human/character, safety = 0)
 		if(be_random_name)
-			real_name = random_name()
+			real_name = random_name(gender)
 
 		if(config.humans_need_surnames)
 			var/firstspace = findtext(real_name, " ")
