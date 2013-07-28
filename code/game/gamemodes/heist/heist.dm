@@ -13,10 +13,10 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 /datum/game_mode/heist
 	name = "heist"
 	config_tag = "heist"
-	required_players = 1
-	required_players_secret = 1
-	required_enemies = 1
-	recommended_enemies = 1
+	required_players = 15
+	required_players_secret = 25
+	required_enemies = 4
+	recommended_enemies = 6
 
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
@@ -35,7 +35,7 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	if(!..())
 		return 0
 
-	var/list/candidates = get_players_for_role(BE_OPERATIVE)
+	var/list/candidates = get_players_for_role(BE_RAIDER)
 	var/raider_num = 0
 
 	//Check that we have enough vox.
