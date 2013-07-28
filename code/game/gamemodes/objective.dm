@@ -742,3 +742,172 @@ datum/objective/absorb
 
 /*-------ENDOF CULTIST------*/
 */
+
+//Vox heist objectives.
+
+datum/objective/heist
+	proc/choose_target()
+		return
+
+datum/objective/heist/kidnap
+	choose_target()
+		var/list/roles = list("Chief Engineer","Research Director","Roboticist","Chemist","Station Engineer")
+		var/list/possible_targets = list()
+		var/list/priority_targets = list()
+
+		for(var/datum/mind/possible_target in ticker.minds)
+			if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != 2) && (possible_target.assigned_role != "MODE"))
+				possible_targets += possible_target
+				for(var/role in roles)
+					if(possible_target.assigned_role == role)
+						priority_targets += possible_target
+						continue
+
+		if(priority_targets.len > 0)
+			target = pick(priority_targets)
+		else if(possible_targets.len > 0)
+			target = pick(possible_targets)
+
+		if(target && target.current)
+			explanation_text = "The Shoal has a need for [target.current.real_name], the [target.assigned_role]. Take them alive."
+		else
+			explanation_text = "Free Objective"
+		return target
+
+	check_completion()
+		if(target && target.current)
+			if (target.current.stat == 2)
+				return 0 // They're dead. Fail.
+			//if (!target.current.restrained())
+			//	return 0 // They're loose. Close but no cigar.
+
+			var/area/shuttle/vox/station/A = locate()
+			for(var/mob/living/carbon/human/M in A)
+				if(target.current == M)
+					return 1 //They're restrained on the shuttle. Success.
+		else
+			return 0
+
+datum/objective/heist/loot
+	choose_target()
+
+		if(pick("hardware","weapons") == "hardware")
+			target = pick("a complete particle accelerator","a gravitational generator","four emitters","a nuclear bomb")
+		else
+			target = pick("six guns","four energy guns","two laser guns","an ion gun")
+
+		explanation_text = "We are lacking in hardware. Steal [target]."
+
+		switch(target)
+			if("a complete particle accelerator")
+				target = /obj/structure/particle_accelerator
+				target_amount = 6
+			if("a gravitational generator")
+				target = /obj/machinery/the_singularitygen
+				target_amount = 1
+			if("four emitters")
+				target = /obj/machinery/power/emitter
+				target_amount = 4
+			if("a nuclear bomb")
+				target = /obj/machinery/nuclearbomb
+				target_amount = 1
+			if("six guns")
+				target = /obj/item/weapon/gun
+				target_amount = 6
+			if("four energy guns")
+				target = /obj/item/weapon/gun/energy
+				target_amount = 4
+			if("two laser guns")
+				target = /obj/item/weapon/gun/energy/laser
+				target_amount = 2
+			if("an ion gun")
+				target = /obj/item/weapon/gun/energy/ionrifle
+				target_amount = 1
+
+	check_completion()
+
+		var/total_amount = 0
+
+		for(var/obj/O in locate(/area/shuttle/vox/station))
+			if(istype(O,target)) total_amount++
+			if(total_amount >= target_amount) return 1
+
+		var/datum/game_mode/heist/H = ticker.mode
+		for(var/datum/mind/raider in H.raiders)
+			if(raider.current)
+				for(var/obj/O in raider.current.get_contents())
+					if(istype(O,target)) total_amount++
+					if(total_amount >= target_amount) return 1
+
+		return 0
+
+datum/objective/heist/salvage
+
+	choose_target()
+		var/list/possible_items = list("300 metal sheets","200 glass sheets","100 plasteel sheets","100 units of solid plasma","50 silver bars","20 gold bars","20 uranium bars","20 diamonds")
+		target = pick(possible_items)
+		explanation_text = "Ransack the station and escape with [target]."
+
+		switch(target)
+			if("300 metal sheets")
+				target = "metal"
+				target_amount = 300
+			if("200 glass sheets")
+				target = "glass"
+				target_amount = 200
+			if("100 plasteel sheets")
+				target = "plasteel"
+				target_amount = 100
+			if("100 units of solid plasma")
+				target = "plasma"
+				target_amount = 100
+			if("50 silver bars")
+				target = "silver"
+				target_amount = 50
+			if("20 gold bars")
+				target = "gold"
+				target_amount = 20
+			if("20 uranium bars")
+				target = "uranium"
+				target_amount = 20
+			if("20 diamonds")
+				target = "diamond"
+				target_amount = 20
+
+
+	check_completion()
+
+		var/total_amount = 0
+
+		for(var/obj/item/O in locate(/area/shuttle/vox/station))
+			if(istype(O,/obj/item/stack/sheet))
+				if(O.name == target)
+					var/obj/item/stack/sheet/S = O
+					total_amount += S.amount
+
+		var/datum/game_mode/heist/H = ticker.mode
+		for(var/datum/mind/raider in H.raiders)
+			if(raider.current)
+				for(var/obj/item/O in raider.current.get_contents())
+					if(istype(O,/obj/item/stack/sheet))
+						if(O.name == target)
+							var/obj/item/stack/sheet/S = O
+							total_amount += S.amount
+
+		if(total_amount >= target_amount) return 1
+		return 0
+
+
+datum/objective/heist/inviolate_crew
+	explanation_text = "Do not leave any Vox behind, alive or dead."
+
+	check_completion()
+		var/datum/game_mode/heist/H = ticker.mode
+		if(H.is_raider_crew_safe()) return 1
+		return 0
+
+datum/objective/heist/inviolate_death
+	explanation_text = "Follow the Inviolate. Minimise death and loss of resources."
+	check_completion()
+		if(vox_kills>5) return 0
+		return 1
