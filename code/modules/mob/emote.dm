@@ -45,6 +45,14 @@
 
 /mob/proc/emote_dead(var/message)
 
+	if(client.prefs.muted & MUTE_DEADCHAT)
+		src << "\red You cannot send deadchat emotes (muted)."
+		return
+
+	if(!(client.prefs.toggles & CHAT_DEAD))
+		src << "\red You have deadchat muted."
+		return
+
 	var/input
 	if(!message)
 		input = copytext(sanitize(input(src, "Choose an emote to display.") as text|null), 1, MAX_MESSAGE_LEN)
@@ -64,8 +72,8 @@
 			if(istype(M, /mob/new_player))
 				continue
 
-			if(M.client && M.client.holder && (M.client.holder.rights & R_ADMIN|R_MOD) && (M.client.prefs.toggles & CHAT_DEAD))
+			if(M.client && M.client.holder && (M.client.holder.rights & R_ADMIN|R_MOD) && (M.client.prefs.toggles & CHAT_DEAD)) // Show the emote to admins/mods
 				M << message
 
-			else if(M.stat == DEAD)
+			else if(M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD)) // Show the emote to regular ghosts with deadchat toggled on
 				M.show_message(message, 2)
