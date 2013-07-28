@@ -7,9 +7,6 @@ VOX HEIST ROUNDTYPE
 
 var/global/vox_kills = 0 //Used to check the Inviolate.
 
-/datum/game_mode
-	var/list/datum/mind/raiders = list()
-
 /datum/game_mode/heist
 	name = "heist"
 	config_tag = "heist"
@@ -21,7 +18,9 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
 
-	var/list/raid_objectives = list() //Raid objectives.
+	var/list/raid_objectives = list()     //Raid objectives.
+	var/list/datum/mind/raiders = list()  //Antags.
+	var/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' objective.
 
 /datum/game_mode/heist/announce()
 	world << "<B>The current game mode is - Heist!</B>"
@@ -111,14 +110,14 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()
 
-/datum/game_mode/heist/declare_completion()
-
 /datum/game_mode/heist/proc/is_raider_crew_safe()
 
-	for(var/datum/mind/raider in raiders)
-		if(raider.current)
-			if (get_area(raider.current) != locate(/area/shuttle/vox/station))
-				return 0
+	if(cortical_stacks.len == 0)
+		return 0
+
+	for(var/obj/stack in cortical_stacks)
+		if (get_area(stack) != locate(/area/shuttle/vox/station))
+			return 0
 	return 1
 
 /datum/game_mode/heist/proc/is_raider_crew_alive()
@@ -170,7 +169,9 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 
 /datum/game_mode/heist/proc/greet_vox(var/datum/mind/raider)
 	raider.current << "\blue <B>You are a Vox Raider, fresh from the Shoal!</b>"
-	raider.current << "\blue Don't forget to turn on your nitrogen internals."
+	raider.current << "\blue The Vox are a race of cunning, sharp-eyed nomadic raiders and traders endemic to Tau Ceti and much of the unexplored galaxy. You and the crew have come to the Exodus for plunder, trade or both."
+	raider.current << "\blue Vox are cowardly and will flee from larger groups, but corner one or find them en masse and they are vicious."
+	raider.current << "\blue Use :V to voxtalk, :H to talk on your encrypted channel, and don't forget to turn on your nitrogen internals!"
 	var/obj_count = 1
 	for(var/datum/objective/objective in raider.objectives)
 		raider.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
