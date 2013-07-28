@@ -128,7 +128,7 @@
 		return
 	if(killing)
 		return
-	if (assailant.last_click + assailant.click_delay < world.time)
+	if (assailant.last_click + assailant.click_delay > world.time)
 		return
 	if ((!( assailant.canmove ) || assailant.lying))
 		//SN src = null
