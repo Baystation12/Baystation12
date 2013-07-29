@@ -33,6 +33,7 @@ var/global/vox_tick = 1
 			equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(src), slot_belt)
 			equip_to_slot_or_del(new /obj/item/clothing/glasses/meson(src), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
 			equip_to_slot_or_del(new /obj/item/weapon/storage/box/emps(src), slot_l_store)
+			equip_to_slot_or_del(new /obj/item/device/multitool(src), slot_l_hand)
 
 			var/obj/item/weapon/storage/pneumatic/W = new(src)
 			W.tank = new /obj/item/weapon/tank/nitrogen(W)
@@ -44,7 +45,8 @@ var/global/vox_tick = 1
 			equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(src), slot_belt)
 			equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/monocle(src), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
 			equip_to_slot_or_del(new /obj/item/weapon/card/emag(src), slot_l_store)
-			equip_to_slot_or_del(new /obj/item/weapon/gun/dartgun/vox/raider, slot_r_hand)
+			equip_to_slot_or_del(new /obj/item/weapon/gun/dartgun/vox/raider(src), slot_r_hand)
+			equip_to_slot_or_del(new /obj/item/device/multitool(src), slot_l_hand)
 
 		if(4) // Vox medic!
 			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/pressure(src), slot_wear_suit)
