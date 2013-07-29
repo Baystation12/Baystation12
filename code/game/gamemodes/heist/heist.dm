@@ -7,9 +7,6 @@ VOX HEIST ROUNDTYPE
 
 var/global/vox_kills = 0 //Used to check the Inviolate.
 
-/datum/game_mode
-	var/list/datum/mind/raiders = list()
-
 /datum/game_mode/heist
 	name = "heist"
 	config_tag = "heist"
@@ -21,7 +18,9 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
 
-	var/list/raid_objectives = list() //Raid objectives.
+	var/list/raid_objectives = list()     //Raid objectives.
+	var/list/datum/mind/raiders = list()  //Antags.
+	var/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' objective.
 
 /datum/game_mode/heist/announce()
 	world << "<B>The current game mode is - Heist!</B>"
@@ -111,14 +110,14 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()
 
-/datum/game_mode/heist/declare_completion()
-
 /datum/game_mode/heist/proc/is_raider_crew_safe()
 
-	for(var/datum/mind/raider in raiders)
-		if(raider.current)
-			if (get_area(raider.current) != locate(/area/shuttle/vox/station))
-				return 0
+	if(cortical_stacks.len == 0)
+		return 0
+
+	for(var/obj/stack in cortical_stacks)
+		if (get_area(stack) != locate(/area/shuttle/vox/station))
+			return 0
 	return 1
 
 /datum/game_mode/heist/proc/is_raider_crew_alive()
