@@ -169,7 +169,9 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 
 /datum/game_mode/heist/proc/greet_vox(var/datum/mind/raider)
 	raider.current << "\blue <B>You are a Vox Raider, fresh from the Shoal!</b>"
-	raider.current << "\blue Don't forget to turn on your nitrogen internals."
+	raider.current << "\blue The Vox are a race of cunning, sharp-eyed nomadic raiders and traders endemic to Tau Ceti and much of the unexplored galaxy. You and the crew have come to the Exodus for plunder, trade or both."
+	raider.current << "\blue Vox are cowardly and will flee from larger groups, but corner one or find them en masse and they are vicious."
+	raider.current << "\blue Use :V to voxtalk, :H to talk on your encrypted channel, and don't forget to turn on your nitrogen internals!"
 	var/obj_count = 1
 	for(var/datum/objective/objective in raider.objectives)
 		raider.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
