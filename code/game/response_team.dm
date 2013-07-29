@@ -33,7 +33,6 @@ var/global/send_emergency_team = 0 // Used for automagic response teams
 		usr << "\red Looks like somebody beat you to it!"
 		return
 
-	send_emergency_team = 1
 	message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
 	trigger_armed_response_team(1)
@@ -258,6 +257,12 @@ proc/trigger_armed_response_team(var/force = 0)
 
 	//Special radio setup
 	equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(src), slot_ears)
+
+	//Adding Camera Network
+	var/obj/machinery/camera/camera = new /obj/machinery/camera(src) //Gives all the commandos internals cameras.
+	camera.network = "CREED"
+	camera.c_tag = real_name
+
 
 	//Replaced with new ERT uniform
 	equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(src), slot_w_uniform)
