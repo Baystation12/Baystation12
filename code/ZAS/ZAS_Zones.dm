@@ -2,129 +2,124 @@ var/list/zones = list()
 var/list/DoorDirections = list(NORTH,WEST) //Which directions doors turfs can connect to zones
 var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs can connect to zones
 
-zone
-
-	var
-		dbg_output = 0 //Enables debug output.
-		rebuild = 0 //If 1, zone will be rebuilt on next process. Not sure if used.
-		datum/gas_mixture/air //The air contents of the zone.
-		list/contents //All the tiles that are contained in this zone.
-		list/connections // /connection objects which refer to connections with other zones, e.g. through a door.
-		list/connected_zones //Parallels connections, but lists zones to which this one is connected and the number
+/zone
+	var/dbg_output = 0 //Enables debug output.
+	var/rebuild = 0 //If 1, zone will be rebuilt on next process. Not sure if used.
+	var/datum/gas_mixture/air //The air contents of the zone.
+	var/list/contents //All the tiles that are contained in this zone.
+	var/list/connections // /connection objects which refer to connections with other zones, e.g. through a door.
+	var/list/connected_zones //Parallels connections, but lists zones to which this one is connected and the number
 							//of points they're connected at.
-		list/closed_connection_zones //Same as connected_zones, but for zones where the door or whatever is closed.
-		list/unsimulated_tiles // Any space tiles in this list will cause air to flow out.
-		last_update = 0
-		progress = "nothing"
-
-		// To make sure you're not spammed to death by airflow sound effects
-		tmp/playsound_cooldown = 0
+	var/list/closed_connection_zones //Same as connected_zones, but for zones where the door or whatever is closed.
+	var/list/unsimulated_tiles // Any space tiles in this list will cause air to flow out.
+	var/last_update = 0
+	var/progress = "nothing"
 
 
 //CREATION AND DELETION
-	New(turf/start)
-		. = ..()
-		//Get the turfs that are part of the zone using a floodfill method
-		if(istype(start,/list))
-			contents = start
-		else
-			contents = FloodFill(start)
+/zone/New(turf/start)
+	. = ..()
+	//Get the turfs that are part of the zone using a floodfill method
+	if(istype(start,/list))
+		contents = start
+	else
+		contents = FloodFill(start)
 
-		//Change all the zone vars of the turfs, check for space to be added to unsimulated_tiles.
-		for(var/turf/T in contents)
-			if(T.zone && T.zone != src)
-				T.zone.RemoveTurf(T)
-			T.zone = src
-			if(!istype(T,/turf/simulated))
-				AddTurf(T)
+	//Change all the zone vars of the turfs, check for space to be added to unsimulated_tiles.
+	for(var/turf/T in contents)
+		if(T.zone && T.zone != src)
+			T.zone.RemoveTurf(T)
+		T.zone = src
+		if(!istype(T,/turf/simulated))
+			AddTurf(T)
 
-		//Generate the gas_mixture for use in txhis zone by using the average of the gases
-		//defined at startup.
-		air = new
-		var/members = contents.len
-		for(var/turf/simulated/T in contents)
-			air.oxygen += T.oxygen / members
-			air.nitrogen += T.nitrogen / members
-			air.carbon_dioxide += T.carbon_dioxide / members
-			air.toxins += T.toxins / members
-			air.temperature += T.temperature / members
-		air.group_multiplier = contents.len
-		air.update_values()
+	//Generate the gas_mixture for use in txhis zone by using the average of the gases
+	//defined at startup.
+	air = new
+	var/members = contents.len
+	for(var/turf/simulated/T in contents)
+		air.oxygen += T.oxygen / members
+		air.nitrogen += T.nitrogen / members
+		air.carbon_dioxide += T.carbon_dioxide / members
+		air.toxins += T.toxins / members
+		air.temperature += T.temperature / members
+	air.group_multiplier = contents.len
+	air.update_values()
 
-		//Add this zone to the global list.
-		zones.Add(src)
+	//Add this zone to the global list.
+	zones.Add(src)
 
 
 	//LEGACY, DO NOT USE.  Use the SoftDelete proc.
-	Del()
-		//Ensuring the zone list doesn't get clogged with null values.
-		for(var/turf/simulated/T in contents)
-			RemoveTurf(T)
-			air_master.tiles_to_reconsider_zones += T
-		for(var/zone/Z in connected_zones)
-			if(src in Z.connected_zones)
-				Z.connected_zones.Remove(src)
-		for(var/connection/C in connections)
-			air_master.connections_to_check += C
-		zones.Remove(src)
-		air = null
-		. = ..()
+/zone/Del()
+	//Ensuring the zone list doesn't get clogged with null values.
+	for(var/turf/simulated/T in contents)
+		RemoveTurf(T)
+		air_master.tiles_to_reconsider_zones += T
+	for(var/zone/Z in connected_zones)
+		if(src in Z.connected_zones)
+			Z.connected_zones.Remove(src)
+	for(var/connection/C in connections)
+		air_master.connections_to_check += C
+	zones.Remove(src)
+	air = null
+	. = ..()
 
 
 	//Handles deletion via garbage collection.
-	proc/SoftDelete()
-		zones.Remove(src)
-		air = null
+/zone/proc/SoftDelete()
+	zones.Remove(src)
+	air = null
 
-		//Ensuring the zone list doesn't get clogged with null values.
-		for(var/turf/simulated/T in contents)
-			RemoveTurf(T)
-			air_master.tiles_to_reconsider_zones += T
+	//Ensuring the zone list doesn't get clogged with null values.
+	for(var/turf/simulated/T in contents)
+		RemoveTurf(T)
+		air_master.tiles_to_reconsider_zones += T
 
-		//Removing zone connections and scheduling connection cleanup
-		for(var/zone/Z in connected_zones)
-			if(src in Z.connected_zones)
-				Z.connected_zones.Remove(src)
-		for(var/connection/C in connections)
-			air_master.connections_to_check += C
+	//Removing zone connections and scheduling connection cleanup
+	for(var/zone/Z in connected_zones)
+		if(src in Z.connected_zones)
+			Z.connected_zones.Remove(src)
+	for(var/connection/C in connections)
+		air_master.connections_to_check += C
 
-		return 1
+	return 1
 
 
 //ZONE MANAGEMENT FUNCTIONS
-	proc/AddTurf(turf/T)
-		//Adds the turf to contents, increases the size of the zone, and sets the zone var.
-		if(istype(T, /turf/simulated))
-			if(T in contents)
-				return
-			if(T.zone)
-				T.zone.RemoveTurf(T)
-			contents += T
-			if(air)
-				air.group_multiplier++
-			T.zone = src
-		else
-			if(!unsimulated_tiles)
-				unsimulated_tiles = list()
-			else if(T in unsimulated_tiles)
-				return
-			unsimulated_tiles += T
-			contents -= T
+/zone/proc/AddTurf(turf/T)
+	//Adds the turf to contents, increases the size of the zone, and sets the zone var.
+	if(istype(T, /turf/simulated))
+		if(T in contents)
+			return
+		if(T.zone)
+			T.zone.RemoveTurf(T)
+		contents += T
+		if(air)
+			air.group_multiplier++
+		T.zone = src
+	else
+		if(!unsimulated_tiles)
+			unsimulated_tiles = list()
+		else if(T in unsimulated_tiles)
+			return
+		unsimulated_tiles += T
+		contents -= T
 
-	proc/RemoveTurf(turf/T)
-		//Same, but in reverse.
-		if(istype(T, /turf/simulated))
-			if(!(T in contents))
-				return
-			contents -= T
-			if(air)
-				air.group_multiplier--
-			if(T.zone == src)
-				T.zone = null
-		else if(unsimulated_tiles)
-			unsimulated_tiles -= T
-			if(!unsimulated_tiles.len)
-				unsimulated_tiles = null
+/zone/proc/RemoveTurf(turf/T)
+	//Same, but in reverse.
+	if(istype(T, /turf/simulated))
+		if(!(T in contents))
+			return
+		contents -= T
+		if(air)
+			air.group_multiplier--
+		if(T.zone == src)
+			T.zone = null
+	else if(unsimulated_tiles)
+		unsimulated_tiles -= T
+		if(!unsimulated_tiles.len)
+			unsimulated_tiles = null
 
   //////////////
  //PROCESSING//
@@ -132,7 +127,7 @@ zone
 
 #define QUANTIZE(variable)		(round(variable,0.0001))
 
-zone/proc/process()
+/zone/proc/process()
 	. = 1
 
 	progress = "problem with: SoftDelete()"
@@ -171,15 +166,6 @@ zone/proc/process()
 				RemoveTurf(T)
 		if(unsimulated_tiles)
 			var/moved_air = ShareSpace(air,unsimulated_tiles)
-
-			// Only play a sound effect every once in a while
-			if(playsound_cooldown <= world.time)
-				// Play a nice sound effect at one of the bordering turfs
-
-				playsound_cooldown = world.time + rand(30, 70)
-
-				var/turf/random_border = pick(contents)
-				play_wind_sound(random_border, abs(moved_air))
 
 			if(moved_air > vsc.airflow_lightest_pressure)
 				AirflowSpace(src)
@@ -262,15 +248,6 @@ zone/proc/process()
 			if(air && Z.air)
 				//Ensure we're not doing pointless calculations on equilibrium zones.
 				var/moles_delta = abs(air.total_moles() - Z.air.total_moles())
-				if(moles_delta > 0.1)
-					// Only play a sound effect every once in a while
-					if(playsound_cooldown <= world.time)
-						// Play a nice sound effect at one of the bordering turfs
-
-						playsound_cooldown = world.time + rand(30, 70)
-
-						var/turf/random_border = pick(contents)
-						play_wind_sound(random_border, abs(moles_delta))
 				if(moles_delta > 0.1 || abs(air.temperature - Z.air.temperature) > 0.1)
 					if(abs(Z.air.return_pressure() - air.return_pressure()) > vsc.airflow_lightest_pressure)
 						Airflow(src,Z)
@@ -542,22 +519,6 @@ zone/proc/Rebuild()
 				var/turf/simulated/T = get_step(S,direction)
 				if(istype(T) && T.zone && S.CanPass(null, T, 0, 0))
 					T.zone.AddTurf(S)
-
-
-proc/play_wind_sound(var/turf/random_border, var/n)
-	if(random_border)
-		var/windsound = 'sound/effects/wind/wind_2_1.ogg'
-		switch(n)
-			if(31 to 40)
-				windsound = pick('sound/effects/wind/wind_2_1.ogg', 'sound/effects/wind/wind_2_2.ogg')
-			if(41 to 50)
-				windsound = pick('sound/effects/wind/wind_3_1.ogg')
-			if(51 to 60)
-				windsound = pick('sound/effects/wind/wind_4_1.ogg', 'sound/effects/wind/wind_4_2.ogg')
-			if(61 to 1000000)
-				windsound = pick('sound/effects/wind/wind_5_1.ogg')
-
-		playsound(random_border, windsound, 50, 1, 1)
 
 //UNUSED
 /*
