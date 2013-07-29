@@ -1114,9 +1114,9 @@ mob/living/carbon/human/yank_out_object()
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
-	if(!isliving(usr) || usr.next_move > world.time)
+	if(!isliving(usr) || usr.last_click + usr.click_delay > world.time)
 		return
-	usr.next_move = world.time + 20
+	usr.delay_click(20)
 
 	if(usr.stat == 1)
 		usr << "You are unconcious and cannot do that!"
@@ -1213,3 +1213,36 @@ mob/living/carbon/human/yank_out_object()
 				organ.status |= ORGAN_BLEEDING
 				organ.take_damage(rand(1,3), 0, 0)
 				src.adjustToxLoss(rand(1,3))
+
+/mob/living/carbon/human/verb/check_pulse()
+	set category = "Object"
+	set name = "Check pulse"
+	set desc = "Approximately count somebody's pulse. Requires you to stand still at least 6 seconds."
+	set src in view(1)
+	var/self = 0
+
+	if(usr.stat == 1 || usr.restrained() || !isliving(usr)) return
+
+	if(usr == src)
+		self = 1
+	if(!self)
+		usr.visible_message("\blue [usr] kneels down, puts \his hand on [src]'s wrist and begins counting their pulse.",\
+		"You begin counting [src]'s pulse")
+	else
+		usr.visible_message("\blue [usr] begins counting their pulse.",\
+		"You begin counting your pulse.")
+
+	if(src.pulse)
+		usr << "\blue [self ? "You have a" : "[src] has a"] pulse! Counting..."
+	else
+		usr << "\red [src] has no pulse!"	//it is REALLY UNLIKELY that a dead person would check his own pulse
+		return
+
+	usr << "Don't move until counting is finished."
+	var/time = world.timeofday
+	sleep(60)
+	if(usr.l_move_time >= time)	//checks if our mob has moved during the sleep()
+		usr << "You moved while counting. Try again."
+	else
+		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
+

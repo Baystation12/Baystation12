@@ -48,7 +48,7 @@
 	//var/list/laws = list()
 	var/alarms = list("Motion"=list(), "Fire"=list(), "Atmosphere"=list(), "Power"=list(), "Camera"=list())
 	var/viewalerts = 0
-	var/modtype = "robot"
+	var/modtype = "Default"
 	var/lower_mod = 0
 	var/jetpack = 0
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
@@ -87,7 +87,7 @@
 		module = new /obj/item/weapon/robot_module/syndicate(src)
 		hands.icon_state = "standard"
 		icon_state = "secborg"
-		modtype = "Synd"
+		modtype = "Security"
 	else
 		laws = new /datum/ai_laws/nanotrasen()
 		connected_ai = select_active_ai_with_fewest_borgs()
@@ -102,7 +102,7 @@
 	if(!scrambledcodes && !camera)
 		camera = new /obj/machinery/camera(src)
 		camera.c_tag = real_name
-		camera.network = list("SS13")
+		camera.network = list("SS13","Robots")
 		if(isWireCut(5)) // 5 = BORG CAMERA
 			camera.status = 0
 
@@ -151,7 +151,7 @@
 	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
-	var/mod = input("Please, select a module!", "Robot", null, null) in modules
+	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
 	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
 	var/channels = list()
@@ -159,17 +159,15 @@
 	if(module)
 		return
 
-	switch(mod)
+	switch(modtype)
 		if("Standard")
 			module = new /obj/item/weapon/robot_module/standard(src)
-			modtype = "Stand"
 			module_sprites["Basic"] = "robot_old"
 			module_sprites["Android"] = "droid"
 			module_sprites["Default"] = "robot"
 
 		if("Service")
 			module = new /obj/item/weapon/robot_module/butler(src)
-			modtype = "Butler"
 			module_sprites["Waitress"] = "Service"
 			module_sprites["Kent"] = "toiletbot"
 			module_sprites["Bro"] = "Brobot"
@@ -178,16 +176,18 @@
 
 		if("Miner")
 			module = new /obj/item/weapon/robot_module/miner(src)
-			modtype = "Miner"
 			channels = list("Supply" = 1)
+			if(camera && "Robots" in camera.network)
+				camera.network.Add("MINE")
 			module_sprites["Basic"] = "Miner_old"
 			module_sprites["Advanced Droid"] = "droid-miner"
 			module_sprites["Treadhead"] = "Miner"
 
 		if("Medical")
 			module = new /obj/item/weapon/robot_module/medical(src)
-			modtype = "Med"
 			channels = list("Medical" = 1)
+			if(camera && "Robots" in camera.network)
+				camera.network.Add("Medical")
 			module_sprites["Basic"] = "Medbot"
 			module_sprites["Advanced Droid"] = "droid-medical"
 			module_sprites["Needles"] = "medicalrobot"
@@ -195,17 +195,14 @@
 
 		if("Security")
 			module = new /obj/item/weapon/robot_module/security(src)
-			modtype = "Sec"
 			channels = list("Security" = 1)
 			module_sprites["Basic"] = "secborg"
 			module_sprites["Red Knight"] = "Security"
 			module_sprites["Black Knight"] = "securityrobot"
 			module_sprites["Bloodhound"] = "bloodhound"
-			module_sprites["Mark II"] = "droid-combat"
 
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
-			modtype = "Eng"
 			channels = list("Engineering" = 1)
 			module_sprites["Basic"] = "Engineering"
 			module_sprites["Antique"] = "engineerrobot"
@@ -213,26 +210,24 @@
 
 		if("Janitor")
 			module = new /obj/item/weapon/robot_module/janitor(src)
-			modtype = "Jan"
 			module_sprites["Basic"] = "JanBot2"
 			module_sprites["Mopbot"]  = "janitorrobot"
 			module_sprites["Mop Gear Rex"] = "mopgearrex"
 
 		if("Combat")
 			module = new /obj/item/weapon/robot_module/combat(src)
-			modtype = "Com"
 			module_sprites["Combat Android"] = "droid-combat"
 			channels = list("Security" = 1)
 
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
-		module_sprites["Custom"] = "[src.ckey]-[mod]"
+		module_sprites["Custom"] = "[src.ckey]-[modtype]"
 
-	hands.icon_state = lowertext(mod)
-	feedback_inc("cyborg_[lowertext(mod)]",1)
-	updatename(mod)
+	hands.icon_state = lowertext(modtype)
+	feedback_inc("cyborg_[lowertext(modtype)]",1)
+	updatename()
 
-	if(mod == "Medical" || mod == "Security" || mod == "Combat")
+	if(modtype == "Medical" || modtype == "Security" || modtype == "Combat")
 		status_flags &= ~CANPUSH
 
 	choose_icon(6,module_sprites)
@@ -240,7 +235,8 @@
 	base_icon = icon_state
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
-
+	if(prefix)
+		modtype = prefix
 	if(istype(mmi, /obj/item/device/mmi/posibrain))
 		braintype = "Android"
 	else
@@ -250,7 +246,7 @@
 	if(custom_name)
 		changed_name = custom_name
 	else
-		changed_name = "[(prefix ? "[prefix] " : "")][braintype]-[num2text(ident)]"
+		changed_name = "[modtype] [braintype]-[num2text(ident)]"
 	real_name = changed_name
 	name = real_name
 
@@ -288,7 +284,7 @@
 		if (newname != "")
 			custom_name = newname
 
-		updatename("Default")
+		updatename()
 		updateicon()
 
 /mob/living/silicon/robot/verb/cmd_robot_alerts()
@@ -1183,12 +1179,8 @@
 	scrambledcodes = 1
 	//Disconnect it's camera so it's not so easily tracked.
 	if(src.camera)
-		del(src.camera)
-		src.camera = null
-		// I'm trying to get the Cyborg to not be listed in the camera list
-		// Instead of being listed as "deactivated". The downside is that I'm going
-		// to have to check if every camera is null or not before doing anything, to prevent runtime errors.
-		// I could change the network to null but I don't know what would happen, and it seems too hacky for me.
+		src.camera.network = list()
+		cameranet.removeCamera(src.camera)
 
 
 /mob/living/silicon/robot/proc/ResetSecurityCodes()
