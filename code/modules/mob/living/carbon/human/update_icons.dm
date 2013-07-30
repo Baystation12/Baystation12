@@ -220,14 +220,14 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	var/husk_color_mod = rgb(96,88,80)
 	var/hulk_color_mod = rgb(48,224,40)
-	var/plant_color_mod = rgb(144,224,144)
+	//var/plant_color_mod = rgb(144,224,144)
 	var/necrosis_color_mod = rgb(10,50,0)
 
 	var/husk = (HUSK in src.mutations)  //100% unnecessary -Agouri	//nope, do you really want to iterate through src.mutations repeatedly? -Pete
 	var/fat = (FAT in src.mutations)
 	var/hulk = (HULK in src.mutations)
 	var/skeleton = (SKELETON in src.mutations)
-	var/plant = (PLANT in src.mutations)
+	var/plant = (PLANT in src.mutations || (dna && dna.mutantrace == "plant"))
 
 	var/g = "m"
 	if(gender == FEMALE)	g = "f"
@@ -240,8 +240,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 		else if(hulk)
 			var/list/TONE = ReadRGB(hulk_color_mod)
 			stand_icon.MapColors(rgb(TONE[1],0,0),rgb(0,TONE[2],0),rgb(0,0,TONE[3]))
-		else if(plant)
-			stand_icon.ColorTone(plant_color_mod)
+		//else if(plant)
+		//	stand_icon.ColorTone(plant_color_mod)
 
 	var/datum/organ/external/head = get_organ("head")
 	var/has_head = 0
@@ -269,8 +269,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 				else if(hulk)
 					var/list/TONE = ReadRGB(hulk_color_mod)
 					temp.MapColors(rgb(TONE[1],0,0),rgb(0,TONE[2],0),rgb(0,0,TONE[3]))
-				else if(plant)
-					temp.ColorTone(plant_color_mod)
+				//else if(plant)
+				//	temp.ColorTone(plant_color_mod)
 
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
@@ -320,7 +320,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		stand_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[lip_style]_s"), ICON_OVERLAY)
 
 	//Underwear
-	if(underwear >0 && underwear < 12 && (src.dna.mutantrace != "vox" && src.dna.mutantrace != "kidan"))
+	if(underwear >0 && underwear < 12 && (src.dna.mutantrace != "vox" && src.dna.mutantrace != "plant" && src.dna.mutantrace != "kidan"))
 		if(!fat && !skeleton)
 			stand_icon.Blend(new /icon('icons/mob/human.dmi', "underwear[underwear]_[g]_s"), ICON_OVERLAY)
 
@@ -440,11 +440,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 			if("skrell")
 				race_icon = 'icons/mob/human_races/r_skrell.dmi'
 				deform_icon = 'icons/mob/human_races/r_def_skrell.dmi'
-
 			if("vox")
 				race_icon = 'icons/mob/human_races/r_vox.dmi'
 				deform_icon = 'icons/mob/human_races/r_def_vox.dmi'
-
+			if("plant")
+				race_icon = 'icons/mob/human_races/r_plant.dmi'
+				deform_icon = 'icons/mob/human_races/r_def_plant.dmi'
 			else
 				race_icon = 'icons/mob/human_races/r_human.dmi'
 				deform_icon = 'icons/mob/human_races/r_def_human.dmi'
@@ -459,12 +460,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 		//	if("lizard","tajaran","skrell")
 		//		overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/species.dmi', "icon_state" = "[dna.mutantrace]_[gender]_l")
 		//		overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/species.dmi', "icon_state" = "[dna.mutantrace]_[gender]_s")
-			if("plant")
-				if(stat == DEAD)	//TODO
-					overlays_lying[MUTANTRACE_LAYER] = image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace]_d")
-				else
-					overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_l")
-					overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_s")
+		//	if("plant")
+		//		if(stat == DEAD)	//TODO
+		//			overlays_lying[MUTANTRACE_LAYER] = image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace]_d")
+		//		else
+		//			overlays_lying[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_l")
+		//			overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_s")
 			else
 				overlays_lying[MUTANTRACE_LAYER]	= null
 				overlays_standing[MUTANTRACE_LAYER]	= null
