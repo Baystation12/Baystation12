@@ -51,7 +51,7 @@
 	//This list tracks characters spawned in the world and cannot be modified in-game. Currently referenced by respawn_character().
 	var/locked[] = list()
 
-	proc/get_manifest(monochrome)
+	proc/get_manifest(monochrome, OOC)
 		var/list/heads = new()
 		var/list/sec = new()
 		var/list/eng = new()
@@ -80,7 +80,15 @@
 			var/name = t.fields["name"]
 			var/rank = t.fields["rank"]
 			var/real_rank = t.fields["real_rank"]
-			isactive[name] = t.fields["p_stat"]
+			if(OOC)
+				var/active = 0
+				for(var/mob/M in player_list)
+					if(M.real_name == name && M.client && M.client.inactivity <= 10 * 60 * 10)
+						active = 1
+						break
+				isactive[name] = active ? "Active" : "Inactive"
+			else
+				isactive[name] = t.fields["p_stat"]
 
 			//world << "[name]: [rank]"
 

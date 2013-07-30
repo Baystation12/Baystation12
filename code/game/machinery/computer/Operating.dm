@@ -13,7 +13,8 @@
 	..()
 	for(dir in list(NORTH,EAST,SOUTH,WEST))
 		table = locate(/obj/machinery/optable, get_step(src, dir))
-		if (!isnull(table))
+		if (table)
+			table.computer = src
 			break
 
 /obj/machinery/computer/operating/attack_ai(mob/user)
