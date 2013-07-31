@@ -260,7 +260,7 @@ proc/trigger_armed_response_team(var/force = 0)
 
 	//Adding Camera Network
 	var/obj/machinery/camera/camera = new /obj/machinery/camera(src) //Gives all the commandos internals cameras.
-	camera.network = "CREED"
+	camera.network = list("CREED")
 	camera.c_tag = real_name
 
 
