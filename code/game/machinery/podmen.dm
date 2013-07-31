@@ -67,7 +67,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	var/mob/ghost
 	var/list/candidates = list()
 
-	user.visible_message("\blue You carefully begin to open the pod..."."[user] carefully begins to open the pod..."
+	user.visible_message("\blue You carefully begin to open the pod...","[user] carefully begins to open the pod...")
 
 	//If a sample is injected (and revival is allowed) the plant will be controlled by the original donor.
 	if(source && source.mind && source.ckey && config.revival_pod_plants)
