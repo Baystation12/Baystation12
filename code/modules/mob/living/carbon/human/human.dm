@@ -5,15 +5,40 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 	var/list/hud_list = list()
-
+	var/datum/species/species //Contains icon generation and language information, set during New().
 
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
 
+/mob/living/carbon/human/skrell/New()
+	h_style = "Skrell Male Tentacles"
+	species = new /datum/species/skrell(src)
+	..()
 
+/mob/living/carbon/human/tajaran/New()
+	h_style = "Tajaran Ears"
+	species = new /datum/species/tajaran(src)
+	..()
+
+/mob/living/carbon/human/unathi/New()
+	h_style = "Unathi Horns"
+	species = new /datum/species/unathi(src)
+	..()
+
+/mob/living/carbon/human/vox/New()
+	h_style = "Short Vox Quills"
+	species = new /datum/species/vox(src)
+	..()
 
 /mob/living/carbon/human/New()
+
+	if(!species)
+		species = new /datum/species/human(src)
+
+	if(species.language)
+		languages += species.language
+
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src

@@ -86,9 +86,9 @@
 	var/lastpuke = 0
 	var/unacidable = 0
 	var/small = 0
-	var/list/pinned = list() //List of things pinning this creature to walls (see living_defense.dm)
-	var/list/embedded = list() //Embedded items, since simple mobs don't have organs.
-
+	var/list/pinned = list()    //List of things pinning this creature to walls (see living_defense.dm)
+	var/list/embedded = list()  //Embedded items, since simple mobs don't have organs.
+	var/list/languages = list() // For speaking/listening.
 	var/name_archive //For admin things like possession
 
 	var/timeofdeath = 0.0//Living
