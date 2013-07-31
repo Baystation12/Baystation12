@@ -256,9 +256,12 @@ client
 			body += "<option value='?_src_=vars;drop_everything=\ref[D]'>Drop Everything</option>"
 
 			body += "<option value='?_src_=vars;regenerateicons=\ref[D]'>Regenerate Icons</option>"
+			body += "<option value='?_src_=vars;addlanguage=\ref[D]'>Add Language</option>"
+			body += "<option value='?_src_=vars;remlanguage=\ref[D]'>Remove Language</option>"
 			if(ishuman(D))
 				body += "<option value>---</option>"
 				body += "<option value='?_src_=vars;setmutantrace=\ref[D]'>Set Mutantrace</option>"
+				body += "<option value='?_src_=vars;setspecies=\ref[D]'>Set Species</option>"
 				body += "<option value='?_src_=vars;makeai=\ref[D]'>Make AI</option>"
 				body += "<option value='?_src_=vars;makerobot=\ref[D]'>Make cyborg</option>"
 				body += "<option value='?_src_=vars;makemonkey=\ref[D]'>Make monkey</option>"
@@ -742,6 +745,63 @@ client
 		if(H.dna)
 			H.dna.mutantrace = new_mutantrace
 			H.update_mutantrace()
+
+	else if(href_list["setspecies"])
+		if(!check_rights(R_SPAWN))	return
+
+		var/mob/living/carbon/human/H = locate(href_list["setspecies"])
+		if(!istype(H))
+			usr << "This can only be done to instances of type /mob/living/carbon/human"
+			return
+
+		var/datum/species/new_species = input("Please choose a new species.","Species",null) as null|anything in (typesof(/datum/species)-/datum/species)
+
+		if(!H)
+			usr << "Mob doesn't exist anymore"
+			return
+
+		if(H.set_species(new new_species))
+			usr << "Set species of [H] to [H.species]."
+		else
+			usr << "Failed! Something went wrong."
+
+	else if(href_list["addlanguage"])
+		if(!check_rights(R_SPAWN))	return
+
+		var/mob/H = locate(href_list["addlanguage"])
+		if(!istype(H))
+			usr << "This can only be done to instances of type /mob"
+			return
+
+		var/datum/language/new_language = input("Please choose a language to add.","Language",null) as null|anything in (typesof(/datum/language)-/datum/language)
+
+		if(!H)
+			usr << "Mob doesn't exist anymore"
+			return
+
+		if(H.add_language(new new_language))
+			usr << "Added [new_language] to [H]."
+		else
+			usr << "Mob already knows that language."
+
+	else if(href_list["remlanguage"])
+		if(!check_rights(R_SPAWN))	return
+
+		var/mob/H = locate(href_list["remlanguage"])
+		if(!istype(H))
+			usr << "This can only be done to instances of type /mob"
+			return
+
+		var/datum/language/rem_language = input("Please choose a language to remove.","Language",null) as null|anything in H.languages
+
+		if(!H)
+			usr << "Mob doesn't exist anymore"
+			return
+
+		if(H.remove_language(rem_language))
+			usr << "Removed [rem_language] from [H]."
+		else
+			usr << "Mob doesn't know that language."
 
 	else if(href_list["regenerateicons"])
 		if(!check_rights(0))	return

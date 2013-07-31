@@ -429,7 +429,17 @@ proc/get_damage_icon_part(damage_state, body_part)
 	var/skeleton = (SKELETON in src.mutations)
 	if(skeleton)
 		race_icon = 'icons/mob/human_races/r_skeleton.dmi'
-	else if(dna)
+
+	//Icon data is kept in species datums within the mob.
+	race_icon = 'icons/mob/human_races/r_human.dmi'
+	deform_icon = 'icons/mob/human_races/r_def_human.dmi'
+
+	if(species.icobase)
+		race_icon = species.icobase
+	if(species.deform)
+		deform_icon = species.deform
+
+	/*else if(dna)
 		switch(dna.mutantrace)
 			if("tajaran")
 				race_icon = 'icons/mob/human_races/r_tajaran.dmi'
@@ -450,7 +460,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 				race_icon = 'icons/mob/human_races/r_human.dmi'
 				deform_icon = 'icons/mob/human_races/r_def_human.dmi'
 	else
-		icon = 'icons/mob/human_races/r_human.dmi'
+		icon = 'icons/mob/human_races/r_human.dmi' */
 
 	if(dna)
 		switch(dna.mutantrace)
