@@ -1,8 +1,42 @@
 //STRIKE TEAMS
+//Thanks to Kilakk for the admin-button portion of this code.
 
 var/list/response_team_members = list()
 var/global/send_emergency_team = 0 // Used for automagic response teams
 // 'admin_emergency_team' for admin-spawned response teams
+
+
+/client/proc/response_team()
+	set name = "Dispatch Emergency Response Team"
+	set category = "Special Verbs"
+	set desc = "Send an emergency response team to the station"
+
+	if(!holder)
+		usr << "\red Only administrators may use this command."
+		return
+	if(!ticker)
+		usr << "\red The game hasn't started yet!"
+		return
+	if(ticker.current_state == 1)
+		usr << "\red The round hasn't started yet!"
+		return
+	if(send_emergency_team)
+		usr << "\red Central Command has already dispatched an emergency response team!"
+		return
+	if(alert("Do you want to dispatch an Emergency Response Team?",,"Yes","No") != "Yes")
+		return
+	if(get_security_level() != "red") // Allow admins to reconsider if the alert level isn't Red
+		switch(alert("The station has not entered code red recently. Do you still want to dispatch a response team?",,"Yes","No"))
+			if("No")
+				return
+	if(send_emergency_team)
+		usr << "\red Looks like somebody beat you to it!"
+		return
+
+	message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
+	log_admin("[key_name(usr)] used Dispatch Response Team.")
+	trigger_armed_response_team(1)
+
 
 client/verb/JoinResponseTeam()
 	set category = "IC"
@@ -11,9 +45,9 @@ client/verb/JoinResponseTeam()
 		if(!send_emergency_team)
 			usr << "No emergency response team is currently being sent."
 			return
-		if(admin_emergency_team)
+	/*	if(admin_emergency_team)
 			usr << "An emergency response team has already been sent."
-			return
+			return */
 		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Security Officer"))
 			usr << "<font color=red><b>You are jobbanned from the emergency reponse team!"
 			return
@@ -69,10 +103,10 @@ proc/percentage_antagonists()
 
 
 proc/trigger_armed_response_team(var/force = 0)
-	if(send_emergency_team || admin_emergency_team)
+	if(send_emergency_team)
 		return
 
-	var/send_team_chance = 20 // base chance that a team will be sent
+	var/send_team_chance = 50 // base chance that a team will be sent
 	send_team_chance += 2*percentage_dead() // the more people are dead, the higher the chance
 	send_team_chance += percentage_antagonists() // the more antagonists, the higher the chance
 	send_team_chance = min(send_team_chance, 100)
@@ -82,7 +116,7 @@ proc/trigger_armed_response_team(var/force = 0)
 	// there's only a certain chance a team will be sent
 	if(!prob(send_team_chance)) return
 
-	command_alert("Sensors indicate that [station_name()] has entered Code Red and is in need of assistance. We will prepare and dispatch an emergency response team to deal with the situation.", "NMV Icarus Command")
+	command_alert("Sensors indicate that [station_name()] has entered Code Red and is in need of assistance. We will prepare and dispatch an emergency response team to deal with the situation.", "Central Command")
 
 	send_emergency_team = 1
 
@@ -223,6 +257,12 @@ proc/trigger_armed_response_team(var/force = 0)
 
 	//Special radio setup
 	equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(src), slot_ears)
+
+	//Adding Camera Network
+	var/obj/machinery/camera/camera = new /obj/machinery/camera(src) //Gives all the commandos internals cameras.
+	camera.network = "CREED"
+	camera.c_tag = real_name
+
 
 	//Replaced with new ERT uniform
 	equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(src), slot_w_uniform)

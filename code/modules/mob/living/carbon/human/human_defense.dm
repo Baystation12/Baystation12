@@ -28,7 +28,7 @@ emp_act
 // END TASER NERF
 
 	if(wear_suit && istype(wear_suit, /obj/item/clothing/suit/armor/laserproof))
-		if(istype(P, /obj/item/projectile/energy) || !(istype(P, /obj/item/projectile/energy/electrode)) || istype(P, /obj/item/projectile/beam))
+		if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
 			var/reflectchance = 40 - round(P.damage/3)
 			if(!(def_zone in list("chest", "groin")))
 				reflectchance /= 2
@@ -67,6 +67,24 @@ emp_act
 		src <<"\red You have been shot!"
 		del P
 //End taser nerf.
+
+//BEGIN BOOK'S TASER NERF.
+	if(istype(P, /obj/item/projectile/energy/electrode))
+		var/datum/organ/external/select_area = get_organ(def_zone) // We're checking the outside, buddy!
+		var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
+		// var/deflectchance=90 //Is it a CRITICAL HIT with that taser?
+		for(var/bp in body_parts) //Make an unregulated var to pass around.
+			if(!bp)
+				continue //Does this thing we're shooting even exist?
+			if(bp && istype(bp ,/obj/item/clothing)) // If it exists, and it's clothed
+				var/obj/item/clothing/C = bp // Then call an argument C to be that clothing!
+				if(C.body_parts_covered & select_area.body_part) // Is that body part being targeted covered?
+					P.agony=P.agony*C.siemens_coefficient
+		apply_effect(P.agony,AGONY,0)
+		flash_pain()
+		src <<"\red You have been shot!"
+		del P
+//END TASER NERF
 
 	if(check_shields(P.damage, "the [P.name]"))
 		P.on_hit(src, 2)
