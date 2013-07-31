@@ -66,7 +66,6 @@ emp_act
 		apply_effect(P.agony,AGONY,0)
 		flash_pain()
 		src <<"\red You have been shot!"
-		del P
 //END TASER NERF
 
 	if(check_shields(P.damage, "the [P.name]"))
