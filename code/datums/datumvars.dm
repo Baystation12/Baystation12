@@ -256,6 +256,7 @@ client
 			body += "<option value='?_src_=vars;drop_everything=\ref[D]'>Drop Everything</option>"
 
 			body += "<option value='?_src_=vars;regenerateicons=\ref[D]'>Regenerate Icons</option>"
+			body += "<option value='?_src_=vars;addlanguage=\ref[D]'>Add Language</option>"
 			if(ishuman(D))
 				body += "<option value>---</option>"
 				body += "<option value='?_src_=vars;setmutantrace=\ref[D]'>Set Mutantrace</option>"
@@ -742,6 +743,32 @@ client
 		if(H.dna)
 			H.dna.mutantrace = new_mutantrace
 			H.update_mutantrace()
+
+	else if(href_list["addlanguage"])
+		if(!check_rights(R_SPAWN))	return
+
+		var/mob/H = locate(href_list["addlanguage"])
+		if(!istype(H))
+			usr << "This can only be done to instances of type /mob"
+			return
+
+		var/datum/language/new_language = input("Please choose a language to add.","Language",null) as null|anything in (typesof(/datum/language)-/datum/language)
+
+		var/already_known
+		for(var/datum/language/L in H.languages)
+			if(L.name == new_language.name)
+				already_known = 1
+				break
+
+		if(!H)
+			usr << "Mob doesn't exist anymore"
+			return
+
+		if(already_known)
+			usr << "Mob already knows that language."
+		else
+			usr << "Adding [new_language] to [H]."
+			H.languages += new new_language
 
 	else if(href_list["regenerateicons"])
 		if(!check_rights(0))	return
