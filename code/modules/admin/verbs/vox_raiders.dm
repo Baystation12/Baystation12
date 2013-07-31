@@ -35,9 +35,6 @@ var/global/vox_tick = 1
 			equip_to_slot_or_del(new /obj/item/weapon/storage/box/emps(src), slot_l_store)
 			equip_to_slot_or_del(new /obj/item/device/multitool(src), slot_l_hand)
 
-			var/obj/item/weapon/storage/pneumatic/W = new(src)
-			W.tank = new /obj/item/weapon/tank/nitrogen(W)
-			equip_to_slot_or_del(W, slot_r_hand)
 
 		if(3) // Vox saboteur!
 			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/carapace(src), slot_wear_suit)

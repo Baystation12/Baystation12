@@ -95,7 +95,7 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 
 		var/mob/living/carbon/human/vox = raider.current
 
-		vox.vox_talk_understand = 1
+		vox.languages += new /datum/language/vox
 		vox.real_name = capitalize(newname)
 		vox.name = vox.real_name
 		vox.age = rand(12,20)

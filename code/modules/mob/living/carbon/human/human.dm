@@ -850,13 +850,13 @@
 /mob/living/carbon/proc/update_mutantrace_languages()
 	if(src.dna)
 		if(src.dna.mutantrace == "lizard")
-			src.soghun_talk_understand = 1
+			src.languages += new /datum/language/unathi
 		else if(src.dna.mutantrace == "skrell")
-			src.skrell_talk_understand = 1
+			src.languages += new /datum/language/skrell
 		else if(src.dna.mutantrace == "tajaran")
-			src.tajaran_talk_understand = 1
+			src.languages += new /datum/language/tajaran
 		else if(src.dna.mutantrace == "vox")
-			src.vox_talk_understand = 1
+			src.languages += new /datum/language/vox
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
