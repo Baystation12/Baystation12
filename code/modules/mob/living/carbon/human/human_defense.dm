@@ -10,7 +10,7 @@ emp_act
 
 /mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
-//Old taser nerf.
+// BEGIN TASER NERF
 					/* Commenting out new-old taser nerf.
 					if(C.siemens_coefficient == 0) //If so, is that clothing shock proof?
 						if(prob(deflectchance))
@@ -50,23 +50,6 @@ emp_act
 					P.xo = new_x - curloc.x
 
 				return -1 // complete projectile permutation
-//Book's taser nerf.
-	if(istype(P, /obj/item/projectile/energy/electrode))
-		var/datum/organ/external/select_area = get_organ(def_zone) // We're checking the outside, buddy!
-		var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
-		// var/deflectchance=90 //Is it a CRITICAL HIT with that taser?
-		for(var/bp in body_parts) //Make an unregulated var to pass around.
-			if(!bp)
-				continue //Does this thing we're shooting even exist?
-			if(bp && istype(bp ,/obj/item/clothing)) // If it exists, and it's clothed
-				var/obj/item/clothing/C = bp // Then call an argument C to be that clothing!
-				if(C.body_parts_covered & select_area.body_part) // Is that body part being targeted covered?
-					P.agony=P.agony*C.siemens_coefficient
-		apply_effect(P.agony,AGONY,0)
-		flash_pain()
-		src <<"\red You have been shot!"
-		del P
-//End taser nerf.
 
 //BEGIN BOOK'S TASER NERF.
 	if(istype(P, /obj/item/projectile/energy/electrode))
