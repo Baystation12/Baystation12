@@ -25,6 +25,8 @@
 		var/datum/organ/external/E = get_organ(organ_name)
 		if(!E || (E.status & ORGAN_DESTROYED))
 			tally += 4
+		if(E.status & ORGAN_SPLINTED)
+			tally += 0.5
 		else if(E.status & ORGAN_BROKEN)
 			tally += 1.5
 
