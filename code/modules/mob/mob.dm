@@ -900,7 +900,7 @@ mob/verb/yank_out_object()
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
-	if(!isliving(usr) || usr.last_click + usr.click_delay < world.time)
+	if(!isliving(usr) || usr.last_click + usr.click_delay > world.time)
 		return
 	usr.delay_click(20)
 

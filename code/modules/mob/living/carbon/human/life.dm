@@ -841,8 +841,7 @@
 		if(status_flags & GODMODE)	return 0	//godmode
 		adjustToxLoss(total_plasmaloss)
 
-//		if(dna && dna.mutantrace == "plant") //couldn't think of a better place to place it, since it handles nutrition -- Urist
-		if(PLANT in mutations)
+		if(PLANT in mutations || (dna && dna.mutantrace == "plant"))
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light
 				var/turf/T = loc
@@ -900,8 +899,7 @@
 			if(overeatduration > 1)
 				overeatduration -= 2 //doubled the unfat rate
 
-//		if(dna && dna.mutantrace == "plant")
-		if(PLANT in mutations)
+		if(PLANT in mutations || (dna && dna.mutantrace == "plant"))
 			if(nutrition < 200)
 				take_overall_damage(2,0)
 
@@ -998,7 +996,7 @@
 						sleeping = max(sleeping-1, 0)
 				blinded = 1
 				stat = UNCONSCIOUS
-				if( prob(10) && health && !hal_crit )
+				if( prob(2) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
 			else if(resting)

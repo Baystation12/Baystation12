@@ -222,7 +222,7 @@
 	slots = 5
 
 /obj/item/clothing/tie/storage/brown_vest
-	name = "black webbing vest"
+	name = "brown webbing vest"
 	desc = "Worn brownish synthcotton vest with lots of pockets to unload your hands."
 	icon_state = "vest_brown"
 	color = "vest_brown"

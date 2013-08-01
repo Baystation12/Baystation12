@@ -600,7 +600,7 @@
 	set name = "Resist"
 	set category = "IC"
 
-	if(!isliving(usr) || usr.last_click + usr.click_delay < world.time)
+	if(!isliving(usr) || usr.last_click + usr.click_delay > world.time)
 		return
 	usr.delay_click(20)
 

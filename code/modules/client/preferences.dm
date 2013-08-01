@@ -15,6 +15,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
 	"ninja" = "true",									 // 10
+	"vox raider" = IS_MODE_COMPILED("heist"),			 // 11
 )
 
 var/const/MAX_SAVE_SLOTS = 10
@@ -1135,7 +1136,7 @@ datum/preferences
 
 	proc/copy_to(mob/living/carbon/human/character, safety = 0)
 		if(be_random_name)
-			real_name = random_name()
+			real_name = random_name(gender)
 
 		if(config.humans_need_surnames)
 			var/firstspace = findtext(real_name, " ")
