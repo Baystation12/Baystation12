@@ -326,11 +326,11 @@
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
 		// slow healing
-		var/heal_amt = 0.2
-		if (W.damage > 20)	//this thing's edges are not in day's travel of each other, what healing?
-			heal_amt = 0
+		var/heal_amt = 0
+		if (W.damage < 15) //this thing's edges are not in day's travel of each other, what healing?
+			heal_amt += 0.2
 
-		if(W.is_treated())
+		if(W.is_treated() && W.damage < 50) //whoa, not even magical band aid can hold it together
 			heal_amt += 0.3
 
 		//we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
