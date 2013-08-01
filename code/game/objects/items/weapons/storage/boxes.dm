@@ -424,6 +424,13 @@
 		W.update_icon()
 		return
 
+/obj/item/weapon/storage/box/injectors
+	name = "box of injectors"
+	desc = "Contains autoinjectors."
+	New()
+		..()
+		for (var/i; i < storage_slots; i++)
+			new /obj/item/weapon/reagent_containers/hypospray/autoinjector(src)
 
 /obj/item/weapon/storage/box/lights
 	name = "replacement bulbs"
