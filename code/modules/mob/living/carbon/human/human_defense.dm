@@ -51,6 +51,10 @@ emp_act
 
 				return -1 // complete projectile permutation
 
+	if(check_shields(P.damage, "the [P.name]"))
+		P.on_hit(src, 2)
+		return 2
+
 //BEGIN BOOK'S TASER NERF.
 	if(istype(P, /obj/item/projectile/energy/electrode))
 		var/datum/organ/external/select_area = get_organ(def_zone) // We're checking the outside, buddy!
@@ -67,11 +71,24 @@ emp_act
 		flash_pain()
 		src <<"\red You have been shot!"
 		del P
+
+		var/obj/item/weapon/cloaking_device/C = locate((/obj/item/weapon/cloaking_device) in src)
+		if(C && C.active)
+			C.attack_self(src)//Should shut it off
+			update_icons()
+			src << "\blue Your [C.name] was disrupted!"
+			Stun(2)
+
+		if(istype(equipped(),/obj/item/device/assembly/signaler))
+			var/obj/item/device/assembly/signaler/signaler = equipped()
+			if(signaler.deadman && prob(80))
+				src.visible_message("\red [src] triggers their deadman's switch!")
+				signaler.signal()
+
+		return
 //END TASER NERF
 
-	if(check_shields(P.damage, "the [P.name]"))
-		P.on_hit(src, 2)
-		return 2
+
 	return (..(P , def_zone))
 
 
