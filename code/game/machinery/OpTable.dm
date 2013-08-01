@@ -18,6 +18,7 @@
 	for(dir in list(NORTH,EAST,SOUTH,WEST))
 		computer = locate(/obj/machinery/computer/operating, get_step(src, dir))
 		if (computer)
+			computer.table = src
 			break
 //	spawn(100) //Wont the MC just call this process() before and at the 10 second mark anyway?
 //		process()
