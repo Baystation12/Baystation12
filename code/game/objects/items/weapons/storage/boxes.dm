@@ -439,9 +439,10 @@
 		W.update_icon()
 		return
 
-/obj/item/weapon/storage/box/injectors
+/obj/item/weapon/storage/box/autoinjectors
 	name = "box of injectors"
 	desc = "Contains autoinjectors."
+	icon_state = "syringe"
 	New()
 		..()
 		for (var/i; i < storage_slots; i++)
