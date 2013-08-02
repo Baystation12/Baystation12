@@ -1198,6 +1198,8 @@ mob/living/carbon/human/yank_out_object()
 /mob/living/carbon/human/proc/handle_embedded_objects()
 
 	for(var/datum/organ/external/organ in src.organs)
+		if(organ.status & ORGAN_SPLINTED) //Splints prevent movement.
+			continue
 		for(var/obj/item/weapon/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
 				// All kinds of embedded objects cause bleeding.
@@ -1211,9 +1213,10 @@ mob/living/carbon/human/yank_out_object()
 						msg ="<span class='warning'>[O] in your [organ.display_name] twists painfully as you move.</span>"
 				src << msg
 
-				organ.status |= ORGAN_BLEEDING
 				organ.take_damage(rand(1,3), 0, 0)
-				src.adjustToxLoss(rand(1,3))
+				if(!(organ.status & ORGAN_ROBOT)) //There is no blood in protheses.
+					organ.status |= ORGAN_BLEEDING
+					src.adjustToxLoss(rand(1,3))
 
 /mob/living/carbon/human/verb/check_pulse()
 	set category = "Object"
