@@ -435,7 +435,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	if ((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 		usr.set_machine(src)
 		if(href_list["set_channel_name"])
-			src.channel_name = strip_html_simple(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", ""))
+			src.channel_name = sanitizeSQL(strip_html_simple(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", "")))
 			while (findtext(src.channel_name," ") == 1)
 				src.channel_name = copytext(src.channel_name,2,lentext(src.channel_name)+1)
 			src.updateUsrDialog()
