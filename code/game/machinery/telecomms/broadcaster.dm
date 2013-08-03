@@ -341,12 +341,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 				freq_text = "Engineering"
 			if(1359)
 				freq_text = "Security"
-//			if(1349)
-//				freq_text = "Mining"
 			if(1347)
 				freq_text = "Supply"
 			if(1441)
-				freq_text = "Death Squad"
+				freq_text = "Special Ops"
 			if(1443)
 				freq_text = "Response Team"
 		//There's probably a way to use the list var of channels in code\game\communications.dm to make the dept channels non-hardcoded, but I wasn't in an experimentive mood. --NEO
@@ -365,10 +363,35 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		var/part_b = "</span><b> \icon[radio]\[[freq_text]\][part_b_extra]</b> <span class='message'>" // Tweaked for security headsets -- TLE
 		var/part_c = "</span></span>"
 
-		if (display_freq==SYND_FREQ)
+		// syndies!
+		if (display_freq == SYND_FREQ)
 			part_a = "<span class='syndradio'><span class='name'>"
-		else if (display_freq==COMM_FREQ)
+
+		// centcomm channels (deathsquid and ert)
+		else if (display_freq in CENT_FREQS)
+			part_a = "<span class='centradio'><span class='name'>"
+
+		// command channel
+		else if (display_freq == COMM_FREQ)
 			part_a = "<span class='comradio'><span class='name'>"
+
+		// department radio formatting (poorly optimized, ugh)
+		else if (display_freq == SEC_FREQ)
+			part_a = "<span class='secradio'><span class='name'>"
+
+		else if (display_freq == ENG_FREQ)
+			part_a = "<span class='engradio'><span class='name'>"
+
+		else if (display_freq == SCI_FREQ)
+			part_a = "<span class='sciradio'><span class='name'>"
+
+		else if (display_freq == MED_FREQ)
+			part_a = "<span class='medradio'><span class='name'>"
+
+		else if (display_freq == SUP_FREQ) // cargo
+			part_a = "<span class='supradio'><span class='name'>"
+
+		// If all else fails and it's a dept_freq, color me purple!
 		else if (display_freq in DEPT_FREQS)
 			part_a = "<span class='deptradio'><span class='name'>"
 
@@ -406,8 +429,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					blackbox.msg_deathsquad += blackbox_msg
 				if(1213)
 					blackbox.msg_syndicate += blackbox_msg
-//				if(1349)
-//					blackbox.msg_mining += blackbox_msg
 				if(1347)
 					blackbox.msg_cargo += blackbox_msg
 				else
@@ -629,8 +650,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 				freq_text = "Engineering"
 			if(1359)
 				freq_text = "Security"
-//			if(1349)
-//				freq_text = "Mining"
 			if(1347)
 				freq_text = "Supply"
 		//There's probably a way to use the list var of channels in code\game\communications.dm to make the dept channels non-hardcoded, but I wasn't in an experimentive mood. --NEO
@@ -685,8 +704,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					blackbox.msg_deathsquad += blackbox_msg
 				if(1213)
 					blackbox.msg_syndicate += blackbox_msg
-//				if(1349)
-//					blackbox.msg_mining += blackbox_msg
 				if(1347)
 					blackbox.msg_cargo += blackbox_msg
 				else

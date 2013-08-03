@@ -163,8 +163,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 	//set reagent data
 	B.data["donor"] = src
-	if(src.virus2)
-		B.data["virus2"] = src.virus2.getcopy()
+	if (!B.data["virus2"])
+		B.data["virus2"] = list()
+	B.data["virus2"] |= virus_copylist(src.virus2)
 	B.data["antibodies"] = src.antibodies
 	B.data["blood_DNA"] = copytext(src.dna.unique_enzymes,1,0)
 	if(src.resistances && src.resistances.len)
@@ -200,7 +201,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	else
 		vessel.add_reagent("blood", amount, injected.data)
 		vessel.update_total()
-
+	src.virus2 |= virus_copylist(injected.data["virus2"])
+	if (injected.data["antibodies"] && prob(5))
+		antibodies |= injected.data["antibodies"]
 	var/list/chems = list()
 	chems = params2list(injected.data["trace_chem"])
 	for(var/C in chems)

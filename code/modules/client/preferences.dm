@@ -15,6 +15,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
 	"ninja" = "true",									 // 10
+	"vox raider" = IS_MODE_COMPILED("heist"),			 // 11
 )
 
 var/const/MAX_SAVE_SLOTS = 10
@@ -99,6 +100,7 @@ datum/preferences
 	var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
+	var/gen_record = ""
 	var/disabilities = 0
 
 	var/nanotrasen_relation = "Neutral"
@@ -492,6 +494,13 @@ datum/preferences
 		else
 			HTML += "[copytext(med_record, 1, 37)]..."
 
+		HTML += "<br><br><a href=\"byond://?src=\ref[user];preference=records;task=gen_record\">Employment Records</a><br>"
+
+		if(lentext(gen_record) <= 40)
+			HTML += "[gen_record]"
+		else
+			HTML += "[copytext(gen_record, 1, 37)]..."
+
 		HTML += "<br><br><a href=\"byond://?src=\ref[user];preference=records;task=sec_record\">Security Records</a><br>"
 
 		if(lentext(sec_record) <= 40)
@@ -731,6 +740,15 @@ datum/preferences
 					secmsg = html_encode(secmsg)
 
 					sec_record = secmsg
+					SetRecords(user)
+			if(href_list["task"] == "gen_record")
+				var/genmsg = input(usr,"Set your employment notes here.","Employment Records",html_decode(gen_record)) as message
+
+				if(genmsg != null)
+					genmsg = copytext(genmsg, 1, MAX_PAPER_MESSAGE_LEN)
+					genmsg = html_encode(genmsg)
+
+					gen_record = genmsg
 					SetRecords(user)
 
 		switch(href_list["task"])
@@ -1118,7 +1136,7 @@ datum/preferences
 
 	proc/copy_to(mob/living/carbon/human/character, safety = 0)
 		if(be_random_name)
-			real_name = random_name()
+			real_name = random_name(gender)
 
 		if(config.humans_need_surnames)
 			var/firstspace = findtext(real_name, " ")
@@ -1136,6 +1154,7 @@ datum/preferences
 		character.flavor_text = flavor_text
 		character.med_record = med_record
 		character.sec_record = sec_record
+		character.gen_record = gen_record
 
 		character.gender = gender
 		character.age = age

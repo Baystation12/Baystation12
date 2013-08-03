@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/weapon/reagent_containers/glass
 	name = " "
+	var/base_name = " "
 	desc = " "
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "null"
@@ -12,6 +13,8 @@
 	possible_transfer_amounts = list(5,10,15,25,30,50)
 	volume = 50
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
+
+	var/label_text = ""
 
 	var/list/can_be_placed_into = list(
 		/obj/machinery/chem_master/,
@@ -31,7 +34,12 @@
 		/obj/machinery/disposal,
 		/obj/machinery/apiary,
 		/mob/living/simple_animal/cow,
-		/mob/living/simple_animal/hostile/retaliate/goat	)
+		/mob/living/simple_animal/hostile/retaliate/goat,
+		/obj/machinery/computer/centrifuge	)
+
+	New()
+		..()
+		base_name = name
 
 	examine()
 		set src in view()
@@ -39,8 +47,7 @@
 		if (!(usr in view(2)) && usr!=src.loc) return
 		usr << "\blue It contains:"
 		if(reagents && reagents.reagent_list.len)
-			for(var/datum/reagent/R in reagents.reagent_list)
-				usr << "\blue [R.volume] units of [R.name]"
+			usr << "\blue [src.reagents.total_volume] units of liquid."
 		else
 			usr << "\blue Nothing."
 		if (!is_open_container())
@@ -120,6 +127,22 @@
 			src.reagents.reaction(target, TOUCH)
 			spawn(5) src.reagents.clear_reagents()
 			return
+
+	attackby(obj/item/weapon/W as obj, mob/user as mob)
+		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
+			var/tmp_label = sanitize(input(user, "Enter a label for [src.name]","Label",src.label_text))
+			if(length(tmp_label) > 10)
+				user << "\red The label can be at most 10 characters long."
+			else
+				user << "\blue You set the label to \"[tmp_label]\"."
+				src.label_text = tmp_label
+				src.update_name_label()
+
+	proc/update_name_label()
+		if(src.label_text == "")
+			src.name = src.base_name
+		else
+			src.name = "[src.base_name] ([src.label_text])"
 
 /obj/item/weapon/reagent_containers/glass/beaker
 	name = "beaker"
@@ -227,6 +250,16 @@
 			user.put_in_hands(new /obj/item/weapon/bucket_sensor)
 			user.drop_from_inventory(src)
 			del(src)
+
+/obj/item/weapon/reagent_containers/glass/beaker/vial
+	name = "vial"
+	desc = "Small glass vial. Looks fragile."
+	icon_state = "vial"
+	g_amt = 500
+	volume = 15
+	amount_per_transfer_from_this = 5
+	possible_transfer_amounts = list(1,5,15)
+	flags = FPRINT | TABLEPASS | OPENCONTAINER
 
 /*
 /obj/item/weapon/reagent_containers/glass/blender_jug

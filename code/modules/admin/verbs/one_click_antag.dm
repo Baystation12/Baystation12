@@ -462,11 +462,11 @@ client/proc/one_click_antag()
 			candidates.Remove(G)
 
 	if(candidates.len)
-		var/max_raiders = 4
+		var/max_raiders = 1
 		var/raiders = max_raiders
 		//Spawns vox raiders and equips them.
 		for (var/obj/effect/landmark/L in world)
-			if(L.name == "Response Team")
+			if(L.name == "voxstart")
 				if(raiders<=0)
 					break
 
