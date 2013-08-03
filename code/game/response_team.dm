@@ -3,8 +3,9 @@
 
 var/list/response_team_members = list()
 var/global/send_emergency_team = 0 // Used for automagic response teams
-// 'admin_emergency_team' for admin-spawned response teams
-
+                                   // 'admin_emergency_team' for admin-spawned response teams
+var/ert_base_chance = 10 // Default base chance. Will be incremented by increment ERT chance.
+var/can_call_ert
 
 /client/proc/response_team()
 	set name = "Dispatch Emergency Response Team"
@@ -26,7 +27,7 @@ var/global/send_emergency_team = 0 // Used for automagic response teams
 	if(alert("Do you want to dispatch an Emergency Response Team?",,"Yes","No") != "Yes")
 		return
 	if(get_security_level() != "red") // Allow admins to reconsider if the alert level isn't Red
-		switch(alert("The station has not entered code red recently. Do you still want to dispatch a response team?",,"Yes","No"))
+		switch(alert("The station is not in red alert. Do you still want to dispatch a response team?",,"Yes","No"))
 			if("No")
 				return
 	if(send_emergency_team)
@@ -101,12 +102,28 @@ proc/percentage_antagonists()
 	if(total == 0) return 0
 	else return round(100 * antagonists / total)
 
+// Increments the ERT chance automatically, so that the later it is in the round,
+// the more likely an ERT is to be able to be called.
+proc/increment_ert_chance()
+	while(send_emergency_team == 0) // There is no ERT at the time.
+		if(get_security_level() == "green")
+			ert_base_chance += 1
+		if(get_security_level() == "blue")
+			ert_base_chance += 2
+		if(get_security_level() == "red")
+			ert_base_chance += 3
+		if(get_security_level() == "delta")
+			ert_base_chance += 10           // Need those big guns
+		sleep(600 * 3) // Minute * Number of Minutes
+
 
 proc/trigger_armed_response_team(var/force = 0)
+	if(!can_call_ert && !force)
+		return
 	if(send_emergency_team)
 		return
 
-	var/send_team_chance = 50 // base chance that a team will be sent
+	var/send_team_chance = ert_base_chance // Is incremented by increment_ert_chance.
 	send_team_chance += 2*percentage_dead() // the more people are dead, the higher the chance
 	send_team_chance += percentage_antagonists() // the more antagonists, the higher the chance
 	send_team_chance = min(send_team_chance, 100)
@@ -114,11 +131,18 @@ proc/trigger_armed_response_team(var/force = 0)
 	if(force) send_team_chance = 100
 
 	// there's only a certain chance a team will be sent
-	if(!prob(send_team_chance)) return
+	if(!prob(send_team_chance))
+		command_alert("It would appear that an emergency response team was requested for [station_name()]. Unfortunately, we were unable to send one at this time.", "Central Command")
+		can_call_ert = 0 // Only one call per round, ladies.
+		return
 
-	command_alert("Sensors indicate that [station_name()] has entered Code Red and is in need of assistance. We will prepare and dispatch an emergency response team to deal with the situation.", "Central Command")
+	command_alert("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "Central Command")
 
+	can_call_ert = 0 // Only one call per round, gentleman.
 	send_emergency_team = 1
+
+	sleep(600 * 5)
+	send_emergency_team = 0 // Can no longer join the ERT.
 
 /*	var/area/security/nuke_storage/nukeloc = locate()//To find the nuke in the vault
 	var/obj/machinery/nuclearbomb/nuke = locate() in nukeloc
