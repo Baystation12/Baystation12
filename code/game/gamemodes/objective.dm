@@ -789,40 +789,44 @@ datum/objective/heist/kidnap
 			return 0
 
 datum/objective/heist/loot
+
 	choose_target()
-
-		if(pick("hardware","weapons") == "hardware")
-			target = pick("a complete particle accelerator","a gravitational generator","four emitters","a nuclear bomb")
-		else
-			target = pick("six guns","four energy guns","two laser guns","an ion gun")
-
-		explanation_text = "We are lacking in hardware. Steal [target]."
-
-		switch(target)
-			if("a complete particle accelerator")
+		var/loot = "an object"
+		switch(rand(1,8))
+			if(1)
 				target = /obj/structure/particle_accelerator
 				target_amount = 6
-			if("a gravitational generator")
+				loot = "a complete particle accelerator"
+			if(2)
 				target = /obj/machinery/the_singularitygen
 				target_amount = 1
-			if("four emitters")
+				loot = "a gravitational generator"
+			if(3)
 				target = /obj/machinery/power/emitter
 				target_amount = 4
-			if("a nuclear bomb")
+				loot = "four emitters"
+			if(4)
 				target = /obj/machinery/nuclearbomb
 				target_amount = 1
-			if("six guns")
+				loot = "a nuclear bomb"
+			if(5)
 				target = /obj/item/weapon/gun
 				target_amount = 6
-			if("four energy guns")
+				loot = "six guns"
+			if(6)
 				target = /obj/item/weapon/gun/energy
 				target_amount = 4
-			if("two laser guns")
+				loot = "four energy guns"
+			if(7)
 				target = /obj/item/weapon/gun/energy/laser
 				target_amount = 2
-			if("an ion gun")
+				loot = "two laser guns"
+			if(8)
 				target = /obj/item/weapon/gun/energy/ionrifle
 				target_amount = 1
+				loot = "an ion gun"
+
+		explanation_text = "We are lacking in hardware. Steal [loot]."
 
 	check_completion()
 
@@ -844,36 +848,33 @@ datum/objective/heist/loot
 datum/objective/heist/salvage
 
 	choose_target()
-		var/list/possible_items = list("300 metal sheets","200 glass sheets","100 plasteel sheets","100 units of solid plasma","50 silver bars","20 gold bars","20 uranium bars","20 diamonds")
-		target = pick(possible_items)
-		explanation_text = "Ransack the station and escape with [target]."
-
-		switch(target)
-			if("300 metal sheets")
+		switch(rand(1,8))
+			if(1)
 				target = "metal"
 				target_amount = 300
-			if("200 glass sheets")
+			if(2)
 				target = "glass"
 				target_amount = 200
-			if("100 plasteel sheets")
+			if(3)
 				target = "plasteel"
 				target_amount = 100
-			if("100 units of solid plasma")
+			if(4)
 				target = "plasma"
 				target_amount = 100
-			if("50 silver bars")
+			if(5)
 				target = "silver"
 				target_amount = 50
-			if("20 gold bars")
+			if(6)
 				target = "gold"
 				target_amount = 20
-			if("20 uranium bars")
+			if(7)
 				target = "uranium"
 				target_amount = 20
-			if("20 diamonds")
+			if(8)
 				target = "diamond"
 				target_amount = 20
 
+		explanation_text = "Ransack the station and escape with [target_amount] [target]."
 
 	check_completion()
 
