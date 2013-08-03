@@ -118,7 +118,7 @@ proc/increment_ert_chance()
 
 
 proc/trigger_armed_response_team(var/force = 0)
-	if(!can_call_ert)
+	if(!can_call_ert && !force)
 		return
 	if(send_emergency_team)
 		return
