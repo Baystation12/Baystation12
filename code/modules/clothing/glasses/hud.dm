@@ -53,8 +53,10 @@
 			for(var/datum/disease/D in patient.viruses)
 				if(!D.hidden[SCANNER])
 					foundVirus++
-			if(patient.virus2)
-				foundVirus++
+			for (var/ID in patient.virus2)
+				if (ID in virusDB)
+					foundVirus = 1
+					break
 			if(!C) continue
 
 			holder = patient.hud_list[HEALTH_HUD]
