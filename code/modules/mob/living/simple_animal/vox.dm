@@ -18,7 +18,6 @@
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	status_flags = 0
 	universal_speak = 1
-	vox_talk_understand = 1
 
 	var/armour = null
 	var/amp = null

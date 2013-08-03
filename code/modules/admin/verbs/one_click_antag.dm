@@ -507,7 +507,7 @@ client/proc/one_click_antag()
 		i++
 		newname += pick(list("ti","hi","ki","ya","ta","ha","ka","ya","chi","cha","kah"))
 
-	new_vox.vox_talk_understand = 1
+	new_vox.languages += new /datum/language/vox
 	new_vox.real_name = capitalize(newname)
 	new_vox.name = new_vox.real_name
 	new_vox.age = rand(12,20)
