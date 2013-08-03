@@ -349,17 +349,14 @@
 
 		if(client.prefs.species == "Tajaran") //This is like the worst, but it works, so meh. - Erthilo
 			if(is_alien_whitelisted(src, "Tajaran") || !config.usealienwhitelist)
-				new_character.dna.mutantrace = "tajaran"
 				new_character.set_species(new /datum/species/tajaran)
 				new_character.languages += new /datum/language/tajaran
 		if(client.prefs.species == "Unathi")
 			if(is_alien_whitelisted(src, "Soghun") || !config.usealienwhitelist)
-				new_character.dna.mutantrace = "lizard"
 				new_character.set_species(new /datum/species/unathi)
 				new_character.languages += new /datum/language/unathi
 		if(client.prefs.species == "Skrell")
 			if(is_alien_whitelisted(src, "Skrell") || !config.usealienwhitelist)
-				new_character.dna.mutantrace = "skrell"
 				new_character.set_species(new /datum/species/skrell)
 				new_character.languages += new /datum/language/skrell
 

@@ -820,22 +820,14 @@
 	return
 
 /mob/living/carbon/human/get_species()
-	if(dna)
-		switch(dna.mutantrace)
-			if("lizard")
-				return "Unathi"
-			if("tajaran")
-				return "Tajaran"
-			if("skrell")
-				return "Skrell"
-			if("vox")
-				return "Vox"
-			if("plant")
-				return "Mobile vegetation"
-			if("golem")
-				return "Animated Construct"
-			else
-				return "Human"
+
+	if(!species)
+		set_species()
+
+	if(dna && dna.mutantrace == "golem")
+		return "Animated Construct"
+
+	return species.name
 
 /mob/living/carbon/get_species()
 	if(src.dna)
@@ -847,17 +839,6 @@
 			return "Tajaran"
 		else if(src.dna.mutantrace == "vox")
 			return "vox"
-
-/mob/living/carbon/proc/update_mutantrace_languages()
-	if(src.dna)
-		if(src.dna.mutantrace == "lizard")
-			src.languages += new /datum/language/unathi
-		else if(src.dna.mutantrace == "skrell")
-			src.languages += new /datum/language/skrell
-		else if(src.dna.mutantrace == "tajaran")
-			src.languages += new /datum/language/tajaran
-		else if(src.dna.mutantrace == "vox")
-			src.languages += new /datum/language/vox
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)

@@ -738,20 +738,7 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 
 	//Setting base icon for this mob's race
 	if(ishuman(H) && H.dna)
-		var/icon/base
-		switch(H.dna.mutantrace)
-			if("tajaran")
-				base = new('icons/mob/human_races/r_tajaran.dmi')
-			if("lizard")
-				base = new('icons/mob/human_races/r_lizard.dmi')
-			if("skrell")
-				base = new('icons/mob/human_races/r_skrell.dmi')
-
-			if("vox")
-				base = new('icons/mob/human_races/r_vox.dmi')
-
-			else
-				base = new('icons/mob/human_races/r_human.dmi')
+		var/icon/base = new H.species.icobase
 		if(base)
 			icon = base.MakeLying()
 	else

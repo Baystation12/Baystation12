@@ -117,6 +117,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	podman.gender = NEUTER
 	podman.dna = new /datum/dna()
 	podman.dna.real_name = podman.real_name
+	podman.set_species(new /datum/species/diona)
 	podman.dna.mutantrace = "plant"
 	podman.update_mutantrace()
 

@@ -492,7 +492,7 @@
 
 		if( (abs(310.15 - breath.temperature) > 50) && !(COLD_RESISTANCE in mutations)) // Hot air hurts :(
 			if(status_flags & GODMODE)	return 1	//godmode
-			if(breath.temperature < species.cold_level_1 && dna.mutantrace != "vox") //Vox are resistant to cold.
+			if(breath.temperature < species.cold_level_1)
 				if(prob(20))
 					src << "\red You feel your face freezing and an icicle forming in your lungs!"
 			else if(breath.temperature > species.heat_level_1)
