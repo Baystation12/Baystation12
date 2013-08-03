@@ -408,7 +408,7 @@
 		// Nitrogen, for Vox.
 		var/Nitrogen_pp = (breath.nitrogen/breath.total_moles())*breath_pressure
 
-		if(O2_pp < safe_oxygen_min && src.dna.mutantrace!="vox") 	// Too little oxygen
+		if(O2_pp < safe_oxygen_min && species.name != "Vox") 	// Too little oxygen
 			if(prob(20))
 				spawn(0) emote("gasp")
 			if(O2_pp > 0)
@@ -426,7 +426,7 @@
 			oxyloss += 5*ratio
 			oxygen_used = breath.oxygen*ratio/6
 			oxygen_alert = max(oxygen_alert, 1)*/
-		else if(Nitrogen_pp < safe_oxygen_min && src.dna.mutantrace=="vox")  //Vox breathe nitrogen, not oxygen.
+		else if(Nitrogen_pp < safe_oxygen_min && species.name == "Vox")  //Vox breathe nitrogen, not oxygen.
 
 			if(prob(20))
 				spawn(0) emote("gasp")
@@ -471,7 +471,7 @@
 			if(reagents)
 				reagents.add_reagent("plasma", Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
-		else if(O2_pp > vox_oxygen_max && src.dna.mutantrace=="vox") //Oxygen is toxic to vox.
+		else if(O2_pp > vox_oxygen_max && species.name == "Vox") //Oxygen is toxic to vox.
 			var/ratio = (breath.oxygen/vox_oxygen_max) * 1000
 			adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
@@ -492,30 +492,30 @@
 
 		if( (abs(310.15 - breath.temperature) > 50) && !(COLD_RESISTANCE in mutations)) // Hot air hurts :(
 			if(status_flags & GODMODE)	return 1	//godmode
-			if(breath.temperature < 260.15 && dna.mutantrace != "vox") //Vox are resistant to cold.
+			if(breath.temperature < species.cold_level_1)
 				if(prob(20))
 					src << "\red You feel your face freezing and an icicle forming in your lungs!"
-			else if(breath.temperature > 360.15)
+			else if(breath.temperature > species.heat_level_1)
 				if(prob(20))
 					src << "\red You feel your face burning and a searing heat in your lungs!"
 
 			switch(breath.temperature)
-				if(-INFINITY to 120)
+				if(-INFINITY to species.cold_level_3)
 					apply_damage(COLD_GAS_DAMAGE_LEVEL_3, BURN, "head", used_weapon = "Excessive Cold")
 					fire_alert = max(fire_alert, 1)
-				if(120 to 200 && dna.mutantrace != "vox")  //Vox are resistant to cold.
+				if(species.cold_level_3 to species.cold_level_2)
 					apply_damage(COLD_GAS_DAMAGE_LEVEL_2, BURN, "head", used_weapon = "Excessive Cold")
 					fire_alert = max(fire_alert, 1)
-				if(200 to 260 && dna.mutantrace != "vox")  //Vox are resistant to cold.
+				if(species.cold_level_2 to species.cold_level_1)
 					apply_damage(COLD_GAS_DAMAGE_LEVEL_1, BURN, "head", used_weapon = "Excessive Cold")
 					fire_alert = max(fire_alert, 1)
-				if(360 to 400)
+				if(species.heat_level_1 to species.heat_level_2)
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_1, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
-				if(400 to 1000)
+				if(species.heat_level_2 to species.heat_level_3)
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_2, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
-				if(1000 to INFINITY)
+				if(species.heat_level_3 to INFINITY)
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_3, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
 
@@ -596,22 +596,22 @@
 		var/pressure = environment.return_pressure()
 		var/adjusted_pressure = calculate_affecting_pressure(pressure) //Returns how much pressure actually affects the mob.
 		if(status_flags & GODMODE)	return 1	//godmode
-		switch(adjusted_pressure)
-			if(HAZARD_HIGH_PRESSURE to INFINITY)
-				adjustBruteLoss( min( ( (adjusted_pressure / HAZARD_HIGH_PRESSURE) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE) )
-				pressure_alert = 2
-			if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
-				pressure_alert = 1
-			if(WARNING_LOW_PRESSURE to WARNING_HIGH_PRESSURE)
-				pressure_alert = 0
-			if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
-				pressure_alert = -1
+
+		if(adjusted_pressure >= species.hazard_high_pressure)
+			adjustBruteLoss( min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE) )
+			pressure_alert = 2
+		else if(adjusted_pressure >= species.warning_high_pressure)
+			pressure_alert = 1
+		else if(adjusted_pressure >= species.warning_low_pressure)
+			pressure_alert = 0
+		else if(adjusted_pressure >= species.hazard_low_pressure)
+			pressure_alert = -1
+		else
+			if( !(COLD_RESISTANCE in mutations))
+				adjustBruteLoss( LOW_PRESSURE_DAMAGE )
+				pressure_alert = -2
 			else
-				if( !(COLD_RESISTANCE in mutations) && src.dna.mutantrace!="vox") //Vox are resistant to pressure loss.
-					adjustBruteLoss( LOW_PRESSURE_DAMAGE )
-					pressure_alert = -2
-				else
-					pressure_alert = -1
+				pressure_alert = -1
 
 		if(environment.toxins > MOLES_PLASMA_VISIBLE)
 			pl_effects()
@@ -841,7 +841,7 @@
 		if(status_flags & GODMODE)	return 0	//godmode
 		adjustToxLoss(total_plasmaloss)
 
-		if(PLANT in mutations || (dna && dna.mutantrace == "plant"))
+		if(species.flags & REQUIRE_LIGHT)
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light
 				var/turf/T = loc
@@ -899,7 +899,7 @@
 			if(overeatduration > 1)
 				overeatduration -= 2 //doubled the unfat rate
 
-		if(PLANT in mutations || (dna && dna.mutantrace == "plant"))
+		if(species.flags & REQUIRE_LIGHT)
 			if(nutrition < 200)
 				take_overall_damage(2,0)
 

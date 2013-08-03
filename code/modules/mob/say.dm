@@ -74,19 +74,15 @@
 		return 1
 	return 0
 
-/mob/proc/say_quote(var/text,var/is_speaking_soghun,var/is_speaking_skrell,var/is_speaking_tajaran,var/is_speaking_vox)
+/mob/proc/say_quote(var/text,var/datum/language/speaking)
 	if(!text)
 		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 		//tcomms code is still runtiming somewhere here
 	var/ending = copytext(text, length(text))
-	if (is_speaking_soghun)
-		return "<span class='say_quote'>hisses</span>, \"<span class='soghun'>[text]</span>\"";
-	if (is_speaking_skrell)
-		return "<span class='say_quote'>warbles</span>, \"<span class='skrell'>[text]</span>\"";
-	if (is_speaking_tajaran)
-		return "<span class='say_quote'>mrowls</span>, \"<span class='tajaran'>[text]</span>\"";
-	if (is_speaking_vox)
-		return "<span class='say_quote'>chirps</span>, \"<span class='vox'>[text]</span>\"";
+
+	if (speaking)
+		return "<span class='say_quote'>[speaking.speech_verb]</span>, \"<span class='[speaking.colour]'>[text]</span>\"";
+
 //Needs Virus2
 //	if (src.disease_symptoms & DISEASE_HOARSE)
 //		return "rasps, \"[text]\"";
