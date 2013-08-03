@@ -114,7 +114,7 @@
 						del(spark_system)
 
 		else if(E.name in list("l_leg","l_foot","r_leg","r_foot") && !lying)
-			if (E.status & ORGAN_DESTROYED || malfunction || (broken && !(E.status & ORGAN_SPLINTED)))
+			if (!E.is_usable() || malfunction || (broken && !(E.status & ORGAN_SPLINTED)))
 				leg_tally--			// let it fail even if just foot&leg
 
 	// standing is poor
