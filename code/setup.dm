@@ -627,7 +627,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define CHAT_LOOC		4096
 
 
-#define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS)
+#define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 
 #define BE_TRAITOR		1
 #define BE_OPERATIVE	2
@@ -640,6 +640,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define BE_CULTIST		256
 #define BE_MONKEY		512
 #define BE_NINJA		1024
+#define BE_RAIDER		2048
 
 var/list/be_special_flags = list(
 	"Traitor" = BE_TRAITOR,
@@ -652,7 +653,8 @@ var/list/be_special_flags = list(
 	"pAI" = BE_PAI,
 	"Cultist" = BE_CULTIST,
 	"Monkey" = BE_MONKEY,
-	"Ninja" = BE_NINJA
+	"Ninja" = BE_NINJA,
+	"Raider" = BE_RAIDER
 	)
 
 #define AGE_MIN 17			//youngest a character can be
@@ -694,3 +696,9 @@ var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_d
 //proc/get_pulse methods
 #define GETPULSE_HAND	0	//less accurate (hand)
 #define GETPULSE_TOOL	1	//more accurate (med scanner, sleeper, etc)
+
+var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accessed by preexisting terminals. AIs and new terminals can't use them.
+	"thunder",
+	"ERT",
+	"NUKE"
+	)

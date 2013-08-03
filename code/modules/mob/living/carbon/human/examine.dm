@@ -190,6 +190,12 @@
 		else if(jitteriness >= 100)
 			msg += "<span class='warning'>[t_He] [t_is] twitching ever so slightly.</span>\n"
 
+	//splints
+	for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
+		var/datum/organ/external/o = get_organ(organ)
+		if(o && o.status & ORGAN_SPLINTED)
+			msg += "<span class='warning'>[t_He] [t_has] a splint on his [o.display_name]!</span>\n"
+
 	if(suiciding)
 		msg += "<span class='warning'>[t_He] appears to have commited suicide... there is no hope of recovery.</span>\n"
 
@@ -199,19 +205,15 @@
 	var/distance = get_dist(usr,src)
 	if(istype(usr, /mob/dead/observer) || usr.stat == 2) // ghosts can see anything
 		distance = 1
-	if (src.stat == 1 || stat == 2)
+	if (src.stat)
 		msg += "<span class='warning'>[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep.</span>\n"
 		if((stat == 2 || src.health < config.health_threshold_crit) && distance <= 3)
 			msg += "<span class='warning'>[t_He] does not appear to be breathing.</span>\n"
-		if(istype(usr, /mob/living/carbon/human) && usr.stat == 0 && src.stat == 1 && distance <= 1)
+		if(istype(usr, /mob/living/carbon/human) && !usr.stat && distance <= 1)
 			for(var/mob/O in viewers(usr.loc, null))
 				O.show_message("[usr] checks [src]'s pulse.", 1)
-			spawn(15)
-				usr << "\blue [t_He] has a pulse!"
-
-	if(distance <= 1)
-		if(istype(usr, /mob/living/carbon/human) && usr.stat == 0)
-			spawn(15)
+		spawn(15)
+			if(distance <= 1 && usr.stat != 1)
 				if(pulse == PULSE_NONE)
 					usr << "<span class='deadsay'>[t_He] has no pulse[src.client ? "" : " and [t_his] soul has departed"]...</span>"
 				else

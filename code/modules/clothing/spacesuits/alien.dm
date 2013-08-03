@@ -130,8 +130,9 @@
 	icon_state = "boots-vox"
 
 	toggle()
-		name = "Toggle Floor Grip"
-
+		//set name = "Toggle Floor Grip"
+		if(usr.stat)
+			return
 		if(src.magpulse)
 			src.flags &= ~NOSLIP
 			src.magpulse = 0
