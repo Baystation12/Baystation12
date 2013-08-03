@@ -5,15 +5,44 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 	var/list/hud_list = list()
-
+	var/datum/species/species //Contains icon generation and language information, set during New().
 
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
 
+/mob/living/carbon/human/skrell/New()
+	h_style = "Skrell Male Tentacles"
+	set_species(new /datum/species/skrell(src))
+	..()
 
+/mob/living/carbon/human/tajaran/New()
+	h_style = "Tajaran Ears"
+	set_species(new /datum/species/tajaran(src))
+	..()
+
+/mob/living/carbon/human/unathi/New()
+	h_style = "Unathi Horns"
+	set_species(new /datum/species/unathi(src))
+	..()
+
+/mob/living/carbon/human/vox/New()
+	h_style = "Short Vox Quills"
+	species = new /datum/species/vox(src)
+	..()
+
+/mob/living/carbon/human/diona/New()
+	species = new /datum/species/diona(src)
+	..()
 
 /mob/living/carbon/human/New()
+
+	if(!species)
+		set_species()
+
+	if(species.language)
+		languages += species.language
+
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
@@ -795,22 +824,14 @@
 	return
 
 /mob/living/carbon/human/get_species()
-	if(dna)
-		switch(dna.mutantrace)
-			if("lizard")
-				return "Unathi"
-			if("tajaran")
-				return "Tajaran"
-			if("skrell")
-				return "Skrell"
-			if("vox")
-				return "Vox"
-			if("plant")
-				return "Mobile vegetation"
-			if("golem")
-				return "Animated Construct"
-			else
-				return "Human"
+
+	if(!species)
+		set_species()
+
+	if(dna && dna.mutantrace == "golem")
+		return "Animated Construct"
+
+	return species.name
 
 /mob/living/carbon/get_species()
 	if(src.dna)
@@ -822,17 +843,6 @@
 			return "Tajaran"
 		else if(src.dna.mutantrace == "vox")
 			return "vox"
-
-/mob/living/carbon/proc/update_mutantrace_languages()
-	if(src.dna)
-		if(src.dna.mutantrace == "lizard")
-			src.soghun_talk_understand = 1
-		else if(src.dna.mutantrace == "skrell")
-			src.skrell_talk_understand = 1
-		else if(src.dna.mutantrace == "tajaran")
-			src.tajaran_talk_understand = 1
-		else if(src.dna.mutantrace == "vox")
-			src.vox_talk_understand = 1
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
@@ -1250,3 +1260,26 @@ mob/living/carbon/human/yank_out_object()
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
+/mob/living/carbon/human/proc/set_species(var/datum/species/new_species)
+
+	if(!new_species)
+		new_species = new /datum/species/human
+
+	if(species)
+
+		if(species.name == new_species.name)
+			return
+
+		var/temp = species
+		species = new_species
+		del(temp)
+	else
+		species = new_species
+
+	spawn(0)
+		update_icons()
+
+	if(species)
+		return 1
+	else
+		return 0

@@ -507,13 +507,13 @@ client/proc/one_click_antag()
 		i++
 		newname += pick(list("ti","hi","ki","ya","ta","ha","ka","ya","chi","cha","kah"))
 
-	new_vox.vox_talk_understand = 1
+	new_vox.languages += new /datum/language/vox
 	new_vox.real_name = capitalize(newname)
 	new_vox.name = new_vox.real_name
 	new_vox.age = rand(12,20)
 
 	new_vox.dna.ready_dna(new_vox) // Creates DNA.
-	new_vox.dna.mutantrace = "vox" // Actually makes the vox! How about that.
+	new_vox.set_species(new /datum/species/vox) // Actually makes the vox! How about that.
 	new_vox.mind_initialize()
 	new_vox.mind.assigned_role = "MODE"
 	new_vox.mind.special_role = "Vox Raider"
