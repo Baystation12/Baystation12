@@ -112,6 +112,7 @@
 
 			if (B)
 				beaker.reagents.reagent_list |= B
+				beaker.reagents.update_total()
 				beaker.on_reagent_change()
 				beaker.reagents.handle_reactions()
 				update_icon()

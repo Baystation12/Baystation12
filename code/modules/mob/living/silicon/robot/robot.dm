@@ -3,8 +3,8 @@
 	real_name = "Cyborg"
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "robot"
-	maxHealth = 300
-	health = 300
+	maxHealth = 200
+	health = 200
 	universal_speak = 1
 
 	var/sight_mode = 0
@@ -107,17 +107,17 @@
 			camera.status = 0
 
 	initialize_components()
-	if(!unfinished)
-		// Create all the robot parts.
-		for(var/V in components) if(V != "power cell")
-			var/datum/robot_component/C = components[V]
-			C.installed = 1
-			C.wrapped = new C.external_type
+	//if(!unfinished)
+	// Create all the robot parts.
+	for(var/V in components) if(V != "power cell")
+		var/datum/robot_component/C = components[V]
+		C.installed = 1
+		C.wrapped = new C.external_type
 
-		if(!cell)
-			cell = new /obj/item/weapon/cell(src)
-			cell.maxcharge = 7500
-			cell.charge = 7500
+	if(!cell)
+		cell = new /obj/item/weapon/cell(src)
+		cell.maxcharge = 7500
+		cell.charge = 7500
 
 	..()
 
@@ -148,7 +148,7 @@
 	if(module)
 		return
 	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
-	if(crisis) //Leaving this in until it's balanced appropriately.
+	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	var/mod = input("Please, select a module!", "Robot", null, null) in modules
@@ -201,6 +201,7 @@
 			module_sprites["Red Knight"] = "Security"
 			module_sprites["Black Knight"] = "securityrobot"
 			module_sprites["Bloodhound"] = "bloodhound"
+			module_sprites["Mark II"] = "droid-combat"
 
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
@@ -1247,9 +1248,11 @@
 	else
 		src << "Something is badly wrong with the sprite selection. Harass a coder."
 		icon_state = module_sprites[1]
+		base_icon = icon_state
 		return
 
 	overlays -= "eyes"
+	base_icon = icon_state
 	updateicon()
 
 	if (triesleft >= 1)

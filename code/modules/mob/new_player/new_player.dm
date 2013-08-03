@@ -359,10 +359,10 @@
 			if(is_alien_whitelisted(src, "Skrell") || !config.usealienwhitelist)
 				new_character.dna.mutantrace = "skrell"
 				new_character.skrell_talk_understand = 1
-		if(client.prefs.species == "Kidan")
-			if(is_alien_whitelisted(src, "Kidan") || !config.usealienwhitelist)
-				new_character.dna.mutantrace = "kidan"
-				new_character.kidan_talk_understand = 1
+		if(client.prefs.species == "Vox")
+			if(is_alien_whitelisted(src, "Vox"|| !config.usealienwhitelist))
+				new_character.dna.mutantrace = "vox"
+				new_character.vox_talk_understand = 1
 
 		if(client.prefs.language == "Tajaran")
 			if(is_alien_whitelisted(src, "Language_Tajaran") || !config.usealienwhitelist)
@@ -373,9 +373,6 @@
 		if(client.prefs.language == "Skrell")
 			if(is_alien_whitelisted(src, "Language_Skrell") || !config.usealienwhitelist)
 				new_character.skrell_talk_understand = 1
-		if(client.prefs.language == "Kidan")
-			if(is_alien_whitelisted(src, "Language_Kidan") || !config.usealienwhitelist)
-				new_character.kidan_talk_understand = 1
 
 
 		if(ticker.random_players)
@@ -410,7 +407,7 @@
 	proc/ViewManifest()
 		var/dat = "<html><body>"
 		dat += "<h4>Crew Manifest</h4>"
-		dat += data_core.get_manifest()
+		dat += data_core.get_manifest(OOC = 1)
 
 		src << browse(dat, "window=manifest;size=370x420;can_close=1")
 

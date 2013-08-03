@@ -152,7 +152,7 @@
 
 				else if(prob(5))
 					dish.virus2.minormutate()
-				 radiation -= 1
+				radiation -= 1
 			if(toxins && prob(5))
 				dish.virus2.infectionchance -= 1
 			if(toxins > 50)
