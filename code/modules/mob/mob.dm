@@ -956,3 +956,22 @@ mob/verb/yank_out_object()
 		if(!pinned.len)
 			anchored = 0
 	return 1
+
+// Language handling.
+/mob/proc/add_language(var/datum/language/new_language)
+
+	for(var/datum/language/L in languages)
+		if(L && L.name == new_language.name)
+			return 0
+
+	languages += new_language
+	return 1
+
+/mob/proc/remove_language(var/datum/language/rem_language)
+
+	for(var/datum/language/L in languages)
+		if(L && L.name == rem_language.name)
+			languages -= L
+			return 1
+
+	return 0
