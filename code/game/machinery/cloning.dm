@@ -191,7 +191,7 @@
 		randmutb(H) //Sometimes the clones come out wrong.
 
 	H.f_style = "Shaved"
-	if(mrace.name != "Human") //no more xenos losing ears/tentacles
+	if(mrace.name == "Human") //no more xenos losing ears/tentacles
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
 
 	H.species = mrace
