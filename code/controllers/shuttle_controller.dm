@@ -326,9 +326,11 @@ datum/shuttle_controller
 						settimeleft(SHUTTLETRANSITTIME)
 						start_location.move_contents_to(end_location, null, NORTH)
 
-						for(var/obj/machinery/door/D in end_location)
+						for(var/obj/machinery/door/unpowered/shuttle/D in end_location)
 							spawn(0)
 								D.close()
+								D.locked = 1
+
 							// Some aesthetic turbulance shaking
 						for(var/mob/M in end_location)
 							if(M.client)
