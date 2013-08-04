@@ -2807,6 +2807,12 @@ datum
 				if(d >= pass_out)
 					M:paralysis = max(M:paralysis, 20)
 					M:drowsyness  = max(M:drowsyness, 30)
+					if(ishuman(M))
+						var/mob/living/cabon.huan/H = M
+						var/datum/organ/internal/liver/L = H.internal_organs["liver"]
+						if (istype(L))
+							L.take_damage(0.1, 1)
+						H.adjustToxLoss(0.1)
 
 				holder.remove_reagent(src.id, 0.4)
 				..()
