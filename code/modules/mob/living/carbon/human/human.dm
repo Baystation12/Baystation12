@@ -31,6 +31,10 @@
 	species = new /datum/species/vox(src)
 	..()
 
+/mob/living/carbon/human/diona/New()
+	species = new /datum/species/diona(src)
+	..()
+
 /mob/living/carbon/human/New()
 
 	if(!species)
@@ -1272,8 +1276,10 @@ mob/living/carbon/human/yank_out_object()
 	else
 		species = new_species
 
-	if(species)
+	spawn(0)
 		update_icons()
+
+	if(species)
 		return 1
 	else
 		return 0

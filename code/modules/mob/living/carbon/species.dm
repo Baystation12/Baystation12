@@ -38,10 +38,10 @@
 	var/heat_level_2 = 400  // Heat damage level 2 above this point.
 	var/heat_level_3 = 1000 // Heat damage level 2 above this point.
 
-	var/hazard_high_pressure = 550   // Dangerously high pressure.
-	var/warning_high_pressure = 325  // High pressure warning.
-	var/hazard_low_pressure = 50     // Dangerously low pressure.
-	var/warning_low_pressure = 20    // Low pressure warning.
+	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
+	var/warning_high_pressure = WARNING_HIGH_PRESSURE // High pressure warning.
+	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
+	var/hazard_low_pressure = HAZARD_LOW_PRESSURE     // Dangerously low pressure.
 
 	var/brute_resist    // Physical damage reduction.
 	var/burn_resist     // Burn damage reduction.

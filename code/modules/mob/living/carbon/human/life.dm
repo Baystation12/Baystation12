@@ -408,7 +408,7 @@
 		// Nitrogen, for Vox.
 		var/Nitrogen_pp = (breath.nitrogen/breath.total_moles())*breath_pressure
 
-		if(O2_pp < safe_oxygen_min && src.dna.mutantrace!="vox") 	// Too little oxygen
+		if(O2_pp < safe_oxygen_min && species.name != "Vox") 	// Too little oxygen
 			if(prob(20))
 				spawn(0) emote("gasp")
 			if(O2_pp > 0)
@@ -426,7 +426,7 @@
 			oxyloss += 5*ratio
 			oxygen_used = breath.oxygen*ratio/6
 			oxygen_alert = max(oxygen_alert, 1)*/
-		else if(Nitrogen_pp < safe_oxygen_min && src.dna.mutantrace=="vox")  //Vox breathe nitrogen, not oxygen.
+		else if(Nitrogen_pp < safe_oxygen_min && species.name == "Vox")  //Vox breathe nitrogen, not oxygen.
 
 			if(prob(20))
 				spawn(0) emote("gasp")
@@ -471,7 +471,7 @@
 			if(reagents)
 				reagents.add_reagent("plasma", Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
-		else if(O2_pp > vox_oxygen_max && src.dna.mutantrace=="vox") //Oxygen is toxic to vox.
+		else if(O2_pp > vox_oxygen_max && species.name == "Vox") //Oxygen is toxic to vox.
 			var/ratio = (breath.oxygen/vox_oxygen_max) * 1000
 			adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
@@ -596,22 +596,22 @@
 		var/pressure = environment.return_pressure()
 		var/adjusted_pressure = calculate_affecting_pressure(pressure) //Returns how much pressure actually affects the mob.
 		if(status_flags & GODMODE)	return 1	//godmode
-		switch(adjusted_pressure)
-			if(species.hazard_high_pressure to INFINITY)
-				adjustBruteLoss( min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE) )
-				pressure_alert = 2
-			if(species.warning_high_pressure to species.hazard_high_pressure)
-				pressure_alert = 1
-			if(species.warning_low_pressure to species.warning_high_pressure)
-				pressure_alert = 0
-			if(species.hazard_low_pressure to species.warning_low_pressure)
-				pressure_alert = -1
+
+		if(adjusted_pressure >= species.hazard_high_pressure)
+			adjustBruteLoss( min( ( (adjusted_pressure / species.hazard_high_pressure) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE) )
+			pressure_alert = 2
+		else if(adjusted_pressure >= species.warning_high_pressure)
+			pressure_alert = 1
+		else if(adjusted_pressure >= species.warning_low_pressure)
+			pressure_alert = 0
+		else if(adjusted_pressure >= species.hazard_low_pressure)
+			pressure_alert = -1
+		else
+			if( !(COLD_RESISTANCE in mutations))
+				adjustBruteLoss( LOW_PRESSURE_DAMAGE )
+				pressure_alert = -2
 			else
-				if( !(COLD_RESISTANCE in mutations))
-					adjustBruteLoss( LOW_PRESSURE_DAMAGE )
-					pressure_alert = -2
-				else
-					pressure_alert = -1
+				pressure_alert = -1
 
 		if(environment.toxins > MOLES_PLASMA_VISIBLE)
 			pl_effects()
