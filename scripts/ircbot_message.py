@@ -6,18 +6,18 @@
 import sys,cPickle,socket
 
 def pack():
-    ip = sys.argv[1]
+    passwd = sys.argv[1]
+    ip = sys.argv[3]
     try:
-        data = sys.argv[2:] #The rest of the arguments is data
+        data = sys.argv[4:] #The rest of the arguments is data
     except:
         data = "NO DATA SPECIFIED"
-    dictionary = {"ip":ip,"data":["PASSWORD"] + data}
+    dictionary = {"ip":ip,"data":[passwd] + data}
     pickled = cPickle.dumps(dictionary)
     nudge(pickled)
 def nudge(data):
-    HOST = "IRCBOT IP"
+    HOST = sys.argv[2]
     PORT = 45678
-    size = 1024
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST,PORT))
     s.send(data)
