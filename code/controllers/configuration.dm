@@ -118,7 +118,10 @@
 	var/gateway_delay = 18000 //How long the gateway takes before it activates. Default is half an hour.
 	var/ghost_interaction = 0
 
+	var/comms_password = ""
+
 	var/use_irc_bot = 0
+	var/irc_bot_host = ""
 	var/main_irc = ""
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
@@ -406,6 +409,12 @@
 
 				if("ghost_interaction")
 					config.ghost_interaction = 1
+
+				if("comms_password")
+					config.comms_password = value
+
+				if("irc_bot_host")
+					config.irc_bot_host = value
 
 				if("main_irc")
 					config.main_irc = value
