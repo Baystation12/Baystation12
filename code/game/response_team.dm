@@ -54,15 +54,16 @@ client/verb/JoinResponseTeam()
 
 		if(response_team_members.len > 5) usr << "The emergency response team is already full!"
 
-		var/leader_selected = (response_team_members.len == 0)
-
 
 		for (var/obj/effect/landmark/L in landmarks_list) if (L.name == "Commando")
-
+			L.name = null//Reserving the place.
 			var/new_name = input(usr, "Pick a name","Name") as null|text
-			if(!new_name) return
-			var/mob/living/carbon/human/new_commando = create_response_team(L, leader_selected, new_name)
-
+			if(!new_name)//Somebody changed his mind, place is available again.
+				L.name = "Commando"
+				return
+			var/leader_selected = isemptylist(response_team_members)
+			var/mob/living/carbon/human/new_commando = create_response_team(L.loc, leader_selected, new_name)
+			del(L)
 			new_commando.mind.key = usr.key
 			new_commando.key = usr.key
 
@@ -72,7 +73,7 @@ client/verb/JoinResponseTeam()
 				new_commando << "<b>As member of the Emergency Response Team, you answer only to your leader and CentComm officials.</b>"
 			else
 				new_commando << "<b>As leader of the Emergency Response Team, you answer only to CentComm, and have authority to override the Captain where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the captain where possible, however."
-			del(L)
+			return
 
 	else
 		usr << "You need to be an observer or new player to use this."
@@ -248,9 +249,8 @@ proc/trigger_armed_response_team(var/force = 0)
 	M.mind.special_role = "Response Team"
 	if(!(M.mind in ticker.minds))
 		ticker.minds += M.mind//Adds them to regular mind list.
-	M.loc = spawn_location.loc
+	M.loc = spawn_location
 	M.equip_strike_team(leader_selected)
-	del(spawn_location)
 	return M
 
 /mob/living/carbon/human/proc/equip_strike_team(leader_selected = 0)
@@ -298,19 +298,12 @@ proc/trigger_armed_response_team(var/force = 0)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(src), slot_in_backpack)
 */
 	var/obj/item/weapon/card/id/W = new(src)
-	W.name = "[real_name]'s ID Card (Emergency Response Team)"
-	W.icon_state = "centcom"
-	if(leader_selected)
-		W.name = "[real_name]'s ID Card (Emergency Response Team Leader)"
-		W.access = get_all_accesses()
-		W.access += get_all_centcom_access()
-		W.assignment = "Emergency Response Team Leader"
-	else
-		W.access = get_all_accesses()
-		W.access += get_all_centcom_access()
-		W.assignment = "Emergency Response Team"
-	W.access += list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)//Let's add their alloted CentCom access.
+	W.assignment = "Emergency Response Team[leader_selected ? " Leader" : ""]"
 	W.registered_name = real_name
+	W.name = "[real_name]'s ID Card ([W.assignment])"
+	W.icon_state = "centcom"
+	W.access = get_all_accesses()
+	W.access += get_all_centcom_access()
 	equip_to_slot_or_del(W, slot_wear_id)
 
 	return 1
