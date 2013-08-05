@@ -754,13 +754,13 @@ client
 			usr << "This can only be done to instances of type /mob/living/carbon/human"
 			return
 
-		var/datum/species/new_species = input("Please choose a new species.","Species",null) as null|anything in (typesof(/datum/species)-/datum/species)
+		var/new_species = input("Please choose a new species.","Species",null) as null|anything in all_species
 
 		if(!H)
 			usr << "Mob doesn't exist anymore"
 			return
 
-		if(H.set_species(new new_species))
+		if(H.set_species(new_species))
 			usr << "Set species of [H] to [H.species]."
 		else
 			usr << "Failed! Something went wrong."
@@ -773,13 +773,13 @@ client
 			usr << "This can only be done to instances of type /mob"
 			return
 
-		var/datum/language/new_language = input("Please choose a language to add.","Language",null) as null|anything in (typesof(/datum/language)-/datum/language)
+		var/new_language = input("Please choose a language to add.","Language",null) as null|anything in all_languages
 
 		if(!H)
 			usr << "Mob doesn't exist anymore"
 			return
 
-		if(H.add_language(new new_language))
+		if(H.add_language(new_language))
 			usr << "Added [new_language] to [H]."
 		else
 			usr << "Mob already knows that language."
@@ -792,13 +792,17 @@ client
 			usr << "This can only be done to instances of type /mob"
 			return
 
+		if(!H.languages.len)
+			usr << "This mob knows no languages."
+			return
+
 		var/datum/language/rem_language = input("Please choose a language to remove.","Language",null) as null|anything in H.languages
 
 		if(!H)
 			usr << "Mob doesn't exist anymore"
 			return
 
-		if(H.remove_language(rem_language))
+		if(H.remove_language(rem_language.name))
 			usr << "Removed [rem_language] from [H]."
 		else
 			usr << "Mob doesn't know that language."

@@ -154,9 +154,9 @@
 						B = d
 						break
 					var/trans
-					if(B && ishuman(target))
-						var/mob/living/carbon/human/H = target
-						H.inject_blood(src,5)
+					if(B && istype(target,/mob/living/carbon))
+						var/mob/living/carbon/C = target
+						C.inject_blood(src,5)
 					else
 						trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
 					user << "\blue You inject [trans] units of the solution. The syringe now contains [src.reagents.total_volume] units."

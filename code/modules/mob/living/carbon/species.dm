@@ -25,7 +25,7 @@
 
 	var/tail                     // Name of tail image in species effects icon file.
 	var/primitive                // Lesser form, if any (ie. monkey for humans)
-	var/datum/language/language  // Default racial language, if any.
+	var/language                 // Default racial language, if any.
 	var/attack_verb = "punch"    // Empty hand hurt intent verb.
 
 	var/breath_type     // Non-oxygen gas breathed, if any.
@@ -56,7 +56,7 @@
 	name = "Unathi"
 	icobase = 'icons/mob/human_races/r_lizard.dmi'
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
-	language = new /datum/language/unathi
+	language = "Sinta'unathi"
 	tail = "sogtail"
 	attack_verb = "scratch"
 
@@ -66,7 +66,7 @@
 	name = "Tajara"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
-	language = new /datum/language/tajaran
+	language = "Siik'mas"
 	tail = "tajtail"
 	attack_verb = "scratch"
 
@@ -76,7 +76,7 @@
 	name = "Skrell"
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
-	language = new /datum/language/skrell
+	language = "Skrellian"
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
 
@@ -84,7 +84,7 @@
 	name = "Vox"
 	icobase = 'icons/mob/human_races/r_vox.dmi'
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
-	language = new /datum/language/vox
+	language = "Vox-pidgin"
 
 	eyes = "vox_eyes_s"
 	breath_type = "nitrogen"
