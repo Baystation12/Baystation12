@@ -166,10 +166,12 @@
 
 
 /client/Center()
+	/* No 3D movement in 2D spessman game. dir 16 is Z Up
 	if (isobj(mob.loc))
 		var/obj/O = mob.loc
 		if (mob.canmove)
 			return O.relaymove(mob, 16)
+	*/
 	return
 
 
