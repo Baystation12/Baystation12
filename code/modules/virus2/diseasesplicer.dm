@@ -39,7 +39,7 @@
 /obj/machinery/computer/diseasesplicer/attack_hand(var/mob/user as mob)
 	if(..())
 		return
-	user.machine = src
+	user.set_machine(src)
 	var/dat
 	if(splicing)
 		dat = "Splicing in progress."
@@ -111,11 +111,14 @@
 			d.effect = memorybank
 			state("The [src.name] zings", "blue")
 
+	src.updateUsrDialog()
 	return
 
 /obj/machinery/computer/diseasesplicer/Topic(href, href_list)
 	if(..())
 		return
+
+	if(usr) usr.set_machine(src)
 
 	if (href_list["grab"])
 		memorybank = locate(href_list["grab"])
