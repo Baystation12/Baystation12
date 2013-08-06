@@ -51,13 +51,14 @@
 /obj/machinery/disease2/incubator/Topic(href, href_list)
 	if(..()) return
 
+	if(usr) usr.set_machine(src)
+
 	if (href_list["ejectchem"])
 		if(beaker)
 			beaker.loc = src.loc
 			beaker = null
 	if(!dish)
 		return
-	usr.machine = src
 	if (href_list["power"])
 		on = !on
 		if(on)
@@ -78,19 +79,17 @@
 	if(href_list["virus"])
 		if (!dish)
 			state("\The [src.name] buzzes, \"No viral culture sample detected.\"", "blue")
-			return
+		else
+			var/datum/reagent/blood/B = locate(/datum/reagent/blood) in beaker.reagents.reagent_list
+			if (!B)
+				state("\The [src.name] buzzes, \"No suitable breeding enviroment detected.\"", "blue")
+			else
+				if (!B.data["virus2"])
+					B.data["virus2"] = list()
+				var/list/virus = list("[dish.virus2.uniqueID]" = dish.virus2.getcopy())
+				B.data["virus2"] = virus
 
-		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in beaker.reagents.reagent_list
-		if (!B)
-			state("\The [src.name] buzzes, \"No suitable breeding enviroment detected.\"", "blue")
-			return
-
-		if (!B.data["virus2"])
-			B.data["virus2"] = list()
-		var/list/virus = list("[dish.virus2.uniqueID]" = dish.virus2.getcopy())
-		B.data["virus2"] = virus
-
-		state("\The [src.name] pings, \"Injection complete.\"", "blue")
+				state("\The [src.name] pings, \"Injection complete.\"", "blue")
 
 
 	src.add_fingerprint(usr)
@@ -99,7 +98,7 @@
 /obj/machinery/disease2/incubator/attack_hand(mob/user as mob)
 	if(stat & BROKEN)
 		return
-	user.machine = src
+	user.set_machine(src)
 	var/dat = ""
 	if(!dish)
 		dat = "Please insert dish into the incubator.<BR>"
@@ -151,7 +150,7 @@
 
 			else if(prob(5))
 				dish.virus2.minormutate()
-			 radiation -= 1
+			radiation -= 1
 		if(toxins && prob(5))
 			dish.virus2.infectionchance -= 1
 		if(toxins > 50)
@@ -165,3 +164,5 @@
 			foodsupply += 10
 		if(!beaker.reagents.remove_reagent("toxin",1))
 			toxins += 1
+
+	src.updateUsrDialog()
