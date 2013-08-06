@@ -36,14 +36,14 @@
 // Language handling.
 /mob/proc/add_language(var/language)
 
+	for(var/datum/language/L in languages)
+		if(L && L.name == language)
+			return 0
+
 	var/datum/language/new_language = all_languages[language]
 
 	if(!istype(new_language,/datum/language))
-		return
-
-	for(var/datum/language/L in languages)
-		if(L && L.name == new_language)
-			return 0
+		return 0
 
 	languages += new_language
 	return 1
