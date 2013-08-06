@@ -13,22 +13,22 @@
 
 /mob/living/carbon/human/skrell/New()
 	h_style = "Skrell Male Tentacles"
-	set_species(new /datum/species/skrell(src))
+	set_species("Skrell")
 	..()
 
 /mob/living/carbon/human/tajaran/New()
 	h_style = "Tajaran Ears"
-	set_species(new /datum/species/tajaran(src))
+	set_species("Tajara")
 	..()
 
 /mob/living/carbon/human/unathi/New()
 	h_style = "Unathi Horns"
-	set_species(new /datum/species/unathi(src))
+	set_species("Unathi")
 	..()
 
 /mob/living/carbon/human/vox/New()
 	h_style = "Short Vox Quills"
-	species = new /datum/species/vox(src)
+	set_species("Vox")
 	..()
 
 /mob/living/carbon/human/diona/New()
@@ -41,7 +41,9 @@
 		set_species()
 
 	if(species.language)
-		languages += species.language
+		var/datum/language/L = all_languages[species.language]
+		if(L)
+			languages += L
 
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
@@ -1260,21 +1262,15 @@ mob/living/carbon/human/yank_out_object()
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/datum/species/new_species)
+/mob/living/carbon/human/proc/set_species(var/new_species)
 
 	if(!new_species)
-		new_species = new /datum/species/human
+		new_species = "Human"
 
-	if(species)
+	if(species && (species.name && species.name == new_species))
+		return
 
-		if(species.name == new_species.name)
-			return
-
-		var/temp = species
-		species = new_species
-		del(temp)
-	else
-		species = new_species
+	species = all_species[new_species]
 
 	spawn(0)
 		update_icons()

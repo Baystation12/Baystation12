@@ -73,8 +73,8 @@
 				A.randomize_appearance_for(new_mob)
 
 				var/mob/living/carbon/human/H = new_mob
-				var/newspecies = pick(typesof(/datum/species)-/datum/species)
-				H.set_species(new newspecies)
+				var/datum/species/newspecies = pick(all_species)
+				H.set_species(newspecies.name)
 			else
 				return
 
