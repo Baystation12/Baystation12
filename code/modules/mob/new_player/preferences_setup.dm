@@ -137,19 +137,13 @@ datum/preferences
 		if(gender == FEMALE)	g = "f"
 
 		var/icon/icobase
-		switch(species)
-			if("Tajaran")
-				icobase = 'icons/mob/human_races/r_tajaran.dmi'
-			if("Unathi")
-				icobase = 'icons/mob/human_races/r_lizard.dmi'
-			if("Skrell")
-				icobase = 'icons/mob/human_races/r_skrell.dmi'
+		var/datum/species/current_species = all_species[species]
 
-			if("Vox")
-				icobase = 'icons/mob/human_races/r_vox.dmi'
+		if(current_species)
+			icobase = current_species.icobase
+		else
+			icobase = 'icons/mob/human_races/r_human.dmi'
 
-			else
-				icobase = 'icons/mob/human_races/r_human.dmi'
 		preview_icon = new /icon(icobase, "torso_[g]")
 		preview_icon.Blend(new /icon(icobase, "groin_[g]"), ICON_OVERLAY)
 		preview_icon.Blend(new /icon(icobase, "head_[g]"), ICON_OVERLAY)
@@ -169,16 +163,13 @@ datum/preferences
 			preview_icon.Blend(temp, ICON_OVERLAY)
 
 		// Skin tone
-		if(species == "Human")
+		if(current_species && (current_species.flags & HAS_SKIN_TONE))
 			if (s_tone >= 0)
 				preview_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
 			else
 				preview_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 
-		var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "eyes_s")
-		if(species=="Vox")
-			eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "vox_eyes_s")
-
+		var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = current_species ? current_species.eyes : "eyes_s")
 		eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
 
 		var/datum/sprite_accessory/hair_style = hair_styles_list[h_style]

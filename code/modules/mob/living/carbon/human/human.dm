@@ -18,7 +18,7 @@
 
 /mob/living/carbon/human/tajaran/New()
 	h_style = "Tajaran Ears"
-	set_species("Tajara")
+	set_species("Tajaran")
 	..()
 
 /mob/living/carbon/human/unathi/New()
