@@ -761,7 +761,6 @@
 #include "code\modules\clothing\shoes\miscellaneous.dm"
 #include "code\modules\clothing\spacesuits\alien.dm"
 #include "code\modules\clothing\spacesuits\captain.dm"
-#include "code\modules\clothing\spacesuits\civilian.dm"
 #include "code\modules\clothing\spacesuits\ert.dm"
 #include "code\modules\clothing\spacesuits\miscellaneous.dm"
 #include "code\modules\clothing\spacesuits\ninja.dm"
