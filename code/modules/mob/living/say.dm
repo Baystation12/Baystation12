@@ -367,7 +367,7 @@ var/list/department_radio_keys = list(
 
 	for (var/M in listening)
 		if(hascall(M,"say_understands"))
-			if (M:say_understands(src) && !speaking)
+			if ((M:say_understands(src) && !speaking) || M.universal_speak)
 				//world << "[M] understood [src] (0)."
 				heard_a += M
 			else if(ismob(M))
