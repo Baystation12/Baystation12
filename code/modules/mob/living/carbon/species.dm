@@ -9,10 +9,11 @@
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
 
-	var/tail                     // Name of tail image in species effects icon file.
 	var/primitive                // Lesser form, if any (ie. monkey for humans)
+	var/tail                     // Name of tail image in species effects icon file.
 	var/language                 // Default racial language, if any.
 	var/attack_verb = "punch"    // Empty hand hurt intent verb.
+	var/mutantrace               // Safeguard due to old code.
 
 	var/breath_type     // Non-oxygen gas breathed, if any.
 
@@ -24,6 +25,7 @@
 	var/heat_level_2 = 400  // Heat damage level 2 above this point.
 	var/heat_level_3 = 1000 // Heat damage level 2 above this point.
 
+	var/darksight = 2
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
 	var/warning_high_pressure = WARNING_HIGH_PRESSURE // High pressure warning.
 	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
@@ -36,6 +38,8 @@
 
 /datum/species/human
 	name = "Human"
+	primitive = /mob/living/carbon/monkey
+
 	flags = HAS_LIPS | HAS_UNDERWEAR
 
 /datum/species/unathi
@@ -45,6 +49,8 @@
 	language = "Sinta'unathi"
 	tail = "sogtail"
 	attack_verb = "scratch"
+	primitive = /mob/living/carbon/monkey/unathi
+	darksight = 3
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
@@ -55,6 +61,9 @@
 	language = "Siik'mas"
 	tail = "tajtail"
 	attack_verb = "scratch"
+	darksight = 8
+
+	primitive = /mob/living/carbon/monkey/tajara
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
@@ -63,6 +72,7 @@
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	language = "Skrellian"
+	primitive = /mob/living/carbon/monkey/skrell
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
 

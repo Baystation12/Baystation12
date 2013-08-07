@@ -835,17 +835,6 @@
 
 	return species.name
 
-/mob/living/carbon/get_species()
-	if(src.dna)
-		if(src.dna.mutantrace == "lizard")
-			return "Unathi"
-		else if(src.dna.mutantrace == "skrell")
-			return "Skrell"
-		else if(src.dna.mutantrace == "tajaran")
-			return "Tajaran"
-		else if(src.dna.mutantrace == "vox")
-			return "vox"
-
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
 		visible_message("\red [src] begins playing his ribcage like a xylophone. It's quite spooky.","\blue You begin to play a spooky refrain on your ribcage.","\red You hear a spooky xylophone melody.")
@@ -1271,6 +1260,12 @@ mob/living/carbon/human/yank_out_object()
 		return
 
 	species = all_species[new_species]
+
+	see_in_dark = species.darksight
+	if(see_in_dark > 2)
+		see_invisible = SEE_INVISIBLE_LEVEL_ONE
+	else
+		see_invisible = SEE_INVISIBLE_LIVING
 
 	spawn(0)
 		update_icons()
