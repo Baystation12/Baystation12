@@ -40,7 +40,7 @@
 	name = "Human"
 	primitive = /mob/living/carbon/monkey
 
-	flags = HAS_LIPS | HAS_UNDERWEAR
+	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR
 
 /datum/species/unathi
 	name = "Unathi"
