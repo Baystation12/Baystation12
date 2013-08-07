@@ -70,7 +70,7 @@ log transactions
 		break
 
 /obj/machinery/atm/proc/reconnect_database()
-	for(var/obj/machinery/account_database/DB in machines)
+	for(var/obj/machinery/account_database/DB in world) //Hotfix until someone finds out why it isn't in 'machines'
 		if( DB.z == src.z && !(DB.stat & NOPOWER) && DB.activated )
 			linked_db = DB
 			break

@@ -36,14 +36,13 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	//Generate the gas_mixture for use in txhis zone by using the average of the gases
 	//defined at startup.
 	air = new
-	var/members = contents.len
-	for(var/turf/simulated/T in contents)
-		air.oxygen += T.oxygen / members
-		air.nitrogen += T.nitrogen / members
-		air.carbon_dioxide += T.carbon_dioxide / members
-		air.toxins += T.toxins / members
-		air.temperature += T.temperature / members
 	air.group_multiplier = contents.len
+	for(var/turf/simulated/T in contents)
+		air.oxygen += T.oxygen / air.group_multiplier
+		air.nitrogen += T.nitrogen / air.group_multiplier
+		air.carbon_dioxide += T.carbon_dioxide / air.group_multiplier
+		air.toxins += T.toxins / air.group_multiplier
+		air.temperature += T.temperature / air.group_multiplier
 	air.update_values()
 
 	//Add this zone to the global list.
@@ -80,8 +79,11 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	for(var/zone/Z in connected_zones)
 		if(src in Z.connected_zones)
 			Z.connected_zones.Remove(src)
+	connected_zones = null
+
 	for(var/connection/C in connections)
 		air_master.connections_to_check += C
+	connections = null
 
 	return 1
 
@@ -146,7 +148,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	if(!contents.len) //If we got soft deleted.
 		return
 
-	progress = "problem with: air.adjust()"
+	progress = "problem with: air regeneration"
 
 	//Sometimes explosions will cause the air to be deleted for some reason.
 	if(!air)
@@ -157,27 +159,23 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 		air.total_moles()
 		world.log << "Air object lost in zone. Regenerating."
 
-	progress = "problem with: ShareSpace()"
 
+	progress = "problem with: ShareSpace()"
 
 	if(unsimulated_tiles)
 		if(locate(/turf/simulated) in unsimulated_tiles)
 			for(var/turf/simulated/T in unsimulated_tiles)
-				RemoveTurf(T)
-		if(unsimulated_tiles)
+				unsimulated_tiles -= T
+
+		if(unsimulated_tiles.len)
 			var/moved_air = ShareSpace(air,unsimulated_tiles)
 
 			if(moved_air > vsc.airflow_lightest_pressure)
 				AirflowSpace(src)
-
-	progress = "problem with: air.react()"
-
-	//React the air here.
-	//Handled by fire, no need for this.
-//	air.react(null,0)
+		else
+			unsimulated_tiles = null
 
 	//Check the graphic.
-
 	progress = "problem with: modifying turf graphics"
 
 	air.graphic = 0
@@ -232,12 +230,13 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			//Check if the connection is valid first.
 			if(!C.Cleanup())
 				continue
+
 			//Do merging if conditions are met. Specifically, if there's a non-door connection
 			//to somewhere with space, the zones are merged regardless of equilibrium, to speed
 			//up spacing in areas with double-plated windows.
 			if(C && C.A.zone && C.B.zone)
 				//indirect = 2 is a direct connection.
-				if(C.indirect == 2 )
+				if( C.indirect == 2 )
 					if(C.A.zone.air.compare(C.B.zone.air) || unsimulated_tiles)
 						ZMerge(C.A.zone,C.B.zone)
 
@@ -245,6 +244,10 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 		//Share some
 		for(var/zone/Z in connected_zones)
+			//If that zone has already processed, skip it.
+			if(Z.last_update > last_update)
+				continue
+
 			if(air && Z.air)
 				//Ensure we're not doing pointless calculations on equilibrium zones.
 				var/moles_delta = abs(air.total_moles() - Z.air.total_moles())
@@ -260,8 +263,11 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 					ShareRatio( air , Z.air , connected_zones[Z] + unsimulated_boost)
 
 		for(var/zone/Z in closed_connection_zones)
+			//If that zone has already processed, skip it.
+			if(Z.last_update > last_update)
+				continue
 			if(air && Z.air)
-				if( abs(air.temperature - Z.air.temperature) > 10 )
+				if( abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta )
 					ShareHeat(air, Z.air, closed_connection_zones[Z])
 
 	progress = "all components completed successfully, the problem is not here"
@@ -270,7 +276,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
  //Air Movement//
 ////////////////
 
-var/list/sharing_lookup_table = list(0.15, 0.20, 0.24, 0.27, 0.30, 0.33)
+var/list/sharing_lookup_table = list(0.30, 0.40, 0.48, 0.54, 0.60, 0.66)
 
 proc/ShareRatio(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 	//Shares a specific ratio of gas between mixtures using simple weighted averages.
@@ -400,7 +406,9 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 
 	if(sharing_lookup_table.len >= unsimulated_tiles.len) //6 or more interconnecting tiles will max at 42% of air moved per tick.
 		ratio = sharing_lookup_table[unsimulated_tiles.len]
-	ratio *= 2
+
+	//We need to adjust it to account for the insulation settings.
+	ratio *= 1 - vsc.connection_insulation
 
 	A.oxygen = max(0, (A.oxygen - oxy_avg) * (1 - ratio) + oxy_avg )
 	A.nitrogen = max(0, (A.nitrogen - nit_avg) * (1 - ratio) + nit_avg )

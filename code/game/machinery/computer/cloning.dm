@@ -443,10 +443,7 @@
 	subject.dna.check_integrity()
 
 	var/datum/data/record/R = new /datum/data/record(  )
-	if(subject.dna)
-		R.fields["mrace"] = subject.dna.mutantrace
-	else
-		R.fields["mrace"] = null
+	R.fields["mrace"] = subject.species
 	R.fields["ckey"] = subject.ckey
 	R.fields["name"] = subject.real_name
 	R.fields["id"] = copytext(md5(subject.real_name), 2, 6)

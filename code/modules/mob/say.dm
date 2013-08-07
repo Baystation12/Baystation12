@@ -37,6 +37,10 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
+	if(!(client.prefs.toggles & CHAT_DEAD))
+		usr << "\red You have deadchat muted."
+		return
+
 	if(mind && mind.name)
 		name = "[mind.name]"
 	else
@@ -50,9 +54,10 @@
 	for(var/mob/M in player_list)
 		if(istype(M, /mob/new_player))
 			continue
-		if(M.client && M.client.holder && (M.client.holder.rights & R_ADMIN|R_MOD) && (M.client.prefs.toggles & CHAT_DEAD)) //admins can toggle deadchat on and off. This is a proc in admin.dm and is only give to Administrators and above
+		if(M.client && M.client.holder && (M.client.holder.rights & R_ADMIN|R_MOD) && (M.client.prefs.toggles & CHAT_DEAD)) // Show the message to admins/mods with deadchat toggled on
 			M << rendered	//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
-		else if(M.stat == DEAD)
+
+		else if(M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD)) // Show the message to regular ghosts with deadchat toggled on.
 			M.show_message(rendered, 2) //Takes into account blindness and such.
 	return
 
@@ -69,19 +74,15 @@
 		return 1
 	return 0
 
-/mob/proc/say_quote(var/text,var/is_speaking_soghun,var/is_speaking_skrell,var/is_speaking_tajaran,var/is_speaking_vox)
+/mob/proc/say_quote(var/text,var/datum/language/speaking)
 	if(!text)
 		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 		//tcomms code is still runtiming somewhere here
 	var/ending = copytext(text, length(text))
-	if (is_speaking_soghun)
-		return "<span class='say_quote'>hisses</span>, \"<span class='soghun'>[text]</span>\"";
-	if (is_speaking_skrell)
-		return "<span class='say_quote'>warbles</span>, \"<span class='skrell'>[text]</span>\"";
-	if (is_speaking_tajaran)
-		return "<span class='say_quote'>mrowls</span>, \"<span class='tajaran'>[text]</span>\"";
-	if (is_speaking_vox)
-		return "<span class='say_quote'>chirps</span>, \"<span class='vox'>[text]</span>\"";
+
+	if (speaking)
+		return "<span class='say_quote'>[speaking.speech_verb]</span>, \"<span class='[speaking.colour]'>[text]</span>\"";
+
 //Needs Virus2
 //	if (src.disease_symptoms & DISEASE_HOARSE)
 //		return "rasps, \"[text]\"";

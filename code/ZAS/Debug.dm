@@ -8,7 +8,8 @@ client/proc/Zone_Info(turf/T as null|turf)
 			mob << "No zone here."
 	else
 		if(zone_debug_images)
-			images -= zone_debug_images
+			for(var/zone in  zone_debug_images)
+				images -= zone_debug_images[zone]
 			zone_debug_images = null
 
 client/var/list/zone_debug_images
@@ -23,12 +24,12 @@ client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
 	"South" = SOUTH,\
 	"East" = EAST,\
 	"West" = WEST,\
-	"None" = null)
+	"N/A" = null)
 	var/direction = input("What direction do you wish to test?","Set direction") as null|anything in direction_list
 	if(!direction)
 		return
 
-	if(direction == "None")
+	if(direction == "N/A")
 		if(T.CanPass(null, T, 0,0))
 			mob << "The turf can pass air! :D"
 		else
@@ -64,11 +65,14 @@ zone/proc/DebugDisplay(client/client)
 
 		if(!client.zone_debug_images)
 			client.zone_debug_images = list()
+
+		var/list/current_zone_images = list()
+
 		for(var/turf/T in contents)
-			client.zone_debug_images += image('debug_group.dmi', T)
+			current_zone_images += image('debug_group.dmi', T, null, TURF_LAYER)
 
 		for(var/turf/space/S in unsimulated_tiles)
-			client.zone_debug_images += image('debug_space.dmi', S)
+			current_zone_images += image('debug_space.dmi', S, null, TURF_LAYER)
 
 		client << "<u>Zone Air Contents</u>"
 		client << "Oxygen: [air.oxygen]"
@@ -85,8 +89,8 @@ zone/proc/DebugDisplay(client/client)
 
 		for(var/connection/C in connections)
 			client << "\ref[C] [C.A] --> [C.B] [(C.indirect?"Open":"Closed")]"
-			client.zone_debug_images += image('debug_connect.dmi', C.A)
-			client.zone_debug_images += image('debug_connect.dmi', C.B)
+			current_zone_images += image('debug_connect.dmi', C.A, null, TURF_LAYER)
+			current_zone_images += image('debug_connect.dmi', C.B, null, TURF_LAYER)
 
 		client << "Connected Zones:"
 		for(var/zone/zone in connected_zones)
@@ -99,13 +103,17 @@ zone/proc/DebugDisplay(client/client)
 			if(!istype(C,/connection))
 				client << "[C] (Not Connection!)"
 
-		client.images += client.zone_debug_images
+		if(!client.zone_debug_images)
+			client.zone_debug_images = list()
+		client.zone_debug_images[src] = current_zone_images
+
+		client.images += client.zone_debug_images[src]
 
 	else
 		dbg_output = 0
 
-		client.images -= client.zone_debug_images
-		client.zone_debug_images = null
+		client.images -= client.zone_debug_images[src]
+		client.zone_debug_images.Remove(src)
 
 	for(var/zone/Z in zones)
 		if(Z.air == air && Z != src)
