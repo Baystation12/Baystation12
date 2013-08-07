@@ -1,17 +1,3 @@
-#define NO_EAT 1
-#define NO_BREATHE 2
-#define NO_SLEEP 4
-#define NO_SHOCK 8
-#define NO_SCAN 16
-#define NON_GENDERED 32
-#define REQUIRE_LIGHT 64
-#define WHITELISTED 128
-#define HAS_SKIN_TONE 256
-#define HAS_LIPS 512
-#define HAS_UNDERWEAR 1024
-#define HAS_TAIL 2048
-#define IS_PLANT 4096
-
 /*
 	Datum-based species. Should make for much cleaner and easier to maintain mutantrace code.
 */
@@ -63,7 +49,7 @@
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
 /datum/species/tajaran
-	name = "Tajara"
+	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
 	language = "Siik'mas"
