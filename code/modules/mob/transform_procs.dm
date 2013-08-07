@@ -21,6 +21,10 @@
 	sleep(48)
 	//animation = null
 
+	if(!species.primitive) //If the creature in question has no primitive set, this is going to be messy.
+		gib()
+		return
+
 	var/mob/living/carbon/monkey/O = null
 
 	O = new species.primitive(loc)
