@@ -40,7 +40,7 @@
 	R.my_atom = src
 
 	if(name == "monkey" || name == "farwa" || name == "stok" || name == "neara") //Hideous but necessary to stop Pun-Pun becoming generic.
-		name = "[name] ([rand(1, 1000)])")
+		name = "[name] ([rand(1, 1000)])"
 		real_name = name
 
 	if (!(dna))
@@ -68,19 +68,19 @@
 
 	..()
 	dna.mutantrace = "lizard"
-    greaterform = "Unathi"
+	greaterform = "Unathi"
 
 /mob/living/carbon/monkey/skrell/New()
 
 	..()
 	dna.mutantrace = "skrell"
-    greaterform = "Skrell"
+	greaterform = "Skrell"
 
 /mob/living/carbon/monkey/tajara/New()
 
 	..()
 	dna.mutantrace = "tajaran"
-    greaterform = "Tajaran"
+	greaterform = "Tajaran"
 
 /mob/living/carbon/monkey/movement_delay()
 	var/tally = 0

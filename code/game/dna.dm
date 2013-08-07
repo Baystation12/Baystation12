@@ -550,10 +550,10 @@
 
 
 		var/mob/living/carbon/monkey/O = null
-		if(M.species.primitive)
-			O = new M.species.primitive(src)
+		if(H.species.primitive)
+			O = new H.species.primitive(src)
 		else
-			M.gib() //Trying to change the species of a creature with no primitive var set is messy.
+			H.gib() //Trying to change the species of a creature with no primitive var set is messy.
 			return
 
 		if(M)
@@ -622,8 +622,8 @@
 			del(animation)
 
 		var/mob/living/carbon/human/O = new( src )
-		if(Mo.greater)
-			O.set_species(Mo.greater)
+		if(Mo.greaterform)
+			O.set_species(Mo.greaterform)
 
 		if (isblockon(getblock(M.dna.uni_identity, 11,3),11))
 			O.gender = FEMALE
