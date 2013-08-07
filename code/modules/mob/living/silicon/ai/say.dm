@@ -38,8 +38,9 @@ var/const/VOX_VOLUME = 75
 	set desc = "Display a list of vocal words to announce to the crew."
 	set category = "AI Commands"
 
-
-	var/dat = "Here is a list of words you can type into the Announcement button to create sentences to vocally announce.<BR> \
+	src << "\red VOX is disabled until issues with the code can be sorted."
+	return
+/*	var/dat = "Here is a list of words you can type into the Announcement button to create sentences to vocally announce.<BR> \
 	Do not use punctuation as you would normally, if you want a pause you can use the full stop and comma characters by separating them with spaces, like so: 'Alpha . Test , Bravo'.<BR>"
 
 	var/index = 0
@@ -49,7 +50,7 @@ var/const/VOX_VOLUME = 75
 		if(index != vox_sounds.len)
 			dat += " / "
 
-	src << browse(dat, "window=announce_help;size=500x400")
+	src << browse(dat, "window=announce_help;size=500x400")*/
 
 
 /mob/living/silicon/ai/verb/announcement(var/message as text)
@@ -58,6 +59,9 @@ var/const/VOX_VOLUME = 75
 	set desc = "Create a vocal announcement by typing in the available words to create a setence. More help is available in 'Announcement Help'"
 	set category = "AI Commands"
 
+	src << "\red VOX is disabled until issues with the code can be sorted."
+	return
+/*
 	if(!message)
 		return
 	//if(!announcing_vox > world.time)
@@ -81,9 +85,9 @@ var/const/VOX_VOLUME = 75
 
 	if(incorrect_words.len)
 		src << "<span class='notice'>These words are not available on the announcement system: [english_list(incorrect_words)].</span>"
-
+*/
 /proc/play_vox_word(var/word, var/z_level)
-
+/*
 	word = lowertext(word)
 
 	if(vox_sounds[word])
@@ -99,12 +103,12 @@ var/const/VOX_VOLUME = 75
 				if(T.z == z_level)
 					M << voice
 		return 1
-	return 0
+	return 0*/
 
 // List is required to compile the resources into the game when it loads.
 // Dynamically loading it has bad results with sounds overtaking each other, even with the wait variable.
 
-var/list/vox_sounds = list("," = 'sound/vox/,.wav',
+var/list/vox_sounds = list(/*"," = 'sound/vox/,.wav',
 "." = 'sound/vox/..wav',
 "a" = 'sound/vox/a.wav',
 "accelerating" = 'sound/vox/accelerating.wav',
@@ -719,4 +723,4 @@ var/list/vox_sounds = list("," = 'sound/vox/,.wav',
 "yourself" = 'sound/vox/yourself.wav',
 "zero" = 'sound/vox/zero.wav',
 "zone" = 'sound/vox/zone.wav',
-"zulu" = 'sound/vox/zulu.wav')
+"zulu" = 'sound/vox/zulu.wav'*/)

@@ -367,6 +367,7 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 		if(zone_A && zone_B)
 			DisconnectZones(zone_A, zone_B)
 		ConnectZones(A.zone, B.zone, indirect)
+		zone_A = A.zone
 
 	//The "B" zone changed.
 	else if(B.zone && B.zone != zone_B)
@@ -394,6 +395,7 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 		if(zone_A && zone_B)
 			DisconnectZones(zone_A, zone_B)
 		ConnectZones(A.zone, B.zone, indirect)
+		zone_B = B.zone
 
 
 #undef CONNECTION_DIRECT

@@ -102,7 +102,7 @@
 	if(!scrambledcodes && !camera)
 		camera = new /obj/machinery/camera(src)
 		camera.c_tag = real_name
-		camera.network = list("SS13")
+		camera.network = list("SS13","Robots")
 		if(isWireCut(5)) // 5 = BORG CAMERA
 			camera.status = 0
 
@@ -148,7 +148,7 @@
 	if(module)
 		return
 	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
-	if(emagged || security_level > SEC_LEVEL_BLUE)
+	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
@@ -177,6 +177,8 @@
 		if("Miner")
 			module = new /obj/item/weapon/robot_module/miner(src)
 			channels = list("Supply" = 1)
+			if(camera && "Robots" in camera.network)
+				camera.network.Add("MINE")
 			module_sprites["Basic"] = "Miner_old"
 			module_sprites["Advanced Droid"] = "droid-miner"
 			module_sprites["Treadhead"] = "Miner"
@@ -184,6 +186,8 @@
 		if("Medical")
 			module = new /obj/item/weapon/robot_module/medical(src)
 			channels = list("Medical" = 1)
+			if(camera && "Robots" in camera.network)
+				camera.network.Add("Medical")
 			module_sprites["Basic"] = "Medbot"
 			module_sprites["Advanced Droid"] = "droid-medical"
 			module_sprites["Needles"] = "medicalrobot"
@@ -1175,12 +1179,8 @@
 	scrambledcodes = 1
 	//Disconnect it's camera so it's not so easily tracked.
 	if(src.camera)
-		del(src.camera)
-		src.camera = null
-		// I'm trying to get the Cyborg to not be listed in the camera list
-		// Instead of being listed as "deactivated". The downside is that I'm going
-		// to have to check if every camera is null or not before doing anything, to prevent runtime errors.
-		// I could change the network to null but I don't know what would happen, and it seems too hacky for me.
+		src.camera.network = list()
+		cameranet.removeCamera(src.camera)
 
 
 /mob/living/silicon/robot/proc/ResetSecurityCodes()
@@ -1240,9 +1240,11 @@
 	else
 		src << "Something is badly wrong with the sprite selection. Harass a coder."
 		icon_state = module_sprites[1]
+		base_icon = icon_state
 		return
 
 	overlays -= "eyes"
+	base_icon = icon_state
 	updateicon()
 
 	if (triesleft >= 1)

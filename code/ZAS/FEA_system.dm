@@ -85,7 +85,7 @@ atom/proc/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
 		return 1
 
 
-var/global/datum/controller/air_system/air_master
+var/datum/controller/air_system/air_master
 
 /datum/controller/air_system/
 	//Geoemetry lists
@@ -180,17 +180,20 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			if(. && T && !T.update_air_properties())
 				. = 0 //If a runtime occured, make sure we can sense it.
 				//message_admins("ZASALERT: Unable run turf/simualted/update_air_properties()")
-		tiles_to_update = list()
+		if(.)
+			tiles_to_update = list()
 
 	//Check sanity on connection objects.
-	tick_progress = "connections_to_check"
+	if(.)
+		tick_progress = "connections_to_check"
 	if(connections_to_check.len)
 		for(var/connection/C in connections_to_check)
 			C.CheckPassSanity()
 		connections_to_check = list()
 
 	//Ensure tiles still have zones.
-	tick_progress = "tiles_to_reconsider_zones"
+	if(.)
+		tick_progress = "tiles_to_reconsider_zones"
 	if(tiles_to_reconsider_zones.len)
 		for(var/turf/simulated/T in tiles_to_reconsider_zones)
 			if(!T.zone)
@@ -198,7 +201,8 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		tiles_to_reconsider_zones = list()
 
 	//Process zones.
-	tick_progress = "zone/process()"
+	if(.)
+		tick_progress = "zone/process()"
 	for(var/zone/Z in zones)
 		if(Z.last_update < current_cycle)
 			var/output = Z.process()
@@ -207,9 +211,11 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			if(. && Z && !output)
 				. = 0
 	//Process fires.
-	tick_progress = "active_hotspots (fire)"
+	if(.)
+		tick_progress = "active_hotspots (fire)"
 	for(var/obj/fire/F in active_hotspots)
 		if(. && F && !F.process())
 			. = 0
 
-	tick_progress = "success"
+	if(.)
+		tick_progress = "success"

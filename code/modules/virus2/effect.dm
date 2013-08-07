@@ -144,7 +144,7 @@
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
 			for (var/datum/organ/external/E in H.organs)
-				E.status ^= ORGAN_DEAD
+				E.status &= ~ORGAN_DEAD
 
 /datum/disease2/effect/immortal
 	name = "Longevity Syndrome"

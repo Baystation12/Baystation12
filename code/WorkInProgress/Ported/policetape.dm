@@ -72,6 +72,8 @@
 		while (cur!=end && can_place)
 			if(cur.density == 1)
 				can_place = 0
+			else if (istype(cur, /turf/space))
+				can_place = 0
 			else
 				for(var/obj/O in cur)
 					if(!istype(O, /obj/item/tape) && O.density)

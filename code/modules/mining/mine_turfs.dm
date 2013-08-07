@@ -598,12 +598,10 @@ commented out in r5061, I left it because of the shroom thingies
 		if(istype(R.module_active,/obj/item/weapon/pickaxe))
 			src.attackby(R.module_active,R)
 			return
-/*	else if(istype(AM,/obj/mecha))
+	else if(istype(AM,/obj/mecha))
 		var/obj/mecha/M = AM
 		if(istype(M.selected,/obj/item/mecha_parts/mecha_equipment/tool/drill))
-			src.attackby(M.selected,M)
-			return*/
-//Aparantly mechs are just TOO COOL to call Bump(), so fuck em (for now)
+			M.selected.action(src)
 	else
 		return
 

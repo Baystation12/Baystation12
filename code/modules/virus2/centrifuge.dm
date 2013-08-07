@@ -31,7 +31,7 @@
 /obj/machinery/computer/centrifuge/attack_hand(var/mob/user as mob)
 	if(..())
 		return
-	user.machine = src
+	user.set_machine(src)
 	var/dat= ""
 	if(curing)
 		dat = "Antibody isolation in progress"
@@ -86,12 +86,15 @@
 			if(sample)
 				isolate()
 			update_icon()
+
+	src.updateUsrDialog()
 	return
 
 /obj/machinery/computer/centrifuge/Topic(href, href_list)
 	if(..())
 		return
-	usr.machine = src
+
+	if(usr) usr.set_machine(src)
 
 	switch(href_list["action"])
 		if("antibody")
@@ -99,33 +102,27 @@
 			var/datum/reagent/blood/B = locate(/datum/reagent/blood) in sample.reagents.reagent_list
 			if (!B)
 				state("\The [src.name] buzzes, \"No antibody carrier detected.\"", "blue")
-				return
 
-			if(sample.reagents.has_reagent("toxins"))
+			else if(sample.reagents.has_reagent("toxins"))
 				state("\The [src.name] beeps, \"Pathogen purging speed above nominal.\"", "blue")
 				delay = delay/2
-				return
 
-			curing = delay
-			playsound(src.loc, 'sound/machines/juicer.ogg', 50, 1)
-			update_icon()
+			else
+				curing = delay
+				playsound(src.loc, 'sound/machines/juicer.ogg', 50, 1)
+				update_icon()
 
 		if("isolate")
 			var/datum/reagent/blood/B = locate(/datum/reagent/blood) in sample.reagents.reagent_list
-			if (!B)
-				return
-
-			var/list/virus = virus_copylist(B.data["virus2"])
-			var/choice = href_list["isolate"];
-			if (choice in virus)
-				virus2 = virus[choice]
-			else
-				state("\The [src.name] buzzes, \"No such pathogen detected.\"", "blue")
-				return
-			isolating = 40
-			update_icon()
-			src.updateUsrDialog()
-			return
+			if (B)
+				var/list/virus = virus_copylist(B.data["virus2"])
+				var/choice = href_list["isolate"]
+				if (choice in virus)
+					virus2 = virus[choice]
+					isolating = 40
+					update_icon()
+				else
+					state("\The [src.name] buzzes, \"No such pathogen detected.\"", "blue")
 
 		if("sample")
 			if(sample)

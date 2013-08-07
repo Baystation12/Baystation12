@@ -13,7 +13,7 @@
 	flags = FPRINT | TABLEPASS | CONDUCT | USEDELAY
 
 
-/obj/item/device/antibody_scanner/attack(mob/living/carbon/human/M as mob, mob/user as mob)
+/obj/item/device/antibody_scanner/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(!istype(M))
 		user << "<span class='notice'>Incompatible object, scan aborted.</span>"
 		return
