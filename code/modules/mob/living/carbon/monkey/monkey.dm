@@ -10,8 +10,9 @@
 	update_icon = 0		///no need to call regenerate_icon
 
 	var/obj/item/weapon/card/id/wear_id = null // Fix for station bounced radios -- Skie
-	var/greaterform = "Human" //Used when humanizing a monkey.
-	var/ico = "monkey" //Used when updating icons.
+	var/greaterform = "Human"                  // Used when humanizing a monkey.
+	var/ico = "monkey"                         // Used when updating icons.
+	var/uni_append = "12C4E2"                  // Small appearance modifier for different species.
 
 /mob/living/carbon/monkey/tajara
 	name = "farwa"
@@ -19,6 +20,7 @@
 	voice_message = "mews"
 	say_message = "mews"
 	ico = "tajkey"
+	uni_append = "0A0E00"
 
 /mob/living/carbon/monkey/skrell
 	name = "neaera"
@@ -26,6 +28,7 @@
 	voice_message = "squicks"
 	say_message = "squicks"
 	ico = "skrellkey"
+	uni_append = "01CC92"
 
 /mob/living/carbon/monkey/unathi
 	name = "stok"
@@ -33,6 +36,7 @@
 	voice_message = "hisses"
 	say_message = "hisses"
 	ico = "stokkey"
+	uni_append = "044C5D"
 
 /mob/living/carbon/monkey/New()
 	var/datum/reagents/R = new/datum/reagents(1000)
@@ -57,9 +61,7 @@
 			gendervar = add_zero2(num2hex((rand(1,2049)),1), 3)
 		else
 			gendervar = add_zero2(num2hex((rand(2051,4094)),1), 3)
-		dna.uni_identity += gendervar
-		dna.uni_identity += "12C"
-		dna.uni_identity += "4E2"
+		dna.uni_identity += "[gendervar][uni_append]"
 	..()
 	update_icons()
 	return
