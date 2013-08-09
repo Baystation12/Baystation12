@@ -52,8 +52,8 @@
 			user << "<span class='notice'>You put [I] in [src].</span>"
 		else
 			user << "<span class='notice'>[src] is full.</span>"
-		return
 		updateUsrDialog()
+		return
 	if(istype(I, /obj/item/weapon/tank/plasma))
 		if(plasmatanks < 10)
 			user.drop_item()
@@ -63,8 +63,8 @@
 			user << "<span class='notice'>You put [I] in [src].</span>"
 		else
 			user << "<span class='notice'>[src] is full.</span>"
-		return
 		updateUsrDialog()
+		return
 	if(istype(I, /obj/item/weapon/wrench))
 		if(anchored)
 			user << "<span class='notice'>You lean down and unwrench [src].</span>"
