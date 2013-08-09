@@ -12,7 +12,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	productname = "/mob/living/carbon/human" //verrry special -- Urist
 	lifespan = 50 //no idea what those do
 	endurance = 8
-	maturation = 10
+	maturation = 5
 	production = 10
 	yield = 1 //seeds if there isn't a dna inside
 	oneharvest = 1
