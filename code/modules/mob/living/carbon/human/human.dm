@@ -1312,30 +1312,33 @@ mob/living/carbon/human/yank_out_object()
 	set name = "Torment host"
 	set desc = "Punish your host with agony."
 
-	var/datum/organ/external/head = get_organ("head")
-	var/mob/living/simple_animal/borer/B
+	var/mob/living/simple_animal/borer/B = has_brain_worms()
 
-	for(var/I in head.implants)
-		if(istype(I,/mob/living/simple_animal/borer))
-			B = I
 	if(!B)
 		return
 
 	if(B.host_brain.ckey)
 		src << "\red <B>You send a punishing spike of psychic agony lancing into your host's brain.</B>"
-		B.host_brain << "\red <B><FONT size=5>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></B>"
+		B.host_brain << "\red <B><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></B>"
+
+//Check for brain worms in head.
+/mob/living/carbon/human/proc/has_brain_worms()
+
+	var/datum/organ/external/head = get_organ("head")
+
+	for(var/I in head.implants)
+		if(istype(I,/mob/living/simple_animal/borer))
+			return I
+
+	return 0
 
 /mob/living/carbon/human/proc/spawn_larvae()
 	set category = "Alien"
 	set name = "Reproduce"
 	set desc = "Spawn several young."
 
-	var/datum/organ/external/head = get_organ("head")
-	var/mob/living/simple_animal/borer/B
+	var/mob/living/simple_animal/borer/B = has_brain_worms()
 
-	for(var/I in head.implants)
-		if(istype(I,/mob/living/simple_animal/borer))
-			B = I
 	if(!B)
 		return
 
