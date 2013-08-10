@@ -1291,7 +1291,7 @@ mob/living/carbon/human/yank_out_object()
 	if(!B)
 		return
 
-	if(!B.ckey && ckey && B.controlling)
+	if(B.controlling)
 		src << "\red <B>You withdraw your probosci, releasing control of [B.host_brain]</B>"
 		B.host_brain << "\red <B>Your vision swims as the alien parasite releases control of your body.</B>"
 		B.ckey = ckey
