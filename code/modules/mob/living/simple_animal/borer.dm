@@ -57,7 +57,7 @@
 				if(prob(5))
 					host.adjustBrainLoss(rand(1,2))
 
-				if(prob(host.brainloss))
+				if(prob(host.brainloss/20))
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
 
 				//if(host.brainloss > 100)
