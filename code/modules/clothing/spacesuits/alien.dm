@@ -92,6 +92,9 @@
 
 	return ..()
 
+/obj/item/clothing/under/vox
+	has_sensor = 0
+
 /obj/item/clothing/under/vox/vox_casual
 	name = "alien clothing"
 	desc = "This doesn't look very comfortable."
