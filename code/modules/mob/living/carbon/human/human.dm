@@ -1274,3 +1274,32 @@ mob/living/carbon/human/yank_out_object()
 		return 1
 	else
 		return 0
+
+//Brain slug proc for voluntary removal of control.
+/mob/living/carbon/human/proc/release_control()
+
+	set category = "Alien"
+	set name = "Release Control"
+	set desc = "Release control of your host's body."
+
+	var/datum/organ/external/head = get_organ("head")
+	var/mob/living/simple_animal/borer/B
+
+	for(var/I in head.implants)
+		if(istype(I,/mob/living/simple_animal/borer))
+			B = I
+	if(!B)
+		return
+
+	if(!B.ckey && ckey && B.controlling)
+		src << "\red <B>You withdraw your probosci, releasing control of [B.host_brain]</B>"
+		B.host_brain << "\red <B>Your vision swims as the alien parasite releases control of your body.</B>"
+		B.ckey = ckey
+		B.controlling = 0
+	if(B.host_brain.ckey)
+		ckey = B.host_brain.ckey
+		B.host_brain.ckey = null
+		B.host_brain.name = "host brain"
+		B.host_brain.real_name = "host brain"
+
+	verbs -= /mob/living/carbon/human/proc/release_control
