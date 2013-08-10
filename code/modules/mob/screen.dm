@@ -611,12 +611,12 @@
 		var/mob/living/simple_animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
 
-		H << "\red <B>You begin doggedly resisting the parasite's control.</B>"
+		H << "\red <B>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</B>"
 		B.host << "\red <B>You feel the captive mind of [src] begin to resist your control.</B>"
 
-		spawn(50)
+		spawn(rand(400,500))
 
-			if(!B || !H || !H.ckey)
+			if(!B || !B.controlling)
 				return
 
 			H << "\red <B>With an immense exertion of will, you regain control of your body!</B>"

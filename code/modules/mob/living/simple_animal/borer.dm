@@ -39,16 +39,33 @@
 	friendly = "prods"
 	wander = 0
 
+	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
 	var/mob/living/carbon/human/host        // Human host for the brain worm.
 	var/truename                            // Name used for brainworm-speak.
 	var/bonded                              // Var for full bonding with the host brain.
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
 	var/controlling                         // Used in human death check.
 
+/mob/living/simple_animal/borer/Life()
+
+	..()
+	if(host)
+		if(!stat && !host.stat && chemicals < 250)
+			chemicals++
+
 /mob/living/simple_animal/borer/New()
 	..()
 	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
 	host_brain = new/mob/living/captive_brain(src)
+
+	for(var/mob/M in player_list)
+		if(istype(M,/mob/dead/observer))
+			var/mob/dead/observer/O = M
+			if(O.client)
+				if(O.client.prefs.be_special & BE_ALIEN)
+					src.ckey = O.ckey
+					break
+
 
 /mob/living/simple_animal/borer/say(var/message)
 
@@ -120,6 +137,8 @@
 			controlling = 1
 
 			host.verbs += /mob/living/carbon/human/proc/release_control
+			host.verbs += /mob/living/carbon/human/proc/punish_host
+			host.verbs += /mob/living/carbon/human/proc/spawn_larvae
 
 mob/living/simple_animal/borer/verb/release_host()
 	set category = "Alien"
@@ -164,6 +183,10 @@ mob/living/simple_animal/borer/proc/detatch()
 	head.implants -= src
 	src.loc = get_turf(host)
 	controlling = 0
+
+	host.verbs -= /mob/living/carbon/human/proc/release_control
+	host.verbs -= /mob/living/carbon/human/proc/punish_host
+	host.verbs -= /mob/living/carbon/human/proc/spawn_larvae
 
 	if(host_brain.ckey)
 		src.ckey = host.ckey
