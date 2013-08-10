@@ -50,8 +50,17 @@
 
 	..()
 	if(host)
-		if(!stat && !host.stat && chemicals < 250)
-			chemicals++
+		if(!stat && !host.stat)
+			if(chemicals < 250)
+				chemicals++
+			if(controlling)
+				if(rand(0,3))
+					host.adjustBrainLoss(rand(1,2))
+
+				if(prob(host.brainloss))
+					host.say("*"[pick("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp")])
+
+				//if(host.brainloss > 100)
 
 /mob/living/simple_animal/borer/New()
 	..()
@@ -124,7 +133,7 @@
 
 	src << "You begin delicately adjusting your connection to the host brain..."
 
-	spawn(100)
+	spawn(300+(host.brainloss*5))
 
 		if(!host || !src) return
 

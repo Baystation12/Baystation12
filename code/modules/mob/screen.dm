@@ -614,11 +614,12 @@
 		H << "\red <B>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</B>"
 		B.host << "\red <B>You feel the captive mind of [src] begin to resist your control.</B>"
 
-		spawn(rand(400,500))
+		spawn(rand(350,450)+B.host.brainloss)
 
 			if(!B || !B.controlling)
 				return
 
+			B.host.adjustBrainLoss(rand(5,10))
 			H << "\red <B>With an immense exertion of will, you regain control of your body!</B>"
 			B.host << "\red <B>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</b>"
 			B.controlling = 0
