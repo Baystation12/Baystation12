@@ -384,6 +384,12 @@ var/list/department_radio_keys = list(
 					if(understood || P.universal_speak)
 						//world << "[M] understood [src] (1)."
 						heard_a += M
+					else if(istype(P,/mob/living/carbon/human))
+						var/mob/living/carbon/human/H = P
+						if(H.has_brain_worms()) // Brain worms act like Babelfish.
+							heard_a += M
+						else
+							heard_b += M
 					else
 						//world << "[M] didn't understand [src]."
 						heard_b += M

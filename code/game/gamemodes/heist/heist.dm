@@ -7,6 +7,9 @@ VOX HEIST ROUNDTYPE
 
 var/global/vox_kills = 0 //Used to check the Inviolate.
 
+/datum/game_mode/
+	var/list/datum/mind/raiders = list()  //Antags.
+
 /datum/game_mode/heist
 	name = "heist"
 	config_tag = "heist"
@@ -19,7 +22,6 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
 
 	var/list/raid_objectives = list()     //Raid objectives.
-	var/list/datum/mind/raiders = list()  //Antags.
 	var/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' objective.
 
 /datum/game_mode/heist/announce()
