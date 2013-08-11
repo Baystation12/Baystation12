@@ -1,6 +1,3 @@
-#define WHITELISTED 1  // Language is available if the speaker is whitelisted.
-#define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
-
 /*
 	Datum based languages. Easily editable and modular.
 */
@@ -9,14 +6,16 @@
 	var/name = "an unknown language" // Fluff name of language if any.
 	var/speech_verb = "says"         // 'says', 'hisses', 'farts'.
 	var/colour = ""                  // CSS style to use for strings in this language.
-	var/key                          // Character used to speak in language eg. :o for Unathi.
+	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                    // Various language flags.
+	var/native                       // If set, non-native speakers will have trouble speaking.
 
 /datum/language/unathi
 	name = "Sinta'unathi"
 	speech_verb = "hisses"
 	colour = "soghun"
 	key = "o"
+	native = "Unathi"
 	flags = RESTRICTED
 
 /datum/language/tajaran
@@ -24,6 +23,7 @@
 	speech_verb = "mrowls"
 	colour = "tajaran"
 	key = "j"
+	native = "Tajaran"
 	flags = RESTRICTED
 
 /datum/language/skrell
@@ -31,6 +31,7 @@
 	speech_verb = "warbles"
 	colour = "skrell"
 	key = "k"
+	native = "Skrell"
 	flags = RESTRICTED
 
 /datum/language/vox
@@ -38,11 +39,13 @@
 	speech_verb = "shrieks"
 	colour = "vox"
 	key = "v"
+	native = "Vox"
 	flags = RESTRICTED
 
 /datum/language/human
 	name = "Sol Common"
 	key = "1"
+	native = "Human"
 	flags = RESTRICTED
 
 //Pidgin languages, imperfectly speakable by people not a member of the core species.
@@ -65,11 +68,11 @@
 
 // Galactic common languages (systemwide accepted standards).
 
-/datum/language/common/trader
+/datum/language/trader
 	name = "Tradeband"
 	key = "tra"
 
-/datum/language/common/gutter
+/datum/language/gutter
 	name = "Gutter"
 	key = "gut"
 
