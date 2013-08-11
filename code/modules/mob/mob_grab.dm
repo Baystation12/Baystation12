@@ -162,6 +162,8 @@
 	if(killing)
 		return
 
+	assailant.delay_click(10)
+
 	switch(S.id)
 		if(1.0)
 			if (state < 2)
