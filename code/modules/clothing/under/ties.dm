@@ -176,7 +176,7 @@
 	color = "holster_low"
 
 /obj/item/clothing/tie/storage
-	name = "load beearing equipment"
+	name = "load bearing equipment"
 	desc = "Used to hold things when you don't have enough hands for that."
 	icon_state = "webbing"
 	color = "webbing"
@@ -201,7 +201,7 @@
 	src.add_fingerprint(user)
 
 /obj/item/weapon/storage/pockets
-	name = "webbing pockets"
+	name = "storage"
 	var/master_item		//item it belongs to
 
 /obj/item/weapon/storage/pockets/close(mob/user as mob)
@@ -222,7 +222,7 @@
 	slots = 5
 
 /obj/item/clothing/tie/storage/brown_vest
-	name = "black webbing vest"
+	name = "brown webbing vest"
 	desc = "Worn brownish synthcotton vest with lots of pockets to unload your hands."
 	icon_state = "vest_brown"
 	color = "vest_brown"
@@ -303,3 +303,35 @@
 		new /obj/item/clothing/tie/holobadge/cord(src)
 		..()
 		return
+
+/obj/item/clothing/tie/storage/knifeharness
+	name = "decorated harness"
+	desc = "A heavily decorated harness of sinew and leather with two knife-loops."
+	icon_state = "unathiharness2"
+	color = "unathiharness2"
+	slots = 2
+
+/obj/item/clothing/tie/storage/knifeharness/attackby(var/obj/item/O as obj, mob/user as mob)
+	..()
+	update()
+
+/obj/item/clothing/tie/storage/knifeharness/proc/update()
+	var/count = 0
+	for(var/obj/item/I in hold)
+		if(istype(I,/obj/item/weapon/hatchet/unathiknife))
+			count++
+	if(count>2) count = 2
+	item_state = "unathiharness[count]"
+	icon_state = item_state
+	color = item_state
+
+	if(istype(loc, /obj/item/clothing))
+		var/obj/item/clothing/U = loc
+		if(istype(U.loc, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = U.loc
+			H.update_inv_w_uniform()
+
+/obj/item/clothing/tie/storage/knifeharness/New()
+	..()
+	new /obj/item/weapon/hatchet/unathiknife(hold)
+	new /obj/item/weapon/hatchet/unathiknife(hold)

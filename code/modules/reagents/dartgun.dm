@@ -28,7 +28,7 @@
 	var/list/mixing = list() //Containers being used for mixing.
 	var/obj/item/weapon/dart_cartridge/cartridge = null //Container of darts.
 	var/max_beakers = 3
-	var/dart_reagent_amount = 5
+	var/dart_reagent_amount = 15
 	var/container_type = /obj/item/weapon/reagent_containers/glass/beaker/vial
 	var/list/starting_chems = null
 
@@ -52,7 +52,7 @@
 	if(starting_chems)
 		for(var/chem in starting_chems)
 			var/obj/item/weapon/reagent_containers/glass/beaker/vial/B = new(src)
-			B.reagents.add_reagent(chem, 25)
+			B.reagents.add_reagent(chem, 50)
 			beakers += B
 	cartridge = new /obj/item/weapon/dart_cartridge(src)
 	update_icon()

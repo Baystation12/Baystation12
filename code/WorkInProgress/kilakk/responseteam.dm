@@ -2,7 +2,9 @@
 // work in progress
 
 var/const/members_possible = 5
-var/sent_emergency_team = 0
+var/const/members_required = 1 // We need at least *one* person ;_;
+var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
+// 'sent_response_team' for automagic response teams
 
 /client/proc/response_team()
 	set name = "Dispatch Emergency Response Team"
@@ -18,7 +20,7 @@ var/sent_emergency_team = 0
 	if(ticker.current_state == GAME_STATE_PREGAME)
 		usr << "\red The round hasn't started yet!"
 		return
-	if(sent_emergency_team == 1)
+	if(admin_emergency_team || send_emergency_team)
 		usr << "\red Central Command has already dispatched an emergency response team!"
 		return
 	if(alert("Do you want to dispatch an Emergency Response Team?",,"Yes","No") != "Yes")
@@ -35,11 +37,11 @@ var/sent_emergency_team = 0
 			if(alert("You haven't specified a mission. Exit the setup process?",,"No","Yes")=="Yes")
 				return
 
-	if(sent_emergency_team)
+	if(admin_emergency_team || send_emergency_team)
 		usr << "\red Looks like somebody beat you to it!"
 		return
 
-	sent_emergency_team = 1
+	admin_emergency_team = 1
 	message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
 
@@ -87,6 +89,12 @@ var/sent_emergency_team = 0
 
 	sleep(300)
 
+	if(candidates.len < members_required)
+		message_admins("Not enough people signed up for [key_name_admin(usr)]'s response team! Aborting.")
+		log_admin("Response Team aborted: Not Enough Signups.")
+		admin_emergency_team = 0
+		return
+
 	for(var/i=members_possible,(i>0&&candidates.len), i--) // The rest of the choosing process is just an input with a list of candidates on it
 		var/chosen = input("Time's up! Choose characters to spawn as reponse team members. This will go on until there are no more ghosts to pick from or until all slots are full.", "Considered Players") as null|anything in candidates
 		candidates -= chosen
@@ -111,6 +119,7 @@ var/sent_emergency_team = 0
 				break
 
 			spawn(0)
+
 				switch(alert(new_member, "You are an Emergency Response Team member! Are you a boy or a girl?",,"Male","Female"))
 					if("Male")
 						new_member.gender = MALE
@@ -122,9 +131,12 @@ var/sent_emergency_team = 0
 				if(!new_name)
 					new_member.real_name = "Agent [pick("Red","Yellow","Orange","Silver","Gold", "Pink", "Purple", "Rainbow")]" // Choose a "random" agent name
 					new_member.name = usr.real_name
+					new_member.mind.name = usr.real_name
+
 				else
 					new_member.real_name = new_name
 					new_member.name = new_name
+					new_member.mind.name = new_name
 
 				// -- CHANGE APPEARANCE --
 				var/new_tone = input(new_member, "Please select your new skin tone: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation") as num
@@ -171,13 +183,16 @@ var/sent_emergency_team = 0
 				new_member.update_hair(1)
 
 				new_member.mind_initialize()
+
 				new_member.mind.assigned_role = "Emergency Response Team"
 				new_member.mind.special_role = "Emergency Response Team"
-				ticker.mode.traitors += new_member.mind // ERTs will show up at the end of the round on the "traitor" list
+				ticker.mode.traitors |= new_member.mind // ERTs will show up at the end of the round on the "traitor" list
 
+				// Join message
 				new_member << "\blue You are the <b>Emergency Response Team[!leader_selected?"!</b>":" Leader!</b>"] \nAs a response team [!leader_selected?"member":"<b>leader</b>"] you answer directly to [!leader_selected?"your team leader.":"Central Command."] \nYou have been deployed by NanoTrasen Central Command in Tau Ceti to resolve a Code Red alert aboard [station_name()], and have been provided with the following instructions and information regarding your mission: \red [situation]"
 				new_member.mind.store_memory("<b>Mission Parameters:</b> \red [situation].")
 
+				// Leader join message
 				if(leader_selected)
 					new_member << "\red The Nuclear Authentication Code is: <b> [nuke_code]</b>. You are instructed not to detonate the nuclear device aboard [station_name()] unless <u>absolutely necessary</u>."
 					new_member.mind.store_memory("<b>Nuclear Authentication Code:</b> \red [nuke_code]")
@@ -213,7 +228,7 @@ var/sent_emergency_team = 0
 
 	// Put stuff into their backpacks
 	equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(src), slot_in_backpack)
-	equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid(src), slot_in_backpack) // Not sure about this
+	// equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(src), slot_in_backpack) // Regular medkit
 
 	// Loyalty implants
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(src)
@@ -234,6 +249,8 @@ var/sent_emergency_team = 0
 		E.assignment = "Emergency Response Team"
 	E.registered_name = real_name
 	equip_to_slot_or_del(E, slot_wear_id)
+
+	update_icons()
 
 	return 1
 

@@ -5,15 +5,46 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 	var/list/hud_list = list()
-
+	var/datum/species/species //Contains icon generation and language information, set during New().
 
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
 
+/mob/living/carbon/human/skrell/New()
+	h_style = "Skrell Male Tentacles"
+	set_species("Skrell")
+	..()
 
+/mob/living/carbon/human/tajaran/New()
+	h_style = "Tajaran Ears"
+	set_species("Tajaran")
+	..()
+
+/mob/living/carbon/human/unathi/New()
+	h_style = "Unathi Horns"
+	set_species("Unathi")
+	..()
+
+/mob/living/carbon/human/vox/New()
+	h_style = "Short Vox Quills"
+	set_species("Vox")
+	..()
+
+/mob/living/carbon/human/diona/New()
+	species = new /datum/species/diona(src)
+	..()
 
 /mob/living/carbon/human/New()
+
+	if(!species)
+		set_species()
+
+	if(species.language)
+		var/datum/language/L = all_languages[species.language]
+		if(L)
+			languages += L
+
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
@@ -379,6 +410,7 @@
 	<BR>[(handcuffed ? text("<A href='?src=\ref[src];item=handcuff'>Handcuffed</A>") : text("<A href='?src=\ref[src];item=handcuff'>Not Handcuffed</A>"))]
 	<BR>[(legcuffed ? text("<A href='?src=\ref[src];item=legcuff'>Legcuffed</A>") : text(""))]
 	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
+	<BR><A href='?src=\ref[src];item=splints'>Remove Splints</A>
 	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
 	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
 	<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>
@@ -794,44 +826,14 @@
 	return
 
 /mob/living/carbon/human/get_species()
-	if(dna)
-		switch(dna.mutantrace)
-			if("lizard")
-				return "Unathi"
-			if("tajaran")
-				return "Tajaran"
-			if("skrell")
-				return "Skrell"
-			if("vox")
-				return "Vox"
-			if("plant")
-				return "Mobile vegetation"
-			if("golem")
-				return "Animated Construct"
-			else
-				return "Human"
 
-/mob/living/carbon/get_species()
-	if(src.dna)
-		if(src.dna.mutantrace == "lizard")
-			return "Unathi"
-		else if(src.dna.mutantrace == "skrell")
-			return "Skrell"
-		else if(src.dna.mutantrace == "tajaran")
-			return "Tajaran"
-		else if(src.dna.mutantrace == "vox")
-			return "vox"
+	if(!species)
+		set_species()
 
-/mob/living/carbon/proc/update_mutantrace_languages()
-	if(src.dna)
-		if(src.dna.mutantrace == "lizard")
-			src.soghun_talk_understand = 1
-		else if(src.dna.mutantrace == "skrell")
-			src.skrell_talk_understand = 1
-		else if(src.dna.mutantrace == "tajaran")
-			src.tajaran_talk_understand = 1
-		else if(src.dna.mutantrace == "vox")
-			src.vox_talk_understand = 1
+	if(dna && dna.mutantrace == "golem")
+		return "Animated Construct"
+
+	return species.name
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)
@@ -1114,9 +1116,9 @@ mob/living/carbon/human/yank_out_object()
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
-	if(!isliving(usr) || usr.next_move > world.time)
+	if(!isliving(usr) || usr.last_click + usr.click_delay > world.time)
 		return
-	usr.next_move = world.time + 20
+	usr.delay_click(20)
 
 	if(usr.stat == 1)
 		usr << "You are unconcious and cannot do that!"
@@ -1197,6 +1199,8 @@ mob/living/carbon/human/yank_out_object()
 /mob/living/carbon/human/proc/handle_embedded_objects()
 
 	for(var/datum/organ/external/organ in src.organs)
+		if(organ.status & ORGAN_SPLINTED) //Splints prevent movement.
+			continue
 		for(var/obj/item/weapon/O in organ.implants)
 			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
 				// All kinds of embedded objects cause bleeding.
@@ -1210,9 +1214,10 @@ mob/living/carbon/human/yank_out_object()
 						msg ="<span class='warning'>[O] in your [organ.display_name] twists painfully as you move.</span>"
 				src << msg
 
-				organ.status |= ORGAN_BLEEDING
 				organ.take_damage(rand(1,3), 0, 0)
-				src.adjustToxLoss(rand(1,3))
+				if(!(organ.status & ORGAN_ROBOT)) //There is no blood in protheses.
+					organ.status |= ORGAN_BLEEDING
+					src.adjustToxLoss(rand(1,3))
 
 /mob/living/carbon/human/verb/check_pulse()
 	set category = "Object"
@@ -1246,3 +1251,106 @@ mob/living/carbon/human/yank_out_object()
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
+/mob/living/carbon/human/proc/set_species(var/new_species)
+
+	if(!new_species)
+		new_species = "Human"
+
+	if(species && (species.name && species.name == new_species))
+		return
+
+	species = all_species[new_species]
+
+	see_in_dark = species.darksight
+	if(see_in_dark > 2)
+		see_invisible = SEE_INVISIBLE_LEVEL_ONE
+	else
+		see_invisible = SEE_INVISIBLE_LIVING
+
+	spawn(0)
+		update_icons()
+
+	if(species)
+		return 1
+	else
+		return 0
+
+//Brain slug proc for voluntary removal of control.
+/mob/living/carbon/human/proc/release_control()
+
+	set category = "Alien"
+	set name = "Release Control"
+	set desc = "Release control of your host's body."
+
+	var/datum/organ/external/head = get_organ("head")
+	var/mob/living/simple_animal/borer/B
+
+	for(var/I in head.implants)
+		if(istype(I,/mob/living/simple_animal/borer))
+			B = I
+	if(!B)
+		return
+
+	if(B.controlling)
+		src << "\red <B>You withdraw your probosci, releasing control of [B.host_brain]</B>"
+		B.host_brain << "\red <B>Your vision swims as the alien parasite releases control of your body.</B>"
+		B.ckey = ckey
+		B.controlling = 0
+	if(B.host_brain.ckey)
+		ckey = B.host_brain.ckey
+		B.host_brain.ckey = null
+		B.host_brain.name = "host brain"
+		B.host_brain.real_name = "host brain"
+
+	verbs -= /mob/living/carbon/human/proc/release_control
+	verbs -= /mob/living/carbon/human/proc/punish_host
+	verbs -= /mob/living/carbon/human/proc/spawn_larvae
+
+//Brain slug proc for tormenting the host.
+/mob/living/carbon/human/proc/punish_host()
+	set category = "Alien"
+	set name = "Torment host"
+	set desc = "Punish your host with agony."
+
+	var/mob/living/simple_animal/borer/B = has_brain_worms()
+
+	if(!B)
+		return
+
+	if(B.host_brain.ckey)
+		src << "\red <B>You send a punishing spike of psychic agony lancing into your host's brain.</B>"
+		B.host_brain << "\red <B><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></B>"
+
+//Check for brain worms in head.
+/mob/living/carbon/human/proc/has_brain_worms()
+
+	var/datum/organ/external/head = get_organ("head")
+
+	for(var/I in head.implants)
+		if(istype(I,/mob/living/simple_animal/borer))
+			return I
+
+	return 0
+
+/mob/living/carbon/human/proc/spawn_larvae()
+	set category = "Alien"
+	set name = "Reproduce"
+	set desc = "Spawn several young."
+
+	var/mob/living/simple_animal/borer/B = has_brain_worms()
+
+	if(!B)
+		return
+
+	if(B.chemicals >= 100)
+		src << "\red <B>Your host twitches and quivers as you rapdly excrete several larvae from your sluglike body.</B>"
+		visible_message("\red <B>[src] heaves violently, expelling a rush of vomit and a wriggling, sluglike creature!</B>")
+		B.chemicals -= 100
+
+		new /obj/effect/decal/cleanable/vomit(get_turf(src))
+		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+		new /mob/living/simple_animal/borer(get_turf(src))
+
+	else
+		src << "You do not have enough chemicals stored to reproduce."
+		return
