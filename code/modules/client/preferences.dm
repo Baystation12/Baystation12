@@ -862,19 +862,24 @@ datum/preferences
 							s_tone = 0
 
 					if("language")
+						var/languages_available
 						var/list/new_languages = list("None")
-						var/language_whitelisted = 0
+
 						if(config.usealienwhitelist)
 							for(var/L in all_languages)
-								if(is_alien_whitelisted(user, L))
-									new_languages += L
-									language_whitelisted = 1
+								var/datum/language/lang = all_languages[L]
+								world << "Checking [L]! [lang.flags]."
+								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))))
+									new_languages += lang
+									languages_available = 1
+
+							if(languages_available)
+								alert(user, "There are not currently any available secondary languages.")
 						else
 							for(var/L in all_languages)
-								new_languages += L
-
-						if(!language_whitelisted)
-							alert(user, "You cannot select a secondary language as you need to be whitelisted.  If you wish to enable a language, post in the Alien Whitelist forums.")
+								var/datum/language/lang = all_languages[L]
+								if(!(lang.flags & RESTRICTED))
+									new_languages += lang
 
 						language = input("Please select a secondary language", "Character Generation", null) in new_languages
 
