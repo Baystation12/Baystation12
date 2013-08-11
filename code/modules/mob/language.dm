@@ -1,37 +1,77 @@
+#define WHITELISTED 1  // Language is available if the speaker is whitelisted.
+#define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
+
 /*
 	Datum based languages. Easily editable and modular.
 */
 
 /datum/language
-	var/name = "name"   // Fluff name of language if any.
-	var/speech_verb     // 'says', 'hisses', 'farts'.
-	var/colour          // CSS style to use for strings in this language.
-	var/key             // Character used to speak in language eg. :o for Unathi.
+	var/name = "an unknown language" // Fluff name of language if any.
+	var/speech_verb = "says"         // 'says', 'hisses', 'farts'.
+	var/colour = ""                  // CSS style to use for strings in this language.
+	var/key                          // Character used to speak in language eg. :o for Unathi.
+	var/flags = 0                    // Various language flags.
 
 /datum/language/unathi
 	name = "Sinta'unathi"
 	speech_verb = "hisses"
 	colour = "soghun"
 	key = "o"
+	flags = RESTRICTED
 
 /datum/language/tajaran
-	name = "Siik'mas"
+	name = "Siik'tjar"
 	speech_verb = "mrowls"
 	colour = "tajaran"
 	key = "j"
+	flags = RESTRICTED
 
 /datum/language/skrell
 	name = "Skrellian"
 	speech_verb = "warbles"
 	colour = "skrell"
 	key = "k"
+	flags = RESTRICTED
 
 /datum/language/vox
 	name = "Vox-pidgin"
 	speech_verb = "shrieks"
 	colour = "vox"
 	key = "v"
+	flags = RESTRICTED
 
+/datum/language/human
+	name = "Sol Common"
+	key = "1"
+	flags = RESTRICTED
+
+//Pidgin languages, imperfectly speakable by people not a member of the core species.
+
+/datum/language/unathi/common
+	name = "Common Unathi"
+	flags = WHITELISTED
+
+/datum/language/tajaran/common
+	name = "Siik'mas"
+	flags = WHITELISTED
+
+/datum/language/skrell/common
+	name = "Common Skrell"
+	flags = WHITELISTED
+
+/datum/language/human/common
+	name = "Common Human"
+	flags = WHITELISTED
+
+// Galactic common languages (systemwide accepted standards).
+
+/datum/language/common/trader
+	name = "Tradeband"
+	key = "tra"
+
+/datum/language/common/gutter
+	name = "Gutter"
+	key = "gut"
 
 // Language handling.
 /mob/proc/add_language(var/language)
