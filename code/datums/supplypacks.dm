@@ -356,10 +356,12 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/storage/firstaid/fire,
 					/obj/item/weapon/storage/firstaid/toxin,
 					/obj/item/weapon/storage/firstaid/o2,
+					/obj/item/weapon/storage/firstaid/adv,
 					/obj/item/weapon/reagent_containers/glass/bottle/antitoxin,
 					/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,
 					/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
-					/obj/item/weapon/storage/box/syringes)
+					/obj/item/weapon/storage/box/syringes,
+					/obj/item/weapon/storage/box/autoinjectors)
 	cost = 10
 	containertype = /obj/structure/closet/crate/medical
 	containername = "Medical crate"

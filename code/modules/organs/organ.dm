@@ -80,7 +80,7 @@
 
 		//Broken limbs hurt too
 		var/broken = 0
-		if(E.status & ORGAN_BROKEN && !(E.status & ORGAN_SPLINTED && prob(10)) )
+		if(E.status & ORGAN_BROKEN && !(E.status & ORGAN_SPLINTED) )
 			broken = 1
 
 		//Moving around with fractured ribs won't do you any good
