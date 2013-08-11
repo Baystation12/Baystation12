@@ -5,7 +5,7 @@
 /datum/language
 	var/name = "an unknown language" // Fluff name of language if any.
 	var/speech_verb = "says"         // 'says', 'hisses', 'farts'.
-	var/colour = ""                  // CSS style to use for strings in this language.
+	var/colour = "say_quote"         // CSS style to use for strings in this language.
 	var/key = "x"                    // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                    // Various language flags.
 	var/native                       // If set, non-native speakers will have trouble speaking.

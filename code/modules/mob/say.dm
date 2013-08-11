@@ -81,7 +81,7 @@
 	var/ending = copytext(text, length(text))
 
 	if (speaking)
-		return "<span class='say_quote'>[speaking.speech_verb]</span>, \"<span class='[speaking.colour]'>[text]</span>\"";
+		return "<span class='say_quote'>[speaking.speech_verb] in [speaking.name]</span>, \"<span class='[speaking.colour]'>[text]</span>\"";
 
 //Needs Virus2
 //	if (src.disease_symptoms & DISEASE_HOARSE)
