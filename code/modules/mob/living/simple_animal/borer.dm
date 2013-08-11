@@ -54,10 +54,10 @@
 			if(chemicals < 250)
 				chemicals++
 			if(controlling)
-				if(rand(0,3))
+				if(prob(5))
 					host.adjustBrainLoss(rand(1,2))
 
-				if(prob(host.brainloss))
+				if(prob(host.brainloss/20))
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
 
 				//if(host.brainloss > 100)
@@ -97,11 +97,11 @@
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return
 
-	/*if (copytext(message, 1, 2) == "*")
+	if (copytext(message, 1, 2) == "*")
 		return emote(copytext(message, 2))
 
 	if (copytext(message, 1, 2) == ";") //Brain borer hivemind.
-		return borer_speak(message)*/
+		return borer_speak(message)
 
 	if(!host)
 		src << "You have no host to speak to."
@@ -227,6 +227,9 @@ mob/living/simple_animal/borer/proc/detatch()
 	var/mob/living/carbon/human/M = input(src,"Who do you wish to infest?") in null|choices
 
 	if(!M || !src) return
+
+	if(M.has_brain_worms())
+		src << "You cannot infest someone who is already infested!"
 
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
