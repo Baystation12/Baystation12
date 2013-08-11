@@ -190,6 +190,12 @@
 		else if(jitteriness >= 100)
 			msg += "<span class='warning'>[t_He] [t_is] twitching ever so slightly.</span>\n"
 
+	//splints
+	for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
+		var/datum/organ/external/o = get_organ(organ)
+		if(o && o.status & ORGAN_SPLINTED)
+			msg += "<span class='warning'>[t_He] [t_has] a splint on his [o.display_name]!</span>\n"
+
 	if(suiciding)
 		msg += "<span class='warning'>[t_He] appears to have commited suicide... there is no hope of recovery.</span>\n"
 

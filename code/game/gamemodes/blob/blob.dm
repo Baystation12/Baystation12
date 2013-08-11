@@ -6,7 +6,7 @@ var/list/blob_cores = list()
 var/list/blob_nodes = list()
 
 
-/datum/game_mode/blob
+/*/datum/game_mode/blob
 	name = "blob"
 	config_tag = "blob"
 	required_players = 0
@@ -130,3 +130,4 @@ var/list/blob_nodes = list()
 					stage = 3
 		return
 
+*/

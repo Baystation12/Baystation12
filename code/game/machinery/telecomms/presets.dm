@@ -142,12 +142,7 @@
 	id = "Supply Server"
 	freq_listening = list(1347)
 	autolinkers = list("supply")
-/*
-/obj/machinery/telecomms/server/presets/mining
-	id = "Mining Server"
-	freq_listening = list(1349)
-	autolinkers = list("mining")
-*/
+
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"
 	freq_listening = list()

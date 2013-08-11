@@ -33,7 +33,7 @@
 	if(hud_used)	del(hud_used)		//remove the hud objects
 	hud_used = new /datum/hud(src)
 
-	next_move = 1
+	last_click = world.time
 	sight |= SEE_SELF
 	..()
 
