@@ -33,6 +33,7 @@
 	R.base_icon = "robot"
 	del(R.module)
 	R.module = null
+	R.camera.network.Remove(list("Medical","MINE"))
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
 	R.updateicon()

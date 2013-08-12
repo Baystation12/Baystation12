@@ -81,30 +81,6 @@
 	plant_type = 2
 	growthstages = 3
 
-/obj/item/seeds/replicapod
-	name = "pack of replica pod seeds"
-	desc = "These seeds grow into replica pods. They say these are used to harvest humans."
-	icon_state = "seed-replicapod"
-	mypath = "/obj/item/seeds/replicapod"
-	species = "replicapod"
-	plantname = "Replica Pod"
-	productname = "/mob/living/carbon/human" //verrry special -- Urist
-	lifespan = 50 //no idea what those do
-	endurance = 8
-	maturation = 10
-	production = 10
-	yield = 1 //seeds if there isn't a dna inside
-	oneharvest = 1
-	potency = 30
-	plant_type = 0
-	growthstages = 6
-	var/ui = null //for storing the guy
-	var/se = null
-	var/ckey = null
-	var/realName = null
-	var/datum/mind/mind = null
-	gender = MALE
-
 /obj/item/seeds/grapeseed
 	name = "pack of grape seeds"
 	desc = "These seeds grow into grape vines."
