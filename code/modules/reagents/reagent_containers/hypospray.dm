@@ -68,9 +68,15 @@
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
 	..()
-	if(reagents.total_volume <= 0)
+/*if(reagents.total_volume <= 0) //Prevents autoinjectors to be refilled.
 		flags &= ~OPENCONTAINER
+*/
 	update_icon()
+	return
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/attackby(obj/item/I as obj, mob/user as mob)
+	..()
+	update_icon() //Allows the autoinjector to be reset.
 	return
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/update_icon()
