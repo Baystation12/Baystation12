@@ -193,6 +193,12 @@ mob/living/simple_animal/borer/proc/detatch()
 	src.loc = get_turf(host)
 	controlling = 0
 
+	reset_view(null)
+	machine = null
+
+	host.reset_view(null)
+	host.machine = null
+
 	host.verbs -= /mob/living/carbon/human/proc/release_control
 	host.verbs -= /mob/living/carbon/human/proc/punish_host
 	host.verbs -= /mob/living/carbon/human/proc/spawn_larvae
@@ -230,6 +236,7 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	if(M.has_brain_worms())
 		src << "You cannot infest someone who is already infested!"
+		return
 
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
