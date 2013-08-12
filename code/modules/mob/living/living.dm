@@ -269,6 +269,15 @@
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 		C.handcuffed = initial(C.handcuffed)
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		for(var/datum/organ/external/O in H.organs)
+			O.heal_damage(1000,1000,1,1)
+		for(var/datum/organ/internal/I in H.internal_organs)
+			I.damage = 0
+		for (var/ID in H.virus2)
+			var/datum/disease2/disease/V = H.virus2[ID]
+			V.cure(src)
 	for(var/datum/disease/D in viruses)
 		D.cure(0)
 	if(stat == 2)
