@@ -224,7 +224,7 @@ mob/living/simple_animal/borer/proc/detatch()
 		return
 
 	var/list/choices = list()
-	for(var/mob/living/C in view(1,src))
+	for(var/mob/living/carbon/human/C in view(1,src))
 		if(istype(C,/mob/living/carbon/human) && C.stat != 2)
 			choices += C
 
