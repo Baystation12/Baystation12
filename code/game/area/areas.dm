@@ -45,12 +45,13 @@
 		poweralm = state
 		if(istype(source))	//Only report power alarms on the z-level where the source is located.
 			var/list/cameras = list()
-			for (var/obj/machinery/camera/C in src)
-				cameras += C
-				if(state == 1)
-					C.network.Remove("Power Alarms")
-				else
-					C.network.Add("Power Alarms")
+			for (var/area/RA in related)
+				for (var/obj/machinery/camera/C in RA)
+					cameras += C
+					if(state == 1)
+						C.network.Remove("Power Alarms")
+					else
+						C.network.Add("Power Alarms")
 			for (var/mob/living/silicon/aiPlayer in player_list)
 				if(aiPlayer.z == source.z)
 					if (state == 1)

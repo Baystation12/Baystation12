@@ -68,7 +68,7 @@
 				message = replacetext(message, "u", "µ")
 				message = replacetext(message, "b", "ß")
 
-		else if(istype(wear_mask, /obj/item/clothing/mask/luchador))
+		/*else if(istype(wear_mask, /obj/item/clothing/mask/luchador))
 			if(copytext(message, 1, 2) != "*")
 				message = replacetext(message, "captain", "CAPITÁN")
 				message = replacetext(message, "station", "ESTACIÓN")
@@ -88,7 +88,7 @@
 				message = replacetext(message, "wizard", "mago")
 				message = uppertext(message)	//Things end up looking better this way (no mixed cases), and it fits the macho wrestler image.
 				if(prob(25))
-					message += " OLE!"
+					message += " OLE!"*/
 
 		else if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
 			var/obj/item/clothing/mask/horsehead/hoers = wear_mask

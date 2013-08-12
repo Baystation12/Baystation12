@@ -3,14 +3,14 @@
 	var/up = 0 //So Unathi helmets play nicely with the weldervision check.
 	mob_can_equip(M as mob, slot)
 		var/mob/living/carbon/human/U = M
-		if(U.dna.mutantrace != "lizard")
+		if(U.species.name != "Unathi")
 			U << "<span class='warning'>This clearly isn't designed for your species!</span>"
 			return 0
 		return ..()
 
 /obj/item/clothing/suit/space/unathi/mob_can_equip(M as mob, slot)
 	var/mob/living/carbon/human/U = M
-	if(U.dna.mutantrace != "lizard")
+	if(U.species.name != "Unathi")
 		U << "<span class='warning'>This clearly isn't designed for your species!</span>"
 		return 0
 
@@ -79,18 +79,21 @@
 
 /obj/item/clothing/head/helmet/space/vox/mob_can_equip(M as mob, slot)
 	var/mob/living/carbon/human/V = M
-	if(V.dna.mutantrace != "vox")
+	if(V.species.name != "Vox")
 		V << "<span class='warning'>This clearly isn't designed for your species!</span>"
 		return 0
 	return ..()
 
 /obj/item/clothing/suit/space/vox/mob_can_equip(M as mob, slot)
 	var/mob/living/carbon/human/V = M
-	if(V.dna.mutantrace != "vox")
+	if(V.species.name != "Vox")
 		V << "<span class='warning'>This clearly isn't designed for your species!</span>"
 		return 0
 
 	return ..()
+
+/obj/item/clothing/under/vox
+	has_sensor = 0
 
 /obj/item/clothing/under/vox/vox_casual
 	name = "alien clothing"
@@ -117,7 +120,7 @@
 
 /obj/item/clothing/gloves/yellow/vox/mob_can_equip(M as mob, slot)
 	var/mob/living/carbon/human/U = M
-	if(U.dna.mutantrace != "vox")
+	if(U.species.name != "Vox")
 		U << "<span class='warning'>This clearly isn't designed for your species!</span>"
 		return 0
 	return ..()
@@ -149,7 +152,7 @@
 
 /obj/item/clothing/shoes/magboots/vox/mob_can_equip(M as mob, slot)
 	var/mob/living/carbon/human/U = M
-	if(U.dna.mutantrace != "vox")
+	if(U.species.name != "Vox")
 		U << "<span class='warning'>This clearly isn't designed for your species!</span>"
 		return 0
 	return ..()

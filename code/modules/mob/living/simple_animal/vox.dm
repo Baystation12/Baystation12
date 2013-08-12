@@ -18,7 +18,6 @@
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	status_flags = 0
 	universal_speak = 1
-	vox_talk_understand = 1
 
 	var/armour = null
 	var/amp = null
@@ -102,7 +101,7 @@
 	M << "\blue Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]"
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(H.dna.mutantrace == "vox")
+		if(H.species.name == "Vox")
 			return
 		H << "\red Your nose begins to bleed..."
 		H.drip(1)

@@ -799,31 +799,21 @@ datum/preferences
 						if(new_age)
 							age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
 					if("species")
+
 						var/list/new_species = list("Human")
 						var/prev_species = species
 						var/whitelisted = 0
+
 						if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
-							if(is_alien_whitelisted(user, "Soghun")) //Check for Unathi and admins
-								new_species += "Unathi"
-								whitelisted = 1
-							if(is_alien_whitelisted(user, "Tajaran")) //Check for Tajaran and admins
-								new_species += "Tajaran"
-								whitelisted = 1
-							if(is_alien_whitelisted(user, "Skrell")) //Check for Skrell and admins
-								new_species += "Skrell"
-								whitelisted = 1
-							if(is_alien_whitelisted(user, "Vox")) //Check for Skrell and admins
-								new_species += "Vox"
-								whitelisted = 1
-
-
+							for(var/S in whitelisted_species)
+								if(is_alien_whitelisted(user,S))
+									new_species += S
+									whitelisted = 1
 							if(!whitelisted)
 								alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
 						else //Not using the whitelist? Aliens for everyone!
-							new_species += "Tajaran"
-							new_species += "Unathi"
-							new_species += "Skrell"
-							new_species += "Vox"
+							new_species = whitelisted_species
+
 						species = input("Please select a species", "Character Generation", null) in new_species
 
 						if(prev_species != species)
@@ -872,31 +862,21 @@ datum/preferences
 							s_tone = 0
 
 					if("language")
-						var/list/new_language = list("None")
+						var/list/new_languages = list("None")
 						var/language_whitelisted = 0
 						if(config.usealienwhitelist)
-							if(is_alien_whitelisted(user, "Language_Soghun"))
-								new_language += "Unathi"
-								language_whitelisted = 1
-							if(is_alien_whitelisted(user, "Language_Tajaran"))
-								new_language += "Tajaran"
-								language_whitelisted = 1
-							if(is_alien_whitelisted(user, "Language_Skrell"))
-								new_language += "Skrell"
-								language_whitelisted = 1
-							if(is_alien_whitelisted(user, "Language_Kidan"))
-								new_language += "Kidan"
-								language_whitelisted = 1
-
-							if(!language_whitelisted)
-								alert(user, "You cannot select a secondary language as you need to be whitelisted.  If you wish to enable a language, post in the Alien Whitelist forums.")
-
+							for(var/L in all_languages)
+								if(is_alien_whitelisted(user, L))
+									new_languages += L
+									language_whitelisted = 1
 						else
-							new_language += "Unathi"
-							new_language += "Tajaran"
-							new_language += "Skrell"
-							new_language += "Kidan"
-						language = input("Please select a secondary language", "Character Generation", null) in new_language
+							for(var/L in all_languages)
+								new_languages += L
+
+						if(!language_whitelisted)
+							alert(user, "You cannot select a secondary language as you need to be whitelisted.  If you wish to enable a language, post in the Alien Whitelist forums.")
+
+						language = input("Please select a secondary language", "Character Generation", null) in new_languages
 
 					if("metadata")
 						var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
