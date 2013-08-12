@@ -806,7 +806,7 @@ datum/preferences
 
 						if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
 							for(var/S in whitelisted_species)
-								if(is_alien_whitelisted(user,S))
+								if(is_alien_whitelisted(user,S) || (S == "Unathi" && is_alien_whitelisted(user,"Soghun")))
 									new_species += S
 									whitelisted = 1
 							if(!whitelisted)
