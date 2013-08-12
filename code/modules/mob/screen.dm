@@ -600,11 +600,42 @@
 	set name = "Resist"
 	set category = "IC"
 
-	if(!isliving(usr) || usr.next_move > world.time)
+	if(!isliving(usr) || usr.last_click + usr.click_delay > world.time)
 		return
-	usr.next_move = world.time + 20
+	usr.delay_click(20)
 
 	var/mob/living/L = usr
+
+	//Resisting control by an alien mind.
+	if(istype(src.loc,/mob/living/simple_animal/borer))
+		var/mob/living/simple_animal/borer/B = src.loc
+		var/mob/living/captive_brain/H = src
+
+		H << "\red <B>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</B>"
+		B.host << "\red <B>You feel the captive mind of [src] begin to resist your control.</B>"
+
+		spawn(rand(350,450)+B.host.brainloss)
+
+			if(!B || !B.controlling)
+				return
+
+			B.host.adjustBrainLoss(rand(5,10))
+			H << "\red <B>With an immense exertion of will, you regain control of your body!</B>"
+			B.host << "\red <B>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</b>"
+			B.controlling = 0
+
+			B.ckey = B.host.ckey
+			B.host.ckey = H.ckey
+
+			H.ckey = null
+			H.name = "host brain"
+			H.real_name = "host brain"
+
+			verbs -= /mob/living/carbon/human/proc/release_control
+			verbs -= /mob/living/carbon/human/proc/punish_host
+			verbs -= /mob/living/carbon/human/proc/spawn_larvae
+
+			return
 
 	//resisting grabs (as if it helps anyone...)
 	if ((!( L.stat ) && L.canmove && !( L.restrained() )))
@@ -639,7 +670,7 @@
 		if(iscarbon(L))
 			var/mob/living/carbon/C = L
 			if( C.handcuffed )
-				C.next_move = world.time + 100
+				C.delay_click(100)
 				C.last_special = world.time + 100
 				C << "\red You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)"
 				for(var/mob/O in viewers(L))
@@ -673,7 +704,7 @@
 		//		breakout_time++ //Harder to get out of welded lockers than locked lockers
 
 		//okay, so the closet is either welded or locked... resist!!!
-		usr.next_move = world.time + 100
+		usr.delay_click(100)
 		L.last_special = world.time + 100
 		L << "\red You lean on the back of \the [C] and start pushing the door open. (this will take about [breakout_time] minutes)"
 		for(var/mob/O in viewers(usr.loc))
@@ -726,7 +757,7 @@
 	else if(iscarbon(L))
 		var/mob/living/carbon/CM = L
 		if(CM.handcuffed && CM.canmove && (CM.last_special <= world.time))
-			CM.next_move = world.time + 100
+			CM.delay_click(100)
 			CM.last_special = world.time + 100
 			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
@@ -764,7 +795,7 @@
 						CM.handcuffed = null
 						CM.update_inv_handcuffed()
 		else if(CM.legcuffed && CM.canmove && (CM.last_special <= world.time))
-			CM.next_move = world.time + 100
+			CM.delay_click(100)
 			CM.last_special = world.time + 100
 			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)"

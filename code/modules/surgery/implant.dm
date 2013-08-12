@@ -166,7 +166,7 @@
 
 		if (affected.implants.len)
 
-			var/obj/item/weapon/obj = affected.implants[1]
+			var/obj/item/obj = affected.implants[1]
 
 			if(istype(obj,/obj/item/weapon/implant))
 				var/obj/item/weapon/implant/imp = obj
@@ -181,6 +181,14 @@
 				user.visible_message("\blue [user] takes something out of incision on [target]'s [affected.display_name] with \the [tool].", \
 				"\blue You take [obj] out of incision on [target]'s [affected.display_name]s with \the [tool]." )
 				affected.implants -= obj
+
+				//Handle possessive brain borers.
+				if(istype(obj,/mob/living/simple_animal/borer))
+					var/mob/living/simple_animal/borer/worm = obj
+					if(worm.controlling)
+						target.release_control()
+					worm.detatch()
+
 				obj.loc = get_turf(target)
 				if(istype(obj,/obj/item/weapon/implant))
 					var/obj/item/weapon/implant/imp = obj

@@ -87,7 +87,7 @@
 			cell = W
 			user << "<span class='notice'>You jam [cell] into [src] and wire it to the firing coil.</span>"
 			if(arrow)
-				if(istype(arrow,/obj/item/weapon/arrow/rod) && cell.charge >= 500)
+				if(istype(arrow,/obj/item/weapon/arrow/rod) && arrow.throwforce < 15 && cell.charge >= 500)
 					user << "<span class='notice'>[arrow] plinks and crackles as it begins to glow red-hot.</span>"
 					arrow.throwforce = 15
 					arrow.icon_state = "metal-rod-superheated"
