@@ -131,7 +131,7 @@
 	in_chamber.loc = get_turf(user)
 	in_chamber.starting = get_turf(user)
 	in_chamber.shot_from = src
-	usr.delay_click(4)
+	user.next_move = world.time + 4
 	in_chamber.silenced = silenced
 	in_chamber.current = curloc
 	in_chamber.yo = targloc.y - curloc.y
