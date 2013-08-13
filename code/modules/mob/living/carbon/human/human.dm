@@ -1030,6 +1030,7 @@
 		if (!O.amputated)
 			O.status &= ~ORGAN_DESTROYED
 		O.wounds.Cut()
+		O.heal_damage(1000,1000,1,1)
 
 	var/datum/organ/external/head/h = organs_by_name["head"]
 	h.disfigured = 0
@@ -1049,6 +1050,10 @@
 
 	for (var/datum/disease/virus in viruses)
 		virus.cure()
+	for (var/ID in virus2)
+		var/datum/disease2/disease/V = virus2[ID]
+		V.cure(src)
+
 	..()
 
 /mob/living/carbon/human/proc/is_lung_ruptured()
@@ -1116,9 +1121,9 @@ mob/living/carbon/human/yank_out_object()
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
-	if(!isliving(usr) || usr.last_click + usr.click_delay > world.time)
+	if(!isliving(usr) || usr.next_move > world.time)
 		return
-	usr.delay_click(20)
+	usr.next_move = world.time + 20
 
 	if(usr.stat == 1)
 		usr << "You are unconcious and cannot do that!"

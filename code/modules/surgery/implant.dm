@@ -184,7 +184,10 @@
 
 				//Handle possessive brain borers.
 				if(istype(obj,/mob/living/simple_animal/borer))
-					target.release_control()
+					var/mob/living/simple_animal/borer/worm = obj
+					if(worm.controlling)
+						target.release_control()
+					worm.detatch()
 
 				obj.loc = get_turf(target)
 				if(istype(obj,/obj/item/weapon/implant))
