@@ -59,6 +59,11 @@
 	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
 	icon_state = "beret_badge"
 	flags = FPRINT | TABLEPASS
+/obj/item/clothing/head/beret/eng
+	name = "engineering beret"
+	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
+	icon_state = "e_beret_badge"
+	flags = FPRINT | TABLEPASS
 
 //Medical
 /obj/item/clothing/head/surgery
