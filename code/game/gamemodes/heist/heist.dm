@@ -106,7 +106,7 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 		vox.flavor_text = ""
 		vox.add_language("Vox-pidgin")
 		vox.h_style = "Short Vox Quills"
-		vox.flavor_text = ""
+		vox.f_style = "Shaved"
 		for(var/datum/organ/external/limb in vox.organs)
 			limb.status &= ~(ORGAN_DESTROYED | ORGAN_ROBOT)
 		vox.equip_vox_raider()
