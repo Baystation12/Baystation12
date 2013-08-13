@@ -62,7 +62,7 @@
 	*/
 
 /client/proc/fix_next_move()
-/*	set category = "Debug"
+	set category = "Debug"
 	set name = "Unfreeze Everyone"
 	var/largest_move_time = 0
 	var/largest_click_time = 0
@@ -90,7 +90,6 @@
 	message_admins("[key_name_admin(largest_click_mob)] had the largest click delay with [largest_click_time] frames / [largest_click_time/10] seconds!", 1)
 	message_admins("world.time = [world.time]", 1)
 	feedback_add_details("admin_verb","UFE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	*/
 	return
 
 /client/proc/radio_report()

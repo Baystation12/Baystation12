@@ -131,7 +131,8 @@
 	else
 		if(isliving(src.loc))
 			return
-		user.delay_click(2)
+		user.lastDblClick = world.time + 2
+		user.next_move = world.time + 2
 	src.pickup(user)
 	add_fingerprint(user)
 	user.put_in_active_hand(src)
@@ -165,7 +166,8 @@
 		if(istype(src.loc, /mob/living))
 			return
 		src.pickup(user)
-		user.delay_click(2)
+		user.lastDblClick = world.time + 2
+		user.next_move = world.time + 2
 
 	user.put_in_active_hand(src)
 	return
@@ -226,8 +228,6 @@
 	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>"
 	log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(src.damtype)])</font>" )
 	msg_admin_attack("ATTACK: [user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])") //BS12 EDIT ALG
-
-	user.delay_click(10)
 
 	//spawn(1800)			// this wont work right
 	//	M.lastattacker = null
