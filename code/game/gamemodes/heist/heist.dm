@@ -103,6 +103,7 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 		vox.dna.mutantrace = "vox"
 		vox.set_species("Vox")
 		vox.languages = list() // Removing language from chargen.
+		vox.flavor_text = ""
 		vox.add_language("Vox-pidgin")
 		vox.h_style = "Short Vox Quills"
 		vox.flavor_text = ""
