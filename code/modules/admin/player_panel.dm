@@ -470,12 +470,15 @@
 			dat += "</table>"
 
 		if(ticker.mode.raiders.len > 0)
+			dat += "<br><table cellspacing=5><tr><td><B>Wizards</B></td><td></td><td></td></tr>"
 			for(var/datum/mind/raider in ticker.mode.raiders)
 				var/mob/M = raider.current
 				if(M)
 					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
 					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
 					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
+			dat += "</table>"
+
 		/*
 		if(ticker.mode.ninjas.len > 0)
 			dat += "<br><table cellspacing=5><tr><td><B>Ninjas</B></td><td></td><td></td></tr>"
