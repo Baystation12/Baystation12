@@ -84,9 +84,6 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	if(!do_after(user, 100))
 		return
 
-	if(!src || !user)
-		return
-
 	if(candidates.len)
 		ghost = pick(candidates)
 
