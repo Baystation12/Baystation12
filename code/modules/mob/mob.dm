@@ -83,7 +83,6 @@
 //This is awful
 /mob/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
-	user.delay_click(10)
 	//Holding a balloon will shield you from an item that is_sharp() ... cause that makes sense
 	if (user.intent != "harm")
 		if (istype(src.l_hand,/obj/item/latexballon) && src.l_hand:air_contents && is_sharp(W))
@@ -906,9 +905,9 @@ mob/verb/yank_out_object()
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
-	if(!isliving(usr) || usr.last_click + usr.click_delay > world.time)
+	if(!isliving(usr) || usr.next_move > world.time)
 		return
-	usr.delay_click(20)
+	usr.next_move = world.time + 20
 
 	if(usr.stat == 1)
 		usr << "You are unconcious and cannot do that!"

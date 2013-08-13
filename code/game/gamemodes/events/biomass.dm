@@ -22,9 +22,6 @@
 
 /obj/effect/biomass/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (!W || !user || !W.type) return
-
-	user.delay_click(10)
-
 	switch(W.type)
 		if(/obj/item/weapon/circular_saw) del src
 		if(/obj/item/weapon/kitchen/utensil/knife) del src

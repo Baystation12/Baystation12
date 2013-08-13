@@ -86,8 +86,6 @@ RCD
 		if(!(istype(A, /turf) || istype(A, /obj/machinery/door/airlock)))
 			return 0
 
-		user.delay_click(10)
-
 		switch(mode)
 			if(1)
 				if(istype(A, /turf/space))

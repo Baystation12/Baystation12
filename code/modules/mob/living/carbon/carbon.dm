@@ -49,11 +49,7 @@
 	. = ..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
-
 	if(!istype(M, /mob/living/carbon)) return
-
-	M.delay_click(10)
-
 	if (hasorgans(M))
 		var/datum/organ/external/temp = M:organs_by_name["r_hand"]
 		if (M.hand)
@@ -79,8 +75,6 @@
 
 /mob/living/carbon/attack_paw(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
-
-	M.delay_click(10)
 
 	for(var/datum/disease/D in viruses)
 
