@@ -164,7 +164,7 @@
 			host.verbs += /mob/living/carbon/human/proc/punish_host
 			host.verbs += /mob/living/carbon/human/proc/spawn_larvae
 
-/mob/living/simple_animal/borer/verb/bond_brain()
+/mob/living/simple_animal/borer/verb/secrete_chemicals()
 	set category = "Alien"
 	set name = "Secrete Chemicals"
 	set desc = "Push some chemicals into your host's bloodstream."
