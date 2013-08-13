@@ -454,7 +454,3 @@ var/list/intents = list("help","disarm","grab","hurt")
 				hud_used.action_intent.icon_state = "harm"
 			else
 				hud_used.action_intent.icon_state = "help"
-
-/mob/proc/delay_click(var/delay)
-	src.click_delay = max(src.click_delay, delay)
-	return src.click_delay
