@@ -105,7 +105,10 @@
 			message = slur(message)
 	..(message)
 
-/mob/living/carbon/human/say_understands(var/other)
+/mob/living/carbon/human/say_understands(var/other,var/datum/language/speaking = null)
+
+	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
+		return 1
 	if (istype(other, /mob/living/silicon/ai))
 		return 1
 	if (istype(other, /mob/living/silicon/decoy))
