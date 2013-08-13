@@ -110,6 +110,21 @@
 	src << "You drop words into [host]'s mind: \"[message]\""
 	host << "Your own thoughts speak: \"[message]\""
 
+/mob/living/simple_animal/borer/Stat()
+	..()
+	statpanel("Status")
+
+	if(emergency_shuttle)
+		if(emergency_shuttle.online && emergency_shuttle.location < 2)
+			var/timeleft = emergency_shuttle.timeleft()
+			if (timeleft)
+				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+
+	if (client.statpanel == "Status")
+		stat("Chemicals", chemicals)
+
+// VERBS!
+
 /mob/living/simple_animal/borer/proc/borer_speak(var/message)
 	if(!message)
 		return
@@ -149,7 +164,31 @@
 			host.verbs += /mob/living/carbon/human/proc/punish_host
 			host.verbs += /mob/living/carbon/human/proc/spawn_larvae
 
-mob/living/simple_animal/borer/verb/release_host()
+/mob/living/simple_animal/borer/verb/bond_brain()
+	set category = "Alien"
+	set name = "Secrete Chemicals"
+	set desc = "Push some chemicals into your host's bloodstream."
+
+	if(!host)
+		src << "You are not inside a host body."
+		return
+
+	if(stat)
+		src << "You cannot secrete chemicals in your current state."
+
+	if(chemicals < 50)
+		src << "You don't have enough chemicals!"
+
+	var/chem = input("Select a chemical to secrete.", "Chemicals") in list("bicaridine","tramadol","hyperzine")
+
+	if(chemicals < 50 || !host || controlling || !src || stat) //Sanity check.
+		return
+
+	src << "\red <B>You squirt a measure of [chem] from your reservoirs into [host]'s bloodstream.</B>"
+	host.reagents.add_reagent(chem, 15)
+	chemicals -= 50
+
+/mob/living/simple_animal/borer/verb/release_host()
 	set category = "Alien"
 	set name = "Release Host"
 	set desc = "Slither out of your host."
@@ -271,19 +310,6 @@ mob/living/simple_animal/borer/proc/detatch()
 	else
 		src << "They are no longer in range!"
 		return
-
-/mob/living/simple_animal/borer/Stat()
-	..()
-	statpanel("Status")
-
-	if(emergency_shuttle)
-		if(emergency_shuttle.online && emergency_shuttle.location < 2)
-			var/timeleft = emergency_shuttle.timeleft()
-			if (timeleft)
-				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
-
-	if (client.statpanel == "Status")
-		stat("Chemicals", chemicals)
 
 /mob/living/simple_animal/borer/verb/ventcrawl()
 	set name = "Crawl through Vent"
