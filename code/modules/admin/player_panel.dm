@@ -470,7 +470,7 @@
 			dat += "</table>"
 
 		if(ticker.mode.raiders.len > 0)
-			dat += "<br><table cellspacing=5><tr><td><B>Wizards</B></td><td></td><td></td></tr>"
+			dat += "<br><table cellspacing=5><tr><td><B>Raiders</B></td><td></td><td></td></tr>"
 			for(var/datum/mind/raider in ticker.mode.raiders)
 				var/mob/M = raider.current
 				if(M)
