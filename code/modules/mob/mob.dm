@@ -83,6 +83,7 @@
 //This is awful
 /mob/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
+	user.delay_click(10)
 	//Holding a balloon will shield you from an item that is_sharp() ... cause that makes sense
 	if (user.intent != "harm")
 		if (istype(src.l_hand,/obj/item/latexballon) && src.l_hand:air_contents && is_sharp(W))

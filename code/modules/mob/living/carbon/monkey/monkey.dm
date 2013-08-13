@@ -217,6 +217,8 @@
 		M << "No attacking people at spawn, you jackass."
 		return
 
+	M.delay_click(10)
+
 	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
 		var/obj/item/clothing/gloves/G = M.gloves
 		if(G.cell)
