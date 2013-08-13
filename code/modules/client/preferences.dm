@@ -16,6 +16,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
 	"ninja" = "true",									 // 10
 	"vox raider" = IS_MODE_COMPILED("heist"),			 // 11
+	"diona" = 1,                                         // 12
 )
 
 var/const/MAX_SAVE_SLOTS = 10
