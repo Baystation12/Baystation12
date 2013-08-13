@@ -68,7 +68,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
 	..()
-if(reagents.total_volume <= 0) //Prevents autoinjectors to be refilled.
+	if(reagents.total_volume <= 0) //Prevents autoinjectors to be refilled.
 		flags &= ~OPENCONTAINER
 	update_icon()
 	return
