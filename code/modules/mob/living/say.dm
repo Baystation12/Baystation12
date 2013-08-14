@@ -86,7 +86,6 @@ var/list/department_radio_keys = list(
 
 /mob/living/say(var/message)
 
-	//world << "[src] speaks! [message]"
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 	message = capitalize(message)
 
@@ -125,7 +124,7 @@ var/list/department_radio_keys = list(
 	var/italics = 0
 	var/message_range = null
 	var/message_mode = null
-	var/datum/language/speaking //For use if a specific language is being spoken.
+	var/datum/language/speaking = null //For use if a specific language is being spoken.
 
 	// If brain damaged, talk on headset at random.
 	if (getBrainLoss() >= 60 && prob(50))
@@ -146,11 +145,9 @@ var/list/department_radio_keys = list(
 		//Check if the person is speaking a language that they know.
 		for(var/datum/language/L in languages)
 			if(lowertext(channel_prefix) == ":[L.key]")
-				//world << "Key [L.key] matches [lowertext(channel_prefix)] for [src]."
 				speaking = L
 				break
 		message_mode = department_radio_keys[channel_prefix]
-		//world << "channel_prefix=[channel_prefix]; message_mode=[message_mode]"
 		if (message_mode)
 			message = trim(copytext(message, 3))
 			if (!(ishuman(src) || istype(src, /mob/living/simple_animal/parrot) || isrobot(src) && (message_mode=="department" || (message_mode in radiochannels))))
@@ -367,38 +364,12 @@ var/list/department_radio_keys = list(
 
 	for (var/M in listening)
 		if(hascall(M,"say_understands"))
-			if ((M:say_understands(src) && !speaking))
-				//world << "[M] understood [src] (0)."
+			if (M:say_understands(src,speaking))
 				heard_a += M
-			else if(ismob(M))
-
-				// If speaking is set, it means that a language has been found that uses the given key.
-				// If it hasn't, then they are likely just speaking English.
-
-				var/understood
-				var/mob/P = M
-				if (speaking)
-					for(var/datum/language/L in P.languages)
-						if(speaking.name == L.name)
-							understood = 1
-					if(understood || P.universal_speak)
-						//world << "[M] understood [src] (1)."
-						heard_a += M
-					else if(istype(P,/mob/living/carbon/human))
-						var/mob/living/carbon/human/H = P
-						if(H.has_brain_worms()) // Brain worms act like Babelfish.
-							heard_a += M
-						else
-							heard_b += M
-					else
-						//world << "[M] didn't understand [src]."
-						heard_b += M
-				else
-					heard_a += M
-
 			else
-				//world << "[M] understood [src] (2)."
-				heard_a += M
+				heard_b += M
+		else
+			heard_a += M
 
 	var/speech_bubble_test = say_test(message)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
