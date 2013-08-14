@@ -61,16 +61,29 @@
 			M.show_message(rendered, 2) //Takes into account blindness and such.
 	return
 
-/mob/proc/say_understands(var/mob/other)
+/mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
 	if(!other)
 		return 1
-	if (src.stat == 2)
+	else if (src.stat == 2)
 		return 1
-	else if (istype(other, src.type))
-		return 1
+	else if (speaking) //Language check.
+
+		var/understood
+		for(var/datum/language/L in src.languages)
+			if(speaking.name == L.name)
+				understood = 1
+				break
+
+		if(understood || universal_speak)
+			return 1
+		else
+			return 0
+
 	else if(other.universal_speak || src.universal_speak)
 		return 1
 	else if(isAI(src) && ispAI(other))
+		return 1
+	else if (istype(other, src.type))
 		return 1
 	return 0
 
@@ -80,26 +93,28 @@
 		//tcomms code is still runtiming somewhere here
 	var/ending = copytext(text, length(text))
 
-	if (speaking)
-		return "<span class='say_quote'>[speaking.speech_verb] in [speaking.name]</span>, \"<span class='[speaking.colour]'>[text]</span>\"";
+	var/speechverb = "<span class='say_quote'>"
 
-//Needs Virus2
-//	if (src.disease_symptoms & DISEASE_HOARSE)
-//		return "rasps, \"[text]\"";
-	if (src.stuttering)
-		return "<span class='say_quote'>stammers</span>, \"[text]\"";
-	if (src.slurring)
-		return "<span class='say_quote'>slurrs</span>, \"[text]\"";
-	if(isliving(src))
+	if (speaking)
+		speechverb = "[speaking.speech_verb]</span>, \"<span class='[speaking.colour]'>"
+	else if (src.stuttering)
+		speechverb = "stammers, \""
+	else if (src.slurring)
+		speechverb = "slurrs, \""
+	else if (ending == "?")
+		speechverb = "asks, \""
+	else if (ending == "!")
+		speechverb = "exclaims, \""
+	else if(isliving(src))
 		var/mob/living/L = src
 		if (L.getBrainLoss() >= 60)
-			return "<span class='say_quote'>gibbers</span>, \"[text]\"";
-	if (ending == "?")
-		return "<span class='say_quote'>asks</span>, \"[text]\"";
-	if (ending == "!")
-		return "<span class='say_quote'>exclaims</span>, \"[text]\"";
+			speechverb = "gibbers, \""
+		else
+			speechverb = "says, \""
+	else
+		speechverb = "says, \""
 
-	return "<span class='say_quote'>says</span>, \"[text]\"";
+	return "[speechverb][text]</span>\""
 
 /mob/proc/emote(var/act, var/type, var/message)
 	if(act == "me")
