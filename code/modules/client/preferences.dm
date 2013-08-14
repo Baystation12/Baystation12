@@ -16,6 +16,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
 	"ninja" = "true",									 // 10
 	"vox raider" = IS_MODE_COMPILED("heist"),			 // 11
+	"diona" = 1,                                         // 12
 )
 
 var/const/MAX_SAVE_SLOTS = 10
@@ -806,7 +807,7 @@ datum/preferences
 
 						if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
 							for(var/S in whitelisted_species)
-								if(is_alien_whitelisted(user,S))
+								if(is_alien_whitelisted(user,S) || (S == "Unathi" && is_alien_whitelisted(user,"Soghun")))
 									new_species += S
 									whitelisted = 1
 							if(!whitelisted)

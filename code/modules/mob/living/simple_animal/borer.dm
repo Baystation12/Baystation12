@@ -38,6 +38,7 @@
 	attacktext = "nips"
 	friendly = "prods"
 	wander = 0
+	pass_flags = PASSTABLE
 
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
 	var/mob/living/carbon/human/host        // Human host for the brain worm.
@@ -109,6 +110,21 @@
 	src << "You drop words into [host]'s mind: \"[message]\""
 	host << "Your own thoughts speak: \"[message]\""
 
+/mob/living/simple_animal/borer/Stat()
+	..()
+	statpanel("Status")
+
+	if(emergency_shuttle)
+		if(emergency_shuttle.online && emergency_shuttle.location < 2)
+			var/timeleft = emergency_shuttle.timeleft()
+			if (timeleft)
+				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
+
+	if (client.statpanel == "Status")
+		stat("Chemicals", chemicals)
+
+// VERBS!
+
 /mob/living/simple_animal/borer/proc/borer_speak(var/message)
 	if(!message)
 		return
@@ -148,7 +164,31 @@
 			host.verbs += /mob/living/carbon/human/proc/punish_host
 			host.verbs += /mob/living/carbon/human/proc/spawn_larvae
 
-mob/living/simple_animal/borer/verb/release_host()
+/mob/living/simple_animal/borer/verb/secrete_chemicals()
+	set category = "Alien"
+	set name = "Secrete Chemicals"
+	set desc = "Push some chemicals into your host's bloodstream."
+
+	if(!host)
+		src << "You are not inside a host body."
+		return
+
+	if(stat)
+		src << "You cannot secrete chemicals in your current state."
+
+	if(chemicals < 50)
+		src << "You don't have enough chemicals!"
+
+	var/chem = input("Select a chemical to secrete.", "Chemicals") in list("bicaridine","tramadol","hyperzine")
+
+	if(chemicals < 50 || !host || controlling || !src || stat) //Sanity check.
+		return
+
+	src << "\red <B>You squirt a measure of [chem] from your reservoirs into [host]'s bloodstream.</B>"
+	host.reagents.add_reagent(chem, 15)
+	chemicals -= 50
+
+/mob/living/simple_animal/borer/verb/release_host()
 	set category = "Alien"
 	set name = "Release Host"
 	set desc = "Slither out of your host."
@@ -270,3 +310,61 @@ mob/living/simple_animal/borer/proc/detatch()
 	else
 		src << "They are no longer in range!"
 		return
+
+/mob/living/simple_animal/borer/verb/ventcrawl()
+	set name = "Crawl through Vent"
+	set desc = "Enter an air vent and crawl through the pipe system."
+	set category = "Alien"
+
+//	if(!istype(V,/obj/machinery/atmoalter/siphs/fullairsiphon/air_vent))
+//		return
+	var/obj/machinery/atmospherics/unary/vent_pump/vent_found
+	var/welded = 0
+	for(var/obj/machinery/atmospherics/unary/vent_pump/v in range(1,src))
+		if(!v.welded)
+			vent_found = v
+			break
+		else
+			welded = 1
+	if(vent_found)
+		if(vent_found.network&&vent_found.network.normal_members.len)
+			var/list/vents = list()
+			for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in vent_found.network.normal_members)
+				if(temp_vent.loc == loc)
+					continue
+				vents.Add(temp_vent)
+			var/list/choices = list()
+			for(var/obj/machinery/atmospherics/unary/vent_pump/vent in vents)
+				if(vent.loc.z != loc.z)
+					continue
+				var/atom/a = get_turf(vent)
+				choices.Add(a.loc)
+			var/turf/startloc = loc
+			var/obj/selection = input("Select a destination.", "Duct System") in choices
+			var/selection_position = choices.Find(selection)
+			if(loc==startloc)
+				var/obj/target_vent = vents[selection_position]
+				if(target_vent)
+					loc = target_vent.loc
+			else
+				src << "\blue You need to remain still while entering a vent."
+		else
+			src << "\blue This vent is not connected to anything."
+	else if(welded)
+		src << "\red That vent is welded."
+	else
+		src << "\blue You must be standing on or beside an air vent to enter it."
+	return
+
+//copy paste from alien/larva, if that func is updated please update this one alsoghost
+/mob/living/simple_animal/borer/verb/hide()
+	set name = "Hide"
+	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
+	set category = "Alien"
+
+	if (layer != TURF_LAYER+0.2)
+		layer = TURF_LAYER+0.2
+		src << text("\blue You are now hiding.")
+	else
+		layer = MOB_LAYER
+		src << text("\blue You have stopped hiding.")

@@ -351,7 +351,7 @@
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
 		if(chosen_species)
-			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & WHITELISTED))
+			if(is_alien_whitelisted(src, client.prefs.species) || (client.prefs.species == "Unathi" && is_alien_whitelisted(src, "Soghun")) || !config.usealienwhitelist || !(chosen_species.flags & WHITELISTED))
 				new_character.set_species(client.prefs.species)
 				if(chosen_species.language)
 					new_character.add_language(chosen_species.language)

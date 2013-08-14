@@ -74,15 +74,14 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 		ghost = source
 	else // If no sample was injected or revival is not allowed, we grab an interested observer.
 		for(var/mob/dead/observer/O in player_list)
-			if(O.client)
-				var/response = alert(O, "Someone is harvesting a replica pod. Would you like to play as a Dionaea?", "Replica pod harvest", "Yes", "No")
+			if(O.client && O.client.prefs.be_special & BE_PLANT)
+				var/response = alert(O, "Someone is harvesting a replica pod. Would you like to play as a Dionaea?", "Replica pod harvest", "Yes", "No", "Never for this round.")
 				if(response == "Yes")
 					candidates += O
+				else if(response == "Never for this round")
+					O.client.prefs.be_special ^= BE_PLANT
 
 	if(!do_after(user, 100))
-		return
-
-	if(!src || !user)
 		return
 
 	if(candidates.len)
