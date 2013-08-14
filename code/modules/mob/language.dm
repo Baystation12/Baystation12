@@ -16,7 +16,7 @@
 	desc = "The common language of Moghes, composed of sibilant hisses and rattles. Spoken natively by Unathi."
 	speech_verb = "hisses"
 	colour = "soghun"
-	key = "una"
+	key = "o"
 	flags = WHITELISTED
 
 /datum/language/tajaran
@@ -24,7 +24,7 @@
 	desc = "An expressive language that combines yowls and chirps with posture, tail and ears. Native to the Tajaran."
 	speech_verb = "mrowls"
 	colour = "tajaran"
-	key = "taj"
+	key = "j"
 	flags = WHITELISTED
 
 /datum/language/skrell
@@ -32,7 +32,7 @@
 	desc = "A melodic and complex language spoken by the Skrell of Qerrbalak. Some of the notes are inaudible to humans."
 	speech_verb = "warbles"
 	colour = "skrell"
-	key = "skr"
+	key = "k"
 	flags = WHITELISTED
 
 /datum/language/vox
@@ -40,7 +40,7 @@
 	desc = "The common tongue of the various Vox ships making up the Shoal. It sounds like chaotic shrieking to everyone else."
 	speech_verb = "shrieks"
 	colour = "vox"
-	key = "vox"
+	key = "v"
 	flags = RESTRICTED
 
 /*
