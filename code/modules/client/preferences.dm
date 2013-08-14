@@ -873,7 +873,7 @@ datum/preferences
 									new_languages += lang
 									languages_available = 1
 
-							if(languages_available)
+							if(!(languages_available))
 								alert(user, "There are not currently any available secondary languages.")
 						else
 							for(var/L in all_languages)
