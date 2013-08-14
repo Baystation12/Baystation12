@@ -42,7 +42,6 @@
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
 	var/mob/living/carbon/human/host        // Human host for the brain worm.
 	var/truename                            // Name used for brainworm-speak.
-	var/bonded                              // Var for full bonding with the host brain.
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
 	var/controlling                         // Used in human death check.
 
@@ -135,7 +134,7 @@
 
 	spawn(300+(host.brainloss*5))
 
-		if(!host || !src) return
+		if(!host || !src || controlling) return
 
 		else
 			src << "\red <B>You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system.</B>"
@@ -165,7 +164,6 @@ mob/living/simple_animal/borer/verb/release_host()
 	if(!host || !src) return
 
 	src << "You begin disconnecting from [host]'s synapses and prodding at their internal ear canal."
-	bonded = 0
 
 	if(!host.stat)
 		host << "An odd, uncomfortable pressure begins to build inside your skull, behind your ear..."
@@ -192,6 +190,12 @@ mob/living/simple_animal/borer/proc/detatch()
 	head.implants -= src
 	src.loc = get_turf(host)
 	controlling = 0
+
+	reset_view(null)
+	machine = null
+
+	host.reset_view(null)
+	host.machine = null
 
 	host.verbs -= /mob/living/carbon/human/proc/release_control
 	host.verbs -= /mob/living/carbon/human/proc/punish_host
@@ -220,7 +224,7 @@ mob/living/simple_animal/borer/proc/detatch()
 		return
 
 	var/list/choices = list()
-	for(var/mob/living/C in view(1,src))
+	for(var/mob/living/carbon/human/C in view(1,src))
 		if(istype(C,/mob/living/carbon/human) && C.stat != 2)
 			choices += C
 
@@ -230,6 +234,7 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	if(M.has_brain_worms())
 		src << "You cannot infest someone who is already infested!"
+		return
 
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
@@ -257,7 +262,6 @@ mob/living/simple_animal/borer/proc/detatch()
 		var/datum/organ/external/head = M.get_organ("head")
 		head.implants += src
 		src.loc = M
-		bonded = 0
 
 		host_brain.name = M.name
 		host_brain.real_name = M.real_name
