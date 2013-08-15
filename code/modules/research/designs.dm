@@ -1364,7 +1364,7 @@ datum/design/decloner
 	materials = list("$gold" = 5000,"$uranium" = 10000, "mutagen" = 40)
 	build_path = "/obj/item/weapon/gun/energy/decloner"
 	locked = 1
-/*
+
 datum/design/chemsprayer
 	name = "Chem Sprayer"
 	desc = "An advanced chem spraying device."
@@ -1373,8 +1373,8 @@ datum/design/chemsprayer
 	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000)
 	reliability_base = 100
-	build_path = "/obj/item/weapon/chemsprayer"
-*/
+	build_path = "/obj/item/weapon/reagent_containers/spray/chemsprayer"
+
 datum/design/rapidsyringe
 	name = "Rapid Syringe Gun"
 	desc = "A gun that fires many syringes."
