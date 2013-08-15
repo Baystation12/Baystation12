@@ -13,7 +13,8 @@
 	..()
 	for(dir in list(NORTH,EAST,SOUTH,WEST))
 		table = locate(/obj/machinery/optable, get_step(src, dir))
-		if (!isnull(table))
+		if (table)
+			table.computer = src
 			break
 
 /obj/machinery/computer/operating/attack_ai(mob/user)
@@ -55,6 +56,7 @@
 <B>Fire Damage:</B> [src.victim.getFireLoss()]<BR>
 <B>Suffocation Damage:</B> [src.victim.getOxyLoss()]<BR>
 <B>Patient Status:</B> [src.victim.stat ? "Non-Responsive" : "Stable"]<BR>
+<B>Heartbeat rate:</B> [victim.get_pulse(GETPULSE_TOOL)]<BR>
 "}
 	else
 		src.victim = null

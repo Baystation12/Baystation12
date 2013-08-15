@@ -340,6 +340,16 @@
 			if("id")
 				if ((!( target.wear_id ) || !( target.w_uniform )))
 					del(src)
+			if("splints")
+				var/count = 0
+				for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
+					var/datum/organ/external/o = target.organs_by_name[organ]
+					if(o.status & ORGAN_SPLINTED)
+						count = 1
+						break
+				if(count == 0)
+					del(src)
+					return
 			if("internal")
 				if ((!( (istype(target.wear_mask, /obj/item/clothing/mask) && istype(target.back, /obj/item/weapon/tank) && !( target.internal )) ) && !( target.internal )))
 					del(src)
@@ -366,7 +376,7 @@
 					message = "\red <B>[source] fails to take off \a [target.wear_mask] from [target]'s head!</B>"
 					return
 				else
-					message = "\red <B>[source] is trying to take off \a [source.wear_mask] from [target]'s head!</B>"
+					message = "\red <B>[source] is trying to take off \a [target.wear_mask] from [target]'s head!</B>"
 			if("l_hand")
 				message = "\red <B>[source] is trying to take off \a [target.l_hand] from [target]'s left hand!</B>"
 			if("r_hand")
@@ -443,6 +453,9 @@
 					message = "\red <B>[source] is trying to remove [target]'s internals</B>"
 				else
 					message = "\red <B>[source] is trying to set on [target]'s internals.</B>"
+			if("splints")
+				message = text("\red <B>[] is trying to remove []'s splints!</B>", source, target)
+
 		for(var/mob/M in viewers(target, null))
 			M.show_message(message, 1)
 	spawn( HUMAN_STRIP_DELAY )
@@ -541,6 +554,16 @@ It can still be worn/put on as normal.
 			slot_to_process = slot_legcuffed
 			if (target.legcuffed)
 				strip_item = target.legcuffed
+		if("splints")
+			for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
+				var/datum/organ/external/o = target.get_organ(organ)
+				if (o && o.status & ORGAN_SPLINTED)
+					var/obj/item/W = new /obj/item/stack/medical/splint/single()
+					o.status &= ~ORGAN_SPLINTED
+					if (W)
+						W.loc = target.loc
+						W.layer = initial(W.layer)
+						W.add_fingerprint(source)
 		if("CPR")
 			if ((target.health > config.health_threshold_dead && target.health < config.health_threshold_crit))
 				var/suff = min(target.getOxyLoss(), 7)

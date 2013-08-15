@@ -340,7 +340,7 @@ var/list/ai_list = list()
 	if(href_list["say_word"])
 		src.announcement(href_list["say_word"])
 		return
-	
+
 	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
 		var/L = text2num(href_list["lawi"])
 		switch(ioncheck[L])
@@ -561,10 +561,9 @@ var/list/ai_list = list()
 		if(!C.can_use())
 			continue
 
-		var/list/tempnetwork = C.network
-		tempnetwork.Remove("CREED", "thunder", "RD", "toxins", "Prison")
+		var/list/tempnetwork = difflist(C.network,RESTRICTED_CAMERA_NETWORKS,1)
 		if(tempnetwork.len)
-			for(var/i in C.network)
+			for(var/i in tempnetwork)
 				cameralist[i] = i
 	var/old_network = network
 	network = input(U, "Which network would you like to view?") as null|anything in cameralist

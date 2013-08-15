@@ -527,7 +527,7 @@ obj/machinery/atmospherics/pipe
 		var/build_killswitch = 1
 
 		var/obj/machinery/atmospherics/node1
-		New()		
+		New()
 			initialize_directions = dir
 			..()
 
@@ -722,7 +722,7 @@ obj/machinery/atmospherics/pipe
 
 				icon_state = "manifold_[connected]_[unconnected]"
 
-				if(!connected) 
+				if(!connected)
 					del(src)
 
 			return
@@ -951,7 +951,7 @@ obj/machinery/atmospherics/pipe
 			return
 
 		initialize()
-			
+
 			for(var/obj/machinery/atmospherics/target in get_step(src,1))
 				if(target.initialize_directions & 2)
 					node1 = target
@@ -1028,7 +1028,7 @@ obj/machinery/atmospherics/pipe
 	manifold4w/general/hidden
 		level = 1
 		icon_state = "manifold4w-f"
-		
+
 	cap
 		name = "pipe endcap"
 		desc = "An endcap for pipes"
@@ -1117,28 +1117,9 @@ obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/u
 	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
 		return ..()
 
-	// ===== Handle paints =====
-	if(istype(W, /obj/item/weapon/reagent_containers/glass/paint/red))
-		src.color = "red"
-		user << "\red You paint the pipe red."
-		update_icon()
+	if(istype(W,/obj/item/device/pipe_painter))
 		return 1
-	if(istype(W, /obj/item/weapon/reagent_containers/glass/paint/blue))
-		src.color = "blue"
-		user << "\red You paint the pipe blue."
-		update_icon()
-		return 1
-	if(istype(W, /obj/item/weapon/reagent_containers/glass/paint/green))
-		src.color = "green"
-		user << "\red You paint the pipe green."
-		update_icon()
-		return 1
-	if(istype(W, /obj/item/weapon/reagent_containers/glass/paint/yellow))
-		src.color = "yellow"
-		user << "\red You paint the pipe yellow."
-		update_icon()
-		return 1
-    
+
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
 	var/turf/T = src.loc

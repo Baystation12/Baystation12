@@ -557,6 +557,13 @@
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return ..()
 
+/obj/item/weapon/hatchet/unathiknife
+	name = "duelling knife"
+	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "unathiknife"
+	attack_verb = list("ripped", "torn", "cut")
+
 /obj/item/weapon/scythe
 	icon_state = "scythe0"
 	name = "scythe"
