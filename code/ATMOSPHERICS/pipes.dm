@@ -922,6 +922,7 @@ obj/machinery/atmospherics/pipe
 			..()
 
 		update_icon()
+			overlays.Cut()
 			if(node1&&node2&&node3&&node4)
 				var/C = ""
 				switch(color)
