@@ -101,23 +101,23 @@ Please contact me on #coderbus IRC. ~Carn x
 #define MUTATIONS_LAYER			2
 #define DAMAGE_LAYER			3
 #define UNIFORM_LAYER			4
-#define ID_LAYER				5
-#define SHOES_LAYER				6
+#define ID_LAYER			5
+#define SHOES_LAYER			6
 #define GLOVES_LAYER			7
-#define EARS_LAYER				8
-#define SUIT_LAYER				9
+#define EARS_LAYER			8
+#define SUIT_LAYER			9
 #define GLASSES_LAYER			10
-#define BELT_LAYER				11		//Possible make this an overlay of somethign required to wear a belt?
+#define BELT_LAYER			11		//Possible make this an overlay of somethign required to wear a belt?
 #define SUIT_STORE_LAYER		12
-#define BACK_LAYER				13
-#define HAIR_LAYER				14		//TODO: make part of head layer?
+#define BACK_LAYER			13
+#define HAIR_LAYER			14		//TODO: make part of head layer?
 #define FACEMASK_LAYER			15
-#define HEAD_LAYER				16
+#define HEAD_LAYER			16
 #define HANDCUFF_LAYER			17
 #define LEGCUFF_LAYER			18
 #define L_HAND_LAYER			19
 #define R_HAND_LAYER			20
-#define TAIL_LAYER				21		//bs12 specific. this hack is probably gonna come back to haunt me
+#define TAIL_LAYER			21		//bs12 specific. this hack is probably gonna come back to haunt me
 #define TARGETED_LAYER			22		//BS12: Layer for the target overlay from weapon targeting system
 #define TOTAL_LAYERS			22
 //////////////////////////////////
@@ -653,20 +653,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 			drop_r_hand()
 
 		if(wear_suit.blood_DNA)
-			var/t_state
-			if( istype(wear_suit, /obj/item/clothing/suit/armor/vest || /obj/item/clothing/suit/wcoat) )
-				t_state = "armor"
-			else if( istype(wear_suit, /obj/item/clothing/suit/storage/det_suit || /obj/item/clothing/suit/storage/labcoat) )
-				t_state = "coat"
-			else
-				t_state = "suit"
-			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[t_state]blood2")
-			standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[t_state]blood")
-
-			if(wear_suit.blood_DNA)
-				var/obj/item/clothing/suit/S = wear_suit
-				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood2")
-				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood")
+			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[wear_suit.blood_overlay_type]blood2")
+			standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[wear_suit.blood_overlay_type]blood")
 
 		overlays_lying[SUIT_LAYER]		= lying
 		overlays_standing[SUIT_LAYER]	= standing
@@ -833,7 +821,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef BELT_LAYER
 #undef SUIT_STORE_LAYER
 #undef BACK_LAYER
-#undef HAIR_LAYER
+#undef HAIR)
+
+	if(f_style)
+		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[f_style]
+		if(facial_hair_style)
+			var/icon/facial_s = new/icon(_LAYER
 #undef HEAD_LAYER
 #undef HANDCUFF_LAYER
 #undef LEGCUFF_LAYER
