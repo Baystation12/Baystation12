@@ -38,12 +38,19 @@
 	ico = "stokkey"
 	uni_append = "044C5D"
 
+/mob/living/carbon/monkey/diona
+	name = "diona nymph"
+	voice_name = "diona nymph"
+	voice_message = "chirrups"
+	say_message = "chirrups"
+	ico = "nymph"
+
 /mob/living/carbon/monkey/New()
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
 
-	if(name == "monkey" || name == "farwa" || name == "stok" || name == "neara") //Hideous but necessary to stop Pun-Pun becoming generic.
+	if(name == "monkey" || name == "farwa" || name == "stok" || name == "neara" || name == "diona nymph") //Hideous but necessary to stop Pun-Pun becoming generic.
 		name = "[name] ([rand(1, 1000)])"
 		real_name = name
 

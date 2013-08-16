@@ -92,5 +92,6 @@
 	icobase = 'icons/mob/human_races/r_plant.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	attack_verb = "slash"
+	primitive = /mob/living/carbon/monkey/diona
 
 	flags = NO_EAT | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT
