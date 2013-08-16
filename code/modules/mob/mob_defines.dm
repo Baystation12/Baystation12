@@ -89,6 +89,8 @@
 	var/list/pinned = list()    //List of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded = list()  //Embedded items, since simple mobs don't have organs.
 	var/list/languages = list() // For speaking/listening.
+	var/list/speak_emote = null //Verbs used when speaking. Defaults to 'say' if speak_emote is null.
+
 	var/name_archive //For admin things like possession
 
 	var/timeofdeath = 0.0//Living
@@ -156,7 +158,6 @@
 
 	var/voice_name = "unidentifiable voice"
 	var/voice_message = null // When you are not understood by others (replaced with just screeches, hisses, chimpers etc.)
-	var/say_message = null // When you are understood by others. Currently only used by aliens and monkeys in their say_quote procs
 
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 
