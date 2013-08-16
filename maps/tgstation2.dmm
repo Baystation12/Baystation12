@@ -1554,7 +1554,7 @@
 "aDT" = (/obj/structure/table,/obj/item/weapon/paper/pamphlet,/turf/simulated/floor,/area/gateway)
 "aDU" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor,/area/gateway)
 "aDV" = (/obj/structure/table,/obj/item/device/radio/off{pixel_y = 6},/obj/item/device/radio/off{pixel_x = 6; pixel_y = 4},/obj/item/device/radio/off{pixel_x = -6; pixel_y = 4},/obj/item/device/radio/off,/turf/simulated/floor,/area/gateway)
-"aDW" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/structure/table,/obj/machinery/recharger{pixel_y = 29},/obj/structure/sign/biohazard{pixel_x = 32},/turf/simulated/floor,/area/gateway)
+"aDW" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/structure/table,/obj/machinery/recharger{pixel_y = 0},/obj/structure/sign/biohazard{pixel_x = 32},/turf/simulated/floor,/area/gateway)
 "aDX" = (/obj/structure/reagent_dispensers/watertank,/turf/simulated/floor/plating,/area/maintenance/fpmaint)
 "aDY" = (/obj/item/device/radio/intercom{freerange = 1; frequency = 1459; name = "Station Intercom (General)"; pixel_x = -30},/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/table/reinforced,/obj/item/weapon/storage/toolbox/electrical{pixel_x = 1; pixel_y = -1},/turf/simulated/floor{dir = 8; icon_state = "warning"},/area/ai_monitored/storage/eva)
 "aDZ" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/turf/simulated/floor{icon_state = "dark"},/area/ai_monitored/storage/eva)

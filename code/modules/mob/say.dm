@@ -82,8 +82,12 @@
 			return 1
 		else
 			return 0
-	//Sharing a type implies understanding.
-	else if (istype(other, src.type) || istype(src.type, other))
+
+	else if(other.universal_speak || src.universal_speak)
+		return 1
+	else if(isAI(src) && ispAI(other))
+		return 1
+	else if (istype(other, src.type) || istype(src, other.type))
 		return 1
 	return 0
 
