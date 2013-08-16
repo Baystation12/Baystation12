@@ -83,7 +83,7 @@
 		return 1
 	else if(isAI(src) && ispAI(other))
 		return 1
-	else if (istype(other, src.type))
+	else if (istype(other, src.type) || istype(src.type, other))
 		return 1
 	return 0
 
