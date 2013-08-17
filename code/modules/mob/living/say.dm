@@ -15,10 +15,6 @@ var/list/department_radio_keys = list(
 	  ":t" = "Syndicate",	"#t" = "Syndicate",		".t" = "Syndicate",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
 	  ":g" = "changeling",	"#g" = "changeling",	".g" = "changeling",
-	  ":k" = "skrell",		"#k" = "skrell",		".k" = "skrell",
-	  ":j" = "tajaran",		"#j" = "tajaran",		".j" = "tajaran",
-	  ":o" = "soghun",		"#o" = "soghun",		".o" = "soghun",
-	  ":v" = "vox",			"#v" = "vox",			".v" = "vox",
 
 	  ":R" = "right hand",	"#R" = "right hand",	".R" = "right hand",
 	  ":L" = "left hand",	"#L" = "left hand",		".L" = "left hand",
@@ -35,10 +31,6 @@ var/list/department_radio_keys = list(
 	  ":T" = "Syndicate",	"#T" = "Syndicate",		".T" = "Syndicate",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
 	  ":G" = "changeling",	"#G" = "changeling",	".G" = "changeling",
-	  ":K" = "skrell",		"#K" = "skrell",		".K" = "skrell",
-	  ":J" = "tajaran",		"#J" = "tajaran",		".J" = "tajaran",
-	  ":O" = "soghun",		"#O" = "soghun",		".O" = "soghun",
-	  ":V" = "vox",			"#V" = "vox",			".V" = "vox",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -56,10 +48,7 @@ var/list/department_radio_keys = list(
 	  ":ô" = "alientalk",	"#ô" = "alientalk",		".ô" = "alientalk",
 	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
 	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
-	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling",
-	  ":ë" = "skrell",		"#ë" = "skrell",		".ë" = "skrell",
-	  ":î" = "tajaran",		"#î" = "tajaran",		".î" = "tajaran",
-	  ":ù" = "soghun",		"#ù" = "soghun",		".ù" = "soghun"
+	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling"
 )
 
 /mob/living/proc/binarycheck()
@@ -98,6 +87,9 @@ var/list/department_radio_keys = list(
 	*/
 
 	if (!message)
+		return
+
+	if(silent)
 		return
 
 	if (stat == 2) // Dead.
