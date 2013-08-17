@@ -1,5 +1,5 @@
 ## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # infront of SERVERNAME and replace 'tgstation' with the name of your choice
-# SERVERNAME tgstation
+#SERVERNAME RP, Modified code, Fun events
 
 ## Alert levels
 ALERT_GREEN All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced.
@@ -98,10 +98,10 @@ ALLOW_ADMIN_OOCCOLOR
 ALLOW_METADATA
 
 ## allow players to initiate a restart vote
-ALLOW_VOTE_RESTART
+#ALLOW_VOTE_RESTART
 
 ## allow players to initate a mode-change start
-ALLOW_VOTE_MODE
+#ALLOW_VOTE_MODE
 
 ## min delay (deciseconds) between voting sessions (default 10 minutes)
 VOTE_DELAY 6000
@@ -139,7 +139,7 @@ GUEST_BAN
 # USEWHITELIST
 
 ## set a server location for world reboot. Don't include the byond://, just give the address and port.
-SERVER 198.46.141.57:45000
+SERVER 192.3.27.2:45000
 
 ## forum address
 # FORUMURL http://example.com
@@ -185,14 +185,14 @@ AUTOMUTE_ON
 GATEWAY_DELAY 18000
 
 ## Remove the # to give assistants maint access.
-ASSISTANT_MAINT
+#ASSISTANT_MAINT
 
 ## Remove the # to make rounds which end instantly (Rev, Wizard, Malf) to continue until the shuttle is called or the station is nuked.
 ## Malf and Rev will let the shuttle be called when the antags/protags are dead.
 #CONTINUOUS_ROUNDS
 
 ## Uncomment to restrict non-admins from using humanoid alien races
-#USEALIENWHITELIST
+USEALIENWHITELIST
 
 ## Comment this to unrestrict the number of alien players allowed in the round. The number represents the number of alien players for every human player.
 ALIEN_PLAYER_RATIO 0.2
