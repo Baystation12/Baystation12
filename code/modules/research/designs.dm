@@ -1279,6 +1279,26 @@ datum/design/adv_mass_spectrometer
 	reliability_base = 74
 	build_path = "/obj/item/device/mass_spectrometer/adv"
 
+datum/design/reagent_scanner
+	name = "Reagent Scanner"
+	desc = "A device for identifying chemicals."
+	id = "reagent_scanner"
+	req_tech = list("biotech" = 2, "magnets" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 30, "$glass" = 20)
+	reliability_base = 76
+	build_path = "/obj/item/device/reagent_scanner"
+
+datum/design/adv_reagent_scanner
+	name = "Advanced Reagent Scanner"
+	desc = "A device for identifying chemicals and their proportions."
+	id = "adv_reagent_scanner"
+	req_tech = list("biotech" = 2, "magnets" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 30, "$glass" = 20)
+	reliability_base = 74
+	build_path = "/obj/item/device/reagent_scanner/adv"
+
 datum/design/mmi
 	name = "Man-Machine Interface"
 	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity."
