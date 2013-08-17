@@ -473,7 +473,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					R.show_message(rendered, 2)
 
 		/* --- Process all the mobs that heard the voice normally (did not understand) --- */
-			// Does not display message; displayes the mob's voice_message (ie "chimpers")
 
 		if (length(heard_voice))
 			var/rendered = "[part_a][vname][part_b][vmessage][part_c]"
