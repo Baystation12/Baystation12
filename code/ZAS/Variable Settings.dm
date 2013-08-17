@@ -62,7 +62,7 @@ var/global/vs_control/vsc = new
 	var/airflow_mob_slowdown_NAME = "Airflow Slowdown"
 	var/airflow_mob_slowdown_DESC = "Time in tenths of a second to add as a delay to each movement by a mob if they are fighting the pull of the airflow."
 
-	var/connection_insulation = 0.4
+	var/connection_insulation = 1
 	var/connection_insulation_NAME = "Connections - Insulation"
 	var/connection_insulation_DESC = "How insulative a connection is, in terms of heat transfer.  1 is perfectly insulative, and 0 is perfectly conductive."
 
