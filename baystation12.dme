@@ -1351,7 +1351,11 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
+<<<<<<< HEAD
 #include "maps\ponystation.dmm"
+=======
+#include "maps\tgstation2.dmm"
+>>>>>>> pr/2
 #include "maps\RandomZLevels\Academy.dm"
 #include "maps\RandomZLevels\challenge.dm"
 #include "maps\RandomZLevels\stationCollision.dm"

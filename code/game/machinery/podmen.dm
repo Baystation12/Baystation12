@@ -88,7 +88,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 		ghost = pick(candidates)
 
 	 //If we don't have a ghost or the ghost is now unplayed, we just give the harvester some seeds.
-	if(!ghost || !(ghost.ckey))
+	if(!ghost || !(ghost.ckey) || ghost.stat != 2)
 		user << "The pod has formed badly, and all you can do is salvage some of the seeds."
 		var/seed_count = 1
 
