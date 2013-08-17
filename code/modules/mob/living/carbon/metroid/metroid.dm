@@ -3,7 +3,6 @@
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "grey baby slime"
 	pass_flags = PASSTABLE
-	voice_message = "skree!"
 	speak_emote = list("hums")
 
 	layer = 5

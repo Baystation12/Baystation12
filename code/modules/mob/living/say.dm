@@ -141,8 +141,11 @@ var/list/department_radio_keys = list(
 			message = uppertext(message)
 
 	// General public key. Special message handling
-	if (copytext(message, 1, 2) == ";" || prob(braindam/2))
-		message_mode = "broadcast"
+	else if (copytext(message, 1, 2) == ";" || prob(braindam/2))
+		if (ishuman(src))
+			message_mode = "headset"
+		else if(ispAI(src) || isrobot(src))
+			message_mode = "pAI"
 		message = copytext(message, 2)
 	// Begin checking for either a message mode or a language to speak.
 	else if (length(message) >= 2)
@@ -157,15 +160,13 @@ var/list/department_radio_keys = list(
 
 		message_mode = department_radio_keys[channel_prefix]
 
-		if (message_mode)
+		if (message_mode || speaking)
 			message = trim(copytext(message, 3))
-			if (!(ishuman(src) || istype(src, /mob/living/simple_animal/parrot) || isrobot(src) && (message_mode=="department" || (message_mode in radiochannels))))
+			if (!(istype(src,/mob/living/carbon/human) || istype(src,/mob/living/carbon/monkey) || istype(src, /mob/living/simple_animal/parrot) || isrobot(src) && (message_mode=="department" || (message_mode in radiochannels))))
 				message_mode = null //only humans can use headsets
-			// Check changed so that parrots can use headsets. Other simple animals do not have ears and will cause runtimes.
-			// And borgs -Sieve
 
 	if(src.stunned > 2 || (traumatic_shock > 61 && prob(50)))
-		message_mode = "" //Stunned people shouldn't be able to physically turn on their radio/hold down the button to speak into it
+		message_mode = null //Stunned people shouldn't be able to physically turn on their radio/hold down the button to speak into it
 
 	if (!message)
 		return
@@ -180,16 +181,6 @@ var/list/department_radio_keys = list(
 		if ("headset")
 			if (src:ears)
 				src:ears.talk_into(src, message)
-				used_radios += src:ears
-				is_speaking_radio = 1
-
-			message_range = 1
-			italics = 1
-
-
-		if ("secure headset")
-			if (src:ears)
-				src:ears.talk_into(src, message, 1)
 				used_radios += src:ears
 				is_speaking_radio = 1
 
@@ -383,13 +374,10 @@ var/list/department_radio_keys = list(
 				M << speech_bubble
 
 	if (length(heard_b))
-		var/message_b
 
-		if (voice_message)
-			message_b = voice_message
-		else
-			message_b = stars(message)
-			message_b = say_quote(message_b,speaking)
+		var/message_b
+		message_b = stars(message)
+		message_b = say_quote(message_b,speaking)
 
 		if (italics)
 			message_b = "<i>[message_b]</i>"

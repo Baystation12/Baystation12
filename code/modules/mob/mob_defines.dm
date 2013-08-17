@@ -86,10 +86,10 @@
 	var/lastpuke = 0
 	var/unacidable = 0
 	var/small = 0
-	var/list/pinned = list()    //List of things pinning this creature to walls (see living_defense.dm)
-	var/list/embedded = list()  //Embedded items, since simple mobs don't have organs.
-	var/list/languages = list() // For speaking/listening.
-	var/list/speak_emote = null //Verbs used when speaking. Defaults to 'say' if speak_emote is null.
+	var/list/pinned = list()            //List of things pinning this creature to walls (see living_defense.dm)
+	var/list/embedded = list()          //Embedded items, since simple mobs don't have organs.
+	var/list/languages = list()         // For speaking/listening.
+	var/list/speak_emote = list("says") //Verbs used when speaking. Defaults to 'say' if speak_emote is null.
 
 	var/name_archive //For admin things like possession
 
@@ -157,7 +157,6 @@
 	//see: setup.dm for list of mutations
 
 	var/voice_name = "unidentifiable voice"
-	var/voice_message = null // When you are not understood by others (replaced with just screeches, hisses, chimpers etc.)
 
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 
