@@ -2,7 +2,7 @@
 	name = "monkey"
 	voice_name = "monkey"
 	voice_message = "chimpers"
-	say_message = "chimpers"
+	speak_emote = list("chimpers")
 	icon_state = "monkey1"
 	icon = 'icons/mob/monkey.dmi'
 	gender = NEUTER
@@ -18,7 +18,7 @@
 	name = "farwa"
 	voice_name = "farwa"
 	voice_message = "mews"
-	say_message = "mews"
+	speak_emote = list("mews")
 	ico = "tajkey"
 	uni_append = "0A0E00"
 
@@ -26,7 +26,7 @@
 	name = "neaera"
 	voice_name = "neaera"
 	voice_message = "squicks"
-	say_message = "squicks"
+	speak_emote = list("squicks")
 	ico = "skrellkey"
 	uni_append = "01CC92"
 
@@ -34,7 +34,7 @@
 	name = "stok"
 	voice_name = "stok"
 	voice_message = "hisses"
-	say_message = "hisses"
+	speak_emote = list("hisses")
 	ico = "stokkey"
 	uni_append = "044C5D"
 
@@ -42,7 +42,7 @@
 	name = "diona nymph"
 	voice_name = "diona nymph"
 	voice_message = "chirrups"
-	say_message = "chirrups"
+	speak_emote = list("chirrups")
 	ico = "nymph"
 
 /mob/living/carbon/monkey/New()
