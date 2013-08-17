@@ -91,6 +91,7 @@
 	name = "Diona"
 	icobase = 'icons/mob/human_races/r_plant.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
+	language = "Rootspeak"
 	attack_verb = "slash"
 	primitive = /mob/living/carbon/monkey/diona
 
