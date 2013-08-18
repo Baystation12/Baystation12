@@ -110,10 +110,7 @@
 	if (length(heard_b))
 		var/message_b
 
-		if (src.voice_message)
-			message_b = src.voice_message
-		else
-			message_b = stars(message)
+		message_b = stars(message)
 
 		if (italics)
 			message_b = "<i>[message_b]</i>"

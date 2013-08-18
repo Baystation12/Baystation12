@@ -374,13 +374,10 @@ var/list/department_radio_keys = list(
 				M << speech_bubble
 
 	if (length(heard_b))
-		var/message_b
 
-		if (voice_message)
-			message_b = voice_message
-		else
-			message_b = stars(message)
-			message_b = say_quote(message_b,speaking)
+		var/message_b
+		message_b = stars(message)
+		message_b = say_quote(message_b,speaking)
 
 		if (italics)
 			message_b = "<i>[message_b]</i>"
