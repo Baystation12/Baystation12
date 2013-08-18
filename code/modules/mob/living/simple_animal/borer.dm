@@ -279,6 +279,12 @@ mob/living/simple_animal/borer/proc/detatch()
 		src << "You cannot infest someone who is already infested!"
 		return
 
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		if(H.head && (H.head.flags_inv & HIDEEARS))
+			src << "You cannot get past [H.head]."
+			return
+
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
 
@@ -293,7 +299,11 @@ mob/living/simple_animal/borer/proc/detatch()
 		return
 
 	if(M.stat == 2)
-		src << "That is not an appropriate target."
+		src << "They are dead and therefore unsuitable."
+		return
+
+	if(M.has_brain_worms())
+		src << "You cannot infest someone who is already infested!"
 		return
 
 	if(M in view(1, src))
