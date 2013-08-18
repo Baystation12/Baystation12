@@ -74,7 +74,7 @@
 	//Pass whispers on to anything inside the immediate listeners.
 	for(var/mob/L in listening)
 		for(var/mob/C in L.contents)
-			if(istype(C,/mob/living)
+			if(istype(C,/mob/living))
 				listening += C
 
 	var/list/eavesdropping = hearers(2, src)
