@@ -1,7 +1,6 @@
 /mob/living/captive_brain
 	name = "host brain"
 	real_name = "host brain"
-	universal_speak = 1
 
 /mob/living/captive_brain/say(var/message)
 
@@ -42,7 +41,7 @@
 	pass_flags = PASSTABLE
 
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
-	var/mob/living/host                     // Host for the brain worm.
+	var/mob/living/carbon/human/host        // Human host for the brain worm.
 	var/truename                            // Name used for brainworm-speak.
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
 	var/controlling                         // Used in human death check.
@@ -68,13 +67,7 @@
 	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
 	host_brain = new/mob/living/captive_brain(src)
 
-	for(var/mob/M in player_list)
-		if(istype(M,/mob/dead/observer))
-			var/mob/dead/observer/O = M
-			if(O.client)
-				if(O.client.prefs.be_special & BE_ALIEN)
-					src.ckey = O.ckey
-					break
+	request_player()
 
 
 /mob/living/simple_animal/borer/say(var/message)
@@ -269,7 +262,7 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	var/list/choices = list()
 	for(var/mob/living/carbon/C in view(1,src))
-		if(C.ckey != ckey && !(istype(C,/mob/living/captive_brain)) && !(istype(C,/mob/living/simple_animal/borer)))
+		if(C.stat != 2)
 			choices += C
 
 	var/mob/living/carbon/M = input(src,"Who do you wish to infest?") in null|choices
@@ -279,12 +272,6 @@ mob/living/simple_animal/borer/proc/detatch()
 	if(M.has_brain_worms())
 		src << "You cannot infest someone who is already infested!"
 		return
-
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		if(H.head && (H.head.flags_inv & HIDEEARS))
-			src << "You cannot get past [H.head]."
-			return
 
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
@@ -300,11 +287,7 @@ mob/living/simple_animal/borer/proc/detatch()
 		return
 
 	if(M.stat == 2)
-		src << "They are dead and therefore unsuitable."
-		return
-
-	if(M.has_brain_worms())
-		src << "You cannot infest someone who is already infested!"
+		src << "That is not an appropriate target."
 		return
 
 	if(M in view(1, src))
@@ -385,3 +368,33 @@ mob/living/simple_animal/borer/proc/detatch()
 	else
 		layer = MOB_LAYER
 		src << text("\blue You have stopped hiding.")
+
+//Procs for grabbing players.
+mob/living/simple_animal/borer/proc/request_player()
+	for(var/mob/dead/observer/O in player_list)
+		if(jobban_isbanned(O, "Syndicate"))
+			continue
+		if(O.client)
+			if(O.client.prefs.be_special & BE_ALIEN)
+				question(O.client)
+
+mob/living/simple_animal/borer/proc/question(var/client/C)
+	spawn(0)
+		if(!C)	return
+		var/response = alert(C, "A cortical borer needs a player. Are you interested?", "Cortical borer request", "Yes", "No", "Never for this round")
+		if(!C || ckey)
+			return
+		if(response == "Yes")
+			transfer_personality(C)
+		else if (response == "Never for this round")
+			C.prefs.be_special ^= BE_ALIEN
+
+mob/living/simple_animal/borer/proc/transfer_personality(var/client/candidate)
+
+	if(!candidate)
+		return
+
+	src.mind = candidate.mob.mind
+	src.ckey = candidate.ckey
+	if(src.mind)
+		src.mind.assigned_role = "Cortical Borer"
