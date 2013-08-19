@@ -113,7 +113,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 
 	found_player = 1
 
-	var/mob/living/carbon/human/podman = new /mob/living/carbon/monkey/diona(parent.loc)
+	var/mob/living/carbon/monkey/diona/podman = new(parent.loc)
 	podman.ckey = player.ckey
 
 	if(player.mob && player.mob.mind)
