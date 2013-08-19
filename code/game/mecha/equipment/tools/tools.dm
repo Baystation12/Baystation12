@@ -20,6 +20,8 @@
 	action(atom/target)
 		if(!action_checks(target)) return
 		if(!cargo_holder) return
+		if(istype(target, /obj/structure/stool)) return
+
 		if(istype(target,/obj))
 			var/obj/O = target
 			if(!O.anchored)
@@ -482,6 +484,7 @@
 		return "[..()] [mode==1?"([locked||"Nothing"])":null] \[<a href='?src=\ref[src];mode=1'>S</a>|<a href='?src=\ref[src];mode=2'>P</a>\]"
 
 	Topic(href, href_list)
+		..()
 		if(href_list["mode"])
 			mode = text2num(href_list["mode"])
 			send_byjax(chassis.occupant,"exosuit.browser","\ref[src]",src.get_equip_info())

@@ -550,15 +550,11 @@
 
 
 		var/mob/living/carbon/monkey/O = null
-		switch(M.dna.mutantrace)
-			if("tajaran")
-				O = new /mob/living/carbon/monkey/tajara(src)
-			if("lizard")
-				O = new /mob/living/carbon/monkey/unathi(src)
-			if("skrell")
-				O = new /mob/living/carbon/monkey/skrell(src)
-			else
-				O = new /mob/living/carbon/monkey(src)
+		if(H.species.primitive)
+			O = new H.species.primitive(src)
+		else
+			H.gib() //Trying to change the species of a creature with no primitive var set is messy.
+			return
 
 		if(M)
 			if (M.dna)
@@ -626,6 +622,9 @@
 			del(animation)
 
 		var/mob/living/carbon/human/O = new( src )
+		if(Mo.greaterform)
+			O.set_species(Mo.greaterform)
+
 		if (isblockon(getblock(M.dna.uni_identity, 11,3),11))
 			O.gender = FEMALE
 		else

@@ -16,6 +16,10 @@
 			new /obj/item/weapon/storage/backpack/industrial(src)
 		else
 			new /obj/item/weapon/storage/backpack/satchel_eng(src)
+		if (prob(70))
+			new /obj/item/clothing/tie/storage/brown_vest(src)
+		else
+			new /obj/item/clothing/tie/storage/webbing(src)
 		new /obj/item/blueprints(src)
 		new /obj/item/clothing/under/rank/chief_engineer(src)
 		new /obj/item/clothing/head/hardhat/white(src)
@@ -29,6 +33,7 @@
 		new /obj/item/clothing/mask/gas(src)
 		new /obj/item/device/multitool(src)
 		new /obj/item/device/flash(src)
+		new /obj/item/taperoll/engineering(src)
 		return
 
 

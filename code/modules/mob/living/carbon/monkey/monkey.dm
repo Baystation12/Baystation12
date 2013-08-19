@@ -10,116 +10,43 @@
 	update_icon = 0		///no need to call regenerate_icon
 
 	var/obj/item/weapon/card/id/wear_id = null // Fix for station bounced radios -- Skie
+	var/greaterform = "Human"                  // Used when humanizing a monkey.
+	var/ico = "monkey"                         // Used when updating icons.
+	var/uni_append = "12C4E2"                  // Small appearance modifier for different species.
 
 /mob/living/carbon/monkey/tajara
 	name = "farwa"
 	voice_name = "farwa"
 	voice_message = "mews"
 	say_message = "mews"
-	icon_state = "tajkey1"
+	ico = "tajkey"
+	uni_append = "0A0E00"
 
 /mob/living/carbon/monkey/skrell
 	name = "neaera"
 	voice_name = "neaera"
 	voice_message = "squicks"
 	say_message = "squicks"
-	icon_state = "skrellkey1"
+	ico = "skrellkey"
+	uni_append = "01CC92"
+
 /mob/living/carbon/monkey/unathi
 	name = "stok"
 	voice_name = "stok"
 	voice_message = "hisses"
 	say_message = "hisses"
-	icon_state = "stokkey1"
-
-/mob/living/carbon/monkey/unathi/New()
-	var/datum/reagents/R = new/datum/reagents(1000)
-	reagents = R
-	R.my_atom = src
-
-	if(name == "stok")
-		name = text("stok ([rand(1, 1000)])")
-	real_name = name
-	if (!(dna))
-		if(gender == NEUTER)
-			gender = pick(MALE, FEMALE)
-		dna = new /datum/dna( null )
-		dna.real_name = real_name
-		dna.uni_identity = "000000000000000000DC0000066000"
-		dna.struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
-		dna.unique_enzymes = md5(name)
-		dna.mutantrace = "lizard"
-				//////////blah
-		var/gendervar
-		if (gender == MALE)
-			gendervar = add_zero2(num2hex((rand(1,2049)),1), 3)
-		else
-			gendervar = add_zero2(num2hex((rand(2051,4094)),1), 3)
-		dna.uni_identity += gendervar
-		dna.uni_identity += "044"
-		dna.uni_identity += "C5D"
-	..()
-/mob/living/carbon/monkey/skrell/New()
-	var/datum/reagents/R = new/datum/reagents(1000)
-	reagents = R
-	R.my_atom = src
-	if(name == "neaera")
-		name = text("neaera ([rand(1, 1000)])")
-	real_name = name
-	if (!(dna))
-		if(gender == NEUTER)
-			gender = pick(MALE, FEMALE)
-		dna = new /datum/dna( null )
-		dna.real_name = real_name
-		dna.uni_identity = "000000000000000000DC0000066000"
-		dna.struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
-		dna.unique_enzymes = md5(name)
-		dna.mutantrace = "skrell"
-				//////////blah
-		var/gendervar
-		if (gender == MALE)
-			gendervar = add_zero2(num2hex((rand(1,2049)),1), 3)
-		else
-			gendervar = add_zero2(num2hex((rand(2051,4094)),1), 3)
-		dna.uni_identity += gendervar
-		dna.uni_identity += "01C"
-		dna.uni_identity += "C92"
-	..()
-/mob/living/carbon/monkey/tajara/New()
-	var/datum/reagents/R = new/datum/reagents(1000)
-	reagents = R
-	R.my_atom = src
-
-	if(name == "farwa")
-		name = text("farwa ([rand(1, 1000)])")
-	real_name = name
-	if (!(dna))
-		if(gender == NEUTER)
-			gender = pick(MALE, FEMALE)
-		dna = new /datum/dna( null )
-		dna.real_name = real_name
-		dna.uni_identity = "000000000000000000DC0000066000"
-		dna.struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
-		dna.unique_enzymes = md5(name)
-		dna.mutantrace = "tajaran"
-				//////////blah
-		var/gendervar
-		if (gender == MALE)
-			gendervar = add_zero2(num2hex((rand(1,2049)),1), 3)
-		else
-			gendervar = add_zero2(num2hex((rand(2051,4094)),1), 3)
-		dna.uni_identity += gendervar
-		dna.uni_identity += "0A0"
-		dna.uni_identity += "E00"
-	..()
+	ico = "stokkey"
+	uni_append = "044C5D"
 
 /mob/living/carbon/monkey/New()
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
 
-	if(name == "monkey")
-		name = text("monkey ([rand(1, 1000)])")
-	real_name = name
+	if(name == "monkey" || name == "farwa" || name == "stok" || name == "neara") //Hideous but necessary to stop Pun-Pun becoming generic.
+		name = "[name] ([rand(1, 1000)])"
+		real_name = name
+
 	if (!(dna))
 		if(gender == NEUTER)
 			gender = pick(MALE, FEMALE)
@@ -134,11 +61,28 @@
 			gendervar = add_zero2(num2hex((rand(1,2049)),1), 3)
 		else
 			gendervar = add_zero2(num2hex((rand(2051,4094)),1), 3)
-		dna.uni_identity += gendervar
-		dna.uni_identity += "12C"
-		dna.uni_identity += "4E2"
+		dna.uni_identity += "[gendervar][uni_append]"
 	..()
+	update_icons()
 	return
+
+/mob/living/carbon/monkey/unathi/New()
+
+	..()
+	dna.mutantrace = "lizard"
+	greaterform = "Unathi"
+
+/mob/living/carbon/monkey/skrell/New()
+
+	..()
+	dna.mutantrace = "skrell"
+	greaterform = "Skrell"
+
+/mob/living/carbon/monkey/tajara/New()
+
+	..()
+	dna.mutantrace = "tajaran"
+	greaterform = "Tajaran"
 
 /mob/living/carbon/monkey/movement_delay()
 	var/tally = 0

@@ -320,17 +320,18 @@
 
 		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
 		if(W.internal && !W.is_treated() && owner.bodytemperature >= 170)
-			W.open_wound(0.1 * wound_update_accuracy)
+			if(!owner.reagents.has_reagent("bicaridine"))	//bicard stops internal wounds from growing bigger with time
+				W.open_wound(0.1 * wound_update_accuracy)
 			owner.vessel.remove_reagent("blood",0.07 * W.damage * wound_update_accuracy)
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
 		// slow healing
-		var/heal_amt = 0.2
-		if (W.damage > 20)	//this thing's edges are not in day's travel of each other, what healing?
-			heal_amt = 0
+		var/heal_amt = 0
+		if (W.damage < 15) //this thing's edges are not in day's travel of each other, what healing?
+			heal_amt += 0.2
 
-		if(W.is_treated())
+		if(W.is_treated() && W.damage < 50) //whoa, not even magical band aid can hold it together
 			heal_amt += 0.3
 
 		//we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
@@ -466,25 +467,29 @@
 					organ= new /obj/item/weapon/organ/l_arm(owner.loc, owner)
 			if(LEG_RIGHT)
 				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/l_leg(owner.loc)
+					organ = new /obj/item/robot_parts/r_leg(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/r_leg(owner.loc, owner)
 			if(LEG_LEFT)
 				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/r_leg(owner.loc)
+					organ = new /obj/item/robot_parts/l_leg(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/l_leg(owner.loc, owner)
 			if(HAND_RIGHT)
-				organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
+				if(!(status & ORGAN_ROBOT))
+					organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(HAND_LEFT)
-				organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
+				if(!(status & ORGAN_ROBOT))
+					organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(FOOT_RIGHT)
-				organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
+				if(!(status & ORGAN_ROBOT))
+					organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 			if(FOOT_LEFT)
-				organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
+				if(!(status & ORGAN_ROBOT))
+					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 		if(organ)
 			destspawn = 1
@@ -738,20 +743,7 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 
 	//Setting base icon for this mob's race
 	if(ishuman(H) && H.dna)
-		var/icon/base
-		switch(H.dna.mutantrace)
-			if("tajaran")
-				base = new('icons/mob/human_races/r_tajaran.dmi')
-			if("lizard")
-				base = new('icons/mob/human_races/r_lizard.dmi')
-			if("skrell")
-				base = new('icons/mob/human_races/r_skrell.dmi')
-
-			if("vox")
-				base = new('icons/mob/human_races/r_vox.dmi')
-
-			else
-				base = new('icons/mob/human_races/r_human.dmi')
+		var/icon/base = new H.species.icobase
 		if(base)
 			icon = base.MakeLying()
 	else

@@ -607,6 +607,11 @@ var/list/slot_equipment_priority = list( \
 	src.pulling = AM
 	AM.pulledby = src
 
+	//Attempted fix for people flying away through space when cuffed and dragged.
+	if(ismob(AM))
+		var/mob/pulled = AM
+		pulled.inertia_dir = 0
+
 /mob/proc/can_use_hands()
 	return
 
