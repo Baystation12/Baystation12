@@ -178,6 +178,63 @@ rcd light flash thingy on matter drain
 			else
 				usr << "Out of uses."
 
+/datum/AI_Module/large/place_cyborg_transformer
+	module_name = "Place Robotic Factory"
+	mod_pick_name = "robfactory"
+
+/mob/living/silicon/ai/proc/place_transformer()
+	set name = "Place Robotic Factory"
+	set category = "Malfunction"
+
+	if(eyeobj)
+		return
+
+	if(!isturf(usr.loc)) // AI must be in it's core.
+		return
+
+	var/datum/AI_Module/large/place_cyborg_transformer/PCT = locate(/datum/AI_Module/large/place_cyborg_transformer) in usr:current_modules
+	if(!PCT)
+		return
+
+	if(PCT.uses < 1)
+		usr << "Out of uses."
+		return
+
+	var/sure = alert(usr, "Make sure the room it is in is big enough, there is camera vision and that there is a 1x3 area for the machine. Are you sure you want to place the machine here?", "Are you sure?", "Yes", "No")
+	if(sure != "Yes")
+		return
+
+	// Make sure there is enough room.
+	var/turf/middle = get_turf(eyeobj.loc)
+	var/list/turfs = list(middle, locate(middle.x - 1, middle.y, middle.z), locate(middle.x + 1, middle.y, middle.z))
+
+	var/alert_msg = "There isn't enough room. Make sure you are placing the machine in a clear area and on a floor."
+
+	var/datum/camerachunk/C = cameranet.getCameraChunk(middle.x, middle.y, middle.z)
+	if(!C.visibleTurfs[middle])
+		alert(usr, "We cannot get camera vision of this location.")
+		return
+
+	for(var/T in turfs)
+
+		// Make sure the turfs are clear and the correct type.
+		if(!istype(T, /turf/simulated/floor))
+			alert(usr, alert_msg)
+			return
+
+		var/turf/simulated/floor/F = T
+		for(var/atom/movable/AM in F.contents)
+			if(AM.density)
+				alert(usr, alert_msg)
+				return
+
+	// All clear, place the transformer
+	new /obj/machinery/transformer/conveyor(middle)
+	playsound(middle, 'sound/effects/phasein.ogg', 100, 1)
+//	usr.can_shunt = 0
+	PCT.uses -= 1
+//	usr << "You cannot shunt anymore."
+
 
 /datum/AI_Module/module_picker
 	var/temp = null
@@ -217,7 +274,18 @@ rcd light flash thingy on matter drain
 
 /datum/AI_Module/module_picker/Topic(href, href_list)
 	..()
-	if (href_list["coreup"])
+	if (href_list["robfactory"])
+		var/already
+		for (var/datum/AI_Module/mod in usr:current_modules)
+			if(istype(mod, /datum/AI_Module/large/place_cyborg_transformer))
+				already = 1
+		if (!already)
+			usr:current_modules += new /datum/AI_Module/large/place_cyborg_transformer
+			usr.verbs += /mob/living/silicon/ai/proc/place_transformer
+			src.temp = 	"Place a Robot Factory to turn humans into cyborgs."
+		else src.temp = "Additional Robot Factory."
+		src.processing_time -= 100
+	else if (href_list["coreup"])
 		var/already
 		for (var/datum/AI_Module/mod in usr:current_modules)
 			if(istype(mod, /datum/AI_Module/large/fireproof_core))
