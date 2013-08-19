@@ -379,12 +379,16 @@ mob/living/simple_animal/borer/proc/question(var/client/C)
 		if(!C || ckey)
 			return
 		if(response == "Yes")
-			transfer_personality(src)
+			transfer_personality(C)
 		else if (response == "Never for this round")
 			C.prefs.be_special ^= BE_ALIEN
 
-mob/living/simple_animal/borer/proc/transfer_personality(var/mob/candidate)
+mob/living/simple_animal/borer/proc/transfer_personality(var/client/candidate)
 
-	src.mind = candidate.mind
+	if(!candidate)
+		return
+
+	src.mind = candidate.mob.mind
 	src.ckey = candidate.ckey
-	src.mind.assigned_role = "Cortical Borer"
+	if(src.mind)
+		src.mind.assigned_role = "Cortical Borer"
