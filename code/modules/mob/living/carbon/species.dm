@@ -93,4 +93,4 @@
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	attack_verb = "slash"
 
-	flags = NO_EAT | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT
+	flags = WHITELISTED | NO_EAT | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT
