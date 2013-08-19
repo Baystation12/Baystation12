@@ -131,9 +131,9 @@
 			if (beaker)
 				var/obj/item/weapon/reagent_containers/glass/B = beaker
 				B.loc = get_step(loc, SOUTH)
-				beaker = null
+				beaker = null		
 
-		updateUsrDialog()
+		nanomanager.update_uis(src) // update all UIs attached to this object
 		add_fingerprint(usr)
 		return
 
