@@ -23,7 +23,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	var/realName = null
 	var/mob/living/carbon/human/source //Donor of blood, if any.
 	gender = MALE
-	var/obj/machinery/hydroponics/parent
+	var/obj/machinery/hydroponics/parent = null
 	var/found_player = 0
 
 /obj/item/seeds/replicapod/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -65,7 +65,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 
 /obj/item/seeds/replicapod/harvest(mob/user = usr)
 
-	var/obj/machinery/hydroponics/parent = loc
+	parent = loc
 	var/found_player = 0
 
 	user.visible_message("\blue [user] carefully begins to open the pod...","\blue You carefully begin to open the pod...")
