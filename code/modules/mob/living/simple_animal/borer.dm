@@ -67,13 +67,7 @@
 	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
 	host_brain = new/mob/living/captive_brain(src)
 
-	for(var/mob/M in player_list)
-		if(istype(M,/mob/dead/observer))
-			var/mob/dead/observer/O = M
-			if(O.client)
-				if(O.client.prefs.be_special & BE_ALIEN)
-					src.ckey = O.ckey
-					break
+	request_player()
 
 
 /mob/living/simple_animal/borer/say(var/message)
@@ -368,3 +362,29 @@ mob/living/simple_animal/borer/proc/detatch()
 	else
 		layer = MOB_LAYER
 		src << text("\blue You have stopped hiding.")
+
+//Procs for grabbing players.
+mob/living/simple_animal/borer/proc/request_player()
+	for(var/mob/dead/observer/O in player_list)
+		if(jobban_isbanned(O, "Syndicate"))
+			continue
+		if(O.client)
+			if(O.client.prefs.be_special & BE_ALIEN)
+				question(O.client)
+
+mob/living/simple_animal/borer/proc/question(var/client/C)
+	spawn(0)
+		if(!C)	return
+		var/response = alert(C, "A cortical borer needs a player. Are you interested?", "Cortical borer request", "Yes", "No", "Never for this round")
+		if(!C || ckey)
+			return
+		if(response == "Yes")
+			transfer_personality(src)
+		else if (response == "Never for this round")
+			C.prefs.be_special ^= BE_ALIEN
+
+mob/living/simple_animal/borer/proc/transfer_personality(var/mob/candidate)
+
+	src.mind = candidate.mind
+	src.ckey = candidate.ckey
+	src.mind.assigned_role = "Cortical Borer"
