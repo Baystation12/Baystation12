@@ -110,7 +110,7 @@
 
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
 	if (!ui)
-		ui = new(user, src, ui_key, 'nano/templates/cryo.tmpl', "Cryo Cell Control System", 520, 410)
+		ui = new(user, src, ui_key, "cryo.tmpl", "Cryo Cell Control System", 520, 410)
 		// When the UI is first opened this is the data it will use
 		ui.set_initial_data(data)
 		ui.open()
