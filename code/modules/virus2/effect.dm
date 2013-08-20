@@ -48,7 +48,7 @@
 	proc/deactivate(var/mob/living/carbon/mob)
 
 ////////////////////////SPECIAL/////////////////////////////////
-/datum/disease2/effect/alien
+/*/datum/disease2/effect/alien
 	name = "Unidentified Foreign Body"
 	stage = 4
 	activate(var/mob/living/carbon/mob,var/multiplier)
@@ -62,7 +62,7 @@
 				new/mob/living/carbon/alien/larva(mob.loc)
 			var/datum/disease2/disease/D = mob:virus2
 			mob:gib()
-			del D
+			del D*/
 
 /datum/disease2/effect/invisible
 	name = "Waiting Syndrome"
