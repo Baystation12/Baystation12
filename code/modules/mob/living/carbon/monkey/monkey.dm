@@ -75,7 +75,7 @@
 
 	var/list/choices = list()
 	for(var/mob/living/C in view(1,src))
-		if(C.real_name != real_name
+		if(C.real_name != real_name)
 			choices += C
 
 	var/mob/living/M = input(src,"Who do you wish to take a sample from?") in null|choices
