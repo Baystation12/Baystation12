@@ -7,8 +7,8 @@ datum/preferences
 			else
 				gender = FEMALE
 		s_tone = random_skin_tone()
-		h_style = random_hair_style(gender)
-		f_style = random_facial_hair_style(gender)
+		h_style = random_hair_style(gender, species)
+		f_style = random_facial_hair_style(gender, species)
 		randomize_hair_color("hair")
 		randomize_hair_color("facial")
 		randomize_eyes_color()
