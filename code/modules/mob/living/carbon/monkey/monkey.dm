@@ -63,6 +63,8 @@
 		adult.add_language(L.name)
 	adult.regenerate_icons()
 
+	adult.name = src.name
+	adult.real_name = src.real_name
 	adult.ckey = src.ckey
 	del(src)
 
