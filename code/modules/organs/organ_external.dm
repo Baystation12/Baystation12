@@ -81,10 +81,11 @@
 		burn *= 0.66 //~2/3 damage for ROBOLIMBS
 
 	//If limb took enough damage, try to cut or tear it off
-	if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
-		if( (sharp && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
-			droplimb(1)
-			return
+	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
+		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
+			if( (sharp && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
+				droplimb(1)
+				return
 
 	// High brute damage or sharp objects may damage internal organs
 	if(internal_organs != null) if( (sharp && brute >= 5) || brute >= 10) if(prob(5))
@@ -830,10 +831,7 @@ obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 
 	H.regenerate_icons()
 
-	if(H.organs_by_name["chest"])
-		var/datum/organ/external/chest/humanchest = H.organs_by_name["chest"]
-		humanchest.brute_dam = H.maxHealth * 2
-
+	H.stat = 2
 	H.death()
 
 obj/item/weapon/organ/head/proc/transfer_identity(var/mob/living/carbon/human/H)//Same deal as the regular brain proc. Used for human-->head
