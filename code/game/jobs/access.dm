@@ -343,10 +343,10 @@
 			return "Chief Medical Officer"
 		if(access_qm)
 			return "Quartermaster"
-/*		if(access_clown)
+		if(access_clown)
 			return "HONK! Access"
 		if(access_mime)
-			return "Silent Access"*/
+			return "Silent Access"
 		if(access_surgery)
 			return "Surgery"
 		if(access_theatre)
