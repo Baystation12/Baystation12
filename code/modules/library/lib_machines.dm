@@ -195,7 +195,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			else
 				dat += "<A href='?src=\ref[src];orderbyid=1'>(Order book by SS<sup>13</sup>BN)</A><BR><BR>"
 				dat += "<table>"
-				dat += "<tr><td>AUTHOR</td><td>TITLE</td><td>CATEGORY</td><td></td></tr>"
+				dat += "<tr><td>AUTHOR</td><td>TITLE</td><td>CATEGORY</td><td>ID</td><td></td></tr>"
 
 				var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library")
 				query.Execute()
@@ -205,7 +205,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 					var/author = query.item[2]
 					var/title = query.item[3]
 					var/category = query.item[4]
-					dat += "<tr><td>[author]</td><td>[title]</td><td>[category]</td><td><A href='?src=\ref[src];targetid=[id]'>\[Order\]</A></td></tr>"
+					dat += "<tr><td>[author]</td><td>[title]</td><td>[category]</td><td>[id]</td><td><A href='?src=\ref[src];targetid=[id]'>\[Order\]</A></td></tr>"
 				dat += "</table>"
 			dat += "<BR><A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"
 		if(5)
@@ -463,3 +463,27 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 		del(O)
 	else
 		..()
+
+/client/proc/delbook()
+	set name = "Delete Book"
+	set desc = "Permamently deletes a book from the database."
+	set category = "Admin"
+	if(!src.holder)
+		src << "Only administrators may use this command."
+		return
+
+	var/isbn = input("ISBN number?", "Delete Book") as num | null
+	if(!isbn)
+		return
+
+	if(dbcon_old.IsConnected())
+		var/DBConnection/dbcon = new()
+		dbcon.Connect("dbi:mysql:[sqldb]:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
+		if(!dbcon.IsConnected())
+			alert("Connection to Archive has been severed. Aborting.")
+		else
+			var/DBQuery/query = dbcon.NewQuery("DELETE FROM library WHERE id=[isbn]")
+			if(!query.Execute())
+				usr << query.ErrorMsg()
+			dbcon.Disconnect()
+	log_admin("[usr.key] has deleted the book [isbn]")
