@@ -3,6 +3,7 @@
 	name = "bees"
 	icon = 'icons/obj/apiary_bees_etc.dmi'
 	icon_state = "bees1"
+	icon_dead = "bees1"
 	var/strength = 1
 	var/feral = 0
 	var/mut = 0
@@ -138,31 +139,31 @@
 					target_mob = G
 					break
 
-	if(target_turf)
-		if (!(DirBlocked(get_step(src, get_dir(src,target_turf)),get_dir(src,target_turf)))) // Check for windows and doors!
-			Move(get_step(src, get_dir(src,target_turf)))
-			if (prob(0.1))
-				src.visible_message("\blue The bees swarm after [target_mob]!")
-		if(src.loc == target_turf)
-			target_turf = null
-			wander = 1
-	else
-		//find some flowers, harvest
-		//angry bee swarms don't hang around
-		if(feral > 0)
-			turns_per_move = rand(1,3)
-		else if(feral < 0)
-			turns_since_move = 0
-		else if(!my_hydrotray || my_hydrotray.loc != src.loc || !my_hydrotray.planted || my_hydrotray.dead || !my_hydrotray.myseed)
-			var/obj/machinery/hydroponics/my_hydrotray = locate() in src.loc
-			if(my_hydrotray)
-				if(my_hydrotray.planted && !my_hydrotray.dead && my_hydrotray.myseed)
-					turns_per_move = rand(20,50)
-				else
-					my_hydrotray = null
+		if(target_turf)
+			if (!(DirBlocked(get_step(src, get_dir(src,target_turf)),get_dir(src,target_turf)))) // Check for windows and doors!
+				Move(get_step(src, get_dir(src,target_turf)))
+				if (prob(0.1))
+					src.visible_message("\blue The bees swarm after [target_mob]!")
+			if(src.loc == target_turf)
+				target_turf = null
+				wander = 1
+		else
+			//find some flowers, harvest
+			//angry bee swarms don't hang around
+			if(feral > 0)
+				turns_per_move = rand(1,3)
+			else if(feral < 0)
+				turns_since_move = 0
+			else if(!my_hydrotray || my_hydrotray.loc != src.loc || !my_hydrotray.planted || my_hydrotray.dead || !my_hydrotray.myseed)
+				var/obj/machinery/hydroponics/my_hydrotray = locate() in src.loc
+				if(my_hydrotray)
+					if(my_hydrotray.planted && !my_hydrotray.dead && my_hydrotray.myseed)
+						turns_per_move = rand(20,50)
+					else
+						my_hydrotray = null
 
-	pixel_x = rand(-12,12)
-	pixel_y = rand(-12,12)
+		pixel_x = rand(-12,12)
+		pixel_y = rand(-12,12)
 
 	if(!parent && prob(10))
 		strength -= 1

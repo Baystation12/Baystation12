@@ -37,7 +37,7 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	if(!(client.prefs.toggles & CHAT_DEAD))
+	if(client && !(client.prefs.toggles & CHAT_DEAD))
 		usr << "\red You have deadchat muted."
 		return
 
@@ -57,12 +57,16 @@
 		if(M.client && M.client.holder && (M.client.holder.rights & R_ADMIN|R_MOD) && (M.client.prefs.toggles & CHAT_DEAD)) // Show the message to admins/mods with deadchat toggled on
 			M << rendered	//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
 
-		else if(M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD)) // Show the message to regular ghosts with deadchat toggled on.
+		else if(M.client && M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD)) // Show the message to regular ghosts with deadchat toggled on.
 			M.show_message(rendered, 2) //Takes into account blindness and such.
 	return
 
 /mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
+
 	if(!other)
+		return 1
+	//Universal speak makes everything understandable, for obvious reasons.
+	else if(other.universal_speak || src.universal_speak)
 		return 1
 	else if (src.stat == 2)
 		return 1
@@ -83,11 +87,12 @@
 		return 1
 	else if(isAI(src) && ispAI(other))
 		return 1
-	else if (istype(other, src.type))
+	else if (istype(other, src.type) || istype(src, other.type))
 		return 1
 	return 0
 
 /mob/proc/say_quote(var/text,var/datum/language/speaking)
+
 	if(!text)
 		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 		//tcomms code is still runtiming somewhere here
@@ -97,6 +102,8 @@
 
 	if (speaking)
 		speechverb = "[speaking.speech_verb]</span>, \"<span class='[speaking.colour]'>"
+	else if(speak_emote && speak_emote.len)
+		speechverb = "[pick(speak_emote)], \""
 	else if (src.stuttering)
 		speechverb = "stammers, \""
 	else if (src.slurring)
