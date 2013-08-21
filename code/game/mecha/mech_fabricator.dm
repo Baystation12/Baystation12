@@ -116,7 +116,6 @@
 						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar, Also HONK-related
 						///obj/item/mecha_parts/mecha_equipment/weapon/honker Thirdly HONK-related
 						),
-
 	"Robotic Upgrade Modules" = list(
 						/obj/item/borg/upgrade/reset,
 						/obj/item/borg/upgrade/rename,
@@ -125,12 +124,7 @@
 						/obj/item/borg/upgrade/tasercooler,
 						/obj/item/borg/upgrade/jetpack
 						),
-
-
-
-
-
-
+	"Hardsuit Construction" = list(	),
 	"Misc"=list(/obj/item/mecha_parts/mecha_tracking)
 	)
 

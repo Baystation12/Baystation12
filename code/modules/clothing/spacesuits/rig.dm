@@ -6,6 +6,8 @@
 	item_state = "eng_helm"
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
 	allowed = list(/obj/item/device/flashlight)
+	var/construction_time = 100
+	var/list/construction_cost = list("metal"=2000,"glass"=500)
 	var/brightness_on = 4 //luminosity when on
 	var/on = 0
 	color = "engineering" //Determines used sprites: rig[on]-[color] and rig[on]-[color]2 (lying down sprite)
@@ -44,6 +46,8 @@
 	slowdown = 1
 	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 80)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	var/list/construction_cost = list("metal"=2500)
+	var/construction_time = 150
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
 
@@ -61,7 +65,6 @@
 	desc = "An advanced suit that protects against hazardous, low pressure environments. Shines with a high polish."
 	item_state = "ce_hardsuit"
 
-
 //Mining rig
 /obj/item/clothing/head/helmet/space/rig/mining
 	name = "mining hardsuit helmet"
@@ -69,13 +72,16 @@
 	icon_state = "rig0-mining"
 	item_state = "mining_helm"
 	color = "mining"
+	construction_cost = list("metal"=2000,"glass"=500)
+	construction_time = 150
 
 /obj/item/clothing/suit/space/rig/mining
 	icon_state = "rig-mining"
 	name = "mining hardsuit"
 	desc = "A special suit that protects against hazardous, low pressure environments. Has reinforced plating."
 	item_state = "mining_hardsuit"
-
+	construction_cost = list("metal"=2500)
+	construction_time = 150
 
 
 //Syndicate rig
@@ -146,6 +152,8 @@
 	icon_state = "rig0-medical"
 	item_state = "medical_helm"
 	color = "medical"
+	construction_cost = list("metal"=2000,"glass"=500)
+	construction_time = 150
 
 /obj/item/clothing/suit/space/rig/medical
 	icon_state = "rig-medical"
@@ -153,7 +161,8 @@
 	desc = "A special suit that protects against hazardous, low pressure environments. Has minor radiation shielding."
 	item_state = "medical_hardsuit"
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical)
-
+	construction_cost = list("metal"=2500)
+	construction_time = 150
 
 	//Security
 /obj/item/clothing/head/helmet/space/rig/security
@@ -164,6 +173,8 @@
 	color = "sec"
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	siemens_coefficient = 0.7
+	construction_cost = list("metal"=2000,"glass"=500,"silver"=500)
+	construction_time = 200
 
 /obj/item/clothing/suit/space/rig/security
 	icon_state = "rig-sec"
@@ -173,7 +184,8 @@
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/melee/baton)
 	siemens_coefficient = 0.7
-
+	construction_cost = list("metal"=2500,"silver"=1000)
+	construction_time = 150
 
 //Atmospherics Rig (BS12)
 /obj/item/clothing/head/helmet/space/rig/atmos
@@ -184,6 +196,8 @@
 	color = "atmos"
 	armor = list(melee = 40, bullet = 0, laser = 0, energy = 0, bomb = 25, bio = 100, rad = 0)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE
+	construction_cost = list("metal"=1500,"glass"=500)
+	construction_time = 150
 
 /obj/item/clothing/suit/space/rig/atmos
 	desc = "A special suit that protects against hazardous, low pressure environments. Has reduced radiation shielding to allow for greater mobility."
@@ -192,3 +206,25 @@
 	item_state = "atmos_hardsuit"
 	armor = list(melee = 40, bullet = 0, laser = 0, energy = 0, bomb = 25, bio = 100, rad = 0)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE
+	construction_cost = list("metal"=2000)
+	construction_time = 150
+
+/obj/item/clothing/head/helmet/space/rig/camera
+	name = "camera helmet"
+	desc = "A hardsuit helmet with an inbuilt camera."
+	var/obj/machinery/camera/camera
+
+/obj/item/clothing/head/helmet/space/rig/camera/attack_self(mob/user)
+	if(camera)
+		..(user)
+	else
+		camera = new /obj/machinery/camera(src)
+		camera.network = list("HELMET")
+		cameranet.removeCamera(camera)
+		camera.c_tag = user.name
+		user << "\blue User scanned as [camera.c_tag]. Camera activated."
+
+/obj/item/clothing/head/helmet/space/rig/camera/examine()
+	..()
+	if(get_dist(usr,src) <= 1)
+		usr << "This helmet has a built-in camera. It's [camera ? "" : "in"]active."
