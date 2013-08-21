@@ -6,7 +6,7 @@ HEALTH ANALYZER
 GAS ANALYZER
 PLANT ANALYZER
 MASS SPECTROMETER
-
+REAGENT SCANNER
 */
 /obj/item/device/t_scanner
 	name = "T-ray scanner"
