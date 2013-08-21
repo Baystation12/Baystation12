@@ -1,8 +1,7 @@
 /mob/living/carbon/monkey
 	name = "monkey"
 	voice_name = "monkey"
-	voice_message = "chimpers"
-	say_message = "chimpers"
+	speak_emote = list("chimpers")
 	icon_state = "monkey1"
 	icon = 'icons/mob/monkey.dmi'
 	gender = NEUTER
@@ -17,33 +16,101 @@
 /mob/living/carbon/monkey/tajara
 	name = "farwa"
 	voice_name = "farwa"
-	voice_message = "mews"
-	say_message = "mews"
+	speak_emote = list("mews")
 	ico = "tajkey"
 	uni_append = "0A0E00"
 
 /mob/living/carbon/monkey/skrell
 	name = "neaera"
 	voice_name = "neaera"
-	voice_message = "squicks"
-	say_message = "squicks"
+	speak_emote = list("squicks")
 	ico = "skrellkey"
 	uni_append = "01CC92"
 
 /mob/living/carbon/monkey/unathi
 	name = "stok"
 	voice_name = "stok"
-	voice_message = "hisses"
-	say_message = "hisses"
+	speak_emote = list("hisses")
 	ico = "stokkey"
 	uni_append = "044C5D"
+
+/mob/living/carbon/monkey/diona
+	name = "diona nymph"
+	voice_name = "diona nymph"
+	speak_emote = list("chirrups")
+	ico = "nymph"
+	var/list/donors = list()
+	var/ready_evolve = 0
+
+/mob/living/carbon/monkey/diona/verb/evolve()
+
+	set category = "Diona"
+	set name = "Evolve"
+	set desc = "Grow to a more complex form."
+
+	if(donors.len < 5)
+		src << "You are not yet ready for your growth..."
+		return
+
+	if(reagents.get_reagent_amount("nutriment") < 5)
+		src << "You have not yet consumed enough to grow..."
+		return
+
+	src.visible_message("\red [src] begins to shift and quiver, and erupts in a shower of shed bark and twigs!","\red You begin to shift and quiver, then erupt in a shower of shed bark and twigs, attaining your adult form!")
+	var/mob/living/carbon/human/adult = new(loc)
+	adult.set_species("Diona")
+	for(var/datum/language/L in languages)
+		adult.add_language(L.name)
+	adult.regenerate_icons()
+
+	adult.name = src.name
+	adult.real_name = src.real_name
+	adult.ckey = src.ckey
+	del(src)
+
+/mob/living/carbon/monkey/diona/verb/steal_blood()
+	set category = "Diona"
+	set name = "Steal Blood"
+	set desc = "Take a blood sample from a suitable donor."
+
+	var/list/choices = list()
+	for(var/mob/living/C in view(1,src))
+		if(C.real_name != real_name)
+			choices += C
+
+	var/mob/living/M = input(src,"Who do you wish to take a sample from?") in null|choices
+
+	if(!M || !src) return
+
+	if(donors.Find(M.real_name))
+		src << "\red That donor offers you nothing new."
+		return
+
+	src.visible_message("\red [src] flicks out a feeler and neatly steals a sample of [M]'s blood.","\red You flick out a feeler and neatly steal a sample of [M]'s blood.")
+	donors += M.real_name
+	spawn(25)
+		update_progression()
+
+/mob/living/carbon/monkey/diona/proc/update_progression()
+
+	if(!donors.len)
+		return
+
+	if(donors.len == 5)
+		ready_evolve = 1
+		src << "\green You feel ready to move on to your next stage of growth."
+	else if(donors.len == 3)
+		universal_speak = 1
+		src << "\green You feel your awareness expand, and realize you know how to speak to the meat-creatures around you."
+	else
+		src << "\green The blood seeps into your small form, and you draw out the echoes of memories and personality from it, working them into your budding mind."
 
 /mob/living/carbon/monkey/New()
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
 
-	if(name == "monkey" || name == "farwa" || name == "stok" || name == "neara") //Hideous but necessary to stop Pun-Pun becoming generic.
+	if(name == "monkey" || name == "farwa" || name == "stok" || name == "neara" || name == "diona nymph") //Hideous but necessary to stop Pun-Pun becoming generic.
 		name = "[name] ([rand(1, 1000)])"
 		real_name = name
 
@@ -71,18 +138,29 @@
 	..()
 	dna.mutantrace = "lizard"
 	greaterform = "Unathi"
+	add_language("Sinta'unathi")
 
 /mob/living/carbon/monkey/skrell/New()
 
 	..()
 	dna.mutantrace = "skrell"
 	greaterform = "Skrell"
+	add_language("Skrellian")
 
 /mob/living/carbon/monkey/tajara/New()
 
 	..()
 	dna.mutantrace = "tajaran"
 	greaterform = "Tajaran"
+	add_language("Siik'tajr")
+
+/mob/living/carbon/monkey/diona/New()
+
+	..()
+	gender = NEUTER
+	dna.mutantrace = "plant"
+	greaterform = "Diona"
+	add_language("Rootspeak")
 
 /mob/living/carbon/monkey/movement_delay()
 	var/tally = 0

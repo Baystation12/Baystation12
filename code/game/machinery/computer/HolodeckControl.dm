@@ -231,8 +231,10 @@
 	emergencyShutdown()
 	..()
 
-
 /obj/machinery/computer/HolodeckControl/process()
+	for(var/item in holographic_items) // do this first, to make sure people don't take items out when power is down.
+		if(!(get_turf(item) in linkedholodeck))
+			derez(item, 0)
 
 	if(!..())
 		return
@@ -255,13 +257,6 @@
 					s.start()
 				T.ex_act(3)
 				T.hotspot_expose(1000,500,1)
-
-
-		for(var/item in holographic_items)
-			if(!(get_turf(item) in linkedholodeck))
-				derez(item, 0)
-
-
 
 /obj/machinery/computer/HolodeckControl/proc/derez(var/obj/obj , var/silent = 1)
 	holographic_items.Remove(obj)

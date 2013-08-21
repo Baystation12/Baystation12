@@ -2035,8 +2035,10 @@ datum
 							victim << "\red Your [safe_thing] protect you from most of the pepperspray!"
 							victim.eye_blurry = max(M.eye_blurry, 15)
 							victim.eye_blind = max(M.eye_blind, 5)
-							victim.Paralyse(1)
-							victim.drop_item()
+							victim.Stun(5)
+							victim.Weaken(5)
+							//victim.Paralyse(10)
+							//victim.drop_item()
 							return
 						else if ( eyes_covered ) // Eye cover is better than mouth cover
 							victim << "\red Your [safe_thing] protects your eyes from the pepperspray!"
@@ -2048,8 +2050,10 @@ datum
 							victim << "\red You're sprayed directly in the eyes with pepperspray!"
 							victim.eye_blurry = max(M.eye_blurry, 25)
 							victim.eye_blind = max(M.eye_blind, 10)
-							victim.Paralyse(1)
-							victim.drop_item()
+							victim.Stun(5)
+							victim.Weaken(5)
+							//victim.Paralyse(10)
+							//victim.drop_item()
 
 		frostoil
 			name = "Frost Oil"

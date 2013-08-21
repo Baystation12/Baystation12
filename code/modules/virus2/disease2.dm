@@ -162,3 +162,27 @@ var/global/list/virusDB = list()
 	v.fields["spread type"] = spreadtype
 	virusDB["[uniqueID]"] = v
 	return 1
+
+proc/virus2_lesser_infection()
+	var/list/candidates = list()	//list of candidate keys
+
+	for(var/mob/living/carbon/human/G in player_list)
+		if(G.client && G.stat != DEAD)
+			candidates += G
+	if(!candidates.len)	return
+
+	candidates = shuffle(candidates)
+
+	infect_mob_random_lesser(candidates[1])
+
+proc/virus2_greater_infection()
+	var/list/candidates = list()	//list of candidate keys
+
+	for(var/mob/living/carbon/human/G in player_list)
+		if(G.client && G.stat != DEAD)
+			candidates += G
+	if(!candidates.len)	return
+
+	candidates = shuffle(candidates)
+
+	infect_mob_random_greater(candidates[1])

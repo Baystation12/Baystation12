@@ -719,6 +719,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"Mch-[master_controller.machines_cost]\t#[machines.len]")
 				stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
 				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
+				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
 				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
 			else
 				stat(null,"MasterController-ERROR")
@@ -905,9 +906,9 @@ mob/verb/yank_out_object()
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
 	set src in view(1)
 
-	if(!isliving(usr) || usr.last_click + usr.click_delay > world.time)
+	if(!isliving(usr) || usr.next_move > world.time)
 		return
-	usr.delay_click(20)
+	usr.next_move = world.time + 20
 
 	if(usr.stat == 1)
 		usr << "You are unconcious and cannot do that!"

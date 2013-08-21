@@ -91,10 +91,10 @@
 
 /obj/machinery/optable/proc/check_victim()
 	if(locate(/mob/living/carbon/human, src.loc))
-		var/mob/M = locate(/mob/living/carbon/human, src.loc)
+		var/mob/living/carbon/human/M = locate(/mob/living/carbon/human, src.loc)
 		if(M.resting)
 			src.victim = M
-			icon_state = "table2-active"
+			icon_state = M.pulse ? "table2-active" : "table2-idle"
 			return 1
 	src.victim = null
 	icon_state = "table2-idle"
@@ -103,22 +103,40 @@
 /obj/machinery/optable/process()
 	check_victim()
 
-/obj/machinery/optable/attackby(obj/item/weapon/W as obj, mob/living/carbon/user as mob)
+/obj/machinery/optable/proc/take_victim(mob/living/carbon/human/H, mob/living/carbon/user as mob)
+	if (H == user)
+		user.visible_message("[user] climbs on the operating table.","You climb on the operating table.")
+	else
+		visible_message("\red [H] has been laid on the operating table by [user].", 3)
+	if (H.client)
+		H.client.perspective = EYE_PERSPECTIVE
+		H.client.eye = src
+	H.resting = 1
+	H.loc = src.loc
+	for(var/obj/O in src)
+		O.loc = src.loc
+	src.add_fingerprint(user)
+	icon_state = H.pulse ? "table2-active" : "table2-idle"
+	src.victim = H
 
+/obj/machinery/optable/verb/climb_on()
+	set name = "Climb On Table"
+	set category = "Object"
+	set src in oview(1)
+
+	if(usr.stat || !ishuman(usr) || usr.buckled || usr.restrained())
+		return
+
+	if(src.victim)
+		usr << "\blue <B>The table is already occupied!</B>"
+		return
+
+	take_victim(usr,usr)
+
+/obj/machinery/optable/attackby(obj/item/weapon/W as obj, mob/living/carbon/user as mob)
 	if (istype(W, /obj/item/weapon/grab))
-		if(ismob(W:affecting))
-			var/mob/M = W:affecting
-			if (M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
-			M.resting = 1
-			M.loc = src.loc
-			visible_message("\red [M] has been laid on the operating table by [user].", 3)
-			for(var/obj/O in src)
-				O.loc = src.loc
-			src.add_fingerprint(user)
-			icon_state = "table2-active"
-			src.victim = M
+		if(ishuman(W:affecting))
+			take_victim(W:affecting,usr)
 			del(W)
 			return
 	user.drop_item()

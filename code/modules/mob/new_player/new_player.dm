@@ -134,9 +134,7 @@
 
 			if(client.prefs.species != "Human")
 
-				var/S = client.prefs.species
-				if(S == "Unathi") S = "Soghun"
-				if(!is_alien_whitelisted(src, S) && config.usealienwhitelist)
+				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
 
@@ -151,9 +149,7 @@
 				usr << "\blue There is an administrative lock on entering the game!"
 				return
 
-			var/S = client.prefs.species
-			if(S == "Unathi") S = "Soghun"
-			if(!is_alien_whitelisted(src, S) && config.usealienwhitelist)
+			if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 				src << alert("You are currently not whitelisted to play [client.prefs.species].")
 				return 0
 
@@ -360,7 +356,7 @@
 		if(client.prefs.language)
 			chosen_language = all_languages[client.prefs.language]
 		if(chosen_language)
-			if(is_alien_whitelisted(src, client.prefs.language) || !config.usealienwhitelist)
+			if(is_alien_whitelisted(src, client.prefs.language) || !config.usealienwhitelist || !(chosen_language.flags & WHITELISTED))
 				new_character.add_language(client.prefs.language)
 
 		if(ticker.random_players)
