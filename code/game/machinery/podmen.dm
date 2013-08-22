@@ -153,5 +153,5 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 		if (newname != "")
 			podman.real_name = newname
 
-	parent.visible_message("\blue The pod disgorges a fully-formed plant person!")
+	parent.visible_message("\blue The pod disgorges a fully-formed plant creature!")
 	parent.update_tray()
