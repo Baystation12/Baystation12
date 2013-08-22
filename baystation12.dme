@@ -949,6 +949,7 @@
 #include "code\modules\mob\living\carbon\metroid\subtypes.dm"
 #include "code\modules\mob\living\carbon\metroid\update_icons.dm"
 #include "code\modules\mob\living\carbon\monkey\death.dm"
+#include "code\modules\mob\living\carbon\monkey\diona.dm"
 #include "code\modules\mob\living\carbon\monkey\emote.dm"
 #include "code\modules\mob\living\carbon\monkey\examine.dm"
 #include "code\modules\mob\living\carbon\monkey\hud.dm"
