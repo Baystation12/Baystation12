@@ -584,7 +584,7 @@
 	icon_state = "bookSpaceLaw"
 	author = "Nanotrasen"
 	title = "Space Law"
-	/*dat = {"
+	dat = {"
 
 		<html><head>
 		</head>
@@ -594,7 +594,7 @@
 
 		</html>
 
-		"}*/
+		"}
 
 /obj/item/weapon/book/manual/engineering_guide
 	name = "Engineering Textbook"
