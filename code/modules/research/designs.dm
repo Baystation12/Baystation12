@@ -710,6 +710,74 @@ datum/design/honker_targ
 	build_path = "/obj/item/weapon/circuitboard/mecha/honker/targeting"
 
 ////////////////////////////////////////
+/////////// Space Suits/// /////////////
+////////////////////////////////////////
+datum/design/rig_atmos
+	name = "Atmospherics Hardsuit"
+	desc = "Allows for the construction of Atmospherics Hardsuits."
+	id = "atmos_rig"
+	build_type = MECHFAB
+	req_tech = list("engineering" = 2,"materials" = 2,"biotech" = 2)
+	build_path = "/obj/item/clothing/suit/space/rig/atmos"
+	category = "Hardsuit Construction"
+datum/design/rig_atmos_helm
+	name = "Atmospherics Helmet"
+	desc = "Allows for the construction of Atmospherics Hardsuit Helmets."
+	id = "atmos_rig_helm"
+	build_type = MECHFAB
+	req_tech = list("engineering" = 2,"materials" = 2,"biotech" = 2)
+	build_path = "/obj/item/clothing/head/helmet/space/rig/atmos"
+	category = "Hardsuit Construction"
+datum/design/rig
+	name = "Engineering Hardsuit"
+	desc = "Allows for the construction of Engineering Hardsuits."
+	id = "engineering_rig"
+	build_type = MECHFAB
+	req_tech = list("engineering" = 3,"materials" = 2,"biotech" = 2)
+	build_path = "/obj/item/clothing/suit/space/rig"
+	category = "Hardsuit Construction"
+datum/design/rig_helm
+	name = "Engineering Helmet"
+	desc = "Allows for the construction of Engineering Hardsuit Helmets."
+	id = "engineering_rig_helm"
+	build_type = MECHFAB
+	req_tech = list("engineering" = 3,"materials" = 2,"biotech" = 2)
+	build_path = "/obj/item/clothing/head/helmet/space/rig"
+	category = "Hardsuit Construction"
+datum/design/rig_sec
+	name = "Security Hardsuit"
+	desc = "Allows for the construction of Security Hardsuits."
+	id = "security_rig"
+	build_type = MECHFAB
+	req_tech = list("engineering" = 3,"materials" = 4,"biotech" = 2,"combat" = 2)
+	build_path = "/obj/item/clothing/suit/space/rig/security"
+	category = "Hardsuit Construction"
+datum/design/rig_sec_helm
+	name = "Security Helmet"
+	desc = "Allows for the construction of Security Hardsuit Helmets."
+	id = "security_rig_helm"
+	build_type = MECHFAB
+	req_tech = list("engineering" = 3,"materials" = 4,"biotech" = 2, "combat" = 2)
+	build_path = "/obj/item/clothing/head/helmet/space/rig/security"
+	category = "Hardsuit Construction"
+datum/design/magboots
+	name = "Magboots"
+	desc = "Allows for the construction of Magboots."
+	id = "magboots"
+	build_type = MECHFAB
+	req_tech = list("engineering" = 3,"materials" = 3,"magnets" = 2)
+	build_path = "/obj/item/clothing/shoes/magboots"
+	category = "Hardsuit Construction"
+datum/design/rig_cam_helm
+	name = "Engineering Camera Helmet"
+	desc = "Allows for the construction of Engineering Camera Helmets."
+	id = "cam_rig_helm"
+	build_type = MECHFAB
+	req_tech = list("engineering" = 4,"materials" = 2,"biotech" = 2)
+	build_path = "/obj/item/clothing/head/helmet/space/rig/camera"
+	category = "Hardsuit Construction"
+
+////////////////////////////////////////
 /////////// Mecha Equpment /////////////
 ////////////////////////////////////////
 
@@ -865,6 +933,7 @@ datum/design/mech_generator_nuclear
 	req_tech = list("powerstorage"= 3, "engineering" = 3, "materials" = 3)
 	build_path = "/obj/item/mecha_parts/mecha_equipment/generator/nuclear"
 	category = "Exosuit Equipment"
+
 
 
 ////////////////////////////////////////
@@ -1269,16 +1338,6 @@ datum/design/mass_spectrometer
 	reliability_base = 76
 	build_path = "/obj/item/device/mass_spectrometer"
 
-datum/design/adv_mass_spectrometer
-	name = "Advanced Mass-Spectrometer"
-	desc = "A device for analyzing chemicals in the blood and their quantities."
-	id = "adv_mass_spectrometer"
-	req_tech = list("biotech" = 2, "magnets" = 4)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 30, "$glass" = 20)
-	reliability_base = 74
-	build_path = "/obj/item/device/mass_spectrometer/adv"
-
 datum/design/reagent_scanner
 	name = "Reagent Scanner"
 	desc = "A device for identifying chemicals."
@@ -1298,6 +1357,16 @@ datum/design/adv_reagent_scanner
 	materials = list("$metal" = 30, "$glass" = 20)
 	reliability_base = 74
 	build_path = "/obj/item/device/reagent_scanner/adv"
+
+datum/design/adv_mass_spectrometer
+	name = "Advanced Mass-Spectrometer"
+	desc = "A device for analyzing chemicals in the blood and their quantities."
+	id = "adv_mass_spectrometer"
+	req_tech = list("biotech" = 2, "magnets" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 30, "$glass" = 20)
+	reliability_base = 74
+	build_path = "/obj/item/device/mass_spectrometer/adv"
 
 datum/design/mmi
 	name = "Man-Machine Interface"

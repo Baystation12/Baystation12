@@ -200,4 +200,4 @@
 	name = "Engineering Cameras"
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
-	network = list("Power Alarms","Atmosphere Alarms","Fire Alarms")
+	network = list("Power Alarms","Atmosphere Alarms","Fire Alarms","HELMET","Robots")
