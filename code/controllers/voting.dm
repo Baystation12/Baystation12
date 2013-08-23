@@ -13,7 +13,6 @@ datum/controller/vote
 	var/list/voting = list()
 	var/list/current_votes = list()
 	var/auto_muted = 0
-	var/hide_mode = 1
 
 	New()
 		if(vote != src)
@@ -118,7 +117,7 @@ datum/controller/vote
 		var/text
 		if(winners.len > 0)
 			if(winners.len > 1)
-				if(mode != "gamemode" || hide_mode == 0) // Here we are making sure we don't announce potential game modes
+				if(mode != "gamemode" || ticker.hide_mode == 0) // Here we are making sure we don't announce potential game modes
 					text = "<b>Vote Tied Between:</b>\n"
 				for(var/option in winners)
 					text += "\t[option]\n"
@@ -127,7 +126,7 @@ datum/controller/vote
 			for(var/key in current_votes)
 				if(choices[current_votes[key]] == .)
 					round_voters += key // Keep track of who voted for the winning round.
-			if((mode == "gamemode" && . == "extended") || hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
+			if((mode == "gamemode" && . == "extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
 				text += "<b>Vote Result: [.]</b>"
 			else
 				if(mode != "gamemode")

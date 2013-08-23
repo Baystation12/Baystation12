@@ -5,7 +5,6 @@
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
 	var/totalPlayers = 0		 //Player counts for the Lobby tab
 	var/totalPlayersReady = 0
-	var/hide_mode = 1
 	universal_speak = 1
 
 	invisibility = 101
@@ -75,7 +74,7 @@
 			if(ticker.hide_mode)
 				stat("Game Mode:", "Secret")
 			else
-				if(hide_mode == 0)
+				if(ticker.hide_mode == 0)
 					stat("Game Mode:", "[master_mode]") // Old setting for showing the game mode
 				else
 					stat("Game Mode: ", "Secret")
