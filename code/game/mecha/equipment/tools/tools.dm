@@ -22,7 +22,7 @@
 		if(!cargo_holder) return
 		if(istype(target, /obj/structure/stool)) return
 		for(var/M in target.contents)
-			if(istype(M, /mob/living)
+			if(istype(M, /mob/living))
 				return
 
 		if(istype(target,/obj))
