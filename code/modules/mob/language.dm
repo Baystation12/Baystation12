@@ -54,7 +54,7 @@
 /datum/language/human
 	name = "Sol Common"
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
-	key = "hum"
+	key = "1"
 	flags = RESTRICTED
 
 // Galactic common languages (systemwide accepted standards).
@@ -62,13 +62,13 @@
 	name = "Tradeband"
 	desc = "Maintained by the various trading cartels in major systems, this elegant, structured language is used for bartering and bargaining."
 	speech_verb = "enunciates"
-	key = "tra"
+	key = "2"
 
 /datum/language/gutter
 	name = "Gutter"
 	desc = "Much like Standard, this crude pidgin tongue descended from numerous languages and serves as Tradeband for criminal elements."
 	speech_verb = "growls"
-	key = "g"
+	key = "3"
 
 // Language handling.
 /mob/proc/add_language(var/language)
@@ -94,4 +94,6 @@
 
 	return 0
 
+//TBD
 /mob/verb/check_languages()
+	return
