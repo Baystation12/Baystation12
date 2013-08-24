@@ -51,7 +51,6 @@
 	key = "q"
 	flags = RESTRICTED
 
-/*
 /datum/language/human
 	name = "Sol Common"
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
@@ -69,8 +68,7 @@
 	name = "Gutter"
 	desc = "Much like Standard, this crude pidgin tongue descended from numerous languages and serves as Tradeband for criminal elements."
 	speech_verb = "growls"
-	key = "gut"
-*/
+	key = "g"
 
 // Language handling.
 /mob/proc/add_language(var/language)
@@ -95,3 +93,5 @@
 			return 1
 
 	return 0
+
+/mob/verb/check_languages()

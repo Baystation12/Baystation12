@@ -111,10 +111,14 @@
 	primitive = /mob/living/carbon/monkey/diona
 
 	warning_low_pressure = 50
-	hazard_low_pressure = 0
+	hazard_low_pressure = -1
 
-	heat_level_1 = 500
-	heat_level_2 = 700
-	heat_level_3 = 1200
+	cold_level_1 = 50
+	cold_level_2 = -1
+	cold_level_3 = -1
 
-	flags = WHITELISTED | NO_EAT | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT
+	heat_level_1 = 2000
+	heat_level_2 = 3000
+	heat_level_3 = 4000
+
+	flags = WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB

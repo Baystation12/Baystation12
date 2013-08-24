@@ -697,6 +697,8 @@
 		if(!opened)//Cover is closed
 			if(locked)
 				if(prob(90))
+					var/obj/item/weapon/card/emag/emag = W
+					emag.uses--
 					user << "You emag the cover lock."
 					locked = 0
 				else
