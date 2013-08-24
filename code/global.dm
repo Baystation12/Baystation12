@@ -76,7 +76,7 @@ var/blobevent = 0
 var/diary = null
 var/diaryofmeanpeople = null
 var/href_logfile = null
-var/station_name = "Wreckit Station"
+var/station_name = "Deep Space Testing Initiative Gamma"
 var/game_version = "Custom Modified Baystation12"
 var/changelog_hash = ""
 
