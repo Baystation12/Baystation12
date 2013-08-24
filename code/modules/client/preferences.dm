@@ -764,13 +764,13 @@ datum/preferences
 						g_hair = rand(0,255)
 						b_hair = rand(0,255)
 					if("h_style")
-						h_style = random_hair_style(gender)
+						h_style = random_hair_style(gender, species)
 					if("facial")
 						r_facial = rand(0,255)
 						g_facial = rand(0,255)
 						b_facial = rand(0,255)
 					if("f_style")
-						f_style = random_facial_hair_style(gender)
+						f_style = random_facial_hair_style(gender, species)
 					if("underwear")
 						underwear = rand(1,underwear_m.len)
 						ShowChoices(user)
@@ -822,9 +822,7 @@ datum/preferences
 							var/list/valid_hairstyles = list()
 							for(var/hairstyle in hair_styles_list)
 								var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-								if(gender == MALE && S.gender == FEMALE)
-									continue
-								if(gender == FEMALE && S.gender == MALE)
+								if(gender != S.gender)
 									continue
 								if( !(species in S.species_allowed))
 									continue
@@ -840,9 +838,7 @@ datum/preferences
 							var/list/valid_facialhairstyles = list()
 							for(var/facialhairstyle in facial_hair_styles_list)
 								var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-								if(gender == MALE && S.gender == FEMALE)
-									continue
-								if(gender == FEMALE && S.gender == MALE)
+								if(gender != S.gender)
 									continue
 								if( !(species in S.species_allowed))
 									continue
@@ -925,9 +921,7 @@ datum/preferences
 						var/list/valid_facialhairstyles = list()
 						for(var/facialhairstyle in facial_hair_styles_list)
 							var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-							if(gender == MALE && S.gender == FEMALE)
-								continue
-							if(gender == FEMALE && S.gender == MALE)
+							if(gender != S.gender)
 								continue
 							if( !(species in S.species_allowed))
 								continue
