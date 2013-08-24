@@ -497,26 +497,32 @@ proc/process_ghost_teleport_locs()
 /area/vox_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
+	requires_power = 0
 
 /area/vox_station/southwest_solars
 	name = "\improper aft port solars"
 	icon_state = "southwest"
+	requires_power = 0
 
 /area/vox_station/northwest_solars
 	name = "\improper fore port solars"
 	icon_state = "northwest"
+	requires_power = 0
 
 /area/vox_station/northeast_solars
 	name = "\improper fore starboard solars"
 	icon_state = "northeast"
+	requires_power = 0
 
 /area/vox_station/southeast_solars
 	name = "\improper aft starboard solars"
 	icon_state = "southeast"
+	requires_power = 0
 
 /area/vox_station/mining
 	name = "\improper nearby mining asteroid"
 	icon_state = "north"
+	requires_power = 0
 
 //PRISON
 /area/prison

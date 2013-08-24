@@ -191,6 +191,8 @@ emp_act
 			user << "\red [src]'s [affecting.display_name] is already sabotaged!"
 		else
 			user << "\red You sneakily slide [I] into the dataport on [src]'s [affecting.display_name] and short out the safeties."
+			var/obj/item/weapon/card/emag/emag = I
+			emag.uses--
 			affecting.sabotaged = 1
 		return
 
