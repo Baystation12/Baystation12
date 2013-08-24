@@ -1,5 +1,5 @@
 #define VOX_SHUTTLE_MOVE_TIME 260
-#define VOX_SHUTTLE_COOLDOWN 460
+#define VOX_SHUTTLE_COOLDOWN 1200
 
 //Copied from Syndicate shuttle.
 var/global/vox_shuttle_location
