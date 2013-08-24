@@ -32,7 +32,7 @@
 	R.icon_state = "robot"
 	del(R.module)
 	R.module = null
-	R.camera.network.Remove(list("Medical","MINE"))
+	R.camera.network.Remove(list("Engineering","Medical","MINE"))
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
 	R.updateicon()
