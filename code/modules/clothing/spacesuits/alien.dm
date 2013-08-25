@@ -40,18 +40,7 @@
 // Vox space gear (vaccuum suit, low pressure armour)
 // Can't be equipped by any other species due to bone structure and vox cybernetics.
 
-/obj/item/clothing/head/helmet/space/vox/pressure
-	name = "alien helmet"
-	icon_state = "vox-pressure"
-	item_state = "vox-pressure"
-	desc = "Hey, wasn't this a prop in \'The Abyss\'?"
-	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 30, rad = 30)
-
-/obj/item/clothing/suit/space/vox/pressure
-	name = "alien pressure suit"
-	icon_state = "vox-pressure"
-	item_state = "vox-pressure"
-	desc = "A huge, armoured, pressurized suit, designed for distinctly nonhuman proportions."
+/obj/item/clothing/suit/space/vox
 	w_class = 3
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank)
 	slowdown = 2
@@ -59,23 +48,9 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
 
-/obj/item/clothing/head/helmet/space/vox/carapace
-	name = "alien visor"
-	icon_state = "vox-carapace"
-	item_state = "vox-carapace"
-	desc = "A glowing visor, perhaps stolen from a depressed Cylon."
+/obj/item/clothing/head/helmet/space/vox
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 30, rad = 30)
 	flags = HEADCOVERSEYES|STOPSPRESSUREDMAGE
-
-/obj/item/clothing/suit/space/vox/carapace
-	name = "alien carapace armour"
-	icon_state = "vox-carapace"
-	item_state = "vox-carapace"
-	desc = "An armoured, segmented carapace with glowing purple lights. It looks pretty run-down."
-	w_class = 3
-	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank)
-	slowdown = 1
-	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 
 /obj/item/clothing/head/helmet/space/vox/mob_can_equip(M as mob, slot)
 	var/mob/living/carbon/human/V = M
@@ -89,8 +64,55 @@
 	if(V.species.name != "Vox")
 		V << "<span class='warning'>This clearly isn't designed for your species!</span>"
 		return 0
-
 	return ..()
+
+/obj/item/clothing/head/helmet/space/vox/pressure
+	name = "alien helmet"
+	icon_state = "vox-pressure"
+	item_state = "vox-pressure"
+	desc = "Hey, wasn't this a prop in \'The Abyss\'?"
+
+/obj/item/clothing/suit/space/vox/pressure
+	name = "alien pressure suit"
+	icon_state = "vox-pressure"
+	item_state = "vox-pressure"
+	desc = "A huge, armoured, pressurized suit, designed for distinctly nonhuman proportions."
+
+/obj/item/clothing/head/helmet/space/vox/carapace
+	name = "alien visor"
+	icon_state = "vox-carapace"
+	item_state = "vox-carapace"
+	desc = "A glowing visor, perhaps stolen from a depressed Cylon."
+
+/obj/item/clothing/suit/space/vox/carapace
+	name = "alien carapace armour"
+	icon_state = "vox-carapace"
+	item_state = "vox-carapace"
+	desc = "An armoured, segmented carapace with glowing purple lights. It looks pretty run-down."
+
+/obj/item/clothing/head/helmet/space/vox/stealth
+	name = "alien stealth helmet"
+	icon_state = "vox-stealth"
+	item_state = "vox-stealth"
+	desc = "A smoothly contoured, matte-black alien helmet."
+
+/obj/item/clothing/suit/space/vox/stealth
+	name = "alien stealth suit"
+	icon_state = "vox-stealth"
+	item_state = "vox-stealth"
+	desc = "A sleek black suit. It seems to have a tail, and is very heavy."
+
+/obj/item/clothing/head/helmet/space/vox/medic
+	name = "alien goggled helmet"
+	icon_state = "vox-medic"
+	item_state = "vox-medic"
+	desc = "An alien helmet with enormous goggled lenses."
+
+/obj/item/clothing/suit/space/vox/medic
+	name = "alien armour"
+	icon_state = "vox-medic"
+	item_state = "vox-medic"
+	desc = "An almost organic looking nonhuman pressure suit."
 
 /obj/item/clothing/under/vox
 	has_sensor = 0

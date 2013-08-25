@@ -37,8 +37,8 @@ var/global/vox_tick = 1
 
 
 		if(3) // Vox saboteur!
-			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/carapace(src), slot_wear_suit)
-			equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/carapace(src), slot_head)
+			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/stealth(src), slot_wear_suit)
+			equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/stealth(src), slot_head)
 			equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(src), slot_belt)
 			equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/monocle(src), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
 			equip_to_slot_or_del(new /obj/item/weapon/card/emag(src), slot_l_store)
@@ -46,8 +46,8 @@ var/global/vox_tick = 1
 			equip_to_slot_or_del(new /obj/item/device/multitool(src), slot_l_hand)
 
 		if(4) // Vox medic!
-			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/pressure(src), slot_wear_suit)
-			equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/pressure(src), slot_head)
+			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/medic(src), slot_wear_suit)
+			equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/vox/medic(src), slot_head)
 			equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(src), slot_belt) // Who needs actual surgical tools?
 			equip_to_slot_or_del(new /obj/item/clothing/glasses/hud/health(src), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
 			equip_to_slot_or_del(new /obj/item/weapon/circular_saw(src), slot_l_store)
