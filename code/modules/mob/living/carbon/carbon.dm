@@ -255,7 +255,16 @@
 
 					var/turf/startloc = loc
 					var/obj/selection = input("Select a destination.", "Duct System") as null|anything in sortList(vents)
-					if(!selection)	return
+
+					if(!selection)
+						return
+
+					if(!do_after(src, 45))
+						return
+
+					if(!src||!selection)
+						return
+
 					if(loc==startloc)
 						if(contents.len)
 							for(var/obj/item/carried_item in contents)//If the monkey got on objects.
