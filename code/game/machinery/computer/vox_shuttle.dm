@@ -26,10 +26,10 @@ var/global/announce_vox_departure = 1 //Stealth systems - give an announcement o
 		return
 
 	if(announce_vox_departure)
-		user << "\red Shuttle stealth systems have been deactivated. The Exodus will be warned of our arrival."
+		user << "\red Shuttle stealth systems have been activated. The Exodus will not be warned of our arrival."
 		announce_vox_departure = 0
 	else
-		user << "\red Shuttle stealth systems have been activated. The Exodus will not be warned of our arrival."
+		user << "\red Shuttle stealth systems have been deactivated. The Exodus will be warned of our arrival."
 		announce_vox_departure = 1
 
 
