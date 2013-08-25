@@ -634,10 +634,10 @@
 					t += "<BR><HR><A href='?src=\ref[src];malfhack=1'><I>Override Programming</I></A><BR>"
 				else
 					t += "<BR><HR><I>APC Hacked</I><BR>"
-					if(!src.occupant)
+					/*if(!src.occupant)
 						t += "<A href='?src=\ref[src];occupyapc=1'><I>Shunt Core Processes</I></A><BR>"
 					else
-						t += "<I>Core Processes Uploaded</I><BR>"
+						t += "<I>Core Processes Uploaded</I><BR>"*/
 
 	t += "<BR><HR><A href='?src=\ref[src];close=1'>Close</A>"
 
@@ -902,19 +902,19 @@
 					malfai << "Hack complete. The APC is now under your exclusive control."
 					update_icon()
 
-	else if (href_list["occupyapc"])
+	/*else if (href_list["occupyapc"])
 		malfoccupy(usr)
 
 
 	else if (href_list["deoccupyapc"])
-		malfvacate()
+		malfvacate()*/
 
 	if(usingUI)
 		src.updateDialog()
 
 	return
 
-/obj/machinery/power/apc/proc/malfoccupy(var/mob/living/silicon/ai/malf)
+/*/obj/machinery/power/apc/proc/malfoccupy(var/mob/living/silicon/ai/malf)
 	if(!istype(malf))
 		return
 	if(istype(malf.loc, /obj/machinery/power/apc)) // Already in an APC
@@ -952,7 +952,7 @@
 		if(forced)
 			src.occupant.loc = src.loc
 			src.occupant.death()
-			src.occupant.gib()
+			src.occupant.gib()*/
 
 
 /obj/machinery/power/apc/proc/ion_act()
@@ -1234,8 +1234,8 @@
 				ticker.mode:apcs--
 	stat |= BROKEN
 	operating = 0
-	if(occupant)
-		malfvacate(1)
+	/*if(occupant)
+		malfvacate(1)*/
 	update_icon()
 	update()
 
@@ -1262,8 +1262,8 @@
 	area.power_equip = 0
 	area.power_environ = 0
 	area.power_change()
-	if(occupant)
-		malfvacate(1)
+	/*if(occupant)
+		malfvacate(1)*/
 	..()
 
 /obj/machinery/power/apc/proc/shock(mob/user, prb)

@@ -54,8 +54,8 @@
 	var/sdisabilities = 0	//Carbon
 	var/disabilities = 0	//Carbon
 	var/atom/movable/pulling = null
-	var/last_click = null
-	var/click_delay = 0
+	var/next_move = null
+	var/prev_move = null
 	var/monkeyizing = null	//Carbon
 	var/other = 0.0
 	var/hand = null
@@ -86,9 +86,11 @@
 	var/lastpuke = 0
 	var/unacidable = 0
 	var/small = 0
-	var/list/pinned = list()    //List of things pinning this creature to walls (see living_defense.dm)
-	var/list/embedded = list()  //Embedded items, since simple mobs don't have organs.
-	var/list/languages = list() // For speaking/listening.
+	var/list/pinned = list()            //List of things pinning this creature to walls (see living_defense.dm)
+	var/list/embedded = list()          //Embedded items, since simple mobs don't have organs.
+	var/list/languages = list()         // For speaking/listening.
+	var/list/speak_emote = list("says") //Verbs used when speaking. Defaults to 'say' if speak_emote is null.
+
 	var/name_archive //For admin things like possession
 
 	var/timeofdeath = 0.0//Living
@@ -155,8 +157,6 @@
 	//see: setup.dm for list of mutations
 
 	var/voice_name = "unidentifiable voice"
-	var/voice_message = null // When you are not understood by others (replaced with just screeches, hisses, chimpers etc.)
-	var/say_message = null // When you are understood by others. Currently only used by aliens and monkeys in their say_quote procs
 
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 

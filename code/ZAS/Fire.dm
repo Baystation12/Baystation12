@@ -73,17 +73,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	//get liquid fuels on the ground.
 	var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in S
 	//and the volatile stuff from the air
-	var/datum/gas/volatile_fuel/fuel = locate() in air_contents.trace_gases
-
-	//since the air is processed in fractions, we need to make sure not to have any minuscle residue or
-	//the amount of moles might get to low for some functions to catch them and thus result in wonky behaviour
-	if(air_contents.oxygen < 0.001)
-		air_contents.oxygen = 0
-	if(air_contents.toxins < 0.001)
-		air_contents.toxins = 0
-	if(fuel)
-		if(fuel.moles < 0.001)
-			air_contents.trace_gases.Remove(fuel)
+	//var/datum/gas/volatile_fuel/fuel = locate() in air_contents.trace_gases
 
 	//check if there is something to combust
 	if(!air_contents.check_combustability(liquid))
@@ -243,7 +233,7 @@ datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fu
 	var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
 	var/value = 0
 
-	if(oxygen && (toxins || fuel || liquid))
+	if(oxygen > 0.01 && (toxins > 0.01 || (fuel && fuel.moles > 0.01) || liquid))
 		value = 1
 
 	return value

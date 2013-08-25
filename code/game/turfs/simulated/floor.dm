@@ -188,7 +188,7 @@ turf/simulated/floor/proc/update_icon()
 		update_icon()
 	if ((!( user.canmove ) || user.restrained() || !( user.pulling )))
 		return
-	if (user.pulling.anchored)
+	if (user.pulling.anchored || !isturf(user.pulling.loc))
 		return
 	if ((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
 		return

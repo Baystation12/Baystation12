@@ -16,6 +16,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
 	"ninja" = "true",									 // 10
 	"vox raider" = IS_MODE_COMPILED("heist"),			 // 11
+	"diona" = 1,                                         // 12
 )
 
 var/const/MAX_SAVE_SLOTS = 10
@@ -763,13 +764,13 @@ datum/preferences
 						g_hair = rand(0,255)
 						b_hair = rand(0,255)
 					if("h_style")
-						h_style = random_hair_style(gender)
+						h_style = random_hair_style(gender, species)
 					if("facial")
 						r_facial = rand(0,255)
 						g_facial = rand(0,255)
 						b_facial = rand(0,255)
 					if("f_style")
-						f_style = random_facial_hair_style(gender)
+						f_style = random_facial_hair_style(gender, species)
 					if("underwear")
 						underwear = rand(1,underwear_m.len)
 						ShowChoices(user)
@@ -821,9 +822,7 @@ datum/preferences
 							var/list/valid_hairstyles = list()
 							for(var/hairstyle in hair_styles_list)
 								var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-								if(gender == MALE && S.gender == FEMALE)
-									continue
-								if(gender == FEMALE && S.gender == MALE)
+								if(gender != S.gender)
 									continue
 								if( !(species in S.species_allowed))
 									continue
@@ -839,9 +838,7 @@ datum/preferences
 							var/list/valid_facialhairstyles = list()
 							for(var/facialhairstyle in facial_hair_styles_list)
 								var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-								if(gender == MALE && S.gender == FEMALE)
-									continue
-								if(gender == FEMALE && S.gender == MALE)
+								if(gender != S.gender)
 									continue
 								if( !(species in S.species_allowed))
 									continue
@@ -862,19 +859,23 @@ datum/preferences
 							s_tone = 0
 
 					if("language")
+						var/languages_available
 						var/list/new_languages = list("None")
-						var/language_whitelisted = 0
+
 						if(config.usealienwhitelist)
 							for(var/L in all_languages)
-								if(is_alien_whitelisted(user, L))
-									new_languages += L
-									language_whitelisted = 1
+								var/datum/language/lang = all_languages[L]
+								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))))
+									new_languages += lang
+									languages_available = 1
+
+							if(!(languages_available))
+								alert(user, "There are not currently any available secondary languages.")
 						else
 							for(var/L in all_languages)
-								new_languages += L
-
-						if(!language_whitelisted)
-							alert(user, "You cannot select a secondary language as you need to be whitelisted.  If you wish to enable a language, post in the Alien Whitelist forums.")
+								var/datum/language/lang = all_languages[L]
+								if(!(lang.flags & RESTRICTED))
+									new_languages += lang
 
 						language = input("Please select a secondary language", "Character Generation", null) in new_languages
 
@@ -920,9 +921,7 @@ datum/preferences
 						var/list/valid_facialhairstyles = list()
 						for(var/facialhairstyle in facial_hair_styles_list)
 							var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-							if(gender == MALE && S.gender == FEMALE)
-								continue
-							if(gender == FEMALE && S.gender == MALE)
+							if(gender != S.gender)
 								continue
 							if( !(species in S.species_allowed))
 								continue

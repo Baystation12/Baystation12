@@ -600,9 +600,9 @@
 	set name = "Resist"
 	set category = "IC"
 
-	if(!isliving(usr) || usr.last_click + usr.click_delay > world.time)
+	if(!isliving(usr) || usr.next_move > world.time)
 		return
-	usr.delay_click(20)
+	usr.next_move = world.time + 20
 
 	var/mob/living/L = usr
 
@@ -631,9 +631,9 @@
 			H.name = "host brain"
 			H.real_name = "host brain"
 
-			verbs -= /mob/living/carbon/human/proc/release_control
-			verbs -= /mob/living/carbon/human/proc/punish_host
-			verbs -= /mob/living/carbon/human/proc/spawn_larvae
+			verbs -= /mob/living/carbon/proc/release_control
+			verbs -= /mob/living/carbon/proc/punish_host
+			verbs -= /mob/living/carbon/proc/spawn_larvae
 
 			return
 
@@ -670,7 +670,7 @@
 		if(iscarbon(L))
 			var/mob/living/carbon/C = L
 			if( C.handcuffed )
-				C.delay_click(100)
+				C.next_move = world.time + 100
 				C.last_special = world.time + 100
 				C << "\red You attempt to unbuckle yourself. (This will take around 2 minutes and you need to stand still)"
 				for(var/mob/O in viewers(L))
@@ -704,7 +704,7 @@
 		//		breakout_time++ //Harder to get out of welded lockers than locked lockers
 
 		//okay, so the closet is either welded or locked... resist!!!
-		usr.delay_click(100)
+		usr.next_move = world.time + 100
 		L.last_special = world.time + 100
 		L << "\red You lean on the back of \the [C] and start pushing the door open. (this will take about [breakout_time] minutes)"
 		for(var/mob/O in viewers(usr.loc))
@@ -757,7 +757,7 @@
 	else if(iscarbon(L))
 		var/mob/living/carbon/CM = L
 		if(CM.handcuffed && CM.canmove && (CM.last_special <= world.time))
-			CM.delay_click(100)
+			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
 			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your handcuffs. (This will take around 5 seconds and you need to stand still)"
@@ -795,7 +795,7 @@
 						CM.handcuffed = null
 						CM.update_inv_handcuffed()
 		else if(CM.legcuffed && CM.canmove && (CM.last_special <= world.time))
-			CM.delay_click(100)
+			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
 			if(isalienadult(CM) || (HULK in usr.mutations))//Don't want to do a lot of logic gating here.
 				usr << "\red You attempt to break your legcuffs. (This will take around 5 seconds and you need to stand still)"

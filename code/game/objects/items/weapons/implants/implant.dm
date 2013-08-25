@@ -159,9 +159,14 @@ Implant Specifics:<BR>"}
 			return
 		if(istype(imp_in, /mob/))
 			var/mob/T = imp_in
+
+			message_admins("Explosive implant triggered in [T] ([T.key]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>) ")
+			log_game("Explosive implant triggered in [T] ([T.key]).")
+
 			T.gib()
 		explosion(get_turf(imp_in), 1, 3, 4, 6, 3)
 		var/turf/t = get_turf(imp_in)
+
 		if(t)
 			t.hotspot_expose(3500,125)
 
