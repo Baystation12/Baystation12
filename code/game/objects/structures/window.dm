@@ -304,7 +304,7 @@
 	update_nearby_tiles()
 	playsound(src, "shatter", 70, 1)
 	update_nearby_icons()
-	..()
+	loc = null //garbage collect
 
 
 /obj/structure/window/Move()
