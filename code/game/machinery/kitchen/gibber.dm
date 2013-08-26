@@ -91,6 +91,10 @@
 		user << "\red This item is not suitable for the gibber!"
 		return
 
+	if(G.state < 2)
+		user << "\red You need a better grip to do that!"
+		return
+
 	if(G.affecting.abiotic(1))
 		user << "\red Subject may not have abiotic items on."
 		return
