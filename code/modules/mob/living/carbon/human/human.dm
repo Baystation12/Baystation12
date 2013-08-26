@@ -676,7 +676,7 @@
 					for (var/datum/data/record/R in data_core.general)
 						if (R.fields["id"] == E.fields["id"])
 
-							var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", R.fields["p_stat"]) in list("*Deceased*", "*Unconscious*", "Physically Unfit", "Active", "Cancel")
+							var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", R.fields["p_stat"]) in list("*SSD*", "*Deceased*", "Physically Unfit", "Active", "Disabled", "Cancel")
 
 							if(hasHUD(usr,"medical"))
 								if(setmedical != "Cancel")
