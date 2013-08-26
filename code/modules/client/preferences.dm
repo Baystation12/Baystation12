@@ -822,7 +822,7 @@ datum/preferences
 							var/list/valid_hairstyles = list()
 							for(var/hairstyle in hair_styles_list)
 								var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-								if(gender != S.gender)
+								if(gender != S.gender && S.gender != NEUTER)
 									continue
 								if( !(species in S.species_allowed))
 									continue
@@ -838,7 +838,7 @@ datum/preferences
 							var/list/valid_facialhairstyles = list()
 							for(var/facialhairstyle in facial_hair_styles_list)
 								var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-								if(gender != S.gender)
+								if(gender != S.gender && S.gender != NEUTER)
 									continue
 								if( !(species in S.species_allowed))
 									continue
@@ -875,7 +875,7 @@ datum/preferences
 							for(var/L in all_languages)
 								var/datum/language/lang = all_languages[L]
 								if(!(lang.flags & RESTRICTED))
-									new_languages += lang
+									new_languages += lang.name
 
 						language = input("Please select a secondary language", "Character Generation", null) in new_languages
 
@@ -921,7 +921,7 @@ datum/preferences
 						var/list/valid_facialhairstyles = list()
 						for(var/facialhairstyle in facial_hair_styles_list)
 							var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-							if(gender != S.gender)
+							if(gender != S.gender && S.gender != NEUTER)
 								continue
 							if( !(species in S.species_allowed))
 								continue

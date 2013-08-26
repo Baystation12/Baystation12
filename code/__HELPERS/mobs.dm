@@ -4,7 +4,7 @@ proc/random_hair_style(gender, species = "Human")
 	var/list/valid_hairstyles = list()
 	for(var/hairstyle in hair_styles_list)
 		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-		if(gender != S.gender)
+		if(gender != S.gender && S.gender != NEUTER)
 			continue
 		if(!(species in S.species_allowed))
 			continue
@@ -21,7 +21,7 @@ proc/random_facial_hair_style(gender, species = "Human")
 	var/list/valid_facialhairstyles = list()
 	for(var/facialhairstyle in facial_hair_styles_list)
 		var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-		if(gender != S.gender)
+		if(gender != S.gender && S.gender != NEUTER)
 			continue
 		if(!(species in S.species_allowed))
 			continue
