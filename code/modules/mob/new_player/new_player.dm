@@ -74,7 +74,10 @@
 			if(ticker.hide_mode)
 				stat("Game Mode:", "Secret")
 			else
-				stat("Game Mode:", "[master_mode]")
+				if(ticker.hide_mode == 0)
+					stat("Game Mode:", "[master_mode]") // Old setting for showing the game mode
+				else
+					stat("Game Mode: ", "Secret")
 
 			if((ticker.current_state == GAME_STATE_PREGAME) && going)
 				stat("Time To Start:", ticker.pregame_timeleft)
@@ -347,7 +350,7 @@
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
 		if(chosen_species)
-			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & WHITELISTED))
+			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
 				new_character.set_species(client.prefs.species)
 				if(chosen_species.language)
 					new_character.add_language(chosen_species.language)

@@ -215,6 +215,7 @@
 			adjustCloneLoss(0.1)
 
 	proc/handle_mutations_and_radiation()
+
 		if(getFireLoss())
 			if((COLD_RESISTANCE in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
@@ -237,6 +238,16 @@
 				radiation = 0
 
 			else
+				if(species.flags & RAD_ABSORB)
+					var/rads = radiation/25
+					radiation -= rads
+					nutrition += rads
+					heal_overall_damage(rads,rads)
+					adjustOxyLoss(-(rads))
+					adjustToxLoss(-(rads))
+					updatehealth()
+					return
+
 				var/damage = 0
 				switch(radiation)
 					if(1 to 49)
@@ -850,6 +861,8 @@
 					if(A.lighting_use_dynamic)	light_amount = min(10,T.lighting_lumcount) - 5 //hardcapped so it's not abused by having a ton of flashlights
 					else						light_amount =  5
 			nutrition += light_amount
+			traumatic_shock -= light_amount
+
 			if(nutrition > 500)
 				nutrition = 500
 			if(light_amount > 2) //if there's enough light, heal
@@ -902,6 +915,7 @@
 		if(species.flags & REQUIRE_LIGHT)
 			if(nutrition < 200)
 				take_overall_damage(2,0)
+				traumatic_shock++
 
 		if (drowsyness)
 			drowsyness--
