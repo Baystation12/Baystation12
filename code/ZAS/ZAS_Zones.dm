@@ -383,7 +383,7 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 	unsim_co2 *= correction_ratio
 	unsim_nitrogen *= correction_ratio
 	unsim_plasma *= correction_ratio
-	unsim_heat_capacity = HEAT_CAPACITY_CALCULATION(unsim_oxygen,unsim_co2,unsim_nitrogen,unsim_plasma)
+	unsim_heat_capacity = HEAT_CAPACITY_CALCULATION(unsim_oxygen, unsim_co2, unsim_nitrogen, unsim_plasma)
 
 	var
 		ratio = sharing_lookup_table[6]
@@ -402,6 +402,9 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 		co2_avg = (full_co2 + unsim_co2) / (size + share_size)
 		plasma_avg = (full_plasma + unsim_plasma) / (size + share_size)
 
+		temp_avg = 0
+
+	if((full_heat_capacity + unsim_heat_capacity) > 0)
 		temp_avg = (A.temperature * full_heat_capacity + unsim_temperature * unsim_heat_capacity) / (full_heat_capacity + unsim_heat_capacity)
 
 	if(sharing_lookup_table.len >= unsimulated_tiles.len) //6 or more interconnecting tiles will max at 42% of air moved per tick.
