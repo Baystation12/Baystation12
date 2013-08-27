@@ -461,10 +461,20 @@
 				if( !(slot_flags & SLOT_HEAD) )
 					return 0
 				return 1
-			if(slot_ears)
-				if(H.ears)
+			if(slot_l_ear)
+				if(H.l_ear)
 					return 0
 				if( !(slot_flags & SLOT_EARS) )
+					return 0
+				if( (slot_flags & SLOT_TWOEARS) && H.r_ear )
+					return 0
+				return 1
+			if(slot_r_ear)
+				if(H.r_ear)
+					return 0
+				if( !(slot_flags & SLOT_EARS) )
+					return 0
+				if( (slot_flags & SLOT_TWOEARS) && H.l_ear )
 					return 0
 				return 1
 			if(slot_w_uniform)

@@ -41,7 +41,7 @@
 				injected += R.name
 
 			var/trans = reagents.trans_to(M, amount_per_transfer_from_this)
-			user << "\blue [trans] units injected.  [reagents.total_volume] units remaining in [src]."
+			user << "\blue [trans] units injected. [reagents.total_volume] units remaining in [src]."
 
 			var/contained = english_list(injected)
 
