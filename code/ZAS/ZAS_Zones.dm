@@ -54,12 +54,11 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	//Ensuring the zone list doesn't get clogged with null values.
 	for(var/turf/simulated/T in contents)
 		RemoveTurf(T)
-		air_master.tiles_to_reconsider_zones += T
+		air_master.ReconsiderTileZone(T)
 	for(var/zone/Z in connected_zones)
 		if(src in Z.connected_zones)
 			Z.connected_zones.Remove(src)
-	for(var/connection/C in connections)
-		air_master.connections_to_check += C
+	air_master.AddConnectionToCheck(connections)
 	zones.Remove(src)
 	air = null
 	. = ..()
@@ -73,7 +72,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	//Ensuring the zone list doesn't get clogged with null values.
 	for(var/turf/simulated/T in contents)
 		RemoveTurf(T)
-		air_master.tiles_to_reconsider_zones += T
+		air_master.ReconsiderTileZone(T)
 
 	//Removing zone connections and scheduling connection cleanup
 	for(var/zone/Z in connected_zones)
@@ -81,8 +80,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			Z.connected_zones.Remove(src)
 	connected_zones = null
 
-	for(var/connection/C in connections)
-		air_master.connections_to_check += C
+	air_master.AddConnectionToCheck(connections)
 	connections = null
 
 	return 1

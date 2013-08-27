@@ -158,10 +158,9 @@
 
 	//Check pass sanity of the connections.
 	if("\ref[src]" in air_master.turfs_with_connections)
-		for(var/connection/C in air_master.turfs_with_connections["\ref[src]"])
-			air_master.connections_to_check |= C
+		air_master.AddConnectionToCheck(air_master.turfs_with_connections["\ref[src]"])
 
-	if(zone && !zone.rebuild && CanPass(null, src, 0, 0))
+	if(zone && CanPass(null, src, 0, 0))
 
 		for(var/direction in cardinal)
 			var/turf/T = get_step(src,direction)

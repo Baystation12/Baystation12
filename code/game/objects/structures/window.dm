@@ -318,7 +318,7 @@
 /obj/structure/window/proc/update_nearby_tiles(need_rebuild)
 	if(!air_master)
 		return 0
-	AddTurfToUpdate(
+	air_master.AddTurfToUpdate(get_turf(src))
 
 	return 1
 

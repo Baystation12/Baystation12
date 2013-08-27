@@ -126,7 +126,6 @@ datum/controller/game_controller/proc/process()
 					timer = world.timeofday
 					last_thing_processed = air_master.type
 
-					air_master.current_cycle++
 					if(!air_master.Tick()) //Runtimed.
 						air_master.failed_ticks++
 						if(air_master.failed_ticks > 5)
@@ -136,7 +135,8 @@ datum/controller/game_controller/proc/process()
 							log_admin("ZASALERT: unable run zone/process() -- [air_master.tick_progress]")
 							air_processing_killed = 1
 							air_master.failed_ticks = 0
-				air_cost = (world.timeofday - timer) / 10
+
+					air_cost = (world.timeofday - timer) / 10
 
 				sleep(breather_ticks)
 
