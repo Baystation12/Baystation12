@@ -107,7 +107,7 @@
 	if(config.resource_urls)
 		src.preload_rsc = pick(config.resource_urls)
 	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
-	
+
 	src << "\red If the title screen is black, resources are still downloading. Please be patient until the title screen appears."
 
 
@@ -241,6 +241,7 @@
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
+	preload_vox()
 	getFiles(
 		'nano/js/libraries.min.js',
 		'nano/js/nano_update.js',
