@@ -1,3 +1,7 @@
+#define STATUS_INTERACTIVE 2 // GREEN Visability
+#define STATUS_UPDATE 1 // ORANGE Visability
+#define STATUS_DISABLED 0 // RED Visability
+
 /datum/nanoui
 	var/mob/user
 	var/atom/movable/src_object
@@ -19,7 +23,10 @@
 	var/content = "<div id='mainTemplate'></div>" // the #mainTemplate div will contain the compiled "main" template html
 	var/list/initial_data[0]
 	var/is_auto_updating = 0
-	var/status = 2
+	var/status = STATUS_INTERACTIVE
+	
+	// Only allow users with a certain user.stat to get updates. Defaults to 0 (concious)
+	var/allowed_user_stat = 0 // -1 = ignore, 0 = alive, 1 = unconcious or alive, 2 = dead concious or alive
 
 
 /datum/nanoui/New(nuser, nsrc_object, nui_key, ntemplate, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null)
@@ -39,7 +46,7 @@
 	if (nref)
 		ref = nref
 
-	add_common_assets()
+	add_common_assets()	
 
 /datum/nanoui/proc/add_common_assets()
 	add_script("libraries.min.js") // The jQuery library
@@ -49,12 +56,41 @@
 	add_stylesheet("shared.css") // this CSS sheet is common to all UIs
 	add_stylesheet("icons.css") // this CSS sheet is common to all UIs
 
-/datum/nanoui/proc/set_status(state)
+/datum/nanoui/proc/set_status(state, push_update)
 	if (state != status)
 		status = state
-		push_data(list(), 1) // Update the UI
+		if (push_update || !status)
+			push_data(list(), 1) // Update the UI, force the update in case the status is 0
 	else
 		status = state
+
+/datum/nanoui/proc/update_status(push_update = 0)
+	if (istype(user, /mob/living/silicon/ai))
+		set_status(STATUS_INTERACTIVE, push_update) // interactive (green visibility)
+	else if (istype(user, /mob/living/silicon/robot))
+		if (src_object in view(7, user)) // robots can see and interact with things they can see within 7 tiles
+			set_status(STATUS_INTERACTIVE, push_update) // interactive (green visibility)
+		else
+			set_status(STATUS_DISABLED, push_update) // no updates, completely disabled (red visibility)
+	else
+		var/dist = get_dist(src_object, user)
+		
+		if (dist > 4)
+			close()
+			return
+			
+		if ((allowed_user_stat > -1) && (user.stat > allowed_user_stat))
+			set_status(STATUS_DISABLED, push_update) // no updates, completely disabled (red visibility)
+		else if (user.restrained() || user.lying)
+			set_status(STATUS_UPDATE, push_update) // update only (orange visibility)
+		else if (!(src_object in view(4, user))) // If the src object is not in visable, set status to 0
+			set_status(STATUS_DISABLED, push_update) // interactive (green visibility)			
+		else if (dist <= 1)
+			set_status(STATUS_INTERACTIVE, push_update) // interactive (green visibility)
+		else if (dist <= 2)
+			set_status(STATUS_UPDATE, push_update) // update only (orange visibility)
+		else if (dist <= 4)
+			set_status(STATUS_DISABLED, push_update) // no updates, completely disabled (red visibility)
 
 /datum/nanoui/proc/set_auto_update(state = 1)
 	is_auto_updating = state
@@ -109,7 +145,7 @@
 	if (initial_data.len > 0)
 		initial_data_json = list2json(initial_data)
 
-	var/url_parameters_json = list2json(list("src" = "\ref[src_object]"))
+	var/url_parameters_json = list2json(list("src" = "\ref[src]"))
 
 	return {"<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -145,6 +181,14 @@
 			[title ? "<div id='uiTitleWrapper'><div id='uiStatusIcon' class='icon24 uiStatusGood'></div><div [title_attributes]>[title]</div><div id='uiTitleFluff'></div></div>" : ""]
 			<div id='uiContent'>
 	"}
+	
+/datum/nanoui/Topic(href, href_list)
+	update_status(0) // update the status
+	if (status != STATUS_INTERACTIVE || user != usr) // If UI is not interactive or usr calling Topic is not the UI user
+		return
+		
+	if (src_object.Topic(href, href_list))
+		nanomanager.update_uis(src_object) // update all UIs attached to src_object	
 
 /datum/nanoui/proc/get_footer()
 	var/scriptsContent = ""
@@ -170,6 +214,7 @@
 	var/window_size = ""
 	if (width && height)
 		window_size = "size=[width]x[height];"
+	update_status(0)
 	user << browse(get_content(), "window=[window_id];[window_size][window_options]")
 	on_close_winset()
 	//onclose(user, window_id)
@@ -188,21 +233,11 @@
 
 	winset(user, window_id, "on-close=\"nanoclose [params]\"")
 
-/datum/nanoui/proc/process(update = 0)
-	var/dist = get_dist(src_object, user)
-	if (dist <= 1)
-		set_status(2) // interactive
-	else if (dist <= 2)
-		set_status(1) // update only
-	else if (dist <= 3)
-		set_status(0) // no updates, completely disabled
-		return // don't auto update
+/datum/nanoui/proc/process(update = 0)	
+	if (status && (update || is_auto_updating))
+		src_object.ui_interact(user, ui_key) // Update the UI (update_status() is called whenever a UI is updated)
 	else
-		close()
-		return
-
-	if (update || is_auto_updating)
-		src_object.ui_interact(user, ui_key)
+		update_status(1) // Not updating UI, so lets check here if status has changed
 
 /datum/nanoui/proc/modify_data(data)
 	data["ui"] = list(
@@ -213,9 +248,9 @@
 	return data
 
 /datum/nanoui/proc/push_data(data, force_push = 0)
-	if (!status && !force_push)
-		user << "Cannot update UI, user out of range (status [status])"
-		return
+	update_status(0)
+	if (status == STATUS_DISABLED && !force_push)
+		return // Cannot update UI, no visibility
 
 	data = modify_data(data)
 
