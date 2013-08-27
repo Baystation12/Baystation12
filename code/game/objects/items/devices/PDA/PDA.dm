@@ -38,7 +38,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/cart = "" //A place to stick cartridge menu information
 	var/detonate = 1 // Can the PDA be blown up?
 	var/hidden = 0 // Is the PDA hidden from the PDA list?
-	var/centcomm_message_cooldown = 0 //Internal Affairs centcomm message cooldown
 
 	var/obj/item/weapon/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above
@@ -379,15 +378,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						dat += "</ul>"
 					else	dat += "</ul>"
 					if(cartridge.access_quartermaster)
-						dat += "<h4>Quartermaster Functions</h4>"
+						dat += "<h4>Quartermaster Functions:</h4>"
 						dat += "<ul>"
 						dat += "<li><a href='byond://?src=\ref[src];choice=47'><img src=pda_crate.png> Supply Records</A></li>"
 						dat += "<li><a href='byond://?src=\ref[src];choice=48'><img src=pda_mule.png> Delivery Bot Control</A></li>"
-						dat += "</ul>"
-					if (cartridge.access_internalaffairs)
-						dat += "<h4>Internal Affairs Functions</h4>"
-						dat += "<ul>"
-						dat += "<li><a href='byond://?src=\ref[src];choice=Centcomm Message'><img src=pda_mail.png> Send Centcomm Message</A></li>"
 						dat += "</ul>"
 				dat += "</ul>"
 
@@ -680,23 +674,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 							P.ttone = "silence"
 					else
 						U << "PDA not found."
-				else
-					U << browse(null, "window=pda")
-					return
-			if("Centcomm Message")
-				if(istype(cartridge, /obj/item/weapon/cartridge/lawyer))
-					if(centcomm_message_cooldown)
-						U << "\red Arrays recycling.  Please stand by."
-						return
-					var/input = stripped_input(usr, "Please choose a message to transmit to Centcomm via quantum entanglement. Use only as a last resort if all other avenues have been exhausted. Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "")
-					if(!input || !(usr in view(1,src)))
-						return
-					Centcomm_announce(input, usr)
-					U << "\blue Message transmitted."
-					log_say("[key_name(usr)] has made a Centcomm announcement: [input]")
-					centcomm_message_cooldown = 1
-					spawn(300)//30 seconds cooldown
-						centcomm_message_cooldown = 0
 				else
 					U << browse(null, "window=pda")
 					return
