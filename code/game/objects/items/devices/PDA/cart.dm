@@ -14,6 +14,7 @@
 	var/access_clown = 0
 	var/access_mime = 0
 	var/access_janitor = 0
+	var/access_internalaffairs = 0
 //	var/access_flora = 0
 	var/access_reagent_scanner = 0
 	var/access_remote_door = 0 //Control some blast doors remotely!!
@@ -79,6 +80,7 @@
 		name = "P.R.O.V.E. Cartridge"
 		icon_state = "cart-s"
 		access_security = 1
+		access_internalaffairs = 1
 
 	clown
 		name = "Honkworks 5.0"
@@ -601,7 +603,6 @@ Code:
 				else
 					menu += "ERROR: Unable to determine current location."
 				menu += "<br><br><A href='byond://?src=\ref[src];choice=49'>Refresh GPS Locator</a>"
-
 
 /obj/item/weapon/cartridge/Topic(href, href_list)
 	..()
