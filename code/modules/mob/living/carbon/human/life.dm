@@ -294,7 +294,7 @@
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
 		// HACK NEED CHANGING LATER
-		if(health < 0)
+		if(health < config.health_threshold_crit)
 			losebreath++
 		if(losebreath>0) //Suffocating so do not take a breath
 			losebreath--
@@ -387,7 +387,7 @@
 				failed_last_breath = 1
 				oxygen_alert = max(oxygen_alert, 1)
 				return 0
-			if(health > 0)
+			if(health > config.health_threshold_crit)
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 				failed_last_breath = 1
 			else
@@ -1413,10 +1413,10 @@
 		if(status_flags & GODMODE)	return 0	//godmode
 		if(analgesic) return // analgesic avoids all traumatic shock temporarily
 
-		if(health < 0)// health 0 makes you immediately collapse
-			shock_stage = max(shock_stage, 61)
+		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
+			shock_stage = max(shock_stage, 70)
 
-		if(traumatic_shock >= 80)
+		if(traumatic_shock >= 80 || health < config.health_threshold_softcrit)
 			shock_stage += 1
 		else
 			shock_stage = min(shock_stage, 100)
@@ -1443,7 +1443,7 @@
 		if(shock_stage == 80)
 			src << "<font color='red'><b>"+pick("You see a light at the end of the tunnel!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
 
-		if (shock_stage > 80)
+		if(shock_stage > 80)
 			Paralyse(rand(15,28))
 
 	proc/handle_pulse()

@@ -634,7 +634,7 @@ It can still be worn/put on as normal.
 						W.add_fingerprint(source)
 		if("CPR")
 			if ((target.health > config.health_threshold_dead && target.health < config.health_threshold_crit))
-				var/suff = min(target.getOxyLoss(), 7)
+				var/suff = min(target.getOxyLoss(), 5) //Pre-merge level, less healing, more prevention of dieing.
 				target.adjustOxyLoss(-suff)
 				target.updatehealth()
 				for(var/mob/O in viewers(source, null))
