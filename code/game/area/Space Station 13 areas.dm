@@ -1140,7 +1140,7 @@ proc/process_ghost_teleport_locs()
 	icon_state = "cloning"
 
 /area/medical/sleeper
-	name = "\improper Emergency"
+	name = "\improper Medical Treatment Center"
 	icon_state = "exam_room"
 
 //Security
