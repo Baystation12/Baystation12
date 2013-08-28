@@ -62,6 +62,11 @@
 		if(!..()) return
 		//H.apply_effect(5, WEAKEN, 0)
 		H.visible_message("<span class='danger'>[M] has been beaten with the [src] by [user]!</span>")
+
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> Beat [H.name] ([H.ckey]) with [src.name]</font>"
+		H.attack_log += "\[[time_stamp()]\]<font color='orange'> Beaten by [user.name] ([user.ckey]) with [src.name]</font>"
+		msg_admin_attack("[user.name] ([user.ckey]) beat [H.name] ([H.ckey]) with [src.name] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+
 		playsound(src.loc, "swing_hit", 50, 1, -1)
 	else if(!status)
 		H.visible_message("<span class='warning'>[M] has been prodded with the [src] by [user]. Luckily it was off.</span>")
@@ -80,9 +85,10 @@
 		else
 			charges--
 		H.visible_message("<span class='danger'>[M] has been stunned with the [src] by [user]!</span>")
+
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Stunned [H.name] ([H.ckey]) with [src.name]</font>"
 		H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by [user.name] ([user.ckey]) with [src.name]</font>"
-		log_attack("<font color='red'>[user.name] ([user.ckey]) stunned [H.name] ([H.ckey]) with [src.name]</font>" )
+		log_attack("[user.name] ([user.ckey]) stunned [H.name] ([H.ckey]) with [src.name]")
 
 		playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 		if(charges < 1)
@@ -107,8 +113,8 @@
 
 				H.visible_message("<span class='danger'>[src], thrown by [foundmob.name], strikes [H] and stuns them!</span>")
 
-				H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by thrown [src.name] (([src.fingerprintslast]))</font>"
-				log_attack("<font color='red'>Flying [src.name], thrown by ([src.fingerprintslast]) stunned [H.name] ([H.ckey])</font>" )
+				H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by thrown [src.name] last touched by ([src.fingerprintslast])</font>"
+				log_attack("Flying [src.name], last touched by ([src.fingerprintslast]) stunned [H.name] ([H.ckey])" )
 
 				return
 	return ..()

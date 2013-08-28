@@ -72,16 +72,14 @@
 				return
 
 		if(ismob(target) && target.reagents && reagents.total_volume)
-			var/mob/M = target
 			user << "\blue You splash the solution onto [target]."
-			var/R
-			if(src.reagents)
-				for(var/datum/reagent/A in src.reagents.reagent_list)
-					R += A.id + " ("
-					R += num2text(A.volume) + "),"
-			user.attack_log += "\[[time_stamp()]\] <b>[user]/[user.ckey]</b> splashed <b>[M]/[M.ckey]</b> with ([R])"
-			M.attack_log += "\[[time_stamp()]\] <b>[user]/[user.ckey]</b> splashed <b>[M]/[M.ckey]</b> with ([R])"
-			log_attack("\[[time_stamp()]\] <b>[user]/[user.ckey]</b> splashed <b>[M]/[M.ckey]</b> with ([R])")
+
+			var/mob/living/M = target
+			var/contained = english_list(src.reagents)
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been splashed ([contained]) with [src.name] by [user.name] ([user.ckey])</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to splash [M.name] ([M.key]) with [contained]</font>")
+			msg_admin_attack("[user.name] ([user.ckey]) splashed [M.name] ([M.key]) with [src.name], which had [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message(text("\red [] has been splashed with something by []!", target, user), 1)
 			src.reagents.reaction(target, TOUCH)
