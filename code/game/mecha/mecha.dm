@@ -1574,7 +1574,7 @@
 		return
 	if(href_list["dna_lock"])
 		if(usr != src.occupant)	return
-		if(istype(src, /obj/item/device/mmi))
+		if(istype(occupant, /mob/living/carbon/brain))
 			occupant_message("You are a brain. No.")
 			return
 		if(src.occupant)
