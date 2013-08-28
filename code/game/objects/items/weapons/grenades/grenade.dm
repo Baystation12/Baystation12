@@ -69,9 +69,7 @@
 		return
 
 	if(user)
-		log_attack("<font color='red'>[user.name] ([user.ckey]) primed \a [src]</font>")
-		log_admin("ATTACK: [user] ([user.ckey]) primed \a [src]")
-		message_admins("ATTACK: [user] ([user.ckey]) primed \a [src]")
+		msg_admin_attack("[user.name] ([user.ckey]) primed \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 	icon_state = initial(icon_state) + "_active"
 	active = 1

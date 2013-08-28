@@ -12,8 +12,8 @@ var/global/floorIsLava = 0
 			C << msg
 
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
-	var/rendered = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[text]</span></span>"
-	log_adminwarn(rendered)
+	log_attack(text)
+	var/rendered = "<span class=\"admin\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
 	for(var/client/C in admins)
 		if(R_ADMIN & C.holder.rights)
 			if(C.prefs.toggles & CHAT_ATTACKLOGS)
