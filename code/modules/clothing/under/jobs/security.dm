@@ -108,7 +108,6 @@
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.8
 
-
 /obj/item/clothing/suit/armor/hos
 	name = "armored coat"
 	desc = "A greatcoat enhanced with a special alloy for some protection and style."
