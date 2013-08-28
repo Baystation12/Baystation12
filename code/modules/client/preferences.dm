@@ -822,7 +822,9 @@ datum/preferences
 							var/list/valid_hairstyles = list()
 							for(var/hairstyle in hair_styles_list)
 								var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-								if(gender != S.gender && S.gender != NEUTER)
+								if(gender == MALE && S.gender == FEMALE)
+									continue
+								if(gender == FEMALE && S.gender == MALE)
 									continue
 								if( !(species in S.species_allowed))
 									continue
@@ -838,7 +840,9 @@ datum/preferences
 							var/list/valid_facialhairstyles = list()
 							for(var/facialhairstyle in facial_hair_styles_list)
 								var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-								if(gender != S.gender && S.gender != NEUTER)
+								if(gender == MALE && S.gender == FEMALE)
+									continue
+								if(gender == FEMALE && S.gender == MALE)
 									continue
 								if( !(species in S.species_allowed))
 									continue
@@ -921,7 +925,9 @@ datum/preferences
 						var/list/valid_facialhairstyles = list()
 						for(var/facialhairstyle in facial_hair_styles_list)
 							var/datum/sprite_accessory/S = facial_hair_styles_list[facialhairstyle]
-							if(gender != S.gender && S.gender != NEUTER)
+							if(gender == MALE && S.gender == FEMALE)
+								continue
+							if(gender == FEMALE && S.gender == MALE)
 								continue
 							if( !(species in S.species_allowed))
 								continue

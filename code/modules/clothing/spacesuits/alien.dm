@@ -1,20 +1,11 @@
+//Unathi space gear. Huge and restrictive.
+
 /obj/item/clothing/head/helmet/space/unathi
-
+	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
+	heat_protection = HEAD
+	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
 	var/up = 0 //So Unathi helmets play nicely with the weldervision check.
-	mob_can_equip(M as mob, slot)
-		var/mob/living/carbon/human/U = M
-		if(U.species.name != "Unathi")
-			U << "<span class='warning'>This clearly isn't designed for your species!</span>"
-			return 0
-		return ..()
-
-/obj/item/clothing/suit/space/unathi/mob_can_equip(M as mob, slot)
-	var/mob/living/carbon/human/U = M
-	if(U.species.name != "Unathi")
-		U << "<span class='warning'>This clearly isn't designed for your species!</span>"
-		return 0
-
-	return ..()
+	species_restricted = list("Unathi")
 
 /obj/item/clothing/head/helmet/space/unathi/helmet_cheap
 	name = "NT breacher helmet"
@@ -22,9 +13,13 @@
 	icon_state = "unathi_helm_cheap"
 	item_state = "unathi_helm_cheap"
 	color = "unathi_helm_cheap"
+
+/obj/item/clothing/suit/space/unathi
 	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
-	heat_protection = HEAD
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
+	species_restricted = list("Unathi")
 
 /obj/item/clothing/suit/space/unathi/rig_cheap
 	name = "NT breacher chassis"
@@ -32,10 +27,21 @@
 	icon_state = "rig-unathi-cheap"
 	item_state = "rig-unathi-cheap"
 	slowdown = 3
-	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
-	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
+
+/obj/item/clothing/head/helmet/space/breacher
+	name = "breacher helm"
+	desc = "Weathered, ancient and battle-scarred. The helmet is too."
+	icon_state = "unathi_breacher"
+	item_state = "unathi_breacher"
+	color = "unathi_breacher"
+
+/obj/item/clothing/suit/space/unathi/breacher
+	name = "breacher chassis"
+	desc = "Huge, bulky and absurdly heavy. It must be like wearing a tank."
+	icon_state = "unathi_breacher"
+	item_state = "unathi_breacher"
+	color = "unathi_breacher"
+	slowdown = 1
 
 // Vox space gear (vaccuum suit, low pressure armour)
 // Can't be equipped by any other species due to bone structure and vox cybernetics.
@@ -47,24 +53,12 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
+	species_restricted = list("Vox")
 
 /obj/item/clothing/head/helmet/space/vox
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 30, rad = 30)
 	flags = HEADCOVERSEYES|STOPSPRESSUREDMAGE
-
-/obj/item/clothing/head/helmet/space/vox/mob_can_equip(M as mob, slot)
-	var/mob/living/carbon/human/V = M
-	if(V.species.name != "Vox")
-		V << "<span class='warning'>This clearly isn't designed for your species!</span>"
-		return 0
-	return ..()
-
-/obj/item/clothing/suit/space/vox/mob_can_equip(M as mob, slot)
-	var/mob/living/carbon/human/V = M
-	if(V.species.name != "Vox")
-		V << "<span class='warning'>This clearly isn't designed for your species!</span>"
-		return 0
-	return ..()
+	species_restricted = list("Vox")
 
 /obj/item/clothing/head/helmet/space/vox/pressure
 	name = "alien helmet"
@@ -116,6 +110,7 @@
 
 /obj/item/clothing/under/vox
 	has_sensor = 0
+	species_restricted = list("Vox")
 
 /obj/item/clothing/under/vox/vox_casual
 	name = "alien clothing"
@@ -139,13 +134,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	color="gloves-vox"
-
-/obj/item/clothing/gloves/yellow/vox/mob_can_equip(M as mob, slot)
-	var/mob/living/carbon/human/U = M
-	if(U.species.name != "Vox")
-		U << "<span class='warning'>This clearly isn't designed for your species!</span>"
-		return 0
-	return ..()
+	species_restricted = list("Vox")
 
 /obj/item/clothing/shoes/magboots/vox
 
@@ -153,6 +142,7 @@
 	name = "vox boots"
 	item_state = "boots-vox"
 	icon_state = "boots-vox"
+	species_restricted = list("Vox")
 
 	toggle()
 		//set name = "Toggle Floor Grip"
@@ -171,10 +161,3 @@
 	examine()
 		set src in view()
 		..()
-
-/obj/item/clothing/shoes/magboots/vox/mob_can_equip(M as mob, slot)
-	var/mob/living/carbon/human/U = M
-	if(U.species.name != "Vox")
-		U << "<span class='warning'>This clearly isn't designed for your species!</span>"
-		return 0
-	return ..()
