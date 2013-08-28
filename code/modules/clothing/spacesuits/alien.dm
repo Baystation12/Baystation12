@@ -1,3 +1,18 @@
+// Tajaran rigs.
+/obj/item/clothing/head/helmet/space/rig/tajara
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig0-taj-helmet"
+	item_state = "rig0-taj-helmet"
+	color = "taj-helmet"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/suit/space/rig/tajara
+	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig-taj"
+	item_state = "rig-taj"
+	color = "rig-taj"
+	species_restricted = list("Tajaran")
+
 //Skrell space gear. Sleek like a wetsuit.
 
 /obj/item/clothing/head/helmet/space/skrell
