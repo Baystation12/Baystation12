@@ -53,7 +53,7 @@
 	item_state = "sec_corporate"
 	color = "sec_corporate"
 
-/obj/item/clothing/under/rank/warden
+/obj/item/clothing/under/rank/warden/corp
 	icon_state = "warden_corporate"
 	item_state = "warden_corporate"
 	color = "warden_corporate"
