@@ -249,6 +249,7 @@
 		'nano/js/nano_base_helpers.js',
 		'nano/css/shared.css',
 		'nano/css/icons.css',
+		'nano/templates/chem_dispenser.tmpl',
 		'nano/templates/cryo.tmpl',
 		'nano/images/uiBackground.png',
 		'nano/images/uiIcons16.png',
