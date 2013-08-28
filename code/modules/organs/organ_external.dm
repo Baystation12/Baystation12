@@ -884,8 +884,7 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 				user.attack_log += "\[[time_stamp()]\]<font color='red'> Debrained [brainmob.name] ([brainmob.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 				brainmob.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-				log_admin("ATTACK: [brainmob] ([brainmob.ckey]) debrained [user] ([user.ckey]).")
-				message_admins("ATTACK: [brainmob] ([brainmob.ckey]) debrained [user] ([user.ckey]).")
+				msg_admin_attack("[brainmob] ([brainmob.ckey]) debrained [user] ([user.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 				var/obj/item/brain/B = new(loc)
 				B.transfer_identity(brainmob)

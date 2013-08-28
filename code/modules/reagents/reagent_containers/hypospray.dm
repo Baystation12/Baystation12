@@ -44,10 +44,9 @@
 			user << "\blue [trans] units injected.  [reagents.total_volume] units remaining in [src]."
 
 			var/contained = english_list(injected)
-
-			log_attack("<font color='red'>[user.name] ([user.ckey]) injected [M.name] ([M.ckey]) with [src.name], which had [contained] (INTENT: [uppertext(user.a_intent)])</font>")
 			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected ([contained]) with [src.name] by [user.name] ([user.ckey])</font>")
-			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to inject [M.name] ([M.ckey]) with [contained]</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to inject [M.name] ([M.key]) with [contained]</font>")
+			msg_admin_attack("[user.name] ([user.ckey]) injected [M.name] ([M.key]) with [src.name], which had [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 	return
 
