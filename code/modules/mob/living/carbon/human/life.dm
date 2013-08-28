@@ -1414,10 +1414,12 @@
 		if(analgesic) return // analgesic avoids all traumatic shock temporarily
 
 		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
-			shock_stage = max(shock_stage, 70)
+			shock_stage = max(shock_stage, 61)
 
-		if(traumatic_shock >= 80 || health < config.health_threshold_softcrit)
+		if(traumatic_shock >= 80)
 			shock_stage += 1
+		else if(health < config.health_threshold_softcrit)
+			shock_stage = max(shock_stage, 61)
 		else
 			shock_stage = min(shock_stage, 100)
 			shock_stage = max(shock_stage-1, 0)
