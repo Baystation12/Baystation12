@@ -27,14 +27,14 @@
 	species_restricted = list("Skrell","Human")
 
 /obj/item/clothing/suit/space/skrell/white
+	icon_state = "skrell_suit_white"
+	item_state = "skrell_suit_white"
+	color = "skrell_suit_white"
+
+/obj/item/clothing/suit/space/skrell/black
 	icon_state = "skrell_suit_black"
 	item_state = "skrell_suit_black"
 	color = "skrell_suit_black"
-
-/obj/item/clothing/suit/space/skrell/black
-	icon_state = "skrell_helmet_black"
-	item_state = "skrell_helmet_black"
-	color = "skrell_helmet_black"
 
 //Unathi space gear. Huge and restrictive.
 
