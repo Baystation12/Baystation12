@@ -66,7 +66,7 @@
 	item_state = "rig-unathi-cheap"
 	slowdown = 3
 
-/obj/item/clothing/head/helmet/space/breacher
+/obj/item/clothing/head/helmet/space/unathi/breacher
 	name = "breacher helm"
 	desc = "Weathered, ancient and battle-scarred. The helmet is too."
 	icon_state = "unathi_breacher"
