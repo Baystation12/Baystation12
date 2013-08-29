@@ -26,9 +26,6 @@
 		var/mob/living/M = hit_atom
 		M.hitby(src,speed)
 
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with [src], last touched by [src.fingerprintslast]</font>")
-		msg_admin_attack("[hit_atom] ([M.ckey]) was hit by [src] last touched by ([src.fingerprintslast]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[M.x];Y=[M.y];Z=[M.z]'>JMP</a>)")
-
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
