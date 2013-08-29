@@ -1,6 +1,20 @@
 /obj/item/clothing
 	name = "clothing"
+	var/list/species_restricted = null //Only these species can wear this kit.
 
+//BS12: Species-restricted clothing check.
+/obj/item/clothing/mob_can_equip(M as mob, slot)
+	if(species_restricted && istype(M,/mob/living/carbon/human))
+		var/wearable = null
+		var/mob/living/carbon/human/H = M
+		for(var/str in species_restricted)
+			if(H.species && H.species.name == str)
+				wearable = 1
+				break
+		if(!wearable)
+			M << "Your species cannot wear [src]."
+			return
+	..()
 
 //Ears: currently only used for headsets and earmuffs
 /obj/item/clothing/ears
