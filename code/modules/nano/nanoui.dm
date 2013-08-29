@@ -185,6 +185,7 @@
 /datum/nanoui/Topic(href, href_list)
 	update_status(0) // update the status
 	if (status != STATUS_INTERACTIVE || user != usr) // If UI is not interactive or usr calling Topic is not the UI user
+		//usr << "Not interaction or wrong usr"
 		return
 		
 	if (src_object.Topic(href, href_list))
