@@ -96,7 +96,7 @@
 /obj/item/clothing/under/rank/head_of_security/corp
 	icon_state = "hos_corporate"
 	item_state = "hos_corporate"
-
+	color = "hos_corporate"
 
 /obj/item/clothing/head/helmet/HoS
 	name = "Head of Security Hat"
