@@ -169,7 +169,7 @@ BLIND     // can't see anything
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE
 	siemens_coefficient = 0.9
-	species_restricted = list("Diona","Vox")
+	species_restricted = list("exclude","Diona","Vox")
 
 //Under clothing
 /obj/item/clothing/under
