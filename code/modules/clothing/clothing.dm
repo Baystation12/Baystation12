@@ -12,9 +12,9 @@
 				wearable = 1
 				break
 		if(!wearable)
-			M << "Your species cannot wear [src]."
-			return
-	..()
+			M << "\red Your species cannot wear [src]."
+			return 0
+	return ..()
 
 //Ears: currently only used for headsets and earmuffs
 /obj/item/clothing/ears
