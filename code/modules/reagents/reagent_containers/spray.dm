@@ -17,7 +17,7 @@
 
 /obj/item/weapon/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob)
 	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/rack) || istype(A, /obj/structure/closet) \
-	|| istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/sink))
+	|| istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
 	if(istype(A, /obj/effect/proc_holder/spell))
@@ -40,16 +40,12 @@
 		user << "<span class='notice'>\The [src] is empty!</span>"
 		return
 
-	var/obj/effect/decal/D = new/obj/effect/decal(get_turf(src))
+	var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
 	D.create_reagents(amount_per_transfer_from_this)
 	reagents.trans_to(D, amount_per_transfer_from_this, 1/3)
-
-	D.name = "chemicals"
-	D.icon = 'icons/obj/chempuff.dmi'
-
 	D.icon += mix_color_from_reagents(D.reagents.reagent_list)
 
-	var/turf/A_turf = get_turf(A)
+	var/turf/A_turf = get_turf(A)//BS12
 
 	spawn(0)
 		for(var/i=0, i<3, i++)
@@ -59,7 +55,7 @@
 				D.reagents.reaction(T)
 
 				// When spraying against the wall, also react with the wall, but
-				// not its contents.
+				// not its contents. BS12
 				if(get_dist(D, A_turf) == 1 && A_turf.density)
 					D.reagents.reaction(A_turf)
 				sleep(2)
@@ -69,14 +65,14 @@
 	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 
 	if(reagents.has_reagent("sacid"))
-		message_admins("[key_name_admin(user)] fired sulphuric acid from a spray bottle.")
-		log_game("[key_name(user)] fired sulphuric acid from a spray bottle.")
+		message_admins("[key_name_admin(user)] fired sulphuric acid from \a [src].")
+		log_game("[key_name(user)] fired sulphuric acid from \a [src].")
 	if(reagents.has_reagent("pacid"))
-		message_admins("[key_name_admin(user)] fired Polyacid from a spray bottle.")
-		log_game("[key_name(user)] fired Polyacid from a spray bottle.")
+		message_admins("[key_name_admin(user)] fired Polyacid from \a [src].")
+		log_game("[key_name(user)] fired Polyacid from \a [src].")
 	if(reagents.has_reagent("lube"))
-		message_admins("[key_name_admin(user)] fired Space lube from a spray bottle.")
-		log_game("[key_name(user)] fired Space lube from a spray bottle.")
+		message_admins("[key_name_admin(user)] fired Space lube from \a [src].")
+		log_game("[key_name(user)] fired Space lube from \a [src].")
 	return
 
 /obj/item/weapon/reagent_containers/spray/attack_self(var/mob/user)
@@ -97,8 +93,10 @@
 	set category = "Object"
 	set src in usr
 
+	if (alert(usr, "Are you sure you want to empty that?", "Empty Bottle:", "Yes", "No") != "Yes")
+		return
 	if(isturf(usr.loc))
-		usr << "<span class='notice'>You empty the [src] onto the floor.</span>"
+		usr << "<span class='notice'>You empty \the [src] onto the floor.</span>"
 		reagents.reaction(usr.loc)
 		spawn(5) src.reagents.clear_reagents()
 
@@ -127,6 +125,22 @@
 	..()
 	reagents.add_reagent("condensedcapsaicin", 40)
 
+//water flower
+/obj/item/weapon/reagent_containers/spray/waterflower
+	name = "water flower"
+	desc = "A seemingly innocent sunflower...with a twist."
+	icon = 'icons/obj/harvest.dmi'
+	icon_state = "sunflower"
+	item_state = "sunflower"
+	amount_per_transfer_from_this = 1
+	volume = 10
+
+/obj/item/weapon/reagent_containers/spray/waterflower/New()
+	..()
+	reagents.add_reagent("water", 10)
+
+/obj/item/weapon/reagent_containers/spray/waterflower/attack_self(var/mob/user) //Don't allow changing how much the flower sprays
+	return
 
 //chemsprayer
 /obj/item/weapon/reagent_containers/spray/chemsprayer
@@ -170,9 +184,7 @@
 	var/Sprays[3]
 	for(var/i=1, i<=3, i++) // intialize sprays
 		if(src.reagents.total_volume < 1) break
-		var/obj/effect/decal/D = new/obj/effect/decal(get_turf(src))
-		D.name = "chemicals"
-		D.icon = 'icons/obj/chempuff.dmi'
+		var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
 		D.create_reagents(amount_per_transfer_from_this)
 		src.reagents.trans_to(D, amount_per_transfer_from_this)
 
@@ -188,7 +200,7 @@
 
 	for(var/i=1, i<=Sprays.len, i++)
 		spawn()
-			var/obj/effect/decal/D = Sprays[i]
+			var/obj/effect/decal/chempuff/D = Sprays[i]
 			if(!D) continue
 
 			// Spreads the sprays a little bit
