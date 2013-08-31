@@ -105,7 +105,6 @@
 
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
-
 			log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
 
 			var/damage = rand(0, 5)//BS12 EDIT
@@ -136,7 +135,8 @@
 				visible_message("\red <B>[M] has weakened [src]!</B>")
 				apply_effect(2, WEAKEN, armor_block)
 
-			if(M.species.attack_verb != "punch")	damage += 5
+			if(M.species.punch_damage)
+				damage += M.species.punch_damage
 			apply_damage(damage, BRUTE, affecting, armor_block)
 
 
