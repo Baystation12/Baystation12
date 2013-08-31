@@ -56,6 +56,9 @@
 #define FILE_DIR "sound/voice/Serithi"
 #define FILE_DIR "sound/vox"
 #define FILE_DIR "sound/weapons"
+#define FILE_DIR "tools"
+#define FILE_DIR "tools/AddToChangelog"
+#define FILE_DIR "tools/AddToChangelog/AddToChangelog"
 // END_FILE_DIR
 // BEGIN_PREFERENCES
 #define DEBUG
@@ -116,6 +119,7 @@
 #include "code\controllers\verbs.dm"
 #include "code\controllers\voting.dm"
 #include "code\datums\ai_laws.dm"
+#include "code\datums\browser.dm"
 #include "code\datums\computerfiles.dm"
 #include "code\datums\datacore.dm"
 #include "code\datums\datumvars.dm"
@@ -1288,8 +1292,6 @@
 #include "code\WorkInProgress\explosion_particles.dm"
 #include "code\WorkInProgress\periodic_news.dm"
 #include "code\WorkInProgress\Apples\artifacts.dm"
-#include "code\WorkInProgress\Cael_Aislinn\meteor_battery.dm"
-#include "code\WorkInProgress\Cael_Aislinn\sculpture.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Economy\Accounts.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Economy\Economy.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Economy\Economy_Events.dm"
@@ -1339,7 +1341,6 @@
 #include "code\WorkInProgress\Ported\policetape.dm"
 #include "code\WorkInProgress\SkyMarshal\officer_stuff.dm"
 #include "code\WorkInProgress\SkyMarshal\Ultralight_procs.dm"
-#include "code\WorkInProgress\Susan\susan_desert_turfs.dm"
 #include "code\ZAS\Airflow.dm"
 #include "code\ZAS\Connection.dm"
 #include "code\ZAS\Debug.dm"
@@ -1354,8 +1355,4 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\tgstation2.dmm"
-#include "maps\RandomZLevels\Academy.dm"
-#include "maps\RandomZLevels\challenge.dm"
-#include "maps\RandomZLevels\stationCollision.dm"
-#include "maps\RandomZLevels\wildwest.dm"
 // END_INCLUDE
