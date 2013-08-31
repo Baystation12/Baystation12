@@ -27,6 +27,13 @@
 			var/trans = 0
 
 			if(ismob(target))
+
+				var/time = 20 //2/3rds the time of a syringe
+				for(var/mob/O in viewers(world.view, user))
+					O.show_message(text("\red <B>[] is trying to squirt something into []'s eyes!</B>", user, target), 1)
+
+				if(!do_mob(user, target, time)) return
+
 				if(istype(target , /mob/living/carbon/human))
 					var/mob/living/carbon/human/victim = target
 
@@ -51,14 +58,11 @@
 						spawn(5)
 							src.reagents.reaction(safe_thing, TOUCH)
 
-
-
 						user << "\blue You transfer [trans] units of the solution."
 						if (src.reagents.total_volume<=0)
 							filled = 0
 							icon_state = "dropper[filled]"
 						return
-
 
 				for(var/mob/O in viewers(world.view, user))
 					O.show_message(text("\red <B>[] squirts something into []'s eyes!</B>", user, target), 1)
