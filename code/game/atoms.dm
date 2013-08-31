@@ -26,8 +26,6 @@
 		var/mob/living/M = hit_atom
 		M.hitby(src,speed)
 
-		log_attack("<font color='red'>[hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])</font>")
-
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
