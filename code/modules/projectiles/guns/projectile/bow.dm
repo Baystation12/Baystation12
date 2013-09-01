@@ -77,7 +77,7 @@
 					user << "<span class='notice'>[arrow] plinks and crackles as it begins to glow red-hot.</span>"
 					arrow.throwforce = 15
 					arrow.icon_state = "metal-rod-superheated"
-					cell.charge -= 500
+					cell.use(500)
 			return
 
 	if(istype(W, /obj/item/weapon/cell))
@@ -91,7 +91,7 @@
 					user << "<span class='notice'>[arrow] plinks and crackles as it begins to glow red-hot.</span>"
 					arrow.throwforce = 15
 					arrow.icon_state = "metal-rod-superheated"
-					cell.charge -= 500
+					cell.use(500)
 		else
 			user << "<span class='notice'>[src] already has a cell installed.</span>"
 

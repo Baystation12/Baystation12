@@ -79,6 +79,7 @@
 		/obj/item/device/lightreplacer,
 		/obj/item/device/taperecorder,
 		/obj/item/device/hailer,
+		/obj/item/device/megaphone,
 		/obj/item/clothing/tie/holobadge,
 		/obj/structure/closet/crate/secure,
 		/obj/structure/closet/secure_closet,
