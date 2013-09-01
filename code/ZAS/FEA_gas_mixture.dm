@@ -367,7 +367,7 @@ What are the archived variables for?
 	//del(giver)
 	return 1
 
-/datum/gas_mixture/proc/remove(amount)
+/datum/gas_mixture/proc/remove(amount, var/filtered = 0)
 	//Purpose: Removes a certain number of moles from the air.
 	//Called by: ?
 	//Inputs: How many moles to remove.
@@ -384,7 +384,7 @@ What are the archived variables for?
 	removed.oxygen = QUANTIZE((oxygen/sum)*amount)
 	removed.nitrogen = QUANTIZE((nitrogen/sum)*amount)
 	removed.carbon_dioxide = QUANTIZE((carbon_dioxide/sum)*amount)
-	removed.toxins = QUANTIZE((toxins/sum)*amount)
+	removed.toxins = QUANTIZE(((toxins/sum)*amount)*(1-filtered))
 
 	oxygen -= removed.oxygen/group_multiplier
 	nitrogen -= removed.nitrogen/group_multiplier
@@ -396,8 +396,8 @@ What are the archived variables for?
 			var/datum/gas/corresponding = new trace_gas.type()
 			removed.trace_gases += corresponding
 
-			corresponding.moles = (trace_gas.moles/sum)*amount
-			trace_gas.moles -= corresponding.moles/group_multiplier
+			corresponding.moles = ((trace_gas.moles/sum)*amount)*(1-filtered)
+			trace_gas.moles -= (corresponding.moles/group_multiplier)*(1-filtered)
 
 	removed.temperature = temperature
 	update_values()

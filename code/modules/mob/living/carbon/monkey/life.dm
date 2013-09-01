@@ -225,13 +225,17 @@
 					breath = location_as_object.handle_internal_lifeform(src, BREATH_VOLUME)
 				else if(istype(loc, /turf/))
 					var/breath_moles = environment.total_moles()*BREATH_PERCENTAGE
-					breath = loc.remove_air(breath_moles)
 
 					// Handle chem smoke effect  -- Doohl
 					var/block = 0
 					if(wear_mask)
 						if(istype(wear_mask, /obj/item/clothing/mask/gas))
 							block = 1
+
+					if(!block)
+						breath = loc.remove_air(breath_moles, 0)
+					else
+						breath = loc.remove_air(breath_moles, wear_mask.gas_filter_strength) //Filters out harmful gases
 
 					if(!block)
 

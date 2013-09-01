@@ -20,20 +20,21 @@
 
 	return GM
 
-/turf/remove_air(amount as num)
+/turf/remove_air(amount as num, var/filtered = 0)
 	var/datum/gas_mixture/GM = new
 
-	var/sum = oxygen + carbon_dioxide + nitrogen + toxins
+	var/sum = oxygen + carbon_dioxide + nitrogen + (toxins*(1-filtered))
 	if(sum>0)
 		GM.oxygen = (oxygen/sum)*amount
 		GM.carbon_dioxide = (carbon_dioxide/sum)*amount
 		GM.nitrogen = (nitrogen/sum)*amount
-		GM.toxins = (toxins/sum)*amount
+		GM.toxins = ((toxins/sum)*amount)*(1-filtered)
 
 	GM.temperature = temperature
 	GM.update_values()
 
 	return GM
+
 
 /turf/simulated/var/current_graphic = null
 
@@ -109,21 +110,21 @@
 	else
 		return ..()
 
-/turf/simulated/remove_air(amount as num)
+/turf/simulated/remove_air(amount as num, var/filtered = 0)
 	if(zone)
 		var/datum/gas_mixture/removed = null
-		removed = zone.air.remove(amount)
+		removed = zone.air.remove(amount, filtered)
 		return removed
 	else if(air)
 		var/datum/gas_mixture/removed = null
-		removed = air.remove(amount)
+		removed = air.remove(amount, filtered)
 
 		if(air.check_tile_graphic())
 			update_visuals(air)
 		return removed
 
 	else
-		return ..()
+		return ..(amount, filtered)
 
 /turf/simulated/proc/update_air_properties()
 	var/air_directions_archived = air_check_directions
