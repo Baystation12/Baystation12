@@ -21,11 +21,12 @@
 
 /obj/machinery/chem_dispenser/proc/recharge()
 	if(stat & (BROKEN|NOPOWER)) return
-	var/addenergy = 2
+	var/addenergy = 1
 	var/oldenergy = energy
 	energy = min(energy + addenergy, max_energy)
 	if(energy != oldenergy)
-		use_power(3000) // This thing uses up alot of power (this is still low as shit for creating reagents from thin air)
+		use_power(1500) // This thing uses up alot of power (this is still low as shit for creating reagents from thin air)
+		nanomanager.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chem_dispenser/power_change()
 	if(powered())
@@ -33,6 +34,7 @@
 	else
 		spawn(rand(0, 15))
 			stat |= NOPOWER
+	nanomanager.update_uis(src) // update all UIs attached to src
 
 /obj/machinery/chem_dispenser/process()
 
@@ -73,6 +75,7 @@
 
 	data["amount"] = amount
 	data["energy"] = energy
+	data["maxEnergy"] = max_energy
 
 	data["isBeakerLoaded"] = beaker ? 1 : 0
 
@@ -103,7 +106,7 @@
 
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
 	if (!ui)
-		ui = new(user, src, ui_key, "chem_dispenser.tmpl", "Chem Dispenser 5000", 370, 585)
+		ui = new(user, src, ui_key, "chem_dispenser.tmpl", "Chem Dispenser 5000", 370, 605)
 		// When the UI is first opened this is the data it will use
 		ui.set_initial_data(data)
 		ui.open()
