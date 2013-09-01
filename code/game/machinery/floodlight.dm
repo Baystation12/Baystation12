@@ -21,8 +21,9 @@
 
 /obj/machinery/floodlight/process()
 	if(on)
-		cell.charge -= use
-		if(cell.charge <= 0)
+		if(cell.charge >= use)
+			cell.use(use)
+		else
 			on = 0
 			updateicon()
 			SetLuminosity(0)
