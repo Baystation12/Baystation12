@@ -321,14 +321,21 @@
 
 		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
 		if(W.internal && !W.is_treated() && owner.bodytemperature >= 170)
-			if(!owner.reagents.has_reagent("bicaridine"))	//bicard stops internal wounds from growing bigger with time
+			if(!owner.reagents.has_reagent("bicaridine"))	//bicard stops internal wounds from growing bigger with time, and also stop bleeding
 				W.open_wound(0.1 * wound_update_accuracy)
-			owner.vessel.remove_reagent("blood",0.07 * W.damage * wound_update_accuracy)
+				owner.vessel.remove_reagent("blood",0.04 * W.damage * wound_update_accuracy) //This line causes the bleeding from internal organs.
+			if(owner.reagents.has_reagent("bicaridine") && (owner.reagents.get_reagent_amount("bicaridine") >= 30))
+				var/healinternal = 0.2
+				if(W.damage <= healinternal)
+					W.damage = 0
+				else
+					W.damage -= healinternal
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
 		// slow healing
 		var/heal_amt = 0
+
 		if (W.damage < 15) //this thing's edges are not in day's travel of each other, what healing?
 			heal_amt += 0.2
 
