@@ -616,7 +616,7 @@
 /obj/item/clothing/suit/fluff/oldscarf //Writerer2: Javaria Zara
 	name = "old scarf"
 	desc = "An old looking scarf, it seems to be fairly worn."
-	icon = 'clothing/suits.dmi'
+	icon = 'icons/obj/clothing/suits.dmi'
 	icon_state = "mantle-unathi"
 	item_state = "mantle-unathi"
 	body_parts_covered = UPPER_TORSO

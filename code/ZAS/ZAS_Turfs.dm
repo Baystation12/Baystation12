@@ -51,7 +51,7 @@
 
 	var/siding_icon_state = return_siding_icon_state()
 	if(siding_icon_state)
-		overlays += image('floors.dmi',siding_icon_state)
+		overlays += image('icons/turf/floors.dmi',siding_icon_state)
 	var/datum/gas_mixture/model = return_air()
 	switch(model.graphic)
 		if(1)
