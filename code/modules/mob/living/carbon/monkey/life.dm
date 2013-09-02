@@ -232,13 +232,16 @@
 						if(istype(wear_mask, /obj/item/clothing/mask/gas))
 							block = 1
 
-					if(!block)
-						breath = loc.remove_air(breath_moles, 0)
+					if(block && wear_mask)
+						if(istype(wear_mask, /obj/item/clothing/mask/gas))
+							var/obj/item/clothing/mask/gas/G = wear_mask
+							breath = loc.remove_air(breath_moles, G.gas_filter_strength) //Filters out harmful gases
+						else
+							breath = loc.remove_air(breath_moles, 0)
 					else
-						breath = loc.remove_air(breath_moles, wear_mask.gas_filter_strength) //Filters out harmful gases
+						breath = loc.remove_air(breath_moles, 0)
 
 					if(!block)
-
 						for(var/obj/effect/effect/chem_smoke/smoke in view(1, src))
 							if(smoke.reagents.total_volume)
 								smoke.reagents.reaction(src, INGEST)
