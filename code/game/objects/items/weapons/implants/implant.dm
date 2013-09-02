@@ -2,7 +2,7 @@
 #define MALFUNCTION_PERMANENT 2
 /obj/item/weapon/implant
 	name = "implant"
-	icon = 'device.dmi'
+	icon = 'icons/obj/device.dmi'
 	icon_state = "implant"
 	var/implanted = null
 	var/mob/imp_in = null

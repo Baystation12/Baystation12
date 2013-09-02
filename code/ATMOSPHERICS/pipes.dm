@@ -936,7 +936,7 @@ obj/machinery/atmospherics/pipe
 
 			else
 				icon_state = "manifold4w_ex"
-				var/icon/con = new/icon('pipe_manifold.dmi',"manifold4w_con") //Since 4-ways are supposed to be directionless, they need an overlay instead it seems.
+				var/icon/con = new/icon('icons/obj/atmospherics/pipe_manifold.dmi',"manifold4w_con") //Since 4-ways are supposed to be directionless, they need an overlay instead it seems.
 
 				if(node1)
 					overlays += new/image(con,dir=1)
@@ -1033,7 +1033,7 @@ obj/machinery/atmospherics/pipe
 	cap
 		name = "pipe endcap"
 		desc = "An endcap for pipes"
-		icon = 'pipes.dmi'
+		icon = 'icons/obj/pipes.dmi'
 		icon_state = "cap"
 		level = 2
 		layer = 2.4 //under wires with their 2.44
