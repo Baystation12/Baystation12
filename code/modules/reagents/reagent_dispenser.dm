@@ -166,9 +166,7 @@
 
 /obj/structure/reagent_dispensers/fueltank/temperature_expose(datum/gas_mixture/air, temperature, volume)
 	if(temperature > T0C+500)
-		explosion(src.loc,-1,0,2)
-		if(src)
-			del(src)
+		explode()
 	return ..()
 
 /obj/structure/reagent_dispensers/peppertank
