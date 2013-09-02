@@ -19,6 +19,8 @@
 	if(!ishuman(user))
 		user << "\red You don't know how to use this!"
 		return
+	if(user.silent)
+		return
 	if(spamcheck)
 		user << "\red \The [src] needs to recharge!"
 		return

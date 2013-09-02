@@ -97,7 +97,7 @@
 
 		handle_pain()
 
-		handle_medical_side_effects()
+//		handle_medical_side_effects()
 
 	handle_stasis_bag()
 
@@ -322,14 +322,7 @@
 						// Not enough air around, take a percentage of what's there to model this properly
 					breath_moles = environment.total_moles()*BREATH_PERCENTAGE
 
-					breath = loc.remove_air(breath_moles)
-
-					if(!is_lung_ruptured())
-						if(!breath || breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
-							if(prob(5))
-								rupture_lung()
-
-					// Handle chem smoke effect  -- Doohl
+					// Handle filtering
 					var/block = 0
 					if(wear_mask)
 						if(wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT)
@@ -340,6 +333,20 @@
 					if(head)
 						if(head.flags & BLOCK_GAS_SMOKE_EFFECT)
 							block = 1
+
+					if(block && wear_mask)
+						if(istype(wear_mask, /obj/item/clothing/mask/gas))
+							var/obj/item/clothing/mask/gas/G = wear_mask
+							breath = loc.remove_air(breath_moles, G.gas_filter_strength) //Filters out harmful gases
+						else
+							breath = loc.remove_air(breath_moles, 0)
+					else
+						breath = loc.remove_air(breath_moles, 0)
+
+					if(!is_lung_ruptured())
+						if(!breath || breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
+							if(prob(5))
+								rupture_lung()
 
 					if(!block)
 

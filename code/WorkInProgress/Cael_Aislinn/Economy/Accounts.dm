@@ -14,7 +14,7 @@ var/global/list/all_money_accounts = list()
 		station_account = new()
 		station_account.owner_name = "[station_name()] Station Account"
 		station_account.account_number = rand(111111, 999999)
-		station_account.remote_access_pin = rand(1111, 111111)
+		station_account.remote_access_pin = rand(1000, 9999)
 		station_account.money = 75000
 
 		//create an entry in the account transaction log for when it was created
@@ -36,7 +36,7 @@ var/global/list/all_money_accounts = list()
 	var/datum/money_account/department_account = new()
 	department_account.owner_name = "[department] Account"
 	department_account.account_number = rand(111111, 999999)
-	department_account.remote_access_pin = rand(1111, 111111)
+	department_account.remote_access_pin = rand(1000, 9999)
 	department_account.money = 5000
 
 	//create an entry in the account transaction log for when it was created
@@ -62,7 +62,7 @@ var/global/list/all_money_accounts = list()
 	//create a new account
 	var/datum/money_account/M = new()
 	M.owner_name = new_owner_name
-	M.remote_access_pin = rand(1111, 111111)
+	M.remote_access_pin = rand(1000, 9999)
 	M.money = starting_funds
 
 	//create an entry in the account transaction log for when it was created
@@ -161,7 +161,7 @@ var/global/list/all_money_accounts = list()
 		vendor_account = department_accounts["Vendor"]
 
 	if(!current_date_string)
-		current_date_string = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], 2557"
+		current_date_string = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [game_year]"
 
 	machine_id = "[station_name()] Acc. DB #[num_financial_terminals++]"
 
