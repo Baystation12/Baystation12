@@ -323,15 +323,18 @@
 		if(W.internal && !W.is_treated() && owner.bodytemperature >= 170)
 			if(!owner.reagents.has_reagent("bicaridine"))	//bicard stops internal wounds from growing bigger with time, and also stop bleeding
 				W.open_wound(0.1 * wound_update_accuracy)
-				owner.vessel.remove_reagent("blood",0.04 * W.damage * wound_update_accuracy) //This line causes the bleeding from internal organs.
-			if(owner.reagents.has_reagent("bicaridine") && (owner.reagents.get_reagent_amount("bicaridine") >= 30))
-				var/healinternal = 0.2
-				if(W.damage <= healinternal)
-					W.damage = 0
-				else
-					W.damage -= healinternal
+				owner.vessel.remove_reagent("blood",0.05 * W.damage * wound_update_accuracy)
+			owner.vessel.remove_reagent("blood",0.02 * W.damage * wound_update_accuracy)//Bicaridine slows Internal Bleeding
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
+
+		//overdose of bicaridine begins healing IB
+		if(owner.reagents.has_reagent("bicaridine") && (owner.reagents.get_reagent_amount("bicaridine") >= 30))
+			var/healinternal = 0.2
+			if(W.damage <= healinternal)
+				W.damage = 0
+			else
+				W.damage -= healinternal
 
 		// slow healing
 		var/heal_amt = 0
