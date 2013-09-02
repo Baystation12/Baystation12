@@ -191,7 +191,7 @@
 			if (istype(module,/obj/item/weapon/robot_module/security))
 				message = "<B>[src]</B> shows its legal authorization barcode."
 
-				playsound(src.loc, 'biamthelaw.ogg', 50, 0)
+				playsound(src.loc, 'sound/voice/biamthelaw.ogg', 50, 0)
 				m_type = 2
 			else
 				src << "You are not THE LAW, pal."
