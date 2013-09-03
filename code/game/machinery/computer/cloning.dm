@@ -400,7 +400,7 @@
 			else
 
 				var/mob/selected = find_dead_player("[C.fields["ckey"]]")
-				selected << 'chime.ogg'	//probably not the best sound but I think it's reasonable
+				selected << 'sound/machines/chime.ogg'	//probably not the best sound but I think it's reasonable
 				var/answer = alert(selected,"Do you want to return to life?","Cloning","Yes","No")
 				if(answer != "No" && pod1.growclone(C.fields["ckey"], C.fields["name"], C.fields["UI"], C.fields["SE"], C.fields["mind"], C.fields["mrace"], C.fields["interface"]))
 					temp = "Initiating cloning cycle..."
