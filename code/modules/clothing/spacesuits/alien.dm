@@ -28,9 +28,9 @@
 	color = "skrell_helmet_white"
 
 /obj/item/clothing/head/helmet/space/skrell/black
-	icon_state = "skrell_suit_black"
-	item_state = "skrell_suit_black"
-	color = "skrell_suit_black"
+	icon_state = "skrell_helmet_black"
+	item_state = "skrell_helmet_black"
+	color = "skrell_helmet_black"
 
 /obj/item/clothing/suit/space/skrell
 	name = "Skrellian hardsuit"
