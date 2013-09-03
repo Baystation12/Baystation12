@@ -182,7 +182,7 @@
 				src.active2 = null
 				src.authenticated = usr.name
 				var/mob/living/silicon/robot/R = usr
-				src.rank = R.braintype
+				src.rank = "[R.modtype] [R.braintype]"
 				src.screen = 1
 
 			else if (istype(src.scan, /obj/item/weapon/card/id))

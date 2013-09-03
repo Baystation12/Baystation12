@@ -87,7 +87,7 @@
 	name = "drips of blood"
 	desc = "It's red."
 	gender = PLURAL
-	icon = 'drip.dmi'
+	icon = 'icons/effects/drip.dmi'
 	icon_state = "1"
 	amount = 0
 
@@ -141,7 +141,7 @@
 	density = 0
 	anchored = 1
 	layer = 2
-	icon = 'blood.dmi'
+	icon = 'icons/effects/blood.dmi'
 	icon_state = "mucus"
 	random_icon_states = list("mucus")
 	var/list/datum/disease2/disease/virus2 = list()

@@ -162,7 +162,7 @@
 			T = get_step(T,direct)
 		console.jump_on_click(src,T)
 		return
-	..(n,direct)
+	return ..(n,direct)
 
 /obj/machinery/computer/security/telescreen
 	name = "Telescreen"

@@ -6,8 +6,8 @@
 	desc = "A rare collectable hat."
 
 /obj/item/clothing/head/collectable/petehat
-	name = "ultra rare Pete's hat!"
-	desc = "It smells faintly of plasma"
+	name = "ultra rare hat"
+	desc = "an ultra rare hat. It commands a certain respect."
 	icon_state = "petehat"
 
 /obj/item/clothing/head/collectable/slime

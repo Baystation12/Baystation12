@@ -13,9 +13,57 @@ NanoUpdate = function ()
 	
 	var init = function () 
 	{
+		NanoUpdate.addAfterUpdateCallback(function (updateData) {
+			var uiStatusClass;
+			if (updateData['ui']['status'] == 2)
+			{
+				uiStatusClass = 'icon24 uiStatusGood';
+				$('.linkActive').removeClass('inactive');
+			}
+			else if (updateData['ui']['status'] == 1)
+			{
+				uiStatusClass = 'icon24 uiStatusAverage';
+				$('.linkActive').addClass('inactive');
+			}
+			else
+			{
+				uiStatusClass = 'icon24 uiStatusBad'
+				$('.linkActive').addClass('inactive');
+			}
+			$('#uiStatusIcon').attr('class', uiStatusClass);
+
+			$('.linkActive').stopTime('linkPending');
+			$('.linkActive').removeClass('linkPending');
+
+			$('.linkActive').off('click');
+			$('.linkActive').on('click', function (event) {
+				event.preventDefault();
+				var href = $(this).data('href');
+				if (href != null && _canClick)
+				{
+					_canClick = false;
+					$('body').oneTime(300, 'enableClick', function () {
+						_canClick = true;
+					});
+					if (updateData['ui']['status'] == 2)
+					{						
+						$(this).oneTime(300, 'linkPending', function () {
+							$(this).addClass('linkPending');
+						});
+					}
+					window.location.href = href;
+				}
+			});
+		});
+	
 		var body = $('body'); // We store data in the body tag, it's as good a place as any
 		
 		_data = body.data('initialData');
+		
+		if (!_data)
+		{
+			alert('Error: Initial data did not load correctly.');
+		}
 
 		var templateData = body.data('templateData');
 		
@@ -57,6 +105,8 @@ NanoUpdate = function ()
 							{
 								observedDataUpdateRecursive(_earlyUpdateData, _data);
 							}	
+			
+							executeCallbacks(_afterUpdateCallbacks, _data);
 							
 							//alert($("#mainTemplate").html());
 						}
@@ -68,52 +118,22 @@ NanoUpdate = function ()
 					});    
 			}
 		}	
-		
-		NanoUpdate.addAfterUpdateCallback(function (updateData) {
-			var uiStatusClass;
-			if (updateData['ui']['status'] == 2)
-			{
-				uiStatusClass = 'icon24 uiStatusGood';
-				$('.linkActive').removeClass('inactive');
-			}
-			else if (updateData['ui']['status'] == 1)
-			{
-				uiStatusClass = 'icon24 uiStatusAverage';
-				$('.linkActive').addClass('inactive');
-			}
-			else
-			{
-				uiStatusClass = 'icon24 uiStatusBad'
-				$('.linkActive').addClass('inactive');
-			}
-			$('#uiStatusIcon').attr('class', uiStatusClass);
-
-			$('.linkActive').stopTime('linkPending');
-			$('.linkActive').removeClass('linkPending');
-
-			$('.linkActive').off('click');
-			$('.linkActive').on('click', function (event) {
-				event.preventDefault();
-				var href = $(this).data('href');
-				if (href != null && _canClick)
-				{
-					_canClick = false;
-					$('body').oneTime(300, 'enableClick', function () {
-						_canClick = true;
-					});
-					$(this).oneTime(300, 'linkPending', function () {
-						$(this).addClass('linkPending');
-					});
-					window.location.href = href;
-				}
-			});
-		});
 	};
 	
 	// Receive update data from the server
 	var receiveUpdateData = function (jsonString)
 	{
-		var updateData = jQuery.parseJSON(jsonString);
+		var updateData;
+		try
+		{
+			updateData = jQuery.parseJSON(jsonString);
+		}
+		catch (error)
+		{
+			alert(error.Message);
+			return;
+		}
+		
 		
 		if (_isInitialised) // templates have been loaded and are observing the data. We need to update it recursively
 		{
