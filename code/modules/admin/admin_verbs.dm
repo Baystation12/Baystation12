@@ -233,7 +233,8 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 	/client/proc/player_panel_new,
-	/datum/admins/proc/show_skills
+	/datum/admins/proc/show_skills,
+	/client/proc/dsay
 )
 /client/proc/add_admin_verbs()
 	if(holder)
