@@ -395,6 +395,12 @@
 	icon_state = "barflask"
 	volume = 60
 
+/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask
+	name = "vacuum flask"
+	desc = "Keeping your drinks at the perfect temperature since 2321."
+	icon_state = "vacuumflask"
+	volume = 60
+
 /obj/item/weapon/reagent_containers/food/drinks/britcup
 	name = "cup"
 	desc = "A cup with the british flag emblazoned on it."

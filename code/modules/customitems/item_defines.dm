@@ -1,5 +1,5 @@
 // Add custom items you give to people here, and put their icons in custom_items.dmi
-// Remember to change 'icon = 'custom_items.dmi'' for items not using /obj/item/fluff as a base
+// Remember to change 'icon = 'icons/obj/custom_items.dmi'' for items not using /obj/item/fluff as a base
 // Clothing item_state doesn't use custom_items.dmi. Just add them to the normal clothing files.
 
 /obj/item/fluff // so that they don't spam up the object tree
@@ -616,7 +616,7 @@
 /obj/item/clothing/suit/fluff/oldscarf //Writerer2: Javaria Zara
 	name = "old scarf"
 	desc = "An old looking scarf, it seems to be fairly worn."
-	icon = 'clothing/suits.dmi'
+	icon = 'icons/obj/clothing/suits.dmi'
 	icon_state = "mantle-unathi"
 	item_state = "mantle-unathi"
 	body_parts_covered = UPPER_TORSO
