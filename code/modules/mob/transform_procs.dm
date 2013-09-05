@@ -369,7 +369,8 @@
 		return 1 //Bears will auto-attack mobs, even if they're player controlled (Fixed! - Nodrak)
 	if(ispath(MP, /mob/living/simple_animal/parrot))
 		return 1 //Parrots are no longer unfinished! -Nodrak
-
+	if(ispath(MP, /mob/living/simple_animal/pony))
+		return 1 // ZOMG PONIES WHEEE
 	//Not in here? Must be untested!
 	return 0
 
