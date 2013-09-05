@@ -76,7 +76,7 @@ var/blobevent = 0
 var/diary = null
 var/diaryofmeanpeople = null
 var/href_logfile = null
-var/station_name = "Deep Space Testing Initiative Gamma"
+var/station_name = "Paradise Station"
 var/game_version = "Custom Modified Baystation12"
 var/changelog_hash = ""
 
@@ -209,13 +209,13 @@ var/sqladdress = "localhost"
 var/sqlport = "3306"
 var/sqldb = "tgstation"
 var/sqllogin = "root"
-var/sqlpass = ""
+var/sqlpass = "bleh"
 
 	// Feedback gathering sql connection
 
 var/sqlfdbkdb = "test"
 var/sqlfdbklogin = "root"
-var/sqlfdbkpass = ""
+var/sqlfdbkpass = "bleh"
 
 var/sqllogging = 0 // Should we log deaths, population stats, etc?
 
@@ -229,7 +229,7 @@ var/forumsqladdress = "localhost"
 var/forumsqlport = "3306"
 var/forumsqldb = "tgstation"
 var/forumsqllogin = "root"
-var/forumsqlpass = ""
+var/forumsqlpass = "bleh"
 var/forum_activated_group = "2"
 var/forum_authenticated_group = "10"
 
