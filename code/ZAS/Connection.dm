@@ -104,8 +104,7 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 
 	//Disconnect zones while handling unusual conditions.
 	//	e.g. loss of a zone on a turf
-	if(A && A.zone && B && B.zone)
-		DisconnectZones(A.zone, B.zone)
+	DisconnectZones(zone_A, zone_B)
 
 	//Finally, preform actual deletion.
 	. = ..()

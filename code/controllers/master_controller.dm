@@ -125,11 +125,6 @@ datum/controller/game_controller/proc/process()
 				if(!air_processing_killed)
 					timer = world.timeofday
 					last_thing_processed = air_master.type
-					air_master.tick()
-					air_cost = (world.timeofday - timer) / 10				// this might make atmos slower
-				//  1. atmos won't process if the game is generally lagged out(no deadlocks)
-				//  2. if the server frequently crashes during atmos processing we will knowif(!kill_air)
-					//src.set_debug_state("Air Master")
 
 					air_master.current_cycle++
 					if(!air_master.tick()) //Runtimed.

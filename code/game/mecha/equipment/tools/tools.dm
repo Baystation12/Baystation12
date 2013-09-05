@@ -1064,7 +1064,7 @@
 /obj/item/weapon/paintkit //Please don't use this for anything, it's a base type for custom mech paintjobs.
 	name = "mecha customisation kit"
 	desc = "A generic kit containing all the needed tools and parts to turn a mech into another mech."
-	icon = 'custom_items.dmi'
+	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "royce_kit"
 
 	var/new_name = "mech"    //What is the variant called?
