@@ -61,6 +61,16 @@
 		DB_ban_panel(playerckey, adminckey, playerip, pban, tban, jpban, jtban)
 		return
 
+	else if(href_list["dbbanedit"])
+		var/banedit = href_list["dbbanedit"]
+		var/banid = text2num(href_list["dbbanid"])
+		if(!banedit || !banid)
+			return
+
+		DB_ban_edit(banid, banedit)
+		return
+
+
 	else if(href_list["dbbanaddtype"])
 
 		var/bantype = text2num(href_list["dbbanaddtype"])
