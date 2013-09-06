@@ -281,6 +281,7 @@
 	selection_color = "#dddddd"
 	access = list(access_janitor, access_maint_tunnels)
 	minimal_access = list(access_janitor, access_maint_tunnels)
+	alt_titles = list("Custodial Technician")
 
 
 	equip(var/mob/living/carbon/human/H)
