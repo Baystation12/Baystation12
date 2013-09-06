@@ -49,7 +49,7 @@
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_morgue, access_surgery, access_virology)
-	alt_titles = list("Surgeon","Emergency Physician","Nurse","Virologist")
+	alt_titles = list("Surgeon","Emergency Physician","Nurse","Virologist","Medical Intern","Orderly","First Responder")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -110,7 +110,7 @@
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_chemistry)
-	alt_titles = list("Pharmacist")
+	alt_titles = list("Pharmacist","Drug Dealer")
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -199,7 +199,7 @@
 	selection_color = "#ffeef0"
 	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_psychiatrist)
 	minimal_access = list(access_medical, access_psychiatrist)
-	alt_titles = list("Psychologist")
+	alt_titles = list("Psychologist","Therapist")
 
 
 	equip(var/mob/living/carbon/human/H)
