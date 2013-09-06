@@ -43,12 +43,16 @@ var/religion_name = null
 
 	return capitalize(name)
 
+
 /proc/station_name()
 	if (station_name)
 		return station_name
 
-	var/random = rand(1,5)
 	var/name = ""
+
+/*
+	var/random = rand(1,5)
+
 
 	//Rare: Pre-Prefix
 	if (prob(10))
@@ -92,7 +96,7 @@ var/religion_name = null
 			station_name += pick("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen")
 		if(13)
 			station_name += pick("13","XIII","Thirteen")
-
+*/
 
 	if (config && config.server_name)
 		world.name = "[config.server_name]: [name]"
@@ -100,6 +104,8 @@ var/religion_name = null
 		world.name = station_name
 
 	return station_name
+
+
 
 /proc/world_name(var/name)
 
