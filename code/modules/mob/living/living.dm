@@ -369,10 +369,6 @@
 							if(pulling:ini_dir == NORTHWEST || pulling:ini_dir == NORTHEAST || pulling:ini_dir == SOUTHWEST || pulling:ini_dir == SOUTHEAST)
 								for(var/obj/structure/window/win in get_step(pulling,get_dir(pulling.loc, T)))
 									stop_pulling()
-						if (istype(pulling, /obj/structure/stool/bed/roller))
-							if(pulling:ini_dir == NORTHWEST || pulling:ini_dir == NORTHEAST || pulling:ini_dir == SOUTHWEST || pulling:ini_dir == SOUTHEAST)
-								for(var/obj/structure/stool/bed/roller in get_step(pulling,get_dir(pulling.loc, T)))
-									stop_pulling()
 					if (pulling)
 						step(pulling, get_dir(pulling.loc, T))
 	else

@@ -26,6 +26,13 @@
 		unbuckle()
 	if(istype(user.l_hand, /obj/item/key/ambulance) || istype(user.r_hand, /obj/item/key/ambulance))
 		step(src, direction)
+
+// NEW PULLING CODE
+		if (istype(user.pulling, /obj/structure/stool/bed/roller))
+			var/turf/T = loc
+			step(user.pulling, get_dir(user.pulling.loc, T))
+
+// END NEW PULLING CODE
 		update_mob()
 		handle_rotation()
 	else
