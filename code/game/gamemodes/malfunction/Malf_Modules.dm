@@ -245,6 +245,7 @@ rcd light flash thingy on matter drain
 	src.possible_modules += new /datum/AI_Module/large/fireproof_core
 	src.possible_modules += new /datum/AI_Module/large/upgrade_turrets
 	src.possible_modules += new /datum/AI_Module/large/disable_rcd
+	src.possible_modules += new /datum/AI_Module/large/place_cyborg_transformer
 	src.possible_modules += new /datum/AI_Module/small/overload_machine
 	src.possible_modules += new /datum/AI_Module/small/interhack
 	src.possible_modules += new /datum/AI_Module/small/blackout
