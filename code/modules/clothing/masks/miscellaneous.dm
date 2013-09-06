@@ -7,6 +7,12 @@
 	w_class = 2
 	gas_transfer_coefficient = 0.90
 
+/obj/item/clothing/mask/muzzle/gag
+	name = "gag"
+	desc = "Stick this in their mouth to stop the noise."
+	icon_state = "gag"
+	w_class = 1
+
 //Monkeys can not take the muzzle off of themself! Call PETA!
 /obj/item/clothing/mask/muzzle/attack_paw(mob/user as mob)
 	if (src == user.wear_mask)
