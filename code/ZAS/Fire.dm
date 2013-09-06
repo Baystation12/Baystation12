@@ -51,7 +51,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 	//luminosity = 3
 
-	icon = 'fire.dmi'
+	icon = 'icons/effects/fire.dmi'
 	icon_state = "1"
 
 	layer = TURF_LAYER
@@ -262,7 +262,7 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 			//slows down the burning when the concentration of the reactants is low
 			var/dampening_multiplier = total_combustables / (total_combustables + nitrogen + carbon_dioxide)
 			//calculates how close the mixture of the reactants is to the optimum
-			var/mix_multiplier = 1 / (1 + (5 * ((oxygen / total_combustables) ^2)))
+			var/mix_multiplier = 1 / (1 + (5 * ((oxygen / total_combustables) ** 2)))
 			//toss everything together
 			firelevel = vsc.fire_firelevel_multiplier * mix_multiplier * dampening_multiplier
 

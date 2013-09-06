@@ -55,7 +55,7 @@
 
 /proc/log_attack(text)
 	if (config.log_attack)
-		diaryofmeanpeople << "\[[time_stamp()]]ATTACK: [text]"
+		diary << "\[[time_stamp()]]ATTACK: [text]" //Seperate attack logs? Why?
 
 /proc/log_adminsay(text)
 	if (config.log_adminchat)
