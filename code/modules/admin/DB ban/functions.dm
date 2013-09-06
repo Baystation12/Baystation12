@@ -260,7 +260,8 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	holder.DB_ban_panel()
 
 
-/datum/admins/proc/DB_ban_panel(var/playerckey = null, var/adminckey = null)
+/datum/admins/proc/DB_ban_panel(var/playerckey = null, var/adminckey = null, var/playerip = null, var/pban = null, var/tban = null, var/jpban = null, var/jtban = null)
+
 	if(!usr.client)
 		return
 
@@ -312,11 +313,19 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	output += "<input type='hidden' name='src' value='\ref[src]'>"
 	output += "<b>Ckey:</b> <input type='text' name='dbsearchckey' value='[playerckey]'>"
 	output += "<b>Admin ckey:</b> <input type='text' name='dbsearchadmin' value='[adminckey]'>"
+	output += "<b>IP address:</b> <input type='text' name='dbsearchip' value='[playerip]'><br>"
+	output += "<b>Permban:</b> <input type='checkbox' name='dbpban' value='PERMABAN'>"
+	output += "<b>Tempban:</b> <input type='checkbox' name='dbtban' value='TEMPBAN'>"
+	output += "<b>PermJOBban:</b> <input type='checkbox' name='dbjpban' value='JOB_PERMABAN'>"
+	output += "<b>TempJOBban:</b> <input type='checkbox' name='dbjtban' value='JOB_TEMPBAN'>"
 	output += "<input type='submit' value='search'>"
 	output += "</form>"
 	output += "Please note that all jobban bans or unbans are in-effect the following round."
 
-	if(adminckey || playerckey)
+
+
+
+	if(adminckey || playerckey || playerip || pban || tban || jpban || jtban)
 
 		var/blcolor = "#ffeeee" //banned light
 		var/bdcolor = "#ffdddd" //banned dark
@@ -334,14 +343,32 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 
 		adminckey = ckey(adminckey)
 		playerckey = ckey(playerckey)
+
 		var/adminsearch = ""
 		var/playersearch = ""
+		var/playeripsearch = ""
+		var/pbansearch = ""
+		var/tbansearch = ""
+		var/jpbansearch = ""
+		var/jtbansearch = ""
 		if(adminckey)
 			adminsearch = "AND a_ckey = '[adminckey]' "
 		if(playerckey)
 			playersearch = "AND ckey = '[playerckey]' "
+		if(playerip)
+			playeripsearch = "AND ip = '[playerip]' "
+		if(pban != null)
+			pbansearch = "AND bantype = 'PERMABAN'"
+		if(tban != null)
+			tbansearch = "AND bantype = 'TEMPBAN'"
+		if(jpban != null)
+			jpbansearch = "AND bantype = 'JOB_PERMABAN'"
+		if(jtban != null)
+			jtbansearch = "AND bantype = 'JOB_TEMPBAN'"
 
-		var/DBQuery/select_query = dbcon.NewQuery("SELECT id, bantime, bantype, reason, job, duration, expiration_time, ckey, a_ckey, unbanned, unbanned_ckey, unbanned_datetime, edits FROM erro_ban WHERE 1 [playersearch] [adminsearch] ORDER BY bantime DESC")
+
+
+		var/DBQuery/select_query = dbcon.NewQuery("SELECT id, bantime, bantype, reason, job, duration, expiration_time, ckey, a_ckey, unbanned, unbanned_ckey, unbanned_datetime, edits, ip FROM erro_ban WHERE 1 [pbansearch] [tbansearch] [jpbansearch] [jtbansearch] [playersearch] [adminsearch] [playeripsearch] ORDER BY bantime DESC")
 		select_query.Execute()
 
 		while(select_query.NextRow())
@@ -358,6 +385,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 			var/unbanckey = select_query.item[11]
 			var/unbantime = select_query.item[12]
 			var/edits = select_query.item[13]
+			var/ip = select_query.item[14]
 
 			var/lcolor = blcolor
 			var/dcolor = bdcolor
@@ -385,6 +413,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 			output += "</tr>"
 			output += "<tr bgcolor='[lcolor]'>"
 			output += "<td align='center' colspan='5'><b>Reason: [(unbanned) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=reason;dbbanid=[banid]\">Edit</a>)"]</b> <cite>\"[reason]\"</cite></td>"
+			output += "<td align='center' colspan='5'><b>IP: [ip] </b></td>"
 			output += "</tr>"
 			if(edits)
 				output += "<tr bgcolor='[dcolor]'>"
@@ -403,4 +432,102 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 
 		output += "</table></div>"
 
+
+
+
+	else
+
+		var/DBQuery/select_query = dbcon.NewQuery("SELECT bantype, COUNT(*) FROM erro_ban GROUP BY bantype")
+		select_query.Execute()
+
+		while(select_query.NextRow())
+			var/bantype  = select_query.item[1]
+			var/count = select_query.item[2]
+
+
+			output +="<br><tr>"
+			output += "<td align='center'>[bantype]:[count] </td>"
+			output += "</tr>"
+		output += "</table></div>"
+
+/*
+		var/blcolor = "#ffeeee" //banned light
+		var/bdcolor = "#ffdddd" //banned dark
+		var/ulcolor = "#eeffee" //unbanned light
+		var/udcolor = "#ddffdd" //unbanned dark
+
+		output += "<table width='90%' bgcolor='#e3e3e3' cellpadding='5' cellspacing='0' align='center'>"
+		output += "<tr>"
+		output += "<th width='25%'><b>TYPE</b></th>"
+		output += "<th width='20%'><b>CKEY</b></th>"
+		output += "<th width='20%'><b>TIME APPLIED</b></th>"
+		output += "<th width='20%'><b>ADMIN</b></th>"
+		output += "<th width='15%'><b>OPTIONS</b></th>"
+		output += "</tr>"
+
+
+		var/DBQuery/select_query = dbcon.NewQuery("SELECT id, bantime, bantype, reason, job, duration, expiration_time, ckey, a_ckey, unbanned, unbanned_ckey, unbanned_datetime, edits, ip FROM erro_ban ORDER BY bantime DESC")
+		select_query.Execute()
+
+		while(select_query.NextRow())
+			var/banid = select_query.item[1]
+			var/bantime = select_query.item[2]
+			var/bantype  = select_query.item[3]
+			var/reason = select_query.item[4]
+			var/job = select_query.item[5]
+			var/duration = select_query.item[6]
+			var/expiration = select_query.item[7]
+			var/ckey = select_query.item[8]
+			var/ackey = select_query.item[9]
+			var/unbanned = select_query.item[10]
+			var/unbanckey = select_query.item[11]
+			var/unbantime = select_query.item[12]
+			var/edits = select_query.item[13]
+			var/ip = select_query.item[14]
+
+			var/lcolor = blcolor
+			var/dcolor = bdcolor
+			if(unbanned)
+				lcolor = ulcolor
+				dcolor = udcolor
+
+			var/typedesc =""
+			switch(bantype)
+				if("PERMABAN")
+					typedesc = "<font color='red'><b>PERMABAN</b></font>"
+				if("TEMPBAN")
+					typedesc = "<b>TEMPBAN</b><br><font size='2'>([duration] minutes [(unbanned) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>))"]<br>Expires [expiration]</font>"
+				if("JOB_PERMABAN")
+					typedesc = "<b>JOBBAN</b><br><font size='2'>([job])"
+				if("JOB_TEMPBAN")
+					typedesc = "<b>TEMP JOBBAN</b><br><font size='2'>([job])<br>([duration] minutes<br>Expires [expiration]"
+
+			output += "<tr bgcolor='[dcolor]'>"
+			output += "<td align='center'>[typedesc]</td>"
+			output += "<td align='center'><b>[ckey]</b></td>"
+			output += "<td align='center'>[bantime]</td>"
+			output += "<td align='center'><b>[ackey]</b></td>"
+			output += "<td align='center'>[(unbanned) ? "" : "<b><a href=\"byond://?src=\ref[src];dbbanedit=unban;dbbanid=[banid]\">Unban</a></b>"]</td>"
+			output += "</tr>"
+			output += "<tr bgcolor='[lcolor]'>"
+			output += "<td align='center' colspan='5'><b>Reason: [(unbanned) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=reason;dbbanid=[banid]\">Edit</a>)"]</b> <cite>\"[reason]\"</cite></td>"
+			output += "<td align='center'><b>IP:</b> [ip]</td>"
+			output += "</tr>"
+			if(edits)
+				output += "<tr bgcolor='[dcolor]'>"
+				output += "<td align='center' colspan='5'><b>EDITS</b></td>"
+				output += "</tr>"
+				output += "<tr bgcolor='[lcolor]'>"
+				output += "<td align='center' colspan='5'><font size='2'>[edits]</font></td>"
+				output += "</tr>"
+			if(unbanned)
+				output += "<tr bgcolor='[dcolor]'>"
+				output += "<td align='center' colspan='5' bgcolor=''><b>UNBANNED by admin [unbanckey] on [unbantime]</b></td>"
+				output += "</tr>"
+			output += "<tr>"
+			output += "<td colspan='5' bgcolor='white'>&nbsp</td>"
+			output += "</tr>"
+
+		output += "</table></div>"
+*/
 	usr << browse(output,"window=lookupbans;size=900x500")

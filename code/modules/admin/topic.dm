@@ -48,20 +48,17 @@
 				log_admin("[key_name(usr)] has spawned vox raiders.")
 				if(!src.makeVoxRaiders())
 					usr << "\red Unfortunately there weren't enough candidates available."
-	else if(href_list["dbsearchckey"] || href_list["dbsearchadmin"])
+
+	else if(href_list["dbsearchckey"] || href_list["dbsearchadmin"] || href_list["dbsearchip"] || href_list["dbpban"] || href_list["dbtban"] || href_list["dbjpban"] || href_list["dbjtban"])
 		var/adminckey = href_list["dbsearchadmin"]
 		var/playerckey = href_list["dbsearchckey"]
+		var/playerip = href_list["dbsearchip"]
+		var/pban = href_list["dbpban"]
+		var/tban = href_list["dbtban"]
+		var/jpban = href_list["dbjpban"]
+		var/jtban = href_list["dbjpban"]
 
-		DB_ban_panel(playerckey, adminckey)
-		return
-
-	else if(href_list["dbbanedit"])
-		var/banedit = href_list["dbbanedit"]
-		var/banid = text2num(href_list["dbbanid"])
-		if(!banedit || !banid)
-			return
-
-		DB_ban_edit(banid, banedit)
+		DB_ban_panel(playerckey, adminckey, playerip, pban, tban, jpban, jtban)
 		return
 
 	else if(href_list["dbbanaddtype"])
