@@ -199,7 +199,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		checking_connections = TRUE
 
 		for(var/connection/C in connections_to_check)
-			C.CheckPassSanity()
+			C.Cleanup()
 
 		checking_connections = FALSE
 
@@ -208,6 +208,17 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			connections_to_check_alternate = null
 		else
 			connections_to_check = list()
+
+	//Process zones.
+	if(.)
+		tick_progress = "zone/process()"
+	for(var/zone/Z in zones)
+		if(Z.last_update < current_cycle)
+			var/output = Z.process()
+			if(Z)
+				Z.last_update = current_cycle
+			if(. && Z && !output)
+				. = 0
 
 	//Ensure tiles still have zones.
 	if(.)
@@ -226,17 +237,6 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			tiles_to_reconsider_alternate = null
 		else
 			tiles_to_reconsider_zones = list()
-
-	//Process zones.
-	if(.)
-		tick_progress = "zone/process()"
-	for(var/zone/Z in zones)
-		if(Z.last_update < current_cycle)
-			var/output = Z.process()
-			if(Z)
-				Z.last_update = current_cycle
-			if(. && Z && !output)
-				. = 0
 
 	//Process fires.
 	if(.)

@@ -157,8 +157,8 @@
 			new/zone(list(src))
 
 	//Check pass sanity of the connections.
-	if("\ref[src]" in air_master.turfs_with_connections)
-		air_master.AddConnectionToCheck(air_master.turfs_with_connections["\ref[src]"])
+	if(src in air_master.turfs_with_connections)
+		air_master.AddConnectionToCheck(air_master.turfs_with_connections[src])
 
 	if(zone && CanPass(null, src, 0, 0))
 

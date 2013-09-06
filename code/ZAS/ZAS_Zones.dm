@@ -7,11 +7,15 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	var/rebuild = 0 //If 1, zone will be rebuilt on next process. Not sure if used.
 	var/datum/gas_mixture/air //The air contents of the zone.
 	var/list/contents //All the tiles that are contained in this zone.
-	var/list/connections // /connection objects which refer to connections with other zones, e.g. through a door.
-	var/list/connected_zones //Parallels connections, but lists zones to which this one is connected and the number
-							//of points they're connected at.
-	var/list/closed_connection_zones //Same as connected_zones, but for zones where the door or whatever is closed.
 	var/list/unsimulated_tiles // Any space tiles in this list will cause air to flow out.
+
+	var/list/connections //connection objects which refer to connections with other zones, e.g. through a door.
+	var/list/direct_connections //connections which directly connect two zones.
+
+	var/list/connected_zones //Parallels connections, but lists zones to which this one is connected and the number
+							 //of points they're connected at.
+	var/list/closed_connection_zones //Same as connected_zones, but for zones where the door or whatever is closed.
+
 	var/last_update = 0
 	var/progress = "nothing"
 
@@ -49,7 +53,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	zones.Add(src)
 
 
-	//LEGACY, DO NOT USE.  Use the SoftDelete proc.
+//DO NOT USE.  Use the SoftDelete proc.
 /zone/Del()
 	//Ensuring the zone list doesn't get clogged with null values.
 	for(var/turf/simulated/T in contents)
@@ -64,7 +68,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	. = ..()
 
 
-	//Handles deletion via garbage collection.
+//Handles deletion via garbage collection.
 /zone/proc/SoftDelete()
 	zones.Remove(src)
 	air = null
@@ -96,8 +100,15 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			T.zone.RemoveTurf(T)
 		contents += T
 		if(air)
+			air.oxygen = (air.oxygen * air.group_multiplier + T.oxygen) / (air.group_multiplier + 1)
+			air.nitrogen = (air.nitrogen * air.group_multiplier + T.nitrogen) / (air.group_multiplier + 1)
+			air.carbon_dioxide = (air.carbon_dioxide * air.group_multiplier + T.carbon_dioxide) / (air.group_multiplier + 1)
+			air.toxins = (air.toxins * air.group_multiplier + T.toxins) / (air.group_multiplier + 1)
+			air.temperature = (air.temperature * air.group_multiplier + T.temperature) / (air.group_multiplier + 1)
 			air.group_multiplier++
+
 		T.zone = src
+
 	else
 		if(!unsimulated_tiles)
 			unsimulated_tiles = list()
@@ -113,9 +124,19 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			return
 		contents -= T
 		if(air)
+			T.oxygen = air.oxygen
+			T.nitrogen = air.nitrogen
+			T.carbon_dioxide = air.carbon_dioxide
+			T.toxins = air.toxins
+			T.temperature = air.temperature
 			air.group_multiplier--
+
 		if(T.zone == src)
 			T.zone = null
+
+		if(!contents.len)
+			SoftDelete()
+
 	else if(unsimulated_tiles)
 		unsimulated_tiles -= T
 		if(!unsimulated_tiles.len)
@@ -224,17 +245,13 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 		progress = "problem with: ZMerge(), a couple of misc procs"
 
-		for(var/connection/C in connections)
-			//Check if the connection is valid first.
-			if(!C.Cleanup())
-				continue
+		if(length(direct_connections))
+			for(var/connection/C in connections)
 
-			//Do merging if conditions are met. Specifically, if there's a non-door connection
-			//to somewhere with space, the zones are merged regardless of equilibrium, to speed
-			//up spacing in areas with double-plated windows.
-			if(C && C.A.zone && C.B.zone)
-				//indirect = 2 is a direct connection.
-				if( C.indirect == 2 )
+				//Do merging if conditions are met. Specifically, if there's a non-door connection
+				//to somewhere with space, the zones are merged regardless of equilibrium, to speed
+				//up spacing in areas with double-plated windows.
+				if(C.A.zone && C.B.zone)
 					if(C.A.zone.air.compare(C.B.zone.air) || unsimulated_tiles)
 						ZMerge(C.A.zone,C.B.zone)
 
@@ -264,6 +281,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			//If that zone has already processed, skip it.
 			if(Z.last_update > last_update)
 				continue
+
 			if(air && Z.air)
 				if( abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta )
 					ShareHeat(air, Z.air, closed_connection_zones[Z])
@@ -455,69 +473,45 @@ proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 
 zone/proc/Rebuild()
 	//Choose a random turf and regenerate the zone from it.
-	var
-		turf/simulated/sample = locate() in contents
-		list/new_contents
-		problem = 0
+	var/list/new_contents
+	var/list/new_unsimulated
 
-	//
-	var/list/turfs_to_consider = contents.Copy()
+	var/list/turfs_needing_zones = list()
 
-	while(!sample || !sample.CanPass(null, sample, 1.5, 1))
-		if(sample)
-			turfs_to_consider.Remove(sample)
-		sample = locate() in turfs_to_consider
-		if(!sample)
-			break
+	var/list/zones_to_check_connections = list(src)
 
-	if(!istype(sample) || !sample.CanPass(null, sample, 1.5, 1)) //Not a single valid turf.
-		for(var/turf/simulated/T in contents)
-			air_master.tiles_to_update |= T
+	if(!locate(/turf/simulated/floor) in contents)
+		for(var/turf/simulated/turf in contents)
+			air_master.ReconsiderTileZone(turf)
 		return SoftDelete()
 
-	new_contents = FloodFill(sample)
+	new_contents = FloodFill(locate(/turf/simulated/floor) in contents)
 
-	var/list/new_unsimulated = ( unsimulated_tiles ? unsimulated_tiles : list() )
+	new_unsimulated = ( unsimulated_tiles ? unsimulated_tiles : list() )
 
+	//Now, we have allocated the new turfs into proper lists, and we can start actually rebuilding.
+
+	//If something isn't carried over, it will need a new zone.
+	for(var/turf/T in contents)
+		if(!(T in new_contents))
+			RemoveTurf(T)
+			turfs_needing_zones += T
+
+	//Handle addition of new turfs
 	for(var/turf/S in new_contents)
 		if(!istype(S, /turf/simulated))
 			new_unsimulated |= S
 			new_contents.Remove(S)
 
-	if(contents.len != new_contents.len)
-		problem = 1
+		//If something new is added, we need to deal with it seperately.
+		else if(!(S in contents) && istype(S, /turf/simulated))
+			if(!(S.zone in zones_to_check_connections))
+				zones_to_check_connections += S.zone
 
-	//If something isn't carried over, there was a complication.
-	for(var/turf/T in contents)
-		if(!(T in new_contents))
-			T.zone = null
-			problem = 1
+			S.zone.RemoveTurf(S)
+			AddTurf(S)
 
-	if(problem)
-		//Build some new zones for stuff that wasn't included.
-		var/list/turf/simulated/rebuild_turfs = contents - new_contents
-		var/list/turf/simulated/reconsider_turfs = list()
-		contents = new_contents
-		for(var/turf/simulated/T in rebuild_turfs)
-			if(!T.zone && T.CanPass(null, T, 1.5, 1))
-				var/zone/Z = new /zone(T)
-				Z.air.copy_from(air)
-			else
-				reconsider_turfs |= T
-		for(var/turf/simulated/T in reconsider_turfs)
-			if(!T.zone && T.CanPass(null, T, 1.5, 1))
-				var/zone/Z = new /zone(T)
-				Z.air.copy_from(air)
-			else if(!T in air_master.tiles_to_update)
-				air_master.tiles_to_update.Add(T)
-
-	for(var/turf/simulated/T in contents)
-		if(T.zone && T.zone != src)
-			T.zone.RemoveTurf(T)
-			T.zone = src
-		else if(!T.zone)
-			T.zone = src
-	air.group_multiplier = contents.len
+	//Handle the addition of new unsimulated tiles.
 	unsimulated_tiles = null
 
 	if(new_unsimulated.len)
@@ -529,20 +523,12 @@ zone/proc/Rebuild()
 				if(istype(T) && T.zone && S.CanPass(null, T, 0, 0))
 					T.zone.AddTurf(S)
 
-//UNUSED
-/*
-zone/proc/connected_zones()
-	//A legacy proc for getting connected zones.
-	. = list()
-	for(var/connection/C in connections)
-		var/zone/Z
-		if(C.A.zone == src)
-			Z = C.B.zone
-		else
-			Z = C.A.zone
+	//Finally, handle the orphaned turfs
 
-		if(Z in .)
-			.[Z]++
-		else
-			. += Z
-			.[Z] = 1*/
+	for(var/turf/simulated/T in turfs_needing_zones)
+		if(!T.zone)
+			zones_to_check_connections += new /zone(T)
+
+	for(var/zone/zone in zones_to_check_connections)
+		for(var/connection/C in zone.connections)
+			C.Cleanup()
