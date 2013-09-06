@@ -494,6 +494,7 @@ datum/objective/steal
 		"the hypospray" = /obj/item/weapon/reagent_containers/hypospray,
 		"the captain's pinpointer" = /obj/item/weapon/pinpointer,
 		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
+		"a laser pointer" = /obj/item/device/laser_pointer,
 	)
 
 	var/global/possible_items_special[] = list(
