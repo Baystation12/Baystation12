@@ -183,6 +183,31 @@
 						del(C)
 #undef INACTIVITY_KICK
 
+#define DISCONNECTED_DELETE	3000	//5 minutes in ticks (approx)
+/world/proc/KickDisconnectedClients()
+	spawn(-1)
+		set background = 1
+		while(1)
+			sleep(DISCONNECTED_DELETE)
+			for(var/mob/living/L in mob_list)
+				if(iscarbon(L) && !ismonkey(L) && !isslime(L))
+					var/mob/living/carbon/C = L
+					if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0)
+						sleep(600)
+						if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0)
+							job_master.FreeRole(C.job)
+							message_admins("<b>[C.name]</b> ([C.ckey]), the [C.job] has been freed due to (<font color='#ffcc00'><b>Client disconnect for 5 minutes</b></font>)\n")
+							for(var/obj/item/W in C)
+								C.drop_from_inventory(W)
+							del(C)
+						else if(!C.key && C.stat != DEAD && C.brain_op_stage!=4.0)
+							job_master.FreeRole(C.job)
+							message_admins("<b>[C.name]</b> ([C.ckey]), the [C.job] has been freed due to (<font color='#ffcc00'><b>Client quit BYOND</b></font>)\n")
+							for(var/obj/item/W in C)
+								C.drop_from_inventory(W)
+							del(C)
+#undef DISCONNECTED_DELETE
+
 
 /world/proc/load_mode()
 	var/list/Lines = file2list("data/mode.txt")
