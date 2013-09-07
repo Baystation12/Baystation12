@@ -96,6 +96,8 @@
 			ToRban_autoupdate()
 		if(config.kick_inactive)
 			KickInactiveClients()
+			KickDisconnectedClients()
+
 
 #undef RECOMMENDED_VERSION
 
@@ -189,10 +191,9 @@
 		set background = 1
 		while(1)
 			sleep(DISCONNECTED_DELETE)
-			for(var/mob/living/L in mob_list)
-				if(iscarbon(L) && !ismonkey(L) && !isslime(L))
-					var/mob/living/carbon/C = L
-					if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0)
+			for(var/mob/living/carbon/C in mob_list)
+				if(!ismonkey(C) && !isslime(C))
+					if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0 && C.lastKnownIP)
 						sleep(600)
 						if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0)
 							job_master.FreeRole(C.job)
@@ -207,7 +208,6 @@
 								C.drop_from_inventory(W)
 							del(C)
 #undef DISCONNECTED_DELETE
-
 
 /world/proc/load_mode()
 	var/list/Lines = file2list("data/mode.txt")
