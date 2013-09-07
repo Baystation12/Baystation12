@@ -100,11 +100,6 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			T.zone.RemoveTurf(T)
 		contents += T
 		if(air)
-			air.oxygen = (air.oxygen * air.group_multiplier + T.oxygen) / (air.group_multiplier + 1)
-			air.nitrogen = (air.nitrogen * air.group_multiplier + T.nitrogen) / (air.group_multiplier + 1)
-			air.carbon_dioxide = (air.carbon_dioxide * air.group_multiplier + T.carbon_dioxide) / (air.group_multiplier + 1)
-			air.toxins = (air.toxins * air.group_multiplier + T.toxins) / (air.group_multiplier + 1)
-			air.temperature = (air.temperature * air.group_multiplier + T.temperature) / (air.group_multiplier + 1)
 			air.group_multiplier++
 
 		T.zone = src
@@ -124,11 +119,6 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			return
 		contents -= T
 		if(air)
-			T.oxygen = air.oxygen
-			T.nitrogen = air.nitrogen
-			T.carbon_dioxide = air.carbon_dioxide
-			T.toxins = air.toxins
-			T.temperature = air.temperature
 			air.group_multiplier--
 
 		if(T.zone == src)
@@ -470,8 +460,102 @@ proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
   ///////////////////
  //Zone Rebuilding//
 ///////////////////
+//Used for updating zone geometry when a zone is cut into two parts.
 
 zone/proc/Rebuild()
+	var/list/new_zone_contents = IsolateContents()
+	if(new_zone_contents.len == 1)
+		return
+
+	var/list/current_contents
+	var/list/new_zones = list()
+
+	contents = new_zone_contents[1]
+	air.group_multiplier = contents.len
+
+	for(var/identifier in 2 to new_zone_contents.len)
+		current_contents = new_zone_contents[identifier]
+		var/zone/new_zone = new (current_contents)
+		new_zone.air.copy_from(air)
+		new_zones += new_zone
+
+	for(var/connection/connection in connections)
+		connection.Cleanup()
+
+	var/turf/simulated/adjacent
+
+	for(var/turf/unsimulated in unsimulated_tiles)
+		for(var/direction in cardinal)
+			adjacent = get_step(unsimulated, direction)
+
+			if(istype(adjacent) && adjacent.CanPass(null, unsimulated, 0, 0))
+				for(var/zone/zone in new_zones)
+					if(adjacent in zone)
+						zone.AddTurf(unsimulated)
+
+
+//Implements a two-pass connected component labeling algorithm to determine if the zone is, in fact, split.
+
+/zone/proc/IsolateContents()
+	var/turf/simulated/current
+	var/turf/simulated/adjacent
+	var/list/current_adjacents = list()
+	var/adjacent_id
+	var/lowest_id
+
+	var/list/identical_ids = list()
+	var/turfs = contents.Copy()
+	var/current_identifier = 1
+
+	for(current in turfs)
+		lowest_id = null
+		current_adjacents = list()
+
+		for(var/direction in current.air_check_directions)
+			adjacent = get_step(current, direction)
+			if(adjacent in turfs)
+				current_adjacents += adjacent
+				adjacent_id = turfs[adjacent]
+
+				if(adjacent_id && (!lowest_id || adjacent_id < lowest_id))
+					lowest_id = adjacent_id
+
+		if(!lowest_id)
+			lowest_id = current_identifier++
+
+		for(adjacent in current_adjacents)
+			adjacent_id = turfs[adjacent]
+			if(adjacent_id)
+				if(identical_ids.len < adjacent_id)
+					identical_ids.len = adjacent_id
+
+				identical_ids[adjacent_id] = lowest_id
+
+			turfs[adjacent] = lowest_id
+		turfs[current] = lowest_id
+
+	var/list/final_arrangement = list()
+
+	for(current in turfs)
+		current_identifier = identical_ids[turfs[current]]
+
+		if( current_identifier > final_arrangement.len )
+			final_arrangement.len = current_identifier
+			final_arrangement[current_identifier] = list(current)
+
+		else
+			final_arrangement[current_identifier] += current
+
+	//lazy but fast
+	final_arrangement.Remove(null)
+
+	return final_arrangement
+
+
+/*
+	if(!RequiresRebuild())
+		return
+
 	//Choose a random turf and regenerate the zone from it.
 	var/list/new_contents
 	var/list/new_unsimulated
@@ -485,7 +569,13 @@ zone/proc/Rebuild()
 			air_master.ReconsiderTileZone(turf)
 		return SoftDelete()
 
-	new_contents = FloodFill(locate(/turf/simulated/floor) in contents)
+	var/turfs_to_ignore = list()
+	if(direct_connections)
+		for(var/connection/connection in direct_connections)
+			if(connection.A.zone != src)
+				turfs_to_ignore += A
+			else if(connection.B.zone != src)
+				turfs_to_ignore += B
 
 	new_unsimulated = ( unsimulated_tiles ? unsimulated_tiles : list() )
 
@@ -531,4 +621,5 @@ zone/proc/Rebuild()
 
 	for(var/zone/zone in zones_to_check_connections)
 		for(var/connection/C in zone.connections)
-			C.Cleanup()
+			C.Cleanup()*/
+
