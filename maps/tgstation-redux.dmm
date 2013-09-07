@@ -4674,7 +4674,7 @@
 "bLT" = (/obj/effect/landmark/start{name = "Blueshield"},/turf/simulated/floor{icon_state = "bcarpet05"},/area/storage/tech)
 "bLU" = (/obj/machinery/requests_console{name = "Blueshield Requests Console"; pixel_x = 30},/turf/simulated/floor/wood,/area/storage/tech)
 "bLV" = (/obj/machinery/requests_console{pixel_x = -30},/turf/simulated/floor/wood,/area/storage/tech)
-"bLW" = (/obj/effect/landmark/start{name = "Centcom Rep"},/turf/simulated/floor/carpet{icon_state = "carpetnoconnect"},/area/storage/tech)
+"bLW" = (/obj/effect/landmark/start{name = "Nanotrasen Representative"},/turf/simulated/floor/carpet{icon_state = "carpetnoconnect"},/area/storage/tech)
 "bLX" = (/obj/structure/stool/bed/chair/office/dark,/turf/simulated/floor/carpet{icon_state = "carpetnoconnect"},/area/storage/tech)
 "bLY" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/wood,/area/storage/tech)
 "bLZ" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden,/obj/structure/disposalpipe/segment,/turf/simulated/floor{dir = 8; icon_state = "cautioncorner"},/area/hallway/primary/aft)
