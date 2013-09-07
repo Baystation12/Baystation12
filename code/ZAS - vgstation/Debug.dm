@@ -69,10 +69,10 @@ zone/proc/DebugDisplay(client/client)
 		var/list/current_zone_images = list()
 
 		for(var/turf/T in contents)
-			current_zone_images += image('debug_group.dmi', T, null, TURF_LAYER)
+			current_zone_images += image('icons/misc/debug_group.dmi', T, null, TURF_LAYER)
 
 		for(var/turf/space/S in unsimulated_tiles)
-			current_zone_images += image('debug_space.dmi', S, null, TURF_LAYER)
+			current_zone_images += image('icons/misc/debug_space.dmi', S, null, TURF_LAYER)
 
 		client << "<u>Zone Air Contents</u>"
 		client << "Oxygen: [air.oxygen]"
