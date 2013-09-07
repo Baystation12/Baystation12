@@ -2,7 +2,7 @@
 //Contents: FloodFill, ZMerge, ZConnect
 
 //Floods outward from an initial turf to fill everywhere it's zone would reach.
-proc/FloodFill(turf/simulated/start, var/list/turfs_to_skip = list())
+proc/FloodFill(turf/simulated/start)
 
 	if(!istype(start))
 		return list()
@@ -10,7 +10,7 @@ proc/FloodFill(turf/simulated/start, var/list/turfs_to_skip = list())
 	//The list of tiles waiting to be evaulated.
 	var/list/open = list(start)
 	//The list of tiles which have been evaulated.
-	var/list/closed = turfs_to_skip
+	var/list/closed = list()
 
 	//Loop through the turfs in the open list in order to find which adjacent turfs should be added to the zone.
 	while(open.len)
@@ -157,7 +157,7 @@ proc/ZConnect(turf/simulated/A,turf/simulated/B)
 	if(!A.zone || !B.zone) return
 	if(A.zone == B.zone) return
 
-	if(A.zone.air.compare(B.zone.air))
+	if(A.CanPass(null, B, 0, 0) && A.zone.air.compare(B.zone.air))
 		return ZMerge(A.zone,B.zone)
 
 	//Ensure the connection isn't already made.
