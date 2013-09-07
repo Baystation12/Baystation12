@@ -106,6 +106,7 @@ obj/structure/door_assembly
 		dir = EAST
 		var/width = 1
 
+
 /*Temporary until we get sprites.
 		glass_type = "/multi_tile/glass"
 		airlock_type = "/multi_tile/maint"

@@ -89,8 +89,8 @@ zone/proc/DebugDisplay(client/client)
 
 		for(var/connection/C in connections)
 			client << "\ref[C] [C.A] --> [C.B] [(C.indirect?"Open":"Closed")]"
-			current_zone_images += image('debug_connect.dmi', C.A, null, TURF_LAYER)
-			current_zone_images += image('debug_connect.dmi', C.B, null, TURF_LAYER)
+			current_zone_images += image('icons/misc/debug_connect.dmi', C.A, null, TURF_LAYER)
+			current_zone_images += image('icons/misc/debug_connect.dmi', C.B, null, TURF_LAYER)
 
 		client << "Connected Zones:"
 		for(var/zone/zone in connected_zones)
