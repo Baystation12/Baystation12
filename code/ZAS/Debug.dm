@@ -148,8 +148,6 @@ client/proc/TestZASRebuild()
 	var/list/turfs = current_zone.contents.Copy()
 	var/current_identifier = 1
 
-	src << "[turfs[1]] = [turfs[turfs[1]]]"
-
 	for(var/turf/simulated/current in turfs)
 		lowest_id = null
 		current_adjacents = list()
@@ -182,6 +180,8 @@ client/proc/TestZASRebuild()
 
 				sleep(5)
 
+		if(turfs[current])
+			current.overlays += overlays[turfs[current]]
 		turfs[current] = lowest_id
 		current.overlays += overlays[lowest_id]
 		sleep(5)
@@ -204,7 +204,7 @@ client/proc/TestZASRebuild()
 	//lazy but fast
 	final_arrangement.Remove(null)
 
-	src << final_arrangement.len
+	src << "There are [final_arrangement.len] unique segments."
 
 	for(var/turf/current in turfs)
 		current.overlays -= overlays
