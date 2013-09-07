@@ -155,9 +155,9 @@ client/proc/TestZASRebuild()
 		current_adjacents = list()
 
 		for(var/direction in cardinal)
-			if( !(current.air_check_directions & direction))
-				continue
 			var/turf/simulated/adjacent = get_step(current, direction)
+			if(!current.ZAirPass(adjacent))
+				continue
 			if(turfs.Find(adjacent))
 				current_adjacents += adjacent
 				adjacent_id = turfs[adjacent]
