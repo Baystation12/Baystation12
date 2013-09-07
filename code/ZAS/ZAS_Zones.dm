@@ -497,22 +497,22 @@ zone/proc/Rebuild()
 //Implements a two-pass connected component labeling algorithm to determine if the zone is, in fact, split.
 
 /zone/proc/IsolateContents()
-	var/turf/simulated/current
-	var/turf/simulated/adjacent
 	var/list/current_adjacents = list()
 	var/adjacent_id
 	var/lowest_id
 
 	var/list/identical_ids = list()
-	var/turfs = contents.Copy()
+	var/list/turfs = contents.Copy()
 	var/current_identifier = 1
 
-	for(current in turfs)
+	for(var/turf/simulated/current in turfs)
 		lowest_id = null
 		current_adjacents = list()
 
-		for(var/direction in current.air_check_directions)
-			adjacent = get_step(current, direction)
+		for(var/direction in cardinal)
+			if( !(current.air_check_directions & direction))
+				continue
+			var/turf/simulated/adjacent = get_step(current, direction)
 			if(adjacent in turfs)
 				current_adjacents += adjacent
 				adjacent_id = turfs[adjacent]
@@ -522,21 +522,19 @@ zone/proc/Rebuild()
 
 		if(!lowest_id)
 			lowest_id = current_identifier++
+			identical_ids += lowest_id
 
-		for(adjacent in current_adjacents)
+		for(var/turf/simulated/adjacent in current_adjacents)
 			adjacent_id = turfs[adjacent]
-			if(adjacent_id)
-				if(identical_ids.len < adjacent_id)
-					identical_ids.len = adjacent_id
-
-				identical_ids[adjacent_id] = lowest_id
-
-			turfs[adjacent] = lowest_id
+			if(adjacent_id != lowest_id)
+				if(adjacent_id)
+					identical_ids[adjacent_id] = lowest_id
+				turfs[adjacent] = lowest_id
 		turfs[current] = lowest_id
 
 	var/list/final_arrangement = list()
 
-	for(current in turfs)
+	for(var/turf/simulated/current in turfs)
 		current_identifier = identical_ids[turfs[current]]
 
 		if( current_identifier > final_arrangement.len )
