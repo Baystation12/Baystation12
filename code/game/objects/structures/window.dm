@@ -316,21 +316,9 @@
 
 //This proc has to do with airgroups and atmos, it has nothing to do with smoothwindows, that's update_nearby_tiles().
 /obj/structure/window/proc/update_nearby_tiles(need_rebuild)
-	if(!air_master) return 0
-	if(!dir in cardinal)
-		var/turf/simulated/source = get_turf(src)
-		if(istype(source))
-			air_master.tiles_to_update |= source
-			for(var/dir in cardinal)
-				var/turf/simulated/target = get_step(source,dir)
-				if(istype(target)) air_master.tiles_to_update |= target
-		return 1
-
-	var/turf/simulated/source = get_turf(src)
-	var/turf/simulated/target = get_step(source,dir)
-
-	if(istype(source)) air_master.tiles_to_update |= source
-	if(istype(target)) air_master.tiles_to_update |= target
+	if(!air_master)
+		return 0
+	air_master.AddTurfToUpdate(get_turf(src))
 
 	return 1
 
