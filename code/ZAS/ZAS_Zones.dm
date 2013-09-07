@@ -236,7 +236,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 		progress = "problem with: ZMerge(), a couple of misc procs"
 
 		if(length(direct_connections))
-			for(var/connection/C in connections)
+			for(var/connection/C in direct_connections)
 
 				//Do merging if conditions are met. Specifically, if there's a non-door connection
 				//to somewhere with space, the zones are merged regardless of equilibrium, to speed
