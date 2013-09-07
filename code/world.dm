@@ -185,7 +185,7 @@
 						del(C)
 #undef INACTIVITY_KICK
 
-#define DISCONNECTED_DELETE	3000	//5 minutes in ticks (approx)
+#define DISCONNECTED_DELETE	6000	//10 minutes in ticks (approx)
 /world/proc/KickDisconnectedClients()
 	spawn(-1)
 		set background = 1
@@ -197,7 +197,7 @@
 						sleep(600)
 						if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0)
 							job_master.FreeRole(C.job)
-							message_admins("<b>[C.name]</b> ([C.ckey]), the [C.job] has been freed due to (<font color='#ffcc00'><b>Client disconnect for 5 minutes</b></font>)\n")
+							message_admins("<b>[C.name]</b> ([C.ckey]), the [C.job] has been freed due to (<font color='#ffcc00'><b>Client disconnect for 10 minutes</b></font>)\n")
 							for(var/obj/item/W in C)
 								C.drop_from_inventory(W)
 							del(C)
