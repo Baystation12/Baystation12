@@ -1300,7 +1300,6 @@
 #include "code\WorkInProgress\ZomgPonies\clothing\civilian.dm"
 #include "code\WorkInProgress\ZomgPonies\mobs\pony.dm"
 #include "code\WorkInProgress\ZomgPonies\mobs\metroid\powers.dm"
-#include "code\WorkInProgress\ZomgPonies\objects\doccart.dm"
 #include "code\ZAS - vgstation\Airflow.dm"
 #include "code\ZAS - vgstation\Connection.dm"
 #include "code\ZAS - vgstation\Debug.dm"
