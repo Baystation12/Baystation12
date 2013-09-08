@@ -418,24 +418,24 @@
 		else
 			dat += "Add to buffer:<BR>"
 			for(var/datum/reagent/G in R.reagent_list)
-				dat += "[G.name] , [G.volume] Units - "
-				dat += "<A href='?src=\ref[src];analyze=1;desc=[G.description];name=[G.name]'>(Analyze)</A> "
-				dat += "<A href='?src=\ref[src];add=[G.id];amount=1'>(1)</A> "
-				dat += "<A href='?src=\ref[src];add=[G.id];amount=5'>(5)</A> "
-				dat += "<A href='?src=\ref[src];add=[G.id];amount=10'>(10)</A> "
-				dat += "<A href='?src=\ref[src];add=[G.id];amount=[G.volume]'>(All)</A> "
-				dat += "<A href='?src=\ref[src];addcustom=[G.id]'>(Custom)</A><BR>"
+				dat += {"[G.name] , [G.volume] Units -
+						<A href='?src=\ref[src];analyze=1;desc=[G.description];name=[G.name]'>(Analyze)</A>
+						<A href='?src=\ref[src];add=[G.id];amount=1'>(1)</A>
+						<A href='?src=\ref[src];add=[G.id];amount=5'>(5)</A>
+						<A href='?src=\ref[src];add=[G.id];amount=10'>(10)</A>
+						<A href='?src=\ref[src];add=[G.id];amount=[G.volume]'>(All)</A>
+						<A href='?src=\ref[src];addcustom=[G.id]'>(Custom)</A><BR>"}
 
 		dat += "<HR>Transfer to <A href='?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
 		if(reagents.total_volume)
 			for(var/datum/reagent/N in reagents.reagent_list)
-				dat += "[N.name] , [N.volume] Units - "
-				dat += "<A href='?src=\ref[src];analyze=1;desc=[N.description];name=[N.name]'>(Analyze)</A> "
-				dat += "<A href='?src=\ref[src];remove=[N.id];amount=1'>(1)</A> "
-				dat += "<A href='?src=\ref[src];remove=[N.id];amount=5'>(5)</A> "
-				dat += "<A href='?src=\ref[src];remove=[N.id];amount=10'>(10)</A> "
-				dat += "<A href='?src=\ref[src];remove=[N.id];amount=[N.volume]'>(All)</A> "
-				dat += "<A href='?src=\ref[src];removecustom=[N.id]'>(Custom)</A><BR>"
+				dat += {"[N.name] , [N.volume] Units -
+						<A href='?src=\ref[src];analyze=1;desc=[N.description];name=[N.name]'>(Analyze)</A>
+						<A href='?src=\ref[src];remove=[N.id];amount=1'>(1)</A>
+						<A href='?src=\ref[src];remove=[N.id];amount=5'>(5)</A>
+						<A href='?src=\ref[src];remove=[N.id];amount=10'>(10)</A>
+						<A href='?src=\ref[src];remove=[N.id];amount=[N.volume]'>(All)</A>
+						<A href='?src=\ref[src];removecustom=[N.id]'>(Custom)</A><BR>"}
 		else
 			dat += "Empty<BR>"
 		if(!condi)
@@ -661,11 +661,11 @@
 							if(!D)
 								CRASH("We weren't able to get the advance disease from the archive.")
 
-							dat += "<b>Disease Agent:</b> [D?"[D.agent] - <A href='?src=\ref[src];create_virus_culture=[disease_creation]'>Create virus culture bottle</A>":"none"]<BR>"
-							dat += "<b>Common name:</b> [(D.name||"none")]<BR>"
-							dat += "<b>Description: </b> [(D.desc||"none")]<BR>"
-							dat += "<b>Spread:</b> [(D.spread||"none")]<BR>"
-							dat += "<b>Possible cure:</b> [(D.cure||"none")]<BR><BR>"
+							dat += {"<b>Disease Agent:</b> [D?"[D.agent] - <A href='?src=\ref[src];create_virus_culture=[disease_creation]'>Create virus culture bottle</A>":"none"]<BR>
+									<b>Common name:</b> [(D.name||"none")]<BR>
+									<b>Description: </b> [(D.desc||"none")]<BR>
+									<b>Spread:</b> [(D.spread||"none")]<BR>
+									<b>Possible cure:</b> [(D.cure||"none")]<BR><BR>"}
 
 							if(istype(D, /datum/disease/advance))
 								var/datum/disease/advance/A = D

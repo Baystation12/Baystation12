@@ -226,11 +226,13 @@
 
 	if(mob.control_object)	Move_object(direct)
 
-	if(isobserver(mob))	return mob.Move(n,direct)
+	if(world.time < move_delay)  return
 
-	if(moving)	return 0
+	if(isAI(mob))  return AIMove(n,direct,mob)
 
-	if(world.time < move_delay)	return
+	if(!isliving(mob))  return mob.Move(n,direct)
+
+	if(moving)  return 0
 
 	if(!mob)	return
 
@@ -241,7 +243,6 @@
 
 	if(mob.stat==2)	return
 
-	if(isAI(mob))	return AIMove(n,direct,mob)
 
 	if(mob.monkeyizing)	return//This is sota the goto stop mobs from moving var
 

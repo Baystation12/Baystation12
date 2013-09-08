@@ -37,11 +37,11 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	var/dat = "<HEAD><TITLE>Library Visitor</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
 	switch(screenstate)
 		if(0)
-			dat += "<h2>Search Settings</h2><br>"
-			dat += "<A href='?src=\ref[src];settitle=1'>Filter by Title: [title]</A><BR>"
-			dat += "<A href='?src=\ref[src];setcategory=1'>Filter by Category: [category]</A><BR>"
-			dat += "<A href='?src=\ref[src];setauthor=1'>Filter by Author: [author]</A><BR>"
-			dat += "<A href='?src=\ref[src];search=1'>\[Start Search\]</A><BR>"
+			dat += {"<h2>Search Settings</h2><br>
+					<A href='?src=\ref[src];settitle=1'>Filter by Title: [title]</A><BR>
+					<A href='?src=\ref[src];setcategory=1'>Filter by Category: [category]</A><BR>"
+					<A href='?src=\ref[src];setauthor=1'>Filter by Author: [author]</A><BR>
+					<A href='?src=\ref[src];search=1'>\[Start Search\]</A><BR>"}
 		if(1)
 			establish_old_db_connection()
 			if(!dbcon_old.IsConnected())
@@ -138,12 +138,12 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	switch(screenstate)
 		if(0)
 			// Main Menu
-			dat += "<A href='?src=\ref[src];switchscreen=1'>1. View General Inventory</A><BR>"
-			dat += "<A href='?src=\ref[src];switchscreen=2'>2. View Checked Out Inventory</A><BR>"
-			dat += "<A href='?src=\ref[src];switchscreen=3'>3. Check out a Book</A><BR>"
-			dat += "<A href='?src=\ref[src];switchscreen=4'>4. Connect to External Archive</A><BR>"
-			dat += "<A href='?src=\ref[src];switchscreen=5'>5. Upload New Title to Archive</A><BR>"
-			dat += "<A href='?src=\ref[src];switchscreen=6'>6. Print a Bible</A><BR>"
+			dat += {"<A href='?src=\ref[src];switchscreen=1'>1. View General Inventory</A><BR>
+					<A href='?src=\ref[src];switchscreen=2'>2. View Checked Out Inventory</A><BR>
+					<A href='?src=\ref[src];switchscreen=3'>3. Check out a Book</A><BR>
+					<A href='?src=\ref[src];switchscreen=4'>4. Connect to External Archive</A><BR>
+					<A href='?src=\ref[src];switchscreen=5'>5. Upload New Title to Archive</A><BR>
+					<A href='?src=\ref[src];switchscreen=6'>6. Print a Bible</A><BR>"}
 			if(src.emagged)
 				dat += "<A href='?src=\ref[src];switchscreen=7'>7. Access the Forbidden Lore Vault</A><BR>"
 			if(src.arcanecheckout)
@@ -177,16 +177,16 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			dat += "<A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"
 		if(3)
 			// Check Out a Book
-			dat += "<h3>Check Out a Book</h3><BR>"
-			dat += "Book: [src.buffer_book] "
-			dat += "<A href='?src=\ref[src];editbook=1'>\[Edit\]</A><BR>"
-			dat += "Recipient: [src.buffer_mob] "
-			dat += "<A href='?src=\ref[src];editmob=1'>\[Edit\]</A><BR>"
-			dat += "Checkout Date : [world.time/600]<BR>"
-			dat += "Due Date: [(world.time + checkoutperiod)/600]<BR>"
-			dat += "(Checkout Period: [checkoutperiod] minutes) (<A href='?src=\ref[src];increasetime=1'>+</A>/<A href='?src=\ref[src];decreasetime=1'>-</A>)"
-			dat += "<A href='?src=\ref[src];checkout=1'>(Commit Entry)</A><BR>"
-			dat += "<A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"
+			dat += {"<h3>Check Out a Book</h3><BR>
+					Book: [src.buffer_book]
+					<A href='?src=\ref[src];editbook=1'>\[Edit\]</A><BR>
+					Recipient: [src.buffer_mob]
+					<A href='?src=\ref[src];editmob=1'>\[Edit\]</A><BR>
+					Checkout Date : [world.time/600]<BR>
+					Due Date: [(world.time + checkoutperiod)/600]<BR>
+					(Checkout Period: [checkoutperiod] minutes) (<A href='?src=\ref[src];increasetime=1'>+</A>/<A href='?src=\ref[src];decreasetime=1'>-</A>)
+					<A href='?src=\ref[src];checkout=1'>(Commit Entry)</A><BR>
+					<A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"}
 		if(4)
 			dat += "<h3>External Archive</h3>"
 			establish_old_db_connection()

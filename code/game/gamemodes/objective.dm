@@ -571,9 +571,10 @@ datum/objective/steal
 						if(istype(M, /mob/living/silicon/ai) && M.stat != 2) //See if any AI's are alive inside that card.
 							return 1
 
-				for(var/obj/item/clothing/suit/space/space_ninja/S in all_items) //Let an AI downloaded into a space ninja suit count
+/*				for(var/obj/item/clothing/suit/space/space_ninja/S in all_items) //Let an AI downloaded into a space ninja suit count
 					if(S.AI && S.AI.stat != 2)
 						return 1
+*/
 				for(var/mob/living/silicon/ai/ai in world)
 					if(istype(ai.loc, /turf))
 						var/area/check_area = get_area(ai)
@@ -608,7 +609,7 @@ datum/objective/download
 			return 0
 		if(!owner.current || owner.current.stat == 2)
 			return 0
-		if(!(istype(owner.current:wear_suit, /obj/item/clothing/suit/space/space_ninja)&&owner.current:wear_suit:s_initialized))
+/*		if(!(istype(owner.current:wear_suit, /obj/item/clothing/suit/space/space_ninja)&&owner.current:wear_suit:s_initialized))
 			return 0
 		var/current_amount
 		var/obj/item/clothing/suit/space/space_ninja/S = owner.current:wear_suit
@@ -618,7 +619,7 @@ datum/objective/download
 			for(var/datum/tech/current_data in S.stored_research)
 				if(current_data.level>1)	current_amount+=(current_data.level-1)
 		if(current_amount<target_amount)	return 0
-		return 1
+		return 1*/
 
 
 

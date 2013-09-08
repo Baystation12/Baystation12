@@ -374,6 +374,9 @@
 		adjustBruteLoss(60)
 		updatehealth()
 		return 1
+	else
+		gib()
+		return 1
 	return 0
 
 // this function shows information about the malf_ai gameplay type in the status screen
@@ -942,12 +945,12 @@
 			var/obj/item/broken_device = cell_component.wrapped
 			user << "You remove \the [broken_device]."
 			user.put_in_active_hand(broken_device)
-
+/*
 	if(ishuman(user))
 		if(istype(user:gloves, /obj/item/clothing/gloves/space_ninja)&&user:gloves:candrain&&!user:gloves:draining)
 			call(/obj/item/clothing/gloves/space_ninja/proc/drain)("CYBORG",src,user:wear_suit)
 			return
-
+*/
 /mob/living/silicon/robot/proc/allowed(mob/M)
 	//check if it doesn't require any access at all
 	if(check_access(null))
