@@ -762,6 +762,7 @@ client
 
 		if(H.set_species(new_species))
 			usr << "Set species of [H] to [H.species]."
+			H.regenerate_icons()
 		else
 			usr << "Failed! Something went wrong."
 

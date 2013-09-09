@@ -9,7 +9,6 @@
 	var/icon_gib = null	//We only try to show a gibbing animation if this exists.
 
 	var/list/speak = list()
-	var/list/speak_emote = list()//	Emotes while speaking IE: Ian [emote], [text] -- Ian barks, "WOOF!". Spoken text is generated from the speak variable.
 	var/speak_chance = 0
 	var/list/emote_hear = list()	//Hearable emotes
 	var/list/emote_see = list()		//Unlike speak_emote, the list of things in this variable only show by themselves with no spoken text. IE: Ian barks, Ian yaps
@@ -221,13 +220,6 @@
 /mob/living/simple_animal/blob_act()
 	adjustBruteLoss(20)
 	return
-
-/mob/living/simple_animal/say_quote(var/text)
-	if(speak_emote && speak_emote.len)
-		var/emote = pick(speak_emote)
-		if(emote)
-			return "[emote], \"[text]\""
-	return "says, \"[text]\"";
 
 /mob/living/simple_animal/emote(var/act)
 	if(stat)

@@ -162,6 +162,12 @@
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
+	new /obj/item/clothing/head/hardhat/red(src)
+	new /obj/item/clothing/head/hardhat/red(src)
+	new /obj/item/clothing/head/hardhat/red(src)
+	new /obj/item/clothing/head/beret/eng(src)
+	new /obj/item/clothing/head/beret/eng(src)
+	new /obj/item/clothing/head/beret/eng(src)
 	return
 
 
@@ -178,6 +184,12 @@
 	new /obj/item/clothing/shoes/orange(src)
 	new /obj/item/clothing/shoes/orange(src)
 	new /obj/item/clothing/shoes/orange(src)
+	new /obj/item/clothing/head/hardhat(src)
+	new /obj/item/clothing/head/hardhat(src)
+	new /obj/item/clothing/head/hardhat(src)
+	new /obj/item/clothing/head/beret/eng(src)
+	new /obj/item/clothing/head/beret/eng(src)
+	new /obj/item/clothing/head/beret/eng(src)
 	return
 
 

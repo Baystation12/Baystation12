@@ -1,9 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-LAST_COMPILE_VERSION: 499.1193
-DIR: code code\WorkInProgress code\WorkInProgress\ZomgPonies maps 
-LAST_COMPILE_TIME: 1378402518
+WINDOW: icons\mob\head.dmi;icons\mob\monkey.dmi;icons\mob\suit.dmi;icons\obj\clothing\hats.dmi;icons\obj\clothing\suits.dmi
+LAST_COMPILE_VERSION: 499.1202
+DIR: code code\modules\mob\living\carbon code\WorkInProgress\ZomgPonies icons\obj icons\obj\clothing 
+FILE: icons\obj\clothing\suits.dmi
+LAST_COMPILE_TIME: 1378734876
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
