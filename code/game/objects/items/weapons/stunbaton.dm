@@ -128,3 +128,19 @@
 	if(charges < 1)
 		status = 0
 		update_icon()
+
+
+/obj/item/weapon/melee/baton/ntcane
+	name = "fancy cane"
+	desc = "A cane with special engraving on it. It has a strange button on the handle..."
+	icon_state = "cane_nt"
+	item_state = "cane_nt"
+
+
+/obj/item/weapon/melee/baton/ntcane/update_icon()
+	if(status)
+		icon_state = "cane_nt_active"
+		item_state = "cane_nt_active"
+	else
+		icon_state = "cane_nt"
+		item_state = "cane_nt"

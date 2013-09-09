@@ -238,6 +238,13 @@
 	icon_on = "engravedzippoon"
 	icon_off = "engravedzippo"
 
+/obj/item/weapon/lighter/zippo/fluff/nt_rep
+	name = "gold engraved zippo"
+	desc = "An engraved golden Zippo lighter with the letters NT on it."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_on = "zippo_nt_on"
+	icon_off = "zippo_nt_off"
+
 /obj/item/weapon/fluff/cado_keppel_1 //sparklysheep: Cado Keppel
 	name = "purple comb"
 	desc = "A pristine purple comb made from flexible plastic. It has a small K etched into its side."
