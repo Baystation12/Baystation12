@@ -157,10 +157,8 @@ var/list/department_radio_keys = list(
 				if(lowertext(channel_prefix) == ":[L.key]")
 					speaking = L
 					break
-
 		message_mode = department_radio_keys[channel_prefix]
-
-		if (message_mode || speaking)
+		if (message_mode || speaking || copytext(message,1,2) == ":")
 			message = trim(copytext(message, 3))
 			if (!(istype(src,/mob/living/carbon/human) || istype(src,/mob/living/carbon/monkey) || istype(src, /mob/living/simple_animal/parrot) || isrobot(src) && (message_mode=="department" || (message_mode in radiochannels))))
 				message_mode = null //only humans can use headsets
