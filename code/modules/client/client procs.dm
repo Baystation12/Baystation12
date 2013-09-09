@@ -99,7 +99,7 @@
 		return null
 
 	if(IsGuestKey(key))
-		alert(src,"Baystation12 doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
+		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
 		del(src)
 		return
 
@@ -241,7 +241,7 @@
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
-	preload_vox()
+//	preload_vox() //Causes long delays with initial start window and subsequent windows when first logged in.
 	getFiles(
 		'nano/js/libraries.min.js',
 		'nano/js/nano_update.js',

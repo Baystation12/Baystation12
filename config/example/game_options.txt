@@ -1,5 +1,8 @@
 ### HEALTH ###
 
+## level of health at which a mob goes into continual shock (soft crit)
+HEALTH_THRESHOLD_SOFTCRIT 0
+
 ## level of health at which a mob becomes unconscious (crit)
 HEALTH_THRESHOLD_CRIT -50
 

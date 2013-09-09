@@ -53,7 +53,6 @@ Important Procedures
 
 */
 
-var/kill_air = 0
 var/tick_multiplier = 2
 
 atom/proc/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
@@ -87,17 +86,24 @@ atom/proc/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
 
 var/datum/controller/air_system/air_master
 
-/datum/controller/air_system/
-	//Geoemetry lists
+/datum/controller/air_system
+	//Geometry lists
 	var/list/turfs_with_connections = list()
 	var/list/active_hotspots = list()
 
 	//Special functions lists
+	var/reconsidering_zones = FALSE
 	var/list/tiles_to_reconsider_zones = list()
+	var/list/tiles_to_reconsider_alternate
 
 	//Geometry updates lists
+	var/updating_tiles = FALSE
 	var/list/tiles_to_update = list()
+	var/list/tiles_to_update_alternate
+
+	var/checking_connections = FALSE
 	var/list/connections_to_check = list()
+	var/list/connections_to_check_alternate
 
 	var/current_cycle = 0
 	var/update_delay = 5 //How long between check should it try to process atmos again.
@@ -106,20 +112,7 @@ var/datum/controller/air_system/air_master
 	var/tick_progress = 0
 
 
-/*				process()
-					//Call this to process air movements for a cycle
-
-				process_rebuild_select_groups()
-					//Used by process()
-					//Warning: Do not call this
-
-				rebuild_group(datum/air_group)
-					//Used by process_rebuild_select_groups()
-					//Warning: Do not call this, add the group to air_master.groups_to_rebuild instead
-					*/
-
-
-/datum/controller/air_system/proc/setup()
+/datum/controller/air_system/proc/Setup()
 	//Purpose: Call this at the start to setup air groups geometry
 	//    (Warning: Very processor intensive but only must be done once per round)
 	//Called by: Gameticker/Master controller
@@ -147,10 +140,11 @@ var/datum/controller/air_system/air_master
 Total Simulated Turfs: [simulated_turf_count]
 Total Zones: [zones.len]
 Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_count]</font>"}
-	/*
-	spawn start()
 
-/datum/controller/air_system/proc/start()
+//	spawn Start()
+
+
+/datum/controller/air_system/proc/Start()
 	//Purpose: This is kicked off by the master controller, and controls the processing of all atmosphere.
 	//Called by: Master controller
 	//Inputs: None.
@@ -160,45 +154,60 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	set background = 1
 
 	while(1)
-		if(!kill_air)
-			current_cycle++
-			var/success = tick() //Changed so that a runtime does not crash the ticker.
+		if(!air_processing_killed)
+			var/success = Tick() //Changed so that a runtime does not crash the ticker.
 			if(!success) //Runtimed.
 				failed_ticks++
 				if(failed_ticks > 20)
 					world << "<font color='red'><b>ERROR IN ATMOS TICKER.  Killing air simulation!</font></b>"
-					kill_air = 1
+					air_processing_killed = 1
 		sleep(max(5,update_delay*tick_multiplier))
-	*/
 
-/datum/controller/air_system/proc/tick()
+
+/datum/controller/air_system/proc/Tick()
 	. = 1 //Set the default return value, for runtime detection.
 
+	current_cycle++
+
+	//If there are tiles to update, do so.
 	tick_progress = "update_air_properties"
-	if(tiles_to_update.len) //If there are tiles to update, do so.
+	if(tiles_to_update.len)
+		updating_tiles = TRUE
+
 		for(var/turf/simulated/T in tiles_to_update)
 			if(. && T && !T.update_air_properties())
-				. = 0 //If a runtime occured, make sure we can sense it.
-				//message_admins("ZASALERT: Unable run turf/simualted/update_air_properties()")
+				//If a runtime occured, make sure we can sense it.
+				. = 0
+
+		updating_tiles = FALSE
+
 		if(.)
-			tiles_to_update = list()
+			if(tiles_to_update_alternate)
+				tiles_to_update = tiles_to_update_alternate
+				tiles_to_update_alternate = null
+			else
+				tiles_to_update = list()
+
+		else if(tiles_to_update_alternate)
+			tiles_to_update |= tiles_to_update_alternate
+			tiles_to_update_alternate = null
 
 	//Check sanity on connection objects.
 	if(.)
 		tick_progress = "connections_to_check"
 	if(connections_to_check.len)
-		for(var/connection/C in connections_to_check)
-			C.CheckPassSanity()
-		connections_to_check = list()
+		checking_connections = TRUE
 
-	//Ensure tiles still have zones.
-	if(.)
-		tick_progress = "tiles_to_reconsider_zones"
-	if(tiles_to_reconsider_zones.len)
-		for(var/turf/simulated/T in tiles_to_reconsider_zones)
-			if(!T.zone)
-				new /zone(T)
-		tiles_to_reconsider_zones = list()
+		for(var/connection/C in connections_to_check)
+			C.Cleanup()
+
+		checking_connections = FALSE
+
+		if(connections_to_check_alternate)
+			connections_to_check = connections_to_check_alternate
+			connections_to_check_alternate = null
+		else
+			connections_to_check = list()
 
 	//Process zones.
 	if(.)
@@ -210,6 +219,25 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 				Z.last_update = current_cycle
 			if(. && Z && !output)
 				. = 0
+
+	//Ensure tiles still have zones.
+	if(.)
+		tick_progress = "tiles_to_reconsider_zones"
+	if(tiles_to_reconsider_zones.len)
+		reconsidering_zones = TRUE
+
+		for(var/turf/simulated/T in tiles_to_reconsider_zones)
+			if(!T.zone)
+				new /zone(T)
+
+		reconsidering_zones = FALSE
+
+		if(tiles_to_reconsider_alternate)
+			tiles_to_reconsider_zones = tiles_to_reconsider_alternate
+			tiles_to_reconsider_alternate = null
+		else
+			tiles_to_reconsider_zones = list()
+
 	//Process fires.
 	if(.)
 		tick_progress = "active_hotspots (fire)"
@@ -219,3 +247,53 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 	if(.)
 		tick_progress = "success"
+
+
+/datum/controller/air_system/proc/AddTurfToUpdate(turf/simulated/outdated_turf)
+	var/list/tiles_to_check = list()
+
+	if(istype(outdated_turf))
+		tiles_to_check |= outdated_turf
+
+	if(istype(outdated_turf, /turf))
+		for(var/direction in cardinal)
+			var/turf/simulated/adjacent_turf = get_step(outdated_turf, direction)
+			if(istype(adjacent_turf))
+				tiles_to_check |= adjacent_turf
+
+	if(updating_tiles)
+		if(!tiles_to_update_alternate)
+			tiles_to_update_alternate = tiles_to_check
+		else
+			tiles_to_update_alternate |= tiles_to_check
+	else
+		tiles_to_update |= tiles_to_check
+
+
+/datum/controller/air_system/proc/AddConnectionToCheck(connection/connection)
+	if(checking_connections)
+		if(istype(connection, /list))
+			if(!connections_to_check_alternate)
+				connections_to_check_alternate = connection
+
+		else if(!connections_to_check_alternate)
+			connections_to_check_alternate = list()
+
+		connections_to_check_alternate |= connection
+
+	else
+		connections_to_check |= connection
+
+
+/datum/controller/air_system/proc/ReconsiderTileZone(var/turf/simulated/zoneless_turf)
+	if(zoneless_turf.zone)
+		return
+
+	if(reconsidering_zones)
+		if(!tiles_to_reconsider_alternate)
+			tiles_to_reconsider_alternate = list()
+
+		tiles_to_reconsider_alternate |= zoneless_turf
+
+	else
+		tiles_to_reconsider_zones |= zoneless_turf

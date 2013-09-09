@@ -97,7 +97,7 @@
 
 		handle_pain()
 
-		handle_medical_side_effects()
+//		handle_medical_side_effects()
 
 	handle_stasis_bag()
 
@@ -294,7 +294,7 @@
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
 		// HACK NEED CHANGING LATER
-		if(health < 0)
+		if(health < config.health_threshold_crit)
 			losebreath++
 		if(losebreath>0) //Suffocating so do not take a breath
 			losebreath--
@@ -322,14 +322,7 @@
 						// Not enough air around, take a percentage of what's there to model this properly
 					breath_moles = environment.total_moles()*BREATH_PERCENTAGE
 
-					breath = loc.remove_air(breath_moles)
-
-					if(!is_lung_ruptured())
-						if(!breath || breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
-							if(prob(5))
-								rupture_lung()
-
-					// Handle chem smoke effect  -- Doohl
+					// Handle filtering
 					var/block = 0
 					if(wear_mask)
 						if(wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT)
@@ -340,6 +333,20 @@
 					if(head)
 						if(head.flags & BLOCK_GAS_SMOKE_EFFECT)
 							block = 1
+
+					if(block && wear_mask)
+						if(istype(wear_mask, /obj/item/clothing/mask/gas))
+							var/obj/item/clothing/mask/gas/G = wear_mask
+							breath = loc.remove_air(breath_moles, G.gas_filter_strength) //Filters out harmful gases
+						else
+							breath = loc.remove_air(breath_moles, 0)
+					else
+						breath = loc.remove_air(breath_moles, 0)
+
+					if(!is_lung_ruptured())
+						if(!breath || breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
+							if(prob(5))
+								rupture_lung()
 
 					if(!block)
 
@@ -387,7 +394,7 @@
 				failed_last_breath = 1
 				oxygen_alert = max(oxygen_alert, 1)
 				return 0
-			if(health > 0)
+			if(health > config.health_threshold_crit)
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 				failed_last_breath = 1
 			else
@@ -537,38 +544,37 @@
 	proc/handle_environment(datum/gas_mixture/environment)
 		if(!environment)
 			return
-		var/loc_temp = T0C
-		if(istype(loc, /obj/mecha))
-			var/obj/mecha/M = loc
-			loc_temp =  M.return_temperature()
-		else if(istype(get_turf(src), /turf/space))
-			var/turf/heat_turf = get_turf(src)
-			loc_temp = heat_turf.temperature
-		else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-			loc_temp = loc:air_contents.temperature
-		else
-			loc_temp = environment.temperature
+		if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
+			var/loc_temp = T0C
+			if(istype(loc, /obj/mecha))
+				var/obj/mecha/M = loc
+				loc_temp =  M.return_temperature()
+			else if(istype(get_turf(src), /turf/space))
+			else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
+				loc_temp = loc:air_contents.temperature
+			else
+				loc_temp = environment.temperature
 
-		//world << "Loc temp: [loc_temp] - Body temp: [bodytemperature] - Fireloss: [getFireLoss()] - Thermal protection: [get_thermal_protection()] - Fire protection: [thermal_protection + add_fire_protection(loc_temp)] - Heat capacity: [environment_heat_capacity] - Location: [loc] - src: [src]"
+			//world << "Loc temp: [loc_temp] - Body temp: [bodytemperature] - Fireloss: [getFireLoss()] - Thermal protection: [get_thermal_protection()] - Fire protection: [thermal_protection + add_fire_protection(loc_temp)] - Heat capacity: [environment_heat_capacity] - Location: [loc] - src: [src]"
 
-		//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
-		if(stat != 2)
-			stabilize_temperature_from_calories()
+			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
+			if(stat != 2)
+				stabilize_temperature_from_calories()
 
-//		log_debug("Adjusting to atmosphere.")
-		//After then, it reacts to the surrounding atmosphere based on your thermal protection
-		if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
-			var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
-			if(thermal_protection < 1)
-				var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
-//				log_debug("[loc_temp] is Cold. Cooling by [amt]")
-				bodytemperature += amt
-		else if (loc_temp > BODYTEMP_HEAT_DAMAGE_LIMIT)			//Place is hotter than we are
-			var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
-			if(thermal_protection < 1)
-				var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
-//				log_debug("[loc_temp] is Heat. Heating up by [amt]")
-				bodytemperature += amt
+	//		log_debug("Adjusting to atmosphere.")
+			//After then, it reacts to the surrounding atmosphere based on your thermal protection
+			if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
+				var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
+				if(thermal_protection < 1)
+					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
+	//				log_debug("[loc_temp] is Cold. Cooling by [amt]")
+					bodytemperature += amt
+			else if (loc_temp > BODYTEMP_HEAT_DAMAGE_LIMIT)			//Place is hotter than we are
+				var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
+				if(thermal_protection < 1)
+					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
+	//				log_debug("[loc_temp] is Heat. Heating up by [amt]")
+					bodytemperature += amt
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 		if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
@@ -1413,11 +1419,13 @@
 		if(status_flags & GODMODE)	return 0	//godmode
 		if(analgesic) return // analgesic avoids all traumatic shock temporarily
 
-		if(health < 0)// health 0 makes you immediately collapse
+		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
 			shock_stage = max(shock_stage, 61)
 
 		if(traumatic_shock >= 80)
 			shock_stage += 1
+		else if(health < config.health_threshold_softcrit)
+			shock_stage = max(shock_stage, 61)
 		else
 			shock_stage = min(shock_stage, 100)
 			shock_stage = max(shock_stage-1, 0)
@@ -1443,7 +1451,7 @@
 		if(shock_stage == 80)
 			src << "<font color='red'><b>"+pick("You see a light at the end of the tunnel!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
 
-		if (shock_stage > 80)
+		if(shock_stage > 80)
 			Paralyse(rand(15,28))
 
 	proc/handle_pulse()

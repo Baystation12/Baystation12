@@ -65,8 +65,8 @@
 
 	var/server
 	var/banappeals
-	var/wikiurl = "http://baystation12.net/wiki/index.php?title=Main_Page"
-	var/forumurl = "http://baystation12.net/forums/"
+	var/wikiurl
+	var/forumurl
 
 	//Alert level description
 	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
@@ -80,6 +80,7 @@
 
 	//game_options.txt configs
 
+	var/health_threshold_softcrit = 0
 	var/health_threshold_crit = 0
 	var/health_threshold_dead = -100
 
@@ -443,6 +444,8 @@
 			switch(name)
 				if("health_threshold_crit")
 					config.health_threshold_crit = value
+				if("health_threshold_softcrit")
+					config.health_threshold_softcrit = value
 				if("health_threshold_dead")
 					config.health_threshold_dead = value
 				if("revival_pod_plants")

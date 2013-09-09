@@ -109,7 +109,7 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 		playsound(U.loc, 'sound/effects/EMPulse.ogg', 60, 2)
 		empulse(U, 2, 3) //Procs sure are nice. Slightly weaker than wizard's disable tch.
 		s_coold = 2
-		cell.charge-=(C*10)
+		cell.use(C*10)
 	return
 
 //=======//ENERGY BLADE//=======//
@@ -129,7 +129,7 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 				spark_system.start()
 				playsound(U.loc, "sparks", 50, 1)
 				U.put_in_hands(W)
-				cell.charge-=(C*10)
+				cell.use(C*10)
 			else
 				U << "\red You can only summon one blade. Try dropping an item first."
 		else//Else you can run around with TWO energy blades. I don't know why you'd want to but cool factor remains.
@@ -173,7 +173,7 @@ This could be a lot better but I'm too tired atm.*/
 			A.current = curloc
 			A.yo = targloc.y - curloc.y
 			A.xo = targloc.x - curloc.x
-			cell.charge-=(C*100)// Ninja stars now cost 100 energy, stil la fair chunk to avoid spamming, will run out of power quickly if used 3 or more times
+			cell.use(C*100)// Ninja stars now cost 100 energy, stil la fair chunk to avoid spamming, will run out of power quickly if used 3 or more times
 			A.process()
 		else
 			U << "\red There are no targets in view."
@@ -210,7 +210,7 @@ Must right click on a mob to activate.*/
 				E.master = U
 				spawn(0)//Parallel processing.
 					E.process(M)
-				cell.charge-=(C*100) // Nets now cost what should be most of a standard battery, since your taking someone out of the round
+				cell.use(C*100) // Nets now cost what should be most of a standard battery, since your taking someone out of the round
 			else
 				U << "They are already trapped inside an energy net."
 		else

@@ -62,7 +62,7 @@ proc/move_research_shuttle()
 
 /obj/machinery/computer/research_shuttle
 	name = "Research Shuttle Console"
-	icon = 'computer.dmi'
+	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
 	req_access = list(access_research)
 	circuit = "/obj/item/weapon/circuitboard/research_shuttle"
@@ -105,7 +105,7 @@ proc/move_research_shuttle()
 		usr << "You fried the consoles ID checking system. It's now available to everyone!"
 
 	else if(istype(W, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
 			var/obj/item/weapon/circuitboard/research_shuttle/M = new /obj/item/weapon/circuitboard/research_shuttle( A )

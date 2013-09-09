@@ -517,6 +517,7 @@ client/proc/one_click_antag()
 	new_vox.mind_initialize()
 	new_vox.mind.assigned_role = "MODE"
 	new_vox.mind.special_role = "Vox Raider"
+	new_vox.mutations |= NOCLONE //Stops the station crew from messing around with their DNA.
 
 	ticker.mode.traitors += new_vox.mind
 	new_vox.equip_vox_raider()

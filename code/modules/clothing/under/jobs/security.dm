@@ -48,6 +48,16 @@
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/under/rank/security/corp
+	icon_state = "sec_corporate"
+	item_state = "sec_corporate"
+	color = "sec_corporate"
+
+/obj/item/clothing/under/rank/warden/corp
+	icon_state = "warden_corporate"
+	item_state = "warden_corporate"
+	color = "warden_corporate"
+
 /*
  * Detective
  */
@@ -83,6 +93,10 @@
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.8
 
+/obj/item/clothing/under/rank/head_of_security/corp
+	icon_state = "hos_corporate"
+	item_state = "hos_corporate"
+	color = "hos_corporate"
 
 /obj/item/clothing/head/helmet/HoS
 	name = "Head of Security Hat"
@@ -94,10 +108,9 @@
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.8
 
-
 /obj/item/clothing/suit/armor/hos
 	name = "armored coat"
-	desc = "A greatcoat enchanced with a special alloy for some protection and style."
+	desc = "A greatcoat enhanced with a special alloy for some protection and style."
 	icon_state = "hos"
 	item_state = "hos"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS

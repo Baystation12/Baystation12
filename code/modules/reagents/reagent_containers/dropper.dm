@@ -27,6 +27,13 @@
 			var/trans = 0
 
 			if(ismob(target))
+
+				var/time = 20 //2/3rds the time of a syringe
+				for(var/mob/O in viewers(world.view, user))
+					O.show_message(text("\red <B>[] is trying to squirt something into []'s eyes!</B>", user, target), 1)
+
+				if(!do_mob(user, target, time)) return
+
 				if(istype(target , /mob/living/carbon/human))
 					var/mob/living/carbon/human/victim = target
 
@@ -51,27 +58,25 @@
 						spawn(5)
 							src.reagents.reaction(safe_thing, TOUCH)
 
-
-
 						user << "\blue You transfer [trans] units of the solution."
 						if (src.reagents.total_volume<=0)
 							filled = 0
 							icon_state = "dropper[filled]"
 						return
 
-
 				for(var/mob/O in viewers(world.view, user))
 					O.show_message(text("\red <B>[] squirts something into []'s eyes!</B>", user, target), 1)
 				src.reagents.reaction(target, TOUCH)
-				var/mob/M = target
-				var/R
-				if(src.reagents)
-					for(var/datum/reagent/A in src.reagents.reagent_list)
-						R += A.id + " ("
-						R += num2text(A.volume) + "),"
-				user.attack_log += "\[[time_stamp()]\] <b>[user]/[user.ckey]</b> squirted <b>[M]/[M.ckey]</b> with ([R])"
-				M.attack_log += "\[[time_stamp()]\] <b>[user]/[user.ckey]</b> squirted <b>[M]/[M.ckey]</b> with ([R])"
-				log_attack("\[[time_stamp()]\] <b>[user]/[user.ckey]</b> squirted <b>[M]/[M.ckey]</b> with ([R])")
+
+				var/mob/living/M = target
+
+				var/list/injected = list()
+				for(var/datum/reagent/R in src.reagents.reagent_list)
+					injected += R.name
+				var/contained = english_list(injected)
+				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been squirted with [src.name] by [user.name] ([user.ckey]). Reagents: [contained]</font>")
+				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to squirt [M.name] ([M.key]). Reagents: [contained]</font>")
+				msg_admin_attack("[user.name] ([user.ckey]) squirted [M.name] ([M.key]) with [src.name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 			trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
 			user << "\blue You transfer [trans] units of the solution."
