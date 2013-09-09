@@ -1021,6 +1021,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	switch(scanmode)
 
 		if(3)
+			if(!isobj(A))
+				return
 			if(!isnull(A.reagents))
 				if(A.reagents.reagent_list.len > 0)
 					var/reagents_length = A.reagents.reagent_list.len

@@ -125,6 +125,8 @@
 			user << "\red [src] is already overloaded - better run."
 			return 0
 		else
+			var/obj/item/weapon/card/emag/emag = O
+			emag.uses--
 			emagged = 1
 			user << "\blue You short out the security protocols and overload [src]'s cell, priming it to explode in a short time."
 			spawn(100)	src << "\red Your cell seems to be outputting a lot of power..."

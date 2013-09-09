@@ -631,9 +631,9 @@
 			H.name = "host brain"
 			H.real_name = "host brain"
 
-			verbs -= /mob/living/carbon/human/proc/release_control
-			verbs -= /mob/living/carbon/human/proc/punish_host
-			verbs -= /mob/living/carbon/human/proc/spawn_larvae
+			verbs -= /mob/living/carbon/proc/release_control
+			verbs -= /mob/living/carbon/proc/punish_host
+			verbs -= /mob/living/carbon/proc/spawn_larvae
 
 			return
 

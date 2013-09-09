@@ -652,7 +652,7 @@ var/list/ai_list = list()
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo2"))
 	return
 
-/mob/living/silicon/ai/proc/corereturn()
+/*/mob/living/silicon/ai/proc/corereturn()
 	set category = "Malfunction"
 	set name = "Return to Main Core"
 
@@ -660,7 +660,7 @@ var/list/ai_list = list()
 	if(!istype(apc))
 		src << "\blue You are already in your Main Core."
 		return
-	apc.malfvacate()
+	apc.malfvacate()*/
 
 //Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()

@@ -1,8 +1,3 @@
-/mob/living/carbon/alien/say_understands(var/other)
-	if (istype(other, /mob/living/carbon/alien))
-		return 1
-	return ..()
-
 /mob/living/carbon/alien/say(var/message)
 
 	if (silent)
@@ -21,12 +16,6 @@
 				playsound(loc, "hiss", 25, 1, 1)//So aliens can hiss while they hiss yo/N
 			return ..(message)
 	else
-
-// ~lol~
-/mob/living/carbon/alien/say_quote(var/text)
-//	var/ending = copytext(text, length(text))
-
-	return "[say_message], \"[text]\"";
 
 /mob/living/proc/alien_talk(var/message)
 
