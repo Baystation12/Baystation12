@@ -192,7 +192,7 @@
 		while(1)
 			sleep(DISCONNECTED_DELETE)
 			for(var/mob/living/carbon/C in mob_list)
-				if(!ismonkey(C) && !isslime(C))
+				if(!ismonkey(C) && !isslime(C) && !istype(C,/datum/admins))
 					if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0 && C.lastKnownIP)
 						sleep(600)
 						if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0)
