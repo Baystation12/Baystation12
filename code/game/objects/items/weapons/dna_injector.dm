@@ -66,10 +66,10 @@
 	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		user << "\red You don't have the dexterity to do this!"
 		return
+
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [name] by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to inject [M.name] ([M.ckey])</font>")
-
-	log_attack("<font color='red'>[user.name] ([user.ckey]) used the [name] to inject [M.name] ([M.ckey])</font>")
+	log_attack("[user.name] ([user.ckey]) used the [name] to inject [M.name] ([M.ckey])")
 
 	if (user)
 		if (istype(M, /mob/living/carbon/human))
@@ -87,8 +87,7 @@
 				M.requests += O
 				if (dnatype == "se")
 					if (isblockon(getblock(dna, 14,3),14) && istype(M, /mob/living/carbon/human))
-						message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name] \red(MONKEY)")
-						log_attack("[key_name(user)] injected [key_name(M)] with the [name] (MONKEY)")
+						msg_admin_attack("[key_name_admin(user)] injected [key_name_admin(M)] with the [name] \red(MONKEY) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 					else
 	//					message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name]")
 						log_attack("[key_name(user)] injected [key_name(M)] with the [name]")

@@ -337,10 +337,12 @@
 	O.density = 1
 	O.layer = 5
 
-	var/turf/simulated/floor/F = ChangeTurf(/turf/simulated/floor/plating)
+	src.ChangeTurf(/turf/simulated/floor/plating)
+
+	var/turf/simulated/floor/F = src
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
-	user << "<span class='warning'>The thermite melts through the wall.</span>"
+	user << "<span class='warning'>The thermite starts melting through the wall.</span>"
 
 	spawn(100)
 		if(O)	del(O)
