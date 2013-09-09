@@ -1,11 +1,12 @@
-var/list/zones = list()
 var/list/DoorDirections = list(NORTH,WEST) //Which directions doors turfs can connect to zones
 var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs can connect to zones
 
 /zone
 	var/dbg_output = 0 //Enables debug output.
-	var/rebuild = 0 //If 1, zone will be rebuilt on next process. Not sure if used.
+
 	var/datum/gas_mixture/air //The air contents of the zone.
+	var/datum/gas_mixture/archived_air
+
 	var/list/contents //All the tiles that are contained in this zone.
 	var/list/unsimulated_tiles // Any space tiles in this list will cause air to flow out.
 
@@ -17,6 +18,9 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	var/list/closed_connection_zones //Same as connected_zones, but for zones where the door or whatever is closed.
 
 	var/last_update = 0
+	var/last_rebuilt = 0
+	var/status = ZONE_ACTIVE
+	var/interactions_with_neighbors = 0
 	var/progress = "nothing"
 
 
@@ -50,7 +54,9 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	air.update_values()
 
 	//Add this zone to the global list.
-	zones.Add(src)
+	if(air_master)
+		air_master.zones.Add(src)
+		air_master.active_zones.Add(src)
 
 
 //DO NOT USE.  Use the SoftDelete proc.
@@ -63,14 +69,21 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 		if(src in Z.connected_zones)
 			Z.connected_zones.Remove(src)
 	air_master.AddConnectionToCheck(connections)
-	zones.Remove(src)
+
+	if(air_master)
+		air_master.zones.Remove(src)
+		air_master.active_zones.Remove(src)
+		air_master.zones_needing_rebuilt.Remove(src)
 	air = null
 	. = ..()
 
 
 //Handles deletion via garbage collection.
 /zone/proc/SoftDelete()
-	zones.Remove(src)
+	if(air_master)
+		air_master.zones.Remove(src)
+		air_master.active_zones.Remove(src)
+		air_master.zones_needing_rebuilt.Remove(src)
 	air = null
 
 	//Ensuring the zone list doesn't get clogged with null values.
@@ -148,11 +161,6 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 		return SoftDelete()
 
 	progress = "problem with: Rebuild()"
-
-	//Does rebuilding stuff.
-	if(rebuild)
-		rebuild = 0
-		Rebuild() //Shoving this into a proc.
 
 	if(!contents.len) //If we got soft deleted.
 		return
@@ -253,10 +261,17 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			if(Z.last_update > last_update)
 				continue
 
+			//Handle adjacent zones that are sleeping
+			if(Z.status == ZONE_SLEEPING)
+				if(air.compare(Z.air))
+					continue
+
+				else
+					Z.SetStatus(ZONE_ACTIVE)
+
 			if(air && Z.air)
 				//Ensure we're not doing pointless calculations on equilibrium zones.
-				var/moles_delta = abs(air.total_moles() - Z.air.total_moles())
-				if(moles_delta > 0.1 || abs(air.temperature - Z.air.temperature) > 0.1)
+				if(!air.compare(Z.air))
 					if(abs(Z.air.return_pressure() - air.return_pressure()) > vsc.airflow_lightest_pressure)
 						Airflow(src,Z)
 					var/unsimulated_boost = 0
@@ -267,16 +282,74 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 					unsimulated_boost = max(0, min(3, unsimulated_boost))
 					ShareRatio( air , Z.air , connected_zones[Z] + unsimulated_boost)
 
+					Z.interactions_with_neighbors++
+					interactions_with_neighbors++
+
 		for(var/zone/Z in closed_connection_zones)
 			//If that zone has already processed, skip it.
 			if(Z.last_update > last_update)
 				continue
 
+			var/handle_temperature = abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta
+
+			if(Z.status == ZONE_SLEEPING)
+				if (handle_temperature)
+					Z.SetStatus(ZONE_ACTIVE)
+				else
+					continue
+
 			if(air && Z.air)
-				if( abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta )
+				if( handle_temperature )
 					ShareHeat(air, Z.air, closed_connection_zones[Z])
 
+					Z.interactions_with_neighbors++
+					interactions_with_neighbors++
+
+		if(!interactions_with_neighbors && !unsimulated_tiles)
+			SetStatus(ZONE_SLEEPING)
+
+		interactions_with_neighbors = 0
+
 	progress = "all components completed successfully, the problem is not here"
+
+
+/zone/proc/SetStatus(var/new_status)
+	if(status == ZONE_SLEEPING  && new_status == ZONE_ACTIVE)
+		air_master.active_zones.Add(src)
+		status = ZONE_ACTIVE
+
+	else if(status == ZONE_ACTIVE && new_status == ZONE_SLEEPING)
+		air_master.active_zones.Remove(src)
+		status = ZONE_SLEEPING
+		if(!archived_air)
+			archived_air = new
+		archived_air.copy_from(air)
+
+
+/zone/proc/assume_air(var/datum/gas_mixture/giver)
+	if(status == ZONE_ACTIVE)
+		return air.merge(giver)
+
+	else
+		var/result = air.merge(giver)
+
+		if(!archived_air.compare(air))
+			SetStatus(ZONE_ACTIVE)
+
+		return result
+
+
+/zone/proc/remove_air(var/amount)
+	if(status == ZONE_ACTIVE)
+		return air.remove(amount)
+
+	else
+		var/result = air.remove(amount)
+
+		if(!archived_air.compare(air))
+			SetStatus(ZONE_ACTIVE)
+
+		return result
 
   ////////////////
  //Air Movement//
@@ -463,6 +536,11 @@ proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 //Used for updating zone geometry when a zone is cut into two parts.
 
 zone/proc/Rebuild()
+	if(last_rebuilt == air_master.current_cycle)
+		return
+
+	last_rebuilt = air_master.current_cycle
+
 	var/list/new_zone_contents = IsolateContents()
 	if(new_zone_contents.len == 1)
 		return

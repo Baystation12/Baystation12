@@ -2,45 +2,46 @@
 	set category = "Debug"
 	set name = "Show Air Report"
 
-	/*(!master_controller || !air_master)
+	if(!master_controller || !air_master)
 		alert(usr,"Master_controller or air_master not found.","Air Report")
-		return 0
+		return
 
-	var/active_groups = 0
-	var/inactive_groups = 0
-	var/active_tiles = 0
-	for(var/datum/air_group/group in air_master.air_groups)
-		if(group.group_processing)
-			active_groups++
-		else
-			inactive_groups++
-			active_tiles += group.members.len
+	var/active_groups = air_master.active_zones.len
+	var/inactive_groups = air_master.zones.len - active_groups
 
 	var/hotspots = 0
-	for(var/obj/effect/hotspot/hotspot in world)
+	for(var/obj/fire/hotspot in world)
 		hotspots++
+
+	var/active_on_main_station = 0
+	var/inactive_on_main_station = 0
+	for(var/zone/zone in air_master.zones)
+		var/turf/simulated/turf = locate() in zone.contents
+		if(turf && turf.z == 1)
+			if(zone.status)
+				active_on_main_station++
+			else
+				inactive_on_main_station++
 
 	var/output = {"<B>AIR SYSTEMS REPORT</B><HR>
 <B>General Processing Data</B><BR>
-<B># of Groups:</B> [air_master.air_groups.len]<BR>
+	Cycle: [air_master.current_cycle]<br>
+	Groups: [air_master.zones.len]<BR>
 ---- <I>Active:</I> [active_groups]<BR>
----- <I>Inactive:</I> [inactive_groups]<BR>
--------- <I>Tiles:</I> [active_tiles]<BR>
-<B># of Active Singletons:</B> [air_master.active_singletons.len]<BR>
+---- <I>Inactive:</I> [inactive_groups]<BR><br>
+---- <I>Active on station:</i> [active_on_main_station]<br>
+---- <i>Inactive on station:</i> [inactive_on_main_station]<br>
 <BR>
 <B>Special Processing Data</B><BR>
-<B>Hotspot Processing:</B> [hotspots]<BR>
-<B>High Temperature Processing:</B> [air_master.active_super_conductivity.len]<BR>
-<B>High Pressure Processing:</B> [air_master.high_pressure_delta.len] (not yet implemented)<BR>
-<BR>
+	Hotspot Processing: [hotspots]<BR>
+<br>
 <B>Geometry Processing Data</B><BR>
-<B>Group Rebuild:</B> [air_master.groups_to_rebuild.len]<BR>
-<B>Tile Update:</B> [air_master.tiles_to_update.len]<BR>
+	Tile Update: [air_master.tiles_to_update.len]<BR>
 "}
 
 	usr << browse(output,"window=airreport")
-	feedback_add_details("admin_verb","SAR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-*/
+
+
 /client/proc/air_status(turf/target as turf)
 	set category = "Debug"
 	set name = "Display Air Status"

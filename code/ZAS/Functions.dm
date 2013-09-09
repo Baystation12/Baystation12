@@ -155,7 +155,9 @@ proc/ZConnect(turf/simulated/A,turf/simulated/B)
 
 	//Make some preliminary checks to see if the connection is valid.
 	if(!A.zone || !B.zone) return
-	if(A.zone == B.zone) return
+	if(A.zone == B.zone)
+		air_master.AddIntrazoneConnection(A,B)
+		return
 
 	if(A.CanPass(null, B, 1.5, 1) && A.zone.air.compare(B.zone.air))
 		return ZMerge(A.zone,B.zone)

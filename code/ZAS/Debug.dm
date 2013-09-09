@@ -126,10 +126,11 @@ zone/proc/DebugDisplay(client/client)
 		client.images -= client.zone_debug_images[src]
 		client.zone_debug_images.Remove(src)
 
-	for(var/zone/Z in zones)
-		if(Z.air == air && Z != src)
-			var/turf/zloc = pick(Z.contents)
-			client << "\red Illegal air datum shared by: [zloc.loc.name]"
+	if(air_master)
+		for(var/zone/Z in air_master.zones)
+			if(Z.air == air && Z != src)
+				var/turf/zloc = pick(Z.contents)
+				client << "\red Illegal air datum shared by: [zloc.loc.name]"
 
 
 client/proc/TestZASRebuild()
@@ -181,7 +182,7 @@ client/proc/TestZASRebuild()
 				sleep(5)
 
 		if(turfs[current])
-			current.overlays += overlays[turfs[current]]
+			current.overlays -= overlays[turfs[current]]
 		turfs[current] = lowest_id
 		current.overlays += overlays[lowest_id]
 		sleep(5)
