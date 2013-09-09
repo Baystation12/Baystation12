@@ -19,17 +19,17 @@
 			return ui
 
 	return null
-	
+
 /datum/nanomanager/proc/update_uis(src_object)
 	var/src_object_key = "\ref[src_object]"
 	if (isnull(open_uis[src_object_key]) || !istype(open_uis[src_object_key], /list))
-		return 0	
+		return 0
 
 	var/update_count = 0
-	for (var/ui_key in open_uis[src_object_key])			
+	for (var/ui_key in open_uis[src_object_key])
 		for (var/datum/nanoui/ui in open_uis[src_object_key][ui_key])
 			if(ui && ui.src_object && ui.user)
-				ui.process()
+				ui.process(1)
 				update_count++
 	return update_count
 
