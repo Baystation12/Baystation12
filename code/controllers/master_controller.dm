@@ -24,6 +24,7 @@ datum/controller/game_controller
 	var/objects_cost	= 0
 	var/networks_cost	= 0
 	var/powernets_cost	= 0
+	var/nano_cost		= 0
 	var/events_cost		= 0
 	var/ticker_cost		= 0
 	var/total_cost		= 0
@@ -191,6 +192,13 @@ datum/controller/game_controller/proc/process()
 
 				sleep(breather_ticks)
 
+				//NANO UIS
+				timer = world.timeofday
+				process_nano()
+				nano_cost = (world.timeofday - timer) / 10
+				
+				sleep(breather_ticks)
+
 				//EVENTS
 				timer = world.timeofday
 				process_events()
@@ -203,7 +211,7 @@ datum/controller/game_controller/proc/process()
 				ticker_cost = (world.timeofday - timer) / 10
 
 				//TIMING
-				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + events_cost + ticker_cost
+				total_cost = air_cost + sun_cost + mobs_cost + diseases_cost + machines_cost + objects_cost + networks_cost + powernets_cost + nano_cost + events_cost + ticker_cost
 
 				var/end_time = world.timeofday
 				if(end_time < start_time)
@@ -280,6 +288,16 @@ datum/controller/game_controller/proc/process_powernets()
 			i++
 			continue
 		powernets.Cut(i,i+1)
+
+datum/controller/game_controller/proc/process_nano()
+	var/i = 1
+	while(i<=nanomanager.processing_uis.len)
+		var/datum/nanoui/ui = nanomanager.processing_uis[i]
+		if(ui && ui.src_object && ui.user)
+			ui.process()
+			i++
+			continue
+		nanomanager.processing_uis.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_events()
 	last_thing_processed = /datum/event
