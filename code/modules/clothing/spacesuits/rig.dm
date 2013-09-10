@@ -1,3 +1,33 @@
+//Species modification item.
+
+/obj/item/weapon/modkit/tajaran
+	name = "hardsuit modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another species. This one looks like it's meant for Tajara."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "royce_kit"
+
+/obj/item/clothing/head/helmet/space/rig/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I,/obj/item/weapon/modkit/tajaran))
+		user.drop_item()
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		user << "\red You painstakingly modify [src] to make it more suitable for a Tajaran user."
+		new /obj/item/clothing/head/helmet/space/rig/tajara(user.loc)
+		del(I)
+		del(src)
+		return
+	..()
+
+/obj/item/clothing/suit/space/rig/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I,/obj/item/weapon/modkit/tajaran))
+		user.drop_item()
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		user << "\red You painstakingly modify [src] to make it more suitable for a Tajaran user."
+		new /obj/item/clothing/suit/space/rig/tajara(user.loc)
+		del(I)
+		del(src)
+		return
+	..()
+
 //Regular rig suits
 /obj/item/clothing/head/helmet/space/rig
 	name = "engineering hardsuit helmet"
@@ -12,7 +42,7 @@
 	icon_action_button = "action_hardhat"
 	heat_protection = HEAD
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	species_restricted = list("exclude","Unathi","Tajara","Skrell","Diona","Vox")
+	species_restricted = list("exclude","Unathi","Tajaran","Skrell","Diona","Vox")
 
 	attack_self(mob/user)
 		if(!isturf(user.loc))
@@ -47,7 +77,7 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	species_restricted = list("exclude","Unathi","Tajara","Diona","Vox")
+	species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
 
 //Chief Engineer's rig
 /obj/item/clothing/head/helmet/space/rig/elite

@@ -78,6 +78,19 @@ BLIND     // can't see anything
 	attack_verb = list("challenged")
 	species_restricted = list("exclude","Unathi","Tajara")
 
+/obj/item/clothing/under/attackby(obj/item/I, mob/user)
+
+	if(istype(I, /obj/item/weapon/wirecutters))
+		if("excluded" in species_restricted && ("Tajaran" in species_restricted || "Unathi" in species_restricted))
+			species_restricted -= "Unathi"
+			species_restricted -= "Tajaran"
+			name = "mangled [name]"
+			user.visible_message("\red [user] snips the fingertips off [src].","\red You snip the fingertips off [src].")
+		else
+			user << "\red You cannot modify [src]."
+		return
+	..()
+
 /obj/item/clothing/gloves/examine()
 	set src in usr
 	..()
