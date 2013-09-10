@@ -52,6 +52,8 @@
 	var/turf/T = get_turf(src)
 	T.thermal_conductivity = initial(T.thermal_conductivity)
 	..()
+	density = 0
+
 
 /obj/effect/alien/resin/proc/healthcheck()
 	if(health <=0)
