@@ -178,7 +178,7 @@
 		while(1)
 			sleep(INACTIVITY_KICK)
 			for(var/client/C in clients)
-				if(C.is_afk(INACTIVITY_KICK))
+				if(C.is_afk(INACTIVITY_KICK) && !istype(C,/datum/admins))
 					if(!istype(C.mob, /mob/dead))
 						log_access("AFK: [key_name(C)]")
 						C << "\red You have been inactive for more than 10 minutes and have been disconnected."
