@@ -254,12 +254,12 @@
 					if(candidates.len)
 						var/mob/dead/observer/picked = pick(candidates)
 						var/mob/living/carbon/slime/S = pick(babies)
-						picked.mind.transfer_to(S)
+						S.key = picked
 						S.a_intent = "hurt"
 						S.universal_speak = universal_speak
 						S << "<B>You are now a slime!</B>"
 
-					else return
+
 				else
 					new_slime << "<i>You're an only child!</i>"
 		else
