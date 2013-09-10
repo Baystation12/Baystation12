@@ -10,5 +10,3 @@
 
 	move_on_shuttle = 0
 
-/mob/camera/experience_pressure_difference()
-	return
