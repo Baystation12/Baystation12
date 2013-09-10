@@ -88,7 +88,7 @@
 		/obj/machinery/suspension_gen,
 		/obj/machinery/shield_capacitor,
 		/obj/machinery/shield_gen,
-		/obj/machinery/zero_point_emitter,
+//		/obj/machinery/zero_point_emitter,
 		/obj/machinery/clonepod,
 		/obj/machinery/deployable,
 		/obj/machinery/door_control,
