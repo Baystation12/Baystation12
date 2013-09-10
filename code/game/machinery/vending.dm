@@ -859,3 +859,7 @@
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
 
+/obj/machinery/vending/eva
+	name = "Hardsuit Kits"
+	desc = "Conversion kits for your alien hardsuit needs."
+	products = list(/obj/item/weapon/modkit/tajaran = 3, /obj/item/weapon/modkit = 3)
