@@ -401,7 +401,7 @@
 	M.sdisabilities = 0
 	var/old_mutations = M.mutations
 	M.mutations = list()
-
+	M.pass_flags = 0
 //	M.see_in_dark = 2
 //	M.see_invisible = 0
 
@@ -421,6 +421,7 @@
 	if(ismuton(REMOTEVIEWBLOCK,M))
 		if(probinj(45,inj) || (mRemote in old_mutations))
 			M << "\blue Your mind expands"
+			M.verbs += /mob/living/carbon/human/proc/remoteobserve
 			M.mutations.Add(mRemote)
 	if(ismuton(REGENERATEBLOCK,M))
 		if(probinj(45,inj) || (mRegen in old_mutations))
@@ -434,6 +435,7 @@
 		if(probinj(45,inj) || (mRemotetalk in old_mutations))
 			M << "\blue You expand your mind outwards"
 			M.mutations.Add(mRemotetalk)
+			M.verbs += /mob/living/carbon/human/proc/remotesay
 	if(ismuton(MORPHBLOCK,M))
 		if(probinj(45,inj) || (mMorph in old_mutations))
 			M.mutations.Add(mMorph)
@@ -458,6 +460,7 @@
 		if(probinj(45,inj) || (mSmallsize in old_mutations))
 			M << "\blue Your skin feels rubbery"
 			M.mutations.Add(mSmallsize)
+			M.pass_flags |= 1
 
 
 

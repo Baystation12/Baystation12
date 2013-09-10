@@ -504,6 +504,9 @@
 		if(gloves)
 			var/obj/item/clothing/gloves/G = gloves
 			siemens_coeff = G.siemens_coefficient
+			//If they have shock immunity mutation
+		if(mShock in src.mutations)
+			siemens_coeff = 0
 	return ..(shock_damage,source,siemens_coeff)
 
 
@@ -986,6 +989,12 @@
 		remoteview_target = null
 		reset_view(0)
 		src.verbs -= /mob/living/carbon/human/proc/remoteobserve
+		return
+
+	if(istype(l_hand, /obj/item/tk_grab) || istype(r_hand, /obj/item/tk_grab/))
+		src << "\red Your mind is too busy with that telekinetic grab."
+		remoteview_target = null
+		reset_view(0)
 		return
 
 	if(client.eye != client.mob)
