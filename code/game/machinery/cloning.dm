@@ -3,7 +3,7 @@
 
 //Potential replacement for genetics revives or something I dunno (?)
 
-#define CLONE_BIOMASS 3000
+#define CLONE_BIOMASS 150
 
 /obj/machinery/clonepod
 	anchored = 1
