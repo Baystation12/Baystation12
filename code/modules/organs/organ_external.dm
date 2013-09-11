@@ -83,7 +83,11 @@
 	//If limb took enough damage, try to cut or tear it off
 	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
 		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
-			if( (sharp && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
+			if(body_part != HEAD)
+				if ( (sharp && prob(8 * brute)) || (brute > 20 && prob(3 * brute)) )
+					droplimb(1)
+					return
+			else if( (sharp && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
 				droplimb(1)
 				return
 
@@ -291,7 +295,7 @@
 		if(germ_level > GANGREN_LEVEL_TWO)
 			germ_level++
 			owner.adjustToxLoss(1)
-/*
+
 		if(germ_level > GANGREN_LEVEL_TERMINAL)
 			if (!(status & ORGAN_DEAD))
 				status |= ORGAN_DEAD
@@ -305,7 +309,7 @@
 				if (parent)
 					if (!(parent.status & (ORGAN_DEAD|ORGAN_DESTROYED|ORGAN_ROBOT)))
 						parent.germ_level += round(GERM_TRANSFER_AMOUNT)
-*/
+
 
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /datum/organ/external/proc/update_wounds()
@@ -603,7 +607,7 @@
 	icon_name = "torso"
 	display_name = "chest"
 	max_damage = 75
-	min_broken_damage = 40
+	min_broken_damage = 55
 	body_part = UPPER_TORSO
 
 
@@ -612,7 +616,7 @@
 	icon_name = "groin"
 	display_name = "groin"
 	max_damage = 50
-	min_broken_damage = 30
+	min_broken_damage = 40
 	body_part = LOWER_TORSO
 
 /datum/organ/external/l_arm
@@ -620,7 +624,7 @@
 	display_name = "left arm"
 	icon_name = "l_arm"
 	max_damage = 50
-	min_broken_damage = 20
+	min_broken_damage = 30
 	body_part = ARM_LEFT
 
 /datum/organ/external/l_leg
@@ -628,7 +632,7 @@
 	display_name = "left leg"
 	icon_name = "l_leg"
 	max_damage = 50
-	min_broken_damage = 20
+	min_broken_damage = 30
 	body_part = LEG_LEFT
 	icon_position = LEFT
 
@@ -637,7 +641,7 @@
 	display_name = "right arm"
 	icon_name = "r_arm"
 	max_damage = 50
-	min_broken_damage = 20
+	min_broken_damage = 30
 	body_part = ARM_RIGHT
 
 /datum/organ/external/r_leg
@@ -645,7 +649,7 @@
 	display_name = "right leg"
 	icon_name = "r_leg"
 	max_damage = 50
-	min_broken_damage = 20
+	min_broken_damage = 30
 	body_part = LEG_RIGHT
 	icon_position = RIGHT
 
@@ -654,7 +658,7 @@
 	display_name = "left foot"
 	icon_name = "l_foot"
 	max_damage = 30
-	min_broken_damage = 15
+	min_broken_damage = 25
 	body_part = FOOT_LEFT
 	icon_position = LEFT
 
@@ -663,7 +667,7 @@
 	display_name = "right foot"
 	icon_name = "r_foot"
 	max_damage = 30
-	min_broken_damage = 15
+	min_broken_damage = 25
 	body_part = FOOT_RIGHT
 	icon_position = RIGHT
 
@@ -672,7 +676,7 @@
 	display_name = "right hand"
 	icon_name = "r_hand"
 	max_damage = 30
-	min_broken_damage = 15
+	min_broken_damage = 25
 	body_part = HAND_RIGHT
 
 /datum/organ/external/l_hand
@@ -680,7 +684,7 @@
 	display_name = "left hand"
 	icon_name = "l_hand"
 	max_damage = 30
-	min_broken_damage = 15
+	min_broken_damage = 25
 	body_part = HAND_LEFT
 
 /datum/organ/external/head
@@ -688,7 +692,7 @@
 	icon_name = "head"
 	display_name = "head"
 	max_damage = 75
-	min_broken_damage = 40
+	min_broken_damage = 55
 	body_part = HEAD
 	var/disfigured = 0
 
