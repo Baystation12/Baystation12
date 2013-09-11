@@ -13,7 +13,7 @@
 	..()
 	return
 
-
+/*
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
 	if(istype(I, /obj/item/weapon/card/data/))
 		var/obj/item/weapon/card/data/C = I
@@ -54,6 +54,42 @@
 				src.locked = L
 				one_time_use = 1
 
+			src.add_fingerprint(usr)
+	else
+		..()
+
+	return
+*/
+
+/obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
+	if(istype(I, /obj/item/weapon/card/data/))
+		var/obj/item/weapon/card/data/C = I
+		if(stat & (NOPOWER|BROKEN) & (C.function != "teleporter"))
+			src.attack_hand()
+
+		var/obj/L = null
+
+		for(var/obj/effect/landmark/sloc in landmarks_list)
+			if(sloc.name != C.data) continue
+			if(locate(/mob/living) in sloc.loc) continue
+			L = sloc
+			break
+
+		if(!L)
+			L = locate("landmark*[C.data]") // use old stype
+
+
+		if(istype(L, /obj/effect/landmark/) && istype(L.loc, /turf))
+			src.locked = L
+			one_time_use = 1
+
+			usr << "You insert the coordinates into the machine."
+			usr << "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the station at all times."
+			user.drop_item()
+			del(I)
+
+			for(var/mob/O in hearers(src, null))
+				O.show_message("\blue Locked In", 2)
 			src.add_fingerprint(usr)
 	else
 		..()
