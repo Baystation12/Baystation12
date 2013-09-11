@@ -1314,6 +1314,5 @@
 #include "code\ZAS - vgstation\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\clownplanet.dmm"
 #include "maps\tgstation-redux-WIP.dmm"
 // END_INCLUDE

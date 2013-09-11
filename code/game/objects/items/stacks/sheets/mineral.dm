@@ -205,10 +205,17 @@ var/global/list/datum/stack_recipe/silver_recipes = list ( \
 	perunit = 2000
 	sheettype = "clown"
 
+
 /obj/item/stack/sheet/mineral/clown/New(var/loc, var/amount=null)
+	recipes = clown_recipes
 	pixel_x = rand(0,4)-4
 	pixel_y = rand(0,4)-4
 	..()
+
+var/global/list/datum/stack_recipe/clown_recipes = list ( \
+	new/datum/stack_recipe("bananium computer frame", /obj/structure/computerframe/HONKputer, 10, time = 25, one_per_turf = 1, on_floor = 1), \
+	)
+
 
 
 /****************************** Others ****************************/
