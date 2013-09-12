@@ -53,6 +53,9 @@ Important Procedures
 
 */
 
+#define ZONE_ACTIVE 1
+#define ZONE_SLEEPING 0
+
 var/tick_multiplier = 2
 
 atom/proc/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
@@ -104,6 +107,14 @@ var/datum/controller/air_system/air_master
 	var/checking_connections = FALSE
 	var/list/connections_to_check = list()
 	var/list/connections_to_check_alternate
+
+	var/list/potential_intrazone_connections = list()
+
+	//Zone lists
+	var/list/active_zones = list()
+	var/list/zones_needing_rebuilt = list()
+	var/list/zones = list()
+
 
 	var/current_cycle = 0
 	var/update_delay = 5 //How long between check should it try to process atmos again.
@@ -170,7 +181,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	current_cycle++
 
 	//If there are tiles to update, do so.
-	tick_progress = "update_air_properties"
+	tick_progress = "updating turf properties"
 	if(tiles_to_update.len)
 		updating_tiles = TRUE
 
@@ -192,16 +203,48 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			tiles_to_update |= tiles_to_update_alternate
 			tiles_to_update_alternate = null
 
+	//Rebuild zones.
+	if(.)
+		tick_progress = "rebuilding zones"
+	if(zones_needing_rebuilt.len)
+		for(var/zone/zone in zones_needing_rebuilt)
+			zone.Rebuild()
+
+		zones_needing_rebuilt = list()
+
 	//Check sanity on connection objects.
 	if(.)
-		tick_progress = "connections_to_check"
+		tick_progress = "checking/creating connections"
 	if(connections_to_check.len)
 		checking_connections = TRUE
 
 		for(var/connection/C in connections_to_check)
 			C.Cleanup()
 
+		for(var/turf/simulated/turf_1 in potential_intrazone_connections)
+			for(var/turf/simulated/turf_2 in potential_intrazone_connections[turf_1])
+
+				if(!turf_1.zone || !turf_2.zone)
+					continue
+
+				if(turf_1.zone == turf_2.zone)
+					continue
+
+				var/should_skip = FALSE
+				if(turf_1 in air_master.turfs_with_connections)
+
+					for(var/connection/C in turfs_with_connections[turf_1])
+						if(C.B == turf_2 || C.A == turf_2)
+							should_skip = TRUE
+							break
+				if(should_skip)
+					continue
+
+				new /connection(turf_1, turf_2)
+
 		checking_connections = FALSE
+
+		potential_intrazone_connections = list()
 
 		if(connections_to_check_alternate)
 			connections_to_check = connections_to_check_alternate
@@ -211,8 +254,8 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 	//Process zones.
 	if(.)
-		tick_progress = "zone/process()"
-	for(var/zone/Z in zones)
+		tick_progress = "processing zones"
+	for(var/zone/Z in active_zones)
 		if(Z.last_update < current_cycle)
 			var/output = Z.process()
 			if(Z)
@@ -222,7 +265,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 	//Ensure tiles still have zones.
 	if(.)
-		tick_progress = "tiles_to_reconsider_zones"
+		tick_progress = "reconsidering zones on turfs"
 	if(tiles_to_reconsider_zones.len)
 		reconsidering_zones = TRUE
 
@@ -240,7 +283,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 	//Process fires.
 	if(.)
-		tick_progress = "active_hotspots (fire)"
+		tick_progress = "processing fire"
 	for(var/obj/fire/F in active_hotspots)
 		if(. && F && !F.process())
 			. = 0
@@ -297,3 +340,21 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 	else
 		tiles_to_reconsider_zones |= zoneless_turf
+
+
+/datum/controller/air_system/proc/AddIntrazoneConnection(var/turf/simulated/A, var/turf/simulated/B)
+	if(!istype(A) || !istype(B))
+		return
+
+	if(A in potential_intrazone_connections)
+		if(B in potential_intrazone_connections[A])
+			return
+
+	if (B in potential_intrazone_connections)
+		if(A in potential_intrazone_connections[B])
+			return
+
+		potential_intrazone_connections[B] += A
+
+	else
+		potential_intrazone_connections[B] = list(A)
