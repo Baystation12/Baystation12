@@ -213,7 +213,7 @@ var/global/list/datum/stack_recipe/silver_recipes = list ( \
 	..()
 
 var/global/list/datum/stack_recipe/clown_recipes = list ( \
-	new/datum/stack_recipe("bananium computer frame", /obj/structure/computerframe/HONKputer, 10, time = 25, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("bananium computer frame", /obj/structure/computerframe/HONKputer, 50, time = 25, one_per_turf = 1, on_floor = 1), \
 	)
 
 
