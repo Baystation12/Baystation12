@@ -8,6 +8,7 @@
 	origin_tech = "syndicate=3"
 	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
+	species_restricted = null
 
 /obj/item/clothing/shoes/mime
 	name = "mime shoes"
@@ -48,11 +49,13 @@
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECITON_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECITON_TEMPERATURE
+	species_restricted = null
 
 /obj/item/clothing/shoes/sandal
 	desc = "A pair of rather plain, wooden sandals."
 	name = "sandals"
 	icon_state = "wizard"
+	species_restricted = null
 
 /obj/item/clothing/shoes/sandal/marisa
 	desc = "A pair of magic, black shoes."
@@ -66,6 +69,7 @@
 	permeability_coefficient = 0.05
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
+	species_restricted = null
 
 /obj/item/clothing/shoes/clown_shoes
 	desc = "The prankster's standard-issue clowning shoes. Damn they're huge!"
@@ -75,6 +79,7 @@
 	slowdown = SHOES_SLOWDOWN+1
 	color = "clown"
 	var/footstep = 1	//used for squeeks whilst walking
+	species_restricted = null
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"
@@ -96,6 +101,7 @@
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECITON_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECITON_TEMPERATURE
+	species_restricted = null
 
 /obj/item/clothing/shoes/cyborg
 	name = "cyborg boots"
@@ -107,6 +113,7 @@
 	desc = "Fluffy!"
 	icon_state = "slippers"
 	item_state = "slippers"
+	species_restricted = null
 
 /obj/item/clothing/shoes/slippers_worn
 	name = "worn bunny slippers"

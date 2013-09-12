@@ -1,8 +1,37 @@
-#define VOX_SHUTTLE_MOVE_TIME 260
-#define VOX_SHUTTLE_COOLDOWN 460
+#define VOX_SHUTTLE_MOVE_TIME 400
+#define VOX_SHUTTLE_COOLDOWN 1200
 
 //Copied from Syndicate shuttle.
 var/global/vox_shuttle_location
+var/global/announce_vox_departure = 1 //Stealth systems - give an announcement or not.
+
+/obj/machinery/computer/vox_stealth
+	name = "skipjack cloaking field terminal"
+	icon = 'icons/obj/computer.dmi'
+	icon_state = "syndishuttle"
+	req_access = list(access_syndicate)
+
+/obj/machinery/computer/vox_stealth/attackby(obj/item/I as obj, mob/user as mob)
+	return attack_hand(user)
+
+/obj/machinery/computer/vox_stealth/attack_ai(mob/user as mob)
+	return attack_hand(user)
+
+/obj/machinery/computer/vox_stealth/attack_paw(mob/user as mob)
+	return attack_hand(user)
+
+/obj/machinery/computer/vox_stealth/attack_hand(mob/user as mob)
+	if(!allowed(user))
+		user << "\red Access Denied"
+		return
+
+	if(announce_vox_departure)
+		user << "\red Shuttle stealth systems have been activated. The Exodus will not be warned of our arrival."
+		announce_vox_departure = 0
+	else
+		user << "\red Shuttle stealth systems have been deactivated. The Exodus will be warned of our arrival."
+		announce_vox_departure = 1
+
 
 /obj/machinery/computer/vox_station
 	name = "vox skipjack terminal"
@@ -23,6 +52,12 @@ var/global/vox_shuttle_location
 	if(lastMove + VOX_SHUTTLE_COOLDOWN > world.time)	return
 	var/area/dest_location = locate(destination)
 	if(curr_location == dest_location)	return
+
+	if(announce_vox_departure)
+		if(curr_location == locate(/area/shuttle/vox/station))
+			command_alert("Attention, Exodus, we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not.", "NSV Icarus")
+		else if(dest_location == locate(/area/shuttle/vox/station))
+			command_alert("Your guests are pulling away, Exodus - moving too fast for us to draw a bead on them. Looks like they're heading out of Tau Ceti at a rapid clip.", "NSV Icarus")
 
 	moving = 1
 	lastMove = world.time
