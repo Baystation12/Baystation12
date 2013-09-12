@@ -1721,6 +1721,10 @@
 					spawn(0)
 						H.corgize()
 				ok = 1
+			if("honksquad")
+				if(usr.client.honksquad())
+					feedback_inc("admin_secrets_fun_used",1)
+					feedback_add_details("admin_secrets_fun_used","HONK")
 			if("striketeam")
 				if(usr.client.strike_team())
 					feedback_inc("admin_secrets_fun_used",1)
