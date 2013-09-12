@@ -284,13 +284,11 @@
 
 		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
 		job_master.EquipRank(character, rank, 1)					//equips the human
-		//EquipCustomItems(character)
+		EquipCustomItems(character)
 		character.loc = pick(latejoin)
 		character.lastarea = get_area(loc)
 
 		ticker.mode.latespawn(character)
-
-		//ticker.mode.latespawn(character)
 
 		if(character.mind.assigned_role != "Cyborg")
 			data_core.manifest_inject(character)

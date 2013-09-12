@@ -4,7 +4,7 @@
 //for multiple items just add mutliple entries, unless i change it to be a listlistlist
 //yes, it has to be an item, you can't pick up nonitems
 
-/*
+
 
 /proc/EquipCustomItems(mob/living/carbon/human/M)
 	// load lines
@@ -74,4 +74,3 @@
 				if (ok == 0) // Finally, since everything else failed, place it on the ground
 					Item.loc = get_turf(M.loc)
 
-*/

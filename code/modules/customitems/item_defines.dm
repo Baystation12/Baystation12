@@ -6,6 +6,21 @@
 	icon = 'icons/obj/custom_items.dmi'
 	w_class = 1.0
 
+
+
+///////////////////////////////////////////////////////////////////////
+/////////////////////PARADISE STATION CUSTOM ITEMS////////////////////
+//////////////////////////////////////////////////////////////////////
+
+/obj/item/clothing/head/fluff/heather_winceworth // regens: Heather Winceworth
+	name= "red flower hair pin"
+	desc= "A blood red flower pin."
+	icon= 'icons/obj/clothing/hats.dmi'
+	icon_state = "hairflower"
+	flags = FPRINT|TABLEPASS
+
+
+
 //////////////////////////////////
 ////////// Fluff Items ///////////
 //////////////////////////////////
@@ -242,6 +257,7 @@
 	name = "gold engraved zippo"
 	desc = "An engraved golden Zippo lighter with the letters NT on it."
 	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "zippo_nt_off"
 	icon_on = "zippo_nt_on"
 	icon_off = "zippo_nt_off"
 
@@ -926,3 +942,19 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		flick("leamas-reloading",src)
 	..()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
