@@ -20,21 +20,20 @@
 
 	return GM
 
-/turf/remove_air(amount as num, var/filtered = 0)
+/turf/remove_air(amount as num)
 	var/datum/gas_mixture/GM = new
 
-	var/sum = oxygen + carbon_dioxide + nitrogen + (toxins*(1-filtered))
+	var/sum = oxygen + carbon_dioxide + nitrogen + toxins
 	if(sum>0)
 		GM.oxygen = (oxygen/sum)*amount
 		GM.carbon_dioxide = (carbon_dioxide/sum)*amount
 		GM.nitrogen = (nitrogen/sum)*amount
-		GM.toxins = ((toxins/sum)*amount)*(1-filtered)
+		GM.toxins = (toxins/sum)*amount
 
 	GM.temperature = temperature
 	GM.update_values()
 
 	return GM
-
 
 /turf/simulated/var/current_graphic = null
 
@@ -96,7 +95,7 @@
 /turf/simulated/assume_air(datum/gas_mixture/giver)
 	if(!giver)	return 0
 	if(zone)
-		zone.air.merge(giver)
+		zone.assume_air(giver)
 		return 1
 	else
 		return ..()
@@ -110,21 +109,20 @@
 	else
 		return ..()
 
-/turf/simulated/remove_air(amount as num, var/filtered = 0)
+/turf/simulated/remove_air(amount as num)
 	if(zone)
-		var/datum/gas_mixture/removed = null
-		removed = zone.air.remove(amount, filtered)
-		return removed
+		return zone.remove_air(amount)
+
 	else if(air)
 		var/datum/gas_mixture/removed = null
-		removed = air.remove(amount, filtered)
+		removed = air.remove(amount)
 
 		if(air.check_tile_graphic())
 			update_visuals(air)
 		return removed
 
 	else
-		return ..(amount, filtered)
+		return ..()
 
 /turf/simulated/proc/update_air_properties()
 	var/air_directions_archived = air_check_directions
@@ -179,7 +177,7 @@
 
 				//If the tile is in our own zone, and we cannot connect to it, better rebuild.
 				if(istype(NT,/turf/simulated) && NT in zone.contents)
-					zone.rebuild = 1
+					air_master.zones_needing_rebuilt.Add(zone)
 
 				//Parse if we need to remove the tile, or rebuild the zone.
 				else if(istype(NT) && NT in zone.unsimulated_tiles)
@@ -197,7 +195,7 @@
 					//The unsimulated turf is adjacent to another one of our zone's turfs,
 					//  better rebuild to be sure we didn't get cut in twain
 					if(consider_rebuild)
-						zone.rebuild = 1
+						air_master.zones_needing_rebuilt.Add(zone)
 
 					//Not adjacent to anything, and unsimulated.  Goodbye~
 					else
