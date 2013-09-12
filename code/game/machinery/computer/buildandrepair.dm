@@ -220,10 +220,11 @@
 
 /obj/item/weapon/circuitboard/HONKputer
 	name = "Circuit board (HONKputer)"
-	build_path = "obj/machinery/computer/HONKputer"
+	build_path = "/obj/machinery/computer/HONKputer"
 	origin_tech = "programming=4"
 	icon = 'icons/obj/machines/HONKputer.dmi'
 	icon_state = "bananium_board"
+	board_type = "honkcomputer"
 
 
 /obj/item/weapon/circuitboard/supplycomp/attackby(obj/item/I as obj, mob/user as mob)
@@ -438,7 +439,7 @@
 					src.state = 0
 			if(istype(P, /obj/item/weapon/circuitboard) && !circuit)
 				var/obj/item/weapon/circuitboard/B = P
-				if(B.board_type == "computer")
+				if(B.board_type == "honkcomputer")
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					user << "\blue You place the circuit board inside the frame."
 					src.icon_state = "1"
@@ -508,12 +509,4 @@
 				if(circuit.id) B:id = circuit.id
 				if(circuit.records) B:records = circuit.records
 				if(circuit.frequency) B:frequency = circuit.frequency
-				if(istype(circuit,/obj/item/weapon/circuitboard/supplycomp))
-					var/obj/machinery/computer/supplycomp/SC = B
-					var/obj/item/weapon/circuitboard/supplycomp/C = circuit
-					SC.can_order_contraband = C.contraband_enabled
-				if(istype(circuit,/obj/item/weapon/circuitboard/security))
-					var/obj/machinery/computer/security/C = B
-					var/obj/item/weapon/circuitboard/security/CB = circuit
-					C.network = CB.network
 				del(src)

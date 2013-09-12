@@ -84,7 +84,7 @@
 	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
 		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
 			if(body_part != HEAD)
-				if ( (sharp && prob(8 * brute)) || (brute > 20 && prob(3 * brute)) )
+				if ( (sharp && prob(8 * brute)) || (brute > 20 && prob(2 * brute)) )
 					droplimb(1)
 					return
 			else if( (sharp && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )

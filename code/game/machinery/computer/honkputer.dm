@@ -10,10 +10,9 @@
 	var/state = STATE_DEFAULT
 	var/const/STATE_DEFAULT = 1
 
-/obj/machinery/computer/communications/process()
+/obj/machinery/computer/HONKputer/process()
 	if(..())
-		if(state != STATE_STATUSDISPLAY)
-			src.updateDialog()
+		src.updateDialog()
 
 /obj/machinery/computer/HONKputer/Topic(href, href_list)
 	if(..())
@@ -91,3 +90,28 @@
 	dat += "<BR>\[ [(src.state != STATE_DEFAULT) ? "<A HREF='?src=\ref[src];operation=main'>Main Menu</A> | " : ""]<A HREF='?src=\ref[user];mach_close=honkputer'>Close</A> \]"
 	user << browse(dat, "window=honkputer;size=400x500")
 	onclose(user, "honkputer")
+
+
+/obj/machinery/computer/HONKputer/attackby(I as obj, user as mob)
+	if(istype(I, /obj/item/weapon/screwdriver) && circuit)
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		if(do_after(user, 20))
+			var/obj/structure/computerframe/HONKputer/A = new /obj/structure/computerframe/HONKputer( src.loc )
+			var/obj/item/weapon/circuitboard/M = new circuit( A )
+			A.circuit = M
+			A.anchored = 1
+			for (var/obj/C in src)
+				C.loc = src.loc
+			if (src.stat & BROKEN)
+				user << "\blue The broken glass falls out."
+				new /obj/item/weapon/shard( src.loc )
+				A.state = 3
+				A.icon_state = "3"
+			else
+				user << "\blue You disconnect the monitor."
+				A.state = 4
+				A.icon_state = "4"
+			del(src)
+	else
+		src.attack_hand(user)
+	return
