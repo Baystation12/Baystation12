@@ -1090,6 +1090,8 @@
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
+		if(!(locate(O) in src.module.modules) && O != src.module.emag)
+			return
 		if(activated(O))
 			src << "Already activated"
 			return
