@@ -1,33 +1,3 @@
-//Species modification item.
-
-/obj/item/weapon/modkit/tajaran
-	name = "hardsuit modification kit"
-	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another species. This one looks like it's meant for Tajara."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "royce_kit"
-
-/obj/item/clothing/head/helmet/space/rig/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I,/obj/item/weapon/modkit/tajaran))
-		user.drop_item()
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		user << "\red You painstakingly modify [src] to make it more suitable for a Tajaran user."
-		new /obj/item/clothing/head/helmet/space/rig/tajara(user.loc)
-		del(I)
-		del(src)
-		return
-	..()
-
-/obj/item/clothing/suit/space/rig/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I,/obj/item/weapon/modkit/tajaran))
-		user.drop_item()
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		user << "\red You painstakingly modify [src] to make it more suitable for a Tajaran user."
-		new /obj/item/clothing/suit/space/rig/tajara(user.loc)
-		del(I)
-		del(src)
-		return
-	..()
-
 //Regular rig suits
 /obj/item/clothing/head/helmet/space/rig
 	name = "engineering hardsuit helmet"
