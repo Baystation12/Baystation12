@@ -250,6 +250,9 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 				if (holding)
 					release_log += "Valve was <b>opened</b> by [usr], starting the transfer into the [holding]<br>"
 				else
+					if(src.air_contents.toxins > 0 || (locate(/datum/gas/sleeping_agent) in src.air_contents.trace_gases))
+						message_admins("[usr]([ckey(usr.key)]) opened a canister that contains plasma at [loc.x], [loc.y], [loc.z]")
+						log_admin("[usr]([ckey(usr.key)]) opened a canister that contains plasma at [loc.x], [loc.y], [loc.z]")
 					release_log += "Valve was <b>opened</b> by [usr], starting the transfer into the <font color='red'><b>air</b></font><br>"
 			valve_open = !valve_open
 
