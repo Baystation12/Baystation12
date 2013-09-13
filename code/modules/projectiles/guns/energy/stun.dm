@@ -35,6 +35,7 @@
 		charge_tick = 0
 
 		if(!power_supply) return 0 //sanity
+		if(power_supply.charge >= power_supply.maxcharge) return 0 // check if we actually need to recharge
 		if(isrobot(src.loc))
 			var/mob/living/silicon/robot/R = src.loc
 			if(R && R.cell)
