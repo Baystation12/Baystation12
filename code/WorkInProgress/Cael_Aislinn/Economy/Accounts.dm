@@ -338,3 +338,6 @@ var/global/list/all_money_accounts = list()
 	for(var/datum/money_account/D in all_money_accounts)
 		if(D.account_number == account_number)
 			return D
+
+/obj/machinery/account_database/process()
+	return 0
