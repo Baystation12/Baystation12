@@ -50,7 +50,7 @@
 		..()
 
 /obj/item/weapon/implant/tracking
-	name = "tracking"
+	name = "tracking implant"
 	desc = "Track with this."
 	var/id = 1.0
 
@@ -219,7 +219,7 @@ Implant Specifics:<BR>"}
 				del(src)
 
 /obj/item/weapon/implant/chem
-	name = "chem"
+	name = "chemical implant"
 	desc = "Injects things."
 	allow_reagents = 1
 
@@ -283,7 +283,7 @@ the implant may become unstable and either pre-maturely inject the subject or si
 			malfunction--
 
 /obj/item/weapon/implant/loyalty
-	name = "loyalty"
+	name = "loyalty implant"
 	desc = "Makes you loyal or such."
 
 	get_data()

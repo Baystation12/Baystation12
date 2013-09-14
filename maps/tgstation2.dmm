@@ -7823,7 +7823,7 @@
 "cUw" = (/obj/machinery/sleeper,/turf/simulated/shuttle/floor4,/area/shuttle/vox/station)
 "cUx" = (/obj/machinery/sleep_console,/turf/simulated/shuttle/floor4,/area/shuttle/vox/station)
 "cUy" = (/obj/machinery/bodyscanner,/turf/simulated/shuttle/floor4,/area/shuttle/vox/station)
-"cUz" = (/obj/machinery/body_scanconsole,/turf/simulated/shuttle/floor4,/area/shuttle/vox/station)
+"cUz" = (/obj/machinery/body_scanconsole{known_implants = list(/obj/item/weapon/implant/cortical)},/turf/simulated/shuttle/floor4,/area/shuttle/vox/station)
 "cUA" = (/turf/space,/turf/simulated/shuttle/wall{icon_state = "diagonalWall3"},/area/shuttle/vox/station)
 "cUB" = (/obj/structure/shuttle/engine/heater,/turf/simulated/shuttle/plating,/area/shuttle/vox/station)
 "cUC" = (/obj/structure/rack,/obj/item/clothing/tie/storage/black_vest,/obj/item/clothing/suit/space/vox/medic,/obj/item/clothing/head/helmet/space/vox/medic,/obj/item/clothing/mask/breath/vox,/turf/simulated/shuttle/floor4,/area/shuttle/vox/station)
