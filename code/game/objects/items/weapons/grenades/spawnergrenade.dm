@@ -8,6 +8,7 @@
 	var/banglet = 0
 	var/spawner_type = null // must be an object path
 	var/deliveryamt = 1 // amount of type to deliver
+	spawner_type = /mob/living/simple_animal/hostile/viscerator
 
 	prime()													// Prime now just handles the two loops that query for people in lockers and people who can see it.
 
@@ -34,7 +35,7 @@
 /obj/item/weapon/grenade/spawnergrenade/manhacks
 	name = "manhack delivery grenade"
 	spawner_type = /mob/living/simple_animal/hostile/viscerator
-	deliveryamt = 5
+	deliveryamt = 3
 	origin_tech = "materials=3;magnets=4;syndicate=4"
 
 /obj/item/weapon/grenade/spawnergrenade/spesscarp
