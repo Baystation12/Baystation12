@@ -46,7 +46,7 @@
 			E.take_damage(20, 0, 0)
 			E.fracture()
 
-/*/datum/genetics/side_effect/monkey
+/datum/genetics/side_effect/monkey
 	name = "Monkey"
 	symptom = "Subject starts drooling uncontrollably."
 	treatment = "Inject small dose of dylovene."
@@ -58,7 +58,7 @@
 
 	finish(mob/living/carbon/human/H)
 		if(!H.reagents.has_reagent("anti_toxin"))
-			H.monkeyize()**/
+			H.monkeyize()
 
 /datum/genetics/side_effect/confuse
 	name = "Confuse"
