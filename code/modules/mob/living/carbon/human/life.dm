@@ -202,7 +202,7 @@
 			if(getBrainLoss() >= 50)
 				if(10 <= rn && rn <= 12) if(!lying)
 					src << "\red Your legs won't respond properly, you fall down."
-					lying = 1
+					resting = 1
 
 	proc/handle_stasis_bag()
 		// Handle side effects from stasis bag
