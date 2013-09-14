@@ -164,6 +164,7 @@
 
 /obj/machinery/body_scanconsole
 	var/obj/machinery/bodyscanner/connected
+	var/known_implants = list(/obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /obj/item/weapon/implant/loyalty, /obj/item/weapon/implant/tracking)
 	var/delete
 	var/temphtml
 	name = "Body Scanner Console"
@@ -265,25 +266,6 @@
 						if(!D.hidden[SCANNER])
 							dat += text("<font color='red'><B>Warning: [D.form] Detected</B>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]</FONT><BR>")
 
-					var/implnts = ""
-					for(var/obj/item/weapon/implant/I in occupant)
-						if(I in occupant)
-							if(I.implanted)
-								if(istype(I, /obj/item/weapon/implant/death_alarm))
-									implnts += "<font color='blue'>death alarm</font><br>"
-								if(istype(I, /obj/item/weapon/implant/loyalty))
-									implnts += "<font color='blue'>loyalty</font><br>"
-								if(istype(I, /obj/item/weapon/implant/chem))
-									implnts += "<font color='red'>chemical</font><br>"
-								if(istype(I, /obj/item/weapon/implant/tracking))
-									implnts += "<font color='red'>tracking</font><br>"
-
-					if(implnts)
-						dat += "<br>"
-						dat += "Detected implants: <br>"
-
-						dat += implnts
-
 					dat += "<HR><table border='1'>"
 					dat += "<tr>"
 					dat += "<th>Organ</th>"
@@ -315,8 +297,14 @@
 							AN = "[e.broken_description]:"
 						if(e.open)
 							open = "Open:"
-						if(e.implants.len)
-							imp = "Unknown body present:"
+						var/unknown_body = 0
+						for(var/I in e.implants)
+							if(is_type_in_list(I,known_implants))
+								imp += "[I] implanted:"
+							else
+								unknown_body++
+						if(unknown_body)
+							imp += "Unknown body present:"
 						if(!AN && !open && !infected & !imp)
 							AN = "None:"
 						if(!(e.status & ORGAN_DESTROYED))
