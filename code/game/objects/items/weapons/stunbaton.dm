@@ -98,6 +98,7 @@
 	add_fingerprint(user)
 
 /obj/item/weapon/melee/baton/throw_impact(atom/hit_atom)
+	. = ..()
 	if (prob(50))
 		if(istype(hit_atom, /mob/living))
 			var/mob/living/carbon/human/H = hit_atom
@@ -115,9 +116,6 @@
 
 				H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by thrown [src.name] last touched by ([src.fingerprintslast])</font>"
 				log_attack("Flying [src.name], last touched by ([src.fingerprintslast]) stunned [H.name] ([H.ckey])" )
-
-				return
-	return ..()
 
 /obj/item/weapon/melee/baton/emp_act(severity)
 	switch(severity)
