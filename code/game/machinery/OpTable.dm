@@ -103,21 +103,25 @@
 /obj/machinery/optable/process()
 	check_victim()
 
-/obj/machinery/optable/proc/take_victim(mob/living/carbon/human/H, mob/living/carbon/user as mob)
-	if (H == user)
+/obj/machinery/optable/proc/take_victim(mob/living/carbon/C, mob/living/carbon/user as mob)
+	if (C == user)
 		user.visible_message("[user] climbs on the operating table.","You climb on the operating table.")
 	else
-		visible_message("\red [H] has been laid on the operating table by [user].", 3)
-	if (H.client)
-		H.client.perspective = EYE_PERSPECTIVE
-		H.client.eye = src
-	H.resting = 1
-	H.loc = src.loc
+		visible_message("\red [C] has been laid on the operating table by [user].", 3)
+	if (C.client)
+		C.client.perspective = EYE_PERSPECTIVE
+		C.client.eye = src
+	C.resting = 1
+	C.loc = src.loc
 	for(var/obj/O in src)
 		O.loc = src.loc
 	src.add_fingerprint(user)
-	icon_state = H.pulse ? "table2-active" : "table2-idle"
-	src.victim = H
+	if(ishuman(C))
+		var/mob/living/carbon/human/H = C
+		src.victim = H
+		icon_state = H.pulse ? "table2-active" : "table2-idle"
+	else
+		icon_state = "table2-idle"
 
 /obj/machinery/optable/verb/climb_on()
 	set name = "Climb On Table"
@@ -135,7 +139,7 @@
 
 /obj/machinery/optable/attackby(obj/item/weapon/W as obj, mob/living/carbon/user as mob)
 	if (istype(W, /obj/item/weapon/grab))
-		if(ishuman(W:affecting))
+		if(iscarbon(W:affecting))
 			take_victim(W:affecting,usr)
 			del(W)
 			return
