@@ -142,3 +142,25 @@
 	item_state = "jensencoat"
 	flags_inv = 0
 	siemens_coefficient = 0.6
+
+//Paradise Station
+
+/obj/item/clothing/suit/armor/hos/hosnavyjacket
+	name = "head of security navy jacket"
+	icon_state = "hosdnavyjacket"
+	item_state = "hosdnavyjacket"
+
+/obj/item/clothing/suit/armor/hos/hosbluejacket
+	name = "head of security blue jacket"
+	icon_state = "hosbluejacket"
+	item_state = "hosbluejacket"
+
+/obj/item/clothing/suit/armor/hos/officernavyjacket
+	name = "officer's navy jacket"
+	icon_state = "officernavyjacket"
+	item_state = "officernavyjacket"
+
+/obj/item/clothing/suit/armor/hos/officerbluejacket
+	name = "officer's blue jacket"
+	icon_state = "officerbluejacket"
+	item_state = "officerbluejacket"
