@@ -14,6 +14,9 @@
 	var/obj/item/weapon/paper/tofax = null // what we're sending to central
 	var/sendcooldown = 0 // to avoid spamming fax messages
 
+/obj/machinery/faxmachine/process()
+	return 0
+
 /obj/machinery/faxmachine/attack_ai(mob/user as mob)
 	return attack_hand(user)
 
