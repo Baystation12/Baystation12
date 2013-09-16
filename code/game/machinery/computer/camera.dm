@@ -183,11 +183,13 @@
 	desc = "Damn, they better have /tg/thechannel on these things."
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "entertainment"
+	network = list("news")
 
 /obj/machinery/computer/security/wooden_tv
 	name = "Security Cameras"
 	desc = "An old TV hooked into the stations camera network."
 	icon_state = "security_det"
+	network = list("news")
 
 
 /obj/machinery/computer/security/mining

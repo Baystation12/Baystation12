@@ -260,3 +260,54 @@
 	spawn(64)
 		icon_state = icon_on
 		on = 1
+
+
+/**************
+*video camera *
+***************/
+
+/obj/item/device/videocam
+	name = "camera"
+	icon = 'icons/obj/items.dmi'
+	desc = "video camera that can send live feed to the entertainment network."
+	icon_state = "videocam"
+	item_state = "videocam"
+	w_class = 2.0
+	flags = FPRINT | CONDUCT | USEDELAY | TABLEPASS
+	slot_flags = SLOT_BELT
+	m_amt = 2000
+	var/on = 0
+	var/obj/machinery/camera/camera
+	var/icon_on = "videocam_on"
+	var/icon_off = "videocam"
+	var/canhear_range = 7
+
+/obj/item/device/videocam/attack_self(mob/user)
+	on = !on
+	if(camera)
+		if(on==0)
+			src.icon_state = icon_off
+			camera.c_tag = null
+			camera.network = null
+		else
+			src.icon_state = icon_on
+			camera.network = list("news")
+			camera.c_tag = user.name
+	else
+		src.icon_state = icon_on
+		camera = new /obj/machinery/camera(src)
+		camera.network = list("news")
+		cameranet.removeCamera(camera)
+		camera.c_tag = user.name
+	user << "You switch the camera [on ? "on" : "off"]."
+
+/obj/item/device/videocam/examine()
+	..()
+	if(get_dist(usr,src) <= 1)
+		usr << "This video camera can send live feeds to the entertainment network. It's [camera ? "" : "in"]active."
+
+
+/obj/item/device/videocam/hear_talk(mob/M as mob, msg)
+	if (camera && on)
+		if(get_dist(src, M) <= canhear_range)
+			talk_into(M, msg)
