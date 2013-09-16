@@ -99,7 +99,10 @@ var/list/civilian_positions = list(
 	"Lawyer",
 	"Chaplain",
 	"Assistant",
-	"Nanotrasen Representative"
+	"Nanotrasen Representative",
+	"Clown",
+	"Mime"
+
 )
 
 
