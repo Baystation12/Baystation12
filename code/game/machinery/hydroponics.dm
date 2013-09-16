@@ -769,7 +769,6 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 		if(istype(src, /obj/machinery/hydroponics/soil))
 			user << "You clear up the [src]!"
 			del(src)
-/*
 	else if(istype(O, /obj/item/apiary))
 		if(planted)
 			user << "\red The hydroponics tray is already occupied!"
@@ -781,7 +780,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 			A.icon = src.icon
 			A.icon_state = src.icon_state
 			A.hydrotray_type = src.type
-			del(src)*/
+			del(src)
 	return
 
 
