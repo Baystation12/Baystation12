@@ -183,26 +183,26 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 		switch(screen)
 			if(0)
-				dat += "Welcome to Newscasting Unit #[src.unit_no].<BR> Interface & News networks Operational."
-				dat += "<BR><FONT SIZE=1>Property of Nanotransen Inc</FONT>"
+				dat += {"Welcome to Newscasting Unit #[src.unit_no].<BR> Interface & News networks Operational.
+				<BR><FONT SIZE=1>Property of Nanotransen Inc</FONT>"}
 				if(news_network.wanted_issue)
 					dat+= "<HR><A href='?src=\ref[src];view_wanted=1'>Read Wanted Issue</A>"
-				dat+= "<HR><BR><A href='?src=\ref[src];create_channel=1'>Create Feed Channel</A>"
-				dat+= "<BR><A href='?src=\ref[src];view=1'>View Feed Channels</A>"
-				dat+= "<BR><A href='?src=\ref[src];create_feed_story=1'>Submit new Feed story</A>"
-				dat+= "<BR><A href='?src=\ref[src];menu_paper=1'>Print newspaper</A>"
-				dat+= "<BR><A href='?src=\ref[src];refresh=1'>Re-scan User</A>"
-				dat+= "<BR><BR><A href='?src=\ref[human_or_robot_user];mach_close=newscaster_main'>Exit</A>"
+				dat+= {"<HR><BR><A href='?src=\ref[src];create_channel=1'>Create Feed Channel</A>
+				<BR><A href='?src=\ref[src];view=1'>View Feed Channels</A>
+				<BR><A href='?src=\ref[src];create_feed_story=1'>Submit new Feed story</A>
+				<BR><A href='?src=\ref[src];menu_paper=1'>Print newspaper</A>
+				<BR><A href='?src=\ref[src];refresh=1'>Re-scan User</A>
+				<BR><BR><A href='?src=\ref[human_or_robot_user];mach_close=newscaster_main'>Exit</A>"}
 				if(src.securityCaster)
 					var/wanted_already = 0
 					if(news_network.wanted_issue)
 						wanted_already = 1
 
-					dat+="<HR><B>Feed Security functions:</B><BR>"
-					dat+="<BR><A href='?src=\ref[src];menu_wanted=1'>[(wanted_already) ? ("Manage") : ("Publish")] \"Wanted\" Issue</A>"
-					dat+="<BR><A href='?src=\ref[src];menu_censor_story=1'>Censor Feed Stories</A>"
-					dat+="<BR><A href='?src=\ref[src];menu_censor_channel=1'>Mark Feed Channel with Nanotrasen D-Notice</A>"
-				dat+="<BR><HR>The newscaster recognises you as: <FONT COLOR='green'>[src.scanned_user]</FONT>"
+					dat += {"<HR><B>Feed Security functions:</B><BR>
+					<BR><A href='?src=\ref[src];menu_wanted=1'>[(wanted_already) ? ("Manage") : ("Publish")] \"Wanted\" Issue</A>
+					<BR><A href='?src=\ref[src];menu_censor_story=1'>Censor Feed Stories</A>
+					<BR><A href='?src=\ref[src];menu_censor_channel=1'>Mark Feed Channel with Nanotrasen D-Notice</A>
+					<BR><HR>The newscaster recognises you as: <FONT COLOR='green'>[src.scanned_user]</FONT>"}
 			if(1)
 				dat+= "Station Feed Channels<HR>"
 				if( isemptylist(news_network.network_channels) )
@@ -224,18 +224,18 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<BR><HR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Back</A>"
 			if(2)
-				dat+="Creating new Feed Channel..."
-				dat+="<HR><B><A href='?src=\ref[src];set_channel_name=1'>Channel Name</A>:</B> [src.channel_name]<BR>"
-				dat+="<B>Channel Author:</B> <FONT COLOR='green'>[src.scanned_user]</FONT><BR>"
-				dat+="<B><A href='?src=\ref[src];set_channel_lock=1'>Will Accept Public Feeds</A>:</B> [(src.c_locked) ? ("NO") : ("YES")]<BR><BR>"
-				dat+="<BR><A href='?src=\ref[src];submit_new_channel=1'>Submit</A><BR><BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"
+				dat+={"Creating new Feed Channel...
+				<HR><B><A href='?src=\ref[src];set_channel_name=1'>Channel Name</A>:</B> [src.channel_name]<BR>
+				<B>Channel Author:</B> <FONT COLOR='green'>[src.scanned_user]</FONT><BR>
+				<B><A href='?src=\ref[src];set_channel_lock=1'>Will Accept Public Feeds</A>:</B> [(src.c_locked) ? ("NO") : ("YES")]<BR><BR>
+				<BR><A href='?src=\ref[src];submit_new_channel=1'>Submit</A><BR><BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"}
 			if(3)
-				dat+="Creating new Feed Message..."
-				dat+="<HR><B><A href='?src=\ref[src];set_channel_receiving=1'>Receiving Channel</A>:</B> [src.channel_name]<BR>" //MARK
-				dat+="<B>Message Author:</B> <FONT COLOR='green'>[src.scanned_user]</FONT><BR>"
-				dat+="<B><A href='?src=\ref[src];set_new_message=1'>Message Body</A>:</B> [src.msg] <BR>"
-				dat+="<B><A href='?src=\ref[src];set_attachment=1'>Attach Photo</A>:</B>  [(src.photo ? "Photo Attached" : "No Photo")]</BR>"
-				dat+="<BR><A href='?src=\ref[src];submit_new_message=1'>Submit</A><BR><BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"
+				dat+={"Creating new Feed Message...
+				<HR><B><A href='?src=\ref[src];set_channel_receiving=1'>Receiving Channel</A>:</B> [src.channel_name]<BR>
+				<B>Message Author:</B> <FONT COLOR='green'>[src.scanned_user]</FONT><BR>
+				<B><A href='?src=\ref[src];set_new_message=1'>Message Body</A>:</B> [src.msg] <BR>
+				<B><A href='?src=\ref[src];set_attachment=1'>Attach Photo</A>:</B>  [(src.photo ? "Photo Attached" : "No Photo")]</BR>
+				<BR><A href='?src=\ref[src];submit_new_message=1'>Submit</A><BR><BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A><BR>"}
 			if(4)
 				dat+="Feed story successfully submitted to [src.channel_name].<BR><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Return</A><BR>"
