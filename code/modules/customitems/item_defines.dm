@@ -156,7 +156,7 @@
 	desc = "A faded badge, backed with leather, that reads 'NT Security Force' across the front. It bears the emblem of the Forensic division."
 	icon_state = "ana_badge"
 	item_state = "ana_badge"
-	color = "ana_badge"
+	_color = "ana_badge"
 
 /obj/item/fluff/ana_issek_2/attack_self(mob/user as mob)
 	if(isliving(user))
@@ -500,7 +500,7 @@
 	item_state = "lgloves"
 	siemens_coefficient = 0.30
 	permeability_coefficient = 0.01
-	color="white"
+	_color="white"
 
 /obj/item/clothing/gloves/fluff/walter_brooks_1 //botanistpower: Walter Brooks
 	name = "mittens"
@@ -508,7 +508,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "walter_brooks_1"
 	item_state = "bluegloves"
-	color="blue"
+	_color="blue"
 
 /obj/item/clothing/gloves/fluff/chal_appara_1 //furlucis: Chal Appara
 	name = "Left Black Glove"
@@ -619,7 +619,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "graycoat"
 	item_state = "graycoat"
-	color = "graycoat"
+	_color = "graycoat"
 
 /obj/item/clothing/suit/storage/det_suit/fluff/leatherjack //atomicdog92: Seth Sealis
 	name = "leather jacket"
@@ -627,7 +627,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "leatherjack"
 	item_state = "leatherjack"
-	color = "leatherjack"
+	_color = "leatherjack"
 
 /obj/item/clothing/suit/armor/vest/fluff/deus_blueshield //deusdactyl
 	name = "blue shield security armor"
@@ -652,7 +652,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "milohachert"
 	item_state = "milohachert"
-	color = "milohachert"
+	_color = "milohachert"
 
 /obj/item/clothing/under/fluff/jumpsuitdown //searif: Yuki Matsuda
 	name = "rolled down jumpsuit"
@@ -660,7 +660,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "jumpsuitdown"
 	item_state = "jumpsuitdown"
-	color = "jumpsuitdown"
+	_color = "jumpsuitdown"
 
 /obj/item/clothing/under/fluff/lilith_vinous_1 //slyhidden: Lilith Vinous
 	name = "casual security uniform"
@@ -668,7 +668,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "lilith_uniform"
 	item_state = "lilith_uniform"
-	color = "lilith_uniform"
+	_color = "lilith_uniform"
 
 /obj/item/clothing/under/fluff/ana_issek_1 //suethecake: Ana Issek
 	name = "retired uniform"
@@ -676,7 +676,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "ana_uniform"
 	item_state = "ana_uniform"
-	color = "ana_uniform"
+	_color = "ana_uniform"
 
 /obj/item/clothing/under/fluff/olddressuniform //desiderium: Momiji Inubashiri
 	name = "retired dress uniform"
@@ -684,14 +684,14 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "olddressuniform"
 	item_state = "olddressuniform"
-	color = "olddressuniform"
+	_color = "olddressuniform"
 
 /obj/item/clothing/under/rank/security/fluff/jeremy_wolf_1 //whitewolf41: Jeremy Wolf
 	name = "worn officer's uniform"
 	desc = "An old red security jumpsuit. Seems to have some slight modifications."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "jeremy_wolf_1"
-	color = "jeremy_wolf_1"
+	_color = "jeremy_wolf_1"
 
 /obj/item/clothing/under/fluff/tian_dress //phaux: Tian Yinhu
 	name = "purple dress"
@@ -699,7 +699,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "tian_dress"
 	item_state = "tian_dress"
-	color = "tian_dress"
+	_color = "tian_dress"
 
 /obj/item/clothing/under/rank/bartender/fluff/classy	//searif: Ara Al-Jazari
 	name = "classy bartender uniform"
@@ -707,7 +707,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "ara_bar_uniform"
 	item_state = "ara_bar_uniform"
-	color = "ara_bar_uniform"
+	_color = "ara_bar_uniform"
 
 /obj/item/clothing/under/fluff/callum_suit //roaper: Callum Leamus
 	name = "knockoff suit"
@@ -715,7 +715,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "callum_suit"
 	item_state = "callum_suit"
-	color = "callum_suit"
+	_color = "callum_suit"
 
 /obj/item/clothing/under/fluff/solara_light_1 //bluefishie: Solara Born-In-Light
 	name = "Elaborate Purple Dress"
@@ -723,7 +723,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "solara_dress"
 	item_state = "solara_dress"
-	color = "solara_dress"
+	_color = "solara_dress"
 
 /////// NT-SID Suit //Zuhayr: Jane Doe
 
@@ -734,7 +734,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "jane_sid_suit"
 	item_state = "jane_sid_suit"
-	color = "jane_sid_suit"
+	_color = "jane_sid_suit"
 	has_sensor = 2
 	sensor_mode = 3
 	flags = FPRINT | TABLEPASS
@@ -749,14 +749,14 @@
 		return 0
 
 	if(src.icon_state == "jane_sid_suit_down")
-		src.color = "jane_sid_suit"
+		src._color = "jane_sid_suit"
 		usr << "You zip up the [src]."
 	else
-		src.color = "jane_sid_suit_down"
+		src._color = "jane_sid_suit_down"
 		usr << "You unzip and roll down the [src]."
 
-	src.icon_state = "[color]"
-	src.item_state = "[color]"
+	src.icon_state = "[_color]"
+	src.item_state = "[_color]"
 	usr.update_inv_w_uniform()
 
 ////// Wyatt's Ex-Commander Jumpsuit - RawrTaicho
@@ -767,7 +767,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "wyatt_uniform"
 	item_state = "wyatt_uniform"
-	color = "wyatt_uniform"
+	_color = "wyatt_uniform"
 
 //////////// Masks ////////////
 
@@ -799,7 +799,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "altair_locket"
 	item_state = "altair_locket"
-	color = "altair_locket"
+	_color = "altair_locket"
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 1
@@ -813,7 +813,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "konaahirano"
 	item_state = "konaahirano"
-	color = "konaahirano"
+	_color = "konaahirano"
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 1
@@ -883,7 +883,7 @@
 	desc = "Made of a special fiber that gives special protection against biohazards. Has a cross on the chest denoting that the wearer is trained medical personnel and short sleeves."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "medical_short"
-	color = "medical_short"
+	_color = "medical_short"
 
 /obj/item/clothing/suit/storage/labcoat/fluff/red
 	name = "red labcoat"
@@ -899,7 +899,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "retpolcoat"
 	item_state = "retpolcoat"
-	color = "retpolcoat"
+	_color = "retpolcoat"
 
 /obj/item/clothing/head/det_hat/fluff/retpolcap
 	name = "retired colony patrolman's cap"
@@ -912,7 +912,7 @@
 	desc = "A meticulously clean police uniform belonging to Precinct 31, Outer Light Colony. The word \"RETIRED\" is engraved tastefully and professionally in the badge below the number, 501."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "retpoluniform"
-	color = "retpoluniform"
+	_color = "retpoluniform"
 
 //////////// Weapons ////////////
 

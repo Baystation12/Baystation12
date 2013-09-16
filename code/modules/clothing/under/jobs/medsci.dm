@@ -6,7 +6,7 @@
 	name = "research director's jumpsuit"
 	icon_state = "director"
 	item_state = "g_suit"
-	color = "director"
+	_color = "director"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	flags = FPRINT | TABLEPASS
 
@@ -15,7 +15,7 @@
 	name = "scientist's jumpsuit"
 	icon_state = "toxins"
 	item_state = "w_suit"
-	color = "toxinswhite"
+	_color = "toxinswhite"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
@@ -26,7 +26,7 @@
 	name = "chemist's jumpsuit"
 	icon_state = "chemistry"
 	item_state = "w_suit"
-	color = "chemistrywhite"
+	_color = "chemistrywhite"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -38,7 +38,7 @@
 	name = "chief medical officer's jumpsuit"
 	icon_state = "cmo"
 	item_state = "w_suit"
-	color = "cmo"
+	_color = "cmo"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -47,7 +47,7 @@
 	name = "geneticist's jumpsuit"
 	icon_state = "genetics"
 	item_state = "w_suit"
-	color = "geneticswhite"
+	_color = "geneticswhite"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	flags = FPRINT | TABLEPASS
@@ -57,7 +57,7 @@
 	name = "virologist's jumpsuit"
 	icon_state = "virology"
 	item_state = "w_suit"
-	color = "virologywhite"
+	_color = "virologywhite"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -66,7 +66,7 @@
 	name = "nurse's suit"
 	icon_state = "nursesuit"
 	item_state = "nursesuit"
-	color = "nursesuit"
+	_color = "nursesuit"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -75,7 +75,7 @@
 	name = "nurse's dress"
 	icon_state = "nurse"
 	item_state = "nurse"
-	color = "nurse"
+	_color = "nurse"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -84,7 +84,7 @@
 	name = "orderly's uniform"
 	icon_state = "orderly"
 	item_state = "orderly"
-	color = "orderly"
+	_color = "orderly"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -93,7 +93,7 @@
 	name = "medical doctor's jumpsuit"
 	icon_state = "medical"
 	item_state = "w_suit"
-	color = "medical"
+	_color = "medical"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	flags = FPRINT | TABLEPASS
@@ -102,21 +102,21 @@
 	name = "medical scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in baby blue."
 	icon_state = "scrubsblue"
-	color = "scrubsblue"
+	_color = "scrubsblue"
 	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/under/rank/medical/green
 	name = "medical scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in dark green."
 	icon_state = "scrubsgreen"
-	color = "scrubsgreen"
+	_color = "scrubsgreen"
 	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/under/rank/medical/purple
 	name = "medical scrubs"
 	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in deep purple."
 	icon_state = "scrubspurple"
-	color = "scrubspurple"
+	_color = "scrubspurple"
 	flags = FPRINT | TABLEPASS
 
 
@@ -130,7 +130,7 @@
 	name = "geneticist's jumpsuit"
 	icon_state = "genetics_new"
 	item_state = "w_suit"
-	color = "genetics_new"
+	_color = "genetics_new"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -139,7 +139,7 @@
 	name = "chemist's jumpsuit"
 	icon_state = "chemist_new"
 	item_state = "w_suit"
-	color = "chemist_new"
+	_color = "chemist_new"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
@@ -148,7 +148,7 @@
 	name = "scientist's jumpsuit"
 	icon_state = "scientist_new"
 	item_state = "w_suit"
-	color = "scientist_new"
+	_color = "scientist_new"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
 
@@ -157,6 +157,6 @@
 	name = "virologist's jumpsuit"
 	icon_state = "virologist_new"
 	item_state = "w_suit"
-	color = "virologist_new"
+	_color = "virologist_new"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
