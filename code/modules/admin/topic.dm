@@ -1446,7 +1446,7 @@
 
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
 
-		for(var/obj/machinery/faxmachine/F in world)
+		for(var/obj/machinery/faxmachine/F in machines)
 			if(! (F.stat & (BROKEN|NOPOWER) ) )
 				var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
 				P.name = "[command_name()]- [customname]"
