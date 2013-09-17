@@ -36,9 +36,9 @@
 				log_admin("[key_name(usr)] has spawned a nuke team.")
 				if(!src.makeNukeTeam())
 					usr << "\red Unfortunately there weren't enough candidates available."
-/*			if("8")
+			if("8")
 				log_admin("[key_name(usr)] has spawned a ninja.")
-				src.makeSpaceNinja()*/
+				src.makeSpaceNinja()
 			if("9")
 				log_admin("[key_name(usr)] has spawned aliens.")
 				src.makeAliens()

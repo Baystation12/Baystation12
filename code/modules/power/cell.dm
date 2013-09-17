@@ -62,12 +62,12 @@
 
 /obj/item/weapon/cell/attack_self(mob/user as mob)
 	src.add_fingerprint(user)
-/*
+
 	if(ishuman(user))
 		if(istype(user:gloves, /obj/item/clothing/gloves/space_ninja)&&user:gloves:candrain&&!user:gloves:draining)
 			call(/obj/item/clothing/gloves/space_ninja/proc/drain)("CELL",src,user:wear_suit)
 	return
-*/
+
 /obj/item/weapon/cell/attackby(obj/item/W, mob/user)
 	..()
 	if(istype(W, /obj/item/weapon/reagent_containers/syringe))

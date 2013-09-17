@@ -309,11 +309,11 @@ client/proc/one_click_antag()
 /datum/admins/proc/makeAliens()
 	alien_infestation(3)
 	return 1
-/*
+
 /datum/admins/proc/makeSpaceNinja()
 	space_ninja_arrival()
 	return 1
-*/
+
 /datum/admins/proc/makeDeathsquad()
 	var/list/mob/dead/observer/candidates = list()
 	var/mob/dead/observer/theghost = null

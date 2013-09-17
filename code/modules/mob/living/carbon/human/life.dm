@@ -1188,7 +1188,7 @@
 				else
 					see_invisible = SEE_INVISIBLE_LIVING
 					seer = 0
-/*
+
 			if(istype(wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja))
 				var/obj/item/clothing/mask/gas/voice/space_ninja/O = wear_mask
 				switch(O.mode)
@@ -1209,7 +1209,7 @@
 					if(3)
 						sight |= SEE_TURFS
 						if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
-*/
+
 			if(glasses)
 				if(istype(glasses, /obj/item/clothing/glasses/meson))
 					sight |= SEE_TURFS

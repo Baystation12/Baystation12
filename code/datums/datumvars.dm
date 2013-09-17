@@ -498,8 +498,8 @@ client
 			usr << "This can only be used on instances of type /mob"
 			return
 
-//		src.cmd_admin_ninjafy(M)
-//		href_list["datumrefresh"] = href_list["ninja"]
+		src.cmd_admin_ninjafy(M)
+		href_list["datumrefresh"] = href_list["ninja"]
 
 	else if(href_list["godmode"])
 		if(!check_rights(R_REJUVINATE))	return
