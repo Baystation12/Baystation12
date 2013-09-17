@@ -298,6 +298,7 @@ var/global/datum/controller/gameticker/ticker
 			return 0
 
 		mode.process()
+		mode.process_job_tasks()
 
 		emergency_shuttle.process()
 
@@ -365,6 +366,8 @@ var/global/datum/controller/gameticker/ticker
 				robo.laws.show_laws(world)
 
 	mode.declare_completion()//To declare normal completion.
+
+	mode.declare_job_completion()
 
 	//calls auto_declare_completion_* for all modes
 	for(var/handler in typesof(/datum/game_mode/proc))

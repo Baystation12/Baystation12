@@ -19,6 +19,11 @@
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
 	minimal_player_age = 7
 
+	// All science-y guys get bonuses for maxing out their tech.
+	required_objectives=list(
+		/datum/job_objective/maximize_research
+	)
+
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/rd(H), slot_ears)
@@ -49,6 +54,11 @@
 	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
 	alt_titles = list("Xenoarcheologist", "Anomalist", "Plasma Researcher")
 
+	// All science-y guys get bonuses for maxing out their tech.
+	required_objectives=list(
+		/datum/job_objective/maximize_research
+	)
+
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sci(H), slot_ears)
@@ -76,6 +86,12 @@
 	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology)
 	minimal_access = list(access_research, access_xenobiology)
 
+	// All science-y guys get bonuses for maxing out their tech.
+	required_objectives=list(
+		/datum/job_objective/maximize_research
+	)
+
+
 	equip(var/mob/living/carbon/human/H)
 		if(!H) return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sci(H), slot_ears)
@@ -102,6 +118,12 @@
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
+
+	required_objectives=list(
+		/datum/job_objective/make_cyborg,
+//		/datum/job_objective/make_mommi,
+		/datum/job_objective/make_ripley
+	)
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

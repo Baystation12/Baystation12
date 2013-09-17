@@ -48,6 +48,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	req_access = list(access_tox)	//Data and setting manipulation requires scientist access.
 
+/obj/machinery/computer/rdconsole/proc/Maximize()
+
+	files.known_tech=files.possible_tech
+	for(var/datum/tech/KT in files.known_tech)
+		if(KT.level < KT.max_level)
+			KT.level=KT.max_level
 
 /obj/machinery/computer/rdconsole/proc/CallTechName(var/ID) //A simple helper proc to find the name of a tech with a given ID.
 	var/datum/tech/check_tech
@@ -208,6 +214,15 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		spawn(50)
 			screen = 1.2
 			files.AddTech2Known(t_disk.stored)
+			updateUsrDialog()
+			griefProtection() //Update centcomm too
+
+	else if(href_list["hax"]) // aww shit
+		if(!usr.client.holder) return
+		screen = 0.0
+		spawn(50)
+			Maximize()
+			screen = 1.0
 			updateUsrDialog()
 			griefProtection() //Update centcomm too
 
@@ -599,6 +614,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_destroy != null) dat += "<A href='?src=\ref[src];menu=2.2'>Destructive Analyzer Menu</A><BR>"
 			if(linked_lathe != null) dat += "<A href='?src=\ref[src];menu=3.1'>Protolathe Construction Menu</A><BR>"
 			if(linked_imprinter != null) dat += "<A href='?src=\ref[src];menu=4.1'>Circuit Construction Menu</A><BR>"
+			if(user.client.holder) dat += "<A href='?src=\ref[src];hax=1'>MAXIMUM SCIENCE</A><BR>"
 			dat += "<A href='?src=\ref[src];menu=1.6'>Settings</A>"
 
 		if(1.1) //Research viewer
