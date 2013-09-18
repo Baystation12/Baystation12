@@ -202,7 +202,7 @@
 			if(getBrainLoss() >= 50)
 				if(10 <= rn && rn <= 12) if(!lying)
 					src << "\red Your legs won't respond properly, you fall down."
-					lying = 1
+					resting = 1
 
 	proc/handle_stasis_bag()
 		// Handle side effects from stasis bag
@@ -215,6 +215,7 @@
 			adjustCloneLoss(0.1)
 
 	proc/handle_mutations_and_radiation()
+
 		if(getFireLoss())
 			if((COLD_RESISTANCE in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
@@ -237,6 +238,16 @@
 				radiation = 0
 
 			else
+				if(species.flags & RAD_ABSORB)
+					var/rads = radiation/25
+					radiation -= rads
+					nutrition += rads
+					heal_overall_damage(rads,rads)
+					adjustOxyLoss(-(rads))
+					adjustToxLoss(-(rads))
+					updatehealth()
+					return
+
 				var/damage = 0
 				switch(radiation)
 					if(1 to 49)
@@ -275,6 +286,7 @@
 	proc/breathe()
 		if(reagents.has_reagent("lexorin")) return
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
+		if(species && species.flags & NO_BREATHE) return
 
 		var/datum/organ/internal/lungs/L = internal_organs["lungs"]
 		L.process()
@@ -311,7 +323,6 @@
 					breath_moles = environment.total_moles()*BREATH_PERCENTAGE
 
 					breath = loc.remove_air(breath_moles)
-
 
 					if(!is_lung_ruptured())
 						if(!breath || breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
@@ -849,6 +860,8 @@
 					if(A.lighting_use_dynamic)	light_amount = min(10,T.lighting_lumcount) - 5 //hardcapped so it's not abused by having a ton of flashlights
 					else						light_amount =  5
 			nutrition += light_amount
+			traumatic_shock -= light_amount
+
 			if(nutrition > 500)
 				nutrition = 500
 			if(light_amount > 2) //if there's enough light, heal
@@ -901,6 +914,7 @@
 		if(species.flags & REQUIRE_LIGHT)
 			if(nutrition < 200)
 				take_overall_damage(2,0)
+				traumatic_shock++
 
 		if (drowsyness)
 			drowsyness--

@@ -12,6 +12,7 @@
 	icon_action_button = "action_hardhat"
 	heat_protection = HEAD
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
+	species_restricted = list("exclude","Unathi","Tajaran","Skrell","Diona","Vox")
 
 	attack_self(mob/user)
 		if(!isturf(user.loc))
@@ -46,6 +47,7 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
+	species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
 
 //Chief Engineer's rig
 /obj/item/clothing/head/helmet/space/rig/elite

@@ -117,16 +117,23 @@ datum/controller/vote
 		var/text
 		if(winners.len > 0)
 			if(winners.len > 1)
-				text = "<b>Vote Tied Between:</b>\n"
-				for(var/option in winners)
-					text += "\t[option]\n"
+				if(mode != "gamemode" || ticker.hide_mode == 0) // Here we are making sure we don't announce potential game modes
+					text = "<b>Vote Tied Between:</b>\n"
+					for(var/option in winners)
+						text += "\t[option]\n"
 			. = pick(winners)
 
 			for(var/key in current_votes)
 				if(choices[current_votes[key]] == .)
 					round_voters += key // Keep track of who voted for the winning round.
+			if((mode == "gamemode" && . == "extended") || ticker.hide_mode == 0) // Announce Extended gamemode, but not other gamemodes
+				text += "<b>Vote Result: [.]</b>"
+			else
+				if(mode != "gamemode")
+					text += "<b>Vote Result: [.]</b>"
+				else
+					text += "<b>The vote has ended.</b>" // What will be shown if it is a gamemode vote that isn't extended
 
-			text += "<b>Vote Result: [.]</b>"
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 		log_vote(text)

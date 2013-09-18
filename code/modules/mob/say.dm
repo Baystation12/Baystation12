@@ -62,7 +62,11 @@
 	return
 
 /mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
+
 	if(!other)
+		return 1
+	//Universal speak makes everything understandable, for obvious reasons.
+	else if(other.universal_speak || src.universal_speak)
 		return 1
 	else if (src.stat == 2)
 		return 1
@@ -88,6 +92,7 @@
 	return 0
 
 /mob/proc/say_quote(var/text,var/datum/language/speaking)
+
 	if(!text)
 		return "says, \"...\"";	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 		//tcomms code is still runtiming somewhere here
@@ -97,6 +102,8 @@
 
 	if (speaking)
 		speechverb = "[speaking.speech_verb]</span>, \"<span class='[speaking.colour]'>"
+	else if(speak_emote && speak_emote.len)
+		speechverb = "[pick(speak_emote)], \""
 	else if (src.stuttering)
 		speechverb = "stammers, \""
 	else if (src.slurring)
