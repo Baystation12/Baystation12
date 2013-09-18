@@ -281,6 +281,7 @@
 	var/icon_on = "videocam_on"
 	var/icon_off = "videocam"
 	var/canhear_range = 7
+	var/watcherslist = list()
 
 /obj/item/device/videocam/attack_self(mob/user)
 	on = !on
@@ -311,3 +312,5 @@
 	if (camera && on)
 		if(get_dist(src, M) <= canhear_range)
 			talk_into(M, msg)
+		for(var/mob/living/carbon/human/H in watcherslist)
+			H.show_message(text("\blue (Newscaster) [] says, '[]'",M,msg), 1)

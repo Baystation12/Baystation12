@@ -46,7 +46,7 @@
 		for(var/obj/machinery/camera/C in L)
 			if(can_access_camera(C))
 				D[text("[][]", C.c_tag, (C.status ? null : " (Deactivated)"))] = C
-
+				C.watcherslist -= user
 		var/t = input(user, "Which camera should you change to?") as null|anything in D
 		if(!t)
 			user.unset_machine()
@@ -59,6 +59,7 @@
 			return 0
 
 		if(C)
+			C.watcherslist += user
 			switch_to_camera(user, C)
 			spawn(5)
 				attack_hand(user)

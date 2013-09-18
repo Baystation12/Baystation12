@@ -17,6 +17,7 @@
 	var/invuln = null
 	var/bugged = 0
 	var/obj/item/weapon/camera_assembly/assembly = null
+	var/watcherslist = list()
 
 	// WIRES
 	var/wires = 63 // 0b111111
