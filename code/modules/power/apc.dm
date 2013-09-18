@@ -903,23 +903,26 @@
 					malfai << "Hack complete. The APC is now under your exclusive control."
 					update_icon()
 
-	/*else if (href_list["occupyapc"])
+	else if (href_list["occupyapc"])
 		malfoccupy(usr)
 
 
 	else if (href_list["deoccupyapc"])
-		malfvacate()*/
+		malfvacate()
 
 	if(usingUI)
 		src.updateDialog()
 
 	return
 
-/*/obj/machinery/power/apc/proc/malfoccupy(var/mob/living/silicon/ai/malf)
+/obj/machinery/power/apc/proc/malfoccupy(var/mob/living/silicon/ai/malf)
 	if(!istype(malf))
 		return
 	if(istype(malf.loc, /obj/machinery/power/apc)) // Already in an APC
 		malf << "<span class='warning'>You must evacuate your current apc first.</span>"
+		return
+	if(!malf.can_shunt)
+		malf << "<span class='warning'>You cannot shunt.</span>"
 		return
 	if(src.z != 1)
 		return
@@ -953,7 +956,7 @@
 		if(forced)
 			src.occupant.loc = src.loc
 			src.occupant.death()
-			src.occupant.gib()*/
+			src.occupant.gib()
 
 
 /obj/machinery/power/apc/proc/ion_act()

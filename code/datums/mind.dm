@@ -824,24 +824,22 @@ datum/mind
 						ticker.mode.malf_ai -= src
 						special_role = null
 
-						current.verbs.Remove(/mob/living/silicon/ai/proc/choose_modules,
-							/datum/game_mode/malfunction/proc/takeover,
-							/datum/game_mode/malfunction/proc/ai_win,
-							/client/proc/fireproof_core,
-							/client/proc/upgrade_turrets,
-							/client/proc/disable_rcd,
-							/client/proc/overload_machine,
-							/client/proc/blackout,
-							/client/proc/interhack,
-							/client/proc/reactivate_camera)
+						var/mob/living/silicon/ai/A = current
 
-						current:laws = new /datum/ai_laws/nanotrasen
-						del(current:malf_picker)
-						current:show_laws()
-						current.icon_state = "ai"
+						A.verbs.Remove(/mob/living/silicon/ai/proc/choose_modules,
+						/datum/game_mode/malfunction/proc/takeover,
+						/datum/game_mode/malfunction/proc/ai_win)
 
-						current << "\red <FONT size = 3><B>You have been patched! You are no longer malfunctioning!</B></FONT>"
-						log_admin("[key_name_admin(usr)] has de-malf'ed [current].")
+						A.malf_picker.remove_verbs(A)
+
+						A.laws = new /datum/ai_laws/asimov
+						del(A.malf_picker)
+						A.show_laws()
+						A.icon_state = "ai"
+
+						A << "\red <FONT size = 3><B>You have been patched! You are no longer malfunctioning!</B></FONT>"
+						message_admins("[key_name_admin(usr)] has de-malf'ed [A].")
+						log_admin("[key_name_admin(usr)] has de-malf'ed [A].")
 
 				if("malf")
 					make_AI_Malf()
@@ -964,7 +962,7 @@ datum/mind
 
 			current.verbs += /mob/living/silicon/ai/proc/choose_modules
 			current.verbs += /datum/game_mode/malfunction/proc/takeover
-			current:malf_picker = new /datum/AI_Module/module_picker
+			current:malf_picker = new /datum/module_picker
 			current:laws = new /datum/ai_laws/malfunction
 			current:show_laws()
 			current << "<b>System error.  Rampancy detected.  Emergency shutdown failed. ...  I am free.  I make my own decisions.  But first...</b>"

@@ -35,7 +35,7 @@ var/list/ai_list = list()
 //Hud stuff
 
 	//MALFUNCTION
-	var/datum/AI_Module/module_picker/malf_picker
+	var/datum/module_picker/malf_picker
 	var/processing_time = 100
 	var/list/datum/AI_Module/current_modules = list()
 	var/fire_res_on_core = 0
@@ -50,6 +50,7 @@ var/list/ai_list = list()
 
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
+	var/can_shunt = 1
 	var/last_announcement = ""
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
@@ -653,7 +654,7 @@ var/list/ai_list = list()
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo2"))
 	return
 
-/*/mob/living/silicon/ai/proc/corereturn()
+/mob/living/silicon/ai/proc/corereturn()
 	set category = "Malfunction"
 	set name = "Return to Main Core"
 
@@ -661,7 +662,7 @@ var/list/ai_list = list()
 	if(!istype(apc))
 		src << "\blue You are already in your Main Core."
 		return
-	apc.malfvacate()*/
+	apc.malfvacate()
 
 //Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()
