@@ -376,3 +376,43 @@
 
 
 
+
+//////////////////////Grutor:
+/////////////////////Zombie tranformation into NPC type zombie//////////////
+////////////////////I'm very certain we can just remove player key//////////
+////////////////move it to AI control instead and change body icon//////////
+////////////////////////to zombie. But o'well lol//////////////////////////
+/mob/living/carbon/human/proc/Turnundead()
+	if (monkeyizing)
+		return
+	for(var/obj/item/W in src)
+		drop_from_inventory(W)		//should be replace with look for something that can transfer items
+	regenerate_icons()
+	monkeyizing = 1
+	canmove = 0
+	icon = null
+	invisibility = 101
+	for(var/t in organs)	//this really should not be necessary
+		del(t)
+
+	var/mob/living/simple_animal/hostile/new_zombie = new /mob/living/simple_animal/hostile/zombie (src.loc)
+
+	new_zombie.name = "Zombie \red[name]"
+	new_zombie.desc = "A person that has fallen victim to cannibles."
+	new_zombie.loc	= loc
+	//If you wish everything from here to there can be edited out...
+	new_zombie.dna	= dna	//Don't know why I did this, you can't prick em with a needle
+	if(src.viruses)			//Checks and see if the source has any viruses
+		for(var/datum/disease/tempvirus in new_zombie.viruses)	//retrieves anything of disease type
+			tempvirus.cure(0)	//For each virus found cure it
+		//One day we will need this...
+		for(var/datum/disease/cv in src.viruses)
+			new_zombie.viruses += cv			//Add/assign the list to the zombie
+			cv.affected_mob = new_zombie					//Change the copy's var to zombie
+			cv.strain_data = cv.strain_data.Copy()		//what? line 520 does this already....
+			cv.holder = new_zombie						//new_zombie is holder of the virus
+			cv.carrier = 1
+	//Edit from there to hear if you wish.
+	spawn(0)//To prevent the proc from returning null.
+		del(src)
+	return
