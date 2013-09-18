@@ -23,7 +23,7 @@
 										"diamond"=0,
 										"plasma"=0,
 										"uranium"=0,
-										//"bananium"=0 No need to state what it can no longer hold
+										"bananium"=0
 										)
 	var/res_max_amount = 200000
 	var/datum/research/files
@@ -90,7 +90,7 @@
 						/obj/item/mecha_parts/part/durand_right_leg,
 						/obj/item/mecha_parts/part/durand_armour
 					),
-	/*"H.O.N.K"=list(
+	"H.O.N.K"=list(
 						/obj/item/mecha_parts/chassis/honker,
 						/obj/item/mecha_parts/part/honker_torso,
 						/obj/item/mecha_parts/part/honker_head,
@@ -98,7 +98,7 @@
 						/obj/item/mecha_parts/part/honker_right_arm,
 						/obj/item/mecha_parts/part/honker_left_leg,
 						/obj/item/mecha_parts/part/honker_right_leg
-						), No need for HONK stuff*/
+						),
 	"Exosuit Equipment"=list(
 						/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
 						/obj/item/mecha_parts/mecha_equipment/tool/drill,
@@ -112,9 +112,9 @@
 						///obj/item/mecha_parts/mecha_equipment/jetpack, //TODO MECHA JETPACK SPRITE MISSING
 						/obj/item/mecha_parts/mecha_equipment/weapon/energy/taser,
 						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg,
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/mousetrap_mortar, HONK-related mech part
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar, Also HONK-related
-						///obj/item/mecha_parts/mecha_equipment/weapon/honker Thirdly HONK-related
+						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/mousetrap_mortar,
+						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar,
+						/obj/item/mecha_parts/mecha_equipment/weapon/honker
 						),
 
 	"Robotic Upgrade Modules" = list(
