@@ -74,17 +74,17 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
     {^{:~displayDNABlocks(occupant.uniqueIdentity, selectedUIBlock, selectedUISubBlock, dnaBlockSize, 'UI')}}
     <div class="clearBoth"></div>
 	<div class="item">
-		<div class="itemLabel">
+		<div class="itemLabelNarrow">
 			Target:
 		</div>
-		<div class="itemContent">
+		<div class="itemContentWide">
 			{^{:~link('-', null, {'changeUITarget' : 0}, selectedUITarget > 0 ? null : 'disabled')}} 
             <div class="statusValue">&nbsp;{^{:selectedUITargetHex}}&nbsp;</div> 
             {^{:~link('+', null, {'changeUITarget' : 1}, selectedUITarget < 15 ? null : 'disabled')}}
 		</div>
 	</div>
     <div class="item">
-		<div class="itemContent">
+		<div class="itemContentWide">
 			{^{:~link('Irradiate Block', 'radiation', {'pulseUIRadiation' : 1}, !occupant.isViableSubject ? 'disabled' : null)}}
 		</div>
 	</div>    
@@ -93,7 +93,7 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
     {^{:~displayDNABlocks(occupant.structuralEnzymes, selectedSEBlock, selectedSESubBlock, dnaBlockSize, 'SE')}}
     <div class="clearBoth"></div>
     <div class="item">
-		<div class="itemContent">
+		<div class="itemContentWide">
 			{^{:~link('Irradiate Block', 'radiation', {'pulseSERadiation' : 1}, !occupant.isViableSubject ? 'disabled' : null)}}
 		</div>
 	</div> 
@@ -102,10 +102,10 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 	{^{for buffers}}
 		<h4>Buffer {{:#index + 1}}</h4>
 		<div class="item">			
-			<div class="itemLabel">
+			<div class="itemLabelNarrow">
 				Load Data:
 			</div>
-			<div class="itemContent">
+			<div class="itemContentWide">
 				{^{:~link('Subject U.I.', 'link', {'bufferOption' : 'saveUI', 'bufferId' : (#index + 1)}, !~root.hasOccupant ? 'disabled' : null)}}
 				{^{:~link('Subject U.I. + U.E.', 'link', {'bufferOption' : 'saveUIAndUE', 'bufferId' : (#index + 1)}, !~root.hasOccupant ? 'disabled' : null)}}
 				{^{:~link('Subject S.E.', 'link', {'bufferOption' : 'saveSE', 'bufferId' : (#index + 1)}, !~root.hasOccupant ? 'disabled' : null)}}
@@ -114,42 +114,42 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 		</div>
 		{^{if data}}
 			<div class="item">			
-				<div class="itemLabel">
+				<div class="itemLabelNarrow">
 					Label:
 				</div>
-				<div class="itemContent">
+				<div class="itemContentWide">
 					{^{:label ? label : 'No Label'}}
 				</div>
 			</div>
 			<div class="item">			
-				<div class="itemLabel">
+				<div class="itemLabelNarrow">
 					Subject:
 				</div>
-				<div class="itemContent">
+				<div class="itemContentWide">
 					{^{:owner ? owner : '<span class="average">Unknown</span>'}}
 				</div>
 			</div>
 			<div class="item">			
-				<div class="itemLabel" style="width: 20%">
+				<div class="itemLabelNarrow">
 					Stored Data:
 				</div>
-				<div class="itemContent" style="width: 79%">
+				<div class="itemContentWide">
 					{^{:data == 'ui' ? 'Unique Identifiers' : 'Structural Enzymes'}}
 					{^{:ue ? ' + Unique Enzymes' : ''}}
 				</div>
 			</div>
 		{{else}}
 			<div class="item">			
-				<div class="itemContent">
+				<div class="itemContentWide">
 					<span class="notice">This buffer is empty.</span>
 				</div>
 			</div>
 		{{/if}}
 		<div class="item">			
-			<div class="itemLabel" style="width: 20%">
+			<div class="itemLabelNarrow">
 				Options:
 			</div>
-			<div class="itemContent" style="width: 79%">
+			<div class="itemContentWide">
 				{^{:~link('Clear', 'trash', {'bufferOption' : 'clear', 'bufferId' : (#index + 1)}, !data ? 'disabled' : null)}}
 				{^{:~link('Create Injector', 'pencil', {'bufferOption' : 'createInjector', 'bufferId' : (#index + 1)}, !data ? 'disabled' : null)}}				
 				{^{:~link('Transfer To Subject', 'radiation', {'bufferOption' : 'transfer', 'bufferId' : (#index + 1)}, !~root.hasOccupant || !data ? 'disabled' : null)}}
@@ -162,46 +162,49 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 	{^{if hasDisk}}
 		{^{if disk.data}}
 			<div class="item">			
-				<div class="itemLabel">
+				<div class="itemLabelNarrow">
 					Label:
 				</div>
-				<div class="itemContent">
+				<div class="itemContentWide">
 					{^{:disk.label ? disk.label : 'No Label'}}
 				</div>
 			</div>
 			<div class="item">			
-				<div class="itemLabel">
+				<div class="itemLabelNarrow">
 					Subject:
 				</div>
-				<div class="itemContent">
+				<div class="itemContentWide">
 					{^{:disk.owner ? disk.owner : '<span class="average">Unknown</span>'}}
 				</div>
 			</div>
 			<div class="item">			
-				<div class="itemLabel">
+				<div class="itemLabelNarrow">
 					Stored Data:
 				</div>
-				<div class="itemContent">
+				<div class="itemContentWide">
 					{^{:disk.data == 'ui' ? 'Unique Identifiers' : 'Structural Enzymes'}}
 					{^{:disk.ue ? ' + Unique Enzymes' : ''}}
 				</div>
 			</div>
 		{{else}}
 			<div class="item">			
-				<div class="itemContent">
+				<div class="itemContentWide">
 					<span class="notice">Disk is blank.</span>
 				</div>
 			</div>
 		{{/if}}
 	{{else}}
 		<div class="item">			
-			<div class="itemContent">
+			<div class="itemContentWide">
 				<span class="notice">No disk inserted.</span>
 			</div>
 		</div>
 	{{/if}}
 	<div class="item">			
-		<div class="itemContent">
+		<div class="itemLabelNarrow">
+				Options:
+		</div>
+		<div class="itemContentWide">
 			{^{:~link('Wipe Disk', 'trash', {'bufferOption' : 'wipeDisk'}, !hasDisk || !disk.data ? 'disabled' : null)}}
 			{^{:~link('Eject Disk', 'eject', {'bufferOption' : 'ejectDisk'}, !hasDisk ? 'disabled' : null)}}
 		</div>
@@ -209,10 +212,10 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 {{else selectedMenuKey == 'rejuvenators'}}
 	<h3>Rejuvenators</h3>
 	<div class="item">
-		<div class="itemLabel">
+		<div class="itemLabelNarrow">
 			Inject:
 		</div>
-		<div class="itemContent">
+		<div class="itemContentWide">
 			{^{:~link('5', 'pencil', {'injectRejuvenators' : 5}, !hasOccupant || !beakerVolume ? 'disabled' : null)}}
 			{^{:~link('10', 'pencil', {'injectRejuvenators' : 10}, !hasOccupant || !beakerVolume ? 'disabled' : null)}}
 			{^{:~link('20', 'pencil', {'injectRejuvenators' : 20}, !hasOccupant || !beakerVolume ? 'disabled' : null)}}
@@ -222,10 +225,10 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 	</div>
 	<div class="item">&nbsp;</div>
 	<div class="item">
-		<div class="itemLabel">
+		<div class="itemLabelNarrow">
 			Beaker:
 		</div>
-		<div class="itemContent" style="width: 40%;">
+		<div class="itemContentWide" style="width: 40%;">
 			{^{if isBeakerLoaded}}		
 				{^{:beakerLabel ? beakerLabel : '<span class="average">No label</span>'}}<br>
 				{^{if beakerVolume}}
@@ -237,7 +240,7 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 				<span class="average"><i>No beaker loaded</i></span>
 			{{/if}}
 		</div>
-		<div class="itemContent" style="width: 26%;">
+		<div class="itemContentWide" style="width: 26%;">
 			{^{:~link('Eject Beaker', 'eject', {'ejectBeaker' : 1}, isBeakerLoaded ? null : 'disabled')}}
 		</div>
 	</div>
@@ -248,30 +251,30 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 {^{if selectedMenuKey == 'ui' || selectedMenuKey == 'se'}}
 	<h3>Radiation Emitter Settings</h3>
 	<div class="item">
-		<div class="itemLabel">
+		<div class="itemLabelNarrow">
 			Intensity:
 		</div>
-		<div class="itemContent">
+		<div class="itemContentWide">
 			{^{:~link('-', null, {'radiationIntensity' : 0}, radiationIntensity > 1 ? null : 'disabled')}} 
             <div class="statusValue">&nbsp;{^{:radiationIntensity}}&nbsp;</div> 
             {^{:~link('+', null, {'radiationIntensity' : 1}, radiationIntensity < 10 ? null : 'disabled')}}
 		</div>
 	</div>
 	<div class="item">
-		<div class="itemLabel">
+		<div class="itemLabelNarrow">
 			Duration:
 		</div>
-		<div class="itemContent">
+		<div class="itemContentWide">
 			{^{:~link('-', null, {'radiationDuration' : 0}, radiationDuration > 2 ? null : 'disabled')}} 
             <div class="statusValue">&nbsp;{^{:radiationDuration}}&nbsp;</div>
             {^{:~link('+', null, {'radiationDuration' : 1}, radiationDuration < 20 ? null : 'disabled')}}
 		</div>
 	</div>
 	<div class="item">
-		<div class="itemLabel">
+		<div class="itemLabelNarrow">
 			&nbsp;
 		</div>
-		<div class="itemContent">
+		<div class="itemContentWide">
 			{^{:~link('Pulse Radiation', 'radiation', {'pulseRadiation' : 1}, !hasOccupant ? 'disabled' : null)}}
 		</div>
 	</div>
@@ -282,18 +285,18 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 <hr>
 
 <div class="item">
-	<div class="itemLabel">
+	<div class="itemLabelNarrow">
 		Occupant:
 	</div>
-	<div class="itemContent">
+	<div class="itemContentWide">
 		{^{:~link('Eject Occupant', 'eject', {'ejectOccupant' : 1}, locked || !hasOccupant || irradiating ? 'disabled' : null)}}
 	</div>
 </div>
 <div class="item">
-	<div class="itemLabel">
+	<div class="itemLabelNarrow">
 		Door Lock:
 	</div>
-	<div class="itemContent">
+	<div class="itemContentWide">
 		{^{:~link('Engaged', 'locked', {'toggleLock' : 1}, locked ? 'selected' : !hasOccupant ? 'disabled' : null)}}
         {^{:~link('Disengaged', 'unlocked', {'toggleLock' : 1}, !locked ? 'selected' : irradiating ? 'disabled' : null)}}
 	</div>

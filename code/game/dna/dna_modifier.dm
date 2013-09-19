@@ -700,7 +700,7 @@
 		return 1
 
 	// Transfer Buffer Management
-	if(href_list["bufferOption"] && href_list["bufferId"])
+	if(href_list["bufferOption"])
 		var/bufferOption = href_list["bufferOption"]
 		
 		// These bufferOptions do not require a bufferId
@@ -725,6 +725,9 @@
 			return 1		
 		
 		// All bufferOptions from here on require a bufferId
+		if (!href_list["bufferId"])
+			return 0
+			
 		var/bufferId = text2num(href_list["bufferId"])
 
 		if (bufferId < 1 || bufferId > 3)

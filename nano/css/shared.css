@@ -193,6 +193,15 @@ div.notice {
     float: left;
     width: 69%;
 }
+.itemLabelNarrow {
+    float: left;
+    width: 20%;
+    color: #e9c183;
+}
+.itemContentWide {
+    float: left;
+    width: 79%;
+}
 .itemContentSmall {
     float: left;
     width: 33%;
