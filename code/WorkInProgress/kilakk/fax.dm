@@ -1,7 +1,7 @@
 /obj/machinery/faxmachine
 	name = "fax machine"
 	icon = 'icons/obj/library.dmi'
-	icon_state = "bigscanner"
+	icon_state = "fax"
 	req_access = list(access_lawyer)
 	anchored = 1
 	density = 1
@@ -125,7 +125,7 @@
 			tofax = O
 			O.loc = src
 			user << "<span class='notice'>You insert the paper into \the [src].</span>"
-			flick("bigscanner1", src)
+			flick("faxsend", src)
 			updateUsrDialog()
 		else
 			user << "<span class='notice'>There is already something in \the [src].</span>"
