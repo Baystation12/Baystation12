@@ -49,6 +49,7 @@ json_writer
 					else
 						txt = copytext(txt, 1, i) + "\\" + copytext(txt, i)
 						start = i + 2 // 2 characters added
+					
 			return {""[txt]""}
 
 		is_associative(list/L)

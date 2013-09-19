@@ -3,7 +3,7 @@
 #define GAS 3
 
 /obj/machinery/chem_dispenser
-	name = "Chem Dispenser"
+	name = "chem dispenser"
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/chemical.dmi'
@@ -67,18 +67,27 @@
 	del(src)
 	return
 
-/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main")
+ /**
+  * The ui_interact proc is used to open and update Nano UIs
+  * If ui_interact is not used then the UI will not update correctly
+  * ui_interact is currently defined for /atom/movable
+  *
+  * @param user /mob The mob who is interacting with this ui
+  * @param ui_key string A string key to use for this ui. Allows for multiple unique uis on one obj/mob (defaut value "main")
+  * @param ui /datum/nanoui This parameter is passed by the nanoui process() proc when updating an open ui
+  *
+  * @return nothing
+  */
+/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	if(stat & (BROKEN|NOPOWER)) return
 	if(user.stat || user.restrained()) return
 
+	// this is the data which will be sent to the ui
 	var/data[0]
-
 	data["amount"] = amount
 	data["energy"] = energy
 	data["maxEnergy"] = max_energy
-
 	data["isBeakerLoaded"] = beaker ? 1 : 0
-
 
 	var beakerContents[0]
 	var beakerCurrentVolume = 0
@@ -87,6 +96,7 @@
 			beakerContents.Add(list(list("name" = R.name, "volume" = R.volume))) // list in a list because Byond merges the first list...
 			beakerCurrentVolume += R.volume
 	data["beakerContents"] = beakerContents
+
 	if (beaker)
 		data["beakerCurrentVolume"] = beakerCurrentVolume
 		data["beakerMaxVolume"] = beaker:volume
@@ -101,10 +111,12 @@
 			chemicals.Add(list(list("title" = temp.name, "id" = temp.id, "commands" = list("dispense" = temp.id)))) // list in a list because Byond merges the first list...
 	data["chemicals"] = chemicals
 
-	//user << list2json(data)
-
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
+	if (!ui) // no ui has been passed, so we'll search for one
+	{
+		ui = nanomanager.get_open_ui(user, src, ui_key)
+	}
 	if (!ui)
+		// the ui does not exist, so we'll create a new one
 		ui = new(user, src, ui_key, "chem_dispenser.tmpl", "Chem Dispenser 5000", 370, 605)
 		// When the UI is first opened this is the data it will use
 		ui.set_initial_data(data)
@@ -188,6 +200,7 @@
 	var/mode = 0
 	var/condi = 0
 	var/useramount = 30 // Last used amount
+	var/pillamount = 10
 	var/bottlesprite = "1" //yes, strings
 	var/pillsprite = "1"
 	var/client/has_sprites = list()
@@ -333,24 +346,30 @@
 				beaker = null
 				reagents.clear_reagents()
 				icon_state = "mixer0"
-		else if (href_list["createpill"])
-			var/name = reject_bad_text(input(usr,"Name:","Name your pill!",reagents.get_master_reagent_name()))
-			var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
-			if(!name) name = reagents.get_master_reagent_name()
-			P.name = "[name] pill"
-			P.pixel_x = rand(-7, 7) //random position
-			P.pixel_y = rand(-7, 7)
-			P.icon_state = "pill"+pillsprite
-			reagents.trans_to(P,50)
-			if(src.loaded_pill_bottle)
-				if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
-					P.loc = loaded_pill_bottle
-					src.updateUsrDialog()
+		else if (href_list["createpill"] || href_list["createpill_multiple"])
+			var/count = 1
+			if (href_list["createpill_multiple"]) count = isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num)
+			if (count > 20) count = 20	//Pevent people from creating huge stacks of pills easily. Maybe move the number to defines?
+			var/amount_per_pill = reagents.total_volume/count
+			if (amount_per_pill > 50) amount_per_pill = 50
+			var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"))
+			while (count--)
+				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
+				if(!name) name = "[reagents.get_master_reagent_name()] ([amount_per_pill] units)"
+				P.name = "[name] pill"
+				P.pixel_x = rand(-7, 7) //random position
+				P.pixel_y = rand(-7, 7)
+				P.icon_state = "pill"+pillsprite
+				reagents.trans_to(P,amount_per_pill)
+				if(src.loaded_pill_bottle)
+					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
+						P.loc = loaded_pill_bottle
+						src.updateUsrDialog()
 		else if (href_list["createbottle"])
 			if(!condi)
-				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!",reagents.get_master_reagent_name()))
+				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!","[reagents.get_master_reagent_name()] ([reagents.total_volume] units)"))
 				var/obj/item/weapon/reagent_containers/glass/bottle/P = new/obj/item/weapon/reagent_containers/glass/bottle(src.loc)
-				if(!name) name = reagents.get_master_reagent_name()
+				if(!name) name = "[reagents.get_master_reagent_name()] ([reagents.total_volume] units)"
 				P.name = "[name] bottle"
 				P.pixel_x = rand(-7, 7) //random position
 				P.pixel_y = rand(-7, 7)
@@ -420,28 +439,29 @@
 		else
 			dat += "Add to buffer:<BR>"
 			for(var/datum/reagent/G in R.reagent_list)
-				dat += {"[G.name] , [G.volume] Units -
-						<A href='?src=\ref[src];analyze=1;desc=[G.description];name=[G.name]'>(Analyze)</A>
-						<A href='?src=\ref[src];add=[G.id];amount=1'>(1)</A>
-						<A href='?src=\ref[src];add=[G.id];amount=5'>(5)</A>
-						<A href='?src=\ref[src];add=[G.id];amount=10'>(10)</A>
-						<A href='?src=\ref[src];add=[G.id];amount=[G.volume]'>(All)</A>
-						<A href='?src=\ref[src];addcustom=[G.id]'>(Custom)</A><BR>"}
+				dat += "[G.name] , [G.volume] Units - "
+				dat += "<A href='?src=\ref[src];analyze=1;desc=[G.description];name=[G.name]'>(Analyze)</A> "
+				dat += "<A href='?src=\ref[src];add=[G.id];amount=1'>(1)</A> "
+				dat += "<A href='?src=\ref[src];add=[G.id];amount=5'>(5)</A> "
+				dat += "<A href='?src=\ref[src];add=[G.id];amount=10'>(10)</A> "
+				dat += "<A href='?src=\ref[src];add=[G.id];amount=[G.volume]'>(All)</A> "
+				dat += "<A href='?src=\ref[src];addcustom=[G.id]'>(Custom)</A><BR>"
 
 		dat += "<HR>Transfer to <A href='?src=\ref[src];toggle=1'>[(!mode ? "disposal" : "beaker")]:</A><BR>"
 		if(reagents.total_volume)
 			for(var/datum/reagent/N in reagents.reagent_list)
-				dat += {"[N.name] , [N.volume] Units -
-						<A href='?src=\ref[src];analyze=1;desc=[N.description];name=[N.name]'>(Analyze)</A>
-						<A href='?src=\ref[src];remove=[N.id];amount=1'>(1)</A>
-						<A href='?src=\ref[src];remove=[N.id];amount=5'>(5)</A>
-						<A href='?src=\ref[src];remove=[N.id];amount=10'>(10)</A>
-						<A href='?src=\ref[src];remove=[N.id];amount=[N.volume]'>(All)</A>
-						<A href='?src=\ref[src];removecustom=[N.id]'>(Custom)</A><BR>"}
+				dat += "[N.name] , [N.volume] Units - "
+				dat += "<A href='?src=\ref[src];analyze=1;desc=[N.description];name=[N.name]'>(Analyze)</A> "
+				dat += "<A href='?src=\ref[src];remove=[N.id];amount=1'>(1)</A> "
+				dat += "<A href='?src=\ref[src];remove=[N.id];amount=5'>(5)</A> "
+				dat += "<A href='?src=\ref[src];remove=[N.id];amount=10'>(10)</A> "
+				dat += "<A href='?src=\ref[src];remove=[N.id];amount=[N.volume]'>(All)</A> "
+				dat += "<A href='?src=\ref[src];removecustom=[N.id]'>(Custom)</A><BR>"
 		else
 			dat += "Empty<BR>"
 		if(!condi)
 			dat += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pill (50 units max)</A><a href=\"?src=\ref[src]&change_pill=1\"><img src=\"pill[pillsprite].png\" /></a><BR>"
+			dat += "<A href='?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (30 units max)<a href=\"?src=\ref[src]&change_bottle=1\"><img src=\"bottle[bottlesprite].png\" /></A>"
 		else
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (50 units max)</A>"
@@ -663,11 +683,11 @@
 							if(!D)
 								CRASH("We weren't able to get the advance disease from the archive.")
 
-							dat += {"<b>Disease Agent:</b> [D?"[D.agent] - <A href='?src=\ref[src];create_virus_culture=[disease_creation]'>Create virus culture bottle</A>":"none"]<BR>
-									<b>Common name:</b> [(D.name||"none")]<BR>
-									<b>Description: </b> [(D.desc||"none")]<BR>
-									<b>Spread:</b> [(D.spread||"none")]<BR>
-									<b>Possible cure:</b> [(D.cure||"none")]<BR><BR>"}
+							dat += "<b>Disease Agent:</b> [D?"[D.agent] - <A href='?src=\ref[src];create_virus_culture=[disease_creation]'>Create virus culture bottle</A>":"none"]<BR>"
+							dat += "<b>Common name:</b> [(D.name||"none")]<BR>"
+							dat += "<b>Description: </b> [(D.desc||"none")]<BR>"
+							dat += "<b>Spread:</b> [(D.spread||"none")]<BR>"
+							dat += "<b>Possible cure:</b> [(D.cure||"none")]<BR><BR>"
 
 							if(istype(D, /datum/disease/advance))
 								var/datum/disease/advance/A = D
