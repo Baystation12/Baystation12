@@ -79,12 +79,13 @@ Used In File(s): \code\game\machinery\cryo.dm
 		Beaker:
 	</div>
 	<div class="itemContent" style="width: 40%;">
-		{^{if isBeakerLoaded}}			
-			{^{for beakerContents}}
-				<span class="highlight">{^{:volume}} units of {^{:name}}</span><br>
+		{^{if isBeakerLoaded}}		
+			{^{:beakerLabel ? beakerLabel : '<span class="average">No label</span>'}}<br>
+			{^{if beakerVolume}}
+				<span class="highlight">{^{:beakerVolume}} units remaining</span><br>
 			{{else}}
 				<span class="bad">Beaker is empty</span>
-			{{/for}}
+			{{/if}}
 		{{else}}
 			<span class="average"><i>No beaker loaded</i></span>
 		{{/if}}
