@@ -84,6 +84,7 @@
 
 	// flip and rotate verbs
 	verb/rotate()
+		set category = "Object"
 		set name = "Rotate Pipe"
 		set src in view(1)
 
@@ -98,6 +99,7 @@
 		update()
 
 	verb/flip()
+		set category = "Object"
 		set name = "Flip Pipe"
 		set src in view(1)
 		if(usr.stat)
