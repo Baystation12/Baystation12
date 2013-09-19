@@ -18,56 +18,6 @@
 	var/time = ""
 	var/source_terminal = ""
 
-/proc/create_station_account()
-	if(!station_account)
-		next_account_number = rand(111111, 999999)
-
-		station_account = new()
-		station_account.owner_name = "[station_name()] Station Account"
-		station_account.account_number = rand(111111, 999999)
-		station_account.remote_access_pin = rand(1111, 111111)
-		station_account.money = 75000
-
-		//create an entry in the account transaction log for when it was created
-		var/datum/transaction/T = new()
-		T.target_name = station_account.owner_name
-		T.purpose = "Account creation"
-		T.amount = 75000
-		T.date = "2nd April, 2555"
-		T.time = "11:24"
-		T.source_terminal = "Biesel GalaxyNet Terminal #277"
-
-		//add the account
-		station_account.transaction_log.Add(T)
-		all_money_accounts.Add(station_account)
-
-/proc/create_department_account(department)
-	next_account_number = rand(111111, 999999)
-
-	var/datum/money_account/department_account = new()
-	department_account.owner_name = "[department] Account"
-	department_account.account_number = rand(111111, 999999)
-	department_account.remote_access_pin = rand(1111, 111111)
-	department_account.money = 5000
-
-	//create an entry in the account transaction log for when it was created
-	var/datum/transaction/T = new()
-	T.target_name = department_account.owner_name
-	T.purpose = "Account creation"
-	T.amount = department_account.money
-	T.date = "2nd April, 2555"
-	T.time = "11:24"
-	T.source_terminal = "Biesel GalaxyNet Terminal #277"
-
-	//add the account
-	department_account.transaction_log.Add(T)
-	all_money_accounts.Add(department_account)
-
-	department_accounts[department] = department_account
-
-//the current ingame time (hh:mm) can be obtained by calling:
-//worldtime2text()
-
 /proc/create_account(var/new_owner_name = "Default user", var/starting_funds = 0, var/obj/machinery/account_database/source_db)
 
 	//create a new account
