@@ -194,10 +194,6 @@
 	amount = 5
 	max_amount = 5
 
-/obj/item/stack/medical/splint/single
-	amount = 1
-
-
 /obj/item/stack/medical/splint/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())
 		return 1

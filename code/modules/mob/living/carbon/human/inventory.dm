@@ -594,7 +594,7 @@ It can still be worn/put on as normal.
 			for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
 				var/datum/organ/external/o = target.get_organ(organ)
 				if (o && o.status & ORGAN_SPLINTED)
-					var/obj/item/W = new /obj/item/stack/medical/splint/single()
+					var/obj/item/W = new /obj/item/stack/medical/splint(amount=1)
 					o.status &= ~ORGAN_SPLINTED
 					if (W)
 						W.loc = target.loc
