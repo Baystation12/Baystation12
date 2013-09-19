@@ -119,8 +119,8 @@ datum/controller/vote
 			if(winners.len > 1)
 				if(mode != "gamemode" || ticker.hide_mode == 0) // Here we are making sure we don't announce potential game modes
 					text = "<b>Vote Tied Between:</b>\n"
-				for(var/option in winners)
-					text += "\t[option]\n"
+					for(var/option in winners)
+						text += "\t[option]\n"
 			. = pick(winners)
 
 			for(var/key in current_votes)
