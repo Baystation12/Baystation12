@@ -256,7 +256,7 @@ What a mess.*/
 					src.active2 = null
 					src.authenticated = usr.name
 					var/mob/living/silicon/robot/R = usr
-					src.rank = R.braintype
+					src.rank = "[R.modtype] [R.braintype]"
 					src.screen = 1
 				else if (istype(scan, /obj/item/weapon/card/id))
 					active1 = null
@@ -369,7 +369,7 @@ What a mess.*/
 				var/counter = 1
 				while(active2.fields[text("com_[]", counter)])
 					counter++
-				active2.fields[text("com_[counter]")] = text("Made by [authenticated] ([rank]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], 2557<BR>[t1]")
+				active2.fields[text("com_[counter]")] = text("Made by [authenticated] ([rank]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], [game_year]<BR>[t1]")
 
 			if ("Delete Record (ALL)")
 				if (active1)

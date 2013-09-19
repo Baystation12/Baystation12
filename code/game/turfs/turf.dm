@@ -231,8 +231,8 @@
 			W.zone = src.zone
 			W.zone.AddTurf(W)
 
-		for(var/turf/simulated/T in orange(src,1))
-			air_master.tiles_to_update.Add(T)
+		if(air_master)
+			air_master.AddTurfToUpdate(src)
 
 		W.levelupdate()
 		return W
@@ -252,8 +252,7 @@
 			W.zone.AddTurf(W)
 
 		if(air_master)
-			for(var/turf/simulated/T in orange(src,1))
-				air_master.tiles_to_update.Add(T)
+			air_master.AddTurfToUpdate(src)
 
 		W.levelupdate()
 		return W

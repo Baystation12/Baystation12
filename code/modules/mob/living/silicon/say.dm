@@ -4,7 +4,7 @@
 	if (ending == "?")
 		return "queries, \"[text]\"";
 	else if (ending == "!")
-		return "declares, \"[copytext(text, 1, length(text))]\"";
+		return "declares, \"[text]\"";
 
 	return "states, \"[text]\"";
 

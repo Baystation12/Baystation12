@@ -71,10 +71,10 @@
 #define DOOR_CRUSH_DAMAGE 10
 
 // Factor of how fast mob nutrition decreases
-#define	HUNGER_FACTOR 0.05
+#define HUNGER_FACTOR 0.05
 
 // How many units of reagent are consumed per tick, by default.
-#define  REAGENTS_METABOLISM 0.2
+#define REAGENTS_METABOLISM 0.2
 
 // By defining the effect multiplier this way, it'll exactly adjust
 // all effects according to how they originally were with the 0.4 metabolism
@@ -171,7 +171,8 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SLOT_BACK 1024
 #define SLOT_POCKET 2048		//this is to allow items with a w_class of 3 or 4 to fit in pockets.
 #define SLOT_DENYPOCKET 4096	//this is to deny items with a w_class of 2 or 1 to fit in pockets.
-
+#define SLOT_TWOEARS 8192
+#define SLOT_LEGS = 16384
 
 //FLAGS BITMASK
 #define STOPSPRESSUREDMAGE 1	//This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
@@ -235,7 +236,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define slot_r_hand 5
 #define slot_belt 6
 #define slot_wear_id 7
-#define slot_ears 8
+#define slot_l_ear 8
 #define slot_glasses 9
 #define slot_gloves 10
 #define slot_head 11
@@ -247,6 +248,8 @@ var/MAX_EXPLOSION_RANGE = 14
 #define slot_s_store 17
 #define slot_in_backpack 18
 #define slot_legcuffed 19
+#define slot_r_ear 20
+#define slot_legs 21
 
 //Cant seem to find a mob bitflags area other than the powers one
 

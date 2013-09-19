@@ -8,7 +8,7 @@ What are the archived variables for?
 #define SPECIFIC_HEAT_AIR		20
 #define SPECIFIC_HEAT_CDO		30
 #define HEAT_CAPACITY_CALCULATION(oxygen,carbon_dioxide,nitrogen,toxins) \
-	(carbon_dioxide*SPECIFIC_HEAT_CDO + (oxygen+nitrogen)*SPECIFIC_HEAT_AIR + toxins*SPECIFIC_HEAT_TOXIN)
+	max(0, carbon_dioxide * SPECIFIC_HEAT_CDO + (oxygen + nitrogen) * SPECIFIC_HEAT_AIR + toxins * SPECIFIC_HEAT_TOXIN)
 
 #define MINIMUM_HEAT_CAPACITY	0.0003
 #define QUANTIZE(variable)		(round(variable,0.0001))
@@ -384,7 +384,7 @@ What are the archived variables for?
 	removed.oxygen = QUANTIZE((oxygen/sum)*amount)
 	removed.nitrogen = QUANTIZE((nitrogen/sum)*amount)
 	removed.carbon_dioxide = QUANTIZE((carbon_dioxide/sum)*amount)
-	removed.toxins = QUANTIZE((toxins/sum)*amount)
+	removed.toxins = QUANTIZE(((toxins/sum)*amount))
 
 	oxygen -= removed.oxygen/group_multiplier
 	nitrogen -= removed.nitrogen/group_multiplier
@@ -396,8 +396,8 @@ What are the archived variables for?
 			var/datum/gas/corresponding = new trace_gas.type()
 			removed.trace_gases += corresponding
 
-			corresponding.moles = (trace_gas.moles/sum)*amount
-			trace_gas.moles -= corresponding.moles/group_multiplier
+			corresponding.moles = ((trace_gas.moles/sum)*amount)
+			trace_gas.moles -= (corresponding.moles/group_multiplier)
 
 	removed.temperature = temperature
 	update_values()
