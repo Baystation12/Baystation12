@@ -743,6 +743,7 @@
 #include "code\modules\DetectiveWork\footprints_and_rag.dm"
 #include "code\modules\DetectiveWork\scanner.dm"
 #include "code\modules\Economy\Accounts.dm"
+#include "code\modules\Economy\Accounts_DB.dm"
 #include "code\modules\Economy\ATM.dm"
 #include "code\modules\Economy\Economy.dm"
 #include "code\modules\Economy\Economy_Events.dm"
