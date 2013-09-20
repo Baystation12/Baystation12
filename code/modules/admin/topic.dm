@@ -1446,22 +1446,29 @@
 
 		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
 
-		for(var/obj/machinery/faxmachine/F in world)
+		for(var/obj/machinery/faxmachine/F in machines)
 			if(! (F.stat & (BROKEN|NOPOWER) ) )
-				var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
-				P.name = "[command_name()]- [customname]"
-				P.info = input
-				P.update_icon()
-				playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)
 
-				// Stamps
-				var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-				stampoverlay.icon_state = "paper_stamp-cent"
-				if(!P.stamped)
-					P.stamped = new
-				P.stamped += /obj/item/weapon/stamp
-				P.overlays += stampoverlay
-				P.stamps += "<HR><i>This paper has been stamped by the Central Command Quantum Relay.</i>"
+				// animate! it's alive!
+				flick("faxreceive", F)
+
+				// give the sprite some time to flick
+				spawn(20)
+					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
+					P.name = "[command_name()]- [customname]"
+					P.info = input
+					P.update_icon()
+
+					playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)
+
+					// Stamps
+					var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+					stampoverlay.icon_state = "paper_stamp-cent"
+					if(!P.stamped)
+						P.stamped = new
+					P.stamped += /obj/item/weapon/stamp
+					P.overlays += stampoverlay
+					P.stamps += "<HR><i>This paper has been stamped by the Central Command Quantum Relay.</i>"
 
 		src.owner << "Message reply to transmitted successfully."
 		log_admin("[key_name(src.owner)] replied to a fax message from [key_name(H)]: [input]")

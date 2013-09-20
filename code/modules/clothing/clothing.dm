@@ -124,7 +124,7 @@ BLIND     // can't see anything
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
-	species_restricted = list("exclude","Unathi","Tajara")
+	species_restricted = list("exclude","Unathi","Tajaran")
 
 /obj/item/clothing/gloves/examine()
 	set src in usr
@@ -169,7 +169,7 @@ BLIND     // can't see anything
 
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
-	species_restricted = list("exclude","Unathi","Tajara")
+	species_restricted = list("exclude","Unathi","Tajaran")
 
 //Suit
 /obj/item/clothing/suit
