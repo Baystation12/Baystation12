@@ -101,113 +101,117 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 	<h3>Transfer Buffers</h3>
 	{^{for buffers}}
 		<h4>Buffer {{:#index + 1}}</h4>
-		<div class="item">			
-			<div class="itemLabelNarrow">
-				Load Data:
-			</div>
-			<div class="itemContentWide">
-				{^{:~link('Subject U.I.', 'link', {'bufferOption' : 'saveUI', 'bufferId' : (#index + 1)}, !~root.hasOccupant ? 'disabled' : null)}}
-				{^{:~link('Subject U.I. + U.E.', 'link', {'bufferOption' : 'saveUIAndUE', 'bufferId' : (#index + 1)}, !~root.hasOccupant ? 'disabled' : null)}}
-				{^{:~link('Subject S.E.', 'link', {'bufferOption' : 'saveSE', 'bufferId' : (#index + 1)}, !~root.hasOccupant ? 'disabled' : null)}}
-				{^{:~link('From Disk', 'disk', {'bufferOption' : 'loadDisk', 'bufferId' : (#index + 1)}, !~root.hasDisk || !~root.disk.data ? 'disabled' : null)}}
-			</div>
-		</div>
-		{^{if data}}
+		<div class="itemGroup">
 			<div class="item">			
 				<div class="itemLabelNarrow">
-					Label:
+					Load Data:
 				</div>
 				<div class="itemContentWide">
-					{^{:~link(label, 'document-b', {'bufferOption' : 'changeLabel', 'bufferId' : (#parent.index + 1)})}}
+					{^{:~link('Subject U.I.', 'link', {'bufferOption' : 'saveUI', 'bufferId' : (#index + 1)}, !~root.hasOccupant ? 'disabled' : null)}}
+					{^{:~link('Subject U.I. + U.E.', 'link', {'bufferOption' : 'saveUIAndUE', 'bufferId' : (#index + 1)}, !~root.hasOccupant ? 'disabled' : null)}}
+					{^{:~link('Subject S.E.', 'link', {'bufferOption' : 'saveSE', 'bufferId' : (#index + 1)}, !~root.hasOccupant ? 'disabled' : null)}}
+					{^{:~link('From Disk', 'disk', {'bufferOption' : 'loadDisk', 'bufferId' : (#index + 1)}, !~root.hasDisk || !~root.disk.data ? 'disabled' : null)}}
 				</div>
 			</div>
+			{^{if data}}
+				<div class="item">			
+					<div class="itemLabelNarrow">
+						Label:
+					</div>
+					<div class="itemContentWide">
+						{^{:~link(label, 'document-b', {'bufferOption' : 'changeLabel', 'bufferId' : (#parent.index + 1)})}}
+					</div>
+				</div>
+				<div class="item">			
+					<div class="itemLabelNarrow">
+						Subject:
+					</div>
+					<div class="itemContentWide">
+						{^{:owner ? owner : '<span class="average">Unknown</span>'}}
+					</div>
+				</div>
+				<div class="item">			
+					<div class="itemLabelNarrow">
+						Stored Data:
+					</div>
+					<div class="itemContentWide">
+						{^{:data == 'ui' ? 'Unique Identifiers' : 'Structural Enzymes'}}
+						{^{:ue ? ' + Unique Enzymes' : ''}}
+					</div>
+				</div>
+			{{else}}
+				<div class="item">			
+					<div class="itemContentWide">
+						<span class="highlight">This buffer is empty.</span>
+					</div>
+				</div>
+			{{/if}}
 			<div class="item">			
 				<div class="itemLabelNarrow">
-					Subject:
+					Options:
 				</div>
 				<div class="itemContentWide">
-					{^{:owner ? owner : '<span class="average">Unknown</span>'}}
+					{^{:~link('Clear', 'trash', {'bufferOption' : 'clear', 'bufferId' : (#index + 1)}, !data ? 'disabled' : null)}}
+					{^{:~link('Injector', ~root.isInjectorReady ? 'pencil' : 'clock', {'bufferOption' : 'createInjector', 'bufferId' : (#index + 1)}, !~root.isInjectorReady || !data ? 'disabled' : null)}}
+					{^{:~link('Block Injector', ~root.isInjectorReady ? 'pencil' : 'clock', {'bufferOption' : 'createInjector', 'bufferId' : (#index + 1), 'createBlockInjector' : 1}, !~root.isInjectorReady || !data ? 'disabled' : null)}}
+					{^{:~link('Transfer', 'radiation', {'bufferOption' : 'transfer', 'bufferId' : (#index + 1)}, !~root.hasOccupant || !data ? 'disabled' : null)}}
+					{^{:~link('Save To Disk', 'disk', {'bufferOption' : 'saveDisk', 'bufferId' : (#index + 1)}, !data || !~root.hasDisk ? 'disabled' : null)}}
 				</div>
-			</div>
-			<div class="item">			
-				<div class="itemLabelNarrow">
-					Stored Data:
-				</div>
-				<div class="itemContentWide">
-					{^{:data == 'ui' ? 'Unique Identifiers' : 'Structural Enzymes'}}
-					{^{:ue ? ' + Unique Enzymes' : ''}}
-				</div>
-			</div>
-		{{else}}
-			<div class="item">			
-				<div class="itemContentWide">
-					<span class="notice">This buffer is empty.</span>
-				</div>
-			</div>
-		{{/if}}
-		<div class="item">			
-			<div class="itemLabelNarrow">
-				Options:
-			</div>
-			<div class="itemContentWide">
-				{^{:~link('Clear', 'trash', {'bufferOption' : 'clear', 'bufferId' : (#index + 1)}, !data ? 'disabled' : null)}}
-				{^{:~link('Injector', 'pencil', {'bufferOption' : 'createInjector', 'bufferId' : (#index + 1)}, !data ? 'disabled' : null)}}
-				{^{:~link('Block Injector', 'pencil', {'bufferOption' : 'createInjector', 'bufferId' : (#index + 1), 'createBlockInjector' : 1}, !data ? 'disabled' : null)}}
-				{^{:~link('Transfer', 'radiation', {'bufferOption' : 'transfer', 'bufferId' : (#index + 1)}, !~root.hasOccupant || !data ? 'disabled' : null)}}
-				{^{:~link('Save To Disk', 'disk', {'bufferOption' : 'saveDisk', 'bufferId' : (#index + 1)}, !data || !~root.hasDisk ? 'disabled' : null)}}
 			</div>
 		</div>
 	{{/for}}
 	
 	<h4>Data Disk</h4>		
-	{^{if hasDisk}}
-		{^{if disk.data}}
-			<div class="item">			
-				<div class="itemLabelNarrow">
-					Label:
+	<div class="itemGroup">
+		{^{if hasDisk}}
+			{^{if disk.data}}
+				<div class="item">			
+					<div class="itemLabelNarrow">
+						Label:
+					</div>
+					<div class="itemContentWide">
+						{^{:disk.label ? disk.label : 'No Label'}}
+					</div>
 				</div>
-				<div class="itemContentWide">
-					{^{:disk.label ? disk.label : 'No Label'}}
+				<div class="item">			
+					<div class="itemLabelNarrow">
+						Subject:
+					</div>
+					<div class="itemContentWide">
+						{^{:disk.owner ? disk.owner : '<span class="average">Unknown</span>'}}
+					</div>
 				</div>
-			</div>
-			<div class="item">			
-				<div class="itemLabelNarrow">
-					Subject:
+				<div class="item">			
+					<div class="itemLabelNarrow">
+						Stored Data:
+					</div>
+					<div class="itemContentWide">
+						{^{:disk.data == 'ui' ? 'Unique Identifiers' : 'Structural Enzymes'}}
+						{^{:disk.ue ? ' + Unique Enzymes' : ''}}
+					</div>
 				</div>
-				<div class="itemContentWide">
-					{^{:disk.owner ? disk.owner : '<span class="average">Unknown</span>'}}
+			{{else}}
+				<div class="item">			
+					<div class="itemContentWide">
+						<span class="average">Disk is blank.</span>
+					</div>
 				</div>
-			</div>
-			<div class="item">			
-				<div class="itemLabelNarrow">
-					Stored Data:
-				</div>
-				<div class="itemContentWide">
-					{^{:disk.data == 'ui' ? 'Unique Identifiers' : 'Structural Enzymes'}}
-					{^{:disk.ue ? ' + Unique Enzymes' : ''}}
-				</div>
-			</div>
+			{{/if}}
 		{{else}}
 			<div class="item">			
 				<div class="itemContentWide">
-					<span class="notice">Disk is blank.</span>
+					<span class="highlight">No disk inserted.</span>
 				</div>
 			</div>
 		{{/if}}
-	{{else}}
 		<div class="item">			
-			<div class="itemContentWide">
-				<span class="notice">No disk inserted.</span>
+			<div class="itemLabelNarrow">
+					Options:
 			</div>
-		</div>
-	{{/if}}
-	<div class="item">			
-		<div class="itemLabelNarrow">
-				Options:
-		</div>
-		<div class="itemContentWide">
-			{^{:~link('Wipe Disk', 'trash', {'bufferOption' : 'wipeDisk'}, !hasDisk || !disk.data ? 'disabled' : null)}}
-			{^{:~link('Eject Disk', 'eject', {'bufferOption' : 'ejectDisk'}, !hasDisk ? 'disabled' : null)}}
+			<div class="itemContentWide">
+				{^{:~link('Wipe Disk', 'trash', {'bufferOption' : 'wipeDisk'}, !hasDisk || !disk.data ? 'disabled' : null)}}
+				{^{:~link('Eject Disk', 'eject', {'bufferOption' : 'ejectDisk'}, !hasDisk ? 'disabled' : null)}}
+			</div>
 		</div>
 	</div>
 {{else selectedMenuKey == 'rejuvenators'}}

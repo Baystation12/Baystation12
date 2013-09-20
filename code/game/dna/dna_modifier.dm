@@ -363,6 +363,8 @@
 	data["selectedMenuKey"] = selected_menu_key
 	data["locked"] = src.connected.locked
 	data["hasOccupant"] = connected.occupant ? 1 : 0
+	
+	data["isInjectorReady"] = injector_ready
 
 	data["hasDisk"] = disk ? 1 : 0
 
