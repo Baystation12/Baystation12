@@ -145,6 +145,17 @@
 
 					for(var/mob/O in viewers(world.view, user))
 						O.show_message(text("\red [] injects [] with the syringe!", user, target), 1)
+
+					if(istype(target,/mob/living))
+						var/mob/living/M = target
+						var/list/injected = list()
+						for(var/datum/reagent/R in src.reagents.reagent_list)
+							injected += R.name
+						var/contained = english_list(injected)
+						M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been injected with [src.name] by [user.name] ([user.ckey]). Reagents: [contained]</font>")
+						user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to inject [M.name] ([M.key]). Reagents: [contained]</font>")
+						msg_admin_attack("[user.name] ([user.ckey]) injected [M.name] ([M.key]) with [src.name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+
 					src.reagents.reaction(target, INGEST)
 				if(ismob(target) && target == user)
 					src.reagents.reaction(target, INGEST)
@@ -197,8 +208,7 @@
 
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [target.name] ([target.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 		target.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-
-		log_attack("<font color='red'> [user.name] ([user.ckey]) attacked [target.name] ([target.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
+		msg_admin_attack("[user.name] ([user.ckey]) attacked [target.name] ([target.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 		if(istype(target, /mob/living/carbon/human))
 

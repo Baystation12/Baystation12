@@ -255,7 +255,16 @@
 
 					var/turf/startloc = loc
 					var/obj/selection = input("Select a destination.", "Duct System") as null|anything in sortList(vents)
-					if(!selection)	return
+
+					if(!selection)
+						return
+
+					if(!do_after(src, 45))
+						return
+
+					if(!src||!selection)
+						return
+
 					if(loc==startloc)
 						if(contents.len)
 							for(var/obj/item/carried_item in contents)//If the monkey got on objects.
@@ -371,8 +380,7 @@
 
 				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been thrown by [usr.name] ([usr.ckey]) from [start_T_descriptor] with the target [end_T_descriptor]</font>")
 				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Has thrown [M.name] ([M.ckey]) from [start_T_descriptor] with the target [end_T_descriptor]</font>")
-
-				log_attack("<font color='red'>[usr.name] ([usr.ckey]) Has thrown [M.name] ([M.ckey]) from [start_T_descriptor] with the target [end_T_descriptor]</font>")
+				msg_admin_attack("[usr.name] ([usr.ckey]) has thrown [M.name] ([M.ckey]) from [start_T_descriptor] with the target [end_T_descriptor] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
 
 	if(!item) return //Grab processing has a chance of returning null
 
@@ -478,3 +486,78 @@
 		if(PULSE_THREADY)
 			return method ? ">250" : "extremely weak and fast, patient's artery feels like a thread"
 //			output for machines^	^^^^^^^output for people^^^^^^^^^
+
+
+//Brain slug proc for voluntary removal of control.
+/mob/living/carbon/proc/release_control()
+
+	set category = "Alien"
+	set name = "Release Control"
+	set desc = "Release control of your host's body."
+
+	var/mob/living/simple_animal/borer/B = has_brain_worms()
+
+	if(!B)
+		return
+
+	if(B.controlling)
+		src << "\red <B>You withdraw your probosci, releasing control of [B.host_brain]</B>"
+		B.host_brain << "\red <B>Your vision swims as the alien parasite releases control of your body.</B>"
+		B.ckey = ckey
+		B.controlling = 0
+	if(B.host_brain.ckey)
+		ckey = B.host_brain.ckey
+		B.host_brain.ckey = null
+		B.host_brain.name = "host brain"
+		B.host_brain.real_name = "host brain"
+
+	verbs -= /mob/living/carbon/proc/release_control
+	verbs -= /mob/living/carbon/proc/punish_host
+	verbs -= /mob/living/carbon/proc/spawn_larvae
+
+//Brain slug proc for tormenting the host.
+/mob/living/carbon/proc/punish_host()
+	set category = "Alien"
+	set name = "Torment host"
+	set desc = "Punish your host with agony."
+
+	var/mob/living/simple_animal/borer/B = has_brain_worms()
+
+	if(!B)
+		return
+
+	if(B.host_brain.ckey)
+		src << "\red <B>You send a punishing spike of psychic agony lancing into your host's brain.</B>"
+		B.host_brain << "\red <B><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></B>"
+
+//Check for brain worms in head.
+/mob/living/carbon/proc/has_brain_worms()
+
+	for(var/I in contents)
+		if(istype(I,/mob/living/simple_animal/borer))
+			return I
+
+	return 0
+
+/mob/living/carbon/proc/spawn_larvae()
+	set category = "Alien"
+	set name = "Reproduce"
+	set desc = "Spawn several young."
+
+	var/mob/living/simple_animal/borer/B = has_brain_worms()
+
+	if(!B)
+		return
+
+	if(B.chemicals >= 100)
+		src << "\red <B>Your host twitches and quivers as you rapdly excrete several larvae from your sluglike body.</B>"
+		visible_message("\red <B>[src] heaves violently, expelling a rush of vomit and a wriggling, sluglike creature!</B>")
+		B.chemicals -= 100
+
+		new /obj/effect/decal/cleanable/vomit(get_turf(src))
+		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+		new /mob/living/simple_animal/borer(get_turf(src))
+
+	else
+		src << "You do not have enough chemicals stored to reproduce."
+		return

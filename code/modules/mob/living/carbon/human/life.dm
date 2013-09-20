@@ -202,7 +202,7 @@
 			if(getBrainLoss() >= 50)
 				if(10 <= rn && rn <= 12) if(!lying)
 					src << "\red Your legs won't respond properly, you fall down."
-					lying = 1
+					resting = 1
 
 	proc/handle_stasis_bag()
 		// Handle side effects from stasis bag
@@ -215,6 +215,7 @@
 			adjustCloneLoss(0.1)
 
 	proc/handle_mutations_and_radiation()
+
 		if(getFireLoss())
 			if((COLD_RESISTANCE in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
@@ -237,6 +238,16 @@
 				radiation = 0
 
 			else
+				if(species.flags & RAD_ABSORB)
+					var/rads = radiation/25
+					radiation -= rads
+					nutrition += rads
+					heal_overall_damage(rads,rads)
+					adjustOxyLoss(-(rads))
+					adjustToxLoss(-(rads))
+					updatehealth()
+					return
+
 				var/damage = 0
 				switch(radiation)
 					if(1 to 49)
@@ -275,6 +286,7 @@
 	proc/breathe()
 		if(reagents.has_reagent("lexorin")) return
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
+		if(species && species.flags & NO_BREATHE) return
 
 		var/datum/organ/internal/lungs/L = internal_organs["lungs"]
 		L.process()
@@ -311,7 +323,6 @@
 					breath_moles = environment.total_moles()*BREATH_PERCENTAGE
 
 					breath = loc.remove_air(breath_moles)
-
 
 					if(!is_lung_ruptured())
 						if(!breath || breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
@@ -526,38 +537,37 @@
 	proc/handle_environment(datum/gas_mixture/environment)
 		if(!environment)
 			return
-		var/loc_temp = T0C
-		if(istype(loc, /obj/mecha))
-			var/obj/mecha/M = loc
-			loc_temp =  M.return_temperature()
-		else if(istype(get_turf(src), /turf/space))
-			var/turf/heat_turf = get_turf(src)
-			loc_temp = heat_turf.temperature
-		else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-			loc_temp = loc:air_contents.temperature
-		else
-			loc_temp = environment.temperature
+		if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
+			var/loc_temp = T0C
+			if(istype(loc, /obj/mecha))
+				var/obj/mecha/M = loc
+				loc_temp =  M.return_temperature()
+			else if(istype(get_turf(src), /turf/space))
+			else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
+				loc_temp = loc:air_contents.temperature
+			else
+				loc_temp = environment.temperature
 
-		//world << "Loc temp: [loc_temp] - Body temp: [bodytemperature] - Fireloss: [getFireLoss()] - Thermal protection: [get_thermal_protection()] - Fire protection: [thermal_protection + add_fire_protection(loc_temp)] - Heat capacity: [environment_heat_capacity] - Location: [loc] - src: [src]"
+			//world << "Loc temp: [loc_temp] - Body temp: [bodytemperature] - Fireloss: [getFireLoss()] - Thermal protection: [get_thermal_protection()] - Fire protection: [thermal_protection + add_fire_protection(loc_temp)] - Heat capacity: [environment_heat_capacity] - Location: [loc] - src: [src]"
 
-		//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
-		if(stat != 2)
-			stabilize_temperature_from_calories()
+			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
+			if(stat != 2)
+				stabilize_temperature_from_calories()
 
-//		log_debug("Adjusting to atmosphere.")
-		//After then, it reacts to the surrounding atmosphere based on your thermal protection
-		if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
-			var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
-			if(thermal_protection < 1)
-				var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
-//				log_debug("[loc_temp] is Cold. Cooling by [amt]")
-				bodytemperature += amt
-		else if (loc_temp > BODYTEMP_HEAT_DAMAGE_LIMIT)			//Place is hotter than we are
-			var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
-			if(thermal_protection < 1)
-				var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
-//				log_debug("[loc_temp] is Heat. Heating up by [amt]")
-				bodytemperature += amt
+	//		log_debug("Adjusting to atmosphere.")
+			//After then, it reacts to the surrounding atmosphere based on your thermal protection
+			if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
+				var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
+				if(thermal_protection < 1)
+					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
+	//				log_debug("[loc_temp] is Cold. Cooling by [amt]")
+					bodytemperature += amt
+			else if (loc_temp > BODYTEMP_HEAT_DAMAGE_LIMIT)			//Place is hotter than we are
+				var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
+				if(thermal_protection < 1)
+					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
+	//				log_debug("[loc_temp] is Heat. Heating up by [amt]")
+					bodytemperature += amt
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 		if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
@@ -850,6 +860,8 @@
 					if(A.lighting_use_dynamic)	light_amount = min(10,T.lighting_lumcount) - 5 //hardcapped so it's not abused by having a ton of flashlights
 					else						light_amount =  5
 			nutrition += light_amount
+			traumatic_shock -= light_amount
+
 			if(nutrition > 500)
 				nutrition = 500
 			if(light_amount > 2) //if there's enough light, heal
@@ -902,6 +914,7 @@
 		if(species.flags & REQUIRE_LIGHT)
 			if(nutrition < 200)
 				take_overall_damage(2,0)
+				traumatic_shock++
 
 		if (drowsyness)
 			drowsyness--

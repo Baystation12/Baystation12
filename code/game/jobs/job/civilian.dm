@@ -342,6 +342,7 @@
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
+		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(H), slot_ears)
 		switch(H.backbag)
 			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(H), slot_back)
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
@@ -359,6 +360,7 @@
 		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
 		L.imp_in = H
 		L.implanted = 1
+		var/datum/organ/external/affected = H.organs_by_name["head"]
+		affected.implants += L
+		L.part = affected
 		return 1
-
-

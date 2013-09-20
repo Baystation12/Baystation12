@@ -238,17 +238,17 @@
 
 		if(heart.damage > 0)
 			user.visible_message("\blue [user] treats the bruises on [target]'s heart with \the [tool].", \
-			"\blue You treats the bruises on [target]'s heart with \the [tool]." )
+			"\blue You treat the bruises on [target]'s heart with \the [tool]." )
 			heart.damage = 0
 
 		if(liver.damage > 0)
 			user.visible_message("\blue [user] treats the bruises on [target]'s liver with \the [tool].", \
-			"\blue You treats the bruises on [target]'s liver with \the [tool]." )
+			"\blue You treat the bruises on [target]'s liver with \the [tool]." )
 			liver.damage = 0
 
 		if(kidney.damage > 0)
 			user.visible_message("\blue [user] treats the bruises on [target]'s kidney with \the [tool].", \
-			"\blue You treats the bruises on [target]'s kidney with \the [tool]." )
+			"\blue You treat the bruises on [target]'s kidney with \the [tool]." )
 			kidney.damage = 0
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

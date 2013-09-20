@@ -113,7 +113,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 
 	found_player = 1
 
-	var/mob/living/carbon/human/podman = new /mob/living/carbon/human(parent.loc)
+	var/mob/living/carbon/monkey/diona/podman = new(parent.loc)
 	podman.ckey = player.ckey
 
 	if(player.mob && player.mob.mind)
@@ -122,14 +122,9 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	if(realName)
 		podman.real_name = realName
 	else
-		podman.real_name = "Diona [rand(0,999)]"
+		podman.real_name = "diona nymph ([rand(100,999)])"
 
-	podman.gender = NEUTER
-	podman.dna = new /datum/dna()
 	podman.dna.real_name = podman.real_name
-	podman.set_species("Diona")
-	podman.dna.mutantrace = "plant"
-	podman.update_mutantrace()
 
 	// Update mode specific HUD icons.
 	switch(ticker.mode.name)
@@ -158,5 +153,5 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 		if (newname != "")
 			podman.real_name = newname
 
-	parent.visible_message("\blue The pod disgorges a fully-formed plant person!")
+	parent.visible_message("\blue The pod disgorges a fully-formed plant creature!")
 	parent.update_tray()

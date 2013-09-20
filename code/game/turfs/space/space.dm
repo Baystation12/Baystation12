@@ -3,7 +3,7 @@
 	name = "\proper space"
 	icon_state = "0"
 
-	temperature = TCMB
+	temperature = T0C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 //	heat_capacity = 700000 No.
 

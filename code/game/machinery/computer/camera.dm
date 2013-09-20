@@ -162,7 +162,7 @@
 			T = get_step(T,direct)
 		console.jump_on_click(src,T)
 		return
-	..(n,direct)
+	return ..(n,direct)
 
 /obj/machinery/computer/security/telescreen
 	name = "Telescreen"
@@ -200,4 +200,4 @@
 	name = "Engineering Cameras"
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
-	network = list("Power Alarms","Atmosphere Alarms","Fire Alarms")
+	network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")

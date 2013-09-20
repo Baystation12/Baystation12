@@ -70,8 +70,12 @@
 	D.name = "small parcel - 'EFTPOS access code'"
 
 /obj/item/device/eftpos/proc/reconnect_database()
-	for(var/obj/machinery/account_database/DB in world) //Hotfix until someone finds out why it isn't in 'machines'
-		if(DB.z == src.z)
+	var/turf/location = get_turf(src)
+	if(!location)
+		return
+
+	for(var/obj/machinery/account_database/DB in machines) //Hotfix until someone finds out why it isn't in 'machines'
+		if(DB.z == location.z)
 			linked_db = DB
 			break
 
@@ -201,7 +205,7 @@
 				var/datum/money_account/D = linked_db.attempt_account_access(C.associated_account_number, attempt_pin, 2)
 				if(D)
 					if(transaction_amount <= D.money)
-						playsound(src, 'chime.ogg', 50, 1)
+						playsound(src, 'sound/machines/chime.ogg', 50, 1)
 						src.visible_message("\icon[src] The [src] chimes.")
 						transaction_paid = 1
 

@@ -458,6 +458,13 @@ datum
 			required_reagents = list("carpotoxin" = 5, "stoxin" = 5, "copper" = 5)
 			result_amount = 2
 
+		rezadone
+			name = "Rezadone"
+			id = "rezadone"
+			result = "rezadone"
+			required_reagents = list("carpotoxin" = 1, "cryptobiolin" = 1, "copper" = 1)
+			result_amount = 3
+
 		mindbreaker
 			name = "Mindbreaker Toxin"
 			id = "mindbreaker"
@@ -490,9 +497,7 @@ datum
 			required_reagents = list("pacid" = 10, "plasticide" = 20)
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder)
-				var/obj/item/stack/sheet/metal/M = new /obj/item/stack/sheet/mineral/plastic
-				M.amount = 10
-				M.loc = get_turf_loc(holder.my_atom)
+				new /obj/item/stack/sheet/mineral/plastic(get_turf(holder.my_atom),10)
 				return
 
 		virus_food
