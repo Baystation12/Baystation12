@@ -118,7 +118,7 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 					Label:
 				</div>
 				<div class="itemContentWide">
-					{^{:label ? label : 'No Label'}}
+					{^{:~link(label, 'document-b', {'bufferOption' : 'changeLabel', 'bufferId' : (#parent.index + 1)})}}
 				</div>
 			</div>
 			<div class="item">			
@@ -151,8 +151,9 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 			</div>
 			<div class="itemContentWide">
 				{^{:~link('Clear', 'trash', {'bufferOption' : 'clear', 'bufferId' : (#index + 1)}, !data ? 'disabled' : null)}}
-				{^{:~link('Create Injector', 'pencil', {'bufferOption' : 'createInjector', 'bufferId' : (#index + 1)}, !data ? 'disabled' : null)}}				
-				{^{:~link('Transfer To Subject', 'radiation', {'bufferOption' : 'transfer', 'bufferId' : (#index + 1)}, !~root.hasOccupant || !data ? 'disabled' : null)}}
+				{^{:~link('Injector', 'pencil', {'bufferOption' : 'createInjector', 'bufferId' : (#index + 1)}, !data ? 'disabled' : null)}}
+				{^{:~link('Block Injector', 'pencil', {'bufferOption' : 'createInjector', 'bufferId' : (#index + 1), 'createBlockInjector' : 1}, !data ? 'disabled' : null)}}
+				{^{:~link('Transfer', 'radiation', {'bufferOption' : 'transfer', 'bufferId' : (#index + 1)}, !~root.hasOccupant || !data ? 'disabled' : null)}}
 				{^{:~link('Save To Disk', 'disk', {'bufferOption' : 'saveDisk', 'bufferId' : (#index + 1)}, !data || !~root.hasDisk ? 'disabled' : null)}}
 			</div>
 		</div>
@@ -248,7 +249,7 @@ Used In File(s): D:\Development\SS13-BS12\code\game\dna\dna_modifier.dm
 
 <div class="item">&nbsp;</div>
 
-{^{if selectedMenuKey == 'ui' || selectedMenuKey == 'se'}}
+{^{if !selectedMenuKey || selectedMenuKey == 'ui' || selectedMenuKey == 'se'}}
 	<h3>Radiation Emitter Settings</h3>
 	<div class="item">
 		<div class="itemLabelNarrow">

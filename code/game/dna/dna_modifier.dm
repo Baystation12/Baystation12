@@ -776,8 +776,9 @@
 			src.buffers[bufferId]["ue"] = null
 			return 1
 
-		if (bufferOption == "label" && href_list["newLabel"])
-			src.buffers[bufferId]["label"] = sanitize(href_list["newLabel"])
+		if (bufferOption == "changeLabel")
+			var/label = src.buffers[bufferId]["label"] ? src.buffers[bufferId]["label"] : "New Label"
+			src.buffers[bufferId]["label"] = sanitize(input("New Label:", "Edit Label", label))
 			return 1
 
 		if (bufferOption == "transfer")
@@ -811,7 +812,7 @@
 				var/success = 1
 				var/obj/item/weapon/dnainjector/I = new /obj/item/weapon/dnainjector
 				I.dnatype = src.buffers[bufferId]["type"]
-				if(href_list["createInjectorOption"] == "2")
+				if(href_list["createBlockInjector"])
 					var/blk = input(usr,"Select Block","Block") in all_dna_blocks(src.buffers[bufferId]["data"])
 					success = setInjectorBlock(I,blk,src.buffers[bufferId]["data"])
 				else
