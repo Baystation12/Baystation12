@@ -74,10 +74,11 @@
   *
   * @param user /mob The mob who is interacting with this ui
   * @param ui_key string A string key to use for this ui. Allows for multiple unique uis on one obj/mob (defaut value "main")
+  * @param ui /datum/nanoui This parameter is passed by the nanoui process() proc when updating an open ui
   *
   * @return nothing
   */
-/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main") 
+/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	if(stat & (BROKEN|NOPOWER)) return
 	if(user.stat || user.restrained()) return
 
@@ -110,10 +111,13 @@
 			chemicals.Add(list(list("title" = temp.name, "id" = temp.id, "commands" = list("dispense" = temp.id)))) // list in a list because Byond merges the first list...
 	data["chemicals"] = chemicals
 
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
-	if (!ui) 
+	if (!ui) // no ui has been passed, so we'll search for one
+	{
+		ui = nanomanager.get_open_ui(user, src, ui_key)
+	}
+	if (!ui)
 		// the ui does not exist, so we'll create a new one
-		ui = new(user, src, ui_key, "chem_dispenser.tmpl", "Chem Dispenser 5000", 370, 605)
+		ui = new(user, src, ui_key, "chem_dispenser.tmpl", "Chem Dispenser 5000", 374, 640)
 		// When the UI is first opened this is the data it will use
 		ui.set_initial_data(data)
 		ui.open()
@@ -343,15 +347,15 @@
 				reagents.clear_reagents()
 				icon_state = "mixer0"
 		else if (href_list["createpill"] || href_list["createpill_multiple"])
-			var/name = reject_bad_text(input(usr,"Name:","Name your pill!",reagents.get_master_reagent_name()))
 			var/count = 1
 			if (href_list["createpill_multiple"]) count = isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num)
 			if (count > 20) count = 20	//Pevent people from creating huge stacks of pills easily. Maybe move the number to defines?
 			var/amount_per_pill = reagents.total_volume/count
 			if (amount_per_pill > 50) amount_per_pill = 50
+			var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"))
 			while (count--)
 				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
-				if(!name) name = reagents.get_master_reagent_name()
+				if(!name) name = "[reagents.get_master_reagent_name()] ([amount_per_pill] units)"
 				P.name = "[name] pill"
 				P.pixel_x = rand(-7, 7) //random position
 				P.pixel_y = rand(-7, 7)
@@ -363,9 +367,9 @@
 						src.updateUsrDialog()
 		else if (href_list["createbottle"])
 			if(!condi)
-				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!",reagents.get_master_reagent_name()))
+				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!","[reagents.get_master_reagent_name()] ([reagents.total_volume] units)"))
 				var/obj/item/weapon/reagent_containers/glass/bottle/P = new/obj/item/weapon/reagent_containers/glass/bottle(src.loc)
-				if(!name) name = reagents.get_master_reagent_name()
+				if(!name) name = "[reagents.get_master_reagent_name()] ([reagents.total_volume] units)"
 				P.name = "[name] bottle"
 				P.pixel_x = rand(-7, 7) //random position
 				P.pixel_y = rand(-7, 7)
