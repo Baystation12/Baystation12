@@ -117,7 +117,7 @@
 	}
 	if (!ui)
 		// the ui does not exist, so we'll create a new one
-		ui = new(user, src, ui_key, "chem_dispenser.tmpl", "Chem Dispenser 5000", 370, 605)
+		ui = new(user, src, ui_key, "chem_dispenser.tmpl", "Chem Dispenser 5000", 374, 640)
 		// When the UI is first opened this is the data it will use
 		ui.set_initial_data(data)
 		ui.open()

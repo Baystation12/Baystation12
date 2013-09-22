@@ -364,6 +364,8 @@
 	data["locked"] = src.connected.locked
 	data["hasOccupant"] = connected.occupant ? 1 : 0
 
+	data["isInjectorReady"] = injector_ready
+
 	data["hasDisk"] = disk ? 1 : 0
 
 	var/diskData[0]
@@ -702,7 +704,7 @@
 	// Transfer Buffer Management
 	if(href_list["bufferOption"])
 		var/bufferOption = href_list["bufferOption"]
-		
+
 		// These bufferOptions do not require a bufferId
 		if (bufferOption == "wipeDisk")
 			if ((isnull(src.disk)) || (src.disk.read_only))
@@ -722,12 +724,12 @@
 				return
 			src.disk.loc = get_turf(src)
 			src.disk = null
-			return 1		
-		
+			return 1
+
 		// All bufferOptions from here on require a bufferId
 		if (!href_list["bufferId"])
 			return 0
-			
+
 		var/bufferId = text2num(href_list["bufferId"])
 
 		if (bufferId < 1 || bufferId > 3)
@@ -776,14 +778,15 @@
 			src.buffers[bufferId]["ue"] = null
 			return 1
 
-		if (bufferOption == "label" && href_list["newLabel"])
-			src.buffers[bufferId]["label"] = sanitize(href_list["newLabel"])
+		if (bufferOption == "changeLabel")
+			var/label = src.buffers[bufferId]["label"] ? src.buffers[bufferId]["label"] : "New Label"
+			src.buffers[bufferId]["label"] = sanitize(input("New Label:", "Edit Label", label))
 			return 1
 
 		if (bufferOption == "transfer")
 			if (!src.connected.occupant || (NOCLONE in src.connected.occupant.mutations) || !src.connected.occupant.dna)
 				return
-				
+
 			irradiating = 2
 			var/lock_state = src.connected.locked
 			src.connected.locked = 1//lock it
@@ -793,7 +796,7 @@
 
 			irradiating = 0
 			src.connected.locked = lock_state
-			
+
 			if (src.buffers[bufferId]["type"] == "ui")
 				if (src.buffers[bufferId]["ue"])
 					src.connected.occupant.real_name = src.buffers[bufferId]["owner"]
@@ -811,7 +814,7 @@
 				var/success = 1
 				var/obj/item/weapon/dnainjector/I = new /obj/item/weapon/dnainjector
 				I.dnatype = src.buffers[bufferId]["type"]
-				if(href_list["createInjectorOption"] == "2")
+				if(href_list["createBlockInjector"])
 					var/blk = input(usr,"Select Block","Block") in all_dna_blocks(src.buffers[bufferId]["data"])
 					success = setInjectorBlock(I,blk,src.buffers[bufferId]["data"])
 				else
@@ -853,7 +856,7 @@
 			src.disk.owner = src.buffers[bufferId]["owner"]
 			src.disk.name = "data disk - '[src.buffers[bufferId]["owner"]]'"
 			//src.temphtml = "Data saved."
-			return 1		
+			return 1
 
 
 /////////////////////////// DNA MACHINES

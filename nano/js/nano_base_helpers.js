@@ -136,9 +136,15 @@ NanoBaseHelpers = function ()
 						continue;
 					}
 					
-					var selectBlockKey = 'select' + paramKey + 'Block';
-					var selectSubblockKey = 'select' + paramKey + 'Subblock';
-                    var parameters = { selectBlockKey : block, selectSubblockKey : subblock };
+					var parameters;
+					if (paramKey.toUpperCase() == 'UI')
+					{
+						parameters = { 'selectUIBlock' : block, 'selectUISubblock' : subblock };
+					}
+					else
+					{
+						parameters = { 'selectSEBlock' : block, 'selectSESubblock' : subblock };
+					}                    
                     
                     var status = 'linkActive';
                     if (block == selectedBlock && subblock == selectedSubblock)

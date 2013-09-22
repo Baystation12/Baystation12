@@ -24,7 +24,7 @@ hr {
     margin: 0 2px 2px 0;
     cursor:default;
 }
-.noIcon {
+.hasIcon {
     padding: 0px 4px 4px 0px;
 }
 
@@ -163,8 +163,8 @@ h4 {
     font-size: 12px;
     font-style: italic;
     font-weight: bold;
-    padding: 3px 0px 3px 0px;
-    margin: 4px;
+    padding: 3px 4px 3px 4px;
+    margin: 4px 0 4px 0;
 }
 .notice.icon {
     padding: 2px 4px 0 20px;
@@ -178,6 +178,12 @@ h4 {
 }
 div.notice {
     clear: both;
+}
+.itemGroup {
+    border: 1px solid #e9c183;
+	background: #2c2c2c;
+	padding: 4px;
+	clear: both;
 }
 .item {
     width: 100%;
