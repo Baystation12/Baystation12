@@ -123,8 +123,18 @@ proc/move_mining_shuttle()
 		return
 	src.add_fingerprint(usr)
 	var/dat
-	dat = text("<center>Mining shuttle:<br> <b><A href='?src=\ref[src];move=[1]'>Send</A></b></center>")
-	user << browse("[dat]", "window=miningshuttle;size=200x100")
+
+	dat = "<center>Mining Shuttle Control<hr>"
+
+	if(mining_shuttle_moving)
+		dat += "Location: <font color='red'>Moving</font> <br>"
+	else
+		dat += "Location: [mining_shuttle_location ? "Outpost" : "Station"] <br>"
+
+	dat += "<b><A href='?src=\ref[src];move=[1]'>Send</A></b></center>"
+
+
+	user << browse("[dat]", "window=miningshuttle;size=200x150")
 
 /obj/machinery/computer/mining_shuttle/Topic(href, href_list)
 	if(..())
@@ -142,6 +152,8 @@ proc/move_mining_shuttle()
 			move_mining_shuttle()
 		else
 			usr << "\blue Shuttle is already moving."
+
+	updateUsrDialog()
 
 /obj/machinery/computer/mining_shuttle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
