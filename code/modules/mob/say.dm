@@ -138,7 +138,21 @@
 /mob/proc/say_test(var/text)
 	var/ending = copytext(text, length(text))
 	if (ending == "?")
-		return "1"
+		if(isalien(src))
+			return "A1"
+		if(isrobot(src))
+			return "R1"
+		else
+			return "1"
 	else if (ending == "!")
-		return "2"
+		if(isalien(src))
+			return "A2"
+		if(isrobot(src))
+			return "R2"
+		else
+			return "2"
+	else if(isalien(src))
+		return "A0"
+	else if(isrobot(src))
+		return "R0"
 	return "0"
