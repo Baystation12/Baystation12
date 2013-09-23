@@ -311,6 +311,60 @@ the implant may become unstable and either pre-maturely inject the subject or si
 		H << "\blue You feel a surge of loyalty towards Nanotrasen."
 		return 1
 
+/obj/item/weapon/implant/traitor
+	name = "Greytide Implant"
+	desc = "Greytide Station wide"
+	icon_state = "implant_evil"
+
+	get_data()
+		var/dat = {"
+<b>Implant Specifications:</b><BR>
+<b>Name:</b> Greytide Mind-Slave Implant<BR>
+<b>Life:</b> ??? <BR>
+<b>Important Notes:</b> Any humanoid injected with this implant will become loyal to the injector and the greytide, unless of course the host is already loyal to someone else.<BR>
+<HR>
+<b>Implant Details:</b><BR>
+<b>Function:</b> Contains a small pod of nanobots that manipulate the host's mental functions.<BR>
+<b>Special Features:</b> Glory to the Greytide!<BR>
+<b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
+		return dat
+
+	implanted(mob/M, mob/user)
+		var/list/implanters
+		var/ref = "\ref[user.mind]"
+		if(!ishuman(M)) return 0
+		if(!M.mind) return 0
+		var/mob/living/carbon/human/H = M
+		if(locate(/obj/item/weapon/implant/traitor) in H.contents || locate(/obj/item/weapon/implant/traitor) in H.contents)
+			H.visible_message("[H] seems to resist the implant!", "You feel a strange sensation in your head that quickly dissipates.")
+			return 0
+		else if(H.mind in ticker.mode.traitors)
+			H.visible_message("[H] seems to resist the implant!", "You feel a familiar sensation in your head that quickly dissipates.")
+			return 0
+		H.implanting = 1
+		H << "\blue You feel a surge of loyalty towards [user.name]."
+		if(!(user.mind in ticker.mode:implanter))
+			ticker.mode:implanter[ref] = list()
+		implanters = ticker.mode:implanter[ref]
+		implanters.Add(H.mind)
+		ticker.mode.implanted.Add(H.mind)
+		ticker.mode.implanted[H.mind] = user.mind
+		//ticker.mode:implanter[user.mind] += H.mind
+		ticker.mode:implanter[ref] = implanters
+		ticker.mode.traitors += H.mind
+		H.mind.special_role = "traitor"
+		H << "<B>\red You've been shown the Greytide by [user.name]!</B> You now must lay down your life to protect them and assist in their goals at any cost."
+		var/datum/objective/protect/p = new
+		p.owner = H.mind
+		p.target = user:mind
+		p.explanation_text = "Protect [user:real_name], the [user:mind:assigned_role=="MODE" ? (user:mind:special_role) : (user:mind:assigned_role)]."
+		H.mind.objectives += p
+		for(var/datum/objective/objective in H.mind.objectives)
+			H << "<B>Objective #1</B>: [objective.explanation_text]"
+		ticker.mode.update_traitor_icons_added(H.mind)
+		ticker.mode.update_traitor_icons_added(user.mind)
+		log_admin("[ckey(user.key)] has mind-slaved [ckey(H.key)].")
+		return 1
 
 /obj/item/weapon/implant/adrenalin
 	name = "adrenalin"

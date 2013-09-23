@@ -294,6 +294,56 @@
 	flags = FPRINT | TABLEPASS
 	attack_verb = list("warned", "cautioned", "smashed")
 
+	proximity_sign
+		var/timing = 0
+		var/armed = 0
+		var/timepassed = 0
+
+		attack_self(mob/user as mob)
+			if(ishuman(user))
+				var/mob/living/carbon/human/H = user
+				if(H.mind.assigned_role != "Janitor")
+					return
+				if(armed)
+					armed = 0
+					user << "\blue You disarm \the [src]."
+					return
+				timing = !timing
+				if(timing)
+					processing_objects.Add(src)
+				else
+					armed = 0
+					timepassed = 0
+				H << "\blue You [timing ? "activate \the [src]'s timer, you have 15 seconds." : "de-activate \the [src]'s timer."]"
+
+		process()
+			if(!timing)
+				processing_objects.Remove(src)
+			timepassed++
+			if(timepassed >= 15 && !armed)
+				armed = 1
+				timing = 0
+
+		HasProximity(atom/movable/AM as mob|obj)
+			if(armed)
+				if(istype(AM, /mob/living/carbon) && !istype(AM, /mob/living/carbon/brain))
+					var/mob/living/carbon/C = AM
+					if(C.m_intent != "walk")
+						src.visible_message("The [src.name] beeps, \"Running on wet floors is hazardous to your health.\"")
+						explosion(src.loc,-1,2,0)
+						if(ishuman(C))
+							dead_legs(C)
+						if(src)
+							del(src)
+
+		proc/dead_legs(mob/living/carbon/human/H as mob)
+			var/datum/organ/external/l = H.get_organ("l_leg")
+			var/datum/organ/external/r = H.get_organ("r_leg")
+			if(l && !(l.status & ORGAN_DESTROYED))
+				l.status |= ORGAN_DESTROYED
+			if(r && !(r.status & ORGAN_DESTROYED))
+				r.status |= ORGAN_DESTROYED
+
 /obj/item/weapon/caution/cone
 	desc = "This cone is trying to warn you of something!"
 	name = "warning cone"
@@ -497,10 +547,11 @@
 
 /obj/item/device/camera_bug
 	name = "camera bug"
+	desc = "Tiny electronic device meant to bug cameras for viewing later."
 	icon = 'icons/obj/device.dmi'
-	icon_state = "flash"
+	icon_state = "implant_evil"
 	w_class = 1.0
-	item_state = "electronic"
+	item_state = ""
 	throw_speed = 4
 	throw_range = 20
 
@@ -835,3 +886,67 @@
 	icon_state = "capacitor"
 	desc = "A debug item for research."
 	origin_tech = "materials=8;programming=8;magnets=8;powerstorage=8;bluespace=8;combat=8;biotech=8;syndicate=8"
+
+
+/////////Random shit////////
+
+/obj/item/weapon/lightning
+	name = "lightning"
+	icon = 'icons/obj/lightning.dmi'
+	icon_state = "lightning"
+	desc = "test lightning"
+	flags = USEDELAY
+
+	New()
+		icon = midicon
+		icon_state = "1"
+
+	afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
+		var/angle = get_angle(A, user)
+		//world << angle
+		angle = round(angle) + 45
+		if(angle > 180)
+			angle -= 180
+		else
+			angle += 180
+
+		if(!angle)
+			angle = 1
+		//world << "adjusted [angle]"
+		icon_state = "[angle]"
+		//world << "[angle] [(get_dist(user, A) - 1)]"
+		user.Beam(A, "lightning", 'icons/obj/zap.dmi', 50, 15)
+/*Testing
+proc/get_angle(atom/a, atom/b)
+    return atan2(b.y - a.y, b.x - a.x)
+proc/atan2(x, y)
+    if(!x && !y) return 0
+    return y >= 0 ? arccos(x / sqrt(x * x + y * y)) : -arccos(x / sqrt(x * x + y * y))
+proc
+    //  creates an /icon object with 360 states of rotation
+    rotate_icon(file, state, step = 1, aa = FALSE)
+        var icon/base = icon(file, state)
+
+        var w, h, w2, h2
+        if(aa)
+            aa ++
+            w = base.Width()
+            w2 = w * aa
+            h = base.Height()
+            h2 = h * aa
+
+        var icon{result = icon(base); temp}
+
+        for(var/angle in 0 to 360 step step)
+            if(angle == 0  ) continue
+            if(angle == 360)   continue
+
+            temp = icon(base)
+
+            if(aa) temp.Scale(w2, h2)
+            temp.Turn(angle)
+            if(aa) temp.Scale(w,   h)
+
+            result.Insert(temp, "[angle]")
+
+        return result*/

@@ -76,6 +76,7 @@ BLIND     // can't see anything
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
+	var/pickpocket = 0 //Master pickpocket?
 	species_restricted = list("exclude","Unathi","Tajaran")
 
 /obj/item/clothing/gloves/examine()

@@ -21,6 +21,11 @@
 	origin_tech = "syndicate=3"
 	syndie = 1//Signifies that it de-crypts Syndicate transmissions
 
+/obj/item/device/encryptionkey/syndicate/hacked
+	name = "Standard Encryption Key"
+	desc = "An encryption key for a radio headset.  Has no special codes in it. Looks more sophisticated than usual."
+	channels = list("Command" = 0, "Security" = 0, "Engineering" = 0, "Science" = 0, "Medical" = 0, "Supply" = 0)
+
 /obj/item/device/encryptionkey/binary
 	icon_state = "cypherkey"
 	translate_binary = 1

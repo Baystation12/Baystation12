@@ -18,6 +18,7 @@
 	var/bugged = 0
 	var/obj/item/weapon/camera_assembly/assembly = null
 	var/watcherslist = list()
+	var/obj/item/device/camera_bug/hasbug = null
 
 	// WIRES
 	var/wires = 63 // 0b111111
@@ -161,16 +162,25 @@
 				if (S.current == src)
 					O << "[U] holds \a [itemname] up to one of the cameras ..."
 					O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
-	else if (istype(W, /obj/item/weapon/camera_bug))
+	else if (istype(W, /obj/item/device/camera_bug) && panel_open)
 		if (!src.can_use())
 			user << "\blue Camera non-functional"
 			return
-		if (src.bugged)
-			user << "\blue Camera bug removed."
-			src.bugged = 0
 		else
 			user << "\blue Camera bugged."
-			src.bugged = 1
+			user.drop_item(W)
+			hasbug = W
+			contents += W
+			if(prob(15))
+				spawn(30)
+					if(src.can_use() && hasbug)
+						desc += "<br>The power light on the camera is blinking"
+						triggerCameraAlarm()
+	else if (iscrowbar(W) && panel_open && src.hasbug)
+		user << "\blue You retrieve \the [hasbug]"
+		user.put_in_hands(hasbug)
+		hasbug = null
+		deactivatebug(user)
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))//Putting it here last since it's a special case. I wonder if there is a better way to do these than type casting.
 		deactivate(user,2)//Here so that you can disconnect anyone viewing the camera, regardless if it's on or off.
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -186,6 +196,14 @@
 	else
 		..()
 	return
+/obj/machinery/camera/proc/deactivatebug(user as mob)
+	for(var/mob/O in player_list)
+		if(istype(O.machine, /obj/item/device/handtv))
+			var/obj/item/device/handtv/S = O.machine
+			if (S.current == src)
+				O.unset_machine()
+				O.reset_view(null)
+				O << "The screen bursts into static."
 
 /obj/machinery/camera/proc/deactivate(user as mob, var/choice = 1)
 	if(choice==1)

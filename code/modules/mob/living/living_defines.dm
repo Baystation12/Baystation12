@@ -36,3 +36,5 @@
 	var/tod = null // Time of death
 	var/update_slimes = 1
 	var/silent = null 		//Can't talk. Value goes down every life proc.
+	var/specialsauce = 0 //Has this person consumed enough special sauce? IF so they're a ticking time bomb of death.
+	var/implanting = 0 //Used for the mind-slave implant

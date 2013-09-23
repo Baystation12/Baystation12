@@ -7,6 +7,9 @@
 	permeability_coefficient = 0.05
 	_color="yellow"
 
+	power
+		var/next_shock = 0
+
 /obj/item/clothing/gloves/fyellow                             //Cheap Chinese Crap
 	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."
 	name = "budget insulated gloves"
@@ -38,6 +41,9 @@
 
 	ce
 		_color = "chief"			//Exists for washing machines. Is not different from black gloves in any way.
+
+	thief
+		pickpocket = 1
 
 /obj/item/clothing/gloves/orange
 	name = "orange gloves"

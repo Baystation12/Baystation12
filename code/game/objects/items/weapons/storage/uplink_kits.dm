@@ -9,7 +9,6 @@
 				new /obj/item/clothing/shoes/syndigaloshes(src)
 				return
 
-			if ("stealth")
 			if("stealth")
 				new /obj/item/weapon/gun/energy/crossbow(src)
 				new /obj/item/weapon/pen/paralysis(src)
@@ -117,3 +116,42 @@
 	new /obj/item/clothing/suit/space/syndicate(src)
 	new /obj/item/clothing/head/helmet/space/syndicate(src)
 	return
+
+/obj/item/weapon/storage/box/syndie_kit/surveillance
+	name = "box (S)"
+
+/obj/item/weapon/storage/box/syndie_kit/surveillance/New()
+	..()
+	new /obj/item/device/handtv(src)
+	new /obj/item/weapon/storage/box/surveillance(src)
+	return
+
+/obj/item/weapon/storage/box/syndie_kit/conversion
+	name = "box (CK)"
+
+/obj/item/weapon/storage/box/syndie_kit/conversion/New()
+	..()
+	new /obj/item/weapon/conversion_kit(src)
+	new /obj/item/ammo_magazine/a357(src)
+	return
+
+/obj/item/weapon/storage/box/syndie_kit/greytide
+	name = "box (GT)"
+
+	New()
+		..()
+		var/obj/item/weapon/implanter/O = new(src)
+		O.imp = new /obj/item/weapon/implant/traitor(O)
+		O.update()
+
+/obj/item/weapon/storage/box/syndie_kit/boolets
+	name = "Shotgun shells"
+
+	New()
+		..()
+		new /obj/item/ammo_casing/shotgun/fakebeanbag(src)
+		new /obj/item/ammo_casing/shotgun/fakebeanbag(src)
+		new /obj/item/ammo_casing/shotgun/fakebeanbag(src)
+		new /obj/item/ammo_casing/shotgun/fakebeanbag(src)
+		new /obj/item/ammo_casing/shotgun/fakebeanbag(src)
+		new /obj/item/ammo_casing/shotgun/fakebeanbag(src)
