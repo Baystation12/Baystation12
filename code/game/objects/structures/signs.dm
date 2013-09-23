@@ -174,3 +174,23 @@
 	name = "\improper HYDROPONICS"
 	desc = "A warning sign which reads 'HYDROPONICS'"
 	icon_state = "hydro1"
+
+/obj/structure/sign/mech
+	name = "\improper mech painting"
+	desc = "A painting of a mech"
+	icon_state = "mech"
+
+/obj/structure/sign/nuke
+	name = "\improper nuke painting"
+	desc = "A painting of a nuke"
+	icon_state = "nuke"
+
+/obj/structure/sign/clown
+	name = "\improper mech painting"
+	desc = "A painting of the clown and mime. Awwww."
+	icon_state = "clown"
+
+/obj/structure/sign/singulo
+	name = "\improper singulo painting"
+	desc = "A mesmerizing painting of a singularity. It seems to suck you in..."
+	icon_state = "singulo"
