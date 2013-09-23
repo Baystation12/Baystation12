@@ -3544,7 +3544,7 @@ datum
 							M.drop_from_inventory(W)
 						M.gib()
 				return
-/* Not tested
+
 		necrovirus
 			name = "Zombie Virus"
 			id = "necrodisease"
@@ -3559,4 +3559,4 @@ datum
 				M.viruses += D
 				..()
 				return
-*/
+

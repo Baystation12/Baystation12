@@ -1963,12 +1963,12 @@ datum
 			result = "necrocure"
 			required_reagents = list("sterilizine" = 2, "zmeat" = 2)
 			result_amount = 5
-/* Not Tested
+
 		necrodisease
 			name = "Zombie Virus"
 			id = "necrodisease"
 			result = "necrodisease"
 			required_reagents = list("zombiepowder" = 2, "cryptobiolin" = 2)
 			result_amount = 5
-*/
+
 
