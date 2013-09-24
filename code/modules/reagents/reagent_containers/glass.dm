@@ -121,7 +121,7 @@
 		else if(istype(target, /obj/machinery/bunsen_burner))
 			return
 
-		else if(istype(target, /obj/machinery/anomaly))
+		else if(istype(target, /obj/machinery/radiocarbon_spectrometer))
 			return
 
 		else if(reagents.total_volume)

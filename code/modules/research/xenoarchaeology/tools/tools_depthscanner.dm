@@ -37,17 +37,12 @@
 			D.record_index = positive_locations.len + 1
 			D.material = M.mineralName
 
-			//find whichever is closer: find or mineral
+			//find the first artifact and store it
 			if(M.finds.len)
 				var/datum/find/F = M.finds[1]
-				D.depth = F.excavation_required * 2
+				D.depth = F.excavation_required * 2		//0-100% but 0-200cm
 				D.clearance = F.clearance_range * 2
 				D.material = get_responsive_reagent(F.find_type)
-			if(M.excavation_minerals.len)
-				if(M.excavation_minerals[1] < D.depth)
-					D.depth = M.excavation_minerals[1]
-					D.clearance = rand(2,6)
-					D.dissonance_spread = rand(1,1000) / 100
 
 			positive_locations.Add(D)
 
@@ -71,7 +66,7 @@
 			positive_locations.Add(D)
 
 			for(var/mob/L in range(src, 1))
-				L << "\blue \icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]."
+				L << "\blue \icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!."
 
 /obj/item/device/depth_scanner/attack_self(var/mob/user as mob)
 	return src.interact(user)

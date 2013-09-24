@@ -1,0 +1,47 @@
+<!-- 
+Title: Radiometric Scanner UI 
+Used In File(s): \code\modules\research\xenoarchaeology\machinery\geosample_scanner.dm
+ -->
+<h3>Radiometric Scanner Status</h3>
+
+<div class="item">
+	<div class="itemLabel">
+		Item:
+	</div>
+	<div class="itemContent" style="width: 40%;">
+		{^{if scanned_item}}
+			<span class="good">{^{:scanned_item}}</span><br>
+		{{else}}
+			<span class="bad">No item inserted</span><br>
+		{{/if}}
+	</div>
+	<div class="itemContent" style="width: 26%;">
+		{^{:~link('Eject item', 'eject', {'ejectItem' : 1}, (scanned_item && !scanning) ? null : 'disabled')}}
+	</div>
+</div>
+	
+<div class="item">
+	<div class="itemLabel">
+		Heuristic analysis:
+	</div>
+	<div class="itemContent" style="width: 40%;">
+		{^{if scanned_item_desc}}
+			<span class="average">{^{:scanned_item_desc}}</span>
+		{{else}}
+			<br>
+		{{/if}}
+	</div>
+	<div class="itemContent" style="width: 26%;">
+		{^{:~link(scanning ? 'Scan in progress' : 'Begin Scan', 'signal-diag', {'scanItem' : 1}, scanning ? 'disabled' : null)}}
+	</div>
+</div>
+
+<h3>{^{scanning ? 'Scan in progress' : 'Scan results'}}</h3>
+<div class="statusDisplay">
+	<div class="statusLabel">Scan progress:</div>
+	{^{:~displayBar(scan_progress, 0, 100, scan_progress < 66 ? (scan_progress < 33 ? 'bad' : 'average') : 'good')}}
+	<div class="statusValue">{^{:scan_progress}}%</div>
+	<div class="line">
+		<span class="highlight">{^{:last_scan_data}}</span>
+	</div>
+</div>
