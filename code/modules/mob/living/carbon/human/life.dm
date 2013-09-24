@@ -174,8 +174,8 @@
 		if (disabilities & NERVOUS)
 			if (prob(10))
 				stuttering = max(10, stuttering)
-		// No. -- cib
-		/*if (getBrainLoss() >= 60 && stat != 2)
+
+		if (getBrainLoss() >= 60 && stat != 2)
 			if (prob(3))
 				switch(pick(1,2,3))
 					if(1)
@@ -184,7 +184,7 @@
 						say(pick("FUS RO DAH","fucking 4rries!", "stat me", ">my face", "roll it easy!", "waaaaaagh!!!", "red wonz go fasta", "FOR TEH EMPRAH", "lol2cat", "dem dwarfs man, dem dwarfs", "SPESS MAHREENS", "hwee did eet fhor khayosss", "lifelike texture ;_;", "luv can bloooom", "PACKETS!!!"))
 					if(3)
 						emote("drool")
-		*/
+
 
 		if(stat != 2)
 			var/rn = rand(0, 200)
@@ -883,24 +883,24 @@
 			else if (light_amount < 2) //heal in the dark
 				heal_overall_damage(1,1)
 
-/*		//The fucking FAT mutation is the dumbest shit ever. It makes the code so difficult to work with
-		if(FAT in mutations)
-			if(overeatduration < 100)
-				src << "\blue You feel fit again!"
-				mutations.Remove(FAT)
-				update_mutantrace(0)
-				update_mutations(0)
-				update_inv_w_uniform(0)
-				update_inv_wear_suit()
-		else
-			if(overeatduration > 500)
-				src << "\red You suddenly feel blubbery!"
-				mutations.Add(FAT)
-				update_mutantrace(0)
-				update_mutations(0)
-				update_inv_w_uniform(0)
-				update_inv_wear_suit()
-*/
+
+		if(species.flags & CAN_BE_FAT)
+			if(FAT in mutations)
+				if(overeatduration < 100)
+					src << "\blue You feel fit again!"
+					mutations.Remove(FAT)
+					update_mutantrace(0)
+					update_mutations(0)
+					update_inv_w_uniform(0)
+					update_inv_wear_suit()
+			else
+				if(overeatduration > 500)
+					src << "\red You suddenly feel blubbery!"
+					mutations.Add(FAT)
+					update_mutantrace(0)
+					update_mutations(0)
+					update_inv_w_uniform(0)
+					update_inv_wear_suit()
 
 		// nutrition decrease
 		if (nutrition > 0 && stat != 2)

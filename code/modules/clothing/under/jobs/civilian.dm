@@ -6,7 +6,7 @@
 	icon_state = "ba_suit"
 	item_state = "ba_suit"
 	_color = "ba_suit"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/captain //Alright, technically not a 'civilian' but its better then giving a .dm file for a single define.
@@ -15,7 +15,7 @@
 	icon_state = "captain"
 	item_state = "caparmor"
 	_color = "captain"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/cargo
@@ -24,6 +24,7 @@
 	icon_state = "qm"
 	item_state = "lb_suit"
 	_color = "qm"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/cargotech
@@ -32,7 +33,7 @@
 	icon_state = "cargotech"
 	item_state = "lb_suit"
 	_color = "cargo"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/chaplain
@@ -41,7 +42,7 @@
 	icon_state = "chaplain"
 	item_state = "bl_suit"
 	_color = "chapblack"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/chef
@@ -49,7 +50,7 @@
 	name = "chef's uniform"
 	icon_state = "chef"
 	_color = "chef"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/clown
@@ -58,7 +59,7 @@
 	icon_state = "clown"
 	item_state = "clown"
 	_color = "clown"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/head_of_personnel
@@ -67,7 +68,7 @@
 	icon_state = "hop"
 	item_state = "b_suit"
 	_color = "hop"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/rank/head_of_personnel_whimsy
 	desc = "A blue jacket and red tie, with matching red cuffs! Snazzy. Wearing this makes you feel more important than your job title does."
@@ -75,7 +76,7 @@
 	icon_state = "hopwhimsy"
 	item_state = "hopwhimsy"
 	_color = "hopwhimsy"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/hydroponics
@@ -85,7 +86,7 @@
 	item_state = "g_suit"
 	_color = "hydroponics"
 	permeability_coefficient = 0.50
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/internalaffairs
@@ -94,7 +95,7 @@
 	icon_state = "internalaffairs"
 	item_state = "internalaffairs"
 	_color = "internalaffairs"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/janitor
@@ -103,37 +104,41 @@
 	icon_state = "janitor"
 	_color = "janitor"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/lawyer
 	desc = "Slick threads."
 	name = "Lawyer suit"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/lawyer/black
 	icon_state = "lawyer_black"
 	item_state = "lawyer_black"
 	_color = "lawyer_black"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/lawyer/female
 	icon_state = "black_suit_fem"
 	item_state = "black_suit_fem"
 	_color = "black_suit_fem"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/lawyer/red
 	icon_state = "lawyer_red"
 	item_state = "lawyer_red"
 	_color = "lawyer_red"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/lawyer/blue
 	icon_state = "lawyer_blue"
 	item_state = "lawyer_blue"
 	_color = "lawyer_blue"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/lawyer/bluesuit
@@ -142,6 +147,7 @@
 	icon_state = "bluesuit"
 	item_state = "bluesuit"
 	_color = "bluesuit"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/lawyer/purpsuit
@@ -149,6 +155,7 @@
 	icon_state = "lawyer_purp"
 	item_state = "lawyer_purp"
 	_color = "lawyer_purp"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/lawyer/oldman
 	name = "Old Man's Suit"
@@ -156,6 +163,7 @@
 	icon_state = "oldman"
 	item_state = "oldman"
 	_color = "oldman"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/librarian
@@ -164,6 +172,7 @@
 	icon_state = "red_suit"
 	item_state = "red_suit"
 	_color = "red_suit"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/mime
 	name = "mime's outfit"
@@ -171,7 +180,7 @@
 	icon_state = "mime"
 	item_state = "mime"
 	_color = "mime"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/rank/miner
 	desc = "It's a snappy jumpsuit with a sturdy set of overalls. It is very dirty."
@@ -179,3 +188,4 @@
 	icon_state = "miner"
 	item_state = "miner"
 	_color = "miner"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL

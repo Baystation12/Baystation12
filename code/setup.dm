@@ -71,7 +71,7 @@
 #define DOOR_CRUSH_DAMAGE 10
 
 // Factor of how fast mob nutrition decreases
-#define	HUNGER_FACTOR 0.05
+#define	HUNGER_FACTOR 0.15
 
 // How many units of reagent are consumed per tick, by default.
 #define  REAGENTS_METABOLISM 0.2
@@ -305,6 +305,12 @@ var/MAX_EXPLOSION_RANGE = 14
 
 #define STRUCDNASIZE 27
 #define UNIDNASIZE 13
+
+// Used in preferences.
+#define DISABILITY_FLAG_NEARSIGHTED 1
+#define DISABILITY_FLAG_FAT         2
+#define DISABILITY_FLAG_EPILEPTIC   4
+#define DISABILITY_FLAG_DEAF        8
 
 	// Generic mutations:
 #define	TK				1
@@ -719,6 +725,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define HAS_UNDERWEAR 1024
 #define HAS_TAIL 2048
 #define IS_PLANT 4096
+#define CAN_BE_FAT 8192
 
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.

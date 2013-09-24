@@ -258,9 +258,10 @@ datum/preferences
 		dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
 		dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
 		dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
-		//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
-		dat += "Needs Glasses: <a href='?_src_=prefs;preference=disabilities'><b>[disabilities == 0 ? "No" : "Yes"]</b></a><br>"
-		dat += "Limbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
+		dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
+		dat += "<br><b>Handicaps</b><br>"
+		dat += "\t<a href='byond://?src=\ref[user];task=input;preference=disabilities'><b>\[Set Disabilities\]</b></a><br>"
+		dat += "\tLimbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
 
 		//display limbs below
 		var/ind = 0
@@ -463,22 +464,32 @@ datum/preferences
 		user << browse(HTML, "window=mob_occupation;size=[width]x[height]")
 		return
 
+	proc/ShowDisabilityState(mob/user,flag,label)
+		if(flag==DISABILITY_FLAG_FAT && species!="Human")
+			return "<li><i>[species] cannot be fat.</i></li>"
+		return "<li><b>[label]:</b> <a href=\"?_src_=prefs;task=input;preference=disabilities;disability=[flag]\">[disabilities & flag ? "Yes" : "No"]</a></li>"
+
 	proc/SetDisabilities(mob/user)
 		var/HTML = "<body>"
-		HTML += "<tt><center>"
-		HTML += "<b>Choose disabilities</b><br>"
 
-		HTML += "Need Glasses? <a href=\"byond://?src=\ref[user];preferences=1;disabilities=0\">[disabilities & (1<<0) ? "Yes" : "No"]</a><br>"
-		HTML += "Seizures? <a href=\"byond://?src=\ref[user];preferences=1;disabilities=1\">[disabilities & (1<<1) ? "Yes" : "No"]</a><br>"
-		HTML += "Coughing? <a href=\"byond://?src=\ref[user];preferences=1;disabilities=2\">[disabilities & (1<<2) ? "Yes" : "No"]</a><br>"
-		HTML += "Tourettes/Twitching? <a href=\"byond://?src=\ref[user];preferences=1;disabilities=3\">[disabilities & (1<<3) ? "Yes" : "No"]</a><br>"
-		HTML += "Nervousness? <a href=\"byond://?src=\ref[user];preferences=1;disabilities=4\">[disabilities & (1<<4) ? "Yes" : "No"]</a><br>"
-		HTML += "Deafness? <a href=\"byond://?src=\ref[user];preferences=1;disabilities=5\">[disabilities & (1<<5) ? "Yes" : "No"]</a><br>"
+		// AUTOFIXED BY fix_string_idiocy.py
+		// C:\Users\Rob\Documents\Projects\vgstation13\code\modules\client\preferences.dm:474: HTML += "<tt><center>"
+		HTML += {"<tt><center>
+			<b>Choose disabilities</b><ul>"}
+		// END AUTOFIX
+		HTML += ShowDisabilityState(user,DISABILITY_FLAG_NEARSIGHTED,"Needs Glasses")
+		HTML += ShowDisabilityState(user,DISABILITY_FLAG_FAT,"Obese")
+		HTML += ShowDisabilityState(user,DISABILITY_FLAG_EPILEPTIC,"Seizures")
+		HTML += ShowDisabilityState(user,DISABILITY_FLAG_DEAF,"Deaf")
 
-		HTML += "<br>"
-		HTML += "<a href=\"byond://?src=\ref[user];preferences=1;disabilities=-2\">\[Done\]</a>"
-		HTML += "</center></tt>"
 
+		// AUTOFIXED BY fix_string_idiocy.py
+		// C:\Users\Rob\Documents\Projects\vgstation13\code\modules\client\preferences.dm:481: HTML += "</ul>"
+		HTML += {"</ul>
+			<a href=\"?_src_=prefs;task=close;preference=disabilities\">\[Done\]</a>
+			<a href=\"?_src_=prefs;task=reset;preference=disabilities\">\[Reset\]</a>
+			</center></tt>"}
+		// END AUTOFIX
 		user << browse(null, "window=preferences")
 		user << browse(HTML, "window=disabil;size=350x300")
 		return
@@ -681,6 +692,24 @@ datum/preferences
 					SetJob(user, href_list["text"])
 				else
 					SetChoices(user)
+			return 1
+		else if(href_list["preference"] == "disabilities")
+
+			switch(href_list["task"])
+				if("close")
+					user << browse(null, "window=disabil")
+					ShowChoices(user)
+				if("reset")
+					disabilities=0
+					SetDisabilities(user)
+				if("input")
+					var/dflag=text2num(href_list["disability"])
+					if(dflag >= 0)
+						if(!(dflag==DISABILITY_FLAG_FAT && species!="Human"))
+							disabilities ^= text2num(href_list["disability"]) //MAGIC
+					SetDisabilities(user)
+				else
+					SetDisabilities(user)
 			return 1
 		else if(href_list["preference"] == "skills")
 			if(href_list["cancel"])
@@ -988,15 +1017,6 @@ datum/preferences
 
 							flavor_text = msg
 
-					if("disabilities")
-						if(text2num(href_list["disabilities"]) >= -1)
-							if(text2num(href_list["disabilities"]) >= 0)
-								disabilities ^= (1<<text2num(href_list["disabilities"])) //MAGIC
-							SetDisabilities(user)
-							return
-						else
-							user << browse(null, "window=disabil")
-
 					if("limbs")
 						var/limb_name = input(user, "Which limb do you want to change?") as null|anything in list("Left Leg","Right Leg","Left Arm","Right Arm","Left Foot","Right Foot","Left Hand","Right Hand")
 						if(!limb_name) return
@@ -1059,8 +1079,6 @@ datum/preferences
 						else
 							gender = MALE
 
-					if("disabilities")				//please note: current code only allows nearsightedness as a disability
-						disabilities = !disabilities//if you want to add actual disabilities, code that selects them should be here
 
 					if("hear_adminhelps")
 						toggles ^= SOUND_ADMINHELP
@@ -1177,6 +1195,16 @@ datum/preferences
 				O.destspawn = 1
 			else if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
+
+		if(disabilities & DISABILITY_FLAG_FAT && species=="Human")//character.species.flags & CAN_BE_FAT)
+			character.mutations += FAT
+		if(disabilities & DISABILITY_FLAG_NEARSIGHTED)
+			character.disabilities|=NEARSIGHTED
+		if(disabilities & DISABILITY_FLAG_EPILEPTIC)
+			character.disabilities|=EPILEPSY
+		if(disabilities & DISABILITY_FLAG_DEAF)
+			character.sdisabilities|=DEAF
+
 		if(underwear > underwear_m.len || underwear < 1)
 			underwear = 1 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me.
 		character.underwear = underwear

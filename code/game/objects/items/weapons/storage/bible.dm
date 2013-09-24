@@ -22,7 +22,7 @@
 	new /obj/item/weapon/spacecash(src)
 	new /obj/item/weapon/spacecash(src)
 //BS12 EDIT
-/* // All cult functionality moved to Null Rod
+ // All cult functionality moved to Null Rod
 /obj/item/weapon/storage/bible/proc/bless(mob/living/carbon/M as mob)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -87,7 +87,7 @@
 			O.show_message(text("\red <B>[] smacks []'s lifeless corpse with [].</B>", user, M, src), 1)
 		playsound(src.loc, "punch", 25, 1, -1)
 	return
-*/
+
 /obj/item/weapon/storage/bible/afterattack(atom/A, mob/user as mob)
 /*	if (istype(A, /turf/simulated/floor))
 		user << "\blue You hit the floor with the bible."
