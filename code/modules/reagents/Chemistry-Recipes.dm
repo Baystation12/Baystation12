@@ -1026,7 +1026,7 @@ datum
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 
-				/*var/blocked = list(/mob/living/simple_animal/hostile,
+				var/blocked = list(/mob/living/simple_animal/hostile,
 					/mob/living/simple_animal/hostile/pirate,
 					/mob/living/simple_animal/hostile/pirate/ranged,
 					/mob/living/simple_animal/hostile/russian,
@@ -1058,9 +1058,9 @@ datum
 					C.loc = get_turf_loc(holder.my_atom)
 					if(prob(50))
 						for(var/j = 1, j <= rand(1, 3), j++)
-							step(C, pick(NORTH,SOUTH,EAST,WEST))*/
-				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
-					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)
+							step(C, pick(NORTH,SOUTH,EAST,WEST))
+//				for(var/mob/O in viewers(get_turf_loc(holder.my_atom), null))
+//					O.show_message(text("\red The slime core fizzles disappointingly,"), 1)
 
 //Silver
 		slimebork
@@ -1968,7 +1968,7 @@ datum
 			name = "Zombie Virus"
 			id = "necrodisease"
 			result = "necrodisease"
-			required_reagents = list("zombiepowder" = 2, "cryptobiolin" = 2)
+			required_reagents = list("zombiepowder" = 2, "cryptobiolin" = 2, "mutagen" = 2)
 			result_amount = 5
 
 

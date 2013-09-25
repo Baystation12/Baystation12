@@ -76,7 +76,7 @@
 	icon_state = "hopwhimsy"
 	item_state = "hopwhimsy"
 	_color = "hopwhimsy"
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = FPRINT | TABLEPASS
 
 
 /obj/item/clothing/under/rank/hydroponics
@@ -117,28 +117,28 @@
 	icon_state = "lawyer_black"
 	item_state = "lawyer_black"
 	_color = "lawyer_black"
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = FPRINT | TABLEPASS
 
 
 /obj/item/clothing/under/lawyer/female
 	icon_state = "black_suit_fem"
 	item_state = "black_suit_fem"
 	_color = "black_suit_fem"
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = FPRINT | TABLEPASS
 
 
 /obj/item/clothing/under/lawyer/red
 	icon_state = "lawyer_red"
 	item_state = "lawyer_red"
 	_color = "lawyer_red"
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = FPRINT | TABLEPASS
 
 
 /obj/item/clothing/under/lawyer/blue
 	icon_state = "lawyer_blue"
 	item_state = "lawyer_blue"
 	_color = "lawyer_blue"
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = FPRINT | TABLEPASS
 
 
 /obj/item/clothing/under/lawyer/bluesuit
@@ -147,7 +147,7 @@
 	icon_state = "bluesuit"
 	item_state = "bluesuit"
 	_color = "bluesuit"
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = FPRINT | TABLEPASS
 
 
 /obj/item/clothing/under/lawyer/purpsuit
@@ -155,7 +155,7 @@
 	icon_state = "lawyer_purp"
 	item_state = "lawyer_purp"
 	_color = "lawyer_purp"
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/under/lawyer/oldman
 	name = "Old Man's Suit"
@@ -163,7 +163,7 @@
 	icon_state = "oldman"
 	item_state = "oldman"
 	_color = "oldman"
-	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	flags = FPRINT | TABLEPASS
 
 
 /obj/item/clothing/under/librarian

@@ -466,6 +466,9 @@ its easier to just keep the beam vertical.
 		if(toxvomit)
 			this.icon_state = "vomittox_[pick(1,4)]"
 
+/atom/proc/add_poop_floor(mob/living/carbon/M as mob)
+	if( istype(src, /turf/simulated) )
+		new /obj/effect/decal/cleanable/poop(src)
 
 /atom/proc/clean_blood()
 	src.germ_level = 0

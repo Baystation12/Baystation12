@@ -48,7 +48,7 @@
 	proc/deactivate(var/mob/living/carbon/mob)
 
 ////////////////////////SPECIAL/////////////////////////////////
-/datum/disease2/effect/alien
+/*/datum/disease2/effect/alien
 	name = "Unidentified Foreign Body"
 	stage = 4
 	activate(var/mob/living/carbon/mob,var/multiplier)
@@ -62,7 +62,7 @@
 				new/mob/living/carbon/alien/larva(mob.loc)
 			var/datum/disease2/disease/D = mob:virus2
 			mob:gib()
-			del D
+			del D*/
 
 /datum/disease2/effect/invisible
 	name = "Waiting Syndrome"
@@ -359,3 +359,18 @@
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob << "<span class = 'notice'> Your head hurts a bit</span>"
+
+/datum/disease2/effect/poop
+	name = "Uncontrollable Bowel Syndrome"
+	stage = 1
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		if  (prob(50))
+			mob << "<span class='notice'>[pick("Your stomach rumbles strangely.", "You feel like you're going shit your pants any second now!")]</span>"
+
+		else
+			mob.visible_message("<B>[mob]</B> has explosive diarrhea all over the floor!")
+			mob.nutrition -= 20
+			mob.adjustToxLoss(-3)
+			var/obj/effect/decal/cleanable/poop/P = new(get_turf(mob))
+			P.virus2 = virus_copylist(mob.virus2)
+			playsound(P.loc, 'sound/effects/splat.ogg', 50, 1)

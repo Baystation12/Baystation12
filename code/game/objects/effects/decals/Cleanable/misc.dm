@@ -92,12 +92,24 @@
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "vomit_1"
 	random_icon_states = list("vomit_1", "vomit_2", "vomit_3", "vomit_4")
+	var/list/datum/disease2/disease/virus2 = list()
 	var/list/viruses = list()
 
 	Del()
 		for(var/datum/disease/D in viruses)
 			D.cure(0)
 		..()
+
+/obj/effect/decal/cleanable/poop
+	name = "poop"
+	desc = "Gosh, how unpleasant."
+	gender = PLURAL
+	density = 0
+	anchored = 1
+	layer = 2
+	icon = 'icons/effects/poop.dmi'
+	random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6", "floor7")
+	var/list/datum/disease2/disease/virus2 = list()
 
 /obj/effect/decal/cleanable/tomato_smudge
 	name = "tomato smudge"

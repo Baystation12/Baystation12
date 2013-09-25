@@ -500,19 +500,19 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 		if(FAT in mutations)
 			if(w_uniform.flags&ONESIZEFITSALL)
-				lying.icon    = 'icons/mob/uniform_fat.dmi'
-				standing.icon  = 'icons/mob/uniform_fat.dmi'
+				lying.icon		= 'icons/mob/uniform_fat.dmi'
+				standing.icon	= 'icons/mob/uniform_fat.dmi'
 			else
 				src << "\red You burst out of \the [w_uniform]!"
 				drop_from_inventory(w_uniform)
-			return
+				return
 		else
-			lying.icon    = 'icons/mob/uniform.dmi'
-			standing.icon  = 'icons/mob/uniform.dmi'
+			lying.icon		= 'icons/mob/uniform.dmi'
+			standing.icon	= 'icons/mob/uniform.dmi'
 
 		if(w_uniform.custom)
-			lying.icon    = w_uniform.icon
-			standing.icon  = w_uniform.icon
+			lying.icon		= w_uniform.icon
+			standing.icon	= w_uniform.icon
 
 		if(w_uniform.blood_DNA)
 			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "uniformblood2")

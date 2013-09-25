@@ -178,7 +178,8 @@
 		while(1)
 			sleep(INACTIVITY_KICK)
 			for(var/client/C in clients)
-				if(C.is_afk(INACTIVITY_KICK) && !istype(C,/datum/admins))
+				if(R_ADMIN & C.holder.rights || !(R_MOD & C.holder.rights)) return
+				if(C.is_afk(INACTIVITY_KICK))
 					if(!istype(C.mob, /mob/dead))
 						log_access("AFK: [key_name(C)]")
 						C << "\red You have been inactive for more than 10 minutes and have been disconnected."
@@ -192,7 +193,9 @@
 		while(1)
 			sleep(DISCONNECTED_DELETE)
 			for(var/mob/living/carbon/C in mob_list)
-				if(!ismonkey(C) && !isslime(C) && !istype(C,/datum/admins))
+//				var/client/L = C
+//				if(R_ADMIN & L.holder.rights || !(R_MOD & L.holder.rights)) return
+				if(!ismonkey(C) && !isslime(C))
 					if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0 && C.lastKnownIP)
 						sleep(600)
 						if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0)
