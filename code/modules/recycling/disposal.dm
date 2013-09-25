@@ -27,23 +27,18 @@
 	// find the attached trunk (if present) and init gas resvr.
 	New()
 		..()
-		trunk = locate() in src.loc
-		if(!trunk)
-			mode = 0
-			flush = 0
-		else
-			trunk.linked = src  // link the pipe trunk to self
+		spawn(5)
+			trunk = locate() in src.loc
+			if(!trunk)
+				mode = 0
+				flush = 0
+			else
+				trunk.linked = src	// link the pipe trunk to self
 
-		air_contents = new/datum/gas_mixture()
-		//gas.volume = 1.05 * CELLSTANDARD
-		update()
+			air_contents = new/datum/gas_mixture()
+			//gas.volume = 1.05 * CELLSTANDARD
+			update()
 
-	initialize() //this will remove around 5kpa from a turf, add it to the disposal air and then add it back to the turf, basically it spawns air depending on the turf air.
-		var/atom/L = loc
-		var/datum/gas_mixture/env = L.return_air()
-		var/datum/gas_mixture/removed = env.remove(SEND_PRESSURE)
-		air_contents.merge(removed)
-		env.merge(removed)
 
 	// attack by item places it in to disposal
 	attackby(var/obj/item/I, var/mob/user)
