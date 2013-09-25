@@ -109,6 +109,12 @@ VOTE_DELAY 6000
 ## time period (deciseconds) which voting session will last (default 1 minute)
 VOTE_PERIOD 600
 
+## autovote initial delay (deciseconds) before first automatic transfer vote call (default 180 minutes)
+VOTE_AUTOTRANSFER_INITIAL 108000
+
+##autovote delay (deciseconds) before sequential automatic transfer votes are called (default 60 minutes)
+Vote_AUTOTRANSFER_INTERVAL 36000
+
 ## prevents dead players from voting or starting votes
 #NO_DEAD_VOTE
 
