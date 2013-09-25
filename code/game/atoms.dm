@@ -881,6 +881,8 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 		if(parameters["alt"]){
 			if(isrobot(usr))
 				RobotAltClick(usr)
+			else if(isovermind(usr))
+				OvermindAltClick(usr)
 			else if(!isAI(usr))
 				AltClick(usr)
 			else
@@ -1265,7 +1267,8 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 	return
 
 /atom/proc/AltClick()
-
+	var/turf/T = get_turf(src)
+	T.AltClick()
 	/* // NOT UNTIL I FIGURE OUT A GOOD WAY TO DO THIS SHIT
 	if((HULK in usr.mutations) || (SUPRSTR in usr.augmentations))
 		if(!istype(src, /obj/item) && !istype(src, /mob) && !istype(src, /turf))
@@ -1305,6 +1308,11 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 		blob.click_expand_blob(src)
 	return
 
+/atom/proc/OvermindAltClick(var/mob/camera/blob/blob)
+	if(istype(src, /obj/effect/blob/normal))
+		blob.click_create_shield(src)
+	return
+
 /atom/proc/RobotAltClick() // Opens and closes doors!
 	if(istype(src , /obj/machinery/door/airlock))
 		if(src:density)
@@ -1313,8 +1321,21 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 		else
 			var/nhref = "src=\ref[src];aiDisable=7"
 			src.Topic(nhref, params2list(nhref), src, 1)
+	else
+		var/turf/T = get_turf(src)
+		T.AltClick()
 
 	return
+
+/turf/AltClick()
+	if(!usr)
+		return
+	if(usr.listed_turf == src)
+		usr.listed_turf = null
+	else
+		usr.listed_turf = src
+		if(usr.client && !(get_dist(src,usr) > 1))
+			usr.client.statpanel = "[src.name]"
 
 /atom/proc/AIShiftClick() // Opens and closes doors!
 	if(istype(src , /obj/machinery/door/airlock))
