@@ -46,6 +46,9 @@ datum/controller/vote
 
 				voting.Cut()
 
+	proc/autotransfer()
+		initiate_vote("crew_transfer","the server")
+
 	proc/reset()
 		initiator = null
 		time_remaining = 0
@@ -202,10 +205,18 @@ datum/controller/vote
 						return 0
 					choices.Add(config.votable_modes)
 				if("crew_transfer")
-					if(ticker.current_state <= 2)
-						return 0
-					question = "End the shift?"
-					choices.Add("Initiate Crew Transfer", "Continue The Round")
+					if (check_rights(R_ADMIN) || check_rights(R_MOD))
+						if(ticker.current_state <= 2)
+							return 0
+						question = "End the shift?"
+						choices.Add("Initiate Crew Transfer", "Continue The Round")
+					else
+						if (get_security_level() == "red" || get_security_level() == "delta")
+							return 0
+						if(ticker.current_state <= 2)
+							return 0
+						question = "End the shift?"
+						choices.Add("Initiate Crew Transfer", "Continue The Round")
 				if("custom")
 					question = html_encode(input(usr,"What is the vote for?") as text|null)
 					if(!question)	return 0
@@ -278,9 +289,9 @@ datum/controller/vote
 				var/votes = choices[choices[i]]
 				if(!votes)	votes = 0
 				if(current_votes[C.ckey] == i)
-					. += "<li><b><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></b></li>"
+					. += "<li><b><a href='?src=\ref[src];vote=[i]'>[choices[i]] ([votes] votes)</a></b></li>"
 				else
-					. += "<li><a href='?src=\ref[src];vote=[i]'>[choices[i]]</a></li>"
+					. += "<li><a href='?src=\ref[src];vote=[i]'>[choices[i]] ([votes] votes)</a></li>"
 
 			. += "</ul><hr>"
 			if(admin)
