@@ -33,25 +33,29 @@
 			user << "<span class='notice'>[src] already have a cell.</span>"
 
 	else if(istype(W, /obj/item/weapon/wirecutters))
-		if("exclude" in species_restricted)
-			name = "mangled [name]"
-			species_restricted -= "Unathi"
-			species_restricted -= "Tajaran"
-			species_restricted += "stunglove"
 
-			wired = null
 
-			if(cell)
-				cell.updateicon()
-				cell.loc = get_turf(src.loc)
-				cell = null
+		wired = null
 
+		if(cell)
+			cell.updateicon()
+			cell.loc = get_turf(src.loc)
+			cell = null
+		if(clipped == 0)
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			user.visible_message("\red [user] snips the fingertips off [src].","\red You snip the fingertips off [src].")
-
+			clipped = 1
+			if("exclude" in species_restricted)
+				name = "mangled [name]"
+				desc = "[desc] They have had the fingertips cut off of them."
+				species_restricted -= "Unathi"
+				species_restricted -= "Tajaran"
+				species_restricted += "stunglove"
+		else if(clipped == 1)
+			user << "<span class='notice'>[src] have already been clipped!</span>"
 			update_icon()
 
-			return
+		return
 
 		if(cell)
 			cell.updateicon()

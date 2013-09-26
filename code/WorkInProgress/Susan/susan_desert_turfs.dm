@@ -250,7 +250,7 @@ Alien plants should do something if theres a lot of poison
 	name = "warden's jumpsuit"
 	icon_state = "wardendnavyclothes"
 	item_state = "wardendnavyclothes"
-	color = "wardendnavyclothes"
+	item_color = "wardendnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
 
@@ -259,7 +259,7 @@ Alien plants should do something if theres a lot of poison
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
 	icon_state = "officerdnavyclothes"
 	item_state = "officerdnavyclothes"
-	color = "officerdnavyclothes"
+	item_color = "officerdnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
 
@@ -268,7 +268,7 @@ Alien plants should do something if theres a lot of poison
 	name = "head of security's jumpsuit"
 	icon_state = "hosdnavyclothes"
 	item_state = "hosdnavyclothes"
-	color = "hosdnavyclothes"
+	item_color = "hosdnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
 
