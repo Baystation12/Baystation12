@@ -10,7 +10,7 @@ var/global/datum/controller/gameticker/ticker
 	var/const/restart_timeout = 600
 	var/current_state = GAME_STATE_PREGAME
 
-	var/hide_mode = 1
+	var/hide_mode = 0
 	var/datum/game_mode/mode = null
 	var/event_time = null
 	var/event = 0
