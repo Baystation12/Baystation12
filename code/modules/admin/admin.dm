@@ -579,7 +579,11 @@ var/global/floorIsLava = 0
 			<BR>
 			<A href='?src=\ref[src];secretsfun=gravity'>Toggle station artificial gravity</A><BR>
 			<A href='?src=\ref[src];secretsfun=wave'>Spawn a wave of meteors (aka lagocolyptic shower)</A><BR>
-			<A href='?src=\ref[src];secretsfun=gravanomalies'>Spawn a gravitational anomaly (aka lagitational anomolag)</A><BR>
+			<A href='?src=\ref[src];secretsfun=blackhole'>Spawn a vortex anomaly</A><BR>
+			<A href='?src=\ref[src];secretsfun=gravanomalies'>Spawn a gravitational anomaly</A><BR>
+			<A href='?src=\ref[src];secretsfun=pyroanomalies'>Spawn a pyroclastic anomaly</A><BR>
+			<A href='?src=\ref[src];secretsfun=energeticflux'>Spawn a flux wave anomaly</A><BR>
+			<A href='?src=\ref[src];secretsfun=bluespaceanomaly'>Spawn a bluespace anomaly</A><BR>
 			<A href='?src=\ref[src];secretsfun=timeanomalies'>Spawn wormholes</A><BR>
 			<A href='?src=\ref[src];secretsfun=goblob'>Spawn blob</A><BR>
 			<A href='?src=\ref[src];secretsfun=aliens'>Trigger an Alien infestation</A><BR>

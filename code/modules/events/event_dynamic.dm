@@ -21,7 +21,7 @@
 			*/
 
 var/list/event_last_fired = list()
-
+var/global/list/possibleEvents = list()
 //Always triggers an event when called, dynamically chooses events based on job population
 /proc/spawn_dynamic_event()
 	if(!config.allow_random_events)
@@ -39,7 +39,7 @@ var/list/event_last_fired = list()
 	// Maps event names to event chances
 	// For each chance, 100 represents "normal likelihood", anything below 100 is "reduced likelihood", anything above 100 is "increased likelihood"
 	// Events have to be manually added to this proc to happen
-	var/list/possibleEvents = list()
+//	var/list/possibleEvents = list()
 
 	//see:
 	// Code/WorkInProgress/Cael_Aislinn/Economy/Economy_Events.dm
@@ -48,12 +48,23 @@ var/list/event_last_fired = list()
 	possibleEvents[/datum/event/trivial_news] = 300
 	possibleEvents[/datum/event/mundane_news] = 200
 
+	possibleEvents[/datum/event/mass_hallucination] = 200
+	possibleEvents[/datum/event/falsealarm] = 300
+	possibleEvents[/datum/event/immovable_rod] = 200
+	possibleEvents[/datum/event/vent_clog] = 300
+	possibleEvents[/datum/event/anomaly/anomaly_bluespace] = 200
+	possibleEvents[/datum/event/anomaly/anomaly_flux] = 200
+	possibleEvents[/datum/event/anomaly/anomaly_grav] = 200
+	possibleEvents[/datum/event/anomaly/anomaly_pyro] = 200
+	possibleEvents[/datum/event/anomaly/anomaly_vortex] = 200
+
 	possibleEvents[/datum/event/pda_spam] = max(min(25, player_list.len) * 4, 200)
 	possibleEvents[/datum/event/money_lotto] = max(min(5, player_list.len), 50)
 	if(account_hack_attempted)
 		possibleEvents[/datum/event/money_hacker] = max(min(25, player_list.len) * 4, 200)
 
 	possibleEvents[/datum/event/carp_migration] = 50 + 50 * active_with_role["Engineer"]
+	possibleEvents[/datum/event/dust] = 50 + 50 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/brand_intelligence] = 50 + 25 * active_with_role["Janitor"]
 
 	possibleEvents[/datum/event/rogue_drone] = 25 + 25 * active_with_role["Engineer"] + 25 * active_with_role["Security"]

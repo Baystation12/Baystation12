@@ -1587,7 +1587,7 @@
 				if(!check_rights(R_FUN,0))
 					removed_paths += dirty_path
 					continue
-			else if(ispath(path, /obj/effect/bhole))
+			else if(ispath(path, /obj/effect/anomaly/bhole))
 				if(!check_rights(R_FUN,0))
 					removed_paths += dirty_path
 					continue
@@ -1762,6 +1762,32 @@
 				log_admin("[key_name(usr)] spawned a meteor wave", 1)
 				message_admins("\blue [key_name_admin(usr)] spawned a meteor wave.", 1)
 				new /datum/event/meteor_wave
+
+			if("gravanomalies")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","GA")
+				message_admins("[key_name_admin(usr)] has spawned a gravitational anomaly")
+				new /datum/event/anomaly/anomaly_grav()
+			if("pyroanomalies")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","PYRO")
+				message_admins("[key_name_admin(usr)] has spawned a pyroclastic anomaly")
+				new /datum/event/anomaly/anomaly_pyro()
+			if("blackhole")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","BH")
+				message_admins("[key_name_admin(usr)] has spawned a vortex anomaly")
+				new /datum/event/anomaly/anomaly_vortex()
+			if("bluespaceanomaly")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","BA")
+				message_admins("[key_name_admin(usr)] has triggered a bluespace anomaly", 1)
+				new /datum/event/anomaly/anomaly_bluespace()
+			if("energeticflux")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","FLUX")
+				message_admins("[key_name_admin(usr)] has triggered an energetic flux")
+				new /datum/event/anomaly/anomaly_flux()
 			if("power")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","P")
