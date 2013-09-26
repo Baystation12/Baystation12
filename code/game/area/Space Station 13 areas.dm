@@ -1778,6 +1778,23 @@ proc/process_ghost_teleport_locs()
 
 		spawn(60) .()
 
+////////////////////////CLOWN PLANET///////////////////////////////////
+
+
+/area/awaymission/clownplanet/miningtown
+	name = "\improper Clown Planet - Bananium-o-Rama"
+	icon_state = "away1"
+	luminosity = 1
+	requires_power = 0
+
+/area/awaymission/clownplanet/mine
+	name = "\improper Clown Planet - Bananium-o-Rama Mines"
+	icon_state = "away2"
+	luminosity = 1
+	requires_power = 0
+
+
+
 /////////////////////////////////////////////////////////////////////
 /*
  Lists of areas to be used with is_type_in_list.
