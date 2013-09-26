@@ -1,6 +1,32 @@
 /obj/item/clothing
 	name = "clothing"
+	var/list/species_restricted = null //Only these species can wear this kit.
 
+//BS12: Species-restricted clothing check.
+/obj/item/clothing/mob_can_equip(M as mob, slot)
+
+	if(species_restricted && istype(M,/mob/living/carbon/human))
+
+		var/wearable = null
+		var/exclusive = null
+		var/mob/living/carbon/human/H = M
+
+		if("exclude" in species_restricted)
+			exclusive = 1
+
+		if(H.species)
+			if(exclusive)
+				if(!(H.species.name in species_restricted))
+					wearable = 1
+			else
+				if(H.species.name in species_restricted)
+					wearable = 1
+
+			if(!wearable)
+				M << "\red Your species cannot wear [src]."
+				return 0
+
+	return ..()
 
 //Ears: currently only used for headsets and earmuffs
 /obj/item/clothing/ears
@@ -9,12 +35,60 @@
 	throwforce = 2
 	slot_flags = SLOT_EARS
 
+/obj/item/clothing/ears/attack_hand(mob/user as mob)
+	if (!user) return
+
+	if (src.loc != user || !istype(user,/mob/living/carbon/human))
+		..()
+		return
+
+	var/mob/living/carbon/human/H = user
+	if(H.l_ear != src && H.r_ear != src)
+		..()
+		return
+
+	if(!canremove)
+		return
+
+	var/obj/item/clothing/ears/O
+	if(slot_flags & SLOT_TWOEARS )
+		O = (H.l_ear == src ? H.r_ear : H.l_ear)
+		user.u_equip(O)
+		if(!istype(src,/obj/item/clothing/ears/offear))
+			del(O)
+			O = src
+	else
+		O = src
+
+	user.u_equip(src)
+
+	if (O)
+		user.put_in_hands(O)
+		O.add_fingerprint(user)
+
+	if(istype(src,/obj/item/clothing/ears/offear))
+		del(src)
+
+/obj/item/clothing/ears/offear
+	name = "Other ear"
+	w_class = 5.0
+	icon = 'icons/mob/screen1_Midnight.dmi'
+	icon_state = "block"
+	slot_flags = SLOT_EARS | SLOT_TWOEARS
+
+	New(var/obj/O)
+		name = O.name
+		desc = O.desc
+		icon = O.icon
+		icon_state = O.icon_state
+		dir = O.dir
+
 /obj/item/clothing/ears/earmuffs
 	name = "earmuffs"
 	desc = "Protects your hearing from loud noises, and quiet ones as well."
 	icon_state = "earmuffs"
 	item_state = "earmuffs"
-
+	slot_flags = SLOT_EARS | SLOT_TWOEARS
 
 //Glasses
 /obj/item/clothing/glasses
@@ -50,6 +124,7 @@ BLIND     // can't see anything
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
+	species_restricted = list("exclude","Unathi","Tajaran")
 
 /obj/item/clothing/gloves/examine()
 	set src in usr
@@ -94,6 +169,7 @@ BLIND     // can't see anything
 
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
+	species_restricted = list("exclude","Unathi","Tajaran")
 
 //Suit
 /obj/item/clothing/suit
@@ -122,6 +198,7 @@ BLIND     // can't see anything
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECITON_TEMPERATURE
 	siemens_coefficient = 0.9
+	species_restricted = list("exclude","Diona","Vox")
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
@@ -140,7 +217,7 @@ BLIND     // can't see anything
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE
 	siemens_coefficient = 0.9
-
+	species_restricted = list("exclude","Diona","Vox")
 
 //Under clothing
 /obj/item/clothing/under

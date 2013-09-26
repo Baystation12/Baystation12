@@ -10,7 +10,7 @@ var/global/datum/controller/gameticker/ticker
 	var/const/restart_timeout = 600
 	var/current_state = GAME_STATE_PREGAME
 
-	var/hide_mode = 0
+	var/hide_mode = 1
 	var/datum/game_mode/mode = null
 	var/event_time = null
 	var/event = 0
@@ -105,13 +105,6 @@ var/global/datum/controller/gameticker/ticker
 		world << "<B>Possibilities:</B> [english_list(modes)]"
 	else
 		src.mode.announce()
-
-	//setup the money accounts
-	if(!centcomm_account_db)
-		for(var/obj/machinery/account_database/check_db in machines)
-			if(check_db.z == 2)
-				centcomm_account_db = check_db
-				break
 
 	create_characters() //Create player characters and transfer them
 	collect_minds()

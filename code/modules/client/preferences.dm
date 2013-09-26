@@ -764,13 +764,13 @@ datum/preferences
 						g_hair = rand(0,255)
 						b_hair = rand(0,255)
 					if("h_style")
-						h_style = random_hair_style(gender)
+						h_style = random_hair_style(gender, species)
 					if("facial")
 						r_facial = rand(0,255)
 						g_facial = rand(0,255)
 						b_facial = rand(0,255)
 					if("f_style")
-						f_style = random_facial_hair_style(gender)
+						f_style = random_facial_hair_style(gender, species)
 					if("underwear")
 						underwear = rand(1,underwear_m.len)
 						ShowChoices(user)
@@ -879,7 +879,7 @@ datum/preferences
 							for(var/L in all_languages)
 								var/datum/language/lang = all_languages[L]
 								if(!(lang.flags & RESTRICTED))
-									new_languages += lang
+									new_languages += lang.name
 
 						language = input("Please select a secondary language", "Character Generation", null) in new_languages
 

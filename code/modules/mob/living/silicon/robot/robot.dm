@@ -9,7 +9,6 @@
 
 	var/sight_mode = 0
 	var/custom_name = ""
-	var/base_icon
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
 
@@ -60,6 +59,8 @@
 	var/weapon_lock = 0
 	var/weaponlock_time = 120
 	var/lawupdate = 1 //Cyborgs will sync their laws with their AI by default
+	var/lawcheck[1] //For stating laws.
+	var/ioncheck[1] //Ditto.
 	var/lockcharge //Used when locking down a borg to preserve cell charge
 	var/speed = 0 //Cause sec borgs gotta go fast //No they dont!
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
@@ -132,7 +133,7 @@
 /mob/living/silicon/robot/proc/setup_PDA()
 	if (!rbPDA)
 		rbPDA = new/obj/item/device/pda/ai(src)
-	rbPDA.set_name_and_job(custom_name,braintype)
+	rbPDA.set_name_and_job(custom_name,"[modtype] [braintype]")
 
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
 //Improved /N
@@ -204,6 +205,8 @@
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
 			channels = list("Engineering" = 1)
+			if(camera && "Robots" in camera.network)
+				camera.network.Add("Engineering")
 			module_sprites["Basic"] = "Engineering"
 			module_sprites["Antique"] = "engineerrobot"
 			module_sprites["Landmate"] = "landmate"
@@ -232,7 +235,6 @@
 
 	choose_icon(6,module_sprites)
 	radio.config(channels)
-	base_icon = icon_state
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 	if(prefix)
@@ -697,6 +699,8 @@
 		if(!opened)//Cover is closed
 			if(locked)
 				if(prob(90))
+					var/obj/item/weapon/card/emag/emag = W
+					emag.uses--
 					user << "You emag the cover lock."
 					locked = 0
 				else
@@ -773,7 +777,8 @@
 
 
 	else
-		spark_system.start()
+		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/healthanalyzer)) )
+			spark_system.start()
 		return ..()
 
 /mob/living/silicon/robot/attack_alien(mob/living/carbon/alien/humanoid/M as mob)
@@ -1007,9 +1012,11 @@
 	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
 		overlays += "[icon_state]-shield"
 
-	if(base_icon)
+	if(modtype == "Combat")
+		var/base_icon = ""
+		base_icon = icon_state
 		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-			icon_state = "[base_icon]-roll"
+			icon_state = "[icon_state]-roll"
 		else
 			icon_state = base_icon
 		return
@@ -1125,6 +1132,25 @@
 		else
 			src << "Module isn't activated"
 		installed_modules()
+
+	if (href_list["lawc"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
+		var/L = text2num(href_list["lawc"])
+		switch(lawcheck[L+1])
+			if ("Yes") lawcheck[L+1] = "No"
+			if ("No") lawcheck[L+1] = "Yes"
+//		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
+		checklaws()
+
+	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
+		var/L = text2num(href_list["lawi"])
+		switch(ioncheck[L])
+			if ("Yes") ioncheck[L] = "No"
+			if ("No") ioncheck[L] = "Yes"
+//		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
+		checklaws()
+
+	if (href_list["laws"]) // With how my law selection code works, I changed statelaws from a verb to a proc, and call it through my law selection panel. --NeoFite
+		statelaws()
 	return
 
 /mob/living/silicon/robot/proc/radio_menu()
@@ -1229,8 +1255,8 @@
 
 	var/icontype
 
-	if (src.name == "Lucy" && src.ckey == "rowtree")
-		icontype = "Lucy"
+	if (custom_sprite == 1)
+		icontype = "Custom"
 		triesleft = 0
 	else
 		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chances." : "This is your last try."]", "Robot", null, null) in module_sprites
@@ -1240,11 +1266,9 @@
 	else
 		src << "Something is badly wrong with the sprite selection. Harass a coder."
 		icon_state = module_sprites[1]
-		base_icon = icon_state
 		return
 
 	overlays -= "eyes"
-	base_icon = icon_state
 	updateicon()
 
 	if (triesleft >= 1)

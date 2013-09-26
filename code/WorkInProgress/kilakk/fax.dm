@@ -1,7 +1,7 @@
 /obj/machinery/faxmachine
 	name = "fax machine"
 	icon = 'icons/obj/library.dmi'
-	icon_state = "bigscanner"
+	icon_state = "fax"
 	req_access = list(access_lawyer)
 	anchored = 1
 	density = 1
@@ -14,133 +14,135 @@
 	var/obj/item/weapon/paper/tofax = null // what we're sending to central
 	var/sendcooldown = 0 // to avoid spamming fax messages
 
-	attack_ai(mob/user as mob)
-		return attack_hand(user)
+/obj/machinery/faxmachine/process()
+	return 0
 
-	attack_paw(mob/user as mob)
-		return attack_hand(user)
+/obj/machinery/faxmachine/attack_ai(mob/user as mob)
+	return attack_hand(user)
 
-	attack_hand(mob/user as mob)
-		user.set_machine(src)
+/obj/machinery/faxmachine/attack_paw(mob/user as mob)
+	return attack_hand(user)
 
-		var/dat = "Central Command Fax Machine<BR>"
+/obj/machinery/faxmachine/attack_hand(mob/user as mob)
+	user.set_machine(src)
 
-		var/scan_name
-		if(scan)
-			scan_name = scan.name
-		else
-			scan_name = "--------"
+	var/dat = "Central Command Fax Machine<BR>"
 
-		dat += "Confirm Identity: <a href='byond://?src=\ref[src];scan=1'>[scan_name]</a><br>"
+	var/scan_name
+	if(scan)
+		scan_name = scan.name
+	else
+		scan_name = "--------"
 
-		if(authenticated)
-			dat += "<a href='byond://?src=\ref[src];logout=1'>{Log Out}</a>"
-		else
-			dat += "<a href='byond://?src=\ref[src];auth=1'>{Log In}</a>"
+	dat += "Confirm Identity: <a href='byond://?src=\ref[src];scan=1'>[scan_name]</a><br>"
 
-		dat += "<hr>"
+	if(authenticated)
+		dat += "<a href='byond://?src=\ref[src];logout=1'>{Log Out}</a>"
+	else
+		dat += "<a href='byond://?src=\ref[src];auth=1'>{Log In}</a>"
 
-		if(authenticated)
-			dat += "<b>Logged in to:</b> Central Command Quantum Entanglement Network<br><br>"
+	dat += "<hr>"
 
-			if(tofax)
-				dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Paper</a><br><br>"
+	if(authenticated)
+		dat += "<b>Logged in to:</b> Central Command Quantum Entanglement Network<br><br>"
 
-				if(sendcooldown)
-					dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
+		if(tofax)
+			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Paper</a><br><br>"
 
-				else
-					dat += "<a href='byond://?src=\ref[src];send=1'>Send</a><br>"
-					dat += "<b>Currently sending:</b> [tofax.name]"
+			if(sendcooldown)
+				dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
 
 			else
-				if(sendcooldown)
-					dat += "Please insert paper to send to Central Command via secure connection.<br><br>"
-					dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
-				else
-					dat += "Please insert paper to send to Central Command via secure connection.<br><br>"
+				dat += "<a href='byond://?src=\ref[src];send=1'>Send</a><br>"
+				dat += "<b>Currently sending:</b> [tofax.name]"
 
 		else
-			dat += "Proper authentication is required to use this device.<br><br>"
-
-			if(tofax)
-				dat += "<a href ='byond://?src=\ref[src];remove=1'>Remove Paper</a><br>"
-
-		user << browse(dat, "window=copier")
-		onclose(user, "copier")
-		return
-
-	Topic(href, href_list)
-
-		if(href_list["send"])
-			if(tofax)
-				Centcomm_fax(tofax.info, tofax.name, usr)
-				usr << "Message transmitted."
-				sendcooldown = 1
-				spawn(3000) // three minute cooldown. might mess with this number a bit as time goes on
-					sendcooldown = 0
-
-		if(href_list["remove"])
-			if(tofax)
-				tofax.loc = usr.loc
-				usr.put_in_hands(tofax)
-				usr << "<span class='notice'>You take the paper out of \the [src].</span>"
-				tofax = null
-
-		if(href_list["scan"])
-			if (scan)
-				if(ishuman(usr))
-					scan.loc = usr.loc
-					if(!usr.get_active_hand())
-						usr.put_in_hands(scan)
-					scan = null
-				else
-					scan.loc = src.loc
-					scan = null
+			if(sendcooldown)
+				dat += "Please insert paper to send to Central Command via secure connection.<br><br>"
+				dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
 			else
-				var/obj/item/I = usr.get_active_hand()
-				if (istype(I, /obj/item/weapon/card/id))
-					usr.drop_item()
-					I.loc = src
-					scan = I
-			authenticated = 0
+				dat += "Please insert paper to send to Central Command via secure connection.<br><br>"
 
-		if(href_list["auth"])
-			if ( (!( authenticated ) && (scan)) )
-				if (check_access(scan))
-					authenticated = 1
+	else
+		dat += "Proper authentication is required to use this device.<br><br>"
 
-		if(href_list["logout"])
-			authenticated = 0
+		if(tofax)
+			dat += "<a href ='byond://?src=\ref[src];remove=1'>Remove Paper</a><br>"
 
-		updateUsrDialog()
+	user << browse(dat, "window=copier")
+	onclose(user, "copier")
+	return
 
-	attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/faxmachine/Topic(href, href_list)
+	if(href_list["send"])
+		if(tofax)
+			Centcomm_fax(tofax.info, tofax.name, usr)
+			usr << "Message transmitted."
+			sendcooldown = 1
+			spawn(3000) // three minute cooldown. might mess with this number a bit as time goes on
+				sendcooldown = 0
 
-		if(istype(O, /obj/item/weapon/paper))
-			if(!tofax)
-				user.drop_item()
-				tofax = O
-				O.loc = src
-				user << "<span class='notice'>You insert the paper into \the [src].</span>"
-				flick("bigscanner1", src)
-				updateUsrDialog()
+	if(href_list["remove"])
+		if(tofax)
+			tofax.loc = usr.loc
+			usr.put_in_hands(tofax)
+			usr << "<span class='notice'>You take the paper out of \the [src].</span>"
+			tofax = null
+
+	if(href_list["scan"])
+		if (scan)
+			if(ishuman(usr))
+				scan.loc = usr.loc
+				if(!usr.get_active_hand())
+					usr.put_in_hands(scan)
+				scan = null
 			else
-				user << "<span class='notice'>There is already something in \the [src].</span>"
-
-		else if(istype(O, /obj/item/weapon/card/id))
-			var/obj/item/weapon/card/id/idcard = O
-
-			if(!scan)
+				scan.loc = src.loc
+				scan = null
+		else
+			var/obj/item/I = usr.get_active_hand()
+			if (istype(I, /obj/item/weapon/card/id))
 				usr.drop_item()
-				idcard.loc = src
-				scan = idcard
+				I.loc = src
+				scan = I
+		authenticated = 0
 
-		else if(istype(O, /obj/item/weapon/wrench))
-			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
-			anchored = !anchored
-			user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
-		return
+	if(href_list["auth"])
+		if ( (!( authenticated ) && (scan)) )
+			if (check_access(scan))
+				authenticated = 1
+
+	if(href_list["logout"])
+		authenticated = 0
+
+	updateUsrDialog()
+
+/obj/machinery/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
+
+	if(istype(O, /obj/item/weapon/paper))
+		if(!tofax)
+			user.drop_item()
+			tofax = O
+			O.loc = src
+			user << "<span class='notice'>You insert the paper into \the [src].</span>"
+			flick("faxsend", src)
+			updateUsrDialog()
+		else
+			user << "<span class='notice'>There is already something in \the [src].</span>"
+
+	else if(istype(O, /obj/item/weapon/card/id))
+
+		var/obj/item/weapon/card/id/idcard = O
+		if(!scan)
+			usr.drop_item()
+			idcard.loc = src
+			scan = idcard
+
+	else if(istype(O, /obj/item/weapon/wrench))
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		anchored = !anchored
+		user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
+	return
 
 /proc/Centcomm_fax(var/sent, var/sentname, var/mob/Sender)
 

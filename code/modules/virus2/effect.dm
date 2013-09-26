@@ -48,6 +48,22 @@
 	proc/deactivate(var/mob/living/carbon/mob)
 
 ////////////////////////SPECIAL/////////////////////////////////
+/*/datum/disease2/effect/alien
+	name = "Unidentified Foreign Body"
+	stage = 4
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		mob << "\red You feel something tearing its way out of your stomach..."
+		mob.adjustToxLoss(10)
+		mob.updatehealth()
+		if(prob(40))
+			if(mob.client)
+				mob.client.mob = new/mob/living/carbon/alien/larva(mob.loc)
+			else
+				new/mob/living/carbon/alien/larva(mob.loc)
+			var/datum/disease2/disease/D = mob:virus2
+			mob:gib()
+			del D*/
+
 /datum/disease2/effect/invisible
 	name = "Waiting Syndrome"
 	stage = 1
@@ -293,7 +309,7 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			if(!(H.h_style == "Bald") && !(H.h_style == "Balding Hair"))
+			if(H.species.name == "Human" && !(H.h_style == "Bald") && !(H.h_style == "Balding Hair"))
 				H << "<span class='danger'>Your hair starts to fall out in clumps...</span>"
 				spawn(50)
 					H.h_style = "Balding Hair"

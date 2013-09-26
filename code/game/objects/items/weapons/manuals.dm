@@ -12,7 +12,8 @@
 	icon_state ="bookEngineering"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Station Repairs and Construction"
-	/*dat = {"
+
+	dat = {"
 
 		<html><head>
 		</head>
@@ -23,16 +24,16 @@
 
 		</html>
 
-		"}*/
+		"}
+
 
 /obj/item/weapon/book/manual/engineering_particle_accelerator
 	name = "Particle Accelerator User's Guide"
 	icon_state ="bookParticleAccelerator"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Particle Accelerator User's Guide"
-//big pile of shit below.
 
-	/*dat = {"<html>
+	dat = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -65,7 +66,7 @@
 				</ol>
 
 				</body>
-				</html>"}*/
+				</html>"}
 
 
 /obj/item/weapon/book/manual/engineering_hacking
@@ -73,29 +74,28 @@
 	icon_state ="bookHacking"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Hacking"
-//big pile of shit below.
 
-	/*dat = {"
+	dat = {"
 
 		<html><head>
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://wiki.nanotrasen.com/index.php?title=Hacking&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
+		<iframe width='100%' height='97%' src="http://baystation12.net/wiki/index.php?title=Hacking&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
 		</body>
 
 		</html>
 
-		"}*/
+		"}
+
 
 /obj/item/weapon/book/manual/engineering_singularity_safety
 	name = "Singularity Safety in Special Circumstances"
 	icon_state ="bookEngineeringSingularitySafety"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Singularity Safety in Special Circumstances"
-//big pile of shit below.
 
-	/*dat = {"<html>
+	dat = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -134,14 +134,16 @@
 				Step one: <b>GET THE FUCK OUT OF THERE!!! FORGET THE WOMEN AND CHILDREN, SAVE YOURSELF!!!</b><br>
 				</body>
 				</html>
-				"}*/
+				"}
+
 
 /obj/item/weapon/book/manual/hydroponics_pod_people
-	name = "The Human Harvest - From seed to market"
+	name = "The Diona Harvest - From seed to market"
 	icon_state ="bookHydroponicsPodPeople"
 	author = "Farmer John"
-	title = "The Human Harvest - From seed to market"
-	/*dat = {"<html>
+	title = "The Diona Harvest - From seed to market"
+
+	dat = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -152,33 +154,29 @@
 				</style>
 				</head>
 				<body>
-				<h3>Growing Humans</h3>
+				<h3>Growing Diona</h3>
 
-				Why would you want to grow humans? Well I'm expecting most readers to be in the slave trade, but a few might actually
-				want to revive fallen comrades. Growing pod people is easy, but prone to disaster.
+				Growing Diona is easy!
 				<p>
 				<ol>
-				<li>Find a dead person who is in need of cloning. </li>
-				<li>Take a blood sample with a syringe. </li>
-				<li>Inject a seed pack with the blood sample. </li>
 				<li>Plant the seeds. </li>
-				<li>Tend to the plants water and nutrition levels until it is time to harvest the cloned human.</li>
+				<li>Tend to the plants water and nutrition levels until it is time to harvest the Diona.</li>
 				</ol>
 				<p>
 				It really is that easy! Good luck!
 
 				</body>
 				</html>
-				"}*/
+				"}
+
 
 /obj/item/weapon/book/manual/medical_cloning
 	name = "Cloning techniques of the 26th century"
 	icon_state ="bookCloning"
 	author = "Medical Journal, volume 3"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Cloning techniques of the 26th century"
-//big pile of shit below.
 
-	/*dat = {"<html>
+	dat = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -202,7 +200,7 @@
 					<li><a href='#6'>Get clean Structurel Enzymes for the body</a></li>
 					<li><a href='#7'>Put body in morgue</a></li>
 					<li><a href='#8'>Await cloned body</a></li>
-					<li><a href='#9'>Use the clean SW injector</a></li>
+					<li><a href='#9'>Cryo and use the clean SE injector</a></li>
 					<li><a href='#10'>Give person clothes back</a></li>
 					<li><a href='#11'>Send person on their way</a></li>
 				</ol>
@@ -231,8 +229,8 @@
 				<a name='8'><H4>Step 8: Await cloned body</H4>
 				Now go back to the lab and wait for your patient to be cloned. It won’t be long now, I promise.
 
-				<a name='9'><H4>Step 9: Use the clean SE injector on person</H4>
-				Has your body been cloned yet? Great! As soon as the guy pops out, grab your injector and jab it in them. Once you’ve injected them, they now have clean Structural Enzymes and their defects, if any, will disappear in a short while.
+				<a name='9'><H4>Step 9: Cyo and clean clean SE injector on person</H4>
+				Has your body been cloned yet? Great! As soon as the guy pops out, grab them and stick them in cryo. Clonexadone and Cryoxadone help rebuild their genetic material. Then grab your cleanr SE injector and jab it in them. Once you’ve injected them, they now have clean Structural Enzymes and their defects, if any, will disappear in a short while.
 
 				<a name='10'><H4>Step 10: Give person clothes back</H4>
 				Obviously the person will be naked after they have been cloned. Provided you weren’t an irresponsible little shit, you should have protected their possessions from thieves and should be able to give them back to the patient. No matter how cruel you are, it’s simply against protocol to force your patients to walk outside naked.
@@ -242,11 +240,9 @@
 
 				<p>If you’ve gotten this far, congratulations! You have mastered the art of cloning. Now, the real problem is how to resurrect yourself after that traitor had his way with you for cloning his target.
 
-
-
 				</body>
 				</html>
-				"}*/
+				"}
 
 
 /obj/item/weapon/book/manual/ripley_build_and_repair
@@ -254,9 +250,8 @@
 	icon_state ="book"
 	author = "Weyland-Yutani Corp"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "APLU \"Ripley\" Construction and Operation Manual"
-//big pile of shit below.
 
-	/*dat = {"<html>
+	dat = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -320,9 +315,7 @@
 				</body>
 				</html>
 
-				<h2>Operation</h2>
-				Coming soon...
-			"}*/
+			"}
 
 
 /obj/item/weapon/book/manual/research_and_development
@@ -330,8 +323,8 @@
 	icon_state = "rdbook"
 	author = "Dr. L. Ight"
 	title = "Research and Development 101"
-	/*dat = {"
-	<html>
+
+	dat = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -373,7 +366,7 @@
 				Many machines produces from circuit boards and inserted into a machine frame require a variety of parts to construct. These are parts like capacitors, batteries, matter bins, and so forth. As your knowledge of science improves, more advanced versions are unlocked. If you use these parts when constructing something, its attributes may be improved. For example, if you use an advanced matter bin when constructing an autolathe (rather then a regular one), it'll hold more materials. Experiment around with stock parts of various qualities to see how they affect the end results! Be warned, however: Tier 3 and higher stock parts don't have 100% reliability and their low reliability may affect the reliability of the end machine.
 				</body>
 				</html>
-			"}*/
+			"}
 
 
 /obj/item/weapon/book/manual/robotics_cyborgs
@@ -381,7 +374,8 @@
 	icon_state = "borgbook"
 	author = "XISC"
 	title = "Cyborgs for Dummies"
-	/*dat = {"<html>
+
+	dat = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 21px; margin: 15px 0px 5px;}
@@ -576,7 +570,8 @@
 
         </body>
 		</html>
-		"}*/
+		"}
+
 
 /obj/item/weapon/book/manual/security_space_law
 	name = "Space Law"
@@ -584,7 +579,8 @@
 	icon_state = "bookSpaceLaw"
 	author = "Nanotrasen"
 	title = "Space Law"
-	/*dat = {"
+
+	dat = {"
 
 		<html><head>
 		</head>
@@ -594,24 +590,26 @@
 
 		</html>
 
-		"}*/
+		"}
+
 
 /obj/item/weapon/book/manual/engineering_guide
 	name = "Engineering Textbook"
 	icon_state ="bookEngineering2"
 	author = "Engineering Encyclopedia"
 	title = "Engineering Textbook"
-	/*dat = {"
+
+	dat = {"
 
 		<html><head>
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://wiki.nanotrasen.com/index.php?title=Guide_to_engineering&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
+		<iframe width='100%' height='97%' src="http://baystation12.net/wiki/index.php?title=Guide_to_Engineering&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
 
 		</html>
 
-		"}*/
+		"}
 
 
 /obj/item/weapon/book/manual/chef_recipes
@@ -619,7 +617,8 @@
 	icon_state = "cooked_book"
 	author = "Lord Frenrir Cageth"
 	title = "Chef Recipes"
-	/*dat = {"<html>
+
+	dat = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -664,14 +663,16 @@
 
 				</body>
 				</html>
-			"}*/
+			"}
+
 
 /obj/item/weapon/book/manual/barman_recipes
 	name = "Barman Recipes"
 	icon_state = "barbook"
 	author = "Sir John Rose"
 	title = "Barman Recipes"
-	/*dat = {"<html>
+
+	dat = {"<html>
 				<head>
 				<style>
 				h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -716,7 +717,7 @@
 
 				</body>
 				</html>
-			"}*/
+			"}
 
 
 /obj/item/weapon/book/manual/detective
@@ -724,7 +725,8 @@
 	icon_state ="bookDetective"
 	author = "Nanotrasen"
 	title = "The Film Noir: Proper Procedures for Investigations"
-	/*dat = {"<html>
+
+	dat = {"<html>
 			<head>
 			<style>
 			h1 {font-size: 18px; margin: 15px 0px 5px;}
@@ -758,14 +760,15 @@
 			It really is that easy! Good luck!
 
 			</body>
-			</html>"}*/
+			</html>"}
 
 /obj/item/weapon/book/manual/nuclear
 	name = "Fission Mailed: Nuclear Sabotage 101"
 	icon_state ="bookNuclear"
 	author = "Syndicate"
 	title = "Fission Mailed: Nuclear Sabotage 101"
-	/*dat = {"<html>
+
+	dat = {"<html>
 			Nuclear Explosives 101:<br>
 			Hello and thank you for choosing the Syndicate for your nuclear information needs.<br>
 			Today's crash course will deal with the operation of a Fusion Class Nanotrasen made Nuclear Device.<br>
@@ -793,4 +796,4 @@
 			<b>Disk, Code, Safety, Timer, Disk, RUN!</b><br>
 			Intelligence Analysts believe that normal Nanotrasen procedure is for the Captain to secure the nuclear authorisation disk.<br>
 			Good luck!
-			</html>"}*/
+			</html>"}

@@ -2,7 +2,7 @@
 
 /obj/machinery/floodlight
 	name = "Emergency Floodlight"
-	icon = 'floodlight.dmi'
+	icon = 'icons/obj/machines/floodlight.dmi'
 	icon_state = "flood00"
 	density = 1
 	var/on = 0
@@ -21,8 +21,9 @@
 
 /obj/machinery/floodlight/process()
 	if(on)
-		cell.charge -= use
-		if(cell.charge <= 0)
+		if(cell.charge >= use)
+			cell.use(use)
+		else
 			on = 0
 			updateicon()
 			SetLuminosity(0)

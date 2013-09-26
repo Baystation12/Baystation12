@@ -133,7 +133,7 @@
 	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
 	var/mob/living/occupant = null
 	var/available_chemicals = list("inaprovaline" = "Inaprovaline", "stoxin" = "Soporific", "dermaline" = "Dermaline", "bicaridine" = "Bicaridine", "dexalin" = "Dexalin")
-	var/amounts = list(10, 20)
+	var/amounts = list(5, 10)
 
 
 	New()
@@ -269,11 +269,11 @@
 
 	proc/inject_chemical(mob/living/user as mob, chemical, amount)
 		if(src.occupant && src.occupant.reagents)
-			if(src.occupant.reagents.get_reagent_amount(chemical) + amount <= 40)
+			if(src.occupant.reagents.get_reagent_amount(chemical) + amount <= 20)
 				src.occupant.reagents.add_reagent(chemical, amount)
 				user << "Occupant now has [src.occupant.reagents.get_reagent_amount(chemical)] units of [available_chemicals[chemical]] in his/her bloodstream."
 				return
-		user << "There's no occupant in the sleeper or the subject rejects the chemicals!"
+		user << "There's no occupant in the sleeper or the subject has too many chemicals!"
 		return
 
 

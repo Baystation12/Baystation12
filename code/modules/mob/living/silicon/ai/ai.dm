@@ -50,6 +50,7 @@ var/list/ai_list = list()
 
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
+	var/last_announcement = ""
 
 /mob/living/silicon/ai/New(loc, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
 	var/list/possibleNames = ai_names
@@ -338,7 +339,7 @@ var/list/ai_list = list()
 		checklaws()
 
 	if(href_list["say_word"])
-		src.announcement(href_list["say_word"])
+		play_vox_word(href_list["say_word"], null, src)
 		return
 
 	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
@@ -652,7 +653,7 @@ var/list/ai_list = list()
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo2"))
 	return
 
-/mob/living/silicon/ai/proc/corereturn()
+/*/mob/living/silicon/ai/proc/corereturn()
 	set category = "Malfunction"
 	set name = "Return to Main Core"
 
@@ -660,7 +661,7 @@ var/list/ai_list = list()
 	if(!istype(apc))
 		src << "\blue You are already in your Main Core."
 		return
-	apc.malfvacate()
+	apc.malfvacate()*/
 
 //Toggles the luminosity and applies it by re-entereing the camera.
 /mob/living/silicon/ai/proc/toggle_camera_light()
