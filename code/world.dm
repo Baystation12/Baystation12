@@ -234,8 +234,6 @@
 	config.loadsql("config/dbconfig.txt")
 	config.loadforumsql("config/forumdbconfig.txt")
 	// apply some settings from config..
-	abandon_allowed = config.respawn
-
 /world/proc/load_mods()
 	if(config.admin_legacy_system)
 		var/text = file2text("config/moderators.txt")
