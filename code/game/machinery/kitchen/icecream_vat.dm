@@ -54,12 +54,12 @@ var/list/ingredients_source = list(
 	density = 1
 	anchored = 0
 	var/list/ingredients = list()
-	var/dispense_flavour = ICECREAM_VANILLA
+	var/dispense_flavour = 1
 	var/obj/item/weapon/reagent_containers/glass/held_container
 
 /obj/machinery/icecream_vat/New()
 	..()
-
+	create_reagents(50)
 	while(ingredients.len < 11)
 		ingredients.Add(5)
 
@@ -96,7 +96,7 @@ var/list/ingredients_source = list(
 			if(!I.ice_creamed)
 				if(ingredients[ICECREAM_VANILLA] > 0)
 					var/flavour_name = get_icecream_flavour_string(dispense_flavour)
-					if(ingredients[dispense_flavour] > 0)
+					if(dispense_flavour < 11 && ingredients[dispense_flavour] > 0)
 						src.visible_message("\icon[src] <span class='info'>[user] scoops delicious [flavour_name] flavoured icecream into [I].</span>")
 						ingredients[dispense_flavour] -= 1
 						ingredients[ICECREAM_VANILLA] -= 1
