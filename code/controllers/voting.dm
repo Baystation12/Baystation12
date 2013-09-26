@@ -47,7 +47,7 @@ datum/controller/vote
 				voting.Cut()
 
 	proc/autotransfer()
-		initiate_vote("crew_transfer","the server")
+		initiate_vote("crew_transfer","the Server")
 
 
 	proc/reset()
@@ -206,12 +206,18 @@ datum/controller/vote
 						return 0
 					choices.Add(config.votable_modes)
 				if("crew_transfer")
-					if (get_security_level() == "red" || get_security_level() == "delta")
-						return 0
-					if(ticker.current_state <= 2)
-						return 0
-					question = "End the shift?"
-					choices.Add("Initiate Crew Transfer", "Continue The Round")
+					if (check_rights(R_ADMIN) || check_rights(R_MOD))
+						if(ticker.current_state <= 2)
+							return 0
+						question = "End the shift?"
+						choices.Add("Initiate Crew Transfer", "Continue The Round")
+					else
+						if (get_security_level() == "red" || get_security_level() == "delta")
+							return 0
+						if(ticker.current_state <= 2)
+							return 0
+						question = "End the shift?"
+						choices.Add("Initiate Crew Transfer", "Continue The Round")
 				if("custom")
 					question = html_encode(input(usr,"What is the vote for?") as text|null)
 					if(!question)	return 0
