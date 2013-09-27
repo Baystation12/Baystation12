@@ -178,7 +178,7 @@
 		while(1)
 			sleep(INACTIVITY_KICK)
 			for(var/client/C in clients)
-				if(R_ADMIN & C.holder.rights || !(R_MOD & C.holder.rights)) return
+				if(C.holder) return
 				if(C.is_afk(INACTIVITY_KICK))
 					if(!istype(C.mob, /mob/dead))
 						log_access("AFK: [key_name(C)]")

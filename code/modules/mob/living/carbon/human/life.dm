@@ -1380,6 +1380,11 @@
 				for (var/ID in M.virus2)
 					var/datum/disease2/disease/V = virus2[ID]
 					infect_virus2(src,V)
+		for(var/obj/effect/decal/cleanable/poop/P in view(1,src))
+			if(P.virus2.len && get_infection_chance(src))
+				for (var/ID in P.virus2)
+					var/datum/disease2/disease/V = virus2[ID]
+					infect_virus2(src,V)
 
 		for (var/ID in virus2)
 			var/datum/disease2/disease/V = virus2[ID]

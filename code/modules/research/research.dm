@@ -183,7 +183,7 @@ datum/tech/materials
 	name = "Materials Research"
 	desc = "Development of new and improved materials."
 	id = "materials"
-	max_level=6
+	max_level=7
 
 datum/tech/engineering
 	name = "Engineering Research"
@@ -195,7 +195,7 @@ datum/tech/plasmatech
 	name = "Plasma Research"
 	desc = "Research into the mysterious substance colloqually known as 'plasma'."
 	id = "plasmatech"
-	max_level=3
+	max_level=4
 
 datum/tech/powerstorage
 	name = "Power Manipulation Technology"
@@ -207,13 +207,13 @@ datum/tech/bluespace
 	name = "'Blue-space' Research"
 	desc = "Research into the sub-reality known as 'blue-space'"
 	id = "bluespace"
-	max_level=10
+	max_level=4
 
 datum/tech/biotech
 	name = "Biological Technology"
 	desc = "Research into the deeper mysteries of life and organic substances."
 	id = "biotech"
-	max_level=7
+	max_level=5
 
 datum/tech/combat
 	name = "Combat Systems Research"
@@ -231,7 +231,7 @@ datum/tech/programming
 	name = "Data Theory Research"
 	desc = "The development of new computer and artificial intelligence and data storage systems."
 	id = "programming"
-	max_level=4
+	max_level=5
 
 datum/tech/syndicate
 	name = "Illegal Technologies Research"

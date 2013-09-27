@@ -122,3 +122,13 @@
 	heat_level_3 = 4000
 
 	flags = WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
+
+
+/datum/species/skellington // /vg/
+	name = "Skellington"
+	icobase = 'icons/mob/human_races/r_skeleton.dmi'
+	deform = 'icons/mob/human_races/r_skeleton.dmi'  // TODO: Need deform.
+	language = "Clatter"
+	attack_verb = "punch"
+
+	flags = WHITELISTED | HAS_LIPS | HAS_TAIL | NO_EAT | NO_BREATHE | NON_GENDERED

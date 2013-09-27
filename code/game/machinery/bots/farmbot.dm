@@ -350,8 +350,9 @@
 		mode = 0
 		frustration = 0
 		src.path = new()
-	if(src.target && (src.path.len) && (get_dist(src.target,src.path[src.path.len]) > 2))
-		src.path = new()
+	if(src.path)
+		if(src.target && (src.path.len) && (get_dist(src.target,src.path[src.path.len]) > 2))
+			src.path = new()
 	if(src.target && src.path.len == 0 && (get_dist(src,src.target) > 1))
 		spawn(0)
 			var/turf/dest = get_step_towards(target,src)  //Can't pathfind to a tray, as it is dense, so pathfind to the spot next to the tray

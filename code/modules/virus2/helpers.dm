@@ -63,6 +63,8 @@ proc/airborne_can_reach(turf/source, turf/target)
 		var/datum/disease2/disease/D = disease.getcopy()
 		D.minormutate()
 		M.virus2["[D.uniqueID]"] = D
+	else
+		message_admins("Virus2 [disease.uniqueID] could not transmit")
 
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)

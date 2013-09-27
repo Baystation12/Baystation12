@@ -391,9 +391,10 @@
 /mob/living/carbon/human/show_inv(mob/user as mob)
 	var/obj/item/clothing/gloves/G
 	var/pickpocket = 0
-	if(user:gloves)
-		G = user:gloves
-		pickpocket = G.pickpocket
+	if(ishuman(user))
+		if(user:gloves)
+			G = user:gloves
+			pickpocket = G.pickpocket
 	user.set_machine(src)
 	var/dat = {"
 	<B><HR><FONT size=3>[name]</FONT></B>

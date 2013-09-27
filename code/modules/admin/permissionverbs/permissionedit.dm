@@ -12,8 +12,8 @@
 <html>
 <head>
 <title>Permissions Panel</title>
-<script type='text/javascript' src='html/search.js'></script>
-<link rel='stylesheet' type='text/css' href='html/panels.css'>
+<script type='text/javascript' src='search.js'></script>
+<link rel='stylesheet' type='text/css' href='panels.css'>
 </head>
 <body onload='selectTextField();updateSearch();'>
 <div id='main'><table id='searchable' cellspacing='0'>
@@ -29,12 +29,17 @@
 		var/rank = D.rank ? D.rank : "*none*"
 		var/rights = rights2text(D.rights," ")
 		if(!rights)	rights = "*none*"
+		output += {"<tr>
+<td style='text-align:right;'>[adm_ckey] <a class='small' href='?src=\ref[src];editrights=remove;ckey=[adm_ckey]'>\[-\]</a></td>
+<td><a href='?src=\ref[src];editrights=rank;ckey=[adm_ckey]'>[rank]</a></td>
+<td><a class='small' href='?src=\ref[src];editrights=permissions;ckey=[adm_ckey]'>[rights]</a></font></td>
+</tr>"}
 
-		output += "<tr>"
+		/*output += "<tr>"
 		output += "<td style='text-align:right;'>[adm_ckey] <a class='small' href='?src=\ref[src];editrights=remove;ckey=[adm_ckey]'>\[-\]</a></td>"
 		output += "<td><a href='?src=\ref[src];editrights=rank;ckey=[adm_ckey]'>[rank]</a></td>"
 		output += "<td><a class='small' href='?src=\ref[src];editrights=permissions;ckey=[adm_ckey]'>[rights]</a></font></td>"
-		output += "</tr>"
+		output += "</tr>"*/
 
 	output += {"
 </table></div>
