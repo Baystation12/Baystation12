@@ -113,7 +113,7 @@
 	name = "\improper S'rendarr's Hand leaf"
 	singular_name = "S'rendarr's Hand leaf"
 	desc = "A soft leaf that is rubbed on bruises."
-	icon = 'harvest.dmi'
+	icon = 'icons/obj/harvest.dmi'
 	icon_state = "cabbage"
 	heal_brute = 7
 
@@ -121,7 +121,7 @@
 	name = "\improper Messa's Tear leaf"
 	singular_name = "Messa's Tear leaf"
 	desc = "A cold leaf that is rubbed on burns."
-	icon = 'harvest.dmi'
+	icon = 'icons/obj/harvest.dmi'
 	icon_state = "ambrosiavulgaris"
 	heal_burn = 7
 
@@ -193,10 +193,6 @@
 	icon_state = "splint"
 	amount = 5
 	max_amount = 5
-
-/obj/item/stack/medical/splint/single
-	amount = 1
-
 
 /obj/item/stack/medical/splint/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(..())

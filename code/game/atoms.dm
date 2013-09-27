@@ -26,8 +26,6 @@
 		var/mob/living/M = hit_atom
 		M.hitby(src,speed)
 
-		log_attack("<font color='red'>[hit_atom] ([M.ckey]) was hit by [src] thrown by ([src.fingerprintslast])</font>")
-
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
 		if(!O.anchored)
@@ -490,7 +488,7 @@ its easier to just keep the beam vertical.
 
 var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblClickNew() proc is being tested)
 
-/*/atom/proc/DblClickNew()
+/atom/proc/DblClickNew()
 	if(!usr)	return
 // TODO DOOHL: Intergrate params to new proc. Saved for another time because var/valid_place is a fucking brainfuck
 
@@ -792,7 +790,7 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 
 		if (in_range)
 			if ( !animal.restrained() )
-				attack_animal(animal)*/
+				attack_animal(animal)
 
 /atom/DblClick(location, control, params) //TODO: DEFERRED: REWRITE
 	if(!usr)	return
@@ -943,9 +941,9 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 
 		// ------- ( CAN USE ITEM OR HAS 1 SECOND USE DELAY ) AND NOT CLICKING ON SCREEN -------
 
-		if (usr.last_click + usr.click_delay < world.time)
-			usr.last_click = world.time
-			usr.click_delay = 0
+		if (usr.next_move < world.time)
+			usr.prev_move = usr.next_move
+			usr.next_move = world.time + 10
 		else
 			// ------- ALREADY USED ONE ITEM WITH USE DELAY IN THE PREVIOUS SECOND -------
 			return
@@ -1109,9 +1107,10 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 		// ------- ITEM INACESSIBLE OR CLICKING ON SCREEN -------
 		if (istype(src, /obj/screen))
 			// ------- IT'S THE HUD YOU'RE CLICKING ON -------
-			usr.delay_click(2)
-			if (usr.last_click + usr.click_delay < world.time)
-				usr.last_click = world.time
+			usr.prev_move = usr.next_move
+			usr:lastDblClick = world.time + 2
+			if (usr.next_move < world.time)
+				usr.next_move = world.time + 2
 			else
 				return
 
@@ -1143,7 +1142,7 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 					src.hand_al(usr, usr.hand)
 		else
 			// ------- YOU ARE CLICKING ON AN OBJECT THAT'S INACCESSIBLE TO YOU AND IS NOT YOUR HUD -------
-			if((LASER in usr:mutations) && usr:a_intent == "hurt" && usr.last_click + usr.click_delay < world.time)
+			if((LASER in usr:mutations) && usr:a_intent == "hurt" && world.time >= usr.next_move)
 				// ------- YOU HAVE THE LASER MUTATION, YOUR INTENT SET TO HURT AND IT'S BEEN MORE THAN A DECISECOND SINCE YOU LAS TATTACKED -------
 
 				var/turf/T = get_turf(usr)
@@ -1168,7 +1167,7 @@ var/using_new_click_proc = 0 //TODO ERRORAGE (This is temporary, while the DblCl
 				spawn( 1 )
 					A.process()
 
-				usr.delay_click(6)
+				usr.next_move = world.time + 6
 	return
 
 /atom/proc/ShiftClick(var/mob/M as mob)

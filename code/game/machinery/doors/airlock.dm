@@ -365,7 +365,7 @@ About the new airlock wires panel:
 		if(AIRLOCK_WIRE_IDSCAN)
 			//Sending a pulse through this flashes the red light on the door (if the door has power).
 			if((src.arePowerSystemsOn()) && (!(stat & NOPOWER)))
-				animate("deny")
+				do_animate("deny")
 		if(AIRLOCK_WIRE_MAIN_POWER1 || AIRLOCK_WIRE_MAIN_POWER2)
 			//Sending a pulse through either one causes a breaker to trip, disabling the door for 10 seconds if backup power is connected, or 1 minute if not (or until backup power comes back on, whichever is shorter).
 			src.loseMainPower()
@@ -634,7 +634,7 @@ About the new airlock wires panel:
 
 	return
 
-/obj/machinery/door/airlock/animate(animation)
+/obj/machinery/door/airlock/do_animate(animation)
 	switch(animation)
 		if("opening")
 			if(overlays) overlays.Cut()
@@ -1150,7 +1150,7 @@ About the new airlock wires panel:
 		if(src.isElectrified())
 			if(src.shock(user, 75))
 				return
-	if(istype(C, /obj/item/device/detective_scanner))
+	if(istype(C, /obj/item/device/detective_scanner) || istype(C, /obj/item/taperoll))
 		return
 
 	src.add_fingerprint(user)

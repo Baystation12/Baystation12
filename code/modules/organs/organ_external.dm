@@ -81,10 +81,11 @@
 		burn *= 0.66 //~2/3 damage for ROBOLIMBS
 
 	//If limb took enough damage, try to cut or tear it off
-	if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
-		if( (sharp && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
-			droplimb(1)
-			return
+	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
+		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
+			if( (sharp && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
+				droplimb(1)
+				return
 
 	// High brute damage or sharp objects may damage internal organs
 	if(internal_organs != null) if( (sharp && brute >= 5) || brute >= 10) if(prob(5))
@@ -467,25 +468,29 @@
 					organ= new /obj/item/weapon/organ/l_arm(owner.loc, owner)
 			if(LEG_RIGHT)
 				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/l_leg(owner.loc)
+					organ = new /obj/item/robot_parts/r_leg(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/r_leg(owner.loc, owner)
 			if(LEG_LEFT)
 				if(status & ORGAN_ROBOT)
-					organ = new /obj/item/robot_parts/r_leg(owner.loc)
+					organ = new /obj/item/robot_parts/l_leg(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/l_leg(owner.loc, owner)
 			if(HAND_RIGHT)
-				organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
+				if(!(status & ORGAN_ROBOT))
+					organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(HAND_LEFT)
-				organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
+				if(!(status & ORGAN_ROBOT))
+					organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(FOOT_RIGHT)
-				organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
+				if(!(status & ORGAN_ROBOT))
+					organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 			if(FOOT_LEFT)
-				organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
+				if(!(status & ORGAN_ROBOT))
+					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 		if(organ)
 			destspawn = 1
@@ -738,21 +743,44 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 	//Forming icon for the limb
 
 	//Setting base icon for this mob's race
-	if(ishuman(H) && H.dna)
-		var/icon/base = new H.species.icobase
-		if(base)
-			icon = base.MakeLying()
+	var/icon/base
+	if(H.species && H.species.icobase)
+		base = icon(H.species.icobase)
 	else
-		icon_state = initial(icon_state)+"_l"
+		base = icon('icons/mob/human_races/r_human.dmi')
 
-	var/icon/I = new /icon(icon, icon_state)
+	if(base)
+		base = base.MakeLying()
 
-	//Changing limb's skin tone to match owner
-	if (H.s_tone >= 0)
-		I.Blend(rgb(H.s_tone, H.s_tone, H.s_tone), ICON_ADD)
-	else
-		I.Blend(rgb(-H.s_tone,  -H.s_tone,  -H.s_tone), ICON_SUBTRACT)
-	icon = I
+		//Changing limb's skin tone to match owner
+		if(!H.species || H.species.flags & HAS_SKIN_TONE)
+			if (H.s_tone >= 0)
+				base.Blend(rgb(H.s_tone, H.s_tone, H.s_tone), ICON_ADD)
+			else
+				base.Blend(rgb(-H.s_tone,  -H.s_tone,  -H.s_tone), ICON_SUBTRACT)
+
+		//this is put here since I can't easially edit the same icon from head's constructor
+		if(istype(src, /obj/item/weapon/organ/head))
+			//Add (facial) hair.
+			if(H.f_style)
+				var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[H.f_style]
+				if(facial_hair_style)
+					var/icon/facial = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_l")
+					if(facial_hair_style.do_colouration)
+						facial.Blend(rgb(H.r_facial, H.g_facial, H.b_facial), ICON_ADD)
+
+					base.Blend(facial, ICON_OVERLAY)
+
+			if(H.h_style && !(H.head && (H.head.flags & BLOCKHEADHAIR)))
+				var/datum/sprite_accessory/hair_style = hair_styles_list[H.h_style]
+				if(hair_style)
+					var/icon/hair = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_l")
+					if(hair_style.do_colouration)
+						hair.Blend(rgb(H.r_hair, H.g_hair, H.b_hair), ICON_ADD)
+
+					base.Blend(hair, ICON_OVERLAY)
+
+	icon = base
 
 
 /****************************************************
@@ -790,21 +818,24 @@ obj/item/weapon/organ/head
 	var/brain_op_stage = 0
 
 obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
+	if(istype(H))
+		src.icon_state = H.gender == MALE? "head_m" : "head_f"
 	..()
 	spawn(5)
 	if(brainmob && brainmob.client)
 		brainmob.client.screen.len = null //clear the hud
-	if(ishuman(H))
-		if(H.gender == FEMALE)
-			H.icon_state = "head_f"
-		H.overlays += H.generate_head_icon()
+
+	//if(ishuman(H))
+	//	if(H.gender == FEMALE)
+	//		H.icon_state = "head_f"
+	//	H.overlays += H.generate_head_icon()
 	transfer_identity(H)
-	pixel_x = -10
-	pixel_y = 6
+
 	name = "[H.real_name]'s head"
 
 	H.regenerate_icons()
 
+	H.stat = 2
 	H.death()
 
 obj/item/weapon/organ/head/proc/transfer_identity(var/mob/living/carbon/human/H)//Same deal as the regular brain proc. Used for human-->head
@@ -853,8 +884,7 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 				user.attack_log += "\[[time_stamp()]\]<font color='red'> Debrained [brainmob.name] ([brainmob.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 				brainmob.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-				log_admin("ATTACK: [brainmob] ([brainmob.ckey]) debrained [user] ([user.ckey]).")
-				message_admins("ATTACK: [brainmob] ([brainmob.ckey]) debrained [user] ([user.ckey]).")
+				msg_admin_attack("[brainmob] ([brainmob.ckey]) debrained [user] ([user.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 				var/obj/item/brain/B = new(loc)
 				B.transfer_identity(brainmob)

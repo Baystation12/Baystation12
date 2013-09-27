@@ -35,7 +35,6 @@
 	user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
 						 "<span class='warning'>You kick [src].</span>", \
 						 "You hear twisting metal.")
-	user.delay_click(10)
 
 	if(shock(user, 70))
 		return
@@ -52,7 +51,6 @@
 	user.visible_message("<span class='warning'>[user] mangles [src].</span>", \
 						 "<span class='warning'>You mangle [src].</span>", \
 						 "You hear twisting metal.")
-	user.delay_click(10)
 
 	if(!shock(user, 70))
 		health -= 5
@@ -66,7 +64,6 @@
 	user.visible_message("<span class='warning'>[user] smashes against [src].</span>", \
 						 "<span class='warning'>You smash against [src].</span>", \
 						 "You hear twisting metal.")
-	user.delay_click(10)
 
 	health -= rand(2,3)
 	healthcheck()
@@ -79,7 +76,6 @@
 	M.visible_message("<span class='warning'>[M] smashes against [src].</span>", \
 					  "<span class='warning'>You smash against [src].</span>", \
 					  "You hear twisting metal.")
-	M.delay_click(10)
 
 	health -= M.melee_damage_upper
 	healthcheck()
@@ -106,7 +102,7 @@
 	if(iswirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			new /obj/item/stack/rods(loc)
+			new /obj/item/stack/rods(loc, 2)
 			del(src)
 	else if((isscrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
@@ -164,10 +160,8 @@
 
 	else if(istype(W, /obj/item/weapon/shard))
 		health -= W.force * 0.1
-		user.delay_click(10)
 	else if(!shock(user, 70))
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-		user.delay_click(10)
 		switch(W.damtype)
 			if("fire")
 				health -= W.force

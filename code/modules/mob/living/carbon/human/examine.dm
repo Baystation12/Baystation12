@@ -194,7 +194,7 @@
 	for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
 		var/datum/organ/external/o = get_organ(organ)
 		if(o && o.status & ORGAN_SPLINTED)
-			msg += "<span class='warning'>[t_He] [t_has] a splint on his [o.display_name]!</span>\n"
+			msg += "<span class='warning'>[t_He] [t_has] a splint on [t_his] [o.display_name]!</span>\n"
 
 	if(suiciding)
 		msg += "<span class='warning'>[t_He] appears to have commited suicide... there is no hope of recovery.</span>\n"
@@ -282,40 +282,43 @@
 						wound_descriptors[this_wound_desc] += W.amount
 						continue
 					wound_descriptors[this_wound_desc] = W.amount
-				var/list/flavor_text = list()
-				var/list/no_exclude = list("gaping wound", "big gaping wound", "massive wound", "large bruise",\
-				"huge bruise", "massive bruise", "severe burn", "large burn", "deep burn", "carbonised area")
-				for(var/wound in wound_descriptors)
-					switch(wound_descriptors[wound])
-						if(1)
-							if(!flavor_text.len)
-								flavor_text += "<span class='warning'>[t_He] has[prob(10) && !(wound in no_exclude)  ? " what might be" : ""] a [wound]"
-							else
-								flavor_text += "[prob(10) && !(wound in no_exclude) ? " what might be" : ""] a [wound]"
-						if(2)
-							if(!flavor_text.len)
-								flavor_text += "<span class='warning'>[t_He] has[prob(10) && !(wound in no_exclude) ? " what might be" : ""] a pair of [wound]s"
-							else
-								flavor_text += "[prob(10) && !(wound in no_exclude) ? " what might be" : ""] a pair of [wound]s"
-						if(3 to 5)
-							if(!flavor_text.len)
-								flavor_text += "<span class='warning'>[t_He] has several [wound]s"
-							else
-								flavor_text += " several [wound]s"
-						if(6 to INFINITY)
-							if(!flavor_text.len)
-								flavor_text += "<span class='warning'>[t_He] has a bunch of [wound]s"
-							else
-								flavor_text += " a ton of [wound]\s"
-				var/flavor_text_string = ""
-				for(var/text = 1, text <= flavor_text.len, text++)
-					if(text == flavor_text.len && flavor_text.len > 1)
-						flavor_text_string += ", and"
-					else if(flavor_text.len > 1 && text > 1)
-						flavor_text_string += ","
-					flavor_text_string += flavor_text[text]
-				flavor_text_string += " on [t_his] [temp.display_name].</span><br>"
-				wound_flavor_text["[temp.display_name]"] = flavor_text_string
+				if(wound_descriptors.len)
+					var/list/flavor_text = list()
+					var/list/no_exclude = list("gaping wound", "big gaping wound", "massive wound", "large bruise",\
+					"huge bruise", "massive bruise", "severe burn", "large burn", "deep burn", "carbonised area")
+					for(var/wound in wound_descriptors)
+						switch(wound_descriptors[wound])
+							if(1)
+								if(!flavor_text.len)
+									flavor_text += "<span class='warning'>[t_He] has[prob(10) && !(wound in no_exclude)  ? " what might be" : ""] a [wound]"
+								else
+									flavor_text += "[prob(10) && !(wound in no_exclude) ? " what might be" : ""] a [wound]"
+							if(2)
+								if(!flavor_text.len)
+									flavor_text += "<span class='warning'>[t_He] has[prob(10) && !(wound in no_exclude) ? " what might be" : ""] a pair of [wound]s"
+								else
+									flavor_text += "[prob(10) && !(wound in no_exclude) ? " what might be" : ""] a pair of [wound]s"
+							if(3 to 5)
+								if(!flavor_text.len)
+									flavor_text += "<span class='warning'>[t_He] has several [wound]s"
+								else
+									flavor_text += " several [wound]s"
+							if(6 to INFINITY)
+								if(!flavor_text.len)
+									flavor_text += "<span class='warning'>[t_He] has a bunch of [wound]s"
+								else
+									flavor_text += " a ton of [wound]\s"
+					var/flavor_text_string = ""
+					for(var/text = 1, text <= flavor_text.len, text++)
+						if(text == flavor_text.len && flavor_text.len > 1)
+							flavor_text_string += ", and"
+						else if(flavor_text.len > 1 && text > 1)
+							flavor_text_string += ","
+						flavor_text_string += flavor_text[text]
+					flavor_text_string += " on [t_his] [temp.display_name].</span><br>"
+					wound_flavor_text["[temp.display_name]"] = flavor_text_string
+				else
+					wound_flavor_text["[temp.display_name]"] = ""
 				if(temp.status & ORGAN_BLEEDING)
 					is_bleeding["[temp.display_name]"] = 1
 			else

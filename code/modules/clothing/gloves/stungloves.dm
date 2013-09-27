@@ -4,18 +4,21 @@
 		..()
 		return
 	if(istype(W, /obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/C = W
-		if(!wired)
-			if(C.amount >= 2)
-				C.use(2)
-				wired = 1
-				siemens_coefficient = 3.0
-				user << "<span class='notice'>You wrap some wires around [src].</span>"
-				update_icon()
+		if(!("stunglove" in species_restricted))
+			var/obj/item/weapon/cable_coil/C = W
+			if(!wired)
+				if(C.amount >= 2)
+					C.use(2)
+					wired = 1
+					siemens_coefficient = 3.0
+					user << "<span class='notice'>You wrap some wires around [src].</span>"
+					update_icon()
+				else
+					user << "<span class='notice'>There is not enough wire to cover [src].</span>"
 			else
-				user << "<span class='notice'>There is not enough wire to cover [src].</span>"
+				user << "<span class='notice'>[src] are already wired.</span>"
 		else
-			user << "<span class='notice'>[src] are already wired.</span>"
+			user << "<span class='notice'[src] is not suitable for wiring.</span>"
 
 	else if(istype(W, /obj/item/weapon/cell))
 		if(!wired)
@@ -30,6 +33,30 @@
 			user << "<span class='notice'>[src] already have a cell.</span>"
 
 	else if(istype(W, /obj/item/weapon/wirecutters))
+
+
+		wired = null
+
+		if(cell)
+			cell.updateicon()
+			cell.loc = get_turf(src.loc)
+			cell = null
+		if(clipped == 0)
+			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+			user.visible_message("\red [user] snips the fingertips off [src].","\red You snip the fingertips off [src].")
+			clipped = 1
+			if("exclude" in species_restricted)
+				name = "mangled [name]"
+				desc = "[desc] They have had the fingertips cut off of them."
+				species_restricted -= "Unathi"
+				species_restricted -= "Tajaran"
+				species_restricted += "stunglove"
+		else if(clipped == 1)
+			user << "<span class='notice'>[src] have already been clipped!</span>"
+			update_icon()
+
+		return
+
 		if(cell)
 			cell.updateicon()
 			cell.loc = get_turf(src.loc)

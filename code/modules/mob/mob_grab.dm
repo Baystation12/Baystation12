@@ -128,7 +128,7 @@
 		return
 	if(killing)
 		return
-	if (assailant.last_click + assailant.click_delay > world.time)
+	if (assailant.next_move > world.time)
 		return
 	if ((!( assailant.canmove ) || assailant.lying))
 		//SN src = null
@@ -140,7 +140,7 @@
 				if (!( killing ))
 					assailant.visible_message("\red [assailant] has temporarily tightened \his grip on [affecting]!")
 						//Foreach goto(97)
-					assailant.delay_click(10)
+					assailant.next_move = world.time + 10
 					//affecting.stunned = max(2, affecting.stunned)
 					//affecting.paralysis = max(1, affecting.paralysis)
 					affecting.losebreath = min(affecting.losebreath + 1, 3)
@@ -161,8 +161,6 @@
 		return
 	if(killing)
 		return
-
-	assailant.delay_click(10)
 
 	switch(S.id)
 		if(1.0)
@@ -213,7 +211,7 @@
 						affecting.loc = assailant.loc
 					affecting.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their neck grabbed by [assailant.name] ([assailant.ckey])</font>")
 					assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Grabbed the neck of [affecting.name] ([affecting.ckey])</font>")
-					log_attack("<font color='red'>[assailant.name] ([assailant.ckey]) grabbed the neck of [affecting.name] ([affecting.ckey])</font>")
+					msg_admin_attack("[assailant.name] ([assailant.ckey]) grabbed the neck of [affecting.name] ([affecting.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[assailant.x];Y=[assailant.y];Z=[assailant.z]'>JMP</a>)")
 					hud1.icon_state = "disarm/kill"
 					hud1.name = "disarm/kill"
 				else
@@ -235,9 +233,9 @@
 							assailant.visible_message("\red [assailant] has tightened \his grip on [affecting]'s neck!")
 							affecting.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been strangled (kill intent) by [assailant.name] ([assailant.ckey])</font>")
 							assailant.attack_log += text("\[[time_stamp()]\] <font color='red'>Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>")
-							log_attack("<font color='red'>[assailant.name] ([assailant.ckey]) Strangled (kill intent) [affecting.name] ([affecting.ckey])</font>")
+							msg_admin_attack("[assailant.name] ([assailant.ckey]) Strangled (kill intent) [affecting.name] ([affecting.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[assailant.x];Y=[assailant.y];Z=[assailant.z]'>JMP</a>)")
 
-							assailant.delay_click(10)
+							assailant.next_move = world.time + 10
 							affecting.losebreath += 1
 						else
 							assailant.visible_message("\red [assailant] was unable to tighten \his grip on [affecting]'s neck!")

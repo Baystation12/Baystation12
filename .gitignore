@@ -1,7 +1,10 @@
+#ignore misc BYOND files
 *.log
 *.int
 *.rsc
 *.dmb
 *.lk
-info.json
-/config/admins.txt
+
+#ignore any files in config/, except those in subdirectories.
+/config/*
+!/config/*/*

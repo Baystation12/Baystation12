@@ -67,13 +67,7 @@
 	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
 	host_brain = new/mob/living/captive_brain(src)
 
-	for(var/mob/M in player_list)
-		if(istype(M,/mob/dead/observer))
-			var/mob/dead/observer/O = M
-			if(O.client)
-				if(O.client.prefs.be_special & BE_ALIEN)
-					src.ckey = O.ckey
-					break
+	request_player()
 
 
 /mob/living/simple_animal/borer/say(var/message)
@@ -160,9 +154,9 @@
 			host.ckey = src.ckey
 			controlling = 1
 
-			host.verbs += /mob/living/carbon/human/proc/release_control
-			host.verbs += /mob/living/carbon/human/proc/punish_host
-			host.verbs += /mob/living/carbon/human/proc/spawn_larvae
+			host.verbs += /mob/living/carbon/proc/release_control
+			host.verbs += /mob/living/carbon/proc/punish_host
+			host.verbs += /mob/living/carbon/proc/spawn_larvae
 
 /mob/living/simple_animal/borer/verb/secrete_chemicals()
 	set category = "Alien"
@@ -226,8 +220,11 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	if(!host) return
 
-	var/datum/organ/external/head = host.get_organ("head")
-	head.implants -= src
+	if(istype(host,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = host
+		var/datum/organ/external/head = H.get_organ("head")
+		head.implants -= src
+
 	src.loc = get_turf(host)
 	controlling = 0
 
@@ -237,9 +234,9 @@ mob/living/simple_animal/borer/proc/detatch()
 	host.reset_view(null)
 	host.machine = null
 
-	host.verbs -= /mob/living/carbon/human/proc/release_control
-	host.verbs -= /mob/living/carbon/human/proc/punish_host
-	host.verbs -= /mob/living/carbon/human/proc/spawn_larvae
+	host.verbs -= /mob/living/carbon/proc/release_control
+	host.verbs -= /mob/living/carbon/proc/punish_host
+	host.verbs -= /mob/living/carbon/proc/spawn_larvae
 
 	if(host_brain.ckey)
 		src.ckey = host.ckey
@@ -250,7 +247,7 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	host = null
 
-/mob/living/simple_animal/borer/verb/infest(var/mob/living/carbon/human/H)
+/mob/living/simple_animal/borer/verb/infest()
 	set category = "Alien"
 	set name = "Infest"
 	set desc = "Infest a suitable humanoid host."
@@ -264,11 +261,11 @@ mob/living/simple_animal/borer/proc/detatch()
 		return
 
 	var/list/choices = list()
-	for(var/mob/living/carbon/human/C in view(1,src))
-		if(istype(C,/mob/living/carbon/human) && C.stat != 2)
+	for(var/mob/living/carbon/C in view(1,src))
+		if(C.stat != 2)
 			choices += C
 
-	var/mob/living/carbon/human/M = input(src,"Who do you wish to infest?") in null|choices
+	var/mob/living/carbon/M = input(src,"Who do you wish to infest?") in null|choices
 
 	if(!M || !src) return
 
@@ -299,9 +296,12 @@ mob/living/simple_animal/borer/proc/detatch()
 			M << "Something disgusting and slimy wiggles into your ear!"
 
 		src.host = M
-		var/datum/organ/external/head = M.get_organ("head")
-		head.implants += src
 		src.loc = M
+
+		if(istype(M,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			var/datum/organ/external/head = H.get_organ("head")
+			head.implants += src
 
 		host_brain.name = M.name
 		host_brain.real_name = M.real_name
@@ -368,3 +368,33 @@ mob/living/simple_animal/borer/proc/detatch()
 	else
 		layer = MOB_LAYER
 		src << text("\blue You have stopped hiding.")
+
+//Procs for grabbing players.
+mob/living/simple_animal/borer/proc/request_player()
+	for(var/mob/dead/observer/O in player_list)
+		if(jobban_isbanned(O, "Syndicate"))
+			continue
+		if(O.client)
+			if(O.client.prefs.be_special & BE_ALIEN)
+				question(O.client)
+
+mob/living/simple_animal/borer/proc/question(var/client/C)
+	spawn(0)
+		if(!C)	return
+		var/response = alert(C, "A cortical borer needs a player. Are you interested?", "Cortical borer request", "Yes", "No", "Never for this round")
+		if(!C || ckey)
+			return
+		if(response == "Yes")
+			transfer_personality(C)
+		else if (response == "Never for this round")
+			C.prefs.be_special ^= BE_ALIEN
+
+mob/living/simple_animal/borer/proc/transfer_personality(var/client/candidate)
+
+	if(!candidate)
+		return
+
+	src.mind = candidate.mob.mind
+	src.ckey = candidate.ckey
+	if(src.mind)
+		src.mind.assigned_role = "Cortical Borer"

@@ -15,10 +15,6 @@ var/list/department_radio_keys = list(
 	  ":t" = "Syndicate",	"#t" = "Syndicate",		".t" = "Syndicate",
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
 	  ":g" = "changeling",	"#g" = "changeling",	".g" = "changeling",
-	  ":k" = "skrell",		"#k" = "skrell",		".k" = "skrell",
-	  ":j" = "tajaran",		"#j" = "tajaran",		".j" = "tajaran",
-	  ":o" = "soghun",		"#o" = "soghun",		".o" = "soghun",
-	  ":v" = "vox",			"#v" = "vox",			".v" = "vox",
 
 	  ":R" = "right hand",	"#R" = "right hand",	".R" = "right hand",
 	  ":L" = "left hand",	"#L" = "left hand",		".L" = "left hand",
@@ -35,10 +31,6 @@ var/list/department_radio_keys = list(
 	  ":T" = "Syndicate",	"#T" = "Syndicate",		".T" = "Syndicate",
 	  ":U" = "Supply",		"#U" = "Supply",		".U" = "Supply",
 	  ":G" = "changeling",	"#G" = "changeling",	".G" = "changeling",
-	  ":K" = "skrell",		"#K" = "skrell",		".K" = "skrell",
-	  ":J" = "tajaran",		"#J" = "tajaran",		".J" = "tajaran",
-	  ":O" = "soghun",		"#O" = "soghun",		".O" = "soghun",
-	  ":V" = "vox",			"#V" = "vox",			".V" = "vox",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -56,10 +48,7 @@ var/list/department_radio_keys = list(
 	  ":ô" = "alientalk",	"#ô" = "alientalk",		".ô" = "alientalk",
 	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
 	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
-	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling",
-	  ":ë" = "skrell",		"#ë" = "skrell",		".ë" = "skrell",
-	  ":î" = "tajaran",		"#î" = "tajaran",		".î" = "tajaran",
-	  ":ù" = "soghun",		"#ù" = "soghun",		".ù" = "soghun"
+	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling"
 )
 
 /mob/living/proc/binarycheck()
@@ -86,15 +75,27 @@ var/list/department_radio_keys = list(
 
 /mob/living/say(var/message)
 
-	//world << "[src] speaks! [message]"
+	/*
+		Formatting and sanitizing.
+	*/
+
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 	message = capitalize(message)
+
+	/*
+		Sanity checking and speech failure.
+	*/
 
 	if (!message)
 		return
 
-	if (stat == 2)
+	if(silent)
+		return
+
+	if (stat == 2) // Dead.
 		return say_dead(message)
+	else if (stat) // Unconcious.
+		return
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)
@@ -103,96 +104,74 @@ var/list/department_radio_keys = list(
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return
 
-	// stat == 2 is handled above, so this stops transmission of uncontious messages
-	if (stat)
-		return
-
 	// Mute disability
 	if (sdisabilities & MUTE)
 		return
 
+	// Muzzled.
 	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))
 		return
 
-	// emotes
+	// Emotes.
 	if (copytext(message, 1, 2) == "*" && !stat)
 		return emote(copytext(message, 2))
 
+	/*
+		Identity hiding.
+	*/
 	var/alt_name = ""
 	if (istype(src, /mob/living/carbon/human) && name != GetVoice())
 		var/mob/living/carbon/human/H = src
 		alt_name = " (as [H.get_id_name("Unknown")])"
+
+	/*
+		Now we get into the real meat of the say processing. Determining the message mode.
+	*/
+
 	var/italics = 0
 	var/message_range = null
 	var/message_mode = null
-	var/datum/language/speaking //For use if a specific language is being spoken.
+	var/datum/language/speaking = null //For use if a specific language is being spoken.
 
-	// If brain damaged, talk on headset at random.
-	if (getBrainLoss() >= 60 && prob(50))
-		if (ishuman(src))
-			message_mode = "headset"
+	var/braindam = getBrainLoss()
+	if (braindam >= 60)
+		if(prob(braindam/4))
+			message = stutter(message)
+		if(prob(braindam))
+			message = uppertext(message)
 
 	// General public key. Special message handling
-	else if (copytext(message, 1, 2) == ";")
+	else if (copytext(message, 1, 2) == ";" || prob(braindam/2))
 		if (ishuman(src))
 			message_mode = "headset"
 		else if(ispAI(src) || isrobot(src))
 			message_mode = "pAI"
 		message = copytext(message, 2)
-
+	// Begin checking for either a message mode or a language to speak.
 	else if (length(message) >= 2)
 		var/channel_prefix = copytext(message, 1, 3)
 
 		//Check if the person is speaking a language that they know.
-		for(var/datum/language/L in languages)
-			if(lowertext(channel_prefix) == ":[L.key]")
-				//world << "Key [L.key] matches [lowertext(channel_prefix)] for [src]."
-				speaking = L
-				break
+		if(languages.len)
+			for(var/datum/language/L in languages)
+				if(lowertext(channel_prefix) == ":[L.key]")
+					speaking = L
+					break
 		message_mode = department_radio_keys[channel_prefix]
-		//world << "channel_prefix=[channel_prefix]; message_mode=[message_mode]"
-		if (message_mode)
+		if (message_mode || speaking || copytext(message,1,2) == ":")
 			message = trim(copytext(message, 3))
-			if (!(ishuman(src) || istype(src, /mob/living/simple_animal/parrot) || isrobot(src) && (message_mode=="department" || (message_mode in radiochannels))))
+			if (!(istype(src,/mob/living/carbon/human) || istype(src,/mob/living/carbon/monkey) || istype(src, /mob/living/simple_animal/parrot) || isrobot(src) && (message_mode=="department" || (message_mode in radiochannels))))
 				message_mode = null //only humans can use headsets
-			// Check changed so that parrots can use headsets. Other simple animals do not have ears and will cause runtimes.
-			// And borgs -Sieve
 
 	if(src.stunned > 2 || (traumatic_shock > 61 && prob(50)))
-		message_mode = "" //Stunned people shouldn't be able to physically turn on their radio/hold down the button to speak into it
+		message_mode = null //Stunned people shouldn't be able to physically turn on their radio/hold down the button to speak into it
 
 	if (!message)
 		return
 
-	// :downs:
-	if (getBrainLoss() >= 60)
-		message = replacetext(message, " am ", " ")
-		message = replacetext(message, " is ", " ")
-		message = replacetext(message, " are ", " ")
-		message = replacetext(message, "you", "u")
-		message = replacetext(message, "help", "halp")
-		message = replacetext(message, "grief", "grife")
-		message = replacetext(message, "space", "spess")
-		message = replacetext(message, "carp", "crap")
-		message = replacetext(message, "reason", "raisin")
-		if(prob(50))
-			message = uppertext(message)
-			message += "[stutter(pick("!", "!!", "!!!"))]"
-		if(!stuttering && prob(15))
-			message = stutter(message)
-
 	if (stuttering)
 		message = stutter(message)
 
-/* //qw do not have beesease atm.
-	if(virus)
-		if(virus.name=="beesease" && virus.stage>=2)
-			if(prob(virus.stage*10))
-				var/bzz = length(message)
-				message = "B"
-				for(var/i=0,i<bzz,i++)
-					message += "Z"
-*/
 	var/list/obj/item/used_radios = new
 	var/is_speaking_radio = 0
 
@@ -200,16 +179,6 @@ var/list/department_radio_keys = list(
 		if ("headset")
 			if (src:ears)
 				src:ears.talk_into(src, message)
-				used_radios += src:ears
-				is_speaking_radio = 1
-
-			message_range = 1
-			italics = 1
-
-
-		if ("secure headset")
-			if (src:ears)
-				src:ears.talk_into(src, message, 1)
 				used_radios += src:ears
 				is_speaking_radio = 1
 
@@ -367,38 +336,12 @@ var/list/department_radio_keys = list(
 
 	for (var/M in listening)
 		if(hascall(M,"say_understands"))
-			if ((M:say_understands(src) && !speaking))
-				//world << "[M] understood [src] (0)."
+			if (M:say_understands(src,speaking))
 				heard_a += M
-			else if(ismob(M))
-
-				// If speaking is set, it means that a language has been found that uses the given key.
-				// If it hasn't, then they are likely just speaking English.
-
-				var/understood
-				var/mob/P = M
-				if (speaking)
-					for(var/datum/language/L in P.languages)
-						if(speaking.name == L.name)
-							understood = 1
-					if(understood || P.universal_speak)
-						//world << "[M] understood [src] (1)."
-						heard_a += M
-					else if(istype(P,/mob/living/carbon/human))
-						var/mob/living/carbon/human/H = P
-						if(H.has_brain_worms()) // Brain worms act like Babelfish.
-							heard_a += M
-						else
-							heard_b += M
-					else
-						//world << "[M] didn't understand [src]."
-						heard_b += M
-				else
-					heard_a += M
-
 			else
-				//world << "[M] understood [src] (2)."
-				heard_a += M
+				heard_b += M
+		else
+			heard_a += M
 
 	var/speech_bubble_test = say_test(message)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
@@ -429,13 +372,10 @@ var/list/department_radio_keys = list(
 				M << speech_bubble
 
 	if (length(heard_b))
-		var/message_b
 
-		if (voice_message)
-			message_b = voice_message
-		else
-			message_b = stars(message)
-			message_b = say_quote(message_b,speaking)
+		var/message_b
+		message_b = stars(message)
+		message_b = say_quote(message_b,speaking)
 
 		if (italics)
 			message_b = "<i>[message_b]</i>"

@@ -3,8 +3,7 @@
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "grey baby slime"
 	pass_flags = PASSTABLE
-	voice_message = "skree!"
-	say_message = "hums"
+	speak_emote = list("hums")
 
 	layer = 5
 
@@ -56,6 +55,7 @@
 	name = "adult slime"
 	icon = 'icons/mob/slimes.dmi'
 	icon_state = "grey adult slime"
+	speak_emote = list("telepathically chirps")
 
 	health = 200
 	gender = NEUTER
@@ -900,7 +900,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 	desc = "a golem's skin"
 	icon_state = "golem"
 	item_state = "golem"
-	color = "golem"
+	item_color = "golem"
 	has_sensor = 0
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	canremove = 0
@@ -965,7 +965,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 /obj/item/clothing/head/space/golem
 	icon_state = "golem"
 	item_state = "dermal"
-	color = "dermal"
+	item_color = "dermal"
 	name = "golem's head"
 	desc = "a golem's head"
 	canremove = 0

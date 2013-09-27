@@ -136,7 +136,7 @@ var/global/list/all_money_accounts = list()
 /obj/machinery/account_database
 	name = "Accounts database"
 	desc = "Holds transaction logs, account data and all kinds of other financial records."
-	icon = 'virology.dmi'
+	icon = 'icons/obj/virology.dmi'
 	icon_state = "analyser"
 	density = 1
 	req_one_access = list(access_hop, access_captain)
@@ -338,3 +338,6 @@ var/global/list/all_money_accounts = list()
 	for(var/datum/money_account/D in all_money_accounts)
 		if(D.account_number == account_number)
 			return D
+
+/obj/machinery/account_database/process()
+	return 0

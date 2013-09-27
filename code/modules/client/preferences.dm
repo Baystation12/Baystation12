@@ -764,13 +764,13 @@ datum/preferences
 						g_hair = rand(0,255)
 						b_hair = rand(0,255)
 					if("h_style")
-						h_style = random_hair_style(gender)
+						h_style = random_hair_style(gender, species)
 					if("facial")
 						r_facial = rand(0,255)
 						g_facial = rand(0,255)
 						b_facial = rand(0,255)
 					if("f_style")
-						f_style = random_facial_hair_style(gender)
+						f_style = random_facial_hair_style(gender, species)
 					if("underwear")
 						underwear = rand(1,underwear_m.len)
 						ShowChoices(user)
@@ -807,7 +807,7 @@ datum/preferences
 
 						if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
 							for(var/S in whitelisted_species)
-								if(is_alien_whitelisted(user,S) || (S == "Unathi" && is_alien_whitelisted(user,"Soghun")))
+								if(is_alien_whitelisted(user,S))
 									new_species += S
 									whitelisted = 1
 							if(!whitelisted)
@@ -863,19 +863,23 @@ datum/preferences
 							s_tone = 0
 
 					if("language")
+						var/languages_available
 						var/list/new_languages = list("None")
-						var/language_whitelisted = 0
+
 						if(config.usealienwhitelist)
 							for(var/L in all_languages)
-								if(is_alien_whitelisted(user, L))
-									new_languages += L
-									language_whitelisted = 1
+								var/datum/language/lang = all_languages[L]
+								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))))
+									new_languages += lang
+									languages_available = 1
+
+							if(!(languages_available))
+								alert(user, "There are not currently any available secondary languages.")
 						else
 							for(var/L in all_languages)
-								new_languages += L
-
-						if(!language_whitelisted)
-							alert(user, "You cannot select a secondary language as you need to be whitelisted.  If you wish to enable a language, post in the Alien Whitelist forums.")
+								var/datum/language/lang = all_languages[L]
+								if(!(lang.flags & RESTRICTED))
+									new_languages += lang.name
 
 						language = input("Please select a secondary language", "Character Generation", null) in new_languages
 

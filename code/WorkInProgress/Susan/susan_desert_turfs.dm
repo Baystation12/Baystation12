@@ -2,7 +2,7 @@
 
 turf/unsimulated/desert
 	name = "desert"
-	icon = 'desert.dmi'
+	icon = 'code/WorkInProgress/Susan/desert.dmi'
 	icon_state = "desert"
 	temperature = 393.15
 	luminosity = 5
@@ -120,7 +120,7 @@ turf/simulated/wall/impassable_rock
 /obj/effect/alien/flesh/weeds
 	name = "Fleshy Growth"
 	desc = "A pulsating grouping of odd, alien tissues. It's almost like it has a heartbeat..."
-	icon = 'biocraps.dmi'
+	icon = 'code/WorkInProgress/Susan/biocraps.dmi'
 	icon_state = "flesh"
 
 	anchored = 1
@@ -130,7 +130,7 @@ turf/simulated/wall/impassable_rock
 
 /obj/effect/alien/flesh/weeds/node
 	icon_state = "fleshnode"
-	icon = 'biocraps.dmi'
+	icon = 'code/WorkInProgress/Susan/biocraps.dmi'
 	name = "Throbbing Pustule"
 	desc = "A grotquese, oozing, pimple-like growth. You swear you can see something moving around in the bulb..."
 	luminosity = NODERANGE
@@ -250,7 +250,7 @@ Alien plants should do something if theres a lot of poison
 	name = "warden's jumpsuit"
 	icon_state = "wardendnavyclothes"
 	item_state = "wardendnavyclothes"
-	color = "wardendnavyclothes"
+	item_color = "wardendnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
 
@@ -259,7 +259,7 @@ Alien plants should do something if theres a lot of poison
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
 	icon_state = "officerdnavyclothes"
 	item_state = "officerdnavyclothes"
-	color = "officerdnavyclothes"
+	item_color = "officerdnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
 
@@ -268,7 +268,7 @@ Alien plants should do something if theres a lot of poison
 	name = "head of security's jumpsuit"
 	icon_state = "hosdnavyclothes"
 	item_state = "hosdnavyclothes"
-	color = "hosdnavyclothes"
+	item_color = "hosdnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
 
@@ -316,7 +316,7 @@ Alien plants should do something if theres a lot of poison
 //hostile entities or npcs
 
 /obj/item/projectile/slimeglob
-	icon = 'projectiles.dmi'
+	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "toxin"
 	damage = 20
 	damage_type = BRUTE
@@ -461,7 +461,7 @@ Alien plants should do something if theres a lot of poison
 
 obj/effect/critter/fleshmonster/fleshslime
 	name = "Flesh Slime"
-	icon = 'biocraps.dmi'
+	icon = 'code/WorkInProgress/Susan/biocraps.dmi'
 	icon_state = "livingflesh"
 	desc = "A creature that appears to be made out of living tissue strewn together haphazardly. Some kind of liquid bubbles from its maw."
 	//ranged = 1

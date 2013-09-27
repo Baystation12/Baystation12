@@ -35,6 +35,9 @@
 		L.imp_in = H
 		L.implanted = 1
 		world << "<b>[H.real_name] is the captain!</b>"
+		var/datum/organ/external/affected = H.organs_by_name["head"]
+		affected.implants += L
+		L.part = affected
 		return 1
 
 	get_access()

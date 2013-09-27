@@ -68,7 +68,7 @@
 			comm.messagetitle.Add("Cent. Com. CONFIDENTIAL REPORT")
 			comm.messagetext.Add(intercepttext)
 
-	world << sound('commandreport.ogg')
+	world << sound('sound/AI/commandreport.ogg')
 
 	// add an extra law to the AI to make sure it cooperates with the heads
 	var/extra_law = "Crew authorized to know of pathogen [virus_name]'s existence are: Heads of command, any crew member with loyalty implant. Do not allow unauthorized personnel to gain knowledge of [virus_name]. Aid authorized personnel in quarantining and neutrlizing the outbreak. This law overrides all other laws."
@@ -89,7 +89,7 @@
 
 			comm.messagetitle.Add("Cent. Com. CONFIDENTIAL REPORT")
 			comm.messagetext.Add(intercepttext)
-	world << sound('commandreport.ogg')
+	world << sound('sound/AI/commandreport.ogg')
 
 
 /datum/game_mode/epidemic/post_setup()
@@ -194,7 +194,7 @@
 	ticker.mode:explosion_in_progress = 1
 	for(var/mob/M in world)
 		if(M.client)
-			M << 'Alarm.ogg'
+			M << 'sound/machines/Alarm.ogg'
 	world << "\blue<b>Incoming missile detected.. Impact in 10..</b>"
 	for (var/i=9 to 1 step -1)
 		sleep(10)
