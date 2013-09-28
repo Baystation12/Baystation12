@@ -4,6 +4,7 @@
 	spread = "Airborne"
 	cure = "A whole banana."
 	cure_id = "banana"
+	curable=1
 	cure_chance = 75
 	agent = "H0NI<42 Virus"
 	affected_species = list("Human")

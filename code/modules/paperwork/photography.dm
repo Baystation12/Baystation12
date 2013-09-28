@@ -267,7 +267,7 @@
 ***************/
 
 /obj/item/device/videocam
-	name = "camera"
+	name = "video camera"
 	icon = 'icons/obj/items.dmi'
 	desc = "video camera that can send live feed to the entertainment network."
 	icon_state = "videocam"

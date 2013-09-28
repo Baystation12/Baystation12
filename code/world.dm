@@ -265,6 +265,11 @@
 	s += "[game_version]"
 	s += "</a>"
 	s += ")"
+	s += "<br>The Perfect Mix of RP & Action<br>"
+	s += "<b>BYOND 500 BETA REQUIRED</b><br>"
+
+
+
 
 	var/list/features = list()
 
@@ -301,8 +306,8 @@
 		features += "hosted by <b>[host]</b>"
 	*/
 
-	if (!host && config && config.hostedby)
-		features += "hosted by <b>[config.hostedby]</b>"
+//	if (!host && config && config.hostedby)
+//		features += "hosted by <b>[config.hostedby]</b>"
 
 	if (features)
 		s += ": [dd_list2text(features, ", ")]"

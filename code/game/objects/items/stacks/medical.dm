@@ -38,6 +38,10 @@
 			user << "\red This isn't useful at all on a robotic limb.."
 			return 1
 
+		if(affecting.status & ORGAN_PEG)
+			user << "\red This isn't useful at all on a peg limb. It's fucking wood."
+			return 1
+
 		H.UpdateDamageIcon()
 
 	else
