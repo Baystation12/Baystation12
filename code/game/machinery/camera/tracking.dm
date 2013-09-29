@@ -15,6 +15,7 @@
 		var/list/tempnetwork = C.network&src.network
 		if (tempnetwork.len)
 			T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
+		else return
 
 	track = new()
 	track.cameras = T
