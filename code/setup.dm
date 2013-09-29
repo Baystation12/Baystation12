@@ -647,7 +647,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define BE_CULTIST		256
 #define BE_MONKEY		512
 #define BE_NINJA		1024
-#define BE_RAIDER		2048
+#define BE_VOX			2048
 #define BE_PLANT		4096
 
 var/list/be_special_flags = list(
@@ -662,7 +662,7 @@ var/list/be_special_flags = list(
 	"Cultist" = BE_CULTIST,
 	"Monkey" = BE_MONKEY,
 	"Ninja" = BE_NINJA,
-	"Raider" = BE_RAIDER,
+	"Vox" = BE_VOX,
 	"Diona" = BE_PLANT
 	)
 

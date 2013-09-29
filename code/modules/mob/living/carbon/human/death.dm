@@ -74,7 +74,7 @@
 		verbs -= /mob/living/carbon/proc/release_control
 
 	//Check for heist mode kill count.
-	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist) ) )
+	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/vox/heist) || istype( ticker.mode,/datum/game_mode/vox/trade) ) )
 		//Check for last assailant's mutantrace.
 		/*if( LAssailant && ( istype( LAssailant,/mob/living/carbon/human ) ) )
 			var/mob/living/carbon/human/V = LAssailant
