@@ -46,6 +46,10 @@ datum/controller/vote
 
 				voting.Cut()
 
+	proc/autotransfer()
+		initiate_vote("crew_transfer","the server")
+
+
 	proc/reset()
 		initiator = null
 		time_remaining = 0
@@ -202,7 +206,7 @@ datum/controller/vote
 						return 0
 					choices.Add(config.votable_modes)
 				if("crew_transfer")
-					if(check_rights(R_ADMIN) || check_rights(R_MOD))
+					if check_rights(R_ADMIN) || check_rights(R_MOD)
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
 					else
