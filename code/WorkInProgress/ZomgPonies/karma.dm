@@ -51,9 +51,10 @@ proc/sql_report_karma(var/mob/spender, var/mob/receiver)
 
 var/list/karma_spenders = list()
 
-/mob/dead/observer/verb/spend_karma(var/mob/M in world) // Karma system -- TLE
-	set name = "Spend Karma"
+/mob/verb/spend_karma(var/mob/M in player_list) // Karma system -- TLE
+	set name = "Award Karma"
 	set desc = "Let the gods know whether someone's been naughty or nice. <One use only>"
+	set category = "Special Verbs"
 	if(!istype(M, /mob))
 		usr << "\red That's not a mob. You shouldn't have even been able to specify that. Please inform TLE post haste."
 		return
