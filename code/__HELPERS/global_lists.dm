@@ -20,7 +20,7 @@ var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mob
 //Languages/species/whitelist.
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
-var/global/list/whitelisted_species = list("Human")
+var/global/list/whitelisted_species = list()
 
 //Preferences stuff
 	//Hairstyles

@@ -44,6 +44,7 @@ var/const/CLOWN				=(1<<11)
 var/const/MIME				=(1<<12)
 var/const/ASSISTANT			=(1<<13)
 var/const/NANO				=(1<<14)
+var/const/BLUESHIELD		=(1<<15)
 
 
 var/list/assistant_occupations = list(
@@ -120,9 +121,12 @@ var/list/nonhuman_positions = list(
 	"pAI"
 )
 
+var/list/whitelisted_positions = list(
+	"Blueshield",
+)
 
 /proc/guest_jobbans(var/job)
-	return ((job in command_positions) || (job in nonhuman_positions) || (job in security_positions))
+	return (job in whitelisted_positions)
 
 /proc/get_job_datums()
 	var/list/occupations = list()

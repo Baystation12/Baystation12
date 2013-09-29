@@ -123,7 +123,7 @@
 
 	flags = NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
 
-/*
+
 /datum/species/skellington // /vg/
 	name = "Skellington"
 	icobase = 'icons/mob/human_races/r_skeleton.dmi'
@@ -131,5 +131,15 @@
 	language = "Clatter"
 	attack_verb = "punch"
 
-	flags = HAS_LIPS | HAS_TAIL | NO_EAT | NO_BREATHE | NON_GENDERED
-*/
+	flags = WHITELISTED | HAS_LIPS | HAS_TAIL | NO_EAT | NO_BREATHE | NON_GENDERED
+
+
+
+/datum/species/kidan
+	name = "Kidan"
+	icobase = 'icons/mob/human_races/r_kidan.dmi'
+	deform = 'icons/mob/human_races/r_def_kidan.dmi'
+	language = "Chittin"
+	attack_verb = "slash"
+
+	flags = WHITELISTED
