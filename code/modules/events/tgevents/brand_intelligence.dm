@@ -38,6 +38,7 @@
 
 	if(!vendingMachines.len)	//if every machine is infected
 		for(var/obj/machinery/vending/upriser in infectedMachines)
+			if(prob(25)) return
 			if(prob(60))
 				var/mob/living/simple_animal/hostile/mimic/M = new(upriser.loc)
 				M.name = upriser.name
