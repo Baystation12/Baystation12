@@ -86,6 +86,7 @@
 					affected_mob:Turnundead()
 
 /datum/disease/zombie_transformation/process()	//Almost the same thing, a few tweaks needed for dead people.
+	if(!affected_mob) return
 	if(!holder)
 		active_diseases -= src
 		return
