@@ -52,7 +52,7 @@
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
 /datum/species/tajaran
 	name = "Tajaran"
@@ -73,7 +73,7 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
 /datum/species/skrell
 	name = "Skrell"
@@ -82,7 +82,7 @@
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
+	flags = HAS_LIPS | HAS_UNDERWEAR
 
 /datum/species/vox
 	name = "Vox"
@@ -121,7 +121,7 @@
 	heat_level_2 = 3000
 	heat_level_3 = 4000
 
-	flags = WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
+	flags = NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
 
 /*
 /datum/species/skellington // /vg/
@@ -131,5 +131,5 @@
 	language = "Clatter"
 	attack_verb = "punch"
 
-	flags = WHITELISTED | HAS_LIPS | HAS_TAIL | NO_EAT | NO_BREATHE | NON_GENDERED
+	flags = HAS_LIPS | HAS_TAIL | NO_EAT | NO_BREATHE | NON_GENDERED
 */
