@@ -221,13 +221,18 @@
 
 	msg += "<span class='warning'>"
 
+	if(fire_stacks > 0)
+		msg += "[t_He] [t_is] covered in something flammable.\n"
+	if(fire_stacks < 0)
+		msg += "[t_He] looks a little soaked.\n"
+
 	if(nutrition < 100)
 		msg += "[t_He] [t_is] severely malnourished.\n"
 	else if(nutrition >= 500)
-		/*if(usr.nutrition < 100)
+		if(usr.nutrition < 100)
 			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy.\n"
-		else*/
-		msg += "[t_He] [t_is] quite chubby.\n"
+		else
+			msg += "[t_He] [t_is] quite chubby.\n"
 
 	msg += "</span>"
 

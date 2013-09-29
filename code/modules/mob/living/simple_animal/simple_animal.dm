@@ -462,3 +462,6 @@
 		if (M.occupant)
 			return 0
 	return 1
+
+/mob/living/simple_animal/update_fire()
+	return
