@@ -56,7 +56,7 @@
 		var/pban = href_list["dbpban"]
 		var/tban = href_list["dbtban"]
 		var/jpban = href_list["dbjpban"]
-		var/jtban = href_list["dbjpban"]
+		var/jtban = href_list["dbjtban"]
 
 		DB_ban_panel(playerckey, adminckey, playerip, pban, tban, jpban, jtban)
 		return
