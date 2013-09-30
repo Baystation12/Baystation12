@@ -64,10 +64,10 @@ var/global/datum/controller/gameticker/ticker
 		timerbuffer = config.vote_autotransfer_initial
 	else
 		timerbuffer = config.vote_autotransfer_interval
-	sleep(timerbuffer)
-	vote.autotransfer()
-	initialtpass = 1
-	votetimer()
+	spawn(timerbuffer)
+		vote.autotransfer()
+		initialtpass = 1
+		votetimer()
 
 
 /datum/controller/gameticker/proc/setup()
