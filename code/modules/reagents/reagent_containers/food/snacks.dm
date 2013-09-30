@@ -258,6 +258,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 8)
+		reagents.add_reagent("doctorsdelight", 8)
 		reagents.add_reagent("tricordrazine", 8)
 		bitesize = 3
 
@@ -1812,9 +1813,9 @@
 		reagents.add_reagent("nutriment", 8)
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/herbsalad
-	name = "herb salad"
-	desc = "A tasty salad with apples on top."
+/obj/item/weapon/reagent_containers/food/snacks/tossedsalad
+	name = "tossed salad"
+	desc = "A proper salad, basic and simple, with little bits of carrot, tomato and apple intermingled. Vegan!"
 	icon_state = "herbsalad"
 	trash = /obj/item/trash/snack_bowl
 	New()
@@ -1824,13 +1825,12 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/validsalad
 	name = "valid salad"
-	desc = "It's just an herb salad with meatballs and fried potato slices. Nothing suspicious about it."
+	desc = "It's just a salad of questionable 'herbs' with meatballs and fried potato slices. Nothing suspicious about it."
 	icon_state = "validsalad"
 	trash = /obj/item/trash/snack_bowl
 	New()
 		..()
 		reagents.add_reagent("nutriment", 8)
-		reagents.add_reagent("doctorsdelight", 5)
 		bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/appletart
