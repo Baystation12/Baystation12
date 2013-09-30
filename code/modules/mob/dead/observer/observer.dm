@@ -296,3 +296,34 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	dat += data_core.get_manifest()
 
 	src << browse(dat, "window=manifest;size=370x420;can_close=1")
+
+//BEGIN TELEPORT HREF CODE
+/mob/dead/observer/Topic(href, href_list)
+	if(usr != src)
+		return
+		..()
+
+	if (href_list["follow"])
+		var/mob/target = locate(href_list["follow"]) in mob_list
+		var/mob/A = usr;
+		A << "You are now following [target]"
+		//var/mob/living/silicon/ai/A = locate(href_list["track2"]) in mob_list
+		if(target && target != usr)
+			following = target
+			spawn(0)
+				var/turf/pos = get_turf(A)
+				while(A.loc == pos)
+
+					var/turf/T = get_turf(target)
+					if(!T)
+						break
+					if(following != target)
+						break
+					if(!client)
+						break
+					A.loc = T
+					pos = A.loc
+					sleep(15)
+				following = null
+	..()
+//END TELEPORT HREF CODE
