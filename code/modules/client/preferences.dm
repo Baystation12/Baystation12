@@ -413,6 +413,9 @@ datum/preferences
 			HTML += "<tr bgcolor='[job.selection_color]'><td width='60%' align='right'>"
 			var/rank = job.title
 			lastJob = job
+			if(!is_job_whitelisted(user, rank))
+				HTML += "<font color=red>[rank]</font></td><td><font color=red><b> \[KARMA]</b></font></td></tr>"
+				continue
 			if(jobban_isbanned(user, rank))
 				HTML += "<font color=red>[rank]</font></td><td><font color=red><b> \[BANNED]</b></font></td></tr>"
 				continue

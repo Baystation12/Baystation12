@@ -135,7 +135,7 @@
 				usr << "\red The round is either not ready, or has already finished..."
 				return
 
-			if(client.prefs.species != "Human")
+			if(client.prefs.species in whitelisted_species)
 
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
@@ -152,9 +152,10 @@
 				usr << "\blue There is an administrative lock on entering the game!"
 				return
 
-			if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
-				src << alert("You are currently not whitelisted to play [client.prefs.species].")
-				return 0
+			if(client.prefs.species in whitelisted_species)
+				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
+					src << alert("You are currently not whitelisted to play [client.prefs.species].")
+					return 0
 
 			AttemptLateSpawn(href_list["SelectedJob"])
 			return
@@ -263,6 +264,7 @@
 		if(!job)	return 0
 		if((job.current_positions >= job.total_positions) && job.total_positions != -1)	return 0
 		if(jobban_isbanned(src,rank))	return 0
+		if(!is_job_whitelisted(src, rank))	 return 0
 		if(!job.player_old_enough(src.client))	return 0
 		return 1
 

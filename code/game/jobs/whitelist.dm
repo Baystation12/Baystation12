@@ -5,11 +5,39 @@ var/list/whitelist = list()
 /proc/load_whitelist()
 	whitelist = file2list(WHITELISTFILE)
 	if(!whitelist.len)	whitelist = null
-
-/proc/check_whitelist(mob/M /*, var/rank*/)
+/*
+/proc/check_whitelist(mob/M, var/rank)
 	if(!whitelist)
 		return 0
 	return ("[M.ckey]" in whitelist)
+*/
+
+/proc/is_job_whitelisted(mob/M, var/rank)
+	if (guest_jobbans(rank))
+		if(!config.usewhitelist)
+			return 1
+		if(check_rights(R_ADMIN, 0))
+			return 1
+		if(!dbcon.IsConnected())
+			usr << "\red Unable to connect to whitelist database. Please try again later.<br>"
+			return 0
+		else
+			var/DBQuery/query = dbcon.NewQuery("SELECT job FROM whitelist WHERE ckey='[M.ckey]'")
+			query.Execute()
+
+
+			while(query.NextRow())
+				var/joblist = query.item[1]
+				if(joblist!="*")
+					var/allowed_jobs = text2list(joblist,",")
+					if(rank in allowed_jobs) return 1
+				else return 1
+			return 0
+	else
+		return 1
+
+
+
 
 var/list/alien_whitelist = list()
 
@@ -30,13 +58,28 @@ proc/load_alienwhitelist()
 		return 1
 	if(!alien_whitelist)
 		return 0
+	if(!dbcon.IsConnected())
+		usr << "\red Unable to connect to whitelist database. Please try again later.<br>"
+		return 0
+	else
+		var/DBQuery/query = dbcon.NewQuery("SELECT species FROM whitelist WHERE ckey='[M.ckey]'")
+		query.Execute()
+
+		while(query.NextRow())
+			var/specieslist = query.item[1]
+			if(specieslist!="*")
+				var/allowed_species = text2list(specieslist,",")
+				if(species in allowed_species) return 1
+			else return 1
+		return 0
+/*
 	if(M && species)
 		for (var/s in alien_whitelist)
 			if(findtext(s,"[M.ckey] - [species]"))
 				return 1
 			if(findtext(s,"[M.ckey] - All"))
 				return 1
+*/
 
-	return 0
 
 #undef WHITELISTFILE

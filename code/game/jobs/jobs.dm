@@ -122,7 +122,7 @@ var/list/nonhuman_positions = list(
 )
 
 var/list/whitelisted_positions = list(
-	"Blueshield",
+	"Blueshield"
 )
 
 /proc/guest_jobbans(var/job)
