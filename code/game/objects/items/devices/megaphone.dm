@@ -28,7 +28,7 @@
 	var/message = copytext(sanitize(input(user, "Shout a message?", "Megaphone", null)  as text),1,MAX_MESSAGE_LEN)
 	if(!message)
 		return
-
+	message = capitalize(message)
 	if ((src.loc == user && usr.stat == 0))
 		if(emagged)
 			if(insults)
