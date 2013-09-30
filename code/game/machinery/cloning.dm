@@ -195,6 +195,7 @@
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
 
 	H.species = mrace
+	H.add_language(mrace.language)
 	H.update_mutantrace()
 	H.suiciding = 0
 	src.attempting = 0
