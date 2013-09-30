@@ -14,7 +14,26 @@ NanoBaseHelpers = function ()
 	
 	var initHelpers = function ()
 	{
-		$.views.helpers({
+	    $.views.tags({
+            fields: function(object) {
+                var key;
+                var ret = "";
+                for (key in object) {
+                    if (object.hasOwnProperty(key)) {
+                        // For each property/field, render the content of the {{fields object}} tag, with "~key" as template parameter
+                        ret += this.tagCtx.render(object[key], { key: key });
+                    }
+                }
+                return ret;
+            }
+	    });
+		$.views.helpers({ 
+            combine: function( arr1, arr2 ) {
+                return arr1 && arr2 ? arr1.concat(arr2) : arr1 || arr2;
+            },  
+            dump: function( arr1 ) {
+                return JSON.stringify(arr1);
+            },
 			// Generate a Byond link
 			link: function( text, icon, parameters, status, elementClass, elementId) {
 	
@@ -44,10 +63,21 @@ NanoBaseHelpers = function ()
 				
 				return '<div unselectable="on" class="link linkActive ' + iconClass + ' ' + elementClass + '" data-href="' + generateHref(parameters) + '" ' + elementIdHtml + '>' + iconHtml + text + '</div>';
 			},
+            // Since jsrender breaks the ^ operator
+            xor: function(number,bit) {                               
+                return number ^ bit;
+            },
 			// Round a number to the nearest integer
 			round: function(number) {								
 				return Math.round(number);
 			},
+			// Round a number to X decimal places.
+            precisionRound: function (value, places) {
+                if(places==0)
+                    return Math.round(number);
+                var multiplier = Math.pow(10, places);
+                return (Math.round(value * multiplier) / multiplier);
+            },
 			// Round a number down to integer
 			floor: function(number) {								
 				return Math.floor(number);
@@ -117,6 +147,12 @@ NanoBaseHelpers = function ()
 				
 				return '<div class="displayBar ' + styleClass + '"><div class="displayBarFill ' + styleClass + '" style="width: ' + percentage + '%;"></div><div class="displayBarText ' + styleClass + '">' + showText + '</div></div>';
 			},
+			// Convert danger level to class (for the air alarm)
+			dangerToClass: function(level) {
+				if(level==0) return 'good';
+				if(level==1) return 'average';
+				return 'bad';
+			},
 			// Display DNA Blocks (for the DNA Modifier UI)
 			displayDNABlocks: function(dnaString, selectedBlock, selectedSubblock, blockSize, paramKey) {		
 			    if (!dnaString)
@@ -152,7 +188,7 @@ NanoBaseHelpers = function ()
                         status = 'selected';
                     }
                     
-                    html += '<div class="link ' + status + ' dnaSubBlock" data-href="' + generateHref(parameters) + '" id="dnaBlock' + index + '">' + characters[index] + '</div>'
+                    html += '<div class="link ' + status + ' dnaSubBlock" data-href="' + generateHref(parameters) + '" id="dnaBlock' + index + '">' + characters[index] + '</div>';
                     
                     index++;
                     if (index % blockSize == 0 && index < characters.length)
@@ -172,7 +208,7 @@ NanoBaseHelpers = function ()
 				return html;
 			}
 		});
-	}
+	};
 	
 	// generate a Byond href, combines _urlParameters with parameters
 	var generateHref = function (parameters)
@@ -203,7 +239,7 @@ NanoBaseHelpers = function ()
 			}
 		}
 		return queryString;
-	}
+	};
 
 	return {
         init: function () 
