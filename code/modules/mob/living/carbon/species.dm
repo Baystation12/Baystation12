@@ -142,4 +142,4 @@
 	language = "Chittin"
 	attack_verb = "slash"
 
-	flags = WHITELISTED
+	flags = WHITELISTED | HAS_CHITTIN

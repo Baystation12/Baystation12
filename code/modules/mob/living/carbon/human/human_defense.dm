@@ -150,6 +150,9 @@ emp_act
 			if(!isturf(picked)) return
 			src.loc = picked
 			return 1
+	if(species.flags & HAS_CHITTIN && (prob(50 - round(damage / 3))))
+		visible_message("\red <B> The [attack_text] bounces off [src]' natural armor!</B>")
+		return 1
 	return 0
 
 /mob/living/carbon/human/emp_act(severity)
