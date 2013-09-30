@@ -192,24 +192,23 @@
 		set background = 1
 		while(1)
 			sleep(DISCONNECTED_DELETE)
-			for(var/mob/living/carbon/C in mob_list)
-//				var/client/L = C
-//				if(R_ADMIN & L.holder.rights || !(R_MOD & L.holder.rights)) return
-				if(!ismonkey(C) && !isslime(C))
-					if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0 && C.lastKnownIP)
-						sleep(600)
-						if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0)
-							job_master.FreeRole(C.job)
-							message_admins("<b>[C.name]</b> ([C.ckey]), the [C.job] has been freed due to (<font color='#ffcc00'><b>Client disconnect for 10 minutes</b></font>)\n")
-							for(var/obj/item/W in C)
-								C.drop_from_inventory(W)
-							del(C)
-						else if(!C.key && C.stat != DEAD && C.brain_op_stage!=4.0)
-							job_master.FreeRole(C.job)
-							message_admins("<b>[C.name]</b> ([C.ckey]), the [C.job] has been freed due to (<font color='#ffcc00'><b>Client quit BYOND</b></font>)\n")
-							for(var/obj/item/W in C)
-								C.drop_from_inventory(W)
-							del(C)
+			for(var/mob/living/carbon/human/C in living_mob_list)
+				var/client/L = C
+				if(L.holder) return
+				if(!C.client && C.brain_op_stage!=4.0 && C.lastKnownIP)
+					sleep(600)
+					if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0)
+						job_master.FreeRole(C.job)
+						message_admins("<b>[C.name]</b> ([C.ckey]), the [C.job] has been freed due to (<font color='#ffcc00'><b>Client disconnect for 10 minutes</b></font>)\n")
+						for(var/obj/item/W in C)
+							C.drop_from_inventory(W)
+						del(C)
+					else if(!C.key && C.stat != DEAD && C.brain_op_stage!=4.0)
+						job_master.FreeRole(C.job)
+						message_admins("<b>[C.name]</b> ([C.ckey]), the [C.job] has been freed due to (<font color='#ffcc00'><b>Client quit BYOND</b></font>)\n")
+						for(var/obj/item/W in C)
+							C.drop_from_inventory(W)
+						del(C)
 #undef DISCONNECTED_DELETE
 
 /world/proc/load_mode()
