@@ -65,6 +65,7 @@
 /var/const/access_sec_doors = 63 // Security front doors
 /var/const/access_psychiatrist = 64 // Psychiatrist's office
 /var/const/access_xenoarch = 65
+/var/const/access_paramedic = 66
 
 	//BEGIN CENTCOM ACCESS
 	/*Should leave plenty of room if we need to add more access levels.

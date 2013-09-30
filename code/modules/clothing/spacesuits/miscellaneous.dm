@@ -83,3 +83,16 @@
 	siemens_coefficient = 0.9
 
 
+//Paramedic EVA suit
+/obj/item/clothing/head/helmet/space/paramedic
+	name = "Paramedic EVA helmet"
+	desc = "A paramedic space helmet. Used in the recovery of bodies from space."
+	icon_state = "paramedic-eva-helmet"
+	item_state = "paramedic-eva-helmet"
+
+/obj/item/clothing/suit/space/paramedic
+	name = "Paramedic EVA suit"
+	icon_state = "paramedic-eva"
+	item_state = "paramedic-eva"
+	desc = "A paramedic space suit. Used in the recovery of bodies from space."
+	slowdown = 1
