@@ -252,6 +252,7 @@
 		'nano/templates/chem_dispenser.tmpl',
 		'nano/templates/cryo.tmpl',
 		'nano/templates/dna_modifier.tmpl',
+		'nano/templates/air_alarm.tmpl',
 		'nano/images/uiBackground.png',
 		'nano/images/uiIcons16.png',
 		'nano/images/uiIcons24.png',
