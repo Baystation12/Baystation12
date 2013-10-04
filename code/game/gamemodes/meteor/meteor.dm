@@ -1,4 +1,4 @@
-/*/datum/game_mode/meteor
+/datum/game_mode/meteor
 	name = "meteor"
 	config_tag = "meteor"
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
@@ -6,7 +6,7 @@
 	var/const/meteordelay = 2000
 	var/nometeors = 1
 	required_players = 0
-
+	votable = 0
 	uplink_welcome = "EVIL METEOR Uplink Console:"
 	uplink_uses = 10
 
@@ -62,4 +62,3 @@
 
 	..()
 	return 1
-*/
