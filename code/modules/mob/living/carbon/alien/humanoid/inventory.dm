@@ -2,10 +2,10 @@
 /mob/living/carbon/alien/humanoid/u_equip(obj/item/W as obj)
 	if (W == wear_suit)
 		wear_suit = null
-		update_inv_wear_suit(0)
+		update_inv_wear_suit(0,0)
 	else if (W == head)
 		head = null
-		update_inv_head(0)
+		update_inv_head(0,0)
 	else if (W == r_store)
 		r_store = null
 		update_inv_pockets(0)

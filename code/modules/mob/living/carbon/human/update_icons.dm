@@ -489,15 +489,15 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(monkeyizing)		return
 	update_mutations(0)
 	update_mutantrace(0)
-	update_inv_w_uniform(0)
+	update_inv_w_uniform(0,0)
 	update_inv_wear_id(0)
-	update_inv_gloves(0)
+	update_inv_gloves(0,0)
 	update_inv_glasses(0)
 	update_inv_ears(0)
-	update_inv_shoes(0)
+	update_inv_shoes(0,0)
 	update_inv_s_store(0)
 	update_inv_wear_mask(0)
-	update_inv_head(0)
+	update_inv_head(0,0)
 	update_inv_belt(0)
 	update_inv_back(0)
 	update_inv_wear_suit(0)
@@ -514,7 +514,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 /* --------------------------------------- */
 //vvvvvv UPDATE_INV PROCS vvvvvv
 
-/mob/living/carbon/human/update_inv_w_uniform(var/update_icons=1)
+/mob/living/carbon/human/update_inv_w_uniform(var/update_icons=1,var/green=0)
 	if(w_uniform && istype(w_uniform, /obj/item/clothing/under) )
 		w_uniform.screen_loc = ui_iclothing
 		var/t_color = w_uniform._color
@@ -539,8 +539,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 			standing.icon	= w_uniform.icon
 
 		if(w_uniform.blood_DNA)
-			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "uniformblood2")
-			standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "uniformblood")
+			if(green==1)
+				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "xuniformblood2")
+				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "xuniformblood")
+			else
+				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "uniformblood2")
+				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "uniformblood")
 
 		if(w_uniform:hastie)	//WE CHECKED THE TYPE ABOVE. THIS REALLY SHOULD BE FINE.
 			var/tie_color = w_uniform:hastie._color
@@ -580,22 +584,30 @@ proc/get_damage_icon_part(damage_state, body_part)
 		overlays_standing[ID_LAYER]	= null
 	if(update_icons)   update_icons()
 
-/mob/living/carbon/human/update_inv_gloves(var/update_icons=1)
+/mob/living/carbon/human/update_inv_gloves(var/update_icons=1,var/green=0)
 	if(gloves)
 		var/t_state = gloves.item_state
 		if(!t_state)	t_state = gloves.icon_state
 		var/image/lying		= image("icon" = 'icons/mob/hands.dmi', "icon_state" = "[t_state]2")
 		var/image/standing	= image("icon" = 'icons/mob/hands.dmi', "icon_state" = "[t_state]")
 		if(gloves.blood_DNA)
-			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands2")
-			standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
+			if(green==1)
+				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "xbloodyhands2")
+				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "xbloodyhands")
+			else
+				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands2")
+				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
 		gloves.screen_loc = ui_gloves
 		overlays_lying[GLOVES_LAYER]	= lying
 		overlays_standing[GLOVES_LAYER]	= standing
 	else
 		if(blood_DNA)
-			overlays_lying[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands2")
-			overlays_standing[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
+			if (green)
+				overlays_lying[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "xbloodyhands2")
+				overlays_standing[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "xbloodyhands")
+			else
+				overlays_lying[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands2")
+				overlays_standing[GLOVES_LAYER]	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
 		else
 			overlays_lying[GLOVES_LAYER]	= null
 			overlays_standing[GLOVES_LAYER]	= null
@@ -626,7 +638,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		overlays_standing[EARS_LAYER]	= null
 	if(update_icons)   update_icons()
 
-/mob/living/carbon/human/update_inv_shoes(var/update_icons=1)
+/mob/living/carbon/human/update_inv_shoes(var/update_icons=1,var/green=0)
 	if(shoes)
 		var/dmi='icons/mob/feet.dmi'
 		if(shoes.custom)
@@ -634,8 +646,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 		var/image/lying    = image("icon" = dmi, "icon_state" = "[shoes.icon_state]2")
 		var/image/standing  = image("icon" = dmi, "icon_state" = "[shoes.icon_state]")
 		if(shoes.blood_DNA)
-			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "shoeblood2")
-			standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "shoeblood")
+			if(green==1)
+				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "xshoeblood2")
+				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "xshoeblood")
+			else
+				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "shoeblood2")
+				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "shoeblood")
 		overlays_lying[SHOES_LAYER]		= lying
 		overlays_standing[SHOES_LAYER]	= standing
 	else
@@ -660,7 +676,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(update_icons)   update_icons()
 
 
-/mob/living/carbon/human/update_inv_head(var/update_icons=1)
+/mob/living/carbon/human/update_inv_head(var/update_icons=1,var/green=0)
 	if(head)
 		head.screen_loc = ui_head		//TODO
 		var/image/lying
@@ -675,8 +691,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 			lying    = image("icon" = dmi, "icon_state" = "[head.icon_state]2")
 			standing  = image("icon" = dmi, "icon_state" = "[head.icon_state]")
 		if(head.blood_DNA)
-			lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "helmetblood2")
-			standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "helmetblood")
+			if(green==1)
+				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "xhelmetblood2")
+				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "xhelmetblood")
+			else
+				lying.overlays		+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "helmetblood2")
+				standing.overlays	+= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "helmetblood")
 		overlays_lying[HEAD_LAYER]		= lying
 		overlays_standing[HEAD_LAYER]	= standing
 	else

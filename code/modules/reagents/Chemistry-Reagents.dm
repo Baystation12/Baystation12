@@ -1235,16 +1235,16 @@ datum
 						var/mob/living/carbon/human/H = C
 						if(H.head)
 							if(H.head.clean_blood())
-								H.update_inv_head(0)
+								H.update_inv_head(0,0)
 						if(H.wear_suit)
 							if(H.wear_suit.clean_blood())
-								H.update_inv_wear_suit(0)
+								H.update_inv_wear_suit(0,0)
 						else if(H.w_uniform)
 							if(H.w_uniform.clean_blood())
-								H.update_inv_w_uniform(0)
+								H.update_inv_w_uniform(0,0)
 						if(H.shoes)
 							if(H.shoes.clean_blood())
-								H.update_inv_shoes(0)
+								H.update_inv_shoes(0,0)
 					M.clean_blood()
 
 		plantbgone

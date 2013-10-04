@@ -49,7 +49,7 @@
 		if(!perp.shoes.blood_DNA)
 			perp.shoes.blood_DNA = list()
 			perp.shoes.overlays += perp.shoes.blood_overlay
-			perp.update_inv_shoes(1)
+			perp.update_inv_shoes(1,0)
 		perp.shoes.blood_DNA |= blood_DNA.Copy()
 	else
 		perp.track_blood = max(amount,perp.track_blood)				//Or feet
@@ -71,6 +71,44 @@
 	random_icon_states = list("gibbl1", "gibbl2", "gibbl3", "gibbl4", "gibbl5")
 	amount = 2
 
+/obj/effect/decal/cleanable/blood/green
+	name = "green blood"
+	desc = "It's green and gooey. Perhaps it's the chef's cooking?"
+	icon_state = "xfloor1"
+	random_icon_states = list("xfloor1", "xfloor2", "xfloor3", "xfloor4", "xfloor5", "xfloor6", "xfloor7")
+
+/obj/effect/decal/cleanable/blood/green/HasEntered(mob/living/carbon/human/perp)
+	if (!istype(perp))
+		return
+	if(amount < 1)
+		return
+
+	if(perp.shoes)
+		perp.shoes:track_blood_green= max(amount,perp.shoes:track_blood_green)		//Adding blood to shoes
+		if(!perp.shoes.blood_overlay)
+			perp.shoes.blood_overlay_color = 1
+			perp.shoes.generate_blood_overlay()
+		if(!perp.shoes.blood_DNA)
+			perp.shoes.blood_DNA = list()
+			perp.shoes.overlays += perp.shoes.blood_overlay
+			perp.update_inv_shoes(1,1)
+		perp.shoes.blood_DNA |= blood_DNA.Copy()
+	else
+		perp.track_blood_green = max(amount,perp.track_blood_green)				//Or feet
+		if(!perp.feet_blood_DNA)
+			perp.feet_blood_DNA = list()
+		perp.feet_blood_DNA |= blood_DNA.Copy()
+
+	amount--
+
+/obj/effect/decal/cleanable/blood/drip/green
+	name = "drips of blood"
+	desc = "It's green."
+	gender = PLURAL
+	icon = 'icons/effects/drip.dmi'
+	icon_state = "g1"
+	amount = 0
+
 // The idea is to have 4 bits for coming and 4 for going.
 #define TRACKS_COMING_NORTH 1
 #define TRACKS_COMING_SOUTH 2
@@ -88,8 +126,11 @@
 	amount = 0
 	random_icon_states = null
 	var/dirs=0
+	icon='icons/effects/footprints.dmi'
 	var/coming_state="blood1"
 	var/going_state="blood2"
+
+
 	var/newtracks=0 // Cleared after every icon_update
 	var/crustytracks=0 // Cleared after every icon_update
 
@@ -112,7 +153,26 @@
 	* @param comingdir Direction tracks come from, or 0.
 	* @param goingdir Direction tracks are going to (or 0).
 	*/
-	proc/AddTracks(var/list/DNA, var/comingdir, var/goingdir)
+	proc/AddTracks(var/mob/living/carbon/human/H, var/list/DNA, var/comingdir, var/goingdir,var/typepath)
+		if(typepath == /obj/effect/decal/cleanable/blood/tracks/footprints)
+			if(H.species.bodyflags & FEET_CLAWS)
+				coming_state="bloodclaw1"
+				going_state="bloodclaw2"
+			if(H.species.bodyflags & FEET_PADDED)
+				coming_state="bloodpaw1"
+				going_state="bloodpaw2"
+		if(typepath == /obj/effect/decal/cleanable/blood/tracks/footprints/green)
+			if(H.species.bodyflags & FEET_CLAWS)
+				coming_state="xenoclaw1"
+				going_state="xenoclaw2"
+			if(H.species.bodyflags & FEET_PADDED)
+				coming_state="xenopaw1"
+				going_state="xenopaw2"
+			else
+				coming_state="xeno1"
+				going_state="xeno2"
+
+
 		var/updated=0
 		// Shift our goingdir 4 spaces to the left so it's in the GOING bitblock.
 		var/realgoing=goingdir<<4
@@ -203,13 +263,16 @@
 /obj/effect/decal/cleanable/blood/tracks/footprints
 	name = "bloody footprints"
 	desc = "Whoops..."
-	icon='icons/effects/footprints.dmi'
-	coming_state = "blood1"
-	going_state  = "blood2"
+
+/obj/effect/decal/cleanable/blood/tracks/footprints/green
+	name = "bloody green footprints"
+	desc = "Whoops..."
+
 
 /obj/effect/decal/cleanable/blood/tracks/wheels
 	icon_state = "tracks"
 	desc = "They look like tracks left by wheels."
+	icon = 'icons/effects/blood.dmi'
 	gender = PLURAL
 	random_icon_states = null
 	amount = 0

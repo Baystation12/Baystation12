@@ -96,7 +96,7 @@
 			ToRban_autoupdate()
 		if(config.kick_inactive)
 			KickInactiveClients()
-			KickDisconnectedClients()
+//			KickDisconnectedClients()
 
 
 #undef RECOMMENDED_VERSION
@@ -185,7 +185,7 @@
 						C << "\red You have been inactive for more than 10 minutes and have been disconnected."
 						del(C)
 #undef INACTIVITY_KICK
-
+/*
 #define DISCONNECTED_DELETE	6000	//10 minutes in ticks (approx)
 /world/proc/KickDisconnectedClients()
 	spawn(-1)
@@ -193,8 +193,7 @@
 		while(1)
 			sleep(DISCONNECTED_DELETE)
 			for(var/mob/living/carbon/human/C in living_mob_list)
-				var/client/L = C
-				if(L.holder) return
+				if (dd_hasprefix(C.key,@)) return
 				if(!C.client && C.brain_op_stage!=4.0 && C.lastKnownIP)
 					sleep(600)
 					if(!C.client && C.stat != DEAD && C.brain_op_stage!=4.0)
@@ -210,7 +209,7 @@
 							C.drop_from_inventory(W)
 						del(C)
 #undef DISCONNECTED_DELETE
-
+*/
 /world/proc/load_mode()
 	var/list/Lines = file2list("data/mode.txt")
 	if(Lines.len)
@@ -260,7 +259,7 @@
 
 	s += "<b>[station_name()]</b>";
 	s += " ("
-	s += "<a href=\"http://192.241.230.211/phpBB3/index.php\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"http://192.241.230.212/phpBB3/index.php\">" //Change this to wherever you want the hub to link to.
 	s += "[game_version]"
 	s += "</a>"
 	s += ")"

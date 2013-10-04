@@ -72,8 +72,11 @@ var/global/vox_tick = 1
 	affected.implants += I
 	I.part = affected
 
-	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/vox/heist ) ) )
+	if(ticker.mode && ( istype(ticker.mode,/datum/game_mode/vox/heist) ) )
 		var/datum/game_mode/vox/heist/M = ticker.mode
+		M.cortical_stacks += I
+	else if(ticker.mode && ( istype(ticker.mode,/datum/game_mode/vox/trade) ) )
+		var/datum/game_mode/vox/trade/M = ticker.mode
 		M.cortical_stacks += I
 
 	vox_tick++

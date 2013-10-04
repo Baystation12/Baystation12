@@ -132,23 +132,45 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	var/amm = 0.1 * amt
 	var/turf/T = get_turf(src)
 	var/list/obj/effect/decal/cleanable/blood/drip/nums = list()
+
 	var/list/iconL = list("1","2","3","4","5")
 
-	vessel.remove_reagent("blood",amm)
+	if(src.species.bloodflags &BLOOD_GREEN)
+		var/list/obj/effect/decal/cleanable/blood/drip/green/nums2 = list()
+		iconL = list("g1","g2","g3","g4","g5")
 
-	for(var/obj/effect/decal/cleanable/blood/drip/G in T)
-		nums += G
-		iconL.Remove(G.icon_state)
+		vessel.remove_reagent("blood",amm)
 
-	if (nums.len < 5)
-		var/obj/effect/decal/cleanable/blood/drip/this = new(T)
-		this.icon_state = pick(iconL)
-		this.blood_DNA = list()
-		this.blood_DNA[dna.unique_enzymes] = dna.b_type
+		for(var/obj/effect/decal/cleanable/blood/drip/green/G in T)
+			nums2 += G
+			iconL.Remove(G.icon_state)
+
+		if (nums2.len < 5)
+			var/obj/effect/decal/cleanable/blood/drip/green/this = new(T)
+			this.icon_state = pick(iconL)
+			this.blood_DNA = list()
+			this.blood_DNA[dna.unique_enzymes] = dna.b_type
+		else
+			for(var/obj/effect/decal/cleanable/blood/drip/green/G in nums)
+				del G
+			T.add_blood(src)
+
 	else
-		for(var/obj/effect/decal/cleanable/blood/drip/G in nums)
-			del G
-		T.add_blood(src)
+		vessel.remove_reagent("blood",amm)
+
+		for(var/obj/effect/decal/cleanable/blood/drip/G in T)
+			nums += G
+			iconL.Remove(G.icon_state)
+
+		if (nums.len < 5)
+			var/obj/effect/decal/cleanable/blood/drip/this = new(T)
+			this.icon_state = pick(iconL)
+			this.blood_DNA = list()
+			this.blood_DNA[dna.unique_enzymes] = dna.b_type
+		else
+			for(var/obj/effect/decal/cleanable/blood/drip/G in nums)
+				del G
+			T.add_blood(src)
 
 /****************************************************
 				BLOOD TRANSFERS

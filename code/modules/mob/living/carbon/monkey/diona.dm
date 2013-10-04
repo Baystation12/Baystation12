@@ -82,6 +82,10 @@
 	adult.name = src.name
 	adult.real_name = src.real_name
 	adult.ckey = src.ckey
+
+	for (var/obj/item/W in src.contents)
+		src.drop_from_inventory(W)
+
 	del(src)
 
 /mob/living/carbon/monkey/diona/verb/steal_blood()

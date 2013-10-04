@@ -1,3 +1,22 @@
+/proc/EquipRacialItems(mob/living/carbon/human/M)
+	if(M.species.name=="Vox")
+		M.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(M), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
+		M.equip_to_slot_or_del(new /obj/item/clothing/mask/breath/vox(M), slot_wear_mask)
+		M.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(M), slot_back)
+
+		var/sounds = rand(2,10)
+		var/i = 0
+		var/newname = ""
+
+		while(i<=sounds)
+			i++
+			newname += pick(list("ti","hi","ki","ya","ta","ha","ka","ya","chi","cha","kah"))
+
+		M.real_name = capitalize(newname)
+		M.name = M.real_name
+
+	if( M.species.name=="Tajaran" || M.species.name=="Unathi" )
+		M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(M), slot_shoes)
 
 /proc/EquipCustomItems(mob/living/carbon/human/M)
 	testing("\[CustomItem\] Checking for custom items for [M.ckey] ([M.real_name])...")

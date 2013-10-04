@@ -13,11 +13,11 @@
 	..()
 	levelupdate()
 
-/turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir)
+/turf/simulated/proc/AddTracks(var/typepath,var/mob,var/bloodDNA,var/comingdir,var/goingdir)
 	var/obj/effect/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
 	if(!tracks)
 		tracks = new typepath(src)
-	tracks.AddTracks(bloodDNA,comingdir,goingdir)
+	tracks.AddTracks(mob,bloodDNA,comingdir,goingdir,typepath)
 
 /turf/simulated/Entered(atom/A, atom/OL)
 	if(movement_disabled && usr.ckey != movement_disabled_exception)
@@ -46,16 +46,33 @@
 				if(S.track_blood && S.blood_DNA)
 					bloodDNA = S.blood_DNA
 					S.track_blood--
+					src.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,H,bloodDNA,H.dir,0) // Coming
+					var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
+					if(from && istype(from, /turf/simulated))
+						from.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,H,bloodDNA,0,H.dir) // Going
+
+				if(S.track_blood_green && S.blood_DNA)
+					bloodDNA = S.blood_DNA
+					S.track_blood_green--
+					src.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/green,H,bloodDNA,H.dir,0) // Coming
+					var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
+					if(from && istype(from, /turf/simulated))
+						from.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/green,H,bloodDNA,0,H.dir) // Going
 			else
 				if(H.track_blood && H.feet_blood_DNA)
 					bloodDNA = H.feet_blood_DNA
 					H.track_blood--
-
-			if (bloodDNA)
-				src.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,bloodDNA,H.dir,0) // Coming
-				var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
-				if(from && istype(from, /turf/simulated))
-					from.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,bloodDNA,0,H.dir) // Going
+					src.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,H,bloodDNA,H.dir,0) // Coming
+					var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
+					if(from && istype(from, /turf/simulated))
+						from.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints,H,bloodDNA,0,H.dir) // Going
+				if(H.track_blood_green && H.feet_blood_DNA)
+					bloodDNA = H.feet_blood_DNA
+					H.track_blood_green--
+					src.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/green,H,bloodDNA,H.dir,0) // Coming
+					var/turf/simulated/from = get_step(H,reverse_direction(H.dir))
+					if(from && istype(from, /turf/simulated))
+						from.AddTracks(/obj/effect/decal/cleanable/blood/tracks/footprints/green,H,bloodDNA,0,H.dir) // Going
 			bloodDNA = null
 
 		switch (src.wet)
@@ -111,16 +128,34 @@
 		return 1 //we bloodied the floor
 
 	//if there isn't a blood decal already, make one.
-	var/obj/effect/decal/cleanable/blood/newblood = new /obj/effect/decal/cleanable/blood(src)
-	newblood.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-	if (M.virus2.len)
-		newblood.virus2 |= virus_copylist(M.virus2)
+	if(M.species.bloodflags &BLOOD_GREEN)
+		var/obj/effect/decal/cleanable/blood/green/newblood = new /obj/effect/decal/cleanable/blood/green(src)
+		newblood.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+		if (M.virus2.len)
+			newblood.virus2 |= virus_copylist(M.virus2)
+	else
+		var/obj/effect/decal/cleanable/blood/newblood = new /obj/effect/decal/cleanable/blood(src)
+		newblood.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+		if (M.virus2.len)
+			newblood.virus2 |= virus_copylist(M.virus2)
 	return 1 //we bloodied the floor
 
 
 // Only adds blood on the floor -- Skie
 /turf/simulated/proc/add_blood_floor(mob/living/carbon/M as mob)
-	if( istype(M, /mob/living/carbon/monkey) || istype(M, /mob/living/carbon/human))
+	if(istype(M, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		if(H.species.bloodflags &BLOOD_GREEN)
+			var/obj/effect/decal/cleanable/blood/green/this = new /obj/effect/decal/cleanable/blood/green(src)
+			this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+			if (M.virus2.len)
+				this.virus2 = virus_copylist(M.virus2)
+		else
+			var/obj/effect/decal/cleanable/blood/this = new /obj/effect/decal/cleanable/blood(src)
+			this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+			if (M.virus2.len)
+				this.virus2 = virus_copylist(M.virus2)
+	if(istype(M, /mob/living/carbon/monkey))
 		var/obj/effect/decal/cleanable/blood/this = new /obj/effect/decal/cleanable/blood(src)
 		this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 		if (M.virus2.len)

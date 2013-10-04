@@ -285,6 +285,7 @@
 		job_master.AssignRole(src, rank, 1)
 
 		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
+		EquipRacialItems(character)
 		job_master.EquipRank(character, rank, 1)					//equips the human
 		EquipCustomItems(character)
 		character.loc = pick(latejoin)

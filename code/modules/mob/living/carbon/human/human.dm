@@ -1163,7 +1163,10 @@
 	if(blood_DNA[M.dna.unique_enzymes])
 		return 0 //already bloodied with this blood. Cannot add more.
 	blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-	src.update_inv_gloves()	//handles bloody hands overlays and updating
+	if(M.species.bloodflags & BLOOD_GREEN)
+		src.update_inv_gloves(1,1)	//handles bloody hands overlays and updating
+	else
+		src.update_inv_gloves(1,0)
 	return 1 //we applied blood to the item
 
 /mob/living/carbon/human/clean_blood()

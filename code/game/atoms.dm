@@ -454,7 +454,10 @@ its easier to just keep the beam vertical.
 		if(blood_DNA[H.dna.unique_enzymes])
 			return 0 //already bloodied with this blood. Cannot add more.
 		blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
-		H.update_inv_gloves()	//handles bloody hands overlays and updating
+		if(H.species.bloodflags & BLOOD_GREEN)
+			H.update_inv_gloves(1,1)
+		else
+			H.update_inv_gloves(1,0)	//handles bloody hands overlays and updating
 		return 1 //we applied blood to the item
 	return
 

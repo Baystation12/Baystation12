@@ -134,7 +134,7 @@
 				M.Paralyse(4)
 			else
 				M.make_jittery(500)
-			/* //else the mousetraps are useless
+			///else the mousetraps are useless
 			if(istype(M, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
 				if(isobj(H.shoes))
@@ -144,7 +144,7 @@
 					spawn(20)
 						if(thingy)
 							walk(thingy,0)
-			*/
+
 		chassis.use_power(energy_drain)
 		log_message("Honked from [src.name]. HONK!")
 		do_after_cooldown()

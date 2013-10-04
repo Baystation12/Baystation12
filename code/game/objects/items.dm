@@ -2,6 +2,7 @@
 	name = "item"
 	icon = 'icons/obj/items.dmi'
 	var/icon/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
+	var/blood_overlay_color = null
 	var/abstract = 0
 	var/item_state = null
 	var/r_speed = 1.0
@@ -719,7 +720,10 @@
 
 	//if we haven't made our blood_overlay already
 	if( !blood_overlay )
-		generate_blood_overlay()
+		if(M.species.bloodflags & BLOOD_GREEN)
+			generate_blood_overlay(1)
+		else
+			generate_blood_overlay()
 
 	//apply the blood-splatter overlay if it isn't already in there
 	if(!blood_DNA.len)
@@ -732,13 +736,16 @@
 	blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 	return 1 //we applied blood to the item
 
-/obj/item/proc/generate_blood_overlay()
+/obj/item/proc/generate_blood_overlay(blood_overlay_color)
 	if(blood_overlay)
 		return
 
 	var/icon/I = new /icon(icon, icon_state)
 	I.Blend(new /icon('icons/effects/blood.dmi', rgb(255,255,255)),ICON_ADD) //fills the icon_state with white (except where it's transparent)
-	I.Blend(new /icon('icons/effects/blood.dmi', "itemblood"),ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
+	if (blood_overlay_color == 1)
+		I.Blend(new /icon('icons/effects/blood.dmi', "xitemblood"),ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
+	else
+		I.Blend(new /icon('icons/effects/blood.dmi', "itemblood"),ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
 
 	//not sure if this is worth it. It attaches the blood_overlay to every item of the same type if they don't have one already made.
 	for(var/obj/item/A in world)

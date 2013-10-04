@@ -53,7 +53,7 @@ var/list/karma_spenders = list()
 
 /mob/verb/spend_karma(var/mob/M in player_list) // Karma system -- TLE
 	set name = "Award Karma"
-	set desc = "Let the gods know whether someone's been naughty or nice. <One use only>"
+	set desc = "Let the gods know whether someone's been nice. <One use only>"
 	set category = "Special Verbs"
 	if(!istype(M, /mob))
 		usr << "\red That's not a mob. You shouldn't have even been able to specify that. Please inform TLE post haste."
@@ -109,13 +109,19 @@ mob/verb/check_karma()
 		usr << "\red Unable to connect to karma database. Please try again later.<br>"
 		return
 	else
-		var/DBQuery/query = dbcon.NewQuery("SELECT karma FROM karmatotals WHERE byondkey='[src.key]'")
+		var/DBQuery/query = dbcon.NewQuery("SELECT karma, karmaspent FROM karmatotals WHERE byondkey='[src.key]'")
 		query.Execute()
 
-		var/currentkarma
+		var/totalkarma
+		var/karmaspent
 		while(query.NextRow())
-			currentkarma = query.item[1]
-		if(currentkarma)
-			usr << "<b>Your current karma is:</b> [currentkarma]<br>"
+			totalkarma = query.item[1]
+			karmaspent = query.item[2]
+		var/currentkarma = (text2num(totalkarma) - text2num(karmaspent))
+		if(totalkarma)
+			usr << {"<br>You have <b>[currentkarma]</b> available.<br>
+					You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 		else
-			usr << "<b>Your current karma is:</b> 0<br>"
+			usr << "<b>Your total karma is:</b> 0<br>"
+
+

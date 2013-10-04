@@ -383,7 +383,7 @@
 						if (M.lying && (prob(M.getBruteLoss() / 6)))
 							var/turf/location = M.loc
 							if (istype(location, /turf/simulated))
-								location.add_blood(M)
+								location.add_blood()
 
 
 						step(pulling, get_dir(pulling.loc, T))
