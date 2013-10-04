@@ -23,7 +23,7 @@
 
 	var/heat_level_1 = 360  // Heat damage level 1 above this point.
 	var/heat_level_2 = 400  // Heat damage level 2 above this point.
-	var/heat_level_3 = 1000 // Heat damage level 2 above this point.
+	var/heat_level_3 = 1000 // Heat damage level 3 above this point.
 
 	var/darksight = 2
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
@@ -35,6 +35,8 @@
 	var/burn_resist     // Burn damage reduction.
 
 	var/flags = 0       // Various specific features.
+	var/bloodflags=0
+	var/bodyflags=0
 
 /datum/species/human
 	name = "Human"
@@ -53,6 +55,7 @@
 	darksight = 3
 
 	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	bodyflags = FEET_CLAWS
 
 /datum/species/tajaran
 	name = "Tajaran"
@@ -74,6 +77,7 @@
 	primitive = /mob/living/carbon/monkey/tajara
 
 	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	bodyflags = FEET_PADDED
 
 /datum/species/skrell
 	name = "Skrell"
@@ -100,7 +104,7 @@
 	eyes = "vox_eyes_s"
 	breath_type = "nitrogen"
 
-	flags = NO_SCAN
+	flags = NO_SCAN | WHITELISTED
 
 /datum/species/diona
 	name = "Diona"
@@ -122,7 +126,7 @@
 	heat_level_3 = 4000
 
 	flags = NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
-
+	bloodflags = BLOOD_GREEN
 
 /datum/species/skellington // /vg/
 	name = "Skellington"
@@ -143,3 +147,5 @@
 	attack_verb = "slash"
 
 	flags = WHITELISTED | HAS_CHITTIN
+	bloodflags = BLOOD_GREEN
+	bodyflags = FEET_CLAWS
