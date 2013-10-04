@@ -26,7 +26,6 @@
 
 /obj/structure/stool/bed/chair/cart/examine()
 	set src in usr
-	usr << "\icon[src] This [name] contains [reagents.total_volume] unit\s of [reagents]!"
 	switch(health)
 		if(75 to 99)
 			usr << "\blue It appears slightly dented."
@@ -282,6 +281,7 @@
 
 /obj/structure/stool/bed/chair/cart/janicart/examine()
 	..()
+	usr << "\icon[src] This [name] contains [reagents.total_volume] unit\s of [reagents]!"
 	if(mybag)
 		usr << "\A [mybag] is hanging on the [name]."
 
