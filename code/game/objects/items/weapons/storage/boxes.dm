@@ -134,18 +134,19 @@
 
 
 /obj/item/weapon/storage/box/blanks
-	name = "box of blank shells"
+	name = "box of birdshot shells"
 	desc = "It has a picture of a gun and several warning symbols on the front."
+	m_amt = 41000
 
 	New()
 		..()
-		new /obj/item/ammo_casing/shotgun/blank(src)
-		new /obj/item/ammo_casing/shotgun/blank(src)
-		new /obj/item/ammo_casing/shotgun/blank(src)
-		new /obj/item/ammo_casing/shotgun/blank(src)
-		new /obj/item/ammo_casing/shotgun/blank(src)
-		new /obj/item/ammo_casing/shotgun/blank(src)
-		new /obj/item/ammo_casing/shotgun/blank(src)
+		new /obj/item/ammo_casing/shotgun/birdshot(src)
+		new /obj/item/ammo_casing/shotgun/birdshot(src)
+		new /obj/item/ammo_casing/shotgun/birdshot(src)
+		new /obj/item/ammo_casing/shotgun/birdshot(src)
+		new /obj/item/ammo_casing/shotgun/birdshot(src)
+		new /obj/item/ammo_casing/shotgun/birdshot(src)
+		new /obj/item/ammo_casing/shotgun/birdshot(src)
 
 
 

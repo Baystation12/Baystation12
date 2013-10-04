@@ -59,12 +59,12 @@
 	m_amt = 12500
 
 
-/obj/item/ammo_casing/shotgun/blank
+/obj/item/ammo_casing/shotgun/birdshot
 	name = "shotgun shell"
-	desc = "A blank shell."
+	desc = "A shotgun shell full of birdshot."
 	icon_state = "blshell"
-	projectile_type = ""
-	m_amt = 250
+	projectile_type = "/obj/item/projectile/bullet/midbullet"
+	m_amt = 6000
 
 
 /obj/item/ammo_casing/shotgun/beanbag

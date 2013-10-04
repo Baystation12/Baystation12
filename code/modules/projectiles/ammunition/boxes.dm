@@ -117,3 +117,5 @@
 	ammo_type = "/obj/item/ammo_casing/a762"
 	max_ammo = 0
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine
