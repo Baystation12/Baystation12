@@ -479,7 +479,7 @@
 					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
 			dat += "</table>"
 
-		/*
+
 		if(ticker.mode.ninjas.len > 0)
 			dat += "<br><table cellspacing=5><tr><td><B>Ninjas</B></td><td></td><td></td></tr>"
 			for(var/datum/mind/ninja in ticker.mode.ninjas)
@@ -491,7 +491,7 @@
 				else
 					dat += "<tr><td><i>Ninja not found!</i></td></tr>"
 			dat += "</table>"
-		*/
+
 
 		if(ticker.mode.cult.len)
 			dat += "<br><table cellspacing=5><tr><td><B>Cultists</B></td><td></td></tr>"
@@ -501,8 +501,8 @@
 					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
 					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td></tr>"
 			dat += "</table>"
-
-		/*if(istype(ticker.mode, /datum/game_mode/anti_revolution) && ticker.mode:heads.len)	//comment out anti-revolution
+/*
+		if(istype(ticker.mode, /datum/game_mode/anti_revolution) && ticker.mode:heads.len)	//comment out anti-revolution
 			dat += "<br><table cellspacing=5><tr><td><B>Corrupt Heads</B></td><td></td></tr>"
 			for(var/datum/mind/N in ticker.mode:heads)
 				var/mob/M = N.current
