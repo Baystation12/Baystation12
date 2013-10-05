@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: icons\mob\head.dmi;icons\mob\monkey.dmi;icons\mob\suit.dmi;icons\obj\clothing\hats.dmi;icons\obj\clothing\suits.dmi
-LAST_COMPILE_VERSION: 499.1202
-DIR: code code\modules\mob\living\carbon code\WorkInProgress\ZomgPonies icons\obj icons\obj\clothing 
-FILE: icons\obj\clothing\suits.dmi
-LAST_COMPILE_TIME: 1378734876
-AUTO_FILE_DIR: OFF
+WINDOW: code\game\objects\items\contraband.dm;code\game\objects\items\weapons\extinguisher.dm
+LAST_COMPILE_VERSION: 500.1210
+DIR: code code\__HELPERS code\ATMOSPHERICS\components code\ATMOSPHERICS\components\unary code\datums\diseases code\datums\diseases\advance code\datums\diseases\advance\symptoms code\defines\obj code\game code\game\gamemodes\changeling code\game\gamemodes\vox code\game\gamemodes\vox\heist code\game\gamemodes\vox\trade code\game\jobs code\game\jobs\job code\game\machinery\computer code\game\mecha\combat code\game\mecha\equipment code\game\mecha\equipment\tools code\game\mecha\equipment\weapons code\game\objects code\game\objects\effects\decals code\game\objects\effects\decals\Cleanable code\game\objects\effects\spawners code\game\objects\items code\game\objects\items\stacks\sheets code\game\objects\items\weapons code\game\objects\items\weapons\implants code\game\objects\items\weapons\melee code\game\objects\items\weapons\storage code\game\objects\storage code\game\objects\structures\stool_bed_chair_nest code\game\turfs\simulated code\modules code\modules\admin\verbs code\modules\clothing\gloves code\modules\clothing\head code\modules\clothing\shoes code\modules\clothing\spacesuits code\modules\clothing\suits code\modules\clothing\under code\modules\customitems code\modules\events code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\alien code\modules\mob\living\carbon\alien\humanoid code\modules\mob\living\carbon\alien\larva code\modules\mob\living\carbon\alien\special code\modules\mob\living\carbon\brain code\modules\mob\living\carbon\human code\modules\mob\living\carbon\monkey code\modules\mob\living\silicon code\modules\mob\living\silicon\robot code\modules\mob\living\simple_animal code\modules\mob\new_player code\modules\projectiles\ammunition code\modules\projectiles\guns code\modules\projectiles\guns\projectile code\modules\projectiles\projectile code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food code\modules\reagents\reagent_containers\food\snacks code\modules\store code\WorkInProgress code\WorkInProgress\Mini code\WorkInProgress\ZomgPonies icons\effects maps 
+FILE: code\game\objects\items\weapons\extinguisher.dm
+LAST_COMPILE_TIME: 1380905897
+AUTO_FILE_DIR: ON
 */
 // END_INTERNALS
