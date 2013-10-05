@@ -285,9 +285,10 @@
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*cough")
-		for(var/mob/living/carbon/M in view(1,mob))
+		for(var/mob/living/carbon/M in oview(2,mob))
 			if(airborne_can_reach(get_turf(mob), get_turf(M)))
-				for (var/datum/disease2/disease/V in mob.virus2)
+				for (var/key in mob.virus2)
+					var/datum/disease2/disease/V = mob.virus2[key]
 					if(V.spreadtype == "Airborne")
 						infect_virus2(M,V)
 
