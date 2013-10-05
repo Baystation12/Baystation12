@@ -65,6 +65,7 @@
 	)
 	var/longtermpower = 10
 	var/updating_icon = 0
+	var/list/status_overlays
 	//var/debug = 0
 
 /proc/RandomAPCWires()
@@ -178,17 +179,15 @@
 // also add overlays for indicator lights
 
 /obj/machinery/power/apc/update_icon()
-	var/list/status_overlays
-
 	if (isnull(status_overlays)) // if no status overlays list, this is first call
 		status_overlays = new
 		status_overlays.len = 5
-		status_overlays[1] = image('power.dmi', "apcox-[locked]")    // 0=blue 1=red
-		status_overlays[2] = image('power.dmi', "apco3-[charging]") // 0=red, 1=yellow/black 2=green
+		status_overlays[1] = image('icons/obj/power.dmi', "apcox-[locked]")    // 0=blue 1=red
+		status_overlays[2] = image('icons/obj/power.dmi', "apco3-[charging]") // 0=red, 1=yellow/black 2=green
 
-		status_overlays[3] = image('power.dmi', "apco0-[equipment]") // 0=red, 1=green, 2=blue
-		status_overlays[4] = image('power.dmi', "apco1-[lighting]")
-		status_overlays[5] = image('power.dmi', "apco2-[environ]")
+		status_overlays[3] = image('icons/obj/power.dmi', "apco0-[equipment]") // 0=red, 1=green, 2=blue
+		status_overlays[4] = image('icons/obj/power.dmi', "apco1-[lighting]")
+		status_overlays[5] = image('icons/obj/power.dmi', "apco2-[environ]")
 
 	if(opened)
 		icon_state = "[ cell ? "apc2" : "apc1" ]"       // if opened, show cell if it's inserted

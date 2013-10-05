@@ -1,6 +1,7 @@
 // the power cell
 // charge from 0 to 100%
 // fits in APC to provide backup power
+/obj/item/weapon/cell/var/image/overlay_image
 
 /obj/item/weapon/cell/New()
 	..()
@@ -10,14 +11,18 @@
 		updateicon()
 
 /obj/item/weapon/cell/proc/updateicon()
+	if(isnull(src.overlay_image))
+		src.overlay_image = image('icons/obj/power.dmi')
 	overlays.Cut()
 
 	if(charge < 0.01)
 		return
 	else if(charge/maxcharge >=0.995)
-		overlays += image('icons/obj/power.dmi', "cell-o2")
+		src.overlay_image.icon_state = "cell-o2"
+		overlays += src.overlay_image
 	else
-		overlays += image('icons/obj/power.dmi', "cell-o1")
+		src.overlay_image.icon_state = "cell-o1"
+		overlays += src.overlay_image
 
 /obj/item/weapon/cell/proc/percent()		// return % charge of cell
 	return 100.0*charge/maxcharge
