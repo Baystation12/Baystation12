@@ -176,6 +176,66 @@
 
 // update the APC icon to show the three base states
 // also add overlays for indicator lights
+
+/obj/machinery/power/apc/update_icon()
+	var/list/status_overlays
+
+	if (isnull(status_overlays)) // if no status overlays list, this is first call
+		status_overlays = new
+		status_overlays.len = 5
+		status_overlays[1] = image('power.dmi', "apcox-[locked]")    // 0=blue 1=red
+		status_overlays[2] = image('power.dmi', "apco3-[charging]") // 0=red, 1=yellow/black 2=green
+
+		status_overlays[3] = image('power.dmi', "apco0-[equipment]") // 0=red, 1=green, 2=blue
+		status_overlays[4] = image('power.dmi', "apco1-[lighting]")
+		status_overlays[5] = image('power.dmi', "apco2-[environ]")
+
+	if(opened)
+		icon_state = "[ cell ? "apc2" : "apc1" ]"       // if opened, show cell if it's inserted
+		if (overlays.len) overlays.len = 0               // also delete all overlays
+		return
+	else if(emagged)
+		icon_state = "apcemag"
+		if (overlays.len) overlays.len = 0
+		return
+	else if(wiresexposed)
+		icon_state = "apcwires"
+		if (overlays.len) overlays.len = 0
+		return
+	else
+		icon_state = "apc0"
+
+		// if closed, update overlays for channel status
+
+		if (overlays.len) overlays.len = 0
+
+		var/image/buffer
+
+		buffer = status_overlays[1]
+		buffer.icon_state = "apcox-[locked]"
+
+		buffer = status_overlays[2]
+		buffer.icon_state = "apco3-[charging]"
+
+		buffer = status_overlays[3]
+		buffer.icon_state = "apco0-[equipment]"
+
+		buffer = status_overlays[4]
+		buffer.icon_state = "apco1-[lighting]"
+
+		buffer = status_overlays[5]
+		buffer.icon_state = "apco2-[environ]"
+
+		overlays += status_overlays[1]
+		overlays += status_overlays[2]
+
+		if(operating)
+			overlays += status_overlays[3]
+			overlays += status_overlays[4]
+			overlays += status_overlays[5]
+
+
+/*
 /obj/machinery/power/apc/update_icon()
 
 	overlays.Cut()
@@ -201,6 +261,8 @@
 			overlays.Add("apcox-[locked]","apco3-[charging]")	// 0=blue 1=red // 0=red, 1=yellow/black 2=green
 			if(operating)
 				overlays.Add("apco0-[equipment]","apco1-[lighting]","apco2-[environ]")	// 0=red, 1=green, 2=blue
+
+*/
 
 // Used in process so it doesn't update the icon too much
 /obj/machinery/power/apc/proc/queue_icon_update()
