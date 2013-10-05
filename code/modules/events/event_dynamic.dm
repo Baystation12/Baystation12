@@ -52,11 +52,11 @@ var/global/list/possibleEvents = list()
 	possibleEvents[/datum/event/falsealarm] = 300
 	possibleEvents[/datum/event/immovable_rod] = 200
 	possibleEvents[/datum/event/vent_clog] = 300
-	possibleEvents[/datum/event/anomaly/anomaly_bluespace] = 200
+	possibleEvents[/datum/event/anomaly/anomaly_bluespace] = 150
 	possibleEvents[/datum/event/anomaly/anomaly_flux] = 200
 	possibleEvents[/datum/event/anomaly/anomaly_grav] = 200
 	possibleEvents[/datum/event/anomaly/anomaly_pyro] = 200
-	possibleEvents[/datum/event/anomaly/anomaly_vortex] = 200
+	possibleEvents[/datum/event/anomaly/anomaly_vortex] = 150
 
 	possibleEvents[/datum/event/pda_spam] = max(min(25, player_list.len) * 4, 200)
 	possibleEvents[/datum/event/money_lotto] = max(min(5, player_list.len), 50)

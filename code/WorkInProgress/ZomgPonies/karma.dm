@@ -120,7 +120,7 @@ mob/verb/check_karma()
 		var/currentkarma = (text2num(totalkarma) - text2num(karmaspent))
 		if(totalkarma)
 			usr << {"<br>You have <b>[currentkarma]</b> available.<br>
-					You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
+You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 		else
 			usr << "<b>Your total karma is:</b> 0<br>"
 
