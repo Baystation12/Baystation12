@@ -57,6 +57,8 @@ What are the archived variables for?
 	var/tmp/graphic_archived = 0
 	var/tmp/fuel_burnt = 0
 
+	var/reacting = 0
+
 //FOR THE LOVE OF GOD PLEASE USE THIS PROC
 //Call it with negative numbers to remove gases.
 
@@ -207,14 +209,13 @@ What are the archived variables for?
 	//Inputs: None
 	//Outputs: If a fire occured
 
-	var/reacting = 0 //set to 1 if a notable reaction occured (used by pipe_network)
+	 //set to 1 if a notable reaction occured (used by pipe_network)
 
-	if(temperature > FIRE_MINIMUM_TEMPERATURE_TO_EXIST)
-		if(zburn(null) > 0)
-			reacting = 1
+	zburn(null)
 
 	return reacting
 
+/*
 /datum/gas_mixture/proc/fire()
 	//Purpose: Calculating any fire reactions.
 	//Called by: react() (See above)
@@ -223,7 +224,7 @@ What are the archived variables for?
 
 	return zburn(null)
 
-	/*var/energy_released = 0
+	var/energy_released = 0
 	var/old_heat_capacity = heat_capacity()
 
 	var/datum/gas/volatile_fuel/fuel_store = locate(/datum/gas/volatile_fuel) in trace_gases
