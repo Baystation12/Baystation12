@@ -1,5 +1,5 @@
 /datum/disease2/disease
-	var/infectionchance = 10
+	var/infectionchance = 70
 	var/speed = 1
 	var/spreadtype = "Blood" // Can also be "Airborne"
 	var/stage = 1
@@ -25,7 +25,7 @@
 			holder.getrandomeffect()
 		effects += holder
 	uniqueID = rand(0,10000)
-	infectionchance = rand(1,10)
+	infectionchance = rand(60,90)
 	antigen |= text2num(pick(ANTIGENS))
 	antigen |= text2num(pick(ANTIGENS))
 	spreadtype = "Airborne"
