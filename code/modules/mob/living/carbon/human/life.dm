@@ -97,7 +97,7 @@
 
 		handle_pain()
 
-//		handle_medical_side_effects()
+		handle_medical_side_effects()
 
 	handle_stasis_bag()
 
