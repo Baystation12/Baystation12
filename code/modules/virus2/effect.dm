@@ -290,7 +290,7 @@
 	stage = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*cough")
-		for(var/mob/living/carbon/M in view(2,mob))
+		for(var/mob/living/carbon/M in oview(2,mob))
 			mob.spread_disease_to(M)
 
 /datum/disease2/effect/hungry
