@@ -134,10 +134,13 @@
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
-			var/datum/organ/external/E = pick(H.organs)
+			var/organ = pick(list("r_arm","l_arm","r_leg","r_leg"))
+			var/datum/organ/external/E = H.organs_by_name[organ]
 			if (!(E.status & ORGAN_DEAD))
 				E.status |= ORGAN_DEAD
 				H << "<span class='notice'>You can't feel your [E.display_name] anymore...</span>"
+				for (var/datum/organ/external/C in E.children)
+					C.status |= ORGAN_DEAD
 		mob.adjustToxLoss(15*multiplier)
 
 	deactivate(var/mob/living/carbon/mob,var/multiplier)
@@ -145,6 +148,8 @@
 			var/mob/living/carbon/human/H = mob
 			for (var/datum/organ/external/E in H.organs)
 				E.status &= ~ORGAN_DEAD
+				for (var/datum/organ/external/C in E.children)
+					C.status &= ~ORGAN_DEAD
 
 /datum/disease2/effect/immortal
 	name = "Longevity Syndrome"

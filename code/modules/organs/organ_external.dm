@@ -596,7 +596,7 @@
 	return 0
 
 /datum/organ/external/get_icon(gender="")
-	if (status & ORGAN_MUTATED)
+	if (status & ORGAN_MUTATED|ORGAN_DEAD)
 		return new /icon(owner.deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
 	else
 		return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
