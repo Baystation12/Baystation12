@@ -1,7 +1,7 @@
 /datum/disease2/disease
 	var/infectionchance = 70
 	var/speed = 1
-	var/spreadtype = "Blood" // Can also be "Airborne"
+	var/spreadtype = "Contact" // Can also be "Airborne"
 	var/stage = 1
 	var/stageprob = 10
 	var/dead = 0
@@ -28,7 +28,7 @@
 	infectionchance = rand(60,90)
 	antigen |= text2num(pick(ANTIGENS))
 	antigen |= text2num(pick(ANTIGENS))
-	spreadtype = "Airborne"
+	spreadtype = prob(70) ? "Airborne" : "Contact"
 
 /datum/disease2/disease/proc/activate(var/mob/living/carbon/mob)
 	if(dead)
@@ -75,10 +75,10 @@
 	mob.virus2.Remove("[uniqueID]")
 
 /datum/disease2/disease/proc/minormutate()
-	uniqueID = rand(0,10000)
+	//uniqueID = rand(0,10000)
 	var/datum/disease2/effectholder/holder = pick(effects)
 	holder.minormutate()
-	infectionchance = min(10,infectionchance + rand(0,1))
+	infectionchance = min(50,infectionchance + rand(0,10))
 
 /datum/disease2/disease/proc/majormutate()
 	uniqueID = rand(0,10000)
