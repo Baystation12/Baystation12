@@ -10,7 +10,7 @@
 	icon_state = "health"
 	w_class = 2.0
 	item_state = "electronic"
-	flags = FPRINT | TABLEPASS | CONDUCT | USEDELAY
+	flags = FPRINT | TABLEPASS | CONDUCT
 
 
 /obj/item/device/antibody_scanner/attack(mob/living/carbon/M as mob, mob/user as mob)

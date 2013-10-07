@@ -235,11 +235,6 @@
 	if(prob(75))
 		destroy()
 
-
-/obj/structure/table/hand_p(mob/user as mob)
-	return src.attack_paw(user)
-
-
 /obj/structure/table/attack_paw(mob/user)
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
@@ -263,6 +258,8 @@
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		destroy()
 
+/obj/structure/table/attack_tk() // no telehulk sorry
+	return
 
 /obj/structure/table/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -285,7 +282,7 @@
 	return
 
 
-/obj/structure/table/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
 		if (istype(G.affecting, /mob/living))
@@ -478,3 +475,6 @@
 		new /obj/item/weapon/rack_parts(loc)
 		density = 0
 		del(src)
+
+/obj/structure/rack/attack_tk() // no telehulk sorry
+	return

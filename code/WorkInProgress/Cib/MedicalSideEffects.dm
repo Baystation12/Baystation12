@@ -34,7 +34,6 @@
 	for(var/T in L)
 		var/datum/medical_effect/M = new T
 		if (M.manifest(src))
-			log_debug ("[src], tick [life_tick] : [M] manfiested.")
 			src.add_side_effect(M.name)
 
 	// One full cycle(in terms of strength) every 10 minutes
