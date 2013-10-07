@@ -55,7 +55,6 @@
 	var/disabilities = 0	//Carbon
 	var/atom/movable/pulling = null
 	var/next_move = null
-	var/prev_move = null
 	var/monkeyizing = null	//Carbon
 	var/other = 0.0
 	var/hand = null
@@ -116,7 +115,6 @@
 	var/a_intent = "help"//Living
 	var/m_int = null//Living
 	var/m_intent = "run"//Living
-	var/lastDblClick = 0
 	var/lastKnownIP = null
 	var/obj/structure/stool/bed/buckled = null//Living
 	var/obj/item/l_hand = null//Living
@@ -216,3 +214,5 @@
 	var/can_stand = 1 //Whether this mob have ability to stand
 
 	var/immune_to_ssd = 0
+
+	var/turf/listed_turf = null  //the current turf being examined in the stat panel

@@ -64,7 +64,8 @@
 			flags |= OPENCONTAINER
 		update_icon()
 
-	afterattack(obj/target, mob/user , flag)
+	afterattack(obj/target, mob/user, proximity)
+		if(!proximity) return
 		if (!is_open_container())
 			return
 
