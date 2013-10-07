@@ -214,3 +214,5 @@
 	var/can_stand = 1 //Whether this mob have ability to stand
 
 	var/immune_to_ssd = 0
+
+	var/turf/listed_turf = null  //the current turf being examined in the stat panel
