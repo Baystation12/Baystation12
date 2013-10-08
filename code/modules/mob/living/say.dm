@@ -88,7 +88,6 @@ var/list/department_radio_keys = list(
 	*/
 
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
-	message = capitalize(message)
 
 	/*
 		Sanity checking and speech failure.
@@ -173,6 +172,8 @@ var/list/department_radio_keys = list(
 
 	if(src.stunned > 2 || (traumatic_shock > 61 && prob(50)))
 		message_mode = null //Stunned people shouldn't be able to physically turn on their radio/hold down the button to speak into it
+
+	message = capitalize(message)
 
 	if (!message)
 		return
