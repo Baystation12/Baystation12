@@ -134,13 +134,8 @@
 	density = 1
 	layer = 2.0
 	var/obj/structure/morgue/connected = null
-	anchored = 1.0
-
-/obj/structure/m_tray/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if (istype(mover, /obj/item/weapon/dummy))
-		return 1
-	else
-		return ..()
+	anchored = 1
+	throwpass = 1
 
 /obj/structure/m_tray/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
@@ -353,13 +348,8 @@
 	density = 1
 	layer = 2.0
 	var/obj/structure/crematorium/connected = null
-	anchored = 1.0
-
-/obj/structure/c_tray/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if (istype(mover, /obj/item/weapon/dummy))
-		return 1
-	else
-		return ..()
+	anchored = 1
+	throwpass = 1
 
 /obj/structure/c_tray/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
