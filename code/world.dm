@@ -173,17 +173,27 @@
 
 #define INACTIVITY_KICK	6000	//10 minutes in ticks (approx.)
 /world/proc/KickInactiveClients()
-	spawn(-1)
-		set background = 1
-		while(1)
-			sleep(INACTIVITY_KICK)
-			for(var/client/C in clients)
-				if(C.holder) return
-				if(C.is_afk(INACTIVITY_KICK))
-					if(!istype(C.mob, /mob/dead))
-						log_access("AFK: [key_name(C)]")
-						C << "\red You have been inactive for more than 10 minutes and have been disconnected."
-						del(C)
+	var/tmp/sleep_check = 0 // buffer for checking elapsed ticks
+	var/tmp/work_length = 2 // number of ticks to run before yielding cpu
+	var/tmp/sleep_length = 5 // number of ticks to yield
+	var/waiting=1
+
+	sleep_check = world.timeofday
+
+	while(waiting)
+		waiting = 0
+		sleep(INACTIVITY_KICK)
+		for(var/client/C in clients)
+			if(C.holder) return
+			if(C.is_afk(INACTIVITY_KICK))
+				if(!istype(C.mob, /mob/dead))
+					log_access("AFK: [key_name(C)]")
+					C << "\red You have been inactive for more than 10 minutes and have been disconnected."
+					del(C)
+		if ( ((world.timeofday - sleep_check) > work_length) || ((world.timeofday - sleep_check) < 0) )
+			sleep(sleep_length)
+			sleep_check = world.timeofday
+		waiting++
 #undef INACTIVITY_KICK
 /*
 #define DISCONNECTED_DELETE	6000	//10 minutes in ticks (approx)

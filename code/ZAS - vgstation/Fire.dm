@@ -67,10 +67,10 @@ obj
 			var/turf/simulated/S = loc
 
 			if(!istype(S))
-				del src
+				src.gc_del()
 
 			if(!S.zone)
-				del src
+				src.gc_del()
 
 			var/datum/gas_mixture/air_contents = S.return_air()
 			//get liquid fuels on the ground.
@@ -90,7 +90,7 @@ obj
 
 			//check if there is something to combust
 			if(!air_contents.check_recombustability(liquid))
-				//del src
+				//src.gc_del()
 				RemoveFire()
 
 			//get a firelevel and set the icon
@@ -159,7 +159,7 @@ obj
 			..()
 
 			if(!istype(loc, /turf))
-				del src
+				src.gc_del()
 
 			dir = pick(cardinal)
 			SetLuminosity(3)
@@ -180,6 +180,10 @@ obj
 			if (istype(loc, /turf/simulated))
 				SetLuminosity(0)
 				loc = null
+			air_master.active_hotspots.Remove(src)
+
+		proc/gc_del()
+			loc = null
 			air_master.active_hotspots.Remove(src)
 
 

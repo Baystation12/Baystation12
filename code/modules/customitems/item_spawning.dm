@@ -3,6 +3,10 @@
 		M.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(M), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
 		M.equip_to_slot_or_del(new /obj/item/clothing/mask/breath/vox(M), slot_wear_mask)
 		M.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(M), slot_back)
+		M << "\blue You are now running on nitrogen internals from the [M.back] in your suit storage. Your species finds oxygen toxic, so you must breathe nitrogen only."
+		M.internal = M.back
+		if (M.internals)
+			M.internals.icon_state = "internal1"
 
 		var/sounds = rand(2,10)
 		var/i = 0
