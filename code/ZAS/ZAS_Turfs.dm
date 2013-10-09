@@ -125,7 +125,6 @@
 		return ..()
 
 /turf/simulated/proc/update_air_properties()
-	var/air_directions_archived = air_check_directions
 	air_check_directions = 0
 
 	for(var/direction in cardinal)
@@ -165,14 +164,12 @@
 			var/turf/T = get_step(src,direction)
 			if(!istype(T))
 				continue
-
 			//I can connect to air in this direction
-			if(air_check_directions & direction && !(air_directions_archived & direction))
-
+			if(air_check_directions & direction)
 				ZConnect(src,T)
 
 			//Something like a wall was built, changing the geometry.
-			else if(!(air_check_directions & direction) && air_directions_archived & direction)
+			else if(!(air_check_directions & direction))
 				var/turf/NT = get_step(T, direction)
 
 				//If the tile is in our own zone, and we cannot connect to it, better rebuild.
