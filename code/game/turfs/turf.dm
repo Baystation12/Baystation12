@@ -214,6 +214,13 @@
 	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
 
 	if(ispath(N, /turf/simulated/floor))
+		//if the old turf had a zone, connect the new turf to it as well - Cael
+		//Adjusted by SkyMarshal 5/10/13 - The air master will handle the addition of the new turf.
+		if(zone)
+			zone.RemoveTurf(src)
+			if(!zone.CheckStatus())
+				zone.SetStatus(ZONE_ACTIVE)
+
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 		//W.Assimilate_Air()
 
@@ -225,13 +232,6 @@
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
 
-		//if the old turf had a zone, connect the new turf to it as well - Cael
-		//Adjusted by SkyMarshal 5/10/13 - The air master will handle the addition of the new turf.
-		if(zone)
-			zone.RemoveTurf(src)
-			if(!zone.CheckStatus())
-				zone.SetStatus(ZONE_ACTIVE)
-
 		if(air_master)
 			air_master.AddTurfToUpdate(src)
 
@@ -239,16 +239,16 @@
 		return W
 
 	else
+		if(zone)
+			zone.RemoveTurf(src)
+			if(!zone.CheckStatus())
+				zone.SetStatus(ZONE_ACTIVE)
+
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
 		W.lighting_lumcount += old_lumcount
 		if(old_lumcount != W.lighting_lumcount)
 			W.lighting_changed = 1
 			lighting_controller.changed_turfs += W
-
-		if(zone)
-			zone.RemoveTurf(src)
-			if(!zone.CheckStatus())
-				zone.SetStatus(ZONE_ACTIVE)
 
 		if(air_master)
 			air_master.AddTurfToUpdate(src)
