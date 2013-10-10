@@ -191,6 +191,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define FPRINT		256		// takes a fingerprint
 #define ON_BORDER	512		// item has priority to check when entering or leaving
 #define NOBLUDGEON  4  // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
+#define NOBLOODY	2048	// used to items if they don't want to get a blood overlay
 
 #define GLASSESCOVERSEYES	1024
 #define MASKCOVERSEYES		1024		// get rid of some of the other retardation in these flags
@@ -736,3 +737,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
 #define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
+
+//Flags for zone sleeping
+#define ZONE_ACTIVE 1
+#define ZONE_SLEEPING 0
