@@ -252,6 +252,8 @@
 			user.drop_from_inventory(src)
 			del(src)
 
+// vials are defined twice, what?
+/*
 /obj/item/weapon/reagent_containers/glass/beaker/vial
 	name = "vial"
 	desc = "Small glass vial. Looks fragile."
@@ -260,7 +262,7 @@
 	volume = 15
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(1,5,15)
-	flags = FPRINT | TABLEPASS | OPENCONTAINER
+	flags = FPRINT | TABLEPASS | OPENCONTAINER */
 
 /*
 /obj/item/weapon/reagent_containers/glass/blender_jug

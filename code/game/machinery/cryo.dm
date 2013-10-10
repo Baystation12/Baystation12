@@ -1,5 +1,5 @@
 /obj/machinery/atmospherics/unary/cryo_cell
-	name = "Cryo Cell"
+	name = "cryo cell"
 	icon = 'icons/obj/cryogenics.dmi'
 	icon_state = "cell-off"
 	density = 1
@@ -12,8 +12,6 @@
 	var/beaker = null
 
 	var/current_heat_capacity = 50
-
-
 
 /obj/machinery/atmospherics/unary/cryo_cell/New()
 	..()
@@ -64,18 +62,33 @@
 /obj/machinery/atmospherics/unary/cryo_cell/attack_hand(mob/user)
 	ui_interact(user)
 
+ /**
+  * The ui_interact proc is used to open and update Nano UIs
+  * If ui_interact is not used then the UI will not update correctly
+  * ui_interact is currently defined for /atom/movable
+  *
+  * @param user /mob The mob who is interacting with this ui
+  * @param ui_key string A string key to use for this ui. Allows for multiple unique uis on one obj/mob (defaut value "main")
+  *
+  * @return nothing
+  */
 /obj/machinery/atmospherics/unary/cryo_cell/ui_interact(mob/user, ui_key = "main")
-	
-	var/data[0]
-	data["isOperating"] = on
 
+	if(user == occupant || user.stat)
+		return
+
+	// this is the data which will be sent to the ui
+	var/data[0]	
+	data["isOperating"] = on
 	data["hasOccupant"] = occupant ? 1 : 0
-	
+
 	var/occupantData[0]
 	if (!occupant)
 		occupantData["name"] = null
 		occupantData["stat"] = null
 		occupantData["health"] = null
+		occupantData["maxHealth"] = null
+		occupantData["minHealth"] = null
 		occupantData["bruteLoss"] = null
 		occupantData["oxyLoss"] = null
 		occupantData["toxLoss"] = null
@@ -84,12 +97,14 @@
 	else
 		occupantData["name"] = occupant.name
 		occupantData["stat"] = occupant.stat
-		occupantData["health"] = round(occupant.health)
-		occupantData["bruteLoss"] = round(occupant.getBruteLoss())
-		occupantData["oxyLoss"] = round(occupant.getOxyLoss())
-		occupantData["toxLoss"] = round(occupant.getToxLoss())
-		occupantData["fireLoss"] = round(occupant.getFireLoss())
-		occupantData["bodyTemperature"] = round(occupant.bodytemperature)
+		occupantData["health"] = occupant.health
+		occupantData["maxHealth"] = occupant.maxHealth
+		occupantData["minHealth"] = config.health_threshold_dead
+		occupantData["bruteLoss"] = occupant.getBruteLoss()
+		occupantData["oxyLoss"] = occupant.getOxyLoss()
+		occupantData["toxLoss"] = occupant.getToxLoss()
+		occupantData["fireLoss"] = occupant.getFireLoss()
+		occupantData["bodyTemperature"] = occupant.bodytemperature
 	data["occupant"] = occupantData;
 
 	data["cellTemperature"] = round(air_contents.temperature)
@@ -103,13 +118,12 @@
 	var beakerContents[0]
 	if(beaker && beaker:reagents && beaker:reagents.reagent_list.len)
 		for(var/datum/reagent/R in beaker:reagents.reagent_list)
-			beakerContents.Add(list(list("name" = R.name, "volume" = R.volume))) // list in a list because Byond merges the first list... 
+			beakerContents.Add(list(list("name" = R.name, "volume" = R.volume))) // list in a list because Byond merges the first list...
 	data["beakerContents"] = beakerContents
-	
-	//user << list2json(data)
 
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
-	if (!ui)
+	if (!ui) 
+		// the ui does not exist, so we'll create a new one
 		ui = new(user, src, ui_key, "cryo.tmpl", "Cryo Cell Control System", 520, 410)
 		// When the UI is first opened this is the data it will use
 		ui.set_initial_data(data)
@@ -123,19 +137,33 @@
 	//user.set_machine(src)
 
 /obj/machinery/atmospherics/unary/cryo_cell/Topic(href, href_list)
-	if ((get_dist(src, usr) <= 1) || istype(usr, /mob/living/silicon/ai))
-		if(href_list["start"])
-			on = !on
-			update_icon()
-		if(href_list["eject"])
-			if (beaker)
-				var/obj/item/weapon/reagent_containers/glass/B = beaker
-				B.loc = get_step(loc, SOUTH)
-				beaker = null		
+	if(usr == occupant)
+		return 0 // don't update UIs attached to this object
 
-		nanomanager.update_uis(src) // update all UIs attached to this object
-		add_fingerprint(usr)
-		return
+	if(..())
+		return 0 // don't update UIs attached to this object
+
+	if(href_list["switchOn"])
+		on = 1
+		update_icon()
+		
+	if(href_list["switchOff"])
+		on = 0
+		update_icon()
+
+	if(href_list["ejectBeaker"])
+		if(beaker)
+			var/obj/item/weapon/reagent_containers/glass/B = beaker
+			B.loc = get_step(loc, SOUTH)
+			beaker = null
+			
+	if(href_list["ejectOccupant"])
+		if(!occupant || isslime(usr) || ispAI(usr))
+			return 0 // don't update UIs attached to this object
+		go_out()
+	
+	add_fingerprint(usr)
+	return 1 // update UIs attached to this object
 
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
