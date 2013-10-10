@@ -43,6 +43,8 @@
 
 /turf/simulated/var/tmp/air_check_directions = 0 //Do not modify this, just add turf to air_master.tiles_to_update
 
+/turf/simulated/var/tmp/unsim_check_directions = 0 //See above.
+
 /turf/simulated/var/tmp/obj/fire/active_hotspot
 
 /turf/simulated/proc/update_visuals()
@@ -125,11 +127,19 @@
 		return ..()
 
 /turf/simulated/proc/update_air_properties()
+	var/air_directions_archived = air_check_directions
 	air_check_directions = 0
 
+	var/unsim_directions_archived = unsim_check_directions
+	unsim_check_directions = 0
+
 	for(var/direction in cardinal)
-		if(ZAirPass(get_step(src,direction)))
-			air_check_directions |= direction
+		var/turf/check_turf = get_step(src, direction)
+		if(ZAirPass(check_turf))
+			if(istype(check_turf, /turf/simulated))
+				air_check_directions |= direction
+			else if(istype(check_turf, /turf/space) || istype(check_turf, /turf/unsimulated))
+				unsim_check_directions |= direction
 
 	if(!zone && !blocks_air) //No zone, but not a wall.
 		for(var/direction in DoorDirections) //Check door directions first.
@@ -164,12 +174,15 @@
 			var/turf/T = get_step(src,direction)
 			if(!istype(T))
 				continue
-			//I can connect to air in this direction
-			if(air_check_directions & direction)
+
+			//I can connect to air or space in this direction
+			if((air_check_directions & direction && !(air_directions_archived & direction)) || \
+				(unsim_check_directions & direction && !(unsim_directions_archived & direction)))
 				ZConnect(src,T)
 
 			//Something like a wall was built, changing the geometry.
-			else if(!(air_check_directions & direction))
+			else if((!(air_check_directions & direction) && air_directions_archived & direction) || \
+					(!(unsim_check_directions & direction) && unsim_directions_archived & direction))
 				var/turf/NT = get_step(T, direction)
 
 				//If the tile is in our own zone, and we cannot connect to it, better rebuild.
