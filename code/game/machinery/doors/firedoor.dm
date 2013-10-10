@@ -70,6 +70,7 @@
 	power_change()
 		if(powered(ENVIRON))
 			stat &= ~NOPOWER
+			latetoggle()
 		else
 			stat |= NOPOWER
 		return
@@ -197,19 +198,27 @@
 					nextstate = CLOSED
 
 
-	process()
+	latetoggle()
 		if(operating || stat & NOPOWER || !nextstate)
 			return
 		switch(nextstate)
 			if(OPEN)
-				spawn()
-					open()
+				nextstate = null
+				open()
 			if(CLOSED)
-				spawn()
-					close()
-		nextstate = null
+				nextstate = null
+				close()
 		return
 
+	open()
+		..()
+		latetoggle()
+		return
+
+	close()
+		..()
+		latetoggle()
+		return
 
 	do_animate(animation)
 		switch(animation)
