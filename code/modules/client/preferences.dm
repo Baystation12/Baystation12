@@ -69,6 +69,7 @@ datum/preferences
 	var/language = "None"				//Secondary language
 
 		//Mob preview
+	var/icon/preview_icon = null
 	var/icon/preview_icon_front = null
 	var/icon/preview_icon_side = null
 

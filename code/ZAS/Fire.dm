@@ -80,7 +80,7 @@ obj
 			if(firelevel > vsc.IgnitionLevel)
 
 				var/turf/simulated/floor/S = loc
-				if(!S.zone) src.gc_del() //Cannot exist where zones are broken.
+				if(!S.zone) del src //Cannot exist where zones are broken.
 
 				if(istype(S))
 					var
@@ -139,17 +139,17 @@ obj
 
 						else
 
-							src.gc_del()
+							del src
 
 
 						S.assume_air(flow) //Then put it back where you found it.
 
 					else
-						src.gc_del()
+						del src
 				else
-					src.gc_del()
+					del src
 			else
-				src.gc_del()
+				del src
 
 
 			for(var/mob/living/carbon/human/M in loc)
@@ -160,16 +160,12 @@ obj
 			..()
 
 			if(!istype(loc, /turf))
-				src.gc_del()
+				del src
 
 			dir = pick(cardinal)
 			//sd_SetLuminosity(3,2,0)
 			firelevel = fl
 			air_master.active_hotspots.Add(src)
-
-		proc/gc_del()
-			loc = null
-			air_master.active_hotspots.Remove(src)
 
 		Del()
 			if (istype(loc, /turf/simulated))

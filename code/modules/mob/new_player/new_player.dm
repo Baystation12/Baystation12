@@ -119,12 +119,16 @@
 				var/obj/O = locate("landmark*Observer-Start")
 				src << "\blue Now teleporting."
 				observer.loc = O.loc
+
+				client.prefs.update_preview_icon()
+				observer.icon = client.prefs.preview_icon
+				observer.alpha = 127
+
 				if(client.prefs.be_random_name)
 					client.prefs.real_name = random_name(client.prefs.gender)
 				observer.real_name = client.prefs.real_name
 				observer.name = observer.real_name
 				observer.key = key
-
 				del(src)
 				return 1
 
