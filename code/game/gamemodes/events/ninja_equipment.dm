@@ -520,7 +520,10 @@ ________________________________________________________________________________
 			if(damage>1)//So they don't spam it when energy is a factor.
 				spark_system.start()//SPARKS THERE SHALL BE SPARKS
 				U.electrocute_act(damage, src,0.1,1)//The last argument is a safety for the human proc that checks for gloves.
-				cell.charge -= damage
+				if(cell.charge < damage)
+					cell.use(cell.charge)
+				else
+					cell.use(damage)
 			else
 				A << "\red <b>ERROR</b>: \black Not enough energy remaining."
 

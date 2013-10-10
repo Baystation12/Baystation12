@@ -76,7 +76,7 @@
 		R.reaction(M, INGEST)
 		if(M.reagents)
 			var/trans = R.trans_to(M, amount_per_transfer_from_this)
-			user << "\blue [trans] units injected.  [R.total_volume] units remaining."
+			user << "\blue [trans] units injected. [R.total_volume] units remaining."
 	return
 
 /obj/item/weapon/reagent_containers/borghypo/attack_self(mob/user as mob)
