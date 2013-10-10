@@ -21,6 +21,7 @@
 	throwpass = 1	//You can throw objects over this, despite it's density.")
 	var/parts = /obj/item/weapon/table_parts
 	var/flipped = 0
+	var/health = 100
 
 /obj/structure/table/proc/update_adjacent()
 	for(var/direction in list(1,2,4,8,5,6,9,10))
@@ -284,6 +285,17 @@
 
 /obj/structure/table/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
+	if(istype(mover,/obj/item/projectile))
+		var/obj/item/projectile/P = mover
+		if(flipped & prob(20))
+			health -= P.damage
+			if (health > 0)
+				visible_message("<span class='warning'>[P] hits \the [src]!</span>")
+				return 0
+			else
+				visible_message("<span class='warning'>[src] breaks down!</span>")
+				destroy()
+				return 1
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
 	if (flipped)
@@ -460,7 +472,7 @@
 	desc = "Do not apply fire to this. Rumour says it burns easily."
 	icon_state = "wood_table"
 	parts = /obj/item/weapon/table_parts/wood
-
+	health = 50
 /*
  * Reinforced tables
  */
