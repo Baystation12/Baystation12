@@ -17,7 +17,8 @@ var/global/list/cached_icons = list()
 	flags = FPRINT | OPENCONTAINER
 	var/paint_type = ""
 
-	afterattack(turf/simulated/target, mob/user , flag)
+	afterattack(turf/simulated/target, mob/user, proximity)
+		if(!proximity) return
 		if(istype(target) && reagents.total_volume > 5)
 			for(var/mob/O in viewers(user))
 				O.show_message("\red \The [target] has been splashed with something by [user]!", 1)
@@ -139,7 +140,8 @@ var/global/list/cached_icons = list()
 		return
 
 
-/obj/item/weapon/paint/afterattack(turf/target, mob/user as mob)
+/obj/item/weapon/paint/afterattack(turf/target, mob/user as mob, proximity)
+	if(!proximity) return
 	if(!istype(target) || istype(target, /turf/space))
 		return
 	var/ind = "[initial(target.icon)][color]"

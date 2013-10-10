@@ -46,6 +46,10 @@ datum/controller/vote
 
 				voting.Cut()
 
+	proc/autotransfer()
+		initiate_vote("crew_transfer","the server")
+
+
 	proc/reset()
 		initiator = null
 		time_remaining = 0

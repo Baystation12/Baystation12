@@ -1,7 +1,7 @@
 /obj/item/device/chameleon
 	name = "chameleon-projector"
 	icon_state = "shield0"
-	flags = FPRINT | TABLEPASS| CONDUCT | USEDELAY
+	flags = FPRINT | TABLEPASS| CONDUCT
 	slot_flags = SLOT_BELT
 	item_state = "electronic"
 	throwforce = 5.0
@@ -19,7 +19,8 @@
 	attack_self()
 		toggle()
 
-	afterattack(atom/target, mob/user , flag)
+	afterattack(atom/target, mob/user, proximity)
+		if(!proximity) return
 		if(istype(target,/obj/item))
 			playsound(src, 'sound/weapons/flash.ogg', 100, 1, 1)
 			user << "\blue Scanned [target]."

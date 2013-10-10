@@ -133,24 +133,6 @@
 		updatehealth()
 	return
 
-
-/mob/living/carbon/alien/humanoid/hand_p(mob/M as mob)
-	if (!ticker)
-		M << "You cannot attack people before the game has started."
-		return
-
-	if (M.a_intent == "hurt")
-		if (istype(M.wear_mask, /obj/item/clothing/mask/muzzle))
-			return
-		if (health > 0)
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message(text("\red <B>[M.name] has bit []!</B>", src), 1)
-			adjustBruteLoss(rand(1, 3))
-
-			updatehealth()
-	return
-
 /mob/living/carbon/alien/humanoid/attack_paw(mob/living/carbon/monkey/M as mob)
 	if(!ismonkey(M))	return//Fix for aliens receiving double messages when attacking other aliens.
 
@@ -305,9 +287,9 @@
 						return
 
 		if ("grab")
-			if (M == src)
+			if (M == src || anchored)
 				return
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, M, src)
+			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, src)
 
 			M.put_in_active_hand(G)
 
