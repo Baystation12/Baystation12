@@ -107,6 +107,7 @@
 	//Must be between 0 and 1. Values closer to 1 equalize temperature faster
 	//Should not exceed 0.4 else strange heat flow occur
 
+/*
 #define FIRE_MINIMUM_TEMPERATURE_TO_SPREAD	150+T0C
 #define FIRE_MINIMUM_TEMPERATURE_TO_EXIST	100+T0C
 #define FIRE_SPREAD_RADIOSITY_SCALE		0.85
@@ -114,7 +115,7 @@
 #define FIRE_PLASMA_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt plasma into the tile
 #define FIRE_GROWTH_RATE			40000 //For small fires
 
-//#define WATER_BOIL_TEMP 393
+#define WATER_BOIL_TEMP 393 */
 
 // Fire Damage
 #define CARBON_LIFEFORM_FIRE_RESISTANCE 200+T0C
@@ -132,7 +133,8 @@
 #define T20C 293.15					// 20degC
 #define TCMB 2.7					// -270.3degC
 
-var/turf/space/Space_Tile = locate(/turf/space) // A space tile to reference when atmos wants to remove excess heat.
+//Used to be used by FEA
+//var/turf/space/Space_Tile = locate(/turf/space) // A space tile to reference when atmos wants to remove excess heat.
 
 #define TANK_LEAK_PRESSURE		(30.*ONE_ATMOSPHERE)	// Tank starts leaking
 #define TANK_RUPTURE_PRESSURE	(40.*ONE_ATMOSPHERE) // Tank spills all contents into atmosphere
@@ -188,6 +190,8 @@ var/MAX_EXPLOSION_RANGE = 14
 #define CONDUCT		64		// conducts electricity (metal etc.)
 #define FPRINT		256		// takes a fingerprint
 #define ON_BORDER	512		// item has priority to check when entering or leaving
+#define NOBLUDGEON  4  // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
+#define NOBLOODY	2048	// used to items if they don't want to get a blood overlay
 
 #define GLASSESCOVERSEYES	1024
 #define MASKCOVERSEYES		1024		// get rid of some of the other retardation in these flags
@@ -452,6 +456,13 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define XENO_HOST	32768	//Tracks whether we're gonna be a baby alien's mummy.
 
 var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons/Taser.ogg','sound/weapons/armbomb.ogg','sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg','sound/voice/hiss5.ogg','sound/voice/hiss6.ogg','sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg','sound/items/Welder.ogg','sound/items/Welder2.ogg','sound/machines/airlock.ogg','sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
+
+//Grab levels
+#define GRAB_PASSIVE	1
+#define GRAB_AGGRESSIVE	2
+#define GRAB_NECK		3
+#define GRAB_UPGRADING	4
+#define GRAB_KILL		5
 
 //Security levels
 #define SEC_LEVEL_GREEN	0
@@ -726,3 +737,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
 #define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
+
+//Flags for zone sleeping
+#define ZONE_ACTIVE 1
+#define ZONE_SLEEPING 0

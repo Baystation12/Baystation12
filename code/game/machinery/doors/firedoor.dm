@@ -170,18 +170,25 @@
 
 
 
-/obj/machinery/door/firedoor/process()
+/obj/machinery/door/firedoor/proc/latetoggle()
 	if(operating || stat & NOPOWER || !nextstate)
 		return
 	switch(nextstate)
 		if(OPEN)
-			spawn()
-				open()
+			nextstate = null
+			open()
 		if(CLOSED)
-			spawn()
-				close()
-	nextstate = null
+			nextstate = null
+			close()
 	return
+
+/obj/machinery/door/firedoor/close()
+	latetoggle()
+	return ..()
+
+/obj/machinery/door/firedoor/open()
+	latetoggle()
+	return ..()
 
 
 /obj/machinery/door/firedoor/do_animate(animation)

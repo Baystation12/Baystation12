@@ -59,6 +59,10 @@
 				apply_effect(4, WEAKEN, armor_block)
 
 			return
+	else
+		if(istype(M,/mob/living/carbon))
+//			log_debug("No gloves, [M] is truing to infect [src]")
+			M.spread_disease_to(src, "Contact")
 
 
 	switch(M.a_intent)
@@ -87,18 +91,23 @@
 			return 1
 
 		if("grab")
-			if(M == src)	return 0
-			if(w_uniform)	w_uniform.add_fingerprint(M)
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, M, src)
+			if(M == src || anchored)
+				return 0
+			if(w_uniform)
+				w_uniform.add_fingerprint(M)
 
+			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, src)
+			if(buckled)
+				M << "<span class='notice'>You cannot grab [src], \he is buckled in!</span>"
+			if(!G)	//the grab will delete itself in New if affecting is anchored
+				return
 			M.put_in_active_hand(G)
-
 			grabbed_by += G
 			G.synch()
 			LAssailant = M
 
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			visible_message("\red [M] has grabbed [src] passively!")
+			visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
 			return 1
 
 		if("hurt")

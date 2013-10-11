@@ -82,6 +82,9 @@
 	adult.name = src.name
 	adult.real_name = src.real_name
 	adult.ckey = src.ckey
+
+	for (var/obj/item/W in src.contents)
+		src.drop_from_inventory(W)
 	del(src)
 
 /mob/living/carbon/monkey/diona/verb/steal_blood()
@@ -90,7 +93,7 @@
 	set desc = "Take a blood sample from a suitable donor."
 
 	var/list/choices = list()
-	for(var/mob/living/C in view(1,src))
+	for(var/mob/living/carbon/C in view(1,src))
 		if(C.real_name != real_name)
 			choices += C
 

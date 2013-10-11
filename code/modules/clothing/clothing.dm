@@ -141,6 +141,9 @@ BLIND     // can't see anything
 			cell.reliability -= 10 / severity
 	..()
 
+// Called just before an attack_hand(), in mob/UnarmedAttack()
+/obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
+	return 0 // return 1 to cancel attack_hand()
 
 //Head
 /obj/item/clothing/head
@@ -310,9 +313,6 @@ BLIND     // can't see anything
 	if(usr.stat) return
 
 	if(hastie)
-		usr.put_in_hands(hastie)
-		hastie = null
-
 		if (istype(hastie,/obj/item/clothing/tie/holster))
 			verbs -= /obj/item/clothing/under/proc/holster
 
@@ -320,7 +320,10 @@ BLIND     // can't see anything
 			verbs -= /obj/item/clothing/under/proc/storage
 			var/obj/item/clothing/tie/storage/W = hastie
 			if (W.hold)
-				W.hold.loc = hastie
+				W.hold.close(usr)
+
+		usr.put_in_hands(hastie)
+		hastie = null
 
 		if(istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc

@@ -43,7 +43,7 @@
 	icon_state = "crossbow"
 	item_state = "crossbow-solid"
 	w_class = 5.0
-	flags =  FPRINT | TABLEPASS | CONDUCT |  USEDELAY
+	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT | SLOT_BACK
 
 	w_class = 3.0

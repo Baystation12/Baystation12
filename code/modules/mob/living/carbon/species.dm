@@ -39,6 +39,7 @@
 
 /datum/species/human
 	name = "Human"
+	language = "Sol Common"
 	primitive = /mob/living/carbon/monkey
 
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR

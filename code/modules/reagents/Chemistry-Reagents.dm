@@ -116,7 +116,7 @@ datum
 					if(method == TOUCH)
 						infect_virus2(M,self.data["virus2"])
 					else
-						infect_virus2(M,self.data["virus2"],1)
+						infect_virus2(M,self.data["virus2"],1) //injected, force infection!
 				if(self.data && self.data["antibodies"] && istype(M, /mob/living/carbon))//... and curing
 					var/mob/living/carbon/C = M
 					C.antibodies |= self.data["antibodies"]

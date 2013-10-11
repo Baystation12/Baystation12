@@ -326,6 +326,9 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 		archived_air.copy_from(air)
 
 
+/zone/proc/CheckStatus()
+	return status
+
 /zone/proc/assume_air(var/datum/gas_mixture/giver)
 	if(status == ZONE_ACTIVE)
 		return air.merge(giver)

@@ -243,7 +243,8 @@
 		location.hotspot_expose(700, 5)
 
 
-/obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob)
+/obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
+	if(!proximity) return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1 && !src.welding)
 		O.reagents.trans_to(src, max_fuel)
 		user << "\blue Welder refueled"

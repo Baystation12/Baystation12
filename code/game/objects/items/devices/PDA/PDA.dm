@@ -518,7 +518,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/mob/living/U = usr
 	//Looking for master was kind of pointless since PDAs don't appear to have one.
 	//if ((src in U.contents) || ( istype(loc, /turf) && in_range(src, U) ) )
-
+	if (usr.stat == DEAD)
+		return 0
 	if(can_use()) //Why reinvent the wheel? There's a proc that does exactly that.
 
 		add_fingerprint(U)
@@ -1017,7 +1018,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				else
 					user.show_message("\blue No radiation detected.")
 
-/obj/item/device/pda/afterattack(atom/A as mob|obj|turf|area, mob/user as mob)
+/obj/item/device/pda/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
+	if(!proximity) return
 	switch(scanmode)
 
 		if(3)
