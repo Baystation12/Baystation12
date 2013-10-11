@@ -368,27 +368,78 @@
 
 	spawn(rand(800,2000))
 		if(changeling_power(20,1,100,DEAD))
+			// charge the changeling chemical cost for stasis
 			changeling.chem_charges -= 20
-			if(C.stat == DEAD)
-				dead_mob_list -= C
-				living_mob_list += C
-			C.stat = CONSCIOUS
-			C.tod = null
+			
+			// shut down various types of badness
 			C.setToxLoss(0)
 			C.setOxyLoss(0)
 			C.setCloneLoss(0)
+			C.setBrainLoss(0)
 			C.SetParalysis(0)
 			C.SetStunned(0)
 			C.SetWeakened(0)
+			
+			// shut down ongoing problems
 			C.radiation = 0
-			C.heal_overall_damage(C.getBruteLoss(), C.getFireLoss())
+			C.nutrition = 400
+			C.bodytemperature = 310
+			C.sdisabilities = 0
+			C.disabilities = 0
+			C.blinded = 0
+			
+			// fix blindness and deafness
+			C.eye_blind = 0
+			C.eye_blurry = 0
+			C.ear_deaf = 0
+			C.ear_damage = 0
+			
+			// head actual damage numbers
+			C.heal_overall_damage(1000, 1000)
+			
+			// get rid of the reagents
 			C.reagents.clear_reagents()
+			
+			// cure diseases
+			for(var/datum/disease/D in viruses)
+				D.cure(0)
+				
+			// fix all the organs
+			C.restore_all_organs()
+			
+			// restore blood
+			if(ishuman(C))
+				var/mob/living/carbon/human/human_mob = C
+				human_mob.restore_blood()
+			
+			// remove the character from the list of the dead
+			if(C.stat == 2)
+				dead_mob_list -= src
+				living_mob_list += src
+			
+			// make us conscious again
+			C.stat = CONSCIOUS
+			
+			// remove the time of death
+			C.tod = null
+			
+			// fix all the icons
+			C.regenerate_icons()
+			
+			// remove our fake death flag
+			C.status_flags &= ~(FAKEDEATH)
+			
+			// let us move again
+			C.update_canmove()
+			
+			// re-add out changeling powers
+			C.make_changeling()		
+			
+			// sending display messages
 			C << "<span class='notice'>We have regenerated.</span>"
 			C.visible_message("<span class='warning'>[src] appears to wake from the dead, having healed all wounds.</span>")
-
-			C.status_flags &= ~(FAKEDEATH)
-			C.update_canmove()
-			C.make_changeling()
+			
+			
 	feedback_add_details("changeling_powers","FD")
 	return 1
 

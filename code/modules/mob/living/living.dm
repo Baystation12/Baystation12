@@ -246,6 +246,9 @@
 	adjustFireLoss(burn)
 	src.updatehealth()
 
+/mob/living/proc/restore_all_organs()
+	return
+	
 /mob/living/proc/revive()
 	setToxLoss(0)
 	setOxyLoss(0)
@@ -270,8 +273,15 @@
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 		C.handcuffed = initial(C.handcuffed)
+		
+		// restore all of the human's blood
+		if(ishuman(src))
+			var/mob/living/carbon/human/human_mob = src
+			human_mob.restore_blood()
+			
 	for(var/datum/disease/D in viruses)
 		D.cure(0)
+	restore_all_organs()
 	if(stat == 2)
 		dead_mob_list -= src
 		living_mob_list += src
