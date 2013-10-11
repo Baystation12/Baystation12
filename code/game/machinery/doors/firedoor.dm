@@ -198,7 +198,7 @@
 					nextstate = CLOSED
 
 
-	latetoggle()
+	proc/latetoggle()
 		if(operating || stat & NOPOWER || !nextstate)
 			return
 		switch(nextstate)
