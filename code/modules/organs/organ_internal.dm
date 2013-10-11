@@ -11,6 +11,9 @@
 	var/min_broken_damage = 30
 	var/parent_organ = "chest"
 
+/datum/organ/internal/proc/rejuvenate()
+	damage=0
+	
 /datum/organ/internal/proc/is_bruised()
 	return damage >= min_bruised_damage
 
