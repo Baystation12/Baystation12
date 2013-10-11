@@ -246,7 +246,21 @@
 	adjustFireLoss(burn)
 	src.updatehealth()
 
+/mob/living/proc/restore_all_organs()
+	return
+	
+
+	
 /mob/living/proc/revive()
+	rejuvenate()
+	buckled = initial(src.buckled)
+	if(iscarbon(src))
+		var/mob/living/carbon/C = src
+		C.handcuffed = initial(C.handcuffed)
+	
+/mob/living/proc/rejuvenate()
+
+	// shut down various types of badness
 	setToxLoss(0)
 	setOxyLoss(0)
 	setCloneLoss(0)
@@ -254,30 +268,43 @@
 	SetParalysis(0)
 	SetStunned(0)
 	SetWeakened(0)
+	
+	// shut down ongoing problems
 	radiation = 0
 	nutrition = 400
-	bodytemperature = 310
+	bodytemperature = T20C
 	sdisabilities = 0
 	disabilities = 0
+	
+	// fix blindness and deafness
 	blinded = 0
 	eye_blind = 0
 	eye_blurry = 0
 	eye_stat = 0
 	ear_deaf = 0
 	ear_damage = 0
-	heal_overall_damage(1000, 1000)
-	buckled = initial(src.buckled)
-	if(iscarbon(src))
-		var/mob/living/carbon/C = src
-		C.handcuffed = initial(C.handcuffed)
-	for(var/datum/disease/D in viruses)
-		D.cure(0)
+	heal_overall_damage(getBruteLoss(), getFireLoss())
+	
+	// restore all of a human's blood
+	if(ishuman(src))
+		var/mob/living/carbon/human/human_mob = src
+		human_mob.restore_blood()
+	
+	// fix all of our organs
+	restore_all_organs()
+	
+	// remove the character from the list of the dead
 	if(stat == 2)
 		dead_mob_list -= src
 		living_mob_list += src
+		tod = null
+		
+	// restore us to conciousness
 	stat = CONSCIOUS
+	
+	// make the icons look correct
 	regenerate_icons()
-	..()
+	
 	return
 
 /mob/living/proc/UpdateDamageIcon()
