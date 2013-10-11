@@ -59,6 +59,9 @@
 		var/base = "table"
 		if (istype(src, /obj/structure/table/woodentable))
 			base = "wood"
+		if (istype(src, /obj/structure/table/reinforced))
+			base = "rtable"
+
 		icon_state = "[base]flip[type]"
 		if (type==1)
 			if (tabledirs & turn(dir,90))
@@ -377,6 +380,10 @@
 	if(locate(/obj/structure/table,left) || locate(/obj/structure/table,right))
 		return 0
 	var/obj/structure/table/T = locate(/obj/structure/table, next)
+	if (istype(T,/obj/structure/table/reinforced/))
+		var/obj/structure/table/reinforced/R = T
+		if (R.status == 2)
+			return 0
 	if (!T)
 		return 1
 	else
@@ -480,11 +487,15 @@
 	name = "reinforced table"
 	desc = "A version of the four legged table. It is stronger."
 	icon_state = "reinf_table"
+	health = 200
 	var/status = 2
 	parts = /obj/item/weapon/table_parts/reinforced
 
 /obj/structure/table/reinforced/flip(var/direction)
-	return 0
+	if (status == 2)
+		return 0
+	else
+		return ..()
 
 /obj/structure/table/reinforced/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/weldingtool))
