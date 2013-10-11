@@ -93,7 +93,7 @@
 	set desc = "Take a blood sample from a suitable donor."
 
 	var/list/choices = list()
-	for(var/mob/living/C in view(1,src))
+	for(var/mob/living/carbon/C in view(1,src))
 		if(C.real_name != real_name)
 			choices += C
 
