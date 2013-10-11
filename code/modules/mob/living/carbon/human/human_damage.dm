@@ -198,7 +198,6 @@ This function restores the subjects blood to max.
 		var/blood_volume = vessel.get_reagent_amount("blood")
 		vessel.add_reagent("blood",560.0-blood_volume)
 
-
 /*
 This function restores all organs.
 */
