@@ -349,6 +349,7 @@ its easier to just keep the beam vertical.
 
 //returns 1 if made bloody, returns 0 otherwise
 /atom/proc/add_blood(mob/living/carbon/human/M as mob)
+	if(flags & NOBLOODY) return 0
 	.=1
 	if (!( istype(M, /mob/living/carbon/human) ))
 		return 0

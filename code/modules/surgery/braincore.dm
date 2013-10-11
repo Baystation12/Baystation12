@@ -122,8 +122,8 @@
 		return ..() && target.brain_op_stage == 2
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("[user] starts taking out bone chips and out of [target]'s brain with \the [tool].", \
-		"You start taking out bone chips and out of [target]'s brain with \the [tool].")
+		user.visible_message("[user] starts taking out bone chips out of [target]'s brain with \the [tool].", \
+		"You start taking out bone chips out of [target]'s brain with \the [tool].")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
