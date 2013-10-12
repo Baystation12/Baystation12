@@ -263,8 +263,11 @@
 				if(H.glasses && washglasses)
 					if(H.glasses.clean_blood())
 						H.update_inv_glasses(0)
-				if(H.ears && washears)
-					if(H.ears.clean_blood())
+				if(H.l_ear && washears)
+					if(H.l_ear.clean_blood())
+						H.update_inv_ears(0)
+				if(H.r_ear && washears)
+					if(H.r_ear.clean_blood())
 						H.update_inv_ears(0)
 				if(H.belt)
 					if(H.belt.clean_blood())
@@ -323,23 +326,26 @@
 	anchored = 1
 	var/busy = 0 	//Something's being washed at the moment
 
+
+
 /obj/structure/sink/attack_hand(mob/M as mob)
 	if(isrobot(M) || isAI(M))
+		return
+
+	if(!Adjacent(M))
 		return
 
 	if(busy)
 		M << "\red Someone's already washing here."
 		return
 
-	var/turf/location = M.loc
-	if(!isturf(location)) return
 	usr << "\blue You start washing your hands."
 
 	busy = 1
 	sleep(40)
 	busy = 0
 
-	if(M.loc != location) return		//Person has moved away from the sink
+	if(!Adjacent(M)) return    //Person has moved away from the sink
 
 	M.clean_blood()
 	if(ishuman(M))

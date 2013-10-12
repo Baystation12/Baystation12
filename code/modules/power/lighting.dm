@@ -501,9 +501,14 @@
 
 		if(prot > 0 || (COLD_RESISTANCE in user.mutations))
 			user << "You remove the light [fitting]"
+		else if(TK in user.mutations)
+			user << "You telekinetically remove the light [fitting]."
 		else
 			user << "You try to remove the light [fitting], but it's too hot and you don't want to burn your hand."
 			return				// if burned, don't remove the light
+	else
+		user << "You remove the light [fitting]."
+
 
 	// create a light tube/bulb item and put it in the user's hand
 	var/obj/item/weapon/light/L = new light_type()
@@ -524,6 +529,29 @@
 	update()
 
 // break the light and make sparks if was on
+
+/obj/machinery/light/attack_tk(mob/user)
+	if(status == LIGHT_EMPTY)
+		user << "There is no [fitting] in this light."
+		return
+
+	user << "You telekinetically remove the light [fitting]."
+	// create a light tube/bulb item and put it in the user's hand
+	var/obj/item/weapon/light/L = new light_type()
+	L.status = status
+	L.rigged = rigged
+	L.brightness = brightness
+
+	// light item inherits the switchcount, then zero it
+	L.switchcount = switchcount
+	switchcount = 0
+
+	L.update()
+	L.add_fingerprint(user)
+	L.loc = loc
+
+	status = LIGHT_EMPTY
+	update()
 
 /obj/machinery/light/proc/broken(var/skip_sound_and_sparks = 0)
 	if(status == LIGHT_EMPTY)
@@ -706,7 +734,8 @@
 // shatter light, unless it was an attempt to put it in a light socket
 // now only shatter if the intent was harm
 
-/obj/item/weapon/light/afterattack(atom/target, mob/user)
+/obj/item/weapon/light/afterattack(atom/target, mob/user, proximity)
+	if(!proximity) return
 	if(istype(target, /obj/machinery/light))
 		return
 	if(user.a_intent != "hurt")

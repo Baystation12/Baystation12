@@ -253,7 +253,7 @@
 	inv_box.icon = ui_style
 	inv_box.icon_state = "ears"
 	inv_box.screen_loc = ui_ears
-	inv_box.slot_id = slot_ears
+	inv_box.slot_id = slot_l_ear
 	inv_box.layer = 19
 	src.other += inv_box
 

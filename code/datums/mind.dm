@@ -716,7 +716,8 @@ datum/mind
 					var/mob/living/carbon/human/H = current
 					del(H.belt)
 					del(H.back)
-					del(H.ears)
+					del(H.l_ear)
+					del(H.r_ear)
 					del(H.gloves)
 					del(H.head)
 					del(H.shoes)
@@ -996,7 +997,8 @@ datum/mind
 			var/mob/living/carbon/human/H = current
 			del(H.belt)
 			del(H.back)
-			del(H.ears)
+			del(H.l_ear)
+			del(H.r_ear)
 			del(H.gloves)
 			del(H.head)
 			del(H.shoes)

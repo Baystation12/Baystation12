@@ -101,7 +101,7 @@ var/global/sent_honksquad = 0
 
 	var/obj/item/device/radio/R = new /obj/item/device/radio/headset(src)
 	R.set_frequency(1442)
-	equip_to_slot_or_del(R, slot_ears)
+	equip_to_slot_or_del(R, slot_l_ear)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/clown(src), slot_back)
 	equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(src), slot_in_backpack)
 	if(src.gender == FEMALE)

@@ -193,7 +193,7 @@ proc/dress_for_job_default(var/mob/living/carbon/human/employee as mob, var/job_
 	var/datum/job/JOB = jobs.get_job(job_alias)
 	if(JOB)
 		var/item = JOB.equipment_ears[1]
-		employee.equip_to_slot_or_del(new item(employee), employee.slot_ears)
+		employee.equip_to_slot_or_del(new item(employee), employee.slot_l_ear)
 		item = JOB.equipment_under[1]
 		employee.equip_to_slot_or_del(new item(employee), employee.slot_w_uniform)
 
@@ -201,7 +201,7 @@ proc/dress_for_job_default(var/mob/living/carbon/human/employee as mob, var/job_
 		/*
 	src.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/industrial (src), slot_back)
 	src.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(src), slot_in_backpack)
-	src.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_eng (src), slot_ears) // -- TLE
+	src.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_eng (src), slot_l_ear) // -- TLE
 	src.equip_to_slot_or_del(new /obj/item/device/pda/engineering(src), slot_belt)
 	src.equip_to_slot_or_del(new /obj/item/clothing/under/rank/engineer(src), slot_w_uniform)
 	src.equip_to_slot_or_del(new /obj/item/clothing/shoes/orange(src), slot_shoes)

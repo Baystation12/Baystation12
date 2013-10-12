@@ -1,3 +1,21 @@
+/mob/living/carbon/human/verb/quick_equip()
+	set name = "quick-equip"
+	set hidden = 1
+
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		var/obj/item/I = H.get_active_hand()
+		if(!I)
+			H << "<span class='notice'>You are not holding anything to equip.</span>"
+			return
+		if(H.equip_to_appropriate_slot(I))
+			if(hand)
+				update_inv_l_hand(0)
+			else
+				update_inv_r_hand(0)
+		else
+			H << "\red You are unable to equip that."
+
 /mob/living/carbon/human/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
 	for (var/slot in slots)
 		if (equip_to_slot_if_possible(W, slots[slot], del_on_fail = 0))
@@ -31,7 +49,9 @@
 		if(slot_wear_id)
 			// the only relevant check for this is the uniform check
 			return 1
-		if(slot_ears)
+		if(slot_l_ear)
+			return has_organ("head")
+		if(slot_r_ear)
 			return has_organ("head")
 		if(slot_glasses)
 			return has_organ("head")
@@ -92,8 +112,12 @@
 			update_hair(0)	//rebuild hair
 		success = 1
 		update_inv_head()
-	else if (W == ears)
-		ears = null
+	else if (W == l_ear)
+		l_ear = null
+		success = 1
+		update_inv_ears()
+	else if (W == r_ear)
+		r_ear = null
 		success = 1
 		update_inv_ears()
 	else if (W == shoes)
@@ -215,8 +239,22 @@
 			src.wear_id = W
 			W.equipped(src, slot)
 			update_inv_wear_id(redraw_mob)
-		if(slot_ears)
-			src.ears = W
+		if(slot_l_ear)
+			src.l_ear = W
+			if(l_ear.slot_flags & SLOT_TWOEARS)
+				var/obj/item/clothing/ears/offear/O = new(W)
+				O.loc = src
+				src.r_ear = O
+				O.layer = 20
+			W.equipped(src, slot)
+			update_inv_ears(redraw_mob)
+		if(slot_r_ear)
+			src.r_ear = W
+			if(r_ear.slot_flags & SLOT_TWOEARS)
+				var/obj/item/clothing/ears/offear/O = new(W)
+				O.loc = src
+				src.l_ear = O
+				O.layer = 20
 			W.equipped(src, slot)
 			update_inv_ears(redraw_mob)
 		if(slot_glasses)
@@ -404,14 +442,22 @@
 					return
 				else
 					message = "\red <B>[source] is trying to take off the [target.glasses] from [target]'s eyes!</B>"
-			if("ears")
-				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their ear item ([target.ears]) removed by [source.name] ([source.ckey])</font>")
-				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) ear item ([target.ears])</font>")
-				if(target.ears && !target.ears.canremove)
-					message = "\red <B>[source] fails to take off \a [target.ears] from [target]'s ears!</B>"
+			if("l_ear")
+				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their left ear item ([target.l_ear]) removed by [source.name] ([source.ckey])</font>")
+				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) left ear item ([target.l_ear])</font>")
+				if(target.l_ear && !target.l_ear.canremove)
+					message = "\red <B>[source] fails to take off \a [target.l_ear] from [target]'s left ear!</B>"
 					return
 				else
-					message = "\red <B>[source] is trying to take off the [target.ears] from [target]'s ears!</B>"
+					message = "\red <B>[source] is trying to take off the [target.l_ear] from [target]'s left ear!</B>"
+			if("r_ear")
+				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their right ear item ([target.r_ear]) removed by [source.name] ([source.ckey])</font>")
+				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) right ear item ([target.r_ear])</font>")
+				if(target.r_ear && !target.r_ear.canremove)
+					message = "\red <B>[source] fails to take off \a [target.r_ear] from [target]'s right ear!</B>"
+					return
+				else
+					message = "\red <B>[source] is trying to take off the [target.r_ear] from [target]'s right ear!</B>"
 			if("head")
 				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their hat ([target.head]) removed by [source.name] ([source.ckey])</font>")
 				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) hat ([target.head])</font>")
@@ -553,10 +599,14 @@ It can still be worn/put on as normal.
 			slot_to_process = slot_head
 			if (target.head && target.head.canremove)
 				strip_item = target.head
-		if("ears")
-			slot_to_process = slot_ears
-			if (target.ears)
-				strip_item = target.ears
+		if("l_ear")
+			slot_to_process = slot_l_ear
+			if (target.l_ear)
+				strip_item = target.l_ear
+		if("r_ear")
+			slot_to_process = slot_r_ear
+			if (target.r_ear)
+				strip_item = target.r_ear
 		if("shoes")
 			slot_to_process = slot_shoes
 			if (target.shoes && target.shoes.canremove)

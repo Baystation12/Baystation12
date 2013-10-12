@@ -171,6 +171,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SLOT_BACK 1024
 #define SLOT_POCKET 2048		//this is to allow items with a w_class of 3 or 4 to fit in pockets.
 #define SLOT_DENYPOCKET 4096	//this is to deny items with a w_class of 2 or 1 to fit in pockets.
+#define SLOT_TWOEARS 8192
 
 
 //FLAGS BITMASK
@@ -187,6 +188,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define CONDUCT		64		// conducts electricity (metal etc.)
 #define FPRINT		256		// takes a fingerprint
 #define ON_BORDER	512		// item has priority to check when entering or leaving
+#define NOBLUDGEON  4  // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
 #define NOBLOODY	2048	// used to items if they don't want to get a blood overlay
 
 #define GLASSESCOVERSEYES	1024
@@ -236,7 +238,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define slot_r_hand 5
 #define slot_belt 6
 #define slot_wear_id 7
-#define slot_ears 8
+#define slot_l_ear 8
 #define slot_glasses 9
 #define slot_gloves 10
 #define slot_head 11
@@ -248,6 +250,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define slot_s_store 17
 #define slot_in_backpack 18
 #define slot_legcuffed 19
+#define slot_r_ear 20
 
 //Cant seem to find a mob bitflags area other than the powers one
 
@@ -456,6 +459,13 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define XENO_HOST	32768	//Tracks whether we're gonna be a baby alien's mummy.
 
 var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons/Taser.ogg','sound/weapons/armbomb.ogg','sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg','sound/voice/hiss5.ogg','sound/voice/hiss6.ogg','sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg','sound/items/Welder.ogg','sound/items/Welder2.ogg','sound/machines/airlock.ogg','sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
+
+//Grab levels
+#define GRAB_PASSIVE  1
+#define GRAB_AGGRESSIVE  2
+#define GRAB_NECK    3
+#define GRAB_UPGRADING  4
+#define GRAB_KILL    5
 
 //Security levels
 #define SEC_LEVEL_GREEN	0

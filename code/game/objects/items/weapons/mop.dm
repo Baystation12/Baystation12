@@ -34,7 +34,8 @@ obj/item/weapon/mop/proc/clean(turf/simulated/A as turf)
 	..()
 
 
-/obj/item/weapon/mop/afterattack(atom/A, mob/user as mob)
+/obj/item/weapon/mop/afterattack(atom/A, mob/user, proximity)
+	if(!proximity) return
 	if(reagents.total_volume < 1 || mopcount >= 5)
 		user << "<span class='notice'>Your mop is dry!</span>"
 		return

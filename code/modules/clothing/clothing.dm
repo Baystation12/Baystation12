@@ -35,6 +35,54 @@
 	throwforce = 2
 	slot_flags = SLOT_EARS
 
+/obj/item/clothing/ears/attack_hand(mob/user as mob)
+	if (!user) return
+
+	if (src.loc != user || !istype(user,/mob/living/carbon/human))
+		..()
+		return
+
+	var/mob/living/carbon/human/H = user
+	if(H.l_ear != src && H.r_ear != src)
+		..()
+		return
+
+	if(!canremove)
+		return
+
+	var/obj/item/clothing/ears/O
+	if(slot_flags & SLOT_TWOEARS )
+		O = (H.l_ear == src ? H.r_ear : H.l_ear)
+		user.u_equip(O)
+		if(!istype(src,/obj/item/clothing/ears/offear))
+			del(O)
+			O = src
+	else
+		O = src
+
+	user.u_equip(src)
+
+	if (O)
+		user.put_in_hands(O)
+		O.add_fingerprint(user)
+
+	if(istype(src,/obj/item/clothing/ears/offear))
+		del(src)
+
+/obj/item/clothing/ears/offear
+	name = "Other ear"
+	w_class = 5.0
+	icon = 'icons/mob/screen1_Midnight.dmi'
+	icon_state = "block"
+	slot_flags = SLOT_EARS | SLOT_TWOEARS
+
+	New(var/obj/O)
+		name = O.name
+		desc = O.desc
+		icon = O.icon
+		icon_state = O.icon_state
+		dir = O.dir
+
 /obj/item/clothing/ears/earmuffs
 	name = "earmuffs"
 	desc = "Protects your hearing from loud noises, and quiet ones as well."
@@ -94,6 +142,9 @@ BLIND     // can't see anything
 			cell.reliability -= 10 / severity
 	..()
 
+// Called just before an attack_hand(), in mob/UnarmedAttack()
+/obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
+	return 0 // return 1 to cancel attack_hand()
 
 //Head
 /obj/item/clothing/head

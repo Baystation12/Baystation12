@@ -55,7 +55,7 @@ Note: Must be placed west/left of and R&D console to function.
 	if (shocked)
 		shock(user,50)
 	if (O.is_open_container())
-		return 1
+		return
 	if (istype(O, /obj/item/weapon/screwdriver))
 		if (!opened)
 			opened = 1

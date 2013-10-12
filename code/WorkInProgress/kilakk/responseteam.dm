@@ -212,7 +212,7 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 /mob/living/carbon/human/proc/equip_response_team(leader_selected = 0)
 
 	// Headset
-	equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(src), slot_ears)
+	equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(src), slot_l_ear)
 
 	// Uniform
 	equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(src), slot_w_uniform)
