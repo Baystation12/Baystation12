@@ -236,3 +236,11 @@ VOX HEIST ROUNDTYPE
 	if (!(is_vox_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
 		return 1
 	return ..()
+
+/datum/game_mode/vox/heist/proc/is_vox_crew_alive()
+
+	for(var/datum/mind/raider in raiders)
+		if(raider.current)
+			if(istype(raider.current,/mob/living/carbon/human) && raider.current.stat != 2)
+				return 1
+	return 0

@@ -18,16 +18,6 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 			return 0
 	return 1
 
-/datum/game_mode/vox/proc/is_vox_crew_alive()
-
-	for(var/datum/mind/raider in raiders)
-		if(raider.current)
-			if(istype(raider.current,/mob/living/carbon/human) && raider.current.stat != 2)
-				return 1
-	return 0
-
-
-
 //Vox global objectives.
 
 datum/objective/vox

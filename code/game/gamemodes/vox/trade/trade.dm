@@ -212,3 +212,11 @@ VOX TRADE ROUNDTYPE
 	if (!(is_vox_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
 		return 1
 	return ..()
+
+/datum/game_mode/vox/trade/proc/is_vox_crew_alive()
+
+	for(var/datum/mind/trader in traders)
+		if(trader.current)
+			if(istype(trader.current,/mob/living/carbon/human) && trader.current.stat != 2)
+				return 1
+	return 0
