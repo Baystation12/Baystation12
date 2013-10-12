@@ -274,7 +274,7 @@
 	s += "</a>"
 	s += ")"
 	s += "<br>The Perfect Mix of RP & Action<br>"
-	s += "<b>BYOND 500 BETA REQUIRED</b><br>"
+	s += "<b>BYOND 500 REQUIRED</b><br>"
 
 
 
