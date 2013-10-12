@@ -1470,6 +1470,16 @@ datum/design/stunshell
 	materials = list("$metal" = 4000)
 	build_path = "/obj/item/ammo_casing/shotgun/stunshell"
 
+datum/design/xray
+	name = "Xray Laser Gun"
+	desc = "Not quite as menacing as it sounds"
+	id = "xray"
+	req_tech = list("combat" = 6, "materials" = 5, "biotech" = 5, "powerstorage" = 4)
+	build_type = PROTOLATHE
+	materials = list("$gold" = 5000,"$uranium" = 10000, "$metal" = 4000)
+	build_path = "/obj/item/weapon/gun/energy/xray"
+	locked = 1
+
 /////////////////////////////////////////
 /////////////////Mining//////////////////
 /////////////////////////////////////////
