@@ -22,7 +22,7 @@
 
 	weapons += new /datum/mecha_weapon/honker(src)
 	weapons += new /datum/mecha_weapon/missile_rack/banana_mortar(src)
-	weapons += new /datum/mecha_weapon/missile_rack/mousetrap_mortar(src)
+	weapons += new /datum/mecha_weapon/missile_rack/banana_mortar/mousetrap_mortar(src)
 	selected_weapon = weapons[1]
 	return
 */
