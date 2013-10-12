@@ -891,4 +891,4 @@
 /obj/machinery/vending/eva
 	name = "Hardsuit Kits"
 	desc = "Conversion kits for your alien hardsuit needs."
-	products = list(/obj/item/weapon/modkit/tajaran = 3, /obj/item/weapon/modkit = 3)
+	products = list(/obj/item/weapon/modkit/tajaran = 6)
