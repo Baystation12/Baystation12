@@ -266,6 +266,7 @@ obj/machinery/atmospherics/valve
 		icon = 'icons/obj/atmospherics/digital_valve.dmi'
 
 		attack_ai(mob/user as mob)
+			src.add_hiddenprint(user)
 			return src.attack_hand(user)
 
 		attack_hand(mob/user as mob)
@@ -314,8 +315,8 @@ obj/machinery/atmospherics/valve
 	attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 		if (!istype(W, /obj/item/weapon/wrench))
 			return ..()
-		if (istype(src, /obj/machinery/atmospherics/valve/digital))
-			user << "\red You cannot unwrench this [src], it's too complicated."
+		if (istype(src,/obj/machinery/atmospherics/valve/digital) && src:frequency)
+			user << "\red You cannot unwrench this [src], it's digitally connected to another device."
 			return 1
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && T.intact)

@@ -20,6 +20,15 @@
 
 	return GM
 
+// For new turfs
+/turf/proc/copy_air_from(var/turf/T)
+	oxygen = T.oxygen
+	carbon_dioxide = T.carbon_dioxide
+	nitrogen = T.nitrogen
+	toxins = T.toxins
+
+	temperature = T.temperature
+
 /turf/remove_air(amount as num)
 	var/datum/gas_mixture/GM = new
 
@@ -36,14 +45,11 @@
 	return GM
 
 /turf/simulated/var/current_graphic = null
-
 /turf/simulated/var/tmp/datum/gas_mixture/air
-
 /turf/simulated/var/tmp/processing = 1
-
 /turf/simulated/var/tmp/air_check_directions = 0 //Do not modify this, just add turf to air_master.tiles_to_update
-
 /turf/simulated/var/tmp/obj/fire/active_hotspot
+/turf/simulated/var/tmp/was_icy=0
 
 /turf/simulated/proc/update_visuals()
 	overlays = null
@@ -51,12 +57,47 @@
 	var/siding_icon_state = return_siding_icon_state()
 	if(siding_icon_state)
 		overlays += image('icons/turf/floors.dmi',siding_icon_state)
+
+	// ONLY USED IF ZAS_SETTINGS SAYS SO.
 	var/datum/gas_mixture/model = return_air()
-	switch(model.graphic)
-		if(1)
-			overlays.Add(plmaster) //TODO: Make invisible plasma an option
-		if(2)
-			overlays.Add(slmaster)
+	if(model.graphics & GRAPHICS_COLD)
+		if(!was_icy)
+			wet=3 // Custom ice
+			was_icy=1
+			var/o=""
+			//if(is_plating())
+			//	o="snowfloor_s"
+			//else
+			if(is_plasteel_floor())
+				o="snowfloor"
+			if(o!="")
+				overlays += image('icons/turf/overlays.dmi',o)
+	else
+		if(was_icy)
+			wet=0
+			was_icy=0
+			if(prob(10))
+				wet = 1
+				if(wet_overlay)
+					overlays -= wet_overlay
+					wet_overlay = null
+				wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
+				overlays += wet_overlay
+
+				spawn(800)
+					if (!istype(src)) return
+					if(wet >= 2) return
+					wet = 0
+					if(wet_overlay)
+						overlays -= wet_overlay
+						wet_overlay = null
+	if(model.graphics & GRAPHICS_PLASMA)
+		overlays.Add(plmaster)
+	if(model.graphics & GRAPHICS_N2O)
+		overlays.Add(slmaster)
+	//if(model.graphics & GRAPHICS_REAGENTS)
+	//	overlays.Add(slmaster/*rlmaster*/)
+
 
 /turf/simulated/New()
 	..()
@@ -92,6 +133,12 @@
 				air_master.tiles_to_update.Add(tile)
 	..()
 
+/turf/simulated/copy_air_from(var/turf/T)
+	//if(istype(T,/turf/simulated))
+	//	var/turf/simulated/ST=T
+	//	air=ST.air
+	air=T.return_air()
+
 /turf/simulated/assume_air(datum/gas_mixture/giver)
 	if(!giver)	return 0
 	if(zone)
@@ -113,6 +160,8 @@
 	if(zone)
 		var/datum/gas_mixture/removed = null
 		removed = zone.air.remove(amount)
+		if(zone.air.check_tile_graphic())
+			update_visuals(zone.air)
 		return removed
 	else if(air)
 		var/datum/gas_mixture/removed = null
@@ -162,6 +211,8 @@
 			air_master.connections_to_check |= C
 
 	if(zone && !zone.rebuild)
+		if(zone.air.check_tile_graphic())
+			update_visuals(zone.air)
 		for(var/direction in cardinal)
 			var/turf/T = get_step(src,direction)
 			if(!istype(T))

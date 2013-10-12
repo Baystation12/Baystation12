@@ -268,6 +268,7 @@ obj/machinery/atmospherics/tvalve
 		icon = 'icons/obj/atmospherics/digital_valve.dmi'
 
 		attack_ai(mob/user as mob)
+			src.add_hiddenprint(user)
 			return src.attack_hand(user)
 
 		attack_hand(mob/user as mob)
@@ -387,6 +388,7 @@ obj/machinery/atmospherics/tvalve/mirrored
 		icon = 'icons/obj/atmospherics/digital_valve.dmi'
 
 		attack_ai(mob/user as mob)
+			src.add_hiddenprint(user)
 			return src.attack_hand(user)
 
 		attack_hand(mob/user as mob)

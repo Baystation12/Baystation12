@@ -247,7 +247,6 @@ obj/machinery/atmospherics/pipe
 				node2 = null
 
 			update_icon()
-
 			return null
 
 	simple/scrubbers
@@ -315,9 +314,23 @@ obj/machinery/atmospherics/pipe
 		level = 1
 		icon_state = "intact-y-f"
 
+	simple/filtering
+		name="Pipe"
+		_color="green"
+		icon_state = ""
+
+	simple/filtering/visible
+		level = 2
+		icon_state = "intact-g"
+
+	simple/filtering/hidden
+		level = 1
+		icon_state = "intact-g-f"
+
 
 
 	simple/insulated
+		name = "Insulated pipe"
 		icon = 'icons/obj/atmospherics/red_pipe.dmi'
 		icon_state = "intact"
 
@@ -328,6 +341,10 @@ obj/machinery/atmospherics/pipe
 		alert_pressure = 900*ONE_ATMOSPHERE
 
 		level = 2
+
+		hidden
+			level=1
+			icon_state="intact-f"
 
 
 	tank
@@ -792,6 +809,22 @@ obj/machinery/atmospherics/pipe
 		_color="yellow"
 		icon_state = ""
 
+	manifold/filtering
+		name="Air filtering pipe"
+		_color="green"
+		icon_state = ""
+
+	manifold/insulated
+		//thermal_conductivity = 0
+		name="Insulated pipe"
+		icon = 'icons/obj/atmospherics/red_pipe.dmi'
+		icon_state = "manifold"
+		//minimum_temperature_difference = 10000
+		//maximum_pressure = 1000*ONE_ATMOSPHERE
+		//fatigue_pressure = 900*ONE_ATMOSPHERE
+		alert_pressure = 900*ONE_ATMOSPHERE
+		level = 2
+
 	manifold/scrubbers/visible
 		level = 2
 		icon_state = "manifold-r"
@@ -824,6 +857,14 @@ obj/machinery/atmospherics/pipe
 		level = 1
 		icon_state = "manifold-f"
 
+	manifold/insulated/visible
+		level = 2
+		icon_state = "manifold"
+
+	manifold/insulated/hidden
+		level = 1
+		icon_state = "manifold-f"
+
 	manifold/yellow/visible
 		level = 2
 		icon_state = "manifold-y"
@@ -831,6 +872,15 @@ obj/machinery/atmospherics/pipe
 	manifold/yellow/hidden
 		level = 1
 		icon_state = "manifold-y-f"
+
+	manifold/filtering/visible
+		level = 2
+		icon_state = "manifold-g"
+
+	manifold/filtering/hidden
+		level = 1
+		icon_state = "manifold-g-f"
+
 
 	manifold4w
 		icon = 'icons/obj/atmospherics/pipe_manifold.dmi'
@@ -998,6 +1048,16 @@ obj/machinery/atmospherics/pipe
 		_color="gray"
 		icon_state = ""
 
+	manifold4w/insulated
+		name="Insulated pipe"
+		_color=""
+		//minimum_temperature_difference = 10000
+		//maximum_pressure = 1000*ONE_ATMOSPHERE
+		//fatigue_pressure = 900*ONE_ATMOSPHERE
+		alert_pressure = 900*ONE_ATMOSPHERE
+		level = 2
+		icon_state = "manifold4w"
+
 	manifold4w/scrubbers/visible
 		level = 2
 		icon_state = "manifold4w-r"
@@ -1027,6 +1087,10 @@ obj/machinery/atmospherics/pipe
 		icon_state = "manifold4w"
 
 	manifold4w/general/hidden
+		level = 1
+		icon_state = "manifold4w-f"
+
+	manifold4w/insulated/hidden
 		level = 1
 		icon_state = "manifold4w-f"
 
@@ -1118,7 +1182,26 @@ obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/u
 	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
 		return ..()
 
-	if(istype(W,/obj/item/device/pipe_painter))
+	// ===== Handle paints =====
+	if(istype(W, /obj/item/weapon/reagent_containers/glass/paint/red))
+		src._color = "red"
+		user << "\red You paint the pipe red."
+		update_icon()
+		return 1
+	if(istype(W, /obj/item/weapon/reagent_containers/glass/paint/blue))
+		src._color = "blue"
+		user << "\red You paint the pipe blue."
+		update_icon()
+		return 1
+	if(istype(W, /obj/item/weapon/reagent_containers/glass/paint/green))
+		src._color = "green"
+		user << "\red You paint the pipe green."
+		update_icon()
+		return 1
+	if(istype(W, /obj/item/weapon/reagent_containers/glass/paint/yellow))
+		src._color = "yellow"
+		user << "\red You paint the pipe yellow."
+		update_icon()
 		return 1
 
 	if (!istype(W, /obj/item/weapon/wrench))

@@ -14,6 +14,15 @@ What are the archived variables for?
 #define QUANTIZE(variable)		(round(variable,0.0001))
 #define TRANSFER_FRACTION 5 //What fraction (1/#) of the air difference to try and transfer
 
+#define TEMPERATURE_ICE_FORMATION 273.15 // 273 kelvin is the freezing point of water.
+#define MIN_PRESSURE_ICE_FORMATION 10 // 10kPa should be okay
+
+#define GRAPHICS_PLASMA   1
+#define GRAPHICS_N2O      2
+#define GRAPHICS_REAGENTS 4  // Not used.  Yet.
+#define GRAPHICS_COLD     8
+
+
 /datum/gas/sleeping_agent/specific_heat = 40 //These are used for the "Trace Gases" stuff, but is buggy.
 
 /datum/gas/oxygen_agent_b/specific_heat = 300
@@ -43,7 +52,7 @@ What are the archived variables for?
 				//Size of the group this gas_mixture is representing.
 				//=1 for singletons
 
-	var/graphic
+	var/graphics=0
 
 	var/list/datum/gas/trace_gases = list() //Seemed to be a good idea that was abandoned
 
@@ -54,7 +63,7 @@ What are the archived variables for?
 
 	var/tmp/temperature_archived
 
-	var/tmp/graphic_archived = 0
+	var/tmp/graphics_archived = 0
 	var/tmp/fuel_burnt = 0
 
 //FOR THE LOVE OF GOD PLEASE USE THIS PROC
@@ -81,7 +90,7 @@ What are the archived variables for?
 	update_values()
 	return
 
-		//tg seems to like using these a lot
+//tg seems to like using these a lot
 /datum/gas_mixture/proc/return_temperature()
 	return temperature
 
@@ -105,7 +114,7 @@ What are the archived variables for?
 
 	var/heat_capacity = HEAT_CAPACITY_CALCULATION(oxygen,carbon_dioxide,nitrogen,toxins)
 
-	if(trace_gases.len)
+	if(trace_gases && trace_gases.len) //sanity check because somehow the tracegases gets nulled?
 		for(var/datum/gas/trace_gas in trace_gases)
 			heat_capacity += trace_gas.moles*trace_gas.specific_heat
 
@@ -189,17 +198,30 @@ What are the archived variables for?
 	//Inputs: None
 	//Outputs: 1 if graphic changed, 0 if unchanged
 
-	graphic = 0
+	graphics = 0
+
+	// If configured and cold, maek ice
+	if(zas_settings.Get(/datum/ZAS_Setting/ice_formation))
+		if(temperature <= TEMPERATURE_ICE_FORMATION && return_pressure()>MIN_PRESSURE_ICE_FORMATION)
+			// If we're just forming, do a probability check.  Otherwise, KEEP IT ON~
+			// This ordering will hopefully keep it from sampling random noise every damn tick.
+			//if(was_icy || (!was_icy && prob(25)))
+			graphics |= GRAPHICS_COLD
+
 	if(toxins > MOLES_PLASMA_VISIBLE)
-		graphic = 1
-	else if(length(trace_gases))
+		graphics |= GRAPHICS_PLASMA
+	if(length(trace_gases))
 		var/datum/gas/sleeping_agent = locate(/datum/gas/sleeping_agent) in trace_gases
 		if(sleeping_agent && (sleeping_agent.moles > 1))
-			graphic = 2
-		else
-			graphic = 0
+			graphics |= GRAPHICS_N2O
 
-	return graphic != graphic_archived
+	/*
+	var/datum/gas/reagent = exact_locate(/datum/gas/reagent,trace_gases)
+	if(reagent && (reagent.moles > 0.1))
+		graphics |= GRAPHICS_REAGENTS
+	*/
+
+	return graphics != graphics_archived
 
 /datum/gas_mixture/proc/react(atom/dump_location)
 	//Purpose: Calculating if it is possible for a fire to occur in the airmix
@@ -298,7 +320,7 @@ What are the archived variables for?
 
 	temperature_archived = temperature
 
-	graphic_archived = graphic
+	graphics_archived = graphics
 
 	return 1
 
@@ -372,6 +394,10 @@ What are the archived variables for?
 	//Called by: ?
 	//Inputs: How many moles to remove.
 	//Outputs: Removed air.
+
+	// Fix a singuloth problem
+	if(group_multiplier==0)
+		return null
 
 	var/sum = total_moles()
 	amount = min(amount,sum) //Can not take more air than tile has!
