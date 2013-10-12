@@ -28,6 +28,10 @@
 	var/turf/targloc = get_turf(target)
 	if(!curloc || !targloc)
 		return
+	chassis.use_power(energy_drain)
+	chassis.visible_message("<span class='warning'>[chassis] fires [src]!</span>")
+	occupant_message("<span class='warning'>You fire [src]!</span>")
+	log_message("Fired from [src], targeting [target].")
 	for(var/i = 1 to min(projectiles, projectiles_per_shot))
 		var/turf/aimloc = targloc
 		if(deviation)
@@ -43,10 +47,6 @@
 	if(auto_rearm)
 		projectiles = projectiles_per_shot
 	set_ready_state(0)
-	chassis.use_power(energy_drain)
-	chassis.visible_message("<span class='warning'>[chassis] fires [src]!</span>")
-	occupant_message("<span class='warning'>You fire [src]!</span>")
-	log_message("Fired from [src], targeting [target].")
 	do_after_cooldown()
 	return
 
@@ -223,6 +223,7 @@
 	projectiles_per_shot = 3
 	deviation = 0.3
 	projectile_energy_cost = 20
+	fire_cooldown = 2
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack
 	var/missile_speed = 2
