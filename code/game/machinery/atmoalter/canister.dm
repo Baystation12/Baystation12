@@ -17,6 +17,17 @@
 	volume = 1000
 	use_power = 0
 	var/release_log = ""
+	var/busy = 0
+/*	m_amt=10*CC_PER_SHEET_METAL
+
+// Need to redefine /obj/item's recyk method
+/obj/machinery/portable_atmospherics/canister/recycle(var/obj/machinery/mineral/processing_unit/recycle/rec)
+	if (src.m_amt == 0 && src.g_amt == 0)
+		return 0
+	rec.iron += src.m_amt/CC_PER_SHEET_METAL
+	rec.glass += src.g_amt/CC_PER_SHEET_GLASS
+	return 1
+*/
 
 /obj/machinery/portable_atmospherics/canister/sleeping_agent
 	name = "Canister: \[N2O\]"
@@ -174,6 +185,14 @@
 	return
 
 /obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	if(iswelder(W) && src.destroyed)
+		if(weld(W, user))
+			user << "\blue You salvage whats left of \the [src]"
+			var/obj/item/stack/sheet/metal/M = new /obj/item/stack/sheet/metal(src.loc)
+			M.amount = 3
+			del src
+		return
+
 	if(!istype(W, /obj/item/weapon/wrench) && !istype(W, /obj/item/weapon/tank) && !istype(W, /obj/item/device/analyzer) && !istype(W, /obj/item/device/pda))
 		visible_message("\red [user] hits the [src] with a [W]!")
 		src.health -= W.force
@@ -196,6 +215,7 @@
 	..()
 
 /obj/machinery/portable_atmospherics/canister/attack_ai(var/mob/user as mob)
+	src.add_hiddenprint(user)
 	return src.attack_hand(user)
 
 /obj/machinery/portable_atmospherics/canister/attack_paw(var/mob/user as mob)
@@ -243,17 +263,18 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 		if(href_list["toggle"])
 			if (valve_open)
 				if (holding)
-					release_log += "Valve was <b>closed</b> by [usr], stopping the transfer into the [holding]<br>"
+					release_log += "Valve was <b>closed</b> by [usr]([ckey(usr.key)]), stopping the transfer into the [holding]<br>"
 				else
-					release_log += "Valve was <b>closed</b> by [usr], stopping the transfer into the <font color='red'><b>air</b></font><br>"
+					release_log += "Valve was <b>closed</b> by [usr]([ckey(usr.key)]), stopping the transfer into the <font color='red'><b>air</b></font><br>"
 			else
 				if (holding)
-					release_log += "Valve was <b>opened</b> by [usr], starting the transfer into the [holding]<br>"
+					release_log += "Valve was <b>opened</b> by [usr]([ckey(usr.key)]), starting the transfer into the [holding]<br>"
 				else
-					if(src.air_contents.toxins > 0 || (locate(/datum/gas/sleeping_agent) in src.air_contents.trace_gases))
-						message_admins("[usr]([ckey(usr.key)]) opened a canister that contains plasma at [loc.x], [loc.y], [loc.z]")
+					var/datum/gas/sleeping_agent/S = locate() in src.air_contents.trace_gases
+					if(src.air_contents.toxins > 0 || (istype(S)))
+						message_admins("[usr.real_name] ([formatPlayerPanel(usr,usr.ckey)]) opened a canister that contains \[[src.air_contents.toxins > 0 ? "Toxins " : ""] [istype(S) ? "N2O" : ""]\] at [formatJumpTo(loc)]!")
 						log_admin("[usr]([ckey(usr.key)]) opened a canister that contains plasma at [loc.x], [loc.y], [loc.z]")
-					release_log += "Valve was <b>opened</b> by [usr], starting the transfer into the <font color='red'><b>air</b></font><br>"
+					release_log += "Valve was <b>opened</b> by [usr]([ckey(usr.key)]), starting the transfer into the <font color='red'><b>air</b></font><br>"
 			valve_open = !valve_open
 
 		if (href_list["remove_tank"])
@@ -323,6 +344,7 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 	src.update_icon()
 	return 1
 
+
 //Dirty way to fill room with gas. However it is a bit easier to do than creating some floor/engine/n2o -rastaf0
 /obj/machinery/portable_atmospherics/canister/sleeping_agent/roomfiller/New()
 	..()
@@ -336,6 +358,7 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 			location.assume_air(air_contents)
 			air_contents = new
 	return 1
+
 
 /obj/machinery/portable_atmospherics/canister/nitrogen/New()
 
@@ -366,3 +389,23 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 
 	src.update_icon()
 	return 1
+
+/obj/machinery/portable_atmospherics/canister/proc/weld(var/obj/item/weapon/weldingtool/WT, var/mob/user)
+
+	if(busy)
+		return 0
+	if(!WT.isOn())
+		return 0
+
+	// Do after stuff here
+	user << "<span class='notice'>You start to slice away at \the [src]...</span>"
+	playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+	WT.eyecheck(user)
+	busy = 1
+	if(do_after(user, 50))
+		busy = 0
+		if(!WT.isOn())
+			return 0
+		return 1
+	busy = 0
+	return 0

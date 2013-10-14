@@ -151,7 +151,7 @@ var/global/ZAS_Settings/zas_settings = new
 // N3X15 - Ice is disabled by default, per Pomf's request.
 /datum/ZAS_Setting/ice_formation
 	name="Airflow - Enable Ice Formation"
-	value = 0
+	value = 1
 	desc="1=yes, 0=no - Slippin' and slidin' when pressure &gt; 10kPa and temperature &lt; 273K"
 	valtype=ZAS_TYPE_BOOLEAN
 
