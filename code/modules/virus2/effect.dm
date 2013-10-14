@@ -171,6 +171,23 @@
 		var/backlash_amt = 5*multiplier
 		mob.apply_damages(backlash_amt,backlash_amt,backlash_amt,backlash_amt)
 
+/datum/disease2/effect/gmagnitis
+	name = "Greater Magnitis"
+	stage = 4
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		for(var/obj/M in orange(6,mob))
+			if(!M.anchored && (M.flags & CONDUCT))
+				var/i
+				var/iter = rand(1,3)
+				for(i=0,i<iter,i++)
+					step_towards(M,mob)
+		for(var/mob/living/silicon/S in orange(6,mob))
+			if(istype(S, /mob/living/silicon/ai)) continue
+			var/i
+			var/iter = rand(1,3)
+			for(i=0,i<iter,i++)
+				step_towards(S,mob)
+
 ////////////////////////STAGE 3/////////////////////////////////
 
 /datum/disease2/effect/bones
@@ -259,6 +276,23 @@
 	stage = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob.say("*groan")
+
+/datum/disease2/effect/lmagnitis
+	name = "Lesser Magnitis"
+	stage = 3
+	activate(var/mob/living/carbon/mob,var/multiplier)
+		for(var/obj/M in orange(4,mob))
+			if(!M.anchored && (M.flags & CONDUCT))
+				var/i
+				var/iter = rand(1,2)
+				for(i=0,i<iter,i++)
+					step_towards(M,mob)
+		for(var/mob/living/silicon/S in orange(4,mob))
+			if(istype(S, /mob/living/silicon/ai)) continue
+			var/i
+			var/iter = rand(1,2)
+			for(i=0,i<iter,i++)
+				step_towards(S,mob)
 ////////////////////////STAGE 2/////////////////////////////////
 
 /datum/disease2/effect/scream
