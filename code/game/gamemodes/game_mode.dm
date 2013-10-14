@@ -91,7 +91,7 @@
 	for(var/mob/M in player_list)
 		if(M.mind)
 			var/obj/item/device/pda/P=null
-			for(var/obj/item/device/pda/check_pda in sortAtom(PDAs))
+			for(var/obj/item/device/pda/check_pda in PDAs)
 				if (check_pda.owner==M.name)
 					P=check_pda
 					break
@@ -100,10 +100,11 @@
 				count++
 				var/msg=""
 				var/pay=0
-				if(objective.per_unit && objective.units_needing_compensation>0)
-					var/newunits = objective.units_needing_compensation
+				if(objective.per_unit && objective.units_compensated<objective.units_completed)
+					var/newunits = objective.units_completed - objective.units_compensated
 					msg="We see that you completed [newunits] new unit[newunits>1?"s":""] for Task #[count]! "
 					pay=objective.completion_payment * newunits
+					objective.units_compensated += newunits
 				else if(!objective.completed)
 					if(objective.is_completed())
 						pay=objective.completion_payment
