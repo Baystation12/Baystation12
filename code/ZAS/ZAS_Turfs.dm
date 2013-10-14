@@ -179,6 +179,8 @@
 			if((air_check_directions & direction && !(air_directions_archived & direction)) || \
 				(unsim_check_directions & direction && !(unsim_directions_archived & direction)))
 				ZConnect(src,T)
+				zone.ActivateIfNeeded()
+				if(T.zone) T.zone.ActivateIfNeeded()
 
 			//Something like a wall was built, changing the geometry.
 			else if((!(air_check_directions & direction) && air_directions_archived & direction) || \
