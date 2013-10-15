@@ -233,8 +233,10 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 	/client/proc/player_panel_new,
+	/client/proc/dsay,
 	/datum/admins/proc/show_skills,
-	/client/proc/dsay
+	/client/proc/jobbans,
+	/client/proc/cmd_admin_subtle_message 	/*send an message to somebody as a 'voice in their head'*/
 )
 /client/proc/add_admin_verbs()
 	if(holder)
