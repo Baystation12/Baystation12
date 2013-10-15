@@ -119,6 +119,7 @@
 				var/obj/O = locate("landmark*Observer-Start")
 				src << "\blue Now teleporting."
 				observer.loc = O.loc
+				observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 				client.prefs.update_preview_icon()
 				observer.icon = client.prefs.preview_icon

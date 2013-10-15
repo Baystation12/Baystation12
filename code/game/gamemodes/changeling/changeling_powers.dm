@@ -368,27 +368,26 @@
 
 	spawn(rand(800,2000))
 		if(changeling_power(20,1,100,DEAD))
+			// charge the changeling chemical cost for stasis
 			changeling.chem_charges -= 20
-			if(C.stat == DEAD)
-				dead_mob_list -= C
-				living_mob_list += C
-			C.stat = CONSCIOUS
-			C.tod = null
-			C.setToxLoss(0)
-			C.setOxyLoss(0)
-			C.setCloneLoss(0)
-			C.SetParalysis(0)
-			C.SetStunned(0)
-			C.SetWeakened(0)
-			C.radiation = 0
-			C.heal_overall_damage(C.getBruteLoss(), C.getFireLoss())
-			C.reagents.clear_reagents()
+			
+			// restore us to health
+			C.rejuvenate()
+			
+			// remove our fake death flag
+			C.status_flags &= ~(FAKEDEATH)
+			
+			// let us move again
+			C.update_canmove()
+			
+			// re-add out changeling powers
+			C.make_changeling()		
+			
+			// sending display messages
 			C << "<span class='notice'>We have regenerated.</span>"
 			C.visible_message("<span class='warning'>[src] appears to wake from the dead, having healed all wounds.</span>")
-
-			C.status_flags &= ~(FAKEDEATH)
-			C.update_canmove()
-			C.make_changeling()
+			
+			
 	feedback_add_details("changeling_powers","FD")
 	return 1
 
