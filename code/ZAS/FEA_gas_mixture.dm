@@ -1007,6 +1007,18 @@ What are the archived variables for?
 					return 0
 	return 1
 
+/datum/gas_mixture/proc/compare_unsim(turf/list/samples)
+	//Purpose: Compares a list of unsimulated tiles to self to see if within acceptable ranges that group processing may be enabled
+	//Called by: ZAS sleeping detection.
+	//Inputs: List of unsimulated turfs to compare to
+	//Outputs: 1 if within an acceptable range to sleep, 0 otherwise.
+	var/datum/gas_mixture/after_share = new
+	after_share.copy_from(src)
+
+	ShareSpace(after_share, samples)
+
+	return src.compare(after_share)
+
 /datum/gas_mixture/proc/subtract(datum/gas_mixture/right_side)
 	//Purpose: Subtracts right_side from air_mixture. Used to help turfs mingle
 	//Called by: Pipelines ending in a break (or something)
