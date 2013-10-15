@@ -471,3 +471,12 @@
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
 					dir = i
 					sleep(1)
+
+
+/mob/living/simple_animal/corgi/Ian/borgi
+	name = "E-N"
+	real_name = "E-N"	//Intended to hold the name without altering it.
+	desc = "It's a borgi."
+	icon_state = "borgi"
+	icon_living = "borgi"
+	icon_dead = "borgi_dead"
