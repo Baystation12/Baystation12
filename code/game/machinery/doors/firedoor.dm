@@ -163,6 +163,8 @@
 			if(density)
 				spawn(0)
 					open()
+				spawn(150)
+					close()
 			else
 				spawn(0)
 					close()
