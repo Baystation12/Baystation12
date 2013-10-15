@@ -587,7 +587,7 @@ var/list/admin_verbs_mod = list(
 		air_processing_killed = 0
 		usr << "<b>Enabled air processing.</b>"
 	else
-		kill_air = 1
+		air_processing_killed = 1
 		usr << "<b>Disabled air processing.</b>"
 	feedback_add_details("admin_verb","KA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] used 'kill air'.")
