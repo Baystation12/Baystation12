@@ -1,11 +1,31 @@
 // MEDICAL SIDE EFFECT BASE
 // ========================
-/datum/medical_effect/var/name = "None"
-/datum/medical_effect/var/strength = 0
-/datum/medical_effect/var/start = 0
+/datum/medical_effect
+	var/name = "None"
+	var/strength = 0
+	var/start = 0
+	var/list/triggers
+	var/list/cures
+	var/cure_message
+
 /datum/medical_effect/proc/manifest(mob/living/carbon/human/H)
+	for(var/R in cures)
+		if(H.reagents.has_reagent(R))
+			return 0
+	for(var/R in triggers)
+		if(H.reagents.get_reagent_amount(R) >= triggers[R])
+			return 1
+	return 0
+
 /datum/medical_effect/proc/on_life(mob/living/carbon/human/H, strength)
+	return
+
 /datum/medical_effect/proc/cure(mob/living/carbon/human/H)
+	for(var/R in cures)
+		if(H.reagents.has_reagent(R))
+			H <<"\red [cure_message]"
+			return 1
+	return 0
 
 
 // MOB HELPERS
@@ -58,13 +78,11 @@
 
 // HEADACHE
 // ========
-/datum/medical_effect/headache/name = "Headache"
-/datum/medical_effect/headache/manifest(mob/living/carbon/human/H)
-	if(H.reagents.has_reagent("alkysine") || H.reagents.has_reagent("tramadol"))
-		return 0
-	if(H.reagents.has_reagent("cryoxadone") >= 10 || H.reagents.get_reagent_amount("bicaridine") >= 15 || H.reagents.get_reagent_amount("tricordrazine") >= 15)
-		return 1
-	return 0
+/datum/medical_effect/headache
+	name = "Headache"
+	triggers = list("cryoxadone" = 10, "bicaridine" = 15, "tricordrazine" = 15)
+	cures = list("alkysine", "tramadol")
+	cure_message = "Your head stops throbbing..."
 
 /datum/medical_effect/headache/on_life(mob/living/carbon/human/H, strength)
 	switch(strength)
@@ -76,22 +94,13 @@
 			H.custom_pain("You feel an excrutiating pain in your head!",1)
 			H.adjustBrainLoss(1)
 
-/datum/medical_effect/headache/cure(mob/living/carbon/human/H)
-	if(H.reagents.has_reagent("alkysine") || H.reagents.has_reagent("tramadol"))
-		H << "\red Your head stops throbbing.."
-		return 1
-	return 0
-
 // BAD STOMACH
 // ===========
-/datum/medical_effect/bad_stomach/name = "Bad Stomach"
-/datum/medical_effect/bad_stomach/manifest(mob/living/carbon/human/H)
-	if(H.reagents.has_reagent("anti_toxin"))
-		return 0
-	if(H.reagents.get_reagent_amount("kelotane") >= 30 || H.reagents.get_reagent_amount("dermaline") >= 15)
-		return 1
-	return 0
-
+/datum/medical_effect/bad_stomach
+	name = "Bad Stomach"
+	triggers = list("kelotane" = 30, "dermaline" = 15)
+	cures = list("anti_toxin")
+	cure_message = "Your stomach feels a little better now..."
 
 /datum/medical_effect/bad_stomach/on_life(mob/living/carbon/human/H, strength)
 	switch(strength)
@@ -103,22 +112,14 @@
 			H.custom_pain("You feel sick.",1)
 			H.adjustToxLoss(1)
 
-/datum/medical_effect/bad_stomach/cure(mob/living/carbon/human/H)
-	if(H.reagents.has_reagent("anti_toxin"))
-		H << "\red Your stomach feels a little better now.."
-		return 1
-	return 0
-
-
 // CRAMPS
 // ======
-/datum/medical_effect/cramps/name = "Cramps"
-/datum/medical_effect/cramps/manifest(mob/living/carbon/human/H)
-	if(H.reagents.has_reagent("inaprovaline"))
-		return 0
-	if( H.reagents.get_reagent_amount("anti_toxin") >= 30 || H.reagents.get_reagent_amount("tramadol") >= 15)
-		return 1
-	return 0
+/datum/medical_effect/cramps
+	name = "Cramps"
+	triggers = list("anti_toxin" = 30, "tramadol" = 15)
+	cures = list("inaprovaline")
+	cure_message = "The cramps let up..."
+
 /datum/medical_effect/cramps/on_life(mob/living/carbon/human/H, strength)
 	switch(strength)
 		if(1 to 10)
@@ -130,21 +131,14 @@
 			H.custom_pain("There's pain all over your body.",1)
 			H.adjustToxLoss(1)
 
-/datum/medical_effect/cramps/cure(mob/living/carbon/human/H)
-	if(H.reagents.has_reagent("inaprovaline"))
-		H << "\red The cramps let up.."
-		return 1
-	return 0
-
 // ITCH
 // ====
-/datum/medical_effect/itch/name = "Itch"
-/datum/medical_effect/itch/manifest(mob/living/carbon/human/H)
-	if(H.reagents.has_reagent("inaprovaline"))
-		return 0
-	if(H.reagents.get_reagent_amount("space_drugs") >= 10)
-		return 1
-	return 0
+/datum/medical_effect/itch
+	name = "Itch"
+	triggers = list("space_drugs" = 10)
+	cures = list("inaprovaline")
+	cure_message = "The itching stops..."
+
 /datum/medical_effect/itch/on_life(mob/living/carbon/human/H, strength)
 	switch(strength)
 		if(1 to 10)
@@ -155,9 +149,3 @@
 			H.emote("me",1,"shivers slightly.")
 			H.custom_pain("This itch makes it really hard to concentrate.",1)
 			H.adjustToxLoss(1)
-
-/datum/medical_effect/itch/cure(mob/living/carbon/human/H)
-	if(H.reagents.has_reagent("inaprovaline"))
-		H << "\red The itching stops.."
-		return 1
-	return 0
