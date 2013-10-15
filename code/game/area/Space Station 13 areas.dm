@@ -697,9 +697,22 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Port Primary Hallway"
 	icon_state = "hallP"
 
+/area/hallway/primary/port/west
+
+/area/hallway/primary/port/east
+
 /area/hallway/primary/central
 	name = "\improper Central Primary Hallway"
 	icon_state = "hallC"
+
+/area/hallway/primary/central/north
+/area/hallway/primary/central/south
+/area/hallway/primary/central/west
+/area/hallway/primary/central/east
+/area/hallway/primary/central/nw
+/area/hallway/primary/central/ne
+/area/hallway/primary/central/sw
+/area/hallway/primary/central/se
 
 /area/hallway/secondary/exit
 	name = "\improper Escape Shuttle Hallway"
@@ -712,6 +725,10 @@ proc/process_ghost_teleport_locs()
 /area/hallway/secondary/entry
 	name = "\improper Arrival Shuttle Hallway"
 	icon_state = "entry"
+
+/area/hallway/secondary/entry/north
+
+/area/hallway/secondary/entry/south
 
 //Command
 
