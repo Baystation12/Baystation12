@@ -1,6 +1,73 @@
 /*
  * False Walls
  */
+
+// Minimum pressure difference to fail building falsewalls.
+// Also affects admin alerts.
+#define FALSEDOOR_MAX_PRESSURE_DIFF 25.0
+
+/**
+* Gets the highest and lowest pressures from the tiles in cardinal directions
+* around us, then checks the difference.
+*/
+/proc/getOPressureDifferential(var/turf/loc)
+	var/minp=16777216;
+	var/maxp=0;
+	for(var/dir in cardinal)
+		var/turf/T=get_turf(get_step(loc,dir))
+		var/cp=0
+		if(T && istype(T,/turf/simulated) && T.zone)
+			var/datum/gas_mixture/environment = T.return_air()
+			cp = environment.return_pressure()
+		else
+			if(istype(T,/turf/simulated))
+				continue
+		if(cp<minp)minp=cp
+		if(cp>maxp)maxp=cp
+	return abs(minp-maxp)
+
+// Checks pressure here vs. around us.
+/proc/performFalseWallPressureCheck(var/turf/loc)
+	var/turf/simulated/lT=loc
+	if(!istype(lT) || !lT.zone)
+		return 0
+	var/datum/gas_mixture/myenv=lT.return_air()
+	var/pressure=myenv.return_pressure()
+
+	for(var/dir in cardinal)
+		var/turf/simulated/T=get_turf(get_step(loc,dir))
+		if(T && istype(T) && T.zone)
+			var/datum/gas_mixture/environment = T.return_air()
+			var/pdiff = abs(pressure - environment.return_pressure())
+			if(pdiff > FALSEDOOR_MAX_PRESSURE_DIFF)
+				return pdiff
+	return 0
+
+/proc/performWallPressureCheck(var/turf/loc)
+	var/pdiff = getOPressureDifferential(loc)
+	if(pdiff > FALSEDOOR_MAX_PRESSURE_DIFF)
+		return pdiff
+	return 0
+
+/client/proc/pdiff()
+	set name = "Get PDiff"
+	set category = "Debug"
+
+	if(!mob || !holder)
+		return
+	var/turf/T = mob.loc
+
+	if (!( istype(T, /turf) ))
+		return
+
+	var/pdiff = getOPressureDifferential(T)
+	var/fwpcheck=performFalseWallPressureCheck(T)
+	var/wpcheck=performWallPressureCheck(T)
+
+	src << "Pressure Differential (cardinals): [pdiff]"
+	src << "FWPCheck: [fwpcheck]"
+	src << "WPCheck: [wpcheck]"
+
 /obj/structure/falsewall
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
@@ -51,6 +118,7 @@
 				junction |= get_dir(src,W)
 	icon_state = "[mineral][junction]"
 	return
+
 
 /obj/structure/falsewall/attack_hand(mob/user as mob)
 	if(opening)
@@ -175,6 +243,7 @@
 	..()
 
 
+
 /obj/structure/falserwall/attack_hand(mob/user as mob)
 	if(opening)
 		return
@@ -231,7 +300,7 @@
 	if(istype(W, /obj/item/weapon/screwdriver))
 		var/turf/T = get_turf(src)
 		user.visible_message("[user] tightens some bolts on the r wall.", "You tighten the bolts on the wall.")
-		T.ChangeTurf(/turf/simulated/wall) //Intentionally makes a regular wall instead of an r-wall (no cheap r-walls for you).
+		T.ChangeTurf(/turf/simulated/wall/r_wall) //Why not make rwall?
 		del(src)
 
 	if( istype(W, /obj/item/weapon/weldingtool) )

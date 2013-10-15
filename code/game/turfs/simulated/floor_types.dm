@@ -78,7 +78,9 @@
 		var/datum/gas/sleeping_agent/trace_gas = new
 
 		air.trace_gases += trace_gas
-		trace_gas.moles = 9*4000
+		trace_gas.moles = 70000
+		air.oxygen = 0
+		air.nitrogen = 0
 		air.update_values()
 
 /turf/simulated/floor/engine/vacuum
