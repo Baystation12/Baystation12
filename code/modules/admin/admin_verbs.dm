@@ -233,6 +233,7 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 	/client/proc/player_panel_new,
+	/client/proc/dsay,
 	/datum/admins/proc/show_skills,
 	/client/proc/jobbans,
 	/client/proc/cmd_admin_subtle_message 	/*send an message to somebody as a 'voice in their head'*/
@@ -582,8 +583,8 @@ var/list/admin_verbs_mod = list(
 	set category = "Debug"
 	set name = "Kill Air"
 	set desc = "Toggle Air Processing"
-	if(kill_air)
-		kill_air = 0
+	if(air_processing_killed)
+		air_processing_killed = 0
 		usr << "<b>Enabled air processing.</b>"
 	else
 		kill_air = 1
