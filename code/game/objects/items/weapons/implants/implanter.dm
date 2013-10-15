@@ -129,3 +129,14 @@
 		imp:scanned = A
 		A.loc.contents.Remove(A)
 		update()
+
+
+/obj/item/weapon/implanter/deadman
+	name = "implanter-deadman"
+	desc = "Switch it."
+
+	New()
+		src.imp = new /obj/item/weapon/implant/deadman(src)
+		..()
+		update()
+		return
