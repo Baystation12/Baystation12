@@ -112,27 +112,25 @@
 					M.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[M]/[M.ckey]</b> with a <b>[src]</b>"
 					msg_admin_attack("UNKNOWN shot [M] ([M.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
 
-		spawn(0)
-
-			if(A)
-				if (!forcedodge)
-					forcedodge = A.bullet_act(src, def_zone) // searches for return value
-				if(forcedodge == -1) // the bullet passes through a dense object!
-					bumped = 0 // reset bumped variable!
-					if(istype(A, /turf))
-						loc = A
-					else
-						loc = A.loc
-					permutated.Add(A)
-					return 0
-				if(istype(A,/turf))
-					for(var/obj/O in A)
-						O.bullet_act(src)
-					for(var/mob/M in A)
-						M.bullet_act(src, def_zone)
-				density = 0
-				invisibility = 101
-				del(src)
+		if(A)
+			if (!forcedodge)
+				forcedodge = A.bullet_act(src, def_zone) // searches for return value
+			if(forcedodge == -1) // the bullet passes through a dense object!
+				bumped = 0 // reset bumped variable!
+				if(istype(A, /turf))
+					loc = A
+				else
+					loc = A.loc
+				permutated.Add(A)
+				return 0
+			if(istype(A,/turf))
+				for(var/obj/O in A)
+					O.bullet_act(src)
+				for(var/mob/M in A)
+					M.bullet_act(src, def_zone)
+			density = 0
+			invisibility = 101
+			del(src)
 		return 1
 
 
