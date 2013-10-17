@@ -13,10 +13,11 @@
 //////////////////////////////////////////////////////////////////////
 
 /obj/item/clothing/head/fluff/heather_winceworth // regens: Heather Winceworth
-	name= "red flower hair pin"
-	desc= "A blood red flower pin."
+	name= "Heather's rose"
+	desc= "A beautiful purple rose for your hair."
 	icon= 'icons/obj/clothing/hats.dmi'
-	icon_state = "hairflower"
+	icon_state = "hairflowerp"
+	item_state = "hairflowerp"
 	flags = FPRINT|TABLEPASS
 
 

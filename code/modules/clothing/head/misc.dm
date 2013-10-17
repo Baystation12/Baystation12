@@ -15,6 +15,10 @@
 	item_state = "hairflower"
 	flags = FPRINT|TABLEPASS
 
+/obj/item/clothing/head/hairflower/purple
+	icon_state = "hairflowerp"
+	item_state = "hairflowerp"
+
 /obj/item/clothing/head/powdered_wig
 	name = "powdered wig"
 	desc = "A powdered wig."
