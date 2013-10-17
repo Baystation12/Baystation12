@@ -142,3 +142,6 @@
 	if(W && W.loc)
 		W.loc = src.loc
 	return
+
+/obj/machinery/optable/slime
+	icon_state = "table-slime"
