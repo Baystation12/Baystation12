@@ -76,6 +76,7 @@ var/global/vox_tick = 1
 	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
 		var/datum/game_mode/heist/M = ticker.mode
 		M.cortical_stacks += I
+		M.raiders[mind] = I
 
 	vox_tick++
 	if (vox_tick > 4) vox_tick = 1
