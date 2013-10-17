@@ -479,4 +479,23 @@
 	desc = "It's a borgi."
 	icon_state = "borgi"
 	icon_living = "borgi"
-	icon_dead = "borgi_dead"
+
+
+/mob/living/simple_animal/corgi/Ian/borgi/Life()
+	..()
+
+	//spark for no reason
+	if(prob(5))
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(3, 1, src)
+		s.start()
+
+/mob/living/simple_animal/corgi/Ian/borgi/Die()
+	..()
+	visible_message("<b>[src]</b> blows apart!")
+	new /obj/effect/decal/cleanable/robot_debris(src.loc)
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(3, 1, src)
+	s.start()
+	del src
+	return

@@ -689,17 +689,23 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Starboard Primary Hallway"
 	icon_state = "hallS"
 
+/area/hallway/primary/starboard/west
+/area/hallway/primary/starboard/east
+
 /area/hallway/primary/aft
 	name = "\improper Aft Primary Hallway"
 	icon_state = "hallA"
+
 
 /area/hallway/primary/port
 	name = "\improper Port Primary Hallway"
 	icon_state = "hallP"
 
 /area/hallway/primary/port/west
+	name = "\improper Port West Hallway"
 
 /area/hallway/primary/port/east
+	name = "\improper Port East Hallway"
 
 /area/hallway/primary/central
 	name = "\improper Central Primary Hallway"
@@ -872,7 +878,13 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Law Office"
 	icon_state = "law"
 
+/area/civilian/barber
+	name = "\improper Barber Shop"
+	icon_state = "barber"
 
+/area/civilian/clothing
+	name = "\improper Clothing Shop"
+	icon_state = "Theatre"
 
 
 
