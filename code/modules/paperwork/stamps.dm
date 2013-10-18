@@ -10,7 +10,7 @@
 	throw_speed = 7
 	throw_range = 15
 	m_amt = 60
-	_color = "cargo"
+	_color = "qm"
 	pressure_resistance = 2
 	attack_verb = list("stamped")
 
