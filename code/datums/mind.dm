@@ -130,11 +130,11 @@ datum/mind
 				text = uppertext(text)
 			text = "<i><b>[text]</b></i>: "
 			if (assigned_role in command_positions)
-				text += "<b>HEAD</b>|officer|employee|headrev|rev"
-			else if (assigned_role in list("Security Officer", "Detective", "Warden"))
-				text += "head|<b>OFFICER</b>|employee|headre|rev"
+				text += "<b>HEAD</b>|employee|headrev|rev"
+//			else if (assigned_role in list("Security Officer", "Detective", "Warden"))
+//				text += "head|<b>OFFICER</b>|employee|headre|rev"
 			else if (src in ticker.mode.head_revolutionaries)
-				text = "head|officer|<a href='?src=\ref[src];revolution=clear'>employee</a>|<b>HEADREV</b>|<a href='?src=\ref[src];revolution=rev'>rev</a>"
+				text = "head|<a href='?src=\ref[src];revolution=clear'>employee</a>|<b>HEADREV</b>|<a href='?src=\ref[src];revolution=rev'>rev</a>"
 				text += "<br>Flash: <a href='?src=\ref[src];revolution=flash'>give</a>"
 
 				var/list/L = current.get_contents()
@@ -151,9 +151,9 @@ datum/mind
 				if (objectives.len==0)
 					text += "<br>Objectives are empty! <a href='?src=\ref[src];revolution=autoobjectives'>Set to kill all heads</a>."
 			else if (src in ticker.mode.revolutionaries)
-				text += "head|officer|<a href='?src=\ref[src];revolution=clear'>employee</a>|<a href='?src=\ref[src];revolution=headrev'>headrev</a>|<b>REV</b>"
+				text += "head|<a href='?src=\ref[src];revolution=clear'>employee</a>|<a href='?src=\ref[src];revolution=headrev'>headrev</a>|<b>REV</b>"
 			else
-				text += "head|officer|<b>EMPLOYEE</b>|<a href='?src=\ref[src];revolution=headrev'>headrev</a>|<a href='?src=\ref[src];revolution=rev'>rev</a>"
+				text += "head|<b>EMPLOYEE</b>|<a href='?src=\ref[src];revolution=headrev'>headrev</a>|<a href='?src=\ref[src];revolution=rev'>rev</a>"
 			sections["revolution"] = text
 
 			/** CULT ***/
@@ -162,18 +162,18 @@ datum/mind
 				text = uppertext(text)
 			text = "<i><b>[text]</b></i>: "
 			if (assigned_role in command_positions)
-				text += "<b>HEAD</b>|officer|employee|cultist"
-			else if (assigned_role in list("Security Officer", "Detective", "Warden"))
-				text += "head|<b>OFFICER</b>|employee|cultist"
+				text += "<b>HEAD</b>|employee|cultist"
+//			else if (assigned_role in list("Security Officer", "Detective", "Warden"))
+//				text += "head|<b>OFFICER</b>|employee|cultist"
 			else if (src in ticker.mode.cult)
-				text += "head|officer|<a href='?src=\ref[src];cult=clear'>employee</a>|<b>CULTIST</b>"
+				text += "head|<a href='?src=\ref[src];cult=clear'>employee</a>|<b>CULTIST</b>"
 				text += "<br>Give <a href='?src=\ref[src];cult=tome'>tome</a>|<a href='?src=\ref[src];cult=amulet'>amulet</a>."
 /*
 				if (objectives.len==0)
 					text += "<br>Objectives are empty! Set to sacrifice and <a href='?src=\ref[src];cult=escape'>escape</a> or <a href='?src=\ref[src];cult=summon'>summon</a>."
 */
 			else
-				text += "head|officer|<b>EMPLOYEE</b>|<a href='?src=\ref[src];cult=cultist'>cultist</a>"
+				text += "head|<b>EMPLOYEE</b>|<a href='?src=\ref[src];cult=cultist'>cultist</a>"
 			sections["cult"] = text
 
 			/** WIZARD ***/
@@ -707,7 +707,8 @@ datum/mind
 					var/mob/living/carbon/human/H = current
 					del(H.belt)
 					del(H.back)
-					del(H.ears)
+					del(H.l_ear)
+					del(H.r_ear)
 					del(H.gloves)
 					del(H.head)
 					del(H.shoes)
@@ -989,7 +990,8 @@ datum/mind
 			var/mob/living/carbon/human/H = current
 			del(H.belt)
 			del(H.back)
-			del(H.ears)
+			del(H.l_ear)
+			del(H.r_ear)
 			del(H.gloves)
 			del(H.head)
 			del(H.shoes)

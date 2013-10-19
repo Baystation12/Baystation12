@@ -1,5 +1,5 @@
 /obj/effect/expl_particles
-	name = "fire"
+	name = "explosive particles"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "explosion_particle"
 	opacity = 1
@@ -9,7 +9,7 @@
 /obj/effect/expl_particles/New()
 	..()
 	spawn (15)
-		del(src)
+		src.loc = null
 	return
 
 /obj/effect/expl_particles/Move()
@@ -37,7 +37,7 @@
 				step(expl,direct)
 
 /obj/effect/explosion
-	name = "fire"
+	name = "explosive particles"
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "explosion"
 	opacity = 1
@@ -49,7 +49,7 @@
 /obj/effect/explosion/New()
 	..()
 	spawn (10)
-		del(src)
+		src.loc = null
 	return
 
 /datum/effect/system/explosion

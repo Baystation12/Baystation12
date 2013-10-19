@@ -39,7 +39,7 @@
 	reagents = R
 	R.my_atom = src
 
-	if(name == "monkey" || name == "farwa" || name == "stok" || name == "neara" || name == "diona nymph") //Hideous but necessary to stop Pun-Pun becoming generic.
+	if(name == initial(name)) //To stop Pun-Pun becoming generic.
 		name = "[name] ([rand(1, 1000)])"
 		real_name = name
 
@@ -229,7 +229,7 @@
 		if(G.cell)
 			if(M.a_intent == "hurt")//Stungloves. Any contact will stun the alien.
 				if(G.cell.charge >= 2500)
-					G.cell.charge -= 2500
+					G.cell.use(2500)
 					Weaken(5)
 					if (stuttering < 5)
 						stuttering = 5

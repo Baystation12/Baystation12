@@ -64,9 +64,14 @@
 				user << "\red [target] is empty. Cant dissolve pill."
 				return
 			user << "\blue You dissolve the pill in [target]"
+
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Spiked \a [target] with a pill. Reagents: [reagentlist(src)]</font>")
+			msg_admin_attack("[user.name] ([user.ckey]) spiked \a [target] with a pill. Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+
 			reagents.trans_to(target, reagents.total_volume)
 			for(var/mob/O in viewers(2, user))
-				O.show_message("\red [user] puts something in [target].", 1)
+				O.show_message("\red [user] puts something in \the [target].", 1)
+
 			spawn(5)
 				del(src)
 
@@ -115,7 +120,7 @@
 	icon_state = "pill8"
 	New()
 		..()
-		reagents.add_reagent("stoxin", 30)
+		reagents.add_reagent("stoxin", 15)
 
 /obj/item/weapon/reagent_containers/pill/kelotane
 	name = "Kelotane pill"
@@ -123,7 +128,7 @@
 	icon_state = "pill11"
 	New()
 		..()
-		reagents.add_reagent("kelotane", 30)
+		reagents.add_reagent("kelotane", 15)
 
 /obj/item/weapon/reagent_containers/pill/tramadol
 	name = "Tramadol pill"
@@ -165,7 +170,7 @@
 	icon_state = "pill16"
 	New()
 		..()
-		reagents.add_reagent("dexalin", 30)
+		reagents.add_reagent("dexalin", 15)
 
 /obj/item/weapon/reagent_containers/pill/bicaridine
 	name = "Bicaridine pill"
@@ -173,7 +178,7 @@
 	icon_state = "pill18"
 	New()
 		..()
-		reagents.add_reagent("bicaridine", 30)
+		reagents.add_reagent("bicaridine", 20)
 
 /obj/item/weapon/reagent_containers/pill/happy
 	name = "Happy pill"

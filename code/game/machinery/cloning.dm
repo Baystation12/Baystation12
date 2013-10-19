@@ -195,6 +195,7 @@
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
 
 	H.species = mrace
+	H.add_language(mrace.language)
 	H.update_mutantrace()
 	H.suiciding = 0
 	src.attempting = 0
@@ -334,7 +335,7 @@
 	src.icon_state = "pod_0"
 	src.eject_wait = 0 //If it's still set somehow.
 	domutcheck(src.occupant) //Waiting until they're out before possible monkeyizing.
-	src.occupant.add_side_effect("Bad Stomach") // Give them an extra side-effect for free.
+//	src.occupant.add_side_effect("Bad Stomach") // Give them an extra side-effect for free.
 	src.occupant = null
 
 	src.biomass -= CLONE_BIOMASS

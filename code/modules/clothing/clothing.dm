@@ -35,12 +35,60 @@
 	throwforce = 2
 	slot_flags = SLOT_EARS
 
+/obj/item/clothing/ears/attack_hand(mob/user as mob)
+	if (!user) return
+
+	if (src.loc != user || !istype(user,/mob/living/carbon/human))
+		..()
+		return
+
+	var/mob/living/carbon/human/H = user
+	if(H.l_ear != src && H.r_ear != src)
+		..()
+		return
+
+	if(!canremove)
+		return
+
+	var/obj/item/clothing/ears/O
+	if(slot_flags & SLOT_TWOEARS )
+		O = (H.l_ear == src ? H.r_ear : H.l_ear)
+		user.u_equip(O)
+		if(!istype(src,/obj/item/clothing/ears/offear))
+			del(O)
+			O = src
+	else
+		O = src
+
+	user.u_equip(src)
+
+	if (O)
+		user.put_in_hands(O)
+		O.add_fingerprint(user)
+
+	if(istype(src,/obj/item/clothing/ears/offear))
+		del(src)
+
+/obj/item/clothing/ears/offear
+	name = "Other ear"
+	w_class = 5.0
+	icon = 'icons/mob/screen1_Midnight.dmi'
+	icon_state = "block"
+	slot_flags = SLOT_EARS | SLOT_TWOEARS
+
+	New(var/obj/O)
+		name = O.name
+		desc = O.desc
+		icon = O.icon
+		icon_state = O.icon_state
+		dir = O.dir
+
 /obj/item/clothing/ears/earmuffs
 	name = "earmuffs"
 	desc = "Protects your hearing from loud noises, and quiet ones as well."
 	icon_state = "earmuffs"
 	item_state = "earmuffs"
-
+	slot_flags = SLOT_EARS | SLOT_TWOEARS
 
 //Glasses
 /obj/item/clothing/glasses
@@ -262,9 +310,6 @@ BLIND     // can't see anything
 	if(usr.stat) return
 
 	if(hastie)
-		usr.put_in_hands(hastie)
-		hastie = null
-
 		if (istype(hastie,/obj/item/clothing/tie/holster))
 			verbs -= /obj/item/clothing/under/proc/holster
 
@@ -272,7 +317,10 @@ BLIND     // can't see anything
 			verbs -= /obj/item/clothing/under/proc/storage
 			var/obj/item/clothing/tie/storage/W = hastie
 			if (W.hold)
-				W.hold.loc = hastie
+				W.hold.close(usr)
+
+		usr.put_in_hands(hastie)
+		hastie = null
 
 		if(istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc

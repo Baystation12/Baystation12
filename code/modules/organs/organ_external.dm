@@ -181,8 +181,31 @@
 
 	var/result = update_icon()
 	return result
-
-
+	
+/*
+This function completely restores a damaged organ to perfect condition.
+*/
+/datum/organ/external/proc/rejuvenate()
+	damage_state = "00"
+	status = 0
+	perma_injury = 0
+	brute_dam = 0
+	burn_dam = 0
+	
+	// handle internal organs
+	for(var/datum/organ/internal/current_organ in internal_organs)
+		current_organ.rejuvenate()
+	
+	// remove embedded objects and drop them on the floor
+	for(var/obj/implanted_object in implants)
+		if(!istype(implanted_object,/obj/item/weapon/implant))	// We don't want to remove REAL implants. Just shrapnel etc.
+			implanted_object.loc = owner.loc
+			implants -= implanted_object
+			
+	owner.updatehealth()
+	update_icon()
+	
+	
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
 
@@ -321,14 +344,24 @@
 
 		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
 		if(W.internal && !W.is_treated() && owner.bodytemperature >= 170)
-			if(!owner.reagents.has_reagent("bicaridine"))	//bicard stops internal wounds from growing bigger with time
+			if(!owner.reagents.has_reagent("bicaridine"))	//bicard stops internal wounds from growing bigger with time, and also stop bleeding
 				W.open_wound(0.1 * wound_update_accuracy)
-			owner.vessel.remove_reagent("blood",0.07 * W.damage * wound_update_accuracy)
+				owner.vessel.remove_reagent("blood",0.05 * W.damage * wound_update_accuracy)
+			owner.vessel.remove_reagent("blood",0.02 * W.damage * wound_update_accuracy)//Bicaridine slows Internal Bleeding
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
+		//overdose of bicaridine begins healing IB
+		if(owner.reagents.has_reagent("bicaridine") && (owner.reagents.get_reagent_amount("bicaridine") >= 30))
+			var/healinternal = 0.2
+			if(W.damage <= healinternal)
+				W.damage = 0
+			else
+				W.damage -= healinternal
+
 		// slow healing
 		var/heal_amt = 0
+
 		if (W.damage < 15) //this thing's edges are not in day's travel of each other, what healing?
 			heal_amt += 0.2
 
@@ -454,7 +487,8 @@
 				organ= new /obj/item/weapon/organ/head(owner.loc, owner)
 				owner.u_equip(owner.glasses)
 				owner.u_equip(owner.head)
-				owner.u_equip(owner.ears)
+				owner.u_equip(owner.l_ear)
+				owner.u_equip(owner.r_ear)
 				owner.u_equip(owner.wear_mask)
 			if(ARM_RIGHT)
 				if(status & ORGAN_ROBOT)

@@ -8,7 +8,7 @@ What are the archived variables for?
 #define SPECIFIC_HEAT_AIR		20
 #define SPECIFIC_HEAT_CDO		30
 #define HEAT_CAPACITY_CALCULATION(oxygen,carbon_dioxide,nitrogen,toxins) \
-	(carbon_dioxide*SPECIFIC_HEAT_CDO + (oxygen+nitrogen)*SPECIFIC_HEAT_AIR + toxins*SPECIFIC_HEAT_TOXIN)
+	max(0, carbon_dioxide * SPECIFIC_HEAT_CDO + (oxygen + nitrogen) * SPECIFIC_HEAT_AIR + toxins * SPECIFIC_HEAT_TOXIN)
 
 #define MINIMUM_HEAT_CAPACITY	0.0003
 #define QUANTIZE(variable)		(round(variable,0.0001))
@@ -56,6 +56,8 @@ What are the archived variables for?
 
 	var/tmp/graphic_archived = 0
 	var/tmp/fuel_burnt = 0
+
+	var/reacting = 0
 
 //FOR THE LOVE OF GOD PLEASE USE THIS PROC
 //Call it with negative numbers to remove gases.
@@ -207,14 +209,13 @@ What are the archived variables for?
 	//Inputs: None
 	//Outputs: If a fire occured
 
-	var/reacting = 0 //set to 1 if a notable reaction occured (used by pipe_network)
+	 //set to 1 if a notable reaction occured (used by pipe_network)
 
-	if(temperature > FIRE_MINIMUM_TEMPERATURE_TO_EXIST)
-		if(zburn(null) > 0)
-			reacting = 1
+	zburn(null)
 
 	return reacting
 
+/*
 /datum/gas_mixture/proc/fire()
 	//Purpose: Calculating any fire reactions.
 	//Called by: react() (See above)
@@ -223,7 +224,7 @@ What are the archived variables for?
 
 	return zburn(null)
 
-	/*var/energy_released = 0
+	var/energy_released = 0
 	var/old_heat_capacity = heat_capacity()
 
 	var/datum/gas/volatile_fuel/fuel_store = locate(/datum/gas/volatile_fuel) in trace_gases
@@ -384,7 +385,7 @@ What are the archived variables for?
 	removed.oxygen = QUANTIZE((oxygen/sum)*amount)
 	removed.nitrogen = QUANTIZE((nitrogen/sum)*amount)
 	removed.carbon_dioxide = QUANTIZE((carbon_dioxide/sum)*amount)
-	removed.toxins = QUANTIZE((toxins/sum)*amount)
+	removed.toxins = QUANTIZE(((toxins/sum)*amount))
 
 	oxygen -= removed.oxygen/group_multiplier
 	nitrogen -= removed.nitrogen/group_multiplier
@@ -396,8 +397,8 @@ What are the archived variables for?
 			var/datum/gas/corresponding = new trace_gas.type()
 			removed.trace_gases += corresponding
 
-			corresponding.moles = (trace_gas.moles/sum)*amount
-			trace_gas.moles -= corresponding.moles/group_multiplier
+			corresponding.moles = ((trace_gas.moles/sum)*amount)
+			trace_gas.moles -= (corresponding.moles/group_multiplier)
 
 	removed.temperature = temperature
 	update_values()
@@ -1005,6 +1006,18 @@ What are the archived variables for?
 				else
 					return 0
 	return 1
+
+/datum/gas_mixture/proc/compare_unsim(turf/list/samples)
+	//Purpose: Compares a list of unsimulated tiles to self to see if within acceptable ranges that group processing may be enabled
+	//Called by: ZAS sleeping detection.
+	//Inputs: List of unsimulated turfs to compare to
+	//Outputs: 1 if within an acceptable range to sleep, 0 otherwise.
+	var/datum/gas_mixture/after_share = new
+	after_share.copy_from(src)
+
+	ShareSpace(after_share, samples)
+
+	return src.compare(after_share)
 
 /datum/gas_mixture/proc/subtract(datum/gas_mixture/right_side)
 	//Purpose: Subtracts right_side from air_mixture. Used to help turfs mingle

@@ -214,8 +214,15 @@
 	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
 
 	if(ispath(N, /turf/simulated/floor))
+		//if the old turf had a zone, connect the new turf to it as well - Cael
+		//Adjusted by SkyMarshal 5/10/13 - The air master will handle the addition of the new turf.
+		if(zone)
+			zone.RemoveTurf(src)
+			if(!zone.CheckStatus())
+				zone.SetStatus(ZONE_ACTIVE)
+
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
-		W.Assimilate_Air()
+		//W.Assimilate_Air()
 
 		W.lighting_lumcount += old_lumcount
 		if(old_lumcount != W.lighting_lumcount)
@@ -225,20 +232,17 @@
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
 
-		//if the old turf had a zone, connect the new turf to it as well - Cael
-		if(src.zone)
-			src.zone.RemoveTurf(src)
-			W.zone = src.zone
-			W.zone.AddTurf(W)
-
-		for(var/turf/simulated/T in orange(src,1))
-			air_master.tiles_to_update.Add(T)
+		if(air_master)
+			air_master.AddTurfToUpdate(src)
 
 		W.levelupdate()
 		return W
+
 	else
-		/*if(istype(src, /turf/simulated) && src.zone)
-			src.zone.rebuild = 1*/
+		if(zone)
+			zone.RemoveTurf(src)
+			if(!zone.CheckStatus())
+				zone.SetStatus(ZONE_ACTIVE)
 
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
 		W.lighting_lumcount += old_lumcount
@@ -246,19 +250,19 @@
 			W.lighting_changed = 1
 			lighting_controller.changed_turfs += W
 
-		if(src.zone)
-			src.zone.RemoveTurf(src)
-			W.zone = src.zone
-			W.zone.AddTurf(W)
-
 		if(air_master)
-			for(var/turf/simulated/T in orange(src,1))
-				air_master.tiles_to_update.Add(T)
+			air_master.AddTurfToUpdate(src)
 
 		W.levelupdate()
 		return W
 
+
+//Commented out by SkyMarshal 5/10/13 - If you are patching up space, it should be vacuum.
+//  If you are replacing a wall, you have increased the volume of the room without increasing the amount of gas in it.
+//  As such, this will no longer be used.
+
 //////Assimilate Air//////
+/*
 /turf/simulated/proc/Assimilate_Air()
 	var/aoxy = 0//Holders to assimilate air from nearby turfs
 	var/anitro = 0
@@ -302,6 +306,8 @@
 				S.air.toxins = air.toxins
 				S.air.temperature = air.temperature
 				S.air.update_values()
+*/
+
 
 /turf/proc/ReplaceWithLattice()
 	src.ChangeTurf(/turf/space)

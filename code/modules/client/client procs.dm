@@ -99,7 +99,7 @@
 		return null
 
 	if(IsGuestKey(key))
-		alert(src,"Baystation12 doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
+		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
 		del(src)
 		return
 
@@ -107,7 +107,7 @@
 	if(config.resource_urls)
 		src.preload_rsc = pick(config.resource_urls)
 	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
-	
+
 	src << "\red If the title screen is black, resources are still downloading. Please be patient until the title screen appears."
 
 
@@ -241,6 +241,7 @@
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
+//	preload_vox() //Causes long delays with initial start window and subsequent windows when first logged in.
 	getFiles(
 		'nano/js/libraries.min.js',
 		'nano/js/nano_update.js',
@@ -248,6 +249,7 @@
 		'nano/js/nano_base_helpers.js',
 		'nano/css/shared.css',
 		'nano/css/icons.css',
+		'nano/templates/chem_dispenser.tmpl',
 		'nano/templates/cryo.tmpl',
 		'nano/images/uiBackground.png',
 		'nano/images/uiIcons16.png',

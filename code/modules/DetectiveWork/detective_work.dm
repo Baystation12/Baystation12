@@ -107,8 +107,8 @@ obj/machinery/computer/forensic_scanning
 				dat += "<a href='?src=\ref[src];operation=logout'>{Log Out}</a><br><hr><br>"
 				if(scanning)
 					if(scan_process)
-						dat += "Scan Object: {[scanning.name]}<br>"
-						dat += "<a href='?src=\ref[src];operation=cancel'>{Cancel Scan}</a> {Print}<br>"
+						dat += {"Scan Object: {[scanning.name]}<br>
+						<a href='?src=\ref[src];operation=cancel'>{Cancel Scan}</a> {Print}<br>"}
 					else
 						if(isai) dat += "Scan Object: {[scanning.name]}<br>"
 						else dat += "Scan Object: <a href='?src=\ref[src];operation=eject'>{[scanning.name]}</a><br>"
@@ -117,8 +117,8 @@ obj/machinery/computer/forensic_scanning
 					if(isai) dat += "{No Object Inserted}<br>"
 					else dat += "<a href='?src=\ref[src];operation=insert'>{No Object Inserted}</a><br>"
 					dat += "{Scan} <a href='?src=\ref[src];operation=print'>{Print}</a><br>"
-				dat += "<a href='?src=\ref[src];operation=database'>{Access Database}</a><br><br>"
-				dat += "<tt>[scan_data]</tt>"
+				dat += {"<a href='?src=\ref[src];operation=database'>{Access Database}</a><br><br>"
+				<tt>[scan_data]</tt>"}
 				if(scan_data && !scan_process)
 					dat += "<br><a href='?src=\ref[src];operation=erase'>{Erase Data}</a>"
 		user << browse(dat,"window=scanner")
@@ -200,8 +200,8 @@ obj/machinery/computer/forensic_scanning
 					else
 						temp = ""
 					if(misc && misc.len)
-						temp += "<b>Auxiliary Evidence Database</b><br><br>"
-						temp += "This is where anything without fingerprints goes.<br><br>"
+						temp += {"<b>Auxiliary Evidence Database</b><br><br>
+						This is where anything without fingerprints goes.<br><br>"}
 						for(var/atom in misc)
 							var/list/data_entry = misc[atom]
 							temp += "<a href='?src=\ref[src];operation=auxiliary;identifier=[atom]'>{[data_entry[3]]}</a><br>"
@@ -215,8 +215,8 @@ obj/machinery/computer/forensic_scanning
 							dossier[2] = new_title
 						else
 							usr << "Illegal or blank name."
-					temp = "<b>Criminal Evidence Database</b><br><br>"
-					temp += "Consolidated data points: [dossier[2]]<br>"
+					temp = {"<b>Criminal Evidence Database</b><br><br>
+					Consolidated data points: [dossier[2]]<br>"}
 					var/print_string = "Fingerprints: Print not complete!<br>"
 					if(stringpercent(dossier[1]) <= FINGERPRINT_COMPLETE)
 						print_string = "Fingerprints: (80% or higher completion reached)<br>[dossier[1]]<br>"

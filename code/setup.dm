@@ -71,10 +71,10 @@
 #define DOOR_CRUSH_DAMAGE 10
 
 // Factor of how fast mob nutrition decreases
-#define	HUNGER_FACTOR 0.05
+#define HUNGER_FACTOR 0.05
 
 // How many units of reagent are consumed per tick, by default.
-#define  REAGENTS_METABOLISM 0.2
+#define REAGENTS_METABOLISM 0.2
 
 // By defining the effect multiplier this way, it'll exactly adjust
 // all effects according to how they originally were with the 0.4 metabolism
@@ -107,6 +107,7 @@
 	//Must be between 0 and 1. Values closer to 1 equalize temperature faster
 	//Should not exceed 0.4 else strange heat flow occur
 
+/*
 #define FIRE_MINIMUM_TEMPERATURE_TO_SPREAD	150+T0C
 #define FIRE_MINIMUM_TEMPERATURE_TO_EXIST	100+T0C
 #define FIRE_SPREAD_RADIOSITY_SCALE		0.85
@@ -114,7 +115,7 @@
 #define FIRE_PLASMA_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt plasma into the tile
 #define FIRE_GROWTH_RATE			40000 //For small fires
 
-//#define WATER_BOIL_TEMP 393
+#define WATER_BOIL_TEMP 393 */
 
 // Fire Damage
 #define CARBON_LIFEFORM_FIRE_RESISTANCE 200+T0C
@@ -132,7 +133,8 @@
 #define T20C 293.15					// 20degC
 #define TCMB 2.7					// -270.3degC
 
-var/turf/space/Space_Tile = locate(/turf/space) // A space tile to reference when atmos wants to remove excess heat.
+//Used to be used by FEA
+//var/turf/space/Space_Tile = locate(/turf/space) // A space tile to reference when atmos wants to remove excess heat.
 
 #define TANK_LEAK_PRESSURE		(30.*ONE_ATMOSPHERE)	// Tank starts leaking
 #define TANK_RUPTURE_PRESSURE	(40.*ONE_ATMOSPHERE) // Tank spills all contents into atmosphere
@@ -171,7 +173,8 @@ var/MAX_EXPLOSION_RANGE = 14
 #define SLOT_BACK 1024
 #define SLOT_POCKET 2048		//this is to allow items with a w_class of 3 or 4 to fit in pockets.
 #define SLOT_DENYPOCKET 4096	//this is to deny items with a w_class of 2 or 1 to fit in pockets.
-
+#define SLOT_TWOEARS 8192
+#define SLOT_LEGS = 16384
 
 //FLAGS BITMASK
 #define STOPSPRESSUREDMAGE 1	//This flag is used on the flags variable for SUIT and HEAD items which stop pressure damage. Note that the flag 1 was previous used as ONBACK, so it is possible for some code to use (flags & 1) when checking if something can be put on your back. Replace this code with (inv_flags & SLOT_BACK) if you see it anywhere
@@ -187,6 +190,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define CONDUCT		64		// conducts electricity (metal etc.)
 #define FPRINT		256		// takes a fingerprint
 #define ON_BORDER	512		// item has priority to check when entering or leaving
+#define NOBLOODY	2048	// used to items if they don't want to get a blood overlay
 
 #define GLASSESCOVERSEYES	1024
 #define MASKCOVERSEYES		1024		// get rid of some of the other retardation in these flags
@@ -235,7 +239,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define slot_r_hand 5
 #define slot_belt 6
 #define slot_wear_id 7
-#define slot_ears 8
+#define slot_l_ear 8
 #define slot_glasses 9
 #define slot_gloves 10
 #define slot_head 11
@@ -247,6 +251,8 @@ var/MAX_EXPLOSION_RANGE = 14
 #define slot_s_store 17
 #define slot_in_backpack 18
 #define slot_legcuffed 19
+#define slot_r_ear 20
+#define slot_legs 21
 
 //Cant seem to find a mob bitflags area other than the powers one
 
@@ -723,3 +729,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
 #define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
+
+//Flags for zone sleeping
+#define ZONE_ACTIVE 1
+#define ZONE_SLEEPING 0

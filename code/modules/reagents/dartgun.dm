@@ -29,7 +29,7 @@
 	var/obj/item/weapon/dart_cartridge/cartridge = null //Container of darts.
 	var/max_beakers = 3
 	var/dart_reagent_amount = 15
-	var/container_type = /obj/item/weapon/reagent_containers/glass/beaker/vial
+	var/container_type = /obj/item/weapon/reagent_containers/glass/beaker
 	var/list/starting_chems = null
 
 /obj/item/weapon/gun/dartgun/update_icon()
@@ -51,7 +51,7 @@
 	..()
 	if(starting_chems)
 		for(var/chem in starting_chems)
-			var/obj/item/weapon/reagent_containers/glass/beaker/vial/B = new(src)
+			var/obj/B = new container_type(src)
 			B.reagents.add_reagent(chem, 50)
 			beakers += B
 	cartridge = new /obj/item/weapon/dart_cartridge(src)
@@ -97,7 +97,7 @@
 			user << "\blue [I] doesn't seem to fit into [src]."
 			return
 		if(beakers.len >= max_beakers)
-			user << "\blue [src] already has [max_beakers] vials in it - another one isn't going to fit!"
+			user << "\blue [src] already has [max_beakers] beakers in it - another one isn't going to fit!"
 			return
 		var/obj/item/weapon/reagent_containers/glass/beaker/B = I
 		user.drop_item()

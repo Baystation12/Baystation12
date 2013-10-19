@@ -97,7 +97,7 @@
 
 		handle_pain()
 
-		handle_medical_side_effects()
+//		handle_medical_side_effects()
 
 	handle_stasis_bag()
 
@@ -294,7 +294,7 @@
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
 		// HACK NEED CHANGING LATER
-		if(health < 0)
+		if(health < config.health_threshold_crit)
 			losebreath++
 		if(losebreath>0) //Suffocating so do not take a breath
 			losebreath--
@@ -324,12 +324,28 @@
 
 					breath = loc.remove_air(breath_moles)
 
+					if(istype(wear_mask, /obj/item/clothing/mask/gas))
+						var/obj/item/clothing/mask/gas/G = wear_mask
+						var/datum/gas_mixture/filtered = new
+
+						filtered.copy_from(breath)
+						filtered.toxins *= G.gas_filter_strength
+						for(var/datum/gas/gas in filtered.trace_gases)
+							gas.moles *= G.gas_filter_strength
+						filtered.update_values()
+						loc.assume_air(filtered)
+
+						breath.toxins *= 1 - G.gas_filter_strength
+						for(var/datum/gas/gas in breath.trace_gases)
+							gas.moles *= 1 - G.gas_filter_strength
+						breath.update_values()
+
 					if(!is_lung_ruptured())
 						if(!breath || breath.total_moles < BREATH_MOLES / 5 || breath.total_moles > BREATH_MOLES * 5)
 							if(prob(5))
 								rupture_lung()
 
-					// Handle chem smoke effect  -- Doohl
+					// Handle filtering
 					var/block = 0
 					if(wear_mask)
 						if(wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT)
@@ -387,7 +403,7 @@
 				failed_last_breath = 1
 				oxygen_alert = max(oxygen_alert, 1)
 				return 0
-			if(health > 0)
+			if(health > config.health_threshold_crit)
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 				failed_last_breath = 1
 			else
@@ -495,7 +511,7 @@
 				if(SA_pp > SA_para_min) // Enough to make us paralysed for a bit
 					Paralyse(3) // 3 gives them one second to wake up and run away a bit!
 					if(SA_pp > SA_sleep_min) // Enough to make us sleep as well
-						sleeping = max(sleeping+2, 10)
+						sleeping = min(sleeping+2, 10)
 				else if(SA_pp > 0.15)	// There is sleeping gas in their lungs, but only a little, so give them a bit of a warning
 					if(prob(20))
 						spawn(0) emote(pick("giggle", "laugh"))
@@ -1038,7 +1054,7 @@
 				ear_deaf = max(ear_deaf, 1)
 			else if(ear_deaf)			//deafness, heals slowly over time
 				ear_deaf = max(ear_deaf-1, 0)
-			else if(istype(ears, /obj/item/clothing/ears/earmuffs))	//resting your ears with earmuffs heals ear damage faster
+			else if(istype(l_ear, /obj/item/clothing/ears/earmuffs) || istype(r_ear, /obj/item/clothing/ears/earmuffs))	//resting your ears with earmuffs heals ear damage faster
 				ear_damage = max(ear_damage-0.15, 0)
 				ear_deaf = max(ear_deaf, 1)
 			else if(ear_damage < 25)	//ear damage heals slowly under this threshold. otherwise you'll need earmuffs
@@ -1412,11 +1428,13 @@
 		if(status_flags & GODMODE)	return 0	//godmode
 		if(analgesic) return // analgesic avoids all traumatic shock temporarily
 
-		if(health < 0)// health 0 makes you immediately collapse
+		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
 			shock_stage = max(shock_stage, 61)
 
 		if(traumatic_shock >= 80)
 			shock_stage += 1
+		else if(health < config.health_threshold_softcrit)
+			shock_stage = max(shock_stage, 61)
 		else
 			shock_stage = min(shock_stage, 100)
 			shock_stage = max(shock_stage-1, 0)
@@ -1442,7 +1460,7 @@
 		if(shock_stage == 80)
 			src << "<font color='red'><b>"+pick("You see a light at the end of the tunnel!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
 
-		if (shock_stage > 80)
+		if(shock_stage > 80)
 			Paralyse(rand(15,28))
 
 	proc/handle_pulse()

@@ -521,7 +521,6 @@
 		name = "Short Vox Quills"
 		icon_state = "vox_shortquills"
 		species_allowed = list("Vox")
-		do_colouration = 0
 
 /datum/sprite_accessory/facial_hair
 

@@ -1,7 +1,7 @@
 #define SAY_MINIMUM_PRESSURE 10
 var/list/department_radio_keys = list(
-	  ":r" = "right hand",	"#r" = "right hand",	".r" = "right hand",
-	  ":l" = "left hand",	"#l" = "left hand",		".l" = "left hand",
+	  ":r" = "right ear",	"#r" = "right ear",		".r" = "right ear",
+	  ":l" = "left ear",	"#l" = "left ear",		".l" = "left ear",
 	  ":i" = "intercom",	"#i" = "intercom",		".i" = "intercom",
 	  ":h" = "department",	"#h" = "department",	".h" = "department",
 	  ":c" = "Command",		"#c" = "Command",		".c" = "Command",
@@ -16,8 +16,8 @@ var/list/department_radio_keys = list(
 	  ":u" = "Supply",		"#u" = "Supply",		".u" = "Supply",
 	  ":g" = "changeling",	"#g" = "changeling",	".g" = "changeling",
 
-	  ":R" = "right hand",	"#R" = "right hand",	".R" = "right hand",
-	  ":L" = "left hand",	"#L" = "left hand",		".L" = "left hand",
+	  ":R" = "right ear",	"#R" = "right ear",		".R" = "right ear",
+	  ":L" = "left ear",	"#L" = "left ear",		".L" = "left ear",
 	  ":I" = "intercom",	"#I" = "intercom",		".I" = "intercom",
 	  ":H" = "department",	"#H" = "department",	".H" = "department",
 	  ":C" = "Command",		"#C" = "Command",		".C" = "Command",
@@ -34,8 +34,8 @@ var/list/department_radio_keys = list(
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = "right hand",	"#ê" = "right hand",	".ê" = "right hand",
-	  ":ä" = "left hand",	"#ä" = "left hand",		".ä" = "left hand",
+	  ":ê" = "right ear",	"#ê" = "right ear",		".ê" = "right ear",
+	  ":ä" = "left ear",	"#ä" = "left ear",		".ä" = "left ear",
 	  ":ø" = "intercom",	"#ø" = "intercom",		".ø" = "intercom",
 	  ":ð" = "department",	"#ð" = "department",	".ð" = "department",
 	  ":ñ" = "Command",		"#ñ" = "Command",		".ñ" = "Command",
@@ -59,8 +59,12 @@ var/list/department_radio_keys = list(
 	if (!ishuman(src))
 		return
 	var/mob/living/carbon/human/H = src
-	if (H.ears)
-		var/obj/item/device/radio/headset/dongle = H.ears
+	if (H.l_ear || H.r_ear)
+		var/obj/item/device/radio/headset/dongle
+		if(istype(H.l_ear,/obj/item/device/radio/headset))
+			dongle = H.l_ear
+		else
+			dongle = H.r_ear
 		if(!istype(dongle)) return
 		if(dongle.translate_binary) return 1
 
@@ -68,10 +72,14 @@ var/list/department_radio_keys = list(
 	if (isalien(src)) return 1
 	if (!ishuman(src)) return
 	var/mob/living/carbon/human/H = src
-	if (H.ears)
-		var/obj/item/device/radio/headset/dongle = H.ears
+	if (H.l_ear || H.r_ear)
+		var/obj/item/device/radio/headset/dongle
+		if(istype(H.l_ear,/obj/item/device/radio/headset))
+			dongle = H.l_ear
+		else
+			dongle = H.r_ear
 		if(!istype(dongle)) return
-		if(dongle.translate_hive) return 1
+		if(dongle.translate_binary) return 1
 
 /mob/living/say(var/message)
 
@@ -80,7 +88,6 @@ var/list/department_radio_keys = list(
 	*/
 
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
-	message = capitalize(message)
 
 	/*
 		Sanity checking and speech failure.
@@ -166,6 +173,8 @@ var/list/department_radio_keys = list(
 	if(src.stunned > 2 || (traumatic_shock > 61 && prob(50)))
 		message_mode = null //Stunned people shouldn't be able to physically turn on their radio/hold down the button to speak into it
 
+	message = capitalize(message)
+
 	if (!message)
 		return
 
@@ -177,27 +186,31 @@ var/list/department_radio_keys = list(
 
 	switch (message_mode)
 		if ("headset")
-			if (src:ears)
-				src:ears.talk_into(src, message)
-				used_radios += src:ears
+			if (src:l_ear && istype(src:l_ear,/obj/item/device/radio))
+				src:l_ear.talk_into(src, message)
+				used_radios += src:l_ear
+				is_speaking_radio = 1
+			else if (src:r_ear)
+				src:r_ear.talk_into(src, message)
+				used_radios += src:r_ear
 				is_speaking_radio = 1
 
 			message_range = 1
 			italics = 1
 
-		if ("right hand")
-			if (r_hand)
-				r_hand.talk_into(src, message)
-				used_radios += src:r_hand
+		if ("right ear")
+			if (src:r_ear)
+				src:r_ear.talk_into(src, message)
+				used_radios += src:r_ear
 				is_speaking_radio = 1
 
 			message_range = 1
 			italics = 1
 
-		if ("left hand")
-			if (l_hand)
-				l_hand.talk_into(src, message)
-				used_radios += src:l_hand
+		if ("left ear")
+			if (src:l_ear)
+				src:l_ear.talk_into(src, message)
+				used_radios += src:l_ear
 				is_speaking_radio = 1
 
 			message_range = 1
@@ -231,9 +244,13 @@ var/list/department_radio_keys = list(
 
 		if ("department")
 			if(istype(src, /mob/living/carbon))
-				if (src:ears)
-					src:ears.talk_into(src, message, message_mode)
-					used_radios += src:ears
+				if (src:l_ear && istype(src:l_ear,/obj/item/device/radio))
+					src:l_ear.talk_into(src, message, message_mode)
+					used_radios += src:l_ear
+					is_speaking_radio = 1
+				if (src:r_ear)
+					src:r_ear.talk_into(src, message, message_mode)
+					used_radios += src:r_ear
 					is_speaking_radio = 1
 			else if(istype(src, /mob/living/silicon/robot))
 				if (src:radio)
@@ -265,9 +282,12 @@ var/list/department_radio_keys = list(
 						R.radio.talk_into(src, message, message_mode)
 						used_radios += R.radio
 				else
-					if (src:ears)
-						src:ears.talk_into(src, message, message_mode)
-						used_radios += src:ears
+					if (src:l_ear && istype(src:l_ear,/obj/item/device/radio))
+						src:l_ear.talk_into(src, message, message_mode)
+						used_radios += src:l_ear
+					else if (src:r_ear)
+						src:r_ear.talk_into(src, message, message_mode)
+						used_radios += src:r_ear
 				message_range = 1
 				italics = 1
 /////SPECIAL HEADSETS END
