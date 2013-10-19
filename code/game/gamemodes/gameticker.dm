@@ -64,10 +64,10 @@ var/global/datum/controller/gameticker/ticker
 		timerbuffer = config.vote_autotransfer_initial
 	else
 		timerbuffer = config.vote_autotransfer_interval
-	sleep(timerbuffer)
-	vote.autotransfer()
-	initialtpass = 1
-	votetimer()
+	spawn(timerbuffer)
+		vote.autotransfer()
+		initialtpass = 1
+		votetimer()
 
 
 /datum/controller/gameticker/proc/setup()
@@ -119,13 +119,6 @@ var/global/datum/controller/gameticker/ticker
 		world << "<B>Possibilities:</B> [english_list(modes)]"
 	else
 		src.mode.announce()
-
-	//setup the money accounts
-	if(!centcomm_account_db)
-		for(var/obj/machinery/account_database/check_db in machines)
-			if(check_db.z == 2)
-				centcomm_account_db = check_db
-				break
 
 	create_characters() //Create player characters and transfer them
 	collect_minds()

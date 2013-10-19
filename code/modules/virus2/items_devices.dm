@@ -10,7 +10,7 @@
 	icon_state = "health"
 	w_class = 2.0
 	item_state = "electronic"
-	flags = FPRINT | TABLEPASS | CONDUCT | USEDELAY
+	flags = FPRINT | TABLEPASS | CONDUCT
 
 
 /obj/item/device/antibody_scanner/attack(mob/living/carbon/M as mob, mob/user as mob)
@@ -53,8 +53,8 @@
 	if(prob(50))
 		user << "The dish shatters"
 		if(virus2.infectionchance > 0)
-			for(var/mob/living/carbon/target in view(null, src))
-				if(airborne_can_reach(src.loc, target.loc))
+			for(var/mob/living/carbon/target in view(1, get_turf(src)))
+				if(airborne_can_reach(get_turf(src), get_turf(target)))
 					if(get_infection_chance(target))
 						infect_virus2(target,src.virus2)
 		del src

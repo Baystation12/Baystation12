@@ -233,8 +233,10 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 	/client/proc/player_panel_new,
+	/client/proc/dsay,
 	/datum/admins/proc/show_skills,
-	/client/proc/dsay
+	/client/proc/jobbans,
+	/client/proc/cmd_admin_subtle_message 	/*send an message to somebody as a 'voice in their head'*/
 )
 /client/proc/add_admin_verbs()
 	if(holder)
@@ -590,15 +592,6 @@ var/list/admin_verbs_mod = list(
 	feedback_add_details("admin_verb","KA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] used 'kill air'.")
 	message_admins("\blue [key_name_admin(usr)] used 'kill air'.", 1)
-
-/client/proc/toggle_clickproc() //TODO ERRORAGE (This is a temporary verb here while I test the new clicking proc)
-	set name = "Toggle NewClickProc"
-	set category = "Debug"
-
-	if(!holder) return
-	using_new_click_proc = !using_new_click_proc
-	world << "Testing of new click proc [using_new_click_proc ? "enabled" : "disabled"]"
-	feedback_add_details("admin_verb","TNCP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/deadmin_self()
 	set name = "De-admin self"

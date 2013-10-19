@@ -9,7 +9,7 @@
 	var/on = 0
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null
-	var/beaker = null
+	var/obj/item/weapon/reagent_containers/glass/beaker = null
 
 	var/current_heat_capacity = 50
 
@@ -68,11 +68,12 @@
   * ui_interact is currently defined for /atom/movable
   *
   * @param user /mob The mob who is interacting with this ui
-  * @param ui_key string A string key to use for this ui. Allows for multiple unique uis on one obj/mob (defaut value "main")
+  * @param ui_key string A string key to use for this ui. Allows for multiple unique uis on one obj/mob (defaut value "main")  
+  * @param ui /datum/nanoui This parameter is passed by the nanoui process() proc when updating an open ui
   *
   * @return nothing
   */
-/obj/machinery/atmospherics/unary/cryo_cell/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/atmospherics/unary/cryo_cell/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 
 	if(user == occupant || user.stat)
 		return
@@ -114,14 +115,26 @@
 	else if(air_contents.temperature > 225)
 		data["cellTemperatureStatus"] = "average"
 
-	data["isBeakerLoaded"] = beaker ? 1 : 0
+	data["isBeakerLoaded"] = beaker ? 1 : 0	
+	/* // Removing beaker contents list from front-end, replacing with a total remaining volume
 	var beakerContents[0]
-	if(beaker && beaker:reagents && beaker:reagents.reagent_list.len)
-		for(var/datum/reagent/R in beaker:reagents.reagent_list)
+	if(beaker && beaker.reagents && beaker.reagents.reagent_list.len)
+		for(var/datum/reagent/R in beaker.reagents.reagent_list)
 			beakerContents.Add(list(list("name" = R.name, "volume" = R.volume))) // list in a list because Byond merges the first list...
 	data["beakerContents"] = beakerContents
-
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
+	*/
+	data["beakerLabel"] = null
+	data["beakerVolume"] = 0
+	if(beaker)
+		data["beakerLabel"] = beaker.label_text ? beaker.label_text : null
+		if (beaker.reagents && beaker.reagents.reagent_list.len)
+			for(var/datum/reagent/R in beaker.reagents.reagent_list)
+				data["beakerVolume"] += R.volume
+	
+	if (!ui) // no ui has been passed, so we'll search for one
+	{
+		ui = nanomanager.get_open_ui(user, src, ui_key)
+	}	
 	if (!ui) 
 		// the ui does not exist, so we'll create a new one
 		ui = new(user, src, ui_key, "cryo.tmpl", "Cryo Cell Control System", 520, 410)
@@ -153,8 +166,7 @@
 
 	if(href_list["ejectBeaker"])
 		if(beaker)
-			var/obj/item/weapon/reagent_containers/glass/B = beaker
-			B.loc = get_step(loc, SOUTH)
+			beaker.loc = get_step(loc, SOUTH)
 			beaker = null
 			
 	if(href_list["ejectOccupant"])
@@ -224,8 +236,8 @@
 		var/has_clonexa = occupant.reagents.get_reagent_amount("clonexadone") >= 1
 		var/has_cryo_medicine = has_cryo || has_clonexa
 		if(beaker && !has_cryo_medicine)
-			beaker:reagents.trans_to(occupant, 1, 10)
-			beaker:reagents.reaction(occupant)
+			beaker.reagents.trans_to(occupant, 1, 10)
+			beaker.reagents.reaction(occupant)
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/heat_gas_contents()
 	if(air_contents.total_moles() < 1)

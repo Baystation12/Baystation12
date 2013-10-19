@@ -980,6 +980,24 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Engineering"
 	access = access_engine
 
+/datum/supply_packs/air_dispenser
+	contains = list(/obj/machinery/pipedispenser/orderable)
+	name = "Pipe Dispenser"
+	cost = 35
+	containertype = /obj/structure/closet/crate/secure/large
+	containername = "Pipe Dispenser Crate"
+	group = "Engineering"
+	access = access_atmospherics
+
+/datum/supply_packs/disposals_dispenser
+	contains = list(/obj/machinery/pipedispenser/disposal/orderable)
+	name = "Disposals Pipe Dispenser"
+	cost = 35
+	containertype = /obj/structure/closet/crate/secure/large
+	containername = "Disposal Dispenser Crate"
+	group = "Engineering"
+	access = access_atmospherics
+	
 /datum/supply_packs/bee_keeper
 	name = "Beekeeping Crate"
 	contains = list(/obj/item/beezeez,

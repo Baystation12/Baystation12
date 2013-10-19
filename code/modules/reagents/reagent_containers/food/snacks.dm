@@ -96,14 +96,8 @@
 
 	return 0
 
-/obj/item/weapon/reagent_containers/food/snacks/afterattack(obj/target, mob/user , flag)
+/obj/item/weapon/reagent_containers/food/snacks/afterattack(obj/target, mob/user, proximity)
 	return
-
-
-
-
-
-
 
 /obj/item/weapon/reagent_containers/food/snacks/examine()
 	set src in view()
@@ -1338,7 +1332,8 @@
 		..()
 		reagents.add_reagent("nutriment",10)
 
-	afterattack(obj/O as obj, mob/user as mob)
+	afterattack(obj/O as obj, mob/user as mob, proximity)
+		if(!proximity) return
 		if(istype(O,/obj/structure/sink) && !wrapped)
 			user << "You place \the [name] under a stream of water..."
 			loc = get_turf(O)
