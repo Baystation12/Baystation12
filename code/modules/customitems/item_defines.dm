@@ -850,6 +850,18 @@
 	w_class = 1
 	slot_flags = SLOT_MASK
 
+
+////// Medallion - Lin Chang - Roland410
+
+/obj/item/clothing/tie/fluff/lin_chang_1
+	name = "shining black medallion"
+	desc = "A shiny black medallion made of something that looks like the Earth's obsidian, but it is harder than anything ever seen yet. On the front there seems to be a standing unathi chiseled in it, on the back the name of Lin Chang with the title of the Assassin Archmage."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "nasir_khayyam_1"
+	flags = FPRINT|TABLEPASS
+	w_class = 1
+	slot_flags = SLOT_MASK
+
 ////// Emerald necklace - Ty Foster - Nega
 
 /obj/item/clothing/mask/mara_kilpatrick_1
