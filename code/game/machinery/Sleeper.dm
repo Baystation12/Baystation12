@@ -147,7 +147,6 @@
 	New()
 		..()
 		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large()
-		beaker.volume = 1000000
 		spawn( 5 )
 			if(orient == "RIGHT")
 				icon_state = "sleeper_0-r"
@@ -180,50 +179,52 @@
 			del(src)
 		return
 
-/*	attackby(obj/item/weapon/reagent_containers/glass/beaker/O as obj, mob/user as mob)
-		if(istype(O, /obj/item/weapon/reagent_containers/glass))
+	attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
+		if(istype(G, /obj/item/weapon/reagent_containers/glass))
 			if(!beaker)
-				user.before_take_item(O)
-				O.loc = src
-				beaker = O
+				beaker = G
+				user.drop_item()
+				G.loc = src
+				user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
+				return
 			else
 				user << "\red The sleeper has a beaker already."
-*/
-	attackby(obj/item/weapon/grab/G as obj, mob/user as mob)
-		if((!( istype(G, /obj/item/weapon/grab)) || !( ismob(G.affecting))))
-			return
-		if(src.occupant)
-			user << "\blue <B>The sleeper is already occupied!</B>"
-			return
-
-		for(var/mob/living/carbon/slime/M in range(1,G.affecting))
-			if(M.Victim == G.affecting)
-				usr << "[G.affecting.name] will not fit into the sleeper because they have a slime latched onto their head."
 				return
 
-		visible_message("[user] starts putting [G.affecting.name] into the sleeper.", 3)
+		else if(istype(G, /obj/item/weapon/grab))
+			if(!ismob(G:affecting))
+				return
 
-		if(do_after(user, 20))
 			if(src.occupant)
 				user << "\blue <B>The sleeper is already occupied!</B>"
 				return
-			if(!G || !G.affecting) return
-			var/mob/M = G.affecting
-			if(M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
-			M.loc = src
-			src.occupant = M
-			src.icon_state = "sleeper_1"
-			if(orient == "RIGHT")
-				icon_state = "sleeper_1-r"
 
-			M << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
+			for(var/mob/living/carbon/slime/M in range(1,G:affecting))
+				if(M.Victim == G:affecting)
+					usr << "[G:affecting.name] will not fit into the sleeper because they have a slime latched onto their head."
+					return
 
-			for(var/obj/O in src)
-				O.loc = src.loc
-			src.add_fingerprint(user)
-			del(G)
+			visible_message("[user] starts putting [G:affecting:name] into the sleeper.", 3)
+
+			if(do_after(user, 20))
+				if(src.occupant)
+					user << "\blue <B>The sleeper is already occupied!</B>"
+					return
+				if(!G || !G:affecting) return
+				var/mob/M = G:affecting
+				if(M.client)
+					M.client.perspective = EYE_PERSPECTIVE
+					M.client.eye = src
+				M.loc = src
+				src.occupant = M
+				src.icon_state = "sleeper_1"
+				if(orient == "RIGHT")
+					icon_state = "sleeper_1-r"
+
+				M << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
+
+				src.add_fingerprint(user)
+				del(G)
 			return
 		return
 
@@ -291,8 +292,6 @@
 			toggle_filter()
 		if(!src.occupant)
 			return
-		for(var/obj/O in src)
-			O.loc = src.loc
 		if(src.occupant.client)
 			src.occupant.client.eye = src.occupant.client.mob
 			src.occupant.client.perspective = MOB_PERSPECTIVE
@@ -351,7 +350,7 @@
 		add_fingerprint(usr)
 		return
 
-/*	verb/remove_beaker()
+	verb/remove_beaker()
 		set name = "Remove Beaker"
 		set category = "Object"
 		set src in oview(1)
@@ -362,7 +361,7 @@
 			beaker = null
 		add_fingerprint(usr)
 		return
-*/
+
 	verb/move_inside()
 		set name = "Enter Sleeper"
 		set category = "Object"
