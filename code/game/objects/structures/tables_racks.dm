@@ -348,6 +348,7 @@
 
 
 /obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
+	if (!W) return
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
 		if (istype(G.affecting, /mob/living))
