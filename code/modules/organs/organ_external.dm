@@ -181,8 +181,31 @@
 
 	var/result = update_icon()
 	return result
-
-
+	
+/*
+This function completely restores a damaged organ to perfect condition.
+*/
+/datum/organ/external/proc/rejuvenate()
+	damage_state = "00"
+	status = 0
+	perma_injury = 0
+	brute_dam = 0
+	burn_dam = 0
+	
+	// handle internal organs
+	for(var/datum/organ/internal/current_organ in internal_organs)
+		current_organ.rejuvenate()
+	
+	// remove embedded objects and drop them on the floor
+	for(var/obj/implanted_object in implants)
+		if(!istype(implanted_object,/obj/item/weapon/implant))	// We don't want to remove REAL implants. Just shrapnel etc.
+			implanted_object.loc = owner.loc
+			implants -= implanted_object
+			
+	owner.updatehealth()
+	update_icon()
+	
+	
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
 

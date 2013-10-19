@@ -6,9 +6,6 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 #define CONNECTION_INDIRECT 1
 #define CONNECTION_CLOSED   0
 
-#define ZONE_ACTIVE 1
-#define ZONE_SLEEPING 0
-
 /connection
 	var/turf/simulated/A
 	var/turf/simulated/B

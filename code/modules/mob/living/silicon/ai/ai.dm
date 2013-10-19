@@ -134,7 +134,7 @@ var/list/ai_list = list()
 
 		for(var/line in lines)
 		// split & clean up
-			var/list/Entry = text2list(line, "-")
+			var/list/Entry = text2list(line, ":")
 			for(var/i = 1 to Entry.len)
 				Entry[i] = trim(Entry[i])
 
@@ -428,16 +428,6 @@ var/list/ai_list = list()
 					if ((O.client && !( O.blinded )))
 						O.show_message(text("\red <B>[] took a swipe at []!</B>", M, src), 1)
 	return
-
-/mob/living/silicon/ai/attack_hand(mob/living/carbon/M as mob)
-	if(ishuman(M))//Checks to see if they are ninja
-		if(istype(M:gloves, /obj/item/clothing/gloves/space_ninja)&&M:gloves:candrain&&!M:gloves:draining)
-			if(M:wear_suit:s_control)
-				M:wear_suit:transfer_ai("AICORE", "NINJASUIT", src, M)
-			else
-				M << "\red <b>ERROR</b>: \black Remote access channel disabled."
-	return
-
 
 /mob/living/silicon/ai/attack_animal(mob/living/simple_animal/M as mob)
 	if(M.melee_damage_upper == 0)

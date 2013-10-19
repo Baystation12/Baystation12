@@ -65,7 +65,8 @@
 		return 0
 
 
-	afterattack(obj/target, mob/user , flag)
+	afterattack(obj/target, mob/user, proximity)
+		if(!proximity) return
 
 		if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
 

@@ -9,7 +9,7 @@
 	var/list/stored = list()
 	w_class = 3.0
 	item_state = "electronic"
-	flags = FPRINT | TABLEPASS | CONDUCT | USEDELAY
+	flags = FPRINT | TABLEPASS | CONDUCT | NOBLUDGEON
 	slot_flags = SLOT_BELT
 
 	attackby(obj/item/weapon/f_card/W as obj, mob/user as mob)
@@ -64,9 +64,8 @@
 					user << "\blue Blood type: [M.blood_DNA[blood]]\nDNA: [blood]"
 		return
 
-	afterattack(atom/A as obj|turf|area, mob/user as mob)
-		if(!in_range(A,user))
-			return
+	afterattack(atom/A as obj|turf|area, mob/user as mob, proximity)
+		if(!proximity) return
 		if(loc != user)
 			return
 		if(istype(A,/obj/machinery/computer/forensic_scanning)) //breaks shit.

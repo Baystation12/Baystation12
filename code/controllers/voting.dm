@@ -206,12 +206,16 @@ datum/controller/vote
 						return 0
 					choices.Add(config.votable_modes)
 				if("crew_transfer")
-					if (get_security_level() == "red" || get_security_level() == "delta")
-						return 0
-					if(ticker.current_state <= 2)
-						return 0
-					question = "End the shift?"
-					choices.Add("Initiate Crew Transfer", "Continue The Round")
+					if(check_rights(R_ADMIN) || check_rights(R_MOD))
+						question = "End the shift?"
+						choices.Add("Initiate Crew Transfer", "Continue The Round")
+					else
+						if (get_security_level() == "red" || get_security_level() == "delta")
+							return 0
+						if(ticker.current_state <= 2)
+							return 0
+						question = "End the shift?"
+						choices.Add("Initiate Crew Transfer", "Continue The Round")
 				if("custom")
 					question = html_encode(input(usr,"What is the vote for?") as text|null)
 					if(!question)	return 0
@@ -236,10 +240,10 @@ datum/controller/vote
 					world << sound('sound/ambience/alarm4.ogg')
 				if("custom")
 					world << sound('sound/ambience/alarm4.ogg')
-		/*	if(mode == "gamemode" && going)
+			if(mode == "gamemode" && going)
 				going = 0
 				world << "<font color='red'><b>Round start has been delayed.</b></font>"
-			if(mode == "crew_transfer" && ooc_allowed)
+		/*	if(mode == "crew_transfer" && ooc_allowed)
 				auto_muted = 1
 				ooc_allowed = !( ooc_allowed )
 				world << "<b>The OOC channel has been automatically disabled due to a crew transfer vote.</b>"

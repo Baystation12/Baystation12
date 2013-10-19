@@ -20,6 +20,14 @@
 	layer = 2.8
 	throwpass = 1	//You can throw objects over this, despite it's density.")
 	var/parts = /obj/item/weapon/table_parts
+	var/flipped = 0
+	var/health = 100
+
+/obj/structure/table/proc/update_adjacent()
+	for(var/direction in list(1,2,4,8,5,6,9,10))
+		if(locate(/obj/structure/table,get_step(src,direction)))
+			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
+			T.update_icon()
 
 /obj/structure/table/New()
 	..()
@@ -27,16 +35,10 @@
 		if(T != src)
 			del(T)
 	update_icon()
-	for(var/direction in list(1,2,4,8,5,6,9,10))
-		if(locate(/obj/structure/table,get_step(src,direction)))
-			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
-			T.update_icon()
+	update_adjacent()
 
 /obj/structure/table/Del()
-	for(var/direction in list(1,2,4,8,5,6,9,10))
-		if(locate(/obj/structure/table,get_step(src,direction)))
-			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
-			T.update_icon()
+	update_adjacent()
 	..()
 
 /obj/structure/table/proc/destroy()
@@ -46,6 +48,28 @@
 
 
 /obj/structure/table/update_icon()
+	if(flipped)
+		var/type = 0
+		var/tabledirs = 0
+		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
+			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
+			if (T && T.flipped)
+				type++
+				tabledirs |= direction
+		var/base = "table"
+		if (istype(src, /obj/structure/table/woodentable))
+			base = "wood"
+		if (istype(src, /obj/structure/table/reinforced))
+			base = "rtable"
+
+		icon_state = "[base]flip[type]"
+		if (type==1)
+			if (tabledirs & turn(dir,90))
+				icon_state = icon_state+"-"
+			if (tabledirs & turn(dir,-90))
+				icon_state = icon_state+"+"
+		return 1
+
 	spawn(2) //So it properly updates when deleting
 		var/dir_sum = 0
 		for(var/direction in list(1,2,4,8,5,6,9,10))
@@ -77,7 +101,8 @@
 					skip_sum = 1
 					continue
 			if(!skip_sum) //means there is a window between the two tiles in this direction
-				if(locate(/obj/structure/table,get_step(src,direction)))
+				var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
+				if(T && !T.flipped)
 					if(direction <5)
 						dir_sum += direction
 					else
@@ -235,11 +260,6 @@
 	if(prob(75))
 		destroy()
 
-
-/obj/structure/table/hand_p(mob/user as mob)
-	return src.attack_paw(user)
-
-
 /obj/structure/table/attack_paw(mob/user)
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
@@ -263,18 +283,60 @@
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		destroy()
 
+/obj/structure/table/attack_tk() // no telehulk sorry
+	return
 
 /obj/structure/table/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
-
+	if(istype(mover,/obj/item/projectile))
+		return (check_cover(mover,target))
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
-	else
-		return 0
+	if (flipped)
+		if (get_dir(loc, target) == dir)
+			return !density
+		else
+			return 1
+	return 0
 
+//checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
+/obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)
+	var/turf/cover = flipped ? get_turf(src) : get_step(loc, get_dir(from, loc))
+	if (get_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
+		return 1
+	if (get_turf(P.original) == cover)
+		var/chance = 20
+		if (ismob(P.original))
+			var/mob/M = P.original
+			if (M.lying)
+				chance += 20				//Lying down lets you catch less bullets
+		if(flipped)
+			if(get_dir(loc, from) == dir)	//Flipped tables catch mroe bullets
+				chance += 20
+			else
+				return 1					//But only from one side
+		if(prob(chance))
+			health -= P.damage/2
+			if (health > 0)
+				visible_message("<span class='warning'>[P] hits \the [src]!</span>")
+				return 0
+			else
+				visible_message("<span class='warning'>[src] breaks down!</span>")
+				destroy()
+				return 1
+	return 1
+
+/obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
+	if(istype(O) && O.checkpass(PASSTABLE))
+		return 1
+	if (flipped)
+		if (get_dir(loc, target) == dir)
+			return !density
+		else
+			return 1
+	return 1
 
 /obj/structure/table/MouseDrop_T(obj/O as obj, mob/user as mob)
-
 	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
 		return
 	if(isrobot(user))
@@ -285,7 +347,8 @@
 	return
 
 
-/obj/structure/table/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
+	if (!W) return
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
 		if (istype(G.affecting, /mob/living))
@@ -329,6 +392,103 @@
 	user.drop_item(src)
 	return
 
+/obj/structure/table/proc/straight_table_check(var/direction)
+	var/turf/left = get_step(src,turn(direction,90))
+	var/turf/right = get_step(src,turn(direction,-90))
+	var/turf/next = get_step(src,direction)
+	if(locate(/obj/structure/table,left) || locate(/obj/structure/table,right))
+		return 0
+	var/obj/structure/table/T = locate(/obj/structure/table, next)
+	if (istype(T,/obj/structure/table/reinforced/))
+		var/obj/structure/table/reinforced/R = T
+		if (R.status == 2)
+			return 0
+	if (!T)
+		return 1
+	else
+		return T.straight_table_check(direction)
+
+/obj/structure/table/verb/do_flip()
+	set name = "Flip table"
+	set desc = "Flips a non-reinforced table"
+	set category = "Object"
+	set src in oview(1)
+
+	if (issilicon(usr))
+		usr << "<span class='notice'>You need hands for this.</span>"
+		return
+	if(!flip(get_cardinal_dir(usr,src)))
+		usr << "<span class='notice'>It won't budge.</span>"
+	else
+		usr.visible_message("<span class='warning'>[usr] flips \the [src]!</span>")
+		return
+
+/obj/structure/table/proc/do_put()
+	set name = "Put table back"
+	set desc = "Puts flipped table back"
+	set category = "Object"
+	set src in oview(1)
+
+	if (!unflip())
+		usr << "<span class='notice'>It won't budge.</span>"
+		return
+
+
+/obj/structure/table/proc/flip(var/direction)
+	if (flipped)
+		return 0
+
+	if( !straight_table_check(turn(direction,90)) || !straight_table_check(turn(direction,-90)) )
+		return 0
+
+	verbs -=/obj/structure/table/verb/do_flip
+	verbs +=/obj/structure/table/proc/do_put
+
+	var/list/targets = list(get_step(src,dir),get_step(src,turn(dir, 45)),get_step(src,turn(dir, -45)))
+	for (var/atom/movable/A in get_turf(src))
+		if (!A.anchored)
+			spawn(0)
+				A.throw_at(pick(targets),1,1)
+
+	dir = direction
+	if(dir != NORTH)
+		layer = 5
+	flipped = 1
+	flags |= ON_BORDER
+	for(var/D in list(turn(direction, 90), turn(direction, -90)))
+		if(locate(/obj/structure/table,get_step(src,D)))
+			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,D))
+			T.flip(direction)
+	update_icon()
+	update_adjacent()
+
+	return 1
+
+/obj/structure/table/proc/unflip()
+	if (!flipped)
+		return 0
+
+	var/can_flip = 1
+	for (var/mob/A in oview(src,0))//src.loc)
+		if (istype(A))
+			can_flip = 0
+	if (!can_flip)
+		return 0
+
+	verbs -=/obj/structure/table/proc/do_put
+	verbs +=/obj/structure/table/verb/do_flip
+
+	layer = initial(layer)
+	flipped = 0
+	flags &= ~ON_BORDER
+	for(var/D in list(turn(dir, 90), turn(dir, -90)))
+		if(locate(/obj/structure/table,get_step(src,D)))
+			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,D))
+			T.unflip()
+	update_icon()
+	update_adjacent()
+
+	return 1
 
 /*
  * Wooden tables
@@ -338,7 +498,7 @@
 	desc = "Do not apply fire to this. Rumour says it burns easily."
 	icon_state = "wood_table"
 	parts = /obj/item/weapon/table_parts/wood
-
+	health = 50
 /*
  * Reinforced tables
  */
@@ -346,9 +506,15 @@
 	name = "reinforced table"
 	desc = "A version of the four legged table. It is stronger."
 	icon_state = "reinf_table"
+	health = 200
 	var/status = 2
 	parts = /obj/item/weapon/table_parts/reinforced
 
+/obj/structure/table/reinforced/flip(var/direction)
+	if (status == 2)
+		return 0
+	else
+		return ..()
 
 /obj/structure/table/reinforced/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/weldingtool))
@@ -478,3 +644,6 @@
 		new /obj/item/weapon/rack_parts(loc)
 		density = 0
 		del(src)
+
+/obj/structure/rack/attack_tk() // no telehulk sorry
+	return

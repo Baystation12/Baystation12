@@ -21,6 +21,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	var/last_rebuilt = 0
 	var/status = ZONE_ACTIVE
 	var/interactions_with_neighbors = 0
+	var/interactions_with_unsim = 0
 	var/progress = "nothing"
 
 
@@ -185,10 +186,14 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 				unsimulated_tiles -= T
 
 		if(unsimulated_tiles.len)
+			var/old_pressure = air.return_pressure()
 			var/moved_air = ShareSpace(air,unsimulated_tiles)
 
 			if(moved_air > vsc.airflow_lightest_pressure)
 				AirflowSpace(src)
+
+			if(old_pressure && (moved_air / old_pressure) > MINIMUM_AIR_RATIO_TO_SUSPEND) //Check if we've moved enough air to be considered awake.
+				interactions_with_unsim++
 		else
 			unsimulated_tiles = null
 
@@ -305,10 +310,11 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 					Z.interactions_with_neighbors++
 					interactions_with_neighbors++
 
-		if(!interactions_with_neighbors && !unsimulated_tiles)
+		if(!interactions_with_neighbors && !interactions_with_unsim)
 			SetStatus(ZONE_SLEEPING)
 
 		interactions_with_neighbors = 0
+		interactions_with_unsim = 0
 
 	progress = "all components completed successfully, the problem is not here"
 
@@ -324,6 +330,31 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 		if(!archived_air)
 			archived_air = new
 		archived_air.copy_from(air)
+
+
+/zone/proc/CheckStatus()
+	return status
+
+
+/zone/proc/ActivateIfNeeded()
+	if(status == ZONE_ACTIVE) return
+
+	var/difference = 0
+
+	if(unsimulated_tiles && unsimulated_tiles.len)
+		if(air.compare_unsim(unsimulated_tiles))
+			difference = 1
+
+	if(!difference)
+		for(var/zone/Z in connected_zones) //Check adjacent zones for air difference.
+			if(air.compare(Z.air))
+				difference = 1
+				break
+
+	if(difference) //We have a difference, activate the zone.
+		SetStatus(ZONE_ACTIVE)
+
+	return
 
 
 /zone/proc/assume_air(var/datum/gas_mixture/giver)

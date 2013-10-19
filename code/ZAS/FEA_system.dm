@@ -50,11 +50,7 @@ Important Procedures
 	air_master.process()
 		This first processes the air_master update/rebuild lists then processes all groups and tiles for air calculations
 
-
 */
-
-#define ZONE_ACTIVE 1
-#define ZONE_SLEEPING 0
 
 var/tick_multiplier = 2
 

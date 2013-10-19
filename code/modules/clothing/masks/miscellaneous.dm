@@ -34,6 +34,13 @@
 	flags = FPRINT|TABLEPASS
 	flags_inv = HIDEFACE
 
+/obj/item/clothing/mask/snorkel
+	name = "Snorkel"
+	desc = "For the Swimming Savant."
+	icon_state = "snorkel"
+	flags = FPRINT|TABLEPASS
+	flags_inv = HIDEFACE
+
 //scarves (fit in in mask slot)
 
 /obj/item/clothing/mask/bluescarf
