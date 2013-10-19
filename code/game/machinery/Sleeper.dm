@@ -75,8 +75,13 @@
 			if(src.connected.beaker)
 				if(src.connected.filtering)
 					dat += "<HR><A href='?src=\ref[src];togglefilter=1'>Stop Dialysis</A><BR>"
+					dat += text("Output Beaker has [] units of free space remaining<BR><HR>", src.connected.beaker.reagents.maximum_volume - src.connected.beaker.reagents.total_volume)
 				else
-					dat += "<HR><A href='?src=\ref[src];togglefilter=1'> Start Dialysis</A><BR>"
+					dat += "<HR><A href='?src=\ref[src];togglefilter=1'>Start Dialysis</A><BR>"
+					dat += text("Output Beaker has [] units of free space remaining<BR><HR>", src.connected.beaker.reagents.maximum_volume - src.connected.beaker.reagents.total_volume)
+			else
+				dat += "<HR>No Dialysis Output Beaker is present.<BR><HR>"
+
 			for(var/chemical in connected.available_chemicals)
 				dat += "Inject [connected.available_chemicals[chemical]]: "
 				for(var/amount in connected.amounts)
@@ -332,6 +337,10 @@
 			user << text("[]\t -Burn Severity %: []", (src.occupant.getFireLoss() < 60 ? "\blue " : "\red "), src.occupant.getFireLoss())
 			user << "\blue Expected time till occupant can safely awake: (note: If health is below 20% these times are inaccurate)"
 			user << text("\blue \t [] second\s (if around 1 or 2 the sleeper is keeping them asleep.)", src.occupant.paralysis / 5)
+			if(src.beaker)
+				user << text("\blue \t Dialysis Output Beaker has [] of free space remaining.", src.beaker.reagents.maximum_volume - src.beaker.reagents.total_volume)
+			else
+				user << "\blue No Dialysis Output Beaker loaded."
 		else
 			user << "\blue There is no one inside!"
 		return
@@ -357,6 +366,7 @@
 		if(usr.stat != 0)
 			return
 		if(beaker)
+			filtering = 0
 			beaker.loc = usr.loc
 			beaker = null
 		add_fingerprint(usr)
@@ -391,6 +401,8 @@
 			src.icon_state = "sleeper_1"
 			if(orient == "RIGHT")
 				icon_state = "sleeper_1-r"
+
+			usr << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
 
 			for(var/obj/O in src)
 				del(O)
