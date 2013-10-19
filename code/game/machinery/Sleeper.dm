@@ -11,7 +11,6 @@
 	density = 1
 	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
 
-
 /obj/machinery/sleep_console/ex_act(severity)
 	switch(severity)
 		if(1.0)
@@ -73,6 +72,11 @@
 				for(var/chemical in connected.available_chemicals)
 					dat += "[connected.available_chemicals[chemical]]: [occupant.reagents.get_reagent_amount(chemical)] units<br>"
 			dat += "<HR><A href='?src=\ref[src];refresh=1'>Refresh meter readings each second</A><BR>"
+			if(src.connected.beaker)
+				if(src.connected.filtering)
+					dat += "<HR><A href='?src=\ref[src];togglefilter=1'>Stop Dialysis</A><BR>"
+				else
+					dat += "<HR><A href='?src=\ref[src];togglefilter=1'> Start Dialysis</A><BR>"
 			for(var/chemical in connected.available_chemicals)
 				dat += "Inject [connected.available_chemicals[chemical]]: "
 				for(var/amount in connected.amounts)
@@ -100,6 +104,9 @@
 					else
 						usr << "\red \b This person is not in good enough condition for sleepers to be effective! Use another means of treatment, such as cryogenics!"
 		if (href_list["refresh"])
+			src.updateUsrDialog()
+		if (href_list["togglefilter"])
+			src.connected.toggle_filter()
 			src.updateUsrDialog()
 		src.add_fingerprint(usr)
 	return
@@ -131,13 +138,16 @@
 	density = 1
 	anchored = 1
 	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
-	var/mob/living/occupant = null
+	var/mob/living/carbon/human/occupant = null
 	var/available_chemicals = list("inaprovaline" = "Inaprovaline", "stoxin" = "Soporific", "dermaline" = "Dermaline", "bicaridine" = "Bicaridine", "dexalin" = "Dexalin")
 	var/amounts = list(5, 10)
-
+	var/obj/item/weapon/reagent_containers/glass/beaker = null
+	var/filtering = 0
 
 	New()
 		..()
+		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large()
+		beaker.volume = 1000000
 		spawn( 5 )
 			if(orient == "RIGHT")
 				icon_state = "sleeper_0-r"
@@ -150,6 +160,14 @@
 
 
 	process()
+		if(filtering > 0)
+			if(beaker)
+				if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
+					src.occupant.vessel.trans_to(beaker, 1)
+					for(var/datum/reagent/x in src.occupant.reagents.reagent_list)
+//						world << "FILTERING CHEMS"
+						src.occupant.reagents.trans_to(beaker, 3)
+						src.occupant.vessel.trans_to(beaker, 1)
 		src.updateDialog()
 		return
 
@@ -162,7 +180,15 @@
 			del(src)
 		return
 
-
+/*	attackby(obj/item/weapon/reagent_containers/glass/beaker/O as obj, mob/user as mob)
+		if(istype(O, /obj/item/weapon/reagent_containers/glass))
+			if(!beaker)
+				user.before_take_item(O)
+				O.loc = src
+				beaker = O
+			else
+				user << "\red The sleeper has a beaker already."
+*/
 	attackby(obj/item/weapon/grab/G as obj, mob/user as mob)
 		if((!( istype(G, /obj/item/weapon/grab)) || !( ismob(G.affecting))))
 			return
@@ -203,6 +229,8 @@
 
 
 	ex_act(severity)
+		if(filtering)
+			toggle_filter()
 		switch(severity)
 			if(1.0)
 				for(var/atom/movable/A as mob|obj in src)
@@ -226,6 +254,8 @@
 					return
 		return
 	emp_act(severity)
+		if(filtering)
+			toggle_filter()
 		if(stat & (BROKEN|NOPOWER))
 			..(severity)
 			return
@@ -250,9 +280,15 @@
 		if (M:reagents.get_reagent_amount("inaprovaline") < 5)
 			M:reagents.add_reagent("inaprovaline", 5)
 		return
-
+	proc/toggle_filter()
+		if(filtering)
+			filtering = 0
+		else
+			filtering = 1
 
 	proc/go_out()
+		if(filtering)
+			toggle_filter()
 		if(!src.occupant)
 			return
 		for(var/obj/O in src)
@@ -315,7 +351,18 @@
 		add_fingerprint(usr)
 		return
 
-
+/*	verb/remove_beaker()
+		set name = "Remove Beaker"
+		set category = "Object"
+		set src in oview(1)
+		if(usr.stat != 0)
+			return
+		if(beaker)
+			beaker.loc = usr.loc
+			beaker = null
+		add_fingerprint(usr)
+		return
+*/
 	verb/move_inside()
 		set name = "Enter Sleeper"
 		set category = "Object"
