@@ -94,6 +94,7 @@ VOX HEIST ROUNDTYPE
 
 		vox.real_name = capitalize(newname)
 		vox.name = vox.real_name
+		raider.name = vox.name
 		vox.age = rand(12,20)
 		vox.dna.mutantrace = "vox"
 		vox.set_species("Vox")
@@ -231,6 +232,34 @@ VOX HEIST ROUNDTYPE
 		count++
 
 	..()
+
+datum/game_mode/proc/auto_declare_completion_heist()
+	if(raiders.len)
+		var/check_return = 0
+		if(ticker && istype(ticker.mode,/datum/game_mode/vox/heist))
+			check_return = 1
+		var/text = "<FONT size = 2><B>The vox raiders were:</B></FONT>"
+
+		for(var/datum/mind/vox in raiders)
+			text += "<br>[vox.key] was [vox.name] ("
+			if(check_return)
+				var/obj/stack = raiders[vox]
+				if(get_area(stack) != locate(/area/shuttle/vox/station))
+					text += "left behind)"
+					continue
+			if(vox.current)
+				if(vox.current.stat == DEAD)
+					text += "died"
+				else
+					text += "survived"
+				if(vox.current.real_name != vox.name)
+					text += " as [vox.current.real_name]"
+			else
+				text += "body destroyed"
+			text += ")"
+
+		world << text
+	return 1
 
 /datum/game_mode/vox/heist/check_finished()
 	if (!(is_vox_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
