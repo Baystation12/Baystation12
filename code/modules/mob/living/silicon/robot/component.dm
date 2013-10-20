@@ -124,11 +124,11 @@
 
 /obj/item/broken_device
 	name = "broken component"
-	icon = 'icons/robot_component.dmi'
+	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "broken"
 
 /obj/item/robot_parts/robot_component
-	icon = 'icons/robot_component.dmi'
+	icon = 'icons/obj/robot_component.dmi'
 	icon_state = "working"
 	construction_time = 200
 	construction_cost = list("metal"=5000)
