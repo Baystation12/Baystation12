@@ -198,7 +198,7 @@
 		if (overlays.len) overlays.len = 0
 		return
 	else if(wiresexposed)
-		icon_state = "apcwires"
+		icon_state = "apcewires"
 		if (overlays.len) overlays.len = 0
 		return
 	else
