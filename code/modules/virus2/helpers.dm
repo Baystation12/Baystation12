@@ -51,14 +51,14 @@ proc/airborne_can_reach(turf/source, turf/target)
 //Attemptes to infect mob M with virus. Set forced to 1 to ignore protective clothnig
 /proc/infect_virus2(var/mob/living/carbon/M,var/datum/disease2/disease/disease,var/forced = 0)
 	if(!istype(disease))
-		return
+		return 0
 	if(!istype(M))
-		return
+		return 0
 	if ("[disease.uniqueID]" in M.virus2)
-		return
+		return 0
 	// if one of the antibodies in the mob's body matches one of the disease's antigens, don't infect
 	if(M.antibodies & disease.antigen != 0)
-		return
+		return 0
 
 	if(prob(disease.infectionchance) || forced)
 		// certain clothes can prevent an infection
@@ -68,6 +68,8 @@ proc/airborne_can_reach(turf/source, turf/target)
 		var/datum/disease2/disease/D = disease.getcopy()
 		D.minormutate()
 		M.virus2["[D.uniqueID]"] = D
+		return 1
+	return 0
 
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)
