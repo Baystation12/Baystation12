@@ -10,14 +10,12 @@
 	var/transaction_amount = 0
 	var/transaction_purpose = "Default charge"
 	var/access_code = 0
-	var/obj/machinery/account_database/linked_db
 	var/datum/money_account/linked_account
 
 /obj/item/device/eftpos/New()
 	..()
 	machine_id = "[station_name()] EFTPOS #[num_financial_terminals++]"
 	access_code = rand(1111,111111)
-	reconnect_database()
 	spawn(0)
 		print_reference()
 
@@ -69,16 +67,6 @@
 	D.wrapped = R
 	D.name = "small parcel - 'EFTPOS access code'"
 
-/obj/item/device/eftpos/proc/reconnect_database()
-	var/turf/location = get_turf(src)
-	if(!location)
-		return
-
-	for(var/obj/machinery/account_database/DB in machines) //Hotfix until someone finds out why it isn't in 'machines'
-		if(DB.z == location.z)
-			linked_db = DB
-			break
-
 /obj/item/device/eftpos/attack_self(mob/user as mob)
 	if(get_dist(src,user) <= 1)
 		var/dat = "<b>[eftpos_name]</b><br>"
@@ -109,17 +97,11 @@
 
 /obj/item/device/eftpos/attackby(O as obj, user as mob)
 	if(istype(O, /obj/item/weapon/card))
-		//attempt to connect to a new db, and if that doesn't work then fail
-		if(!linked_db)
-			reconnect_database()
-		if(linked_db)
-			if(linked_account)
-				var/obj/item/weapon/card/I = O
-				scan_card(I)
-			else
-				usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
+		if(linked_account)
+			var/obj/item/weapon/card/I = O
+			scan_card(I)
 		else
-			usr << "\icon[src]<span class='warning'>Unable to connect to accounts database.</span>"
+			usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
 	else
 		..()
 
@@ -145,14 +127,12 @@
 				else
 					usr << "\icon[src]<span class='warning'>Incorrect code entered.</span>"
 			if("link_account")
-				if(!linked_db)
-					reconnect_database()
-				if(linked_db)
-					var/attempt_account_num = input("Enter account number to pay EFTPOS charges into", "New account number") as num
-					var/attempt_pin = input("Enter pin code", "Account pin") as num
-					linked_account = linked_db.attempt_account_access(attempt_account_num, attempt_pin, 1)
-				else
-					usr << "\icon[src]<span class='warning'>Unable to connect to accounts database.</span>"
+				var/attempt_account_num = input("Enter account number to pay EFTPOS charges into", "New account number") as num
+				var/attempt_pin = input("Enter pin code", "Account pin") as num
+				linked_account = attempt_account_access(attempt_account_num, attempt_pin, 1)
+				if(linked_account.suspended)
+					linked_account = null
+					usr << "\icon[src]<span class='warning'>Account has been suspended.</span>"
 			if("trans_purpose")
 				transaction_purpose = input("Enter reason for EFTPOS transaction", "Transaction purpose")
 			if("trans_value")
@@ -172,10 +152,7 @@
 				else
 					usr << "\icon[src] <span class='warning'>No account connected to send transactions to.</span>"
 			if("scan_card")
-				//attempt to connect to a new db, and if that doesn't work then fail
-				if(!linked_db)
-					reconnect_database()
-				if(linked_db && linked_account)
+				if(linked_account)
 					var/obj/item/I = usr.get_active_hand()
 					if (istype(I, /obj/item/weapon/card))
 						scan_card(I)
@@ -201,45 +178,62 @@
 		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
 		if(transaction_locked && !transaction_paid)
 			if(linked_account)
-				var/attempt_pin = input("Enter pin code", "EFTPOS transaction") as num
-				var/datum/money_account/D = linked_db.attempt_account_access(C.associated_account_number, attempt_pin, 2)
-				if(D)
-					if(transaction_amount <= D.money)
-						playsound(src, 'sound/machines/chime.ogg', 50, 1)
-						src.visible_message("\icon[src] The [src] chimes.")
-						transaction_paid = 1
+				if(!linked_account.suspended)
+					var/attempt_pin = input("Enter pin code", "EFTPOS transaction") as num
+					var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
+					if(D)
+						if(!D.suspended)
+							if(transaction_amount <= D.money)
+								playsound(src, 'sound/machines/chime.ogg', 50, 1)
+								src.visible_message("\icon[src] The [src] chimes.")
+								transaction_paid = 1
 
-						//transfer the money
-						D.money -= transaction_amount
-						linked_account.money += transaction_amount
+								//transfer the money
+								D.money -= transaction_amount
+								linked_account.money += transaction_amount
 
-						//create entries in the two account transaction logs
-						var/datum/transaction/T = new()
-						T.target_name = "[linked_account.owner_name] (via [eftpos_name])"
-						T.purpose = transaction_purpose
-						if(transaction_amount > 0)
-							T.amount = "([transaction_amount])"
+								//create entries in the two account transaction logs
+								var/datum/transaction/T = new()
+								T.target_name = "[linked_account.owner_name] (via [eftpos_name])"
+								T.purpose = transaction_purpose
+								if(transaction_amount > 0)
+									T.amount = "([transaction_amount])"
+								else
+									T.amount = "[transaction_amount]"
+								T.source_terminal = machine_id
+								T.date = current_date_string
+								T.time = worldtime2text()
+								D.transaction_log.Add(T)
+								//
+								T = new()
+								T.target_name = D.owner_name
+								T.purpose = transaction_purpose
+								T.amount = "[transaction_amount]"
+								T.source_terminal = machine_id
+								T.date = current_date_string
+								T.time = worldtime2text()
+								linked_account.transaction_log.Add(T)
+							else
+								usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
 						else
-							T.amount = "[transaction_amount]"
-						T.source_terminal = machine_id
-						T.date = current_date_string
-						T.time = worldtime2text()
-						D.transaction_log.Add(T)
-						//
-						T = new()
-						T.target_name = D.owner_name
-						T.purpose = transaction_purpose
-						T.amount = "[transaction_amount]"
-						T.source_terminal = machine_id
-						T.date = current_date_string
-						T.time = worldtime2text()
-						linked_account.transaction_log.Add(T)
+							usr << "\icon[src]<span class='warning'>Your account has been suspended.</span>"
 					else
-						usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
+						usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 				else
-					usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
+					usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
 			else
 				usr << "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>"
+	else if (istype(I, /obj/item/weapon/card/emag))
+		if(transaction_locked)
+			if(transaction_paid)
+				usr << "\icon[src]<span class='info'>You stealthily swipe [I] through [src].</span>"
+				transaction_locked = 0
+				transaction_paid = 0
+			else
+				visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
+				playsound(src, 'sound/machines/chime.ogg', 50, 1)
+				src.visible_message("\icon[src] The [src] chimes.")
+				transaction_paid = 1
 	else
 		..()
 

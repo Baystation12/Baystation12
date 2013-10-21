@@ -814,7 +814,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	contains = list(/obj/item/seeds/bloodtomatoseed,
 					/obj/item/weapon/storage/pill_bottle/zoom,
 					/obj/item/weapon/storage/pill_bottle/happy,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe)
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine)
 
 	name = "Contraband crate"
 	cost = 30
@@ -979,6 +979,24 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Atmospheric circulator crate"
 	group = "Engineering"
 	access = access_engine
+
+/datum/supply_packs/air_dispenser
+	contains = list(/obj/machinery/pipedispenser/orderable)
+	name = "Pipe Dispenser"
+	cost = 35
+	containertype = /obj/structure/closet/crate/secure/large
+	containername = "Pipe Dispenser Crate"
+	group = "Engineering"
+	access = access_atmospherics
+
+/datum/supply_packs/disposals_dispenser
+	contains = list(/obj/machinery/pipedispenser/disposal/orderable)
+	name = "Disposals Pipe Dispenser"
+	cost = 35
+	containertype = /obj/structure/closet/crate/secure/large
+	containername = "Disposal Dispenser Crate"
+	group = "Engineering"
+	access = access_atmospherics
 
 /datum/supply_packs/bee_keeper
 	name = "Beekeeping Crate"

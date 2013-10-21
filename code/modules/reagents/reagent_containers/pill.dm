@@ -57,7 +57,8 @@
 
 		return 0
 
-	afterattack(obj/target, mob/user , flag)
+	afterattack(obj/target, mob/user, proximity)
+		if(!proximity) return
 
 		if(target.is_open_container() != 0 && target.reagents)
 			if(!target.reagents.total_volume)

@@ -112,7 +112,7 @@
 						///obj/item/mecha_parts/mecha_equipment/jetpack, //TODO MECHA JETPACK SPRITE MISSING
 						/obj/item/mecha_parts/mecha_equipment/weapon/energy/taser,
 						/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg,
-						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/mousetrap_mortar, HONK-related mech part
+						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar/mousetrap_mortar, HONK-related mech part
 						///obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/banana_mortar, Also HONK-related
 						///obj/item/mecha_parts/mecha_equipment/weapon/honker Thirdly HONK-related
 						),

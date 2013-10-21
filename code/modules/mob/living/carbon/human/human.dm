@@ -71,6 +71,8 @@
 	if (ismob(AM))
 		var/mob/tmob = AM
 
+		if( istype(tmob, /mob/living/carbon) && prob(10) )
+			src.spread_disease_to(AM, "Contact")
 //BubbleWrap - Should stop you pushing a restrained person out of the way
 
 		if(istype(tmob, /mob/living/carbon/human))
@@ -276,23 +278,6 @@
 	return
 
 
-/mob/living/carbon/human/hand_p(mob/M as mob)
-	var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
-	var/datum/organ/external/affecting = get_organ(ran_zone(dam_zone))
-	var/armor = run_armor_check(affecting, "melee")
-	apply_damage(rand(1,2), BRUTE, affecting, armor)
-	if(armor >= 2)	return
-
-	for(var/datum/disease/D in M.viruses)
-		if(istype(D, /datum/disease/jungle_fever))
-			var/mob/living/carbon/human/H = src
-			src = null
-			src = H.monkeyize()
-			contract_disease(D,1,0)
-	return
-
-
-
 /mob/living/carbon/human/attack_animal(mob/living/simple_animal/M as mob)
 	if(M.melee_damage_upper == 0)
 		M.emote("[M.friendly] [src]")
@@ -483,21 +468,20 @@
 //gets name from ID or PDA itself, ID inside PDA doesn't matter
 //Useful when player is being seen by other mobs
 /mob/living/carbon/human/proc/get_id_name(var/if_no_id = "Unknown")
-	var/obj/item/device/pda/pda = wear_id
-	var/obj/item/weapon/card/id/id = wear_id
-	if(istype(pda))		. = pda.owner
-	else if(istype(id))	. = id.registered_name
-	if(!.) 				. = if_no_id	//to prevent null-names making the mob unclickable
+	. = if_no_id
+	if(istype(wear_id,/obj/item/device/pda))
+		var/obj/item/device/pda/P = wear_id
+		return P.owner
+	if(wear_id)
+		var/obj/item/weapon/card/id/I = wear_id.GetID()
+		if(I)
+			return I.registered_name
 	return
 
 //gets ID card object from special clothes slot or null.
 /mob/living/carbon/human/proc/get_idcard()
-	var/obj/item/weapon/card/id/id = wear_id
-	var/obj/item/device/pda/pda = wear_id
-	if (istype(pda) && pda.id)
-		id = pda.id
-	if (istype(id))
-		return id
+	if(wear_id)
+		return wear_id.GetID()
 
 //Added a safety check in case you want to shock a human mob directly through electrocute_act.
 /mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/safety = 0)

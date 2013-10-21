@@ -116,7 +116,7 @@ datum
 					if(method == TOUCH)
 						infect_virus2(M,self.data["virus2"])
 					else
-						infect_virus2(M,self.data["virus2"],1)
+						infect_virus2(M,self.data["virus2"],1) //injected, force infection!
 				if(self.data && self.data["antibodies"] && istype(M, /mob/living/carbon))//... and curing
 					var/mob/living/carbon/C = M
 					C.antibodies |= self.data["antibodies"]
@@ -2340,6 +2340,12 @@ datum
 			name = "Berry Juice"
 			id = "berryjuice"
 			description = "A delicious blend of several different kinds of berries."
+			color = "#990066" // rgb: 153, 0, 102
+
+		drink/grapejuice
+			name = "Grape Juice"
+			id = "grapejuice"
+			description = "It's grrrrrape!"
 			color = "#863333" // rgb: 134, 51, 51
 
 		drink/poisonberryjuice
@@ -2407,6 +2413,12 @@ datum
 			id = "cream"
 			description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?"
 			color = "#DFD7AF" // rgb: 223, 215, 175
+
+		drink/grenadine
+			name = "Grenadine Syrup"
+			id = "grenadine"
+			description = "Made in the modern day with proper pomegranate substitute. Who uses real fruit, anyways?"
+			color = "#FF004F" // rgb: 255, 0, 79
 
 		drink/hot_coco
 			name = "Hot Chocolate"
@@ -3010,20 +3022,69 @@ datum
 			name = "Absinthe"
 			id = "absinthe"
 			description = "Watch out that the Green Fairy doesn't come for you!"
-			color = "#33EE00" // rgb: lots, ??, ??
-			boozepwr = 2
+			color = "#33EE00" // rgb: 51, 238, 0
+			boozepwr = 4
 			dizzy_adj = 5
-			slur_start = 25
-			confused_start = 100
+			slur_start = 15
+			confused_start = 30
 
-			//copy paste from LSD... shoot me
-			on_mob_life(var/mob/M)
+
+		ethanol/pwine
+			name = "Poison Wine"
+			id = "pwine"
+			description = "Is this even wine? Toxic! Hallucinogenic! Probably consumed in boatloads by your superiors!"
+			color = "#000000" // rgb: 0, 0, 0 SHOCKER
+			boozepwr = 1
+			dizzy_adj = 1
+			slur_start = 1
+			confused_start = 1
+
+			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
+				M.druggy = max(M.druggy, 50)
 				if(!data) data = 1
 				data++
-				M:hallucination += 5
-				..()
-				return
+				switch(data)
+					if(1 to 25)
+						if (!M.stuttering) M.stuttering = 1
+						M.make_dizzy(10)
+						M.hallucination = max(M.hallucination, 3)
+						if(prob(1)) M.emote(pick("twitch","giggle"))
+					if(25 to 75)
+						if (!M.stuttering) M.stuttering = 1
+						M.hallucination = max(M.hallucination, 10)
+						M.make_jittery(20)
+						M.make_dizzy(20)
+						M.druggy = max(M.druggy, 45)
+						if(prob(5)) M.emote(pick("twitch","giggle"))
+					if (75 to 150)
+						if (!M.stuttering) M.stuttering = 1
+						M.hallucination = max(M.hallucination, 60)
+						M.make_jittery(40)
+						M.make_dizzy(40)
+						M.druggy = max(M.druggy, 60)
+						if(prob(10)) M.emote(pick("twitch","giggle"))
+						if(prob(30)) M.adjustToxLoss(2)
+					if (150 to 300)
+						if (!M.stuttering) M.stuttering = 1
+						M.hallucination = max(M.hallucination, 60)
+						M.make_jittery(40)
+						M.make_dizzy(40)
+						M.druggy = max(M.druggy, 60)
+						if(prob(10)) M.emote(pick("twitch","giggle"))
+						if(prob(30)) M.adjustToxLoss(2)
+						if(prob(5)) if(ishuman(M))
+							var/mob/living/carbon/human/H = M
+							var/datum/organ/internal/heart/L = H.internal_organs["heart"]
+							if (istype(L))
+								L.take_damage(5, 0)
+					if (300 to INFINITY)
+						if(ishuman(M))
+							var/mob/living/carbon/human/H = M
+							var/datum/organ/internal/heart/L = H.internal_organs["heart"]
+							if (istype(L))
+								L.take_damage(100, 0)
+
 
 		ethanol/deadrum
 			name = "Deadrum"
@@ -3274,6 +3335,27 @@ datum
 			description = "A cold refreshment"
 			color = "#FFFFFF" // rgb: 255, 255, 255
 			boozepwr = 1.5
+
+		ethanol/melonliquor
+			name = "Melon Liquor"
+			id = "melonliquor"
+			description = "A relatively sweet and fruity 46 proof liquor."
+			color = "#138808" // rgb: 19, 136, 8
+			boozepwr = 1
+
+		ethanol/bluecuracao
+			name = "Blue Curacao"
+			id = "bluecuracao"
+			description = "Exotically blue, fruity drink, distilled from oranges."
+			color = "#0000CD" // rgb: 0, 0, 205
+			boozepwr = 1.5
+
+		ethanol/suidream
+			name = "Sui Dream"
+			id = "suidream"
+			description = "Comprised of: White soda, blue curacao, melon liquor."
+			color = "#00A86B" // rgb: 0, 168, 107
+			boozepwr = 0.5
 
 		ethanol/demonsblood
 			name = "Demons Blood"

@@ -5,7 +5,7 @@
 	fire_sound = 'sound/weapons/Laser.ogg'
 	origin_tech = "combat=2;magnets=4"
 	w_class = 4.0
-	flags =  FPRINT | TABLEPASS | CONDUCT | USEDELAY
+	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BACK
 	charge_cost = 100
 	projectile_type = "/obj/item/projectile/ion"
@@ -33,7 +33,7 @@ obj/item/weapon/gun/energy/staff
 	icon_state = "staffofchange"
 	item_state = "staffofchange"
 	fire_sound = 'sound/weapons/emitter.ogg'
-	flags =  FPRINT | TABLEPASS | CONDUCT | USEDELAY
+	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BACK
 	w_class = 4.0
 	charge_cost = 200
@@ -63,6 +63,15 @@ obj/item/weapon/gun/energy/staff
 
 	update_icon()
 		return
+
+
+	click_empty(mob/user = null)
+		if (user)
+			user.visible_message("*fizzle*", "\red <b>*fizzle*</b>")
+		else
+			src.visible_message("*fizzle*")
+		playsound(src.loc, 'sound/effects/sparks1.ogg', 100, 1)
+
 /obj/item/weapon/gun/energy/staff/animate
 	name = "staff of animation"
 	desc = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
