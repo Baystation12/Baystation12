@@ -4,7 +4,7 @@
 
 /datum/species
 	var/name                     // Species name.
-
+	var/path 					// Species path
 	var/icobase = 'icons/mob/human_races/r_human.dmi'    // Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi' // Mutated icon set.
 	var/eyes = "eyes_s"                                  // Icon for eyes.
@@ -38,16 +38,18 @@
 	var/bloodflags=0
 	var/bodyflags=0
 
+
 /datum/species/human
 	name = "Human"
 	primitive = /mob/living/carbon/monkey
-
+	path = /mob/living/carbon/human
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
 
 /datum/species/unathi
 	name = "Unathi"
 	icobase = 'icons/mob/human_races/r_lizard.dmi'
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
+	path = /mob/living/carbon/human/unathi
 	language = "Sinta'unathi"
 	tail = "sogtail"
 	attack_verb = "scratch"
@@ -61,6 +63,7 @@
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
+	path = /mob/living/carbon/human/tajaran
 	language = "Siik'tajr"
 	tail = "tajtail"
 	attack_verb = "scratch"
@@ -83,6 +86,7 @@
 	name = "Skrell"
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
+	path = /mob/living/carbon/human/skrell
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
 
@@ -92,6 +96,7 @@
 	name = "Vox"
 	icobase = 'icons/mob/human_races/r_vox.dmi'
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
+	path = /mob/living/carbon/human/vox
 	language = "Vox-pidgin"
 
 	warning_low_pressure = 50
@@ -110,6 +115,7 @@
 	name = "Diona"
 	icobase = 'icons/mob/human_races/r_plant.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
+	path = /mob/living/carbon/human/diona
 	language = "Rootspeak"
 	attack_verb = "slash"
 	primitive = /mob/living/carbon/monkey/diona
@@ -132,6 +138,7 @@
 	name = "Skellington"
 	icobase = 'icons/mob/human_races/r_skeleton.dmi'
 	deform = 'icons/mob/human_races/r_skeleton.dmi'  // TODO: Need deform.
+	path = /mob/living/carbon/human/skellington
 	language = "Clatter"
 	attack_verb = "punch"
 
@@ -143,9 +150,22 @@
 	name = "Kidan"
 	icobase = 'icons/mob/human_races/r_kidan.dmi'
 	deform = 'icons/mob/human_races/r_def_kidan.dmi'
+	path = /mob/living/carbon/human/kidan
 	language = "Chittin"
 	attack_verb = "slash"
 
 	flags = WHITELISTED | HAS_CHITTIN
 	bloodflags = BLOOD_GREEN
 	bodyflags = FEET_CLAWS
+
+
+
+/datum/species/slime
+	name = "Slime People"
+	language = "Bubblish"
+	attack_verb = "bludgeon"
+	path = /mob/living/carbon/human/slime
+	primitive = /mob/living/carbon/slime/adult
+
+	flags = WHITELISTED | NO_BREATHE | HAS_LIPS
+	bloodflags = BLOOD_SLIME
