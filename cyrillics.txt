@@ -1,0 +1,25 @@
+Исправлено:
+
+code/__HELPERS/text.dm
+	Возвращаем "я"
+	
+code/modules/admin/verbs/adminhelp.dm
+	Исправление пустых админхелпов
+	
+code/modules/admin/verbs/adminpm.dm
+	Фикс "я" в AdminPM
+
+code/game/machinery/requests_console.dm
+	Фикс консоли запросов (опять "я")
+	
+code/modules/admin/player_notes.dm
+	фикс "я" в админских записях о игроке
+	
+code/defines/procs/captain_announce.dm
+	фикс "я" в аннонсах с мостика
+	
+code/modules/mob/mob.dm
+	фикс "я" в Notes игрока
+	
+code/modules/paperwork/paper.dm
+	"я" в заголовке листа, "я" для самих листов бумаги

@@ -57,6 +57,8 @@
 	if(!msg)
 		msg = input(src,"Message:", "Private message to [C.key]") as text|null
 
+		msg = sanitize(copytext(msg,1,MAX_MESSAGE_LEN))
+
 		if(!msg)	return
 		if(!C)
 			if(holder)	src << "<font color='red'>Error: Admin-PM: Client not found.</font>"

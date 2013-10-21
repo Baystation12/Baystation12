@@ -291,7 +291,7 @@ var/list/slot_equipment_priority = list( \
 	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
 
 	if (sane)
-		msg = sanitize(msg)
+		msg = sanitize_u(msg)
 
 	if (length(memory) == 0)
 		memory += msg
