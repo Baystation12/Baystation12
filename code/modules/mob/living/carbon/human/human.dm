@@ -36,6 +36,20 @@
 	species = new /datum/species/diona(src)
 	..()
 
+/mob/living/carbon/human/kidan/New()
+	species = new /datum/species/kidan(src)
+	..()
+
+/mob/living/carbon/human/slime/New()
+	species = new /datum/species/slime(src)
+	dna = new /datum/dna(null)
+	dna.mutantrace = "slime"
+	..()
+
+/mob/living/carbon/human/skellington/New()
+	species = new /datum/species/skellington(src)
+	..()
+
 /mob/living/carbon/human/New()
 
 	if(!species)
@@ -62,6 +76,7 @@
 		dna.real_name = real_name
 
 	prev_gender = gender // Debug for plural genders
+
 	make_organs()
 	make_blood()
 
@@ -1316,6 +1331,9 @@ mob/living/carbon/human/yank_out_object()
 		see_invisible = SEE_INVISIBLE_LEVEL_ONE
 	else
 		see_invisible = SEE_INVISIBLE_LIVING
+
+	if(species.name=="Slime People")
+		dna.mutantrace = "slime"
 
 	spawn(0)
 		update_icons()

@@ -348,18 +348,38 @@
 	proc/create_character()
 		spawning = 1
 		close_spawn_windows()
-
-		var/mob/living/carbon/human/new_character = new(loc)
-		new_character.lastarea = get_area(loc)
-
+		var/mob/living/carbon/human/new_character
 		var/datum/species/chosen_species
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
 		if(chosen_species)
 			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
-				new_character.set_species(client.prefs.species)
+				switch(chosen_species.name)
+					if("Slime People")
+						new_character = new /mob/living/carbon/human/slime(loc)
+					if("Tajaran")
+						new_character = new /mob/living/carbon/human/tajaran(loc)
+					if("Unathi")
+						new_character = new /mob/living/carbon/human/unathi(loc)
+					if("Skrell")
+						new_character = new /mob/living/carbon/human/skrell(loc)
+					if("Diona")
+						new_character = new /mob/living/carbon/human/diona(loc)
+					if("Vox")
+						new_character = new /mob/living/carbon/human/vox(loc)
+					if("Kidan")
+						new_character = new /mob/living/carbon/human/kidan(loc)
+					if("Skellington")
+						new_character = new /mob/living/carbon/human/skellington(loc)
+					if("Human")
+						new_character = new /mob/living/carbon/human(loc)
+//				new_character.set_species(client.prefs.species)
 				if(chosen_species.language)
 					new_character.add_language(chosen_species.language)
+		else
+			new_character = new /mob/living/carbon/human(loc)
+		new_character.lastarea = get_area(loc)
+
 
 		var/datum/language/chosen_language
 		if(client.prefs.language)
