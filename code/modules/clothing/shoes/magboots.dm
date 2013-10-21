@@ -2,6 +2,7 @@
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle."
 	name = "magboots"
 	icon_state = "magboots0"
+	species_restricted = null
 	var/magpulse = 0
 //	flags = NOSLIP //disabled by default
 
