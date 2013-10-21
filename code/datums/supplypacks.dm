@@ -814,7 +814,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	contains = list(/obj/item/seeds/bloodtomatoseed,
 					/obj/item/weapon/storage/pill_bottle/zoom,
 					/obj/item/weapon/storage/pill_bottle/happy,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe)
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine)
 
 	name = "Contraband crate"
 	cost = 30
@@ -997,7 +997,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Disposal Dispenser Crate"
 	group = "Engineering"
 	access = access_atmospherics
-	
+
 /datum/supply_packs/bee_keeper
 	name = "Beekeeping Crate"
 	contains = list(/obj/item/beezeez,
