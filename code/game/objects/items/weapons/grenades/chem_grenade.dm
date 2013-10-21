@@ -10,7 +10,7 @@
 	var/path = 0
 	var/obj/item/device/assembly_holder/detonator = null
 	var/list/beakers = new/list()
-	var/list/allowed_containers = list(/obj/item/weapon/reagent_containers/glass/beaker, /obj/item/weapon/reagent_containers/glass/bottle)
+	var/list/allowed_containers = list(/obj/item/weapon/reagent_containers/glass/beaker, /obj/item/weapon/reagent_containers/glass/beaker/large, /obj/item/weapon/reagent_containers/glass/bottle)
 	var/affected_area = 3
 
 	New()
@@ -176,7 +176,7 @@
 	name = "Large Chem Grenade"
 	desc = "An oversized grenade that affects a larger area."
 	icon_state = "large_grenade"
-	allowed_containers = list(/obj/item/weapon/reagent_containers/glass)
+	allowed_containers = list(/obj/item/weapon/reagent_containers/glass/beaker/bluespace)
 	origin_tech = "combat=3;materials=3"
 	affected_area = 4
 

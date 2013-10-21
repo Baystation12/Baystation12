@@ -7,7 +7,7 @@ var/const/speed = -1
 /mob/living/simple_animal/hostile/zombie
 	name = "zombie"
 	desc = "Cannablism at its best."
-	icon = 'icons/mob//otherHuman/human.dmi'
+	icon = 'icons/mob/otherHuman/human.dmi'
 	icon_state = "zombie_s"
 	icon_living = "zombie_s"
 	icon_dead = "zombie_l"
