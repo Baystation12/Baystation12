@@ -16,6 +16,7 @@
 	return
 
 /mob/living/carbon/human/getBrainLoss()
+	if(species && species.flags & NO_INTORGANS) return
 	var/res = brainloss
 	var/datum/organ/internal/brain/sponge = internal_organs["brain"]
 	if (sponge.is_bruised())

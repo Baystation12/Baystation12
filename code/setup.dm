@@ -739,6 +739,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define IS_PLANT 		4096
 #define CAN_BE_FAT 		8192
 #define HAS_CHITTIN 	16384
+#define NO_INTORGANS	32768
 
 
 #define BLOOD_GREEN 	1

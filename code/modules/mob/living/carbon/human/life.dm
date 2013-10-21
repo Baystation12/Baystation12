@@ -865,6 +865,8 @@
 	*/
 
 	proc/handle_chemicals_in_body()
+
+
 		if(reagents) reagents.metabolize(src)
 		var/total_plasmaloss = 0
 		for(var/obj/item/I in src)
@@ -956,6 +958,8 @@
 		else
 			dizziness = max(0, dizziness - 3)
 			jitteriness = max(0, jitteriness - 3)
+
+		if(species && species.flags & NO_INTORGANS) return
 
 		handle_trace_chems()
 

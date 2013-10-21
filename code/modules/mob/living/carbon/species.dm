@@ -167,5 +167,5 @@
 	path = /mob/living/carbon/human/slime
 	primitive = /mob/living/carbon/slime/adult
 
-	flags = WHITELISTED | NO_BREATHE | HAS_LIPS
+	flags = WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS
 	bloodflags = BLOOD_SLIME
