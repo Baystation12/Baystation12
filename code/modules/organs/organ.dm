@@ -51,11 +51,12 @@
 	organs_by_name["l_foot"] = new/datum/organ/external/l_foot(organs_by_name["l_leg"])
 	organs_by_name["r_foot"] = new/datum/organ/external/r_foot(organs_by_name["r_leg"])
 
-	new/datum/organ/internal/heart(src)
-	new/datum/organ/internal/lungs(src)
-	new/datum/organ/internal/liver(src)
-	new/datum/organ/internal/kidney(src)
-	new/datum/organ/internal/brain(src)
+	if (species.name!="Slime People")
+		new/datum/organ/internal/heart(src)
+		new/datum/organ/internal/lungs(src)
+		new/datum/organ/internal/liver(src)
+		new/datum/organ/internal/kidney(src)
+		new/datum/organ/internal/brain(src)
 
 	for(var/name in organs_by_name)
 		organs += organs_by_name[name]

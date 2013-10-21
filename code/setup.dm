@@ -743,6 +743,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 
 #define BLOOD_GREEN 	1
 #define BLOOD_BLUE		2
+#define BLOOD_SLIME		4
 
 #define FEET_CLAWS		1
 #define FEET_PADDED		2
