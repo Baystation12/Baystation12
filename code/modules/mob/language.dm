@@ -56,7 +56,7 @@
 	desc = "Languages of slimes, a mixture of bubbling noises and pops. Almost impossible to speak without mechanical aid for non slime people."
 	speech_verb = "bubbles and pops"
 	colour = "slime"
-	key = "sl"
+	key = "f"
 	flags = RESTRICTED
 
 /datum/language/human

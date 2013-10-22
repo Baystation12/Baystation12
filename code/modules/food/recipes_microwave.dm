@@ -2,7 +2,7 @@
 // see code/datums/recipe.dm
 
 
-/* No telebacon. just no...
+
 /datum/recipe/telebacon
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
@@ -10,14 +10,14 @@
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/telebacon
 
-I said no!
+
 /datum/recipe/syntitelebacon
 	items = list(
 		/obj/item/weapon/syntiflesh,
 		/obj/item/device/assembly/signaler
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/telebacon
-*/
+
 
 /datum/recipe/friedegg
 	reagents = list("sodiumchloride" = 1, "blackpepper" = 1)
@@ -122,14 +122,14 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/brainburger
 
-/* NO FUN ALLOWED
+
 /datum/recipe/roburger
+	reagents = list("flour" = 5)
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/flour,
 		/obj/item/robot_parts/head
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/roburger
-*/
+
 
 /datum/recipe/xenoburger
 	reagents = list("flour" = 5)
@@ -192,7 +192,7 @@ I said no!
 /datum/recipe/donkpocket
 	reagents = list("flour" = 5)
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/faggot,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/donkpocket //SPECIAL
 	proc/warm_up(var/obj/item/weapon/reagent_containers/food/snacks/donkpocket/being_cooked)
@@ -592,7 +592,7 @@ I said no!
 /datum/recipe/meatballsoup
 	reagents = list("water" = 10)
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/faggot ,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball ,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/carrot,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/potato,
 	)
@@ -848,8 +848,8 @@ I said no!
 	reagents = list("water" = 5)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/spagetti,
-		/obj/item/weapon/reagent_containers/food/snacks/faggot,
-		/obj/item/weapon/reagent_containers/food/snacks/faggot,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/meatballspagetti
 
@@ -857,10 +857,10 @@ I said no!
 	reagents = list("water" = 5)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/spagetti,
-		/obj/item/weapon/reagent_containers/food/snacks/faggot,
-		/obj/item/weapon/reagent_containers/food/snacks/faggot,
-		/obj/item/weapon/reagent_containers/food/snacks/faggot,
-		/obj/item/weapon/reagent_containers/food/snacks/faggot,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/spesslaw
 
@@ -1037,7 +1037,7 @@ I said no!
 
 /datum/recipe/sausage
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/faggot,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball,
 		/obj/item/weapon/reagent_containers/food/snacks/meat,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sausage
@@ -1135,7 +1135,7 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/potato,
-		/obj/item/weapon/reagent_containers/food/snacks/faggot,
+		/obj/item/weapon/reagent_containers/food/snacks/meatball,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/validsalad
 	make_food(var/obj/container as obj)

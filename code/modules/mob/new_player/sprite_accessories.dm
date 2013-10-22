@@ -51,7 +51,7 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi")
+		species_allowed = list("Human","Unathi","Vox","Diona","Skellington","Kidan")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
@@ -288,10 +288,6 @@
 		icon_state = "hair_e"
 		gender = MALE // turnoff!
 
-
-	bald
-		name = "Bald"
-		icon_state = "bald"
 /*
 ///////////////////////////////////
 /  =---------------------------=  /

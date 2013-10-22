@@ -600,10 +600,10 @@
 		reagents.add_reagent("nutriment", 3)
 		src.bitesize = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/faggot
-	name = "Faggot"
-	desc = "A great meal all round. Not a cord of wood."
-	icon_state = "faggot"
+/obj/item/weapon/reagent_containers/food/snacks/meatball
+	name = "Meatball"
+	desc = "A great meal all round."
+	icon_state = "meatball"
 	New()
 		..()
 		reagents.add_reagent("nutriment", 3)
@@ -1303,7 +1303,7 @@
 		reagents.add_reagent("tomatojuice", 2)
 		bitesize = 5
 
-/* No more of this
+
 /obj/item/weapon/reagent_containers/food/snacks/telebacon
 	name = "Tele Bacon"
 	desc = "It tastes a little odd but it is still delicious."
@@ -1318,7 +1318,7 @@
 		if(!reagents.total_volume)
 			baconbeacon.loc = usr
 			baconbeacon.digest_delay()
-*/
+
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeycube
 	name = "monkey cube"

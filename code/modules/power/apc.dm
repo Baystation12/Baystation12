@@ -193,7 +193,7 @@
 		icon_state = "[ cell ? "apc2" : "apc1" ]"       // if opened, show cell if it's inserted
 		if (overlays.len) overlays.len = 0               // also delete all overlays
 		return
-	else if(emagged)
+	else if(emagged || malfhack)
 		icon_state = "apcemag"
 		if (overlays.len) overlays.len = 0
 		return
@@ -957,6 +957,7 @@
 					else
 						src.malfai = usr
 					malfai << "Hack complete. The APC is now under your exclusive control."
+					src.malfhack = 1
 					update_icon()
 
 	else if (href_list["occupyapc"])
