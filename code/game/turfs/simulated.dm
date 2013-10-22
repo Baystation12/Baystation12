@@ -40,9 +40,13 @@
 				else
 					playsound(src, "clownstep", 20, 1)
 			if(istype(H.shoes, /obj/item/clothing/shoes/jackboots))
-//				var/obj/item/clothing/shoes/jackboots/O = H.shoes
+				var/obj/item/clothing/shoes/jackboots/O = H.shoes
 				if(H.m_intent == "run")
-					playsound(src, "jackboot", 50, 1) // this will get annoying very fast.
+					if(O.footstep >= 2)
+						O.footstep = 0
+						playsound(src, "jackboot", 50, 1) // this will get annoying very fast.
+					else
+						O.footstep++
 				else
 					playsound(src, "jackboot", 20, 1)
 
