@@ -965,6 +965,7 @@ What are the archived variables for?
 	//Outputs: 1 if can rebuild, 0 if not.
 	if(!sample) return 0
 
+
 	if((abs(oxygen-sample.oxygen) > MINIMUM_AIR_TO_SUSPEND) && \
 		((oxygen < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.oxygen) || (oxygen > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.oxygen)))
 		return 0
@@ -972,52 +973,61 @@ What are the archived variables for?
 		((nitrogen < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.nitrogen) || (nitrogen > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.nitrogen)))
 		return 0
 	if((abs(carbon_dioxide-sample.carbon_dioxide) > MINIMUM_AIR_TO_SUSPEND) && \
-		((carbon_dioxide < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.carbon_dioxide) || (oxygen > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.carbon_dioxide)))
+		((carbon_dioxide < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.carbon_dioxide) || (carbon_dioxide > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.carbon_dioxide)))
 		return 0
 	if((abs(toxins-sample.toxins) > MINIMUM_AIR_TO_SUSPEND) && \
 		((toxins < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.toxins) || (toxins > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.toxins)))
 		return 0
+
 
 	if(total_moles() > MINIMUM_AIR_TO_SUSPEND)
 		if((abs(temperature-sample.temperature) > MINIMUM_TEMPERATURE_DELTA_TO_SUSPEND) && \
 			((temperature < (1-MINIMUM_TEMPERATURE_RATIO_TO_SUSPEND)*sample.temperature) || (temperature > (1+MINIMUM_TEMPERATURE_RATIO_TO_SUSPEND)*sample.temperature)))
 			//world << "temp fail [temperature] & [sample.temperature]"
 			return 0
-
+	var/check_moles
 	if(sample.trace_gases.len)
 		for(var/datum/gas/trace_gas in sample.trace_gases)
-			if(trace_gas.moles_archived > MINIMUM_AIR_TO_SUSPEND)
-				var/datum/gas/corresponding = locate(trace_gas.type) in trace_gases
-				if(corresponding)
-					if((abs(trace_gas.moles - corresponding.moles) > MINIMUM_AIR_TO_SUSPEND) && \
-						((corresponding.moles < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*trace_gas.moles) || (corresponding.moles > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*trace_gas.moles)))
-						return 0
-				else
-					return 0
+			var/datum/gas/corresponding = locate(trace_gas.type) in trace_gases
+			if(corresponding)
+				check_moles = corresponding.moles
+			else
+				check_moles = 0
+
+			if((abs(trace_gas.moles - check_moles) > MINIMUM_AIR_TO_SUSPEND) && \
+				((check_moles < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*trace_gas.moles) || (check_moles > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*trace_gas.moles)))
+				return 0
 
 	if(trace_gases.len)
 		for(var/datum/gas/trace_gas in trace_gases)
-			if(trace_gas.moles > MINIMUM_AIR_TO_SUSPEND)
-				var/datum/gas/corresponding = locate(trace_gas.type) in sample.trace_gases
-				if(corresponding)
-					if((abs(trace_gas.moles - corresponding.moles) > MINIMUM_AIR_TO_SUSPEND) && \
-						((trace_gas.moles < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*corresponding.moles) || (trace_gas.moles > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*corresponding.moles)))
-						return 0
-				else
-					return 0
+			var/datum/gas/corresponding = locate(trace_gas.type) in trace_gases
+			if(corresponding)
+				check_moles = corresponding.moles
+			else
+				check_moles = 0
+
+			if((abs(trace_gas.moles - check_moles) > MINIMUM_AIR_TO_SUSPEND) && \
+				((trace_gas.moles < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*check_moles) || (trace_gas.moles > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*check_moles)))
+				return 0
+
 	return 1
 
-/datum/gas_mixture/proc/compare_unsim(turf/list/samples)
-	//Purpose: Compares a list of unsimulated tiles to self to see if within acceptable ranges that group processing may be enabled
-	//Called by: ZAS sleeping detection.
-	//Inputs: List of unsimulated turfs to compare to
-	//Outputs: 1 if within an acceptable range to sleep, 0 otherwise.
-	var/datum/gas_mixture/after_share = new
-	after_share.copy_from(src)
+/datum/gas_mixture/proc/add(datum/gas_mixture/right_side)
+	oxygen += right_side.oxygen
+	carbon_dioxide += right_side.carbon_dioxide
+	nitrogen += right_side.nitrogen
+	toxins += right_side.toxins
 
-	ShareSpace(after_share, samples)
+	if(trace_gases.len || right_side.trace_gases.len)
+		for(var/datum/gas/trace_gas in right_side.trace_gases)
+			var/datum/gas/corresponding = locate(trace_gas.type) in trace_gases
+			if(!corresponding)
+				corresponding = new trace_gas.type()
+				trace_gases += corresponding
+			corresponding.moles += trace_gas.moles
 
-	return src.compare(after_share)
+	update_values()
+	return 1
 
 /datum/gas_mixture/proc/subtract(datum/gas_mixture/right_side)
 	//Purpose: Subtracts right_side from air_mixture. Used to help turfs mingle
@@ -1025,18 +1035,42 @@ What are the archived variables for?
 	//Inputs: Gas mix to remove
 	//Outputs: 1
 
-	oxygen -= right_side.oxygen
-	carbon_dioxide -= right_side.carbon_dioxide
-	nitrogen -= right_side.nitrogen
-	toxins -= right_side.toxins
+	oxygen = max(oxygen - right_side.oxygen)
+	carbon_dioxide = max(carbon_dioxide - right_side.carbon_dioxide)
+	nitrogen = max(nitrogen - right_side.nitrogen)
+	toxins = max(toxins - right_side.toxins)
 
-	if((trace_gases.len > 0)||(right_side.trace_gases.len > 0))
+	if(trace_gases.len || right_side.trace_gases.len)
 		for(var/datum/gas/trace_gas in right_side.trace_gases)
 			var/datum/gas/corresponding = locate(trace_gas.type) in trace_gases
-			if(!corresponding)
-				corresponding = new trace_gas.type()
-				trace_gases += corresponding
+			if(corresponding)
+				corresponding.moles = max(0, corresponding.moles - trace_gas.moles)
 
-			corresponding.moles -= trace_gas.moles
+	update_values()
+	return 1
+
+/datum/gas_mixture/proc/multiply(factor)
+	oxygen *= factor
+	carbon_dioxide *= factor
+	nitrogen *= factor
+	toxins *= factor
+
+	if(trace_gases && trace_gases.len)
+		for(var/datum/gas/trace_gas in trace_gases)
+			trace_gas.moles *= factor
+
+	update_values()
+	return 1
+
+/datum/gas_mixture/proc/divide(factor)
+	oxygen /= factor
+	carbon_dioxide /= factor
+	nitrogen /= factor
+	toxins /= factor
+
+	if(trace_gases && trace_gases.len)
+		for(var/datum/gas/trace_gas in trace_gases)
+			trace_gas.moles /= factor
+
 	update_values()
 	return 1
