@@ -17,6 +17,7 @@
 	var/savefile/F = new(MEMOFILE)
 	if(F)
 		var/memo = input(src,"Type your memo\n(Leaving it blank will delete your current memo):","Write Memo",null) as null|message
+		memo = sanitize(memo)
 		switch(memo)
 			if(null)
 				return

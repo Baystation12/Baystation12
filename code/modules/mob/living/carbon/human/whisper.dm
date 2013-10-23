@@ -6,6 +6,7 @@
 		return
 
 	message = trim(copytext(strip_html_simple(message), 1, MAX_MESSAGE_LEN))
+	message = sanitize(copytext(message,1,MAX_MESSAGE_LEN))
 
 	if (!message || silent || miming)
 		return
