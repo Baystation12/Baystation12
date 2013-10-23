@@ -53,6 +53,7 @@
 		return
 
 	var/msg = input("Message:", text("Subtle PM to [M.key]")) as text
+	msg = sanitize(msg)
 
 	if (!msg)
 		return
@@ -74,6 +75,7 @@
 		return
 
 	var/msg = input("Message:", text("Enter the text you wish to appear to everyone:")) as text
+	msg = sanitize(msg)
 
 	if (!msg)
 		return
@@ -97,6 +99,7 @@
 		return
 
 	var/msg = input("Message:", text("Enter the text you wish to appear to your target:")) as text
+	msg = sanitize(msg)
 
 	if( !msg )
 		return
@@ -415,6 +418,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		src << "Only administrators may use this command."
 		return
 	var/input = input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "") as text|null
+	input = sanitize(input)
+
 	if(!input)
 		return
 	for(var/mob/living/silicon/ai/M in mob_list)
@@ -464,6 +469,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		return
 	var/input = input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null
 	var/customname = input(usr, "Pick a title for the report.", "Title") as text|null
+
 	if(!input)
 		return
 	if(!customname)
@@ -472,7 +478,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if(! (C.stat & (BROKEN|NOPOWER) ) )
 			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( C.loc )
 			P.name = "'[command_name()] Update.'"
-			P.info = input
+			P.info = sanitize_u(input, list("ÿ"="____255_"))
 			P.update_icon()
 			C.messagetitle.Add("[command_name()] Update")
 			C.messagetext.Add(P.info)
