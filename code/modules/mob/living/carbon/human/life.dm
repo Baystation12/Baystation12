@@ -1251,8 +1251,12 @@
 						see_invisible = SEE_INVISIBLE_LIVING
 				else
 					see_invisible = SEE_INVISIBLE_LIVING
-			else if(!seer)
+			else if(!seer) // this works on BYOND 500 +
+				see_in_dark = species.darksight
 				see_invisible = SEE_INVISIBLE_LIVING
+	/*		else if(!glasses || !seer) // On previous tests, this worked, but as of BYOND 500, it works for all but sunglasses
+				see_in_dark = species.darksight
+				see_invisible = SEE_INVISIBLE_LIVING */
 
 			if(healths)
 				if (analgesic)
