@@ -3084,7 +3084,7 @@ datum
 							var/datum/organ/internal/heart/L = H.internal_organs["heart"]
 							if (istype(L))
 								L.take_damage(100, 0)
-
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
 
 		ethanol/deadrum
 			name = "Deadrum"
