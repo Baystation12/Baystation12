@@ -201,3 +201,9 @@
 	desc = "Used to monitor fires and breaches."
 	icon_state = "engineeringcameras"
 	network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms")
+
+/obj/machinery/computer/security/nuclear
+	name = "Mission Monitor"
+	desc = "Used to access the built-in cameras in helmets."
+	icon_state = "syndicam"
+	network = list("NUKE")
