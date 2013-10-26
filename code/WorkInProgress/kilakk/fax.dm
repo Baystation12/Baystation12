@@ -96,13 +96,15 @@ var/list/alldepartments = list("Central Command")
 
 			if(dpt == "Central Command")
 				Centcomm_fax(tofax.info, tofax.name, usr)
+				sendcooldown = 1800
 
 			else
 				SendFax(tofax.info, tofax.name, usr, dpt)
+				sendcooldown = 600
 
 			usr << "Message transmitted successfully."
-			sendcooldown = 1
-			spawn(3000) // three minute cooldown. might mess with this number a bit as time goes on
+
+			spawn(sendcooldown) // cooldown time
 				sendcooldown = 0
 
 	if(href_list["remove"])
