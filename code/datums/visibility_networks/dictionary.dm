@@ -3,5 +3,7 @@ var/datum/visibility_network/list/visibility_networks = list("ALL_CAMERAS"=camer
 
 // used by turfs and objects to update all visibility networks
 /proc/updateVisibilityNetworks(atom/A, var/opacity_check = 1)
-	for (var/datum/visibility_network/currentNetwork in visibility_networks)
+	var/datum/visibility_network/currentNetwork
+	for (var/networkName in visibility_networks)
+		currentNetwork = visibility_networks[networkName]
 		currentNetwork.updateVisibility(A, opacity_check)
