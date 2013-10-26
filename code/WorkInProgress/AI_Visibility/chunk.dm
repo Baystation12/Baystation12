@@ -88,7 +88,7 @@
 
 		dim += t.dim
 
-	cameranet.minimap |= minimap_obj
+	cameraNetwork.minimap |= minimap_obj
 
 	for(var/mob/aiEye/eye in seenby)
 		if(eye.ai.client)

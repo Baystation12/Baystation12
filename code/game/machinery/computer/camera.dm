@@ -36,7 +36,7 @@
 			user.set_machine(src)
 
 		var/list/L = list()
-		for (var/obj/machinery/camera/C in cameranet.cameras)
+		for (var/obj/machinery/camera/C in cameraNetwork.viewpoints)
 			L.Add(C)
 
 		camera_sort(L)

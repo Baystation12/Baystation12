@@ -1201,7 +1201,7 @@
 	//Disconnect it's camera so it's not so easily tracked.
 	if(src.camera)
 		src.camera.network = list()
-		cameranet.removeCamera(src.camera)
+		cameraNetwork.removeViewpoint(src.camera)
 
 
 /mob/living/silicon/robot/proc/ResetSecurityCodes()

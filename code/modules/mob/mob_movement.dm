@@ -176,7 +176,8 @@
 				return
 
 	if(mob.stat==2)	return
-
+	
+	if(isSpirit(mob)) return mob:Spirit_Move(direct)
 	if(isAI(mob))	return AIMove(n,direct,mob)
 
 	if(mob.monkeyizing)	return//This is sota the goto stop mobs from moving var

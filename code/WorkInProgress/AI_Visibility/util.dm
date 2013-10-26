@@ -4,31 +4,31 @@
 	var/image/dim
 
 /turf/proc/visibilityChanged()
-	cameranet.updateVisibility(src)
+	cameraNetwork.updateVisibility(src)
 
 /turf/New()
 	..()
-	cameranet.updateVisibility(src)
+	cameraNetwork.updateVisibility(src)
 
 /obj/machinery/door/update_nearby_tiles(need_rebuild)
 	. = ..(need_rebuild)
-	cameranet.updateVisibility(loc)
+	cameraNetwork.updateVisibility(loc)
 
 /obj/machinery/camera/New()
 	..()
-	cameranet.addCamera(src)
+	cameraNetwork.addViewpoint(src)
 
 /obj/machinery/camera/Del()
-	cameranet.removeCamera(src)
+	cameraNetwork.removeViewpoint(src)
 	..()
 
 /obj/machinery/camera/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	. = ..(W, user)
 	if(istype(W, /obj/item/weapon/wirecutters))
 		if(status)
-			cameranet.addCamera(src)
+			cameraNetwork.addViewpoint(src)
 		else
-			cameranet.removeCamera(src)
+			cameraNetwork.removeViewpoint(src)
 
 /proc/checkcameravis(atom/A)
 	for(var/obj/machinery/camera/C in view(A,7))

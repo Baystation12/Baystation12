@@ -72,7 +72,7 @@
 			debug_variables(paiController)
 			feedback_add_details("admin_verb","DpAI")
 		if("Cameras")
-			debug_variables(cameranet)
+			debug_variables(cameraNetwork)
 			feedback_add_details("admin_verb","DCameras")
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return

@@ -100,7 +100,7 @@
 				C.network = uniquelist(tempnetwork)
 				tempnetwork = difflist(C.network,RESTRICTED_CAMERA_NETWORKS)
 				if(!tempnetwork.len)//Camera isn't on any open network - remove its chunk from AI visibility.
-					cameranet.removeCamera(C)
+					cameraNetwork.removeViewpoint(C)
 
 				C.c_tag = input
 

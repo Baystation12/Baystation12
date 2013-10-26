@@ -1,3 +1,21 @@
+/datum/visibility_network/cameras
+	ChunkType = /datum/visibility_chunk/camera
+
+/datum/visibility_network/cameras/validViewpoint(var/viewpoint)
+	var/obj/machinery/camera/c = viewpoint
+	if (!c)
+		return FALSE
+	return c.can_use()
+
+
+
+
+
+
+
+
+
+/*
 // CAMERA NET
 //
 // The datum containing all the chunks.
@@ -145,4 +163,6 @@ var/datum/cameranet/cameranet = new()
 	if(cameranet.chunkGenerated(x, y, z))
 		var/datum/camerachunk/chunk = cameranet.getCameraChunk(x, y, z)
 		usr.client.debug_variables(chunk)
+*/
+
 */
