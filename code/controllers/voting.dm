@@ -48,6 +48,7 @@ datum/controller/vote
 
 	proc/autotransfer()
 		initiate_vote("crew_transfer","the server")
+		log_debug("The server has called an Autotransfer")
 
 
 	proc/reset()
@@ -206,14 +207,16 @@ datum/controller/vote
 						return 0
 					choices.Add(config.votable_modes)
 				if("crew_transfer")
-					if(check_rights(R_ADMIN) || check_rights(R_MOD))
+					if(check_rights(R_ADMIN|R_MOD, 0))
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
 					else
 						if (get_security_level() == "red" || get_security_level() == "delta")
+							initiator_key << "The current alert status is too high to call for a crew transfer!"
 							return 0
 						if(ticker.current_state <= 2)
 							return 0
+							initiator_key << "The crew transfer button has been disabled!"
 						question = "End the shift?"
 						choices.Add("Initiate Crew Transfer", "Continue The Round")
 				if("custom")
