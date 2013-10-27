@@ -15,7 +15,6 @@
 	var/amount = 30
 	var/beaker = null
 	var/recharged = 0
-	var/hackingstep = 0
 	var/hackedcheck = 0
 	var/list/dispensable_reagents = list("hydrogen","lithium","carbon","nitrogen","oxygen","fluorine",
 	"sodium","aluminum","silicon","phosphorus","sulfur","chlorine","potassium","iron",
@@ -190,18 +189,16 @@
 
 	/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 		..()
-		if(istype(B, /obj/item/device/multitool) && hackingstep == 0||hackingstep == 1)
+		if(istype(B, /obj/item/device/multitool))
 			if(hackedcheck == 0)
 				user << "You change the mode from 'McNano' to 'Pizza King'."
-				dispensable_reagents = list("water","ice","coffee","tea","icetea","space_cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice","thirteenloko")
-				hackingstep = 1
+				dispensable_reagents += list("thirteenloko")
 				hackedcheck = 1
 				return
 
 			else
 				user << "You change the mode from 'Pizza King' to 'McNano'."
-				dispensable_reagents = list("water","ice","coffee","tea","icetea","space_cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice")
-				hackingstep = 0
+				dispensable_reagents -= list("thirteenloko")
 				hackedcheck = 0
 				return
 /obj/machinery/chem_dispenser/beer
@@ -214,18 +211,16 @@
 
 	/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 		..()
-		if(istype(B, /obj/item/device/multitool) && hackingstep == 0||hackingstep == 1)
+		if(istype(B, /obj/item/device/multitool))
 			if(hackedcheck == 0)
 				user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
-				dispensable_reagents = list("water","ice","coffee","tea","cream","lemon_lime","sugar","orangejuice","limejuice","cola","sodawater","tonic","beer","kahlua","whisky","wine","vodka","gin","rum","tequila","vermouth","cognac","ale","goldschlager","patron","mead","watermelonjuice","berryjuice")
-				hackingstep = 1
+				dispensable_reagents += list("goldschlager","patron","watermelonjuice","berryjuice")
 				hackedcheck = 1
 				return
 
 			else
 				user << "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
-				dispensable_reagents = list("water","ice","coffee","tea","cream","lemon_lime","sugar","orangejuice","limejuice","cola","sodawater","tonic","beer","kahlua","whisky","wine","vodka","gin","rum","tequila","vermouth","cognac","ale","mead")
-				hackingstep = 0
+				dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
 				hackedcheck = 0
 				return
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
