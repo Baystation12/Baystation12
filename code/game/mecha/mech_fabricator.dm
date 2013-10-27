@@ -44,7 +44,10 @@
 						/obj/item/robot_parts/l_arm,
 						/obj/item/robot_parts/r_arm,
 						/obj/item/robot_parts/l_leg,
-						/obj/item/robot_parts/r_leg,
+						/obj/item/robot_parts/r_leg
+					),
+
+"Robot Repair"=list(
 						/obj/item/robot_parts/robot_component/binary_communication_device,
 						/obj/item/robot_parts/robot_component/radio,
 						/obj/item/robot_parts/robot_component/actuator,

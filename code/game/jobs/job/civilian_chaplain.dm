@@ -10,7 +10,6 @@
 	selection_color = "#dddddd"
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
-	alt_titles = list("Counselor","Pastor","Space Shaman")
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -34,7 +33,7 @@
 
 			switch(lowertext(new_religion))
 				if("christianity")
-					B.name = pick("The Holy Bible","The Dead Sea Scrolls")
+					B.name = pick("The Holy Bible")
 				if("satanism")
 					B.name = "The Unholy Bible"
 				if("cthulu")
@@ -48,7 +47,7 @@
 				if("imperium")
 					B.name = "Uplifting Primer"
 				if("toolboxia")
-					B.name = "Toolbox Manifesto"
+					B.name = "Toolbox Manifesto Robusto"
 				if("homosexuality")
 					B.name = "Guys Gone Wild"
 				if("lol", "wtf", "gay", "penis", "ass", "poo", "badmin", "shitmin", "deadmin", "cock", "cocks")

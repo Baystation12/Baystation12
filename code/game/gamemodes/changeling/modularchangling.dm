@@ -74,7 +74,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Silence Sting"
 	desc = "We silently sting a human, completely silencing them for a short time."
 	helptext = "Does not provide a warning to a victim that they have been stung, until they try to speak and cannot."
-	genomecost = 2
+	genomecost = 3
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_silence_sting
 
@@ -103,7 +103,7 @@ var/list/datum/power/changeling/powerinstances = list()
 /datum/power/changeling/paralysis_sting
 	name = "Paralysis Sting"
 	desc = "We silently sting a human, paralyzing them for a short time."
-	genomecost = 3
+	genomecost = 4
 	verbpath = /mob/proc/changeling_paralysis_sting
 
 /datum/power/changeling/LSDSting

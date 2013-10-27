@@ -315,8 +315,8 @@ datum
 			name = "Glycerol"
 			id = "glycerol"
 			result = "glycerol"
-			required_reagents = list("cornoil" = 3, "sacid" = 1)
-			result_amount = 1
+			required_reagents = list("cornoil" = 3, "sacid" = 2)
+			result_amount = 5
 
 		nitroglycerin
 			name = "Nitroglycerin"
@@ -455,8 +455,8 @@ datum
 			name = "Zombie Powder"
 			id = "zombiepowder"
 			result = "zombiepowder"
-			required_reagents = list("carpotoxin" = 5, "stoxin" = 5, "copper" = 5)
-			result_amount = 2
+			required_reagents = list("carpotoxin" = 1, "stoxin" = 1, "copper" = 1)
+			result_amount = 3
 
 		rezadone
 			name = "Rezadone"
@@ -1961,10 +1961,26 @@ datum
 			required_reagents = list("spacemountainwind" = 1, "coffee" = 1)
 			result_amount = 2
 
+
+
+//Fox
+///////////////////////Requires Balance Testing///////////////////
+/*
+		lectrazine
+			name = "Lectrazine"
+			id = "lectrazine"
+			result = "lectrazine"
+			required_reagents = list("inaprovaline" = 1, "phosphorus" = 1)
+			required_catalysts = list("silver" = 5)
+			result_amount = 2
+
+*/
+
+
 //Grutor
 ///////////////////////Zombie recipes////////////////////////////
 
-		necrocure
+	/*	necrocure
 			name = "Zombie Cure"
 			id = "necrocure"
 			result = "necrocure"
@@ -1977,5 +1993,7 @@ datum
 			result = "necrodisease"
 			required_reagents = list("zombiepowder" = 2, "cryptobiolin" = 2, "mutagen" = 2)
 			result_amount = 5
+
+	*/
 
 
