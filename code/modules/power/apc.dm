@@ -691,10 +691,10 @@
 					t += "<BR><HR><A href='?src=\ref[src];malfhack=1'><I>Override Programming</I></A><BR>"
 				else
 					t += "<BR><HR><I>APC Hacked</I><BR>"
-					/*if(!src.occupant)
+					if(!src.occupant)
 						t += "<A href='?src=\ref[src];occupyapc=1'><I>Shunt Core Processes</I></A><BR>"
 					else
-						t += "<I>Core Processes Uploaded</I><BR>"*/
+						t += "<I>Core Processes Uploaded</I><BR>"
 
 	t += "<BR><HR><A href='?src=\ref[src];close=1'>Close</A>"
 
