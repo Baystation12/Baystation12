@@ -375,7 +375,7 @@
 	return 0
 
 
-
+/*
 
 //////////////////////Grutor:
 /////////////////////Zombie tranformation into NPC type zombie//////////////
@@ -416,3 +416,5 @@
 	spawn(0)//To prevent the proc from returning null.
 		del(src)
 	return
+
+*/

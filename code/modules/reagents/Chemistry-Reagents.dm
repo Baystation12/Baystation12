@@ -3548,7 +3548,7 @@ datum
 						M.confused = max(M.confused+15,15)
 					..()
 					return
-
+/*
 
 //Grutor
 /////////////////Zombie Stuff//////////////////
@@ -3607,3 +3607,4 @@ datum
 				..()
 				return
 
+*/
