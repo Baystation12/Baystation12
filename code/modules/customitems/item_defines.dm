@@ -726,6 +726,11 @@
 	item_state = "solara_dress"
 	_color = "solara_dress"
 
+/obj/item/clothing/under/psysuit/fluff/isaca_sirius_1 // Xilia: Isaca Sirius
+	name = "Isaca's suit"
+	desc = "Black, comfortable and nicely fitting suit. Made not to hinder the wearer in any way. Made of some exotic fabric. And some strange glowing jewel at the waist. Name labels says; Property of Isaca Sirius; The Seeder."
+
+
 /////// NT-SID Suit //Zuhayr: Jane Doe
 
 /obj/item/clothing/under/fluff/jane_sidsuit
