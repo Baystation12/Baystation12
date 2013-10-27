@@ -1251,12 +1251,6 @@ mob/living/carbon/human/yank_out_object()
 
 	species = all_species[new_species]
 
-	see_in_dark = species.darksight
-	if(see_in_dark > 2)
-		see_invisible = SEE_INVISIBLE_LEVEL_ONE
-	else
-		see_invisible = SEE_INVISIBLE_LIVING
-
 	spawn(0)
 		update_icons()
 

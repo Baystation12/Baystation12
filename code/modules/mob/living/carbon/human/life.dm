@@ -1180,6 +1180,8 @@
 			if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
 		else
 			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			see_in_dark = species.darksight
+			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 			if(dna)
 				switch(dna.mutantrace)
 					if("slime")
@@ -1224,40 +1226,27 @@
 						if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
 
 			if(glasses)
-				if(istype(glasses, /obj/item/clothing/glasses/meson))
-					sight |= SEE_TURFS
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
-				else if(istype(glasses, /obj/item/clothing/glasses/night))
-					see_in_dark = 5
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
-				else if(istype(glasses, /obj/item/clothing/glasses/thermal))
-					sight |= SEE_MOBS
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
-				else if(istype(glasses, /obj/item/clothing/glasses/material))
-					sight |= SEE_OBJS
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
+				var/obj/item/clothing/glasses/G = glasses
+				if(istype(G))
+					see_in_dark += G.darkness_view
+					if(G.vision_flags)
+						sight |= G.vision_flags
+						if(!druggy)
+							see_invisible = SEE_INVISIBLE_MINIMUM
 
 	/* HUD shit goes here, as long as it doesn't modify sight flags */
 	// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
 
-				else if(istype(glasses, /obj/item/clothing/glasses/sunglasses))
-					see_in_dark = 1
-					if(istype(glasses, /obj/item/clothing/glasses/sunglasses/sechud))
-						var/obj/item/clothing/glasses/sunglasses/sechud/O = glasses
-						if(O.hud)		O.hud.process_hud(src)
-						if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
-
+				if(istype(glasses, /obj/item/clothing/glasses/sunglasses/sechud))
+					var/obj/item/clothing/glasses/sunglasses/sechud/O = glasses
+					if(O.hud)		O.hud.process_hud(src)
+					if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
 				else if(istype(glasses, /obj/item/clothing/glasses/hud))
 					var/obj/item/clothing/glasses/hud/O = glasses
 					O.process_hud(src)
 					if(!druggy)
 						see_invisible = SEE_INVISIBLE_LIVING
-				else
-					see_invisible = SEE_INVISIBLE_LIVING
+
 			else if(!seer)
 				see_invisible = SEE_INVISIBLE_LIVING
 
