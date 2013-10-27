@@ -2620,7 +2620,7 @@
 "aYt" = (/obj/machinery/status_display{density = 0; layer = 4; pixel_x = -32; pixel_y = 0},/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 4},/turf/simulated/floor,/area/crew_quarters/locker)
 "aYu" = (/obj/structure/disposalpipe/segment{dir = 4},/turf/simulated/floor,/area/crew_quarters/locker)
 "aYv" = (/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/turf/simulated/floor,/area/crew_quarters/locker)
-"aYw" = (/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_y = -29},/obj/machinery/vending/autodrobe,/turf/simulated/floor{tag = "icon-warningcorner"; icon_state = "warningcorner"; dir = 2},/area/crew_quarters/locker)
+"aYw" = (/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_y = -29},/turf/simulated/floor{tag = "icon-warningcorner"; icon_state = "warningcorner"; dir = 2},/area/crew_quarters/locker)
 "aYx" = (/turf/simulated/floor{dir = 2; icon_state = "warning"},/area/crew_quarters/locker)
 "aYy" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/turf/simulated/floor{tag = "icon-warningcorner (NORTH)"; icon_state = "warningcorner"; dir = 1},/area/crew_quarters/locker)
 "aYz" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 5},/turf/simulated/wall,/area)
