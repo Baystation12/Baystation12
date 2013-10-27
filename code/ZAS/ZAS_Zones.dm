@@ -155,7 +155,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 //Updates the air_unsim var
 /zone/proc/UpdateUnsimAvg()
-	if(!unsim_air_needs_update)
+	if(!unsim_air_needs_update && air_unsim)
 		return
 
 	unsim_air_needs_update = 0
