@@ -1454,6 +1454,15 @@ datum/design/flora_gun
 	materials = list("$metal" = 2000, "$glass" = 500, "$uranium" = 500)
 	build_path = "/obj/item/weapon/gun/energy/floragun"
 
+datum/design/portaseed
+	name = "Portaseeder"
+	desc = "An advanced hydroponics tool used for harvesting produce and extracting seeds."
+	id = "portaseed"
+	req_tech = list("materials" = 2, "biotech" = 3, "powerstorage" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 500, "$glass" = 500)
+	build_path = "/obj/item/weapon/storage/bag/plants/portaseeder"
+
 datum/design/large_grenade
 	name = "Large Grenade"
 	desc = "A grenade that affects a larger area and use larger containers."
