@@ -155,7 +155,10 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 //Updates the air_unsim var
 /zone/proc/UpdateUnsimAvg()
-	if(!unsim_air_needs_update && air_unsim)
+	if(!unsimulated_tiles || !unsimulated_tiles.len) //if we don't have any unsimulated tiles, we can't do much.
+		return
+
+	if(!unsim_air_needs_update && air_unsim) //if air_unsim doesn't exist, we need to create it even if we don't need an update.
 		return
 
 	unsim_air_needs_update = 0
