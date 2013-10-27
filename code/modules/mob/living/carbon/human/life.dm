@@ -188,6 +188,10 @@
 					if(3)
 						emote("drool")
 
+		if(species.name == "Tajaran")
+			if(prob(3))
+				vomit(1) // Hairball
+
 
 		if(stat != 2)
 			var/rn = rand(0, 200)
