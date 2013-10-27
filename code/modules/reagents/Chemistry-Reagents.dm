@@ -3547,7 +3547,32 @@ datum
 					else if(data >= 115 && prob(33))
 						M.confused = max(M.confused+15,15)
 					..()
+
 					return
+
+
+//Fox
+/////////////////Requires Further Balance Testing//////////////////
+/*
+		lectrazine
+			name = "Lectrazine"
+			id = "lectrazine"
+			description = "An extremly powerful cardiostimulant and analgesic which is used in revival of deceased."
+			reagent_state = LIQUID
+			color = "#080000"
+			custom_metabolism = 0.1
+
+			reaction_mob(var/mob/living/carbon/M as mob, var/methode=INGEST)
+				if(!M) M = holder.my_atom
+				M.stat = CONSCIOUS
+				M.setOxyLoss(0)
+				M.heal_organ_damage(15,0)
+				M.SetParalysis(15)
+				M.adjustBrainLoss(10*REM)
+				return
+
+*/
+
 /*
 
 //Grutor
