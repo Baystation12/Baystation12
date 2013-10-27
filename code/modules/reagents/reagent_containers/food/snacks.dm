@@ -1925,10 +1925,47 @@
 		reagents.add_reagent("gold", 5)
 		bitesize = 3
 
+/obj/item/weapon/reagent_containers/food/snacks/dough_ball
+	name = "ball of raw dough"
+	desc = "A ball of raw dough, ready to be molded into new recipes."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "dough"
+	New()
+		..()
+		reagents.add_reagent("nutriment", 3)
+		bitesize = 1
+	attackby(obj/item/weapon/W as obj, mob/user as mob)
+		if(istype(W,/obj/item/weapon/kitchen/rollingpin))
+			user.visible_message( \
+				"[user] flattens the dough with the rolling pin!", \
+				"\blue You flatten the dough with your rolling pin!" \
+				)
+			new /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough(src.loc)
+			del(src)
+
 /////////////////////////////////////////////////Sliceable////////////////////////////////////////
 // All the food items that can be sliced into smaller bits like Meatbread and Cheesewheels
 
 // sliceable is just an organization type path, it doesn't have any additional code or variables tied to it.
+
+/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
+	name = "flattened dough"
+	desc = "Still raw. You resist the temptation to cover it in tomato sauce."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "flatdough"
+	slice_path = /obj/item/weapon/reagent_containers/food/snacks/doughslice
+	slices_num = 3
+	New()
+		..()
+		reagents.add_reagent("nutriment", 3)
+		bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/doughslice
+	name = "slice of dough"
+	desc = "an individual portion of raw dough, ready to be cooked."
+	icon = 'icons/obj/food_ingredients.dmi'
+	icon_state = "doughslice"
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/meatbread
 	name = "meatbread loaf"
@@ -2161,6 +2198,8 @@
 	desc = "A wedge of delicious Cheddar. The cheese wheel it was cut from can't have gone far."
 	icon_state = "cheesewedge"
 	bitesize = 2
+
+
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake
 	name = "Birthday Cake"
