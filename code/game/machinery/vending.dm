@@ -157,6 +157,13 @@
 		coin = W
 		user << "\blue You insert the [W] into the [src]"
 		return
+
+	else if(src.panel_open)
+		for(var/datum/data/vending_product/R in product_records)
+			if(istype(W, R.product_path))
+				stock(R, user)
+				del(W)
+
 	else if(istype(W, /obj/item/weapon/card) && currently_vending)
 		//attempt to connect to a new db, and if that doesn't work then fail
 		if(!linked_db)
@@ -169,11 +176,7 @@
 				usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
 		else
 			usr << "\icon[src]<span class='warning'>Unable to connect to accounts database.</span>"
-	 else if(src.panel_open)
-		for(var/datum/data/vending_product/R in product_records)
-			if(istype(W, R.product_path))
-				stock(R, user)
-				del(W)
+
 
 
 	else
