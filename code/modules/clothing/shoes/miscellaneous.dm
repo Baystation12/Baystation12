@@ -131,3 +131,4 @@
 	desc = "Sandals with buckled leather straps on it."
 	icon_state = "roman"
 	item_state = "roman"
+	species_restricted = null
