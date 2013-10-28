@@ -327,9 +327,9 @@ datum/preferences
 			if(!lentext(flavor_text))
 				dat += "\[...\]"
 			else
-				dat += "[flavor_text]"
+				dat += "[sanitize_u(flavor_text)]"
 		else
-			dat += "[copytext(flavor_text, 1, 37)]...<br>"
+			dat += "[sanitize_u(copytext(flavor_text, 1, 37))]...<br>"
 		dat += "<br>"
 
 		dat += "<br><b>Hair</b><br>"
@@ -492,23 +492,23 @@ datum/preferences
 		HTML += "<a href=\"byond://?src=\ref[user];preference=records;task=med_record\">Medical Records</a><br>"
 
 		if(lentext(med_record) <= 40)
-			HTML += "[med_record]"
+			HTML += "[sanitize_u(med_record)]"
 		else
-			HTML += "[copytext(med_record, 1, 37)]..."
+			HTML += "[sanitize_u(copytext(med_record, 1, 37))]..."
 
 		HTML += "<br><br><a href=\"byond://?src=\ref[user];preference=records;task=gen_record\">Employment Records</a><br>"
 
 		if(lentext(gen_record) <= 40)
-			HTML += "[gen_record]"
+			HTML += "[sanitize_u(gen_record)]"
 		else
-			HTML += "[copytext(gen_record, 1, 37)]..."
+			HTML += "[sanitize_u(copytext(gen_record, 1, 37))]..."
 
 		HTML += "<br><br><a href=\"byond://?src=\ref[user];preference=records;task=sec_record\">Security Records</a><br>"
 
 		if(lentext(sec_record) <= 40)
-			HTML += "[sec_record]<br>"
+			HTML += "[sanitize_u(sec_record)]<br>"
 		else
-			HTML += "[copytext(sec_record, 1, 37)]...<br>"
+			HTML += "[sanitize_u(copytext(sec_record, 1, 37))]...<br>"
 
 		HTML += "<br>"
 		HTML += "<a href=\"byond://?src=\ref[user];preference=records;records=-1\">\[Done\]</a>"
@@ -728,7 +728,7 @@ datum/preferences
 				var/medmsg = input(usr,"Set your medical notes here.","Medical Records",html_decode(med_record)) as message
 
 				if(medmsg != null)
-					medmsg = copytext(medmsg, 1, MAX_PAPER_MESSAGE_LEN)
+					medmsg = sanitize_simple(copytext(medmsg, 1, MAX_PAPER_MESSAGE_LEN))
 					medmsg = html_encode(medmsg)
 
 					med_record = medmsg
@@ -738,7 +738,7 @@ datum/preferences
 				var/secmsg = input(usr,"Set your security notes here.","Security Records",html_decode(sec_record)) as message
 
 				if(secmsg != null)
-					secmsg = copytext(secmsg, 1, MAX_PAPER_MESSAGE_LEN)
+					secmsg = sanitize_simple(copytext(secmsg, 1, MAX_PAPER_MESSAGE_LEN))
 					secmsg = html_encode(secmsg)
 
 					sec_record = secmsg
@@ -747,7 +747,7 @@ datum/preferences
 				var/genmsg = input(usr,"Set your employment notes here.","Employment Records",html_decode(gen_record)) as message
 
 				if(genmsg != null)
-					genmsg = copytext(genmsg, 1, MAX_PAPER_MESSAGE_LEN)
+					genmsg = sanitize_simple(copytext(genmsg, 1, MAX_PAPER_MESSAGE_LEN))
 					genmsg = html_encode(genmsg)
 
 					gen_record = genmsg
@@ -984,7 +984,7 @@ datum/preferences
 						var/msg = input(usr,"Set the flavor text in your 'examine' verb. This can also be used for OOC notes and preferences!","Flavor Text",html_decode(flavor_text)) as message
 
 						if(msg != null)
-							msg = copytext(msg, 1, MAX_MESSAGE_LEN)
+							msg = sanitize_simple(copytext(msg, 1, MAX_MESSAGE_LEN))
 							msg = html_encode(msg)
 
 							flavor_text = msg
@@ -1140,7 +1140,7 @@ datum/preferences
 		character.flavor_text = flavor_text
 		character.med_record = med_record
 		character.sec_record = sec_record
-		character.gen_record = gen_record
+		character.gen_record = sanitize_u(gen_record)
 
 		character.gender = gender
 		character.age = age

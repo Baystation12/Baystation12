@@ -572,11 +572,11 @@
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
 								usr << "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]"
-								usr << "<b>Minor Crimes:</b> [R.fields["mi_crim"]]"
-								usr << "<b>Details:</b> [R.fields["mi_crim_d"]]"
-								usr << "<b>Major Crimes:</b> [R.fields["ma_crim"]]"
-								usr << "<b>Details:</b> [R.fields["ma_crim_d"]]"
-								usr << "<b>Notes:</b> [R.fields["notes"]]"
+								usr << "<b>Minor Crimes:</b> [sanitize(R.fields["mi_crim"])]"
+								usr << "<b>Details:</b> [sanitize(R.fields["mi_crim_d"])]"
+								usr << "<b>Major Crimes:</b> [sanitize(R.fields["ma_crim"])]"
+								usr << "<b>Details:</b> [sanitize(R.fields["ma_crim_d"])]"
+								usr << "<b>Notes:</b> [sanitize(R.fields["notes"])]"
 								usr << "<a href='?src=\ref[src];secrecordComment=`'>\[View Comment Log\]</a>"
 								read = 1
 
@@ -629,7 +629,7 @@
 					for (var/datum/data/record/R in data_core.security)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"security"))
-								var/t1 = copytext(sanitize(input("Add Comment:", "Sec. records", null, null)  as message),1,MAX_MESSAGE_LEN)
+								var/t1 = copytext(sanitize_u(input("Add Comment:", "Sec. records", null, null)  as message),1,MAX_MESSAGE_LEN)
 								if ( !(t1) || usr.stat || usr.restrained() || !(hasHUD(usr,"security")) )
 									return
 								var/counter = 1
@@ -699,11 +699,11 @@
 							if(hasHUD(usr,"medical"))
 								usr << "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]"
 								usr << "<b>DNA:</b> [R.fields["b_dna"]]"
-								usr << "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]"
-								usr << "<b>Details:</b> [R.fields["mi_dis_d"]]"
-								usr << "<b>Major Disabilities:</b> [R.fields["ma_dis"]]"
-								usr << "<b>Details:</b> [R.fields["ma_dis_d"]]"
-								usr << "<b>Notes:</b> [R.fields["notes"]]"
+								usr << "<b>Minor Disabilities:</b> [sanitize(R.fields["mi_dis"])]"
+								usr << "<b>Details:</b> [sanitize(R.fields["mi_dis_d"])]"
+								usr << "<b>Major Disabilities:</b> [sanitize(R.fields["ma_dis"])]"
+								usr << "<b>Details:</b> [sanitize(R.fields["ma_dis_d"])]"
+								usr << "<b>Notes:</b> [sanitize(R.fields["notes"])]"
 								usr << "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>"
 								read = 1
 
@@ -756,7 +756,7 @@
 					for (var/datum/data/record/R in data_core.medical)
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
-								var/t1 = copytext(sanitize(input("Add Comment:", "Med. records", null, null)  as message),1,MAX_MESSAGE_LEN)
+								var/t1 = copytext(sanitize_u(input("Add Comment:", "Med. records", null, null)  as message),1,MAX_MESSAGE_LEN)
 								if ( !(t1) || usr.stat || usr.restrained() || !(hasHUD(usr,"medical")) )
 									return
 								var/counter = 1
