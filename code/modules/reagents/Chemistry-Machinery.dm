@@ -159,7 +159,7 @@
 	if(isrobot(user))
 		return
 
-	if(!istype(B, /obj/item/weapon/reagent_containers/glass) || !istype(B, /obj/item/weapon/reagent_containers/food))
+	if(!istype(B, /obj/item/weapon/reagent_containers/glass || /obj/item/weapon/reagent_containers/food))
 		return
 
 	if(src.beaker)
@@ -193,7 +193,7 @@
 	desc = "A drink fabricating machine, capable of producing many sugary drinks with just one touch."
 	energy = 100
 	max_energy = 100
-	dispensable_reagents = list("water","ice","coffee","tea","milk","cream","icetea","cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_line","sugar","orangejuice","limejuice","lemonjuice","tomatojuice","banana","berryjuice","potato_juice","watermelonjuice","carrotjuice")
+	dispensable_reagents = list("water","ice","coffee","tea","milk","cream","icetea","space_cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_line","sugar","orangejuice","limejuice","lemonjuice","tomatojuice","banana","berryjuice","potato_juice","watermelonjuice","carrotjuice")
 
 /obj/machinery/chem_dispenser/beer
 	icon_state = "booze_dispenser"
