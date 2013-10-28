@@ -29,30 +29,6 @@
 	pixel_x = rand(0,16)-8
 	pixel_y = rand(0,8)-8
 
-var/list/responsive_carriers = list( \
-	"carbon", \
-	"potassium", \
-	"hydrogen", \
-	"nitrogen", \
-	"mercury", \
-	"iron", \
-	"chlorine", \
-	"phosphorus", \
-	"plasma")
-
-var/list/finds_as_strings = list( \
-	"Trace organic cells", \
-	"Long exposure particles", \
-	"Trace water particles", \
-	"Crystalline structures", \
-	"Metallic derivative", \
-	"Metallic composite", \
-	"Metamorphic/igneous rock composite", \
-	"Metamorphic/sedimentary rock composite", \
-	"Anomalous material" )
-
-var/list/artifact_spawning_turfs = list()
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Geosample datum
 
@@ -64,7 +40,6 @@ var/list/artifact_spawning_turfs = list()
 	var/artifact_id = ""					//id of a nearby artifact, if there is one
 	var/artifact_distance = -1				//proportional to distance
 	var/source_mineral = "chlorine"			//machines will pop up a warning telling players that the sample may be confused
-	var/total_spread = 0
 	//
 	//var/source_mineral
 	//all potential finds are initialised to null, so nullcheck before you access them
@@ -76,11 +51,11 @@ var/list/artifact_spawning_turfs = list()
 
 //this should only need to be called once
 /datum/geosample/proc/UpdateTurf(var/turf/simulated/mineral/container)
+	set background = 1
 	if(!container || !istype(container))
 		return
 
 	age = rand(1,999)
-	total_spread = 0
 
 	switch(container.mineralName)
 		if("Uranium")
@@ -132,8 +107,15 @@ var/list/artifact_spawning_turfs = list()
 		var/responsive_reagent = get_responsive_reagent(F.find_type)
 		find_presence[responsive_reagent] = F.dissonance_spread
 
-	for(var/entry in find_presence)
-		total_spread += find_presence[entry]
+	//loop over again to reset values to percentages
+	var/total_presence = 0
+	for(var/carrier in find_presence)
+		total_presence += find_presence[carrier]
+	for(var/carrier in find_presence)
+		find_presence[carrier] = find_presence[carrier] / total_presence
+
+	/*for(var/entry in find_presence)
+		total_spread += find_presence[entry]*/
 
 //have this separate from UpdateTurf() so that we dont have a billion turfs being updated (redundantly) every time an artifact spawns
 /datum/geosample/proc/UpdateNearbyArtifactInfo(var/turf/simulated/mineral/container)
@@ -146,7 +128,7 @@ var/list/artifact_spawning_turfs = list()
 	else
 		for(var/turf/simulated/mineral/holder in artifact_spawning_turfs)
 			if(holder.artifact_find)
-				var/dist = get_dist(container, holder)
+				var/dist = get_dist(container, holder) * 2
 				if(dist < holder.artifact_find.artifact_detect_range && dist < src.artifact_distance)
 					src.artifact_distance = dist
 					src.artifact_id = holder.artifact_find.artifact_id
