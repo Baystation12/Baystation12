@@ -189,7 +189,7 @@
 						emote("drool")
 
 		if(species.name == "Tajaran")
-			if(prob(3))
+			if(prob(1))
 				vomit(1) // Hairball
 
 
