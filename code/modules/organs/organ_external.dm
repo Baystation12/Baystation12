@@ -270,7 +270,7 @@
 			return
 
 	//Bone fracurtes
-	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(status & (ORGAN_ROBOT|ORGAN_PEG)))
+	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(status & (ORGAN_ROBOT|ORGAN_PEG)) && !(istype(owner, /mob/living/carbon/human/slime)))
 		src.fracture()
 	if(!(status & ORGAN_BROKEN))
 		perma_injury = 0
