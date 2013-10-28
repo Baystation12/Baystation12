@@ -1,7 +1,3 @@
-#define GHOST_DARK_ALPHA 10
-#define GHOST_LIGHT_ALPHA 255
-#define GHOST_DARK_CUTOFF 1
-
 /mob/dead/observer
 	name = "ghost"
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
@@ -99,22 +95,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
 	return
 
-// In darkness over a certain threshold, ghosts become slightly visible for the spooky value.
-/mob/dead/observer/proc/amInDarkPlace()
-	var/turf/simulated/T = get_turf(src)
-	if(!istype(T))
-		return 0
-	if(T.lighting_lumcount <= GHOST_DARK_CUTOFF)
-		return 1
-	return 0
-
-/mob/dead/observer/proc/updateSpookyAlpha()
-	if(amInDarkPlace())
-		alpha=GHOST_DARK_ALPHA
-		invisibility=0
-	else
-		alpha=GHOST_LIGHT_ALPHA
-		invisibility=INVISIBILITY_OBSERVER
 
 /mob/dead/observer/Move(NewLoc, direct)
 	dir = direct
@@ -122,7 +102,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		loc = NewLoc
 		for(var/obj/effect/step_trigger/S in NewLoc)
 			S.HasEntered(src)
-		updateSpookyAlpha()
+
 		return
 	loc = get_turf(src) //Get out of closets and such as a ghost
 	if((direct & NORTH) && y < world.maxy)
@@ -136,7 +116,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	for(var/obj/effect/step_trigger/S in locate(x, y, z))	//<-- this is dumb
 		S.HasEntered(src)
-	updateSpookyAlpha()
+
 /mob/dead/observer/examine()
 	if(usr)
 		usr << desc
