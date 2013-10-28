@@ -15,6 +15,7 @@
 	var/amount = 30
 	var/beaker = null
 	var/recharged = 0
+	var/hackedcheck = 0
 	var/list/dispensable_reagents = list("hydrogen","lithium","carbon","nitrogen","oxygen","fluorine",
 	"sodium","aluminum","silicon","phosphorus","sulfur","chlorine","potassium","iron",
 	"copper","mercury","radium","water","ethanol","sugar","sacid","tungsten")
@@ -77,7 +78,7 @@
   *
   * @return nothing
   */
-/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main") 
+/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main")
 	if(stat & (BROKEN|NOPOWER)) return
 	if(user.stat || user.restrained()) return
 
@@ -111,7 +112,7 @@
 	data["chemicals"] = chemicals
 
 	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
-	if (!ui) 
+	if (!ui)
 		// the ui does not exist, so we'll create a new one
 		ui = new(user, src, ui_key, "chem_dispenser.tmpl", "Chem Dispenser 5000", 370, 605)
 		// When the UI is first opened this is the data it will use
@@ -155,18 +156,16 @@
 	if(isrobot(user))
 		return
 
-	if(!istype(B, /obj/item/weapon/reagent_containers/glass))
-		return
-
 	if(src.beaker)
-		user << "A beaker is already loaded into the machine."
+		user << "Something is already loaded into the machine."
 		return
-
-	src.beaker =  B
-	user.drop_item()
-	B.loc = src
-	user << "You add the beaker to the machine!"
-	nanomanager.update_uis(src) // update all UIs attached to src
+	if(istype(B, /obj/item/weapon/reagent_containers/glass||/obj/item/weapon/reagent_containers/food))
+		src.beaker =  B
+		user.drop_item()
+		B.loc = src
+		user << "You set [B] on the machine."
+		nanomanager.update_uis(src) // update all UIs attached to src
+		return
 
 /obj/machinery/chem_dispenser/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -180,6 +179,50 @@
 
 	ui_interact(user)
 
+/obj/machinery/chem_dispenser/soda
+	icon_state = "soda_dispenser"
+	name = "soda fountain"
+	desc = "A drink fabricating machine, capable of producing many sugary drinks with just one touch."
+	energy = 100
+	max_energy = 100
+	dispensable_reagents = list("water","ice","coffee","tea","icetea","space_cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice")
+
+	/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+		..()
+		if(istype(B, /obj/item/device/multitool))
+			if(hackedcheck == 0)
+				user << "You change the mode from 'McNano' to 'Pizza King'."
+				dispensable_reagents += list("thirteenloko")
+				hackedcheck = 1
+				return
+
+			else
+				user << "You change the mode from 'Pizza King' to 'McNano'."
+				dispensable_reagents -= list("thirteenloko")
+				hackedcheck = 0
+				return
+/obj/machinery/chem_dispenser/beer
+	icon_state = "booze_dispenser"
+	name = "booze dispenser"
+	energy = 100
+	max_energy = 100
+	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
+	dispensable_reagents = list("water","ice","coffee","tea","cream","lemon_lime","sugar","orangejuice","limejuice","cola","sodawater","tonic","beer","kahlua","whisky","wine","vodka","gin","rum","tequila","vermouth","cognac","ale","mead")
+
+	/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+		..()
+		if(istype(B, /obj/item/device/multitool))
+			if(hackedcheck == 0)
+				user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
+				dispensable_reagents += list("goldschlager","patron","watermelonjuice","berryjuice")
+				hackedcheck = 1
+				return
+
+			else
+				user << "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
+				dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
+				hackedcheck = 0
+				return
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

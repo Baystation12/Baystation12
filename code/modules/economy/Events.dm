@@ -8,9 +8,6 @@
 	var/datum/trade_destination/affected_dest
 
 /datum/event/economic_event/start()
-	if(!setup_economy)
-		setup_economy()
-
 	affected_dest = pickweight(weighted_randomevent_locations)
 	if(affected_dest.viable_random_events.len)
 		endWhen = rand(60,300)

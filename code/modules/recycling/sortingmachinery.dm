@@ -6,7 +6,7 @@
 	var/obj/wrapped = null
 	density = 1
 	var/sortTag = 0
-	flags = FPRINT
+	flags = FPRINT | NOBLUDGEON
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
 	attack_hand(mob/user as mob)
@@ -88,11 +88,11 @@
 	var/amount = 25.0
 
 
-	afterattack(var/obj/target as obj, mob/user as mob)
+	afterattack(var/obj/target as obj, mob/user as mob, proximity)
+		if(!proximity) return
 		if(!istype(target))	//this really shouldn't be necessary (but it is).	-Pete
 			return
-		if(istype(target, /obj/structure/table) || istype(target, /obj/structure/rack) \
-		|| istype(target, /obj/item/smallDelivery) || istype(target,/obj/structure/bigDelivery) \
+		if(istype(target, /obj/item/smallDelivery) || istype(target,/obj/structure/bigDelivery) \
 		|| istype(target, /obj/item/weapon/gift) || istype(target, /obj/item/weapon/evidencebag))
 			return
 		if(target.anchored)
@@ -157,7 +157,7 @@
 /obj/item/device/destTagger
 	name = "destination tagger"
 	desc = "Used to set the destination of properly wrapped packages."
-	icon_state = "forensic0-old"
+	icon_state = "dest_tagger"
 	var/currTag = 0
 	//The whole system for the sorttype var is determined based on the order of this list,
 	//disposals must always be 1, since anything that's untagged will automatically go to disposals, or sorttype = 1 --Superxpdude
@@ -218,7 +218,7 @@
 		return
 
 	Bumped(var/atom/movable/AM) //Go straight into the chute
-		if(istype(AM, /obj/item/projectile) || istype(AM, /obj/item/weapon/dummy))	return
+		if(istype(AM, /obj/item/projectile))	return
 		switch(dir)
 			if(NORTH)
 				if(AM.loc.y != src.loc.y+1) return

@@ -5,7 +5,7 @@
 	icon_state = "pneumatic"
 	item_state = "pneumatic"
 	w_class = 5.0
-	flags =  FPRINT | TABLEPASS | CONDUCT |  USEDELAY
+	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	max_w_class = 3
 	max_combined_w_class = 20
