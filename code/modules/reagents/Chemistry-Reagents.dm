@@ -2351,7 +2351,7 @@ datum
 		drink/grapesoda
 			name = "Grape Soda"
 			id = "grapesoda"
-			description = "Grapes turned into soda!"
+			description = "Grapes made into a fine drank."
 			color = "#421C52" // rgb: 98, 57, 53
 			adj_drowsy 	= 	-3
 
