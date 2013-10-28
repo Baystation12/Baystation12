@@ -94,14 +94,14 @@
 						usr << "<span class='notice'>You feel kind of silly copying [ass == usr ? "your" : ass][ass == usr ? "" : "\'s"] ass with [ass == usr ? "your" : "their"] clothes on.</span>"
 					else if(toner >= 5 && check_ass()) //You have to be sitting on the copier and either be a xeno or a human without clothes on.
 						if(isalien(ass) || istype(ass,/mob/living/simple_animal/hostile/alien)) //Xenos have their own asses, thanks to Pybro.
-							temp_img = icon("icons/ass/assalien.png")
+							temp_img = icon('icons/ass/assalien.png')
 						else if(ishuman(ass)) //Suit checks are in check_ass
 							if(ass.gender == MALE)
-								temp_img = icon("icons/ass/assmale.png")
+								temp_img = icon('icons/ass/assmale.png')
 							else if(ass.gender == FEMALE)
-								temp_img = icon("icons/ass/assfemale.png")
+								temp_img = icon('icons/ass/assfemale.png')
 							else                   //In case anyone ever makes the generic ass. For now I'll be using male asses.
-								temp_img = icon("icons/ass/assmale.png")
+								temp_img = icon('icons/ass/assmale.png')
 					else
 						break
 					var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (loc)
