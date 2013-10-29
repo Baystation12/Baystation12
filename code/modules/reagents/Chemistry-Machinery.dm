@@ -192,7 +192,7 @@
 		if(istype(B, /obj/item/device/multitool))
 			if(hackedcheck == 0)
 				user << "You change the mode from 'McNano' to 'Pizza King'."
-				dispensable_reagents += list("thirteenloko")
+				dispensable_reagents += list("thirteenloko","grapesoda")
 				hackedcheck = 1
 				return
 
