@@ -119,7 +119,8 @@ Please contact me on #coderbus IRC. ~Carn x
 #define R_HAND_LAYER			20
 #define TAIL_LAYER				21		//bs12 specific. this hack is probably gonna come back to haunt me
 #define TARGETED_LAYER			22		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			22
+#define FIRE_LAYER				23
+#define TOTAL_LAYERS			23
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -457,6 +458,14 @@ proc/get_damage_icon_part(damage_state, body_part)
 		overlays_standing[TARGETED_LAYER]	= null
 	if(update_icons)		update_icons()
 
+/mob/living/carbon/human/update_fire(var/update_icons=1)
+	if (on_fire)
+		overlays_lying[FIRE_LAYER]		= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Lying")
+		overlays_standing[FIRE_LAYER]	= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")
+	if (!on_fire)
+		overlays_lying[FIRE_LAYER]		= null
+		overlays_standing[FIRE_LAYER]	= null
+	if(update_icons)		update_icons()
 
 /* --------------------------------------- */
 //For legacy support.
@@ -838,4 +847,5 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef R_HAND_LAYER
 #undef TAIL_LAYER
 #undef TARGETED_LAYER
+#undef FIRE_LAYER
 #undef TOTAL_LAYERS

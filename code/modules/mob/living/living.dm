@@ -275,6 +275,8 @@
 	bodytemperature = T20C
 	sdisabilities = 0
 	disabilities = 0
+	ExtinguishMob()
+	fire_stacks = 0
 
 	// fix blindness and deafness
 	blinded = 0
