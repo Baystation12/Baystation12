@@ -157,7 +157,7 @@
 /obj/item/device/destTagger
 	name = "destination tagger"
 	desc = "Used to set the destination of properly wrapped packages."
-	icon_state = "forensic0-old"
+	icon_state = "dest_tagger"
 	var/currTag = 0
 	//The whole system for the sorttype var is determined based on the order of this list,
 	//disposals must always be 1, since anything that's untagged will automatically go to disposals, or sorttype = 1 --Superxpdude
