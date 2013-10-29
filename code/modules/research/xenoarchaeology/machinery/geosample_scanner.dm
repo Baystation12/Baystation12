@@ -68,7 +68,7 @@
 		user << "<span class='warning'>You can't do that while [src] is scanning!</span>"
 	else
 		if(istype(I, /obj/item/stack/nanopaste))
-			var/choice = alert("What do you want to do with the nanopaste?","Radiometric Scanner","Add nanopaste","Fix seal integrity")
+			var/choice = alert("What do you want to do with the nanopaste?","Radiometric Scanner","Scan nanopaste","Fix seal integrity")
 			if(choice == "Fix seal integrity")
 				var/obj/item/stack/nanopaste/N = I
 				var/amount_used = min(N.amount, 10 - scanner_seal_integrity / 10)
@@ -79,12 +79,16 @@
 			var/choice = alert("What do you want to do with the container?","Radiometric Scanner","Add coolant","Empty coolant","Scan container")
 			if(choice == "Add coolant")
 				var/obj/item/weapon/reagent_containers/glass/G = I
-				G.reagents.trans_to(src, min(src.reagents.maximum_volume - src.reagents.total_volume, G.reagents.total_volume))
+				var/amount_transferred = min(src.reagents.maximum_volume - src.reagents.total_volume, G.reagents.total_volume)
+				G.reagents.trans_to(src, amount_transferred)
+				user << "<span class='info'>You empty [amount_transferred]u of coolant into [src].</span>"
 				update_coolant()
 				return
 			else if(choice == "Empty coolant")
 				var/obj/item/weapon/reagent_containers/glass/G = I
-				src.reagents.trans_to(G, min(G.reagents.maximum_volume - G.reagents.total_volume, src.reagents.total_volume))
+				var/amount_transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, src.reagents.total_volume)
+				src.reagents.trans_to(G, amount_transferred)
+				user << "<span class='info'>You remove [amount_transferred]u of coolant from [src].</span>"
 				update_coolant()
 				return
 		user.drop_item()
@@ -95,14 +99,18 @@
 	var/total_purity = 0
 	fresh_coolant = 0
 	coolant_purity = 0
+	var/num_reagent_types = 0
 	for (var/datum/reagent/current_reagent in src.reagents.reagent_list)
 		if (!current_reagent)
 			continue
 		var/cur_purity = coolant_reagents_purity[current_reagent.id]
 		if(!cur_purity)
 			cur_purity = 0.1
-		total_purity += cur_purity
+		else if(cur_purity > 1)
+			cur_purity = 1
+		total_purity += cur_purity * current_reagent.volume
 		fresh_coolant += current_reagent.volume
+		num_reagent_types += 1
 	if(total_purity && fresh_coolant)
 		coolant_purity = total_purity / fresh_coolant
 
