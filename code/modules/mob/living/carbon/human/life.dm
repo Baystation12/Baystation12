@@ -190,7 +190,8 @@
 
 		if(species.name == "Tajaran")
 			if(prob(1))
-				vomit(1) // Hairball
+				if(prob(1))
+					vomit(1) // Hairball
 
 
 		if(stat != 2)

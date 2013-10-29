@@ -252,6 +252,7 @@
 		'nano/templates/chem_dispenser.tmpl',
 		'nano/templates/cryo.tmpl',
 		'nano/templates/dna_modifier.tmpl',
+		'nano/templates/geoscanner.tmpl',
 		'nano/templates/air_alarm.tmpl',
 		'nano/images/uiBackground.png',
 		'nano/images/uiIcons16.png',
@@ -299,9 +300,5 @@
 		'icons/spideros_icons/sos_11.png',
 		'icons/spideros_icons/sos_12.png',
 		'icons/spideros_icons/sos_13.png',
-		'icons/spideros_icons/sos_14.png',
-		'icons/xenoarch_icons/chart1.jpg',
-		'icons/xenoarch_icons/chart2.jpg',
-		'icons/xenoarch_icons/chart3.jpg',
-		'icons/xenoarch_icons/chart4.jpg'
+		'icons/spideros_icons/sos_14.png'
 		)

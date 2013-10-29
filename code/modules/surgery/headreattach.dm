@@ -95,7 +95,7 @@
 		return ..() && affected.open == 3
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
+//		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] is stapling and suturing flesh into place in [target]'s esophagal and vocal region with \the [tool].", \
 		"You start to staple and suture flesh into place in [target]'s esophagal and vocal region with \the [tool].")
 		..()
