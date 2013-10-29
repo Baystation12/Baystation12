@@ -453,3 +453,10 @@
 	overlays = null
 	if (targeted_by && target_locked)
 		overlays += target_locked
+
+/mob/living/simple_animal/update_fire()
+	return
+/mob/living/simple_animal/IgniteMob()
+	return
+/mob/living/simple_animal/ExtinguishMob()
+	return
