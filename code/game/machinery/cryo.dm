@@ -296,6 +296,7 @@
 		M << "\blue <b>You feel a cold liquid surround you. Your skin starts to freeze up.</b>"
 	occupant = M
 //	M.metabslow = 1
+	M.ExtinguishMob() //Cryo extingguish occupant
 	add_fingerprint(usr)
 	update_icon()
 	return 1
