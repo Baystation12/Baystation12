@@ -46,8 +46,10 @@
 
 /datum/species/human
 	name = "Human"
+	icobase = 'icons/mob/human_races/r_human.dmi'
+	deform = 'icons/mob/human_races/r_def_human.dmi'
 	primitive = /mob/living/carbon/monkey
-	path = /mob/living/carbon/human
+	path = /mob/living/carbon/human/human
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
 
 /datum/species/unathi
@@ -186,7 +188,5 @@
 	darksight = 5 // BOOSTED from 2
 	max_hurt_damage = 3 // From 5 (for humans)
 	default_mutations=list(mRemotetalk) // TK is also another candidate, but TK is overpowered as fuck.
-
-	primitive = /mob/living/carbon/monkey // TODO
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT

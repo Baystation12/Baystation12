@@ -374,7 +374,7 @@
 					if("Grey")
 						new_character = new /mob/living/carbon/human/grey(loc)
 					if("Human")
-						new_character = new /mob/living/carbon/human(loc)
+						new_character = new /mob/living/carbon/human/human(loc)
 //				new_character.set_species(client.prefs.species)
 				if(chosen_species.language)
 					new_character.add_language(chosen_species.language)

@@ -54,10 +54,14 @@
 	species = new /datum/species/skellington(src)
 	..()
 
+/mob/living/carbon/human/human/New()
+	species = new /datum/species/human(src)
+	..()
+
 /mob/living/carbon/human/New()
 
 	if(!species)
-		set_species()
+		set_species("Human")
 
 	if(species.language)
 		var/datum/language/L = all_languages[species.language]
@@ -1330,7 +1334,7 @@ mob/living/carbon/human/yank_out_object()
 		new_species = "Human"
 
 	if(species && (species.name && species.name == new_species))
-		return
+		return 1
 
 	species = all_species[new_species]
 
