@@ -96,6 +96,15 @@
 	projectile_type = "/obj/item/projectile/energy/dart"
 	m_amt = 12500
 
+obj/item/ammo_casing/shotgun/dart/New()
+	..()
+	flags |= NOREACT
+	create_reagents(30)
+
+/obj/item/ammo_casing/shotgun/dart/attackby()
+	return
+
+
 /obj/item/ammo_casing/a762
 	desc = "A 7.62 bullet casing."
 	caliber = "a762"

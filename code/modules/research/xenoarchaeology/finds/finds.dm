@@ -88,7 +88,7 @@
 	if(new_item_type)
 		find_type = new_item_type
 	else
-		find_type = rand(1,34)	//update this when you add new find types
+		find_type = rand(1,33)	//update this when you add new find types
 
 	var/item_type = "object"
 	icon_state = "unknown[rand(1,4)]"
@@ -347,9 +347,9 @@
 					new_gun.power_supply.charge = 0
 
 			item_type = "gun"
-		if(27)
+/*		if(27)
 			//revolver
-			var/obj/item/weapon/gun/projectile/new_gun = new /obj/item/weapon/gun/projectile(src.loc)
+			var/obj/item/weapon/gun/projectile/revolver/new_gun = new /obj/item/weapon/gun/projectile/revolver(src.loc)
 			new_item = new_gun
 			new_item.icon_state = "gun[rand(1,4)]"
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
@@ -381,7 +381,7 @@
 						new_gun.loaded.Remove(I)
 						I.loc = null
 
-			item_type = "gun"
+			item_type = "gun"*/
 		if(28)
 			//completely unknown alien device
 			if(prob(50))
@@ -447,7 +447,7 @@
 			"A pile of wires and crap metal that looks vaguely robotic.")
 			apply_image_decorations = 0
 			apply_material_decorations = 0
-		if(34)
+		if(27)
 			//xenos remains
 			apply_prefix = 0
 			item_type = "alien [pick("remains","skeleton")]"
