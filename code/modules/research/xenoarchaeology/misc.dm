@@ -1,14 +1,15 @@
 
 //---- Noticeboard
 
-/obj/structure/noticeboard/anomaly/New()
+/obj/structure/noticeboard/anomaly
 	notices = 5
 	icon_state = "nboard05"
 
+/obj/structure/noticeboard/anomaly/New()
 	//add some memos
 	var/obj/item/weapon/paper/P = new()
 	P.name = "Memo RE: proper analysis procedure"
-	P.info = "Rose,<br>activate <i>then</i> analyse the artifacts, the machine will have a much easier time determining their function/s. Remember to employ basic quasi-elemental forces such as heat, energy, force and various chemical mixes - who knows why those ancient aliens made such obscure activation indices.<br><br>And don't forget your suit this time, I can't afford to have any researchers out of commision for as long as that again!.<br>Ward"
+	P.info = "<br>We keep test dummies in pens here for a reason, so standard procedure should be to activate newfound alien artifacts and place the two in close proximity. Promising items I might even approve monkey testing on."
 	P.stamped = list(/obj/item/weapon/stamp/rd)
 	P.overlays = list("paper_stamped_rd")
 	src.contents += P
@@ -29,7 +30,7 @@
 
 	P = new()
 	P.name = "READ ME! Before you people destroy any more samples"
-	P.info = "how many times do i have to tell you people, these xeno-arch samples are del-i-cate, and should be handled so! careful application of a focussed, ceoncentrated heat or some corrosive liquids should clear away the extraneous carbon matter, while application of an energy beam will most decidedly destroy it entirely! W, <b>the one who signs your paychecks</b>"
+	P.info = "how many times do i have to tell you people, these xeno-arch samples are del-i-cate, and should be handled so! careful application of a focussed, concentrated heat or some corrosive liquids should clear away the extraneous carbon matter, while application of an energy beam will most decidedly destroy it entirely - like someone did to the chemical dispenser! W, <b>the one who signs your paychecks</b>"
 	P.stamped = list(/obj/item/weapon/stamp/rd)
 	P.overlays = list("paper_stamped_rd")
 	src.contents += P

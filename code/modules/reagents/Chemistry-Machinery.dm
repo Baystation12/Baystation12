@@ -19,6 +19,8 @@
 	var/list/dispensable_reagents = list("hydrogen","lithium","carbon","nitrogen","oxygen","fluorine",
 	"sodium","aluminum","silicon","phosphorus","sulfur","chlorine","potassium","iron",
 	"copper","mercury","radium","water","ethanol","sugar","sacid","tungsten")
+	var/list/broken_requirements = list()
+	var/broken_on_spawn = 0
 
 /obj/machinery/chem_dispenser/proc/recharge()
 	if(stat & (BROKEN|NOPOWER)) return
@@ -49,6 +51,28 @@
 	..()
 	recharge()
 	dispensable_reagents = sortList(dispensable_reagents)
+
+	if(broken_on_spawn)
+		var/amount = pick(1,2,2,3,4)
+		var/list/options = list()
+		options[/obj/item/weapon/stock_parts/capacitor/adv] = "Add an advanced capacitor to fix it."
+		options[/obj/item/weapon/stock_parts/console_screen] = "Replace the console screen to fix it."
+		options[/obj/item/weapon/stock_parts/manipulator/pico] = "Upgrade to a pico manipulator to fix it."
+		options[/obj/item/weapon/stock_parts/matter_bin/adv] = "Give it an advanced matter bin to fix it."
+		options[/obj/item/stack/sheet/mineral/diamond] = "Line up a cut diamond with the nozzle to fix it."
+		options[/obj/item/stack/sheet/mineral/uranium] = "Position a uranium sheet inside to fix it."
+		options[/obj/item/stack/sheet/mineral/plasma] = "Enter a block of plasma to fix it."
+		options[/obj/item/stack/sheet/mineral/silver] = "Cover the internals with a silver lining to fix it."
+		options[/obj/item/stack/sheet/mineral/gold] = "Wire a golden filament to fix it."
+		options[/obj/item/stack/sheet/plasteel] = "Surround the outside with a plasteel cover to fix it."
+		options[/obj/item/stack/sheet/rglass] = "Insert a pane of reinforced glass to fix it."
+
+		while(amount > 0)
+			amount -= 1
+
+			var/index = pick(options)
+			broken_requirements[index] = options[index]
+			options -= index
 
 /obj/machinery/chem_dispenser/ex_act(severity)
 	switch(severity)
@@ -81,6 +105,10 @@
 /obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main")
 	if(stat & (BROKEN|NOPOWER)) return
 	if(user.stat || user.restrained()) return
+
+	if(broken_requirements.len)
+		user << "<span class='warning'>[src] is broken. [broken_requirements[broken_requirements[1]]]</span>"
+		return
 
 	// this is the data which will be sent to the ui
 	var/data[0]
@@ -156,6 +184,19 @@
 	if(isrobot(user))
 		return
 
+	if(broken_requirements.len && B.type == broken_requirements[1])
+		broken_requirements -= broken_requirements[1]
+		user << "<span class='notice'>You fix [src].</span>"
+		if(istype(B,/obj/item/stack))
+			var/obj/item/stack/S = B
+			S.use(1)
+		else
+			user.drop_item()
+			del(B)
+		return
+
+	if(!istype(B, /obj/item/weapon/reagent_containers/glass))
+		return
 	if(src.beaker)
 		user << "Something is already loaded into the machine."
 		return
@@ -192,7 +233,7 @@
 		if(istype(B, /obj/item/device/multitool))
 			if(hackedcheck == 0)
 				user << "You change the mode from 'McNano' to 'Pizza King'."
-				dispensable_reagents += list("thirteenloko")
+				dispensable_reagents += list("thirteenloko","grapesoda")
 				hackedcheck = 1
 				return
 

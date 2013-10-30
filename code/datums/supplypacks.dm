@@ -456,6 +456,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "fuel tank crate"
 	group = "Engineering"
 
+/datum/supply_packs/coolanttank
+	name = "Coolant tank crate"
+	contains = list(/obj/structure/reagent_dispensers/coolanttank)
+	cost = 16
+	containertype = /obj/structure/largecrate
+	containername = "coolant tank crate"
+	group = "Medical / Science"
+
 /datum/supply_packs/solar
 	name = "Solar Pack crate"
 	contains  = list(/obj/item/solar_assembly,
