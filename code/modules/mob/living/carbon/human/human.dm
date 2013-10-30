@@ -1324,7 +1324,7 @@ mob/living/carbon/human/yank_out_object()
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/new_species,var/on_spawn=0)
+/mob/living/carbon/human/proc/set_species(var/new_species)
 
 	if(!new_species)
 		new_species = "Human"
