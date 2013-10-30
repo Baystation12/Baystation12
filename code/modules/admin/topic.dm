@@ -1444,10 +1444,10 @@
 	else if(href_list["CentcommFaxReply"])
 		var/mob/living/carbon/human/H = locate(href_list["CentcommFaxReply"])
 
-		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null
+		var/input = sanitize_u(input(src.owner, "Please enter a message to reply to [key_name(H)] via secure connection. NOTE: BBCode does not work, but HTML tags do! Use <br> for line breaks.", "Outgoing message from Centcomm", "") as message|null)
 		if(!input)	return
 
-		var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
+		var/customname = sanitize_u(input(src.owner, "Pick a title for the report", "Title") as text|null)
 
 		for(var/obj/machinery/faxmachine/F in machines)
 			if(! (F.stat & (BROKEN|NOPOWER) ) )
