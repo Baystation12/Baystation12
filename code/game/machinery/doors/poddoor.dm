@@ -6,6 +6,11 @@
 	var/id = 1.0
 	explosion_resistance = 25
 
+/obj/machinery/door/poddoor/preopen
+	icon_state = "open"
+	density = 0
+	opacity = 0
+
 /obj/machinery/door/poddoor/four_tile_ver/
 	name = "Large Pod Door"
 	icon = 'icons/obj/doors/1x4blast_vert.dmi'

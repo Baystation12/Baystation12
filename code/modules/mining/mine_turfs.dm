@@ -167,6 +167,7 @@ var/list/artifact_spawning_turfs = list()
 					M = new/turf/simulated/mineral/uranium(src)
 				if("Iron")
 					M = new/turf/simulated/mineral/iron(src)
+					M.icon_state = "rock_Iron[rand(1,3)]"
 				if("Diamond")
 					M = new/turf/simulated/mineral/diamond(src)
 				if("Gold")
@@ -175,6 +176,7 @@ var/list/artifact_spawning_turfs = list()
 					M = new/turf/simulated/mineral/silver(src)
 				if("Plasma")
 					M = new/turf/simulated/mineral/plasma(src)
+					M.icon_state = "rock_Plasma[rand(1,3)]"
 				/*if("Adamantine")
 					M = new/turf/simulated/mineral/adamantine(src)*/
 			if(M)
@@ -212,7 +214,7 @@ var/list/artifact_spawning_turfs = list()
 
 /turf/simulated/mineral/iron
 	name = "Iron deposit"
-	icon_state = "rock_Iron"
+	icon_state = "rock_Iron1"
 	mineralName = "Iron"
 	mineralAmt = 5
 	spreadChance = 25
@@ -248,7 +250,7 @@ var/list/artifact_spawning_turfs = list()
 
 /turf/simulated/mineral/plasma
 	name = "Plasma deposit"
-	icon_state = "rock_Plasma"
+	icon_state = "rock_Plasma1"
 	mineralName = "Plasma"
 	mineralAmt = 5
 	spreadChance = 25
