@@ -46,6 +46,10 @@
 	dna.mutantrace = "slime"
 	..()
 
+/mob/living/carbon/human/grey/New()
+	set_species("Grey")
+	..()
+
 /mob/living/carbon/human/skellington/New()
 	species = new /datum/species/skellington(src)
 	..()
@@ -1320,7 +1324,7 @@ mob/living/carbon/human/yank_out_object()
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/new_species)
+/mob/living/carbon/human/proc/set_species(var/new_species,var/on_spawn=0)
 
 	if(!new_species)
 		new_species = "Human"
@@ -1338,6 +1342,10 @@ mob/living/carbon/human/yank_out_object()
 
 	if(species.name=="Slime People")
 		dna.mutantrace = "slime"
+
+	if(mutations.len==0)
+		mutations=species.default_mutations
+
 
 	spawn(0)
 		update_icons()

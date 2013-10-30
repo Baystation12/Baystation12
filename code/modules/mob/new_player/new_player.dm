@@ -371,6 +371,8 @@
 						new_character = new /mob/living/carbon/human/kidan(loc)
 					if("Skellington")
 						new_character = new /mob/living/carbon/human/skellington(loc)
+					if("Grey")
+						new_character = new /mob/living/carbon/human/grey(loc)
 					if("Human")
 						new_character = new /mob/living/carbon/human(loc)
 //				new_character.set_species(client.prefs.species)
