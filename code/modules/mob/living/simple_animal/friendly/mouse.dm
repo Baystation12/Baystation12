@@ -50,6 +50,8 @@
 
 /mob/living/simple_animal/mouse/New()
 	..()
+	name = "[name] ([rand(1, 1000)])"
+	real_name = name
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
 	icon_state = "mouse_[body_color]"
