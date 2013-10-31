@@ -16,7 +16,7 @@
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
 			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
-			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway)
+			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_customs)
 	minimal_player_age = 14
 
 	equip(var/mob/living/carbon/human/H)
@@ -165,4 +165,35 @@
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
 			H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_in_backpack)
+		return 1
+
+
+/datum/job/customs
+	title = "Customs Officer"
+	flag = CUSTOMS
+	department_flag = ENGSEC
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the head of security"
+	selection_color = "#ffeeee"
+	access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue)
+	minimal_access = list(access_security, access_customs, access_maint_tunnels)
+	minimal_player_age = 7
+	equip(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
+		switch(H.backbag)
+			if(2) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(H), slot_back)
+			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_sec(H), slot_back)
+			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
+		H.equip_to_slot_or_del(new /obj/item/clothing/under/fluff/milo_hachert(H), slot_w_uniform)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
+		H.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/customs(H), slot_head)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/security(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(H), slot_s_store)
+		H.equip_to_slot_or_del(new /obj/item/device/flash(H), slot_l_store)
+		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+		H.equip_to_slot_or_del(new /obj/item/weapon/stamp(H), slot_in_backpack)
+		H.equip_to_slot_or_del(new /obj/item/weapon/stamp/denied(H), slot_in_backpack)
 		return 1

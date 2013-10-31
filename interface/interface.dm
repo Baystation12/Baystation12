@@ -11,6 +11,18 @@
 		src << "\red The wiki URL is not set in the server configuration."
 	return
 
+#define CHANGELOG "http://192.241.230.212/phpBB3/viewtopic.php?f=10&t=36"
+/client/verb/changes()
+	set name = "Changelog"
+	set desc = "Visit the forum to check out the changelog."
+	set hidden = 1
+
+	if(alert("This will open the changelog in your browser. Are you sure?",,"Yes","No")=="No")
+		return
+	src << link(CHANGELOG)
+	return
+#undef CHANGELOG
+
 /client/verb/forum()
 	set name = "forum"
 	set desc = "Visit the forum."
