@@ -5,11 +5,11 @@
 /mob/living/carbon/proc/updateshock()
 	src.traumatic_shock = 			\
 	1	* src.getOxyLoss() + 		\
-	0.5	* src.getToxLoss() + 		\
-	2.5	* src.getFireLoss() + 		\
-	1.5	* src.getBruteLoss() + 		\
-	2	* src.getCloneLoss() + 		\
-	1	* src.halloss
+	0.7	* src.getToxLoss() + 		\
+	1.5	* src.getFireLoss() + 		\
+	1.2	* src.getBruteLoss() + 		\
+	1.7	* src.getCloneLoss() + 		\
+	2	* src.halloss
 
 	if(reagents.has_reagent("alkysine"))
 		src.traumatic_shock -= 10
@@ -35,7 +35,7 @@
 			else if(organ.status & ORGAN_BROKEN || organ.open)
 				src.traumatic_shock += 30
 				if(organ.status & ORGAN_SPLINTED)
-					src.traumatic_shock -= 20
+					src.traumatic_shock -= 25
 
 	if(src.traumatic_shock < 0)
 		src.traumatic_shock = 0

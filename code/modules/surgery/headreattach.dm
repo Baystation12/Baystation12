@@ -95,7 +95,6 @@
 		return ..() && affected.open == 3
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("[user] is stapling and suturing flesh into place in [target]'s esophagal and vocal region with \the [tool].", \
 		"You start to staple and suture flesh into place in [target]'s esophagal and vocal region with \the [tool].")
 		..()
@@ -174,12 +173,13 @@
 		affected.status = 0
 		affected.amputated = 0
 		affected.destspawn = 0
-		var/obj/item/weapon/organ/head/B = tool
-		B.brainmob.mind.transfer_to(target)
 		target.update_body()
 		target.updatehealth()
 		target.UpdateDamageIcon()
-		del(tool)
+		var/obj/item/weapon/organ/head/B = tool
+		B.brainmob.mind.transfer_to(target)
+		del(B)
+
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
