@@ -51,7 +51,7 @@
 		name = "Bald"
 		icon_state = "bald"
 		gender = MALE
-		species_allowed = list("Human","Unathi","Vox","Diona","Skellington","Kidan")
+		species_allowed = list("Human","Unathi","Vox","Diona","Kidan","Greys")
 
 	short
 		name = "Short Hair"	  // try to capatilize the names please~
@@ -305,7 +305,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajaran","Skrell","Vox","Diona","Skellington","Kidan")
+		species_allowed = list("Human","Unathi","Tajaran","Skrell","Vox","Diona","Kidan","Greys")
 
 	watson
 		name = "Watson Mustache"

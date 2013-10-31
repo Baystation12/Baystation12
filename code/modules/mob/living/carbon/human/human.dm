@@ -50,10 +50,6 @@
 	set_species("Grey")
 	..()
 
-/mob/living/carbon/human/skellington/New()
-	species = new /datum/species/skellington(src)
-	..()
-
 /mob/living/carbon/human/human/New()
 	species = new /datum/species/human(src)
 	..()

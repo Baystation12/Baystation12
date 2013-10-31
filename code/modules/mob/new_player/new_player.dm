@@ -369,8 +369,6 @@
 						new_character = new /mob/living/carbon/human/vox(loc)
 					if("Kidan")
 						new_character = new /mob/living/carbon/human/kidan(loc)
-					if("Skellington")
-						new_character = new /mob/living/carbon/human/skellington(loc)
 					if("Grey")
 						new_character = new /mob/living/carbon/human/grey(loc)
 					if("Human")

@@ -141,18 +141,6 @@
 	flags = NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
 	bloodflags = BLOOD_GREEN
 
-/datum/species/skellington // /vg/
-	name = "Skellington"
-	icobase = 'icons/mob/human_races/r_skeleton.dmi'
-	deform = 'icons/mob/human_races/r_skeleton.dmi'  // TODO: Need deform.
-	path = /mob/living/carbon/human/skellington
-	language = "Clatter"
-	attack_verb = "punch"
-
-	flags = HAS_LIPS | HAS_TAIL | NO_EAT | NO_BREATHE | NON_GENDERED
-
-
-
 /datum/species/kidan
 	name = "Kidan"
 	icobase = 'icons/mob/human_races/r_kidan.dmi'
