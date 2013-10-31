@@ -1,8 +1,8 @@
 /obj/item/weapon/stamp
-	name = "rubber stamp"
+	name = "\improper GRANTED rubber stamp"
 	desc = "A rubber stamp for stamping important documents."
 	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "stamp-qm"
+	icon_state = "stamp-ok"
 	item_state = "stamp"
 	flags = FPRINT | TABLEPASS
 	throwforce = 0
@@ -13,6 +13,16 @@
 	_color = "qm"
 	pressure_resistance = 2
 	attack_verb = list("stamped")
+
+/obj/item/weapon/stamp/qm
+	name = "Quartermaster's rubber stamp"
+	icon_state = "stamp-qm"
+	_color = "cargo"
+
+/obj/item/weapon/stamp/law
+	name = "Law office's rubber stamp"
+	icon_state = "stamp-law"
+	_color = "cargo"
 
 /obj/item/weapon/stamp/captain
 	name = "captain's rubber stamp"
@@ -54,6 +64,10 @@
 	icon_state = "stamp-clown"
 	_color = "clown"
 
+/obj/item/weapon/stamp/centcom
+	name = "Nanotrasen representative's rubber stamp"
+	icon_state = "stamp-cent"
+	_color = "centcom"
 
 /obj/item/weapon/stamp/attack_paw(mob/user as mob)
 	return attack_hand(user)
