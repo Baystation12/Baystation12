@@ -145,6 +145,7 @@
 	var/icon/front
 	var/icon/side
 	var/dat
+	var/stamped=0
 
 /obj/item/weapon/card/id/New()
 	..()
@@ -153,6 +154,16 @@
 		blood_type = loc:dna:b_type
 		dna_hash = loc:dna:unique_enzymes
 		fingerprint_hash = md5(loc:dna:uni_identity)
+		dat = ("<table><tr><td>")
+		dat +=text("Name: []</A><BR>", registered_name)
+		dat +=text("Sex: []</A><BR>\n", name)
+		dat +=text("Age: []</A><BR>\n", age)
+		dat +=text("Rank: []</A><BR>\n", assignment)
+		dat +=text("Fingerprint: []</A><BR>\n", fingerprint_hash)
+		dat +=text("Blood Type: []<BR>\n", blood_type)
+		dat +=text("DNA Hash: []<BR><BR>\n", dna_hash)
+		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4>	\
+		<img src=side.png height=80 width=80 border=4></td></tr></table>"
 
 /obj/item/weapon/card/id/examine()
 	set src in oview(1)
@@ -169,16 +180,6 @@
 		side = new(photo, dir = WEST)
 	user << browse_rsc(front, "front.png")
 	user << browse_rsc(side, "side.png")
-	dat = ("<table><tr><td>	\
-		Name: [registered_name]</A><BR> \
-		Sex: [sex]</A><BR>\n	\
-		Age: [age]</A><BR>\n	\
-		Rank: [assignment]</A><BR>\n	\
-		Fingerprint: [fingerprint_hash]</A><BR>\n	\
-		Blood Type: [blood_type]<BR>\n	\
-		DNA Hash: [dna_hash]<BR><BR>\n	\
-		<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4>	\
-		<img src=side.png height=80 width=80 border=4></td></tr></table>")
 	var/datum/browser/popup = new(user, "idcard", name, 600, 400)
 	popup.set_content(dat)
 	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
@@ -209,6 +210,15 @@
 		src.icon_state = W.icon_state
 		del(W)
 		return
+
+	else if(istype (W,/obj/item/weapon/stamp))
+		if(!stamped)
+			dat+="<img src=large_[W.icon_state].png>"
+			stamped = 1
+			usr << "You stamp the ID card!"
+		else
+			usr << "This ID has already been stamped!"
+
 
 /obj/item/weapon/card/id/verb/read()
 	set name = "Read ID Card"
