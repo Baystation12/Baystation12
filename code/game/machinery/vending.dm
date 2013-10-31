@@ -145,6 +145,15 @@
 		coin = W
 		user << "\blue You insert the [W] into the [src]"
 		return
+	else if(istype(W, /obj/item/weapon/wrench))	//unwrenching vendomats
+		var/turf/T = user.loc
+		user << "<span class='notice'>You begin [anchored ? "unwrenching" : "wrenching"] the [src].</span>"
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		sleep(40)
+		if( !istype(src, /obj/machinery/vending) || !user || !W || !T )	return
+		if( user.loc == T && user.get_active_hand() == W )
+			anchored = !anchored
+			user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
 	else if(istype(W, /obj/item/weapon/card) && currently_vending)
 		var/obj/item/weapon/card/I = W
 		scan_card(I)
