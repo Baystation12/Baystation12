@@ -31,6 +31,7 @@
 	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE     // Dangerously low pressure.
 
+	// This shit is apparently not even wired up.
 	var/brute_resist    // Physical damage reduction.
 	var/burn_resist     // Burn damage reduction.
 
@@ -38,11 +39,17 @@
 	var/bloodflags=0
 	var/bodyflags=0
 
+	// For grays
+	var/max_hurt_damage = 5 // Max melee damage dealt + 5 if hulk
+	var/default_mutations = list()
+
 
 /datum/species/human
 	name = "Human"
+	icobase = 'icons/mob/human_races/r_human.dmi'
+	deform = 'icons/mob/human_races/r_def_human.dmi'
 	primitive = /mob/living/carbon/monkey
-	path = /mob/living/carbon/human
+	path = /mob/living/carbon/human/human
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
 
 /datum/species/unathi
@@ -134,18 +141,6 @@
 	flags = NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
 	bloodflags = BLOOD_GREEN
 
-/datum/species/skellington // /vg/
-	name = "Skellington"
-	icobase = 'icons/mob/human_races/r_skeleton.dmi'
-	deform = 'icons/mob/human_races/r_skeleton.dmi'  // TODO: Need deform.
-	path = /mob/living/carbon/human/skellington
-	language = "Clatter"
-	attack_verb = "punch"
-
-	flags = WHITELISTED | HAS_LIPS | HAS_TAIL | NO_EAT | NO_BREATHE | NON_GENDERED
-
-
-
 /datum/species/kidan
 	name = "Kidan"
 	icobase = 'icons/mob/human_races/r_kidan.dmi'
@@ -169,3 +164,17 @@
 
 	flags = WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS
 	bloodflags = BLOOD_SLIME
+
+
+/datum/species/grey
+	name = "Grey"
+	icobase = 'icons/mob/human_races/r_grey.dmi'
+	deform = 'icons/mob/human_races/r_def_grey.dmi'
+	language = "Galactic Standard"
+	attack_verb = "punch"
+	path = /mob/living/carbon/human/grey
+	darksight = 5 // BOOSTED from 2
+	max_hurt_damage = 3 // From 5 (for humans)
+	default_mutations=list(mRemotetalk) // TK is also another candidate, but TK is overpowered as fuck.
+
+	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT

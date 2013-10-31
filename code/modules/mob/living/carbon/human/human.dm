@@ -46,14 +46,18 @@
 	dna.mutantrace = "slime"
 	..()
 
-/mob/living/carbon/human/skellington/New()
-	species = new /datum/species/skellington(src)
+/mob/living/carbon/human/grey/New()
+	set_species("Grey")
+	..()
+
+/mob/living/carbon/human/human/New()
+	species = new /datum/species/human(src)
 	..()
 
 /mob/living/carbon/human/New()
 
 	if(!species)
-		set_species()
+		set_species("Human")
 
 	if(species.language)
 		var/datum/language/L = all_languages[species.language]
@@ -428,7 +432,7 @@
 
 // called when something steps onto a human
 // this could be made more general, but for now just handle mulebot
-/mob/living/carbon/human/HasEntered(var/atom/movable/AM)
+/mob/living/carbon/human/Crossed(var/atom/movable/AM)
 	var/obj/machinery/bot/mulebot/MB = AM
 	if(istype(MB))
 		MB.RunOver(src)
@@ -896,7 +900,7 @@
 			xylophone=0
 	return
 
-/mob/living/carbon/human/proc/vomit()
+/mob/living/carbon/human/proc/vomit(hairball=0)
 	if(!lastpuke)
 		lastpuke = 1
 		src << "<spawn class='warning'>You feel nauseous..."
@@ -905,15 +909,19 @@
 			spawn(100)	//and you have 10 more for mad dash to the bucket
 				Stun(5)
 
-				src.visible_message("<spawn class='warning'>[src] throws up!","<spawn class='warning'>You throw up!")
+				if(hairball)
+					src.visible_message("<span class='warning'>[src] hacks up a hairball!</span>","<span class='warning'>You hack up a hairball!</span>")
+				else
+					src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 				var/turf/location = loc
 				if (istype(location, /turf/simulated))
 					location.add_vomit_floor(src, 1)
 
-				nutrition -= 40
-				adjustToxLoss(-3)
+				if(!hairball)
+					nutrition -= 40
+					adjustToxLoss(-3)
 				spawn(350)	//wait 35 seconds before next volley
 					lastpuke = 0
 
@@ -1322,7 +1330,7 @@ mob/living/carbon/human/yank_out_object()
 		new_species = "Human"
 
 	if(species && (species.name && species.name == new_species))
-		return
+		return 1
 
 	species = all_species[new_species]
 
@@ -1334,6 +1342,10 @@ mob/living/carbon/human/yank_out_object()
 
 	if(species.name=="Slime People")
 		dna.mutantrace = "slime"
+
+	if(mutations.len==0)
+		mutations=species.default_mutations
+
 
 	spawn(0)
 		update_icons()

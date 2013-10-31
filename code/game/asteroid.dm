@@ -1,4 +1,5 @@
 
+
 var/global/list/space_surprises = list(		/obj/item/clothing/mask/facehugger				=4,
 											/obj/item/weapon/pickaxe/silver					=4,
 											/obj/item/weapon/pickaxe/drill					=4,

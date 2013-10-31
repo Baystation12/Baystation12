@@ -88,7 +88,7 @@
 	if(new_item_type)
 		find_type = new_item_type
 	else
-		find_type = rand(1,34)	//update this when you add new find types
+		find_type = rand(1,33)	//update this when you add new find types
 
 	var/item_type = "object"
 	icon_state = "unknown[rand(1,4)]"
@@ -323,34 +323,33 @@
 			item_type = new_item.name
 		if(26)
 			//energy gun
-			var/spawn_type = pick(
-			/obj/item/weapon/gun/energy/laser/practice;100,\
-			/obj/item/weapon/gun/energy/laser;75,\
-			/obj/item/weapon/gun/energy/xray;50,\
-			/obj/item/weapon/gun/energy/laser/captain;25,\
-			)
-			if(isnull(spawn_type))
-				spawn_type = /obj/item/weapon/gun/energy/laser
-			var/obj/item/weapon/gun/energy/new_gun = new spawn_type(src.loc)
-			new_item = new_gun
-			new_item.icon_state = "egun[rand(1,6)]"
+			var/spawn_type = pick(\
+			/obj/item/weapon/gun/energy/laser/practice,\
+			/obj/item/weapon/gun/energy/laser,\
+			/obj/item/weapon/gun/energy/xray,\
+			/obj/item/weapon/gun/energy/laser/captain)
+			if(spawn_type)
+				var/obj/item/weapon/gun/energy/new_gun = new spawn_type(src.loc)
+				new_item = new_gun
+				new_item.icon_state = "egun[rand(1,6)]"
+				new_gun.desc = "This is an antique energy weapon, you're not sure if it will fire or not."
 
-			//5% chance to explode when first fired
-			//10% chance to have an unchargeable cell
-			//15% chance to gain a random amount of starting energy, otherwise start with an empty cell
-			if(prob(5))
-				new_gun.power_supply.rigged = 1
-			if(prob(10))
-				new_gun.power_supply.maxcharge = 0
-			if(prob(15))
-				new_gun.power_supply.charge = rand(0, new_gun.power_supply.maxcharge)
-			else
-				new_gun.power_supply.charge = 0
+				//5% chance to explode when first fired
+				//10% chance to have an unchargeable cell
+				//15% chance to gain a random amount of starting energy, otherwise start with an empty cell
+				if(prob(5))
+					new_gun.power_supply.rigged = 1
+				if(prob(10))
+					new_gun.power_supply.maxcharge = 0
+				if(prob(15))
+					new_gun.power_supply.charge = rand(0, new_gun.power_supply.maxcharge)
+				else
+					new_gun.power_supply.charge = 0
 
 			item_type = "gun"
-		if(27)
+/*		if(27)
 			//revolver
-			var/obj/item/weapon/gun/projectile/new_gun = new /obj/item/weapon/gun/projectile(src.loc)
+			var/obj/item/weapon/gun/projectile/revolver/new_gun = new /obj/item/weapon/gun/projectile/revolver(src.loc)
 			new_item = new_gun
 			new_item.icon_state = "gun[rand(1,4)]"
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
@@ -382,7 +381,7 @@
 						new_gun.loaded.Remove(I)
 						I.loc = null
 
-			item_type = "gun"
+			item_type = "gun"*/
 		if(28)
 			//completely unknown alien device
 			if(prob(50))
@@ -448,7 +447,7 @@
 			"A pile of wires and crap metal that looks vaguely robotic.")
 			apply_image_decorations = 0
 			apply_material_decorations = 0
-		if(34)
+		if(27)
 			//xenos remains
 			apply_prefix = 0
 			item_type = "alien [pick("remains","skeleton")]"

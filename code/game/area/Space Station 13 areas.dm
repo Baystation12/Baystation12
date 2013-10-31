@@ -20,6 +20,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/atmosalm = 0
 	var/poweralm = 1
 	var/party = null
+	var/radalert = 0
 	level = null
 	name = "Space"
 	icon = 'icons/turf/areas.dmi'
@@ -246,6 +247,21 @@ proc/process_ghost_teleport_locs()
 
 /area/shuttle/prison/prison
 	icon_state = "shuttle2"
+
+/area/shuttle/siberia
+	name = "\improper Labor Camp Shuttle"
+	music = "music/escape.ogg"
+
+/area/shuttle/siberia/station
+	icon_state = "shuttle"
+
+/area/shuttle/siberia/outpost
+	icon_state = "shuttle"
+
+/area/shuttle/transport1/centcom
+	icon_state = "shuttle"
+	name = "\improper Transport Shuttle Centcom"
+
 
 /area/shuttle/specops/centcom
 	name = "\improper Special Ops Shuttle"
@@ -1194,6 +1210,10 @@ proc/process_ghost_teleport_locs()
 
 /area/security/prison
 	name = "\improper Prison Wing"
+	icon_state = "sec_prison"
+
+/area/security/processing
+	name = "\improper Prisoner Processing"
 	icon_state = "sec_prison"
 
 /area/security/warden

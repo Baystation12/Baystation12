@@ -20,6 +20,9 @@
 #define ui_action_slot4 "4:12,14:26"
 #define ui_action_slot5 "5:14,14:26"
 
+//Middle left indicators
+#define ui_alienplasmadisplay "1,6:15"
+
 //Lower left, persistant menu
 #define ui_inventory "1:6,1:5"
 

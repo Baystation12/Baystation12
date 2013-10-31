@@ -179,26 +179,32 @@ var/list/uplink_items = list()
 /datum/uplink_item/dangerous/revolver
 	name = "Fully Loaded Revolver"
 	desc = "A traditional handgun which fires .357 rounds. Has 7 chambers. Can down an unarmoured target with two shots."
-	item = /obj/item/weapon/gun/projectile
+	item = /obj/item/weapon/gun/projectile/revolver
 	cost = 6
 
 /datum/uplink_item/dangerous/ammo
 	name = "Ammo-357"
 	desc = "Seven additional rounds for the revolver. Reports indicate the presence of machinery aboard Nanotrasen space stations suitable for producing extra .357 cartridges."
-	item = /obj/item/ammo_magazine/a357
+	item = /obj/item/ammo_box/a357
 	cost = 2
 
 /datum/uplink_item/dangerous/crossbow
 	name = "Energy Crossbow"
 	desc = "A miniature energy crossbow that is small enough both to fit into a pocket and to slip into a backpack unnoticed by observers. Fires bolts tipped with toxin, a poisonous substance that is the product of a living organism. Stuns enemies for a short period of time. Recharges automatically."
 	item = /obj/item/weapon/gun/energy/crossbow
-	cost = 5
+	cost = 7
 
 /datum/uplink_item/dangerous/sword
 	name = "Energy Sword"
 	desc = "The esword is an edged weapon with a blade of pure energy. The sword is small enough to be pocketed when inactive. Activating it produces a loud, distinctive noise."
 	item = /obj/item/weapon/melee/energy/sword
 	cost = 4
+
+/datum/uplink_item/dangerous/manhacks
+	name = "Manhack Delivery Grenade"
+	desc = "The manhack grenade is a highly specialized grenades that, once thrown, will deploy a swarm of Viscerators to attack any nearby crewmembers. WARNING: Viscerator progrmaming does not include safeties. They may turn on you!"
+	item = /obj/item/weapon/grenade/spawnergrenade/manhacks
+	cost = 7
 
 /datum/uplink_item/dangerous/emp
 	name = "5 EMP Grenades"

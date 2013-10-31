@@ -4,6 +4,8 @@
 #define XENOARCH_SPREAD_CHANCE 15
 #define ARTIFACT_SPAWN_CHANCE 20
 
+/datum/controller/game_controller/var/list/artifact_spawning_turfs = list()
+
 /turf/simulated/mineral //wall piece
 	name = "Rock"
 	icon = 'icons/turf/walls.dmi'
@@ -127,7 +129,7 @@
 			//dont create artifact machinery in animal or plant digsites, or if we already have one
 			if(!artifact_find && digsite != 1 && digsite != 2 && prob(ARTIFACT_SPAWN_CHANCE))
 				artifact_find = new()
-				artifact_spawning_turfs.Add(src)
+				master_controller.artifact_spawning_turfs.Add(src)
 
 		if(!src.geological_data)
 			src.geological_data = new/datum/geosample(src)
@@ -165,6 +167,7 @@
 					M = new/turf/simulated/mineral/uranium(src)
 				if("Iron")
 					M = new/turf/simulated/mineral/iron(src)
+					M.icon_state = "rock_Iron[rand(1,3)]"
 				if("Diamond")
 					M = new/turf/simulated/mineral/diamond(src)
 				if("Gold")
@@ -173,6 +176,7 @@
 					M = new/turf/simulated/mineral/silver(src)
 				if("Plasma")
 					M = new/turf/simulated/mineral/plasma(src)
+					M.icon_state = "rock_Plasma[rand(1,3)]"
 				/*if("Adamantine")
 					M = new/turf/simulated/mineral/adamantine(src)*/
 			if(M)
@@ -210,7 +214,7 @@
 
 /turf/simulated/mineral/iron
 	name = "Iron deposit"
-	icon_state = "rock_Iron"
+	icon_state = "rock_Iron1"
 	mineralName = "Iron"
 	mineralAmt = 5
 	spreadChance = 25
@@ -246,7 +250,7 @@
 
 /turf/simulated/mineral/plasma
 	name = "Plasma deposit"
-	icon_state = "rock_Plasma"
+	icon_state = "rock_Plasma1"
 	mineralName = "Plasma"
 	mineralAmt = 5
 	spreadChance = 25
@@ -369,29 +373,25 @@ commented out in r5061, I left it because of the shroom thingies
 					//just pull the surrounding rock out
 					excavate_find(0, F)
 
-			if( src.excavation_level + P.excavation_amount >= 100 || (!finds.len && !excavation_minerals.len) )
-				//if players have been excavating this turf, have a chance to leave some rocky debris behind
-				var/boulder_prob = 0
+			if( src.excavation_level + P.excavation_amount >= 100 )
+				//if players have been excavating this turf, leave some rocky debris behind
 				var/obj/structure/boulder/B
-
-				if(src.excavation_level > 15)
-					boulder_prob = 10
 				if(artifact_find)
-					boulder_prob += 25
-					if(src.excavation_level >= 100)
-						boulder_prob += 40
-					else if(src.excavation_level > 95)
-						boulder_prob += 25
-					else if(src.excavation_level > 90)
-						boulder_prob += 10
-				if(prob(boulder_prob))
+					if( src.excavation_level > 0 || prob(15) )
+						//boulder with an artifact inside
+						B = new(src)
+						if(artifact_find)
+							B.artifact_find = artifact_find
+					else
+						artifact_debris(1)
+				else if(prob(15))
+					//empty boulder
 					B = new(src)
-					if(artifact_find)
-						B.artifact_find = artifact_find
-				else if(artifact_find && src.excavation_level + P.excavation_amount >= 100)
-					artifact_debris(1)
 
-				gets_drilled(B ? 0 : 1)
+				if(B)
+					gets_drilled(0)
+				else
+					gets_drilled(1)
 				return
 			else
 				src.excavation_level += P.excavation_amount
@@ -475,7 +475,7 @@ commented out in r5061, I left it because of the shroom thingies
 		if(prob(50))
 			pain = 1
 		for(var/mob/living/M in range(src, 200))
-			M << "<font color='red'><b>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fadaing away!</b></font>"
+			M << "<font color='red'><b>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</b></font>"
 			if(pain)
 				flick("pain",M.pain)
 				if(prob(50))
