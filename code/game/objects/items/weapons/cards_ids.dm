@@ -138,6 +138,14 @@
 	var/rank = null			//actual job
 	var/dorm = 0		// determines if this ID has claimed a dorm already
 
+	var/datum/data/record/active1 = null
+	var/sex
+	var/age
+	var/photo
+	var/icon/front
+	var/icon/side
+	var/dat
+
 /obj/item/weapon/card/id/New()
 	..()
 	spawn(30)
@@ -145,6 +153,38 @@
 		blood_type = loc:dna:b_type
 		dna_hash = loc:dna:unique_enzymes
 		fingerprint_hash = md5(loc:dna:uni_identity)
+
+/obj/item/weapon/card/id/examine()
+	set src in oview(1)
+	if(in_range(usr, src))
+		show(usr)
+		usr << desc
+	else
+		usr << "<span class='notice'>It is too far away.</span>"
+
+/obj/item/weapon/card/id/proc/show(mob/user as mob)
+	if(!front)
+		front = new(photo, dir = SOUTH)
+	if(!side)
+		side = new(photo, dir = WEST)
+	user << browse_rsc(front, "front.png")
+	user << browse_rsc(side, "side.png")
+	dat = ("<table><tr><td>	\
+		Name: [registered_name]</A><BR> \
+		Sex: [sex]</A><BR>\n	\
+		Age: [age]</A><BR>\n	\
+		Rank: [assignment]</A><BR>\n	\
+		Fingerprint: [fingerprint_hash]</A><BR>\n	\
+		Blood Type: [blood_type]<BR>\n	\
+		DNA Hash: [dna_hash]<BR><BR>\n	\
+		<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4>	\
+		<img src=side.png height=80 width=80 border=4></td></tr></table>")
+	var/datum/browser/popup = new(user, "idcard", name, 600, 400)
+	popup.set_content(dat)
+	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
+	popup.open()
+
+	return
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
 	for(var/mob/O in viewers(user, null))
