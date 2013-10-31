@@ -95,7 +95,7 @@
 	storage.amount += inp.amount //Stack the sheets
 	inp.loc = null //Let the old sheet garbage collect
 	while(storage.amount > stack_amt) //Get rid of excessive stackage
-		var/obj/item/stack/sheet/out = new input.type()
+		var/obj/item/stack/sheet/out = new inp.type()
 		out.amount = stack_amt
 		out.loc = output.loc
 		storage.amount -= stack_amt

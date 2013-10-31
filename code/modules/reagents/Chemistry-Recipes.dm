@@ -1976,24 +1976,3 @@ datum
 
 */
 
-
-//Grutor
-///////////////////////Zombie recipes////////////////////////////
-
-	/*	necrocure
-			name = "Zombie Cure"
-			id = "necrocure"
-			result = "necrocure"
-			required_reagents = list("sterilizine" = 2, "zmeat" = 2)
-			result_amount = 5
-
-		necrodisease
-			name = "Zombie Virus"
-			id = "necrodisease"
-			result = "necrodisease"
-			required_reagents = list("zombiepowder" = 2, "cryptobiolin" = 2, "mutagen" = 2)
-			result_amount = 5
-
-	*/
-
-

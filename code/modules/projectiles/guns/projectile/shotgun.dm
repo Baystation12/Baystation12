@@ -11,14 +11,14 @@
 	if(istype(A, /obj/item/ammo_box))
 		var/obj/item/ammo_box/AM = A
 		for(var/obj/item/ammo_casing/AC in AM.stored_ammo)
-			if(magazine.give_round(AC))
+			if(magazine && magazine.give_round(AC))
 				AM.stored_ammo -= AC
 				num_loaded++
 			else
 				break
 	if(istype(A, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/AC = A
-		if(magazine.give_round(AC))
+		if(magazine && magazine.give_round(AC))
 			user.drop_item()
 			AC.loc = src
 			num_loaded++

@@ -149,7 +149,7 @@
 	language = "Clatter"
 	attack_verb = "punch"
 
-	flags = WHITELISTED | HAS_LIPS | HAS_TAIL | NO_EAT | NO_BREATHE | NON_GENDERED
+	flags = HAS_LIPS | HAS_TAIL | NO_EAT | NO_BREATHE | NON_GENDERED
 
 
 
