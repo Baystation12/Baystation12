@@ -4,6 +4,7 @@
 	icon_state = "ice_1"
 	damage = 20
 	flag = "energy"
+	embed = 1
 
 /obj/item/projectile/forcebolt/strong
 	name = "force bolt"
