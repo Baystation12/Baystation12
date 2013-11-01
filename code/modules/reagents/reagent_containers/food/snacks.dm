@@ -131,7 +131,8 @@
 			istype(W, /obj/item/weapon/melee/energy/sword) && W:active || \
 			istype(W, /obj/item/weapon/melee/energy/blade) || \
 			istype(W, /obj/item/weapon/shovel) || \
-			istype(W, /obj/item/weapon/hatchet) \
+			istype(W, /obj/item/weapon/hatchet) || \
+			istype(W, /obj/item/weapon/shard) \
 		)
 		inaccurate = 1
 	else if(W.w_class <= 2 && istype(src,/obj/item/weapon/reagent_containers/food/snacks/sliceable))
