@@ -5,6 +5,7 @@
 	damage_type = BRUTE
 	nodamage = 0
 	flag = "bullet"
+	embed = 1
 
 	on_hit(var/atom/target, var/blocked = 0)
 		if (..(target, blocked))
@@ -17,8 +18,10 @@
 	damage = 10
 	stun = 5
 	weaken = 5
+	embed = 0
 
 /obj/item/projectile/bullet/weakbullet/booze
+	embed = 0
 	on_hit(var/atom/target, var/blocked = 0)
 		if(..(target, blocked))
 			var/mob/living/M = target
@@ -41,6 +44,7 @@
 	damage = 20
 	stun = 5
 	weaken = 5
+	embed = 0
 
 /obj/item/projectile/bullet/midbullet2
 	damage = 25
