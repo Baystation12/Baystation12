@@ -150,6 +150,7 @@ datum/hud/New(mob/owner)
 		if(hud_shown)
 			if(H.s_store)	H.s_store.screen_loc = ui_sstore1
 			if(H.wear_id)	H.wear_id.screen_loc = ui_id
+			if(H.wear_pda)	H.wear_pda.screen_loc = ui_pda
 			if(H.belt)		H.belt.screen_loc = ui_belt
 			if(H.back)		H.back.screen_loc = ui_back
 			if(H.l_store)	H.l_store.screen_loc = ui_storage1
@@ -157,6 +158,7 @@ datum/hud/New(mob/owner)
 		else
 			if(H.s_store)	H.s_store.screen_loc = null
 			if(H.wear_id)	H.wear_id.screen_loc = null
+			if(H.wear_pda)	H.wear_pda.screen_loc = null
 			if(H.belt)		H.belt.screen_loc = null
 			if(H.back)		H.back.screen_loc = null
 			if(H.l_store)	H.l_store.screen_loc = null

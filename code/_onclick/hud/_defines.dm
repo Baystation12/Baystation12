@@ -39,6 +39,8 @@
 #define ui_storage1 "9:18,1:5"
 #define ui_storage2 "10:20,1:5"
 
+#define ui_pda "11:22,1:5"
+
 #define ui_alien_head "4:12,1:5"	//aliens
 #define ui_alien_oclothing "5:14,1:5"	//aliens
 
@@ -51,7 +53,7 @@
 #define ui_monkey_back "6:14,1:5"	//monkey
 
 //Lower right, persistant menu
-#define ui_dropbutton "11:22,1:5"
+//#define ui_dropbutton "11:22,1:5"
 #define ui_drop_throw "14:28,2:7"
 #define ui_pull_resist "13:26,2:7"
 #define ui_acti "13:26,1:5"
@@ -94,6 +96,7 @@
 #define ui_iclothing "1:6,2:7"
 #define ui_oclothing "2:8,2:7"
 #define ui_gloves "3:10,2:7"
+
 
 #define ui_glasses "1:6,3:9"
 #define ui_mask "2:8,3:9"

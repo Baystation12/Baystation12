@@ -257,6 +257,10 @@
 			if(!src.wear_id && src.w_uniform)
 				src.wear_id = W
 				equipped = 1
+		if(slot_wear_pda)
+			if(!src.wear_pda && src.w_uniform)
+				src.wear_pda = W
+				equipped = 1
 		if(slot_l_ear)
 			if(!src.l_ear)
 				src.l_ear = W

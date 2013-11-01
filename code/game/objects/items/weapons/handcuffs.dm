@@ -124,3 +124,8 @@
 
 /obj/item/weapon/handcuffs/cyborg
 	dispenser = 1
+
+/obj/item/weapon/handcuffs/pinkcuffs
+	name = "fluffy pink handcuffs"
+	desc = "Use this to keep prisoners in line. Or you know, your significant other."
+	icon_state = "pinkcuffs"

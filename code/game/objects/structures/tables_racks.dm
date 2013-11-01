@@ -269,6 +269,7 @@
 
 /obj/structure/table/attack_alien(mob/user)
 	visible_message("<span class='danger'>[user] slices [src] apart!</span>")
+	destroy()
 
 /obj/structure/table/attack_animal(mob/living/simple_animal/user)
 	if(user.wall_smash)
@@ -416,6 +417,8 @@
 	if (issilicon(usr))
 		usr << "<span class='notice'>You need hands for this.</span>"
 		return
+	if (isobserver(usr))
+		usr << "<span class='notice'>No haunting outside halloween.</span>n"
 	if(!flip(get_cardinal_dir(usr,src)))
 		usr << "<span class='notice'>It won't budge.</span>"
 	else

@@ -61,6 +61,9 @@
 /mob/proc/update_inv_pockets()
 	return
 
+mob/proc/update_inv_wear_pda()
+	return
+
 /mob/proc/update_inv_ears()
 	return
 
