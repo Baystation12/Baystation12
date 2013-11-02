@@ -251,7 +251,7 @@
 		..()
 		if(istype(B, /obj/item/device/multitool))
 			if(hackedcheck == 0)
-				user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive bozes."
+				user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
 				dispensable_reagents += list("goldschlager","patron","watermelonjuice","berryjuice")
 				hackedcheck = 1
 				return
