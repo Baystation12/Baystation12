@@ -206,6 +206,8 @@
 				break
 		if(!ok)
 			if(!stop_messages)
+				if (istype(W, /obj/item/weapon/hand_labeler))
+					return 0
 				usr << "<span class='notice'>[src] cannot hold [W].</span>"
 			return 0
 
@@ -311,7 +313,7 @@
 		return 1 //Robots can't interact with storage items.
 
 	if(!can_be_inserted(W))
-		return 1
+		return 0
 
 	if(istype(W, /obj/item/weapon/tray))
 		var/obj/item/weapon/tray/T = W
