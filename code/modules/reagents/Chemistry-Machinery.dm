@@ -194,9 +194,6 @@
 			user.drop_item()
 			del(B)
 		return
-
-	if(!istype(B, /obj/item/weapon/reagent_containers/glass))
-		return
 	if(src.beaker)
 		user << "Something is already loaded into the machine."
 		return
@@ -248,7 +245,7 @@
 	energy = 100
 	max_energy = 100
 	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
-	dispensable_reagents = list("water","ice","coffee","tea","cream","lemon_lime","sugar","orangejuice","limejuice","cola","sodawater","tonic","beer","kahlua","whisky","wine","vodka","gin","rum","tequila","vermouth","cognac","ale","mead")
+	dispensable_reagents = list("water","ice","coffee","tea","cream","lemon_lime","sugar","orangejuice","limejuice","cola","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequila","vermouth","cognac","ale","mead")
 
 	/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 		..()
