@@ -419,6 +419,7 @@
 		return
 	if (isobserver(usr))
 		usr << "<span class='notice'>No haunting outside halloween.</span>n"
+		return
 	if(!flip(get_cardinal_dir(usr,src)))
 		usr << "<span class='notice'>It won't budge.</span>"
 	else
