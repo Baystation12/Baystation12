@@ -323,6 +323,14 @@ obj/machinery/hydroponics/proc/mutatespecie() // Mutagent produced a new plant!
 		del(myseed)
 		myseed = new /obj/item/seeds/angelmycelium
 
+	else if ( istype(myseed, /obj/item/seeds/sunflowerseed ))
+		del(myseed)
+		switch(rand(1,100))
+			if(1 to 50)
+				myseed = new /obj/item/seeds/moonflowerseed
+			if(51 to 100)
+				myseed = new /obj/item/seeds/novaflowerseed
+
 	else if ( istype(myseed, /obj/item/seeds/lemonseed ))
 		del(myseed)
 		myseed = new /obj/item/seeds/cashseed
@@ -337,11 +345,23 @@ obj/machinery/hydroponics/proc/mutatespecie() // Mutagent produced a new plant!
 
 	else if ( istype(myseed, /obj/item/seeds/chiliseed ))
 		del(myseed)
-		myseed = new /obj/item/seeds/icepepperseed
+		switch(rand(1,100))
+			if(1 to 50)
+				myseed = new /obj/item/seeds/icepepperseed
+			if(51 to 100)
+				myseed = new /obj/item/seeds/chillighost
+
+	else if ( istype(myseed, /obj/item/seeds/soyaseed ))
+		del(myseed)
+		myseed = new /obj/item/seeds/koiseed
 
 	else if ( istype(myseed, /obj/item/seeds/appleseed ))
 		del(myseed)
-		myseed = new /obj/item/seeds/goldappleseed
+		switch(rand(1,100))
+			if(1 to 50)
+				myseed = new /obj/item/seeds/goldappleseed
+			if(51 to 100)
+				myseed = new /obj/item/seeds/poisonedappleseed
 
 	else if ( istype(myseed, /obj/item/seeds/berryseed ))
 		del(myseed)
