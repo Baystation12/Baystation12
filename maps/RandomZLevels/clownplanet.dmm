@@ -119,7 +119,7 @@
 "co" = (/obj/machinery/gateway{dir = 9},/turf/simulated/floor,/area/awaymission/wwrefine)
 "cp" = (/obj/machinery/gateway{dir = 1},/turf/simulated/floor,/area/awaymission/wwrefine)
 "cq" = (/obj/machinery/gateway{dir = 5},/turf/simulated/floor,/area/awaymission/wwrefine)
-"cr" = (/obj/structure/stool/bed,/obj/item/weapon/bedsheet/clown,/obj/item/weapon/gun/projectile,/turf/simulated/floor/wood,/area/awaymission/wwmines)
+"cr" = (/obj/structure/stool/bed,/obj/item/weapon/bedsheet/clown,/turf/simulated/floor/wood,/area/awaymission/wwmines)
 "cs" = (/obj/effect/decal/cleanable/blood,/obj/structure/stool/bed,/obj/item/weapon/bedsheet/clown,/turf/simulated/floor/wood,/area/awaymission/wwmines)
 "ct" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/drinks/coffee,/obj/item/weapon/reagent_containers/food/snacks/donut/slimejelly,/turf/simulated/floor/carpet,/area/awaymission/wwmines)
 "cu" = (/obj/structure/stool/bed/chair/comfy/beige{dir = 8},/obj/effect/decal/cleanable/blood/gibs/body{tag = "icon-gibdown1"; icon_state = "gibdown1"},/turf/simulated/floor/carpet,/area/awaymission/wwmines)

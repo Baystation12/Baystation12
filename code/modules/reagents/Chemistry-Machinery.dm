@@ -322,7 +322,7 @@
 
 /obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 
-	if(istype(B, /obj/item/weapon/reagent_containers/glass))
+	if(istype(B, /obj/item/weapon/reagent_containers/glass) || istype(B, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass))
 
 		if(src.beaker)
 			user << "A beaker is already loaded into the machine."

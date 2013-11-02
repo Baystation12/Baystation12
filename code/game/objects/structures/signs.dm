@@ -194,3 +194,13 @@
 	name = "\improper singulo painting"
 	desc = "A mesmerizing painting of a singularity. It seems to suck you in..."
 	icon_state = "singulo"
+
+/obj/structure/sign/barber
+	name = "\improper barber shop sign"
+	desc = "A spinning sign indicating a barbershop is near."
+	icon_state = "barber"
+
+/obj/structure/sign/chinese
+	name = "\improper chinese restaurant sign"
+	desc = "A glowing dragon invites you in"
+	icon_state = "chinese"
