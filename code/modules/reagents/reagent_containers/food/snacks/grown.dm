@@ -541,6 +541,44 @@
 			reagents.add_reagent("nutriment", 1+round((potency / 20), 1))
 			bitesize = 1+round(reagents.total_volume / 2, 1)
 
+/obj/item/weapon/reagent_containers/food/snacks/grown/koibeans
+	seed = "/obj/item/seeds/koiseed"
+	name = "koibean"
+	desc = "Something about these seems fishy."
+	icon_state = "koibeans"
+	New()
+		..()
+		spawn(5)	//So potency can be set in the proc that creates these crops
+			reagents.add_reagent("nutriment", 1+round((potency / 30), 1))
+			reagents.add_reagent("carpotoxin", 1+round((potency / 20), 1))
+			bitesize = 1+round(reagents.total_volume / 2, 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/moonflower
+	seed = "/obj/item/seeds/moonflowerseed"
+	name = "moonflower"
+	desc = "Store in a location at least 50 yards away from werewolves."
+	icon_state = "moonflower"
+	New()
+		..()
+		spawn(5)	//So potency can be set in the proc that creates these crops
+			reagents.add_reagent("nutriment", 1+round((potency / 50), 1))
+			reagents.add_reagent("moonshine", 1+round((potency / 10), 1))
+			bitesize = 1+round(reagents.total_volume / 2, 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/ghost_chilli
+	seed = "/obj/item/seeds/chillighost"
+	name = "ghost chili"
+	desc = "It seems to be vibrating gently."
+	icon_state = "ghostchilipepper"
+	var/mob/held_mob
+	New()
+		..()
+		spawn(5)	//So potency can be set in the proc that creates these crops
+			reagents.add_reagent("nutriment", 1+round((potency / 25), 1))
+			reagents.add_reagent("capsaicin", 8+round(potency / 2, 1))
+			reagents.add_reagent("condensedcapsaicin", 4+round(potency / 4, 1))
+			bitesize = 1+round(reagents.total_volume / 4, 1)
+
 /obj/item/weapon/reagent_containers/food/snacks/grown/tomato
 	seed = "/obj/item/seeds/tomatoseed"
 	name = "tomato"
