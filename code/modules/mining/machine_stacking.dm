@@ -89,13 +89,13 @@
 					machine.ore_plasma = 0
 			if ("plasmaglass")
 				if (machine.ore_plasmaglass > 0)
-					var/obj/item/stack/sheet/plasmaglass/G = new /obj/item/stack/sheet/plasmaglass
+					var/obj/item/stack/sheet/glass/plasmaglass/G = new /obj/item/stack/sheet/glass/plasmaglass
 					G.amount = machine.ore_plasmaglass
 					G.loc = machine.output.loc
 					machine.ore_plasmaglass = 0
 			if ("plasmarglass")
 				if (machine.ore_plasmarglass > 0)
-					var/obj/item/stack/sheet/plasmarglass/G = new /obj/item/stack/sheet/plasmarglass
+					var/obj/item/stack/sheet/glass/plasmarglass/G = new /obj/item/stack/sheet/glass/plasmarglass
 					G.amount = machine.ore_plasmarglass
 					G.loc = machine.output.loc
 					machine.ore_plasmarglass = 0
@@ -281,11 +281,11 @@
 				ore_rglass+= O:amount
 				del(O)
 				continue
-			if (istype(O,/obj/item/stack/sheet/plasmaglass))
+			if (istype(O,/obj/item/stack/sheet/glass/plasmaglass))
 				ore_plasmaglass+= O:amount
 				del(O)
 				continue
-			if (istype(O,/obj/item/stack/sheet/plasmarglass))
+			if (istype(O,/obj/item/stack/sheet/glass/plasmarglass))
 				ore_plasmarglass+= O:amount
 				del(O)
 				continue
@@ -376,13 +376,13 @@
 		ore_rglass -= stack_amt
 		return
 	if (ore_plasmaglass >= stack_amt)
-		var/obj/item/stack/sheet/plasmaglass/G = new /obj/item/stack/sheet/plasmaglass
+		var/obj/item/stack/sheet/glass/plasmaglass/G = new /obj/item/stack/sheet/glass/plasmaglass
 		G.amount = stack_amt
 		G.loc = output.loc
 		ore_plasmaglass -= stack_amt
 		return
 	if (ore_plasmarglass >= stack_amt)
-		var/obj/item/stack/sheet/plasmarglass/G = new /obj/item/stack/sheet/plasmarglass
+		var/obj/item/stack/sheet/glass/plasmarglass/G = new /obj/item/stack/sheet/glass/plasmarglass
 		G.amount = stack_amt
 		G.loc = output.loc
 		ore_plasmarglass -= stack_amt

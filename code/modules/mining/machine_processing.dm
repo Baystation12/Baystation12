@@ -302,7 +302,7 @@
 					if (ore_glass > 0 && ore_plasma > 0)
 						ore_glass--;
 						ore_plasma--;
-						new /obj/item/stack/sheet/plasmaglass(output.loc)
+						new /obj/item/stack/sheet/glass/plasmaglass(output.loc)
 					else
 						on = 0
 				if (selected_glass == 1 && selected_gold == 0 && selected_silver == 0 && selected_diamond == 0 && selected_plasma == 1 && selected_uranium == 0 && selected_iron == 1 && selected_clown == 0)
@@ -310,7 +310,7 @@
 						ore_glass--;
 						ore_iron--;
 						ore_plasma--;
-						new /obj/item/stack/sheet/plasmarglass(output.loc)
+						new /obj/item/stack/sheet/glass/plasmarglass(output.loc)
 					else
 						on = 0
 					continue
