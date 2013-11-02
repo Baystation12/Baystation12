@@ -252,9 +252,6 @@ proc/get_damage_icon_part(damage_state, body_part)
 			else
 				temp = part.get_icon()
 
-			if(part.status & ORGAN_ROBOT)
-				temp.GrayScale()
-
 			if(part.status & ORGAN_DEAD)
 				temp.ColorTone(necrosis_color_mod)
 				temp.SetIntensity(0.7)

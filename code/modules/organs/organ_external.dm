@@ -181,7 +181,7 @@
 
 	var/result = update_icon()
 	return result
-	
+
 /*
 This function completely restores a damaged organ to perfect condition.
 */
@@ -191,21 +191,21 @@ This function completely restores a damaged organ to perfect condition.
 	perma_injury = 0
 	brute_dam = 0
 	burn_dam = 0
-	
+
 	// handle internal organs
 	for(var/datum/organ/internal/current_organ in internal_organs)
 		current_organ.rejuvenate()
-	
+
 	// remove embedded objects and drop them on the floor
 	for(var/obj/implanted_object in implants)
 		if(!istype(implanted_object,/obj/item/weapon/implant))	// We don't want to remove REAL implants. Just shrapnel etc.
 			implanted_object.loc = owner.loc
 			implants -= implanted_object
-			
+
 	owner.updatehealth()
 	update_icon()
-	
-	
+
+
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
 
@@ -619,10 +619,13 @@ This function completely restores a damaged organ to perfect condition.
 	return 0
 
 /datum/organ/external/get_icon(gender="")
+	if (status & ORGAN_ROBOT)
+		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+
 	if (status & ORGAN_MUTATED)
 		return new /icon(owner.deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
-	else
-		return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
+
+	return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
 
 
 /datum/organ/external/proc/is_usable()
