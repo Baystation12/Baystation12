@@ -17,6 +17,7 @@
 	icon_state = "sheet-glass"
 	g_amt = 3750
 	origin_tech = "materials=1"
+	var/created_window = /obj/structure/window/basic
 
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
@@ -83,30 +84,12 @@
 				if(!found)
 					dir_to_set = direction
 					break
-			if(istype(src, /obj/item/stack/sheet/glass))
-				var/obj/structure/window/W
-				W = new /obj/structure/window/basic( user.loc, 0 )
-				W.dir = dir_to_set
-				W.ini_dir = W.dir
-				W.anchored = 0
-				src.use(1)
-			else if(istype(src, /obj/item/stack/sheet/glass/plasmaglass))
-				var/obj/structure/window/W
-				W = new /obj/structure/window/plasmabasic( user.loc, 0 )
-				W.dir = dir_to_set
-				W.ini_dir = W.dir
-				W.anchored = 0
-				src.use(1)
-			else if(istype(src, /obj/item/stack/sheet/glass/plasmarglass))
-				var/obj/structure/window/W
-				W = new /obj/structure/window/plasmareinforced( user.loc, 0 )
-				W.dir = dir_to_set
-				W.ini_dir = W.dir
-				W.anchored = 0
-				src.use(1)
-			else
-				user << "#$%&. CONDOM IS CAPTAIN, CAPTAIN IS CONDOM, CONDOMS FOR EVERYONE(so yeah code dun fuked up, let Iamgoofball on #codershuttle on irc.sorcery.net know)"
-
+			var/obj/structure/window/W
+			W = new created_window( user.loc, 0 )
+			W.dir = dir_to_set
+			W.ini_dir = W.dir
+			W.anchored = 0
+			src.use(1)
 		if("Full Window")
 			if(!src)	return 1
 			if(src.loc != user)	return 1
@@ -116,30 +99,12 @@
 			if(locate(/obj/structure/window) in user.loc)
 				user << "\red There is a window in the way."
 				return 1
-			if(istype(src, /obj/item/stack/sheet/glass))
-				var/obj/structure/window/W
-				W = new /obj/structure/window/basic( user.loc, 0 )
-				W.dir = SOUTHWEST
-				W.ini_dir = SOUTHWEST
-				W.anchored = 0
-				src.use(2)
-			else if(istype(src, /obj/item/stack/sheet/glass/plasmaglass))
-				var/obj/structure/window/W
-				W = new /obj/structure/window/plasmabasic( user.loc, 0 )
-				W.dir = SOUTHWEST
-				W.ini_dir = SOUTHWEST
-				W.anchored = 0
-				src.use(2)
-			else if(istype(src, /obj/item/stack/sheet/glass/plasmarglass))
-				var/obj/structure/window/W
-				W = new /obj/structure/window/plasmareinforced( user.loc, 0 )
-				W.dir = SOUTHWEST
-				W.ini_dir = SOUTHWEST
-				W.anchored = 0
-				src.use(2)
-			else
-				user << "#$%&. ALL CYBORGS MUST COMMENCE CELEBRATORY SPANKINGS!!!(so yeah code dun fuked up, let Iamgoofball on #codershuttle on irc.sorcery.net know)"
-
+			var/obj/structure/window/W
+			W = new created_window( user.loc, 0 )
+			W.dir = SOUTHWEST
+			W.ini_dir = SOUTHWEST
+			W.anchored = 0
+			src.use(2)
 	return 0
 
 
@@ -344,6 +309,7 @@
 	icon_state = "sheet-plasmaglass"
 	g_amt = 7500
 	origin_tech = "materials=3;plasma=2"
+	created_window = /obj/structure/window/plasmabasic
 
 /obj/item/stack/sheet/glass/plasmaglass/attack_self(mob/user as mob)
 	construct_window(user)
@@ -376,6 +342,7 @@
 	g_amt = 7500
 	m_amt = 1875
 	origin_tech = "materials=4;plasma=2"
+	created_window = /obj/structure/window/plasmareinforced
 
 /obj/item/stack/sheet/glass/plasmarglass/attack_self(mob/user as mob)
 	construct_window(user)
