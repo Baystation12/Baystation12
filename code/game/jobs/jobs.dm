@@ -103,7 +103,6 @@ var/list/civilian_positions = list(
 	"Lawyer",
 	"Chaplain",
 	"Assistant",
-	"Nanotrasen Representative",
 	"Clown",
 	"Mime"
 
@@ -127,7 +126,8 @@ var/list/nonhuman_positions = list(
 
 var/list/whitelisted_positions = list(
 	"Blueshield",
-	"Customs Officer"
+	"Customs Officer",
+	"Nanotrasen Representative"
 )
 
 /proc/guest_jobbans(var/job)
