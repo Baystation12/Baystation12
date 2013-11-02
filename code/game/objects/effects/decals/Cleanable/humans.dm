@@ -1,5 +1,6 @@
 #define DRYING_TIME 5 * 60*10			//for 1 unit of depth in puddle (amount var)
 
+
 /obj/effect/decal/cleanable/blood
 	name = "blood"
 	desc = "It's red and gooey. Perhaps it's the chef's cooking?"
@@ -66,6 +67,8 @@
 	I.SetIntensity(0.7)
 	icon = I
 	amount = 0
+	spawn(DRYING_TIME)
+		Del()
 
 /obj/effect/decal/cleanable/blood/splatter
 	random_icon_states = list("gibbl1", "gibbl2", "gibbl3", "gibbl4", "gibbl5")
