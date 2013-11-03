@@ -70,73 +70,9 @@
 	set hidden = 1
 	if(istype(mob, /mob/living/carbon))
 		mob:swap_hand()
-	if(istype(mob,/mob/living/silicon/robot))//Oh nested logic loops, is there anything you can't do? -Sieve
+	if(istype(mob,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = mob
-		if(!R.module_active)
-			if(!R.module_state_1)
-				if(!R.module_state_2)
-					if(!R.module_state_3)
-						return
-					else
-						R:inv1.icon_state = "inv1"
-						R:inv2.icon_state = "inv2"
-						R:inv3.icon_state = "inv3 +a"
-						R:module_active = R:module_state_3
-				else
-					R:inv1.icon_state = "inv1"
-					R:inv2.icon_state = "inv2 +a"
-					R:inv3.icon_state = "inv3"
-					R:module_active = R:module_state_2
-			else
-				R:inv1.icon_state = "inv1 +a"
-				R:inv2.icon_state = "inv2"
-				R:inv3.icon_state = "inv3"
-				R:module_active = R:module_state_1
-		else
-			if(R.module_active == R.module_state_1)
-				if(!R.module_state_2)
-					if(!R.module_state_3)
-						return
-					else
-						R:inv1.icon_state = "inv1"
-						R:inv2.icon_state = "inv2"
-						R:inv3.icon_state = "inv3 +a"
-						R:module_active = R:module_state_3
-				else
-					R:inv1.icon_state = "inv1"
-					R:inv2.icon_state = "inv2 +a"
-					R:inv3.icon_state = "inv3"
-					R:module_active = R:module_state_2
-			else if(R.module_active == R.module_state_2)
-				if(!R.module_state_3)
-					if(!R.module_state_1)
-						return
-					else
-						R:inv1.icon_state = "inv1 +a"
-						R:inv2.icon_state = "inv2"
-						R:inv3.icon_state = "inv3"
-						R:module_active = R:module_state_1
-				else
-					R:inv1.icon_state = "inv1"
-					R:inv2.icon_state = "inv2"
-					R:inv3.icon_state = "inv3 +a"
-					R:module_active = R:module_state_3
-			else if(R.module_active == R.module_state_3)
-				if(!R.module_state_1)
-					if(!R.module_state_2)
-						return
-					else
-						R:inv1.icon_state = "inv1"
-						R:inv2.icon_state = "inv2 +a"
-						R:inv3.icon_state = "inv3"
-						R:module_active = R:module_state_2
-				else
-					R:inv1.icon_state = "inv1 +a"
-					R:inv2.icon_state = "inv2"
-					R:inv3.icon_state = "inv3"
-					R:module_active = R:module_state_1
-			else
-				return
+		R.cycle_modules()
 	return
 
 
@@ -176,7 +112,7 @@
 
 
 /atom/movable/Move(NewLoc, direct)
-	if (direct & direct - 1)
+	if (direct & (direct - 1))
 		if (direct & 1)
 			if (direct & 4)
 				if (step(src, NORTH))
@@ -276,9 +212,12 @@
 
 		if(mob.restrained())//Why being pulled while cuffed prevents you from moving
 			for(var/mob/M in range(mob, 1))
-				if(M.pulling == mob && !M.restrained() && M.stat == 0 && M.canmove)
-					src << "\blue You're restrained! You can't move!"
-					return 0
+				if(M.pulling == mob)
+					if(!M.restrained() && M.stat == 0 && M.canmove && mob.Adjacent(M))
+						src << "\blue You're restrained! You can't move!"
+						return 0
+					else
+						M.stop_pulling()
 
 		if(mob.pinned.len)
 			src << "\blue You're pinned to a wall by [mob.pinned[1]]!"

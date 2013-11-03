@@ -30,6 +30,17 @@
 		T = get_turf(body)				//Where is the body located?
 		attack_log = body.attack_log	//preserve our attack logs by copying them to our ghost
 
+		if (ishuman(body))
+			var/mob/living/carbon/human/H = body
+			icon = H.stand_icon
+			overlays = H.overlays_standing
+		else
+			icon = body.icon
+			icon_state = body.icon_state
+			overlays = body.overlays
+
+		alpha = 127
+
 		gender = body.gender
 		if(body.mind && body.mind.name)
 			name = body.mind.name
@@ -87,6 +98,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 
 /mob/dead/observer/Move(NewLoc, direct)
+	dir = direct
 	if(NewLoc)
 		loc = NewLoc
 		for(var/obj/effect/step_trigger/S in NewLoc)

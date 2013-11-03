@@ -4,7 +4,7 @@
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "detective"
 	item_state = "gun"
-	flags =  FPRINT | TABLEPASS | CONDUCT |  USEDELAY
+	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	m_amt = 2000
 	w_class = 3.0
@@ -51,7 +51,7 @@
 			O.emp_act(severity)
 
 /obj/item/weapon/gun/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
-	if(flag)	return //we're placing gun on a table or in backpack
+	if(flag)	return //It's adjacent, is the user, or is on the user's person
 	if(istype(target, /obj/machinery/recharger) && istype(src, /obj/item/weapon/gun/energy))	return//Shouldnt flag take care of this?
 	if(user && user.client && user.client.gun_mode && !(A in target))
 		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
@@ -136,6 +136,14 @@
 	in_chamber.current = curloc
 	in_chamber.yo = targloc.y - curloc.y
 	in_chamber.xo = targloc.x - curloc.x
+	if(istype(user, /mob/living/carbon))
+		var/mob/living/carbon/mob = user
+		if(mob.shock_stage > 120)
+			in_chamber.yo += rand(-2,2)
+			in_chamber.xo += rand(-2,2)
+		else if(mob.shock_stage > 70)
+			in_chamber.yo += rand(-1,1)
+			in_chamber.xo += rand(-1,1)
 
 	if(params)
 		var/list/mouse_control = params2list(params)

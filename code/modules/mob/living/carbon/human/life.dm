@@ -97,7 +97,7 @@
 
 		handle_pain()
 
-//		handle_medical_side_effects()
+		handle_medical_side_effects()
 
 	handle_stasis_bag()
 
@@ -376,6 +376,13 @@
 
 		if(breath)
 			loc.assume_air(breath)
+
+			//spread some viruses while we are at it
+			if (virus2.len > 0)
+				if (get_infection_chance(src) && prob(20))
+//					log_debug("[src] : Exhaling some viruses")
+					for(var/mob/living/carbon/M in view(1,src))
+						src.spread_disease_to(M)
 
 
 	proc/get_breath_from_internal(volume_needed)
@@ -1366,14 +1373,15 @@
 				V.cure(src)
 
 		for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
-			if(B.virus2.len && get_infection_chance(src))
+			if(B.virus2.len)
 				for (var/ID in B.virus2)
-					var/datum/disease2/disease/V = virus2[ID]
+					var/datum/disease2/disease/V = B.virus2[ID]
 					infect_virus2(src,V)
+
 		for(var/obj/effect/decal/cleanable/mucus/M in view(1,src))
-			if(M.virus2.len && get_infection_chance(src))
+			if(M.virus2.len)
 				for (var/ID in M.virus2)
-					var/datum/disease2/disease/V = virus2[ID]
+					var/datum/disease2/disease/V = M.virus2[ID]
 					infect_virus2(src,V)
 
 		for (var/ID in virus2)
@@ -1425,7 +1433,7 @@
 		else if(health < config.health_threshold_softcrit)
 			shock_stage = max(shock_stage, 61)
 		else
-			shock_stage = min(shock_stage, 100)
+			shock_stage = min(shock_stage, 160)
 			shock_stage = max(shock_stage-1, 0)
 			return
 
@@ -1442,15 +1450,26 @@
 
 		if (shock_stage >= 60)
 			if(shock_stage == 60) emote("me",1,"'s body becomes limp.")
+			if (prob(2))
+				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+				Weaken(20)
+
+		if(shock_stage >= 80)
 			if (prob(5))
-				Stun(20)
-				lying = 1
+				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+				Weaken(20)
 
-		if(shock_stage == 80)
-			src << "<font color='red'><b>"+pick("You see a light at the end of the tunnel!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
+		if(shock_stage >= 120)
+			if (prob(2))
+				src << "<font color='red'><b>"+pick("You black out!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
+				Paralyse(5)
 
-		if(shock_stage > 80)
-			Paralyse(rand(15,28))
+		if(shock_stage == 150)
+			emote("me",1,"can no longer stand, collapsing!")
+			Weaken(20)
+
+		if(shock_stage >= 150)
+			Weaken(20)
 
 	proc/handle_pulse()
 		if(life_tick % 5) return pulse	//update pulse every 5 life ticks (~1 tick/sec, depending on server load)

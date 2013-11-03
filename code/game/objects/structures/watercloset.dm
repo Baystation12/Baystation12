@@ -324,19 +324,20 @@
 	if(isrobot(M) || isAI(M))
 		return
 
+	if(!Adjacent(M))
+		return
+
 	if(busy)
 		M << "\red Someone's already washing here."
 		return
 
-	var/turf/location = M.loc
-	if(!isturf(location)) return
 	usr << "\blue You start washing your hands."
 
 	busy = 1
 	sleep(40)
 	busy = 0
 
-	if(M.loc != location) return		//Person has moved away from the sink
+	if(!Adjacent(M)) return		//Person has moved away from the sink
 
 	M.clean_blood()
 	if(ishuman(M))
