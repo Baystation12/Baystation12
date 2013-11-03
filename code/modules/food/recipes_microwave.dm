@@ -1010,14 +1010,18 @@
 		/obj/item/weapon/ore/clown,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/clownstears
-/*
+
 /datum/recipe/boiledslimeextract
 	reagents = list("water" = 5)
 	items = list(
-		/obj/item/slime_core,
+		/obj/item/slime_extract,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/boiledslimecore
-*/
+
+/datum/recipe/mint
+	reagents = list("toxin" = 5)
+	result = /obj/item/weapon/reagent_containers/food/snacks/mint
+
 /datum/recipe/braincake
 	reagents = list("milk" = 5, "flour" = 15)
 	items = list(
