@@ -123,6 +123,7 @@
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/clothing/tie/holster/waist(src)
 		new /obj/item/weapon/melee/telebaton(src)
+		new /obj/item/weapon/storage/box/cdeathalarm_kit(src)
 		return
 
 
