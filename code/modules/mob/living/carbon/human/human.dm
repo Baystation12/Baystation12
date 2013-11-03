@@ -468,21 +468,20 @@
 //gets name from ID or PDA itself, ID inside PDA doesn't matter
 //Useful when player is being seen by other mobs
 /mob/living/carbon/human/proc/get_id_name(var/if_no_id = "Unknown")
-	var/obj/item/device/pda/pda = wear_id
-	var/obj/item/weapon/card/id/id = wear_id
-	if(istype(pda))		. = pda.owner
-	else if(istype(id))	. = id.registered_name
-	if(!.) 				. = if_no_id	//to prevent null-names making the mob unclickable
+	. = if_no_id
+	if(istype(wear_id,/obj/item/device/pda))
+		var/obj/item/device/pda/P = wear_id
+		return P.owner
+	if(wear_id)
+		var/obj/item/weapon/card/id/I = wear_id.GetID()
+		if(I)
+			return I.registered_name
 	return
 
 //gets ID card object from special clothes slot or null.
 /mob/living/carbon/human/proc/get_idcard()
-	var/obj/item/weapon/card/id/id = wear_id
-	var/obj/item/device/pda/pda = wear_id
-	if (istype(pda) && pda.id)
-		id = pda.id
-	if (istype(id))
-		return id
+	if(wear_id)
+		return wear_id.GetID()
 
 //Added a safety check in case you want to shock a human mob directly through electrocute_act.
 /mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/safety = 0)
@@ -1251,12 +1250,6 @@ mob/living/carbon/human/yank_out_object()
 		return
 
 	species = all_species[new_species]
-
-	see_in_dark = species.darksight
-	if(see_in_dark > 2)
-		see_invisible = SEE_INVISIBLE_LEVEL_ONE
-	else
-		see_invisible = SEE_INVISIBLE_LIVING
 
 	spawn(0)
 		update_icons()

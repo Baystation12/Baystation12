@@ -136,6 +136,14 @@
 	in_chamber.current = curloc
 	in_chamber.yo = targloc.y - curloc.y
 	in_chamber.xo = targloc.x - curloc.x
+	if(istype(user, /mob/living/carbon))
+		var/mob/living/carbon/mob = user
+		if(mob.shock_stage > 120)
+			in_chamber.yo += rand(-2,2)
+			in_chamber.xo += rand(-2,2)
+		else if(mob.shock_stage > 70)
+			in_chamber.yo += rand(-1,1)
+			in_chamber.xo += rand(-1,1)
 
 	if(params)
 		var/list/mouse_control = params2list(params)

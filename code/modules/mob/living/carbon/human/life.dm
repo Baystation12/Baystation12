@@ -1180,6 +1180,8 @@
 			if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
 		else
 			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+			see_in_dark = species.darksight
+			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : SEE_INVISIBLE_LIVING
 			if(dna)
 				switch(dna.mutantrace)
 					if("slime")
@@ -1224,40 +1226,27 @@
 						if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
 
 			if(glasses)
-				if(istype(glasses, /obj/item/clothing/glasses/meson))
-					sight |= SEE_TURFS
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
-				else if(istype(glasses, /obj/item/clothing/glasses/night))
-					see_in_dark = 5
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
-				else if(istype(glasses, /obj/item/clothing/glasses/thermal))
-					sight |= SEE_MOBS
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
-				else if(istype(glasses, /obj/item/clothing/glasses/material))
-					sight |= SEE_OBJS
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
+				var/obj/item/clothing/glasses/G = glasses
+				if(istype(G))
+					see_in_dark += G.darkness_view
+					if(G.vision_flags)
+						sight |= G.vision_flags
+						if(!druggy)
+							see_invisible = SEE_INVISIBLE_MINIMUM
 
 	/* HUD shit goes here, as long as it doesn't modify sight flags */
 	// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
 
-				else if(istype(glasses, /obj/item/clothing/glasses/sunglasses))
-					see_in_dark = 1
-					if(istype(glasses, /obj/item/clothing/glasses/sunglasses/sechud))
-						var/obj/item/clothing/glasses/sunglasses/sechud/O = glasses
-						if(O.hud)		O.hud.process_hud(src)
-						if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
-
+				if(istype(glasses, /obj/item/clothing/glasses/sunglasses/sechud))
+					var/obj/item/clothing/glasses/sunglasses/sechud/O = glasses
+					if(O.hud)		O.hud.process_hud(src)
+					if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
 				else if(istype(glasses, /obj/item/clothing/glasses/hud))
 					var/obj/item/clothing/glasses/hud/O = glasses
 					O.process_hud(src)
 					if(!druggy)
 						see_invisible = SEE_INVISIBLE_LIVING
-				else
-					see_invisible = SEE_INVISIBLE_LIVING
+
 			else if(!seer)
 				see_invisible = SEE_INVISIBLE_LIVING
 
@@ -1444,7 +1433,7 @@
 		else if(health < config.health_threshold_softcrit)
 			shock_stage = max(shock_stage, 61)
 		else
-			shock_stage = min(shock_stage, 100)
+			shock_stage = min(shock_stage, 160)
 			shock_stage = max(shock_stage-1, 0)
 			return
 
@@ -1461,15 +1450,26 @@
 
 		if (shock_stage >= 60)
 			if(shock_stage == 60) emote("me",1,"'s body becomes limp.")
+			if (prob(2))
+				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+				Weaken(20)
+
+		if(shock_stage >= 80)
 			if (prob(5))
-				Stun(20)
-				lying = 1
+				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+				Weaken(20)
 
-		if(shock_stage == 80)
-			src << "<font color='red'><b>"+pick("You see a light at the end of the tunnel!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
+		if(shock_stage >= 120)
+			if (prob(2))
+				src << "<font color='red'><b>"+pick("You black out!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
+				Paralyse(5)
 
-		if(shock_stage > 80)
-			Paralyse(rand(15,28))
+		if(shock_stage == 150)
+			emote("me",1,"can no longer stand, collapsing!")
+			Weaken(20)
+
+		if(shock_stage >= 150)
+			Weaken(20)
 
 	proc/handle_pulse()
 		if(life_tick % 5) return pulse	//update pulse every 5 life ticks (~1 tick/sec, depending on server load)

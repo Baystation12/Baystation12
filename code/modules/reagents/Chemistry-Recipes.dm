@@ -1461,11 +1461,43 @@ datum
 			required_catalysts = list("enzyme" = 5)
 			result_amount = 10
 
+		grenadine
+			name = "Grenadine Syrup"
+			id = "grenadine"
+			result = "grenadine"
+			required_reagents = list("berryjuice" = 10)
+			required_catalysts = list("enzyme" = 5)
+			result_amount = 10
+
 		wine
 			name = "Wine"
 			id = "wine"
 			result = "wine"
-			required_reagents = list("berryjuice" = 10)
+			required_reagents = list("grapejuice" = 10)
+			required_catalysts = list("enzyme" = 5)
+			result_amount = 10
+
+		pwine
+			name = "Poison Wine"
+			id = "pwine"
+			result = "pwine"
+			required_reagents = list("poisonberryjuice" = 10)
+			required_catalysts = list("enzyme" = 5)
+			result_amount = 10
+
+		melonliquor
+			name = "Melon Liquor"
+			id = "melonliquor"
+			result = "melonliquor"
+			required_reagents = list("watermelonjuice" = 10)
+			required_catalysts = list("enzyme" = 5)
+			result_amount = 10
+
+		bluecuracao
+			name = "Blue Curacao"
+			id = "bluecuracao"
+			result = "bluecuracao"
+			required_reagents = list("orangejuice" = 10)
 			required_catalysts = list("enzyme" = 5)
 			result_amount = 10
 
@@ -1654,6 +1686,13 @@ datum
 			required_reagents = list("vodka" = 1, "gin" = 1, "tequilla" = 1, "cubalibre" = 1)
 			result_amount = 4
 
+		icedtea
+			name = "Long Island Iced Tea"
+			id = "longislandicedtea"
+			result = "longislandicedtea"
+			required_reagents = list("vodka" = 1, "gin" = 1, "tequilla" = 1, "cubalibre" = 1)
+			result_amount = 4
+
 		threemileisland
 			name = "Three Mile Island Iced Tea"
 			id = "threemileisland"
@@ -1751,6 +1790,14 @@ datum
 			result = "barefoot"
 			required_reagents = list("berryjuice" = 1, "cream" = 1, "vermouth" = 1)
 			result_amount = 3
+			
+		grapesoda //Allows Grape Soda to be made
+			name = "Grape Soda"
+			id = "grapesoda"
+			result = "grapesoda"
+			required_reagents = list("grapejuice" = 2, "cola" = 1)
+			result_amount = 3
+
 
 
 ////DRINKS THAT REQUIRED IMPROVED SPRITES BELOW:: -Agouri/////
@@ -1952,5 +1999,9 @@ datum
 			required_reagents = list("spacemountainwind" = 1, "coffee" = 1)
 			result_amount = 2
 
-
-
+		suidream
+			name = "Sui Dream"
+			id = "suidream"
+			result = "suidream"
+			required_reagents = list("space_up" = 2, "bluecuracao" = 1, "melonliquor" = 1)
+			result_amount = 4
