@@ -1851,16 +1851,16 @@
 	New()
 		..()
 		reagents.add_reagent("cherryjelly", 5)
-/*
+
 /obj/item/weapon/reagent_containers/food/snacks/boiledslimecore
-	name = "Boiled slime Core"
+	name = "Boiled Slime Core"
 	desc = "A boiled red thing."
-	icon_state = "boiledslimecore"
+	icon_state = "boiledrorocore"
 	New()
 		..()
 		reagents.add_reagent("slimejelly", 5)
 		bitesize = 3
-*/
+
 /obj/item/weapon/reagent_containers/food/snacks/mint
 	name = "mint"
 	desc = "it is only wafer thin."

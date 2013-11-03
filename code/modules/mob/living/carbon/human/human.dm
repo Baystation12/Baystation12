@@ -1343,9 +1343,7 @@ mob/living/carbon/human/yank_out_object()
 	if(species.name=="Slime People")
 		dna.mutantrace = "slime"
 
-	if(mutations.len==0)
-		mutations=species.default_mutations
-
+	mutations+=species.default_mutations
 
 	spawn(0)
 		update_icons()

@@ -56,13 +56,13 @@
 	if(broken_on_spawn)
 		var/amount = pick(3,3,4)
 		var/list/options = list()
-		options[/obj/item/weapon/stock_parts/capacitor/super] = "Add a super capacitor to fix it."
+		options[/obj/item/weapon/stock_parts/capacitor/adv] = "Add an advanced capacitor to fix it."
 		options[/obj/item/weapon/stock_parts/console_screen] = "Replace the console screen to fix it."
 		options[/obj/item/weapon/stock_parts/manipulator/pico] = "Upgrade to a pico manipulator to fix it."
 		options[/obj/item/weapon/stock_parts/matter_bin/super] = "Give it a super matter bin to fix it."
 		options[/obj/item/weapon/cell/super] = "Replace the reagent synthesizer with a super capacity cell to fix it."
 		options[/obj/item/device/mass_spectrometer/adv] = "Replace the reagent scanner with an advanced mass spectrometer to fix it"
-		options[/obj/item/weapon/stock_parts/micro_laser/ultra] = "Repair the reagent synthesizer with an ultra-high-power micro-laser to fix it"
+		options[/obj/item/weapon/stock_parts/micro_laser/high] = "Repair the reagent synthesizer with an high-power micro-laser to fix it"
 		options[/obj/item/device/reagent_scanner/adv] = "Replace the reagent scanner with an advanced reagent scanner to fix it"
 		options[/obj/item/stack/nanopaste] = "Apply some nanopaste to the broken nozzles to fix it."
 		options[/obj/item/stack/sheet/plasteel] = "Surround the outside with a plasteel cover to fix it."
