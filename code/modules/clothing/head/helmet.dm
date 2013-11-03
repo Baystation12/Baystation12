@@ -31,6 +31,13 @@
 	icon_state = "policehelm"
 	flags_inv = 0
 
+/obj/item/clothing/head/helmet/customs
+	name = "customs officer's hat"
+	desc = "A serious looking hat for a serious job."
+	icon_state = "customshelm"
+	item_state = "customshelm"
+	flags_inv = 0
+
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
 	desc = "It's a helmet specifically designed to protect against close range attacks."

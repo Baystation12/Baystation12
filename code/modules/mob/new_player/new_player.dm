@@ -59,7 +59,10 @@
 
 		output += "</div>"
 
-		src << browse(output,"window=playersetup;size=210x240;can_close=0")
+		var/datum/browser/popup = new(src, "playersetup", "<div align='center'>New Player Options</div>", 210, 240)
+		popup.set_window_options("can_close=0")
+		popup.set_content(output)
+		popup.open(0)
 		return
 
 	Stat()
@@ -342,8 +345,13 @@
 				dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions]) (Active: [active])</a><br>"
 
 		dat += "</center>"
-		src << browse(dat, "window=latechoices;size=300x640;can_close=1")
-
+		// Removing the old window method but leaving it here for reference
+//		src << browse(dat, "window=latechoices;size=300x640;can_close=1")
+		// Added the new browser window method
+		var/datum/browser/popup = new(src, "latechoices", "Choose Profession", 440, 500)
+		popup.add_stylesheet("playeroptions", 'html/browser/playeroptions.css')
+		popup.set_content(dat)
+		popup.open(0) // 0 is passed to open so that it doesn't use the onclose() proc
 
 	proc/create_character()
 		spawning = 1
@@ -442,5 +450,9 @@
 
 
 	proc/close_spawn_windows()
+
 		src << browse(null, "window=latechoices") //closes late choices window
 		src << browse(null, "window=playersetup") //closes the player setup window
+		src << browse(null, "window=preferences") //closes job selection
+		src << browse(null, "window=mob_occupation")
+		src << browse(null, "window=latechoices") //closes late job selection

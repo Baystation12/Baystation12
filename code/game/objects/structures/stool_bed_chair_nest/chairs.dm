@@ -128,3 +128,15 @@
 
 /obj/structure/stool/bed/chair/barber
 	icon_state = "barber_chair"
+
+/obj/structure/stool/bed/chair/sofa
+	name = "old ratty sofa"
+	icon_state = "sofamiddle"
+	anchored = 1
+	density = 1
+/obj/structure/stool/bed/chair/sofa/left
+	icon_state = "sofaend_left"
+/obj/structure/stool/bed/chair/sofa/right
+	icon_state = "sofaend_right"
+/obj/structure/stool/bed/chair/sofa/corner
+	icon_state = "sofacorner"

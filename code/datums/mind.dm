@@ -722,6 +722,7 @@ datum/mind
 					del(H.head)
 					del(H.shoes)
 					del(H.wear_id)
+					del(H.wear_pda)
 					del(H.wear_suit)
 					del(H.w_uniform)
 
@@ -1003,6 +1004,7 @@ datum/mind
 			del(H.head)
 			del(H.shoes)
 			del(H.wear_id)
+			del(H.wear_pda)
 			del(H.wear_suit)
 			del(H.w_uniform)
 

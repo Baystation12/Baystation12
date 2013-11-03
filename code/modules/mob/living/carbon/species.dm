@@ -177,4 +177,4 @@
 	max_hurt_damage = 3 // From 5 (for humans)
 	default_mutations=list(mRemotetalk) // TK is also another candidate, but TK is overpowered as fuck.
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
+	flags = WHITELISTED | HAS_LIPS | CAN_BE_FAT

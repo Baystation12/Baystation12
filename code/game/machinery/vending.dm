@@ -673,7 +673,15 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 30,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 20,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 30,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 25)
 
-
+/obj/machinery/vending/chinese
+	name = "Mr. Chang"
+	desc = "A self-serving chinese food machine, for all your chinese food needs."
+	product_slogans = "Taste 5000 years of culture!"
+	icon_state = "snack"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/chinese/chowmein = 5, /obj/item/weapon/reagent_containers/food/snacks/chinese/tao = 5, /obj/item/weapon/reagent_containers/food/snacks/chinese/newdles = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/chinese/rice = 5, /obj/item/weapon/reagent_containers/food/snacks/wingfangchu = 5)
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/chinese/chowmein = 50, /obj/item/weapon/reagent_containers/food/snacks/chinese/tao = 50, /obj/item/weapon/reagent_containers/food/snacks/chinese/newdles = 50,
+					/obj/item/weapon/reagent_containers/food/snacks/chinese/rice = 50, /obj/item/weapon/reagent_containers/food/snacks/wingfangchu = 50)
 
 /obj/machinery/vending/cola
 	name = "Robust Softdrinks"

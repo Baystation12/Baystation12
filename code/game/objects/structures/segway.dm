@@ -7,7 +7,7 @@
 	density = 1
 
 	var/health = 100
-	var/delay = 4	//Move delay to simulate a speed
+	var/delay = 3	//Move delay to simulate a speed
 	var/allowMove = 1
 	var/datum/global_iterator/space_move //Handling space movement (i.e. drift forever)
 

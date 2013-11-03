@@ -1030,6 +1030,42 @@
 		reagents.add_reagent("nutriment", 4)
 		bitesize = 2
 
+/obj/item/weapon/reagent_containers/food/snacks/chinese/chowmein
+	name = "chow mein"
+	desc = "What is in this anyways?"
+	icon_state = "chinese1"
+	New()
+		..()
+		reagents.add_reagent("nutriment", 6)
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/chinese/tao
+	name = "Admiral Yamamoto carp"
+	desc = "Tastes like chicken."
+	icon_state = "chinese2"
+	New()
+		..()
+		reagents.add_reagent("nutriment", 6)
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/chinese/newdles
+	name = "chinese newdles"
+	desc = "Made fresh, weekly!"
+	icon_state = "chinese3"
+	New()
+		..()
+		reagents.add_reagent("nutriment", 6)
+		bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/chinese/rice
+	name = "fried rice"
+	desc = "A timeless classic."
+	icon_state = "chinese4"
+	New()
+		..()
+		reagents.add_reagent("nutriment", 6)
+		bitesize = 2
+
 /obj/item/weapon/reagent_containers/food/snacks/syndicake
 	name = "Syndi-Cakes"
 	icon_state = "syndi_cakes"

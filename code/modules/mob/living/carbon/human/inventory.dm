@@ -49,6 +49,8 @@
 		if(slot_wear_id)
 			// the only relevant check for this is the uniform check
 			return 1
+		if(slot_wear_pda)
+			return 1
 		if(slot_l_ear)
 			return has_organ("head")
 		if(slot_r_ear)
@@ -142,6 +144,10 @@
 		wear_id = null
 		success = 1
 		update_inv_wear_id()
+	else if (W == wear_pda)
+		wear_pda = null
+		success = 1
+		update_inv_wear_pda()
 	else if (W == r_store)
 		r_store = null
 		success = 1
@@ -239,6 +245,10 @@
 			src.wear_id = W
 			W.equipped(src, slot)
 			update_inv_wear_id(redraw_mob)
+		if(slot_wear_pda)
+			src.wear_pda = W
+			W.equipped(src, slot)
+			update_inv_wear_pda(redraw_mob)
 		if(slot_l_ear)
 			src.l_ear = W
 			if(l_ear.slot_flags & SLOT_TWOEARS)
@@ -635,6 +645,10 @@ It can still be worn/put on as normal.
 			slot_to_process = slot_wear_id
 			if (target.wear_id)
 				strip_item = target.wear_id
+		if("pda")
+			slot_to_process = slot_wear_pda
+			if (target.wear_pda)
+				strip_item = target.wear_pda
 		if("back")
 			slot_to_process = slot_back
 			if (target.back)

@@ -138,6 +138,15 @@
 	var/rank = null			//actual job
 	var/dorm = 0		// determines if this ID has claimed a dorm already
 
+	var/datum/data/record/active1 = null
+	var/sex
+	var/age
+	var/photo
+	var/icon/front
+	var/icon/side
+	var/dat
+	var/stamped=0
+
 /obj/item/weapon/card/id/New()
 	..()
 	spawn(30)
@@ -145,6 +154,38 @@
 		blood_type = loc:dna:b_type
 		dna_hash = loc:dna:unique_enzymes
 		fingerprint_hash = md5(loc:dna:uni_identity)
+		dat = ("<table><tr><td>")
+		dat +=text("Name: []</A><BR>", registered_name)
+		dat +=text("Sex: []</A><BR>\n", name)
+		dat +=text("Age: []</A><BR>\n", age)
+		dat +=text("Rank: []</A><BR>\n", assignment)
+		dat +=text("Fingerprint: []</A><BR>\n", fingerprint_hash)
+		dat +=text("Blood Type: []<BR>\n", blood_type)
+		dat +=text("DNA Hash: []<BR><BR>\n", dna_hash)
+		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4>	\
+		<img src=side.png height=80 width=80 border=4></td></tr></table>"
+
+/obj/item/weapon/card/id/examine()
+	set src in oview(1)
+	if(in_range(usr, src))
+		show(usr)
+		usr << desc
+	else
+		usr << "<span class='notice'>It is too far away.</span>"
+
+/obj/item/weapon/card/id/proc/show(mob/user as mob)
+	if(!front)
+		front = new(photo, dir = SOUTH)
+	if(!side)
+		side = new(photo, dir = WEST)
+	user << browse_rsc(front, "front.png")
+	user << browse_rsc(side, "side.png")
+	var/datum/browser/popup = new(user, "idcard", name, 600, 400)
+	popup.set_content(dat)
+	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
+	popup.open()
+
+	return
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
 	for(var/mob/O in viewers(user, null))
@@ -169,6 +210,15 @@
 		src.icon_state = W.icon_state
 		del(W)
 		return
+
+	else if(istype (W,/obj/item/weapon/stamp))
+		if(!stamped)
+			dat+="<img src=large_[W.icon_state].png>"
+			stamped = 1
+			usr << "You stamp the ID card!"
+		else
+			usr << "This ID has already been stamped!"
+
 
 /obj/item/weapon/card/id/verb/read()
 	set name = "Read ID Card"

@@ -506,6 +506,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	update_inv_handcuffed(0)
 	update_inv_legcuffed(0)
 	update_inv_pockets(0)
+	update_inv_wear_pda(0)
 	UpdateDamageIcon()
 	update_icons()
 	//Hud Stuff
@@ -558,7 +559,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		overlays_lying[UNIFORM_LAYER]		= null
 		overlays_standing[UNIFORM_LAYER]	= null
 		// Automatically drop anything in store / id / belt if you're not wearing a uniform.	//CHECK IF NECESARRY
-		for( var/obj/item/thing in list(r_store, l_store, wear_id, belt) )						//
+		for( var/obj/item/thing in list(r_store, l_store, wear_id, wear_pda, belt) )						//
 			if(thing)																			//
 				u_equip(thing)																	//
 				if (client)																		//
@@ -772,6 +773,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(r_store)			r_store.screen_loc = ui_storage2	//TODO
 	if(update_icons)	update_icons()
 
+/mob/living/carbon/human/update_inv_wear_pda(var/update_icons=1)
+	if(wear_pda)			wear_pda.screen_loc = ui_pda
+	if(update_icons)	update_icons()
 
 /mob/living/carbon/human/update_inv_wear_mask(var/update_icons=1)
 	if( wear_mask && ( istype(wear_mask, /obj/item/clothing/mask) || istype(wear_mask, /obj/item/clothing/tie) ) )
@@ -818,11 +822,25 @@ proc/get_damage_icon_part(damage_state, body_part)
 		drop_r_hand()
 		drop_l_hand()
 		stop_pulling()	//TODO: should be handled elsewhere
-		overlays_lying[HANDCUFF_LAYER]		= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff2")
-		overlays_standing[HANDCUFF_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff1")
+		if(hud_used)	//hud handcuff icons
+			var/obj/screen/inventory/R = hud_used.adding[3]
+			var/obj/screen/inventory/L = hud_used.adding[4]
+			R.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="markus")
+			L.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="gabrielle")
+		if(istype(handcuffed, /obj/item/weapon/handcuffs/pinkcuffs))
+			overlays_lying[HANDCUFF_LAYER]		= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "pinkcuff2")
+			overlays_standing[HANDCUFF_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "pinkcuff1")
+		else
+			overlays_lying[HANDCUFF_LAYER]		= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff2")
+			overlays_standing[HANDCUFF_LAYER]	= image("icon" = 'icons/mob/mob.dmi', "icon_state" = "handcuff1")
 	else
 		overlays_lying[HANDCUFF_LAYER]		= null
 		overlays_standing[HANDCUFF_LAYER]	= null
+		if(hud_used)
+			var/obj/screen/inventory/R = hud_used.adding[3]
+			var/obj/screen/inventory/L = hud_used.adding[4]
+			R.overlays = null
+			L.overlays = null
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_legcuffed(var/update_icons=1)

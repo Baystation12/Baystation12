@@ -54,17 +54,17 @@
 	dispensable_reagents = sortList(dispensable_reagents)
 
 	if(broken_on_spawn)
-		var/amount = pick(1,2,2,3,4)
+		var/amount = pick(3,3,4)
 		var/list/options = list()
-		options[/obj/item/weapon/stock_parts/capacitor/adv] = "Add an advanced capacitor to fix it."
+		options[/obj/item/weapon/stock_parts/capacitor/super] = "Add a super capacitor to fix it."
 		options[/obj/item/weapon/stock_parts/console_screen] = "Replace the console screen to fix it."
 		options[/obj/item/weapon/stock_parts/manipulator/pico] = "Upgrade to a pico manipulator to fix it."
-		options[/obj/item/weapon/stock_parts/matter_bin/adv] = "Give it an advanced matter bin to fix it."
-		options[/obj/item/stack/sheet/mineral/diamond] = "Line up a cut diamond with the nozzle to fix it."
-		options[/obj/item/stack/sheet/mineral/uranium] = "Position a uranium sheet inside to fix it."
-		options[/obj/item/stack/sheet/mineral/plasma] = "Enter a block of plasma to fix it."
-		options[/obj/item/stack/sheet/mineral/silver] = "Cover the internals with a silver lining to fix it."
-		options[/obj/item/stack/sheet/mineral/gold] = "Wire a golden filament to fix it."
+		options[/obj/item/weapon/stock_parts/matter_bin/super] = "Give it a super matter bin to fix it."
+		options[/obj/item/weapon/cell/super] = "Replace the reagent synthesizer with a super capacity cell to fix it."
+		options[/obj/item/device/mass_spectrometer/adv] = "Replace the reagent scanner with an advanced mass spectrometer to fix it"
+		options[/obj/item/weapon/stock_parts/micro_laser/ultra] = "Repair the reagent synthesizer with an ultra-high-power micro-laser to fix it"
+		options[/obj/item/device/reagent_scanner/adv] = "Replace the reagent scanner with an advanced reagent scanner to fix it"
+		options[/obj/item/stack/nanopaste] = "Apply some nanopaste to the broken nozzles to fix it."
 		options[/obj/item/stack/sheet/plasteel] = "Surround the outside with a plasteel cover to fix it."
 		options[/obj/item/stack/sheet/rglass] = "Insert a pane of reinforced glass to fix it."
 
@@ -322,7 +322,7 @@
 
 /obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
 
-	if(istype(B, /obj/item/weapon/reagent_containers/glass))
+	if(istype(B, /obj/item/weapon/reagent_containers/glass) || istype(B, /obj/item/weapon/reagent_containers/food/drinks/drinkingglass))
 
 		if(src.beaker)
 			user << "A beaker is already loaded into the machine."
@@ -882,6 +882,7 @@
 		/obj/item/stack/sheet/mineral/gold = list("gold" = 20),
 		/obj/item/weapon/grown/nettle = list("sacid" = 0),
 		/obj/item/weapon/grown/deathnettle = list("pacid" = 0),
+		/obj/item/weapon/grown/novaflower = list("capsaicin" = 0),
 
 		//Blender Stuff
 		/obj/item/weapon/reagent_containers/food/snacks/grown/soybeans = list("soymilk" = 0),

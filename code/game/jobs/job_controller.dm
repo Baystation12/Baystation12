@@ -477,7 +477,10 @@ var/global/datum/controller/occupations/job_master
 			C.registered_name = H.real_name
 			C.rank = rank
 			C.assignment = title ? title : rank
+			C.sex = H.gender
+			C.age = H.age
 			C.name = "[C.registered_name]'s ID Card ([C.assignment])"
+			C.photo = get_id_photo(H)
 
 			//put the player's account number onto the ID
 			if(H.mind && H.mind.initial_account)
@@ -485,7 +488,7 @@ var/global/datum/controller/occupations/job_master
 
 			H.equip_to_slot_or_del(C, slot_wear_id)
 
-		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/device/pda(H), slot_wear_pda)
 		if(locate(/obj/item/device/pda,H))
 			var/obj/item/device/pda/pda = locate(/obj/item/device/pda,H)
 			pda.owner = H.real_name
