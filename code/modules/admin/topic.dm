@@ -2184,6 +2184,11 @@
 				feedback_add_details("admin_secrets_fun_used","K")
 				//new /datum/event/spacevine
 				message_admins("[key_name_admin(usr)] has spawned spacevines", 1)
+			if("vent_clog")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","VC")
+				new /datum/event/vent_clog
+				message_admins("[key_name_admin(usr)] has made scrubbers spew chemical smoke", 1)
 			if("onlyone")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","OO")
