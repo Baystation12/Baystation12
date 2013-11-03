@@ -26,6 +26,17 @@
 /obj/item/weapon/storage/MouseDrop(obj/over_object as obj)
 	if (ishuman(usr) || ismonkey(usr)) //so monkeys can take off their backpacks -- Urist
 		var/mob/M = usr
+
+		if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
+			return
+
+		if(over_object == M && Adjacent(M)) // this must come before the screen objects only block
+			orient2hud(M)          // dunno why it wasn't before
+			if(M.s_active)
+				M.s_active.close(M)
+			show_to(M)
+			return
+
 		if (!( istype(over_object, /obj/screen) ))
 			return ..()
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
@@ -198,6 +209,8 @@
 				break
 		if(!ok)
 			if(!stop_messages)
+				if (istype(W, /obj/item/weapon/hand_labeler))
+					return 0
 				usr << "<span class='notice'>[src] cannot hold [W].</span>"
 			return 0
 
@@ -300,17 +313,17 @@
 
 	if(isrobot(user))
 		user << "\blue You're a robot. No."
-		return //Robots can't interact with storage items.
+		return 1 //Robots can't interact with storage items.
 
 	if(!can_be_inserted(W))
-		return
+		return 0
 
 	if(istype(W, /obj/item/weapon/tray))
 		var/obj/item/weapon/tray/T = W
 		if(T.calc_carry() > 0)
 			if(prob(85))
 				user << "\red The tray won't fit in [src]."
-				return
+				return 1
 			else
 				W.loc = user.loc
 				if ((user.client && user.s_active != src))
@@ -319,18 +332,9 @@
 				user << "\red God damnit!"
 
 	handle_item_insertion(W)
-	return
+	return 1
 
 /obj/item/weapon/storage/dropped(mob/user as mob)
-	return
-
-/obj/item/weapon/storage/MouseDrop(over_object, src_location, over_location)
-	..()
-	orient2hud(usr)
-	if ((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
-		if (usr.s_active)
-			usr.s_active.close(usr)
-		src.show_to(usr)
 	return
 
 /obj/item/weapon/storage/attack_hand(mob/user as mob)

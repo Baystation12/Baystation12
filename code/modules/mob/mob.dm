@@ -80,39 +80,6 @@
 		M.show_message( message, 1, blind_message, 2)
 
 
-//This is awful
-/mob/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
-	//Holding a balloon will shield you from an item that is_sharp() ... cause that makes sense
-	if (user.intent != "harm")
-		if (istype(src.l_hand,/obj/item/latexballon) && src.l_hand:air_contents && is_sharp(W))
-			return src.l_hand.attackby(W)
-		if (istype(src.r_hand,/obj/item/latexballon) && src.r_hand:air_contents && is_sharp(W))
-			return src.r_hand.attackby(W)
-
-	//If src is grabbing someone and facing the attacker, the src will use the grabbed person as a shield
-	var/shielded = 0
-	if (locate(/obj/item/weapon/grab, src))
-		var/mob/safe = null
-		if (istype(src.l_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = src.l_hand
-			if ((G.state == 3 && get_dir(src, user) == src.dir))
-				safe = G.affecting
-		if (istype(src.r_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = src.r_hand
-			if ((G.state == 3 && get_dir(src, user) == src.dir))
-				safe = G.affecting
-		if (safe)
-			return safe.attackby(W, user)
-
-	//If the mob is not wearing a shield or otherwise is not shielded
-	if ((!( shielded ) || !( W.flags ) & NOSHIELD))
-		spawn( 0 )
-			if (W && istype(W, /obj/item)) //The istype is necessary for things like bodybags which are structures that do not have an attack() proc.
-				W.attack(src, user)
-				return
-	return
-
 /mob/proc/findname(msg)
 	for(var/mob/M in mob_list)
 		if (M.real_name == text("[]", msg))
@@ -134,7 +101,6 @@
 //This proc is called whenever someone clicks an inventory ui slot.
 /mob/proc/attack_ui(slot)
 	var/obj/item/W = get_active_hand()
-
 	if(istype(W))
 		equip_to_slot_if_possible(W, slot)
 
@@ -271,8 +237,10 @@ var/list/slot_equipment_priority = list( \
 
 /mob/verb/mode()
 	set name = "Activate Held Object"
-	set category = "IC"
+	set category = "Object"
 	set src = usr
+
+	if(istype(loc,/obj/mecha)) return
 
 	if(hand)
 		var/obj/item/W = l_hand
@@ -284,6 +252,8 @@ var/list/slot_equipment_priority = list( \
 		if (W)
 			W.attack_self(src)
 			update_inv_r_hand()
+	if(next_move < world.time)
+		next_move = world.time + 2
 	return
 
 /*
@@ -569,9 +539,8 @@ var/list/slot_equipment_priority = list( \
 	..()
 	if(M != usr) return
 	if(usr == src) return
-	if(get_dist(usr,src) > 1) return
+	if(!Adjacent(usr)) return
 	if(istype(M,/mob/living/silicon/ai)) return
-	if(LinkBlocked(usr.loc,loc)) return
 	show_inv(usr)
 
 
@@ -731,6 +700,15 @@ note dizziness decrements automatically in the mob's Life() proc.
 			else
 				stat(null,"MasterController-ERROR")
 
+	if(listed_turf && client)
+		if(get_dist(listed_turf,src) > 1)
+			listed_turf = null
+		else
+			statpanel(listed_turf.name, null, listed_turf)
+			for(var/atom/A in listed_turf)
+				if(A.invisibility > see_invisible)
+					continue
+				statpanel(listed_turf.name, null, A)
 
 	if(spell_list && spell_list.len)
 		for(var/obj/effect/proc_holder/spell/S in spell_list)

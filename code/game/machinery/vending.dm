@@ -52,9 +52,6 @@
 	var/const/WIRE_SHOCK = 3
 	var/const/WIRE_SHOOTINV = 4
 
-	var/obj/machinery/account_database/linked_db
-	var/datum/money_account/linked_account
-
 /obj/machinery/vending/New()
 	..()
 	spawn(4)
@@ -71,18 +68,9 @@
 		src.build_inventory(premium, 0, 1)
 		power_change()
 
-		reconnect_database()
-		linked_account = vendor_account
-
 		return
 
 	return
-
-/obj/machinery/vending/proc/reconnect_database()
-	for(var/obj/machinery/account_database/DB in world)
-		if(DB.z == src.z)
-			linked_db = DB
-			break
 
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
@@ -158,17 +146,8 @@
 		user << "\blue You insert the [W] into the [src]"
 		return
 	else if(istype(W, /obj/item/weapon/card) && currently_vending)
-		//attempt to connect to a new db, and if that doesn't work then fail
-		if(!linked_db)
-			reconnect_database()
-		if(linked_db)
-			if(linked_account)
-				var/obj/item/weapon/card/I = W
-				scan_card(I)
-			else
-				usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
-		else
-			usr << "\icon[src]<span class='warning'>Unable to connect to accounts database.</span>"
+		var/obj/item/weapon/card/I = W
+		scan_card(I)
 	else
 		..()
 
@@ -177,20 +156,20 @@
 	if (istype(I, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/C = I
 		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
-		if(linked_account)
+		if(vendor_account)
 			var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-			var/datum/money_account/D = linked_db.attempt_account_access(C.associated_account_number, attempt_pin, 2)
+			var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
 			if(D)
 				var/transaction_amount = currently_vending.price
 				if(transaction_amount <= D.money)
 
 					//transfer the money
 					D.money -= transaction_amount
-					linked_account.money += transaction_amount
+					vendor_account.money += transaction_amount
 
 					//create entries in the two account transaction logs
 					var/datum/transaction/T = new()
-					T.target_name = "[linked_account.owner_name] (via [src.name])"
+					T.target_name = "[vendor_account.owner_name] (via [src.name])"
 					T.purpose = "Purchase of [currently_vending.product_name]"
 					if(transaction_amount > 0)
 						T.amount = "([transaction_amount])"
@@ -208,17 +187,17 @@
 					T.source_terminal = src.name
 					T.date = current_date_string
 					T.time = worldtime2text()
-					linked_account.transaction_log.Add(T)
+					vendor_account.transaction_log.Add(T)
 
 					// Vend the item
 					src.vend(src.currently_vending, usr)
 					currently_vending = null
-				else
-					usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
 			else
-				usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
+				usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
 		else
-			usr << "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>"
+			usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
+	else
+		usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
 
 /obj/machinery/vending/attack_paw(mob/user as mob)
 	return attack_hand(user)
@@ -615,7 +594,9 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 4,/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 4,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 4,/obj/item/weapon/reagent_containers/food/drinks/tonic = 8,
 					/obj/item/weapon/reagent_containers/food/drinks/cola = 8, /obj/item/weapon/reagent_containers/food/drinks/sodawater = 15,
-					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,/obj/item/weapon/reagent_containers/food/drinks/ice = 9)
+					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,/obj/item/weapon/reagent_containers/food/drinks/ice = 9,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao = 2,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/tea = 10)
 	vend_delay = 15
 	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"
@@ -652,9 +633,9 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 6,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 6,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 6)
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6)
-	prices = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 20,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 30,/obj/item/weapon/reagent_containers/food/snacks/chips =25,
-					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 30,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 20,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 30,
-					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 25)
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 1,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,/obj/item/weapon/reagent_containers/food/snacks/chips = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 2,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 1,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 1)
 
 
 
@@ -666,11 +647,13 @@
 	product_ads = "Refreshing!;Hope you're thirsty!;Over 1 million drinks sold!;Thirsty? Why not cola?;Please, have a drink!;Drink up!;The best drinks in space."
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/starkist = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/space_up = 10)
+					/obj/item/weapon/reagent_containers/food/drinks/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/space_up = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/iced_tea = 10, /obj/item/weapon/reagent_containers/food/drinks/grape_juice = 10)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/thirteenloko = 5)
-	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 20,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 20,
-					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 20,/obj/item/weapon/reagent_containers/food/drinks/starkist = 20,
-					/obj/item/weapon/reagent_containers/food/drinks/space_up = 20)
+	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 1,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/starkist = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/space_up = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/grape_juice = 1)
 
 //This one's from bay12
 /obj/machinery/vending/cart
@@ -694,7 +677,7 @@
 	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 4)
 	contraband = list(/obj/item/weapon/lighter/zippo = 4)
 	premium = list(/obj/item/clothing/mask/cigarette/cigar/havana = 2)
-	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 60,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 60)
+	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/lighter/random = 2)
 
 
 /obj/machinery/vending/medical
@@ -762,7 +745,7 @@
 	icon_deny = "nutri-deny"
 	products = list(/obj/item/beezeez = 45,/obj/item/nutrient/ez = 35,/obj/item/nutrient/l4z = 25,/obj/item/nutrient/rh = 15,/obj/item/weapon/pestspray = 20,
 					/obj/item/weapon/reagent_containers/syringe = 5,/obj/item/weapon/storage/bag/plants = 5)
-	contraband = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
+	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
 
 /obj/machinery/vending/hydroseeds
 	name = "MegaSeed Servitor"
@@ -774,10 +757,10 @@
 					/obj/item/seeds/cornseed = 3, /obj/item/seeds/eggplantseed = 3, /obj/item/seeds/potatoseed = 3, /obj/item/seeds/replicapod = 3,/obj/item/seeds/soyaseed = 3,
 					/obj/item/seeds/sunflowerseed = 3,/obj/item/seeds/tomatoseed = 3,/obj/item/seeds/towermycelium = 3,/obj/item/seeds/wheatseed = 3,/obj/item/seeds/appleseed = 3,
 					/obj/item/seeds/poppyseed = 3,/obj/item/seeds/ambrosiavulgarisseed = 3,/obj/item/seeds/whitebeetseed = 3,/obj/item/seeds/watermelonseed = 3,/obj/item/seeds/limeseed = 3,
-					/obj/item/seeds/lemonseed = 3,/obj/item/seeds/orangeseed = 3,/obj/item/seeds/grassseed = 3,/obj/item/seeds/cocoapodseed = 3,
+					/obj/item/seeds/lemonseed = 3,/obj/item/seeds/orangeseed = 3,/obj/item/seeds/grassseed = 3,/obj/item/seeds/cocoapodseed = 3,/obj/item/seeds/plumpmycelium = 2,
 					/obj/item/seeds/cabbageseed = 3,/obj/item/seeds/grapeseed = 3,/obj/item/seeds/pumpkinseed = 3,/obj/item/seeds/cherryseed = 3,/obj/item/seeds/plastiseed = 3,/obj/item/seeds/riceseed = 3)
-	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,/obj/item/seeds/nettleseed = 2,
-						/obj/item/seeds/plumpmycelium = 2,/obj/item/seeds/reishimycelium = 2)
+	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,
+					  /obj/item/seeds/nettleseed = 2,/obj/item/seeds/reishimycelium = 2)
 	premium = list(/obj/item/toy/waterflower = 1)
 
 

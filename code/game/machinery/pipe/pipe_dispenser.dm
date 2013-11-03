@@ -110,7 +110,6 @@
 	else
 		return ..()
 
-
 /obj/machinery/pipedispenser/disposal
 	name = "Disposal Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
@@ -200,3 +199,11 @@ Nah
 				wait = 0
 	return
 
+// adding a pipe dispensers that spawn unhooked from the ground
+/obj/machinery/pipedispenser/orderable
+	anchored = 0
+	unwrenched = 1
+	
+/obj/machinery/pipedispenser/disposal/orderable
+	anchored = 0
+	unwrenched = 1

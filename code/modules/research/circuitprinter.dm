@@ -101,7 +101,7 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 			user << "\The [name] must be linked to an R&D console first!"
 			return 1
 		if (O.is_open_container())
-			return 1
+			return 0
 		if (!istype(O, /obj/item/stack/sheet/glass) && !istype(O, /obj/item/stack/sheet/mineral/gold) && !istype(O, /obj/item/stack/sheet/mineral/diamond) && !istype(O, /obj/item/stack/sheet/mineral/uranium))
 			user << "\red You cannot insert this item into the [name]!"
 			return 1

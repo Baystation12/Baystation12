@@ -22,7 +22,6 @@ log transactions
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 10
-	var/obj/machinery/account_database/linked_db
 	var/datum/money_account/authenticated_account
 	var/number_incorrect_tries = 0
 	var/previous_account_number = 0
@@ -38,19 +37,9 @@ log transactions
 	..()
 	machine_id = "[station_name()] RT #[num_financial_terminals++]"
 
-/obj/machinery/atm/initialize()
-	..()
-	reconnect_database()
-
 /obj/machinery/atm/process()
 	if(stat & NOPOWER)
 		return
-
-	if(linked_db && ( (linked_db.stat & NOPOWER) || !linked_db.activated ) )
-		linked_db = null
-		authenticated_account = null
-		src.visible_message("\red \icon[src] [src] buzzes rudely, \"Connection to remote database lost.\"")
-		updateDialog()
 
 	if(ticks_left_timeout > 0)
 		ticks_left_timeout--
@@ -68,12 +57,6 @@ log transactions
 		else
 			playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
 		break
-
-/obj/machinery/atm/proc/reconnect_database()
-	for(var/obj/machinery/account_database/DB in world) //Hotfix until someone finds out why it isn't in 'machines'
-		if( DB.z == src.z && !(DB.stat & NOPOWER) && DB.activated )
-			linked_db = DB
-			break
 
 /obj/machinery/atm/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/card))
@@ -126,69 +109,72 @@ log transactions
 		if(ticks_left_locked_down > 0)
 			dat += "<span class='alert'>Maximum number of pin attempts exceeded! Access to this ATM has been temporarily disabled.</span>"
 		else if(authenticated_account)
-			switch(view_screen)
-				if(CHANGE_SECURITY_LEVEL)
-					dat += "Select a new security level for this account:<br><hr>"
-					var/text = "Zero - Either the account number or card is required to access this account. EFTPOS transactions will require a card and ask for a pin, but not verify the pin is correct."
-					if(authenticated_account.security_level != 0)
-						text = "<A href='?src=\ref[src];choice=change_security_level;new_security_level=0'>[text]</a>"
-					dat += "[text]<hr>"
-					text = "One - An account number and pin must be manually entered to access this account and process transactions."
-					if(authenticated_account.security_level != 1)
-						text = "<A href='?src=\ref[src];choice=change_security_level;new_security_level=1'>[text]</a>"
-					dat += "[text]<hr>"
-					text = "Two - In addition to account number and pin, a card is required to access this account and process transactions."
-					if(authenticated_account.security_level != 2)
-						text = "<A href='?src=\ref[src];choice=change_security_level;new_security_level=2'>[text]</a>"
-					dat += "[text]<hr><br>"
-					dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=0'>Back</a>"
-				if(VIEW_TRANSACTION_LOGS)
-					dat += "<b>Transaction logs</b><br>"
-					dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=0'>Back</a>"
-					dat += "<table border=1 style='width:100%'>"
-					dat += "<tr>"
-					dat += "<td><b>Date</b></td>"
-					dat += "<td><b>Time</b></td>"
-					dat += "<td><b>Target</b></td>"
-					dat += "<td><b>Purpose</b></td>"
-					dat += "<td><b>Value</b></td>"
-					dat += "<td><b>Source terminal ID</b></td>"
-					dat += "</tr>"
-					for(var/datum/transaction/T in authenticated_account.transaction_log)
+			if(authenticated_account.suspended)
+				dat += "\red<b>Access to this account has been suspended, and the funds within frozen.</b>"
+			else
+				switch(view_screen)
+					if(CHANGE_SECURITY_LEVEL)
+						dat += "Select a new security level for this account:<br><hr>"
+						var/text = "Zero - Either the account number or card is required to access this account. EFTPOS transactions will require a card and ask for a pin, but not verify the pin is correct."
+						if(authenticated_account.security_level != 0)
+							text = "<A href='?src=\ref[src];choice=change_security_level;new_security_level=0'>[text]</a>"
+						dat += "[text]<hr>"
+						text = "One - An account number and pin must be manually entered to access this account and process transactions."
+						if(authenticated_account.security_level != 1)
+							text = "<A href='?src=\ref[src];choice=change_security_level;new_security_level=1'>[text]</a>"
+						dat += "[text]<hr>"
+						text = "Two - In addition to account number and pin, a card is required to access this account and process transactions."
+						if(authenticated_account.security_level != 2)
+							text = "<A href='?src=\ref[src];choice=change_security_level;new_security_level=2'>[text]</a>"
+						dat += "[text]<hr><br>"
+						dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=0'>Back</a>"
+					if(VIEW_TRANSACTION_LOGS)
+						dat += "<b>Transaction logs</b><br>"
+						dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=0'>Back</a>"
+						dat += "<table border=1 style='width:100%'>"
 						dat += "<tr>"
-						dat += "<td>[T.date]</td>"
-						dat += "<td>[T.time]</td>"
-						dat += "<td>[T.target_name]</td>"
-						dat += "<td>[T.purpose]</td>"
-						dat += "<td>$[T.amount]</td>"
-						dat += "<td>[T.source_terminal]</td>"
+						dat += "<td><b>Date</b></td>"
+						dat += "<td><b>Time</b></td>"
+						dat += "<td><b>Target</b></td>"
+						dat += "<td><b>Purpose</b></td>"
+						dat += "<td><b>Value</b></td>"
+						dat += "<td><b>Source terminal ID</b></td>"
 						dat += "</tr>"
-					dat += "</table>"
-				if(TRANSFER_FUNDS)
-					dat += "<b>Account balance:</b> $[authenticated_account.money]<br>"
-					dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=0'>Back</a><br><br>"
-					dat += "<form name='transfer' action='?src=\ref[src]' method='get'>"
-					dat += "<input type='hidden' name='src' value='\ref[src]'>"
-					dat += "<input type='hidden' name='choice' value='transfer'>"
-					dat += "Target account number: <input type='text' name='target_acc_number' value='' style='width:200px; background-color:white;'><br>"
-					dat += "Funds to transfer: <input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><br>"
-					dat += "Transaction purpose: <input type='text' name='purpose' value='Funds transfer' style='width:200px; background-color:white;'><br>"
-					dat += "<input type='submit' value='Transfer funds'><br>"
-					dat += "</form>"
-				else
-					dat += "Welcome, <b>[authenticated_account.owner_name].</b><br/>"
-					dat += "<b>Account balance:</b> $[authenticated_account.money]"
-					dat += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
-					dat += "<input type='hidden' name='src' value='\ref[src]'>"
-					dat += "<input type='hidden' name='choice' value='withdrawal'>"
-					dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw funds'><br>"
-					dat += "</form>"
-					dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
-					dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
-					dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=3'>View transaction log</a><br>"
-					dat += "<A href='?src=\ref[src];choice=balance_statement'>Print balance statement</a><br>"
-					dat += "<A href='?src=\ref[src];choice=logout'>Logout</a><br>"
-		else if(linked_db)
+						for(var/datum/transaction/T in authenticated_account.transaction_log)
+							dat += "<tr>"
+							dat += "<td>[T.date]</td>"
+							dat += "<td>[T.time]</td>"
+							dat += "<td>[T.target_name]</td>"
+							dat += "<td>[T.purpose]</td>"
+							dat += "<td>$[T.amount]</td>"
+							dat += "<td>[T.source_terminal]</td>"
+							dat += "</tr>"
+						dat += "</table>"
+					if(TRANSFER_FUNDS)
+						dat += "<b>Account balance:</b> $[authenticated_account.money]<br>"
+						dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=0'>Back</a><br><br>"
+						dat += "<form name='transfer' action='?src=\ref[src]' method='get'>"
+						dat += "<input type='hidden' name='src' value='\ref[src]'>"
+						dat += "<input type='hidden' name='choice' value='transfer'>"
+						dat += "Target account number: <input type='text' name='target_acc_number' value='' style='width:200px; background-color:white;'><br>"
+						dat += "Funds to transfer: <input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><br>"
+						dat += "Transaction purpose: <input type='text' name='purpose' value='Funds transfer' style='width:200px; background-color:white;'><br>"
+						dat += "<input type='submit' value='Transfer funds'><br>"
+						dat += "</form>"
+					else
+						dat += "Welcome, <b>[authenticated_account.owner_name].</b><br/>"
+						dat += "<b>Account balance:</b> $[authenticated_account.money]"
+						dat += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
+						dat += "<input type='hidden' name='src' value='\ref[src]'>"
+						dat += "<input type='hidden' name='choice' value='withdrawal'>"
+						dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw funds'><br>"
+						dat += "</form>"
+						dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
+						dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
+						dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=3'>View transaction log</a><br>"
+						dat += "<A href='?src=\ref[src];choice=balance_statement'>Print balance statement</a><br>"
+						dat += "<A href='?src=\ref[src];choice=logout'>Logout</a><br>"
+		else
 			dat += "<form name='atm_auth' action='?src=\ref[src]' method='get'>"
 			dat += "<input type='hidden' name='src' value='\ref[src]'>"
 			dat += "<input type='hidden' name='choice' value='attempt_auth'>"
@@ -196,9 +182,6 @@ log transactions
 			dat += "<b>PIN:</b> <input type='text' id='account_pin' name='account_pin' style='width:250px; background-color:white;'><br>"
 			dat += "<input type='submit' value='Submit'><br>"
 			dat += "</form>"
-		else
-			dat += "<span class='warning'>Unable to connect to accounts database, please retry and if the issue persists contact NanoTrasen IT support.</span>"
-			reconnect_database()
 
 		user << browse(dat,"window=atm;size=550x650")
 	else
@@ -208,14 +191,14 @@ log transactions
 	if(href_list["choice"])
 		switch(href_list["choice"])
 			if("transfer")
-				if(authenticated_account && linked_db)
+				if(authenticated_account)
 					var/transfer_amount = text2num(href_list["funds_amount"])
 					if(transfer_amount <= 0)
 						alert("That is not a valid amount.")
 					else if(transfer_amount <= authenticated_account.money)
 						var/target_account_number = text2num(href_list["target_acc_number"])
 						var/transfer_purpose = href_list["purpose"]
-						if(linked_db.charge_to_account(target_account_number, authenticated_account.owner_name, transfer_purpose, machine_id, transfer_amount))
+						if(charge_to_account(target_account_number, authenticated_account.owner_name, transfer_purpose, machine_id, transfer_amount))
 							usr << "\icon[src]<span class='info'>Funds transfer successful.</span>"
 							authenticated_account.money -= transfer_amount
 
@@ -240,13 +223,13 @@ log transactions
 					var/new_sec_level = max( min(text2num(href_list["new_security_level"]), 2), 0)
 					authenticated_account.security_level = new_sec_level
 			if("attempt_auth")
-				if(linked_db && !ticks_left_locked_down)
+				if(!ticks_left_locked_down)
 					var/tried_account_num = text2num(href_list["account_num"])
 					if(!tried_account_num)
 						tried_account_num = held_card.associated_account_number
 					var/tried_pin = text2num(href_list["account_pin"])
 
-					authenticated_account = linked_db.attempt_account_access(tried_account_num, tried_pin, held_card && held_card.associated_account_number == tried_account_num ? 2 : 1)
+					authenticated_account = attempt_account_access(tried_account_num, tried_pin, held_card && held_card.associated_account_number == tried_account_num ? 2 : 1)
 					if(!authenticated_account)
 						number_incorrect_tries++
 						if(previous_account_number == tried_account_num)
@@ -256,7 +239,7 @@ log transactions
 								playsound(src, 'sound/machines/buzz-two.ogg', 50, 1)
 
 								//create an entry in the account transaction log
-								var/datum/money_account/failed_account = linked_db.get_account(tried_account_num)
+								var/datum/money_account/failed_account = get_account(tried_account_num)
 								if(failed_account)
 									var/datum/transaction/T = new()
 									T.target_name = failed_account.owner_name
@@ -299,7 +282,7 @@ log transactions
 
 						//remove the money
 						authenticated_account.money -= amount
-						withdraw_arbitrary_sum(amount)
+						spawn_money(amount,src.loc)
 
 						//create an entry in the account transaction log
 						var/datum/transaction/T = new()
@@ -357,36 +340,9 @@ log transactions
 
 	src.attack_hand(usr)
 
-//create the most effective combination of notes to make up the requested amount
-/obj/machinery/atm/proc/withdraw_arbitrary_sum(var/arbitrary_sum)
-	while(arbitrary_sum >= 1000)
-		arbitrary_sum -= 1000
-		new /obj/item/weapon/spacecash/c1000(src)
-	while(arbitrary_sum >= 500)
-		arbitrary_sum -= 500
-		new /obj/item/weapon/spacecash/c500(src)
-	while(arbitrary_sum >= 200)
-		arbitrary_sum -= 200
-		new /obj/item/weapon/spacecash/c200(src)
-	while(arbitrary_sum >= 100)
-		arbitrary_sum -= 100
-		new /obj/item/weapon/spacecash/c100(src)
-	while(arbitrary_sum >= 50)
-		arbitrary_sum -= 50
-		new /obj/item/weapon/spacecash/c50(src)
-	while(arbitrary_sum >= 20)
-		arbitrary_sum -= 20
-		new /obj/item/weapon/spacecash/c20(src)
-	while(arbitrary_sum >= 10)
-		arbitrary_sum -= 10
-		new /obj/item/weapon/spacecash/c10(src)
-	while(arbitrary_sum >= 1)
-		arbitrary_sum -= 1
-		new /obj/item/weapon/spacecash(src)
-
 //stolen wholesale and then edited a bit from newscasters, which are awesome and by Agouri
 /obj/machinery/atm/proc/scan_user(mob/living/carbon/human/human_user as mob)
-	if(!authenticated_account && linked_db)
+	if(!authenticated_account)
 		if(human_user.wear_id)
 			var/obj/item/weapon/card/id/I
 			if(istype(human_user.wear_id, /obj/item/weapon/card/id) )
@@ -395,7 +351,7 @@ log transactions
 				var/obj/item/device/pda/P = human_user.wear_id
 				I = P.id
 			if(I)
-				authenticated_account = linked_db.attempt_account_access(I.associated_account_number)
+				authenticated_account = attempt_account_access(I.associated_account_number)
 				if(authenticated_account)
 					human_user << "\blue \icon[src] Access granted. Welcome user '[authenticated_account.owner_name].'"
 
