@@ -625,6 +625,8 @@
 
 /datum/organ/external/get_icon(gender="",isFat=0)
 	//stand_icon = new /icon(icobase, "torso_[g][fat?"_fat":""]")
+	if (status & ORGAN_ROBOT)
+		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 	if(gender)
 		gender="_[gender]"
 	var/fat=""
