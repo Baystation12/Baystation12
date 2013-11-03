@@ -1458,3 +1458,13 @@ proc/rotate_icon(file, state, step = 1, aa = FALSE)
 		result.Insert(temp, "[angle]")
 
 	return result
+
+
+/*
+Standard way to write links -Sayu
+*/
+
+/proc/topic_link(var/datum/D, var/arglist, var/content)
+	if(istype(arglist,/list))
+		arglist = list2params(arglist)
+	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"
