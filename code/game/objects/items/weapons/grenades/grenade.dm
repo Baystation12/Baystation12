@@ -7,7 +7,7 @@
 	item_state = "flashbang"
 	throw_speed = 4
 	throw_range = 20
-	flags = FPRINT | TABLEPASS | CONDUCT
+	flags = FPRINT  | CONDUCT
 	slot_flags = SLOT_BELT
 	var/active = 0
 	var/det_time = 50
@@ -15,10 +15,12 @@
 /obj/item/weapon/grenade/proc/clown_check(var/mob/living/user)
 	if((CLUMSY in user.mutations) && prob(50))
 		user << "<span class='warning'>Huh? How does this thing work?</span>"
-
-		activate(user)
-		add_fingerprint(user)
+		active = 1
+		icon_state = initial(icon_state) + "_active"
+		playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 		spawn(5)
+			if(user)
+				user.drop_item()
 			prime()
 		return 0
 	return 1
@@ -54,41 +56,32 @@
 /obj/item/weapon/grenade/attack_self(mob/user as mob)
 	if(!active)
 		if(clown_check(user))
-			user << "<span class='warning'>You prime \the [name]! [det_time/10] seconds!</span>"
-
-			activate(user)
+			user << "<span class='warning'>You prime the [name]! [det_time/10] seconds!</span>"
+			active = 1
+			icon_state = initial(icon_state) + "_active"
 			add_fingerprint(user)
+			var/turf/bombturf = get_turf(src)
+			var/area/A = get_area(bombturf)
+			var/log_str = "[key_name(usr)]<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A> has primed a [name] for detonation at <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[bombturf.x];Y=[bombturf.y];Z=[bombturf.z]'>[A.name] (JMP)</a>."
+			message_admins(log_str)
+			log_game(log_str)
 			if(iscarbon(user))
 				var/mob/living/carbon/C = user
 				C.throw_mode_on()
-	return
-
-
-/obj/item/weapon/grenade/proc/activate(mob/user as mob)
-	if(active)
-		return
-
-	if(user)
-		msg_admin_attack("[user.name] ([user.ckey]) primed \a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-
-	icon_state = initial(icon_state) + "_active"
-	active = 1
-	playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
-
-	spawn(det_time)
-		prime()
-		return
+			spawn(det_time)
+				prime()
 
 
 /obj/item/weapon/grenade/proc/prime()
-//	playsound(loc, 'sound/items/Welder2.ogg', 25, 1)
-	var/turf/T = get_turf(src)
-	if(T)
-		T.hotspot_expose(700,125)
+
+/obj/item/weapon/grenade/proc/update_mob()
+	if(ismob(loc))
+		var/mob/M = loc
+		M.drop_from_inventory(src)
 
 
 /obj/item/weapon/grenade/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(isscrewdriver(W))
+	if(istype(W, /obj/item/weapon/screwdriver))
 		switch(det_time)
 			if ("1")
 				det_time = 10
@@ -104,12 +97,10 @@
 				user << "<span class='notice'>You set the [name] for instant detonation.</span>"
 		add_fingerprint(user)
 	..()
-	return
 
 /obj/item/weapon/grenade/attack_hand()
 	walk(src, null, null)
 	..()
-	return
 
 /obj/item/weapon/grenade/attack_paw(mob/user as mob)
 	return attack_hand(user)

@@ -3,21 +3,23 @@
 	desc = "A small electronic device that should never exist."
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
 	icon_state = ""
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = FPRINT | CONDUCT
 	w_class = 2.0
 	m_amt = 100
 	g_amt = 0
-	w_amt = 0
 	throwforce = 2
 	throw_speed = 3
 	throw_range = 10
 	origin_tech = "magnets=1"
+
+	var/bomb_name = "bomb" // used for naming bombs / mines
 
 	var/secured = 1
 	var/list/attached_overlays = null
 	var/obj/item/device/assembly_holder/holder = null
 	var/cooldown = 0//To prevent spam
 	var/wires = WIRE_RECEIVE | WIRE_PULSE
+	var/datum/wires/connected = null // currently only used by timer/signaler
 
 	var/const/WIRE_RECEIVE = 1			//Allows Pulsed(0) to call Activate()
 	var/const/WIRE_PULSE = 2				//Allows Pulse(0) to act on the holder
@@ -49,6 +51,8 @@
 	interact(mob/user as mob)					//Called when attack_self is called
 		return
 
+	proc/describe()									// Called by grenades to describe the state of the trigger (time left, etc)
+		return "The trigger assembly looks broken!"
 
 	process_cooldown()
 		cooldown--
@@ -71,6 +75,8 @@
 			holder.process_activation(src, 1, 0)
 		if(holder && (wires & WIRE_PULSE_SPECIAL))
 			holder.process_activation(src, 0, 1)
+//		if(connected && (wires & WIRE_PULSE))
+//			connected.Pulse(src)
 //		if(radio && (wires & WIRE_RADIO_PULSE))
 			//Not sure what goes here quite yet send signal?
 		return 1
@@ -104,7 +110,7 @@
 			if((!A.secured) && (!secured))
 				attach_assembly(A,user)
 				return
-		if(isscrewdriver(W))
+		if(istype(W, /obj/item/weapon/screwdriver))
 			if(toggle_secure())
 				user << "\blue \The [src] is ready!"
 			else

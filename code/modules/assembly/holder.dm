@@ -3,7 +3,7 @@
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
 	icon_state = "holder"
 	item_state = "assembly"
-	flags = FPRINT | TABLEPASS| CONDUCT
+	flags = FPRINT | CONDUCT
 	throwforce = 5
 	w_class = 2.0
 	throw_speed = 3
@@ -12,19 +12,13 @@
 	var/secured = 0
 	var/obj/item/device/assembly/a_left = null
 	var/obj/item/device/assembly/a_right = null
-	var/obj/special_assembly = null
 
 	proc/attach(var/obj/item/device/D, var/obj/item/device/D2, var/mob/user)
-		return
-
-	proc/attach_special(var/obj/O, var/mob/user)
 		return
 
 	proc/process_activation(var/obj/item/device/D)
 		return
 
-	proc/detached()
-		return
 
 
 	IsAssemblyHolder()
@@ -46,21 +40,7 @@
 		a_right = D2
 		name = "[D.name]-[D2.name] assembly"
 		update_icon()
-		usr.put_in_hands(src)
-
 		return 1
-
-
-	attach_special(var/obj/O, var/mob/user)
-		if(!O)	return
-		if(!O.IsSpecialAssembly())	return 0
-
-/*		if(O:Attach_Holder())
-			special_assembly = O
-			update_icon()
-			src.name = "[a_left.name] [a_right.name] [special_assembly.name] assembly"
-*/
-		return
 
 
 	update_icon()
@@ -76,13 +56,6 @@
 		if(master)
 			master.update_icon()
 
-/*		if(special_assembly)
-			special_assembly.update_icon()
-			if(special_assembly:small_icon_state)
-				src.overlays += special_assembly:small_icon_state
-				for(var/O in special_assembly:small_icon_state_overlays)
-					src.overlays += O
-*/
 
 	examine()
 		set src in view()
@@ -100,8 +73,6 @@
 			a_left.HasProximity(AM)
 		if(a_right)
 			a_right.HasProximity(AM)
-		if(special_assembly)
-			special_assembly.HasProximity(AM)
 
 
 	Crossed(atom/movable/AM as mob|obj)
@@ -109,43 +80,52 @@
 			a_left.Crossed(AM)
 		if(a_right)
 			a_right.Crossed(AM)
-		if(special_assembly)
-			special_assembly.Crossed(AM)
-
 
 	on_found(mob/finder as mob)
 		if(a_left)
 			a_left.on_found(finder)
 		if(a_right)
 			a_right.on_found(finder)
-		if(special_assembly)
-			if(istype(special_assembly, /obj/item))
-				var/obj/item/S = special_assembly
-				S.on_found(finder)
 
 
-	Move()
-		..()
+	hear_talk(mob/living/M as mob, msg)
+		if(a_left)
+			a_left.hear_talk(M, msg)
+		if(a_right)
+			a_right.hear_talk(M, msg)
+
+	proc/process_movement() // infrared beams and prox sensors
 		if(a_left && a_right)
 			a_left.holder_movement()
 			a_right.holder_movement()
-//		if(special_assembly)
-//			special_assembly:holder_movement()
+
+	Move()
+		..()
+		process_movement()
 		return
 
+	pickup()
+		..()
+		process_movement()
+
+	Bump()
+		..()
+		process_movement()
+
+	throw_impact() // called when a throw stops
+		..()
+		process_movement()
 
 	attack_hand()//Perhapse this should be a holder_pickup proc instead, can add if needbe I guess
 		if(a_left && a_right)
 			a_left.holder_movement()
 			a_right.holder_movement()
-//		if(special_assembly)
-//			special_assembly:Holder_Movement()
 		..()
 		return
 
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(isscrewdriver(W))
+		if(istype(W, /obj/item/weapon/screwdriver))
 			if(!a_left || !a_right)
 				user << "\red BUG:Assembly part missing, please report this!"
 				return
@@ -158,8 +138,6 @@
 				user << "\blue \The [src] can now be taken apart!"
 			update_icon()
 			return
-		else if(W.IsSpecialAssembly())
-			attach_special(W, user)
 		else
 			..()
 		return
@@ -177,10 +155,8 @@
 					if("Right")	a_right.attack_self(user)
 				return
 			else
-				if(!istype(a_left,/obj/item/device/assembly/igniter))
-					a_left.attack_self(user)
-				if(!istype(a_right,/obj/item/device/assembly/igniter))
-					a_right.attack_self(user)
+				a_left.attack_self(user)
+				a_right.attack_self(user)
 		else
 			var/turf/T = get_turf(src)
 			if(!T)	return 0
@@ -197,8 +173,6 @@
 
 	process_activation(var/obj/D, var/normal = 1, var/special = 1)
 		if(!D)	return 0
-		if(!secured)
-			visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")
 		if((normal) && (a_right) && (a_left))
 			if(a_right != D)
 				a_right.pulsed(0)
@@ -206,9 +180,6 @@
 				a_left.pulsed(0)
 		if(master)
 			master.receive_signal()
-//		if(special && special_assembly)
-//			if(!special_assembly == D)
-//				special_assembly.dothings()
 		return 1
 
 
@@ -217,58 +188,6 @@
 
 
 
-/obj/item/device/assembly_holder/timer_igniter
-	name = "timer-igniter assembly"
 
-	New()
-		..()
 
-		var/obj/item/device/assembly/igniter/ign = new(src)
-		ign.secured = 1
-		ign.holder = src
-		var/obj/item/device/assembly/timer/tmr = new(src)
-		tmr.time=5
-		tmr.secured = 1
-		tmr.holder = src
-		processing_objects.Add(tmr)
-		a_left = tmr
-		a_right = ign
-		secured = 1
-		update_icon()
-		name = initial(name) + " ([tmr.time] secs)"
 
-		loc.verbs += /obj/item/device/assembly_holder/timer_igniter/verb/configure
-
-	detached()
-		loc.verbs -= /obj/item/device/assembly_holder/timer_igniter/verb/configure
-		..()
-
-	verb/configure()
-		set name = "Set Timer"
-		set category = "Object"
-		set src in usr
-
-		if ( !(usr.stat || usr.restrained()) )
-			var/obj/item/device/assembly_holder/holder
-			if(istype(src,/obj/item/weapon/grenade/chem_grenade))
-				var/obj/item/weapon/grenade/chem_grenade/gren = src
-				holder=gren.detonator
-			var/obj/item/device/assembly/timer/tmr = holder.a_left
-			if(!istype(tmr,/obj/item/device/assembly/timer))
-				tmr = holder.a_right
-			if(!istype(tmr,/obj/item/device/assembly/timer))
-				usr << "<span class='notice'>This detonator has no timer.</span>"
-				return
-
-			if(tmr.timing)
-				usr << "<span class='notice'>Clock is ticking already.</span>"
-			else
-				var/ntime = input("Enter desired time in seconds", "Time", "5") as num
-				if (ntime>0 && ntime<1000)
-					tmr.time = ntime
-					name = initial(name) + "([tmr.time] secs)"
-					usr << "<span class='notice'>Timer set to [tmr.time] seconds.</span>"
-				else
-					usr << "<span class='notice'>Timer can't be [ntime<=0?"negative":"more than 1000 seconds"].</span>"
-		else
-			usr << "<span class='notice'>You cannot do this while [usr.stat?"unconscious/dead":"restrained"].</span>"
