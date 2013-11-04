@@ -101,7 +101,7 @@ proc/airborne_can_reach(turf/source, turf/target)
 //	log_debug("Spreading [vector] diseases from [src] to [victim]")
 	if (virus2.len > 0)
 		for (var/ID in virus2)
-			log_debug("Attempting virus [ID]")
+//			log_debug("Attempting virus [ID]")
 			var/datum/disease2/disease/V = virus2[ID]
 			if(V.spreadtype != vector) continue
 
