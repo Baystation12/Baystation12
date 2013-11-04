@@ -1593,6 +1593,16 @@ datum/design/beacon
 	materials = list ("$metal" = 20, "$glass" = 10)
 	build_path = "/obj/item/device/radio/beacon"
 
+datum/design/telepad_beacon
+	name = "Telepad Beacon"
+	desc = "Use to warp in a cargo telepad."
+	id = "telepad_beacon"
+	req_tech = list("bluespace" = 3, "materials" = 4)
+	build_type = PROTOLATHE
+	materials = list ("$metal" = 2000, "$glass" = 1750, "$silver" = 500)
+	build_path = "/obj/item/device/telepad_beacon"
+
+
 datum/design/bag_holding
 	name = "Bag of Holding"
 	desc = "A backpack that opens into a localized pocket of Blue Space."
