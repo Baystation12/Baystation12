@@ -245,15 +245,8 @@
 		usr << "\red Error: Z is less than 1, greater than 6, or equal to 2."
 		return
 	if(teles_left > 0)
-		if(prob(75))
-			teles_left -= 1
-			dosend()
-			if(teles_left == 0)
-				for(var/mob/O in hearers(src, null))
-					O.show_message("\red The telepad has become uncalibrated!", 2)
-		else
-			telefail()
-		return
+		teles_left -= 1
+		dosend()
 	else	// oh no, the telepad is uncalibrated!
 		if(prob(35))
 			// 35% chance it will work
@@ -288,17 +281,10 @@
 		usr << "\red Error: Z is less than 1, greater than 6, or equal to 2."
 		return
 	if(teles_left > 0)
-		if(prob(85))
-			teles_left -= 1
-			doreceive()
-			if(teles_left == 0)
-				for(var/mob/O in hearers(src, null))
-					O.show_message("\red The telepad has become uncalibrated.", 2)
-		else
-			telefail()
-		return
+		teles_left -= 1
+		doreceive()
 	else
-		if(prob(55))
+		if(prob(35))
 			doreceive()
 		else
 			telefail()
@@ -333,7 +319,7 @@
 		telereceive()
 		return
 	if(href_list["recal"])
-		teles_left = rand(7,10)
+		teles_left = rand(9,12)
 		x_off = rand(-10,10)
 		y_off = rand(-10,10)
 		for(var/obj/machinery/telepad/E in world)
