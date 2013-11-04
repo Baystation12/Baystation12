@@ -31,7 +31,7 @@ datum
 				var/datum/reagent/self = src
 				src = null										  //of the reagent to the mob on TOUCHING it.
 
-				if(!istype(self.holder.my_atom, /obj/effect/effect/chem_smoke))
+				if(!istype(self.holder.my_atom, /obj/effect/effect/smoke/chem))
 					// If the chemicals are in a smoke cloud, do not try to let the chemicals "penetrate" into the mob's system (balance station 13) -- Doohl
 
 					if(method == TOUCH)

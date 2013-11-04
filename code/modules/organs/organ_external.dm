@@ -418,7 +418,7 @@ This function completely restores a damaged organ to perfect condition.
 		if(status & ORGAN_DESTROYED)
 			owner.update_body(1)
 		else
-			UpdateDamageIcon(1)
+			owner.UpdateDamageIcon(1)
 		return 1
 	return 0
 
