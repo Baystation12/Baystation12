@@ -2347,6 +2347,13 @@ datum
 			id = "grapejuice"
 			description = "It's grrrrrape!"
 			color = "#863333" // rgb: 134, 51, 51
+		
+		drink/grapesoda
+			name = "Grape Soda"
+			id = "grapesoda"
+			description = "Grapes made into a fine drank."
+			color = "#421C52" // rgb: 98, 57, 53
+			adj_drowsy 	= 	-3
 
 		drink/poisonberryjuice
 			name = "Poison Berry Juice"

@@ -1790,6 +1790,14 @@ datum
 			result = "barefoot"
 			required_reagents = list("berryjuice" = 1, "cream" = 1, "vermouth" = 1)
 			result_amount = 3
+			
+		grapesoda //Allows Grape Soda to be made
+			name = "Grape Soda"
+			id = "grapesoda"
+			result = "grapesoda"
+			required_reagents = list("grapejuice" = 2, "cola" = 1)
+			result_amount = 3
+
 
 
 ////DRINKS THAT REQUIRED IMPROVED SPRITES BELOW:: -Agouri/////

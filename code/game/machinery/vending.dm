@@ -148,6 +148,14 @@
 	else if(istype(W, /obj/item/weapon/card) && currently_vending)
 		var/obj/item/weapon/card/I = W
 		scan_card(I)
+
+	else if(src.panel_open)
+
+		for(var/datum/data/vending_product/R in product_records)
+			if(istype(W, R.product_path))
+				stock(R, user)
+				del(W)
+
 	else
 		..()
 
@@ -404,6 +412,13 @@
 		new R.product_path(get_turf(src))
 		src.vend_ready = 1
 		return
+
+	src.updateUsrDialog()
+
+/obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
+	if(src.panel_open)
+		user << "\blue You stock the [src] with \a [R.product_name]"
+		R.amount++
 
 	src.updateUsrDialog()
 

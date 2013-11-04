@@ -478,6 +478,7 @@
 	siemens_coefficient = 0.30
 	permeability_coefficient = 0.01
 	item_color="white"
+	species_restricted = list("exclude","Unathi")
 
 /obj/item/clothing/gloves/fluff/walter_brooks_1 //botanistpower: Walter Brooks
 	name = "mittens"
@@ -860,6 +861,7 @@
 	desc = "Made of a special fiber that gives special protection against biohazards. Has a cross on the chest denoting that the wearer is trained medical personnel and short sleeves."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "medical_short"
+	item_state = "medical_short"
 	item_color = "medical_short"
 
 /obj/item/clothing/suit/storage/labcoat/fluff/red
