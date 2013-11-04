@@ -766,6 +766,7 @@
 #include "code\modules\economy\Accounts.dm"
 #include "code\modules\economy\Accounts_DB.dm"
 #include "code\modules\economy\ATM.dm"
+#include "code\modules\economy\cash.dm"
 #include "code\modules\economy\economy_misc.dm"
 #include "code\modules\economy\EFTPOS.dm"
 #include "code\modules\economy\Events.dm"
