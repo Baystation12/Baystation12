@@ -199,6 +199,17 @@
 		new /obj/item/clothing/under/rank/security/corp(src)
 		return
 
+/obj/structure/closet/secure_closet/security/blueshield
+	name = "Blueshield Locker"
+	req_access = list(access_blueshield)
+
+	New()
+		..()
+		new	/obj/item/weapon/storage/firstaid/adv(src)
+		new /obj/item/weapon/gun/projectile/revolver/detective(src)
+		new /obj/item/weapon/storage/box/deathimp(src)
+		return
+
 
 /obj/structure/closet/secure_closet/security/cargo
 

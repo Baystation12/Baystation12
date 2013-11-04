@@ -140,3 +140,13 @@
 		..()
 		update()
 		return
+
+/obj/item/weapon/implanter/death_alarm
+	name = "implanter-death alarm"
+	desc = "Announces the death of the implanted person over radio"
+
+	New()
+		src.imp = new /obj/item/weapon/implant/death_alarm(src)
+		..()
+		update()
+		return
