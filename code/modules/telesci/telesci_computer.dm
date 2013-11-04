@@ -250,7 +250,7 @@
 			dosend()
 			if(teles_left == 0)
 				for(var/mob/O in hearers(src, null))
-					O.show_message("/red The telepad has become uncalibrated.", 2)
+					O.show_message("\red The telepad has become uncalibrated!", 2)
 		else
 			telefail()
 		return
