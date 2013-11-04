@@ -45,6 +45,7 @@
 	// how often wounds should be updated, a higher number means less often
 	var/wound_update_accuracy = 1
 
+
 /datum/organ/external/New(var/datum/organ/external/P)
 	if(P)
 		parent = P
@@ -297,6 +298,11 @@ This function completely restores a damaged organ to perfect condition.
 #define GANGREN_LEVEL_TERMINAL	2500
 #define GERM_TRANSFER_AMOUNT	germ_level/500
 /datum/organ/external/proc/update_germs()
+
+	if(status & ORGAN_ROBOT|ORGAN_DESTROYED) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
+		germ_level = 0
+		return
+
 	if(germ_level > 0 && owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//Syncing germ levels with external wounds
 		for(var/datum/wound/W in wounds)
