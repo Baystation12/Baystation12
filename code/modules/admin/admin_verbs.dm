@@ -139,7 +139,9 @@ var/list/admin_verbs_debug = list(
 	/client/proc/restart_controller,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
-	/client/proc/toggledebuglogs
+	/client/proc/toggledebuglogs,
+	/client/proc/SDQL_query,
+	/client/proc/SDQL2_query
 	)
 var/list/admin_verbs_possess = list(
 	/proc/possess,
