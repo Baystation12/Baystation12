@@ -8,7 +8,10 @@
 	use_power = 1
 	idle_power_usage = 200
 	active_power_usage = 5000
-
+/obj/machinery/telepad/New()
+	..()
+/obj/machinery/telepad/Del()
+	..()
 //CARGO TELEPAD//
 /obj/machinery/telepad_cargo
 	name = "cargo telepad"
@@ -20,7 +23,10 @@
 	idle_power_usage = 20
 	active_power_usage = 500
 	var/stage = 0
-
+/obj/machinery/telepad_cargo/New()
+	..()
+/obj/machinery/telepad_cargo/Del()
+	..()
 /obj/machinery/telepad_cargo/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		anchored = 0

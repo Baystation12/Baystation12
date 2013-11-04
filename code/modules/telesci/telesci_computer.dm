@@ -1,8 +1,3 @@
-/area/telescience
-	name = "\improper Telescience Lab"
-	icon_state = "teleporter"
-	music = "signal"
-
 /obj/machinery/computer/telescience
 	name = "Telepad Control Console"
 	desc = "Used to teleport objects to and from the telescience telepad."
@@ -57,21 +52,23 @@
 	popup.set_content(t)
 	popup.open()
 	return
-
+/obj/machinery/computer/telescience/proc/sparks()
+	for(var/obj/machinery/telepad/E in machines)
+		var/L = get_turf(E)
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(5, 1, L)
+		s.start()
 /obj/machinery/computer/telescience/proc/telefail()
-	if(prob(65))
+	if(prob(75))
+		sparks()
 		for(var/mob/O in hearers(src, null))
 			O.show_message("\red The telepad weakly fizzles.", 2)
-		for(var/obj/machinery/telepad/E in world)
-			var/L = get_turf(E)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(5, 1, L)
-			s.start()
 		return
 	if(prob(10))
 		// Irradiate everyone in telescience!
 		for(var/obj/machinery/telepad/E in world)
 			var/L = get_turf(E)
+			sparks()
 			for(var/mob/living/carbon/human/M in viewers(L, null))
 				M.apply_effect((rand(25, 50)), IRRADIATE, 0)
 				M << "\red You feel strange."
@@ -83,35 +80,23 @@
 			O.show_message("\red The telepad flashes with a strange light, and you have a sudden surge of allegiance toward the true dark one!", 2)
 			O.mind.make_Cultist()
 			temp.grant_runeword(O)
-		for(var/obj/machinery/telepad/E in world)
-			var/L = get_turf(E)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(5, 1, L)
-			s.start()
+			sparks()
 		return
 	if(prob(1))
 		// VIVA LA FUCKING REVOLUTION BITCHES, SUPER LOW CHANCE, CAN HARDLY HAPPEN
 		for(var/mob/living/carbon/O in viewers(src, null))
 			O.show_message("\red The telepad flashes with a strange light, and you see all kind of images flash through your mind, of murderous things Nanotrasen has done, and you decide to rebel!", 2)
 			O.mind.make_Rev()
-		for(var/obj/machinery/telepad/E in world)
-			var/L = get_turf(E)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(5, 1, L)
-			s.start()
+			sparks()
 		return
-	if(prob(10))
-		// *fart
+	if(prob(5))
+		// damn it a meteor
 		for(var/mob/living/carbon/O in viewers(src, null))
-			O.show_message("\red The telepad flashes with a rainbow light, and a portal opens, to what appears to be a Galactic Space Authority owned station. There is an Assistant mooning you through the portal, and-Oh god, he farted! The bad smell of the fart knocks you down.", 2)
-			O.Weaken(10)
-		for(var/obj/machinery/telepad/E in world)
-			var/L = get_turf(E)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(5, 1, L)
-			s.start()
+			O.show_message("\red You get a ominous feeling as the teleporter fizzles out.", 2)
+			spawn_meteors(number = 1)
+			sparks()
 		return
-	if(prob(15))
+	if(prob(5))
 		// The OH SHIT FUCK GOD DAMN IT LYNCH THE SCIENTISTS event.
 		for(var/mob/living/carbon/O in viewers(src, null))
 			O.show_message("\red The telepad changes colors rapidly, and opens a portal, and you see what your mind seems to think is the very threads that hold the pattern of the universe together, and a eerie sense of paranoia creeps into you.", 2)
@@ -125,16 +110,11 @@
 				if(3)
 					spacevine_infestation()
 					spacevine_infestation()
-		for(var/obj/machinery/telepad/E in world)
-			var/L = get_turf(E)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(5, 1, L)
-			s.start()
+			sparks()
 		return
 	if(prob(10))
 		// HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONK
 		for(var/mob/living/carbon/M in hearers(src, null))
-
 			M << sound('sound/items/AirHorn.ogg')
 			if(istype(M, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
@@ -150,15 +130,11 @@
 				M.Paralyse(4)
 			else
 				M.make_jittery(500)
-		for(var/obj/machinery/telepad/E in world)
-			var/L = get_turf(E)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(5, 1, L)
-			s.start()
+			sparks()
 		return
 	if(prob(5))
 		// They did the mash! (They did the monster mash!) The monster mash! (It was a graveyard smash!)
-		// copied from gold slime code because it's efficient
+		sparks()
 		for(var/obj/machinery/telepad/E in world)
 			var/L = get_turf(E)
 			var/blocked = list(/mob/living/simple_animal/hostile,
@@ -188,6 +164,10 @@
 		s.start()
 		flick("pad-beam", E)
 		usr << "\blue Teleport successful."
+		var/sparks = get_turf(target)
+		var/datum/effect/effect/system/spark_spread/y = new /datum/effect/effect/system/spark_spread
+		y.set_up(5, 1, sparks)
+		y.start()
 		for(var/obj/item/OI in L)
 			do_teleport(OI, target, 0)
 		for(var/obj/structure/closet/OC in L)
@@ -211,6 +191,10 @@
 		s.start()
 		flick("pad-beam", E)
 		usr << "\blue Teleport successful."
+		var/sparks = get_turf(T)
+		var/datum/effect/effect/system/spark_spread/y = new /datum/effect/effect/system/spark_spread
+		y.set_up(5, 1, sparks)
+		y.start()
 		for(var/obj/item/ROI in G)
 			do_teleport(ROI, E, 0)
 		for(var/obj/structure/closet/ROC in G)
@@ -247,13 +231,8 @@
 	if(teles_left > 0)
 		teles_left -= 1
 		dosend()
-	else	// oh no, the telepad is uncalibrated!
-		if(prob(35))
-			// 35% chance it will work
-			dosend()
-		else
-			// OH NO YOU IDIOT
-			telefail()
+	else
+		dosend()
 		return
 	return
 
