@@ -95,7 +95,7 @@
 	playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 	var/turf/T = get_turf(src)
 	if(T)
-		var/datum/effect/effect/system/harmless_smoke_spread/smoke = new
+		var/datum/effect/effect/system/smoke_spread/smoke = new
 		smoke.set_up(3, 0, src.loc)
 		smoke.attach(src)
 		smoke.start()
