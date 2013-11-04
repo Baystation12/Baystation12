@@ -169,9 +169,9 @@
 				if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
 					src.occupant.vessel.trans_to(beaker, 1)
 					for(var/datum/reagent/x in src.occupant.reagents.reagent_list)
-//						world << "FILTERING CHEMS"
-						src.occupant.reagents.trans_to(beaker, 3)
-						src.occupant.vessel.trans_to(beaker, 1)
+						if(x.volume > 20)
+							src.occupant.reagents.trans_id_to(beaker, x.id, 2)
+							src.occupant.vessel.trans_to(beaker, 1)
 		src.updateDialog()
 		return
 
