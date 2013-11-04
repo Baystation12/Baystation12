@@ -181,7 +181,7 @@
 
 	var/result = update_icon()
 	return result
-	
+
 /*
 This function completely restores a damaged organ to perfect condition.
 */
@@ -191,21 +191,21 @@ This function completely restores a damaged organ to perfect condition.
 	perma_injury = 0
 	brute_dam = 0
 	burn_dam = 0
-	
+
 	// handle internal organs
 	for(var/datum/organ/internal/current_organ in internal_organs)
 		current_organ.rejuvenate()
-	
+
 	// remove embedded objects and drop them on the floor
 	for(var/obj/implanted_object in implants)
 		if(!istype(implanted_object,/obj/item/weapon/implant))	// We don't want to remove REAL implants. Just shrapnel etc.
 			implanted_object.loc = owner.loc
 			implants -= implanted_object
-			
+
 	owner.updatehealth()
 	update_icon()
-	
-	
+
+
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
 
@@ -338,8 +338,9 @@ This function completely restores a damaged organ to perfect condition.
 
 	for(var/datum/wound/W in wounds)
 		// wounds can disappear after 10 minutes at the earliest
-		if(W.damage == 0 && W.created + 10 * 10 * 60 <= world.time)
+		if(W.damage <= 0 && W.created + 10 * 10 * 60 <= world.time)
 			wounds -= W
+			continue
 			// let the GC handle the deletion of the wound
 
 		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
@@ -347,17 +348,14 @@ This function completely restores a damaged organ to perfect condition.
 			if(!owner.reagents.has_reagent("bicaridine"))	//bicard stops internal wounds from growing bigger with time, and also stop bleeding
 				W.open_wound(0.1 * wound_update_accuracy)
 				owner.vessel.remove_reagent("blood",0.05 * W.damage * wound_update_accuracy)
+
 			owner.vessel.remove_reagent("blood",0.02 * W.damage * wound_update_accuracy)//Bicaridine slows Internal Bleeding
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
-		//overdose of bicaridine begins healing IB
-		if(owner.reagents.has_reagent("bicaridine") && (owner.reagents.get_reagent_amount("bicaridine") >= 30))
-			var/healinternal = 0.2
-			if(W.damage <= healinternal)
-				W.damage = 0
-			else
-				W.damage -= healinternal
+			//overdose of bicaridine begins healing IB
+			if(owner.reagents.get_reagent_amount("bicaridine") >= 30)
+				W.damage = max(0, W.damage - 0.2)
 
 		// slow healing
 		var/heal_amt = 0
@@ -417,7 +415,10 @@ This function completely restores a damaged organ to perfect condition.
 	var/n_is = damage_state_text()
 	if (n_is != damage_state)
 		damage_state = n_is
-		owner.update_body(1)
+		if(status & ORGAN_DESTROYED)
+			owner.update_body(1)
+		else
+			UpdateDamageIcon(1)
 		return 1
 	return 0
 
