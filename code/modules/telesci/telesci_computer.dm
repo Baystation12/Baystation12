@@ -66,7 +66,7 @@
 		return
 	if(prob(10))
 		// Irradiate everyone in telescience!
-		for(var/obj/machinery/telepad/E in world)
+		for(var/obj/machinery/telepad/E in machines)
 			var/L = get_turf(E)
 			sparks()
 			for(var/mob/living/carbon/human/M in viewers(L, null))
@@ -135,7 +135,7 @@
 	if(prob(5))
 		// They did the mash! (They did the monster mash!) The monster mash! (It was a graveyard smash!)
 		sparks()
-		for(var/obj/machinery/telepad/E in world)
+		for(var/obj/machinery/telepad/E in machines)
 			var/L = get_turf(E)
 			var/blocked = list(/mob/living/simple_animal/hostile,
 				/mob/living/simple_animal/hostile/alien/queen/large,
@@ -156,7 +156,7 @@
 /obj/machinery/computer/telescience/proc/dosend()
 	var/trueX = (x_co + x_off)
 	var/trueY = (y_co + y_off)
-	for(var/obj/machinery/telepad/E in world)
+	for(var/obj/machinery/telepad/E in machines)
 		var/L = get_turf(E)
 		var/target = locate(trueX, trueY, z_co)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -182,7 +182,7 @@
 /obj/machinery/computer/telescience/proc/doreceive()
 	var/trueX = (x_co + x_off)
 	var/trueY = (y_co + y_off)
-	for(var/obj/machinery/telepad/E in world)
+	for(var/obj/machinery/telepad/E in machines)
 		var/L = get_turf(E)
 		var/T = locate(trueX, trueY, z_co)
 		var/G = get_turf(T)
@@ -301,7 +301,7 @@
 		teles_left = rand(9,12)
 		x_off = rand(-10,10)
 		y_off = rand(-10,10)
-		for(var/obj/machinery/telepad/E in world)
+		for(var/obj/machinery/telepad/E in machines)
 			var/L = get_turf(E)
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(5, 1, L)
