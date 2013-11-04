@@ -328,8 +328,9 @@
 
 	for(var/datum/wound/W in wounds)
 		// wounds can disappear after 10 minutes at the earliest
-		if(W.damage == 0 && W.created + 10 * 10 * 60 <= world.time)
+		if(W.damage <= 0 && W.created + 10 * 10 * 60 <= world.time)
 			wounds -= W
+			continue
 			// let the GC handle the deletion of the wound
 
 		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
@@ -339,6 +340,10 @@
 			owner.vessel.remove_reagent("blood",0.07 * W.damage * wound_update_accuracy)
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
+
+		//overdose of bicaridine begins healing IB
+		if(owner.reagents.get_reagent_amount("bicaridine") >= 30)
+			W.damage = max(0, W.damage - 0.2)
 
 		// slow healing
 		var/heal_amt = 0
@@ -397,7 +402,10 @@
 	var/n_is = damage_state_text()
 	if (n_is != damage_state)
 		damage_state = n_is
-		owner.update_body(1)
+		if(status & ORGAN_DESTROYED)
+			owner.update_body(1)
+		else
+			owner.UpdateDamageIcon(1)
 		return 1
 	return 0
 
