@@ -69,9 +69,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/check_customitem_activity,
 	/client/proc/man_up,
 	/client/proc/global_man_up,
-	/client/proc/response_team, // Response Teams admin verb
-	/client/proc/SDQL_query,
-	/client/proc/SDQL2_query
+	/client/proc/response_team // Response Teams admin verb
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -141,7 +139,9 @@ var/list/admin_verbs_debug = list(
 	/client/proc/restart_controller,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
-	/client/proc/toggledebuglogs
+	/client/proc/toggledebuglogs,
+	/client/proc/SDQL_query,
+	/client/proc/SDQL2_query
 	)
 var/list/admin_verbs_possess = list(
 	/proc/possess,
