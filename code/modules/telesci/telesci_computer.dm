@@ -76,8 +76,8 @@
 				M.apply_effect((rand(25, 50)), IRRADIATE, 0)
 				M << "\red You feel strange."
 		return
-	if(prob(5))
-		// AI CALL SHUTTLE I SAW RUNE
+	if(prob(1))
+		// AI CALL SHUTTLE I SAW RUNE, SUPER LOW CHANCE, CAN HARDLY HAPPEN
 		for(var/mob/living/carbon/O in viewers(src, null))
 			var/datum/game_mode/cult/temp = new
 			O.show_message("\red The telepad flashes with a strange light, and you have a sudden surge of allegiance toward the true dark one!", 2)
@@ -89,8 +89,8 @@
 			s.set_up(5, 1, L)
 			s.start()
 		return
-	if(prob(5))
-		// VIVA LA FUCKING REVOLUTION BITCHES.
+	if(prob(1))
+		// VIVA LA FUCKING REVOLUTION BITCHES, SUPER LOW CHANCE, CAN HARDLY HAPPEN
 		for(var/mob/living/carbon/O in viewers(src, null))
 			O.show_message("\red The telepad flashes with a strange light, and you see all kind of images flash through your mind, of murderous things Nanotrasen has done, and you decide to rebel!", 2)
 			O.mind.make_Rev()
