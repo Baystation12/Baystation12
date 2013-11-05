@@ -23,10 +23,15 @@
 	return
 
 /obj/effect/portal/New()
+	portals += src
 	spawn(300)
 		del(src)
 		return
 	return
+
+/obj/effect/portal/Del()
+	portals -= src
+	return ..()
 
 /obj/effect/portal/proc/teleport(atom/movable/M as mob|obj)
 	if(istype(M, /obj/effect)) //sparks don't teleport
