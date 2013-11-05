@@ -4746,7 +4746,7 @@
 "bNn" = (/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/toxins/misc_lab)
 "bNo" = (/obj/effect/decal/cleanable/oil,/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/toxins/misc_lab)
 "bNp" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 1},/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/toxins/misc_lab)
-"bNq" = (/obj/structure/table/reinforced,/obj/item/device/gps,/obj/item/device/gps,/obj/item/weapon/rcs,/obj/item/weapon/rcs,/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/toxins/misc_lab)
+"bNq" = (/obj/structure/table/reinforced,/obj/item/weapon/rcs,/obj/item/weapon/rcs,/obj/item/device/sps,/obj/item/device/sps,/obj/item/device/sps,/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/toxins/misc_lab)
 "bNr" = (/obj/machinery/light_switch{pixel_x = 27},/obj/machinery/camera{c_tag = "Miscellaneous Research"; dir = 8; network = list("RD"); pixel_y = -22},/obj/machinery/camera{c_tag = "Miscellaneous Lab"; dir = 8},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/toxins/misc_lab)
 "bNs" = (/obj/machinery/door/firedoor/border_only{dir = 8; name = "Firelock West"},/obj/machinery/door/airlock/research{name = "Toxins Storage"; req_access_txt = "8"},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/turf/simulated/floor,/area/toxins/storage)
 "bNt" = (/obj/structure/sign/nuke,/turf/simulated/wall,/area)

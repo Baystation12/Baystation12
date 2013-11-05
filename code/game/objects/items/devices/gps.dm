@@ -1,4 +1,4 @@
-/obj/item/device/gps
+/obj/item/device/sps
 	name = "Space Positioning System"
 	desc = "Helping lost spacemen find their way through the galaxy since 3016."
 	icon = 'icons/obj/telescience.dmi'
@@ -10,11 +10,11 @@
 	var/gpstag = "COM0"
 	var/emped = 0
 
-/obj/item/device/gps/New()
+/obj/item/device/sps/New()
 	name = "Space Positioning System ([gpstag])"
 	overlays += "working"
 
-/obj/item/device/gps/emp_act(severity)
+/obj/item/device/sps/emp_act(severity)
 	emped = 1
 	overlays -= "working"
 	overlays += "emp"
@@ -23,15 +23,15 @@
 		overlays -= "emp"
 		overlays += "working"
 
-/obj/item/device/gps/attack_self(mob/user as mob)
-	var/obj/item/device/gps/t = ""
+/obj/item/device/sps/attack_self(mob/user as mob)
+	var/obj/item/device/sps/t = ""
 	if(emped)
 		t += "ERROR"
 	else
 		t += "<BR><A href='?src=\ref[src];tag=1'>Set Tag</A> "
 		t += "<BR>Tag: [gpstag]"
 
-		for(var/obj/item/device/gps/G in world)
+		for(var/obj/item/device/sps/G in world)
 			var/turf/pos = get_turf(G)
 			var/area/gps_area = get_area(G)
 			var/tracked_gpstag = G.gpstag
@@ -45,7 +45,7 @@
 	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
 
-/obj/item/device/gps/Topic(href, href_list)
+/obj/item/device/sps/Topic(href, href_list)
 	if(href_list["tag"] )
 		var/a = input("Please enter desired tag.", name, gpstag) as text
 		a = copytext(sanitize(a), 1, 20)
@@ -57,10 +57,10 @@
 			name = "Space Positioning System ([gpstag])"
 			return
 
-/obj/item/device/gps/science
+/obj/item/device/sps/science
 	icon_state = "gps-s"
 	gpstag = "SCI0"
 
-/obj/item/device/gps/engineering
+/obj/item/device/sps/engineering
 	icon_state = "gps-e"
 	gpstag = "ENG0"
