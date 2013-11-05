@@ -411,10 +411,10 @@
 /obj/structure/table/verb/can_touch(var/mob/user)
 	if (!user)
 		return 0
-	if (usr.stat)	//zombie goasts go away
+	if (user.stat)	//zombie goasts go away
 		return 0
-	if (issilicon(usr))
-		usr << "<span class='notice'>You need hands for this.</span>"
+	if (issilicon(user))
+		user << "<span class='notice'>You need hands for this.</span>"
 		return 0
 	return 1
 
