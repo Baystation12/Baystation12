@@ -23,6 +23,18 @@
 	return
 #undef CHANGELOG
 
+#define KARMA "http://192.241.230.212/phpBB3/viewtopic.php?f=10&t=52"
+/client/verb/karmashop()
+	set name = "karmashop"
+	set desc = "Visit the forum to check out the karma shop."
+	set hidden = 1
+
+	if(alert("This will open the karma shop in your browser. Are you sure?",,"Yes","No")=="No")
+		return
+	src << link(KARMA)
+	return
+#undef KARMA
+
 /client/verb/forum()
 	set name = "forum"
 	set desc = "Visit the forum."
