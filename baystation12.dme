@@ -1366,6 +1366,7 @@
 #include "code\WorkInProgress\computer3\computers\card.dm"
 #include "code\WorkInProgress\computer3\computers\communications.dm"
 #include "code\WorkInProgress\computer3\computers\crew.dm"
+#include "code\WorkInProgress\computer3\computers\customs.dm"
 #include "code\WorkInProgress\computer3\computers\HolodeckControl.dm"
 #include "code\WorkInProgress\computer3\computers\Operating.dm"
 #include "code\WorkInProgress\computer3\computers\power.dm"
