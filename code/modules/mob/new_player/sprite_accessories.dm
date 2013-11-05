@@ -114,6 +114,11 @@
 		name = "Ponytail 3"
 		icon_state = "hair_ponytail3"
 
+	sideponytail
+		name = "Side Ponytail"
+		icon_state = "hair_stail"
+		gender = FEMALE
+
 	parted
 		name = "Parted"
 		icon_state = "hair_parted"
@@ -239,6 +244,11 @@
 	gelled
 		name = "Gelled Back"
 		icon_state = "hair_gelled"
+		gender = FEMALE
+
+	gentle
+		name = "Gentle"
+		icon_state = "hair_gentle"
 		gender = FEMALE
 
 	spiky
@@ -466,6 +476,18 @@
 	taj_ears_clean
 		name = "Tajara Clean"
 		icon_state = "hair_clean"
+		species_allowed = list("Tajaran")
+		do_colouration = 0
+
+	taj_ears_bangs
+		name = "Tajara Bangs"
+		icon_state = "hair_bangs"
+		species_allowed = list("Tajaran")
+		do_colouration = 0
+
+	taj_ears_braid
+		name = "Tajara Braid"
+		icon_state = "hair_tbraid"
 		species_allowed = list("Tajaran")
 		do_colouration = 0
 
