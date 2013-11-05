@@ -148,7 +148,7 @@
 
 						if(!block)
 
-							for(var/obj/effect/effect/chem_smoke/smoke in view(1, src))
+							for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
 								if(smoke.reagents.total_volume)
 									smoke.reagents.reaction(src, INGEST)
 									spawn(5)
