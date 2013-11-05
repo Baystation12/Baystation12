@@ -1159,6 +1159,10 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Medical Research"
 	icon_state = "medresearch"
 
+/area/medical/research_shuttle_dock
+	name = "\improper Research Shuttle Dock"
+	icon_state = "medresearch"
+
 /area/medical/virology
 	name = "\improper Virology"
 	icon_state = "virology"
