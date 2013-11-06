@@ -11,14 +11,14 @@
 
 /datum/event/weightless/start()
 	for(var/area/A in world)
-		A.gravitychange(0)
+		A.gravitychange(0,A)
 /*
 	if(control)
 		control.weight *= 2
 */
 /datum/event/weightless/end()
 	for(var/area/A in world)
-		A.gravitychange(1)
+		A.gravitychange(1,A)
 
 	if(announceWhen >= 0)
 		command_alert("Artificial gravity arrays are now functioning within normal parameters. Please report any irregularities to your respective head of staff.")
