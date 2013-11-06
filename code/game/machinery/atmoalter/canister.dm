@@ -350,11 +350,11 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 	..()
 	var/datum/gas/sleeping_agent/trace_gas = air_contents.trace_gases[1]
 	trace_gas.moles = 9*4000
-	spawn(10)
+	spawn(100)
 		var/turf/simulated/location = src.loc
 		if (istype(src.loc))
 			while (!location.air)
-				sleep(10)
+				sleep(1000)
 			location.assume_air(air_contents)
 			air_contents = new
 	return 1
