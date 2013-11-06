@@ -180,6 +180,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 			message_admins("SQL ERROR during whitelist logging (adding new key). Error : \[[err]\]\n")
 			return
 		else
+			usr << "You have unlocked [job]."
 			message_admins("[key_name(usr)] has unlocked [job].")
 			karmacharge(cost)
 
@@ -195,6 +196,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 				message_admins("SQL ERROR during whitelist logging (updating existing entry). Error : \[[err]\]\n")
 				return
 			else
+				usr << "You have unlocked [job]."
 				message_admins("[key_name(usr)] has unlocked [job].")
 				karmacharge(cost)
 		else
@@ -224,6 +226,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 			message_admins("SQL ERROR during whitelist logging (adding new key). Error : \[[err]\]\n")
 			return
 		else
+			usr << "You have unlocked [species]."
 			message_admins("[key_name(usr)] has unlocked [species].")
 			karmacharge(cost)
 
@@ -239,6 +242,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 				message_admins("SQL ERROR during whitelist logging (updating existing entry). Error : \[[err]\]\n")
 				return
 			else
+				usr << "You have unlocked [species]."
 				message_admins("[key_name(usr)] has unlocked [species].")
 				karmacharge(cost)
 		else
@@ -259,5 +263,6 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 			message_admins("SQL ERROR during karmaspent updating (updating existing entry). Error : \[[err]\]\n")
 			return
 		else
+			usr << "You have been charged [cost]."
 			message_admins("[key_name(usr)] has been charged [cost].")
 			return
