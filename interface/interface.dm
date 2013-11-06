@@ -22,7 +22,7 @@
 	src << link(CHANGELOG)
 	return
 #undef CHANGELOG
-
+/*
 #define KARMA "http://192.241.230.212/phpBB3/viewtopic.php?f=10&t=52"
 /client/verb/karmashop()
 	set name = "karmashop"
@@ -34,6 +34,7 @@
 	src << link(KARMA)
 	return
 #undef KARMA
+*/
 
 /client/verb/forum()
 	set name = "forum"
