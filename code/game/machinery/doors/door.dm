@@ -93,8 +93,8 @@
 
 /obj/machinery/door/proc/bumpopen(mob/user as mob)
 	if(operating)	return
-	//if(user.last_airflow > world.time - vsc.airflow_delay) //Fakkit
-	if(user.last_airflow > world.time - zas_settings.Get("airflow_delay")) //Fakkit
+	if(user.last_airflow > world.time - vsc.airflow_delay) //Fakkit
+//	if(user.last_airflow > world.time - zas_settings.Get("airflow_delay")) //Fakkit
 		return
 	src.add_fingerprint(user)
 	if(!src.requiresID())
