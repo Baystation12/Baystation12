@@ -64,7 +64,7 @@
 
 		// Only do anything if the effect is currently strong enough
 		if(strength_percent >= 0.4)
-			log_debug ("[src], tick [life_tick] : Active phase ; strength [M.strength]")
+//			log_debug ("[src], tick [life_tick] : Active phase ; strength [M.strength]")
 			if (M.cure(src) || M.strength > 50)
 //				log_debug ("[src], tick [life_tick] : [M] cured or reached end of lifecycle")
 				side_effects -= M
