@@ -13,62 +13,68 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 	var/zone/zone_A
 	var/zone/zone_B
 
+	var/ref_A
+	var/ref_B
+
 	var/indirect = CONNECTION_DIRECT //If the connection is purely indirect, the zones should not join.
+
+	var/last_updated //The tick at which this was last updated.
+
+	var/no_zone_count = 0
+
 
 
 /connection/New(turf/T,turf/O)
-	. = ..()
-
 	A = T
 	B = O
-
 	if(A.zone && B.zone)
-		if(!A.zone.connections)
-			A.zone.connections = list()
+		if(!A.zone.connections) A.zone.connections = list()
 		A.zone.connections += src
 		zone_A = A.zone
+		ref_A = "\ref[A]"
 
-		if(!B.zone.connections)
-			B.zone.connections = list()
+		if(!B.zone.connections) B.zone.connections = list()
 		B.zone.connections += src
 		zone_B = B.zone
+		ref_B = "\ref[B]"
 
-		if(A in air_master.turfs_with_connections)
-			var/list/connections = air_master.turfs_with_connections[A]
+		if(ref_A in air_master.turfs_with_connections)
+			var/list/connections = air_master.turfs_with_connections[ref_A]
 			connections.Add(src)
 		else
-			air_master.turfs_with_connections[A] = list(src)
+			air_master.turfs_with_connections[ref_A] = list(src)
 
-		if(B in air_master.turfs_with_connections)
-			var/list/connections = air_master.turfs_with_connections[B]
+		if(ref_B in air_master.turfs_with_connections)
+			var/list/connections = air_master.turfs_with_connections[ref_B]
 			connections.Add(src)
 		else
-			air_master.turfs_with_connections[B] = list(src)
+			air_master.turfs_with_connections[ref_B] = list(src)
 
 		if(A.CanPass(null, B, 0, 0))
 
-			if(!A.CanPass(null, B, 1.5, 1))
-				indirect = CONNECTION_INDIRECT
+			ConnectZones(A.zone, B.zone, 1)
 
-			ConnectZones(A.zone, B.zone, indirect)
+			if(A.HasDoor(B) || B.HasDoor(A))
+				indirect = CONNECTION_INDIRECT
 
 		else
 			ConnectZones(A.zone, B.zone)
 			indirect = CONNECTION_CLOSED
 
+
 	else
 		world.log << "Attempted to create connection object for non-zone tiles: [T] ([T.x],[T.y],[T.z]) -> [O] ([O.x],[O.y],[O.z])"
-		SoftDelete()
+		del(src)
 
 
 /connection/Del()
 	//remove connections from master lists.
-	if(B in air_master.turfs_with_connections)
-		var/list/connections = air_master.turfs_with_connections[B]
+	if(ref_B in air_master.turfs_with_connections)
+		var/list/connections = air_master.turfs_with_connections[ref_B]
 		connections.Remove(src)
 
-	if(A in air_master.turfs_with_connections)
-		var/list/connections = air_master.turfs_with_connections[A]
+	if(ref_A in air_master.turfs_with_connections)
+		var/list/connections = air_master.turfs_with_connections[ref_A]
 		connections.Remove(src)
 
 	//Remove connection from zones.
@@ -98,50 +104,11 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 
 	//Disconnect zones while handling unusual conditions.
 	//	e.g. loss of a zone on a turf
-	DisconnectZones(zone_A, zone_B)
+	if(A && A.zone && B && B.zone)
+		DisconnectZones(A.zone, B.zone)
 
 	//Finally, preform actual deletion.
 	. = ..()
-
-
-/connection/proc/SoftDelete()
-	//remove connections from master lists.
-	if(B in air_master.turfs_with_connections)
-		var/list/connections = air_master.turfs_with_connections[B]
-		connections.Remove(src)
-
-	if(A in air_master.turfs_with_connections)
-		var/list/connections = air_master.turfs_with_connections[A]
-		connections.Remove(src)
-
-	//Remove connection from zones.
-	if(A)
-		if(A.zone && A.zone.connections)
-			A.zone.connections.Remove(src)
-			if(!A.zone.connections.len)
-				A.zone.connections = null
-
-	if(istype(zone_A) && (!A || A.zone != zone_A))
-		if(zone_A.connections)
-			zone_A.connections.Remove(src)
-			if(!zone_A.connections.len)
-				zone_A.connections = null
-
-	if(B)
-		if(B.zone && B.zone.connections)
-			B.zone.connections.Remove(src)
-			if(!B.zone.connections.len)
-				B.zone.connections = null
-
-	if(istype(zone_B) && (!B || B.zone != zone_B))
-		if(zone_B.connections)
-			zone_B.connections.Remove(src)
-			if(!zone_B.connections.len)
-				zone_B.connections = null
-
-	//Disconnect zones while handling unusual conditions.
-	//	e.g. loss of a zone on a turf
-	DisconnectZones(zone_A, zone_B)
 
 
 /connection/proc/ConnectZones(var/zone/zone_1, var/zone/zone_2, open = 0)
@@ -173,18 +140,6 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 			zone_2.connected_zones += zone_1
 			zone_2.connected_zones[zone_1] = 1
 
-		if(open == CONNECTION_DIRECT)
-			if(!zone_1.direct_connections)
-				zone_1.direct_connections = list(src)
-			else
-				zone_1.direct_connections += src
-
-			if(!zone_2.direct_connections)
-				zone_2.direct_connections = list(src)
-			else
-				zone_2.direct_connections += src
-
-
 	//Handle closed connections.
 	else
 
@@ -208,11 +163,6 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 			zone_2.closed_connection_zones += zone_1
 			zone_2.closed_connection_zones[zone_1] = 1
 
-	if(zone_1.status == ZONE_SLEEPING)
-		zone_1.SetStatus(ZONE_ACTIVE)
-
-	if(zone_2.status == ZONE_SLEEPING)
-		zone_2.SetStatus(ZONE_ACTIVE)
 
 /connection/proc/DisconnectZones(var/zone/zone_1, var/zone/zone_2)
 	//Sanity checking
@@ -243,15 +193,6 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 					if(!zone_2.connected_zones.len)
 						zone_2.connected_zones = null
 
-			if(indirect == CONNECTION_DIRECT)
-				zone_1.direct_connections -= src
-				if(!zone_1.direct_connections.len)
-					zone_1.direct_connections = null
-
-				zone_2.direct_connections -= src
-				if(!zone_2.direct_connections.len)
-					zone_2.direct_connections = null
-
 	else
 		//Handle disconnection of closed zones.
 		if( (zone_1 in zone_2.closed_connection_zones) || (zone_2 in zone_1.closed_connection_zones) )
@@ -281,22 +222,34 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 
 	//Check sanity: existance of turfs
 	if(!A || !B)
-		SoftDelete()
-		return
-
-	//Check sanity: loss of zone
-	if(!A.zone || !B.zone)
-		SoftDelete()
-		return
+		del src
 
 	//Check sanity: zones are different
 	if(A.zone == B.zone)
-		SoftDelete()
-		return
+		del src
+
+	//Check sanity: same turfs as before.
+	if(ref_A != "\ref[A]" || ref_B != "\ref[B]")
+		del src
 
 	//Handle zones changing on a turf.
 	if((A.zone && A.zone != zone_A) || (B.zone && B.zone != zone_B))
 		Sanitize()
+
+	//Manage sudden loss of a turfs zone. (e.g. a wall being built)
+	if(!A.zone || !B.zone)
+		no_zone_count++
+		if(no_zone_count >= 5)
+			//world.log << "Connection removed: [A] or [B] missing a zone."
+			del src
+		return 0
+
+	return 1
+
+
+/connection/proc/CheckPassSanity()
+	//Sanity check, first.
+	Cleanup()
 
 	if(A.zone && B.zone)
 
@@ -310,7 +263,7 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 				//Make and remove connections to let air pass.
 				if(indirect == CONNECTION_CLOSED)
 					DisconnectZones(A.zone, B.zone)
-					ConnectZones(A.zone, B.zone, door_pass + 1)
+					ConnectZones(A.zone, B.zone, 1)
 
 				if(door_pass)
 					indirect = CONNECTION_DIRECT
@@ -325,8 +278,7 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 
 		//If I can no longer pass air, better delete
 		else
-			SoftDelete()
-			return
+			del src
 
 /connection/proc/Sanitize()
 	//If the zones change on connected turfs, update it.
@@ -342,6 +294,9 @@ Indirect connections will not merge the two zones after they reach equilibrium.
 			A = temp
 			zone_B = B.zone
 			zone_A = A.zone
+			var/temp_ref = ref_A
+			ref_A = ref_B
+			ref_B = temp_ref
 			return
 
 		//Handle removal of connections from archived zones.

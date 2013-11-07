@@ -2526,13 +2526,13 @@
 	else if(href_list["vsc"])
 		if(check_rights(R_ADMIN|R_SERVER))
 			if(href_list["vsc"] == "airflow")
-				vsc.ChangeSettingsDialog(usr,vsc.settings)
+/*				vsc.ChangeSettingsDialog(usr,vsc.settings)
 			if(href_list["vsc"] == "plasma")
-				vsc.ChangeSettingsDialog(usr,vsc.plc.settings)
-//				zas_settings.ChangeSettingsDialog(usr,zas_settings.settings)
+				vsc.ChangeSettingsDialog(usr,vsc.plc.settings) */
+				zas_settings.ChangeSettingsDialog(usr,zas_settings.settings)
 			if(href_list["vsc"] == "default")
-				vsc.SetDefault(usr)
-//				zas_settings.SetDefault(usr)
+				//vsc.SetDefault(usr)
+				zas_settings.SetDefault(usr)
 	// player info stuff
 
 	if(href_list["add_player_info"])
