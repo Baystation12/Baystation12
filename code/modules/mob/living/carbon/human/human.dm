@@ -48,6 +48,8 @@
 
 /mob/living/carbon/human/grey/New()
 	set_species("Grey")
+	mutations.Add(mRemotetalk)
+	verbs += /mob/living/carbon/human/proc/remotesay
 	..()
 
 /mob/living/carbon/human/human/New()

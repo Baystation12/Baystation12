@@ -76,7 +76,7 @@
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_species_unlock("Greys",30)
+					src.DB_species_unlock("Grey",30)
 			if("6")
 				if(karma <45)
 					usr << "You do not have enough karma!"
