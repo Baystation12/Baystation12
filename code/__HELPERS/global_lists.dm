@@ -80,7 +80,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	paths = typesof(/datum/medical_effect)-/datum/medical_effect
 	for(var/T in paths)
 		var/datum/medical_effect/M = new T
-		side_effects[S.name] = T
+		side_effects[M.name] = T
 
 
 	//Languages and species.
