@@ -59,18 +59,18 @@
 		s.set_up(5, 1, L)
 		s.start()
 /obj/machinery/computer/telescience/proc/telefail()
-	if(prob(75))
+	if(prob(95))
 		sparks()
 		for(var/mob/O in hearers(src, null))
 			O.show_message("\red The telepad weakly fizzles.", 2)
 		return
-	if(prob(10))
+	if(prob(5))
 		// Irradiate everyone in telescience!
 		for(var/obj/machinery/telepad/E in machines)
 			var/L = get_turf(E)
 			sparks()
 			for(var/mob/living/carbon/human/M in viewers(L, null))
-				M.apply_effect((rand(25, 50)), IRRADIATE, 0)
+				M.apply_effect((rand(10, 20)), IRRADIATE, 0)
 				M << "\red You feel strange."
 		return
 	if(prob(1))
@@ -89,30 +89,14 @@
 			O.mind.make_Rev()
 			sparks()
 		return
-	if(prob(5))
-		// damn it a meteor
-		for(var/mob/living/carbon/O in viewers(src, null))
-			O.show_message("\red You get a ominous feeling as the teleporter fizzles out.", 2)
-			spawn_meteors(number = 1)
-			sparks()
-		return
-	if(prob(5))
+	if(prob(1))
 		// The OH SHIT FUCK GOD DAMN IT LYNCH THE SCIENTISTS event.
 		for(var/mob/living/carbon/O in viewers(src, null))
 			O.show_message("\red The telepad changes colors rapidly, and opens a portal, and you see what your mind seems to think is the very threads that hold the pattern of the universe together, and a eerie sense of paranoia creeps into you.", 2)
-			switch(rand(1,3))
-				if(1)
-					mini_blob_event()
-				if(2)
-					immovablerod()
-					immovablerod()
-					immovablerod()
-				if(3)
-					spacevine_infestation()
-					spacevine_infestation()
+			spacevine_infestation()
 			sparks()
 		return
-	if(prob(10))
+	if(prob(5))
 		// HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONK
 		for(var/mob/living/carbon/M in hearers(src, null))
 			M << sound('sound/items/AirHorn.ogg')
@@ -132,7 +116,7 @@
 				M.make_jittery(500)
 			sparks()
 		return
-	if(prob(5))
+	if(prob(1))
 		// They did the mash! (They did the monster mash!) The monster mash! (It was a graveyard smash!)
 		sparks()
 		for(var/obj/machinery/telepad/E in machines)
