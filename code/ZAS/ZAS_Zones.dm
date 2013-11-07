@@ -180,15 +180,6 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 	air.graphics = 0
 	if(air.toxins > MOLES_PLASMA_VISIBLE)
-<<<<<<< HEAD
-		air.graphic = 1
-	if(air.trace_gases.len)
-		var/datum/gas/sleeping_agent = locate(/datum/gas/sleeping_agent) in air.trace_gases
-		if(sleeping_agent && (sleeping_agent.moles > 1))
-			air.graphic = 2
-	if(air.temperature <= TEMPERATURE_ICE_FORMATION && air.return_pressure()>MIN_PRESSURE_ICE_FORMATION)
-		air.graphic = 3
-=======
 		air.graphics |= GRAPHICS_PLASMA
 	if(air.trace_gases.len)
 		var/datum/gas/sleeping_agent = locate(/datum/gas/sleeping_agent) in air.trace_gases
@@ -198,7 +189,6 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	if(zas_settings.Get(/datum/ZAS_Setting/ice_formation))
 		if(air.temperature <= TEMPERATURE_ICE_FORMATION && air.return_pressure()>MIN_PRESSURE_ICE_FORMATION)
 			air.graphics |= GRAPHICS_COLD
->>>>>>> parent of e4a82df... ZAS switched from /vg/ to BS12
 
 	progress = "problem with an inbuilt byond function: some conditional checks"
 

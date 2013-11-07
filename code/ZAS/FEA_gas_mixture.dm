@@ -17,15 +17,12 @@ What are the archived variables for?
 #define TEMPERATURE_ICE_FORMATION 273.15 // 273 kelvin is the freezing point of water.
 #define MIN_PRESSURE_ICE_FORMATION 10 // 10kPa should be okay
 
-<<<<<<< HEAD
-=======
 #define GRAPHICS_PLASMA   1
 #define GRAPHICS_N2O      2
 #define GRAPHICS_REAGENTS 4  // Not used.  Yet.
 #define GRAPHICS_COLD     8
 
 
->>>>>>> parent of e4a82df... ZAS switched from /vg/ to BS12
 /datum/gas/sleeping_agent/specific_heat = 40 //These are used for the "Trace Gases" stuff, but is buggy.
 
 /datum/gas/oxygen_agent_b/specific_heat = 300
@@ -201,15 +198,7 @@ What are the archived variables for?
 	//Inputs: None
 	//Outputs: 1 if graphic changed, 0 if unchanged
 
-<<<<<<< HEAD
-	graphic = 0
 
-	if(temperature <= TEMPERATURE_ICE_FORMATION && return_pressure()>MIN_PRESSURE_ICE_FORMATION)
-		// If we're just forming, do a probability check.  Otherwise, KEEP IT ON~
-		// This ordering will hopefully keep it from sampling random noise every damn tick.
-		//if(was_icy || (!was_icy && prob(25)))
-		graphic = 3
-=======
 	graphics = 0
 
 	// If configured and cold, maek ice
@@ -219,7 +208,6 @@ What are the archived variables for?
 			// This ordering will hopefully keep it from sampling random noise every damn tick.
 			//if(was_icy || (!was_icy && prob(25)))
 			graphics |= GRAPHICS_COLD
->>>>>>> parent of e4a82df... ZAS switched from /vg/ to BS12
 
 	if(toxins > MOLES_PLASMA_VISIBLE)
 		graphics |= GRAPHICS_PLASMA
