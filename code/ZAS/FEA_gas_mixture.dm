@@ -14,6 +14,9 @@ What are the archived variables for?
 #define QUANTIZE(variable)		(round(variable,0.0001))
 #define TRANSFER_FRACTION 5 //What fraction (1/#) of the air difference to try and transfer
 
+#define TEMPERATURE_ICE_FORMATION 273.15 // 273 kelvin is the freezing point of water.
+#define MIN_PRESSURE_ICE_FORMATION 10 // 10kPa should be okay
+
 /datum/gas/sleeping_agent/specific_heat = 40 //These are used for the "Trace Gases" stuff, but is buggy.
 
 /datum/gas/oxygen_agent_b/specific_heat = 300
@@ -192,6 +195,13 @@ What are the archived variables for?
 	//Outputs: 1 if graphic changed, 0 if unchanged
 
 	graphic = 0
+
+	if(temperature <= TEMPERATURE_ICE_FORMATION && return_pressure()>MIN_PRESSURE_ICE_FORMATION)
+		// If we're just forming, do a probability check.  Otherwise, KEEP IT ON~
+		// This ordering will hopefully keep it from sampling random noise every damn tick.
+		//if(was_icy || (!was_icy && prob(25)))
+		graphic = 3
+
 	if(toxins > MOLES_PLASMA_VISIBLE)
 		graphic = 1
 	else if(length(trace_gases))

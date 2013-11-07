@@ -253,10 +253,12 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	air.graphic = 0
 	if(air.toxins > MOLES_PLASMA_VISIBLE)
 		air.graphic = 1
-	else if(air.trace_gases.len)
+	if(air.trace_gases.len)
 		var/datum/gas/sleeping_agent = locate(/datum/gas/sleeping_agent) in air.trace_gases
 		if(sleeping_agent && (sleeping_agent.moles > 1))
 			air.graphic = 2
+	if(air.temperature <= TEMPERATURE_ICE_FORMATION && air.return_pressure()>MIN_PRESSURE_ICE_FORMATION)
+		air.graphic = 3
 
 	progress = "problem with an inbuilt byond function: some conditional checks"
 

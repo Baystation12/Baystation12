@@ -129,8 +129,8 @@ datum/controller/game_controller/proc/process()
 					timer = world.timeofday
 					last_thing_processed = air_master.type
 
-/*					air_master.current_cycle++
-					if(!air_master.tick()) Runtimed.*/
+					air_master.current_cycle++
+//					if(!air_master.tick()) Runtimed.
 					if(!air_master.Tick())
 						air_master.failed_ticks++
 						if(air_master.failed_ticks > 5)
