@@ -1,5 +1,5 @@
-
-
+ 
+ 
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass
 	name = "glass"
 	desc = "Your standard drinking glass."
@@ -434,6 +434,10 @@
 					icon_state = "grapejuice"
 					name = "Glass of grape juice"
 					desc = "It's grrrrrape!"
+				if("grapesoda")
+					icon_state = "grapesoda"
+					name = "Can of Grape Soda"
+					desc = "Looks like a delicious drank!"
 				if("icetea")
 					icon_state = "icedteaglass"
 					name = "Iced Tea"

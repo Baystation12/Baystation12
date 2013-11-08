@@ -152,7 +152,7 @@
 			carddesc += "<input type='hidden' name='src' value='\ref[src]'>"
 			carddesc += "<input type='hidden' name='choice' value='account'>"
 			carddesc += "<b>Stored account number:</b> <input type='text' id='accountfield' name='account' value='[modify.associated_account_number]' style='width:250px; background-color:white;' onchange='markAccountRed()'>"
-			carddesc += "<input type='submit' value='Rename' onclick='markAccountGreen()'>"
+			carddesc += "<input type='submit' value='Modify' onclick='markAccountGreen()'>"
 			carddesc += "</form>"
 
 			carddesc += "<b>Assignment:</b> "

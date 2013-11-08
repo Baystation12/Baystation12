@@ -408,14 +408,22 @@
 			return 0
 	return T.straight_table_check(direction)
 
+/obj/structure/table/verb/can_touch(var/mob/user)
+	if (!user)
+		return 0
+	if (user.stat)	//zombie goasts go away
+		return 0
+	if (issilicon(user))
+		user << "<span class='notice'>You need hands for this.</span>"
+		return 0
+	return 1
+
 /obj/structure/table/verb/do_flip()
 	set name = "Flip table"
 	set desc = "Flips a non-reinforced table"
 	set category = "Object"
 	set src in oview(1)
-
-	if (issilicon(usr))
-		usr << "<span class='notice'>You need hands for this.</span>"
+	if (!can_touch(usr))
 		return
 	if(!flip(get_cardinal_dir(usr,src)))
 		usr << "<span class='notice'>It won't budge.</span>"
@@ -445,6 +453,9 @@
 	set desc = "Puts flipped table back"
 	set category = "Object"
 	set src in oview(1)
+
+	if (!can_touch(usr))
+		return
 
 	if (!unflipping_check())
 		usr << "<span class='notice'>It won't budge.</span>"

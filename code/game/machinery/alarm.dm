@@ -184,7 +184,7 @@
 		var/datum/gas_mixture/gas
 		gas = location.remove_air(0.25*environment.total_moles)
 		var/heat_capacity = gas.heat_capacity()
-		var/energy_used = max( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
+		var/energy_used = min( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
 
 		//Use power.  Assuming that each power unit represents 1000 watts....
 		use_power(energy_used/1000, ENVIRON)
@@ -1511,7 +1511,7 @@ FIRE ALARM
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
 
-	if(z == 1)
+	if(z == 1 || z == 5)
 		if(security_level)
 			src.overlays += image('icons/obj/monitors.dmi', "overlay_[get_security_level()]")
 		else
