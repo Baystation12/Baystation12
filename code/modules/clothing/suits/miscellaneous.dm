@@ -257,6 +257,15 @@
 	item_state = "neocoat"
 	flags = FPRINT | TABLEPASS
 
+//actual suits
+
+/obj/item/clothing/suit/creamsuit
+	name = "cream suit"
+	desc = "A cream coloured, genteel suit."
+	icon_state = "creamsuit"
+	item_state = "creamsuit"
+	flags = FPRINT | TABLEPASS
+
 //stripper
 
 /obj/item/clothing/under/stripper/stripper_pink

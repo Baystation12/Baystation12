@@ -35,7 +35,6 @@
 	icon_state = "boulder1"
 	density = 1
 	opacity = 1
-	anchored = 1
 	var/excavation_level = 0
 	var/datum/geosample/geological_data
 	var/datum/artifact_find/artifact_find
@@ -76,14 +75,17 @@
 		user << "\blue You finish [P.drill_verb] [src]."
 		excavation_level += P.excavation_amount
 
-		if(excavation_level > 100)
+		var/reveal_prob = 1
+		if(excavation_level >= 95)
+			reveal_prob = 50 + (excavation_level - 90) * (excavation_level - 90)
+		else if(excavation_level >= 90)
+			reveal_prob = 5
+		if(excavation_level >= 100)
 			//failure
 			user.visible_message("<font color='red'><b>[src] suddenly crumbles away.</b></font>",\
-			"\red [src] has disintegrated under your onslaught, any secrets it was holding are long gone.")
+			"\red [src] has disintegrated under your onslaught, any secrets it was holding long gone.")
 			del(src)
-			return
-
-		if(prob(excavation_level))
+		else if(prob(reveal_prob))
 			//success
 			if(artifact_find)
 				var/spawn_type = artifact_find.artifact_find_type

@@ -99,9 +99,8 @@
 		new /obj/item/weapon/book/manual/engineering_particle_accelerator(src)
 		new /obj/item/weapon/book/manual/engineering_hacking(src)
 		new /obj/item/weapon/book/manual/engineering_guide(src)
-		new /obj/item/weapon/book/manual/atmospipes(src)
 		new /obj/item/weapon/book/manual/engineering_singularity_safety(src)
-		new /obj/item/weapon/book/manual/evaguide(src)
+		new /obj/item/weapon/book/manual/robotics_cyborgs(src)
 		update_icon()
 
 /obj/structure/bookcase/manuals/research_and_development
