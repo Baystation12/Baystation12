@@ -208,9 +208,9 @@
 		telefail()
 		usr << "\red Error: Y is less than 11 or greater than 245."
 		return
-	if(z_co == 2 || z_co < 1 || z_co > 6)
+	if(z_co == 2 || z_co < 1 || z_co > 7)
 		telefail()
-		usr << "\red Error: Z is less than 1, greater than 6, or equal to 2."
+		usr << "\red Error: Z is less than 1, greater than 7, or equal to 2."
 		return
 	if(teles_left > 0)
 		teles_left -= 1
