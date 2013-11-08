@@ -47,6 +47,8 @@
 
 /turf/simulated/var/tmp/obj/fire/active_hotspot
 
+/turf/simulated/var/tmp/was_icy = 0
+
 /turf/simulated/proc/update_visuals()
 	overlays = null
 
@@ -54,46 +56,6 @@
 	if(siding_icon_state)
 		overlays += image('icons/turf/floors.dmi',siding_icon_state)
 	var/datum/gas_mixture/model = return_air()
-<<<<<<< HEAD
-	if(model.graphics & GRAPHICS_COLD)
-		if(!was_icy)
-			wet=3 // Custom ice
-			was_icy=1
-			var/o=""
-			//if(is_plating())
-			//	o="snowfloor_s"
-			//else
-			if(is_plasteel_floor())
-				o="snowfloor"
-			if(o!="")
-				overlays += image('icons/turf/overlays.dmi',o)
-	else
-		if(was_icy)
-			wet=0
-			was_icy=0
-			if(prob(10))
-				wet = 1
-				if(wet_overlay)
-					overlays -= wet_overlay
-					wet_overlay = null
-				wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
-				overlays += wet_overlay
-
-				spawn(800)
-					if (!istype(src)) return
-					if(wet >= 2) return
-					wet = 0
-					if(wet_overlay)
-						overlays -= wet_overlay
-						wet_overlay = null
-	if(model.graphics & GRAPHICS_PLASMA)
-		overlays.Add(plmaster)
-	if(model.graphics & GRAPHICS_N2O)
-		overlays.Add(slmaster)
-	//if(model.graphics & GRAPHICS_REAGENTS)
-	//	overlays.Add(slmaster/*rlmaster*/)
-=======
-
 
 
 	switch(model.graphic)
@@ -132,7 +94,6 @@
 						if(wet_overlay)
 							overlays -= wet_overlay
 							wet_overlay = null
->>>>>>> parent of 0227baa... Reverting ZAS back to /vg/ style
 
 
 /turf/simulated/New()
