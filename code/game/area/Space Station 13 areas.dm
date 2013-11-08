@@ -370,6 +370,11 @@ proc/process_ghost_teleport_locs()
 /area/centcom/holding
 	name = "\improper Holding Facility"
 
+/area/telesci
+	name = "\improper Cosmic Anomaly"
+	icon_state = "centcom"
+	requires_power = 0
+
 //SYNDICATES
 
 /area/syndicate_mothership
