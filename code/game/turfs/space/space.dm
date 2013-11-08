@@ -9,7 +9,7 @@
 
 /turf/space/New()
 	if(!istype(src, /turf/space/transit))
-		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
+		icon_state = "[rand(0,25)]"
 
 /turf/space/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
