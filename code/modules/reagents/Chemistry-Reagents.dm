@@ -3460,7 +3460,7 @@ datum
 			id = "aloe"
 			description = "So very, very, very good."
 			color = "#664300" // rgb: 102, 67, 0
-			boozepwr = 35
+			boozepwr = 3
 
 		ethanol/andalusia
 			name = "Andalusia"
