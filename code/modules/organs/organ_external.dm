@@ -415,10 +415,6 @@ This function completely restores a damaged organ to perfect condition.
 	var/n_is = damage_state_text()
 	if (n_is != damage_state)
 		damage_state = n_is
-		if(status & ORGAN_DESTROYED)
-			owner.update_body(1)
-		else
-			owner.UpdateDamageIcon(1)
 		return 1
 	return 0
 
@@ -550,7 +546,7 @@ This function completely restores a damaged organ to perfect condition.
 			var/lol = pick(cardinal)
 			step(organ,lol)
 
-			owner.regenerate_icons()
+			owner.update_body(1)
 
 
 /****************************************************
