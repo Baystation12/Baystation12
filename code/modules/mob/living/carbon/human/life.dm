@@ -1335,10 +1335,6 @@
 				if(!O.up && tinted_weldhelh)
 					client.screen += global_hud.darkMask
 
-			if(eye_stat > 20)
-				if(eye_stat > 30)	client.screen += global_hud.darkMask
-				else				client.screen += global_hud.vimpaired
-
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)
 			else

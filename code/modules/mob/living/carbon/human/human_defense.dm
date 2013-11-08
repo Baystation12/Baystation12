@@ -159,6 +159,9 @@ emp_act
 	for(var/datum/organ/external/O  in organs)
 		if(O.status & ORGAN_DESTROYED)	continue
 		O.emp_act(severity)
+	for(var/datum/organ/internal/O  in internal_organs)
+		if(O.robotic == 0)	continue
+		O.emp_act(severity)
 	..()
 
 
