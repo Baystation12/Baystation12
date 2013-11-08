@@ -496,7 +496,7 @@
 			sleep(48)
 			del(animation)
 
-		var/mob/living/carbon/human/O = new( src )
+		var/mob/living/carbon/human/human/O = new( src )
 		if(Mo.greaterform)
 			O.set_species(Mo.greaterform)
 
