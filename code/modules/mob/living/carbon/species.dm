@@ -134,9 +134,9 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 2000
-	heat_level_2 = 3000
-	heat_level_3 = 4000
+	heat_level_1 = 300
+	heat_level_2 = 350
+	heat_level_3 = 700
 
 	flags = NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
 	bloodflags = BLOOD_GREEN
