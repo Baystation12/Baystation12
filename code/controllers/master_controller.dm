@@ -58,7 +58,8 @@ datum/controller/game_controller/proc/setup()
 
 	if(!air_master)
 		air_master = new /datum/controller/air_system()
-		air_master.setup()
+//		air_master.setup()
+		air_master.Setup()
 
 	if(!ticker)
 		ticker = new /datum/controller/gameticker()
@@ -129,7 +130,12 @@ datum/controller/game_controller/proc/process()
 					last_thing_processed = air_master.type
 
 					air_master.current_cycle++
+<<<<<<< HEAD
 					if(!air_master.tick()) //Runtimed.
+=======
+//					if(!air_master.tick()) Runtimed.
+					if(!air_master.Tick())
+>>>>>>> parent of 0227baa... Reverting ZAS back to /vg/ style
 						air_master.failed_ticks++
 						if(air_master.failed_ticks > 5)
 							world << "<font color='red'><b>RUNTIMES IN ATMOS TICKER.  Killing air simulation!</font></b>"

@@ -38,9 +38,6 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 			new /obj/fire(src,1000)
 
-		//active_hotspot.just_spawned = (current_cycle < air_master.current_cycle)
-		//remove just_spawned protection if no longer processing this cell
-
 	return igniting
 
 /obj/fire
@@ -128,12 +125,12 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 				//Spread the fire.
 				if(!(locate(/obj/fire) in enemy_tile))
-					if( prob( 50 + 50 * (firelevel/zas_settings.Get(/datum/ZAS_Setting/fire_firelevel_multiplier)) ) && S.CanPass(null, enemy_tile, 0,0) && enemy_tile.CanPass(null, S, 0,0))
+					if( prob( 50 + 50 * (firelevel/vsc.fire_firelevel_multiplier) ) && S.CanPass(null, enemy_tile, 0,0) && enemy_tile.CanPass(null, S, 0,0))
 						new/obj/fire(enemy_tile,firelevel)
 
 	//seperate part of the present gas
 	//this is done to prevent the fire burning all gases in a single pass
-	var/datum/gas_mixture/flow = air_contents.remove_ratio(zas_settings.Get(/datum/ZAS_Setting/fire_consumption_rate))
+	var/datum/gas_mixture/flow = air_contents.remove_ratio(vsc.fire_consuption_rate)
 ///////////////////////////////// FLOW HAS BEEN CREATED /// DONT DELETE THE FIRE UNTIL IT IS MERGED BACK OR YOU WILL DELETE AIR ///////////////////////////////////////////////
 
 	if(flow)
@@ -225,7 +222,7 @@ datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, forc
 		var/total_reactants = total_fuel + total_oxygen
 
 		//determine the amount of reactants actually reacting
-		var/used_reactants_ratio = min( max(total_reactants * firelevel / zas_settings.Get(/datum/ZAS_Setting/fire_firelevel_multiplier), 0.2), total_reactants) / total_reactants
+		var/used_reactants_ratio = min( max(total_reactants * firelevel / vsc.fire_firelevel_multiplier, 0.2), total_reactants) / total_reactants
 
 		//remove and add gasses as calculated
 		oxygen -= min(oxygen, total_oxygen * used_reactants_ratio )
@@ -246,7 +243,7 @@ datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, forc
 			if(liquid.amount <= 0) del liquid
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
-		temperature = (starting_energy + zas_settings.Get(/datum/ZAS_Setting/fire_fuel_energy_release) * total_fuel) / heat_capacity()
+		temperature = (starting_energy + vsc.fire_fuel_energy_release * total_fuel) / heat_capacity()
 
 		update_values()
 		value = total_reactants * used_reactants_ratio
@@ -256,34 +253,31 @@ datum/gas_mixture/proc/check_recombustability(obj/effect/decal/cleanable/liquid_
 	//this is a copy proc to continue a fire after its been started.
 
 	var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
-	var/value = 0
 
 	if(oxygen && (toxins || fuel || liquid))
 		if(liquid)
-			value = 1
-		else if (toxins && !value)
-			value = 1
-		else if(fuel && !value)
-			value = 1
+			return 1
+		if (toxins)
+			return 1
+		if(fuel)
+			return 1
 
-	return value
+	return 0
 
 datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fuel/liquid)
 	//this check comes up very often and is thus centralized here to ease adding stuff
 
 	var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
-	var/value = 0
 
 	if(oxygen && (toxins || fuel || liquid))
 		if(liquid)
-			value = 1
-		else if (toxins >= 0.7 && !value)
-			value = 1
-		else if(fuel && !value)
-			if(fuel.moles >= 1.4)
-				value = 1
+			return 1
+		if (toxins >= 0.7)
+			return 1
+		if(fuel && fuel.moles >= 1.4)
+			return 1
 
-	return value
+	return 0
 
 datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fuel/liquid)
 	//Calculates the firelevel based on one equation instead of having to do this multiple times in different areas.
@@ -309,31 +303,30 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 			//slows down the burning when the concentration of the reactants is low
 			var/dampening_multiplier = total_combustables / (total_combustables + nitrogen + carbon_dioxide)
 			//calculates how close the mixture of the reactants is to the optimum
-			var/mix_multiplier = 1 / (1 + (5 * ((oxygen / total_combustables) ^2)))
+			var/mix_multiplier = 1 / (1 + (5 * ((oxygen / total_combustables) ** 2)))
 			//toss everything together
-			firelevel = zas_settings.Get(/datum/ZAS_Setting/fire_firelevel_multiplier) * mix_multiplier * dampening_multiplier
+			firelevel = vsc.fire_firelevel_multiplier * mix_multiplier * dampening_multiplier
 
 	return max( 0, firelevel)
 
 
-/mob/living/carbon/human/proc/FireBurn(var/firelevel, var/last_temperature, var/pressure)
-// mostly using the old proc from Sky until I can think of something better
+/mob/living/proc/FireBurn(var/firelevel, var/last_temperature, var/pressure)
+	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
+	apply_damage(2.5*mx, BURN)
+
+
+/mob/living/carbon/human/FireBurn(var/firelevel, var/last_temperature, var/pressure)
 	//Burns mobs due to fire. Respects heat transfer coefficients on various body parts.
 	//Due to TG reworking how fireprotection works, this is kinda less meaningful.
 
-	var
-		head_exposure = 1
-		chest_exposure = 1
-		groin_exposure = 1
-		legs_exposure = 1
-		arms_exposure = 1
-
-	//determine the multiplier
-	//minimize this for low-pressure enviroments
-	var/mx = 5 * firelevel/zas_settings.Get(/datum/ZAS_Setting/fire_firelevel_multiplier) * min(pressure / ONE_ATMOSPHERE, 1)
+	var/head_exposure = 1
+	var/chest_exposure = 1
+	var/groin_exposure = 1
+	var/legs_exposure = 1
+	var/arms_exposure = 1
 
 	//Get heat transfer coefficients for clothing.
-	//skytodo: kill anyone who breaks things then orders me to fix them
+
 	for(var/obj/item/clothing/C in src)
 		if(l_hand == C || r_hand == C)
 			continue
@@ -349,6 +342,8 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 				legs_exposure = 0
 			if(C.body_parts_covered & ARMS)
 				arms_exposure = 0
+	//minimize this for low-pressure enviroments
+	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
 
 	//Always check these damage procs first if fire damage isn't working. They're probably what's wrong.
 
@@ -359,5 +354,3 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 	apply_damage(0.6*mx*legs_exposure, BURN, "r_leg", 0, 0, "Fire")
 	apply_damage(0.4*mx*arms_exposure, BURN, "l_arm", 0, 0, "Fire")
 	apply_damage(0.4*mx*arms_exposure, BURN, "r_arm", 0, 0, "Fire")
-
-	//flash_pain()

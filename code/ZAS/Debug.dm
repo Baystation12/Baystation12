@@ -1,3 +1,14 @@
+client/proc/ZoneTick()
+	set category = "Debug"
+	set name = "Process Atmos"
+
+	var/result = air_master.Tick()
+	if(result)
+		src << "Sucessfully Processed."
+
+	else
+		src << "Failed to process! ([air_master.tick_progress])"
+
 
 client/proc/Zone_Info(turf/T as null|turf)
 	set category = "Debug"
@@ -115,8 +126,88 @@ zone/proc/DebugDisplay(client/client)
 		client.images -= client.zone_debug_images[src]
 		client.zone_debug_images.Remove(src)
 
-	for(var/zone/Z in zones)
-		if(Z.air == air && Z != src)
-			var/turf/zloc = pick(Z.contents)
-			client << "\red Illegal air datum shared by: [zloc.loc.name]"
+	if(air_master)
+		for(var/zone/Z in air_master.zones)
+			if(Z.air == air && Z != src)
+				var/turf/zloc = pick(Z.contents)
+				client << "\red Illegal air datum shared by: [zloc.loc.name]"
 
+
+client/proc/TestZASRebuild()
+//	var/turf/turf = get_turf(mob)
+	var/zone/current_zone = mob.loc:zone
+	if(!current_zone)
+		src << "There is no zone there!"
+		return
+
+	var/list/current_adjacents = list()
+	var/list/overlays = list()
+	var/adjacent_id
+	var/lowest_id
+
+	var/list/identical_ids = list()
+	var/list/turfs = current_zone.contents.Copy()
+	var/current_identifier = 1
+
+	for(var/turf/simulated/current in turfs)
+		lowest_id = null
+		current_adjacents = list()
+
+		for(var/direction in cardinal)
+			var/turf/simulated/adjacent = get_step(current, direction)
+			if(!current.ZAirPass(adjacent))
+				continue
+			if(turfs.Find(adjacent))
+				current_adjacents += adjacent
+				adjacent_id = turfs[adjacent]
+
+				if(adjacent_id && (!lowest_id || adjacent_id < lowest_id))
+					lowest_id = adjacent_id
+
+		if(!lowest_id)
+			lowest_id = current_identifier++
+			identical_ids += lowest_id
+			overlays += image('icons/misc/debug_rebuild.dmi',, "[lowest_id]")
+
+		for(var/turf/simulated/adjacent in current_adjacents)
+			adjacent_id = turfs[adjacent]
+			if(adjacent_id != lowest_id)
+				if(adjacent_id)
+					adjacent.overlays -= overlays[adjacent_id]
+					identical_ids[adjacent_id] = lowest_id
+
+				turfs[adjacent] = lowest_id
+				adjacent.overlays += overlays[lowest_id]
+
+				sleep(5)
+
+		if(turfs[current])
+			current.overlays -= overlays[turfs[current]]
+		turfs[current] = lowest_id
+		current.overlays += overlays[lowest_id]
+		sleep(5)
+
+	var/list/final_arrangement = list()
+
+	for(var/turf/simulated/current in turfs)
+		current_identifier = identical_ids[turfs[current]]
+		current.overlays -= overlays[turfs[current]]
+		current.overlays += overlays[current_identifier]
+		sleep(5)
+
+		if( current_identifier > final_arrangement.len )
+			final_arrangement.len = current_identifier
+			final_arrangement[current_identifier] = list(current)
+
+		else
+			final_arrangement[current_identifier] += current
+
+	//lazy but fast
+	final_arrangement.Remove(null)
+
+	src << "There are [final_arrangement.len] unique segments."
+
+	for(var/turf/current in turfs)
+		current.overlays -= overlays
+
+	return final_arrangement

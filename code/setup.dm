@@ -764,3 +764,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define MISSING_PROGRAM    8  // Some files try to automatically launch a program.  This is that failing.
 #define FILE_DRM      16  // Some files want to not be copied/moved.  This is them complaining that you tried.
 #define NETWORK_FAILURE  32
+
+//Flags for zone sleeping
+#define ZONE_ACTIVE 1
+#define ZONE_SLEEPING 0
