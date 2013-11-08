@@ -5,15 +5,15 @@
 /mob/living/carbon/human/var/list/internal_organs = list()
 
 /datum/organ/internal
-	// amount of damage to the organ
-	var/damage = 0
+	var/damage = 0 // amount of damage to the organ
 	var/min_bruised_damage = 10
 	var/min_broken_damage = 30
 	var/parent_organ = "chest"
+	var/robotic = 0 //For being a robot
 
 /datum/organ/internal/proc/rejuvenate()
 	damage=0
-	
+
 /datum/organ/internal/proc/is_bruised()
 	return damage >= min_bruised_damage
 
@@ -31,11 +31,32 @@
 	src.owner = H
 
 /datum/organ/internal/proc/take_damage(amount, var/silent=0)
+	if(src.robotic == 2)
+		src.damage += amount * 0.8
 	src.damage += amount
 
 	var/datum/organ/external/parent = owner.get_organ(parent_organ)
 	if (!silent)
 		owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
+
+
+/datum/organ/internal/proc/emp_act(severity)
+	if(src.robotic == 1)
+		take_damage(15, 0)
+		if(severity == 2)
+			take_damage(5, 0)
+	if(src.robotic == 2)
+		take_damage(30, 0)
+		if(severity == 2)
+			take_damage(15, 0)
+
+/datum/organ/internal/proc/mechanize() //Being used to make robutt hearts, etc
+	robotic = 2
+
+/datum/organ/internal/proc/mechassist() //Used to add things like pacemakers, etc
+	robotic = 1
+	min_bruised_damage = 15
+	min_broken_damage = 35
 
 /****************************************************
 				INTERNAL ORGANS DEFINES
@@ -103,3 +124,15 @@
 /datum/organ/internal/brain
 	name = "brain"
 	parent_organ = "head"
+
+/datum/organ/internal/eyes
+	name = "eyes"
+	parent_organ = "head"
+
+	process() //Eye damage replaces the old eye_stat var.
+		if(damage > min_bruised_damage)
+			if(damage > min_broken_damage)
+				owner.client.screen += global_hud.darkMask
+				owner.eye_blind = 20
+			else
+				owner.client.screen += global_hud.vimpaired

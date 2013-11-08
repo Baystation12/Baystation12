@@ -281,6 +281,7 @@
 						var/infected = ""
 						var/imp = ""
 						var/bled = ""
+						var/robot = ""
 						var/splint = ""
 						var/internal_bleeding = ""
 						var/lung_ruptured = ""
@@ -295,6 +296,8 @@
 							bled = "Bleeding:"
 						if(e.status & ORGAN_BROKEN)
 							AN = "[e.broken_description]:"
+						if(e.status & ORGAN_ROBOT)
+							robot = "Prosthetic:"
 						if(e.open)
 							open = "Open:"
 						var/unknown_body = 0
@@ -308,16 +311,25 @@
 						if(!AN && !open && !infected & !imp)
 							AN = "None:"
 						if(!(e.status & ORGAN_DESTROYED))
-							dat += "<td>[e.display_name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
+							dat += "<td>[e.display_name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
 						else
 							dat += "<td>[e.display_name]</td><td>-</td><td>-</td><td>Not Found</td>"
 						dat += "</tr>"
 					for(var/organ_name in occupant.internal_organs)
 						var/datum/organ/internal/i = occupant.internal_organs[organ_name]
+						var/mech = ""
+						if(i.robotic == 1)
+							mech = "Assisted:"
+						if(i.robotic == 2)
+							mech = "Mechanical:"
 						dat += "<tr>"
-						dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>None:</td>"
+						dat += "<td>[i.name]</td><td>N/A</td><td>[i.damage]</td><td>None:[mech]</td><td></td>"
 						dat += "</tr>"
 					dat += "</table>"
+					if(occupant.sdisabilities & BLIND)
+						dat += text("<font color='red'>Cataracts detected.</font><BR>")
+					if(occupant.sdisabilities & NEARSIGHTED)
+						dat += text("<font color='red'>Retinal misalignment detected.</font><BR>")
 			else
 				dat += "\The [src] is empty."
 		else

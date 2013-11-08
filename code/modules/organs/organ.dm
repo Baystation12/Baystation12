@@ -56,6 +56,7 @@
 	new/datum/organ/internal/liver(src)
 	new/datum/organ/internal/kidney(src)
 	new/datum/organ/internal/brain(src)
+	new/datum/organ/internal/eyes(src)
 
 	for(var/name in organs_by_name)
 		organs += organs_by_name[name]
