@@ -433,7 +433,7 @@ datum
 			secondary = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
-				var/datum/effect/effect/system/chem_smoke_spread/S = new /datum/effect/effect/system/chem_smoke_spread
+				var/datum/effect/effect/system/smoke_spread/chem/S = new /datum/effect/effect/system/smoke_spread/chem
 				S.attach(location)
 				S.set_up(holder, 10, 0, location)
 				playsound(location, 'sound/effects/smoke.ogg', 50, 1, -3)
@@ -1790,6 +1790,14 @@ datum
 			result = "barefoot"
 			required_reagents = list("berryjuice" = 1, "cream" = 1, "vermouth" = 1)
 			result_amount = 3
+			
+		grapesoda //Allows Grape Soda to be made
+			name = "Grape Soda"
+			id = "grapesoda"
+			result = "grapesoda"
+			required_reagents = list("grapejuice" = 2, "cola" = 1)
+			result_amount = 3
+
 
 
 ////DRINKS THAT REQUIRED IMPROVED SPRITES BELOW:: -Agouri/////
