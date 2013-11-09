@@ -60,8 +60,10 @@
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
-	reagents.remove_reagent("tricordrazine", 30)
-	reagents.add_reagent("inaprovaline", 5)
+	reagents.remove_reagent("doctorsdelight", 15)
+	reagents.remove_reagent("dexalinp", 15)
+	reagents.add_reagent("tramadol", 4)
+	reagents.add_reagent("hyperzine", 1)
 	update_icon()
 	return
 
