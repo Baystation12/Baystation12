@@ -103,7 +103,7 @@ var/global/list/possibleEvents = list()
 			possibleEvents[/datum/event/alien_infestation] = max(active_with_role["Security"], 5) + 2.5
 		if(!sent_ninja_to_station && toggle_space_ninja)
 			possibleEvents[/datum/event/space_ninja] = max(active_with_role["Security"], 5)
-	possibleEvents[/datum/event/undead] = active_with_role["Security"] * 25
+	possibleEvents[/datum/event/undead] = active_with_role["Security"] * 10
 	possibleEvents[/datum/event/ghosts] = active_with_role["Security"] * 25
 
 

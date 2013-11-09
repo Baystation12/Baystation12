@@ -1,5 +1,5 @@
 /datum/event/undead
-	var/spawn_prob = 15
+	var/spawn_prob = 10
 	startWhen = 2
 	announceWhen = 3
 	oneShot			= 1
@@ -10,6 +10,7 @@
 		RS.kill()
 	start()
 		for(var/area/A)
+			if(A.z != 1) continue //Spook on main station only.
 			if(A.luminosity) continue
 //			if(A.lighting_space) continue
 			if(A.type == /area) continue
