@@ -921,6 +921,7 @@
 #include "code\modules\mob\living\carbon\alien\humanoid\alien_powers.dm"
 #include "code\modules\mob\living\carbon\alien\humanoid\death.dm"
 #include "code\modules\mob\living\carbon\alien\humanoid\emote.dm"
+#include "code\modules\mob\living\carbon\alien\humanoid\empress.dm"
 #include "code\modules\mob\living\carbon\alien\humanoid\humanoid.dm"
 #include "code\modules\mob\living\carbon\alien\humanoid\inventory.dm"
 #include "code\modules\mob\living\carbon\alien\humanoid\life.dm"
