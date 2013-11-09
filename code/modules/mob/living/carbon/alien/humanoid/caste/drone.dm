@@ -36,7 +36,7 @@
 			src << "\green You begin to evolve!"
 			for(var/mob/O in viewers(src, null))
 				O.show_message(text("\green <B>[src] begins to twist and contort!</B>"), 1)
-			var/mob/living/carbon/alien/humanoid/queen/new_xeno = new (loc)
+			var/mob/living/carbon/alien/humanoid/queen/large/new_xeno = new (loc)
 			mind.transfer_to(new_xeno)
 			del(src)
 		else
