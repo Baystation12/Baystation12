@@ -95,10 +95,10 @@
 // I think it is a *terrible* idea
 // but I'm leaving it here anyway
 // commented out, of course.
-/*
+
 /atom/proc/attack_admin(mob/user as mob)
 	if(!user || !user.client || !user.client.holder)
 		return
 	attack_hand(user)
 
-*/
+
