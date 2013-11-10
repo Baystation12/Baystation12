@@ -88,8 +88,8 @@
 		return affected.name == "head" && affected.open == 2 && affected.stage == 1
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("[user] is beginning piece together [target]'s skull with \the [tool]."  , \
-			"You are beginning piece together [target]'s skull with \the [tool].")
+		user.visible_message("[user] is beginning to piece together [target]'s skull with \the [tool]."  , \
+			"You are beginning to piece together [target]'s skull with \the [tool].")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
