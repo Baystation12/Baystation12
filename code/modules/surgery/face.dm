@@ -85,13 +85,13 @@
 		return ..() && target.op_stage.face == 2
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("[user] starts pulling skin on [target]'s face back in place with \the [tool].", \
-		"You start pulling skin on [target]'s face back in place with \the [tool].")
+		user.visible_message("[user] starts pulling the skin on [target]'s face back in place with \the [tool].", \
+		"You start pulling the skin on [target]'s face back in place with \the [tool].")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("\blue [user] pulls skin on [target]'s face back in place with \the [tool].",	\
-		"\blue You pull skin on [target]'s face back in place with \the [tool].")
+		user.visible_message("\blue [user] pulls the skin on [target]'s face back in place with \the [tool].",	\
+		"\blue You pull the skin on [target]'s face back in place with \the [tool].")
 		target.op_stage.face = 3
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

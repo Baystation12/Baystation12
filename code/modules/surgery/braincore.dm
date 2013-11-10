@@ -27,8 +27,8 @@
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("\blue [user] has cut through [target]'s skull open with \the [tool].",		\
-		"\blue You have cut through [target]'s skull open with \the [tool].")
+		user.visible_message("\blue [user] has cut [target]'s skull open with \the [tool].",		\
+		"\blue You have cut [target]'s skull open with \the [tool].")
 		target.brain_op_stage = 2
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -122,13 +122,13 @@
 		return ..() && target.brain_op_stage == 2
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("[user] starts taking out bone chips out of [target]'s brain with \the [tool].", \
-		"You start taking out bone chips out of [target]'s brain with \the [tool].")
+		user.visible_message("[user] starts taking bone chips out of [target]'s brain with \the [tool].", \
+		"You start taking bone chips out of [target]'s brain with \the [tool].")
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("\blue [user] takes out all bone chips out of [target]'s brain with \the [tool].",	\
-		"\blue You take out all bone chips out of [target]'s brain with \the [tool].")
+		user.visible_message("\blue [user] takes out all the bone chips in [target]'s brain with \the [tool].",	\
+		"\blue You take out all the bone chips in [target]'s brain with \the [tool].")
 		target.brain_op_stage = 3
 
 
@@ -189,12 +189,12 @@
 		return ..() && target.brain_op_stage == 0
 
 	begin_step(mob/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
-		user.visible_message("[user] starts cutting [target]'s flesh with \the [tool].", \
-		"You start cutting [target]'s flesh with \the [tool].")
+		user.visible_message("[user] starts cutting through [target]'s flesh with \the [tool].", \
+		"You start cutting through [target]'s flesh with \the [tool].")
 
 	end_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
-		user.visible_message("\blue [user] cuts [target]'s flesh with \the [tool].",	\
-		"\blue You cut [target]'s flesh with \the [tool], exposing the cores")
+		user.visible_message("\blue [user] cuts through [target]'s flesh with \the [tool].",	\
+		"\blue You cut through [target]'s flesh with \the [tool], exposing the cores.")
 		target.brain_op_stage = 1
 
 	fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
@@ -219,8 +219,8 @@
 		"You start cutting [target]'s silky innards apart with \the [tool].")
 
 	end_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
-		user.visible_message("\blue [user] cuts [target]'s innards apart with \the [tool], exposing the cores",	\
-		"\blue You cut [target]'s innards apart with \the [tool], exposing the cores")
+		user.visible_message("\blue [user] cuts [target]'s innards apart with \the [tool], exposing the cores.",	\
+		"\blue You cut [target]'s innards apart with \the [tool], exposing the cores.")
 		target.brain_op_stage = 2
 
 	fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
@@ -256,5 +256,5 @@
 
 
 	fail_step(mob/living/user, mob/living/carbon/slime/target, target_zone, obj/item/tool)
-		user.visible_message("\red [user]'s hand slips, failing to cut core out!", \
-		"\red Your hand slips, failing to cut core out!")
+		user.visible_message("\red [user]'s hand slips, causing \him to miss the core!", \
+		"\red Your hand slips, causing you to miss the core!")
