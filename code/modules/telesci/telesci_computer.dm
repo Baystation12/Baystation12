@@ -1,7 +1,9 @@
 /obj/machinery/computer/telescience
-	name = "Telepad Control Console"
+	name = "telepad control console"
 	desc = "Used to teleport objects to and from the telescience telepad."
 	icon_state = "teleport"
+	var/sending = 1
+	var/obj/machinery/telepad/telepad = null
 
 	// VARIABLES //
 	var/teles_left	// How many teleports left until it becomes uncalibrated
@@ -12,9 +14,15 @@
 	var/z_co	// Z coordinate
 
 /obj/machinery/computer/telescience/New()
+	..()
 	teles_left = rand(8,12)
 	x_off = rand(-10,10)
 	y_off = rand(-10,10)
+	initialize()
+
+/obj/machinery/computer/telescience/initialize()
+	..()
+	telepad = locate() in range(src, 7)
 
 /obj/machinery/computer/telescience/update_icon()
 	if(stat & BROKEN)
@@ -28,16 +36,14 @@
 			stat &= ~NOPOWER
 
 /obj/machinery/computer/telescience/attack_paw(mob/user)
-	usr << "You are too primitive to use this computer."
+	user << "You are too primitive to use this computer."
 	return
 
 /obj/machinery/computer/telescience/attack_ai(mob/user)
-	src.attack_hand()
+	src.attack_hand(user)
 
 /obj/machinery/computer/telescience/attack_hand(mob/user)
 	if(..())
-		return
-	if(stat & (NOPOWER|BROKEN))
 		return
 	var/t = ""
 	t += "<A href='?src=\ref[src];setx=1'>Set X</A>"
@@ -53,13 +59,15 @@
 	popup.open()
 	return
 /obj/machinery/computer/telescience/proc/sparks()
-	for(var/obj/machinery/telepad/E in machines)
+	if(telepad)
 		var/L = get_turf(E)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, L)
 		s.start()
+	else
+		return
 /obj/machinery/computer/telescience/proc/telefail()
-	if(prob(95))
+	if(prob(50))
 		sparks()
 		for(var/mob/O in hearers(src, null))
 			O.show_message("\red The telepad weakly fizzles.", 2)
@@ -137,120 +145,54 @@
 		return
 	return
 
-/obj/machinery/computer/telescience/proc/dosend()
+/obj/machinery/computer/telescience/proc/doteleport(mob/user)
 	var/trueX = (x_co + x_off)
 	var/trueY = (y_co + y_off)
-	for(var/obj/machinery/telepad/E in machines)
-		var/L = get_turf(E)
-		var/target = locate(trueX, trueY, z_co)
+	trueX = Clamp(trueX, 1, world.maxx)
+	trueY = Clamp(trueY, 1, world.maxy)
+	if(telepad)
+		var/turf/target = locate(trueX, trueY, z_co)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(5, 1, L)
+		s.set_up(5, 1, telepad)
 		s.start()
-		flick("pad-beam", E)
-		usr << "\blue Teleport successful."
+		flick("pad-beam", telepad)
+		user << "<span class = 'caution'> Teleport successful.</span>"
 		var/sparks = get_turf(target)
 		var/datum/effect/effect/system/spark_spread/y = new /datum/effect/effect/system/spark_spread
 		y.set_up(5, 1, sparks)
 		y.start()
-		for(var/obj/item/OI in L)
-			do_teleport(OI, target, 0)
-		for(var/obj/structure/closet/OC in L)
-			do_teleport(OC, target, 0)
-		for(var/mob/living/carbon/MO in L)
-			do_teleport(MO, target, 0)
-		for(var/mob/living/simple_animal/SA in L)
-			do_teleport(SA, target, 0)
+		var/turf/source = target
+		var/turf/dest = get_turf(telepad)
+		if(sending)
+			source = dest
+			dest = target
+		for(var/atom/movable/ROI in source)
+			if(ROI.anchored) continue
+			do_teleport(ROI, dest, 0)
 		return
 	return
 
-/obj/machinery/computer/telescience/proc/doreceive()
-	var/trueX = (x_co + x_off)
-	var/trueY = (y_co + y_off)
-	for(var/obj/machinery/telepad/E in machines)
-		var/L = get_turf(E)
-		var/T = locate(trueX, trueY, z_co)
-		var/G = get_turf(T)
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(5, 1, L)
-		s.start()
-		flick("pad-beam", E)
-		usr << "\blue Teleport successful."
-		var/sparks = get_turf(T)
-		var/datum/effect/effect/system/spark_spread/y = new /datum/effect/effect/system/spark_spread
-		y.set_up(5, 1, sparks)
-		y.start()
-		for(var/obj/item/ROI in G)
-			do_teleport(ROI, E, 0)
-		for(var/obj/structure/closet/ROC in G)
-			do_teleport(ROC, E, 0)
-		for(var/mob/living/carbon/RMO in G)
-			do_teleport(RMO, E, 0)
-		for(var/mob/living/simple_animal/RSA in G)
-			do_teleport(RSA, E, 0)
-		return
-	return
-
-/obj/machinery/computer/telescience/proc/telesend()
-	if(x_co == "")
-		usr << "\red Error: set coordinates."
-		return
-	if(y_co == "")
-		usr << "\red Error: set coordinates."
-		return
-	if(z_co == "")
-		usr << "\red Error: set coordinates."
+/obj/machinery/computer/telescience/proc/teleport(mob/user)
+	if(x_co == null || y_co == null || z_co == null)
+		user << "<span class = 'caution'>  Error: set coordinates.</span>"
 		return
 	if(x_co < 1 || x_co > 255)
 		telefail()
-		usr << "\red Error: X is less than 11 or greater than 245."
+		user << "<span class = 'caution'>  Error: X is less than 1 or greater than 255.</span>"
 		return
 	if(y_co < 1 || y_co > 255)
 		telefail()
-		usr << "\red Error: Y is less than 11 or greater than 245."
+		user << "<span class = 'caution'>  Error: Y is less than 1 or greater than 255.</span>"
 		return
-	if(z_co == 2 || z_co < 1 || z_co > 6)
+	if(z_co == 2 || z_co < 1 || z_co > 7)
 		telefail()
-		usr << "\red Error: Z is less than 1, greater than 6, or equal to 2."
+		user << "<span class = 'caution'>  Error: Z is less than 1, greater than 7, or equal to 2.</span>"
 		return
 	if(teles_left > 0)
 		teles_left -= 1
-		dosend()
+		doteleport(user)
 	else
-		dosend()
-		return
-	return
-
-/obj/machinery/computer/telescience/proc/telereceive()
-	// basically the same thing
-	if(x_co == "")
-		usr << "\red Error: set coordinates."
-		return
-	if(y_co == "")
-		usr << "\red Error: set coordinates."
-		return
-	if(z_co == "")
-		usr << "\red Error: set coordinates."
-		return
-	if(x_co < 1 || x_co > 255)
 		telefail()
-		usr << "\red Error: X is less than 11 or greater than 200."
-		return
-	if(y_co < 1 || y_co > 255)
-		telefail()
-		usr << "\red Error: Y is less than 11 or greater than 200."
-		return
-	if(z_co == 2 || z_co < 1 || z_co > 6)
-		telefail()
-		usr << "\red Error: Z is less than 1, greater than 6, or equal to 2."
-		return
-	if(teles_left > 0)
-		teles_left -= 1
-		doreceive()
-	else
-		if(prob(35))
-			doreceive()
-		else
-			telefail()
 		return
 	return
 
@@ -258,37 +200,29 @@
 	if(..())
 		return
 	if(href_list["setx"])
-		var/a = input("Please input desired X coordinate.", name, x_co) as num
-		a = copytext(sanitize(a), 1, 20)
-		x_co = a
-		x_co = text2num(x_co)
+		var/new_x = input("Please input desired X coordinate.", name, x_co) as num
+		x_co = Clamp(new_x, 1, 9999)
 		return
 	if(href_list["sety"])
-		var/b = input("Please input desired Y coordinate.", name, y_co) as num
-		b = copytext(sanitize(b), 1, 20)
-		y_co = b
-		y_co = text2num(y_co)
+		var/new_y = input("Please input desired Y coordinate.", name, y_co) as num
+		y_co = Clamp(new_y, 1, 9999)
 		return
 	if(href_list["setz"])
-		var/c = input("Please input desired Z coordinate.", name, z_co) as num
-		c = copytext(sanitize(c), 1, 20)
-		z_co = c
-		z_co = text2num(z_co)
+		var/new_z = input("Please input desired Z coordinate.", name, z_co) as num
+		z_co = Clamp(new_z, 1, 9999)
 		return
 	if(href_list["send"])
-		telesend()
+		sending = 1
+		teleport(usr)
 		return
 	if(href_list["receive"])
-		telereceive()
+		sending = 0
+		teleport(usr)
 		return
 	if(href_list["recal"])
 		teles_left = rand(9,12)
 		x_off = rand(-10,10)
 		y_off = rand(-10,10)
-		for(var/obj/machinery/telepad/E in machines)
-			var/L = get_turf(E)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-			s.set_up(5, 1, L)
-			s.start()
-		usr << "\blue Calibration successful."
+		sparks()
+		usr << "<span class = 'caution'> Calibration successful.</span>"
 		return
