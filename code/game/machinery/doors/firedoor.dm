@@ -269,3 +269,8 @@
 /obj/machinery/door/firedoor/multi_tile
 	icon = 'icons/obj/doors/DoorHazard2x1.dmi'
 	width = 2
+
+
+/obj/machinery/door/firedoor/multi_tile/triple
+	icon = 'icons/obj/doors/DoorHazard3x1.dmi'
+	width = 3
