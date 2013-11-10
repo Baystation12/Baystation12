@@ -67,7 +67,7 @@
 	else
 		return
 /obj/machinery/computer/telescience/proc/telefail()
-	if(prob(95))
+	if(prob(50))
 		sparks()
 		for(var/mob/O in hearers(src, null))
 			O.show_message("\red The telepad weakly fizzles.", 2)
