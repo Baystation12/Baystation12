@@ -121,6 +121,7 @@
 
 		return
 
+/*
 	pulse(var/radio = 0)
 		if(istype(src.loc, /obj/machinery/door/airlock) && src.airlock_wire && src.wires)
 			var/obj/machinery/door/airlock/A = src.loc
@@ -130,7 +131,7 @@
 		else
 			..(radio)
 		return 1
-
+*/
 	receive_signal(datum/signal/signal)
 		if( !receiving || !signal )
 			return 0

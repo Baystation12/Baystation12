@@ -45,12 +45,13 @@
 	var/shut_up = 1 //Stop spouting those godawful pitches!
 	var/extended_inventory = 0 //can we access the hidden inventory?
 	var/panel_open = 0 //Hacking that vending machine. Gonna get a free candy bar.
-	var/wires = 15
 	var/obj/item/weapon/coin/coin
 	var/const/WIRE_EXTEND = 1
 	var/const/WIRE_SCANID = 2
 	var/const/WIRE_SHOCK = 3
 	var/const/WIRE_SHOOTINV = 4
+	var/datum/wires/vending/wires = null
+	var/scan_id = 1
 
 	var/obj/machinery/account_database/linked_db
 	var/datum/money_account/linked_account
@@ -286,35 +287,18 @@
 		dat += "</TT>"
 
 	if(panel_open)
-		var/list/vendwires = list(
-			"Violet" = 1,
-			"Orange" = 2,
-			"Goldenrod" = 3,
-			"Green" = 4,
-		)
-		dat += "<br><hr><br><B>Access Panel</B><br>"
-		for(var/wiredesc in vendwires)
-			var/is_uncut = src.wires & APCWireColorToFlag[vendwires[wiredesc]]
-			dat += "[wiredesc] wire: "
-			if(!is_uncut)
-				dat += "<a href='?src=\ref[src];cutwire=[vendwires[wiredesc]]'>Mend</a>"
-			else
-				dat += "<a href='?src=\ref[src];cutwire=[vendwires[wiredesc]]'>Cut</a> "
-				dat += "<a href='?src=\ref[src];pulsewire=[vendwires[wiredesc]]'>Pulse</a> "
-			dat += "<br>"
-
-		dat += "<br>"
-		dat += "The orange light is [(src.seconds_electrified == 0) ? "off" : "on"].<BR>"
-		dat += "The red light is [src.shoot_inventory ? "off" : "blinking"].<BR>"
-		dat += "The green light is [src.extended_inventory ? "on" : "off"].<BR>"
-		dat += "The [(src.wires & WIRE_SCANID) ? "purple" : "yellow"] light is on.<BR>"
+		dat += wires()
 
 		if (product_slogans != "")
 			dat += "The speaker switch is [src.shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
 
 	user << browse(dat, "window=vending")
 	onclose(user, "")
-	return
+
+// returns the wire panel text
+/obj/machinery/vending/proc/wires()
+	return "<BR>" + wires.GetInteractWindow(0, 0)
+
 
 /obj/machinery/vending/Topic(href, href_list)
 	if(stat & (BROKEN|NOPOWER))
@@ -369,27 +353,6 @@
 			src.currently_vending = null
 			src.updateUsrDialog()
 			return
-
-		else if ((href_list["cutwire"]) && (src.panel_open))
-			var/twire = text2num(href_list["cutwire"])
-			if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
-				usr << "You need wirecutters!"
-				return
-			if (src.isWireColorCut(twire))
-				src.mend(twire)
-			else
-				src.cut(twire)
-
-		else if ((href_list["pulsewire"]) && (src.panel_open))
-			var/twire = text2num(href_list["pulsewire"])
-			if (!istype(usr.get_active_hand(), /obj/item/device/multitool))
-				usr << "You need a multitool!"
-				return
-			if (src.isWireColorCut(twire))
-				usr << "You can't pulse a cut wire."
-				return
-			else
-				src.pulse(twire)
 
 		else if ((href_list["togglevoice"]) && (src.panel_open))
 			src.shut_up = !src.shut_up
@@ -532,49 +495,6 @@
 	src.visible_message("\red <b>[src] launches [throw_item.name] at [target.name]!</b>")
 	return 1
 
-/obj/machinery/vending/proc/isWireColorCut(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	return ((src.wires & wireFlag) == 0)
-
-/obj/machinery/vending/proc/isWireCut(var/wireIndex)
-	var/wireFlag = APCIndexToFlag[wireIndex]
-	return ((src.wires & wireFlag) == 0)
-
-/obj/machinery/vending/proc/cut(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	src.wires &= ~wireFlag
-	switch(wireIndex)
-		if(WIRE_EXTEND)
-			src.extended_inventory = 0
-		if(WIRE_SHOCK)
-			src.seconds_electrified = -1
-		if (WIRE_SHOOTINV)
-			if(!src.shoot_inventory)
-				src.shoot_inventory = 1
-
-
-/obj/machinery/vending/proc/mend(var/wireColor)
-	var/wireFlag = APCWireColorToFlag[wireColor]
-	var/wireIndex = APCWireColorToIndex[wireColor] //not used in this function
-	src.wires |= wireFlag
-	switch(wireIndex)
-//		if(WIRE_SCANID)
-		if(WIRE_SHOCK)
-			src.seconds_electrified = 0
-		if (WIRE_SHOOTINV)
-			src.shoot_inventory = 0
-
-/obj/machinery/vending/proc/pulse(var/wireColor)
-	var/wireIndex = APCWireColorToIndex[wireColor]
-	switch(wireIndex)
-		if(WIRE_EXTEND)
-			src.extended_inventory = !src.extended_inventory
-//		if (WIRE_SCANID)
-		if (WIRE_SHOCK)
-			src.seconds_electrified = 30
-		if (WIRE_SHOOTINV)
-			src.shoot_inventory = !src.shoot_inventory
 
 
 /obj/machinery/vending/proc/shock(mob/user, prb)

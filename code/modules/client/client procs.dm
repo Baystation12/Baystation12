@@ -289,6 +289,7 @@
 		'nano/css/shared.css',
 		'nano/css/icons.css',
 		'nano/templates/chem_dispenser.tmpl',
+		'nano/templates/apc.tmpl',
 		'nano/templates/cryo.tmpl',
 		'nano/templates/dna_modifier.tmpl',
 		'nano/templates/geoscanner.tmpl',
