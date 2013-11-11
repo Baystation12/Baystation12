@@ -127,7 +127,7 @@
 	icon_state = "id"
 	item_state = "card-id"
 	var/access = list()
-	var/registered_name = null // The name registered_name on the card
+	var/registered_name = "Unknown" // The name registered_name on the card
 	slot_flags = SLOT_ID
 
 	var/blood_type = "\[UNSET\]"
