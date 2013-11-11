@@ -207,7 +207,6 @@
 		..()
 		new	/obj/item/weapon/storage/firstaid/adv(src)
 		new /obj/item/weapon/gun/projectile/revolver/detective(src)
-		new /obj/item/weapon/storage/box/deathimp(src)
 		return
 
 
