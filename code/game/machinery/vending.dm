@@ -58,6 +58,7 @@
 
 /obj/machinery/vending/New()
 	..()
+	wires = new(src)
 	spawn(4)
 		src.slogan_list = text2list(src.product_slogans, ";")
 
@@ -297,7 +298,7 @@
 
 // returns the wire panel text
 /obj/machinery/vending/proc/wires()
-	return "<BR>" + wires.GetInteractWindow(0, 0)
+        return wires.GetInteractWindow()
 
 
 /obj/machinery/vending/Topic(href, href_list)
