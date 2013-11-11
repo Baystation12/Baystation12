@@ -19,6 +19,9 @@
 	var/list/dispensable_reagents = list("hydrogen","lithium","carbon","nitrogen","oxygen","fluorine",
 	"sodium","aluminum","silicon","phosphorus","sulfur","chlorine","potassium","iron",
 	"copper","mercury","radium","water","ethanol","sugar","sacid","tungsten")
+	var/list/hacked_reagents = list("plasma","toxin")
+	var/hack_message = "You disable the safety safeguards, enabling the \"Mad Scientist\" mode."
+	var/unhack_message = "You re-enable the safety safeguards, enabling the \"NT Standard\" mode."
 	var/list/broken_requirements = list()
 	var/broken_on_spawn = 0
 
@@ -179,11 +182,11 @@
 			var/obj/item/weapon/reagent_containers/glass/B = beaker
 			B.loc = loc
 			beaker = null
-			icon_state = "dispenser"
+			icon_state = initial(icon_state)
 	add_fingerprint(usr)
 	return 1 // update UIs attached to this object
 
-/obj/machinery/chem_dispenser/attackby(var/obj/item/weapon/reagent_containers/glass/B as obj, var/mob/user as mob)
+/obj/machinery/chem_dispenser/attackby(var/obj/item/weapon/reagent_containers/B as obj, var/mob/user as mob)
 	if(isrobot(user))
 		return
 
@@ -198,21 +201,33 @@
 			del(B)
 		return
 
-	if(!istype(B, /obj/item/weapon/reagent_containers/glass))
-		return
-
-
 	if(src.beaker)
 		user << "Something is already loaded into the machine."
 		return
-	if(istype(B, /obj/item/weapon/reagent_containers/glass||/obj/item/weapon/reagent_containers/food))
+
+	if(istype(B, /obj/item/weapon/reagent_containers/glass) || istype(B,/obj/item/weapon/reagent_containers/food))
 		src.beaker =  B
 		user.drop_item()
 		B.loc = src
 		user << "You set [B] on the machine."
 		nanomanager.update_uis(src) // update all UIs attached to src
-		icon_state = "dispenser2"
+		icon_state = "[icon_state]2"
 		return
+
+/obj/machinery/chem_dispenser/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+	..()
+	if(istype(B, /obj/item/device/multitool))
+		if(hackedcheck == 0)
+			user << hack_message
+			dispensable_reagents += hacked_reagents
+			hackedcheck = 1
+			return
+
+		else
+			user << unhack_message
+			dispensable_reagents -= hacked_reagents
+			hackedcheck = 0
+			return
 
 /obj/machinery/chem_dispenser/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
@@ -232,44 +247,22 @@
 	desc = "A drink fabricating machine, capable of producing many sugary drinks with just one touch."
 	energy = 100
 	max_energy = 100
-	dispensable_reagents = list("water","ice","coffee","tea","icetea","space_cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice")
+	dispensable_reagents = list("water","ice","coffee","tea","icetea","cola","spacemountainwind","dr_gibb","space_up","tonic","sodawater","lemon_lime","sugar","orangejuice","limejuice","tomatojuice" ,"watermelonjuice","berryjuice")
+	hack_message = "You change the mode from 'McNano' to 'Pizza King'."
+	unhack_message = "You change the mode from 'Pizza King' to 'McNano'."
+	hacked_reagents = list("thirteenloko")
 
-	/obj/machinery/chem_dispenser/soda/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
-		..()
-		if(istype(B, /obj/item/device/multitool))
-			if(hackedcheck == 0)
-				user << "You change the mode from 'McNano' to 'Pizza King'."
-				dispensable_reagents += list("thirteenloko")
-				hackedcheck = 1
-				return
-
-			else
-				user << "You change the mode from 'Pizza King' to 'McNano'."
-				dispensable_reagents -= list("thirteenloko")
-				hackedcheck = 0
-				return
 /obj/machinery/chem_dispenser/beer
 	icon_state = "booze_dispenser"
 	name = "booze dispenser"
 	energy = 100
 	max_energy = 100
 	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
-	dispensable_reagents = list("water","ice","coffee","tea","cream","lemon_lime","sugar","orangejuice","limejuice","cola","sodawater","tonic","beer","kahlua","whisky","wine","vodka","gin","rum","tequila","vermouth","cognac","ale","mead")
+	dispensable_reagents = list("ice","cream","beer","kahlua","whisky","wine","vodka","gin","rum","tequila","vermouth","cognac","ale","mead")
+	hack_message = "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
+	unhack_message = "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
+	hacked_reagents = list("goldschlager","patron", "nothing")
 
-	/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
-		..()
-		if(istype(B, /obj/item/device/multitool))
-			if(hackedcheck == 0)
-				user << "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
-				dispensable_reagents += list("goldschlager","patron","watermelonjuice","berryjuice")
-				hackedcheck = 1
-				return
-
-			else
-				user << "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
-				dispensable_reagents -= list("goldschlager","patron","watermelonjuice","berryjuice")
-				hackedcheck = 0
-				return
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
