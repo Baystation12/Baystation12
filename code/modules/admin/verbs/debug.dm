@@ -554,7 +554,35 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		"emergency response team",
 		"nanotrasen representative",
 		"nanotrasen officer",
-		"nanotrasen captain"
+		"nanotrasen captain",
+		"captain",
+		"hop",
+		"hos",
+		"cmo",
+		"rd",
+		"ce",
+		"warden",
+		"security officer",
+		"detective",
+		"doctor",
+		"chemist",
+		"virologist",
+		"psychiatrist",
+		"engineer",
+		"atmos-tech",
+		"scientist",
+		"xenobiologist",
+		"roboticist",
+		"geneticist",
+		"janitor",
+		"chef",
+		"bartender",
+		"botanist",
+		"qm",
+		"cargo",
+		"miner",
+		"librarian",
+		"agent"
 		)
 	var/dresscode = input("Select dress for [M]", "Robust quick dress shop") as null|anything in dresspacks
 	if (isnull(dresscode))
@@ -910,6 +938,561 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			W.assignment = "Admiral"
 			W.registered_name = M.real_name
 			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("captain")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/captain(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/captain(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/caphat(M), slot_head)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(M), slot_glasses)
+
+			var/obj/item/device/pda/captain/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Captain"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/gold/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = get_all_accesses()
+			W.assignment = "Captain"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+
+			var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
+			L.imp_in = M
+			L.implanted = 1
+			world << "<b>[M.real_name] is the captain!</b>"
+			var/datum/organ/external/affected = M.organs_by_name["head"]
+			affected.implants += L
+			L.part = affected
+			return 1
+		if("hop")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/head_of_personnel(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/hop(M), slot_l_ear)
+
+			var/obj/item/device/pda/heads/hop/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Head of Personnel"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/silver/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_security, access_sec_doors, access_brig, access_court, access_forensics_lockers,
+			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_heads,
+			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_construction, access_morgue,
+			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_qm, access_hydroponics, access_lawyer,
+			            access_theatre, access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
+			            access_clown, access_mime, access_hop, access_RC_announce, access_keycard_auth, access_gateway)
+			W.assignment = "Head of Personnel"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("hos")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/head_of_security(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/hos(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/sechud(M), slot_glasses)
+			M.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(M), slot_l_store)
+
+			var/obj/item/device/pda/heads/hos/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Head of Security"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/silver/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_security, access_sec_doors, access_brig, access_armory, access_court,
+			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
+			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
+			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway)
+			W.assignment = "Head of Security"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+
+			var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
+			L.imp_in = M
+			L.implanted = 1
+			var/datum/organ/external/affected = M.organs_by_name["head"]
+			affected.implants += L
+			L.part = affected
+			return 1
+		if("cmo")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chief_medical_officer(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/cmo(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/cmo(M), slot_l_ear)
+
+			var/obj/item/device/pda/heads/cmo/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Chief Medical Officer"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/silver/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_medical, access_morgue, access_genetics, access_heads,
+			access_chemistry, access_virology, access_cmo, access_surgery, access_RC_announce,
+			access_keycard_auth, access_sec_doors, access_psychiatrist)
+			W.assignment = "Chief Medical Officer"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("rd")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/rd(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/research_director(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat(M), slot_wear_suit)
+
+			var/obj/item/device/pda/heads/rd/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Research Director"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/silver/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
+			            access_tox_storage, access_teleporter, access_sec_doors,
+			            access_research, access_robotics, access_xenobiology, access_ai_upload,
+			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch)
+			W.assignment = "Research Director"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("ce")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chief_engineer(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat/white(M), slot_head)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(M), slot_belt)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(M), slot_gloves)
+
+			var/obj/item/device/pda/heads/ce/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Chief Engineer"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_l_store)
+
+			var/obj/item/weapon/card/id/silver/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
+			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
+			            access_heads, access_construction, access_sec_doors,
+			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
+			W.assignment = "Chief Engineer"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("warden")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/warden(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/sechud(M), slot_glasses)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(M), slot_l_ear)
+
+			var/obj/item/device/pda/warden/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Warden"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_l_store)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels)
+			W.assignment = "Warden"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("security officer")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/security(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/weapon/handcuffs(M), slot_r_store)
+			M.equip_to_slot_or_del(new /obj/item/device/flash(M), slot_l_store)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(M), slot_l_ear)
+
+			var/obj/item/device/pda/security/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Security Officer"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_l_store)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels)
+			W.assignment = "Security Officer"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("detective")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/det(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/det_suit(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/det_hat(M), slot_head)
+			M.equip_to_slot_or_del(new /obj/item/device/detective_scanner(M), slot_r_hand)
+
+			var/obj/item/device/pda/detective/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Detective"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
+			W.assignment = "Detective"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("doctor")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(M), slot_shoes)
+
+			var/obj/item/device/pda/medical/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Medical Doctor"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_medical, access_morgue, access_surgery)
+			W.assignment = "Medical Doctor"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("chemist")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chemist(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/chemist(M), slot_wear_suit)
+
+			var/obj/item/device/pda/chemist/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Chemist"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_medical, access_chemistry)
+			W.assignment = "Chemist"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("virologist")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/virologist(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/mask/surgical(M), slot_wear_mask)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/virologist(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(M), slot_l_ear)
+
+			var/obj/item/device/pda/viro/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Virologist"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_medical, access_virology)
+			W.assignment = "Virologist"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("psychiatrist")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/medical(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_med(M), slot_l_ear)
+
+			var/obj/item/device/pda/medical/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Psychiatrist"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_medical, access_psychiatrist)
+			W.assignment = "Psychiatrist"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("engineer")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_eng(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/engineer(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/orange(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(M), slot_belt)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat(M), slot_head)
+
+			var/obj/item/device/pda/engineering/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Station Egnineer"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_l_store)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction)
+			W.assignment = "Station Engineer"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("atmos-tech")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_eng(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/atmospheric_technician(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/atmostech/(M), slot_belt)
+
+			var/obj/item/device/pda/atmos/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Atmospheric Technician"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_l_store)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction)
+			W.assignment = "Atmospheric Technician"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("scientist")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sci(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/scientist(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/science(M), slot_wear_suit)
+
+			var/obj/item/device/pda/toxins/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Scientist"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
+			W.assignment = "Scientist"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("xenobiologist")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sci(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/scientist(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/science(M), slot_wear_suit)
+
+			var/obj/item/device/pda/toxins/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Xenobiologist"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_research, access_xenobiology)
+			W.assignment = "Xenobiologist"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("roboticist")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sci(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/roboticist(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat(M), slot_wear_suit)
+
+			var/obj/item/device/pda/roboticist/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Roboticist"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_robotics, access_tech_storage, access_morgue, access_research)
+			W.assignment = "Roboticist"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("geneticist")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_medsci(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/geneticist(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/white(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/labcoat/genetics(M), slot_wear_suit)
+
+			var/obj/item/device/pda/geneticist/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Geneticist"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_medical, access_morgue, access_genetics, access_research)
+			W.assignment = "Geneticist"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("janitor")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/janitor(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
+
+			var/obj/item/device/pda/janitor/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Janitor"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_janitor, access_maint_tunnels)
+			W.assignment = "Janitor"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("chef")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chef(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/chef(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/chefhat(M), slot_head)
+
+			var/obj/item/device/pda/chef/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Chef"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_kitchen)
+			W.assignment = "Chef"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("bartender")
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/armor/vest(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/bartender(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
+
+			var/obj/item/device/pda/bar/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Bartender"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_bar)
+			W.assignment = "Bartender"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("botanist")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/hydroponics(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/botanic_leather(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/apron(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/device/analyzer/plant_analyzer(M), slot_s_store)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
+
+			var/obj/item/device/pda/botanist/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Botanist"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_hydroponics, access_morgue)
+			W.assignment = "Botanist"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("qm")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cargo(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/cargo(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(M), slot_glasses)
+
+			var/obj/item/device/pda/cargo/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Quartermastert"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mint, access_mining, access_mining_station)
+			W.assignment = "Quartermaster"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("cargo")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cargo(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/cargotech(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
+
+			var/obj/item/device/pda/cargo/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Cargo Technician"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
+			W.assignment = "Cargo Technician"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("miner")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/miner(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cargo(M), slot_l_ear)
+
+			var/obj/item/device/pda/shaftminer/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Shaft Miner"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_mining, access_mint, access_mining_station, access_mailsorting)
+			W.assignment = "Shaft Miner"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("librarian")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/red(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
+
+			var/obj/item/device/pda/librarian/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Librariant"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_library)
+			W.assignment = "Librarian"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if("agent")
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(M), slot_l_ear)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/internalaffairs(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/internalaffairs(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/brown(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/big(M), slot_glasses)
+
+			var/obj/item/device/pda/lawyer/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Internal Affairs Agent"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/silver/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_lawyer, access_court, access_sec_doors)
+			W.assignment = "Internal Affairs Agent"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
+
+			var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
+			L.imp_in = M
+			L.implanted = 1
+			var/datum/organ/external/affected = M.organs_by_name["head"]
+			affected.implants += L
+			L.part = affected
+
 
 	M.regenerate_icons()
 

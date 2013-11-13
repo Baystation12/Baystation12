@@ -39,4 +39,33 @@ proc/load_alienwhitelist()
 
 	return 0
 
+client/proc/get_whitelist()
+	set category = "Admin"
+	set name = "Check Whitelist"
+	if(!check_rights(R_ADMIN))	return
+
+	var/path = "data/whitelist.txt"
+	if( fexists(path) )
+		src << run( file(path) )
+	else
+		src << "<font color='red'>Error: get_whitelist(): File not found/Invalid path([path]).</font>"
+		return
+	feedback_add_details("admin_verb","GWL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	return
+
+
+/client/proc/add_to_whitelist()
+	set category = "Admin"
+	set name = "Add To Whitelist"
+	if(!check_rights(R_ADMIN))	return
+
+	var/path = "data/whitelist.txt"
+	var/player = input("Input player byound key", "\n") as text
+	if(fexists(path))
+		text2file(player,path)
+		load_whitelist()
+	else
+		src << "<font color='red'>Error: get_whitelist(): File not found/Invalid path([path]).</font>"
+	return
+
 #undef WHITELISTFILE
