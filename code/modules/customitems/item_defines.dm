@@ -20,7 +20,17 @@
 	item_state = "hairflowerp"
 	flags = FPRINT|TABLEPASS
 
-
+/obj/item/clothing/under/fluff/WornTurtleneck // DaveTheHeadcrab: Makkota Atani
+	name = "Worn Combat Turtleneck"
+	desc = "A worn out turtleneck with 'J.C. NSS Regnare' stitched on the inside of the collar. The tag reveals it to be 99% NanoCotton."
+	icon= 'icons/obj/clothing/uniforms.dmi'
+	icon_state = "syndicate"
+	item_state = "bl_suit"
+	_color = "syndicate"
+	has_sensor = 1 // Jumpsuit has no sensor by default
+	displays_id = 0 // Purely astetic, the ID does not show up on the player sprite when equipped. Examining still reveals it.
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0) // Standard Security jumpsuit stats
+	siemens_coefficient = 0.
 
 //////////////////////////////////
 ////////// Fluff Items ///////////

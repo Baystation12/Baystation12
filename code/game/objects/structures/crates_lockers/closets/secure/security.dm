@@ -199,14 +199,30 @@
 		new /obj/item/clothing/under/rank/security/corp(src)
 		return
 
-/obj/structure/closet/secure_closet/security/blueshield
+/obj/structure/closet/secure_closet/blueshield
 	name = "Blueshield Locker"
 	req_access = list(access_blueshield)
+	icon_state = "bssecure1"
+	icon_closed = "bssecure"
+	icon_locked = "bssecure1"
+	icon_opened = "bssecureopen"
+	icon_broken = "bssecurebroken"
+	icon_off = "bssecureoff"
 
 	New()
 		..()
+		sleep(2)
 		new	/obj/item/weapon/storage/firstaid/adv(src)
 		new /obj/item/weapon/gun/projectile/revolver/detective(src)
+		new /obj/item/weapon/storage/belt/security(src)
+		new /obj/item/weapon/grenade/flashbang(src)
+		new /obj/item/weapon/melee/baton(src)
+		new /obj/item/weapon/gun/energy/taser(src)
+		new /obj/item/clothing/tie/storage/black_vest(src)
+		new /obj/item/clothing/glasses/sunglasses(src)
+		new /obj/item/clothing/under/rank/centcom_officer(src)
+		new /obj/item/device/flash(src)
+		new /obj/item/weapon/handcuffs(src)
 		return
 
 
