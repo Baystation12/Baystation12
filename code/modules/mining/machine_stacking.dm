@@ -102,9 +102,11 @@
 
 
 /obj/machinery/mineral/stacking_machine/process()
-	var/obj/item/stack/sheet/O
-	while (locate(/obj/item/stack/sheet, input.loc))
-		O = locate(/obj/item/stack/sheet, input.loc)
+	var/obj/item/O
+	while (locate(/obj/item, input.loc))
+		O = locate(/obj/item, input.loc)
 		if(istype(O,/obj/item/stack/sheet))
 			process_sheet(O)
+		else
+			O.loc = src.output.loc
 	return
