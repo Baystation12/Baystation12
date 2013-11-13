@@ -3722,7 +3722,7 @@
 "btD" = (/obj/structure/sign/redcross,/turf/simulated/wall/r_wall,/area/medical/chemistry)
 "btE" = (/obj/structure/sign/securearea,/turf/simulated/wall,/area/medical/chemistry)
 "btF" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/glass_medical{id_tag = null; name = "Chemistry Lab"; req_access_txt = "5; 33"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/floor{icon_state = "white"},/area/medical/chemistry)
-"btG" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/turf/simulated/floor/plating,/area/medical/chemistry)
+"btG" = (/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/obj/machinery/smartfridge/chemistry,/turf/simulated/floor/plating,/area/medical/chemistry)
 "btH" = (/obj/structure/table/reinforced,/obj/machinery/atmospherics/pipe/simple/supply/hidden,/obj/machinery/door/firedoor/border_only{dir = 1; name = "Firelock North"},/obj/machinery/door/window/southleft{dir = 1; name = "Chemistry Desk"; req_access_txt = "33"},/obj/structure/disposalpipe/segment{dir = 2; icon_state = "pipe-c"},/turf/simulated/floor/plating,/area/medical/chemistry)
 "btI" = (/obj/structure/stool/bed/roller,/turf/simulated/floor{icon_state = "white"},/area/medical/medbay)
 "btJ" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor{icon_state = "white"},/area/medical/medbay)
