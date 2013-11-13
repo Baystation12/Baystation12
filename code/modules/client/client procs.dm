@@ -253,6 +253,7 @@
 		'nano/templates/cryo.tmpl',
 		'nano/templates/geoscanner.tmpl',
 		'nano/templates/dna_modifier.tmpl',
+		'nano/templates/telescience_console.tmpl',
 		'nano/images/uiBackground.png',
 		'nano/images/uiIcons16.png',
 		'nano/images/uiIcons24.png',

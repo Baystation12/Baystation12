@@ -9,9 +9,9 @@
 	var/teles_left	// How many teleports left until it becomes uncalibrated
 	var/x_off	// X offset
 	var/y_off	// Y offset
-	var/x_co	// X coordinate
-	var/y_co	// Y coordinate
-	var/z_co	// Z coordinate
+	var/x_co = 1	// X coordinate
+	var/y_co = 1	// Y coordinate
+	var/z_co = 1	// Z coordinate
 
 /obj/machinery/computer/telescience/New()
 	..()
@@ -35,29 +35,51 @@
 			icon_state = initial(icon_state)
 			stat &= ~NOPOWER
 
+ /**
+  * The ui_interact proc is used to open and update Nano UIs
+  * If ui_interact is not used then the UI will not update correctly
+  * ui_interact is currently defined for /atom/movable
+  *
+  * @param user /mob The mob who is interacting with this ui
+  * @param ui_key string A string key to use for this ui. Allows for multiple unique uis on one obj/mob (defaut value "main")
+  *
+  * @return nothing
+  */
+/obj/machinery/computer/telescience/ui_interact(mob/user, ui_key = "main")
+	if(stat & (BROKEN|NOPOWER)) return
+	if(user.stat || user.restrained()) return
+
+	// this is the data which will be sent to the ui
+	var/data[0]
+	data["coordx"] = x_co
+	data["coordy"] = y_co
+	data["coordz"] = z_co
+
+	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
+	if (!ui)
+		// the ui does not exist, so we'll create a new one
+		ui = new(user, src, ui_key, "telescience_console.tmpl", name, 380, 110)
+		// When the UI is first opened this is the data it will use
+		ui.set_initial_data(data)
+		ui.open()
+	else
+		// The UI is already open so push the new data to it
+		ui.push_data(data)
+		return
+
 /obj/machinery/computer/telescience/attack_paw(mob/user)
 	user << "You are too primitive to use this computer."
 	return
 
 /obj/machinery/computer/telescience/attack_ai(mob/user)
-	src.attack_hand(user)
+	return src.attack_hand(user)
 
-/obj/machinery/computer/telescience/attack_hand(mob/user)
-	if(..())
+/obj/machinery/computer/telescience/attack_hand(mob/user as mob)
+	if(stat & BROKEN)
 		return
-	var/t = ""
-	t += "<A href='?src=\ref[src];setx=1'>Set X</A>"
-	t += "<A href='?src=\ref[src];sety=1'>Set Y</A>"
-	t += "<A href='?src=\ref[src];setz=1'>Set Z</A>"
-	t += "<BR><BR>Current set coordinates:"
-	t += "([x_co], [y_co], [z_co])"
-	t += "<BR><BR><A href='?src=\ref[src];send=1'>Send</A>"
-	t += " <A href='?src=\ref[src];receive=1'>Receive</A>"
-	t += "<BR><BR><A href='?src=\ref[src];recal=1'>Recalibrate</A>"
-	var/datum/browser/popup = new(user, "telesci", name, 640, 480)
-	popup.set_content(t)
-	popup.open()
-	return
+
+	ui_interact(user)
+
 /obj/machinery/computer/telescience/proc/sparks()
 	if(telepad)
 		var/L = get_turf(E)
@@ -66,6 +88,7 @@
 		s.start()
 	else
 		return
+
 /obj/machinery/computer/telescience/proc/telefail()
 	if(prob(50))
 		sparks()
@@ -156,7 +179,7 @@
 		s.set_up(5, 1, telepad)
 		s.start()
 		flick("pad-beam", telepad)
-		user << "<span class = 'caution'> Teleport successful.</span>"
+		user << "<span class='caution'>Teleport successful.</span>"
 		var/sparks = get_turf(target)
 		var/datum/effect/effect/system/spark_spread/y = new /datum/effect/effect/system/spark_spread
 		y.set_up(5, 1, sparks)
@@ -174,20 +197,7 @@
 
 /obj/machinery/computer/telescience/proc/teleport(mob/user)
 	if(x_co == null || y_co == null || z_co == null)
-		user << "<span class = 'caution'>  Error: set coordinates.</span>"
-		return
-	if(x_co < 1 || x_co > 255)
-		telefail()
-		user << "<span class = 'caution'>  Error: X is less than 1 or greater than 255.</span>"
-		return
-	if(y_co < 1 || y_co > 255)
-		telefail()
-		user << "<span class = 'caution'>  Error: Y is less than 1 or greater than 255.</span>"
-		return
-	if(z_co == 2 || z_co < 1 || z_co > 7)
-		telefail()
-		user << "<span class = 'caution'>  Error: Z is less than 1, greater than 7, or equal to 2.</span>"
-		return
+		user << "<span class='caution'>Error: coordinates not set.</span>"
 	if(teles_left > 0)
 		teles_left -= 1
 		doteleport(user)
@@ -197,32 +207,48 @@
 	return
 
 /obj/machinery/computer/telescience/Topic(href, href_list)
-	if(..())
-		return
+	if(stat & (NOPOWER|BROKEN))
+		return 0
+
 	if(href_list["setx"])
 		var/new_x = input("Please input desired X coordinate.", name, x_co) as num
-		x_co = Clamp(new_x, 1, 9999)
-		return
+		if(new_x < 1 || new_x > 255)
+			usr << "<span class='caution'>Error: Invalid X coordinate.</span>"
+		else
+			x_co = new_x
+		return 1
+
 	if(href_list["sety"])
 		var/new_y = input("Please input desired Y coordinate.", name, y_co) as num
-		y_co = Clamp(new_y, 1, 9999)
-		return
+		if(new_y < 1 || new_y > 255)
+			usr << "<span class='caution'>Error: Invalid Y coordinate.</span>"
+		else
+			y_co = new_y
+		return 1
+
 	if(href_list["setz"])
 		var/new_z = input("Please input desired Z coordinate.", name, z_co) as num
-		z_co = Clamp(new_z, 1, 9999)
-		return
+		if(new_z == 2 || new_z < 1 || new_z > 7)
+			usr << "<span class='caution'>Error: Invalid Z coordinate.</span>"
+		else
+			z_co = new_z
+		return 1
+
 	if(href_list["send"])
 		sending = 1
 		teleport(usr)
-		return
+		return 1
+
 	if(href_list["receive"])
 		sending = 0
 		teleport(usr)
-		return
+		return 1
+
 	if(href_list["recal"])
 		teles_left = rand(9,12)
 		x_off = rand(-10,10)
 		y_off = rand(-10,10)
 		sparks()
-		usr << "<span class = 'caution'> Calibration successful.</span>"
-		return
+		usr << "<span class='caution'>Calibration successful.</span>"
+		return 1
+	return 0
