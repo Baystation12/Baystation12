@@ -157,6 +157,14 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 /obj/fire/New(newLoc,fl)
 	..()
+	
+	if(!istype(loc, /turf))
+		del src
+
+	dir = pick(cardinal)
+	SetLuminosity(3)
+	firelevel = fl
+	air_master.active_hotspots.Add(src)
 
 /obj/fire/Del()
 	if (istype(loc, /turf/simulated))
