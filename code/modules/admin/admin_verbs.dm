@@ -33,6 +33,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/getserverlog,			/*allows us to fetch server logs (diary) for other days*/
 	/client/proc/get_whitelist, 			//Whitelist
 	/client/proc/add_to_whitelist,
+	/client/proc/get_alienwhitelist,
+	/client/proc/add_to_alienwhitelist,
 	/client/proc/jumptocoord,			/*we ghost and jump to a coordinate*/
 	/client/proc/Getmob,				/*teleports a mob to our location*/
 	/client/proc/Getkey,				/*teleports a mob with a certain ckey to our location*/
@@ -184,7 +186,9 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/play_sound,
 	/client/proc/play_server_sound,
 	/client/proc/get_whitelist, 			//Whitelist
+	/client/proc/get_alienwhitelist,
 	/client/proc/add_to_whitelist,
+	/client/proc/add_to_alienwhitelist,
 	/client/proc/roll_dices,
 	/client/proc/object_talk,
 	/client/proc/cmd_admin_dress,
