@@ -37,14 +37,8 @@
 		src.damage += amount
 
 	var/datum/organ/external/parent = owner.get_organ(parent_organ)
-	var/datum/organ/internal/eyes/E
-	var/datum/organ/internal/heart/H
 	if (!silent)
-		if(istype(E))
-			owner.custom_pain("Your eyes burn like mad!", 1)
-		if(istype(H))
-			owner.custom_pain("You feel a sudden, stabbing pain inside of your [parent.display_name]!", 1)
-		else owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
+		owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
 
 
 /datum/organ/internal/proc/emp_act(severity)

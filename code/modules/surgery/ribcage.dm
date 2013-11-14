@@ -303,38 +303,37 @@
 		var/datum/organ/external/chest/affected = target.get_organ("chest")
 		user.visible_message("\red [user]'s hand slips, getting mess and tearing the inside of [target]'s chest with \the [tool]!", \
 		"\red Your hand slips, getting mess and tearing the inside of [target]'s chest with \the [tool]!")
-		switch(tool)
-			if(/obj/item/stack/medical/advanced/bruise_pack)
-				if(heart.damage > 0)
-					heart.take_damage(2, 0)
-				if(liver.damage > 0)
-					liver.take_damage(2, 0)
-				if(kidney.damage > 0)
-					kidney.take_damage(2, 0)
-				if(lungs.damage > 0)
-					lungs.take_damage(2, 0)
-				target.adjustToxLoss(5)
-			if(/obj/item/stack/medical/bruise_pack/tajaran)
-				if(heart.damage > 0)
-					heart.take_damage(2, 0)
-				if(liver.damage > 0)
-					liver.take_damage(2, 0)
-				if(kidney.damage > 0)
-					kidney.take_damage(2, 0)
-				if(lungs.damage > 0)
-					lungs.take_damage(2, 0)
-				target.adjustToxLoss(7)
-			if(/obj/item/stack/medical/bruise_pack)
-				if(heart.damage > 0)
-					heart.take_damage(5, 0)
-				if(liver.damage > 0)
-					liver.take_damage(5, 0)
-				if(kidney.damage > 0)
-					kidney.take_damage(5, 0)
-				if(lungs.damage > 0)
-					lungs.take_damage(5, 0)
-				target.adjustToxLoss(10)
-				affected.createwound(CUT, 5)
+		if (istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
+			if(heart.damage > 0)
+				heart.take_damage(2, 0)
+			if(liver.damage > 0)
+				liver.take_damage(2, 0)
+			if(kidney.damage > 0)
+				kidney.take_damage(2, 0)
+			if(lungs.damage > 0)
+				lungs.take_damage(2, 0)
+			target.adjustToxLoss(5)
+		if (istype(tool, /obj/item/stack/medical/bruise_pack/tajaran))
+			if(heart.damage > 0)
+				heart.take_damage(2, 0)
+			if(liver.damage > 0)
+				liver.take_damage(2, 0)
+			if(kidney.damage > 0)
+				kidney.take_damage(2, 0)
+			if(lungs.damage > 0)
+				lungs.take_damage(2, 0)
+			target.adjustToxLoss(7)
+		if (istype(tool, /obj/item/stack/medical/bruise_pack))
+			if(heart.damage > 0)
+				heart.take_damage(5, 0)
+			if(liver.damage > 0)
+				liver.take_damage(5, 0)
+			if(kidney.damage > 0)
+				kidney.take_damage(5, 0)
+			if(lungs.damage > 0)
+				lungs.take_damage(5, 0)
+			target.adjustToxLoss(10)
+			affected.createwound(CUT, 5)
 
 /datum/surgery_step/ribcage/fix_chest_internal_robot //For artificial organs
 	allowed_tools = list(
@@ -348,32 +347,28 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/is_chest_organ_damaged = 0
+		var/datum/organ/internal/heart/heart = target.internal_organs["heart"]
 		var/datum/organ/external/chest/chest = target.get_organ("chest")
 		for(var/datum/organ/internal/I in chest.internal_organs) if(I.damage > 0)
 			is_chest_organ_damaged = 1
 			break
-		return ..() && is_chest_organ_damaged && target.op_stage.ribcage == 2
+		return ..() && is_chest_organ_damaged && heart.robotic == 2 && target.op_stage.ribcage == 2
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/internal/heart/heart = target.internal_organs["heart"]
 
 		if(heart.damage > 0)
-			if(heart.robotic == 2)
-				user.visible_message("[user] starts mending the mechanisms on [target]'s heart with \the [tool].", \
-				"You start mending the mechanisms on [target]'s heart with \the [tool]." )
-			else
-				user.visible_message("[user] cannot mend an organic heart with this!")
-				return
+			user.visible_message("[user] starts mending the mechanisms on [target]'s heart with \the [tool].", \
+			"You start mending the mechanisms on [target]'s heart with \the [tool]." )
 		target.custom_pain("The pain in your chest is living hell!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/internal/heart/heart = target.internal_organs["heart"]
 		if(heart.damage > 0)
-			if(heart.robotic == 2)
-				user.visible_message("\blue [user] repairs [target]'s heart with \the [tool].", \
-				"\blue You repair [target]'s heart with \the [tool]." )
-				heart.damage = 0
+			user.visible_message("\blue [user] repairs [target]'s heart with \the [tool].", \
+			"\blue You repair [target]'s heart with \the [tool]." )
+			heart.damage = 0
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/internal/heart/heart = target.internal_organs["heart"]
@@ -385,16 +380,17 @@
 //////////////////////////////////////////////////////////////////
 //						HEART SURGERY							//
 //////////////////////////////////////////////////////////////////
+// To be finished after some tests.
+// /datum/surgery_step/ribcage/heart/cut
+//	allowed_tools = list(
+//	/obj/item/weapon/scalpel = 100,		\
+//	/obj/item/weapon/kitchenknife = 75,	\
+//	/obj/item/weapon/shard = 50, 		\
+//	)
 
-/datum/surgery_step/ribcage/heart/cut
-	allowed_tools = list(
-	/obj/item/weapon/scalpel = 100,		\
-	/obj/item/weapon/kitchenknife = 75,	\
-	/obj/item/weapon/shard = 50, 		\
-	)
+//	min_duration = 30
+//	max_duration = 40
 
-	min_duration = 30
-	max_duration = 40
+//	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+//		return ..() && target.op_stage.ribcage == 2
 
-	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		return ..() && target.op_stage.ribcage == 2

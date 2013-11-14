@@ -354,35 +354,36 @@
 /obj/item/weapon/weldingtool/proc/eyecheck(mob/user as mob)
 	if(!iscarbon(user))	return 1
 	var/safety = user:eyecheck()
-	var/mob/living/carbon/human/H = user
-	var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
-	switch(safety)
-		if(1)
-			usr << "\red Your eyes sting a little."
-			E.damage += rand(1, 2)
-			if(E.damage > 12)
-				user.eye_blurry += rand(3,6)
-		if(0)
-			usr << "\red Your eyes burn."
-			E.damage += rand(2, 4)
-			if(E.damage > 10)
-				E.damage += rand(4,10)
-		if(-1)
-			usr << "\red Your thermals intensify the welder's glow. Your eyes itch and burn severely."
-			user.eye_blurry += rand(12,20)
-			E.damage += rand(12, 16)
-	if(E.damage > 10 && safety < 2)
-		user << "\red Your eyes are really starting to hurt. This can't be good for you!"
-	if (E.damage >= E.min_broken_damage)
-		user << "\red You go blind!"
-		user.sdisabilities |= BLIND
-	else if (E.damage >= E.min_bruised_damage)
-		user << "\red You go blind!"
-		user.eye_blind = 5
-		user.eye_blurry = 5
-		user.disabilities |= NEARSIGHTED
-		spawn(100)
-			user.disabilities &= ~NEARSIGHTED
+	if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+		switch(safety)
+			if(1)
+				usr << "\red Your eyes sting a little."
+				E.damage += rand(1, 2)
+				if(E.damage > 12)
+					user.eye_blurry += rand(3,6)
+			if(0)
+				usr << "\red Your eyes burn."
+				E.damage += rand(2, 4)
+				if(E.damage > 10)
+					E.damage += rand(4,10)
+			if(-1)
+				usr << "\red Your thermals intensify the welder's glow. Your eyes itch and burn severely."
+				user.eye_blurry += rand(12,20)
+				E.damage += rand(12, 16)
+		if(E.damage > 10 && safety < 2)
+			user << "\red Your eyes are really starting to hurt. This can't be good for you!"
+		if (E.damage >= E.min_broken_damage)
+			user << "\red You go blind!"
+			user.sdisabilities |= BLIND
+		else if (E.damage >= E.min_bruised_damage)
+			user << "\red You go blind!"
+			user.eye_blind = 5
+			user.eye_blurry = 5
+			user.disabilities |= NEARSIGHTED
+			spawn(100)
+				user.disabilities &= ~NEARSIGHTED
 	return
 
 
