@@ -32,23 +32,47 @@
 
 /datum/organ/internal/proc/take_damage(amount, var/silent=0)
 	if(src.robotic == 2)
-		src.damage += amount * 0.8
-	src.damage += amount
+		src.damage += (amount * 0.8)
+	else
+		src.damage += amount
 
 	var/datum/organ/external/parent = owner.get_organ(parent_organ)
+	var/datum/organ/internal/eyes/E
+	var/datum/organ/internal/heart/H
 	if (!silent)
-		owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
+		if(istype(E))
+			owner.custom_pain("Your eyes burn like mad!", 1)
+		if(istype(H))
+			owner.custom_pain("You feel a sudden, stabbing pain inside of your [parent.display_name]!", 1)
+		else owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
 
 
 /datum/organ/internal/proc/emp_act(severity)
-	if(src.robotic == 1)
-		take_damage(15, 0)
-		if(severity == 2)
-			take_damage(5, 0)
-	if(src.robotic == 2)
-		take_damage(30, 0)
-		if(severity == 2)
-			take_damage(15, 0)
+	switch(robotic)
+		if(0)
+			return
+		if(1)
+			switch (severity)
+				if (1.0)
+					take_damage(20,0)
+					return
+				if (2.0)
+					take_damage(7,0)
+					return
+				if(3.0)
+					take_damage(3,0)
+					return
+		if(2)
+			switch (severity)
+				if (1.0)
+					take_damage(40,0)
+					return
+				if (2.0)
+					take_damage(15,0)
+					return
+				if(3.0)
+					take_damage(10,0)
+					return
 
 /datum/organ/internal/proc/mechanize() //Being used to make robutt hearts, etc
 	robotic = 2
@@ -130,9 +154,7 @@
 	parent_organ = "head"
 
 	process() //Eye damage replaces the old eye_stat var.
-		if(damage > min_bruised_damage)
-			if(damage > min_broken_damage)
-				owner.client.screen += global_hud.darkMask
-				owner.eye_blind = 20
-			else
-				owner.client.screen += global_hud.vimpaired
+		if(is_bruised())
+			owner.eye_blurry = 20
+		if(is_broken())
+			owner.eye_blind = 20
