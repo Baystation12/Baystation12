@@ -2,8 +2,9 @@
 	icon = 'icons/obj/barsigns.dmi'
 	icon_state = "empty"
 	anchored = 1
+	var/global/bar_sing_global = pick("pinkflamingo", "magmasea", "limbo", "rustyaxe", "armokbar", "brokendrum", "meadbay", "thedamnwall", "thecavern", "cindikate", "theorchard", "thesaucyclown", "theclownshead")
 	New()
-		ChangeSign(pick("pinkflamingo", "magmasea", "limbo", "rustyaxe", "armokbar", "brokendrum", "meadbay", "thedamnwall", "thecavern", "cindikate", "theorchard", "thesaucyclown", "theclownshead"))
+		ChangeSign(bar_sing_global)
 		return
 	proc/ChangeSign(var/Text)
 		src.icon_state = "[Text]"
