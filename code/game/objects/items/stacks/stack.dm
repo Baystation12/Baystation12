@@ -17,7 +17,7 @@
 
 /obj/item/stack/New(var/loc, var/amount=null)
 	..()
-	if (amount)
+	if (amount!=null)	//Allow for stacks with the amount=0
 		src.amount=amount
 	return
 
