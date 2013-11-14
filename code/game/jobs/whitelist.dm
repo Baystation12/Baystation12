@@ -40,8 +40,8 @@ proc/load_alienwhitelist()
 	return 0
 
 client/proc/get_alienwhitelist()
-	set category = "Admin"
-	set name = "Check Alienwhitelist"
+	set category = "Server"
+	set name = "Whitelist(Alien): Check"
 	if(!check_rights(R_ADMIN))	return
 
 	var/path = "config/alienwhitelist.txt"
@@ -53,12 +53,14 @@ client/proc/get_alienwhitelist()
 	return
 
 /client/proc/add_to_alienwhitelist()
-	set category = "Admin"
-	set name = "Add To Alienwhitelist"
+	set category = "Server"
+	set name = "Whitelist(Alien): Add"
 	if(!check_rights(R_ADMIN))	return
 
 	var/path = "config/alienwhitelist.txt"
-	var/player = input("Input player byound key and alien species, e.g. some_user - Species", "\n") as text
+	var/player = ckey(input("Input player byound key and alien species, e.g. some_user - Species", "\n") as text)
+	if(length(player) == 0)
+		return
 	if(fexists(path))
 		text2file(player,path)
 		load_alienwhitelist()
@@ -67,8 +69,8 @@ client/proc/get_alienwhitelist()
 	return
 
 client/proc/get_whitelist()
-	set category = "Admin"
-	set name = "Check Whitelist"
+	set category = "Server"
+	set name = "Whitelist: Check"
 	if(!check_rights(R_ADMIN))	return
 
 	var/path = "data/whitelist.txt"
@@ -82,12 +84,14 @@ client/proc/get_whitelist()
 
 
 /client/proc/add_to_whitelist()
-	set category = "Admin"
-	set name = "Add To Whitelist"
+	set category = "Server"
+	set name = "Whitelist: Add"
 	if(!check_rights(R_ADMIN))	return
 
 	var/path = "data/whitelist.txt"
-	var/player = input("Input player byound key", "\n") as text
+	var/player = ckey(input("Input player byound key", "\n") as text)
+	if(length(player) == 0)
+		return
 	if(fexists(path))
 		text2file(player,path)
 		load_whitelist()
