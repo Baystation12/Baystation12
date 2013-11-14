@@ -1069,7 +1069,6 @@ datum
 				M.sdisabilities = 0
 				M.eye_blurry = 0
 				M.eye_blind = 0
-				M.eye_stat = 0
 				M.SetWeakened(0)
 				M.SetStunned(0)
 				M.SetParalysis(0)
@@ -1189,9 +1188,31 @@ datum
 				if(!M) M = holder.my_atom
 				M.eye_blurry = max(M.eye_blurry-5 , 0)
 				M.eye_blind = max(M.eye_blind-5 , 0)
-				M.disabilities &= ~NEARSIGHTED
-				M.eye_stat = max(M.eye_stat-5, 0)
-//				M.sdisabilities &= ~1		Replaced by eye surgery
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+					if(istype(E))
+						if(E.damage > 0)
+							E.damage -= 1
+				..()
+				return
+
+		peridaxon
+			name = "Peridaxon"
+			id = "peridaxon"
+			description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
+			reagent_state = LIQUID
+			color = "#C8A5DC" // rgb: 200, 165, 220
+			overdose = 10
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/external/chest/C = H.get_organ("chest")
+					for(var/datum/organ/internal/I in C.internal_organs)
+						if(I.damage > 0)
+							I.damage -= 0.20
 				..()
 				return
 
@@ -1661,7 +1682,7 @@ datum
 					if(15 to 25)
 						M.drowsyness  = max(M.drowsyness, 20)
 					if(25 to INFINITY)
-						M.Paralyse(20)
+						M.Weaken(20)
 						M.drowsyness  = max(M.drowsyness, 30)
 				data++
 				..()
@@ -1673,9 +1694,10 @@ datum
 			description = "A powerful sedative."
 			reagent_state = SOLID
 			color = "#000067" // rgb: 0, 0, 103
-			toxpwr = 0
+			toxpwr = 1
 			custom_metabolism = 0.1 //Default 0.2
-			overdose = REAGENTS_OVERDOSE/2
+			overdose = 15
+			overdose_dam = 5
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1685,11 +1707,50 @@ datum
 					if(1)
 						M.confused += 2
 						M.drowsyness += 2
-					if(2 to 50)
+					if(2 to 199)
+						M.Weaken(30)
+					if(200 to INFINITY)
 						M.sleeping += 1
-					if(51 to INFINITY)
-						M.sleeping += 1
-						M.adjustToxLoss((data - 50)*REM)
+				..()
+				return
+
+		toxin/potassium_chloride
+			name = "Potassium Chloride"
+			id = "potassium_chloride"
+			description = "A delicious salt that stops the heart when injected into cardiac muscle."
+			reagent_state = SOLID
+			color = "#FFFFFF" // rgb: 255,255,255
+			toxpwr = 0
+			overdose = 30
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				var/mob/living/carbon/human/H = M
+				if(H.stat != 1)
+					if (volume >= overdose)
+						if(H.losebreath >= 10)
+							H.losebreath = max(10, H.losebreath-10)
+						H.adjustOxyLoss(2)
+						H.Weaken(10)
+				..()
+				return
+
+		toxin/potassium_chlorophoride
+			name = "Potassium Chlorophoride"
+			id = "potassium_chlorophoride"
+			description = "A specific chemical based on Potassium Chloride to stop the heart for surgery. Not safe to eat!"
+			reagent_state = SOLID
+			color = "#FFFFFF" // rgb: 255,255,255
+			toxpwr = 3
+			overdose = 20
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					if(H.stat != 1)
+						if(H.losebreath >= 10)
+							H.losebreath = max(10, M.losebreath-10)
+						H.adjustOxyLoss(2)
+						H.Weaken(10)
 				..()
 				return
 
@@ -2347,7 +2408,7 @@ datum
 			id = "grapejuice"
 			description = "It's grrrrrape!"
 			color = "#863333" // rgb: 134, 51, 51
-		
+
 		drink/grapesoda
 			name = "Grape Soda"
 			id = "grapesoda"
@@ -3054,29 +3115,29 @@ datum
 				switch(data)
 					if(1 to 25)
 						if (!M.stuttering) M.stuttering = 1
-						M.make_dizzy(10)
+						M.make_dizzy(1)
 						M.hallucination = max(M.hallucination, 3)
 						if(prob(1)) M.emote(pick("twitch","giggle"))
 					if(25 to 75)
 						if (!M.stuttering) M.stuttering = 1
 						M.hallucination = max(M.hallucination, 10)
-						M.make_jittery(20)
-						M.make_dizzy(20)
+						M.make_jittery(2)
+						M.make_dizzy(2)
 						M.druggy = max(M.druggy, 45)
 						if(prob(5)) M.emote(pick("twitch","giggle"))
 					if (75 to 150)
 						if (!M.stuttering) M.stuttering = 1
 						M.hallucination = max(M.hallucination, 60)
-						M.make_jittery(40)
-						M.make_dizzy(40)
+						M.make_jittery(4)
+						M.make_dizzy(4)
 						M.druggy = max(M.druggy, 60)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 						if(prob(30)) M.adjustToxLoss(2)
 					if (150 to 300)
 						if (!M.stuttering) M.stuttering = 1
 						M.hallucination = max(M.hallucination, 60)
-						M.make_jittery(40)
-						M.make_dizzy(40)
+						M.make_jittery(4)
+						M.make_dizzy(4)
 						M.druggy = max(M.druggy, 60)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 						if(prob(30)) M.adjustToxLoss(2)
