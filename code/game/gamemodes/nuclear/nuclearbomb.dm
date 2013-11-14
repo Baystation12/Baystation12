@@ -26,18 +26,6 @@ var/bomb_set
 	flags = FPRINT
 	use_power = 0
 
-	proc   //Bomb squad, go!
-		nukehack_win(mob/user as mob)
-			var/dat as text
-			dat += "<TT><B>Nuclear Fission Explosive</B><BR>\nNuclear Device Wires:</A><HR>"
-			for(var/wire in src.wires)
-				dat += text("[wire] Wire: <A href='?src=\ref[src];wire=[wire];act=wire'>[src.wires[wire] ? "Mend" : "Cut"]</A> <A href='?src=\ref[src];wire=[wire];act=pulse'>Pulse</A><BR>")
-
-			dat += text("<HR>The device is [src.timing ? "shaking!" : "still"]<BR>")
-			dat += text("The device is [src.safety ? "quiet" : "whirring"].<BR>")
-			dat += text("The lights are [src.lighthack ? "static" : "functional"].<BR>")
-			user << browse("<HTML><HEAD><TITLE>Bomb Defusion</TITLE></HEAD><BODY>[dat]</BODY></HTML>","window=nukebomb_hack")
-			onclose(user, "nukebomb_hack")
 
 
 /obj/machinery/nuclearbomb/New()
@@ -212,6 +200,17 @@ var/bomb_set
 		src.extended = 1
 	return
 
+obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
+	var/dat as text
+	dat += "<TT><B>Nuclear Fission Explosive</B><BR>\nNuclear Device Wires:</A><HR>"
+	for(var/wire in src.wires)
+		dat += text("[wire] Wire: <A href='?src=\ref[src];wire=[wire];act=wire'>[src.wires[wire] ? "Mend" : "Cut"]</A> <A href='?src=\ref[src];wire=[wire];act=pulse'>Pulse</A><BR>")
+	dat += text("<HR>The device is [src.timing ? "shaking!" : "still"]<BR>")
+	dat += text("The device is [src.safety ? "quiet" : "whirring"].<BR>")
+	dat += text("The lights are [src.lighthack ? "static" : "functional"].<BR>")
+	user << browse("<HTML><HEAD><TITLE>Bomb Defusion</TITLE></HEAD><BODY>[dat]</BODY></HTML>","window=nukebomb_hack")
+	onclose(user, "nukebomb_hack")
+
 /obj/machinery/nuclearbomb/verb/make_deployable()
 	set category = "Object"
 	set name = "Make Deployable"
@@ -245,7 +244,8 @@ var/bomb_set
 							src.lighthack = !src.lighthack
 							spawn(100) src.lighthack = !src.lighthack
 						if(src.timing_wire == temp_wire)
-							explode()
+							if(src.timing)
+								explode()
 						if(src.safety_wire == temp_wire)
 							src.safety = !src.safety
 							spawn(100) src.safety = !src.safety
@@ -262,7 +262,8 @@ var/bomb_set
 				else
 					wires[temp_wire] = !wires[temp_wire]
 					if(src.safety_wire == temp_wire)
-						explode()
+						if(src.timing)
+							explode()
 					if(src.timing_wire == temp_wire)
 						if(!src.lighthack)
 							if (src.icon_state == "nuclearbomb2")
