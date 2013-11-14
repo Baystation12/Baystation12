@@ -60,18 +60,18 @@
 	for (var/datum/medical_effect/M in side_effects)
 		if (!M) continue
 		var/strength_percent = sin((life_tick - M.start) / 2)
-		log_debug ("[src], tick [life_tick] : Processing [M],  Current phase: [strength_percent]")
+//		log_debug ("[src], tick [life_tick] : Processing [M],  Current phase: [strength_percent]")
 
 		// Only do anything if the effect is currently strong enough
 		if(strength_percent >= 0.4)
 			log_debug ("[src], tick [life_tick] : Active phase ; strength [M.strength]")
 			if (M.cure(src) || M.strength > 50)
-				log_debug ("[src], tick [life_tick] : [M] cured or reached end of lifecycle")
+//				log_debug ("[src], tick [life_tick] : [M] cured or reached end of lifecycle")
 				side_effects -= M
 				del(M)
 			else
 				if(life_tick % 45 == 0)
-					log_debug ("[src], tick [life_tick] : Activating [M] ")
+//					log_debug ("[src], tick [life_tick] : Activating [M] ")
 					M.on_life(src, strength_percent*M.strength)
 				// Effect slowly growing stronger
 				M.strength+=0.08

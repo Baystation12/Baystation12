@@ -1,7 +1,7 @@
 
 datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = -1, var/reason, var/job = "", var/rounds = 0, var/banckey = null)
 
-	if(!check_rights(R_BAN))	return
+	if(!check_rights(R_MOD,0) && !check_rights(R_BAN))	return
 
 	establish_db_connection()
 	if(!dbcon.IsConnected())

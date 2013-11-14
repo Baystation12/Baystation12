@@ -66,7 +66,7 @@ var/global/vox_tick = 1
 	C.registered_user = src
 	var/obj/item/weapon/storage/wallet/W = new(src)
 	W.handle_item_insertion(C)
-	spawn_money(rand(100,300)*5,W)
+	spawn_money(rand(50,150)*10,W)
 	equip_to_slot_or_del(W, slot_wear_id)
 
 	var/obj/item/weapon/implant/cortical/I = new(src)

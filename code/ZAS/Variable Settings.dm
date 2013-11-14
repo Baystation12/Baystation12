@@ -1,7 +1,7 @@
 var/global/vs_control/vsc = new
 
 /vs_control
-/*	var/fire_consuption_rate = 0.25
+	var/fire_consuption_rate = 0.25
 	var/fire_consuption_rate_NAME = "Fire - Air Consumption Ratio"
 	var/fire_consuption_rate_DESC = "Ratio of air removed and combusted per tick."
 
@@ -12,7 +12,7 @@ var/global/vs_control/vsc = new
 	var/fire_fuel_energy_release = 397000
 	var/fire_fuel_energy_release_NAME = "Fire - Fuel energy release"
 	var/fire_fuel_energy_release_DESC = "The energy in joule released when burning one mol of a burnable substance"
-*/
+
 
 	var/IgnitionLevel = 0.5
 	var/IgnitionLevel_DESC = "Determines point at which fire can ignite"
