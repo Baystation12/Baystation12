@@ -153,7 +153,7 @@
 	name = "pack of messa's tear seeds"
 	desc = "These seeds grow into a helpful herb called Messa's Tear, native to Ahdomai."
 	icon_state = "seed-mtear"
-	mypath = "/obj/item/seeds/shandseed"
+	mypath = "/obj/item/seeds/mtearseed"
 	species = "mtear"
 	plantname = "Messa's Tear"
 	productname = "/obj/item/stack/medical/ointment/tajaran"
