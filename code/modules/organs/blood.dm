@@ -60,7 +60,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 			if(heart.min_bruised_damage to heart.min_broken_damage)
 				blood_volume *= 0.6
 			if(heart.min_broken_damage to INFINITY)
-				blood_volume *= 0.4
+				blood_volume *= 0.3
 
 		//Effects of bloodloss
 		switch(blood_volume)
@@ -93,7 +93,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 					src << "\red You feel extremely [word]"
 			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 				oxyloss += 5
-				toxloss += 1
+				toxloss += 3
 				if(prob(15))
 					var/word = pick("dizzy","woosey","faint")
 					src << "\red You feel extremely [word]"

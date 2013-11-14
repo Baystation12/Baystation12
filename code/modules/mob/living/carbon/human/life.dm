@@ -960,6 +960,9 @@
 		var/datum/organ/internal/liver/liver = internal_organs["liver"]
 		liver.process()
 
+		var/datum/organ/internal/eyes/eyes = internal_organs["eyes"]
+		eyes.process()
+
 		updatehealth()
 
 		return //TODO: DEFERRED
@@ -1491,6 +1494,15 @@
 			if(R.id in tachycardics)
 				if(temp <= PULSE_FAST && temp >= PULSE_NONE)
 					temp++
+					break
+		for(var/datum/reagent/R in reagents.reagent_list) //To avoid using fakedeath
+			if(R.id in heartstopper)
+				temp = PULSE_NONE
+				break
+		for(var/datum/reagent/R in reagents.reagent_list) //Conditional heart-stoppage
+			if(R.id in cheartstopper)
+				if(R.volume >= R.overdose)
+					temp = PULSE_NONE
 					break
 
 		return temp
