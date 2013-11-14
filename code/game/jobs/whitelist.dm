@@ -39,6 +39,33 @@ proc/load_alienwhitelist()
 
 	return 0
 
+client/proc/get_alienwhitelist()
+	set category = "Admin"
+	set name = "Check Alienwhitelist"
+	if(!check_rights(R_ADMIN))	return
+
+	var/path = "config/alienwhitelist.txt"
+	if( fexists(path) )
+		src << run( file(path) )
+	else
+		src << "<font color='red'>Error: get_alienwhitelist(): File not found/Invalid path([path]).</font>"
+		return
+	return
+
+/client/proc/add_to_alienwhitelist()
+	set category = "Admin"
+	set name = "Add To Alienwhitelist"
+	if(!check_rights(R_ADMIN))	return
+
+	var/path = "config/alienwhitelist.txt"
+	var/player = input("Input player byound key and alien species, e.g. some_user - Species", "\n") as text
+	if(fexists(path))
+		text2file(player,path)
+		load_alienwhitelist()
+	else
+		src << "<font color='red'>Error: get_alienwhitelist(): File not found/Invalid path([path]).</font>"
+	return
+
 client/proc/get_whitelist()
 	set category = "Admin"
 	set name = "Check Whitelist"
