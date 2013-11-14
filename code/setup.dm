@@ -723,7 +723,6 @@ var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_d
 var/list/heartstopper = list("potassium_phorochloride", "zombie_powder") //this stops the heart
 var/list/cheartstopper = list("potassium_chloride") //this stops the heart when overdose is met -- c = conditional
 
-
 //proc/get_pulse methods
 #define GETPULSE_HAND	0	//less accurate (hand)
 #define GETPULSE_TOOL	1	//more accurate (med scanner, sleeper, etc)

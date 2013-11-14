@@ -132,7 +132,7 @@
 		if (target.op_stage.eyes == 3)
 			target.disabilities &= ~NEARSIGHTED
 			target.sdisabilities &= ~BLIND
-			eyes.damage -= 15
+			eyes.damage = 0
 		target.op_stage.eyes = 0
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
