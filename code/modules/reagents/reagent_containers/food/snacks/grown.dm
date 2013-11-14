@@ -328,6 +328,7 @@
 	name = "ambrosia vulgaris branch"
 	desc = "This is a plant containing various healing chemicals."
 	icon_state = "ambrosiavulgaris"
+	slot_flags = SLOT_HEAD
 	potency = 10
 	New()
 		..()
@@ -344,6 +345,7 @@
 	name = "ambrosia deus branch"
 	desc = "Eating this makes you feel immortal!"
 	icon_state = "ambrosiadeus"
+	slot_flags = SLOT_HEAD
 	potency = 10
 	New()
 		..()
