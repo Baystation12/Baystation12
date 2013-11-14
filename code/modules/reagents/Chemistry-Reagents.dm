@@ -1192,8 +1192,8 @@ datum
 					var/mob/living/carbon/human/H = M
 					var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
 					if(istype(E))
-						E.damage = max(E.damage-5 , 0)
-//				M.sdisabilities &= ~1		Replaced by eye surgery
+						if(E.damage > 0)
+							E.damage -= 1
 				..()
 				return
 
@@ -1209,9 +1209,10 @@ datum
 				if(!M) M = holder.my_atom
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
-					var/datum/organ/internal/I = H.internal_organs
-					if(I.parent_organ == "chest")
-						I.damage = max(I.damage -1 , 0)
+					var/datum/organ/external/chest/C = H.get_organ("chest")
+					for(var/datum/organ/internal/I in C.internal_organs)
+						if(I.damage > 0)
+							I.damage -= 0.20
 				..()
 				return
 
@@ -1693,9 +1694,10 @@ datum
 			description = "A powerful sedative."
 			reagent_state = SOLID
 			color = "#000067" // rgb: 0, 0, 103
-			toxpwr = 0
+			toxpwr = 1
 			custom_metabolism = 0.1 //Default 0.2
-			overdose = REAGENTS_OVERDOSE/2
+			overdose = 15
+			overdose_dam = 5
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1705,11 +1707,50 @@ datum
 					if(1)
 						M.confused += 2
 						M.drowsyness += 2
-					if(2 to 50)
+					if(2 to 199)
+						M.Weaken(30)
+					if(200 to INFINITY)
 						M.sleeping += 1
-					if(51 to INFINITY)
-						M.sleeping += 1
-						M.adjustToxLoss((data - 50)*REM)
+				..()
+				return
+
+		toxin/potassium_chloride
+			name = "Potassium Chloride"
+			id = "potassium_chloride"
+			description = "A delicious salt that stops the heart when injected into cardiac muscle."
+			reagent_state = SOLID
+			color = "#FFFFFF" // rgb: 255,255,255
+			toxpwr = 0
+			overdose = 30
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				var/mob/living/carbon/human/H = M
+				if(H.stat != 1)
+					if (volume >= overdose)
+						if(H.losebreath >= 10)
+							H.losebreath = max(10, H.losebreath-10)
+						H.adjustOxyLoss(2)
+						H.Weaken(10)
+				..()
+				return
+
+		toxin/potassium_chlorophoride
+			name = "Potassium Chlorophoride"
+			id = "potassium_chlorophoride"
+			description = "A specific chemical based on Potassium Chloride to stop the heart for surgery. Not safe to eat!"
+			reagent_state = SOLID
+			color = "#FFFFFF" // rgb: 255,255,255
+			toxpwr = 3
+			overdose = 20
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					if(H.stat != 1)
+						if(H.losebreath >= 10)
+							H.losebreath = max(10, M.losebreath-10)
+						H.adjustOxyLoss(2)
+						H.Weaken(10)
 				..()
 				return
 
