@@ -49,6 +49,45 @@
 	if(config && config.log_hrefs && href_logfile)
 		href_logfile << "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>"
 
+	if(href_list["KarmaBuy"])
+		var/karma=verify_karma()
+		switch(href_list["KarmaBuy"])
+			if("1")
+				if(karma <15)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_job_unlock("Nanotrasen Representative",15)
+			if("2")
+				if(karma <30)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_job_unlock("Customs Officer",30)
+			if("3")
+				if(karma <30)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_job_unlock("Blueshield",30)
+			if("4")
+				if(karma <30)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_species_unlock("Kidan",30)
+			if("5")
+				if(karma <30)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_species_unlock("Grey",30)
+			if("6")
+				if(karma <45)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_species_unlock("Vox",45)
+			if("7")
+				if(karma <45)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_species_unlock("Slime People",45)
+
 	switch(href_list["_src_"])
 		if("holder")	hsrc = holder
 		if("usr")		hsrc = mob
@@ -250,6 +289,7 @@
 		'nano/css/shared.css',
 		'nano/css/icons.css',
 		'nano/templates/chem_dispenser.tmpl',
+		'nano/templates/apc.tmpl',
 		'nano/templates/cryo.tmpl',
 		'nano/templates/dna_modifier.tmpl',
 		'nano/templates/geoscanner.tmpl',

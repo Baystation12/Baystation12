@@ -296,7 +296,7 @@
 			M.verbs += /mob/living/carbon/human/proc/remoteobserve
 	if(ismuton(REGENERATEBLOCK,M))
 		if(probinj(45,inj) || (mRegen in old_mutations))
-			M << "\blue You feel strange"
+			M << "\blue Your body pulses with energy"
 			M.mutations.Add(mRegen)
 	if(ismuton(INCREASERUNBLOCK,M))
 		if(probinj(45,inj) || (mRun in old_mutations))
@@ -327,7 +327,7 @@
 	if(ismuton(SHOCKIMMUNITYBLOCK,M))
 		if(probinj(45,inj) || (mShock in old_mutations))
 			M.mutations.Add(mShock)
-			M << "\blue You feel strange"
+			M << "\blue Your skin feels dry"
 	if(ismuton(SMALLSIZEBLOCK,M))
 		if(probinj(45,inj) || (mSmallsize in old_mutations))
 			M << "\blue Your skin feels rubbery"
@@ -496,7 +496,7 @@
 			sleep(48)
 			del(animation)
 
-		var/mob/living/carbon/human/O = new( src )
+		var/mob/living/carbon/human/human/O = new( src )
 		if(Mo.greaterform)
 			O.set_species(Mo.greaterform)
 

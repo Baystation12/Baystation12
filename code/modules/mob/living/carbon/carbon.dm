@@ -221,6 +221,8 @@
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
+/*
+
 /mob/living/carbon/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null) // -- TLE -- Merged by Carn
 	if(stat)
 		src << "You must be conscious to do this!"
@@ -311,6 +313,7 @@
 		if(new_area)
 			new_area.Entered(src)
 
+*/
 
 /mob/living/carbon/clean_blood()
 	. = ..()

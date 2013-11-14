@@ -185,7 +185,7 @@
 
 	var/list/container = list(  )
 
-
+/*
 /obj/structure/cable
 	level = 1
 	anchored =1
@@ -227,6 +227,7 @@
 /obj/structure/cable/white
 	_color = "white"
 	icon = 'icons/obj/power_cond_white.dmi'
+*/
 
 /obj/effect/projection
 	name = "Projection"

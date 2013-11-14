@@ -5,25 +5,27 @@
 	item_state = "signaler"
 	m_amt = 1000
 	g_amt = 200
-	w_amt = 100
 	origin_tech = "magnets=1"
 	wires = WIRE_RECEIVE | WIRE_PULSE | WIRE_RADIO_PULSE | WIRE_RADIO_RECEIVE
 
 	secured = 1
+	var/receiving = 0
+
+	bomb_name = "remote-control bomb"
 
 	var/code = 30
 	var/frequency = 1457
 	var/delay = 0
-	var/airlock_wire = null
 	var/datum/radio_frequency/radio_connection
-	var/deadman = 0
+	var/airlock_wire = null
 
 	New()
 		..()
 		spawn(40)
 			set_frequency(frequency)
 		return
-
+	describe()
+		return "\The [src]'s power light is [receiving?"on":"off"]"
 
 	activate()
 		if(cooldown > 0)	return 0
@@ -49,6 +51,7 @@
 	<TT>
 
 	<A href='byond://?src=\ref[src];send=1'>Send Signal</A><BR>
+	Reciever is <A href='byond://?src=\ref[src];receive=1'>[receiving?"on":"off"]</A><BR>
 	<B>Frequency/Code</B> for signaler:<BR>
 	Frequency:
 	<A href='byond://?src=\ref[src];freq=-10'>-</A>
@@ -89,6 +92,8 @@
 			src.code = round(src.code)
 			src.code = min(100, src.code)
 			src.code = max(1, src.code)
+		if(href_list["receive"])
+			receiving = !receiving
 
 		if(href_list["send"])
 			spawn( 0 )
@@ -108,17 +113,15 @@
 		signal.encryption = code
 		signal.data["message"] = "ACTIVATE"
 		radio_connection.post_signal(src, signal)
+
+		var/time = time2text(world.realtime,"hh:mm:ss")
+		var/turf/T = get_turf(src)
+		if(usr)
+			lastsignalers.Add("[time] <B>:</B> [usr.key] used [src] @ location ([T.x],[T.y],[T.z]) <B>:</B> [format_frequency(frequency)]/[code]")
+
 		return
+
 /*
-		for(var/obj/item/device/assembly/signaler/S in world)
-			if(!S)	continue
-			if(S == src)	continue
-			if((S.frequency == src.frequency) && (S.code == src.code))
-				spawn(0)
-					if(S)	S.pulse(0)
-		return 0*/
-
-
 	pulse(var/radio = 0)
 		if(istype(src.loc, /obj/machinery/door/airlock) && src.airlock_wire && src.wires)
 			var/obj/machinery/door/airlock/A = src.loc
@@ -128,17 +131,18 @@
 		else
 			..(radio)
 		return 1
-
-
+*/
 	receive_signal(datum/signal/signal)
-		if(!signal)	return 0
-		if(signal.encryption != code)	return 0
-		if(!(src.wires & WIRE_RADIO_RECEIVE))	return 0
-		pulse(1)
+		if( !receiving || !signal )
+			return 0
 
-		if(!holder)
-			for(var/mob/O in hearers(1, src.loc))
-				O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
+		if(signal.encryption != code)
+			return 0
+		if(!(src.wires & WIRE_RADIO_RECEIVE))	return 0
+
+		pulse(1)
+		for(var/mob/O in hearers(1, src.loc))
+			O.show_message(text("\icon[] *beep* *beep*", src), 3, "*beep* *beep*", 2)
 		return
 
 
@@ -151,28 +155,6 @@
 		frequency = new_frequency
 		radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 		return
-
-	process()
-		if(!deadman)
-			processing_objects.Remove(src)
-		var/mob/M = src.loc
-		if(!M || !ismob(M))
-			if(prob(5))
-				signal()
-			deadman = 0
-			processing_objects.Remove(src)
-		else if(prob(5))
-			M.visible_message("[M]'s finger twitches a bit over [src]'s signal button!")
-		return
-
-	verb/deadman_it()
-		set src in usr
-		set name = "Threaten to push the button!"
-		set desc = "BOOOOM!"
-		deadman = 1
-		processing_objects.Add(src)
-		usr.visible_message("\red [usr] moves their finger over [src]'s signal button...")
-
 
 // Embedded signaller used in anomalies.
 /obj/item/device/assembly/signaler/anomaly

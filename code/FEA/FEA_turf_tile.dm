@@ -119,6 +119,38 @@ turf/simulated
 			if("sleeping_agent")
 				overlays.Add(slmaster)
 
+			if(model.graphics & GRAPHICS_COLD)
+		if(!was_icy)
+			wet=3 // Custom ice
+			was_icy=1
+			var/o=""
+			//if(is_plating())
+			//	o="snowfloor_s"
+			//else
+			if(is_plasteel_floor())
+				o="snowfloor"
+			if(o!="")
+				overlays += image('icons/turf/overlays.dmi',o)
+	else
+		if(was_icy)
+			wet=0
+			was_icy=0
+			if(prob(10))
+				wet = 1
+				if(wet_overlay)
+					overlays -= wet_overlay
+					wet_overlay = null
+				wet_overlay = image('icons/effects/water.dmi',src,"wet_floor")
+				overlays += wet_overlay
+
+				spawn(800)
+					if (!istype(src)) return
+					if(wet >= 2) return
+					wet = 0
+					if(wet_overlay)
+						overlays -= wet_overlay
+						wet_overlay = null
+
 
 
 	New()

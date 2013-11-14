@@ -755,3 +755,16 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
 #define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
+
+
+//computer3 error codes, move lower in the file when it passes dev -Sayu
+#define PROG_CRASH      1  // Generic crash
+#define MISSING_PERIPHERAL  2  // Missing hardware
+#define BUSTED_ASS_COMPUTER  4  // Self-perpetuating error.  BAC will continue to crash forever.
+#define MISSING_PROGRAM    8  // Some files try to automatically launch a program.  This is that failing.
+#define FILE_DRM      16  // Some files want to not be copied/moved.  This is them complaining that you tried.
+#define NETWORK_FAILURE  32
+
+//Flags for zone sleeping
+#define ZONE_ACTIVE 1
+#define ZONE_SLEEPING 0

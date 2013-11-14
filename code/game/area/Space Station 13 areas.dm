@@ -1075,6 +1075,11 @@ proc/process_ghost_teleport_locs()
 	icon_state = "teleporter"
 	music = "signal"
 
+/area/toxins/telesci
+	name = "\improper Telescience Lab"
+	icon_state = "toxmisc"
+
+
 //MedBay
 
 /area/medical/medbay
@@ -1152,6 +1157,10 @@ proc/process_ghost_teleport_locs()
 
 /area/medical/research
 	name = "\improper Medical Research"
+	icon_state = "medresearch"
+
+/area/medical/research_shuttle_dock
+	name = "\improper Research Shuttle Dock"
 	icon_state = "medresearch"
 
 /area/medical/virology

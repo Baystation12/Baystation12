@@ -2184,6 +2184,11 @@
 				feedback_add_details("admin_secrets_fun_used","K")
 				//new /datum/event/spacevine
 				message_admins("[key_name_admin(usr)] has spawned spacevines", 1)
+			if("vent_clog")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","VC")
+				new /datum/event/vent_clog
+				message_admins("[key_name_admin(usr)] has made scrubbers spew chemical smoke", 1)
 			if("onlyone")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","OO")
@@ -2521,13 +2526,13 @@
 	else if(href_list["vsc"])
 		if(check_rights(R_ADMIN|R_SERVER))
 			if(href_list["vsc"] == "airflow")
-/*				vsc.ChangeSettingsDialog(usr,vsc.settings)
+				vsc.ChangeSettingsDialog(usr,vsc.settings)
 			if(href_list["vsc"] == "plasma")
-				vsc.ChangeSettingsDialog(usr,vsc.plc.settings) */
-				zas_settings.ChangeSettingsDialog(usr,zas_settings.settings)
+				vsc.ChangeSettingsDialog(usr,vsc.plc.settings)
+//				zas_settings.ChangeSettingsDialog(usr,zas_settings.settings)
 			if(href_list["vsc"] == "default")
-				//vsc.SetDefault(usr)
-				zas_settings.SetDefault(usr)
+				vsc.SetDefault(usr)
+//				zas_settings.SetDefault(usr)
 	// player info stuff
 
 	if(href_list["add_player_info"])

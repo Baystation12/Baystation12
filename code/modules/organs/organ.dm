@@ -92,7 +92,7 @@
 				I.take_damage(rand(3,5))
 
 		//Special effects for limbs.
-		if(E.name in list("l_hand","l_arm","r_hand","r_arm"))
+		if(E.name in list("l_hand","l_arm","r_hand","r_arm") && (broken||malfunction))
 			var/obj/item/c_hand		//Getting what's in this hand
 			if(E.name == "l_hand" || E.name == "l_arm")
 				c_hand = l_hand
@@ -100,8 +100,7 @@
 				c_hand = r_hand
 
 			if (c_hand)
-				if (broken||malfunction)
-					u_equip(c_hand)
+				u_equip(c_hand)
 
 				if(broken)
 					emote("me", 1, "screams in pain and drops what they were holding in their [E.display_name?"[E.display_name]":"[E]"]!")
@@ -125,39 +124,11 @@
 		paralysis = 10
 
 	//Check arms and legs for existence
-	var/canstand_l = 1  //Can stand on left leg
-	var/canstand_r = 1  //Can stand on right leg
-	var/legispeg_l=0
-	var/legispeg_r=0
-	var/hasleg_l = 1  //Have left leg
-	var/hasleg_r = 1  //Have right leg
-	var/hasarm_l = 1  //Have left arm
-	var/hasarm_r = 1  //Have right arm
-	var/datum/organ/external/E
-	E = get_organ("l_leg")
-	if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED))
-		canstand_l = 0
-		hasleg_l = 0
-	legispeg_l=E.status & ORGAN_PEG
-	E = get_organ("r_leg")
-	if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED))
-		canstand_r = 0
-		hasleg_r = 0
-	legispeg_r=E.status & ORGAN_PEG
-	E = get_organ("l_foot")
-	if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED) && !legispeg_l)
-		canstand_l = 0
-	E = get_organ("r_foot")
-	if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED) && !legispeg_r)
-		canstand_r = 0
-	E = get_organ("l_arm")
-	if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED))
-		hasarm_l = 0
-	E = get_organ("r_arm")
-	if(E.status & ORGAN_DESTROYED && !(E.status & ORGAN_SPLINTED))
-		hasarm_r = 0
+	can_stand = 2 //can stand on both legs
+	var/datum/organ/external/E = organs_by_name["l_foot"]
+	if(E.status & ORGAN_DESTROYED)
+		can_stand--
 
-	// Can stand if have at least one full leg (with leg and foot parts present, or an entire pegleg)
-	// Has limbs to move around if at least one arm or leg is at least partially there
-	can_stand = canstand_l||canstand_r
-	has_limbs = hasleg_l||hasleg_r||hasarm_l||hasarm_r
+	E = organs_by_name["r_foot"]
+	if(E.status & ORGAN_DESTROYED)
+		can_stand--

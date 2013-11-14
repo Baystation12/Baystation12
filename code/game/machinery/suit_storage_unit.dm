@@ -331,11 +331,11 @@
 		sleep(50)
 		if(src.OCCUPANT)
 			if(src.issuperUV)
-				var/burndamage = rand(28,35)
+				var/burndamage = rand(35,45)
 				OCCUPANT.take_organ_damage(0,burndamage)
 				OCCUPANT.emote("scream")
 			else
-				var/burndamage = rand(6,10)
+				var/burndamage = rand(10,15)
 				OCCUPANT.take_organ_damage(0,burndamage)
 				OCCUPANT.emote("scream")
 		if(i==3) //End of the cycle

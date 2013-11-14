@@ -23,7 +23,7 @@
 
 		var/list/gunk = list("water","carbon","flour","radium","toxin","cleaner","nutriment","condensedcapsaicin","psilocybin","lube",
 							"plantbgone","banana","anti_toxin","space_drugs","hyperzine","holywater","ethanol","hot_coco","pacid",
-							"blood","stoxin","flourine","ryetalyn","thermite","mutagen","oxycodone","fuel","plasma","cryptobiolin",
+							"blood","stoxin","fluorine","ryetalyn","mutagen","oxycodone","fuel","cryptobiolin",
 							"impedrezene","mindbreaker","nanites","xenomicrobes","lipozine","frostoil","doctorsdelight","beepskysmash","tricordrazine")
 		var/datum/reagents/R = new/datum/reagents(50)
 		R.my_atom = vent

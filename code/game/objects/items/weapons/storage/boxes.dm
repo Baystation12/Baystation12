@@ -209,6 +209,21 @@
 		new /obj/item/weapon/implanter(src)
 		new /obj/item/weapon/implantpad(src)
 
+/obj/item/weapon/storage/box/deathimp
+	name = "death alarm implant kit"
+	desc = "Box of life sign monitoring implants."
+	icon_state = "implant"
+
+	New()
+		..()
+		new /obj/item/weapon/implantcase/death_alarm(src)
+		new /obj/item/weapon/implantcase/death_alarm(src)
+		new /obj/item/weapon/implantcase/death_alarm(src)
+		new /obj/item/weapon/implantcase/death_alarm(src)
+		new /obj/item/weapon/implantcase/death_alarm(src)
+		new /obj/item/weapon/implanter(src)
+		new /obj/item/weapon/implantpad(src)
+
 
 /obj/item/weapon/storage/box/rxglasses
 	name = "prescription glasses"

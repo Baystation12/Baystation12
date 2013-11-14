@@ -3,7 +3,7 @@
 	name = "magboots"
 	icon_state = "magboots0"
 	var/magpulse = 0
-//	flags = NOSLIP //disabled by default
+	species_restricted = null
 
 
 	verb/toggle()

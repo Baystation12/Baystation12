@@ -48,6 +48,7 @@ datum/controller/game_controller/New()
 	if(!syndicate_code_phrase)		syndicate_code_phrase	= generate_code_phrase()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
 	if(!emergency_shuttle)			emergency_shuttle = new /datum/shuttle_controller/emergency_shuttle()
+	if(!supply_shuttle)				supply_shuttle = new /datum/controller/supply_shuttle()
 
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
@@ -57,7 +58,8 @@ datum/controller/game_controller/proc/setup()
 
 	if(!air_master)
 		air_master = new /datum/controller/air_system()
-		air_master.setup()
+//		air_master.setup()
+		air_master.Setup()
 
 	if(!ticker)
 		ticker = new /datum/controller/gameticker()
@@ -128,7 +130,8 @@ datum/controller/game_controller/proc/process()
 					last_thing_processed = air_master.type
 
 					air_master.current_cycle++
-					if(!air_master.tick()) //Runtimed.
+//					if(!air_master.tick()) Runtimed.
+					if(!air_master.Tick())
 						air_master.failed_ticks++
 						if(air_master.failed_ticks > 5)
 							world << "<font color='red'><b>RUNTIMES IN ATMOS TICKER.  Killing air simulation!</font></b>"
@@ -196,7 +199,7 @@ datum/controller/game_controller/proc/process()
 				timer = world.timeofday
 				process_nano()
 				nano_cost = (world.timeofday - timer) / 10
-				
+
 				sleep(breather_ticks)
 
 				//EVENTS

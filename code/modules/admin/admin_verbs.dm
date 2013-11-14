@@ -573,7 +573,7 @@ var/list/admin_verbs_mod = list(
 		for (var/mob/V in hearers(mob.control_object))
 			V.show_message("<b>[mob.control_object.name]</b> says: \"" + msg + "\"", 2)
 	feedback_add_details("admin_verb","OT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
+/*
 /client/proc/kill_air() // -- TLE
 	set category = "Debug"
 	set name = "Kill Air"
@@ -583,6 +583,21 @@ var/list/admin_verbs_mod = list(
 		usr << "<b>Enabled air processing.</b>"
 	else
 		kill_air = 1
+		usr << "<b>Disabled air processing.</b>"
+	feedback_add_details("admin_verb","KA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	log_admin("[key_name(usr)] used 'kill air'.")
+	message_admins("\blue [key_name_admin(usr)] used 'kill air'.", 1)
+*/
+
+/client/proc/kill_air() // -- TLE
+	set category = "Debug"
+	set name = "Kill Air"
+	set desc = "Toggle Air Processing"
+	if(air_processing_killed)
+		air_processing_killed = 0
+		usr << "<b>Enabled air processing.</b>"
+	else
+		air_processing_killed = 1
 		usr << "<b>Disabled air processing.</b>"
 	feedback_add_details("admin_verb","KA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] used 'kill air'.")

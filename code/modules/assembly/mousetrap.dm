@@ -3,15 +3,31 @@
 	desc = "A handy little spring-loaded trap for catching pesty rodents."
 	icon_state = "mousetrap"
 	m_amt = 100
-	w_amt = 10
 	origin_tech = "combat=1"
 	var/armed = 0
 
+	bomb_name = "contact mine"
 
 	examine()
 		..()
 		if(armed)
 			usr << "It looks like it's armed."
+
+	activate()
+		if(..())
+			armed = !armed
+			if(!armed)
+				if(ishuman(usr))
+					var/mob/living/carbon/human/user = usr
+					if(((user.getBrainLoss() >= 60 || (CLUMSY in user.mutations)) && prob(50)))
+						user << "Your hand slips, setting off the trigger."
+						pulse(0)
+			update_icon()
+			if(usr)
+				playsound(usr.loc, 'sound/weapons/handcuffs.ogg', 30, 1, -3)
+
+	describe()
+		return "The pressure switch is [armed?"primed":"safe"]."
 
 	update_icon()
 		if(armed)
@@ -37,14 +53,12 @@
 						affecting = H.get_organ(type)
 						H.Stun(3)
 			if(affecting)
-				if(affecting.take_damage(1, 0))
-					H.UpdateDamageIcon()
 				H.updatehealth()
 		else if(ismouse(target))
 			var/mob/living/simple_animal/mouse/M = target
 			visible_message("\red <b>SPLAT!</b>")
 			M.splat()
-		playsound(target.loc, 'sound/effects/snap.ogg', 50, 1)
+		playsound(src.loc, 'sound/effects/snap.ogg', 50, 1)
 		armed = 0
 		update_icon()
 		pulse(0)
@@ -81,7 +95,7 @@
 		..()
 
 
-	Crossed(AM as mob|obj)
+	Crossed(var/atom/movable/AM as mob|obj)
 		if(armed)
 			if(ishuman(AM))
 				var/mob/living/carbon/H = AM
@@ -89,7 +103,9 @@
 					triggered(H)
 					H.visible_message("<span class='warning'>[H] accidentally steps on [src].</span>", \
 									  "<span class='warning'>You accidentally step on [src]</span>")
-			if(ismouse(AM))
+			else if(ismouse(AM))
+				triggered(AM)
+			else if(AM.density) // For mousetrap grenades, set off by anything heavy
 				triggered(AM)
 		..()
 

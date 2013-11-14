@@ -114,7 +114,6 @@ var/list/security_positions = list(
 	"Warden",
 	"Detective",
 	"Security Officer",
-	"Customs Officer"
 )
 
 

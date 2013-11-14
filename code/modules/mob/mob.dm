@@ -489,6 +489,7 @@ var/list/slot_equipment_priority = list( \
 	if(href_list["flavor_change"])
 		update_flavor_text()
 
+
 //	..()
 	return
 

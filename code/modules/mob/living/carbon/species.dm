@@ -134,9 +134,9 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 2000
-	heat_level_2 = 3000
-	heat_level_3 = 4000
+	heat_level_1 = 300
+	heat_level_2 = 350
+	heat_level_3 = 700
 
 	flags = NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
 	bloodflags = BLOOD_GREEN
@@ -174,7 +174,8 @@
 	attack_verb = "punch"
 	path = /mob/living/carbon/human/grey
 	darksight = 5 // BOOSTED from 2
+	eyes = "grey_eyes_s"
 	max_hurt_damage = 3 // From 5 (for humans)
-	default_mutations=list(mRemotetalk) // TK is also another candidate, but TK is overpowered as fuck.
+//	default_mutations=list(mRemotetalk) // TK is also another candidate, but TK is overpowered as fuck.
 
 	flags = WHITELISTED | HAS_LIPS | CAN_BE_FAT

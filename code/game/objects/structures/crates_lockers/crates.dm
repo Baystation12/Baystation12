@@ -393,6 +393,9 @@
 	return attack_hand(user)
 
 /obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/rcs) && !src.opened)
+		..()
+		return
 	if(opened)
 		if(isrobot(user))
 			return

@@ -41,7 +41,9 @@
 /obj/item/weapon/extinguisher/examine()
 	set src in usr
 
-	usr << text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume)
+	usr << "\icon[src] [src.name] contains [src.reagents.total_volume] units of water!"
+	for(var/thing in src)
+		usr << "\red \A [thing] is jammed into the nozzle!"
 	..()
 	return
 
@@ -51,6 +53,21 @@
 	src.desc = "The safety is [safety ? "on" : "off"]."
 	user << "The safety is [safety ? "on" : "off"]."
 	return
+
+/obj/item/weapon/extinguisher/attackby(obj/item/W, mob/user)
+	if(user.stat || user.restrained() || user.lying)  return
+	if (istype(W, /obj/item))
+		if(W.w_class>1)
+			user << "\The [W] won't fit into the nozzle!"
+			return
+		if(locate(/obj) in src)
+			user << "There's already something crammed into the nozzle."
+			return
+		user.drop_item()
+		W.loc=src
+		user << "You cram \the [W] into the nozzle of \the [src]."
+		message_admins("[user]/[user.ckey] has crammed \a [W] into a [src].")
+
 
 /obj/item/weapon/extinguisher/afterattack(atom/target, mob/user , flag)
 	//TODO; Add support for reagents in water.
@@ -97,6 +114,16 @@
 				B.Move(get_step(usr,movementdirection), movementdirection)
 				sleep(3)
 				B.Move(get_step(usr,movementdirection), movementdirection)
+
+		if(locate(/obj) in src)
+			for(var/obj/thing in src)
+				thing.loc = get_turf(src)
+				thing.throw_at(target,10,rand(45,50))
+				user.visible_message(
+					"<span class='danger'>[user] fires [src] and launches [thing] at [target]!</span>",
+					"<span class='danger'>You fire [src] and launch [thing] at [target]!</span>")
+				break
+
 
 		var/turf/T = get_turf(target)
 		var/turf/T1 = get_step(T,turn(direction, 90))

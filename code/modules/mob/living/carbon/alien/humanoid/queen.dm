@@ -7,7 +7,7 @@
 	status_flags = CANPARALYSE
 	heal_rate = 5
 	plasma_rate = 20
-
+	move_delay_add = 2
 
 /mob/living/carbon/alien/humanoid/queen/New()
 	var/datum/reagents/R = new/datum/reagents(100)
@@ -73,7 +73,7 @@
 
 
 /mob/living/carbon/alien/humanoid/queen/large
-	icon = 'icons/mob/alienqueen.dmi'
+	icon = 'icons/mob/alienlarge.dmi'
 	icon_state = "queen_s"
 	pixel_x = -16
 
@@ -90,3 +90,31 @@
 		icon_state = "queen_s"
 		for(var/image/I in overlays_standing)
 			overlays += I
+
+
+
+/mob/living/carbon/alien/humanoid/queen/verb/evolve() // -- TLE
+	set name = "Evolve (1000)"
+	set desc = "The ultimate transformation. Become an alien Empress. Only one empress can exist at a time."
+	set category = "Alien"
+
+	if(powerc(500))
+		// Queen check
+		var/no_queen = 1
+		for(var/mob/living/carbon/alien/humanoid/empress/E in living_mob_list)
+			if(!E.key && E.brain_op_stage != 4)
+				continue
+			no_queen = 0
+
+		if(no_queen)
+			adjustToxLoss(-500)
+			src << "\green You begin to evolve!"
+			for(var/mob/O in viewers(src, null))
+				O.show_message(text("\green <B>[src] begins to twist and contort!</B>"), 1)
+			var/mob/living/carbon/alien/humanoid/empress/large/new_xeno = new (loc)
+			mind.transfer_to(new_xeno)
+			del(src)
+		else
+			src << "<span class='notice'>We already have an alive empress.</span>"
+	return
+

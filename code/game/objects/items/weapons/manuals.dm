@@ -590,7 +590,7 @@
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://http://192.241.230.211/wiki/index.php/Space_law&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
+		<iframe width='100%' height='97%' src="http://192.241.230.212/wiki/index.php/Space_law&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
 
 		</html>
 

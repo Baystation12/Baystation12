@@ -136,6 +136,11 @@
 		user << "\red \The [src] is welded solid!"
 		return
 
+	var/area/A = get_area(src)
+	ASSERT(istype(A))
+	if(A.master)
+		A = A.master
+	var/alarmed = A.air_doors_activated || A.fire
 
 	if( istype(C, /obj/item/weapon/crowbar) || ( istype(C,/obj/item/weapon/twohanded/fireaxe) && C:wielded == 1 ) )
 		if(operating)
@@ -160,14 +165,19 @@
 				user.visible_message("\red \The [user] forces \the [ blocked ? "welded" : "" ] [src] [density ? "open" : "closed"] with \a [C]!",\
 					"You force \the [ blocked ? "welded" : "" ] [src] [density ? "open" : "closed"] with \the [C]!",\
 					"You hear metal strain and groan, and a door [density ? "open" : "close"].")
+			var/needs_to_close = 0
 			if(density)
+				if(alarmed)
+					needs_to_close = 1
 				spawn(0)
 					open()
-				spawn(5)
-					close()
 			else
 				spawn(0)
 					close()
+			if(needs_to_close)
+				spawn(50)
+					if(alarmed)
+						nextstate = CLOSED
 			return
 
 
@@ -259,3 +269,8 @@
 /obj/machinery/door/firedoor/multi_tile
 	icon = 'icons/obj/doors/DoorHazard2x1.dmi'
 	width = 2
+
+
+/obj/machinery/door/firedoor/multi_tile/triple
+	icon = 'icons/obj/doors/DoorHazard3x1.dmi'
+	width = 3

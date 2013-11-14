@@ -244,10 +244,13 @@ var/list/ai_list = list()
 
 	// hack to display shuttle timer
 	if(emergency_shuttle.online)
-		var/obj/machinery/computer/communications/C = locate() in machines
-		if(C)
-			C.post_status("shuttle")
-
+		var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
+		if(!frequency) return
+		var/datum/signal/status_signal = new
+		status_signal.source = src
+		status_signal.transmission_method = 1
+		status_signal.data["command"] = "shuttle"
+		frequency.post_signal(src, status_signal)
 	return
 
 /mob/living/silicon/ai/proc/ai_cancel_call()

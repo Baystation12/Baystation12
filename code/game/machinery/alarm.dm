@@ -226,7 +226,9 @@
 			target_temperature = T0C + MIN_TEMPERATURE
 
 		var/datum/gas_mixture/gas = location.remove_air(0.25*environment.total_moles)
-		var/heat_capacity = gas.heat_capacity()
+		var/heat_capacity = 0
+		if(gas)
+			heat_capacity = gas.heat_capacity()
 		var/energy_used = min( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
 
 		//Use power.  Assuming that each power unit represents 1000 watts....

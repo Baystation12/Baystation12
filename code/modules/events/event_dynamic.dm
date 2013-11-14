@@ -52,11 +52,13 @@ var/global/list/possibleEvents = list()
 	possibleEvents[/datum/event/falsealarm] = 300
 	possibleEvents[/datum/event/immovable_rod] = 200
 	possibleEvents[/datum/event/vent_clog] = 300
-	possibleEvents[/datum/event/anomaly/anomaly_bluespace] = 150
+	possibleEvents[/datum/event/anomaly/anomaly_bluespace] = 100
 	possibleEvents[/datum/event/anomaly/anomaly_flux] = 200
 	possibleEvents[/datum/event/anomaly/anomaly_grav] = 200
 	possibleEvents[/datum/event/anomaly/anomaly_pyro] = 200
 	possibleEvents[/datum/event/anomaly/anomaly_vortex] = 150
+	possibleEvents[/datum/event/weightless] = 150
+	possibleEvents[/datum/event/wormholes] = 150
 
 	possibleEvents[/datum/event/pda_spam] = max(min(25, player_list.len) * 4, 200)
 	possibleEvents[/datum/event/money_lotto] = max(min(5, player_list.len), 50)
@@ -65,6 +67,7 @@ var/global/list/possibleEvents = list()
 
 	possibleEvents[/datum/event/carp_migration] = 50 + 50 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/dust] = 50 + 50 * active_with_role["Engineer"]
+	possibleEvents[/datum/event/dust/meaty] = 50 + 50 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/brand_intelligence] = 50 + 25 * active_with_role["Janitor"]
 
 	possibleEvents[/datum/event/rogue_drone] = 25 + 25 * active_with_role["Engineer"] + 25 * active_with_role["Security"]
@@ -76,8 +79,10 @@ var/global/list/possibleEvents = list()
 	possibleEvents[/datum/event/electrical_storm] = 10 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Botanist"]
 
+
+
 	if(!spacevines_spawned)
-		possibleEvents[/datum/event/spacevine] = 5 + 5 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/spacevine] = 25 + 5 * active_with_role["Engineer"]
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/meteor_shower] = 40 * active_with_role["Engineer"]
@@ -98,6 +103,9 @@ var/global/list/possibleEvents = list()
 			possibleEvents[/datum/event/alien_infestation] = max(active_with_role["Security"], 5) + 2.5
 		if(!sent_ninja_to_station && toggle_space_ninja)
 			possibleEvents[/datum/event/space_ninja] = max(active_with_role["Security"], 5)
+	possibleEvents[/datum/event/undead] = active_with_role["Security"] * 10
+	possibleEvents[/datum/event/ghosts] = active_with_role["Security"] * 25
+
 
 	for(var/event_type in event_last_fired) if(possibleEvents[event_type])
 		var/time_passed = world.time - event_last_fired[event_type]

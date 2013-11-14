@@ -42,3 +42,41 @@
 						healths.icon_state = "health5"
 			else
 				healths.icon_state = "health6"
+
+
+/mob/living/carbon/alien/humanoid/sentinel/verb/evolve() // -- TLE
+	set name = "Evolve (250)"
+	set desc = "Become a Praetorian, Royal Guard to the Queen."
+	set category = "Alien"
+
+	if(powerc(250))
+		adjustToxLoss(-250)
+		src << "\green You begin to evolve!"
+		for(var/mob/O in viewers(src, null))
+			O.show_message(text("\green <B>[src] begins to twist and contort!</B>"), 1)
+		var/mob/living/carbon/alien/humanoid/sentinel/large/new_xeno = new (loc)
+		mind.transfer_to(new_xeno)
+		del(src)
+	return
+
+/mob/living/carbon/alien/humanoid/sentinel/large
+	icon = 'icons/mob/alienlarge.dmi'
+	icon_state = "prat_s"
+	pixel_x = -16
+	maxHealth = 200
+	health = 200
+	move_delay_add = 1
+
+/mob/living/carbon/alien/humanoid/sentinel/large/update_icons()
+	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
+	update_hud()		//TODO: remove the need for this to be here
+	overlays.Cut()
+	if(lying)
+		if(resting)					icon_state = "prat_sleep"
+		else						icon_state = "prat_l"
+		for(var/image/I in overlays_lying)
+			overlays += I
+	else
+		icon_state = "prat_s"
+		for(var/image/I in overlays_standing)
+			overlays += I

@@ -69,7 +69,6 @@
 				feedback_add_details("employee_objective","[objective.type]|SUCCESS")
 				tasks_completed++
 			else
-				text += "<br><B>Task #[count]</B>: [objective.get_description()] <font color='red'>Fail.</font>"
 				feedback_add_details("employee_objective","[objective.type]|FAIL")
 			count++
 
@@ -77,7 +76,6 @@
 			text += "<br><font color='green'><B>The [employee.assigned_role] did their fucking job!</B></font>"
 			feedback_add_details("employee_success","SUCCESS")
 		else
-			text += "<br><font color='red'><B>The [employee.assigned_role] was a worthless sack of shit!</B></font>"
 			feedback_add_details("employee_success","FAIL")
 	if(numEmployees>0)
 		world << text

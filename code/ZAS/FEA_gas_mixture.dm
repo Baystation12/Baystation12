@@ -8,7 +8,7 @@ What are the archived variables for?
 #define SPECIFIC_HEAT_AIR		20
 #define SPECIFIC_HEAT_CDO		30
 #define HEAT_CAPACITY_CALCULATION(oxygen,carbon_dioxide,nitrogen,toxins) \
-	(carbon_dioxide*SPECIFIC_HEAT_CDO + (oxygen+nitrogen)*SPECIFIC_HEAT_AIR + toxins*SPECIFIC_HEAT_TOXIN)
+	max(0, carbon_dioxide * SPECIFIC_HEAT_CDO + (oxygen + nitrogen) * SPECIFIC_HEAT_AIR + toxins * SPECIFIC_HEAT_TOXIN)
 
 #define MINIMUM_HEAT_CAPACITY	0.0003
 #define QUANTIZE(variable)		(round(variable,0.0001))
@@ -17,10 +17,6 @@ What are the archived variables for?
 #define TEMPERATURE_ICE_FORMATION 273.15 // 273 kelvin is the freezing point of water.
 #define MIN_PRESSURE_ICE_FORMATION 10 // 10kPa should be okay
 
-#define GRAPHICS_PLASMA   1
-#define GRAPHICS_N2O      2
-#define GRAPHICS_REAGENTS 4  // Not used.  Yet.
-#define GRAPHICS_COLD     8
 
 
 /datum/gas/sleeping_agent/specific_heat = 40 //These are used for the "Trace Gases" stuff, but is buggy.
@@ -52,7 +48,7 @@ What are the archived variables for?
 				//Size of the group this gas_mixture is representing.
 				//=1 for singletons
 
-	var/graphics=0
+	var/graphic
 
 	var/list/datum/gas/trace_gases = list() //Seemed to be a good idea that was abandoned
 
@@ -63,8 +59,10 @@ What are the archived variables for?
 
 	var/tmp/temperature_archived
 
-	var/tmp/graphics_archived = 0
+	var/tmp/graphic_archived = 0
 	var/tmp/fuel_burnt = 0
+
+	var/reacting = 0
 
 //FOR THE LOVE OF GOD PLEASE USE THIS PROC
 //Call it with negative numbers to remove gases.
@@ -90,7 +88,7 @@ What are the archived variables for?
 	update_values()
 	return
 
-//tg seems to like using these a lot
+		//tg seems to like using these a lot
 /datum/gas_mixture/proc/return_temperature()
 	return temperature
 
@@ -114,7 +112,7 @@ What are the archived variables for?
 
 	var/heat_capacity = HEAT_CAPACITY_CALCULATION(oxygen,carbon_dioxide,nitrogen,toxins)
 
-	if(trace_gases && trace_gases.len) //sanity check because somehow the tracegases gets nulled?
+	if(trace_gases.len)
 		for(var/datum/gas/trace_gas in trace_gases)
 			heat_capacity += trace_gas.moles*trace_gas.specific_heat
 
@@ -198,30 +196,25 @@ What are the archived variables for?
 	//Inputs: None
 	//Outputs: 1 if graphic changed, 0 if unchanged
 
-	graphics = 0
+	graphic = 0
 
-	// If configured and cold, maek ice
-	if(zas_settings.Get(/datum/ZAS_Setting/ice_formation))
-		if(temperature <= TEMPERATURE_ICE_FORMATION && return_pressure()>MIN_PRESSURE_ICE_FORMATION)
-			// If we're just forming, do a probability check.  Otherwise, KEEP IT ON~
-			// This ordering will hopefully keep it from sampling random noise every damn tick.
-			//if(was_icy || (!was_icy && prob(25)))
-			graphics |= GRAPHICS_COLD
+	if(temperature <= TEMPERATURE_ICE_FORMATION && return_pressure()>MIN_PRESSURE_ICE_FORMATION)
+		// If we're just forming, do a probability check.  Otherwise, KEEP IT ON~
+		// This ordering will hopefully keep it from sampling random noise every damn tick.
+		//if(was_icy || (!was_icy && prob(25)))
+		graphic = 3
+
 
 	if(toxins > MOLES_PLASMA_VISIBLE)
-		graphics |= GRAPHICS_PLASMA
-	if(length(trace_gases))
+		graphic = 1
+	else if(length(trace_gases))
 		var/datum/gas/sleeping_agent = locate(/datum/gas/sleeping_agent) in trace_gases
 		if(sleeping_agent && (sleeping_agent.moles > 1))
-			graphics |= GRAPHICS_N2O
+			graphic = 2
+		else
+			graphic = 0
 
-	/*
-	var/datum/gas/reagent = exact_locate(/datum/gas/reagent,trace_gases)
-	if(reagent && (reagent.moles > 0.1))
-		graphics |= GRAPHICS_REAGENTS
-	*/
-
-	return graphics != graphics_archived
+	return graphic != graphic_archived
 
 /datum/gas_mixture/proc/react(atom/dump_location)
 	//Purpose: Calculating if it is possible for a fire to occur in the airmix
@@ -229,14 +222,13 @@ What are the archived variables for?
 	//Inputs: None
 	//Outputs: If a fire occured
 
-	var/reacting = 0 //set to 1 if a notable reaction occured (used by pipe_network)
+	 //set to 1 if a notable reaction occured (used by pipe_network)
 
-	if(temperature > FIRE_MINIMUM_TEMPERATURE_TO_EXIST)
-		if(zburn(null) > 0)
-			reacting = 1
+	zburn(null)
 
 	return reacting
 
+/*
 /datum/gas_mixture/proc/fire()
 	//Purpose: Calculating any fire reactions.
 	//Called by: react() (See above)
@@ -245,7 +237,7 @@ What are the archived variables for?
 
 	return zburn(null)
 
-	/*var/energy_released = 0
+	var/energy_released = 0
 	var/old_heat_capacity = heat_capacity()
 
 	var/datum/gas/volatile_fuel/fuel_store = locate(/datum/gas/volatile_fuel) in trace_gases
@@ -320,7 +312,7 @@ What are the archived variables for?
 
 	temperature_archived = temperature
 
-	graphics_archived = graphics
+	graphic_archived = graphic
 
 	return 1
 
@@ -395,10 +387,6 @@ What are the archived variables for?
 	//Inputs: How many moles to remove.
 	//Outputs: Removed air.
 
-	// Fix a singuloth problem
-	if(group_multiplier==0)
-		return null
-
 	var/sum = total_moles()
 	amount = min(amount,sum) //Can not take more air than tile has!
 	if(amount <= 0)
@@ -410,7 +398,7 @@ What are the archived variables for?
 	removed.oxygen = QUANTIZE((oxygen/sum)*amount)
 	removed.nitrogen = QUANTIZE((nitrogen/sum)*amount)
 	removed.carbon_dioxide = QUANTIZE((carbon_dioxide/sum)*amount)
-	removed.toxins = QUANTIZE((toxins/sum)*amount)
+	removed.toxins = QUANTIZE(((toxins/sum)*amount))
 
 	oxygen -= removed.oxygen/group_multiplier
 	nitrogen -= removed.nitrogen/group_multiplier
@@ -422,8 +410,8 @@ What are the archived variables for?
 			var/datum/gas/corresponding = new trace_gas.type()
 			removed.trace_gases += corresponding
 
-			corresponding.moles = (trace_gas.moles/sum)*amount
-			trace_gas.moles -= corresponding.moles/group_multiplier
+			corresponding.moles = ((trace_gas.moles/sum)*amount)
+			trace_gas.moles -= (corresponding.moles/group_multiplier)
 
 	removed.temperature = temperature
 	update_values()
@@ -990,6 +978,7 @@ What are the archived variables for?
 	//Outputs: 1 if can rebuild, 0 if not.
 	if(!sample) return 0
 
+
 	if((abs(oxygen-sample.oxygen) > MINIMUM_AIR_TO_SUSPEND) && \
 		((oxygen < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.oxygen) || (oxygen > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.oxygen)))
 		return 0
@@ -997,39 +986,60 @@ What are the archived variables for?
 		((nitrogen < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.nitrogen) || (nitrogen > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.nitrogen)))
 		return 0
 	if((abs(carbon_dioxide-sample.carbon_dioxide) > MINIMUM_AIR_TO_SUSPEND) && \
-		((carbon_dioxide < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.carbon_dioxide) || (oxygen > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.carbon_dioxide)))
+		((carbon_dioxide < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.carbon_dioxide) || (carbon_dioxide > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.carbon_dioxide)))
 		return 0
 	if((abs(toxins-sample.toxins) > MINIMUM_AIR_TO_SUSPEND) && \
 		((toxins < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.toxins) || (toxins > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*sample.toxins)))
 		return 0
+
 
 	if(total_moles() > MINIMUM_AIR_TO_SUSPEND)
 		if((abs(temperature-sample.temperature) > MINIMUM_TEMPERATURE_DELTA_TO_SUSPEND) && \
 			((temperature < (1-MINIMUM_TEMPERATURE_RATIO_TO_SUSPEND)*sample.temperature) || (temperature > (1+MINIMUM_TEMPERATURE_RATIO_TO_SUSPEND)*sample.temperature)))
 			//world << "temp fail [temperature] & [sample.temperature]"
 			return 0
-
+	var/check_moles
 	if(sample.trace_gases.len)
 		for(var/datum/gas/trace_gas in sample.trace_gases)
-			if(trace_gas.moles_archived > MINIMUM_AIR_TO_SUSPEND)
-				var/datum/gas/corresponding = locate(trace_gas.type) in trace_gases
-				if(corresponding)
-					if((abs(trace_gas.moles - corresponding.moles) > MINIMUM_AIR_TO_SUSPEND) && \
-						((corresponding.moles < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*trace_gas.moles) || (corresponding.moles > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*trace_gas.moles)))
-						return 0
-				else
-					return 0
+			var/datum/gas/corresponding = locate(trace_gas.type) in trace_gases
+			if(corresponding)
+				check_moles = corresponding.moles
+			else
+				check_moles = 0
+
+			if((abs(trace_gas.moles - check_moles) > MINIMUM_AIR_TO_SUSPEND) && \
+				((check_moles < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*trace_gas.moles) || (check_moles > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*trace_gas.moles)))
+				return 0
 
 	if(trace_gases.len)
 		for(var/datum/gas/trace_gas in trace_gases)
-			if(trace_gas.moles > MINIMUM_AIR_TO_SUSPEND)
-				var/datum/gas/corresponding = locate(trace_gas.type) in sample.trace_gases
-				if(corresponding)
-					if((abs(trace_gas.moles - corresponding.moles) > MINIMUM_AIR_TO_SUSPEND) && \
-						((trace_gas.moles < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*corresponding.moles) || (trace_gas.moles > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*corresponding.moles)))
-						return 0
-				else
-					return 0
+			var/datum/gas/corresponding = locate(trace_gas.type) in trace_gases
+			if(corresponding)
+				check_moles = corresponding.moles
+			else
+				check_moles = 0
+
+			if((abs(trace_gas.moles - check_moles) > MINIMUM_AIR_TO_SUSPEND) && \
+				((trace_gas.moles < (1-MINIMUM_AIR_RATIO_TO_SUSPEND)*check_moles) || (trace_gas.moles > (1+MINIMUM_AIR_RATIO_TO_SUSPEND)*check_moles)))
+				return 0
+
+	return 1
+
+/datum/gas_mixture/proc/add(datum/gas_mixture/right_side)
+	oxygen += right_side.oxygen
+	carbon_dioxide += right_side.carbon_dioxide
+	nitrogen += right_side.nitrogen
+	toxins += right_side.toxins
+
+	if(trace_gases.len || right_side.trace_gases.len)
+		for(var/datum/gas/trace_gas in right_side.trace_gases)
+			var/datum/gas/corresponding = locate(trace_gas.type) in trace_gases
+			if(!corresponding)
+				corresponding = new trace_gas.type()
+				trace_gases += corresponding
+			corresponding.moles += trace_gas.moles
+
+	update_values()
 	return 1
 
 /datum/gas_mixture/proc/subtract(datum/gas_mixture/right_side)
@@ -1038,18 +1048,42 @@ What are the archived variables for?
 	//Inputs: Gas mix to remove
 	//Outputs: 1
 
-	oxygen -= right_side.oxygen
-	carbon_dioxide -= right_side.carbon_dioxide
-	nitrogen -= right_side.nitrogen
-	toxins -= right_side.toxins
+	oxygen = max(oxygen - right_side.oxygen)
+	carbon_dioxide = max(carbon_dioxide - right_side.carbon_dioxide)
+	nitrogen = max(nitrogen - right_side.nitrogen)
+	toxins = max(toxins - right_side.toxins)
 
-	if((trace_gases.len > 0)||(right_side.trace_gases.len > 0))
+	if(trace_gases.len || right_side.trace_gases.len)
 		for(var/datum/gas/trace_gas in right_side.trace_gases)
 			var/datum/gas/corresponding = locate(trace_gas.type) in trace_gases
-			if(!corresponding)
-				corresponding = new trace_gas.type()
-				trace_gases += corresponding
+			if(corresponding)
+				corresponding.moles = max(0, corresponding.moles - trace_gas.moles)
 
-			corresponding.moles -= trace_gas.moles
+	update_values()
+	return 1
+
+/datum/gas_mixture/proc/multiply(factor)
+	oxygen *= factor
+	carbon_dioxide *= factor
+	nitrogen *= factor
+	toxins *= factor
+
+	if(trace_gases && trace_gases.len)
+		for(var/datum/gas/trace_gas in trace_gases)
+			trace_gas.moles *= factor
+
+	update_values()
+	return 1
+
+/datum/gas_mixture/proc/divide(factor)
+	oxygen /= factor
+	carbon_dioxide /= factor
+	nitrogen /= factor
+	toxins /= factor
+
+	if(trace_gases && trace_gases.len)
+		for(var/datum/gas/trace_gas in trace_gases)
+			trace_gas.moles /= factor
+
 	update_values()
 	return 1

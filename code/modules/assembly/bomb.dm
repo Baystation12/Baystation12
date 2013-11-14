@@ -6,7 +6,7 @@
 	w_class = 3.0
 	throw_speed = 2
 	throw_range = 4
-	flags = FPRINT | TABLEPASS| CONDUCT //Copied this from old code, so this may or may not be necessary
+	flags = FPRINT | CONDUCT //Copied this from old code, so this may or may not be necessary
 	var/status = 0   //0 - not readied //1 - bomb finished with welder
 	var/obj/item/device/assembly_holder/bombassembly = null   //The first part of the bomb is an assembly holder, holding an igniter+some device
 	var/obj/item/weapon/tank/bombtank = null //the second part of the bomb is a plasma tank
@@ -72,6 +72,19 @@
 /obj/item/device/onetankbomb/HasProximity(atom/movable/AM as mob|obj)
 	if(bombassembly)
 		bombassembly.HasProximity(AM)
+
+/obj/item/device/onetankbomb/Crossed(atom/movable/AM as mob|obj) //for mousetraps
+	if(bombassembly)
+		bombassembly.Crossed(AM)
+
+/obj/item/device/onetankbomb/on_found(mob/finder as mob) //for mousetraps
+	if(bombassembly)
+		bombassembly.on_found(finder)
+
+/obj/item/device/onetankbomb/hear_talk(mob/living/M as mob, msg)
+	if(bombassembly)
+		bombassembly.hear_talk(M, msg)
+
 
 // ---------- Procs below are for tanks that are used exclusively in 1-tank bombs ----------
 

@@ -100,11 +100,17 @@ var/list/karma_spenders = list()
 
 
 
-mob/verb/check_karma()
+/client/verb/check_karma()
 	set name = "Check Karma"
 	set category = "Special Verbs"
 	set desc = "Reports how much karma you have accrued"
 
+	var/currentkarma=verify_karma()
+	usr << {"<br>You have <b>[currentkarma]</b> available."}
+	return
+
+/client/proc/verify_karma()
+	var/currentkarma=0
 	if(!dbcon.IsConnected())
 		usr << "\red Unable to connect to karma database. Please try again later.<br>"
 		return
@@ -117,11 +123,146 @@ mob/verb/check_karma()
 		while(query.NextRow())
 			totalkarma = query.item[1]
 			karmaspent = query.item[2]
-		var/currentkarma = (text2num(totalkarma) - text2num(karmaspent))
-		if(totalkarma)
+		currentkarma = (text2num(totalkarma) - text2num(karmaspent))
+/*		if(totalkarma)
 			usr << {"<br>You have <b>[currentkarma]</b> available.<br>
 You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 		else
-			usr << "<b>Your total karma is:</b> 0<br>"
+			usr << "<b>Your total karma is:</b> 0<br>"*/
+	return currentkarma
 
 
+/client/verb/karmashop()
+	set name = "karmashop"
+	set desc = "Spend your hard-earned karma here"
+	set hidden = 1
+
+	karmashopmenu()
+	return
+
+
+/client/proc/karmashopmenu()
+	var/dat = {"<B>Karma Shop</B><br>
+		<a href='?src=\ref[src];KarmaBuy=1'>Unlock Nanotrasen Representative -- 15KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=2'>Unlock Customs Officer -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=3'>Unlock BlueShield -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=4'>Unlock Kidan -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Grey -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=6'>Unlock Vox -- 45KP</a><br>
+
+		"}
+
+// 		<a href='?src=\ref[src];KarmaBuy=7'>Unlock Slime People -- 45KP</a><br>
+
+	var/datum/browser/popup = new(usr, "karmashop", "<div align='center'>Karma Shop</div>", 400, 400)
+	popup.set_content(dat)
+	popup.open(0)
+	return
+
+
+
+/client/proc/DB_job_unlock(var/job,var/cost)
+
+	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM whitelist WHERE ckey='[usr.key]'")
+	query.Execute()
+
+	var/dbjob
+	var/dbckey
+	while(query.NextRow())
+
+		dbckey = query.item[2]
+		dbjob = query.item[3]
+	if(!dbckey)
+		query = dbcon.NewQuery("INSERT INTO whitelist (ckey, job) VALUES ('[usr.key]','[job]')")
+		if(!query.Execute())
+			var/err = query.ErrorMsg()
+			log_game("SQL ERROR during whitelist logging (adding new key). Error : \[[err]\]\n")
+			message_admins("SQL ERROR during whitelist logging (adding new key). Error : \[[err]\]\n")
+			return
+		else
+			usr << "You have unlocked [job]."
+			message_admins("[key_name(usr)] has unlocked [job].")
+			karmacharge(cost)
+
+	if(dbckey)
+		var/list/joblist = text2list(dbjob,",")
+		if(!(job in joblist))
+			joblist += job
+			var/newjoblist = dd_list2text(joblist,",")
+			query = dbcon.NewQuery("UPDATE whitelist SET job='[newjoblist]' WHERE ckey='[dbckey]'")
+			if(!query.Execute())
+				var/err = query.ErrorMsg()
+				log_game("SQL ERROR during whitelist logging (updating existing entry). Error : \[[err]\]\n")
+				message_admins("SQL ERROR during whitelist logging (updating existing entry). Error : \[[err]\]\n")
+				return
+			else
+				usr << "You have unlocked [job]."
+				message_admins("[key_name(usr)] has unlocked [job].")
+				karmacharge(cost)
+		else
+			usr << "You already have this job unlocked!"
+			return
+
+
+
+
+
+/client/proc/DB_species_unlock(var/species,var/cost)
+
+	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM whitelist WHERE ckey='[usr.key]'")
+	query.Execute()
+
+	var/dbspecies
+	var/dbckey
+	while(query.NextRow())
+
+		dbckey = query.item[2]
+		dbspecies = query.item[4]
+	if(!dbckey)
+		query = dbcon.NewQuery("INSERT INTO whitelist (ckey, species) VALUES ('[usr.key]','[species]')")
+		if(!query.Execute())
+			var/err = query.ErrorMsg()
+			log_game("SQL ERROR during whitelist logging (adding new key). Error : \[[err]\]\n")
+			message_admins("SQL ERROR during whitelist logging (adding new key). Error : \[[err]\]\n")
+			return
+		else
+			usr << "You have unlocked [species]."
+			message_admins("[key_name(usr)] has unlocked [species].")
+			karmacharge(cost)
+
+	if(dbckey)
+		var/list/specieslist = text2list(dbspecies,",")
+		if(!(species in specieslist))
+			specieslist += species
+			var/newspecieslist = dd_list2text(specieslist,",")
+			query = dbcon.NewQuery("UPDATE whitelist SET species='[newspecieslist]' WHERE ckey='[dbckey]'")
+			if(!query.Execute())
+				var/err = query.ErrorMsg()
+				log_game("SQL ERROR during whitelist logging (updating existing entry). Error : \[[err]\]\n")
+				message_admins("SQL ERROR during whitelist logging (updating existing entry). Error : \[[err]\]\n")
+				return
+			else
+				usr << "You have unlocked [species]."
+				message_admins("[key_name(usr)] has unlocked [species].")
+				karmacharge(cost)
+		else
+			usr << "You already have this species unlocked!"
+			return
+
+/client/proc/karmacharge(var/cost)
+	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM karmatotals WHERE byondkey='[usr.key]'")
+	query.Execute()
+
+	while(query.NextRow())
+		var/spent = text2num(query.item[4])
+		spent += cost
+		query = dbcon.NewQuery("UPDATE karmatotals SET karmaspent=[spent] WHERE byondkey='[usr.key]'")
+		if(!query.Execute())
+			var/err = query.ErrorMsg()
+			log_game("SQL ERROR during karmaspent updating (updating existing entry). Error : \[[err]\]\n")
+			message_admins("SQL ERROR during karmaspent updating (updating existing entry). Error : \[[err]\]\n")
+			return
+		else
+			usr << "You have been charged [cost]."
+			message_admins("[key_name(usr)] has been charged [cost].")
+			return
