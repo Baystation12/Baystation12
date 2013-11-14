@@ -11,6 +11,7 @@
 
 /datum/event/weightless/start()
 	for(var/area/A in world)
+		if (A.z != 1) continue	//Don't turn off gravity on non-station z-levels.
 		A.gravitychange(0,A)
 /*
 	if(control)
@@ -18,6 +19,7 @@
 */
 /datum/event/weightless/end()
 	for(var/area/A in world)
+		if (A.z != 1) continue
 		A.gravitychange(1,A)
 
 	if(announceWhen >= 0)
