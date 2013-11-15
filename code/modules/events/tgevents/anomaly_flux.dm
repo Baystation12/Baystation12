@@ -18,5 +18,5 @@
 
 /datum/event/anomaly/anomaly_flux/end()
 	if(newAnomaly)//If it hasn't been neutralized, it's time to blow up.
-		explosion(newAnomaly, -1, 3, 5, 5)
+		explosion(newAnomaly.loc, -1, 3, 5, 5)
 		del(newAnomaly)
