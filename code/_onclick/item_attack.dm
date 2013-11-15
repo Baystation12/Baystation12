@@ -7,8 +7,15 @@
 /atom/proc/attackby(obj/item/W, mob/user)
 	return
 /atom/movable/attackby(obj/item/W, mob/user)
+
+	if(istype(W,/obj/item/weapon/tome))			// For some reason onclick intercepts this so we're sending it back where it belongs.
+		var/obj/item/weapon/tome/thistome = W
+		thistome.smackghost(src)
+		return
+
 	if(!(W.flags&NOBLUDGEON))
 		visible_message("<span class='danger'>[src] has been hit by [user] with [W].</span>")
+
 
 /mob/living/attackby(obj/item/I, mob/user)
 	if(istype(I) && ismob(user))
