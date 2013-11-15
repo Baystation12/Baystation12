@@ -7,11 +7,11 @@
 	item_state = "flashbang"
 	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
-	var/datum/effect/effect/system/smoke_spread/bad/smoke
+	var/datum/effect/effect/system/bad_smoke_spread/smoke
 
 	New()
 		..()
-		src.smoke = new /datum/effect/effect/system/smoke_spread/bad
+		src.smoke = new /datum/effect/effect/system/bad_smoke_spread
 		src.smoke.attach(src)
 
 	prime()

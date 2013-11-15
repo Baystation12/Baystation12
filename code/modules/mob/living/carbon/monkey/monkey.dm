@@ -10,27 +10,28 @@
 
 	var/obj/item/weapon/card/id/wear_id = null // Fix for station bounced radios -- Skie
 	var/greaterform = "Human"                  // Used when humanizing a monkey.
+	var/ico = "monkey"                         // Used when updating icons.
 	var/uni_append = "12C4E2"                  // Small appearance modifier for different species.
 
 /mob/living/carbon/monkey/tajara
 	name = "farwa"
 	voice_name = "farwa"
 	speak_emote = list("mews")
-	icon_state = "tajkey1"
+	ico = "tajkey"
 	uni_append = "0A0E00"
 
 /mob/living/carbon/monkey/skrell
 	name = "neaera"
 	voice_name = "neaera"
 	speak_emote = list("squicks")
-	icon_state = "skrellkey1"
+	ico = "skrellkey"
 	uni_append = "01CC92"
 
 /mob/living/carbon/monkey/unathi
 	name = "stok"
 	voice_name = "stok"
 	speak_emote = list("hisses")
-	icon_state = "stokkey1"
+	ico = "stokkey"
 	uni_append = "044C5D"
 
 /mob/living/carbon/monkey/New()

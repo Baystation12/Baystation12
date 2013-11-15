@@ -6,7 +6,7 @@
 	name = "diona nymph"
 	voice_name = "diona nymph"
 	speak_emote = list("chirrups")
-	icon_state = "nymph1"
+	ico = "nymph"
 	var/list/donors = list()
 	var/ready_evolve = 0
 

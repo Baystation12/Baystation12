@@ -31,7 +31,7 @@ datum
 				var/datum/reagent/self = src
 				src = null										  //of the reagent to the mob on TOUCHING it.
 
-				if(!istype(self.holder.my_atom, /obj/effect/effect/smoke/chem))
+				if(!istype(self.holder.my_atom, /obj/effect/effect/chem_smoke))
 					// If the chemicals are in a smoke cloud, do not try to let the chemicals "penetrate" into the mob's system (balance station 13) -- Doohl
 
 					if(method == TOUCH)
@@ -2347,13 +2347,6 @@ datum
 			id = "grapejuice"
 			description = "It's grrrrrape!"
 			color = "#863333" // rgb: 134, 51, 51
-		
-		drink/grapesoda
-			name = "Grape Soda"
-			id = "grapesoda"
-			description = "Grapes made into a fine drank."
-			color = "#421C52" // rgb: 98, 57, 53
-			adj_drowsy 	= 	-3
 
 		drink/poisonberryjuice
 			name = "Poison Berry Juice"
