@@ -731,6 +731,14 @@ datum
 				..()
 				return
 
+		paracetamol
+			name = "Paracetamol"
+			id = "paracetamol"
+			description = "Most probably know this as Tylenol, but this chemical is a mild, simple painkiller."
+			reagent_state = LIQUID
+			color = "#C855DC"
+			overdose = REAGENTS_OVERDOSE
+
 		tramadol
 			name = "Tramadol"
 			id = "tramadol"
@@ -745,7 +753,7 @@ datum
 			description = "An effective and very addictive painkiller."
 			reagent_state = LIQUID
 			color = "#C805DC"
-			overdose = REAGENTS_OVERDOSE
+			overdose = 20
 
 		virus_food
 			name = "Virus Food"
@@ -1025,7 +1033,7 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				if(M.getOxyLoss() && prob(80)) M.adjustOxyLoss(-1*REM)
+				if(M.getOxyLoss()) M.adjustOxyLoss(-1*REM)
 				if(M.getBruteLoss() && prob(80)) M.heal_organ_damage(1*REM,0)
 				if(M.getFireLoss() && prob(80)) M.heal_organ_damage(0,1*REM)
 				if(M.getToxLoss() && prob(80)) M.adjustToxLoss(-1*REM)
@@ -1679,9 +1687,11 @@ datum
 						if(prob(5))	M.emote("yawn")
 					if(12 to 15)
 						M.eye_blurry = max(M.eye_blurry, 10)
-					if(15 to 25)
+					if(15 to 49)
+						if(prob(50))
+							M.Weaken(2)
 						M.drowsyness  = max(M.drowsyness, 20)
-					if(25 to INFINITY)
+					if(50 to INFINITY)
 						M.Weaken(20)
 						M.drowsyness  = max(M.drowsyness, 30)
 				data++
@@ -1740,7 +1750,7 @@ datum
 			description = "A specific chemical based on Potassium Chloride to stop the heart for surgery. Not safe to eat!"
 			reagent_state = SOLID
 			color = "#FFFFFF" // rgb: 255,255,255
-			toxpwr = 3
+			toxpwr = 2
 			overdose = 20
 
 			on_mob_life(var/mob/living/carbon/M as mob)
