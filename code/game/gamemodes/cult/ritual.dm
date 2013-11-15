@@ -338,7 +338,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 //		usr << browse(null, "window=tank")
 
 	attack(mob/living/M as mob, mob/living/user as mob)
-
+		user.show_message("You attacked [M.name] they are a [M.type].  You asshole.")
 		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had the [name] used on him by [user.name] ([user.ckey])</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used [name] on [M.name] ([M.ckey])</font>")
 		msg_admin_attack("[user.name] ([user.ckey]) used [name] on [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
@@ -474,6 +474,20 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 				words[w] = T.words[w]
 			user << "You copy the translation notes from your tome."
 
+	proc/smackghost(mob/dead/M as mob)
+		if(istype(M,/mob/dead))                              //Always time for sanity checks...though it should never happen.
+			if(M.invisibility != 0)
+				M.invisibility = 0
+				usr.visible_message( \
+					"\red [usr] drags the [M] to our plan of reality!", \
+					"\red You drag the [M] to our plan of reality!" \
+				)
+			else
+				usr.visible_message ( \
+					"\red [usr] just tried to smash his book into that ghost!  It's not very effective", \
+					"\red You get the feeling that the ghost can't become any more visible." \
+				)
+		return
 
 	examine()
 		set src in usr
