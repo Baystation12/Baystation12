@@ -371,3 +371,17 @@
 	item_state = "sundress"
 	item_color = "sundress"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/rank/mecha_operator
+	desc = "It's a slimming black with reinforced seams."
+	name = "pilot's jumpsuit"
+	icon_state = "robotics2"
+	item_state = "robotics"
+	item_color = "robotics2"
+
+/obj/item/clothing/under/rank/cadet
+	desc = ""
+	name = "security cadet's uniform"
+	icon_state = "officertanclothes"
+	item_state = "r_suit"
+	item_color = "officertanclothes"

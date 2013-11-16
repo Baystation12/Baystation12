@@ -43,6 +43,7 @@ var/const/CHAPLAIN			=(1<<10)
 var/const/CLOWN				=(1<<11)
 var/const/MIME				=(1<<12)
 var/const/ASSISTANT			=(1<<13)
+var/const/INTERN			=(1<<14) 	//Multi-assistant
 
 
 var/list/assistant_occupations = list(
@@ -97,7 +98,8 @@ var/list/civilian_positions = list(
 	"Shaft Miner",
 	"Lawyer",
 	"Chaplain",
-	"Assistant"
+	"Assistant",
+	"Intern"
 )
 
 //Space Assholes
