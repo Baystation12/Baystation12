@@ -203,7 +203,6 @@ This function completely restores a damaged organ to perfect condition.
 			implants -= implanted_object
 
 	owner.updatehealth()
-	update_icon()
 
 
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
@@ -290,7 +289,6 @@ This function completely restores a damaged organ to perfect condition.
 		perma_injury = 0
 
 	update_germs()
-	update_icon()
 	return
 
 //Updating germ levels. Handles organ germ levels and necrosis.
@@ -383,6 +381,8 @@ This function completely restores a damaged organ to perfect condition.
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
+	if (update_icon())
+		owner.UpdateDamageIcon(1)
 
 //Updates brute_damn and burn_damn from wound damages. Updates BLEEDING status.
 /datum/organ/external/proc/update_damages()
@@ -415,10 +415,6 @@ This function completely restores a damaged organ to perfect condition.
 	var/n_is = damage_state_text()
 	if (n_is != damage_state)
 		damage_state = n_is
-		if(status & ORGAN_DESTROYED)
-			owner.update_body(1)
-		else
-			owner.UpdateDamageIcon(1)
 		return 1
 	return 0
 
@@ -550,7 +546,7 @@ This function completely restores a damaged organ to perfect condition.
 			var/lol = pick(cardinal)
 			step(organ,lol)
 
-			owner.regenerate_icons()
+			owner.update_body(1)
 
 
 /****************************************************
