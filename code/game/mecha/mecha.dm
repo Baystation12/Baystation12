@@ -115,6 +115,7 @@
 		cell = C
 		return
 	cell = new(src)
+	cell.name = "high-capacity power cell"
 	cell.charge = 15000
 	cell.maxcharge = 15000
 
