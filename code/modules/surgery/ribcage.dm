@@ -209,29 +209,41 @@
 		if (istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
 			tool_name = "regenerative membrane"
 		if (istype(tool, /obj/item/stack/medical/bruise_pack))
-			tool_name = "the poultice"
-
+			if (istype(tool, /obj/item/stack/medical/bruise_pack/tajaran))
+				tool_name = "the poultice"
+			else
+				tool_name = "the bandaid"
+		var/datum/organ/external/chest/chest = target.get_organ("chest")
 		for(var/datum/organ/internal/I in chest.internal_organs)
 			if(I && I.damage > 0)
-				if(heart.robotic < 2)
-					user.visible_message("[user] starts treating damage to [target]'s [I,name] with [tool_name].", \
-					"You start treating damage to [target]'s [I,name] with [tool_name]." )
+				if(I.robotic < 2)
+					user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
+					"You start treating damage to [target]'s [I.name] with [tool_name]." )
 				else
-					user.visible_message("\blue [user] attempts to repair [target]'s mechanical [I,name] with [tool_name]...", \
-					"\blue You attempt to repair [target]'s mechanical [I,name] with [tool_name]...")
+					user.visible_message("\blue [user] attempts to repair [target]'s mechanical [I.name] with [tool_name]...", \
+					"\blue You attempt to repair [target]'s mechanical [I.name] with [tool_name]...")
 
 		target.custom_pain("The pain in your chest is living hell!",1)
 		..()
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/tool_name = "\the [tool]"
+		if (istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
+			tool_name = "regenerative membrane"
+		if (istype(tool, /obj/item/stack/medical/bruise_pack))
+			if (istype(tool, /obj/item/stack/medical/bruise_pack/tajaran))
+				tool_name = "the poultice"
+			else
+				tool_name = "the bandaid"
+		var/datum/organ/external/chest/chest = target.get_organ("chest")
 		for(var/datum/organ/internal/I in chest.internal_organs)
 			if(I && I.damage > 0)
-				if(heart.robotic < 2)
-					user.visible_message("[user] treats damage to [target]'s [I,name] with [tool_name].", \
-					"You treat damage to [target]'s [I,name] with [tool_name]." )
+				if(I.robotic < 2)
+					user.visible_message("[user] treats damage to [target]'s [I.name] with [tool_name].", \
+					"You treat damage to [target]'s [I.name] with [tool_name]." )
 				else
-					user.visible_message("\blue [user] pokes [target]'s mechanical [I,name] with [tool_name]...", \
-					"\blue You poke [target]'s mechanical [I,name] with [tool_name]... \red For no effect, since it's robotic.")
+					user.visible_message("\blue [user] pokes [target]'s mechanical [I.name] with [tool_name]...", \
+					"\blue You poke [target]'s mechanical [I.name] with [tool_name]... \red For no effect, since it's robotic.")
 				I.damage = 0
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -243,15 +255,15 @@
 		if (istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
 			target.adjustToxLoss(5)
 
-		else if (istype(tool, /obj/item/stack/medical/bruise_pack/tajaran))
-			target.adjustToxLoss(7)
-
 		else if (istype(tool, /obj/item/stack/medical/bruise_pack))
-			dam_amt = 5
-			target.adjustToxLoss(10)
-			affected.createwound(CUT, 5)
+			if (istype(tool, /obj/item/stack/medical/bruise_pack/tajaran))
+				target.adjustToxLoss(7)
+			else
+				dam_amt = 5
+				target.adjustToxLoss(10)
+				affected.createwound(CUT, 5)
 
-		for(var/datum/organ/internal/I in chest.internal_organs)
+		for(var/datum/organ/internal/I in affected.internal_organs)
 			if(I && I.damage > 0)
 				I.take_damage(dam_amt,0)
 
