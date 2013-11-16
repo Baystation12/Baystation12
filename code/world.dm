@@ -66,7 +66,7 @@
 
 	plmaster = new /obj/effect/overlay()
 	plmaster.icon = 'icons/effects/tile_effects.dmi'
-	plmaster.icon_state = "plasma"
+	plmaster.icon_state = "plasma-purple"
 	plmaster.layer = FLY_LAYER
 	plmaster.mouse_opacity = 0
 
