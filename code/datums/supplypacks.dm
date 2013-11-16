@@ -959,18 +959,18 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/plasma
 	containername = "Supermatter crate (CAUTIION)"
-	access = access_ce
 	group = "Engineering"
+	access = access_ce
 
 
-/datum/supply_packs/smsmall
+/* /datum/supply_packs/smsmall // Currently nonfunctional, waiting on virgil
 	name = "Supermatter Shard"
 	contains = list(/obj/machinery/power/supermatter/shard)
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure/plasma
-	containername = "Supermatter crate (CAUTIION)"
+	containername = "Supermatter shard crate (CAUTIION)"
 	access = access_ce
-	group = "Engineering"
+	group = "Engineering" */
 
 /datum/supply_packs/shield_cap
 	contains = list(/obj/item/weapon/circuitboard/shield_cap)
