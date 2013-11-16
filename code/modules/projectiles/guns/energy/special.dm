@@ -185,3 +185,10 @@ obj/item/weapon/gun/energy/staff/focus
 			user << "\red The [src.name] will now strike only a single person."
 			projectile_type = "/obj/item/projectile/forcebolt"
 	*/
+
+/obj/item/weapon/gun/energy/clown
+	name = "HONK Rifle"
+	desc = "Clown Planet's finest."
+	icon_state = "energy"
+	projectile_type = "/obj/item/projectile/clown"
+	fire_sound = 'sound/weapons/Gunshot_smg.ogg'

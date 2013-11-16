@@ -138,3 +138,17 @@
 			var/mob/living/carbon/human/M = target
 			M.adjustBrainLoss(20)
 			M.hallucination += 20
+
+/obj/item/projectile/clown
+	name = "snap-pop"
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "snappop"
+
+	Bump(atom/A as mob|obj|turf|area)
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(3, 1, src)
+		s.start()
+		new /obj/effect/decal/cleanable/ash(src.loc)
+		src.visible_message("\red The [src.name] explodes!","\red You hear a snap!")
+		playsound(src, 'sound/effects/snap.ogg', 50, 1)
+		del(src)
