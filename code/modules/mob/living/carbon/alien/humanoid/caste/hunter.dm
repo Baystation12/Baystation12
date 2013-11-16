@@ -1,8 +1,8 @@
 /mob/living/carbon/alien/humanoid/hunter
 	name = "alien hunter"
 	caste = "h"
-	maxHealth = 150
-	health = 150
+	maxHealth = 180
+	health = 180
 	storedPlasma = 100
 	max_plasma = 150
 	icon_state = "alienh_s"

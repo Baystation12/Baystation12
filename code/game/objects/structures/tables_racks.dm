@@ -270,6 +270,14 @@
 
 /obj/structure/table/attack_alien(mob/user)
 	visible_message("<span class='danger'>[user] slices [src] apart!</span>")
+	if(istype(src, /obj/structure/table/reinforced))
+		return
+	else if(istype(src, /obj/structure/table/woodentable))
+		new/obj/item/weapon/table_parts/wood(loc)
+	else
+		new /obj/item/weapon/table_parts(loc)
+	density = 0
+	del(src)
 
 /obj/structure/table/attack_animal(mob/living/simple_animal/user)
 	if(user.wall_smash)

@@ -1,9 +1,11 @@
 /mob/living/carbon/alien/humanoid/queen
 	name = "alien queen"
 	caste = "q"
-	maxHealth = 250
-	health = 250
-	icon_state = "alienq_s"
+	maxHealth = 300
+	health = 300
+	icon = 'icons/mob/alienqueen.dmi'
+	icon_state = "queen_s"
+	pixel_x = -16
 	status_flags = CANPARALYSE
 	heal_rate = 5
 	plasma_rate = 20
@@ -71,10 +73,25 @@
 		new /obj/effect/alien/egg(loc)
 	return
 
+/mob/living/carbon/alien/humanoid/queen/update_icons()
+	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
+	update_hud()		//TODO: remove the need for this to be here
+	overlays.Cut()
+	if(lying)
+		if(resting)					icon_state = "queen_sleep"
+		else if(stat == DEAD)		icon_state = "queen_dead"
+		else						icon_state = "queen_l"
+		for(var/image/I in overlays_lying)
+			overlays += I
+	else
+		icon_state = "queen_s"
+		for(var/image/I in overlays_standing)
+			overlays += I
+
 
 /mob/living/carbon/alien/humanoid/queen/large
 	icon = 'icons/mob/alienqueen.dmi'
-	icon_state = "queen_s"
+	icon_state = "queen_s-old"
 	pixel_x = -16
 
 /mob/living/carbon/alien/humanoid/queen/large/update_icons()
@@ -82,11 +99,12 @@
 	update_hud()		//TODO: remove the need for this to be here
 	overlays.Cut()
 	if(lying)
-		if(resting)					icon_state = "queen_sleep"
-		else						icon_state = "queen_l"
+		if(resting)					icon_state = "queen_sleep-old"
+		else if(stat == DEAD)		icon_state = "queen_dead-old"
+		else						icon_state = "queen_l-old"
 		for(var/image/I in overlays_lying)
 			overlays += I
 	else
-		icon_state = "queen_s"
+		icon_state = "queen_s-old"
 		for(var/image/I in overlays_standing)
 			overlays += I

@@ -57,7 +57,7 @@
 	icon_state = "neurotoxin"
 	damage = 5
 	damage_type = TOX
-	weaken = 5
+	weaken = 10
 
 
 
