@@ -13,7 +13,7 @@ obj/machinery/recharger
 obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 	if(istype(user,/mob/living/silicon))
 		return
-	if(istype(G, /obj/item/weapon/gun/energy) || istype(G, /obj/item/weapon/melee/baton))
+	if(istype(G, /obj/item/weapon/gun/energy) || istype(G, /obj/item/weapon/melee/baton) || istype(G, /obj/item/weapon/defibrillator))
 		if(charging)
 			return
 
@@ -75,6 +75,15 @@ obj/machinery/recharger/process()
 			var/obj/item/weapon/melee/baton/B = charging
 			if(B.charges < initial(B.charges))
 				B.charges++
+				icon_state = "recharger1"
+				use_power(150)
+			else
+				icon_state = "recharger2"
+			return
+		if(istype(charging, /obj/item/weapon/defibrillator))
+			var/obj/item/weapon/defibrillator/D = charging
+			if(D.charges < initial(D.charges))
+				D.charges++
 				icon_state = "recharger1"
 				use_power(150)
 			else

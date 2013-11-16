@@ -605,6 +605,7 @@
 #include "code\game\objects\structures\crates_lockers\closets\l3closet.dm"
 #include "code\game\objects\structures\crates_lockers\closets\malfunction.dm"
 #include "code\game\objects\structures\crates_lockers\closets\syndicate.dm"
+#include "code\game\objects\structures\crates_lockers\closets\theatrecloset.dm"
 #include "code\game\objects\structures\crates_lockers\closets\utility_closets.dm"
 #include "code\game\objects\structures\crates_lockers\closets\wardrobe.dm"
 #include "code\game\objects\structures\crates_lockers\closets\secure\bar.dm"
@@ -1317,4 +1318,9 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\tgstation2.dmm"
+#include "tauceti\defibrillator\defibrillator.dm"
+#include "tauceti\vendomats\bloodvend.dm"
+#include "tauceti\vendomats\holybane.dm"
+#include "tauceti\vendomats\omskvend.dm"
+#include "tauceti\vendomats\theatromat.dm"
 // END_INCLUDE
