@@ -737,7 +737,11 @@ datum
 			description = "Most probably know this as Tylenol, but this chemical is a mild, simple painkiller."
 			reagent_state = LIQUID
 			color = "#C855DC"
-			overdose = REAGENTS_OVERDOSE
+			overdose = 60
+
+			on_mob_life(var/mob/living/M as mob)
+				if (volume > overdose)
+					M.hallucination = max(M.hallucination, 2)
 
 		tramadol
 			name = "Tramadol"
@@ -745,7 +749,11 @@ datum
 			description = "A simple, yet effective painkiller."
 			reagent_state = LIQUID
 			color = "#C8A5DC"
-			overdose = REAGENTS_OVERDOSE
+			overdose = 30
+
+			on_mob_life(var/mob/living/M as mob)
+				if (volume > overdose)
+					M.hallucination = max(M.hallucination, 2)
 
 		oxycodone
 			name = "Oxycodone"
@@ -754,6 +762,12 @@ datum
 			reagent_state = LIQUID
 			color = "#C805DC"
 			overdose = 20
+
+			on_mob_life(var/mob/living/M as mob)
+				if (volume > overdose)
+					M.druggy = max(M.druggy, 10)
+					M.hallucination = max(M.hallucination, 3)
+
 
 		virus_food
 			name = "Virus Food"
