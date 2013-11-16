@@ -393,6 +393,11 @@
 			sight &= ~SEE_OBJS
 			see_in_dark = 4
 			see_invisible = SEE_INVISIBLE_LEVEL_TWO
+		if(perception == 1)
+			sight |= SEE_TURFS
+			sight &= ~SEE_MOBS
+			see_in_dark = 8
+			see_invisible = BORGMESON	
 
 		if (healths)
 			if (stat != 2)
