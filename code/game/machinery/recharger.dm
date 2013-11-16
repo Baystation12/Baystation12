@@ -137,6 +137,15 @@ obj/machinery/recharger/wallcharger/process()
 				use_power(150)
 			else
 				icon_state = "wrecharger2"
+			return
+		if(istype(charging, /obj/item/weapon/defibrillator))
+			var/obj/item/weapon/defibrillator/D = charging
+			if(D.charges < initial(D.charges))
+				D.charges++
+				icon_state = "recharger1"
+				use_power(150)
+			else
+				icon_state = "recharger2"
 
 obj/machinery/recharger/wallcharger/update_icon()
 	if(charging)
