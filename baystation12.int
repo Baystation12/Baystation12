@@ -1,9 +1,0 @@
-// BEGIN_INTERNALS
-/*
-MAP_ICON_TYPE: 0
-WINDOW: icons\mob\mob.dmi;icons\mob\hud.dmi
-DIR: icons icons\mob 
-FILE: icons\mob\hud.dmi
-AUTO_FILE_DIR: OFF
-*/
-// END_INTERNALS
