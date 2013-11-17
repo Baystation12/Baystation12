@@ -348,6 +348,10 @@ var/list/slot_equipment_priority = list( \
 		return
 	else
 		var/deathtime = world.time - src.timeofdeath
+		var/mob/dead/observer/G = src
+		if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+			usr << "\blue <B>Upon using the antagHUD you forfeighted the ability to join the round.</B>"
+			return
 		var/deathtimeminutes = round(deathtime / 600)
 		var/pluralcheck = "minute"
 		if(deathtimeminutes == 0)
@@ -358,6 +362,7 @@ var/list/slot_equipment_priority = list( \
 			pluralcheck = " [deathtimeminutes] minutes and"
 		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
 		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
+		
 		if (deathtime < 18000)
 			usr << "You must wait 30 minutes to respawn!"
 			return
