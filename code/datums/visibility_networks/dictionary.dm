@@ -1,5 +1,7 @@
-var/datum/visibility_network/cameras/cameraNetwork = new /datum/visibility_network/cameras()
-var/datum/visibility_network/list/visibility_networks = list("ALL_CAMERAS"=cameraNetwork)
+var/datum/visibility_network/cameras/cameraNetwork = new()
+var/datum/visibility_network/cult/cultNetwork = new()
+var/datum/visibility_network/list/visibility_networks = list("ALL_CAMERAS"=cameraNetwork, "CULT" = cultNetwork)
+
 
 // used by turfs and objects to update all visibility networks
 /proc/updateVisibilityNetworks(atom/A, var/opacity_check = 1)

@@ -40,7 +40,6 @@
 // It will also stream the chunk that the new loc is in.
 
 /mob/aiEye/proc/setLoc(var/T)
-
 	if(ai)
 		if(!isturf(ai.loc))
 			return

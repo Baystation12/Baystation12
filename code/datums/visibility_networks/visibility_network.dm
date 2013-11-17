@@ -86,6 +86,14 @@
 	if(validViewpoint(viewpoint))
 		majorChunkChange(viewpoint, 0)
 
+/datum/visibility_network/proc/getViewpointFromMob(var/mob/currentMob)
+	return FALSE
+		
+/datum/visibility_network/proc/updateMob(var/mob/currentMob)
+	var/viewpoint = getViewpointFromMob(currentMob)
+	if(viewpoint)
+		updateViewpoint(viewpoint)
+		
 
 /datum/visibility_network/proc/updateViewpoint(var/viewpoint)
 	if(validViewpoint(viewpoint))

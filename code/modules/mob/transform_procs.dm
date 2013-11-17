@@ -133,7 +133,71 @@
 	. = O
 	del(src)
 
+	
+/mob/living/carbon/human/make_into_mask(var/should_gib = 0)
+	for(var/t in organs)
+		del(t)
+	return ..(should_gib)
+	
 
+/mob/proc/make_into_mask(var/should_gib = 0, var/should_remove_items = 0)
+
+	if (should_gib)
+		var/mob/spirit/mask/new_spirit = new()
+		
+		if(mind)
+			new_spirit.mind = mind
+			new_spirit.mind.assigned_role = "Mask"
+			new_spirit.mind.original = new_spirit
+		
+		new_spirit.key = key
+		new_spirit.loc=loc
+		
+		spawn(0)
+			src.gib() // gib the body
+		
+		new_spirit.set_name()
+		
+		// let spirits identify cultists
+		if(ticker.mode)
+			ticker.mode.reset_cult_icons_for_spirit(new_spirit)
+	
+		return new_spirit
+		
+	else 
+		if(should_remove_items)
+			for(var/obj/item/W in src)
+				drop_from_inventory(W)
+			
+		icon = null
+		invisibility = 101
+		
+		var/mob/spirit/mask/new_spirit = new()
+		
+		if(mind)
+			new_spirit.mind = mind
+			new_spirit.mind.assigned_role = "Mask"
+			new_spirit.mind.original = new_spirit
+		
+		new_spirit.key = key
+		new_spirit.loc=loc
+		
+		spawn(0)//To prevent the proc from returning null.
+			src.visible_message( \
+				"[src] disappears into the shadows, never to be seen again.", \
+				"You disappear into the shadows, never to be seen again.", \
+				"You hear strange noise, you can't quite place it.")
+			del(src)
+		
+		new_spirit.set_name()
+		
+		// let spirits identify cultists
+		if(ticker.mode)
+			ticker.mode.reset_cult_icons_for_spirit(new_spirit)
+	
+		return new_spirit
+	
+	
 //human -> robot
 /mob/living/carbon/human/proc/Robotize()
 	if (monkeyizing)

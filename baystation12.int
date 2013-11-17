@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 501.1217
+DIR: code code\datums code\datums\visibility_networks code\defines\obj code\game code\game\gamemodes code\game\gamemodes\cult code\game\gamemodes\malfunction code\game\machinery code\game\machinery\camera code\modules code\modules\admin code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human 
+LAST_COMPILE_TIME: 1384721250
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

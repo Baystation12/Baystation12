@@ -106,6 +106,9 @@
 		camera.network = list("SS13","Robots")
 		if(isWireCut(5)) // 5 = BORG CAMERA
 			camera.status = 0
+	
+	// hook the robot into the camera network
+	addToVisibilityNetwork(cameraNetwork)
 
 	initialize_components()
 	//if(!unfinished)
@@ -143,6 +146,8 @@
 		if(T)	mmi.loc = T
 		if(mind)	mind.transfer_to(mmi.brainmob)
 		mmi = null
+	// remove blown up robots from the visibility network
+	removeFromVisibilityNetwork(cameraNetwork)
 	..()
 
 /mob/living/silicon/robot/proc/pick_module()

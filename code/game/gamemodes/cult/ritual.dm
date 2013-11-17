@@ -25,6 +25,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "1"
 	var/visibility = 0
+	var/view_range = 7
 	unacidable = 1
 	layer = TURF_LAYER
 
@@ -67,11 +68,18 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		blood.override = 1
 		for(var/mob/living/silicon/ai/AI in player_list)
 			AI.client.images += blood
+		cultNetwork.viewpoints+=src
+		cultNetwork.addViewpoint(src)
+		
+	Del()
+		..()
+		cultNetwork.viewpoints-=src
+		cultNetwork.removeViewpoint(src)
 
 	examine()
 		set src in view(2)
 
-		if(!iscultist(usr))
+		if(!iscultist(usr) && !isSpirit(usr))
 			usr << "A strange collection of symbols drawn in blood."
 			return
 			/* Explosions... really?

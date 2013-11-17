@@ -327,6 +327,7 @@
 	return
 
 /mob/living/Move(a, b, flag)
+
 	if (buckled)
 		return
 

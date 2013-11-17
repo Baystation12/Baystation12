@@ -1,0 +1,7 @@
+Next Thing To Do 
+
+- sprites!
+- follow!
+	- can we hide inside cultists?
+- cult names!
+- powers
