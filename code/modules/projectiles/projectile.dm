@@ -49,7 +49,7 @@
 	var/eyeblur = 0
 	var/drowsy = 0
 	var/agony = 0
-
+	var/embed = 0 // whether or not the projectile can embed itself in the mob
 
 	proc/on_hit(var/atom/target, var/blocked = 0)
 		if(blocked >= 2)		return 0//Full block
@@ -86,11 +86,8 @@
 				loc = A.loc
 				return 0// nope.avi
 
-			//Lower accurancy/longer range tradeoff. Distance matters a lot here, so at
-			// close distance, actually RAISE the chance to hit.
 			var/distance = get_dist(starting,loc)
 			var/miss_modifier = -30
-			if(isorgan(def_zone,M)) //modify chances to hit based on the area you're attacking.
 				if(def_zone == "l_arm")
 					miss_modifier += 10
 				if(def_zone == "r_arm")
