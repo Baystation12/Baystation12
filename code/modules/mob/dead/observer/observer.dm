@@ -10,6 +10,7 @@
 	blinded = 0
 	anchored = 1	//  don't get pushed around
 	invisibility = INVISIBILITY_OBSERVER
+	var/tempdir = 1
 	var/can_reenter_corpse
 	var/datum/hud/living/carbon/hud = null // hud
 	var/bootime = 0
@@ -94,26 +95,27 @@ Works together with spawning an observer, noted above.
 		
 
 /mob/dead/proc/assess_targets(list/target_list, mob/living/carbon/U)
+	var/mob/dead/observer/M = src
 	var/icon/tempHud = 'icons/mob/hud.dmi'
 	for(var/mob/living/target in target_list)
 		if(iscarbon(target))
 			switch(target.mind.special_role)
 				if("traitor","Syndicate")
-					U.client.images += image(tempHud,target,"hudsyndicate")
+					U.client.images += image(tempHud,target,"hudsyndicate",,M.tempdir)
 				if("Revolutionary")
-					U.client.images += image(tempHud,target,"hudrevolutionary")
+					U.client.images += image(tempHud,target,"hudrevolutionary",,M.tempdir)
 				if("Head Revolutionary")
-					U.client.images += image(tempHud,target,"hudheadrevolutionary")
+					U.client.images += image(tempHud,target,"hudheadrevolutionary",,M.tempdir)
 				if("Cultist")
-					U.client.images += image(tempHud,target,"hudcultist")
+					U.client.images += image(tempHud,target,"hudcultist",,M.tempdir)
 				if("Changeling")
-					U.client.images += image(tempHud,target,"hudchangeling")
+					U.client.images += image(tempHud,target,"hudchangeling",,M.tempdir)
 				if("Wizard","Fake Wizard")
-					U.client.images += image(tempHud,target,"hudwizard")
+					U.client.images += image(tempHud,target,"hudwizard",,M.tempdir)
 				if("Hunter","Sentinel","Drone","Queen")
-					U.client.images += image(tempHud,target,"hudalien")
+					U.client.images += image(tempHud,target,"hudalien",,M.tempdir)
 				if("Death Commando")
-					U.client.images += image(tempHud,target,"huddeathsquad")
+					U.client.images += image(tempHud,target,"huddeathsquad",,M.tempdir)
 				if("Ninja")
 					U.client.images += image(tempHud,target,"hudninja")
 				else//If we don't know what role they have but they have one.
@@ -223,7 +225,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "Ghost"
 	set name = "Toggle AntagHUD"
 	set desc = "Toggles AntagHUD allowing you to see who is the antagonist"
-	if(!config.antag_hud_allowed)
+	if(!config.antag_hud_allowed && !client.holder)
 		src << "\red Admins have disabled this for this round."
 		return
 	if(!client)
@@ -232,11 +234,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(jobban_isbanned(M, "AntagHUD"))
 		src << "\red <B>You have been banned from using this feature</B>"
 		return
-	if(config.antag_hud_restricted && !M.has_enabled_antagHUD) 
+	if(config.antag_hud_restricted && !M.has_enabled_antagHUD &&!client.holder) 
 		var/response = alert(src, "If you turn this on, you will not be able to take any part in the round.","Are you sure you want to turn this feature on?","Yes","No")
 		if(response == "No") return
 		M.can_reenter_corpse = 0
-	if(!M.has_enabled_antagHUD)
+	if(!M.has_enabled_antagHUD && !client.holder)
 		M.has_enabled_antagHUD = 1
 	if(M.antagHUD)
 		M.antagHUD = 0

@@ -293,7 +293,7 @@ Ccomp's first proc.
 			if(g.antagHUD)
 				g.antagHUD = 0				// Disable it on those that have it enabled
 				g.has_enabled_antagHUD = 2		// We'll allow them to respawn
-				g << "\red <B>TheAdministrator has disabled AntagHUD </B>"    
+				g << "\red <B>The Administrator has disabled AntagHUD </B>"    
 		config.antag_hud_allowed = 0
 		src << "\red <B>AntagHUD usage has been disabled</B>"
 		action = "disabled"
