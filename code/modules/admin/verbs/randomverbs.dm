@@ -257,7 +257,7 @@ Ccomp's first proc.
 	set desc = "Let's the player bypass the 30 minute wait to respawn or allow them to re-enter their corpse."
 	if(!holder)
 		src << "Only administrators may use this command."
-	var/list/ghosts= get_ghosts(1)
+	var/list/ghosts= get_ghosts(1,1)
 
 	var/target = input("Please, select a ghost!", "COME BACK TO LIFE!", null, null) as null|anything in ghosts
 	if(!target)
