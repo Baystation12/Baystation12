@@ -146,12 +146,11 @@
 	var/deathpoints = score_deadcrew * 25
 	var/researchpoints = score_researchdone * 30
 	var/eventpoints = score_eventsendured * 50
-	var/borgpoints = score_cyborgsmade * 50
 	var/escapoints = score_escapees * 25
-	var/harvests = score_stuffharvested * 5
+	var/harvests = score_stuffharvested * 5 //done
 	var/shipping = score_stuffshipped * 5
-	var/mining = score_oremined * 2
-	var/meals = score_meals * 5
+	var/mining = score_oremined * 2 //done
+	var/meals = score_meals * 5 //done, but this only counts cooked meals, not drinks served
 	var/power = score_powerloss * 20
 	var/messpoints
 	if (score_mess != 0) messpoints = score_mess
@@ -179,7 +178,6 @@
 	score_crewscore += shipping
 	score_crewscore += harvests
 	score_crewscore += mining
-	score_crewscore += borgpoints
 	score_crewscore += researchpoints
 	score_crewscore += eventpoints
 	score_crewscore += escapoints
@@ -302,7 +300,6 @@
 	<B>Ore Mined:</B> [score_oremined] ([score_oremined * 2] Points)<BR>
 	<B>Refreshments Prepared:</B> [score_meals] ([score_meals * 5] Points)<BR>
 	<B>Research Completed:</B> [score_researchdone] ([score_researchdone * 30] Points)<BR>
-	<B>Cyborgs Constructed:</B> [score_cyborgsmade] ([score_cyborgsmade * 50] Points)<BR>"}
 	if (emergency_shuttle.location == 2) dat += "<B>Shuttle Escapees:</B> [score_escapees] ([score_escapees * 25] Points)<BR>"
 	dat += {"<B>Random Events Endured:</B> [score_eventsendured] ([score_eventsendured * 50] Points)<BR>
 	<B>Whole Station Powered:</B> [score_powerbonus ? "Yes" : "No"] ([score_powerbonus * 2500] Points)<BR>

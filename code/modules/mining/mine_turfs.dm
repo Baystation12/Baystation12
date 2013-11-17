@@ -426,6 +426,7 @@ commented out in r5061, I left it because of the shroom thingies
 				drop_mineral()
 				pop(excavation_minerals)
 				mineralAmt--
+				score_oremined++
 
 			//drop some rocks
 			next_rock += P.excavation_amount * 10
@@ -467,6 +468,7 @@ commented out in r5061, I left it because of the shroom thingies
 		//if the turf has already been excavated, some of it's ore has been removed
 		for (var/i=0;i<mineralAmt;i++)
 			drop_mineral()
+			score_oremined++
 
 	//destroyed artifacts have weird, unpleasant effects
 	//make sure to destroy them before changing the turf though

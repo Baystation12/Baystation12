@@ -255,7 +255,6 @@ var/score_crewscore = 0 // this is the overall var/score for the whole round
 var/score_stuffshipped = 0 // how many useful items have cargo shipped out?
 var/score_stuffharvested = 0 // how many harvests have hydroponics done?
 var/score_oremined = 0 // obvious
-var/score_cyborgsmade = 0
 var/score_researchdone = 0
 var/score_eventsendured = 0 // how many random events did the station survive?
 var/score_powerloss = 0 // how many APCs have poor charge?

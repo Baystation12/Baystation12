@@ -6,7 +6,7 @@
 	anchored = 1
 	density = 1
 //	mats = 10
-	var/money = 2500000
+	var/money = 25000
 	var/plays = 0
 	var/working = 0
 	var/obj/item/weapon/card/id/scan = null
@@ -41,7 +41,7 @@
 			var/dat = {"<B>Slot Machine</B><BR>
 			<HR><BR>
 			Five credits to play!<BR>
-			<B>Prize Money Available:</B> [src.scan.money]<BR>
+			<B>Prize Money Available:</B> [src.money]<BR>
 			<B>Your Card:</B> [src.scan]<BR>
 			<B>Credits Remaining:</B> [src.scan.money]<BR>
 			[src.plays] players have tried their luck today!<BR>
@@ -55,17 +55,18 @@
 		if(href_list["ops"])
 			var/operation = text2num(href_list["ops"])
 			if(operation == 1) // Play
+/*				if (src.working == 1)
+					usr << "\red You need to wait until the machine stops spinning!"
+					return */
 				if (src.scan.money < 5)
-					for(var/mob/O in hearers(src, null))
-						O.show_message(text("<b>[]</b> says, 'Insufficient money to play!'", src), 1)
+					usr << "\red Insufficient money to play!"
 					return
 				src.scan.money -= 5
 				src.money += 5
 				src.plays += 1
 				src.working = 1
 				src.icon_state = "slots-on"
-				for(var/mob/O in hearers(src, null))
-					O.show_message(text("<b>[]</b> says, 'Let's roll!'", src), 1)
+				usr << "Let's roll!"
 				var/roll = rand(1,10000)
 				spawn(100)
 					if (roll == 1)
@@ -85,13 +86,11 @@
 						src.scan.money += 500
 						src.money -= 500
 					else if (roll > 100 && roll <= 1000)
-						for(var/mob/O in hearers(src, null))
-							O.show_message(text("<b>[]</b> says, 'You win a free game!'", src), 1)
+						usr << "\blue You win a free game!"
 						src.scan.money += 5
 						src.money -= 5
 					else
-						for(var/mob/O in hearers(src, null))
-							O.show_message(text("<b>[]</b> says, 'No luck!'", src), 1)
+						usr << "\red No luck!"
 					src.working = 0
 					src.icon_state = "slots-off"
 			if(operation == 2) // Eject Card
