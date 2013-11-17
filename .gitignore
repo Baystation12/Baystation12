@@ -4,9 +4,3 @@
 *.rsc
 *.dmb
 *.lk
-
-#ignore any files in config/, except those in subdirectories.
-/config/*
-!/config/*/*
-
-/baystation12.int
