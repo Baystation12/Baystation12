@@ -90,12 +90,34 @@
 			//Lower accurancy/longer range tradeoff. Distance matters a lot here, so at
 			// close distance, actually RAISE the chance to hit.
 			var/distance = get_dist(starting,loc)
-			var/miss_modifier = -30
+			var/miss_modifier = -50
+			if(isorgan(def_zone,M)) //modify chances to hit based on the area you're attacking.
+				if(def_zone == "chest")
+					miss_modifier += 10
+				if(def_zone == "l_arm")
+					miss_modifier += 30
+				if(def_zone == "r_arm")
+					miss_modifier += 30
+				if(def_zone == "l_leg")
+					miss_modifier += 30
+				if(def_zone == "r_leg")
+					miss_modifier += 30
+				if(def_zone == "head")
+					miss_modifier += 40
+				if(def_zone == "l_hand")
+					miss_modifier += 50
+				if(def_zone == "r_hand")
+					miss_modifier += 50
+				if(def_zone == "l_foot")
+					miss_modifier += 50
+				if(def_zone == "r_foot")
+					miss_modifier += 50
+
 			if (istype(shot_from,/obj/item/weapon/gun))	//If you aim at someone beforehead, it'll hit more often.
 				var/obj/item/weapon/gun/daddy = shot_from //Kinda balanced by fact you need like 2 seconds to aim
 				if (daddy.target && original in daddy.target) //As opposed to no-delay pew pew
 					miss_modifier += -30
-			def_zone = get_zone_with_miss_chance(def_zone, M, -30 + 8*distance)
+			def_zone = get_zone_with_miss_chance(def_zone, M, miss_modifier + 25*distance)
 
 			if(!def_zone)
 				visible_message("\blue \The [src] misses [M] narrowly!")
