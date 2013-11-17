@@ -1563,6 +1563,13 @@ proc/process_ghost_teleport_locs()
 	name = "Construction Site Storage"
 	icon_state = "yellow"
 
+
+//GAYBAR
+/area/secret/gaybar
+	name = "\improper Secret Space Bar"
+	requires_power = 0
+	icon_state = "pink"
+
 //AI
 
 /area/ai_monitored/storage/eva
