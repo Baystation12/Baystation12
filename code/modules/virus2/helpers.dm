@@ -48,7 +48,8 @@ proc/airborne_can_reach(turf/source, turf/target)
 	for(var/i=0, i<5, i++) if(!step_towards(dummy, target)) break
 
 	var/rval = (dummy.loc in range(1,target))
-	del dummy
+	dummy.loc = null
+	dummy = null
 	return rval
 
 //Attemptes to infect mob M with virus. Set forced to 1 to ignore protective clothnig
@@ -101,7 +102,7 @@ proc/airborne_can_reach(turf/source, turf/target)
 //	log_debug("Spreading [vector] diseases from [src] to [victim]")
 	if (virus2.len > 0)
 		for (var/ID in virus2)
-			log_debug("Attempting virus [ID]")
+//			log_debug("Attempting virus [ID]")
 			var/datum/disease2/disease/V = virus2[ID]
 			if(V.spreadtype != vector) continue
 

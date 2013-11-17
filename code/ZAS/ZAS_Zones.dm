@@ -519,7 +519,7 @@ proc/ShareRatio(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 
 	for(var/datum/gas/G in B.trace_gases)
 		var/datum/gas/H = locate(G.type) in A.trace_gases
-		if(H)
+		if(!H)
 			H = new G.type
 			A.trace_gases += H
 			var/G_avg = (G.moles*size) / (size+share_size)

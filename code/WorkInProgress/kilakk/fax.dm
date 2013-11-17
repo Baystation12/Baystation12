@@ -1,18 +1,34 @@
+var/list/obj/machinery/faxmachine/allfaxes = list()
+var/list/alldepartments = list("Central Command")
+
 /obj/machinery/faxmachine
 	name = "fax machine"
 	icon = 'icons/obj/library.dmi'
 	icon_state = "fax"
-	req_access = list(access_lawyer)
+	req_one_access = list(access_lawyer, access_heads)
 	anchored = 1
 	density = 1
 	use_power = 1
 	idle_power_usage = 30
 	active_power_usage = 200
 	power_channel = EQUIP
+
 	var/obj/item/weapon/card/id/scan = null // identification
 	var/authenticated = 0
-	var/obj/item/weapon/paper/tofax = null // what we're sending to central
+
+	var/obj/item/weapon/paper/tofax = null // what we're sending
 	var/sendcooldown = 0 // to avoid spamming fax messages
+
+	var/department = "Unknown" // our department
+
+	var/dpt = "Central Command" // the department we're sending to
+
+/obj/machinery/faxmachine/New()
+	..()
+	allfaxes += src
+
+	if( !("[department]" in alldepartments) )
+		alldepartments += department
 
 /obj/machinery/faxmachine/process()
 	return 0
@@ -26,7 +42,7 @@
 /obj/machinery/faxmachine/attack_hand(mob/user as mob)
 	user.set_machine(src)
 
-	var/dat = "Central Command Fax Machine<BR>"
+	var/dat = "Fax Machine<BR>"
 
 	var/scan_name
 	if(scan)
@@ -54,14 +70,15 @@
 
 			else
 				dat += "<a href='byond://?src=\ref[src];send=1'>Send</a><br>"
-				dat += "<b>Currently sending:</b> [tofax.name]"
+				dat += "<b>Currently sending:</b> [tofax.name]<br>"
+				dat += "<b>Sending to:</b> <a href='byond://?src=\ref[src];dept=1'>[dpt]</a><br>"
 
 		else
 			if(sendcooldown)
-				dat += "Please insert paper to send to Central Command via secure connection.<br><br>"
+				dat += "Please insert paper to send via secure connection.<br><br>"
 				dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
 			else
-				dat += "Please insert paper to send to Central Command via secure connection.<br><br>"
+				dat += "Please insert paper to send via secure connection.<br><br>"
 
 	else
 		dat += "Proper authentication is required to use this device.<br><br>"
@@ -76,10 +93,18 @@
 /obj/machinery/faxmachine/Topic(href, href_list)
 	if(href_list["send"])
 		if(tofax)
-			Centcomm_fax(tofax.info, tofax.name, usr)
-			usr << "Message transmitted."
-			sendcooldown = 1
-			spawn(3000) // three minute cooldown. might mess with this number a bit as time goes on
+
+			if(dpt == "Central Command")
+				Centcomm_fax(tofax.info, tofax.name, usr)
+				sendcooldown = 1800
+
+			else
+				SendFax(tofax.info, tofax.name, usr, dpt)
+				sendcooldown = 600
+
+			usr << "Message transmitted successfully."
+
+			spawn(sendcooldown) // cooldown time
 				sendcooldown = 0
 
 	if(href_list["remove"])
@@ -106,6 +131,9 @@
 				I.loc = src
 				scan = I
 		authenticated = 0
+
+	if(href_list["dept"])
+		dpt = input(usr, "Which department?", "Choose a department", "") as null|anything in alldepartments
 
 	if(href_list["auth"])
 		if ( (!( authenticated ) && (scan)) )
@@ -148,3 +176,20 @@
 
 	var/msg = "\blue <b><font color='orange'>CENTCOMM FAX: </font>[key_name(Sender, 1)] (<A HREF='?_src_=holder;adminplayeropts=\ref[Sender]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[Sender]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=\ref[Sender]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[Sender]'>JMP</A>) (<A HREF='?_src_=holder;secretsadmin=check_antagonist'>CA</A>) (<a href='?_src_=holder;CentcommFaxReply=\ref[Sender]'>RPLY</a>)</b>: Receiving '[sentname]' via secure connection ... <a href='?_src_=holder;CentcommFaxView=\ref[sent]'>view message</a>"
 	admins << msg
+
+proc/SendFax(var/sent, var/sentname, var/mob/Sender, var/dpt)
+
+	for(var/obj/machinery/faxmachine/F in allfaxes)
+		if( F.department == dpt )
+			if(! (F.stat & (BROKEN|NOPOWER) ) )
+
+				flick("faxreceive", F)
+
+				// give the sprite some time to flick
+				spawn(20)
+					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( F.loc )
+					P.name = "[sentname]"
+					P.info = "[sent]"
+					P.update_icon()
+
+					playsound(F.loc, "sound/items/polaroid1.ogg", 50, 1)

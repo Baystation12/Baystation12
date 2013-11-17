@@ -23,7 +23,8 @@
 /datum/medical_effect/proc/cure(mob/living/carbon/human/H)
 	for(var/R in cures)
 		if(H.reagents.has_reagent(R))
-			H <<"\red [cure_message]"
+			if (cure_message)
+				H <<"\blue [cure_message]"
 			return 1
 	return 0
 
@@ -39,16 +40,21 @@
 			M.start = life_tick
 			return
 
-	var/list/L = typesof(/datum/medical_effect)-/datum/medical_effect
 
-	for(var/T in L)
-		var/datum/medical_effect/M = new T
-		if(M.name == name)
-			M.strength = strength
-			M.start = life_tick
-			side_effects += M
+	var/T = side_effects[name]
+	if (!T)
+		return
+
+	var/datum/medical_effect/M = new T
+	if(M.name == name)
+		M.strength = strength
+		M.start = life_tick
+		side_effects += M
 
 /mob/living/carbon/human/proc/handle_medical_side_effects()
+	//Going to handle those things only every few ticks.
+	if(life_tick % 15 != 0)
+		return 0
 
 	var/list/L = typesof(/datum/medical_effect)-/datum/medical_effect
 	for(var/T in L)
@@ -60,18 +66,14 @@
 	for (var/datum/medical_effect/M in side_effects)
 		if (!M) continue
 		var/strength_percent = sin((life_tick - M.start) / 2)
-		log_debug ("[src], tick [life_tick] : Processing [M],  Current phase: [strength_percent]")
 
 		// Only do anything if the effect is currently strong enough
 		if(strength_percent >= 0.4)
-			log_debug ("[src], tick [life_tick] : Active phase ; strength [M.strength]")
 			if (M.cure(src) || M.strength > 50)
-				log_debug ("[src], tick [life_tick] : [M] cured or reached end of lifecycle")
 				side_effects -= M
-				del(M)
+				M = null
 			else
 				if(life_tick % 45 == 0)
-					log_debug ("[src], tick [life_tick] : Activating [M] ")
 					M.on_life(src, strength_percent*M.strength)
 				// Effect slowly growing stronger
 				M.strength+=0.08
@@ -81,7 +83,7 @@
 /datum/medical_effect/headache
 	name = "Headache"
 	triggers = list("cryoxadone" = 10, "bicaridine" = 15, "tricordrazine" = 15)
-	cures = list("alkysine", "tramadol")
+	cures = list("alkysine", "tramadol", "paracetamol", "oxycodone")
 	cure_message = "Your head stops throbbing..."
 
 /datum/medical_effect/headache/on_life(mob/living/carbon/human/H, strength)
@@ -92,7 +94,6 @@
 			H.custom_pain("You feel a throbbing pain in your head!",1)
 		if(31 to INFINITY)
 			H.custom_pain("You feel an excrutiating pain in your head!",1)
-			H.adjustBrainLoss(1)
 
 // BAD STOMACH
 // ===========
@@ -110,7 +111,6 @@
 			H.custom_pain("Your stomach hurts.",0)
 		if(31 to INFINITY)
 			H.custom_pain("You feel sick.",1)
-			H.adjustToxLoss(1)
 
 // CRAMPS
 // ======
@@ -129,7 +129,6 @@
 		if(31 to INFINITY)
 			H.emote("me",1,"flinches as all the muscles in their body cramp up.")
 			H.custom_pain("There's pain all over your body.",1)
-			H.adjustToxLoss(1)
 
 // ITCH
 // ====
@@ -148,4 +147,3 @@
 		if(31 to INFINITY)
 			H.emote("me",1,"shivers slightly.")
 			H.custom_pain("This itch makes it really hard to concentrate.",1)
-			H.adjustToxLoss(1)

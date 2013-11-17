@@ -118,7 +118,7 @@
 	if(istype(W,/obj/item/weapon/storage))
 		..() // -> item/attackby()
 	if((slices_num <= 0 || !slices_num) || !slice_path)
-		return 1
+		return 0
 	var/inaccurate = 0
 	if( \
 			istype(W, /obj/item/weapon/kitchenknife) || \

@@ -81,7 +81,6 @@
 	var/lying = 0
 	var/lying_prev = 0
 	var/canmove = 1
-	var/eye_stat = null//Living, potentially Carbon
 	var/lastpuke = 0
 	var/unacidable = 0
 	var/small = 0

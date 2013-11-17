@@ -37,17 +37,19 @@
 			D.record_index = positive_locations.len + 1
 			D.material = M.mineralName
 
-			//find whichever is closer: find or mineral
+			//find the first artifact and store it
 			if(M.finds.len)
 				var/datum/find/F = M.finds[1]
-				D.depth = F.excavation_required * 2
+				D.depth = F.excavation_required * 2		//0-100% and 0-200cm
 				D.clearance = F.clearance_range * 2
 				D.material = get_responsive_reagent(F.find_type)
+
+			//check if there are minerals interfering with the scan
 			if(M.excavation_minerals.len)
-				if(M.excavation_minerals[1] < D.depth)
+				if(!D.depth || M.excavation_minerals[1] < D.depth)
 					D.depth = M.excavation_minerals[1]
-					D.clearance = rand(2,6)
-					D.dissonance_spread = rand(1,1000) / 100
+					D.clearance = rand() * 4 + 1
+					D.material = M.mineralName
 
 			positive_locations.Add(D)
 
@@ -71,7 +73,7 @@
 			positive_locations.Add(D)
 
 			for(var/mob/L in range(src, 1))
-				L << "\blue \icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]."
+				L << "\blue \icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!."
 
 /obj/item/device/depth_scanner/attack_self(var/mob/user as mob)
 	return src.interact(user)
@@ -85,7 +87,11 @@
 		dat += "Anomaly depth: [current.depth] cm<br>"
 		dat += "Clearance above anomaly depth: [current.clearance] cm<br>"
 		dat += "Dissonance spread: [current.dissonance_spread]<br>"
-		dat += "Anomaly material: [current.material]<br>"
+		var/index = responsive_carriers.Find(current.material)
+		if(index > 0 && index <= finds_as_strings.len)
+			dat += "Anomaly material: [finds_as_strings[index]]<br>"
+		else
+			dat += "Anomaly material: Unknown<br>"
 		dat += "<A href='?src=\ref[src];clear=[current.record_index]'>clear entry</a><br>"
 	else
 		dat += "Select an entry from the list<br>"

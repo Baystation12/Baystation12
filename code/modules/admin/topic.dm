@@ -685,6 +685,7 @@
 		if(notbannedlist.len) //at least 1 unbanned job exists in joblist so we have stuff to ban.
 			switch(alert("Temporary Ban?",,"Yes","No", "Cancel"))
 				if("Yes")
+					if(!check_rights(R_MOD,0) && !check_rights(R_BAN))  return
 					if(config.ban_legacy_system)
 						usr << "\red Your server is using the legacy banning system, which does not support temporary job bans. Consider upgrading. Aborting ban."
 						return
@@ -846,7 +847,7 @@
 				del(M.client)
 				//del(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
-				if(check_rights(R_BAN))   return
+				if(!check_rights(R_BAN))   return
 				var/reason = input(usr,"Reason?","reason","Griefer") as text|null
 				if(!reason)
 					return

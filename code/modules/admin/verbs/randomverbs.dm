@@ -222,6 +222,50 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 	return 1
 
 /*
+Allow admins to set players to be able to respawn/bypass 30 min wait, without the admin having to edit variables directly
+Ccomp's first proc.
+*/
+
+/client/proc/allow_character_respawn()
+	set category = "Special Verbs"
+	set name = "Allow player to respawn"
+	set desc = "Let's the player bypass the 30 minute wait to respawn."
+	if(!holder)
+		src << "Only administrators may use this command."
+	var/any = 0
+	var/list/mobs = list()
+	var/list/ghosts = list()
+	var/list/sortmob = sortAtom(mob_list)    			// get the mob list.
+	for(var/mob/dead/observer/M in sortmob)	 
+		mobs.Add(M) 						//filter it where it's only ghosts
+		any = 1							//if no ghosts show up, any will just be 0
+	if(!any)
+		src << "There doesn't appear to be any ghosts for you to select."
+		return
+
+	for(var/mob/M in mobs)
+		var/name = M.name
+		ghosts[name] = M					//get the name of the mob for the popup list
+
+	var/target = input("Please, select a ghost!", "COME BACK TO LIFE!", null, null) as null|anything in ghosts
+	if(!target)
+		src << "Hrm, appears you didn't select a ghost"		// Sanity check, if no ghosts in the list we don't want to edit a null variable and cause a runtime error.
+		return
+
+	var/mob/M = ghosts[target]					
+	M.timeofdeath=-19999						/* time of death is checked in /mob/verb/abandon_mob() which is the Respawn verb.
+									   timeofdeath is used for bodies on autopsy but since we're messing with a ghost I'm pretty sure
+									   there won't be an autopsy.
+									*/
+	M:show_message(text("\blue <B>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</B>"), 1)
+	log_admin("[key_name(usr)] allowed [key_name(M)] to bypass the 30 minute respawn limit")
+	message_admins("Admin [key_name_admin(usr)] allowed [key_name_admin(M)] to bypass the 30 minute respawn limit", 1)
+
+	 
+
+
+
+/*
 If a guy was gibbed and you want to revive him, this is a good way to do so.
 Works kind of like entering the game with a new character. Character receives a new mind if they didn't have one.
 Traitors and the like can also be revived with the previous role mostly intact.

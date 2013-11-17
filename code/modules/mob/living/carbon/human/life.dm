@@ -359,7 +359,7 @@
 
 					if(!block)
 
-						for(var/obj/effect/effect/chem_smoke/smoke in view(1, src))
+						for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
 							if(smoke.reagents.total_volume)
 								smoke.reagents.reaction(src, INGEST)
 								spawn(5)
@@ -960,6 +960,9 @@
 		var/datum/organ/internal/liver/liver = internal_organs["liver"]
 		liver.process()
 
+		var/datum/organ/internal/eyes/eyes = internal_organs["eyes"]
+		eyes.process()
+
 		updatehealth()
 
 		return //TODO: DEFERRED
@@ -1335,10 +1338,6 @@
 				if(!O.up && tinted_weldhelh)
 					client.screen += global_hud.darkMask
 
-			if(eye_stat > 20)
-				if(eye_stat > 30)	client.screen += global_hud.darkMask
-				else				client.screen += global_hud.vimpaired
-
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)
 			else
@@ -1433,7 +1432,7 @@
 		else if(health < config.health_threshold_softcrit)
 			shock_stage = max(shock_stage, 61)
 		else
-			shock_stage = min(shock_stage, 100)
+			shock_stage = min(shock_stage, 160)
 			shock_stage = max(shock_stage-1, 0)
 			return
 
@@ -1450,15 +1449,26 @@
 
 		if (shock_stage >= 60)
 			if(shock_stage == 60) emote("me",1,"'s body becomes limp.")
+			if (prob(2))
+				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+				Weaken(20)
+
+		if(shock_stage >= 80)
 			if (prob(5))
-				Stun(20)
-				lying = 1
+				src << "<font color='red'><b>"+pick("The pain is excrutiating!", "Please, just end the pain!", "Your whole body is going numb!")
+				Weaken(20)
 
-		if(shock_stage == 80)
-			src << "<font color='red'><b>"+pick("You see a light at the end of the tunnel!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
+		if(shock_stage >= 120)
+			if (prob(2))
+				src << "<font color='red'><b>"+pick("You black out!", "You feel like you could die any moment now.", "You're about to lose consciousness.")
+				Paralyse(5)
 
-		if(shock_stage > 80)
-			Paralyse(rand(15,28))
+		if(shock_stage == 150)
+			emote("me",1,"can no longer stand, collapsing!")
+			Weaken(20)
+
+		if(shock_stage >= 150)
+			Weaken(20)
 
 	proc/handle_pulse()
 		if(life_tick % 5) return pulse	//update pulse every 5 life ticks (~1 tick/sec, depending on server load)
@@ -1484,6 +1494,15 @@
 			if(R.id in tachycardics)
 				if(temp <= PULSE_FAST && temp >= PULSE_NONE)
 					temp++
+					break
+		for(var/datum/reagent/R in reagents.reagent_list) //To avoid using fakedeath
+			if(R.id in heartstopper)
+				temp = PULSE_NONE
+				break
+		for(var/datum/reagent/R in reagents.reagent_list) //Conditional heart-stoppage
+			if(R.id in cheartstopper)
+				if(R.volume >= R.overdose)
+					temp = PULSE_NONE
 					break
 
 		return temp

@@ -31,7 +31,7 @@ datum
 				var/datum/reagent/self = src
 				src = null										  //of the reagent to the mob on TOUCHING it.
 
-				if(!istype(self.holder.my_atom, /obj/effect/effect/chem_smoke))
+				if(!istype(self.holder.my_atom, /obj/effect/effect/smoke/chem))
 					// If the chemicals are in a smoke cloud, do not try to let the chemicals "penetrate" into the mob's system (balance station 13) -- Doohl
 
 					if(method == TOUCH)
@@ -731,13 +731,29 @@ datum
 				..()
 				return
 
+		paracetamol
+			name = "Paracetamol"
+			id = "paracetamol"
+			description = "Most probably know this as Tylenol, but this chemical is a mild, simple painkiller."
+			reagent_state = LIQUID
+			color = "#C855DC"
+			overdose = 60
+
+			on_mob_life(var/mob/living/M as mob)
+				if (volume > overdose)
+					M.hallucination = max(M.hallucination, 2)
+
 		tramadol
 			name = "Tramadol"
 			id = "tramadol"
 			description = "A simple, yet effective painkiller."
 			reagent_state = LIQUID
 			color = "#C8A5DC"
-			overdose = REAGENTS_OVERDOSE
+			overdose = 30
+
+			on_mob_life(var/mob/living/M as mob)
+				if (volume > overdose)
+					M.hallucination = max(M.hallucination, 2)
 
 		oxycodone
 			name = "Oxycodone"
@@ -745,7 +761,13 @@ datum
 			description = "An effective and very addictive painkiller."
 			reagent_state = LIQUID
 			color = "#C805DC"
-			overdose = REAGENTS_OVERDOSE
+			overdose = 20
+
+			on_mob_life(var/mob/living/M as mob)
+				if (volume > overdose)
+					M.druggy = max(M.druggy, 10)
+					M.hallucination = max(M.hallucination, 3)
+
 
 		virus_food
 			name = "Virus Food"
@@ -1025,7 +1047,7 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				if(M.getOxyLoss() && prob(80)) M.adjustOxyLoss(-1*REM)
+				if(M.getOxyLoss()) M.adjustOxyLoss(-1*REM)
 				if(M.getBruteLoss() && prob(80)) M.heal_organ_damage(1*REM,0)
 				if(M.getFireLoss() && prob(80)) M.heal_organ_damage(0,1*REM)
 				if(M.getToxLoss() && prob(80)) M.adjustToxLoss(-1*REM)
@@ -1069,7 +1091,6 @@ datum
 				M.sdisabilities = 0
 				M.eye_blurry = 0
 				M.eye_blind = 0
-				M.eye_stat = 0
 				M.SetWeakened(0)
 				M.SetStunned(0)
 				M.SetParalysis(0)
@@ -1189,9 +1210,31 @@ datum
 				if(!M) M = holder.my_atom
 				M.eye_blurry = max(M.eye_blurry-5 , 0)
 				M.eye_blind = max(M.eye_blind-5 , 0)
-				M.disabilities &= ~NEARSIGHTED
-				M.eye_stat = max(M.eye_stat-5, 0)
-//				M.sdisabilities &= ~1		Replaced by eye surgery
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+					if(istype(E))
+						if(E.damage > 0)
+							E.damage -= 1
+				..()
+				return
+
+		peridaxon
+			name = "Peridaxon"
+			id = "peridaxon"
+			description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
+			reagent_state = LIQUID
+			color = "#C8A5DC" // rgb: 200, 165, 220
+			overdose = 10
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/external/chest/C = H.get_organ("chest")
+					for(var/datum/organ/internal/I in C.internal_organs)
+						if(I.damage > 0)
+							I.damage -= 0.20
 				..()
 				return
 
@@ -1658,10 +1701,12 @@ datum
 						if(prob(5))	M.emote("yawn")
 					if(12 to 15)
 						M.eye_blurry = max(M.eye_blurry, 10)
-					if(15 to 25)
+					if(15 to 49)
+						if(prob(50))
+							M.Weaken(2)
 						M.drowsyness  = max(M.drowsyness, 20)
-					if(25 to INFINITY)
-						M.Paralyse(20)
+					if(50 to INFINITY)
+						M.Weaken(20)
 						M.drowsyness  = max(M.drowsyness, 30)
 				data++
 				..()
@@ -1673,9 +1718,10 @@ datum
 			description = "A powerful sedative."
 			reagent_state = SOLID
 			color = "#000067" // rgb: 0, 0, 103
-			toxpwr = 0
+			toxpwr = 1
 			custom_metabolism = 0.1 //Default 0.2
-			overdose = REAGENTS_OVERDOSE/2
+			overdose = 15
+			overdose_dam = 5
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1685,11 +1731,50 @@ datum
 					if(1)
 						M.confused += 2
 						M.drowsyness += 2
-					if(2 to 50)
+					if(2 to 199)
+						M.Weaken(30)
+					if(200 to INFINITY)
 						M.sleeping += 1
-					if(51 to INFINITY)
-						M.sleeping += 1
-						M.adjustToxLoss((data - 50)*REM)
+				..()
+				return
+
+		toxin/potassium_chloride
+			name = "Potassium Chloride"
+			id = "potassium_chloride"
+			description = "A delicious salt that stops the heart when injected into cardiac muscle."
+			reagent_state = SOLID
+			color = "#FFFFFF" // rgb: 255,255,255
+			toxpwr = 0
+			overdose = 30
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				var/mob/living/carbon/human/H = M
+				if(H.stat != 1)
+					if (volume >= overdose)
+						if(H.losebreath >= 10)
+							H.losebreath = max(10, H.losebreath-10)
+						H.adjustOxyLoss(2)
+						H.Weaken(10)
+				..()
+				return
+
+		toxin/potassium_chlorophoride
+			name = "Potassium Chlorophoride"
+			id = "potassium_chlorophoride"
+			description = "A specific chemical based on Potassium Chloride to stop the heart for surgery. Not safe to eat!"
+			reagent_state = SOLID
+			color = "#FFFFFF" // rgb: 255,255,255
+			toxpwr = 2
+			overdose = 20
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					if(H.stat != 1)
+						if(H.losebreath >= 10)
+							H.losebreath = max(10, M.losebreath-10)
+						H.adjustOxyLoss(2)
+						H.Weaken(10)
 				..()
 				return
 
@@ -2347,6 +2432,13 @@ datum
 			id = "grapejuice"
 			description = "It's grrrrrape!"
 			color = "#863333" // rgb: 134, 51, 51
+
+		drink/grapesoda
+			name = "Grape Soda"
+			id = "grapesoda"
+			description = "Grapes made into a fine drank."
+			color = "#421C52" // rgb: 98, 57, 53
+			adj_drowsy 	= 	-3
 
 		drink/poisonberryjuice
 			name = "Poison Berry Juice"
@@ -3047,29 +3139,29 @@ datum
 				switch(data)
 					if(1 to 25)
 						if (!M.stuttering) M.stuttering = 1
-						M.make_dizzy(10)
+						M.make_dizzy(1)
 						M.hallucination = max(M.hallucination, 3)
 						if(prob(1)) M.emote(pick("twitch","giggle"))
 					if(25 to 75)
 						if (!M.stuttering) M.stuttering = 1
 						M.hallucination = max(M.hallucination, 10)
-						M.make_jittery(20)
-						M.make_dizzy(20)
+						M.make_jittery(2)
+						M.make_dizzy(2)
 						M.druggy = max(M.druggy, 45)
 						if(prob(5)) M.emote(pick("twitch","giggle"))
 					if (75 to 150)
 						if (!M.stuttering) M.stuttering = 1
 						M.hallucination = max(M.hallucination, 60)
-						M.make_jittery(40)
-						M.make_dizzy(40)
+						M.make_jittery(4)
+						M.make_dizzy(4)
 						M.druggy = max(M.druggy, 60)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 						if(prob(30)) M.adjustToxLoss(2)
 					if (150 to 300)
 						if (!M.stuttering) M.stuttering = 1
 						M.hallucination = max(M.hallucination, 60)
-						M.make_jittery(40)
-						M.make_dizzy(40)
+						M.make_jittery(4)
+						M.make_dizzy(4)
 						M.druggy = max(M.druggy, 60)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 						if(prob(30)) M.adjustToxLoss(2)
@@ -3084,7 +3176,7 @@ datum
 							var/datum/organ/internal/heart/L = H.internal_organs["heart"]
 							if (istype(L))
 								L.take_damage(100, 0)
-
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
 
 		ethanol/deadrum
 			name = "Deadrum"
@@ -3460,7 +3552,7 @@ datum
 			id = "aloe"
 			description = "So very, very, very good."
 			color = "#664300" // rgb: 102, 67, 0
-			boozepwr = 35
+			boozepwr = 3
 
 		ethanol/andalusia
 			name = "Andalusia"
