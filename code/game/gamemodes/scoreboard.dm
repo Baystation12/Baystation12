@@ -299,7 +299,7 @@
 	<B>Hydroponics Harvests:</B> [score_stuffharvested] ([score_stuffharvested * 5] Points)<BR>
 	<B>Ore Mined:</B> [score_oremined] ([score_oremined * 2] Points)<BR>
 	<B>Refreshments Prepared:</B> [score_meals] ([score_meals * 5] Points)<BR>
-	<B>Research Completed:</B> [score_researchdone] ([score_researchdone * 30] Points)<BR>
+	<B>Research Completed:</B> [score_researchdone] ([score_researchdone * 30] Points)<BR>"}
 	if (emergency_shuttle.location == 2) dat += "<B>Shuttle Escapees:</B> [score_escapees] ([score_escapees * 25] Points)<BR>"
 	dat += {"<B>Random Events Endured:</B> [score_eventsendured] ([score_eventsendured * 50] Points)<BR>
 	<B>Whole Station Powered:</B> [score_powerbonus ? "Yes" : "No"] ([score_powerbonus * 2500] Points)<BR>
