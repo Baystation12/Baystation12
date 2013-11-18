@@ -61,6 +61,8 @@ var/list/event_last_fired = list()
 
 	possibleEvents[/datum/event/communications_blackout] = 50 + 25 * active_with_role["AI"] + active_with_role["Scientist"] * 25
 	possibleEvents[/datum/event/ionstorm] = active_with_role["AI"] * 25 + active_with_role["Cyborg"] * 25 + active_with_role["Engineer"] * 10 + active_with_role["Scientist"] * 5
+	possibleEvents[/datum/event/anomaly_pyro] = 25 + 15 * active_with_role["Atmospheric Technician"] * 10 + active_with_role["Scientist"] * 5
+	possibleEvents[/datum/event/anomaly_flux] = 25 + 10 * active_with_role["Engineer"] * 10 + active_with_role["Scientist"] * 5
 	possibleEvents[/datum/event/grid_check] = 25 + 10 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/electrical_storm] = 15 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Botanist"]
@@ -70,6 +72,9 @@ var/list/event_last_fired = list()
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/meteor_shower] = 20 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/anomaly_bluespace] = 50 + 25 * active_with_role["Engineer"] * 10 + active_with_role["Scientist"] * 5
+		possibleEvents[/datum/event/anomaly_grav] = 50 + 25 * active_with_role["Engineer"] * 10 + active_with_role["Scientist"] * 5
+		possibleEvents[/datum/event/anomaly_vortex] = 50 + 25 * active_with_role["Engineer"] * 10 + active_with_role["Scientist"] * 5
 		possibleEvents[/datum/event/blob] = 20 * active_with_role["Engineer"]
 
 	possibleEvents[/datum/event/viral_infection] = 25 + active_with_role["Medical"] * 15
