@@ -58,7 +58,9 @@ client/proc/get_alienwhitelist()
 	if(!check_rights(R_ADMIN))	return
 
 	var/path = "config/alienwhitelist.txt"
-	var/player = ckey(input("Input player byound key and alien species, e.g. some_user - Species", "\n") as text)
+	var/player = ckey(input("Input player byound key", "\n") as text)
+	player += " - "
+	player += input("Input alien species, e.g. Soghun, Tajaran, Skrell") as text
 	if(length(player) == 0)
 		return
 	if(fexists(path))

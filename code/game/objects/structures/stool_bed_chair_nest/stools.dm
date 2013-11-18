@@ -7,6 +7,10 @@
 	flags = FPRINT
 	pressure_resistance = 15
 
+/obj/structure/stool/bar
+	name = "bar stool"
+	icon_state = "bar_chair"
+
 /obj/structure/stool/ex_act(severity)
 	switch(severity)
 		if(1.0)

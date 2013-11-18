@@ -84,10 +84,13 @@
 
 	if(href_list["remove"])
 		if(tofax)
-			tofax.loc = usr.loc
-			usr.put_in_hands(tofax)
-			usr << "<span class='notice'>You take the paper out of \the [src].</span>"
-			tofax = null
+			if(!ishuman(usr))
+				usr << "<span class='warning'>You can't do it.</span>"
+			else
+				tofax.loc = usr.loc
+				usr.put_in_hands(tofax)
+				usr << "<span class='notice'>You take the paper out of \the [src].</span>"
+				tofax = null
 
 	if(href_list["scan"])
 		if (scan)
