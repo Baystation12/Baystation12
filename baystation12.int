@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\game\jobs\job\assistant.dm;code\game\objects\items\devices\PDA\PDA.dm;code\modules\client\preferences.dm;code\modules\mob\new_player\preferences_setup.dm;code\unused\jobs.dm;code\game\jobs\job\civilian.dm;code\game\jobs\job\medical.dm;code\modules\mob\new_player\new_player.dm;icons\obj\objects.dmi;code\modules\mob\living\simple_animal\friendly\mouse.dm;code\game\objects\structures\tables_racks.dm;code\modules\mob\living\carbon\alien\humanoid\queen.dm;code\game\objects\structures\target_stake.dm;code\modules\assembly\mousetrap.dm;code\modules\reagents\Chemistry-Machinery.dm
+LAST_COMPILE_VERSION: 501.1217
+DIR: code code\ATMOSPHERICS\components\unary code\defines code\game code\game\gamemodes code\game\gamemodes\blob\blobs code\game\gamemodes\ninja code\game\gamemodes\nuclear code\game\jobs code\game\jobs\job code\game\machinery code\game\machinery\computer code\game\objects code\game\objects\items\devices code\game\objects\items\devices\PDA code\game\objects\structures code\modules code\modules\assembly code\modules\client code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\alien code\modules\mob\living\carbon\alien\humanoid code\modules\mob\living\simple_animal code\modules\mob\living\simple_animal\friendly code\modules\mob\new_player code\modules\reagents code\unused icons icons\obj 
+FILE: code\modules\reagents\Chemistry-Machinery.dm
+LAST_COMPILE_TIME: 1384758154
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
