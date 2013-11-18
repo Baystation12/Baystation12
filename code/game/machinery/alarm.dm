@@ -768,13 +768,11 @@
 	return data
 
 
-/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
-	if(user.stat)
-		return
+/obj/machinery/alarm/proc/get_nano_data(mob/user, fromAtmosConsole=0)
 	var/data[0]
 	data["air"]=ui_air_status()
 	data["sensors"]=TLV
-	data["locked"]=(!(istype(user, /mob/living/silicon)) && locked)
+	data["locked"]=fromAtmosConsole || (!(istype(user, /mob/living/silicon)) && locked)
 	data["rcon"]=rcon_setting
 	data["target_temp"] = target_temperature - T0C
 	data["atmos_alarm"] = alarm_area.atmosalm
@@ -818,7 +816,13 @@
 			scrubber_data["name"]=long_name
 			scrubbers+=list(scrubber_data)
 	data["scrubbers"]=scrubbers
+	return data
 
+/obj/machinery/alarm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+	if(user.stat && !isobserver(user))
+		return
+
+	var/list/data=src.get_nano_data(user,FALSE)
 	if (!ui) // no ui has been passed, so we'll search for one
 	{
 		ui = nanomanager.get_open_ui(user, src, ui_key)
