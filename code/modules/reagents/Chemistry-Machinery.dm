@@ -352,7 +352,7 @@
 			if (count > 20) count = 20	//Pevent people from creating huge stacks of pills easily. Maybe move the number to defines?
 			var/amount_per_pill = reagents.total_volume/count
 			if (amount_per_pill > 50) amount_per_pill = 50
-			var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"))
+			var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()]"))   // ([amount_per_pill] units)
 			while (count--)
 				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
 				if(!name) name = "[reagents.get_master_reagent_name()] ([amount_per_pill] units)"
@@ -367,9 +367,9 @@
 						src.updateUsrDialog()
 		else if (href_list["createbottle"])
 			if(!condi)
-				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!","[reagents.get_master_reagent_name()] ([reagents.total_volume] units)"))
+				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!","[reagents.get_master_reagent_name()]")) // ([reagents.total_volume] units)
 				var/obj/item/weapon/reagent_containers/glass/bottle/P = new/obj/item/weapon/reagent_containers/glass/bottle(src.loc)
-				if(!name) name = "[reagents.get_master_reagent_name()] ([reagents.total_volume] units)"
+				if(!name) name = "[reagents.get_master_reagent_name()]" //([reagents.total_volume] units)
 				P.name = "[name] bottle"
 				P.pixel_x = rand(-7, 7) //random position
 				P.pixel_y = rand(-7, 7)
