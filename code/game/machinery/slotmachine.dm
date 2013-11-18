@@ -9,29 +9,14 @@
 	var/money = 25000
 	var/plays = 0
 	var/working = 0
-	var/obj/item/weapon/card/id/scan = null
-
-	attackby(var/obj/item/I as obj, user as mob)
-		if(istype(I, /obj/item/weapon/card/id))
-			if(src.scan)
-				user << "\red There is a card already in the slot machine."
-			else
-				user << "\blue You insert your ID card."
-				usr.drop_item()
-				I.loc = src
-				src.scan = I
-		else src.attack_hand(user)
-		return
+	var/balance=0
 
 	attack_hand(var/mob/user as mob)
+		if(user.mind)
+			if(user.mind.initial_account)
+				balance = user.mind.initial_account.money
 		user.machine = src
-		if (!src.scan)
-			var/dat = {"<B>Slot Machine</B><BR>
-			<HR><BR>
-			<B>Please insert card!</B><BR>"}
-			user << browse(dat, "window=slotmachine;size=450x500")
-			onclose(user, "slotmachine")
-		else if (src.working)
+		if (src.working)
 			var/dat = {"<B>Slot Machine</B><BR>
 			<HR><BR>
 			<B>Please wait!</B><BR>"}
@@ -42,12 +27,10 @@
 			<HR><BR>
 			Five credits to play!<BR>
 			<B>Prize Money Available:</B> [src.money]<BR>
-			<B>Your Card:</B> [src.scan]<BR>
-			<B>Credits Remaining:</B> [src.scan.money]<BR>
+			<B>Credits Remaining:</B> [balance]<BR>
 			[src.plays] players have tried their luck today!<BR>
 			<HR><BR>
-			<A href='?src=\ref[src];ops=1'>Play!<BR>
-			<A href='?src=\ref[src];ops=2'>Eject card"}
+			<A href='?src=\ref[src];ops=1'>Play!<BR>"}
 			user << browse(dat, "window=slotmachine;size=400x500")
 			onclose(user, "slotmachine")
 
@@ -58,10 +41,10 @@
 /*				if (src.working == 1)
 					usr << "\red You need to wait until the machine stops spinning!"
 					return */
-				if (src.scan.money < 5)
+				if (balance < 5)
 					usr << "\red Insufficient money to play!"
 					return
-				src.scan.money -= 5
+				usr.mind.initial_account.money -= 5
 				src.money += 5
 				src.plays += 1
 				src.working = 1
@@ -72,32 +55,27 @@
 					if (roll == 1)
 						for(var/mob/O in hearers(src, null))
 							O.show_message(text("<b>[]</b> says, 'JACKPOT! You win [src.money]!'", src), 1)
-						command_alert("Congratulations [src.scan.registered_name] on winning the Jackpot!", "Jackpot Winner")
-						src.scan.money += src.money
+						command_alert("Congratulations [usr.name] on winning the Jackpot!", "Jackpot Winner")
+						usr.mind.initial_account.money += src.money
 						src.money = 0
 					else if (roll > 1 && roll <= 10)
 						for(var/mob/O in hearers(src, null))
 							O.show_message(text("<b>[]</b> says, 'Big Winner! You win five thousand credits!'", src), 1)
-						src.scan.money += 5000
+						usr.mind.initial_account.money += 5000
 						src.money -= 5000
 					else if (roll > 10 && roll <= 100)
 						for(var/mob/O in hearers(src, null))
 							O.show_message(text("<b>[]</b> says, 'Winner! You win five hundred credits!'", src), 1)
-						src.scan.money += 500
+						usr.mind.initial_account.money += 500
 						src.money -= 500
 					else if (roll > 100 && roll <= 1000)
 						usr << "\blue You win a free game!"
-						src.scan.money += 5
+						usr.mind.initial_account.money += 5
 						src.money -= 5
 					else
 						usr << "\red No luck!"
 					src.working = 0
 					src.icon_state = "slots-off"
-			if(operation == 2) // Eject Card
-				src.scan.loc = src.loc
-				src.scan = null
-				for(var/mob/O in hearers(src, null))
-					O.show_message(text("<b>[]</b> says, 'Thank you for playing!'", src), 1)
 		src.add_fingerprint(usr)
 		src.updateUsrDialog()
 		return

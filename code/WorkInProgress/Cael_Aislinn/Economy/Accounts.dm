@@ -334,6 +334,13 @@ var/global/list/all_money_accounts = list()
 			if( D.security_level <= security_level_passed && (!D.security_level || D.remote_access_pin == attempt_pin_number) )
 				return D
 
+/obj/machinery/account_database/proc/attempt_account_access_nosec(var/attempt_account_number)
+	if(!activated)
+		return 0
+	for(var/datum/money_account/D in all_money_accounts)
+		if(D.account_number == attempt_account_number)
+			return D
+
 /obj/machinery/account_database/proc/get_account(var/account_number)
 	for(var/datum/money_account/D in all_money_accounts)
 		if(D.account_number == account_number)

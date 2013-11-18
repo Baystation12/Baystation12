@@ -190,8 +190,7 @@
 		var/obj/item/weapon/card/id/C = I
 		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
 		if(linked_account)
-			var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-			var/datum/money_account/D = linked_db.attempt_account_access(C.associated_account_number, attempt_pin, 2)
+			var/datum/money_account/D = linked_db.attempt_account_access_nosec(C.associated_account_number)
 			if(D)
 				var/transaction_amount = currently_vending.price
 				if(transaction_amount <= D.money)
