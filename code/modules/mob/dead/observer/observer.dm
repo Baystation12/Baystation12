@@ -25,6 +25,7 @@
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
 	verbs += /mob/dead/observer/proc/dead_tele
+	
 	stat = DEAD
 
 	var/turf/T
@@ -132,6 +133,8 @@ Works together with spawning an observer, noted above.
 		ghost.can_reenter_corpse = can_reenter_corpse
 		ghost.timeofdeath = src.timeofdeath //BS12 EDIT
 		ghost.key = key
+		if(!ghost.client.holder && !config.antag_hud_allowed)		// For new ghosts we remove the verb from even showing up if it's not allowed.
+			verbs -= /mob/dead/observer/verb/toggle_antagHUD	// Poor guys, don't know what they are missing!
 		return ghost
 
 /*
