@@ -61,6 +61,7 @@ client/proc/get_alienwhitelist()
 	var/player = ckey(input("Input player byound key", "\n") as text)
 	player += " - "
 	player += input("Input alien species, e.g. Soghun, Tajaran, Skrell") as text
+	player += "\n"
 	if(length(player) == 0)
 		return
 	if(fexists(path))
