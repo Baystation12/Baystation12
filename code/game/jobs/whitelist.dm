@@ -1,9 +1,7 @@
-#define WHITELISTFILE "data/whitelist.txt"
-
 var/list/whitelist = list()
 
 /proc/load_whitelist()
-	whitelist = file2list(WHITELISTFILE)
+	whitelist = file2list("config/whitelist.txt")
 	if(!whitelist.len)	whitelist = null
 
 /proc/check_whitelist(mob/M /*, var/rank*/)
@@ -59,16 +57,17 @@ client/proc/get_alienwhitelist()
 
 	var/path = "config/alienwhitelist.txt"
 	var/player = ckey(input("Input player byound key", "\n") as text)
-	player += " - "
-	player += input("Input alien species, e.g. Soghun, Tajaran, Skrell") as text
-	player += "\n"
 	if(length(player) == 0)
 		return
+	player += " - "
+	player += input("Input alien species, e.g. Soghun, Tajaran, Skrell, Diona") as text
+	player += " Added by [src.key]\n"
 	if(fexists(path))
 		text2file(player,path)
 		load_alienwhitelist()
 	else
 		src << "<font color='red'>Error: get_alienwhitelist(): File not found/Invalid path([path]).</font>"
+	message_admins("Alien whitelist: [player]", 1)
 	return
 
 client/proc/get_whitelist()
@@ -76,7 +75,7 @@ client/proc/get_whitelist()
 	set name = "Whitelist: Check"
 	if(!check_rights(R_ADMIN))	return
 
-	var/path = "data/whitelist.txt"
+	var/path = "config/whitelist.txt"
 	if( fexists(path) )
 		src << run( file(path) )
 	else
@@ -91,15 +90,15 @@ client/proc/get_whitelist()
 	set name = "Whitelist: Add"
 	if(!check_rights(R_ADMIN))	return
 
-	var/path = "data/whitelist.txt"
+	var/path = "config/whitelist.txt"
 	var/player = ckey(input("Input player byound key", "\n") as text)
 	if(length(player) == 0)
 		return
+	player += " Added by [src.key]\n"
 	if(fexists(path))
 		text2file(player,path)
 		load_whitelist()
 	else
 		src << "<font color='red'>Error: get_whitelist(): File not found/Invalid path([path]).</font>"
+	message_admins("Whitelist: [player]", 1)
 	return
-
-#undef WHITELISTFILE
