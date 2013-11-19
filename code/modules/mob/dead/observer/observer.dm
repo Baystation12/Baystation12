@@ -10,7 +10,6 @@
 	blinded = 0
 	anchored = 1	//  don't get pushed around
 	invisibility = INVISIBILITY_OBSERVER
-	var/tempdir = 1
 	var/can_reenter_corpse
 	var/datum/hud/living/carbon/hud = null // hud
 	var/bootime = 0
@@ -83,39 +82,37 @@ Works together with spawning an observer, noted above.
 		for(var/image/hud in client.images)	
 			if(copytext(hud.icon_state,1,4) == "hud")
 				client.images.Remove(hud)
-	var/mob/dead/observer/M = src
-	if(M.antagHUD)
+	if(antagHUD)
 		var/list/target_list = list()
-		for(var/mob/living/target in oview(M))
+		for(var/mob/living/target in oview(src))
 			if( target.mind&&(target.mind.special_role||issilicon(target)) )
 				target_list += target
 		if(target_list.len)
-			M.assess_targets(target_list, M)
+			assess_targets(target_list, src)
 
 		
 
-/mob/dead/proc/assess_targets(list/target_list, mob/living/carbon/U)
-	var/mob/dead/observer/M = src
+/mob/dead/proc/assess_targets(list/target_list, mob/dead/observer/U)
 	var/icon/tempHud = 'icons/mob/hud.dmi'
 	for(var/mob/living/target in target_list)
 		if(iscarbon(target))
 			switch(target.mind.special_role)
 				if("traitor","Syndicate")
-					U.client.images += image(tempHud,target,"hudsyndicate",,M.tempdir)
+					U.client.images += image(tempHud,target,"hudsyndicate")
 				if("Revolutionary")
-					U.client.images += image(tempHud,target,"hudrevolutionary",,M.tempdir)
+					U.client.images += image(tempHud,target,"hudrevolutionary")
 				if("Head Revolutionary")
-					U.client.images += image(tempHud,target,"hudheadrevolutionary",,M.tempdir)
+					U.client.images += image(tempHud,target,"hudheadrevolutionary")
 				if("Cultist")
-					U.client.images += image(tempHud,target,"hudcultist",,M.tempdir)
+					U.client.images += image(tempHud,target,"hudcultist")
 				if("Changeling")
-					U.client.images += image(tempHud,target,"hudchangeling",,M.tempdir)
+					U.client.images += image(tempHud,target,"hudchangeling")
 				if("Wizard","Fake Wizard")
-					U.client.images += image(tempHud,target,"hudwizard",,M.tempdir)
+					U.client.images += image(tempHud,target,"hudwizard")
 				if("Hunter","Sentinel","Drone","Queen")
-					U.client.images += image(tempHud,target,"hudalien",,M.tempdir)
+					U.client.images += image(tempHud,target,"hudalien")
 				if("Death Commando")
-					U.client.images += image(tempHud,target,"huddeathsquad",,M.tempdir)
+					U.client.images += image(tempHud,target,"huddeathsquad")
 				if("Ninja")
 					U.client.images += image(tempHud,target,"hudninja")
 				else//If we don't know what role they have but they have one.
