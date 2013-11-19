@@ -85,8 +85,11 @@
 
 	var/turf/L = loc
 
-	if(!istype(L)) //If we are not on a turf, uh oh.
-		del src
+	if(isnull(L))		// We have a null turf...something is wrong, stop processing this entity.
+		return PROCESS_KILL
+
+	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
+		return  //Yeah just stop.
 
 	//Ok, get the air from the turf
 	var/datum/gas_mixture/env = L.return_air()

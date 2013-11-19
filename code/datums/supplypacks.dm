@@ -958,7 +958,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	contains = list(/obj/machinery/power/supermatter)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/plasma
-	containername = "Supermatter crate (CAUTIION)"
+	containername = "Supermatter crate (CAUTION)"
 	group = "Engineering"
 	access = access_ce
 
@@ -968,7 +968,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	contains = list(/obj/machinery/power/supermatter/shard)
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure/plasma
-	containername = "Supermatter shard crate (CAUTIION)"
+	containername = "Supermatter shard crate (CAUTION)"
 	access = access_ce
 	group = "Engineering" */
 
