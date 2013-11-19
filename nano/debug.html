@@ -1,0 +1,43 @@
+
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<head>
+		<link rel='stylesheet' type='text/css' href='shared.css'><link rel='stylesheet' type='text/css' href='icons.css'>
+	</head>
+	<body scroll=auto data-url-parameters='{"src":"[0x2101140f]"}' data-template-data='{"main":"vending.tmpl"}' data-initial-data='{"premiumItems":[],"contraband":{"/obj/item/weapon/reagent_containers/food/drinks/ice":10},"products":{"/obj/item/weapon/reagent_containers/food/drinks/coffee":25,"/obj/item/weapon/reagent_containers/food/drinks/tea":25,"/obj/item/weapon/reagent_containers/food/drinks/h_chocolate":25},"coin":null,"extendedInventory":0,"panelOpen":1,"productData":[{"amount":25,"name":"Robust Coffee","displayColor":"green","itself":"[0x2100e293]","path":"/obj/item/weapon/reagent_containers/food/drinks/coffee"},{"amount":25,"name":"Duke Purple Tea","displayColor":"red","itself":"[0x2100e290]","path":"/obj/item/weapon/reagent_containers/food/drinks/tea"},{"amount":25,"name":"Dutch Hot Coco","displayColor":"blue","itself":"[0x2100e28d]","path":"/obj/item/weapon/reagent_containers/food/drinks/h_chocolate"}],"premiumData":[],"contrabandData":[{"amount":10,"name":"Ice Cup","displayColor":"red","itself":"[0x2100e28a]","path":"/obj/item/weapon/reagent_containers/food/drinks/ice"}],"ui":{"status":2,"user":{"name":"Henry Sidower"}}}'>
+		<script type='text/javascript'>
+			function receiveUpdateData(jsonString)
+			{
+				// We need both jQuery and NanoUpdate to be able to recieve data
+				if (typeof NanoUpdate != 'undefined' && typeof jQuery != 'undefined')
+				{
+					NanoUpdate.receiveUpdateData(jsonString);
+				}
+				else
+				{
+					alert('receiveUpdateData error: something is not defined!');
+					if (typeof NanoUpdate == 'undefined')
+					{
+						alert('NanoUpdate not defined!');
+					}
+					if (typeof jQuery == 'undefined')
+					{
+						alert('jQuery not defined!');
+					}
+				}
+				// At the moment any data received before those libraries are loaded will be lost
+			}
+		</script>
+		<div id='uiWrapper'>
+			<div id='uiTitleWrapper'><div id='uiStatusIcon' class='icon24 uiStatusGood'></div><div id='uiTitle'>Vending Machine</div><div id='uiTitleFluff'></div></div>
+			<div id='uiContent'>
+	
+	<div id='mainTemplate'></div>
+	
+				<script type='text/javascript' src='1-jquery.js'></script><script type='text/javascript' src='2-jsviews.js'></script><script type='text/javascript' src='3-jquery.timers.js'></script><script type='text/javascript' src='nano_update.js'></script><script type='text/javascript' src='nano_config.js'></script><script type='text/javascript' src='nano_base_helpers.js'></script>
+			</div>
+		</div>
+	</body>
+</html>
+	

@@ -282,7 +282,7 @@
 /client/proc/send_resources()
 //	preload_vox()
 	getFiles(
-		//'nano/js/libraries.min.js',
+	//	'nano/js/libraries.min.js',
 		'nano/js/libraries/1-jquery.js',
 		'nano/js/libraries/2-jsviews.js',
 		'nano/js/libraries/3-jquery.timers.js',
@@ -298,6 +298,8 @@
 		'nano/templates/geoscanner.tmpl',
 		'nano/templates/air_alarm.tmpl',
 		'nano/templates/atmos_control.tmpl',
+		'nano/templates/firealarm.tmpl',
+		'nano/templates/vending.tmpl',
 		'nano/images/uiBackground.png',
 		'nano/images/uiIcons16.png',
 		'nano/images/uiIcons24.png',
