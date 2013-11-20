@@ -30,9 +30,6 @@
 			for(var/i = 0, i < 12, i++)
 				new/obj/item/weapon/coin/diamond(src)
 		if(4)
-			new/obj/item/clothing/shoes/clown_shoes(src)
-			new/obj/item/clothing/under/rank/clown(src)
-			new/obj/item/clothing/mask/gas/clown_hat(src)
 			new/obj/item/weapon/bananapeel(src)
 		if(5)
 			for(var/i = 0, i < 6, i++)
@@ -40,12 +37,9 @@
 			new/obj/item/weapon/lighter/zippo(src)
 		if(7)
 			new/obj/item/weapon/reagent_containers/glass/beaker/bluespace(src)
-		if(9)
-			for(var/i = 0, i < 5, i++)
+		if(9 to 10)
+			for(var/i = 0, i < 10, i++)
 				new/obj/item/weapon/ore/diamond(src)
-		if(10)
-			for(var/i = 0, i < 5, i++)
-				new/obj/item/weapon/ore/clown(src)
 		if(11)
 			return
 		if(12)
@@ -58,18 +52,9 @@
 		if(15)
 			for(var/i = 0, i < 3, i++)
 				new/obj/item/weapon/reagent_containers/glass/beaker/noreact(src)
-			new/obj/item/weapon/reagent_containers/hypospray(src)
-		if(16)
+		if(16 to 17)
 			for(var/i = 0, i < 9, i++)
 				new/obj/item/bluespace_crystal(src)
-		if(17)
-			new/obj/item/mecha_parts/mecha_equipment/weapon/honker(src)
-			new/obj/item/mecha_parts/chassis/honker(src)
-			new/obj/item/mecha_parts/part/honker_torso(src)
-			new/obj/item/mecha_parts/part/honker_head(src)
-			new/obj/item/mecha_parts/part/honker_left_arm(src)
-		if(18)
-			return
 		if(19)
 			for(var/i = 0, i < 4, i++)
 				new/obj/item/weapon/melee/classic_baton(src)
@@ -91,6 +76,8 @@
 		if(8)
 			return
 		if(6)
+			return
+		if(18)
 			return
 		//Dummy crates end here.
 		if(30)

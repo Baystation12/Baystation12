@@ -1859,12 +1859,4 @@ datum/design/cart_traitor
 	req_tech = list("syndicate" = 2, "powerstorage" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
-<<<<<<< HEAD
-<<<<<<< HEAD
 	build_path = "/obj/item/weapon/cartridge/syndicate"
-=======
-	build_path = "/obj/item/weapon/cartridge/syndicate"
->>>>>>> 60f644c4014e7ae0ca8267e271c8985574039f2b
-=======
-	build_path = "/obj/item/weapon/cartridge/syndicate"
->>>>>>> ab43cc9cd6179a50395854c59eccfb43a651641b
