@@ -5,9 +5,13 @@ var/list/whitelist = list()
 	if(!whitelist.len)	whitelist = null
 
 /proc/check_whitelist(mob/M /*, var/rank*/)
-	if(!whitelist)
-		return 0
-	return ("[M.ckey]" in whitelist)
+//	if(!whitelist)
+//		return 0
+//	return ("[M.ckey]" in whitelist)
+	for (var/s in whitelist)
+		if(findtext(s,"[M.ckey]"))
+			return 1
+	return 0
 
 var/list/alien_whitelist = list()
 
@@ -61,7 +65,7 @@ client/proc/get_alienwhitelist()
 		return
 	player += " - "
 	player += input("Input alien species, e.g. Soghun, Tajaran, Skrell, Diona") as text
-	player += " Added by [src.key]\n"
+	player += " ,added by [src.key]\n"
 	if(fexists(path))
 		text2file(player,path)
 		load_alienwhitelist()
@@ -94,7 +98,7 @@ client/proc/get_whitelist()
 	var/player = ckey(input("Input player byound key", "\n") as text)
 	if(length(player) == 0)
 		return
-	player += " Added by [src.key]\n"
+	player += " ,added by [src.key]\n"
 	if(fexists(path))
 		text2file(player,path)
 		load_whitelist()

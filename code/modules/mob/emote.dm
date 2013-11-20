@@ -76,4 +76,4 @@
 				M << message
 
 			else if(M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD)) // Show the emote to regular ghosts with deadchat toggled on
-				M << message
+				M.show_message(message, 2)
