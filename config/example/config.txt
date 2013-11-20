@@ -113,13 +113,19 @@ VOTE_PERIOD 600
 VOTE_AUTOTRANSFER_INITIAL 108000
 
 ##autovote delay (deciseconds) before sequential automatic transfer votes are called (default 60 minutes)
-Vote_AUTOTRANSFER_INTERVAL 36000
+VOTE_AUTOTRANSFER_INTERVAL 36000
 
 ## prevents dead players from voting or starting votes
 #NO_DEAD_VOTE
 
 ## players' votes default to "No vote" (otherwise,  default to "No change")
 DEFAULT_NO_VOTE
+
+## Allow ghosts to see antagonist through AntagHUD
+ALLOW_ANTAG_HUD
+
+## If ghosts use antagHUD they are no longer allowed to join the round.
+ANTAG_HUD_RESTRICTED
 
 ## allow AI job
 ALLOW_AI

@@ -515,7 +515,7 @@
 	//Non-Human (Green)
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='ccffcc'><th colspan='[length(nonhuman_positions)]'><a href='?src=\ref[src];jobban3=nonhumandept;jobban4=\ref[M]'>Non-human Positions</a></th></tr><tr align='center'>"
+		jobs += "<tr bgcolor='ccffcc'><th colspan='[length(nonhuman_positions)+1]'><a href='?src=\ref[src];jobban3=nonhumandept;jobban4=\ref[M]'>Non-human Positions</a></th></tr><tr align='center'>"
 		for(var/jobPos in nonhuman_positions)
 			if(!jobPos)	continue
 			var/datum/job/job = job_master.GetJob(jobPos)
@@ -533,11 +533,15 @@
 				counter = 0
 
 		//pAI isn't technically a job, but it goes in here.
+		
 		if(jobban_isbanned(M, "pAI"))
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=pAI;jobban4=\ref[M]'><font color=red>pAI</font></a></td>"
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=pAI;jobban4=\ref[M]'>pAI</a></td>"
-
+		if(jobban_isbanned(M, "AntagHUD"))
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=AntagHUD;jobban4=\ref[M]'><font color=red>AntagHUD</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=AntagHUD;jobban4=\ref[M]'>AntagHUD</a></td>"
 		jobs += "</tr></table>"
 
 	//Antagonist (Orange)
@@ -685,6 +689,7 @@
 		if(notbannedlist.len) //at least 1 unbanned job exists in joblist so we have stuff to ban.
 			switch(alert("Temporary Ban?",,"Yes","No", "Cancel"))
 				if("Yes")
+					if(!check_rights(R_MOD,0) && !check_rights(R_BAN))  return
 					if(config.ban_legacy_system)
 						usr << "\red Your server is using the legacy banning system, which does not support temporary job bans. Consider upgrading. Aborting ban."
 						return
@@ -846,7 +851,7 @@
 				del(M.client)
 				//del(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
-				if(check_rights(R_BAN))   return
+				if(!check_rights(R_BAN))   return
 				var/reason = input(usr,"Reason?","reason","Griefer") as text|null
 				if(!reason)
 					return

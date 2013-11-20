@@ -99,6 +99,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 		spawn(10)
 			icon_state = "d_analyzer_l"
 			busy = 0
+		return 1
 	return
 
 //For testing purposes only.

@@ -6,7 +6,7 @@
 	var/money = 0
 	var/list/transaction_log = list()
 	var/suspended = 0
-	var/security_level = 1	//0 - auto-identify from worn ID, require only account number
+	var/security_level = 0	//0 - auto-identify from worn ID, require only account number
 							//1 - require manual login / account number and pin
 							//2 - require card and manual login
 

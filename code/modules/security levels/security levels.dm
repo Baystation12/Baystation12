@@ -25,7 +25,7 @@
 				world << "<font color='red'>[config.alert_desc_green]</font>"
 				security_level = SEC_LEVEL_GREEN
 				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z == 1)
+					if(FA.z == 1 || FA.z == 5)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_green")
 			if(SEC_LEVEL_BLUE)
@@ -37,7 +37,7 @@
 					world << "<font color='red'>[config.alert_desc_blue_downto]</font>"
 				security_level = SEC_LEVEL_BLUE
 				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z == 1)
+					if(FA.z == 1 || FA.z == 5)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_blue")
 			if(SEC_LEVEL_RED)
@@ -55,7 +55,7 @@
 					CC.post_status("alert", "redalert")*/
 
 				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z == 1)
+					if(FA.z == 1 || FA.z == 5)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_red")
 
@@ -64,7 +64,7 @@
 				world << "<font color='red'>[config.alert_desc_delta]</font>"
 				security_level = SEC_LEVEL_DELTA
 				for(var/obj/machinery/firealarm/FA in machines)
-					if(FA.z == 1)
+					if(FA.z == 1 || FA.z == 5)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_delta")
 	else

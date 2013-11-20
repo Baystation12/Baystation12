@@ -1,5 +1,5 @@
-
-
+ 
+ 
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass
 	name = "glass"
 	desc = "Your standard drinking glass."
@@ -60,7 +60,7 @@
 					desc = "Vitamins! Yay!"
 				if("tomatojuice")
 					icon_state = "glass_red"
-					name = "Glass of Tomato juice"
+					name = "Glass of Tomato juf"
 					desc = "Are you sure this is tomato juice?"
 				if("blood")
 					icon_state = "glass_red"
@@ -429,17 +429,29 @@
 				if("brownstar")
 					icon_state = "brownstar"
 					name = "Brown Star"
-					desc = "Its not what it sounds like..."
+					desc = "It's not what it sounds like..."
+				if("grapejuice")
+					icon_state = "grapejuice"
+					name = "Glass of grape juice"
+					desc = "It's grrrrrape!"
+				if("grapesoda")
+					icon_state = "grapesoda"
+					name = "Can of Grape Soda"
+					desc = "Looks like a delicious drank!"
 				if("icetea")
-					icon_state = "icetea"
+					icon_state = "icedteaglass"
 					name = "Iced Tea"
 					desc = "No relation to a certain rap artist/ actor."
+				if("grenadine")
+					icon_state = "grenadineglass"
+					name = "Glass of grenadine syrup"
+					desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
 				if("milkshake")
 					icon_state = "milkshake"
 					name = "Milkshake"
 					desc = "Glorious brainfreezing mixture."
 				if("lemonade")
-					icon_state = "lemonade"
+					icon_state = "lemonadeglass"
 					name = "Lemonade"
 					desc = "Oh the nostalgia..."
 				if("kiraspecial")
@@ -449,7 +461,27 @@
 				if("rewriter")
 					icon_state = "rewriter"
 					name = "Rewriter"
-					desc = "The secert of the sanctuary of the Libarian..."
+					desc = "The secret of the sanctuary of the Libarian..."
+				if("suidream")
+					icon_state = "sdreamglass"
+					name = "Sui Dream"
+					desc = "A froofy, fruity, and sweet mixed drink. Understanding the name only brings shame."
+				if("melonliquor")
+					icon_state = "emeraldglass"
+					name = "Glass of Melon Liquor"
+					desc = "A relatively sweet and fruity 46 proof liquor."
+				if("bluecuracao")
+					icon_state = "curacaoglass"
+					name = "Glass of Blue Curacao"
+					desc = "Exotically blue, fruity drink, distilled from oranges."
+				if("absinthe")
+					icon_state = "absintheglass"
+					name = "Glass of Absinthe"
+					desc = "Wormwood, anise, oh my."
+				if("pwine")
+					icon_state = "pwineglass"
+					name = "Glass of ???"
+					desc = "A black ichor with an oily purple sheer on top. Are you sure you should drink this?"
 				else
 					icon_state ="glass_brown"
 					name = "Glass of ..what?"

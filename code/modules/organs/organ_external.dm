@@ -45,6 +45,7 @@
 	// how often wounds should be updated, a higher number means less often
 	var/wound_update_accuracy = 1
 
+
 /datum/organ/external/New(var/datum/organ/external/P)
 	if(P)
 		parent = P
@@ -181,7 +182,7 @@
 
 	var/result = update_icon()
 	return result
-	
+
 /*
 This function completely restores a damaged organ to perfect condition.
 */
@@ -191,21 +192,20 @@ This function completely restores a damaged organ to perfect condition.
 	perma_injury = 0
 	brute_dam = 0
 	burn_dam = 0
-	
+
 	// handle internal organs
 	for(var/datum/organ/internal/current_organ in internal_organs)
 		current_organ.rejuvenate()
-	
+
 	// remove embedded objects and drop them on the floor
 	for(var/obj/implanted_object in implants)
 		if(!istype(implanted_object,/obj/item/weapon/implant))	// We don't want to remove REAL implants. Just shrapnel etc.
 			implanted_object.loc = owner.loc
 			implants -= implanted_object
-			
+
 	owner.updatehealth()
-	update_icon()
-	
-	
+
+
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
 
@@ -290,7 +290,6 @@ This function completely restores a damaged organ to perfect condition.
 		perma_injury = 0
 
 	update_germs()
-	update_icon()
 	return
 
 //Updating germ levels. Handles organ germ levels and necrosis.
@@ -299,6 +298,11 @@ This function completely restores a damaged organ to perfect condition.
 #define GANGREN_LEVEL_TERMINAL	2500
 #define GERM_TRANSFER_AMOUNT	germ_level/500
 /datum/organ/external/proc/update_germs()
+
+	if(status & ORGAN_ROBOT|ORGAN_DESTROYED) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
+		germ_level = 0
+		return
+
 	if(germ_level > 0 && owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//Syncing germ levels with external wounds
 		for(var/datum/wound/W in wounds)
@@ -338,8 +342,9 @@ This function completely restores a damaged organ to perfect condition.
 
 	for(var/datum/wound/W in wounds)
 		// wounds can disappear after 10 minutes at the earliest
-		if(W.damage == 0 && W.created + 10 * 10 * 60 <= world.time)
+		if(W.damage <= 0 && W.created + 10 * 10 * 60 <= world.time)
 			wounds -= W
+			continue
 			// let the GC handle the deletion of the wound
 
 		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
@@ -347,17 +352,17 @@ This function completely restores a damaged organ to perfect condition.
 			if(!owner.reagents.has_reagent("bicaridine"))	//bicard stops internal wounds from growing bigger with time, and also stop bleeding
 				W.open_wound(0.1 * wound_update_accuracy)
 				owner.vessel.remove_reagent("blood",0.05 * W.damage * wound_update_accuracy)
+			if(!owner.reagents.has_reagent("inaprovaline")) //This little copypaste will allow inaprovaline to work too, giving it a much needed buff to help medical.
+				W.open_wound(0.1 * wound_update_accuracy)
+				owner.vessel.remove_reagent("blood",0.05 * W.damage * wound_update_accuracy)
+
 			owner.vessel.remove_reagent("blood",0.02 * W.damage * wound_update_accuracy)//Bicaridine slows Internal Bleeding
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
-		//overdose of bicaridine begins healing IB
-		if(owner.reagents.has_reagent("bicaridine") && (owner.reagents.get_reagent_amount("bicaridine") >= 30))
-			var/healinternal = 0.2
-			if(W.damage <= healinternal)
-				W.damage = 0
-			else
-				W.damage -= healinternal
+			//overdose of bicaridine begins healing IB
+			if(owner.reagents.get_reagent_amount("bicaridine") >= 30)
+				W.damage = max(0, W.damage - 0.2)
 
 		// slow healing
 		var/heal_amt = 0
@@ -385,6 +390,8 @@ This function completely restores a damaged organ to perfect condition.
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
+	if (update_icon())
+		owner.UpdateDamageIcon(1)
 
 //Updates brute_damn and burn_damn from wound damages. Updates BLEEDING status.
 /datum/organ/external/proc/update_damages()
@@ -417,7 +424,6 @@ This function completely restores a damaged organ to perfect condition.
 	var/n_is = damage_state_text()
 	if (n_is != damage_state)
 		damage_state = n_is
-		owner.update_body(1)
 		return 1
 	return 0
 
@@ -549,7 +555,7 @@ This function completely restores a damaged organ to perfect condition.
 			var/lol = pick(cardinal)
 			step(organ,lol)
 
-			owner.regenerate_icons()
+			owner.update_body(1)
 
 
 /****************************************************
@@ -619,10 +625,13 @@ This function completely restores a damaged organ to perfect condition.
 	return 0
 
 /datum/organ/external/get_icon(gender="")
+	if (status & ORGAN_ROBOT)
+		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+
 	if (status & ORGAN_MUTATED)
 		return new /icon(owner.deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
-	else
-		return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
+
+	return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
 
 
 /datum/organ/external/proc/is_usable()
@@ -886,17 +895,17 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		switch(brain_op_stage)
 			if(0)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] is beginning to have \his head cut open with [src] by [user].", 1)
-				brainmob << "\red [user] begins to cut open your head with [src]!"
-				user << "\red You cut [brainmob]'s head open with [src]!"
+					O.show_message("\red [brainmob] is beginning to have \his head cut open with [W] by [user].", 1)
+				brainmob << "\red [user] begins to cut open your head with [W]!"
+				user << "\red You cut [brainmob]'s head open with [W]!"
 
 				brain_op_stage = 1
 
 			if(2)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] is having \his connections to the brain delicately severed with [src] by [user].", 1)
-				brainmob << "\red [user] begins to cut open your head with [src]!"
-				user << "\red You cut [brainmob]'s head open with [src]!"
+					O.show_message("\red [brainmob] is having \his connections to the brain delicately severed with [W] by [user].", 1)
+				brainmob << "\red [user] begins to cut open your head with [W]!"
+				user << "\red You cut [brainmob]'s head open with [W]!"
 
 				brain_op_stage = 3.0
 			else
@@ -905,20 +914,20 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		switch(brain_op_stage)
 			if(1)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] has \his skull sawed open with [src] by [user].", 1)
-				brainmob << "\red [user] begins to saw open your head with [src]!"
-				user << "\red You saw [brainmob]'s head open with [src]!"
+					O.show_message("\red [brainmob] has \his skull sawed open with [W] by [user].", 1)
+				brainmob << "\red [user] begins to saw open your head with [W]!"
+				user << "\red You saw [brainmob]'s head open with [W]!"
 
 				brain_op_stage = 2
 			if(3)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] has \his spine's connection to the brain severed with [src] by [user].", 1)
-				brainmob << "\red [user] severs your brain's connection to the spine with [src]!"
-				user << "\red You sever [brainmob]'s brain's connection to the spine with [src]!"
+					O.show_message("\red [brainmob] has \his spine's connection to the brain severed with [W] by [user].", 1)
+				brainmob << "\red [user] severs your brain's connection to the spine with [W]!"
+				user << "\red You sever [brainmob]'s brain's connection to the spine with [W]!"
 
-				user.attack_log += "\[[time_stamp()]\]<font color='red'> Debrained [brainmob.name] ([brainmob.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-				brainmob.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-				msg_admin_attack("[brainmob] ([brainmob.ckey]) debrained [user] ([user.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+				user.attack_log += "\[[time_stamp()]\]<font color='red'> Debrained [brainmob.name] ([brainmob.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)])</font>"
+				brainmob.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)])</font>"
+				msg_admin_attack("[user] ([user.ckey]) debrained [brainmob] ([brainmob.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 				var/obj/item/brain/B = new(loc)
 				B.transfer_identity(brainmob)

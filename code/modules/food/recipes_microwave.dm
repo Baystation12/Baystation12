@@ -1107,18 +1107,15 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/appletart
 
-/datum/recipe/herbsalad
+/datum/recipe/tossedsalad
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
-		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
-		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/cabbage,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/cabbage,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/tomato,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/carrot,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/apple,
 	)
-	result = /obj/item/weapon/reagent_containers/food/snacks/herbsalad
-	make_food(var/obj/container as obj)
-		var/obj/item/weapon/reagent_containers/food/snacks/herbsalad/being_cooked = ..(container)
-		being_cooked.reagents.del_reagent("toxin")
-		return being_cooked
+	result = /obj/item/weapon/reagent_containers/food/snacks/tossedsalad
 
 /datum/recipe/aesirsalad
 	items = list(

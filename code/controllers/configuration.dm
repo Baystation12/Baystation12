@@ -28,7 +28,7 @@
 	var/vote_delay = 6000				// minimum time between voting sessions (deciseconds, 10 minute default)
 	var/vote_period = 600				// length of voting period (deciseconds, default 1 minute)
 	var/vote_autotransfer_initial = 108000 // Length of time before the first autotransfer vote is called
-	var/vote_autotransfer_interval = 3600 // length of time before next sequential autotransfer vote
+	var/vote_autotransfer_interval = 36000 // length of time before next sequential autotransfer vote
 	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 //	var/enable_authentication = 0		// goon authentication
@@ -43,7 +43,8 @@
 	var/Tickcomp = 0
 	var/socket_talk	= 0					// use socket_talk to communicate with other processes
 	var/list/resource_urls = null
-
+	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
+	var/antag_hud_restricted = 0                    // Ghosts that turn on Antagovision cannot rejoin the round.
 	var/list/mode_names = list()
 	var/list/modes = list()				// allowed modes
 	var/list/votable_modes = list()		// votable modes
@@ -384,6 +385,11 @@
 
 				if("ticklag")
 					Ticklag = text2num(value)
+
+				if("allow_antag_hud")
+					config.antag_hud_allowed = 1
+				if("antag_hud_restricted")
+					config.antag_hud_restricted = 1
 
 				if("socket_talk")
 					socket_talk = text2num(value)

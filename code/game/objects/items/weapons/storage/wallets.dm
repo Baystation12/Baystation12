@@ -34,6 +34,7 @@
 	if(.)
 		if(W == front_id)
 			front_id = null
+			name = initial(name)
 			update_icon()
 
 /obj/item/weapon/storage/wallet/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
@@ -41,6 +42,7 @@
 	if(.)
 		if(!front_id && istype(W, /obj/item/weapon/card/id))
 			front_id = W
+			name = "[name] ([front_id])"
 			update_icon()
 
 /obj/item/weapon/storage/wallet/update_icon()

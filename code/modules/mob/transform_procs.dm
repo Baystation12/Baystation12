@@ -171,9 +171,14 @@
 
 	O.loc = loc
 	O.job = "Cyborg"
-
-	O.mmi = new /obj/item/device/mmi(O)
-	O.mmi.transfer_identity(src)//Does not transfer key/client.
+	if(O.mind.assigned_role == "Cyborg")
+		if(O.mind.role_alt_title == "Android")
+			O.mmi = new /obj/item/device/mmi/posibrain(O)
+		if(O.mind.role_alt_title == "Robot")
+			O.mmi = new /obj/item/device/mmi/posibrain(O) //Ravensdale wants a circuit based brain for another robot class, this is a placeholder.
+	else
+		O.mmi = new /obj/item/device/mmi(O)
+		O.mmi.transfer_identity(src)//Does not transfer key/client.
 
 	O.Namepick()
 

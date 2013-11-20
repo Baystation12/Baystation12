@@ -252,6 +252,16 @@
 		src.pixel_x = rand(-10.0, 10)
 		src.pixel_y = rand(-10.0, 10)
 
+/obj/item/weapon/reagent_containers/food/drinks/waterbottle
+	name = "Bottled Water"
+	desc = "Introduced to the vending machines on health nut protest, taste fresh, pure glacial* water! *Note: Might be tapwater."
+	icon_state = "waterbottle"
+	New()
+		..()
+		reagents.add_reagent("water", 30)
+		src.pixel_x = rand(-10.0, 10)
+		src.pixel_y = rand(-10.0, 10)
+
 /obj/item/weapon/reagent_containers/food/drinks/beer
 	name = "Space Beer"
 	desc = "Beer. In space."
@@ -272,6 +282,7 @@
 		reagents.add_reagent("ale", 30)
 		src.pixel_x = rand(-10.0, 10)
 		src.pixel_y = rand(-10.0, 10)
+
 
 /obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind
 	name = "Space Mountain Wind"
@@ -334,6 +345,25 @@
 		src.pixel_x = rand(-10.0, 10)
 		src.pixel_y = rand(-10.0, 10)
 
+/obj/item/weapon/reagent_containers/food/drinks/iced_tea
+	name = "Vrisk Serket Iced Tea"
+	desc = "That sweet, refreshing southern earthy flavor. That's where it's from, right? South Earth? Whatever!!!!!!!!"
+	icon_state = "ice_tea_can"
+	New()
+		..()
+		reagents.add_reagent("icetea", 30)
+		src.pixel_x = rand(-10.0, 10)
+		src.pixel_y = rand(-10.0, 10)
+
+/obj/item/weapon/reagent_containers/food/drinks/grape_juice
+	name = "Grapel Juice"
+	desc = "500 pages of rules of how to appropriately enter into a combat with this juice!"
+	icon_state = "purple_can"
+	New()
+		..()
+		reagents.add_reagent("grapejuice", 30)
+		src.pixel_x = rand(-10.0, 10)
+		src.pixel_y = rand(-10.0, 10)
 
 /obj/item/weapon/reagent_containers/food/drinks/sillycup
 	name = "Paper Cup"

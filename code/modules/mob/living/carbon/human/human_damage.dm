@@ -180,7 +180,7 @@ This function restores the subjects blood to max.
 /mob/living/carbon/human/proc/restore_blood()
 	var/blood_volume = vessel.get_reagent_amount("blood")
 	vessel.add_reagent("blood",560.0-blood_volume)
-	
+
 
 /*
 This function restores all organs.
@@ -252,8 +252,9 @@ This function restores all organs.
 			W.loc = src
 
 	else if(istype(used_weapon,/obj/item/projectile)) //We don't want to use the actual projectile item, so we spawn some shrapnel.
-		if(prob(75) && damagetype == BRUTE)
-			var/obj/item/projectile/P = used_weapon
+
+		var/obj/item/projectile/P = used_weapon
+		if(prob(75) && P.embed)
 			var/obj/item/weapon/shard/shrapnel/S = new()
 			S.name = "[P.name] shrapnel"
 			S.desc = "[S.desc] It looks like it was fired from [P.shot_from]."

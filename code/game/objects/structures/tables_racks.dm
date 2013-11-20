@@ -48,29 +48,30 @@
 
 
 /obj/structure/table/update_icon()
-	if(flipped)
-		var/type = 0
-		var/tabledirs = 0
-		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
-			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
-			if (T && T.flipped)
-				type++
-				tabledirs |= direction
-		var/base = "table"
-		if (istype(src, /obj/structure/table/woodentable))
-			base = "wood"
-		if (istype(src, /obj/structure/table/reinforced))
-			base = "rtable"
-
-		icon_state = "[base]flip[type]"
-		if (type==1)
-			if (tabledirs & turn(dir,90))
-				icon_state = icon_state+"-"
-			if (tabledirs & turn(dir,-90))
-				icon_state = icon_state+"+"
-		return 1
-
 	spawn(2) //So it properly updates when deleting
+
+		if(flipped)
+			var/type = 0
+			var/tabledirs = 0
+			for(var/direction in list(turn(dir,90), turn(dir,-90)) )
+				var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
+				if (T && T.flipped && T.dir == src.dir)
+					type++
+					tabledirs |= direction
+			var/base = "table"
+			if (istype(src, /obj/structure/table/woodentable))
+				base = "wood"
+			if (istype(src, /obj/structure/table/reinforced))
+				base = "rtable"
+
+			icon_state = "[base]flip[type]"
+			if (type==1)
+				if (tabledirs & turn(dir,90))
+					icon_state = icon_state+"-"
+				if (tabledirs & turn(dir,-90))
+					icon_state = icon_state+"+"
+			return 1
+
 		var/dir_sum = 0
 		for(var/direction in list(1,2,4,8,5,6,9,10))
 			var/skip_sum = 0
@@ -348,6 +349,7 @@
 
 
 /obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
+	if (!W) return
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
 		if (istype(G.affecting, /mob/living))
@@ -392,29 +394,36 @@
 	return
 
 /obj/structure/table/proc/straight_table_check(var/direction)
-	var/turf/left = get_step(src,turn(direction,90))
-	var/turf/right = get_step(src,turn(direction,-90))
-	var/turf/next = get_step(src,direction)
-	if(locate(/obj/structure/table,left) || locate(/obj/structure/table,right))
-		return 0
-	var/obj/structure/table/T = locate(/obj/structure/table, next)
+	var/obj/structure/table/T
+	for(var/angle in list(-90,90))
+		T = locate() in get_step(src.loc,turn(direction,angle))
+		if(T && !T.flipped)
+			return 0
+	T = locate() in get_step(src.loc,direction)
+	if (!T || T.flipped)
+		return 1
 	if (istype(T,/obj/structure/table/reinforced/))
 		var/obj/structure/table/reinforced/R = T
 		if (R.status == 2)
 			return 0
-	if (!T)
-		return 1
-	else
-		return T.straight_table_check(direction)
+	return T.straight_table_check(direction)
+
+/obj/structure/table/verb/can_touch(var/mob/user)
+	if (!user)
+		return 0
+	if (user.stat)	//zombie goasts go away
+		return 0
+	if (issilicon(user))
+		user << "<span class='notice'>You need hands for this.</span>"
+		return 0
+	return 1
 
 /obj/structure/table/verb/do_flip()
 	set name = "Flip table"
 	set desc = "Flips a non-reinforced table"
 	set category = "Object"
 	set src in oview(1)
-
-	if (issilicon(usr))
-		usr << "<span class='notice'>You need hands for this.</span>"
+	if (!can_touch(usr))
 		return
 	if(!flip(get_cardinal_dir(usr,src)))
 		usr << "<span class='notice'>It won't budge.</span>"
@@ -422,21 +431,38 @@
 		usr.visible_message("<span class='warning'>[usr] flips \the [src]!</span>")
 		return
 
+/obj/structure/table/proc/unflipping_check(var/direction)
+	for(var/mob/M in oview(src,0))
+		return 0
+
+	var/list/L = list()
+	if(direction)
+		L.Add(direction)
+	else
+		L.Add(turn(src.dir,-90))
+		L.Add(turn(src.dir,90))
+	for(var/new_dir in L)
+		var/obj/structure/table/T = locate() in get_step(src.loc,new_dir)
+		if(T)
+			if(T.flipped && T.dir == src.dir && !T.unflipping_check(new_dir))
+				return 0
+	return 1
+
 /obj/structure/table/proc/do_put()
 	set name = "Put table back"
 	set desc = "Puts flipped table back"
 	set category = "Object"
 	set src in oview(1)
 
-	if (!unflip())
-		usr << "<span class='notice'>It won't budge.</span>"
+	if (!can_touch(usr))
 		return
 
+	if (!unflipping_check())
+		usr << "<span class='notice'>It won't budge.</span>"
+		return
+	unflip()
 
 /obj/structure/table/proc/flip(var/direction)
-	if (flipped)
-		return 0
-
 	if( !straight_table_check(turn(direction,90)) || !straight_table_check(turn(direction,-90)) )
 		return 0
 
@@ -455,8 +481,8 @@
 	flipped = 1
 	flags |= ON_BORDER
 	for(var/D in list(turn(direction, 90), turn(direction, -90)))
-		if(locate(/obj/structure/table,get_step(src,D)))
-			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,D))
+		var/obj/structure/table/T = locate() in get_step(src,D)
+		if(T && !T.flipped)
 			T.flip(direction)
 	update_icon()
 	update_adjacent()
@@ -464,16 +490,6 @@
 	return 1
 
 /obj/structure/table/proc/unflip()
-	if (!flipped)
-		return 0
-
-	var/can_flip = 1
-	for (var/mob/A in oview(src,0))//src.loc)
-		if (istype(A))
-			can_flip = 0
-	if (!can_flip)
-		return 0
-
 	verbs -=/obj/structure/table/proc/do_put
 	verbs +=/obj/structure/table/verb/do_flip
 
@@ -481,8 +497,8 @@
 	flipped = 0
 	flags &= ~ON_BORDER
 	for(var/D in list(turn(dir, 90), turn(dir, -90)))
-		if(locate(/obj/structure/table,get_step(src,D)))
-			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,D))
+		var/obj/structure/table/T = locate() in get_step(src.loc,D)
+		if(T && T.flipped && T.dir == src.dir)
 			T.unflip()
 	update_icon()
 	update_adjacent()
