@@ -1852,11 +1852,3 @@ datum/design/cart_captain
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/captain"
 	locked = 1
-datum/design/cart_traitor
-	name = "Detomatix Cart"
-	desc = "A data cartridge for portable microcomputers."
-	id = "cart_traitor"
-	req_tech = list("syndicate" = 2, "powerstorage" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = "/obj/item/weapon/cartridge/syndicate"
