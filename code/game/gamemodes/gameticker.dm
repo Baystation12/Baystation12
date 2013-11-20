@@ -36,8 +36,6 @@ var/global/datum/controller/gameticker/ticker
 
 	var/triai = 0//Global holder for Triumvirate
 
-	var/initialtpass = 0 //holder for inital autotransfer vote timer
-
 /datum/controller/gameticker/proc/pregame()
 	login_music = pick(\
 	/*'sound/music/halloween/skeletons.ogg',\
@@ -62,17 +60,6 @@ var/global/datum/controller/gameticker/ticker
 			if(pregame_timeleft <= 0)
 				current_state = GAME_STATE_SETTING_UP
 	while (!setup())
-
-/datum/controller/gameticker/proc/votetimer()
-	var/timerbuffer = 0
-	if (initialtpass == 0)
-		timerbuffer = config.vote_autotransfer_initial
-	else
-		timerbuffer = config.vote_autotransfer_interval
-	spawn(timerbuffer)
-		vote.autotransfer()
-		initialtpass = 1
-		votetimer()
 
 
 /datum/controller/gameticker/proc/setup()
@@ -166,7 +153,6 @@ var/global/datum/controller/gameticker/ticker
 		spawn(3000)
 		statistic_cycle() // Polls population totals regularly and stores them in an SQL DB -- TLE
 
-	votetimer()
 	return 1
 
 /datum/controller/gameticker

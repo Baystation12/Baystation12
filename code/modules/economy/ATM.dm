@@ -97,8 +97,6 @@ log transactions
 		user << "\red Artificial unit recognized. Artificial units do not currently receive monetary compensation, as per NanoTrasen regulation #1005."
 		return
 	if(get_dist(src,user) <= 1)
-		//check to see if the user has low security enabled
-		scan_user(user)
 
 		//js replicated from obj/machinery/computer/card
 		var/dat = "<h1>NanoTrasen Automatic Teller Machine</h1>"
@@ -223,7 +221,11 @@ log transactions
 					var/new_sec_level = max( min(text2num(href_list["new_security_level"]), 2), 0)
 					authenticated_account.security_level = new_sec_level
 			if("attempt_auth")
-				if(!ticks_left_locked_down)
+
+				// check if they have low security enabled
+				scan_user(usr)
+
+				if(!ticks_left_locked_down && held_card)
 					var/tried_account_num = text2num(href_list["account_num"])
 					if(!tried_account_num)
 						tried_account_num = held_card.associated_account_number
@@ -363,3 +365,5 @@ log transactions
 					T.date = current_date_string
 					T.time = worldtime2text()
 					authenticated_account.transaction_log.Add(T)
+
+					view_screen = NO_SCREEN
