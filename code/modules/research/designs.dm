@@ -1746,6 +1746,7 @@ datum/design/cart_security
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/security"
+	locked = 1
 datum/design/cart_janitor
 	name = "CustodiPRO Cartridge"
 	desc = "A data cartridge for portable microcomputers."
@@ -1786,6 +1787,7 @@ datum/design/cart_quartermaster
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/quartermaster"
+	locked = 1
 datum/design/cart_hop
 	name = "Human Resources 9001 Cartridge"
 	desc = "A data cartridge for portable microcomputers."
@@ -1794,6 +1796,7 @@ datum/design/cart_hop
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/hop"
+	locked = 1
 datum/design/cart_hos
 	name = "R.O.B.U.S.T. DELUXE Cartridge"
 	desc = "A data cartridge for portable microcomputers."
@@ -1802,6 +1805,7 @@ datum/design/cart_hos
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/hos"
+	locked = 1
 datum/design/cart_ce
 	name = "Power-On DELUXE Cartridge"
 	desc = "A data cartridge for portable microcomputers."
@@ -1810,6 +1814,7 @@ datum/design/cart_ce
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/ce"
+	locked = 1
 datum/design/cart_cmo
 	name = "Med-U DELUXE Cartridge"
 	desc = "A data cartridge for portable microcomputers."
@@ -1818,6 +1823,7 @@ datum/design/cart_cmo
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/cmo"
+	locked = 1
 datum/design/cart_rd
 	name = "Signal Ace DELUXE Cartridge"
 	desc = "A data cartridge for portable microcomputers."
@@ -1826,6 +1832,7 @@ datum/design/cart_rd
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/rd"
+	locked = 1
 datum/design/cart_captain
 	name = "Value-PAK Cartridge"
 	desc = "A data cartridge for portable microcomputers."
@@ -1834,6 +1841,7 @@ datum/design/cart_captain
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/captain"
+	locked = 1
 datum/design/cart_traitor
 	name = "Detomatix Cart"
 	desc = "A data cartridge for portable microcomputers."
