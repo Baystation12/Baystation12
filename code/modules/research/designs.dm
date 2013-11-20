@@ -1852,4 +1852,3 @@ datum/design/cart_traitor
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/syndicate"
-
