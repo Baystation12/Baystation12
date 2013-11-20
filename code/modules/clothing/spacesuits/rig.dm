@@ -12,7 +12,8 @@
 	icon_action_button = "action_hardhat"
 	heat_protection = HEAD
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	species_restricted = list("exclude","Unathi","Tajaran","Skrell","Diona","Vox")
+	// species_restricted = list("exclude","Unathi","Tajaran","Skrell","Diona","Vox") Commented out to solve the issue of "OH FUCK I ROLLED NUKE OP ALIEN AND THERE AREN'T ANY ADMINS ABLE TO FIX IT ON", as it made nuke rounds a pain in the ass when one of your squaddies was unable to join in.
+	// TODO: Make nuke ops hardsuit sprites for Unathi, Tajaran, Skrell, Diona, and Vox so this can be uncommented and shit can work again.
 
 	attack_self(mob/user)
 		if(!isturf(user.loc))
@@ -47,7 +48,8 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
+	//species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox") See comment on respective helmet.
+	// TODO: Make nuke ops hardsuit helmet sprites for Unathi, Tajaran, Skrell, Diona, and Vox so this can be uncommented.
 
 //Chief Engineer's rig
 /obj/item/clothing/head/helmet/space/rig/elite
