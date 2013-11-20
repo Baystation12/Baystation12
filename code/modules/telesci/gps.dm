@@ -19,6 +19,10 @@ var/list/GPS_list = list()
 /obj/item/device/gps/Del()
 	GPS_list.Remove(src)
 	..()
+/obj/item/device/gps/Del()
+	GPS_list.Remove(src)
+	..()
+
 /obj/item/device/gps/emp_act(severity)
 	emped = 1
 	overlays -= "working"
@@ -29,6 +33,7 @@ var/list/GPS_list = list()
 		overlays += "working"
 
 /obj/item/device/gps/attack_self(mob/user as mob)
+
 	var/obj/item/device/gps/t = ""
 	if(emped)
 		t += "ERROR"
@@ -54,14 +59,11 @@ var/list/GPS_list = list()
 	..()
 	if(href_list["tag"] )
 		var/a = input("Please enter desired tag.", name, gpstag) as text
-		a = copytext(sanitize(a), 1, 20)
-		if(length(a) != 4)
-			usr << "<span class = 'caution'> The tag must be four letters long!</span>"
-			return
-		else
+		a = uppertext(copytext(sanitize(a), 1, 5))
+		if(src.loc == usr)
 			gpstag = a
 			name = "global positioning system ([gpstag])"
-			return
+			attack_self(usr)
 
 /obj/item/device/gps/science
 	icon_state = "gps-s"
