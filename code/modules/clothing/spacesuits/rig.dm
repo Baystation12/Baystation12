@@ -12,9 +12,7 @@
 	icon_action_button = "action_hardhat"
 	heat_protection = HEAD
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	// species_restricted = list("exclude","Unathi","Tajaran","Skrell","Diona","Vox") Commented out to solve the issue of "OH FUCK I ROLLED NUKE OP ALIEN AND THERE AREN'T ANY ADMINS ABLE TO FIX IT ON", as it made nuke rounds a pain in the ass when one of your squaddies was unable to join in.
-	// TODO: Make nuke ops hardsuit sprites for Unathi, Tajaran, Skrell, Diona, and Vox so this can be uncommented and shit can work again.
-
+	species_restricted = list("exclude","Unathi","Tajaran","Skrell","Diona","Vox")
 	attack_self(mob/user)
 		if(!isturf(user.loc))
 			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
@@ -48,8 +46,7 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	//species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox") See comment on respective helmet.
-	// TODO: Make nuke ops hardsuit helmet sprites for Unathi, Tajaran, Skrell, Diona, and Vox so this can be uncommented.
+	species_restricted = list("exclude","Unathi","Tajaran","Diona","Vox")
 
 //Chief Engineer's rig
 /obj/item/clothing/head/helmet/space/rig/elite
@@ -92,7 +89,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 60)
 	siemens_coefficient = 0.6
 	var/obj/machinery/camera/camera
-
+	species_restricted = list("exclude","Vox")
 /obj/item/clothing/head/helmet/space/rig/syndi/attack_self(mob/user)
 	if(camera)
 		..(user)
@@ -118,6 +115,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 60)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.6
+	species_restricted = list("exclude","Vox")
 
 
 //Wizard Rig
