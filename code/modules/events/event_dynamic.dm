@@ -44,39 +44,39 @@ var/list/event_last_fired = list()
 	//see:
 	// Code/WorkInProgress/Cael_Aislinn/Economy/Economy_Events.dm
 	// Code/WorkInProgress/Cael_Aislinn/Economy/Economy_Events_Mundane.dm
-	possibleEvents[/datum/event/economic_event] = 200
-	possibleEvents[/datum/event/trivial_news] = 300
-	possibleEvents[/datum/event/mundane_news] = 200
+	possibleEvents[/datum/event/economic_event] = 300
+	possibleEvents[/datum/event/trivial_news] = 400
+	possibleEvents[/datum/event/mundane_news] = 300
 
 	possibleEvents[/datum/event/pda_spam] = max(min(25, player_list.len) * 4, 200)
 	possibleEvents[/datum/event/money_lotto] = max(min(5, player_list.len), 50)
 	if(account_hack_attempted)
 		possibleEvents[/datum/event/money_hacker] = max(min(25, player_list.len) * 4, 200)
 
-	possibleEvents[/datum/event/carp_migration] = 50 + 50 * active_with_role["Engineer"]
-	possibleEvents[/datum/event/brand_intelligence] = 50 + 25 * active_with_role["Janitor"]
+	possibleEvents[/datum/event/carp_migration] = 20 + 10 * active_with_role["Engineer"]
+	possibleEvents[/datum/event/brand_intelligence] = 20 + 25 * active_with_role["Janitor"]
 
-	possibleEvents[/datum/event/rogue_drone] = 25 + 25 * active_with_role["Engineer"] + 25 * active_with_role["Security"]
-	possibleEvents[/datum/event/infestation] = 50 + 25 * active_with_role["Janitor"]
+	possibleEvents[/datum/event/rogue_drone] = 5 + 25 * active_with_role["Engineer"] + 25 * active_with_role["Security"]
+	possibleEvents[/datum/event/infestation] = 100 + 100 * active_with_role["Janitor"]
 
 	possibleEvents[/datum/event/communications_blackout] = 50 + 25 * active_with_role["AI"] + active_with_role["Scientist"] * 25
 	possibleEvents[/datum/event/ionstorm] = active_with_role["AI"] * 25 + active_with_role["Cyborg"] * 25 + active_with_role["Engineer"] * 10 + active_with_role["Scientist"] * 5
-	possibleEvents[/datum/event/grid_check] = 25 + 20 * active_with_role["Engineer"]
-	possibleEvents[/datum/event/electrical_storm] = 10 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
+	possibleEvents[/datum/event/grid_check] = 25 + 10 * active_with_role["Engineer"]
+	possibleEvents[/datum/event/electrical_storm] = 15 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Botanist"]
 
 	if(!spacevines_spawned)
-		possibleEvents[/datum/event/spacevine] = 5 + 5 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/spacevine] = 10 + 5 * active_with_role["Engineer"]
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
-		possibleEvents[/datum/event/meteor_shower] = 40 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/meteor_shower] = 20 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/blob] = 20 * active_with_role["Engineer"]
 
-	possibleEvents[/datum/event/viral_infection] = 25 + active_with_role["Medical"] * 100
+	possibleEvents[/datum/event/viral_infection] = 25 + active_with_role["Medical"] * 15
 	if(active_with_role["Medical"] > 0)
-		possibleEvents[/datum/event/radiation_storm] = active_with_role["Medical"] * 50
-		possibleEvents[/datum/event/spontaneous_appendicitis] = active_with_role["Medical"] * 150
-		possibleEvents[/datum/event/viral_infection] = active_with_role["Medical"] * 10
+		possibleEvents[/datum/event/radiation_storm] = active_with_role["Medical"] * 10
+		possibleEvents[/datum/event/spontaneous_appendicitis] = active_with_role["Medical"] * 10
+		possibleEvents[/datum/event/viral_infection] = active_with_role["Medical"] * 20
 		possibleEvents[/datum/event/organ_failure] = active_with_role["Medical"] * 50
 
 	possibleEvents[/datum/event/prison_break] = active_with_role["Security"] * 50

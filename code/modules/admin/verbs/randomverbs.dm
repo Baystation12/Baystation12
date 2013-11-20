@@ -290,15 +290,19 @@ Ccomp's first proc.
 	var/action=""
 	if(config.antag_hud_allowed)
 		for(var/mob/dead/observer/g in get_ghosts())
+			if(!g.client.holder)						//Remove the verb from non-admin ghosts
+				g.verbs -= /mob/dead/observer/verb/toggle_antagHUD
 			if(g.antagHUD)
-				g.antagHUD = 0				// Disable it on those that have it enabled
-				g.has_enabled_antagHUD = 2		// We'll allow them to respawn
+				g.antagHUD = 0						// Disable it on those that have it enabled
+				g.has_enabled_antagHUD = 2				// We'll allow them to respawn
 				g << "\red <B>The Administrator has disabled AntagHUD </B>"    
 		config.antag_hud_allowed = 0
 		src << "\red <B>AntagHUD usage has been disabled</B>"
 		action = "disabled"
 	else
 		for(var/mob/dead/observer/g in get_ghosts())
+			if(!g.client.holder)						// Add the verb back for all non-admin ghosts
+				g.verbs += /mob/dead/observer/verb/toggle_antagHUD
 			g << "\blue <B>The Administrator has enabled AntagHUD </B>"	// Notify all observers they can now use AntagHUD
 		config.antag_hud_allowed = 1
 		action = "enabled"

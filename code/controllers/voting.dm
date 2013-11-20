@@ -50,7 +50,6 @@ datum/controller/vote
 		initiate_vote("crew_transfer","the server")
 		log_debug("The server has called an Autotransfer")
 
-
 	proc/reset()
 		initiator = null
 		time_remaining = 0

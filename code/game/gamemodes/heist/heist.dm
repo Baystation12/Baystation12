@@ -139,10 +139,8 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 
 /datum/game_mode/heist/proc/forge_vox_objectives()
 
-
-	//Commented out for testing.
-	/* var/i = 1
-	var/max_objectives = pick(2,2,2,3,3)
+	var/i = 1
+	var/max_objectives = pick(2,2,2,2,3,3,3,4)
 	var/list/objs = list()
 	while(i<= max_objectives)
 		var/list/goals = list("kidnap","loot","salvage")
@@ -163,13 +161,7 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 
 	//-All- vox raids have these two objectives. Failing them loses the game.
 	objs += new /datum/objective/heist/inviolate_crew
-	objs += new /datum/objective/heist/inviolate_death */
-
-	raid_objectives += new /datum/objective/heist/kidnap
-	raid_objectives += new /datum/objective/heist/loot
-	raid_objectives += new /datum/objective/heist/salvage
-	raid_objectives += new /datum/objective/heist/inviolate_crew
-	raid_objectives += new /datum/objective/heist/inviolate_death
+	objs += new /datum/objective/heist/inviolate_death
 
 	for(var/datum/objective/heist/O in raid_objectives)
 		O.choose_target()
@@ -181,6 +173,7 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	raider.current << "\blue The Vox are a race of cunning, sharp-eyed nomadic raiders and traders endemic to Tau Ceti and much of the unexplored galaxy. You and the crew have come to the Exodus for plunder, trade or both."
 	raider.current << "\blue Vox are cowardly and will flee from larger groups, but corner one or find them en masse and they are vicious."
 	raider.current << "\blue Use :V to voxtalk, :H to talk on your encrypted channel, and don't forget to turn on your nitrogen internals!"
+	raider.current << "\red IF YOU HAVE NOT PLAYED A VOX BEFORE, REVIEW THIS THREAD: http://baystation12.net/forums/viewtopic.php?f=6&t=8657."
 	var/obj_count = 1
 	for(var/datum/objective/objective in raider.objectives)
 		raider.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
@@ -251,6 +244,28 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 			world << "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
 			feedback_add_details("traitor_objective","[objective.type]|FAIL")
 		count++
+
+	var/text = "<FONT size = 2><B>The vox raiders were:</B></FONT>"
+
+	for(var/datum/mind/vox in raiders)
+		text += "<br>[vox.key] was [vox.name] ("
+		var/obj/stack = raiders[vox]
+		if(get_area(stack) != locate(/area/shuttle/vox/station))
+			text += "left behind)"
+			continue
+		else if(vox.current)
+			if(vox.current.stat == DEAD)
+				text += "died"
+			else
+				text += "survived"
+			if(vox.current.real_name != vox.name)
+				text += " as [vox.current.real_name]"
+		else
+			text += "body destroyed"
+		text += ")"
+
+	world << text
+	return 1
 
 	..()
 
