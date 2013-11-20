@@ -81,3 +81,10 @@
 	/*if(oneShot)
 		potentialRandomEvents.Remove(type)*/
 	..()
+
+/datum/event/proc/num_players()
+	var/players = 0
+	for(var/mob/living/carbon/human/P in player_list)
+		if(P.client)
+			players++
+	return players
