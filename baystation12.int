@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\modules\research\designs.dm;code\game\objects\items\devices\PDA\PDA.dm;code\game\objects\items\weapons\implants\implantfreedom.dm;code\modules\clothing\under\chameleon.dm;code\modules\mining\abandonedcrates.dm;code\modules\mining\mine_turfs.dm
+LAST_COMPILE_VERSION: 501.1217
+DIR: code code\ATMOSPHERICS code\game code\game\objects code\game\objects\closets code\game\objects\items code\game\objects\items\devices code\game\objects\items\devices\PDA code\game\objects\items\devices\radio code\game\objects\items\weapons code\game\objects\items\weapons\implants code\modules code\modules\clothing code\modules\clothing\spacesuits code\modules\clothing\under code\modules\mining code\modules\reagents code\modules\reagents\reagent_containers code\modules\research 
+FILE: code\modules\mining\abandonedcrates.dm
+LAST_COMPILE_TIME: 1384930775
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
