@@ -245,16 +245,15 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 			feedback_add_details("traitor_objective","[objective.type]|FAIL")
 		count++
 
-		var/text = "<FONT size = 2><B>The vox raiders were:</B></FONT>"
+	var/text = "<FONT size = 2><B>The vox raiders were:</B></FONT>"
 
 	for(var/datum/mind/vox in raiders)
 		text += "<br>[vox.key] was [vox.name] ("
-		if(check_return)
-			var/obj/stack = raiders[vox]
-			if(get_area(stack) != locate(/area/shuttle/vox/station))
-				text += "left behind)"
-				continue
-		if(vox.current)
+		var/obj/stack = raiders[vox]
+		if(get_area(stack) != locate(/area/shuttle/vox/station))
+			text += "left behind)"
+			continue
+		else if(vox.current)
 			if(vox.current.stat == DEAD)
 				text += "died"
 			else
