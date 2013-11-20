@@ -715,10 +715,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 								U.show_message("\red Energy feeds back into your [src]!", 1)
 								U << browse(null, "window=pda")
 								explode()
-								message_admins("Admin [U] ([U.Key]) just attempted to blow up [P] with the Detomax cartridge but failed, blowing himself up", 1)
+								message_admins("Admin [U] ([U.key]) just attempted to blow up [P] with the Detomax cartridge but failed, blowing himself up", 1)
 							else
 								U.show_message("\blue Success!", 1)
-								message_admins("Admin [U] ([U.Key]) just attempted to blow up [P] with the Detomax cartridge and succeded", 1)
+								message_admins("Admin [U] ([U.key]) just attempted to blow up [P] with the Detomax cartridge and succeded", 1)
 								P.explode()
 					else
 						U << "PDA not found."
