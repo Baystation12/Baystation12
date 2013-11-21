@@ -65,24 +65,31 @@
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
-		if(!affecting.bandage())
-			user << "\red The wounds on [M]'s [affecting.display_name] have already been bandaged."
-			return 1
+		if(affecting.open == 0)
+			if(!affecting.bandage())
+				user << "\red The wounds on [M]'s [affecting.display_name] have already been bandaged."
+				return 1
+			else
+				for (var/datum/wound/W in affecting.wounds)
+					if (W.internal)
+						continue
+					if (W.current_stage <= W.max_bleeding_stage)
+						user.visible_message( 	"\blue [user] bandages [W.desc] on [M]'s [affecting.display_name].", \
+										"\blue You bandage [W.desc] on [M]'s [affecting.display_name]." )
+						//H.add_side_effect("Itch")
+					else if (istype(W,/datum/wound/bruise))
+						user.visible_message( 	"\blue [user] places bruise patch over [W.desc] on [M]'s [affecting.display_name].", \
+										"\blue You place bruise patch over [W.desc] on [M]'s [affecting.display_name]." )
+					else
+						user.visible_message( 	"\blue [user] places bandaid over [W.desc] on [M]'s [affecting.display_name].", \
+										"\blue You place bandaid over [W.desc] on [M]'s [affecting.display_name]." )
+				use(1)
 		else
-			for (var/datum/wound/W in affecting.wounds)
-				if (W.internal)
-					continue
-				if (W.current_stage <= W.max_bleeding_stage)
-					user.visible_message( 	"\blue [user] bandages [W.desc] on [M]'s [affecting.display_name].", \
-									"\blue You bandage [W.desc] on [M]'s [affecting.display_name]." )
-					//H.add_side_effect("Itch")
-				else if (istype(W,/datum/wound/bruise))
-					user.visible_message( 	"\blue [user] places bruise patch over [W.desc] on [M]'s [affecting.display_name].", \
-									"\blue You place bruise patch over [W.desc] on [M]'s [affecting.display_name]." )
-				else
-					user.visible_message( 	"\blue [user] places bandaid over [W.desc] on [M]'s [affecting.display_name].", \
-									"\blue You place bandaid over [W.desc] on [M]'s [affecting.display_name]." )
-			use(1)
+			if (can_operate(H))        //Checks if mob is lying down on table for surgery
+				if (do_surgery(H,user,src))
+					return
+			else
+				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"
 
 /obj/item/stack/medical/ointment
 	name = "ointment"
@@ -101,29 +108,37 @@
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
-		if(!affecting.salve())
-			user << "\red The wounds on [M]'s [affecting.display_name] have already been salved."
-			return 1
+		if(affecting.open == 0)
+			if(!affecting.salve())
+				user << "\red The wounds on [M]'s [affecting.display_name] have already been salved."
+				return 1
+			else
+				user.visible_message( 	"\blue [user] salves wounds on [M]'s [affecting.display_name].", \
+										"\blue You salve wounds on [M]'s [affecting.display_name]." )
+				use(1)
 		else
-			user.visible_message( 	"\blue [user] salves wounds on [M]'s [affecting.display_name].", \
-									"\blue You salve wounds on [M]'s [affecting.display_name]." )
-			use(1)
+			if (can_operate(H))        //Checks if mob is lying down on table for surgery
+				if (do_surgery(H,user,src))
+					return
+			else
+				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"
 
 /obj/item/stack/medical/bruise_pack/tajaran
 	name = "\improper S'rendarr's Hand leaf"
 	singular_name = "S'rendarr's Hand leaf"
-	desc = "A soft leaf that is rubbed on bruises."
+	desc = "A poultice made of soft leaves that is rubbed on bruises."
 	icon = 'icons/obj/harvest.dmi'
-	icon_state = "cabbage"
+	icon_state = "shandp"
 	heal_brute = 7
 
 /obj/item/stack/medical/ointment/tajaran
-	name = "\improper Messa's Tear leaf"
-	singular_name = "Messa's Tear leaf"
-	desc = "A cold leaf that is rubbed on burns."
+	name = "\improper Messa's Tear petals"
+	singular_name = "Messa's Tear petals"
+	desc = "A poultice made of cold, blue petals that is rubbed on burns."
 	icon = 'icons/obj/harvest.dmi'
-	icon_state = "ambrosiavulgaris"
+	icon_state = "mtearp"
 	heal_burn = 7
+
 
 /obj/item/stack/medical/advanced/bruise_pack
 	name = "advanced trauma kit"
@@ -141,25 +156,32 @@
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
-		if(!affecting.bandage())
-			user << "\red The wounds on [M]'s [affecting.display_name] have already been treated."
-			return 1
+		if(affecting.open == 0)
+			if(!affecting.bandage())
+				user << "\red The wounds on [M]'s [affecting.display_name] have already been treated."
+				return 1
+			else
+				for (var/datum/wound/W in affecting.wounds)
+					if (W.internal)
+						continue
+					if (W.current_stage <= W.max_bleeding_stage)
+						user.visible_message( 	"\blue [user] cleans [W.desc] on [M]'s [affecting.display_name] and seals edges with bioglue.", \
+										"\blue You clean and seal [W.desc] on [M]'s [affecting.display_name]." )
+						//H.add_side_effect("Itch")
+					else if (istype(W,/datum/wound/bruise))
+						user.visible_message( 	"\blue [user] places medicine patch over [W.desc] on [M]'s [affecting.display_name].", \
+										"\blue You place medicine patch over [W.desc] on [M]'s [affecting.display_name]." )
+					else
+						user.visible_message( 	"\blue [user] smears some bioglue over [W.desc] on [M]'s [affecting.display_name].", \
+										"\blue You smear some bioglue over [W.desc] on [M]'s [affecting.display_name]." )
+				affecting.heal_damage(heal_brute,0)
+				use(1)
 		else
-			for (var/datum/wound/W in affecting.wounds)
-				if (W.internal)
-					continue
-				if (W.current_stage <= W.max_bleeding_stage)
-					user.visible_message( 	"\blue [user] cleans [W.desc] on [M]'s [affecting.display_name] and seals edges with bioglue.", \
-									"\blue You clean and seal [W.desc] on [M]'s [affecting.display_name]." )
-					//H.add_side_effect("Itch")
-				else if (istype(W,/datum/wound/bruise))
-					user.visible_message( 	"\blue [user] places medicine patch over [W.desc] on [M]'s [affecting.display_name].", \
-									"\blue You place medicine patch over [W.desc] on [M]'s [affecting.display_name]." )
-				else
-					user.visible_message( 	"\blue [user] smears some bioglue over [W.desc] on [M]'s [affecting.display_name].", \
-									"\blue You smear some bioglue over [W.desc] on [M]'s [affecting.display_name]." )
-			affecting.heal_damage(heal_brute,0)
-			use(1)
+			if (can_operate(H))        //Checks if mob is lying down on table for surgery
+				if (do_surgery(H,user,src))
+					return
+			else
+				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"
 
 /obj/item/stack/medical/advanced/ointment
 	name = "advanced burn kit"
@@ -178,14 +200,21 @@
 		var/mob/living/carbon/human/H = M
 		var/datum/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
-		if(!affecting.salve())
-			user << "\red The wounds on [M]'s [affecting.display_name] have already been salved."
-			return 1
+		if(affecting.open == 0)
+			if(!affecting.salve())
+				user << "\red The wounds on [M]'s [affecting.display_name] have already been salved."
+				return 1
+			else
+				user.visible_message( 	"\blue [user] covers wounds on [M]'s [affecting.display_name] with regenerative membrane.", \
+										"\blue You cover wounds on [M]'s [affecting.display_name] with regenerative membrane." )
+				affecting.heal_damage(0,heal_burn)
+				use(1)
 		else
-			user.visible_message( 	"\blue [user] covers wounds on [M]'s [affecting.display_name] with regenerative membrane.", \
-									"\blue You cover wounds on [M]'s [affecting.display_name] with regenerative membrane." )
-			affecting.heal_damage(0,heal_burn)
-			use(1)
+			if (can_operate(H))        //Checks if mob is lying down on table for surgery
+				if (do_surgery(H,user,src))
+					return
+			else
+				user << "<span class='notice'>The [affecting.display_name] is cut open, you'll need more than a bandage!</span>"
 
 /obj/item/stack/medical/splint
 	name = "medical splints"

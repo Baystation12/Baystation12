@@ -6,7 +6,7 @@
 	name = "diona nymph"
 	voice_name = "diona nymph"
 	speak_emote = list("chirrups")
-	ico = "nymph"
+	icon_state = "nymph1"
 	var/list/donors = list()
 	var/ready_evolve = 0
 
@@ -68,7 +68,7 @@
 		src << "You are not yet ready for your growth..."
 		return
 
-	if(reagents.get_reagent_amount("nutriment") < 5)
+	if(nutrition < 400)
 		src << "You have not yet consumed enough to grow..."
 		return
 

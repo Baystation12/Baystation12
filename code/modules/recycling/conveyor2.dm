@@ -211,6 +211,10 @@
 
 // attack with hand, switch position
 /obj/machinery/conveyor_switch/attack_hand(mob/user)
+	if(!allowed(user))
+		user << "<span class='warning'>Access denied.</span>"
+		return
+
 	if(position == 0)
 		if(last_pos < 0)
 			position = 1
