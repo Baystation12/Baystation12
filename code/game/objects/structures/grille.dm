@@ -12,6 +12,17 @@
 	var/health = 10
 	var/destroyed = 0
 
+/obj/structure/grille/fence/east_west
+	//width=80
+	//height=42
+	icon='icons/fence-ew.dmi'
+
+/obj/structure/grille/fence/north_south
+	//width=80
+	//height=42
+	icon='icons/fence-ns.dmi'
+
+
 /obj/structure/grille/Del()
 	loc = null //garbage collect
 
