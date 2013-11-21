@@ -177,8 +177,8 @@
 				if("Plasma")
 					M = new/turf/simulated/mineral/plasma(src)
 					M.icon_state = "rock_Plasma[rand(1,3)]"
-				/*if("Adamantine")
-					M = new/turf/simulated/mineral/adamantine(src)*/
+				if("Clown")
+					M = new/turf/simulated/mineral/clown(src)
 			if(M)
 				src = M
 				M.levelupdate()
@@ -267,8 +267,8 @@
 	icon_state = "rock_Clown"
 	mineralName = "Clown"
 	mineralAmt = 3
-	spreadChance = 0
-	spread = 0
+	spreadChance = 10
+	spread = 1
 
 /*
 commented out in r5061, I left it because of the shroom thingies
