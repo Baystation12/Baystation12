@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\__HELPERS\bygex.dm
+DIR: code code\__HELPERS 
+FILE: code\__HELPERS\bygex.dm
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
