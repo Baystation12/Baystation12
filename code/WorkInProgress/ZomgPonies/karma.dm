@@ -149,7 +149,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 		<a href='?src=\ref[src];KarmaBuy=4'>Unlock Kidan -- 30KP</a><br>
 		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Grey -- 30KP</a><br>
 		<a href='?src=\ref[src];KarmaBuy=6'>Unlock Vox -- 45KP</a><br>
-
+		<B>PLEASE NOTE THAT PEOPLE WHO TRY TO GAME THE KARMA SYSTEM WILL END UP ON THE WALL OF SHAME. THIS INCLUDES BUT IS NOT LIMITED TO TRADES, OOC KARMA BEGGING, CODE EXPLOITS, ETC.</B>
 		"}
 
 // 		<a href='?src=\ref[src];KarmaBuy=7'>Unlock Slime People -- 45KP</a><br>
