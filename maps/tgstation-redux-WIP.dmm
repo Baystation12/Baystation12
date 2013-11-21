@@ -2019,7 +2019,7 @@
 "aMQ" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 5},/obj/machinery/firealarm{dir = 1; pixel_y = -24},/turf/simulated/floor{icon_state = "hydrofloor"},/area/hydroponics)
 "aMR" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/turf/simulated/floor{icon_state = "hydrofloor"},/area/hydroponics)
 "aMS" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 10},/turf/simulated/floor{icon_state = "hydrofloor"},/area/hydroponics)
-"aMT" = (/obj/structure/table,/obj/item/weapon/reagent_containers/glass/mister,/obj/item/weapon/watertank,/turf/simulated/floor{icon_state = "hydrofloor"},/area/hydroponics)
+"aMT" = (/obj/structure/table,/obj/item/weapon/watertank,/turf/simulated/floor{icon_state = "hydrofloor"},/area/hydroponics)
 "aMU" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/turf/simulated/floor/wood,/area/library)
 "aMV" = (/obj/structure/stool/bed/chair/office/dark{dir = 1},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/turf/simulated/floor/wood,/area/library)
 "aMW" = (/obj/structure/stool/bed/chair/office/dark{dir = 1},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/obj/structure/disposalpipe/segment,/turf/simulated/floor/wood,/area/library)

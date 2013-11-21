@@ -199,6 +199,7 @@
 	mineralChance = 25
 	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 25, "Archaeo" = 2)
 
+
 /turf/simulated/mineral/random/high_chance_clown
 	mineralChance = 40
 	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 5, "Silver" = 5, "Plasma" = 25, "Archaeo" = 2, "Clown" = 15)
