@@ -88,24 +88,6 @@
 
 			var/distance = get_dist(starting,loc)
 			var/miss_modifier = -30
-				if(def_zone == "l_arm")
-					miss_modifier += 10
-				if(def_zone == "r_arm")
-					miss_modifier += 10
-				if(def_zone == "l_leg")
-					miss_modifier += 5
-				if(def_zone == "r_leg")
-					miss_modifier += 5
-				if(def_zone == "head")
-					miss_modifier += 20
-				if(def_zone == "l_hand")
-					miss_modifier += 25
-				if(def_zone == "r_hand")
-					miss_modifier += 25
-				if(def_zone == "l_foot")
-					miss_modifier += 23
-				if(def_zone == "r_foot")
-					miss_modifier += 23
 
 			if (istype(shot_from,/obj/item/weapon/gun))	//If you aim at someone beforehead, it'll hit more often.
 				var/obj/item/weapon/gun/daddy = shot_from //Kinda balanced by fact you need like 2 seconds to aim
