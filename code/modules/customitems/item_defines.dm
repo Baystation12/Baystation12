@@ -921,3 +921,12 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		flick("leamas-reloading",src)
 	..()
+
+
+///// Custom Items coded by Iamgoofball are Below /////
+/obj/item/weapon/storage/belt/medical/fluff/honkbelt
+	name = "rainbow medical belt"
+	desc = "A somewhat-worn, modified, rainbow belt."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "nashi_belt"
+	item_state = "fluff_rbelt"
