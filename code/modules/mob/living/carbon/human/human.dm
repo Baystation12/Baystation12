@@ -299,7 +299,9 @@
 /mob/living/carbon/human/proc/is_loyalty_implanted(mob/living/carbon/human/M)
 	for(var/L in M.contents)
 		if(istype(L, /obj/item/weapon/implant/loyalty))
-			return 1
+			for(var/datum/organ/external/O in M.organs)
+				if(L in O.implants)
+					return 1
 	return 0
 
 /mob/living/carbon/human/attack_slime(mob/living/carbon/slime/M as mob)
