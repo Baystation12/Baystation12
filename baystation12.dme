@@ -1042,6 +1042,7 @@
 #include "code\modules\mob\living\simple_animal\parrot.dm"
 #include "code\modules\mob\living\simple_animal\shade.dm"
 #include "code\modules\mob\living\simple_animal\simple_animal.dm"
+#include "code\modules\mob\living\simple_animal\tribbles.dm"
 #include "code\modules\mob\living\simple_animal\vox.dm"
 #include "code\modules\mob\living\simple_animal\worm.dm"
 #include "code\modules\mob\living\simple_animal\friendly\cat.dm"
