@@ -3,8 +3,8 @@
 /datum/game_mode/ninja
 	name = "ninja"
 	config_tag = "ninja"
-	required_players = 1 //Can be adjusted later, should suffice for now.
-	required_players_secret = 1
+	required_players = 10 //Can be adjusted later, should suffice for now.
+	required_players_secret = 10
 	required_enemies = 1
 	recommended_enemies = 1
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
@@ -54,7 +54,7 @@
 /datum/game_mode/ninja/post_setup()
 	for(var/datum/mind/ninja in ninjas)
 		if(ninja.current && !(istype(ninja.current,/mob/living/carbon/human))) return 0
-		//forge_ninja_objectives(ninja)
+		forge_ninja_objectives(ninja)
 		var/mob/living/carbon/human/N = ninja.current
 		N.internal = N.s_store
 		N.internals.icon_state = "internal1"
@@ -82,7 +82,8 @@
 		return 1
 
 /datum/game_mode/ninja/proc/forge_ninja_objectives(var/datum/mind/ninja)
-	var/objective_list[] = list(1,2,3,4,5)
+
+	var/objective_list = list(1,2,3,4,5)
 	for(var/i=rand(2,4),i>0,i--)
 		switch(pick(objective_list))
 			if(1)//Kill
