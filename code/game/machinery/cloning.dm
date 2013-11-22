@@ -116,7 +116,7 @@
 //Clonepod
 
 //Start growing a human clone in the pod!
-/obj/machinery/clonepod/proc/growclone(var/ckey, var/clonename, var/ui, var/se, var/mindref, var/datum/species/mrace)
+/obj/machinery/clonepod/proc/growclone(var/ckey, var/clonename, var/ui, var/se, var/mindref, var/datum/species/mrace, var/languages)
 	if(mess || attempting)
 		return 0
 	var/datum/mind/clonemind = locate(mindref)
@@ -195,7 +195,8 @@
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
 
 	H.species = mrace
-	H.add_language(mrace.language)
+	for(var/datum/language/L in languages)
+		H.add_language(L.name)
 	H.update_mutantrace()
 	H.suiciding = 0
 	src.attempting = 0
