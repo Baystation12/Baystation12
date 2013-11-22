@@ -22,7 +22,7 @@
 				if(H.species.name in species_restricted)
 					wearable = 1
 
-			if(!wearable || (slot != slot_l_store && slot != slot_r_store))
+			if(!wearable)
 				M << "\red Your species cannot wear [src]."
 				return 0
 
