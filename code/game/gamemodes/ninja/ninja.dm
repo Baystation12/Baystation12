@@ -3,8 +3,8 @@
 /datum/game_mode/ninja
 	name = "ninja"
 	config_tag = "ninja"
-	required_players = 10 //Can be adjusted later, should suffice for now.
-	required_players_secret = 10
+	required_players = 1 //Can be adjusted later, should suffice for now.
+	required_players_secret = 1
 	required_enemies = 1
 	recommended_enemies = 1
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
@@ -26,18 +26,22 @@
 	ninja.assigned_role = "MODE" //So they aren't chosen for other jobs.
 	ninja.special_role = "Ninja"
 	ninja.original = ninja.current
-	if(ninjastart.len == 0)
+
+	/*if(ninjastart.len == 0)
 		ninja.current << "<B>\red A proper starting location for you could not be found, please report this bug!</B>"
-		ninja.current << "<B>\red Attempting to place at a carpspawn.</B>"
-		for(var/obj/effect/landmark/L in landmarks_list)
-			if(L.name == "carpspawn")
-				ninjastart.Add(L)
-		if(ninjastart.len == 0 && latejoin.len > 0)
-			ninja.current << "<B>\red Still no spawneable locations could be found. Defaulting to latejoin.</B>"
-			return 1
-		else if (ninjastart.len == 0)
-			ninja.current << "<B>\red Still no spawneable locations could be found. Aborting.</B>"
-			return 0
+		ninja.current << "<B>\red Attempting to place at a carpspawn.</B>"*/
+
+	//Until such a time as people want to place ninja spawn points, carpspawn will do fine.
+	for(var/obj/effect/landmark/L in landmarks_list)
+		if(L.name == "carpspawn")
+			ninjastart.Add(L)
+	if(ninjastart.len == 0 && latejoin.len > 0)
+		ninja.current << "<B>\red No spawneable locations could be found. Defaulting to latejoin.</B>"
+		return 1
+	else if (ninjastart.len == 0)
+		ninja.current << "<B>\red No spawneable locations could be found. Aborting.</B>"
+		return 0
+
 	return 1
 
 /datum/game_mode/ninja/pre_setup()
