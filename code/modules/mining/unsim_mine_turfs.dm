@@ -485,7 +485,7 @@ commented out in r5061, I left it because of the shroom thingies
 					M.Stun(5)
 			M.apply_effect(25, IRRADIATE)
 
-	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
+	var/turf/unsimulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/unsimulated/floor/plating/airless/asteroid)
 	N.fullUpdateMineralOverlays()
 
 	return
@@ -603,3 +603,174 @@ commented out in r5061, I left it because of the shroom thingies
 			M.selected.action(src)
 	else
 		return
+
+
+/**********************Asteroid**************************/
+
+/turf/unsimulated/floor/plating/airless/asteroid //floor piece
+	name = "Asteroid"
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "asteroid"
+	oxygen = 0.01
+	nitrogen = 0.01
+	temperature = TCMB
+	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
+
+/turf/unsimulated/floor/plating/airless/asteroid/New()
+	var/proper_name = name
+	..()
+	name = proper_name
+	//if (prob(50))
+	//	seedName = pick(list("1","2","3","4"))
+	//	seedAmt = rand(1,4)
+	if(prob(20))
+		icon_state = "asteroid[rand(0,12)]"
+	spawn(2)
+		updateMineralOverlays()
+
+/turf/unsimulated/floor/plating/airless/asteroid/ex_act(severity)
+	switch(severity)
+		if(3.0)
+			return
+		if(2.0)
+			if (prob(70))
+				src.gets_dug()
+		if(1.0)
+			src.gets_dug()
+	return
+
+/turf/unsimulated/floor/plating/airless/asteroid/attackby(obj/item/weapon/W as obj, mob/user as mob)
+
+	if(!W || !user)
+		return 0
+
+	if ((istype(W, /obj/item/weapon/shovel)))
+		var/turf/T = user.loc
+		if (!( istype(T, /turf) ))
+			return
+
+		if (dug)
+			user << "\red This area has already been dug"
+			return
+
+		user << "\red You start digging."
+		playsound(src.loc, 'sound/effects/rustle1.ogg', 50, 1) //russle sounds sounded better
+
+		sleep(40)
+		if ((user.loc == T && user.get_active_hand() == W))
+			user << "\blue You dug a hole."
+			gets_dug()
+
+	if ((istype(W,/obj/item/weapon/pickaxe/drill)))
+		var/turf/T = user.loc
+		if (!( istype(T, /turf) ))
+			return
+
+		if (dug)
+			user << "\red This area has already been dug"
+			return
+
+		user << "\red You start digging."
+		playsound(src.loc, 'sound/effects/rustle1.ogg', 50, 1) //russle sounds sounded better
+
+		sleep(30)
+		if ((user.loc == T && user.get_active_hand() == W))
+			user << "\blue You dug a hole."
+			gets_dug()
+
+	if ((istype(W,/obj/item/weapon/pickaxe/diamonddrill)) || (istype(W,/obj/item/weapon/pickaxe/borgdrill)))
+		var/turf/T = user.loc
+		if (!( istype(T, /turf) ))
+			return
+
+		if (dug)
+			user << "\red This area has already been dug"
+			return
+
+		user << "\red You start digging."
+		playsound(src.loc, 'sound/effects/rustle1.ogg', 50, 1) //russle sounds sounded better
+
+		sleep(0)
+		if ((user.loc == T && user.get_active_hand() == W))
+			user << "\blue You dug a hole."
+			gets_dug()
+
+	if(istype(W,/obj/item/weapon/storage/bag/ore))
+		var/obj/item/weapon/storage/bag/ore/S = W
+		if(S.collection_mode)
+			for(var/obj/item/weapon/ore/O in src.contents)
+				O.attackby(W,user)
+				return
+
+	else
+		..(W,user)
+	return
+
+/turf/unsimulated/floor/plating/airless/asteroid/proc/gets_dug()
+	if(dug)
+		return
+	new/obj/item/weapon/ore/glass(src)
+	new/obj/item/weapon/ore/glass(src)
+	new/obj/item/weapon/ore/glass(src)
+	new/obj/item/weapon/ore/glass(src)
+	new/obj/item/weapon/ore/glass(src)
+	dug = 1
+	icon_state = "asteroid_dug"
+	return
+
+/turf/unsimulated/floor/plating/airless/asteroid/proc/updateMineralOverlays()
+
+	src.overlays.Cut()
+
+	if(istype(get_step(src, NORTH), /turf/unsimulated/mineral))
+		src.overlays += image('icons/turf/walls.dmi', "rock_side_n")
+	if(istype(get_step(src, SOUTH), /turf/unsimulated/mineral))
+		src.overlays += image('icons/turf/walls.dmi', "rock_side_s", layer=6)
+	if(istype(get_step(src, EAST), /turf/unsimulated/mineral))
+		src.overlays += image('icons/turf/walls.dmi', "rock_side_e", layer=6)
+	if(istype(get_step(src, WEST), /turf/unsimulated/mineral))
+		src.overlays += image('icons/turf/walls.dmi', "rock_side_w", layer=6)
+
+/turf/unsimulated/floor/plating/airless/asteroid/proc/fullUpdateMineralOverlays()
+	var/turf/unsimulated/floor/plating/airless/asteroid/A
+	if(istype(get_step(src, WEST), /turf/unsimulated/floor/plating/airless/asteroid))
+		A = get_step(src, WEST)
+		A.updateMineralOverlays()
+	if(istype(get_step(src, EAST), /turf/unsimulated/floor/plating/airless/asteroid))
+		A = get_step(src, EAST)
+		A.updateMineralOverlays()
+	if(istype(get_step(src, NORTH), /turf/unsimulated/floor/plating/airless/asteroid))
+		A = get_step(src, NORTH)
+		A.updateMineralOverlays()
+	if(istype(get_step(src, NORTHWEST), /turf/unsimulated/floor/plating/airless/asteroid))
+		A = get_step(src, NORTHWEST)
+		A.updateMineralOverlays()
+	if(istype(get_step(src, NORTHEAST), /turf/unsimulated/floor/plating/airless/asteroid))
+		A = get_step(src, NORTHEAST)
+		A.updateMineralOverlays()
+	if(istype(get_step(src, SOUTHWEST), /turf/unsimulated/floor/plating/airless/asteroid))
+		A = get_step(src, SOUTHWEST)
+		A.updateMineralOverlays()
+	if(istype(get_step(src, SOUTHEAST), /turf/unsimulated/floor/plating/airless/asteroid))
+		A = get_step(src, SOUTHEAST)
+		A.updateMineralOverlays()
+	if(istype(get_step(src, SOUTH), /turf/unsimulated/floor/plating/airless/asteroid))
+		A = get_step(src, SOUTH)
+		A.updateMineralOverlays()
+	src.updateMineralOverlays()
+
+/turf/unsimulated/floor/plating/airless/asteroid/Entered(atom/movable/M as mob|obj)
+	..()
+	if(istype(M,/mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = M
+		if(istype(R.module, /obj/item/weapon/robot_module/miner))
+			if(istype(R.module_state_1,/obj/item/weapon/storage/bag/ore))
+				src.attackby(R.module_state_1,R)
+			else if(istype(R.module_state_2,/obj/item/weapon/storage/bag/ore))
+				src.attackby(R.module_state_2,R)
+			else if(istype(R.module_state_3,/obj/item/weapon/storage/bag/ore))
+				src.attackby(R.module_state_3,R)
+			else
+				return
+
+
