@@ -48,7 +48,11 @@ datum/controller/vote
 
 	proc/autotransfer()
 		initiate_vote("crew_transfer","the server")
-		log_debug("The server has called an Autotransfer")
+		log_debug("The server has called a crew transfer vote")
+
+/*	proc/autogamemode() //This is here for whoever can figure out how to make this work
+		initiate_vote("gamemode","the server")
+		log_debug("The server has called a gamemode vote")*/
 
 	proc/reset()
 		initiator = null
