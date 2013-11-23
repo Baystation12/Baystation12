@@ -2540,7 +2540,7 @@ datum
 			color = "#619494" // rgb: 97, 148, 148
 
 		drink/cold/space_cola
-			name = "Cola"
+			name = "Space Cola"
 			id = "cola"
 			description = "A refreshing beverage."
 			reagent_state = LIQUID
