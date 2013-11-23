@@ -17,7 +17,6 @@
 
 	name = "vox quill"
 	desc = "A wickedly barbed quill from some bizarre animal."
-	icon = 'icons/obj/weapons.dmi'
 	icon_state = "quill"
 	item_state = "quill"
 	throwforce = 5
@@ -34,6 +33,15 @@
 		var/obj/item/weapon/shard/shrapnel/S = new()
 		S.loc = get_turf(src)
 		src.Del()
+
+/obj/item/weapon/arrow/baguette
+	name = "baguette"
+	desc = "Still warm from the oven!"
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "baguette"
+	item_state = "baguette"
+	throwforce = 3
+	sharp = 0
 
 /obj/item/weapon/crossbow
 
@@ -203,3 +211,34 @@
 		arrow = null
 		tension = 0
 		icon_state = "crossbow"
+
+/obj/item/weapon/crossbow/french
+	name = "french powered crossbow"
+
+/obj/item/weapon/crossbow/french/attackby(obj/item/W as obj, mob/user as mob)
+	if(!arrow)
+		if (istype(W,/obj/item/weapon/reagent_containers/food/snacks/baguette))
+			user.drop_item()
+			arrow = W
+			arrow.loc = src
+			user.visible_message("[user] slides [arrow] into [src].","You slide [arrow] into [src].")
+			icon_state = "fcrossbow-nocked"
+			return
+
+	else
+		..()
+
+/obj/item/weapon/crossbow/french/increase_tension(var/mob/user as mob)
+
+	if(!arrow || !tension || current_user != user) //Arrow has been fired, bow has been relaxed or user has changed.
+		return
+
+	tension++
+	icon_state = "fcrossbow-drawn"
+
+	if(tension>=max_tension)
+		tension = max_tension
+		usr << "[src] clunks as you draw the string to its maximum tension!"
+	else
+		user.visible_message("[usr] draws back the string of [src]!","You continue drawing back the string of [src]!")
+		spawn(25) increase_tension(user)

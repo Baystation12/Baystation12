@@ -12,6 +12,29 @@
 	var/health = 10
 	var/destroyed = 0
 
+/obj/structure/grille/fence/
+	var/width = 3
+	health = 50
+
+/obj/structure/grille/fence/New()
+	if(width > 1)
+		if(dir in list(EAST, WEST))
+			bound_width = width * world.icon_size
+			bound_height = world.icon_size
+		else
+			bound_width = world.icon_size
+			bound_height = width * world.icon_size
+
+/obj/structure/grille/fence/east_west
+	//width=80
+	//height=42
+	icon='icons/fence-ew.dmi'
+
+/obj/structure/grille/fence/north_south
+	//width=80
+	//height=42
+	icon='icons/fence-ns.dmi'
+
 /obj/structure/grille/Del()
 	loc = null //garbage collect
 

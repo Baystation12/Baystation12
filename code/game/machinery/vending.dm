@@ -82,7 +82,7 @@
 
 /obj/machinery/vending/proc/reconnect_database()
 	for(var/obj/machinery/account_database/DB in world)
-		if(DB.z == src.z)
+		if(DB.z == 1)	//Hardcoded to the main station for now.
 			linked_db = DB
 			break
 
@@ -190,8 +190,7 @@
 		var/obj/item/weapon/card/id/C = I
 		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
 		if(linked_account)
-			var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-			var/datum/money_account/D = linked_db.attempt_account_access(C.associated_account_number, attempt_pin, 2)
+			var/datum/money_account/D = linked_db.attempt_account_access_nosec(C.associated_account_number)
 			if(D)
 				var/transaction_amount = currently_vending.price
 				if(transaction_amount <= D.money)
@@ -238,63 +237,62 @@
 /obj/machinery/vending/attack_ai(mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/vending/attack_hand(mob/user as mob)
-	if(stat & (BROKEN|NOPOWER))
+/obj/machinery/vending/attack_hand(var/mob/user as mob)
+	if(stat & BROKEN)
 		return
-	user.set_machine(src)
 
 	if(src.seconds_electrified != 0)
 		if(src.shock(user, 100))
 			return
 
-	var/vendorname = (src.name)  //import the machine's name
 
-	if(src.currently_vending)
-		var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
-		dat += "<b>You have selected [currently_vending.product_name].<br>Please swipe your ID to pay for the article.</b><br>"
-		dat += "<a href='byond://?src=\ref[src];cancel_buying=1'>Cancel</a>"
-		user << browse(dat, "window=vending")
-		onclose(user, "")
-		return
-
-	var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
-	dat += "<b>Select an item: </b><br><br>" //the rest is just general spacing and bolding
-
-	if (premium.len > 0)
-		dat += "<b>Coin slot:</b> [coin ? coin : "No coin inserted"] (<a href='byond://?src=\ref[src];remove_coin=1'>Remove</A>)<br><br>"
-
-	if (src.product_records.len == 0)
-		dat += "<font color = 'red'>No product loaded!</font>"
-	else
-		var/list/display_records = src.product_records
-		if(src.extended_inventory)
-			display_records = src.product_records + src.hidden_records
-		if(src.coin)
-			display_records = src.product_records + src.coin_records
-		if(src.coin && src.extended_inventory)
-			display_records = src.product_records + src.hidden_records + src.coin_records
-
-		for (var/datum/data/vending_product/R in display_records)
-			dat += "<FONT color = '[R.display_color]'><B>[R.product_name]</B>:"
-			dat += " <b>[R.amount]</b> </font>"
-			if(R.price)
-				dat += " <b>(Price: [R.price])</b>"
-			if (R.amount > 0)
-				dat += " <a href='byond://?src=\ref[src];vend=\ref[R]'>(Vend)</A>"
-			else
-				dat += " <font color = 'red'>SOLD OUT</font>"
-			dat += "<br>"
-
-		dat += "</TT>"
-
-	if(panel_open)
+	if(panel_open) //NanoUI does not feature thoes wire() procs, and I don't feel like rewriting it, so this is the best option.
+		var/dat
 		dat += wires()
 
 		if (product_slogans != "")
 			dat += "The speaker switch is [src.shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
 
-	user << browse(dat, "window=vending")
-	onclose(user, "")
+		var/datum/browser/popup = new(user, "vending", (name))
+		popup.set_content(dat)
+		popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
+		popup.open()
+	ui_interact(user)
+
+/obj/machinery/vending/ui_interact(mob/user, ui_key = "vending_machine")
+	if(stat & (BROKEN|NOPOWER)) return
+	if(user.stat || user.restrained()) return
+	var/list/productData[0]
+	var/list/premiumData[0]
+	var/list/contrabandData[0]
+	var/list/display_records = product_records
+	for(var/datum/data/vending_product/R in display_records)
+		productData.Add(list(list("amount" = R.amount, "name" = R.product_name, "price" = R.price, "displayColor" = R.display_color, "itself" = "\ref[R]", "path" = R.product_path)))
+	for(var/datum/data/vending_product/R in coin_records)
+		premiumData.Add(list(list("amount" = R.amount, "name" = R.product_name, "price" = R.price, "displayColor" = R.display_color, "itself" = "\ref[R]", "path" = R.product_path)))
+	for(var/datum/data/vending_product/R in hidden_records)
+		contrabandData.Add(list(list("amount" = R.amount, "name" = R.product_name, "price" = R.price, "displayColor" = R.display_color, "itself" = "\ref[R]", "path" = R.product_path)))
+
+	var/data[0]
+	data["premiumItems"]      = premium
+	data["contraband"]        = contraband
+	data["products"]        = products
+	data["coin"]          = coin
+	data["extendedInventory"]    = extended_inventory
+	data["panelOpen"]        = panel_open
+	data["productData"]        = productData
+	data["premiumData"]        = premiumData
+	data["contrabandData"]      = contrabandData
+	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
+	if (!ui)
+		ui = new(user, src, ui_key, "vending.tmpl", "Vending Machine", 600, 500)
+		ui.set_initial_data(data)
+		ui.set_auto_update(1)
+		ui.open()
+	else
+		ui.push_data(data)
+		return
+
 
 // returns the wire panel text
 /obj/machinery/vending/proc/wires()

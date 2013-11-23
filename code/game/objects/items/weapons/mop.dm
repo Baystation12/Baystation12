@@ -23,6 +23,7 @@
 obj/item/weapon/mop/proc/clean(turf/simulated/A as turf)
 	reagents.reaction(A,1,10)
 	A.clean_blood()
+	A.dirt = 0
 	for(var/obj/effect/O in A)
 		if( istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay) )
 			del(O)

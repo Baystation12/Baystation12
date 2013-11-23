@@ -434,6 +434,8 @@ proc/process_ghost_teleport_locs()
 /area/planet/clown
 	name = "\improper Clown Planet"
 	icon_state = "honk"
+	luminosity = 1
+	lighting_use_dynamic = 0
 	requires_power = 0
 
 /area/tdome
@@ -1562,6 +1564,13 @@ proc/process_ghost_teleport_locs()
 /area/construction/Storage
 	name = "Construction Site Storage"
 	icon_state = "yellow"
+
+
+//GAYBAR
+/area/secret/gaybar
+	name = "\improper Secret Space Bar"
+	requires_power = 0
+	icon_state = "pink"
 
 //AI
 

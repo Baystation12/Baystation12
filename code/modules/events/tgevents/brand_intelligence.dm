@@ -5,7 +5,7 @@
 	var/list/obj/machinery/vending/vendingMachines = list()
 	var/list/obj/machinery/vending/infectedMachines = list()
 	var/obj/machinery/vending/originMachine
-
+	var/scaling_factor
 
 /datum/event/brand_intelligence/announce()
 	command_alert("Rampant brand intelligence has been detected aboard [station_name()], please stand-by. The origin is believed to be \a [originMachine.name].", "Machine Learning Alert")
@@ -25,6 +25,9 @@
 	originMachine.shut_up = 0
 	originMachine.shoot_inventory = 1
 
+	scaling_factor = num_players() / 25	//Tweak this value to change the number of hostile machines. Lower value = more hostile machines.
+
+
 
 /datum/event/brand_intelligence/tick()
 	if(!originMachine || originMachine.shut_up || !originMachine.powered())	//if the original vending machine is missing or has it's voice switch flipped
@@ -39,7 +42,7 @@
 	if(!vendingMachines.len)	//if every machine is infected
 		for(var/obj/machinery/vending/upriser in infectedMachines)
 			if(prob(25)) return
-			if(prob(60))
+			if(prob(60 * scaling_factor))
 				var/mob/living/simple_animal/hostile/mimic/M = new(upriser.loc)
 				M.name = upriser.name
 				M.icon = upriser.icon

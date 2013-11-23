@@ -767,6 +767,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 			if(!S.can_be_inserted(G))
 				return
 			S.handle_item_insertion(G, 1)
+			score_stuffharvested++
 
 	else if ( istype(O, /obj/item/weapon/pestspray) )
 		var/obj/item/pestkiller/myPKiller = O
@@ -850,6 +851,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 		t_prod.potency = potency
 		t_prod.plant_type = plant_type
 		t_amount++
+		score_stuffharvested++
 
 	parent.update_tray()
 

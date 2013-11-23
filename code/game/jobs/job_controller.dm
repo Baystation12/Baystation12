@@ -113,6 +113,9 @@ var/global/datum/controller/occupations/job_master
 			if(job in command_positions) //If you want a command position, select it!
 				continue
 
+			if(job in whitelisted_positions) // No random whitelisted job, sorry!
+				continue
+
 			if(jobban_isbanned(player, job.title))
 				Debug("GRJ isbanned failed, Player: [player], Job: [job.title]")
 				continue
