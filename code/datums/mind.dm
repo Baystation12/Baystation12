@@ -510,7 +510,6 @@ datum/mind
 						for(var/datum/organ/external/organs in H.organs)
 							if(I in organs.implants)
 								I.Del()
-								break
 					H << "\blue <Font size =3><B>Your loyalty implant has been deactivated.</B></FONT>"
 				if("add")
 					var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
