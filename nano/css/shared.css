@@ -303,11 +303,11 @@ div.notice {
     border-color: #666666;
 }
 .fixedLeft {
-    width: 130px;
+    width: 110px;
     float: left;
 }
 .fixedLeftWide {
-    width: 260px;
+    width: 150px;
     float: left;
 }
 
