@@ -8,6 +8,7 @@
 /proc/iscultist(mob/living/M as mob)
 	return istype(M) && M.mind && ticker && ticker.mode && (M.mind in ticker.mode.cult)
 
+	
 /proc/is_convertable_to_cult(datum/mind/mind)
 	if(!istype(mind))	return 0
 	if(istype(mind.current, /mob/living/carbon/human) && (mind.assigned_role in list("Captain", "Chaplain")))	return 0
@@ -133,7 +134,6 @@
 			mob << "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself."
 			mob.mutations.Remove(CLUMSY)
 
-
 	var/obj/cult_viewpoint/viewpoint = new(mob)
 	viewpoint.loc = mob
 	world << "Spawning viewpoint on [mob]"
@@ -205,7 +205,7 @@
 			for(var/mob/M in viewers(cult_mind.current))
 				M << "<FONT size = 3>[cult_mind.current] looks like they just reverted to their old faith!</FONT>"
 
-				
+
 /datum/game_mode/proc/update_all_cult_icons()
 	spawn(0)
 		// reset the cult
@@ -322,35 +322,6 @@
 		for(var/mob/spirit/currentSpirit in spirits)
 			remove_cult_icon_from_spirit(currentSpirit,cult_mind)
 	
-/*
-/datum/game_mode/proc/update_cult_icons_added(datum/mind/cult_mind)
-	spawn(0)
-		for(var/datum/mind/cultist in cult)
-			if(cultist.current)
-				if(cultist.current.client)
-					var/I = image('icons/mob/mob.dmi', loc = cult_mind.current, icon_state = "cult")
-					cultist.current.client.images += I
-			if(cult_mind.current)
-				if(cult_mind.current.client)
-					var/image/J = image('icons/mob/mob.dmi', loc = cultist.current, icon_state = "cult")
-					cult_mind.current.client.images += J
-
-
-/datum/game_mode/proc/update_cult_icons_removed(datum/mind/cult_mind)
-	spawn(0)
-		for(var/datum/mind/cultist in cult)
-			if(cultist.current)
-				if(cultist.current.client)
-					for(var/image/I in cultist.current.client.images)
-						if(I.icon_state == "cult" && I.loc == cult_mind.current)
-							del(I)
-
-		if(cult_mind.current)
-			if(cult_mind.current.client)
-				for(var/image/I in cult_mind.current.client.images)
-					if(I.icon_state == "cult")
-						del(I)
-*/
 
 /datum/game_mode/cult/proc/get_unconvertables()
 	var/list/ucs = list()
@@ -385,6 +356,10 @@
 	else
 		return 1
 
+
+/atom/proc/cult_log(var/message)
+	investigate_log(message, "cult")
+	
 
 /datum/game_mode/cult/declare_completion()
 

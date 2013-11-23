@@ -1031,6 +1031,7 @@
 #include "code\modules\mob\spirit\spirit.dm"
 #include "code\modules\mob\spirit\viewpoint.dm"
 #include "code\modules\mob\spirit\mask\mask.dm"
+#include "code\modules\mob\spirit\mask\respawn.dm"
 #include "code\modules\nano\_JSON.dm"
 #include "code\modules\nano\JSON Reader.dm"
 #include "code\modules\nano\JSON Writer.dm"

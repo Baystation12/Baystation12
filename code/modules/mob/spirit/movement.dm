@@ -18,6 +18,8 @@ mob/spirit/proc/Spirit_Move(direct)
 		if(step)
 			setLoc(step)
 
+	dir = direct // update our sprite
+	
 	cooldown = world.timeofday + 5
 	if(acceleration)
 		sprint = min(sprint + 0.5, max_sprint)

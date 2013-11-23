@@ -76,6 +76,7 @@ var/obj/cult_viewpoint/list/cult_viewpoints = list()
 		if(FAVOR_DISPLEASED)
 			owner << "\red \b You cringe at your gods displeasure."
 
+
 /obj/cult_viewpoint/verb/pray_to_mask()
 	set category = "Cult"
 	set desc = "Pray to your god"
@@ -86,6 +87,7 @@ var/obj/cult_viewpoint/list/cult_viewpoints = list()
 	if(!input)
 		return
 	
+	cult_log("[key_name(usr,0)](Pray):[input]")
 	owner << "<span class='cultspeech'><b>You pray to Nar'Sie</b>: [input]</span>"
 	
 	for(var/mob/spirit/spirit in spirits)
@@ -145,12 +147,17 @@ var/obj/cult_viewpoint/list/cult_viewpoints = list()
 	set desc = "Sacrifice your life and become a Mask of Nar'sie."
 	set src in usr
 	
+	cult_log("[key_name(usr,0)] has tried to become a Mask of Nar'sie.")
+	
 	if (!active_mask())
 		var/transformation_type = alert(owner.client, "You are about to become a Mask. Do you want it to be subtle or violent?", "Mask", "Subtle", "Violent")
 		if(!active_mask())
+			cult_log("[key_name(usr,0)] has become a Mask of Nar'sie.")
 			if (transformation_type=="Subtle")
+				log_admin("[key_name_admin(owner)] has subtly become a Mask of Nar'sie")
 				owner.make_into_mask(0,0)
 			else
+				log_admin("[key_name_admin(owner)] has violently become a Mask of Nar'sie")
 				owner.make_into_mask(1,1)
 	else
 		owner << "\b You cannot become a mask of Nar'Sie because a Mask already exists."

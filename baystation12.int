@@ -2,8 +2,8 @@
 /*
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 501.1217
-DIR: code code\datums code\datums\visibility_networks code\defines\obj code\game code\game\gamemodes code\game\gamemodes\cult code\game\gamemodes\malfunction code\game\machinery code\game\machinery\camera code\modules code\modules\admin code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human 
-LAST_COMPILE_TIME: 1384721250
+DIR: code code\_onclick code\datums code\datums\visibility_networks code\defines\obj code\game code\game\gamemodes code\game\gamemodes\blob code\game\gamemodes\blob\blobs code\game\gamemodes\cult code\game\gamemodes\events code\game\gamemodes\malfunction code\modules code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\spirit code\modules\mob\spirit\mask icons icons\mob icons\mob\spirits 
+LAST_COMPILE_TIME: 1385167549
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

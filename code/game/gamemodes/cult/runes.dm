@@ -2,6 +2,9 @@ var/list/sacrificed = list()
 
 
 /////////////////////////////////////////FIRST RUNE
+/obj/effect/rune/proc/teleportRune()
+	return teleport(src.word3)
+	
 /obj/effect/rune/proc/teleport(var/key)
 	var/mob/living/user = usr
 	var/allrunesloc[]
@@ -36,7 +39,8 @@ var/list/sacrificed = list()
 		call(/obj/effect/rune/proc/fizzle)()
 		return
 
-
+/obj/effect/rune/proc/itemportRune()
+	return itemport(src.word3)
 /obj/effect/rune/proc/itemport(var/key)
 //			var/allrunesloc[]
 //			allrunesloc = new/list()
@@ -106,6 +110,7 @@ var/list/sacrificed = list()
 		M.visible_message("\red [M] writhes in pain as the markings below him glow a bloody red.", \
 		"\red AAAAAAHHHH!.", \
 		"\red You hear an anguished scream.")
+		cult_log("[key_name_admin(usr)] tried to convert [key_name_admin(M)]")
 		if(is_convertable_to_cult(M.mind) && !jobban_isbanned(M, "cultist"))//putting jobban check here because is_convertable uses mind as argument
 			ticker.mode.add_cultist(M.mind)
 			M.mind.special_role = "Cultist"
@@ -130,6 +135,7 @@ var/list/sacrificed = list()
 			M.say("Tok-lyr rqa'nap g[pick("'","`")]lt-ulotf!")
 			cultist_count += 1
 	if(cultist_count >= 9)
+		cult_log("THE CULT HAS SUMMONED NAR'SIE. GGNORE")
 		new /obj/machinery/singularity/narsie/large(src.loc)
 		if(ticker.mode.name == "cult")
 			ticker.mode:eldergod = 0
@@ -138,7 +144,9 @@ var/list/sacrificed = list()
 		return fizzle()
 
 /////////////////////////////////////////FIFTH RUNE
-
+/obj/effect/rune/proc/empRune()
+	emp(src.loc,3)
+	
 /obj/effect/rune/proc/emp(var/U,var/range_red) //range_red - var which determines by which number to reduce the default emp range, U is the source loc, needed because of talisman emps which are held in hand at the moment of using and that apparently messes things up -- Urist
 	if(istype(src,/obj/effect/rune))
 		usr.say("Ta'gh fara[pick("'","`")]qha fel d'amar det!")
@@ -161,6 +169,7 @@ var/list/sacrificed = list()
 		if(R.word1==cultwords["travel"] && R.word2==cultwords["blood"] && R.word3==cultwords["self"])
 			for(var/mob/living/carbon/D in R.loc)
 				if(D.stat!=2)
+					cult_log("[key_name_admin(usr)] has drained blood from [key_name_admin(D)]")
 					var/bdrain = rand(1,25)
 					D << "\red You feel weakened."
 					D.take_overall_damage(bdrain, 0)
@@ -298,6 +307,8 @@ var/list/sacrificed = list()
 
 /////////////////////////////////////////NINETH RUNE
 
+/obj/effect/rune/proc/obscureRune()
+	return obscure(4)
 /obj/effect/rune/proc/obscure(var/rad)
 	var/S=0
 	for(var/obj/effect/rune/R in orange(rad,src))
@@ -520,6 +531,9 @@ var/list/sacrificed = list()
 			return 0
 		else
 			return 0
+	
+	// record this
+	cult_log("[key_name(usr,0)] says : [input]")
 
 	var/obj/cult_viewpoint/vp = getCultViewpoint(usr)
 	if (!vp)
@@ -697,6 +711,9 @@ var/list/sacrificed = list()
 	return fizzle() */
 
 /////////////////////////////////////////SIXTEENTH RUNE
+
+/obj/effect/rune/proc/revealrunesrune()
+	revealrunes(src)
 
 /obj/effect/rune/proc/revealrunes(var/obj/W as obj)
 	var/go=0
@@ -940,6 +957,7 @@ var/list/sacrificed = list()
 			var/obj/item/weapon/nullrod/N = locate() in M
 			if(N)
 				continue
+			cult_log(": Blood Boil damaged [key_name_admin(M)].")
 			M.take_overall_damage(51,51)
 			M << "\red Your blood boils!"
 			if(prob(5))
