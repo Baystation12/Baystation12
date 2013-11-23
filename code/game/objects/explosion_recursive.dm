@@ -91,7 +91,13 @@ proc/explosion_rec(turf/epicenter, power)
 /turf/simulated/floor
 	explosion_resistance = 1
 
+/turf/unsimulated/floor
+	explosion_resistance = 1
+
 /turf/simulated/mineral
+	explosion_resistance = 2
+
+/turf/unsimulated/mineral
 	explosion_resistance = 2
 
 /turf/simulated/shuttle/floor
@@ -148,5 +154,7 @@ proc/explosion_rec(turf/epicenter, power)
 		T.explosion_spread(spread_power)
 	*/
 
+/*
 /turf/unsimulated/explosion_spread(power)
 	return //So it doesn't get to the parent proc, which simulates explosions
+*/
