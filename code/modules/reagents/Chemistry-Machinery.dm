@@ -204,7 +204,6 @@
 	var/bottlesprite = "1" //yes, strings
 	var/pillsprite = "1"
 	var/client/has_sprites = list()
-	var/waiting = null //Fix for spamming 'create multiple pills'
 	var/max_pill_count = 20
 
 /obj/machinery/chem_master/New()
@@ -349,32 +348,37 @@
 				reagents.clear_reagents()
 				icon_state = "mixer0"
 		else if (href_list["createpill"] || href_list["createpill_multiple"])
+
 			var/count = 1
-			if (href_list["createpill_multiple"] && !waiting)
-				waiting = 1
+
+			if(reagents.total_volume/count < 1) //Sanity checking.
+				return
+
+			if (href_list["createpill_multiple"])
 				count = Clamp(isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num),1,max_pill_count)
+
+			if(reagents.total_volume/count < 1) //Sanity checking.
+				return
 
 			var/amount_per_pill = reagents.total_volume/count
 			if (amount_per_pill > 50) amount_per_pill = 50
+			var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"))
 
-			if(waiting < 2)
-				var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"))
-				waiting = 2
-				while (count--)
-					var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
-					if(!name) name = "[reagents.get_master_reagent_name()] ([amount_per_pill] units)"
-					P.name = "[name] pill"
-					P.pixel_x = rand(-7, 7) //random position
-					P.pixel_y = rand(-7, 7)
-					P.icon_state = "pill"+pillsprite
-					reagents.trans_to(P,amount_per_pill)
-					if(src.loaded_pill_bottle)
-						if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
-							P.loc = loaded_pill_bottle
-							src.updateUsrDialog()
+			if(reagents.total_volume/count < 1) //Sanity checking.
+				return
 
-			spawn(0)
-				waiting = null
+			while (count--)
+				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
+				if(!name) name = "[reagents.get_master_reagent_name()] ([amount_per_pill] units)"
+				P.name = "[name] pill"
+				P.pixel_x = rand(-7, 7) //random position
+				P.pixel_y = rand(-7, 7)
+				P.icon_state = "pill"+pillsprite
+				reagents.trans_to(P,amount_per_pill)
+				if(src.loaded_pill_bottle)
+					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
+						P.loc = loaded_pill_bottle
+						src.updateUsrDialog()
 
 		else if (href_list["createbottle"])
 			if(!condi)
