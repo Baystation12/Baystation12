@@ -134,10 +134,6 @@
 			mob << "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself."
 			mob.mutations.Remove(CLUMSY)
 
-	var/obj/cult_viewpoint/viewpoint = new(mob)
-	viewpoint.loc = mob
-	world << "Spawning viewpoint on [mob]"
-
 	var/obj/item/weapon/paper/talisman/supply/T = new(mob)
 	var/list/slots = list (
 		"backpack" = slot_in_backpack,
