@@ -241,44 +241,43 @@ datum/mind
 				text += "<a href='?src=\ref[src];nuclear=nuclear'>operative</a>|<b>NANOTRASEN</b>"
 			sections["nuclear"] = text
 
-		/** TRAITOR ***/
-		text = "traitor"
-		if (ticker.mode.config_tag=="traitor" || ticker.mode.config_tag=="traitorchan")
-			text = uppertext(text)
-		text = "<i><b>[text]</b></i>: "
-		if(istype(current, /mob/living/carbon/human))
-			if (H.is_loyalty_implanted(H))
-				text +="traitor|<b>LOYAL EMPLOYEE</b>"
-		else
-			if (src in ticker.mode.traitors)
-				text += "<b>TRAITOR</b>|<a href='?src=\ref[src];traitor=clear'>Employee</a>"
-				if (objectives.len==0)
-					text += "<br>Objectives are empty! <a href='?src=\ref[src];traitor=autoobjectives'>Randomize</a>!"
-			else
-				text += "<a href='?src=\ref[src];traitor=traitor'>traitor</a>|<b>Employee</b>"
-		sections["traitor"] = text
-
-		/** MONKEY ***/
-		if (istype(current, /mob/living/carbon))
-			text = "monkey"
-			if (ticker.mode.config_tag=="monkey")
+			/** TRAITOR ***/
+			text = "traitor"
+			if (ticker.mode.config_tag=="traitor" || ticker.mode.config_tag=="traitorchan")
 				text = uppertext(text)
 			text = "<i><b>[text]</b></i>: "
-			if (istype(current, /mob/living/carbon/human))
-				text += "<a href='?src=\ref[src];monkey=healthy'>healthy</a>|<a href='?src=\ref[src];monkey=infected'>infected</a>|<b>HUMAN</b>|other"
-			else if (istype(current, /mob/living/carbon/monkey))
-				var/found = 0
-				for(var/datum/disease/D in current.viruses)
-					if(istype(D, /datum/disease/jungle_fever)) found = 1
-
-				if(found)
-					text += "<a href='?src=\ref[src];monkey=healthy'>healthy</a>|<b>INFECTED</b>|<a href='?src=\ref[src];monkey=human'>human</a>|other"
-				else
-					text += "<b>HEALTHY</b>|<a href='?src=\ref[src];monkey=infected'>infected</a>|<a href='?src=\ref[src];monkey=human'>human</a>|other"
-
+			if (H.is_loyalty_implanted(H))
+				text +="traitor|<b>LOYAL EMPLOYEE</b>"
 			else
-				text += "healthy|infected|human|<b>OTHER</b>"
-			sections["monkey"] = text
+				if (src in ticker.mode.traitors)
+					text += "<b>TRAITOR</b>|<a href='?src=\ref[src];traitor=clear'>EMPLOYEE</a>"
+					if (objectives.len==0)
+						text += "<br>Objectives are empty! <a href='?src=\ref[src];traitor=autoobjectives'>Randomize</a>!"
+				else
+					text += "<a href='?src=\ref[src];traitor=traitor'>traitor</a>|<b>EMPLOYEE</b>"
+			sections["traitor"] = text
+
+			/** MONKEY ***/
+			if (istype(current, /mob/living/carbon))
+				text = "monkey"
+				if (ticker.mode.config_tag=="monkey")
+					text = uppertext(text)
+				text = "<i><b>[text]</b></i>: "
+				if (istype(current, /mob/living/carbon/human))
+					text += "<a href='?src=\ref[src];monkey=healthy'>healthy</a>|<a href='?src=\ref[src];monkey=infected'>infected</a>|<b>HUMAN</b>|other"
+				else if (istype(current, /mob/living/carbon/monkey))
+					var/found = 0
+					for(var/datum/disease/D in current.viruses)
+						if(istype(D, /datum/disease/jungle_fever)) found = 1
+
+					if(found)
+						text += "<a href='?src=\ref[src];monkey=healthy'>healthy</a>|<b>INFECTED</b>|<a href='?src=\ref[src];monkey=human'>human</a>|other"
+					else
+						text += "<b>HEALTHY</b>|<a href='?src=\ref[src];monkey=infected'>infected</a>|<a href='?src=\ref[src];monkey=human'>human</a>|other"
+
+				else
+					text += "healthy|infected|human|<b>OTHER</b>"
+				sections["monkey"] = text
 
 
 		/** SILICON ***/
@@ -508,19 +507,10 @@ datum/mind
 			switch(href_list["implant"])
 				if("remove")
 					for(var/obj/item/weapon/implant/loyalty/I in H.contents)
-						for(var/datum/organ/external/organs in H.organs)
-							if(I in organs.implants)
-								I.Del()
-								break
+						I.Del()
 					H << "\blue <Font size =3><B>Your loyalty implant has been deactivated.</B></FONT>"
 				if("add")
-					var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-					L.imp_in = H
-					L.implanted = 1
-					var/datum/organ/external/affected = H.organs_by_name["head"]
-					affected.implants += L
-					L.part = affected
-
+					H.contents.Add( new /obj/item/weapon/implant/loyalty (src) )
 					H << "\red <Font size =3><B>You somehow have become the recepient of a loyalty transplant, and it just activated!</B></FONT>"
 					if(src in ticker.mode.revolutionaries)
 						special_role = null
