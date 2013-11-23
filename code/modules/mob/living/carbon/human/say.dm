@@ -1,4 +1,6 @@
 /mob/living/carbon/human/say(var/message)
+	if(miming)
+		return
 
 	if(wear_mask)
 		if(istype(wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja) && wear_mask:voice == "Unknown")
@@ -34,6 +36,8 @@
 		if(copytext(message, 1, 2) != "*")
 			message = slur(message)
 	..(message)
+
+
 
 /mob/living/carbon/human/say_understands(var/other,var/datum/language/speaking = null)
 
