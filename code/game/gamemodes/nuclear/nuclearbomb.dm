@@ -119,6 +119,11 @@ var/bomb_set
 
 /obj/machinery/nuclearbomb/attack_hand(mob/user as mob)
 	if (src.extended)
+
+		if (!ishuman(user))
+			usr << "\red You don't have the dexterity to do this!"
+			return 1
+
 		user.set_machine(src)
 		var/dat = text("<TT><B>Nuclear Fission Explosive</B><BR>\nAuth. Disk: <A href='?src=\ref[];auth=1'>[]</A><HR>", src, (src.auth ? "++++++++++" : "----------"))
 		if (src.auth)
@@ -154,6 +159,12 @@ var/bomb_set
 	set category = "Object"
 	set name = "Make Deployable"
 	set src in oview(1)
+
+	if (!usr.canmove || usr.stat || usr.restrained())
+		return
+	if (!ishuman(usr))
+		usr << "\red You don't have the dexterity to do this!"
+		return 1
 
 	if (src.deployable)
 		usr << "\red You close several panels to make [src] undeployable."

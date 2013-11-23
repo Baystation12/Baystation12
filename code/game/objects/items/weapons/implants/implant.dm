@@ -157,14 +157,20 @@ Implant Specifics:<BR>"}
 	activate()
 		if (malfunction == MALFUNCTION_PERMANENT)
 			return
+
+		var/need_gib = null
 		if(istype(imp_in, /mob/))
 			var/mob/T = imp_in
 
 			message_admins("Explosive implant triggered in [T] ([T.key]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>) ")
 			log_game("Explosive implant triggered in [T] ([T.key]).")
+			need_gib = 1
 
-			T.gib()
 		explosion(get_turf(imp_in), 1, 3, 4, 6, 3)
+
+		if(need_gib)
+			imp_in.gib()
+
 		var/turf/t = get_turf(imp_in)
 
 		if(t)
