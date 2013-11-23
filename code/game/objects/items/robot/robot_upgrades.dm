@@ -2,7 +2,7 @@
 // Contains various borg upgrades.
 
 /obj/item/borg/upgrade
-	name = "A borg upgrade module."
+	name = "borg upgrade module."
 	desc = "Protected by FRM."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "cyborg_upgrade"
@@ -153,7 +153,7 @@
 
 
 /obj/item/borg/upgrade/syndicate/
-	name = "Illegal Equipment Module"
+	name = "illegal equipment module"
 	desc = "Unlocks the hidden, deadlier functions of a robot"
 	construction_cost = list("metal"=10000,"glass"=15000,"diamond" = 10000)
 	icon_state = "cyborg_upgrade3"
