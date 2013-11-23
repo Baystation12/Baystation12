@@ -2563,7 +2563,7 @@ datum
 				return
 
 		drink/cold/spacemountainwind
-			name = "Space Mountain Wind"
+			name = "MountainWind"
 			id = "spacemountainwind"
 			description = "Blows right through you like a space wind."
 			color = "#102000" // rgb: 16, 32, 0
