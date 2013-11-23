@@ -194,35 +194,7 @@ proc/checkhtml(var/t)
 /*
  * Text modification
  */
-/proc/replacetext(text, find, replacement)
-	var/find_len = length(find)
-	if(find_len < 1)	return text
-	. = ""
-	var/last_found = 1
-	while(1)
-		var/found = findtext(text, find, last_found, 0)
-		. += copytext(text, last_found, found)
-		if(found)
-			. += replacement
-			last_found = found + find_len
-			continue
-		return .
-
-/proc/replacetextEx(text, find, replacement)
-	var/find_len = length(find)
-	if(find_len < 1)	return text
-	. = ""
-	var/last_found = 1
-	while(1)
-		var/found = findtextEx(text, find, last_found, 0)
-		. += copytext(text, last_found, found)
-		if(found)
-			. += replacement
-			last_found = found + find_len
-			continue
-		return .
-
-//Adds 'u' number of zeros ahead of the text 't'
+ //Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
 	while (length(t) < u)
 		t = "0[t]"

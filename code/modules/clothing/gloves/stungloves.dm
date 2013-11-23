@@ -32,7 +32,7 @@
 		else
 			user << "<span class='notice'>[src] already have a cell.</span>"
 
-	else if(istype(W, /obj/item/weapon/wirecutters))
+	else if(istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/weapon/scalpel))
 
 
 		wired = null
@@ -43,7 +43,7 @@
 			cell = null
 		if(clipped == 0)
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			user.visible_message("\red [user] snips the fingertips off [src].","\red You snip the fingertips off [src].")
+			user.visible_message("\red [user] cut the fingertips off [src].","\red You cut the fingertips off [src].")
 			clipped = 1
 			if("exclude" in species_restricted)
 				name = "mangled [name]"
