@@ -134,6 +134,8 @@
 			mob << "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself."
 			mob.mutations.Remove(CLUMSY)
 
+	add_cult_viewpoint(mob) // give them a viewpoint
+	
 	var/obj/item/weapon/paper/talisman/supply/T = new(mob)
 	var/list/slots = list (
 		"backpack" = slot_in_backpack,
@@ -169,13 +171,20 @@
 	cult_mob.mind.store_memory("<B>You remember that</B> [wordexp]", 0, 0)
 
 
+/datum/game_mode/proc/add_cult_viewpoint(var/mob/target)
+	for(var/obj/cult_viewpoint/viewpoint in target)
+		return
+	var/obj/cult_viewpoint/viewpoint = new(target)
+	viewpoint.loc = target
+	return viewpoint
+	
+
 /datum/game_mode/proc/add_cultist(datum/mind/cult_mind) //BASE
 	if (!istype(cult_mind))
 		return 0
 	if(!(cult_mind in cult) && is_convertable_to_cult(cult_mind))
 		cult += cult_mind
-		var/obj/cult_viewpoint/viewpoint = new(cult_mind.current)
-		viewpoint.loc = cult_mind.current
+		add_cult_viewpoint(cult_mind.current)
 		update_cult_icons_added(cult_mind)
 		return 1
 
