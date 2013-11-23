@@ -439,8 +439,18 @@
 	var/atom/movable/locked
 	var/mode = 1 //1 - gravsling 2 - gravpush
 
+	var/last_fired = 0  //Concept stolen from guns.
+	var/fire_delay = 10 //Used to prevent spam-brute against humans.
 
 	action(atom/movable/target)
+
+		if(world.time >= last_fired + fire_delay)
+			last_fired = world.time
+		else
+			if (world.time % 3)
+				occupant_message("<span class='warning'>[src] is not ready to fire again!")
+			return 0
+
 		switch(mode)
 			if(1)
 				if(!action_checks(target) && !locked) return

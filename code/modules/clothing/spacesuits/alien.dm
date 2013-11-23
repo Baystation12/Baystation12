@@ -214,3 +214,49 @@
 	examine()
 		set src in view()
 		..()
+
+//Species-specific Syndicate rigs.
+
+/obj/item/clothing/head/helmet/space/rig/syndi/tajara
+	icon_state = "rig0-syndie-taj"
+	item_state = "syndie_helm"
+	item_color = "syndie-taj"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/suit/space/rig/syndi/tajara
+	item_state = "syndie_hardsuit"
+	icon_state = "rig-syndie-taj"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/head/helmet/space/rig/syndi/unathi
+	icon_state = "rig0-syndie-unathi"
+	item_state = "syndie_helm"
+	item_color = "syndie-unathi"
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/suit/space/rig/syndi/unathi
+	item_state = "syndie_hardsuit"
+	icon_state = "rig-syndie-unathi"
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/head/helmet/space/rig/syndi/skrell
+	icon_state = "rig0-syndie-skrell"
+	item_state = "syndie_helm"
+	item_color = "syndie-skrell"
+	species_restricted = list("Skrell")
+
+/obj/item/clothing/suit/space/rig/syndi/skrell
+	item_state = "syndie_hardsuit"
+	icon_state = "rig-syndie-skrell"
+	species_restricted = list("Skrell")
+
+/obj/item/clothing/head/helmet/space/rig/syndi/human
+	icon_state = "rig0-syndie-human"
+	item_state = "syndie_helm"
+	item_color = "syndie-human"
+	species_restricted = list("Human")
+
+/obj/item/clothing/suit/space/rig/syndi/human
+	item_state = "syndie_hardsuit"
+	icon_state = "rig-syndie-human"
+	species_restricted = list("Human")
