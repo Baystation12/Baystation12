@@ -183,7 +183,6 @@
 	return 1 // update UIs attached to this object
 
 /obj/machinery/chem_dispenser/attackby(var/obj/item/weapon/reagent_containers/B as obj, var/mob/user as mob)
-	world << "DEBUG:  got chem_dispenser attack by"
 	if(isrobot(user))
 		return
 
@@ -200,9 +199,7 @@
 	if(src.beaker)
 		user << "Something is already loaded into the machine."
 		return
-	world << "DEBUG:  Got to chem_dispenser/attackby istype check"
 	if(istype(B, /obj/item/weapon/reagent_containers/glass) || istype(B, /obj/item/weapon/reagent_containers/food))
-		world << "DEBUG: Passed istype check"
 		if(!accept_glass && istype(B,/obj/item/weapon/reagent_containers/food))
 			user << "<span class='notice'>This machine only accepts beakers</span>"
 		src.beaker =  B
@@ -259,7 +256,6 @@
 	dispensable_reagents = list("water","ice","coffee","tea","cream","lemon_lime","sugar","orangejuice","limejuice","cola","sodawater","tonic","beer","kahlua","whiskey","wine","vodka","gin","rum","tequilla","vermouth","cognac","ale","mead")
 
 	/obj/machinery/chem_dispenser/beer/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
-		world << "DEBUG:  GOT BEER DISPENSER attackby"
 		..()
 
 		if(istype(B, /obj/item/device/multitool))

@@ -176,6 +176,8 @@ h4 {
     width: 16px;
     height: 16px;
 }
+
+
 div.notice {
     clear: both;
 }
@@ -301,9 +303,14 @@ div.notice {
     border-color: #666666;
 }
 .fixedLeft {
-    width: 110px;
+    width: 130px;
     float: left;
 }
+.fixedLeftWide {
+    width: 260px;
+    float: left;
+}
+
 .floatRight {
     float: right;
 }
