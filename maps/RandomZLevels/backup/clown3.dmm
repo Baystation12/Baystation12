@@ -112,7 +112,7 @@
 "ch" = (/obj/machinery/door/airlock/clown,/turf/simulated/floor/carpet{icon_state = "carpetnoconnect"},/area/planet/clown)
 "ci" = (/turf/simulated/floor{dir = 1; icon_state = "rampbottom"; tag = "icon-rampbottom (EAST)"},/area/planet/clown)
 "cj" = (/turf/simulated/floor{dir = 8; icon_state = "rampbottom"; tag = "icon-rampbottom (EAST)"},/area/planet/clown)
-"ck" = (/obj/structure/tribble_cage,/turf/simulated/floor/wood,/area/planet/clown)
+"ck" = (/obj/structure/tribble,/turf/simulated/floor/wood,/area/planet/clown)
 "cl" = (/obj/structure/stool/bed/chair/comfy/lime{tag = "icon-comfychair_lime (NORTH)"; icon_state = "comfychair_lime"; dir = 1},/obj/item/clothing/head/crown,/turf/simulated/floor/wood,/area/planet/clown)
 "cm" = (/turf/simulated/floor{dir = 2; icon_state = "rampbottom"; tag = "icon-rampbottom (EAST)"},/area/planet/clown)
 "cn" = (/turf/simulated/wall/cult,/area/planet/clown)
