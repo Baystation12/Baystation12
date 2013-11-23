@@ -921,3 +921,31 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		flick("leamas-reloading",src)
 	..()
+
+
+///// Custom Items coded by Iamgoofball are Below /////
+/obj/item/weapon/storage/belt/medical/fluff/nashi_belt
+	name = "rainbow medical belt"
+	desc = "A somewhat-worn, modified, rainbow belt."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "nashi_belt"
+	item_state = "fluff_rbelt"
+
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 14, "Bicaridine")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 15, "Dermaline")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 16, "Dylovene")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 17, "Dexalin Plus")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 18, "Tricordrazine")
+		new /obj/item/weapon/reagent_containers/syringe/(src)
+		new /obj/item/device/healthanalyzer(src)
+
+/obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle
+	icon = 'icons/obj/chemical.dmi'
+	flags = FPRINT | TABLEPASS //Starting them with lids on them.  Safety first!
+	New(loc, var/color, var/labeled)
+		..()
+		name = "[labeled] bottle"
+		desc = "A small bottle.  Contains [labeled]"
+		icon_state = "bottle[color]"

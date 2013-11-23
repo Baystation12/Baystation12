@@ -251,15 +251,4 @@ This function restores all organs.
 				H.drop_item()
 			W.loc = src
 
-	else if(istype(used_weapon,/obj/item/projectile)) //We don't want to use the actual projectile item, so we spawn some shrapnel.
-
-		var/obj/item/projectile/P = used_weapon
-		if(prob(75) && P.embed)
-			var/obj/item/weapon/shard/shrapnel/S = new()
-			S.name = "[P.name] shrapnel"
-			S.desc = "[S.desc] It looks like it was fired from [P.shot_from]."
-			S.loc = src
-			organ.implants += S
-			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
-			S.add_blood(src)
 	return 1
