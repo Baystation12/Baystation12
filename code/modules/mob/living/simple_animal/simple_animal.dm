@@ -262,7 +262,7 @@
 
 			grabbed_by += G
 			G.synch()
-
+			G.affecting = src
 			LAssailant = M
 
 			for(var/mob/O in viewers(src, null))
@@ -298,6 +298,7 @@
 
 			grabbed_by += G
 			G.synch()
+			G.affecting = src
 			LAssailant = M
 
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
