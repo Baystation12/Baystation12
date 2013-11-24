@@ -2540,7 +2540,7 @@ datum
 			color = "#619494" // rgb: 97, 148, 148
 
 		drink/cold/space_cola
-			name = "Cola"
+			name = "Space Cola"
 			id = "cola"
 			description = "A refreshing beverage."
 			reagent_state = LIQUID
@@ -2563,7 +2563,7 @@ datum
 				return
 
 		drink/cold/spacemountainwind
-			name = "Space Mountain Wind"
+			name = "Mountain Wind"
 			id = "spacemountainwind"
 			description = "Blows right through you like a space wind."
 			color = "#102000" // rgb: 16, 32, 0

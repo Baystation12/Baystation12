@@ -176,6 +176,8 @@ h4 {
     width: 16px;
     height: 16px;
 }
+
+
 div.notice {
     clear: both;
 }
@@ -304,6 +306,11 @@ div.notice {
     width: 110px;
     float: left;
 }
+.fixedLeftWide {
+    width: 150px;
+    float: left;
+}
+
 .floatRight {
     float: right;
 }
