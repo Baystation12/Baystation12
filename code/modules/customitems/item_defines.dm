@@ -949,3 +949,18 @@
 		name = "[labeled] bottle"
 		desc = "A small bottle.  Contains [labeled]"
 		icon_state = "bottle[color]"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/fluff/yuri_kornienkovich_flask
+        name = "Yuri's Flask"
+        desc = "An old gold plated flask. Nothing noteworthy about it besides it being gold and the red star on the worn out leather around it. There is also an engraving on the cap that is rather hard to see but it looks like \"Kornienkovich\" "
+        icon = 'icons/obj/custom_items.dmi'
+        icon_state = "yuri_kornienkovich_flask"
+
+/obj/item/clothing/under/fluff/mai_yang_dress // Mai Yang's pretty pretty dress.
+        name = "White Cheongsam"
+        desc = "It is a white cheongsam dress."
+        icon = 'icons/obj/custom_items.dmi'
+        icon_state = "mai_yang"
+        item_state = "mai_yang"
+        item_color = "mai_yang"
+
