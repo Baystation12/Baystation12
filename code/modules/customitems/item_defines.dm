@@ -951,16 +951,24 @@
 		icon_state = "bottle[color]"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/yuri_kornienkovich_flask
-        name = "Yuri's Flask"
-        desc = "An old gold plated flask. Nothing noteworthy about it besides it being gold and the red star on the worn out leather around it. There is also an engraving on the cap that is rather hard to see but it looks like \"Kornienkovich\" "
-        icon = 'icons/obj/custom_items.dmi'
-        icon_state = "yuri_kornienkovich_flask"
+	name = "Yuri's Flask"
+	desc = "An old gold plated flask. Nothing noteworthy about it besides it being gold and the red star on the worn out leather around it. There is also an engraving on the cap that is rather hard to see but it looks like \"Kornienkovich\" "
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "yuri_kornienkovich_flask"
 
 /obj/item/clothing/under/fluff/mai_yang_dress // Mai Yang's pretty pretty dress.
-        name = "White Cheongsam"
-        desc = "It is a white cheongsam dress."
-        icon = 'icons/obj/custom_items.dmi'
-        icon_state = "mai_yang"
-        item_state = "mai_yang"
-        item_color = "mai_yang"
+	name = "White Cheongsam"
+	desc = "It is a white cheongsam dress."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "mai_yang"
+	item_state = "mai_yang"
+	item_color = "mai_yang"
+
+/obj/item/clothing/under/fluff/sakura_hokkaido_kimono // Mai Yang's pretty pretty dress.
+	name = "Sakura Kimono"
+	desc = "A pale-pink, nearly white, kimono with a red and gold obi. There is a embroidered design of cherry blossom flowers covering the kimono."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "sakura_hokkaido_kimono"
+	item_state = "sakura_hokkaido_kimono"
+	item_color = "sakura_hokkaido_kimono"
 
