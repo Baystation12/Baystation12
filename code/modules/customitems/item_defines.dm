@@ -494,12 +494,6 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "chal_appara_1"
 
-/obj/item/clothing/gloves/fluff/ashley_rifler_1 //Vinceluk: Ashley Rifler
-	name = "Purple Glove"
-	desc = "A single, purple glove. Initials A.R. are written on the inside of it."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "ashley_rifler_1"
-
 //////////// Eye Wear ////////////
 
 /obj/item/clothing/glasses/meson/fluff/book_berner_1 //asanadas: Book Berner
@@ -590,14 +584,6 @@
 	desc = "A suit that protects against minor chemical spills. Has a pink stripe down from the shoulders."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "labcoat_pink_open"
-
-/obj/item/clothing/suit/storage/det_suit/fluff/graycoat //vinceluk: Seth Sealis
-	name = "gray coat"
-	desc = "Old, worn out coat. It's seen better days."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "graycoat"
-	item_state = "graycoat"
-	item_color = "graycoat"
 
 /obj/item/clothing/suit/storage/det_suit/fluff/leatherjack //atomicdog92: Seth Sealis
 	name = "leather jacket"
@@ -964,7 +950,7 @@
 	item_state = "mai_yang"
 	item_color = "mai_yang"
 
-/obj/item/clothing/under/fluff/sakura_hokkaido_kimono // Mai Yang's pretty pretty dress.
+/obj/item/clothing/under/fluff/sakura_hokkaido_kimono
 	name = "Sakura Kimono"
 	desc = "A pale-pink, nearly white, kimono with a red and gold obi. There is a embroidered design of cherry blossom flowers covering the kimono."
 	icon = 'icons/obj/custom_items.dmi'
