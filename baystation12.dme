@@ -917,7 +917,6 @@
 #include "code\modules\mob\living\login.dm"
 #include "code\modules\mob\living\logout.dm"
 #include "code\modules\mob\living\say.dm"
-#include "code\modules\mob\living\ventcrawl.dm"
 #include "code\modules\mob\living\carbon\carbon.dm"
 #include "code\modules\mob\living\carbon\carbon_defenses.dm"
 #include "code\modules\mob\living\carbon\carbon_defines.dm"
