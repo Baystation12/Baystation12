@@ -63,6 +63,23 @@
 	real_name = name
 	..()
 
+
+/mob/dead/attackby(obj/item/W, mob/user)
+	if(istype(W,/obj/item/weapon/tome))
+		var/mob/dead/M = src
+		if(src.invisibility != 0)
+			M.invisibility = 0
+			user.visible_message( \
+				"\red [user] drags ghost, [M], to our plan of reality!", \
+				"\red You drag [M] to our plan of reality!" \
+			)
+		else
+			user.visible_message ( \
+				"\red [user] just tried to smash his book into that ghost!  It's not very effective", \
+				"\red You get the feeling that the ghost can't become any more visible." \
+			)
+
+
 /mob/dead/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 1
 /*

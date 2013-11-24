@@ -158,10 +158,13 @@ Implant Specifics:<BR>"}
 	activate()
 		if (malfunction == MALFUNCTION_PERMANENT)
 			return
+
+		var/need_gib = null
 		if(istype(imp_in, /mob/))
 			var/mob/T = imp_in
 			message_admins("Explosive implant triggered in [T] ([T.key]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>) ")
 			log_game("Explosive implant triggered in [T] ([T.key]).")
+			need_gib = 1
 
 			if(ishuman(imp_in))
 				if (elevel == "Localized Limb")
@@ -186,8 +189,12 @@ Implant Specifics:<BR>"}
 					explosion(get_turf(T), 0, 1, 3, 6)
 					T.gib()
 
-		else
-			explosion(get_turf(imp_in), 0, 1, 3, 6)
+			else
+				explosion(get_turf(imp_in), 0, 1, 3, 6)
+
+		if(need_gib)
+			imp_in.gib()
+
 		var/turf/t = get_turf(imp_in)
 
 		if(t)
