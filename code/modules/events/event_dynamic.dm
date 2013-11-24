@@ -50,7 +50,7 @@ var/global/list/possibleEvents = list()
 
 	possibleEvents[/datum/event/mass_hallucination] = 200
 	possibleEvents[/datum/event/falsealarm] = 300
-	possibleEvents[/datum/event/immovable_rod] = 200
+//	possibleEvents[/datum/event/immovable_rod] = 200
 	possibleEvents[/datum/event/vent_clog] = 300
 	possibleEvents[/datum/event/anomaly/anomaly_bluespace] = 100
 	possibleEvents[/datum/event/anomaly/anomaly_flux] = 200
