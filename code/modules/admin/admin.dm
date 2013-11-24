@@ -244,7 +244,7 @@ var/global/floorIsLava = 0
 	for(var/client/C in clients)
 		if(C.ckey == key)
 			p_age = C.player_age
-	dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span>"
+	dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span><br>"
 
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
