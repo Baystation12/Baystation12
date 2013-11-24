@@ -52,11 +52,11 @@
 	var/list/remove = targetMob.visibility_interface:visible_chunks - visibleChunks
 	var/list/add = visibleChunks - targetMob.visibility_interface:visible_chunks
 
-	for(var/chunk in remove)
-		chunk:remove(targetMob)
+	for(var/datum/visibility_chunk/chunk in remove)
+		chunk.remove(targetMob)
 
-	for(var/chunk in add)
-		chunk:add(targetMob)
+	for(var/datum/visibility_chunk/chunk in add)
+		chunk.add(targetMob)
 
 
 // Updates the chunks that the turf is located in. Use this when obstacles are destroyed or	when doors open.

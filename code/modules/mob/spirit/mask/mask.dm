@@ -1,15 +1,15 @@
-mob/spirit/mask
+/mob/spirit/mask
 	icon = 'icons/mob/spirits/mask.dmi'
 	icon_state = "depressurized"
 
-mob/spirit/mask/New()
+/mob/spirit/mask/New()
 	..()
 	spell_list += new /obj/effect/proc_holder/spell/aoe_turf/conjure/create_talisman(src)
 	spell_list += new /obj/effect/proc_holder/spell/aoe_turf/blood_speech(src)
 	spell_list += new /obj/effect/proc_holder/spell/aoe_turf/shatter_lights(src)
 	
 
-mob/spirit/mask/verb/go_to_follower()
+/mob/spirit/mask/verb/go_to_follower()
 	set category = "Mask"
 	set name = "Go to follower"
 	set desc = "Select who you would like to go too."
@@ -21,7 +21,7 @@ mob/spirit/mask/verb/go_to_follower()
 		src << "You start following [cultist.get_display_name()]."
 	
 	
-mob/spirit/mask/verb/urge_cultist()
+/mob/spirit/mask/verb/urge_cultist()
 	set category = "Mask"
 	set name = "Urge cultist"
 	set desc = "Push your cultists to do something."
@@ -34,7 +34,7 @@ mob/spirit/mask/verb/urge_cultist()
 			src << "You urge [cultist.owner.name] to [newUrge]."
 			cult_log("controlled by [key_name_admin(src)] has urged [key_name_admin(cultist.owner)] to [newUrge].")
 
-mob/spirit/mask/verb/set_cult_name()
+/mob/spirit/mask/verb/set_cult_name()
 	set category = "Mask"
 	set name = "Set Cult Name"
 	set desc = "Grant a cultist a name."
@@ -50,7 +50,7 @@ mob/spirit/mask/verb/set_cult_name()
 			cult_log("[key_name_admin(src)] has set [key_name_admin(cultist.owner)] to \'[newName]\'")
 		
 		
-mob/spirit/mask/verb/urge_cult()
+/mob/spirit/mask/verb/urge_cult()
 	set category = "Mask"
 	set name = "Urge Cult"
 	set desc = "Set urge on the entire cult."
@@ -62,7 +62,7 @@ mob/spirit/mask/verb/urge_cult()
 	cult_log("[key_name_admin(src)] has urged the entire cult to [newUrge]")
 			
 			
-mob/spirit/mask/verb/set_favor_for_cultist()
+/mob/spirit/mask/verb/set_favor_for_cultist()
 	set category = "Mask"
 	set name = "Show your favor"
 	set desc = "Set the favor for a cultist"
@@ -84,15 +84,14 @@ mob/spirit/mask/verb/set_favor_for_cultist()
 					cult_log("[key_name_admin(src)] is indifferent too [key_name_admin(cultist.owner)]")
 	
 	
-mob/spirit/mask/proc/set_name()
+/mob/spirit/mask/proc/set_name()
 	spawn(0)
 		var/newName = stripped_input(src, "Please pick a name.", "Pick Name for Mask", "")
 		name = newName ? newName : "Mask of Nar'sie"
 		src << "You have set your name to [name]."
-		return name
 	
 	
-mob/spirit/mask/proc/pick_cultist()
+/mob/spirit/mask/proc/pick_cultist()
 	var/list/cultists = list()
 	for(var/obj/cult_viewpoint/viewpoint in cult_viewpoints)
 		cultists[viewpoint.get_display_name()]=viewpoint
@@ -226,5 +225,3 @@ mob/spirit/mask/proc/pick_cultist()
 			newVars = list("imbue" = "[imbue_value]")
 			
 	..()
-	
-	

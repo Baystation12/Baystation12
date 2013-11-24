@@ -76,6 +76,7 @@
 #include "code\ATMOSPHERICS\components\unary\vent_pump.dm"
 #include "code\ATMOSPHERICS\components\unary\vent_scrubber.dm"
 #include "code\controllers\_DynamicAreaLighting_TG.dm"
+#include "code\controllers\autotransfer.dm"
 #include "code\controllers\configuration.dm"
 #include "code\controllers\failsafe.dm"
 #include "code\controllers\lighting_controller.dm"
