@@ -890,7 +890,8 @@ steam.start() -- spawns the effect
 		var/mob/M =	AM
 		if (istype(M, /mob/living/carbon/human) && (istype(M:shoes, /obj/item/clothing/shoes) && M:shoes.flags&NOSLIP))
 			return
-
+		if (istype (M, /mob/living/carbon/human) && M:species.bodyflags & FEET_NOSLIP)
+			return
 		M.stop_pulling()
 		M << "\blue You slipped on the foam!"
 		playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)

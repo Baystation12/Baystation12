@@ -751,6 +751,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 
 #define FEET_CLAWS		1
 #define FEET_PADDED		2
+#define FEET_NOSLIP		4
 
 
 //Language flags.

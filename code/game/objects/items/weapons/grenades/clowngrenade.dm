@@ -69,7 +69,7 @@
 			var/mob/living/M = AM
 			if(ishuman(M))
 				if(isobj(M:shoes))
-					if(M:shoes.flags&NOSLIP)
+					if((M:shoes.flags&NOSLIP) || (M:species.bodyflags & FEET_NOSLIP))
 						return
 				else
 					M << "\red Your feet feel like they're on fire!"

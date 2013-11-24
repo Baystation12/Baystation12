@@ -70,7 +70,7 @@ mob/living/carbon/human/airflow_stun()
 	if(last_airflow_stun > world.time - vsc.airflow_stun_cooldown)	return 0
 	if(buckled) return 0
 	if(shoes)
-		if(shoes.flags & NOSLIP) return 0
+		if((shoes.flags & NOSLIP) || (species.bodyflags & FEET_NOSLIP)) return 0
 	if(!(status_flags & CANSTUN) && !(status_flags & CANWEAKEN))
 		src << "\blue You stay upright as the air rushes past you."
 		return 0
