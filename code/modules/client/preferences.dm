@@ -151,6 +151,8 @@ datum/preferences
 				dat += "<a href='?_src_=prefs;preference=job;task=menu'>Set Occupation Preferences</a><br></center>"
 				dat += "<h2>Identity</h2>"
 				dat += "<table width='100%'><tr><td width='75%' valign='top'>"
+				if(appearance_isbanned(user))
+					dat += "<b>You are banned from using custom names and appearances. You can continue to adjust your characters, but you will be randomised once you join the game.</b><br>"
 				dat += "<b>Name:</b> "
 				dat += "<a href='?_src_=prefs;preference=name;task=input'><b>[real_name]</b></a><br>"
 				dat += "(<a href='?_src_=prefs;preference=name;task=random'>Random Name</A>) "
