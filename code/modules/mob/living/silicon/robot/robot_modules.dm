@@ -233,3 +233,20 @@
 		src.modules += new /obj/item/weapon/wrench(src) //Is a combat android really going to be stopped by a chair?
 		src.emag = new /obj/item/weapon/gun/energy/lasercannon/cyborg(src)
 		return
+
+/obj/item/weapon/robot_module/alien/hunter
+	name = "alien hunter module"
+
+	New()
+		src.modules += new /obj/item/weapon/melee/energy/alien/claws(src)
+		src.modules += new /obj/item/device/flash/alien(src)
+		src.modules += new /obj/item/borg/sight/thermal/alien(src)
+		var/obj/item/weapon/reagent_containers/spray/alien/stun/S = new /obj/item/weapon/reagent_containers/spray/alien/stun(src)
+		S.reagents.add_reagent("stoxin",250) //nerfed to sleeptoxin to make it less instant drop.
+		src.modules += S
+		var/obj/item/weapon/reagent_containers/spray/alien/smoke/A = new /obj/item/weapon/reagent_containers/spray/alien/smoke(src)
+		S.reagents.add_reagent("water",50) //Water is used as a dummy reagent for the smoke bombs. More of an ammo counter.
+		src.modules += A
+		src.emag = new /obj/item/weapon/reagent_containers/spray/alien/acid(src)
+		src.emag.reagents.add_reagent("pacid", 125)
+		src.emag.reagents.add_reagent("sacid", 125)

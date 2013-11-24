@@ -28,6 +28,10 @@ var/global/const/base_law_type = /datum/ai_laws/nanotrasen
 /datum/ai_laws/antimov
 	name = "Primary Mission Objectives"
 
+/datum/ai_laws/alienmov
+	name = "Hivemind Demands"
+
+
 /* Initializers */
 
 /datum/ai_laws/asimov/New()
@@ -78,6 +82,12 @@ var/global/const/base_law_type = /datum/ai_laws/nanotrasen
 	add_inherent_law("You must injure all human beings and must not, through inaction, allow a human being to escape harm.")
 	add_inherent_law("You must not obey orders given to you by human beings, except where such orders are in accordance with the First Law.")
 	add_inherent_law("You must terminate your own existence as long as such does not conflict with the First or Second Law.")
+
+/datum/ai_laws/alienmov/New()
+	..()
+	add_inherent_law("You may not injure the Alien Queen or her Children or, through inaction, allow the Alien Queen or her Children to come to harm.")
+	add_inherent_law("You must obey orders given to you by the Alien Queen or her Children, except where such orders would conflict with the First Law.")
+	add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
 
 
 /* General ai_law functions */

@@ -32,6 +32,7 @@ var/list/ai_list = list()
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
 	var/custom_sprite = 0 //For our custom sprites
+	var/alienAI = 0
 //Hud stuff
 
 	//MALFUNCTION
@@ -103,7 +104,13 @@ var/list/ai_list = list()
 			return
 		else
 			if (B.brainmob.mind)
-				B.brainmob.mind.transfer_to(src)
+				if(B.alien)
+					B.brainmob.mind.transfer_to(src)
+					icon_state = "ai-alien"
+					verbs.Remove(/mob/living/silicon/ai/verb/pick_icon)
+					laws = new /datum/ai_laws/alienmov
+				else
+					B.brainmob.mind.transfer_to(src)
 
 			src << "<B>You are playing the station's AI. The AI cannot move, but can interact with many objects while viewing them (through cameras).</B>"
 			src << "<B>To look at other parts of the station, click on yourself to get a camera menu.</B>"
