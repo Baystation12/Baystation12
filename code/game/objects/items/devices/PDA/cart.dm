@@ -281,7 +281,7 @@ Code:
 				menu += " <A HREF='?src=\ref[src];choice=Status;statdisp=alert;alert=lockdown'>Lockdown</A> |"
 				menu += " <A HREF='?src=\ref[src];choice=Status;statdisp=alert;alert=biohazard'>Biohazard</A> \]<BR>"
 
-			if (43) //Muskets' and Rockdtben's power monitor :D
+			if (43) 
 				menu = "<h4><img src=pda_power.png> Power Monitors - Please select one</h4><BR>"
 				powmonitor = null
 				powermonitors = list()
@@ -307,7 +307,7 @@ Code:
 
 					menu += "</FONT>"
 
-			if (433) //Muskets' and Rockdtben's power monitor :D
+			if (433)
 				menu = "<h4><img src=pda_power.png> Power Monitor </h4><BR>"
 				if(!powmonitor)
 					menu += "\red No connection<BR>"
@@ -320,19 +320,40 @@ Code:
 
 					menu += "<PRE>Total power: [powmonitor.powernet.avail] W<BR>Total load:  [num2text(powmonitor.powernet.viewload,10)] W<BR>"
 
-					menu += "<FONT SIZE=-1>"
+					menu += "<FONT SIZE=1></PRE>"
 
 					if(L.len > 0)
-						menu += "Area                           Eqp./Lgt./Env.  Load   Cell<HR>"
+						menu += "</BR><Table border=\"1\"><tr>"
+						menu += "<th>Area</th><th>Eqp.</th><th>Lgt.</th><th>Env</th><th>Load</th><th>Cell</th></tr>"
 
-						var/list/S = list(" Off","AOff","  On", " AOn")
-						var/list/chg = list("N","C","F")
+						//var/list/S = list(" Off","AOff","  On", " AOn")
+						//var/list/chg = list("N","C","F")
 
+						var/list/S = list(0,0,1,1)
+						var/list/chg = list(0,1,1)
+						var/list/red = "FF0000"
+						var/list/green =  "00FF00"
+						var/list/color = null
+		
 						for(var/obj/machinery/power/apc/A in L)
-							menu += copytext(add_tspace(A.area.name, 30), 1, 30)
-							menu += " [S[A.equipment+1]] [S[A.lighting+1]] [S[A.environ+1]] [add_lspace(A.lastused_total, 6)]  [A.cell ? "[add_lspace(round(A.cell.percent()), 3)]% [chg[A.charging+1]]" : "  N/C"]<BR>"
-
-					menu += "</FONT></PRE>"
+							color = red
+							if (S[A.equipment+1]) 
+								color = green
+							menu += "<tr><td>[A.area.name]</td><td bgcolor=\"[color]\">&nbsp;&nbsp;</td>" // area name and equipment
+							color = red
+							if (S[A.lighting+1])
+								color = green							
+							menu += "<td bgcolor=\"[color]\">&nbsp;&nbsp;</td>"                            // lighting
+							color = red
+							if (S[A.environ+1])
+								color = green
+							menu += "<td bgcolor=\"[color]\">&nbsp;&nbsp;</td>"                            // environment
+							color = red
+							if (A.cell && chg[A.charging])
+								color = green
+							menu += "<td bgcolor=\"[color]\">[round(A.cell.percent())]%</td></tr>"	   // and the cell.
+						menu += "</table>"
+					menu += "</FONT>"
 
 			if (44) //medical records //This thing only displays a single screen so it's hard to really get the sub-menu stuff working.
 				menu = "<h4><img src=pda_medical.png> Medical Record List</h4>"
