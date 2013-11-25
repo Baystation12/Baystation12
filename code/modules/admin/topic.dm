@@ -2617,3 +2617,5 @@
 		switch(href_list["secretsmenu"])
 			if("tab")
 				current_tab = text2num(href_list["tab"])
+				Secrets(usr)
+				return 1

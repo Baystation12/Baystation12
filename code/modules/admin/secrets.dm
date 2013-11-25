@@ -7,9 +7,9 @@
 	if(!check_rights(0))	return
 	var/dat = "<html><body><center>"
 
-	dat += "<a href='?_src_=\ref[src];secretsmenu=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Debug</a>"
-	dat += "<a href='?_src_=\ref[src];secretsmenu=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Random Events</a>"
-	dat += "<a href='?_src_=\ref[src];secretsmenu=tab;tab=2' [current_tab == 2 ? "class='linkOn'" : ""]>Special Events</a>"
+	dat += "<a href='?src=\ref[src];secretsmenu=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Debug</a>"
+	dat += "<a href='?src=\ref[src];secretsmenu=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Random Events</a>"
+	dat += "<a href='?src=\ref[src];secretsmenu=tab;tab=2' [current_tab == 2 ? "class='linkOn'" : ""]>Special Events</a>"
 
 	dat += "</center>"
 	dat += "<HR>"
