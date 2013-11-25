@@ -321,7 +321,7 @@ proc/trigger_armed_response_team(var/force = 0)
 	W.name = "[real_name]'s ID Card ([W.assignment])"
 	W.icon_state = "centcom"
 	W.access = get_all_accesses()
-	W.access += get_all_centcom_access()
+	W.access += list(access_cent_general, access_cent_living, access_cent_storage)
 	equip_to_slot_or_del(W, slot_wear_id)
 
 	return 1
