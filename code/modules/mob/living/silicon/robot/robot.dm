@@ -156,7 +156,7 @@
 	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
-	if(mmi != null & mmi.alien)
+	if(mmi != null && mmi.alien)
 		modules="Hunter"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
