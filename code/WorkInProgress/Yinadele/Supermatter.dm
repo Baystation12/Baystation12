@@ -7,8 +7,8 @@
 
 
 //These would be what you would get at point blank, decreases with distance
-#define DETONATION_RADS 200
-#define DETONATION_HALLUCINATION 600
+#define DETONATION_RADS 300000
+#define DETONATION_HALLUCINATION 60000
 
 
 #define WARNING_DELAY 60 //45 seconds between warnings.
@@ -124,8 +124,8 @@
                         for(var/mob/living/mob in living_mob_list)
                                 if(istype(mob, /mob/living/carbon/human))
                                         //Hilariously enough, running into a closet should make you get hit the hardest.
-                                        mob:hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
-                                var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
+                                        mob:hallucination += max(50, min(300, DETONATION_HALLUCINATION/((get_dist(mob, src)+1)**2) ) )
+                                var/rads = DETONATION_RADS/((get_dist(mob, src)+1)**2)
                                 mob.apply_effect(rads, IRRADIATE)
 
                         explode()

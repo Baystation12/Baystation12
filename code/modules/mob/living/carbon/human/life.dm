@@ -237,7 +237,6 @@
 
 		if (radiation)
 			if (radiation > 100)
-				radiation = 100
 				Weaken(10)
 				src << "\red You feel weak."
 				emote("collapse")
@@ -258,7 +257,7 @@
 
 				var/damage = 0
 				switch(radiation)
-					if(1 to 49)
+					if(0 to 49)
 						radiation--
 						if(prob(25))
 							adjustToxLoss(1)
@@ -279,6 +278,17 @@
 					if(75 to 100)
 						radiation -= 3
 						adjustToxLoss(3)
+						damage = 1
+						if(prob(1))
+							src << "\red You mutate!"
+							randmutb(src)
+							domutcheck(src,null)
+							emote("gasp")
+						updatehealth()
+
+					else
+						radiation -= 5
+						adjustToxLoss(5)
 						damage = 1
 						if(prob(1))
 							src << "\red You mutate!"

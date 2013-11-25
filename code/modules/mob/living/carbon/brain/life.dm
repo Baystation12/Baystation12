@@ -37,14 +37,16 @@
 
 		if (radiation)
 			if (radiation > 100)
-				radiation = 100
+				radiation -= 3
+				adjustToxLoss(3)
+				updatehealth()
 				if(!container)//If it's not in an MMI
 					src << "\red You feel weak."
 				else//Fluff-wise, since the brain can't detect anything itself, the MMI handles thing like that
 					src << "\red STATUS: CRITICAL AMOUNTS OF RADIATION DETECTED."
 
 			switch(radiation)
-				if(1 to 49)
+				if(0 to 49)
 					radiation--
 					if(prob(25))
 						adjustToxLoss(1)
@@ -65,7 +67,6 @@
 					radiation -= 3
 					adjustToxLoss(3)
 					updatehealth()
-
 
 	proc/handle_environment(datum/gas_mixture/environment)
 		if(!environment)
