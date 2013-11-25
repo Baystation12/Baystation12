@@ -66,7 +66,7 @@
 /obj/item/weapon/beach_ball/dodgeball/throw_impact(atom/hit_atom)
 	if((ishuman(hit_atom)))
 		var/mob/living/carbon/M = hit_atom
-		if(dir==get_dir(src,M))
+		if(dir&get_dir(src,M))
 			if(M.in_throw_mode && !M.get_active_hand())  //empty active hand and we're in throw mode
 				if(M.canmove && !M.restrained())
 					M.hitby(src)
