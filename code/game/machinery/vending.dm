@@ -53,8 +53,7 @@
 	var/datum/wires/vending/wires = null
 	var/scan_id = 1
 
-	var/obj/machinery/account_database/linked_db
-	var/datum/money_account/linked_account
+
 
 /obj/machinery/vending/New()
 	..()
@@ -73,18 +72,13 @@
 		src.build_inventory(premium, 0, 1)
 		power_change()
 
-		reconnect_database()
-		linked_account = vendor_account
+
 
 		return
 
 	return
 
-/obj/machinery/vending/proc/reconnect_database()
-	for(var/obj/machinery/account_database/DB in world)
-		if(DB.z == 1)	//Hardcoded to the main station for now.
-			linked_db = DB
-			break
+
 
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
@@ -167,17 +161,8 @@
 				del(W)
 
 	else if(istype(W, /obj/item/weapon/card) && currently_vending)
-		//attempt to connect to a new db, and if that doesn't work then fail
-		if(!linked_db)
-			reconnect_database()
-		if(linked_db)
-			if(linked_account)
-				var/obj/item/weapon/card/I = W
-				scan_card(I)
-			else
-				usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
-		else
-			usr << "\icon[src]<span class='warning'>Unable to connect to accounts database.</span>"
+		var/obj/item/weapon/card/I = W
+		scan_card(I)
 
 
 
@@ -189,19 +174,19 @@
 	if (istype(I, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/C = I
 		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
-		if(linked_account)
-			var/datum/money_account/D = linked_db.attempt_account_access_nosec(C.associated_account_number)
+		if(vendor_account)
+			var/datum/money_account/D = attempt_account_access_nosec(C.associated_account_number)
 			if(D)
 				var/transaction_amount = currently_vending.price
 				if(transaction_amount <= D.money)
 
 					//transfer the money
 					D.money -= transaction_amount
-					linked_account.money += transaction_amount
+					vendor_account.money += transaction_amount
 
 					//create entries in the two account transaction logs
 					var/datum/transaction/T = new()
-					T.target_name = "[linked_account.owner_name] (via [src.name])"
+					T.target_name = "[vendor_account.owner_name] (via [src.name])"
 					T.purpose = "Purchase of [currently_vending.product_name]"
 					if(transaction_amount > 0)
 						T.amount = "([transaction_amount])"
@@ -219,7 +204,7 @@
 					T.source_terminal = src.name
 					T.date = current_date_string
 					T.time = worldtime2text()
-					linked_account.transaction_log.Add(T)
+					vendor_account.transaction_log.Add(T)
 
 					// Vend the item
 					src.vend(src.currently_vending, usr)
@@ -229,7 +214,7 @@
 			else
 				usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 		else
-			usr << "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>"
+			usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
 
 /obj/machinery/vending/attack_paw(mob/user as mob)
 	return attack_hand(user)
