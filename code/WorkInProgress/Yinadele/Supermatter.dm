@@ -191,13 +191,15 @@
                 damage += Proj.damage * config_bullet_energy
         return 0
 
+/obj/machinery/power/supermatter/attack_ai()
+        return
 
 /obj/machinery/power/supermatter/attack_paw(mob/user as mob)
         return attack_hand(user)
 
 
-/obj/machinery/power/supermatter/attack_robot(mob/user as mob)
-        return attack_hand(user)
+/obj/machinery/power/supermatter/attack_robot()
+        return
 
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
