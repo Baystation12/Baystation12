@@ -96,7 +96,7 @@
 	else
 		camera = new /obj/machinery/camera(src)
 		camera.network = list("NUKE")
-		cameranet.removeCamera(camera)
+		cameraNetwork.removeViewpoint(camera)
 		camera.c_tag = user.name
 		user << "\blue User scanned as [camera.c_tag]. Camera activated."
 
