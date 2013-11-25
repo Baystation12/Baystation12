@@ -100,6 +100,7 @@
 					dat += "<A href='?src=\ref[src];action=create;item=gloves;cost=250'>Botanical gloves</A> <FONT COLOR=blue>(250)</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=tbelt;cost=300'>Utility belt</A> <FONT COLOR=blue>(300)</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=satchel;cost=400'>Leather Satchel</A> <FONT COLOR=blue>(400)</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=cashbag;cost=400'>Cash Bag</A> <FONT COLOR=blue>(400)</FONT><BR>"
 					//dat += "Other<BR>"
 					//dat += "<A href='?src=\ref[src];action=create;item=monkey;cost=500'>Monkey</A> <FONT COLOR=blue>(500)</FONT><BR>"
 				else
@@ -194,6 +195,8 @@
 			new/obj/item/weapon/storage/belt/utility(src.loc)
 		if("satchel")
 			new/obj/item/weapon/storage/backpack/satchel(src.loc)
+		if("cashbag")
+			new/obj/item/weapon/storage/bag/cash(src.loc)
 		if("monkey")
 			new/mob/living/carbon/monkey(src.loc)
 	processing = 0
