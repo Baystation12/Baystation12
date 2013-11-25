@@ -55,6 +55,8 @@
 		handle_rotation()
 		return
 	else
+		if(istype(usr,/mob/living/simple_animal/mouse))
+			return
 		if(!usr || !isturf(usr.loc))
 			return
 		if(usr.stat || usr.restrained())
