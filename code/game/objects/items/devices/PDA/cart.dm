@@ -313,10 +313,11 @@ Code:
 					menu += "\red No connection<BR>"
 				else
 					var/list/L = list()
-					for(var/obj/machinery/power/terminal/term in powmonitor.powernet.nodes)
-						if(istype(term.master, /obj/machinery/power/apc))
-							var/obj/machinery/power/apc/A = term.master
-							L += A
+					if(powmonitor.powernet)
+						for(var/obj/machinery/power/terminal/term in powmonitor.powernet.nodes)
+							if(istype(term.master, /obj/machinery/power/apc))
+								var/obj/machinery/power/apc/A = term.master
+								L += A
 
 					menu += "<PRE>Total power: [powmonitor.powernet.avail] W<BR>Total load:  [num2text(powmonitor.powernet.viewload,10)] W<BR>"
 
@@ -324,7 +325,7 @@ Code:
 
 					if(L.len > 0)
 						menu += "</BR><Table border=\"1\"><tr>"
-						menu += "<th>Area</th><th>Eqp.</th><th>Lgt.</th><th>Env</th><th>Load</th><th>Cell</th></tr>"
+						menu += "<th>Area</th><th>Eqp.</th><th>Lgt.</th><th>Env</th><th>Cell</th></tr>"
 
 						//var/list/S = list(" Off","AOff","  On", " AOn")
 						//var/list/chg = list("N","C","F")
@@ -349,9 +350,13 @@ Code:
 								color = green
 							menu += "<td bgcolor=\"[color]\">&nbsp;&nbsp;</td>"                            // environment
 							color = red
-							if (A.cell && chg[A.charging])
-								color = green
-							menu += "<td bgcolor=\"[color]\">[round(A.cell.percent())]%</td></tr>"	   // and the cell.
+							if (A.cell)
+								if (chg[A.charging+1])
+									color = green
+								menu += "<td bgcolor=\"[color]\">[round(A.cell.percent())]%</td></tr>"	   // and the cell.
+							else
+								menu += "<td bgcolor=\"[color]\">No Cell</td></tr>"
+							
 						menu += "</table>"
 					menu += "</FONT>"
 
