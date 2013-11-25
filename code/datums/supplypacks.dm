@@ -58,6 +58,54 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Food crate"
 	group = "Hospitality"
 
+/datum/supply_packs/vending_bar
+	name = "Bartending supply crate"
+	contains = list(/obj/item/weapon/vending_refill/boozeomat)
+	cost = 15
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "bartending supply crate"
+	group = "Hospitality"
+
+/datum/supply_packs/vending_coffee
+	name = "Hotdrinks supply crate"
+	contains = list(/obj/item/weapon/vending_refill/coffee,
+					/obj/item/weapon/vending_refill/coffee,
+					/obj/item/weapon/vending_refill/coffee)
+	cost = 15
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "hotdrinks supply crate"
+	group = "Hospitality"
+
+/datum/supply_packs/vending_snack
+	name = "Snack supply crate"
+	contains = list(/obj/item/weapon/vending_refill/snack,
+					/obj/item/weapon/vending_refill/snack,
+					/obj/item/weapon/vending_refill/snack)
+	cost = 15
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "snack supply crate"
+	group = "Hospitality"
+
+/datum/supply_packs/vending_cola
+	name = "Softdrinks supply crate"
+	contains = list(/obj/item/weapon/vending_refill/cola,
+					/obj/item/weapon/vending_refill/cola,
+					/obj/item/weapon/vending_refill/cola)
+	cost = 15
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "softdrinks supply crate"
+	group = "Hospitality"
+
+/datum/supply_packs/vending_cigarette
+	name = "Cigarette supply crate"
+	contains = list(/obj/item/weapon/vending_refill/cigarette,
+					/obj/item/weapon/vending_refill/cigarette,
+					/obj/item/weapon/vending_refill/cigarette)
+	cost = 15
+	containertype = /obj/structure/closet/crate/freezer
+	containername = "cigarette supply crate"
+	group = "Hospitality"
+
 /datum/supply_packs/monkey
 	name = "Monkey crate"
 	contains = list (/obj/item/weapon/storage/box/monkeycubes)
