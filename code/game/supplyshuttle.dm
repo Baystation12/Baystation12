@@ -254,10 +254,10 @@ var/list/mechtoys = list(
 							find_slip = 0
 						continue
 
-					// Sell plasma
-					if(istype(A, /obj/item/stack/sheet/mineral/plasma))
-						var/obj/item/stack/sheet/mineral/plasma/P = A
-						plasma_count += P.amount
+					// Selling everything else and their dog. -Iamgoofball
+					if(istype(A, /obj/))
+						var/obj/P = A
+						points += P.cargo_worth
 			del(MA)
 
 		if(plasma_count)
