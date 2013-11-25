@@ -243,7 +243,7 @@ datum/preferences
 
 		dat += "<br>"
 		dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
-		dat += "<b>Custom UI:</b><br>"
+		dat += "<b>Custom UI</b>(recommended for White UI):<br>"
 		dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a><br>"
 		dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 		dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
@@ -1078,7 +1078,7 @@ datum/preferences
 						UI_style_color = UI_style_color_new
 
 					if("UIalpha")
-						var/UI_style_alpha_new = sanitize_hudalpha(input(user, "Select a new alpha(transparence) parametr for UI, between 0 and 255") as num)
+						var/UI_style_alpha_new = sanitize_hudalpha(input(user, "Select a new alpha(transparence) parametr for UI, between 50 and 255") as num)
 						if(!UI_style_alpha_new) return
 						UI_style_alpha = UI_style_alpha_new
 
