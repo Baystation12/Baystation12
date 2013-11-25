@@ -29,7 +29,7 @@
 		if(prob(50))
 			team_alpha += H
 
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/red(H), slot_w_uniform)
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/red(H), slot_w_uniform)
 
 			var/obj/item/weapon/card/id/W = new(H)
 			W.name = "[H.real_name]'s ID Card"
@@ -43,7 +43,7 @@
 		else
 			team_bravo += H
 
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/blue(H), slot_w_uniform)
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/blue(H), slot_w_uniform)
 
 			var/obj/item/weapon/card/id/W = new(H)
 			W.name = "[H.real_name]'s ID Card"
@@ -66,19 +66,21 @@
 /obj/item/weapon/beach_ball/dodgeball/throw_impact(atom/hit_atom)
 	if((ishuman(hit_atom)))
 		var/mob/living/carbon/M = hit_atom
-		if(
-
-
-		playsound(src, 'sound/items/dodgeball.ogg', 50, 1)
-		visible_message("\red [M] HAS BEEN ELIMINATED!!", 3)
-		spawn(0)
-			var/mobloc = get_turf(M.loc)
-			var/atom/movable/overlay/animation = new /atom/movable/overlay( mobloc )
-			animation.name = "water"
-			animation.density = 0
-			animation.anchored = 1
-			animation.icon = 'icons/mob/mob.dmi'
-			animation.icon_state = "liquify"
-			animation.layer = 5
-			animation.master = holder
-			del(M)
+		if(dir==get_dir(src,M))
+			if(M.in_throw_mode && !M.get_active_hand())  //empty active hand and we're in throw mode
+				if(M.canmove && !M.restrained())
+					M.hitby(src)
+		else
+			playsound(src, 'sound/items/dodgeball.ogg', 50, 1)
+			visible_message("\red [M] HAS BEEN ELIMINATED!!", 3)
+			spawn(0)
+				var/mobloc = get_turf(M.loc)
+				var/atom/movable/overlay/animation = new /atom/movable/overlay( mobloc )
+				animation.name = "water"
+				animation.density = 0
+				animation.anchored = 1
+				animation.icon = 'icons/mob/mob.dmi'
+				animation.icon_state = "liquify"
+				animation.layer = 5
+//				animation.master = holder
+				del(M)
