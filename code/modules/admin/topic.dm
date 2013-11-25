@@ -2612,3 +2612,8 @@
 			if("list")
 				PlayerNotesPage(text2num(href_list["index"]))
 		return
+
+	if(href_list["secretsmenu"])
+		switch(href_list["secretsmenu"])
+			if("tab")
+				current_tab = text2num(href_list["tab"])
