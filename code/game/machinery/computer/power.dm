@@ -93,23 +93,46 @@
 				var/obj/machinery/power/apc/A = term.master
 				L += A
 
-		t += "<PRE>Total power: [powernet.avail] W<BR>Total load:  [num2text(powernet.viewload,10)] W<BR>"
+		t += "<PRE>Total power: [powernet.avail] W<BR>Total load:  [num2text(powernet.viewload,10)] W<BR></PRE>"
 
 		t += "<FONT SIZE=-1>"
 
 		if(L.len > 0)
+			t += "</BR><Table border=\"1\"><tr>"
+			t += "<th>Area</th><th>Eqp.</th><th>Lgt.</th><th>Env</th><th>Cell</th></tr>"
 
-			t += "Area                           Eqp./Lgt./Env.  Load   Cell<HR>"
-
-			var/list/S = list(" Off","AOff","  On", " AOn")
-			var/list/chg = list("N","C","F")
-
+			var/list/S = list(0,0,1,1)
+			var/list/chg = list(0,1,1)
+			var/list/red = "FF0000"
+			var/list/green =  "00FF00"
+			var/list/color = null
 			for(var/obj/machinery/power/apc/A in L)
+				color = red
+				if (S[A.equipment+1])
+					color = green
+				t += "<tr><td>[A.area.name]</td><td bgcolor=\"[color]\">&nbsp;&nbsp;</td>" // area name and equipment
+				color = red
+				if (S[A.lighting+1])
+					color = green
+				t += "<td bgcolor=\"[color]\">&nbsp;&nbsp;</td>"                            // lighting
+				color = red
+				if (S[A.environ+1])
+					color = green
+				t += "<td bgcolor=\"[color]\">&nbsp;&nbsp;</td>"                            // environment
+				color = red
+				if (A.cell)
+					if (chg[A.charging+1])
+						color = green
+					t += "<td bgcolor=\"[color]\">[round(A.cell.percent())]%</td></tr>"     // and the cell.
+				else
+					t += "<td bgcolor=\"[color]\">No Cell</td></tr>"
 
-				t += copytext(add_tspace("\The [A.area]", 30), 1, 30)
-				t += " [S[A.equipment+1]] [S[A.lighting+1]] [S[A.environ+1]] [add_lspace(A.lastused_total, 6)]  [A.cell ? "[add_lspace(round(A.cell.percent()), 3)]% [chg[A.charging+1]]" : "  N/C"]<BR>"
+			t += "</table>"
+			t += "</FONT>"
 
-		t += "</FONT></PRE></TT>"
+
+
+
 
 	user << browse(t, "window=powcomp;size=420x900")
 	onclose(user, "powcomp")
