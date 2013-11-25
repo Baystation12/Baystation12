@@ -303,9 +303,9 @@
 			data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 			AnnounceArrival(character, rank)
-			return character
+
 		else
-			return character.Robotize()
+			character.Robotize()
 		del(src)
 
 	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank)

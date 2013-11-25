@@ -58,10 +58,9 @@
 	var/datum/organ/external/head = get_organ("head")
 	var/mob/living/simple_animal/borer/B
 
-	if(istype(head))
-		for(var/I in head.implants)
-			if(istype(I,/mob/living/simple_animal/borer))
-				B = I
+	for(var/I in head.implants)
+		if(istype(I,/mob/living/simple_animal/borer))
+			B = I
 	if(B)
 		if(!B.ckey && ckey && B.controlling)
 			B.ckey = ckey

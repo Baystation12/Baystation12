@@ -1,14 +1,14 @@
 //------------------------------------------------------------
 //
-//                      The cameraNetwork
+//                      The Cameranet
 //
-//   The cameraNetwork is a single global instance of a unique
+//   The cameranet is a single global instance of a unique
 //  datum, which contains logic for managing the individual
 //  chunks.
 //
 //------------------------------------------------------------
 
-/datum/cameraNetwork
+/datum/cameranet
 	var/list/cameras = list()
 	var/list/chunks = list()
 	var/network = "net1"
@@ -18,18 +18,18 @@
 
 	var/generating_minimap = TRUE
 
-var/datum/cameraNetwork/cameraNetwork = new()
+var/datum/cameranet/cameranet = new()
 
 
 
-/datum/cameraNetwork/New()
+/datum/cameranet/New()
 	..()
 
 	spawn(100)
 		init_minimap()
 
 
-/datum/cameraNetwork/proc/init_minimap()
+/datum/cameranet/proc/init_minimap()
 	for(var/x = 0, x <= world.maxx, x += 16)
 		for(var/y = 0, y <= world.maxy, y += 16)
 			sleep(1)
@@ -39,12 +39,12 @@ var/datum/cameraNetwork/cameraNetwork = new()
 	generating_minimap = FALSE
 
 
-/datum/cameraNetwork/proc/chunkGenerated(x, y, z)
+/datum/cameranet/proc/chunkGenerated(x, y, z)
 	var/key = "[x],[y],[z]"
 	return key in chunks
 
 
-/datum/cameraNetwork/proc/getCameraChunk(x, y, z)
+/datum/cameranet/proc/getCameraChunk(x, y, z)
 	var/key = "[x],[y],[z]"
 
 	if(!(key in chunks))
@@ -71,7 +71,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 // have a proc called automatically every time an
 // object's loc changes.
 
-/datum/cameraNetwork/proc/visibility(mob/aiEye/ai)
+/datum/cameranet/proc/visibility(mob/aiEye/ai)
 	var/x1 = max(0, ai.x - 16) & ~0xf
 	var/y1 = max(0, ai.y - 16) & ~0xf
 	var/x2 = min(world.maxx, ai.x + 16) & ~0xf
@@ -101,7 +101,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 // anything else that would alter line of sight in the
 // general area.
 
-/datum/cameraNetwork/proc/updateVisibility(turf/loc)
+/datum/cameranet/proc/updateVisibility(turf/loc)
 	if(!chunkGenerated(loc.x & ~0xf, loc.y & ~0xf, loc.z))
 		return
 
@@ -115,7 +115,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 // creating a camera, allowing freelook and the minimap to
 // respond correctly.
 
-/datum/cameraNetwork/proc/addCamera(obj/machinery/camera/c)
+/datum/cameranet/proc/addCamera(obj/machinery/camera/c)
 	var/x1 = max(0, c.x - 16) & ~0xf
 	var/y1 = max(0, c.y - 16) & ~0xf
 	var/x2 = min(world.maxx, c.x + 16) & ~0xf
@@ -137,7 +137,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 // deleting a camera, allowing freelook and the minimap to
 // respond correctly.
 
-/datum/cameraNetwork/proc/removeCamera(obj/machinery/camera/c)
+/datum/cameranet/proc/removeCamera(obj/machinery/camera/c)
 	var/x1 = max(0, c.x - 16) & ~0xf
 	var/y1 = max(0, c.y - 16) & ~0xf
 	var/x2 = min(world.maxx, c.x + 16) & ~0xf

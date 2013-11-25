@@ -28,24 +28,24 @@
 		var/mob/living/silicon/ai/ai = usr
 		ai.freelook()
 		ai.eyeobj.loc = locate(max(1, x - 1), max(1, y - 1), usr.client.minimap_view_z)
-		cameraNetwork.visibility(ai.eyeobj)
+		cameranet.visibility(ai.eyeobj)
 
 	else
 		usr.loc = locate(max(1, x - 1), max(1, y - 1), usr.client.minimap_view_z)
 
 /mob/dead/verb/Open_Minimap()
 	set category = "Ghost"
-	cameraNetwork.show_minimap(client)
+	cameranet.show_minimap(client)
 
 
 /mob/living/silicon/ai/verb/Open_Minimap()
 	set category = "AI Commands"
-	cameraNetwork.show_minimap(client)
+	cameranet.show_minimap(client)
 
 
 /client/proc/Open_Minimap()
 	set category = "Admin"
-	cameraNetwork.show_minimap(src)
+	cameranet.show_minimap(src)
 
 
 /mob/verb/Open_Minimap_Z()
@@ -54,26 +54,26 @@
 	if(!istype(src, /mob/dead) && !istype(src, /mob/living/silicon/ai) && !(client && client.holder && client.holder.level >= 4))
 		return
 
-	var/level = input("Select a Z level", "Z select", null) as null | anything in cameraNetwork.minimap
+	var/level = input("Select a Z level", "Z select", null) as null | anything in cameranet.minimap
 
 	if(level != null)
-		cameraNetwork.show_minimap(client, level)
+		cameranet.show_minimap(client, level)
 
 
 
-/datum/cameraNetwork/proc/show_minimap(client/client, z_level = "z-1")
+/datum/cameranet/proc/show_minimap(client/client, z_level = "z-1")
 	if(!istype(client.mob, /mob/dead) && !istype(client.mob, /mob/living/silicon/ai) && !(client.holder && client.holder.level >= 4))
 		return
 
-	if(z_level in cameraNetwork.minimap)
+	if(z_level in cameranet.minimap)
 		winshow(client, "minimapwindow", 1)
 
-		for(var/key in cameraNetwork.minimap)
-			client.screen -= cameraNetwork.minimap[key]
+		for(var/key in cameranet.minimap)
+			client.screen -= cameranet.minimap[key]
 
-		client.screen |= cameraNetwork.minimap[z_level]
+		client.screen |= cameranet.minimap[z_level]
 
-		if(cameraNetwork.generating_minimap)
+		if(cameranet.generating_minimap)
 			spawn(50)
 				show_minimap(client, z_level)
 

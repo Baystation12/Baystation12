@@ -114,11 +114,6 @@ proc/isobserver(A)
 	if(istype(A, /mob/dead/observer))
 		return 1
 	return 0
-	
-/proc/isSpirit(A)
-	if(istype(A, /mob/spirit))
-		return 1
-	return 0
 
 proc/isorgan(A)
 	if(istype(A, /datum/organ/external))

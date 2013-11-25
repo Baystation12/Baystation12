@@ -262,8 +262,6 @@
 /obj/machinery/door/proc/requiresID()
 	return 1
 
-/*
-
 /obj/machinery/door/proc/update_nearby_tiles(need_rebuild)
 	if(!air_master)
 		return 0
@@ -273,8 +271,6 @@
 		air_master.AddTurfToUpdate(turf)
 
 	return 1
-
-*/
 
 /obj/machinery/door/proc/update_heat_protection(var/turf/simulated/source)
 	if(istype(source))

@@ -16,15 +16,15 @@
 	var/image/dim
 
 /turf/proc/visibilityChanged()
-	cameraNetwork.updateVisibility(src)
+	cameranet.updateVisibility(src)
 
 /turf/New()
 	..()
-	cameraNetwork.updateVisibility(src)
+	cameranet.updateVisibility(src)
 /*
 /turf/Del()
 	..()
-	cameraNetwork.updateVisibility(src)
+	cameranet.updateVisibility(src)
 */
 /datum/camerachunk
 	var/list/obscuredTurfs = list()
@@ -73,7 +73,7 @@
 		var/mob/living/silicon/ai/ai = usr
 		ai.freelook()
 		ai.eyeobj.loc = locate(max(1, x - 1), max(1, y - 1), ai.eyeobj.z)
-		cameraNetwork.visibility(ai.eyeobj)
+		cameranet.visibility(ai.eyeobj)
 
 	else
 		usr.loc = locate(max(1, x - 1), max(1, y - 1), usr.z)
@@ -81,26 +81,26 @@
 /mob/dead/verb/Open_Minimap()
 	set category = "Ghost"
 	winshow(src, "minimapwindow", 1)
-	client.screen |= cameraNetwork.minimap
+	client.screen |= cameranet.minimap
 
-	if(cameraNetwork.generating_minimap)
-		cameraNetwork.minimap_viewers += src
+	if(cameranet.generating_minimap)
+		cameranet.minimap_viewers += src
 
 /mob/living/silicon/ai/verb/Open_Minimap()
 	set category = "AI Commands"
 	winshow(src, "minimapwindow", 1)
-	client.screen |= cameraNetwork.minimap
+	client.screen |= cameranet.minimap
 
-	if(cameraNetwork.generating_minimap)
-		cameraNetwork.minimap_viewers += src
+	if(cameranet.generating_minimap)
+		cameranet.minimap_viewers += src
 
 /client/proc/Open_Minimap()
 	set category = "Admin"
 	winshow(src, "minimapwindow", 1)
-	screen |= cameraNetwork.minimap
+	screen |= cameranet.minimap
 
-	if(cameraNetwork.generating_minimap)
-		cameraNetwork.minimap_viewers += src.mob
+	if(cameranet.generating_minimap)
+		cameranet.minimap_viewers += src.mob
 
 /datum/camerachunk/proc/update_minimap()
 	if(changed && !updating)
@@ -325,11 +325,11 @@
 
 			dim += t.dim
 
-	cameraNetwork.minimap += minimap_obj
+	cameranet.minimap += minimap_obj
 
-var/datum/cameraNetwork/cameraNetwork = new()
+var/datum/cameranet/cameranet = new()
 
-/datum/cameraNetwork
+/datum/cameranet
 	var/list/cameras = list()
 	var/list/chunks = list()
 	var/network = "net1"
@@ -340,7 +340,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 	var/generating_minimap = TRUE
 	var/list/minimap_viewers = list()
 
-/datum/cameraNetwork/New()
+/datum/cameranet/New()
 	..()
 
 	spawn(200)
@@ -356,11 +356,11 @@ var/datum/cameraNetwork/cameraNetwork = new()
 		generating_minimap = FALSE
 		minimap_viewers = list()
 
-/datum/cameraNetwork/proc/chunkGenerated(x, y, z)
+/datum/cameranet/proc/chunkGenerated(x, y, z)
 	var/key = "[x],[y],[z]"
 	return key in chunks
 
-/datum/cameraNetwork/proc/getCameraChunk(x, y, z)
+/datum/cameranet/proc/getCameraChunk(x, y, z)
 	var/key = "[x],[y],[z]"
 
 	if(!(key in chunks))
@@ -368,7 +368,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 
 	return chunks[key]
 
-/datum/cameraNetwork/proc/visibility(mob/aiEye/ai)
+/datum/cameranet/proc/visibility(mob/aiEye/ai)
 	var/x1 = max(0, ai.x - 16) & ~0xf
 	var/y1 = max(0, ai.y - 16) & ~0xf
 	var/x2 = min(world.maxx, ai.x + 16) & ~0xf
@@ -389,14 +389,14 @@ var/datum/cameraNetwork/cameraNetwork = new()
 	for(var/datum/camerachunk/c in add)
 		c.add(ai)
 
-/datum/cameraNetwork/proc/updateVisibility(turf/loc)
+/datum/cameranet/proc/updateVisibility(turf/loc)
 	if(!chunkGenerated(loc.x & ~0xf, loc.y & ~0xf, loc.z))
 		return
 
 	var/datum/camerachunk/chunk = getCameraChunk(loc.x & ~0xf, loc.y & ~0xf, loc.z)
 	chunk.visibilityChanged(loc)
 
-/datum/cameraNetwork/proc/addCamera(obj/machinery/camera/c)
+/datum/cameranet/proc/addCamera(obj/machinery/camera/c)
 	var/x1 = max(0, c.x - 16) & ~0xf
 	var/y1 = max(0, c.y - 16) & ~0xf
 	var/x2 = min(world.maxx, c.x + 16) & ~0xf
@@ -410,7 +410,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 					chunk.cameras += c
 					chunk.hasChanged()
 
-/datum/cameraNetwork/proc/removeCamera(obj/machinery/camera/c)
+/datum/cameranet/proc/removeCamera(obj/machinery/camera/c)
 	var/x1 = max(0, c.x - 16) & ~0xf
 	var/y1 = max(0, c.y - 16) & ~0xf
 	var/x2 = min(world.maxx, c.x + 16) & ~0xf
@@ -452,18 +452,18 @@ var/datum/cameraNetwork/cameraNetwork = new()
 		eyeobj.ai = src
 	client.eye = eyeobj
 	eyeobj.loc = loc
-	cameraNetwork.visibility(eyeobj)
+	cameranet.visibility(eyeobj)
 	cameraFollow = null
 
 /mob/aiEye/Move()
 	. = ..()
 	if(.)
-		cameraNetwork.visibility(src)
+		cameranet.visibility(src)
 
 /client/AIMove(n, direct, var/mob/living/silicon/ai/user)
 	if(eye == user.eyeobj)
 		user.eyeobj.loc = get_step(user.eyeobj, direct)
-		cameraNetwork.visibility(user.eyeobj)
+		cameranet.visibility(user.eyeobj)
 
 	else
 		return ..()
@@ -477,7 +477,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 		else if(direct == DOWN && user.eyeobj.z < 4)
 			dif = 1
 		user.eyeobj.loc = locate(user.eyeobj.x, user.eyeobj.y, user.eyeobj.z + dif)
-		cameraNetwork.visibility(user.eyeobj)
+		cameranet.visibility(user.eyeobj)
 	else
 		return ..()
 */
@@ -492,23 +492,23 @@ var/datum/cameraNetwork/cameraNetwork = new()
 
 /obj/machinery/door/update_nearby_tiles(need_rebuild)
 	. = ..(need_rebuild)
-	cameraNetwork.updateVisibility(loc)
+	cameranet.updateVisibility(loc)
 
 /obj/machinery/camera/New()
 	..()
-	cameraNetwork.addViewpoint(src)
+	cameranet.addCamera(src)
 
 /obj/machinery/camera/Del()
-	cameraNetwork.removeViewpoint(src)
+	cameranet.removeCamera(src)
 	..()
 
 /obj/machinery/camera/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	. = ..(W, user)
 	if(istype(W, /obj/item/weapon/wirecutters))
 		if(status)
-			cameraNetwork.addViewpoint(src)
+			cameranet.addCamera(src)
 		else
-			cameraNetwork.removeViewpoint(src)
+			cameranet.removeCamera(src)
 
 /proc/checkcameravis(atom/A)
 	for(var/obj/machinery/camera/C in view(A,7))
@@ -545,7 +545,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 	var/obj/machinery/camera/C = D[t]
 
 	eyeobj.loc = C.loc
-	cameraNetwork.visibility(eyeobj)
+	cameranet.visibility(eyeobj)
 
 	return
 
@@ -570,4 +570,4 @@ var/datum/cameraNetwork/cameraNetwork = new()
 		else
 			eyeobj.loc = locate(src.x, src.y, src.z)
 
-		cameraNetwork.visibility(eyeobj)
+		cameranet.visibility(eyeobj)

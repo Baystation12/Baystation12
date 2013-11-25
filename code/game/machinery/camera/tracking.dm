@@ -4,7 +4,7 @@
 		return
 
 	var/list/L = list()
-	for (var/obj/machinery/camera/C in cameraNetwork.viewpoints)
+	for (var/obj/machinery/camera/C in cameranet.cameras)
 		L.Add(C)
 
 	camera_sort(L)
@@ -168,9 +168,9 @@
 		return 0
 	if(isrobot(M))
 		var/mob/living/silicon/robot/R = M
-		if(!(R.camera && R.camera.can_use()) && !cameraNetwork.checkCanSee(M))
+		if(!(R.camera && R.camera.can_use()) && !cameranet.checkCameraVis(M))
 			return 0
-	else if(!cameraNetwork.checkCanSee(M))
+	else if(!cameranet.checkCameraVis(M))
 		return 0
 	return 1
 

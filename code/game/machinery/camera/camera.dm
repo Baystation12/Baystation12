@@ -39,7 +39,7 @@
 	assembly = new(src)
 	assembly.state = 4
 	/* // Use this to look for cameras that have the same c_tag.
-	for(var/obj/machinery/camera/C in cameraNetwork.viewpoints)
+	for(var/obj/machinery/camera/C in cameranet.cameras)
 		var/list/tempnetwork = C.network&src.network
 		if(C != src && C.c_tag == src.c_tag && tempnetwork.len)
 			world.log << "[src.c_tag] [src.x] [src.y] [src.z] conflicts with [C.c_tag] [C.x] [C.y] [C.z]"
@@ -59,7 +59,7 @@
 			icon_state = "[initial(icon_state)]emp"
 			var/list/previous_network = network
 			network = list()
-			cameraNetwork.removeViewpoint(src)
+			cameranet.removeCamera(src)
 			stat |= EMPED
 			SetLuminosity(0)
 			triggerCameraAlarm()
@@ -69,7 +69,7 @@
 				stat &= ~EMPED
 				cancelCameraAlarm()
 				if(can_use())
-					cameraNetwork.addViewpoint(src)
+					cameranet.addCamera(src)
 			for(var/mob/O in mob_list)
 				if (istype(O.machine, /obj/machinery/computer/security))
 					var/obj/machinery/computer/security/S = O.machine
@@ -92,7 +92,7 @@
 
 /obj/machinery/camera/proc/setViewRange(var/num = 7)
 	src.view_range = num
-	cameraNetwork.updateVisibility(src, 0)
+	cameranet.updateVisibility(src, 0)
 
 /obj/machinery/camera/proc/shock(var/mob/living/user)
 	if(!istype(user))

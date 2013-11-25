@@ -13,7 +13,7 @@
 	else
 		camera = new /obj/machinery/camera(src)
 		camera.network = list("ERT")
-		cameraNetwork.removeViewpoint(camera)
+		cameranet.removeCamera(camera)
 		camera.c_tag = user.name
 		user << "\blue User scanned as [camera.c_tag]. Camera activated."
 

@@ -5,7 +5,7 @@
 	var/image/dim
 
 /turf/proc/visibilityChanged()
-	cameraNetwork.updateVisibility(src)
+	cameranet.updateVisibility(src)
 
 /datum/camerachunk
 	var/list/obscuredTurfs = list()
@@ -180,22 +180,22 @@
 
 			dim += t.dim
 
-var/datum/cameraNetwork/cameraNetwork = new()
+var/datum/cameranet/cameranet = new()
 
-/datum/cameraNetwork
+/datum/cameranet
 	var/list/cameras = list()
 	var/list/chunks = list()
 	var/network = "net1"
 	var/ready = 0
 
-/datum/cameraNetwork/New()
+/datum/cameranet/New()
 	..()
 
-/datum/cameraNetwork/proc/chunkGenerated(x, y, z)
+/datum/cameranet/proc/chunkGenerated(x, y, z)
 	var/key = "[x],[y],[z]"
 	return key in chunks
 
-/datum/cameraNetwork/proc/getCameraChunk(x, y, z)
+/datum/cameranet/proc/getCameraChunk(x, y, z)
 	var/key = "[x],[y],[z]"
 
 	if(!(key in chunks))
@@ -203,7 +203,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 
 	return chunks[key]
 
-/datum/cameraNetwork/proc/visibility(mob/aiEye/ai)
+/datum/cameranet/proc/visibility(mob/aiEye/ai)
 	var/x1 = max(0, ai.x - 16) & ~0xf
 	var/y1 = max(0, ai.y - 16) & ~0xf
 	var/x2 = min(world.maxx, ai.x + 16) & ~0xf
@@ -224,14 +224,14 @@ var/datum/cameraNetwork/cameraNetwork = new()
 	for(var/datum/camerachunk/c in add)
 		c.add(ai)
 
-/datum/cameraNetwork/proc/updateVisibility(turf/loc)
+/datum/cameranet/proc/updateVisibility(turf/loc)
 	if(!chunkGenerated(loc.x & ~0xf, loc.y & ~0xf, loc.z))
 		return
 
 	var/datum/camerachunk/chunk = getCameraChunk(loc.x & ~0xf, loc.y & ~0xf, loc.z)
 	chunk.visibilityChanged(loc)
 
-/datum/cameraNetwork/proc/addCamera(obj/machinery/camera/c)
+/datum/cameranet/proc/addCamera(obj/machinery/camera/c)
 	var/x1 = max(0, c.x - 16) & ~0xf
 	var/y1 = max(0, c.y - 16) & ~0xf
 	var/x2 = min(world.maxx, c.x + 16) & ~0xf
@@ -265,17 +265,17 @@ var/datum/cameraNetwork/cameraNetwork = new()
 	else
 		client.eye = eyeobj
 		eyeobj.loc = loc
-		cameraNetwork.visibility(eyeobj)
+		cameranet.visibility(eyeobj)
 		cameraFollow = null
 /mob/aiEye/Move()
 	. = ..()
 	if(.)
-		cameraNetwork.visibility(src)
+		cameranet.visibility(src)
 
 /client/AIMove(n, direct, var/mob/living/silicon/ai/user)
 	if(eye == user.eyeobj)
 		user.eyeobj.loc = get_step(user.eyeobj, direct)
-		cameraNetwork.visibility(user.eyeobj)
+		cameranet.visibility(user.eyeobj)
 
 	else
 		return ..()
@@ -289,7 +289,7 @@ var/datum/cameraNetwork/cameraNetwork = new()
 		else if(direct == DOWN && user.eyeobj.z < 4)
 			dif = 1
 		user.eyeobj.loc = locate(user.eyeobj.x, user.eyeobj.y, user.eyeobj.z + dif)
-		cameraNetwork.visibility(user.eyeobj)
+		cameranet.visibility(user.eyeobj)
 	else
 		return ..()
 */
@@ -303,8 +303,8 @@ var/datum/cameraNetwork/cameraNetwork = new()
 
 /obj/machinery/door/update_nearby_tiles(need_rebuild)
 	. = ..(need_rebuild)
-	cameraNetwork.updateVisibility(loc)
+	cameranet.updateVisibility(loc)
 
 /obj/machinery/camera/New()
 	..()
-	cameraNetwork.addViewpoint(src)
+	cameranet.addCamera(src)

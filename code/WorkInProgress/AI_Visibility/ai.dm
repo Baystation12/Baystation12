@@ -29,17 +29,17 @@
 		eyeobj.ai = src
 	client.eye = eyeobj
 	eyeobj.loc = loc
-	cameraNetwork.visibility(eyeobj)
+	cameranet.visibility(eyeobj)
 
 /mob/aiEye/Move()
 	. = ..()
 	if(.)
-		cameraNetwork.visibility(src)
+		cameranet.visibility(src)
 
 /client/AIMove(n, direct, var/mob/living/silicon/ai/user)
 	if(eye == user.eyeobj)
 		user.eyeobj.loc = get_step(user.eyeobj, direct)
-		cameraNetwork.visibility(user.eyeobj)
+		cameranet.visibility(user.eyeobj)
 
 	else
 		return ..()
@@ -79,7 +79,7 @@
 	var/obj/machinery/camera/C = D[t]
 
 	eyeobj.loc = C.loc
-	cameraNetwork.visibility(eyeobj)
+	cameranet.visibility(eyeobj)
 
 	return
 
@@ -104,4 +104,4 @@
 		else
 			eyeobj.loc = locate(src.x, src.y, src.z)
 
-		cameraNetwork.visibility(eyeobj)
+		cameranet.visibility(eyeobj)

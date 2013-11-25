@@ -6,16 +6,13 @@
 /mob/aiEye
 	name = "Inactive AI Eye"
 	icon = 'icons/obj/status_display.dmi' // For AI friend secret shh :o
+	var/list/visibleCameraChunks = list()
 	var/mob/living/silicon/ai/ai = null
 	density = 0
 	status_flags = GODMODE  // You can't damage it.
 	mouse_opacity = 0
 	see_in_dark = 7
 
-/mob/aiEye/New()
-	..()
-	visibility_interface = new /datum/visibility_interface/ai_eye(src)
-	
 // Movement code. Returns 0 to stop air movement from moving it.
 /mob/aiEye/Move()
 	return 0
@@ -40,12 +37,13 @@
 // It will also stream the chunk that the new loc is in.
 
 /mob/aiEye/proc/setLoc(var/T)
+
 	if(ai)
 		if(!isturf(ai.loc))
 			return
 		T = get_turf(T)
 		loc = T
-		cameraNetwork.visibility(src)
+		cameranet.visibility(src)
 		if(ai.client)
 			ai.client.eye = src
 		//Holopad
@@ -138,8 +136,7 @@
 
 	if(client && client.eye)
 		client.eye = src
-		
-	for(var/datum/visibility_chunk/camera/c in eyeobj.visibility_interface.visible_chunks)
+	for(var/datum/camerachunk/c in eyeobj.visibleCameraChunks)
 		c.remove(eyeobj)
 
 /mob/living/silicon/ai/verb/toggle_acceleration()

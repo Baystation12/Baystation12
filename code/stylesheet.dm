@@ -63,7 +63,6 @@ h1.alert, h2.alert		{color: #000000;}
 .skrell					{color: #00CED1;}
 .soghun					{color: #228B22;}
 .vox					{color: #AA00AA;}
-.cultspeech				{color: #B20000;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 
 .interface				{color: #330033;}
