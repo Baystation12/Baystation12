@@ -42,8 +42,10 @@ datum/preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#b82e00"
 	var/be_special = 0					//Special role selection
-	var/UI_style = "Midnight"
+	var/UI_style = "White"
 	var/toggles = TOGGLES_DEFAULT
+	var/UI_style_color = "#ffffff"
+	var/UI_style_alpha = 255
 
 	//character preferences
 	var/real_name						//our character's name
@@ -241,6 +243,9 @@ datum/preferences
 
 		dat += "<br>"
 		dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
+		dat += "<b>Custom UI:</b><br>"
+		dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a><br>"
+		dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 		dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "Nearest Creatures" : "All Speech"]</b></a><br>"
@@ -1052,6 +1057,7 @@ datum/preferences
 						var/skin_style_name = input(user, "Select a new skin style") as null|anything in list("default1", "default2", "default3")
 						if(!skin_style_name) return
 
+
 			else
 				switch(href_list["preference"])
 					if("gender")
@@ -1066,14 +1072,26 @@ datum/preferences
 					if("hear_adminhelps")
 						toggles ^= SOUND_ADMINHELP
 
+					if("UIcolor")
+						var/UI_style_color_new = sanitize_hudcolor(input(user, "Select a new HEX color for UI, for example: #FFFFFF"))
+						if(!UI_style_color_new) return
+						UI_style_color = UI_style_color_new
+
+					if("UIalpha")
+						var/UI_style_alpha_new = sanitize_hudalpha(input(user, "Select a new alpha(transparence) parametr for UI, between 0 and 255") as num)
+						if(!UI_style_alpha_new) return
+						UI_style_alpha = UI_style_alpha_new
+
 					if("ui")
 						switch(UI_style)
+							if("White")
+								UI_style = "Midnight"
 							if("Midnight")
 								UI_style = "Orange"
 							if("Orange")
 								UI_style = "old"
 							else
-								UI_style = "Midnight"
+								UI_style = "White"
 
 					if("be_special")
 						var/num = text2num(href_list["num"])

@@ -28,6 +28,8 @@
 	if (src.req_access && src.req_access.len)
 		src.icon_state = "[src.icon_state]"
 		src.base_state = src.icon_state
+
+	color = color_windows()
 	return
 
 /obj/machinery/door/window/Del()
