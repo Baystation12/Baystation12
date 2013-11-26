@@ -103,6 +103,7 @@ var/list/admin_verbs_fun = list(
 	/client/proc/set_ooc,
 	/client/proc/roll_dices,
 	/client/proc/epileptic_anomaly,
+	/client/proc/epileptic_anomaly_cancel,
 	/client/proc/editappear
 	)
 var/list/admin_verbs_spawn = list(

@@ -126,6 +126,7 @@
 	O.verbs += /mob/living/silicon/ai/proc/ai_camera_list
 	O.verbs += /mob/living/silicon/ai/proc/ai_statuschange
 	O.verbs += /mob/living/silicon/ai/proc/ai_roster
+	O.verbs += /mob/living/silicon/ai/proc/change_floor
 
 	O.job = "AI"
 

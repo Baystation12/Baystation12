@@ -244,7 +244,7 @@ datum/preferences
 		dat += "<br>"
 		dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
 		dat += "<b>Custom UI</b>(recommended for White UI):<br>"
-		dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a><br>"
+		dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
 		dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 		dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
@@ -1073,7 +1073,7 @@ datum/preferences
 						toggles ^= SOUND_ADMINHELP
 
 					if("UIcolor")
-						var/UI_style_color_new = sanitize_hudcolor(input(user, "Select a new HEX color for UI, for example: #FFFFFF"))
+						var/UI_style_color_new = input(user, "Choose your UI color, dark colors are not recommended!") as color|null
 						if(!UI_style_color_new) return
 						UI_style_color = UI_style_color_new
 

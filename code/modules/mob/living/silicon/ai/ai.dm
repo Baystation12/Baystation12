@@ -93,7 +93,7 @@ var/list/ai_list = list()
 		verbs.Add(/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
 		/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
 		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
-		/mob/living/silicon/ai/proc/toggle_camera_light)
+		/mob/living/silicon/ai/proc/toggle_camera_light, /mob/living/silicon/ai/proc/change_floor)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -248,6 +248,24 @@ var/list/ai_list = list()
 			C.post_status("shuttle")
 
 	return
+
+/mob/living/silicon/ai/proc/change_floor()
+	set category = "AI Commands"
+	set name = "Change Floor"
+
+	var/f_color = input("Choose your color, dark colors are not recommended!") as color|null
+	if(!f_color)
+		return
+	world << locate(/area/turret_protected/ai_upload)
+	world << locate(/area/turret_protected/ai)
+	for(var/turf/simulated/floor/whitegreed/F  in world)
+		world << "1"
+		F.color = f_color
+		world << F.color
+	//for(var/atom/O in locate(/area/turret_protected/ai))
+	//	world << "2"
+	//	O.color = f_color
+	usr << "Floor color was change to [f_color]"
 
 /mob/living/silicon/ai/proc/ai_cancel_call()
 	set category = "AI Commands"
