@@ -481,6 +481,11 @@
 	src.mind.changeling.chem_charges -= 30
 
 	var/mob/living/carbon/human/C = src
+	if(ishuman(src))
+		var/mob/living/carbon/human/H=src
+		if(H.said_last_words)
+			H.said_last_words=0
+
 	spawn(0)
 		for(var/i = 0, i<10,i++)
 			if(C)

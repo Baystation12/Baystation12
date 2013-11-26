@@ -221,7 +221,7 @@
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
-/*
+
 
 /mob/living/carbon/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null) // -- TLE -- Merged by Carn
 	if(stat)
@@ -313,7 +313,7 @@
 		if(new_area)
 			new_area.Entered(src)
 
-*/
+
 
 /mob/living/carbon/clean_blood()
 	. = ..()
@@ -334,24 +334,24 @@
 //Throwing stuff
 
 /mob/living/carbon/proc/toggle_throw_mode()
-	if (src.in_throw_mode)
+	if (in_throw_mode)
 		throw_mode_off()
 	else
 		throw_mode_on()
 
 /mob/living/carbon/proc/throw_mode_off()
-	src.in_throw_mode = 0
-	src.throw_icon.icon_state = "act_throw_off"
+	in_throw_mode = 0
+	throw_icon.icon_state = "act_throw_off"
 
 /mob/living/carbon/proc/throw_mode_on()
-	src.in_throw_mode = 1
-	src.throw_icon.icon_state = "act_throw_on"
+	in_throw_mode = 1
+	throw_icon.icon_state = "act_throw_on"
 
 /mob/proc/throw_item(atom/target)
 	return
 
 /mob/living/carbon/throw_item(atom/target)
-	src.throw_mode_off()
+	throw_mode_off()
 	if(usr.stat || !target)
 		return
 	if(target.type == /obj/screen) return
@@ -382,7 +382,7 @@
 	update_icons()
 
 	if (istype(usr, /mob/living/carbon)) //Check if a carbon mob is throwing. Modify/remove this line as required.
-		item.loc = src.loc
+		item.loc = usr.loc
 		if(src.client)
 			src.client.screen -= item
 		if(istype(item, /obj/item))

@@ -519,6 +519,7 @@ var/list/liftable_structures = list(\
 #define BANTYPE_JOB_PERMA	3
 #define BANTYPE_JOB_TEMP	4
 #define BANTYPE_ANY_FULLBAN	5 //used to locate stuff to unban.
+#define BANTYPE_APPEARANCE  6
 
 #define SEE_INVISIBLE_MINIMUM 5
 
@@ -750,6 +751,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 
 #define FEET_CLAWS		1
 #define FEET_PADDED		2
+#define FEET_NOSLIP		4
 
 
 //Language flags.

@@ -49,3 +49,19 @@
 	message_admins("\blue [key_name_admin(usr)] used THERE CAN BE ONLY ONE!", 1)
 	log_admin("[key_name(usr)] used there can be only one.")
 	world << sound('sound/music/highlander.ogg')
+
+
+/obj/item/weapon/beach_ball/dodgeball
+	name = "dodgeball"
+	icon_state = "dodgeball"
+	item_state = "dodgeball"
+	desc = "Used for playing the most violent and degrading of childhood games."
+
+/obj/item/weapon/beach_ball/holoball/dodgeball/throw_impact(atom/hit_atom)
+	if((ishuman(hit_atom)))
+		var/mob/living/carbon/M = hit_atom
+		playsound(src, 'sound/items/dodgeball.ogg', 50, 1)
+		M.apply_damage(10, HALLOSS)
+		if(prob(5))
+			M.Weaken(3)
+			visible_message("\red [M] HAS BEEN ELIMINATED!!", 3)

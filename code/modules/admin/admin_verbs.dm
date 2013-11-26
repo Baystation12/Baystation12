@@ -71,7 +71,7 @@ var/list/admin_verbs_admin = list(
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans,
-	/client/proc/unjobban_panel,
+	// /client/proc/unjobban_panel,
 	// /client/proc/DB_ban_panel
 	)
 var/list/admin_verbs_sounds = list(

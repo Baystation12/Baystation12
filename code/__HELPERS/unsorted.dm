@@ -389,6 +389,16 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		else		. = pick(ais)
 	return .
 
+//this is like the above function, but for alien borgs. Im not going to go over verbose with the name.
+/proc/select_active_alien_ai()
+	var/mob/living/silicon/ai/selected
+	var/list/active = active_ais()
+	for(var/mob/living/silicon/ai/A in active)
+		if(!selected || ((selected.connected_robots > A.connected_robots) && selected.alienAI))
+			selected = A
+	return selected
+
+
 /proc/get_sorted_mobs()
 	var/list/old_list = getmobs()
 	var/list/AI_list = list()
@@ -1468,3 +1478,79 @@ Standard way to write links -Sayu
 	if(istype(arglist,/list))
 		arglist = list2params(arglist)
 	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"
+
+
+/proc/get_location_accessible(mob/M, location)
+	var/covered_locations	= 0	//based on body_parts_covered
+	var/face_covered		= 0	//based on flags_inv
+	var/eyesmouth_covered	= 0	//based on flags
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		for(var/obj/item/clothing/I in list(C.back, C.wear_mask))
+			covered_locations |= I.body_parts_covered
+			face_covered |= I.flags_inv
+			eyesmouth_covered |= I.flags
+		if(ishuman(C))
+			var/mob/living/carbon/human/H = C
+			for(var/obj/item/I in list(H.wear_suit, H.w_uniform, H.shoes, H.belt, H.gloves, H.glasses, H.head, H.r_ear, H.l_ear))
+				covered_locations |= I.body_parts_covered
+				face_covered |= I.flags_inv
+				eyesmouth_covered |= I.flags
+
+	switch(location)
+		if("head")
+			if(covered_locations & HEAD)
+				return 0
+		if("eyes")
+			if(covered_locations & HEAD || face_covered & HIDEEYES || eyesmouth_covered & GLASSESCOVERSEYES)
+				return 0
+		if("mouth")
+			if(covered_locations & HEAD || face_covered & HIDEFACE || eyesmouth_covered & MASKCOVERSMOUTH)
+				return 0
+		if("chest")
+			if(covered_locations & UPPER_TORSO)
+				return 0
+		if("groin")
+			if(covered_locations & LOWER_TORSO)
+				return 0
+		if("l_arm")
+			if(covered_locations & ARM_LEFT)
+				return 0
+		if("r_arm")
+			if(covered_locations & ARM_RIGHT)
+				return 0
+		if("l_leg")
+			if(covered_locations & LEG_LEFT)
+				return 0
+		if("r_leg")
+			if(covered_locations & LEG_RIGHT)
+				return 0
+		if("l_hand")
+			if(covered_locations & HAND_LEFT)
+				return 0
+		if("r_hand")
+			if(covered_locations & HAND_RIGHT)
+				return 0
+		if("l_foot")
+			if(covered_locations & FOOT_LEFT)
+				return 0
+		if("r_foot")
+			if(covered_locations & FOOT_RIGHT)
+				return 0
+
+	return 1
+
+proc/check_target_facings(mob/living/initator, mob/living/target)
+	/*This can be used to add additional effects on interactions between mobs depending on how the mobs are facing each other, such as adding a crit damage to blows to the back of a guy's head.
+	Given how click code currently works (Nov '13), the initiating mob will be facing the target mob most of the time
+	That said, this proc should not be used if the change facing proc of the click code is overriden at the same time*/
+	if(!!isliving(target) || target.lying || istype(target, /mob/living/silicon/pai))
+	//Make sure we are not doing this for things that can't have a logical direction to the players given that the target would be on their side
+		return
+
+	if(initator.dir == target.dir) //mobs are facing the same direction
+		return 1
+	if(initator.dir + 4 == target.dir || initator.dir - 4 == target.dir) //mobs are facing each other
+		return 2
+	if(initator.dir + 2 == target.dir || initator.dir - 2 == target.dir || initator.dir + 6 == target.dir || initator.dir - 6 == target.dir) //Initating mob is looking at the target, while the target mob is looking in a direction perpendicular to the 1st
+		return 3

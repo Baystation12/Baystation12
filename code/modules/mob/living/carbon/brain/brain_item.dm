@@ -96,3 +96,10 @@
 	else
 		..()
 	return
+
+/obj/item/brain/alien
+	name = "alien brain"
+	desc = "We barely understand the brains of terrestial animals. Who knows what we may find in the brain of such an advanced species?"
+	icon = 'icons/mob/alien.dmi'
+	icon_state = "AlienBrain"
+	origin_tech = "biotech=7"

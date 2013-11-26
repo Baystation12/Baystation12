@@ -164,6 +164,7 @@
 
 	flags = WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS
 	bloodflags = BLOOD_SLIME
+	bodyflags = FEET_NOSLIP
 
 
 /datum/species/grey

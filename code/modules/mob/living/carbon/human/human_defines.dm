@@ -47,6 +47,7 @@
 
 	var/miming = null //Toggle for the mime's abilities.
 	var/special_voice = "" // For changing our voice. Used by a symptom.
+	var/said_last_words=0
 
 	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
 
@@ -54,3 +55,5 @@
 
 	var/mob/remoteview_target = null
 	var/meatleft = 3 //For chef item
+
+	var/slime_color = "blue" //For slime people this defines their color, it's blue by default to pay tribute to the old icons

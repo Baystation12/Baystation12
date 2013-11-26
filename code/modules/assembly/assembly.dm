@@ -48,11 +48,12 @@
 	proc/holder_movement()							//Called when the holder is moved
 		return
 
+	proc/describe()                  // Called by grenades to describe the state of the trigger (time left, etc)
+		return "The trigger assembly looks broken!"
+
+
 	interact(mob/user as mob)					//Called when attack_self is called
 		return
-
-	proc/describe()									// Called by grenades to describe the state of the trigger (time left, etc)
-		return "The trigger assembly looks broken!"
 
 	process_cooldown()
 		cooldown--
@@ -79,6 +80,12 @@
 //			connected.Pulse(src)
 //		if(radio && (wires & WIRE_RADIO_PULSE))
 			//Not sure what goes here quite yet send signal?
+
+		if(istype(loc,/obj/item/weapon/grenade)) // This is a hack.  Todo: Manage this better -Sayu
+			var/obj/item/weapon/grenade/G = loc
+			G.prime()                // Adios, muchachos
+
+
 		return 1
 
 

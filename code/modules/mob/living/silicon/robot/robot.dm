@@ -10,7 +10,6 @@
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
-	var/crisis //Admin-settable for combat module use.
 
 //Hud stuff
 
@@ -73,29 +72,34 @@
 	ident = rand(1, 999)
 	updatename("Default")
 	updateicon()
+	if(mmi != null)
+		if(syndie)
+			if(!cell)
+				cell = new /obj/item/weapon/cell(src)
 
-	if(syndie)
-		if(!cell)
-			cell = new /obj/item/weapon/cell(src)
-
-		laws = new /datum/ai_laws/antimov()
-		lawupdate = 0
-		scrambledcodes = 1
-		cell.maxcharge = 25000
-		cell.charge = 25000
-		module = new /obj/item/weapon/robot_module/syndicate(src)
-		hands.icon_state = "standard"
-		icon_state = "secborg"
-		modtype = "Security"
-	else
-		laws = new /datum/ai_laws/nanotrasen()
-		connected_ai = select_active_ai_with_fewest_borgs()
-		if(connected_ai)
-			connected_ai.connected_robots += src
-			lawsync()
-			lawupdate = 1
-		else
+			laws = new /datum/ai_laws/antimov()
 			lawupdate = 0
+			scrambledcodes = 1
+			cell.maxcharge = 25000
+			cell.charge = 25000
+			module = new /obj/item/weapon/robot_module/syndicate(src)
+			hands.icon_state = "standard"
+			icon_state = "secborg"
+			modtype = "Security"
+		else
+			if(mmi.alien)
+				laws = new /datum/ai_laws/alienmov()
+				connected_ai = select_active_alien_ai()
+				scrambledcodes = 1
+			else
+				laws = new /datum/ai_laws/nanotrasen()
+				connected_ai = select_active_ai_with_fewest_borgs()
+			if(connected_ai)
+				connected_ai.connected_robots += src
+				lawsync()
+				lawupdate = 1
+			else
+				lawupdate = 0
 
 	radio = new /obj/item/device/radio/borg(src)
 	if(!scrambledcodes && !camera)
@@ -146,10 +150,13 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
+
 	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
-	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
+	if(security_level == SEC_LEVEL_RED)
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
+	if(mmi != null && mmi.alien)
+		modules="Hunter"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
 	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
@@ -219,6 +226,15 @@
 			module = new /obj/item/weapon/robot_module/combat(src)
 			module_sprites["Combat Android"] = "droid-combat"
 			channels = list("Security" = 1)
+		if("Hunter")
+			updatename(module)
+			module = new /obj/item/weapon/robot_module/alien/hunter(src)
+			hands.icon_state = "standard"
+			icon = "icons/mob/alien.dmi"
+			icon_state = "xenoborg-state-a"
+			modtype = "Xeno-Hu"
+			feedback_inc("xeborg_hunter",1)
+
 
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)

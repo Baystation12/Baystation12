@@ -17,6 +17,8 @@
 			return "[src] is deactivated."
 
 	hear_talk(mob/living/M as mob, msg)
+		if(!istype(M,/mob/living))
+			return
 		if(listening)
 			recorded = msg
 			listening = 0
@@ -25,6 +27,8 @@
 		else
 			if(findtext(msg, recorded))
 				pulse(0)
+				var/turf/T = get_turf(src)  //otherwise it won't work in hand
+				T.visible_message("\icon[src] \red beeps!")
 
 	activate()
 		return // previously this toggled listning when not in a holder, that's a little silly.  It was only called in attack_self that way.

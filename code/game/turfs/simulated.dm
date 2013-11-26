@@ -103,7 +103,7 @@
 					else
 						M.inertia_dir = 0
 						return
-				else if(!istype(M, /mob/living/carbon/slime))
+				else if(!istype(M, /mob/living/carbon/slime) || (M:species.bodyflags & FEET_NOSLIP))
 					if (M.m_intent == "run")
 						M.stop_pulling()
 						step(M, M.dir)
@@ -140,7 +140,7 @@
 					else
 						M.inertia_dir = 0
 						return
-				else if(!istype(M, /mob/living/carbon/metroid))
+				else if(!istype(M, /mob/living/carbon/metroid) || (M:species.bodyflags & FEET_NOSLIP))
 					if (M.m_intent == "run" && prob(30))
 						M.stop_pulling()
 						step(M, M.dir)
