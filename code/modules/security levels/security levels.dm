@@ -2,7 +2,9 @@
 //0 = code green
 //1 = code blue
 //2 = code red
-//3 = code delta
+//3 = gamma
+//4 = epsilon
+//5 = code delta
 
 //config.alert_desc_blue_downto
 
