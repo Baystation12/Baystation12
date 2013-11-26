@@ -9,7 +9,7 @@
 /datum/event/dust/start()
 	while(qnty-- > 0)
 		new /obj/effect/space_dust/weak()
-
+	score_eventsendured++
 
 /obj/effect/space_dust
 	name = "Space Dust"

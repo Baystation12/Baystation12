@@ -7,7 +7,7 @@
 
 /datum/event/ghosts/announce()
 	command_alert("Unknown quasi-aetheric entities have been detected near [station_name()], please stand-by.", "Lifesign Alert?")
-
+	score_eventsendured++
 
 /datum/event/ghosts/start()
 	var/p = 100

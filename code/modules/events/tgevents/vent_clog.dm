@@ -8,7 +8,7 @@
 
 /datum/event/vent_clog/announce()
 	command_alert("The scrubbers network is experiencing a backpressure surge.  Some ejection of contents may occur.", "Atmospherics alert")
-
+	score_eventsendured++
 
 /datum/event/vent_clog/setup()
 	endWhen = rand(25, 100)

@@ -10,7 +10,7 @@
 
 /datum/event/carp_migration/announce()
 	command_alert("Unknown biological entities have been detected near [station_name()], please stand-by.", "Lifesign Alert")
-
+	score_eventsendured++
 /datum/event/carp_migration/start()
 	for(var/obj/effect/landmark/C in landmarks_list)
 		if(C.name == "carpspawn")

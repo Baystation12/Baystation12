@@ -9,7 +9,7 @@
 
 /datum/event/anomaly/announce()
 	command_alert("Localized hyper-energetic flux wave detected on long range scanners. Expected location of impact: [impact_area.name].", "Anomaly Alert")
-
+	score_eventsendured++
 /datum/event/anomaly/start()
 	var/turf/T = pick(get_area_turfs(impact_area))
 	if(T)
