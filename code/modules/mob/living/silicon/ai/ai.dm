@@ -259,12 +259,8 @@ var/list/ai_list = list()
 	world << locate(/area/turret_protected/ai_upload)
 	world << locate(/area/turret_protected/ai)
 	for(var/turf/simulated/floor/whitegreed/F  in world)
-		world << "1"
 		F.color = f_color
-		world << F.color
-	//for(var/atom/O in locate(/area/turret_protected/ai))
-	//	world << "2"
-	//	O.color = f_color
+
 	usr << "Floor color was change to [f_color]"
 
 /mob/living/silicon/ai/proc/ai_cancel_call()
