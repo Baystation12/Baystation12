@@ -1008,12 +1008,12 @@
 		overlays += "[icon_state]-shield"
 
 	if(modtype == "Combat")
-		var/base_icon = ""
-		base_icon = icon_state
+//		var/base_icon = ""
+//		base_icon = icon_state
 		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-			icon_state = "[icon_state]-roll"
+			icon_state = "droid-combat-roll"
 		else
-			icon_state = base_icon
+			icon_state = "droid-combat"
 		return
 
 //Call when target overlay should be added/removed
