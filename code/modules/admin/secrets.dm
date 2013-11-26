@@ -55,6 +55,7 @@
 					<A href='?src=\ref[src];secretscoder=maint_access_engiebrig'>Change all maintenance doors to engie/brig access only</A><BR>
 					<A href='?src=\ref[src];secretscoder=maint_access_brig'>Change all maintenance doors to brig access only</A><BR>
 					<A href='?src=\ref[src];secretscoder=infinite_sec'>Remove cap on security officers</A><BR>
+					<A href='?src=\ref[src];secretscoder=maint_access_engiebrig'>Change Security Level </A><BR>
 					<BR>
 					<B>Coder Secrets</B><BR>
 					<BR>
@@ -115,6 +116,13 @@
 					<A href='?src=\ref[src];secretsfun=fakeguns'>Make all items look like guns</A><BR>
 					<A href='?src=\ref[src];secretsfun=schoolgirl'>Japanese Animes Mode</A><BR>
 					<A href='?src=\ref[src];secretsfun=eagles'>Egalitarian Station Mode</A><BR>
+					<BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel0'>Change Security Level To Green</A><BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel1'>Change Security Level To Blue</A><BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel2'>Change Security Level To Red</A><BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel3'>Change Security Level To Gamma</A><BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel4'>Change Security Level To Epsilon</A><BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel5'>Change Security Level To Delta</A><BR>
 					"}
 	dat += "</center></body></html>"
 	var/datum/browser/popup = new(usr, "secrets", "<div align='center'>Admin Secrets</div>", 610, 650)

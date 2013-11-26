@@ -1894,6 +1894,7 @@
 					var/turf/loc = find_loc(H)
 					var/security = 0
 					if(loc.z > 1 || prisonwarped.Find(H))
+
 //don't warp them if they aren't ready or are already there
 						continue
 					H.Paralyse(5)
@@ -2243,6 +2244,24 @@
 				feedback_add_details("admin_secrets_fun_used","OO")
 				usr.client.only_one()
 //				message_admins("[key_name_admin(usr)] has triggered a battle to the death (only one)")
+			if("securitylevel0")
+				set_security_level(0)
+				message_admins("\blue [key_name_admin(usr)] change security level to Green.", 1)
+			if("securitylevel1")
+				set_security_level(1)
+				message_admins("\blue [key_name_admin(usr)] change security level to Blue.", 1)
+			if("securitylevel2")
+				set_security_level(2)
+				message_admins("\blue [key_name_admin(usr)] change security level to Red.", 1)
+			if("securitylevel3")
+				set_security_level(3)
+				message_admins("\blue [key_name_admin(usr)] change security level to Gamma.", 1)
+			if("securitylevel4")
+				set_security_level(4)
+				message_admins("\blue [key_name_admin(usr)] change security level to Epsilon.", 1)
+			if("securitylevel5")
+				set_security_level(5)
+				message_admins("\blue [key_name_admin(usr)] change security level to Delta.", 1)
 		if(usr)
 			log_admin("[key_name(usr)] used secret [href_list["secretsfun"]]")
 			if (ok)

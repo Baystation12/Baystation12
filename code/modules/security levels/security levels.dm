@@ -18,7 +18,7 @@
 			level = SEC_LEVEL_RED
 		if("gamma")
 			level = SEC_LEVEL_GAMMA
-		if("epsiolon")
+		if("epsilon")
 			level = SEC_LEVEL_EPSILON
 		if("delta")
 			level = SEC_LEVEL_DELTA
@@ -54,10 +54,11 @@
 					world << "<font size=4 color='red'>Attention! Code red!</font>"
 					world << "<font color='red'>[config.alert_desc_red_downto]</font>"
 				security_level = SEC_LEVEL_RED
-				for(var/obj/machinery/door/airlock/highsecurity/red/R in machines)
-					if(R.z == 1)
-						R.locked = 0
-						R.update_icon()
+				var/obj/machinery/door/airlock/highsecurity/red/R = locate(/obj/machinery/door/airlock/highsecurity/red) in world
+				message_admins("Found [R]")
+				if(R && R.z == 1)
+					R.locked = 0
+					R.update_icon()
 				/*	- At the time of commit, setting status displays didn't work properly
 				var/obj/machinery/computer/communications/CC = locate(/obj/machinery/computer/communications,world)
 				if(CC)
@@ -72,11 +73,11 @@
 				world << "<font size=4 color='red'>Attention! GAMMA security level activated!</font>"
 				world << "<font color='red'>[config.alert_desc_red_upto]</font>"
 				if(security_level < SEC_LEVEL_RED)
-					for(var/obj/machinery/door/airlock/highsecurity/red/R in machines)
+					for(var/obj/machinery/door/airlock/highsecurity/red/R in world)
 						if(R.z == 1)
 							R.locked = 0
 							R.update_icon()
-				for(var/obj/machinery/door/airlock/hatch/gamma/H in machines)
+				for(var/obj/machinery/door/airlock/hatch/gamma/H in world)
 					if(H.z == 1)
 						H.open()
 						spawn(10)
