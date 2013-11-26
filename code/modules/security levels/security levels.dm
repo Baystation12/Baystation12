@@ -14,6 +14,10 @@
 			level = SEC_LEVEL_BLUE
 		if("red")
 			level = SEC_LEVEL_RED
+		if("gamma")
+			level = SEC_LEVEL_GAMMA
+		if("epsiolon")
+			level = SEC_LEVEL_EPSILON
 		if("delta")
 			level = SEC_LEVEL_DELTA
 
@@ -48,7 +52,10 @@
 					world << "<font size=4 color='red'>Attention! Code red!</font>"
 					world << "<font color='red'>[config.alert_desc_red_downto]</font>"
 				security_level = SEC_LEVEL_RED
-
+				for(var/obj/machinery/door/airlock/highsecurity/red/R in machines)
+					if(R.z == 1)
+						R.locked = 0
+						R.update_icon()
 				/*	- At the time of commit, setting status displays didn't work properly
 				var/obj/machinery/computer/communications/CC = locate(/obj/machinery/computer/communications,world)
 				if(CC)
@@ -58,6 +65,26 @@
 					if(FA.z == 1)
 						FA.overlays = list()
 						FA.overlays += image('icons/obj/monitors.dmi', "overlay_red")
+
+			if(SEC_LEVEL_GAMMA)
+				world << "<font size=4 color='red'>Attention! GAMMA security level activated!</font>"
+				world << "<font color='red'>[config.alert_desc_red_upto]</font>"
+				if(security_level < SEC_LEVEL_RED)
+					for(var/obj/machinery/door/airlock/highsecurity/red/R in machines)
+						if(R.z == 1)
+							R.locked = 0
+							R.update_icon()
+				for(var/obj/machinery/door/airlock/hatch/gamma/H in machines)
+					if(H.z == 1)
+						H.open()
+						spawn(10)
+							H.locked = 1
+							H.update_icon()
+				security_level = SEC_LEVEL_GAMMA
+			if(SEC_LEVEL_EPSILON)
+				world << "<font size=4 color='red'>Attention! EPSILON security level activated!</font>"
+				world << "<font color='red'>[config.alert_desc_red_upto]</font>"
+				security_level = SEC_LEVEL_EPSILON
 
 			if(SEC_LEVEL_DELTA)
 				world << "<font size=4 color='red'>Attention! Delta security level reached!</font>"
@@ -78,6 +105,10 @@
 			return "blue"
 		if(SEC_LEVEL_RED)
 			return "red"
+		if(SEC_LEVEL_GAMMA)
+			return "gamma"
+		if(SEC_LEVEL_EPSILON)
+			return "epsilon"
 		if(SEC_LEVEL_DELTA)
 			return "delta"
 
@@ -89,6 +120,10 @@
 			return "blue"
 		if(SEC_LEVEL_RED)
 			return "red"
+		if(SEC_LEVEL_GAMMA)
+			return "gamma"
+		if(SEC_LEVEL_EPSILON)
+			return "epsilon"
 		if(SEC_LEVEL_DELTA)
 			return "delta"
 
@@ -100,6 +135,10 @@
 			return SEC_LEVEL_BLUE
 		if("red")
 			return SEC_LEVEL_RED
+		if("gamma")
+			return SEC_LEVEL_GAMMA
+		if("epsilon")
+			return SEC_LEVEL_EPSILON
 		if("delta")
 			return SEC_LEVEL_DELTA
 
