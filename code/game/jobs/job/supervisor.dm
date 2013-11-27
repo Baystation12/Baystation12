@@ -128,7 +128,7 @@
 			if(3) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(H), slot_back)
 			if(4) H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
 		H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
-		H.equip_to_slot_or_del(new /obj/item/weapon/melee/baton/ntcane(H.back), slot_in_backpack)
+		H.equip_to_slot_or_del(new /obj/item/weapon/melee/baton/loaded/ntcane(H.back), slot_in_backpack)
 		H.equip_to_slot_or_del(new /obj/item/weapon/lighter/zippo/fluff/nt_rep(H.back), slot_in_backpack)
 		H.equip_if_possible(new /obj/item/clothing/under/rank/centcom/representative(H), slot_w_uniform)
 		H.equip_if_possible(new /obj/item/clothing/shoes/centcom(H), slot_shoes)

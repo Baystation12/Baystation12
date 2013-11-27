@@ -1,5 +1,5 @@
 /obj/item/weapon/melee/baton
-	name = "stun baton"
+	name = "stunbaton"
 	desc = "A stun baton for incapacitating people with."
 	icon_state = "stunbaton"
 	item_state = "baton"
@@ -48,11 +48,11 @@
 
 /obj/item/weapon/melee/baton/update_icon()
 	if(status)
-		icon_state = "[initial(name)]_active"
+		icon_state = "[initial(icon_state)]_active"
 	else if(!bcell)
-		icon_state = "[initial(name)]_nocell"
+		icon_state = "[initial(icon_state)]_nocell"
 	else
-		icon_state = "[initial(name)]"
+		icon_state = "[initial(icon_state)]"
 
 /obj/item/weapon/melee/baton/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W, /obj/item/weapon/cell))
@@ -78,6 +78,9 @@
 	return
 
 /obj/item/weapon/melee/baton/attack_self(mob/user as mob)
+	if(bcell.charge < hitcost)
+		status = 0
+		return
 	if(status && (CLUMSY in user.mutations) && prob(50))
 		user << "\red You grab the [src] on the wrong side."
 		user.Weaken(stunforce*3)
@@ -182,20 +185,11 @@
 	..()
 
 
-/obj/item/weapon/melee/baton/ntcane
+/obj/item/weapon/melee/baton/loaded/ntcane
 	name = "fancy cane"
 	desc = "A cane with special engraving on it. It has a strange button on the handle..."
 	icon_state = "cane_nt"
 	item_state = "cane_nt"
-
-
-/obj/item/weapon/melee/baton/ntcane/update_icon()
-	if(status)
-		icon_state = "cane_nt_active"
-		item_state = "cane_nt_active"
-	else
-		icon_state = "cane_nt"
-		item_state = "cane_nt"
 
 //Makeshift stun baton. Replacement for stun gloves.
 /obj/item/weapon/melee/baton/cattleprod
@@ -208,3 +202,11 @@
 	stunforce = 5
 	hitcost = 2500
 	slot_flags = null
+
+/obj/item/weapon/melee/baton/cattleprod/update_icon()
+	if(status)
+		icon_state = "stunprod_active"
+	else if(!bcell)
+		icon_state = "stunprod_nocell"
+	else
+		icon_state = "stunprod"
