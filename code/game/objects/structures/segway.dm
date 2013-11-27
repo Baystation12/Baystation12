@@ -26,6 +26,7 @@
 		if(src.space_move.active())
 			return
 		allowMove = 0
+		icon_state = "sec_seg_move"
 		step(src, direction)
 		update_mob()
 		handle_rotation()
@@ -65,8 +66,8 @@
         unbuckle()
 
         M.visible_message(\
-                "<span class='notice'>[M] climbs onto the segway!</span>",\
-                "<span class='notice'>You climb onto the segway!</span>")
+                "<span class='notice'>[M] climbs onto the [src.name]!</span>",\
+                "<span class='notice'>You climb onto the [src.name]!</span>")
         M.buckled = src
         M.loc = loc
         M.dir = dir
@@ -74,7 +75,6 @@
         buckled_mob = M
         update_mob()
         add_fingerprint(user)
-        icon_state = "sec_seg_move"
         buckled_mob.pixel_x = 0
         buckled_mob.pixel_y = 5
 
@@ -111,7 +111,7 @@
 	health -= amount
 	if(health <= 0)
 		if(buckled_mob)
-			buckled_mob << "The segway was destroyed!"
+			buckled_mob << "The [src.name] was destroyed!"
 		Del()
 
 /obj/item/sec_seg_key
@@ -127,3 +127,45 @@
 	process(var/obj/structure/stool/bed/chair/segway/seg as obj,direction)
 		if(!step(seg, direction))
 			src.stop()
+
+
+/obj/structure/stool/bed/chair/segway/snowmobile
+	name = "red snowmobile"
+	desc = "Wheeeeeeeeeeee."
+	icon = 'icons/obj/vehicles.dmi'
+	icon_state = "snowmobile"
+	anchored = 1
+	density = 1
+
+/obj/structure/stool/bed/chair/segway/snowmobile/blue
+	name = "blue snowmobile"
+	desc = "Wheeeeeeeeeeee."
+	icon = 'icons/obj/vehicles.dmi'
+	icon_state = "bluesnowmobile"
+	anchored = 1
+	density = 1
+
+/obj/structure/stool/bed/chair/segway/snowmobile/relaymove(mob/user, direction)
+	if(user.stat || user.stunned || user.weakened || user.paralysis)
+		unbuckle()
+	if(!allowMove)
+		return
+	if(src.space_move.active())
+		return
+	allowMove = 0
+	step(src, direction)
+	update_mob()
+	handle_rotation()
+	if(istype(src.loc, /turf/space))
+		src.space_move.start(list(src,direction))
+	if(istype(src.loc, /turf/simulated))
+		var/turf/simulated/T = src.loc
+		if(T.wet == 2)	//Lube! Fall off!
+			playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
+			buckled_mob.Stun(8)
+			buckled_mob.Weaken(5)
+			unbuckle()
+			step(src, dir)
+	sleep(delay)
+	allowMove = 1
+
