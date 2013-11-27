@@ -471,12 +471,12 @@ obj/item/weapon/rollingpaperpack
 
 obj/item/weapon/rollingpaperpack/attack_self(mob/user)
 	if(papers > 1)
-		var/obj/item/weapon/rollingpaper/P = new /obj/item/weapon/rollingpaper(user.loc)
+		var/obj/item/weapon/rollingpaper/P = new /obj/item/weapon/rollingpaper()
 		user.put_in_inactive_hand(P)
 		user << "You take a paper out of the pack."
 		papers --
 	else
-		var/obj/item/weapon/rollingpaper/P = new /obj/item/weapon/rollingpaper(user.loc)
+		var/obj/item/weapon/rollingpaper/P = new /obj/item/weapon/rollingpaper()
 		user.put_in_inactive_hand(P)
 		user << "You take the last paper out of the pack, and throw the pack away."
 		del(src)
