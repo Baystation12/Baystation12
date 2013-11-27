@@ -78,19 +78,19 @@
 	return
 
 /obj/item/weapon/melee/baton/attack_self(mob/user as mob)
-	if(bcell.charge < hitcost)
-		status = 0
-		return
 	if(status && (CLUMSY in user.mutations) && prob(50))
 		user << "\red You grab the [src] on the wrong side."
 		user.Weaken(stunforce*3)
 		deductcharge(hitcost)
 		return
 	if(bcell && bcell.charge)
-		status = !status
-		user << "<span class='notice'>[src] is now [status ? "on" : "off"].</span>"
-		playsound(loc, "sparks", 75, 1, -1)
-		update_icon()
+		if(bcell.charge < hitcost)
+			status = 0
+		else
+			status = !status
+			user << "<span class='notice'>[src] is now [status ? "on" : "off"].</span>"
+			playsound(loc, "sparks", 75, 1, -1)
+			update_icon()
 	else
 		status = 0
 		if(!bcell)
