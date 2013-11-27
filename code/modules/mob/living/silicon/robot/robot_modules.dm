@@ -47,13 +47,12 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/weapon/melee/baton(src)
-		src.modules += new /obj/item/weapon/extinguisher(src)
-		src.modules += new /obj/item/weapon/wrench(src)
-		src.modules += new /obj/item/weapon/crowbar(src)
-		src.modules += new /obj/item/device/healthanalyzer(src)
-		src.emag = new /obj/item/weapon/melee/energy/sword(src)
-		return
+		modules += new /obj/item/weapon/melee/baton/loaded(src)
+		modules += new /obj/item/weapon/extinguisher(src)
+		modules += new /obj/item/weapon/wrench(src)
+		modules += new /obj/item/weapon/crowbar(src)
+		modules += new /obj/item/device/healthanalyzer(src)
+		emag = new /obj/item/weapon/melee/energy/sword(src)
 
 
 
@@ -85,19 +84,18 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/borg/sight/meson(src)
-		src.emag = new /obj/item/borg/stun(src)
-		src.modules += new /obj/item/weapon/rcd/borg(src)
-		src.modules += new /obj/item/weapon/extinguisher(src)
-//		src.modules += new /obj/item/device/flashlight(src)
-		src.modules += new /obj/item/weapon/weldingtool/largetank(src)
-		src.modules += new /obj/item/weapon/screwdriver(src)
-		src.modules += new /obj/item/weapon/wrench(src)
-		src.modules += new /obj/item/weapon/crowbar(src)
-		src.modules += new /obj/item/weapon/wirecutters(src)
-		src.modules += new /obj/item/device/multitool(src)
-		src.modules += new /obj/item/device/t_scanner(src)
-		src.modules += new /obj/item/device/analyzer(src)
+		modules += new /obj/item/borg/sight/meson(src)
+		emag = new /obj/item/borg/stun(src)
+		modules += new /obj/item/weapon/rcd/borg(src)
+		modules += new /obj/item/weapon/extinguisher(src)
+		modules += new /obj/item/weapon/weldingtool/largetank(src)
+		modules += new /obj/item/weapon/screwdriver(src)
+		modules += new /obj/item/weapon/wrench(src)
+		modules += new /obj/item/weapon/crowbar(src)
+		modules += new /obj/item/weapon/wirecutters(src)
+		modules += new /obj/item/device/multitool(src)
+		modules += new /obj/item/device/t_scanner(src)
+		modules += new /obj/item/device/analyzer(src)
 
 		var/obj/item/stack/sheet/metal/cyborg/M = new /obj/item/stack/sheet/metal/cyborg(src)
 		M.amount = 50
@@ -136,12 +134,11 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/borg/sight/hud/sec(src)
-		src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
-		src.modules += new /obj/item/weapon/melee/baton(src)
-		src.modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
-		src.emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
-		return
+		modules += new /obj/item/borg/sight/hud/sec(src)
+		modules += new /obj/item/weapon/handcuffs/cyborg(src)
+		modules += new /obj/item/weapon/melee/baton/loaded(src)
+		modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
+		emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
 
 
 
@@ -202,13 +199,11 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/borg/sight/meson(src)
-		src.emag = new /obj/item/borg/stun(src)
-		src.modules += new /obj/item/weapon/storage/bag/ore(src)
-		src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
-		src.modules += new /obj/item/weapon/storage/bag/sheetsnatcher/borg(src)
-//		src.modules += new /obj/item/weapon/shovel(src) Uneeded due to buffed drill
-		return
+		modules += new /obj/item/borg/sight/meson(src)
+		emag = new /obj/item/borg/stun(src)
+		modules += new /obj/item/weapon/storage/bag/ore(src)
+		modules += new /obj/item/weapon/pickaxe/borgdrill(src)
+		modules += new /obj/item/weapon/storage/bag/sheetsnatcher/borg(src)
 
 
 /obj/item/weapon/robot_module/syndicate

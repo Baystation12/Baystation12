@@ -183,7 +183,6 @@
 	corpseshoes = /obj/item/clothing/shoes/black
 	corpseradio = /obj/item/device/radio/headset
 	corpsemask = /obj/item/clothing/mask/gas/mime
-	corpsegloves = /obj/item/clothing/gloves/white/stunglove // Spawn with empty, crappy batteries.
 	corpseback = /obj/item/weapon/storage/backpack
 	corpseid = 1
 	corpseidjob = "Mime"
