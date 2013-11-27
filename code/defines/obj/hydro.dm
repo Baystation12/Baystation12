@@ -1117,7 +1117,7 @@
 	icon_state = "seed-coffeea"
 	species = "coffeea"
 	plantname = "Coffee Arabica Bush"
-	productname = /obj/item/weapon/reagent_containers/food/snacks/grown/coffee_arabica
+	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/coffee_arabica"
 	lifespan = 30
 	endurance = 20
 	maturation = 5
@@ -1134,7 +1134,7 @@
 	icon_state = "seed-coffeer"
 	species = "coffeer"
 	plantname = "Coffee Robusta Bush"
-	productname = /obj/item/weapon/reagent_containers/food/snacks/grown/coffee_robusta
+	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/coffee_robusta"
 	lifespan = 20
 	endurance = 15
 	maturation = 5
@@ -1150,7 +1150,7 @@
 	icon_state = "seed-tobacco"
 	species = "tobacco"
 	plantname = "Tobacco Plant"
-	productname = /obj/item/weapon/reagent_containers/food/snacks/grown/tobacco
+	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/tobacco"
 	lifespan = 20
 	endurance = 15
 	maturation = 5
@@ -1168,7 +1168,7 @@
 	icon_state = "seed-stobacco"
 	species = "stobacco"
 	plantname = "Space Tobacco Plant"
-	productname = /obj/item/weapon/reagent_containers/food/snacks/grown/tobacco_space
+	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/tobacco_space"
 	lifespan = 20
 	endurance = 15
 	maturation = 5
@@ -1185,7 +1185,7 @@
 	icon_state = "seed-teaaspera"
 	species = "teaaspera"
 	plantname = "Tea Aspera Plant"
-	productname = /obj/item/weapon/reagent_containers/food/snacks/grown/tea_aspera
+	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/tea_aspera"
 	lifespan = 20
 	endurance = 15
 	maturation = 5
@@ -1202,7 +1202,7 @@
 	icon_state = "seed-teaastra"
 	species = "teaastra"
 	plantname = "Tea Astra Plant"
-	productname = /obj/item/weapon/reagent_containers/food/snacks/grown/tea_astra
+	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/tea_astra"
 	lifespan = 20
 	endurance = 15
 	maturation = 5
