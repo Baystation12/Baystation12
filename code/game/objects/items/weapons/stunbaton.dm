@@ -86,6 +86,7 @@
 	if(bcell && bcell.charge)
 		if(bcell.charge < hitcost)
 			status = 0
+			user << "<span class='warning'>[src] is out of charge.</span>"
 		else
 			status = !status
 			user << "<span class='notice'>[src] is now [status ? "on" : "off"].</span>"
