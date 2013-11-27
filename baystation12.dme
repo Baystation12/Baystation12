@@ -1329,7 +1329,6 @@
 #include "maps\tgstation2.dmm"
 #include "tauceti\Colored-windows.dm"
 #include "tauceti\FUNadm.dm"
-#include "tauceti\CustomHUD\CustomHUD.dm"
 #include "tauceti\defibrillator\defibrillator.dm"
 #include "tauceti\vendomats\bloodvend.dm"
 #include "tauceti\vendomats\holybane.dm"
