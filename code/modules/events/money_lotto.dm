@@ -38,3 +38,4 @@
 
 	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
 		NEWSCASTER.newsAlert("Tau Ceti Daily")
+	score_eventsendured++

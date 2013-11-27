@@ -56,7 +56,7 @@
 					for (var/mob/O in hearers(5, Console.loc))
 						O.show_message(text("\icon[Console] *The Requests Console beeps: 'PRIORITY Alert in [my_department]'"))
 				Console.messages += "<B><FONT color='red'>High Priority message from [my_department]</FONT></B><BR>[sending]"
-
+	score_eventsendured++
 /datum/event/money_hacker/tick()
 	if(world.time > time_start + time_duration)
 		var/message

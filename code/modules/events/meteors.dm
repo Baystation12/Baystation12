@@ -11,7 +11,7 @@
 /datum/event/meteor_wave/announce()
 	command_alert("Meteors have been detected on collision course with the station.", "Meteor Alert")
 	world << sound('sound/AI/meteors.ogg')
-
+	score_eventsendured++
 /datum/event/meteor_wave/tick()
 	if(IsMultiple(activeFor, 3))
 		spawn_meteors(rand(2,5))

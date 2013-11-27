@@ -191,6 +191,9 @@
 	if(z_co == 2 || z_co < 1 || z_co > 6)
 		usr << "\red Error: Z is less than 1, greater than 6, or equal to 2."
 		fail = 1
+	if(istype(get_area(locate(x_co,y_co,z_co)), /area/security/armoury/gamma))
+		usr << "\red Error: Attempting to access telescience-protected area."
+		fail = 1
 	return fail
 
 /obj/machinery/computer/telescience/Topic(href, href_list)

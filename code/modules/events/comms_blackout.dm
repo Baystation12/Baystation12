@@ -10,3 +10,4 @@
 			A << "<br>"
 	for(var/obj/machinery/telecomms/T in telecomms_list)
 		T.emp_act(1)
+	score_eventsendured++

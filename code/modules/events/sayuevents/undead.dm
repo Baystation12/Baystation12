@@ -38,3 +38,4 @@
 	announce()
 		for(var/mob/living/M in player_list)
 			M << "You feel [pick("a chill","a deathly chill","the undead","dirty", "creeped out","afraid","fear")]!"
+		score_eventsendured++

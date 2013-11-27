@@ -1,8 +1,14 @@
 //Species modification item.
 
 /obj/item/weapon/modkit/tajaran
-	name = "hardsuit modification kit"
+	name = "tajaran hardsuit modification kit"
 	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another species. This one looks like it's meant for Tajara."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "royce_kit"
+
+/obj/item/weapon/modkit/unathi
+	name = "Unathi hardsuit modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another species. This one looks like it's meant for Unathi."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "royce_kit"
 
@@ -15,6 +21,14 @@
 		del(I)
 		del(src)
 		return
+	if(istype(I,/obj/item/weapon/modkit/unathi))
+		user.drop_item()
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		user << "\red You painstakingly modify [src] to make it more suitable for a Tajaran user."
+		new /obj/item/clothing/head/helmet/space/rig/unathi(user.loc)
+		del(I)
+		del(src)
+		return
 	..()
 
 /obj/item/clothing/suit/space/rig/attackby(obj/item/I as obj, mob/user as mob)
@@ -23,6 +37,14 @@
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		user << "\red You painstakingly modify [src] to make it more suitable for a Tajaran user."
 		new /obj/item/clothing/suit/space/rig/tajara(user.loc)
+		del(I)
+		del(src)
+		return
+	if(istype(I,/obj/item/weapon/modkit/unathi))
+		user.drop_item()
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		user << "\red You painstakingly modify [src] to make it more suitable for a Tajaran user."
+		new /obj/item/clothing/suit/space/rig/unathi(user.loc)
 		del(I)
 		del(src)
 		return
@@ -206,6 +228,29 @@
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/melee/baton)
 	siemens_coefficient = 0.7
+
+/obj/item/clothing/head/helmet/space/rig/security/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I,/obj/item/weapon/modkit/unathi))
+		user.drop_item()
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		user << "\red You painstakingly modify [src] to make it more suitable for a Unathi user."
+		new /obj/item/clothing/head/helmet/space/rig/security/unathi(user.loc)
+		del(I)
+		del(src)
+		return
+	..()
+
+
+/obj/item/clothing/suit/space/rig/security/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I,/obj/item/weapon/modkit/unathi))
+		user.drop_item()
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		user << "\red You painstakingly modify [src] to make it more suitable for a Unathi user."
+		new /obj/item/clothing/suit/space/rig/security/unathi(user.loc)
+		del(I)
+		del(src)
+		return
+	..()
 
 
 //Atmospherics Rig (BS12)
