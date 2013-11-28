@@ -1237,7 +1237,7 @@ proc/process_ghost_teleport_locs()
 /area/security/armoury/gamma
 	name = "\improper Gamma Armory"
 	icon_state = "Warden"
-
+	requires_power = 0
 /area/security/hos
 	name = "\improper Head of Security's Office"
 	icon_state = "sec_hos"
