@@ -63,6 +63,7 @@
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/braintype = "Cyborg"
 	var/pose
+	var/base_icon = ""
 
 /mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
@@ -1024,10 +1025,10 @@
 		overlays += "[icon_state]-shield"
 
 	if(modtype == "Combat")
-		var/base_icon = ""
-		base_icon = icon_state
+		if (base_icon == "")
+			base_icon = icon_state
 		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-			icon_state = "[icon_state]-roll"
+			icon_state = "[base_icon]-roll"
 		else
 			icon_state = base_icon
 		return
