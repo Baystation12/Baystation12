@@ -258,7 +258,7 @@ datum/preferences
 			if (1) // General Preferences
 				dat += "<table><tr><td width='340px' height='300px' valign='top'>"
 				dat += "<h2>General Settings</h2>"
-				dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
+//				dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
 				dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "Nearest Creatures" : "All Speech"]</b></a><br>"
@@ -269,7 +269,7 @@ datum/preferences
 
 				dat += "</td><td width='300px' height='300px' valign='top'>"
 				dat += "<h2>Antagonist Settings</h2>"
-				dat += "<br><br>"
+//				dat += "<br><br>"
 				if(jobban_isbanned(user, "Syndicate"))
 					dat += "<b>You are banned from antagonist roles.</b>"
 					src.be_special = 0
@@ -1117,7 +1117,7 @@ datum/preferences
 
 					if("hear_adminhelps")
 						toggles ^= SOUND_ADMINHELP
-
+/*
 					if("ui")
 						switch(UI_style)
 							if("Midnight")
@@ -1126,7 +1126,7 @@ datum/preferences
 								UI_style = "old"
 							else
 								UI_style = "Midnight"
-
+*/
 					if("be_special")
 						var/num = text2num(href_list["num"])
 						be_special ^= (1<<num)
