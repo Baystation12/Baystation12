@@ -25,7 +25,7 @@
 	if(newdir)
 		dir = newdir
 
-	if(id == "CentComConv01")
+	if(id == "CentComConv01" | id == "dw_c")
 		on = 1
 
 	switch(dir)
