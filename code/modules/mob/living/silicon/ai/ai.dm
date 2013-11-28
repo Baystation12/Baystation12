@@ -256,8 +256,6 @@ var/list/ai_list = list()
 	var/f_color = input("Choose your color, dark colors are not recommended!") as color|null
 	if(!f_color)
 		return
-	world << locate(/area/turret_protected/ai_upload)
-	world << locate(/area/turret_protected/ai)
 	for(var/turf/simulated/floor/whitegreed/F  in world)
 		F.color = f_color
 
