@@ -91,7 +91,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 			return
 
 /obj/item/seeds/replicapod/proc/request_player()
-	for(var/mob/dead/observer/O in player_list)
+	for(var/mob/O in respawnable_list)
 		if(O.client)
 			if(O.client.prefs.be_special & BE_PLANT)
 				question(O.client)
@@ -110,9 +110,8 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 /obj/item/seeds/replicapod/proc/transfer_personality(var/client/player)
 
 	if(!player) return
-
+	respawnable_list -= player
 	found_player = 1
-
 	var/mob/living/carbon/monkey/diona/podman = new(parent.loc)
 	podman.ckey = player.ckey
 

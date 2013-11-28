@@ -201,7 +201,7 @@
 
 		var/mob/living/carbon/alien/larva/new_xeno = new(vent.loc)
 		new_xeno.key = candidate
-
+		respawnable_list -= candidate
 		candidates -= candidate
 		vents -= vent
 		spawncount--

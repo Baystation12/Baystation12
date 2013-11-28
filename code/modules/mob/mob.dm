@@ -331,7 +331,7 @@ var/list/slot_equipment_priority = list( \
 	src << browse('html/help.html', "window=help")
 	return
 */
-
+/*
 /mob/verb/abandon_mob()
 	set name = "Respawn"
 	set category = "OOC"
@@ -384,7 +384,7 @@ var/list/slot_equipment_priority = list( \
 	M.key = key
 //	M.Login()	//wat
 	return
-
+*/
 /mob/verb/observe()
 	set name = "Observe"
 	set category = "OOC"

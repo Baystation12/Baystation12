@@ -426,6 +426,8 @@
 /mob/living/simple_animal/proc/Die()
 	living_mob_list -= src
 	dead_mob_list += src
+	if(key)
+		respawnable_list += src
 	icon_state = icon_dead
 	stat = DEAD
 	density = 0

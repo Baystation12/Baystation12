@@ -146,11 +146,11 @@ client/proc/one_click_antag()
 	return 0
 
 /datum/admins/proc/makeWizard()
-	var/list/mob/dead/observer/candidates = list()
-	var/mob/dead/observer/theghost = null
+	var/list/mob/candidates = list()
+	var/mob/theghost = null
 	var/time_passed = world.time
 
-	for(var/mob/dead/observer/G in player_list)
+	for(var/mob/G in respawnable_list)
 		if(!jobban_isbanned(G, "wizard") && !jobban_isbanned(G, "Syndicate"))
 			spawn(0)
 				switch(alert(G, "Do you wish to be considered for the position of Space Wizard Foundation 'diplomat'?","Please answer in 30 seconds!","Yes","No"))
@@ -216,11 +216,11 @@ client/proc/one_click_antag()
 
 /datum/admins/proc/makeNukeTeam()
 
-	var/list/mob/dead/observer/candidates = list()
-	var/mob/dead/observer/theghost = null
+	var/list/mob/candidates = list()
+	var/mob/theghost = null
 	var/time_passed = world.time
 
-	for(var/mob/dead/observer/G in player_list)
+	for(var/mob/G in respawnable_list)
 		if(!jobban_isbanned(G, "operative") && !jobban_isbanned(G, "Syndicate"))
 			spawn(0)
 				switch(alert(G,"Do you wish to be considered for a nuke team being sent in?","Please answer in 30 seconds!","Yes","No"))
@@ -315,8 +315,8 @@ client/proc/one_click_antag()
 	return 1
 
 /datum/admins/proc/makeDeathsquad()
-	var/list/mob/dead/observer/candidates = list()
-	var/mob/dead/observer/theghost = null
+	var/list/mob/candidates = list()
+	var/mob/theghost = null
 	var/time_passed = world.time
 	var/input = "Purify the station."
 	if(prob(10))
@@ -325,7 +325,7 @@ client/proc/one_click_antag()
 	var/syndicate_leader_selected = 0 //when the leader is chosen. The last person spawned.
 
 	//Generates a list of commandos from active ghosts. Then the user picks which characters to respawn as the commandos.
-	for(var/mob/dead/observer/G in player_list)
+	for(var/mob/G in respawnable_list)
 		spawn(0)
 			switch(alert(G,"Do you wish to be considered for an elite syndicate strike team being sent in?","Please answer in 30 seconds!","Yes","No"))
 				if("Yes")
@@ -434,15 +434,15 @@ client/proc/one_click_antag()
 
 /datum/admins/proc/makeVoxRaiders()
 
-	var/list/mob/dead/observer/candidates = list()
-	var/mob/dead/observer/theghost = null
+	var/list/mob/candidates = list()
+	var/mob/theghost = null
 	var/time_passed = world.time
 	var/input = "Disregard shinies, acquire hardware."
 
 	var/leader_chosen = 0 //when the leader is chosen. The last person spawned.
 
 	//Generates a list of candidates from active ghosts.
-	for(var/mob/dead/observer/G in player_list)
+	for(var/mob/G in respawnable_list)
 		spawn(0)
 			switch(alert(G,"Do you wish to be considered for a vox raiding party arriving on the station?","Please answer in 30 seconds!","Yes","No"))
 				if("Yes")

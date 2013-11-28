@@ -91,10 +91,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(stat == DEAD)
 		resting = 1
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
+	respawnable_list -= src
 
 
 	return
-
 
 /mob/dead/observer/Move(NewLoc, direct)
 	dir = direct
@@ -146,6 +146,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "Ghost"
 	set name = "Re-enter Corpse"
 	if(!client)	return
+	if(!can_reenter_corpse)
+		src << "<span class='warning'>You've given up your right to respawn!</span>"
+		return
 	if(!(mind && mind.current && can_reenter_corpse))
 		src << "<span class='warning'>You have no body.</span>"
 		return
@@ -273,7 +276,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/verb/become_mouse()
 	set name = "Become mouse"
-	set category = "Ghost"
+	set category = "OOC"
 
 	var/timedifference = world.time - client.time_died_as_mouse
 	if(client.time_died_as_mouse && timedifference <= mouse_respawn_time * 600)
