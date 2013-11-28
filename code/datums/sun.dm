@@ -14,6 +14,10 @@
 	if(prob(50))
 		rate = -rate
 
+/hook/startup/proc/createSun()
+	sun = new /datum/sun()
+	return 1
+
 // calculate the sun's position given the time of day
 
 /datum/sun/proc/calc_position()
