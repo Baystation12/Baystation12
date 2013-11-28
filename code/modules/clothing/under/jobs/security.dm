@@ -71,6 +71,22 @@
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/under/det/black
+	icon_state = "detective2"
+	item_color = "detective2"
+
+/obj/item/clothing/under/det/slob
+	icon_state = "polsuit"
+	item_color = "polsuit"
+
+/obj/item/clothing/under/det/slob/verb/rollup()
+	set name = "Roll suit sleevels"
+	set category = "Object"
+	set src in usr
+	item_color = item_color == "polsuit" ? "polsuit_rolled" : "polsuit"
+	if (ishuman(loc))
+		var/mob/living/carbon/human/H = loc
+		H.update_inv_w_uniform(1)
 
 /obj/item/clothing/head/det_hat
 	name = "hat"
@@ -79,6 +95,10 @@
 	allowed = list(/obj/item/weapon/reagent_containers/food/snacks/candy_corn, /obj/item/weapon/pen)
 	armor = list(melee = 50, bullet = 5, laser = 25,energy = 10, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
+
+/obj/item/clothing/head/det_hat/black
+	icon_state = "detective2"
+
 
 /*
  * Head of Security
