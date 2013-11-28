@@ -5,7 +5,7 @@
 	var/oneShot			= 0	//If true, then the event removes itself from the list of potential events on creation.
 
 	var/activeFor		= 0	//How long the event has existed. You don't need to change this.
-
+	var/area/impact_area
 //Called first before processing.
 //Allows you to setup your event, such as randomly
 //setting the startWhen and or announceWhen variables.
@@ -88,3 +88,4 @@
 		if(P.client)
 			players++
 	return players
+

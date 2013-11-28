@@ -849,6 +849,7 @@
 #include "code\modules\events\rogue_drones.dm"
 #include "code\modules\events\space_ninja.dm"
 #include "code\modules\events\spontaneous_appendicitis.dm"
+#include "code\modules\events\tear.dm"
 #include "code\modules\events\viral_infection.dm"
 #include "code\modules\events\viral_outbreak.dm"
 #include "code\modules\events\wallrot.dm"

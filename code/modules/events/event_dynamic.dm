@@ -105,7 +105,7 @@ var/global/list/possibleEvents = list()
 			possibleEvents[/datum/event/space_ninja] = max(active_with_role["Security"], 5)
 	possibleEvents[/datum/event/undead] = active_with_role["Security"] * 10
 	possibleEvents[/datum/event/ghosts] = active_with_role["Security"] * 25
-
+	possibleEvents[/datum/event/tear] = active_with_role["Security"] * 25
 
 	for(var/event_type in event_last_fired) if(possibleEvents[event_type])
 		var/time_passed = world.time - event_last_fired[event_type]
