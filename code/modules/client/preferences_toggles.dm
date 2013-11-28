@@ -158,7 +158,8 @@
 	if(!UI_style_color_new) return
 
 	//update UI
-	var/list/icons = usr.hud_used.adding + usr.hud_used.other + usr.hud_used.hotkeybuttons
+	var/list/icons = usr.hud_used.adding + usr.hud_used.other +usr.hud_used.hotkeybuttons
+	icons.Add(usr.zone_sel)
 
 	for(var/obj/screen/I in icons)
 		if(I.color && I.alpha)
