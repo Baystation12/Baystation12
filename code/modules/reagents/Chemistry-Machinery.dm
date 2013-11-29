@@ -281,6 +281,7 @@
 	var/bottlesprite = "1" //yes, strings
 	var/pillsprite = "1"
 	var/client/has_sprites = list()
+	var/max_pill_count = 20
 
 /obj/machinery/chem_master/New()
 	var/datum/reagents/R = new/datum/reagents(100)
@@ -424,12 +425,23 @@
 				reagents.clear_reagents()
 				icon_state = "mixer0"
 		else if (href_list["createpill"] || href_list["createpill_multiple"])
-			var/name = reject_bad_text(input(usr,"Name:","Name your pill!",reagents.get_master_reagent_name()))
 			var/count = 1
-			if (href_list["createpill_multiple"]) count = isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num)
-			if (count > 20) count = 20	//Pevent people from creating huge stacks of pills easily. Maybe move the number to defines?
+
+			if(reagents.total_volume/count < 1) //Sanity checking.
+				return
+
+			if (href_list["createpill_multiple"])
+				count = Clamp(isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num),1,max_pill_count)
+
+			if(reagents.total_volume/count < 1) //Sanity checking.
+				return
+
 			var/amount_per_pill = reagents.total_volume/count
 			if (amount_per_pill > 50) amount_per_pill = 50
+
+			if(reagents.total_volume/count < 1) //Sanity checking.
+				return
+
 			while (count--)
 				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
 				if(!name) name = reagents.get_master_reagent_name()
@@ -442,6 +454,7 @@
 					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
 						P.loc = loaded_pill_bottle
 						src.updateUsrDialog()
+
 		else if (href_list["createbottle"])
 			if(!condi)
 				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!",reagents.get_master_reagent_name()))

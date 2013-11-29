@@ -7,6 +7,9 @@
 	for(var/obj/machinery/power/smes/S in world)
 		if(istype(get_area(S), /area/turret_protected) || S.z != 1)
 			continue
+		S.last_charge = S.charge
+		S.last_output = S.output
+		S.last_online = S.online
 		S.charge = 0
 		S.output = 0
 		S.online = 0
@@ -60,9 +63,9 @@
 	for(var/obj/machinery/power/smes/S in world)
 		if(S.z != 1)
 			continue
-		S.charge = S.capacity
-		S.output = 200000
-		S.online = 1
+		S.charge = S.last_charge
+		S.output = S.last_output
+		S.online = S.last_online
 		S.updateicon()
 		S.power_change()
 	for(var/area/A in world)
