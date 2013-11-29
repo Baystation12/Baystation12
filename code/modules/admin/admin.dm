@@ -1014,14 +1014,6 @@ var/global/floorIsLava = 0
 	message_admins("\blue [key_name_admin(usr)] toggled guests game entering [guests_allowed?"":"dis"]allowed.", 1)
 	feedback_add_details("admin_verb","TGU") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/unjobban_panel()
-	set name = "Unjobban Panel"
-	set category = "Admin"
-	if (src.holder)
-		src.holder.unjobbanpanel()
-	feedback_add_details("admin_verb","UJBP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	return
-
 /datum/admins/proc/output_ai_laws()
 	var/ai_number = 0
 	for(var/mob/living/silicon/S in mob_list)
