@@ -134,7 +134,7 @@
 				observer.real_name = client.prefs.real_name
 				observer.name = observer.real_name
 				observer.key = key
-
+				respawnable_list += observer
 				del(src)
 				return 1
 

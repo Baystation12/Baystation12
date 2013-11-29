@@ -929,12 +929,7 @@ mob/verb/yank_out_object()
 	set name = "Respawn as Mindless"
 	set category = "OOC"
 
-	usr in respawnable_list
-	if(istype(usr, /mob/dead/observer) || usr in respawnable_list)
-		if(istype(usr, /mob/dead/observer))
-			var/mob/dead/observer/O = usr
-			if(!O.started_as_observer) return
-
+	if(usr in respawnable_list)
 		var/list/creatures = list("Mouse")
 		for(var/mob/living/simple_animal/S in living_mob_list)
 			if(safe_animal(S.type))
