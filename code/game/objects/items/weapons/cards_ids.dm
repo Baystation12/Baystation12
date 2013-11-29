@@ -250,7 +250,7 @@
 		registered_user = user
 	else if(!registered_user || registered_user == user)
 
-		if(registered_user) registered_user = user  // First one to pick it up is the owner if there is ever a wild case New() doens't work.
+		if(!registered_user) registered_user = user  // First one to pick it up is the owner if there is ever a wild case New() doens't work.
 
 		switch(alert("Would you like to display the ID, or retitle it?","Choose.","Rename","Show"))
 			if("Rename")
