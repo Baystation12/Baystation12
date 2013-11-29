@@ -932,7 +932,7 @@ mob/verb/yank_out_object()
 	if(usr in respawnable_list)
 		var/list/creatures = list("Mouse")
 		for(var/mob/living/simple_animal/S in living_mob_list)
-			if(safe_animal(S.type))
+			if(safe_animal_respawn(S.type))
 				if(!S.key)
 					creatures += S
 		var/picked = input("Please select a creature to respawn as", "Respawn as Mindless Creature")  as null|anything in creatures

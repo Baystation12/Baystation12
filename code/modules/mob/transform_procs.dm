@@ -380,3 +380,33 @@
 		return 1 // ZOMG PONIES WHEEE
 	//Not in here? Must be untested!
 	return 0
+
+
+/mob/proc/safe_animal_respawn(var/MP)
+//Bad mobs! - Remember to add a comment explaining what's wrong with the mob
+	if(!MP)
+		return 0	//Sanity, this should never happen.
+
+//Good mobs!
+	if(ispath(MP, /mob/living/simple_animal/cat))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/corgi))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/crab))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/chicken))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/cow))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/parrot))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/pony))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/hostile/carp))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
+		return 1
+
+
+	//Not in here? Must be untested!
+	return 0
