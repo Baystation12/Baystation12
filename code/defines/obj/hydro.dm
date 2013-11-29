@@ -81,6 +81,7 @@
 	plant_type = 2
 	growthstages = 3
 
+
 /obj/item/seeds/grapeseed
 	name = "pack of grape seeds"
 	desc = "These seeds grow into grape vines."
@@ -760,6 +761,43 @@
 	oneharvest = 1
 	growthstages = 3
 	plant_type = 1
+
+/obj/item/seeds/moonflowerseed
+	name = "pack of moonflower seeds"
+	desc = "These seeds grow into moonflowers."
+	icon_state = "seed-moonflower"
+	mypath = "/obj/item/seeds/moonflowerseed"
+	species = "moonflower"
+	plantname = "Moonflowers"
+	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/moonflower"
+	lifespan = 25
+	endurance = 20
+	maturation = 6
+	production = 2
+	yield = 2
+	potency = 15
+	oneharvest = 1
+	growthstages = 3
+	plant_type = 0
+
+/obj/item/seeds/novaflowerseed
+	name = "pack of novaflower seeds"
+	desc = "These seeds grow into novaflowers."
+	icon_state = "seed-novaflower"
+	mypath = "/obj/item/seeds/novaflowerseed"
+	species = "novaflower"
+	plantname = "Novaflowers"
+	productname = "/obj/item/weapon/grown/novaflower"
+	lifespan = 25
+	endurance = 20
+	maturation = 6
+	production = 2
+	yield = 2
+	potency = 20
+	oneharvest = 1
+	growthstages = 3
+	plant_type = 0
+
 
 /obj/item/seeds/brownmold
 	name = "pack of brown mold"
