@@ -132,9 +132,9 @@
 			for(var/mob/C in player_list)
 				if(C.mind && C.mind.key == M.mind.key)
 					message_admins("Found mind, asking for respawn")
-					switch(alert(C,"<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Do you want to be resurrected/cloned? Please not if you select 'No', you will be able to be cloned or borged again this round.</b></font color>","Yes","No"))
+					switch(alert(C,"Your corpse has been placed into a cloning scanner. Do you want to be resurrected/cloned? Please not if you select 'No', you will be able to be cloned or borged again this round.","Clone Alert","Yes","No"))
 						if("Yes")
-							C.key = M.key
+							M.key = C.key
 							return
 						if("No")
 							return
