@@ -43,10 +43,15 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 			source = B.data["donor"]
 			user << "The strange, sluglike seeds quiver gently and swell with blood."
 			if(!source.client && source.mind)
-				for(var/mob/dead/observer/O in player_list)
+				for(var/mob/O in respawnable_list)
 					if(O.mind == source.mind && config.revival_pod_plants)
-						O << "<b><font color = #330033><font size = 3>Your blood has been placed into a replica pod seed. Return to your body if you want to be returned to life as a pod person!</b> (Verbs -> Ghost -> Re-enter corpse)</font color>"
-						break
+						message_admins("Found mind, asking for respawn")
+						switch(alert(O,"<b><font color = #330033><font size = 3>Your corpse has been placed into a pod plant. Do you want to be resurrected/cloned? Please not if you select 'No', you will be able to be cloned or borged again this round.</b></font color>","Yes","No"))
+							if("Yes")
+								source.key = O.key
+								return
+							if("No")
+								return
 		else
 			user << "Nothing happens."
 			return

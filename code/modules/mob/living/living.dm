@@ -671,7 +671,7 @@
 
 
 
-/mob/living/verb/become_mouse()
+/mob/living/proc/become_mouse()
 	if(usr in respawnable_list)
 		var/timedifference = world.time - client.time_died_as_mouse
 		if(client.time_died_as_mouse && timedifference <= mouse_respawn_time * 600)
