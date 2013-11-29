@@ -873,6 +873,7 @@ obj/item/weapon/organ/head/proc/transfer_identity(var/mob/living/carbon/human/H)
 	brainmob.dna = H.dna
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
+	respawnable_list += brainmob
 	brainmob.container = src
 
 obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)

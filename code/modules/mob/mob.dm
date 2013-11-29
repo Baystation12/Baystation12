@@ -938,13 +938,17 @@ mob/verb/yank_out_object()
 		var/picked = input("Please select a creature to respawn as", "Respawn as Mindless Creature")  as null|anything in creatures
 		switch(picked)
 			if("Mouse")
+				respawnable_list -= usr
 				become_mouse()
+				respawnable_list += usr
 			else
 				var/mob/living/simple_animal/picked_animal = picked
 				if(istype(picked_animal) && !picked_animal.key)
+					respawnable_list -= usr
 					picked_animal.key = key
+					respawnable_list += usr
 				else
-					message_admins("Failed to check type")
+//					message_admins("Failed to check type")
 	else
 		usr << "You are not dead or you have given up your right to be respawned!"
 		return

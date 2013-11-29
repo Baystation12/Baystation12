@@ -17,7 +17,7 @@
 	gibs(loc, viruses, dna)
 
 	dead_mob_list -= src
-	if(client)
+	if(client && !src in respawnable_list)
 		respawnable_list += src
 	spawn(15)
 		if(animation)	del(animation)
@@ -44,7 +44,7 @@
 	new /obj/effect/decal/cleanable/ash(loc)
 
 	dead_mob_list -= src
-	if(client)
+	if(client && !src in respawnable_list)
 		respawnable_list += src
 	spawn(15)
 		if(animation)	del(animation)
@@ -56,6 +56,6 @@
 
 	living_mob_list -= src
 	dead_mob_list += src
-	if(client)
+	if(client && !src in respawnable_list)
 		respawnable_list += src
 	return ..(gibbed)

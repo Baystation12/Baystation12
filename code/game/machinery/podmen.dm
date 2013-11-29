@@ -99,20 +99,20 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 /obj/item/seeds/replicapod/proc/request_player()
 	for(var/mob/O in respawnable_list)
 		if(O.client)
-			message_admins("Found client for nymph")
+//			message_admins("Found client for nymph")
 			if(O.client.prefs.be_special & BE_PLANT)
-				message_admins("Questioning client for nymph")
+//				message_admins("Questioning client for nymph")
 				question(O.client)
 
 /obj/item/seeds/replicapod/proc/question(var/client/C)
 	spawn(0)
 		if(!C)	return
-		message_admins("Sending popup for nymph")
+//		message_admins("Sending popup for nymph")
 		var/response = alert(C, "Someone is harvesting a replica pod. Would you like to play as a Dionaea?", "Replica pod harvest", "Yes", "No", "Never for this round.")
 		if(!C || ckey)
 			return
 		if(response == "Yes")
-			message_admins("Transferring personality for nymph")
+//			message_admins("Transferring personality for nymph")
 			transfer_personality(C)
 		else if (response == "Never for this round")
 			C.prefs.be_special ^= BE_PLANT
