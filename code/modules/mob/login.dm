@@ -24,6 +24,7 @@
 						log_access("Notice: [key_name(src)] has the same [matches] as [key_name(M)] (no longer logged in).")
 
 /mob/Login()
+
 	player_list |= src
 	update_Login_details()
 	world.update_status()
@@ -44,4 +45,13 @@
 		client.eye = src
 		client.perspective = MOB_PERSPECTIVE
 
+	//Clear ability list and update from mob.
+	client.verbs -= ability_verbs
 
+	if(abilities)
+		client.verbs |= abilities
+
+	if(istype(src,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = src
+		if(H.species && H.species.abilities)
+			client.verbs |= H.species.abilities

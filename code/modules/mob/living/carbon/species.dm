@@ -37,12 +37,18 @@
 
 	var/flags = 0       // Various specific features.
 
+	var/list/abilities = list()	// For species-derived or admin-given powers
+
 /datum/species/human
 	name = "Human"
 	language = "Sol Common"
 	primitive = /mob/living/carbon/monkey
 
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR
+
+	abilities = list(
+		/client/proc/test_ability,
+		)
 
 /datum/species/unathi
 	name = "Unathi"
@@ -65,6 +71,11 @@
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
+	abilities = list(
+		/client/proc/test_ability,
+		/client/proc/unathi_ability
+		)
+
 /datum/species/tajaran
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
@@ -86,6 +97,11 @@
 	primitive = /mob/living/carbon/monkey/tajara
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+
+	abilities = list(
+		/client/proc/test_ability,
+		/client/proc/tajaran_ability
+		)
 
 /datum/species/skrell
 	name = "Skrell"
