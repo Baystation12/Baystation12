@@ -929,7 +929,7 @@ mob/verb/yank_out_object()
 	set name = "Respawn as Mindless"
 	set category = "OOC"
 
-	if(usr in respawnable_list)
+	if(usr in respawnable_list && stat==2)
 		var/list/creatures = list("Mouse")
 		for(var/mob/living/simple_animal/S in living_mob_list)
 			if(safe_animal_respawn(S.type))
