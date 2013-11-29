@@ -221,13 +221,15 @@
 	adjustBruteLoss(20)
 	return
 
-/mob/living/simple_animal/emote(var/act)
+/mob/living/simple_animal/emote(var/act,var/m_type=1,var/message = null)
 	if(stat)
 		return
-	if(act)
-		if(act == "scream")	act = "makes a loud and pained whimper" //ugly hack to stop animals screaming when crushed :P
-		for (var/mob/O in viewers(src, null))
-			O.show_message("<B>[src]</B> [act].")
+	switch(act)
+		if("scream")
+			message = "<B>The [src.name]</B> whimpers."
+			m_type = 2
+	..()
+
 
 
 /mob/living/simple_animal/attack_animal(mob/living/simple_animal/M as mob)
