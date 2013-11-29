@@ -161,23 +161,21 @@ var/global/datum/controller/gameticker/ticker
 	votetimer()
 	return 1
 
+
+//Temporary Cinematic location for crash testing
+/obj/screen/cinematic
+	icon = 'icons/effects/station_explosion.dmi'
+	icon_state = "station_intact"
+	screen_loc = "1,0"
+
 /datum/controller/gameticker
 	//station_explosion used to be a variable for every mob's hud. Which was a waste!
 	//Now we have a general cinematic centrally held within the gameticker....far more efficient!
-	var/obj/screen/cinematic = null
+	var/obj/screen/cinematic/C = null
 
 	//Plus it provides an easy way to make cinematics for other events. Just use this as a template :)
 	proc/station_explosion_cinematic(var/station_missed=0, var/override = null)
-		if( cinematic )	return	//already a cinematic in progress!
-
-		//initialise our cinematic screen object
-		cinematic = new(src)
-		sleep(100)
-		cinematic.icon = 'icons/effects/station_explosion.dmi'
-		cinematic.icon_state = "station_intact"
-		cinematic.layer = 20
-		cinematic.mouse_opacity = 0
-		cinematic.screen_loc = "1,0"
+		C = new(src)
 
 		var/obj/structure/stool/bed/temp_buckle = new(src)
 		//Incredibly hackish. It creates a bed within the gameticker (lol) to stop mobs running around
@@ -185,12 +183,12 @@ var/global/datum/controller/gameticker/ticker
 			for(var/mob/living/M in living_mob_list)
 				M.buckled = temp_buckle				//buckles the mob so it can't do anything
 				if(M.client)
-					M.client.screen += cinematic	//show every client the cinematic
+					M.client.screen += C	//show every client the cinematic
 		else	//nuke kills everyone on z-level 1 to prevent "hurr-durr I survived"
 			for(var/mob/living/M in living_mob_list)
 				M.buckled = temp_buckle
 				if(M.client)
-					M.client.screen += cinematic
+					M.client.screen += C
 
 				switch(M.z)
 					if(0)	//inside a crate or something
@@ -209,13 +207,13 @@ var/global/datum/controller/gameticker/ticker
 					override = mode.name
 				switch( override )
 					if("nuclear emergency") //Nuke wasn't on station when it blew up
-						flick("intro_nuke",cinematic)
+						flick("intro_nuke",C)
 						sleep(35)
 						world << sound('sound/effects/explosionfar.ogg')
-						flick("station_intact_fade_red",cinematic)
-						cinematic.icon_state = "summary_nukefail"
+						flick("station_intact_fade_red",C)
+						C.icon_state = "summary_nukefail"
 					else
-						flick("intro_nuke",cinematic)
+						flick("intro_nuke",C)
 						sleep(35)
 						world << sound('sound/effects/explosionfar.ogg')
 						//flick("end",cinematic)
@@ -231,29 +229,29 @@ var/global/datum/controller/gameticker/ticker
 					override = mode.name
 				switch( override )
 					if("nuclear emergency") //Nuke Ops successfully bombed the station
-						flick("intro_nuke",cinematic)
+						flick("intro_nuke",C)
 						sleep(35)
-						flick("station_explode_fade_red",cinematic)
+						flick("station_explode_fade_red",C)
 						world << sound('sound/effects/explosionfar.ogg')
-						cinematic.icon_state = "summary_nukewin"
+						C.icon_state = "summary_nukewin"
 					if("AI malfunction") //Malf (screen,explosion,summary)
-						flick("intro_malf",cinematic)
+						flick("intro_malf",C)
 						sleep(76)
-						flick("station_explode_fade_red",cinematic)
+						flick("station_explode_fade_red",C)
 						world << sound('sound/effects/explosionfar.ogg')
-						cinematic.icon_state = "summary_malf"
+						C.icon_state = "summary_malf"
 					if("blob") //Station nuked (nuke,explosion,summary)
-						flick("intro_nuke",cinematic)
+						flick("intro_nuke",C)
 						sleep(35)
-						flick("station_explode_fade_red",cinematic)
+						flick("station_explode_fade_red",C)
 						world << sound('sound/effects/explosionfar.ogg')
-						cinematic.icon_state = "summary_selfdes"
+						C.icon_state = "summary_selfdes"
 					else //Station nuked (nuke,explosion,summary)
-						flick("intro_nuke",cinematic)
+						flick("intro_nuke",C)
 						sleep(35)
-						flick("station_explode_fade_red", cinematic)
+						flick("station_explode_fade_red", C)
 						world << sound('sound/effects/explosionfar.ogg')
-						cinematic.icon_state = "summary_selfdes"
+						C.icon_state = "summary_selfdes"
 				for(var/mob/living/M in living_mob_list)
 					if(M.loc.z == 1)
 						M.death()//No mercy
@@ -261,7 +259,7 @@ var/global/datum/controller/gameticker/ticker
 		//Otherwise if its a verb it will continue on afterwards.
 		sleep(300)
 
-		if(cinematic)	del(cinematic)		//end the cinematic
+		if(C)	del(C)		//end the cinematic
 		if(temp_buckle)	del(temp_buckle)	//release everybody
 		return
 
