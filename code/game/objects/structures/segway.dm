@@ -159,6 +159,8 @@
 	if(istype(src.loc, /turf/space))
 		src.space_move.start(list(src,direction))
 	if(istype(src.loc, /turf/simulated))
+		health -= 5
+		usr << "Your snowmobile takes damage from not being on snow!"
 		var/turf/simulated/T = src.loc
 		if(T.wet == 2)	//Lube! Fall off!
 			playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
