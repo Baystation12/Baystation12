@@ -126,17 +126,20 @@ datum/mind
 		var/mob/living/carbon/human/H = current
 		if (istype(current, /mob/living/carbon/human) || istype(current, /mob/living/carbon/monkey))
 			/** Impanted**/
-			if(H.is_loyalty_implanted(H)) 
-				text = "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
+			if(istype(current, /mob/living/carbon/human))
+				if(H.is_loyalty_implanted(H)) 
+					text = "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
+				else
+					text = "Loyalty Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant=add'>Implant him!</a></br>"
 			else
-				text = "Loyalty Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant=add'>Implant him!</a></br>"
+				text = "Loyalty Implant: Don't implant that monkey!</br>"
 			sections["implant"] = text
 			/** REVOLUTION ***/
 			text = "revolution"
 			if (ticker.mode.config_tag=="revolution")
 				text += uppertext(text)
 			text = "<i><b>[text]</b></i>: "
-			if (H.is_loyalty_implanted(H))
+			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H))
 				text += "<b>LOYAL EMPLOYEE</b>|headrev|rev"
 			else if (src in ticker.mode.head_revolutionaries)
 				text = "<a href='?src=\ref[src];revolution=clear'>employee</a>|<b>HEADREV</b>|<a href='?src=\ref[src];revolution=rev'>rev</a>"
@@ -166,7 +169,7 @@ datum/mind
 			if (ticker.mode.config_tag=="cult")
 				text = uppertext(text)
 			text = "<i><b>[text]</b></i>: "
-			if (H.is_loyalty_implanted(H))
+			if (istype(current, /mob/living/carbon/monkey) || H.is_loyalty_implanted(H))
 				text += "<B>LOYAL EMPLOYEE</B>|cultist"
 			else if (src in ticker.mode.cult)
 				text += "<a href='?src=\ref[src];cult=clear'>employee</a>|<b>CULTIST</b>"
@@ -238,13 +241,13 @@ datum/mind
 		if(istype(current, /mob/living/carbon/human))
 			if (H.is_loyalty_implanted(H))
 				text +="traitor|<b>LOYAL EMPLOYEE</b>"
-		else
-			if (src in ticker.mode.traitors)
-				text += "<b>TRAITOR</b>|<a href='?src=\ref[src];traitor=clear'>Employee</a>"
-				if (objectives.len==0)
-					text += "<br>Objectives are empty! <a href='?src=\ref[src];traitor=autoobjectives'>Randomize</a>!"
 			else
-				text += "<a href='?src=\ref[src];traitor=traitor'>traitor</a>|<b>Employee</b>"
+				if (src in ticker.mode.traitors)
+					text += "<b>TRAITOR</b>|<a href='?src=\ref[src];traitor=clear'>Employee</a>"
+					if (objectives.len==0)
+						text += "<br>Objectives are empty! <a href='?src=\ref[src];traitor=autoobjectives'>Randomize</a>!"
+				else
+					text += "<a href='?src=\ref[src];traitor=traitor'>traitor</a>|<b>Employee</b>"
 		sections["traitor"] = text
 
 		/** MONKEY ***/

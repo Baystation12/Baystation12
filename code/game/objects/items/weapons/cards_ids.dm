@@ -199,6 +199,27 @@
 	name = "agent card"
 	access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 	origin_tech = "syndicate=3"
+	var/registered_user=null
+	
+/obj/item/weapon/card/id/syndicate/New(mob/user as mob)
+	..()
+	var/t = reject_bad_name(input(user, "What name would you like to put on this card?\nNode:  You can change this later by clicking on the ID card while it's in your hand.", "Agent card name", ishuman(user) ? user.real_name : user.name))
+	if(!t) 
+		alert("Invalid name.")
+		if(!registered_name) 
+			registered_name = ishuman(user) ? user.real_name : user.name
+	else
+		registered_name = t
+	var/u = copytext(sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Assistant")),1,MAX_MESSAGE_LEN)
+	if(!u)
+		alert("Invalid assignment.")
+		assignment = "Assistant"
+	else
+		assignment = u
+	name = "[registered_name]'s ID Card ([assignment])"
+	user << "\blue You successfully forge the ID card."
+	registered_user = user
+	
 
 /obj/item/weapon/card/id/syndicate/afterattack(var/obj/item/weapon/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
@@ -209,7 +230,6 @@
 			if(user.mind.special_role)
 				usr << "\blue The card's microscanners activate as you pass it over the ID, copying its access."
 
-/obj/item/weapon/card/id/syndicate/var/mob/registered_user = null
 /obj/item/weapon/card/id/syndicate/attack_self(mob/user as mob)
 	if(!src.registered_name)
 		//Stop giving the players unsanitized unputs! You are giving ways for players to intentionally crash clients! -Nodrak
@@ -228,7 +248,10 @@
 		src.name = "[src.registered_name]'s ID Card ([src.assignment])"
 		user << "\blue You successfully forge the ID card."
 		registered_user = user
-	else if(registered_user == user)
+	else if(!registered_user || registered_user == user)
+
+		if(!registered_user) registered_user = user  // First one to pick it up is the owner if there is ever a wild case New() doens't work.
+
 		switch(alert("Would you like to display the ID, or retitle it?","Choose.","Rename","Show"))
 			if("Rename")
 				var t = copytext(sanitize(input(user, "What name would you like to put on this card?", "Agent card name", ishuman(user) ? user.real_name : user.name)),1,26)

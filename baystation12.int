@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 501.1217
+WINDOW: icons\obj\clothing\suits.dmi
+DIR: code code\__HELPERS code\game code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\organs icons icons\mob icons\obj icons\obj\clothing 
+FILE: icons\obj\clothing\suits.dmi
+LAST_COMPILE_TIME: 1385727227
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
