@@ -85,7 +85,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Ghost"
 	set desc = "Relinquish your life and enter the land of the dead."
 
-	var/response = alert(src, "Are you -sure- you want to ghost?\n(If you ghost, you won't be able to respawn as anything this round! You can't change your mind so choose wisely!)","Are you sure you want to ghost?","Ghost","Stay in body")
+	var/response = alert(src, "Are you -sure- you want to ghost?\n(If you ghost, YOU WILL NOT BE ABLE TO RESPAWN THIS ROUND! You can't change your mind so choose wisely!)","Are you sure you want to ghost?","Ghost","Stay in body")
 	if(response != "Ghost")	return	//didn't want to ghost after-all
 	var/mob/dead/observer/ghost = ghostize(0)            //0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 	if(stat == DEAD)
