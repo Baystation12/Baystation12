@@ -260,7 +260,7 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 	dirtyUI=0
 
 /datum/dna/proc/UpdateSE()
-	var/oldse=struc_enzymes
+//	var/oldse=struc_enzymes
 	struc_enzymes=""
 	for(var/block in SE)
 		struc_enzymes += EncodeDNABlock(block)
