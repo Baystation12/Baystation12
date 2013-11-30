@@ -1029,7 +1029,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			usr << list2text(respawnable_list,",")
 
 
-
 /client/proc/cmd_admin_toggle_block(var/mob/M in mob_list,var/block)
 	set category = "Fun"
 	set name = "Toggle a DNA Block"
