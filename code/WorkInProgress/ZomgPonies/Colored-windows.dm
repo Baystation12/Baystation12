@@ -26,7 +26,8 @@ var/global/wcCommon
 		/area/security/lobby,
 		/area/security/main,
 		/area/security/prison,
-		/area/security/warden
+		/area/security/warden,
+		/area/prison/cell_block
 		)
 
 	for(var/A in wsBrigList)
