@@ -143,10 +143,9 @@ Works together with spawning an observer, noted above.
 	var/image/holder
 	for(var/mob/living/carbon/human/patient in oview(M))
 		var/foundVirus = 0
-		for(var/datum/disease/D in patient.viruses)
-			if(!D.hidden[SCANNER])
-				foundVirus++
-		if(!C) continue   // I have no idea why this is here but I'm leaving it here because it's in the medicalHUD code as well.
+		if(patient.virus2.len)
+			foundVirus = 1
+		if(!C) return 
 		holder = patient.hud_list[HEALTH_HUD]
 		if(patient.stat == 2)
 			holder.icon_state = "hudhealth-100"
