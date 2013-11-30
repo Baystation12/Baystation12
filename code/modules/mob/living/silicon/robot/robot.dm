@@ -73,34 +73,35 @@
 	ident = rand(1, 999)
 	updatename("Default")
 	updateicon()
-	if(mmi != null)
-		if(syndie)
-			if(!cell)
-				cell = new /obj/item/weapon/cell(src)
-
+	if(mmi == null)
+		mmi = new /obj/item/device/mmi/posibrain(src)	//Give the borg an MMI if he spawns without for some reason. (probably not the correct way to spawn a posibrain, but it works)
+		mmi.icon_state="posibrain-occupied"
+	if(syndie)
+		if(!cell)
+			cell = new /obj/item/weapon/cell(src)
 			laws = new /datum/ai_laws/antimov()
-			lawupdate = 0
+		lawupdate = 0
+		scrambledcodes = 1
+		cell.maxcharge = 25000
+		cell.charge = 25000
+		module = new /obj/item/weapon/robot_module/syndicate(src)
+		hands.icon_state = "standard"
+		icon_state = "secborg"
+		modtype = "Security"
+	else
+		if(mmi.alien)
+			laws = new /datum/ai_laws/alienmov()
+			connected_ai = select_active_alien_ai()
 			scrambledcodes = 1
-			cell.maxcharge = 25000
-			cell.charge = 25000
-			module = new /obj/item/weapon/robot_module/syndicate(src)
-			hands.icon_state = "standard"
-			icon_state = "secborg"
-			modtype = "Security"
 		else
-			if(mmi.alien)
-				laws = new /datum/ai_laws/alienmov()
-				connected_ai = select_active_alien_ai()
-				scrambledcodes = 1
-			else
-				laws = new /datum/ai_laws/nanotrasen()
-				connected_ai = select_active_ai_with_fewest_borgs()
-			if(connected_ai)
-				connected_ai.connected_robots += src
-				lawsync()
-				lawupdate = 1
-			else
-				lawupdate = 0
+			laws = new /datum/ai_laws/nanotrasen()
+			connected_ai = select_active_ai_with_fewest_borgs()
+		if(connected_ai)
+			connected_ai.connected_robots += src
+			lawsync()
+			lawupdate = 1
+		else
+			lawupdate = 0
 
 	radio = new /obj/item/device/radio/borg(src)
 	if(!scrambledcodes && !camera)
