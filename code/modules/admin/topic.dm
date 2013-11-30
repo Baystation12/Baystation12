@@ -891,19 +891,6 @@
 			if("Cancel")
 				return
 
-	else if(href_list["unjobbanf"])
-		if(!check_rights(R_BAN))	return
-
-		var/banfolder = href_list["unjobbanf"]
-		Banlist.cd = "/base/[banfolder]"
-		var/key = Banlist["key"]
-		if(alert(usr, "Are you sure you want to unban [key]?", "Confirmation", "Yes", "No") == "Yes")
-			if (RemoveBanjob(banfolder))
-				unjobbanpanel()
-			else
-				alert(usr,"This ban has already been lifted / does not exist.","Error","Ok")
-				unjobbanpanel()
-
 	else if(href_list["mute"])
 		if(!check_rights(R_MOD,0) && !check_rights(R_ADMIN))  return
 
