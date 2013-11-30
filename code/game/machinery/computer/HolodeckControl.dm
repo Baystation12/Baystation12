@@ -454,6 +454,15 @@
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "wood_table"
 
+/obj/structure/holostool
+	name = "stool"
+	desc = "Apply butt."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "stool"
+	anchored = 1.0
+	flags = FPRINT
+	pressure_resistance = 15
+
 
 /obj/item/clothing/gloves/boxing/hologlove
 	name = "boxing gloves"
