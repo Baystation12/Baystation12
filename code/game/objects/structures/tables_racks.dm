@@ -423,6 +423,8 @@
 	set desc = "Flips a non-reinforced table"
 	set category = "Object"
 	set src in oview(1)
+	if(ismouse(usr))
+		return
 	if (!can_touch(usr))
 		return
 	if(!flip(get_cardinal_dir(usr,src)))
