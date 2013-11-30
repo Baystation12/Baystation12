@@ -65,7 +65,7 @@
 	var/pose
 	var/base_icon = ""
 
-/mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0)
+/mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0, var/alien = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
@@ -89,7 +89,7 @@
 		icon_state = "secborg"
 		modtype = "Security"
 	else
-		if(mmi.alien)
+		if(mmi.alien || alien)
 			laws = new /datum/ai_laws/alienmov()
 			connected_ai = select_active_alien_ai()
 			scrambledcodes = 1

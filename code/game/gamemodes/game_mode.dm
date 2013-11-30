@@ -26,6 +26,7 @@
 	var/required_players = 0
 	var/required_players_secret = 0 //Minimum number of players for that game mode to be chose in Secret
 	var/required_enemies = 0
+	var/recommended_players = 0
 	var/recommended_enemies = 0
 	var/newscaster_announcements = null
 	var/uplink_welcome = "Syndicate Uplink Console:"
