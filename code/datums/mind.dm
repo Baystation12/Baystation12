@@ -127,7 +127,7 @@ datum/mind
 		if (istype(current, /mob/living/carbon/human) || istype(current, /mob/living/carbon/monkey))
 			/** Impanted**/
 			if(istype(current, /mob/living/carbon/human))
-				if(H.is_loyalty_implanted(H)) 
+				if(H.is_loyalty_implanted(H))
 					text = "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
 				else
 					text = "Loyalty Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant=add'>Implant him!</a></br>"
@@ -802,14 +802,17 @@ datum/mind
 						special_role = "traitor"
 						current << "<B>\red You are a traitor!</B>"
 						log_admin("[key_name_admin(usr)] has traitor'ed [current].")
+						if (config.objectives_disabled == 1)
+							current << "<i>You have been turned into an antagonist- <font color=blue>Within the rules,</font> try to act as an opposing force to the crew- This can be via corporate payoff, personal motives, or maybe just being a dick. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonist.</i></b>"
 						if(istype(current, /mob/living/silicon))
 							var/mob/living/silicon/A = current
 							call(/datum/game_mode/proc/add_law_zero)(A)
 							A.show_laws()
 
 				if("autoobjectives")
-					ticker.mode.forge_traitor_objectives(src)
-					usr << "\blue The objectives for traitor [key] have been generated. You can edit them and anounce manually."
+					if (config.objectives_disabled == 0)
+						ticker.mode.forge_traitor_objectives(src)
+						usr << "\blue The objectives for traitor [key] have been generated. You can edit them and anounce manually."
 
 		else if (href_list["monkey"])
 			var/mob/living/L = current
@@ -1019,7 +1022,8 @@ datum/mind
 		if(!(src in ticker.mode.traitors))
 			ticker.mode.traitors += src
 			special_role = "traitor"
-			ticker.mode.forge_traitor_objectives(src)
+			if (config.objectives_disabled == 0)
+				ticker.mode.forge_traitor_objectives(src)
 			ticker.mode.finalize_traitor(src)
 			ticker.mode.greet_traitor(src)
 

@@ -107,6 +107,8 @@ datum/preferences
 
 	var/nanotrasen_relation = "Neutral"
 
+	var/uplinklocation = "PDA"
+
 		// OOC Metadata:
 	var/metadata = ""
 	var/slot_name = ""
@@ -320,6 +322,8 @@ datum/preferences
 		else
 			dat += "<b><a href=\"byond://?src=\ref[user];preference=records;record=1\">Character Records</a></b><br>"
 
+		dat += "<b><a href=\"byond://?src=\ref[user];preference=antagoptions;active=0\">Set Antag Options</b></a><br>"
+
 		dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)][used_skillpoints > 0 ? " [used_skillpoints]" : "0"])</i></a><br>"
 
 		dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=input'><b>Set Flavor Text</b></a><br>"
@@ -517,6 +521,24 @@ datum/preferences
 		user << browse(null, "window=preferences")
 		user << browse(HTML, "window=records;size=350x300")
 		return
+
+	proc/SetAntagoptions(mob/user)
+		var/HTML = "<body>"
+		HTML += "<tt><center>"
+		HTML += "<b>Antagonist Options</b> <hr />"
+		HTML += "<br>"
+		HTML +="Uplink Type : <b><a href='?src=\ref[user];preference=antagoptions;antagtask=uplinktype;active=1'>[uplinklocation]</a></b>"
+		HTML +="<br>"
+		HTML +="<hr />"
+		HTML +="<a href='?src=\ref[user];preference=antagoptions;antagtask=done;active=1'>\[Done\]</a>"
+
+		HTML += "</center></tt>"
+
+		user << browse(null, "window=preferences")
+		user << browse(HTML, "window=antagoptions")
+		return
+
+
 
 	proc/GetPlayerAltTitle(datum/job/job)
 		return player_alt_titles.Find(job.title) > 0 \
@@ -752,6 +774,23 @@ datum/preferences
 
 					gen_record = genmsg
 					SetRecords(user)
+
+		else if (href_list["preference"] == "antagoptions")
+			if(text2num(href_list["active"]) == 0)
+				SetAntagoptions(user)
+				return
+			if (href_list["antagtask"] == "uplinktype")
+				if (uplinklocation == "PDA")
+					uplinklocation = "Headset"
+				else if(uplinklocation == "Headset")
+					uplinklocation = "None"
+				else
+					uplinklocation = "PDA"
+				SetAntagoptions(user)
+			if (href_list["antagtask"] == "done")
+				user << browse(null, "window=antagoptions")
+				ShowChoices(user)
+			return 1
 
 		switch(href_list["task"])
 			if("random")
