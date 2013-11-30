@@ -98,6 +98,8 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 
 /obj/item/seeds/replicapod/proc/request_player()
 	for(var/mob/O in respawnable_list)
+		if(jobban_isbanned(O, "Dionaea"))
+			continue
 		if(O.client)
 //			message_admins("Found client for nymph")
 			if(O.client.prefs.be_special & BE_PLANT)
