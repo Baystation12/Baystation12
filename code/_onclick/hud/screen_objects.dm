@@ -36,6 +36,9 @@
 		if(istype(master, /obj/item/weapon/storage))
 			var/obj/item/weapon/storage/S = master
 			S.close(usr)
+		else if(istype(master,/obj/item/clothing/suit/storage))
+			var/obj/item/clothing/suit/storage/S = master
+			S.close(usr)
 	return 1
 
 
