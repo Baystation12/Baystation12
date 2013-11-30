@@ -26,7 +26,9 @@
 			spawn(600) reset_search()
 
 	proc/request_player()
-		for(var/mob/dead/observer/O in player_list)
+		for(var/mob/O in respawnable_list)
+			if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+				continue
 			if(jobban_isbanned(O, "pAI"))
 				continue
 			if(O.client)
