@@ -341,6 +341,7 @@
 	else
 		icon_state = "window"*/
 
+	color = color_windows()
 	update_nearby_tiles(need_rebuild=1)
 	update_nearby_icons()
 
