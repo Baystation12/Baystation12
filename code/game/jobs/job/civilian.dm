@@ -196,7 +196,7 @@
 
 
 //Griff //BS12 EDIT
-/*
+
 /datum/job/clown
 	title = "Clown"
 	flag = CLOWN
@@ -228,7 +228,7 @@
 		return 1
 
 
-
+/*
 /datum/job/mime
 	title = "Mime"
 	flag = MIME

@@ -27,6 +27,8 @@ var/list/station_departments = list("Command", "Medical", "Engineering", "Scienc
 /datum/job/librarian/department = "Civilian"
 
 /datum/job/lawyer/department = "Civilian"
+// *JMO* 20131129 Added for clown access
+/datum/job/clown/department = "Civilian"
 
 /datum/job/chaplain/department = "Civilian"
 
