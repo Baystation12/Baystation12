@@ -441,6 +441,14 @@
 	shardtype = /obj/item/weapon/shard/plasma
 	health = 120
 
+/obj/structure/window/plasmabasic/New(Loc,re=0)
+	..()
+	ini_dir = dir
+	color = null
+	update_nearby_tiles(need_rebuild=1)
+	update_nearby_icons()
+	return
+
 /obj/structure/window/plasmabasic/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + 32000)
 		hit(round(exposed_volume / 1000), 0)
@@ -458,6 +466,13 @@
 /obj/structure/window/plasmareinforced/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return
 
+/obj/structure/window/plasmareinforced/New(Loc,re=0)
+	..()
+	ini_dir = dir
+	color = null
+	update_nearby_tiles(need_rebuild=1)
+	update_nearby_icons()
+	return
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
