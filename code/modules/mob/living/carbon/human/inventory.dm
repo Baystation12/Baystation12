@@ -38,6 +38,13 @@
 		del(W)
 	return null
 
+/mob/living/carbon/human/proc/is_in_hands(var/typepath)
+	if(istype(l_hand,typepath))
+		return l_hand
+	if(istype(r_hand,typepath))
+		return r_hand
+	return 0
+
 
 /mob/living/carbon/human/proc/has_organ(name)
 	var/datum/organ/external/O = organs_by_name[name]

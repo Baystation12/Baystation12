@@ -1029,15 +1029,12 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			usr << list2text(respawnable_list,",")
 
 
-/client/proc/cmd_admin_toggle_block(var/mob/M in mob_list,var/block)
-	set category = "Fun"
-	set name = "Toggle a DNA Block"
-
+/client/proc/cmd_admin_toggle_block(var/mob/M,var/block)
 	if(!ticker)
 		alert("Wait until the game starts")
 		return
 	if(istype(M, /mob/living/carbon))
-		M.dna.SetSEState(!M.dna.GetSEState(block))
+		M.dna.SetSEState(block,!M.dna.GetSEState(block))
 		domutcheck(M,null)
 		M.update_mutations()
 		var/state="[M.dna.GetSEState(block)?"on":"off"]"
