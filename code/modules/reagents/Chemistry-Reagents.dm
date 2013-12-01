@@ -2626,7 +2626,7 @@ datum
 			color = "#619494" // rgb: 97, 148, 148
 
 		drink/cold/space_cola
-			name = "Cola"
+			name = "Space Cola"
 			id = "cola"
 			description = "A refreshing beverage."
 			reagent_state = LIQUID
@@ -2649,7 +2649,7 @@ datum
 				return
 
 		drink/cold/spacemountainwind
-			name = "Space Mountain Wind"
+			name = "Mountain Wind"
 			id = "spacemountainwind"
 			description = "Blows right through you like a space wind."
 			color = "#102000" // rgb: 16, 32, 0
@@ -2907,8 +2907,8 @@ datum
 				if (adj_drowsy)	M.drowsyness = max(0,M.drowsyness + adj_drowsy)
 				if (adj_sleepy) M.sleeping = max(0,M.sleeping + adj_sleepy)
 
-				if(!src.data) data = 1
-				src.data += boozepwr
+				if(!src.data || (!isnum(src.data)  && src.data.len)) data = 1   //if it doesn't exist we set it.  if it's a list we're going to set it to 1 as well.  This is to
+				src.data += boozepwr						//avoid a runtime error associated with drinking blood mixed in drinks (demon's blood).
 
 				var/d = data
 
@@ -3456,7 +3456,6 @@ datum
 			description = "AHHHH!!!!"
 			color = "#820000" // rgb: 130, 0, 0
 			boozepwr = 3
-
 		ethanol/vodkatonic
 			name = "Vodka and Tonic"
 			id = "vodkatonic"

@@ -23,7 +23,10 @@
 	var/online = 1
 	var/n_tag = null
 	var/obj/machinery/power/terminal/terminal = null
-
+	//Holders for powerout event.
+	var/last_output = 0
+	var/last_charge = 0
+	var/last_online = 0
 
 /obj/machinery/power/smes/New()
 	..()

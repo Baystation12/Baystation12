@@ -16,6 +16,12 @@ var/list/GPS_list = list()
 	GPS_list.Add(src)
 	name = "global positioning system ([gpstag])"
 	overlays += "working"
+/obj/item/device/gps/Del()
+	GPS_list.Remove(src)
+	..()
+/obj/item/device/gps/Del()
+	GPS_list.Remove(src)
+	..()
 
 /obj/item/device/gps/Del()
 	GPS_list.Remove(src)

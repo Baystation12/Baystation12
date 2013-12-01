@@ -26,23 +26,32 @@ Used In File(s): \code\modules\reagents\Chemistry-Machinery.dm
 <div class="item">&nbsp;</div>
 <div class="item">
 	<div class="itemLabel" style="width: 100%;">
-		Chemical Dispenser
+		{^{if glass}}
+			Drink Dispenser
+		{{else}}
+			Chemical Dispenser
+		{{/if}}
 	</div>
 </div>
 <div class="item">
-	<div class="itemContent" style="width: 100%;">
+	<div class="itemContentWide" style="width: 100%;">
 		{^{for chemicals}}
-			{^{:~link(title, 'circle-arrow-s', commands, null, 'fixedLeft')}}
+			{^{:~link(title, 'circle-arrow-s', commands, null, ~root.glass ? 'fixedLeftWide' : 'fixedLeft' )}}
 		{{/for}}
+		
 	</div>
 </div>
 <div class="item">&nbsp;</div>
 <div class="item">
 	<div class="itemLabel">
-		Beaker Contents
+		{^{if glass}}
+			Glass
+		{{else}}
+			Beaker
+		{{/if}} Contents
 	</div>
 	<div class="itemContent">
-		{^{:~link('Eject Beaker', 'eject', {'ejectBeaker' : 1}, isBeakerLoaded ? null : 'disabled', 'floatRight')}}
+		{^{:~link(glass ? 'Eject Glass' : 'Eject Beaker', 'eject', {'ejectBeaker' : 1}, isBeakerLoaded ? null : 'disabled', 'floatRight')}}
 	</div>
 </div>
 <div class="statusDisplay" style="height: 225px; overflow: auto;">
@@ -53,10 +62,21 @@ Used In File(s): \code\modules\reagents\Chemistry-Machinery.dm
 				{^{for beakerContents}}
 					<span class="highlight">{^{:volume}} units of {^{:name}}</span><br>
 				{{else}}
-					<span class="bad">Beaker is empty</span>
+					<span class="bad">
+							{^{if glass}}
+								Glass
+							{{else}}
+								Beaker
+							{{/if}}
+								 is empty</span>
 				{{/for}}
 			{{else}}
-				<span class="average"><i>No beaker loaded</i></span>
+				<span class="average"><i>No 
+							{^{if glass}}
+								Glass
+							{{else}}
+								Beaker
+							{{/if}} loaded</i></span>
 			{{/if}}
 		</div>
 	</div>

@@ -10,9 +10,6 @@
 	construction_storage
 		name = "\improper Construction storage"
 
-	locker
-		name = "\improper Locker room"
-
 	atmos_storage
 		name = "\improper Atmos storage"
 		icon_state = "engine_storage"
@@ -69,7 +66,11 @@
 		//icon_state = "engine_portgyro"
 
 	storage
-		name = "\improper Engineering hallway"
+		name = "\improper Engineering Storage"
+		icon_state = "engine_storage"
+
+	storage_hard
+		name = "\improper Engineering Hard Storage"
 		icon_state = "engine_storage"
 
 	hallway

@@ -793,8 +793,6 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 		base = icon('icons/mob/human_races/r_human.dmi')
 
 	if(base)
-		base = base.MakeLying()
-
 		//Changing limb's skin tone to match owner
 		if(!H.species || H.species.flags & HAS_SKIN_TONE)
 			if (H.s_tone >= 0)
@@ -802,28 +800,9 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 			else
 				base.Blend(rgb(-H.s_tone,  -H.s_tone,  -H.s_tone), ICON_SUBTRACT)
 
-		//this is put here since I can't easially edit the same icon from head's constructor
-		if(istype(src, /obj/item/weapon/organ/head))
-			//Add (facial) hair.
-			if(H.f_style)
-				var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[H.f_style]
-				if(facial_hair_style)
-					var/icon/facial = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_l")
-					if(facial_hair_style.do_colouration)
-						facial.Blend(rgb(H.r_facial, H.g_facial, H.b_facial), ICON_ADD)
-
-					base.Blend(facial, ICON_OVERLAY)
-
-			if(H.h_style && !(H.head && (H.head.flags & BLOCKHEADHAIR)))
-				var/datum/sprite_accessory/hair_style = hair_styles_list[H.h_style]
-				if(hair_style)
-					var/icon/hair = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_l")
-					if(hair_style.do_colouration)
-						hair.Blend(rgb(H.r_hair, H.g_hair, H.b_hair), ICON_ADD)
-
-					base.Blend(hair, ICON_OVERLAY)
-
 	icon = base
+	dir = SOUTH
+	src.transform = turn(src.transform, rand(70,130))
 
 
 /****************************************************
@@ -864,6 +843,24 @@ obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 	if(istype(H))
 		src.icon_state = H.gender == MALE? "head_m" : "head_f"
 	..()
+	//Add (facial) hair.
+	if(H.f_style)
+		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[H.f_style]
+		if(facial_hair_style)
+			var/icon/facial = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
+			if(facial_hair_style.do_colouration)
+				facial.Blend(rgb(H.r_facial, H.g_facial, H.b_facial), ICON_ADD)
+
+			overlays.Add(facial) // icon.Blend(facial, ICON_OVERLAY)
+
+	if(H.h_style && !(H.head && (H.head.flags & BLOCKHEADHAIR)))
+		var/datum/sprite_accessory/hair_style = hair_styles_list[H.h_style]
+		if(hair_style)
+			var/icon/hair = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
+			if(hair_style.do_colouration)
+				hair.Blend(rgb(H.r_hair, H.g_hair, H.b_hair), ICON_ADD)
+
+			overlays.Add(hair) //icon.Blend(hair, ICON_OVERLAY)
 	spawn(5)
 	if(brainmob && brainmob.client)
 		brainmob.client.screen.len = null //clear the hud

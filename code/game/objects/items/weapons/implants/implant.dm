@@ -127,6 +127,7 @@ Implant Specifics:<BR>"}
 /obj/item/weapon/implant/explosive
 	name = "explosive implant"
 	desc = "A military grade micro bio-explosive. Highly dangerous."
+	var/elevel = "Localized Limb"
 	var/phrase = "supercalifragilisticexpialidocious"
 	icon_state = "implant_evil"
 
@@ -157,20 +158,50 @@ Implant Specifics:<BR>"}
 	activate()
 		if (malfunction == MALFUNCTION_PERMANENT)
 			return
+
+		var/need_gib = null
 		if(istype(imp_in, /mob/))
 			var/mob/T = imp_in
-
 			message_admins("Explosive implant triggered in [T] ([T.key]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>) ")
 			log_game("Explosive implant triggered in [T] ([T.key]).")
+			need_gib = 1
 
-			T.gib()
-		explosion(get_turf(imp_in), 1, 3, 4, 6, 3)
+			if(ishuman(imp_in))
+				if (elevel == "Localized Limb")
+					if(part) //For some reason, small_boom() didn't work. So have this bit of working copypaste.
+						imp_in.visible_message("\red Something beeps inside [imp_in][part ? "'s [part.display_name]" : ""]!")
+						playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
+						sleep(25)
+						if (istype(part,/datum/organ/external/chest) ||	\
+							istype(part,/datum/organ/external/groin) ||	\
+							istype(part,/datum/organ/external/head))
+							part.createwound(BRUISE, 60)	//mangle them instead
+							explosion(get_turf(imp_in), -1, -1, 2, 3)
+							del(src)
+						else
+							explosion(get_turf(imp_in), -1, -1, 2, 3)
+							part.droplimb(1)
+							del(src)
+				if (elevel == "Destroy Body")
+					explosion(get_turf(T), -1, 0, 1, 6)
+					T.gib()
+				if (elevel == "Full Explosion")
+					explosion(get_turf(T), 0, 1, 3, 6)
+					T.gib()
+
+			else
+				explosion(get_turf(imp_in), 0, 1, 3, 6)
+
+		if(need_gib)
+			imp_in.gib()
+
 		var/turf/t = get_turf(imp_in)
 
 		if(t)
 			t.hotspot_expose(3500,125)
 
 	implanted(mob/source as mob)
+		elevel = alert("What sort of explosion would you prefer?", "Implant Intent", "Localized Limb", "Destroy Body", "Full Explosion")
 		phrase = input("Choose activation phrase:") as text
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
 		phrase = sanitize_simple(phrase, replacechars)
@@ -215,7 +246,7 @@ Implant Specifics:<BR>"}
 						part.createwound(BRUISE, 60)	//mangle them instead
 					else
 						part.droplimb(1)
-				explosion(get_turf(imp_in), -1, -1, 2, 3, 3)
+				explosion(get_turf(imp_in), -1, -1, 2, 3)
 				del(src)
 
 /obj/item/weapon/implant/chem
