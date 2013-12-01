@@ -17,6 +17,7 @@
 							//If you died in the game and are a ghsot - this will remain as null.
 							//Note that this is not a reliable way to determine if admins started as observers, since they change mobs a lot.
 	var/has_enabled_antagHUD = 0
+	var/medHUD = 0
 	var/antagHUD = 0
 	universal_speak = 1
 	var/atom/movable/following = null
@@ -107,7 +108,61 @@ Works together with spawning an observer, noted above.
 				target_list += target
 		if(target_list.len)
 			assess_targets(target_list, src)
+	if(medHUD)
+		process_medHUD(src)
 
+
+// Direct copied from medical HUD glasses proc, used to determine what health bar to put over the targets head.
+/mob/dead/proc/RoundHealth(var/health)
+	switch(health)
+		if(100 to INFINITY)
+			return "health100"
+		if(70 to 100)
+			return "health80"
+		if(50 to 70)
+			return "health60"
+		if(30 to 50)
+			return "health40"
+		if(18 to 30)
+			return "health25"
+		if(5 to 18)
+			return "health10"
+		if(1 to 5)
+			return "health1"
+		if(-99 to 0)
+			return "health0"
+		else
+			return "health-100"
+	return "0"
+
+
+// Pretty much a direct copy of Medical HUD stuff, except will show ill if they are ill instead of also checking for known illnesses.
+
+/mob/dead/proc/process_medHUD(var/mob/M)
+	var/client/C = M.client
+	var/image/holder
+	for(var/mob/living/carbon/human/patient in oview(M))
+		var/foundVirus = 0
+		if(patient.virus2.len)
+			foundVirus = 1
+		if(!C) return 
+		holder = patient.hud_list[HEALTH_HUD]
+		if(patient.stat == 2)
+			holder.icon_state = "hudhealth-100"
+		else
+			holder.icon_state = "hud[RoundHealth(patient.health)]"
+		C.images += holder
+
+		holder = patient.hud_list[STATUS_HUD]
+		if(patient.stat == 2)
+			holder.icon_state = "huddead"
+		else if(patient.status_flags & XENO_HOST)
+			holder.icon_state = "hudxeno"
+		else if(foundVirus)
+			holder.icon_state = "hudill"
+		else
+			holder.icon_state = "hudhealthy"
+		C.images += holder	
 		
 
 /mob/dead/proc/assess_targets(list/target_list, mob/dead/observer/U)
@@ -237,6 +292,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	mind.current.ajourn=0
 	mind.current.key = key
 	return 1
+
+/mob/dead/observer/verb/toggle_medHUD()
+	set category = "Ghost"
+	set name = "Toggle MedicHUD"
+	set desc = "Toggles Medical HUD allowing you to see how everyone is doing"
+	if(!client)
+		return
+	if(medHUD)
+		medHUD = 0
+		src << "\blue <B>Medical HUD Disabled</B>"
+	else
+		medHUD = 1
+		src << "\blue <B>Medical HUD Enabled</B>"
 
 /mob/dead/observer/verb/toggle_antagHUD()
 	set category = "Ghost"
