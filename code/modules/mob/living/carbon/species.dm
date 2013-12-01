@@ -46,9 +46,9 @@
 
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR
 
-	abilities = list(
+	/*abilities = list(
 		/client/proc/test_ability,
-		)
+		)*/
 
 /datum/species/unathi
 	name = "Unathi"
@@ -71,10 +71,10 @@
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
-	abilities = list(
+	/*abilities = list(
 		/client/proc/test_ability,
 		/client/proc/unathi_ability
-		)
+		)*/
 
 /datum/species/tajaran
 	name = "Tajaran"
@@ -98,10 +98,10 @@
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
-	abilities = list(
+	/*abilities = list(
 		/client/proc/test_ability,
 		/client/proc/tajaran_ability
-		)
+		)*/
 
 /datum/species/skrell
 	name = "Skrell"
