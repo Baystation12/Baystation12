@@ -31,7 +31,7 @@ datum
 				var/datum/reagent/self = src
 				src = null										  //of the reagent to the mob on TOUCHING it.
 
-				if(!istype(self.holder.my_atom, /obj/effect/effect/chem_smoke))
+				if(!istype(self.holder.my_atom, /obj/effect/effect/smoke/chem))
 					// If the chemicals are in a smoke cloud, do not try to let the chemicals "penetrate" into the mob's system (balance station 13) -- Doohl
 
 					if(method == TOUCH)
@@ -2347,6 +2347,13 @@ datum
 			id = "grapejuice"
 			description = "It's grrrrrape!"
 			color = "#863333" // rgb: 134, 51, 51
+		
+		drink/grapesoda
+			name = "Grape Soda"
+			id = "grapesoda"
+			description = "Grapes made into a fine drank."
+			color = "#421C52" // rgb: 98, 57, 53
+			adj_drowsy 	= 	-3
 
 		drink/poisonberryjuice
 			name = "Poison Berry Juice"
@@ -2533,7 +2540,7 @@ datum
 			color = "#619494" // rgb: 97, 148, 148
 
 		drink/cold/space_cola
-			name = "Cola"
+			name = "Space Cola"
 			id = "cola"
 			description = "A refreshing beverage."
 			reagent_state = LIQUID
@@ -2556,7 +2563,7 @@ datum
 				return
 
 		drink/cold/spacemountainwind
-			name = "Space Mountain Wind"
+			name = "Mountain Wind"
 			id = "spacemountainwind"
 			description = "Blows right through you like a space wind."
 			color = "#102000" // rgb: 16, 32, 0

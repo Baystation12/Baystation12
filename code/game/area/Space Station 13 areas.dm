@@ -795,6 +795,14 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Dormitories"
 	icon_state = "Sleep"
 
+/area/crew_quarters/sleep/engi
+	name = "\improper Engineering Dormitories"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/sec
+	name = "\improper Security Dormitories"
+	icon_state = "Sleep"
+
 /area/crew_quarters/sleep_male
 	name = "\improper Male Dorm"
 	icon_state = "Sleep"
@@ -1320,6 +1328,10 @@ proc/process_ghost_teleport_locs()
 
 /area/toxins/misc_lab
 	name = "\improper Miscellaneous Research"
+	icon_state = "toxmisc"
+
+/area/toxins/telesci
+	name = "\improper Telescience Lab"
 	icon_state = "toxmisc"
 
 /area/toxins/server

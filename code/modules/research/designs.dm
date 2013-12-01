@@ -1340,6 +1340,28 @@ datum/design/nanopaste
 	build_type = PROTOLATHE
 	materials = list("$metal" = 7000, "$glass" = 7000)
 	build_path = "/obj/item/stack/nanopaste"
+
+datum/design/bluespacebeaker
+	name = "bluespace beaker"
+	desc = "A bluespace beaker, powered by experimental bluespace technology and Element Cuban combined with the Compound Pete. Can hold up to 300 units."
+	id = "bluespacebeaker"
+	req_tech = list("bluespace" = 2, "materials" = 6)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000, "$plasma" = 3000, "$diamond" = 500)
+	reliability_base = 76
+	build_path = "/obj/item/weapon/reagent_containers/glass/beaker/bluespace"
+	category = "Misc"
+
+datum/design/noreactbeaker
+	name = "cryostasis beaker"
+	desc = "A cryostasis beaker that allows for chemical storage without reactions. Can hold up to 50 units."
+	id = "splitbeaker"
+	req_tech = list("materials" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000)
+	reliability_base = 76
+	build_path = "/obj/item/weapon/reagent_containers/glass/beaker/noreact"
+	category = "Misc"
 /////////////////////////////////////////
 /////////////////Weapons/////////////////
 /////////////////////////////////////////
@@ -1552,6 +1574,16 @@ datum/design/bag_holding
 	materials = list("$gold" = 3000, "$diamond" = 1500, "$uranium" = 250)
 	reliability_base = 80
 	build_path = "/obj/item/weapon/storage/backpack/holding"
+
+datum/design/bluespace_crystal
+	name = "Artificial Bluespace Crystal"
+	desc = "A small blue crystal with mystical properties."
+	id = "bluespace_crystal"
+	req_tech = list("bluespace" = 5, "materials" = 7)
+	build_type = PROTOLATHE
+	materials = list("$gold" = 1500, "$diamond" = 3000, "$plasma" = 1500)
+	reliability_base = 100
+	build_path = "/obj/item/bluespace_crystal/artificial"
 
 /////////////////////////////////////////
 /////////////////HUDs////////////////////
