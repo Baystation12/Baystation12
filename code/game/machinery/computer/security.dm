@@ -347,6 +347,7 @@ What a mess.*/
 					P.info += "</TT>"
 					P.name = "paper - 'Security Record'"
 					printing = null
+					updateUsrDialog()
 //RECORD DELETE
 			if ("Delete All Records")
 				temp = ""

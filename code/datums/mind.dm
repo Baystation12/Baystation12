@@ -241,13 +241,13 @@ datum/mind
 		if(istype(current, /mob/living/carbon/human))
 			if (H.is_loyalty_implanted(H))
 				text +="traitor|<b>LOYAL EMPLOYEE</b>"
-		else
-			if (src in ticker.mode.traitors)
-				text += "<b>TRAITOR</b>|<a href='?src=\ref[src];traitor=clear'>Employee</a>"
-				if (objectives.len==0)
-					text += "<br>Objectives are empty! <a href='?src=\ref[src];traitor=autoobjectives'>Randomize</a>!"
 			else
-				text += "<a href='?src=\ref[src];traitor=traitor'>traitor</a>|<b>Employee</b>"
+				if (src in ticker.mode.traitors)
+					text += "<b>TRAITOR</b>|<a href='?src=\ref[src];traitor=clear'>Employee</a>"
+					if (objectives.len==0)
+						text += "<br>Objectives are empty! <a href='?src=\ref[src];traitor=autoobjectives'>Randomize</a>!"
+				else
+					text += "<a href='?src=\ref[src];traitor=traitor'>traitor</a>|<b>Employee</b>"
 		sections["traitor"] = text
 
 		/** MONKEY ***/
