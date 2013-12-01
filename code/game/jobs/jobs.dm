@@ -96,6 +96,7 @@ var/list/civilian_positions = list(
 	"Shaft Miner",
 	"Lawyer",
 	"Chaplain",
+	"Clown",	// *JMO* 20131129 Added for clown access
 	"Assistant"
 )
 

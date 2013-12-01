@@ -3,7 +3,7 @@ import time
 class IRC:
    queue = []
    partial = ''
-   def __init__ ( self, network, port, name, hostName, serverName, realName ):
+   def __init__ ( self, network, port, name, hostName, serverName, realName, password ):
       self.network =  network
       self.port = port
       self.hostName = hostName
@@ -14,6 +14,9 @@ class IRC:
       self.address = self.socket.getpeername()
       self.nick ( name )
       self.send ( 'USER ' + self.name + ' ' + self.serverName + ' ' + self.hostName + ' :' + self.realName )
+      # *JMO* 20131130 Added in password support. We're not caching the password as a safety measure.
+      if len(password) > 0:
+            self.send ( 'PASS ' + password )
    def quit ( self ):
       self.send ( 'QUIT' )
       self.socket.close()

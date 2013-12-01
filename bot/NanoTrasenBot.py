@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 # This script is shared under the
 # Creative Commons Attribution-ShareAlike 3.0 license (CC BY-SA 3.0)
 # Added clause to Attribution:
@@ -176,6 +176,7 @@ Network = CORE_DATA.Network
 channel = CORE_DATA.channel
 prefix = CORE_DATA.prefix
 Port = CORE_DATA.Port
+Password = CORE_DATA.Password
 # - - - - -
 pregen = CORE_DATA.version
 influx = ""
@@ -487,7 +488,7 @@ if heavy_psyco and psyco_exists:
 elif heavy_psyco and not psyco_exists:
    print "Heavy psyco couldn't be done because Psyco does not exist"
 try:
-   conn = irchat.IRC ( Network, Port, Name, "NT", "NT", "Trasen" )
+   conn = irchat.IRC ( Network, Port, Name, "NT", "NT", "Trasen", Password )
 except socket.error:
    print "Connection failed!"
 else:
@@ -1510,7 +1511,7 @@ while True:
             Name += "_"+version
             print "New name:",Name
             duplicate_notify = True
-            conn = irchat.IRC ( Network, Port, Name, "NT_"+version, "NT_"+version, "Trasen_"+version )
+            conn = irchat.IRC ( Network, Port, Name, "NT_"+version, "NT_"+version, "Trasen_"+version, Password )
             for i in CORE_DATA.channels:
                conn.join(i)
                sleep(0.5)
