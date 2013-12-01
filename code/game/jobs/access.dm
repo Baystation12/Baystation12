@@ -89,9 +89,18 @@
 /obj/var/req_access_txt = "0"
 /obj/var/list/req_one_access = null
 /obj/var/req_one_access_txt = "0"
-
+/obj/var/cargo_worth = 0
+var/list/good_exports = list()
+var/list/bad_exports = list()
 /obj/New()
 	..()
+	//Putting the Cargo point exporting code here, as it's the only spot with a /obj/New(). -Iamgoofball
+	src.cargo_worth = rand(1,10)
+	if(cargo_worth >= 5)
+		good_exports.Add(src)
+	if(cargo_worth < 5)
+		bad_exports.Add(src)
+
 	//NOTE: If a room requires more than one access (IE: Morgue + medbay) set the req_acesss_txt to "5;6" if it requires 5 and 6
 	if(src.req_access_txt)
 		var/list/req_access_str = text2list(req_access_txt,";")
