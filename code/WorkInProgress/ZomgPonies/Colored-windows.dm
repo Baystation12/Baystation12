@@ -19,7 +19,6 @@ var/global/wcCommon
 
 	//BRIG
 	var/wsBrigList = list(
-		/area/security/armoury,
 		/area/security/brig,
 		/area/security/detectives_office,
 		/area/security/hos,
@@ -27,9 +26,11 @@ var/global/wcCommon
 		/area/security/main,
 		/area/security/prison,
 		/area/security/warden,
+		/area/security/range,
 		/area/prison/cell_block/A,
 		/area/prison/cell_block/B,
-		/area/security/processing
+		/area/security/processing,
+		/area/security/armoury
 
 		)
 
