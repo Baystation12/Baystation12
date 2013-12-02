@@ -222,3 +222,7 @@
 	var/turf/listed_turf = null  //the current turf being examined in the stat panel
 
 	var/kills=0
+
+
+	var/list/active_genes=list()
+
