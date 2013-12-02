@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 29/05/2012 15:03:04
 
 /datum/event/ionstorm
-	var/botEmagChance = 0.5
+	var/botEmagChance = 20
 	var/list/players = list()
 
 /datum/event/ionstorm/announce()
@@ -48,8 +48,9 @@
 		target << law
 		target.add_ion_law(law)
 	score_eventsendured++
+
 /datum/event/ionstorm/tick()
-	if(botEmagChance)
+	if (botEmagChance && activeFor%20)
 		for(var/obj/machinery/bot/bot in world)
 			if(prob(botEmagChance))
 				bot.Emag()
