@@ -2257,13 +2257,27 @@ datum
 			name = "Amatoxin"
 			id = "amatoxin"
 			description = "A powerful poison derived from certain species of mushroom."
+			custom_metabolism = 0.1
 			color = "#792300" // rgb: 121, 35, 0
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.adjustToxLoss(1*REM)
+				if(!data) data = 1
+				data++
 				..()
 				return
+
+			Del()
+				if (istype(holder.my_atom,/mob/living))
+					var/mob/living/M as mob
+					var/to_remove = 0
+					if(!M) M = holder.my_atom
+					if (holder.has_reagent("anti_toxin"))
+						to_remove = min(holder.get_reagent_amount("anti_toxin"),data)
+						holder.remove_reagent("anti_toxin", to_remove, 0)
+						data -= to_remove
+					M.adjustToxLoss(data)
+				..()
 
 		psilocybin
 			name = "Psilocybin"
