@@ -52,11 +52,8 @@ var/global/list/possibleEvents = list()
 	possibleEvents[/datum/event/falsealarm] = 300
 //	possibleEvents[/datum/event/immovable_rod] = 200
 	possibleEvents[/datum/event/vent_clog] = 300
-	possibleEvents[/datum/event/anomaly/anomaly_bluespace] = 100
-	possibleEvents[/datum/event/anomaly/anomaly_flux] = 200
 	possibleEvents[/datum/event/anomaly/anomaly_grav] = 200
-	possibleEvents[/datum/event/anomaly/anomaly_pyro] = 200
-	possibleEvents[/datum/event/anomaly/anomaly_vortex] = 150
+
 	possibleEvents[/datum/event/weightless] = 150
 	possibleEvents[/datum/event/wormholes] = 150
 
@@ -79,14 +76,16 @@ var/global/list/possibleEvents = list()
 	possibleEvents[/datum/event/electrical_storm] = 10 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Botanist"]
 
-
-
 	if(!spacevines_spawned)
 		possibleEvents[/datum/event/spacevine] = 25 + 5 * active_with_role["Engineer"]
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/meteor_shower] = 40 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/blob] = 20 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/anomaly/anomaly_pyro] = 100 + 50 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/anomaly/anomaly_vortex] = 50 + 20 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/anomaly/anomaly_bluespace] = 50 + 15 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/anomaly/anomaly_flux] = 50 + 50 * active_with_role["Engineer"]
 
 	possibleEvents[/datum/event/viral_infection] = 25 + active_with_role["Medical"] * 100
 	if(active_with_role["Medical"] > 0)
