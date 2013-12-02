@@ -2,11 +2,11 @@
 Creature-level abilities.
 */
 
-/*/var/global/list/ability_verbs = list(
-	/client/proc/test_ability,
+/var/global/list/ability_verbs = list(
+	/*/client/proc/test_ability,
 	/client/proc/tajaran_ability,
-	/client/proc/unathi_ability
-	)*/
+	/client/proc/unathi_ability*/
+	)
 
 /client/proc/test_ability()
 
