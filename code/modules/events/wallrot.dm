@@ -11,7 +11,7 @@ datum/event/wallrot/setup()
 
 datum/event/wallrot/announce()
 	command_alert("Harmful fungi detected on station. Station structures may be contaminated.", "Biohazard Alert")
-	score_eventsendured++
+
 datum/event/wallrot/start()
 	spawn()
 		var/turf/center = null

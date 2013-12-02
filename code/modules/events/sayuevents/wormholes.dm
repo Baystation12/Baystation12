@@ -25,7 +25,7 @@
 	for(var/mob/M in player_list)
 		if(!istype(M, /mob/new_player))
 			M << sound('sound/AI/spanomalies.ogg')
-	score_eventsendured++
+
 /datum/event/wormholes/tick()
 	if(activeFor % shift_frequency == 0)
 		for(var/obj/effect/portal/wormhole/O in wormholes)

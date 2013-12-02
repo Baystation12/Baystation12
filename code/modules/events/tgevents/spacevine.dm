@@ -18,7 +18,7 @@
 		var/turf/simulated/floor/T = pick(turfs)
 		spawn(0)	new/obj/effect/spacevine_controller(T) //spawn a controller at turf
 		spacevines_spawned = 1
-	score_eventsendured++
+
 
 
 

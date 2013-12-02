@@ -47,7 +47,6 @@
 		target << "\red <b>You have detected a change in your laws information:</b>"
 		target << law
 		target.add_ion_law(law)
-	score_eventsendured++
 
 /datum/event/ionstorm/tick()
 	if (botEmagChance && activeFor%20)
