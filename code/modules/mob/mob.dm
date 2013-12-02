@@ -940,13 +940,15 @@ mob/verb/yank_out_object()
 			if("Mouse")
 				respawnable_list -= usr
 				become_mouse()
-				respawnable_list += usr
+				spawn(5)
+					respawnable_list += usr
 			else
 				var/mob/living/simple_animal/picked_animal = picked
 				if(istype(picked_animal) && !picked_animal.key)
 					respawnable_list -= usr
 					picked_animal.key = key
-					respawnable_list += usr
+					spawn(5)
+						respawnable_list += usr
 				else
 //					message_admins("Failed to check type")
 	else
