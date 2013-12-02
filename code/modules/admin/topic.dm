@@ -2107,7 +2107,7 @@
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","PB")
 				message_admins("[key_name_admin(usr)] has allowed a prison break", 1)
-				prison_break()
+				new /datum/event/prison_break
 			if("radiation")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","RAD")
@@ -2239,7 +2239,7 @@
 			if("ionstorm")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","I")
-				IonStorm()
+				new /datum/event/ionstorm
 				message_admins("[key_name_admin(usr)] triggered an ion storm")
 				var/show_log = alert(usr, "Show ion message?", "Message", "Yes", "No")
 				if(show_log == "Yes")
@@ -2248,7 +2248,7 @@
 			if("carp")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","Crp")
-				carp_migration()
+				new /datum/event/carp_migration
 				message_admins("[key_name_admin(usr)] triggered a carp migration")
 			if("spiders")
 				feedback_inc("admin_secrets_fun_used",1)
@@ -2258,7 +2258,7 @@
 			if("spacevines")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","K")
-				//new /datum/event/spacevine
+				new /datum/event/spacevine
 				message_admins("[key_name_admin(usr)] has spawned spacevines", 1)
 			if("vent_clog")
 				feedback_inc("admin_secrets_fun_used",1)
