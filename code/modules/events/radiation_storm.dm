@@ -13,7 +13,7 @@
 
 /datum/event/radiation_storm/announce()
 	// Don't do anything, we want to pack the announcement with the actual event
-	score_eventsendured++
+
 /datum/event/radiation_storm/proc/is_safe_zone(var/area/A)
 	for(var/szt in safe_zones)
 		if(istype(A, szt))

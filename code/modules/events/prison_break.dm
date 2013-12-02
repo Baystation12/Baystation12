@@ -20,7 +20,7 @@
 	else
 		world.log << "ERROR: Could not initate grey-tide. Unable find prison or brig area."
 		kill()
-	score_eventsendured++
+
 
 /datum/event/prison_break/start()
 	for(var/area/A in world)

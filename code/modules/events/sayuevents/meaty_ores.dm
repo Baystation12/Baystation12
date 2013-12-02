@@ -4,7 +4,7 @@
 	else
 		command_alert("Meaty ores have been detected on collision course with the station.", "Meaty Ore Alert")
 		world << sound('sound/AI/meteors.ogg')
-	score_eventsendured++
+
 /datum/event/dust/meaty/setup()
 	qnty = rand(45,125)
 

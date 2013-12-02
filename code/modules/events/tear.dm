@@ -6,7 +6,7 @@
 
 /datum/event/tear/announce()
 	command_alert("A tear in the fabric of space and time has opened. Expected location: [impact_area.name].", "Anomaly Alert")
-	score_eventsendured++
+
 
 /datum/event/tear/start()
 	var/turf/T = pick(get_area_turfs(impact_area))

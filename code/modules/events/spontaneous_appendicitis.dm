@@ -11,4 +11,3 @@
 		D.affected_mob = H
 		H.viruses += D
 		break
-	score_eventsendured++

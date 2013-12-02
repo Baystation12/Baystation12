@@ -8,9 +8,9 @@ datum/event/viral_infection/setup()
 	severity = rand(1, 3)
 
 datum/event/viral_infection/announce()
-	command_alert("Confirmed outbreak of level five biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+	command_alert("Confirmed outbreak of level five viral biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
 	world << sound('sound/AI/outbreak5.ogg')
-	score_eventsendured++
+
 datum/event/viral_infection/start()
 	var/list/candidates = list()	//list of candidate keys
 	for(var/mob/living/carbon/human/G in player_list)

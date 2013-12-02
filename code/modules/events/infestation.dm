@@ -103,7 +103,7 @@
 
 /datum/event/infestation/announce()
 	command_alert("Bioscans indicate that [vermstring] have been breeding in [locstring]. Clear them out, before this starts to affect productivity.", "Vermin infestation")
-	score_eventsendured++
+
 #undef LOC_KITCHEN
 #undef LOC_ATMOS
 #undef LOC_INCIN

@@ -8,7 +8,7 @@
 
 /datum/event/weightless/announce()
 	command_alert("Warning: Failsafes for the station's artificial gravity arrays have been triggered. Please be aware that if this problem recurs it may result in formation of gravitational anomalies. Nanotrasen wishes to remind you that the unauthorised formation of anomalies within Nanotrasen facilities is strictly prohibited by health and safety regulation [rand(99,9999)][pick("a","b","c")]:subclause[rand(1,20)][pick("a","b","c")].")
-	score_eventsendured++
+
 /datum/event/weightless/start()
 	for(var/area/A in world)
 		if (A.z != 1) continue	//Don't turn off gravity on non-station z-levels.

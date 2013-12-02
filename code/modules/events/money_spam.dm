@@ -9,7 +9,7 @@
 		if(MS.active)
 			useMS = MS
 			break
-	score_eventsendured++
+
 /datum/event/pda_spam/tick()
 	if(!useMS || !useMS.active)
 		useMS = null

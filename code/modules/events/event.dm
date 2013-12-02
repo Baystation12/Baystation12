@@ -78,6 +78,7 @@
 /datum/event/New()
 	setup()
 	events.Add(src)
+	score_eventsendured++
 	/*if(oneShot)
 		potentialRandomEvents.Remove(type)*/
 	..()

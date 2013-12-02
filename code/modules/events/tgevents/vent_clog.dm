@@ -8,7 +8,7 @@
 
 /datum/event/vent_clog/announce()
 	command_alert("The scrubbers network is experiencing a backpressure surge.  Some ejection of contents may occur.", "Atmospherics alert")
-	score_eventsendured++
+
 
 /datum/event/vent_clog/setup()
 	endWhen = rand(25, 100)
@@ -24,7 +24,8 @@
 		var/list/gunk = list("water","carbon","flour","radium","toxin","cleaner","nutriment","condensedcapsaicin","psilocybin","lube",
 							"plantbgone","banana","anti_toxin","space_drugs","hyperzine","holywater","ethanol","hot_coco","pacid",
 							"blood","stoxin","fluorine","ryetalyn","mutagen","oxycodone","fuel","cryptobiolin",
-							"impedrezene","mindbreaker","nanites","xenomicrobes","lipozine","frostoil","doctorsdelight","beepskysmash","tricordrazine")
+							"impedrezene","mindbreaker","nanites","xenomicrobes","lipozine","frostoil","doctorsdelight","beepskysmash",
+							"tricordrazine", "amatoxin", "adminordrazine", "neurotoxin", "zombiepowder", "synaptizine")
 		var/datum/reagents/R = new/datum/reagents(50)
 		R.my_atom = vent
 		R.add_reagent(pick(gunk), 50)
