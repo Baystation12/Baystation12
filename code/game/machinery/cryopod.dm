@@ -6,9 +6,99 @@
  * ~ Zuhayr
  */
 
+//Used for logging people entering cryosleep and important items they are carrying.
+var/global/list/frozen_crew = list()
+var/global/list/frozen_items = list()
+
 //Main cryopod console.
 
+/obj/machinery/computer/cryopod
+	name = "cryogenic oversight console"
+	desc = "An interface between crew and the cryogenic storage oversight systems."
+	icon_state = "teleport"
+	circuit = "/obj/item/weapon/circuitboard/cryopodcontrol"
+	var/mode = null
 
+/obj/machinery/computer/cryopod/attack_paw()
+	src.attack_hand()
+
+/obj/machinery/computer/cryopod/attack_ai()
+	src.attack_hand()
+
+obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
+	if(stat & (NOPOWER|BROKEN))
+		return
+
+	user.set_machine(src)
+	src.add_fingerprint(usr)
+
+	var/dat
+
+	if (!( ticker ))
+		return
+
+	dat += "<hr/><br/><b>Cryogenic Oversight Control</b><br/>"
+	dat += "<i>Welcome, [user.real_name].</i><br/><br/><hr/>"
+	dat += "<a href='?src=\ref[src];log=1'>View storage log</a>.<br>"
+	dat += "<a href='?src=\ref[src];item=1'>Recover object</a>.<br>"
+	dat += "<a href='?src=\ref[src];allitems=1'>Recover all objects</a>.<br>"
+	dat += "<a href='?src=\ref[src];crew=1'>Revive crew</a>.<br/><hr/>"
+
+	user << browse(dat, "window=cryopod_console")
+	onclose(user, "cryopod_console")
+
+obj/machinery/computer/cryopod/Topic(href, href_list)
+
+	if(..())
+		return
+
+	var/mob/user = usr
+
+	src.add_fingerprint(user)
+
+	if(href_list["log"])
+
+		user << "You clicked log! :D"
+	else if(href_list["item"])
+
+		if(frozen_items.len == 0)
+			user << "\blue There is nothing to recover from storage."
+			return
+
+		var/obj/item/I = input(usr, "Please choose which object to retrieve.","Object recovery",null) as obj in frozen_items
+
+		if(!I || frozen_items.len == 0)
+			user << "\blue There is nothing to recover from storage."
+			return
+
+		visible_message("\blue The console beeps happily as it disgorges \the [I].", 3)
+
+		I.loc = get_turf(src)
+		frozen_items -= I
+
+	else if(href_list["allitems"])
+
+		if(frozen_items.len == 0)
+			user << "\blue There is nothing to recover from storage."
+			return
+
+		visible_message("\blue The console beeps happily as it disgorges the desired objects.", 3)
+
+		for(var/obj/item/I in frozen_items)
+			I.loc = get_turf(src)
+			frozen_items -= I
+
+	else if(href_list["crew"])
+
+		user << "You clicked crew! :D"
+
+	src.updateUsrDialog()
+	return
+
+/obj/item/weapon/circuitboard/cryopodcontrol
+	name = "Circuit board (Cryogenic Oversight Console)"
+	build_path = "/obj/machinery/computer/cryopod"
+	origin_tech = "programming=3"
 
 //Decorative structures to go alongside cryopods.
 /obj/structure/cryofeed
@@ -98,7 +188,10 @@
 						preserve = 1
 						break
 
-				if(!preserve) del(W)
+				if(!preserve)
+					del(W)
+				else
+					frozen_items += W
 
 			var/job = occupant.mind.assigned_role
 			var/role = occupant.mind.special_role
@@ -135,11 +228,15 @@
 			occupant.ckey = null
 
 			//Make an announcement and log the person entering storage.
+			frozen_crew += "[occupant.real_name]"
+
 			announce.autosay("[occupant.real_name] has entered long-term storage.", "Cryogenic Oversight")
+			visible_message("\blue The crypod hums and hisses as it moves [occupant.real_name] into storage.", 3)
 
 			// Delete the mob.
 			del(occupant)
 			occupant = null
+
 
 	return
 
