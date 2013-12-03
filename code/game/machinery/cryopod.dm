@@ -15,7 +15,8 @@ var/global/list/frozen_items = list()
 /obj/machinery/computer/cryopod
 	name = "cryogenic oversight console"
 	desc = "An interface between crew and the cryogenic storage oversight systems."
-	icon_state = "teleport"
+	icon = 'icons/obj/Cryogenic2.dmi'
+	icon_state = "cellconsole"
 	circuit = "/obj/item/weapon/circuitboard/cryopodcontrol"
 	var/mode = null
 
@@ -58,7 +59,13 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 	if(href_list["log"])
 
-		user << "You clicked log! :D"
+		var/dat = "<b>Recently stored crewmembers</b><br/><hr/><br/>"
+		for(var/person in frozen_crew)
+			dat += "[person]<br/>"
+		dat += "<hr/>"
+
+		user << browse(dat, "window=cryolog")
+
 	else if(href_list["item"])
 
 		if(frozen_items.len == 0)
@@ -90,7 +97,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 	else if(href_list["crew"])
 
-		user << "You clicked crew! :D"
+		user << "\red Functionality unavailable at this time."
 
 	src.updateUsrDialog()
 	return
@@ -132,13 +139,13 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	density = 1
 	anchored = 1
 
-	var/mob/occupant = null      //Person waiting to be despawned.
-	var/orient_right = null      //Flips the sprite.
-	var/time_till_despawn = 10   //(9000 ticks) 15 minutes-ish safe period before being despawned.
-	var/time_entered = 0         //Used to keep track of the safe period.
+	var/mob/occupant = null      // Person waiting to be despawned.
+	var/orient_right = null      // Flips the sprite.
+	var/time_till_despawn = 9000 // 15 minutes-ish safe period before being despawned.
+	var/time_entered = 0         // Used to keep track of the safe period.
 	var/obj/item/device/radio/intercom/announce //
 
-	//These items are preserved when the process() despawn proc occurs.
+	// These items are preserved when the process() despawn proc occurs.
 	var/list/preserve_items = list(
 		/obj/item/weapon/hand_tele,
 		/obj/item/weapon/card/id/captains_spare,
@@ -325,7 +332,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 			usr << "You're too busy getting your life sucked out of you."
 			return
 
-	visible_message("[usr] starts climbing into the sleeper.", 3)
+	visible_message("[usr] starts climbing into the cryo pod.", 3)
 
 	if(do_after(usr, 20))
 
