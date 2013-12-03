@@ -10,10 +10,10 @@
 	icon_state = "dispenser"
 	use_power = 0
 	idle_power_usage = 40
-	var/ui_name = "Chem Dispenser 5000" 
+	var/ui_name = "Chem Dispenser 5000"
 	var/energy = 100
 	var/max_energy = 100
-	var/amount = 30	
+	var/amount = 30
 	var/accept_glass = 0
 	var/beaker = null
 	var/recharged = 0
@@ -447,6 +447,8 @@
 
 			var/amount_per_pill = reagents.total_volume/count
 			if (amount_per_pill > 50) amount_per_pill = 50
+
+			var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"))
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
