@@ -26,18 +26,22 @@
 	ninja.assigned_role = "MODE" //So they aren't chosen for other jobs.
 	ninja.special_role = "Ninja"
 	ninja.original = ninja.current
-	if(ninjastart.len == 0)
+
+	/*if(ninjastart.len == 0)
 		ninja.current << "<B>\red A proper starting location for you could not be found, please report this bug!</B>"
-		ninja.current << "<B>\red Attempting to place at a carpspawn.</B>"
-		for(var/obj/effect/landmark/L in landmarks_list)
-			if(L.name == "carpspawn")
-				ninjastart.Add(L)
-		if(ninjastart.len == 0 && latejoin.len > 0)
-			ninja.current << "<B>\red Still no spawneable locations could be found. Defaulting to latejoin.</B>"
-			return 1
-		else if (ninjastart.len == 0)
-			ninja.current << "<B>\red Still no spawneable locations could be found. Aborting.</B>"
-			return 0
+		ninja.current << "<B>\red Attempting to place at a carpspawn.</B>"*/
+
+	//Until such a time as people want to place ninja spawn points, carpspawn will do fine.
+	for(var/obj/effect/landmark/L in landmarks_list)
+		if(L.name == "carpspawn")
+			ninjastart.Add(L)
+	if(ninjastart.len == 0 && latejoin.len > 0)
+		ninja.current << "<B>\red No spawneable locations could be found. Defaulting to latejoin.</B>"
+		return 1
+	else if (ninjastart.len == 0)
+		ninja.current << "<B>\red No spawneable locations could be found. Aborting.</B>"
+		return 0
+
 	return 1
 
 /datum/game_mode/ninja/pre_setup()
@@ -50,7 +54,7 @@
 /datum/game_mode/ninja/post_setup()
 	for(var/datum/mind/ninja in ninjas)
 		if(ninja.current && !(istype(ninja.current,/mob/living/carbon/human))) return 0
-		//forge_ninja_objectives(ninja)
+		forge_ninja_objectives(ninja)
 		var/mob/living/carbon/human/N = ninja.current
 		N.internal = N.s_store
 		N.internals.icon_state = "internal1"
@@ -78,7 +82,8 @@
 		return 1
 
 /datum/game_mode/ninja/proc/forge_ninja_objectives(var/datum/mind/ninja)
-	var/objective_list[] = list(1,2,3,4,5)
+
+	var/objective_list = list(1,2,3,4,5)
 	for(var/i=rand(2,4),i>0,i--)
 		switch(pick(objective_list))
 			if(1)//Kill

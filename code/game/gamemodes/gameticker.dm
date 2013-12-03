@@ -118,6 +118,7 @@ var/global/datum/controller/gameticker/ticker
 	data_core.manifest()
 	current_state = GAME_STATE_PLAYING
 
+	callHook("roundstart")
 
 	//here to initialize the random events nicely at round start
 	setup_economy()
@@ -309,6 +310,8 @@ var/global/datum/controller/gameticker/ticker
 				declare_completion()
 
 			spawn(50)
+				callHook("roundend")
+
 				if (mode.station_was_nuked)
 					feedback_set_details("end_proper","nuke")
 					if(!delay_end)
