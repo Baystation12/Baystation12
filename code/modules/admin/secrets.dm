@@ -83,6 +83,7 @@
 					<A href='?src=\ref[src];secretsfun=spiders'>Trigger a Spider infestation</A><BR>
 					<A href='?src=\ref[src];secretsfun=spaceninja'>Send in a space ninja</A><BR>
 					<A href='?src=\ref[src];secretsfun=striketeam'>Send in a strike team</A><BR>
+					<A href='?src=\ref[src];secretsfun=striketeam_syndicate'>Send inn a syndicate strike team</A><BR>
 					<A href='?src=\ref[src];secretsfun=honksquad'>Send in a HONKsquad</A><BR>
 					<A href='?src=\ref[src];secretsfun=carp'>Trigger an Carp migration</A><BR>
 					<A href='?src=\ref[src];secretsfun=radiation'>Irradiate the station</A><BR>
