@@ -6,6 +6,10 @@
  * ~ Zuhayr
  */
 
+//Main cryopod console.
+
+
+
 //Decorative structures to go alongside cryopods.
 /obj/structure/cryofeed
 
@@ -19,6 +23,7 @@
 
 /obj/structure/cryofeed/right
 	orient_right = 1
+	icon_state = "cryo_rear-r"
 
 /obj/structure/cryofeed/New()
 
@@ -39,13 +44,32 @@
 
 	var/mob/occupant = null      //Person waiting to be despawned.
 	var/orient_right = null      //Flips the sprite.
-	var/time_till_despawn = 9000 //15 minutes-ish safe period before being despawned.
+	var/time_till_despawn = 10   //(9000 ticks) 15 minutes-ish safe period before being despawned.
 	var/time_entered = 0         //Used to keep track of the safe period.
+	var/obj/item/device/radio/intercom/announce //
+
+	//These items are preserved when the process() despawn proc occurs.
+	var/list/preserve_items = list(
+		/obj/item/weapon/hand_tele,
+		/obj/item/weapon/card/id/captains_spare,
+		/obj/item/device/aicard,
+		/obj/item/device/mmi,
+		/obj/item/device/paicard,
+		/obj/item/weapon/gun,
+		/obj/item/weapon/pinpointer,
+		/obj/item/clothing/suit,
+		/obj/item/clothing/shoes/magboots,
+		/obj/item/blueprints,
+		/obj/item/clothing/head/helmet/space/
+	)
 
 /obj/machinery/cryopod/right
 	orient_right = 1
+	icon_state = "body_scanner_0-r"
 
 /obj/machinery/cryopod/New()
+
+	announce = new /obj/item/device/radio/intercom(src)
 
 	if(orient_right)
 		icon_state = "body_scanner_0-r"
@@ -62,10 +86,19 @@
 			return
 
 		if(!occupant.client && occupant.stat<2) //Occupant is living and has no client.
+
+			//Delete all items not on the preservation list and drop all others into the pod.
 			for(var/obj/item/W in occupant)
-				//TODO: More complex/interesting code for storage/recovery of specific items.
 				occupant.drop_from_inventory(W)
 				W.loc = src
+
+				var/preserve = null
+				for(var/T in preserve_items)
+					if(istype(W,T))
+						preserve = 1
+						break
+
+				if(!preserve) del(W)
 
 			var/job = occupant.mind.assigned_role
 			var/role = occupant.mind.special_role
@@ -100,6 +133,9 @@
 
 			//This should guarantee that ghosts don't spawn.
 			occupant.ckey = null
+
+			//Make an announcement and log the person entering storage.
+			announce.autosay("[occupant.real_name] has entered long-term storage.", "Cryogenic Oversight")
 
 			// Delete the mob.
 			del(occupant)
