@@ -800,7 +800,8 @@
 		if(!can_use(usr, 1))
 			return
 	src.add_fingerprint(usr)
-	usr.set_machine(src)
+	if(usingUI) // If we set their machine and they're not using the UI, it'll cause the UI to pop up.
+		usr.set_machine(src)
 	if (href_list["apcwires"])
 		var/t1 = text2num(href_list["apcwires"])
 		if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
