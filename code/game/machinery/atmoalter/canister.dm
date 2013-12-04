@@ -255,6 +255,8 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?sr
 
 		if (href_list["remove_tank"])
 			if(holding)
+				if(istype(holding, /obj/item/weapon/tank))
+					holding.manipulated_by = usr.real_name
 				holding.loc = loc
 				holding = null
 
