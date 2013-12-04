@@ -63,13 +63,15 @@ emp_act
 		for(var/bp in body_parts) //Make an unregulated var to pass around.
 			if(!bp)
 				continue //Does this thing we're shooting even exist?
-			if(bp && istype(bp,/obj/item/clothing/suit/space))
-				visible_message("\red <B>The [P.name] gets deflected by [src]'s [wear_suit.name]!</B>")
-				del P
 			if(bp && istype(bp ,/obj/item/clothing)) // If it exists, and it's clothed
 				var/obj/item/clothing/C = bp // Then call an argument C to be that clothing!
 				if(C.body_parts_covered & select_area.body_part) // Is that body part being targeted covered?
-					P.agony=P.agony*C.siemens_coefficient
+					if(istype(C, /obj/item/clothing/suit/space) || istype(C, /obj/item/clothing/suit/armor))
+						visible_message("\red <B>The [P.name] gets deflected by [src]'s [wear_suit.name]!</B>")
+						del P
+						return
+					else
+						P.agony=P.agony*C.siemens_coefficient
 		apply_effect(P.agony,AGONY,0)
 		flash_pain()
 		src <<"\red You have been shot!"
