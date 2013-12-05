@@ -1042,6 +1042,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if(5)
 			if((istype(A, /obj/item/weapon/tank)) || (istype(A, /obj/machinery/portable_atmospherics)))
+				if(istype(A, /obj/item/weapon/tank))
+					var/obj/item/weapon/tank/t = A
+					t.manipulated_by = user.real_name
 				var/obj/icon = A
 				for (var/mob/O in viewers(user, null))
 					O << "\red [user] has used [src] on \icon[icon] [A]"
