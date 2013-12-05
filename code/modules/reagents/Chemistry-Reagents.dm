@@ -1480,7 +1480,7 @@ datum
 					if(prob(98))	randmutb(M)
 					else			randmutg(M)
 					domutcheck(M, null)
-					updateappearance(M,M.dna.uni_identity)
+					M.UpdateAppearance()
 				return
 			on_mob_life(var/mob/living/carbon/M)
 				if(!istype(M))	return
