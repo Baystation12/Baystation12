@@ -10,8 +10,7 @@
 /datum/event/brand_intelligence/announce()
 	command_alert("Rampant brand intelligence has been detected aboard [station_name()], please stand-by. The origin is believed to be \a [originMachine.name].", "Machine Learning Alert")
 
-
-/datum/event/brand_intelligence/start()
+/datum/event/brand_intelligence/setup()
 	for(var/obj/machinery/vending/V in machines)
 		if(V.z != 1)	continue
 		vendingMachines.Add(V)
@@ -22,6 +21,8 @@
 
 	originMachine = pick(vendingMachines)
 	vendingMachines.Remove(originMachine)
+
+/datum/event/brand_intelligence/start()
 	originMachine.shut_up = 0
 	originMachine.shoot_inventory = 1
 
