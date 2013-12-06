@@ -162,11 +162,6 @@
 		var/trueX = Clamp(round(proj_data.dest_x, 1), 1, world.maxx)
 		var/trueY = Clamp(round(proj_data.dest_y, 1), 1, world.maxy)
 		var/spawn_time = round(proj_data.time) * 10
-		if(isnull(trueX) || !trueX || isnull(trueY) || !trueY || isnull(z_co) || !z_co || z_co == 2) //SANITY CHECK OH GOD   (This really shouldn't happen but if it does, here we go!)
-			investigate_log("[key_name(usr)]/[user] Tried teleporting but range was out of boundsi","telesci")
-			playsound(telepad.loc, 'sound/weapons/flash.ogg', 25, 1)
-			temp_msg = "ERROR!<BR>Division by Zero!"
-			return
 
 		var/turf/target = locate(trueX, trueY, z_co)
 		var/area/A = get_area(target)
