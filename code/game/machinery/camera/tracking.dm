@@ -4,7 +4,7 @@
 		return
 
 	var/list/L = list()
-	for (var/obj/machinery/camera/C in cameranet.cameras)
+	for (var/obj/machinery/camera/C in cameranet.viewpoints)
 		L.Add(C)
 
 	camera_sort(L)
@@ -221,6 +221,7 @@
 	else if(!cameranet.checkCameraVis(M))
 		return 0
 	return 1
+
 
 /obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (!istype(user))

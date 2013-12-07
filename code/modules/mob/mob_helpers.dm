@@ -101,7 +101,7 @@ proc/isembryo(A)
 	return 0
 
 /proc/isAIEye(A)
-	if(istype(A, /mob/camera/aiEye))
+	if(istype(A, /mob/aiEye))
 		return 1
 	return 0
 

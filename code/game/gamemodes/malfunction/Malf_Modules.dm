@@ -218,9 +218,10 @@ rcd light flash thingy on matter drain
 	uses = 10
 	cost = 15
 
-	power_type = /mob/living/silicon/ai/proc/reactivate_camera
+	power_type = /client/proc/reactivate_camera
 
-/mob/living/silicon/ai/proc/reactivate_camera(obj/machinery/camera/C as obj in cameranet.cameras)
+
+/client/proc/reactivate_camera(obj/machinery/camera/C as obj in cameranet.viewpoints)
 	set name = "Reactivate Camera"
 	set category = "Malfunction"
 	if (istype (C, /obj/machinery/camera))
@@ -241,9 +242,9 @@ rcd light flash thingy on matter drain
 	uses = 10
 	cost = 15
 
-	power_type = /mob/living/silicon/ai/proc/upgrade_camera
+	power_type = /client/proc/upgrade_camera
 
-/mob/living/silicon/ai/proc/upgrade_camera(obj/machinery/camera/C as obj in cameranet.cameras)
+/client/proc/upgrade_camera(obj/machinery/camera/C as obj in cameranet.viewpoints)
 	set name = "Upgrade Camera"
 	set category = "Malfunction"
 	if(istype(C))
