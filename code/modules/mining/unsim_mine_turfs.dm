@@ -148,7 +148,6 @@
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 /turf/unsimulated/mineral/random/New()
-	..()
 	if (prob(mineralChance))
 		var/mName = pickweight(mineralSpawnChanceList) //temp mineral name
 
@@ -172,6 +171,7 @@
 				if("Clown")
 					M = new/turf/unsimulated/mineral/clown(src)
 			if(M)
+				..()
 				src = M
 				M.levelupdate()
 
