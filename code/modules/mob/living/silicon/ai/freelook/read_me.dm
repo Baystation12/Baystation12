@@ -43,7 +43,7 @@
 
  WHERE IS EVERYTHING?
 
- cameranet.dm	=	Everything about the cameranet datum.
+ cameraNetwork.dm	=	Everything about the cameraNetwork datum.
  chunk.dm		=	Everything about the chunk datum.
  eye.dm			=	Everything about the AI and the AIEye.
  updating.dm	=	Everything about triggers that will update chunks.

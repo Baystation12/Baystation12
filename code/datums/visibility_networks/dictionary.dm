@@ -1,4 +1,4 @@
-var/datum/visibility_network/cameras/cameraNetwork = new()
+var/datum/visibility_network/cameras/cameranet = new()
 var/datum/visibility_network/cult/cultNetwork = new()
 var/datum/visibility_network/list/visibility_networks = list("ALL_CAMERAS"=cameraNetwork, "CULT" = cultNetwork)
 
