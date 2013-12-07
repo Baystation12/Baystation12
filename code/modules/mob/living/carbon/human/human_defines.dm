@@ -55,5 +55,5 @@
 
 	var/mob/remoteview_target = null
 	var/meatleft = 3 //For chef item
-
+	var/decaylevel = 0 // For rotting bodies
 	var/slime_color = "blue" //For slime people this defines their color, it's blue by default to pay tribute to the old icons
