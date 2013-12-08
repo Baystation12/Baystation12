@@ -499,6 +499,7 @@ var/list/slot_equipment_priority = list( \
 	return
 */
 
+
 /mob/verb/memory()
 	set name = "Notes"
 	set category = "IC"
@@ -568,6 +569,12 @@ var/list/slot_equipment_priority = list( \
 	src << browse('html/help.html', "window=help")
 	return
 */
+
+
+/mob
+
+	var/newPlayerType = /mob/new_player
+
 /*
 /mob/verb/abandon_mob()
 	set name = "Respawn"
@@ -612,14 +619,13 @@ var/list/slot_equipment_priority = list( \
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
 
-	var/mob/new_player/M = new /mob/new_player()
+	var/mob/newPlayer = new newPlayerType()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
-		del(M)
+		del(newPlayer)
 		return
 
-	M.key = key
-//	M.Login()	//wat
+	newPlayer.key = key
 	return
 */
 /mob/verb/observe()
