@@ -142,7 +142,7 @@
 			return null
 
 		var/list/L = list()
-		for(var/obj/machinery/camera/C in cameranet.cameras)
+		for(var/obj/machinery/camera/C in cameranet.viewpoints)
 			var/list/temp = C.network & key.networks
 			if(temp.len)
 				L.Add(C)

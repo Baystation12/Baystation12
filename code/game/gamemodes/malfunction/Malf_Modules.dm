@@ -149,11 +149,12 @@ rcd light flash thingy on matter drain
 
 	var/alert_msg = "There isn't enough room. Make sure you are placing the machine in a clear area and on a floor."
 
+/*
 	var/datum/camerachunk/C = cameranet.getCameraChunk(middle.x, middle.y, middle.z)
 	if(!C.visibleTurfs[middle])
 		alert(src, "We cannot get camera vision of this location.")
 		return
-
+*/
 	for(var/T in turfs)
 
 		// Make sure the turfs are clear and the correct type.
@@ -225,7 +226,7 @@ rcd light flash thingy on matter drain
 	set name = "Reactivate Camera"
 	set category = "Malfunction"
 	if (istype (C, /obj/machinery/camera))
-		for(var/datum/AI_Module/small/reactivate_camera/camera in current_modules)
+		for(var/datum/AI_Module/small/reactivate_camera/camera in usr:current_modules)
 			if(camera.uses > 0)
 				if(!C.status)
 					C.deactivate(src)
@@ -248,7 +249,7 @@ rcd light flash thingy on matter drain
 	set name = "Upgrade Camera"
 	set category = "Malfunction"
 	if(istype(C))
-		var/datum/AI_Module/small/upgrade_camera/UC = locate(/datum/AI_Module/small/upgrade_camera) in current_modules
+		var/datum/AI_Module/small/upgrade_camera/UC = locate(/datum/AI_Module/small/upgrade_camera) in usr:current_modules
 		if(UC)
 			if(UC.uses > 0)
 				if(C.assembly)
