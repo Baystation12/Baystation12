@@ -176,8 +176,15 @@
 				return
 
 	if(mob.stat==2)	return
-
-	if(isAI(mob))	return AIMove(n,direct,mob)
+	
+// handle possible spirit movement
+	if(istype(mob,/mob/spirit))
+		var/mob/spirit/currentSpirit = mob
+		return currentSpirit.Spirit_Move(direct)
+	
+	// handle possible AI movement
+	if(isAI(mob))
+		return AIMove(n,direct,mob)
 
 	if(mob.monkeyizing)	return//This is sota the goto stop mobs from moving var
 
