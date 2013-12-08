@@ -1565,20 +1565,26 @@
 		if(decaytime <= 6000) //10 minutes for decaylevel1 -- stinky
 			return
 
-		if(decaytime > 6000 <= 12000)//20 minutes for decaylevel2 -- bloated and very stinky
+		if(decaytime > 6000 && decaytime <= 12000)//20 minutes for decaylevel2 -- bloated and very stinky
 			decaylevel = 1
 
-		if(decaytime > 12000 <= 18000)//30 minutes for decaylevel3 -- rotting and gross
+		if(decaytime > 12000 && decaytime <= 18000)//30 minutes for decaylevel3 -- rotting and gross
 			decaylevel = 2
 
-		if(decaytime > 18000 <= 27000)//45 minutes for decaylevel4 -- skeleton
+		if(decaytime > 18000 && decaytime <= 27000)//45 minutes for decaylevel4 -- skeleton
 			decaylevel = 3
 		if(decaytime > 27000)
 			decaylevel = 4
+			if (!mutations & SKELETON)
+				mutations.Add(SKELETON)
+				h_style = "Bald"
+				f_style = "Shaved"
+				update_body()
+				update_hair()
 			return
 
 		for(var/mob/living/carbon/human/H in range(decaylevel, src))
-			if(prob(5))
+			if(!src && prob(5))
 				if(airborne_can_reach(get_turf(src), get_turf(H)))
 					H << "<spawn class='warning'>You smell something foul..."
 					H.vomit()
