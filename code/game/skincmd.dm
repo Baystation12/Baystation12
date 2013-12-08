@@ -2,7 +2,7 @@
 /obj/proc/SkinCmd(mob/user as mob, var/data as text)
 
 /proc/SkinCmdRegister(var/mob/user, var/name as text, var/O as obj)
-			user.skincmds[name] = O
+	user.skincmds[name] = O
 
 /mob/verb/skincmd(data as text)
 	set hidden = 1

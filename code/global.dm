@@ -5,6 +5,7 @@ var/global/obj/effect/datacore/data_core = null
 var/global/obj/effect/overlay/plmaster = null
 var/global/obj/effect/overlay/slmaster = null
 
+var/list/list/all_networks = list( )
 
 var/global/list/machines = list()
 var/global/list/processing_objects = list()

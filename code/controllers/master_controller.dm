@@ -25,6 +25,7 @@ datum/controller/game_controller
 	var/networks_cost	= 0
 	var/powernets_cost	= 0
 	var/nano_cost		= 0
+	var/uninets_cost	= 0
 	var/events_cost		= 0
 	var/ticker_cost		= 0
 	var/total_cost		= 0
@@ -99,6 +100,11 @@ datum/controller/game_controller/proc/setup_objects()
 		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
 			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
 			T.broadcast_status()
+
+	//temporarily only used for networking cable
+	world << "\red \b Initializing Unified Networks"
+	sleep(-1)
+	makeUnifiedNetworks()
 
 	world << "\red \b Initializations complete."
 	sleep(-1)
@@ -200,7 +206,10 @@ datum/controller/game_controller/proc/process()
 				process_nano()
 				nano_cost = (world.timeofday - timer) / 10
 
-				sleep(breather_ticks)
+				//UNINETS
+				timer = world.timeofday
+				process_uninets()
+				uninets_cost = (world.timeofday - timer) / 10
 
 				//EVENTS
 				timer = world.timeofday
@@ -301,6 +310,13 @@ datum/controller/game_controller/proc/process_nano()
 			i++
 			continue
 		nanomanager.processing_uis.Cut(i,i+1)
+
+datum/controller/game_controller/proc/process_uninets()
+	for(var/outer_key in all_networks)
+		var/list/network_set = all_networks[outer_key]
+		for(var/unified_network/network in network_set)
+			if(network)
+				network.controller.process()
 
 datum/controller/game_controller/proc/process_events()
 	last_thing_processed = /datum/event

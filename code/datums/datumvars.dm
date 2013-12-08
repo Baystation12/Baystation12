@@ -389,7 +389,11 @@ client
 					html += "<ul>"
 					var/index = 1
 					for (var/entry in L)
-						if(istext(entry))
+						//if you poke a bad index on a builtin list, it will throw a runtime.
+						//doing the same thing on a user defined list will just return null.
+						//this is a bit of a hackish workaround, I may have missed something.
+						//also; list association keys don't have to be strings.
+						if(name != "contents" && name != "verbs" && L[entry])
 							html += debug_variable(entry, L[entry], level + 1)
 						//html += debug_variable("[index]", L[index], level + 1)
 						else
