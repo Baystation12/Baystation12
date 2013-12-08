@@ -262,16 +262,6 @@
 /obj/machinery/door/proc/requiresID()
 	return 1
 
-/obj/machinery/door/proc/update_nearby_tiles(need_rebuild)
-	if(!air_master)
-		return 0
-
-	for(var/turf/simulated/turf in locs)
-		update_heat_protection(turf)
-		air_master.AddTurfToUpdate(turf)
-
-	return 1
-
 /obj/machinery/door/proc/update_heat_protection(var/turf/simulated/source)
 	if(istype(source))
 		if(src.density && (src.opacity || src.heat_proof))

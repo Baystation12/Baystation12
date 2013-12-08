@@ -1,6 +1,7 @@
 var/datum/visibility_network/cameras/cameranet = new()
-var/datum/visibility_network/cult/cultNetwork = new()
-var/datum/visibility_network/list/visibility_networks = list("ALL_CAMERAS"=cameraNetwork, "CULT" = cultNetwork)
+//var/datum/visibility_network/cult/cultNetwork = new()
+var/datum/visibility_network/list/visibility_networks = list("ALL_CAMERAS"=cameranet)
+//var/datum/visibility_network/list/visibility_networks = list("ALL_CAMERAS"=cameranet, "CULT" = cultNetwork)
 
 
 // used by turfs and objects to update all visibility networks
