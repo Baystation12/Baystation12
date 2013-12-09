@@ -80,7 +80,7 @@
 	item_color = "polsuit"
 
 /obj/item/clothing/under/det/slob/verb/rollup()
-	set name = "Roll suit sleevels"
+	set name = "Roll suit sleeves"
 	set category = "Object"
 	set src in usr
 	item_color = item_color == "polsuit" ? "polsuit_rolled" : "polsuit"
