@@ -25,6 +25,8 @@ var/global/list/dna_activity_bounds[STRUCDNASIZE]
 // Used to determine what each block means (admin hax and species stuff on /vg/, mostly)
 var/global/list/assigned_blocks[STRUCDNASIZE]
 
+var/global/list/datum/dna/gene/dna_genes[0]
+
 // UI Indices (can change to mutblock style, if desired)
 #define DNA_UI_HAIR_R      1
 #define DNA_UI_HAIR_G      2

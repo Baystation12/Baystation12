@@ -62,7 +62,6 @@
 		..(M)
 		M.verbs += /mob/living/carbon/human/proc/morph
 
-
 /datum/dna/gene/basic/cold_resist
 	name="Cold Resistance"
 	activation_messages=list("Your body is filled with warmth.")
@@ -71,10 +70,7 @@
 	initialize()
 		block=FIREBLOCK
 
-	can_activate(var/mob/M,var/list/old_mutations,var/flags)
-		// Mutation already set?
-		if(mutation in old_mutations)
-			return 1
+	can_activate(var/mob/M,var/flags)
 
 		// Probability check
 		var/_prob=30
@@ -105,11 +101,11 @@
 	initialize()
 		block=SMALLSIZEBLOCK
 
-	can_activate(var/mob/M,var/list/old_mutations,var/flags)
+	can_activate(var/mob/M,var/flags)
 		// Can't be big and small.
-		if(HULK in old_mutations)
+		if(HULK in M.mutations)
 			return 0
-		return ..(M,old_mutations,flags)
+		return ..(M,flags)
 
 	activate(var/mob/M)
 		..(M)
@@ -123,11 +119,11 @@
 	initialize()
 		block=HULKBLOCK
 
-	can_activate(var/mob/M,var/list/old_mutations,var/flags)
+	can_activate(var/mob/M,var/flags)
 		// Can't be big and small.
-		if(mSmallsize in old_mutations)
+		if(mSmallsize in M.mutations)
 			return 0
-		return ..(M,old_mutations,flags)
+		return ..(M,flags)
 
 /datum/dna/gene/basic/xray
 	name="X-Ray Vision"
