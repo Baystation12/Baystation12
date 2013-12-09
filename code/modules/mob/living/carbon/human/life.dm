@@ -1575,16 +1575,11 @@
 			decaylevel = 3
 		if(decaytime > 27000)
 			decaylevel = 4
-			if (!mutations & SKELETON)
-				mutations.Add(SKELETON)
-				h_style = "Bald"
-				f_style = "Shaved"
-				update_body()
-				update_hair()
-			return
+			makeSkeleton()
+
 
 		for(var/mob/living/carbon/human/H in range(decaylevel, src))
-			if(!src && prob(5))
+			if(prob(5))
 				if(airborne_can_reach(get_turf(src), get_turf(H)))
 					H << "<spawn class='warning'>You smell something foul..."
 					H.vomit()
