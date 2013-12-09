@@ -7,7 +7,7 @@
 	activation_messages=list("You feel no need to breathe.")
 	mutation=mNobreath
 
-	initialize()
+	New()
 		block=NOBREATHBLOCK
 
 /datum/dna/gene/basic/remoteview
@@ -15,7 +15,7 @@
 	activation_messages=list("Your mind expands.")
 	mutation=mRemote
 
-	initialize()
+	New()
 		block=REMOTEVIEWBLOCK
 
 	activate(var/mob/M)
@@ -27,7 +27,7 @@
 	activation_messages=list("You feel better.")
 	mutation=mRegen
 
-	initialize()
+	New()
 		block=REGENERATEBLOCK
 
 /datum/dna/gene/basic/increaserun
@@ -35,7 +35,7 @@
 	activation_messages=list("Your leg muscles pulsate.")
 	mutation=mRun
 
-	initialize()
+	New()
 		block=INCREASERUNBLOCK
 
 /datum/dna/gene/basic/remotetalk
@@ -43,7 +43,7 @@
 	activation_messages=list("You expand your mind outwards.")
 	mutation=mRemotetalk
 
-	initialize()
+	New()
 		block=REMOTETALKBLOCK
 
 	activate(var/mob/M)
@@ -55,19 +55,20 @@
 	activation_messages=list("Your skin feels strange.")
 	mutation=mMorph
 
-	initialize()
+	New()
 		block=MORPHBLOCK
 
 	activate(var/mob/M)
 		..(M)
 		M.verbs += /mob/living/carbon/human/proc/morph
 
+
 /datum/dna/gene/basic/cold_resist
 	name="Cold Resistance"
 	activation_messages=list("Your body is filled with warmth.")
 	mutation=COLD_RESISTANCE
 
-	initialize()
+	New()
 		block=FIREBLOCK
 
 	can_activate(var/mob/M,var/flags)
@@ -82,7 +83,7 @@
 	activation_messages=list("Your fingers feel numb.")
 	mutation=mFingerprints
 
-	initialize()
+	New()
 		block=NOPRINTSBLOCK
 
 /datum/dna/gene/basic/noshock
@@ -90,7 +91,7 @@
 	activation_messages=list("Your skin feels strange.")
 	mutation=mShock
 
-	initialize()
+	New()
 		block=SHOCKIMMUNITYBLOCK
 
 /datum/dna/gene/basic/midget
@@ -98,7 +99,7 @@
 	activation_messages=list("Your skin feels rubbery.")
 	mutation=mSmallsize
 
-	initialize()
+	New()
 		block=SMALLSIZEBLOCK
 
 	can_activate(var/mob/M,var/flags)
@@ -116,7 +117,7 @@
 	activation_messages=list("Your muscles hurt.")
 	mutation=HULK
 
-	initialize()
+	New()
 		block=HULKBLOCK
 
 	can_activate(var/mob/M,var/flags)
@@ -130,7 +131,7 @@
 	activation_messages=list("The walls suddenly disappear.")
 	mutation=XRAY
 
-	initialize()
+	New()
 		block=XRAYBLOCK
 
 /datum/dna/gene/basic/tk
@@ -139,5 +140,5 @@
 	mutation=TK
 	activation_prob=15
 
-	initialize()
+	New()
 		block=TELEBLOCK
