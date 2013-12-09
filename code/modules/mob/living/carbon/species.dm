@@ -42,6 +42,8 @@
 	// For grays
 	var/max_hurt_damage = 5 // Max melee damage dealt + 5 if hulk
 	var/list/default_mutations = list()
+	var/list/default_blocks = list() // Don't touch.
+	var/list/default_block_names = list() // Use this instead, using the names from setupgame.dm
 
 	var/list/abilities = list()  // For species-derived or admin-given powers
 
