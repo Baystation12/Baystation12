@@ -53,21 +53,15 @@
 		dna.ResetSE()
 		dna.ResetUI()
 		//dna.uni_identity = "00600200A00E0110148FC01300B009"
+		//dna.uni_identity = "006 002 00A 00E 011 014 8FC 013 00B 009"
 		//dna.struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
 		dna.unique_enzymes = md5(name)
+
 
 		// We're a monkey
 		dna.SetSEState(MONKEYBLOCK,   1)
 		// Fix gender
-		dna.SetUIState(DNA_UI_GENDER, gender != MALE, 1)
-
-		// Set the blocks to uni_append, if needed.
-		if(uni_append.len>0)
-			for(var/b=1;b<=uni_append.len;b++)
-				dna.SetUIValue(DNA_UI_LENGTH-(uni_append.len-b),uni_append[b], 1)
-		dna.UpdateUI()
-
-		update_muts=1
+		dna.SetUIState(DNA_UI_GENDER, gender != MALE)
 
 	..()
 	update_icons()
