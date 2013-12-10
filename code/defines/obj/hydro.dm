@@ -1026,7 +1026,7 @@
 	icon_state = "seed-gatfruit"
 	species = "gatfruit"
 	plantname = "Gatfruit"
-	product = /obj/item/weapon/reagent_containers/food/snacks/grown/gatfruit
+	productname = /obj/item/weapon/reagent_containers/food/snacks/grown/gatfruit
 	lifespan = 60
 	endurance = 60
 	maturation = 10
@@ -1042,7 +1042,7 @@
 	icon_state = "seed-xmastree"
 	species = "xmastree"
 	plantname = "Pine Tree"
-	product = /obj/item/weapon/reagent_containers/food/snacks/grown/present
+	productname = /obj/item/weapon/reagent_containers/food/snacks/grown/present
 	lifespan = 60
 	endurance = 60
 	maturation = 10

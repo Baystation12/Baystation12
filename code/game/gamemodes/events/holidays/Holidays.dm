@@ -99,14 +99,17 @@ var/global/Holiday = null
 
 		if(12)	//Dec
 			switch(DD)
-				if(10)							Holiday = "Human-Rights Day"
-				if(14)							Holiday = "Monkey Day"
-				if(21)							if(YY==12)	Holiday = "End of the World"
-				if(22)							Holiday = "Orgasming Day"		//lol. These all actually exist
-				if(24)							Holiday = "Christmas Eve"
-				if(25)							Holiday = "Christmas"
-				if(26)							Holiday = "Boxing Day"
-				if(31)							Holiday = "New Year's Eve"
+				if(1 to 31)
+					Christmas_Game_Start()
+					switch(DD)
+						if(10)							Holiday = "Human-Rights Day"
+						if(14)							Holiday = "Monkey Day"
+						if(21)							if(YY==12)	Holiday = "End of the World"
+						if(22)							Holiday = "Orgasming Day"		//lol. These all actually exist
+						if(24)							Holiday = "Christmas Eve"
+						if(25)							Holiday = "Christmas"
+						if(26)							Holiday = "Boxing Day"
+						if(31)							Holiday = "New Year's Eve"
 
 	if(!Holiday)
 		//Friday the 13th
@@ -135,16 +138,9 @@ var/global/Holiday = null
 
 //Run at the  start of a round
 /proc/Holiday_Game_Start()
-	var/MM	=	text2num(time2text(world.timeofday, "MM")) 	// get the current month
 	if(Holiday)
 		world << "<font color='blue'>and...</font>"
 		world << "<h4>Happy [Holiday] Everybody!</h4>"
-		switch(Holiday)			//special holidays
-			if("Easter")
-				//do easter stuff
-			switch(MM)
-				if(12) // This is here because everyone's gonna be doing something other then 2dspaceman for christmas eve and day, so the events actually get run with purpose.
-					Christmas_Game_Start()
 
 	return
 
