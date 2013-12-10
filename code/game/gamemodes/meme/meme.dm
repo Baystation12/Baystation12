@@ -124,7 +124,7 @@
 	meme.objectives += survive_objective
 
 	// generate some random objectives, use standard traitor objectives
-	var/job = first_host.assigned_role
+//	var/job = first_host.assigned_role
 
 /*	for(var/datum/objective/o in SelectObjectives(job, meme))
 		o.owner = meme

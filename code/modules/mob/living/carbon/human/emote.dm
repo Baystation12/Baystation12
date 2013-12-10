@@ -568,7 +568,12 @@
 		else if (m_type & 2)
 			for (var/mob/O in (hearers(src.loc, null) | get_mobs_in_view(world.view,src)))
 				O.show_message(message, m_type)
-
+		else if (m_type & 2)
+			for (var/mob/O in hearers(src.loc, null))
+				if(istype(O,/mob/living/carbon/human))
+					for(var/mob/living/parasite/P in O:parasites)
+						P.show_message(message, m_type)
+				O.show_message(message, m_type)
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"

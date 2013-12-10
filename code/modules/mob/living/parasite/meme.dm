@@ -29,7 +29,6 @@ mob/living/parasite
 		client.eye = host
 		client.perspective = EYE_PERSPECTIVE
 
-
 mob/living/parasite/proc/enter_host(mob/living/carbon/human/host)
 	// by default, parasites can't share a body with other life forms
 	if(host.parasites.len > 0)
@@ -60,6 +59,11 @@ mob/living/parasite/meme/var/dormant = 0
 
 // Memes have a list of indoctrinated hosts
 mob/living/parasite/meme/var/list/indoctrinated = list()
+
+
+mob/living/parasite/meme/New()
+	..()
+	name = "[pick("Meme")] [rand(1000,9999)]"
 
 mob/living/parasite/meme/Life()
 	..()

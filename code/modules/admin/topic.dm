@@ -639,6 +639,11 @@
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Emergency Response Team;jobban4=\ref[M]'>Emergency Response Team</a></td>"
 
+		//Meme
+		if(jobban_isbanned(M, "meme") || isbanned_dept)
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Meme;jobban4=\ref[M]'><font color=red>Meme</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Meme;jobban4=\ref[M]'>Meme</a></td>"
 
 /*		//Malfunctioning AI	//Removed Malf-bans because they're a pain to impliment
 		if(jobban_isbanned(M, "malf AI") || isbanned_dept)

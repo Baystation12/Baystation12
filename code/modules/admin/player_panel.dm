@@ -348,8 +348,8 @@
 			dat += "<td>Monkey</td>"
 		else if(isalien(M))
 			dat += "<td>Alien</td>"
-	//	else if(istype(M, /mob/living/parasite/meme))
-    //        dat += "<td>Meme</td>"
+		else if(istype(M, /mob/living/parasite/meme))
+			dat += "<td>Meme</td>"
 		else
 			dat += "<td>Unknown</td>"
 
