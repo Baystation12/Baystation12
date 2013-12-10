@@ -247,8 +247,8 @@ proc/slur(phrase)
 			if(lowertext(newletter)=="s")	newletter="ch"
 			if(lowertext(newletter)=="a")	newletter="ah"
 			if(lowertext(newletter)=="c")	newletter="k"
-			if(newletter == "Ğ§" || newletter == "Ñ‡")	newletter = "Ñ‰"
-			if(newletter == "Ğ•" || newletter == "Ğµ")	newletter = "Ğ¸"
+			if(newletter == "×" || newletter == "÷")	newletter = "ù"
+			if(newletter == "Å" || newletter == "å")	newletter = "è"
 		switch(rand(1,15))
 			if(1,3,5,8)
 				newletter = "[lowertext(newletter)]"
@@ -266,7 +266,7 @@ proc/slur(phrase)
 	text = html_decode(text)
 	var/t = ""
 	var/lenght = length(text)//length of the entire word
-	var/alphabet = "bcdfghjklmnpqrstvwxyzĞ±Ğ²Ğ³Ğ´Ğ¶Ğ·Ğ¹ĞºĞ»Ğ¼Ğ½Ğ¿Ñ€ÑÑ‚Ñ„Ñ…Ñ†Ñ‡ÑˆÑ‰"
+	var/alphabet = "bcdfghjklmnpqrstvwxyzáâãäæçéêëìíïğñòôõö÷øù"
 	var/letter
 	var/lcase_letter
 	var/tletter
