@@ -1000,3 +1000,20 @@
 		src.visible_message("<span class='notice'>The [src.name] has been squashed, causing a distortion in space-time.</span>","<span class='moderate'>You hear a splat and a crackle.</span>")
 		del(src)
 		return
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/gatfruit
+	seed = "/obj/item/seeds/gatfruit"
+	name = "gatfruit"
+	desc = "It smells like burning."
+	icon_state = "gatfruit"
+	potency = 60
+	origin_tech = "combat=3"
+	trash = /obj/item/weapon/gun/projectile
+	New()
+		..()
+		spawn(5)	//So potency can be set in the proc that creates these crops
+			reagents.add_reagent("sulfur", 1+round((potency / 10), 1))
+			reagents.add_reagent("carbon", 1+round((potency / 10), 1))
+			reagents.add_reagent("nitrogen", 1+round((potency / 15), 1))
+			reagents.add_reagent("potassium", 1+round((potency / 20), 1))
+			bitesize = 1+round(reagents.total_volume / 2, 1)
