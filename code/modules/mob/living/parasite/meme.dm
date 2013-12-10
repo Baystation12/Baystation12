@@ -82,10 +82,10 @@ mob/living/parasite/meme/Life()
 		src.death()
 		return
 	// a host without brain is no good
-//	if(!host.mind)
-//		src << "\red <b>Your host has no mind.. you fade away..</b>"
-//		src.death()
-//		return
+	if(!host.mind)
+		src << "\red <b>Your host has no mind.. you fade away..</b>"
+		src.death()
+		return
 	if(host.stat == 2)
 		src << "\red <b>Your host has died.. you fade away..</b>"
 		src.death()
