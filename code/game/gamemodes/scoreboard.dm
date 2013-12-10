@@ -29,10 +29,15 @@
 		if (I.stat == 2 && I.z == 1)
 			score_deadaipenalty = 1
 			score_deadcrew += 1
-/*	for (var/mob/living/carbon/human/I in mob_list)
-		for (var/datum/ailment/disease/V in I.ailments)
-			if (!V.vaccine && !V.spread != "Remissive") score_disease++
-		if (I.stat == 2 && I.z == 1) score_deadcrew += 1*/
+	for (var/mob/living/carbon/human/I in mob_list)
+//		for (var/datum/ailment/disease/V in I.ailments)
+//			if (!V.vaccine && !V.spread != "Remissive") score_disease++
+		if (I.stat == 2 && I.z == 1) score_deadcrew += 1
+		if (I.job == "Clown")
+			for(var/thing in I.attack_log)
+				if(findtext(thing, "<font color='orange'>")) score_clownabuse++
+
+
 	for(var/mob/living/player in mob_list)
 		if (player.client)
 			if (player.stat != 2)
@@ -143,17 +148,17 @@
 
 	// Bonus Modifiers
 	//var/traitorwins = score_traitorswon
-	var/deathpoints = score_deadcrew * 25
+	var/deathpoints = score_deadcrew * 25 //done
 	var/researchpoints = score_researchdone * 30
 	var/eventpoints = score_eventsendured * 50
-	var/escapoints = score_escapees * 25
+	var/escapoints = score_escapees * 25 //done
 	var/harvests = score_stuffharvested * 5 //done
 	var/shipping = score_stuffshipped * 5
 	var/mining = score_oremined * 2 //done
 	var/meals = score_meals * 5 //done, but this only counts cooked meals, not drinks served
 	var/power = score_powerloss * 20
 	var/messpoints
-	if (score_mess != 0) messpoints = score_mess
+	if (score_mess != 0) messpoints = score_mess //done
 	var/plaguepoints = score_disease * 30
 
 	// Mode Specific
