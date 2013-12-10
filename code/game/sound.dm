@@ -14,7 +14,7 @@
 		if(!M || !M.client)
 			continue
 		var/turf/T = get_turf(M)
-		if(T && T.z == source.z)
+		if(T && T.z && T.z == source.z)
 			if(get_dist(T, source) <= world.view + extrarange)
 				M.playsound_local(source, soundin, vol, vary, frequency, falloff)
 
