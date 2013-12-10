@@ -831,7 +831,6 @@
 #include "code\modules\maps\reader.dm"
 #include "code\modules\maps\swapmaps.dm"
 #include "code\modules\maps\writer.dm"
-#include "code\modules\marines\equipment.dm"
 #include "code\modules\mining\machine_input_output_plates.dm"
 #include "code\modules\mining\machine_processing.dm"
 #include "code\modules\mining\machine_stacking.dm"
