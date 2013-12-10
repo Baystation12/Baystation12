@@ -135,14 +135,16 @@ var/global/Holiday = null
 
 //Run at the  start of a round
 /proc/Holiday_Game_Start()
+	var/MM	=	text2num(time2text(world.timeofday, "MM")) 	// get the current month
 	if(Holiday)
 		world << "<font color='blue'>and...</font>"
 		world << "<h4>Happy [Holiday] Everybody!</h4>"
 		switch(Holiday)			//special holidays
 			if("Easter")
 				//do easter stuff
-			if("Christmas Eve","Christmas")
-				Christmas_Game_Start()
+			switch(MM)
+				if(12) // This is here because everyone's gonna be doing something other then 2dspaceman for christmas eve and day, so the events actually get run with purpose.
+					Christmas_Game_Start()
 
 	return
 

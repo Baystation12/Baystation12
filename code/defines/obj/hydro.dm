@@ -1036,6 +1036,22 @@
 	plant_type = 0
 	growthstages = 2
 
+/obj/item/seeds/xmastree // Merry Christmas from 2013! -Iamgoofball
+	name = "pack of pine tree seeds"
+	desc = "It's the most wonderful time, of the year~!"
+	icon_state = "seed-xmastree"
+	species = "xmastree"
+	plantname = "Pine Tree"
+	product = /obj/item/weapon/reagent_containers/food/snacks/grown/present
+	lifespan = 60
+	endurance = 60
+	maturation = 10
+	production = 10
+	yield = 2
+	potency = 60
+	plant_type = 0
+	growthstages = 2
+
 /obj/item/seeds/kudzuseed
 	name = "pack of kudzu seeds"
 	desc = "These seeds grow into a weed that grows incredibly fast."

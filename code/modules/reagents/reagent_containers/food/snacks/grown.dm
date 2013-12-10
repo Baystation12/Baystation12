@@ -1017,3 +1017,10 @@
 			reagents.add_reagent("nitrogen", 1+round((potency / 15), 1))
 			reagents.add_reagent("potassium", 1+round((potency / 20), 1))
 			bitesize = 1+round(reagents.total_volume / 2, 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/present
+	name = "You shouldn't see this~"
+/obj/item/weapon/reagent_containers/food/snacks/grown/present/New()
+	..()
+	new /obj/item/weapon/a_gift/present(src.loc)
+	del(src)
