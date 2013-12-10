@@ -1,4 +1,3 @@
-
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
 /proc/ishuman(A)
 	if(istype(A, /mob/living/carbon/human))
@@ -247,8 +246,9 @@ proc/slur(phrase)
 			if(lowertext(newletter)=="s")	newletter="ch"
 			if(lowertext(newletter)=="a")	newletter="ah"
 			if(lowertext(newletter)=="c")	newletter="k"
-			if(newletter == "×" || newletter == "÷")	newletter = "ù"
-			if(newletter == "Å" || newletter == "å")	newletter = "è"
+			if(newletter == "Ã—" || newletter == "Ã·")	newletter = "Ã¹"
+			if(newletter == "Ã…" || newletter == "Ã¥")	newletter = "Ã¨"
+
 		switch(rand(1,15))
 			if(1,3,5,8)
 				newletter = "[lowertext(newletter)]"
@@ -262,11 +262,12 @@ proc/slur(phrase)
 		newphrase+="[newletter]";counter-=1
 	return newphrase
 
+
 /proc/stutter(text)
 	text = html_decode(text)
 	var/t = ""
 	var/lenght = length(text)//length of the entire word
-	var/alphabet = "bcdfghjklmnpqrstvwxyzáâãäæçéêëìíïðñòôõö÷øù"
+	var/alphabet = "bcdfghjklmnpqrstvwxyzÃ¡Ã¢Ã£Ã¤Ã¦Ã§Ã©ÃªÃ«Ã¬Ã­Ã¯Ã°Ã±Ã²Ã´ÃµÃ¶Ã·Ã¸Ã¹"
 	var/letter
 	var/lcase_letter
 	var/tletter
@@ -276,7 +277,7 @@ proc/slur(phrase)
 		tletter = letter
 		lcase_letter = text2ascii(letter)
 		if((lcase_letter >= 65 && lcase_letter <=90) || (lcase_letter >= 192 && lcase_letter <=223))
-			tletter = ascii2text(lcase_letter + 32)
+			tletter = ascii2text(lcase_letter + 32)	
 		if (prob(80) && (findtext(alphabet,tletter)))
 			if (prob(10))
 				letter = text("[letter]-[letter]-[letter]-[letter]")//replaces the current letter with this instead.
