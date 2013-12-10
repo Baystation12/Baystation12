@@ -191,6 +191,8 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 	proc/requestRecruits()
 		for(var/mob/dead/observer/O in player_list)
+			if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+				continue
 			if(jobban_isbanned(O, "pAI"))
 				continue
 			if(asked.Find(O.key))
