@@ -142,6 +142,7 @@ var/global/floorIsLava = 0
 				<A href='?src=\ref[src];simplemake=constructbuilder;mob=\ref[M]'>Builder</A> ,
 				<A href='?src=\ref[src];simplemake=constructwraith;mob=\ref[M]'>Wraith</A> \]
 				<A href='?src=\ref[src];simplemake=shade;mob=\ref[M]'>Shade</A>
+				<A href='?src=\ref[src];simplemake=meme;mob=\ref[M]'>Meme</A>
 				<br>
 			"}
 

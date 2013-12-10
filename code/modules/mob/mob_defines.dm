@@ -41,6 +41,7 @@
 	var/obj/screen/zone_sel/zone_sel = null
 
 	var/use_me = 1 //Allows all mobs to use the me verb by default, will have to manually specify they cannot
+	var/speech_allowed = 1 //Meme Stuff
 	var/damageoverlaytemp = 0
 	var/computer_id = null
 	var/lastattacker = null

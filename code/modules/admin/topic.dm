@@ -290,6 +290,29 @@
 			if("constructbuilder")	M.change_mob_type( /mob/living/simple_animal/construct/builder , null, null, delmob )
 			if("constructwraith")	M.change_mob_type( /mob/living/simple_animal/construct/wraith , null, null, delmob )
 			if("shade")				M.change_mob_type( /mob/living/simple_animal/shade , null, null, delmob )
+			if("meme")
+				var/mob/living/parasite/meme/newmeme = new
+				M.mind.transfer_to(newmeme)
+				newmeme.clearHUD()
+
+				var/found = 0
+				for(var/mob/living/carbon/human/H in world) if(H.client && !H.parasites.len)
+					found = 1
+					newmeme.enter_host(H)
+
+					message_admins("[H] has become [newmeme.key]'s host")
+
+					break
+
+				// if there was no host, abort
+				if(!found)
+					newmeme.mind.transfer_to(M)
+					message_admins("Failed to find host for meme [M.key]. Aborting.")
+
+				ticker.mode.memes += newmeme
+
+				if(delmob)
+					del(M)
 
 
 	/////////////////////////////////////new ban stuff
@@ -511,10 +534,10 @@
 				jobs += "</tr><tr align='center'>"
 				counter = 0
 
-		if(jobban_isbanned(M, "Internal Affairs Agent"))  
+		if(jobban_isbanned(M, "Internal Affairs Agent"))
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Internal Affairs Agent;jobban4=\ref[M]'><font color=red>Internal Affairs Agent</font></a></td>"
 		else
-			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Internal Affairs Agent;jobban4=\ref[M]'>Internal Affairs Agent</a></td>"	
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Internal Affairs Agent;jobban4=\ref[M]'>Internal Affairs Agent</a></td>"
 
 		jobs += "</tr></table>"
 
