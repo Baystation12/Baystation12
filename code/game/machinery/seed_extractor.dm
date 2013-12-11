@@ -5,7 +5,7 @@
 
 	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown/))
 		var/obj/item/weapon/reagent_containers/food/snacks/grown/F = O
-		for(t_amount = 0, t_amount < t_max, t_amount++)
+		for(t_amount in 1 to t_max)
 			var/obj/item/seeds/t_prod = new F.seed(O.loc)
 			t_prod.species = F.species
 			t_prod.lifespan = F.lifespan
@@ -20,7 +20,7 @@
 
 	else if(istype(O, /obj/item/weapon/grown/))
 		var/obj/item/weapon/grown/F = O
-		for(t_amount = 0, t_amount < t_max, t_amount++)
+		for(t_amount in 1 to t_max)
 			var/obj/item/seeds/t_prod = new F.seed(O.loc)
 			t_prod.species = F.species
 			t_prod.lifespan = F.lifespan
@@ -34,9 +34,9 @@
 		return 1
 
 
-	if(O.nonplant_seed_type)
+	if(O)
 		var/obj/item/F = O
-		for(t_amount = 0, t_amount < t_max, t_amount++)
+		for(t_amount in 1 to t_max)
 			new F.nonplant_seed_type(O.loc)
 		del(O)
 		return 1

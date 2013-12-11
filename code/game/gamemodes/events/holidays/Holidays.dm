@@ -98,18 +98,16 @@ var/global/Holiday = null
 				if(21)							Holiday = "Saying-'Hello' Day"
 
 		if(12)	//Dec
+			Christmas_Game_Start()
 			switch(DD)
-				if(1 to 31)
-					Christmas_Game_Start()
-					switch(DD)
-						if(10)							Holiday = "Human-Rights Day"
-						if(14)							Holiday = "Monkey Day"
-						if(21)							if(YY==12)	Holiday = "End of the World"
-						if(22)							Holiday = "Orgasming Day"		//lol. These all actually exist
-						if(24)							Holiday = "Christmas Eve"
-						if(25)							Holiday = "Christmas"
-						if(26)							Holiday = "Boxing Day"
-						if(31)							Holiday = "New Year's Eve"
+				if(10)							Holiday = "Human-Rights Day"
+				if(14)							Holiday = "Monkey Day"
+				if(21)							if(YY==12)	Holiday = "End of the World"
+				if(22)							Holiday = "Orgasming Day"		//lol. These all actually exist
+				if(24)							Holiday = "Christmas Eve"
+				if(25)							Holiday = "Christmas"
+				if(26)							Holiday = "Boxing Day"
+				if(31)							Holiday = "New Year's Eve"
 
 	if(!Holiday)
 		//Friday the 13th
