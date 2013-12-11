@@ -905,6 +905,7 @@
 #include "code\modules\mining\laborcamp\laborminerals.dm"
 #include "code\modules\mining\laborcamp\laborshuttle.dm"
 #include "code\modules\mining\laborcamp\laborstacker.dm"
+#include "code\modules\mob\abilities.dm"
 #include "code\modules\mob\death.dm"
 #include "code\modules\mob\emote.dm"
 #include "code\modules\mob\inventory.dm"
