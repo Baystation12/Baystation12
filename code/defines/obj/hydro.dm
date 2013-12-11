@@ -1020,34 +1020,19 @@
 	plant_type = 0
 	growthstages = 5
 
-/obj/item/seeds/gatfruit
-	name = "pack of gatfruit seeds"
-	desc = "These seeds grow into .357 revolvers."
-	icon_state = "seed-gatfruit"
-	species = "gatfruit"
-	plantname = "Gatfruit"
-	productname = /obj/item/weapon/reagent_containers/food/snacks/grown/gatfruit
-	lifespan = 60
-	endurance = 60
-	maturation = 10
-	production = 10
-	yield = 2
-	potency = 60
-	plant_type = 0
-	growthstages = 2
-
 /obj/item/seeds/xmastree // Merry Christmas from 2013! -Iamgoofball
 	name = "pack of pine tree seeds"
 	desc = "It's the most wonderful time, of the year~!"
 	icon_state = "seed-xmastree"
 	species = "xmastree"
 	plantname = "Pine Tree"
-	productname = /obj/item/weapon/reagent_containers/food/snacks/grown/present
+	mypath = "/obj/item/seeds/xmastree"
+	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/present"
 	lifespan = 60
 	endurance = 60
 	maturation = 10
-	production = 10
-	yield = 2
+	production = 30
+	yield = 10
 	potency = 60
 	plant_type = 0
 	growthstages = 2

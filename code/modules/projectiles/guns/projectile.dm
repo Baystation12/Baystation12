@@ -11,7 +11,6 @@
 	w_class = 3.0
 	m_amt = 1000
 	recoil = 1
-	nonplant_seed_type = "/obj/item/seeds/gatfruit"
 	var/ammo_type = "/obj/item/ammo_casing/a357"
 	var/list/loaded = list()
 	var/max_shells = 7

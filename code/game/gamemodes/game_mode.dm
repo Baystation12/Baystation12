@@ -40,7 +40,6 @@
 Whitespace:Seperator;
 Stealthy and Inconspicuous Weapons;
 /obj/item/weapon/a_gift/traitor:2:Rigged Present;
-/obj/item/seeds/gatfruit:11:357 Revolver Plant;
 /obj/item/weapon/pen/paralysis:3:Paralysis Pen;
 /obj/item/weapon/soap/syndie:1:Syndicate Soap;
 /obj/item/weapon/cartridge/syndicate:3:Detomatix PDA Cartridge;
