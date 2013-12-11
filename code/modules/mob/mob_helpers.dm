@@ -240,10 +240,16 @@ proc/slur(phrase)
 	var/newphrase=""
 	var/newletter=""
 	var/lletter=""
+	var/newLnum
 	while(counter>=1)
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
-		if((newletter >= 65 && newletter <=90) || (newletter >= 192 && newletter <=223))
-			lletter = ascii2text(newletter + 32)
+		lletter = newletter
+		newLnum = text2ascii(newletter)
+		switch(newLnum)
+			if(65 to 90)
+				lletter = ascii2text(newLnum + 32)
+			if (192 to 223)
+				lletter = ascii2text(newLnum + 32)
 		if(rand(1,3)==3)
 			if(lletter=="o")	newletter="u"
 			if(lletter=="s")	newletter="ch"
@@ -252,15 +258,15 @@ proc/slur(phrase)
 			if(text2ascii(lletter) == 247)	newletter = ascii2text(249)
 			if(text2ascii(lletter) == 229)	newletter = ascii2text(232)
 		switch(rand(1,15))
-			if(1,3,5,8)
+			if(1 to 4)
 				newletter = "[lowertext(newletter)]"
 				if(text2ascii(newletter) >223 && text2ascii(newletter) < 256)
 					newletter = ascii2text(text2ascii(newletter) - 32)
-			if(2,4,6,15)
+			if(5 to 8)
 				newletter = "[uppertext(newletter)]"
 				if(text2ascii(newletter) >191 && text2ascii(newletter) < 224)
 					newletter = ascii2text(text2ascii(newletter) + 32)
-			if(7)	newletter+="'"
+			if(9)	newletter+="'"
 		newphrase+="[newletter]";counter-=1
 	return newphrase
 
