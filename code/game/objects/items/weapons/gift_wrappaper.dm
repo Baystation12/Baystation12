@@ -48,10 +48,10 @@
 
 /obj/item/weapon/a_gift/present
 	desc = "PRESENTS!!!! eek!"
-	gift = /obj/item/weapon/grenade/chem_grenade/incendiary
 
 /obj/item/weapon/a_gift/traitor
 	desc = "PRESENTS!!!! eek!"
+	gift = /obj/item/weapon/grenade/chem_grenade/incendiary
 /*
  * Wrapping Paper
  */
