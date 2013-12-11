@@ -15,6 +15,8 @@
 	item_state = "gift1"
 	nonplant_seed_type = "/obj/item/seeds/xmastree"
 	var/seed // Needed to stop runtimes
+	var/gift = /obj/item
+
 
 /obj/item/weapon/a_gift/New()
 	..()
@@ -22,32 +24,32 @@
 	pixel_y = rand(-10,10)
 	icon_state = "giftcrate[rand(1,5)]"
 
+
 /obj/item/weapon/a_gift/attack_self(mob/M as mob)
-	var/gift_type
-	if(istype(src, /obj/item/weapon/a_gift/endless))
-		gift_type = /obj/item/weapon/a_gift/endless
-	else if(istype(src, /obj/item/weapon/a_gift/traitor))
-		gift_type = /obj/item/weapon/grenade/chem_grenade/incendiary
-	else if(istype(src, /obj/item/weapon/a_gift/present))
-		gift_type = pick(typesof(/obj/item))
-	else
-		gift_type = pick(typesof(/obj/item))
-	if(!ispath(gift_type,/obj/item))	return
+	var/gift_type = pick(typesof(gift))
+	if(!ispath(gift_type,/obj/item))
+		return
 
 	var/obj/item/I = new gift_type(M)
 	M.u_equip(src)
 	M.put_in_hands(I)
 	I.add_fingerprint(M)
+
+	//This is awful but whatever.
 	if(istype(I, /obj/item/weapon/grenade/chem_grenade/incendiary))
 		var/obj/item/weapon/grenade/chem_grenade/incendiary/thenade = I
 		thenade.prime()
+
 	del(src)
-	return
 
 /obj/item/weapon/a_gift/endless
 	desc = "PRESENTS!!! Something feels odd about this one."
+	gift = /obj/item/weapon/a_gift/endless
+
 /obj/item/weapon/a_gift/present
 	desc = "PRESENTS!!!! eek!"
+	gift = /obj/item/weapon/grenade/chem_grenade/incendiary
+
 /obj/item/weapon/a_gift/traitor
 	desc = "PRESENTS!!!! eek!"
 /*
