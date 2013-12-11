@@ -239,16 +239,18 @@ proc/slur(phrase)
 	var/counter=lentext(phrase)
 	var/newphrase=""
 	var/newletter=""
+	var/lletter=""
 	while(counter>=1)
 		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
+		if((newletter >= 65 && newletter <=90) || (newletter >= 192 && newletter <=223))
+			lletter = ascii2text(newletter + 32)
 		if(rand(1,3)==3)
-			if(lowertext(newletter)=="o")	newletter="u"
-			if(lowertext(newletter)=="s")	newletter="ch"
-			if(lowertext(newletter)=="a")	newletter="ah"
-			if(lowertext(newletter)=="c")	newletter="k"
-			if(newletter == "×" || newletter == "÷")	newletter = "ù"
-			if(newletter == "Å" || newletter == "å")	newletter = "è"
-
+			if(lletter=="o")	newletter="u"
+			if(lletter=="s")	newletter="ch"
+			if(lletter=="a")	newletter="ah"
+			if(lletter=="c")	newletter="k"
+			if(text2ascii(lletter) == 247)	newletter = ascii2text(249)
+			if(text2ascii(lletter) == 229)	newletter = ascii2text(232)
 		switch(rand(1,15))
 			if(1,3,5,8)
 				newletter = "[lowertext(newletter)]"
@@ -262,12 +264,15 @@ proc/slur(phrase)
 		newphrase+="[newletter]";counter-=1
 	return newphrase
 
-
 /proc/stutter(text)
 	text = html_decode(text)
 	var/t = ""
 	var/lenght = length(text)//length of the entire word
-	var/alphabet = "bcdfghjklmnpqrstvwxyzáâãäæçéêëìíïðñòôõö÷øù"
+	var/alphabet[0]
+	//alphabet.Add("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z")
+	//alphabet.Add("á","â","ã","ä","æ","ç","é","ê","ë","ì","í","ï","ð","ñ","ò","ô","õ","ö","÷","ø","ù")
+	alphabet.Add(98,99,100,102,103,104,105,106,107,108,109,110,112,113,114,115,116,118,119,120,121,122)
+	alphabet.Add(225,226,227,228,230,231,233,234,235,236,237,239,240,241,242,244,245,246,247,248,249)
 	var/letter
 	var/lcase_letter
 	var/tletter
@@ -277,8 +282,8 @@ proc/slur(phrase)
 		tletter = letter
 		lcase_letter = text2ascii(letter)
 		if((lcase_letter >= 65 && lcase_letter <=90) || (lcase_letter >= 192 && lcase_letter <=223))
-			tletter = ascii2text(lcase_letter + 32)	
-		if (prob(80) && (findtext(alphabet,tletter)))
+			tletter = ascii2text(lcase_letter + 32)
+		if (prob(80) && (text2ascii(tletter) in alphabet))
 			if (prob(10))
 				letter = text("[letter]-[letter]-[letter]-[letter]")//replaces the current letter with this instead.
 			else
