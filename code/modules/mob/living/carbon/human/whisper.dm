@@ -21,6 +21,9 @@
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return
 
+	if(!speech_allowed && usr == src)
+		usr << "\red You can't speak."
+		return
 
 	if (src.stat == 2)
 		return src.say_dead(message)
