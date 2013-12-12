@@ -70,6 +70,11 @@
 		return 1
 	return 0
 
+proc/isovermind(A)
+	if(istype(A, /mob/camera/blob))
+		return 1
+	return 0
+
 /proc/isbear(A)
 	if(istype(A, /mob/living/simple_animal/hostile/bear))
 		return 1

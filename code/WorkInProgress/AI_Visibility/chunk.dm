@@ -40,7 +40,7 @@
 //  Completely re-calculate the whole chunk.
 
 /datum/camerachunk/proc/rebuild_chunk()
-	for(var/mob/aiEye/eye in seenby)
+	for(var/mob/camera/aiEye/eye in seenby)
 		if(!eye.ai)
 			seenby -= eye
 			continue
@@ -90,14 +90,14 @@
 
 	cameranet.minimap |= minimap_obj
 
-	for(var/mob/aiEye/eye in seenby)
+	for(var/mob/camera/aiEye/eye in seenby)
 		if(eye.ai.client)
 			eye.ai.client.images |= obscured
 			eye.ai.client.images |= dim
 
 
 
-/datum/camerachunk/proc/add(mob/aiEye/eye)
+/datum/camerachunk/proc/add(mob/camera/aiEye/eye)
 	eye.visibleCameraChunks |= src
 
 	if(eye.ai.client)
@@ -112,7 +112,7 @@
 
 
 
-/datum/camerachunk/proc/remove(mob/aiEye/eye)
+/datum/camerachunk/proc/remove(mob/camera/aiEye/eye)
 	eye.visibleCameraChunks -= src
 
 	if(eye.ai.client)
@@ -215,7 +215,7 @@
 			obscured += t.obscured
 			images_added += t.obscured
 
-	for(var/mob/aiEye/eye in seenby)
+	for(var/mob/camera/aiEye/eye in seenby)
 		if(eye.ai)
 			if(eye.ai.client)
 				eye.ai.client.images -= images_removed

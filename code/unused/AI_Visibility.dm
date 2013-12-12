@@ -20,12 +20,12 @@
 	var/changed = 0
 	var/updating = 0
 
-/mob/aiEye
+/mob/camera/aiEye
 	var/list/visibleCameraChunks = list()
 	var/mob/ai = null
 	density = 0
 
-/datum/camerachunk/proc/add(mob/aiEye/ai)
+/datum/camerachunk/proc/add(mob/camera/aiEye/ai)
 	ai.visibleCameraChunks += src
 	if(ai.ai.client)
 		ai.ai.client.images += obscured
@@ -35,7 +35,7 @@
 	if(changed && !updating)
 		update()
 
-/datum/camerachunk/proc/remove(mob/aiEye/ai)
+/datum/camerachunk/proc/remove(mob/camera/aiEye/ai)
 	ai.visibleCameraChunks -= src
 	if(ai.ai.client)
 		ai.ai.client.images -= obscured
@@ -90,7 +90,7 @@
 	for(var/turf/t in dimRemoved)
 		if(t.dim)
 			dim -= t.dim
-			for(var/mob/aiEye/m in seenby)
+			for(var/mob/camera/aiEye/m in seenby)
 				if(m.ai.client)
 					m.ai.client.images -= t.dim
 
@@ -99,7 +99,7 @@
 				t.obscured = image('icons/effects/cameravis.dmi', t, "black", 15)
 
 			obscured += t.obscured
-			for(var/mob/aiEye/m in seenby)
+			for(var/mob/camera/aiEye/m in seenby)
 				if(m.ai.client)
 					m.ai.client.images += t.obscured
 
@@ -110,20 +110,20 @@
 				t.mouse_opacity = 0
 
 			dim += t.dim
-			for(var/mob/aiEye/m in seenby)
+			for(var/mob/camera/aiEye/m in seenby)
 				if(m.ai.client)
 					m.ai.client.images += t.dim
 
 			if(t.obscured)
 				obscured -= t.obscured
-				for(var/mob/aiEye/m in seenby)
+				for(var/mob/camera/aiEye/m in seenby)
 					if(m.ai.client)
 						m.ai.client.images -= t.obscured
 
 	for(var/turf/t in visAdded)
 		if(t.obscured)
 			obscured -= t.obscured
-			for(var/mob/aiEye/m in seenby)
+			for(var/mob/camera/aiEye/m in seenby)
 				if(m.ai.client)
 					m.ai.client.images -= t.obscured
 
@@ -133,7 +133,7 @@
 				t.obscured = image('icons/effects/cameravis.dmi', t, "black", 15)
 
 			obscured += t.obscured
-			for(var/mob/aiEye/m in seenby)
+			for(var/mob/camera/aiEye/m in seenby)
 				if(m.ai.client)
 					m.ai.client.images += t.obscured
 
@@ -203,7 +203,7 @@ var/datum/cameranet/cameranet = new()
 
 	return chunks[key]
 
-/datum/cameranet/proc/visibility(mob/aiEye/ai)
+/datum/cameranet/proc/visibility(mob/camera/aiEye/ai)
 	var/x1 = max(0, ai.x - 16) & ~0xf
 	var/y1 = max(0, ai.y - 16) & ~0xf
 	var/x2 = min(world.maxx, ai.x + 16) & ~0xf
@@ -246,7 +246,7 @@ var/datum/cameranet/cameranet = new()
 					chunk.hasChanged()
 
 
-/mob/living/silicon/ai/var/mob/aiEye/eyeobj = new()
+/mob/living/silicon/ai/var/mob/camera/aiEye/eyeobj = new()
 
 /mob/living/silicon/ai/New()
 	..()
@@ -267,7 +267,7 @@ var/datum/cameranet/cameranet = new()
 		eyeobj.loc = loc
 		cameranet.visibility(eyeobj)
 		cameraFollow = null
-/mob/aiEye/Move()
+/mob/camera/aiEye/Move()
 	. = ..()
 	if(.)
 		cameranet.visibility(src)

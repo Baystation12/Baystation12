@@ -28,7 +28,6 @@
 		yourself.
 
 */
-
 datum/mind
 	var/key
 	var/name				//replaces mob/var/original_name
@@ -127,7 +126,7 @@ datum/mind
 		if (istype(current, /mob/living/carbon/human) || istype(current, /mob/living/carbon/monkey))
 			/** Impanted**/
 			if(istype(current, /mob/living/carbon/human))
-				if(H.is_loyalty_implanted(H)) 
+				if(H.is_loyalty_implanted(H))
 					text = "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
 				else
 					text = "Loyalty Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant=add'>Implant him!</a></br>"
@@ -1177,17 +1176,21 @@ datum/mind
 
 
 
+/mob/proc/sync_mind()
+	mind_initialize()	//updates the mind (or creates and initializes one if one doesn't exist)
+	mind.active = 1		//indicates that the mind is currently synced with a client
+
 //Initialisation procs
-/mob/living/proc/mind_initialize()
+/mob/proc/mind_initialize()
 	if(mind)
 		mind.key = key
+
 	else
 		mind = new /datum/mind(key)
-		mind.original = src
 		if(ticker)
 			ticker.minds += mind
 		else
-			world.log << "## DEBUG: mind_initialize(): No ticker ready yet! Please inform Carn"
+			error("mind_initialize(): No ticker ready yet! Please inform Carn")
 	if(!mind.name)	mind.name = real_name
 	mind.current = src
 
@@ -1246,6 +1249,11 @@ datum/mind
 	mind.assigned_role = "pAI"
 	mind.special_role = ""
 
+//BLOB
+/mob/camera/blob/mind_initialize()
+	..()
+	mind.special_role = "Blob"
+
 //Animals
 /mob/living/simple_animal/mind_initialize()
 	..()
@@ -1274,9 +1282,7 @@ datum/mind
 	mind.assigned_role = "Juggernaut"
 	mind.special_role = "Cultist"
 
-/mob/living/simple_animal/vox/armalis/mind_initialize()
-	..()
-	mind.assigned_role = "Armalis"
-	mind.special_role = "Vox Raider"
+
+
 
 

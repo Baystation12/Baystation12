@@ -1,10 +1,10 @@
 
-/mob/aiEye
+/mob/camera/aiEye
 	var/list/visibleCameraChunks = list()
 	var/mob/ai = null
 	density = 0
 
-/mob/living/silicon/ai/var/mob/aiEye/eyeobj = new()
+/mob/living/silicon/ai/var/mob/camera/aiEye/eyeobj = new()
 
 /mob/living/silicon/ai/New()
 	..()
@@ -31,7 +31,7 @@
 	eyeobj.loc = loc
 	cameranet.visibility(eyeobj)
 
-/mob/aiEye/Move()
+/mob/camera/aiEye/Move()
 	. = ..()
 	if(.)
 		cameranet.visibility(src)
