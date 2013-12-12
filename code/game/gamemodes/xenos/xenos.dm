@@ -36,9 +36,9 @@
 	//Check that we have enough alien candidates
 	if(candidates.len < required_enemies)
 		return 0
-	else if (playersready < recommended_players)
+	if (playersready < recommended_players)
 		xenos_num = required_enemies
-	else
+	if (playersready >= recommended_players)
 		xenos_num = recommended_enemies
 
 	//Grab candidates randomly until we have enough.
@@ -86,7 +86,7 @@
 				O.mind.original = O
 			else
 				O.key = xeno_mind.current.key
-
+			del(xeno_mind)
 			var/obj/loc_landmark
 			for(var/obj/effect/landmark/start/sloc in landmarks_list)
 				if (sloc.name == "XenoAI")
@@ -106,7 +106,7 @@
 				xeno_mind.transfer_to(O)
 			else
 				O.key = xeno_mind.current.key
-
+			del(xeno_mind)
 			xenoqueen_selected = 1
 			spawnpos++
 			continue
@@ -123,6 +123,7 @@
 			O.invisibility = 0
 
 			O.key = xeno_mind.current.key
+			del(xeno_mind)
 			O.job = "Alien Cyborg"
 			O.name = "Alien Cyborg"
 
@@ -136,7 +137,7 @@
 				xeno_mind.transfer_to(O)
 			else
 				O.key = xeno_mind.current.key
-
+			del(xeno_mind)
 		spawnpos++
 
 	spawn (rand(waittime_l, waittime_h))
