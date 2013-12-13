@@ -11,6 +11,7 @@
 	var/hitsound = null
 	var/w_class = 3.0
 	flags = FPRINT | TABLEPASS
+	var/nonplant_seed_type // Used for getting spessbux money trees.
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	pass_flags = PASSTABLE
 	pressure_resistance = 5

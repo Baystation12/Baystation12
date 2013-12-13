@@ -98,6 +98,8 @@ var/global/Holiday = null
 				if(21)							Holiday = "Saying-'Hello' Day"
 
 		if(12)	//Dec
+			Christmas_Game_Start()
+			Holiday = "Christmas Month" // Ensures Santa Squad can operate during the month.
 			switch(DD)
 				if(10)							Holiday = "Human-Rights Day"
 				if(14)							Holiday = "Monkey Day"
@@ -135,14 +137,22 @@ var/global/Holiday = null
 
 //Run at the  start of a round
 /proc/Holiday_Game_Start()
+	var/MM	=	text2num(time2text(world.timeofday, "MM")) 	// get the current month
 	if(Holiday)
 		world << "<font color='blue'>and...</font>"
 		world << "<h4>Happy [Holiday] Everybody!</h4>"
-		switch(Holiday)			//special holidays
-			if("Easter")
-				//do easter stuff
-			if("Christmas Eve","Christmas")
-				Christmas_Game_Start()
+		switch(MM)
+			if(12) // SANTA SQUAD, ASSEMBLE!
+				for(var/obj/item/clothing/head/helmet/space/rig/syndi/helm in world)
+					new /obj/item/clothing/head/helmet/space/santahat(helm.loc)
+					del(helm)
+				for(var/obj/item/clothing/suit/space/rig/syndi/suit in world)
+					new /obj/item/clothing/suit/space/santa(suit.loc)
+					del(suit)
+				for(var/obj/machinery/nuclearbomb/oh_my_god_JC_a_bomb in world)
+					oh_my_god_JC_a_bomb.icon_state = "nuclearbombxmas"
+					oh_my_god_JC_a_bomb.name = "Nanotrasen's Present"
+					oh_my_god_JC_a_bomb.desc = "Merry BOOMmas!"
 
 	return
 
@@ -174,5 +184,5 @@ var/global/Holiday = null
 		if("End of the World")
 			if(prob(eventchance))	GameOver()
 
-		if("Christmas","Christmas Eve")
+		if("Christmas","Christmas Eve","Christmas Month")
 			if(prob(eventchance))	ChristmasEvent()

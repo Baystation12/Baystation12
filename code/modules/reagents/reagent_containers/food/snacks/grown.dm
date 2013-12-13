@@ -1000,3 +1000,15 @@
 		src.visible_message("<span class='notice'>The [src.name] has been squashed, causing a distortion in space-time.</span>","<span class='moderate'>You hear a splat and a crackle.</span>")
 		del(src)
 		return
+
+/obj/item/weapon/reagent_containers/food/snacks/grown/present
+	name = "You shouldn't see this~"
+	seed = "/obj/item/seeds/xmastree"
+	desc = "Green and lush."
+	icon_state = "spawner"
+	potency = 10
+/obj/item/weapon/reagent_containers/food/snacks/grown/present/New()
+	..()
+	new /obj/item/weapon/a_gift/present(src.loc)
+	spawn(5)
+	del(src)
