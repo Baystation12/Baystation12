@@ -10,7 +10,7 @@
 	origin_tech = "combat=4;materials=2"
 	var/recentpump = 0 // to prevent spammage
 	var/pumped = 0
-
+	mag_type = "/obj/item/ammo_box/magazine/internal/shot"
 
 /obj/item/weapon/gun/projectile/shotgun/attackby(var/obj/item/A as obj, mob/user as mob)
 	var/num_loaded = 0
