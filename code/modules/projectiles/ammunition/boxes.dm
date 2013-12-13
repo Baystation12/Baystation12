@@ -14,7 +14,7 @@
 	multiple_sprites = 1
 
 
-/obj/item/ammo_magazine/c45
+/obj/item/ammo_magazine/c45m
 	name = "magazine (.45)"
 	icon_state = "45"
 	ammo_type = "/obj/item/ammo_casing/c45"
