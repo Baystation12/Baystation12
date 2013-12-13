@@ -10,6 +10,9 @@
 	var/caliber = ""							//Which kind of guns it can be loaded into
 	var/projectile_type = ""//The bullet type to create when New() is called
 	var/obj/item/projectile/BB = null 			//The loaded bullet
+	var/buck = 0
+	var/deviation = 0
+
 
 /obj/item/ammo_casing/New()
 	..()
@@ -30,8 +33,8 @@
 
 //Boxes of ammo
 /obj/item/ammo_box
-	name = "ammo box (.357)"
-	desc = "A box of ammo"
+	name = "ammo box (generic)"
+	desc = "A box of ammo?"
 	icon_state = "357"
 	icon = 'icons/obj/ammo.dmi'
 	flags = FPRINT | TABLEPASS | CONDUCT
@@ -43,11 +46,11 @@
 	throw_speed = 4
 	throw_range = 10
 	var/list/stored_ammo = list()
-	var/ammo_type = "/obj/item/ammo_casing"
+	var/obj/item/ammo_casing/ammo_type
 	var/max_ammo = 7
 	var/multiple_sprites = 0
 	var/caliber = ""
-
+	var/multiload = 1
 /obj/item/ammo_box/New()
 	for(var/i = 1, i <= max_ammo, i++)
 		stored_ammo += new ammo_type(src)
@@ -77,10 +80,11 @@
 	if(istype(A, /obj/item/ammo_box))
 		var/obj/item/ammo_box/AM = A
 		for(var/obj/item/ammo_casing/AC in AM.stored_ammo)
-			if(give_round(AC))
+			var/didload = give_round(AC)
+			if(didload)
 				AM.stored_ammo -= AC
 				num_loaded++
-			else
+			if(!multiload || !didload)
 				break
 	if(istype(A, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/AC = A

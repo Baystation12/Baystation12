@@ -10,10 +10,9 @@
 	w_class = 3.0
 	m_amt = 1000
 	recoil = 1
-	var/ammo_type = "/obj/item/ammo_casing/c10mm"
 	var/mag_type = "/obj/item/ammo_box/magazine/m10mm" //Removes the need for max_ammo and caliber info
 	var/obj/item/ammo_box/magazine/magazine
-	var/obj/item/ammo_casing/chambered = null // The round (not bullet) that is in the chamber.
+//	var/obj/item/ammo_casing/chambered = null // The round (not bullet) that is in the chamber.
 
 
 
@@ -59,7 +58,7 @@
 			user.remove_from_mob(AM)
 			magazine = AM
 			magazine.loc = src
-			user << "<span class='notice'>You load a new magazine into \the [src]!</span>"
+			user << "<span class='notice'>You load a new magazine into \the [src].</span>"
 			chamber_round()
 			A.update_icon()
 			update_icon()

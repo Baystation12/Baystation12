@@ -20,6 +20,7 @@
 	var/silenced = 0
 	var/recoil = 0
 	var/clumsy_check = 1
+	var/obj/item/ammo_casing/chambered = null // The round (not bullet) that is in the chamber. THIS MISPLACED ITEM BROUGHT TO YOU BY HACKY BUCKSHOT.
 	var/tmp/list/mob/living/target //List of who yer targeting.
 	var/tmp/lock_time = -100
 	var/tmp/mouthshoot = 0 ///To stop people from suiciding twice... >.>
@@ -47,6 +48,11 @@
 	emp_act(severity)
 		for(var/obj/O in contents)
 			O.emp_act(severity)
+
+	proc/prepare_shot(var/obj/item/projectile/proj) //Transfer properties from the gun to the bullet
+		proj.shot_from = src
+		proj.silenced = silenced
+		return
 
 /obj/item/weapon/gun/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
 	if(flag)	return //we're placing gun on a table or in backpack
@@ -125,6 +131,12 @@
 		"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>", \
 		"You hear a [istype(in_chamber, /obj/item/projectile/beam) ? "laser blast" : "gunshot"]!")
 
+	if (istype(in_chamber, /obj/item/projectile/bullet/blank)) // A hacky way of making blank shotgun shells work again. Honk.
+		in_chamber.delete()
+		in_chamber = null
+		return
+
+
 	in_chamber.original = target
 	in_chamber.loc = get_turf(user)
 	in_chamber.starting = get_turf(user)
@@ -142,6 +154,31 @@
 		else if(mob.shock_stage > 70)
 			in_chamber.yo += rand(-1,1)
 			in_chamber.xo += rand(-1,1)
+
+
+	if(chambered) // Beep boop buckshot
+		var/target_x = targloc.x
+		var/target_y = targloc.y
+		var/target_z = targloc.z
+		if(in_chamber)
+			in_chamber.process()
+		while(chambered.buck > 0)
+			var/dx = round(gaussian(0,chambered.deviation),1)
+			var/dy = round(gaussian(0,chambered.deviation),1)
+			targloc = locate(target_x+dx, target_y+dy, target_z)
+			if(!targloc || targloc == curloc)
+				break
+			in_chamber = new chambered.projectile_type()
+			prepare_shot(in_chamber)
+			in_chamber.original = target
+			in_chamber.loc = get_turf(user)
+			in_chamber.starting = get_turf(user)
+			in_chamber.current = curloc
+			in_chamber.yo = targloc.y - curloc.y
+			in_chamber.xo = targloc.x - curloc.x
+			if(in_chamber)
+				in_chamber.process()
+			chambered.buck--
 
 
 	if(params)
