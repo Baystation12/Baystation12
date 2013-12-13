@@ -61,7 +61,7 @@
 
 		if(href_list["remove"])
 			var/obj/item/P = locate(href_list["remove"])
-			if(P)
+			if(P && P.loc == src)
 				P.loc = usr.loc
 				usr.put_in_hands(P)
 

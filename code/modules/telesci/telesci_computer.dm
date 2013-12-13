@@ -84,6 +84,8 @@
 	interact(user)
 
 /obj/machinery/computer/telescience/interact(mob/user)
+	user.machine = src
+	in_use = 1
 
 	var/t = "<div class='statusDisplay'>[temp_msg]</div><BR>"
 	t += "<A href='?src=\ref[src];setrotation=1'>Set Bearing</A>"
@@ -301,6 +303,7 @@
 		temp_msg = "NOTICE:<BR>Bluespace crystals ejected."
 
 	updateDialog()
+	return 1
 
 /obj/machinery/computer/telescience/proc/recalibrate()
 	teles_left = rand(30, 40)
