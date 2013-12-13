@@ -35,11 +35,12 @@
 
 
 	if(O)
-		var/obj/item/F = O
-		for(t_amount in 1 to t_max)
-			new F.nonplant_seed_type(O.loc)
-		del(O)
-		return 1
+		if(O:nonplant_seed_type)
+			var/obj/item/F = O
+			for(t_amount in 1 to t_max)
+				new F:nonplant_seed_type(O.loc)
+			del(O)
+			return 1
 
 	/*else if(istype(O, /obj/item/stack/tile/grass))
 		var/obj/item/stack/tile/grass/S = O
