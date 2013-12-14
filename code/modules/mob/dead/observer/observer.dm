@@ -188,6 +188,9 @@ Works together with spawning an observer, noted above.
 		var/mob/dead/observer/ghost = new(src)	//Transfer safety to observer spawning proc.
 		ghost.can_reenter_corpse = can_reenter_corpse
 		ghost.timeofdeath = src.timeofdeath //BS12 EDIT
+		respawnable_list -= src
+		if(ghost.can_reenter_corpse)
+			respawnable_list += ghost
 		ghost.key = key
 		if(!ghost.client.holder && !config.antag_hud_allowed)    // For new ghosts we remove the verb from even showing up if it's not allowed.
 			ghost.verbs -= /mob/dead/observer/verb/toggle_antagHUD  // Poor guys, don't know what they are missing!
@@ -201,15 +204,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Ghost"
 	set desc = "Relinquish your life and enter the land of the dead."
 
-	var/response = alert(src, "Are you -sure- you want to ghost?\n(If you ghost, YOU WILL NOT BE ABLE TO RESPAWN THIS ROUND! You can't change your mind so choose wisely!)","Are you sure you want to ghost?","Ghost","Stay in body")
-	if(response != "Ghost")	return	//didn't want to ghost after-all
-	var/mob/dead/observer/ghost = ghostize(0)            //0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 	if(stat == DEAD)
+		ghostize(1)
+	else
+		var/response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost, you won't be able to play this round for another 30 minutes! You can't change your mind so choose wisely!)","Are you sure you want to ghost?","Ghost","Stay in body")
+		if(response != "Ghost")	return	//didn't want to ghost after-all
 		resting = 1
+		var/mob/dead/observer/ghost = ghostize(0)            //0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
-	respawnable_list -= src
-
-
 	return
 
 /mob/dead/observer/Move(NewLoc, direct)
