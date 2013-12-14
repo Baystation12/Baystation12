@@ -141,7 +141,11 @@
 				H << "<span class='notice'>You can't feel your [E.display_name] anymore...</span>"
 				for (var/datum/organ/external/C in E.children)
 					C.status |= ORGAN_DEAD
-		mob.adjustToxLoss(15*multiplier)
+			H.update_body(1)
+			if(multiplier < 1) multiplier = 1
+			H.adjustToxLoss(10*multiplier)
+	vampire
+		stage = 3
 
 	deactivate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
