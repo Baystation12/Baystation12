@@ -368,21 +368,24 @@
 			for(var/mob/living/carbon/human/M in SubA)
 				thunk(M)
 
-/area/proc/thunk(mob)
-	if(istype(mob,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
-		if((istype(mob:shoes, /obj/item/clothing/shoes/magboots) && (mob:shoes.flags & NOSLIP)))
+/area/proc/thunk(var/mob/living/carbon/human/M)
+	if(istype(M,/mob/living/carbon/human/))  // Only humans can wear magboots, so we give them a chance to.
+		if(istype(M.shoes, /obj/item/clothing/shoes/magboots) && (M.shoes.flags & NOSLIP))
 			return
 
-	if(istype(get_turf(mob), /turf/space)) // Can't fall onto nothing.
+	if (M.buckled) //Cam't fall down if you are buckled
 		return
 
-	if((istype(mob,/mob/living/carbon/human/)) && (mob:m_intent == "run")) // Only clumbsy humans can fall on their asses.
-		mob:AdjustStunned(5)
-		mob:AdjustWeakened(5)
+	if(istype(get_turf(M), /turf/space)) // Can't fall onto nothing.
+		return
 
-	else if (istype(mob,/mob/living/carbon/human/))
-		mob:AdjustStunned(2)
-		mob:AdjustWeakened(2)
+	if((istype(M,/mob/living/carbon/human/)) && (M.m_intent == "run")).
+		M.AdjustStunned(5)
+		M.AdjustWeakened(5)
 
-	mob << "Gravity!"
+	else if (istype(M,/mob/living/carbon/human/))
+		M.AdjustStunned(2)
+		M.AdjustWeakened(2)
+
+	M << "Gravity!"
 
