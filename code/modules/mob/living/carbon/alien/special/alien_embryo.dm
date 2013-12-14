@@ -80,7 +80,7 @@
 	// he will become the alien but if he doesn't then we will set the stage
 	// to 2, so we don't do a process heavy check everytime.
 
-	if(candidates.len)
+	if(candidates && candidates.len)
 		picked = pick(candidates)
 	else if(affected_mob.client)
 		picked = affected_mob.key
