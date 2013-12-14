@@ -1,3 +1,9 @@
+/mob/living/carbon/Login()
+	..()
+	update_hud()
+	return
+
+
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(.)

@@ -224,8 +224,32 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 		if(findtext("[handler]","vampire_"))
 			verbs += handler*/
 	for(var/i = 1; i <= 3; i++) // CHANGE TO 3 RATHER THAN 12 AFTER TESTING IS DONE
-		mind.vampire.powers.Add(i)
+		if(!(i in mind.vampire.powers))
+			mind.vampire.powers.Add(i)
 
+
+	for(var/n in mind.vampire.powers)
+		switch(n)
+			if(VAMP_SHAPE)
+				verbs += /client/proc/vampire_shapeshift
+			if(VAMP_VISION)
+				continue
+			if(VAMP_DISEASE)
+				verbs += /client/proc/vampire_disease
+			if(VAMP_CLOAK)
+				verbs += /client/proc/vampire_cloak
+			if(VAMP_BATS)
+				verbs += /client/proc/vampire_bats
+			if(VAMP_SCREAM)
+				verbs += /client/proc/vampire_screech
+			if(VAMP_JAUNT)
+				verbs += /client/proc/vampire_jaunt
+			if(VAMP_BLINK)
+				verbs += /client/proc/vampire_shadowstep
+			if(VAMP_SLAVE)
+				verbs += /client/proc/vampire_enthrall
+			if(VAMP_FULL)
+				continue
 /mob/proc/remove_vampire_powers()
 	for(var/handler in typesof(/client/proc))
 		if(findtext("[handler]","vampire_"))
@@ -301,6 +325,11 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 		// Commented out until we can figured out a way to stop this from spamming.
 		//src << "\blue Your rejuvination abilities have improved and will now heal you over time when used."
 
+	// TIER 3.5 (/vg/)
+	if(vamp.bloodtotal >= 250)
+		if(!(VAMP_BLINK in vamp.powers))
+			vamp.powers.Add(VAMP_BLINK)
+
 	// TIER 4
 	if(vamp.bloodtotal >= 300)
 		if(!(VAMP_JAUNT in vamp.powers))
@@ -343,8 +372,11 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 				if(VAMP_SLAVE)
 					src << "\blue You have gained the Enthrall ability which at a heavy blood cost allows you to enslave a human that is not loyal to any other for a random period of time."
 					verbs += /client/proc/vampire_enthrall
+				if(VAMP_BLINK)
+					src << "\blue You have gained the ability to shadowstep, which makes you disappear into nearby shadows at the cost of blood."
+					verbs += /client/proc/vampire_shadowstep
 				if(VAMP_FULL)
-					src << "\blue You have reached your full potential and are no longer weak to the effects of anything holy and your vision has been improved greatyl."
+					src << "\blue You have reached your full potential and are no longer weak to the effects of anything holy and your vision has been improved greatly."
 					//no verb
 //prepare for copypaste
 /datum/game_mode/proc/update_vampire_icons_added(datum/mind/vampire_mind)

@@ -71,6 +71,8 @@ datum/mind
 			if(changeling)
 				current.remove_changeling_powers()
 				current.verbs -= /datum/changeling/proc/EvolutionMenu
+			if(vampire)
+				current.remove_vampire_powers()
 			current.mind = null
 
 			nanomanager.user_transferred(current, new_character)
@@ -82,7 +84,8 @@ datum/mind
 
 		if(changeling)
 			new_character.make_changeling()
-
+		if(vampire)
+			new_character.make_vampire()
 		if(active)
 			new_character.key = key		//now transfer the key to link the client to our new body
 

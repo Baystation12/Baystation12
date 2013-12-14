@@ -96,6 +96,7 @@ var/datum/global_hud/global_hud = new()
 	var/obj/screen/lingchemdisplay
 	var/obj/screen/blobpwrdisplay
 	var/obj/screen/blobhealthdisplay
+	var/obj/screen/vampire_blood_display
 	var/obj/screen/alien_plasma_display
 	var/obj/screen/r_hand_hud_object
 	var/obj/screen/l_hand_hud_object
@@ -188,7 +189,10 @@ datum/hud/New(mob/owner)
 		robot_hud()
 	else if(isobserver(mymob))
 		ghost_hud()
-
+	else if(isovermind(mymob))
+		blob_hud()
+	else if(mymob.mind && mymob.mind.vampire)
+		vampire_hud()
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
 /mob/verb/button_pressed_F12()

@@ -20,7 +20,11 @@
 	if(vampire.bloodusable < required_blood)
 		src << "<span class='warning'>You require at least [required_blood] units of usable blood to do that!</span>"
 		return 0
-
+	//chapel check
+	if(istype(loc.loc, /area/chapel))
+		if(!(VAMP_FULL in vampire.powers))
+			src << "<span class='warning'>Your powers are useless on this holy ground.</span>"
+			return 0
 	return 1
 
 /mob/proc/vampire_can_reach(mob/M as mob, active_range = 1)
@@ -124,7 +128,9 @@
 	shutdown.spreadtype = "None"
 	shutdown.uniqueID = rand(0,10000)
 	shutdown.effects += holder
-	shutdown.speed = 10
+	shutdown.speed = 1
+	shutdown.stage = 2
+	shutdown.clicks = 185
 	infect_virus2(C,shutdown,0)
 	M.current.remove_vampire_blood(100)
 	M.current.verbs -= /client/proc/vampire_disease
@@ -254,7 +260,7 @@
 	if(!C.mind)
 		src << "\red [C.name]'s mind is not there for you to enthrall."
 		return 0
-	if(/obj/item/weapon/implant/traitor in C.contents || /obj/item/weapon/implant/loyalty in C.contents || C.mind in ticker.mode.vampires || C.mind.vampire || C.mind in ticker.mode.enthralled)
+	if((/obj/item/weapon/implant/traitor in C.contents) || (/obj/item/weapon/implant/loyalty in C.contents )||( C.mind in ticker.mode.vampires )||( C.mind.vampire )||( C.mind in ticker.mode.enthralled ))
 		C.visible_message("[C] seems to resist the takeover!", "You feel a familiar sensation in your skull that quickly dissipates.")
 		return 0
 	if(!ishuman(C))
@@ -269,6 +275,8 @@
 	var/ref = "\ref[src.mind]"
 	if(!(ref in ticker.mode.thralls))
 		ticker.mode.thralls[ref] = list(H.mind)
+	else
+		ticker.mode.thralls[ref] += H.mind
 	ticker.mode.enthralled.Add(H.mind)
 	ticker.mode.enthralled[H.mind] = src.mind
 	H.mind.special_role = "VampThrall"
@@ -359,6 +367,63 @@
 		M.current.remove_vampire_blood(30)
 		M.current.verbs -= /client/proc/vampire_jaunt
 		spawn(600) M.current.verbs += /client/proc/vampire_jaunt
+
+// Blink for vamps
+// Less smoke spam.
+/client/proc/vampire_shadowstep()
+	set category = "Vampire"
+	set name = "Shadowstep (30)"
+	set desc = "Vanish into the shadows."
+	var/datum/mind/M = usr.mind
+	if(!M) return
+
+	// Teleport radii
+	var/inner_tele_radius = 0
+	var/outer_tele_radius = 6
+
+	// Maximum lighting_lumcount.
+	var/max_lum = 1
+
+	if(M.current.vampire_power(30, 0))
+		if(M.current.buckled) M.current.buckled.unbuckle()
+		spawn(0)
+			var/list/turfs = new/list()
+			for(var/turf/T in range(usr,outer_tele_radius))
+				if(T in range(usr,inner_tele_radius)) continue
+				if(istype(T,/turf/space)) continue
+				if(T.density) continue
+				if(T.x>world.maxx-outer_tele_radius || T.x<outer_tele_radius)	continue	//putting them at the edge is dumb
+				if(T.y>world.maxy-outer_tele_radius || T.y<outer_tele_radius)	continue
+
+				// LIGHTING CHECK
+				if(T.lighting_lumcount > max_lum) continue
+				turfs += T
+
+			if(!turfs.len)
+				usr << "\red You cannot find darkness to step to."
+				return
+
+			var/turf/picked = pick(turfs)
+
+			if(!picked || !isturf(picked))
+				return
+			M.current.ExtinguishMob()
+			if(M.current.buckled)
+				M.current.buckled.unbuckle()
+			var/atom/movable/overlay/animation = new /atom/movable/overlay( get_turf(usr) )
+			animation.name = usr.name
+			animation.density = 0
+			animation.anchored = 1
+			animation.icon = usr.icon
+			animation.alpha = 127
+			animation.layer = 5
+			//animation.master = src
+			usr.loc = picked
+			spawn(10)
+				del(animation)
+		M.current.verbs -= /client/proc/vampire_shadowstep
+		spawn(20)
+			M.current.verbs += /client/proc/vampire_shadowstep
 
 /mob/proc/remove_vampire_blood(amount = 0)
 	var/bloodold
