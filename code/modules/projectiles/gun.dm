@@ -45,6 +45,11 @@
 	proc/special_check(var/mob/M) //Placeholder for any special checks, like detective's revolver.
 		return 1
 
+
+	proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
+		user << "<span class='warning'>*click*</span>"
+		return
+
 	emp_act(severity)
 		for(var/obj/O in contents)
 			O.emp_act(severity)

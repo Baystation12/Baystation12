@@ -196,3 +196,9 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 			if(prob(15))
 				L.Weaken(1)
 				L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
+
+/mob/living/simple_animal/hostile/mimic/copy/proc/ChangeOwner(var/mob/owner)
+	if(owner != creator)
+		LoseTarget()
+		creator = owner
+		faction = "\ref[owner]"
