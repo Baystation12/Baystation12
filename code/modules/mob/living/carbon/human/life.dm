@@ -923,8 +923,8 @@
 
 			if(nutrition > 500)
 				nutrition = 500
-			if(light_amount > 2) //if there's enough light, heal
-				heal_overall_damage(1,1)
+			if(light_amount > 5) //if there's enough light, heal
+				adjustBruteLoss(-1)
 				adjustToxLoss(-1)
 				adjustOxyLoss(-1)
 		if(dna && dna.mutantrace == "shadow")
