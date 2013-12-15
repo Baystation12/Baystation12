@@ -13,6 +13,7 @@
 	..()
 
 	if((M != src) && check_shields(0, M.name))
+		add_logs(src, M, "attempted to touch")
 		visible_message("\red <B>[M] attempted to touch [src]!</B>")
 		return 0
 
@@ -47,6 +48,7 @@
 		if("help")
 			if(health >= config.health_threshold_crit)
 				help_shake_act(M)
+				add_logs(src, M, "shaked")
 				return 1
 //			if(M.health < -75)	return 0
 
@@ -66,6 +68,7 @@
 			requests += O
 			spawn(0)
 				O.process()
+			add_logs(src, M, "CPRed")
 			return 1
 
 		if("grab")
@@ -86,6 +89,7 @@
 
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
+			add_logs(src, M, "grabbed", addition="passively")
 			return 1
 
 		if("hurt")
@@ -104,14 +108,12 @@
 						return 0
 					//we're good to suck the blood, blaah
 					M.handle_bloodsucking(src)
+					add_logs(src, M, "vampirebit")
+					message_admins("[M.name] ([M.ckey]) vampirebit [src.name] ([src.ckey])")
 					return
 			//end vampire codes
 
-
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
-
-			log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
+			add_logs(src, M, "[M.species.attack_verb]ed")
 
 			var/damage = rand(0, M.species.max_hurt_damage)//BS12 EDIT
 			if(!damage)
@@ -146,10 +148,7 @@
 
 
 		if("disarm")
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
-
-			log_attack("[M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])")
+			add_logs(src, M, "disarmed")
 
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)
