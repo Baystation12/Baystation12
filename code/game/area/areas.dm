@@ -213,9 +213,6 @@
 	else
 	//	new lighting behaviour with obj lights
 		icon_state = null
-	for(var/area/RA in related)
-		RA.updateicon()
-
 
 
 /*
