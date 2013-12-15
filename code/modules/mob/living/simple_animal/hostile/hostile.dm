@@ -99,6 +99,9 @@
 		var/obj/machinery/bot/B = target_mob
 		B.attack_animal(src)
 
+/mob/living/simple_animal/hostile/proc/Goto(var/target, var/delay)
+	walk_to(src, target, 1, delay)
+
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null

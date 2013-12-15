@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\game\mecha\mecha.dm;code\modules\admin\admin.dm;code\modules\admin\topic.dm;code\__HELPERS\unsorted.dm;code\modules\mob\camera\camera.dm;code\modules\mob\living\silicon\ai\freelook\cameranet.dm;code\modules\mob\living\silicon\ai\freelook\chunk.dm;code\game\gamemodes\blob\blob_report.dm;code\_onclick\overmind.dm;code\game\gamemodes\blob\blob.dm;code\game\gamemodes\blob\blob_finish.dm
+LAST_COMPILE_VERSION: 502.1218
+DIR: code code\_onclick code\datums code\game code\game\gamemodes code\game\gamemodes\blob code\game\gamemodes\blob\blobs code\game\gamemodes\changeling code\game\mecha code\modules code\modules\admin code\modules\mob code\modules\mob\camera code\modules\mob\dead code\modules\mob\living code\modules\mob\living\silicon code\modules\mob\living\silicon\ai code\modules\mob\living\silicon\ai\freelook maps 
+FILE: code\game\gamemodes\blob\blob.dm
+LAST_COMPILE_TIME: 1386889169
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

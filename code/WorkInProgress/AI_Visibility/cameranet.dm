@@ -71,7 +71,7 @@ var/datum/cameranet/cameranet = new()
 // have a proc called automatically every time an
 // object's loc changes.
 
-/datum/cameranet/proc/visibility(mob/aiEye/ai)
+/datum/cameranet/proc/visibility(mob/camera/aiEye/ai)
 	var/x1 = max(0, ai.x - 16) & ~0xf
 	var/y1 = max(0, ai.y - 16) & ~0xf
 	var/x2 = min(world.maxx, ai.x + 16) & ~0xf

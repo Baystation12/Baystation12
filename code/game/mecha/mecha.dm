@@ -448,6 +448,9 @@
 		visible_message("\blue The [user] rebounds off [src.name]'s armor!")
 	return
 
+/obj/mecha/blob_act()
+	take_damage(10, "brute")
+	return
 
 /obj/mecha/attack_animal(mob/living/simple_animal/user as mob)
 	src.log_message("Attack by simple animal. Attacker - [user].",1)
