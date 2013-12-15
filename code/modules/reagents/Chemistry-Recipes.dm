@@ -105,11 +105,19 @@ datum
 			required_reagents = list("inaprovaline" = 1, "ethanol" = 1, "oxygen" = 1)
 			result_amount = 3
 
+		paracetamol
+			name = "Paracetamol"
+			id = "paracetamol"
+			result = "paracetamol"
+			required_reagents = list("tramadol" = 1, "sugar" = 1, "water" = 1)
+			result_amount = 3
+
 		oxycodone
 			name = "Oxycodone"
 			id = "oxycodone"
 			result = "oxycodone"
-			required_reagents = list("ethanol" = 1, "tramadol" = 1, "plasma" = 1)
+			required_reagents = list("ethanol" = 1, "tramadol" = 1)
+			required_catalysts = list("plasma" = 1)
 			result_amount = 1
 
 		//cyanide
@@ -118,6 +126,13 @@ datum
 		//	result = "cyanide"
 		//	required_reagents = list("hydrogen" = 1, "carbon" = 1, "nitrogen" = 1)
 		//	result_amount = 1
+
+		water //I can't believe we never had this.
+			name = "Water"
+			id = "water"
+			result = null
+			required_reagents = list("oxygen" = 2, "hydrogen" = 1)
+			result_amount = 1
 
 		thermite
 			name = "Thermite"
@@ -187,6 +202,14 @@ datum
 			id = "kelotane"
 			result = "kelotane"
 			required_reagents = list("silicon" = 1, "carbon" = 1)
+			result_amount = 2
+
+		peridaxon
+			name = "Peridaxon"
+			id = "peridaxon"
+			result = "peridaxon"
+			required_reagents = list("bicaridine" = 2, "clonexadone" = 2)
+			required_catalysts = list("plasma" = 5)
 			result_amount = 2
 
 		virus_food
@@ -450,6 +473,27 @@ datum
 			result = "chloralhydrate"
 			required_reagents = list("ethanol" = 1, "chlorine" = 3, "water" = 1)
 			result_amount = 1
+
+		potassium_chloride
+			name = "Potassium Chloride"
+			id = "potassium_chloride"
+			id = "potassium_chloride"
+			required_reagents = list("sodiumchloride" = 1, "potassium" = 1)
+			result_amount = 2
+
+		potassium_chlorophoride
+			name = "Potassium Chlorophoride"
+			id = "potassium_chlorophoride"
+			id = "potassium_chlorophoride"
+			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloral_hydrate" = 1)
+			result_amount = 4
+
+		stoxin
+			name = "Sleep Toxin"
+			id = "stoxin"
+			result = "stoxin"
+			required_reagents = list("chloralhydrate" = 1, "sugar" = 4)
+			result_amount = 5
 
 		zombiepowder
 			name = "Zombie Powder"
@@ -1790,7 +1834,7 @@ datum
 			result = "barefoot"
 			required_reagents = list("berryjuice" = 1, "cream" = 1, "vermouth" = 1)
 			result_amount = 3
-			
+
 		grapesoda //Allows Grape Soda to be made
 			name = "Grape Soda"
 			id = "grapesoda"

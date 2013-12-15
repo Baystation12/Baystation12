@@ -9,6 +9,7 @@
  *		Mining Satchel
  *		Plant Bag
  *		Sheet Snatcher
+ *		Cash Bag
  *
  *	-Sayu
  */
@@ -238,3 +239,18 @@
 	name = "Sheet Snatcher 9000"
 	desc = ""
 	capacity = 500//Borgs get more because >specialization
+
+// -----------------------------
+//           Cash Bag
+// -----------------------------
+
+/obj/item/weapon/storage/bag/cash
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "cashbag"
+	name = "Cash bag"
+	desc = "A bag for carrying lots of cash. It's got a big dollar sign printed on the front."
+	storage_slots = 50; //the number of cash pieces it can carry.
+	max_combined_w_class = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * cash.w_class
+	max_w_class = 3
+	w_class = 1
+	can_hold = list("/obj/item/weapon/coin","/obj/item/weapon/spacecash")

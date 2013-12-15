@@ -103,16 +103,16 @@ var/list/radiochannels = list(
 	"Medical" = 1355,
 	"Engineering" = 1357,
 	"Security" = 1359,
-	"Response Team" = 1443,
-	"Deathsquad" = 1441,
+	"Response Team" = 1345,
+	"Deathsquad" = 1341,
 	"Syndicate" = 1213,
 	"Supply" = 1347,
 )
 //depenging helpers
-var/list/DEPT_FREQS = list(1351, 1355, 1357, 1359, 1213, 1443, 1441, 1347)
+var/list/DEPT_FREQS = list(1351, 1355, 1357, 1359, 1213, 1345, 1341, 1347)
 
 // central command channels, i.e deathsquid & response teams
-var/list/CENT_FREQS = list(1441, 1443)
+var/list/CENT_FREQS = list(1345, 1341)
 
 var/const/COMM_FREQ = 1353 //command, colored gold in chat window
 var/const/SYND_FREQ = 1213
@@ -139,6 +139,10 @@ var/const/RADIO_MULEBOT = "8"
 var/const/RADIO_MAGNETS = "9"
 
 var/global/datum/controller/radio/radio_controller
+
+/hook/startup/proc/createRadioController()
+	radio_controller = new /datum/controller/radio()
+	return 1
 
 datum/controller/radio
 	var/list/datum/radio_frequency/frequencies = list()

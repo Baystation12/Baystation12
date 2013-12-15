@@ -166,9 +166,11 @@ datum/hud/New(mob/owner)
 	if(!ismob(mymob)) return 0
 	if(!mymob.client) return 0
 	var/ui_style = ui_style2icon(mymob.client.prefs.UI_style)
+	var/ui_color = mymob.client.prefs.UI_style_color
+	var/ui_alpha = mymob.client.prefs.UI_style_alpha
 
 	if(ishuman(mymob))
-		human_hud(ui_style) // Pass the player the UI style chosen in preferences
+		human_hud(ui_style, ui_color, ui_alpha) // Pass the player the UI style chosen in preferences
 	else if(ismonkey(mymob))
 		monkey_hud(ui_style)
 	else if(isbrain(mymob))

@@ -88,6 +88,18 @@ emp_act
 		return
 //END TASER NERF
 
+		var/datum/organ/external/organ = get_organ(check_zone(def_zone))
+
+		var/armor = checkarmor(organ, "bullet")
+
+		if((P.embed && prob(20 + max(P.damage - armor, -10))) && P.damage_type == BRUTE)
+			var/obj/item/weapon/shard/shrapnel/SP = new()
+			(SP.name) = "[P.name] shrapnel"
+			(SP.desc) = "[SP.desc] It looks like it was fired from [P.shot_from]."
+			(SP.loc) = organ
+			organ.implants += SP
+			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
+			SP.add_blood(src)
 
 	return (..(P , def_zone))
 
@@ -159,6 +171,9 @@ emp_act
 	for(var/datum/organ/external/O  in organs)
 		if(O.status & ORGAN_DESTROYED)	continue
 		O.emp_act(severity)
+		for(var/datum/organ/internal/I  in O.internal_organs)
+			if(I.robotic == 0)	continue
+			I.emp_act(severity)
 	..()
 
 

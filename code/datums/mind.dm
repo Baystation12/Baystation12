@@ -726,7 +726,7 @@ datum/mind
 					else
 						current.dna = changeling.absorbed_dna[1]
 						current.real_name = current.dna.real_name
-						updateappearance(current, current.dna.uni_identity)
+						current.UpdateAppearance()
 						domutcheck(current, null)
 
 		else if (href_list["nuclear"])

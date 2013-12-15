@@ -1,3 +1,6 @@
+/hook/startup/proc/createDatacore()
+	data_core = new /obj/effect/datacore()
+	return 1
 
 /obj/effect/datacore/proc/manifest(var/nosleep = 0)
 	spawn()
@@ -109,8 +112,8 @@
 		L.fields["sex"]			= H.gender
 		L.fields["b_type"]		= H.b_type
 		L.fields["b_dna"]		= H.dna.unique_enzymes
-		L.fields["enzymes"]		= H.dna.struc_enzymes
-		L.fields["identity"]	= H.dna.uni_identity
+		L.fields["enzymes"]		= H.dna.SE
+		L.fields["identity"]	= H.dna.UI
 		L.fields["image"]		= getFlatIcon(H,0)	//This is god-awful
 		locked += L
 	return
