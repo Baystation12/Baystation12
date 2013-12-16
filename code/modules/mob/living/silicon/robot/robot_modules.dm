@@ -96,6 +96,7 @@
 		modules += new /obj/item/device/multitool(src)
 		modules += new /obj/item/device/t_scanner(src)
 		modules += new /obj/item/device/analyzer(src)
+		modules += new /obj/item/taperoll/engineering(src)
 
 		var/obj/item/stack/sheet/metal/cyborg/M = new /obj/item/stack/sheet/metal/cyborg(src)
 		M.amount = 50
@@ -138,6 +139,7 @@
 		modules += new /obj/item/weapon/handcuffs/cyborg(src)
 		modules += new /obj/item/weapon/melee/baton/loaded(src)
 		modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
+		modules += new /obj/item/taperoll/police(src)
 		emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
 
 
