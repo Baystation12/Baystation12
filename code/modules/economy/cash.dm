@@ -12,7 +12,6 @@
 	throw_speed = 1
 	throw_range = 2
 	w_class = 1.0
-	var/nonplant_seed_type = "/obj/item/seeds/cashseed"
 	var/access = list()
 	access = access_crate_cash
 	var/worth = 0
