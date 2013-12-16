@@ -119,6 +119,24 @@
 		for (var/obj/machinery/computer/station_alert/a in machines)
 			a.triggerAlarm("Fire", src, cameras, src)
 
+/area/proc/increaseresidue(var/increase_amount = 0)
+	if(name == "Space")
+		return
+	residuelevel += increase_amount
+	updateicon()
+
+/area/proc/decreaseresidue(var/decrease_amount = 0)
+	if(name == "Space")
+		return
+	if(residuelevel > 0)
+		residuelevel -= decrease_amount
+		if(residuelevel < 0)
+			residuelevel = 0
+			updateicon()
+			return 0
+		updateicon()
+		return 1
+
 /area/proc/firereset()
 	if (fire)
 		fire = 0
@@ -191,6 +209,10 @@
 	else
 	//	new lighting behaviour with obj lights
 		icon_state = null
+	if(residuelevel > 50)
+		icon_state = "residuelevel_low"
+	if(residuelevel > 100)
+		icon_state = "residuelevel_high"
 
 
 /*

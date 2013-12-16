@@ -819,6 +819,8 @@
 #include "code\modules\library\lib_machines.dm"
 #include "code\modules\library\lib_readme.dm"
 #include "code\modules\liquid\splash_simulation.dm"
+#include "code\modules\magicresearch\magic_items.dm"
+#include "code\modules\magicresearch\magic_machines.dm"
 #include "code\modules\maps\dmm_suite.dm"
 #include "code\modules\maps\reader.dm"
 #include "code\modules\maps\swapmaps.dm"
@@ -1321,5 +1323,5 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\tgstation2.dmm"
+#include "maps\test.dmm"
 // END_INCLUDE

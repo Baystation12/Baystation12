@@ -158,8 +158,6 @@ obj/item/weapon/gun/energy/staff
 
 	update_icon()
 		return
-
-
 /obj/item/weapon/gun/energy/meteorgun/pen
 	name = "meteor pen"
 	desc = "The pen is mightier than the sword."
@@ -194,3 +192,35 @@ obj/item/weapon/gun/energy/staff/focus
 			user << "\red The [src.name] will now strike only a single person."
 			projectile_type = "/obj/item/projectile/forcebolt"
 	*/
+
+/obj/item/weapon/gun/energy/staff/death
+	name = "Death Wand"
+	desc = "Very deadly. Use with caution."
+	icon = 'icons/obj/cult.dmi'
+	icon_state = "deathwand"
+	projectile_type = "/obj/item/projectile/energy/death"
+	charge_cost = 350
+
+/obj/item/weapon/gun/energy/staff/pain
+	name = "Pain Wand"
+	desc = "Very painful. Use with caution."
+	icon = 'icons/obj/cult.dmi'
+	icon_state = "painwand"
+	projectile_type = "/obj/item/projectile/energy/pain"
+	charge_cost = 200
+
+/obj/item/weapon/gun/energy/staff/change
+	name = "Change Wand"
+	desc = "Very painful. Use with caution."
+	icon = 'icons/obj/cult.dmi'
+	icon_state = "changewand"
+	projectile_type = "/obj/item/projectile/change"
+	charge_cost = 100
+
+/obj/item/weapon/gun/energy/staff/animate
+	name = "Animation Wand"
+	desc = "A wand of animation. Use with caution."
+	icon = 'icons/obj/cult.dmi'
+	icon_state = "animatewand"
+	projectile_type = "/obj/item/projectile/animate"
+	charge_cost = 100

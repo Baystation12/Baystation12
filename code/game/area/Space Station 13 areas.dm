@@ -51,6 +51,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 //	var/list/lights				// list of all lights on this area
 	var/list/all_doors = list()		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/air_doors_activated = 0
+	var/magiclevel = 0 // The residue level of the area. Determines whether your magic stuff is gonna fuck up when you try to use it.
+	var/residuelevel = 0 // The magic level of the area. Determines whether your
 
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
