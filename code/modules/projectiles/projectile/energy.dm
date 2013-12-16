@@ -60,4 +60,15 @@
 	weaken = 5
 
 
+/obj/item/projectile/energy/death
+	name = "death bolt"
+	icon_state = "ice_1"
+	damage = 99999 // You aren't coming back from this one.
+	damage_type = TOX
 
+/obj/item/projectile/energy/pain
+	name = "pain bolt"
+	icon_state = "ice_1"
+	damage = 10
+	damage_type = TOX
+	weaken = 10
