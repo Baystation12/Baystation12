@@ -9,7 +9,6 @@
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
-	var/dirtoverlay = null
 /turf/simulated/New()
 	..()
 	levelupdate()
@@ -21,18 +20,15 @@
 
 	if (istype(A,/mob/living/carbon))
 		var/mob/living/carbon/M = A
-		var/obj/effect/decal/cleanable/dirt/dirttile = dirtoverlay
-		if(M.lying)	return
+		if(M.lying)        return
 		dirt++
+		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 		if (dirt >= 30)
-			if (!locate(/obj/effect/decal/cleanable/dirt, src))
+			if (!dirtoverlay)
 				dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
-				dirttile = dirtoverlay
-				dirttile.alpha = 15
-		if (dirt > 30 && dirtoverlay && dirttile.alpha <= 255)
-			dirttile.alpha += 20
-		if (dirt == 0)
-			dirtoverlay = null
+				dirtoverlay.alpha = 15
+			else if (dirt > 30)
+				dirtoverlay.alpha = min(dirtoverlay.alpha+20, 255)
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
