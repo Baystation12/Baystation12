@@ -7961,7 +7961,7 @@
 "cXe" = (/obj/structure/rack,/obj/item/ammo_box/magazine/msmg9mm,/obj/item/ammo_box/magazine/msmg9mm,/obj/item/weapon/gun/projectile/automatic,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/admin{requires_power = 0})
 "cXf" = (/obj/structure/rack,/obj/item/ammo_box/magazine/uzim45,/obj/item/ammo_box/magazine/uzim45,/obj/item/weapon/gun/projectile/automatic/mini_uzi,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/admin{requires_power = 0})
 "cXg" = (/obj/structure/rack,/obj/item/ammo_box/magazine/m75,/obj/item/ammo_box/magazine/m75,/obj/item/weapon/gun/projectile/automatic/gyropistol,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/admin{requires_power = 0})
-"cXh" = (/obj/structure/rack,/obj/item/ammo_box,/obj/item/ammo_box,/obj/item/weapon/gun/projectile/revolver/mateba,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/admin{requires_power = 0})
+"cXh" = (/obj/structure/rack,/obj/item/weapon/gun/projectile/revolver/mateba,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/admin{requires_power = 0})
 "cXi" = (/obj/structure/rack,/obj/item/weapon/gun/energy/pulse_rifle/M1911,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/admin{requires_power = 0})
 "cXj" = (/obj/structure/rack,/obj/item/clothing/under/fluff/milo_hachert,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/admin{requires_power = 0})
 "cXk" = (/obj/structure/rack,/obj/item/clothing/under/fluff/olddressuniform,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/admin{requires_power = 0})
