@@ -66,7 +66,8 @@
 		update_icon()
 
 	afterattack(obj/target, mob/user , flag)
-		if (!is_open_container())
+
+		if (!is_open_container() || get_dist(get_turf(src),get_turf(target))>1)
 			return
 
 		for(var/type in src.can_be_placed_into)
