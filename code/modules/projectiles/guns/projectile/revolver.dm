@@ -54,7 +54,7 @@
 					caliber = "357"
 					desc = "The barrel and chamber assembly seems to have been modified."
 					user << "<span class='warning'>You reinforce the barrel of [src]! Now it will fire .357 rounds.</span>"
-			else
+			else if (caliber == "357")
 				user << "<span class='notice'>You begin to revert the modifications to [src].</span>"
 				if(loaded.len)
 					afterattack(user, user)	//and again
