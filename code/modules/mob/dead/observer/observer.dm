@@ -1,3 +1,7 @@
+#define GHOST_CAN_REENTER 1
+#define GHOST_IS_OBSERVER 2
+
+
 /mob/dead/observer
 	name = "ghost"
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
@@ -19,11 +23,16 @@
 	universal_speak = 1
 	var/atom/movable/following = null
 	var/medHUD = 0
-/mob/dead/observer/New(mob/body)
+/mob/dead/observer/New(var/mob/body=null, var/flags=1)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
 	verbs += /mob/dead/observer/proc/dead_tele
+
+	can_reenter_corpse = flags & GHOST_CAN_REENTER
+	started_as_observer = flags & GHOST_IS_OBSERVER
+
+
 	stat = DEAD
 
 	var/turf/T
@@ -183,10 +192,9 @@ Works together with spawning an observer, noted above.
 					U.client.images += image(tempHud,silicon_target,"hudmalai")
 	return 1
 
-/mob/proc/ghostize(var/can_reenter_corpse = 1)
+/mob/proc/ghostize(var/flags = GHOST_CAN_REENTER)
 	if(key)
-		var/mob/dead/observer/ghost = new(src)	//Transfer safety to observer spawning proc.
-		ghost.can_reenter_corpse = can_reenter_corpse
+		var/mob/dead/observer/ghost = new(src, flags)	//Transfer safety to observer spawning proc.
 		ghost.timeofdeath = src.timeofdeath //BS12 EDIT
 		respawnable_list -= src
 		if(ghost.can_reenter_corpse)
