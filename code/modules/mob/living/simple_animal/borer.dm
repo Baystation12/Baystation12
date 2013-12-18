@@ -140,12 +140,16 @@
 		src << "You cannot do that in your current state."
 		return
 
+	if(host.internal_organs_by_name["brain"]) //this should only run in admin-weirdness situations, but it's here non the less - RR
+		src << "<span class='warning'>There is no brain here for us to command!</span>"
+		return
+
 	src << "You begin delicately adjusting your connection to the host brain..."
 
 	spawn(300+(host.brainloss*5))
 
-		if(!host || !src || controlling) return
-
+		if(!host || !src || controlling)
+			return
 		else
 			src << "\red <B>You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system.</B>"
 			host << "\red <B>You feel a strange shifting sensation behind your eyes as an alien consciousness displaces yours.</B>"
