@@ -117,6 +117,8 @@
 					<A href='?src=\ref[src];secretsfun=fakeguns'>Make all items look like guns</A><BR>
 					<A href='?src=\ref[src];secretsfun=schoolgirl'>Japanese Animes Mode</A><BR>
 					<A href='?src=\ref[src];secretsfun=eagles'>Egalitarian Station Mode</A><BR>
+					<A href='?src=\ref[src];secretsfun=guns'>Summon Guns</A><BR>
+					<A href='?src=\ref[src];secretsfun=magic'>Summon Magic</A><BR>
 					<BR>
 					<A href='?src=\ref[src];secretsfun=securitylevel0'>Change Security Level To Green</A><BR>
 					<A href='?src=\ref[src];secretsfun=securitylevel1'>Change Security Level To Blue</A><BR>
