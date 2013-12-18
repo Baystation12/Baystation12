@@ -355,12 +355,14 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	var/list/choices = list()
 	for(var/mob/living/carbon/C in view(1,src))
-		if(C.stat != 2)
+		if(C.stat != 2 && src.Adjacent(C))
 			choices += C
 
 	var/mob/living/carbon/M = input(src,"Who do you wish to infest?") in null|choices
 
 	if(!M || !src) return
+
+	if(!(src.Adjacent(M))) return
 
 	if(M.has_brain_worms())
 		src << "You cannot infest someone who is already infested!"
