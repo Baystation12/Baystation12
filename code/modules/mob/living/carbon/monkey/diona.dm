@@ -17,8 +17,14 @@
 	dna.mutantrace = "plant"
 	greaterform = "Diona"
 	add_language("Rootspeak")
+	verbs -= /mob/living/carbon/monkey/verb/ventcrawl
 
 //Verbs after this point.
+/mob/living/carbon/monkey/diona/verb/dionaventcrawl()
+	set name = "Crawl through Vent"
+	set desc = "Enter an air vent and crawl through the pipe system."
+	set category = "Diona"
+	handle_ventcrawl()
 
 /mob/living/carbon/monkey/diona/verb/fertilize_plant()
 
