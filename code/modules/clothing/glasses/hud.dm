@@ -69,6 +69,8 @@
 			holder = patient.hud_list[STATUS_HUD]
 			if(patient.stat == 2)
 				holder.icon_state = "huddead"
+			else if(patient.has_brain_worms())
+				holder.icon_state = "hudbrainworm"
 			else if(patient.status_flags & XENO_HOST)
 				holder.icon_state = "hudxeno"
 			else if(foundVirus)
