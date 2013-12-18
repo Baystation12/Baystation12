@@ -338,6 +338,7 @@
 	spawn(2)
 		if(!src) return
 		if(!is_fulltile())
+			icon_state = "[basestate]"
 			return
 		var/junction = 0 //will be used to determine from which side the window is connected to other windows
 		if(anchored)
