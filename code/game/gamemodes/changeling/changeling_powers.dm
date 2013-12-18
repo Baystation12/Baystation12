@@ -2,6 +2,7 @@
 /mob/proc/make_changeling()
 	if(!mind)				return
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
+	if(!ishuman(src) && !ismonkey(src))    return
 	verbs += /datum/changeling/proc/EvolutionMenu
 
 	var/lesser_form = !ishuman(src)
