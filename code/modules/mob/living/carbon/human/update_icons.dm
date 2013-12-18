@@ -660,6 +660,17 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 		var/image/standing  = image("icon" = dmi, "icon_state" = "[wear_suit.icon_state]")
 
+		if(FAT in mutations)
+			if(wear_suit.flags&ONESIZEFITSALL)
+				standing.icon	= 'icons/mob/suit_fat.dmi'
+			else
+				src << "\red You burst out of \the [wear_suit]!"
+				drop_from_inventory(wear_suit)
+				return
+		else
+			standing.icon	= 'icons/mob/suit.dmi'
+
+
 		if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
 			drop_from_inventory(handcuffed)
 			drop_l_hand()

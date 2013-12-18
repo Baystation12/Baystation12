@@ -206,6 +206,7 @@
 	item_state = "rig-syndie-human"
 	icon_state = "rig-syndie-human"
 	species_restricted = list("Human")
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
 
 ////////////////UNATHI/////////////////////
 
