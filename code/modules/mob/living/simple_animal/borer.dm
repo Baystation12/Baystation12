@@ -46,6 +46,7 @@
 	wander = 0
 	pass_flags = PASSTABLE
 
+	var/used_dominate
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
 	var/mob/living/carbon/human/host        // Human host for the brain worm.
 	var/truename                            // Name used for brainworm-speak.
@@ -164,6 +165,46 @@
 		if(M.mind && (istype(M, /mob/living/simple_animal/borer) || istype(M, /mob/dead/observer)))
 			M << "<i>Cortical link, <b>[truename]:</b> [copytext(message, 2)]</i>"
 
+/mob/living/simple_animal/borer/verb/dominate_victim()
+	set category = "Alien"
+	set name = "Dominate Victim"
+	set desc = "Freeze the limbs of a potential host with supernatural fear."
+
+	if(world.time - used_dominate < 300)
+		src << "You cannot use that ability again so soon."
+		return
+
+	if(host)
+		src << "You cannot do that from within a host body."
+		return
+
+	if(src.stat)
+		src << "You cannot do that in your current state."
+		return
+
+	var/list/choices = list()
+	for(var/mob/living/carbon/C in view(3,src))
+		if(C.stat != 2)
+			choices += C
+
+	if(world.time - used_dominate < 300)
+		src << "You cannot use that ability again so soon."
+		return
+
+	var/mob/living/carbon/M = input(src,"Who do you wish to dominate?") in null|choices
+
+	if(!M || !src) return
+
+	if(M.has_brain_worms())
+		src << "You cannot infest someone who is already infested!"
+		return
+
+	src << "\red You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread."
+	M << "\red You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing."
+	M.Weaken(3)
+
+	used_dominate = world.time
+
 /mob/living/simple_animal/borer/verb/bond_brain()
 	set category = "Alien"
 	set name = "Assume Control"
@@ -222,7 +263,7 @@
 	if(chemicals < 50)
 		src << "You don't have enough chemicals!"
 
-	var/chem = input("Select a chemical to secrete.", "Chemicals") in list("bicaridine","tramadol","hyperzine")
+	var/chem = input("Select a chemical to secrete.", "Chemicals") in list("bicaridine","tramadol","hyperzine","alkysine")
 
 	if(chemicals < 50 || !host || controlling || !src || stat) //Sanity check.
 		return
