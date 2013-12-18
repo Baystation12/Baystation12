@@ -27,6 +27,7 @@
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	universal_speak = 0
+	universal_understand = 1
 
 /mob/living/simple_animal/mouse/Life()
 	..()
@@ -50,6 +51,7 @@
 
 /mob/living/simple_animal/mouse/New()
 	..()
+	name = "[name] ([rand(1, 1000)])"
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
 	icon_state = "mouse_[body_color]"

@@ -43,7 +43,8 @@
 	var/Tickcomp = 0
 	var/socket_talk	= 0					// use socket_talk to communicate with other processes
 	var/list/resource_urls = null
-
+	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
+	var/antag_hud_restricted = 0                    // Ghosts that turn on Antagovision cannot rejoin the round.
 	var/list/mode_names = list()
 	var/list/modes = list()				// allowed modes
 	var/list/votable_modes = list()		// votable modes
@@ -60,6 +61,9 @@
 	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
+
+	var/disable_player_mice = 0
+	var/uneducated_mice = 0 //Set to 1 to prevent newly-spawned mice from understanding human speech
 
 	var/usealienwhitelist = 0
 	var/limitalienplayers = 0
@@ -385,6 +389,11 @@
 				if("ticklag")
 					Ticklag = text2num(value)
 
+				if("allow_antag_hud")
+					config.antag_hud_allowed = 1
+				if("antag_hud_restricted")
+					config.antag_hud_restricted = 1
+
 				if("socket_talk")
 					socket_talk = text2num(value)
 
@@ -418,6 +427,12 @@
 
 				if("ghost_interaction")
 					config.ghost_interaction = 1
+
+				if("disable_player_mice")
+					config.disable_player_mice = 1
+
+				if("uneducated_mice")
+					config.uneducated_mice = 1
 
 				if("comms_password")
 					config.comms_password = value
