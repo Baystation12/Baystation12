@@ -1299,6 +1299,7 @@
 #include "code\WorkInProgress\Cael_Aislinn\Supermatter\LaserComputer.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Supermatter\ZeroPointLaser.dm"
 #include "code\WorkInProgress\Chinsky\ashtray.dm"
+#include "code\WorkInProgress\Chinsky\guestpass.dm"
 #include "code\WorkInProgress\Cib\MedicalSideEffects.dm"
 #include "code\WorkInProgress\kilakk\fax.dm"
 #include "code\WorkInProgress\Mini\atmos_control.dm"
