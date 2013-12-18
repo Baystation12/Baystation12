@@ -27,6 +27,7 @@
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	universal_speak = 0
+	can_hide = 1
 
 /mob/living/simple_animal/mouse/Life()
 	..()
@@ -120,29 +121,6 @@
 	else
 		src << "\blue You must be standing on or beside an air vent to enter it."
 	return
-
-//copy paste from alien/larva, if that func is updated please update this one alsoghost
-/mob/living/simple_animal/mouse/verb/hide()
-	set name = "Hide"
-	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
-	set category = "Mouse"
-
-	if (layer != TURF_LAYER+0.2)
-		layer = TURF_LAYER+0.2
-		src << text("\blue You are now hiding.")
-		/*
-		for(var/mob/O in oviewers(src, null))
-			if ((O.client && !( O.blinded )))
-				O << text("<B>[] scurries to the ground!</B>", src)
-		*/
-	else
-		layer = MOB_LAYER
-		src << text("\blue You have stopped hiding.")
-		/*
-		for(var/mob/O in oviewers(src, null))
-			if ((O.client && !( O.blinded )))
-				O << text("[] slowly peaks up from the ground...", src)
-		*/
 
 //make mice fit under tables etc? this was hacky, and not working
 /*

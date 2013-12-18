@@ -40,6 +40,7 @@
 	//pass_flags = PASSTABLE      //Maybe griefy?
 	small = 1
 	speak_emote = list("beeps","clicks","chirps")
+	can_hide = 1
 
 /mob/living/simple_animal/spiderbot/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
@@ -259,19 +260,6 @@
 	else
 		src << "\blue You must be standing on or beside an air vent to enter it."
 	return
-
-//copy paste from alien/larva, if that func is updated please update this one alsoghost
-/mob/living/simple_animal/spiderbot/verb/hide()
-	set name = "Hide"
-	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
-	set category = "Spiderbot"
-
-	if (layer != TURF_LAYER+0.2)
-		layer = TURF_LAYER+0.2
-		src << text("\blue You are now hiding.")
-	else
-		layer = MOB_LAYER
-		src << text("\blue You have stopped hiding.")
 
 //Cannibalized from the parrot mob. ~Zuhayr
 

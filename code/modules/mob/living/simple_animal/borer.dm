@@ -39,6 +39,7 @@
 	friendly = "prods"
 	wander = 0
 	pass_flags = PASSTABLE
+	can_hide = 1
 
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
 	var/mob/living/carbon/human/host        // Human host for the brain worm.
@@ -355,19 +356,6 @@ mob/living/simple_animal/borer/proc/detatch()
 	else
 		src << "\blue You must be standing on or beside an air vent to enter it."
 	return
-
-//copy paste from alien/larva, if that func is updated please update this one alsoghost
-/mob/living/simple_animal/borer/verb/hide()
-	set name = "Hide"
-	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
-	set category = "Alien"
-
-	if (layer != TURF_LAYER+0.2)
-		layer = TURF_LAYER+0.2
-		src << text("\blue You are now hiding.")
-	else
-		layer = MOB_LAYER
-		src << text("\blue You have stopped hiding.")
 
 //Procs for grabbing players.
 mob/living/simple_animal/borer/proc/request_player()

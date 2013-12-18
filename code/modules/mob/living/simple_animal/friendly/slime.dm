@@ -13,6 +13,7 @@
 	response_harm   = "stomps on"
 	emote_see = list("jiggles", "bounces in place")
 	var/colour = "grey"
+	pass_flags = PASSTABLE
 
 /mob/living/simple_animal/slime/Bump(atom/movable/AM as mob|obj, yes)
 

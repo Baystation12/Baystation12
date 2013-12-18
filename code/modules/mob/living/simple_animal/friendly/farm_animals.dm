@@ -168,6 +168,7 @@
 	var/amount_grown = 0
 	pass_flags = PASSTABLE | PASSGRILLE
 	small = 1
+	can_hide = 1
 
 /mob/living/simple_animal/chick/New()
 	..()
@@ -210,6 +211,7 @@ var/global/chicken_count = 0
 	var/_color
 	pass_flags = PASSTABLE
 	small = 1
+	can_hide = 1
 
 /mob/living/simple_animal/chicken/New()
 	..()
