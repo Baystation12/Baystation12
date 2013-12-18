@@ -51,22 +51,46 @@
 	var/truename                            // Name used for brainworm-speak.
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
 	var/controlling                         // Used in human death check.
+	var/docile = 0                          // Sugar can stop borers from acting.
 
 /mob/living/simple_animal/borer/Life()
 
 	..()
+
+
 	if(host)
+
 		if(!stat && !host.stat)
+
+			if(host.reagents.has_reagent("sugar"))
+				if(!docile)
+					if(controlling)
+						host << "\blue You feel the soporific flow of sugar in your host's blood, lulling you into docility."
+					else
+						src << "\blue You feel the soporific flow of sugar in your host's blood, lulling you into docility."
+					docile = 1
+			else
+				if(docile)
+					if(controlling)
+						host << "\blue You shake off your lethargy as the sugar leaves your host's blood."
+					else
+						src << "\blue You shake off your lethargy as the sugar leaves your host's blood."
+					docile = 0
+
 			if(chemicals < 250)
 				chemicals++
 			if(controlling)
+
+				if(docile)
+					host << "\blue You are feeling far too docile to continue controlling your host..."
+					host.release_control()
+					return
+
 				if(prob(5))
 					host.adjustBrainLoss(rand(1,2))
 
 				if(prob(host.brainloss/20))
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
-
-				//if(host.brainloss > 100)
 
 /mob/living/simple_animal/borer/New()
 	..()
@@ -157,6 +181,10 @@
 		src << "<span class='warning'>There is no brain here for us to command!</span>"
 		return
 
+	if(docile)
+		src << "\blue You are feeling far too docile to do that."
+		return
+
 	src << "You begin delicately adjusting your connection to the host brain..."
 
 	spawn(300+(host.brainloss*5))
@@ -187,6 +215,10 @@
 	if(stat)
 		src << "You cannot secrete chemicals in your current state."
 
+	if(docile)
+		src << "\blue You are feeling far too docile to do that."
+		return
+
 	if(chemicals < 50)
 		src << "You don't have enough chemicals!"
 
@@ -211,6 +243,9 @@
 	if(stat)
 		src << "You cannot leave your host in your current state."
 
+	if(docile)
+		src << "\blue You are feeling far too docile to do that."
+		return
 
 	if(!host || !src) return
 
