@@ -149,6 +149,14 @@
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 2.0
 
+/obj/item/clothing/suit/corgisuit
+	name = "Chicken Suit"
+	desc = "A suit made long ago by the ancient empire KFC."
+	icon_state = "corgisuit"
+	item_state = "chickensuit"
+	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS|FEET
+	flags_inv = HIDESHOES|HIDEJUMPSUIT
+	siemens_coefficient = 2.0
 
 /obj/item/clothing/suit/monkeysuit
 	name = "Monkey Suit"
