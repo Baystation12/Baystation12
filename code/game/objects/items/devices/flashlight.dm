@@ -104,6 +104,8 @@
 	desc = "A pen-sized light, used by medical staff."
 	icon_state = "penlight"
 	item_state = ""
+	w_class = 1
+	slot_flags = SLOT_BELT | SLOT_EARS
 	flags = FPRINT | TABLEPASS | CONDUCT
 	brightness_on = 2
 
