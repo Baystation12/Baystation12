@@ -80,6 +80,8 @@
 				else if(prob(50))
 					severity -= 1
 				severity = min(max(severity, 0), 4)
+				var/mob/living/carbon/human/H = C
+				var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
 
 				switch(severity)
 					if(0)
@@ -87,26 +89,26 @@
 						C << "<span class='info'>A small, bright dot appears in your vision.</span>"
 					if(1)
 						//industrial grade eye protection
-						C.eye_stat += rand(0, 2)
+						E.damage += rand(0, 2)
 						C << "<span class='notice'>Something bright flashes in the corner of your vision!</span>"
 					if(2)
 						//basic eye protection (sunglasses)
 						flick("flash", C.flash)
-						C.eye_stat += rand(1, 6)
+						E.damage += rand(1, 6)
 						C << "<span class='danger'>Your eyes were blinded!</span>"
 					if(3)
 						//no eye protection
 						if(prob(2))
 							C.Weaken(1)
 						flick("e_flash", C.flash)
-						C.eye_stat += rand(3, 7)
+						E.damage += rand(3, 7)
 						C << "<span class='danger'>Your eyes were blinded!</span>"
 					if(4)
 						//the effect has been worsened by something
 						if(prob(5))
 							C.Weaken(1)
 						flick("e_flash", C.flash)
-						C.eye_stat += rand(5, 10)
+						E.damage += rand(5, 10)
 						C << "<span class='danger'>Your eyes were blinded!</span>"
 			else
 				outmsg = "<span class='notice'>You fail to blind [C] by shining [src] at their eyes.</span>"

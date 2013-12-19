@@ -58,7 +58,7 @@
 		internal_organs_by_name["liver"] = new/datum/organ/internal/liver(src)
 		internal_organs_by_name["kidney"] = new/datum/organ/internal/kidney(src)
 		internal_organs_by_name["brain"] = new/datum/organ/internal/brain(src)
-//		internal_organs_by_name["eyes"] = new/datum/organ/internal/eyes(src)
+		internal_organs_by_name["eyes"] = new/datum/organ/internal/eyes(src)
 
 	for(var/name in organs_by_name)
 		organs += organs_by_name[name]

@@ -516,7 +516,7 @@ datum
 					if(15 to 25)
 						M.drowsyness  = max(M.drowsyness, 20)
 					if(25 to INFINITY)
-						M.Paralyse(20)
+						M.Weaken(20)
 						M.drowsyness  = max(M.drowsyness, 30)
 				data++
 				..()
@@ -1596,6 +1596,11 @@ datum
 				M.eye_blind = 0
 //				M.disabilities &= ~NEARSIGHTED		//doesn't even do anythig cos of the disabilities = 0 bit
 //				M.sdisabilities &= ~BLIND			//doesn't even do anythig cos of the sdisabilities = 0 bit
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+					if(istype(E))
+						E.damage = max(E.damage-5 , 0)
 				M.SetWeakened(0)
 				M.SetStunned(0)
 				M.SetParalysis(0)
@@ -1613,6 +1618,25 @@ datum
 						D.cure()
 				..()
 				return
+
+		peridaxon
+			name = "Peridaxon"
+			id = "peridaxon"
+			description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
+			reagent_state = LIQUID
+			color = "#C8A5DC" // rgb: 200, 165, 220
+//			overdose = 10
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/internal/I = H.internal_organs
+					if(I.parent_organ == "chest")
+						I.damage = max(I.damage -1 , 0)
+				..()
+				return
+
 
 		synaptizine
 			name = "Synaptizine"
@@ -1710,8 +1734,11 @@ datum
 				if(!M) M = holder.my_atom
 				M.eye_blurry = max(M.eye_blurry-5 , 0)
 				M.eye_blind = max(M.eye_blind-5 , 0)
-				M.disabilities &= ~NEARSIGHTED
-				M.eye_stat = max(M.eye_stat-5, 0)
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+					if(istype(E))
+						E.damage = max(E.damage-5 , 0)
 //				M.sdisabilities &= ~1		Replaced by eye surgery
 				..()
 				return
