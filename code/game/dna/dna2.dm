@@ -46,6 +46,9 @@ var/global/list/datum/dna/gene/dna_genes[0]
 /////////////////
 // GENE DEFINES
 /////////////////
+// Skip checking if it's already active.
+// Used for genes that check for value rather than a binary on/off.
+#define GENE_ALWAYS_ACTIVATE 1
 
 // Skip checking if it's already active.
 // Used for genes that check for value rather than a binary on/off.
@@ -75,6 +78,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	// New stuff
 	var/species = "Human"
 
+/*
 // Make a copy of this strand.
 // USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!
 /datum/dna/proc/Clone()
@@ -91,7 +95,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.UpdateUI()
 	new_dna.UpdateSE()
 	return new_dna
-
+/*
 ///////////////////////////////////////
 // UNIQUE IDENTITY
 ///////////////////////////////////////
