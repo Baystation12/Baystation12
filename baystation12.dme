@@ -836,6 +836,7 @@
 #include "code\modules\economy\Job_Departments.dm"
 #include "code\modules\economy\TradeDestinations.dm"
 #include "code\modules\events\blob.dm"
+#include "code\modules\events\borers.dm"
 #include "code\modules\events\carp_migration.dm"
 #include "code\modules\events\comms_blackout.dm"
 #include "code\modules\events\communications_blackout.dm"

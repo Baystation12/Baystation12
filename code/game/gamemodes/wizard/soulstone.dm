@@ -18,6 +18,11 @@
 			return ..()
 		if(istype(M, /mob/living/carbon/human/dummy))
 			return..()
+
+		if(M.has_brain_worms()) //Borer stuff - RR
+			user << "<span class='warning'>This being is corrupted by an alien intelligence and cannot be soul trapped.</span>"
+			return..()
+
 		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their soul captured with [src.name] by [user.name] ([user.ckey])</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to capture the soul of [M.name] ([M.ckey])</font>")
 

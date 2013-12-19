@@ -78,7 +78,8 @@
 					<A href='?src=\ref[src];secretsfun=vent_clog'>Make scrubbers spew chemicals</A><BR>
 					<A href='?src=\ref[src];secretsfun=timeanomalies'>Spawn wormholes</A><BR>
 					<A href='?src=\ref[src];secretsfun=goblob'>Spawn blob</A><BR>
-					<A href='?src=\ref[src];secretsfun=aliens'>Trigger an Alien infestation</A><BR>
+					<A href='?src=\ref[src];secretsfun=aliens'>Trigger a Xenomorph infestation</A><BR>
+					<A href='?src=\ref[src];secretsfun=borers'>Trigger a Cortical Borer infestation</A><BR>
 					<A href='?src=\ref[src];secretsfun=alien_silent'>Spawn an Alien silently</A><BR>
 					<A href='?src=\ref[src];secretsfun=spiders'>Trigger a Spider infestation</A><BR>
 					<A href='?src=\ref[src];secretsfun=spaceninja'>Send in a space ninja</A><BR>

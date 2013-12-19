@@ -2259,6 +2259,12 @@
 				feedback_add_details("admin_secrets_fun_used","Sp")
 				new /datum/event/spider_infestation
 				message_admins("[key_name_admin(usr)] has spawned giant spiders", 1)
+			if("borers")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","Borers")
+				log_admin("[key_name(usr)] spawned a cortical borer infestation.", 1)
+				message_admins("\blue [key_name_admin(usr)] spawned a cortical borer infestation.", 1)
+				new /datum/event/borer_infestation
 			if("spacevines")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","K")
