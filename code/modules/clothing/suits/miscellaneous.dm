@@ -150,7 +150,7 @@
 	siemens_coefficient = 2.0
 
 /obj/item/clothing/suit/corgisuit
-	name = "Chicken Suit"
+	name = "Corgi Suit"
 	desc = "A suit made long ago by the ancient empire KFC."
 	icon_state = "corgisuit"
 	item_state = "chickensuit"
