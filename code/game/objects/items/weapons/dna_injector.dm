@@ -66,7 +66,7 @@
 	if (!(NOCLONE in M.mutations)) // prevents drained people from having their DNA changed
 		if (buf.types & DNA2_BUF_UI)
 			if (!block) //isolated block?
-				M.UpdateAppearance(buf.dna)
+				M.UpdateAppearance(buf.dna.UI)
 				if (buf.types & DNA2_BUF_UE) //unique enzymes? yes
 					M.real_name = buf.dna.real_name
 					M.name = buf.dna.real_name
