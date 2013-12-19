@@ -368,6 +368,12 @@ mob/living/simple_animal/borer/proc/detatch()
 		src << "You cannot infest someone who is already infested!"
 		return
 
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		if(H.check_head_coverage())
+			src << "You cannot get through that host's protective gear."
+			return
+
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
 
