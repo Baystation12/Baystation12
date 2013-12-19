@@ -21,6 +21,8 @@ datum
 		var/nutriment_factor = 0
 		var/custom_metabolism = REAGENTS_METABOLISM
 		var/mildly_toxic = 0
+		var/overdose = 0
+		var/overdose_dam = 1
 		//var/list/viruses = list()
 		var/color = "#000000" // rgb: 0, 0, 0 (does not support alpha channels - yet!)
 
@@ -1625,7 +1627,7 @@ datum
 			description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
-//			overdose = 10
+			overdose = 10
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
