@@ -55,9 +55,9 @@
 /obj/item/weapon/dnainjector/proc/SetValue(var/val,var/selblock=0)
 	var/real_block=GetRealBlock(selblock)
 	if(buf.types&DNA2_BUF_SE)
-		return buf.dna.SetSEState(real_block,val)
+		return buf.dna.SetSEValue(real_block,val)
 	else
-		return buf.dna.SetUIState(real_block,val)
+		return buf.dna.SetUIValue(real_block,val)
 
 /obj/item/weapon/dnainjector/proc/inject(mob/M as mob, mob/user as mob)
 	if(istype(M,/mob/living))
@@ -203,7 +203,6 @@
 	//block = 2
 	New()
 		block = HULKBLOCK
-		..()
 		..()
 
 /obj/item/weapon/dnainjector/antihulk
