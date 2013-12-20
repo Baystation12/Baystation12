@@ -26,7 +26,7 @@
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
 	verbs += /mob/dead/observer/proc/dead_tele
-	
+
 	stat = DEAD
 
 	var/turf/T
@@ -93,12 +93,12 @@ Works together with spawning an observer, noted above.
 
 /mob/dead/observer/Life()
 	..()
-	if(!loc) return		
+	if(!loc) return
 	if(!client) return 0
 
 
 	if(client.images.len)
-		for(var/image/hud in client.images)	
+		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud")
 				client.images.Remove(hud)
 	if(antagHUD)
@@ -145,7 +145,7 @@ Works together with spawning an observer, noted above.
 		var/foundVirus = 0
 		if(patient.virus2.len)
 			foundVirus = 1
-		if(!C) return 
+		if(!C) return
 		holder = patient.hud_list[HEALTH_HUD]
 		if(patient.stat == 2)
 			holder.icon_state = "hudhealth-100"
@@ -160,10 +160,17 @@ Works together with spawning an observer, noted above.
 			holder.icon_state = "hudxeno"
 		else if(foundVirus)
 			holder.icon_state = "hudill"
+		else if(patient.has_brain_worms())
+			var/mob/living/simple_animal/borer/B = patient.has_brain_worms()
+			if(B.controlling)
+				holder.icon_state = "hudbrainworm"
+			else
+				holder.icon_state = "hudhealthy"
 		else
 			holder.icon_state = "hudhealthy"
-		C.images += holder	
-		
+
+		C.images += holder
+
 
 /mob/dead/proc/assess_targets(list/target_list, mob/dead/observer/U)
 	var/icon/tempHud = 'icons/mob/hud.dmi'
@@ -319,7 +326,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(jobban_isbanned(M, "AntagHUD"))
 		src << "\red <B>You have been banned from using this feature</B>"
 		return
-	if(config.antag_hud_restricted && !M.has_enabled_antagHUD &&!client.holder) 
+	if(config.antag_hud_restricted && !M.has_enabled_antagHUD &&!client.holder)
 		var/response = alert(src, "If you turn this on, you will not be able to take any part in the round.","Are you sure you want to turn this feature on?","Yes","No")
 		if(response == "No") return
 		M.can_reenter_corpse = 0
@@ -455,7 +462,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/response = alert(src, "Are you -sure- you want to become a mouse?","Are you sure you want to squeek?","Squeek!","Nope!")
 	if(response != "Squeek!") return  //Hit the wrong key...again.
-	
+
 
 	//find a viable mouse candidate
 	var/mob/living/simple_animal/mouse/host
