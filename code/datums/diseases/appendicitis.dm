@@ -45,7 +45,7 @@
 			H.op_stage.appendix = 2.0
 
 			var/datum/organ/external/groin = H.get_organ("groin")
-			var/datum/wound/W = new /datum/wound/internal_bleeding(25)
+			var/datum/wound/W = new /datum/wound/internal_bleeding(15)
 			H.adjustToxLoss(25)
 			groin.wounds += W
 			src.cure()

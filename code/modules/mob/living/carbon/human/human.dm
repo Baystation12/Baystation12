@@ -1179,7 +1179,7 @@ mob/living/carbon/human/yank_out_object()
 			anchored = 0
 
 	if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
-		var/datum/wound/internal_bleeding/I = new (15)
+		var/datum/wound/internal_bleeding/I = new (10)
 		affected.wounds += I
 		custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
 	return 1
