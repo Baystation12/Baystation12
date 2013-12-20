@@ -61,6 +61,10 @@
 		name = "Cut Hair"
 		icon_state = "hair_c"
 
+	flair
+		name = "Flaired Hair"
+		icon_state = "hair_flair"
+
 	long
 		name = "Shoulder-length Hair"
 		icon_state = "hair_b"
