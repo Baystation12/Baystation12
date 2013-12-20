@@ -27,6 +27,7 @@
 	minbodytemp = 223		//Below -50 Degrees Celcius
 	maxbodytemp = 323	//Above 50 Degrees Celcius
 	universal_speak = 0
+	universal_understand = 1
 
 /mob/living/simple_animal/mouse/Life()
 	..()
@@ -50,6 +51,7 @@
 
 /mob/living/simple_animal/mouse/New()
 	..()
+	name = "[name] ([rand(1, 1000)])"
 	if(!body_color)
 		body_color = pick( list("brown","gray","white") )
 	icon_state = "mouse_[body_color]"
@@ -63,6 +65,7 @@
 	src.stat = DEAD
 	src.icon_dead = "mouse_[body_color]_splat"
 	src.icon_state = "mouse_[body_color]_splat"
+	layer = MOB_LAYER
 	if(client)
 		client.time_died_as_mouse = world.time
 
@@ -179,6 +182,7 @@
 	..()
 
 /mob/living/simple_animal/mouse/Die()
+	layer = MOB_LAYER
 	if(client)
 		client.time_died_as_mouse = world.time
 	..()
