@@ -1248,7 +1248,6 @@
 #include "code\modules\surgery\ribcage.dm"
 #include "code\modules\surgery\robolimbs.dm"
 #include "code\modules\surgery\surgery.dm"
-#include "code\modules\telesci\bscrystal.dm"
 #include "code\modules\telesci\gps.dm"
 #include "code\modules\telesci\telepad.dm"
 #include "code\modules\telesci\telesci_computer.dm"
@@ -1322,5 +1321,5 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\tgstation2.dmm"
+#include "maps\test.dmm"
 // END_INCLUDE
