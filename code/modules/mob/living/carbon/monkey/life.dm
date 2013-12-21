@@ -68,16 +68,9 @@
 
 	if(!client && stat == CONSCIOUS)
 
-		if(prob(33) && canmove && isturf(loc))
+		if(prob(33) && canmove && isturf(loc) && !pulledby) //won't move if being pulled
 
-			var/isBeingPulled = 0
-
-			for(var/mob/M in range(src, 1)) //won't move if being pulled
-				if(M.pulling == src)
-					isBeingPulled = 1
-
-			if(isBeingPulled == 0)
-				step(src, pick(cardinal))
+			step(src, pick(cardinal))
 
 		if(prob(1))
 			emote(pick("scratch","jump","roll","tail"))
