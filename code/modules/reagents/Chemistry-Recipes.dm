@@ -189,6 +189,14 @@ datum
 			required_reagents = list("silicon" = 1, "carbon" = 1)
 			result_amount = 2
 
+		peridaxon
+			name = "Peridaxon"
+			id = "peridaxon"
+			result = "peridaxon"
+			required_reagents = list("bicaridine" = 2, "clonexadone" = 2)
+			required_catalysts = list("plasma" = 5)
+			result_amount = 2
+
 		virus_food
 			name = "Virus Food"
 			id = "virusfood"

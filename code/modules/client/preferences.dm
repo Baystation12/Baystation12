@@ -174,7 +174,8 @@ datum/preferences
 		//		dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
 				dat += "<br><b>Handicaps</b><br>"
 				dat += "\t<a href='byond://?src=\ref[user];task=input;preference=disabilities'><b>\[Set Disabilities\]</b></a><br>"
-				dat += "\tLimbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
+				dat += "Limbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
+				dat += "Internal Organs: <a href='byond://?src=\ref[user];preference=organs;task=input'>Adjust</a><br>"
 
 				//display limbs below
 				var/ind = 0
@@ -199,6 +200,10 @@ datum/preferences
 							organ_name = "left hand"
 						if("r_hand")
 							organ_name = "right hand"
+						if("heart")
+							organ_name = "heart"
+						if("eyes")
+							organ_name = "eyes"
 
 					if(status == "cyborg")
 						++ind
@@ -217,6 +222,26 @@ datum/preferences
 						if(ind > 1)
 							dat += ", "
 						dat += "\tAmputated [organ_name]"
+
+					else if(status == "mechanical")
+						++ind
+						if(ind > 1)
+							dat += ", "
+						dat += "\tMechanical [organ_name]"
+
+					else if(status == "assisted")
+						++ind
+						if(ind > 1)
+							dat += ", "
+						switch(organ_name)
+							if("heart")
+								dat += "\tPacemaker-assisted [organ_name]"
+							if("voicebox") //on adding voiceboxes for speaking skrell/similar replacements
+								dat += "\tSurgically altered [organ_name]"
+							if("eyes")
+								dat += "\tRetinal overlayed [organ_name]"
+							else
+								dat += "\tMechanically assisted [organ_name]"
 				if(!ind)
 					dat += "\[...\]<br><br>"
 				else
@@ -1108,6 +1133,29 @@ datum/preferences
 								organ_data[limb] = "peg"
 								if(second_limb)
 									organ_data[second_limb] = "amputated"
+
+					if("organs")
+						var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes")
+						if(!organ_name) return
+
+						var/organ = null
+						switch(organ_name)
+							if("Heart")
+								organ = "heart"
+							if("Eyes")
+								organ = "eyes"
+
+						var/new_state = input(user, "What state do you wish the organ to be in?") as null|anything in list("Normal","Assisted","Mechanical")
+						if(!new_state) return
+
+						switch(new_state)
+							if("Normal")
+								organ_data[organ] = null
+							if("Assisted")
+								organ_data[organ] = "assisted"
+							if("Mechanical")
+								organ_data[organ] = "mechanical"
+
 /*
 					if("skin_style")
 						var/skin_style_name = input(user, "Select a new skin style") as null|anything in list("default1", "default2", "default3")
@@ -1237,8 +1285,7 @@ datum/preferences
 		// Destroy/cyborgize organs
 		for(var/name in organ_data)
 			var/datum/organ/external/O = character.organs_by_name[name]
-			if(!O) continue
-
+			var/datum/organ/internal/I = character.internal_organs_by_name[name]
 			var/status = organ_data[name]
 			if(status == "amputated")
 				O.status &= ~ORGAN_ROBOT
@@ -1246,12 +1293,17 @@ datum/preferences
 				O.amputated = 1
 				O.status |= ORGAN_DESTROYED
 				O.destspawn = 1
-			else if(status == "cyborg")
+			if(status == "cyborg")
 				O.status &= ~ORGAN_PEG
 				O.status |= ORGAN_ROBOT
-			else if(status == "peg")
+			if(status == "peg")
 				O.status &= ~ORGAN_ROBOT
 				O.status |= ORGAN_PEG
+			if(status == "assisted")
+				I.mechassist()
+			else if(status == "mechanical")
+				I.mechanize()
+			else continue
 
 		if(disabilities & DISABILITY_FLAG_FAT && species=="Human")//character.species.flags & CAN_BE_FAT)
 			character.mutations += FAT
@@ -1263,7 +1315,7 @@ datum/preferences
 			character.sdisabilities|=DEAF
 
 		if(underwear > underwear_m.len || underwear < 1)
-			underwear = 1 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me.
+			underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES
 		character.underwear = underwear
 
 		if(backbag > 4 || backbag < 1)
