@@ -51,7 +51,7 @@
 		s.start()
 		flick("pad-beam", E)
 		usr << "\blue Teleport successful."
-		investigate_log("[key_name(usr)]/[user] has teleported with Telescience at [trueX],[trueY],[z_co], in [A ? A.name : "null area"].","telesci")
+		investigate_log("[key_name(usr)]/[usr] has teleported with Telescience at [x_co],[y_co],[z_co], in [A ? A.name : "null area"].","telesci")
 		for(var/atom/movable/ROI in A)
 			// if is anchored, don't let through
 			if(ROI.anchored)
@@ -79,7 +79,7 @@
 		s.start()
 		flick("pad-beam", E)
 		usr << "\blue Teleport successful."
-		investigate_log("[key_name(usr)]/[user] has teleported with Telescience at [trueX],[trueY],[z_co], in [A ? A.name : "null area"].","telesci")
+		investigate_log("[key_name(usr)]/[usr] has teleported with Telescience at [x_co],[y_co],[z_co], in [A ? A.name : "null area"].","telesci")
 		for(var/atom/movable/ROI in G)
 			// if is anchored, don't let through
 			if(ROI.anchored)
