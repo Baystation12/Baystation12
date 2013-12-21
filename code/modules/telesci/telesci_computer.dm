@@ -46,12 +46,13 @@
 	for(var/obj/machinery/telepad/E in world)
 		var/A = get_turf(E)
 		var/target = locate(x_co, y_co, z_co)
+		var/area/G = get_area(target)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, A)
 		s.start()
 		flick("pad-beam", E)
 		usr << "\blue Teleport successful."
-		investigate_log("[key_name(usr)]/[usr] has teleported with Telescience at [x_co],[y_co],[z_co], in [A ? A.name : "null area"].","telesci")
+		investigate_log("[key_name(usr)]/[usr] has teleported with Telescience at [x_co],[y_co],[z_co], in [G ? G.name : "null area"].","telesci")
 		for(var/atom/movable/ROI in A)
 			// if is anchored, don't let through
 			if(ROI.anchored)
@@ -74,12 +75,13 @@
 		var/A = get_turf(E)
 		var/T = locate(x_co, y_co, z_co)
 		var/G = get_turf(T)
+		var/area/F = get_area(T)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(5, 1, A)
 		s.start()
 		flick("pad-beam", E)
 		usr << "\blue Teleport successful."
-		investigate_log("[key_name(usr)]/[usr] has teleported with Telescience at [x_co],[y_co],[z_co], in [A ? A.name : "null area"].","telesci")
+		investigate_log("[key_name(usr)]/[usr] has teleported with Telescience at [x_co],[y_co],[z_co], in [F ? F.name : "null area"].","telesci")
 		for(var/atom/movable/ROI in G)
 			// if is anchored, don't let through
 			if(ROI.anchored)
