@@ -51,6 +51,9 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		if((load_method == MAGAZINE) && loaded.len)	return
 		var/obj/item/ammo_magazine/AM = A
+		if(AM.stored_ammo.len <= 0)
+			user << "<span class='warning'>The magazine is empty!</span>"
+			return
 		for(var/obj/item/ammo_casing/AC in AM.stored_ammo)
 			if(loaded.len >= max_shells)
 				break
