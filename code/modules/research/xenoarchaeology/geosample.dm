@@ -126,14 +126,15 @@
 		artifact_distance = rand()
 		artifact_id = container.artifact_find.artifact_id
 	else
-		for(var/turf/simulated/mineral/T in master_controller.artifact_spawning_turfs)
-			if(T.artifact_find)
-				var/cur_dist = get_dist(container, T) * 2
-				if( (artifact_distance < 0 || cur_dist < artifact_distance) && cur_dist <= T.artifact_find.artifact_detect_range )
-					artifact_distance = cur_dist + rand() * 2 - 1
-					artifact_id = T.artifact_find.artifact_id
-			else
-				master_controller.artifact_spawning_turfs.Remove(T)
+		if(master_controller) //Sanity check due to runtimes ~Z
+			for(var/turf/simulated/mineral/T in master_controller.artifact_spawning_turfs)
+				if(T.artifact_find)
+					var/cur_dist = get_dist(container, T) * 2
+					if( (artifact_distance < 0 || cur_dist < artifact_distance) && cur_dist <= T.artifact_find.artifact_detect_range )
+						artifact_distance = cur_dist + rand() * 2 - 1
+						artifact_id = T.artifact_find.artifact_id
+				else
+					master_controller.artifact_spawning_turfs.Remove(T)
 
 /*
 #undef FIND_PLANT
