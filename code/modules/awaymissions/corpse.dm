@@ -24,6 +24,8 @@
 	var/corpseidaccess = null //This is for access. See access.dm for which jobs give what access. Again, put in quotes. Use "Captain" if you want it to be all access.
 	var/corpseidicon = null //For setting it to be a gold, silver, centcomm etc ID
 	var/mutantrace = "human"
+	var/timeofdeath = null
+	var/coffin = 0
 
 /obj/effect/landmark/corpse/initialize()
 	createCorpse()
@@ -33,6 +35,7 @@
 	M.dna.mutantrace = mutantrace
 	M.real_name = src.name
 	M.death(1) //Kills the new mob
+	M.timeofdeath = timeofdeath
 	if(src.corpseuniform)
 		M.equip_to_slot_or_del(new src.corpseuniform(M), slot_w_uniform)
 	if(src.corpsesuit)
@@ -77,6 +80,9 @@
 			W.assignment = corpseidjob
 		W.registered_name = M.real_name
 		M.equip_to_slot_or_del(W, slot_wear_id)
+	if(src.coffin == 1)
+		var/obj/structure/closet/coffin/sarcophagus/sarc = locate(/obj/structure/closet/coffin/sarcophagus) in loc
+		if(sarc) M.loc = sarc
 	del(src)
 
 
@@ -176,6 +182,21 @@
 	corpseid = 1
 	corpseidjob = "Clown"
 	corpseidaccess = "Clown"
+
+/obj/effect/landmark/corpse/clownking
+	name = "Clown King"
+	corpseuniform = /obj/item/clothing/under/rank/clown
+	corpseshoes = /obj/item/clothing/shoes/clown_shoes
+	corpseradio = /obj/item/device/radio/headset
+	corpsemask = /obj/item/clothing/mask/gas/clown_hat
+	corpsehelmet = /obj/item/clothing/head/crown
+	corpsepocket1 = /obj/item/weapon/bikehorn
+	corpseback = /obj/item/weapon/bedsheet/clown
+	corpseid = 1
+	corpseidjob = "Clown King"
+	corpseidaccess = "Clown"
+	timeofdeath = -50000
+	coffin = 1
 
 /obj/effect/landmark/corpse/mime
 	name = "Mime"

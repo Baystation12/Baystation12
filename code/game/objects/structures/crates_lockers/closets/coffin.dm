@@ -10,3 +10,9 @@
 		icon_state = icon_closed
 	else
 		icon_state = icon_opened
+
+/obj/structure/closet/coffin/sarcophagus
+	name = "sarcophagus"
+	icon_state = "sarc"
+	icon_closed = "sarc"
+	icon_opened = "sarc_open"

@@ -68,6 +68,8 @@
 	src.opened = 1
 	if(istype(src, /obj/structure/closet/body_bag))
 		playsound(src.loc, 'sound/items/zip.ogg', 15, 1, -3)
+	if(istype(src,/obj/structure/closet/coffin/sarcophagus))
+		playsound(src.loc, 'sound/effects/stonedoor_openclose.ogg', 15, 1, -3)
 	else
 		playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
 	density = 0
@@ -114,6 +116,8 @@
 	src.opened = 0
 	if(istype(src, /obj/structure/closet/body_bag))
 		playsound(src.loc, 'sound/items/zip.ogg', 15, 1, -3)
+	if(istype(src,/obj/structure/closet/coffin/sarcophagus))
+		playsound(src.loc, 'sound/effects/stonedoor_openclose.ogg', 15, 1, -3)
 	else
 		playsound(src.loc, 'sound/machines/click.ogg', 15, 1, -3)
 	density = 1
