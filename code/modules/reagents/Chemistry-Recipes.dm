@@ -477,14 +477,14 @@ datum
 		potassium_chloride
 			name = "Potassium Chloride"
 			id = "potassium_chloride"
-			id = "potassium_chloride"
+			result = "potassium_chloride"
 			required_reagents = list("sodiumchloride" = 1, "potassium" = 1)
 			result_amount = 2
 
 		potassium_chlorophoride
 			name = "Potassium Chlorophoride"
 			id = "potassium_chlorophoride"
-			id = "potassium_chlorophoride"
+			result = "potassium_chlorophoride"
 			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloral_hydrate" = 1)
 			result_amount = 4
 
