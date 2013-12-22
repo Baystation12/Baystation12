@@ -54,6 +54,10 @@
 	var/list/internal_log = list()
 	var/mode = 0  // 0 - making pass, 1 - viewing logs
 
+/obj/machinery/computer/guestpass/New()
+	..()
+	uid = "[rand(100,999)]-G[rand(10,99)]"
+
 /obj/machinery/computer/guestpass/attackby(obj/O, mob/user)
 	if(istype(O, /obj/item/weapon/card/id))
 		user.drop_item()
