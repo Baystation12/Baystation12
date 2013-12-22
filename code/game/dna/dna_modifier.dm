@@ -738,6 +738,8 @@
 				var/datum/dna2/record/databuf=new
 				databuf.types = DNA2_BUF_UE
 				databuf.dna = src.connected.occupant.dna.Clone()
+				if(ishuman(connected.occupant))
+					databuf.dna.real_name=connected.occupant.name
 				databuf.name = "Unique Identifier"
 				src.buffers[bufferId] = databuf
 			return 1
@@ -747,6 +749,8 @@
 				var/datum/dna2/record/databuf=new
 				databuf.types = DNA2_BUF_UI|DNA2_BUF_UE
 				databuf.dna = src.connected.occupant.dna.Clone()
+				if(ishuman(connected.occupant))
+					databuf.dna.real_name=connected.occupant.name
 				databuf.name = "Unique Identifier + Unique Enzymes"
 				src.buffers[bufferId] = databuf
 			return 1
@@ -756,6 +760,8 @@
 				var/datum/dna2/record/databuf=new
 				databuf.types = DNA2_BUF_SE
 				databuf.dna = src.connected.occupant.dna.Clone()
+				if(ishuman(connected.occupant))
+					databuf.dna.real_name=connected.occupant.name
 				databuf.name = "Structural Enzymes"
 				src.buffers[bufferId] = databuf
 			return 1
