@@ -1,23 +1,20 @@
+/////////////////////////////////////////////
+//Guest pass ////////////////////////////////
+/////////////////////////////////////////////
 /obj/item/weapon/card/id/guest
 	name = "guest pass"
 	desc = "Allows temporary access to station areas."
 	icon_state = "guest"
 
+	var/temp_access = list() //to prevent agent cards stealing access as permanent
 	var/expiration_time = 0
 	var/reason = "NOT SPECIFIED"
 
-/obj/item/weapon/card/id/guest/New()
-	processing_objects.Add(src)
-
-/obj/item/weapon/card/id/guest/Del()
-	processing_objects.Remove(src)
-	..()
-
-/obj/item/weapon/card/id/guest/process()
+/obj/item/weapon/card/id/guest/GetAccess()
 	if (world.time > expiration_time)
-		access = null
-		icon_state = "guest_invalid"
-		processing_objects.Remove(src)
+		return access
+	else
+		return temp_access
 
 /obj/item/weapon/card/id/guest/examine()
 	..()
@@ -31,12 +28,16 @@
 		usr << "This pass expired at [worldtime2text(expiration_time)]."
 	else
 		usr << "This pass expires at [worldtime2text(expiration_time)]."
-		usr << "It grants access to following areas:"
-		for (var/A in access)
-			usr << "[get_access_desc(A)]."
-		usr << "Issuing reason: [reason]."
+
+	usr << "It grants access to following areas:"
+	for (var/A in temp_access)
+		usr << "[get_access_desc(A)]."
+	usr << "Issuing reason: [reason]."
 	return
 
+/////////////////////////////////////////////
+//Guest pass terminal////////////////////////
+/////////////////////////////////////////////
 
 /obj/machinery/computer/guestpass
 	name = "guest pass terminal"
@@ -170,7 +171,7 @@
 					internal_log.Add(entry)
 
 					var/obj/item/weapon/card/id/guest/pass = new(src.loc)
-					pass.access = accesses.Copy()
+					pass.temp_access = accesses.Copy()
 					pass.registered_name = giv_name
 					pass.expiration_time = world.time + duration*10*60
 					pass.reason = reason
