@@ -138,6 +138,13 @@
 	item_state = "psysuit"
 	item_color = "psysuit"
 
+/obj/item/clothing/under/gentlesuit
+	name = "Gentlemans Suit"
+	desc = "A silk black shirt with a white tie and a matching gray vest and slacks. Feels proper."
+	icon_state = "gentlesuit"
+	item_state = "gentlesuit"
+	item_color = "gentlesuit"
+
 /obj/item/clothing/under/gimmick/rank/captain/suit
 	name = "captain's suit"
 	desc = "A green suit and yellow necktie. Exemplifies authority."
@@ -358,7 +365,7 @@
 	flags_inv = HIDESHOES
 
 /obj/item/clothing/under/wedding/bride_white
-	name = "orange wedding dress"
+	name = "silky wedding dress"
 	desc = "A white wedding gown made from the finest silk."
 	icon_state = "bride_white"
 	item_color = "bride_white"

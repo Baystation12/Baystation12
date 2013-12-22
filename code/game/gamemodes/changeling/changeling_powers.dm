@@ -205,6 +205,10 @@
 	var/datum/changeling/changeling = changeling_power(1,0,0)
 	if(!changeling)	return
 
+	if(src.has_brain_worms())
+		src << "<span class='warning'>We cannot perform this ability at the present time!</span>"
+		return
+
 	var/mob/living/carbon/C = src
 	changeling.chem_charges--
 	C.remove_changeling_powers()
@@ -370,24 +374,24 @@
 		if(changeling_power(20,1,100,DEAD))
 			// charge the changeling chemical cost for stasis
 			changeling.chem_charges -= 20
-			
+
 			// restore us to health
 			C.rejuvenate()
-			
+
 			// remove our fake death flag
 			C.status_flags &= ~(FAKEDEATH)
-			
+
 			// let us move again
 			C.update_canmove()
-			
+
 			// re-add out changeling powers
-			C.make_changeling()		
-			
+			C.make_changeling()
+
 			// sending display messages
 			C << "<span class='notice'>We have regenerated.</span>"
 			C.visible_message("<span class='warning'>[src] appears to wake from the dead, having healed all wounds.</span>")
-			
-			
+
+
 	feedback_add_details("changeling_powers","FD")
 	return 1
 
