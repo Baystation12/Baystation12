@@ -41,9 +41,9 @@
 	if(mutation && (mutation in M.mutations))
 		M.mutations.Remove(mutation)
 	if(disability)
-		M.disabilities-=disability
+		M.disabilities &= ~disability
 	if(mutation)
-		M.sdisabilities-=sdisability
+		M.sdisabilities &= ~sdisability
 	if(deactivation_message)
 		M << "\red [deactivation_message]"
 
