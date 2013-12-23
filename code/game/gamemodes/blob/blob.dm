@@ -161,8 +161,9 @@ var/list/blob_nodes = list()
 			declared = 1
 			for (var/mob/living/silicon/ai/aiPlayer in player_list)
 				if (aiPlayer.client)
-					var/law = "The station is under quarantine. Do not permit anyone to leave. Disregard all other laws if necessary to prevent, by any means necessary, anyone from leaving."
+					var/law = "The station is under quarantine, prevent biological entities from leaving the station at all costs while minimizing collateral damage."
 					aiPlayer.set_zeroth_law(law)
+					aiPlayer << "\red <b>You have detected a change in your laws information:</b>"
 					aiPlayer << "Laws Updated: [law]"
 			return
 
