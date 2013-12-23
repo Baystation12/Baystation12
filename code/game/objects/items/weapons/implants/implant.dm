@@ -130,6 +130,10 @@ Implant Specifics:<BR>"}
 	var/phrase = "supercalifragilisticexpialidocious"
 	icon_state = "implant_evil"
 
+	New()
+		..()
+		phrase=GenerateKey()
+
 	get_data()
 		var/dat = {"
 <b>Implant Specifications:</b><BR>
