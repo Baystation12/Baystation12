@@ -51,6 +51,10 @@
 	var/agony = 0
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
 
+	proc/delete()
+		// Garbage collect the projectiles
+		loc = null
+
 	proc/on_hit(var/atom/target, var/blocked = 0)
 		if(blocked >= 2)		return 0//Full block
 		if(!isliving(target))	return 0

@@ -205,27 +205,13 @@
 		M << "No attacking people at spawn, you jackass."
 		return
 
-	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
-		var/obj/item/clothing/gloves/G = M.gloves
-		if(G.cell)
-			if(M.a_intent == "hurt")//Stungloves. Any contact will stun the alien.
-				if(G.cell.charge >= 2500)
-					G.cell.charge -= 2500
-					Weaken(5)
-					if (stuttering < 5)
-						stuttering = 5
-					Stun(5)
+	if(..())	//To allow surgery to return properly.
+		return
 
-					for(var/mob/O in viewers(src, null))
-						if (O.client)
-							O.show_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>", 1, "\red You hear someone fall", 2)
-					return
-				else
-					M << "\red Not enough charge! "
-					return
 
 	if (M.a_intent == "help")
 		help_shake_act(M)
+
 	else
 		if (M.a_intent == "hurt")
 			if ((prob(75) && health > 0))

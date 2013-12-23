@@ -43,10 +43,15 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 			source = B.data["donor"]
 			user << "The strange, sluglike seeds quiver gently and swell with blood."
 			if(!source.client && source.mind)
-				for(var/mob/dead/observer/O in player_list)
+				for(var/mob/O in respawnable_list)
 					if(O.mind == source.mind && config.revival_pod_plants)
-						O << "<b><font color = #330033><font size = 3>Your blood has been placed into a replica pod seed. Return to your body if you want to be returned to life as a pod person!</b> (Verbs -> Ghost -> Re-enter corpse)</font color>"
-						break
+						message_admins("Found mind, asking for respawn")
+						switch(alert(O,"Your corpse has been placed into a pod plant. Do you want to be resurrected/cloned? Please not if you select 'No', you will be able to be cloned or borged again this round.","Pod Alert","Yes","No"))
+							if("Yes")
+								source.key = O.key
+								return
+							if("No")
+								return
 		else
 			user << "Nothing happens."
 			return
@@ -74,9 +79,10 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	if(source && source.stat == 2 && source.client && source.ckey && config.revival_pod_plants)
 		transfer_personality(source.client)
 	else // If no sample was injected or revival is not allowed, we grab an interested observer.
+		message_admins("Requesting player for nymph")
 		request_player()
 
-	spawn(75) //If we don't have a ghost or the ghost is now unplayed, we just give the harvester some seeds.
+	spawn(100) //If we don't have a ghost or the ghost is now unplayed, we just give the harvester some seeds.
 		if(!found_player)
 			parent.visible_message("The pod has formed badly, and all you can do is salvage some of the seeds.")
 			var/seed_count = 1
@@ -91,18 +97,24 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 			return
 
 /obj/item/seeds/replicapod/proc/request_player()
-	for(var/mob/dead/observer/O in player_list)
+	for(var/mob/O in respawnable_list)
+		if(jobban_isbanned(O, "Dionaea"))
+			continue
 		if(O.client)
+//			message_admins("Found client for nymph")
 			if(O.client.prefs.be_special & BE_PLANT)
+//				message_admins("Questioning client for nymph")
 				question(O.client)
 
 /obj/item/seeds/replicapod/proc/question(var/client/C)
 	spawn(0)
 		if(!C)	return
+//		message_admins("Sending popup for nymph")
 		var/response = alert(C, "Someone is harvesting a replica pod. Would you like to play as a Dionaea?", "Replica pod harvest", "Yes", "No", "Never for this round.")
 		if(!C || ckey)
 			return
 		if(response == "Yes")
+//			message_admins("Transferring personality for nymph")
 			transfer_personality(C)
 		else if (response == "Never for this round")
 			C.prefs.be_special ^= BE_PLANT
@@ -112,10 +124,9 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	if(!player) return
 
 	found_player = 1
-
 	var/mob/living/carbon/monkey/diona/podman = new(parent.loc)
 	podman.ckey = player.ckey
-
+	respawnable_list -= player
 	if(player.mob && player.mob.mind)
 		player.mob.mind.transfer_to(podman)
 

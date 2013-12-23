@@ -175,11 +175,11 @@
 	if(O.mind.assigned_role == "Cyborg")
 		if(O.mind.role_alt_title == "Android")
 			O.mmi = new /obj/item/device/mmi/posibrain(O)
-		if(O.mind.role_alt_title == "Robot")
+		else if(O.mind.role_alt_title == "Robot")
 			O.mmi = new /obj/item/device/mmi/posibrain(O) //Ravensdale wants a circuit based brain for another robot class, this is a placeholder.
-	else
-		O.mmi = new /obj/item/device/mmi(O)
-		O.mmi.transfer_identity(src)//Does not transfer key/client.
+		else
+			O.mmi = new /obj/item/device/mmi(O)
+			O.mmi.transfer_identity(src)//Does not transfer key/client.
 
 
 	O.Namepick()
@@ -378,5 +378,35 @@
 		return 1 //Parrots are no longer unfinished! -Nodrak
 	if(ispath(MP, /mob/living/simple_animal/pony))
 		return 1 // ZOMG PONIES WHEEE
+	//Not in here? Must be untested!
+	return 0
+
+
+/mob/proc/safe_animal_respawn(var/MP)
+//Bad mobs! - Remember to add a comment explaining what's wrong with the mob
+	if(!MP)
+		return 0	//Sanity, this should never happen.
+
+//Good mobs!
+	if(ispath(MP, /mob/living/simple_animal/cat))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/corgi))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/crab))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/chicken))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/cow))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/parrot))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/pony))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/hostile/carp))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
+		return 1
+
+
 	//Not in here? Must be untested!
 	return 0

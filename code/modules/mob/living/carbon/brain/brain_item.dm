@@ -32,6 +32,7 @@
 			brainmob.timeofhostdeath = H.timeofdeath
 			if(H.mind)
 				H.mind.transfer_to(brainmob)
+			respawnable_list += brainmob
 			brainmob << "\blue You feel slightly disoriented. That's normal when you're just a brain."
 			return
 
@@ -86,6 +87,7 @@
 			M.ghostize()
 
 		if(brainmob.mind)
+			respawnable_list -= brainmob
 			brainmob.mind.transfer_to(M)
 		else
 			M.key = brainmob.key

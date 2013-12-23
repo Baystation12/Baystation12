@@ -21,6 +21,8 @@ datum
 		var/nutriment_factor = 0
 		var/custom_metabolism = REAGENTS_METABOLISM
 		var/mildly_toxic = 0
+		var/overdose = 0
+		var/overdose_dam = 1
 		//var/list/viruses = list()
 		var/color = "#000000" // rgb: 0, 0, 0 (does not support alpha channels - yet!)
 
@@ -225,6 +227,14 @@ datum
 				if(!istype(M, /mob/living))
 					return
 
+			// Put out fire
+				if(method == TOUCH)
+					M.adjust_fire_stacks(-(volume / 10))
+					if(M.fire_stacks <= 0)
+						M.ExtinguishMob()
+					return
+
+
 			// Grays treat water like acid.
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
@@ -296,14 +306,6 @@ datum
 					var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
 					if(!cube.wrapped)
 						cube.Expand()
-				return
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with water can help put them out!
-				if(!istype(M, /mob/living))
-					return
-				if(method == TOUCH)
-					M.adjust_fire_stacks(-(volume / 10))
-				if(M.fire_stacks <= 0)
-					M.ExtinguishMob()
 				return
 
 		lube
@@ -516,7 +518,7 @@ datum
 					if(15 to 25)
 						M.drowsyness  = max(M.drowsyness, 20)
 					if(25 to INFINITY)
-						M.Paralyse(20)
+						M.Weaken(20)
 						M.drowsyness  = max(M.drowsyness, 30)
 				data++
 				..()
@@ -600,7 +602,39 @@ datum
 						ticker.mode.remove_cultist(M.mind)
 						for(var/mob/O in viewers(M, null))
 							O.show_message(text("\blue []'s eyes blink and become clearer.", M), 1) // So observers know it worked.
+					// Vamps react to this like acid
+					if((M.mind in ticker.mode.vampires) && prob(10))
+						if(!M) M = holder.my_atom
+						M.adjustToxLoss(1*REM)
+						M.take_organ_damage(0, 1*REM)
 				holder.remove_reagent(src.id, 10 * REAGENTS_METABOLISM) //high metabolism to prevent extended uncult rolls.
+
+
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with water can help put them out!
+				// Vamps react to this like acid
+				if(ishuman(M))
+					if((M.mind in ticker.mode.vampires))
+						var/mob/living/carbon/human/H=M
+						if(method == TOUCH)
+							if(H.wear_mask)
+								H << "\red Your mask protects you from the holy water!"
+								return
+							if(H.head)
+								H << "\red Your helmet protects you from the holy water!"
+								return
+							if(!M.unacidable)
+								if(prob(15) && volume >= 30)
+									var/datum/organ/external/affecting = H.get_organ("head")
+									if(affecting)
+										if(affecting.take_damage(25, 0))
+											H.UpdateDamageIcon()
+										H.status_flags |= DISFIGURED
+										H.emote("scream")
+								else
+									M.take_organ_damage(min(15, volume * 2)) // uses min() and volume to make sure they aren't being sprayed in trace amounts (1 unit != insta rape) -- Doohl
+						else
+							if(!M.unacidable)
+								M.take_organ_damage(min(15, volume * 2))
 				return
 
 		serotrotium
@@ -1267,7 +1301,9 @@ datum
 
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
-
+			reaction_turf(var/turf/simulated/S, var/volume)
+				if(volume >= 1)
+					S.dirt = 0
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				if(iscarbon(M))
 					var/mob/living/carbon/C = M
@@ -1340,7 +1376,7 @@ datum
 						var/mob/living/carbon/human/H = M
 						if(H.dna)
 							if(H.species.flags & IS_PLANT) //plantmen take a LOT of damage
-								H.adjustToxLoss(10)
+								H.adjustToxLoss(50)
 
 		plasma
 			name = "Plasma"
@@ -1562,6 +1598,11 @@ datum
 				M.eye_blind = 0
 //				M.disabilities &= ~NEARSIGHTED		//doesn't even do anythig cos of the disabilities = 0 bit
 //				M.sdisabilities &= ~BLIND			//doesn't even do anythig cos of the sdisabilities = 0 bit
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+					if(istype(E))
+						E.damage = max(E.damage-5 , 0)
 				M.SetWeakened(0)
 				M.SetStunned(0)
 				M.SetParalysis(0)
@@ -1579,6 +1620,25 @@ datum
 						D.cure()
 				..()
 				return
+
+		peridaxon
+			name = "Peridaxon"
+			id = "peridaxon"
+			description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
+			reagent_state = LIQUID
+			color = "#C8A5DC" // rgb: 200, 165, 220
+			overdose = 10
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/internal/I = H.internal_organs
+					if(I.parent_organ == "chest")
+						I.damage = max(I.damage -1 , 0)
+				..()
+				return
+
 
 		synaptizine
 			name = "Synaptizine"
@@ -1676,8 +1736,11 @@ datum
 				if(!M) M = holder.my_atom
 				M.eye_blurry = max(M.eye_blurry-5 , 0)
 				M.eye_blind = max(M.eye_blind-5 , 0)
-				M.disabilities &= ~NEARSIGHTED
-				M.eye_stat = max(M.eye_stat-5, 0)
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+					if(istype(E))
+						E.damage = max(E.damage-5 , 0)
 //				M.sdisabilities &= ~1		Replaced by eye surgery
 				..()
 				return
@@ -2257,13 +2320,27 @@ datum
 			name = "Amatoxin"
 			id = "amatoxin"
 			description = "A powerful poison derived from certain species of mushroom."
+			custom_metabolism = 0.1
 			color = "#792300" // rgb: 121, 35, 0
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.adjustToxLoss(1*REM)
+				if(!data) data = 1
+				data++
 				..()
 				return
+
+			Del()
+				if (istype(holder.my_atom,/mob/living))
+					var/mob/living/M as mob
+					var/to_remove = 0
+					if(!M) M = holder.my_atom
+					if (holder.has_reagent("anti_toxin"))
+						to_remove = min(holder.get_reagent_amount("anti_toxin"),data)
+						holder.remove_reagent("anti_toxin", to_remove, 0)
+						data -= to_remove
+					M.adjustToxLoss(data)
+				..()
 
 		psilocybin
 			name = "Psilocybin"
@@ -2464,6 +2541,21 @@ datum
 				M.nutrition += nutriment_factor
 				..()
 				return
+
+		toxin/coffeepowder
+			name = "Coffee Grounds"
+			id = "coffeepowder"
+			description = "Finely ground coffee beans, used to make coffee."
+			reagent_state = SOLID
+			color = "#5B2E0D" // rgb: 91, 46, 13
+
+		toxin/teapowder
+			name = "Ground Tea Leaves"
+			id = "teapowder"
+			description = "Finely shredded tea leaves, used for making tea."
+			reagent_state = SOLID
+			color = "#7F8400" // rgb: 127, 132, 0
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// DRINKS BELOW, Beer is up there though, along with cola. Cap'n Pete's Cuban Spiced Rum////////////////////////////////

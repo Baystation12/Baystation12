@@ -89,7 +89,7 @@
 	var/list/heard_a = list() // understood us
 	var/list/heard_b = list() // didn't understand us
 	var/and_passes_on=""
-	if(!said_last_words)
+	if(!said_last_words && src.isInCrit())
 		and_passes_on=" - and passes on"
 	said_last_words=src.stat
 
@@ -153,6 +153,6 @@
 			M.show_message(rendered, 2)
 	if(said_last_words)
 		src.stat = 2
-		src.death()
+		src.death(0)
 		src.regenerate_icons()
 

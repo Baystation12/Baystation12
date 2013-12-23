@@ -51,50 +51,7 @@
 	item_state = "skrell_suit_black"
 	_color = "skrell_suit_black"
 
-//Unathi space gear. Huge and restrictive.
 
-/obj/item/clothing/head/helmet/space/unathi
-	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
-	heat_protection = HEAD
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	var/up = 0 //So Unathi helmets play nicely with the weldervision check.
-	species_restricted = list("Unathi")
-
-/obj/item/clothing/head/helmet/space/unathi/helmet_cheap
-	name = "NT breacher helmet"
-	desc = "Hey! Watch it with that thing! It's a knock-off of a Unathi battle-helm, and that spike could put someone's eye out."
-	icon_state = "unathi_helm_cheap"
-	item_state = "unathi_helm_cheap"
-	_color = "unathi_helm_cheap"
-
-/obj/item/clothing/suit/space/unathi
-	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
-	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	species_restricted = list("Unathi")
-
-/obj/item/clothing/suit/space/unathi/rig_cheap
-	name = "NT breacher chassis"
-	desc = "A cheap NT knock-off of a Unathi battle-rig. Looks like a fish, moves like a fish, steers like a cow."
-	icon_state = "rig-unathi-cheap"
-	item_state = "rig-unathi-cheap"
-	slowdown = 3
-
-/obj/item/clothing/head/helmet/space/unathi/breacher
-	name = "breacher helm"
-	desc = "Weathered, ancient and battle-scarred. The helmet is too."
-	icon_state = "unathi_breacher"
-	item_state = "unathi_breacher"
-	_color = "unathi_breacher"
-
-/obj/item/clothing/suit/space/unathi/breacher
-	name = "breacher chassis"
-	desc = "Huge, bulky and absurdly heavy. It must be like wearing a tank."
-	icon_state = "unathi_breacher"
-	item_state = "unathi_breacher"
-	_color = "unathi_breacher"
-	slowdown = 1
 
 // Vox space gear (vaccuum suit, low pressure armour)
 // Can't be equipped by any other species due to bone structure and vox cybernetics.
@@ -219,44 +176,110 @@
 //Species-specific Syndicate rigs.
 /obj/item/clothing/head/helmet/space/rig/syndi/tajara
 	icon_state = "rig0-syndie-taj"
-	item_state = "syndie_helm"
+	item_state = "rig0-syndie-taj"
 	_color = "syndie-taj"
 	species_restricted = list("Tajaran")
 
 /obj/item/clothing/suit/space/rig/syndi/tajara
-	item_state = "syndie_hardsuit"
+	item_state = "rig-syndie-taj"
 	icon_state = "rig-syndie-taj"
 	species_restricted = list("Tajaran")
 
-/obj/item/clothing/head/helmet/space/rig/syndi/unathi
-	icon_state = "rig0-syndie-unathi"
-	item_state = "syndie_helm"
-	_color = "syndie-unathi"
-	species_restricted = list("Unathi")
-
-/obj/item/clothing/suit/space/rig/syndi/unathi
-	item_state = "syndie_hardsuit"
-	icon_state = "rig-syndie-unathi"
-	species_restricted = list("Unathi")
-
 /obj/item/clothing/head/helmet/space/rig/syndi/skrell
 	icon_state = "rig0-syndie-skrell"
-	item_state = "syndie_helm"
+	item_state = "rig0-syndie-skrell"
 	_color = "syndie-skrell"
 	species_restricted = list("Skrell")
 
 /obj/item/clothing/suit/space/rig/syndi/skrell
-	item_state = "syndie_hardsuit"
+	item_state = "rig-syndie-skrell"
 	icon_state = "rig-syndie-skrell"
 	species_restricted = list("Skrell")
 
 /obj/item/clothing/head/helmet/space/rig/syndi/human
 	icon_state = "rig0-syndie-human"
-	item_state = "syndie_helm"
+	item_state = "rig0-syndie-human"
 	_color = "syndie-human"
 	species_restricted = list("Human")
 
 /obj/item/clothing/suit/space/rig/syndi/human
-	item_state = "syndie_hardsuit"
+	item_state = "rig-syndie-human"
 	icon_state = "rig-syndie-human"
 	species_restricted = list("Human")
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
+
+////////////////UNATHI/////////////////////
+
+/obj/item/clothing/suit/space/rig/unathi
+	icon_state = "rig-unathi-engineering"
+	item_state = "rig_unathi-engineering"
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/suit/space/rig/security/unathi
+	icon_state = "rig-unathi-sec"
+	item_state = "rig-unathi-sec"
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/head/helmet/space/rig/unathi
+	icon_state = "rig0-unathi-engineering"
+	item_state = "rig0-unathi-engineering"
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/head/helmet/space/rig/security/unathi
+	icon_state = "rig0-unathi-sec"
+	item_state = "rig0-unathi-sec"
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/head/helmet/space/rig/syndi/unathi
+	icon_state = "rig0-syndie-unathi"
+	item_state = "rig0-syndie-unathi"
+	_color = "syndie-unathi"
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/suit/space/rig/syndi/unathi
+	item_state = "rig-syndie-unathi"
+	icon_state = "rig-syndie-unathi"
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/head/helmet/space/unathi
+	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
+	heat_protection = HEAD
+	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
+	var/up = 0 //So Unathi helmets play nicely with the weldervision check.
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/head/helmet/space/unathi/helmet_cheap
+	name = "NT breacher helmet"
+	desc = "Hey! Watch it with that thing! It's a knock-off of a Unathi battle-helm, and that spike could put someone's eye out."
+	icon_state = "unathi_helm_cheap"
+	item_state = "unathi_helm_cheap"
+	_color = "unathi_helm_cheap"
+
+/obj/item/clothing/suit/space/unathi
+	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/bag/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
+	species_restricted = list("Unathi")
+
+/obj/item/clothing/suit/space/unathi/rig_cheap
+	name = "NT breacher chassis"
+	desc = "A cheap NT knock-off of a Unathi battle-rig. Looks like a fish, moves like a fish, steers like a cow."
+	icon_state = "rig-unathi-cheap"
+	item_state = "rig-unathi-cheap"
+	slowdown = 3
+
+/obj/item/clothing/head/helmet/space/unathi/breacher
+	name = "breacher helm"
+	desc = "Weathered, ancient and battle-scarred. The helmet is too."
+	icon_state = "unathi_breacher"
+	item_state = "unathi_breacher"
+	_color = "unathi_breacher"
+
+/obj/item/clothing/suit/space/unathi/breacher
+	name = "breacher chassis"
+	desc = "Huge, bulky and absurdly heavy. It must be like wearing a tank."
+	icon_state = "unathi_breacher"
+	item_state = "unathi_breacher"
+	_color = "unathi_breacher"
+	slowdown = 1

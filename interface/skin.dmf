@@ -1137,6 +1137,7 @@ window "chemdispenser_reagents"
 		align = center
 		text-wrap = false
 
+
 window "mainwindow"
 	elem "mainwindow"
 		type = MAIN

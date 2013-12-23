@@ -1,5 +1,5 @@
 /datum/event/anomaly
-	var/area/impact_area
+
 	var/obj/effect/anomaly/newAnomaly
 
 

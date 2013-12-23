@@ -535,6 +535,10 @@
 				if (!muzzled)
 					message = "<B>[src]</B> screams!"
 					m_type = 2
+					if (prob(5))
+						playsound(src.loc, 'sound/voice/WilhelmScream.ogg', 100, 1, 10)
+					else
+						playsound(src.loc, 'sound/voice/scream2.ogg', 100, 1, 10)
 				else
 					message = "<B>[src]</B> makes a very loud noise."
 					m_type = 2

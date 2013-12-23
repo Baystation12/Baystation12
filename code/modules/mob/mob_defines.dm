@@ -81,7 +81,6 @@
 	var/lying = 0
 	var/lying_prev = 0
 	var/canmove = 1
-	var/eye_stat = null//Living, potentially Carbon
 	var/lastpuke = 0
 	var/unacidable = 0
 	var/small = 0
@@ -89,7 +88,7 @@
 	var/list/embedded = list()          //Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // For speaking/listening.
 	var/list/speak_emote = list("says") //Verbs used when speaking. Defaults to 'say' if speak_emote is null.
-
+	var/list/abilities = list()         // For species-derived or admin-given powers.
 	var/name_archive //For admin things like possession
 
 	var/timeofdeath = 0.0//Living
@@ -160,6 +159,8 @@
 
 	var/move_on_shuttle = 1 // Can move on the shuttle.
 
+	var/has_enabled_antagHUD = 0
+	var/antagHUD = 0
 //Generic list for proc holders. Only way I can see to enable certain verbs/procs. Should be modified if needed.
 	var/proc_holder_list[] = list()//Right now unused.
 	//Also unlike the spell list, this would only store the object in contents, not an object in itself.

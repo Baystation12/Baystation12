@@ -153,7 +153,7 @@
 			n++
 		s["players"] = n
 
-		if(revdata)	s["revision"] = revdata.revision
+//		if(revdata)	s["revision"] = revdata.revision
 		s["admins"] = admins
 
 		return list2params(s)
@@ -270,12 +270,12 @@
 
 	s += "<b>[station_name()]</b>";
 	s += " ("
-	s += "<a href=\"http://192.241.230.212/phpBB3/index.php\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"http://192.241.237.198/phpBB3/index.php\">" //Change this to wherever you want the hub to link to.
 	s += "[game_version]"
 	s += "</a>"
 	s += ")"
 	s += "<br>The Perfect Mix of RP & Action<br>"
-	s += "<b>BYOND 500+ REQUIRED</b><br>"
+	s += "<b>NEW HOST. NO LAG. NO CRASH.</b><br>"
 
 
 

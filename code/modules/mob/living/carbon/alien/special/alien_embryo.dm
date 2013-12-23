@@ -80,7 +80,7 @@
 	// he will become the alien but if he doesn't then we will set the stage
 	// to 2, so we don't do a process heavy check everytime.
 
-	if(candidates.len)
+	if(candidates && candidates.len)
 		picked = pick(candidates)
 	else if(affected_mob.client)
 		picked = affected_mob.key
@@ -95,6 +95,7 @@
 	spawn(6)
 		var/mob/living/carbon/alien/larva/new_xeno = new(affected_mob.loc)
 		new_xeno.key = picked
+		respawnable_list -= picked
 		new_xeno << sound('sound/voice/hiss5.ogg',0,0,0,100)	//To get the player's attention
 		if(gib_on_success)
 			affected_mob.gib()

@@ -9,6 +9,7 @@ var/global/list/player_list = list()				//List of all mobs **with clients attach
 var/global/list/mob_list = list()					//List of all mobs, including clientless
 var/global/list/living_mob_list = list()			//List of all alive mobs, including clientless. Excludes /mob/new_player
 var/global/list/dead_mob_list = list()				//List of all dead mobs, including clientless. Excludes /mob/new_player
+var/global/list/respawnable_list = list()				//List of all mobs, dead or in mindless creatures that still be respawned.
 
 var/global/list/portals = list()					//for use by portals
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time

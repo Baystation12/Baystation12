@@ -28,6 +28,20 @@ NanoBaseHelpers = function ()
             }
 	    });
 		$.views.helpers({ 
+		
+			syndicateMode: function() {
+				$('body').css("background-color","#8f1414");
+				$('body').css("background-image","url('uiBackground-Syndicate.png')");
+				$('body').css("background-position","50% 0");
+				$('body').css("background-repeat","repeat-x");
+
+				$('#uiTitleFluff').css("background-image","url('uiTitleFluff-Syndicate.png')");
+				$('#uiTitleFluff').css("background-position","50% 50%");
+				$('#uiTitleFluff').css("background-repeat", "no-repeat");
+
+			return '';
+			},
+			
             combine: function( arr1, arr2 ) {
                 return arr1 && arr2 ? arr1.concat(arr2) : arr1 || arr2;
             },  

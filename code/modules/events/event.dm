@@ -5,7 +5,8 @@
 	var/oneShot			= 0	//If true, then the event removes itself from the list of potential events on creation.
 
 	var/activeFor		= 0	//How long the event has existed. You don't need to change this.
-
+	var/area/impact_area
+	var/scaling_factor // Used to scale spawns to server pop.
 //Called first before processing.
 //Allows you to setup your event, such as randomly
 //setting the startWhen and or announceWhen variables.
@@ -78,6 +79,7 @@
 /datum/event/New()
 	setup()
 	events.Add(src)
+	score_eventsendured++
 	/*if(oneShot)
 		potentialRandomEvents.Remove(type)*/
 	..()
@@ -88,3 +90,4 @@
 		if(P.client)
 			players++
 	return players
+

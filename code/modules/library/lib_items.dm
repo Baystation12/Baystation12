@@ -26,7 +26,7 @@
 	update_icon()
 
 /obj/structure/bookcase/attackby(obj/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/weapon/book))
+	if(istype(O, /obj/item/weapon/book) || istype(O, /obj/item/weapon/spellbook))
 		user.drop_item()
 		O.loc = src
 		update_icon()

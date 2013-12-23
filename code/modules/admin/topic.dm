@@ -568,7 +568,7 @@
 	//Non-Human (Green)
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='ccffcc'><th colspan='[length(nonhuman_positions)]'><a href='?src=\ref[src];jobban3=nonhumandept;jobban4=\ref[M]'>Non-human Positions</a></th></tr><tr align='center'>"
+		jobs += "<tr bgcolor='ccffcc'><th colspan='[length(nonhuman_positions)+1]'><a href='?src=\ref[src];jobban3=nonhumandept;jobban4=\ref[M]'>Non-human Positions</a></th></tr><tr align='center'>"
 		for(var/jobPos in nonhuman_positions)
 			if(!jobPos)	continue
 			var/datum/job/job = job_master.GetJob(jobPos)
@@ -590,6 +590,11 @@
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=pAI;jobban4=\ref[M]'><font color=red>pAI</font></a></td>"
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=pAI;jobban4=\ref[M]'>pAI</a></td>"
+
+		if(jobban_isbanned(M, "AntagHUD"))
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=AntagHUD;jobban4=\ref[M]'><font color=red>AntagHUD</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=AntagHUD;jobban4=\ref[M]'>AntagHUD</a></td>"
 
 		jobs += "</tr></table>"
 
@@ -636,6 +641,8 @@
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=wizard;jobban4=\ref[M]'>[replacetext("Wizard", " ", "&nbsp")]</a></td>"
 
+
+
 /*		//Malfunctioning AI	//Removed Malf-bans because they're a pain to impliment
 		if(jobban_isbanned(M, "malf AI") || isbanned_dept)
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=malf AI;jobban4=\ref[M]'><font color=red>[replacetext("Malf AI", " ", "&nbsp")]</font></a></td>"
@@ -654,11 +661,30 @@
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=infested monkey;jobban4=\ref[M]'>[replacetext("Infested Monkey", " ", "&nbsp")]</a></td>"
 */
+
+		jobs += "</tr></table>"
+
+		//Other races  (BLUE, because I have no idea what other color to make this)
+		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
+		jobs += "<tr bgcolor='ccccff'><th colspan='1'>Other</th></tr><tr align='center'>"
+
+		//NYMPH
+		if(jobban_isbanned(M, "Dionaea"))
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'><font color=red>Dionaea Nymph</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Dionaea;jobban4=\ref[M]'>Dionaea</a></td>"
+
+		//ERT
+		if(jobban_isbanned(M, "Emergency Response Team") || isbanned_dept)
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Emergency Response Team;jobban4=\ref[M]'><font color=red>Emergency Response Team</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Emergency Response Team;jobban4=\ref[M]'>Emergency Response Team</a></td>"
+
 		jobs += "</tr></table>"
 
 		body = "<body>[jobs]</body>"
 		dat = "<tt>[header][body]</tt>"
-		usr << browse(dat, "window=jobban2;size=800x450")
+		usr << browse(dat, "window=jobban2;size=800x490")
 		return
 
 	//JOBBAN'S INNARDS
@@ -1784,6 +1810,10 @@
 				if(usr.client.strike_team())
 					feedback_inc("admin_secrets_fun_used",1)
 					feedback_add_details("admin_secrets_fun_used","Strike")
+			if("striketeam_syndicate")
+				if(usr.client.syndicate_strike_team())
+					feedback_inc("admin_secrets_fun_used",1)
+					feedback_add_details("admin_secrets_fun_used","Strike")
 			if("tripleAI")
 				usr.client.triple_ai()
 				feedback_inc("admin_secrets_fun_used",1)
@@ -1894,6 +1924,7 @@
 					var/turf/loc = find_loc(H)
 					var/security = 0
 					if(loc.z > 1 || prisonwarped.Find(H))
+
 //don't warp them if they aren't ready or are already there
 						continue
 					H.Paralyse(5)
@@ -2080,7 +2111,7 @@
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","PB")
 				message_admins("[key_name_admin(usr)] has allowed a prison break", 1)
-				prison_break()
+				new /datum/event/prison_break
 			if("radiation")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","RAD")
@@ -2212,7 +2243,7 @@
 			if("ionstorm")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","I")
-				IonStorm()
+				new /datum/event/ionstorm
 				message_admins("[key_name_admin(usr)] triggered an ion storm")
 				var/show_log = alert(usr, "Show ion message?", "Message", "Yes", "No")
 				if(show_log == "Yes")
@@ -2221,17 +2252,23 @@
 			if("carp")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","Crp")
-				carp_migration()
+				new /datum/event/carp_migration
 				message_admins("[key_name_admin(usr)] triggered a carp migration")
 			if("spiders")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","Sp")
 				new /datum/event/spider_infestation
 				message_admins("[key_name_admin(usr)] has spawned giant spiders", 1)
+			if("borers")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","Borers")
+				log_admin("[key_name(usr)] spawned a cortical borer infestation.", 1)
+				message_admins("\blue [key_name_admin(usr)] spawned a cortical borer infestation.", 1)
+				new /datum/event/borer_infestation
 			if("spacevines")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","K")
-				//new /datum/event/spacevine
+				new /datum/event/spacevine
 				message_admins("[key_name_admin(usr)] has spawned spacevines", 1)
 			if("vent_clog")
 				feedback_inc("admin_secrets_fun_used",1)
@@ -2243,6 +2280,32 @@
 				feedback_add_details("admin_secrets_fun_used","OO")
 				usr.client.only_one()
 //				message_admins("[key_name_admin(usr)] has triggered a battle to the death (only one)")
+			if("guns")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","SG")
+				usr.rightandwrong(0)
+			if("magic")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","SM")
+				usr.rightandwrong(1)
+			if("securitylevel0")
+				set_security_level(0)
+				message_admins("\blue [key_name_admin(usr)] change security level to Green.", 1)
+			if("securitylevel1")
+				set_security_level(1)
+				message_admins("\blue [key_name_admin(usr)] change security level to Blue.", 1)
+			if("securitylevel2")
+				set_security_level(2)
+				message_admins("\blue [key_name_admin(usr)] change security level to Red.", 1)
+			if("securitylevel3")
+				set_security_level(3)
+				message_admins("\blue [key_name_admin(usr)] change security level to Gamma.", 1)
+			if("securitylevel4")
+				set_security_level(4)
+				message_admins("\blue [key_name_admin(usr)] change security level to Epsilon.", 1)
+			if("securitylevel5")
+				set_security_level(5)
+				message_admins("\blue [key_name_admin(usr)] change security level to Delta.", 1)
 		if(usr)
 			log_admin("[key_name(usr)] used secret [href_list["secretsfun"]]")
 			if (ok)

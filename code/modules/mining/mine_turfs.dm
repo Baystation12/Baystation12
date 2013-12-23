@@ -156,7 +156,6 @@
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
-	..()
 	if (prob(mineralChance))
 		var/mName = pickweight(mineralSpawnChanceList) //temp mineral name
 
@@ -180,6 +179,7 @@
 				if("Clown")
 					M = new/turf/simulated/mineral/clown(src)
 			if(M)
+				..()
 				src = M
 				M.levelupdate()
 
@@ -495,7 +495,11 @@ commented out in r5061, I left it because of the shroom thingies
 
 	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
 	N.fullUpdateMineralOverlays()
-
+	var/crate = rand(1,30)
+	switch(crate)
+		if(1)
+			visible_message("<span class='notice'>After digging, you find an old dusty crate buried within!</span>")
+			new/obj/structure/closet/crate/secure/loot(src)
 	return
 
 /turf/simulated/mineral/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)

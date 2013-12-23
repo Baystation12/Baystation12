@@ -55,6 +55,7 @@
 					<A href='?src=\ref[src];secretscoder=maint_access_engiebrig'>Change all maintenance doors to engie/brig access only</A><BR>
 					<A href='?src=\ref[src];secretscoder=maint_access_brig'>Change all maintenance doors to brig access only</A><BR>
 					<A href='?src=\ref[src];secretscoder=infinite_sec'>Remove cap on security officers</A><BR>
+					<A href='?src=\ref[src];secretscoder=maint_access_engiebrig'>Change Security Level </A><BR>
 					<BR>
 					<B>Coder Secrets</B><BR>
 					<BR>
@@ -77,11 +78,13 @@
 					<A href='?src=\ref[src];secretsfun=vent_clog'>Make scrubbers spew chemicals</A><BR>
 					<A href='?src=\ref[src];secretsfun=timeanomalies'>Spawn wormholes</A><BR>
 					<A href='?src=\ref[src];secretsfun=goblob'>Spawn blob</A><BR>
-					<A href='?src=\ref[src];secretsfun=aliens'>Trigger an Alien infestation</A><BR>
+					<A href='?src=\ref[src];secretsfun=aliens'>Trigger a Xenomorph infestation</A><BR>
+					<A href='?src=\ref[src];secretsfun=borers'>Trigger a Cortical Borer infestation</A><BR>
 					<A href='?src=\ref[src];secretsfun=alien_silent'>Spawn an Alien silently</A><BR>
 					<A href='?src=\ref[src];secretsfun=spiders'>Trigger a Spider infestation</A><BR>
 					<A href='?src=\ref[src];secretsfun=spaceninja'>Send in a space ninja</A><BR>
 					<A href='?src=\ref[src];secretsfun=striketeam'>Send in a strike team</A><BR>
+					<A href='?src=\ref[src];secretsfun=striketeam_syndicate'>Send in a syndicate strike team</A><BR>
 					<A href='?src=\ref[src];secretsfun=honksquad'>Send in a HONKsquad</A><BR>
 					<A href='?src=\ref[src];secretsfun=carp'>Trigger an Carp migration</A><BR>
 					<A href='?src=\ref[src];secretsfun=radiation'>Irradiate the station</A><BR>
@@ -115,6 +118,15 @@
 					<A href='?src=\ref[src];secretsfun=fakeguns'>Make all items look like guns</A><BR>
 					<A href='?src=\ref[src];secretsfun=schoolgirl'>Japanese Animes Mode</A><BR>
 					<A href='?src=\ref[src];secretsfun=eagles'>Egalitarian Station Mode</A><BR>
+					<A href='?src=\ref[src];secretsfun=guns'>Summon Guns</A><BR>
+					<A href='?src=\ref[src];secretsfun=magic'>Summon Magic</A><BR>
+					<BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel0'>Change Security Level To Green</A><BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel1'>Change Security Level To Blue</A><BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel2'>Change Security Level To Red</A><BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel3'>Change Security Level To Gamma</A><BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel4'>Change Security Level To Epsilon</A><BR>
+					<A href='?src=\ref[src];secretsfun=securitylevel5'>Change Security Level To Delta</A><BR>
 					"}
 	dat += "</center></body></html>"
 	var/datum/browser/popup = new(usr, "secrets", "<div align='center'>Admin Secrets</div>", 610, 650)

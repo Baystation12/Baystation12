@@ -49,9 +49,25 @@
 		w_class = 2
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "\blue [src] can now be concealed."
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
 	add_fingerprint(user)
 	return
 
+/obj/item/weapon/melee/energy/sword/attackby(obj/item/weapon/W, mob/living/user)
+	..()
+	if(istype(W, /obj/item/weapon/melee/energy/sword))
+		if(W == src)
+			user << "<span class='notice'>You try to attach the end of the energy sword to... itself. You're not very smart, are you?</span>"
+			if(ishuman(user))
+				user.adjustBrainLoss(10)
+		else
+			user << "<span class='notice'>You attach the ends of the two energy swords, making a single double-bladed weapon! You're cool.</span>"
+			new /obj/item/weapon/twohanded/dualsaber(user.loc)
+			del(W)
+			del(src)
 /*
  * Classic Baton
  */
@@ -137,6 +153,10 @@
 		w_class = 2
 		force = 3//not so robust now
 		attack_verb = list("hit", "punched")
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
 	playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 	add_fingerprint(user)
 	if (!blood_DNA) return
@@ -248,5 +268,9 @@
 		w_class = 1
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "\blue [src] can now be concealed."
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
 	add_fingerprint(user)
 	return

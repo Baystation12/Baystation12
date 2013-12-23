@@ -23,7 +23,7 @@
 	status_flags = 0
 	faction = "cult"
 	status_flags = CANPUSH
-
+	universal_speak = 1
 
 	Life()
 		..()

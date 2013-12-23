@@ -1,8 +1,14 @@
 //Species modification item.
 
 /obj/item/weapon/modkit/tajaran
-	name = "hardsuit modification kit"
+	name = "tajaran hardsuit modification kit"
 	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another species. This one looks like it's meant for Tajara."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "royce_kit"
+
+/obj/item/weapon/modkit/unathi
+	name = "Unathi hardsuit modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another species. This one looks like it's meant for Unathi."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "royce_kit"
 
@@ -15,6 +21,14 @@
 		del(I)
 		del(src)
 		return
+	if(istype(I,/obj/item/weapon/modkit/unathi))
+		user.drop_item()
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		user << "\red You painstakingly modify [src] to make it more suitable for a Tajaran user."
+		new /obj/item/clothing/head/helmet/space/rig/unathi(user.loc)
+		del(I)
+		del(src)
+		return
 	..()
 
 /obj/item/clothing/suit/space/rig/attackby(obj/item/I as obj, mob/user as mob)
@@ -23,6 +37,14 @@
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		user << "\red You painstakingly modify [src] to make it more suitable for a Tajaran user."
 		new /obj/item/clothing/suit/space/rig/tajara(user.loc)
+		del(I)
+		del(src)
+		return
+	if(istype(I,/obj/item/weapon/modkit/unathi))
+		user.drop_item()
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		user << "\red You painstakingly modify [src] to make it more suitable for a Tajaran user."
+		new /obj/item/clothing/suit/space/rig/unathi(user.loc)
 		del(I)
 		del(src)
 		return
@@ -79,6 +101,7 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
 	species_restricted = list("exclude","Unathi","Tajara","Diona","Vox")
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
 
 //Chief Engineer's rig
 /obj/item/clothing/head/helmet/space/rig/elite
@@ -93,7 +116,7 @@
 	name = "advanced hardsuit"
 	desc = "An advanced suit that protects against hazardous, low pressure environments. Shines with a high polish."
 	item_state = "ce_hardsuit"
-
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
 
 //Mining rig
 /obj/item/clothing/head/helmet/space/rig/mining
@@ -108,6 +131,7 @@
 	name = "mining hardsuit"
 	desc = "A special suit that protects against hazardous, low pressure environments. Has reinforced plating."
 	item_state = "mining_hardsuit"
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
 
 
 
@@ -186,7 +210,7 @@
 	desc = "A special suit that protects against hazardous, low pressure environments. Has minor radiation shielding."
 	item_state = "medical_hardsuit"
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/storage/firstaid,/obj/item/device/healthanalyzer,/obj/item/stack/medical)
-
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
 
 	//Security
 /obj/item/clothing/head/helmet/space/rig/security
@@ -206,6 +230,30 @@
 	armor = list(melee = 60, bullet = 10, laser = 30, energy = 5, bomb = 45, bio = 100, rad = 10)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/melee/baton)
 	siemens_coefficient = 0.7
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
+
+/obj/item/clothing/head/helmet/space/rig/security/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I,/obj/item/weapon/modkit/unathi))
+		user.drop_item()
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		user << "\red You painstakingly modify [src] to make it more suitable for a Unathi user."
+		new /obj/item/clothing/head/helmet/space/rig/security/unathi(user.loc)
+		del(I)
+		del(src)
+		return
+	..()
+
+
+/obj/item/clothing/suit/space/rig/security/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I,/obj/item/weapon/modkit/unathi))
+		user.drop_item()
+		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		user << "\red You painstakingly modify [src] to make it more suitable for a Unathi user."
+		new /obj/item/clothing/suit/space/rig/security/unathi(user.loc)
+		del(I)
+		del(src)
+		return
+	..()
 
 
 //Atmospherics Rig (BS12)
@@ -225,3 +273,4 @@
 	item_state = "atmos_hardsuit"
 	armor = list(melee = 40, bullet = 0, laser = 0, energy = 0, bomb = 25, bio = 100, rad = 0)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL

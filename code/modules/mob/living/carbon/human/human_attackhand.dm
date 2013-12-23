@@ -13,29 +13,9 @@
 	..()
 
 	if((M != src) && check_shields(0, M.name))
+		add_logs(src, M, "attempted to touch")
 		visible_message("\red <B>[M] attempted to touch [src]!</B>")
 		return 0
-
-
-	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
-		var/obj/item/clothing/gloves/G = M.gloves
-		if(G.cell)
-			if(M.a_intent == "hurt")//Stungloves. Any contact will stun the alien.
-				if(G.cell.charge >= 2500)
-					G.cell.charge -= 2500
-					visible_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>")
-					M.attack_log += text("\[[time_stamp()]\] <font color='red'>Stungloved [src.name] ([src.ckey])</font>")
-					src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stungloved by [M.name] ([M.ckey])</font>")
-
-					msg_admin_attack("[M.name] ([M.ckey]) stungloved [src.name] ([src.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[M.x];Y=[M.y];Z=[M.z]'>JMP</a>)")
-
-					var/armorblock = run_armor_check(M.zone_sel.selecting, "energy")
-					apply_effects(5,5,0,0,5,0,0,armorblock)
-					return 1
-				else
-					M << "\red Not enough charge! "
-					visible_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>")
-				return
 
 		if(istype(M.gloves , /obj/item/clothing/gloves/boxing/hologlove))
 
@@ -64,11 +44,11 @@
 //      log_debug("No gloves, [M] is truing to infect [src]")
 			M.spread_disease_to(src, "Contact")
 
-
 	switch(M.a_intent)
 		if("help")
 			if(health >= config.health_threshold_crit)
 				help_shake_act(M)
+				add_logs(src, M, "shaked")
 				return 1
 //			if(M.health < -75)	return 0
 
@@ -88,6 +68,7 @@
 			requests += O
 			spawn(0)
 				O.process()
+			add_logs(src, M, "CPRed")
 			return 1
 
 		if("grab")
@@ -108,14 +89,31 @@
 
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			visible_message("<span class='warning'>[M] has grabbed [src] passively!</span>")
+			add_logs(src, M, "grabbed", addition="passively")
 			return 1
 
 		if("hurt")
 
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
+			//Vampire code
+			if(M.zone_sel && M.zone_sel.selecting == "head" && src != M)
+				if(M.mind && M.mind.vampire && (M.mind in ticker.mode.vampires) && !M.mind.vampire.draining)
+					if((head && (head.flags & HEADCOVERSMOUTH)) || (wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)))
+						M << "\red Remove their mask!"
+						return 0
+					if((M.head && (M.head.flags & HEADCOVERSMOUTH)) || (M.wear_mask && (M.wear_mask.flags & MASKCOVERSMOUTH)))
+						M << "\red Remove your mask!"
+						return 0
+					if(mind && mind.vampire && (mind in ticker.mode.vampires))
+						M << "\red Your fangs fail to pierce [src.name]'s cold flesh"
+						return 0
+					//we're good to suck the blood, blaah
+					M.handle_bloodsucking(src)
+					add_logs(src, M, "vampirebit")
+					message_admins("[M.name] ([M.ckey]) vampirebit [src.name] ([src.ckey])")
+					return
+			//end vampire codes
 
-			log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
+			add_logs(src, M, "[M.species.attack_verb]ed")
 
 			var/damage = rand(0, M.species.max_hurt_damage)//BS12 EDIT
 			if(!damage)
@@ -150,10 +148,7 @@
 
 
 		if("disarm")
-			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
-			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
-
-			log_attack("[M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])")
+			add_logs(src, M, "disarmed")
 
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)

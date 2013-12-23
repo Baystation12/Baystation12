@@ -204,3 +204,28 @@
 	name = "\improper chinese restaurant sign"
 	desc = "A glowing dragon invites you in"
 	icon_state = "chinese"
+
+/obj/structure/sign/directions/science
+	name = "\improper Science department"
+	desc = "A direction sign, pointing out which way Science department is."
+	icon_state = "direction_sci"
+
+/obj/structure/sign/directions/engineering
+	name = "\improper Engineering department"
+	desc = "A direction sign, pointing out which way Engineering department is."
+	icon_state = "direction_eng"
+
+/obj/structure/sign/directions/security
+	name = "\improper Security department"
+	desc = "A direction sign, pointing out which way Security department is."
+	icon_state = "direction_sec"
+
+/obj/structure/sign/directions/medical
+	name = "\improper Medical Bay"
+	desc = "A direction sign, pointing out which way Meducal Bay is."
+	icon_state = "direction_med"
+
+/obj/structure/sign/directions/evac
+	name = "\improper Escape Arm"
+	desc = "A direction sign, pointing out which way escape shuttle dock is."
+	icon_state = "direction_evac"

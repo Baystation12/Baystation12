@@ -643,3 +643,6 @@
 						CM.legcuffed.loc = usr.loc
 						CM.legcuffed = null
 						CM.update_inv_legcuffed()
+
+
+

@@ -28,12 +28,12 @@
 				return
 			for(var/mob/V in viewers(src, null))
 				V.show_message(text("\blue [user] sticks \a [O] into \the [src]."))
-
 			brainmob = O:brainmob
 			O:brainmob = null
 			brainmob.loc = src
 			brainmob.container = src
 			brainmob.stat = 0
+			respawnable_list -= brainmob
 			dead_mob_list -= brainmob//Update dem lists
 			living_mob_list += brainmob
 
@@ -104,6 +104,7 @@
 		dropbrain(var/obj/item/brain/brain, var/turf/dropspot)
 			brainmob.container = null//Reset brainmob mmi var.
 			brainmob.loc = brain//Throw mob into brain.
+			respawnable_list += brainmob
 			living_mob_list -= brainmob//Get outta here
 			brain.brainmob = brainmob//Set the brain to use the brainmob
 			brain.brainmob.cancel_camera()

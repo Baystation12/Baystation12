@@ -8,7 +8,7 @@
 /obj/item/weapon/plastique/afterattack(atom/target as obj|turf, mob/user as mob, flag)
 	if (!flag)
 		return
-	if (istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/weapon/storage/))
+	if (istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/weapon/storage/) || istype(target, /obj/machinery/door/airlock/hatch/gamma))
 		return
 	user << "Planting explosives..."
 	if(ismob(target))

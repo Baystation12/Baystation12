@@ -1222,3 +1222,18 @@
 	/obj/item/weapon/
 	reagents = list("flour" = 10, "sugar" = 10, "cornoil" = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/friedbanana
+
+/datum/recipe/stuffing
+	reagents = list("water" = 5, "sodiumchloride" = 1, "blackpepper" = 1)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/sliceable/bread,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/stuffing
+
+/datum/recipe/tofurkey
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/tofu,
+		/obj/item/weapon/reagent_containers/food/snacks/tofu,
+		/obj/item/weapon/reagent_containers/food/snacks/stuffing,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/tofurkey

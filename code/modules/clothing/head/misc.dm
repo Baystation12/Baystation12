@@ -231,6 +231,14 @@
 	flags = FPRINT | TABLEPASS | BLOCKHAIR
 	siemens_coefficient = 2.0
 
+/obj/item/clothing/head/corgi
+	name = "corgi suit head"
+	desc = "Woof!"
+	icon_state = "corgihead"
+	item_state = "chickensuit"
+	flags = FPRINT | TABLEPASS | BLOCKHAIR
+	siemens_coefficient = 2.0
+
 /obj/item/clothing/head/bearpelt
 	name = "bear pelt hat"
 	desc = "Fuzzy."

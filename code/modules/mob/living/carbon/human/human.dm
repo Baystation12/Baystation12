@@ -911,6 +911,7 @@
 	return
 
 /mob/living/carbon/human/proc/vomit(hairball=0)
+	if(stat==2)return
 	if(!lastpuke)
 		lastpuke = 1
 		src << "<spawn class='warning'>You feel nauseous..."

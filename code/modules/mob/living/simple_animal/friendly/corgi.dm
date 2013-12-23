@@ -149,7 +149,8 @@
 						/obj/item/weapon/bedsheet,
 						/obj/item/clothing/head/helmet/space/santahat,
 						/obj/item/clothing/head/collectable/paper,
-						/obj/item/clothing/head/soft
+						/obj/item/clothing/head/soft,
+						/obj/item/clothing/head/hardhat/reindeer
 					)
 
 					if( ! ( item_to_add.type in allowed_types ) )
@@ -246,13 +247,19 @@
 			emote_hear = list("howls","groans")
 			desc = "Spooky!"
 		if(/obj/item/clothing/head/helmet/space/santahat)
-			name = "Rudolph the Red-Nosed Corgi"
-			emote_hear = list("barks christmas songs", "yaps")
-			desc = "He has a very shiny nose."
+			name = "Santa's Corgi Helper"
+			emote_hear = list("barks christmas songs", "yaps merrily")
+			emote_see = list("looks for presents", "checks his list")
+			desc = "He's very fond of milk and cookies."
 			SetLuminosity(6)
 		if(/obj/item/clothing/head/soft)
 			name = "Corgi Tech [real_name]"
 			desc = "The reason your yellow gloves have chew-marks."
+		if(/obj/item/clothing/head/hardhat/reindeer)
+			name = "[real_name] the red-nosed Corgi"
+			emote_hear = list("lights the way", "illuminates", "yaps")
+			desc = "He has a very shiny nose."
+			SetLuminosity(1)
 
 
 //IAN! SQUEEEEEEEEE~
@@ -497,5 +504,6 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
+	respawnable_list += src
 	del src
 	return

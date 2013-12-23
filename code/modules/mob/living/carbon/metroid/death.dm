@@ -5,7 +5,7 @@
 
 	if(!gibbed)
 		if(istype(src, /mob/living/carbon/slime/adult))
-			ghostize()
+//			ghostize()
 			var/mob/living/carbon/slime/M1 = new primarytype(loc)
 			M1.rabid = 1
 			var/mob/living/carbon/slime/M2 = new primarytype(loc)

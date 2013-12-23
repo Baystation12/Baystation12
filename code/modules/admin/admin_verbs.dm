@@ -120,7 +120,9 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/toggle_random_events,
 	/client/proc/check_customitem_activity,
-	/client/proc/delbook
+	/client/proc/delbook,
+	/client/proc/toggle_antagHUD_use,
+	/client/proc/toggle_antagHUD_restrictions
 	)
 var/list/admin_verbs_debug = list(
 	/client/proc/cmd_admin_list_open_jobs,

@@ -2,6 +2,7 @@
 	var/product_name = "generic"
 	var/product_path = null
 	var/amount = 0
+	var/max_amount = 0
 	var/price = 0
 	var/display_color = "blue"
 
@@ -52,7 +53,7 @@
 	var/const/WIRE_SHOOTINV = 4
 	var/datum/wires/vending/wires = null
 	var/scan_id = 1
-
+	var/obj/item/weapon/vending_refill/refill_canister = null    //The type of refill canisters used by this machine.
 
 
 /obj/machinery/vending/New()
@@ -118,6 +119,7 @@
 		R.product_name = temp.name
 		R.product_path = typepath
 		R.amount = amount
+		R.max_amount = amount
 		R.price = price
 		R.display_color = pick("red","blue","green")
 
@@ -129,6 +131,36 @@
 			product_records += R
 //		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
 	return
+
+/obj/machinery/vending/proc/refill_inventory(obj/item/weapon/vending_refill/refill, datum/data/vending_product/machine, mob/user)
+	var/total = 0
+
+	var/to_restock = 0
+	for(var/datum/data/vending_product/machine_content in machine)
+		to_restock += machine_content.max_amount - machine_content.amount
+
+	if(to_restock <= refill.charges)
+		for(var/datum/data/vending_product/machine_content in machine)
+			if(machine_content.amount != machine_content.max_amount)
+				usr << "<span class='notice'>[machine_content.max_amount - machine_content.amount] of [machine_content.product_name]</span>"
+				machine_content.amount = machine_content.max_amount
+		refill.charges -= to_restock
+		total = to_restock
+	else
+		var/tmp_charges = refill.charges
+		for(var/datum/data/vending_product/machine_content in machine)
+			var/restock = Ceiling(((machine_content.max_amount - machine_content.amount)/to_restock)*tmp_charges)
+			if(restock > refill.charges)
+				restock = refill.charges
+			machine_content.amount += restock
+			refill.charges -= restock
+			total += restock
+			if(restock)
+				usr << "<span class='notice'>[restock] of [machine_content.product_name]</span>"
+			if(refill.charges == 0) //due to rounding, we ran out of refill charges, exit.
+				break
+	return total
+
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/card/emag))
@@ -163,9 +195,23 @@
 	else if(istype(W, /obj/item/weapon/card) && currently_vending)
 		var/obj/item/weapon/card/I = W
 		scan_card(I)
-
-
-
+	else if(istype(W, refill_canister) && refill_canister != null)
+		if(stat & (BROKEN|NOPOWER))
+			user << "<span class='notice'>It does nothing.</span>"
+		else if(panel_open)
+			//if the panel is open we attempt to refill the machine
+			var/obj/item/weapon/vending_refill/canister = W
+			if(canister.charges == 0)
+				user << "<span class='notice'>This [canister.name] is empty!</span>"
+			else
+				var/transfered = refill_inventory(canister,product_records,user)
+				if(transfered)
+					user << "<span class='notice'>You loaded [transfered] items in \the [name].</span>"
+				else
+					user << "<span class='notice'>The [name] is fully stocked.</span>"
+			return;
+		else
+			user << "<span class='notice'>You should probably unscrew the service panel first.</span>"
 	else
 		..()
 
@@ -542,7 +588,7 @@
 	vend_delay = 15
 	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"
 	product_ads = "Drink up!;Booze is good for you!;Alcohol is humanity's best friend.;Quite delighted to serve you!;Care for a nice, cold beer?;Nothing cures you like booze!;Have a sip!;Have a drink!;Have a beer!;Beer is good for you!;Only the finest alcohol!;Best quality booze since 2053!;Award-winning wine!;Maximum alcohol!;Man loves beer.;A toast for progress!"
-
+	refill_canister = /obj/item/weapon/vending_refill/boozeomat
 /obj/machinery/vending/assist
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
 						/obj/item/weapon/wirecutters = 1, /obj/item/weapon/cartridge/signal = 4)
@@ -559,7 +605,7 @@
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,/obj/item/weapon/reagent_containers/food/drinks/tea = 25,/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25, /obj/item/weapon/reagent_containers/food/drinks/tea = 25, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
-
+	refill_canister = /obj/item/weapon/vending_refill/coffee
 
 
 
@@ -576,7 +622,7 @@
 	prices = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 20,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 30,/obj/item/weapon/reagent_containers/food/snacks/chips =25,
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 30,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 20,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 30,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 25)
-
+	refill_canister = /obj/item/weapon/vending_refill/snack
 /obj/machinery/vending/chinese
 	name = "Mr. Chang"
 	desc = "A self-serving chinese food machine, for all your chinese food needs."
@@ -600,7 +646,7 @@
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola = 20,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_mountain_wind = 20,
 					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/dr_gibb = 20,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/starkist = 20,
 					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_up = 20)
-
+	refill_canister = /obj/item/weapon/vending_refill/cola
 //This one's from bay12
 /obj/machinery/vending/cart
 	name = "PTech"
@@ -620,11 +666,11 @@
 	product_ads = "Probably not bad for you!;Don't believe the scientists!;It's good for you!;Don't quit, buy more!;Smoke!;Nicotine heaven.;Best cigarettes since 2150.;Award-winning cigs."
 	vend_delay = 34
 	icon_state = "cigs"
-	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 4)
+	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 4,/obj/item/weapon/rollingpaperpack = 5)
 	contraband = list(/obj/item/weapon/lighter/zippo = 4)
 	premium = list(/obj/item/clothing/mask/cigarette/cigar/havana = 2)
-	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 60,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 60)
-
+	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 60,/obj/item/weapon/storage/box/matches = 10,/obj/item/weapon/lighter/random = 60, /obj/item/weapon/rollingpaperpack = 20)
+	refill_canister = /obj/item/weapon/vending_refill/cigarette
 
 /obj/machinery/vending/medical
 	name = "NanoMed Plus"
@@ -706,7 +752,9 @@
 					/obj/item/seeds/sunflowerseed = 3,/obj/item/seeds/tomatoseed = 3,/obj/item/seeds/towermycelium = 3,/obj/item/seeds/wheatseed = 3,/obj/item/seeds/appleseed = 3,
 					/obj/item/seeds/poppyseed = 3,/obj/item/seeds/ambrosiavulgarisseed = 3,/obj/item/seeds/whitebeetseed = 3,/obj/item/seeds/watermelonseed = 3,/obj/item/seeds/limeseed = 3,
 					/obj/item/seeds/lemonseed = 3,/obj/item/seeds/orangeseed = 3,/obj/item/seeds/grassseed = 3,/obj/item/seeds/cocoapodseed = 3,
-					/obj/item/seeds/cabbageseed = 3,/obj/item/seeds/grapeseed = 3,/obj/item/seeds/pumpkinseed = 3,/obj/item/seeds/cherryseed = 3,/obj/item/seeds/plastiseed = 3,/obj/item/seeds/riceseed = 3)
+					/obj/item/seeds/cabbageseed = 3,/obj/item/seeds/grapeseed = 3,/obj/item/seeds/pumpkinseed = 3,/obj/item/seeds/cherryseed = 3,/obj/item/seeds/plastiseed = 3,/obj/item/seeds/riceseed = 3,
+					/obj/item/seeds/coffee_arabica_seed = 3, /obj/item/seeds/tobacco_seed = 3,/obj/item/seeds/tea_aspera_seed = 3)
+
 	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,/obj/item/seeds/nettleseed = 2,
 						/obj/item/seeds/plumpmycelium = 2,/obj/item/seeds/reishimycelium = 2)
 	premium = list(/obj/item/weapon/reagent_containers/spray/waterflower = 1)
@@ -731,7 +779,7 @@
 	product_slogans = "Dress for success!;Suited and booted!;It's show time!;Why leave style up to fate? Use AutoDrobe!"
 	vend_delay = 15
 	vend_reply = "Thank you for using AutoDrobe!"
-	products = list(/obj/item/clothing/suit/chickensuit = 1,/obj/item/clothing/head/chicken = 1,/obj/item/clothing/under/gladiator = 1,
+	products = list(/obj/item/clothing/suit/chickensuit = 1,/obj/item/clothing/head/chicken = 1, /obj/item/clothing/head/corgi = 1, /obj/item/clothing/suit/corgisuit = 1, /obj/item/clothing/under/gladiator = 1,
 					/obj/item/clothing/head/helmet/gladiator = 1,/obj/item/clothing/under/gimmick/rank/captain/suit = 1,/obj/item/clothing/head/flatcap = 1,
 					/obj/item/clothing/glasses/gglasses = 1,/obj/item/clothing/shoes/jackboots = 1,
 					/obj/item/clothing/under/schoolgirl = 1,/obj/item/clothing/head/kitty = 1,/obj/item/clothing/under/blackskirt = 1,/obj/item/clothing/head/beret = 1,
@@ -747,15 +795,15 @@
 					/obj/item/clothing/suit/wizrobe/fake = 1,/obj/item/clothing/head/wizard/fake = 1,/obj/item/weapon/staff = 3,/obj/item/clothing/mask/gas/sexyclown = 1,
 					/obj/item/clothing/under/sexyclown = 1,/obj/item/clothing/mask/gas/sexymime = 1,/obj/item/clothing/under/sexymime = 1,/obj/item/clothing/suit/apron/overalls = 1,
 					/obj/item/clothing/head/rabbitears =1) //Pretty much everything that had a chance to spawn.
-	contraband = list(/obj/item/clothing/suit/cardborg = 1,/obj/item/clothing/head/cardborg = 1,/obj/item/clothing/suit/judgerobe = 1,/obj/item/clothing/head/powdered_wig = 1)
+	contraband = list(/obj/item/clothing/suit/cardborg = 1,/obj/item/clothing/head/cardborg = 1,/obj/item/clothing/suit/judgerobe = 1,/obj/item/clothing/head/powdered_wig = 1,/obj/item/weapon/gun/magic/wand = 1)
 	premium = list(/obj/item/clothing/suit/hgpirate = 1, /obj/item/clothing/head/hgpiratecap = 1, /obj/item/clothing/head/helmet/roman = 1, /obj/item/clothing/head/helmet/roman/legionaire = 1, /obj/item/clothing/under/roman = 1, /obj/item/clothing/shoes/roman = 1, /obj/item/weapon/shield/riot/roman = 1)
-
+	refill_canister = /obj/item/weapon/vending_refill/autodrobe
 /obj/machinery/vending/dinnerware
 	name = "Dinnerware"
 	desc = "A kitchen and restaurant equipment vendor"
 	product_ads = "Mm, food stuffs!;Food and food accessories.;Get your plates!;You like forks?;I like forks.;Woo, utensils.;You don't really need these..."
 	icon_state = "dinnerware"
-	products = list(/obj/item/weapon/tray = 8,/obj/item/weapon/kitchen/utensil/fork = 6,/obj/item/weapon/kitchenknife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2)
+	products = list(/obj/item/weapon/tray = 8,/obj/item/weapon/kitchen/utensil/fork = 6,/obj/item/weapon/kitchenknife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2,/obj/item/weapon/reagent_containers/food/condiment/pack/ketchup = 5,/obj/item/weapon/reagent_containers/food/condiment/pack/hotsauce = 5)
 	contraband = list(/obj/item/weapon/kitchen/utensil/spoon = 2,/obj/item/weapon/kitchen/utensil/knife = 2,/obj/item/weapon/kitchen/rollingpin = 2, /obj/item/weapon/butch = 2)
 
 /obj/machinery/vending/sovietsoda
@@ -820,7 +868,7 @@
 /obj/machinery/vending/eva
 	name = "Hardsuit Kits"
 	desc = "Conversion kits for your alien hardsuit needs."
-	products = list(/obj/item/weapon/modkit/tajaran = 6)
+	products = list(/obj/item/weapon/modkit/tajaran = 6, /obj/item/weapon/modkit/unathi = 6)
 
 
 /obj/machinery/vending/sustenance

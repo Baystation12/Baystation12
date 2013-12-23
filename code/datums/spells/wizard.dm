@@ -8,6 +8,7 @@
 	invocation = "FORTI GY AMA"
 	invocation_type = "shout"
 	range = 7
+	cooldown_min = 90 //15 deciseconds reduction per rank
 
 	max_targets = 0
 
@@ -42,6 +43,7 @@
 
 	mutations = list(LASER, HULK)
 	duration = 300
+	cooldown_min = 300 //25 deciseconds reduction per rank
 
 /obj/effect/proc_holder/spell/targeted/inflict_handler/disintegrate
 	name = "Disintegrate"
@@ -53,6 +55,7 @@
 	invocation = "EI NATH"
 	invocation_type = "shout"
 	range = 1
+	cooldown_min = 200 //100 deciseconds reduction per rank
 
 	destroys = "gib_brain"
 
@@ -70,6 +73,7 @@
 	invocation_type = "none"
 	range = -1
 	include_user = 1
+	cooldown_min = 20 //25 deciseconds reduction per rank
 
 	smoke_spread = 2
 	smoke_amt = 10
@@ -83,6 +87,7 @@
 	invocation_type = "shout"
 	range = -1
 	include_user = 1
+	cooldown_min = 200 //50 deciseconds reduction per rank
 
 	emp_heavy = 6
 	emp_light = 10
@@ -98,6 +103,8 @@
 	invocation_type = "none"
 	range = -1
 	include_user = 1
+	cooldown_min = 5 //4 deciseconds reduction per rank
+
 
 	smoke_spread = 1
 	smoke_amt = 10
@@ -105,7 +112,7 @@
 	inner_tele_radius = 0
 	outer_tele_radius = 6
 
-	centcomm_cancast = 0 //prevent people from getting to centcomm
+	centcom_cancast = 0 //prevent people from getting to centcom
 
 /obj/effect/proc_holder/spell/targeted/area_teleport/teleport
 	name = "Teleport"
@@ -118,6 +125,7 @@
 	invocation_type = "shout"
 	range = -1
 	include_user = 1
+	cooldown_min = 200 //100 deciseconds reduction per rank
 
 	smoke_spread = 1
 	smoke_amt = 5
@@ -132,6 +140,7 @@
 	invocation = "TARCOL MINTI ZHERI"
 	invocation_type = "whisper"
 	range = 0
+	cooldown_min = 50 //12 deciseconds reduction per rank
 
 	summon_type = list("/obj/effect/forcefield")
 	summon_lifespan = 300
@@ -189,6 +198,7 @@
 	invocation = "STI KALY"
 	invocation_type = "whisper"
 	message = "\blue Your eyes cry out in pain!"
+	cooldown_min = 50 //12 deciseconds reduction per rank
 
 	starting_spells = list("/obj/effect/proc_holder/spell/targeted/inflict_handler/blind","/obj/effect/proc_holder/spell/targeted/genetic/blind")
 
@@ -200,16 +210,32 @@
 	disabilities = 1
 	duration = 300
 
+/obj/effect/proc_holder/spell/targeted/inflict_handler/flesh_to_stone
+	name = "Flesh to Stone"
+	desc = "This spell turns a single person into an inert statue for a long period of time."
+
+	school = "transmutation"
+	charge_max = 600
+	clothes_req = 1
+	range = 2
+	invocation = "STAUN EI"
+	invocation_type = "shout"
+	amt_stunned = 2//just exists to make sure the statue "catches" them
+	cooldown_min = 200 //100 deciseconds reduction per rank
+
+	summon_type = "/obj/structure/closet/statue"
+
 /obj/effect/proc_holder/spell/dumbfire/fireball
 	name = "Fireball"
 	desc = "This spell fires a fireball at a target and does not require wizard garb."
 
 	school = "evocation"
-	charge_max = 100
+	charge_max = 60
 	clothes_req = 0
 	invocation = "ONI SOMA"
 	invocation_type = "shout"
 	range = 20
+	cooldown_min = 20 //10 deciseconds reduction per rank
 
 	proj_icon_state = "fireball"
 	proj_name = "a fireball"
@@ -219,7 +245,7 @@
 	proj_step_delay = 1
 
 /obj/effect/proc_holder/spell/turf/fireball/cast(var/turf/T)
-	explosion(T, -1, 1, 2, 3)
+	explosion(T, -1, 0, 2, 3, 0, flame_range = 2)
 
 
 /obj/effect/proc_holder/spell/targeted/inflict_handler/fireball
@@ -231,97 +257,3 @@
 	ex_heavy = -1
 	ex_light = 2
 	ex_flash = 5
-
-
-
-
-
-
-//////////////////////////////Construct Spells/////////////////////////
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/construct/lesser
-	charge_max = 1800
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/floor
-	name = "Floor Construction"
-	desc = "This spell constructs a cult floor"
-
-	school = "conjuration"
-	charge_max = 20
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = 0
-	summon_type = list(/turf/simulated/floor/engine/cult)
-	centcomm_cancast = 0 //Stop crashing the server by spawning turfs on transit tiles
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/wall
-	name = "Leser Construction"
-	desc = "This spell constructs a cult wall"
-
-	school = "conjuration"
-	charge_max = 100
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = 0
-	summon_type = list(/turf/simulated/wall/cult)
-	centcomm_cancast = 0 //Stop crashing the server by spawning turfs on transit tiles
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/wall/reinforced
-	name = "Greater Construction"
-	desc = "This spell constructs a reinforced metal wall"
-
-	school = "conjuration"
-	charge_max = 300
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = 0
-	centcomm_cancast = 0 //Stop crashing the server by spawning turfs on transit tiles
-	delay = 50
-
-	summon_type = list(/turf/simulated/wall/r_wall)
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone
-	name = "Summon Soulstone"
-	desc = "This spell reaches into Nar-Sie's realm, summoning one of the legendary fragments across time and space"
-
-	school = "conjuration"
-	charge_max = 3000
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = 0
-
-	summon_type = list(/obj/item/device/soulstone)
-
-
-/obj/effect/proc_holder/spell/aoe_turf/conjure/lesserforcewall
-	name = "Shield"
-	desc = "This spell creates a temporary forcefield to shield yourself and allies from incoming fire"
-
-	school = "transmutation"
-	charge_max = 300
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = 0
-	summon_type = list(/obj/effect/forcefield)
-	summon_lifespan = 50
-
-
-/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift
-	name = "Phase Shift"
-	desc = "This spell allows you to pass through walls"
-
-	school = "transmutation"
-	charge_max = 200
-	clothes_req = 0
-	invocation = "none"
-	invocation_type = "none"
-	range = -1
-	include_user = 1
-	phaseshift = 1
-	jaunt_duration = 50 //in deciseconds
-	centcomm_cancast = 0 //Stop people from getting to centcomm

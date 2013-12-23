@@ -745,3 +745,15 @@ datum/objective/absorb
 /*-------ENDOF CULTIST------*/
 */
 
+datum/objective/blood
+	proc/gen_amount_goal(low = 150, high = 400)
+		target_amount = rand(low,high)
+		target_amount = round(round(target_amount/5)*5)
+		explanation_text = "Accumulate atleast [target_amount] units of blood in total."
+		return target_amount
+
+	check_completion()
+		if(owner && owner.vampire && owner.vampire.bloodtotal && owner.vampire.bloodtotal >= target_amount)
+			return 1
+		else
+			return 0

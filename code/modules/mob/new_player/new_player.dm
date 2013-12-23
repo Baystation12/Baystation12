@@ -125,7 +125,7 @@
 				src << "\blue Now teleporting."
 				observer.loc = O.loc
 				observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
-				client.prefs.update_preview_icon()
+				client.prefs.update_preview_icon(1)
 				observer.icon = client.prefs.preview_icon
 				observer.alpha = 127
 
@@ -133,8 +133,10 @@
 					client.prefs.real_name = random_name(client.prefs.gender)
 				observer.real_name = client.prefs.real_name
 				observer.name = observer.real_name
+				if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
+					observer.verbs -= /mob/dead/observer/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
 				observer.key = key
-
+				respawnable_list += observer
 				del(src)
 				return 1
 

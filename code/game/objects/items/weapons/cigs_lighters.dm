@@ -160,14 +160,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		M.IgniteMob()
 	smoketime--
 	if(smoketime < 1)
-		new type_butt(location)
-		processing_objects.Remove(src)
-		if(ismob(loc))
-//			var/mob/living/M = loc
-			M << "<span class='notice'>Your [name] goes out.</span>"
-			M.u_equip(src)	//un-equip it so the overlays can update
-			M.update_inv_wear_mask(0)
-		del(src)
+		die()
 		return
 	if(location)
 		location.hotspot_expose(700, 5)
@@ -185,13 +178,53 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette/attack_self(mob/user as mob)
 	if(lit == 1)
 		user.visible_message("<span class='notice'>[user] calmly drops and treads on the lit [src], putting it out instantly.</span>")
-		var/turf/T = get_turf(src)
-		new type_butt(T)
-		processing_objects.Remove(src)
-		del(src)
+		die()
 	return ..()
 
+/obj/item/clothing/mask/cigarette/proc/die()
+	var/turf/T = get_turf(src)
+	var/obj/item/butt = new type_butt(T)
+	transfer_fingerprints_to(butt)
+	if(ismob(loc))
+		var/mob/living/M = loc
+		M << "<span class='notice'>Your [name] goes out.</span>"
+		M.u_equip(src)  //un-equip it so the overlays can update
+		M.update_inv_wear_mask(0)
+	processing_objects.Remove(src)
+	del(src)
 
+
+/obj/item/clothing/mask/cigarette/joint
+	name = "joint"
+	desc = "A roll of ambrosium vulgaris wrapped in a thin paper. Dude."
+	icon_state = "spliffoff"
+	icon_on = "spliffon"
+	icon_off = "spliffoff"
+	type_butt = /obj/item/weapon/cigbutt/roach
+	throw_speed = 0.5
+	item_state = "spliffoff"
+	smoketime = 180
+	chem_volume = 50
+
+/obj/item/clothing/mask/cigarette/joint/New()
+	..()
+	var/list/jointnames = list("joint","doobie","spliff","blunt")
+	name = pick(jointnames)
+	src.pixel_x = rand(-5.0, 5)
+	src.pixel_y = rand(-5.0, 5)
+
+/obj/item/clothing/mask/cigarette/joint/deus
+	desc = "A roll of ambrosium deus wrapped in a thin paper. Dude."
+
+/obj/item/weapon/cigbutt/roach
+	name = "roach"
+	desc = "A manky old roach."
+	icon_state = "roach"
+
+/obj/item/weapon/cigbutt/roach/New()
+	..()
+	src.pixel_x = rand(-5.0, 5)
+	src.pixel_y = rand(-5.0, 5)
 
 ////////////
 // CIGARS //
@@ -231,6 +264,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = "cigbutt"
 	w_class = 1
 	throwforce = 1
+
+/obj/item/weapon/cigbutt/New()
+	..()
+	pixel_x = rand(-10,10)
+	pixel_y = rand(-10,10)
+	transform = turn(transform,rand(0,360))
 
 /obj/item/weapon/cigbutt/cigarbutt
 	name = "cigar butt"
@@ -419,3 +458,55 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		user.SetLuminosity(user.luminosity-2)
 		SetLuminosity(2)
 	return
+
+///////////
+//ROLLING//
+///////////
+obj/item/weapon/rollingpaper
+	name = "rolling paper"
+	desc = "A thin piece of paper used to make fine smokeables."
+	icon = 'icons/obj/cigarettes.dmi'
+	icon_state = "cig_paper"
+	w_class = 1
+
+
+obj/item/weapon/rollingpaperpack
+	name = "rolling paper pack"
+	desc = "A pack of NanoTrasen brand rolling papers."
+	icon = 'icons/obj/cigarettes.dmi'
+	icon_state = "cig_paper_pack"
+	w_class = 1
+	var/papers = 25
+
+obj/item/weapon/rollingpaperpack/attack_self(mob/user)
+	if(papers > 1)
+		var/obj/item/weapon/rollingpaper/P = new /obj/item/weapon/rollingpaper()
+		user.put_in_inactive_hand(P)
+		user << "You take a paper out of the pack."
+		papers --
+	else
+		var/obj/item/weapon/rollingpaper/P = new /obj/item/weapon/rollingpaper()
+		user.put_in_inactive_hand(P)
+		user << "You take the last paper out of the pack, and throw the pack away."
+		del(src)
+
+/obj/item/weapon/rollingpaperpack/MouseDrop(atom/over_object)
+	var/mob/M = usr
+	if(M.restrained() || M.stat)
+		return
+
+	if(over_object == M)
+		M.put_in_hands(src)
+
+	else if(istype(over_object, /obj/screen))
+		switch(over_object.name)
+			if("r_hand")
+				M.u_equip(src)
+				M.put_in_r_hand(src)
+			if("l_hand")
+				M.u_equip(src)
+				M.put_in_l_hand(src)
+
+/obj/item/weapon/rollingpaperpack/examine()
+	..()
+	usr << "There are [src.papers] left"

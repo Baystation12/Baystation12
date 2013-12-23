@@ -61,7 +61,7 @@
 	var/list/available_channels = list()
 
 	//Headset for Poly to yell at engineers :)
-	var/obj/item/device/radio/headset/ears = null
+	var/obj/item/device/radio/headset/l_ear = null
 
 	//The thing the parrot is currently interested in. This gets used for items the parrot wants to pick up, mobs it wants to steal from,
 	//mobs it wants to attack or mobs that have attacked it
@@ -84,13 +84,13 @@
 
 /mob/living/simple_animal/parrot/New()
 	..()
-	if(!ears)
+	if(!l_ear)
 		var/headset = pick(/obj/item/device/radio/headset/headset_sec, \
 						/obj/item/device/radio/headset/headset_eng, \
 						/obj/item/device/radio/headset/headset_med, \
 						/obj/item/device/radio/headset/headset_sci, \
 						/obj/item/device/radio/headset/headset_cargo)
-		ears = new headset(src)
+		l_ear = new headset(src)
 
 	parrot_sleep_dur = parrot_sleep_max //In case someone decides to change the max without changing the duration var
 
@@ -119,10 +119,10 @@
 	if(user.stat) return
 
 	var/dat = 	"<div align='center'><b>Inventory of [name]</b></div><p>"
-	if(ears)
-		dat +=	"<br><b>Headset:</b> [ears] (<a href='?src=\ref[src];remove_inv=ears'>Remove</a>)"
+	if(l_ear)
+		dat +=	"<br><b>Headset:</b> [l_ear] (<a href='?src=\ref[src];remove_inv=l_ear'>Remove</a>)"
 	else
-		dat +=	"<br><b>Headset:</b> <a href='?src=\ref[src];add_inv=ears'>Nothing</a>"
+		dat +=	"<br><b>Headset:</b> <a href='?src=\ref[src];add_inv=l_ear'>Nothing</a>"
 
 	user << browse(dat, text("window=mob[];size=325x500", name))
 	onclose(user, "mob[real_name]")
@@ -141,14 +141,14 @@
 		if(href_list["remove_inv"])
 			var/remove_from = href_list["remove_inv"]
 			switch(remove_from)
-				if("ears")
-					if(ears)
+				if("l_ear")
+					if(l_ear)
 						if(available_channels.len)
 							src.say("[pick(available_channels)] BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
 						else
 							src.say("BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
-						ears.loc = src.loc
-						ears = null
+						l_ear.loc = src.loc
+						l_ear = null
 						for(var/possible_phrase in speak)
 							if(copytext(possible_phrase,1,3) in department_radio_keys)
 								possible_phrase = copytext(possible_phrase,3,length(possible_phrase))
@@ -163,8 +163,8 @@
 				usr << "\red You have nothing in your hand to put on its [add_to]."
 				return
 			switch(add_to)
-				if("ears")
-					if(ears)
+				if("l_ear")
+					if(l_ear)
 						usr << "\red It's already wearing something."
 						return
 					else
@@ -180,7 +180,7 @@
 
 						usr.drop_item()
 						headset_to_add.loc = src
-						src.ears = headset_to_add
+						src.l_ear = headset_to_add
 						usr << "You fit the headset onto [src]."
 
 						clearlist(available_channels)
@@ -335,7 +335,7 @@
 			if(speak.len)
 				var/list/newspeak = list()
 
-				if(available_channels.len && src.ears)
+				if(available_channels.len && src.l_ear)
 					for(var/possible_phrase in speak)
 
 						//50/50 chance to not use the radio at all
@@ -700,6 +700,6 @@
 	speak = list("Poly wanna cracker!", ":e Check the singlo, you chucklefucks!",":e Wire the solars, you lazy bums!",":e WHO TOOK THE DAMN HARDSUITS?",":e OH GOD ITS FREE CALL THE SHUTTLE")
 
 /mob/living/simple_animal/parrot/Poly/New()
-	ears = new /obj/item/device/radio/headset/headset_eng(src)
+	l_ear = new /obj/item/device/radio/headset/headset_eng(src)
 	available_channels = list(":e")
 	..()

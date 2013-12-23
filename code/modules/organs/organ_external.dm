@@ -45,6 +45,7 @@
 	// how often wounds should be updated, a higher number means less often
 	var/wound_update_accuracy = 1
 
+
 /datum/organ/external/New(var/datum/organ/external/P)
 	if(P)
 		parent = P
@@ -203,7 +204,7 @@ This function completely restores a damaged organ to perfect condition.
 			implants -= implanted_object
 
 	owner.updatehealth()
-
+	update_icon()
 
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
@@ -297,6 +298,11 @@ This function completely restores a damaged organ to perfect condition.
 #define GANGREN_LEVEL_TERMINAL	2500
 #define GERM_TRANSFER_AMOUNT	germ_level/500
 /datum/organ/external/proc/update_germs()
+
+	if(status & ORGAN_ROBOT|ORGAN_DESTROYED) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
+		germ_level = 0
+		return
+
 	if(germ_level > 0 && owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//Syncing germ levels with external wounds
 		for(var/datum/wound/W in wounds)
@@ -490,38 +496,58 @@ This function completely restores a damaged organ to perfect condition.
 			if(ARM_RIGHT)
 				if(status & ORGAN_ROBOT)
 					organ = new /obj/item/robot_parts/r_arm(owner.loc)
+				else if(owner.mutations & SKELETON)
+					organ = new /obj/item/weapon/skeleton/r_arm(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/r_arm(owner.loc, owner)
 			if(ARM_LEFT)
 				if(status & ORGAN_ROBOT)
 					organ= new /obj/item/robot_parts/l_arm(owner.loc)
+				else if(owner.mutations & SKELETON)
+					organ = new /obj/item/weapon/skeleton/l_arm(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/l_arm(owner.loc, owner)
 			if(LEG_RIGHT)
 				if(status & ORGAN_ROBOT)
 					organ = new /obj/item/robot_parts/r_leg(owner.loc)
+				else if(owner.mutations & SKELETON)
+					organ = new /obj/item/weapon/skeleton/r_leg(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/r_leg(owner.loc, owner)
 			if(LEG_LEFT)
 				if(status & ORGAN_ROBOT)
 					organ = new /obj/item/robot_parts/l_leg(owner.loc)
+				else if(owner.mutations & SKELETON)
+					organ = new /obj/item/weapon/skeleton/l_leg(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/l_leg(owner.loc, owner)
 			if(HAND_RIGHT)
 				if(!(status & ORGAN_ROBOT))
-					organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
+					if(owner.mutations & SKELETON)
+						organ = new /obj/item/weapon/skeleton/r_hand(owner.loc)
+					else
+						organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(HAND_LEFT)
 				if(!(status & ORGAN_ROBOT))
-					organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
+					if(owner.mutations & SKELETON)
+						organ = new /obj/item/weapon/skeleton/l_hand(owner.loc)
+					else
+						organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(FOOT_RIGHT)
 				if(!(status & ORGAN_ROBOT))
-					organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
+					if(owner.mutations & SKELETON)
+						organ = new /obj/item/weapon/skeleton/r_foot(owner.loc)
+					else
+						organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 			if(FOOT_LEFT)
 				if(!(status & ORGAN_ROBOT))
-					organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
+					if(owner.mutations & SKELETON)
+						organ = new /obj/item/weapon/skeleton/l_foot(owner.loc)
+					else
+						organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 		if(organ)
 			destspawn = 1
@@ -618,6 +644,8 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/get_icon(gender="")
 	if (status & ORGAN_MUTATED)
 		return new /icon(owner.deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
+	else if (status & ORGAN_ROBOT)
+		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 	else
 		return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
 
@@ -781,7 +809,6 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 		base = icon('icons/mob/human_races/r_human.dmi')
 
 	if(base)
-		base = base.MakeLying()
 
 		//Changing limb's skin tone to match owner
 		if(!H.species || H.species.flags & HAS_SKIN_TONE)
@@ -790,29 +817,9 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 			else
 				base.Blend(rgb(-H.s_tone,  -H.s_tone,  -H.s_tone), ICON_SUBTRACT)
 
-		//this is put here since I can't easially edit the same icon from head's constructor
-		if(istype(src, /obj/item/weapon/organ/head))
-			//Add (facial) hair.
-			if(H.f_style)
-				var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[H.f_style]
-				if(facial_hair_style)
-					var/icon/facial = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_l")
-					if(facial_hair_style.do_colouration)
-						facial.Blend(rgb(H.r_facial, H.g_facial, H.b_facial), ICON_ADD)
-
-					base.Blend(facial, ICON_OVERLAY)
-
-			if(H.h_style && !(H.head && (H.head.flags & BLOCKHEADHAIR)))
-				var/datum/sprite_accessory/hair_style = hair_styles_list[H.h_style]
-				if(hair_style)
-					var/icon/hair = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_l")
-					if(hair_style.do_colouration)
-						hair.Blend(rgb(H.r_hair, H.g_hair, H.b_hair), ICON_ADD)
-
-					base.Blend(hair, ICON_OVERLAY)
-
 	icon = base
-
+	dir = SOUTH
+	src.transform = turn(src.transform, rand(70,130))
 
 /****************************************************
 			   EXTERNAL ORGAN ITEMS DEFINES
@@ -852,6 +859,24 @@ obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 	if(istype(H))
 		src.icon_state = H.gender == MALE? "head_m" : "head_f"
 	..()
+	//Add (facial) hair.
+	if(H.f_style)
+		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[H.f_style]
+		if(facial_hair_style)
+			var/icon/facial = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
+			if(facial_hair_style.do_colouration)
+				facial.Blend(rgb(H.r_facial, H.g_facial, H.b_facial), ICON_ADD)
+
+			overlays.Add(facial) // icon.Blend(facial, ICON_OVERLAY)
+
+	if(H.h_style && !(H.head && (H.head.flags & BLOCKHEADHAIR)))
+		var/datum/sprite_accessory/hair_style = hair_styles_list[H.h_style]
+		if(hair_style)
+			var/icon/hair = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s")
+			if(hair_style.do_colouration)
+				hair.Blend(rgb(H.r_hair, H.g_hair, H.b_hair), ICON_ADD)
+
+			overlays.Add(hair) //icon.Blend(hair, ICON_OVERLAY)
 	spawn(5)
 	if(brainmob && brainmob.client)
 		brainmob.client.screen.len = null //clear the hud
@@ -866,8 +891,8 @@ obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 
 	H.regenerate_icons()
 
-	H.stat = 2
-	H.death()
+	brainmob.stat = 2
+	brainmob.death()
 
 obj/item/weapon/organ/head/proc/transfer_identity(var/mob/living/carbon/human/H)//Same deal as the regular brain proc. Used for human-->head
 	brainmob = new(src)
@@ -876,6 +901,7 @@ obj/item/weapon/organ/head/proc/transfer_identity(var/mob/living/carbon/human/H)
 	brainmob.dna = H.dna
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
+	respawnable_list += brainmob
 	brainmob.container = src
 
 obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -883,17 +909,17 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		switch(brain_op_stage)
 			if(0)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] is beginning to have \his head cut open with [src] by [user].", 1)
-				brainmob << "\red [user] begins to cut open your head with [src]!"
-				user << "\red You cut [brainmob]'s head open with [src]!"
+					O.show_message("\red [brainmob] is beginning to have \his head cut open with [W] by [user].", 1)
+				brainmob << "\red [user] begins to cut open your head with [W]!"
+				user << "\red You cut [brainmob]'s head open with [W]!"
 
 				brain_op_stage = 1
 
 			if(2)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] is having \his connections to the brain delicately severed with [src] by [user].", 1)
-				brainmob << "\red [user] begins to cut open your head with [src]!"
-				user << "\red You cut [brainmob]'s head open with [src]!"
+					O.show_message("\red [brainmob] is having \his connections to the brain delicately severed with [W] by [user].", 1)
+				brainmob << "\red [user] begins to cut open your head with [W]!"
+				user << "\red You cut [brainmob]'s head open with [W]!"
 
 				brain_op_stage = 3.0
 			else
@@ -902,20 +928,20 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		switch(brain_op_stage)
 			if(1)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] has \his skull sawed open with [src] by [user].", 1)
-				brainmob << "\red [user] begins to saw open your head with [src]!"
-				user << "\red You saw [brainmob]'s head open with [src]!"
+					O.show_message("\red [brainmob] has \his skull sawed open with [W] by [user].", 1)
+				brainmob << "\red [user] begins to saw open your head with [W]!"
+				user << "\red You saw [brainmob]'s head open with [W]!"
 
 				brain_op_stage = 2
 			if(3)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] has \his spine's connection to the brain severed with [src] by [user].", 1)
-				brainmob << "\red [user] severs your brain's connection to the spine with [src]!"
-				user << "\red You sever [brainmob]'s brain's connection to the spine with [src]!"
+					O.show_message("\red [brainmob] has \his spine's connection to the brain severed with [W] by [user].", 1)
+				brainmob << "\red [user] severs your brain's connection to the spine with [W]!"
+				user << "\red You sever [brainmob]'s brain's connection to the spine with [W]!"
 
-				user.attack_log += "\[[time_stamp()]\]<font color='red'> Debrained [brainmob.name] ([brainmob.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-				brainmob.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
-				msg_admin_attack("[brainmob] ([brainmob.ckey]) debrained [user] ([user.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+				user.attack_log += "\[[time_stamp()]\]<font color='red'> Debrained [brainmob.name] ([brainmob.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)])</font>"
+				brainmob.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)])</font>"
+				msg_admin_attack("[user] ([user.ckey]) debrained [brainmob] ([brainmob.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 				var/obj/item/brain/B = new(loc)
 				B.transfer_identity(brainmob)

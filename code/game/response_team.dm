@@ -113,6 +113,10 @@ proc/increment_ert_chance()
 			ert_base_chance += 2
 		if(get_security_level() == "red")
 			ert_base_chance += 3
+		if(get_security_level() == "gamma")
+			ert_base_chance += 7
+		if(get_security_level() == "epsilon")
+			ert_base_chance += 9
 		if(get_security_level() == "delta")
 			ert_base_chance += 10           // Need those big guns
 		sleep(600 * 3) // Minute * Number of Minutes
