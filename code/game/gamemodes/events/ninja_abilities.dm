@@ -201,7 +201,11 @@ Must right click on a mob to activate.*/
 			spawn(0)
 				U.Beam(M,"n_beam",,15)
 			M.anchored = 1//Anchors them so they can't move.
-			M.SetWeakened(500)
+			var/obj/effect/stop/S
+			S = new /obj/effect/stop
+			S.victim = M
+			S.loc = M.loc
+
 			var/obj/effect/energy_net/E = new /obj/effect/energy_net(M.loc)
 			E.layer = M.layer+1//To have it appear one layer above the mob.
 			for(var/mob/O in viewers(U, 3))
