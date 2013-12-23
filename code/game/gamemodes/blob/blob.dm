@@ -147,8 +147,8 @@ var/list/blob_nodes = list()
 		stage(1)
 
 		// Stage 2
-		while(blobs.len < blobwincount/stage_2_threshold)
-			sleep(100)
+		while(blobs.len < blobwincount*stage_2_threshold)
+			sleep(10)
 		stage(2)
 
 	..()
