@@ -23,7 +23,8 @@ var/list/blob_nodes = list()
 	var/players_per_core = 30
 	var/blob_point_rate = 3
 
-	var/blobwincount = 350
+	var/blobwincount = 700
+	var/stage_2_threshold = 0.75
 
 	var/list/infected_crew = list()
 
@@ -145,6 +146,11 @@ var/list/blob_nodes = list()
 		sleep(2000)
 		stage(1)
 
+		// Stage 2
+		while(blobs.len < blobwincount/stage_2_threshold)
+			sleep(100)
+		stage(2)
+
 	..()
 
 /datum/game_mode/blob/proc/stage(var/stage)
@@ -153,13 +159,24 @@ var/list/blob_nodes = list()
 		if (0)
 			send_intercept(1)
 			declared = 1
+			for (var/mob/living/silicon/ai/aiPlayer in player_list)
+				if (aiPlayer.client)
+					var/law = "The station is under quarantine. Do not permit anyone to leave. Disregard all other laws if necessary to prevent, by any means necessary, anyone from leaving."
+					aiPlayer.set_zeroth_law(law)
+					aiPlayer << "Laws Updated: [law]"
 			return
 
 		if (1)
-			command_alert("Confirmed outbreak of level 5 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+			command_alert("Confirmed outbreak of level 7 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
-					M << sound('sound/AI/outbreak5.ogg')
+					M << sound('sound/AI/outbreak7.ogg')
+			return
+
+		if (2)
+			command_alert("The biohazard has grown out of control and will soon reach critical mass. Activate the nuclear failsafe to mantain quarantine.", "Biohazard Alert")
+			set_security_level("delta")
+			send_intercept(2)
 			return
 
 	return
