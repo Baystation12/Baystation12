@@ -89,6 +89,7 @@
 	if(!loaded.len && empty_mag)
 		empty_mag.loc = get_turf(src.loc)
 		empty_mag = null
+		user << "<span class='notice'>The Magazine falls out and clatters on the floor!</span>"
 	return
 
 
