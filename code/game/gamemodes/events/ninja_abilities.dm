@@ -191,30 +191,30 @@ Must right click on a mob to activate.*/
 	var/C = 500
 	if(!ninjacost(C,80)&&iscarbon(M)) // Nets now cost 8,000
 		var/mob/living/carbon/human/U = affecting
-		if(M.client)//Monkeys without a client can still step_to() and bypass the net. Also, netting inactive people is lame.
+		//if(M.client)//Monkeys without a client can still step_to() and bypass the net. Also, netting inactive people is lame.
 		//if(M)//DEBUG
-			if(!locate(/obj/effect/energy_net) in M.loc)//Check if they are already being affected by an energy net.
-				for(var/turf/T in getline(U.loc, M.loc))
-					if(T.density)//Don't want them shooting nets through walls. It's kind of cheesy.
-						U << "You may not use an energy net through solid obstacles!"
-						return
-				spawn(0)
-					U.Beam(M,"n_beam",,15)
-				M.anchored = 1//Anchors them so they can't move.
-				U.say("Get over here!")
-				var/obj/effect/energy_net/E = new /obj/effect/energy_net(M.loc)
-				E.layer = M.layer+1//To have it appear one layer above the mob.
-				for(var/mob/O in viewers(U, 3))
-					O.show_message(text("\red [] caught [] with an energy net!", U, M), 1)
-				E.affecting = M
-				E.master = U
-				spawn(0)//Parallel processing.
-					E.process(M)
-				cell.charge-=(C*100) // Nets now cost what should be most of a standard battery, since your taking someone out of the round
-			else
-				U << "They are already trapped inside an energy net."
+		if(!locate(/obj/effect/energy_net) in M.loc)//Check if they are already being affected by an energy net.
+			for(var/turf/T in getline(U.loc, M.loc))
+				if(T.density)//Don't want them shooting nets through walls. It's kind of cheesy.
+					U << "You may not use an energy net through solid obstacles!"
+					return
+			spawn(0)
+				U.Beam(M,"n_beam",,15)
+			M.anchored = 1//Anchors them so they can't move.
+			M.SetWeakened(500)
+			var/obj/effect/energy_net/E = new /obj/effect/energy_net(M.loc)
+			E.layer = M.layer+1//To have it appear one layer above the mob.
+			for(var/mob/O in viewers(U, 3))
+				O.show_message(text("\red [] caught [] with an energy net!", U, M), 1)
+			E.affecting = M
+			E.master = U
+			spawn(0)//Parallel processing.
+				E.process(M)
+			cell.charge-=(C*100) // Nets now cost what should be most of a standard battery, since your taking someone out of the round
 		else
-			U << "They will bring no honor to your Clan!"
+			U << "They are already trapped inside an energy net."
+		//else
+			//U << "They will bring no honor to your Clan!"
 	return
 
 //=======//ADRENALINE BOOST//=======//
