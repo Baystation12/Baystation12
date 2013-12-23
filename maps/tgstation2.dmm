@@ -907,7 +907,7 @@
 "arw" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/maintenance/fpmaint2)
 "arx" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "arrivals_outer"; locked = 1; name = "Engineering External Access"; req_access = null; req_access_txt = "10;13"},/turf/simulated/floor/plating,/area/maintenance/fpmaint2)
 "ary" = (/obj/structure/closet/emcloset,/turf/simulated/floor/plating,/area/maintenance/fpmaint)
-"arz" = (/obj/structure/closet/secure_closet/personal,/turf/simulated/floor/wood,/area/crew_quarters/sleep{name = "Security Wing Dormitories"})
+"arz" = (/obj/structure/closet/secure_closet/personal,/turf/simulated/floor/wood,/area/crew_quarters/sleep/sec)
 "arA" = (/obj/structure/stool/bed,/obj/item/weapon/bedsheet/red,/turf/simulated/floor/wood,/area/crew_quarters/sleep/sec)
 "arB" = (/obj/structure/closet/secure_closet/personal,/obj/machinery/atmospherics/unary/vent_scrubber{on = 1; scrub_N2O = 0; scrub_Toxins = 0},/turf/simulated/floor/wood,/area/crew_quarters/sleep/sec)
 "arC" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/carpet{icon_state = "carpetnoconnect"},/area/crew_quarters/sleep/sec)
