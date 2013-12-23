@@ -131,6 +131,10 @@
 		..(M,connected,flags)
 		M.pass_flags |= 1
 
+	deactivate(var/mob/M, var/connected, var/flags)
+		..(M,connected,flags)
+		M.pass_flags &= 0 //This may cause issues down the track, but offhand I can't think of any other way for humans to get passtable short of varediting so it should be fine. ~Z
+
 /datum/dna/gene/basic/hulk
 	name="Hulk"
 	activation_messages=list("Your muscles hurt.")
