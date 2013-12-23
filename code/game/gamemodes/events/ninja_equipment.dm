@@ -1330,6 +1330,7 @@ It is possible to destroy the net by the occupant or someone else.
 				if(affecting)
 					var/mob/living/carbon/M = affecting
 					M.anchored = 0
+					M.SetWeakened(0)
 					for(var/mob/O in viewers(src, 3))
 						O.show_message(text("[] was recovered from the energy net!", M.name), 1, text("You hear a grunt."), 2)
 					if(!isnull(master))//As long as they still exist.
@@ -1386,6 +1387,7 @@ It is possible to destroy the net by the occupant or someone else.
 				master << "\blue <b>SUCCESS</b>: \black transport procedure of \the [affecting] complete."
 
 			M.anchored = 0//Important.
+			M.SetWeakened(0)
 
 		else//And they are free.
 			M << "\blue You are free of the net!"
