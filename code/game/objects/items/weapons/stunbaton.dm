@@ -146,6 +146,11 @@
 		L.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by [user.name] ([user.ckey]) with [name]</font>"
 		log_attack("<font color='red'>[user.name] ([user.ckey]) stunned [L.name] ([L.ckey]) with [name]</font>" )
 
+		if(!iscarbon(user))
+			L.LAssailant = null
+		else
+			L.LAssailant = user
+
 		if(bcell.charge < hitcost)
 			status = 0
 			update_icon()
@@ -177,6 +182,11 @@
 
 				H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by thrown [src.name] last touched by ([src.fingerprintslast])</font>"
 				log_attack("Flying [src.name], last touched by ([src.fingerprintslast]) stunned [H.name] ([H.ckey])" )
+
+				if(!iscarbon(foundmob))
+					H.LAssailant = null
+				else
+					H.LAssailant = foundmob
 
 /obj/item/weapon/melee/baton/emp_act(severity)
 	if(bcell)

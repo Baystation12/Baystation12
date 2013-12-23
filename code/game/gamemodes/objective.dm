@@ -757,3 +757,11 @@ datum/objective/blood
 			return 1
 		else
 			return 0
+
+
+// /vg/; Vox Inviolate for humans :V
+datum/objective/minimize_casualties
+	explanation_text = "Minimise casualties."
+	check_completion()
+		if(owner.kills.len>5) return 0
+		return 1

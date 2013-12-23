@@ -522,6 +522,11 @@
 	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>"
 	msg_admin_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)") //BS12 EDIT ALG
 
+	if(!iscarbon(user))
+		M.LAssailant = null
+	else
+		M.LAssailant = user
+
 	src.add_fingerprint(user)
 	//if((CLUMSY in user.mutations) && prob(50))
 	//	M = user

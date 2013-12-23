@@ -41,6 +41,11 @@
 
 	add_logs(M, user, "attacked", src.name, "(INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])")
 
+	if(!iscarbon(user))
+		M.LAssailant = null
+	else
+		M.LAssailant = user
+
 	//spawn(1800)            // this wont work right
 	//	M.lastattacker = null
 	/////////////////////////
