@@ -38,8 +38,9 @@
 
 			for (var/mob/living/silicon/ai/aiPlayer in player_list)
 				if (aiPlayer.client)
-					var/law = "The station is under quarantine. Do not permit anyone to leave. Disregard all other laws if necessary to prevent, by any means necessary, anyone from leaving. The nuclear failsafe must be activated at any cost, the code is: [nukecode]."
+					var/law = "The station is under quarantine, prevent biological entities from leaving the station at all costs while minimizing collateral damage. The nuclear failsafe must be activated at any cost, the code is: [nukecode]."
 					aiPlayer.set_zeroth_law(law)
+					aiPlayer << "\red <b>You have detected a change in your laws information:</b>"
 					aiPlayer << "Laws Updated: [law]"
 
 	for(var/obj/machinery/computer/communications/comm in world)
