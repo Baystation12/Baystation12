@@ -590,3 +590,18 @@
 	for(var/obj/item/A in world)
 		if(A.type == type && !A.blood_overlay)
 			A.blood_overlay = I
+
+/obj/item/proc/showoff(mob/user)
+	user.custom_emote(message = "[user] holds up [src]")
+
+/obj/item/weapon/grab/showoff(mob/user)
+	user.custom_emote(message = "[user] nods at [affecting]")
+
+/mob/living/carbon/verb/showoff()
+	set name = "Show item"
+	set category = "Object"
+
+	var/obj/item/I = get_active_hand()
+	if(I && I.abstract)
+		I.showoff(src)
+
