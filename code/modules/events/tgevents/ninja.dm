@@ -2336,17 +2336,32 @@ ________________________________________________________________________________
 
 		if("CELL")
 			var/obj/item/weapon/cell/A = target
+			var/drainrate
 			if(A.charge)
+				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+				spark_system.set_up(5, 0, A.loc)
 				if (G.candrain&&do_after(U,30))
-					U << "\blue Gained <B>[A.charge]</B> energy from the cell."
-					if(S.cell.charge+A.charge>S.cell.maxcharge)
-						S.cell.charge=S.cell.maxcharge
+					drain = rand(G.mindrain,G.maxdrain)
+					if(S.cell.charge+A.charge<S.cell.maxcharge)
+						while(S.cell.charge!=S.cell.maxcharge)
+							while(S.cell.maxcharge-S.cell.charge > drain)
+								S.cell.charge+=drain
+								totaldrain+=drain
+								A.charge-=drain
+								spark_system.start()
+								playsound(A.loc, "sparks", 50, 1)
+							S.cell.charge = S.cell.maxcharge
 					else
-						S.cell.charge+=A.charge
-					A.charge = 0
+						while(A.charge)
+							S.cell.charge+=drain
+							totaldrain+=drain
+							A.charge-=drain
+							spark_system.start()
+							playsound(A.loc, "sparks", 50, 1)
 					G.draining = 0
 					A.corrupt()
 					A.updateicon()
+					U << "\blue Gained <B>[totaldrain]</B> energy from the cell."
 				else
 					U << "\red Procedure interrupted. Protocol terminated."
 			else

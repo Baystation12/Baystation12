@@ -875,6 +875,8 @@ ________________________________________________________________________________
 		anim(U.loc,U,'icons/mob/mob.dmi',,"cloak",,U.dir)
 		s_active=!s_active
 		icon_state = U.gender==FEMALE ? "s-ninjasf" : "s-ninjas"
+		U:gloves.icon_state = "s-ninjas"
+		U:gloves.item_state = "s-ninjas"
 		U.regenerate_icons()	//update their icons
 		U << "\blue You are now invisible to normal detection."
 		for(var/mob/O in oviewers(U))
@@ -892,6 +894,8 @@ ________________________________________________________________________________
 		for(var/mob/O in oviewers(U))
 			O.show_message("[U.name] appears from thin air!",1)
 		icon_state = U.gender==FEMALE ? "s-ninjanf" : "s-ninjan"
+		U:gloves.icon_state = "s-ninjan"
+		U:gloves.item_state = "s-ninjan"
 		U.regenerate_icons()	//update their icons
 		return 1
 	return 0
