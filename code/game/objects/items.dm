@@ -592,16 +592,14 @@
 			A.blood_overlay = I
 
 /obj/item/proc/showoff(mob/user)
-	user.custom_emote(message = "[user] holds up [src]")
-
-/obj/item/weapon/grab/showoff(mob/user)
-	user.custom_emote(message = "[user] nods at [affecting]")
+	for (var/mob/M in view(user))
+		M.show_message("[user] holds up [src]. <a HREF=?src=\ref[M];lookitem=\ref[src]>Take a closer look.</a>",1)
 
 /mob/living/carbon/verb/showoff()
-	set name = "Show item"
+	set name = "Show Held Item"
 	set category = "Object"
 
 	var/obj/item/I = get_active_hand()
-	if(I && I.abstract)
+	if(I && !I.abstract)
 		I.showoff(src)
 
