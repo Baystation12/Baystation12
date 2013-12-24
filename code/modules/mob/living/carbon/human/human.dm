@@ -1273,6 +1273,9 @@ mob/living/carbon/human/yank_out_object()
 	set name = "Write in blood"
 	set desc = "Use blood on your hands to write a short message on the floor or a wall, murder mystery style."
 
+	if (src.stat)
+		return
+
 	if (usr != src)
 		return 0 //something is terribly wrong
 
