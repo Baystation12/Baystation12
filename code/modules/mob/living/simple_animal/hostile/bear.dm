@@ -125,6 +125,8 @@
 	..(5)
 
 /mob/living/simple_animal/hostile/bear/AttackingTarget()
+	if(!Adjacent(target_mob))
+		return
 	emote( pick( list("slashes at [target_mob]", "bites [target_mob]") ) )
 
 	var/damage = rand(20,30)
