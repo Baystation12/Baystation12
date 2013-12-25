@@ -143,8 +143,12 @@
 	//Species-specific blood.
 	if(M.species)
 		newblood.basecolor = M.species.blood_color
+	else
+		newblood.basecolor = "#A10808"
 
 	newblood.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+	newblood.update_icon()
+
 	return 1 //we bloodied the floor
 
 
@@ -154,14 +158,20 @@
 
 		var/obj/effect/decal/cleanable/blood/this = new /obj/effect/decal/cleanable/blood(src)
 		this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+		this.basecolor = "#A10808"
+		this.update_icon()
 
 	else if(istype(M,/mob/living/carbon/human))
 
 		var/obj/effect/decal/cleanable/blood/this = new /obj/effect/decal/cleanable/blood(src)
 		var/mob/living/carbon/human/H = M
+
 		//Species-specific blood.
 		if(H.species)
 			this.basecolor = H.species.blood_color
+		else
+			this.basecolor = "#A10808"
+		this.update_icon()
 
 		this.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 

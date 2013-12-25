@@ -1,15 +1,16 @@
 #define DRYING_TIME 5 * 60*10                        //for 1 unit of depth in puddle (amount var)
 
+var/global/list/image/splatter_cache=list()
+
 /obj/effect/decal/cleanable/blood
         name = "blood"
-        desc = "It's red and gooey. Perhaps it's the chef's cooking?"
+        desc = "It's thick and gooey. Perhaps it's the chef's cooking?"
         gender = PLURAL
         density = 0
         anchored = 1
         layer = 2
-        icon = 'icons/effects/blood.dmi'
         icon_state = "floor1"
-        random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6", "floor7")
+        random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
         var/list/viruses = list()
         blood_DNA = list()
         var/basecolor="#A10808" // Color when wet.
@@ -36,6 +37,18 @@
                                         del(B)
         spawn(DRYING_TIME * (amount+1))
                 dry()
+
+/obj/effect/decal/cleanable/blood/update_icon()
+
+	var/cache_key="[basecolor]|[icon_state]"
+	var/icon/I=null
+	if(cache_key in splatter_cache)
+		I = splatter_cache[cache_key]
+	else
+		I = new /icon('icons/effects/blood.dmi', icon_state=icon_state)
+		I.SwapColor("#000000",basecolor);
+		splatter_cache[cache_key]=I
+	icon = I
 
 /obj/effect/decal/cleanable/blood/HasEntered(mob/living/carbon/human/perp)
         if (!istype(perp))
@@ -91,7 +104,7 @@
         layer = 2
         icon = 'icons/effects/blood.dmi'
         icon_state = "gibbl5"
-        random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6")
+        random_icon_states = list("mgib1", "mgib2", "mgib3", "mgib4", "mgib5", "mgib6")
 
 /obj/effect/decal/cleanable/blood/gibs/up
         random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6","gibup1","gibup1","gibup1")
