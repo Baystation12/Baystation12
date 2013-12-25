@@ -95,8 +95,6 @@
 		drain("MECHA",A,suit)
 		return 1
 		/*
-		Commented out for further tweaks, at the moment it instantly drains everything the cell
-		has with no regard for how large the cell in your suit is. This is silly.
 	if(istype(A,/obj/item/weapon/cell))
 		A.add_fingerprint(H)
 		drain("CELL",A,suit)

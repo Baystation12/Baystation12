@@ -398,7 +398,7 @@ ________________________________________________________________________________
 					<li>*<b>Energy Net</b> (<i>5000E</i>) is a non-lethal solution to incapacitating humanoids. The net is made of non-harmful phase energy and will halt movement as long as it remains in effect--it can be destroyed. If the net is not destroyed, after a certain time it will teleport the target to a holding facility for the Spider Clan and then vanish. You will be notified if the net fails or succeeds in capturing a target in this manner. Combine with energy stars or stripping to ensure success. Abduction never looked this leet.</li>
 					<li>*<b>Adrenaline Boost</b> (<i>1 E. Boost/3</i>) recovers the user from stun, weakness, and paralysis. Also injects 20 units of radium into the bloodstream.</li>
 					<li>*<b>Smoke Bomb</b> (<i>1 Sm.Bomb/10</i>) is a weak but potentially useful ability. It creates harmful smoke and can be used in tandem with other powers to confuse enemies.</li>
-					<li>*<b><a href='byond://?src=\ref[src];choice=32'>???</a></b>: unleash the <b>True Ultimate Power!</b></li>
+					<li>*<b>???</b>: unleash the <b>True Ultimate Power!</b></li>
 					<h4>IMPORTANT:</h4>
 					<ul>
 					<li>*Make sure to toggle Special Interaction from the Ninja Equipment menu to interact differently with certain objects.</li>
@@ -493,8 +493,8 @@ ________________________________________________________________________________
 			return
 
 		if(k_unlock!=7&&href_list["choice"]!="Return")
-			var/u1=text2num(href_list["choice"])
-			var/u2=(u1?abs(abs(k_unlock-u1)-2):1)
+			var/u1=text2num(href_list["choice"]) // Get the number of the choice
+			var/u2=(u1?abs(abs(k_unlock-u1)-2):1) //If u1 is not 0, get the absoloute value of(absoloute value of K_unlock-u1)-2, otherwise return 1
 			k_unlock=(!u2? k_unlock+1:0)
 			if(k_unlock==7)
 				U << "Anonymous Messenger blinks."
@@ -577,7 +577,7 @@ ________________________________________________________________________________
 				A << "There are no potential [href_list["name"]=="Phase Shift"?"destinations" : "targets"] in view."
 
 		if("Unlock Kamikaze")
-			if(input(U)=="Divine Wind" && kamikaze_allowed == 1)
+			if(input(U)=="Divine Wind")
 				if( !(U.stat||U.wear_suit!=src||!s_initialized) )
 					if( !(cell.charge<=1||s_busy) )
 						s_busy = 1
@@ -604,10 +604,7 @@ ________________________________________________________________________________
 					s_busy = 0
 					return
 			else
-				if(kamikaze_allowed == 0)
-					U << "\red ERROR: FUNCTION DISABLED!"
-				else
-					U << "\red ERROR: WRONG PASSWORD!"
+				U << "\red ERROR: WRONG PASSWORD!"
 				k_unlock = 0
 				spideros = 0
 			s_busy = 0
@@ -875,6 +872,8 @@ ________________________________________________________________________________
 		anim(U.loc,U,'icons/mob/mob.dmi',,"cloak",,U.dir)
 		s_active=!s_active
 		icon_state = U.gender==FEMALE ? "s-ninjasf" : "s-ninjas"
+		U:gloves.icon_state = "s-ninjas"
+		U:gloves.item_state = "s-ninjas"
 		U.regenerate_icons()	//update their icons
 		U << "\blue You are now invisible to normal detection."
 		for(var/mob/O in oviewers(U))
@@ -892,6 +891,8 @@ ________________________________________________________________________________
 		for(var/mob/O in oviewers(U))
 			O.show_message("[U.name] appears from thin air!",1)
 		icon_state = U.gender==FEMALE ? "s-ninjanf" : "s-ninjan"
+		U:gloves.icon_state = "s-ninjan"
+		U:gloves.item_state = "s-ninjan"
 		U.regenerate_icons()	//update their icons
 		return 1
 	return 0
@@ -1216,6 +1217,10 @@ ________________________________________________________________________________
 					U.client.images += image(tempHud,target,"huddeathsquad")
 				if("Ninja")
 					U.client.images += image(tempHud,target,"hudninja")
+				if("Vampire")
+					U.client.images += image(tempHud,target,"vampire")
+				if("VampThrall")
+					U.client.images += image(tempHud,target,"vampthrall")
 				else//If we don't know what role they have but they have one.
 					U.client.images += image(tempHud,target,"hudunknown1")
 		else//If the silicon mob has no law datum, no inherent laws, or a law zero, add them to the hud.
@@ -1237,9 +1242,9 @@ ________________________________________________________________________________
 	if(vchange=="New Name")
 		var/chance = rand(1,100)
 		switch(chance)
-			if(1 to 50)//High chance of a regular name.
+			if(1 to 70)//High chance of a regular name.
 				voice = "[rand(0,1)==1?pick(first_names_female):pick(first_names_male)] [pick(last_names)]"
-			if(51 to 80)//Smaller chance of a clown name.
+			if(71 to 80)//Smaller chance of a clown name.
 				voice = "[pick(clown_names)]"
 			if(81 to 90)//Small chance of a wizard name.
 				voice = "[pick(wizard_first)] [pick(wizard_second)]"
@@ -1342,7 +1347,7 @@ It is possible to destroy the net by the occupant or someone else.
 			return
 
 	process(var/mob/living/carbon/M as mob)
-		var/check = 60//30 seconds before teleportation. Could be extended I guess. - Extended to one minute
+		var/check = 30//30 seconds before teleportation. Could be extended I guess.
 		var/mob_name = affecting.name//Since they will report as null if terminated before teleport.
 		//The person can still try and attack the net when inside.
 		while(!isnull(M)&&!isnull(src)&&check>0)//While M and net exist, and 60 seconds have not passed.

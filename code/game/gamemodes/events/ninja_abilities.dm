@@ -65,6 +65,42 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 		s_coold = 1
 	return
 
+//=======//9-8 TILE TELEPORT//=======//
+ //Click to to teleport 9-10 tiles in direction facing.
+/obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt()
+	set name = "Phase Jaunt (125E)"
+	set desc = "Utilizes the internal VOID-shift device to rapidly transit in direction facing."
+	set category = "Ninja Ability"
+	set popup_menu = 0
+
+	var/C = 125
+	if(!ninjacost(C,1))
+		var/mob/living/carbon/human/U = affecting
+		var/turf/destination = get_teleport_loc(U.loc,U,9,1,3,1,0,1)
+		var/turf/mobloc = get_turf(U.loc)//To make sure that certain things work properly below.
+		if(destination&&istype(mobloc, /turf))//The turf check prevents unusual behavior. Like teleporting out of cryo pods, cloners, mechs, etc.
+			spawn(0)
+				playsound(U.loc, "sparks", 50, 1)
+				anim(mobloc,src,'icons/mob/mob.dmi',,"phaseout",,U.dir)
+
+			handle_teleport_grab(destination, U)
+			U.loc = destination
+
+			spawn(0)
+				spark_system.start()
+				playsound(U.loc, 'sound/effects/phasein.ogg', 25, 1)
+				playsound(U.loc, "sparks", 50, 1)
+				anim(U.loc,U,'icons/mob/mob.dmi',,"phasein",,U.dir)
+
+			spawn(0)
+				destination.kill_creatures(U)//Any living mobs in teleport area are gibbed. Check turf procs for how it does it.
+			s_coold = 1
+			cell.charge-=(C)
+		else
+			U << "\red The VOID-shift device is malfunctioning, <B>teleportation failed</B>."
+	return
+
+
 
 //=======//RIGHT CLICK TELEPORT//=======//
 //Right click to teleport somewhere, almost exactly like admin jump to turf.
@@ -91,7 +127,11 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 				playsound(U.loc, 'sound/effects/phasein.ogg', 25, 1)
 				playsound(U.loc, 'sound/effects/sparks2.ogg', 50, 1)
 				anim(U.loc,U,'icons/mob/mob.dmi',,"phasein",,U.dir)
-			cell.charge-=C
+
+			//spawn(0) // Commented out for now, possible implementation in a later upgrade tree.
+				//T.kill_creatures(U)
+			s_coold = 1
+			cell.charge-=(C*10)
 		else
 			U << "\red You cannot teleport into solid walls or from solid matter"
 	return
@@ -105,7 +145,7 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 	set popup_menu = 0
 
 	var/C = 1000
-	if(!ninjacost(C,100)) // EMP's now cost 1,000Energy about 30%
+	if(!ninjacost(C, 1))
 		var/mob/living/carbon/human/U = affecting
 		playsound(U.loc, 'sound/effects/EMPulse.ogg', 60, 2)
 		empulse(U, 2, 3) //Procs sure are nice. Slightly weaker than wizard's disable tch.
@@ -122,7 +162,7 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 	set popup_menu = 0
 
 	var/C = 200
-	if(!ninjacost(C, 1)) //Same spawn cost but higher upkeep cost
+	if(!ninjacost(C, 1))
 		var/mob/living/carbon/human/U = affecting
 		if(!kamikaze)
 			if(!U.get_active_hand()&&!istype(U.get_inactive_hand(), /obj/item/weapon/melee/energy/blade))
@@ -155,7 +195,7 @@ This could be a lot better but I'm too tired atm.*/
 	set popup_menu = 0
 
 	var/C = 500
-	if(!ninjacost(C,1))
+	if(!ninjacost(C, 1))
 		var/mob/living/carbon/human/U = affecting
 		var/targets[] = list()//So yo can shoot while yo throw dawg
 		for(var/mob/living/M in oview(loc))
@@ -174,7 +214,7 @@ This could be a lot better but I'm too tired atm.*/
 			A.current = curloc
 			A.yo = targloc.y - curloc.y
 			A.xo = targloc.x - curloc.x
-			cell.charge-=C// Ninja stars now cost 100 energy, stil la fair chunk to avoid spamming, will run out of power quickly if used 3 or more times
+			cell.charge-=(C)
 			A.process()
 		else
 			U << "\red There are no targets in view."
@@ -215,7 +255,7 @@ Must right click on a mob to activate.*/
 			E.master = U
 			spawn(0)//Parallel processing.
 				E.process(M)
-			cell.charge-=(C) // Nets now cost what should be most of a standard battery, since your taking someone out of the round
+			cell.charge-=(C)
 		else
 			U << "They are already trapped inside an energy net."
 		//else
@@ -236,6 +276,7 @@ Movement impairing would indicate drugs and the like.*/
 		//Wouldn't need to track adrenaline boosters if there was a miracle injection to get rid of paralysis and the like instantly.
 		//For now, adrenaline boosters ARE the miracle injection. Well, radium, really.
 		U.SetParalysis(0)
+		U.SetStunned(0)
 		U.SetWeakened(0)
 	/*
 	Due to lag, it was possible to adrenaline boost but remain helpless while life.dm resets player stat.

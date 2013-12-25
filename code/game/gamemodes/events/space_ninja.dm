@@ -668,6 +668,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 /obj/item/clothing/suit/space/space_ninja/proc/grant_ninja_verbs()
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
+	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjasmoke
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjaboost
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
@@ -680,6 +681,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 /obj/item/clothing/suit/space/space_ninja/proc/remove_ninja_verbs()
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
+	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
+	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjasmoke
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjaboost
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjablade
@@ -691,6 +694,9 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 /obj/item/clothing/suit/space/space_ninja/proc/grant_kamikaze(mob/living/carbon/U)
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
+	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
+	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
+	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjaslayer
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjawalk
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjamirage
@@ -715,11 +721,15 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 /obj/item/clothing/suit/space/space_ninja/proc/remove_kamikaze(mob/living/carbon/U)
 	if(kamikaze)
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
+		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
+		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
+
 		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjaslayer
 		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjawalk
 		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjamirage
+
 
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/stealth
 		if(n_gloves)
