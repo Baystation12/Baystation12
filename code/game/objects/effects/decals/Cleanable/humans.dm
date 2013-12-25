@@ -116,6 +116,7 @@
                         sleep(3)
                         if (i > 0)
                                 var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(src.loc)
+                                b.basecolor = src.basecolor
                                 for(var/datum/disease/D in src.viruses)
                                         var/datum/disease/ND = D.Copy(1)
                                         b.viruses += ND
