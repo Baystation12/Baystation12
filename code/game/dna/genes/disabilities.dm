@@ -32,7 +32,7 @@
 		M.mutations.Add(mutation)
 	if(disability)
 		M.disabilities|=disability
-	if(mutation)
+	if(sdisability)
 		M.sdisabilities|=sdisability
 	if(activation_message)
 		M << "\red [activation_message]"
@@ -42,7 +42,7 @@
 		M.mutations.Remove(mutation)
 	if(disability)
 		M.disabilities &= ~disability
-	if(mutation)
+	if(sdisability)
 		M.sdisabilities &= ~sdisability
 	if(deactivation_message)
 		M << "\red [deactivation_message]"
