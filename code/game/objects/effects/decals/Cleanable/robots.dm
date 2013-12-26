@@ -8,6 +8,9 @@
 	basecolor="#2B2B2B"
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6", "gib7")
 
+/obj/effect/decal/cleanable/blood/robot/dry()	//pieces of robots do not dry up like metachunks
+	return
+
 /obj/effect/decal/cleanable/blood/robot/proc/streak(var/list/directions)
 	spawn (0)
 		var/direction = pick(directions)
