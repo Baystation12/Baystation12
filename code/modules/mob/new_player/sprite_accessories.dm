@@ -424,7 +424,7 @@
 
 	una_frills_short
 		name = "Short Unathi Frills"
-		icon_state = "soghun_shortfrill"
+		icon_state = "soghun_shortfrills"
 		species_allowed = list("Unathi")
 		do_colouration = 0
 

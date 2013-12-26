@@ -83,6 +83,22 @@ var/global/list/image/splatter_cache=list()
         icon = I
         amount = 0
 
+/obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
+	..()
+	if (amount && istype(user))
+		add_fingerprint(user)
+		if (user.gloves)
+			return
+		var/taken = rand(1,amount)
+		amount -= taken
+		user << "<span class='notice'>You get some blood on your hands.</span>"
+		if (!user.blood_DNA)
+			user.blood_DNA = list()
+		user.blood_DNA |= blood_DNA.Copy()
+		user.bloody_hands += taken
+		user.update_inv_gloves(1)
+		user.verbs += /mob/living/carbon/human/proc/bloody_doodle
+
 /obj/effect/decal/cleanable/blood/splatter
         random_icon_states = list("gibbl1", "gibbl2", "gibbl3", "gibbl4", "gibbl5")
         amount = 2
@@ -94,6 +110,24 @@ var/global/list/image/splatter_cache=list()
         icon = 'icons/effects/drip.dmi'
         icon_state = "1"
         amount = 0
+
+/obj/effect/decal/cleanable/blood/writing
+	icon_state = "tracks"
+	desc = "It looks like a writing in blood."
+	gender = NEUTER
+	random_icon_states = list("writing1","writing2","writing3","writing4","writing5")
+	amount = 0
+	var/message
+
+/obj/effect/decal/cleanable/blood/writing/New()
+	..()
+	for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
+		random_icon_states.Remove(W.icon_state)
+	icon_state = pick(random_icon_states)
+
+/obj/effect/decal/cleanable/blood/writing/examine()
+	..()
+	usr << "It reads: <font color='#600000'>\"[message]\"<font>"
 
 /obj/effect/decal/cleanable/blood/gibs
         name = "gibs"
