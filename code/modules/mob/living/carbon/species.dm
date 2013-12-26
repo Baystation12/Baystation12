@@ -39,6 +39,8 @@
 
 	var/list/abilities = list()	// For species-derived or admin-given powers
 
+	var/blood_color = "#A10808" //Red.
+
 /datum/species/human
 	name = "Human"
 	language = "Sol Common"
@@ -128,6 +130,7 @@
 	punch_damage = 5
 	primitive = /mob/living/carbon/monkey/diona
 
+	blood_color = "rainbow"
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 
