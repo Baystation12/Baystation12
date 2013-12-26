@@ -776,6 +776,9 @@ proc
 	return composite
 
 proc/adjust_brightness(var/color, var/value)
+	if (!color) return "#FFFFFF"
+	if (!value) return color
+
 	var/list/RGB = ReadRGB(color)
 	RGB[1] = Clamp(RGB[1]+value,0,255)
 	RGB[2] = Clamp(RGB[2]+value,0,255)
