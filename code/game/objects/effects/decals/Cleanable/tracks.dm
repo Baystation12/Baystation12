@@ -35,6 +35,7 @@ var/global/list/image/fluidtrack_cache=list()
 	random_icon_states = null
 	var/dirs=0
 	icon = 'icons/effects/fluidtracks.dmi'
+	icon_state = ""
 	var/coming_state="blood1"
 	var/going_state="blood2"
 	var/updatedtracks=0
@@ -117,33 +118,13 @@ var/global/list/image/fluidtrack_cache=list()
 		if(updated)
 			update_icon()
 
-	process()
-		return PROCESS_KILL
-
 	update_icon()
-		// Clear everything.
-		// Comment after the FIXME below is fixed.
 		overlays.Cut()
-
+		color = "#FFFFFF"
 		var/truedir=0
-		//var/t=world.time
 
-		/* FIXME: This shit doesn't work for some reason.
-		   The Remove line doesn't remove the overlay given, so this is defunct.
-		var/b=0
-		for(var/image/overlay in overlays)
-			b=overlay.dir
-			if(overlay.icon_state==going_state)
-				b=b<<4
-			if(updatedtracks&b)
-				overlays.Remove(overlay)
-				//del(overlay)
-		*/
 		// Update ONLY the overlays that have changed.
 		for(var/datum/fluidtrack/track in stack)
-			// TODO: Uncomment when the block above is fixed.
-			//if(!(updatedtracks&track.direction) && !track.fresh)
-			//	continue
 			var/stack_idx=setdirs["[track.direction]"]
 			var/state=coming_state
 			truedir=track.direction
@@ -153,22 +134,8 @@ var/global/list/image/fluidtrack_cache=list()
 
 			if(track.overlay)
 				track.overlay=null
-
-			//var/cache_key="[track.basecolor]|[state]|[track.direction]|[track.wet<t?"1":"0"]"
-			var/cache_key="[track.basecolor]|[state]|[track.direction]"
-			var/icon/I=null
-			if(cache_key in fluidtrack_cache)
-				I = fluidtrack_cache[cache_key]
-			else
-				I = new /icon(icon, icon_state=state, dir=num2dir(truedir))
-				I.SwapColor("#000000",track.basecolor);
-				// This track is crusty.
-				//if(track.wet<t)
-				//	I.SetIntensity(0.7)
-				fluidtrack_cache[cache_key]=I
-
-			//if(track.wet<t)
-			//	track.crusty=1
+			var/image/I = image(icon, icon_state=state, dir=num2dir(truedir))
+			I.color = track.basecolor
 
 			track.fresh=0
 			track.overlay=I
