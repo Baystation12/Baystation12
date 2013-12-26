@@ -145,6 +145,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		this.icon_state = pick(iconL)
 		this.blood_DNA = list()
 		this.blood_DNA[dna.unique_enzymes] = dna.b_type
+		if (species) this.color = species.blood_color
 	else
 		for(var/obj/effect/decal/cleanable/blood/drip/G in nums)
 			del G
