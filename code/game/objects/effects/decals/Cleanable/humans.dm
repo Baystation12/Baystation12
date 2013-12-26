@@ -41,8 +41,8 @@ var/global/list/image/splatter_cache=list()
 		dry()
 
 /obj/effect/decal/cleanable/blood/update_icon()
-	if(basecolor == "rainbow") color = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
-	else color = basecolor
+	if(basecolor == "rainbow") basecolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+	color = basecolor
 
 /obj/effect/decal/cleanable/blood/HasEntered(mob/living/carbon/human/perp)
         if (!istype(perp))
