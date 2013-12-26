@@ -7,7 +7,7 @@
 	Enjoy! - Doohl
 
 
-	Notice: This all gets automatically compiled in a list in dna.dm, so you do not
+	Notice: This all gets automatically compiled in a list in dna2.dm, so you do not
 	have to define any UI values for sprite accessories manually for hair and facial
 	hair. Just add in new hair types and the game will naturally adapt.
 
@@ -60,6 +60,10 @@
 	cut
 		name = "Cut Hair"
 		icon_state = "hair_c"
+
+	flair
+		name = "Flaired Hair"
+		icon_state = "hair_flair"
 
 	long
 		name = "Shoulder-length Hair"
@@ -420,7 +424,7 @@
 
 	una_frills_short
 		name = "Short Unathi Frills"
-		icon_state = "soghun_shortfrill"
+		icon_state = "soghun_shortfrills"
 		species_allowed = list("Unathi")
 		do_colouration = 0
 

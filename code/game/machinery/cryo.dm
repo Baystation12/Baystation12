@@ -5,7 +5,7 @@
 	density = 1
 	anchored = 1.0
 	layer = 2.8
-	
+
 	var/on = 0
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null
@@ -68,7 +68,7 @@
   * ui_interact is currently defined for /atom/movable
   *
   * @param user /mob The mob who is interacting with this ui
-  * @param ui_key string A string key to use for this ui. Allows for multiple unique uis on one obj/mob (defaut value "main")  
+  * @param ui_key string A string key to use for this ui. Allows for multiple unique uis on one obj/mob (defaut value "main")
   * @param ui /datum/nanoui This parameter is passed by the nanoui process() proc when updating an open ui
   *
   * @return nothing
@@ -79,7 +79,7 @@
 		return
 
 	// this is the data which will be sent to the ui
-	var/data[0]	
+	var/data[0]
 	data["isOperating"] = on
 	data["hasOccupant"] = occupant ? 1 : 0
 
@@ -115,7 +115,7 @@
 	else if(air_contents.temperature > 225)
 		data["cellTemperatureStatus"] = "average"
 
-	data["isBeakerLoaded"] = beaker ? 1 : 0	
+	data["isBeakerLoaded"] = beaker ? 1 : 0
 	/* // Removing beaker contents list from front-end, replacing with a total remaining volume
 	var beakerContents[0]
 	if(beaker && beaker.reagents && beaker.reagents.reagent_list.len)
@@ -130,12 +130,12 @@
 		if (beaker.reagents && beaker.reagents.reagent_list.len)
 			for(var/datum/reagent/R in beaker.reagents.reagent_list)
 				data["beakerVolume"] += R.volume
-	
+
 	if (!ui) // no ui has been passed, so we'll search for one
 	{
 		ui = nanomanager.get_open_ui(user, src, ui_key)
-	}	
-	if (!ui) 
+	}
+	if (!ui)
 		// the ui does not exist, so we'll create a new one
 		ui = new(user, src, ui_key, "cryo.tmpl", "Cryo Cell Control System", 520, 410)
 		// When the UI is first opened this is the data it will use
@@ -159,7 +159,7 @@
 	if(href_list["switchOn"])
 		on = 1
 		update_icon()
-		
+
 	if(href_list["switchOff"])
 		on = 0
 		update_icon()
@@ -168,12 +168,12 @@
 		if(beaker)
 			beaker.loc = get_step(loc, SOUTH)
 			beaker = null
-			
+
 	if(href_list["ejectOccupant"])
 		if(!occupant || isslime(usr) || ispAI(usr))
 			return 0 // don't update UIs attached to this object
 		go_out()
-	
+
 	add_fingerprint(usr)
 	return 1 // update UIs attached to this object
 
@@ -268,15 +268,15 @@
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.loc = get_step(loc, SOUTH)	//this doesn't account for walls or anything, but i don't forsee that being a problem.
-	if (occupant.bodytemperature < 261 && occupant.bodytemperature > 140) //Patch by Aranclanos to stop people from taking burn damage after being ejected
-		occupant.bodytemperature = 261
+	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) //Patch by Aranclanos to stop people from taking burn damage after being ejected
+		occupant.bodytemperature = 261									  // Changed to 70 from 140 by Zuhayr due to reoccurance of bug.
 //	occupant.metabslow = 0
 	occupant = null
 	update_icon()
 	return
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
 	if (!istype(M))
-		usr << "\red <B>The cryo cell cannot handle such liveform!</B>"
+		usr << "\red <B>The cryo cell cannot handle such a lifeform!</B>"
 		return
 	if (occupant)
 		usr << "\red <B>The cryo cell is already occupied!</B>"

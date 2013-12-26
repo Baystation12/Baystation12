@@ -187,7 +187,7 @@
 	src.dna = chosen_dna
 	src.real_name = chosen_dna.real_name
 	src.flavor_text = ""
-	updateappearance(src, src.dna.uni_identity)
+	src.UpdateAppearance()
 	domutcheck(src, null)
 
 	src.verbs -= /mob/proc/changeling_transform
@@ -204,6 +204,10 @@
 
 	var/datum/changeling/changeling = changeling_power(1,0,0)
 	if(!changeling)	return
+
+	if(src.has_brain_worms())
+		src << "<span class='warning'>We cannot perform this ability at the present time!</span>"
+		return
 
 	var/mob/living/carbon/C = src
 	changeling.chem_charges--
@@ -314,7 +318,7 @@
 			W.layer = initial(W.layer)
 
 	var/mob/living/carbon/human/O = new /mob/living/carbon/human( src )
-	if (isblockon(getblock(C.dna.uni_identity, 11,3),11))
+	if (C.dna.GetUIState(DNA_UI_GENDER))
 		O.gender = FEMALE
 	else
 		O.gender = MALE
@@ -327,7 +331,7 @@
 
 	O.loc = C.loc
 
-	updateappearance(O,O.dna.uni_identity)
+	O.UpdateAppearance()
 	domutcheck(O, null)
 	O.setToxLoss(C.getToxLoss())
 	O.adjustBruteLoss(C.getBruteLoss())
@@ -370,24 +374,24 @@
 		if(changeling_power(20,1,100,DEAD))
 			// charge the changeling chemical cost for stasis
 			changeling.chem_charges -= 20
-			
+
 			// restore us to health
 			C.rejuvenate()
-			
+
 			// remove our fake death flag
 			C.status_flags &= ~(FAKEDEATH)
-			
+
 			// let us move again
 			C.update_canmove()
-			
+
 			// re-add out changeling powers
-			C.make_changeling()		
-			
+			C.make_changeling()
+
 			// sending display messages
 			C << "<span class='notice'>We have regenerated.</span>"
 			C.visible_message("<span class='warning'>[src] appears to wake from the dead, having healed all wounds.</span>")
-			
-			
+
+
 	feedback_add_details("changeling_powers","FD")
 	return 1
 
@@ -719,7 +723,7 @@ var/list/datum/dna/hivemind_bank = list()
 	T.visible_message("<span class='warning'>[T] transforms!</span>")
 	T.dna = chosen_dna
 	T.real_name = chosen_dna.real_name
-	updateappearance(T, T.dna.uni_identity)
+	T.UpdateAppearance()
 	domutcheck(T, null)
 	feedback_add_details("changeling_powers","TS")
 	return 1

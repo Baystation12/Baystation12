@@ -202,6 +202,9 @@
 /obj/machinery/power/supermatter/attack_robot(mob/user as mob)
 	return attack_hand(user)
 
+/obj/machinery/power/supermatter/attack_ai(mob/user as mob)
+	user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
+
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
 	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\

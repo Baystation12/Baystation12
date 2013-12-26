@@ -85,12 +85,18 @@
 		user.visible_message("\blue [user] separates [target]'s brain from \his spine with \the [tool].",	\
 		"\blue You separate [target]'s brain from spine with \the [tool].")
 
+		var/mob/living/simple_animal/borer/borer = target.has_brain_worms()
+
+		if(borer)
+			borer.detatch() //Should remove borer if the brain is removed - RR
+
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Debrained [target.name] ([target.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)])</font>"
 		target.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)])</font>"
 		msg_admin_attack("[user.name] ([user.ckey]) debrained [target.name] ([target.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 		var/obj/item/brain/B = new(target.loc)
 		B.transfer_identity(target)
+		target.internal_organs -= B
 
 		target:brain_op_stage = 4.0
 		target.death()//You want them to die after the brain was transferred, so not to trigger client death() twice.

@@ -66,7 +66,7 @@
 	if(!other)
 		return 1
 	//Universal speak makes everything understandable, for obvious reasons.
-	else if(other.universal_speak || src.universal_speak)
+	else if(other.universal_speak || src.universal_speak || src.universal_understand)
 		return 1
 	else if (src.stat == 2)
 		return 1
@@ -83,7 +83,7 @@
 		else
 			return 0
 
-	else if(other.universal_speak || src.universal_speak)
+	else if(other.universal_speak || src.universal_speak || src.universal_understand)
 		return 1
 	else if(isAI(src) && ispAI(other))
 		return 1

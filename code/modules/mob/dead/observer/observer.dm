@@ -17,6 +17,7 @@
 							//If you died in the game and are a ghsot - this will remain as null.
 							//Note that this is not a reliable way to determine if admins started as observers, since they change mobs a lot.
 	var/has_enabled_antagHUD = 0
+	var/medHUD = 0
 	var/antagHUD = 0
 	universal_speak = 1
 	var/atom/movable/following = null
@@ -25,7 +26,7 @@
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
 	verbs += /mob/dead/observer/proc/dead_tele
-	
+
 	stat = DEAD
 
 	var/turf/T
@@ -92,12 +93,12 @@ Works together with spawning an observer, noted above.
 
 /mob/dead/observer/Life()
 	..()
-	if(!loc) return		
+	if(!loc) return
 	if(!client) return 0
 
 
 	if(client.images.len)
-		for(var/image/hud in client.images)	
+		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud")
 				client.images.Remove(hud)
 	if(antagHUD)
@@ -107,8 +108,69 @@ Works together with spawning an observer, noted above.
 				target_list += target
 		if(target_list.len)
 			assess_targets(target_list, src)
+	if(medHUD)
+		process_medHUD(src)
 
-		
+
+// Direct copied from medical HUD glasses proc, used to determine what health bar to put over the targets head.
+/mob/dead/proc/RoundHealth(var/health)
+	switch(health)
+		if(100 to INFINITY)
+			return "health100"
+		if(70 to 100)
+			return "health80"
+		if(50 to 70)
+			return "health60"
+		if(30 to 50)
+			return "health40"
+		if(18 to 30)
+			return "health25"
+		if(5 to 18)
+			return "health10"
+		if(1 to 5)
+			return "health1"
+		if(-99 to 0)
+			return "health0"
+		else
+			return "health-100"
+	return "0"
+
+
+// Pretty much a direct copy of Medical HUD stuff, except will show ill if they are ill instead of also checking for known illnesses.
+
+/mob/dead/proc/process_medHUD(var/mob/M)
+	var/client/C = M.client
+	var/image/holder
+	for(var/mob/living/carbon/human/patient in oview(M))
+		var/foundVirus = 0
+		if(patient.virus2.len)
+			foundVirus = 1
+		if(!C) return
+		holder = patient.hud_list[HEALTH_HUD]
+		if(patient.stat == 2)
+			holder.icon_state = "hudhealth-100"
+		else
+			holder.icon_state = "hud[RoundHealth(patient.health)]"
+		C.images += holder
+
+		holder = patient.hud_list[STATUS_HUD]
+		if(patient.stat == 2)
+			holder.icon_state = "huddead"
+		else if(patient.status_flags & XENO_HOST)
+			holder.icon_state = "hudxeno"
+		else if(foundVirus)
+			holder.icon_state = "hudill"
+		else if(patient.has_brain_worms())
+			var/mob/living/simple_animal/borer/B = patient.has_brain_worms()
+			if(B.controlling)
+				holder.icon_state = "hudbrainworm"
+			else
+				holder.icon_state = "hudhealthy"
+		else
+			holder.icon_state = "hudhealthy"
+
+		C.images += holder
+
 
 /mob/dead/proc/assess_targets(list/target_list, mob/dead/observer/U)
 	var/icon/tempHud = 'icons/mob/hud.dmi'
@@ -238,6 +300,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	mind.current.key = key
 	return 1
 
+/mob/dead/observer/verb/toggle_medHUD()
+	set category = "Ghost"
+	set name = "Toggle MedicHUD"
+	set desc = "Toggles Medical HUD allowing you to see how everyone is doing"
+	if(!client)
+		return
+	if(medHUD)
+		medHUD = 0
+		src << "\blue <B>Medical HUD Disabled</B>"
+	else
+		medHUD = 1
+		src << "\blue <B>Medical HUD Enabled</B>"
+
 /mob/dead/observer/verb/toggle_antagHUD()
 	set category = "Ghost"
 	set name = "Toggle AntagHUD"
@@ -251,7 +326,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(jobban_isbanned(M, "AntagHUD"))
 		src << "\red <B>You have been banned from using this feature</B>"
 		return
-	if(config.antag_hud_restricted && !M.has_enabled_antagHUD &&!client.holder) 
+	if(config.antag_hud_restricted && !M.has_enabled_antagHUD &&!client.holder)
 		var/response = alert(src, "If you turn this on, you will not be able to take any part in the round.","Are you sure you want to turn this feature on?","Yes","No")
 		if(response == "No") return
 		M.can_reenter_corpse = 0
@@ -378,12 +453,20 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Become mouse"
 	set category = "Ghost"
 
+	if(config.disable_player_mice)
+		src << "<span class='warning'>Spawning as a mouse is currently disabled.</span>"
+		return
+
 	var/timedifference = world.time - client.time_died_as_mouse
 	if(client.time_died_as_mouse && timedifference <= mouse_respawn_time * 600)
 		var/timedifference_text
 		timedifference_text = time2text(mouse_respawn_time * 600 - timedifference,"mm:ss")
 		src << "<span class='warning'>You may only spawn again as a mouse more than [mouse_respawn_time] minutes after your death. You have [timedifference_text] left.</span>"
 		return
+
+	var/response = alert(src, "Are you -sure- you want to become a mouse?","Are you sure you want to squeek?","Squeek!","Nope!")
+	if(response != "Squeek!") return  //Hit the wrong key...again.
+
 
 	//find a viable mouse candidate
 	var/mob/living/simple_animal/mouse/host
@@ -399,6 +482,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "<span class='warning'>Unable to find any unwelded vents to spawn mice at.</span>"
 
 	if(host)
+		if(config.uneducated_mice)
+			host.universal_understand = 0
 		host.ckey = src.ckey
 		host << "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>"
 

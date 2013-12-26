@@ -84,10 +84,11 @@
 	var/lastpuke = 0
 	var/unacidable = 0
 	var/small = 0
-	var/list/pinned = list()            //List of things pinning this creature to walls (see living_defense.dm)
-	var/list/embedded = list()          //Embedded items, since simple mobs don't have organs.
+	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
+	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // For speaking/listening.
-	var/list/speak_emote = list("says") //Verbs used when speaking. Defaults to 'say' if speak_emote is null.
+	var/list/abilities = list()         // For species-derived or admin-given powers.
+	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
 
 	var/name_archive //For admin things like possession
 
@@ -206,6 +207,7 @@
 
 	//Whether or not mobs can understand other mobtypes. These stay in /mob so that ghosts can hear everything.
 	var/universal_speak = 0 // Set to 1 to enable the mob to speak to everyone -- TLE
+	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
 	var/robot_talk_understand = 0
 	var/alien_talk_understand = 0
 
@@ -215,3 +217,5 @@
 	var/immune_to_ssd = 0
 
 	var/turf/listed_turf = null  //the current turf being examined in the stat panel
+
+	var/list/active_genes=list()
