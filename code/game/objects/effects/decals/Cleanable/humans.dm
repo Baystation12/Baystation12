@@ -3,42 +3,44 @@
 var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood
-        name = "blood"
-        desc = "It's thick and gooey. Perhaps it's the chef's cooking?"
-        gender = PLURAL
-        density = 0
-        anchored = 1
-        layer = 2
-        icon_state = "floor1"
-        random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
-        var/list/viruses = list()
-        blood_DNA = list()
-        var/basecolor="#A10808" // Color when wet.
-        var/list/datum/disease2/disease/virus2 = list()
-        var/amount = 5
+	name = "blood"
+	desc = "It's thick and gooey. Perhaps it's the chef's cooking?"
+	gender = PLURAL
+	density = 0
+	anchored = 1
+	layer = 2
+	icon_state = "floor1"
+	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
+	var/list/viruses = list()
+	blood_DNA = list()
+	var/basecolor="#A10808" // Color when wet.
+	var/list/datum/disease2/disease/virus2 = list()
+	var/amount = 5
 
 /obj/effect/decal/cleanable/blood/Del()
-        for(var/datum/disease/D in viruses)
-                D.cure(0)
-        ..()
+	for(var/datum/disease/D in viruses)
+		D.cure(0)
+	..()
 
 /obj/effect/decal/cleanable/blood/New()
-        ..()
-        if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
-                return
-        if(istype(src, /obj/effect/decal/cleanable/blood/tracks))
-                return // We handle our own drying.
-        if(src.type == /obj/effect/decal/cleanable/blood)
-                if(src.loc && isturf(src.loc))
-                        for(var/obj/effect/decal/cleanable/blood/B in src.loc)
-                                if(B != src)
-                                        if (B.blood_DNA)
-                                                blood_DNA |= B.blood_DNA.Copy()
-                                        del(B)
-        spawn(DRYING_TIME * (amount+1))
-                dry()
+	..()
+	if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
+		return
+	if(istype(src, /obj/effect/decal/cleanable/blood/tracks))
+		return // We handle our own drying.
+	if(src.type == /obj/effect/decal/cleanable/blood)
+		if(src.loc && isturf(src.loc))
+			for(var/obj/effect/decal/cleanable/blood/B in src.loc)
+				if(B != src)
+					if (B.blood_DNA)
+						blood_DNA |= B.blood_DNA.Copy()
+					del(B)
+	spawn(DRYING_TIME * (amount+1))
+		dry()
 
 /obj/effect/decal/cleanable/blood/update_icon()
+
+	if(basecolor == "rainbow") basecolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
 
 	var/cache_key="[basecolor]|[icon_state]"
 	var/icon/I=null
@@ -91,11 +93,12 @@ var/global/list/image/splatter_cache=list()
 			return
 		var/taken = rand(1,amount)
 		amount -= taken
-		user << "<span class='notice'>You get some blood on your hands.</span>"
+		user << "<span class='notice'>You get some of \the [src] on your hands.</span>"
 		if (!user.blood_DNA)
 			user.blood_DNA = list()
 		user.blood_DNA |= blood_DNA.Copy()
 		user.bloody_hands += taken
+		user.hand_blood_color = basecolor
 		user.update_inv_gloves(1)
 		user.verbs += /mob/living/carbon/human/proc/bloody_doodle
 
@@ -127,33 +130,33 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/writing/examine()
 	..()
-	usr << "It reads: <font color='#600000'>\"[message]\"<font>"
+	usr << "It reads: <font color='basecolor'>\"[message]\"<font>"
 
 /obj/effect/decal/cleanable/blood/gibs
-        name = "gibs"
-        desc = "They look bloody and gruesome."
-        gender = PLURAL
-        density = 0
-        anchored = 1
-        layer = 2
-        icon = 'icons/effects/blood.dmi'
-        icon_state = "gibbl5"
-        random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6")
+	name = "gibs"
+	desc = "They look bloody and gruesome."
+	gender = PLURAL
+	density = 0
+	anchored = 1
+	layer = 2
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "gibbl5"
+	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6")
 
 /obj/effect/decal/cleanable/blood/gibs/up
-        random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6","gibup1","gibup1","gibup1")
+	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6","gibup1","gibup1","gibup1")
 
 /obj/effect/decal/cleanable/blood/gibs/down
-        random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6","gibdown1","gibdown1","gibdown1")
+	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6","gibdown1","gibdown1","gibdown1")
 
 /obj/effect/decal/cleanable/blood/gibs/body
-        random_icon_states = list("gibhead", "gibtorso")
+	random_icon_states = list("gibhead", "gibtorso")
 
 /obj/effect/decal/cleanable/blood/gibs/limb
-        random_icon_states = list("gibleg", "gibarm")
+	random_icon_states = list("gibleg", "gibarm")
 
 /obj/effect/decal/cleanable/blood/gibs/core
-        random_icon_states = list("gibmid1", "gibmid2", "gibmid3")
+	random_icon_states = list("gibmid1", "gibmid2", "gibmid3")
 
 
 /obj/effect/decal/cleanable/blood/gibs/proc/streak(var/list/directions)
@@ -174,18 +177,19 @@ var/global/list/image/splatter_cache=list()
 
 
 /obj/effect/decal/cleanable/mucus
-        name = "mucus"
-        desc = "Disgusting mucus."
-        gender = PLURAL
-        density = 0
-        anchored = 1
-        layer = 2
-        icon = 'icons/effects/blood.dmi'
-        icon_state = "mucus"
-        random_icon_states = list("mucus")
-        var/list/datum/disease2/disease/virus2 = list()
-        var/dry=0 // Keeps the lag down
+	name = "mucus"
+	desc = "Disgusting mucus."
+	gender = PLURAL
+	density = 0
+	anchored = 1
+	layer = 2
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "mucus"
+	random_icon_states = list("mucus")
+
+	var/list/datum/disease2/disease/virus2 = list()
+	var/dry=0 // Keeps the lag down
 
 /obj/effect/decal/cleanable/mucus/New()
-        spawn(DRYING_TIME * 2)
-                dry=1
+	spawn(DRYING_TIME * 2)
+		dry=1

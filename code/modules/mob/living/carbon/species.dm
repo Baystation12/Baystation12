@@ -130,6 +130,7 @@
 	punch_damage = 5
 	primitive = /mob/living/carbon/monkey/diona
 
+	blood_color = "rainbow"
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 
