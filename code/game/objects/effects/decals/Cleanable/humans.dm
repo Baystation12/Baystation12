@@ -9,7 +9,8 @@ var/global/list/image/splatter_cache=list()
 	density = 0
 	anchored = 1
 	layer = 2
-	icon_state = "floor1"
+	icon = 'icons/effects/blood.dmi'
+	icon_state = "mfloor1"
 	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
 	var/list/viruses = list()
 	blood_DNA = list()
@@ -24,6 +25,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/New()
 	..()
+	color = basecolor
 	if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
 		return
 	if(istype(src, /obj/effect/decal/cleanable/blood/tracks))
@@ -39,18 +41,8 @@ var/global/list/image/splatter_cache=list()
 		dry()
 
 /obj/effect/decal/cleanable/blood/update_icon()
-
-	if(basecolor == "rainbow") basecolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
-
-	var/cache_key="[basecolor]|[icon_state]"
-	var/icon/I=null
-	if(cache_key in splatter_cache)
-		I = splatter_cache[cache_key]
-	else
-		I = new /icon('icons/effects/blood.dmi', icon_state=icon_state)
-		I.SwapColor("#000000",basecolor);
-		splatter_cache[cache_key]=I
-	icon = I
+	if(basecolor == "rainbow") color = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+	else color = basecolor
 
 /obj/effect/decal/cleanable/blood/HasEntered(mob/living/carbon/human/perp)
         if (!istype(perp))
@@ -78,12 +70,10 @@ var/global/list/image/splatter_cache=list()
         amount--
 
 /obj/effect/decal/cleanable/blood/proc/dry()
-        name = "dried [src]"
-        desc = "It's dark red and crusty. Someone is not doing their job."
-        var/icon/I = icon(icon,icon_state)
-        I.SetIntensity(0.7)
-        icon = I
-        amount = 0
+		name = "dried [src.name]"
+		desc = "It's dry and crusty. Someone is not doing their job."
+		color = adjust_brightness(color, -50)
+		amount = 0
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
 	..()
@@ -103,7 +93,7 @@ var/global/list/image/splatter_cache=list()
 		user.verbs += /mob/living/carbon/human/proc/bloody_doodle
 
 /obj/effect/decal/cleanable/blood/splatter
-        random_icon_states = list("gibbl1", "gibbl2", "gibbl3", "gibbl4", "gibbl5")
+        random_icon_states = list("mgibbl1", "mgibbl2", "mgibbl3", "mgibbl4", "mgibbl5")
         amount = 2
 
 /obj/effect/decal/cleanable/blood/drip
@@ -112,6 +102,7 @@ var/global/list/image/splatter_cache=list()
         gender = PLURAL
         icon = 'icons/effects/drip.dmi'
         icon_state = "1"
+        random_icon_states = list("1","2","3","4","5")
         amount = 0
 
 /obj/effect/decal/cleanable/blood/writing

@@ -1,7 +1,7 @@
 /obj/item
 	name = "item"
 	icon = 'icons/obj/items.dmi'
-	var/icon/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
+	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/abstract = 0
 	var/item_state = null
 	var/r_speed = 1.0
@@ -569,6 +569,7 @@
 
 	//apply the blood-splatter overlay if it isn't already in there
 	if(!blood_DNA.len)
+		blood_overlay.color = blood_color
 		overlays += blood_overlay
 
 	//if this blood isn't already in the list, add it
@@ -589,7 +590,7 @@
 	//not sure if this is worth it. It attaches the blood_overlay to every item of the same type if they don't have one already made.
 	for(var/obj/item/A in world)
 		if(A.type == type && !A.blood_overlay)
-			A.blood_overlay = I
+			A.blood_overlay = image(I)
 
 /obj/item/proc/showoff(mob/user)
 	for (var/mob/M in view(user))

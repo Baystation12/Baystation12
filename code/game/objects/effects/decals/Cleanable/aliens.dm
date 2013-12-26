@@ -5,7 +5,7 @@
 	desc = "It's green and acidic. It looks like... <i>blood?</i>"
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "xfloor1"
-	basecolor = "#05CC05"
+	basecolor = "#05EE05"
 	random_icon_states = list("xfloor1", "xfloor2", "xfloor3", "xfloor4", "xfloor5", "xfloor6", "xfloor7")
 
 /obj/effect/decal/cleanable/blood/xeno/proc/streak(var/list/directions)
