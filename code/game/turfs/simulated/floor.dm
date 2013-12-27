@@ -552,26 +552,31 @@ turf/simulated/floor/proc/update_icon()
 				if( WT.remove_fuel(0,user) )
 					user << "<span class='notice'>You begin removing the plating.</span>"
 					playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
-
-					sleep(100)
+					if(!(do_after(user, 100)))
+						return
 					WT.eyecheck(user)
 					user << "You remove the plating."
+					playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 					new /obj/structure/lattice(src)
 					var/turf/Tsrc = get_turf(src)
 					Tsrc.ChangeTurf(/turf/space)
+				else
+					user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 
 
 	if(istype(C, /obj/item/weapon/wrench))
 		if(is_plating())
 			if(!plating_deconstruction)
 				user << "You start to unsecure the boltings on the plating."
-				sleep(100)
+				if(!(do_after(user, 100)))
+					return
 				user << "You unsecure the bolts on the plating."
 				plating_deconstruction = 1
 				return
 			if(plating_deconstruction == 1)
 				user << "You start to secure the boltings on the plating."
-				sleep(100)
+				if(!(do_after(user, 100)))
+					return
 				user << "You secure the bolts on the plating."
 				plating_deconstruction = 0
 				return
