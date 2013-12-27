@@ -35,6 +35,7 @@ var/list/wood_icons = list("wood","wood-broken")
 	var/burnt = 0
 	var/mineral = "metal"
 	var/obj/item/stack/tile/floor_tile = new/obj/item/stack/tile/plasteel
+	var/plating_deconstruction = 0
 
 
 /turf/simulated/floor/New()
@@ -536,21 +537,43 @@ turf/simulated/floor/proc/update_icon()
 	if(istype(C, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/welder = C
 		if(welder.isOn() && (is_plating()))
-			if(broken || burnt)
-				if(welder.remove_fuel(0,user))
-					user << "\red You fix some dents on the broken plating."
-					playsound(src.loc, 'sound/items/Welder.ogg', 80, 1)
-					icon_state = "plating"
-					burnt = 0
-					broken = 0
-				else
-					user << "\blue You need more welding fuel to complete this task."
+			if(!plating_deconstruction)
+				if(broken || burnt)
+					if(welder.remove_fuel(0,user))
+						user << "\red You fix some dents on the broken plating."
+						playsound(src.loc, 'sound/items/Welder.ogg', 80, 1)
+						icon_state = "plating"
+						burnt = 0
+						broken = 0
+					else
+						user << "\blue You need more welding fuel to complete this task."
+			else
+				var/obj/item/weapon/weldingtool/WT = C
+				if( WT.remove_fuel(0,user) )
+					user << "<span class='notice'>You begin removing the plating.</span>"
+					playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
+
+					sleep(100)
+					WT.eyecheck(user)
+					user << "You remove the plating."
+					new /obj/structure/lattice(src)
+					var/turf/Tsrc = get_turf(src)
+					Tsrc.ChangeTurf(/turf/space)
+
 
 	if(istype(C, /obj/item/weapon/wrench))
 		if(is_plating())
-			user << "You remove the plating."
-			new /obj/structure/lattice(src.loc)
-			var/turf/Tsrc = get_turf(src)
-			Tsrc.ChangeTurf(/turf/space)
+			if(!plating_deconstruction)
+				user << "You start to unsecure the boltings on the plating."
+				sleep(100)
+				user << "You unsecure the bolts on the plating."
+				plating_deconstruction = 1
+				return
+			if(plating_deconstruction == 1)
+				user << "You start to secure the boltings on the plating."
+				sleep(100)
+				user << "You secure the bolts on the plating."
+				plating_deconstruction = 0
+				return
 		else
 			user << "Remove the floor tile first."
