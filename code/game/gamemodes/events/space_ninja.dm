@@ -67,7 +67,7 @@ ________________________________________________________________________________
 		Phase Shift
 			Extra Ability
 			Advanced Sensors?
-				Instead of being unlocked at the start, Phase Shieft would become available once requirements are met.
+				Instead of being unlocked at the start, Phase Shift would become available once requirements are met.
 		Uranium-based Recharger:
 			Suit Upgrade
 			Unsure

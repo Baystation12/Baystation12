@@ -68,12 +68,12 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 //=======//9-8 TILE TELEPORT//=======//
  //Click to to teleport 9-10 tiles in direction facing.
 /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt()
-	set name = "Phase Jaunt (125E)"
+	set name = "Phase Jaunt (200E)"
 	set desc = "Utilizes the internal VOID-shift device to rapidly transit in direction facing."
 	set category = "Ninja Ability"
 	set popup_menu = 0
 
-	var/C = 125
+	var/C = 200
 	if(!ninjacost(C,1))
 		var/mob/living/carbon/human/U = affecting
 		var/turf/destination = get_teleport_loc(U.loc,U,9,1,3,1,0,1)
@@ -92,8 +92,8 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 				playsound(U.loc, "sparks", 50, 1)
 				anim(U.loc,U,'icons/mob/mob.dmi',,"phasein",,U.dir)
 
-			spawn(0)
-				destination.kill_creatures(U)//Any living mobs in teleport area are gibbed. Check turf procs for how it does it.
+			//spawn(0)
+				//destination.kill_creatures(U)//Any living mobs in teleport area are gibbed. Check turf procs for how it does it.
 			s_coold = 1
 			cell.charge-=(C)
 		else
@@ -105,12 +105,12 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 //=======//RIGHT CLICK TELEPORT//=======//
 //Right click to teleport somewhere, almost exactly like admin jump to turf.
 /obj/item/clothing/suit/space/space_ninja/proc/ninjashift(turf/T in oview())
-	set name = "Phase Shift (250E)"
+	set name = "Phase Shift (400E)"
 	set desc = "Utilizes the internal VOID-shift device to rapidly transit to a destination in view."
 	set category = null//So it does not show up on the panel but can still be right-clicked.
 	set src = usr.contents//Fixes verbs not attaching properly for objects. Praise the DM reference guide!
 
-	var/C = 250
+	var/C = 400
 	if(!ninjacost(C,1))
 		var/mob/living/carbon/human/U = affecting
 		var/turf/mobloc = get_turf(U.loc)//To make sure that certain things work properly below.
@@ -131,7 +131,7 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 			//spawn(0) // Commented out for now, possible implementation in a later upgrade tree.
 				//T.kill_creatures(U)
 			s_coold = 1
-			cell.charge-=(C*10)
+			cell.charge-=(C)
 		else
 			U << "\red You cannot teleport into solid walls or from solid matter"
 	return
@@ -148,7 +148,7 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 	if(!ninjacost(C, 1))
 		var/mob/living/carbon/human/U = affecting
 		playsound(U.loc, 'sound/effects/EMPulse.ogg', 60, 2)
-		empulse(U, 2, 3) //Procs sure are nice. Slightly weaker than wizard's disable tch.
+		empulse(U, 4, 6) //Procs sure are nice. Slightly weaker than wizard's disable tch.
 		s_coold = 2
 		cell.charge-=(1000)
 	return
@@ -230,7 +230,7 @@ Must right click on a mob to activate.*/
 	set src = usr.contents
 
 	var/C = 5000
-	if(!ninjacost(C,80)&&iscarbon(M)) // Nets now cost 8,000
+	if(!ninjacost(C,1)&&iscarbon(M)) // Nets now cost 8,000
 		var/mob/living/carbon/human/U = affecting
 		//if(M.client)//Monkeys without a client can still step_to() and bypass the net. Also, netting inactive people is lame.
 		//if(M)//DEBUG
