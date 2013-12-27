@@ -49,7 +49,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         <b>Cartridge</b>:
                 </div>
                 <div class="itemContent">
-                         {^{:~link(cartridge ? cartridge.name : 'no cartridge', 'eject', {'choice' : "Eject"}, cartridge ? null : 'disabled', cartridge ? 'fixedLeftWider' : 'fixedLeft')}}
+                         {^{:~link(cartridge ? cartridge.name : 'no cartridge', 'eject', {'choice' : "Eject"}, cartridge ? null : 'disabled', cartridge ? null : 'fixedLeft')}}
                 </div>
         </div>
 	<div class="item">
@@ -708,7 +708,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 				</span>
 			</div>
 		</div>
-		<div class="statusDisplay" style="height: 325px; overflow-y:scroll; word-wrap:normal;">
+		<div class="statusDisplayRecords" style="height: 325px">
                 	<div class="item">
                         	<div class="itemContent" style="width: 100%;">
 				<span class="good"><B>Current Approved Orders</B></span><br>
@@ -722,8 +722,7 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 				<br><br>
 				<span class="good"><B>Current Requested Orders</B></span><br>
                                 {^{if records.supply.requests_count == 0}}
-                                        <span class="average"> No current requested orders </span
-><br><br>
+                                        <span class="average"> No current requested orders </span><br><br>
                                 {{else}}
                                         {^{for records.supply.requests}}
                                         <span class="average">#{^{:Number}} - {^{:Name}} requested by {^{:OrderedBy}}<br>{^{if Comment != ""}} {^{:Comment}} <br>{{/if}}<br></span>
