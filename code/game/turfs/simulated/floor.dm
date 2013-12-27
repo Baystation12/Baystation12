@@ -545,3 +545,12 @@ turf/simulated/floor/proc/update_icon()
 					broken = 0
 				else
 					user << "\blue You need more welding fuel to complete this task."
+
+	if(istype(C, /obj/item/weapon/wrench))
+		if(is_plating())
+			user << "You remove the plating."
+			new /obj/structure/lattice(src.loc)
+			var/turf/Tsrc = get_turf(src)
+			Tsrc.ChangeTurf(/turf/space)
+		else
+			user << "Remove the floor tile first."
