@@ -57,11 +57,9 @@
 	amount--
 
 /obj/effect/decal/cleanable/blood/proc/dry()
-	name = "dried [src]"
+	name = "dried [src.name]"
 	desc = "It's dark red and crusty. Someone is not doing their job."
-	var/icon/I = icon(icon,icon_state)
-	I.SetIntensity(0.7)
-	icon = I
+	color = "#999999"
 	amount = 0
 
 /obj/effect/decal/cleanable/blood/splatter

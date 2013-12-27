@@ -218,6 +218,7 @@
 
 	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
 		return src.attack_hand(user)
+	src.add_fingerprint(user)
 	if (istype(W, /obj/item/weapon/crowbar) && opened)
 		if (has_electronics==1)
 			if (terminal)
