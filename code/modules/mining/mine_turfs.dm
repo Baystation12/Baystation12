@@ -5,6 +5,7 @@
 #define ARTIFACT_SPAWN_CHANCE 20
 
 /datum/controller/game_controller/var/list/artifact_spawning_turfs = list()
+/var/global/list/artifact_spawn = list() // Runtime fix for geometry loading before controller is instantiated.
 
 /turf/simulated/mineral //wall piece
 	name = "Rock"
@@ -129,7 +130,7 @@
 			//dont create artifact machinery in animal or plant digsites, or if we already have one
 			if(!artifact_find && digsite != 1 && digsite != 2 && prob(ARTIFACT_SPAWN_CHANCE))
 				artifact_find = new()
-				master_controller.artifact_spawning_turfs.Add(src)
+				artifact_spawn.Add(src)
 
 		if(!src.geological_data)
 			src.geological_data = new/datum/geosample(src)
