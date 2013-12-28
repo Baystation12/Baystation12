@@ -492,9 +492,9 @@ ________________________________________________________________________________
 			U << browse(null, "window=spideros")//Closes the window.
 			return
 
-		if(k_unlock!=7&&href_list["choice"]!="Return")
-			var/u1=text2num(href_list["choice"]) // Get the number of the choice
-			var/u2=(u1?abs(abs(k_unlock-u1)-2):1) //If u1 is not 0, get the absoloute value of(absoloute value of K_unlock-u1)-2, otherwise return 1
+	if(k_unlock!=7&&href_list["choice"]!="Return")
+			var/u1=text2num(href_list["choice"])
+			var/u2=(u1?abs(abs(k_unlock-u1)-2):1)
 			k_unlock=(!u2? k_unlock+1:0)
 			if(k_unlock==7)
 				U << "Anonymous Messenger blinks."
