@@ -1,6 +1,6 @@
 // Note: BYOND is object oriented. There is no reason for this to be copy/pasted blood code.
 
-/obj/effect/decal/cleanable/blood/robot
+/obj/effect/decal/cleanable/blood/gibs/robot
 	name = "robot debris"
 	desc = "It's a useless heap of junk... <i>or is it?</i>"
 	icon = 'icons/mob/robots.dmi'
@@ -8,20 +8,19 @@
 	basecolor="#2B2B2B"
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6", "gib7")
 
-/obj/effect/decal/cleanable/blood/robot/dry()	//pieces of robots do not dry up like
+/obj/effect/decal/cleanable/blood/gibs/robot/dry()	//pieces of robots do not dry up like
 	return
 
-/obj/effect/decal/cleanable/blood/robot/update_icon()
+/obj/effect/decal/cleanable/blood/gibs/robot/update_icon()
 	return
 
-/obj/effect/decal/cleanable/blood/robot/proc/streak(var/list/directions)
+/obj/effect/decal/cleanable/blood/gibs/robot/streak(var/list/directions)
 	spawn (0)
 		var/direction = pick(directions)
 		for (var/i = 0, i < pick(1, 200; 2, 150; 3, 50; 4), i++)
 			sleep(3)
 			if (i > 0)
 				if (prob(40))
-					/*var/obj/effect/decal/cleanable/oil/o =*/
 					new /obj/effect/decal/cleanable/blood/oil/streak(src.loc)
 				else if (prob(10))
 					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -30,13 +29,13 @@
 			if (step_to(src, get_step(src, direction), 0))
 				break
 
-/obj/effect/decal/cleanable/blood/robot/limb
+/obj/effect/decal/cleanable/blood/gibs/robot/limb
 	random_icon_states = list("gibarm", "gibleg")
 
-/obj/effect/decal/cleanable/blood/robot/up
+/obj/effect/decal/cleanable/blood/gibs/robot/up
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6", "gib7","gibup1","gibup1") //2:7 is close enough to 1:4
 
-/obj/effect/decal/cleanable/blood/robot/down
+/obj/effect/decal/cleanable/blood/gibs/robot/down
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6", "gib7","gibdown1","gibdown1") //2:7 is close enough to 1:4
 
 /obj/effect/decal/cleanable/blood/oil

@@ -27,7 +27,7 @@
 
 	robot
 		sparks = 1
-		gibtypes = list(/obj/effect/decal/cleanable/blood/robot/up,/obj/effect/decal/cleanable/blood/robot/down,/obj/effect/decal/cleanable/blood/robot,/obj/effect/decal/cleanable/blood/robot,/obj/effect/decal/cleanable/blood/robot,/obj/effect/decal/cleanable/blood/robot/limb)
+		gibtypes = list(/obj/effect/decal/cleanable/blood/gibs/robot/up,/obj/effect/decal/cleanable/blood/gibs/robot/down,/obj/effect/decal/cleanable/blood/gibs/robot,/obj/effect/decal/cleanable/blood/gibs/robot,/obj/effect/decal/cleanable/blood/gibs/robot,/obj/effect/decal/cleanable/blood/gibs/robot/limb)
 		gibamounts = list(1,1,1,1,1,1)
 
 		New()

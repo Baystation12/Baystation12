@@ -194,7 +194,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 	if(!src.target || src.target == null)
 		for (var/obj/effect/decal/cleanable/D in view(7,src))
 			for(var/T in src.target_types)
-				if(!(D in cleanbottargets) && (D.type == T || D.parent_type == T) && D != src.oldtarget)
+				if(!(D in cleanbottargets) && istype(D,T) && D != src.oldtarget)
 					src.oldtarget = D
 					src.target = D
 					return
@@ -293,17 +293,12 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 /obj/machinery/bot/cleanbot/proc/get_targets()
 	src.target_types = new/list()
 
-	target_types += /obj/effect/decal/cleanable/blood/oil
+	target_types += /obj/effect/decal/cleanable/blood
 	target_types += /obj/effect/decal/cleanable/vomit
-	target_types += /obj/effect/decal/cleanable/blood/robot
 	target_types += /obj/effect/decal/cleanable/crayon
 	target_types += /obj/effect/decal/cleanable/liquid_fuel
 	target_types += /obj/effect/decal/cleanable/mucus
-
-	if(src.blood)
-		target_types += /obj/effect/decal/cleanable/blood/
-		target_types += /obj/effect/decal/cleanable/blood/gibs/
-		target_types += /obj/effect/decal/cleanable/dirt
+	target_types += /obj/effect/decal/cleanable/dirt
 
 /obj/machinery/bot/cleanbot/proc/clean(var/obj/effect/decal/cleanable/target)
 	src.anchored = 1
