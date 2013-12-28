@@ -730,7 +730,7 @@ var/list/admin_verbs_mod = list(
 	set category = "Server"
 	if(!holder)	return
 	if(config)
-		if(config.log_hrefs)
+		if(config.cult_ghostwriter)
 			config.cult_ghostwriter = 0
 			src << "<b>Disallowed ghost writers.</b>"
 			message_admins("Admin [key_name_admin(usr)] has disabled ghost writers.", 1)
