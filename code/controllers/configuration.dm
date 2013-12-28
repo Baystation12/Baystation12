@@ -455,9 +455,14 @@
 						else //probably windows, if not this should work anyway
 							config.python_path = "python"
 
+				if("allow_cult_ghostwriter")
+					config.cult_ghostwriter = value
+
+				if("req_cult_ghostwriter")
+					config.cult_ghostwriter_req_cultists = value
+
 				else
 					diary << "Unknown setting in configuration: '[name]'"
-
 
 		else if(type == "game_options")
 			if(!value)
