@@ -930,6 +930,14 @@
 				if (istype(location, /turf/simulated))
 					location.add_vomit_floor(src, 1)
 
+				var/stomach_len = src.stomach_contents.len
+				if (stomach_len)
+					var/content = src.stomach_contents[stomach_len]
+					if (istype(content, /atom/movable))
+						var/atom/movable/AM = content
+						src.stomach_contents.Remove(AM)
+						AM.loc = location
+
 				if(!hairball)
 					nutrition -= 40
 					adjustToxLoss(-3)
