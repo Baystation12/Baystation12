@@ -1529,6 +1529,15 @@ datum/design/xray
 	build_path = "/obj/item/weapon/gun/energy/xray"
 	locked = 1
 
+datum/design/plasmapistol
+	name = "plasma pistol"
+	desc = "A specialized firearm designed to fire lethal bolts of toxins."
+	id = "ppistol"
+	req_tech = list("combat" = 5, "plasmatech" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 5000, "$glass" = 1000, "$plasma" = 3000)
+	build_path = "/obj/item/weapon/gun/energy/toxgun"
+
 /////////////////////////////////////////
 /////////////////Mining//////////////////
 /////////////////////////////////////////
