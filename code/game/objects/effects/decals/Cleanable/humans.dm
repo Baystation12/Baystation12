@@ -116,9 +116,9 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/writing/New()
 	..()
-	for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
-		random_icon_states.Remove(W.icon_state)
-	if(random_icon_states)
+	if(random_icon_states.len)
+		for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
+			random_icon_states.Remove(W.icon_state)
 		icon_state = pick(random_icon_states)
 	else
 		icon_state = "writing1"
