@@ -379,3 +379,11 @@
 	_color = "roman"
 	item_state = "armor"
 	armor = list(melee = 25, bullet = 0, laser = 25, energy = 10, bomb = 10, bio = 0, rad = 0)
+
+/obj/item/clothing/under/maid
+	name = "maid uniform"
+	desc = "You have the urge to put this on and act submissively"
+	icon_state = "meido"
+	item_state = "meido"
+	_color = "meido"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
