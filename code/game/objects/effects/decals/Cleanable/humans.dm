@@ -122,7 +122,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/writing/examine()
 	..()
-	usr << "It reads: <font color='basecolor'>\"[message]\"<font>"
+	usr << "It reads: <font color='[basecolor]'>\"[message]\"<font>"
 
 /obj/effect/decal/cleanable/blood/gibs
 	name = "gibs"
