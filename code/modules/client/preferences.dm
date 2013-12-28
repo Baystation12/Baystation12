@@ -1122,6 +1122,8 @@ datum/preferences
 								UI_style = "Orange"
 							if("Orange")
 								UI_style = "old"
+							if("old")
+								UI_style = "White"
 							else
 								UI_style = "Midnight"
 
