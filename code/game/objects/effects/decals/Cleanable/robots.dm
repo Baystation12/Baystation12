@@ -12,7 +12,6 @@
 	return
 
 /obj/effect/decal/cleanable/blood/robot/update_icon()
-	color = "#FFFFFF"
 	return
 
 /obj/effect/decal/cleanable/blood/robot/proc/streak(var/list/directions)

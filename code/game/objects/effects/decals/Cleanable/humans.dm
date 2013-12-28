@@ -138,6 +138,11 @@ var/global/list/image/splatter_cache=list()
 	icon_state = "gibbl5"
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6")
 
+/obj/effect/decal/cleanable/blood/gibs/update_icon()
+	overlays.Cut()
+	..()
+	overlays += image(icon, src, "[icon_state]_flesh")
+
 /obj/effect/decal/cleanable/blood/gibs/up
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6","gibup1","gibup1","gibup1")
 
