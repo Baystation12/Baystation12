@@ -1107,6 +1107,7 @@
 #include "code\modules\projectiles\guns\projectile\pistol.dm"
 #include "code\modules\projectiles\guns\projectile\pneumatic.dm"
 #include "code\modules\projectiles\guns\projectile\revolver.dm"
+#include "code\modules\projectiles\guns\projectile\rocket.dm"
 #include "code\modules\projectiles\guns\projectile\shotgun.dm"
 #include "code\modules\projectiles\projectile\animate.dm"
 #include "code\modules\projectiles\projectile\beams.dm"
