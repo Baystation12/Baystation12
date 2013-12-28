@@ -157,14 +157,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/turf/location = get_turf(src)
 	smoketime--
 	if(smoketime < 1)
-		new type_butt(location)
-		processing_objects.Remove(src)
-		if(ismob(loc))
-			var/mob/living/M = loc
-			M << "<span class='notice'>Your [name] goes out.</span>"
-			M.u_equip(src)	//un-equip it so the overlays can update
-			M.update_inv_wear_mask(0)
-		del(src)
+		die()
 		return
 	if(location)
 		location.hotspot_expose(700, 5)
@@ -182,13 +175,21 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette/attack_self(mob/user as mob)
 	if(lit == 1)
 		user.visible_message("<span class='notice'>[user] calmly drops and treads on the lit [src], putting it out instantly.</span>")
-		var/turf/T = get_turf(src)
-		new type_butt(T)
-		processing_objects.Remove(src)
-		del(src)
+		die()
 	return ..()
 
 
+/obj/item/clothing/mask/cigarette/proc/die()
+	var/turf/T = get_turf(src)
+	var/obj/item/butt = new type_butt(T)
+	transfer_fingerprints_to(butt)
+	if(ismob(loc))
+		var/mob/living/M = loc
+		M << "<span class='notice'>Your [name] goes out.</span>"
+		M.u_equip(src)	//un-equip it so the overlays can update
+		M.update_inv_wear_mask(0)
+	processing_objects.Remove(src)
+	del(src)
 
 ////////////
 // CIGARS //
@@ -228,6 +229,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = "cigbutt"
 	w_class = 1
 	throwforce = 1
+
+/obj/item/weapon/cigbutt/New()
+	..()
+	pixel_x = rand(-10,10)
+	pixel_y = rand(-10,10)
+	transform = turn(transform,rand(0,360))
 
 /obj/item/weapon/cigbutt/cigarbutt
 	name = "cigar butt"

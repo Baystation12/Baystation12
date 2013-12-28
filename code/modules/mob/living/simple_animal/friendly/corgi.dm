@@ -27,7 +27,6 @@
 	regenerate_icons()
 
 /mob/living/simple_animal/corgi/show_inv(mob/user as mob)
-	/* If you're turning this back on, scroll down and uncomment target_updated
 	user.set_machine(src)
 	if(user.stat) return
 
@@ -43,7 +42,6 @@
 
 	user << browse(dat, text("window=mob[];size=325x500", name))
 	onclose(user, "mob[real_name]")
-	*/
 	return
 
 /mob/living/simple_animal/corgi/attackby(var/obj/item/O as obj, var/mob/user as mob)

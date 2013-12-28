@@ -50,7 +50,7 @@ datum/controller/game_controller/New()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
 	if(!ticker)						ticker = new /datum/controller/gameticker()
 	if(!emergency_shuttle)			emergency_shuttle = new /datum/shuttle_controller/emergency_shuttle()
-
+	if(artifact_spawn)				artifact_spawning_turfs = artifact_spawn
 
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag

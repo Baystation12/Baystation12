@@ -776,6 +776,14 @@
 								if(istype(usr,/mob/living/silicon/robot))
 									var/mob/living/silicon/robot/U = usr
 									R.fields[text("com_[counter]")] = text("Made by [U.name] ([U.modtype] [U.braintype]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], [game_year]<BR>[t1]")
+
+	if (href_list["lookitem"])
+		var/obj/item/I = locate(href_list["lookitem"])
+		I.examine()
+
+	if (href_list["lookmob"])
+		var/mob/M = locate(href_list["lookmob"])
+		M.examine()
 	..()
 	return
 
@@ -1100,6 +1108,7 @@
 		return 0 //already bloodied with this blood. Cannot add more.
 	blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 	src.update_inv_gloves()	//handles bloody hands overlays and updating
+	verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
 /mob/living/carbon/human/clean_blood()
@@ -1266,3 +1275,58 @@ mob/living/carbon/human/yank_out_object()
 		return 1
 	else
 		return 0
+
+/mob/living/carbon/human/proc/bloody_doodle()
+	set category = "IC"
+	set name = "Write in blood"
+	set desc = "Use blood on your hands to write a short message on the floor or a wall, murder mystery style."
+
+	if (src.stat)
+		return
+
+	if (usr != src)
+		return 0 //something is terribly wrong
+
+	if (!bloody_hands)
+		verbs -= /mob/living/carbon/human/proc/bloody_doodle
+
+	if (src.gloves)
+		src << "<span class='warning'>Your [src.gloves] are getting in the way.</span>"
+		return
+
+	var/turf/simulated/T = src.loc
+	if (!istype(T)) //to prevent doodling out of mechs and lockers
+		src << "<span class='warning'>You cannot reach the floor.</span>"
+		return
+
+	var/direction = input(src,"Which way?","Tile selection") as anything in list("Here","North","South","East","West")
+	if (direction != "Here")
+		T = get_step(T,text2dir(direction))
+	if (!istype(T))
+		src << "<span class='warning'>You cannot doodle there.</span>"
+		return
+
+	var/num_doodles = 0
+	for (var/obj/effect/decal/cleanable/blood/writing/W in T)
+		num_doodles++
+	if (num_doodles > 4)
+		src << "<span class='warning'>There is no space to write on!</span>"
+		return
+
+	var/max_length = bloody_hands * 30 //tweeter style
+
+	var/message = stripped_input(src,"Write a message. It cannot be longer than [max_length] characters.","Blood writing", "")
+
+	if (message)
+		var/used_blood_amount = round(length(message) / 30, 1)
+		bloody_hands = max(0, bloody_hands - used_blood_amount) //use up some blood
+
+		if (length(message) > max_length)
+			message += "-"
+			src << "<span class='warning'>You ran out of blood to write with!</span>"
+
+		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
+		W.basecolor = (hand_blood_color) ? hand_blood_color : "#A10808"
+		W.update_icon()
+		W.message = message
+		W.add_fingerprint(src)

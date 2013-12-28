@@ -37,12 +37,19 @@
 
 	var/flags = 0       // Various specific features.
 
+	var/list/abilities = list()	// For species-derived or admin-given powers
+
+	var/blood_color = "#A10808" //Red.
+
 /datum/species/human
 	name = "Human"
 	language = "Sol Common"
 	primitive = /mob/living/carbon/monkey
 
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR
+
+	//If you wanted to add a species-level ability:
+	/*abilities = list(/client/proc/test_ability)*/
 
 /datum/species/unathi
 	name = "Unathi"
@@ -123,6 +130,7 @@
 	punch_damage = 5
 	primitive = /mob/living/carbon/monkey/diona
 
+	blood_color = "rainbow"
 	warning_low_pressure = 50
 	hazard_low_pressure = -1
 

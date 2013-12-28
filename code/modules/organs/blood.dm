@@ -55,11 +55,11 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		// being pumped properly anymore.
 		var/datum/organ/internal/heart/heart = internal_organs["heart"]
 		switch(heart.damage)
-			if(5 to 10)
+			if(1 to heart.min_bruised_damage)
 				blood_volume *= 0.8
-			if(11 to 20)
-				blood_volume *= 0.5
-			if(21 to INFINITY)
+			if(heart.min_bruised_damage to heart.min_broken_damage)
+				blood_volume *= 0.6
+			if(heart.min_broken_damage to INFINITY)
 				blood_volume *= 0.3
 
 		//Effects of bloodloss
@@ -93,7 +93,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 					src << "\red You feel extremely [word]"
 			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 				oxyloss += 5
-				toxloss += 5
+				toxloss += 3
 				if(prob(15))
 					var/word = pick("dizzy","woosey","faint")
 					src << "\red You feel extremely [word]"
@@ -145,6 +145,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		this.icon_state = pick(iconL)
 		this.blood_DNA = list()
 		this.blood_DNA[dna.unique_enzymes] = dna.b_type
+		if (species) this.basecolor = species.blood_color
+		this.update_icon()
+
 	else
 		for(var/obj/effect/decal/cleanable/blood/drip/G in nums)
 			del G

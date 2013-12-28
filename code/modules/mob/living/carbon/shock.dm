@@ -15,10 +15,14 @@
 		src.traumatic_shock -= 10
 	if(reagents.has_reagent("inaprovaline"))
 		src.traumatic_shock -= 25
+	if(reagents.has_reagent("synaptizine"))
+		src.traumatic_shock -= 40
+	if(reagents.has_reagent("paracetamol"))
+		src.traumatic_shock -= 50
 	if(reagents.has_reagent("tramadol"))
-		src.traumatic_shock -= 80 // make synaptizine function as good painkiller
+		src.traumatic_shock -= 80
 	if(reagents.has_reagent("oxycodone"))
-		src.traumatic_shock -= 200 // make synaptizine function as good painkiller
+		src.traumatic_shock -= 200
 	if(src.slurring)
 		src.traumatic_shock -= 20
 	if(src.analgesic)
