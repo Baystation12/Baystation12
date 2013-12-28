@@ -553,7 +553,7 @@
 			if(do_mob(usr, src, STRIP_DELAY))
 				if(pocket_item)
 					u_equip(pocket_item)
-					if(pickpocket) usr.put_in_hands(pocket_item)
+					usr.put_in_hands(pocket_item)
 				else
 					if(place_item)
 						usr.u_equip(place_item)

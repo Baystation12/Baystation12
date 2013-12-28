@@ -326,12 +326,19 @@
 				src.u_equip(W)
 			W.loc = src.back
 		else
-			src << "\red You are trying to eqip this item to an unsupported inventory slot. How the heck did you manage that? Stop it..."
+			src << "<span class='warning'>You are trying to equip this item to an unsupported inventory slot. Report this to a coder!</span>"
 			return
 
 	W.layer = 20
 
 	return
+
+/mob/living/carbon/human/put_in_hands(obj/item/W)
+	if(!W)		return 0
+	if(put_in_active_hand(W))			return 1
+	else if(put_in_inactive_hand(W))	return 1
+	else
+		..()
 
 /obj/effect/equip_e
 	name = "equip e"
@@ -786,3 +793,5 @@ It can still be worn/put on as normal.
 		if(slot_r_hand)
 			return r_hand
 	return null
+
+
