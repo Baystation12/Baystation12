@@ -5,9 +5,9 @@
 /datum/game_mode/nuclear
 	name = "nuclear emergency"
 	config_tag = "nuclear"
-	required_players = 6
+	required_players = 15
 	required_players_secret = 25 // 25 players - 5 players to be the nuke ops = 20 players remaining
-	required_enemies = 5
+	required_enemies = 1
 	recommended_enemies = 5
 
 	uplink_welcome = "Corporate Backed Uplink Console:"
@@ -34,17 +34,25 @@
 	var/list/possible_syndicates = get_players_for_role(BE_OPERATIVE)
 	var/agent_number = 0
 
+    /*
+	 * if(possible_syndicates.len > agents_possible)
+	 * 	agent_number = agents_possible
+	 * else
+	 * 	agent_number = possible_syndicates.len
+	 *
+	 * if(agent_number > n_players)
+	 *	agent_number = n_players/2
+	 */
+
 	if(possible_syndicates.len < 1)
 		return 0
 
-	if(possible_syndicates.len > agents_possible)
-		agent_number = agents_possible
-	else
-		agent_number = possible_syndicates.len
-
+	//Antag number should scale to active crew.
 	var/n_players = num_players()
-	if(agent_number > n_players)
-		agent_number = n_players/2
+	agent_number = Clamp((n_players/5), 2, ,6)
+
+	if(possible_syndicates.len < agent_number)
+		agent_number = possible_syndicates.len
 
 	while(agent_number > 0)
 		var/datum/mind/new_syndicate = pick(possible_syndicates)
