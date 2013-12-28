@@ -3,14 +3,10 @@
 	desc = "It's a useless heap of junk... <i>or is it?</i>"
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "gib1"
-	basecolor="#FFFFFF"
+	basecolor="#030303"
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6", "gib7")
 
 /obj/effect/decal/cleanable/blood/gibs/robot/dry()	//pieces of robots do not dry up like
-	return
-
-/obj/effect/decal/cleanable/blood/gibs/robot/update_icon()
-	color = "#FFFFFF"
 	return
 
 /obj/effect/decal/cleanable/blood/gibs/robot/streak(var/list/directions)
@@ -41,13 +37,11 @@
 /obj/effect/decal/cleanable/blood/oil
 	name = "motor oil"
 	desc = "It's black and greasy. Looks like Beepsky made another mess."
-	basecolor="#FFFFFF"
-	icon = 'icons/mob/robots.dmi'
-	icon_state = "floor1"
-	random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6", "floor7")
+	basecolor="#030303"
 
 /obj/effect/decal/cleanable/blood/oil/dry()
 	return
 
 /obj/effect/decal/cleanable/blood/oil/streak
-	random_icon_states = list("streak1", "streak2", "streak3", "streak4", "streak5")
+	random_icon_states = list("mgibbl1", "mgibbl2", "mgibbl3", "mgibbl4", "mgibbl5")
+	amount = 2

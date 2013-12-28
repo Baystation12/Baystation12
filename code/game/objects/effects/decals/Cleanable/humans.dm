@@ -25,7 +25,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/New()
 	..()
-	color = basecolor
+	update_icon()
 	if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
 		return
 	if(istype(src, /obj/effect/decal/cleanable/blood/tracks))
@@ -139,6 +139,7 @@ var/global/list/image/splatter_cache=list()
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6")
 
 /obj/effect/decal/cleanable/blood/gibs/update_icon()
+	color = "#FFFFFF"
 	//overlays.Cut()
 	//..()
 	//overlays += image(icon, src, "[icon_state]_flesh")
