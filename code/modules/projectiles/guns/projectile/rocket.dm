@@ -9,6 +9,7 @@
 	throw_range = 10
 	force = 5.0
 	flags =  FPRINT | TABLEPASS | CONDUCT | USEDELAY
+	slot_flags = 0
 	origin_tech = "combat=8;materials=5"
 	projectile = /obj/item/missile
 	var/missile_speed = 2
