@@ -194,3 +194,48 @@ obj/item/weapon/gun/energy/staff/focus
 			user << "\red The [src.name] will now strike only a single person."
 			projectile_type = "/obj/item/projectile/forcebolt"
 	*/
+
+/obj/item/weapon/gun/energy/toxgun
+	name = "plasma pistol"
+	desc = "A specialized firearm designed to fire lethal bolts of toxins."
+	icon_state = "toxgun"
+	fire_sound = 'sound/effects/stealthoff.ogg'
+	w_class = 3.0
+	origin_tech = "combat=5;plasmatech=4"
+	projectile_type = "/obj/item/projectile/energy/plasma"
+
+/obj/item/weapon/gun/energy/sniperrifle
+   name = "L.W.A.P. Sniper Rifle"
+   desc = "A rifle constructed of lightweight materials, fitted with a SMART aiming-system scope."
+   icon = 'icons/obj/gun.dmi'
+   icon_state = "sniper"
+   fire_sound = 'sound/weapons/marauder.ogg'
+   origin_tech = "combat=6;materials=5;powerstorage=4"
+   projectile_type = "/obj/item/projectile/beam/sniper"
+   slot_flags = SLOT_BACK
+   charge_cost = 250
+   fire_delay = 35
+   w_class = 4.0
+
+   var/zoom = 0
+
+   dropped(mob/user)
+      usr.client.view = world.view
+      zoom = 0
+
+/obj/item/weapon/gun/energy/sniperrifle/verb/zoom()
+   set category = "Special Verbs"
+   set name = "Zoom"
+   set popup_menu = 0
+   if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
+      usr << "No."
+      return
+
+   src.zoom = !src.zoom
+   usr << ("<font color='[src.zoom?"blue":"red"]'>Zoom mode [zoom?"en":"dis"]abled.</font>")
+   if(zoom)
+      usr.client.view = 12
+      usr << sound('sound/mecha/imag_enh.ogg',volume=50)
+   else
+      usr.client.view = world.view//world.view - default mob view size
+   return
