@@ -1442,6 +1442,8 @@
 #include "code\WorkInProgress\ZomgPonies\mobs\pony.dm"
 #include "code\WorkInProgress\ZomgPonies\mobs\metroid\powers.dm"
 #include "code\WorkInProgress\ZomgPonies\oldcode\turntable.dm"
+#include "code\WorkInProgress\ZomgPonies\powerarmor\powerarmor.dm"
+#include "code\WorkInProgress\ZomgPonies\powerarmor\powerarmorcomponents.dm"
 #include "code\ZAS\Airflow.dm"
 #include "code\ZAS\Connection.dm"
 #include "code\ZAS\Debug.dm"
