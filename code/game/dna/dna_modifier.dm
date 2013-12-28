@@ -767,7 +767,7 @@
 			return 1
 
 		if (bufferOption == "clear")
-			src.buffers[bufferId]=null
+			src.buffers[bufferId]=new /datum/dna2/record()
 			return 1
 
 		if (bufferOption == "changeLabel")
