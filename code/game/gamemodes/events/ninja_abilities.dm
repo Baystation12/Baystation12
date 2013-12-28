@@ -68,7 +68,7 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 //=======//9-8 TILE TELEPORT//=======//
  //Click to to teleport 9-10 tiles in direction facing.
 /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt()
-	set name = "Phase Jaunt (200E)"
+	set name = "Phase Jaunt (250E)"
 	set desc = "Utilizes the internal VOID-shift device to rapidly transit in direction facing."
 	set category = "Ninja Ability"
 	set popup_menu = 0
@@ -105,7 +105,7 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 //=======//RIGHT CLICK TELEPORT//=======//
 //Right click to teleport somewhere, almost exactly like admin jump to turf.
 /obj/item/clothing/suit/space/space_ninja/proc/ninjashift(turf/T in oview())
-	set name = "Phase Shift (400E)"
+	set name = "Phase Shift (500E)"
 	set desc = "Utilizes the internal VOID-shift device to rapidly transit to a destination in view."
 	set category = null//So it does not show up on the panel but can still be right-clicked.
 	set src = usr.contents//Fixes verbs not attaching properly for objects. Praise the DM reference guide!
