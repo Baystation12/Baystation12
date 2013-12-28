@@ -1254,7 +1254,6 @@
 #include "code\modules\surgery\ribcage.dm"
 #include "code\modules\surgery\robolimbs.dm"
 #include "code\modules\surgery\surgery.dm"
-#include "code\modules\surgery\headreattach.dm"
 #include "code\modules\telesci\bscrystal.dm"
 #include "code\modules\telesci\gps.dm"
 #include "code\modules\telesci\telepad.dm"
