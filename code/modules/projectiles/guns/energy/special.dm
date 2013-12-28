@@ -219,9 +219,9 @@ obj/item/weapon/gun/energy/staff/focus
 
    var/zoom = 0
 
-   dropped(mob/user)
-      usr.client.view = world.view
-      zoom = 0
+/obj/item/weapon/gun/energy/sniperrifle/dropped(mob/user)
+	user.client.view = world.view
+	zoom = 0
 
 /obj/item/weapon/gun/energy/sniperrifle/verb/zoom()
    set category = "Special Verbs"
