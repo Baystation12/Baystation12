@@ -5,7 +5,7 @@
 //BIG NOTE: Don't add living things to crates, that's bad, it will break the shuttle.
 //NEW NOTE: Do NOT set the price of any crates below 7 points. Doing so allows infinite points.
 
-var/list/all_supply_groups = list("Operations","Security","Hospitality","Engineering","Medical / Science","Hydroponics")
+var/list/all_supply_groups = list("Operations","Security","Hospitality","Engineering","Medical / Science","Hydroponics","Organic")
 
 /datum/supply_packs
 	var/name = null
@@ -243,14 +243,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "MULEbot Crate"
 	group = "Operations"
 
-/datum/supply_packs/lisa
-	name = "Corgi Crate"
-	contains = list()
-	cost = 50
-	containertype = /obj/structure/largecrate/lisa
-	containername = "Corgi Crate"
-	group = "Hydroponics"
-
 /datum/supply_packs/hydroponics // -- Skie
 	name = "Hydroponics Supply Crate"
 	contains = list(/obj/item/weapon/reagent_containers/spray/plantbgone,
@@ -268,37 +260,40 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_hydroponics
 	group = "Hydroponics"
 
-//farm animals - useless and annoying, but potentially a good source of food
-/datum/supply_packs/cow
+/datum/supply_packs/organic
+	group = "Organic"
+	containertype = /obj/structure/closet/crate/freezer
+
+//////// livestock
+/datum/supply_packs/organic/cow
 	name = "Cow Crate"
 	cost = 30
-	containertype = /obj/structure/largecrate/cow
-	containername = "Cow Crate"
-	access = access_hydroponics
+	containertype = /obj/structure/closet/critter/cow
+	containername = "cow crate"
 
-/datum/supply_packs/goat
+/datum/supply_packs/organic/goat
 	name = "Goat Crate"
 	cost = 25
-	containertype = /obj/structure/largecrate/goat
-	containername = "Goat Crate"
-	access = access_hydroponics
-	group = "Hydroponics"
+	containertype = /obj/structure/closet/critter/goat
+	containername = "goat crate"
 
-/datum/supply_packs/chicken
+/datum/supply_packs/organic/chicken
 	name = "Chicken Crate"
 	cost = 20
-	containertype = /obj/structure/largecrate/chick
-	containername = "Chicken Crate"
-	access = access_hydroponics
-	group = "Hydroponics"
+	containertype = /obj/structure/closet/critter/chick
+	containername = "chicken crate"
 
-/datum/supply_packs/lisa
+/datum/supply_packs/organic/corgi
 	name = "Corgi Crate"
-	contains = list()
 	cost = 50
-	containertype = /obj/structure/largecrate/lisa
-	containername = "Corgi Crate"
-	group = "Hydroponics"
+	containertype = /obj/structure/closet/critter/corgi
+	containername = "corgi crate"
+
+/datum/supply_packs/organic/cat
+	name = "Cat crate"
+	cost = 50 //Cats are worth as much as corgis.
+	containertype = /obj/structure/closet/critter/cat
+	containername = "cat crate"
 
 /datum/supply_packs/seeds
 	name = "Seeds Crate"
