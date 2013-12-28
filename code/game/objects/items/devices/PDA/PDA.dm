@@ -619,8 +619,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if (in_range(src, U) && loc == U)
 					n = copytext(adminscrub(n), 1, MAX_MESSAGE_LEN)
 					if (mode == 1)
-						note = replacetext(n, "\n", "<BR>")
-						notehtml = n
+						note = html_decode(n)
+						notehtml = note
+						note = replacetext(note, "\n", "<br>")
 				else
 					ui.close()
 			if("Toggle Messenger")
