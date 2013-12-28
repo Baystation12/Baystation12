@@ -7,8 +7,6 @@
 
 */
 
-#define STATION_Z 1
-#define TELECOMM_Z 3
 
 /obj/machinery/telecomms
 	var/temp = "" // output message
@@ -389,5 +387,3 @@
 		return 1
 	return 0
 
-#undef TELECOMM_Z
-#undef STATION_Z
