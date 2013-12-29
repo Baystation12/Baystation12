@@ -67,7 +67,7 @@ ________________________________________________________________________________
 		Phase Shift
 			Extra Ability
 			Advanced Sensors?
-				Instead of being unlocked at the start, Phase Shieft would become available once requirements are met.
+				Instead of being unlocked at the start, Phase Shift would become available once requirements are met.
 		Uranium-based Recharger:
 			Suit Upgrade
 			Unsure
@@ -482,20 +482,26 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	if(alert("Are you sure you want to send in a space ninja?",,"Yes","No")=="No")
 		return
 
-	var/mission
-	while(!mission)
-		mission = copytext(sanitize(input(src, "Please specify which mission the space ninja shall undertake.", "Specify Mission", "")),1,MAX_MESSAGE_LEN)
-		if(!mission)
-			if(alert("Error, no mission set. Do you want to exit the setup process?",,"Yes","No")=="Yes")
-				return
+	if(alert("Would you like random or custom paramaters?",,"Random","Custom")=="Custom")
+		var/mission
+		while(!mission)
+			mission = copytext(sanitize(input(src, "Please specify which mission the space ninja shall undertake.", "Specify Mission", "")),1,MAX_MESSAGE_LEN)
+			if(!mission)
+				if(alert("Error, no mission set. Do you want to exit the setup process?",,"Yes","No")=="Yes")
+					return
 
-	var/input = ckey(input("Pick character to spawn as the Space Ninja", "Key", ""))
-	if(!input)
-		return
 
-	space_ninja_arrival(input, mission)
+		var/input = ckey(input("Pick character to spawn as the Space Ninja", "Key", ""))
+		if(!input)
+			return
 
-	message_admins("\blue [key_name_admin(key)] has spawned [input] as a Space Ninja.\nTheir <b>mission</b> is: [mission]")
+		space_ninja_arrival(input, mission)
+
+		message_admins("\blue [key_name_admin(key)] has spawned [input] as a Space Ninja.\nTheir <b>mission</b> is: [mission]")
+
+	else
+		space_ninja_arrival()
+		message_admins("\blue [key_name_admin(key)] has spawned a random player as a Space Ninja.")
 	log_admin("[key] used Spawn Space Ninja.")
 
 	return
@@ -575,6 +581,9 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 			U << "\red <B>fÄTaL ÈÈRRoR</B>: 382200-*#00CÖDE <B>RED</B>\nUNAU†HORIZED USÈ DETÈC†††eD\nCoMMÈNCING SUB-R0U†IN3 13...\nTÈRMInATING U-U-USÈR..."
 			U.gib()
 			return 0
+		if(!istype(U:wear_suit, /obj/item/clothing/suit/space/space_ninja)) // Because previously players could activate the suit successfully while holding the suit
+			U << "\red <B>ERROR</B>: 100113 \black UNABLE TO LOCATE USER\nABORTING..."
+			return 0
 		if(!istype(U:head, /obj/item/clothing/head/helmet/space/space_ninja))
 			U << "\red <B>ERROR</B>: 100113 \black UNABLE TO LOCATE HEAD GEAR\nABORTING..."
 			return 0
@@ -584,7 +593,9 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		if(!istype(U:gloves, /obj/item/clothing/gloves/space_ninja))
 			U << "\red <B>ERROR</B>: 110223 \black UNABLE TO LOCATE HAND GEAR\nABORTING..."
 			return 0
-
+		if(!istype(U:wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja))
+			U << "\red <B>ERROR</B>: 110223 \black UNABLE TO LOCATE MASK\nABORTING..."
+			return 0
 		affecting = U
 		canremove = 0
 		slowdown = 0
@@ -595,6 +606,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		n_shoes.slowdown--
 		n_gloves = U:gloves
 		n_gloves.canremove=0
+		n_mask = U:wear_mask
+		n_mask.canremove=0
 
 	return 1
 
@@ -615,6 +628,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		n_gloves.canremove=1
 		n_gloves.candrain=0
 		n_gloves.draining=0
+	if(n_mask)
+		n_mask.canremove=1
 
 //Allows the mob to grab a stealth icon.
 /mob/proc/NinjaStealthActive(atom/A)//A is the atom which we are using as the overlay.

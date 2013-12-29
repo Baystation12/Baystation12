@@ -1729,7 +1729,7 @@ ________________________________________________________________________________
 					<li>*<b>Energy Net</b> (<i>5000E</i>) is a non-lethal solution to incapacitating humanoids. The net is made of non-harmful phase energy and will halt movement as long as it remains in effect--it can be destroyed. If the net is not destroyed, after a certain time it will teleport the target to a holding facility for the Spider Clan and then vanish. You will be notified if the net fails or succeeds in capturing a target in this manner. Combine with energy stars or stripping to ensure success. Abduction never looked this leet.</li>
 					<li>*<b>Adrenaline Boost</b> (<i>1 E. Boost/3</i>) recovers the user from stun, weakness, and paralysis. Also injects 20 units of radium into the bloodstream.</li>
 					<li>*<b>Smoke Bomb</b> (<i>1 Sm.Bomb/10</i>) is a weak but potentially useful ability. It creates harmful smoke and can be used in tandem with other powers to confuse enemies.</li>
-					<li>*<b><a href='byond://?src=\ref[src];choice=32'>???</a></b>: unleash the <b>True Ultimate Power!</b></li>
+					<li>*<b>???</b>: unleash the <b>True Ultimate Power!</b></li>
 					<h4>IMPORTANT:</h4>
 					<ul>
 					<li>*Make sure to toggle Special Interaction from the Ninja Equipment menu to interact differently with certain objects.</li>
