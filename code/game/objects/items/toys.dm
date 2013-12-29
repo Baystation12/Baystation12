@@ -246,7 +246,7 @@
 					for(var/mob/living/M in D.loc)
 						if(!istype(M,/mob/living)) continue
 						if(M == user) continue
-						D.visible_message("<span class='danger'>[] was hit by the foam dart!</span>")
+						D.visible_message("<span class='danger'>[M] was hit by the foam dart!</span>")
 						new /obj/item/toy/ammo/crossbow(M.loc)
 						del(D)
 						return

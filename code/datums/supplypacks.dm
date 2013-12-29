@@ -1008,7 +1008,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	contains = list(/obj/item/weapon/vending_refill/boozeomat,
 					/obj/item/weapon/vending_refill/coffee)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "bartending supply crate"
+	group = "Operations"
 
 /datum/supply_packs/organic/vending/snack
 	name = "Snack Supply Crate"
@@ -1016,27 +1018,35 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/vending_refill/snack,
 					/obj/item/weapon/vending_refill/snack)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "snacks supply crate"
+	group = "Operations"
 
 /datum/supply_packs/organic/vending/cola
 	name = "Softdrinks Supply Crate"
 	contains = list(/obj/item/weapon/vending_refill/cola,
 					/obj/item/weapon/vending_refill/cola)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "softdrinks supply crate"
+	group = "Operations"
 
 /datum/supply_packs/organic/vending/cigarette
 	name = "Cigarette Supply Crate"
 	contains = list(/obj/item/weapon/vending_refill/cigarette)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "cigarette supply crate"
+	group = "Operations"
 
 /datum/supply_packs/misc/autodrobe
 	name = "Autodrobe Supply crate"
 	contains = list(/obj/item/weapon/vending_refill/autodrobe,
 					/obj/item/weapon/vending_refill/autodrobe)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "autodrobe supply crate"
+	group = "Operations"
 
 /datum/supply_packs/misc/mafia
 	name = "Mafia Supply crate"
@@ -1044,4 +1054,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/head/fedora/brownfedora =1,/obj/item/clothing/head/fedora =1,/obj/item/clothing/under/flappers =1,/obj/item/clothing/under/mafia =1,/obj/item/clothing/under/mafia/vest =1,/obj/item/clothing/under/mafia/white =1,
 					/obj/item/clothing/under/mafia/sue =1,/obj/item/clothing/under/mafia/tan =1, /obj/item/toy/crossbow/tommygun =2,/obj/item/clothing/tie/accessory/gunholster =1,)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "mafia supply crate"
+	group = "Operations"
