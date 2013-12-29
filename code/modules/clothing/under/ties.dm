@@ -335,3 +335,14 @@
 	..()
 	new /obj/item/weapon/hatchet/unathiknife(hold)
 	new /obj/item/weapon/hatchet/unathiknife(hold)
+
+
+/////////////////
+//Miscellaneous//
+/////////////////
+
+/obj/item/clothing/tie/accessory/gunholster
+	name = "gun holster"
+	desc = "When you just HAVE to show off your guns"
+	icon_state = "gunhulster"
+	_color = "gunhulster"

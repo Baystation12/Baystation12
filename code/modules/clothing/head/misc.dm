@@ -262,3 +262,17 @@
 	item_state = "crown"
 	desc = "A gliterring bananium crown with spessjewels in it. Swaggy."
 	flags = FPRINT | TABLEPASS | BLOCKHAIR
+
+
+/obj/item/clothing/head/fedora
+	name = "fedora"
+	desc = "Someone wearing this definitely makes them cool"
+	icon_state = "fedora"
+
+/obj/item/clothing/head/fedora/whitefedora
+	name = "white fedora"
+	icon_state = "wfedora"
+
+/obj/item/clothing/head/fedora/brownfedora
+	name = "brown fedora"
+	icon_state = "bfedora"

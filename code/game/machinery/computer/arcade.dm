@@ -12,6 +12,7 @@
 							/obj/item/toy/crossbow							= 2,
 							/obj/item/weapon/storage/fancy/crayons			= 2,
 							/obj/item/toy/spinningtoy						= 2,
+							/obj/item/toy/crossbow/tommygun					= 2,
 							/obj/item/toy/prize/ripley						= 1,
 							/obj/item/toy/prize/fireripley					= 1,
 							/obj/item/toy/prize/deathripley					= 1,
