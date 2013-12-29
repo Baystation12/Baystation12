@@ -12,7 +12,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	item_state = "electronic"
 	w_class = 1.0
 	flags = FPRINT | TABLEPASS
-	slot_flags = SLOT_ID | SLOT_BELT
+	slot_flags = SLOT_PDA | SLOT_BELT
 
 	//Main variables
 	var/owner = null
