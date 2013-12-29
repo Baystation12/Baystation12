@@ -256,7 +256,7 @@ ________________________________________________________________________________
 		dat += "<h2 ALIGN=CENTER>SpiderOS v.<b>ERR-RR00123</b></h2>"
 	dat += "<br>"
 	dat += "<img src=sos_10.png> Current Time: [worldtime2text()]<br>"
-	dat += "<img src=sos_9.png> Battery Life: [round(cell.charge/100)]%<br>"
+	dat += "<img src=sos_9.png> Battery Life: [round(cell.charge)] ([round(cell.charge/100)]%)<br>"
 	dat += "<img src=sos_11.png> Smoke Bombs: \Roman [s_bombs]<br>"
 	dat += "<img src=sos_14.png> pai Device: "
 	if(pai)
@@ -868,7 +868,7 @@ ________________________________________________________________________________
 	var/mob/living/carbon/human/U = affecting
 	if(s_active)
 		cancel_stealth()
-	else
+	else if(!blade_check(U))
 		anim(U.loc,U,'icons/mob/mob.dmi',,"cloak",,U.dir)
 		s_active=!s_active
 		icon_state = U.gender==FEMALE ? "s-ninjasf" : "s-ninjas"
@@ -879,6 +879,8 @@ ________________________________________________________________________________
 		for(var/mob/O in oviewers(U))
 			O.show_message("[U.name] vanishes into thin air!",1)
 		U.invisibility = INVISIBILITY_OBSERVER
+	else
+		U << "\red <b>ERROR</b>: \black You cannot cloak with an active energy blade."
 	return
 
 /obj/item/clothing/suit/space/space_ninja/proc/cancel_stealth()
