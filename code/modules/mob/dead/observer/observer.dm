@@ -23,6 +23,7 @@
 	universal_speak = 1
 	var/atom/movable/following = null
 	var/medHUD = 0
+
 /mob/dead/observer/New(var/mob/body=null, var/flags=1)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	see_invisible = SEE_INVISIBLE_OBSERVER
@@ -218,6 +219,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Ghost"
 	set desc = "Relinquish your life and enter the land of the dead."
 
+	var/mob/M = src
+
 	if(stat == DEAD)
 		ghostize(1)
 	else
@@ -226,7 +229,15 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		resting = 1
 		var/mob/dead/observer/ghost = ghostize(0)            //0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 		ghost.timeofdeath = world.time // Because the living mob won't have a time of death and we want the respawn timer to work properly.
+
+	var/obj/structure/morgue/Morgue = locate() in M.loc
+	if(istype(M.loc,/obj/structure/morgue))
+		Morgue = M.loc
+	if(Morgue)
+		Morgue.update()
+
 	return
+
 
 /mob/dead/observer/Move(NewLoc, direct)
 	dir = direct
@@ -294,6 +305,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 	mind.current.ajourn=0
 	mind.current.key = key
+
+	var/obj/structure/morgue/Morgue = locate() in mind.current.loc
+	if(istype(mind.current.loc,/obj/structure/morgue))
+		Morgue = mind.current.loc
+	if(Morgue)
+		Morgue.update()
+
 	return 1
 
 /mob/dead/observer/verb/toggle_medHUD()
