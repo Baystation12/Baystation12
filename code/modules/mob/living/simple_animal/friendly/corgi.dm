@@ -22,6 +22,7 @@
 	var/obj/item/inventory_back
 	var/facehugger
 
+/*
 /mob/living/simple_animal/corgi/Life()
 	..()
 	regenerate_icons()
@@ -253,6 +254,7 @@
 		if(/obj/item/clothing/head/soft)
 			name = "Corgi Tech [real_name]"
 			desc = "The reason your yellow gloves have chew-marks."
+*/
 
 
 //IAN! SQUEEEEEEEEE~

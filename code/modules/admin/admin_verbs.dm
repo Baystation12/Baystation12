@@ -65,6 +65,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/toggleattacklogs,
 	/client/proc/toggledebuglogs,
+	/client/proc/toggleghostwriters,
 	/datum/admins/proc/show_skills,
 	/client/proc/check_customitem_activity,
 	/client/proc/man_up,
@@ -722,6 +723,21 @@ var/list/admin_verbs_mod = list(
 		usr << "You now will get attack log messages"
 	else
 		usr << "You now won't get attack log messages"
+
+
+/client/proc/toggleghostwriters()
+	set name = "Toggle ghost writers"
+	set category = "Server"
+	if(!holder)	return
+	if(config)
+		if(config.cult_ghostwriter)
+			config.cult_ghostwriter = 0
+			src << "<b>Disallowed ghost writers.</b>"
+			message_admins("Admin [key_name_admin(usr)] has disabled ghost writers.", 1)
+		else
+			config.cult_ghostwriter = 1
+			src << "<b>Enabled ghost writers.</b>"
+			message_admins("Admin [key_name_admin(usr)] has enabled ghost writers.", 1)
 
 
 /client/proc/toggledebuglogs()

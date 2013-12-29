@@ -25,7 +25,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/New()
 	..()
-	color = basecolor
+	update_icon()
 	if(istype(src, /obj/effect/decal/cleanable/blood/gibs))
 		return
 	if(istype(src, /obj/effect/decal/cleanable/blood/tracks))
@@ -116,13 +116,16 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/writing/New()
 	..()
-	for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
-		random_icon_states.Remove(W.icon_state)
-	icon_state = pick(random_icon_states)
+	if(random_icon_states.len)
+		for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
+			random_icon_states.Remove(W.icon_state)
+		icon_state = pick(random_icon_states)
+	else
+		icon_state = "writing1"
 
 /obj/effect/decal/cleanable/blood/writing/examine()
 	..()
-	usr << "It reads: <font color='basecolor'>\"[message]\"<font>"
+	usr << "It reads: <font color='[basecolor]'>\"[message]\"<font>"
 
 /obj/effect/decal/cleanable/blood/gibs
 	name = "gibs"
@@ -134,6 +137,12 @@ var/global/list/image/splatter_cache=list()
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "gibbl5"
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6")
+
+/obj/effect/decal/cleanable/blood/gibs/update_icon()
+	color = "#FFFFFF"
+	//overlays.Cut()
+	//..()
+	//overlays += image(icon, src, "[icon_state]_flesh")
 
 /obj/effect/decal/cleanable/blood/gibs/up
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6","gibup1","gibup1","gibup1")
@@ -159,6 +168,7 @@ var/global/list/image/splatter_cache=list()
                         if (i > 0)
                                 var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(src.loc)
                                 b.basecolor = src.basecolor
+                                b.update_icon()
                                 for(var/datum/disease/D in src.viruses)
                                         var/datum/disease/ND = D.Copy(1)
                                         b.viruses += ND

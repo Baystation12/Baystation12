@@ -7,8 +7,10 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 */
 
 /obj/item/device/uplink
+
 	var/welcome 					// Welcoming menu message
 	var/items						// List of items
+	var/valid_items = list()
 	var/item_data					// raw item text
 	var/list/ItemList				// Parsed list of items
 	var/uses 						// Numbers of crystals
@@ -58,6 +60,12 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 
 
+	//Halfassed fix for href exploit ~Z
+	for(var/D in ItemList)
+		var/list/O = stringsplit(D, ":")
+		if(O.len>0)
+			valid_items += O[1]
+
 //Let's build a menu!
 /obj/item/device/uplink/proc/generate_menu()
 
@@ -87,7 +95,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			continue
 
 		path_text = O[1]
-		cost = text2num(O[2])
+		cost = Clamp(text2num(O[2]),1,20) //Another halfassed fix for href exploit ~Z
 
 		if(cost>uses)
 			continue
@@ -378,7 +386,12 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			return 1
 
 		if(..(href, href_list) == 1)
+
+			if(!(href_list["buy_item"] in valid_items))
+				return
+
 			var/path_obj = text2path(href_list["buy_item"])
+
 			var/obj/I = new path_obj(get_turf(usr))
 			if(ishuman(usr))
 				var/mob/living/carbon/human/A = usr
@@ -427,6 +440,3 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	..()
 	hidden_uplink = new(src)
 	hidden_uplink.uses = 10
-
-
-

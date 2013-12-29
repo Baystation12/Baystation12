@@ -520,7 +520,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	else
 		if(blood_DNA)
 			var/image/bloodsies	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "bloodyhands")
-			bloodsies.color = blood_color
+			bloodsies.color = hand_blood_color
 			overlays_standing[GLOVES_LAYER]	= bloodsies
 		else
 			overlays_standing[GLOVES_LAYER]	= null
