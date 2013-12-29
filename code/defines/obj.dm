@@ -177,8 +177,8 @@ We can't just insert in HTML into the nanoUI so we need the raw data to play wit
 	var/bot[0]  
 	var/misc[0]  
 	for(var/datum/data/record/t in data_core.general)
-		var/name = t.fields["name"]
-		var/rank = t.fields["rank"]
+		var/name = sanitize(t.fields["name"])
+		var/rank = sanitize(t.fields["rank"])
 		var/real_rank = t.fields["real_rank"]
 		var/isactive = t.fields["p_stat"]
 		var/department = 0
