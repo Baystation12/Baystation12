@@ -30,6 +30,7 @@
 	var/obj/item/clothing/head/helmet/space/space_ninja/n_hood
 	var/obj/item/clothing/shoes/space_ninja/n_shoes
 	var/obj/item/clothing/gloves/space_ninja/n_gloves
+	var/obj/item/clothing/mask/gas/voice/space_ninja/n_mask
 
 		//Main function variables.
 	var/s_initialized = 0//Suit starts off.

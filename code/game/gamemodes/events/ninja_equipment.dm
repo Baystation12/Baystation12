@@ -256,7 +256,7 @@ ________________________________________________________________________________
 		dat += "<h2 ALIGN=CENTER>SpiderOS v.<b>ERR-RR00123</b></h2>"
 	dat += "<br>"
 	dat += "<img src=sos_10.png> Current Time: [worldtime2text()]<br>"
-	dat += "<img src=sos_9.png> Battery Life: [round(cell.charge/100)]%<br>"
+	dat += "<img src=sos_9.png> Battery Life: [round(cell.charge)] ([round(cell.charge/100)]%)<br>"
 	dat += "<img src=sos_11.png> Smoke Bombs: \Roman [s_bombs]<br>"
 	dat += "<img src=sos_14.png> pai Device: "
 	if(pai)
@@ -391,7 +391,7 @@ ________________________________________________________________________________
 					</ul>
 					<b>Abilities</b>:
 					<ul>
-					<li>*<b>Phase Shift</b> (<i>250E</i>)is a unique power in that they can be used for defense and offense.Phase Shift can only be used on turf in view but is precise (cannot be used on walls). Any living mob in the area teleported to is instantly gibbed (mechs are damaged, huggers and other similar critters are killed). It is possible to teleport with a target, provided you grab them before teleporting.</li>
+					<li>*<b>Phase Shift</b> (<i>500E</i>) and <b>Phase Jaunt</b> (<i>250E</i>) are unique powers in that they can both be used for defense and offense. Jaunt launches the ninja forward facing up to 9 squares, somewhat randomly selecting the final destination. Shift can only be used on turf in view but is precise (cannot be used on walls). Any living mob in the area teleported to is instantly gibbed (mechs are damaged, huggers and other similar critters are killed). It is possible to teleport with a target, provided you grab them before teleporting. </li>
 					<li>*<b>Energy Blade</b> (<i>200E</i>) is a highly effective weapon. It is summoned directly to the ninja's hand and can also function as an EMAG for certain objects (doors/lockers/etc). You may also use it to cut through walls and disabled doors. Experiment! The blade will crit humans in two hits. This item cannot be placed in containers and when dropped or thrown disappears. Having an energy blade drains more power from the battery each tick.</li>
 					<li>*<b>EM Pulse</b> (<i>1000E</i>) is a highly useful ability that will create an electromagnetic shockwave around the ninja, disabling technology whenever possible. If used properly it can render a security force effectively useless. Of course, getting beat up with a toolbox is not accounted for.</li>
 					<li>*<b>Energy Star</b> (<i>500E</i>) is a ninja star made of green energy AND coated in poison. It works by picking a random living target within range and can be spammed to great effect in incapacitating foes. Just remember that the poison used is also used by the Xeno Hivemind (and will have no effect on them).</li>
@@ -492,12 +492,12 @@ ________________________________________________________________________________
 			U << browse(null, "window=spideros")//Closes the window.
 			return
 
-		if(k_unlock!=7&&href_list["choice"]!="Return")
-			var/u1=text2num(href_list["choice"]) // Get the number of the choice
-			var/u2=(u1?abs(abs(k_unlock-u1)-2):1) //If u1 is not 0, get the absoloute value of(absoloute value of K_unlock-u1)-2, otherwise return 1
-			k_unlock=(!u2? k_unlock+1:0)
-			if(k_unlock==7)
-				U << "Anonymous Messenger blinks."
+	if(k_unlock!=7&&href_list["choice"]!="Return")
+		var/u1=text2num(href_list["choice"])
+		var/u2=(u1?abs(abs(k_unlock-u1)-2):1)
+		k_unlock=(!u2? k_unlock+1:0)
+		if(k_unlock==7)
+			U << "Anonymous Messenger blinks."
 	else
 		if(!affecting||A.stat||!s_initialized||A.loc!=src)
 			A << "\red This function is not available at this time."
@@ -868,7 +868,7 @@ ________________________________________________________________________________
 	var/mob/living/carbon/human/U = affecting
 	if(s_active)
 		cancel_stealth()
-	else
+	else if(!blade_check(U))
 		anim(U.loc,U,'icons/mob/mob.dmi',,"cloak",,U.dir)
 		s_active=!s_active
 		icon_state = U.gender==FEMALE ? "s-ninjasf" : "s-ninjas"
@@ -879,6 +879,8 @@ ________________________________________________________________________________
 		for(var/mob/O in oviewers(U))
 			O.show_message("[U.name] vanishes into thin air!",1)
 		U.invisibility = INVISIBILITY_OBSERVER
+	else
+		U << "\red <b>ERROR</b>: \black You cannot cloak with an active energy blade."
 	return
 
 /obj/item/clothing/suit/space/space_ninja/proc/cancel_stealth()
