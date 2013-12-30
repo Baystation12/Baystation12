@@ -62,6 +62,9 @@
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 
+	var/assistantlimit = 0 //enables assistant limiting
+	var/assistantratio = 2 //how many assistants to security members
+
 	var/usealienwhitelist = 0
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
@@ -440,6 +443,11 @@
 						else //probably windows, if not this should work anyway
 							config.python_path = "python"
 
+				if("assistant_limit")
+					config.assistantlimit = 1
+
+				if("assistant_ratio")
+					config.assistantratio = text2num(value)
 				else
 					diary << "Unknown setting in configuration: '[name]'"
 
