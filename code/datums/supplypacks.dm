@@ -260,40 +260,41 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_hydroponics
 	group = "Hydroponics"
 
-/datum/supply_packs/organic
-	group = "Organic"
-	containertype = /obj/structure/closet/crate/freezer
-
 //////// livestock
 /datum/supply_packs/organic/cow
 	name = "Cow Crate"
 	cost = 30
-	containertype = /obj/structure/closet/critter/cow
+	containertype = /obj/structure/largecrate/cow
 	containername = "cow crate"
+	group = "Organic"
 
 /datum/supply_packs/organic/goat
 	name = "Goat Crate"
 	cost = 25
-	containertype = /obj/structure/closet/critter/goat
+	containertype = /obj/structure/largecrate/goat
 	containername = "goat crate"
+	group = "Organic"
 
 /datum/supply_packs/organic/chicken
 	name = "Chicken Crate"
 	cost = 20
-	containertype = /obj/structure/closet/critter/chick
+	containertype = /obj/structure/largecrate/chick
 	containername = "chicken crate"
+	group = "Organic"
 
 /datum/supply_packs/organic/corgi
 	name = "Corgi Crate"
 	cost = 50
-	containertype = /obj/structure/closet/critter/corgi
+	containertype = /obj/structure/largecrate/lisa
 	containername = "corgi crate"
+	group = "Organic"
 
 /datum/supply_packs/organic/cat
 	name = "Cat crate"
 	cost = 50 //Cats are worth as much as corgis.
-	containertype = /obj/structure/closet/critter/cat
+	containertype = /obj/structure/largecrate/cat
 	containername = "cat crate"
+	group = "Organic"
 
 /datum/supply_packs/seeds
 	name = "Seeds Crate"
@@ -1003,7 +1004,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Hydroponics"
 
 
-/datum/supply_packs/organic/vending
+/datum/supply_packs/vending
 	name = "Bartending Supply Crate"
 	contains = list(/obj/item/weapon/vending_refill/boozeomat,
 					/obj/item/weapon/vending_refill/coffee)
@@ -1012,7 +1013,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "bartending supply crate"
 	group = "Operations"
 
-/datum/supply_packs/organic/vending/snack
+/datum/supply_packs/vending/snack
 	name = "Snack Supply Crate"
 	contains = list(/obj/item/weapon/vending_refill/snack,
 					/obj/item/weapon/vending_refill/snack,
@@ -1022,7 +1023,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "snacks supply crate"
 	group = "Operations"
 
-/datum/supply_packs/organic/vending/cola
+/datum/supply_packs/vending/cola
 	name = "Softdrinks Supply Crate"
 	contains = list(/obj/item/weapon/vending_refill/cola,
 					/obj/item/weapon/vending_refill/cola)
@@ -1031,7 +1032,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "softdrinks supply crate"
 	group = "Operations"
 
-/datum/supply_packs/organic/vending/cigarette
+/datum/supply_packs/vending/cigarette
 	name = "Cigarette Supply Crate"
 	contains = list(/obj/item/weapon/vending_refill/cigarette)
 	cost = 15
@@ -1039,7 +1040,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "cigarette supply crate"
 	group = "Operations"
 
-/datum/supply_packs/misc/autodrobe
+/datum/supply_packs/autodrobe
 	name = "Autodrobe Supply crate"
 	contains = list(/obj/item/weapon/vending_refill/autodrobe,
 					/obj/item/weapon/vending_refill/autodrobe)
@@ -1048,7 +1049,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "autodrobe supply crate"
 	group = "Operations"
 
-/datum/supply_packs/misc/mafia
+/datum/supply_packs/mafia
 	name = "Mafia Supply crate"
 	contains = list(/obj/item/clothing/suit/browntrenchcoat =1,/obj/item/clothing/suit/blacktrenchcoat =1,/obj/item/clothing/head/fedora/whitefedora =1,
 					/obj/item/clothing/head/fedora/brownfedora =1,/obj/item/clothing/head/fedora =1,/obj/item/clothing/under/flappers =1,/obj/item/clothing/under/mafia =1,/obj/item/clothing/under/mafia/vest =1,/obj/item/clothing/under/mafia/white =1,
