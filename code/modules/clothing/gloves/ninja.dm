@@ -19,6 +19,7 @@
 	var/candrain = 0
 	var/mindrain = 200
 	var/maxdrain = 400
+	species_restricted = null
 
 /*
 	This runs the gamut of what ninja gloves can do

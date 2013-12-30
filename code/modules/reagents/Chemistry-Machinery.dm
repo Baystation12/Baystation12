@@ -10,10 +10,10 @@
 	icon_state = "dispenser"
 	use_power = 0
 	idle_power_usage = 40
-	var/ui_name = "Chem Dispenser 5000" 
+	var/ui_name = "Chem Dispenser 5000"
 	var/energy = 100
 	var/max_energy = 100
-	var/amount = 30	
+	var/amount = 30
 	var/accept_glass = 0
 	var/beaker = null
 	var/recharged = 0
@@ -434,7 +434,6 @@
 				reagents.clear_reagents()
 				icon_state = "mixer0"
 		else if (href_list["createpill"] || href_list["createpill_multiple"])
-
 			var/count = 1
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
@@ -453,7 +452,6 @@
 
 			if(reagents.total_volume/count < 1) //Sanity checking.
 				return
-            
 			while (count--)
 				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
 				if(!name) name = reagents.get_master_reagent_name()

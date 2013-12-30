@@ -38,6 +38,7 @@
 	var/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/list/allowed = null //suit storage stuff.
 	var/obj/item/device/uplink/hidden/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
+	var/icon_override = null  //Used to override hardcoded clothing dmis in human clothing proc.
 
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
@@ -522,29 +523,28 @@
 			"\red You stab yourself in the eyes with [src]!" \
 		)
 	if(istype(M, /mob/living/carbon/human))
+		var/datum/organ/internal/eyes/eyes = H.internal_organs["eyes"]
+		eyes.damage += rand(3,4)
+		if(eyes.damage >= eyes.min_bruised_damage)
+			if(M.stat != 2)
+				if(eyes.robotic <= 1) //robot eyes bleeding might be a bit silly
+					M << "\red Your eyes start to bleed profusely!"
+			if(prob(50))
+				if(M.stat != 2)
+					M << "\red You drop what you're holding and clutch at your eyes!"
+					M.drop_item()
+				M.eye_blurry += 10
+				M.Paralyse(1)
+				M.Weaken(4)
+			if (eyes.damage >= eyes.min_broken_damage)
+				if(M.stat != 2)
+					M << "\red You go blind!"
 		var/datum/organ/external/affecting = M:get_organ("head")
 		if(affecting.take_damage(7))
 			M:UpdateDamageIcon()
 	else
 		M.take_organ_damage(7)
 	M.eye_blurry += rand(3,4)
-	M.eye_stat += rand(2,4)
-	if (M.eye_stat >= 10)
-		M.eye_blurry += 15+(0.1*M.eye_blurry)
-		M.disabilities |= NEARSIGHTED
-		if(M.stat != 2)
-			M << "\red Your eyes start to bleed profusely!"
-		if(prob(50))
-			if(M.stat != 2)
-				M << "\red You drop what you're holding and clutch at your eyes!"
-				M.drop_item()
-			M.eye_blurry += 10
-			M.Paralyse(1)
-			M.Weaken(4)
-		if (prob(M.eye_stat - 10 + 1))
-			if(M.stat != 2)
-				M << "\red You go blind!"
-			M.sdisabilities |= BLIND
 	return
 
 /obj/item/clean_blood()
