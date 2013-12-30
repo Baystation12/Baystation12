@@ -195,6 +195,83 @@
 			busy = 0
 			stop_automated_movement = 0
 
+
+
+/mob/living/simple_animal/hostile/giant_spider/verb/web()
+	set category = "Alien"
+	set name = "Spin Web"
+	set desc = "Create a web that slows down movement."
+
+	var/obj/effect/spider/stickyweb/W = locate() in get_turf(src)
+	if(!W)
+		busy = SPINNING_WEB
+		src.visible_message("\blue \the [src] begins to secrete a sticky substance.")
+		spawn(40)
+			if(busy == SPINNING_WEB)
+				new /obj/effect/spider/stickyweb(src.loc)
+
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/verb/cocoon()
+	set category = "Alien"
+	set name = "Cocoon and Feed"
+	set desc = "Cocooned an incapacitated mob so you can feed upon it."
+
+	for(var/mob/living/P in range(1,src))
+		cocoon_target = P
+		if(P.stat && !istype(P,/mob/living/simple_animal/hostile/giant_spider))
+			if(get_dist(src, cocoon_target) <= 1)
+				busy = SPINNING_COCOON
+				src.visible_message("\blue \the [src] begins to secrete a sticky substance around \the [cocoon_target].")
+				walk(src,0)
+				spawn(50)
+					if(busy == SPINNING_COCOON)
+						if(cocoon_target && istype(cocoon_target.loc, /turf) && get_dist(src,cocoon_target) <= 1)
+							var/obj/effect/spider/cocoon/C = new(cocoon_target.loc)
+							var/large_cocoon = 0
+							C.pixel_x = cocoon_target.pixel_x
+							C.pixel_y = cocoon_target.pixel_y
+							for(var/mob/living/M in C.loc)
+								if(istype(M, /mob/living/simple_animal/hostile/giant_spider))
+									continue
+								large_cocoon = 1
+								fed++
+								src.visible_message("\red \the [src] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out.")
+								M.loc = C
+								C.pixel_x = M.pixel_x
+								C.pixel_y = M.pixel_y
+								break
+							for(var/obj/item/I in C.loc)
+								I.loc = C
+							for(var/obj/structure/S in C.loc)
+								if(!S.anchored)
+									S.loc = C
+								large_cocoon = 1
+							for(var/obj/machinery/M in C.loc)
+								if(!M.anchored)
+									M.loc = C
+								large_cocoon = 1
+							if(large_cocoon)
+								C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
+						busy = 0
+
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/verb/eggs()
+	set category = "Alien"
+	set name = "Lay Eggs"
+	set desc = "Lay a clutch of eggs to make new spiderlings. Requires you to have fed."
+
+	var/obj/effect/spider/eggcluster/E = locate() in get_turf(src)
+	if(!E && fed > 0)
+		busy = LAYING_EGGS
+		src.visible_message("\blue \the [src] begins to lay a cluster of eggs.")
+		spawn(50)
+			if(busy == LAYING_EGGS)
+				E = locate() in get_turf(src)
+				if(!E)
+					new /obj/effect/spider/eggcluster(src.loc)
+					fed--
+					busy = 0
+
 #undef SPINNING_WEB
 #undef LAYING_EGGS
 #undef MOVING_TO_TARGET
