@@ -4,7 +4,7 @@
 /datum/game_mode/var/list/borers = list()
 
 /datum/game_mode/borer
-	name = "Cortical Borers"
+	name = "corticalborers"
 	config_tag = "borer"
 	required_players = 3
 	required_players_secret = 10

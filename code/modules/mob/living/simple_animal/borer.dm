@@ -459,7 +459,7 @@ mob/living/simple_animal/borer/proc/detatch()
 
 //Procs for grabbing players.
 mob/living/simple_animal/borer/proc/request_player()
-	for(var/mob/dead/observer/O in player_list)
+	for(var/mob/O in respawnable_list)
 		if(jobban_isbanned(O, "Syndicate"))
 			continue
 		if(O.client)
