@@ -221,6 +221,7 @@
 #include "code\game\gamemodes\heist\heist.dm"
 #include "code\game\gamemodes\malfunction\Malf_Modules.dm"
 #include "code\game\gamemodes\malfunction\malfunction.dm"
+#include "code\game\gamemodes\meteor\meteor.dm"
 #include "code\game\gamemodes\meteor\meteors.dm"
 #include "code\game\gamemodes\nuclear\nuclear.dm"
 #include "code\game\gamemodes\nuclear\nuclearbomb.dm"
