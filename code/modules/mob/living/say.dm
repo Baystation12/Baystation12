@@ -302,6 +302,7 @@ var/list/department_radio_keys = list(
 	var/list/listening
 
 	listening = get_mobs_in_view(message_range, src)
+	var/list/onscreen = get_mobs_in_view(7, src)
 	for(var/mob/M in player_list)
 		if (!M.client)
 			continue //skip monkeys and leavers
@@ -370,16 +371,19 @@ var/list/department_radio_keys = list(
 	for(var/mob/M in hearers(5, src))
 		if(M != src && is_speaking_radio)
 			M:show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "radio"]</span>")
-
+		
 	var/rendered = null
+	
 	if (length(heard_a))
 		var/message_a = say_quote(message,speaking)
 
 		if (italics)
 			message_a = "<i>[message_a]</i>"
 
+		var/message_ghost = "<b>[message_a]</b>" // bold so ghosts know the person is in view.
 		rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] <span class='message'>[message_a]</span></span>"
-		for (var/M in heard_a)
+		var/rendered_ghost = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] <span class='message'>[message_ghost]</span></span>"
+		for (var/mob/M in heard_a)
 			if(hascall(M,"show_message"))
 				var/deaf_message = ""
 				var/deaf_type = 1
@@ -388,7 +392,10 @@ var/list/department_radio_keys = list(
 				else
 					deaf_message = "<span class='notice'>You cannot hear yourself!</span>"
 					deaf_type = 2 // Since you should be able to hear yourself without looking
-				M:show_message(rendered, 2, deaf_message, deaf_type)
+				if (M.stat == DEAD && (M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
+					M:show_message(rendered_ghost, 2, deaf_message, deaf_type)
+				else
+					M:show_message(rendered, 2, deaf_message, deaf_type)
 				M << speech_bubble
 
 	if (length(heard_b))

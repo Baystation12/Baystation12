@@ -14,6 +14,20 @@ What are the archived variables for?
 #define QUANTIZE(variable)		(round(variable,0.0001))
 #define TRANSFER_FRACTION 5 //What fraction (1/#) of the air difference to try and transfer
 
+/hook/startup/proc/createGasOverlays()
+	plmaster = new /obj/effect/overlay()
+	plmaster.icon = 'icons/effects/tile_effects.dmi'
+	plmaster.icon_state = "plasma"
+	plmaster.layer = FLY_LAYER
+	plmaster.mouse_opacity = 0
+
+	slmaster = new /obj/effect/overlay()
+	slmaster.icon = 'icons/effects/tile_effects.dmi'
+	slmaster.icon_state = "sleeping_agent"
+	slmaster.layer = FLY_LAYER
+	slmaster.mouse_opacity = 0
+	return 1
+
 /datum/gas/sleeping_agent/specific_heat = 40 //These are used for the "Trace Gases" stuff, but is buggy.
 
 /datum/gas/oxygen_agent_b/specific_heat = 300

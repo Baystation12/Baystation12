@@ -37,12 +37,17 @@
 
 	var/flags = 0       // Various specific features.
 
+	var/list/abilities = list()	// For species-derived or admin-given powers
+
 /datum/species/human
 	name = "Human"
 	language = "Sol Common"
 	primitive = /mob/living/carbon/monkey
 
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR
+
+	//If you wanted to add a species-level ability:
+	/*abilities = list(/client/proc/test_ability)*/
 
 /datum/species/unathi
 	name = "Unathi"

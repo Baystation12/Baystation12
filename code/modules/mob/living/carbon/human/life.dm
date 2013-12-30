@@ -242,7 +242,7 @@
 					var/rads = radiation/25
 					radiation -= rads
 					nutrition += rads
-					heal_overall_damage(rads,rads)
+					adjustBruteLoss(-(rads))
 					adjustOxyLoss(-(rads))
 					adjustToxLoss(-(rads))
 					updatehealth()
@@ -887,8 +887,8 @@
 
 			if(nutrition > 500)
 				nutrition = 500
-			if(light_amount > 2) //if there's enough light, heal
-				heal_overall_damage(1,1)
+			if(light_amount > 5) //if there's enough light, heal
+				adjustBruteLoss(-1)
 				adjustToxLoss(-1)
 				adjustOxyLoss(-1)
 		if(dna && dna.mutantrace == "shadow")
@@ -959,6 +959,9 @@
 
 		var/datum/organ/internal/liver/liver = internal_organs["liver"]
 		liver.process()
+
+		var/datum/organ/internal/eyes/eyes = internal_organs["eyes"]
+		eyes.process()
 
 		updatehealth()
 
@@ -1335,10 +1338,6 @@
 				if(!O.up && tinted_weldhelh)
 					client.screen += global_hud.darkMask
 
-			if(eye_stat > 20)
-				if(eye_stat > 30)	client.screen += global_hud.darkMask
-				else				client.screen += global_hud.vimpaired
-
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)
 			else
@@ -1495,6 +1494,15 @@
 			if(R.id in tachycardics)
 				if(temp <= PULSE_FAST && temp >= PULSE_NONE)
 					temp++
+					break
+		for(var/datum/reagent/R in reagents.reagent_list) //To avoid using fakedeath
+			if(R.id in heartstopper)
+				temp = PULSE_NONE
+				break
+		for(var/datum/reagent/R in reagents.reagent_list) //Conditional heart-stoppage
+			if(R.id in cheartstopper)
+				if(R.volume >= R.overdose)
+					temp = PULSE_NONE
 					break
 
 		return temp
