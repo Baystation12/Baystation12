@@ -1460,7 +1460,7 @@ datum/design/flora_gun
 	id = "flora_gun"
 	req_tech = list("materials" = 2, "biotech" = 3, "powerstorage" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 2000, "$glass" = 500, "$uranium" = 500)
+	materials = list("$metal" = 2000, "$glass" = 500, "mutagen" = 50)
 	build_path = "/obj/item/weapon/gun/energy/floragun"
 
 datum/design/portaseed
