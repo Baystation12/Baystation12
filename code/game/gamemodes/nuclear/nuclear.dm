@@ -129,13 +129,16 @@
 
 	var/nuke_code = "[rand(10000, 99999)]"
 	var/leader_selected = 0
-	var/agent_number = 1
 	var/spawnpos = 1
 
 	for(var/datum/mind/synd_mind in syndicates)
 		if(spawnpos > synd_spawn.len)
 			spawnpos = 1
 		synd_mind.current.loc = synd_spawn[spawnpos]
+
+		synd_mind.current.real_name = "[syndicate_name()] Operative" // placeholder while we get their actual name
+		spawn(0)
+			NukeNameAssign(synd_mind)
 
 		forge_syndicate_objectives(synd_mind)
 		greet_syndicate(synd_mind)
@@ -144,9 +147,7 @@
 		if(!leader_selected)
 			prepare_syndicate_leader(synd_mind, nuke_code)
 			leader_selected = 1
-		else
-			synd_mind.current.real_name = "[syndicate_name()] Operative #[agent_number]"
-			agent_number++
+
 		spawnpos++
 		update_synd_icons_added(synd_mind)
 
@@ -165,10 +166,6 @@
 
 
 /datum/game_mode/proc/prepare_syndicate_leader(var/datum/mind/synd_mind, var/nuke_code)
-//	var/leader_title = pick("Czar", "Boss", "Commander", "Chief", "Kingpin", "Director", "Overlord")
-	spawn(1)
-//		NukeNameAssign(nukelastname(synd_mind.current),syndicates) //allows time for the rest of the syndies to be chosen
-	synd_mind.current.real_name = "[pick(first_names_male)] [pick(last_names)]"
 	if (nuke_code)
 		synd_mind.store_memory("<B>Syndicate Nuclear Bomb Code</B>: [nuke_code]", 0, 0)
 		synd_mind.current << "The nuclear authorization code is: <B>[nuke_code]</B>"
@@ -370,12 +367,14 @@
 
 	return newname
 */
-/proc/NukeNameAssign(var/lastname,var/list/syndicates)
-	for(var/datum/mind/synd_mind in syndicates)
-		switch(synd_mind.current.gender)
-			if(MALE)
-				synd_mind.name = "[pick(first_names_male)] [pick(last_names)]"
-			if(FEMALE)
-				synd_mind.name = "[pick(first_names_female)] [pick(last_names)]"
-		synd_mind.current.real_name = synd_mind.name
-	return
+
+/proc/NukeNameAssign(var/datum/mind/synd_mind)
+	var/choose_name = input(synd_mind.current, "You are a [syndicate_name()] agent! What is your name?", "Choose a name") as text
+
+	if(!choose_name)
+		return
+
+	else
+		synd_mind.current.name = choose_name
+		synd_mind.current.real_name = choose_name
+		return
