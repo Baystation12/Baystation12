@@ -11,8 +11,9 @@
 	volume = 5
 	var/filled = 0
 
-	afterattack(obj/target, mob/user , flag)
+	afterattack(obj/target, mob/user , proximity)
 		if(!target.reagents) return
+		if(!proximity) return
 
 		if(filled)
 
