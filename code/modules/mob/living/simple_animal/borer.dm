@@ -43,7 +43,6 @@
 	friendly = "prods"
 	wander = 0
 	pass_flags = PASSTABLE
-	can_hide = 1
 
 	var/used_dominate
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
@@ -487,3 +486,24 @@ mob/living/simple_animal/borer/proc/transfer_personality(var/client/candidate)
 	src.ckey = candidate.ckey
 	if(src.mind)
 		src.mind.assigned_role = "Cortical Borer"
+
+/mob/living/simple_animal/borer/verb/borerhide()
+	set category = "Alien"
+	set name = "Hide"
+	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
+
+	if(stat != CONSCIOUS)
+		return
+
+	if (layer != TURF_LAYER+0.2)
+		layer = TURF_LAYER+0.2
+		src << text("\green You are now hiding.")
+		for(var/mob/O in oviewers(src, null))
+			if ((O.client && !( O.blinded )))
+				O << text("<B>[] scurries to the ground!</B>", src)
+	else
+		layer = MOB_LAYER
+		src << text("\green You have stopped hiding.")
+		for(var/mob/O in oviewers(src, null))
+			if ((O.client && !( O.blinded )))
+				O << text("[] slowly peaks up from the ground...", src)
