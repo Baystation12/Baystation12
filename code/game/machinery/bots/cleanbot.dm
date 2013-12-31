@@ -66,6 +66,8 @@
 
 /obj/machinery/bot/cleanbot/turn_off()
 	..()
+	if(!isnull(src.target))
+		target.targeted_by = null
 	src.target = null
 	src.oldtarget = null
 	src.oldloc = null
@@ -165,7 +167,6 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 		return
 	if(src.cleaning)
 		return
-	var/list/cleanbottargets = list()
 
 	if(!src.screwloose && !src.oddbutton && prob(5))
 		visible_message("[src] makes an excited beeping booping sound!")
@@ -194,9 +195,10 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 	if(!src.target || src.target == null)
 		for (var/obj/effect/decal/cleanable/D in view(7,src))
 			for(var/T in src.target_types)
-				if(!(D in cleanbottargets) && (D.type == T || D.parent_type == T) && D != src.oldtarget)
-					src.oldtarget = D
-					src.target = D
+				if(isnull(D.targeted_by) && (D.type == T || D.parent_type == T) && D != src.oldtarget)   // If the mess isn't targeted
+					src.oldtarget = D								 // or if it is but the bot is gone.
+					src.target = D									 // and it's stuff we clean?  Clean it.
+					D.targeted_by = src	// Claim the mess we are targeting.
 					return
 
 	if(!src.target || src.target == null)
@@ -238,6 +240,7 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 			if(src.path.len == 0)
 				src.oldtarget = src.target
 				src.target = null
+				target.targeted_by = null
 		return
 	if(src.path.len > 0 && src.target && (src.target != null))
 		step_to(src, src.path[1])
@@ -312,7 +315,10 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 	src.icon_state = "cleanbot-c"
 	visible_message("\red [src] begins to clean up the [target]")
 	src.cleaning = 1
-	spawn(50)
+	var/cleantime = 50
+	if(istype(target,/obj/effect/decal/cleanable/dirt))		// Clean Dirt much faster
+		cleantime = 10
+	spawn(cleantime)
 		src.cleaning = 0
 		del(target)
 		src.icon_state = "cleanbot[src.on]"
