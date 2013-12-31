@@ -280,7 +280,6 @@
 	blinded = 0
 	eye_blind = 0
 	eye_blurry = 0
-	eye_stat = 0
 	ear_deaf = 0
 	ear_damage = 0
 	heal_overall_damage(getBruteLoss(), getFireLoss())

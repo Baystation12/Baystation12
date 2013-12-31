@@ -13,6 +13,10 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	var/ready = 0
 
 
+/hook/startup/proc/paiControllerSetup()
+	paiController = new /datum/paiController()
+	return 1
+
 
 /datum/paiController
 	var/list/pai_candidates = list()
@@ -191,6 +195,8 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 	proc/requestRecruits()
 		for(var/mob/dead/observer/O in player_list)
+			if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+				continue
 			if(jobban_isbanned(O, "pAI"))
 				continue
 			if(asked.Find(O.key))

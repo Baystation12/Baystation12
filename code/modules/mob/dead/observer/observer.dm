@@ -16,6 +16,9 @@
 	var/started_as_observer //This variable is set to 1 when you enter the game as an observer.
 							//If you died in the game and are a ghsot - this will remain as null.
 							//Note that this is not a reliable way to determine if admins started as observers, since they change mobs a lot.
+	var/has_enabled_antagHUD = 0
+	var/medHUD = 0
+	var/antagHUD = 0
 	universal_speak = 1
 	var/atom/movable/following = null
 /mob/dead/observer/New(mob/body)
@@ -23,6 +26,7 @@
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
 	verbs += /mob/dead/observer/proc/dead_tele
+	
 	stat = DEAD
 
 	var/turf/T
@@ -87,12 +91,122 @@ Transfer_mind is there to check if mob is being deleted/not going to have a body
 Works together with spawning an observer, noted above.
 */
 
+/mob/dead/observer/Life()
+	..()
+	if(!loc) return		
+	if(!client) return 0
+
+
+	if(client.images.len)
+		for(var/image/hud in client.images)	
+			if(copytext(hud.icon_state,1,4) == "hud")
+				client.images.Remove(hud)
+	if(antagHUD)
+		var/list/target_list = list()
+		for(var/mob/living/target in oview(src))
+			if( target.mind&&(target.mind.special_role||issilicon(target)) )
+				target_list += target
+		if(target_list.len)
+			assess_targets(target_list, src)
+	if(medHUD)
+		process_medHUD(src)
+
+
+// Direct copied from medical HUD glasses proc, used to determine what health bar to put over the targets head.
+/mob/dead/proc/RoundHealth(var/health)
+	switch(health)
+		if(100 to INFINITY)
+			return "health100"
+		if(70 to 100)
+			return "health80"
+		if(50 to 70)
+			return "health60"
+		if(30 to 50)
+			return "health40"
+		if(18 to 30)
+			return "health25"
+		if(5 to 18)
+			return "health10"
+		if(1 to 5)
+			return "health1"
+		if(-99 to 0)
+			return "health0"
+		else
+			return "health-100"
+	return "0"
+
+
+// Pretty much a direct copy of Medical HUD stuff, except will show ill if they are ill instead of also checking for known illnesses.
+
+/mob/dead/proc/process_medHUD(var/mob/M)
+	var/client/C = M.client
+	var/image/holder
+	for(var/mob/living/carbon/human/patient in oview(M))
+		var/foundVirus = 0
+		if(patient.virus2.len)
+			foundVirus = 1
+		if(!C) return 
+		holder = patient.hud_list[HEALTH_HUD]
+		if(patient.stat == 2)
+			holder.icon_state = "hudhealth-100"
+		else
+			holder.icon_state = "hud[RoundHealth(patient.health)]"
+		C.images += holder
+
+		holder = patient.hud_list[STATUS_HUD]
+		if(patient.stat == 2)
+			holder.icon_state = "huddead"
+		else if(patient.status_flags & XENO_HOST)
+			holder.icon_state = "hudxeno"
+		else if(foundVirus)
+			holder.icon_state = "hudill"
+		else
+			holder.icon_state = "hudhealthy"
+		C.images += holder	
+		
+
+/mob/dead/proc/assess_targets(list/target_list, mob/dead/observer/U)
+	var/icon/tempHud = 'icons/mob/hud.dmi'
+	for(var/mob/living/target in target_list)
+		if(iscarbon(target))
+			switch(target.mind.special_role)
+				if("traitor","Syndicate")
+					U.client.images += image(tempHud,target,"hudsyndicate")
+				if("Revolutionary")
+					U.client.images += image(tempHud,target,"hudrevolutionary")
+				if("Head Revolutionary")
+					U.client.images += image(tempHud,target,"hudheadrevolutionary")
+				if("Cultist")
+					U.client.images += image(tempHud,target,"hudcultist")
+				if("Changeling")
+					U.client.images += image(tempHud,target,"hudchangeling")
+				if("Wizard","Fake Wizard")
+					U.client.images += image(tempHud,target,"hudwizard")
+				if("Hunter","Sentinel","Drone","Queen")
+					U.client.images += image(tempHud,target,"hudalien")
+				if("Death Commando")
+					U.client.images += image(tempHud,target,"huddeathsquad")
+				if("Ninja")
+					U.client.images += image(tempHud,target,"hudninja")
+				else//If we don't know what role they have but they have one.
+					U.client.images += image(tempHud,target,"hudunknown1")
+		else//If the silicon mob has no law datum, no inherent laws, or a law zero, add them to the hud.
+			var/mob/living/silicon/silicon_target = target
+			if(!silicon_target.laws||(silicon_target.laws&&(silicon_target.laws.zeroth||!silicon_target.laws.inherent.len))||silicon_target.mind.special_role=="traitor")
+				if(isrobot(silicon_target))//Different icons for robutts and AI.
+					U.client.images += image(tempHud,silicon_target,"hudmalborg")
+				else
+					U.client.images += image(tempHud,silicon_target,"hudmalai")
+	return 1
+
 /mob/proc/ghostize(var/can_reenter_corpse = 1)
 	if(key)
 		var/mob/dead/observer/ghost = new(src)	//Transfer safety to observer spawning proc.
 		ghost.can_reenter_corpse = can_reenter_corpse
 		ghost.timeofdeath = src.timeofdeath //BS12 EDIT
 		ghost.key = key
+		if(!ghost.client.holder && !config.antag_hud_allowed)		// For new ghosts we remove the verb from even showing up if it's not allowed.
+			ghost.verbs -= /mob/dead/observer/verb/toggle_antagHUD	// Poor guys, don't know what they are missing!
 		return ghost
 
 /*
@@ -170,7 +284,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
 		usr << "<span class='warning'>Another consciousness is in your body...It is resisting you.</span>"
 		return
-	if(mind.current.ajourn && mind.current.stat != DEAD) 	//check if the corpse is astral-journeying (it's client ghosted using a cultist rune).
+	if(mind.current.ajourn && mind.current.stat != DEAD)	//check if the corpse is astral-journeying (it's client ghosted using a cultist rune).
 		var/obj/effect/rune/R = locate() in mind.current.loc	//whilst corpse is alive, we can only reenter the body if it's on the rune
 		if(!(R && R.word1 == cultwords["hell"] && R.word2 == cultwords["travel"] && R.word3 == cultwords["self"]))	//astral journeying rune
 			usr << "<span class='warning'>The astral cord that ties your body and your spirit has been severed. You are likely to wander the realm beyond until your body is finally dead and thus reunited with you.</span>"
@@ -178,6 +292,45 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	mind.current.ajourn=0
 	mind.current.key = key
 	return 1
+
+/mob/dead/observer/verb/toggle_medHUD()
+	set category = "Ghost"
+	set name = "Toggle MedicHUD"
+	set desc = "Toggles Medical HUD allowing you to see how everyone is doing"
+	if(!client)
+		return
+	if(medHUD)
+		medHUD = 0
+		src << "\blue <B>Medical HUD Disabled</B>"
+	else
+		medHUD = 1
+		src << "\blue <B>Medical HUD Enabled</B>"
+
+/mob/dead/observer/verb/toggle_antagHUD()
+	set category = "Ghost"
+	set name = "Toggle AntagHUD"
+	set desc = "Toggles AntagHUD allowing you to see who is the antagonist"
+	if(!config.antag_hud_allowed && !client.holder)
+		src << "\red Admins have disabled this for this round."
+		return
+	if(!client)
+		return
+	var/mob/dead/observer/M = src
+	if(jobban_isbanned(M, "AntagHUD"))
+		src << "\red <B>You have been banned from using this feature</B>"
+		return
+	if(config.antag_hud_restricted && !M.has_enabled_antagHUD &&!client.holder) 
+		var/response = alert(src, "If you turn this on, you will not be able to take any part in the round.","Are you sure you want to turn this feature on?","Yes","No")
+		if(response == "No") return
+		M.can_reenter_corpse = 0
+	if(!M.has_enabled_antagHUD && !client.holder)
+		M.has_enabled_antagHUD = 1
+	if(M.antagHUD)
+		M.antagHUD = 0
+		src << "\blue <B>AntagHUD Disabled</B>"
+	else
+		M.antagHUD = 1
+		src << "\blue <B>AntagHUD Enabled</B>"
 
 /mob/dead/observer/proc/dead_tele()
 	set category = "Ghost"

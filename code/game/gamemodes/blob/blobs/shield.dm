@@ -6,7 +6,7 @@
 	density = 1
 	opacity = 0
 	anchored = 1
-	health = 100
+	health = 60
 	brute_resist = 1
 	fire_resist = 2
 
