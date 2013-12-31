@@ -412,17 +412,24 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		else
 			pdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "0")))	
 		count++
+
 	data["convopdas"] = convopdas
 	data["pdas"] = pdas
 	data["pda_count"] = count
-	data["messagescount"] = tnote.len
-	data["messages"] = tnote
+
+	if(mode==21)
+		data["messagescount"] = tnote.len
+		data["messages"] = tnote
+	else
+		data["messagescount"] = null
+		data["messages"] = null
+
 	var/found = 0
 	if(active_conversation)
 		for(var/c in tnote)
 			if(c["target"] == active_conversation)
-				data["convo_name"] = c["owner"]
-				data["convo_job"] = c["job"]
+				data["convo_name"] = sanitize(c["owner"])
+				data["convo_job"] = sanitize(c["job"])
 				found = 1
 				break
 	if(!found)
@@ -435,7 +442,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	
 	if(!ui || mode==3)
 		var/turf/T = get_turf_or_move(user.loc)
-		if(!isnull(T))
+		if(!isnull(T) || mode!=3)
 			var/datum/gas_mixture/environment = T.return_air()
 
 			var/pressure = environment.return_pressure()
@@ -619,8 +626,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				if (in_range(src, U) && loc == U)
 					n = copytext(adminscrub(n), 1, MAX_MESSAGE_LEN)
 					if (mode == 1)
-						note = replacetext(n, "\n", "<BR>")
-						notehtml = n
+						note = html_decode(n)
+						notehtml = note
+						note = replacetext(note, "\n", "<br>")
 				else
 					ui.close()
 			if("Toggle Messenger")
@@ -661,8 +669,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				var/obj/item/device/pda/P = locate(href_list["target"])
 				src.create_message(U, P)
 				if(mode == 2)
-					active_conversation = href_list["target"]
-					mode = 21
+					if(href_list["target"] in conversations)            // Need to make sure the message went through, if not welp.
+						active_conversation = href_list["target"]
+						mode = 21
 
 			if("Select Conversation")
 				var/P = href_list["convo"]

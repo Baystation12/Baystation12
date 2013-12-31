@@ -256,14 +256,14 @@
 
 	/*		Station Display (Mode: 42)			*/
 
-	if(mode==42 || !ui)
+	if(mode==42 || (!ui && access_status_display))
 		values["message1"] = message1 ? message1 : "(none)"
 		values["message2"] = message2 ? message2 : "(none)"
 
 
 
 	/*		Power Monitor (Mode: 43 / 433)			*/
-	if(mode==43 || mode==433 || !ui)
+	if(mode==43 || mode==433 || (!ui && access_engine))
 		var/pMonData[0]
 		for(var/obj/machinery/power/monitor/pMon in world)
 			if(!(pMon.stat & (NOPOWER|BROKEN)) )
@@ -294,7 +294,7 @@
 	
 
 	/*		General Records (Mode: 44 / 441 / 45 / 451)	*/
-	if(mode == 44 || mode == 441 || mode == 45 || mode ==451 || !ui)
+	if(mode == 44 || mode == 441 || mode == 45 || mode ==451 || (!ui && (access_medical || access_security)))
 		if(istype(active1, /datum/data/record) && (active1 in data_core.general))
 			values["general"] = active1.fields
 			values["general_exists"] = 1
@@ -317,7 +317,7 @@
 
 	/*		Medical Records (Mode: 44 / 441)	*/
 
-	if(mode == 44 || mode == 441 || !ui)
+	if(mode == 44 || mode == 441 || (!ui && access_medical))
 		var/medData[0]
 		for(var/datum/data/record/R in sortRecord(data_core.general))
 			medData[++medData.len] = list(Name = R.fields["name"],"ref" = "\ref[R]")
@@ -343,7 +343,7 @@
 
 	/*		Security Records (Mode:45 / 451)	*/	
 
-	if(mode == 45 || mode == 451 || !ui)
+	if(mode == 45 || mode == 451 || (!ui && access_security))
 		var/secData[0]
 		for (var/datum/data/record/R in sortRecord(data_core.general))
 			secData[++secData.len] = list(Name = R.fields["name"], "ref" = "\ref[R]")
@@ -441,7 +441,7 @@
 
 	/*	Supply Shuttle Requests Menu (Mode: 47)		*/
 
-	if(mode==47 || !ui)
+	if(mode==47 || (!ui && access_quartermaster))
 		var/supplyData[0]
 		supplyData["shuttle_moving"] = supply_shuttle.moving
 		supplyData["shuttle_eta"] = supply_shuttle.eta
@@ -476,7 +476,7 @@
 	
 
 	/* 	Janitor Supplies Locator  (Mode: 49)      */
-	if(mode==49 || !ui)	
+	if(mode==49 || (!ui && access_janitor))
 		var/JaniData[0]
 		var/turf/cl = get_turf(src)
 	
