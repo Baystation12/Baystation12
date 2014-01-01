@@ -321,7 +321,6 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 			unique_enzymes = md5(character.real_name)
 	else
 		if(length(uni_identity) != 3*DNA_UI_LENGTH)
-			world << "OH FUCK WE SET THE UNI_IDENTIY STRING"
 			uni_identity = "00600200A00E0110148FC01300B0095BD7FD3F4"
 		if(length(struc_enzymes)!= 3*STRUCDNASIZE)
 			struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
