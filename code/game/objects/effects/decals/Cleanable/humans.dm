@@ -12,6 +12,7 @@ var/global/list/image/splatter_cache=list()
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "mfloor1"
 	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
+	var/base_icon = 'icons/effects/blood.dmi'
 	var/list/viruses = list()
 	blood_DNA = list()
 	var/basecolor="#A10808" // Color when wet.
@@ -137,12 +138,22 @@ var/global/list/image/splatter_cache=list()
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "gibbl5"
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6")
+	var/fleshcolor = "#FFFFFF"
 
 /obj/effect/decal/cleanable/blood/gibs/update_icon()
-	color = "#FFFFFF"
-	//overlays.Cut()
-	//..()
-	//overlays += image(icon, src, "[icon_state]_flesh")
+
+	var/image/giblets = new(base_icon, "[icon_state]_flesh", dir)
+	if(!fleshcolor || fleshcolor == "rainbow")
+		fleshcolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+	giblets.color = fleshcolor
+
+	var/icon/blood = new(base_icon,"[icon_state]",dir)
+	if(basecolor == "rainbow") basecolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+	blood.Blend(basecolor,ICON_MULTIPLY)
+
+	icon = blood
+	overlays.Cut()
+	overlays += giblets
 
 /obj/effect/decal/cleanable/blood/gibs/up
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6","gibup1","gibup1","gibup1")
