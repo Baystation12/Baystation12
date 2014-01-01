@@ -5,7 +5,7 @@
 /datum/game_mode/meme
 	name = "Memetic Anomaly"
 	config_tag = "meme"
-	required_players = 3
+	required_players = 6
 	required_players_secret = 10
 	restricted_jobs = list("AI", "Cyborg")
 	recommended_enemies = 2 // need at least a meme and a host
@@ -114,15 +114,22 @@
 	attune_objective.gen_amount_goal(3,6)
 	meme.objectives += attune_objective
 
+	var/datum/objective/assassinate/kill_objective = new
+	kill_objective.owner = meme
+	kill_objective.find_target()
+	meme.objectives += kill_objective
+
+	var/datum/objective/survive/survive_objective = new
+	survive_objective.owner = meme
+	meme.objectives += survive_objective
+
 	// generate some random objectives, use standard traitor objectives
-	var/job = first_host.assigned_role
+//	var/job = first_host.assigned_role
 
-	for(var/datum/objective/o in SelectObjectives(job, meme))
+/*	for(var/datum/objective/o in SelectObjectives(job, meme))
 		o.owner = meme
-		meme.objectives += o
-
+		meme.objectives += o */
 	greet_meme(meme)
-
 	return
 
 /datum/game_mode/proc/greet_meme(var/datum/mind/meme, var/you_are=1)

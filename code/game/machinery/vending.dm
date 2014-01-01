@@ -2,6 +2,7 @@
 	var/product_name = "generic"
 	var/product_path = null
 	var/amount = 0
+	var/max_amount = 0
 	var/price = 0
 	var/display_color = "blue"
 
@@ -51,6 +52,7 @@
 	var/const/WIRE_SCANID = 2
 	var/const/WIRE_SHOCK = 3
 	var/const/WIRE_SHOOTINV = 4
+	var/obj/item/weapon/vending_refill/refill_canister = null		//The type of refill canisters used by this machine.
 
 	var/check_accounts = 0		// 1 = requires PIN and checks accounts.  0 = You slide an ID, it vends, SPACE COMMUNISM!
 
@@ -112,6 +114,7 @@
 		R.product_name = temp.name
 		R.product_path = typepath
 		R.amount = amount
+		R.max_amount = amount
 		R.price = price
 		R.display_color = pick("red","blue","green")
 
@@ -123,6 +126,35 @@
 			product_records += R
 //		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
 	return
+
+/obj/machinery/vending/proc/refill_inventory(obj/item/weapon/vending_refill/refill, datum/data/vending_product/machine, mob/user)  //Restocking from TG
+	var/total = 0
+
+	var/to_restock = 0
+	for(var/datum/data/vending_product/machine_content in machine)
+		to_restock += machine_content.max_amount - machine_content.amount
+
+	if(to_restock <= refill.charges)
+		for(var/datum/data/vending_product/machine_content in machine)
+			if(machine_content.amount != machine_content.max_amount)
+				usr << "<span class='notice'>[machine_content.max_amount - machine_content.amount] of [machine_content.product_name]</span>"
+				machine_content.amount = machine_content.max_amount
+		refill.charges -= to_restock
+		total = to_restock
+	else
+		var/tmp_charges = refill.charges
+		for(var/datum/data/vending_product/machine_content in machine)
+			var/restock = Ceiling(((machine_content.max_amount - machine_content.amount)/to_restock)*tmp_charges)
+			if(restock > refill.charges)
+				restock = refill.charges
+			machine_content.amount += restock
+			refill.charges -= restock
+			total += restock
+			if(restock)
+				usr << "<span class='notice'>[restock] of [machine_content.product_name]</span>"
+			if(refill.charges == 0) //due to rounding, we ran out of refill charges, exit.
+				break
+	return total
 
 /obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/card/emag))
@@ -147,9 +179,36 @@
 		coin = W
 		user << "\blue You insert the [W] into the [src]"
 		return
+	else if(istype(W, /obj/item/weapon/wrench))	//unwrenching vendomats
+		var/turf/T = user.loc
+		user << "<span class='notice'>You begin [anchored ? "unwrenching" : "wrenching"] the [src].</span>"
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		sleep(40)
+		if( !istype(src, /obj/machinery/vending) || !user || !W || !T )	return
+		if( user.loc == T && user.get_active_hand() == W )
+			anchored = !anchored
+			user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
 	else if(istype(W, /obj/item/weapon/card) && currently_vending)
 		var/obj/item/weapon/card/I = W
 		scan_card(I)
+	
+	else if(istype(W, refill_canister) && refill_canister != null)
+		if(stat & (BROKEN|NOPOWER))
+			user << "<span class='notice'>It does nothing.</span>"
+		else if(panel_open)
+			//if the panel is open we attempt to refill the machine
+			var/obj/item/weapon/vending_refill/canister = W
+			if(canister.charges == 0)
+				user << "<span class='notice'>This [canister.name] is empty!</span>"
+			else
+				var/transfered = refill_inventory(canister,product_records,user)
+				if(transfered)
+					user << "<span class='notice'>You loaded [transfered] items in \the [name].</span>"
+				else
+					user << "<span class='notice'>The [name] is fully stocked.</span>"
+			return;
+		else
+			user << "<span class='notice'>You should probably unscrew the service panel first.</span>"
 
 	else if(src.panel_open)
 
@@ -157,7 +216,6 @@
 			if(istype(W, R.product_path))
 				stock(R, user)
 				del(W)
-
 	else
 		..()
 
@@ -624,6 +682,7 @@
 	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"
 	product_ads = "Drink up!;Booze is good for you!;Alcohol is humanity's best friend.;Quite delighted to serve you!;Care for a nice, cold beer?;Nothing cures you like booze!;Have a sip!;Have a drink!;Have a beer!;Beer is good for you!;Only the finest alcohol!;Best quality booze since 2053!;Award-winning wine!;Maximum alcohol!;Man loves beer.;A toast for progress!"
 	req_access_txt = "25"
+	refill_canister = /obj/item/weapon/vending_refill/boozeomat
 
 /obj/machinery/vending/assist
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
@@ -641,7 +700,7 @@
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,/obj/item/weapon/reagent_containers/food/drinks/tea = 25,/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25, /obj/item/weapon/reagent_containers/food/drinks/tea = 25, /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25)
-
+	refill_canister = /obj/item/weapon/vending_refill/coffee
 
 
 
@@ -658,7 +717,7 @@
 	prices = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 1,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,/obj/item/weapon/reagent_containers/food/snacks/chips = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 2,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 1,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 1)
-
+	refill_canister = /obj/item/weapon/vending_refill/snack
 
 
 /obj/machinery/vending/cola
@@ -676,6 +735,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/starkist = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/space_up = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/grape_juice = 1)
+	refill_canister = /obj/item/weapon/vending_refill/cola
 
 //This one's from bay12
 /obj/machinery/vending/cart
@@ -700,7 +760,7 @@
 	contraband = list(/obj/item/weapon/lighter/zippo = 4)
 	premium = list(/obj/item/clothing/mask/cigarette/cigar/havana = 2)
 	prices = list(/obj/item/weapon/storage/fancy/cigarettes = 15,/obj/item/weapon/storage/box/matches = 1,/obj/item/weapon/lighter/random = 2)
-
+	refill_canister = /obj/item/weapon/vending_refill/cigarette
 
 /obj/machinery/vending/medical
 	name = "NanoMed Plus"
@@ -721,8 +781,7 @@
 /obj/machinery/vending/plasmaresearch
 	name = "Toximate 3000"
 	desc = "All the fine parts you need in one vending machine!"
-	products = list(/obj/item/clothing/under/rank/scientist = 6,/obj/item/clothing/suit/bio_suit = 6,/obj/item/clothing/head/bio_hood = 6,
-					/obj/item/device/transfer_valve = 6,/obj/item/device/assembly/timer = 6,/obj/item/device/assembly/signaler = 6,
+	products = list(/obj/item/device/transfer_valve = 6,/obj/item/device/assembly/timer = 6,/obj/item/device/assembly/signaler = 6,
 					/obj/item/device/assembly/prox_sensor = 6,/obj/item/device/assembly/igniter = 6)
 
 /obj/machinery/vending/wallmed1
@@ -858,9 +917,8 @@
 	icon_state = "robotics"
 	icon_deny = "robotics-deny"
 	req_access_txt = "29"
-	products = list(/obj/item/clothing/suit/storage/labcoat = 4,/obj/item/clothing/under/rank/roboticist = 4,/obj/item/weapon/cable_coil = 4,/obj/item/device/flash = 4,
-					/obj/item/weapon/cell/high = 12, /obj/item/device/assembly/prox_sensor = 3,/obj/item/device/assembly/signaler = 3,/obj/item/device/healthanalyzer = 3,
-					/obj/item/weapon/scalpel = 2,/obj/item/weapon/circular_saw = 2,/obj/item/weapon/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
-					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
+	products = list(/obj/item/weapon/cable_coil = 2,/obj/item/device/flash = 4,
+					/obj/item/weapon/cell/high = 5, /obj/item/device/assembly/prox_sensor = 3,/obj/item/device/assembly/signaler = 3,/obj/item/device/healthanalyzer = 3,
+					/obj/item/weapon/scalpel = 2,/obj/item/weapon/circular_saw = 2,/obj/item/weapon/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 2)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
 

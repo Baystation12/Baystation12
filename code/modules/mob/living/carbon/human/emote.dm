@@ -568,7 +568,12 @@
 		else if (m_type & 2)
 			for (var/mob/O in (hearers(src.loc, null) | get_mobs_in_view(world.view,src)))
 				O.show_message(message, m_type)
-
+		else if (m_type & 2)
+			for (var/mob/O in hearers(src.loc, null))
+				if(istype(O,/mob/living/carbon/human))
+					for(var/mob/living/parasite/P in O:parasites)
+						P.show_message(message, m_type)
+				O.show_message(message, m_type)
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"
@@ -582,4 +587,4 @@
 	set desc = "Sets an extended description of your character's features."
 	set category = "IC"
 
-	flavor_text =  copytext(sanitize(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text), 1)
+	flavor_text =  copytext(sanitize_simple(input(usr, "Please enter your new flavour text.", "Flavour text", null)  as text), 1)

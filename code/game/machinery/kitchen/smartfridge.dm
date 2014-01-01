@@ -36,6 +36,28 @@
 		return 1
 	return 0
 
+/obj/machinery/smartfridge/chemistry
+	name = "smart chemical storage"
+	desc = "A refrigerated storage unit for medicine storage."
+
+/obj/machinery/smartfridge/chemistry/accept_check(var/obj/item/O as obj)
+	if(istype(O,/obj/item/weapon/storage/pill_bottle))
+		if(O.contents.len)
+			for(var/obj/item/I in O)
+				if(!accept_check(I))
+					return 0
+			return 1
+		return 0
+	if(!istype(O,/obj/item/weapon/reagent_containers))
+		return 0
+	if(istype(O,/obj/item/weapon/reagent_containers/pill)) // empty pill prank ok
+		return 1
+	if(!O.reagents || !O.reagents.reagent_list.len) // other empty containers not accepted
+		return 0
+	if(istype(O,/obj/item/weapon/reagent_containers/syringe) || istype(O,/obj/item/weapon/reagent_containers/glass/bottle) || istype(O,/obj/item/weapon/reagent_containers/glass/beaker) || istype(O,/obj/item/weapon/reagent_containers/spray))
+		return 1
+	return 0
+
 /obj/machinery/smartfridge/extract
 	name = "\improper Slime Extract Storage"
 	desc = "A refrigerated storage unit for slime extracts"

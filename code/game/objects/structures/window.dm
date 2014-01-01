@@ -157,6 +157,10 @@
 /obj/structure/window/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
 
+	if(istype(W, /obj/item/weapon/airlock_painter))
+		change_paintjob(W, user)
+		return
+
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
 		if (istype(G.affecting, /mob/living))
@@ -210,6 +214,25 @@
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()
 	return
+
+//painter
+/obj/structure/window/proc/change_paintjob(obj/item/C as obj, mob/user as mob)
+	var/obj/item/weapon/airlock_painter/W
+	if(istype(C, /obj/item/weapon/airlock_painter))
+		W = C
+	else
+		return
+
+	if(!W.can_use(user, 1))
+		return
+
+	var/new_color = input(user, "Choose color!") as color|null
+	if(!new_color) return
+
+	if((!in_range(src, usr) && src.loc != usr) || !W.use(user, 1))
+		return
+	else
+		color = new_color
 
 /obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
 	if(reinf) damage *= 0.5
@@ -287,6 +310,8 @@
 //	if(re)	reinf = re
 
 	ini_dir = dir
+
+	color = color_windows()
 
 	update_nearby_tiles(need_rebuild=1)
 	update_nearby_icons()

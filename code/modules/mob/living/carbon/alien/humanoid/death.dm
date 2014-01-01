@@ -15,3 +15,7 @@
 	if(mind) 	mind.store_memory("Time of death: [tod]", 0)
 
 	return ..(gibbed)
+
+/mob/living/carbon/alien/humanoid/praetorian/death()
+	..()
+	praetorians = (praetorians+1)

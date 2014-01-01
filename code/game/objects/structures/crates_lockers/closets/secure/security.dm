@@ -113,6 +113,7 @@
 		new /obj/item/weapon/cartridge/hos(src)
 		new /obj/item/device/radio/headset/heads/hos(src)
 		new /obj/item/clothing/glasses/sunglasses/sechud(src)
+		new /obj/item/clothing/glasses/hud/security/jensenshades(src)
 		new /obj/item/taperoll/police(src)
 		new /obj/item/weapon/shield/riot(src)
 		new /obj/item/weapon/storage/lockbox/loyalty(src)
@@ -123,6 +124,7 @@
 		new /obj/item/weapon/gun/energy/gun(src)
 		new /obj/item/clothing/tie/holster/waist(src)
 		new /obj/item/weapon/melee/telebaton(src)
+		new /obj/item/weapon/storage/box/cdeathalarm_kit(src)
 		return
 
 
@@ -197,6 +199,7 @@
 		new /obj/item/clothing/tie/storage/black_vest(src)
 		new /obj/item/clothing/head/soft/sec/corp(src)
 		new /obj/item/clothing/under/rank/security/corp(src)
+		new /obj/item/clothing/gloves/security(src)
 		return
 
 

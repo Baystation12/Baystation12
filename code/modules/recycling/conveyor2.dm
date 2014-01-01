@@ -24,6 +24,10 @@
 	..(loc)
 	if(newdir)
 		dir = newdir
+
+	if(id == "CentComConv01" | id == "dw_c")
+		on = 1
+
 	switch(dir)
 		if(NORTH)
 			forwards = NORTH

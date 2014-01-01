@@ -1,4 +1,3 @@
-
 //The advanced pea-green monochrome lcd of tomorrow.
 
 var/global/list/obj/item/device/pda/PDAs = list()
@@ -147,6 +146,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon_state = "pda-lawyer"
 	ttone = "..."
 
+/obj/item/device/pda/lawyer2
+	default_cartridge = /obj/item/weapon/cartridge/lawyer
+	icon_state = "pda-lawyer-old"
+	ttone = "..."
+
 /obj/item/device/pda/botanist
 	//default_cartridge = /obj/item/weapon/cartridge/botanist
 	icon_state = "pda-hydro"
@@ -159,6 +163,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a WGW-11 series e-reader."
 	note = "Congratulations, your station has chosen the Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant!"
 	silent = 1 //Quiet in the library!
+
+/obj/item/device/pda/reporter
+	icon_state = "pda-libc"
 
 /obj/item/device/pda/clear
 	icon_state = "pda-transp"
@@ -621,7 +628,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if ("Edit")
 				var/n = input(U, "Please enter message", name, notehtml) as message
 				if (in_range(src, U) && loc == U)
-					n = copytext(adminscrub(n), 1, MAX_MESSAGE_LEN)
+					n = copytext(sanitize_u(n), 1, MAX_MESSAGE_LEN)
 					if (mode == 1)
 						note = replacetext(n, "\n", "<BR>")
 						notehtml = n
@@ -642,7 +649,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 							U << "The PDA softly beeps."
 							U << browse(null, "window=pda")
 						else
-							t = copytext(sanitize(t), 1, 20)
+							t = copytext(sanitize_simple(t), 1, 20)
 							ttone = t
 				else
 					U << browse(null, "window=pda")
@@ -779,7 +786,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/proc/create_message(var/mob/living/U = usr, var/obj/item/device/pda/P)
 
 	var/t = input(U, "Please enter message", name, null) as text
-	t = copytext(sanitize(t), 1, MAX_MESSAGE_LEN)
+	t = copytext(sanitize_simple(t), 1, MAX_MESSAGE_LEN)
 	if (!t || !istype(P))
 		return
 	if (!in_range(src, U) && loc != U)
@@ -822,10 +829,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(useTC != 2) // Does our recepient have a broadcaster on their level?
 			U << "ERROR: Cannot reach recepient."
 			return
-		useMS.send_pda_message("[P.owner]","[owner]","[t]")
+		useMS.send_pda_message("[P.owner]","[owner]","[sanitize_u(t)]")
 
-		tnote += "<i><b>&rarr; To [P.owner]:</b></i><br>[t]<br>"
-		P.tnote += "<i><b>&larr; From <a href='byond://?src=\ref[P];choice=Message;target=\ref[src]'>[owner]</a> ([ownjob]):</b></i><br>[t]<br>"
+		tnote += "<i><b>&rarr; To [P.owner]:</b></i><br>[sanitize_u(t)]<br>"
+		P.tnote += "<i><b>&larr; From <a href='byond://?src=\ref[P];choice=Message;target=\ref[src]'>[owner]</a> ([ownjob]):</b></i><br>[sanitize_u(t)]<br>"
 
 		if (prob(15)) //Give the AI a chance of intercepting the message
 			var/who = src.owner
@@ -834,12 +841,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			for(var/mob/living/silicon/ai/ai in mob_list)
 				// Allows other AIs to intercept the message but the AI won't intercept their own message.
 				if(ai.aiPDA != P && ai.aiPDA != src)
-					ai.show_message("<i>Intercepted message from <b>[who]</b>: [t]</i>")
+					ai.show_message("<i>Intercepted message from <b>[who]</b>: [sanitize(t)]</i>")
 
 		if (!P.silent)
 			playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		for (var/mob/O in hearers(3, P.loc))
-			if(!P.silent) O.show_message(text("\icon[P] *[P.ttone]*"))
+			if(!P.silent) O.show_message(text("\icon[P] *[sanitize(P.ttone)]*"))
 		//Search for holder of the PDA.
 		var/mob/living/L = null
 		if(P.loc && isliving(P.loc))
@@ -849,7 +856,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			L = get(P, /mob/living/silicon)
 
 		if(L)
-			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[t]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
+			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[sanitize(t)]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
 
 		log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
 		P.overlays.Cut()

@@ -238,7 +238,7 @@
 
 /obj/item/clothing/suit/leathercoat
 	name = "leather coat"
-	desc = "A long, thick black leather coat."
+	desc = "A flowing, black coat."
 	icon_state = "leathercoat"
 	item_state = "leathercoat"
 	flags = FPRINT | TABLEPASS

@@ -186,3 +186,13 @@ Doesn't work on other aliens/AI.*/
 					//Paralyse(10)
 			src.visible_message("\green <B>[src] hurls out the contents of their stomach!</B>")
 	return
+
+/mob/living/carbon/alien/humanoid/verb/echolocation()
+	set name = "Echolocation"
+	set desc = "For easy navigation in darkness"
+	set category = "Alien"
+	if(perception)
+		perception = 0
+	else
+		perception = 1
+	return

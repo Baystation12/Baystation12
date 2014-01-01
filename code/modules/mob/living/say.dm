@@ -92,6 +92,9 @@ var/list/department_radio_keys = list(
 	/*
 		Sanity checking and speech failure.
 	*/
+	if(!speech_allowed && usr == src)
+		usr << "\red You can't speak."
+		return
 
 	if (!message)
 		return

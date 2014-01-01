@@ -111,6 +111,10 @@
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "bcircuit"
 
+/turf/simulated/floor/whitegreed
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "bcircuit"
+
 /turf/simulated/floor/greengrid
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "gcircuit"

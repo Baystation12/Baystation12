@@ -70,7 +70,14 @@ var/list/event_last_fired = list()
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/meteor_shower] = 20 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/anomaly_grav] = 5 + 5 * active_with_role["Engineer"] * 5 + active_with_role["Scientist"] * 5
+		possibleEvents[/datum/event/anomaly_pyro] = 5 + 5 * active_with_role["Atmospheric Technician"] * 5 + active_with_role["Scientist"] * 5
+		possibleEvents[/datum/event/anomaly_flux] = 5 + 5 * active_with_role["Engineer"] * 5 + active_with_role["Scientist"] * 5
 		possibleEvents[/datum/event/blob] = 20 * active_with_role["Engineer"]
+
+	if(minutes_passed >= 60)
+		possibleEvents[/datum/event/anomaly_vortex] = 5 + 2.5 * active_with_role["Engineer"] * 5 + active_with_role["Scientist"] * 5
+		possibleEvents[/datum/event/anomaly_bluespace] = 5 + 2.5 * active_with_role["Engineer"] * 5 + active_with_role["Scientist"] * 5
 
 	possibleEvents[/datum/event/viral_infection] = 25 + active_with_role["Medical"] * 15
 	if(active_with_role["Medical"] > 0)

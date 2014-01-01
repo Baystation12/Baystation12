@@ -104,6 +104,9 @@
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(environment)
 
+	//Check if we're on fire
+	handle_fire()
+
 	//Status updates, death etc.
 	handle_regular_status_updates()		//TODO: optimise ~Carn
 	update_canmove()
@@ -579,18 +582,19 @@
 
 	//		log_debug("Adjusting to atmosphere.")
 			//After then, it reacts to the surrounding atmosphere based on your thermal protection
-			if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
-				var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
-				if(thermal_protection < 1)
-					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
-	//				log_debug("[loc_temp] is Cold. Cooling by [amt]")
-					bodytemperature += amt
-			else if (loc_temp > BODYTEMP_HEAT_DAMAGE_LIMIT)			//Place is hotter than we are
-				var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
-				if(thermal_protection < 1)
-					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
-	//				log_debug("[loc_temp] is Heat. Heating up by [amt]")
-					bodytemperature += amt
+			if(!on_fire) //If you're on fire, you do not heat up or cool down based on surrounding gases
+				if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
+					var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
+					if(thermal_protection < 1)
+						var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
+	//					log_debug("[loc_temp] is Cold. Cooling by [amt]")
+						bodytemperature += amt
+				else if (loc_temp > BODYTEMP_HEAT_DAMAGE_LIMIT)			//Place is hotter than we are
+					var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
+					if(thermal_protection < 1)
+						var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
+	//					log_debug("[loc_temp] is Heat. Heating up by [amt]")
+						bodytemperature += amt
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 		if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
@@ -602,8 +606,12 @@
 					apply_damage(HEAT_DAMAGE_LEVEL_1, BURN, used_weapon = "High Body Temperature")
 					fire_alert = max(fire_alert, 2)
 				if(400 to 1000)
-					apply_damage(HEAT_DAMAGE_LEVEL_2, BURN, used_weapon = "High Body Temperature")
-					fire_alert = max(fire_alert, 2)
+					if(on_fire)
+						apply_damage(HEAT_DAMAGE_LEVEL_3, BURN, used_weapon = "High Body Temperature")
+						fire_alert = max(fire_alert, 2)
+					else
+						apply_damage(HEAT_DAMAGE_LEVEL_2, BURN, used_weapon = "High Body Temperature")
+						fire_alert = max(fire_alert, 2)
 				if(1000 to INFINITY)
 					apply_damage(HEAT_DAMAGE_LEVEL_3, BURN, used_weapon = "High Body Temperature")
 					fire_alert = max(fire_alert, 2)
@@ -649,6 +657,17 @@
 		if(environment.toxins > MOLES_PLASMA_VISIBLE)
 			pl_effects()
 		return
+
+///FIRE CODE
+	handle_fire()
+		if(..())
+			return
+		var/thermal_protection = get_heat_protection(30000) //If you don't have fire suit level protection, you get a temperature increase
+		if((1 - thermal_protection) > 0.0001)
+			bodytemperature += BODYTEMP_HEATING_MAX
+		return
+//END FIRE CODE
+
 
 	/*
 	proc/adjust_body_temperature(current, loc_temp, boost)

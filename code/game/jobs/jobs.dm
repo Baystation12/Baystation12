@@ -43,6 +43,7 @@ var/const/CHAPLAIN			=(1<<10)
 var/const/CLOWN				=(1<<11)
 var/const/MIME				=(1<<12)
 var/const/ASSISTANT			=(1<<13)
+var/const/INTERN			=(1<<14) 	//Multi-assistant
 
 
 var/list/assistant_occupations = list(
@@ -71,7 +72,8 @@ var/list/medical_positions = list(
 	"Medical Doctor",
 	"Geneticist",
 	"Psychiatrist",
-	"Chemist"
+	"Chemist",
+	"Virologist"
 )
 
 
@@ -96,9 +98,15 @@ var/list/civilian_positions = list(
 	"Shaft Miner",
 	"Lawyer",
 	"Chaplain",
-	"Assistant"
+	"Assistant",
+	"Intern"
 )
 
+//Space Assholes
+var/list/entertaiment_positions = list(
+	"Clown",
+	"Mime"
+)
 
 var/list/security_positions = list(
 	"Head of Security",
@@ -116,7 +124,7 @@ var/list/nonhuman_positions = list(
 
 
 /proc/guest_jobbans(var/job)
-	return ((job in command_positions) || (job in nonhuman_positions) || (job in security_positions))
+	return job in command_positions
 
 /proc/get_job_datums()
 	var/list/occupations = list()

@@ -142,6 +142,7 @@ var/global/floorIsLava = 0
 				<A href='?src=\ref[src];simplemake=constructbuilder;mob=\ref[M]'>Builder</A> ,
 				<A href='?src=\ref[src];simplemake=constructwraith;mob=\ref[M]'>Wraith</A> \]
 				<A href='?src=\ref[src];simplemake=shade;mob=\ref[M]'>Shade</A>
+				<A href='?src=\ref[src];simplemake=meme;mob=\ref[M]'>Meme</A>
 				<br>
 			"}
 
@@ -238,6 +239,13 @@ var/global/floorIsLava = 0
 		return
 	var/dat = "<html><head><title>Info on [key]</title></head>"
 	dat += "<body>"
+
+	//ooh, this is wrong.
+	var/p_age
+	for(var/client/C in clients)
+		if(C.ckey == key)
+			p_age = C.player_age
+	dat +="<span style='color:#000000; font-weight: bold'>Player age: [p_age]</span><br>"
 
 	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
@@ -578,6 +586,11 @@ var/global/floorIsLava = 0
 			<BR>
 			<A href='?src=\ref[src];secretsfun=gravity'>Toggle station artificial gravity</A><BR>
 			<A href='?src=\ref[src];secretsfun=wave'>Spawn a wave of meteors (aka lagocolyptic shower)</A><BR>
+			<A href='?src=\ref[src];secretsfun=bluespaceanomaly'>Spawn a bluespace anomaly</A><BR>
+			<A href='?src=\ref[src];secretsfun=energeticflux'>Spawn a energetic flux anomaly</A><BR>
+			<A href='?src=\ref[src];secretsfun=pyroanomalies'>Spawn a pyroclastic anomaly</A><BR>
+			<A href='?src=\ref[src];secretsfun=gravanomalies1'>Spawn a gravitational anomaly (new)</A><BR>
+			<A href='?src=\ref[src];secretsfun=blackhole'>Spawn a vortex anomaly</A><BR>
 			<A href='?src=\ref[src];secretsfun=gravanomalies'>Spawn a gravitational anomaly (aka lagitational anomolag)</A><BR>
 			<A href='?src=\ref[src];secretsfun=timeanomalies'>Spawn wormholes</A><BR>
 			<A href='?src=\ref[src];secretsfun=goblob'>Spawn blob</A><BR>
@@ -686,6 +699,8 @@ var/global/floorIsLava = 0
 	if(!check_rights(0))	return
 
 	var/message = input("Global message to send:", "Admin Announce", null, null)  as message
+	message = sanitize(message, list("ÿ"="____255_"))
+
 	if(message)
 		if(!check_rights(R_SERVER,0))
 			message = adminscrub(message,500)

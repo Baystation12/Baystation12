@@ -6,6 +6,7 @@
 		return
 
 	message = trim(copytext(strip_html_simple(message), 1, MAX_MESSAGE_LEN))
+	message = sanitize(copytext(message,1,MAX_MESSAGE_LEN))
 
 	if (!message || silent || miming)
 		return
@@ -20,6 +21,9 @@
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return
 
+	if(!speech_allowed && usr == src)
+		usr << "\red You can't speak."
+		return
 
 	if (src.stat == 2)
 		return src.say_dead(message)

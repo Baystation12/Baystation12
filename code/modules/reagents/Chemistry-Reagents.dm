@@ -250,6 +250,15 @@ datum
 						cube.Expand()
 				return
 
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with water can help put them out!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(-(volume / 10))
+					if(M.fire_stacks <= 0)
+						M.ExtinguishMob()
+					return
+
 		water/holywater
 			name = "Holy Water"
 			id = "holywater"
@@ -882,6 +891,12 @@ datum
 				M.adjustToxLoss(1)
 				..()
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 10)
+					return
 
 		space_cleaner
 			name = "Space cleaner"
@@ -1527,6 +1542,12 @@ datum
 				napalm.trace_gases += fuel
 				T.assume_air(napalm)
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with plasma is stronger than fuel!
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 5)
+					return
 
 		toxin/lexorin
 			name = "Lexorin"

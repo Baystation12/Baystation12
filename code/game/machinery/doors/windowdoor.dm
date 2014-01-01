@@ -28,12 +28,33 @@
 	if (src.req_access && src.req_access.len)
 		src.icon_state = "[src.icon_state]"
 		src.base_state = src.icon_state
+
+	color = color_windows()
 	return
 
 /obj/machinery/door/window/Del()
 	density = 0
 	playsound(src, "shatter", 70, 1)
 	..()
+
+//painter
+/obj/machinery/door/window/proc/change_paintjob(obj/item/C as obj, mob/user as mob)
+	var/obj/item/weapon/airlock_painter/W
+	if(istype(C, /obj/item/weapon/airlock_painter))
+		W = C
+	else
+		return
+
+	if(!W.can_use(user, 1))
+		return
+
+	var/new_color = input(user, "Choose color!") as color|null
+	if(!new_color) return
+
+	if((!in_range(src, usr) && src.loc != usr) || !W.use(user, 1))
+		return
+	else
+		color = new_color
 
 /obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
 	if (!( ismob(AM) ))
@@ -188,6 +209,10 @@
 
 	//If it's in the process of opening/closing, ignore the click
 	if (src.operating == 1)
+		return
+
+	if(istype(I, /obj/item/weapon/airlock_painter))
+		change_paintjob(I, user)
 		return
 
 	//Emags and ninja swords? You may pass.

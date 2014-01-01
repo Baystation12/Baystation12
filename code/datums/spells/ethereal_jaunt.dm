@@ -27,6 +27,7 @@
 			animation.icon_state = "liquify"
 			animation.layer = 5
 			animation.master = holder
+			target.ExtinguishMob()		//This spell can extinguish mob
 			if(phaseshift == 1)
 				animation.dir = target.dir
 				flick("phase_shift",animation)

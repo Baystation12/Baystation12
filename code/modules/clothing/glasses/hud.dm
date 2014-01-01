@@ -86,10 +86,10 @@
 /obj/item/clothing/glasses/hud/security/jensenshades
 	name = "Augmented shades"
 	desc = "Polarized bioneural eyewear, designed to augment your vision."
-	icon_state = "jensenshades"
-	item_state = "jensenshades"
+	icon_state = "thermalimplants"
+	item_state = "thermalimplants"
 	vision_flags = SEE_MOBS
-	invisa_view = 2
+	invisa_view = 3
 
 /obj/item/clothing/glasses/hud/security/process_hud(var/mob/M)
 	if(!M)	return

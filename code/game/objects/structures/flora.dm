@@ -1,3 +1,13 @@
+//random plants
+/obj/structure/flora/plant
+	name = "marvelous potted plant"
+	icon = 'icons/obj/flora/plants.dmi'
+	icon_state = "plant-10"
+
+/obj/structure/flora/plant/random/New()
+	..()
+	icon_state = "plant-[rand(1, 26)]"
+
 //trees
 /obj/structure/flora/tree
 	name = "tree"
@@ -75,7 +85,7 @@
 
 /obj/structure/flora/pottedplant
 	name = "potted plant"
-	icon = 'icons/obj/plants.dmi'
+	icon = 'icons/obj/flora/plants.dmi'
 	icon_state = "plant-26"
 
 //newbushes

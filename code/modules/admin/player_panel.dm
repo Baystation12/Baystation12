@@ -348,6 +348,8 @@
 			dat += "<td>Monkey</td>"
 		else if(isalien(M))
 			dat += "<td>Alien</td>"
+		else if(istype(M, /mob/living/parasite/meme))
+			dat += "<td>Meme</td>"
 		else
 			dat += "<td>Unknown</td>"
 
@@ -489,6 +491,27 @@
 					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
 				else
 					dat += "<tr><td><i>Ninja not found!</i></td></tr>"
+			dat += "</table>"
+
+		if(ticker.mode.memes.len > 0)
+			dat += "<br><table cellspacing=5><tr><td><B>Memes</B></td><td></td><td></td></tr>"
+			for(var/datum/mind/meme in ticker.mode.memes)
+				var/mob/living/parasite/meme/M = meme.current
+				if(M)
+					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.key]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
+					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
+					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
+
+					// need this check because the meme may be possessing someone right now
+					if(istype(M))
+						dat += "\t<td>Attuned: "
+						for(var/mob/attuned in M.indoctrinated)
+							if(attuned.key)
+								dat += "[attuned.real_name]([attuned.key]) "
+							else
+								dat += "[attuned.real_name] "
+				else
+					dat += "<tr><td><i>Changeling not found!</i></td></tr>"
 			dat += "</table>"
 
 		if(ticker.mode.cult.len)
