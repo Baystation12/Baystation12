@@ -130,5 +130,4 @@
 				user << "<span class='notice'>* Last access attempt lower than expected code.</span>"
 			else
 				user << "<span class='notice'>* Last access attempt higher than expected code.</span>"
-		else ..()
 	else ..()
