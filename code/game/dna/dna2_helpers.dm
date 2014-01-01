@@ -143,7 +143,8 @@
 		H.g_eyes   = dna.GetUIValueRange(DNA_UI_EYES_G,    255)
 		H.b_eyes   = dna.GetUIValueRange(DNA_UI_EYES_B,    255)
 
-		H.s_tone   = dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220)
+		var/new_s_tone = dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) 
+		H.s_tone = 35 - max(min( round(new_s_tone), 220),1)         //Warning MATH.  Blame the person that wrote modules/client/preferences.dm, line 994
 
 		if (dna.GetUIState(DNA_UI_GENDER))
 			H.gender = FEMALE
