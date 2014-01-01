@@ -1765,6 +1765,8 @@ datum/design/cart_janitor
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/janitor"
+
+/*
 datum/design/cart_clown
 	name = "Honkworks 5.0 Cartridge"
 	desc = "A data cartridge for portable microcomputers."
@@ -1781,6 +1783,8 @@ datum/design/cart_mime
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/mime"
+*/
+
 datum/design/cart_toxins
 	name = "Signal Ace 2 Cartridge"
 	desc = "A data cartridge for portable microcomputers."
