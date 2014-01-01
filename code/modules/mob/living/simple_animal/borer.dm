@@ -16,11 +16,9 @@
 		src << "You whisper silently, \"[message]\""
 		B.host << "The captive mind of [src] whispers, \"[message]\""
 
-		for (var/mob/M in player_list)
-			if (istype(M, /mob/new_player))
-				continue
-			else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
-				M << "The captive mind of [src] whispers, \"[message]\""
+		for(var/mob/M in mob_list)
+			if(M.mind && (istype(M, /mob/dead/observer)))
+				M << "<i>Thought-speech, <b>[src]</b> -> <b>[B.truename]:</b> [message]</i>"
 
 /mob/living/captive_brain/emote(var/message)
 	return
@@ -45,7 +43,6 @@
 	friendly = "prods"
 	wander = 0
 	pass_flags = PASSTABLE
-	can_hide = 1
 
 	var/used_dominate
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
@@ -94,12 +91,13 @@
 				if(prob(host.brainloss/20))
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
 
-/mob/living/simple_animal/borer/New()
+/mob/living/simple_animal/borer/New(var/by_gamemode=0)
 	..()
 	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
 	host_brain = new/mob/living/captive_brain(src)
 
-	request_player()
+	if(!by_gamemode)
+		request_player()
 
 
 /mob/living/simple_animal/borer/say(var/message)
@@ -136,11 +134,9 @@
 	src << "You drop words into [host]'s mind: \"[message]\""
 	host << "Your own thoughts speak: \"[message]\""
 
-	for (var/mob/M in player_list)
-		if (istype(M, /mob/new_player))
-			continue
-		else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
-			M << "[src.truename] whispers to [host], \"[message]\""
+	for(var/mob/M in mob_list)
+		if(M.mind && (istype(M, /mob/dead/observer)))
+			M << "<i>Thought-speech, <b>[truename]</b> -> <b>[host]:</b> [copytext(message, 2)]</i>"
 
 
 /mob/living/simple_animal/borer/Stat()
@@ -219,7 +215,7 @@
 		src << "You cannot do that in your current state."
 		return
 
-	if(host.internal_organs_by_name["brain"]) //this should only run in admin-weirdness situations, but it's here non the less - RR
+	if(!host.internal_organs_by_name["brain"]) //this should only run in admin-weirdness situations, but it's here non the less - RR
 		src << "<span class='warning'>There is no brain here for us to command!</span>"
 		return
 
@@ -368,13 +364,13 @@ mob/living/simple_animal/borer/proc/detatch()
 	if(M.has_brain_worms())
 		src << "You cannot infest someone who is already infested!"
 		return
-
+/*
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		if(H.check_head_coverage())
 			src << "You cannot get through that host's protective gear."
 			return
-
+*/
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
 
@@ -397,21 +393,24 @@ mob/living/simple_animal/borer/proc/detatch()
 		if(!M.stat)
 			M << "Something disgusting and slimy wiggles into your ear!"
 
-		src.host = M
-		src.loc = M
-
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			var/datum/organ/external/head = H.get_organ("head")
-			head.implants += src
-
-		host_brain.name = M.name
-		host_brain.real_name = M.real_name
+			src.perform_infestation(M)
 
 		return
 	else
 		src << "They are no longer in range!"
 		return
+
+/mob/living/simple_animal/borer/proc/perform_infestation(var/mob/living/carbon/M)
+	src.host = M
+	src.loc = M
+
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		var/datum/organ/external/head = H.get_organ("head")
+		head.implants += src
+
+	host_brain.name = M.name
+	host_brain.real_name = M.real_name
 
 /mob/living/simple_animal/borer/verb/ventcrawl()
 	set name = "Crawl through Vent"
@@ -460,7 +459,7 @@ mob/living/simple_animal/borer/proc/detatch()
 
 //Procs for grabbing players.
 mob/living/simple_animal/borer/proc/request_player()
-	for(var/mob/dead/observer/O in player_list)
+	for(var/mob/O in respawnable_list)
 		if(jobban_isbanned(O, "Syndicate"))
 			continue
 		if(O.client)
@@ -487,3 +486,24 @@ mob/living/simple_animal/borer/proc/transfer_personality(var/client/candidate)
 	src.ckey = candidate.ckey
 	if(src.mind)
 		src.mind.assigned_role = "Cortical Borer"
+
+/mob/living/simple_animal/borer/verb/borerhide()
+	set category = "Alien"
+	set name = "Hide"
+	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
+
+	if(stat != CONSCIOUS)
+		return
+
+	if (layer != TURF_LAYER+0.2)
+		layer = TURF_LAYER+0.2
+		src << text("\green You are now hiding.")
+		for(var/mob/O in oviewers(src, null))
+			if ((O.client && !( O.blinded )))
+				O << text("<B>[] scurries to the ground!</B>", src)
+	else
+		layer = MOB_LAYER
+		src << text("\green You have stopped hiding.")
+		for(var/mob/O in oviewers(src, null))
+			if ((O.client && !( O.blinded )))
+				O << text("[] slowly peaks up from the ground...", src)

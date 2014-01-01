@@ -193,6 +193,10 @@
 	for(var/datum/objective/objective in syndicate.objectives)
 		syndicate.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 		obj_count++
+	for(var/obj/item/weapon/implant/explosive/E in syndicate.current.contents)
+		if (E.implanted)
+			syndicate.current << "The activation code for your explosive implant is <B>[E.phrase]</B>"
+			syndicate.store_memory("The activation code for your explosive implant is <B>[E.phrase]</B>")
 	return
 
 

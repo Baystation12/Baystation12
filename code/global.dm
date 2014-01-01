@@ -79,7 +79,7 @@ var/diary = null
 var/diaryofmeanpeople = null
 var/href_logfile = null
 var/station_name = "NSS Cyberiad"
-var/game_version = "Custom Modified Baystation12"
+var/game_version = "Custom ParaCode"
 var/changelog_hash = ""
 
 var/datum/air_tunnel/air_tunnel1/SS13_airtunnel = null

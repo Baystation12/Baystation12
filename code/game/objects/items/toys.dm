@@ -5,6 +5,7 @@
  *		Fake singularity
  *		Toy gun
  *		Toy crossbow
+ *		Toy Tommy Gun
  *		Toy swords
  *		Crayons
  *		Snap pops
@@ -245,8 +246,7 @@
 					for(var/mob/living/M in D.loc)
 						if(!istype(M,/mob/living)) continue
 						if(M == user) continue
-						for(var/mob/O in viewers(world.view, D))
-							O.show_message(text("\red [] was hit by the foam dart!", M), 1)
+						D.visible_message("<span class='danger'>[M] was hit by the foam dart!</span>")
 						new /obj/item/toy/ammo/crossbow(M.loc)
 						del(D)
 						return
@@ -267,8 +267,8 @@
 			return
 		else if (bullets == 0)
 			user.Weaken(5)
-			for(var/mob/O in viewers(world.view, user))
-				O.show_message(text("\red [] realized they were out of ammo and starting scrounging for some!", user), 1)
+			user.visible_message("<span class='danger'>[] realized they were out of ammo and starting scrounging for some!</span>")
+
 
 
 	attack(mob/M as mob, mob/user as mob)
@@ -280,7 +280,7 @@
 
 			for(var/mob/O in viewers(M, null))
 				if(O.client)
-					O.show_message(text("\red <B>[] casually lines up a shot with []'s head and pulls the trigger!</B>", user, M), 1, "\red You hear the sound of foam against skull", 2)
+					O.show_message(text("<span class='danger'><B>[] casually lines up a shot with []'s head and pulls the trigger!</B></span>", user, M), 1, "<span class='danger'>You hear the sound of foam against skull.</span>", 2)
 					O.show_message(text("\red [] was hit in the head by the foam dart!", M), 1)
 
 			playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
@@ -288,7 +288,7 @@
 			src.bullets--
 		else if (M.lying && src.bullets == 0)
 			for(var/mob/O in viewers(M, null))
-				if (O.client)	O.show_message(text("\red <B>[] casually lines up a shot with []'s head, pulls the trigger, then realizes they are out of ammo and drops to the floor in search of some!</B>", user, M), 1, "\red You hear someone fall", 2)
+				if (O.client)  O.show_message(text("<span class='danger'><B>[] casually lines up a shot with []'s head, pulls the trigger, then realizes they are out of ammo and drops to the floor in search of some!</B></span>", user, M), 1, "<span class='danger'>You hear someone fall.</span>", 2)
 			user.Weaken(5)
 		return
 
@@ -308,6 +308,30 @@
 	anchored = 1
 	density = 0
 
+
+/*
+ * Tommy gun
+ */
+
+/obj/item/toy/crossbow/tommygun
+    name = "tommy gun"
+    desc = "Looks almost like the real thing! Great for practicing Drive-bys"
+    icon_state = "tommy"
+    item_state = "tommy"
+    flags = FPRINT | TABLEPASS| CONDUCT
+    w_class = 1.0
+    attack_verb = list("struck", "hammered", "hit", "bashed")
+    bullets = 20.0
+
+/obj/item/toy/crossbow/tommygun/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I, /obj/item/toy/ammo/crossbow))
+		if(bullets <= 19)
+			user.drop_item()
+			del(I)
+			bullets++
+			user << "<span class='notice'>You load the foam dart into the tommy gun.</span>"
+		else
+			user << "<span class='danger'>It's already fully loaded.</span>"
 
 /*
  * Toy swords

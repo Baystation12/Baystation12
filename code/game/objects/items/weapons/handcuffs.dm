@@ -56,6 +56,12 @@
 				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [C.name] ([C.ckey])</font>")
 				log_attack("[user.name] ([user.ckey]) Attempted to handcuff [C.name] ([C.ckey])")
 
+				if(!iscarbon(user))
+					C.LAssailant = null
+				else
+					C.LAssailant = user
+
+
 				var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human(  )
 				O.source = user
 				O.target = C

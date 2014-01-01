@@ -187,6 +187,11 @@
 			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to wrap [H.name] ([H.ckey])</font>")
 			log_attack("[user.name] ([user.ckey]) used the [src.name] to wrap [H.name] ([H.ckey])")
 
+			if(!iscarbon(user))
+				H.LAssailant = null
+			else
+				H.LAssailant = user
+
 		else
 			user << "\blue You need more paper."
 	else

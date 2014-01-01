@@ -149,7 +149,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		for(var/datum/paiCandidate/c in paiController.pai_candidates)
 			if(c.ready)
 				var/found = 0
-				for(var/mob/dead/observer/o in player_list)
+				for(var/mob/o in respawnable_list)
 					if(o.key == c.key)
 						found = 1
 				if(found)

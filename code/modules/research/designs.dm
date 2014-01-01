@@ -250,14 +250,23 @@ datum/design/clonescanner
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/clonescanner"
 
-datum/design/arcademachine
-	name = "Circuit Design (Arcade Machine)"
+datum/design/arcadebattle
+	name = "Circuit Design (Battle Arcade Machine)"
 	desc = "Allows for the construction of circuit boards used to build a new arcade machine."
 	id = "arcademachine"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
-	build_path = "/obj/item/weapon/circuitboard/arcade"
+	build_path = "/obj/item/weapon/circuitboard/arcade/battle"
+
+datum/design/orion_trail
+	name = "Circuit Design (Orion Trail Arcade Machine)"
+	desc = "Allows for the construction of circuit boards used to build a new Orion Trail machine."
+	id = "arcademachine"
+	req_tech = list("programming" = 2)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = "/obj/item/weapon/circuitboard/arcade/orion_trail"
 
 datum/design/powermonitor
 	name = "Circuit Design (Power Monitor)"
@@ -1451,7 +1460,7 @@ datum/design/flora_gun
 	id = "flora_gun"
 	req_tech = list("materials" = 2, "biotech" = 3, "powerstorage" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 2000, "$glass" = 500, "$uranium" = 500)
+	materials = list("$metal" = 2000, "$glass" = 500, "mutagen" = 50)
 	build_path = "/obj/item/weapon/gun/energy/floragun"
 
 datum/design/portaseed
@@ -1519,6 +1528,15 @@ datum/design/xray
 	materials = list("$gold" = 5000,"$uranium" = 10000, "$metal" = 4000)
 	build_path = "/obj/item/weapon/gun/energy/xray"
 	locked = 1
+
+datum/design/plasmapistol
+	name = "plasma pistol"
+	desc = "A specialized firearm designed to fire lethal bolts of toxins."
+	id = "ppistol"
+	req_tech = list("combat" = 5, "plasmatech" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 5000, "$glass" = 1000, "$plasma" = 3000)
+	build_path = "/obj/item/weapon/gun/energy/toxgun"
 
 /////////////////////////////////////////
 /////////////////Mining//////////////////

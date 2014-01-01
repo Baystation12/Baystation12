@@ -81,9 +81,9 @@ var/list/karma_spenders = list()
 		return
 	if(choice == "Good")
 		M.client.karma += 1
-	usr << "[choice] karma spent on [M.name]."
-	src.client.karma_spent = 1
-	karma_spenders.Add(src.key)
+		usr << "[choice] karma spent on [M.name]."
+		src.client.karma_spent = 1
+		karma_spenders.Add(src.key)
 	if(M.client.karma <= -2 || M.client.karma >= 2)
 		var/special_role = "None"
 		var/assigned_role = "None"

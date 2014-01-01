@@ -234,3 +234,10 @@
 	W.layer = 20
 
 	return
+
+/mob/living/carbon/monkey/put_in_hands(obj/item/W)
+	if(!W)    return 0
+	if(put_in_active_hand(W))      return 1
+	else if(put_in_inactive_hand(W))  return 1
+	else
+		..()

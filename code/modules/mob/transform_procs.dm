@@ -406,7 +406,8 @@
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
 		return 1
-
+	if(ispath(MP, /mob/living/simple_animal/hostile/giant_spider))
+		return 1
 
 	//Not in here? Must be untested!
 	return 0

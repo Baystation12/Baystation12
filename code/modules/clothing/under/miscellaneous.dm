@@ -379,3 +379,53 @@
 	_color = "roman"
 	item_state = "armor"
 	armor = list(melee = 25, bullet = 0, laser = 25, energy = 10, bomb = 10, bio = 0, rad = 0)
+
+/obj/item/clothing/under/maid
+	name = "maid uniform"
+	desc = "You have the urge to put this on and act submissively"
+	icon_state = "meido"
+	item_state = "meido"
+	_color = "meido"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/flappers
+	name = "flappers"
+	desc = "Nothing like the roarin' '20s, flapping the night away on the dance floor."
+	icon_state = "flapper"
+	item_state = "flapper"
+	_color = "flapper"
+
+/obj/item/clothing/under/mafia
+	name = "mafia outfit"
+	desc = "The business of the mafia is business."
+	icon_state = "mafia"
+	item_state = "mafia"
+	_color = "mafia"
+
+/obj/item/clothing/under/mafia/vest
+	name = "mafia vest"
+	desc = "Extreme problems often require extreme solutions."
+	icon_state = "mafiavest"
+	item_state = "mafiavest"
+	_color = "mafiavest"
+
+/obj/item/clothing/under/mafia/white
+	name = "white mafia outfit"
+	desc = "The best defense against the treacherous is treachery."
+	icon_state = "mafiawhite"
+	item_state = "mafiawhite"
+	_color = "mafiawhite"
+
+/obj/item/clothing/under/mafia/sue
+	name = "mafia vest"
+	desc = "The business is born into."
+	icon_state = "suevest"
+	item_state = "suevest"
+	_color = "suevest"
+
+/obj/item/clothing/under/mafia/tan
+	name = "leather mafia outfit"
+	desc = "The big drum sounds good only from a distance."
+	icon_state = "mafiatan"
+	item_state = "mafiatan"
+	_color = "mafiatan"

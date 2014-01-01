@@ -93,6 +93,29 @@ Buildable meters
 	src.pixel_y = rand(-5, 5)
 
 //update the name and icon of the pipe item depending on the type
+var/global/list/pipeID2State = list(
+	"simple", \
+	"simple", \
+	"he", \
+	"he", \
+	"connector", \
+	"manifold", \
+	"junction", \
+	"uvent", \
+	"mvalve", \
+	"pump", \
+	"scrubber", \
+	"insulated", \
+	"insulated", \
+	"filter", \
+	"mixer", \
+	"passivegate", \
+	"volumepump", \
+	"heunary", \
+	"mtvalve", \
+	"manifold4w", \
+	"cap", \
+)
 
 /obj/item/pipe/proc/update()
 	var/list/nlist = list( \
@@ -119,30 +142,7 @@ Buildable meters
 		"pipe cap", \
 	)
 	name = nlist[pipe_type+1] + " fitting"
-	var/list/islist = list( \
-		"simple", \
-		"simple", \
-		"he", \
-		"he", \
-		"connector", \
-		"manifold", \
-		"junction", \
-		"uvent", \
-		"mvalve", \
-		"pump", \
-		"scrubber", \
-		"insulated", \
-		"insulated", \
-		"filter", \
-		"mixer", \
-		"passivegate", \
-		"volumepump", \
-		"heunary", \
-		"mtvalve", \
-		"manifold4w", \
-		"cap", \
-	)
-	icon_state = islist[pipe_type + 1]
+	icon_state = pipeID2State[pipe_type + 1]
 
 //called when a turf is attacked with a pipe item
 // place the pipe on the turf, setting pipe level to 1 (underfloor) if the turf is not intact
@@ -348,7 +348,7 @@ Buildable meters
 			if (M.node3)
 				M.node3.initialize()
 				M.node3.build_network()
-			
+
 		if(PIPE_MANIFOLD4W)		//4-way manifold
 			var/obj/machinery/atmospherics/pipe/manifold4w/M = new( src.loc )
 			M.dir = dir
@@ -515,7 +515,7 @@ Buildable meters
 			if (P.node2)
 				P.node2.initialize()
 				P.node2.build_network()
-				
+
 		if(PIPE_MTVALVE)		//manual t-valve
 			var/obj/machinery/atmospherics/tvalve/V = new(src.loc)
 			V.dir = dir
@@ -535,7 +535,7 @@ Buildable meters
 			if (V.node3)
 				V.node3.initialize()
 				V.node3.build_network()
-				
+
 		if(PIPE_CAP)
 			var/obj/machinery/atmospherics/pipe/cap/C = new(src.loc)
 			C.dir = dir

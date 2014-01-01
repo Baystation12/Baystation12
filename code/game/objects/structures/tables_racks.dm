@@ -272,7 +272,7 @@
 	destroy()
 
 /obj/structure/table/attack_animal(mob/living/simple_animal/user)
-	if(user.wall_smash)
+	if(user.wall_smash || istype(user,/mob/living/simple_animal/hostile/carp))
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
 		destroy()
 

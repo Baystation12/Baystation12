@@ -248,15 +248,23 @@
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/inflict_handler/flesh_to_stone(H)
 							temp = "You have learned flesh to stone."
 						if("summonguns")
-							feedback_add_details("wizard_spell_learned","SG") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
-							H.rightandwrong(0)
-							max_uses--
-							temp = "You have cast summon guns."
+							if(max_uses < 5)
+								temp = "You need 5 slots for this spell"
+								return
+							else
+								feedback_add_details("wizard_spell_learned","SG") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
+								H.rightandwrong(0)
+								max_uses-=5
+								temp = "You have cast summon guns."
 						if("summonmagic")
-							feedback_add_details("wizard_spell_learned","SM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
-							H.rightandwrong(1)
-							max_uses--
-							temp = "You have cast summon magic."
+							if(max_uses < 5)
+								temp = "You need 5 slots for this spell"
+								return
+							else
+								feedback_add_details("wizard_spell_learned","SM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
+								H.rightandwrong(1)
+								max_uses-=5
+								temp = "You have cast summon magic."
 						if("staffchange")
 							feedback_add_details("wizard_spell_learned","ST") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							new /obj/item/weapon/gun/magic/staff/change(get_turf(H))

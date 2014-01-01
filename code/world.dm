@@ -270,7 +270,7 @@
 
 	s += "<b>[station_name()]</b>";
 	s += " ("
-	s += "<a href=\"http://192.241.237.198/phpBB3/index.php\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"http://80.244.78.90/phpBB3/index.php\">" //Change this to wherever you want the hub to link to.
 	s += "[game_version]"
 	s += "</a>"
 	s += ")"

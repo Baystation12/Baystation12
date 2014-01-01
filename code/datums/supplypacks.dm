@@ -5,7 +5,7 @@
 //BIG NOTE: Don't add living things to crates, that's bad, it will break the shuttle.
 //NEW NOTE: Do NOT set the price of any crates below 7 points. Doing so allows infinite points.
 
-var/list/all_supply_groups = list("Operations","Security","Hospitality","Engineering","Medical / Science","Hydroponics")
+var/list/all_supply_groups = list("Operations","Security","Hospitality","Engineering","Medical / Science","Hydroponics","Organic")
 
 /datum/supply_packs
 	var/name = null
@@ -128,12 +128,12 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager,
 					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
 					/obj/item/weapon/lipstick/random,
-					/obj/item/weapon/reagent_containers/food/drinks/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/beer)
+					/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/beer,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/beer,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/beer,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/beer)
 	cost = 20
 	containertype = /obj/structure/closet/crate
 	containername = "Party equipment"
@@ -243,14 +243,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "MULEbot Crate"
 	group = "Operations"
 
-/datum/supply_packs/lisa
-	name = "Corgi Crate"
-	contains = list()
-	cost = 50
-	containertype = /obj/structure/largecrate/lisa
-	containername = "Corgi Crate"
-	group = "Hydroponics"
-
 /datum/supply_packs/hydroponics // -- Skie
 	name = "Hydroponics Supply Crate"
 	contains = list(/obj/item/weapon/reagent_containers/spray/plantbgone,
@@ -268,37 +260,41 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	access = access_hydroponics
 	group = "Hydroponics"
 
-//farm animals - useless and annoying, but potentially a good source of food
-/datum/supply_packs/cow
+//////// livestock
+/datum/supply_packs/organic/cow
 	name = "Cow Crate"
 	cost = 30
 	containertype = /obj/structure/largecrate/cow
-	containername = "Cow Crate"
-	access = access_hydroponics
+	containername = "cow crate"
+	group = "Organic"
 
-/datum/supply_packs/goat
+/datum/supply_packs/organic/goat
 	name = "Goat Crate"
 	cost = 25
 	containertype = /obj/structure/largecrate/goat
-	containername = "Goat Crate"
-	access = access_hydroponics
-	group = "Hydroponics"
+	containername = "goat crate"
+	group = "Organic"
 
-/datum/supply_packs/chicken
+/datum/supply_packs/organic/chicken
 	name = "Chicken Crate"
 	cost = 20
 	containertype = /obj/structure/largecrate/chick
-	containername = "Chicken Crate"
-	access = access_hydroponics
-	group = "Hydroponics"
+	containername = "chicken crate"
+	group = "Organic"
 
-/datum/supply_packs/lisa
+/datum/supply_packs/organic/corgi
 	name = "Corgi Crate"
-	contains = list()
 	cost = 50
 	containertype = /obj/structure/largecrate/lisa
-	containername = "Corgi Crate"
-	group = "Hydroponics"
+	containername = "corgi crate"
+	group = "Organic"
+
+/datum/supply_packs/organic/cat
+	name = "Cat crate"
+	cost = 50 //Cats are worth as much as corgis.
+	containertype = /obj/structure/largecrate/cat
+	containername = "cat crate"
+	group = "Organic"
 
 /datum/supply_packs/seeds
 	name = "Seeds Crate"
@@ -1008,37 +1004,57 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Hydroponics"
 
 
-/datum/supply_packs/organic/vending
+/datum/supply_packs/vending
 	name = "Bartending Supply Crate"
 	contains = list(/obj/item/weapon/vending_refill/boozeomat,
 					/obj/item/weapon/vending_refill/coffee)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "bartending supply crate"
+	group = "Operations"
 
-/datum/supply_packs/organic/vending/snack
+/datum/supply_packs/vending/snack
 	name = "Snack Supply Crate"
 	contains = list(/obj/item/weapon/vending_refill/snack,
 					/obj/item/weapon/vending_refill/snack,
 					/obj/item/weapon/vending_refill/snack)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "snacks supply crate"
+	group = "Operations"
 
-/datum/supply_packs/organic/vending/cola
+/datum/supply_packs/vending/cola
 	name = "Softdrinks Supply Crate"
 	contains = list(/obj/item/weapon/vending_refill/cola,
 					/obj/item/weapon/vending_refill/cola)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "softdrinks supply crate"
+	group = "Operations"
 
-/datum/supply_packs/organic/vending/cigarette
+/datum/supply_packs/vending/cigarette
 	name = "Cigarette Supply Crate"
 	contains = list(/obj/item/weapon/vending_refill/cigarette)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "cigarette supply crate"
+	group = "Operations"
 
-/datum/supply_packs/misc/autodrobe
+/datum/supply_packs/autodrobe
 	name = "Autodrobe Supply crate"
 	contains = list(/obj/item/weapon/vending_refill/autodrobe,
 					/obj/item/weapon/vending_refill/autodrobe)
 	cost = 15
+	containertype = /obj/structure/closet/crate
 	containername = "autodrobe supply crate"
+	group = "Operations"
+
+/datum/supply_packs/mafia
+	name = "Mafia Supply crate"
+	contains = list(/obj/item/clothing/suit/browntrenchcoat =1,/obj/item/clothing/suit/blacktrenchcoat =1,/obj/item/clothing/head/fedora/whitefedora =1,
+					/obj/item/clothing/head/fedora/brownfedora =1,/obj/item/clothing/head/fedora =1,/obj/item/clothing/under/flappers =1,/obj/item/clothing/under/mafia =1,/obj/item/clothing/under/mafia/vest =1,/obj/item/clothing/under/mafia/white =1,
+					/obj/item/clothing/under/mafia/sue =1,/obj/item/clothing/under/mafia/tan =1, /obj/item/toy/crossbow/tommygun =2,/obj/item/clothing/tie/accessory/gunholster =1,)
+	cost = 15
+	containertype = /obj/structure/closet/crate
+	containername = "mafia supply crate"
+	group = "Operations"
