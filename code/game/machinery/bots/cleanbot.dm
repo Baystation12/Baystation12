@@ -239,8 +239,8 @@ text("<A href='?src=\ref[src];operation=oddbutton'>[src.oddbutton ? "Yes" : "No"
 			if (!path) path = list()
 			if(src.path.len == 0)
 				src.oldtarget = src.target
-				src.target = null
 				target.targeted_by = null
+				src.target = null
 		return
 	if(src.path.len > 0 && src.target && (src.target != null))
 		step_to(src, src.path[1])
