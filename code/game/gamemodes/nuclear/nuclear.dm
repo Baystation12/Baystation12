@@ -152,7 +152,7 @@
 
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()
-
+		set_security_level(3)
 	return ..()
 
 
