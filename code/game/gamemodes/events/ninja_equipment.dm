@@ -246,7 +246,7 @@ ________________________________________________________________________________
 	var/dat = "<html><head><title>SpiderOS</title></head><body bgcolor=\"#3D5B43\" text=\"#B65B5B\"><style>a, a:link, a:visited, a:active, a:hover { color: #B65B5B; }img {border-style:none;}</style>"
 	dat += "<a href='byond://?src=\ref[src];choice=Refresh'><img src=sos_7.png> Refresh</a>"
 	if(spideros)
-		dat += " | <a href='byond://?src=\ref[src];choice=0'><img src=sos_1.png> Return</a>"
+		dat += " | <a href='byond://?src=\ref[src];choice=Return'><img src=sos_1.png> Return</a>"
 	dat += " | <a href='byond://?src=\ref[src];choice=Close'><img src=sos_8.png> Close</a>"
 	dat += "<br>"
 	if(s_control)
@@ -492,12 +492,12 @@ ________________________________________________________________________________
 			U << browse(null, "window=spideros")//Closes the window.
 			return
 
-	if(k_unlock!=7&&href_list["choice"]!="Return")
-		var/u1=text2num(href_list["choice"])
-		var/u2=(u1?abs(abs(k_unlock-u1)-2):1)
-		k_unlock=(!u2? k_unlock+1:0)
-		if(k_unlock==7)
-			U << "Anonymous Messenger blinks."
+		if(k_unlock!=7&&href_list["choice"]!="Return")
+			var/u1=text2num(href_list["choice"])
+			var/u2=(u1?abs(abs(k_unlock-u1)-2):1)
+			k_unlock=(!u2? k_unlock+1:0)
+			if(k_unlock==7)
+				U << "Anonymous Messenger blinks."
 	else
 		if(!affecting||A.stat||!s_initialized||A.loc!=src)
 			A << "\red This function is not available at this time."
