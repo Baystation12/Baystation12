@@ -63,9 +63,10 @@ var/global/list/possibleEvents = list()
 		possibleEvents[/datum/event/money_hacker] = max(min(25, player_list.len) * 4, 200)
 
 	possibleEvents[/datum/event/carp_migration] = 50 + 50 * active_with_role["Engineer"]
+	possibleEvents[/datum/event/spider_infestation] = 50 + 50 * active_with_role["Security"]
 	possibleEvents[/datum/event/dust] = 50 + 50 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/dust/meaty] = 50 + 50 * active_with_role["Engineer"]
-	possibleEvents[/datum/event/brand_intelligence] = 50 + 25 * active_with_role["Janitor"]
+	possibleEvents[/datum/event/brand_intelligence] = 50 + 25 * active_with_role["Engineer"]
 
 	possibleEvents[/datum/event/rogue_drone] = 25 + 25 * active_with_role["Engineer"] + 25 * active_with_role["Security"]
 	possibleEvents[/datum/event/infestation] = 50 + 25 * active_with_role["Janitor"]
@@ -75,9 +76,8 @@ var/global/list/possibleEvents = list()
 	possibleEvents[/datum/event/grid_check] = 25 + 20 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/electrical_storm] = 10 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Botanist"]
+	possibleEvents[/datum/event/spacevine] = 25 + 5 * active_with_role["Engineer"]
 
-	if(!spacevines_spawned)
-		possibleEvents[/datum/event/spacevine] = 25 + 5 * active_with_role["Engineer"]
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/meteor_shower] = 40 * active_with_role["Engineer"]
@@ -96,8 +96,6 @@ var/global/list/possibleEvents = list()
 
 	possibleEvents[/datum/event/prison_break] = active_with_role["Security"] * 50
 	if(active_with_role["Security"] > 0)
-		if(!sent_spiders_to_station)
-			possibleEvents[/datum/event/spider_infestation] = max(active_with_role["Security"], 5) + 5
 		if(aliens_allowed && !sent_aliens_to_station)
 			possibleEvents[/datum/event/alien_infestation] = max(active_with_role["Security"], 5) + 2.5
 		if(!sent_ninja_to_station && toggle_space_ninja)
