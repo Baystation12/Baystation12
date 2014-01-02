@@ -182,6 +182,7 @@
 	corpseid = 1
 	corpseidjob = "Clown"
 	corpseidaccess = "Clown"
+	timeofdeath = -50000
 
 /obj/effect/landmark/corpse/clownking
 	name = "Clown King"
@@ -208,7 +209,7 @@
 	corpseid = 1
 	corpseidjob = "Mime"
 	corpseidaccess = "Mime"
-
+	timeofdeath = -50000
 
 /obj/effect/landmark/corpse/scientist
 	name = "Scientist"

@@ -106,6 +106,9 @@
 					if(mind && mind.vampire && (mind in ticker.mode.vampires))
 						M << "\red Your fangs fail to pierce [src.name]'s cold flesh"
 						return 0
+					if(SKELETON in mutations)
+						M << "\red There is no blood in a skeleton!"
+						return 0
 					//we're good to suck the blood, blaah
 					M.handle_bloodsucking(src)
 					add_logs(src, M, "vampirebit")
