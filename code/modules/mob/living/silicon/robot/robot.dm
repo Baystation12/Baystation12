@@ -588,6 +588,7 @@
 				return
 
 	if (istype(W, /obj/item/weapon/weldingtool))
+		if(W == module_active) return
 		if (!getBruteLoss())
 			user << "Nothing to fix here!"
 			return
