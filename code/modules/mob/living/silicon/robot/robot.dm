@@ -154,7 +154,7 @@
 		return
 
 	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
-	if(security_level >= SEC_LEVEL_GAMMA)
+	if(security_level == (SEC_LEVEL_GAMMA || SEC_LEVEL_EPSILON))
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	if(mmi != null && mmi.alien)
