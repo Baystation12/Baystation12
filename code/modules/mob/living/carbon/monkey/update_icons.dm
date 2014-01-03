@@ -45,7 +45,10 @@
 ////////
 /mob/living/carbon/monkey/update_inv_wear_mask(var/update_icons=1)
 	if( wear_mask && istype(wear_mask, /obj/item/clothing/mask) )
-		overlays_standing[M_MASK_LAYER]	= image("icon" = 'icons/mob/monkey.dmi', "icon_state" = "[wear_mask.icon_state]")
+		if(wear_mask:tc_custom)
+			overlays_standing[M_MASK_LAYER]	= image("icon" = wear_mask:tc_custom, "icon_state" = "[wear_mask.icon_state]_mob")
+		else
+			overlays_standing[M_MASK_LAYER]	= image("icon" = 'icons/mob/monkey.dmi', "icon_state" = "[wear_mask.icon_state]")
 		wear_mask.screen_loc = ui_monkey_mask
 	else
 		overlays_standing[M_MASK_LAYER]	= null
@@ -56,7 +59,10 @@
 	if(r_hand)
 		var/t_state = r_hand.item_state
 		if(!t_state)	t_state = r_hand.icon_state
-		overlays_standing[M_R_HAND_LAYER]	= image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = t_state)
+		if(r_hand:tc_custom)
+			overlays_standing[M_R_HAND_LAYER]	= image("icon" = r_hand:tc_custom, "icon_state" = "[t_state]_r")
+		else
+			overlays_standing[M_R_HAND_LAYER]	= image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = t_state)
 		r_hand.screen_loc = ui_rhand
 		if (handcuffed) drop_r_hand()
 	else
@@ -68,7 +74,10 @@
 	if(l_hand)
 		var/t_state = l_hand.item_state
 		if(!t_state)	 t_state = l_hand.icon_state
-		overlays_standing[M_L_HAND_LAYER]	= image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = t_state)
+		if(l_hand:tc_custom)
+			overlays_standing[M_L_HAND_LAYER]	= image("icon" = l_hand:tc_custom, "icon_state" = "[t_state]_l")
+		else
+			overlays_standing[M_L_HAND_LAYER]	= image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = t_state)
 		l_hand.screen_loc = ui_lhand
 		if (handcuffed) drop_l_hand()
 	else
@@ -78,7 +87,10 @@
 
 /mob/living/carbon/monkey/update_inv_back(var/update_icons=1)
 	if(back)
-		overlays_standing[M_BACK_LAYER]	= image("icon" = 'icons/mob/back.dmi', "icon_state" = "[back.icon_state]")
+		if(back:tc_custom)
+			overlays_standing[M_BACK_LAYER]	= image("icon" = back:tc_custom, "icon_state" = "[back.icon_state]_mob")
+		else
+			overlays_standing[M_BACK_LAYER]	= image("icon" = 'icons/mob/back.dmi', "icon_state" = "[back.icon_state]")
 		back.screen_loc = ui_monkey_back
 	else
 		overlays_standing[M_BACK_LAYER]	= null

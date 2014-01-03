@@ -15,6 +15,7 @@
 
 	var/damtype = "brute"
 	var/force = 0
+	var/tc_custom = null //Default Bay12 sprite or not
 
 /obj/item/proc/is_used_on(obj/O, mob/user)
 

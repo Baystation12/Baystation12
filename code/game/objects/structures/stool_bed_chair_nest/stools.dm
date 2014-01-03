@@ -9,6 +9,7 @@
 
 /obj/structure/stool/bar
 	name = "bar stool"
+	icon = 'tauceti/icons/obj/objects.dmi'
 	icon_state = "bar_chair"
 
 /obj/structure/stool/ex_act(severity)

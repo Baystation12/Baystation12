@@ -1,6 +1,6 @@
 /obj/item/weapon/pinpointer
 	name = "pinpointer"
-	icon = 'icons/obj/device.dmi'
+	icon = 'tauceti/icons/obj/devices.dmi'
 	icon_state = "pinoff"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	slot_flags = SLOT_BELT

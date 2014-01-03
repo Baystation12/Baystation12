@@ -167,7 +167,7 @@
 /obj/machinery/computer/security/telescreen
 	name = "Telescreen"
 	desc = "Used for watching an empty arena."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'tauceti/icons/obj/objects.dmi'
 	icon_state = "telescreen"
 	network = list("thunder")
 	density = 0

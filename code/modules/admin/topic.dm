@@ -562,7 +562,7 @@
 				counter = 0
 
 		//pAI isn't technically a job, but it goes in here.
-		
+
 		if(jobban_isbanned(M, "pAI"))
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=pAI;jobban4=\ref[M]'><font color=red>pAI</font></a></td>"
 		else
@@ -572,7 +572,7 @@
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=AntagHUD;jobban4=\ref[M]'><font color=red>AntagHUD</font></a></td>"
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=AntagHUD;jobban4=\ref[M]'>AntagHUD</a></td>"
-		
+
 
 	//Clown&Mime
 		counter = 0
@@ -649,6 +649,12 @@
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Meme;jobban4=\ref[M]'><font color=red>Meme</font></a></td>"
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Meme;jobban4=\ref[M]'>Meme</a></td>"
+
+		//Vox Raider
+		if(jobban_isbanned(M, "Vox Raider") || isbanned_dept)
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Vox Raider;jobban4=\ref[M]'><font color=red>Vox Raider</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Vox Raider;jobban4=\ref[M]'>Vox Raider</a></td>"
 
 /*		//Malfunctioning AI	//Removed Malf-bans because they're a pain to impliment
 		if(jobban_isbanned(M, "malf AI") || isbanned_dept)

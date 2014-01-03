@@ -3,6 +3,12 @@
 	desc = "You sit in this. Either by will or force."
 	icon_state = "chair"
 
+/obj/structure/stool/bed/chair/schair
+	name = "shuttle chair"
+	desc = "You sit in this. Either by will or force."
+	icon = 'tauceti/icons/obj/objects.dmi'
+	icon_state = "schair"
+
 /obj/structure/stool/MouseDrop(atom/over_object)
 	return
 

@@ -1,7 +1,7 @@
 /obj/item/brain
 	name = "brain"
 	desc = "A piece of juicy meat found in a persons head."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'tauceti/icons/obj/surgery.dmi'
 	icon_state = "brain2"
 	flags = TABLEPASS
 	force = 1.0

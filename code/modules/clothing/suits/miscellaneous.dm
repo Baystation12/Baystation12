@@ -235,13 +235,13 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 
 //coats
-
+/*
 /obj/item/clothing/suit/leathercoat
 	name = "leather coat"
 	desc = "A flowing, black coat."
 	icon_state = "leathercoat"
 	item_state = "leathercoat"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS */
 
 /obj/item/clothing/suit/browncoat
 	name = "brown leather coat"
