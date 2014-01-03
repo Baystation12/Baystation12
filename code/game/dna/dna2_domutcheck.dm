@@ -40,6 +40,9 @@
 		//else
 		//	testing("[M] - Failed to activate [gene.name] - [gene_active?"+":"-"]active, [gene_prior_status?"+":"-"]prior")
 
+
+		// PROC CONTINUES BELOW AFTER COMMENTED CODE.
+
 /* Old, inflexibile
 /proc/domutcheck(var/mob/living/M, var/connected, var/flags)
 	if (!M) return
