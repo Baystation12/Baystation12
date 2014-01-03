@@ -150,7 +150,7 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 		playsound(U.loc, 'sound/effects/EMPulse.ogg', 60, 2)
 		empulse(U, 4, 6) //Procs sure are nice. Slightly weaker than wizard's disable tch.
 		s_coold = 2
-		cell.charge-=(1000)
+		cell.charge-=(C)
 	return
 
 //=======//ENERGY BLADE//=======//
