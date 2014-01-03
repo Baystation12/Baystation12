@@ -477,6 +477,15 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/popcorn
 
+
+/datum/recipe/cookie
+	reagents = list("milk" = 5, "flour" = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/egg,
+		/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/cookie
+
 /datum/recipe/fortunecookie
 	reagents = list("flour" = 5)
 	items = list(
