@@ -21,7 +21,7 @@
 			return 0
 		if(spore_delay > world.time)
 			return 0
-		spore_delay = world.time + 100 // 10 seconds
+		spore_delay = world.time + 300 // 30 seconds
 		new/mob/living/simple_animal/hostile/blobspore(src.loc, src)
 		return 1
 
