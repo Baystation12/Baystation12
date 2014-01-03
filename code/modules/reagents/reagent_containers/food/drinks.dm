@@ -254,7 +254,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/waterbottle
 	name = "Bottled Water"
-	desc = "Introduced to the vending machines on health nut protest, taste fresh, pure glacial* water! *Note: Might be tapwater."
+	desc = "Introduced to the vending machines by Skrellian request, this water comes straight from the Martian poles."
 	icon_state = "waterbottle"
 	New()
 		..()
@@ -264,7 +264,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/beer
 	name = "Space Beer"
-	desc = "Beer. In space."
+	desc = "Contains only water, malt and hops."
 	icon_state = "beer"
 	New()
 		..()
@@ -296,7 +296,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/thirteenloko
 	name = "Thirteen Loko"
-	desc = "The CMO has advised crew members that consumption of Thirteen Loko may result in seizures, blindness, drunkeness, or even death. Please Drink Responsably."
+	desc = "The CMO has advised crew members that consumption of Thirteen Loko may result in seizures, blindness, drunkeness, or even death. Please Drink Responsibly."
 	icon_state = "thirteen_loko"
 	New()
 		..()
@@ -347,7 +347,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/iced_tea
 	name = "Vrisk Serket Iced Tea"
-	desc = "That sweet, refreshing southern earthy flavor. That's where it's from, right? South Earth? Whatever!!!!!!!!"
+	desc = "That sweet, refreshing southern earthy flavor. That's where it's from, right? South Earth?"
 	icon_state = "ice_tea_can"
 	New()
 		..()
@@ -391,7 +391,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/sodawater
 	name = "Soda Water"
-	desc = "A can of soda water. Why not make a scotch and soda?"
+	desc = "A can of soda water. Still water's more refreshing cousin."
 	icon_state = "sodawater"
 	New()
 		..()
@@ -428,12 +428,12 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask
 	name = "vacuum flask"
-	desc = "Keeping your drinks at the perfect temperature since 2321."
+	desc = "Keeping your drinks at the perfect temperature since 1892."
 	icon_state = "vacuumflask"
 	volume = 60
 
 /obj/item/weapon/reagent_containers/food/drinks/britcup
 	name = "cup"
-	desc = "A cup with the british flag emblazoned on it."
+	desc = "A cup with the British flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30
