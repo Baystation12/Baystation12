@@ -29,6 +29,9 @@
 		config.server_name += " #[(world.port % 1000) / 100]"
 
 	callHook("startup")
+	//Emergency Fix
+	load_mods()
+	//end-emergency fix
 
 	src.update_status()
 

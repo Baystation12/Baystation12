@@ -487,7 +487,7 @@ commented out in r5061, I left it because of the shroom thingies
 
 	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
 	N.fullUpdateMineralOverlays()
-	var/crate = rand(1,30)
+	var/crate = rand(1,500)
 	switch(crate)
 		if(1)
 			visible_message("<span class='notice'>After digging, you find an old dusty crate buried within!</span>")
