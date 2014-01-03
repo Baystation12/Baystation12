@@ -220,3 +220,15 @@
 	New()
 		..()
 		reagents.add_reagent("virusfood", 1000)
+
+/obj/structure/reagent_dispensers/spacecleanertank
+	name = "space cleaner refiller"
+	desc = "Refills space cleaner bottles."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "spacecleanertank"
+	anchored = 1
+	density = 0
+	amount_per_transfer_from_this = 250
+	New()
+		..()
+		reagents.add_reagent("cleaner",5000)
