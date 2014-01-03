@@ -35,7 +35,7 @@
 			intercepttext += "2. Detonate the Nuke located in the Station's Vault.<BR>"
 			intercepttext += "Nuclear Authentication Code: [nukecode] <BR>"
 			intercepttext += "Message ends."
-
+			spawn(10)	world << sound('sound/effects/siren.ogg')
 			for (var/mob/living/silicon/ai/aiPlayer in player_list)
 				if (aiPlayer.client)
 					var/law = "The station is under quarantine, prevent biological entities from leaving the station at all costs while minimizing collateral damage. The nuclear failsafe must be activated at any cost, the code is: [nukecode]."
