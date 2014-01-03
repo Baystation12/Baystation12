@@ -19,7 +19,13 @@ datum/event/viral_infection/start()
 	if(!candidates.len)	return
 	candidates = shuffle(candidates)//Incorporating Donkie's list shuffle
 
+	var/datum/disease2/disease/D = new /datum/disease2/disease
+	D.makerandom()
+	D.infectionchance = 1
+	message_admins("Viral Infection: releasing strain [D.uniqueID]")
+
 	while(severity > 0 && candidates.len)
-		infect_mob_random_lesser(candidates[1])
+		var/mob/living/carbon/human/H = candidates[1]
+		H.virus2["[D.uniqueID]"] = D
 		candidates.Remove(candidates[1])
 		severity--
