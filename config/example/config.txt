@@ -229,3 +229,9 @@ USEALIENWHITELIST
 ## Path to the python2 executable on the system.  Leave blank for default.
 ## Default is "python" on Windows, "/usr/bin/env python2" on UNIX.
 #PYTHON_PATH
+
+## Uncommen to allow ghosts to write in blood during Cult rounds.
+ALLOW_CULT_GHOSTWRITER
+
+## Sets the minimum number of cultists needed for ghosts to write in blood.
+REQ_CULT_GHOSTWRITER 6

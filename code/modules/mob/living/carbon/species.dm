@@ -39,6 +39,9 @@
 
 	var/list/abilities = list()	// For species-derived or admin-given powers
 
+	var/blood_color = "#A10808" //Red.
+	var/flesh_color = "#FFC896" //Pink.
+
 /datum/species/human
 	name = "Human"
 	language = "Sol Common"
@@ -70,6 +73,8 @@
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
+	flesh_color = "#34AF10"
+
 /datum/species/tajaran
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
@@ -92,6 +97,8 @@
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
+	flesh_color = "#AFA59E"
+
 /datum/species/skrell
 	name = "Skrell"
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
@@ -100,6 +107,8 @@
 	primitive = /mob/living/carbon/monkey/skrell
 
 	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
+
+	flesh_color = "#8CD7A3"
 
 /datum/species/vox
 	name = "Vox"
@@ -118,6 +127,9 @@
 	breath_type = "nitrogen"
 
 	flags = NO_SCAN
+
+	blood_color = "#2299FC"
+	flesh_color = "#808D11"
 
 /datum/species/diona
 	name = "Diona"
@@ -140,3 +152,7 @@
 	heat_level_3 = 4000
 
 	flags = WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
+
+	blood_color = "#004400"
+	flesh_color = "#907E4A"
+

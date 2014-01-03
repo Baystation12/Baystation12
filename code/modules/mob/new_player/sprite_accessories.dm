@@ -61,6 +61,10 @@
 		name = "Cut Hair"
 		icon_state = "hair_c"
 
+	flair
+		name = "Flaired Hair"
+		icon_state = "hair_flair"
+
 	long
 		name = "Shoulder-length Hair"
 		icon_state = "hair_b"
@@ -420,7 +424,7 @@
 
 	una_frills_short
 		name = "Short Unathi Frills"
-		icon_state = "soghun_shortfrill"
+		icon_state = "soghun_shortfrills"
 		species_allowed = list("Unathi")
 		do_colouration = 0
 
