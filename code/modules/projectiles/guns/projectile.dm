@@ -1,121 +1,92 @@
-#define SPEEDLOADER 0
-#define FROM_BOX 1
-#define MAGAZINE 2
-
 /obj/item/weapon/gun/projectile
-	desc = "A classic revolver. Uses 357 ammo"
-	name = "revolver"
-	icon_state = "revolver"
-	caliber = "357"
+	desc = "Now comes in flavors like GUN. Uses 10mm ammo, for some reason"
+	name = "projectile gun"
+	icon_state = "pistol"
 	origin_tech = "combat=2;materials=2"
 	w_class = 3.0
 	m_amt = 1000
-	recoil = 1
-	var/ammo_type = "/obj/item/ammo_casing/a357"
-	var/list/loaded = list()
-	var/max_shells = 7
-	var/load_method = SPEEDLOADER //0 = Single shells or quick loader, 1 = box, 2 = magazine
-	var/obj/item/ammo_magazine/empty_mag = null
 
+	var/ammo_type = /obj/item/ammo_casing/c9mm
+	var/mag_type = /obj/item/ammo_box/magazine/m9mm //Removes the need for max_ammo and caliber info
+	var/obj/item/ammo_box/magazine/magazine
+	var/obj/item/ammo_casing/chambered = null // The round (not bullet) that is in the chamber.
 
 /obj/item/weapon/gun/projectile/New()
 	..()
-	for(var/i = 1, i <= max_shells, i++)
-		loaded += new ammo_type(src)
+	magazine = new mag_type(src)
+	chamber_round()
 	update_icon()
 	return
 
-
-/obj/item/weapon/gun/projectile/load_into_chamber()
-	if(in_chamber)
-		return 1 //{R}
-
-	if(!loaded.len)
-		return 0
-	var/obj/item/ammo_casing/AC = loaded[1] //load next casing.
-	loaded -= AC //Remove casing from loaded list.
+/obj/item/weapon/gun/projectile/process_chambered(var/eject_casing = 1, var/empty_chamber = 1)
+//	if(in_chamber)
+//		return 1
+	var/obj/item/ammo_casing/AC = chambered //Find chambered round
 	if(isnull(AC) || !istype(AC))
 		return 0
-	AC.loc = get_turf(src) //Eject casing onto ground.
+	if(eject_casing)
+		AC.loc = get_turf(src) //Eject casing onto ground.
+	if(empty_chamber)
+		chambered = null
+	chamber_round()
 	if(AC.BB)
-		AC.desc += " This one is spent."	//descriptions are magic - only when there's a projectile in the casing
+		if(AC.reagents && AC.BB.reagents)
+			var/datum/reagents/casting_reagents = AC.reagents
+			casting_reagents.trans_to(AC.BB, casting_reagents.total_volume) //For chemical darts/bullets
+			casting_reagents.delete()
 		in_chamber = AC.BB //Load projectile into chamber.
 		AC.BB.loc = src //Set projectile loc to gun.
+		AC.BB = null
+		AC.update_icon()
 		return 1
 	return 0
 
-
-/obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
-
-	var/num_loaded = 0
-	if(istype(A, /obj/item/ammo_magazine))
-		if((load_method == MAGAZINE) && loaded.len)	return
-		var/obj/item/ammo_magazine/AM = A
-		if(AM.stored_ammo.len <= 0)
-			user << "<span class='warning'>The magazine is empty!</span>"
-			return
-		for(var/obj/item/ammo_casing/AC in AM.stored_ammo)
-			if(loaded.len >= max_shells)
-				break
-			if(AC.caliber == caliber && loaded.len < max_shells)
-				AC.loc = src
-				AM.stored_ammo -= AC
-				loaded += AC
-				num_loaded++
-		if(load_method == MAGAZINE)
-			user.remove_from_mob(AM)
-			empty_mag = AM
-			empty_mag.loc = src
-	if(istype(A, /obj/item/ammo_casing) && load_method == SPEEDLOADER)
-		var/obj/item/ammo_casing/AC = A
-		if(AC.caliber == caliber && loaded.len < max_shells)
-			user.drop_item()
-			AC.loc = src
-			loaded += AC
-			num_loaded++
-	if(num_loaded)
-		user << "\blue You load [num_loaded] shell\s into the gun!"
-	A.update_icon()
-	update_icon()
+/obj/item/weapon/gun/projectile/proc/chamber_round()
+	if (chambered || !magazine)
+		return
+	else if (magazine.ammo_count())
+		chambered = magazine.get_round()
+		chambered.loc = src
 	return
 
-/obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
-	if (target)
-		return ..()
-	if (loaded.len)
-		if (load_method == SPEEDLOADER)
-			var/obj/item/ammo_casing/AC = loaded[1]
-			loaded -= AC
-			AC.loc = get_turf(src) //Eject casing onto ground.
-			user << "\blue You unload shell from \the [src]!"
-		if (load_method == MAGAZINE)
-			var/obj/item/ammo_magazine/AM = empty_mag
-			for (var/obj/item/ammo_casing/AC in loaded)
-				AM.stored_ammo += AC
-				loaded -= AC
-			AM.loc = get_turf(src)
-			empty_mag = null
+/obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
+	if (istype(A, /obj/item/ammo_box/magazine))
+		var/obj/item/ammo_box/magazine/AM = A
+		if (!magazine && istype(AM, mag_type))
+			user.remove_from_mob(AM)
+			magazine = AM
+			magazine.loc = src
+			user << "<span class='notice'>You load a new magazine into \the [src]!</span>"
+			chamber_round()
+			A.update_icon()
 			update_icon()
-			AM.update_icon()
-			user << "\blue You unload magazine from \the [src]!"
-	else
-		user << "\red Nothing loaded in \the [src]!"
+			return 1
+		else if (magazine)
+			user << "<span class='notice'>There's already a magazine in \the [src].</span>"
+	return 0
 
+/obj/item/weapon/gun/projectile/attack_self(mob/living/user as mob)
+	if (magazine)
+		magazine.loc = get_turf(src.loc)
+		user.put_in_hands(magazine)
+		magazine.update_icon()
+		magazine = null
+		user << "<span class='notice'>You pull the magazine out of \the [src]!</span>"
+	else
+		user << "<span class='notice'>There's no magazine in \the [src].</span>"
+	update_icon()
+	return
 
 
 /obj/item/weapon/gun/projectile/examine()
 	..()
-	usr << "Has [getAmmo()] round\s remaining."
-//		if(in_chamber && !loaded.len)
-//			usr << "However, it has a chambered round."
-//		if(in_chamber && loaded.len)
-//			usr << "It also has a chambered round." {R}
+	usr << "Has [get_ammo()] round\s remaining."
 	return
 
-/obj/item/weapon/gun/projectile/proc/getAmmo()
-	var/bullets = 0
-	for(var/obj/item/ammo_casing/AC in loaded)
-		if(istype(AC))
-			bullets += 1
-	return bullets
-
+/obj/item/weapon/gun/projectile/proc/get_ammo(var/countchambered = 1)
+	var/boolets = 0 //mature var names for mature people
+	if (chambered && countchambered)
+		boolets++
+	if (magazine)
+		boolets += magazine.ammo_count()
+	return boolets

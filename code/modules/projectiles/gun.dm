@@ -1,6 +1,6 @@
 /obj/item/weapon/gun
 	name = "gun"
-	desc = "Its a gun. It's pretty terrible, though."
+	desc = "It's a gun. It's pretty terrible, though."
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "detective"
 	item_state = "gun"
@@ -17,10 +17,8 @@
 
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 	var/obj/item/projectile/in_chamber = null
-	var/caliber = ""
 	var/silenced = 0
 	var/recoil = 0
-	var/ejectshell = 1
 	var/clumsy_check = 1
 	var/tmp/list/mob/living/target //List of who yer targeting.
 	var/tmp/lock_time = -100
@@ -40,15 +38,25 @@
 		else
 			return 0
 
-	proc/load_into_chamber()
+	proc/process_chambered()
 		return 0
 
 	proc/special_check(var/mob/M) //Placeholder for any special checks, like detective's revolver.
 		return 1
 
+	proc/prepare_shot(var/obj/item/projectile/proj) //Transfer properties from the gun to the bullet
+		proj.shot_from = src
+		proj.silenced = silenced
+		return
+
+	proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
+		user << "<span class='warning'>*click*</span>"
+		return
+
 	emp_act(severity)
 		for(var/obj/O in contents)
 			O.emp_act(severity)
+
 
 /obj/item/weapon/gun/afterattack(atom/A as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
 	if(flag)	return //It's adjacent, is the user, or is on the user's person
@@ -57,9 +65,6 @@
 		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.
 	else
 		Fire(A,user,params) //Otherwise, fire normally.
-
-/obj/item/weapon/gun/proc/isHandgun()
-	return 1
 
 /obj/item/weapon/gun/proc/Fire(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, params, reflex = 0)//TODO: go over this
 	//Exclude lasertag guns from the CLUMSY check.
@@ -88,7 +93,7 @@
 
 	add_fingerprint(user)
 
-	var/turf/curloc = get_turf(user)
+	var/turf/curloc = user.loc
 	var/turf/targloc = get_turf(target)
 	if (!istype(targloc) || !istype(curloc))
 		return
@@ -101,19 +106,15 @@
 			user << "<span class='warning'>[src] is not ready to fire again!"
 		return
 
-	if(!load_into_chamber()) //CHECK
-		return click_empty(user)
+	if(!process_chambered())
+		shoot_with_empty_chamber(user)
 
 	if(!in_chamber)
 		return
 
 	in_chamber.firer = user
 	in_chamber.def_zone = user.zone_sel.selecting
-	if(targloc == curloc)
-		user.bullet_act(in_chamber)
-		del(in_chamber)
-		update_icon()
-		return
+
 
 	if(recoil)
 		spawn()
@@ -123,27 +124,24 @@
 		playsound(user, fire_sound, 10, 1)
 	else
 		playsound(user, fire_sound, 50, 1)
-		user.visible_message("<span class='warning'>[user] fires [src][reflex ? " by reflex":""]!</span>", \
-		"<span class='warning'>You fire [src][reflex ? "by reflex":""]!</span>", \
-		"You hear a [istype(in_chamber, /obj/item/projectile/beam) ? "laser blast" : "gunshot"]!")
+		user.visible_message("<span class='danger'>[user] fires [src]!</span>", "<span class='danger'>You fire [src]!</span>", "You hear a [istype(in_chamber, /obj/item/projectile/beam) ? "laser blast" : "gunshot"]!")
 
+	prepare_shot(in_chamber)				//Set the projectile's properties
+
+
+
+	if(targloc == curloc)			//Fire the projectile
+		user.bullet_act(in_chamber)
+		del(in_chamber)
+		update_icon()
+		return
 	in_chamber.original = target
 	in_chamber.loc = get_turf(user)
 	in_chamber.starting = get_turf(user)
-	in_chamber.shot_from = src
-	user.next_move = world.time + 4
-	in_chamber.silenced = silenced
 	in_chamber.current = curloc
 	in_chamber.yo = targloc.y - curloc.y
 	in_chamber.xo = targloc.x - curloc.x
-	if(istype(user, /mob/living/carbon))
-		var/mob/living/carbon/mob = user
-		if(mob.shock_stage > 120)
-			in_chamber.yo += rand(-2,2)
-			in_chamber.xo += rand(-2,2)
-		else if(mob.shock_stage > 70)
-			in_chamber.yo += rand(-1,1)
-			in_chamber.xo += rand(-1,1)
+	user.next_move = world.time + 4
 
 	if(params)
 		var/list/mouse_control = params2list(params)
@@ -161,12 +159,13 @@
 	update_icon()
 
 	if(user.hand)
-		user.update_inv_l_hand()
+		user.update_inv_l_hand(0)
 	else
-		user.update_inv_r_hand()
+		user.update_inv_r_hand(0)
+
 
 /obj/item/weapon/gun/proc/can_fire()
-	return load_into_chamber()
+	process_chambered()
 
 /obj/item/weapon/gun/proc/can_hit(var/mob/living/target as mob, var/mob/living/user as mob)
 	return in_chamber.check_fire(target,user)
@@ -179,6 +178,9 @@
 		src.visible_message("*click click*")
 		playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
 
+/obj/item/weapon/gun/proc/isHandgun()
+	return 1
+
 /obj/item/weapon/gun/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
 	//Suicide handling.
 	if (M == user && user.zone_sel.selecting == "mouth" && !mouthshoot)
@@ -188,13 +190,13 @@
 			M.visible_message("\blue [user] decided life was worth living")
 			mouthshoot = 0
 			return
-		if (load_into_chamber())
+		if (process_chambered())
 			user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
 			if(silenced)
 				playsound(user, fire_sound, 10, 1)
 			else
 				playsound(user, fire_sound, 50, 1)
-			if(istype(in_chamber, /obj/item/projectile/beam/lastertag))		
+			if(istype(in_chamber, /obj/item/projectile/beam/lastertag))
 				user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 				mouthshoot = 0
 				return
@@ -214,7 +216,7 @@
 			mouthshoot = 0
 			return
 
-	if (load_into_chamber())
+	if (process_chambered())
 		//Point blank shooting if on harm intent or target we were targeting.
 		if(user.a_intent == "hurt")
 			user.visible_message("\red <b> \The [user] fires \the [src] point blank at [M]!</b>")

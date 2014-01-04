@@ -886,7 +886,7 @@
 /obj/item/weapon/melee/baton/fluff/oeng_baton
 	name = "well-used stun baton"
 	desc = "A stun baton used for incapacitating targets; there seems to be a bunch of tally marks set into the handle."
-
+/*
 ///// Deckard .44 - Callum Leamas - Roaper
 /obj/item/weapon/gun/projectile/detective/fluff/callum_leamas
 	name = "Deckard .44"
@@ -908,7 +908,7 @@
 		flick("leamas-reloading",src)
 	..()
 
-
+*/
 ///// Custom Items coded by Iamgoofball are Below /////
 /obj/item/weapon/storage/belt/medical/fluff/nashi_belt
 	name = "rainbow medical belt"

@@ -50,7 +50,7 @@ obj/item/weapon/gun/energy/laser/retro
 
 
 
-/obj/item/weapon/gun/energy/laser/cyborg/load_into_chamber()
+/obj/item/weapon/gun/energy/laser/cyborg/process_chambered()
 	if(in_chamber)
 		return 1
 	if(isrobot(src.loc))
@@ -76,7 +76,7 @@ obj/item/weapon/gun/energy/laser/retro
 	isHandgun()
 		return 0
 
-/obj/item/weapon/gun/energy/lasercannon/cyborg/load_into_chamber()
+/obj/item/weapon/gun/energy/lasercannon/cyborg/process_chambered()
 	if(in_chamber)
 		return 1
 	if(isrobot(src.loc))

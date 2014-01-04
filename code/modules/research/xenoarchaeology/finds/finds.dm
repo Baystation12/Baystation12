@@ -349,20 +349,22 @@
 			item_type = "gun"
 		if(27)
 			//revolver
-			var/obj/item/weapon/gun/projectile/new_gun = new /obj/item/weapon/gun/projectile(src.loc)
+			var/obj/item/weapon/gun/projectile/revolver/new_gun = new /obj/item/weapon/gun/projectile/revolver(src.loc)
 			new_item = new_gun
 			new_item.icon_state = "gun[rand(1,4)]"
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 
 			//33% chance to be able to reload the gun with human ammunition
 			if(prob(66))
-				new_gun.caliber = "999"
+				new_gun.magazine.caliber = "999"
 
 			//33% chance to fill it with a random amount of bullets
-			new_gun.max_shells = rand(1,12)
+			new_gun.magazine.max_ammo = rand(1,12)
 			if(prob(33))
-				var/num_bullets = rand(1,new_gun.max_shells)
-				if(num_bullets < new_gun.loaded.len)
+				var/num_bullets = rand(1,new_gun.magazine.max_ammo)
+				new_gun.magazine.stored_ammo.len = num_bullets
+/*				var/num_bullets = rand(1,new_gun.magazine.max_ammo)
+				if(num_bullets < new_gun.magazine.stored_ammo.len)
 					new_gun.loaded.Cut()
 					for(var/i = 1, i <= num_bullets, i++)
 						var/A = text2path(new_gun.ammo_type)
@@ -379,7 +381,9 @@
 				for(var/obj/item/I in new_gun)
 					if(I in new_gun.loaded)
 						new_gun.loaded.Remove(I)
-						I.loc = null
+						I.loc = null  */
+			else
+				new_gun.magazine.stored_ammo.len = 0
 
 			item_type = "gun"
 		if(28)

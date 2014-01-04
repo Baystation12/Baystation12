@@ -735,8 +735,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	name = "Ballistic gear crate"
 	contains = list(/obj/item/clothing/suit/armor/bulletproof,
 					/obj/item/clothing/suit/armor/bulletproof,
-					/obj/item/weapon/gun/projectile/shotgun/pump/combat,
-					/obj/item/weapon/gun/projectile/shotgun/pump/combat)
+					/obj/item/weapon/gun/projectile/shotgun/combat,
+					/obj/item/weapon/gun/projectile/shotgun/combat)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Ballistic gear crate"
