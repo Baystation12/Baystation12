@@ -2104,7 +2104,6 @@ datum
 				return
 
 
-				return
 
 		potassium_chloride
 			name = "Potassium Chloride"
