@@ -1,5 +1,6 @@
 /mob/living/carbon/alien/humanoid
 	name = "alien"
+	icon = 'tauceti/icons/mob/alien.dmi'
 	icon_state = "alien_s"
 
 	var/obj/item/clothing/suit/wear_suit = null		//TODO: necessary? Are they even used? ~Carn

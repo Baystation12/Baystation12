@@ -3,7 +3,7 @@
 	caste = "q"
 	maxHealth = 300
 	health = 300
-	icon = 'icons/mob/alienqueen.dmi'
+	icon = 'tauceti/icons/mob/alienbig.dmi'
 	icon_state = "queen_s"
 	pixel_x = -16
 	status_flags = CANPARALYSE

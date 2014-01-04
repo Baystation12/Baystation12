@@ -1,9 +1,9 @@
 /obj/structure/sign/double/barsign
-	icon = 'icons/obj/barsigns.dmi'
+	icon = 'tauceti/icons/obj/barsigns.dmi'
 	icon_state = "empty"
 	anchored = 1
 
-	var/global/bar_sing_global = pick("lv426", "zocalo", "4theemprah", "ishimura", "tardis", "thecavern", "quarks", "tenforward", "thepranicngpony", "vault13", "solaris", "thehive", "cantina", "theouterspess", "milliways42", "thetimeofeve", "spaceasshole", "dwarffortress", "maltesefalcon")
+	var/global/bar_sing_global = pick("lv426", "zocalo", "4theemprah", "ishimura", "tardis", "thecavern", "quarks", "tenforward", "thepranicngpony", "vault13", "solaris", "thehive", "cantina", "theouterspess", "milliways42", "thetimeofeve", "spaceasshole", "dwarffortress", "maltesefalcon", "meadbay", "thecavern","theorchard","whiskeyimplant","carpecarp","robustroadhouse","greytide","theredshirt")
 	New()
 		ChangeSign(bar_sing_global)
 		return

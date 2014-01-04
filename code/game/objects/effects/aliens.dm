@@ -13,7 +13,7 @@
 /obj/effect/alien
 	name = "alien thing"
 	desc = "theres something alien about this"
-	icon = 'icons/mob/alien.dmi'
+	icon = 'tauceti/icons/mob/alien.dmi'
 //	unacidable = 1 //Aliens won't ment their own.
 
 

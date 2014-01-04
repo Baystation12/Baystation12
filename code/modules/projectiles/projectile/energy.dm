@@ -54,6 +54,7 @@
 
 /obj/item/projectile/energy/neurotoxin
 	name = "neuro"
+	icon = 'tauceti/icons/obj/projectiles.dmi'
 	icon_state = "neurotoxin"
 	damage = 5
 	damage_type = TOX
