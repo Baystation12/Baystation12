@@ -32,7 +32,8 @@
 
 var/announcing_vox = 0 // Stores the time of the last announcement
 var/const/VOX_CHANNEL = 200
-var/const/VOX_DELAY = 600
+var/const/VOX_DELAY = 100
+var/const/VOX_PATH = "sound/vox_fem/"
 
 /mob/living/silicon/ai/verb/announcement_help()
 
@@ -61,45 +62,53 @@ var/const/VOX_DELAY = 600
 
 /mob/living/silicon/ai/verb/announcement()
 
-        set name = "Announcement"
-        set desc = "Create a vocal announcement by typing in the available words to create a sentence."
-        set category = "AI Commands"
+	set name = "Announcement"
+	set desc = "Create a vocal announcement by typing in the available words to create a sentence."
+	set category = "AI Commands"
+	if(src.stat == 2)
+		src << "You can't call the shuttle because you are dead!"
+		return
+	if(istype(usr,/mob/living/silicon/ai))
+		var/mob/living/silicon/ai/AI = src
+		if(AI.control_disabled)
+			usr << "Wireless control is disabled!"
+			return
 
-        if(announcing_vox > world.time)
-                src << "<span class='notice'>Please wait [round((announcing_vox - world.time) / 10)] seconds.</span>"
-                return
+	if(announcing_vox > world.time)
+		src << "<span class='notice'>Please wait [round((announcing_vox - world.time) / 10)] seconds.</span>"
+		return
 
-        var/message = input(src, "WARNING: Misuse of this verb can result in you being job banned. More help is available in 'Announcement Help'", "Announcement", src.last_announcement) as text
+	var/message = input(src, "WARNING: Misuse of this verb can result in you being job banned. More help is available in 'Announcement Help'", "Announcement", src.last_announcement) as text
 
-        last_announcement = message
+	last_announcement = message
 
-        if(!message || announcing_vox > world.time)
-                return
+	if(!message || announcing_vox > world.time)
+		return
 
-        var/list/words = stringsplit(trim(message), " ")
-        var/list/incorrect_words = list()
+	var/list/words = stringsplit(trim(message), " ")
+	var/list/incorrect_words = list()
 
-        if(words.len > 30)
-                words.len = 30
+	if(words.len > 30)
+		words.len = 30
 
-        for(var/word in words)
-                word = trim(word)
-                if(!word)
-                        words -= word
-                        continue
-                if(!vox_sounds[word])
-                        incorrect_words += word
+	for(var/word in words)
+		word = lowertext(trim(word))
+		if(!word)
+			words -= word
+			continue
+		if(!vox_sounds[word])
+			incorrect_words += word
 
-        if(incorrect_words.len)
-                src << "<span class='notice'>These words are not available on the announcement system: [english_list(incorrect_words)].</span>"
-                return
+	if(incorrect_words.len)
+		src << "<span class='notice'>These words are not available on the announcement system: [english_list(incorrect_words)].</span>"
+		return
 
-        announcing_vox = world.time + VOX_DELAY
+	announcing_vox = world.time + VOX_DELAY
 
-        log_game("[key_name_admin(src)] made a vocal announcement with the following message: [message].")
+	log_game("[key_name_admin(src)] made a vocal announcement with the following message: [message].")
 
-        for(var/word in words)
-                play_vox_word(word, src.z, null)
+	for(var/word in words)
+		play_vox_word(word, src.z, null)
 
 
 /proc/play_vox_word(var/word, var/z_level, var/mob/only_listener)
@@ -126,3 +135,10 @@ var/const/VOX_DELAY = 600
         return 0
 
 // VOX sounds moved to /code/defines/vox_sounds.dm
+
+/client/proc/preload_vox()
+	var/list/vox_files = flist(VOX_PATH)
+	for(var/file in vox_files)
+	//  src << "Downloading [file]"
+		var/sound/S = sound("[VOX_PATH][file]")
+		src << browse_rsc(S)
