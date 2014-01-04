@@ -1303,6 +1303,9 @@ datum/preferences
 					if("ghost_radio")
 						toggles ^= CHAT_GHOSTRADIO
 
+					if("ghost_radio")
+						toggles ^= CHAT_GHOSTRADIO
+
 					if("save")
 						save_preferences(user)
 						save_character(user)
