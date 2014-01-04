@@ -55,6 +55,7 @@
 		RestrainedClickOn(A)
 	else
 	*/
+	A.add_hiddenprint(src)
 	A.attack_ai(src)
 
 /*
