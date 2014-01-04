@@ -11,6 +11,7 @@ Creature-level abilities.
 	set name = "Ventcrawl (Slime People)"
 	set desc = "The ability to crawl through vents if naked and not holding anything."
 
+
 	if(istype(src,/mob/living/carbon/human/slime))
 		var/mob/living/carbon/M = src
 		// Check if the client has a mob and if the mob is valid and alive.
@@ -27,4 +28,8 @@ Creature-level abilities.
 			M << "\red You cannot do this while cuffed."
 			return 0
 
-	handle_ventcrawl()
+		if(M.contents.len != 0)
+			M << "\red You need to be naked and have nothing in your hands to ventcrawl."
+			return 0
+
+		M.handle_ventcrawl()
