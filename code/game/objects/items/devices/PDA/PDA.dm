@@ -485,6 +485,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		// When the UI is first opened this is the data it will use
 		ui.set_initial_data(data)
 		ui.open()
+		ui.set_auto_update(1)
 	else
 		// The UI is already open so push the new data to it
 		ui.push_data(data)
@@ -882,6 +883,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if(L)
 			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[t]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
+			nanomanager.update_user_uis(L, P) // Update the recieving user's PDA UI so that they can see the new message
+			
+		nanomanager.update_user_uis(U, P) // Update the sending user's PDA UI so that they can see the new message
 
 		log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
 		P.overlays.Cut()
