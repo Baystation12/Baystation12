@@ -10,6 +10,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "nymph"
 	slot_flags = SLOT_HEAD
+	origin_tech = "magnets=3;biotech=5"
 
 /obj/item/weapon/diona_holder/New()
 	..()
@@ -27,6 +28,10 @@
 		for(var/mob/M in contents)
 			M.loc = get_turf(src)
 		del(src)
+
+/obj/item/weapon/diona_holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	for(var/mob/M in src.contents)
+		M.attackby(W,user)
 
 //Mob defines.
 /mob/living/carbon/monkey/diona
@@ -106,7 +111,7 @@
 	set desc = "Grow to a more complex form."
 
 	if(!is_alien_whitelisted(src, "Diona") && config.usealienwhitelist)
-		src << alert("You are currently not whitelisted to play [client.prefs.species].")
+		src << alert("You are currently not whitelisted to play an adult Diona.")
 		return 0
 
 	if(donors.len < 5)
@@ -118,7 +123,7 @@
 		return
 
 	src.visible_message("\red [src] begins to shift and quiver, and erupts in a shower of shed bark and twigs!","\red You begin to shift and quiver, then erupt in a shower of shed bark and twigs, attaining your adult form!")
-	var/mob/living/carbon/human/adult = new(loc)
+	var/mob/living/carbon/human/adult = new(get_turf(src.loc))
 	adult.set_species("Diona")
 	for(var/datum/language/L in languages)
 		adult.add_language(L.name)
