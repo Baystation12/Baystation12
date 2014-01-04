@@ -55,6 +55,49 @@
 				update_count++
 	return update_count
 
+
+ /**
+  * Update /nanoui uis belonging to user
+  *
+  * @param user /mob The mob who owns the uis
+  * @param src_object /obj|/mob If src_object is provided, only update uis which are attached to src_object (optional)
+  * @param ui_key string If ui_key is provided, only update uis with a matching ui_key (optional)
+  *
+  * @return int The number of uis updated
+  */
+/datum/nanomanager/proc/update_user_uis(var/mob/user, src_object = null, ui_key = null)
+	if (isnull(user.open_uis) || !istype(user.open_uis, /list) || open_uis.len == 0)
+		return 0 // has no open uis
+
+	var/update_count = 0
+	for (var/datum/nanoui/ui in user.open_uis)
+		if ((isnull(src_object) || !isnull(src_object) && ui.src_object == src_object) && (isnull(ui_key) || !isnull(ui_key) && ui.ui_key == ui_key))
+			ui.process(1)
+			update_count++
+
+	return update_count
+
+ /**
+  * Close /nanoui uis belonging to user
+  *
+  * @param user /mob The mob who owns the uis
+  * @param src_object /obj|/mob If src_object is provided, only close uis which are attached to src_object (optional)
+  * @param ui_key string If ui_key is provided, only close uis with a matching ui_key (optional)
+  *
+  * @return int The number of uis closed
+  */
+/datum/nanomanager/proc/close_user_uis(var/mob/user, src_object = null, ui_key = null)
+	if (isnull(user.open_uis) || !istype(user.open_uis, /list) || open_uis.len == 0)
+		return 0 // has no open uis
+
+	var/close_count = 0
+	for (var/datum/nanoui/ui in user.open_uis)
+		if ((isnull(src_object) || !isnull(src_object) && ui.src_object == src_object) && (isnull(ui_key) || !isnull(ui_key) && ui.ui_key == ui_key))
+			ui.close()
+			close_count++
+
+	return close_count
+
  /**
   * Add a /nanoui ui to the list of open uis
   * This is called by the /nanoui open() proc
