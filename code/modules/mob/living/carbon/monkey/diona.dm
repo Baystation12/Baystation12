@@ -9,6 +9,7 @@
 	desc = "It's a tiny plant critter."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "nymph"
+	slot_flags = SLOT_HEAD
 
 /obj/item/weapon/diona_holder/New()
 	..()
