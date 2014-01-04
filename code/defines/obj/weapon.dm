@@ -120,6 +120,9 @@
 	item_state = "card-id"
 	w_class = 1.0
 
+/obj/item/weapon/disk/nuclear/pickup(mob/living/user as mob)
+	if(issyndicate(user))
+		set_security_level(3)
 
 /*
 /obj/item/weapon/game_kit
