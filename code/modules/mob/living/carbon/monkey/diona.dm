@@ -123,8 +123,15 @@
 		return
 
 	src.visible_message("\red [src] begins to shift and quiver, and erupts in a shower of shed bark and twigs!","\red You begin to shift and quiver, then erupt in a shower of shed bark and twigs, attaining your adult form!")
+
 	var/mob/living/carbon/human/adult = new(get_turf(src.loc))
 	adult.set_species("Diona")
+
+	if(istype(loc,/obj/item/weapon/diona_holder/))
+		var/obj/item/weapon/diona_holder/L = loc
+		src.loc = L.loc
+		del(L)
+
 	for(var/datum/language/L in languages)
 		adult.add_language(L.name)
 	adult.regenerate_icons()
