@@ -135,11 +135,13 @@ nanoui is used to open and update nano browser uis
 		if (dist > 4)
 			close()
 			return
-
+		
 		if ((allowed_user_stat > -1) && (user.stat > allowed_user_stat))
 			set_status(STATUS_DISABLED, push_update) // no updates, completely disabled (red visibility)
 		else if (user.restrained() || user.lying)
 			set_status(STATUS_UPDATE, push_update) // update only (orange visibility)
+		else if (istype(src_object, /obj/item/device/uplink/hidden)) // You know what if they have the uplink open let them use the UI 
+			set_status(STATUS_INTERACTIVE, push_update)	     // Will build in distance checks on the topics for sanity.
 		else if (!(src_object in view(4, user))) // If the src object is not in visable, set status to 0
 			set_status(STATUS_DISABLED, push_update) // interactive (green visibility)
 		else if (dist <= 1)
@@ -349,6 +351,7 @@ nanoui is used to open and update nano browser uis
 		window_size = "size=[width]x[height];"
 	update_status(0)
 	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
+	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
 	on_close_winset()
 	//onclose(user, window_id)
 	nanomanager.ui_opened(src)
@@ -402,7 +405,7 @@ nanoui is used to open and update nano browser uis
 	if (status != STATUS_INTERACTIVE || user != usr) // If UI is not interactive or usr calling Topic is not the UI user
 		return
 
-	if (src_object.Topic(href, href_list))
+	if (src_object && src_object.Topic(href, href_list))
 		nanomanager.update_uis(src_object) // update all UIs attached to src_object
 
  /**

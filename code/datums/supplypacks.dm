@@ -128,12 +128,12 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager,
 					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
 					/obj/item/weapon/lipstick/random,
-					/obj/item/weapon/reagent_containers/food/drinks/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/ale,
-					/obj/item/weapon/reagent_containers/food/drinks/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/beer,
-					/obj/item/weapon/reagent_containers/food/drinks/beer)
+					/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/beer,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/beer,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/beer,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/beer)
 	cost = 20
 	containertype = /obj/structure/closet/crate
 	containername = "Party equipment"

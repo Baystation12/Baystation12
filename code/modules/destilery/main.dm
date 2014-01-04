@@ -118,7 +118,7 @@
 
 	switch(fermenting_item.type)
 		if(/obj/item/weapon/reagent_containers/food/drinks/flour)	//Flour is still flour
-			var/obj/item/weapon/reagent_containers/food/drinks/beer/B = new(src)
+			var/obj/item/weapon/reagent_containers/food/drinks/cans/beer/B = new(src)
 			output += B
 		else
 			error = 1
@@ -178,7 +178,7 @@
 		return	//Not done yet.
 
 	switch(destilling_item.type)
-		if(/obj/item/weapon/reagent_containers/food/drinks/beer)	//Flour is still flour
+		if(/obj/item/weapon/reagent_containers/food/drinks/cans/beer)	//Flour is still flour
 			var/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka/V = new(src)
 			output += V
 		else
