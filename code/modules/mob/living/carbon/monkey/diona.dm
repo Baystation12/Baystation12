@@ -2,6 +2,32 @@
   Tiny babby plant critter plus procs.
 */
 
+//Helper object for picking dionaea up.
+/obj/item/weapon/diona_holder
+
+	name = "diona nymph"
+	desc = "It's a tiny plant critter."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "nymph"
+
+/obj/item/weapon/diona_holder/New()
+	..()
+	processing_objects.Add(src)
+
+
+/obj/item/weapon/diona_holder/Del()
+	processing_objects.Remove(src)
+	..()
+
+/obj/item/weapon/diona_holder/process()
+	if(!loc) return
+
+	if(!istype(loc,/mob/living))
+		for(var/mob/M in contents)
+			M.loc = get_turf(src)
+		del(src)
+
+//Mob defines.
 /mob/living/carbon/monkey/diona
 	name = "diona nymph"
 	voice_name = "diona nymph"
@@ -9,6 +35,20 @@
 	icon_state = "nymph1"
 	var/list/donors = list()
 	var/ready_evolve = 0
+
+/mob/living/carbon/monkey/diona/attack_hand(mob/living/carbon/human/M as mob)
+
+	//Let people pick the little buggers up.
+	if(M.a_intent == "help")
+		var/obj/item/weapon/diona_holder/D = new(loc)
+		src.loc = D
+		D.name = loc.name
+		D.attack_hand(M)
+		M << "You scoop up [src]."
+		src << "[M] scoops you up."
+		return
+
+	..()
 
 /mob/living/carbon/monkey/diona/New()
 
