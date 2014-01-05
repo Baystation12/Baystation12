@@ -87,7 +87,7 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | CAN_BE_FAT
 	bodyflags = FEET_PADDED
 
 /datum/species/skrell
