@@ -460,7 +460,7 @@ datum
 					var/mob/living/carbon/human/human = M
 					if(human.dna.mutantrace == null)
 						M << "\red Your flesh rapidly mutates!"
-						human.dna.mutantrace = "slime"
+						human.dna.mutantrace = "shadow"
 						human.update_mutantrace()
 				..()
 				return
