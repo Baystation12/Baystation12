@@ -725,17 +725,21 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Species flags.
 #define NO_BLOOD 1
 #define NO_BREATHE 2
-#define IS_SLOW 4
-#define RAD_ABSORB 8
-#define NO_SCAN 16
-#define NON_GENDERED 32
-#define REQUIRE_LIGHT 64
-#define WHITELISTED 128
-#define HAS_SKIN_TONE 256
-#define HAS_LIPS 512
-#define HAS_UNDERWEAR 1024
-#define HAS_TAIL 2048
-#define IS_PLANT 4096
+#define NO_SCAN 4
+#define NO_PAIN 8
+
+#define HAS_SKIN_TONE 16
+#define HAS_LIPS 32
+#define HAS_UNDERWEAR 64
+#define HAS_TAIL 128
+
+#define IS_SLOW 256
+#define IS_PLANT 512
+#define IS_WHITELISTED 1024
+
+#define RAD_ABSORB 2048
+#define REQUIRE_LIGHT 4096
+
 
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
