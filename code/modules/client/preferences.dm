@@ -556,7 +556,7 @@ datum/preferences
 		return 1
 
 	proc/ShowDisabilityState(mob/user,flag,label)
-		if(flag==DISABILITY_FLAG_FAT && species!="Human")
+		if(flag==DISABILITY_FLAG_FAT && species!=("Human" || "Tajaran" || "Grey"))
 			return "<li><i>[species] cannot be fat.</i></li>"
 		return "<li><b>[label]:</b> <a href=\"?_src_=prefs;task=input;preference=disabilities;disability=[flag]\">[disabilities & flag ? "Yes" : "No"]</a></li>"
 
@@ -798,7 +798,7 @@ datum/preferences
 				if("input")
 					var/dflag=text2num(href_list["disability"])
 					if(dflag >= 0)
-						if(!(dflag==DISABILITY_FLAG_FAT && species!="Human"))
+						if(!(dflag==DISABILITY_FLAG_FAT && species!=("Human" || "Tajaran" || "Grey")))
 							disabilities ^= text2num(href_list["disability"]) //MAGIC
 					SetDisabilities(user)
 				else
@@ -1305,7 +1305,7 @@ datum/preferences
 				I.mechanize()
 			else continue
 
-		if(disabilities & DISABILITY_FLAG_FAT && species=="Human")//character.species.flags & CAN_BE_FAT)
+		if(disabilities & DISABILITY_FLAG_FAT && character.species.flags & CAN_BE_FAT)//character.species.flags & CAN_BE_FAT)
 			character.mutations += FAT
 		if(disabilities & DISABILITY_FLAG_NEARSIGHTED)
 			character.disabilities|=NEARSIGHTED
