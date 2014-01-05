@@ -95,7 +95,7 @@
 			connected_ai = select_active_alien_ai()
 			scrambledcodes = 1
 		else
-			laws = new /datum/ai_laws/nanotrasen()
+			make_laws()
 			connected_ai = select_active_ai_with_fewest_borgs()
 		if(connected_ai)
 			connected_ai.connected_robots += src

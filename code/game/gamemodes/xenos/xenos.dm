@@ -77,7 +77,7 @@
 		xeno_mind.current.loc = xenos_spawn[spawnpos]
 //XenoAI selection
 		if(!xenoai_selected)
-			var/mob/living/silicon/ai/O = new(xeno_mind.current.loc, base_law_type,,1)//No MMI but safety is in effect.
+			var/mob/living/silicon/ai/O = new(xeno_mind.current.loc,,,1)//No MMI but safety is in effect.
 			O.invisibility = 0
 			O.aiRestorePowerRoutine = 0
 

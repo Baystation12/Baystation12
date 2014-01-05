@@ -133,6 +133,7 @@
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 
+	var/default_laws = 0 //Controls what laws the AI spawns with.
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -496,6 +497,8 @@
 					config.bones_can_break = value
 				if("limbs_can_break")
 					config.limbs_can_break = value
+				if("default_laws")
+					config.default_laws = text2num(value)
 				else
 					diary << "Unknown setting in configuration: '[name]'"
 
