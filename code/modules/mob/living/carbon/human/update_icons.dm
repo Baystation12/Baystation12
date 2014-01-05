@@ -446,6 +446,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 	remove_overlay(FIRE_LAYER)
 	if(on_fire)
 		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=-FIRE_LAYER)
+	else
+		overlays_standing[FIRE_LAYER] = null
 
 	apply_overlay(FIRE_LAYER)
 
