@@ -266,7 +266,7 @@
 		new /obj/item/ammo_box/magazine/c45r(src)
 		new /obj/item/ammo_box/magazine/c45r(src)
 		new /obj/item/taperoll/police(src)
-	//	new /obj/item/weapon/gun/projectile/automatic/pistol/colt1911(src)
+		new /obj/item/weapon/gun/projectile/automatic/colt1911(src)
 		new /obj/item/clothing/tie/holster/armpit(src)
 		return
 

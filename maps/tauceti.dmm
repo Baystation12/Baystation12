@@ -7060,7 +7060,7 @@
 "cFN" = (/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/specops)
 "cFO" = (/obj/structure/rack,/obj/item/weapon/gun/energy/ionrifle,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/centcom/specops)
 "cFP" = (/obj/structure/rack,/obj/item/weapon/gun/energy/stunrevolver,/obj/item/weapon/gun/energy/stunrevolver,/obj/item/weapon/gun/energy/stunrevolver,/obj/item/weapon/gun/energy/stunrevolver,/obj/item/weapon/gun/energy/stunrevolver,/obj/item/weapon/gun/energy/stunrevolver,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/centcom/specops)
-"cFQ" = (/obj/structure/rack,/obj/item/weapon/gun/projectile/automatic,/obj/item/weapon/gun/projectile/automatic,/obj/item/weapon/gun/projectile/automatic,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/centcom/specops)
+"cFQ" = (/obj/structure/rack,/obj/item/weapon/gun/projectile/automatic,/obj/item/weapon/gun/projectile/automatic,/obj/item/weapon/gun/projectile/automatic,/obj/item/ammo_box/magazine/msmg9mm,/obj/item/ammo_box/magazine/msmg9mm,/obj/item/ammo_box/magazine/msmg9mm,/obj/item/ammo_box/magazine/msmg9mm,/obj/item/ammo_box/magazine/msmg9mm,/obj/item/ammo_box/magazine/msmg9mm,/turf/unsimulated/floor{icon_state = "vault"; dir = 1},/area/centcom/specops)
 "cFR" = (/obj/effect/landmark{name = "Marauder Exit"},/turf/unsimulated/floor{name = "plating"},/area/centcom/specops)
 "cFS" = (/turf/unsimulated/floor{name = "plating"},/area/centcom/specops)
 "cFT" = (/obj/machinery/door/poddoor{icon_state = "pdoor1"; id = "ASSAULT3"; name = "Launch Bay #3"; p_open = 0},/turf/unsimulated/floor{name = "plating"},/area/centcom/specops)

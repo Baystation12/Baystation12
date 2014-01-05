@@ -154,6 +154,7 @@
 /obj/item/weapon/gun/projectile/automatic/silenced
 	name = "silenced pistol"
 	desc = "A small, quiet,  easily concealable gun. Uses .45 rounds."
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "silenced_pistol"
 	w_class = 3.0
 	silenced = 1
@@ -162,11 +163,13 @@
 	mag_type = /obj/item/ammo_box/magazine/sm45
 	fire_sound = 'tauceti/sounds/weapon/Gunshot_silenced.ogg'
 
+/obj/item/weapon/gun/projectile/automatic/silenced/isHandgun()
+	return 1
+
 /obj/item/weapon/gun/projectile/automatic/silenced/update_icon()
 	..()
 	icon_state = "[initial(icon_state)]"
 	return
-
 
 /obj/item/weapon/gun/projectile/automatic/deagle
 	name = "desert eagle"
@@ -177,6 +180,8 @@
 	ammo_type = /obj/item/ammo_casing/a50
 	mag_type = /obj/item/ammo_box/magazine/m50
 
+/obj/item/weapon/gun/projectile/automatic/deagle/isHandgun()
+	return 1
 
 /obj/item/weapon/gun/projectile/automatic/deagle/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 	..()
@@ -195,18 +200,15 @@
 	icon_state = "deagleg"
 	item_state = "deagleg"
 
-
-
 /obj/item/weapon/gun/projectile/automatic/deagle/camo
 	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
 	icon_state = "deaglecamo"
 	item_state = "deagleg"
 
-
-
 /obj/item/weapon/gun/projectile/automatic/gyropistol
 	name = "gyrojet pistol"
 	desc = "A bulky pistol designed to fire self propelled rounds"
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "gyropistol"
 	fire_sound = 'sound/effects/Explosion1.ogg'
 	origin_tech = "combat=3"
@@ -217,7 +219,6 @@
 	..()
 	update_icon()
 	return
-
 
 /obj/item/weapon/gun/projectile/automatic/gyropistol/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 	..()
@@ -242,6 +243,9 @@
 	origin_tech = "combat=2;materials=2;syndicate=2"
 	ammo_type = /obj/item/ammo_casing/c9mm
 	mag_type = /obj/item/ammo_box/magazine/m9mm
+
+/obj/item/weapon/gun/projectile/automatic/pistol/isHandgun()
+	return 1
 
 /obj/item/weapon/gun/projectile/automatic/pistol/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag)
 	..()
@@ -298,3 +302,37 @@
 	icon_state = "silencer"
 	w_class = 2
 	var/oldsound = 0 //Stores the true sound the gun made before it was silenced
+
+/obj/item/weapon/gun/projectile/automatic/colt1911
+	desc = "A cheap Martian knock-off of a Colt M1911. Uses less-than-lethal .45 rounds."
+	name = "\improper Colt M1911"
+	icon = 'icons/obj/gun.dmi'
+	icon_state = "colt"
+	w_class = 2
+	ammo_type = /obj/item/ammo_casing/c45r
+	mag_type = /obj/item/ammo_box/magazine/c45r
+	var/mag_type2 = /obj/item/ammo_box/magazine/c45m
+
+/obj/item/weapon/gun/projectile/automatic/colt1911/isHandgun()
+	return 1
+
+/obj/item/weapon/gun/projectile/automatic/colt1911/update_icon()
+	..()
+	icon_state = "[initial(icon_state)]"
+	return
+
+/obj/item/weapon/gun/projectile/automatic/colt1911/attackby(var/obj/item/A as obj, mob/user as mob)
+	if (istype(A, /obj/item/ammo_box/magazine))
+		var/obj/item/ammo_box/magazine/AM = A
+		if (!magazine && (istype(AM, mag_type) || istype(AM, mag_type2)))
+			user.remove_from_mob(AM)
+			magazine = AM
+			magazine.loc = src
+			user << "<span class='notice'>You load a new magazine into \the [src]!</span>"
+			chamber_round()
+			A.update_icon()
+			update_icon()
+			return 1
+		else if (magazine)
+			user << "<span class='notice'>There's already a magazine in \the [src].</span>"
+	return 0

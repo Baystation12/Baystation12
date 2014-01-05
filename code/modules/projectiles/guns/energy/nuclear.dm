@@ -125,3 +125,6 @@
 		update_charge()
 		update_reactor()
 		update_mode()
+
+	isHandgun()
+		return 0

@@ -151,6 +151,9 @@
 	var/recentpump = 0 // to prevent spammage
 	var/pumped = 0
 
+/obj/item/weapon/gun/projectile/shotgun/isHandgun()
+	return 0
+
 /obj/item/weapon/gun/projectile/shotgun/attackby(var/obj/item/A as obj, mob/user as mob)
 	var/num_loaded = 0
 	if(istype(A, /obj/item/ammo_box))
@@ -226,6 +229,9 @@
 	origin_tech = "combat=3;materials=1"
 	ammo_type = /obj/item/ammo_casing/shotgun/beanbag
 	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/dualshot
+
+/obj/item/weapon/gun/projectile/revolver/doublebarrel/isHandgun()
+	return 0
 
 /obj/item/weapon/gun/projectile/revolver/doublebarrel/attackby(var/obj/item/A as obj, mob/user as mob)
 	..()

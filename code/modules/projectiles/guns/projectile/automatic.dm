@@ -156,6 +156,9 @@
 	mag_type = /obj/item/ammo_box/magazine/msmg9mm
 	var/alarmed = 0
 
+/obj/item/weapon/gun/projectile/automatic/isHandgun()
+	return 0
+
 /obj/item/weapon/gun/projectile/automatic/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][magazine ? "-[magazine.max_ammo]" : ""][chambered ? "" : "-e"]"
@@ -164,7 +167,6 @@
 /obj/item/weapon/gun/projectile/automatic/attackby(var/obj/item/A as obj, mob/user as mob)
 	if(..() && chambered)
 		alarmed = 0
-
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
 	name = "Uzi"
@@ -180,7 +182,6 @@
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "\improper C-20r SMG"
 	desc = "A lightweight, fast firing gun, for when you REALLY need someone dead. Uses 12mm rounds. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp"
-	icon = 'tauceti/icons/obj/guns.dmi'
 	icon_state = "c20r"
 	item_state = "c20r"
 	w_class = 3.0
@@ -215,6 +216,7 @@
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "\improper L6 SAW"
 	desc = "A rather traditionally made light machine gun with a pleasantly lacquered wooden pistol grip. Has 'Aussec Armoury- 2531' engraved on the reciever"
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"
 	w_class = 5

@@ -9,6 +9,9 @@
 	origin_tech = "combat=3;magnets=2"
 	projectile_type = "/obj/item/projectile/beam"
 
+/obj/item/weapon/gun/energy/laser/isHandgun()
+	return 0
+
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser gun"
 	desc = "A modified version of the basic laser gun, this one fires less concentrated energy bolts designed for target practice."
@@ -48,7 +51,8 @@ obj/item/weapon/gun/energy/laser/retro
 		update_icon()
 		return 1
 
-
+	isHandgun()
+		return 1
 
 /obj/item/weapon/gun/energy/laser/cyborg/process_chambered()
 	if(in_chamber)

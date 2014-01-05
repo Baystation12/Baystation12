@@ -5,7 +5,7 @@
 	origin_tech = "combat=2;materials=2"
 	w_class = 3.0
 	m_amt = 1000
-
+	fire_delay = 0
 	var/ammo_type = /obj/item/ammo_casing/c9mm
 	var/mag_type = /obj/item/ammo_box/magazine/m9mm //Removes the need for max_ammo and caliber info
 	var/obj/item/ammo_box/magazine/magazine
