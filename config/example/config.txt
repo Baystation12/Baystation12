@@ -61,6 +61,9 @@ LOG_PDA
 ## log all Topic() calls (for use by coders in tracking down Topic issues)
 # LOG_HREFS
 
+## log world.log and runtime errors to a file
+# LOG_RUNTIME
+
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 

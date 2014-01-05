@@ -22,7 +22,7 @@
 	if(loc)
 		environment = loc.return_air()
 
-	if (stat != DEAD) //still breathing
+	if (stat != DEAD && !istype(src,/mob/living/carbon/monkey/diona)) //still breathing
 		//First, resolve location and get a breath
 		if(air_master.current_cycle%4==2)
 			//Only try to take a breath every 4 seconds, unless suffocating

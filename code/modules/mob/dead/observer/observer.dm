@@ -441,6 +441,58 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set hidden = 1
 	src << "\red You are dead! You have no mind to store memory!"
 
+/mob/dead/observer/verb/analyze_air()
+	set name = "Analyze Air"
+	set category = "Ghost"
+	
+	if(!istype(usr, /mob/dead/observer)) return
+	
+	// Shamelessly copied from the Gas Analyzers
+	if (!( istype(usr.loc, /turf) ))
+		return
+
+	var/datum/gas_mixture/environment = usr.loc.return_air()
+
+	var/pressure = environment.return_pressure()
+	var/total_moles = environment.total_moles()
+
+	src << "\blue <B>Results:</B>"
+	if(abs(pressure - ONE_ATMOSPHERE) < 10)
+		src << "\blue Pressure: [round(pressure,0.1)] kPa"
+	else
+		src << "\red Pressure: [round(pressure,0.1)] kPa"
+	if(total_moles)
+		var/o2_concentration = environment.oxygen/total_moles
+		var/n2_concentration = environment.nitrogen/total_moles
+		var/co2_concentration = environment.carbon_dioxide/total_moles
+		var/plasma_concentration = environment.toxins/total_moles
+
+		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
+		if(abs(n2_concentration - N2STANDARD) < 20)
+			src << "\blue Nitrogen: [round(n2_concentration*100)]% ([round(environment.nitrogen,0.01)] moles)"
+		else
+			src << "\red Nitrogen: [round(n2_concentration*100)]% ([round(environment.nitrogen,0.01)] moles)"
+
+		if(abs(o2_concentration - O2STANDARD) < 2)
+			src << "\blue Oxygen: [round(o2_concentration*100)]% ([round(environment.oxygen,0.01)] moles)"
+		else
+			src << "\red Oxygen: [round(o2_concentration*100)]% ([round(environment.oxygen,0.01)] moles)"
+
+		if(co2_concentration > 0.01)
+			src << "\red CO2: [round(co2_concentration*100)]% ([round(environment.carbon_dioxide,0.01)] moles)"
+		else
+			src << "\blue CO2: [round(co2_concentration*100)]% ([round(environment.carbon_dioxide,0.01)] moles)"
+
+		if(plasma_concentration > 0.01)
+			src << "\red Plasma: [round(plasma_concentration*100)]% ([round(environment.toxins,0.01)] moles)"
+
+		if(unknown_concentration > 0.01)
+			src << "\red Unknown: [round(unknown_concentration*100)]% ([round(unknown_concentration*total_moles,0.01)] moles)"
+
+		src << "\blue Temperature: [round(environment.temperature-T0C,0.1)]&deg;C"
+		src << "\blue Heat Capacity: [round(environment.heat_capacity(),0.1)]"
+
+
 /mob/dead/observer/verb/toggle_darkness()
 	set name = "Toggle Darkness"
 	set category = "Ghost"

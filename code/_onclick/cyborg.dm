@@ -48,6 +48,7 @@
 
 	// Cyborgs have no range-checking unless there is item use
 	if(!W)
+		A.add_hiddenprint(src)
 		A.attack_robot(src)
 		return
 
