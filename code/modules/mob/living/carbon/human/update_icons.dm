@@ -657,7 +657,10 @@ proc/get_damage_icon_part(damage_state, body_part)
 /mob/living/carbon/human/update_inv_back(var/update_icons=1)
 	if(back)
 		back.screen_loc = ui_back	//TODO
-		overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : 'icons/mob/back.dmi'), "icon_state" = "[back.icon_state]")
+		if(back:tc_custom)
+			overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : back:tc_custom), "icon_state" = "[back.icon_state]_mob")
+		else
+			overlays_standing[BACK_LAYER]	= image("icon" = ((back.icon_override) ? back.icon_override : 'icons/mob/back.dmi'), "icon_state" = "[back.icon_state]")
 	else
 		overlays_standing[BACK_LAYER]	= null
 	if(update_icons)   update_icons()

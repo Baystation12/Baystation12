@@ -5,13 +5,13 @@
 /datum/game_mode/nuclear
 	name = "nuclear emergency"
 	config_tag = "nuclear"
-	required_players = 15
+	required_players = 1
 	required_players_secret = 25 // 25 players - 5 players to be the nuke ops = 20 players remaining
 	required_enemies = 1
 	recommended_enemies = 5
 
 	uplink_welcome = "Corporate Backed Uplink Console:"
-	uplink_uses = 40
+	uplink_uses = 10
 
 	var/const/agents_possible = 5 //If we ever need more syndicate agents.
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
@@ -24,7 +24,7 @@
 
 /datum/game_mode/nuclear/announce()
 	world << "<B>The current game mode is - Nuclear Emergency!</B>"
-	world << "<B>A [syndicate_name()] Strike Force is approaching [station_name()]!</B>"
+	world << "<B>Gorlex Maradeurs are approaching NSS Exodus!</B>"
 	world << "A nuclear explosive was being transported by Nanotrasen to a military base. The transport ship mysteriously lost contact with Space Traffic Control (STC). About that time a strange disk was discovered around [station_name()]. It was identified by Nanotrasen as a nuclear auth. disk and now Syndicate Operatives have arrived to retake the disk and detonate SS13! Also, most likely Syndicate star ships are in the vicinity so take care not to lose the disk!\n<B>Syndicate</B>: Reclaim the disk and detonate the nuclear bomb anywhere on SS13.\n<B>Personnel</B>: Hold the disk and <B>escape with the disk</B> on the shuttle!"
 
 /datum/game_mode/nuclear/can_start()//This could be better, will likely have to recode it later
@@ -145,7 +145,7 @@
 			prepare_syndicate_leader(synd_mind, nuke_code)
 			leader_selected = 1
 		else
-			synd_mind.current.real_name = "[syndicate_name()] Operative #[agent_number]"
+			synd_mind.current.real_name = "Gorlex Maradeurs Operative #[agent_number]"
 			agent_number++
 		spawnpos++
 		update_synd_icons_added(synd_mind)
@@ -196,7 +196,7 @@
 
 /datum/game_mode/proc/greet_syndicate(var/datum/mind/syndicate, var/you_are=1)
 	if (you_are)
-		syndicate.current << "\blue You are a [syndicate_name()] agent!"
+		syndicate.current << "\blue You are a Gorlex Maradeurs agent!"
 	var/obj_count = 1
 	for(var/datum/objective/objective in syndicate.objectives)
 		syndicate.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
@@ -216,14 +216,14 @@
 	synd_mob.equip_to_slot_or_del(R, slot_l_ear)
 
 	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(synd_mob), slot_w_uniform)
-	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(synd_mob), slot_shoes)
-	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/gloves/swat(synd_mob), slot_gloves)
+	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(synd_mob), slot_shoes)
+	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(synd_mob), slot_gloves)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/card/id/syndicate(synd_mob), slot_wear_id)
 	if(synd_mob.backbag == 2) synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(synd_mob), slot_back)
 	if(synd_mob.backbag == 3) synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(synd_mob), slot_back)
 	if(synd_mob.backbag == 4) synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(synd_mob), slot_back)
-//	synd_mob.equip_to_slot_or_del(new /obj/item/ammo_magazine/a12mm(synd_mob), slot_in_backpack)
-//	synd_mob.equip_to_slot_or_del(new /obj/item/ammo_magazine/a12mm(synd_mob), slot_in_backpack)
+	synd_mob.equip_to_slot_or_del(new /obj/item/ammo_box/magazine/m12mm(synd_mob), slot_in_backpack)
+	synd_mob.equip_to_slot_or_del(new /obj/item/device/radio/uplink(synd_mob), slot_in_backpack)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/pill/cyanide(synd_mob), slot_in_backpack)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/automatic/c20r(synd_mob), slot_belt)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(synd_mob.back), slot_in_backpack)
@@ -232,20 +232,17 @@
 		var/race = synd_mob.species.name
 
 		if(race == "Unathi")
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/unathi(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/unathi(synd_mob), slot_head)
+			synd_mob.equip_to_slot_or_del(new /obj/item/device/modkit/syndie_unathi(synd_mob), slot_in_backpack)
 		else if(race == "Tajaran")
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/tajara(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/tajara(synd_mob), slot_head)
+			synd_mob.equip_to_slot_or_del(new /obj/item/device/modkit/syndie_tajaran(synd_mob), slot_in_backpack)
 		else if(race == "Skrell")
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/skrell(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/skrell(synd_mob), slot_head)
-		else
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/human(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/human(synd_mob), slot_head)
-	else
-		synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/human(synd_mob), slot_wear_suit)
-		synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/human(synd_mob), slot_head)
+			synd_mob.equip_to_slot_or_del(new /obj/item/device/modkit/syndie_skrell(synd_mob), slot_in_backpack)
+	//	else
+	//		synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/human(synd_mob), slot_wear_suit)
+	//		synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/human(synd_mob), slot_head)
+//	else
+//		synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/human(synd_mob), slot_wear_suit)
+//		synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/human(synd_mob), slot_head)
 
 	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(synd_mob)
 	E.imp_in = synd_mob
@@ -288,42 +285,42 @@
 	if      (!disk_rescued &&  station_was_nuked &&          !syndies_didnt_escape)
 		feedback_set_details("round_end_result","win - syndicate nuke")
 		world << "<FONT size = 3><B>Syndicate Major Victory!</B></FONT>"
-		world << "<B>[syndicate_name()] operatives have destroyed [station_name()]!</B>"
+		world << "<B>Gorlex Maradeurs operatives have destroyed NSS Exodus!</B>"
 
 	else if (!disk_rescued &&  station_was_nuked &&           syndies_didnt_escape)
 		feedback_set_details("round_end_result","halfwin - syndicate nuke - did not evacuate in time")
 		world << "<FONT size = 3><B>Total Annihilation</B></FONT>"
-		world << "<B>[syndicate_name()] operatives destroyed [station_name()] but did not leave the area in time and got caught in the explosion.</B> Next time, don't lose the disk!"
+		world << "<B>Gorlex Maradeurs operatives destroyed NSS Exodus but did not leave the area in time and got caught in the explosion.</B> Next time, don't lose the disk!"
 
 	else if (!disk_rescued && !station_was_nuked &&  nuke_off_station && !syndies_didnt_escape)
 		feedback_set_details("round_end_result","halfwin - blew wrong station")
 		world << "<FONT size = 3><B>Crew Minor Victory</B></FONT>"
-		world << "<B>[syndicate_name()] operatives secured the authentication disk but blew up something that wasn't [station_name()].</B> Next time, don't lose the disk!"
+		world << "<B>Gorlex Maradeurs operatives secured the authentication disk but blew up something that wasn't NSS Exodus.</B> Next time, don't lose the disk!"
 
 	else if (!disk_rescued && !station_was_nuked &&  nuke_off_station &&  syndies_didnt_escape)
 		feedback_set_details("round_end_result","halfwin - blew wrong station - did not evacuate in time")
 		world << "<FONT size = 3><B>[syndicate_name()] operatives have earned Darwin Award!</B></FONT>"
-		world << "<B>[syndicate_name()] operatives blew up something that wasn't [station_name()] and got caught in the explosion.</B> Next time, don't lose the disk!"
+		world << "<B>Gorlex Maradeurs operatives blew up something that wasn't NSS Exodus and got caught in the explosion.</B> Next time, don't lose the disk!"
 
 	else if ( disk_rescued                                         && is_operatives_are_dead())
 		feedback_set_details("round_end_result","loss - evacuation - disk secured - syndi team dead")
 		world << "<FONT size = 3><B>Crew Major Victory!</B></FONT>"
-		world << "<B>The Research Staff has saved the disc and killed the [syndicate_name()] Operatives</B>"
+		world << "<B>The Research Staff has saved the disc and killed the Gorlex Maradeurs Operatives</B>"
 
 	else if ( disk_rescued                                        )
 		feedback_set_details("round_end_result","loss - evacuation - disk secured")
 		world << "<FONT size = 3><B>Crew Major Victory</B></FONT>"
-		world << "<B>The Research Staff has saved the disc and stopped the [syndicate_name()] Operatives!</B>"
+		world << "<B>The Research Staff has saved the disc and stopped the Gorlex Maradeurs Operatives!</B>"
 
 	else if (!disk_rescued                                         && is_operatives_are_dead())
 		feedback_set_details("round_end_result","loss - evacuation - disk not secured")
 		world << "<FONT size = 3><B>Syndicate Minor Victory!</B></FONT>"
-		world << "<B>The Research Staff failed to secure the authentication disk but did manage to kill most of the [syndicate_name()] Operatives!</B>"
+		world << "<B>The Research Staff failed to secure the authentication disk but did manage to kill most of the Gorlex Maradeurs Operatives!</B>"
 
 	else if (!disk_rescued                                         &&  crew_evacuated)
 		feedback_set_details("round_end_result","halfwin - detonation averted")
 		world << "<FONT size = 3><B>Syndicate Minor Victory!</B></FONT>"
-		world << "<B>[syndicate_name()] operatives recovered the abandoned authentication disk but detonation of [station_name()] was averted.</B> Next time, don't lose the disk!"
+		world << "<B>Gorlex Maradeurs operatives recovered the abandoned authentication disk but detonation of NSS Exodus was averted.</B> Next time, don't lose the disk!"
 
 	else if (!disk_rescued                                         && !crew_evacuated)
 		feedback_set_details("round_end_result","halfwin - interrupted")

@@ -20,6 +20,7 @@
 		on = !on
 		icon_state = "rig[on]-[item_color]"
 //		item_state = "rig[on]-[color]"
+		usr.update_inv_head()
 
 		if(on)	user.SetLuminosity(user.luminosity + brightness_on)
 		else	user.SetLuminosity(user.luminosity - brightness_on)
