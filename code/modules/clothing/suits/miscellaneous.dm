@@ -138,7 +138,7 @@
 	item_state = "imperium_monk"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
-
+	allowed = list(/obj/item/weapon/storage/bible, /obj/item/weapon/nullrod, /obj/item/weapon/reagent_containers/food/drinks/bottle/holywater, /obj/item/weapon/storage/fancy/candle_box, /obj/item/candle, /obj/item/weapon/tank/emergency_oxygen)
 
 /obj/item/clothing/suit/chickensuit
 	name = "Chicken Suit"
@@ -149,6 +149,14 @@
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 2.0
 
+/obj/item/clothing/suit/corgisuit
+	name = "Corgi Suit"
+	desc = "A suit made long ago by the ancient empire KFC."
+	icon_state = "corgisuit"
+	item_state = "chickensuit"
+	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS|FEET
+	flags_inv = HIDESHOES|HIDEJUMPSUIT
+	siemens_coefficient = 2.0
 
 /obj/item/clothing/suit/monkeysuit
 	name = "Monkey Suit"
@@ -167,7 +175,7 @@
 	item_state = "holidaypriest"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv = HIDEJUMPSUIT
-
+	allowed = list(/obj/item/weapon/storage/bible, /obj/item/weapon/nullrod, /obj/item/weapon/reagent_containers/food/drinks/bottle/holywater, /obj/item/weapon/storage/fancy/candle_box, /obj/item/candle, /obj/item/weapon/tank/emergency_oxygen)
 
 /obj/item/clothing/suit/cardborg
 	name = "cardborg suit"
@@ -188,6 +196,7 @@
 	item_state = "straight_jacket"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/suit/ianshirt
 	name = "worn shirt"
@@ -256,6 +265,19 @@
 	icon_state = "neocoat"
 	item_state = "neocoat"
 	flags = FPRINT | TABLEPASS
+
+/obj/item/clothing/suit/browntrenchcoat
+	name = "brown trench coat"
+	desc = "It makes you stand out. Just the opposite of why it's typically worn. Nice try trying to blend in while wearing it."
+	icon_state = "brtrenchcoat"
+	item_state = "brtrenchcoat"
+
+/obj/item/clothing/suit/blacktrenchcoat
+	name = "black trench coat"
+	desc = "That shade of black just makes you look a bit more evil. Good for those mafia types."
+	icon_state = "bltrenchcoat"
+	item_state = "bltrenchcoat"
+
 
 //actual suits
 

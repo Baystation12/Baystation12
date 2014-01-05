@@ -19,7 +19,7 @@ s_cooldown ticks off each second based on the suit recharge proc, in seconds. De
 	if( (U.stat||U.incorporeal_move)&&X!=3 )//Will not return if user is using an adrenaline booster since you can use them when stat==1.
 		U << "\red You must be conscious and solid to do this."//It's not a problem of stat==2 since the ninja will explode anyway if they die.
 		return 1
-	else if(C&&cell.charge<C*10)
+	else if(cell.charge<C)
 		U << "\red Not enough energy."
 		return 1
 	switch(X)
@@ -65,16 +65,52 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 		s_coold = 1
 	return
 
+//=======//9-8 TILE TELEPORT//=======//
+ //Click to to teleport 9-10 tiles in direction facing.
+/obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt()
+	set name = "Phase Jaunt (250E)"
+	set desc = "Utilizes the internal VOID-shift device to rapidly transit in direction facing."
+	set category = "Ninja Ability"
+	set popup_menu = 0
+
+	var/C = 200
+	if(!ninjacost(C,1))
+		var/mob/living/carbon/human/U = affecting
+		var/turf/destination = get_teleport_loc(U.loc,U,9,1,3,1,0,1)
+		var/turf/mobloc = get_turf(U.loc)//To make sure that certain things work properly below.
+		if(destination&&istype(mobloc, /turf))//The turf check prevents unusual behavior. Like teleporting out of cryo pods, cloners, mechs, etc.
+			spawn(0)
+				playsound(U.loc, "sparks", 50, 1)
+				anim(mobloc,src,'icons/mob/mob.dmi',,"phaseout",,U.dir)
+
+			handle_teleport_grab(destination, U)
+			U.loc = destination
+
+			spawn(0)
+				spark_system.start()
+				playsound(U.loc, 'sound/effects/phasein.ogg', 25, 1)
+				playsound(U.loc, "sparks", 50, 1)
+				anim(U.loc,U,'icons/mob/mob.dmi',,"phasein",,U.dir)
+
+			//spawn(0)
+				//destination.kill_creatures(U)//Any living mobs in teleport area are gibbed. Check turf procs for how it does it.
+			s_coold = 1
+			cell.charge-=(C)
+		else
+			U << "\red The VOID-shift device is malfunctioning, <B>teleportation failed</B>."
+	return
+
+
 
 //=======//RIGHT CLICK TELEPORT//=======//
 //Right click to teleport somewhere, almost exactly like admin jump to turf.
 /obj/item/clothing/suit/space/space_ninja/proc/ninjashift(turf/T in oview())
-	set name = "Phase Shift (1E)"
+	set name = "Phase Shift (500E)"
 	set desc = "Utilizes the internal VOID-shift device to rapidly transit to a destination in view."
 	set category = null//So it does not show up on the panel but can still be right-clicked.
 	set src = usr.contents//Fixes verbs not attaching properly for objects. Praise the DM reference guide!
 
-	var/C = 200
+	var/C = 400
 	if(!ninjacost(C,1))
 		var/mob/living/carbon/human/U = affecting
 		var/turf/mobloc = get_turf(U.loc)//To make sure that certain things work properly below.
@@ -91,6 +127,11 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 				playsound(U.loc, 'sound/effects/phasein.ogg', 25, 1)
 				playsound(U.loc, 'sound/effects/sparks2.ogg', 50, 1)
 				anim(U.loc,U,'icons/mob/mob.dmi',,"phasein",,U.dir)
+
+			//spawn(0) // Commented out for now, possible implementation in a later upgrade tree.
+				//T.kill_creatures(U)
+			s_coold = 1
+			cell.charge-=(C)
 		else
 			U << "\red You cannot teleport into solid walls or from solid matter"
 	return
@@ -103,25 +144,25 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 	set category = "Ninja Ability"
 	set popup_menu = 0
 
-	var/C = 250
-	if(!ninjacost(C,100)) // EMP's now cost 1,000Energy about 30%
+	var/C = 1000
+	if(!ninjacost(C, 1))
 		var/mob/living/carbon/human/U = affecting
 		playsound(U.loc, 'sound/effects/EMPulse.ogg', 60, 2)
-		empulse(U, 2, 3) //Procs sure are nice. Slightly weaker than wizard's disable tch.
+		empulse(U, 4, 6) //Procs sure are nice. Slightly weaker than wizard's disable tch.
 		s_coold = 2
-		cell.charge-=(C*10)
+		cell.charge-=(C)
 	return
 
 //=======//ENERGY BLADE//=======//
 //Summons a blade of energy in active hand.
 /obj/item/clothing/suit/space/space_ninja/proc/ninjablade()
-	set name = "Energy Blade (20E)"
+	set name = "Energy Blade (200E)"
 	set desc = "Create a focused beam of energy in your active hand."
 	set category = "Ninja Ability"
 	set popup_menu = 0
 
-	var/C = 50
-	if(!ninjacost(C, 800)) //Same spawn cost but higher upkeep cost
+	var/C = 200
+	if(!ninjacost(C, 1))
 		var/mob/living/carbon/human/U = affecting
 		if(!kamikaze)
 			if(!U.get_active_hand()&&!istype(U.get_inactive_hand(), /obj/item/weapon/melee/energy/blade))
@@ -129,7 +170,7 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 				spark_system.start()
 				playsound(U.loc, "sparks", 50, 1)
 				U.put_in_hands(W)
-				cell.charge-=(C*10)
+				cell.charge-=C
 			else
 				U << "\red You can only summon one blade. Try dropping an item first."
 		else//Else you can run around with TWO energy blades. I don't know why you'd want to but cool factor remains.
@@ -148,13 +189,13 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 /*Shoots ninja stars at random people.
 This could be a lot better but I'm too tired atm.*/
 /obj/item/clothing/suit/space/space_ninja/proc/ninjastar()
-	set name = "Energy Star (1,000E)"
+	set name = "Energy Star (500E)"
 	set desc = "Launches an energy star at a random living target."
 	set category = "Ninja Ability"
 	set popup_menu = 0
 
-	var/C = 50
-	if(!ninjacost(C,1))
+	var/C = 500
+	if(!ninjacost(C, 1))
 		var/mob/living/carbon/human/U = affecting
 		var/targets[] = list()//So yo can shoot while yo throw dawg
 		for(var/mob/living/M in oview(loc))
@@ -173,7 +214,7 @@ This could be a lot better but I'm too tired atm.*/
 			A.current = curloc
 			A.yo = targloc.y - curloc.y
 			A.xo = targloc.x - curloc.x
-			cell.charge-=(C*100)// Ninja stars now cost 100 energy, stil la fair chunk to avoid spamming, will run out of power quickly if used 3 or more times
+			cell.charge-=(C)
 			A.process()
 		else
 			U << "\red There are no targets in view."
@@ -183,38 +224,42 @@ This could be a lot better but I'm too tired atm.*/
 /*Allows the ninja to capture people, I guess.
 Must right click on a mob to activate.*/
 /obj/item/clothing/suit/space/space_ninja/proc/ninjanet(mob/living/carbon/M in oview())//Only living carbon mobs.
-	set name = "Energy Net (8,000E)"
+	set name = "Energy Net (5,000E)"
 	set desc = "Captures a fallen opponent in a net of energy. Will teleport them to a holding facility after 30 seconds."
 	set category = null
 	set src = usr.contents
 
-	var/C = 500
-	if(!ninjacost(C,80)&&iscarbon(M)) // Nets now cost 8,000
+	var/C = 5000
+	if(!ninjacost(C,1)&&iscarbon(M)) // Nets now cost 8,000
 		var/mob/living/carbon/human/U = affecting
-		if(M.client)//Monkeys without a client can still step_to() and bypass the net. Also, netting inactive people is lame.
+		//if(M.client)//Monkeys without a client can still step_to() and bypass the net. Also, netting inactive people is lame.
 		//if(M)//DEBUG
-			if(!locate(/obj/effect/energy_net) in M.loc)//Check if they are already being affected by an energy net.
-				for(var/turf/T in getline(U.loc, M.loc))
-					if(T.density)//Don't want them shooting nets through walls. It's kind of cheesy.
-						U << "You may not use an energy net through solid obstacles!"
-						return
-				spawn(0)
-					U.Beam(M,"n_beam",,15)
-				M.anchored = 1//Anchors them so they can't move.
-				U.say("Get over here!")
-				var/obj/effect/energy_net/E = new /obj/effect/energy_net(M.loc)
-				E.layer = M.layer+1//To have it appear one layer above the mob.
-				for(var/mob/O in viewers(U, 3))
-					O.show_message(text("\red [] caught [] with an energy net!", U, M), 1)
-				E.affecting = M
-				E.master = U
-				spawn(0)//Parallel processing.
-					E.process(M)
-				cell.charge-=(C*100) // Nets now cost what should be most of a standard battery, since your taking someone out of the round
-			else
-				U << "They are already trapped inside an energy net."
+		if(!locate(/obj/effect/energy_net) in M.loc)//Check if they are already being affected by an energy net.
+			for(var/turf/T in getline(U.loc, M.loc))
+				if(T.density)//Don't want them shooting nets through walls. It's kind of cheesy.
+					U << "You may not use an energy net through solid obstacles!"
+					return
+			spawn(0)
+				U.Beam(M,"n_beam",,15)
+			M.anchored = 1//Anchors them so they can't move.
+			var/obj/effect/stop/S
+			S = new /obj/effect/stop
+			S.victim = M
+			S.loc = M.loc
+
+			var/obj/effect/energy_net/E = new /obj/effect/energy_net(M.loc)
+			E.layer = M.layer+1//To have it appear one layer above the mob.
+			for(var/mob/O in viewers(U, 3))
+				O.show_message(text("\red [] caught [] with an energy net!", U, M), 1)
+			E.affecting = M
+			E.master = U
+			spawn(0)//Parallel processing.
+				E.process(M)
+			cell.charge-=(C)
 		else
-			U << "They will bring no honor to your Clan!"
+			U << "They are already trapped inside an energy net."
+		//else
+			//U << "They will bring no honor to your Clan!"
 	return
 
 //=======//ADRENALINE BOOST//=======//
@@ -231,6 +276,7 @@ Movement impairing would indicate drugs and the like.*/
 		//Wouldn't need to track adrenaline boosters if there was a miracle injection to get rid of paralysis and the like instantly.
 		//For now, adrenaline boosters ARE the miracle injection. Well, radium, really.
 		U.SetParalysis(0)
+		U.SetStunned(0)
 		U.SetWeakened(0)
 	/*
 	Due to lag, it was possible to adrenaline boost but remain helpless while life.dm resets player stat.
@@ -239,6 +285,8 @@ Movement impairing would indicate drugs and the like.*/
 	Life.dm will kick the player back into unconsciosness the next process loop.
 	*/
 		U.stat = 0//At least now you should be able to teleport away or shoot ninja stars.
+		if(U.said_last_words)
+			U.said_last_words=0
 		spawn(30)//Slight delay so the enemy does not immedietly know the ability was used. Due to lag, this often came before waking up.
 			U.say(pick("A CORNERED FOX IS MORE DANGEROUS THAN A JACKAL!","HURT ME MOOORRREEE!","IMPRESSIVE!"))
 		spawn(70)

@@ -26,48 +26,6 @@
 	charge_cost = 100
 	projectile_type = "/obj/item/projectile/energy/declone"
 
-obj/item/weapon/gun/energy/staff
-	name = "staff of change"
-	desc = "An artefact that spits bolts of coruscating energy which cause the target's very form to reshape itself"
-	icon = 'icons/obj/gun.dmi'
-	icon_state = "staffofchange"
-	item_state = "staffofchange"
-	fire_sound = 'sound/weapons/emitter.ogg'
-	flags =  FPRINT | TABLEPASS | CONDUCT
-	slot_flags = SLOT_BACK
-	w_class = 4.0
-	charge_cost = 200
-	projectile_type = "/obj/item/projectile/change"
-	origin_tech = null
-	clumsy_check = 0
-	var/charge_tick = 0
-
-
-	New()
-		..()
-		processing_objects.Add(src)
-
-
-	Del()
-		processing_objects.Remove(src)
-		..()
-
-
-	process()
-		charge_tick++
-		if(charge_tick < 4) return 0
-		charge_tick = 0
-		if(!power_supply) return 0
-		power_supply.give(200)
-		return 1
-
-	update_icon()
-		return
-/obj/item/weapon/gun/energy/staff/animate
-	name = "staff of animation"
-	desc = "An artefact that spits bolts of life-force which causes objects which are hit by it to animate and come to life! This magic doesn't affect machines."
-	projectile_type = "/obj/item/projectile/animate"
-	charge_cost = 100
 
 /obj/item/weapon/gun/energy/floragun
 	name = "floral somatoray"
@@ -185,3 +143,57 @@ obj/item/weapon/gun/energy/staff/focus
 			user << "\red The [src.name] will now strike only a single person."
 			projectile_type = "/obj/item/projectile/forcebolt"
 	*/
+
+/obj/item/weapon/gun/energy/clown
+	name = "HONK Rifle"
+	desc = "Clown Planet's finest."
+	icon_state = "energy"
+	projectile_type = "/obj/item/projectile/clown"
+	fire_sound = 'sound/weapons/Gunshot_smg.ogg'
+
+
+
+/obj/item/weapon/gun/energy/toxgun
+	name = "plasma pistol"
+	desc = "A specialized firearm designed to fire lethal bolts of toxins."
+	icon_state = "toxgun"
+	fire_sound = 'sound/effects/stealthoff.ogg'
+	w_class = 3.0
+	origin_tech = "combat=5;plasmatech=4"
+	projectile_type = "/obj/item/projectile/energy/plasma"
+
+/obj/item/weapon/gun/energy/sniperrifle
+   name = "L.W.A.P. Sniper Rifle"
+   desc = "A rifle constructed of lightweight materials, fitted with a SMART aiming-system scope."
+   icon = 'icons/obj/gun.dmi'
+   icon_state = "sniper"
+   fire_sound = 'sound/weapons/marauder.ogg'
+   origin_tech = "combat=6;materials=5;powerstorage=4"
+   projectile_type = "/obj/item/projectile/beam/sniper"
+   slot_flags = SLOT_BACK
+   charge_cost = 250
+   fire_delay = 35
+   w_class = 4.0
+
+   var/zoom = 0
+
+/obj/item/weapon/gun/energy/sniperrifle/dropped(mob/user)
+	user.client.view = world.view
+	zoom = 0
+
+/obj/item/weapon/gun/energy/sniperrifle/verb/zoom()
+   set category = "Special Verbs"
+   set name = "Zoom"
+   set popup_menu = 0
+   if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
+      usr << "No."
+      return
+
+   src.zoom = !src.zoom
+   usr << ("<font color='[src.zoom?"blue":"red"]'>Zoom mode [zoom?"en":"dis"]abled.</font>")
+   if(zoom)
+      usr.client.view = 12
+      usr << sound('sound/mecha/imag_enh.ogg',volume=50)
+   else
+      usr.client.view = world.view//world.view - default mob view size
+   return

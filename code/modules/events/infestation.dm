@@ -20,12 +20,13 @@
 	var/locstring
 	var/vermin
 	var/vermstring
-
-/datum/event/infestation/start()
-
-	location = rand(0,9)
 	var/list/turf/simulated/floor/turfs = list()
 	var/spawn_area_type
+	var/list/spawn_types = list()
+	var/max_number
+
+/datum/event/infestation/setup()
+	location = rand(0,9)
 	switch(location)
 		if(LOC_KITCHEN)
 			spawn_area_type = /area/crew_quarters/kitchen
@@ -69,8 +70,6 @@
 				if(!F.contents.len)
 					turfs += F
 
-	var/list/spawn_types = list()
-	var/max_number
 	vermin = rand(0,2)
 	switch(vermin)
 		if(VERM_MICE)
@@ -85,6 +84,9 @@
 			spawn_types = list(/obj/effect/spider/spiderling)
 			vermstring = "spiders"
 
+
+
+/datum/event/infestation/start()
 	spawn(0)
 		var/num = rand(2,max_number)
 		while(turfs.len > 0 && num > 0)
@@ -92,7 +94,7 @@
 			turfs.Remove(T)
 			num--
 
-			
+
 			if(vermin == VERM_SPIDERS)
 				var/obj/effect/spider/spiderling/S = new(T)
 				S.amount_grown = -1

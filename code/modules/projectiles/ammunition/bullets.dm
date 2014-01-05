@@ -29,45 +29,54 @@
 /obj/item/ammo_casing/c38
 	desc = "A .38 bullet casing."
 	caliber = "38"
-	projectile_type = "/obj/item/projectile/bullet/weakbullet"
+	projectile_type = "/obj/item/projectile/bullet/rubberbullet"
 
 
 /obj/item/ammo_casing/c9mm
 	desc = "A 9mm bullet casing."
 	caliber = "9mm"
-	projectile_type = "/obj/item/projectile/bullet/midbullet2"
+	projectile_type = "/obj/item/projectile/bullet/midbullet9"
 
 
 /obj/item/ammo_casing/c45
 	desc = "A .45 bullet casing."
 	caliber = ".45"
-	projectile_type = "/obj/item/projectile/bullet/midbullet"
+	projectile_type = "/obj/item/projectile/bullet/midbullet45"
 
 /obj/item/ammo_casing/c10mm
 	desc = "A 10mm bullet casing."
 	caliber = "10mm"
-	projectile_type = "obj/item/projectile/bullet/midbullet2"
+	projectile_type = "obj/item/projectile/bullet/midbullet10"
 
 /obj/item/ammo_casing/a12mm
 	desc = "A 12mm bullet casing."
 	caliber = "12mm"
-	projectile_type = "/obj/item/projectile/bullet/midbullet2"
+	projectile_type = "/obj/item/projectile/bullet/midbullet12"
 
 
 /obj/item/ammo_casing/shotgun
 	name = "shotgun shell"
 	desc = "A 12 gauge shell."
-	icon_state = "gshell"
+	icon_state = "slshell"
 	caliber = "shotgun"
-	projectile_type = "/obj/item/projectile/bullet"
+	projectile_type = "/obj/item/projectile/bullet/slug"
 	m_amt = 12500
 
+/obj/item/ammo_casing/shotgun/buck
+	name = "buckshot shell"
+	desc = "A 12 gauge buckshot shell."
+	icon_state = "gshell"
+	projectile_type = /obj/item/projectile/bullet/buck
+	buck = 4
+	deviation = 1
 
 /obj/item/ammo_casing/shotgun/birdshot
-	name = "shotgun shell"
+	name = "birdshot shell"
 	desc = "A shotgun shell full of birdshot."
 	icon_state = "blshell"
-	projectile_type = "/obj/item/projectile/bullet/midbullet"
+	projectile_type = "/obj/item/projectile/bullet/rubberbullet"
+	buck = 4
+	deviation = 1
 	m_amt = 6000
 
 
@@ -75,14 +84,14 @@
 	name = "beanbag shell"
 	desc = "A weak beanbag shell."
 	icon_state = "bshell"
-	projectile_type = "/obj/item/projectile/bullet/weakbullet"
+	projectile_type = "/obj/item/projectile/bullet/rubberbullet"
 	m_amt = 500
 
 /obj/item/ammo_casing/shotgun/fakebeanbag
 	name = "beanbag shell"
 	desc = "A weak beanbag shell."
 	icon_state = "bshell"
-	projectile_type = "/obj/item/projectile/bullet/weakbullet/booze"
+	projectile_type = "/obj/item/projectile/bullet/rubberbullet/booze"
 	m_amt = 12500
 
 /obj/item/ammo_casing/shotgun/stunshell
@@ -113,3 +122,11 @@ obj/item/ammo_casing/shotgun/dart/New()
 	desc = "A 7.62 bullet casing."
 	caliber = "a762"
 	projectile_type = "/obj/item/projectile/bullet/a762"
+
+
+/obj/item/ammo_casing/rocket
+	name = "rocket shell"
+	desc = "A high explosive designed to be fired from a launcher."
+	icon_state = "rocketshell"
+	projectile_type = "/obj/item/missile"
+	caliber = "rocket"

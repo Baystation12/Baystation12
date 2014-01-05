@@ -26,6 +26,17 @@
 	item_state = "syringe_kit"
 	foldable = /obj/item/stack/sheet/cardboard	//BubbleWrap
 
+/obj/item/weapon/storage/box/large
+	name = "large box"
+	desc = "You could build a fort with this."
+	icon_state = "largebox"
+	item_state = "largebox"
+	w_class = 42 // Big, bulky.
+	foldable = /obj/item/stack/sheet/cardboard  //BubbleWrap
+	storage_slots = 21
+	max_combined_w_class = 42 // 21*2
+
+
 /obj/item/weapon/storage/box/surveillance/
 	name = "\improper DromedaryCo packet"
 	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""

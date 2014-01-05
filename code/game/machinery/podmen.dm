@@ -43,10 +43,15 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 			source = B.data["donor"]
 			user << "The strange, sluglike seeds quiver gently and swell with blood."
 			if(!source.client && source.mind)
-				for(var/mob/dead/observer/O in player_list)
+				for(var/mob/O in respawnable_list)
 					if(O.mind == source.mind && config.revival_pod_plants)
-						O << "<b><font color = #330033><font size = 3>Your blood has been placed into a replica pod seed. Return to your body if you want to be returned to life as a pod person!</b> (Verbs -> Ghost -> Re-enter corpse)</font color>"
-						break
+						message_admins("Found mind, asking for respawn")
+						switch(alert(O,"Your corpse has been placed into a pod plant. Do you want to be resurrected/cloned? Please not if you select 'No', you will be able to be cloned or borged again this round.","Pod Alert","Yes","No"))
+							if("Yes")
+								source.key = O.key
+								return
+							if("No")
+								return
 		else
 			user << "Nothing happens."
 			return
@@ -66,7 +71,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 /obj/item/seeds/replicapod/harvest(mob/user = usr)
 
 	parent = loc
-	var/found_player = 0
+//	var/found_player = 0
 
 	user.visible_message("\blue [user] carefully begins to open the pod...","\blue You carefully begin to open the pod...")
 
@@ -74,84 +79,54 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 	if(source && source.stat == 2 && source.client && source.ckey && config.revival_pod_plants)
 		transfer_personality(source.client)
 	else // If no sample was injected or revival is not allowed, we grab an interested observer.
-		request_player()
-
-	spawn(75) //If we don't have a ghost or the ghost is now unplayed, we just give the harvester some seeds.
-		if(!found_player)
-			parent.visible_message("The pod has formed badly, and all you can do is salvage some of the seeds.")
-			var/seed_count = 1
-
-			if(prob(yield * parent.yieldmod * 20))
-				seed_count++
-
-			for(var/i=0,i<seed_count,i++)
-				new /obj/item/seeds/replicapod(user.loc)
-
-			parent.update_tray()
-			return
-
-/obj/item/seeds/replicapod/proc/request_player()
-	for(var/mob/dead/observer/O in player_list)
-		if(O.client)
-			if(O.client.prefs.be_special & BE_PLANT)
-				question(O.client)
-
-/obj/item/seeds/replicapod/proc/question(var/client/C)
-	spawn(0)
-		if(!C)	return
-		var/response = alert(C, "Someone is harvesting a replica pod. Would you like to play as a Dionaea?", "Replica pod harvest", "Yes", "No", "Never for this round.")
-		if(!C || ckey)
-			return
-		if(response == "Yes")
-			transfer_personality(C)
-		else if (response == "Never for this round")
-			C.prefs.be_special ^= BE_PLANT
+		transfer_personality()
 
 /obj/item/seeds/replicapod/proc/transfer_personality(var/client/player)
 
-	if(!player) return
+	if(player)
+		found_player = 1
+		var/mob/living/carbon/monkey/diona/podman = new(parent.loc)
+		podman.ckey = player.ckey
+		respawnable_list -= player
+		if(player.mob && player.mob.mind)
+			player.mob.mind.transfer_to(podman)
 
-	found_player = 1
+		if(realName)
+			podman.real_name = realName
+		else
+			podman.real_name = "diona nymph ([rand(100,999)])"
 
-	var/mob/living/carbon/monkey/diona/podman = new(parent.loc)
-	podman.ckey = player.ckey
+		podman.dna.real_name = podman.real_name
 
-	if(player.mob && player.mob.mind)
-		player.mob.mind.transfer_to(podman)
+		// Update mode specific HUD icons.
+		switch(ticker.mode.name)
+			if ("revolution")
+				if (podman.mind in ticker.mode:revolutionaries)
+					ticker.mode:add_revolutionary(podman.mind)
+					ticker.mode:update_all_rev_icons() //So the icon actually appears
+				if (podman.mind in ticker.mode:head_revolutionaries)
+					ticker.mode:update_all_rev_icons()
+			if ("nuclear emergency")
+				if (podman.mind in ticker.mode:syndicates)
+					ticker.mode:update_all_synd_icons()
+			if ("cult")
+				if (podman.mind in ticker.mode:cult)
+					ticker.mode:add_cultist(podman.mind)
+					ticker.mode:update_all_cult_icons() //So the icon actually appears
+			// -- End mode specific stuff
 
-	if(realName)
-		podman.real_name = realName
+		podman << "\green <B>You awaken slowly, feeling your sap stir into sluggish motion as the warm air caresses your bark.</B>"
+		if(source && ckey && podman.ckey == ckey)
+			podman << "<B>Memories of a life as [source] drift oddly through a mind unsuited for them, like a skin of oil over a fathomless lake.</B>"
+		podman << "<B>You are now one of the Dionaea, a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"
+		podman << "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>"
+		if(!realName)
+			var/newname = input(podman,"Enter a name, or leave blank for the default name.", "Name change","") as text
+			if (newname != "")
+				podman.real_name = newname
+
 	else
-		podman.real_name = "diona nymph ([rand(100,999)])"
-
-	podman.dna.real_name = podman.real_name
-
-	// Update mode specific HUD icons.
-	switch(ticker.mode.name)
-		if ("revolution")
-			if (podman.mind in ticker.mode:revolutionaries)
-				ticker.mode:add_revolutionary(podman.mind)
-				ticker.mode:update_all_rev_icons() //So the icon actually appears
-			if (podman.mind in ticker.mode:head_revolutionaries)
-				ticker.mode:update_all_rev_icons()
-		if ("nuclear emergency")
-			if (podman.mind in ticker.mode:syndicates)
-				ticker.mode:update_all_synd_icons()
-		if ("cult")
-			if (podman.mind in ticker.mode:cult)
-				ticker.mode:add_cultist(podman.mind)
-				ticker.mode:update_all_cult_icons() //So the icon actually appears
-		// -- End mode specific stuff
-
-	podman << "\green <B>You awaken slowly, feeling your sap stir into sluggish motion as the warm air caresses your bark.</B>"
-	if(source && ckey && podman.ckey == ckey)
-		podman << "<B>Memories of a life as [source] drift oddly through a mind unsuited for them, like a skin of oil over a fathomless lake.</B>"
-	podman << "<B>You are now one of the Dionaea, a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"
-	podman << "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>"
-	if(!realName)
-		var/newname = input(podman,"Enter a name, or leave blank for the default name.", "Name change","") as text
-		if (newname != "")
-			podman.real_name = newname
+		new /mob/living/carbon/monkey/diona(parent.loc)
 
 	parent.visible_message("\blue The pod disgorges a fully-formed plant creature!")
 	parent.update_tray()

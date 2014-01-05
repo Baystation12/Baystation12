@@ -43,6 +43,7 @@
 	var/max_hurt_damage = 5 // Max melee damage dealt + 5 if hulk
 	var/default_mutations = list()
 
+	var/list/abilities = list()  // For species-derived or admin-given powers
 
 /datum/species/human
 	name = "Human"
@@ -86,7 +87,7 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | CAN_BE_FAT
 	bodyflags = FEET_PADDED
 
 /datum/species/skrell
@@ -164,7 +165,8 @@
 
 	flags = WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS
 	bloodflags = BLOOD_SLIME
-
+	bodyflags = FEET_NOSLIP
+	abilities = list(/mob/living/carbon/human/slime/proc/slimepeople_ventcrawl)
 
 /datum/species/grey
 	name = "Grey"

@@ -9,8 +9,7 @@ var/global/vs_control/vsc = new
 	var/fire_firelevel_multiplier_NAME = "Fire - Firelevel Constant"
 	var/fire_firelevel_multiplier_DESC = "Multiplied by the equation for firelevel, affects mainly the extingiushing of fires."
 
-//	var/fire_fuel_energy_release = 397000
-	var/fire_fuel_energy_release = 200000
+	var/fire_fuel_energy_release = 397000
 	var/fire_fuel_energy_release_NAME = "Fire - Fuel energy release"
 	var/fire_fuel_energy_release_DESC = "The energy in joule released when burning one mol of a burnable substance"
 

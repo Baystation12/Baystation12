@@ -26,6 +26,9 @@ var/list/spells = typesof(/obj/effect/proc_holder/spell) //needed for the badmin
 	var/range = 7 //the range of the spell; outer radius for aoe spells
 	var/message = "" //whatever it says to the guy affected by it
 	var/selection_type = "view" //can be "range" or "view"
+	var/spell_level = 0 //if a spell can be taken multiple times, this raises
+	var/level_max = 4 //The max possible level_max is 4
+	var/cooldown_min = 0 //This defines what spell quickened four timeshas as a cooldown. Make sure to set this for every spell
 
 	var/overlay = 0
 	var/overlay_icon = 'icons/obj/wizard.dmi'
@@ -38,49 +41,53 @@ var/list/spells = typesof(/obj/effect/proc_holder/spell) //needed for the badmin
 	var/smoke_amt = 0 //cropped at 10
 
 	var/critfailchance = 0
-	var/centcomm_cancast = 1 //Whether or not the spell should be allowed on z2
+	var/centcom_cancast = 1 //Whether or not the spell should be allowed on z2
 
 /obj/effect/proc_holder/spell/proc/cast_check(skipcharge = 0,mob/user = usr) //checks if the spell can be cast based on its settings; skipcharge is used when an additional cast_check is called inside the spell
 
-	if(!(src in usr.spell_list))
-		usr << "\red You shouldn't have this spell! Something's wrong."
+	if(!(src in user.spell_list))
+		user << "<span class='warning'>You shouldn't have this spell! Something's wrong.</span>"
 		return 0
 
-	if(usr.z == 2 && !centcomm_cancast) //Certain spells are not allowed on the centcomm zlevel
+	if(user.z == 2 && !centcom_cancast) //Certain spells are not allowed on the centcom zlevel
 		return 0
 
 	if(!skipcharge)
 		switch(charge_type)
 			if("recharge")
 				if(charge_counter < charge_max)
-					usr << "[name] is still recharging."
+					user << "<span class='notice'>[name] is still recharging.</span>"
 					return 0
 			if("charges")
 				if(!charge_counter)
-					usr << "[name] has no charges left."
+					user << "<span class='notice'>[name] has no charges left.</span>"
 					return 0
 
-	if(usr.stat && !stat_allowed)
-		usr << "Not when you're incapacitated."
+	if(user.stat && !stat_allowed)
+		user << "<span class='notice'>Not when you're incapacitated.</span>"
 		return 0
 
-	if(ishuman(usr) || ismonkey(usr))
-		if(istype(usr.wear_mask, /obj/item/clothing/mask/muzzle))
-			usr << "Mmmf mrrfff!"
+	if(ishuman(user))
+
+		var/mob/living/carbon/human/H = user
+
+		if(istype(H.wear_mask, /obj/item/clothing/mask/muzzle))
+			user << "<span class='notice'>You can't get the words out!</span>"
 			return 0
 
-	if(clothes_req) //clothes check
-		if(!istype(usr, /mob/living/carbon/human))
-			usr << "You aren't a human, Why are you trying to cast a human spell, silly non-human? Casting human spells is for humans."
-			return 0
-		if(!istype(usr:wear_suit, /obj/item/clothing/suit/wizrobe) && !istype(user:wear_suit, /obj/item/clothing/suit/space/rig/wizard))
-			usr << "I don't feel strong enough without my robe."
-			return 0
-		if(!istype(usr:shoes, /obj/item/clothing/shoes/sandal))
-			usr << "I don't feel strong enough without my sandals."
-			return 0
-		if(!istype(usr:head, /obj/item/clothing/head/wizard) && !istype(user:head, /obj/item/clothing/head/helmet/space/rig/wizard))
-			usr << "I don't feel strong enough without my hat."
+		if(clothes_req) //clothes check
+			if(!istype(H.wear_suit, /obj/item/clothing/suit/wizrobe) && !istype(H.wear_suit, /obj/item/clothing/suit/space/rig/wizard))
+				H << "<span class='notice'>I don't feel strong enough without my robe.</span>"
+				return 0
+			if(!istype(H.shoes, /obj/item/clothing/shoes/sandal))
+				H << "<span class='notice'>I don't feel strong enough without my sandals.</span>"
+				return 0
+			if(!istype(H.head, /obj/item/clothing/head/wizard) && !istype(H.head, /obj/item/clothing/head/helmet/space/rig/wizard))
+				H << "<span class='notice'>I don't feel strong enough without my hat.</span>"
+				return 0
+	else
+		if(clothes_req)
+			user << "<span class='notice'>This spell can only be casted by humans!</span>"
 			return 0
 
 	if(!skipcharge)
@@ -95,22 +102,17 @@ var/list/spells = typesof(/obj/effect/proc_holder/spell) //needed for the badmin
 	return 1
 
 /obj/effect/proc_holder/spell/proc/invocation(mob/user = usr) //spelling the spell out and setting it on recharge/reducing charges amount
-
 	switch(invocation_type)
 		if("shout")
 			if(prob(50))//Auto-mute? Fuck that noise
-				usr.say(invocation)
+				user.say(invocation)
 			else
-				usr.say(replacetext(invocation," ","`"))
-			if(usr.gender==MALE)
-				playsound(usr.loc, pick('sound/misc/null.ogg','sound/misc/null.ogg'), 100, 1)
-			else
-				playsound(usr.loc, pick('sound/misc/null.ogg','sound/misc/null.ogg'), 100, 1)
+				user.say(replacetext(invocation," ","`"))
 		if("whisper")
 			if(prob(50))
-				usr.whisper(invocation)
+				user.whisper(invocation)
 			else
-				usr.whisper(replacetext(invocation," ","`"))
+				user.whisper(replacetext(invocation," ","`"))
 
 /obj/effect/proc_holder/spell/New()
 	..()

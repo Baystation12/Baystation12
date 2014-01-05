@@ -8,7 +8,7 @@ datum/event/viral_infection/setup()
 	severity = rand(1, 3)
 
 datum/event/viral_infection/announce()
-	command_alert("Confirmed outbreak of level five biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+	command_alert("Confirmed outbreak of level five viral biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
 	world << sound('sound/AI/outbreak5.ogg')
 
 datum/event/viral_infection/start()
@@ -19,7 +19,13 @@ datum/event/viral_infection/start()
 	if(!candidates.len)	return
 	candidates = shuffle(candidates)//Incorporating Donkie's list shuffle
 
+	var/datum/disease2/disease/D = new /datum/disease2/disease
+	D.makerandom()
+	D.infectionchance = 1
+	message_admins("Viral Infection: releasing strain [D.uniqueID]")
+
 	while(severity > 0 && candidates.len)
-		infect_mob_random_lesser(candidates[1])
+		var/mob/living/carbon/human/H = candidates[1]
+		H.virus2["[D.uniqueID]"] = D
 		candidates.Remove(candidates[1])
 		severity--

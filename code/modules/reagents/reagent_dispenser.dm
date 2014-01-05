@@ -1,4 +1,4 @@
-
+#define AUTOIGNITION_WELDERFUEL 561.15
 
 /obj/structure/reagent_dispensers
 	name = "Dispenser"
@@ -154,6 +154,11 @@
 	ex_act()
 		explode()
 
+	temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+		if(exposed_temperature >= AUTOIGNITION_WELDERFUEL)
+			explode()
+
+
 	proc/explode()
 		if (reagents.total_volume > 500)
 			explosion(src.loc,1,2,4)
@@ -215,3 +220,15 @@
 	New()
 		..()
 		reagents.add_reagent("virusfood", 1000)
+
+/obj/structure/reagent_dispensers/spacecleanertank
+	name = "space cleaner refiller"
+	desc = "Refills space cleaner bottles."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "spacecleanertank"
+	anchored = 1
+	density = 0
+	amount_per_transfer_from_this = 250
+	New()
+		..()
+		reagents.add_reagent("cleaner",5000)

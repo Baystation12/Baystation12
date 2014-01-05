@@ -92,3 +92,4 @@ var/scheduledEvent = null
 
 	//Need to locate() as it's just a list of paths.
 	return locate(pick((the_station_areas - safe_areas) + danger_areas))
+

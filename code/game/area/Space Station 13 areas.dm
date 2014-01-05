@@ -434,6 +434,8 @@ proc/process_ghost_teleport_locs()
 /area/planet/clown
 	name = "\improper Clown Planet"
 	icon_state = "honk"
+	luminosity = 1
+	lighting_use_dynamic = 0
 	requires_power = 0
 
 /area/tdome
@@ -538,6 +540,46 @@ proc/process_ghost_teleport_locs()
 /area/vox_station/mining
 	name = "\improper nearby mining asteroid"
 	icon_state = "north"
+	requires_power = 0
+
+/area/xenos_station/start
+	name = "\improper start area"
+	icon_state = "north"
+	requires_power = 0
+
+/area/xenos_station/transit
+	name = "\improper hyperspace"
+	icon_state = "shuttle"
+	requires_power = 0
+
+/area/xenos_station/southwest
+	name = "\improper aft port solars"
+	icon_state = "southwest"
+	requires_power = 0
+
+/area/xenos_station/northwest
+	name = "\improper fore port solars"
+	icon_state = "northwest"
+	requires_power = 0
+
+/area/xenos_station/northeast
+	name = "\improper fore starboard solars"
+	icon_state = "northeast"
+	requires_power = 0
+
+/area/xenos_station/southeast
+	name = "\improper aft starboard solars"
+	icon_state = "southeast"
+	requires_power = 0
+
+/area/xenos_station/north
+	name = "\improper north landing area"
+	icon_state = "north"
+	requires_power = 0
+
+/area/xenos_station/south
+	name = "\improper south landing area"
+	icon_state = "south"
 	requires_power = 0
 
 //PRISON
@@ -874,8 +916,8 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Bar"
 	icon_state = "bar"
 
-/area/crew_quarters/theatre
-	name = "\improper Theatre"
+/area/crew_quarters/mrchangs
+	name = "\improper Mr Chang's"
 	icon_state = "Theatre"
 
 /area/library
@@ -1232,7 +1274,10 @@ proc/process_ghost_teleport_locs()
 /area/security/armoury
 	name = "\improper Armory"
 	icon_state = "Warden"
-
+/area/security/armoury/gamma
+	name = "\improper Gamma Armory"
+	icon_state = "Warden"
+	requires_power = 0
 /area/security/hos
 	name = "\improper Head of Security's Office"
 	icon_state = "sec_hos"
@@ -1562,6 +1607,13 @@ proc/process_ghost_teleport_locs()
 /area/construction/Storage
 	name = "Construction Site Storage"
 	icon_state = "yellow"
+
+
+//GAYBAR
+/area/secret/gaybar
+	name = "\improper Secret Space Bar"
+	requires_power = 0
+	icon_state = "pink"
 
 //AI
 

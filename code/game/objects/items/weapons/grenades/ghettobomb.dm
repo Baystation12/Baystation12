@@ -1,7 +1,7 @@
 //improvised explosives//
 
 //iedcasing assembly crafting//
-/obj/item/weapon/reagent_containers/food/drinks/soda_cans/attackby(var/obj/item/I, mob/user as mob)
+/obj/item/weapon/reagent_containers/food/drinks/cans/attackby(var/obj/item/I, mob/user as mob)
         if(istype(I, /obj/item/device/assembly/igniter))
                 var/obj/item/device/assembly/igniter/G = I
                 var/obj/item/weapon/grenade/iedcasing/W = new /obj/item/weapon/grenade/iedcasing

@@ -94,6 +94,12 @@
 		A.add_fingerprint(H)
 		drain("MECHA",A,suit)
 		return 1
+		/*
+	if(istype(A,/obj/item/weapon/cell))
+		A.add_fingerprint(H)
+		drain("CELL",A,suit)
+		return 1
+		*/
 
 	// download research
 	if(istype(A,/obj/machinery/computer/rdconsole))

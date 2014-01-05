@@ -16,6 +16,10 @@
 		src << "You whisper silently, \"[message]\""
 		B.host << "The captive mind of [src] whispers, \"[message]\""
 
+		for(var/mob/M in mob_list)
+			if(M.mind && (istype(M, /mob/dead/observer)))
+				M << "<i>Thought-speech, <b>[src]</b> -> <b>[B.truename]:</b> [message]</i>"
+
 /mob/living/captive_brain/emote(var/message)
 	return
 
@@ -38,36 +42,64 @@
 	attacktext = "nips"
 	friendly = "prods"
 	wander = 0
+	small = 1
+	density = 0
 	pass_flags = PASSTABLE
 
+	var/used_dominate
 	var/chemicals = 10                      // Chemicals used for reproduction and spitting neurotoxin.
 	var/mob/living/carbon/human/host        // Human host for the brain worm.
 	var/truename                            // Name used for brainworm-speak.
 	var/mob/living/captive_brain/host_brain // Used for swapping control of the body back and forth.
 	var/controlling                         // Used in human death check.
+	var/docile = 0                          // Sugar can stop borers from acting.
 
 /mob/living/simple_animal/borer/Life()
 
 	..()
+
+
 	if(host)
+
 		if(!stat && !host.stat)
+
+			if(host.reagents.has_reagent("sugar"))
+				if(!docile)
+					if(controlling)
+						host << "\blue You feel the soporific flow of sugar in your host's blood, lulling you into docility."
+					else
+						src << "\blue You feel the soporific flow of sugar in your host's blood, lulling you into docility."
+					docile = 1
+			else
+				if(docile)
+					if(controlling)
+						host << "\blue You shake off your lethargy as the sugar leaves your host's blood."
+					else
+						src << "\blue You shake off your lethargy as the sugar leaves your host's blood."
+					docile = 0
+
 			if(chemicals < 250)
 				chemicals++
 			if(controlling)
+
+				if(docile)
+					host << "\blue You are feeling far too docile to continue controlling your host..."
+					host.release_control()
+					return
+
 				if(prob(5))
 					host.adjustBrainLoss(rand(1,2))
 
 				if(prob(host.brainloss/20))
 					host.say("*[pick(list("blink","blink_r","choke","aflap","drool","twitch","twitch_s","gasp"))]")
 
-				//if(host.brainloss > 100)
-
-/mob/living/simple_animal/borer/New()
+/mob/living/simple_animal/borer/New(var/by_gamemode=0)
 	..()
 	truename = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
 	host_brain = new/mob/living/captive_brain(src)
 
-	request_player()
+	if(!by_gamemode)
+		request_player()
 
 
 /mob/living/simple_animal/borer/say(var/message)
@@ -104,6 +136,11 @@
 	src << "You drop words into [host]'s mind: \"[message]\""
 	host << "Your own thoughts speak: \"[message]\""
 
+	for(var/mob/M in mob_list)
+		if(M.mind && (istype(M, /mob/dead/observer)))
+			M << "<i>Thought-speech, <b>[truename]</b> -> <b>[host]:</b> [copytext(message, 2)]</i>"
+
+
 /mob/living/simple_animal/borer/Stat()
 	..()
 	statpanel("Status")
@@ -127,6 +164,46 @@
 		if(M.mind && (istype(M, /mob/living/simple_animal/borer) || istype(M, /mob/dead/observer)))
 			M << "<i>Cortical link, <b>[truename]:</b> [copytext(message, 2)]</i>"
 
+/mob/living/simple_animal/borer/verb/dominate_victim()
+	set category = "Alien"
+	set name = "Dominate Victim"
+	set desc = "Freeze the limbs of a potential host with supernatural fear."
+
+	if(world.time - used_dominate < 300)
+		src << "You cannot use that ability again so soon."
+		return
+
+	if(host)
+		src << "You cannot do that from within a host body."
+		return
+
+	if(src.stat)
+		src << "You cannot do that in your current state."
+		return
+
+	var/list/choices = list()
+	for(var/mob/living/carbon/C in view(3,src))
+		if(C.stat != 2)
+			choices += C
+
+	if(world.time - used_dominate < 300)
+		src << "You cannot use that ability again so soon."
+		return
+
+	var/mob/living/carbon/M = input(src,"Who do you wish to dominate?") in null|choices
+
+	if(!M || !src) return
+
+	if(M.has_brain_worms())
+		src << "You cannot infest someone who is already infested!"
+		return
+
+	src << "\red You focus your psychic lance on [M] and freeze their limbs with a wave of terrible dread."
+	M << "\red You feel a creeping, horrible sense of dread come over you, freezing your limbs and setting your heart racing."
+	M.Weaken(3)
+
+	used_dominate = world.time
+
 /mob/living/simple_animal/borer/verb/bond_brain()
 	set category = "Alien"
 	set name = "Assume Control"
@@ -140,12 +217,20 @@
 		src << "You cannot do that in your current state."
 		return
 
+	if(!host.internal_organs_by_name["brain"]) //this should only run in admin-weirdness situations, but it's here non the less - RR
+		src << "<span class='warning'>There is no brain here for us to command!</span>"
+		return
+
+	if(docile)
+		src << "\blue You are feeling far too docile to do that."
+		return
+
 	src << "You begin delicately adjusting your connection to the host brain..."
 
 	spawn(300+(host.brainloss*5))
 
-		if(!host || !src || controlling) return
-
+		if(!host || !src || controlling)
+			return
 		else
 			src << "\red <B>You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system.</B>"
 			host << "\red <B>You feel a strange shifting sensation behind your eyes as an alien consciousness displaces yours.</B>"
@@ -170,10 +255,14 @@
 	if(stat)
 		src << "You cannot secrete chemicals in your current state."
 
+	if(docile)
+		src << "\blue You are feeling far too docile to do that."
+		return
+
 	if(chemicals < 50)
 		src << "You don't have enough chemicals!"
 
-	var/chem = input("Select a chemical to secrete.", "Chemicals") in list("bicaridine","tramadol","hyperzine")
+	var/chem = input("Select a chemical to secrete.", "Chemicals") in list("bicaridine","tramadol","hyperzine","alkysine")
 
 	if(chemicals < 50 || !host || controlling || !src || stat) //Sanity check.
 		return
@@ -194,6 +283,9 @@
 	if(stat)
 		src << "You cannot leave your host in your current state."
 
+	if(docile)
+		src << "\blue You are feeling far too docile to do that."
+		return
 
 	if(!host || !src) return
 
@@ -262,17 +354,25 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	var/list/choices = list()
 	for(var/mob/living/carbon/C in view(1,src))
-		if(C.stat != 2)
+		if(C.stat != 2 && src.Adjacent(C))
 			choices += C
 
 	var/mob/living/carbon/M = input(src,"Who do you wish to infest?") in null|choices
 
 	if(!M || !src) return
 
+	if(!(src.Adjacent(M))) return
+
 	if(M.has_brain_worms())
 		src << "You cannot infest someone who is already infested!"
 		return
-
+/*
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		if(H.check_head_coverage())
+			src << "You cannot get through that host's protective gear."
+			return
+*/
 	M << "Something slimy begins probing at the opening of your ear canal..."
 	src << "You slither up [M] and begin probing at their ear canal..."
 
@@ -295,21 +395,24 @@ mob/living/simple_animal/borer/proc/detatch()
 		if(!M.stat)
 			M << "Something disgusting and slimy wiggles into your ear!"
 
-		src.host = M
-		src.loc = M
-
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			var/datum/organ/external/head = H.get_organ("head")
-			head.implants += src
-
-		host_brain.name = M.name
-		host_brain.real_name = M.real_name
+			src.perform_infestation(M)
 
 		return
 	else
 		src << "They are no longer in range!"
 		return
+
+/mob/living/simple_animal/borer/proc/perform_infestation(var/mob/living/carbon/M)
+	src.host = M
+	src.loc = M
+
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		var/datum/organ/external/head = H.get_organ("head")
+		head.implants += src
+
+	host_brain.name = M.name
+	host_brain.real_name = M.real_name
 
 /mob/living/simple_animal/borer/verb/ventcrawl()
 	set name = "Crawl through Vent"
@@ -356,22 +459,9 @@ mob/living/simple_animal/borer/proc/detatch()
 		src << "\blue You must be standing on or beside an air vent to enter it."
 	return
 
-//copy paste from alien/larva, if that func is updated please update this one alsoghost
-/mob/living/simple_animal/borer/verb/hide()
-	set name = "Hide"
-	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
-	set category = "Alien"
-
-	if (layer != TURF_LAYER+0.2)
-		layer = TURF_LAYER+0.2
-		src << text("\blue You are now hiding.")
-	else
-		layer = MOB_LAYER
-		src << text("\blue You have stopped hiding.")
-
 //Procs for grabbing players.
 mob/living/simple_animal/borer/proc/request_player()
-	for(var/mob/dead/observer/O in player_list)
+	for(var/mob/O in respawnable_list)
 		if(jobban_isbanned(O, "Syndicate"))
 			continue
 		if(O.client)
@@ -398,3 +488,24 @@ mob/living/simple_animal/borer/proc/transfer_personality(var/client/candidate)
 	src.ckey = candidate.ckey
 	if(src.mind)
 		src.mind.assigned_role = "Cortical Borer"
+
+/mob/living/simple_animal/borer/verb/borerhide()
+	set category = "Alien"
+	set name = "Hide"
+	set desc = "Allows to hide beneath tables or certain items. Toggled on or off."
+
+	if(stat != CONSCIOUS)
+		return
+
+	if (layer != TURF_LAYER+0.2)
+		layer = TURF_LAYER+0.2
+		src << text("\green You are now hiding.")
+		for(var/mob/O in oviewers(src, null))
+			if ((O.client && !( O.blinded )))
+				O << text("<B>[] scurries to the ground!</B>", src)
+	else
+		layer = MOB_LAYER
+		src << text("\green You have stopped hiding.")
+		for(var/mob/O in oviewers(src, null))
+			if ((O.client && !( O.blinded )))
+				O << text("[] slowly peaks up from the ground...", src)

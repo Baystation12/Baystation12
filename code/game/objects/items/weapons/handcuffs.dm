@@ -56,6 +56,12 @@
 				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [C.name] ([C.ckey])</font>")
 				log_attack("[user.name] ([user.ckey]) Attempted to handcuff [C.name] ([C.ckey])")
 
+				if(!iscarbon(user))
+					C.LAssailant = null
+				else
+					C.LAssailant = user
+
+
 				var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human(  )
 				O.source = user
 				O.target = C
@@ -122,6 +128,7 @@
 /obj/item/weapon/handcuffs/cable/white
 	icon_state = "cuff_white"
 
+
 /obj/item/weapon/handcuffs/cyborg
 	dispenser = 1
 
@@ -129,3 +136,13 @@
 	name = "fluffy pink handcuffs"
 	desc = "Use this to keep prisoners in line. Or you know, your significant other."
 	icon_state = "pinkcuffs"
+
+/obj/item/weapon/handcuffs/cable/attackby(var/obj/item/I, mob/user as mob)
+	..()
+	if(istype(I, /obj/item/stack/rods))
+		var/obj/item/stack/rods/R = I
+		var/obj/item/weapon/wirerod/W = new /obj/item/weapon/wirerod
+		R.use(1)
+		user.put_in_hands(W)
+		user << "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>"
+		del(src)

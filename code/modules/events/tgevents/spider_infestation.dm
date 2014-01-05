@@ -8,7 +8,7 @@
 
 /datum/event/spider_infestation/setup()
 	announceWhen = rand(announceWhen, announceWhen + 50)
-	spawncount = rand(5, 8)
+	spawncount = num_players() * 2
 	sent_spiders_to_station = 1
 
 /datum/event/spider_infestation/announce()
@@ -17,6 +17,7 @@
 
 
 /datum/event/spider_infestation/start()
+
 	var/list/vents = list()
 	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in world)
 		if(temp_vent.loc.z == 1 && !temp_vent.welded && temp_vent.network)

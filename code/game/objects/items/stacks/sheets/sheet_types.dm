@@ -132,6 +132,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	new/datum/stack_recipe("wooden door", /obj/structure/mineral_door/wood, 10, time = 20, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("coffin", /obj/structure/closet/coffin, 5, time = 15, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("apiary", /obj/item/apiary, 10, time = 25, one_per_turf = 0, on_floor = 0), \
+	new/datum/stack_recipe("drying rack", /obj/machinery/drying_rack, 10, time = 15, one_per_turf = 1, on_floor = 1), \
 	)
 
 /obj/item/stack/sheet/wood
@@ -160,6 +161,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
  */
 var/global/list/datum/stack_recipe/cardboard_recipes = list ( \
 	new/datum/stack_recipe("box", /obj/item/weapon/storage/box), \
+	new/datum/stack_recipe("large box", /obj/item/weapon/storage/box/large, 4), \
 	new/datum/stack_recipe("light tubes", /obj/item/weapon/storage/box/lights/tubes), \
 	new/datum/stack_recipe("light bulbs", /obj/item/weapon/storage/box/lights/bulbs), \
 	new/datum/stack_recipe("mouse traps", /obj/item/weapon/storage/box/mousetraps), \

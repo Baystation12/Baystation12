@@ -47,13 +47,12 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/weapon/melee/baton(src)
-		src.modules += new /obj/item/weapon/extinguisher(src)
-		src.modules += new /obj/item/weapon/wrench(src)
-		src.modules += new /obj/item/weapon/crowbar(src)
-		src.modules += new /obj/item/device/healthanalyzer(src)
-		src.emag = new /obj/item/weapon/melee/energy/sword(src)
-		return
+		modules += new /obj/item/weapon/melee/baton/loaded(src)
+		modules += new /obj/item/weapon/extinguisher(src)
+		modules += new /obj/item/weapon/wrench(src)
+		modules += new /obj/item/weapon/crowbar(src)
+		modules += new /obj/item/device/healthanalyzer(src)
+		emag = new /obj/item/weapon/melee/energy/sword(src)
 
 
 
@@ -85,19 +84,19 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/borg/sight/meson(src)
-		src.emag = new /obj/item/borg/stun(src)
-		src.modules += new /obj/item/weapon/rcd/borg(src)
-		src.modules += new /obj/item/weapon/extinguisher(src)
-//		src.modules += new /obj/item/device/flashlight(src)
-		src.modules += new /obj/item/weapon/weldingtool/largetank(src)
-		src.modules += new /obj/item/weapon/screwdriver(src)
-		src.modules += new /obj/item/weapon/wrench(src)
-		src.modules += new /obj/item/weapon/crowbar(src)
-		src.modules += new /obj/item/weapon/wirecutters(src)
-		src.modules += new /obj/item/device/multitool(src)
-		src.modules += new /obj/item/device/t_scanner(src)
-		src.modules += new /obj/item/device/analyzer(src)
+		modules += new /obj/item/borg/sight/meson(src)
+		emag = new /obj/item/borg/stun(src)
+		modules += new /obj/item/weapon/rcd/borg(src)
+		modules += new /obj/item/weapon/extinguisher(src)
+		modules += new /obj/item/weapon/weldingtool/largetank(src)
+		modules += new /obj/item/weapon/screwdriver(src)
+		modules += new /obj/item/weapon/wrench(src)
+		modules += new /obj/item/weapon/crowbar(src)
+		modules += new /obj/item/weapon/wirecutters(src)
+		modules += new /obj/item/device/multitool(src)
+		modules += new /obj/item/device/t_scanner(src)
+		modules += new /obj/item/device/analyzer(src)
+		modules += new /obj/item/taperoll/engineering(src)
 
 		var/obj/item/stack/sheet/metal/cyborg/M = new /obj/item/stack/sheet/metal/cyborg(src)
 		M.amount = 50
@@ -136,12 +135,12 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/borg/sight/hud/sec(src)
-		src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
-		src.modules += new /obj/item/weapon/melee/baton(src)
-		src.modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
-		src.emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
-		return
+		modules += new /obj/item/borg/sight/hud/sec(src)
+		modules += new /obj/item/weapon/handcuffs/cyborg(src)
+		modules += new /obj/item/weapon/melee/baton/loaded(src)
+		modules += new /obj/item/weapon/gun/energy/taser/cyborg(src)
+		modules += new /obj/item/taperoll/police(src)
+		emag = new /obj/item/weapon/gun/energy/laser/cyborg(src)
 
 
 
@@ -169,10 +168,10 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/beer(src)
+		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
 		src.modules += new /obj/item/weapon/pen/robopen(src)
-		src.modules += new /obj/item/device/violin(src)
+		src.modules += new /obj/item/weapon/razor(src)
 		var/obj/item/weapon/rsf/M = new /obj/item/weapon/rsf(src)
 		M.matter = 30
 		src.modules += M
@@ -185,7 +184,7 @@
 
 		src.modules += new /obj/item/weapon/tray/robotray(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/shaker(src)
-		src.emag = new /obj/item/weapon/reagent_containers/food/drinks/beer(src)
+		src.emag = new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 
 		var/datum/reagents/R = new/datum/reagents(50)
 		src.emag.reagents = R
@@ -202,13 +201,11 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/borg/sight/meson(src)
-		src.emag = new /obj/item/borg/stun(src)
-		src.modules += new /obj/item/weapon/storage/bag/ore(src)
-		src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
-		src.modules += new /obj/item/weapon/storage/bag/sheetsnatcher/borg(src)
-//		src.modules += new /obj/item/weapon/shovel(src) Uneeded due to buffed drill
-		return
+		modules += new /obj/item/borg/sight/meson(src)
+		emag = new /obj/item/borg/stun(src)
+		modules += new /obj/item/weapon/storage/bag/ore(src)
+		modules += new /obj/item/weapon/pickaxe/borgdrill(src)
+		modules += new /obj/item/weapon/storage/bag/sheetsnatcher/borg(src)
 
 
 /obj/item/weapon/robot_module/syndicate
@@ -233,3 +230,20 @@
 		src.modules += new /obj/item/weapon/wrench(src) //Is a combat android really going to be stopped by a chair?
 		src.emag = new /obj/item/weapon/gun/energy/lasercannon/cyborg(src)
 		return
+
+/obj/item/weapon/robot_module/alien/hunter
+	name = "alien hunter module"
+
+	New()
+		src.modules += new /obj/item/weapon/melee/energy/alien/claws(src)
+		src.modules += new /obj/item/device/flash/alien(src)
+		src.modules += new /obj/item/borg/sight/thermal/alien(src)
+		var/obj/item/weapon/reagent_containers/spray/alien/stun/S = new /obj/item/weapon/reagent_containers/spray/alien/stun(src)
+		S.reagents.add_reagent("stoxin",250) //nerfed to sleeptoxin to make it less instant drop.
+		src.modules += S
+		var/obj/item/weapon/reagent_containers/spray/alien/smoke/A = new /obj/item/weapon/reagent_containers/spray/alien/smoke(src)
+		S.reagents.add_reagent("water",50) //Water is used as a dummy reagent for the smoke bombs. More of an ammo counter.
+		src.modules += A
+		src.emag = new /obj/item/weapon/reagent_containers/spray/alien/acid(src)
+		src.emag.reagents.add_reagent("pacid", 125)
+		src.emag.reagents.add_reagent("sacid", 125)

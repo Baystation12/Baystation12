@@ -239,6 +239,11 @@
 		src << "There is no blob adjacent to you."
 		return
 
+	var/mob/M = locate() in T
+	if(M && !(M.stat))
+		src << "You can't expand to a tile containing a living entity."
+		return
+
 	if(!can_buy(5))
 		return
 	OB.expand(T, 0)

@@ -227,6 +227,29 @@
 		\[hr\] : Adds a horizontal rule.
 	</BODY></HTML>"}, "window=paper_help")
 
+/obj/item/weapon/paper/proc/burnpaper(obj/item/weapon/lighter/P, mob/user)
+	var/class = "<span class='warning'>"
+
+	if(P.lit && !user.restrained())
+		if(istype(P, /obj/item/weapon/lighter/zippo))
+			class = "<span class='rose'>"
+
+		user.visible_message("[class][user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!", \
+		"[class]You hold \the [P] up to \the [src], burning it slowly.")
+
+		spawn(20)
+			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
+				user.visible_message("[class][user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.", \
+				"[class]You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.")
+
+				if(user.get_inactive_hand() == src)
+					user.drop_from_inventory(src)
+
+				new /obj/effect/decal/cleanable/ash(src.loc)
+				del(src)
+
+			else
+				user << "\red You must hold \the [P] steady to burn \the [src]."
 
 /obj/item/weapon/paper/Topic(href, href_list)
 	..()
@@ -309,6 +332,9 @@
 		overlays += stampoverlay
 
 		user << "<span class='notice'>You stamp the paper with your rubber stamp.</span>"
+
+	else if(istype(P, /obj/item/weapon/lighter))
+		burnpaper(P, user)
 
 	add_fingerprint(user)
 	return

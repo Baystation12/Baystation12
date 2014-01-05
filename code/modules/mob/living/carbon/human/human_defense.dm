@@ -122,6 +122,17 @@ emp_act
 				protection += C.armor[type]
 	return protection
 
+/mob/living/carbon/human/proc/check_head_coverage()
+
+	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform)
+	for(var/bp in body_parts)
+		if(!bp)  continue
+		if(bp && istype(bp ,/obj/item/clothing))
+			var/obj/item/clothing/C = bp
+			if(C.body_parts_covered & HEAD)
+				return 1
+	return 0
+
 
 /mob/living/carbon/human/proc/check_shields(var/damage = 0, var/attack_text = "the attack")
 	if(l_hand && istype(l_hand, /obj/item/weapon))//Current base is the prob(50-d/3)
@@ -162,6 +173,9 @@ emp_act
 	for(var/datum/organ/external/O  in organs)
 		if(O.status & ORGAN_DESTROYED)	continue
 		O.emp_act(severity)
+		for(var/datum/organ/internal/I  in O.internal_organs)
+			if(I.robotic == 0)  continue
+			I.emp_act(severity)
 	..()
 
 
@@ -189,6 +203,11 @@ emp_act
 			src.attack_log += "\[[time_stamp()]\] Was chopped up into meat by <b>[user]/[user.ckey]</b>"
 			user.attack_log += "\[[time_stamp()]\] Chopped up <b>[src]/[src.ckey]</b> into meat</b>"
 			msg_admin_attack("[user.name] ([user.ckey]) chopped up [src] ([src.ckey]) into meat (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+			if(!iscarbon(user))
+				LAssailant = null
+			else
+				LAssailant = user
+
 			del(src)
 
 	var/datum/organ/external/affecting = get_organ(target_zone)

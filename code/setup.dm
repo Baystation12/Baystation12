@@ -45,6 +45,7 @@
 #define BODYTEMP_COLD_DAMAGE_LIMIT 260.15 // The limit the human body can take before it starts taking damage from coldness.
 
 #define SPACE_HELMET_MIN_COLD_PROTECITON_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-helmet quality headwear. MUST NOT BE 0.
+#define SPACE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE 5000
 #define SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-suit quality jumpsuits or suits. MUST NOT BE 0.
 #define SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE 5000	//These need better heat protect
 #define FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE 30000 //what max_heat_protection_temperature is set to for firesuit quality headwear. MUST NOT BE 0.
@@ -473,7 +474,9 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 #define SEC_LEVEL_GREEN	0
 #define SEC_LEVEL_BLUE	1
 #define SEC_LEVEL_RED	2
-#define SEC_LEVEL_DELTA	3
+#define SEC_LEVEL_GAMMA	3
+#define SEC_LEVEL_EPSILON	4
+#define SEC_LEVEL_DELTA	5
 
 #define TRANSITIONEDGE	7 //Distance from edge to move to another z-level
 
@@ -519,6 +522,7 @@ var/list/liftable_structures = list(\
 #define BANTYPE_JOB_PERMA	3
 #define BANTYPE_JOB_TEMP	4
 #define BANTYPE_ANY_FULLBAN	5 //used to locate stuff to unban.
+#define BANTYPE_APPEARANCE  6
 
 #define SEE_INVISIBLE_MINIMUM 5
 
@@ -661,7 +665,8 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define BE_MONKEY		512
 #define BE_NINJA		1024
 #define BE_VOX			2048
-#define BE_PLANT		4096
+#define BE_SLIME		4096
+#define BE_VAMPIRE		8192
 
 var/list/be_special_flags = list(
 	"Traitor" = BE_TRAITOR,
@@ -676,7 +681,8 @@ var/list/be_special_flags = list(
 	"Monkey" = BE_MONKEY,
 	"Ninja" = BE_NINJA,
 	"Vox" = BE_VOX,
-	"Diona" = BE_PLANT
+	"Slime" = BE_SLIME,
+	"Vampire" = BE_VAMPIRE
 	)
 
 #define AGE_MIN 17			//youngest a character can be
@@ -714,6 +720,8 @@ var/list/be_special_flags = list(
 //feel free to add shit to lists below
 var/list/tachycardics = list("coffee", "inaprovaline", "hyperzine", "nitroglycerin", "thirteenloko", "nicotine")	//increase heart rate
 var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")					//decrease heart rate
+var/list/heartstopper = list("potassium_phorochloride", "zombie_powder") //this stops the heart
+var/list/cheartstopper = list("potassium_chloride") //this stops the heart when overdose is met -- c = conditional
 
 //proc/get_pulse methods
 #define GETPULSE_HAND	0	//less accurate (hand)
@@ -750,6 +758,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 
 #define FEET_CLAWS		1
 #define FEET_PADDED		2
+#define FEET_NOSLIP		4
 
 
 //Language flags.
@@ -768,3 +777,24 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1
 #define ZONE_SLEEPING 0
+
+// Vampire power defines
+#define VAMP_REJUV 1
+#define VAMP_GLARE 2
+#define VAMP_HYPNO 3
+#define VAMP_SHAPE 4
+#define VAMP_VISION 5
+#define VAMP_DISEASE 6
+#define VAMP_CLOAK 7
+#define VAMP_BATS 8
+#define VAMP_SCREAM 9
+#define VAMP_JAUNT 10
+#define VAMP_SLAVE 11
+#define VAMP_BLINK 12
+#define VAMP_FULL 13
+
+// Moved from machine_interactions.dm
+#define STATION_Z  1
+#define CENTCOMM_Z 2
+#define TELECOMM_Z 3
+#define ASTEROID_Z 5

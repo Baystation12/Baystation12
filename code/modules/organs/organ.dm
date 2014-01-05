@@ -35,6 +35,7 @@
 
 /mob/living/carbon/human/var/list/organs = list()
 /mob/living/carbon/human/var/list/organs_by_name = list() // map organ names to organs
+/mob/living/carbon/human/var/list/internal_organs_by_name = list() // so internal organs have less ickiness too
 
 //Creates and initializes and connects external and internal organs
 /mob/living/carbon/human/proc/make_organs()
@@ -44,19 +45,20 @@
 	organs_by_name["head"] = new/datum/organ/external/head(organs_by_name["chest"])
 	organs_by_name["l_arm"] = new/datum/organ/external/l_arm(organs_by_name["chest"])
 	organs_by_name["r_arm"] = new/datum/organ/external/r_arm(organs_by_name["chest"])
-	organs_by_name["r_leg"] = new/datum/organ/external/r_leg(organs_by_name["groin"])
-	organs_by_name["l_leg"] = new/datum/organ/external/l_leg(organs_by_name["groin"])
+	organs_by_name["r_leg"] = new/datum/organ/external/r_leg(organs_by_name["chest"])
+	organs_by_name["l_leg"] = new/datum/organ/external/l_leg(organs_by_name["chest"])
 	organs_by_name["l_hand"] = new/datum/organ/external/l_hand(organs_by_name["l_arm"])
 	organs_by_name["r_hand"] = new/datum/organ/external/r_hand(organs_by_name["r_arm"])
 	organs_by_name["l_foot"] = new/datum/organ/external/l_foot(organs_by_name["l_leg"])
 	organs_by_name["r_foot"] = new/datum/organ/external/r_foot(organs_by_name["r_leg"])
 
 	if (species.name!="Slime People")
-		new/datum/organ/internal/heart(src)
-		new/datum/organ/internal/lungs(src)
-		new/datum/organ/internal/liver(src)
-		new/datum/organ/internal/kidney(src)
-		new/datum/organ/internal/brain(src)
+		internal_organs_by_name["heart"] = new/datum/organ/internal/heart(src)
+		internal_organs_by_name["lungs"] = new/datum/organ/internal/lungs(src)
+		internal_organs_by_name["liver"] = new/datum/organ/internal/liver(src)
+		internal_organs_by_name["kidney"] = new/datum/organ/internal/kidney(src)
+		internal_organs_by_name["brain"] = new/datum/organ/internal/brain(src)
+		internal_organs_by_name["eyes"] = new/datum/organ/internal/eyes(src)
 
 	for(var/name in organs_by_name)
 		organs += organs_by_name[name]

@@ -60,6 +60,7 @@
 	normalspeed = 1
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	var/hasShocked = 0 //Prevents multiple shocks from happening
+	var/frozen = 0 //special condition for airlocks that are frozen shut, this will look weird on not normal airlocks because of a lack of special overlays.
 
 /obj/machinery/door/airlock/command
 	name = "Airlock"
@@ -119,6 +120,11 @@
 	icon = 'icons/obj/doors/Doorhatchele.dmi'
 	opacity = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_hatch
+
+/obj/machinery/door/airlock/hatch/gamma
+	name = "Gamma Level Hatch"
+	hackProof = 1
+	aiControlDisabled = 1
 
 /obj/machinery/door/airlock/maintenance_hatch
 	name = "Maintenance Hatch"
@@ -287,6 +293,11 @@
 	icon = 'icons/obj/doors/hightechsecurity.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity
 
+/obj/machinery/door/airlock/highsecurity/red
+	name = "Secure Armory Airlock"
+	hackProof = 1
+	aiControlDisabled = 1
+
 /*
 About the new airlock wires panel:
 *	An airlock wire dialog can be accessed by the normal way or by using wirecutters or a multitool on the door while the wire-panel is open. This would show the following wires, which you can either wirecut/mend or send a multitool pulse through. There are 9 wires.
@@ -423,12 +434,15 @@ About the new airlock wires panel:
 			icon_state = "door_locked"
 		else
 			icon_state = "door_closed"
-		if(p_open || welded)
+		if(p_open || welded || frozen)
 			overlays = list()
 			if(p_open)
 				overlays += image(icon, "panel_open")
 			if(welded)
 				overlays += image(icon, "welded")
+			if(frozen)
+				overlays += image(icon, "frozen")
+
 	else
 		icon_state = "door_open"
 
@@ -551,7 +565,11 @@ About the new airlock wires panel:
 
 
 	if(src.welded)
-		t1 += text("Door appears to have been welded shut.<br>\n")
+		if(frozen)
+			t1 += text("Door appears to have been frozen shut.<br>\n")
+		else
+			t1 += text("Door appears to have been welded shut.<br>\n")
+
 	else if(!src.locked)
 		if(src.density)
 			t1 += text("<A href='?src=\ref[];aiEnable=7'>Open door</a><br>\n", src)
@@ -875,6 +893,8 @@ About the new airlock wires panel:
 	if((istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
 		var/obj/item/weapon/weldingtool/W = C
 		if(W.remove_fuel(0,user))
+			if(frozen)
+				frozen = 0
 			if(!src.welded)
 				src.welded = 1
 			else
@@ -1042,6 +1062,9 @@ About the new airlock wires panel:
 				if(A.closeOtherId == src.closeOtherId && A != src)
 					src.closeOther = A
 					break
+	if(frozen)
+		welded = 1
+		update_icon()
 
 
 /obj/machinery/door/airlock/proc/prison_open()
@@ -1049,3 +1072,54 @@ About the new airlock wires panel:
 	src.open()
 	src.locked = 1
 	return
+
+
+/obj/machinery/door/airlock/hatch/gamma/attackby(C as obj, mob/user as mob)
+	//world << text("airlock attackby src [] obj [] mob []", src, C, user)
+	if(!istype(usr, /mob/living/silicon))
+		if(src.isElectrified())
+			if(src.shock(user, 75))
+				return
+	if(istype(C, /obj/item/device/detective_scanner) || istype(C, /obj/item/taperoll))
+		return
+
+	src.add_fingerprint(user)
+	if((istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
+		var/obj/item/weapon/weldingtool/W = C
+		if(W.remove_fuel(0,user))
+			if(frozen)
+				frozen = 0
+			if(!src.welded)
+				src.welded = 1
+			else
+				src.welded = null
+			src.update_icon()
+			return
+		else
+			return
+
+
+/obj/machinery/door/airlock/highsecurity/red/attackby(C as obj, mob/user as mob)
+	//world << text("airlock attackby src [] obj [] mob []", src, C, user)
+	if(!istype(usr, /mob/living/silicon))
+		if(src.isElectrified())
+			if(src.shock(user, 75))
+				return
+	if(istype(C, /obj/item/device/detective_scanner) || istype(C, /obj/item/taperoll))
+		return
+
+	src.add_fingerprint(user)
+	if((istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
+		var/obj/item/weapon/weldingtool/W = C
+		if(W.remove_fuel(0,user))
+			if(frozen)
+				frozen = 0
+			if(!src.welded)
+				src.welded = 1
+			else
+				src.welded = null
+			src.update_icon()
+			return
+		else
+			return
+

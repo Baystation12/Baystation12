@@ -77,3 +77,11 @@
 		new	/obj/item/weapon/ninja_manuscript(loc)
 	..()
 
+/obj/structure/largecrate/cat
+	name = "cat crate"
+	icon_state = "lisacrate"
+
+/obj/structure/largecrate/cat/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/crowbar))
+		new /mob/living/simple_animal/cat(loc)
+	..()

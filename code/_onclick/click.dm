@@ -55,7 +55,7 @@
 	if(modifiers["ctrl"])
 		CtrlClickOn(A)
 		return
-	
+
 	if(stat || paralysis || stunned || weakened)
 		return
 
@@ -65,6 +65,8 @@
 		return
 
 	if(istype(loc,/obj/mecha))
+		if(!locate(/turf) in list(A,A.loc)) // Prevents inventory from being drilled
+			return
 		var/obj/mecha/M = loc
 		return M.click_action(A,src)
 
@@ -289,7 +291,7 @@
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)
-	if( buckled || !A || !x || !y || !A.x || !A.y ) return
+	if( stat || buckled || !A || !x || !y || !A.x || !A.y ) return
 	var/dx = A.x - x
 	var/dy = A.y - y
 	if(!dx && !dy) return

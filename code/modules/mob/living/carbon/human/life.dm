@@ -102,6 +102,9 @@
 
 		handle_medical_side_effects()
 
+	if(stat == DEAD)
+		handle_decay()
+
 	handle_stasis_bag()
 
 	//Handle temperature/pressure differences between body and environment
@@ -121,6 +124,9 @@
 	// Grabbing
 	for(var/obj/item/weapon/grab/G in src)
 		G.process()
+
+	if(mind && mind.vampire)
+		handle_vampire()
 
 
 /mob/living/carbon/human/calculate_affecting_pressure(var/pressure)
@@ -237,7 +243,6 @@
 
 		if (radiation)
 			if (radiation > 100)
-				radiation = 100
 				Weaken(10)
 				src << "\red You feel weak."
 				emote("collapse")
@@ -258,7 +263,7 @@
 
 				var/damage = 0
 				switch(radiation)
-					if(1 to 49)
+					if(0 to 49)
 						radiation--
 						if(prob(25))
 							adjustToxLoss(1)
@@ -279,6 +284,17 @@
 					if(75 to 100)
 						radiation -= 3
 						adjustToxLoss(3)
+						damage = 1
+						if(prob(1))
+							src << "\red You mutate!"
+							randmutb(src)
+							domutcheck(src,null)
+							emote("gasp")
+						updatehealth()
+
+					else
+						radiation -= 5
+						adjustToxLoss(5)
 						damage = 1
 						if(prob(1))
 							src << "\red You mutate!"
@@ -389,6 +405,11 @@
 			else if(internals)
 				internals.icon_state = "internal0"
 		return null
+
+// USED IN DEATHWHISPERS
+	proc/isInCrit()
+		// Health is in deep shit and we're not already dead
+		return health <= 0 && stat != 2
 
 
 	proc/handle_breath(datum/gas_mixture/breath)
@@ -605,6 +626,7 @@
 		else if(bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT)
 			fire_alert = max(fire_alert, 1)
 			if(status_flags & GODMODE)	return 1	//godmode
+			if(stat == DEAD) return 1 //ZomgPonies -- No need for cold burn damage if dead
 			if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 				switch(bodytemperature)
 					if(200 to 260)
@@ -894,8 +916,8 @@
 
 			if(nutrition > 500)
 				nutrition = 500
-			if(light_amount > 2) //if there's enough light, heal
-				heal_overall_damage(1,1)
+			if(light_amount > 5) //if there's enough light, heal
+				adjustBruteLoss(-1)
 				adjustToxLoss(-1)
 				adjustOxyLoss(-1)
 		if(dna && dna.mutantrace == "shadow")
@@ -970,6 +992,9 @@
 
 		var/datum/organ/internal/liver/liver = internal_organs["liver"]
 		liver.process()
+
+		var/datum/organ/internal/eyes/eyes = internal_organs["eyes"]
+		eyes.process()
 
 		updatehealth()
 
@@ -1054,6 +1079,12 @@
 				if( prob(2) && health && !hal_crit )
 					spawn(0)
 						emote("snore")
+				if(mind)
+					if(mind.vampire)
+						if(istype(loc, /obj/structure/closet/coffin))
+							adjustBruteLoss(-1)
+							adjustFireLoss(-1)
+							adjustToxLoss(-1)
 			else if(resting)
 				if(halloss > 0)
 					adjustHalLoss(-3)
@@ -1208,6 +1239,13 @@
 						see_in_dark = 8
 						see_invisible = SEE_INVISIBLE_LEVEL_ONE
 
+			if(mind && mind.vampire)
+				if((VAMP_VISION in mind.vampire.powers) && !(VAMP_FULL in mind.vampire.powers))
+					sight |= SEE_MOBS
+				if((VAMP_FULL in mind.vampire.powers))
+					sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+					see_in_dark = 8
+					if(!druggy)    see_invisible = SEE_INVISIBLE_LEVEL_TWO
 			if(XRAY in mutations)
 				sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 				see_in_dark = 8
@@ -1366,10 +1404,6 @@
 				if(!O.up && tinted_weldhelh)
 					client.screen += global_hud.darkMask
 
-			if(eye_stat > 20)
-				if(eye_stat > 30)	client.screen += global_hud.darkMask
-				else				client.screen += global_hud.vimpaired
-
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)
 			else
@@ -1453,7 +1487,7 @@
 				if(M.loc != src)
 					stomach_contents.Remove(M)
 					continue
-				if(istype(M, /mob/living/carbon) && stat != 2)
+				if(isliving(M) && stat != 2)
 					if(M.stat == 2)
 						M.death(1)
 						stomach_contents.Remove(M)
@@ -1542,9 +1576,42 @@
 				if(temp <= PULSE_FAST && temp >= PULSE_NONE)
 					temp++
 					break
+		for(var/datum/reagent/R in reagents.reagent_list) //To avoid using fakedeath
+			if(R.id in heartstopper)
+				temp = PULSE_NONE
+				break
+		for(var/datum/reagent/R in reagents.reagent_list) //Conditional heart-stoppage
+			if(R.id in cheartstopper)
+				if(R.volume >= R.overdose)
+					temp = PULSE_NONE
+					break
 
 		return temp
 
+	proc/handle_decay()
+		var/decaytime = world.time - timeofdeath
+
+		if(decaytime <= 6000) //10 minutes for decaylevel1 -- stinky
+			return
+
+		if(decaytime > 6000 && decaytime <= 12000)//20 minutes for decaylevel2 -- bloated and very stinky
+			decaylevel = 1
+
+		if(decaytime > 12000 && decaytime <= 18000)//30 minutes for decaylevel3 -- rotting and gross
+			decaylevel = 2
+
+		if(decaytime > 18000 && decaytime <= 27000)//45 minutes for decaylevel4 -- skeleton
+			decaylevel = 3
+		if(decaytime > 27000)
+			decaylevel = 4
+			makeSkeleton()
+
+
+		for(var/mob/living/carbon/human/H in range(decaylevel, src))
+			if(prob(5))
+				if(airborne_can_reach(get_turf(src), get_turf(H)))
+					H << "<spawn class='warning'>You smell something foul..."
+					H.vomit()
 
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS

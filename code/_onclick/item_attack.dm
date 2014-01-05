@@ -39,9 +39,12 @@
 	user.lastattacked = M
 	M.lastattacker = user
 
-	user.attack_log += "\[[time_stamp()]\]<font color='red'> Attacked [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
-	log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>" )
+	add_logs(M, user, "attacked", src.name, "(INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])")
+
+	if(!iscarbon(user))
+		M.LAssailant = null
+	else
+		M.LAssailant = user
 
 	//spawn(1800)            // this wont work right
 	//	M.lastattacker = null

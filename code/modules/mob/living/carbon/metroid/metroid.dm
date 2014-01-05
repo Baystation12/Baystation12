@@ -432,23 +432,6 @@
 
 			return
 
-
-
-
-	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
-		var/obj/item/clothing/gloves/G = M.gloves
-		if(G.cell)
-			if(M.a_intent == "hurt")//Stungloves. Any contact will stun the alien.
-				if(G.cell.charge >= 2500)
-					G.cell.charge -= 2500
-					for(var/mob/O in viewers(src, null))
-						if ((O.client && !( O.blinded )))
-							O.show_message("\red <B>[src] has been touched with the stun gloves by [M]!</B>", 1, "\red You hear someone fall.", 2)
-					return
-				else
-					M << "\red Not enough charge! "
-					return
-
 	switch(M.a_intent)
 
 		if ("help")
@@ -647,6 +630,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 	throw_speed = 3
 	throw_range = 6
 	origin_tech = "biotech=4"
+	_color = "grey"
 	var/Uses = 1 // uses before it goes inert
 
 /obj/item/slime_extract/New()
@@ -655,73 +639,100 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 		reagents = R
 		R.my_atom = src
 
+/obj/item/slime_extract/attack(mob/living/carbon/human/M as mob, mob/user as mob) //changing slime people colors
+		if(M.dna.mutantrace != "slime" || M != user) return
+
+		M.slime_color = _color
+		user <<"You absorb the core and your color shifts!"
+		M.update_mutantrace()
+		del(src) //Finally a tidy way to remove all the used cores lying about
+
+
+
 /obj/item/slime_extract/grey
 	name = "grey slime extract"
 	icon_state = "grey slime extract"
+	_color = "grey"
 
 /obj/item/slime_extract/gold
 	name = "gold slime extract"
 	icon_state = "gold slime extract"
+	_color = "gold"
 
 /obj/item/slime_extract/silver
 	name = "silver slime extract"
 	icon_state = "silver slime extract"
+	_color = "silver"
 
 /obj/item/slime_extract/metal
 	name = "metal slime extract"
 	icon_state = "metal slime extract"
+	_color = "metal"
 
 /obj/item/slime_extract/purple
 	name = "purple slime extract"
 	icon_state = "purple slime extract"
+	_color = "purple"
 
 /obj/item/slime_extract/darkpurple
 	name = "dark purple slime extract"
 	icon_state = "dark purple slime extract"
+	_color = "darkpurple"
 
 /obj/item/slime_extract/orange
 	name = "orange slime extract"
 	icon_state = "orange slime extract"
+	_color = "orange"
 
 /obj/item/slime_extract/yellow
 	name = "yellow slime extract"
 	icon_state = "yellow slime extract"
+	_color = "yellow"
 
 /obj/item/slime_extract/red
 	name = "red slime extract"
 	icon_state = "red slime extract"
+	_color = "red"
 
 /obj/item/slime_extract/blue
 	name = "blue slime extract"
 	icon_state = "blue slime extract"
+	_color = "blue"
 
 /obj/item/slime_extract/darkblue
 	name = "dark blue slime extract"
 	icon_state = "dark blue slime extract"
+	_color = "darkblue"
 
 /obj/item/slime_extract/pink
 	name = "pink slime extract"
 	icon_state = "pink slime extract"
+	_color = "pink"
 
 /obj/item/slime_extract/green
 	name = "green slime extract"
 	icon_state = "green slime extract"
+	_color = "green"
 
 /obj/item/slime_extract/lightpink
 	name = "light pink slime extract"
 	icon_state = "light pink slime extract"
+	_color = "lightpink"
 
 /obj/item/slime_extract/black
 	name = "black slime extract"
 	icon_state = "black slime extract"
+	_color = "black"
 
 /obj/item/slime_extract/oil
 	name = "oil slime extract"
 	icon_state = "oil slime extract"
+	_color = "oil"
 
 /obj/item/slime_extract/adamantine
 	name = "adamantine slime extract"
 	icon_state = "adamantine slime extract"
+	_color = "adamantine"
 
 ////Pet Slime Creation///
 

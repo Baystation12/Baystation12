@@ -15,20 +15,32 @@
 	desc = "Used to keep bodies in untill someone fetches them."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "morgue1"
-	dir = EAST
 	density = 1
+	dir = EAST
 	var/obj/structure/m_tray/connected = null
 	anchored = 1.0
 
 /obj/structure/morgue/proc/update()
-	if (src.connected)
+	if(src.connected)
 		src.icon_state = "morgue0"
 	else
-		if (src.contents.len)
-			src.icon_state = "morgue2"
-		else
-			src.icon_state = "morgue1"
+		if(src.contents.len)
+
+			var/mob/living/M = locate() in contents
+
+			var/obj/structure/closet/body_bag/B = locate() in contents
+			if(M==null) M = locate() in B
+
+			if(M)
+				if(M.client)
+					src.icon_state = "morgue3"
+				else
+					src.icon_state = "morgue2"
+
+			else src.icon_state = "morgue4"
+		else src.icon_state = "morgue1"
 	return
+
 
 /obj/structure/morgue/ex_act(severity)
 	switch(severity)
@@ -134,7 +146,7 @@
 	density = 1
 	layer = 2.0
 	var/obj/structure/morgue/connected = null
-	anchored = 1
+	anchored = 1.0
 	throwpass = 1
 
 /obj/structure/m_tray/attack_paw(mob/user as mob)
@@ -158,6 +170,8 @@
 	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
 		return
 	if (!ismob(O) && !istype(O, /obj/structure/closet/body_bag))
+		return
+	if (!ismob(user) || user.stat || user.lying || user.stunned)
 		return
 	O.loc = src.loc
 	if (user != O)
@@ -314,6 +328,7 @@
 
 		cremating = 1
 		locked = 1
+		icon_state = "crema_active"
 
 		for(var/mob/living/M in contents)
 			if (M.stat!=2)
@@ -333,6 +348,7 @@
 		sleep(30)
 		cremating = 0
 		locked = 0
+		update()
 		playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	return
 
@@ -348,7 +364,7 @@
 	density = 1
 	layer = 2.0
 	var/obj/structure/crematorium/connected = null
-	anchored = 1
+	anchored = 1.0
 	throwpass = 1
 
 /obj/structure/c_tray/attack_paw(mob/user as mob)
@@ -372,6 +388,8 @@
 	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
 		return
 	if (!ismob(O) && !istype(O, /obj/structure/closet/body_bag))
+		return
+	if (!ismob(user) || user.stat || user.lying || user.stunned)
 		return
 	O.loc = src.loc
 	if (user != O)

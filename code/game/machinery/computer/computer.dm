@@ -8,6 +8,7 @@
 	active_power_usage = 300
 	var/obj/item/weapon/circuitboard/circuit = null //if circuit==null, computer can't disassembly
 	var/processing = 0
+	luminosity = 2
 
 /obj/machinery/computer/New()
 	..()
@@ -20,7 +21,9 @@
 
 /obj/machinery/computer/process()
 	if(stat & (NOPOWER|BROKEN))
+		luminosity = 0
 		return 0
+	luminosity = 2
 	return 1
 
 /obj/machinery/computer/meteorhit(var/obj/O as obj)
@@ -83,6 +86,7 @@
 	else if(stat & NOPOWER)
 		icon_state = initial(icon_state)
 		icon_state += "0"
+		luminosity = 0
 
 
 

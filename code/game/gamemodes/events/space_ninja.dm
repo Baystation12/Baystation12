@@ -67,7 +67,7 @@ ________________________________________________________________________________
 		Phase Shift
 			Extra Ability
 			Advanced Sensors?
-				Instead of being unlocked at the start, Phase Shieft would become available once requirements are met.
+				Instead of being unlocked at the start, Phase Shift would become available once requirements are met.
 		Uranium-based Recharger:
 			Suit Upgrade
 			Unsure
@@ -153,7 +153,7 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 	else
 
 		var/list/candidates = list()	//list of candidate keys
-		for(var/mob/dead/observer/G in player_list)
+		for(var/mob/G in respawnable_list)
 			if(G.client && !G.client.holder && !G.client.is_afk() && G.client.prefs.be_special & BE_NINJA)
 				if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
 					candidates += G
@@ -482,20 +482,26 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	if(alert("Are you sure you want to send in a space ninja?",,"Yes","No")=="No")
 		return
 
-	var/mission
-	while(!mission)
-		mission = copytext(sanitize(input(src, "Please specify which mission the space ninja shall undertake.", "Specify Mission", "")),1,MAX_MESSAGE_LEN)
-		if(!mission)
-			if(alert("Error, no mission set. Do you want to exit the setup process?",,"Yes","No")=="Yes")
-				return
+	if(alert("Would you like random or custom paramaters?",,"Random","Custom")=="Custom")
+		var/mission
+		while(!mission)
+			mission = copytext(sanitize(input(src, "Please specify which mission the space ninja shall undertake.", "Specify Mission", "")),1,MAX_MESSAGE_LEN)
+			if(!mission)
+				if(alert("Error, no mission set. Do you want to exit the setup process?",,"Yes","No")=="Yes")
+					return
 
-	var/input = ckey(input("Pick character to spawn as the Space Ninja", "Key", ""))
-	if(!input)
-		return
 
-	space_ninja_arrival(input, mission)
+		var/input = ckey(input("Pick character to spawn as the Space Ninja", "Key", ""))
+		if(!input)
+			return
 
-	message_admins("\blue [key_name_admin(key)] has spawned [input] as a Space Ninja.\nTheir <b>mission</b> is: [mission]")
+		space_ninja_arrival(input, mission)
+
+		message_admins("\blue [key_name_admin(key)] has spawned [input] as a Space Ninja.\nTheir <b>mission</b> is: [mission]")
+
+	else
+		space_ninja_arrival()
+		message_admins("\blue [key_name_admin(key)] has spawned a random player as a Space Ninja.")
 	log_admin("[key] used Spawn Space Ninja.")
 
 	return
@@ -532,6 +538,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		del(head)
 		del(shoes)
 		del(gloves)
+		del(back)
 
 	var/obj/item/device/radio/R = new /obj/item/device/radio/headset(src)
 	equip_to_slot_or_del(R, slot_l_ear)
@@ -544,6 +551,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	equip_to_slot_or_del(new /obj/item/clothing/gloves/space_ninja(src), slot_gloves)
 	equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/space_ninja(src), slot_head)
 	equip_to_slot_or_del(new /obj/item/clothing/mask/gas/voice/space_ninja(src), slot_wear_mask)
+	equip_to_slot_or_del(new /obj/item/weapon/tank/jetpack/oxygenblack(src), slot_back)
 	equip_to_slot_or_del(new /obj/item/device/flashlight(src), slot_belt)
 	equip_to_slot_or_del(new /obj/item/weapon/plastique(src), slot_r_store)
 	equip_to_slot_or_del(new /obj/item/weapon/plastique(src), slot_l_store)
@@ -573,6 +581,9 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 			U << "\red <B>fÄTaL ÈÈRRoR</B>: 382200-*#00CÖDE <B>RED</B>\nUNAU†HORIZED USÈ DETÈC†††eD\nCoMMÈNCING SUB-R0U†IN3 13...\nTÈRMInATING U-U-USÈR..."
 			U.gib()
 			return 0
+		if(!istype(U:wear_suit, /obj/item/clothing/suit/space/space_ninja)) // Because previously players could activate the suit successfully while holding the suit
+			U << "\red <B>ERROR</B>: 100113 \black UNABLE TO LOCATE USER\nABORTING..."
+			return 0
 		if(!istype(U:head, /obj/item/clothing/head/helmet/space/space_ninja))
 			U << "\red <B>ERROR</B>: 100113 \black UNABLE TO LOCATE HEAD GEAR\nABORTING..."
 			return 0
@@ -582,7 +593,9 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		if(!istype(U:gloves, /obj/item/clothing/gloves/space_ninja))
 			U << "\red <B>ERROR</B>: 110223 \black UNABLE TO LOCATE HAND GEAR\nABORTING..."
 			return 0
-
+		if(!istype(U:wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja))
+			U << "\red <B>ERROR</B>: 110223 \black UNABLE TO LOCATE MASK\nABORTING..."
+			return 0
 		affecting = U
 		canremove = 0
 		slowdown = 0
@@ -593,6 +606,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		n_shoes.slowdown--
 		n_gloves = U:gloves
 		n_gloves.canremove=0
+		n_mask = U:wear_mask
+		n_mask.canremove=0
 
 	return 1
 
@@ -613,6 +628,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 		n_gloves.canremove=1
 		n_gloves.candrain=0
 		n_gloves.draining=0
+	if(n_mask)
+		n_mask.canremove=1
 
 //Allows the mob to grab a stealth icon.
 /mob/proc/NinjaStealthActive(atom/A)//A is the atom which we are using as the overlay.
@@ -666,6 +683,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 /obj/item/clothing/suit/space/space_ninja/proc/grant_ninja_verbs()
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
+	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjasmoke
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjaboost
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
@@ -678,6 +696,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 /obj/item/clothing/suit/space/space_ninja/proc/remove_ninja_verbs()
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
+	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
+	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjasmoke
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjaboost
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjablade
@@ -689,6 +709,9 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 /obj/item/clothing/suit/space/space_ninja/proc/grant_kamikaze(mob/living/carbon/U)
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
 	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
+	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
+	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
+	verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjaslayer
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjawalk
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjamirage
@@ -713,11 +736,15 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 /obj/item/clothing/suit/space/space_ninja/proc/remove_kamikaze(mob/living/carbon/U)
 	if(kamikaze)
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjashift
+		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjapulse
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjastar
+		verbs += /obj/item/clothing/suit/space/space_ninja/proc/ninjanet
+
 		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjaslayer
 		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjawalk
 		verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ninjamirage
+
 
 		verbs += /obj/item/clothing/suit/space/space_ninja/proc/stealth
 		if(n_gloves)

@@ -111,6 +111,12 @@ var/list/department_radio_keys = list(
 			return
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return
+	 // undo last word status.
+
+	if(ishuman(src))
+		var/mob/living/carbon/human/H=src
+		if(H.said_last_words)
+			H.said_last_words=0
 
 	// Mute disability
 	if (sdisabilities & MUTE)
@@ -303,6 +309,7 @@ var/list/department_radio_keys = list(
 	var/list/listening
 
 	listening = get_mobs_in_view(message_range, src)
+	var/list/onscreen = get_mobs_in_view(7, src)
 	for(var/mob/M in player_list)
 		if (!M.client)
 			continue //skip monkeys and leavers
@@ -373,12 +380,14 @@ var/list/department_radio_keys = list(
 			M:show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "radio"]</span>")
 
 	var/rendered = null
+
 	if (length(heard_a))
 		var/message_a = say_quote(message,speaking)
 
 		if (italics)
 			message_a = "<i>[message_a]</i>"
 
+		var/message_ghost = "<b>[message_a]</b>" // bold so ghosts know the person is in view.
 		rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] <span class='message'>[message_a]</span></span>"
 		var/rendered2 = null
 
@@ -386,10 +395,14 @@ var/list/department_radio_keys = list(
 		//BEGIN TELEPORT CHANGES
 			if(!istype(M, /mob/new_player))
 				if(M && M.stat == DEAD)
-					rendered2 = "<span class='game say'><span class='name'>[GetVoice()]</span></span> [alt_name] <a href='byond://?src=\ref[M];follow2=\ref[M];follow=\ref[src]'>(Follow)</a> <span class='message'>[message_a]</span></span>"
+					if ((M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
+						rendered2 = "<span class='game say'><span class='name'>[GetVoice()]</span></span> [alt_name] <a href='byond://?src=\ref[M];follow2=\ref[M];follow=\ref[src]'>(Follow)</a> <span class='message'>[message_ghost]</span></span>"
+					else
+						rendered2 = "<span class='game say'><span class='name'>[GetVoice()]</span></span> [alt_name] <a href='byond://?src=\ref[M];follow2=\ref[M];follow=\ref[src]'>(Follow)</a> <span class='message'>[message_a]</span></span>"
 					M:show_message(rendered2, 2)
 					continue
 	//END CHANGES
+
 			if(hascall(M,"show_message"))
 				var/deaf_message = ""
 				var/deaf_type = 1

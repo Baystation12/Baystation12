@@ -18,6 +18,8 @@ nanoui is used to open and update nano browser uis
 	var/atom/movable/src_object
 	// the title of this ui
 	var/title
+	// /vg/ - Whether to write debug information to nano/debug.html
+	var/writeDebug=TRUE
 	// the key of this ui, this is to allow multiple (different) uis for each src_object
 	var/ui_key
 	// window_id is used as the window name/identifier for browse and onclose
@@ -91,7 +93,10 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/add_common_assets()
-	add_script("libraries.min.js") // The jQuery library
+	//add_script("libraries.min.js") // The jQuery library
+	add_script("1-jquery.js")
+	add_script("2-jsviews.js")
+	add_script("3-jquery.timers.js")
 	add_script("nano_update.js") // The NanoUpdate JS, this is used to receive updates and apply them.
 	add_script("nano_config.js") // The NanoUpdate JS, this is used to receive updates and apply them.
 	add_script("nano_base_helpers.js") // The NanoBaseHelpers JS, this is used to set up template helpers which are common to all templates
@@ -146,6 +151,8 @@ nanoui is used to open and update nano browser uis
 			set_status(STATUS_INTERACTIVE, push_update) // interactive (green visibility)
 		else if (dist <= 2)
 			set_status(STATUS_UPDATE, push_update) // update only (orange visibility)
+		else if (istype(src_object, /obj/item/device/uplink/hidden)) // You know what if they have the uplink open let them use the UI
+			set_status(STATUS_INTERACTIVE, push_update)       // Will build in distance checks on the topics for sanity.
 		else if (dist <= 4)
 			set_status(STATUS_DISABLED, push_update) // no updates, completely disabled (red visibility)
 
@@ -349,9 +356,10 @@ nanoui is used to open and update nano browser uis
 		window_size = "size=[width]x[height];"
 	update_status(0)
 	var/html=get_html()
-	var/f = file("nano/debug.html")
-	fdel(f)
-	f << html
+	if(src.writeDebug)
+		var/f = file("nano/debug.html")
+		fdel(f)
+		f << html
 	user << browse(html, "window=[window_id];[window_size][window_options]")
 	winset(user, "mapwindow.map", "focus=true") // Return keyboard focus to map.
 	on_close_winset()
@@ -407,7 +415,7 @@ nanoui is used to open and update nano browser uis
 	if (status != STATUS_INTERACTIVE || user != usr) // If UI is not interactive or usr calling Topic is not the UI user
 		return
 
-	if (src_object.Topic(href, href_list))
+	if (src_object && src_object.Topic(href, href_list))
 		nanomanager.update_uis(src_object) // update all UIs attached to src_object
 
  /**

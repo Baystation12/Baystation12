@@ -96,3 +96,61 @@
 		var/turf/west = locate(T.x - 1, T.y, T.z)
 		if(istype(west, /turf/simulated/floor))
 			new /obj/machinery/conveyor/auto(west, WEST)
+
+
+
+/obj/machinery/transformer/mime
+	name = "Mimetech Greyscaler"
+	desc = "Turns anything placed inside black and white."
+
+
+/obj/machinery/transformer/mime/conveyor/New()
+	..()
+	var/turf/T = loc
+	if(T)
+		// Spawn Conveyour Belts
+
+		//East
+		var/turf/east = locate(T.x + 1, T.y, T.z)
+		if(istype(east, /turf/simulated/floor))
+			new /obj/machinery/conveyor/auto(east, WEST)
+
+		// West
+		var/turf/west = locate(T.x - 1, T.y, T.z)
+		if(istype(west, /turf/simulated/floor))
+			new /obj/machinery/conveyor/auto(west, WEST)
+
+/obj/machinery/transformer/mime/Bumped(var/atom/movable/AM)
+
+	if(cooldown == 1)
+		return
+
+	// Crossed didn't like people lying down.
+	if(isobject(AM))
+		AM.loc = src.loc
+		do_transform_mime(AM)
+	else
+		AM << "Only items can be greyscaled."
+		return
+
+/obj/machinery/transformer/proc/do_transform_mime(var/obj/item/I)
+	if(stat & (BROKEN|NOPOWER))
+		return
+	if(cooldown == 1)
+		return
+
+	playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+	// Sleep for a couple of ticks to allow the human to see the pain
+	sleep(5)
+	use_power(5000) // Use a lot of power.
+
+	var/icon/newicon = new(I.icon, I.icon_state)
+	newicon.GrayScale()
+	I.icon = newicon
+
+	// Activate the cooldown
+	cooldown = 1
+	update_icon()
+	spawn(cooldown_duration)
+		cooldown = 0
+		update_icon()

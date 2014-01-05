@@ -22,6 +22,9 @@
 	if(byond_version < RECOMMENDED_VERSION)
 		world.log << "Your server's byond version does not meet the recommended requirements for TGstation code. Please update BYOND"
 
+	if(config && config.log_runtimes)
+		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
+
 	make_datum_references_lists()	//initialises global lists for referencing frequently used datums (so that we only ever do it once)
 
 	load_configuration()
@@ -35,6 +38,7 @@
 	if(config.usealienwhitelist)
 		load_alienwhitelist()
 	jobban_loadbanfile()
+	appearance_loadbanfile()
 	jobban_updatelegacybans()
 	LoadBans()
 
@@ -152,7 +156,7 @@
 			n++
 		s["players"] = n
 
-		if(revdata)	s["revision"] = revdata.revision
+//		if(revdata)	s["revision"] = revdata.revision
 		s["admins"] = admins
 
 		return list2params(s)
@@ -269,12 +273,12 @@
 
 	s += "<b>[station_name()]</b>";
 	s += " ("
-	s += "<a href=\"http://192.241.230.212/phpBB3/index.php\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"http://80.244.78.90/phpBB3/index.php\">" //Change this to wherever you want the hub to link to.
 	s += "[game_version]"
 	s += "</a>"
 	s += ")"
 	s += "<br>The Perfect Mix of RP & Action<br>"
-	s += "<b>BYOND 500+ REQUIRED</b><br>"
+	s += "<b>NEW HOST. NO LAG. NO CRASH.</b><br>"
 
 
 

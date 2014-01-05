@@ -55,7 +55,7 @@
 	name = "Bubblish"
 	desc = "Languages of slimes, a mixture of bubbling noises and pops. Almost impossible to speak without mechanical aid for non slime people."
 	speech_verb = "bubbles and pops"
-	colour = "slime"
+	colour = "skrell"
 	key = "f"
 	flags = RESTRICTED
 

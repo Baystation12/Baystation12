@@ -49,9 +49,25 @@
 		w_class = 2
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "\blue [src] can now be concealed."
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
 	add_fingerprint(user)
 	return
 
+/obj/item/weapon/melee/energy/sword/attackby(obj/item/weapon/W, mob/living/user)
+	..()
+	if(istype(W, /obj/item/weapon/melee/energy/sword))
+		if(W == src)
+			user << "<span class='notice'>You try to attach the end of the energy sword to... itself. You're not very smart, are you?</span>"
+			if(ishuman(user))
+				user.adjustBrainLoss(10)
+		else
+			user << "<span class='notice'>You attach the ends of the two energy swords, making a single double-bladed weapon! You're cool.</span>"
+			new /obj/item/weapon/twohanded/dualsaber(user.loc)
+			del(W)
+			del(src)
 /*
  * Classic Baton
  */
@@ -98,6 +114,13 @@
 		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
 		log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
+
+		if(!iscarbon(user))
+			M.LAssailant = null
+		else
+			M.LAssailant = user
+
+
 		src.add_fingerprint(user)
 
 		for(var/mob/O in viewers(M))
@@ -137,6 +160,10 @@
 		w_class = 2
 		force = 3//not so robust now
 		attack_verb = list("hit", "punched")
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
 	playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 	add_fingerprint(user)
 	if (!blood_DNA) return
@@ -163,11 +190,24 @@
 			else
 				user.take_organ_damage(2*force)
 			return
-
-		if(!..()) return
-		playsound(src.loc, "swing_hit", 50, 1, -1)
-		//target.Stun(4)	//naaah
-		target.Weaken(4)
+		if (user.a_intent == "hurt")
+			if(!..()) return
+			if(!isrobot(target))
+				playsound(src.loc, "swing_hit", 50, 1, -1)
+				//target.Stun(4)	//naaah
+				target.Weaken(4)
+		else
+			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1, -1)
+			target.Weaken(2)
+			target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [target.name] ([target.ckey])</font>")
+			log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [target.name] ([target.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
+			src.add_fingerprint(user)
+			target.visible_message("\red <B>[target] has been stunned with \the [src] by [user]!</B>")
+			if(!iscarbon(user))
+				target.LAssailant = null
+			else
+				target.LAssailant = user
 		return
 	else
 		return ..()
@@ -248,5 +288,9 @@
 		w_class = 1
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "\blue [src] can now be concealed."
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
 	add_fingerprint(user)
 	return

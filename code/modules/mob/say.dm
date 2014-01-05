@@ -92,6 +92,10 @@
 		return 1
 	else if (istype(other, /mob/living/carbon/human) && istype(src, /mob/living/carbon/human))
 		return 1
+	else if (istype(other, /mob/living/simple_animal) && istype(src, /mob/living/simple_animal))
+		return 1
+	else if (istype(other, /mob/living/carbon/human) && istype(src, /mob/living/simple_animal/borer))
+		return 1
 	return 0
 
 /mob/proc/say_quote(var/text,var/datum/language/speaking)

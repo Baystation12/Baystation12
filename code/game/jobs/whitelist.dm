@@ -22,7 +22,7 @@ var/list/whitelist = list()
 			usr << "\red Unable to connect to whitelist database. Please try again later.<br>"
 			return 0
 		else
-			var/DBQuery/query = dbcon.NewQuery("SELECT job FROM whitelist WHERE ckey='[M.ckey]'")
+			var/DBQuery/query = dbcon.NewQuery("SELECT job FROM whitelist WHERE ckey='[M.key]'")
 			query.Execute()
 
 

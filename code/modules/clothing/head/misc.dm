@@ -231,6 +231,14 @@
 	flags = FPRINT | TABLEPASS | BLOCKHAIR
 	siemens_coefficient = 2.0
 
+/obj/item/clothing/head/corgi
+	name = "corgi suit head"
+	desc = "Woof!"
+	icon_state = "corgihead"
+	item_state = "chickensuit"
+	flags = FPRINT | TABLEPASS | BLOCKHAIR
+	siemens_coefficient = 2.0
+
 /obj/item/clothing/head/bearpelt
 	name = "bear pelt hat"
 	desc = "Fuzzy."
@@ -254,3 +262,17 @@
 	item_state = "crown"
 	desc = "A gliterring bananium crown with spessjewels in it. Swaggy."
 	flags = FPRINT | TABLEPASS | BLOCKHAIR
+
+
+/obj/item/clothing/head/fedora
+	name = "fedora"
+	desc = "Someone wearing this definitely makes them cool"
+	icon_state = "fedora"
+
+/obj/item/clothing/head/fedora/whitefedora
+	name = "white fedora"
+	icon_state = "wfedora"
+
+/obj/item/clothing/head/fedora/brownfedora
+	name = "brown fedora"
+	icon_state = "bfedora"

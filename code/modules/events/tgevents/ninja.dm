@@ -1589,7 +1589,7 @@ ________________________________________________________________________________
 		dat += "<h2 ALIGN=CENTER>SpiderOS v.<b>ERR-RR00123</b></h2>"
 	dat += "<br>"
 	dat += "<img src=sos_10.png> Current Time: [worldtime2text()]<br>"
-	dat += "<img src=sos_9.png> Battery Life: [round(cell.charge/100)]%<br>"
+	dat += "<img src=sos_9.png> Battery Life: [round(cell.charge)] ([round(cell.charge/100)]%)<br>"
 	dat += "<img src=sos_11.png> Smoke Bombs: \Roman [s_bombs]<br>"
 	dat += "<img src=sos_14.png> pai Device: "
 	if(pai)
@@ -1722,11 +1722,11 @@ ________________________________________________________________________________
 					</ul>
 					<b>Abilities</b>:
 					<ul>
-					<li>*<b>Phase Shift</b> (<i>2000E</i>) and <b>Phase Jaunt</b> (<i>1000E</i>) are unique powers in that they can both be used for defense and offense. Jaunt launches the ninja forward facing up to 9 squares, somewhat randomly selecting the final destination. Shift can only be used on turf in view but is precise (cannot be used on walls). Any living mob in the area teleported to is instantly gibbed (mechs are damaged, huggers and other similar critters are killed). It is possible to teleport with a target, provided you grab them before teleporting.</li>
-					<li>*<b>Energy Blade</b> (<i>500E</i>) is a highly effective weapon. It is summoned directly to the ninja's hand and can also function as an EMAG for certain objects (doors/lockers/etc). You may also use it to cut through walls and disabled doors. Experiment! The blade will crit humans in two hits. This item cannot be placed in containers and when dropped or thrown disappears. Having an energy blade drains more power from the battery each tick.</li>
-					<li>*<b>EM Pulse</b> (<i>2500E</i>) is a highly useful ability that will create an electromagnetic shockwave around the ninja, disabling technology whenever possible. If used properly it can render a security force effectively useless. Of course, getting beat up with a toolbox is not accounted for.</li>
+					<li>*<b>Phase Shift</b> (<i>500E</i>) and <b>Phase Jaunt</b> (<i>250E</i>) are unique powers in that they can both be used for defense and offense. Jaunt launches the ninja forward facing up to 9 squares, somewhat randomly selecting the final destination. Shift can only be used on turf in view but is precise (cannot be used on walls). Any living mob in the area teleported to is instantly gibbed (mechs are damaged, huggers and other similar critters are killed). It is possible to teleport with a target, provided you grab them before teleporting. </li>
+					<li>*<b>Energy Blade</b> (<i>200E</i>) is a highly effective weapon. It is summoned directly to the ninja's hand and can also function as an EMAG for certain objects (doors/lockers/etc). You may also use it to cut through walls and disabled doors. Experiment! The blade will crit humans in two hits. This item cannot be placed in containers and when dropped or thrown disappears. Having an energy blade drains more power from the battery each tick.</li>
+					<li>*<b>EM Pulse</b> (<i>1000E</i>) is a highly useful ability that will create an electromagnetic shockwave around the ninja, disabling technology whenever possible. If used properly it can render a security force effectively useless. Of course, getting beat up with a toolbox is not accounted for.</li>
 					<li>*<b>Energy Star</b> (<i>500E</i>) is a ninja star made of green energy AND coated in poison. It works by picking a random living target within range and can be spammed to great effect in incapacitating foes. Just remember that the poison used is also used by the Xeno Hivemind (and will have no effect on them).</li>
-					<li>*<b>Energy Net</b> (<i>2000E</i>) is a non-lethal solution to incapacitating humanoids. The net is made of non-harmful phase energy and will halt movement as long as it remains in effect--it can be destroyed. If the net is not destroyed, after a certain time it will teleport the target to a holding facility for the Spider Clan and then vanish. You will be notified if the net fails or succeeds in capturing a target in this manner. Combine with energy stars or stripping to ensure success. Abduction never looked this leet.</li>
+					<li>*<b>Energy Net</b> (<i>5000E</i>) is a non-lethal solution to incapacitating humanoids. The net is made of non-harmful phase energy and will halt movement as long as it remains in effect--it can be destroyed. If the net is not destroyed, after a certain time it will teleport the target to a holding facility for the Spider Clan and then vanish. You will be notified if the net fails or succeeds in capturing a target in this manner. Combine with energy stars or stripping to ensure success. Abduction never looked this leet.</li>
 					<li>*<b>Adrenaline Boost</b> (<i>1 E. Boost/3</i>) recovers the user from stun, weakness, and paralysis. Also injects 20 units of radium into the bloodstream.</li>
 					<li>*<b>Smoke Bomb</b> (<i>1 Sm.Bomb/10</i>) is a weak but potentially useful ability. It creates harmful smoke and can be used in tandem with other powers to confuse enemies.</li>
 					<li>*<b>???</b>: unleash the <b>True Ultimate Power!</b></li>
@@ -2336,17 +2336,32 @@ ________________________________________________________________________________
 
 		if("CELL")
 			var/obj/item/weapon/cell/A = target
+			var/drainrate
 			if(A.charge)
+				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+				spark_system.set_up(5, 0, A.loc)
 				if (G.candrain&&do_after(U,30))
-					U << "\blue Gained <B>[A.charge]</B> energy from the cell."
-					if(S.cell.charge+A.charge>S.cell.maxcharge)
-						S.cell.charge=S.cell.maxcharge
+					drain = rand(G.mindrain,G.maxdrain)
+					if(S.cell.charge+A.charge<S.cell.maxcharge)
+						while(S.cell.charge!=S.cell.maxcharge)
+							while(S.cell.maxcharge-S.cell.charge > drain)
+								S.cell.charge+=drain
+								totaldrain+=drain
+								A.charge-=drain
+								spark_system.start()
+								playsound(A.loc, "sparks", 50, 1)
+							S.cell.charge = S.cell.maxcharge
 					else
-						S.cell.charge+=A.charge
-					A.charge = 0
+						while(A.charge)
+							S.cell.charge+=drain
+							totaldrain+=drain
+							A.charge-=drain
+							spark_system.start()
+							playsound(A.loc, "sparks", 50, 1)
 					G.draining = 0
 					A.corrupt()
 					A.updateicon()
+					U << "\blue Gained <B>[totaldrain]</B> energy from the cell."
 				else
 					U << "\red Procedure interrupted. Protocol terminated."
 			else

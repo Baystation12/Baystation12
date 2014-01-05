@@ -1,14 +1,14 @@
 
 #define NITROGEN_RETARDATION_FACTOR 4        //Higher == N2 slows reaction more
-#define THERMAL_RELEASE_MODIFIER 10                //Higher == less heat released during reaction
+#define THERMAL_RELEASE_MODIFIER 25                //Higher == less heat released during reaction
 #define PLASMA_RELEASE_MODIFIER 1500                //Higher == less plasma released by reaction
 #define OXYGEN_RELEASE_MODIFIER 750        //Higher == less oxygen released at high temperature/power
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
 
 
 //These would be what you would get at point blank, decreases with distance
-#define DETONATION_RADS 200
-#define DETONATION_HALLUCINATION 600
+#define DETONATION_RADS 300000
+#define DETONATION_HALLUCINATION 60000
 
 
 #define WARNING_DELAY 60 //45 seconds between warnings.
@@ -124,8 +124,8 @@
                         for(var/mob/living/mob in living_mob_list)
                                 if(istype(mob, /mob/living/carbon/human))
                                         //Hilariously enough, running into a closet should make you get hit the hardest.
-                                        mob:hallucination += max(50, min(300, DETONATION_HALLUCINATION * sqrt(1 / (get_dist(mob, src) + 1)) ) )
-                                var/rads = DETONATION_RADS * sqrt( 1 / (get_dist(mob, src) + 1) )
+                                        mob:hallucination += max(50, min(300, DETONATION_HALLUCINATION/((get_dist(mob, src)+1)**2) ) )
+                                var/rads = DETONATION_RADS/((get_dist(mob, src)+1)**2)
                                 mob.apply_effect(rads, IRRADIATE)
 
                         explode()
@@ -191,13 +191,15 @@
                 damage += Proj.damage * config_bullet_energy
         return 0
 
+/obj/machinery/power/supermatter/attack_ai()
+        return
 
 /obj/machinery/power/supermatter/attack_paw(mob/user as mob)
         return attack_hand(user)
 
 
-/obj/machinery/power/supermatter/attack_robot(mob/user as mob)
-        return attack_hand(user)
+/obj/machinery/power/supermatter/attack_robot()
+        return
 
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)

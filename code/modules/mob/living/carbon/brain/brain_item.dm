@@ -32,6 +32,7 @@
 			brainmob.timeofhostdeath = H.timeofdeath
 			if(H.mind)
 				H.mind.transfer_to(brainmob)
+			respawnable_list += brainmob
 			brainmob << "\blue You feel slightly disoriented. That's normal when you're just a brain."
 			return
 
@@ -86,6 +87,7 @@
 			M.ghostize()
 
 		if(brainmob.mind)
+			respawnable_list -= brainmob
 			brainmob.mind.transfer_to(M)
 		else
 			M.key = brainmob.key
@@ -96,3 +98,10 @@
 	else
 		..()
 	return
+
+/obj/item/brain/alien
+	name = "alien brain"
+	desc = "We barely understand the brains of terrestial animals. Who knows what we may find in the brain of such an advanced species?"
+	icon = 'icons/mob/alien.dmi'
+	icon_state = "AlienBrain"
+	origin_tech = "biotech=7"

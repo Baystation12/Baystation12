@@ -14,7 +14,7 @@
 	var/toner = 30 //how much toner is left! woooooo~
 	var/maxcopies = 10	//how many copies can be copied at once- idea shamelessly stolen from bs12's copier!
 	var/mob/living/ass = null
-
+	var/busy = 0
 
 	attack_ai(mob/user as mob)
 		return attack_hand(user)
@@ -46,7 +46,7 @@
 		if(href_list["copy"])
 			if(copy)
 				for(var/i = 0, i < copies, i++)
-					if(toner > 0)
+					if(toner > 0 && !busy && copy)
 						var/obj/item/weapon/paper/c = new /obj/item/weapon/paper (loc)
 						if(toner > 10)	//lots of toner, make it dark
 							c.info = "<font color = #101010>"
@@ -61,13 +61,15 @@
 						c.fields = copy.fields
 						c.updateinfolinks()
 						toner--
+						busy = 1
 						sleep(15)
+						busy = 0
 					else
 						break
 				updateUsrDialog()
 			else if(photocopy)
 				for(var/i = 0, i < copies, i++)
-					if(toner > 0)
+					if(toner >= 5 && !busy && photocopy)
 						var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (loc)
 						var/icon/I = icon(photocopy.icon, photocopy.icon_state)
 						var/icon/img = icon(photocopy.img)
@@ -83,7 +85,9 @@
 						p.desc = photocopy.desc
 						p.scribble = photocopy.scribble
 						toner -= 5	//photos use a lot of ink!
+						busy = 1
 						sleep(15)
+						busy = 0
 					else
 						break
 				updateUsrDialog()
@@ -92,7 +96,7 @@
 					var/icon/temp_img
 					if(ishuman(ass) && (ass.get_item_by_slot(slot_w_uniform) || ass.get_item_by_slot(slot_wear_suit)))
 						usr << "<span class='notice'>You feel kind of silly copying [ass == usr ? "your" : ass][ass == usr ? "" : "\'s"] ass with [ass == usr ? "your" : "their"] clothes on.</span>"
-					else if(toner >= 5 && check_ass()) //You have to be sitting on the copier and either be a xeno or a human without clothes on.
+					else if(toner >= 5 && !busy && check_ass()) //You have to be sitting on the copier and either be a xeno or a human without clothes on.
 						if(isalien(ass) || istype(ass,/mob/living/simple_animal/hostile/alien)) //Xenos have their own asses, thanks to Pybro.
 							temp_img = icon('icons/ass/assalien.png')
 						else if(ishuman(ass)) //Suit checks are in check_ass
@@ -115,7 +119,9 @@
 					ic.Blend(small_img,ICON_OVERLAY, 10, 13)
 					p.icon = ic
 					toner -= 5
+					busy = 1
 					sleep(15)
+					busy = 0
 				updateUsrDialog()
 		else if(href_list["remove"])
 			if(copy)

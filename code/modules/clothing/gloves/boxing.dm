@@ -25,3 +25,4 @@
 
 	redcoat
 		_color = "redcoat"		//Exists for washing machines. Is not different from white gloves in any way.
+

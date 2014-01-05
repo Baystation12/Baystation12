@@ -973,7 +973,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set name = "Debug Mob Lists"
 	set desc = "For when you just gotta know"
 
-	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs", "Clients"))
+	switch(input("Which list?") in list("Players","Admins","Mobs","Living Mobs","Dead Mobs", "Clients","Respawnable Mobs"))
 		if("Players")
 			usr << dd_list2text(player_list,",")
 		if("Admins")
@@ -986,3 +986,5 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			usr << dd_list2text(dead_mob_list,",")
 		if("Clients")
 			usr << dd_list2text(clients,",")
+		if("Respawnable Mobs")
+			usr << dd_list2text(respawnable_list,",")

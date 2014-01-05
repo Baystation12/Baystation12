@@ -91,8 +91,8 @@
 			if(T == chassis.loc && src == chassis.selected)
 				if(istype(target, /turf/simulated/wall/r_wall))
 					occupant_message("<font color='red'>[target] is too durable to drill through.</font>")
-				else if(istype(target, /turf/simulated/mineral))
-					for(var/turf/simulated/mineral/M in range(chassis,1))
+				else if(istype(target, /turf/unsimulated/mineral))
+					for(var/turf/unsimulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
 							M.gets_drilled()
 					log_message("Drilled through [target]")
@@ -102,8 +102,8 @@
 							for(var/obj/item/weapon/ore/ore in range(chassis,1))
 								if(get_dir(chassis,ore)&chassis.dir)
 									ore.Move(ore_box)
-				else if(istype(target, /turf/simulated/floor/plating/airless/asteroid))
-					for(var/turf/simulated/floor/plating/airless/asteroid/M in range(chassis,1))
+				else if(istype(target, /turf/unsimulated/floor/plating/airless/asteroid))
+					for(var/turf/unsimulated/floor/plating/airless/asteroid/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
 							M.gets_dug()
 					log_message("Drilled through [target]")
@@ -114,6 +114,15 @@
 								if(get_dir(chassis,ore)&chassis.dir)
 									ore.Move(ore_box)
 				else if(target.loc == C)
+					if(istype(target, /mob/living))
+						var/mob/living/M = target
+						M.attack_log +="\[[time_stamp()]\]<font color='orange'> Mech Drilled by [chassis.occupant.name] ([chassis.occupant.ckey]) with [src.name]</font>"
+						chassis.occupant.attack_log += "\[[time_stamp()]\]<font color='red'> Mech Drilled [M.name] ([M.ckey]) with [src.name]</font>"
+						log_attack("<font color='red'>[chassis.occupant.name] ([chassis.occupant.ckey]) mech drilled [M.name] ([M.ckey]) with [src.name]</font>" )
+						if(!iscarbon(chassis.occupant))
+							M.LAssailant = null
+						else
+							M.LAssailant = chassis.occupant
 					log_message("Drilled through [target]")
 					target.ex_act(2)
 		return 1
@@ -150,8 +159,8 @@
 					if(do_after_cooldown(target))//To slow down how fast mechs can drill through the station
 						log_message("Drilled through [target]")
 						target.ex_act(3)
-				else if(istype(target, /turf/simulated/mineral))
-					for(var/turf/simulated/mineral/M in range(chassis,1))
+				else if(istype(target, /turf/unsimulated/mineral))
+					for(var/turf/unsimulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
 							M.gets_drilled()
 					log_message("Drilled through [target]")
@@ -161,8 +170,8 @@
 							for(var/obj/item/weapon/ore/ore in range(chassis,1))
 								if(get_dir(chassis,ore)&chassis.dir)
 									ore.Move(ore_box)
-				else if(istype(target,/turf/simulated/floor/plating/airless/asteroid))
-					for(var/turf/simulated/floor/plating/airless/asteroid/M in range(target,1))
+				else if(istype(target,/turf/unsimulated/floor/plating/airless/asteroid))
+					for(var/turf/unsimulated/floor/plating/airless/asteroid/M in range(target,1))
 						M.gets_dug()
 					log_message("Drilled through [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
@@ -171,6 +180,15 @@
 							for(var/obj/item/weapon/ore/ore in range(target,1))
 								ore.Move(ore_box)
 				else if(target.loc == C)
+					if(istype(target, /mob/living))
+						var/mob/living/M = target
+						M.attack_log +="\[[time_stamp()]\]<font color='orange'> Mech Drilled by [chassis.occupant.name] ([chassis.occupant.ckey]) with [src.name]</font>"
+						chassis.occupant.attack_log += "\[[time_stamp()]\]<font color='red'> Mech Drilled [M.name] ([M.ckey]) with [src.name]</font>"
+						log_attack("<font color='red'>[chassis.occupant.name] ([chassis.occupant.ckey]) mech drilled [M.name] ([M.ckey]) with [src.name]</font>" )
+						if(!iscarbon(chassis.occupant))
+							M.LAssailant = null
+						else
+							M.LAssailant = chassis.occupant
 					log_message("Drilled through [target]")
 					target.ex_act(2)
 		return 1

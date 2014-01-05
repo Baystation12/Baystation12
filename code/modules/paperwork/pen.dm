@@ -50,6 +50,10 @@
 	M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been stabbed with [name]  by [user.name] ([user.ckey])</font>")
 	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [name] to stab [M.name] ([M.ckey])</font>")
 	msg_admin_attack("[user.name] ([user.ckey]) Used the [name] to stab [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+	if(!iscarbon(user))
+		M.LAssailant = null
+	else
+		M.LAssailant = user
 	return
 
 
@@ -59,7 +63,6 @@
 /obj/item/weapon/pen/sleepypen
 	desc = "It's a black ink pen with a sharp point and a carefully engraved \"Waffle Co.\""
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
-	slot_flags = SLOT_BELT
 	origin_tech = "materials=2;syndicate=5"
 
 
@@ -86,7 +89,6 @@
  */
  /obj/item/weapon/pen/paralysis
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
-	slot_flags = SLOT_BELT
 	origin_tech = "materials=2;syndicate=5"
 
 

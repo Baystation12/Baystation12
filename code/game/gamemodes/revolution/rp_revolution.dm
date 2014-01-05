@@ -71,7 +71,6 @@
 	for(var/datum/mind/rev_mind in head_revolutionaries)
 		greet_revolutionary(rev_mind)
 		rev_mind.current.verbs += /mob/living/carbon/human/proc/RevConvert
-		equip_traitor(rev_mind.current, 1) //changing how revs get assigned their uplink so they can get PDA uplinks. --NEO
 
 	modePlayer += head_revolutionaries
 	spawn (rand(waittime_l, waittime_h))

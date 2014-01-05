@@ -11,7 +11,7 @@
 		src << "\red The wiki URL is not set in the server configuration."
 	return
 
-#define CHANGELOG "http://192.241.230.212/phpBB3/viewtopic.php?f=10&t=36"
+#define CHANGELOG "http://80.244.78.90/phpBB3/viewtopic.php?f=10&t=36"
 /client/verb/changes()
 	set name = "Changelog"
 	set desc = "Visit the forum to check out the changelog."
@@ -22,19 +22,6 @@
 	src << link(CHANGELOG)
 	return
 #undef CHANGELOG
-/*
-#define KARMA "http://192.241.230.212/phpBB3/viewtopic.php?f=10&t=52"
-/client/verb/karmashop()
-	set name = "karmashop"
-	set desc = "Visit the forum to check out the karma shop."
-	set hidden = 1
-
-	if(alert("This will open the karma shop in your browser. Are you sure?",,"Yes","No")=="No")
-		return
-	src << link(KARMA)
-	return
-#undef KARMA
-*/
 
 /client/verb/forum()
 	set name = "forum"

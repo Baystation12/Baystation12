@@ -96,6 +96,18 @@
 		air_contents.adjust((6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 		return
 
+/obj/item/weapon/tank/jetpack/oxygenblack
+	name = "Jetpack (Oxygen)"
+	desc = "A black tank of compressed oxygen for use as propulsion in zero-gravity areas. Use with caution."
+	icon_state = "jetpack-black"
+	item_state = "jetpack-black"
+
+	New()
+		..()
+		//src.air_contents.oxygen = (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C)
+		air_contents.adjust((6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+		return
+
 /obj/item/weapon/tank/jetpack/carbondioxide
 	name = "Jetpack (Carbon Dioxide)"
 	desc = "A tank of compressed carbon dioxide for use as propulsion in zero-gravity areas. Painted black to indicate that it should not be used as a source for internals."

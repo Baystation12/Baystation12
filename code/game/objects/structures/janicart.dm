@@ -6,6 +6,8 @@
 	var/health = 100
 	var/destroyed = 0
 	var/inertia_dir = 0
+	var/allowMove = 1
+	var/delay = 1
 	var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread
 
 /obj/structure/stool/bed/chair/cart/Move()
@@ -321,10 +323,15 @@
 	if((istype(src.loc, /turf/space)))
 		if(!src.Process_Spacemove(0))	return
 	if(istype(user.l_hand, /obj/item/key) || istype(user.r_hand, /obj/item/key))
+		if(!allowMove)
+			return
+		allowMove = 0
 		step(src, direction)
 		update_mob()
 		handle_rotation()
-		/*
+		sleep(delay)
+		allowMove = 1
+			/*
 		if(istype(src.loc, /turf/space) && (!src.Process_Spacemove(0, user)))
 			var/turf/space/S = src.loc
 			S.Entered(src)*/
@@ -353,6 +360,9 @@
 	if((istype(src.loc, /turf/space)))
 		if(!src.Process_Spacemove(0))	return
 	if(istype(user.l_hand, /obj/item/key) || istype(user.r_hand, /obj/item/key))
+		if(!allowMove)
+			return
+		allowMove = 0
 		step(src, direction)
 		// NEW PULLING CODE
 		if (istype(user.pulling, /obj/structure/stool/bed/roller))
@@ -362,6 +372,8 @@
 		// END NEW PULLING CODE
 		update_mob()
 		handle_rotation()
+		sleep(delay)
+		allowMove = 1
 		/*
 		if(istype(src.loc, /turf/space) && (!src.Process_Spacemove(0, user)))
 			var/turf/space/S = src.loc

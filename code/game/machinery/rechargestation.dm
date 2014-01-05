@@ -106,8 +106,9 @@
 								else
 									O:charge_tick = 0
 							if(istype(O,/obj/item/weapon/melee/baton))
-								if(O:charges < 10)
-									O:charges += 1
+								var/obj/item/weapon/melee/baton/B = O
+								if(B.bcell)
+									B.bcell.charge = B.bcell.maxcharge
 							//Service
 							if(istype(O,/obj/item/weapon/reagent_containers/food/condiment/enzyme))
 								if(O.reagents.get_reagent_amount("enzyme") < 50)
@@ -121,6 +122,14 @@
 							if(istype(O, /obj/item/device/lightreplacer))
 								var/obj/item/device/lightreplacer/LR = O
 								LR.Charge(R)
+							//Alien
+							if(istype(O,/obj/item/weapon/reagent_containers/spray/alien/smoke))
+								if(O.reagents.get_reagent_amount("water") < 50)
+									O.reagents.add_reagent("water", 2)
+							if(istype(O,/obj/item/weapon/reagent_containers/spray/alien/stun))
+								if(O.reagents.get_reagent_amount("stoxin") < 250)
+									O.reagents.add_reagent("stoxin", 2)
+
 
 						if(R)
 							if(R.module)
@@ -132,8 +141,12 @@
 								var/obj/item/weapon/reagent_containers/spray/S = R.module.emag
 								if(S.name == "polyacid spray")
 									S.reagents.add_reagent("pacid", 2)
-								else if(S.name == "lube spray")
+								if(S.name == "lube spray")
 									S.reagents.add_reagent("lube", 2)
+								else if(S.name == "acid synthesizer")
+									S.reagents.add_reagent("pacid", 2)
+									S.reagents.add_reagent("sacid", 2)
+
 
 
 	verb

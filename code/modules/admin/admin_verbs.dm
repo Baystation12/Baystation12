@@ -71,7 +71,7 @@ var/list/admin_verbs_admin = list(
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans,
-	/client/proc/unjobban_panel,
+	// /client/proc/unjobban_panel,
 	// /client/proc/DB_ban_panel
 	)
 var/list/admin_verbs_sounds = list(
@@ -94,7 +94,6 @@ var/list/admin_verbs_fun = list(
 	/client/proc/toggle_random_events,
 	/client/proc/set_ooc,
 	/client/proc/editappear,
-	/client/proc/toggle_kamikaze
 	)
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
@@ -120,7 +119,9 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/toggle_random_events,
 	/client/proc/check_customitem_activity,
-	/client/proc/delbook
+	/client/proc/delbook,
+	/client/proc/toggle_antagHUD_use,
+	/client/proc/toggle_antagHUD_restrictions
 	)
 var/list/admin_verbs_debug = list(
 	/client/proc/cmd_admin_list_open_jobs,

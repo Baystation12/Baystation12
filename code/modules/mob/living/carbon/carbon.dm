@@ -1,3 +1,9 @@
+/mob/living/carbon/Login()
+	..()
+	update_hud()
+	return
+
+
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(.)
@@ -221,7 +227,7 @@
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
-/*
+
 
 /mob/living/carbon/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null) // -- TLE -- Merged by Carn
 	if(stat)
@@ -313,7 +319,7 @@
 		if(new_area)
 			new_area.Entered(src)
 
-*/
+
 
 /mob/living/carbon/clean_blood()
 	. = ..()
@@ -334,24 +340,24 @@
 //Throwing stuff
 
 /mob/living/carbon/proc/toggle_throw_mode()
-	if (src.in_throw_mode)
+	if (in_throw_mode)
 		throw_mode_off()
 	else
 		throw_mode_on()
 
 /mob/living/carbon/proc/throw_mode_off()
-	src.in_throw_mode = 0
-	src.throw_icon.icon_state = "act_throw_off"
+	in_throw_mode = 0
+	throw_icon.icon_state = "act_throw_off"
 
 /mob/living/carbon/proc/throw_mode_on()
-	src.in_throw_mode = 1
-	src.throw_icon.icon_state = "act_throw_on"
+	in_throw_mode = 1
+	throw_icon.icon_state = "act_throw_on"
 
 /mob/proc/throw_item(atom/target)
 	return
 
 /mob/living/carbon/throw_item(atom/target)
-	src.throw_mode_off()
+	throw_mode_off()
 	if(usr.stat || !target)
 		return
 	if(target.type == /obj/screen) return
@@ -375,6 +381,11 @@
 				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Has thrown [M.name] ([M.ckey]) from [start_T_descriptor] with the target [end_T_descriptor]</font>")
 				msg_admin_attack("[usr.name] ([usr.ckey]) has thrown [M.name] ([M.ckey]) from [start_T_descriptor] with the target [end_T_descriptor] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[usr.x];Y=[usr.y];Z=[usr.z]'>JMP</a>)")
 
+				if(!iscarbon(usr))
+					M.LAssailant = null
+				else
+					M.LAssailant = usr
+
 	if(!item) return //Grab processing has a chance of returning null
 
 	item.layer = initial(item.layer)
@@ -382,7 +393,7 @@
 	update_icons()
 
 	if (istype(usr, /mob/living/carbon)) //Check if a carbon mob is throwing. Modify/remove this line as required.
-		item.loc = src.loc
+		item.loc = usr.loc
 		if(src.client)
 			src.client.screen -= item
 		if(istype(item, /obj/item))
@@ -524,7 +535,7 @@
 		B.host_brain << "\red <B><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></B>"
 
 //Check for brain worms in head.
-/mob/living/carbon/proc/has_brain_worms()
+/mob/proc/has_brain_worms()
 
 	for(var/I in contents)
 		if(istype(I,/mob/living/simple_animal/borer))

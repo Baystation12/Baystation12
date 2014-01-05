@@ -156,7 +156,6 @@
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 /turf/simulated/mineral/random/New()
-	..()
 	if (prob(mineralChance))
 		var/mName = pickweight(mineralSpawnChanceList) //temp mineral name
 
@@ -177,9 +176,10 @@
 				if("Plasma")
 					M = new/turf/simulated/mineral/plasma(src)
 					M.icon_state = "rock_Plasma[rand(1,3)]"
-				/*if("Adamantine")
-					M = new/turf/simulated/mineral/adamantine(src)*/
+				if("Clown")
+					M = new/turf/simulated/mineral/clown(src)
 			if(M)
+				..()
 				src = M
 				M.levelupdate()
 
@@ -198,6 +198,11 @@
 /turf/simulated/mineral/random/high_chance
 	mineralChance = 25
 	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 25, "Archaeo" = 2)
+
+
+/turf/simulated/mineral/random/high_chance_clown
+	mineralChance = 40
+	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 5, "Silver" = 5, "Plasma" = 25, "Archaeo" = 2, "Clown" = 15)
 
 /turf/simulated/mineral/random/Del()
 	return
@@ -262,8 +267,8 @@
 	icon_state = "rock_Clown"
 	mineralName = "Clown"
 	mineralAmt = 3
-	spreadChance = 0
-	spread = 0
+	spreadChance = 10
+	spread = 1
 
 /*
 commented out in r5061, I left it because of the shroom thingies
@@ -426,6 +431,7 @@ commented out in r5061, I left it because of the shroom thingies
 				drop_mineral()
 				pop(excavation_minerals)
 				mineralAmt--
+				score_oremined++
 
 			//drop some rocks
 			next_rock += P.excavation_amount * 10
@@ -467,6 +473,7 @@ commented out in r5061, I left it because of the shroom thingies
 		//if the turf has already been excavated, some of it's ore has been removed
 		for (var/i=0;i<mineralAmt;i++)
 			drop_mineral()
+			score_oremined++
 
 	//destroyed artifacts have weird, unpleasant effects
 	//make sure to destroy them before changing the turf though
@@ -488,7 +495,11 @@ commented out in r5061, I left it because of the shroom thingies
 
 	var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
 	N.fullUpdateMineralOverlays()
-
+	var/crate = rand(1,500)
+	switch(crate)
+		if(1)
+			visible_message("<span class='notice'>After digging, you find an old dusty crate buried within!</span>")
+			new/obj/structure/closet/crate/secure/loot(src)
 	return
 
 /turf/simulated/mineral/proc/excavate_find(var/prob_clean = 0, var/datum/find/F)

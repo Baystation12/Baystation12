@@ -3,6 +3,7 @@
 	name = "\improper corgi"
 	real_name = "corgi"
 	desc = "It's a corgi."
+	gender = MALE
 	icon_state = "corgi"
 	icon_living = "corgi"
 	icon_dead = "corgi_dead"
@@ -18,6 +19,8 @@
 	response_disarm = "bops the"
 	response_harm   = "kicks the"
 	see_in_dark = 5
+	childtype = /mob/living/simple_animal/corgi/puppy
+	simplespecies = /mob/living/simple_animal/corgi
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
 	var/facehugger
@@ -149,7 +152,8 @@
 						/obj/item/weapon/bedsheet,
 						/obj/item/clothing/head/helmet/space/santahat,
 						/obj/item/clothing/head/collectable/paper,
-						/obj/item/clothing/head/soft
+						/obj/item/clothing/head/soft,
+						/obj/item/clothing/head/hardhat/reindeer
 					)
 
 					if( ! ( item_to_add.type in allowed_types ) )
@@ -246,13 +250,19 @@
 			emote_hear = list("howls","groans")
 			desc = "Spooky!"
 		if(/obj/item/clothing/head/helmet/space/santahat)
-			name = "Rudolph the Red-Nosed Corgi"
-			emote_hear = list("barks christmas songs", "yaps")
-			desc = "He has a very shiny nose."
+			name = "Santa's Corgi Helper"
+			emote_hear = list("barks christmas songs", "yaps merrily")
+			emote_see = list("looks for presents", "checks his list")
+			desc = "He's very fond of milk and cookies."
 			SetLuminosity(6)
 		if(/obj/item/clothing/head/soft)
 			name = "Corgi Tech [real_name]"
 			desc = "The reason your yellow gloves have chew-marks."
+		if(/obj/item/clothing/head/hardhat/reindeer)
+			name = "[real_name] the red-nosed Corgi"
+			emote_hear = list("lights the way", "illuminates", "yaps")
+			desc = "He has a very shiny nose."
+			SetLuminosity(1)
 
 
 //IAN! SQUEEEEEEEEE~
@@ -442,29 +452,9 @@
 
 /mob/living/simple_animal/corgi/Lisa/Life()
 	..()
+	make_babies()
 
 	if(!stat && !resting && !buckled)
-		turns_since_scan++
-		if(turns_since_scan > 15)
-			turns_since_scan = 0
-			var/alone = 1
-			var/ian = 0
-			for(var/mob/M in oviewers(7, src))
-				if(istype(M, /mob/living/simple_animal/corgi/Ian))
-					if(M.client)
-						alone = 0
-						break
-					else
-						ian = M
-				else
-					alone = 0
-					break
-			if(alone && ian && puppies < 4)
-				if(near_camera(src) || near_camera(ian))
-					return
-				new /mob/living/simple_animal/corgi/puppy(loc)
-
-
 		if(prob(1))
 			emote(pick("dances around","chases her tail"))
 			spawn(0)
@@ -497,5 +487,6 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
+	respawnable_list += src
 	del src
 	return

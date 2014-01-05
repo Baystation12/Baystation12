@@ -418,8 +418,10 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	if(dna)
 		switch(dna.mutantrace)
-			if("golem","slime","shadow","adamantine")
+			if("golem","shadow","adamantine")
 				overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_s")
+			if("slime")
+				overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/slimemutant.dmi', "icon_state" = "[slime_color]_[dna.mutantrace][fat]_[gender]_s")
 			else
 				overlays_standing[MUTANTRACE_LAYER]	= null
 
@@ -444,6 +446,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 	remove_overlay(FIRE_LAYER)
 	if(on_fire)
 		overlays_standing[FIRE_LAYER] = image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing", "layer"=-FIRE_LAYER)
+	else
+		overlays_standing[FIRE_LAYER] = null
 
 	apply_overlay(FIRE_LAYER)
 
@@ -657,6 +661,17 @@ proc/get_damage_icon_part(damage_state, body_part)
 			dmi  = wear_suit.icon
 
 		var/image/standing  = image("icon" = dmi, "icon_state" = "[wear_suit.icon_state]")
+
+		if(FAT in mutations)
+			if(wear_suit.flags&ONESIZEFITSALL)
+				standing.icon	= 'icons/mob/suit_fat.dmi'
+			else
+				src << "\red You burst out of \the [wear_suit]!"
+				drop_from_inventory(wear_suit)
+				return
+		else
+			standing.icon	= 'icons/mob/suit.dmi'
+
 
 		if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
 			drop_from_inventory(handcuffed)

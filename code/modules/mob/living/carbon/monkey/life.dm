@@ -19,7 +19,7 @@
 	if(loc)
 		environment = loc.return_air()
 
-	if (stat != DEAD) //still breathing
+	if (stat != DEAD && !istype(src,/mob/living/carbon/monkey/diona)) //still breathing
 		//First, resolve location and get a breath
 		if(air_master.current_cycle%4==2)
 			//Only try to take a breath every 4 seconds, unless suffocating
@@ -70,7 +70,7 @@
 		G.process()
 
 	if(!client && stat == CONSCIOUS)
-		if(prob(33) && canmove && isturf(loc))
+		if(prob(33) && canmove && isturf(loc) && !pulledby) //won't move if being pulled
 			step(src, pick(cardinal))
 		if(prob(1))
 			emote(pick("scratch","jump","roll","tail"))

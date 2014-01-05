@@ -128,10 +128,17 @@
 		|| locate(/obj/machinery/computer/cloning, get_step(src, WEST)))
 
 		if(!M.client && M.mind)
-			for(var/mob/dead/observer/ghost in player_list)
-				if(ghost.mind == M.mind)
-					ghost << "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font color>"
-					break
+			message_admins("No client found, searching for compatible mind")
+			for(var/mob/C in respawnable_list)
+				if(C.mind && C.mind.key == M.mind.key)
+					message_admins("Found mind, asking for respawn")
+					switch(alert(C,"Your corpse has been placed into a cloning scanner. Do you want to be resurrected/cloned? Please not if you select 'No', you will be able to be cloned or borged again this round.","Clone Alert","Yes","No"))
+						if("Yes")
+							M.key = C.key
+							return
+						if("No")
+							return
+
 	del(G)
 	return
 

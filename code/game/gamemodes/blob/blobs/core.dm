@@ -82,6 +82,7 @@
 			C = new_overmind
 
 		if(C)
+			respawnable_list -= C
 			var/mob/camera/blob/B = new(src.loc)
 			B.key = C.key
 			B.blob_core = src

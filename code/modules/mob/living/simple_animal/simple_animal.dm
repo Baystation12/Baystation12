@@ -15,7 +15,7 @@
 
 	var/turns_per_move = 1
 	var/turns_since_move = 0
-	universal_speak = 1
+	universal_speak = 0
 	var/meat_amount = 0
 	var/meat_type
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
@@ -55,10 +55,20 @@
 	var/wall_smash = 0 //if they can smash walls
 
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
+	var/can_hide    = 0
+
+//Hot simple_animal baby making vars
+	var/childtype = null
+	var/scan_ready = 1
+	var/simplespecies //Sorry, no spider+corgi buttbabies.
+
 
 /mob/living/simple_animal/New()
 	..()
 	verbs -= /mob/verb/observe
+	if(!can_hide)
+		verbs -= /mob/living/simple_animal/verb/hide
+
 
 /mob/living/simple_animal/Login()
 	if(src && src.client)
@@ -221,13 +231,15 @@
 	adjustBruteLoss(20)
 	return
 
-/mob/living/simple_animal/emote(var/act)
+/mob/living/simple_animal/emote(var/act,var/m_type=1,var/message = null)
 	if(stat)
 		return
-	if(act)
-		if(act == "scream")	act = "makes a loud and pained whimper" //ugly hack to stop animals screaming when crushed :P
-		for (var/mob/O in viewers(src, null))
-			O.show_message("<B>[src]</B> [act].")
+	switch(act)
+		if("scream")
+			message = "<B>The [src.name]</B> whimpers."
+			m_type = 2
+	..()
+
 
 
 /mob/living/simple_animal/attack_animal(mob/living/simple_animal/M as mob)
@@ -426,6 +438,8 @@
 /mob/living/simple_animal/proc/Die()
 	living_mob_list -= src
 	dead_mob_list += src
+	if(key)
+		respawnable_list += src
 	icon_state = icon_dead
 	stat = DEAD
 	density = 0
@@ -465,3 +479,34 @@
 
 /mob/living/simple_animal/update_fire()
 	return
+
+/mob/living/simple_animal/revive()
+	..()
+	health = maxHealth
+	icon_state = icon_living
+	density = initial(density)
+	update_canmove()
+
+
+/mob/living/simple_animal/proc/make_babies() // <3 <3 <3
+	if(gender != FEMALE || stat || !scan_ready || !childtype || !simplespecies)
+		return
+	scan_ready = 0
+	spawn(400)
+		scan_ready = 1
+	var/alone = 1
+	var/mob/living/simple_animal/partner
+	var/children = 0
+	for(var/mob/M in oview(7, src))
+		if(istype(M, childtype)) //Check for children FIRST.
+			children++
+		else if(istype(M, simplespecies))
+			if(M.client)
+				continue
+			else if(!istype(M, childtype) && M.gender == MALE) //Better safe than sorry ;_;
+				partner = M
+		else if(istype(M, /mob/))
+			alone = 0
+			continue
+	if(alone && partner && children < 3)
+		new childtype(loc)

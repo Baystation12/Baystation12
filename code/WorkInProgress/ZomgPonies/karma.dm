@@ -81,9 +81,9 @@ var/list/karma_spenders = list()
 		return
 	if(choice == "Good")
 		M.client.karma += 1
-	usr << "[choice] karma spent on [M.name]."
-	src.client.karma_spent = 1
-	karma_spenders.Add(src.key)
+		usr << "[choice] karma spent on [M.name]."
+		src.client.karma_spent = 1
+		karma_spenders.Add(src.key)
 	if(M.client.karma <= -2 || M.client.karma >= 2)
 		var/special_role = "None"
 		var/assigned_role = "None"
@@ -149,10 +149,9 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 		<a href='?src=\ref[src];KarmaBuy=4'>Unlock Kidan -- 30KP</a><br>
 		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Grey -- 30KP</a><br>
 		<a href='?src=\ref[src];KarmaBuy=6'>Unlock Vox -- 45KP</a><br>
-
+		<a href='?src=\ref[src];KarmaBuy=7'>Unlock Slime People -- 45KP</a><br>
+		<B>PLEASE NOTE THAT PEOPLE WHO TRY TO GAME THE KARMA SYSTEM WILL END UP ON THE WALL OF SHAME. THIS INCLUDES BUT IS NOT LIMITED TO TRADES, OOC KARMA BEGGING, CODE EXPLOITS, ETC.</B>
 		"}
-
-// 		<a href='?src=\ref[src];KarmaBuy=7'>Unlock Slime People -- 45KP</a><br>
 
 	var/datum/browser/popup = new(usr, "karmashop", "<div align='center'>Karma Shop</div>", 400, 400)
 	popup.set_content(dat)

@@ -10,7 +10,6 @@
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
-	var/crisis //Admin-settable for combat module use.
 
 //Hud stuff
 
@@ -64,8 +63,9 @@
 	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/braintype = "Cyborg"
 	var/pose
+	var/base_icon = ""
 
-/mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0)
+/mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0, var/alien = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
@@ -73,12 +73,13 @@
 	ident = rand(1, 999)
 	updatename("Default")
 	updateicon()
-
+	if(mmi == null)
+		mmi = new /obj/item/device/mmi/posibrain(src)	//Give the borg an MMI if he spawns without for some reason. (probably not the correct way to spawn a posibrain, but it works)
+		mmi.icon_state="posibrain-occupied"
 	if(syndie)
 		if(!cell)
 			cell = new /obj/item/weapon/cell(src)
-
-		laws = new /datum/ai_laws/antimov()
+			laws = new /datum/ai_laws/antimov()
 		lawupdate = 0
 		scrambledcodes = 1
 		cell.maxcharge = 25000
@@ -88,8 +89,13 @@
 		icon_state = "secborg"
 		modtype = "Security"
 	else
-		laws = new /datum/ai_laws/nanotrasen()
-		connected_ai = select_active_ai_with_fewest_borgs()
+		if(mmi.alien || alien)
+			laws = new /datum/ai_laws/alienmov()
+			connected_ai = select_active_alien_ai()
+			scrambledcodes = 1
+		else
+			laws = new /datum/ai_laws/nanotrasen()
+			connected_ai = select_active_ai_with_fewest_borgs()
 		if(connected_ai)
 			connected_ai.connected_robots += src
 			lawsync()
@@ -146,10 +152,13 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
+
 	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
-	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
+	if(security_level == (SEC_LEVEL_GAMMA || SEC_LEVEL_EPSILON))
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
+	if(mmi != null && mmi.alien)
+		modules="Hunter"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
 	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
@@ -219,6 +228,15 @@
 			module = new /obj/item/weapon/robot_module/combat(src)
 			module_sprites["Combat Android"] = "droid-combat"
 			channels = list("Security" = 1)
+		if("Hunter")
+			updatename(module)
+			module = new /obj/item/weapon/robot_module/alien/hunter(src)
+			hands.icon_state = "standard"
+			icon = "icons/mob/alien.dmi"
+			icon_state = "xenoborg-state-a"
+			modtype = "Xeno-Hu"
+			feedback_inc("xeborg_hunter",1)
+
 
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
@@ -570,6 +588,7 @@
 				return
 
 	if (istype(W, /obj/item/weapon/weldingtool))
+		if(W == module_active) return
 		if (!getBruteLoss())
 			user << "Nothing to fix here!"
 			return
@@ -1008,10 +1027,10 @@
 		overlays += "[icon_state]-shield"
 
 	if(modtype == "Combat")
-		var/base_icon = ""
-		base_icon = icon_state
+		if (base_icon == "")
+			base_icon = icon_state
 		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-			icon_state = "[icon_state]-roll"
+			icon_state = "[base_icon]-roll"
 		else
 			icon_state = base_icon
 		return
@@ -1150,6 +1169,9 @@
 			var/turf/tile = loc
 			if(isturf(tile))
 				tile.clean_blood()
+				if (istype(tile, /turf/simulated))
+					var/turf/simulated/S = tile
+					S.dirt = 0
 				for(var/A in tile)
 					if(istype(A, /obj/effect))
 						if(istype(A, /obj/effect/rune) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay))

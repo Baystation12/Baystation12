@@ -393,7 +393,14 @@
 		msg += "<span class='warning'><b>[src] has \a [implant] sticking out of their flesh!</span>\n"
 	if(digitalcamo)
 		msg += "[t_He] [t_is] repulsively uncanny!\n"
-
+	if(decaylevel == 1)
+		msg += "[t_He] [t_is] starting to smell.\n"
+	if(decaylevel == 2)
+		msg += "[t_He] [t_is] bloated and smells disgusting.\n"
+	if(decaylevel == 3)
+		msg += "[t_He] [t_is] rotting and blackened, the skin sloughing off. The smell is indescribably foul.\n"
+	if(decaylevel == 4)
+		msg += "[t_He] [t_is] mostly dessicated now, with only bones remaining of what used to be a person.\n"
 
 	if(hasHUD(usr,"security"))
 		var/perpname = "wot"

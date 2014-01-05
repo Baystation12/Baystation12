@@ -258,7 +258,7 @@
 	energy = 100
 	max_energy = 100
 	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
-	dispensable_reagents = list("ice","cream","beer","kahlua","whisky","wine","vodka","gin","rum","tequila","vermouth","cognac","ale","mead")
+	dispensable_reagents = list("ice","cream","beer","kahlua","whiskey","wine","vodka","gin","rum","tequila","vermouth","cognac","ale","mead")
 	hack_message = "You disable the 'nanotrasen-are-cheap-bastards' lock, enabling hidden and very expensive boozes."
 	unhack_message = "You re-enable the 'nanotrasen-are-cheap-bastards' lock, disabling hidden and very expensive boozes."
 	hacked_reagents = list("goldschlager","patron", "nothing")
@@ -426,24 +426,33 @@
 				reagents.clear_reagents()
 				icon_state = "mixer0"
 		else if (href_list["createpill"] || href_list["createpill_multiple"])
-			var/count = 1
-			if (href_list["createpill_multiple"]) count = isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num)
-			if (count > 20) count = 20	//Pevent people from creating huge stacks of pills easily. Maybe move the number to defines?
-			var/amount_per_pill = reagents.total_volume/count
-			if (amount_per_pill > 50) amount_per_pill = 50
-			var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"))
-			while (count--)
-				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
+			if(!condi)
+				var/count = 1
+				if (href_list["createpill_multiple"]) count = isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num)
+				if (count > 20) count = 20	//Pevent people from creating huge stacks of pills easily. Maybe move the number to defines?
+				var/amount_per_pill = reagents.total_volume/count
+				if (amount_per_pill > 50) amount_per_pill = 50
+				var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"))
+				while (count--)
+					var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
+					if(!name) name = reagents.get_master_reagent_name()
+					P.name = "[name] pill"
+					P.pixel_x = rand(-7, 7) //random position
+					P.pixel_y = rand(-7, 7)
+					P.icon_state = "pill"+pillsprite
+					reagents.trans_to(P,amount_per_pill)
+					if(src.loaded_pill_bottle)
+						if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
+							P.loc = loaded_pill_bottle
+							src.updateUsrDialog()
+			else
+				var/name = reject_bad_text(input(usr,"Name:","Name your bag!",reagents.get_master_reagent_name()))
+				var/obj/item/weapon/reagent_containers/food/condiment/pack/P = new/obj/item/weapon/reagent_containers/food/condiment/pack(src.loc)
 				if(!name) name = reagents.get_master_reagent_name()
-				P.name = "[name] pill"
-				P.pixel_x = rand(-7, 7) //random position
-				P.pixel_y = rand(-7, 7)
-				P.icon_state = "pill"+pillsprite
-				reagents.trans_to(P,amount_per_pill)
-				if(src.loaded_pill_bottle)
-					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
-						P.loc = loaded_pill_bottle
-						src.updateUsrDialog()
+				P.originalname = name
+				P.name = "[name] pack"
+				P.desc = "A small condiment pack. The label says it contains [name]."
+				reagents.trans_to(P,10)
 		else if (href_list["createbottle"])
 			if(!condi)
 				var/name = reject_bad_text(input(usr,"Name:","Name your bottle!",reagents.get_master_reagent_name()))
@@ -543,6 +552,7 @@
 			dat += "<A href='?src=\ref[src];createpill_multiple=1'>Create multiple pills</A><BR>"
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (30 units max)</A>"
 		else
+			dat += "<HR><BR><A href='?src=\ref[src];createpill=1'>Create pack (10 units max)</A><BR>"
 			dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (50 units max)</A>"
 	if(!condi)
 		user << browse("<TITLE>Chemmaster 3000</TITLE>Chemmaster menu:<BR><BR>[dat]", "window=chem_master;size=575x400")
@@ -887,6 +897,12 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/cherries = list("cherryjelly" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/plastellium = list("plasticide" = 5),
 
+		//Grinder stuff, but only if dry
+		/obj/item/weapon/reagent_containers/food/snacks/grown/coffee_arabica = list("coffeepowder" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/coffee_robusta = list("coffeepowder" = 0, "hyperzine" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/tea_aspera = list("teapowder" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/tea_astra = list("teapowder" = 0, "kelotane" = 0),
+
 
 		//archaeology!
 		/obj/item/weapon/rocksliver = list("ground_rock" = 50),
@@ -912,6 +928,16 @@
 		/obj/item/weapon/reagent_containers/food/snacks/watermelonslice = list("watermelonjuice" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/poisonberries = list("poisonberryjuice" = 0),
 	)
+
+	var/list/dried_items = list(
+
+		//Grinder stuff, but only if dry
+		/obj/item/weapon/reagent_containers/food/snacks/grown/coffee_arabica = list("coffeepowder" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/coffee_robusta = list("coffeepowder" = 0, "hyperzine" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/tea_aspera = list("teapowder" = 0),
+		/obj/item/weapon/reagent_containers/food/snacks/grown/tea_astra = list("teapowder" = 0, "kelotane" = 0),
+	)
+
 
 
 	var/list/holdingitems = list()
@@ -963,6 +989,12 @@
 
 		src.updateUsrDialog()
 		return 0
+
+	if(is_type_in_list(O, dried_items))
+		if(!O:dry)
+			user << "You must dry that first!"
+			return 1
+
 
 	if (!is_type_in_list(O, blend_items) && !is_type_in_list(O, juice_items))
 		user << "Cannot refine into a reagent."

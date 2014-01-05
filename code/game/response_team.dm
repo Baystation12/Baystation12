@@ -113,6 +113,10 @@ proc/increment_ert_chance()
 			ert_base_chance += 2
 		if(get_security_level() == "red")
 			ert_base_chance += 3
+		if(get_security_level() == "gamma")
+			ert_base_chance += 7
+		if(get_security_level() == "epsilon")
+			ert_base_chance += 9
 		if(get_security_level() == "delta")
 			ert_base_chance += 10           // Need those big guns
 		sleep(600 * 3) // Minute * Number of Minutes
@@ -321,7 +325,7 @@ proc/trigger_armed_response_team(var/force = 0)
 	W.name = "[real_name]'s ID Card ([W.assignment])"
 	W.icon_state = "centcom"
 	W.access = get_all_accesses()
-	W.access += get_all_centcom_access()
+	W.access += list(access_cent_general, access_cent_living, access_cent_storage)
 	equip_to_slot_or_del(W, slot_wear_id)
 
 	return 1

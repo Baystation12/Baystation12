@@ -107,6 +107,12 @@
 		..()
 		name = "plating"
 
+/turf/simulated/floor/plating/airless/catwalk
+	icon = 'icons/turf/catwalks.dmi'
+	icon_state = "Floor3"
+	name = "catwalk"
+	desc = "Cats really don't like these things."
+
 /turf/simulated/floor/bluegrid
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "bcircuit"
@@ -210,6 +216,12 @@
 	name = "snow"
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
+
+/turf/simulated/floor/plating/snow/concrete
+	name = "concrete"
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "concrete"
+
 
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return

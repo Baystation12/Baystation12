@@ -13,7 +13,7 @@
 	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for Spider Clan assassins."
 	icon_state = "s-ninja"
 	item_state = "s-ninja_suit"
-	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/cell)
+	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank,/obj/item/weapon/cell)
 	slowdown = 0
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	siemens_coefficient = 0.2
@@ -30,6 +30,7 @@
 	var/obj/item/clothing/head/helmet/space/space_ninja/n_hood
 	var/obj/item/clothing/shoes/space_ninja/n_shoes
 	var/obj/item/clothing/gloves/space_ninja/n_gloves
+	var/obj/item/clothing/mask/gas/voice/space_ninja/n_mask
 
 		//Main function variables.
 	var/s_initialized = 0//Suit starts off.

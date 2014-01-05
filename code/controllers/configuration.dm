@@ -17,6 +17,7 @@
 	var/log_adminchat = 0				// log admin chat messages
 	var/log_adminwarn = 0				// log warnings admins get about bomb construction and such
 	var/log_pda = 0						// log pda messages
+	var/log_runtimes = 0                // Logs all runtimes.
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/sql_enabled = 1					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
@@ -36,14 +37,15 @@
 	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
 	var/protect_roles_from_antagonist = 0// If security and such can be tratior/cult/other
-	var/continous_rounds = 1			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
+	var/continous_rounds = 0			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/allow_Metadata = 0				// Metadata is supported.
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
 	var/Ticklag = 0.9
 	var/Tickcomp = 0
 	var/socket_talk	= 0					// use socket_talk to communicate with other processes
 	var/list/resource_urls = null
-
+	var/antag_hud_allowed = 0      // Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
+	var/antag_hud_restricted = 0                    // Ghosts that turn on Antagovision cannot rejoin the round.
 	var/list/mode_names = list()
 	var/list/modes = list()				// allowed modes
 	var/list/votable_modes = list()		// votable modes
@@ -60,6 +62,9 @@
 	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
+
+	var/assistantlimit = 0 //enables assistant limiting
+	var/assistantratio = 2 //how many assistants to security members
 
 	var/usealienwhitelist = 0
 	var/limitalienplayers = 0
@@ -234,6 +239,9 @@
 				if ("log_pda")
 					config.log_pda = 1
 
+				if ("log_runtimes")
+					config.log_runtimes = 1
+
 				if ("log_hrefs")
 					config.log_hrefs = 1
 
@@ -384,6 +392,12 @@
 				if("tickcomp")
 					Tickcomp = 1
 
+				if("allow_antag_hud")
+					config.antag_hud_allowed = 1
+
+				if("antag_hud_restricted")
+					config.antag_hud_restricted = 1
+
 				if("humans_need_surnames")
 					humans_need_surnames = 1
 
@@ -433,6 +447,11 @@
 						else //probably windows, if not this should work anyway
 							config.python_path = "python"
 
+				if("assistant_limit")
+					config.assistantlimit = 1
+
+				if("assistant_ratio")
+					config.assistantratio = text2num(value)
 				else
 					diary << "Unknown setting in configuration: '[name]'"
 

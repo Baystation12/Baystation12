@@ -8,7 +8,8 @@
 	nitrogen = MOLES_N2STANDARD
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
-
+	var/dirt = 0
+	var/dirtoverlay = null
 /turf/simulated/New()
 	..()
 	levelupdate()
@@ -27,6 +28,14 @@
 	if (istype(A,/mob/living/carbon))
 		var/mob/living/carbon/M = A
 		if(M.lying)	return
+		dirt++
+		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
+		if (dirt >= 50)
+			if (!dirtoverlay)
+				dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
+				dirtoverlay.alpha = 15
+			else if (dirt > 50)
+				dirtoverlay.alpha = min(dirtoverlay.alpha+5, 255)
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
 			if(istype(H.shoes, /obj/item/clothing/shoes/clown_shoes))
@@ -98,7 +107,7 @@
 					else
 						M.inertia_dir = 0
 						return
-				else if(!istype(M, /mob/living/carbon/slime))
+				else if(!istype(M, (/mob/living/carbon/slime || /mob/living/carbon/human/slime)) || (M:species.bodyflags & FEET_NOSLIP))
 					if (M.m_intent == "run")
 						M.stop_pulling()
 						step(M, M.dir)
@@ -135,7 +144,7 @@
 					else
 						M.inertia_dir = 0
 						return
-				else if(!istype(M, /mob/living/carbon/metroid))
+				else if(!istype(M, /mob/living/carbon/metroid) || (M:species.bodyflags & FEET_NOSLIP))
 					if (M.m_intent == "run" && prob(30))
 						M.stop_pulling()
 						step(M, M.dir)
