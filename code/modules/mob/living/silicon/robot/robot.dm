@@ -64,6 +64,7 @@
 	var/braintype = "Cyborg"
 	var/pose
 	var/base_icon = ""
+	var/crisis = 0
 
 /mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0, var/alien = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
@@ -154,7 +155,7 @@
 		return
 
 	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
-	if(security_level == (SEC_LEVEL_GAMMA || SEC_LEVEL_EPSILON))
+	if(security_level == (SEC_LEVEL_GAMMA || SEC_LEVEL_EPSILON) || crisis)
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	if(mmi != null && mmi.alien)
