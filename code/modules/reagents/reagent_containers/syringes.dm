@@ -89,6 +89,12 @@
 							user << "\red You are unable to locate any blood."
 							return
 
+						if(istype(T,/mob/living/carbon/human)) //TODO: make blood sampling take from the reagents datum instead of vessel.
+							var/mob/living/carbon/human/H = T
+							if(H.species && H.species.flags & NO_BLOOD)
+								user << "\red You are unable to locate any blood."
+								return
+
 						var/datum/reagent/B = T.take_blood(src,amount)
 
 						if (B)
