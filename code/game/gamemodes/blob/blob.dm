@@ -24,7 +24,7 @@ var/list/blob_nodes = list()
 	var/blob_point_rate = 3
 
 	var/blobwincount = 700
-	var/stage_2_threshold = 0.66
+	var/stage_2_threshold = 0.60
 
 	var/list/infected_crew = list()
 
