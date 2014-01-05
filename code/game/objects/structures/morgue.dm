@@ -328,7 +328,7 @@
 
 		cremating = 1
 		locked = 1
-		icon_state = "cremate_active"
+		icon_state = "crema_active"
 
 		for(var/mob/living/M in contents)
 			if (M.stat!=2)
