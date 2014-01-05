@@ -67,6 +67,14 @@
 	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 	bodyflags = FEET_CLAWS
 
+	cold_level_1 = 280 //Default 260 - Lower is better
+	cold_level_2 = 220 //Default 200
+	cold_level_3 = 130 //Default 120
+
+	heat_level_1 = 420 //Default 360 - Higher is better
+	heat_level_2 = 480 //Default 400
+	heat_level_3 = 1100 //Default 1000
+
 /datum/species/tajaran
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
@@ -117,7 +125,7 @@
 	eyes = "vox_eyes_s"
 	breath_type = "nitrogen"
 
-	flags = NO_SCAN | WHITELISTED
+	flags = NO_SCAN | IS_WHITELISTED
 
 /datum/species/diona
 	name = "Diona"
@@ -139,8 +147,9 @@
 	heat_level_2 = 350
 	heat_level_3 = 700
 
-	flags = NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW
+	flags = NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
 	bloodflags = BLOOD_GREEN
+
 
 /datum/species/kidan
 	name = "Kidan"
@@ -150,7 +159,7 @@
 	language = "Chittin"
 	attack_verb = "slash"
 
-	flags = WHITELISTED | HAS_CHITTIN
+	flags = IS_WHITELISTED | HAS_CHITTIN
 	bloodflags = BLOOD_GREEN
 	bodyflags = FEET_CLAWS
 
@@ -163,7 +172,7 @@
 	path = /mob/living/carbon/human/slime
 	primitive = /mob/living/carbon/slime/adult
 
-	flags = WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS
+	flags = IS_WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS
 	bloodflags = BLOOD_SLIME
 	bodyflags = FEET_NOSLIP
 	abilities = list(/mob/living/carbon/human/slime/proc/slimepeople_ventcrawl)
@@ -180,4 +189,4 @@
 	max_hurt_damage = 3 // From 5 (for humans)
 //	default_mutations=list(mRemotetalk) // TK is also another candidate, but TK is overpowered as fuck.
 
-	flags = WHITELISTED | HAS_LIPS | CAN_BE_FAT
+	flags = IS_WHITELISTED | HAS_LIPS | CAN_BE_FAT

@@ -739,9 +739,9 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define IS_SLOW 		4
 #define RAD_ABSORB		8
 #define NO_SCAN 		16
-#define NON_GENDERED 	32
+#define NO_PAIN 	32
 #define REQUIRE_LIGHT 	64
-#define WHITELISTED 	128
+#define IS_WHITELISTED 	128
 #define HAS_SKIN_TONE 	256
 #define HAS_LIPS 		512
 #define HAS_UNDERWEAR 	1024
