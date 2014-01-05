@@ -309,6 +309,19 @@ proc/isInSight(var/atom/A, var/atom/B)
 		i++
 	return candidates
 
+/proc/get_slime_candidates()
+
+	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
+	var/i = 0
+	while(candidates.len <= 0 && i < 5)
+		for(var/mob/G in respawnable_list)
+			if( G.client && G.client.prefs.be_special & BE_SLIME)
+				if(((G.client.inactivity/10)/60) <= ALIEN_SELECT_AFK_BUFFER + i) // the most active players are more likely to become a slime
+					if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
+						candidates += G.key
+		i++
+	return candidates
+
 proc/get_candidates(be_special_flag=0)
 	. = list()
 	for(var/mob/G in respawnable_list)

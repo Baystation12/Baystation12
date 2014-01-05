@@ -247,10 +247,10 @@
 			new_slime.key = key
 
 			new_slime << "<B>You are now a slime!</B>"
-/*
+
 			if(new_slime.client)
 				if(babies.len)
-					var/list/candidates = get_active_candidates()
+					var/list/candidates = get_slime_candidates()
 					if(candidates.len)
 						var/mob/dead/observer/picked = pick(candidates)
 						var/mob/living/carbon/slime/S = pick(babies)
@@ -261,7 +261,7 @@
 
 
 				else
-					new_slime << "<i>You're an only child!</i>"*/
+					new_slime << "<i>You're an only child!</i>"
 		else
 			src << "<i>I am not ready to reproduce yet...</i>"
 	else
