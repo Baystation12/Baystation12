@@ -13,14 +13,14 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 //Initializes blood vessels
 /mob/living/carbon/human/proc/make_blood()
 
-	if (vessel)
-		return
-
-	if(species && species.flags & NO_BLOOD)
+	if(vessel)
 		return
 
 	vessel = new/datum/reagents(600)
 	vessel.my_atom = src
+
+	if(species && species.flags & NO_BLOOD) //We want the var for safety but we can do without the actual blood.
+		return
 	if(species.bloodflags &BLOOD_SLIME)
 		vessel.add_reagent("water",560)
 	else
