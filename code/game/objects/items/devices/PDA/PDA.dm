@@ -356,13 +356,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	data["idInserted"] = (id ? 1 : 0)
 	data["idLink"] = (id ? text("[id.registered_name], [id.assignment]") : "--------")
 
-
+	data["cartridge"] = null
+	data["records"] = null
 	if(cartridge)
 		var/cartdata[0]
 
-
 		data["records"] = cartridge.create_NanoUI_values()
-
 
 		cartdata["name"] = cartridge.name
 		cartdata["access"] = list(\
@@ -392,15 +391,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		cartdata["type"] = cartridge.type
 		cartdata["charges"] = cartridge.charges ? cartridge.charges : 0
 		data["cartridge"] = cartdata
-					
-				
-
-
-
+		
 	data["stationTime"] = worldtime2text()
 	data["newMessage"] = newmessage
-
-
+	
 
 	var/convopdas[0]
 	var/pdas[0]
@@ -521,264 +515,260 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	//if ((src in U.contents) || ( istype(loc, /turf) && in_range(src, U) ) )
 	if (usr.stat == DEAD)
 		return 0
-	if(can_use()) //Why reinvent the wheel? There's a proc that does exactly that.
+	if(!can_use()) //Why reinvent the wheel? There's a proc that does exactly that.
+		U.unset_machine()
+		ui.close()
+		return 0
+		
+	add_fingerprint(U)
+	U.set_machine(src)
 
-		add_fingerprint(U)
-		U.set_machine(src)
-
-		switch(href_list["choice"])
-
+	switch(href_list["choice"])
+	
 //BASIC FUNCTIONS===================================
 
-			if("Close")//Self explanatory
-				U.unset_machine()
-				ui.close()				
-				return
-			if("Refresh")//Refresh, goes to the end of the proc.
-			if("Return")//Return
-				if(mode<=9)
+		if("Close")//Self explanatory
+			U.unset_machine()
+			ui.close()				
+			return 0
+		if("Refresh")//Refresh, goes to the end of the proc.
+		if("Return")//Return
+			if(mode<=9)
+				mode = 0
+			else
+				mode = round(mode/10)
+				if(mode==2)
+					active_conversation = null
+				if(mode==4)//Fix for cartridges. Redirects to hub.
 					mode = 0
-				else
-					mode = round(mode/10)
-					if(mode==2)
-						active_conversation = null
-					if(mode==4)//Fix for cartridges. Redirects to hub.
-						mode = 0
-					else if(mode >= 40 && mode <= 49)//Fix for cartridges. Redirects to refresh the menu.
-						cartridge.mode = mode
-			if ("Authenticate")//Checks for ID
-				id_check(U, 1)
-			if("UpdateInfo")
-				ownjob = id.assignment
-				name = "PDA-[owner] ([ownjob])"
-			if("Eject")//Ejects the cart, only done from hub.
-				if (!isnull(cartridge))
-					var/turf/T = loc
-					if(ismob(T))
-						T = T.loc
-					cartridge.loc = T
-					ui.close()
-					mode = 0
-					scanmode = 0
-					if (cartridge.radio)
-						cartridge.radio.hostpda = null
-					cartridge = null
+				else if(mode >= 40 && mode <= 49)//Fix for cartridges. Redirects to refresh the menu.
+					cartridge.mode = mode
+		if ("Authenticate")//Checks for ID
+			id_check(U, 1)
+		if("UpdateInfo")
+			ownjob = id.assignment
+			name = "PDA-[owner] ([ownjob])"
+		if("Eject")//Ejects the cart, only done from hub.
+			if (!isnull(cartridge))
+				var/turf/T = loc
+				if(ismob(T))
+					T = T.loc
+				cartridge.loc = T					
+				mode = 0
+				scanmode = 0
+				if (cartridge.radio)
+					cartridge.radio.hostpda = null
+				cartridge = null
 
 //MENU FUNCTIONS===================================
 
-			if("0")//Hub
-				mode = 0
-			if("1")//Notes
-				mode = 1
-			if("2")//Messenger
-				mode = 2
-			if("21")//Read messeges
-				mode = 21
-			if("3")//Atmos scan
-				mode = 3
-			if("4")//Redirects to hub
-				mode = 0
-			if("chatroom") // chatroom hub
-				mode = 5
-			if("41") //Manifest
-				mode = 41
+		if("0")//Hub
+			mode = 0
+		if("1")//Notes
+			mode = 1
+		if("2")//Messenger
+			mode = 2
+		if("21")//Read messeges
+			mode = 21
+		if("3")//Atmos scan
+			mode = 3
+		if("4")//Redirects to hub
+			mode = 0
+		if("chatroom") // chatroom hub
+			mode = 5
+		if("41") //Manifest
+			mode = 41
 
 
 //MAIN FUNCTIONS===================================
 
-			if("Light")
-				if(fon)
-					fon = 0
-					if(src in U.contents)	U.SetLuminosity(U.luminosity - f_lum)
-					else					SetLuminosity(0)
-				else
-					fon = 1
-					if(src in U.contents)	U.SetLuminosity(U.luminosity + f_lum)
-					else					SetLuminosity(f_lum)
-			if("Medical Scan")
-				if(scanmode == 1)
-					scanmode = 0
-				else if((!isnull(cartridge)) && (cartridge.access_medical))
-					scanmode = 1
-			if("Reagent Scan")
-				if(scanmode == 3)
-					scanmode = 0
-				else if((!isnull(cartridge)) && (cartridge.access_reagent_scanner))
-					scanmode = 3
-			if("Halogen Counter")
-				if(scanmode == 4)
-					scanmode = 0
-				else if((!isnull(cartridge)) && (cartridge.access_engine))
-					scanmode = 4
-			if("Honk")
-				if ( !(last_honk && world.time < last_honk + 20) )
-					playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
-					last_honk = world.time
-			if("Gas Scan")
-				if(scanmode == 5)
-					scanmode = 0
-				else if((!isnull(cartridge)) && (cartridge.access_atmos))
-					scanmode = 5
+		if("Light")
+			if(fon)
+				fon = 0
+				if(src in U.contents)	U.SetLuminosity(U.luminosity - f_lum)
+				else					SetLuminosity(0)
+			else
+				fon = 1
+				if(src in U.contents)	U.SetLuminosity(U.luminosity + f_lum)
+				else					SetLuminosity(f_lum)
+		if("Medical Scan")
+			if(scanmode == 1)
+				scanmode = 0
+			else if((!isnull(cartridge)) && (cartridge.access_medical))
+				scanmode = 1
+		if("Reagent Scan")
+			if(scanmode == 3)
+				scanmode = 0
+			else if((!isnull(cartridge)) && (cartridge.access_reagent_scanner))
+				scanmode = 3
+		if("Halogen Counter")
+			if(scanmode == 4)
+				scanmode = 0
+			else if((!isnull(cartridge)) && (cartridge.access_engine))
+				scanmode = 4
+		if("Honk")
+			if ( !(last_honk && world.time < last_honk + 20) )
+				playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
+				last_honk = world.time
+		if("Gas Scan")
+			if(scanmode == 5)
+				scanmode = 0
+			else if((!isnull(cartridge)) && (cartridge.access_atmos))
+				scanmode = 5
 
 //MESSENGER/NOTE FUNCTIONS===================================
 
-			if ("Edit")
-				var/n = input(U, "Please enter message", name, notehtml) as message
-				if (in_range(src, U) && loc == U)
-					n = copytext(adminscrub(n), 1, MAX_MESSAGE_LEN)
-					if (mode == 1)
-						note = html_decode(n)
-						notehtml = note
-						note = replacetext(note, "\n", "<br>")
+		if ("Edit")
+			var/n = input(U, "Please enter message", name, notehtml) as message
+			if (in_range(src, U) && loc == U)
+				n = copytext(adminscrub(n), 1, MAX_MESSAGE_LEN)
+				if (mode == 1)
+					note = html_decode(n)
+					notehtml = note
+					note = replacetext(note, "\n", "<br>")
+			else
+				ui.close()
+		if("Toggle Messenger")
+			toff = !toff
+		if("Toggle Ringer")//If viewing texts then erase them, if not then toggle silent status
+			silent = !silent
+		if("Clear")//Clears messages
+			if(href_list["option"] == "All")
+				tnote.Cut()
+				conversations.Cut()
+			if(href_list["option"] == "Convo")
+				var/new_tnote[0]
+				for(var/i in tnote)
+					if(i["target"] != active_conversation)
+						new_tnote[++new_tnote.len] = i
+				tnote = new_tnote
+				conversations.Remove(active_conversation)
+
+			active_conversation = null
+			if(mode==21)
+				mode=2
+
+		if("Ringtone")
+			var/t = input(U, "Please enter new ringtone", name, ttone) as text
+			if (in_range(src, U) && loc == U)
+				if (t)
+					if(src.hidden_uplink && hidden_uplink.check_trigger(U, lowertext(t), lowertext(lock_code)))
+						U << "The PDA softly beeps."
+						ui.close()
+					else
+						t = copytext(sanitize(t), 1, 20)
+						ttone = t
+			else
+				ui.close()
+				return 0
+		if("Message")
+
+			var/obj/item/device/pda/P = locate(href_list["target"])
+			src.create_message(U, P)
+			if(mode == 2)
+				if(href_list["target"] in conversations)            // Need to make sure the message went through, if not welp.
+					active_conversation = href_list["target"]
+					mode = 21
+
+		if("Select Conversation")
+			var/P = href_list["convo"]
+			for(var/n in conversations)
+				if(P == n)
+					active_conversation=P
+					mode=21
+		if("Send Honk")//Honk virus
+			if(istype(cartridge, /obj/item/weapon/cartridge/clown))//Cartridge checks are kind of unnecessary since everything is done through switch.
+				var/obj/item/device/pda/P = locate(href_list["target"])//Leaving it alone in case it may do something useful, I guess.
+				if(!isnull(P))
+					if (!P.toff && cartridge.charges > 0)
+						cartridge.charges--
+						U.show_message("\blue Virus sent!", 1)
+						P.honkamt = (rand(15,20))
 				else
-					ui.close()
-			if("Toggle Messenger")
-				toff = !toff
-			if("Toggle Ringer")//If viewing texts then erase them, if not then toggle silent status
-				silent = !silent
-			if("Clear")//Clears messages
-				if(href_list["option"] == "All")
-					tnote.Cut()
-					conversations.Cut()
-				if(href_list["option"] == "Convo")
-					var/new_tnote[0]
-					for(var/i in tnote)
-						if(i["target"] != active_conversation)
-							new_tnote[++new_tnote.len] = i
-					tnote = new_tnote
-					conversations.Remove(active_conversation)
-
-				active_conversation = null
-				if(mode==21)
-					mode=2
-
-			if("Ringtone")
-				var/t = input(U, "Please enter new ringtone", name, ttone) as text
-				if (in_range(src, U) && loc == U)
-					if (t)
-						if(src.hidden_uplink && hidden_uplink.check_trigger(U, lowertext(t), lowertext(lock_code)))
-							U << "The PDA softly beeps."
-							ui.close()
-						else
-							t = copytext(sanitize(t), 1, 20)
-							ttone = t
-				else
-					ui.close()
-					return
-			if("Message")
-
+					U << "PDA not found."
+			else
+				ui.close()
+				return 0
+		if("Send Silence")//Silent virus
+			if(istype(cartridge, /obj/item/weapon/cartridge/mime))
 				var/obj/item/device/pda/P = locate(href_list["target"])
-				src.create_message(U, P)
-				if(mode == 2)
-					if(href_list["target"] in conversations)            // Need to make sure the message went through, if not welp.
-						active_conversation = href_list["target"]
-						mode = 21
-
-			if("Select Conversation")
-				var/P = href_list["convo"]
-				for(var/n in conversations)
-					if(P == n)
-						active_conversation=P
-						mode=21
-			if("Send Honk")//Honk virus
-				if(istype(cartridge, /obj/item/weapon/cartridge/clown))//Cartridge checks are kind of unnecessary since everything is done through switch.
-					var/obj/item/device/pda/P = locate(href_list["target"])//Leaving it alone in case it may do something useful, I guess.
-					if(!isnull(P))
-						if (!P.toff && cartridge.charges > 0)
-							cartridge.charges--
-							U.show_message("\blue Virus sent!", 1)
-							P.honkamt = (rand(15,20))
-					else
-						U << "PDA not found."
+				if(!isnull(P))
+					if (!P.toff && cartridge.charges > 0)
+						cartridge.charges--
+						U.show_message("\blue Virus sent!", 1)
+						P.silent = 1
+						P.ttone = "silence"
 				else
-					ui.close()
-					return
-			if("Send Silence")//Silent virus
-				if(istype(cartridge, /obj/item/weapon/cartridge/mime))
-					var/obj/item/device/pda/P = locate(href_list["target"])
-					if(!isnull(P))
-						if (!P.toff && cartridge.charges > 0)
-							cartridge.charges--
-							U.show_message("\blue Virus sent!", 1)
-							P.silent = 1
-							P.ttone = "silence"
-					else
-						U << "PDA not found."
-				else
-					ui.close()
-					return
+					U << "PDA not found."
+			else
+				ui.close()
+				return 0
 
 
 //SYNDICATE FUNCTIONS===================================
 
-			if("Toggle Door")
-				if(cartridge && cartridge.access_remote_door)
-					for(var/obj/machinery/door/poddoor/M in world)
-						if(M.id == cartridge.remote_door_id)
-							if(M.density)
-								M.open()
-							else
-								M.close()
+		if("Toggle Door")
+			if(cartridge && cartridge.access_remote_door)
+				for(var/obj/machinery/door/poddoor/M in world)
+					if(M.id == cartridge.remote_door_id)
+						if(M.density)
+							M.open()
+						else
+							M.close()
 
-			if("Detonate")//Detonate PDA
-				if(istype(cartridge, /obj/item/weapon/cartridge/syndicate))
-					var/obj/item/device/pda/P = locate(href_list["target"])
-					if(!isnull(P))
-						if (!P.toff && cartridge.charges > 0)
-							cartridge.charges--
+		if("Detonate")//Detonate PDA
+			if(istype(cartridge, /obj/item/weapon/cartridge/syndicate))
+				var/obj/item/device/pda/P = locate(href_list["target"])
+				if(!isnull(P))
+					if (!P.toff && cartridge.charges > 0)
+						cartridge.charges--
 
-							var/difficulty = 0
+						var/difficulty = 0
 
-							if(P.cartridge)
-								difficulty += P.cartridge.access_medical
-								difficulty += P.cartridge.access_security
-								difficulty += P.cartridge.access_engine
-								difficulty += P.cartridge.access_clown
-								difficulty += P.cartridge.access_janitor
-							else
-								difficulty += 2
+						if(P.cartridge)
+							difficulty += P.cartridge.access_medical
+							difficulty += P.cartridge.access_security
+							difficulty += P.cartridge.access_engine
+							difficulty += P.cartridge.access_clown
+							difficulty += P.cartridge.access_janitor
+						else
+							difficulty += 2
 
-							if(prob(difficulty * 12) || (P.hidden_uplink))
-								U.show_message("\red An error flashes on your [src].", 1)
-							else if (prob(difficulty * 3))
-								U.show_message("\red Energy feeds back into your [src]!", 1)
-								ui.close()
-								explode()
-								log_admin("[key_name(U)] just attempted to blow up [P] with the Detomatix cartridge but failed, blowing themselves up")
-								message_admins("[key_name_admin(U)] just attempted to blow up [P] with the Detomatix cartridge but failed, blowing themselves up", 1)
-							else
-								U.show_message("\blue Success!", 1)
-								log_admin("[key_name(U)] just attempted to blow up [P] with the Detomatix cartridge and succeded")
-								message_admins("[key_name_admin(U)] just attempted to blow up [P] with the Detomatix cartridge and succeded", 1)
-								P.explode()
-					else
-						U << "PDA not found."
+						if(prob(difficulty * 12) || (P.hidden_uplink))
+							U.show_message("\red An error flashes on your [src].", 1)
+						else if (prob(difficulty * 3))
+							U.show_message("\red Energy feeds back into your [src]!", 1)
+							ui.close()
+							explode()
+							log_admin("[key_name(U)] just attempted to blow up [P] with the Detomatix cartridge but failed, blowing themselves up")
+							message_admins("[key_name_admin(U)] just attempted to blow up [P] with the Detomatix cartridge but failed, blowing themselves up", 1)
+						else
+							U.show_message("\blue Success!", 1)
+							log_admin("[key_name(U)] just attempted to blow up [P] with the Detomatix cartridge and succeded")
+							message_admins("[key_name_admin(U)] just attempted to blow up [P] with the Detomatix cartridge and succeded", 1)
+							P.explode()
 				else
-					U.unset_machine()
-					ui.close()
-					return
+					U << "PDA not found."
+			else
+				U.unset_machine()
+				ui.close()
+				return 0
 
 //pAI FUNCTIONS===================================
-			if("pai")
-				switch(href_list["option"])
-					if("1")		// Configure pAI device
-						pai.attack_self(U)
-					if("2")		// Eject pAI device
-						var/turf/T = get_turf_or_move(src.loc)
-						if(T)
-							pai.loc = T
-							pai = null
+		if("pai")
+			switch(href_list["option"])
+				if("1")		// Configure pAI device
+					pai.attack_self(U)
+				if("2")		// Eject pAI device
+					var/turf/T = get_turf_or_move(src.loc)
+					if(T)
+						pai.loc = T
+						pai = null
 
-			else
-				mode = text2num(href_list["choice"])
-				if(cartridge)
-					cartridge.mode = mode
-
-
-	else//If not in range or not using the pda.
-		U.unset_machine()
-		ui.close()
-		return
+		else
+			mode = text2num(href_list["choice"])
+			if(cartridge)
+				cartridge.mode = mode
 
 //EXTRA FUNCTIONS===================================
 
@@ -790,7 +780,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		honkamt--
 		playsound(loc, 'sound/items/bikehorn.ogg', 30, 1)
 
-	src.updateUsrDialog()
 	return 1 // return 1 tells it to refresh the UI in NanoUI
 
 /obj/item/device/pda/proc/remove_id()
@@ -960,15 +949,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/attackby(obj/item/C as obj, mob/user as mob)
 	..()
 	if(istype(C, /obj/item/weapon/cartridge) && !cartridge)
-		var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
 		cartridge = C
 		user.drop_item()
 		cartridge.loc = src
 		user << "<span class='notice'>You insert [cartridge] into [src].</span>"
+		nanomanager.update_uis(src) // update all UIs attached to src
 		if(cartridge.radio)
-			cartridge.radio.hostpda = src
-		if(ui)
-			ui.close()
+			cartridge.radio.hostpda = src		
 
 	else if(istype(C, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/idcard = C
@@ -994,7 +981,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		C.loc = src
 		pai = C
 		user << "<span class='notice'>You slot \the [C] into [src].</span>"
-		updateUsrDialog()
+		nanomanager.update_uis(src) // update all UIs attached to src
 	else if(istype(C, /obj/item/weapon/pen))
 		var/obj/item/weapon/pen/O = locate() in src
 		if(O)
