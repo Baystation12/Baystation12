@@ -18,7 +18,7 @@
                 <div class="itemContent">
                         {{if products}}
                                 {{for productData}}
-                                        <div class="fixedLeft" style="width: 500px;>
+                                        <div class="fixedLeft" style="width: 500px";>
                                                 {{if amount}}
                                                         {{:~link('Vend', 'eject', {'vend': itself}, vendReady ? 'disabled' : null)}} <font color="{{:displayColor}}"> {{:name}} </font>- <b>{{:amount}}</b>-<b>{{:price}}</b>
                                                 {{else}}
