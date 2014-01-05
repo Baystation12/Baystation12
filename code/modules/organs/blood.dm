@@ -12,8 +12,13 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 //Initializes blood vessels
 /mob/living/carbon/human/proc/make_blood()
+
 	if (vessel)
 		return
+
+	if(species && species.flags & NO_BLOOD)
+		return
+
 	vessel = new/datum/reagents(600)
 	vessel.my_atom = src
 	vessel.add_reagent("blood",560)
@@ -29,6 +34,10 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/human/proc/handle_blood()
+
+	if(species && species.flags & NO_BLOOD)
+		return
+
 	if(stat != DEAD && bodytemperature >= 170)	//Dead or cryosleep people do not pump the blood.
 
 		var/blood_volume = round(vessel.get_reagent_amount("blood"))
@@ -126,6 +135,10 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 //Makes a blood drop, leaking certain amount of blood from the mob
 /mob/living/carbon/human/proc/drip(var/amt as num)
+
+	if(species && species.flags & NO_BLOOD) //TODO: Make drips come from the reagents instead.
+		return
+
 	if(!amt)
 		return
 
@@ -187,8 +200,13 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 //For humans, blood does not appear from blue, it comes from vessels.
 /mob/living/carbon/human/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
+
+	if(species && species.flags & NO_BLOOD)
+		return null
+
 	if(vessel.get_reagent_amount("blood") < amount)
 		return null
+
 	. = ..()
 	vessel.remove_reagent("blood",amount) // Removes blood if human
 
@@ -210,8 +228,16 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 //Transfers blood from container ot vessels, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(obj/item/weapon/reagent_containers/container, var/amount)
-	var/datum/reagent/blood/our = get_blood(vessel)
+
 	var/datum/reagent/blood/injected = get_blood(container.reagents)
+
+	if(species && species.flags & NO_BLOOD)
+		reagents.add_reagent("blood", amount, injected.data)
+		reagents.update_total()
+		return
+
+	var/datum/reagent/blood/our = get_blood(vessel)
+
 	if (!injected || !our)
 		return
 	if(blood_incompatible(injected.data["blood_type"],our.data["blood_type"]) )
