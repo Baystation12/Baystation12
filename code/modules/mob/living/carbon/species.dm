@@ -139,7 +139,7 @@
 	heat_level_2 = 350
 	heat_level_3 = 700
 
-	flags = NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
+	flags = NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW
 	bloodflags = BLOOD_GREEN
 
 /datum/species/kidan
