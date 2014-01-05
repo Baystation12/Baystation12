@@ -723,9 +723,9 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 	)
 
 //Species flags.
-#define NO_EAT 1
+#define NO_BLOOD 1
 #define NO_BREATHE 2
-#define NO_SLEEP 4
+#define IS_SLOW 4
 #define RAD_ABSORB 8
 #define NO_SCAN 16
 #define NON_GENDERED 32
