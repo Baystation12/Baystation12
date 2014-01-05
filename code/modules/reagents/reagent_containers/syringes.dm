@@ -94,7 +94,6 @@
 							var/mob/living/carbon/human/H = T
 							if(H.species && H.species.flags & NO_BLOOD)
 								H.reagents.trans_to(src,amount)
-								return
 							else
 								B = T.take_blood(src,amount)
 						else
