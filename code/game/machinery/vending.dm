@@ -7,7 +7,6 @@
 	var/display_color = "blue"
 
 
-
 /obj/machinery/vending
 	name = "Vendomat"
 	desc = "A generic vending machine."
@@ -16,44 +15,39 @@
 	layer = 2.9
 	anchored = 1
 	density = 1
-	var/active = 1 //No sales pitches if off!
-	var/vend_ready = 1 //Are we ready to vend?? Is it time??
-	var/vend_delay = 10 //How long does it take to vend?
+	var/active = 1		//No sales pitches if off!
+	var/vend_ready = 1	//Are we ready to vend?? Is it time??
+	var/vend_delay = 10	//How long does it take to vend?
 	var/datum/data/vending_product/currently_vending = null // A /datum/data/vending_product instance of what we're paying for right now.
 
 	// To be filled out at compile time
-	var/list/products	= list() // For each, use the following pattern:
-	var/list/contraband	= list() // list(/type/path = amount,/type/path2 = amount2)
-	var/list/premium 	= list() // No specified amount = only one in stock
-	var/list/prices     = list() // Prices for each item, list(/type/path = price), items not in the list don't have a price.
+	var/list/products	= list()	// For each, use the following pattern:
+	var/list/contraband	= list()	// list(/type/path = amount,/type/path2 = amount2)
+	var/list/premium 	= list()	// No specified amount = only one in stock
+	var/list/prices     = list()	// Prices for each item, list(/type/path = price), items not in the list don't have a price.
 
-	var/product_slogans = "" //String of slogans separated by semicolons, optional
-	var/product_ads = "" //String of small ad messages in the vending screen - random chance
+	var/product_slogans = ""	//String of slogans separated by semicolons, optional
+	var/product_ads = ""		//String of small ad messages in the vending screen - random chance
 	var/list/product_records = list()
 	var/list/hidden_records = list()
 	var/list/coin_records = list()
 	var/list/slogan_list = list()
-	var/list/small_ads = list() // small ad messages in the vending screen - random chance of popping up whenever you open it
-	var/vend_reply //Thank you for shopping!
+	var/list/small_ads = list()	//Small ad messages in the vending screen - random chance of popping up whenever you open it
+	var/vend_reply				//Thank you for shopping!
 	var/last_reply = 0
-	var/last_slogan = 0 //When did we last pitch?
-	var/slogan_delay = 6000 //How long until we can pitch again?
-	var/icon_vend //Icon_state when vending!
-	var/icon_deny //Icon_state when vending!
-	//var/emagged = 0 //Ignores if somebody doesn't have card access to that machine.
-	var/seconds_electrified = 0 //Shock customers like an airlock.
-	var/shoot_inventory = 0 //Fire items at customers! We're broken!
-	var/shut_up = 1 //Stop spouting those godawful pitches!
-	var/extended_inventory = 0 //can we access the hidden inventory?
-	var/panel_open = 0 //Hacking that vending machine. Gonna get a free candy bar.
-	var/obj/item/weapon/coin/coin
-	var/const/WIRE_EXTEND = 1
-	var/const/WIRE_SCANID = 2
-	var/const/WIRE_SHOCK = 3
-	var/const/WIRE_SHOOTINV = 4
-	var/datum/wires/vending/wires = null
-	var/scan_id = 1
 	var/obj/item/weapon/vending_refill/refill_canister = null    //The type of refill canisters used by this machine.
+	var/last_slogan = 0			//When did we last pitch?
+	var/slogan_delay = 6000		//How long until we can pitch again?
+	var/icon_vend				//Icon_state when vending!
+	var/icon_deny				//Icon_state when vending!
+	//var/emagged = 0			//Ignores if somebody doesn't have card access to that machine.
+	var/seconds_electrified = 0	//Shock customers like an airlock.
+	var/shoot_inventory = 0		//Fire items at customers! We're broken!
+	var/shut_up = 0				//Stop spouting those godawful pitches!
+	var/extended_inventory = 0	//can we access the hidden inventory?
+	var/scan_id = 1
+	var/obj/item/weapon/coin/coin
+	var/datum/wires/vending/wires = null
 
 
 /obj/machinery/vending/New()
@@ -91,22 +85,16 @@
 				del(src)
 				return
 		if(3.0)
-			if (prob(25))
-				spawn(0)
-					src.malfunction()
-					return
-				return
-		else
-	return
+			if(prob(25))
+				malfunction()
+
 
 /obj/machinery/vending/blob_act()
-	if (prob(50))
-		spawn(0)
-			src.malfunction()
-			del(src)
-		return
+	if(prob(75))
+		malfunction()
+	else
+		del(src)
 
-	return
 
 /obj/machinery/vending/proc/build_inventory(var/list/productlist,hidden=0,req_coin=0)
 	for(var/typepath in productlist)
@@ -130,7 +118,7 @@
 		else
 			product_records += R
 //		world << "Added: [R.product_name]] - [R.amount] - [R.product_path]"
-	return
+
 
 /obj/machinery/vending/proc/refill_inventory(obj/item/weapon/vending_refill/refill, datum/data/vending_product/machine, mob/user)
 	var/total = 0
@@ -162,28 +150,28 @@
 	return total
 
 
-/obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/card/emag))
-		src.emagged = 1
+/obj/machinery/vending/attackby(obj/item/weapon/W, mob/user)
+	if(istype(W, /obj/item/weapon/card/emag))
+		emagged = 1
 		user << "You short out the product lock on [src]"
 		return
 	else if(istype(W, /obj/item/weapon/screwdriver))
-		src.panel_open = !src.panel_open
-		user << "You [src.panel_open ? "open" : "close"] the maintenance panel."
-		src.overlays.Cut()
-		if(src.panel_open)
-			src.overlays += image(src.icon, "[initial(icon_state)]-panel")
-		src.updateUsrDialog()
+		panel_open = !panel_open
+		user << "You [panel_open ? "open" : "close"] the maintenance panel."
+		overlays.Cut()
+		if(panel_open)
+			overlays += image(icon, "[initial(icon_state)]-panel")
+		updateUsrDialog()
 		return
 	else if(istype(W, /obj/item/device/multitool)||istype(W, /obj/item/weapon/wirecutters))
-		if(src.panel_open)
+		if(panel_open)
 			attack_hand(user)
 		return
 	else if(istype(W, /obj/item/weapon/coin) && premium.len > 0)
 		user.drop_item()
 		W.loc = src
 		coin = W
-		user << "\blue You insert the [W] into the [src]"
+		user << "<span class='notice'>You insert [W] into [src].</span>"
 		return
 
 	else if(src.panel_open)
@@ -268,75 +256,93 @@
 /obj/machinery/vending/attack_ai(mob/user as mob)
 	return attack_hand(user)
 
-/obj/machinery/vending/attack_hand(var/mob/user as mob)
-	if(stat & BROKEN)
+/obj/machinery/vending/attack_hand(mob/user as mob)
+	if(stat & (BROKEN|NOPOWER))
 		return
+	user.set_machine(src)
 
-	if(src.seconds_electrified != 0)
-		if(src.shock(user, 100))
+	if(seconds_electrified != 0)
+		if(shock(user, 100))
 			return
 
+	var/vendorname = (src.name)  //import the machine's name
 
-	if(panel_open) //NanoUI does not feature thoes wire() procs, and I don't feel like rewriting it, so this is the best option.
-		var/dat
-		dat += wires()
+	if(src.currently_vending)
+		var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
 
-		if (product_slogans != "")
-			dat += "The speaker switch is [src.shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
-
-		var/datum/browser/popup = new(user, "vending", (name))
-		popup.set_content(dat)
-		popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
-		popup.open()
-	ui_interact(user)
-
-/obj/machinery/vending/ui_interact(mob/user, ui_key = "vending_machine")
-	if(stat & (BROKEN|NOPOWER)) return
-	if(user.stat || user.restrained()) return
-	var/list/productData[0]
-	var/list/premiumData[0]
-	var/list/contrabandData[0]
-	var/list/display_records = product_records
-	for(var/datum/data/vending_product/R in display_records)
-		productData.Add(list(list("amount" = R.amount, "name" = R.product_name, "price" = R.price, "displayColor" = R.display_color, "itself" = "\ref[R]", "path" = R.product_path)))
-	for(var/datum/data/vending_product/R in coin_records)
-		premiumData.Add(list(list("amount" = R.amount, "name" = R.product_name, "price" = R.price, "displayColor" = R.display_color, "itself" = "\ref[R]", "path" = R.product_path)))
-	for(var/datum/data/vending_product/R in hidden_records)
-		contrabandData.Add(list(list("amount" = R.amount, "name" = R.product_name, "price" = R.price, "displayColor" = R.display_color, "itself" = "\ref[R]", "path" = R.product_path)))
-
-	var/data[0]
-	data["premiumItems"]      = premium
-	data["contraband"]        = contraband
-	data["products"]        = products
-	data["coin"]          = coin
-	data["extendedInventory"]    = extended_inventory
-	data["panelOpen"]        = panel_open
-	data["productData"]        = productData
-	data["premiumData"]        = premiumData
-	data["contrabandData"]      = contrabandData
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
-	if (!ui)
-		ui = new(user, src, ui_key, "vending.tmpl", "Vending Machine", 600, 500)
-		ui.set_initial_data(data)
-		ui.set_auto_update(1)
-		ui.open()
-	else
-		ui.push_data(data)
+		// AUTOFIXED BY fix_string_idiocy.py
+		// C:\Users\Rob\Documents\Projects\vgstation13\code\game\machinery\vending.dm:260: dat += "<b>You have selected [currently_vending.product_name].<br>Please ensure your ID is in your ID holder or hand.</b><br>"
+		dat += {"<b>You have selected [currently_vending.product_name].<br>Please ensure your ID is in your ID holder or hand.</b><br>
+			<a href='byond://?src=\ref[src];buy=1'>Pay</a> |
+			<a href='byond://?src=\ref[src];cancel_buying=1'>Cancel</a>"}
+		// END AUTOFIX
+		user << browse(dat, "window=vending")
+		onclose(user, "")
 		return
 
+	var/dat = "<TT><center><b>[vendorname]</b></center><hr /><br>" //display the name, and added a horizontal rule
+	dat += "<b>Select an item: </b><br><br>" //the rest is just general spacing and bolding
+
+	if (premium.len > 0)
+		dat += "<b>Coin slot:</b> [coin ? coin : "No coin inserted"] (<a href='byond://?src=\ref[src];remove_coin=1'>Remove</A>)<br><br>"
+
+	if (src.product_records.len == 0)
+		dat += "<font color = 'red'>No product loaded!</font>"
+	else
+		var/list/display_records = src.product_records
+		if(src.extended_inventory)
+			display_records = src.product_records + src.hidden_records
+		if(src.coin)
+			display_records = src.product_records + src.coin_records
+		if(src.coin && src.extended_inventory)
+			display_records = src.product_records + src.hidden_records + src.coin_records
+
+		for (var/datum/data/vending_product/R in display_records)
+
+			// AUTOFIXED BY fix_string_idiocy.py
+			// C:\Users\Rob\Documents\Projects\vgstation13\code\game\machinery\vending.dm:285: dat += "<FONT color = '[R.display_color]'><B>[R.product_name]</B>:"
+			dat += {"<FONT color = '[R.display_color]'><B>[R.product_name]</B>:
+				<b>[R.amount]</b> </font>"}
+			// END AUTOFIX
+			if(R.price)
+				dat += " <b>(Price: [R.price])</b>"
+			if (R.amount > 0)
+				dat += " <a href='byond://?src=\ref[src];vend=\ref[R]'>(Vend)</A>"
+			else
+				dat += " <font color = 'red'>SOLD OUT</font>"
+			dat += "<br>"
+
+		dat += "</TT>"
+
+	if(panel_open)
+		dat += wires()
+
+		if(product_slogans != "")
+			dat += "The speaker switch is [shut_up ? "off" : "on"]. <a href='?src=\ref[src];togglevoice=[1]'>Toggle</a>"
+
+	user << browse(dat, "window=vending")
+	onclose(user, "")
+	return
 
 // returns the wire panel text
 /obj/machinery/vending/proc/wires()
-        return wires.GetInteractWindow()
-
+	return wires.GetInteractWindow()
 
 /obj/machinery/vending/Topic(href, href_list)
-	if(stat & (BROKEN|NOPOWER))
-		return
-	if(usr.stat || usr.restrained())
+	if(..())
 		return
 
-	if(href_list["remove_coin"] && !istype(usr,/mob/living/silicon))
+	if(istype(usr,/mob/living/silicon))
+		if(istype(usr,/mob/living/silicon/robot))
+			var/mob/living/silicon/robot/R = usr
+			if(!(R.module && istype(R.module,/obj/item/weapon/robot_module/butler) ) )
+				usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
+				return
+		else
+			usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
+			return
+
+	if(href_list["remove_coin"])
 		if(!coin)
 			usr << "There is no coin in this machine."
 			return
@@ -346,23 +352,13 @@
 			usr.put_in_hands(coin)
 		usr << "\blue You remove the [coin] from the [src]"
 		coin = null
+	usr.set_machine(src)
 
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
-		usr.set_machine(src)
 		if ((href_list["vend"]) && (src.vend_ready) && (!currently_vending))
 
-			if(istype(usr,/mob/living/silicon))
-				if(istype(usr,/mob/living/silicon/robot))
-					var/mob/living/silicon/robot/R = usr
-					if(!(R.module && istype(R.module,/obj/item/weapon/robot_module/butler) ))
-						usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
-						return
-				else
-					usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
-					return
-
-			if ((!src.allowed(usr)) && (!src.emagged) && (src.wires & WIRE_SCANID)) //For SECURE VENDING MACHINES YEAH
+			if (!allowed(usr) && !emagged && scan_id) //For SECURE VENDING MACHINES YEAH
 				usr << "\red Access denied." //Unless emagged of course
 				flick(src.icon_deny,src)
 				return
@@ -384,6 +380,18 @@
 			src.updateUsrDialog()
 			return
 
+		else if (href_list["buy"])
+			if(istype(usr, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H=usr
+				var/obj/item/weapon/card/card = null
+				if(istype(H.wear_id,/obj/item/weapon/card))
+					card=H.wear_id
+				else if(istype(H.get_active_hand(),/obj/item/weapon/card))
+					card=H.get_active_hand()
+				if(card)
+					scan_card(card)
+			return
+
 		else if ((href_list["togglevoice"]) && (src.panel_open))
 			src.shut_up = !src.shut_up
 
@@ -395,7 +403,7 @@
 	return
 
 /obj/machinery/vending/proc/vend(datum/data/vending_product/R, mob/user)
-	if ((!src.allowed(user)) && (!src.emagged) && (src.wires & WIRE_SCANID)) //For SECURE VENDING MACHINES YEAH
+	if (!allowed(user) && !emagged && wires.IsIndexCut(VENDING_WIRE_IDSCAN)) //For SECURE VENDING MACHINES YEAH
 		user << "\red Access denied." //Unless emagged of course
 		flick(src.icon_deny,src)
 		return
@@ -526,7 +534,6 @@
 	return 1
 
 
-
 /obj/machinery/vending/proc/shock(mob/user, prb)
 	if(stat & (BROKEN|NOPOWER))		// unpowered, no shock
 		return 0
@@ -535,7 +542,7 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(5, 1, src)
 	s.start()
-	if (electrocute_mob(user, get_area(src), src, 0.7))
+	if(electrocute_mob(user, get_area(src), src, 0.7))
 		return 1
 	else
 		return 0

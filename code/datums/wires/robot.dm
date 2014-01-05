@@ -3,11 +3,21 @@
 	holder_type = /mob/living/silicon/robot
 	wire_count = 5
 
-var/const/BORG_WIRE_LAWCHECK = 1
-var/const/BORG_WIRE_MAIN_POWER = 2 // The power wires do nothing whyyyyyyyyyyyyy
+/* /tg/ ordering doesn't work for us, we need lawsync at the end for MoMMIs.
+var/const/BORG_WIRE_LAWCHECK    = 1
+var/const/BORG_WIRE_MAIN_POWER  = 2 // The power wires do nothing whyyyyyyyyyyyyy
 var/const/BORG_WIRE_LOCKED_DOWN = 4
-var/const/BORG_WIRE_AI_CONTROL = 8
-var/const/BORG_WIRE_CAMERA = 16
+var/const/BORG_WIRE_AI_CONTROL  = 8
+var/const/BORG_WIRE_CAMERA      = 16
+*/
+
+// /vg/ ordering
+
+var/const/BORG_WIRE_MAIN_POWER  = 1 // The power wires do nothing whyyyyyyyyyyyyy
+var/const/BORG_WIRE_LOCKED_DOWN = 2
+var/const/BORG_WIRE_CAMERA      = 4
+var/const/BORG_WIRE_AI_CONTROL  = 8  // Not used on MoMMIs
+var/const/BORG_WIRE_LAWCHECK    = 16 // Not used on MoMMIs
 
 /datum/wires/robot/GetInteractWindow()
 
@@ -77,3 +87,9 @@ var/const/BORG_WIRE_CAMERA = 16
 
 /datum/wires/robot/proc/LockedCut()
 	return wires_status & BORG_WIRE_LOCKED_DOWN
+
+/datum/wires/robot/proc/CanLawCheck()
+	return wires_status & BORG_WIRE_LAWCHECK
+
+/datum/wires/robot/proc/AIHasControl()
+	return wires_status & BORG_WIRE_AI_CONTROL

@@ -121,17 +121,14 @@
 
 		return
 
-/*
+
 	pulse(var/radio = 0)
-		if(istype(src.loc, /obj/machinery/door/airlock) && src.airlock_wire && src.wires)
-			var/obj/machinery/door/airlock/A = src.loc
-			A.pulse(src.airlock_wire)
-		else if(holder)
-			holder.process_activation(src, 1, 0)
+		if(src.connected && src.wires)
+			connected.Pulse(src)
 		else
-			..(radio)
-		return 1
-*/
+			return ..(radio)
+
+
 	receive_signal(datum/signal/signal)
 		if( !receiving || !signal )
 			return 0

@@ -1,23 +1,8 @@
-#define AIRLOCK_WIRE_IDSCAN 1
-#define AIRLOCK_WIRE_MAIN_POWER1 2
-#define AIRLOCK_WIRE_MAIN_POWER2 3
-#define AIRLOCK_WIRE_DOOR_BOLTS 4
-#define AIRLOCK_WIRE_BACKUP_POWER1 5
-#define AIRLOCK_WIRE_BACKUP_POWER2 6
-#define AIRLOCK_WIRE_OPEN_DOOR 7
-#define AIRLOCK_WIRE_AI_CONTROL 8
-#define AIRLOCK_WIRE_ELECTRIFY 9
-#define AIRLOCK_WIRE_SAFETY 10
-#define AIRLOCK_WIRE_SPEED 11
-#define AIRLOCK_WIRE_LIGHT 12
-
 /*
 	New methods:
 	pulse - sends a pulse into a wire for hacking purposes
 	cut - cuts a wire and makes any necessary state changes
 	mend - mends a wire and makes any necessary state changes
-	isWireColorCut - returns 1 if that color wire is cut, or 0 if not
-	isWireCut - returns 1 if that wire (e.g. AIRLOCK_WIRE_DOOR_BOLTS) is cut, or 0 if not
 	canAIControl - 1 if the AI can control the airlock, 0 if not (then check canAIHack to see if it can hack in)
 	canAIHack - 1 if the AI can hack into the airlock to recover control, 0 if not. Also returns 0 if the AI does not *need* to hack it.
 	arePowerSystemsOn - 1 if the main or backup power are functioning, 0 if not. Does not check whether the power grid is charged or an APC has equipment on or anything like that. (Check (stat & NOPOWER) for that)
@@ -30,8 +15,12 @@
 	shock - has a chance of electrocuting its target.
 */
 
+
+// Wires for the airlock are located in the datum folder, inside the wires datum folder.
+
+
 /obj/machinery/door/airlock
-	name = "Airlock"
+	name = "airlock"
 	icon = 'icons/obj/doors/Doorint.dmi'
 	icon_state = "door_closed"
 	power_channel = ENVIRON
@@ -50,9 +39,7 @@
 	var/aiHacking = 0
 	var/obj/machinery/door/airlock/closeOther = null
 	var/closeOtherId = null
-	var/list/signalers[12]
 	var/lockdownbyai = 0
-	autoclose = 1
 	var/assembly_type = /obj/structure/door_assembly
 	var/mineral = null
 	var/justzap = 0
@@ -61,6 +48,7 @@
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	var/hasShocked = 0 //Prevents multiple shocks from happening
 	var/frozen = 0 //special condition for airlocks that are frozen shut, this will look weird on not normal airlocks because of a lack of special overlays.
+	autoclose = 1
 
 /obj/machinery/door/airlock/command
 	name = "Airlock"
@@ -311,7 +299,7 @@ About the new airlock wires panel:
 *		one wire for controling door safetys.  When active, door does not close on someone.  When cut, door will ruin someone's shit.  When pulsed, door will immedately ruin someone's shit.
 *		one wire for controlling door speed.  When active, dor closes at normal rate.  When cut, door does not close manually.  When pulsed, door attempts to close every tick.
 */
-
+// You can find code for the airlock wires in the wire datum folder.
 
 
 /obj/machinery/door/airlock/bumpopen(mob/living/user as mob) //Airlocks now zap you when you 'bump' them open when they're electrified. --NeoFite
@@ -336,8 +324,6 @@ About the new airlock wires panel:
 	..(user)
 
 
-
-
 /obj/machinery/door/airlock/proc/isElectrified()
 	if(src.secondsElectrified != 0)
 		return 1
@@ -346,7 +332,6 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/isWireCut(var/wireIndex)
 	// You can find the wires in the datum folder.
 	return wires.IsIndexCut(wireIndex)
-
 
 /obj/machinery/door/airlock/proc/canAIControl()
 	return ((src.aiControlDisabled!=1) && (!src.isAllPowerCut()));
@@ -420,8 +405,8 @@ About the new airlock wires panel:
 	s.start() //sparks always.
 	if(electrocute_mob(user, get_area(src), src))
 		hasShocked = 1
-		sleep(10)
-		hasShocked = 0
+		spawn(10)
+			hasShocked = 0
 		return 1
 	else
 		return 0
@@ -645,13 +630,11 @@ About the new airlock wires panel:
 	return src.attack_hand(user)
 
 /obj/machinery/door/airlock/attack_hand(mob/user as mob)
-	if(!istype(usr, /mob/living/silicon))
+	if(!istype(user, /mob/living/silicon))
 		if(src.isElectrified())
 			if(src.shock(user, 100))
 				return
 
-	// No. -- cib
-	/**
 	if(ishuman(user) && prob(40) && src.density)
 		var/mob/living/carbon/human/H = user
 		if(H.getBrainLoss() >= 60)
@@ -666,7 +649,6 @@ About the new airlock wires panel:
 			else
 				visible_message("\red [user] headbutts the airlock. Good thing they're wearing a helmet.")
 			return
-	**/
 
 	if(src.p_open)
 		wires.Interact(user)
@@ -676,6 +658,8 @@ About the new airlock wires panel:
 
 
 /obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
+	// If you add an if(..()) check you must first remove the var/nowindow parameter.
+	// Otherwise it will runtime with this kind of error: null.Topic()
 	if(!nowindow)
 		..()
 	if(usr.stat || usr.restrained()|| usr.small)
@@ -689,6 +673,46 @@ About the new airlock wires panel:
 
 	if((in_range(src, usr) && istype(src.loc, /turf)) && src.p_open)
 		usr.set_machine(src)
+
+		if(!p_open)
+			if(!issilicon(usr))
+				if(!istype(usr.get_active_hand(), /obj/item/device/multitool))
+					testing("Not silicon, not using a multitool.")
+					return
+
+			var/obj/item/device/multitool/P = get_multitool(usr)
+
+			if("set_tag" in href_list)
+				if(!(href_list["set_tag"] in vars))
+					usr << "\red Something went wrong: Unable to find [href_list["set_tag"]] in vars!"
+					return 1
+				var/current_tag = src.vars[href_list["set_tag"]]
+				var/newid = copytext(reject_bad_text(input(usr, "Specify the new ID tag", src, current_tag) as null|text),1,MAX_MESSAGE_LEN)
+				if(newid)
+					vars[href_list["set_tag"]] = newid
+					initialize()
+
+			if("set_freq" in href_list)
+				var/newfreq=frequency
+				if(href_list["set_freq"]!="-1")
+					newfreq=text2num(href_list["set_freq"])
+				else
+					newfreq = input(usr, "Specify a new frequency (GHz). Decimals assigned automatically.", src, frequency) as null|num
+				if(newfreq)
+					if(findtext(num2text(newfreq), "."))
+						newfreq *= 10 // shift the decimal one place
+					if(newfreq < 10000)
+						frequency = newfreq
+						initialize()
+
+			if(href_list["unlink"])
+				P.visible_message("\The [P] buzzes in an annoying tone.","You hear a buzz.")
+
+			if(href_list["link"])
+				P.visible_message("\The [P] buzzes in an annoying tone.","You hear a buzz.")
+
+			if(href_list["buffer"])
+				P.buffer = src
 
 
 
@@ -890,7 +914,7 @@ About the new airlock wires panel:
 		return
 
 	src.add_fingerprint(user)
-	if((istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density))
+	if((istype(C, /obj/item/weapon/weldingtool) && !( src.operating ) && src.density))
 		var/obj/item/weapon/weldingtool/W = C
 		if(W.remove_fuel(0,user))
 			if(frozen)
@@ -921,7 +945,7 @@ About the new airlock wires panel:
 			beingcrowbarred = 1 //derp, Agouri
 		else
 			beingcrowbarred = 0
-		if( beingcrowbarred && (operating == -1 || density && welded && operating != 1 && src.p_open && (!src.arePowerSystemsOn() || stat & NOPOWER) && !src.locked) )
+		if( beingcrowbarred && (density && welded && !operating && src.p_open && (!src.arePowerSystemsOn() || stat & NOPOWER) && !src.locked) )
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 			if(do_after(user,40))
@@ -979,7 +1003,6 @@ About the new airlock wires panel:
 						user << "\red You need to be wielding the Fire axe to do that."
 				else
 					spawn(0)	close(1)
-
 	else
 		..()
 	return
@@ -1004,6 +1027,14 @@ About the new airlock wires panel:
 		playsound(src.loc, 'sound/machines/airlock.ogg', 30, 1)
 	if(src.closeOther != null && istype(src.closeOther, /obj/machinery/door/airlock/) && !src.closeOther.density)
 		src.closeOther.close()
+	// This worries me - N3X
+	if(autoclose  && normalspeed)
+		spawn(150)
+			autoclose()
+	else if(autoclose && !normalspeed)
+		spawn(5)
+			autoclose()
+	// </worry>
 	return ..()
 
 /obj/machinery/door/airlock/close(var/forced=0)
