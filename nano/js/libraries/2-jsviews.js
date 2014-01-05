@@ -1,13 +1,12 @@
-/*! JsRender v1.0.0-beta: http://github.com/BorisMoore/jsrender and http://jsviews.com/jsviews */
-/*
-* Optimized version of jQuery Templates, for rendering to string.
-* Does not require jQuery, or HTML DOM
-* Integrates with JsViews (http://jsviews.com/jsviews)
-* Copyright 2013, Boris Moore
-* Released under the MIT License.
-*/
-// informal pre V1.0 commit counter: v1.0.0-beta (40)
+/*! jsviews.js v1.0.0-alpha single-file version:
+includes JsRender, JsObservable and JsViews  http://github.com/BorisMoore/jsrender and http://jsviews.com/jsviews
+informal pre V1.0 commit counter: 47 (Beta Candidate) */
 
+/* JsRender:
+ *    See http://github.com/BorisMoore/jsrender and http://jsviews.com/jsrender
+ * Copyright 2013, Boris Moore
+ * Released under the MIT License.
+ */
 (function(global, jQuery, undefined) {
 	// global is the this object, which is window when running in the usual browser environment.
 	"use strict";
@@ -23,11 +22,11 @@
 //TODO	tmplFnsCache = {},
 		delimOpenChar0 = "{", delimOpenChar1 = "{", delimCloseChar0 = "}", delimCloseChar1 = "}", linkChar = "^",
 
-		rPath = /^(?:null|true|false|\d[\d.]*|([\w$]+|\.|~([\w$]+)|#(view|([\w$]+))?)([\w$.^]*?)(?:[.[^]([\w$]+)\]?)?)$/g,
-		//                                     object     helper    view  viewProperty pathTokens      leafToken
+		rPath = /^(!*?)(?:null|true|false|\d[\d.]*|([\w$]+|\.|~([\w$]+)|#(view|([\w$]+))?)([\w$.^]*?)(?:[.[^]([\w$]+)\]?)?)$/g,
+		//                                     none   object     helper    view  viewProperty pathTokens      leafToken
 
-		rParams = /(\()(?=\s*\()|(?:([([])\s*)?(?:(\^?)([#~]?[\w$.^]+)?\s*((\+\+|--)|\+|-|&&|\|\||===|!==|==|!=|<=|>=|[<>%*!:?\/]|(=))\s*|([#~]?[\w$.^]+)([([])?)|(,\s*)|(\(?)\\?(?:(')|("))|(?:\s*(([)\]])(?=\s*\.|\s*\^)|[)\]])([([]?))|(\s+)/g,
-		//          lftPrn0        lftPrn        bound         path    operator err                                                eq          path2       prn    comma   lftPrn2   apos quot      rtPrn rtPrnDot                        prn2      space
+		rParams = /(\()(?=\s*\()|(?:([([])\s*)?(?:(\^?)(!*?[#~]?[\w$.^]+)?\s*((\+\+|--)|\+|-|&&|\|\||===|!==|==|!=|<=|>=|[<>%*:?\/]|(=))\s*|(!*?[#~]?[\w$.^]+)([([])?)|(,\s*)|(\(?)\\?(?:(')|("))|(?:\s*(([)\]])(?=\s*\.|\s*\^|\s*$)|[)\]])([([]?))|(\s+)/g,
+		//          lftPrn0        lftPrn        bound            path    operator err                                                eq             path2       prn    comma   lftPrn2   apos quot      rtPrn rtPrnDot                        prn2      space
 		// (left paren? followed by (path? followed by operator) or (path followed by left paren?)) or comma or apos or quot or right paren or space
 
 		rNewLine = /[ \t]*(\r\n|\n|\r)/g,
@@ -50,7 +49,6 @@
 			"`": "&#96;"
 		},
 		tmplAttr = "data-jsv-tmpl",
-
 		$render = {},
 		jsvStores = {
 			template: {
@@ -123,7 +121,7 @@
 		// Set the tag opening and closing delimiters and 'link' character. Default is "{{", "}}" and "^"
 		// openChars, closeChars: opening and closing strings, each with two characters
 
-		if (!$viewsSub.rTag || arguments.length) {
+		if (!$viewsSub.rTag || openChars) {
 			delimOpenChar0 = openChars ? openChars.charAt(0) : delimOpenChar0; // Escape the characters - since they could be regex special characters
 			delimOpenChar1 = openChars ? openChars.charAt(1) : delimOpenChar1;
 			delimCloseChar0 = closeChars ? closeChars.charAt(0) : delimCloseChar0;
@@ -195,35 +193,49 @@
 		return found;
 	}
 
-	function getIndex() {
+	function getNestedIndex() {
 		var view = this.get("item");
 		return view ? view.index : undefined;
 	}
 
-	getIndex.depends = function() {
+	getNestedIndex.depends = function() {
 		return [this.get("item"), "index"];
+	};
+
+	function getIndex() {
+		return this.index;
+	}
+
+	getIndex.depends = function() {
+		return ["index"];
 	};
 
 	//==========
 	// View.hlp
 	//==========
 
-	function getHelper(helper, context) {
+	function getHelper(helper) {
 		// Helper method called as view.hlp(key) from compiled template, for helper functions or template parameters ~foo
 		var wrapped,
 			view = this,
-			res = context && context[helper] || (view.ctx || {})[helper];
+			ctx = view.linkCtx,
+			res = (view.ctx || {})[helper];
 
-		res = res === undefined ? view.getRsc("helpers", helper) : res;
+		if (res === undefined && ctx && ctx.ctx) {
+			res = ctx.ctx[helper];
+		}
+		if (res === undefined) {
+			res = $helpers[helper];
+		}
 
 		if (res) {
 			if (typeof res === "function") {
 				wrapped = function() {
-					// If it is of type function, we will wrap it so it gets called with view as 'this' context.
+					// If it is of type function, we will wrap it, so if called with no this pointer it will be called with the view as 'this' context.
 					// If the helper ~foo() was in a data-link expression, the view will have a 'temporary' linkCtx property too.
-					// However note that helper functions on deeper paths will not have access to view and tagCtx.
+					// Note that helper functions on deeper paths will have specific this pointers, from the preceding path.
 					// For example, ~util.foo() will have the ~util object as 'this' pointer
-					return res.apply(view, arguments);
+					return res.apply(this || view, arguments);
 				};
 				$extend(wrapped, res);
 			}
@@ -238,11 +250,11 @@
 	function convertVal(converter, view, tagCtx) {
 		// self is template object or linkCtx object
 		var tmplConverter, tag, value,
-			boundTagCtx = +tagCtx === tagCtx && tagCtx, // if value is an integer, then it is the key for the boundTagCtx
-			linkCtx = view.linkCtx;
+			boundTagCtx = +tagCtx === tagCtx && tagCtx, // if tagCtx is an integer, then it is the key for the boundTagCtx (compiled function to return the tagCtx)
+			linkCtx = view.linkCtx; // For data-link="{cvt:...}"...
 
 		if (boundTagCtx) {
-			// Call compiled function which returns the tagCtxs for current data
+			// This is a bound tag: {^{xx:yyy}}. Call compiled function which returns the tagCtxs for current data
 			tagCtx = (boundTagCtx = view.tmpl.bnds[boundTagCtx-1])(view.data, view, $views);
 		}
 
@@ -251,17 +263,17 @@
 		if (converter || boundTagCtx) {
 			tag = linkCtx && linkCtx.tag || {
 				_: {
-					inline: !linkCtx
+					inline: !linkCtx,
+					bnd: boundTagCtx
 				},
 				tagName: converter + ":",
 				flow: true,
 				_is: "tag"
 			};
 
-			tag._.bnd = boundTagCtx;
-
 			if (linkCtx) {
 				linkCtx.tag = tag;
+				tag.linkCtx = tag.linkCtx || linkCtx;
 				tagCtx.ctx = extendCtx(tagCtx.ctx, linkCtx.view.ctx);
 			}
 			tag.tagCtx = tagCtx;
@@ -293,20 +305,17 @@
 	//=============
 
 	function getResource(resourceType, itemName) {
-		var res,
-			view = this,
-			store = $views[resourceType];
-
-		res = store && store[itemName];
+		var res, store,
+			view = this;
 		while ((res === undefined) && view) {
 			store = view.tmpl[resourceType];
 			res = store && store[itemName];
 			view = view.parent;
 		}
-		return res;
+		return res || $views[resourceType][itemName];
 	}
 
-	function renderTag(tagName, parentView, tmpl, tagCtxs) {
+	function renderTag(tagName, parentView, tmpl, tagCtxs, isRefresh) {
 		// Called from within compiled template function, to render a template tag
 		// Returns the rendered tag
 
@@ -347,7 +356,7 @@
 				? parentView.getRsc("templates", tmpl) || $templates(tmpl)
 				: tmpl;
 
-			$extend( tagCtx, {
+			$extend(tagCtx, {
 				tmpl: tmpl,
 				render: renderContent,
 				index: i,
@@ -389,14 +398,18 @@
 					linkCtx.tag = tag;
 					tag.linkCtx = linkCtx;
 				}
-				if (tag._.bnd = boundTagFn || linkCtx) {
+				if (tag._.bnd = boundTagFn || linkCtx.fn) {
 					// Bound if {^{tag...}} or data-link="{tag...}"
 					tag._.arrVws = {};
+				} else if (tag.dataBoundOnly) {
+					error("{^{" + tagName + "}} tag must be data-bound");
 				}
 				tag.tagName = tagName;
 				tag.parent = parentTag = ctx && ctx.tag;
 				tag._is = "tag";
 				tag._def = tagDef;
+				//TODO better perf for childTags() - keep child tag.tags array, (and remove child, when disposed)
+				// tag.tags = [];
 				// Provide this tag on view, for addBindingMarkers on bound tags to add the tag to view._.bnds, associated with the tag id,
 			}
 			parentView_.tag = tag;
@@ -409,6 +422,7 @@
 				tags = tag.parents = tagCtxCtx.parentTags = ctx && extendCtx(tagCtxCtx.parentTags, ctx.parentTags) || {};
 				if (parentTag) {
 					tags[parentTag.tagName] = parentTag;
+					//TODO better perf for childTags:  parentTag.tags.push(tag);
 				}
 				tagCtxCtx.tag = tag;
 			}
@@ -423,22 +437,24 @@
 				callInit = undefined;
 			}
 
+			itemRet = undefined;
 			if (render = tag.render) {
 				itemRet = render.apply(tag, tagCtx.args);
 			}
-			ret += itemRet !== undefined
+			itemRet = itemRet !== undefined
 				? itemRet   // Return result of render function unless it is undefined, in which case return rendered template
-				: tagCtx.tmpl
-					// render template/content on the current data item
-					? tagCtx.render()
-					: ""; // No return value from render, and no template/content defined, so return ""
+				: tagCtx.tmpl && tagCtx.render() || (isRefresh ? undefined : "");
+				// No return value from render, and no template/content tagCtx.render(), so return undefined
+			ret =  ret ? ret + (itemRet || "") : itemRet; // If no rendered content, this will be undefined
 		}
+
 		delete tag.rendering;
 
 		tag.tagCtx = tag.tagCtxs[0];
 		tag.ctx= tag.tagCtx.ctx;
 
 		if (tag._.inline && (attr = tag.attr) && attr !== "html") {
+			// inline tag with attr set to "text" will insert HTML-encoded content - as if it was element-based innerText
 			ret = attr === "text"
 				? $converters.html(ret)
 				: "";
@@ -470,7 +486,6 @@
 				content: contentTmpl,
 				views: isArray ? [] : {},
 				parent: parentView,
-				ctx: context,
 				type: type,
 				// If the data is an array, this is an 'array view' with a views array for each child 'item view'
 				// If the data is not an array, this is an 'item view' with a views 'map' object for any child nested views
@@ -489,22 +504,23 @@
 				// Parent is an 'item view'. Add this view to its views object
 				// self._key = is the key in the parent view map
 				views[self_.key = "_" + parentView_.useKey++] = self;
+				self.index = $viewsSettings.debugMode ? noIndex : "";
+				self.getIndex = getNestedIndex;
 				tag = parentView_.tag;
 				self_.bnd = isArray && (!tag || !!tag._.bnd && tag); // For array views that are data bound for collection change events, set the
-				// view._.bnd property to true for top-level link() or data-link="{for}", or to the tag instance for a data- bound tag, e.g. {^{for ...}}
+				// view._.bnd property to true for top-level link() or data-link="{for}", or to the tag instance for a data-bound tag, e.g. {^{for ...}}
 			} else {
 				// Parent is an 'array view'. Add this view to its views array
 				views.splice(
 					// self._.key = self.index - the index in the parent view array
-					self_.key = self.index =
-						key !== undefined
-							? key
-							: views.length,
+					self_.key = self.index = key,
 				0, self);
 			}
 			// If no context was passed in, use parent context
 			// If context was passed in, it should have been merged already with parent context
 			self.ctx = context || parentView.ctx;
+		} else {
+			self.ctx = context;
 		}
 		return self;
 	}
@@ -540,6 +556,8 @@
 				tagDef.template = "" + tmpl === tmpl ? ($templates[tmpl] || $templates(tmpl)) : tmpl;
 			}
 			if (tagDef.init !== false) {
+				// Set int: false on tagDef if you want to provide just a render method, or render and template, but no constuctor or prototype.
+				// so equivalent to setting tag to render function, except you can also provide a template.
 				init = tagDef._ctr = function(tagCtx) {};
 				(init.prototype = tagDef).constructor = init;
 			}
@@ -642,7 +660,7 @@
 				// Create template object
 				tmpl = TmplObject(tmplOrMarkup, options);
 				// Compile to AST and then to compiled function
-				tmplFn(tmplOrMarkup, tmpl);
+				tmplFn(tmplOrMarkup.replace(rEscapeQuotes, "\\$&"), tmpl);
 			}
 			compileChildResources(options);
 			return tmpl;
@@ -675,8 +693,8 @@
 		htmlTag = wrapMap[tmpl.htmlTag];
 		if (htmlTag && htmlTag !== wrapMap.div) {
 			// When using JsViews, we trim templates which are inserted into HTML contexts where text nodes are not rendered (i.e. not 'Phrasing Content').
+			// Currently not trimmed for <li> tag. (Not worth adding perf cost)
 			tmpl.markup = $.trim(tmpl.markup);
-			tmpl._elCnt = true; // element content model (no rendered text nodes), not phrasing content model
 		}
 
 		return tmpl;
@@ -768,7 +786,7 @@
 			tmpl = tagCtx.tmpl;
 			context = extendCtx(context, self.ctx);
 			contentTmpl = tagCtx.content; // The wrapped content - to be added to views, below
-			if ( tagCtx.props.link === false ) {
+			if (tagCtx.props.link === false) {
 				// link=false setting on block tag
 				// We will override inherited value of link by the explicit setting link=false taken from props
 				// The child views of an unlinked view are also unlinked. So setting child back to true will not have any effect.
@@ -817,6 +835,9 @@
 					outerOnRender = undefined;
 					onRender = parentView._.onRender;
 				}
+				context = tmpl.helpers
+					? extendCtx(tmpl.helpers, context)
+					: context;
 				if ($.isArray(data) && !isLayout) {
 					// Create a view for the array, whose child views correspond to each data item. (Note: if key and parentView are passed in
 					// along with parent view, treat as insert -e.g. from view.addViews - so parentView is already the view item for array)
@@ -853,7 +874,7 @@
 	// (Compile AST then build template function)
 
 	function error(message) {
-		throw new $views.sub.Error(message);
+		throw new $viewsSub.Error(message);
 	}
 
 	function syntaxError(message) {
@@ -880,7 +901,7 @@
 
 			//    bind         tag        converter colon html     comment            code      params            slash   closeBlock
 			// /{(\^)?{(?:(?:(\w+(?=[\/\s}]))|(?:(\w+)?(:)|(>)|!--((?:[^-]|-(?!-))*)--|(\*)))\s*((?:[^}]|}(?!}))*?)(\/)?|(?:\/(\w+)))}}/g
-			// Build abstract syntax tree (AST): [ tagName, converter, params, content, hash, bindings, contentMarkup ]
+			// Build abstract syntax tree (AST): [tagName, converter, params, content, hash, bindings, contentMarkup]
 			if (html) {
 				colon = ":";
 				converter = "html";
@@ -965,8 +986,6 @@
 			content = astTop,
 			current = [, , , astTop];
 
-		markup = markup.replace(rEscapeQuotes, "\\$&");
-
 //TODO	result = tmplFnsCache[markup]; // Only cache if template is not named and markup length < ...,
 //and there are no bindings or subtemplates?? Consider standard optimization for data-link="a.b.c"
 //		if (result) {
@@ -976,7 +995,6 @@
 //		result = markup;
 
 		blockTagCheck(stack[0] && stack[0][3].pop()[0]);
-
 		// Build the AST (abstract syntax tree) under astTop
 		markup.replace(rTag, parseTag);
 
@@ -1016,7 +1034,7 @@
 			nestedTmpls = tmpl.tmpls;
 		}
 		for (i = 0; i < l; i++) {
-			// AST nodes: [ tagName, converter, params, content, hash, noError, pathBindings, contentMarkup, link ]
+			// AST nodes: [tagName, converter, params, content, hash, noError, pathBindings, contentMarkup, link]
 			node = ast[i];
 
 			// Add newline for each callout to t() c() etc. and each markup string
@@ -1098,9 +1116,9 @@
 								: "{" + hash) + ");")
 							: tagName === ">"
 								? (hasEncoder = true, "h(" + params + ");")
-								: (getsVal = true, "(v=" + params + ")!=" + (isLinkExpr ? "=" : "") + 'u?v:"";') // Strict equality just for data-link="title{:expr}" so expr=null will remove title attribute 
+								: (getsVal = true, "(v=" + params + ")!=" + (isLinkExpr ? "=" : "") + 'u?v:"";') // Strict equality just for data-link="title{:expr}" so expr=null will remove title attribute
 						)
-						: (hasTag = true, "{tmpl:" // Add this tagCtx to the compiled code for the tagCtxs to be passed to renderTag()
+						: (hasTag = true, "{view:view,tmpl:" // Add this tagCtx to the compiled code for the tagCtxs to be passed to renderTag()
 							+ (content ? nestedTmpls.length: "0") + "," // For block tags, pass in the key (nestedTmpls.length) to the nested content template
 							+ hash + ","));
 
@@ -1160,8 +1178,8 @@
 		//}
 
 		function parseTokens(all, lftPrn0, lftPrn, bound, path, operator, err, eq, path2, prn, comma, lftPrn2, apos, quot, rtPrn, rtPrnDot, prn2, space, index, full) {
-			// rParams = /(\()(?=\s*\()|(?:([([])\s*)?(?:([#~]?[\w$.^]+)?\s*((\+\+|--)|\+|-|&&|\|\||===|!==|==|!=|<=|>=|[<>%*!:?\/]|(=))\s*|([#~]?[\w$.^]+)([([])?)|(,\s*)|(\(?)\\?(?:(')|("))|(?:\s*((\))(?=\s*\.|\s*\^)|\)|\])([([]?))|(\s+)/g,
-			//          lftPrn        lftPrn2                 path    operator err                                                eq          path2       prn    comma   lftPrn2   apos quot      rtPrn rtPrnDot           prn2   space
+			//rParams = /(\()(?=\s*\()|(?:([([])\s*)?(?:(\^?)(!*?[#~]?[\w$.^]+)?\s*((\+\+|--)|\+|-|&&|\|\||===|!==|==|!=|<=|>=|[<>%*:?\/]|(=))\s*|(!*?[#~]?[\w$.^]+)([([])?)|(,\s*)|(\(?)\\?(?:(')|("))|(?:\s*(([)\]])(?=\s*\.|\s*\^)|[)\]])([([]?))|(\s+)/g,
+			//          lftPrn0        lftPrn        bound            path    operator err                                                eq             path2       prn    comma   lftPrn2   apos quot      rtPrn rtPrnDot                        prn2      space
 			// (left paren? followed by (path? followed by operator) or (path followed by paren?)) or comma or apos or quot or right paren or space
 			var expr;
 			operator = operator || "";
@@ -1169,17 +1187,17 @@
 			path = path || path2;
 			prn = prn || prn2 || "";
 
-			function parsePath(all, object, helper, view, viewProperty, pathTokens, leafToken) {
-				// rPath = /^(?:null|true|false|\d[\d.]*|([\w$]+|~([\w$]+)|#(view|([\w$]+))?)([\w$.^]*?)(?:[.[^]([\w$]+)\]?)?)$/g,
-				//                                        object   helper    view  viewProperty pathTokens       leafToken
+			function parsePath(allPath, not, object, helper, view, viewProperty, pathTokens, leafToken) {
+				// rPath = /^(?:null|true|false|\d[\d.]*|(!*?)([\w$]+|\.|~([\w$]+)|#(view|([\w$]+))?)([\w$.^]*?)(?:[.[^]([\w$]+)\]?)?)$/g,
+				//                                        none   object     helper    view  viewProperty pathTokens      leafToken
 				if (object) {
 					if (bindings) {
 						if (named === "linkTo") {
-							bindto = bindings.to = bindings.to || [];
+							bindto = bindings._jsvto = bindings._jsvto || [];
 							bindto.push(path);
 						}
 						if (!named || boundName) {
-							bindings.push(path); // Add path binding for paths on props and args,
+							bindings.push(path.slice(not.length)); // Add path binding for paths on props and args,
 //							list.push(path);
 						}
 					}
@@ -1200,12 +1218,12 @@
 
 						ret = ret + (leafToken ? "." + leafToken : "");
 
-						return ret.slice(0, 9) === "view.data"
+						return not + (ret.slice(0, 9) === "view.data"
 							? ret.slice(5) // convert #view.data... to data...
-							: ret;
+							: ret);
 					}
 				}
-				return all;
+				return allPath;
 			}
 
 			if (err) {
@@ -1216,9 +1234,14 @@
 					// We create a compiled function to get the object instance (which will be called when the dependent data of the subexpression changes, to return the new object, and trigger re-binding of the subsequent path)
 					if (!named || boundName || bindto) {
 						expr = pathStart[parenDepth];
-						if (full.length - 2 > index - expr) { // We need to compile a subexpression
+						if (full.length - 1 > index - expr) { // We need to compile a subexpression
 							expr = full.slice(expr, index + 1);
 							rtPrnDot = delimOpenChar1 + ":" + expr + delimCloseChar0; // The parameter or function subexpression
+							//TODO Optimize along the lines of:
+							//var paths = [];
+							//rtPrnDot = tmplLinks[rtPrnDot] = tmplLinks[rtPrnDot] || tmplFn(delimOpenChar0 + rtPrnDot + delimCloseChar1, tmpl, true, paths); // Compile the expression (or use cached copy already in tmpl.links)
+							//rtPrnDot.paths = rtPrnDot.paths || paths;
+
 							rtPrnDot = tmplLinks[rtPrnDot] = tmplLinks[rtPrnDot] || tmplFn(delimOpenChar0 + rtPrnDot + delimCloseChar1, tmpl, true); // Compile the expression (or use cached copy already in tmpl.links)
 							if (!rtPrnDot.paths) {
 								parseParams(expr, rtPrnDot.paths = [], tmpl);
@@ -1288,7 +1311,10 @@
 
 		//pushBindings();
 
-		return (params + " ").replace(rParams, parseTokens);
+		return (params + " ")
+			.replace(/\)\^/g, ").") // Treat "...foo()^bar..." as equivalent to "...foo().bar..."
+								//since preceding computed observables in the path will always be updated if their dependencies change
+			.replace(rParams, parseTokens);
 	}
 
 	//==========
@@ -1298,7 +1324,7 @@
 	// Merge objects, in particular contexts which inherit from parent contexts
 	function extendCtx(context, parentContext) {
 		// Return copy of parentContext, unless context is defined and is different, in which case return a new merged context
-		// If neither context nor parentContext are undefined, return undefined
+		// If neither context nor parentContext are defined, return undefined
 		return context && context !== parentContext
 			? (parentContext
 				? $extend($extend({}, parentContext), context)
@@ -1322,7 +1348,8 @@
 		$helpers = $views.helpers,
 		$tags = $views.tags,
 		$viewsSub = $views.sub,
-		$viewsSettings = $views.settings;
+		$viewsSettings = $views.settings,
+		noIndex = "Error: #index in nested view: use #getIndex()"; // Error string if debugMode, else empty
 
 	if (jQuery) {
 		////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1387,30 +1414,7 @@
 			flow: true
 		},
 		"for": {
-			render: function(val) {
-				// This function is called once for {{for}} and once for each {{else}}.
-				// We will use the tag.rendering object for carrying rendering state across the calls.
-				var self = this,
-					tagCtx = self.tagCtx,
-					noArg = !arguments.length,
-					result = "",
-					done = noArg || 0;
-
-				if (!self.rendering.done) {
-					if (noArg) {
-						result = undefined;
-					} else if (val !== undefined) {
-						result += tagCtx.render(val);
-						// {{for}} (or {{else}}) with no argument will render the block content
-						done += $.isArray(val) ? val.length : 1;
-					}
-					if (self.rendering.done = done) {
-						self.selected = tagCtx.index;
-					}
-					// If nothing was rendered we will look at the next {{else}}. Otherwise, we are done.
-				}
-				return result;
-			},
+			render: renderForBlock,
 			//onUpdate: function(ev, eventArgs, tagCtxs) {
 				//Consider adding filtering for perf optimization. However the below prevents update on some scenarios which _should_ update - namely when there is another array on which for also depends.
 				//var i, l, tci, prevArg;
@@ -1426,7 +1430,7 @@
 					self = this,
 					change = eventArgs.change;
 				if (this.tagCtxs[1] && ( // There is an {{else}}
-						   change === "insert" && ev.target.length === eventArgs.items.length // inserting, and new length is same as inserted length, so going from 0 to n
+							 change === "insert" && ev.target.length === eventArgs.items.length // inserting, and new length is same as inserted length, so going from 0 to n
 						|| change === "remove" && !ev.target.length // removing , and new length 0, so going from n to 0
 						|| change === "refresh" && !eventArgs.oldItems.length !== !ev.target.length // refreshing, and length is going from 0 to n or from n to 0
 					)) {
@@ -1443,6 +1447,18 @@
 			},
 			flow: true
 		},
+		props: {
+			prep: function(object) {
+				var key,
+					arr = [];
+				for (key in object) {
+					arr.push({key: key, prop: object[key]});
+				}
+				return arr;
+			},
+			render: renderForBlock,
+			flow: true
+		},
 		include: {
 			flow: true
 		},
@@ -1455,6 +1471,30 @@
 		}
 	});
 
+	function renderForBlock(val) {
+		// This function is called once for {{for}} and once for each {{else}}.
+		// We will use the tag.rendering object for carrying rendering state across the calls.
+		var self = this,
+			tagCtx = self.tagCtx,
+			noArg = !arguments.length,
+			result = "",
+			done = noArg || 0;
+
+		if (!self.rendering.done) {
+			if (noArg) {
+				result = undefined;
+			} else if (val !== undefined) {
+				val = self.prep ? self.prep(val) : val;
+				result += tagCtx.render(val);
+				done += $.isArray(val) ? val.length : 1;
+			}
+			if (self.rendering.done = done) {
+				self.selected = tagCtx.index;
+			}
+			// If nothing was rendered we will look at the next {{else}}. Otherwise, we are done.
+		}
+		return result;
+	}
 	//========================== Register converters ==========================
 
 	$converters({
@@ -1464,11 +1504,11 @@
 		},
 		attr: function(text) {
 			// Attribute encode: Replace < > & ' and " by corresponding entities.
-			return text != undefined ? String(text).replace(rAttrEncode, getCharEntity) : text === null ? null : ""; // null returns null, e.g. to remove attribute. undefined returns ""
+			return text != undefined ? String(text).replace(rAttrEncode, getCharEntity) : text === null ? text : ""; // null returns null, e.g. to remove attribute. undefined returns ""
 		},
 		url: function(text) {
 			// URL encoding helper.
-			return text != undefined ? encodeURI(String(text)) : text === null ? null : ""; // null returns null, e.g. to remove attribute. undefined returns ""
+			return text != undefined ? encodeURI(String(text)) : text === null ? text : ""; // null returns null, e.g. to remove attribute. undefined returns ""
 		}
 	});
 
@@ -1476,15 +1516,12 @@
 	$viewsDelimiters();
 
 })(this, this.jQuery);
-/*! JsObservable v1.0.0-alpha: http://github.com/BorisMoore/jsviews and http://jsviews.com/jsviews */
-/*
- * Subcomponent of JsViews
- * Data change events for data-linking
- *
+
+/* JsObservable:
+ *    See http://github.com/borismoore/jsobservable and http://jsviews.com/jsobservable
  * Copyright 2013, Boris Moore
  * Released under the MIT License.
  */
-// informal pre beta commit counter: v1.0.0-alpha (40) (Beta Candidate)
 
 (function(global, $, undefined) {
 	// global is the this object, which is window when running in the usual browser environment.
@@ -1500,15 +1537,15 @@
 
 	var versionNumber = "v1.0.0-alpha",
 
-		cbBindings, cbBindingsId, oldLength, _data,
+		cbBindings, cbBindingsId,
 		$eventSpecial = $.event.special,
 		$viewsSub = $.views ? $.views.sub: {},
 		cbBindingKey = 1,
 		splice = [].splice,
-		concat = [].concat,
 		$isArray = $.isArray,
 		$expando = $.expando,
 		OBJECT = "object",
+		PARSEINT = parseInt,
 		propertyChangeStr = $viewsSub.propChng = $viewsSub.propChng || "propertyChange",// These two settings can be overridden on settings after loading
 		arrayChangeStr = $viewsSub.arrChng = $viewsSub.arrChng || "arrayChange",        // jsRender, and prior to loading jquery.observable.js and/or JsViews
 		cbBindingsStore = $viewsSub._cbBnds = $viewsSub._cbBnds || {},
@@ -1516,7 +1553,8 @@
 		$isFunction = $.isFunction,
 		observeObjKey = 1,
 		observeCbKey = 1,
-		$hasData = $.hasData;
+		$hasData = $.hasData,
+		rObserveAllFilter = /^_|^jquery/i;
 
 	//========================== Top-level functions ==========================
 
@@ -1542,12 +1580,6 @@
 			: data;
 	}
 
-	function validateIndex(index) {
-		if (typeof index !== "number") {
-			throw "Invalid index.";
-		}
-	}
-
 	function resolvePathObjects(paths, root) {
 		paths = $isArray(paths) ? paths : [paths];
 
@@ -1560,7 +1592,7 @@
 		for (i = 0; i < l; i++) {
 			path = paths[i];
 			if ($isFunction(path)) {
-				splice.apply(out, [out.length,1].concat(resolvePathObjects(path.call(root, root), root)));
+				out = out.concat(resolvePathObjects(path.call(root, root), root));
 				continue;
 			} else if ("" + path !== path) {
 				root = nextObj = path;
@@ -1594,15 +1626,18 @@
 		if (!(ev.data && ev.data.off)) {
 			// Skip if !!ev.data.off: - a handler that has already been removed (maybe was on handler collection at call time - then removed by another handler)
 			var value = eventArgs.oldValue,
-				ctx = ev.data;
+				ctx = ev.data,
+				paths = ctx.paths;
 			if (ev.type === arrayChangeStr) {
-				ctx.cb.array(ev, eventArgs);
-			} else if (ctx.prop === "*" || ctx.prop === eventArgs.path) {
-				if (typeof value === OBJECT) {
-					$unobserve(wrapArray(value), ctx.path, ctx.cb);
+				(ctx.cb.array || ctx.cb)(ev, eventArgs); // If there is an arrayHandler expando on the regular handler, use it, otherwise use the regular (propertyChange) handler for arrayChange events also...
+				// Note that on data-link bindings we ensure always to have an array handler - $.noop if none is specified e.g. on the data-linked tag.)
+			} else if (ctx.prop === eventArgs.path || ctx.prop === "*") {
+				if (typeof value === OBJECT && (paths[0] || $isArray(value))) { // Note: && (paths[0] || $isArray(value)) is for perf optimization
+					//- (unobserve ongoing path, if not a leaf object, or arrayChange if array)
+					observe_apply(wrapArray(value), paths, ctx.cb, true); // unobserve
 				}
-				if (typeof (value = eventArgs.value) === OBJECT) {
-					$observe(wrapArray(value), ctx.path, ctx.cb); // If value is an array, observe wrapped array, so that observe() doesn't flatten out this argument
+				if (typeof (value = eventArgs.value) === OBJECT && (paths[0] || $isArray(value))) { // Note: && (paths[0] || $isArray(value)) is for perf optimization
+					observe_apply(wrapArray(value), paths, ctx.cb);
 				}
 				ctx.cb(ev, eventArgs);
 			}
@@ -1610,7 +1645,7 @@
 	}
 
 	function $observe() {
-		// $.observable.observe(root, [1 or more objects, path or path Array params...], callback[, contextCallback][, unobserveOrOrigRoot)
+		// $.observe(root, [1 or more objects, path or path Array params...], callback[, contextCallback][, unobserveOrOrigRoot)
 		function observeOnOff(namespace, pathStr, isArrayBinding, off) {
 			var obIdExpando = $hasData(object),
 				boundObOrArr = wrapArray(object);
@@ -1632,12 +1667,12 @@
 					el = events && events.length;
 
 					while (el--) {
-						if ((data = events[el].data) && data.cb === callback) {
+						if ((data = events[el].data) && data.cb._bnd === callback._bnd) {
 							if (isArrayBinding) {
 								// Duplicate exists, so skip. (This can happen e.g. with {^{for people ~foo=people}})
 								return;
-							} else if (pathStr === "*" && data.prop !== pathStr) {
-								$(object).off(namespace + "." + data.prop, onObservableChange);
+							} else if (pathStr === "*" && data.prop !== pathStr || data.prop === prop) {
+								$(object).off(namespace, onObservableChange);
 									// We remove this object from bindings hash (see above).
 								if (cbBindings) {
 									delete cbBindings[$.data(object, "obId")];
@@ -1646,7 +1681,9 @@
 						}
 					}
 				}
-				$(boundObOrArr).on(namespace, null, isArrayBinding ? { cb: callback } : { path: pathStr, prop: prop, cb: callback }, onObservableChange);
+
+				$(boundObOrArr).on(namespace, null, isArrayBinding ? { cb: callback } : { fullPath: path, paths: pathStr ? [pathStr] : [], prop: prop, cb: callback }, onObservableChange);
+
 				if (bindings) {
 					// Add object to bindings, and add the counter to the jQuery data on the object
 					bindings[$.data(object, "obId") || $.data(object, "obId", observeObjKey++)] = object;
@@ -1654,52 +1691,52 @@
 			}
 		}
 
-		function onUpdatedExpression(exprOb, paths, unobserve) {
+		function onUpdatedExpression(exprOb, paths) {
 			// Use the contextCb callback to execute the compiled exprOb template in the context of the view/data etc. to get the returned value, typically an object or array.
 			// If it is an array, register array binding
 			exprOb._ob = contextCb(exprOb, origRoot);
 			var origRt = origRoot;
-			return function() {
+			return function(ev, eventArgs) {
 				var obj = exprOb._ob,
 					len = paths.length;
 				if (typeof obj === OBJECT) {
 					bindArray(obj, true);
-					if (len) {
-						$unobserve(wrapArray(obj), paths, callback, contextCb);
+					if (len || $.isArray(obj)) {
+						observe_apply(obj, paths, callback, contextCb, true); // unobserve
 					}
 				}
 				obj = exprOb._ob = contextCb(exprOb, origRt);
 				// Put the updated object instance onto the exprOb in the paths array, so subsequent string paths are relative to this object
 				if (typeof obj === OBJECT) {
 					bindArray(obj);
-					if (len) {
-						$observe(wrapArray(obj), paths, callback, contextCb, origRt);
+					if (len || $.isArray(obj)) {
+						observe_apply(obj, paths, callback, contextCb, origRt);
 					}
 				}
+				callback(ev, eventArgs);
 			}
 		}
 
-		function bindArray(arr, unbind) {
-			if (callback && callback.array && $isArray(arr)) {
+		function bindArray(arr, unbind, isArray) {
+			if (isArray||$.isArray(arr)) {
 				// This is a data-bound tag which has an onArrayChange handler, e.g. {^{for}}, and the leaf object is an array
 				// - so we add the arrayChange binding
 				var prevObj = object;
 				object = arr;
-				observeOnOff(arrayChangeStr + ".observe.obs" + callback._bnd, undefined, true, unbind);
+				observeOnOff(arrayChangeStr + ".observe" + (callback? ".obs" + callback._bnd : ""), undefined, true, unbind);
 				object = prevObj;
 			}
 		}
 
-		var i, parts, prop, path, dep, object, unobserve, callback, cbId, el, data, events, contextCb, items, bindings, depth, innerCb,
+		var i, p, skip, parts, prop, path, isArray, dep, unobserve, callback, cbId, el, data, events, contextCb, items, bindings, depth, innerCb,
 			topLevel = 1,
 			ns = observeStr,
-			paths = concat.apply([], arguments),	// flatten the arguments
+			paths = Array.apply(0, arguments),
 			lastArg = paths.pop(),
-			origRoot = paths[0],
-			root = "" + origRoot !== origRoot ? paths.shift() : undefined,	// First parameter is the root object, unless a string
+			origRoot = paths.shift(),
+			root =origRoot,
+			object = root,
 			l = paths.length;
-
-		origRoot = root;
 
 		if ($isFunction(lastArg)) {
 			callback = lastArg;
@@ -1716,20 +1753,24 @@
 				l--;
 			}
 		}
-		if ($isFunction(paths[l-1])) {
+		if (l && $isFunction(paths[l-1])) {
 			contextCb = callback;
 			callback = paths.pop();
 			l--;
 		}
 
-		// Use a unique namespace (e.g. obs7) associated with each observe() callback to allow unobserve to
-		// remove onObservableChange handlers that wrap that callback
-		ns += unobserve
-			? (callback ? ".obs" + callback._bnd: "")
-			: ".obs" + (cbId = callback._bnd = callback._bnd || observeCbKey++);
+		if ($.isArray(root)) {
+			bindArray(root, unobserve, true);
+		} else {
+			// Use a unique namespace (e.g. obs7) associated with each observe() callback to allow unobserve to
+			// remove onObservableChange handlers that wrap that callback
+			ns += unobserve
+				? (callback ? ".obs" + callback._bnd: "")
+				: ".obs" + (cbId = callback._bnd = callback._bnd || observeCbKey++);
 
-		if (unobserve && l === 0 && root) {
-			$(root).off(observeStr, onObservableChange);
+			if (unobserve && l === 0 && root) {
+					observeOnOff(ns, "");
+			}
 		}
 		if (!unobserve) {
 			bindings = cbBindingsStore[cbId] = cbBindingsStore[cbId] || {};
@@ -1737,10 +1778,12 @@
 		depth = 0;
 		for (i = 0; i < l; i++) {
 			path = paths[i];
-			bindArray(object, unobserve);
+			if (path === "") {
+				continue;
+			}
 			object = root;
 			if ("" + path === path) {
-				//path = path || "*"; // This ensures that foo(person) will depend on any changes in foo
+				//path = path || "*"; // This ensures that foo(person) will depend on any changes in person
 				// - equivalent to foo(person.*) - were it legal, or to adding foo.depends = []
 				parts = path.split("^");
 				if (parts[1]) {
@@ -1766,9 +1809,9 @@
 							// This is a compiled function for binding to an object returned by a helper/data function.
 							path._cb = innerCb = onUpdatedExpression(path, paths.slice(i+1));
 							path._rt = origRoot;
-							innerCb._bnd = callback._bnd; // Set the same cbBindingsStore key as for callback, so when callback is disposed, disposal of innerCb happens too. 
+							innerCb._bnd = callback._bnd; // Set the same cbBindingsStore key as for callback, so when callback is disposed, disposal of innerCb happens too.
 						}
-						$observe(path._rt, paths.slice(0, i), path._cb, contextCb, unobserve);
+						observe_apply(path._rt, paths.slice(0, i), path._cb, contextCb, unobserve);
 						path = path._ob;
 					}
 					object = path; // For top-level calls, objects in the paths array become the origRoot for subsequent paths.
@@ -1776,57 +1819,72 @@
 				root = path;
 				parts = [root];
 			}
-			while (object && typeof object === "object" && (prop = parts.shift()) !== undefined) {
-				if ("" + prop === prop) {
-					if (prop === "") {
-						continue;
-					}
-					if ((parts.length < depth + 1) && !object.nodeType) {
-						// Add observer for each token in path starting at depth, and on to the leaf
-						if (!unobserve && (events = $hasData(object) && $._data(object))) {
-							events = events.events;
-							events = events && events.propertyChange;
-							el = events && events.length;
-							while (el--) { // Skip duplicates
-								data = events[el].data;
-								if (data && data.cb === callback && ((data.prop === prop && data.path === parts.join(".")) || data.prop === "*")) {
-									break;
+			while (object && (prop = parts.shift()) !== undefined) {
+				if (typeof object === OBJECT) {
+					if ("" + prop === prop) {
+						if (prop === "") {
+							continue;
+						}
+						if ((parts.length < depth + 1) && !object.nodeType) {
+							// Add observer for each token in path starting at depth, and on to the leaf
+							if (!unobserve && (events = $hasData(object) && $._data(object))) {
+								events = events.events;
+								events = events && events.propertyChange;
+								el = events && events.length;
+								skip = 0;
+								while (el--) { // Skip duplicates
+									data = events[el].data;
+									if (data && data.cb === callback) {
+										if (data.prop === prop || data.prop === "*") {
+											if (p = parts.join(".")) {
+												data.paths.push(p); // We will skip this binding, but if it is not a leaf binding,
+												// need to keep bindings rest of path, ready for if the object gets swapped.
+											}
+											skip++;
+										}
+									}
+								}
+								if (skip) {
+									// Duplicate binding(s) found, so move on
+									object = object[prop];
+									continue;
 								}
 							}
-							if (el > -1) {
-								// Duplicate binding found, so move on
-								object = object[prop];
-								continue;
-							}
-						}
-						if (prop === "*") {
-							if ($isFunction(object)) {
-								if (dep = object.depends) {
-									$observe(dep, callback, unobserve||origRoot);
+							if (prop === "*") {
+								if (!unobserve && events && events.length) {
+									// Remove existing bindings, since they will be duplicates with "*"
+									observeOnOff(ns, "", false, true);
 								}
-							} else {
-								observeOnOff(ns, prop);
+								if ($isFunction(object)) {
+									if (dep = object.depends) {
+										observe_apply(dep, callback, unobserve||origRoot);
+									}
+								} else {
+									observeOnOff(ns, "");
+								}
+								for (p in object) {
+									// observing "*" listens to any prop change, and also to arraychange on props of type array
+									bindArray(object[p], unobserve);
+								}
+								break;
+							} else if (prop) {
+								observeOnOff(ns + "." + prop, parts.join("."));
 							}
-							break;
-						} else if (prop && !($isFunction(dep = object[prop]) && dep.depends)) {
-							// If leaf is a computed observable (function with declared dependencies) we do not
-							// currently observe 'swapping' of the observable - only changes in its dependencies.
-							observeOnOff(ns + "." + prop, parts.join("."));
 						}
+						prop = object[prop];
 					}
-					prop = prop ? object[prop] : object;
-				}
-				if ($isFunction(prop)) {
-					if (dep = prop.depends) {
-						// This is a computed observable. We will observe any declared dependencies
-						$observe(object, resolvePathObjects(dep, object), callback, contextCb, unobserve||wrapArray(origRoot));
+					if ($isFunction(prop)) {
+						if (dep = prop.depends) {
+							// This is a computed observable. We will observe any declared dependencies
+							observe_apply(object, resolvePathObjects(dep, object), callback, contextCb, unobserve||origRoot);
+						}
+						break;
 					}
-					break;
+					object = prop;
 				}
-				object = prop;
 			}
+			bindArray(object, unobserve);
 		}
-		bindArray(object, unobserve);
 		if (cbId) {
 			removeCbBindings(bindings, cbId);
 		}
@@ -1840,27 +1898,97 @@
 		return $observe.apply(this, arguments);
 	}
 
+	function observe_apply() {
+		// $.observe(), but allowing you to include arrays within the arguments - which you want flattened.
+		return $observe.apply(0, [].concat.apply([], arguments)); // Flatten the arguments
+	}
+
 	//========================== Initialize ==========================
 
+	function $observeAll(cb) {
+		observeAll(this._data, cb);
+	}
+
+	function $unobserveAll(cb) {
+		observeAll(this._data, cb, true);
+	}
+
+	function observeAll(object, cb, unobserve, filter) {
+		function wrappedCb(ev, eventArgs) {
+				switch (eventArgs.change) {
+				case "insert":
+					observeAll(eventArgs.items, cb, false, 0);
+					break;
+				case "remove":
+					observeAll(eventArgs.items, cb, true, 0);
+					break;
+				case "refresh":
+					observeAll(eventArgs.oldItems, cb, true, 0);
+					observeAll(ev.target, cb, false, 0);
+					break;
+				case "set":
+					observeAll(eventArgs.oldValue, cb, true, 0);
+					observeAll(eventArgs.value, cb, false, 0);
+			}
+			cb.apply(this, arguments);
+		}
+
+		var l, prop,
+			isObject = $.isArray(object) ? "" : "*"; // The path string for binding all properties of an object
+
+		if (typeof object === OBJECT) {
+			if (cb) {
+				if (isObject || filter !== 0) {
+					// If an object, observe the object. If an array, only add arrayChange binding if this is a top-level call (filter !== 0),
+					// since array properties lower in the tree get arrayChange binding added during regular $.observe(array ...) binding.
+					wrappedCb._bnd = cb._bnd; // Identify wrapped callback with unwrapped callback, so unobserveAll will
+					// remove previous observeAll wrapped callback, if inner callback was the same;
+					$observe(object, isObject, wrappedCb, unobserve);
+					cb._bnd = wrappedCb._bnd; // Identify wrapped callback with unwrapped callback
+				}
+			} else {
+				$observe(object, isObject, undefined, unobserve);
+			}
+
+			if (isObject) {
+				filter = filter || $observable.filter; // To override pass in filter parameter, or replace $.observable.filter
+				for (l in object) {
+					observeAll((filter||observeAllFilter)(l, object), cb, unobserve, 0);
+				}
+			} else {
+				l = object.length;
+				while (l--) {
+					observeAll(object[l], cb, unobserve, 0);
+				}
+			}
+		}
+	}
+
+	function observeAllFilter(key, object) {
+		if (!rObserveAllFilter.test(key)) {
+			var prop = object[key];
+			return prop + "" !== prop && $.isFunction(prop)
+				? prop.set && prop.call(object) // It is a getter/setter
+				: prop;
+		}
+	}
+
 	$.observable = $observable;
+	$observable.filter = observeAllFilter;
 	$observable.Object = ObjectObservable;
 	$observable.Array = ArrayObservable;
-	$observable.observe = $observe;
-	$observable.unobserve = $unobserve;
+	$.observe = $observable.observe = $observe;
+	$.unobserve = $observable.unobserve = $unobserve;
+	$observable._apply = observe_apply;
 
 	ObjectObservable.prototype = {
 		_data: null,
 
+		observeAll: $observeAll,
+		unobserveAll: $unobserveAll,
+
 		data: function() {
 			return this._data;
-		},
-
-		observe: function(paths, callback) {
-			return $observe(this._data, paths, callback);
-		},
-
-		unobserve: function(paths, callback) {
-			return $unobserve(this._data, paths, callback);
 		},
 
 		setProperty: function(path, value, nonStrict) {
@@ -1904,7 +2032,7 @@
 					// Case of property setter/getter - with convention that property is getter and property.set is setter
 					getter = property;
 					setter = property.set === true ? property : property.set;
-					property = property.call(leaf); //get
+					property = property.call(leaf); // get - only treated as getter if also a setter. Otherwise it is simply a property of type function. See unit tests 'Can observe properties of type function'.
 				}
 			}
 
@@ -1917,7 +2045,7 @@
 					} else {
 						leaf[path] = value;
 					}
-					this._trigger(leaf, {path: path, value: value, oldValue: property});
+					this._trigger(leaf, {change: "set", path: path, value: value, oldValue: property});
 				}
 			}
 		},
@@ -1930,17 +2058,24 @@
 	ArrayObservable.prototype = {
 		_data: null,
 
+		observeAll: $observeAll,
+		unobserveAll: $unobserveAll,
+
 		data: function() {
 			return this._data;
 		},
 
 		insert: function(index, data) {
-			validateIndex(index);
-
-			if (arguments.length > 1) {
+			var _data = this._data;
+			if (arguments.length === 1) {
+				data = index;
+				index = _data.length;
+			}
+			index = PARSEINT(index);
+			if (index > -1 && index <= _data.length) {
 				data = $isArray(data) ? data : [data];
 				// data can be a single item (including a null/undefined value) or an array of items.
-				// Note the provided items are inserted without being cloned, as direct feferences to the provided objects
+				// Note the provided items are inserted without being cloned, as direct references to the provided objects
 
 				if (data.length) {
 					this._insert(index, data);
@@ -1950,18 +2085,24 @@
 		},
 
 		_insert: function(index, data) {
-			_data = this._data;
-			oldLength = _data.length;
+			var _data = this._data,
+				oldLength = _data.length;
 			splice.apply(_data, [index, 0].concat(data));
-			this._trigger({change: "insert", index: index, items: data});
+			this._trigger({change: "insert", index: index, items: data}, oldLength);
 		},
 
 		remove: function(index, numToRemove) {
-			validateIndex(index);
+			var items,
+				_data = this._data;
 
-			numToRemove = (numToRemove === undefined || numToRemove === null) ? 1 : numToRemove;
-			if (numToRemove && index > -1) {
-				var items = this._data.slice(index, index + numToRemove);
+			if (index === undefined) {
+				index = _data.length - 1;
+			}
+
+			index = PARSEINT(index);
+			numToRemove = numToRemove ? PARSEINT(numToRemove) : numToRemove === 0 ? 0 : 1; // if null or undefined: remove 1
+			if (numToRemove > -1 && index > -1) {
+				items = _data.slice(index, index + numToRemove);
 				numToRemove = items.length;
 				if (numToRemove) {
 					this._remove(index, numToRemove, items);
@@ -1971,30 +2112,34 @@
 		},
 
 		_remove: function(index, numToRemove, items) {
-			_data = this._data;
-			oldLength = _data.length;
+			var _data = this._data,
+				oldLength = _data.length;
+
 			_data.splice(index, numToRemove);
-			this._trigger({change: "remove", index: index, items: items});
+			this._trigger({change: "remove", index: index, items: items}, oldLength);
 		},
 
 		move: function(oldIndex, newIndex, numToMove) {
-			validateIndex(oldIndex);
-			validateIndex(newIndex);
+			numToMove = numToMove ? PARSEINT(numToMove) : numToMove === 0 ? 0 : 1; // if null or undefined: move 1
+			oldIndex = PARSEINT(oldIndex);
+			newIndex = PARSEINT(newIndex);
 
-			numToMove = (numToMove === undefined || numToMove === null) ? 1 : numToMove;
-			if (numToMove) {
+			if (numToMove > 0 && oldIndex > -1 && newIndex > -1 && oldIndex !== newIndex) {
 				var items = this._data.slice(oldIndex, oldIndex + numToMove);
-				this._move(oldIndex, newIndex, numToMove, items);
+				numToMove = items.length;
+				if (numToMove) {
+					this._move(oldIndex, newIndex, numToMove, items);
+				}
 			}
 			return this;
 		},
 
 		_move: function(oldIndex, newIndex, numToMove, items) {
-			_data = this._data;
-			oldLength = _data.length;
-			_data.splice( oldIndex, numToMove );
-			_data.splice.apply( _data, [ newIndex, 0 ].concat( items ) );
-			this._trigger({change: "move", oldIndex: oldIndex, index: newIndex, items: items});
+			var _data = this._data,
+				oldLength = _data.length;
+			_data.splice(oldIndex, numToMove);
+			_data.splice.apply(_data, [newIndex, 0].concat(items));
+			this._trigger({change: "move", oldIndex: oldIndex, index: newIndex, items: items}, oldLength);
 		},
 
 		refresh: function(newItems) {
@@ -2004,18 +2149,21 @@
 		},
 
 		_refresh: function(oldItems, newItems) {
-			_data = this._data;
-			oldLength = _data.length;
+			var _data = this._data,
+				oldLength = _data.length;
+
 			splice.apply(_data, [0, _data.length].concat(newItems));
-			this._trigger({change: "refresh", oldItems: oldItems});
+			this._trigger({change: "refresh", oldItems: oldItems}, oldLength);
 		},
 
-		_trigger: function(eventArgs) {
-			var length = _data.length,
+		_trigger: function(eventArgs, oldLength) {
+			var _data = this._data,
+				length = _data.length,
 				$data = $([_data]);
+
 			$data.triggerHandler(arrayChangeStr, eventArgs);
 			if (length !== oldLength) {
-				$data.triggerHandler(propertyChangeStr, {path: "length", value: length, oldValue: oldLength});
+				$data.triggerHandler(propertyChangeStr, {change: "set", path: "length", value: length, oldValue: oldLength});
 			}
 		}
 	};
@@ -2038,16 +2186,13 @@
 		}
 	};
 })(this, this.jQuery || this.jsviews);
-/*! JsViews v1.0.0-alpha: http://github.com/BorisMoore/jsviews and http://jsviews.com/jsviews */
-/*
-* Interactive data-driven views using templates and data-linking.
-* Requires jQuery, and jsrender.js (next-generation jQuery Templates, optimized for pure string-based rendering)
-*    See JsRender at  http://github.com/BorisMoore/jsrender and http://jsviews.com/jsrender
-*
-* Copyright 2013, Boris Moore
-* Released under the MIT License.
-*/
-// informal pre beta commit counter: v1.0.0-alpha (41) (Beta Candidate)
+
+/* JsViews:
+ * Interactive data-driven views using templates and data-linking.
+ *    See http://github.com/BorisMoore/jsviews and http://jsviews.com/jsviews
+ * Copyright 2013, Boris Moore
+ * Released under the MIT License.
+ */
 
 (function(global, $, undefined) {
 	// global is the this object, which is window when running in the usual browser environment.
@@ -2084,13 +2229,14 @@
 		topView = $viewsSub.View(undefined, "top"), // Top-level view
 		$isFunction = $.isFunction,
 		$templates = $views.templates,
+		$converters = $views.converters,
 		$observable = $.observable,
 		$observe = $observable.observe,
 		jsvAttrStr = "data-jsv",
-		$viewsLinkAttr = $viewsSettings.linkAttr || "data-link",  // Allows override on settings prior to loading jquery.views.js
+		$viewsLinkAttr = $viewsSettings.linkAttr || "data-link", // Allows override on settings prior to loading jquery.views.js
 
 		// These two settings can be overridden on settings after loading jsRender, and prior to loading jquery.observable.js and/or JsViews
-		propertyChangeStr = $viewsSettings.propChng = $viewsSettings.propChng || "propertyChange",
+		propertyChangeStr = $viewsSub.propChng = $viewsSub.propChng || "propertyChange",
 		arrayChangeStr = $viewsSub.arrChng = $viewsSub.arrChng || "arrayChange",
 
 		cbBindingsStore = $viewsSub._cbBnds = $viewsSub._cbBnds || {},
@@ -2098,6 +2244,9 @@
 		onBeforeChangeStr = "onBeforeChange",
 		onAfterChangeStr = "onAfterChange",
 		onAfterCreateStr = "onAfterCreate",
+		CHECKED = "checked",
+		CHECKBOX = "checkbox",
+		RADIO = "radio",
 		closeScript = '"></script>',
 		openScript = '<script type="jsv',
 		bindElsSel = "script,[" + jsvAttrStr + "]",
@@ -2108,30 +2257,36 @@
 			html: "html",
 			text: "text"
 		},
-		valueBinding = { from: { fromAttr: "value" }, to: { toAttr: "value"} },
+		valueBinding = { from: "value", to: "value"},
 		oldCleanData = $.cleanData,
 		oldJsvDelimiters = $viewsSettings.delimiters,
 		error = $viewsSub.error,
 		syntaxError = $viewsSub.syntaxError,
-		// rFirstElem = /<(?!script)(\w+)([>]*\s+on\w+\s*=)?[>\s]/, // This was without the DomLevel0 test.
 		rFirstElem = /<(?!script)(\w+)(?:[^>]*(on\w+)\s*=)?[^>]*>/,
+		rEscapeQuotes = /['"\\]/g, // Escape quotes and \ character
 		safeFragment = document.createDocumentFragment(),
 		qsa = document.querySelector,
 
 		// elContent maps tagNames which have only element content, so may not support script nodes.
-		elContent = { ol: 1, ul: 1, table: 1, tbody: 1, thead: 1, tfoot: 1, tr: 1, colgroup: 1, dl: 1, select: 1, optgroup: 1 },
+		elContent = {ol: 1, ul: 1, table: 1, tbody: 1, thead: 1, tfoot: 1, tr: 1, colgroup: 1, dl: 1, select: 1, optgroup: 1, svg: 1, svg_ns: 1},
 		badParent = {tr: "table"},
 		// wrapMap provide appropriate wrappers for inserting innerHTML, used in insertBefore
+		// We have to close these tags to support XHTML (#13200)
+		// TODO investigate whether more recent jQuery implementation using wrapMap in domManip/$().html() etc. is better optimized now...
 		wrapMap = $viewsSettings.wrapMap = {
-			option: [ 1, "<select multiple='multiple'>", "</select>" ],
-			legend: [ 1, "<fieldset>", "</fieldset>" ],
-			thead: [ 1, "<table>", "</table>" ],
-			tr: [ 2, "<table><tbody>", "</tbody></table>" ],
-			td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ],
-			col: [ 2, "<table><tbody></tbody><colgroup>", "</colgroup></table>" ],
-			area: [ 1, "<map>", "</map>" ],
-			svg: [1, "<svg>", "</svg>"],
-			div: [1, "x<div>", "</div>"] // Needed in IE7 to serialize link tags correctly, insert comments correctly, etc.
+			option: [1, "<select multiple='multiple'>", "</select>"],
+			legend: [1, "<fieldset>", "</fieldset>"],
+			area: [1, "<map>", "</map>"],
+			param: [1, "<object>", "</object>"],
+			thead: [1, "<table>", "</table>"],
+			tr: [2, "<table><tbody>", "</tbody></table>"],
+			td: [3, "<table><tbody><tr>", "</tr></tbody></table>"],
+			col: [2, "<table><tbody></tbody><colgroup>", "</colgroup></table>"],
+			svg_ns: [1, "<svg>", "</svg>"],
+
+			// IE6-8 can't serialize link, script, style, or any html5 (NoScope) tags,
+			// unless wrapped in a div with non-breaking characters in front of it.
+			div: jQuery.support.htmlSerialize ? [0, "", ""] : [1, "X<div>", "</div>"]
 		},
 		voidElems = {br: 1, img: 1, input: 1, hr: 1, area: 1, base: 1, col: 1, link: 1, meta: 1,
 			command: 1, embed: 1, keygen: 1, param: 1, source: 1, track: 1, wbr: 1},
@@ -2140,7 +2295,7 @@
 		bindingStore = {},
 		bindingKey = 1,
 		rViewPath = /^#(view\.?)?/,
-		rConvertMarkers = /(^|(\/>)|(<\/\w+>)|>|)(\s*)([#\/]\d+[_^])`(\s*)(<\w+(?=[\s\/>]))?|\s*(?:(<\w+(?=[\s\/>]))|(<\/\w+>)(\s*)|(\/>)\s*)/g,
+		rConvertMarkers = /(^|(\/>)|<\/(\w+)>|>|)(\s*)([#\/]\d+[_^])`(\s*)(<\w+(?=[\s\/>]))?|\s*(?:(<\w+(?=[\s\/>]))|<\/(\w+)>(\s*)|(\/>)\s*)/g,
 		rOpenViewMarkers = /(#)()(\d+)(_)/g,
 		rOpenMarkers = /(#)()(\d+)([_^])/g,
 		rViewMarkers = /(?:(#)|(\/))(\d+)(_)/g,
@@ -2156,37 +2311,50 @@
 	//===============
 	// Event handlers
 	//===============
+	function updateTag(value) {
+		var linkedElem = this.linkedElem;
+		if (linkedElem) {
+			elemChangeHandler({
+				target: linkedElem[0],
+				stopImmediatePropagation: $.noop
+			}, value);
+		}
+	}
 
-	function elemChangeHandler(ev) {
-		var setter, cancel, fromAttr, linkCtx, sourceValue, cvtBack, cnvtName, target, $source, view, binding, bindings, l, oldLinkCtx, onBeforeChange, onAfterChange, tag,
+	function elemChangeHandler(ev, sourceValue) {
+		var setter, cancel, fromAttr, linkCtx, cvtBack, cnvtName, target, $source, view, binding, bindings, l, oldLinkCtx, onBeforeChange, onAfterChange, tag, to, eventArgs,
 			source = ev.target,
-			to = source._jsvBnd;
+			bindings = source._jsvBnd,
+			splitBindings = /&(\d+)\+?/g;
 
 		// _jsvBnd is a string with the syntax: "&bindingId1&bindingId2"
-		if (to) {
-			bindings = to.slice(1).split("&");
-			l = bindings.length;
-			while (l--) {
-				if (binding = bindingStore[bindings[l]]) {
+		if (bindings) {
+			while (binding = splitBindings.exec(bindings)) {
+				if (binding = bindingStore[binding[1]]) {
 					if (to = binding.to) {
 						// The binding has a 'to' field, which is of the form [[targetObject, toPath], cvtBack]
 						linkCtx = binding.linkCtx;
 						view = linkCtx.view;
 						tag = linkCtx.tag;
 						$source = $(source);
-						onBeforeChange = view.hlp(onBeforeChangeStr, linkCtx.ctx);
-						onAfterChange = view.hlp(onAfterChangeStr, linkCtx.ctx);
+						onBeforeChange = view.hlp(onBeforeChangeStr); // TODO Can we optimize this and other instances of same?
+						onAfterChange = view.hlp(onAfterChangeStr); // TODO Can we optimize this and other instances of same
 						fromAttr = defaultAttr(source);
 						setter = fnSetters[fromAttr];
-						sourceValue = $isFunction(fromAttr) ? fromAttr(source) : setter ? $source[setter]() : $source.attr(fromAttr);
+						if (sourceValue === undefined) {
+							sourceValue = $isFunction(fromAttr)
+								? fromAttr(source)
+								: setter
+									? $source[setter]()
+									: $source.attr(fromAttr);
+						}
 						cnvtName = to[1];
 						to = to[0]; // [object, path]
 						if (cnvtName) {
 							if ($isFunction(cnvtName)) {
 								cvtBack = cnvtName;
 							} else {
-								cvtBack = view.tmpl.converters;
-								cvtBack = cvtBack && cvtBack[cnvtName] || $views.converters[cnvtName];
+								cvtBack = view.getRsc("converters", cnvtName)
 							}
 						}
 						if (cvtBack) {
@@ -2196,12 +2364,14 @@
 						// Set linkCtx on view, dynamically, just during this handler call
 						oldLinkCtx = view.linkCtx;
 						view.linkCtx = linkCtx;
-						if ((!onBeforeChange || !(cancel = onBeforeChange.call(view, ev, sourceValue) === false)) &&
-								(!tag || !tag.onBeforeChange || !(cancel = tag.onBeforeChange(ev, sourceValue) === false)) &&
+						eventArgs = {
+							change: "change",
+							oldValue: linkCtx._val,
+							value: sourceValue
+						};
+						if ((!onBeforeChange || !(cancel = onBeforeChange.call(linkCtx, ev, eventArgs) === false)) &&
+								(!tag || !tag.onBeforeChange || !(cancel = tag.onBeforeChange(ev, eventArgs) === false)) &&
 								sourceValue !== undefined) {
-							if (tag && tag.onChange) {
-								sourceValue = tag.onChange(sourceValue);
-							}
 							target = to[0]; // [object, path]
 							if (sourceValue !== undefined && target) {
 								target = target._jsvOb ? target._ob : target;
@@ -2209,11 +2379,14 @@
 									tag._.chging = true; // marker to prevent tag change event triggering its own refresh
 								}
 								$observable(target).setProperty(to[2] || to[1], sourceValue);
-								if (tag) {
-									delete tag._.chging; // clear the marker
-								}
 								if (onAfterChange) {
-									onAfterChange.call(linkCtx, ev);
+									onAfterChange.call(linkCtx, ev, eventArgs);
+								}
+								if (tag) {
+									if (tag.onAfterChange) {
+										tag.onAfterChange(ev, eventArgs);
+									}
+									delete tag._.chging; // clear the marker
 								}
 							}
 						}
@@ -2228,23 +2401,20 @@
 	}
 
 	function propertyChangeHandler(ev, eventArgs, linkFn) {
-		var attr, setter, changed, sourceValue, css, tag, prevNode, nextNode, inlineTag,
+		var attr, sourceValue, tag,
 			linkCtx = this,
 			source = linkCtx.data,
 			target = linkCtx.elem,
 			cvt = linkCtx.convert,
-			attrOrProp = "attr",
 			parentElem = target.parentNode,
 			targetElem = parentElem,
-			$target = $(target),
 			view = linkCtx.view,
 			oldCtx = view.ctx,
 			oldLinkCtx = view.linkCtx,
 			onEvent = view.hlp(onBeforeChangeStr);
 
-		// Set linkCtx and ctx on view, dynamically, just during this handler call
+		// Set linkCtx on view, dynamically, just during this handler call
 		view.linkCtx = linkCtx;
-		view.ctx = linkCtx.ctx;
 
 		if (parentElem && (!onEvent || !(eventArgs && onEvent.call(linkCtx, ev, eventArgs) === false))
 				// If data changed, the ev.data is set to be the path. Use that to filter the handler action...
@@ -2253,24 +2423,37 @@
 			if (eventArgs) {
 				linkCtx.eventArgs = eventArgs;
 			}
-			if (!ev || eventArgs || linkCtx._initVal) {
+			if (eventArgs || linkCtx._initVal) {
 				delete linkCtx._initVal;
 				sourceValue = linkFn.call(view.tmpl, source, view, $views);
-				// Compiled link expression for linkTag: return tagCtx or tagCtxs
+				// Compiled link expression for linkTag: return value (in case of {{: ...}} with no cvt or cvtBk), or tagCtx or tagCtxs
 
-				attr = linkCtx.attr || defaultAttr(target, true, cvt !== undefined);
+				attr = getTargetVal(sourceValue, linkCtx, tag,
+						linkCtx.attr || defaultAttr(target, true, cvt !== undefined)
+					);
 				if (tag = linkCtx.tag) {
 					// Existing tag instance
-					if (tag._.chging || eventArgs && tag.onUpdate && tag.onUpdate(ev, eventArgs, sourceValue) === false || attr === "none") {
-						// onUpdate returned false, or attr === "none",or this is an update coming from the tags own change event
-						// - so don't refresh the tag: we just need to bind, and we are done
+					if (eventArgs && tag.onUpdate && tag.onUpdate(ev, eventArgs, sourceValue) === false || attr === "none") {
+						// onUpdate returned false, or attr === "none", or this is an update coming from the tag's own change event
+						// - so don't refresh the tag: we just set the new tagCtxs from the sourceValue,
+						// (which may optionally have been modifed in onUpdate()...) and then bind, and we are done
+						tag.tagCtxs = sourceValue = sourceValue[0] ? sourceValue : [sourceValue];
+						tag.tagCtx = sourceValue[0];
+						if (attr === "html") {
+							tag.onBeforeLink && tag.onBeforeLink();
+						}
+						callAfterLink(tag, tag.tagCtx);
 						observeAndBind(linkCtx, source, target);
 						view.linkCtx = oldLinkCtx;
 						return;
 					}
+					if (tag._.chging) {
+						return;
+					}
+
 					sourceValue = tag.tagName.slice(-1) === ":" // Call convertVal if it is a {{cvt:...}} - otherwise call renderTag
 						? $views._cnvt(tag.tagName.slice(0, -1), view, sourceValue)
-						: $views._tag(tag, view, view.tmpl, sourceValue);
+						: $views._tag(tag, view, view.tmpl, sourceValue, true);
 				} else if (linkFn._ctxs) {
 					// For {{: ...}} without a convert or convertBack, we already have the sourceValue, and we are done
 					// For {{: ...}} with either cvt or cvtBack we call convertVal to get the sourceValue and instantiate the tag
@@ -2278,130 +2461,224 @@
 					cvt = cvt === "" ? "true" : cvt; // If there is a cvtBack but no cvt, set cvt to "true"
 					sourceValue = cvt // Call convertVal if it is a {{cvt:...}} - otherwise call renderTag
 						? $views._cnvt(cvt, view, sourceValue) // convertVal
-						: $views._tag(linkFn._ctxs, view, view.tmpl, sourceValue); // renderTag
+						: $views._tag(linkFn._ctxs, view, view.tmpl, sourceValue, true); // renderTag
 					tag = view._.tag; // In both convertVal and renderTag we have instantiated a tag
 					attr = linkCtx.attr || attr; // linkCtx.attr may have been set to tag.attr during tag instantiation in renderTag
 				}
-				if (tag) {
-					// Initialize the tag with element references
-					tag.parentElem = (linkCtx.expr || tag._elCnt) ? target : target.parentNode;
-					prevNode = tag._prv;
-					nextNode = tag._nxt;
-					attr = tag.attr || attr;
-					tag.refresh = refreshTag;
-				}
 
-				if ($isFunction(sourceValue)) {
-					error(linkCtx.expr + ": missing parens");
+				if (updateContent(sourceValue, linkCtx, attr, tag)
+						&& eventArgs
+						&& (onEvent = view.hlp(onAfterChangeStr))) {
+					onEvent.call(linkCtx, ev, eventArgs);
 				}
+			}
 
-				if (attr === "visible") {
-					attr = "css-display";
-					sourceValue = sourceValue
-					// Make sure we set the correct display style for showing this particular element ("block", "inline" etc.)
-						? getElementDefaultDisplay(target)
-						: "none";
-				}
-				if (css = attr.lastIndexOf("css-", 0) === 0 && attr.substr(4)) {
-// Possible optimization for perf on integer values
-//					prev = $.style(target, css);
-//					if (+sourceValue === sourceValue) {
-//						// support using integer data values, e.g. 100 for width:"100px"
-//						prev = parseInt(prev);
-//					}
-//					if (changed = prev !== sourceValue) {
-//						$.style(target, css, sourceValue);
-//					}
-					if (changed = $.style(target, css) !== sourceValue) {
-						$.style(target, css, sourceValue);
+			if (tag) {
+				tag.contents = getContents;
+				tag.nodes = getNodes;
+				tag.childTags = getChildTags;
+				tag.currentCtxs = getCurrentCtxs;
+				tag.update = updateTag;
+				tag.refresh = refreshTag;
+				callAfterLink(tag, tag.tagCtx);
+			}
+			if ((tag = linkCtx.tag) && tag.tagName.slice(-1) !== ":") {
+				// See also for issue https://github.com/BorisMoore/jsviews/issues/158 arrayChange support on data-link etc.
+				// This code is partial support for the above issue
+				linkCtx._hdlr.array = tag.onArrayChange ?
+					function(ev, eventArgs) {
+						linkCtx.tag.onArrayChange(ev, eventArgs);
 					}
-				} else if (attr !== "link") { // attr === "link" is for tag controls which do data binding but have no rendered output or target
-					if (attr === "value") {
-						if (target.type === "checkbox") {
-							sourceValue = sourceValue && sourceValue !== "false";
-							// The string value "false" can occur with data-link="checked{attr:expr}" - as a result of attr, and hence using convertVal()
-							attrOrProp = "prop";
-							attr = "checked";
-							// We will set the "checked" property
-							// We will compare this with the current value
-						}
-					} else if (attr === "radio") {
-						// This is a special binding attribute for radio buttons, which corresponds to the default 'to' binding.
-						// This allows binding both to value (for each input) and to the default checked radio button (for each input in named group,
-						// e.g. binding to parent data).
-						// Place value binding first: <input type="radio" data-link="value{:name} {:#get('data').data.currency:} " .../>
-						// or (allowing any order for the binding expressions):
-						// <input type="radio" value="{{:name}}" data-link="{:#get('data').data.currency:} value^{:name}" .../>
+					: $.noop; // If tag has no onArrayChange handler, then here we ensure that neither {^{tag myArray}} nor
+										// <foo data-link="{tag myArray}"></foo> will update when an array change occurs on myArray, or on an array that tag depends on.
+			}
+			observeAndBind(linkCtx, source, target);
 
-						if (target.value === ("" + sourceValue)) {
-							// If the data value corresponds to the value attribute of this radio button input, set the checked property to true
-							sourceValue = true;
-							attrOrProp = "prop";
-							attr = "checked";
-						} else {
-							// Otherwise, go straight to observeAndBind, without updating.
-							// (The browser will remove the 'checked' attribute, when another radio button in the group is checked).
-							observeAndBind(linkCtx, source, target);
-							view.linkCtx = oldLinkCtx;
-							return;
-						}
-					} else if (attr === "selected" || attr === "disabled" || attr === "multiple" || attr === "readlonly") {
-						sourceValue = (sourceValue && sourceValue !== "false") ? attr : null;
-						// Use attr, not prop, so when the options (for example) are changed dynamically, but include the previously selected value,
-						// they will still be selected after the change
+			// Remove dynamically added linkCtx from view
+			view.linkCtx = oldLinkCtx;
+		}
+	}
+
+	function getTargetVal(sourceValue, linkCtx, tag, attr) {
+		var currentValue, setter, css, $target,
+			target = tag && tag.parentElem || linkCtx.elem;
+
+		if (sourceValue !== undefined) {
+			$target = $(target);
+			attr = tag && tag.attr || attr;
+			if ($isFunction(sourceValue)) {
+				error(linkCtx.expr + ": missing parens");
+			}
+
+			if (attr === "visible") {
+				attr = "css-display";
+			}
+			if (css = /^css-/.test(attr) && attr.slice(4)) {
+				currentValue = $.style(target, css);
+				if (+sourceValue === sourceValue) {
+					// Optimization for perf on integer values - e.g. css-width{:width+'px'}
+					currentValue = parseInt(currentValue);
+				}
+				currentValue = $.style(target, css);
+			} else if (attr !== "link") { // attr === "link" is for tag controls which do data binding but have no rendered output or target
+				if (attr === "value") {
+					if (target.type === CHECKBOX) {
+						currentValue = $target.prop(attr = CHECKED);
 					}
+				} else if (attr === RADIO) {
+					if (target.value === ("" + sourceValue)) {
+						currentValue = $target.prop(CHECKED);
+					} else {
+						return attr;
+					}
+				}
 
+				if (currentValue === undefined) {
 					setter = fnSetters[attr];
+					currentValue = setter ? $target[setter]() : $target.attr(attr);
+				}
+			}
+			linkCtx._val = currentValue;
+		}
+		return attr;
+	}
 
-					if (setter) {
-						if (changed = tag || $target[setter]() !== sourceValue) {
-							if (attr === "html") {
-								if (tag) {
-									inlineTag = tag._.inline;
-									tag.refresh(sourceValue);
-									if (!inlineTag && tag._.inline) {
-										// data-linked tag: data-link="{tagname ...}" has been converted to inline
-										// We will skip the observeAndBind call below, since the inserted tag binding above replaces that binding
-										view.linkCtx = oldLinkCtx;
-										return;
-									}
-								} else {
-									// data-linked value: data-link="expr" or data-link="{:expr}" or data-link="{:expr:}" (with no convert or convertBack)
-									$target.empty();
-									targetElem = target;
-									view.link(source, targetElem, prevNode, nextNode, sourceValue, tag && {tag: tag._tgId});
-								}
-							} else if (attr === "text" && !target.children[0]) {
-								// This code is faster then $target,text()
-								if (target.textContent !== undefined) {
-									target.textContent = sourceValue;
-								} else {
-									target.innerText = sourceValue === null ? "" : sourceValue;
-								}
-							} else {
-								$target[setter](sourceValue);
+	function updateContent(sourceValue, linkCtx, attr, tag) {
+		// When called for a tag, either in tag.refresh() or propertyChangeHandler(), returns a promise (and supports async)
+		// When called (in propertyChangeHandler) for target HTML returns true
+		// When called (in propertyChangeHandler) for other targets returns boolean for "changed"
+		var setter, changed, prevNode, nextNode, promise, nodesToRemove, useProp,
+			renders = sourceValue !== undefined,
+			source = linkCtx.data,
+			target = tag && tag.parentElem || linkCtx.elem,
+			$target = $(target),
+			view = linkCtx.view,
+			targetVal = linkCtx._val,
+			oldCtx = view.ctx,
+			oldLinkCtx = view.linkCtx,
+			// If not a tag and not targeting HTML, we can use the ._val obtained from getTargetVal()
+			// and only update when the new value (sourceValue) has changed from the previous one
+			change = tag || attr === "html";
+		if (tag) {
+			// Initialize the tag with element references
+			tag.parentElem = tag.parentElem || (linkCtx.expr || tag._elCnt) ? target : target.parentNode;
+			prevNode = tag._prv;
+			nextNode = tag._nxt;
+		}
+		if (!renders) {
+			if (attr === "html" && tag && tag.onBeforeLink) {
+				tag.onBeforeLink();
+			}
+			return;
+		}
+
+		if (/^css-/.test(attr)) {
+			if (attr === "css-display") {
+				sourceValue = sourceValue
+				// Make sure we set the correct display style for showing this particular element ("block", "inline" etc.)
+					? getElementDefaultDisplay(target)
+					: "none";
+			}
+			if (change = change || targetVal !== sourceValue) {
+				$.style(target, attr.slice(4), sourceValue);
+			}
+		} else if (attr !== "link") { // attr === "link" is for tag controls which do data binding but have no rendered output or target
+			if (attr === CHECKED) {
+				useProp = 1;
+				sourceValue = sourceValue && sourceValue !== "false";
+					// The string value "false" can occur with data-link="checked{attr:expr}" - as a result of attr, and hence using convertVal()
+					// We will set the "checked" property
+					// We will compare this with the current value
+			} else if (attr === RADIO) {
+				// This is a special binding attribute for radio buttons, which corresponds to the default 'to' binding.
+				// This allows binding both to value (for each input) and to the default checked radio button (for each input in named group,
+				// e.g. binding to parent data).
+				// Place value binding first: <input type="radio" data-link="value{:name} {:#get('data').data.currency:} " .../>
+				// or (allowing any order for the binding expressions):
+				// <input type="radio" value="{{:name}}" data-link="{:#get('data').data.currency:} value^{:name}" .../>
+
+				if (target.value === ("" + sourceValue)) {
+					// If the data value corresponds to the value attribute of this radio button input, set the checked property to true
+					sourceValue = true;
+					useProp = 1;
+					attr = CHECKED;
+				} else {
+					// Otherwise, go straight to observeAndBind, without updating.
+					// (The browser will remove the 'checked' attribute, when another radio button in the group is checked).
+					observeAndBind(linkCtx, source, target);
+					return;
+				}
+			} else if (attr === "selected" || attr === "disabled" || attr === "multiple" || attr === "readlonly") {
+				sourceValue = (sourceValue && sourceValue !== "false") ? attr : null;
+				// Use attr, not prop, so when the options (for example) are changed dynamically, but include the previously selected value,
+				// they will still be selected after the change
+			}
+
+			if (setter = fnSetters[attr]) {
+				if (attr === "html") {
+					// Set linkCtx and ctx on view, dynamically, just during this handler call
+					view.linkCtx = linkCtx;
+					view.ctx = linkCtx.ctx;
+					if (tag && tag._.inline) {
+						nodesToRemove = tag.nodes(true);
+						if (tag._elCnt) {
+							if (prevNode && prevNode !== nextNode) {
+								// This prevNode will be removed from the DOM, so transfer the view tokens on prevNode to nextNode of this 'viewToRefresh'
+								transferViewTokens(prevNode, nextNode, target, tag._tgId, "^", true);
 							}
+							prevNode = prevNode
+								? prevNode.previousSibling
+								: nextNode
+									? nextNode.previousSibling
+									: target.lastChild;
+						}
+						// Remove HTML nodes
+						$(nodesToRemove).remove();
+
+						if (tag && tag.onBeforeLink) {
+							tag.onBeforeLink();
+						}
+						// Insert and link new content
+						promise = view.link(view.data, target, prevNode, nextNode, sourceValue, tag && {tag: tag._tgId, lazyLink: tag.tagCtx.props.lazyLink});
+					} else {
+						// data-linked value targeting innerHTML: data-link="html{:expr}"
+						if (renders) {
+							$target.empty();
+						}
+						if (tag && tag.onBeforeLink) {
+							tag.onBeforeLink();
+						}
+						if (renders) {
+							promise = view.link(source, target, prevNode, nextNode, sourceValue, tag && {tag: tag._tgId});
+						}
+					}
+					// Remove dynamically added linkCtx and ctx from view
+					view.linkCtx = oldLinkCtx;
+					view.ctx = oldCtx;
+				} else if (change = change || targetVal !== sourceValue) {
+					if (attr === "text" && target.children && !target.children[0]) {
+						// This code is faster then $target.text()
+						if (target.textContent !== undefined) {
+							target.textContent = sourceValue;
+						} else {
+							target.innerText = sourceValue === null ? "" : sourceValue;
+						}
+					} else {
+						$target[setter](sourceValue);
+					}
 // Removing this for now, to avoid side-effects when you programmatically set the value, and want the focus to stay on the text box
 //							if (target.nodeName.toLowerCase() === "input") {
 //								$target.blur(); // Issue with IE. This ensures HTML rendering is updated.
 //							}
-						}
-					} else if (changed = $target[attrOrProp](attr) != sourceValue) {
-						// Setting an attribute to undefined should remove the attribute
-						$target[attrOrProp](attr, sourceValue === undefined && attrOrProp === "attr" ? null : sourceValue);
-					}
+							// Data link the new contents of the target node
 				}
-
-				if (eventArgs && changed && (onEvent = view.hlp(onAfterChangeStr))) {
-					onEvent.call(linkCtx, ev, eventArgs);
-				}
+			} else if (change = change || targetVal !== sourceValue) {
+				// Setting an attribute to undefined should remove the attribute
+				$target[useProp ? "prop" : "attr"](attr, sourceValue === undefined && !useProp ? null : sourceValue);
 			}
-			observeAndBind(linkCtx, source, target);
-
-			// Remove dynamically added linkCtx and ctx from view
-			view.linkCtx = oldLinkCtx;
-			view.ctx = oldCtx;
+			linkCtx._val = sourceValue;
 		}
+		return promise || change;
 	}
 
 	function arrayChangeHandler(ev, eventArgs) {
@@ -2409,7 +2686,7 @@
 			onBeforeChange = self.hlp(onBeforeChangeStr),
 			onAfterChange = self.hlp(onAfterChangeStr);
 
-		if (!onBeforeChange || onBeforeChange.call(ev, eventArgs) !== false) {
+		if (!onBeforeChange || onBeforeChange.call(this, ev, eventArgs) !== false) {
 			if (eventArgs) {
 				// This is an observable action (not a trigger/handler call from pushValues, or similar, for which eventArgs will be null)
 				var action = eventArgs.change,
@@ -2506,12 +2783,12 @@
 			attr = $viewsSettings.merge[nodeName];
 		return attr
 			? (to
-				? ((nodeName === "input" && elem.type === "radio") // For radio buttons, bind from value, but bind to 'radio' - special value.
-					? "radio"
-					: attr.to.toAttr)
-				: attr.from.fromAttr)
+				? ((nodeName === "input" && elem.type === RADIO) // For radio buttons, bind from value, but bind to 'radio' - special value.
+					? RADIO
+					: attr.to)
+				: attr.from)
 			: to
-				? linkGetVal ? "text" : "html" // Default innerText for data-link="a.b.c" or data-link="{:a.b.c}" - otherwise innerHTML
+				? linkGetVal ? "text" : "html" // Default innerText for data-link="a.b.c" or data-link="{:a.b.c}" (with or without converters)- otherwise innerHTML
 				: ""; // Default is not to bind from
 	}
 
@@ -2595,7 +2872,9 @@
 		// Insert binding markers into the rendered template output, which will get converted to appropriate
 		// data-jsv attributes (element-only content) or script marker nodes (phrasing or flow content), in convertMarkers,
 		// within view.link, prior to inserting into the DOM. Linking will then bind based on these markers in the DOM.
-		var id, tag, end;
+		// Added view markers: #m_...VIEW.../m_
+		// Added tag markers: #m^...TAG..../m^
+		var id, tag, end, elem;
 		if (tmplBindingKey) {
 			// This is a binding marker for a data-linked tag {^{...}}
 			end = "^`";
@@ -2611,7 +2890,7 @@
 					flow: true
 				};
 			id = tag._tgId;
-			tag.refresh = refreshTag;
+//??			tag.refresh = refreshTag;
 			if (!id) {
 				bindingStore[id = bindingKey++] = tag; // Store the tag temporarily, ready for databinding.
 				// During linking, in addDataBinding, the tag will be attached to the linkCtx,
@@ -2624,9 +2903,10 @@
 			end = "_`";
 			viewStore[id = view._.id] = view;
 		}
-		// Example: "_#23`TheValue_/23`"
+		// Example: "#23^TheValue/23^"
 		return "#" + id + end
-			+ (value === undefined ? "" : value) // For {^{:name}} this gives the equivalent semantics to compiled (v=data.name)!=u?v:""; used in {{:name}} or data-link="name"
+			+ (value === undefined ? "" : value)  // For {^{:name}} this gives the equivalent semantics to compiled
+													// (v=data.name)!=u?v:""; used in {{:name}} or data-link="name"
 			+ "/" + id + end;
 	}
 
@@ -2639,8 +2919,7 @@
 	//---------------
 
 	function observeAndBind(linkCtx, source, target) { //TODO? linkFnArgs) {;
-		var binding, l,
-			linkedElem = linkCtx.linkedElem,
+		var binding, l, linkedElem,
 			cvtBk = linkCtx.convertBack,
 			tag = linkCtx.tag,
 			depends = [],
@@ -2650,6 +2929,7 @@
 		delete linkCtx._bndId;
 
 		if (tag) {
+			linkedElem = tag.linkedElem,
 			// Use the 'depends' paths set on linkCtx.tag - which may have been set on declaration
 			// or in events: init, render, onBeforeLink, onAfterLink etc.
 			depends = tag.depends || depends;
@@ -2659,9 +2939,9 @@
 			// Only bind the first time, or if the new depends (toString) has changed from when last bound
 			if (linkCtx._depends) {
 				// Unobserve previous binding
-				$observe(source, linkCtx._depends, handler, true);
+				$observable._apply(source, linkCtx._depends, handler, true);
 			}
-			binding = $observe($.isArray(source) ? [source] : source , linkCtx.fn.paths || linkCtx.fn, depends, handler, linkCtx._ctxCb);
+			binding = $observable._apply(source, linkCtx.fn.paths, depends, handler, linkCtx._ctxCb);
 			// The binding returned by $observe has a bnd array with the source objects of the individual bindings.
 			binding.elem = target; // The target of all the individual bindings
 			binding.linkCtx = linkCtx;
@@ -2673,7 +2953,8 @@
 				binding.to = [[], cvtBk];
 				l = linkedElem.length;
 				while (l--) {
-					linkedElem[l]._jsvBnd = target._jsvBnd;
+					linkedElem[l]._jsvBnd = target._jsvBnd + "+";
+					// Add a "+" for cloned binding - so removing elems with cloned bindings will not remove the 'parent' binding from the bindingStore.
 				}
 			}
 			linkCtx._depends = depends;
@@ -2682,6 +2963,15 @@
 			// Store the binding.
 			bindingStore[bindId] = binding; // Note: If this corresponds to a data-linked tag, we are replacing the
 			// temporarily stored tag by the stored binding. The tag will now be at binding.linkCtx.tag
+			if (tag) {
+				if (tag.onAfterBind) {
+					tag.onAfterBind(binding);
+				}
+				if (!tag.flow && !tag._.inline) {
+					target.setAttribute(jsvAttrStr, (target.getAttribute(jsvAttrStr)||"") + "#" + bindId + "^/" + bindId + "^");
+					tag._tgId = "" + bindId;
+				}
+			}
 			if (linkedElem || cvtBk !== undefined) {
 				bindTo(binding, cvtBk);
 			}
@@ -2697,6 +2987,17 @@
 	}
 
 	function $link(tmplOrLinkTag, to, from, context, parentView, prevNode, nextNode) {
+		// Consider supporting this: $.link(true, data) - (top-level activation) target defaults to body.
+		// But with templates, defaulting to body makes less sense, so not support for now...
+			//if (to + "" !== to) {
+			//  nextNode = prevNode;
+			//  prevNode = parentView;
+			//  parentView = context;
+			//  context = from;
+			//  from = to;
+			//  to = "body";
+			//}
+
 		if (tmplOrLinkTag && to) {
 			to = to.jquery ? to : $(to); // to is a jquery object or an element or selector
 
@@ -2778,13 +3079,7 @@
 					}
 
 					// Link the content of the element, since this is a call to template.link(), or to $(el).link(true, ...),
-					oldData = parentView.data;
-					oldCtx = parentView.ctx;
-					parentView.data = from;
-					parentView.ctx = context;
-					parentView.link(from, targetEl, prevNode, nextNode, html);
-					parentView.data = oldData;
-					parentView.ctx = oldCtx;
+					parentView.link(from, targetEl, prevNode, nextNode, html, undefined, context);
 //}, 0);
 				}
 			}
@@ -2796,7 +3091,7 @@
 	// view.link
 	//----------
 
-	function viewLink(outerData, parentNode, prevNode, nextNode, html, refresh) {
+	function viewLink(outerData, parentNode, prevNode, nextNode, html, refresh, context) {
 		// Optionally insert HTML into DOM using documentFragments (and wrapping HTML appropriately).
 		// Data-link existing contents of parentNode, or the inserted HTML, if provided
 
@@ -2809,30 +3104,56 @@
 
 		//==== nested functions ====
 		function convertMarkers(all, preceding, selfClose, closeTag, spaceBefore, id, spaceAfter, tag1, tag2, closeTag2, spaceAfterClose, selfClose2) {
-			//rConvertMarkers = /(^|(\/>)|(<\/\w+>)|>|)(\s*)_([#\/]\d+_)`(\s*)(<\w+(?=[\s\/>]))?|\s*(?:(<\w+(?=[\s\/>]))|(<\/\w+>)(\s*)|(\/>)\s*)/g,
-			//                 prec, slfCl, clTag,  spaceBefore, id,    spaceAfter, tag1,                  tag2,             clTag2,  sac   slfCl2,
+			// rConvertMarkers = /(^|(\/>)|<\/(\w+)>|>|)(\s*)([#\/]\d+[_^])`(\s*)(<\w+(?=[\s\/>]))?|\s*(?:(<\w+(?=[\s\/>]))|<\/(\w+)>(\s*)|(\/>)\s*)/g,
+			//                 prec, slfCl, clTag,  spaceBefore, id,    spaceAfter, tag1,                  tag2,               clTag2,sac  slfCl2,
 			// Convert the markers that were included by addBindingMarkers in template output, to appropriate DOM annotations:
 			// data-jsv attributes (for element-only content) or script marker nodes (within phrasing or flow content).
 
 // TODO consider detecting 'quoted' contexts (attribute strings) so that attribute encoding does not need to encode >
 // Currently rAttrEncode = /[><"'&]/g includes '>' encoding in order to avoid erroneous parsing of <span title="&lt;a/>">
 
-			var endOfElCnt = "";
+			var errorMsg,
+				endOfElCnt = "";
 			tag = tag1 || tag2 || "";
-			closeTag = closeTag || selfClose || closeTag2 || selfClose2;
+			closeTag = closeTag || closeTag2;
+			selfClose = selfClose || selfClose2;
+			if (isVoid && !selfClose && (closeTag || tag || id)) {
+				isVoid = undefined;
+				parentTag = tagStack.shift(); // preceding tag was a void element, with no closing slash, such as <br>.
+			}
+			closeTag = closeTag || selfClose;
 			if (closeTag) {
-				if (validate && (selfClose || selfClose2) && !voidElems[parentTag]) {
-					syntaxError("'<" + parentTag + "... />' in:\n" + html);
+				isVoid = undefined;
+				// TODO: smart insertion of <tbody> - to be completed for robust insertion of deferred bindings etc.
+				//if (closeTag === "table" && parentTag === "tbody") {
+				//	preceding = "</tbody>" + preceding;
+				//	parentTag = "table";
+				//	tagStack.shift();
+				//}
+				if (validate) {
+					if (selfClose || selfClose2) {
+						if (!voidElems[parentTag]) {
+							errorMsg = "'<" + parentTag + ".../"; // self-closed tag such as <div/>
+						}
+					} else if (voidElems[closeTag]) {
+						errorMsg = "'</" + closeTag; // closing tag such as </input>
+					} else if (!tagStack.length || closeTag !== parentTag) {
+						errorMsg = "Mismatch: '</" + closeTag;
+					}
+					if (errorMsg) {
+						syntaxError(errorMsg + ">' in:\n" + html);
+					}
 				}
 				prevElCnt = elCnt;
 				parentTag = tagStack.shift();
 				elCnt = elContent[parentTag];
+				closeTag2 = closeTag2 ? ("</" + closeTag2 + ">") : "";
 				if (prevElCnt) {
 					// If there are ids (markers since the last tag), move them to the defer string
 					defer += ids;
 					ids = "";
 					if (!elCnt) {
-						endOfElCnt = (closeTag2 || "") + openScript + "@" + defer + closeScript + (spaceAfterClose || "");
+						endOfElCnt = closeTag2 + openScript + "@" + defer + closeScript + (spaceAfterClose || "");
 						defer = deferStack.shift();
 					} else {
 						defer += "-"; // Will be used for stepping back through deferred tokens
@@ -2851,6 +3172,17 @@
 					preceding = (closeTag2 || selfClose2 || "");
 				}
 				if (tag) {
+					// TODO: smart insertion of <tbody> - to be completed for robust insertion of deferred bindings etc.
+					//if (tag === "<tr" && parentTag === "table") {
+					//	tagStack.unshift(parentTag);
+					//	parentTag = "tbody";
+					//	preceding += "<" + parentTag + ">";
+					//	if (defer) {
+					//		defer += "+"; // Will be used for stepping back through deferred tokens
+					//	}
+					//	// TODO: move this to design-time validation check
+					//	//	error('"' + parentTag + '" has incorrect parent tag');
+					//}
 					preceding += tag;
 					if (ids) {
 						preceding += ' ' + jsvAttrStr + '="' + ids + '"';
@@ -2860,6 +3192,8 @@
 			} else {
 				// We are in phrasing or flow content, so use script marker nodes
 				// Example: <script type="jsv3/"></script> - data-linked tag, close marker
+				// TODO add validation to track whether we are in attribute context (not yet hit preceding ending with a >) or element content of current 'parentTag'
+				// and according disallow inserting script markers in attribute context. Similar for elCnt too, so no "<table {{if ...}}...{{/if}}... >" or "<table {{if ...}}...> ...{{/if}}..."
 				preceding = id
 					? (preceding + endOfElCnt + spaceBefore + openScript + id + closeScript + spaceAfter + tag)
 					: endOfElCnt || all;
@@ -2868,10 +3202,12 @@
 				// If there are ids (markers since the last tag), move them to the defer string
 				tagStack.unshift(parentTag);
 				parentTag = tag.slice(1);
-				if (tagStack[0] === badParent[parentTag]) {
-					// TODO: move this to design-time validation check
-					error('"' + parentTag + '" has incorrect parent tag');
+				if (tagStack[0] && tagStack[0] === badParent[parentTag]) {
+					// Missing <tbody>
+					// TODO: replace this by smart insertion of <tbody> tags
+					error('Parent of <tr> must be <tbody>');
 				}
+				isVoid = voidElems[parentTag];
 				if ((elCnt = elContent[parentTag]) && !prevElCnt) {
 					deferStack.unshift(defer);
 					defer = "";
@@ -2903,10 +3239,11 @@
 			if (vwInfos) {
 				//targetParent = targetParent || targetElem && targetElem.previousSibling;
 				//targetParent = targetElem ? targetElem.previousSibling : targetParent;
-				len = vwInfos.length;
-				if (vwInfos.tokens.charAt(0) === "@") {
-					// This is a special script element that was created in convertMarkers() to process deferred bindings, and inserted following the
-					// target parent element - because no element tags were encountered to carry those binding tokens.
+				if (vwInfos._tkns.charAt(0) === "@") {
+					// We are processing newly inserted content. This is a special script element that was created in convertMarkers() to process deferred bindings,
+					// and inserted following the target parent element - because no element tags (outside elCnt) were encountered to carry those binding tokens.
+					// We will step back from the  preceding sibling of this element, looking at targetParent elements until we find the one that the current binding
+					// token belongs to. Set elem to null (the special script element), and remove it from the DOM.
 					targetParent = elem.previousSibling;
 					elem.parentNode.removeChild(elem);
 					elem = null;
@@ -2939,21 +3276,15 @@
 							if (tag = bindingStore[id = vwInfo.id]) {
 								// The binding may have been deleted, for example in a different handler to an array collectionChange event
 								// This is a tag binding
-								deep = targetParent && (!elem || elem.parentNode !== targetParent);
+								deep = targetParent && (!elem || elem.parentNode !== targetParent); // We are stepping back looking for the right targetParent,
+								// or we are linking existing content and this element is in elCnt, not an immediate child of the targetParent.
 								if (!elem || deep) {
 									tag.parentElem = targetParent;
 								}
-								if (vwInfo.elCnt) {
-									if (vwInfo.open) {
-										if (targetParent) {
-											// This is an 'open view' node (preceding script marker node,
-											// or if elCnt, the first element in the view, with a data-jsv annotation) for binding
-											targetParent._dfr = "#" + id + bindChar + (targetParent._dfr || "");
-										}
-									} else if (deep) {
-										// There is no ._nxt so add token to _dfr. It is deferred.
-										targetParent._dfr = "/" + id + bindChar + (targetParent._dfr || "");
-									}
+								if (vwInfo.elCnt && deep) {
+									// With element only content, if there is no following element, or if the binding is deeper than the following element
+									// then we need to set the open or close token as a deferred binding annotation on the parent
+									targetParent._dfr = (vwInfo.open ? "#" : "/") + id + bindChar + (targetParent._dfr || "");
 								}
 								// This is an open or close marker for a data-linked tag {^{...}}. Add it to bindEls.
 								addedBindEls.push([deep ? null : elem, vwInfo]);
@@ -2996,7 +3327,7 @@
 									view._nxt = elem;
 								}
 								linkCtx = view.linkCtx;
-								if (onAftCr = onAfterCreate || (view.ctx && view.ctx.onAfterCreate)) {
+								if (onAftCr = view.ctx && view.ctx.onAfterCreate || onAfterCreate) {
 									onAftCr.call(linkCtx, view);
 								}
 							}
@@ -3017,7 +3348,8 @@
 			// Similar to processViewInfos in how it steps through bindings to find tags. Only finds data-linked tags.
 			var level, parentTag;
 
-			if (len = vwInfos && vwInfos.length) {
+			if (vwInfos) {
+				len = vwInfos.length;
 				for (j = 0; j < len; j++) {
 					vwInfo = vwInfos[j];
 					if (get.id) {
@@ -3050,11 +3382,12 @@
 
 			// The prevNode will be in the returned query, since we called markPrevOrNextNode() on it.
 			// But it may have contained nodes that satisfy the selector also.
-			if (prevNode) {
+			if (prevNode && prevNode.innerHTML) {
 				// Find the last contained node of prevNode, to use as the prevNode - so we only link subsequent elems in the query
 				prevNodes = qsa ? prevNode.querySelectorAll(linkViewsSel) : $(linkViewsSel, prevNode).get();
 				prevNode = prevNodes.length ? prevNodes[prevNodes.length - 1] : prevNode;
 			}
+
 			tagDepth = 0;
 			for (i = 0; i < l; i++) {
 				elem = elems[i];
@@ -3068,9 +3401,9 @@
 					// elem has not been removed from DOM
 						&& processInfos(viewInfos(elem, undefined, tags && rOpenTagMarkers))
 						// If a link() call, processViewInfos() adds bindings to bindEls, and returns true for non-script nodes, for adding data-link bindings
-						// If a childTags() call getViewInfos adds tag bindings to tags array.
-							&& elem.getAttribute($viewsLinkAttr)) {
-								bindEls.push([elem]);
+						// If a childTags() call, getViewInfos returns array of tag bindings.
+							&& !get && elem.getAttribute($viewsLinkAttr)) {
+								bindEls.push([elem]); // A data-linked element so add to bindEls too
 							}
 			}
 
@@ -3112,9 +3445,11 @@
 				elem = elem[0];
 				if (linkInfo) {
 					tag = bindingStore[linkInfo.id];
-					linkCtx = tag.linkCtx;
-					tag = linkCtx ? linkCtx.tag : tag;
-					// The tag may have been stored temporarily on the bindingStore - or may have already been replaced by the actual binding
+					if (linkCtx = tag.linkCtx) {
+						// The tag may have been stored temporarily on the bindingStore - or may have already been replaced by the actual binding
+						tag = linkCtx.tag;
+						tag.linkCtx = linkCtx;
+					}
 					if (linkInfo.open) {
 						// This is an 'open linked tag' binding annotation for a data-linked tag {^{...}}
 						if (elem) {
@@ -3123,8 +3458,8 @@
 						}
 						tag._elCnt = linkInfo.elCnt;
 						if (tag && (!tag.onBeforeLink || tag.onBeforeLink() !== false) && !tag._.bound) {
-							// By default we data-link depth-first ("on the way in"), which is better for perf. But if a tag needs nested tags to be linked (refreshed)
-							// first, before linking its content, then make onBeforeLink() return false. In that case we data-link depth-first, so nested tags will have already refreshed.
+							// By default we data-link depth-last ("on the way in"), which is better for perf. But if a tag needs nested tags to be linked (refreshed)
+							// first, before linking its content, then make onBeforeLink() return false. In that case we data-link depth-first ("on the way out"), so nested tags will have already refreshed.
 							tag._.bound = true;
 							view = tag.tagCtx.view;
 							addDataBinding(undefined, tag._prv, view, view.data||outerData, linkInfo.id);
@@ -3141,19 +3476,21 @@
 							tag.contents = getContents;
 							tag.nodes = getNodes;
 							tag.childTags = getChildTags;
-
+							tag.currentCtxs = getCurrentCtxs;
+							tag.update = updateTag;
+							tag.refresh = refreshTag;
 							delete tag._.linking;
-							callAfterLink(tag, tagCtx);
 							if (!tag._.bound) {
 								tag._.bound = true;
 								addDataBinding(undefined, tag._prv, view, view.data||outerData, linkInfo.id);
 							}
+							callAfterLink(tag, tagCtx);
 						}
 					}
 				} else {
 					view = $view(elem);
 					// Add data binding for a data-linked element (with data-link attribute)
-					addDataBinding(elem.getAttribute($viewsLinkAttr), elem, view, view.data||outerData);
+					addDataBinding(elem.getAttribute($viewsLinkAttr), elem, view, view.data||outerData, undefined, context);
 				}
 			}
 			lazyLink && lazyLink.resolve();
@@ -3161,7 +3498,7 @@
 		//==== /end of nested functions ====
 
 		var linkCtx, tag, i, l, j, len, elems, elem, view, vwInfos, vwInfo, linkInfo, prevNodes, token, prevView, nextView, node, tags, deep, tagName, tagCtx, cvt,
-			tagDepth, get, depth, fragment, copiedNode, firstTag, parentTag, wrapper, div, tokens, elCnt, prevElCnt, htmlTag, ids, prevIds, found, lazyLink, linkedElem,
+			tagDepth, get, depth, fragment, copiedNode, firstTag, parentTag, isVoid, wrapper, div, tokens, elCnt, prevElCnt, htmlTag, ids, prevIds, found, lazyLink, linkedElem,
 			noDomLevel0 = $viewsSettings.noDomLevel0,
 			self = this,
 			thisId = self._.id + "_",
@@ -3219,7 +3556,7 @@
 			div = document.createElement("div");
 			wrapper = div;
 			prevIds = ids = "";
-			htmlTag = parentNode.namespaceURI === "http://www.w3.org/2000/svg" ? "svg" : (firstTag = rFirstElem.exec(html)) && firstTag[1] || "";
+			htmlTag = parentNode.namespaceURI === "http://www.w3.org/2000/svg" ? "svg_ns" : (firstTag = rFirstElem.exec(html)) && firstTag[1] || "";
 			if (noDomLevel0 && firstTag && firstTag[2]) {
 				error("Unsupported: " + firstTag[2]); // For security reasons, don't allow insertion of elements with onFoo attributes.
 			}
@@ -3229,7 +3566,7 @@
 				while (node && !(nextView = viewInfos(node))) {
 					node = node.nextSibling;
 				}
-				if (tokens = nextView ? nextView.tokens : parentNode._dfr) {
+				if (tokens = nextView ? nextView._tkns : parentNode._dfr) {
 					token = prevView || "";
 					if (refresh || !prevView) {
 						token += "#" + thisId;
@@ -3251,10 +3588,14 @@
 
 			//================ Convert the markers to DOM annotations, based on content model. ================
 //			oldElCnt = elCnt;
+			isVoid = undefined;
 			html = ("" + html).replace(rConvertMarkers, convertMarkers);
 //			if (!!oldElCnt !== !!elCnt) {
 //				error("Parse: " + html); // Parse error. Content not well-formed?
 //			}
+			if (validate && tagStack.length) {
+				syntaxError("Mismatched '<" + parentTag + "...>' in:\n" + html); // Unmatched tag
+			}
 			// Append wrapper element to doc fragment
 			safeFragment.appendChild(div);
 
@@ -3285,7 +3626,7 @@
 		return lazyLink && lazyLink.promise();
 	}
 
-	function addDataBinding(linkMarkup, node, currentView, data, boundTagId) {
+	function addDataBinding(linkMarkup, node, currentView, data, boundTagId, context) {
 		// Add data binding for data-linked elements or {^{...}} data-linked tags
 		var tmpl, tokens, attr, convertBack, params, trimLen, tagExpr, linkFn, linkCtx, tag, rTagIndex;
 
@@ -3317,7 +3658,7 @@
 //			if (!(linkTags = links[linkMarkup])) {
 			// This is the first time this view template has been linked, so we compile the data-link expressions, and store them on the template.
 
-				linkMarkup = normalizeLinkTag(linkMarkup, node);
+				linkMarkup = normalizeLinkTag(linkMarkup, defaultAttr(node));
 				rTag.lastIndex = 0;
 				while (tokens = rTag.exec(linkMarkup)) { // TODO require } to be followed by whitespace or $, and remove the \}(!\}) option.
 					// Iterate over the data-link expressions, for different target attrs,
@@ -3331,10 +3672,10 @@
 					convertBack = undefined;
 
 					linkCtx = {
-						data: data,             // source
-						elem: tag && tag._elCnt ? tag.parentElem : node,             // target
+						data: data, // source
+						elem: tag && tag._elCnt ? tag.parentElem : node, // target
 						view: currentView,
-						ctx: currentView.ctx,
+						ctx: context || currentView.ctx,
 						attr: attr,
 						_initVal: !tokens[2]
 					};
@@ -3365,6 +3706,11 @@
 					linkCtx.expr = attr + tagExpr;
 					linkFn = tmpl.links[tagExpr];
 					if (!linkFn) {
+						//TODO Optimize along the lines of:
+						//var paths = [];
+						//tmpl.links[tagExpr] = linkFn = $viewsSub.tmplFn(delimOpenChar0 + tagExpr + delimCloseChar1, tmpl, true, convertBack, paths);
+						//linkFn.paths = paths
+
 						tmpl.links[tagExpr] = linkFn = $viewsSub.tmplFn(delimOpenChar0 + tagExpr + delimCloseChar1, tmpl, true, convertBack);
 						$viewsSub.parse(params, linkFn.paths = [], tmpl); // TODO optimize - since parse(params) was already called within tmplFn()
 					}
@@ -3373,7 +3719,6 @@
 						// Default target, so allow 2 way binding
 						linkCtx.convertBack = convertBack;
 					}
-
 					bindDataLinkTarget(linkCtx, linkFn);
 					// We store rTagIndex in local scope, since this addDataBinding method can sometimes be called recursively,
 					// and each is using the same rTag instance.
@@ -3390,18 +3735,8 @@
 			// If the link expression uses a custom tag, the propertyChangeHandler call will call renderTag, which will set tagCtx on linkCtx
 		}
 
-// Consider for issue https://github.com/BorisMoore/jsviews/issues/158 arrayChange support on data-link etc.
-		//handler.array = function() {
-		//	...
-		//}
-
 		linkCtx._ctxCb = getContextCb(linkCtx.view); // _ctxCb is for filtering/appending to dependency paths: function(path, object) { return [(object|path)*]}
 		linkCtx._hdlr = handler;
-		if (linkCtx.tag && linkCtx.tag.onArrayChange) {
-			handler.array = function(ev, eventArgs) {
-				linkCtx.tag.onArrayChange(ev, eventArgs);
-			};
-		}
 		handler(true);
 	}
 
@@ -3446,7 +3781,7 @@
 		if (tokens = isVal ? node : markerNodeInfo(node)) {
 			infos.elCnt = !node.type;
 			elCnt = tokens.charAt(0) === "@" || !node.type;
-			infos.tokens = tokens;
+			infos._tkns = tokens;
 			// rMarkerTokens = /(?:(#)|(\/))(\d+)([_^])([-+@\d]+)?/g;
 			tokens.replace(rBinding || rMarkerTokens, getInfos);
 			return infos;
@@ -3483,12 +3818,12 @@
 		return marker;
 	}
 
-	function normalizeLinkTag(linkMarkup, node) {
-		linkMarkup = $.trim(linkMarkup);
+	function normalizeLinkTag(linkMarkup, twoway) {
+		linkMarkup = $.trim(linkMarkup).replace(rEscapeQuotes, "\\$&");
 		return linkMarkup.slice(-1) !== delimCloseChar0
 		// If simplified syntax is used: data-link="expression", convert to data-link="{:expression}",
 		// or for inputs, data-link="{:expression:}" for (default) two-way binding
-			? linkMarkup = delimOpenChar1 + ":" + linkMarkup + (defaultAttr(node) ? ":" : "") + delimCloseChar0
+			? linkMarkup = delimOpenChar1 + ":" + linkMarkup + (twoway ? ":" : "") + delimCloseChar0
 			: linkMarkup;
 	}
 
@@ -3496,8 +3831,13 @@
 	// Methods for views and tags
 	//===========================
 
-	function getContents(select, deep) {
+	function getContents(deep, select) {
 		// For a view or a tag, return jQuery object with the content nodes,
+		if (deep !== !!deep) {
+				// deep not boolean, so this is getContents(selector)
+				select = deep;
+				deep = undefined;
+			}
 		var filtered,
 			nodes = $(this.nodes());
 		if (nodes[0]) {
@@ -3530,7 +3870,7 @@
 				: prevNode && prevNode.nextSibling);
 
 		while (node && (!nextNode || node !== nextNode)) {
-			if (withMarkers || elCnt || !markerNodeInfo(node)) {
+			if (withMarkers || elCnt || node.tagName !== "SCRIPT") {
 				// All the top-level nodes in the view
 				// (except script marker nodes, unless withMarkers = true)
 				// (Note: If a script marker node, viewInfo.elCnt undefined)
@@ -3568,34 +3908,43 @@
 		return tags;
 	}
 
+	function getCurrentCtxs() {
+		var view = this.tagCtx.view;
+		return this._.bnd.call(view.tmpl, view.data, view, $views);
+	}
+
 	function callAfterLink(tag, tagCtx) {
-		var cvt, linkedElem, elem, isRadio, val, bindings, binding, i, l,
+		var cvt, linkedElem, elem, isRadio, val, bindings, binding, i, l, linkedTag,
+			view = tagCtx.view,
 			linkCtx = tag.linkCtx = tag.linkCtx || {
 				tag: tag,
-				data: tagCtx.view.data
+				data: view.data,
+				view: view,
+				ctx: view.ctx
 			};
 
 		if (tag.onAfterLink) {
 			tag.onAfterLink(tagCtx, linkCtx);
 		}
-
-		if ((linkedElem = linkCtx.linkedElem) && (elem = linkedElem[0])) {
-			isRadio = elem.type === "radio";
+		linkedElem = tag.targetTag ? tag.targetTag.linkedElem : tag.linkedElem;
+		if (!tag._.chging && linkedElem && (elem = linkedElem[0])) {
+			isRadio = elem.type === RADIO;
 			cvt = linkCtx.convert;
 			val = cvt
 				? ($isFunction(cvt)
 					? cvt(tagCtx.args[0])
-					: $views._cnvt(cvt, tagCtx.view, tagCtx))
+					: $views._cnvt(cvt, view, tagCtx))
 				: tagCtx.args[0];
 
 			if (elem !== linkCtx.elem) {
 				l = linkedElem.length;
 				while (l--) {
 					elem = linkedElem[l];
-					elem._jsvLnkdEl = true;
-					if (tag._.inline) {
+					linkedTag = elem._jsvLnkdEl;
+					if (tag._.inline && (!linkedTag || linkedTag !== tag && linkedTag.targetTag !== tag)) {
+						elem._jsvLnkdEl = tag;
 						// For data-linked tags, identify the linkedElem with the tag, for "to" binding
-						// For data-linked elements, if not yet bound, we identify when the linkCtx.elem is bound
+						// (For data-linked elements, if not yet bound, we identify later when the linkCtx.elem is bound)
 						elem._jsvBnd = linkCtx.elem ? linkCtx.elem._jsvBnd : tag._prv._jsvBnd;
 						bindings = elem._jsvBnd.slice(1).split("&");
 						i = bindings.length;
@@ -3604,42 +3953,43 @@
 						}
 					}
 					if (isRadio) {
-						// For radio button, set to checked if val === value. For others set val() to val, below
-						elem.checked = val === elem.value;
+						// For radio button, set to if val === value. For others set val() to val, below
+						elem[CHECKED] = val === elem.value;
 					}
 				}
 			}
-			if (!isRadio) {
-				if (elem.type === "checkbox") {
-					elem.checked = val && val !== "false";
+			if (!isRadio && elem.value !== undefined && val !== undefined) {
+				if (elem.type === CHECKBOX) {
+					elem[CHECKED] = val && val !== "false";
 				} else {
-					linkedElem.val(val);
+					elem.value = val;
 				}
 			}
 		}
 	}
 	function bindTo(binding, cvtBk) {
 		// Two-way binding.
-		// We set the binding.to[1] to be the cvtBack, and  binding.to[0] to be either the path to the target, or [object, path] where the target is the path on the provided object.
+		// We set the binding.to[1] to be the cvtBack, and binding.to[0] to be either the path to the target, or [object, path] where the target is the path on the provided object.
 		// So for a path with an object call: a.b.getObject().d.e, then we set to[0] to be [returnedObject, "d.e"], and we bind to the path on the returned object as target
 		// Otherwise our target is the first path, paths[0], which we will convert with contextCb() for paths like ~a.b.c or #x.y.z
 //TODO add support for two-way binding with bound named props and no bindto expression. <input data-link="{:a ^foo=b:}"
 //- currently will not bind to the correct target - but bindto does gives workaround
 		var bindto, pathIndex, lastPath, bindtoOb,
-			lct =  binding.linkCtx,
+			lct = binding.linkCtx,
 			source = lct.data,
 			paths = lct.fn.paths;
 		if (binding) {
-			if (bindto = paths.to) {
+			if (bindto = paths._jsvto) {
 				paths = bindto;
 			}
 			pathIndex = paths.length;
 			while (pathIndex && "" + (lastPath = paths[--pathIndex]) !== lastPath) {}; // If the lastPath is an object (e.g. with _jsvOb property), take preceding one
-			if (lastPath) {
+			if (lastPath && (!lct.tag || lct.tag.tagCtx.args.length)) {
 				lastPath = paths[pathIndex] = lastPath.split("^").join("."); // We don't need the "^" since binding has happened. For to binding, require just "."s
 				binding.to = (lastPath.charAt(0) === "."
 					? [[bindtoOb = paths[pathIndex-1], lastPath.slice(1)], cvtBk] // someexpr().lastpath - so need to get the bindtoOb object returned from the expression
 					: [lct._ctxCb(paths[0]) || [source, paths[0]], cvtBk]);
+
 				if (bindto && bindtoOb) {
 					// This is a bindto binding {:expr bindto=someob().some.path:}
 					// If it returned an object, we need to call the callback to get the object instance, so we bind to the final path (.some.path) starting from that object
@@ -3653,68 +4003,22 @@
 	}
 
 	function refreshTag(sourceValue) {
-		var skipBinding, nodesToRemove, promise, cvt,
+		var promise, attr,
 			tag = this,
-			target = tag.parentElem,
-			tagCtx = tag.tagCtx,
-			view = tagCtx.view,
-			prevNode = tag._prv,
-			nextNode = tag._nxt,
-			elCnt = tag._elCnt,
-			inline = tag._.inline,
-			props = tagCtx.props;
+			linkCtx = tag.linkCtx,
+			view = tag.tagCtx.view;
 
 		if (tag.disposed) { error("Removed tag"); }
 		if (sourceValue === undefined) {
-			sourceValue = tag._.bnd.call(view.tmpl, view.data, view, $views); // get tagCtxs
-			if (inline) {
-				sourceValue = $views._tag(tag, view, view.tmpl, sourceValue); // get rendered HTML for tag
-			}
+			sourceValue = $views._tag(tag, view, view.tmpl, tag.currentCtxs ? tag.currentCtxs() : tag.tagCtxs, true); // Get rendered HTML for tag, based on refreshed tagCtxs
 		}
-		if (!tag.flow && !tag.render && !tag.tagCtx.tmpl) {
-			// We allow a data-linked tag control which does not render to set content on the data-linked element during init, onBeforeLink and onAfterLink
-		} else if (inline) {
-			nodesToRemove = tag.nodes(true);
+		if (sourceValue + "" === sourceValue) {
+			// If no rendered content, sourceValue will not be a string (can be 0 or undefined)
+			attr = tag._.inline ? "html" : (linkCtx.attr || defaultAttr(tag.parentElem, true));
+			promise = updateContent(sourceValue, linkCtx, attr, tag);
+		}
 
-			if (elCnt) {
-				if (prevNode && prevNode !== nextNode) {
-					// This prevNode will be removed from the DOM, so transfer the view tokens on prevNode to nextNode of this 'viewToRefresh'
-					transferViewTokens(prevNode, nextNode, target, tag._tgId, "^", true);
-				}
-				prevNode = prevNode
-					? prevNode.previousSibling
-					: nextNode
-						? nextNode.previousSibling
-						: target.lastChild;
-			}
-			// Remove HTML nodes
-			$(nodesToRemove).remove();
-		} else {
-			// data-linked value using converter(s): data-link="{cvt: ... :cvtBack}" or tag: data-link="{tagname ...}"
-			if (!tag.flow && props.inline) {
-				// data-link="{tagname ...}"
-				view._.tag = tag;
-				sourceValue = addBindingMarkers(sourceValue, view, true);
-				view._.tag = undefined;
-				skipBinding = tag._.inline = true;
-			}
-
-			$(target).empty();
-		}
-		// Data link the new contents of the target node
-		if (!skipBinding && tag.onBeforeLink) {
-			tag.onBeforeLink();
-		}
-		promise = view.link(view.data, target, prevNode, nextNode, sourceValue, tag && {tag: tag._tgId, lazyLink: props.lazyLink});
-		if (!skipBinding && (tag.onAfterLink || tag.onLinkedInit)) {
-			if (promise) {
-				promise.then(function() {
-					callAfterLink(tag, tagCtx);
-				});
-			} else {
-				callAfterLink(tag, tagCtx);
-			}
-		}
+		callAfterLink(tag, tag.tagCtx);
 		return promise || tag;
 	}
 
@@ -3738,7 +4042,7 @@
 			elem = elemArray[i];
 			if (elem.parentNode) {
 				// Has not already been removed from the DOM
-				if ((bindings = elem._jsvBnd) &&  !elem._jsvLnkdEl) {
+				if (bindings = elem._jsvBnd) {
 					// Get propertyChange bindings for this element
 					// This may be an element with data-link, or the opening script marker node for a data-linked tag {^{...}}
 					// bindings is a string with the syntax: "(&bindingId)*"
@@ -3747,7 +4051,7 @@
 					l = bindings.length;
 					while (l--) {
 						// Remove associated bindings
-						removeViewBinding(bindings[l]); // unbind bindings with this bindingId on this view
+						removeViewBinding(bindings[l], elem._jsvLnkdEl); // unbind bindings with this bindingId on this view
 					}
 				}
 				if (vwInfos = viewInfos(markerNodeInfo(elem) + (elem._dfr || ""), true, rOpenMarkers)) {
@@ -3768,41 +4072,47 @@
 		}
 	}
 
-	function removeViewBinding(bindId) {
+	function removeViewBinding(bindId, linkedElem) {
 		// Unbind
 		var objId, linkCtx, tag, object, obsId,
 			binding = bindingStore[bindId];
 		if (binding) {
-			for (objId in binding.bnd) {
-				object = binding.bnd[objId];
-				obsId = ".obs" + binding.cbId;
-				if ($.isArray(object)) {
-					$([object]).off(arrayChangeStr + obsId).off(propertyChangeStr + obsId); // There may be either or both of arrayChange and propertyChange
-				} else {
-					$(object).off(propertyChangeStr + obsId);
-				}
-				delete binding.bnd[objId];
-			}
-
 			linkCtx = binding.linkCtx;
-			if (tag = linkCtx.tag) {
-				if (tag.onDispose) {
-					tag.onDispose();
+			tag = linkCtx.tag;
+			if (linkedElem) {
+				delete tag.linkedElem;
+			} else {
+				for (objId in binding.bnd) {
+					object = binding.bnd[objId];
+					obsId = ".obs" + binding.cbId;
+					if ($.isArray(object)) {
+						$([object]).off(arrayChangeStr + obsId).off(propertyChangeStr + obsId); // There may be either or both of arrayChange and propertyChange
+					} else {
+						$(object).off(propertyChangeStr + obsId);
+					}
+					delete binding.bnd[objId];
 				}
-				if (!tag._elCnt) {
-					tag._prv && tag._prv.parentNode.removeChild(tag._prv);
-					tag._nxt && tag._nxt.parentNode.removeChild(tag._nxt);
+
+				linkCtx = binding.linkCtx;
+				if (tag) {
+					if (tag.onDispose) {
+						tag.onDispose();
+					}
+					if (!tag._elCnt) {
+						tag._prv && tag._prv.parentNode.removeChild(tag._prv);
+						tag._nxt && tag._nxt.parentNode.removeChild(tag._nxt);
+					}
+					tag.disposed = true;
 				}
-				tag.disposed = true;
+				delete linkCtx.view._.bnds[bindId];
+				delete bindingStore[bindId];
+				delete $viewsSub._cbBnds[binding.cbId];
 			}
-			delete linkCtx.view._.bnds[bindId];
-			delete bindingStore[bindId];
-			delete $viewsSub._cbBnds[binding.cbId];
 		}
 	}
 
 	function $unlink(tmplOrLinkTag, to) {
-		if (!arguments.length) {
+		if (tmplOrLinkTag === undefined) {
 			// Call to $.unlink() is equivalent to $.unlink(true, "body")
 			if (activeBody) {
 				$(activeBody).off(elementChangeStr, elemChangeHandler);
@@ -3815,7 +4125,7 @@
 			to = to.jquery ? to : $(to); // to is a jquery object or an element or selector
 			if (tmplOrLinkTag === true) {
 				// Call to $(el).unlink(true) - unlink content of element, but don't remove bindings on element itself
-				$.each(to, function() {
+				to.each(function() {
 					var innerView;
 //TODO fix this for better perf. Rather that calling inner view multiple times which does querySelectorAll each time, consider a single querySelectorAll
 // or simply call view.removeViews() on the top-level views under the target 'to' node, then clean(...)
@@ -3852,11 +4162,11 @@
 		view = view || $.view();
 		return function(path, object) {
 			// TODO consider only calling the contextCb on the initial token in path '~a.b.c' and not calling again on
-			// the individual tokens, 'a', 'b', 'c'...  Currently it is called multiple times
+			// the individual tokens, 'a', 'b', 'c'... Currently it is called multiple times
 			var tokens, tag,
 				items = [object];
 			if (view && path) {
-				if (path._jsvOb){
+				if (path._jsvOb) {
 					return path._jsvOb.call(view.tmpl, object, view, $views);
 				}
 				if (path.charAt(0) === "~") {
@@ -3892,7 +4202,7 @@
 	}
 
 	function inputAttrib(elem) {
-		return elem.type === "checkbox" ? elem.checked : elem.value;
+		return elem.type === CHECKBOX ? elem[CHECKED] : elem.value;
 	}
 
 	//========================== Initialize ==========================
@@ -3984,7 +4294,7 @@
 			}
 			tokens = nextNode ? nextNode.getAttribute(jsvAttrStr) : parentElem._dfr;
 			if (l = tokens.indexOf("/" + id + viewOrTagChar) + 1) {
-				tokens = vwInfos.tokens.slice(0, precedingLength) + tokens.slice(l + (refresh ? -1 : id.length + 1));
+				tokens = vwInfos._tkns.slice(0, precedingLength) + tokens.slice(l + (refresh ? -1 : id.length + 1));
 			}
 			if (tokens) {
 				if (nextNode) {
@@ -4024,7 +4334,7 @@
 				if (renderAndLink(self, index, tmpl, views, dataItems, self.ctx) !== false) {
 					for (i = index + itemsCount; i < viewsCount; i++) {
 						$observable(views[i]).setProperty("index", i);
-						//This is fixing up index, but not key, and not index on child views. From child views, use view.get("item").index.
+						// This is fixing up index, but not key, and not index on child views. From child views, use view.getIndex()
 					}
 				}
 			}
@@ -4033,8 +4343,8 @@
 
 		removeViews: function(index, itemsCount, keepNodes) {
 			// view.removeViews() removes all the child views
-			// view.removeViews( index ) removes the child view with specified index or key
-			// view.removeViews( index, count ) removes the specified nummber of child views, starting with the specified index
+			// view.removeViews(index) removes the child view with specified index or key
+			// view.removeViews(index, count) removes the specified nummber of child views, starting with the specified index
 			function removeView(index) {
 				var id, bindId, parentElem, prevNode, nextNode, nodesToRemove,
 					viewToRemove = views[index];
@@ -4153,12 +4463,12 @@
 
 	$viewsSettings.merge = {
 		input: {
-			from: { fromAttr: inputAttrib }, to: { toAttr: "value" }
+			from: inputAttrib, to: "value"
 		},
 		textarea: valueBinding,
 		select: valueBinding,
 		optgroup: {
-			from: { fromAttr: "label" }, to: { toAttr: "label" }
+			to: "label"
 		}
 	};
 
@@ -4170,6 +4480,59 @@
 			bindings: bindingStore
 		};
 	}
+
+	//========================
+	// JsViews-specific converters
+	//========================
+
+	$converters.merge = function(val) {
+		// Special converter used in data-linking to space-separated lists, such as className:
+		// Currently only supports toggle semantics - and has no effect if toggle string is not specified
+		// data-link="class{merge:boolExpr toggle=className}"
+		var regularExpression,
+			currentValue = this.linkCtx._val || "",
+			toggle = this.tagCtx.props.toggle;
+
+		if (toggle) {
+			// We are toggling the class specified by the toggle property,
+			// and the boolean val binding is driving the insert/remove toggle
+
+			regularExpression = toggle.replace(/[\\^$.|?*+()[{]/g, "\\$&");
+			// Escape any regular expression special characters (metacharacters) within the toggle string
+			regularExpression = "(\\s(?=" + regularExpression + "$)|(\\s))?(" + regularExpression + "(\\s|$))"
+
+			currentValue = currentValue.replace(new RegExp(regularExpression), "$2")
+			val = currentValue + (val ? (currentValue && " ") + toggle : "")
+		}
+		return val;
+	};
+
+	//========================
+	// JsViews-specific tags
+	//========================
+
+	$views.tags("on", {
+		attr: "none",
+		onAfterLink: function(tagCtx, linkCtx) {
+			var self = this,
+				elem = $(linkCtx.elem),
+				args = tagCtx.args,
+				data = tagCtx.props.data,
+				handler = args.pop(),
+				selector = args[1] || null,
+				contextOb = tagCtx.props.context;
+
+			data = data !== undefined ? data : null;
+			handler = handler.fn && contextOb ? handler.fn : handler; //??VERIFY
+			elem.on(args[0], selector, data, function(ev) {
+					handler.call(contextOb || self.leaf, ev);
+			 });
+		},
+		onAfterBind: function(binding) {
+			this.leaf = binding.leaf;
+		},
+		flow: true
+	});
 
 	//========================
 	// Extend jQuery namespace
@@ -4291,8 +4654,13 @@
 	// Extend topView
 	//===============
 
-	$extend(topView, { tmpl: { links: {}, tags: {} }});
+	$extend(topView, {tmpl: {links: {}, tags: {}}});
 	$extend(topView, LinkedView);
 	topView._.onRender = addBindingMarkers;
 
+//TODO
+// Tests for {{props}} tag.
+// add tests for "on" binding.
+// Tests for different attr settings on tags
+// tests of onAfterBind extensibility
 })(this, this.jQuery);
