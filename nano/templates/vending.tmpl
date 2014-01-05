@@ -1,6 +1,6 @@
-<div class="item">{^{:~link('Eject Coin', 'eject', {'remove_coin' : 1}, coin ? null : 'disabled', 'floatRight')}}
+<div class="item">{{:~link('Eject Coin', 'eject', {'remove_coin' : 1}, coin ? null : 'disabled', 'floatRight')}}
         <div class="floatRight">
-                {^{if !coin}}
+                {{if !coin}}
                         <div class="bad">No coin loaded.&nbsp;&nbsp;</div>
                 {{else}}
                         <div class="good">Coin Loaded.&nbsp;&nbsp;</div>
@@ -16,13 +16,13 @@
 <div class="statusDisplay" style="height: auto; overflow: auto;">
         <div class="item">
                 <div class="itemContent">
-                        {^{if products}}
+                        {{if products}}
                                 {{for productData}}
                                         <div class="fixedLeft" style="width: 500px;>
                                                 {{if amount}}
-                                                        {^{:~link('Vend', 'eject', {'vend': itself}, vendReady ? 'disabled' : null)}} <font color="{{:displayColor}}"> {{:name}} </font>- <b>{{:amount}}</b>-<b>{{:price}}</b>
+                                                        {{:~link('Vend', 'eject', {'vend': itself}, vendReady ? 'disabled' : null)}} <font color="{{:displayColor}}"> {{:name}} </font>- <b>{{:amount}}</b>-<b>{{:price}}</b>
                                                 {{else}}
-                                                        {^{:~link('Vend', 'eject', {'vend': itself}, 'disabled')}}<font color="{{:displayColor}}">{{:name}} - <font color="#cd6500"><i>Sold Out.</i></font></font>
+                                                        {{:~link('Vend', 'eject', {'vend': itself}, 'disabled')}}<font color="{{:displayColor}}">{{:name}} - <font color="#cd6500"><i>Sold Out.</i></font></font>
                                                 {{/if}}
                                         </div>
                                 {{/for}}
@@ -32,7 +32,7 @@
                 </div>
         </div>
 </div>
-{^{if coin}}
+{{if coin}}
 <hr>
 <div class="itemLabel">
 	Premium Items:
@@ -41,13 +41,13 @@
 <div class="statusDisplay" style="height: auto; overflow: auto;">
         <div class="item">
                 <div class="itemContent">
-                        {^{if products}}
+                        {{if products}}
                                 {{for premiumData}}
-                                        <div class="fixedLeft" style="width: 500px;>
+                                        <div class="fixedLeft" style="width: 500px";>
                                                 {{if amount}}
-                                                        {^{:~link('Vend', 'eject', {'vend': itself}, vendReady ? 'disabled' : null)}} <font color="{{:displayColor}}"> {{:name}} </font>- <b>{{:amount}}</b>-<b>{{:price}}</b>
+                                                        {{:~link('Vend', 'eject', {'vend': itself}, vendReady ? 'disabled' : null)}} <font color="{{:displayColor}}"> {{:name}} </font>- <b>{{:amount}}</b>-<b>{{:price}}</b>
                                                 {{else}}
-                                                        {^{:~link('Vend', 'eject', {'vend': itself}, 'disabled')}}<font color="{{:displayColor}}">{{:name}} - <font color="#cd6500"><i>Sold Out.</i></font></font>
+                                                        {{:~link('Vend', 'eject', {'vend': itself}, 'disabled')}}<font color="{{:displayColor}}">{{:name}} - <font color="#cd6500"><i>Sold Out.</i></font></font>
                                                 {{/if}}
                                         </div>
                                 {{/for}}
@@ -58,7 +58,7 @@
         </div>
 </div>
 {{/if}}
-{^{if extendedInventory}}
+{{if extendedInventory}}
 <div class="itemLabel">
 	Contraband:
 </div>
@@ -66,13 +66,13 @@
 	<div class="statusDisplay" style="height: auto; overflow: auto;">
 			<div class="item">
 					<div class="itemContent">
-							{^{if products}}
+							{{if products}}
 									{{for contrabandData}}
-											<div class="fixedLeft" style="width: 500px;>
+											<div class="fixedLeft" style="width: 500px";>
 													{{if amount}}
-															{^{:~link('Vend', 'eject', {'vend': itself}, vendReady ? 'disabled' : null)}} <font color="{{:displayColor}}"> {{:name}} </font>- <b>{{:amount}}</b>-<b>{{:price}}</b>
+															{{:~link('Vend', 'eject', {'vend': itself}, vendReady ? 'disabled' : null)}} <font color="{{:displayColor}}"> {{:name}} </font>- <b>{{:amount}}</b>-<b>{{:price}}</b>
 													{{else}}
-															{^{:~link('Vend', 'eject', {'vend': itself}, 'disabled')}}<font color="{{:displayColor}}">{{:name}} - <font color="#cd6500"><i>Sold Out.</i></font></font>
+															{{:~link('Vend', 'eject', {'vend': itself}, 'disabled')}}<font color="{{:displayColor}}">{{:name}} - <font color="#cd6500"><i>Sold Out.</i></font></font>
 													{{/if}}
 											</div>
 									{{/for}}
