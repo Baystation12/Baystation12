@@ -107,6 +107,7 @@
 	primitive = /mob/living/carbon/monkey/skrell
 
 	flags = HAS_LIPS | HAS_UNDERWEAR
+	bloodflags = BLOOD_GREEN
 
 /datum/species/vox
 	name = "Vox"
@@ -125,7 +126,7 @@
 	eyes = "vox_eyes_s"
 	breath_type = "nitrogen"
 
-	flags = NO_SCAN | IS_WHITELISTED
+	flags = NO_SCAN | IS_WHITELISTED | NO_BLOOD
 
 /datum/species/diona
 	name = "Diona"
@@ -148,7 +149,7 @@
 	heat_level_3 = 700
 
 	flags = NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
-	bloodflags = BLOOD_GREEN
+
 
 
 /datum/species/kidan
