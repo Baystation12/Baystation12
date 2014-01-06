@@ -344,25 +344,24 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 /*
 	NANO UI FOR UPLINK WOOP WOOP
 */
-/obj/item/device/uplink/hidden/ui_interact(mob/user, ui_key = "main")
+/obj/item/device/uplink/hidden/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/title = "Syndicate Uplink"
 	var/data[0]
 	
 	data["crystals"] = uses
 	data["nano_items"] = nanoui_items
 	data["welcome"] = welcome
-
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
+	
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
 	if (!ui)
-		// the ui does not exist, so we'll create a new one
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600)
-		// When the UI is first opened this is the data it will use
-		ui.set_initial_data(data)
+		// when the ui is first opened this is the data it will use
+		ui.set_initial_data(data)		
+		// open the new ui window
 		ui.open()
-	else
-		// The UI is already open so push the new data to it
-		ui.push_data(data)
-		return
 
 // Interaction code. Gathers a list of items purchasable from the paren't uplink and displays it. It also adds a lock button.
 /obj/item/device/uplink/hidden/interact(mob/user)
