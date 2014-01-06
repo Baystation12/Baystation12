@@ -252,7 +252,7 @@ datum
 			name = "Dexalin"
 			id = "dexalin"
 			result = "dexalin"
-			required_reagents = list("oxygen" = 2)
+			required_reagents = list("oxygen" = 2, "plasma" = 0.1)
 			required_catalysts = list("plasma" = 5)
 			result_amount = 1
 
@@ -302,7 +302,7 @@ datum
 			name = "Clonexadone"
 			id = "clonexadone"
 			result = "clonexadone"
-			required_reagents = list("cryoxadone" = 1, "sodium" = 1)
+			required_reagents = list("cryoxadone" = 1, "sodium" = 1, "plasma" = 0.1)
 			required_catalysts = list("plasma" = 5)
 			result_amount = 2
 
@@ -514,7 +514,7 @@ datum
 			id = "mindbreaker"
 			result = "mindbreaker"
 			required_reagents = list("silicon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
-			result_amount = 5
+			result_amount = 3
 
 		lipozine
 			name = "Lipozine"
@@ -1835,7 +1835,7 @@ datum
 			required_reagents = list("berryjuice" = 1, "cream" = 1, "vermouth" = 1)
 			result_amount = 3
 
-		grapesoda //Allows Grape Soda to be made
+		grapesoda
 			name = "Grape Soda"
 			id = "grapesoda"
 			result = "grapesoda"
