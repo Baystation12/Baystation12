@@ -885,12 +885,15 @@
 			nutrition += light_amount
 			traumatic_shock -= light_amount
 
-			if(nutrition > 500)
-				nutrition = 500
-			if(light_amount > 5) //if there's enough light, heal
-				adjustBruteLoss(-1)
-				adjustToxLoss(-1)
-				adjustOxyLoss(-1)
+			if(species.flags & IS_PLANT)
+				if(nutrition > 500)
+					nutrition = 500
+				if(light_amount >= 3) //if there's enough light, heal
+					adjustBruteLoss(-(light_amount))
+					adjustToxLoss(-(light_amount))
+					adjustOxyLoss(-(light_amount))
+					//TODO: heal wounds, heal broken limbs.
+
 		if(dna && dna.mutantrace == "shadow")
 			var/light_amount = 0
 			if(isturf(loc))
