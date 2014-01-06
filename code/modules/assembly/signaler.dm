@@ -15,6 +15,7 @@
 	var/frequency = 1457
 	var/delay = 0
 	var/airlock_wire = null
+	var/datum/wires/connected = null
 	var/datum/radio_frequency/radio_connection
 	var/deadman = 0
 

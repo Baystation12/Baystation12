@@ -19,10 +19,9 @@
 	new /obj/item/clothing/suit/space/rig/syndi/human(src)
 	new /obj/item/weapon/crowbar/red(src)
 	new /obj/item/weapon/cell/high(src)
-	new /obj/item/weapon/card/id/syndicate(src)
 	new /obj/item/device/multitool(src)
-	new /obj/item/weapon/shield/energy(src)
 	new /obj/item/clothing/shoes/magboots(src)
+	new /obj/item/weapon/storage/belt/military(src)
 
 
 /obj/structure/closet/syndicate/nuclear
