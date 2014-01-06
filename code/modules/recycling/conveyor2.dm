@@ -16,17 +16,11 @@
 	var/list/affecting	// the list of all items that will be moved this ptick
 	var/id = ""			// the control ID	- must match controller ID
 
-/obj/machinery/conveyor/centcom_auto
-	id = "round_end_belt"
-
 	// create a conveyor
 /obj/machinery/conveyor/New(loc, newdir, on = 0)
 	..(loc)
 	if(newdir)
 		dir = newdir
-
-	if(id == "CentComConv01" | id == "dw_c")
-		on = 1
 
 	switch(dir)
 		if(NORTH)
