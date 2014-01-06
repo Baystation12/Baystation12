@@ -858,6 +858,7 @@ ________________________________________________________________________________
 				else
 					U << "\red <b>ERROR</b>: \black Procedure interrupted. Process terminated."
 			else
+				U.drop_item()
 				I.loc = src
 				t_disk = I
 				U << "\blue You slot \the [I] into \the [src]."
