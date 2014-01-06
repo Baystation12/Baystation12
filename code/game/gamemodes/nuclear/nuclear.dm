@@ -1,6 +1,8 @@
 /datum/game_mode
 	var/list/datum/mind/syndicates = list()
 
+proc/issyndicate(mob/living/M as mob)
+	return istype(M) && M.mind && ticker && ticker.mode && (M.mind in ticker.mode.syndicates)
 
 /datum/game_mode/nuclear
 	name = "nuclear emergency"
@@ -152,7 +154,6 @@
 
 	spawn (rand(waittime_l, waittime_h))
 		send_intercept()
-		set_security_level(3)
 	return ..()
 
 

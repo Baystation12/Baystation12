@@ -665,7 +665,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define BE_MONKEY		512
 #define BE_NINJA		1024
 #define BE_VOX			2048
-#define BE_PLANT		4096
+#define BE_SLIME		4096
 #define BE_VAMPIRE		8192
 
 var/list/be_special_flags = list(
@@ -681,7 +681,7 @@ var/list/be_special_flags = list(
 	"Monkey" = BE_MONKEY,
 	"Ninja" = BE_NINJA,
 	"Vox" = BE_VOX,
-	"Diona" = BE_PLANT,
+	"Slime" = BE_SLIME,
 	"Vampire" = BE_VAMPIRE
 	)
 
@@ -722,7 +722,6 @@ var/list/tachycardics = list("coffee", "inaprovaline", "hyperzine", "nitroglycer
 var/list/bradycardics = list("neurotoxin", "cryoxadone", "clonexadone", "space_drugs", "stoxin")					//decrease heart rate
 var/list/heartstopper = list("potassium_phorochloride", "zombie_powder") //this stops the heart
 var/list/cheartstopper = list("potassium_chloride") //this stops the heart when overdose is met -- c = conditional
-
 
 //proc/get_pulse methods
 #define GETPULSE_HAND	0	//less accurate (hand)

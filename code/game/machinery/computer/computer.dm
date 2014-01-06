@@ -86,6 +86,7 @@
 	else if(stat & NOPOWER)
 		icon_state = initial(icon_state)
 		icon_state += "0"
+		luminosity = 0
 
 
 

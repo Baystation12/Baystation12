@@ -142,7 +142,7 @@
 		if(ismob(A))
 			var/mob/M = A
 			if(client_check && !M.client)
-				L = recursive_mob_check(A, L, recursion_limit - 1, client_check, sight_check, include_radio)
+				L |= recursive_mob_check(A, L, recursion_limit - 1, client_check, sight_check, include_radio)
 				continue
 			if(sight_check && !isInSight(A, O))
 				continue
@@ -155,7 +155,7 @@
 			L |= A
 
 		if(isobj(A) || ismob(A))
-			L = recursive_mob_check(A, L, recursion_limit - 1, client_check, sight_check, include_radio)
+			L |= recursive_mob_check(A, L, recursion_limit - 1, client_check, sight_check, include_radio)
 	return L
 
 // The old system would loop through lists for a total of 5000 per function call, in an empty server.
@@ -182,7 +182,7 @@
 			hear += A
 
 		if(isobj(A) || ismob(A))
-			hear = recursive_mob_check(A, hear, 3, 1, 0, 1)
+			hear |= recursive_mob_check(A, hear, 3, 1, 0, 1)
 
 	return hear
 
@@ -304,6 +304,19 @@ proc/isInSight(var/atom/A, var/atom/B)
 		for(var/mob/G in respawnable_list)
 			if( G.client && G.client.prefs.be_special & BE_ALIEN)
 				if(((G.client.inactivity/10)/60) <= ALIEN_SELECT_AFK_BUFFER + i) // the most active players are more likely to become an alien
+					if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
+						candidates += G.key
+		i++
+	return candidates
+
+/proc/get_slime_candidates()
+
+	var/list/candidates = list() //List of candidate KEYS to assume control of the new larva ~Carn
+	var/i = 0
+	while(candidates.len <= 0 && i < 5)
+		for(var/mob/G in respawnable_list)
+			if( G.client && G.client.prefs.be_special & BE_SLIME)
+				if(((G.client.inactivity/10)/60) <= ALIEN_SELECT_AFK_BUFFER + i) // the most active players are more likely to become a slime
 					if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
 						candidates += G.key
 		i++

@@ -70,7 +70,7 @@
 
 /mob/living/silicon/robot/proc/laws_sanity_check()
 	if (!laws)
-		laws = new base_law_type
+		make_laws()
 
 /mob/living/silicon/robot/proc/set_zeroth_law(var/law)
 	laws_sanity_check()
@@ -99,3 +99,11 @@
 /mob/living/silicon/robot/proc/clear_ion_laws()
 	laws_sanity_check()
 	laws.clear_ion_laws()
+
+/mob/living/silicon/proc/make_laws()
+	switch(config.default_laws)
+		if(0)  laws = new /datum/ai_laws/default/asimov()
+		if(1)  laws = new /datum/ai_laws/custom()
+		if(2)
+			var/datum/ai_laws/lawtype = pick(typesof(/datum/ai_laws/default) - /datum/ai_laws/default)
+			laws = new lawtype()

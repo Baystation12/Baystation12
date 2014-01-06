@@ -241,6 +241,8 @@ var/list/slot_equipment_priority = list( \
 	set category = "Object"
 	set src = usr
 
+	if(istype(loc,/obj/mecha)) return
+
 	if(hand)
 		var/obj/item/W = l_hand
 		if (W)
@@ -926,16 +928,16 @@ mob/verb/yank_out_object()
 
 
 /mob/verb/respawn()
-	set name = "Respawn as Mindless"
+	set name = "Respawn as NPC"
 	set category = "OOC"
 
 	if((usr in respawnable_list) && (stat==2 || istype(usr,/mob/dead/observer)))
 		var/list/creatures = list("Mouse")
-		for(var/mob/living/simple_animal/S in living_mob_list)
-			if(safe_animal_respawn(S.type))
-				if(!S.key)
-					creatures += S
-		var/picked = input("Please select a creature to respawn as", "Respawn as Mindless Creature")  as null|anything in creatures
+		for(var/mob/living/L in living_mob_list)
+			if(safe_respawn(L.type))
+				if(!L.key)
+					creatures += L
+		var/picked = input("Please select an NPC to respawn as", "Respawn as NPC")  as null|anything in creatures
 		switch(picked)
 			if("Mouse")
 				respawnable_list -= usr
@@ -943,10 +945,10 @@ mob/verb/yank_out_object()
 				spawn(5)
 					respawnable_list += usr
 			else
-				var/mob/living/simple_animal/picked_animal = picked
-				if(istype(picked_animal) && !picked_animal.key)
+				var/mob/living/NPC = picked
+				if(istype(NPC) && !NPC.key)
 					respawnable_list -= usr
-					picked_animal.key = key
+					NPC.key = key
 					spawn(5)
 						respawnable_list += usr
 				else

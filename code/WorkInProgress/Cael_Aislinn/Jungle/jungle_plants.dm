@@ -17,6 +17,7 @@
 	if(prob(20))
 		opacity = 1
 
+/*
 /obj/structure/bush/Bumped(M as mob)
 	if (istype(M, /mob/living/simple_animal))
 		var/mob/living/simple_animal/A = M
@@ -24,6 +25,7 @@
 	else if (istype(M, /mob/living/carbon/monkey))
 		var/mob/living/carbon/monkey/A = M
 		A.loc = get_turf(src)
+*/
 
 /obj/structure/bush/attackby(var/obj/I as obj, var/mob/user as mob)
 	//hatchets can clear away undergrowth

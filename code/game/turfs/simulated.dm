@@ -107,7 +107,7 @@
 					else
 						M.inertia_dir = 0
 						return
-				else if(!istype(M, /mob/living/carbon/slime) || (M:species.bodyflags & FEET_NOSLIP))
+				else if(!istype(M, (/mob/living/carbon/slime || /mob/living/carbon/human/slime)) || (M:species.bodyflags & FEET_NOSLIP))
 					if (M.m_intent == "run")
 						M.stop_pulling()
 						step(M, M.dir)

@@ -460,7 +460,7 @@ datum
 					var/mob/living/carbon/human/human = M
 					if(human.dna.mutantrace == null)
 						M << "\red Your flesh rapidly mutates!"
-						human.dna.mutantrace = "slime"
+						human.dna.mutantrace = "shadow"
 						human.update_mutantrace()
 				..()
 				return
@@ -603,7 +603,7 @@ datum
 						for(var/mob/O in viewers(M, null))
 							O.show_message(text("\blue []'s eyes blink and become clearer.", M), 1) // So observers know it worked.
 					// Vamps react to this like acid
-					if((M.mind in ticker.mode.vampires) && prob(10))
+					if(((M.mind in ticker.mode.vampires) || M.mind.vampire) && prob(10))
 						if(!M) M = holder.my_atom
 						M.adjustToxLoss(1*REM)
 						M.take_organ_damage(0, 1*REM)
@@ -1740,10 +1740,31 @@ datum
 					var/mob/living/carbon/human/H = M
 					var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
 					if(istype(E))
-						E.damage = max(E.damage-5 , 0)
-//				M.sdisabilities &= ~1		Replaced by eye surgery
+						if(E.damage > 0)
+							E.damage -= 1
 				..()
 				return
+
+
+		peridaxon
+			name = "Peridaxon"
+			id = "peridaxon"
+			description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
+			reagent_state = LIQUID
+			color = "#C8A5DC" // rgb: 200, 165, 220
+			overdose = 10
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					var/datum/organ/external/chest/C = H.get_organ("chest")
+					for(var/datum/organ/internal/I in C.internal_organs)
+						if(I.damage > 0)
+							I.damage -= 0.20
+				..()
+				return
+
 
 		bicaridine
 			name = "Bicaridine"
@@ -2081,6 +2102,47 @@ datum
 				holder.remove_reagent(src.id, 0.4)
 				..()
 				return
+
+
+
+		potassium_chloride
+			name = "Potassium Chloride"
+			id = "potassium_chloride"
+			description = "A delicious salt that stops the heart when injected into cardiac muscle."
+			reagent_state = SOLID
+			color = "#FFFFFF" // rgb: 255,255,255
+			overdose = 30
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				var/mob/living/carbon/human/H = M
+				if(H.stat != 1)
+					if (volume >= overdose)
+						if(H.losebreath >= 10)
+							H.losebreath = max(10, H.losebreath-10)
+						H.adjustOxyLoss(2)
+						H.Weaken(10)
+				..()
+				return
+
+		potassium_chlorophoride
+			name = "Potassium Chlorophoride"
+			id = "potassium_chlorophoride"
+			description = "A specific chemical based on Potassium Chloride to stop the heart for surgery. Not safe to eat!"
+			reagent_state = SOLID
+			color = "#FFFFFF" // rgb: 255,255,255
+			overdose = 20
+
+			on_mob_life(var/mob/living/carbon/M as mob)
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					if(H.stat != 1)
+						if(H.losebreath >= 10)
+							H.losebreath = max(10, M.losebreath-10)
+						H.adjustOxyLoss(2)
+						H.Weaken(10)
+				..()
+				return
+
 
 
 /////////////////////////Food Reagents////////////////////////////

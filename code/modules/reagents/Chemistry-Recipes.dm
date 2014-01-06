@@ -119,6 +119,13 @@ datum
 		//	required_reagents = list("hydrogen" = 1, "carbon" = 1, "nitrogen" = 1)
 		//	result_amount = 1
 
+		water //I can't believe we never had this.
+			name = "Water"
+			id = "water"
+			result = null
+			required_reagents = list("oxygen" = 2, "hydrogen" = 1)
+			result_amount = 1
+
 		thermite
 			name = "Thermite"
 			id = "thermite"
@@ -458,6 +465,27 @@ datum
 			result = "chloralhydrate"
 			required_reagents = list("ethanol" = 1, "chlorine" = 3, "water" = 1)
 			result_amount = 1
+
+		potassium_chloride
+			name = "Potassium Chloride"
+			id = "potassium_chloride"
+			id = "potassium_chloride"
+			required_reagents = list("sodiumchloride" = 1, "potassium" = 1)
+			result_amount = 2
+
+		potassium_chlorophoride
+			name = "Potassium Chlorophoride"
+			id = "potassium_chlorophoride"
+			id = "potassium_chlorophoride"
+			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloral_hydrate" = 1)
+			result_amount = 4
+
+		stoxin
+			name = "Sleep Toxin"
+			id = "stoxin"
+			result = "stoxin"
+			required_reagents = list("chloralhydrate" = 1, "sugar" = 4)
+			result_amount = 5
 
 		zombiepowder
 			name = "Zombie Powder"
@@ -1082,6 +1110,33 @@ datum
 			on_reaction(var/datum/reagents/holder)
 
 				var/list/borks = typesof(/obj/item/weapon/reagent_containers/food/snacks) - /obj/item/weapon/reagent_containers/food/snacks
+				// BORK BORK BORK
+
+				playsound(get_turf_loc(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
+
+				for(var/mob/living/carbon/human/M in viewers(get_turf_loc(holder.my_atom), null))
+					if(M:eyecheck() <= 0)
+						flick("e_flash", M.flash)
+
+				for(var/i = 1, i <= 4 + rand(1,2), i++)
+					var/chosen = pick(borks)
+					var/obj/B = new chosen
+					if(B)
+						B.loc = get_turf_loc(holder.my_atom)
+						if(prob(50))
+							for(var/j = 1, j <= rand(1, 3), j++)
+								step(B, pick(NORTH,SOUTH,EAST,WEST))
+		slimedrinks
+			name = "Slime Drinks"
+			id = "m_tele3"
+			result = null
+			required_reagents = list("water" = 5)
+			result_amount = 1
+			required_container = /obj/item/slime_extract/silver
+			required_other = 1
+			on_reaction(var/datum/reagents/holder)
+
+				var/list/borks = typesof(/obj/item/weapon/reagent_containers/food/drinks) - /obj/item/weapon/reagent_containers/food/drinks
 				// BORK BORK BORK
 
 				playsound(get_turf_loc(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)

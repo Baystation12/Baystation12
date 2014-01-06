@@ -64,6 +64,7 @@
 	var/braintype = "Cyborg"
 	var/pose
 	var/base_icon = ""
+	var/crisis = 0
 
 /mob/living/silicon/robot/New(loc,var/syndie = 0,var/unfinished = 0, var/alien = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
@@ -94,7 +95,7 @@
 			connected_ai = select_active_alien_ai()
 			scrambledcodes = 1
 		else
-			laws = new /datum/ai_laws/nanotrasen()
+			make_laws()
 			connected_ai = select_active_ai_with_fewest_borgs()
 		if(connected_ai)
 			connected_ai.connected_robots += src
@@ -154,7 +155,7 @@
 		return
 
 	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
-	if(security_level == (SEC_LEVEL_GAMMA || SEC_LEVEL_EPSILON))
+	if(security_level == (SEC_LEVEL_GAMMA || SEC_LEVEL_EPSILON) || crisis)
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
 	if(mmi != null && mmi.alien)
@@ -588,6 +589,7 @@
 				return
 
 	if (istype(W, /obj/item/weapon/weldingtool))
+		if(W == module_active) return
 		if (!getBruteLoss())
 			user << "Nothing to fix here!"
 			return

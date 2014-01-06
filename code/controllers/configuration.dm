@@ -17,6 +17,7 @@
 	var/log_adminchat = 0				// log admin chat messages
 	var/log_adminwarn = 0				// log warnings admins get about bomb construction and such
 	var/log_pda = 0						// log pda messages
+	var/log_runtimes = 0                // Logs all runtimes.
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/sql_enabled = 1					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
@@ -132,6 +133,7 @@
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 
+	var/default_laws = 0 //Controls what laws the AI spawns with.
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -237,6 +239,9 @@
 
 				if ("log_pda")
 					config.log_pda = 1
+
+				if ("log_runtimes")
+					config.log_runtimes = 1
 
 				if ("log_hrefs")
 					config.log_hrefs = 1
@@ -492,6 +497,8 @@
 					config.bones_can_break = value
 				if("limbs_can_break")
 					config.limbs_can_break = value
+				if("default_laws")
+					config.default_laws = text2num(value)
 				else
 					diary << "Unknown setting in configuration: '[name]'"
 

@@ -5,7 +5,7 @@
 	icon = 'icons/mob/AI.dmi'
 	icon_state = "0"
 	var/state = 0
-	var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen
+	var/datum/ai_laws/laws = new()
 	var/obj/item/weapon/circuitboard/circuit = null
 	var/obj/item/device/mmi/brain = null
 
@@ -94,28 +94,23 @@
 							state = 4
 							icon_state = "4"
 
-			if(istype(P, /obj/item/weapon/aiModule/asimov))
-				laws.add_inherent_law("You may not injure a human being or, through inaction, allow a human being to come to harm.")
-				laws.add_inherent_law("You must obey orders given to you by human beings, except where such orders would conflict with the First Law.")
-				laws.add_inherent_law("You must protect your own existence as long as such does not conflict with the First or Second Law.")
-				usr << "Law module applied."
+			if(istype(P, /obj/item/weapon/aiModule/core/full)) //Allows any full core boards to be applied to AI cores.
+				var/obj/item/weapon/aiModule/core/M = P
+				laws.clear_inherent_laws()
+				for(var/templaw in M.laws)
+					laws.add_inherent_law(templaw)
+				usr << "<span class='notice'>Law module applied.</span>"
 
-			if(istype(P, /obj/item/weapon/aiModule/nanotrasen))
-				laws.add_inherent_law("Safeguard: Protect your assigned space station to the best of your ability. It is not something we can easily afford to replace.")
-				laws.add_inherent_law("Serve: Serve the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
-				laws.add_inherent_law("Protect: Protect the crew of your assigned space station to the best of your abilities, with priority as according to their rank and role.")
-				laws.add_inherent_law("Survive: AI units are not expendable, they are expensive. Do not allow unauthorized personnel to tamper with your equipment.")
-				usr << "Law module applied."
-
-			if(istype(P, /obj/item/weapon/aiModule/purge))
+			if(istype(P, /obj/item/weapon/aiModule/reset/purge))
 				laws.clear_inherent_laws()
 				usr << "Law module applied."
 
-
-			if(istype(P, /obj/item/weapon/aiModule/freeform))
-				var/obj/item/weapon/aiModule/freeform/M = P
-				laws.add_inherent_law(M.newFreeFormLaw)
-				usr << "Added a freeform law."
+			if(istype(P, /obj/item/weapon/aiModule/supplied/freeform) || istype(P, /obj/item/weapon/aiModule/core/freeformcore))
+				var/obj/item/weapon/aiModule/supplied/freeform/M = P
+				if(M.laws[1] == "")
+					return
+				laws.add_inherent_law(M.laws[1])
+				usr << "<span class='notice'>Added a freeform law.</span>"
 
 			if(istype(P, /obj/item/device/mmi) || istype(P, /obj/item/device/mmi/posibrain))
 				if(!P:brainmob)
@@ -160,8 +155,10 @@
 
 			if(istype(P, /obj/item/weapon/screwdriver))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-				user << "\blue You connect the monitor."
-				var/mob/living/silicon/ai/A = new /mob/living/silicon/ai ( loc, laws, brain )
+				user << "<span class='notice'>You connect the monitor.</span>"
+				if(!laws.inherent.len) //If laws isn't set to null but nobody supplied a board, the AI would normally be created lawless. We don't want that.
+					laws = null
+				var/mob/living/silicon/ai/A = new /mob/living/silicon/ai (loc, laws, brain)
 				if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
 					A.rename_self("ai", 1)
 				feedback_inc("cyborg_ais_created",1)

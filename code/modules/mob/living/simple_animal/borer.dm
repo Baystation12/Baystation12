@@ -42,6 +42,8 @@
 	attacktext = "nips"
 	friendly = "prods"
 	wander = 0
+	small = 1
+	density = 0
 	pass_flags = PASSTABLE
 
 	var/used_dominate

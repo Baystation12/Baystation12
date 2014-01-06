@@ -167,6 +167,67 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		return 1
 	return 0
 
+/*
+/*
+	NANO UI FOR UPLINK WOOP WOOP
+*/
+/obj/item/device/uplink/hidden/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+	var/title = "Syndicate Uplink"
+	var/data[0]
+
+	data["crystals"] = uses
+	data["nano_items"] = nanoui_items
+	data["welcome"] = welcome
+
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	if (!ui)
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600)
+		// when the ui is first opened this is the data it will use
+		ui.set_initial_data(data)
+		// open the new ui window
+		ui.open()
+
+// Interaction code. Gathers a list of items purchasable from the paren't uplink and displays it. It also adds a lock button.
+/obj/item/device/uplink/hidden/interact(mob/user)
+
+	ui_interact(user)
+
+// The purchasing code.
+/obj/item/device/uplink/hidden/Topic(href, href_list)
+	if (usr.stat || usr.restrained())
+		return
+
+	if (!( istype(usr, /mob/living/carbon/human)))
+		return 0
+	var/mob/user = usr
+	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
+	if ((usr.contents.Find(src.loc) || (in_range(src.loc, usr) && istype(src.loc.loc, /turf))))
+		usr.set_machine(src)
+		if(href_list["lock"])
+			toggle()
+			ui.close()
+			return 1
+
+		if(..(href, href_list) == 1)
+
+			if(!(href_list["buy_item"] in valid_items))
+				return
+
+			var/path_obj = text2path(href_list["buy_item"])
+
+			var/obj/I = new path_obj(get_turf(usr))
+			if(ishuman(usr))
+				var/mob/living/carbon/human/A = usr
+				A.put_in_any_hand_if_possible(I)
+			purchase_log += "[usr] ([usr.ckey]) bought [I]."
+	interact(usr)
+	return 1
+
+*/
+
 // I placed this here because of how relevant it is.
 // You place this in your uplinkable item to check if an uplink is active or not.
 // If it is, it will display the uplink menu and return 1, else it'll return false.

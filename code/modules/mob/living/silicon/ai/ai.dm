@@ -80,7 +80,7 @@ var/list/ai_list = list()
 		if (istype(L, /datum/ai_laws))
 			laws = L
 	else
-		laws = new base_law_type
+		make_laws()
 
 	verbs += /mob/living/silicon/ai/proc/show_laws_verb
 

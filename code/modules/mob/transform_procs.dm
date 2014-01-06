@@ -77,7 +77,7 @@
 /mob/proc/AIize()
 	if(client)
 		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // stop the jams for AIs
-	var/mob/living/silicon/ai/O = new (loc, base_law_type,,1)//No MMI but safety is in effect.
+	var/mob/living/silicon/ai/O = new (loc,,,1)//No MMI but safety is in effect.
 	O.invisibility = 0
 	O.aiRestorePowerRoutine = 0
 
@@ -382,12 +382,12 @@
 	return 0
 
 
-/mob/proc/safe_animal_respawn(var/MP)
+/mob/proc/safe_respawn(var/MP)
 //Bad mobs! - Remember to add a comment explaining what's wrong with the mob
 	if(!MP)
 		return 0	//Sanity, this should never happen.
 
-//Good mobs!
+//Animals!
 	if(ispath(MP, /mob/living/simple_animal/cat))
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/corgi))
@@ -402,11 +402,19 @@
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/pony))
 		return 1
+
+//Antag Creatures!
 	if(ispath(MP, /mob/living/simple_animal/hostile/carp))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/hostile/bear))
-		return 1
 	if(ispath(MP, /mob/living/simple_animal/hostile/giant_spider))
+		return 1
+	if(ispath(MP, /mob/living/simple_animal/borer))
+		return 1
+	if(ispath(MP, /mob/living/carbon/alien))
+		return 1
+
+//Friendly Creatures!
+	if(ispath(MP, /mob/living/carbon/monkey/diona))
 		return 1
 
 	//Not in here? Must be untested!

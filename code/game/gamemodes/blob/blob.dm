@@ -24,7 +24,7 @@ var/list/blob_nodes = list()
 	var/blob_point_rate = 3
 
 	var/blobwincount = 700
-	var/stage_2_threshold = 0.75
+	var/stage_2_threshold = 0.60
 
 	var/list/infected_crew = list()
 
@@ -54,6 +54,13 @@ var/list/blob_nodes = list()
 		return 0
 
 	return 1
+
+/datum/game_mode/blob/proc/get_nuke_code()
+	var/nukecode = "ERROR"
+	for(var/obj/machinery/nuclearbomb/bomb in world)
+		if(bomb && bomb.r_code && bomb.z == 1)
+			nukecode = bomb.r_code
+	return nukecode
 
 
 /datum/game_mode/blob/announce()
@@ -175,9 +182,10 @@ var/list/blob_nodes = list()
 			return
 
 		if (2)
-			command_alert("The biohazard has grown out of control and will soon reach critical mass. Activate the nuclear failsafe to mantain quarantine.", "Biohazard Alert")
-			set_security_level("delta")
+			command_alert("The biohazard has grown out of control and will soon reach critical mass. Activate the nuclear failsafe to mantain quarantine. The Nuclear Authentication Code is [get_nuke_code()] ", "Biohazard Alert")
+			set_security_level("gamma")
 			send_intercept(2)
+			spawn(10)	world << sound('sound/effects/siren.ogg')
 			return
 
 	return

@@ -506,6 +506,16 @@ datum
 
 				return res
 
+			// Admin logging.
+			get_reagent_ids(var/and_amount=0)
+				var/list/stuff = list()
+				for(var/datum/reagent/A in reagent_list)
+					if(and_amount)
+						stuff += "[get_reagent_amount(A.id)]U of [A.id]"
+					else
+						stuff += A.id
+				return english_list(stuff)
+
 			//two helper functions to preserve data across reactions (needed for xenoarch)
 			get_data(var/reagent_id)
 				for(var/datum/reagent/D in reagent_list)
