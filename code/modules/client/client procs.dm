@@ -282,9 +282,9 @@
 /client/proc/send_resources()
 //	preload_vox()
 	getFiles(
-	//	'nano/js/libraries.min.js',
-		'nano/js/libraries/1-jquery.js',
-		'nano/js/libraries/3-jquery.timers.js',
+		'nano/js/libraries.min.js',
+	//	'nano/js/libraries/1-jquery.js',
+	//	'nano/js/libraries/3-jquery.timers.js',
 		'nano/js/nano_update.js',
 		'nano/js/nano_config.js',
 		'nano/js/nano_base_helpers.js',
