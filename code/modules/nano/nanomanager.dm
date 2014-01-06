@@ -25,11 +25,11 @@
   * @return /nanoui Returns the found ui, for null if none exists
   */
 /datum/nanomanager/proc/try_update_ui(var/mob/user, src_object, ui_key, var/datum/nanoui/ui, data)
-	if (isnull(ui)) // no ui has been passed, so we'll search for one
+	if (!ui) // no ui has been passed, so we'll search for one
 	{
-		ui = get_open_ui(user, src_object, ui_key)
+		ui = get_open_ui(user, src, ui_key)
 	}
-	if (!isnull(ui))
+	if (ui)
 		// The UI is already open so push the data to it
 		ui.push_data(data)
 		return ui
