@@ -119,6 +119,7 @@
 			return
 
 	if (istype(src.loc, /obj/item/weapon/storage))
+		//If the item is in a storage item, take it out
 		var/obj/item/weapon/storage/S = src.loc
 		S.remove_from_storage(src)
 
@@ -170,6 +171,25 @@
 
 	user.put_in_active_hand(src)
 	return
+
+
+/obj/item/attack_alien(mob/user as mob)
+	var/mob/living/carbon/alien/A = user
+
+	if(!A.has_fine_manipulation || w_class >= 4)
+		if(src in A.contents) // To stop Aliens having items stuck in their pockets
+			A.drop_from_inventory(src)
+		user << "Your claws aren't capable of such fine manipulation."
+		return
+	attack_paw(A)
+
+/obj/item/attack_ai(mob/user as mob)
+	if (istype(src.loc, /obj/item/weapon/robot_module))
+		//If the item is part of a cyborg module, equip it
+		if(!isrobot(user)) return
+		var/mob/living/silicon/robot/R = user
+		R.activate_module(src)
+		R.hud_used.update_robot_modules_display()
 
 // Due to storage type consolidation this should get used more now.
 // I have cleaned it up a little, but it could probably use more.  -Sayu

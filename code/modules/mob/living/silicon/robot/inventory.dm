@@ -15,6 +15,26 @@
 		if (client)
 			client.screen -= module_state_1
 		contents -= module_state_1
+
+/mob/living/silicon/robot/proc/uneq_module(obj/item/O)
+	if(!O)
+		return 0
+
+	if(istype(O,/obj/item/borg/sight))
+		var/obj/item/borg/sight/S = O
+		sight_mode &= ~S.sight_mode
+	else if(istype(O, /obj/item/device/flashlight))
+		var/obj/item/device/flashlight/F = O
+		if(F.on)
+			F.on = 0
+			F.update_brightness(src)
+	if(client)
+		client.screen -= O
+	contents -= O
+	if(module)
+		O.loc = module	//Return item to module so it appears in its contents, so it can be taken out again.
+
+	if(module_active == O)
 		module_active = null
 		module_state_1 = null
 		inv1.icon_state = "inv1"
@@ -37,6 +57,35 @@
 		module_state_3 = null
 		inv3.icon_state = "inv3"
 	updateicon()
+	return 1
+
+/mob/living/silicon/robot/proc/activate_module(var/obj/item/O)
+	if(!(locate(O) in src.module.modules) && O != src.module.emag)
+		return
+	if(activated(O))
+		src << "Already activated"
+		return
+	if(!module_state_1)
+		module_state_1 = O
+		O.layer = 20
+		contents += O
+		if(istype(module_state_1,/obj/item/borg/sight))
+			sight_mode |= module_state_1:sight_mode
+	else if(!module_state_2)
+		module_state_2 = O
+		O.layer = 20
+		contents += O
+		if(istype(module_state_2,/obj/item/borg/sight))
+			sight_mode |= module_state_2:sight_mode
+	else if(!module_state_3)
+		module_state_3 = O
+		O.layer = 20
+		contents += O
+		if(istype(module_state_3,/obj/item/borg/sight))
+			sight_mode |= module_state_3:sight_mode
+	else
+		src << "You need to disable a module first!"
+
 
 /mob/living/silicon/robot/proc/uneq_all()
 	module_active = null
