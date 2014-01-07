@@ -140,6 +140,8 @@
 	adult.name = src.name
 	adult.real_name = src.real_name
 	adult.ckey = src.ckey
+	adult.real_name = pick(diona_names)	//I hate this being here of all places but unfortunately dna is based on real_name!
+	adult.rename_self("diona")
 
 	for (var/obj/item/W in src.contents)
 		src.drop_from_inventory(W)
