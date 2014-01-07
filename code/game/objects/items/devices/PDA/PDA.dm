@@ -943,10 +943,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		else
 			//Basic safety check. If either both objects are held by user or PDA is on ground and card is in hand.
 			if(((src in user.contents) && (C in user.contents)) || (istype(loc, /turf) && in_range(src, user) && (C in user.contents)) )
-				if( can_use(user) )//If they can still act.
-					id_check(user, 2)
-					user << "<span class='notice'>You put the ID into \the [src]'s slot.</span>"
-					updateSelfDialog()//Update self dialog on success.
+				id_check(user, 2)
+				user << "<span class='notice'>You put the ID into \the [src]'s slot.</span>"
+				updateSelfDialog()//Update self dialog on success.
 			return	//Return in case of failed check or when successful.
 		updateSelfDialog()//For the non-input related code.
 	else if(istype(C, /obj/item/device/paicard) && !src.pai)
