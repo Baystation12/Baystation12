@@ -591,7 +591,10 @@ This function completely restores a damaged organ to perfect condition.
 	if(status & ORGAN_BROKEN)
 		return
 	owner.visible_message("\red You hear a loud cracking sound coming from \the [owner].","\red <b>Something feels like it shattered in your [display_name]!</b>","You hear a sickening crack.")
-	owner.emote("scream")
+
+	if(owner.species && !(owner.species.flags & NO_PAIN))
+		owner.emote("scream")
+
 	status |= ORGAN_BROKEN
 	broken_description = pick("broken","fracture","hairline fracture")
 	perma_injury = brute_dam
