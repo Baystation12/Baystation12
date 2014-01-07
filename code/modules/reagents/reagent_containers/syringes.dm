@@ -89,7 +89,15 @@
 							user << "\red You are unable to locate any blood."
 							return
 
-						var/datum/reagent/B = T.take_blood(src,amount)
+						var/datum/reagent/B
+						if(istype(T,/mob/living/carbon/human))
+							var/mob/living/carbon/human/H = T
+							if(H.species && H.species.flags & NO_BLOOD)
+								H.reagents.trans_to(src,amount)
+							else
+								B = T.take_blood(src,amount)
+						else
+							B = T.take_blood(src,amount)
 
 						if (B)
 							src.reagents.reagent_list += B

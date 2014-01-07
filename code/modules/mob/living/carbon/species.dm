@@ -71,7 +71,7 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
 	flesh_color = "#34AF10"
 
@@ -95,7 +95,7 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
 	flesh_color = "#AFA59E"
 
@@ -106,7 +106,7 @@
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
 
 	flesh_color = "#8CD7A3"
 
@@ -126,7 +126,7 @@
 	eyes = "vox_eyes_s"
 	breath_type = "nitrogen"
 
-	flags = NO_SCAN
+	flags = NO_SCAN | NO_BLOOD
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -151,7 +151,7 @@
 	heat_level_2 = 3000
 	heat_level_3 = 4000
 
-	flags = WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
+	flags = IS_WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"

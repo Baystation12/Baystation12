@@ -899,7 +899,7 @@ datum/preferences
 						if(config.usealienwhitelist)
 							for(var/L in all_languages)
 								var/datum/language/lang = all_languages[L]
-								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))))
+								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & IS_WHITELISTED ))))
 									new_languages += lang
 									languages_available = 1
 
@@ -1137,7 +1137,7 @@ datum/preferences
 						var/UI_style_alpha_new = input(user, "Select a new alpha(transparence) parametr for UI, between 50 and 255") as num
 						if(!UI_style_alpha_new | !(UI_style_alpha_new <= 255 && UI_style_alpha_new >= 50)) return
 						UI_style_alpha = UI_style_alpha_new
-								
+
 					if("be_special")
 						var/num = text2num(href_list["num"])
 						be_special ^= (1<<num)
@@ -1160,7 +1160,7 @@ datum/preferences
 
 					if("ghost_sight")
 						toggles ^= CHAT_GHOSTSIGHT
-						
+
 					if("ghost_radio")
 						toggles ^= CHAT_GHOSTRADIO
 
