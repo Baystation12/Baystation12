@@ -25,7 +25,7 @@
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 
 	if(use_me)
-		usr.emote("me",1,message)
+		usr.emote("me",usr.emote_type,message)
 	else
 		usr.emote(message)
 

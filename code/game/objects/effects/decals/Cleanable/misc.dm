@@ -41,7 +41,7 @@
 	icon_state = "dirt"
 
 /obj/effect/decal/cleanable/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/crowbar))
+	if(!istype(W,/obj/item/weapon/mop) && !istype(W,/obj/item/weapon/soap))
 		var/turf/T = get_turf(src)
 		if(T)
 			T.attackby(W,user)
