@@ -866,7 +866,15 @@
 	*/
 
 	proc/handle_chemicals_in_body()
-		if(reagents) reagents.metabolize(src)
+		if(reagents)
+
+			var/alien //Not the best way to handle it, but neater than checking this for every single reagent proc.
+			if(species && species.name == "Diona")
+				alien = 1
+			else if(species && species.name == "Vox")
+				alien = 2
+			reagents.metabolize(src,alien)
+
 		var/total_plasmaloss = 0
 		for(var/obj/item/I in src)
 			if(I.contaminated)

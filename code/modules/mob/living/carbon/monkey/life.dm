@@ -440,7 +440,7 @@
 
 	proc/handle_chemicals_in_body()
 
-		if(istype(src,/mob/living/carbon/monkey/diona)) //Filthy check. Dionaea nymphs need light or they get sad.
+		if(alien) //Diona nymphs are the only alien monkey currently.
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light
 				var/turf/T = loc
@@ -459,7 +459,7 @@
 				adjustToxLoss(-1)
 				adjustOxyLoss(-1)
 
-		if(reagents) reagents.metabolize(src)
+		if(reagents) reagents.metabolize(src,alien)
 
 		if (drowsyness)
 			drowsyness--
