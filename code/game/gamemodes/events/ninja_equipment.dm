@@ -23,6 +23,7 @@ ________________________________________________________________________________
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/init//suit initialize verb
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_instruction//for AIs
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_holo
+	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja // Experemental
 	//verbs += /obj/item/clothing/suit/space/space_ninja/proc/display_verb_procs//DEBUG. Doesn't work.
 	spark_system = new()//spark initialize
 	spark_system.set_up(5, 0, src)
@@ -772,8 +773,8 @@ ________________________________________________________________________________
 	return
 
 /obj/item/clothing/suit/space/space_ninja/proc/ai_hack_ninja()
-	set name = "Hack SpiderOS"
-	set desc = "Hack directly into the Black Widow(tm) neuro-interface."
+	set name = "Display SpiderOS"
+	set desc = "Hack into SpiderOS and display a modified interface."
 	set category = "AI Ninja Equip"
 	set src = usr.loc
 
@@ -790,8 +791,53 @@ ________________________________________________________________________________
 	AI << "You have seized your hacking attempt. [affecting.real_name] has regained control."
 	affecting << "<b>UPDATE</b>: [AI.real_name] has ceased hacking attempt. All systems clear."
 
+	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja
 	remove_AI_verbs()
 	return
+
+/obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja()// Experemental -- Dave
+	set name = "Hack Ninja Systems"
+	set desc = "Hack directly into the Black Widow(tm) neuro-interface."
+	set category = "AI Ninja Equip"
+	set src = usr.loc
+
+	var/mob/living/carbon/human/U = affecting
+	var/mob/living/silicon/ai/A = AI
+
+	if(A.laws.zeroth || A.laws != /datum/ai_laws/ninja_override)//Gives a few seconds to re-upload the AI somewhere before it takes full control.
+		s_busy = 1
+		for(var/i,i<5,i++)
+			if(AI==A)
+				switch(i)
+					if(0)
+						A << "\red <b>NOTICE</b>:\n beginning hack attempt..."
+						U << "\red <b>WARNING</b>: HACKING AT��TEMP� IN PR0GRESs!"
+						spideros = 0
+						k_unlock = 0
+						U << browse(null, "window=spideros")
+					if(1)
+						A << "Disconnecting neural interface..."
+						U << "\red <b>WAR�NING</b>: �R�O0�Gr�--S 2&3%"
+					if(2)
+						A << "Shutting down external protocol..."
+						U << "\red <b>WARNING</b>: P����RֆGr�5S 677^%"
+						cancel_stealth()
+					if(3)
+						A << "Connecting to kernel..."
+						U << "\red <b>WARNING</b>: �R�r�R_404"
+						A.control_disabled = 0
+					if(4)
+						A << "Connection established and secured. Menu updated."
+						U << "\red <b>W�r#nING</b>: #%@!!WȆ|_4�54@ \nUn�B88l3 T� L�-�o-L�CaT2 ##$!�RN�0..%.."
+						verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja
+						grant_AI_verbs()
+						return
+				sleep(s_delay)
+			else	break
+		s_busy = 0
+	else
+		A << "/red Unable to hack target with current lawset!"
+
 
 //=======//GENERAL SUIT PROCS//=======//
 
@@ -858,6 +904,7 @@ ________________________________________________________________________________
 				else
 					U << "\red <b>ERROR</b>: \black Procedure interrupted. Process terminated."
 			else
+				U.drop_item()
 				I.loc = src
 				t_disk = I
 				U << "\blue You slot \the [I] into \the [src]."
