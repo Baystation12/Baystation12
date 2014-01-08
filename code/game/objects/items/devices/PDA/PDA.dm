@@ -341,8 +341,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	data["idInserted"] = (id ? 1 : 0)
 	data["idLink"] = (id ? text("[id.registered_name], [id.assignment]") : "--------")
 
-	data["cartridge"] = null
-	data["records"] = null
+	data["cart_loaded"] = cartridge ? 1:0
 	if(cartridge)
 		var/cartdata[0]
 
@@ -403,18 +402,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		data["messagescount"] = null
 		data["messages"] = null
 
-	var/found = 0
 	if(active_conversation)
 		for(var/c in tnote)
 			if(c["target"] == active_conversation)
 				data["convo_name"] = sanitize(c["owner"])
 				data["convo_job"] = sanitize(c["job"])
-				found = 1
 				break
-	if(!found)
-		data["convo_name"] = null
-		data["convo_job"] = null
-
 	if(mode==41)
 		data["manifest"] = data_core.get_manifest_json()
 
@@ -444,16 +437,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					"reading" = 1\
 					)
 		if(isnull(data["aircontents"]))
-			data["aircontents"] = list(\
-				"pressure" = null,\
-				"nitrogen" = null,\
-				"oxygen" = null,\
-				"carbon_dioxide" = null,\
-				"plasma" = null,\
-				"other" = null,\
-				"temp" = null,\
-				"reading" = 0\
-				)
+			data["aircontents"] = list("reading" = 0)
 		
 	// update the ui if it exists, returns null if no ui is passed/found
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
