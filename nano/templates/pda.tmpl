@@ -49,7 +49,11 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
                         <b>Cartridge</b>:
                 </div>
                 <div class="itemContent">
-                         {{:~link(cartridge ? cartridge.name : 'no cartridge', 'eject', {'choice' : "Eject"}, cartridge ? null : 'disabled', cartridge ? null : 'fixedLeft')}}
+			{{if cart_loaded==1}}
+                         {{:~link(cartridge.name, 'eject', {'choice' : "Eject"},null,null)}}
+			{{else}}
+			{{:~link('None', 'eject', {'choice' : "Eject"},'disabled',null)}}
+			{{/if}}
                 </div>
         </div>
 	<div class="item">
@@ -469,10 +473,10 @@ Used In File(s): \code\game\objects\items\devices\PDA\PDA.dm
 			<b> ALERT!</b>:
 		</div>
 		<div class="itemContent">
-		{{:~link('None', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'default' : "alert"}, null, null)}}
-                {{:~link('Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "alert"}, null, null)}}
-                {{:~link('Lockdown', 'caution', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "alert"}, null, null)}}
-                {{:~link('Biohazard', 'radiation', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "alert"}, null, null)}}
+		{{:~link('None', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "default"}, null, null)}}
+                {{:~link('Red Alert', 'alert', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "redalert"}, null, null)}}
+                {{:~link('Lockdown', 'caution', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "lockdown"}, null, null)}}
+                {{:~link('Biohazard', 'radiation', {'cartmenu' : "1", 'choice' : "Status",'statdisp' : "alert", 'alert' : "biohazard"}, null, null)}}
                 </div>
 	</div>
 
