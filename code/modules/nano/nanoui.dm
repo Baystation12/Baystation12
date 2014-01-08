@@ -92,8 +92,8 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/add_common_assets()
 	add_script("libraries.min.js") // The jQuery library
+	add_script("nano_config.js") // The NanoConfig JS, this is used to store configuration values.
 	add_script("nano_update.js") // The NanoUpdate JS, this is used to receive updates and apply them.
-	add_script("nano_config.js") // The NanoUpdate JS, this is used to receive updates and apply them.
 	add_script("nano_base_helpers.js") // The NanoBaseHelpers JS, this is used to set up template helpers which are common to all templates
 	add_stylesheet("shared.css") // this CSS sheet is common to all UIs
 	add_stylesheet("icons.css") // this CSS sheet is common to all UIs
@@ -258,8 +258,12 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/get_header()
 	var/head_content = ""
+	
+	for (var/filename in scripts)
+		head_content += "<script type='text/javascript' src='[filename]'></script> "
+	
 	for (var/filename in stylesheets)
-		head_content += "<link rel='stylesheet' type='text/css' href='[filename]'>"
+		head_content += "<link rel='stylesheet' type='text/css' href='[filename]'> "
 
 	var/templatel_data[0]
 	for (var/key in templates)
@@ -292,7 +296,7 @@ nanoui is used to open and update nano browser uis
 				}
 				else
 				{
-					alert('receiveUpdateData error: something is not defined!');
+					alert('receiveUpdateData ERROR: something is not defined!');
 					if (typeof NanoUpdate == 'undefined')
 					{
 						alert('NanoUpdate not defined!');
@@ -308,7 +312,7 @@ nanoui is used to open and update nano browser uis
 		<div id='uiWrapper'>
 			[title ? "<div id='uiTitleWrapper'><div id='uiStatusIcon' class='icon24 uiStatusGood'></div><div id='uiTitle'>[title]</div><div id='uiTitleFluff'></div></div>" : ""]
 			<div id='uiContent'>
-				<noscript><div id='uiNoJavaScript'>Your browser does not have JavaScript enabled. Please enable JavaScript restart SS13.</div></noscript>
+				<div id='uiNoJavaScript'>Initiating...</div>
 	"}
 
  /**
@@ -317,13 +321,8 @@ nanoui is used to open and update nano browser uis
   * @return string HTML footer content
   */
 /datum/nanoui/proc/get_footer()
-	var/scriptsContent = ""
-
-	for (var/filename in scripts)
-		scriptsContent += "<script type='text/javascript' src='[filename]'></script>"
 
 	return {"
-				[scriptsContent]
 			</div>
 		</div>
 	</body>

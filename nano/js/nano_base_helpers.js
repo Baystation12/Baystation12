@@ -186,7 +186,7 @@ NanoBaseHelpers = function ()
 				return html;
 			}
 		});
-	}
+	};
 	
 	// generate a Byond href, combines _urlParameters with parameters
 	var generateHref = function (parameters)
@@ -217,7 +217,7 @@ NanoBaseHelpers = function ()
 			}
 		}
 		return queryString;
-	}
+	};
 
 	return {
         init: function () 
