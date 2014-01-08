@@ -61,7 +61,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		var/y0 = epicenter.y
 		var/z0 = epicenter.z
 
-		for(var/turf/T in trange(epicenter, max(devastation_range, heavy_impact_range, light_impact_range)))
+		for(var/turf/T in trange(max(devastation_range, heavy_impact_range, light_impact_range), epicenter))
 			var/dist = cheap_pythag(T.x - x0,T.y - y0)
 
 			if(dist < devastation_range)		dist = 1

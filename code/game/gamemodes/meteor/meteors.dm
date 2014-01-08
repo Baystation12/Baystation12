@@ -139,7 +139,7 @@
 					if(!T || T.z != src.z)
 						continue
 					shake_camera(M, 3, get_dist(M.loc, src.loc) > 20 ? 1 : 3)
-					M.playsound_local(src.loc, 'sound/effects/meteorimpact.ogg', 50, 1, get_rand_frequency(), 10)
+					playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
 				explosion(src.loc, 0, 1, 2, 3, 0)
 
 			if (--src.hits <= 0)
