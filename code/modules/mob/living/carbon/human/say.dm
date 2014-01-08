@@ -71,4 +71,3 @@
 
 /mob/living/carbon/human/proc/GetSpecialVoice()
 	return special_voice
-
