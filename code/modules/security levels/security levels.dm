@@ -71,7 +71,7 @@
 
 			if(SEC_LEVEL_GAMMA)
 				world << "<font size=4 color='red'>Attention! GAMMA security level activated!</font>"
-				world << "<font color='red'>[config.alert_desc_red_upto]</font>"
+				world << "<font color='red'>[config.alert_desc_gamma]</font>"
 				if(security_level < SEC_LEVEL_RED)
 					for(var/obj/machinery/door/airlock/highsecurity/red/R in world)
 						if(R.z == 1)
@@ -86,7 +86,7 @@
 				security_level = SEC_LEVEL_GAMMA
 			if(SEC_LEVEL_EPSILON)
 				world << "<font size=4 color='red'>Attention! EPSILON security level activated!</font>"
-				world << "<font color='red'>[config.alert_desc_red_upto]</font>"
+				world << "<font color='red'>[config.alert_desc_epsilon]</font>"
 				security_level = SEC_LEVEL_EPSILON
 
 			if(SEC_LEVEL_DELTA)

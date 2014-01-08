@@ -82,6 +82,9 @@
 	var/alert_desc_red_upto = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
 	var/alert_desc_red_downto = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
 	var/alert_desc_delta = "The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
+	var/alert_desc_epsilon = "Security level EPSILON reached. Consider all contracts terminated."
+	var/alert_desc_gamma = "GAMMA Security level has been set by Centcom, Security is to have weapons at all times, and all civilians are to seek their nearest head for transportation to a safe location. GAMMA Armory unlocked for security personnel."
+
 
 	var/forbid_singulo_possession = 0
 
@@ -371,6 +374,12 @@
 
 				if("alert_delta")
 					config.alert_desc_delta = value
+
+				if("alert_gamma")
+					config.alert_desc_gamma = value
+
+				if("alert_epsilon")
+					config.alert_desc_epsilon = value
 
 				if("forbid_singulo_possession")
 					forbid_singulo_possession = 1
