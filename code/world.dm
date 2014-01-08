@@ -202,7 +202,7 @@
 #define DISCONNECTED_DELETE	6000	//10 minutes in ticks (approx)
 /world/proc/KickDisconnectedClients()
 	spawn(-1)
-		set background = 1
+		//set background = 1
 		while(1)
 			sleep(DISCONNECTED_DELETE)
 			for(var/mob/living/carbon/human/C in living_mob_list)

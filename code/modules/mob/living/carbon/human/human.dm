@@ -1156,7 +1156,7 @@
 /*
 /mob/living/carbon/human/verb/simulate()
 	set name = "sim"
-	set background = 1
+	//set background = 1
 
 	var/damage = input("Wound damage","Wound damage") as num
 
