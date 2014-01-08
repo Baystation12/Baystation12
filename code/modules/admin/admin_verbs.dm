@@ -31,6 +31,10 @@ var/list/admin_verbs_admin = list(
 	/client/proc/giveruntimelog,		/*allows us to give access to runtime logs to somebody*/
 	/client/proc/getruntimelog,			/*allows us to access runtime logs to somebody*/
 	/client/proc/getserverlog,			/*allows us to fetch server logs (diary) for other days*/
+	/client/proc/get_whitelist, 			//Whitelist
+	/client/proc/add_to_whitelist,
+	/client/proc/get_alienwhitelist,
+	/client/proc/add_to_alienwhitelist,
 	/client/proc/jumptocoord,			/*we ghost and jump to a coordinate*/
 	/client/proc/Getmob,				/*teleports a mob to our location*/
 	/client/proc/Getkey,				/*teleports a mob with a certain ckey to our location*/
@@ -72,7 +76,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/response_team, // Response Teams admin verb
 	/client/proc/toggle_antagHUD_use,
 	/client/proc/toggle_antagHUD_restrictions,
-	/client/proc/allow_character_respawn    /* Allows a ghost to respawn */	
+	/client/proc/allow_character_respawn    /* Allows a ghost to respawn */
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -186,6 +190,10 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
 	/client/proc/cinematic,
+	/client/proc/get_whitelist, 			//Whitelist
+	/client/proc/get_alienwhitelist,
+	/client/proc/add_to_whitelist,
+	/client/proc/add_to_alienwhitelist,
 	/datum/admins/proc/toggle_aliens,
 	/datum/admins/proc/toggle_space_ninja,
 	/client/proc/send_space_ninja,
