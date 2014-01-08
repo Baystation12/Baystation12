@@ -1485,7 +1485,7 @@
 
 		if(life_tick % 5) return pulse	//update pulse every 5 life ticks (~1 tick/sec, depending on server load)
 
-		if(species && species.flags && NO_BLOOD) return PULSE_NONE //No blood, no pulse.
+		if(species && species.flags & NO_BLOOD) return PULSE_NONE //No blood, no pulse.
 
 		if(stat == DEAD)
 			return PULSE_NONE	//that's it, you're dead, nothing can influence your pulse
