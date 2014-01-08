@@ -32,15 +32,8 @@
 	layer = 2
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "dirt"
+	mouse_opacity = 0
 
-
-/obj/effect/decal/cleanable/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(!istype(W,/obj/item/weapon/mop) && !istype(W,/obj/item/weapon/soap))
-		var/turf/T = get_turf(src)
-		if(T)
-			T.attackby(W,user)
-			return
-	..()
 
 /obj/effect/decal/cleanable/flour
 	name = "flour"
