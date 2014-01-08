@@ -187,7 +187,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 		var/list/joblist = text2list(dbjob,",")
 		if(!(job in joblist))
 			joblist += job
-			var/newjoblist = dd_list2text(joblist,",")
+			var/newjoblist = list2text(joblist,",")
 			query = dbcon.NewQuery("UPDATE whitelist SET job='[newjoblist]' WHERE ckey='[dbckey]'")
 			if(!query.Execute())
 				var/err = query.ErrorMsg()
@@ -233,7 +233,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 		var/list/specieslist = text2list(dbspecies,",")
 		if(!(species in specieslist))
 			specieslist += species
-			var/newspecieslist = dd_list2text(specieslist,",")
+			var/newspecieslist = list2text(specieslist,",")
 			query = dbcon.NewQuery("UPDATE whitelist SET species='[newspecieslist]' WHERE ckey='[dbckey]'")
 			if(!query.Execute())
 				var/err = query.ErrorMsg()
