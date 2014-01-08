@@ -1028,7 +1028,7 @@ datum
 				if(M.stat == 2.0) //THE GUY IS **DEAD**! BEREFT OF ALL LIFE HE RESTS IN PEACE etc etc. He does NOT metabolise shit anymore, god DAMN
 					return
 				if(!M) M = holder.my_atom
-				if(alien && alien != IS_DIONA)
+				if(!alien || alien != IS_DIONA)
 					M.heal_organ_damage(0,3*REM)
 				..()
 				return
@@ -1048,7 +1048,7 @@ datum
 
 				if(alien && alien == IS_VOX)
 					M.adjustToxLoss(2*REM)
-				else if(alien && alien != IS_DIONA)
+				else if(!alien || alien != IS_DIONA)
 					M.adjustOxyLoss(-2*REM)
 
 				if(holder.has_reagent("lexorin"))
@@ -1071,7 +1071,7 @@ datum
 
 				if(alien && alien == IS_VOX)
 					M.adjustOxyLoss()
-				else if(alien && alien != IS_DIONA)
+				else if(!alien || alien != IS_DIONA)
 					M.adjustOxyLoss(-M.getOxyLoss())
 
 				if(holder.has_reagent("lexorin"))
@@ -1090,7 +1090,7 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				if(alien && alien != IS_DIONA)
+				if(!alien || alien != IS_DIONA)
 					if(M.getOxyLoss()) M.adjustOxyLoss(-1*REM)
 					if(M.getBruteLoss() && prob(80)) M.heal_organ_damage(1*REM,0)
 					if(M.getFireLoss() && prob(80)) M.heal_organ_damage(0,1*REM)
@@ -1107,7 +1107,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(!M) M = holder.my_atom
-				if(alien && alien != IS_DIONA)
+				if(!alien || alien != IS_DIONA)
 					M.reagents.remove_all_type(/datum/reagent/toxin, 1*REM, 0, 1)
 					M.drowsyness = max(M.drowsyness-2*REM, 0)
 					M.hallucination = max(0, M.hallucination - 5*REM)
