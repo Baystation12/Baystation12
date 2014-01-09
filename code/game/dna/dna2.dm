@@ -110,11 +110,11 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 	SetUIValueRange(DNA_UI_BEARD_G,   character.g_facial,  255,    1)
 	SetUIValueRange(DNA_UI_BEARD_B,   character.b_facial,  255,    1)
 
-	SetUIValueRange(DNA_UI_BEARD_R,   character.r_eyes,    255,    1)
-	SetUIValueRange(DNA_UI_BEARD_G,   character.g_eyes,    255,    1)
-	SetUIValueRange(DNA_UI_BEARD_B,   character.b_eyes,    255,    1)
+	SetUIValueRange(DNA_UI_EYES_R,   character.r_eyes,    255,    1)
+	SetUIValueRange(DNA_UI_EYES_G,   character.g_eyes,    255,    1)
+	SetUIValueRange(DNA_UI_EYES_B,   character.b_eyes,    255,    1)
 
-	SetUIValueRange(DNA_UI_SKIN_TONE, character.s_tone,    220,    1)
+	SetUIValueRange(DNA_UI_SKIN_TONE, -character.s_tone+35,    220,    1)    // WARNING:  MATH.  Blame the person that setup line 944 in modules/client/preferences.dm
 
 	SetUIState(DNA_UI_GENDER,         character.gender!=MALE,      1)
 
@@ -140,18 +140,22 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 
 // Set a DNA UI block's value, given a value and a max possible value.
 // Used in hair and facial styles (value being the index and maxvalue being the len of the hairstyle list)
-/datum/dna/proc/SetUIValueRange(var/block,var/value,var/maxvalue)
+/datum/dna/proc/SetUIValueRange(var/block,var/value,var/maxvalue,var/minvalue)
 	if (block<=0) return
+	if(value < minvalue)
+		value=minvalue
+	else if(value > maxvalue)
+		value=maxvalue
 	ASSERT(maxvalue<=4095)
-	var/range = round(4095 / maxvalue)
+	var/range = (4095 / maxvalue)
 	if(value)
-		SetUIValue(block,value * range - rand(1,range-1))
+		SetUIValue(block,round(value * range))
 
 // Getter version of above.
 /datum/dna/proc/GetUIValueRange(var/block,var/maxvalue)
 	if (block<=0) return 0
 	var/value = GetUIValue(block)
-	return round(1 +(value / 4096)*maxvalue)
+	return round(1+(value / 4096)*maxvalue)
 
 // Is the UI gene "on" or "off"?
 // For UI, this is simply a check of if the value is > 2050.
