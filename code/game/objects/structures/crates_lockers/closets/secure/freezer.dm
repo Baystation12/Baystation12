@@ -14,6 +14,15 @@
 		else
 			icon_state = icon_opened
 
+/obj/structure/closet/secure_closet/freezer/ex_act(var/severity)
+	// IF INDIANA JONES CAN DO IT SO CAN YOU
+
+	// Bomb in here? (using same search as space transits searching for nuke disk)
+	var/list/bombs = search_contents_for(/obj/item/device/transfer_valve)
+	if(!isemptylist(bombs)) // You're fucked.
+		..(severity)
+	return
+
 /obj/structure/closet/secure_closet/freezer/kitchen
 	name = "Kitchen Cabinet"
 	req_access = list(access_kitchen)
