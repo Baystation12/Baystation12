@@ -21,6 +21,10 @@
 	processing_objects.Add(src)
 
 /obj/item/weapon/holder/Del()
+	//Hopefully this will stop the icon from remaining on human mobs.
+	var/atom/A = src.loc
+	src.loc = null
+	A.update_icons()
 	processing_objects.Remove(src)
 	..()
 
