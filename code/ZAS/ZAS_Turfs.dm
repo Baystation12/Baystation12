@@ -39,8 +39,6 @@
 
 /turf/simulated/var/tmp/datum/gas_mixture/air
 
-/turf/simulated/var/tmp/processing = 1
-
 /turf/simulated/var/tmp/air_check_directions = 0 //Do not modify this, just add turf to air_master.tiles_to_update
 
 /turf/simulated/var/tmp/unsim_check_directions = 0 //See above.
@@ -61,8 +59,6 @@
 			overlays.Add(slmaster)
 
 /turf/simulated/New()
-	..()
-
 	if(!blocks_air)
 		air = new
 
@@ -83,6 +79,8 @@
 				var/turf/simulated/floor/target = get_step(src,direction)
 				if(istype(target))
 					air_master.tiles_to_update |= target
+
+	. = ..()
 
 /turf/simulated/Del()
 	if(active_hotspot)
@@ -171,24 +169,27 @@
 	if(zone && CanPass(null, src, 0, 0))
 
 		for(var/direction in cardinal)
-			var/turf/T = get_step(src,direction)
+			var/turf/T = get_step(src, direction)
 			if(!istype(T))
 				continue
 
-			//I can connect to air or space in this direction
-			if((air_check_directions & direction && !(air_directions_archived & direction)) || \
-				(unsim_check_directions & direction && !(unsim_directions_archived & direction)))
-				ZConnect(src,T)
+			//A connection to simulated floor has been made where one did not exist.
+			if((air_check_directions & direction && air_directions_archived & ~direction) ||\
+				(unsim_check_directions & direction && unsim_directions_archived & ~direction))
+				//Simply connect them.
+				ZConnect(src, T)
 				zone.ActivateIfNeeded()
-				if(T.zone) T.zone.ActivateIfNeeded()
+				if(T.zone)
+					T.zone.ActivateIfNeeded()
 
 			//Something like a wall was built, changing the geometry.
-			else if((!(air_check_directions & direction) && air_directions_archived & direction) || \
-					(!(unsim_check_directions & direction) && unsim_directions_archived & direction))
+			if((air_check_directions & ~direction && air_directions_archived & direction) || \
+				(unsim_check_directions & ~direction && unsim_directions_archived & direction))
+
 				var/turf/NT = get_step(T, direction)
 
 				//If the tile is in our own zone, and we cannot connect to it, better rebuild.
-				if(istype(NT,/turf/simulated) && NT in zone.contents)
+				if(istype(NT, /turf/simulated) && NT in zone.contents)
 					air_master.zones_needing_rebuilt.Add(zone)
 
 				//Parse if we need to remove the tile, or rebuild the zone.
@@ -197,7 +198,7 @@
 
 					//Loop through all neighboring turfs to see if we should remove the turf or just rebuild.
 					for(var/d in cardinal)
-						var/turf/UT = get_step(NT,d)
+						var/turf/UT = get_step(NT, d)
 
 						//If we find a neighboring tile that is in the same zone, rebuild
 						if(istype(UT, /turf/simulated) && UT.zone == zone && UT.CanPass(null, NT, 0, 0))
@@ -212,11 +213,6 @@
 					//Not adjacent to anything, and unsimulated.  Goodbye~
 					else
 						zone.RemoveTurf(NT)
-
-	if(air_check_directions)
-		processing = 1
-	else
-		processing = 0
 	return 1
 
 /turf/proc/HasDoor(turf/O)

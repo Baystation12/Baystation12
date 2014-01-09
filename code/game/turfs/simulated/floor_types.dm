@@ -73,7 +73,7 @@
 
 /turf/simulated/floor/engine/n20
 	New()
-		..()
+		. = ..()
 		var/datum/gas_mixture/adding = new
 		var/datum/gas/sleeping_agent/trace_gas = new
 
