@@ -194,7 +194,11 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 						O.loc = src
 
 			//Delete all items not on the preservation list.
-			for(var/obj/item/W in occupant)
+			var/list/items = src.contents
+			items -= occupant // Don't delete the occupant
+			items -= announce // or the autosay radio.
+
+			for(var/obj/item/W in items)
 				var/preserve = null
 				for(var/T in preserve_items)
 					if(istype(W,T))
@@ -206,12 +210,28 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 				else
 					frozen_items += W
 
+			//Update any existing objectives involving this mob.
+			for(var/mob/living/M in world) //There has to be a more efficient way to do this.
+				if(!(M.mind) || !(M.mind.objectives.len)) continue
+
+				for(var/datum/objective/O in M.mind.objectives)
+					if(O.target && istype(O.target,/datum/mind))
+						if(O.target == occupant.mind)
+							if(O.owner && O.owner.current)
+								O.owner.current << "\red You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]..."
+							O.target = null
+							spawn(1) //This should ideally fire after the occupant is deleted.
+								if(!O) return
+								O.find_target()
+								if(!(O.target))
+									O.owner.objectives -= O
+
+			//Handle job slot/tater cleanup.
 			var/job = occupant.mind.assigned_role
-			var/role = occupant.mind.special_role
 
 			job_master.FreeRole(job)
 
-			if(role == "traitor" || role == "MODE")
+			if(occupant.mind.objectives.len)
 				del(occupant.mind.objectives)
 				occupant.mind.special_role = null
 			else
