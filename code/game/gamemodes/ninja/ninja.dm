@@ -3,8 +3,8 @@
 /datum/game_mode/ninja
 	name = "ninja"
 	config_tag = "ninja"
-	required_players = 10 //Can be adjusted later, should suffice for now.
-	required_players_secret = 10
+	required_players = 1 //Can be adjusted later, should suffice for now.
+	required_players_secret = 1
 	required_enemies = 1
 	recommended_enemies = 1
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
@@ -128,6 +128,7 @@
 	var/datum/objective/survive/ninja_objective = new
 	ninja_objective.owner = ninja
 	ninja.objectives += ninja_objective
+	ninja.current.mind = ninja
 
 	var/directive = generate_ninja_directive("heel")//Only hired by antags, not NT
 	ninja.current << "You are an elite mercenary assassin of the Spider Clan, [ninja.current.real_name]. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.\nYour current directive is: \red <B>[directive]</B>\n \blue Try your best to adhere to this."
