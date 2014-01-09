@@ -119,13 +119,6 @@ datum
 		//	required_reagents = list("hydrogen" = 1, "carbon" = 1, "nitrogen" = 1)
 		//	result_amount = 1
 
-		water //I can't believe we never had this.
-			name = "Water"
-			id = "water"
-			result = null
-			required_reagents = list("oxygen" = 2, "hydrogen" = 1)
-			result_amount = 1
-
 		thermite
 			name = "Thermite"
 			id = "thermite"
@@ -469,14 +462,14 @@ datum
 		potassium_chloride
 			name = "Potassium Chloride"
 			id = "potassium_chloride"
-			id = "potassium_chloride"
+			result = "potassium_chloride"
 			required_reagents = list("sodiumchloride" = 1, "potassium" = 1)
 			result_amount = 2
 
 		potassium_chlorophoride
 			name = "Potassium Chlorophoride"
 			id = "potassium_chlorophoride"
-			id = "potassium_chlorophoride"
+			result = "potassium_chlorophoride"
 			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloral_hydrate" = 1)
 			result_amount = 4
 
