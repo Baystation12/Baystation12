@@ -239,7 +239,7 @@
 			host_brain.ckey = host.ckey
 			host.ckey = src.ckey
 			if(borer && !borer.ckey)
-				borer.key = "@[src.ckey]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
+				borer.ckey = "@[host.ckey]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 			controlling = 1
 
 			host.verbs += /mob/living/carbon/proc/release_control
