@@ -69,40 +69,48 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	for(var/turf/simulated/T in contents)
 		RemoveTurf(T)
 		air_master.ReconsiderTileZone(T)
-	for(var/zone/Z in connected_zones)
-		if(src in Z.connected_zones)
-			Z.connected_zones.Remove(src)
-	air_master.AddConnectionToCheck(connections)
 
 	if(air_master)
-		air_master.zones.Remove(src)
-		air_master.active_zones.Remove(src)
-		air_master.zones_needing_rebuilt.Remove(src)
+		air_master.AddConnectionToCheck(connections)
+
 	air = null
+
 	. = ..()
 
 
 //Handles deletion via garbage collection.
 /zone/proc/SoftDelete()
+	air = null
+
 	if(air_master)
 		air_master.zones.Remove(src)
 		air_master.active_zones.Remove(src)
 		air_master.zones_needing_rebuilt.Remove(src)
-	air = null
+		air_master.AddConnectionToCheck(connections)
+
+	connections = null
+	for(var/connection/C in direct_connections)
+		if(C.A.zone == src)
+			C.A.zone = null
+		if(C.B.zone == src)
+			C.B.zone = null
+	direct_connections = null
 
 	//Ensuring the zone list doesn't get clogged with null values.
 	for(var/turf/simulated/T in contents)
 		RemoveTurf(T)
 		air_master.ReconsiderTileZone(T)
 
+	contents.Cut()
+
 	//Removing zone connections and scheduling connection cleanup
 	for(var/zone/Z in connected_zones)
-		if(src in Z.connected_zones)
-			Z.connected_zones.Remove(src)
-	connected_zones = null
+		Z.connected_zones.Remove(src)
+		Z.closed_connection_zones.Remove(src)
 
-	air_master.AddConnectionToCheck(connections)
-	connections = null
+	connected_zones = null
+	closed_connection_zones = null
+
 
 	return 1
 
