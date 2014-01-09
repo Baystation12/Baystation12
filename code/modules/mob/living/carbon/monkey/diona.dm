@@ -2,8 +2,12 @@
   Tiny babby plant critter plus procs.
 */
 
-//Helper object for picking dionaea up.
-/obj/item/weapon/diona_holder
+//Helper object for picking dionaea (and other creatures) up.
+/obj/item/weapon/holder
+	name = "holder"
+	desc = "You shouldn't ever see this."
+
+/obj/item/weapon/holder/diona
 
 	name = "diona nymph"
 	desc = "It's a tiny plant critter."
@@ -12,24 +16,23 @@
 	slot_flags = SLOT_HEAD
 	origin_tech = "magnets=3;biotech=5"
 
-/obj/item/weapon/diona_holder/New()
+/obj/item/weapon/holder/New()
 	..()
 	processing_objects.Add(src)
 
-
-/obj/item/weapon/diona_holder/Del()
+/obj/item/weapon/holder/Del()
 	processing_objects.Remove(src)
 	..()
 
-/obj/item/weapon/diona_holder/process()
+/obj/item/weapon/holder/process()
 	if(!loc) return
 
-	if(!istype(loc,/mob/living))
+	if(istype(loc,/turf) || !(contents.len))
 		for(var/mob/M in contents)
 			M.loc = get_turf(src)
 		del(src)
 
-/obj/item/weapon/diona_holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	for(var/mob/M in src.contents)
 		M.attackby(W,user)
 
@@ -46,7 +49,7 @@
 
 	//Let people pick the little buggers up.
 	if(M.a_intent == "help")
-		var/obj/item/weapon/diona_holder/D = new(loc)
+		var/obj/item/weapon/holder/diona/D = new(loc)
 		src.loc = D
 		D.name = loc.name
 		D.attack_hand(M)
@@ -127,8 +130,8 @@
 	var/mob/living/carbon/human/adult = new(get_turf(src.loc))
 	adult.set_species("Diona")
 
-	if(istype(loc,/obj/item/weapon/diona_holder/))
-		var/obj/item/weapon/diona_holder/L = loc
+	if(istype(loc,/obj/item/weapon/holder/diona))
+		var/obj/item/weapon/holder/diona/L = loc
 		src.loc = L.loc
 		del(L)
 
@@ -175,8 +178,11 @@
 	if(donors.len == 5)
 		ready_evolve = 1
 		src << "\green You feel ready to move on to your next stage of growth."
-	else if(donors.len == 3)
+	else if(donors.len == 2)
+		universal_understand = 1
+		src << "\green You feel your awareness expand, and realize you know how to understand the creatures around you."
+	else if(donors.len == 4)
 		universal_speak = 1
-		src << "\green You feel your awareness expand, and realize you know how to speak to the meat-creatures around you."
+		src << "\green You feel your awareness expand, and realize you know how to speak with the creatures around you."
 	else
 		src << "\green The blood seeps into your small form, and you draw out the echoes of memories and personality from it, working them into your budding mind."
