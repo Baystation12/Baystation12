@@ -552,9 +552,9 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	equip_to_slot_or_del(new /obj/item/weapon/plastique(src), slot_l_store)
 	equip_to_slot_or_del(new /obj/item/weapon/tank/emergency_oxygen(src), slot_s_store)
 
-	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(src)
-	E.imp_in = src
-	E.implanted = 1
+	//var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(src)
+	//E.imp_in = src /* Commented out because a Ninja's EMP could set off his own implant*/
+	//E.implanted = 1
 
 
 	return 1
