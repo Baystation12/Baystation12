@@ -67,7 +67,7 @@
 	if(!other)
 		return 1
 	//Universal speak makes everything understandable, for obvious reasons.
-	else if(other.universal_speak || src.universal_speak)
+	else if(other.universal_speak || src.universal_speak || src.universal_understand)
 		return 1
 	else if (src.stat == 2)
 		return 1
@@ -91,10 +91,6 @@
 	else if (istype(other, src.type) || istype(src, other.type))
 		return 1
 	else if (istype(other, /mob/living/carbon/human) && istype(src, /mob/living/carbon/human))
-		return 1
-	else if (istype(other, /mob/living/simple_animal) && istype(src, /mob/living/simple_animal))
-		return 1
-	else if (istype(other, /mob/living/carbon/human) && istype(src, /mob/living/simple_animal/borer))
 		return 1
 	return 0
 
