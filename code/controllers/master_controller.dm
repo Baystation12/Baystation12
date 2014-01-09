@@ -297,7 +297,7 @@ datum/controller/game_controller/proc/process_nano()
 	var/i = 1
 	while(i<=nanomanager.processing_uis.len)
 		var/datum/nanoui/ui = nanomanager.processing_uis[i]
-		if(ui && ui.src_object && ui.user)
+		if(ui)
 			ui.process()
 			i++
 			continue

@@ -14,6 +14,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	var/item_data					// raw item text
 	var/list/ItemList				// Parsed list of items
 	var/uses 						// Numbers of crystals
+	var/nanoui_items[0]
 	// List of items not to shove in their hands.
 	var/list/NotInHand = list(/obj/machinery/singularity_beacon/syndicate)
 
@@ -25,6 +26,39 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		items = replacetext(item_data)
 	ItemList = text2list(src.items, ";")	// Parsing the items text string
 	uses = ticker.mode.uplink_uses
+	nanoui_items = generate_nanoui_items()
+
+/*
+	Built the Items List for use with NanoUI
+*/
+
+/obj/item/device/uplink/proc/generate_nanoui_items()
+	var/items_nano[0]
+	for(var/D in ItemList)
+		var/list/O = stringsplit(D, ":")
+		if(O.len != 3)  //If it is not an actual item, make a break in the menu.
+			if(O.len == 1)  //If there is one item, it's probably a title
+				items_nano[++items_nano.len] = list("Category" = "[O[1]]", "items" = list())
+			continue
+
+		var/path_text = O[1]
+		var/cost = text2num(O[2])
+
+		var/path_obj = text2path(path_text)
+
+		// Because we're using strings, this comes up if item paths change.
+		// Failure to handle this error borks uplinks entirely.  -Sayu
+		if(!path_obj)
+			error("Syndicate item is not a valid path: [path_text]")
+		else
+			var/itemname = O[3]
+			items_nano[items_nano.len]["items"] += list(list("Name" = itemname, "Cost" = cost, "obj_path" = path_text))
+			
+	return items_nano
+
+
+
+
 
 	//Halfassed fix for href exploit ~Z
 	for(var/D in ItemList)
@@ -238,8 +272,8 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			feedback_add_details("traitor_uplink_items_bought","ST")
 
 /obj/item/device/uplink/Topic(href, href_list)
-
 	if (href_list["buy_item"])
+		
 		if(href_list["buy_item"] == "random")
 			var/boughtItem = chooseRandomItem()
 			if(boughtItem)
@@ -307,31 +341,47 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		return 1
 	return 0
 
-// Interaction code. Gathers a list of items purchasable from the paren't uplink and displays it. It also adds a lock button.
-/obj/item/device/uplink/hidden/interact(mob/user as mob)
+/*
+	NANO UI FOR UPLINK WOOP WOOP
+*/
+/obj/item/device/uplink/hidden/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+	var/title = "Syndicate Uplink"
+	var/data[0]
+	
+	data["crystals"] = uses
+	data["nano_items"] = nanoui_items
+	data["welcome"] = welcome
+	
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
+	if (!ui)
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600)
+		// when the ui is first opened this is the data it will use
+		ui.set_initial_data(data)		
+		// open the new ui window
+		ui.open()
 
-	var/dat = "<body link='yellow' alink='white' bgcolor='#601414'><font color='white'>"
-	dat += src.generate_menu()
-	dat += "<A href='byond://?src=\ref[src];lock=1'>Lock</a>"
-	dat += "</font></body>"
-	user << browse(dat, "window=hidden")
-	onclose(user, "hidden")
-	return
+// Interaction code. Gathers a list of items purchasable from the paren't uplink and displays it. It also adds a lock button.
+/obj/item/device/uplink/hidden/interact(mob/user)
+
+	ui_interact(user)
 
 // The purchasing code.
 /obj/item/device/uplink/hidden/Topic(href, href_list)
-
 	if (usr.stat || usr.restrained())
 		return
 
 	if (!( istype(usr, /mob/living/carbon/human)))
 		return 0
-
+	var/mob/user = usr
+	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
 	if ((usr.contents.Find(src.loc) || (in_range(src.loc, usr) && istype(src.loc.loc, /turf))))
 		usr.set_machine(src)
 		if(href_list["lock"])
 			toggle()
-			usr << browse(null, "window=hidden")
+			ui.close()		
 			return 1
 
 		if(..(href, href_list) == 1)
@@ -347,7 +397,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 				A.put_in_any_hand_if_possible(I)
 			purchase_log += "[usr] ([usr.ckey]) bought [I]."
 	interact(usr)
-	return
+	return 1
 
 // I placed this here because of how relevant it is.
 // You place this in your uplinkable item to check if an uplink is active or not.

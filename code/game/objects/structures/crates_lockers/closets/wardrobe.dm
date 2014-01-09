@@ -367,5 +367,6 @@
 	new /obj/item/clothing/shoes/green(src)
 	new /obj/item/clothing/shoes/orange(src)
 	new /obj/item/clothing/shoes/purple(src)
+	new /obj/item/clothing/shoes/red(src)
 	new /obj/item/clothing/shoes/leather(src)
 	return
