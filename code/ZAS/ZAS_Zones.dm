@@ -50,11 +50,19 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	air = new
 	air.group_multiplier = contents.len
 	for(var/turf/simulated/T in contents)
-		air.oxygen += T.oxygen / air.group_multiplier
-		air.nitrogen += T.nitrogen / air.group_multiplier
-		air.carbon_dioxide += T.carbon_dioxide / air.group_multiplier
-		air.toxins += T.toxins / air.group_multiplier
-		air.temperature += T.temperature / air.group_multiplier
+		if(!T.air)
+			continue
+		air.oxygen += T.air.oxygen / air.group_multiplier
+		air.nitrogen += T.air.nitrogen / air.group_multiplier
+		air.carbon_dioxide += T.air.carbon_dioxide / air.group_multiplier
+		air.toxins += T.air.toxins / air.group_multiplier
+		air.temperature += T.air.temperature / air.group_multiplier
+		for(var/datum/gas/trace in T.air.trace_gases)
+			var/datum/gas/corresponding_gas = locate(trace.type) in air.trace_gases
+			if(!corresponding_gas)
+				corresponding_gas = new trace.type()
+				air.trace_gases.Add(corresponding_gas)
+			corresponding_gas.moles += trace.moles
 	air.update_values()
 
 	//Add this zone to the global list.
