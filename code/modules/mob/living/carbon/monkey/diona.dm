@@ -16,8 +16,12 @@
 	..()
 	processing_objects.Add(src)
 
-
-/obj/item/weapon/diona_holder/Del()
+/obj/item/weapon/holder/Del()
+	//Hopefully this will stop the icon from remaining on human mobs.
+	if(istype(loc,/mob/living))
+		var/mob/living/A = src.loc
+		src.loc = null
+		A.update_icons()
 	processing_objects.Remove(src)
 	..()
 
