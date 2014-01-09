@@ -737,7 +737,7 @@
 /obj/item/clothing/under/fluff/lillian_amsel_1
 	name = "Black Dress"
 	desc = "A knee-length, dark gray and black dress made of a sfot, velvety material."
-	icon = "icons/obj/custom_items.dmi'
+	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "lillian_dress"
 	item_state = "lillian_dress"
 	item_color = "lillian_dress"
