@@ -37,7 +37,7 @@ ________________________________________________________________________________
 	reagents.my_atom = src
 	for(var/reagent_id in reagent_list)
 		reagent_id == "radium" ? reagents.add_reagent(reagent_id, r_maxamount+(a_boost*a_transfer)) : reagents.add_reagent(reagent_id, r_maxamount)//It will take into account radium used for adrenaline boosting.
-	cell = new/obj/item/weapon/cell/high//The suit should *always* have a battery because so many things rely on it.
+	cell = new/obj/item/weapon/cell/super//The suit should *always* have a battery because so many things rely on it.
 	cell.charge = 9000//Starting charge should not be higher than maximum charge. It leads to problems with recharging.
 
 /obj/item/clothing/suit/space/space_ninja/Del()
@@ -1385,7 +1385,8 @@ It is possible to destroy the net by the occupant or someone else.
 			if(!isnull(master))//As long as they still exist.
 				master << "\blue <b>SUCCESS</b>: \black transport procedure of \the [affecting] complete."
 
-			M.anchored = 0//Important.
+			M.captured = 0 //Important.
+			M.anchored = initial(M.anchored) //Changes the mob's anchored status to the original one; this is not handled by the can_move proc.
 
 		else//And they are free.
 			M << "\blue You are free of the net!"
