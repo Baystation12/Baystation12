@@ -132,10 +132,19 @@ ________________________________________________________________________________
 		if(s_coold)	s_coold--//Checks for ability s_cooldown first.
 		var/A = s_cost//s_cost is the default energy cost each ntick, usually 5.
 		if(!kamikaze)
+			if(U.stat == 2)
+				U << browse(null, "window=spideros")
+				explosion(U.loc, 0, 1, 3, 4)
+				del(n_gloves)
+				del(n_shoes)
+				del(n_mask)
+				del(n_hood)
+				U.gib()
 			if(blade_check(U))//If there is a blade held in hand.
 				A += s_acost
 			if(s_active)//If stealth is active.
 				A += s_acost
+
 		else
 			if(prob(s_delay))//Suit delay is used as probability. May change later.
 				U.adjustBruteLoss(k_damage)//Default damage done, usually 1.
@@ -145,7 +154,12 @@ ________________________________________________________________________________
 			if(kamikaze)
 				U.say("I DIE TO LIVE AGAIN!")
 				U << browse(null, "window=spideros")//Just in case.
-				U.death()
+				explosion(U.loc, 1, 2, 3, 4)
+				del(n_gloves)
+				del(n_shoes)
+				del(n_mask)
+				del(n_hood)
+				U.gib()
 				return
 			cell.charge=0
 			cancel_stealth()
@@ -177,7 +191,7 @@ ________________________________________________________________________________
 				if(4)
 					U << "\blue VOID-shift device status: <B>ONLINE</B>.\nCLOAK-tech device status: <B>ONLINE</B>."
 				if(5)
-					U << "\blue Primary system status: <B>ONLINE</B>.\nBackup system status: <B>ONLINE</B>.\nCurrent energy capacity: <B>[cell.charge]</B>."
+					U << "\blue Primary system status: <B>ONLINE</B>.\nBackup system status: <B>ONLINE</B>.\nCurrent energy capacity: <B>[cell.maxcharge]</B>."
 				if(6)
 					U << "\blue All systems operational. Welcome to <B>SpiderOS</B>, [U.real_name]."
 					grant_ninja_verbs()
@@ -788,7 +802,7 @@ ________________________________________________________________________________
 	set src = usr.loc
 
 	AI << browse(null, "window=spideros")//Close window
-	AI << "You have seized your hacking attempt. [affecting.real_name] has regained control."
+	AI << "You have ceased your hacking attempt. [affecting.real_name] has regained control."
 	affecting << "<b>UPDATE</b>: [AI.real_name] has ceased hacking attempt. All systems clear."
 
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja
@@ -804,30 +818,30 @@ ________________________________________________________________________________
 	var/mob/living/carbon/human/U = affecting
 	var/mob/living/silicon/ai/A = AI
 
-	if(A.laws.zeroth || A.laws != /datum/ai_laws/ninja_override)//Gives a few seconds to re-upload the AI somewhere before it takes full control.
+	if(A.laws != /datum/ai_laws/ninja_override)
 		s_busy = 1
-		for(var/i,i<5,i++)
+		for(var/i,i<6,i++)
 			if(AI==A)
 				switch(i)
-					if(0)
-						A << "\red <b>NOTICE</b>:\n beginning hack attempt..."
+					if(1)
+						A << "\blue <b>NOTICE</b>:\black Beginning hack attempt..."
 						U << "\red <b>WARNING</b>: HACKING AT��TEMP� IN PR0GRESs!"
 						spideros = 0
 						k_unlock = 0
 						U << browse(null, "window=spideros")
-					if(1)
-						A << "Disconnecting neural interface..."
-						U << "\red <b>WAR�NING</b>: �R�O0�Gr�--S 2&3%"
 					if(2)
-						A << "Shutting down external protocol..."
+						A << "<b>Disconnecting neural interface...</b>"
+						U << "\red <b>WAR�NING</b>: �R�O0�Gr�--S 2&3%"
+					if(3)
+						A << "<b>Shutting down external protocol...</b>"
 						U << "\red <b>WARNING</b>: P����RֆGr�5S 677^%"
 						cancel_stealth()
-					if(3)
-						A << "Connecting to kernel..."
+					if(4)
+						A << "<b>Connecting to kernel...</b>"
 						U << "\red <b>WARNING</b>: �R�r�R_404"
 						A.control_disabled = 0
-					if(4)
-						A << "Connection established and secured. Menu updated."
+					if(5)
+						A << "<b>Connection established and secured. Menu updated.</b>"
 						U << "\red <b>W�r#nING</b>: #%@!!WȆ|_4�54@ \nUn�B88l3 T� L�-�o-L�CaT2 ##$!�RN�0..%.."
 						verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja
 						grant_AI_verbs()
@@ -836,7 +850,7 @@ ________________________________________________________________________________
 			else	break
 		s_busy = 0
 	else
-		A << "/red Unable to hack target with current lawset!"
+		A << "\red<b>ALERT</b>:\black Current lawset prevents hacking!"
 
 
 //=======//GENERAL SUIT PROCS//=======//
