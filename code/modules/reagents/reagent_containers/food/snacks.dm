@@ -2602,6 +2602,7 @@
 /obj/item/pizzabox/meat/New()
 	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/meatpizza(src)
 	boxtag = "Meatlover's Supreme"
+
 ////////////////////////////////FOOD ADDITIONS////////////////////////////////////////////
 
 /obj/item/weapon/reagent_containers/food/snacks/wrap
@@ -2707,3 +2708,14 @@
 		..()
 		reagents.add_reagent("nutriment", 3)
 		bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/dionaroast
+	name = "roast diona"
+	desc = "It's like an enormous, leathery carrot. With an eye."
+	icon_state = "dionaroast"
+	trash = /obj/item/trash/plate
+	New()
+		..()
+		reagents.add_reagent("nutriment", 6)
+		reagents.add_reagent("radium", 2)
+		bitesize = 2
