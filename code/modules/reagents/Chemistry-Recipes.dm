@@ -470,7 +470,7 @@ datum
 			name = "Potassium Chlorophoride"
 			id = "potassium_chlorophoride"
 			result = "potassium_chlorophoride"
-			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloral_hydrate" = 1)
+			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloralhydrate" = 1)
 			result_amount = 4
 
 		stoxin
