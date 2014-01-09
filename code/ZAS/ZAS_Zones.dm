@@ -723,9 +723,9 @@ zone/proc/Rebuild()
 		current_adjacents = list()
 
 		for(var/direction in cardinal)
-			if( !(current.air_check_directions & direction))
-				continue
 			var/turf/simulated/adjacent = get_step(current, direction)
+			if(!current.ZCanPass(adjacent))
+				continue
 			if(adjacent in turfs)
 				current_adjacents += adjacent
 				adjacent_id = turfs[adjacent]
