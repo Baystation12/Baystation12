@@ -22,9 +22,10 @@
 
 /obj/item/weapon/holder/Del()
 	//Hopefully this will stop the icon from remaining on human mobs.
-	var/atom/A = src.loc
-	src.loc = null
-	A.update_icons()
+	if(istype(loc,/mob/living))
+		var/mob/living/A = src.loc
+		src.loc = null
+		A.update_icons()
 	processing_objects.Remove(src)
 	..()
 
