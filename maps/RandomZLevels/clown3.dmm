@@ -4,7 +4,7 @@
 "ad" = (/turf/unsimulated/floor/plating/snow,/area/planet/clown)
 "ae" = (/obj/effect/decal/snow/clean/edge{tag = "icon-snow_corner (WEST)"; icon_state = "snow_corner"; dir = 8},/turf/unsimulated/floor/plating/snow/concrete,/area/planet/clown)
 "af" = (/obj/effect/decal/snow/clean/edge{tag = "icon-snow_corner (EAST)"; icon_state = "snow_corner"; dir = 4},/turf/unsimulated/floor/plating/snow/concrete,/area/planet/clown)
-"ag" = (/turf/unsimulated/mineral/random/high_chance_clown,/area/planet/clown)
+"ag" = (/turf/simulated/mineral/random/high_chance_clown,/area/planet/clown)
 "ah" = (/obj/structure/grille/fence/north_south,/obj/effect/decal/snow/clean/edge{tag = "icon-snow_corner (EAST)"; icon_state = "snow_corner"; dir = 4},/turf/unsimulated/floor/plating/snow/concrete,/area/planet/clown)
 "ai" = (/obj/structure/flora/tree/dead,/turf/unsimulated/floor/plating/snow,/area/planet/clown)
 "aj" = (/obj/structure/flora/tree/pine,/turf/unsimulated/floor/plating/snow,/area/planet/clown)
