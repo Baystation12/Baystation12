@@ -184,11 +184,17 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 		if(!occupant.client && occupant.stat<2) //Occupant is living and has no client.
 
-			//Delete all items not on the preservation list and drop all others into the pod.
+			//Drop all items into the pod.
 			for(var/obj/item/W in occupant)
 				occupant.drop_from_inventory(W)
 				W.loc = src
 
+				if(W.contents.len) //Make sure we catch anything not handled by del() on the items.
+					for(var/obj/item/O in W.contents)
+						O.loc = src
+
+			//Delete all items not on the preservation list.
+			for(var/obj/item/W in occupant)
 				var/preserve = null
 				for(var/T in preserve_items)
 					if(istype(W,T))
