@@ -303,6 +303,9 @@
 			src << alert("[rank] is not available. Please try another.")
 			return 0
 
+		spawning = 1
+		close_spawn_windows()
+
 		job_master.AssignRole(src, rank, 1)
 
 		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
@@ -374,6 +377,7 @@
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
 		if(chosen_species)
+
 			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & IS_WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
 				switch(chosen_species.name)
 					if("Slime People")
@@ -395,12 +399,9 @@
 					if("Human")
 						new_character = new /mob/living/carbon/human/human(loc)
 //				new_character.set_species(client.prefs.species)
-				if(chosen_species.language)
-					new_character.add_language(chosen_species.language)
 		else
 			new_character = new /mob/living/carbon/human(loc)
 		new_character.lastarea = get_area(loc)
-
 
 		var/datum/language/chosen_language
 		if(client.prefs.language)
