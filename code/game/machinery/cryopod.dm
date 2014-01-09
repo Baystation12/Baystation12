@@ -96,7 +96,6 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 			frozen_items -= I
 
 	else if(href_list["crew"])
-
 		user << "\red Functionality unavailable at this time."
 
 	src.updateUsrDialog()
@@ -226,7 +225,6 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 								all_objectives -= O
 								O.owner.objectives -= O
 								del(O)
-
 
 			//Handle job slot/tater cleanup.
 			var/job = occupant.mind.assigned_role
