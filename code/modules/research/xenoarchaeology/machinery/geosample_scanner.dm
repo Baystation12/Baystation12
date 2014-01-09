@@ -274,8 +274,8 @@
 		switch(scanned_item.type)
 			if(/obj/item/weapon/ore)
 				var/obj/item/weapon/ore/O = scanned_item
-				if(O.geological_data)
-					G = O.geological_data
+				if(O.geologic_data)
+					G = O.geologic_data
 
 			if(/obj/item/weapon/rocksliver)
 				var/obj/item/weapon/rocksliver/O = scanned_item
