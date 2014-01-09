@@ -1,5 +1,3 @@
-Methylphenidate
-
 #define ANTIDEPRESSANT_MESSAGE_DELAY 5*60*10
 
 /datum/reagent/antidepressant/methylphenidate
