@@ -2397,7 +2397,7 @@
 	desc = "A slice of home."
 	icon_state = "breadslice"
 	trash = /obj/item/trash/plate
-	filling_color = "#FFE396"
+	filling_color = "#D27332"
 	bitesize = 2
 
 
