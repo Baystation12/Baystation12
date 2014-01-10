@@ -50,11 +50,19 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	air = new
 	air.group_multiplier = contents.len
 	for(var/turf/simulated/T in contents)
-		air.oxygen += T.oxygen / air.group_multiplier
-		air.nitrogen += T.nitrogen / air.group_multiplier
-		air.carbon_dioxide += T.carbon_dioxide / air.group_multiplier
-		air.toxins += T.toxins / air.group_multiplier
-		air.temperature += T.temperature / air.group_multiplier
+		if(!T.air)
+			continue
+		air.oxygen += T.air.oxygen / air.group_multiplier
+		air.nitrogen += T.air.nitrogen / air.group_multiplier
+		air.carbon_dioxide += T.air.carbon_dioxide / air.group_multiplier
+		air.toxins += T.air.toxins / air.group_multiplier
+		air.temperature += T.air.temperature / air.group_multiplier
+		for(var/datum/gas/trace in T.air.trace_gases)
+			var/datum/gas/corresponding_gas = locate(trace.type) in air.trace_gases
+			if(!corresponding_gas)
+				corresponding_gas = new trace.type()
+				air.trace_gases.Add(corresponding_gas)
+			corresponding_gas.moles += trace.moles
 	air.update_values()
 
 	//Add this zone to the global list.
@@ -69,40 +77,48 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	for(var/turf/simulated/T in contents)
 		RemoveTurf(T)
 		air_master.ReconsiderTileZone(T)
-	for(var/zone/Z in connected_zones)
-		if(src in Z.connected_zones)
-			Z.connected_zones.Remove(src)
-	air_master.AddConnectionToCheck(connections)
 
 	if(air_master)
-		air_master.zones.Remove(src)
-		air_master.active_zones.Remove(src)
-		air_master.zones_needing_rebuilt.Remove(src)
+		air_master.AddConnectionToCheck(connections)
+
 	air = null
+
 	. = ..()
 
 
 //Handles deletion via garbage collection.
 /zone/proc/SoftDelete()
+	air = null
+
 	if(air_master)
 		air_master.zones.Remove(src)
 		air_master.active_zones.Remove(src)
 		air_master.zones_needing_rebuilt.Remove(src)
-	air = null
+		air_master.AddConnectionToCheck(connections)
+
+	connections = null
+	for(var/connection/C in direct_connections)
+		if(C.A.zone == src)
+			C.A.zone = null
+		if(C.B.zone == src)
+			C.B.zone = null
+	direct_connections = null
 
 	//Ensuring the zone list doesn't get clogged with null values.
 	for(var/turf/simulated/T in contents)
 		RemoveTurf(T)
 		air_master.ReconsiderTileZone(T)
 
+	contents.Cut()
+
 	//Removing zone connections and scheduling connection cleanup
 	for(var/zone/Z in connected_zones)
-		if(src in Z.connected_zones)
-			Z.connected_zones.Remove(src)
-	connected_zones = null
+		Z.connected_zones.Remove(src)
+		Z.closed_connection_zones.Remove(src)
 
-	air_master.AddConnectionToCheck(connections)
-	connections = null
+	connected_zones = null
+	closed_connection_zones = null
+
 
 	return 1
 
@@ -715,9 +731,9 @@ zone/proc/Rebuild()
 		current_adjacents = list()
 
 		for(var/direction in cardinal)
-			if( !(current.air_check_directions & direction))
-				continue
 			var/turf/simulated/adjacent = get_step(current, direction)
+			if(!current.ZCanPass(adjacent))
+				continue
 			if(adjacent in turfs)
 				current_adjacents += adjacent
 				adjacent_id = turfs[adjacent]
