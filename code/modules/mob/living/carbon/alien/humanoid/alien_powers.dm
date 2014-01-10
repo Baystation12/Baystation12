@@ -118,16 +118,16 @@ Doesn't work on other aliens/AI.*/
 	set category = "Alien"
 	if(powerc(50))
 		adjustToxLoss(-50)
-			src.visible_message("\red [src] spits neurotoxin!", "\green You spit neurotoxin.")
-			var/turf/T = loc
-			var/turf/U = get_step(src, dir) // Get the tile infront of the move, based on their direction
-			if(!isturf(U) || !isturf(T))
-				return
-			var/obj/item/projectile/energy/neurotoxin/A = new /obj/item/projectile/energy/neurotoxin(usr.loc)
-			A.current = U
-			A.yo = U.y - T.y
-			A.xo = U.x - T.x
-			A.process()
+		src.visible_message("\red [src] spits neurotoxin!", "\green You spit neurotoxin.")
+		var/turf/T = loc
+		var/turf/U = get_step(src, dir) // Get the tile infront of the move, based on their direction
+		if(!isturf(U) || !isturf(T))
+			return
+		var/obj/item/projectile/bullet/neurotoxin/A = new /obj/item/projectile/bullet/neurotoxin(usr.loc)
+		A.current = U
+		A.yo = U.y - T.y
+		A.xo = U.x - T.x
+		A.process()
 	return
 
 /mob/living/carbon/alien/humanoid/proc/resin() // -- TLE
