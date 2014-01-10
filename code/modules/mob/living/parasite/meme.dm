@@ -24,10 +24,10 @@ mob/living/parasite
 
 	Login()
 		..()
-
 		// make the client see through the host instead
 		client.eye = host
 		client.perspective = EYE_PERSPECTIVE
+		sleeping = 0
 
 mob/living/parasite/proc/enter_host(mob/living/carbon/human/host)
 	// by default, parasites can't share a body with other life forms
@@ -141,7 +141,7 @@ mob/living/parasite/meme/me_verb(message as text)
 		usr << "\red You can't emote without host!"
 		return
 
-	return host.me_verb(message)
+	return host.emote(message)
 
 // A meme understands everything their host understands
 mob/living/parasite/meme/say_understands(mob/other)

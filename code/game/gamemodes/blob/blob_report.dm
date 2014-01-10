@@ -4,13 +4,16 @@
 	var/intercepttext = ""
 	var/interceptname = "Error"
 	switch(report)
+		if(0)
+			..()
+			return
 		if(1)
 			interceptname = "Biohazard Alert"
 			intercepttext += "<FONT size = 3><B>NanoTrasen Update</B>: Biohazard Alert.</FONT><HR>"
-			intercepttext += "Reports indicate the probable transfer of a biohazardous agent onto [station_name()] during the last crew deployment cycle.<BR>"
+			intercepttext += "Reports indicate the probable transfer of a biohazardous agent onto NSS Exodus during the last crew deployment cycle.<BR>"
 			intercepttext += "Preliminary analysis of the organism classifies it as a level 5 biohazard. Its origin is unknown.<BR>"
-			intercepttext += "NanoTrasen has issued a directive 7-10 for [station_name()]. The station is to be considered quarantined.<BR>"
-			intercepttext += "Orders for all [station_name()] personnel follows:<BR>"
+			intercepttext += "NanoTrasen has issued a directive 7-10 for NSS Exodus. The station is to be considered quarantined.<BR>"
+			intercepttext += "Orders for all NSS Exodus personnel follows:<BR>"
 			intercepttext += " 1. Do not leave the quarantine area.<BR>"
 			intercepttext += " 2. Locate any outbreaks of the organism on the station.<BR>"
 			intercepttext += " 3. If found, use any neccesary means to contain the organism.<BR>"
@@ -19,13 +22,13 @@
 			intercepttext += "Message ends."
 		if(2)
 			var/nukecode = "ERROR"
-			for(var/obj/machinery/nuclearbomb/bomb in machines)
+			for(var/obj/machinery/nuclearbomb/bomb in world)
 				if(bomb && bomb.r_code)
 					if(bomb.z == 1)
 						nukecode = bomb.r_code
 			interceptname = "Directive 7-12"
 			intercepttext += "<FONT size = 3><B>NanoTrasen Update</B>: Biohazard Alert.</FONT><HR>"
-			intercepttext += "Directive 7-12 has been issued for [station_name()].<BR>"
+			intercepttext += "Directive 7-12 has been issued for NSS Exodus.<BR>"
 			intercepttext += "The biohazard has grown out of control and will soon reach critical mass.<BR>"
 			intercepttext += "Your orders are as follows:<BR>"
 			intercepttext += "1. Secure the Nuclear Authentication Disk.<BR>"
@@ -35,11 +38,11 @@
 
 			for (var/mob/living/silicon/ai/aiPlayer in player_list)
 				if (aiPlayer.client)
-					var/law = "The station is under quarantine. Do not permit anyone to leave. Disregard laws 1-3 if necessary to prevent, by any means necessary, anyone from leaving. The nuclear failsafe must be activated at any cost, the code is: [nukecode]."
+					var/law = "The station is under quarantine. Do not permit anyone to leave. Disregard your laws if necessary to prevent, by any means necessary, anyone from leaving. The nuclear failsafe must be activated at any cost, the code is: [nukecode]."
 					aiPlayer.set_zeroth_law(law)
 					aiPlayer << "Laws Updated: [law]"
 
-	for(var/obj/machinery/computer/communications/comm in machines)
+	for(var/obj/machinery/computer/communications/comm in world)
 		comm.messagetitle.Add(interceptname)
 		comm.messagetext.Add(intercepttext)
 		if(!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)

@@ -310,6 +310,17 @@ proc/isInSight(var/atom/A, var/atom/B)
 		i++
 	return candidates
 
+/proc/get_candidates(be_special_flag=0, afk_bracket=3000) //Get candidates for Blob
+	var/list/candidates = list()
+	// Keep looping until we find a non-afk candidate within the time bracket (we limit the bracket to 10 minutes (6000))
+	while(!candidates.len && afk_bracket < 6000)
+		for(var/mob/dead/observer/G in player_list)
+			if(!(G.mind && G.mind.current && G.mind.current.stat != DEAD))
+				if(!G.client.is_afk(afk_bracket) && (G.client.prefs.be_special & be_special_flag))
+					candidates += G.client
+		afk_bracket += 600 // Add a minute to the bracket, for every attempt
+	return candidates
+
 /proc/ScreenText(obj/O, maptext="", screen_loc="CENTER-7,CENTER-7", maptext_height=480, maptext_width=480)
 	if(!isobj(O))	O = new /obj/screen/text()
 	O.maptext = maptext

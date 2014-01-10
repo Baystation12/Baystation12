@@ -28,6 +28,8 @@
 	var/required_enemies = 0
 	var/recommended_enemies = 0
 	var/newscaster_announcements = null
+	var/uplink_welcome_tachyon = "TachyonTech Uplink Console"
+	var/uplink_uses_tachyon = 10
 	var/uplink_welcome = "Syndicate Uplink Console:"
 	var/uplink_uses = 10
 	var/uplink_items = {"Highly Visible and Dangerous Weapons;

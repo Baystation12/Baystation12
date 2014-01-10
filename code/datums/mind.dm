@@ -127,7 +127,7 @@ datum/mind
 		if (istype(current, /mob/living/carbon/human) || istype(current, /mob/living/carbon/monkey))
 			/** Impanted**/
 			if(istype(current, /mob/living/carbon/human))
-				if(H.is_loyalty_implanted(H)) 
+				if(H.is_loyalty_implanted(H))
 					text = "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
 				else
 					text = "Loyalty Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant=add'>Implant him!</a></br>"
@@ -747,7 +747,7 @@ datum/mind
 						if (ticker.mode.syndicates.len==1)
 							ticker.mode.prepare_syndicate_leader(src)
 						else
-							current.real_name = "[syndicate_name()] Operative #[ticker.mode.syndicates.len-1]"
+							current.real_name = "Gorlex Maradeurs Operative #[ticker.mode.syndicates.len-1]"
 						special_role = "Syndicate"
 						current << "\blue You are a [syndicate_name()] agent!"
 						ticker.mode.forge_syndicate_objectives(src)
@@ -1030,7 +1030,7 @@ datum/mind
 			if (ticker.mode.syndicates.len==1)
 				ticker.mode.prepare_syndicate_leader(src)
 			else
-				current.real_name = "[syndicate_name()] Operative #[ticker.mode.syndicates.len-1]"
+				current.real_name = "Gorlex Maradeurs Operative #[ticker.mode.syndicates.len-1]"
 			special_role = "Syndicate"
 			assigned_role = "MODE"
 			current << "\blue You are a [syndicate_name()] agent!"
@@ -1175,10 +1175,12 @@ datum/mind
 		return (duration <= world.time - brigged_since)
 
 
-
+/mob/proc/sync_mind()
+	mind_initialize()	//updates the mind (or creates and initializes one if one doesn't exist)
+	mind.active = 1		//indicates that the mind is currently synced with a client
 
 //Initialisation procs
-/mob/living/proc/mind_initialize()
+/mob/proc/mind_initialize()
 	if(mind)
 		mind.key = key
 	else
@@ -1279,4 +1281,11 @@ datum/mind
 	mind.assigned_role = "Armalis"
 	mind.special_role = "Vox Raider"
 
+mob/living/parasite/meme/mind_initialize() //Just in case
+	..()
+	mind.assigned_role = "meme"
 
+//BLOB
+/mob/camera/blob/mind_initialize()
+	..()
+	mind.special_role = "Blob"
