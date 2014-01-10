@@ -117,3 +117,7 @@
 		drain("RESEARCH",A,suit)
 		return 1
 
+	if(istype(A,/mob/living/carbon/human))
+		drain("HUMAN",A,suit)
+		return 1
+

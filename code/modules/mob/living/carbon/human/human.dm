@@ -184,7 +184,7 @@
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
 		if (istype(wear_suit, /obj/item/clothing/suit/space/space_ninja)&&wear_suit:s_initialized)
-			stat("Energy Charge", round(wear_suit:cell:charge/100))
+			stat("Energy Charge", (wear_suit:cell:charge))
 
 
 /mob/living/carbon/human/ex_act(severity)

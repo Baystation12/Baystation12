@@ -131,15 +131,16 @@ ________________________________________________________________________________
 		//Now let's do the normal processing.
 		if(s_coold)	s_coold--//Checks for ability s_cooldown first.
 		var/A = s_cost//s_cost is the default energy cost each ntick, usually 5.
+		if(U.stat == 2)
+			U << browse(null, "window=spideros")
+			explosion(U.loc, 0, 1, 3, 4)
+			del(n_gloves)
+			del(n_shoes)
+			del(n_mask)
+			del(n_hood)
+			U.gib()
+			return
 		if(!kamikaze)
-			if(U.stat == 2)
-				U << browse(null, "window=spideros")
-				explosion(U.loc, 0, 1, 3, 4)
-				del(n_gloves)
-				del(n_shoes)
-				del(n_mask)
-				del(n_hood)
-				U.gib()
 			if(blade_check(U))//If there is a blade held in hand.
 				A += s_acost
 			if(s_active)//If stealth is active.
@@ -696,6 +697,7 @@ ________________________________________________________________________________
 								if(4)
 									A << "Connection established and secured. Menu updated."
 									U << "\red <b>W�r#nING</b>: #%@!!WȆ|_4�54@ \nUn�B88l3 T� L�-�o-L�CaT2 ##$!�RN�0..%.."
+									verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja // To stop AIs from overriding an overridden Ninja. -- Dave
 									grant_AI_verbs()
 									return
 							sleep(s_delay)
@@ -818,7 +820,7 @@ ________________________________________________________________________________
 	var/mob/living/carbon/human/U = affecting
 	var/mob/living/silicon/ai/A = AI
 
-	if(A.laws != /datum/ai_laws/ninja_override)
+	if(A.laws != new /datum/ai_laws/ninja_override && s_busy == 0)
 		s_busy = 1
 		for(var/i,i<6,i++)
 			if(AI==A)
@@ -1016,7 +1018,7 @@ ________________________________________________________________________________
 
 	G.draining = 1
 
-	if(target_type!="RESEARCH")//I lumped research downloading here for ease of use.
+	if(target_type!="RESEARCH" && target_type!="HUMAN")//I lumped research downloading here for ease of use.
 		U << "\blue Now charging battery..."
 
 	switch(target_type)
@@ -1198,6 +1200,31 @@ ________________________________________________________________________________
 				U << "\blue Gained <B>[totaldrain]</B> energy from [src]."
 			else
 				U << "\red The exosuit's battery has run dry. You must find another source of power."
+
+
+
+		/*
+
+		Experimenting with a wrist-mounted hypospray for delivering hallucigenics. Todo: Possibly make it only work on harm intent.
+
+		-- Dave
+
+		*/
+
+		if("HUMAN")
+			var/mob/living/carbon/human/A = target
+			if(S.h_stings > 0)
+				if(A != U) // Because it's bound to happen.
+					S.h_stings -= 1
+					A <<"\red You feel a tiny prick, something doesn't feel right..."
+					U <<"\blue Hallucigen administered to [A], you have <b>[S.h_stings]</b> doses left."
+					A.hallucination += 300
+				else
+					U <<"\red You think for a moment, and decide may not be wise to inject yourself."
+			else
+				U<<"\red You are out of stings!"
+
+
 
 		if("CYBORG")
 			var/mob/living/silicon/robot/A = target
