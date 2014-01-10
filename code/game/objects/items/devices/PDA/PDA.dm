@@ -319,24 +319,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return attack_self(M)
 	return
 
-
-
-
-/*	Notes for those wanting to modify this code or even understand it.
-	There are two modes:  New UI and a UI already existing.
-	If the UI is new, you define your variables, if the ui already exists if it didn't have variables in data for what you want to add
-	then it won't add it even if you make a data["blahblah"] for it.  That's the reason for the = null all over the place, so that.
-	ui.push_data(data) proc has to have the var structure already setup otherwise it can't push the update.
-
-	The exception to the "YOU HAVE TO DEFINE IT" rule is cartridges, we later force
-	the ui to close if a cartridge is inserted so that never will be a problem.
-	So there will never be a time a UI creation causes that to be a problem.
-*/
-
-/obj/item/device/pda/ui_interact(mob/user, ui_key = "main")
+/obj/item/device/pda/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/title = "Personal Data Assistant"
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
-
+	
 	var/data[0]  // This is the data that will be sent to the PDA
 
 
@@ -356,8 +341,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	data["idInserted"] = (id ? 1 : 0)
 	data["idLink"] = (id ? text("[id.registered_name], [id.assignment]") : "--------")
 
-	data["cartridge"] = null
-	data["records"] = null
+	data["cart_loaded"] = cartridge ? 1:0
 	if(cartridge)
 		var/cartdata[0]
 
@@ -418,23 +402,17 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		data["messagescount"] = null
 		data["messages"] = null
 
-	var/found = 0
 	if(active_conversation)
 		for(var/c in tnote)
 			if(c["target"] == active_conversation)
 				data["convo_name"] = sanitize(c["owner"])
 				data["convo_job"] = sanitize(c["job"])
-				found = 1
 				break
-	if(!found)
-		data["convo_name"] = null
-		data["convo_job"] = null
-
-	if(!ui || mode==41)
+	if(mode==41)
 		data["manifest"] = data_core.get_manifest_json()
 
 	
-	if(!ui || mode==3)
+	if(mode==3)
 		var/turf/T = get_turf_or_move(user.loc)
 		if(!isnull(T) || mode!=3)
 			var/datum/gas_mixture/environment = T.return_air()
@@ -459,33 +437,20 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					"reading" = 1\
 					)
 		if(isnull(data["aircontents"]))
-			data["aircontents"] = list(\
-				"pressure" = null,\
-				"nitrogen" = null,\
-				"oxygen" = null,\
-				"carbon_dioxide" = null,\
-				"plasma" = null,\
-				"other" = null,\
-				"temp" = null,\
-				"reading" = 0\
-				)
+			data["aircontents"] = list("reading" = 0)
 		
-			
-
-
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
 	if (!ui)
-		// the ui does not exist, so we'll create a new one
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "pda.tmpl", title, 630, 600)
-		// When the UI is first opened this is the data it will use
-		ui.set_initial_data(data)
+		// when the ui is first opened this is the data it will use
+		ui.set_initial_data(data)		
+		// open the new ui window
 		ui.open()
+		// auto update every Master Controller tick
 		ui.set_auto_update(1)
-	else
-		// The UI is already open so push the new data to it
-		ui.push_data(data)
-		return
-
-
 
 //NOTE: graphic resources are loaded on client login
 /obj/item/device/pda/attack_self(mob/user as mob)
@@ -970,10 +935,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		else
 			//Basic safety check. If either both objects are held by user or PDA is on ground and card is in hand.
 			if(((src in user.contents) && (C in user.contents)) || (istype(loc, /turf) && in_range(src, user) && (C in user.contents)) )
-				if( can_use(user) )//If they can still act.
-					id_check(user, 2)
-					user << "<span class='notice'>You put the ID into \the [src]'s slot.</span>"
-					updateSelfDialog()//Update self dialog on success.
+				id_check(user, 2)
+				user << "<span class='notice'>You put the ID into \the [src]'s slot.</span>"
+				updateSelfDialog()//Update self dialog on success.
 			return	//Return in case of failed check or when successful.
 		updateSelfDialog()//For the non-input related code.
 	else if(istype(C, /obj/item/device/paicard) && !src.pai)

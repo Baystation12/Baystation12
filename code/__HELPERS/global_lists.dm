@@ -94,7 +94,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		var/datum/species/S = new T
 		all_species[S.name] = S
 
-		if(S.flags & WHITELISTED)
+		if(S.flags & IS_WHITELISTED)
 			whitelisted_species += S.name
 
 	return 1

@@ -40,11 +40,6 @@
 	if(!species)
 		set_species()
 
-	if(species.language)
-		var/datum/language/L = all_languages[species.language]
-		if(L)
-			languages += L
-
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
@@ -1036,8 +1031,10 @@
 	var/datum/organ/external/head/h = organs_by_name["head"]
 	h.disfigured = 0
 
-	vessel.add_reagent("blood",560-vessel.total_volume)
-	fixblood()
+	if(species && !(species.flags & NO_BLOOD))
+		vessel.add_reagent("blood",560-vessel.total_volume)
+		fixblood()
+
 	for (var/obj/item/weapon/organ/head/H in world)
 		if(H.brainmob)
 			if(H.brainmob.real_name == src.real_name)
@@ -1266,7 +1263,13 @@ mob/living/carbon/human/yank_out_object()
 	if(species && (species.name && species.name == new_species))
 		return
 
+	if(species && species.language)
+		remove_language(species.language)
+
 	species = all_species[new_species]
+
+	if(species.language)
+		add_language(species.language)
 
 	spawn(0)
 		update_icons()

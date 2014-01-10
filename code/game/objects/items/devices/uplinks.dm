@@ -35,7 +35,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 /obj/item/device/uplink/proc/generate_nanoui_items()
 	var/items_nano[0]
 	for(var/D in ItemList)
-		var/list/O = stringsplit(D, ":")
+		var/list/O = text2list(D, ":")
 		if(O.len != 3)  //If it is not an actual item, make a break in the menu.
 			if(O.len == 1)  //If there is one item, it's probably a title
 				items_nano[++items_nano.len] = list("Category" = "[O[1]]", "items" = list())
@@ -53,7 +53,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		else
 			var/itemname = O[3]
 			items_nano[items_nano.len]["items"] += list(list("Name" = itemname, "Cost" = cost, "obj_path" = path_text))
-			
+
 	return items_nano
 
 
@@ -62,7 +62,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 	//Halfassed fix for href exploit ~Z
 	for(var/D in ItemList)
-		var/list/O = stringsplit(D, ":")
+		var/list/O = text2list(D, ":")
 		if(O.len>0)
 			valid_items += O[1]
 
@@ -83,7 +83,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	var/category_items = 1 //To prevent stupid :P
 
 	for(var/D in ItemList)
-		var/list/O = stringsplit(D, ":")
+		var/list/O = text2list(D, ":")
 		if(O.len != 3)	//If it is not an actual item, make a break in the menu.
 			if(O.len == 1)	//If there is one item, it's probably a title
 				dat += "<b>[O[1]]</b><br>"
@@ -273,7 +273,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 /obj/item/device/uplink/Topic(href, href_list)
 	if (href_list["buy_item"])
-		
+
 		if(href_list["buy_item"] == "random")
 			var/boughtItem = chooseRandomItem()
 			if(boughtItem)
@@ -344,25 +344,24 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 /*
 	NANO UI FOR UPLINK WOOP WOOP
 */
-/obj/item/device/uplink/hidden/ui_interact(mob/user, ui_key = "main")
+/obj/item/device/uplink/hidden/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/title = "Syndicate Uplink"
 	var/data[0]
-	
+
 	data["crystals"] = uses
 	data["nano_items"] = nanoui_items
 	data["welcome"] = welcome
 
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
-		// the ui does not exist, so we'll create a new one
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600)
-		// When the UI is first opened this is the data it will use
+		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
+		// open the new ui window
 		ui.open()
-	else
-		// The UI is already open so push the new data to it
-		ui.push_data(data)
-		return
 
 // Interaction code. Gathers a list of items purchasable from the paren't uplink and displays it. It also adds a lock button.
 /obj/item/device/uplink/hidden/interact(mob/user)
@@ -382,7 +381,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		usr.set_machine(src)
 		if(href_list["lock"])
 			toggle()
-			ui.close()		
+			ui.close()
 			return 1
 
 		if(..(href, href_list) == 1)

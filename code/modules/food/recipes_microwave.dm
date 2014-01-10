@@ -33,6 +33,15 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/boiledegg
 
+/datum/recipe/dionaroast
+	reagents = list("radium" = 5)
+	items = list(
+		/obj/item/weapon/holder/diona,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/apple
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/dionaroast
+
+
 /*
 /datum/recipe/bananaphone
 	reagents = list("psilocybin" = 5) //Trippin' balls, man.

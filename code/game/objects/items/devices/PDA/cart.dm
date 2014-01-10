@@ -241,14 +241,12 @@
 
 
 /obj/item/weapon/cartridge/proc/create_NanoUI_values(mob/user as mob)
-	var/obj/item/device/pda/PDA = loc
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, PDA, "main")
 	var/values[0]
 
 	/*		Signaler (Mode: 40)				*/
 
 	
-	if(istype(radio,/obj/item/radio/integrated/signal) && (mode==40 || !ui ))
+	if(istype(radio,/obj/item/radio/integrated/signal) && (mode==40))
 		var/obj/item/radio/integrated/signal/R = radio
 		values["signal_freq"] = format_frequency(R.frequency)
 		values["signal_code"] = R.code
@@ -256,14 +254,14 @@
 
 	/*		Station Display (Mode: 42)			*/
 
-	if(mode==42 || (!ui && access_status_display))
+	if(mode==42)
 		values["message1"] = message1 ? message1 : "(none)"
 		values["message2"] = message2 ? message2 : "(none)"
 
 
 
 	/*		Power Monitor (Mode: 43 / 433)			*/
-	if(mode==43 || mode==433 || (!ui && access_engine))
+	if(mode==43 || mode==433)
 		var/pMonData[0]
 		for(var/obj/machinery/power/monitor/pMon in world)
 			if(!(pMon.stat & (NOPOWER|BROKEN)) )
@@ -294,30 +292,19 @@
 	
 
 	/*		General Records (Mode: 44 / 441 / 45 / 451)	*/
-	if(mode == 44 || mode == 441 || mode == 45 || mode ==451 || (!ui && (access_medical || access_security)))
+	if(mode == 44 || mode == 441 || mode == 45 || mode ==451)
 		if(istype(active1, /datum/data/record) && (active1 in data_core.general))
 			values["general"] = active1.fields
 			values["general_exists"] = 1
 								
 		else
-		
-			values["general"] = list("name" = null,\
-						"id" = null,\
-						"sex" = null,\
-						"species" = null,\
-						"age" = null,\
-						"rank" = null,\
-						"fingerprint" = null,\
-						"p_stat" = null,\
-						"m_stat" = null,\
-					)
 			values["general_exists"] = 0
 	
 
 
 	/*		Medical Records (Mode: 44 / 441)	*/
 
-	if(mode == 44 || mode == 441 || (!ui && access_medical))
+	if(mode == 44 || mode == 441)
 		var/medData[0]
 		for(var/datum/data/record/R in sortRecord(data_core.general))
 			medData[++medData.len] = list(Name = R.fields["name"],"ref" = "\ref[R]")
@@ -327,23 +314,11 @@
 			values["medical"] = active2.fields
 			values["medical_exists"] = 1
 		else
-			values["medical"] = list(\
-						"b_type" = null,\
-						"mi_dis" = null,\
-						"mi_dis_d" = null,\
-						"ma_dis" = null,\
-						"ma_dis_d" = null,\
-						"alg" = null,\
-						"alg_d" = null,\
-						"cdi" = null,\
-						"cdi_d" = null,\
-						"notes" = null,\
-						)
 			values["medical_exists"] = 0
 
 	/*		Security Records (Mode:45 / 451)	*/	
 
-	if(mode == 45 || mode == 451 || (!ui && access_security))
+	if(mode == 45 || mode == 451)
 		var/secData[0]
 		for (var/datum/data/record/R in sortRecord(data_core.general))
 			secData[++secData.len] = list(Name = R.fields["name"], "ref" = "\ref[R]")
@@ -353,18 +328,11 @@
 			values["security"] = active3.fields
 			values["security_exists"] = 1
 		else
-			values["security"] = list(\
-						"criminal" = null,\
-						"mi_crim" = null,\
-						"ma_crim" = null,\
-						"ma_crim_d" = null,\
-						"notes"\
-						)
 			values["security_exists"] = 0
 
 	/*		Security Bot Control (Mode: 46)		*/
 
-	if(mode==46 || !ui)
+	if(mode==46)
 		var/botsData[0]
 		var/beepskyData[0]
 		if(istype(radio,/obj/item/radio/integrated/beepsky))
@@ -401,7 +369,7 @@
 
 	/*		MULEBOT Control	(Mode: 48)		*/
 
-	if(mode==48 || !ui)
+	if(mode==48)
 		var/muleData[0]
 		var/mulebotsData[0]
 		if(istype(radio,/obj/item/radio/integrated/mule))
@@ -441,7 +409,7 @@
 
 	/*	Supply Shuttle Requests Menu (Mode: 47)		*/
 
-	if(mode==47 || (!ui && access_quartermaster))
+	if(mode==47)
 		var/supplyData[0]
 		supplyData["shuttle_moving"] = supply_shuttle.moving
 		supplyData["shuttle_eta"] = supply_shuttle.eta
@@ -476,7 +444,7 @@
 	
 
 	/* 	Janitor Supplies Locator  (Mode: 49)      */
-	if(mode==49 || (!ui && access_janitor))
+	if(mode==49)
 		var/JaniData[0]
 		var/turf/cl = get_turf(src)
 	
