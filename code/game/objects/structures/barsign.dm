@@ -3,7 +3,7 @@
 	icon_state = "empty"
 	anchored = 1
 
-	var/global/bar_sing_global = pick("lv426", "zocalo", "4theemprah", "ishimura", "tardis", "thecavern", "quarks", "tenforward", "thepranicngpony", "vault13", "solaris", "thehive", "cantina", "theouterspess", "milliways42", "thetimeofeve", "spaceasshole", "dwarffortress", "maltesefalcon", "meadbay", "thecavern","theorchard","whiskeyimplant","carpecarp","robustroadhouse","greytide","theredshirt")
+	var/global/bar_sing_global = pick("lv426", "zocalo", "4theemprah", "ishimura", "tardis", "thecavern", "quarks", "tenforward", "thepranicngpony", "vault13", "solaris", "thehive", "cantina", "theouterspess", "milliways42", "thetimeofeve", "spaceasshole", "dwarffortress", "maltesefalcon")
 	New()
 		ChangeSign(bar_sing_global)
 		return
