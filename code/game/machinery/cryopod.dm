@@ -115,6 +115,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cryo_rear"
 	anchored = 1
+	density = 1
 
 	var/orient_right = null //Flips the sprite.
 
@@ -134,8 +135,8 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 /obj/machinery/cryopod
 	name = "\improper cryogenic freezer"
 	desc = "A man-sized pod for entering suspended animation."
-	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "body_scanner_0"
+	icon = 'tauceti/icons/obj/cryosleeper.dmi'
+	icon_state = "cryosleeper_left"
 	density = 1
 	anchored = 1
 
@@ -162,16 +163,16 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 /obj/machinery/cryopod/right
 	orient_right = 1
-	icon_state = "body_scanner_0-r"
+	icon_state = "cryosleeper_right"
 
 /obj/machinery/cryopod/New()
 
 	announce = new /obj/item/device/radio/intercom(src)
 
 	if(orient_right)
-		icon_state = "body_scanner_0-r"
+		icon_state = "cryosleeper_right"
 	else
-		icon_state = "body_scanner_0"
+		icon_state = "cryosleeper_left"
 	..()
 
 //Lifted from Unity stasis.dm and refactored. ~Zuhayr
@@ -200,18 +201,20 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 				else
 					frozen_items += W
 
-			var/job = occupant.mind.assigned_role
-			var/role = occupant.mind.special_role
+			if(occupant.mind.assigned_role)
+				var/job = occupant.mind.assigned_role
+				job_master.FreeRole(job)
 
-			job_master.FreeRole(job)
+			if(occupant.mind.special_role)
+				var/role = occupant.mind.special_role
 
-			if(role == "traitor" || role == "MODE")
-				del(occupant.mind.objectives)
-				occupant.mind.special_role = null
-			else
-				if(ticker.mode.name == "AutoTraitor")
-					var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
-					current_mode.possible_traitors.Remove(occupant)
+				if(role == "traitor" || role == "MODE")
+					del(occupant.mind.objectives)
+					occupant.mind.special_role = null
+				else
+					if(ticker.mode.name == "AutoTraitor")
+						var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
+						current_mode.possible_traitors.Remove(occupant)
 
 			// Delete them from datacore.
 			for(var/datum/data/record/R in data_core.medical)
@@ -225,9 +228,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					del(G)
 
 			if(orient_right)
-				icon_state = "body_scanner_0-r"
+				icon_state = "cryosleeper_right"
 			else
-				icon_state = "body_scanner_0"
+				icon_state = "cryosleeper_left"
 
 			//TODO: Check objectives/mode, update new targets if this mob is the target, spawn new antags?
 
@@ -283,9 +286,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					M.client.eye = src
 
 			if(orient_right)
-				icon_state = "body_scanner_1-r"
+				icon_state = "cryosleeper_right_cl"
 			else
-				icon_state = "body_scanner_1"
+				icon_state = "cryosleeper_left_cl"
 
 			M << "\blue You feel cool air surround you. You go numb as your senses turn inward."
 			M << "\blue <b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"
@@ -307,9 +310,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		return
 
 	if(orient_right)
-		icon_state = "body_scanner0-r"
+		icon_state = "cryosleeper_right"
 	else
-		icon_state = "body_scanner0"
+		icon_state = "cryosleeper_left"
 
 	src.go_out()
 	add_fingerprint(usr)
@@ -350,9 +353,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		src.occupant = usr
 
 		if(orient_right)
-			icon_state = "body_scanner_1-r"
+			icon_state = "cryosleeper_right_cl"
 		else
-			icon_state = "body_scanner_1"
+			icon_state = "cryosleeper_left_cl"
 
 		usr << "\blue You feel cool air surround you. You go numb as your senses turn inward."
 		usr << "\blue <b>If you ghost, log out or close your client now, your character will shortly be permanently removed from the round.</b>"
@@ -376,9 +379,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	occupant = null
 
 	if(orient_right)
-		icon_state = "body_scanner_0-r"
+		icon_state = "cryosleeper_right"
 	else
-		icon_state = "body_scanner_0"
+		icon_state = "cryosleeper_left"
 
 	return
 
