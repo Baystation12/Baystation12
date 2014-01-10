@@ -22,6 +22,7 @@
 	new /obj/item/device/multitool(src)
 	new /obj/item/clothing/shoes/magboots(src)
 	new /obj/item/weapon/storage/belt/military(src)
+	new /obj/item/clothing/gloves/combat(src)
 
 
 /obj/structure/closet/syndicate/nuclear

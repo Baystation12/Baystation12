@@ -36,8 +36,10 @@
 /obj/item/clothing/suit/armor/riot
 	name = "Riot Suit"
 	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
+	icon = 'tauceti/items/clothing/suits/riotTG.dmi'
 	icon_state = "riot"
-	item_state = "swat_suit"
+	item_state = "riot_suit"
+	tc_custom = 'tauceti/items/clothing/suits/riotTG.dmi'
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	slowdown = 1
 	armor = list(melee = 80, bullet = 10, laser = 10, energy = 10, bomb = 0, bio = 0, rad = 0)

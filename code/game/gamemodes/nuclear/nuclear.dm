@@ -12,55 +12,6 @@
 
 	uplink_welcome = "Corporate Backed Uplink Console:"
 	uplink_uses = 10
-/*	uplink_items = {"Highly Visible and Dangerous Weapons;
-/obj/item/weapon/gun/projectile/revolver/syndie:6:TR-7 Revolver;
-/obj/item/weapon/gun/projectile/automatic/l6_saw:20:L6 Squad Automatic Weapon;
-/obj/item/weapon/melee/energy/sword:4:Energy Sword;
-/obj/item/weapon/storage/box/emps:3:5 EMP Grenades;
-/obj/item/weapon/grenade/syndieminibomb:3:Syndicate Minibomb;
-/obj/item/weapon/grenade/spawnergrenade/manhacks:4:Viscerator Delivery Grenade;
-/obj/mecha/combat/gygax/dark/loaded:40:Dark Gygax Exosuit;
-/obj/mecha/combat/marauder/loaded:70:Mauler Exosuit;
-Whitespace:Seperator;
-Ammunition;
-/obj/item/ammo_box/a357:2:Ammo-357;
-/obj/item/ammo_box/magazine/m12mm:1:Ammo-12mm;
-/obj/item/ammo_box/magazine/m762:6:Ammo-7.62×51mm;
-Whitespace:Seperator;
-Stealthy and Inconspicuous Weapons;
-/obj/item/weapon/pen/paralysis:3:Paralysis Pen;
-/obj/item/weapon/soap/syndie:1:Syndicate Soap;
-/obj/item/weapon/cartridge/syndicate:3:Detomatix PDA Cartridge;
-Whitespace:Seperator;
-Stealth and Camouflage Items;
-/obj/item/weapon/card/id/syndicate:2:Agent ID card;
-/obj/item/clothing/mask/gas/voice:4:Voice Changer;
-/obj/item/device/chameleon:4:Chameleon-Projector;
-Whitespace:Seperator;
-Devices and Tools;
-/obj/item/weapon/storage/firstaid/tactical:5:Syndicate Medical Supply Kit;
-/obj/item/weapon/card/emag:3:Cryptographic Sequencer;
-/obj/item/weapon/storage/toolbox/syndicate:1:Fully Loaded Toolbox;
-/obj/item/weapon/storage/box/syndie_kit/space:3:Space Suit;
-/obj/item/clothing/glasses/thermal/syndi:3:Thermal Imaging Glasses;
-/obj/item/device/multitool/ai_detect:1:Artificial Intelligence Detector;
-/obj/item/device/encryptionkey/binary:3:Binary Translator Key;
-/obj/item/weapon/aiModule/syndicate:7:Hacked AI Upload Module;
-/obj/item/weapon/plastique:2:C-4 (Destroys walls);
-/obj/item/device/powersink:5:Powersink (DANGER!);
-/obj/item/device/radio/beacon/syndicate:7:Singularity Beacon (DANGER!);
-/obj/item/weapon/circuitboard/teleporter:20:Teleporter Circuit Board;
-/obj/machinery/syndicatebomb:6:Syndicate Bomb;
-/obj/item/device/syndicatedetonator:1:Syndicate Detonator;
-/obj/item/weapon/shield/energy:8:Energy Shield;
-Whitespace:Seperator;
-Implants;
-/obj/item/weapon/storage/box/syndie_kit/imp_freedom:3:Freedom Implant;
-/obj/item/weapon/storage/box/syndie_kit/imp_uplink:10:Uplink Implant (Contains 5 Telecrystals);
-/obj/item/weapon/storage/box/syndie_kit/imp_explosive:6:Explosive Implant (DANGER!);
-/obj/item/weapon/storage/box/syndie_kit/imp_compress:4:Compressed Matter Implant;Whitespace:Seperator;
-(Pointless) Badassery;
-/obj/item/toy/syndicateballoon:10:For showing that You Are The BOSS (Useless Balloon);"} */
 
 	var/const/agents_possible = 5 //If we ever need more syndicate agents.
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
@@ -266,7 +217,6 @@ Implants;
 
 	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(synd_mob), slot_w_uniform)
 	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(synd_mob), slot_shoes)
-	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(synd_mob), slot_gloves)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/card/id/syndicate(synd_mob), slot_wear_id)
 	if(synd_mob.backbag == 2) synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(synd_mob), slot_back)
 	if(synd_mob.backbag == 3) synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(synd_mob), slot_back)
