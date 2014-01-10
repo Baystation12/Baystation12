@@ -66,7 +66,7 @@
 
 	var/image/T = new(src.icon, "sandwich_top")
 	T.pixel_x = pick(list(-1,0,1))
-	T.pixel_y = (ingredients.len * 2)+3
+	T.pixel_y = (ingredients.len * 2)+1
 	overlays += T
 
 	name = lowertext("[fullname] sandwich")
@@ -80,4 +80,22 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/csandwich/examine()
 	..()
-	usr << "\blue You think you can see [pick(ingredients)] in there."
+	var/obj/item/O = pick(contents)
+	usr << "\blue You think you can see [O.name] in there."
+
+/obj/item/weapon/reagent_containers/food/snacks/csandwich/attack(mob/M as mob, mob/user as mob, def_zone)
+
+	var/obj/item/shard
+	for(var/obj/item/O in contents)
+		if(istype(O,/obj/item/weapon/shard))
+			shard = O
+			break
+
+	var/mob/living/H
+	if(istype(M,/mob/living))
+		H = M
+
+	if(H && shard && M == user) //This needs a check for feeding the food to other people, but that could be abusable.
+		H << "\red You lacerate your mouth on a [shard.name] in the sandwich!"
+		H.adjustBruteLoss(5) //TODO: Target head if human.
+	..()
