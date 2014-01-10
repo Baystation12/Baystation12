@@ -33,7 +33,7 @@ datum/controller/game_controller
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
-	if(master_controller != src)
+	if(master_controller != src
 		if(istype(master_controller))
 			Recover()
 			del(master_controller)
