@@ -1,4 +1,5 @@
 
+
 // see code/datums/recipe.dm
 
 
@@ -1246,3 +1247,26 @@
 		/obj/item/weapon/reagent_containers/food/snacks/stuffing,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/tofurkey
+
+/datum/recipe/boiledspiderleg
+	reagents = list("water" = 10)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/spiderleg,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/boiledspiderleg
+
+/datum/recipe/spidereggsham
+	reagents = list("sodiumchloride" = 1)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/spidereggs,
+		/obj/item/weapon/reagent_containers/food/snacks/spidermeat,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/spidereggsham
+
+/datum/recipe/sashimi
+	reagents = list("soysauce" = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/spidereggs,
+		/obj/item/weapon/reagent_containers/food/snacks/carpmeat,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sashimi
