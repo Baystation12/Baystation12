@@ -162,7 +162,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 			if(do_after(user,P.digspeed))
 				user << "\blue You finish [P.drill_verb] the rock."
 
-				if(finds.len)
+				if(finds && finds.len)
 					var/datum/find/F = finds[1]
 					if(round(excavation_level + P.excavation_amount) == F.excavation_required)
 						//Chance to extract any items here perfectly, otherwise just pull them out along with the rock surrounding them
@@ -196,15 +196,15 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 					else
 						GetDrilled(1)
 					return
-				else
-					excavation_level += P.excavation_amount
 
-					//archaeo overlays
-					if(!archaeo_overlay && finds.len)
-						var/datum/find/F = finds[1]
-						if(F.excavation_required <= excavation_level + F.view_range)
-							archaeo_overlay = "overlay_archaeo[rand(1,3)]"
-							overlays += archaeo_overlay
+				excavation_level += P.excavation_amount
+
+				//archaeo overlays
+				if(!archaeo_overlay && finds && finds.len)
+					var/datum/find/F = finds[1]
+					if(F.excavation_required <= excavation_level + F.view_range)
+						archaeo_overlay = "overlay_archaeo[rand(1,3)]"
+						overlays += archaeo_overlay
 
 				//there's got to be a better way to do this
 				var/update_excav_overlay = 0
