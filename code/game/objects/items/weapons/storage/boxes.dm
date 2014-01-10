@@ -59,7 +59,7 @@
 		new /obj/item/clothing/gloves/latex(src)
 
 /obj/item/weapon/storage/box/masks
-	name = "sterile masks"
+	name = "box of sterile masks"
 	desc = "This box contains masks of sterility."
 	icon_state = "sterile"
 
@@ -75,7 +75,7 @@
 
 
 /obj/item/weapon/storage/box/syringes
-	name = "syringes"
+	name = "box of syringes"
 	desc = "A box full of syringes."
 	desc = "A biohazard alert warning is printed on the box"
 	icon_state = "syringe"
@@ -91,7 +91,7 @@
 		new /obj/item/weapon/reagent_containers/syringe( src )
 
 /obj/item/weapon/storage/box/beakers
-	name = "beaker box"
+	name = "box of beakers"
 	icon_state = "beaker"
 
 	New()
@@ -105,7 +105,7 @@
 		new /obj/item/weapon/reagent_containers/glass/beaker( src )
 
 /obj/item/weapon/storage/box/injectors
-	name = "\improper DNA injectors"
+	name = "box of DNA injectors"
 	desc = "This box contains injectors it seems."
 
 	New()
@@ -150,7 +150,7 @@
 		new /obj/item/weapon/grenade/flashbang(src)
 
 /obj/item/weapon/storage/box/emps
-	name = "emp grenades"
+	name = "box of emp grenades"
 	desc = "A box with 5 emp grenades."
 	icon_state = "flashbang"
 
@@ -164,7 +164,7 @@
 
 
 /obj/item/weapon/storage/box/trackimp
-	name = "tracking implant kit"
+	name = "boxed tracking implant kit"
 	desc = "Box full of scum-bag tracking utensils."
 	icon_state = "implant"
 
@@ -179,7 +179,7 @@
 		new /obj/item/weapon/locator(src)
 
 /obj/item/weapon/storage/box/chemimp
-	name = "chemical implant kit"
+	name = "boxed chemical implant kit"
 	desc = "Box of stuff used to implant chemicals."
 	icon_state = "implant"
 
@@ -194,8 +194,9 @@
 		new /obj/item/weapon/implantpad(src)
 
 
+
 /obj/item/weapon/storage/box/rxglasses
-	name = "prescription glasses"
+	name = "box of prescription glasses"
 	desc = "This box contains nerd glasses."
 	icon_state = "glasses"
 
@@ -319,7 +320,7 @@
 			new /obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube(src)
 
 /obj/item/weapon/storage/box/ids
-	name = "spare IDs"
+	name = "box of spare IDs"
 	desc = "Has so many empty IDs."
 	icon_state = "id"
 
@@ -333,8 +334,9 @@
 		new /obj/item/weapon/card/id(src)
 		new /obj/item/weapon/card/id(src)
 
+
 /obj/item/weapon/storage/box/seccarts
-	name = "Spare R.O.B.U.S.T. Cartridges"
+	name = "box of spare R.O.B.U.S.T. Cartridges"
 	desc = "A box full of R.O.B.U.S.T. Cartridges, used by Security."
 	icon_state = "pda"
 
@@ -350,7 +352,7 @@
 
 
 /obj/item/weapon/storage/box/handcuffs
-	name = "spare handcuffs"
+	name = "box of spare handcuffs"
 	desc = "A box full of handcuffs."
 	icon_state = "handcuff"
 
@@ -364,8 +366,9 @@
 		new /obj/item/weapon/handcuffs(src)
 		new /obj/item/weapon/handcuffs(src)
 
+
 /obj/item/weapon/storage/box/mousetraps
-	name = "box of Pest-B-Gon Mousetraps"
+	name = "box of Pest-B-Gon mousetraps"
 	desc = "<B><FONT=red>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
 	icon_state = "mousetraps"
 
@@ -439,7 +442,7 @@
 			new /obj/item/weapon/reagent_containers/hypospray/autoinjector(src)
 
 /obj/item/weapon/storage/box/lights
-	name = "replacement bulbs"
+	name = "box of replacement bulbs"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "light"
 	desc = "This box is shaped on the inside so that only light tubes and bulbs fit."
@@ -456,7 +459,7 @@
 		new /obj/item/weapon/light/bulb(src)
 
 /obj/item/weapon/storage/box/lights/tubes
-	name = "replacement tubes"
+	name = "box of replacement tubes"
 	icon_state = "lighttube"
 
 /obj/item/weapon/storage/box/lights/tubes/New()
@@ -465,7 +468,7 @@
 		new /obj/item/weapon/light/tube(src)
 
 /obj/item/weapon/storage/box/lights/mixed
-	name = "replacement lights"
+	name = "box of replacement lights"
 	icon_state = "lightmixed"
 
 /obj/item/weapon/storage/box/lights/mixed/New()
