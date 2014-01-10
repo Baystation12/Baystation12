@@ -361,25 +361,26 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 					Z.interactions_with_neighbors++
 					interactions_with_neighbors++
 
-		for(var/zone/Z in closed_connection_zones)
-			//If that zone has already processed, skip it.
-			if(Z.last_update > last_update || !Z.air)
-				continue
-
-			var/handle_temperature = abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta
-
-			if(Z.status == ZONE_SLEEPING)
-				if (handle_temperature)
-					Z.SetStatus(ZONE_ACTIVE)
-				else
+		if(!vsc.connection_insulation)
+			for(var/zone/Z in closed_connection_zones)
+				//If that zone has already processed, skip it.
+				if(Z.last_update > last_update || !Z.air)
 					continue
 
-			if(air && Z.air)
-				if( handle_temperature )
-					ShareHeat(air, Z.air, closed_connection_zones[Z])
+				var/handle_temperature = abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta
 
-					Z.interactions_with_neighbors++
-					interactions_with_neighbors++
+				if(Z.status == ZONE_SLEEPING)
+					if (handle_temperature)
+						Z.SetStatus(ZONE_ACTIVE)
+					else
+						continue
+
+				if(air && Z.air)
+					if( handle_temperature )
+						ShareHeat(air, Z.air, closed_connection_zones[Z])
+
+						Z.interactions_with_neighbors++
+						interactions_with_neighbors++
 
 	if(!interactions_with_neighbors && !interactions_with_unsim)
 		SetStatus(ZONE_SLEEPING)
@@ -655,7 +656,7 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 
 proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 	//This implements a simplistic version of the Stefan-Boltzmann law.
-	var/energy_delta = ((A.temperature - B.temperature) ** 4) * 5.6704e-8 * connecting_tiles
+	var/energy_delta = ((A.temperature - B.temperature) ** 4) * 5.6704e-8 * connecting_tiles * 2.5
 	var/maximum_energy_delta = max(0, min(A.temperature * A.heat_capacity() * A.group_multiplier, B.temperature * B.heat_capacity() * B.group_multiplier))
 	if(maximum_energy_delta > abs(energy_delta))
 		if(energy_delta < 0)
