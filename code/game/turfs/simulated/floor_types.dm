@@ -223,5 +223,44 @@
 	icon_state = "concrete"
 
 
+
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return
+
+
+/turf/simulated/shuttle/plating/vox
+	oxygen=0 // BIRDS HATE OXYGEN FOR SOME REASON
+	nitrogen = MOLES_O2STANDARD+MOLES_N2STANDARD // So it totals to the same pressure
+	//icon = 'icons/turf/shuttle-debug.dmi'
+
+
+// CATWALKS
+/turf/simulated/floor/plating/airless/catwalk
+	icon = 'icons/turf/catwalks.dmi'
+	icon_state = "catwalk0"
+	name = "catwalk"
+	desc = "Cats really don't like these things."
+
+	New()
+		..()
+		// Fucking cockshit dickfuck shitslut
+		name = "catwalk"
+		update_icon(1)
+
+	update_icon(var/propogate=1)
+		underlays.Cut()
+		underlays += new /icon('icons/turf/space.dmi',"[((x + y) ^ ~(x * y) + z) % 25]")
+
+		var/dirs = 0
+		for(var/direction in cardinal)
+			var/turf/T = get_step(src,direction)
+			if(T.is_catwalk())
+				var/turf/simulated/floor/plating/airless/catwalk/C=T
+				dirs |= direction
+				if(propogate)
+					C.update_icon(0)
+		icon_state="catwalk[dirs]"
+
+	is_catwalk()
+		return 1
+
