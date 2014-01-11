@@ -142,3 +142,26 @@
 	desc = "By retracting limbs and tucking in its head, a combat android can roll at high speeds."
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "shock"
+
+/obj/item/device/lustmodule
+	icon = 'icons/obj/device.dmi'
+	icon_state = "locator"
+	item_state = "locator"
+	name = "Slime bloodlust pulse emitter"
+	desc = "Highly dangeroues experimental device that makes nearby slimes completely loose it. Has 5 uses."
+	var uses = 5
+	var mobu
+
+/obj/item/device/lustmodule/attack_self(mob/user)
+	if(uses > 0)
+		for(var/mob/living/carbon/slime/slime in viewers(get_turf_loc(user), null))
+			slime.tame = 0
+			slime.rabid = 1
+			for(var/mob/O in viewers(get_turf_loc(user), null))
+				O.show_message(text("\red The [slime] is driven into a frenzy!."), 1)
+		uses -= 1
+		user << "Bloodlust emitter sends a pulse."
+	else
+		user << "You have spent device's capabilities." //To limit number of uses.
+		return 0
+	return 1

@@ -11,6 +11,7 @@
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
 	var/crisis //Admin-settable for combat module use.
+	var/tc_borg = 0 //for Tau Ceti custom borgs
 
 //Hud stuff
 
@@ -148,7 +149,7 @@
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
 		return
-	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security")
+	var/list/modules = list("Standard", "Engineering", "Medical", "Miner", "Janitor", "Service", "Security", "Science")
 	if(crisis && security_level == SEC_LEVEL_RED) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
 		modules+="Combat"
@@ -162,12 +163,14 @@
 
 	switch(modtype)
 		if("Standard")
+			tc_borg = 0
 			module = new /obj/item/weapon/robot_module/standard(src)
 			module_sprites["Basic"] = "robot_old"
 			module_sprites["Android"] = "droid"
 			module_sprites["Default"] = "robot"
 
 		if("Service")
+			tc_borg = 0
 			module = new /obj/item/weapon/robot_module/butler(src)
 			module_sprites["Waitress"] = "Service"
 			module_sprites["Kent"] = "toiletbot"
@@ -175,7 +178,17 @@
 			module_sprites["Rich"] = "maximillion"
 			module_sprites["Default"] = "Service2"
 
+		if("Science")
+			tc_borg = 1
+			module = new /obj/item/weapon/robot_module/science(src)
+			channels = list("Science" = 1)
+			if(camera && "Robots" in camera.network)
+				camera.network.Add("Science")
+			module_sprites["Toxin"] = "toxbot"
+			module_sprites["Xenobio"] = "xenobot"
+
 		if("Miner")
+			tc_borg = 0
 			module = new /obj/item/weapon/robot_module/miner(src)
 			channels = list("Supply" = 1)
 			if(camera && "Robots" in camera.network)
@@ -185,6 +198,7 @@
 			module_sprites["Treadhead"] = "Miner"
 
 		if("Medical")
+			tc_borg = 0
 			module = new /obj/item/weapon/robot_module/medical(src)
 			channels = list("Medical" = 1)
 			if(camera && "Robots" in camera.network)
@@ -195,6 +209,7 @@
 			module_sprites["Standard"] = "surgeon"
 
 		if("Security")
+			tc_borg = 0
 			module = new /obj/item/weapon/robot_module/security(src)
 			channels = list("Security" = 1)
 			module_sprites["Basic"] = "secborg"
@@ -203,6 +218,7 @@
 			module_sprites["Bloodhound"] = "bloodhound"
 
 		if("Engineering")
+			tc_borg = 0
 			module = new /obj/item/weapon/robot_module/engineering(src)
 			channels = list("Engineering" = 1)
 			if(camera && "Robots" in camera.network)
@@ -212,15 +228,23 @@
 			module_sprites["Landmate"] = "landmate"
 
 		if("Janitor")
+			tc_borg = 0
 			module = new /obj/item/weapon/robot_module/janitor(src)
 			module_sprites["Basic"] = "JanBot2"
 			module_sprites["Mopbot"]  = "janitorrobot"
 			module_sprites["Mop Gear Rex"] = "mopgearrex"
 
 		if("Combat")
+			tc_borg = 0
 			module = new /obj/item/weapon/robot_module/combat(src)
 			module_sprites["Combat Android"] = "droid-combat"
 			channels = list("Security" = 1)
+
+
+	if(tc_borg)
+		icon = 'tauceti/icons/mob/robot.dmi'
+	else
+		icon = 'icons/mob/robots.dmi'
 
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)

@@ -235,3 +235,24 @@
 		src.modules += new /obj/item/weapon/wrench(src) //Is a combat android really going to be stopped by a chair?
 		src.emag = new /obj/item/weapon/gun/energy/lasercannon/cyborg(src)
 		return
+
+/obj/item/weapon/robot_module/science
+	name = "science robot module"
+
+	New()
+		src.modules += new /obj/item/device/analyzer(src)
+		src.modules += new /obj/item/device/reagent_scanner/adv(src)
+		src.modules += new /obj/item/weapon/extinguisher/mini(src)
+		src.modules += new /obj/item/device/depth_scanner(src)
+		src.modules += new /obj/item/weapon/crowbar/red
+		src.modules += new /obj/item/weapon/wrench(src)
+		src.modules += new /obj/item/weapon/screwdriver(src)
+		src.modules += new /obj/item/weapon/wirecutters(src)
+		src.modules += new /obj/item/device/flashlight/lantern(src)
+		src.modules += new /obj/item/device/assembly/signaler(src)
+		src.modules += new /obj/item/device/lustmodule(src)
+		src.emag = new /obj/item/weapon/reagent_containers/spray(src)
+
+		src.emag.reagents.add_reagent("sacid", 250)
+		src.emag.name = "Sulfuric spray"
+		return

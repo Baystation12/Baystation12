@@ -35,6 +35,7 @@
 	R.camera.network.Remove(list("Engineering","Medical","MINE"))
 	R.updatename("Default")
 	R.status_flags |= CANPUSH
+	R.tc_borg = 0
 	R.updateicon()
 
 	return 1
