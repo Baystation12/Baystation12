@@ -28,6 +28,11 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	var/progress = "nothing"
 
 
+/datum/gas_mixture/zone
+	Del()
+		CRASH("Something tried to delete a zone's air!")
+		. = ..()
+
 //CREATION AND DELETION
 /zone/New(turf/start)
 	. = ..()
@@ -47,7 +52,8 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 	//Generate the gas_mixture for use in txhis zone by using the average of the gases
 	//defined at startup.
-	air = new
+	//Changed to try and find the source of the error.
+	air = new /datum/gas_mixture/zone()
 	air.group_multiplier = contents.len
 	for(var/turf/simulated/T in contents)
 		if(!T.air)
@@ -102,6 +108,10 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			C.A.zone = null
 		if(C.B.zone == src)
 			C.B.zone = null
+		if(C.zone_A == src)
+			C.zone_A = null
+		if(C.zone_B == src)
+			C.zone_B = null
 	direct_connections = null
 
 	//Ensuring the zone list doesn't get clogged with null values.
@@ -180,6 +190,10 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 		return
 
 	if(!unsim_air_needs_update && air_unsim) //if air_unsim doesn't exist, we need to create it even if we don't need an update.
+		return
+
+	//Tempfix.
+	if(!air)
 		return
 
 	unsim_air_needs_update = 0
@@ -768,6 +782,9 @@ zone/proc/Rebuild()
 			final_arrangement[current_identifier] = list(current)
 
 		else
+			//Sanity check.
+			if(!islist(final_arrangement[current_identifier]))
+				final_arrangement[current_identifier] = list()
 			final_arrangement[current_identifier] += current
 
 	//lazy but fast
