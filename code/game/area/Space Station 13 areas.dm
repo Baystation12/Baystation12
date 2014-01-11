@@ -118,9 +118,14 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Arrival Shuttle"
 
 /area/shuttle/arrival/pre_game
+	name = "Tau Ceti Transfer Station 13"
 	icon_state = "shuttle2"
 
+/area/shuttle/arrival/transit
+	icon_state = "shuttle"
+
 /area/shuttle/arrival/station
+	name = "NSS Exodus"
 	icon_state = "shuttle"
 
 /area/shuttle/escape
@@ -354,6 +359,10 @@ var/list/ghostteleportlocs = list()
 
 /area/centcom/holding
 	name = "\improper Holding Facility"
+
+/area/centcom/arrival
+	name = "\improper Arrival Shuttle Dock"
+
 
 //SYNDICATES
 

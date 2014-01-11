@@ -582,7 +582,8 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		"cargo",
 		"miner",
 		"librarian",
-		"agent"
+		"agent",
+		"assistant"
 		)
 	var/dresscode = input("Select dress for [M]", "Robust quick dress shop") as null|anything in dresspacks
 	if (isnull(dresscode))
@@ -1456,7 +1457,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 			var/obj/item/device/pda/librarian/pda = new(M)
 			pda.owner = M.real_name
-			pda.ownjob = "Librariant"
+			pda.ownjob = "Librarian"
 			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
 			M.equip_to_slot_or_del(pda, slot_belt)
 
@@ -1492,6 +1493,23 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			var/datum/organ/external/affected = M.organs_by_name["head"]
 			affected.implants += L
 			L.part = affected
+		if("assistant")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/color/grey(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset(M), slot_l_ear)
+
+			var/obj/item/device/pda/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Assistant"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			M.equip_to_slot_or_del(pda, slot_belt)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.name = "[M.real_name]'s ID Card"
+			W.access = list(access_library)
+			W.assignment = "Assistant"
+			W.registered_name = M.real_name
+			M.equip_to_slot_or_del(W, slot_wear_id)
 
 
 	M.regenerate_icons()

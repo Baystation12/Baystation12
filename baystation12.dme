@@ -1435,6 +1435,7 @@
 #include "tauceti\items\clothing\masks\masks.dm"
 #include "tauceti\items\clothing\suits\suits.dm"
 #include "tauceti\items\clothing\uniforms\uniforms.dm"
+#include "tauceti\items\computers\arrival_shuttle.dm"
 #include "tauceti\items\defibrillator\defibrillator.dm"
 #include "tauceti\items\devices\ai_detector.dm"
 #include "tauceti\items\devices\nuke_modkits.dm"
