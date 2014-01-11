@@ -273,20 +273,20 @@
 				ore_uranium+= O:amount
 				del(O)
 				continue
-			if (istype(O,/obj/item/stack/sheet/glass))
-				ore_glass+= O:amount
-				del(O)
-				continue
-			if (istype(O,/obj/item/stack/sheet/rglass))
-				ore_rglass+= O:amount
-				del(O)
-				continue
 			if (istype(O,/obj/item/stack/sheet/glass/plasmaglass))
 				ore_plasmaglass+= O:amount
 				del(O)
 				continue
 			if (istype(O,/obj/item/stack/sheet/glass/plasmarglass))
 				ore_plasmarglass+= O:amount
+				del(O)
+				continue
+			if (istype(O,/obj/item/stack/sheet/glass))
+				ore_glass+= O:amount
+				del(O)
+				continue
+			if (istype(O,/obj/item/stack/sheet/rglass))
+				ore_rglass+= O:amount
 				del(O)
 				continue
 			if (istype(O,/obj/item/stack/sheet/plasteel))
