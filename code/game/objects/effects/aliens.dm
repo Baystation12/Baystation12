@@ -280,6 +280,12 @@ Alien plants should do something if theres a lot of poison
 	health -= damage
 	healthcheck()
 
+
+/obj/effect/alien/weeds/temperature_expose(null, temperature, volume)
+	if(temperature > T0C+200)
+		health -= 1 * temperature
+		healthcheck()
+
 /obj/effect/alien/weeds/proc/healthcheck()
 	if(health <= 0)
 		del(src)

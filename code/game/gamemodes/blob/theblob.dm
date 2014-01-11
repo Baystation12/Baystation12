@@ -202,6 +202,11 @@
 	else
 		icon_state = "blob"
 
+/obj/effect/blob/temperature_expose(datum/gas_mixture/air, temperature, volume)
+	if(temperature > T0C+200)
+		health -= 1 * temperature
+		update_icon()
+
 /* // Used to create the glow sprites. Remember to set the animate loop to 1, instead of infinite!
 
 var/datum/blob_colour/B = new()

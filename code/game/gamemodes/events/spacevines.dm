@@ -239,8 +239,9 @@
 				return
 	return
 
-/obj/effect/spacevine/temperature_expose(null, temp, volume) //hotspots kill vines
-	del src
+/obj/effect/spacevine/temperature_expose(null, temperature, volume) //hotspots kill vines
+	if(temperature > T0C+100)
+		del(src)
 
 //Carn: Spacevines random event.
 /proc/spacevine_infestation()
