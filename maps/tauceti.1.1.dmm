@@ -838,7 +838,7 @@
 "aqf" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor,/area/hallway/primary/fore)
 "aqg" = (/obj/machinery/atmospherics/unary/vent_scrubber{on = 1; scrub_N2O = 0; scrub_Toxins = 0},/turf/simulated/floor,/area/hallway/primary/fore)
 "aqh" = (/obj/structure/table,/obj/machinery/camera{c_tag = "Detective South"; dir = 1},/obj/item/weapon/hand_labeler,/obj/item/device/flash,/obj/item/clothing/glasses/sunglasses,/turf/simulated/floor{icon_state = "floorgrime"},/area/security/detectives_office)
-"aqi" = (/obj/structure/stool/bed/chair/office/dark,/obj/effect/landmark/start{name = "Forensics Technician"},/turf/simulated/floor{icon_state = "floorgrime"},/area/security/detectives_office)
+"aqi" = (/obj/structure/stool/bed/chair/office/dark,/obj/effect/landmark/start{name = "Forensic Technician"},/turf/simulated/floor{icon_state = "floorgrime"},/area/security/detectives_office)
 "aqj" = (/obj/effect/decal/cleanable/dirt,/obj/structure/stool,/turf/simulated/floor{icon_state = "floorgrime"},/area/security/detectives_office)
 "aqk" = (/obj/machinery/computer/secure_data,/turf/simulated/floor{icon_state = "floorgrime"},/area/security/detectives_office)
 "aql" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 5},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/structure/disposalpipe/segment,/obj/machinery/light/small{dir = 8},/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/plating,/area/maintenance/fsmaint)
