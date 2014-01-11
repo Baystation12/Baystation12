@@ -38,7 +38,7 @@ var/global/list/cached_icons = list()
 
 	on_reagent_change() //Until we have a generic "paint", this will give new colours to all paints in the can
 		for(var/datum/reagent/paint/P in reagents.reagent_list)
-			P.color = mix_color_from_reagents(reagent_list)
+			P.color = mix_color_from_reagents(reagents.reagent_list)
 
 	red
 		icon_state = "paint_red"
@@ -175,8 +175,7 @@ var/global/list/cached_icons = list()
 datum/reagent/paint
 	name = "Paint"
 	id = "paint_"
-	description = name + " is used to color floor tiles."
-	reagent_state = LIQUID
+	reagent_state = 2
 	color = "#808080"
 
 	reaction_turf(var/turf/T, var/volume)
@@ -227,6 +226,8 @@ datum/reagent/paint
 		name = "White Paint"
 		color = "#F0F8FF"
 		id = "paint_white"
+
+	description = name + " is used to color floor tiles."
 
 datum/reagent/paint_remover
 	name = "Paint Remover"
