@@ -177,6 +177,7 @@ datum/reagent/paint
 	id = "paint_"
 	reagent_state = 2
 	color = "#808080"
+	desc = "This paint will only adhere to floor tiles."
 
 	reaction_turf(var/turf/T, var/volume)
 		if(!istype(T) || istype(T, /turf/space))
@@ -226,8 +227,6 @@ datum/reagent/paint
 		name = "White Paint"
 		color = "#F0F8FF"
 		id = "paint_white"
-
-	description = name + " is used to color floor tiles."
 
 datum/reagent/paint_remover
 	name = "Paint Remover"
