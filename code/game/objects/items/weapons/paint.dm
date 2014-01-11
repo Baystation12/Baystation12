@@ -177,7 +177,7 @@ datum/reagent/paint
 	id = "paint_"
 	reagent_state = 2
 	color = "#808080"
-	desc = "This paint will only adhere to floor tiles."
+	description = "This paint will only adhere to floor tiles."
 
 	reaction_turf(var/turf/T, var/volume)
 		if(!istype(T) || istype(T, /turf/space))
