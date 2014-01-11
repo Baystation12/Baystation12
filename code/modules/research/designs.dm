@@ -1451,7 +1451,7 @@ datum/design/chemsprayer
 	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000)
 	reliability_base = 100
-	build_path = "/obj/item/weapon/reagent_containers/chemsprayer"
+	build_path = "/obj/item/weapon/reagent_containers/spray/chemsprayer"
 
 datum/design/rapidsyringe
 	name = "Rapid Syringe Gun"
