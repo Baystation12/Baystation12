@@ -131,6 +131,11 @@
 	var/leader_selected = 0
 	var/agent_number = 1
 	var/spawnpos = 1
+	var/max_age = 0
+	for(var/datum/mind/synd_mind in syndicates)
+		if(!isnum(synd_mind.current.client.player_age))
+			if(max_age<synd_mind.current.client.player_age)
+				max_age = synd_mind.current.client.player_age
 
 	for(var/datum/mind/synd_mind in syndicates)
 		if(spawnpos > synd_spawn.len)
@@ -140,10 +145,15 @@
 		forge_syndicate_objectives(synd_mind)
 		greet_syndicate(synd_mind)
 		equip_syndicate(synd_mind.current)
-
+		
 		if(!leader_selected)
-			prepare_syndicate_leader(synd_mind, nuke_code)
-			leader_selected = 1
+			if (max_age > 0)
+				if (max_age <= synd_mind.current.client.player_age)
+					prepare_syndicate_leader(synd_mind, nuke_code)
+					leader_selected = 1
+			else
+				prepare_syndicate_leader(synd_mind, nuke_code)
+				leader_selected = 1
 		else
 			synd_mind.current.real_name = "Gorlex Maradeurs Operative #[agent_number]"
 			agent_number++
