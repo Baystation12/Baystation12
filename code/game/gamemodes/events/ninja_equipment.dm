@@ -1385,7 +1385,8 @@ It is possible to destroy the net by the occupant or someone else.
 			if(!isnull(master))//As long as they still exist.
 				master << "\blue <b>SUCCESS</b>: \black transport procedure of \the [affecting] complete."
 
-			M.anchored = 0//Important.
+			M.captured = 0 //Important.
+			M.anchored = initial(M.anchored) //Changes the mob's anchored status to the original one; this is not handled by the can_move proc.
 
 		else//And they are free.
 			M << "\blue You are free of the net!"

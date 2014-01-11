@@ -753,6 +753,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 	else if( stunned )
 //		lying = 0
 		canmove = 0
+	else if(captured)
+		anchored = 1
+		canmove = 0
+		lying = 0
 	else
 		lying = !can_stand
 		canmove = has_limbs
