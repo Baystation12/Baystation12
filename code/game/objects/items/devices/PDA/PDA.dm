@@ -167,6 +167,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/reporter
 	icon_state = "pda-libc"
 
+/obj/item/device/pda/forensic
+	default_cartridge = /obj/item/weapon/cartridge/detective
+	icon = 'tauceti/icons/obj/devices.dmi'
+	icon_state = "pda-forensic"
+
 /obj/item/device/pda/clear
 	icon_state = "pda-transp"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a special edition with a transparent case."
