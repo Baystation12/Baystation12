@@ -114,11 +114,16 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	//Removing zone connections and scheduling connection cleanup
 	for(var/zone/Z in connected_zones)
 		Z.connected_zones.Remove(src)
-		Z.closed_connection_zones.Remove(src)
+		if(!Z.connected_zones.len)
+			Z.connected_zones = null
+
+		if(Z.closed_connection_zones)
+			Z.closed_connection_zones.Remove(src)
+			if(!Z.closed_connection_zones.len)
+				Z.closed_connection_zones = null
 
 	connected_zones = null
 	closed_connection_zones = null
-
 
 	return 1
 
@@ -358,7 +363,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 		for(var/zone/Z in closed_connection_zones)
 			//If that zone has already processed, skip it.
-			if(Z.last_update > last_update)
+			if(Z.last_update > last_update || !Z.air)
 				continue
 
 			var/handle_temperature = abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta
