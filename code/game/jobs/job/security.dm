@@ -168,7 +168,7 @@
 		return 1
 
 /datum/job/forensic
-	title = "Forensic Technician"
+	title = "Forensics Technician"
 	flag = FORENSIC
 	department_flag = ENGSEC
 	faction = "Station"
