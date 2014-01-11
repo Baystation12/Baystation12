@@ -28,6 +28,11 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	var/progress = "nothing"
 
 
+/datum/gas_mixture/zone
+	Del()
+		CRASH("Something tried to delete a zone's air!")
+		. = ..()
+
 //CREATION AND DELETION
 /zone/New(turf/start)
 	. = ..()
@@ -47,7 +52,8 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 	//Generate the gas_mixture for use in txhis zone by using the average of the gases
 	//defined at startup.
-	air = new
+	//Changed to try and find the source of the error.
+	air = new /datum/gas_mixture/zone()
 	air.group_multiplier = contents.len
 	for(var/turf/simulated/T in contents)
 		if(!T.air)
@@ -102,6 +108,10 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			C.A.zone = null
 		if(C.B.zone == src)
 			C.B.zone = null
+		if(C.zone_A == src)
+			C.zone_A = null
+		if(C.zone_B == src)
+			C.zone_B = null
 	direct_connections = null
 
 	//Ensuring the zone list doesn't get clogged with null values.
@@ -114,11 +124,16 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	//Removing zone connections and scheduling connection cleanup
 	for(var/zone/Z in connected_zones)
 		Z.connected_zones.Remove(src)
-		Z.closed_connection_zones.Remove(src)
+		if(!Z.connected_zones.len)
+			Z.connected_zones = null
+
+		if(Z.closed_connection_zones)
+			Z.closed_connection_zones.Remove(src)
+			if(!Z.closed_connection_zones.len)
+				Z.closed_connection_zones = null
 
 	connected_zones = null
 	closed_connection_zones = null
-
 
 	return 1
 
@@ -175,6 +190,10 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 		return
 
 	if(!unsim_air_needs_update && air_unsim) //if air_unsim doesn't exist, we need to create it even if we don't need an update.
+		return
+
+	//Tempfix.
+	if(!air)
 		return
 
 	unsim_air_needs_update = 0
@@ -358,7 +377,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 		for(var/zone/Z in closed_connection_zones)
 			//If that zone has already processed, skip it.
-			if(Z.last_update > last_update)
+			if(Z.last_update > last_update || !Z.air)
 				continue
 
 			var/handle_temperature = abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta
@@ -763,6 +782,9 @@ zone/proc/Rebuild()
 			final_arrangement[current_identifier] = list(current)
 
 		else
+			//Sanity check.
+			if(!islist(final_arrangement[current_identifier]))
+				final_arrangement[current_identifier] = list()
 			final_arrangement[current_identifier] += current
 
 	//lazy but fast
