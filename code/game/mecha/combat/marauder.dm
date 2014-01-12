@@ -59,7 +59,7 @@
 	src.smoke_system.attach(src)
 	return
 
-/obj/mecha/combat/marauder/New()
+/obj/mecha/combat/marauder/loaded/New()
 	..()
 	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse(src)
 	ME.attach(src)

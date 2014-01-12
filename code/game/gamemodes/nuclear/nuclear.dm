@@ -145,7 +145,7 @@
 		forge_syndicate_objectives(synd_mind)
 		greet_syndicate(synd_mind)
 		equip_syndicate(synd_mind.current)
-		
+
 		if(!leader_selected)
 			if (max_age > 0)
 				if (max_age <= synd_mind.current.client.player_age)
@@ -308,7 +308,7 @@
 
 	else if (!disk_rescued && !station_was_nuked &&  nuke_off_station &&  syndies_didnt_escape)
 		feedback_set_details("round_end_result","halfwin - blew wrong station - did not evacuate in time")
-		world << "<FONT size = 3><B>[syndicate_name()] operatives have earned Darwin Award!</B></FONT>"
+		world << "<FONT size = 3><B>Gorlex Maradeurs operatives have earned Darwin Award!</B></FONT>"
 		world << "<B>Gorlex Maradeurs operatives blew up something that wasn't NSS Exodus and got caught in the explosion.</B> Next time, don't lose the disk!"
 
 	else if ( disk_rescued                                         && is_operatives_are_dead())

@@ -749,7 +749,7 @@ datum/mind
 						else
 							current.real_name = "Gorlex Maradeurs Operative #[ticker.mode.syndicates.len-1]"
 						special_role = "Syndicate"
-						current << "\blue You are a [syndicate_name()] agent!"
+						current << "\blue You are a Gorlex Maradeurs agent!"
 						ticker.mode.forge_syndicate_objectives(src)
 						ticker.mode.greet_syndicate(src)
 						log_admin("[key_name_admin(usr)] has nuke op'ed [current].")
@@ -1033,7 +1033,7 @@ datum/mind
 				current.real_name = "Gorlex Maradeurs Operative #[ticker.mode.syndicates.len-1]"
 			special_role = "Syndicate"
 			assigned_role = "MODE"
-			current << "\blue You are a [syndicate_name()] agent!"
+			current << "\blue You are a Gorlex Maradeurs agent!"
 			ticker.mode.forge_syndicate_objectives(src)
 			ticker.mode.greet_syndicate(src)
 
