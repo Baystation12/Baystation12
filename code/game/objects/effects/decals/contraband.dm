@@ -144,7 +144,7 @@ obj/structure/sign/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if("No")
 			return
 
-/obj/structure/sign/poster/proc/roll_and_drop(turf/loc)
+/obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
 	var/obj/item/weapon/contraband/poster/P = new(src, serial_number)
 	P.loc = newloc
 	src.loc = P
