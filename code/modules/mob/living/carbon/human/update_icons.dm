@@ -474,7 +474,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(!t_color)		t_color = icon_state
 		var/image/standing = image("icon_state" = "[t_color]_s")
 		if(w_uniform:tc_custom)
-			standing.icon	= ((w_uniform.icon_override) ? w_uniform.icon_override : w_uniform:tc_custom)
+			standing = image("icon"= ((w_uniform.icon_override) ? w_uniform.icon_override : w_uniform:tc_custom), "icon_state" = "[t_color]_mob")
 		else
 			standing.icon	= ((w_uniform.icon_override) ? w_uniform.icon_override : 'icons/mob/uniform.dmi')
 
