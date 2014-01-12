@@ -65,7 +65,7 @@
 	set desc = "Grow to a more complex form."
 
 	if(!is_alien_whitelisted(src, "Diona") && config.usealienwhitelist)
-		src << alert("You are currently not whitelisted to play [client.prefs.species].")
+		src << alert("You are currently not whitelisted to play as a full diona.")
 		return 0
 
 	if(donors.len < 5)
