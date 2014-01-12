@@ -6399,7 +6399,7 @@
 "ctc" = (/obj/machinery/power/emitter{anchored = 1; dir = 4; state = 2},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/engine{name = "Engine Room"})
 "ctd" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/poddoor/shutters{id = "EngineShutter"; name = "Engine Shutters"},/turf/simulated/floor/plating,/area/engine{name = "Engine Room"})
 "cte" = (/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 8},/area/engine{name = "Engine Room"})
-"ctf" = (/obj/machinery/power/supermatter{layer = 70},/obj/machinery/mass_driver{id = "enginecore"},/turf/simulated/floor/greengrid,/area/engine{name = "Engine Room"})
+"ctf" = (/obj/machinery/power/supermatter{layer = 4},/obj/machinery/mass_driver{id = "enginecore"},/turf/simulated/floor/greengrid,/area/engine{name = "Engine Room"})
 "ctg" = (/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 4},/area/engine{name = "Engine Room"})
 "cth" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/poddoor/shutters{dir = 8; id = "EngineShutter"; name = "Engine Shutters"},/turf/simulated/floor/plating,/area/engine{name = "Engine Room"})
 "cti" = (/obj/machinery/atmospherics/pipe/simple/yellow/visible,/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 8},/area/engine{name = "Engine Room"})
