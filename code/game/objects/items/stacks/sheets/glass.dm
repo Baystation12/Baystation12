@@ -305,7 +305,7 @@
 /obj/item/stack/sheet/glass/plasmaglass
 	name = "plasma glass"
 	desc = "A very strong and very resistant sheet of a plasma-glass alloy."
-	singular_name = "glass sheet"
+	singular_name = "plasma glass sheet"
 	icon_state = "sheet-plasmaglass"
 	g_amt = 7500
 	origin_tech = "materials=3;plasma=2"
