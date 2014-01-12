@@ -207,23 +207,18 @@
   * @return nothing
   */
 
-#define NANO_CSS_PATH		"nano/css/"
-#define NANO_IMAGES_PATH		"nano/images/"
-#define NANO_JS_PATH		"nano/js/"
-#define NANO_TEMPLATES_PATH		"nano/templates/"
-
 /datum/nanomanager/proc/send_resources(client)
-	var/list/css = flist(NANO_CSS_PATH)
-	var/list/images = flist(NANO_IMAGES_PATH)
-	var/list/js = flist(NANO_JS_PATH)
-	var/list/templates = flist(NANO_TEMPLATES_PATH)
+	var/list/nano_asset_dirs = list(\
+		"nano/css/",\
+		"nano/images/",\
+		"nano/js/",\
+		"nano/templates/"\
+	)
 	
-	for(var/file in css)
-		client << browse_rsc(file(NANO_CSS_PATH + file))	
-	for(var/file in images)
-		client << browse_rsc(file(NANO_IMAGES_PATH + file))	
-	for(var/file in js)
-		client << browse_rsc(file(NANO_JS_PATH + file))	
-	for(var/file in templates)
-		client << browse_rsc(file(NANO_TEMPLATES_PATH + file))
+	var/list/files = null
+	for (var/path in nano_asset_dirs)
+		files = flist(path)
+		for(var/file in files)
+			if(copytext(file, length(file)) != "/") // files which end in "/" are actually directories, which we want to ignore
+				client << browse_rsc(file(path + file))	// send the file to the client
 
