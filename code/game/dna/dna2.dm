@@ -25,6 +25,8 @@ var/global/list/dna_activity_bounds[STRUCDNASIZE]
 // Used to determine what each block means (admin hax and species stuff on /vg/, mostly)
 var/global/list/assigned_blocks[STRUCDNASIZE]
 
+var/global/list/datum/dna/gene/dna_genes[0]
+
 // UI Indices (can change to mutblock style, if desired)
 #define DNA_UI_HAIR_R      1
 #define DNA_UI_HAIR_G      2
@@ -41,21 +43,13 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 #define DNA_UI_HAIR_STYLE  13
 #define DNA_UI_LENGTH      13 // Update this when you add something, or you WILL break shit.
 
+/////////////////
+// GENE DEFINES
+/////////////////
 
-/* Note RE: unassigned blocks
-
-   Many genes in baycode are currently sitting unused
-   (compare setupgame.dm to the number of *BLOCK variables).
-
-   This datum will return 0 (or equivalent) if asked about
-   a block 0 (which means the gene was unassigned).  Setters
-   will silently return without performing any action.
-
-   I have code to assign these genes in a streamlined manner,
-   but in order to avoid breaking things, I've left the
-   existing setupgame.dm intact.  Please let me know if you
-   need this behavior changed.
- */
+// Skip checking if it's already active.
+// Used for genes that check for value rather than a binary on/off.
+#define GENE_ALWAYS_ACTIVATE 1
 
 /datum/dna
 	// READ-ONLY, GETS OVERWRITTEN
@@ -77,6 +71,27 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 	var/b_type = "A+"  // Should probably change to an integer => string map but I'm lazy.
 	var/mutantrace = null  // The type of mutant race the player is, if applicable (i.e. potato-man)
 	var/real_name          // Stores the real name of the person who originally got this dna datum. Used primarily for changelings,
+
+	// New stuff
+	var/species = "Human"
+
+// Make a copy of this strand.
+// USE THIS WHEN COPYING STUFF OR YOU'LL GET CORRUPTION!
+/datum/dna/proc/Clone()
+	var/datum/dna/new_dna = new()
+	new_dna.unique_enzymes=unique_enzymes
+	new_dna.b_type=b_type
+	new_dna.mutantrace=mutantrace
+	new_dna.real_name=real_name
+	new_dna.species=species
+	for(var/b=1;b<=STRUCDNASIZE;b++)
+		new_dna.SE[b]=SE[b]
+		if(b<=DNA_UI_LENGTH)
+			new_dna.UI[b]=UI[b]
+	new_dna.UpdateUI()
+	new_dna.UpdateSE()
+	return new_dna
+
 ///////////////////////////////////////
 // UNIQUE IDENTITY
 ///////////////////////////////////////
@@ -84,7 +99,11 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 // Create random UI.
 /datum/dna/proc/ResetUI(var/defer=0)
 	for(var/i=1,i<=DNA_UI_LENGTH,i++)
-		UI[i]=rand(0,4095)
+		switch(i)
+			if(DNA_UI_SKIN_TONE)
+				SetUIValueRange(DNA_UI_SKIN_TONE,rand(1,220),220,1) // Otherwise, it gets fucked
+			else
+				UI[i]=rand(0,4095)
 	if(!defer)
 		UpdateUI()
 
@@ -110,13 +129,13 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 	SetUIValueRange(DNA_UI_BEARD_G,   character.g_facial,  255,    1)
 	SetUIValueRange(DNA_UI_BEARD_B,   character.b_facial,  255,    1)
 
-	SetUIValueRange(DNA_UI_EYES_R,   character.r_eyes,    255,    1)
-	SetUIValueRange(DNA_UI_EYES_G,   character.g_eyes,    255,    1)
-	SetUIValueRange(DNA_UI_EYES_B,   character.b_eyes,    255,    1)
+	SetUIValueRange(DNA_UI_EYES_R,    character.r_eyes,    255,    1)
+	SetUIValueRange(DNA_UI_EYES_G,    character.g_eyes,    255,    1)
+	SetUIValueRange(DNA_UI_EYES_B,    character.b_eyes,    255,    1)
 
-	SetUIValueRange(DNA_UI_SKIN_TONE, -character.s_tone+35,    220,    1)    // WARNING:  MATH.  Blame the person that setup line 944 in modules/client/preferences.dm
+	SetUIValueRange(DNA_UI_SKIN_TONE, 35-character.s_tone, 220,    1) // Value can be negative.
 
-	SetUIState(DNA_UI_GENDER,         character.gender!=MALE,      1)
+	SetUIState(DNA_UI_GENDER,         character.gender!=MALE,        1)
 
 	SetUIValueRange(DNA_UI_HAIR_STYLE,  hair,  hair_styles_list.len,       1)
 	SetUIValueRange(DNA_UI_BEARD_STYLE, beard, facial_hair_styles_list.len,1)
@@ -140,22 +159,18 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 
 // Set a DNA UI block's value, given a value and a max possible value.
 // Used in hair and facial styles (value being the index and maxvalue being the len of the hairstyle list)
-/datum/dna/proc/SetUIValueRange(var/block,var/value,var/maxvalue,var/minvalue)
+/datum/dna/proc/SetUIValueRange(var/block,var/value,var/maxvalue,var/defer=0)
 	if (block<=0) return
-	if(value < minvalue)
-		value=minvalue
-	else if(value > maxvalue)
-		value=maxvalue
 	ASSERT(maxvalue<=4095)
 	var/range = (4095 / maxvalue)
 	if(value)
-		SetUIValue(block,round(value * range))
+		SetUIValue(block,round(value * range),defer)
 
 // Getter version of above.
 /datum/dna/proc/GetUIValueRange(var/block,var/maxvalue)
 	if (block<=0) return 0
 	var/value = GetUIValue(block)
-	return round(1+(value / 4096)*maxvalue)
+	return round(1 +(value / 4096)*maxvalue)
 
 // Is the UI gene "on" or "off"?
 // For UI, this is simply a check of if the value is > 2050.
@@ -238,6 +253,12 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 	if(value)
 		SetSEValue(block, value * range - rand(1,range-1))
 
+// Getter version of above.
+/datum/dna/proc/GetSEValueRange(var/block,var/maxvalue)
+	if (block<=0) return 0
+	var/value = GetSEValue(block)
+	return round(1 +(value / 4096)*maxvalue)
+
 // Is the block "on" (1) or "off" (0)? (Un-assigned genes are always off.)
 /datum/dna/proc/GetSEState(var/block)
 	if (block<=0) return 0
@@ -253,7 +274,7 @@ var/global/list/assigned_blocks[STRUCDNASIZE]
 	if(on)
 		val=rand(BOUNDS[DNA_ON_LOWERBOUND],BOUNDS[DNA_ON_UPPERBOUND])
 	else
-		val=rand(BOUNDS[DNA_OFF_LOWERBOUND],BOUNDS[DNA_OFF_UPPERBOUND])
+		val=rand(1,BOUNDS[DNA_OFF_UPPERBOUND])
 	SetSEValue(block,val,defer)
 
 // Get hex-encoded SE block.

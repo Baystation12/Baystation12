@@ -169,7 +169,7 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/beer(src)
+		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
 		src.modules += new /obj/item/weapon/pen/robopen(src)
 
@@ -185,7 +185,7 @@
 
 		src.modules += new /obj/item/weapon/tray/robotray(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/shaker(src)
-		src.emag = new /obj/item/weapon/reagent_containers/food/drinks/beer(src)
+		src.emag = new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 
 		var/datum/reagents/R = new/datum/reagents(50)
 		src.emag.reagents = R

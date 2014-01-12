@@ -12,10 +12,16 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 //Initializes blood vessels
 /mob/living/carbon/human/proc/make_blood()
-	if (vessel)
+
+	if(vessel)
 		return
+
 	vessel = new/datum/reagents(600)
 	vessel.my_atom = src
+
+	if(species && species.flags & NO_BLOOD) //We want the var for safety but we can do without the actual blood.
+		return
+
 	vessel.add_reagent("blood",560)
 	spawn(1)
 		fixblood()
@@ -29,6 +35,10 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/human/proc/handle_blood()
+
+	if(species && species.flags & NO_BLOOD)
+		return
+
 	if(stat != DEAD && bodytemperature >= 170)	//Dead or cryosleep people do not pump the blood.
 
 		var/blood_volume = round(vessel.get_reagent_amount("blood"))
@@ -126,6 +136,10 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 //Makes a blood drop, leaking certain amount of blood from the mob
 /mob/living/carbon/human/proc/drip(var/amt as num)
+
+	if(species && species.flags & NO_BLOOD) //TODO: Make drips come from the reagents instead.
+		return
+
 	if(!amt)
 		return
 
@@ -145,6 +159,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		this.icon_state = pick(iconL)
 		this.blood_DNA = list()
 		this.blood_DNA[dna.unique_enzymes] = dna.b_type
+		if (species) this.basecolor = species.blood_color
+		this.update_icon()
+
 	else
 		for(var/obj/effect/decal/cleanable/blood/drip/G in nums)
 			del G
@@ -156,6 +173,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 //Gets blood from mob to the container, preserving all data in it.
 /mob/living/carbon/proc/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
+
 	var/datum/reagent/B = get_blood(container.reagents)
 	if(!B) B = new /datum/reagent/blood
 	B.holder = container
@@ -184,8 +202,13 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 //For humans, blood does not appear from blue, it comes from vessels.
 /mob/living/carbon/human/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
+
+	if(species && species.flags & NO_BLOOD)
+		return null
+
 	if(vessel.get_reagent_amount("blood") < amount)
 		return null
+
 	. = ..()
 	vessel.remove_reagent("blood",amount) // Removes blood if human
 
@@ -207,8 +230,16 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 //Transfers blood from container ot vessels, respecting blood types compatability.
 /mob/living/carbon/human/inject_blood(obj/item/weapon/reagent_containers/container, var/amount)
-	var/datum/reagent/blood/our = get_blood(vessel)
+
 	var/datum/reagent/blood/injected = get_blood(container.reagents)
+
+	if(species && species.flags & NO_BLOOD)
+		reagents.add_reagent("blood", amount, injected.data)
+		reagents.update_total()
+		return
+
+	var/datum/reagent/blood/our = get_blood(vessel)
+
 	if (!injected || !our)
 		return
 	if(blood_incompatible(injected.data["blood_type"],our.data["blood_type"]) )

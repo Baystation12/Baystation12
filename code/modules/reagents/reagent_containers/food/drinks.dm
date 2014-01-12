@@ -242,128 +242,6 @@
 		src.pixel_x = rand(-10.0, 10)
 		src.pixel_y = rand(-10.0, 10)
 
-/obj/item/weapon/reagent_containers/food/drinks/cola
-	name = "Space Cola"
-	desc = "Cola. in space."
-	icon_state = "cola"
-	New()
-		..()
-		reagents.add_reagent("cola", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/waterbottle
-	name = "Bottled Water"
-	desc = "Introduced to the vending machines on health nut protest, taste fresh, pure glacial* water! *Note: Might be tapwater."
-	icon_state = "waterbottle"
-	New()
-		..()
-		reagents.add_reagent("water", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/beer
-	name = "Space Beer"
-	desc = "Beer. In space."
-	icon_state = "beer"
-	New()
-		..()
-		reagents.add_reagent("beer", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/ale
-	name = "Magm-Ale"
-	desc = "A true dorf's drink of choice."
-	icon_state = "alebottle"
-	item_state = "beer"
-	New()
-		..()
-		reagents.add_reagent("ale", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-
-/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind
-	name = "Space Mountain Wind"
-	desc = "Blows right through you like a space wind."
-	icon_state = "space_mountain_wind"
-	New()
-		..()
-		reagents.add_reagent("spacemountainwind", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/thirteenloko
-	name = "Thirteen Loko"
-	desc = "The CMO has advised crew members that consumption of Thirteen Loko may result in seizures, blindness, drunkeness, or even death. Please Drink Responsably."
-	icon_state = "thirteen_loko"
-	New()
-		..()
-		reagents.add_reagent("thirteenloko", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/dr_gibb
-	name = "Dr. Gibb"
-	desc = "A delicious mixture of 42 different flavors."
-	icon_state = "dr_gibb"
-	New()
-		..()
-		reagents.add_reagent("dr_gibb", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/starkist
-	name = "Star-kist"
-	desc = "The taste of a star in liquid form. And, a bit of tuna...?"
-	icon_state = "starkist"
-	New()
-		..()
-		reagents.add_reagent("cola", 15)
-		reagents.add_reagent("orangejuice", 15)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/space_up
-	name = "Space-Up"
-	desc = "Tastes like a hull breach in your mouth."
-	icon_state = "space-up"
-	New()
-		..()
-		reagents.add_reagent("space_up", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/lemon_lime
-	name = "Lemon-Lime"
-	desc = "You wanted ORANGE. It gave you Lemon Lime."
-	icon_state = "lemon-lime"
-	New()
-		..()
-		reagents.add_reagent("lemon_lime", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/iced_tea
-	name = "Vrisk Serket Iced Tea"
-	desc = "That sweet, refreshing southern earthy flavor. That's where it's from, right? South Earth? Whatever!!!!!!!!"
-	icon_state = "ice_tea_can"
-	New()
-		..()
-		reagents.add_reagent("icetea", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
-
-/obj/item/weapon/reagent_containers/food/drinks/grape_juice
-	name = "Grapel Juice"
-	desc = "500 pages of rules of how to appropriately enter into a combat with this juice!"
-	icon_state = "purple_can"
-	New()
-		..()
-		reagents.add_reagent("grapejuice", 30)
-		src.pixel_x = rand(-10.0, 10)
-		src.pixel_y = rand(-10.0, 10)
 
 /obj/item/weapon/reagent_containers/food/drinks/sillycup
 	name = "Paper Cup"
@@ -381,21 +259,7 @@
 		else
 			icon_state = "water_cup_e"
 
-/obj/item/weapon/reagent_containers/food/drinks/tonic
-	name = "T-Borg's Tonic Water"
-	desc = "Quinine tastes funny, but at least it'll keep that Space Malaria away."
-	icon_state = "tonic"
-	New()
-		..()
-		reagents.add_reagent("tonic", 50)
 
-/obj/item/weapon/reagent_containers/food/drinks/sodawater
-	name = "Soda Water"
-	desc = "A can of soda water. Why not make a scotch and soda?"
-	icon_state = "sodawater"
-	New()
-		..()
-		reagents.add_reagent("sodawater", 50)
 //////////////////////////drinkingglass and shaker//
 //Note by Darem: This code handles the mixing of drinks. New drinks go in three places: In Chemistry-Reagents.dm (for the drink
 //	itself), in Chemistry-Recipes.dm (for the reaction that changes the components into the drink), and here (for the drinking glass
@@ -428,12 +292,12 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask
 	name = "vacuum flask"
-	desc = "Keeping your drinks at the perfect temperature since 2321."
+	desc = "Keeping your drinks at the perfect temperature since 1892."
 	icon_state = "vacuumflask"
 	volume = 60
 
 /obj/item/weapon/reagent_containers/food/drinks/britcup
 	name = "cup"
-	desc = "A cup with the british flag emblazoned on it."
+	desc = "A cup with the British flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30

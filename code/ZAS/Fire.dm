@@ -75,12 +75,12 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 	//since the air is processed in fractions, we need to make sure not to have any minuscle residue or
 	//the amount of moles might get to low for some functions to catch them and thus result in wonky behaviour
-	if(air_contents.oxygen < 0.001)
+	if(air_contents.oxygen < 0.1)
 		air_contents.oxygen = 0
-	if(air_contents.toxins < 0.001)
+	if(air_contents.toxins < 0.1)
 		air_contents.toxins = 0
 	if(fuel)
-		if(fuel.moles < 0.001)
+		if(fuel.moles < 0.1)
 			air_contents.trace_gases.Remove(fuel)
 
 	//check if there is something to combust
@@ -200,7 +200,7 @@ datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, forc
 
 		if(liquid)
 		//Liquid Fuel
-			if(liquid.amount <= 0)
+			if(liquid.amount <= 0.1)
 				del liquid
 			else
 				total_fuel += liquid.amount
@@ -257,9 +257,9 @@ datum/gas_mixture/proc/check_recombustability(obj/effect/decal/cleanable/liquid_
 	if(oxygen && (toxins || fuel || liquid))
 		if(liquid)
 			return 1
-		if (toxins)
+		if(toxins >= 0.1)
 			return 1
-		if(fuel)
+		if(fuel && fuel.moles >= 0.1)
 			return 1
 
 	return 0
@@ -272,9 +272,9 @@ datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fu
 	if(oxygen && (toxins || fuel || liquid))
 		if(liquid)
 			return 1
-		if (toxins >= 0.7)
+		if (toxins >= 0.1)
 			return 1
-		if(fuel && fuel.moles >= 1.4)
+		if(fuel && fuel.moles >= 0.1)
 			return 1
 
 	return 0
