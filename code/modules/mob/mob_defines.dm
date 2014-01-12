@@ -158,7 +158,7 @@
 	var/voice_name = "unidentifiable voice"
 
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
-
+	var/captured = 0 //Functionally, should give the same effect as being buckled into a chair when true.
 
 //Generic list for proc holders. Only way I can see to enable certain verbs/procs. Should be modified if needed.
 	var/proc_holder_list[] = list()//Right now unused.
@@ -218,3 +218,5 @@
 	var/immune_to_ssd = 0
 
 	var/turf/listed_turf = null  //the current turf being examined in the stat panel
+
+	var/list/active_genes=list()

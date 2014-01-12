@@ -325,6 +325,13 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "broom"
 
+/obj/item/weapon/staff/gentcane
+	name = "Gentlemans Cane"
+	desc = "An ebony can with an ivory tip."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "cane"
+	item_state = "stick"
+
 /obj/item/weapon/staff/stick
 	name = "stick"
 	desc = "A great tool to drag someone else's drinks across the bar."
@@ -394,6 +401,8 @@
 	name = "power control module"
 	icon_state = "power_mod"
 	desc = "Heavy-duty switching circuits for power control."
+	m_amt = 50
+	g_amt = 50
 
 /obj/item/weapon/module/id_auth
 	name = "\improper ID authentication module"

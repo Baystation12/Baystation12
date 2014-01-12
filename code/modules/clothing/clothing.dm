@@ -28,7 +28,7 @@
 
 	return ..()
 
-//Ears: currently only used for headsets and earmuffs
+//Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears
 	name = "ears"
 	w_class = 1.0

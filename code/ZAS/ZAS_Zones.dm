@@ -28,6 +28,11 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	var/progress = "nothing"
 
 
+/datum/gas_mixture/zone
+	Del()
+		CRASH("Something tried to delete a zone's air!")
+		. = ..()
+
 //CREATION AND DELETION
 /zone/New(turf/start)
 	. = ..()
@@ -47,7 +52,8 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 	//Generate the gas_mixture for use in txhis zone by using the average of the gases
 	//defined at startup.
-	air = new
+	//Changed to try and find the source of the error.
+	air = new /datum/gas_mixture/zone()
 	air.group_multiplier = contents.len
 	for(var/turf/simulated/T in contents)
 		if(!T.air)
@@ -102,6 +108,10 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			C.A.zone = null
 		if(C.B.zone == src)
 			C.B.zone = null
+		if(C.zone_A == src)
+			C.zone_A = null
+		if(C.zone_B == src)
+			C.zone_B = null
 	direct_connections = null
 
 	//Ensuring the zone list doesn't get clogged with null values.
@@ -114,11 +124,16 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	//Removing zone connections and scheduling connection cleanup
 	for(var/zone/Z in connected_zones)
 		Z.connected_zones.Remove(src)
-		Z.closed_connection_zones.Remove(src)
+		if(!Z.connected_zones.len)
+			Z.connected_zones = null
+
+		if(Z.closed_connection_zones)
+			Z.closed_connection_zones.Remove(src)
+			if(!Z.closed_connection_zones.len)
+				Z.closed_connection_zones = null
 
 	connected_zones = null
 	closed_connection_zones = null
-
 
 	return 1
 
@@ -175,6 +190,10 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 		return
 
 	if(!unsim_air_needs_update && air_unsim) //if air_unsim doesn't exist, we need to create it even if we don't need an update.
+		return
+
+	//Tempfix.
+	if(!air)
 		return
 
 	unsim_air_needs_update = 0
@@ -356,25 +375,26 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 					Z.interactions_with_neighbors++
 					interactions_with_neighbors++
 
-		for(var/zone/Z in closed_connection_zones)
-			//If that zone has already processed, skip it.
-			if(Z.last_update > last_update)
-				continue
-
-			var/handle_temperature = abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta
-
-			if(Z.status == ZONE_SLEEPING)
-				if (handle_temperature)
-					Z.SetStatus(ZONE_ACTIVE)
-				else
+		if(!vsc.connection_insulation)
+			for(var/zone/Z in closed_connection_zones)
+				//If that zone has already processed, skip it.
+				if(Z.last_update > last_update || !Z.air)
 					continue
 
-			if(air && Z.air)
-				if( handle_temperature )
-					ShareHeat(air, Z.air, closed_connection_zones[Z])
+				var/handle_temperature = abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta
 
-					Z.interactions_with_neighbors++
-					interactions_with_neighbors++
+				if(Z.status == ZONE_SLEEPING)
+					if (handle_temperature)
+						Z.SetStatus(ZONE_ACTIVE)
+					else
+						continue
+
+				if(air && Z.air)
+					if( handle_temperature )
+						ShareHeat(air, Z.air, closed_connection_zones[Z])
+
+						Z.interactions_with_neighbors++
+						interactions_with_neighbors++
 
 	if(!interactions_with_neighbors && !interactions_with_unsim)
 		SetStatus(ZONE_SLEEPING)
@@ -649,6 +669,18 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 
 
 proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
+	//This implements a simplistic version of the Stefan-Boltzmann law.
+	var/energy_delta = ((A.temperature - B.temperature) ** 4) * 5.6704e-8 * connecting_tiles * 2.5
+	var/maximum_energy_delta = max(0, min(A.temperature * A.heat_capacity() * A.group_multiplier, B.temperature * B.heat_capacity() * B.group_multiplier))
+	if(maximum_energy_delta > abs(energy_delta))
+		if(energy_delta < 0)
+			maximum_energy_delta *= -1
+		energy_delta = maximum_energy_delta
+
+	A.temperature -= energy_delta / (A.heat_capacity() * A.group_multiplier)
+	B.temperature += energy_delta / (B.heat_capacity() * B.group_multiplier)
+
+	/* This was bad an I feel bad.
 	//Shares a specific ratio of gas between mixtures using simple weighted averages.
 	var
 		//WOOT WOOT TOUCH THIS AND YOU ARE A RETARD
@@ -671,7 +703,7 @@ proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 
 	A.temperature = max(0, (A.temperature - temp_avg) * (1- (ratio / max(1,A.group_multiplier)) ) + temp_avg )
 	B.temperature = max(0, (B.temperature - temp_avg) * (1- (ratio / max(1,B.group_multiplier)) ) + temp_avg )
-
+	*/
 
   ///////////////////
  //Zone Rebuilding//
@@ -763,6 +795,9 @@ zone/proc/Rebuild()
 			final_arrangement[current_identifier] = list(current)
 
 		else
+			//Sanity check.
+			if(!islist(final_arrangement[current_identifier]))
+				final_arrangement[current_identifier] = list()
 			final_arrangement[current_identifier] += current
 
 	//lazy but fast

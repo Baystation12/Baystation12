@@ -157,14 +157,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/turf/location = get_turf(src)
 	smoketime--
 	if(smoketime < 1)
-		new type_butt(location)
-		processing_objects.Remove(src)
-		if(ismob(loc))
-			var/mob/living/M = loc
-			M << "<span class='notice'>Your [name] goes out.</span>"
-			M.u_equip(src)	//un-equip it so the overlays can update
-			M.update_inv_wear_mask(0)
-		del(src)
+		die()
 		return
 	if(location)
 		location.hotspot_expose(700, 5)
@@ -182,19 +175,27 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette/attack_self(mob/user as mob)
 	if(lit == 1)
 		user.visible_message("<span class='notice'>[user] calmly drops and treads on the lit [src], putting it out instantly.</span>")
-		var/turf/T = get_turf(src)
-		new type_butt(T)
-		processing_objects.Remove(src)
-		del(src)
+		die()
 	return ..()
 
 
+/obj/item/clothing/mask/cigarette/proc/die()
+	var/turf/T = get_turf(src)
+	var/obj/item/butt = new type_butt(T)
+	transfer_fingerprints_to(butt)
+	if(ismob(loc))
+		var/mob/living/M = loc
+		M << "<span class='notice'>Your [name] goes out.</span>"
+		M.u_equip(src)	//un-equip it so the overlays can update
+		M.update_inv_wear_mask(0)
+	processing_objects.Remove(src)
+	del(src)
 
 ////////////
 // CIGARS //
 ////////////
 /obj/item/clothing/mask/cigarette/cigar
-	name = "Premium Cigar"
+	name = "premium cigar"
 	desc = "A brown roll of tobacco and... well, you're not quite sure. This thing's huge!"
 	icon_state = "cigaroff"
 	icon_on = "cigaron"
@@ -206,14 +207,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	chem_volume = 20
 
 /obj/item/clothing/mask/cigarette/cigar/cohiba
-	name = "Cohiba Robusto Cigar"
+	name = "\improper Cohiba Robusto cigar"
 	desc = "There's little more you could want from a cigar."
 	icon_state = "cigar2off"
 	icon_on = "cigar2on"
 	icon_off = "cigar2off"
 
 /obj/item/clothing/mask/cigarette/cigar/havana
-	name = "Premium Havanian Cigar"
+	name = "premium Havanian cigar"
 	desc = "A cigar fit for only the best for the best."
 	icon_state = "cigar2off"
 	icon_on = "cigar2on"
@@ -228,6 +229,12 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = "cigbutt"
 	w_class = 1
 	throwforce = 1
+
+/obj/item/weapon/cigbutt/New()
+	..()
+	pixel_x = rand(-10,10)
+	pixel_y = rand(-10,10)
+	transform = turn(transform,rand(0,360))
 
 /obj/item/weapon/cigbutt/cigarbutt
 	name = "cigar butt"
@@ -330,7 +337,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/lit = 0
 
 /obj/item/weapon/lighter/zippo
-	name = "Zippo lighter"
+	name = "\improper Zippo lighter"
 	desc = "The zippo."
 	icon_state = "zippo"
 	item_state = "zippo"

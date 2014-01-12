@@ -1,6 +1,9 @@
 /mob/living/carbon/human/movement_delay()
 	var/tally = 0
 
+	if(species && species.flags & IS_SLOW)
+		tally = 7
+
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 
 	handle_embedded_objects() //Moving with objects stuck in you can cause bad times.

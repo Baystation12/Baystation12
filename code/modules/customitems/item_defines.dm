@@ -733,6 +733,15 @@
 	item_state = "wyatt_uniform"
 	item_color = "wyatt_uniform"
 
+////// Black Dress - Lillian Amsel - PapaDrow
+/obj/item/clothing/under/fluff/lillian_amsel_1
+	name = "Black Dress"
+	desc = "A knee-length, dark gray and black dress made of a soft, velvety material."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "lillian_dress"
+	item_state = "lillian_dress"
+	item_color = "lillian_dress"
+
 //////////// Masks ////////////
 
 /*
@@ -823,6 +832,15 @@
 	flags = FPRINT|TABLEPASS
 	w_class = 1
 
+////// Apollon Pendant - Michael Guess - Dragor23
+/obj/item/clothing/mask/michael_guess_1
+	name = "Apollon Pendant"
+	desc = "A pendant with the form of a sacrificial tripod, used in acient greece. It's a symbol of the Olympian Apollon, a god associated with oracles, poetry, the sun and healing."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "michael_guess_1"
+	flags = FPRINT|TABLEPASS
+	w_class = 1
+	slot_flags = SLOT_MASK
 //////////// Shoes ////////////
 
 /obj/item/clothing/shoes/magboots/fluff/susan_harris_1 //sniperyeti: Susan Harris
