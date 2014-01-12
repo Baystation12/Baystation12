@@ -206,8 +206,8 @@ Class Procs:
 /obj/machinery/attack_hand(mob/user as mob)
 	if(stat & (NOPOWER|BROKEN|MAINT))
 		return 1
-	if(user.lying || user.stat)
-		return 1
+	/*if(user.lying || user.stat)
+		return 1*/ //look at how fancy enabling legless people is!!!!
 	if ( ! (istype(usr, /mob/living/carbon/human) || \
 			istype(usr, /mob/living/silicon) || \
 			istype(usr, /mob/living/carbon/monkey) && ticker && ticker.mode.name == "monkey") )
