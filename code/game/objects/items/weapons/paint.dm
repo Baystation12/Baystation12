@@ -37,8 +37,9 @@ var/global/list/cached_icons = list()
 		reagents.add_reagent("paint_[paint_type]", volume)
 
 	on_reagent_change() //Until we have a generic "paint", this will give new colours to all paints in the can
+		var/mixedcolor = mix_color_from_reagents(reagents.reagent_list)
 		for(var/datum/reagent/paint/P in reagents.reagent_list)
-			P.color = mix_color_from_reagents(reagents.reagent_list)
+			P.color = mixedcolor
 
 	red
 		icon_state = "paint_red"
