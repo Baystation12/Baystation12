@@ -63,6 +63,9 @@
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 
+	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
+	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
+
 	var/disable_player_mice = 0
 	var/uneducated_mice = 0 //Set to 1 to prevent newly-spawned mice from understanding human speech
 
@@ -181,7 +184,7 @@
 		if(type == "config")
 			switch (name)
 				if ("resource_urls")
-					config.resource_urls = stringsplit(value, " ")
+					config.resource_urls = text2list(value, " ")
 
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
@@ -459,9 +462,14 @@
 						else //probably windows, if not this should work anyway
 							config.python_path = "python"
 
+				if("allow_cult_ghostwriter")
+					config.cult_ghostwriter = 1
+
+				if("req_cult_ghostwriter")
+					config.cult_ghostwriter_req_cultists = value
+
 				else
 					diary << "Unknown setting in configuration: '[name]'"
-
 
 		else if(type == "game_options")
 			if(!value)
