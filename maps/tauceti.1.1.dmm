@@ -2750,7 +2750,7 @@
 "baT" = (/obj/structure/table/woodentable,/obj/item/weapon/hand_labeler,/turf/simulated/floor/wood,/area/security/vacantoffice)
 "baU" = (/obj/machinery/photocopier,/turf/simulated/floor/wood,/area/security/vacantoffice)
 "baV" = (/obj/machinery/power/apc{dir = 2; name = "Vacant Office APC"; pixel_y = -25},/obj/structure/cable,/obj/structure/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/briefcase{pixel_x = -2; pixel_y = -5},/obj/item/weapon/storage/briefcase{pixel_x = 3; pixel_y = 0},/turf/simulated/floor/wood,/area/security/vacantoffice)
-"baW" = (/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_y = -29},/obj/structure/closet/lawcloset,/turf/simulated/floor/wood,/area/security/vacantoffice)
+"baW" = (/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_y = -29},/obj/structure/closet/lawcloset,/obj/item/clothing/under/fluff/terezi_suit,/turf/simulated/floor/wood,/area/security/vacantoffice)
 "baX" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp/green,/turf/simulated/floor/wood,/area/security/vacantoffice)
 "baY" = (/obj/structure/table/woodentable,/obj/item/weapon/book/manual/security_space_law,/turf/simulated/floor/wood,/area/security/vacantoffice)
 "baZ" = (/obj/structure/table/woodentable,/obj/item/device/taperecorder,/turf/simulated/floor/wood,/area/security/vacantoffice)
