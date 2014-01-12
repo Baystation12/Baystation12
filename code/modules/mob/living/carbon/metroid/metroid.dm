@@ -940,6 +940,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 			return
 		var/mob/living/carbon/human/G = new /mob/living/carbon/human
 		G.dna.mutantrace = "adamantine"
+		if(prob(50))	G.gender = "female"
 		G.real_name = text("Adamantine Golem ([rand(1, 1000)])")
 		G.equip_to_slot_or_del(new /obj/item/clothing/under/golem(G), slot_w_uniform)
 		G.equip_to_slot_or_del(new /obj/item/clothing/suit/golem(G), slot_wear_suit)
