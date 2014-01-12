@@ -255,6 +255,7 @@
 		'nano/templates/dna_modifier.tmpl',
 		'nano/templates/telescience_console.tmpl',
 		'nano/templates/pda.tmpl',
+		'nano/templates/smes.tmpl',
 		'nano/templates/uplink.tmpl',
 		'nano/images/uiBackground.png',
 		'nano/images/uiIcons16.png',
