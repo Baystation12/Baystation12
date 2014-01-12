@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\game\objects\effects\decals\remains.dm
+DIR: code code\game code\game\objects code\game\objects\effects code\game\objects\effects\decals code\game\objects\effects\decals\posters 
+FILE: code\game\objects\effects\decals\remains.dm
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

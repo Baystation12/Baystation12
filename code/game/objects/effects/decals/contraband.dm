@@ -1,9 +1,6 @@
 
 //########################## CONTRABAND ;3333333333333333333 -Agouri ###################################################
 
-#define USE_BS_POSTERS 1 //0 for tg, 1 for bs
-#define NUM_OF_POSTER_DESIGNS 28 //10 for tg, 28 for bs
-
 /obj/item/weapon/contraband
 	name = "contraband item"
 	desc = "You probably shouldn't be holding this."
@@ -16,53 +13,15 @@
 	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface."
 	icon_state = "rolled_poster"
 	var/serial_number = 0
-	var/obj/structure/sign/poster/resulting_poster = null //The poster that will be created is initialised and stored through contraband/poster's constructor
 
 
 /obj/item/weapon/contraband/poster/New(turf/loc, var/given_serial = 0)
 	if(given_serial == 0)
-		serial_number = rand(1, NUM_OF_POSTER_DESIGNS)
-		resulting_poster = new(serial_number)
+		serial_number = rand(1, poster_designs.len)
 	else
 		serial_number = given_serial
-		//We don't give it a resulting_poster because if we called it with a given_serial it means that we're rerolling an already used poster.
 	name += " - No. [serial_number]"
 	..(loc)
-
-
-/*/obj/item/weapon/contraband/poster/attack(mob/M as mob, mob/user as mob)
-	src.add_fingerprint(user)
-	if(resulting_poster)
-		resulting_poster.add_fingerprint(user)
-	..()*/
-
-/*/obj/item/weapon/contraband/poster/attack(atom/A, mob/user as mob) //This shit is handled through the wall's attackby()
-	if(istype(A, /turf/simulated/wall))
-		if(resulting_poster == null)
-			return
-		else
-			var/turf/simulated/wall/W = A
-			var/check = 0
-			var/stuff_on_wall = 0
-			for(var/obj/O in W.contents) //Let's see if it already has a poster on it or too much stuff
-				if(istype(O,/obj/structure/sign/poster))
-					check = 1
-					break
-				stuff_on_wall++
-				if(stuff_on_wall == 3)
-					check = 1
-					break
-
-			if(check)
-				user << "<span class='notice'>The wall is far too cluttered to place a poster!</span>"
-				return
-
-			resulting_poster.loc = W //Looks like it's uncluttered enough. Place the poster
-			W.contents += resulting_poster
-
-			del(src)*/
-
-
 
 //############################## THE ACTUAL DECALS ###########################
 
@@ -80,141 +39,14 @@ obj/structure/sign/poster/New(var/serial)
 	serial_number = serial
 
 	if(serial_number == loc)
-		serial_number = rand(1, NUM_OF_POSTER_DESIGNS)	//This is for the mappers that want individual posters without having to use rolled posters.
+		serial_number = rand(1, poster_designs.len)	//This is for the mappers that want individual posters without having to use rolled posters.
 
-	if(!USE_BS_POSTERS)
-		icon_state = "poster[serial_number]"
-
-		switch(serial_number)
-			if(1)
-				name += " - Free Tonto"
-				desc += " A framed shred of a much larger flag, colors bled together and faded from age."
-			if(2)
-				name += " - Atmosia Declaration of Independence"
-				desc += " A relic of a failed rebellion"
-			if(3)
-				name += " - Fun Police"
-				desc += " A poster condemning the station's security forces."
-			if(4)
-				name += " - Lusty Xeno"
-				desc += " A heretical poster depicting the titular star of an equally heretical book."
-			if(5)
-				name += " - Syndicate Recruitment Poster"
-				desc += " See the galaxy! Shatter corrupt megacorporations! Join today!"
-			if(6)
-				name += " - Clown"
-				desc += " Honk."
-			if(7)
-				name += " - Smoke"
-				desc += " A poster depicting a carton of cigarettes."
-			if(8)
-				name += " - Grey Tide"
-				desc += " A rebellious poster symbolizing assistant solidarity."
-			if(9)
-				name += " - Missing Gloves"
-				desc += " This poster is about the uproar that followed Nanotrasen's financial cuts towards insulated-glove purchases."
-			if(10)
-				name += " - Hacking Guide"
-				desc += " This poster details the internal workings of the common Nanotrasen airlock."
-			else
-				name += " - Error"
-				desc += " Bad."
-		..()
-	else
-		icon_state = "bsposter[serial_number]"
-
-		switch (serial_number)
-			if(1)
-				name += " - Unlucky Space Explorer"
-				desc += " This particular one depicts a skeletal form within a space suit."
-			if(2)
-				name += " - Positronic Logic Conflicts"
-				desc += " This particular one depicts the cold, unmoving stare of a particular advanced AI."
-			if(3)
-				name += " - Paranoia"
-				desc += " This particular one warns of the dangers of trusting your co-workers too much."
-			if(4)
-				name += " - Keep Calm"
-				desc += " This particular one is of a famous New Earth design, although a bit modified."
-			if(5)
-				name += " - Martian Warlord"
-				desc += " This particular one depicts the cartoony mug of a certain Martial Warmonger."
-			if(6)
-				name += " - Technological Singularity"
-				desc += " This particular one is of the blood-curdling symbol of a long-since defeated enemy of humanity."
-			if(7)
-				name += " - Wasteland"
-				desc += " This particular one is of a couple of ragged gunmen, one male and one female, on top of a mound of rubble. The number \"12\" is visible on their blue jumpsuits."
-			if(8)
-				name += " - Pinup Girl Cindy"
-				desc += " This particular one is of Nanotrasen's PR girl, Cindy, in a particularly feminine pose."
-			if(9)
-				name += " - Pinup Girl Amy"
-				desc += " This particular one is of Amy, the nymphomaniac Urban Legend of Nanotrasen Space Stations. How this photograph came to be is not known."
-			if(10)
-				name += " - Don't Panic"
-				desc += " This particular one depicts some sort of star in a grimace. The \"Don't Panic\" is written in big, friendly letters."
-			if(11)
-				name += " - Underwater Laboratory"
-				desc += " This particular one is of the fabled last crew of Nanotrasen's previous project before going big on Asteroid mining, Sealab."
-			if(12)
-				name += " - Rogue AI"
-				desc += " This particular one depicts the shell of the infamous AI that catastropically comandeered one of Nanotrasen's earliest space stations. Back then, the corporation was just known as TriOptimum."
-			if(13)
-				name += " - User of the Arcane Arts"
-				desc += " This particular one depicts a wizard, casting a spell. You can't really make out if it's an actial photograph or a computer-generated image."
-			if(14)
-				name += " - Levitating Skull"
-				desc += " This particular one is the portrait of a certain flying, friendly and somewhat sex-crazed enchanted skull. Its adventures along with its fabled companion are now fading through history..."
-			if(15)
-				name += " - Augmented Legend"
-				desc += " This particular one is of an obviously augmented individual, gazing towards the sky. The cyber-city in the backround is rather punkish."
-			if(16)
-				name += " - Dangerous Static"
-				desc += " This particular one depicts nothing remarkable other than a rather mesmerising pattern of monitor static. There's a tag on the sides of the poster, urging you to \"tear this poster in half to receive your free sample\"."
-			if(17)
-				name += " - Pinup Girl Val"
-				desc += " Luscious Val McNeil, the vertically challenged Legal Extraordinaire, winner of Miss Space two years running and favoured pinup girl of Lawyers Weekly."
-			if(18)
-				name += " - Derpman, Enforcer of the State"
-				desc += " Here to protect and serve... your donuts! A generously proportioned man, he teaches you the value of hiding your snacks."
-			if(19)
-				name += " - Respect a Soghun"
-				desc += " This poster depicts a well dressed looking Soghun receiving a prestigious award. It appears to espouse greater co-operation and harmony between the two races."
-			if(20)
-				name += " - Skrell Twilight"
-				desc += " This poster depicts a mysteriously inscrutable, alien scene. Numerous Skrell can be seen conversing amidst great, crystalline towers rising above crashing waves"
-			if(21)
-				name += " - Join the Fuzz!"
-				desc += " It's a nice recruitment poster of a white haired Chinese woman that says; \"Big Guns, Hot Women, Good Times. Security. We get it done.\""
-			if(22)
-				name += " - Looking for a career with excitement?"
-				desc += " A recruitment poster starring a dark haired woman with glasses and a purple shirt that has \"Got Brains? Got Talent? Not afraid of electric flying monsters that want to suck the soul out of you? Then Xenobiology could use someone like you!\" written on the bottom."
-			if(23)
-				name += " - Safety first: because electricity doesn't wait!"
-				desc += " A safety poster starring a clueless looking redhead with frazzled hair. \"Every year, hundreds of NT employees expose themselves to electric shock. Play it safe. Avoid suspicious doors after electrical storms, and always wear protection when doing electric maintenance.\""
-			if(24)
-				name += " - Responsible medbay habits, No #259"
-				desc += " A poster with a nervous looking geneticist on it states; \"Friends Don't Tell Friends They're Clones. It can cause severe and irreparable emotional trauma. Always do the right thing and never tell them that they were dead.\""
-			if(25)
-				name += " - Irresponsible medbay habits, No #2"
-				desc += " This is a safety poster starring a perverted looking naked doctor. \"Sexual harassment is never okay. REPORT any acts of sexual deviance or harassment that disrupt a healthy working environment.\""
-			if(26)
-				name += " - The Men We Knew"
-				desc += " This movie poster depicts a group of soldiers fighting a large mech, the movie seems to be a patriotic war movie."
-			if(27)
-				name += " - Plastic Sheep Can't Scream"
-				desc += " This is a movie poster for an upcoming horror movie, it features an AI in the front of it."
-			if(28)
-				name += " - The Stars Know Love"
-				desc += " This is a movie poster. A bleeding woman is shown drawing a heart in her blood on the window of space ship, it seems to be a romantic Drama."
-			if(29)
-				name += " - Winter Is Coming"
-				desc += " On the poster is a frighteningly large wolf, the message on the poster seems ominous."
-			else
-				name += " - Error"
-				desc += " Bad."
-		..()
+	var/designtype = poster_designs[serial_number]
+	var/datum/poster/design=new designtype
+	name += " - [design.name]"
+	desc += " [design.desc]"
+	icon_state = design.icon_state // poster[serial_number]
+	..()
 
 obj/structure/sign/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wirecutters))
@@ -248,14 +80,17 @@ obj/structure/sign/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 /obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
 	var/obj/item/weapon/contraband/poster/P = new(src, serial_number)
-	P.resulting_poster = src
 	P.loc = newloc
 	src.loc = P
+	del(src)
 
 
-//separated to reduce code duplication. Moved here for ease of reference and to unclutter r_wall/attackby()
+//seperated to reduce code duplication. Moved here for ease of reference and to unclutter r_wall/attackby()
 /turf/simulated/wall/proc/place_poster(var/obj/item/weapon/contraband/poster/P, var/mob/user)
-	if(!P.resulting_poster)	return
+
+	if(!istype(src,/turf/simulated/wall))
+		user << "\red You can't place this here!"
+		return
 
 	var/stuff_on_wall = 0
 	for(var/obj/O in contents) //Let's see if it already has a poster on it or too much stuff
@@ -270,7 +105,7 @@ obj/structure/sign/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	user << "<span class='notice'>You start placing the poster on the wall...</span>" //Looks like it's uncluttered enough. Place the poster.
 
 	//declaring D because otherwise if P gets 'deconstructed' we lose our reference to P.resulting_poster
-	var/obj/structure/sign/poster/D = P.resulting_poster
+	var/obj/structure/sign/poster/D = new(P.serial_number)
 
 	var/temp_loc = user.loc
 	flick("poster_being_set",D)
@@ -286,3 +121,10 @@ obj/structure/sign/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	else
 		D.roll_and_drop(temp_loc)
 	return
+
+/datum/poster
+	// Name suffix. Poster - [name]
+	var/name=""
+	// Description suffix
+	var/desc=""
+	var/icon_state=""
