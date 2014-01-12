@@ -29,11 +29,11 @@
 	{
 		ui = get_open_ui(user, src_object, ui_key)
 	}
-	if (!isnull(ui))		
+	if (!isnull(ui))
 		// The UI is already open so push the data to it
 		ui.push_data(data)
 		return ui
-		
+
 	return null
 
  /**
@@ -201,5 +201,36 @@
 		newMob.open_uis.Add(ui)
 
 	oldMob.open_uis.Cut()
+
+	return 1 // success
+
+ /**
+  * Sends all nano assets to the client
+  * This is called on user login
+  *
+  * @param client /client The user's client
+  *
+  * @return nothing
+  */
+
+#define NANO_CSS_PATH		"nano/css/"
+#define NANO_IMAGES_PATH		"nano/images/"
+#define NANO_JS_PATH		"nano/js/"
+#define NANO_TEMPLATES_PATH		"nano/templates/"
+
+/datum/nanomanager/proc/send_resources(client)
+	var/list/css = flist(NANO_CSS_PATH)
+	var/list/images = flist(NANO_IMAGES_PATH)
+	var/list/js = flist(NANO_JS_PATH)
+	var/list/templates = flist(NANO_TEMPLATES_PATH)
+
+	for(var/file in css)
+		client << browse_rsc(file(NANO_CSS_PATH + file))
+	for(var/file in images)
+		client << browse_rsc(file(NANO_IMAGES_PATH + file))
+	for(var/file in js)
+		client << browse_rsc(file(NANO_JS_PATH + file))
+	for(var/file in templates)
+		client << browse_rsc(file(NANO_TEMPLATES_PATH + file))
 
 	return 1 // success
