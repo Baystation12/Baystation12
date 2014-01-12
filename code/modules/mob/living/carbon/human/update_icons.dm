@@ -247,10 +247,13 @@ proc/get_damage_icon_part(damage_state, body_part)
 			var/list/TONE = ReadRGB(hulk_color_mod)
 			stand_icon.MapColors(rgb(TONE[1],0,0),rgb(0,TONE[2],0),rgb(0,0,TONE[3]))
 
-	var/datum/organ/external/head = get_organ("head")
+	var/datum/organ/external/head/head = get_organ("head")
 	var/has_head = 0
+	var/brain_showing = 0
 	if(head && !(head.status & ORGAN_DESTROYED))
 		has_head = 1
+		if(head.brained==1)
+			brain_showing = 1
 
 	for(var/datum/organ/external/part in organs)
 		if(!istype(part, /datum/organ/external/chest) && !(part.status & ORGAN_DESTROYED))
@@ -316,6 +319,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(lip_style && (species && species.flags & HAS_LIPS))	//skeletons are allowed to wear lipstick no matter what you think, agouri.
 			stand_icon.Blend(new/icon('icons/mob/human_face.dmi', "lips_[lip_style]_s"), ICON_OVERLAY)
 
+		//Brain showing
+		if(brain_showing)
+			stand_icon.Blend(new/icon('icons/mob/dam_human.dmi', "brain"), ICON_OVERLAY)
 	//Underwear
 	if(underwear >0 && underwear < 12 && species.flags & HAS_UNDERWEAR)
 		if(!fat && !skeleton)

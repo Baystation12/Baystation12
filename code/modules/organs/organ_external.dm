@@ -753,6 +753,7 @@ This function completely restores a damaged organ to perfect condition.
 	min_broken_damage = 40
 	body_part = HEAD
 	var/disfigured = 0
+	var/brained = 0
 
 /datum/organ/external/head/get_icon()
 	if (!owner)
@@ -772,6 +773,10 @@ This function completely restores a damaged organ to perfect condition.
 				disfigure("brute")
 		if (burn_dam > 40)
 			disfigure("burn")
+	if(!brained)
+		if(brute_dam > 25)
+			if(prob(10))
+				breakskull()
 
 /datum/organ/external/head/proc/disfigure(var/type = "brute")
 	if (disfigured)
@@ -785,6 +790,17 @@ This function completely restores a damaged organ to perfect condition.
 		"\red <b>Your face melts off!</b>",	\
 		"\red You hear a sickening sizzle.")
 	disfigured = 1
+
+/datum/organ/external/head/proc/breakskull()
+	if(brained)
+		return
+	owner.visible_message("\red The top of \the [owner]'s skull breaks, exposing the brain help within.",	\
+	"\red <b>Unbearable pain hits you as the top of your skull breaks and exposes your brain!</b>",	\
+	"\red You hear a sickening crack.")
+	brained = 1
+	owner.h_style = "Bald"
+	owner.drop_from_inventory(owner.head)
+	owner.update_body()
 
 /****************************************************
 			   EXTERNAL ORGAN ITEMS
