@@ -64,7 +64,7 @@
 			if (I && istype(I))
 				if(src.check_access(I))
 					authenticated = 1
-				if(20 in I.access)
+				if(20 in I.access || 57 in I.access || 58 in I.access)//cap, hop, hos
 					authenticated = 2
 		if("logout")
 			authenticated = 0

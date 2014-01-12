@@ -875,6 +875,8 @@ obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 
 	H.regenerate_icons()
 
+	H.stat = 2
+	H.death()
 	brainmob.stat = 2
 	brainmob.death()
 
