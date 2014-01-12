@@ -1611,7 +1611,7 @@
 		if(decaytime > 27000)
 			decaylevel = 4
 			makeSkeleton()
-
+			return //No puking over skeletons, they don't smell at all!
 
 		for(var/mob/living/carbon/human/H in range(decaylevel, src))
 			if(prob(5))
