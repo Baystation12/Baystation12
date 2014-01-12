@@ -2210,7 +2210,7 @@
 "aQz" = (/obj/structure/table/woodentable,/turf/simulated/floor{icon_state = "dark"},/area/chapel/main)
 "aQA" = (/obj/machinery/door/morgue{dir = 2; name = "Confession Booth"},/turf/simulated/floor{icon_state = "dark"},/area/chapel/main)
 "aQB" = (/obj/machinery/light/small,/obj/item/device/radio/intercom{broadcasting = 1; frequency = 1480; name = "Confessional Intercom"; pixel_x = 25},/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/floor{icon_state = "dark"},/area/chapel/main)
-"aQC" = (/obj/structure/extinguisher_cabinet{pixel_x = 0; pixel_x = -27; pixel_y = 0},/turf/simulated/floor{dir = 1; icon_state = "escape"},/area/hallway/secondary/exit)
+"aQC" = (/obj/structure/extinguisher_cabinet{pixel_x = -30; pixel_y = 0},/turf/simulated/floor{dir = 1; icon_state = "escape"},/area/hallway/secondary/exit)
 "aQD" = (/turf/simulated/floor{dir = 1; icon_state = "escape"},/area/hallway/secondary/exit)
 "aQE" = (/obj/machinery/alarm{pixel_y = 25},/turf/simulated/floor{dir = 1; icon_state = "escape"},/area/hallway/secondary/exit)
 "aQF" = (/obj/structure/closet/emcloset,/turf/simulated/floor{dir = 1; icon_state = "warning"},/area/hallway/secondary/exit)
