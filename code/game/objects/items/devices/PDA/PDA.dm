@@ -379,21 +379,21 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	data["stationTime"] = worldtime2text()
 	data["newMessage"] = newmessage
 	
+	if(mode==2)
+		var/convopdas[0]
+		var/pdas[0]
+		var/count = 0
+		for (var/obj/item/device/pda/P in sortAtom(PDAs))
+			if (!P.owner||P.toff||P == src||P.hidden)       continue
+			if(conversations.Find("\ref[P]"))
+				convopdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "1")))
+			else
+				pdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "0")))	
+			count++
 
-	var/convopdas[0]
-	var/pdas[0]
-	var/count = 0
-	for (var/obj/item/device/pda/P in sortAtom(PDAs))
-		if (!P.owner||P.toff||P == src||P.hidden)       continue
-		if(conversations.Find("\ref[P]"))
-			convopdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "1")))
-		else
-			pdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "0")))	
-		count++
-
-	data["convopdas"] = convopdas
-	data["pdas"] = pdas
-	data["pda_count"] = count
+		data["convopdas"] = convopdas
+		data["pdas"] = pdas
+		data["pda_count"] = count
 
 	if(mode==21)
 		data["messagescount"] = tnote.len
