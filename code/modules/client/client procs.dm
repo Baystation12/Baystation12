@@ -301,6 +301,7 @@
 		'nano/templates/firealarm.tmpl',
 		'nano/templates/vending.tmpl',
 		'nano/templates/pda.tmpl',
+		'nano/templates/smes.tmpl',
 		'nano/templates/uplink.tmpl',
 		'nano/images/uiBackground.png',
 		'nano/images/uiBackground-Syndicate.png',
