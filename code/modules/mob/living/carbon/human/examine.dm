@@ -389,6 +389,10 @@
 	if(display_gloves)
 		msg += "<span class='warning'><b>[src] has blood running from under [t_his] gloves!</b></span>\n"
 
+	var/datum/organ/external/head/H = get_organ("head")
+	if(H && H.brained)
+		msg += "<span class='warning'><b>[src]'s skull is crushed and the brain is exposed to the air!</b></span>\n"
+
 	for(var/implant in get_visible_implants(1))
 		msg += "<span class='warning'><b>[src] has \a [implant] sticking out of their flesh!</span>\n"
 	if(digitalcamo)

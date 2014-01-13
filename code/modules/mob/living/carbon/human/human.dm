@@ -1426,3 +1426,12 @@ mob/living/carbon/human/yank_out_object()
 		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
 		W.message = message
 		W.add_fingerprint(src)
+
+/mob/living/carbon/human/proc/expose_brain()
+	var/datum/organ/external/head/H = get_organ("head")
+	if(H)
+		H.brained=1
+		h_style = "Bald"
+		drop_from_inventory(head)
+		update_hair()
+		update_body()

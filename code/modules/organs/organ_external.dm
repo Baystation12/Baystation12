@@ -797,11 +797,7 @@ This function completely restores a damaged organ to perfect condition.
 	owner.visible_message("\red The top of \the [owner]'s skull breaks, exposing the brain help within.",	\
 	"\red <b>Unbearable pain hits you as the top of your skull breaks and exposes your brain!</b>",	\
 	"\red You hear a sickening crack.")
-	brained = 1
-	owner.h_style = "Bald"
-	owner.drop_from_inventory(owner.head)
-	owner.update_hair()
-	owner.update_body()
+	owner.expose_brain()
 
 /****************************************************
 			   EXTERNAL ORGAN ITEMS
