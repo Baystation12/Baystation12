@@ -63,7 +63,7 @@ var/global/list/possibleEvents = list()
 		possibleEvents[/datum/event/money_hacker] = max(min(25, player_list.len) * 4, 200)
 
 	possibleEvents[/datum/event/carp_migration] = 50 + 50 * active_with_role["Engineer"]
-	possibleEvents[/datum/event/spider_infestation] = 50 + 50 * active_with_role["Security"]
+	possibleEvents[/datum/event/spider_infestation] = 50 + 25 * active_with_role["Security"]
 	possibleEvents[/datum/event/dust] = 50 + 50 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/dust/meaty] = 50 + 50 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/brand_intelligence] = 50 + 25 * active_with_role["Engineer"]
