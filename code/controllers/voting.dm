@@ -204,6 +204,15 @@ datum/controller/vote
 			reset()
 			switch(vote_type)
 				if("restart")
+					if(!usr.client.holder)
+						var/num_admins_online = 0
+						for(var/client/C in admins)
+							if(R_ADMIN & C.holder.rights || !(R_MOD & C.holder.rights))
+								if(!C.holder.fakekey && !C.is_afk())
+									num_admins_online++
+						if(num_admins_online)
+							initiator_key << "You can't start the vote now, for reason there are [num_admins_online] active admins. Speak to them."
+							return 0
 					choices.Add("Restart Round","Continue Playing")
 				if("gamemode")
 					if(ticker.current_state >= 2)
