@@ -177,7 +177,7 @@ Auto Patrol: []"},
 
 /obj/machinery/bot/secbot/Emag(mob/user as mob)
 	..()
-	if((!locked && open) || !user)
+	if(open && !locked)
 		if(user) user << "\red You short out [src]'s target assessment circuits."
 		spawn(0)
 			for(var/mob/O in hearers(src, null))
@@ -333,23 +333,23 @@ Auto Patrol: []"},
 
 
 		if(SECBOT_START_PATROL)	// start a patrol
-
-			if(path.len > 0 && patrol_target)	// have a valid path, so just resume
-				mode = SECBOT_PATROL
-				return
-
-			else if(patrol_target)		// has patrol target already
-				spawn(0)
-					calc_path()		// so just find a route to it
-					if(path.len == 0)
-						patrol_target = 0
-						return
+			if(path != null)
+				if(path.len > 0 && patrol_target)	// have a valid path, so just resume
 					mode = SECBOT_PATROL
+					return
+
+				else if(patrol_target)		// has patrol target already
+					spawn(0)
+						calc_path()		// so just find a route to it
+						if(path.len == 0)
+							patrol_target = 0
+							return
+						mode = SECBOT_PATROL
 
 
-			else					// no patrol target, so need a new one
-				find_patrol_target()
-				speak("Engaging patrol mode.")
+				else					// no patrol target, so need a new one
+					find_patrol_target()
+					speak("Engaging patrol mode.")
 
 
 		if(SECBOT_PATROL)		// patrol mode
@@ -585,8 +585,10 @@ Auto Patrol: []"},
 // calculates a path to the current destination
 // given an optional turf to avoid
 /obj/machinery/bot/secbot/proc/calc_path(var/turf/avoid = null)
-	src.path = AStar(src.loc, patrol_target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 120, id=botcard, exclude=avoid)
-	if (!path) path = list()
+	src.path = AStar(src.loc, patrol_target, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance_cardinal, 0, 120, id=botcard, exclude=avoid)
+	if(!src.path)
+		src.path = list()
+
 
 // look for a criminal in view of the bot
 
@@ -718,7 +720,7 @@ Auto Patrol: []"},
 	Sa.overlays += image('icons/obj/aibots.dmi', "hs_hole")
 	Sa.created_name = src.name
 	new /obj/item/device/assembly/prox_sensor(Tsec)
-	new /obj/item/weapon/melee/baton(Tsec)
+	new /obj/item/weapon/melee/baton/loaded(Tsec)
 
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)

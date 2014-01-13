@@ -204,7 +204,7 @@ Auto Patrol: []"},
 
 /obj/machinery/bot/ed209/Emag(mob/user as mob)
 	..()
-	if((!locked && open) || !user)
+	if(open && !locked)
 		if(user) user << "<span class='warning'>You short out [src]'s target assessment circuits.</span>"
 		spawn(0)
 			for(var/mob/O in hearers(src, null))
@@ -363,7 +363,8 @@ Auto Patrol: []"},
 
 
 		if(SECBOT_START_PATROL)	// start a patrol
-
+			if(!path || !istype(path))
+				path = list()
 			if(path.len > 0 && patrol_target)	// have a valid path, so just resume
 				mode = SECBOT_PATROL
 				return
@@ -406,7 +407,7 @@ Auto Patrol: []"},
 	if(loc == patrol_target)		// reached target
 		at_patrol_target()
 		return
-
+	if(!path || !istype(path))  path = list()
 	else if(path.len > 0 && patrol_target)		// valid path
 
 		var/turf/next = path[1]

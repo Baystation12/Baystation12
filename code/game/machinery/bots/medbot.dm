@@ -215,7 +215,7 @@
 
 /obj/machinery/bot/medbot/Emag(mob/user as mob)
 	..()
-	if((!locked && open) || !user)
+	if(open && !locked)
 		if(user) user << "<span class='warning'>You short out [src]'s reagent synthesis circuits.</span>"
 		spawn(0)
 			for(var/mob/O in hearers(src, null))
@@ -283,7 +283,8 @@
 			else
 				continue
 
-
+	if(!src.path)
+		src.path = new()
 	if(src.patient && (get_dist(src,src.patient) <= 1))
 		if(!src.currently_healing)
 			src.currently_healing = 1

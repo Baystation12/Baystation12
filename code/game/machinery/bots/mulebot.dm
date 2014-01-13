@@ -63,6 +63,7 @@ var/global/mulebot_count = 0
 
 
 	var/bloodiness = 0		// count of bloodiness
+	var/currentBloodColor = "#A10808"
 
 /obj/machinery/bot/mulebot/New()
 	..()
@@ -180,13 +181,10 @@ var/global/mulebot_count = 0
 
 /obj/machinery/bot/mulebot/interact(var/mob/user, var/ai=0)
 	var/dat
+	dat += "<TT><B>Multiple Utility Load Effector Mk. III</B></TT><BR><BR>"
+	dat += "ID: [suffix]<BR>"
+	dat += "Power: [on ? "On" : "Off"]<BR>"
 
-	// AUTOFIXED BY fix_string_idiocy.py
-	// C:\Users\Rob\Documents\Projects\vgstation13\code\game\machinery\bots\mulebot.dm:209: dat += "<TT><B>Multiple Utility Load Effector Mk. III</B></TT><BR><BR>"
-	dat += {"<TT><B>Multiple Utility Load Effector Mk. III</B></TT><BR><BR>
-		ID: [suffix]<BR>
-		Power: [on ? "On" : "Off"]<BR>"}
-	// END AUTOFIX
 	if(!open)
 
 		dat += "Status: "
@@ -206,41 +204,34 @@ var/global/mulebot_count = 0
 			if(7)
 				dat += "Unable to locate destination"
 
-		// AUTOFIXED BY fix_string_idiocy.py
-		// C:\Users\Rob\Documents\Projects\vgstation13\code\game\machinery\bots\mulebot.dm:233: dat += "<BR>Current Load: [load ? load.name : "<i>none</i>"]<BR>"
-		dat += {"<BR>Current Load: [load ? load.name : "<i>none</i>"]<BR>
-			Destination: [!destination ? "<i>none</i>" : destination]<BR>
-			Power level: [cell ? cell.percent() : 0]%<BR>"}
-		// END AUTOFIX
+
+		dat += "<BR>Current Load: [load ? load.name : "<i>none</i>"]<BR>"
+		dat += "Destination: [!destination ? "<i>none</i>" : destination]<BR>"
+		dat += "Power level: [cell ? cell.percent() : 0]%<BR>"
+
 		if(locked && !ai)
 			dat += "<HR>Controls are locked <A href='byond://?src=\ref[src];op=unlock'><I>(unlock)</I></A>"
 		else
+			dat += "<HR>Controls are unlocked <A href='byond://?src=\ref[src];op=lock'><I>(lock)</I></A><BR><BR>"
 
-			// AUTOFIXED BY fix_string_idiocy.py
-			// C:\Users\Rob\Documents\Projects\vgstation13\code\game\machinery\bots\mulebot.dm:240: dat += "<HR>Controls are unlocked <A href='byond://?src=\ref[src];op=lock'><I>(lock)</I></A><BR><BR>"
-			dat += {"<HR>Controls are unlocked <A href='byond://?src=\ref[src];op=lock'><I>(lock)</I></A><BR><BR>
-				<A href='byond://?src=\ref[src];op=power'>Toggle Power</A><BR>
-				<A href='byond://?src=\ref[src];op=stop'>Stop</A><BR>
-				<A href='byond://?src=\ref[src];op=go'>Proceed</A><BR>
-				<A href='byond://?src=\ref[src];op=home'>Return to Home</A><BR>
-				<A href='byond://?src=\ref[src];op=destination'>Set Destination</A><BR>
-				<A href='byond://?src=\ref[src];op=setid'>Set Bot ID</A><BR>
-				<A href='byond://?src=\ref[src];op=sethome'>Set Home</A><BR>
-				<A href='byond://?src=\ref[src];op=autoret'>Toggle Auto Return Home</A> ([auto_return ? "On":"Off"])<BR>
-				<A href='byond://?src=\ref[src];op=autopick'>Toggle Auto Pickup Crate</A> ([auto_pickup ? "On":"Off"])<BR>"}
-			// END AUTOFIX
+			dat += "<A href='byond://?src=\ref[src];op=power'>Toggle Power</A><BR>"
+			dat += "<A href='byond://?src=\ref[src];op=stop'>Stop</A><BR>"
+			dat += "<A href='byond://?src=\ref[src];op=go'>Proceed</A><BR>"
+			dat += "<A href='byond://?src=\ref[src];op=home'>Return to Home</A><BR>"
+			dat += "<A href='byond://?src=\ref[src];op=destination'>Set Destination</A><BR>"
+			dat += "<A href='byond://?src=\ref[src];op=setid'>Set Bot ID</A><BR>"
+			dat += "<A href='byond://?src=\ref[src];op=sethome'>Set Home</A><BR>"
+			dat += "<A href='byond://?src=\ref[src];op=autoret'>Toggle Auto Return Home</A> ([auto_return ? "On":"Off"])<BR>"
+			dat += "<A href='byond://?src=\ref[src];op=autopick'>Toggle Auto Pickup Crate</A> ([auto_pickup ? "On":"Off"])<BR>"
+
 			if(load)
 				dat += "<A href='byond://?src=\ref[src];op=unload'>Unload Now</A><BR>"
 			dat += "<HR>The maintenance hatch is closed.<BR>"
 
 	else
 		if(!ai)
-
-			// AUTOFIXED BY fix_string_idiocy.py
-			// C:\Users\Rob\Documents\Projects\vgstation13\code\game\machinery\bots\mulebot.dm:258: dat += "The maintenance hatch is open.<BR><BR>"
-			dat += {"The maintenance hatch is open.<BR><BR>
-				Power cell: "}
-			// END AUTOFIX
+			dat += "The maintenance hatch is open.<BR><BR>"
+			dat += "Power cell: "
 			if(cell)
 				dat += "<A href='byond://?src=\ref[src];op=cellremove'>Installed</A><BR>"
 			else
@@ -565,7 +556,7 @@ var/global/mulebot_count = 0
 								else if(newdir == 12)
 									newdir = 4
 								goingdir = newdir
-							T.AddTracks(/obj/effect/decal/cleanable/blood/tracks/wheels,list(),0,goingdir)
+							T.AddTracks(/obj/effect/decal/cleanable/blood/tracks/wheels,list(),0,goingdir,currentBloodColor)
 						bloodiness--
 
 					var/moved = step_towards(src, next)	// attempt to move
@@ -734,7 +725,7 @@ var/global/mulebot_count = 0
 	return get_turf(src)
 
 
-// called from mob/living/carbon/human/Crossed()
+// called from mob/living/carbon/human/HasEntered()
 // when mulebot is in the same loc
 /obj/machinery/bot/mulebot/proc/RunOver(var/mob/living/carbon/human/H)
 	src.visible_message("\red [src] drives over [H]!")
@@ -753,6 +744,13 @@ var/global/mulebot_count = 0
 	B.blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
 
 	bloodiness += 4
+	currentBloodColor="#A10808" // For if species get different blood colors.
+
+/obj/machinery/bot/mulebot/proc/RunOverCreature(var/mob/living/H,var/bloodcolor)
+	src.visible_message("\red [src] drives over [H]!")
+	playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
+	bloodiness += 4
+	currentBloodColor=bloodcolor // For if species get different blood colors.
 
 // player on mulebot attempted to move
 /obj/machinery/bot/mulebot/relaymove(var/mob/user)

@@ -34,11 +34,11 @@
 		src.explode()
 
 /obj/machinery/bot/proc/Emag(mob/user as mob)
-	if(locked && user)
+	if(locked)
 		locked = 0
 		emagged = 1
 		user << "<span class='warning'>You bypass [src]'s controls.</span>"
-	if((!locked && open) || !user)	//Ion storm does not require unlocking for emagging
+	if(!locked && open)
 		emagged = 2
 
 /obj/machinery/bot/examine()
@@ -153,6 +153,7 @@
 
 
 /obj/machinery/bot/attack_ai(mob/user as mob)
+	src.add_hiddenprint(user)
 	src.attack_hand(user)
 
 /******************************************************************/
