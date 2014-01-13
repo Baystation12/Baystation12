@@ -800,6 +800,7 @@ This function completely restores a damaged organ to perfect condition.
 	brained = 1
 	owner.h_style = "Bald"
 	owner.drop_from_inventory(owner.head)
+	owner.update_hair()
 	owner.update_body()
 
 /****************************************************
