@@ -15,7 +15,7 @@
 
 //	flick("gibbed-m", animation)
 	gibs(loc, viruses, dna)
-
+	playsound(src.loc, 'sound/effects/gib.ogg', 50, 1)
 	dead_mob_list -= src
 	if(client)
 		respawnable_list += src
