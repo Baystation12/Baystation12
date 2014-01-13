@@ -85,7 +85,7 @@ obj/structure/sign/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	del(src)
 
 
-//seperated to reduce code duplication. Moved here for ease of reference and to unclutter r_wall/attackby()
+//separated to reduce code duplication. Moved here for ease of reference and to unclutter r_wall/attackby()
 /turf/simulated/wall/proc/place_poster(var/obj/item/weapon/contraband/poster/P, var/mob/user)
 
 	if(!istype(src,/turf/simulated/wall))
