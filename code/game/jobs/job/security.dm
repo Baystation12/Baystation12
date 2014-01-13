@@ -189,7 +189,7 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/forensic_technician(H), slot_w_uniform)
 		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/red(H), slot_shoes)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/forensic(H), slot_belt)
-		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/latex(H), slot_gloves)
+		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/black(H), slot_gloves)
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/forensics/red(H), slot_wear_suit)
 
 		if(H.backbag == 1)
