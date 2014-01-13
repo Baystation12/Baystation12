@@ -250,9 +250,5 @@
 		src.modules += new /obj/item/weapon/wirecutters(src)
 		src.modules += new /obj/item/device/flashlight/lantern(src)
 		src.modules += new /obj/item/device/assembly/signaler(src)
-		src.modules += new /obj/item/device/lustmodule(src)
-		src.emag = new /obj/item/weapon/reagent_containers/spray(src)
-
-		src.emag.reagents.add_reagent("sacid", 250)
-		src.emag.name = "Sulfuric spray"
+		src.emag = new /obj/item/device/lustmodule(src)
 		return
