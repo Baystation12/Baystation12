@@ -204,7 +204,7 @@ Auto Patrol: []"},
 
 /obj/machinery/bot/ed209/Emag(mob/user as mob)
 	..()
-	if(open && !locked)
+	if((!locked && open) || !user)
 		if(user) user << "<span class='warning'>You short out [src]'s target assessment circuits.</span>"
 		spawn(0)
 			for(var/mob/O in hearers(src, null))

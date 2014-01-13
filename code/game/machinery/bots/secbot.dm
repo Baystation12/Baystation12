@@ -177,7 +177,7 @@ Auto Patrol: []"},
 
 /obj/machinery/bot/secbot/Emag(mob/user as mob)
 	..()
-	if(open && !locked)
+	if((!locked && open) || !user)
 		if(user) user << "\red You short out [src]'s target assessment circuits."
 		spawn(0)
 			for(var/mob/O in hearers(src, null))

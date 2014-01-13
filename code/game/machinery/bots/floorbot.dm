@@ -152,7 +152,7 @@ var/global/list/floorbot_targets=list()
 
 /obj/machinery/bot/floorbot/Emag(mob/user as mob)
 	..()
-	if(open && !locked)
+	if((!locked && open) || !user)
 		if(user) user << "<span class='notice'>The [src] buzzes and beeps.</span>"
 
 /obj/machinery/bot/floorbot/Topic(href, href_list)
