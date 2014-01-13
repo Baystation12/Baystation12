@@ -104,8 +104,8 @@ var/list/admin_verbs_fun = list(
 	/client/proc/editappear,
 	/client/proc/roll_dices,
 	/client/proc/epileptic_anomaly,
-	/client/proc/epileptic_anomaly_cancel,
-	/client/proc/Noir_anomaly
+//	/client/proc/Noir_anomaly,
+	/client/proc/epileptic_anomaly_cancel
 	)
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
