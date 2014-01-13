@@ -83,7 +83,10 @@ var/scheduledEvent = null
 	/area/shuttle/escape_pod5/station,
 	/area/shuttle/mining/station,
 	/area/shuttle/transport1/station,
-	/area/shuttle/specops/station)
+	/area/shuttle/specops/station,
+	/area/shuttle/prison/station,
+	/area/shuttle/administration/station
+	)
 
 	//These are needed because /area/engine has to be removed from the list, but we still want these areas to get fucked up.
 	var/list/danger_areas = list(
