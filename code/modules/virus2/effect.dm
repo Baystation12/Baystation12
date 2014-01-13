@@ -51,6 +51,7 @@
 /datum/disease2/effect/alien
 	name = "Unidentified Foreign Body"
 	stage = 4
+	badness = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob << "\red You feel something tearing its way out of your stomach..."
 		mob.adjustToxLoss(10)
