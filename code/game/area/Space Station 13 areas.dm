@@ -1949,7 +1949,6 @@ var/list/the_station_areas = list (
 	/area/bridge,
 	/area/crew_quarters,
 	/area/holodeck,
-	/area/mint,
 	/area/library,
 	/area/chapel,
 	/area/lawoffice,
