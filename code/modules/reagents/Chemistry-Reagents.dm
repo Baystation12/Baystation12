@@ -1037,7 +1037,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.apply_effect(2*REM,IRRADIATE,0)
+				M.apply_effect(8*REM,IRRADIATE,0)
 				// radium may increase your chances to cure a disease
 				if(istype(M,/mob/living/carbon)) // make sure to only use it on carbon mobs
 					var/mob/living/carbon/C = M
@@ -1129,7 +1129,7 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M.dna) return //No robots, AIs, aliens, Ians or other mobs should be affected by this.
 				if(!M) M = holder.my_atom
-				M.apply_effect(10,IRRADIATE,0)
+				M.apply_effect(4*REM,IRRADIATE,0)
 				..()
 				return
 
