@@ -67,7 +67,7 @@ var/global/datum/controller/occupations/job_master
 
 	proc/FreeRole(var/rank)	//making additional slot on the fly
 		var/datum/job/job = GetJob(rank)
-		if(job && job.current_positions >= job.total_positions)
+		if(job && job.current_positions >= job.total_positions && job.total_positions != -1)
 			job.total_positions++
 			return 1
 		return 0
