@@ -100,6 +100,7 @@
 		return
 	if( !fire )
 		fire = 1
+		master.fire = 1
 		updateicon()
 		mouse_opacity = 0
 		for(var/obj/machinery/door/firedoor/D in all_doors)
