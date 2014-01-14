@@ -3,7 +3,7 @@
 // External Shield Generator
 
 /obj/item/weapon/circuitboard/shield_gen_ex
-	name = "Circuit board (Experimental hull shield generator)"
+	name = "Circuit board (Hull shield generator)"
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_gen/external"
 	origin_tech = "bluespace=4;plasmatech=3"
@@ -17,7 +17,7 @@
 							"/obj/item/weapon/cable_coil" = 5)
 
 datum/design/shield_gen_ex
-	name = "Circuit Design (Experimental hull shield generator)"
+	name = "Circuit Design (Hull shield generator)"
 	desc = "Allows for the construction of circuit boards used to build an experimental hull shield generator."
 	id = "shield_gen"
 	req_tech = list("bluespace" = 4, "plasmatech" = 3)
@@ -29,7 +29,7 @@ datum/design/shield_gen_ex
 // Shield Generator
 
 /obj/item/weapon/circuitboard/shield_gen
-	name = "Circuit board (Experimental shield generator)"
+	name = "Circuit board (Area shield generator)"
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_gen/external"
 	origin_tech = "bluespace=4;plasmatech=3"
@@ -43,7 +43,7 @@ datum/design/shield_gen_ex
 							"/obj/item/weapon/cable_coil" = 5)
 
 datum/design/shield_gen
-	name = "Circuit Design (Experimental shield generator)"
+	name = "Circuit Design (Area shield generator)"
 	desc = "Allows for the construction of circuit boards used to build an experimental shield generator."
 	id = "shield_gen"
 	req_tech = list("bluespace" = 4, "plasmatech" = 3)
@@ -55,7 +55,7 @@ datum/design/shield_gen
 // Shield Capacitor
 
 /obj/item/weapon/circuitboard/shield_cap
-	name = "Circuit board (Experimental shield capacitor)"
+	name = "Circuit board (Shield capacitor)"
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_capacitor"
 	origin_tech = "magnets=3;powerstorage=4"

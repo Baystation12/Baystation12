@@ -14,7 +14,6 @@
 	var/field_radius = 3
 	var/list/field
 	density = 1
-	anchored = 1
 	var/locked = 0
 	var/average_field_strength = 0
 	var/strengthen_rate = 0.2
@@ -22,7 +21,7 @@
 	var/powered = 0
 	var/check_powered = 1
 	var/obj/machinery/shield_capacitor/owned_capacitor
-	var/max_field_strength = 10
+	var/target_field_strength = 10
 	var/time_since_fail = 100
 	var/energy_conversion_rate = 0.01	//how many renwicks per watt?
 	//
@@ -63,17 +62,22 @@
 		src.anchored = !src.anchored
 		src.visible_message("\blue \icon[src] [src] has been [anchored?"bolted to the floor":"unbolted from the floor"] by [user].")
 
-		spawn(0)
-			for(var/obj/machinery/shield_gen/gen in range(1, src))
-				if(get_dir(src, gen) == src.dir)
-					if(!src.anchored && gen.owned_capacitor == src)
-						gen.owned_capacitor = null
+		if(active)
+			toggle()
+		if(anchored)
+			spawn(0)
+				for(var/obj/machinery/shield_capacitor/cap in range(1, src))
+					if(cap.owned_gen)
+						continue
+					if(get_dir(cap, src) == cap.dir && src.anchored)
+						owned_capacitor = cap
+						owned_capacitor.owned_gen = src
+						updateDialog()
 						break
-					else if(src.anchored && !gen.owned_capacitor)
-						gen.owned_capacitor = src
-						break
-					gen.updateDialog()
-					updateDialog()
+		else
+			if(owned_capacitor && owned_capacitor.owned_gen == src)
+				owned_capacitor.owned_gen = null
+			owned_capacitor = null
 	else
 		..()
 
@@ -102,67 +106,65 @@
 		t += "This generator is: [active ? "<font color=green>Online</font>" : "<font color=red>Offline</font>" ] <a href='?src=\ref[src];toggle=1'>[active ? "\[Deactivate\]" : "\[Activate\]"]</a><br>"
 		t += "[time_since_fail > 2 ? "<font color=green>Field is stable.</font>" : "<font color=red>Warning, field is unstable!</font>"]<br>"
 		t += "Coverage radius (restart required): \
+		<a href='?src=\ref[src];change_radius=-50'>---</a> \
 		<a href='?src=\ref[src];change_radius=-5'>--</a> \
 		<a href='?src=\ref[src];change_radius=-1'>-</a> \
 		[field_radius * 2]m \
 		<a href='?src=\ref[src];change_radius=1'>+</a> \
-		<a href='?src=\ref[src];change_radius=5'>++</a><br>"
-		t += "Overall field strength: [average_field_strength] Renwicks ([max_field_strength ? 100 * average_field_strength / max_field_strength : "NA"]%)<br>"
-		t += "Charge rate: <a href='?src=\ref[src];strengthen_rate=-0.1'>--</a> \
-		<a href='?src=\ref[src];strengthen_rate=-0.01'>-</a> \
-		[strengthen_rate] Renwicks/sec \
-		<a href='?src=\ref[src];strengthen_rate=0.01'>+</a> \
-		<a href='?src=\ref[src];strengthen_rate=0.1'>++</a><br>"
+		<a href='?src=\ref[src];change_radius=5'>++</a> \
+		<a href='?src=\ref[src];change_radius=50'>+++</a><br>"
+		t += "Overall field strength: [average_field_strength] Renwicks ([target_field_strength ? 100 * average_field_strength / target_field_strength : "NA"]%)<br>"
 		t += "Upkeep energy: [field.len * average_field_strength / energy_conversion_rate] Watts/sec<br>"
+		t += "Charge rate: <a href='?src=\ref[src];strengthen_rate=-0.1'>--</a> \
+		[strengthen_rate] Renwicks/sec \
+		<a href='?src=\ref[src];strengthen_rate=0.1'>++</a><br>"
 		t += "Additional energy required to charge: [field.len * strengthen_rate / energy_conversion_rate] Watts/sec<br>"
 		t += "Maximum field strength: \
-		<a href='?src=\ref[src];max_field_strength=-100'>\[min\]</a> \
-		<a href='?src=\ref[src];max_field_strength=-10'>--</a> \
-		<a href='?src=\ref[src];max_field_strength=-1'>-</a> \
-		[max_field_strength] Renwicks \
-		<a href='?src=\ref[src];max_field_strength=1'>+</a> \
-		<a href='?src=\ref[src];max_field_strength=10'>++</a> \
-		<a href='?src=\ref[src];max_field_strength=100'>\[max\]</a><br>"
+		<a href='?src=\ref[src];target_field_strength=-100'>\[min\]</a> \
+		<a href='?src=\ref[src];target_field_strength=-10'>--</a> \
+		<a href='?src=\ref[src];target_field_strength=-1'>-</a> \
+		[target_field_strength] Renwicks \
+		<a href='?src=\ref[src];target_field_strength=1'>+</a> \
+		<a href='?src=\ref[src];target_field_strength=10'>++</a> \
+		<a href='?src=\ref[src];target_field_strength=100'>\[max\]</a><br>"
 	t += "<hr>"
 	t += "<A href='?src=\ref[src]'>Refresh</A> "
 	t += "<A href='?src=\ref[src];close=1'>Close</A><BR>"
-	user << browse(t, "window=shield_generator;size=500x800")
+	user << browse(t, "window=shield_generator;size=500x400")
 	user.set_machine(src)
 
 /obj/machinery/shield_gen/process()
 
-	if(active && field.len)
+	if(field.len)
+		time_since_fail++
 		var/stored_renwicks = 0
-		var/target_field_strength = min(strengthen_rate + max(average_field_strength, 0), max_field_strength)
-		if(owned_capacitor)
-			var/required_energy = field.len * target_field_strength / energy_conversion_rate
+		var/target_strength_this_update = min(strengthen_rate + max(average_field_strength, 0), target_field_strength)
+
+		if(active && owned_capacitor)
+			var/required_energy = field.len * target_strength_this_update / energy_conversion_rate
 			var/assumed_charge = min(owned_capacitor.stored_charge, required_energy)
 			stored_renwicks = assumed_charge * energy_conversion_rate
 			owned_capacitor.stored_charge -= assumed_charge
 
-		time_since_fail++
-
 		average_field_strength = 0
-		target_field_strength = stored_renwicks / field.len
+		var/renwicks_per_field = 0
+		if(stored_renwicks != 0)
+			renwicks_per_field = stored_renwicks / field.len
 
 		for(var/obj/effect/energy_field/E in field)
-			if(stored_renwicks)
-				var/strength_change = target_field_strength - E.strength
-				if(strength_change > stored_renwicks)
-					strength_change = stored_renwicks
-				if(E.strength < 0)
-					E.strength = 0
+			if(active && renwicks_per_field > 0)
+				var/amount_to_strengthen = min(renwicks_per_field - E.strength, strengthen_rate)
+				if(E.ticks_recovering > 0 && amount_to_strengthen > 0)
+					E.Strengthen( min(amount_to_strengthen / 10, 0.1) )
+					E.ticks_recovering -= 1
 				else
-					E.Strengthen(strength_change)
-
-				stored_renwicks -= strength_change
-
+					E.Strengthen(amount_to_strengthen)
 				average_field_strength += E.strength
 			else
 				E.Strengthen(-E.strength)
 
 		average_field_strength /= field.len
-		if(average_field_strength < 0)
+		if(average_field_strength < 1)
 			time_since_fail = 0
 	else
 		average_field_strength = 0
@@ -187,12 +189,12 @@
 			strengthen_rate = 1
 		else if(strengthen_rate < 0)
 			strengthen_rate = 0
-	else if( href_list["max_field_strength"] )
-		max_field_strength += text2num(href_list["max_field_strength"])
-		if(max_field_strength > 1000)
-			max_field_strength = 1000
-		else if(max_field_strength < 0)
-			max_field_strength = 0
+	else if( href_list["target_field_strength"] )
+		target_field_strength += text2num(href_list["target_field_strength"])
+		if(target_field_strength > 1000)
+			target_field_strength = 1000
+		else if(target_field_strength < 0)
+			target_field_strength = 0
 	//
 	updateDialog()
 
@@ -252,6 +254,7 @@
 			*/
 
 /obj/machinery/shield_gen/proc/toggle()
+	set background = 1
 	active = !active
 	power_change()
 	if(active)
@@ -269,7 +272,7 @@
 	else
 		for(var/obj/effect/energy_field/D in field)
 			field.Remove(D)
-			del D
+			D.loc = null
 
 		for(var/mob/M in view(5,src))
 			M << "\icon[src] You hear heavy droning fade out."
@@ -278,6 +281,8 @@
 /obj/machinery/shield_gen/proc/get_shielded_turfs()
 	var/list/out = list()
 	for(var/turf/T in range(field_radius, src))
+		world << "turf dist:[get_dist(src,T)]"
 		if(get_dist(src,T) == field_radius)
 			out.Add(T)
+			world << "	added"
 	return out

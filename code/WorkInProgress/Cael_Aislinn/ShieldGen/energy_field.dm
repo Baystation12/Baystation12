@@ -11,6 +11,7 @@
 	density = 0
 	invisibility = 101
 	var/strength = 0
+	var/ticks_recovering = 10
 
 /obj/effect/energy_field/ex_act(var/severity)
 	Stress(0.5 + severity)
@@ -27,9 +28,12 @@
 	strength -= severity
 
 	//if we take too much damage, drop out - the generator will bring us back up if we have enough power
+	ticks_recovering = min(ticks_recovering + 2, 10)
 	if(strength < 1)
 		invisibility = 101
 		density = 0
+		ticks_recovering = 10
+		strength = 0
 	else if(strength >= 1)
 		invisibility = 0
 		density = 1
