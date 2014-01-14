@@ -11,6 +11,8 @@
 	animation.icon = 'icons/mob/mob.dmi'
 	animation.master = src
 
+	playsound(src.loc, 'sound/effects/gib.ogg', 100, 1, 10)
+
 	for(var/datum/organ/external/E in src.organs)
 		if(istype(E, /datum/organ/external/chest))
 			continue
