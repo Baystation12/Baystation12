@@ -14,7 +14,6 @@
 	var/net_id
 	var/list/areas_added
 	var/list/users_to_open
-	var/alarmed = 0
 
 /obj/machinery/door/firedoor/New()
 	. = ..()
@@ -91,13 +90,10 @@
 
 	var/area/A = get_area(src)
 	ASSERT(istype(A))
-	if(A.master)
-		A = A.master
+	/*if(A.master)		// var/fire in master area never gets set, so will always be 0
+		A = A.master*/
 
-	if(A.air_doors_activated || A.fire)
-		alarmed = 1
-
-//	var/alarmed = A.air_doors_activated || A.fire
+	var/alarmed = (A.air_doors_activated || A.fire)
 
 	var/answer = alert(user, "Would you like to [density ? "open" : "close"] this [src.name]?[ alarmed && density ? "\nNote that by doing so, you acknowledge any damages from opening this\n[src.name] as being your own fault, and you will be held accountable under the law." : ""]",\
 	"\The [src]", "Yes, [density ? "open" : "close"]", "No")
