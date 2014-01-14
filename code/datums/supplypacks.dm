@@ -761,14 +761,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Security"
 
 /datum/supply_packs/securitybarriers
-	name = "Shield Generators"
+	name = "Shield Wall Generators"
 	contains = list(/obj/machinery/shieldwallgen,
 					/obj/machinery/shieldwallgen,
 					/obj/machinery/shieldwallgen,
 					/obj/machinery/shieldwallgen)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
-	containername = "Shield Generators crate"
+	containername = "Shield Wall Generators crate"
 	access = access_teleporter
 	group = "Security"
 
@@ -958,10 +958,28 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/shield_gen
 	contains = list(/obj/item/weapon/circuitboard/shield_gen)
-	name = "Experimental shield generator circuitry"
+	name = "Area shield generator circuitry"
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
-	containername = "Experimental shield generator"
+	containername = "area shield generator circuitry crate"
+	group = "Engineering"
+	access = access_ce
+
+/datum/supply_packs/shield_gen_ex
+	contains = list(/obj/item/weapon/circuitboard/shield_gen_ex)
+	name = "Hull shield generator circuitry"
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "hull shield generator circuitry crate"
+	group = "Engineering"
+	access = access_ce
+
+/datum/supply_packs/shield_cap
+	contains = list(/obj/item/weapon/circuitboard/shield_cap)
+	name = "Shield capacitor circuitry"
+	cost = 50
+	containertype = /obj/structure/closet/crate/secure
+	containername = "shield capacitor circuitry crate"
 	group = "Engineering"
 	access = access_ce
 
@@ -983,15 +1001,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Supermatter shard crate (CAUTION)"
 	access = access_ce
 	group = "Engineering" */
-
-/datum/supply_packs/shield_cap
-	contains = list(/obj/item/weapon/circuitboard/shield_cap)
-	name = "Experimental shield capacitor circuitry"
-	cost = 50
-	containertype = /obj/structure/closet/crate/secure
-	containername = "Experimental shield capacitor"
-	group = "Engineering"
-	access = access_ce
 
 /datum/supply_packs/eftpos
 	contains = list(/obj/item/device/eftpos)
