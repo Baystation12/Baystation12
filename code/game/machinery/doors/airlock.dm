@@ -113,6 +113,7 @@
 	name = "Gamma Level Hatch"
 	hackProof = 1
 	aiControlDisabled = 1
+	unacidable = 1
 
 /obj/machinery/door/airlock/maintenance_hatch
 	name = "Maintenance Hatch"
@@ -1112,6 +1113,14 @@ About the new airlock wires panel:
 			if(src.shock(user, 75))
 				return
 	if(istype(C, /obj/item/device/detective_scanner) || istype(C, /obj/item/taperoll))
+		return
+
+	if(istype(C, /obj/item/weapon/plastique))
+		user << "The hatch is coated with a product that prevents the shaped charge from sticking!"
+		return
+
+	if(istype(C, /obj/item/mecha_parts/mecha_equipment/tool/rcd) || istype(C, /obj/item/weapon/rcd))
+		user << "The hatch is made of an advanced compound that cannot be deconstructed using an RCD."
 		return
 
 	src.add_fingerprint(user)
