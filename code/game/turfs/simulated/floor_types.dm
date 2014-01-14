@@ -247,7 +247,7 @@
 	heat_capacity = 700000
 
 	lighting_lumcount = 4		//starlight
-	accepts_lighting=0 			// Don't apply overlays
+//	accepts_lighting=0 			// Don't apply overlays
 
 	New()
 		..()
