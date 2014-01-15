@@ -6570,7 +6570,7 @@
 "cwr" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor/plating,/area/engine/reactor_core)
 "cws" = (/obj/machinery/power/emitter{anchored = 1; dir = 4; state = 2},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/engine/reactor_core)
 "cwt" = (/obj/structure/grille,/obj/structure/window/plasmareinforced{dir = 4},/obj/structure/window/plasmareinforced{dir = 8},/obj/structure/window/plasmareinforced{dir = 1},/turf/simulated/floor/plating,/area)
-"cwu" = (/obj/machinery/power/supermatter{layer = 70},/obj/machinery/mass_driver{id = "enginecore"},/turf/simulated/floor/greengrid,/area/engine/reactor_core)
+"cwu" = (/obj/machinery/power/supermatter{layer = 4},/obj/machinery/mass_driver{id = "enginecore"},/turf/simulated/floor/greengrid,/area/engine/reactor_core)
 "cwv" = (/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 4},/area/engine/reactor_core)
 "cww" = (/obj/machinery/power/emitter{anchored = 1; dir = 8; state = 2},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/engine/reactor_core)
 "cwx" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/plating,/area/engine/reactor_core)
