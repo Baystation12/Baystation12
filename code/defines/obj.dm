@@ -16,6 +16,52 @@
 			if("No")
 				return
 
+/obj/structure/ninjatele
+
+	name = "Long-Distance Teleportation Console"
+	desc = "A console used to send a Spider Clan agent long distances rapidly."
+	icon = 'icons/obj/ninjaobjects.dmi'
+	icon_state = "teleconsole"
+	anchored = 1
+	density = 0
+
+	var/list/teleportpoints = list()
+
+	attackby(obj/item/weapon/W as obj, mob/user as mob)
+
+		return attack_hand(user)
+
+
+	attack_hand(mob/user as mob)
+		for(var/obj/effect/landmark/L in landmarks_list)
+			if(L.name == "carpspawn")
+				teleportpoints.Add(L)
+
+
+		if (user.mind.special_role=="Ninja")
+			switch(alert("Phase Jaunt relay primed, target locked as [station_name()], initiate VOID-shift translocation? (Warning! Internals required!)",,"Yes","No"))
+
+				if("Yes")
+					if(user.z != src.z)        return
+
+					user.loc.loc.Exited(user)
+					user.loc = pick(teleportpoints) // In the future, possibly make specific NinjaTele landmarks, and give him an option to teleport to North/South/East/West of SS13 instead of just hijacking a carpspawn.
+
+
+					playsound(user.loc, 'sound/effects/phasein.ogg', 25, 1)
+					playsound(user.loc, 'sound/effects/sparks2.ogg', 50, 1)
+					anim(user.loc,user,'icons/mob/mob.dmi',,"phasein",,user.dir)
+
+					user <<"\blue <b>VOID-Shift</b> translocation successful"
+
+				if("No")
+
+					user <<"\red <b>Process aborted!</b>"
+
+					return
+		else
+			user<< "\red <B>FÄ†AL ï¿½Rrï¿½R</B>: µ§er n¤t rec¤gnized, c-c¤ntr-r¤£§-£§ £¤cked."
+
 /obj/effect/mark
 		var/mark = ""
 		icon = 'icons/misc/mark.dmi'

@@ -78,26 +78,29 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 		var/mob/living/carbon/human/U = affecting
 		var/turf/destination = get_teleport_loc(U.loc,U,9,1,3,1,0,1)
 		var/turf/mobloc = get_turf(U.loc)//To make sure that certain things work properly below.
-		if(destination&&istype(mobloc, /turf))//The turf check prevents unusual behavior. Like teleporting out of cryo pods, cloners, mechs, etc.
-			spawn(0)
-				playsound(U.loc, "sparks", 50, 1)
-				anim(mobloc,src,'icons/mob/mob.dmi',,"phaseout",,U.dir)
+		if(mobloc.loc != /area/ninja_outpost)
+			if(destination&&istype(mobloc, /turf))//The turf check prevents unusual behavior. Like teleporting out of cryo pods, cloners, mechs, etc.
+				spawn(0)
+					playsound(U.loc, "sparks", 50, 1)
+					anim(mobloc,src,'icons/mob/mob.dmi',,"phaseout",,U.dir)
 
-			handle_teleport_grab(destination, U)
-			U.loc = destination
+				handle_teleport_grab(destination, U)
+				U.loc = destination
 
-			spawn(0)
-				spark_system.start()
-				playsound(U.loc, 'sound/effects/phasein.ogg', 25, 1)
-				playsound(U.loc, "sparks", 50, 1)
-				anim(U.loc,U,'icons/mob/mob.dmi',,"phasein",,U.dir)
+				spawn(0)
+					spark_system.start()
+					playsound(U.loc, 'sound/effects/phasein.ogg', 25, 1)
+					playsound(U.loc, "sparks", 50, 1)
+					anim(U.loc,U,'icons/mob/mob.dmi',,"phasein",,U.dir)
 
-			//spawn(0)
-				//destination.kill_creatures(U)//Any living mobs in teleport area are gibbed. Check turf procs for how it does it.
-			s_coold = 1
-			cell.charge-=(C)
+				//spawn(0)
+					//destination.kill_creatures(U)//Any living mobs in teleport area are gibbed. Check turf procs for how it does it.
+				s_coold = 1
+				cell.charge-=(C)
+			else
+				U << "\red The VOID-shift device is malfunctioning, <B>teleportation failed</B>."
 		else
-			U << "\red The VOID-shift device is malfunctioning, <B>teleportation failed</B>."
+			U<< "\red Your <b>NINJA HONOR</b> prevents you from teleporting here!"
 	return
 
 
@@ -114,26 +117,29 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 	if(!ninjacost(C,1))
 		var/mob/living/carbon/human/U = affecting
 		var/turf/mobloc = get_turf(U.loc)//To make sure that certain things work properly below.
-		if((!T.density)&&istype(mobloc, /turf))
-			spawn(0)
-				playsound(U.loc, 'sound/effects/sparks4.ogg', 50, 1)
-				anim(mobloc,src,'icons/mob/mob.dmi',,"phaseout",,U.dir)
+		if(mobloc.loc != /area/ninja_outpost)
+			if((!T.density)&&istype(mobloc, /turf))
+				spawn(0)
+					playsound(U.loc, 'sound/effects/sparks4.ogg', 50, 1)
+					anim(mobloc,src,'icons/mob/mob.dmi',,"phaseout",,U.dir)
 
-			handle_teleport_grab(T, U)
-			U.loc = T
+				handle_teleport_grab(T, U)
+				U.loc = T
 
-			spawn(0)
-				spark_system.start()
-				playsound(U.loc, 'sound/effects/phasein.ogg', 25, 1)
-				playsound(U.loc, 'sound/effects/sparks2.ogg', 50, 1)
-				anim(U.loc,U,'icons/mob/mob.dmi',,"phasein",,U.dir)
+				spawn(0)
+					spark_system.start()
+					playsound(U.loc, 'sound/effects/phasein.ogg', 25, 1)
+					playsound(U.loc, 'sound/effects/sparks2.ogg', 50, 1)
+					anim(U.loc,U,'icons/mob/mob.dmi',,"phasein",,U.dir)
 
-			//spawn(0) // Commented out for now, possible implementation in a later upgrade tree.
-				//T.kill_creatures(U)
-			s_coold = 1
-			cell.charge-=(C)
+				//spawn(0) // Commented out for now, possible implementation in a later upgrade tree.
+					//T.kill_creatures(U)
+				s_coold = 1
+				cell.charge-=(C)
+			else
+				U << "\red You cannot teleport into solid walls or from solid matter"
 		else
-			U << "\red You cannot teleport into solid walls or from solid matter"
+			U<< "\red Your <b>NINJA HONOR</b> prevents you from teleporting here!"
 	return
 
 //=======//EM PULSE//=======//
@@ -328,11 +334,11 @@ Or otherwise known as anime mode. Which also happens to be ridiculously powerful
 	set desc = "Utilizes the internal VOID-shift device to mutilate creatures in a straight line."
 	set category = "Ninja Ability"
 	set popup_menu = 0
-
 	if(!ninjacost())
 		var/mob/living/carbon/human/U = affecting
 		var/turf/destination = get_teleport_loc(U.loc,U,5)
 		var/turf/mobloc = get_turf(U.loc)//To make sure that certain things work properly below.
+
 		if(destination&&istype(mobloc, /turf))
 			U.say("Ai Satsugai!")
 			spawn(0)
