@@ -114,6 +114,9 @@ datum/preferences
 	var/metadata = ""
 	var/slot_name = ""
 
+	// Whether or not to use randomized character slots
+	var/randomslot = 0
+
 /datum/preferences/New(client/C)
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 	if(istype(C))
@@ -246,7 +249,6 @@ datum/preferences
 					dat += "\[...\]<br><br>"
 				else
 					dat += "<br><br>"
-
 				if(gender == MALE)
 					dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
 				else
@@ -293,6 +295,7 @@ datum/preferences
 				dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 				dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
+				dat += "<b>Randomized Character Slot:</b> <a href='?_src_=prefs;preference=randomslot'><b>[randomslot ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "Nearest Creatures" : "All Speech"]</b></a><br>"
 				dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "Nearest Creatures" : "All Emotes"]</b></a><br>"
 
@@ -1196,6 +1199,9 @@ datum/preferences
 
 					if("name")
 						be_random_name = !be_random_name
+
+					if("randomslot")
+						randomslot = !randomslot
 
 					if("hear_midis")
 						toggles ^= SOUND_MIDI
