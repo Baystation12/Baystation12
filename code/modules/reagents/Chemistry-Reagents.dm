@@ -23,7 +23,7 @@ datum
 		var/list/data = null
 		var/volume = 0
 		var/nutriment_factor = 0
-		var/custom_metabolism = REAGENTS_METABOLISM //Default 0.2
+		var/custom_metabolism = REAGENTS_METABOLISM
 		var/overdose = 0
 		var/overdose_dam = 1
 		//var/list/viruses = list()

@@ -1,4 +1,4 @@
-/proc/GetColors(hex)
+/proc/GetColors(hex) //Actually converts hex to rgb
 	hex = uppertext(hex)
 	var/hi1 = text2ascii(hex, 2)
 	var/lo1 = text2ascii(hex, 3)
@@ -15,7 +15,7 @@
 
 	var/list/rgbcolor = list(0,0,0)
 	var/finalcolor = 0
-	for(var/datum/reagent/re in reagent_list) // natural color mixing bullshit/algorithm
+	for(var/datum/reagent/re in reagent_list) //TODO: weigh final colour by amount of reagents; make this algorithm use hex
 		if(!finalcolor)
 			rgbcolor = GetColors(re.color)
 			finalcolor = re.color
