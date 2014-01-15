@@ -142,4 +142,4 @@
 /datum/poster/bay_29
 	icon_state="bsposter29"
 	name = "Winter Is Coming"
-	desc = "On the poster is a frighteningly large wolf, he warns: \"Only YOU can keep the station from freezing during planetary occultation!"\"
+	desc = "On the poster is a frighteningly large wolf, he warns: \"Only YOU can keep the station from freezing during planetary occultation!\""
