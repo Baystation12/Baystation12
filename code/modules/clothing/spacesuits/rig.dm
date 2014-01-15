@@ -179,7 +179,7 @@
 
 //Atmospherics Rig (BS12)
 /obj/item/clothing/head/helmet/space/rig/atmos
-	desc = "A special helmet designed for work in a hazardou, low pressure environments. Has reduced radiation shielding and protective plating to allow for greater mobility."
+	desc = "A special helmet designed for work in a hazardous, low pressure environments. Has reduced radiation shielding and protective plating to allow for greater mobility."
 	name = "atmospherics hardsuit helmet"
 	icon_state = "rig0-atmos"
 	item_state = "atmos_helm"
