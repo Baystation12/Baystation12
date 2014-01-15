@@ -922,6 +922,11 @@ datum
 						M.take_organ_damage(min(15, volume * 2))
 
 			reaction_obj(var/obj/O, var/volume)
+				if(istype(O,/obj/item/weapon/organ/head))
+					new/obj/item/weapon/skeleton/head(O.loc)
+					for(var/mob/M in viewers(5, O))
+						M << "\red \the [O] melts."
+					del(O)
 				if((istype(O,/obj/item) || istype(O,/obj/effect/glowshroom)) && prob(10))
 					if(!O.unacidable)
 						var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
@@ -1000,6 +1005,11 @@ datum
 							M.take_organ_damage(min(15, volume * 4))
 
 			reaction_obj(var/obj/O, var/volume)
+				if(istype(O,/obj/item/weapon/organ/head))
+					new/obj/item/weapon/skeleton/head(O.loc)
+					for(var/mob/M in viewers(5, O))
+						M << "\red \the [O] melts."
+					del(O)
 				if((istype(O,/obj/item) || istype(O,/obj/effect/glowshroom)))
 					if(!O.unacidable)
 						var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
