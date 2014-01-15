@@ -202,6 +202,8 @@
 //							message_admins("\blue [key_name_admin(usr)] emagged [R.name] using robotic console!")
 							log_game("[key_name(usr)] emagged [R.name] using robotic console!")
 							R.emagged = 1
+							if(R.hud_used)
+								R.hud_used.update_robot_modules_display()  //Shows/hides the emag item if the inventory screen is already open.
 							if(R.mind.special_role)
 								R.verbs += /mob/living/silicon/robot/proc/ResetSecurityCodes
 
