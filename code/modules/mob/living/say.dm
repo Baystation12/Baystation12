@@ -109,7 +109,7 @@ var/list/department_radio_keys = list(
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (muted)."
 			return
-		if (src.client.handle_spam_prevention(message, MUTE_IC))
+		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return
 	 // undo last word status.
 
@@ -180,7 +180,7 @@ var/list/department_radio_keys = list(
 	if(src.stunned > 2 || (traumatic_shock > 61 && prob(50)))
 		message_mode = null //Stunned people shouldn't be able to physically turn on their radio/hold down the button to speak into it
 
-	message = capitalize(trim_left(message))
+	message = capitalize(message)
 
 	if (!message)
 		return
