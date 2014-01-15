@@ -79,6 +79,7 @@
 							R.update_icon()
 				for(var/obj/machinery/door/airlock/hatch/gamma/H in world)
 					if(H.z == 1)
+						H.locked = 0
 						H.open()
 						spawn(10)
 							H.locked = 1

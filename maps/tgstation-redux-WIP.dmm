@@ -170,7 +170,7 @@
 "adn" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/wall/r_wall,/area)
 "ado" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/obj/machinery/door/airlock/highsecurity/red{locked = 1},/turf/simulated/floor{icon_state = "dark"},/area/security/armoury)
 "adp" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/wall/r_wall,/area)
-"adq" = (/obj/machinery/door/airlock/hatch/gamma{req_access_txt = "109"; use_power = 0},/turf/simulated/floor{icon_state = "dark"},/area/security/armoury/gamma)
+"adq" = (/obj/machinery/door/airlock/hatch/gamma{locked = 1; req_access_txt = "109"; use_power = 0},/turf/simulated/floor{icon_state = "dark"},/area/security/armoury/gamma)
 "adr" = (/obj/structure/sign/securearea,/turf/simulated/wall/r_wall,/area)
 "ads" = (/obj/machinery/door/airlock/vault{icon_state = "door_locked"; locked = 1; req_access_txt = "53"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/floor{tag = "icon-vault (NORTHEAST)"; icon_state = "vault"; dir = 5},/area/security/nuke_storage)
 "adt" = (/obj/structure/cable{icon_state = "0-2"; pixel_y = 1; d2 = 2},/turf/simulated/floor/engine,/area/security/armoury)
