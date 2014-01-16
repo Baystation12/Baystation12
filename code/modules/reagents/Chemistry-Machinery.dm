@@ -43,7 +43,7 @@
 
 /obj/machinery/chem_dispenser/process()
 
-	if(recharged < 0)
+	if(recharged <= 0)
 		recharge()
 		recharged = 15
 	else
@@ -68,7 +68,7 @@
 		options[/obj/item/stack/sheet/mineral/gold] = "Wire a golden filament to fix it."
 		options[/obj/item/stack/sheet/plasteel] = "Surround the outside with a plasteel cover to fix it."
 		options[/obj/item/stack/sheet/rglass] = "Insert a pane of reinforced glass to fix it."
-
+		stat |= BROKEN
 		while(amount > 0)
 			amount -= 1
 
@@ -105,12 +105,11 @@
   * @return nothing
   */
 /obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main")
-	if(stat & (BROKEN|NOPOWER)) return
-	if(user.stat || user.restrained()) return
-
 	if(broken_requirements.len)
 		user << "<span class='warning'>[src] is broken. [broken_requirements[broken_requirements[1]]]</span>"
 		return
+	if(stat & (BROKEN|NOPOWER)) return
+	if(user.stat || user.restrained()) return
 
 	// this is the data which will be sent to the ui
 	var/data[0]
@@ -195,6 +194,8 @@
 		else
 			user.drop_item()
 			del(B)
+		if(broken_requirements.len==0)
+			stat ^= BROKEN
 		return
 	if(src.beaker)
 		user << "Something is already loaded into the machine."
