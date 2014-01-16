@@ -30,8 +30,9 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 	var/obj/structure/reagent_dispensers/fueltank/FT = locate() in src
 	if(exposed_temperature >= AUTOIGNITION_WELDERFUEL)
-		FT.explode()
-		return 1
+		if (FT)
+			FT.explode()
+			return 1
 
 	var/igniting = 0
 	var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in src
