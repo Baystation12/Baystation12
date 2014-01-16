@@ -132,6 +132,9 @@
 	S["job_engsec_high"]	>> job_engsec_high
 	S["job_engsec_med"]		>> job_engsec_med
 	S["job_engsec_low"]		>> job_engsec_low
+	S["job_karma_high"]		>> job_karma_high
+	S["job_karma_med"]		>> job_karma_med
+	S["job_karma_low"]		>> job_karma_low
 
 	//Miscellaneous
 	S["flavor_text"]		>> flavor_text
@@ -182,6 +185,9 @@
 	job_engsec_high = sanitize_integer(job_engsec_high, 0, 65535, initial(job_engsec_high))
 	job_engsec_med = sanitize_integer(job_engsec_med, 0, 65535, initial(job_engsec_med))
 	job_engsec_low = sanitize_integer(job_engsec_low, 0, 65535, initial(job_engsec_low))
+	job_karma_high = sanitize_integer(job_karma_high, 0, 65535, initial(job_karma_high))
+	job_karma_med = sanitize_integer(job_karma_med, 0, 65535, initial(job_karma_med))
+	job_karma_low = sanitize_integer(job_karma_low, 0, 65535, initial(job_karma_low))
 
 	if(isnull(disabilities)) disabilities = 0
 	if(!player_alt_titles) player_alt_titles = new()
@@ -358,6 +364,9 @@
 	S["job_engsec_high"]	<< job_engsec_high
 	S["job_engsec_med"]		<< job_engsec_med
 	S["job_engsec_low"]		<< job_engsec_low
+	S["job_karma_high"]		<< job_karma_high
+	S["job_karma_med"]		<< job_karma_med
+	S["job_karma_low"]		<< job_karma_low
 
 	//Miscellaneous
 	S["flavor_text"]		<< flavor_text

@@ -44,10 +44,14 @@ var/const/CHAPLAIN			=(1<<10)
 var/const/CLOWN				=(1<<11)
 var/const/MIME				=(1<<12)
 var/const/ASSISTANT			=(1<<13)
-var/const/NANO				=(1<<14)
-var/const/BLUESHIELD		=(1<<15)
-var/const/CUSTOMS			=(1<<16)
-var/const/BARBER			=(1<<17)
+
+
+var/const/KARMA				=(1<<3)
+
+var/const/NANO				=(1<<0)
+var/const/BLUESHIELD		=(1<<1)
+var/const/CUSTOMS			=(1<<2)
+var/const/BARBER			=(1<<3)
 
 
 var/list/assistant_occupations = list(

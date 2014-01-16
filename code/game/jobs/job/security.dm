@@ -171,7 +171,7 @@
 /datum/job/customs
 	title = "Customs Officer"
 	flag = CUSTOMS
-	department_flag = ENGSEC
+	department_flag = KARMA
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1

@@ -381,7 +381,7 @@
 /datum/job/barber
 	title = "Barber"
 	flag = BARBER
-	department_flag = CIVILIAN
+	department_flag = KARMA
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1

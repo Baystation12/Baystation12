@@ -90,6 +90,10 @@ datum/preferences
 	var/job_engsec_med = 0
 	var/job_engsec_low = 0
 
+	var/job_karma_high = 0
+	var/job_karma_med = 0
+	var/job_karma_low = 0
+
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
 
@@ -483,9 +487,11 @@ datum/preferences
 			job_civilian_med |= job_civilian_high
 			job_engsec_med |= job_engsec_high
 			job_medsci_med |= job_medsci_high
+			job_karma_med |= job_karma_high
 			job_civilian_high = 0
 			job_engsec_high = 0
 			job_medsci_high = 0
+			job_karma_high = 0
 
 		if (job.department_flag == CIVILIAN)
 			job_civilian_low &= ~job.flag
@@ -527,6 +533,20 @@ datum/preferences
 					job_medsci_med |= job.flag
 				if (3)
 					job_medsci_low |= job.flag
+
+			return 1
+		else if (job.department_flag == KARMA)
+			job_karma_low &= ~job.flag
+			job_karma_med &= ~job.flag
+			job_karma_high &= ~job.flag
+
+			switch(level)
+				if (1)
+					job_karma_high |= job.flag
+				if (2)
+					job_karma_med |= job.flag
+				if (3)
+					job_karma_low |= job.flag
 
 			return 1
 
@@ -675,6 +695,10 @@ datum/preferences
 		job_engsec_med = 0
 		job_engsec_low = 0
 
+		job_karma_high = 0
+		job_karma_med = 0
+		job_karma_low = 0
+
 
 	proc/GetJobDepartment(var/datum/job/job, var/level)
 		if(!job || !level)	return 0
@@ -703,6 +727,14 @@ datum/preferences
 						return job_engsec_med
 					if(3)
 						return job_engsec_low
+			if(KARMA)
+				switch(level)
+					if(1)
+						return job_karma_high
+					if(2)
+						return job_karma_med
+					if(3)
+						return job_karma_low
 		return 0
 
 	proc/SetJobDepartment(var/datum/job/job, var/level)
@@ -712,14 +744,17 @@ datum/preferences
 				job_civilian_high = 0
 				job_medsci_high = 0
 				job_engsec_high = 0
+				job_karma_high = 0
 				return 1
 			if(2)//Set current highs to med, then reset them
 				job_civilian_med |= job_civilian_high
 				job_medsci_med |= job_medsci_high
 				job_engsec_med |= job_engsec_high
+				job_karma_med |= job_karma_high
 				job_civilian_high = 0
 				job_medsci_high = 0
 				job_engsec_high = 0
+				job_karma_high = 0
 
 		switch(job.department_flag)
 			if(CIVILIAN)
@@ -752,6 +787,16 @@ datum/preferences
 						job_engsec_low &= ~job.flag
 					else
 						job_engsec_low |= job.flag
+			if(KARMA)
+				switch(level)
+					if(2)
+						job_karma_high = job.flag
+						job_karma_med &= ~job.flag
+					if(3)
+						job_karma_med |= job.flag
+						job_karma_low &= ~job.flag
+					else
+						job_karma_low |= job.flag
 		return 1
 
 	proc/process_link(mob/user, list/href_list)
