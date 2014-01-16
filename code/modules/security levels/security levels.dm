@@ -72,6 +72,7 @@
 			if(SEC_LEVEL_GAMMA)
 				world << "<font size=4 color='red'>Attention! GAMMA security level activated!</font>"
 				world << "<font color='red'>[config.alert_desc_gamma]</font>"
+				move_gamma_ship()
 				if(security_level < SEC_LEVEL_RED)
 					for(var/obj/machinery/door/airlock/highsecurity/red/R in world)
 						if(R.z == 1)
@@ -80,10 +81,8 @@
 				for(var/obj/machinery/door/airlock/hatch/gamma/H in world)
 					if(H.z == 1)
 						H.locked = 0
-						H.open()
-						spawn(10)
-							H.locked = 1
-							H.update_icon()
+						H.update_icon()
+
 				security_level = SEC_LEVEL_GAMMA
 			if(SEC_LEVEL_EPSILON)
 				world << "<font size=4 color='red'>Attention! EPSILON security level activated!</font>"
