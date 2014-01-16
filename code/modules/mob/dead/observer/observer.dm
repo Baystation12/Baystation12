@@ -450,6 +450,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "<span class='warning'>Spawning as a mouse is currently disabled.</span>"
 		return
 
+	var/mob/dead/observer/M = usr
+	if(config.antag_hud_restricted && M.has_enabled_antagHUD == 1)
+		src << "<span class='warning'>antagHUD restrictions prevent you from spawning in as a mouse.</span>"
+		return
+
 	var/timedifference = world.time - client.time_died_as_mouse
 	if(client.time_died_as_mouse && timedifference <= mouse_respawn_time * 600)
 		var/timedifference_text
