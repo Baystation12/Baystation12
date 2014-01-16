@@ -512,6 +512,11 @@ proc/process_ghost_teleport_locs()
 	icon_state = "yellow"
 	requires_power = 0
 
+/area/ninja_outpost
+	name = "\improper SpiderClan Outpost"
+	icon_state = "ninjabase"
+	requires_power = 0
+
 /area/vox_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
