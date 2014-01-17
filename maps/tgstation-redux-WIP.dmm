@@ -156,7 +156,7 @@
 "acZ" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/obj/machinery/door/airlock/highsecurity/red{locked = 1},/turf/simulated/floor{icon_state = "dark"},/area/security/armoury)
 "ada" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/wall/r_wall,/area)
 "adb" = (/turf/unsimulated/wall,/area)
-"adc" = (/obj/machinery/door/airlock/hatch/gamma{locked = 1; req_access_txt = "109"; use_power = 0},/turf/simulated/floor{icon_state = "dark"},/area/security/armoury)
+"adc" = (/obj/machinery/door/airlock/hatch/gamma{locked = 1; req_access_txt = "0"; use_power = 0},/turf/simulated/floor{icon_state = "dark"},/area/security/armoury)
 "add" = (/obj/structure/sign/securearea,/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/wall/r_wall,/area)
 "ade" = (/obj/machinery/door/airlock/vault{icon_state = "door_locked"; locked = 1; req_access_txt = "53"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/floor{tag = "icon-vault (NORTHEAST)"; icon_state = "vault"; dir = 5},/area/security/nuke_storage)
 "adf" = (/obj/structure/sign/securearea,/turf/simulated/wall/r_wall,/area)
