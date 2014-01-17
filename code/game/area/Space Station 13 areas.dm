@@ -239,6 +239,20 @@ proc/process_ghost_teleport_locs()
 	luminosity = 0
 	lighting_use_dynamic = 1
 
+/area/shuttle/gamma/space
+	icon_state = "shuttle"
+	name = "\improper Gamma Shuttle Space"
+	requires_power = 1
+	luminosity = 0
+	lighting_use_dynamic = 1
+
+/area/shuttle/gamma/station
+	icon_state = "shuttle"
+	name = "\improper Gamma Shuttle Station"
+	requires_power = 1
+	luminosity = 0
+	lighting_use_dynamic = 1
+
 /area/shuttle/prison/
 	name = "\improper Prison Shuttle"
 

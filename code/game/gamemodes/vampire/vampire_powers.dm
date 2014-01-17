@@ -141,7 +141,7 @@
 	else if (src.gender == FEMALE)
 		t_him = "her"
 	M.current.visible_message("\blue [M] shakes [src] trying to wake [t_him] up!" )
-	playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)*/
+	playsound(get_turf(src), 'sound/weapons/thudswoosh.ogg', 50, 1, -1)*/
 	C.help_shake_act(M.current) // i use da colon
 	if(!C.vampire_affected(M))
 		M.current << "\red They seem to be unaffected."
@@ -359,9 +359,9 @@
 	if(M.current.vampire_power(30, 0))
 		if(M.current.buckled) M.current.buckled.unbuckle()
 		spawn(0)
-			var/mobloc = get_turf(M.current.loc)
-			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( mobloc )
-			var/atom/movable/overlay/animation = new /atom/movable/overlay( mobloc )
+			var/originalloc = get_turf(M.current.loc)
+			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( originalloc )
+			var/atom/movable/overlay/animation = new /atom/movable/overlay( originalloc )
 			animation.name = "water"
 			animation.density = 0
 			animation.anchored = 1
@@ -376,10 +376,13 @@
 			M.current.loc = holder
 			M.current.client.eye = holder
 			var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
-			steam.set_up(10, 0, mobloc)
+			steam.set_up(10, 0, originalloc)
 			steam.start()
 			sleep(jaunt_duration)
-			mobloc = get_turf(M.current.loc)
+			var/mobloc = get_turf(M.current.loc)
+			if(get_area(mobloc) == /area/security/armoury/gamma)
+				M << "A strange energy repels you!"
+				mobloc = originalloc
 			animation.loc = mobloc
 			steam.location = mobloc
 			steam.start()

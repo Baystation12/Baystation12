@@ -1025,6 +1025,23 @@ proc/move_alien_ship()
 		alien_ship_location = 1
 	return
 
+var/gamma_ship_location = 1 // 0 = station , 1 = space
+
+proc/move_gamma_ship()
+	var/area/fromArea
+	var/area/toArea
+	if (gamma_ship_location == 1)
+		fromArea = locate(/area/shuttle/gamma/space)
+		toArea = locate(/area/shuttle/gamma/station)
+	else
+		fromArea = locate(/area/shuttle/gamma/station)
+		toArea = locate(/area/shuttle/gamma/space)
+	fromArea.move_contents_to(toArea)
+	if (gamma_ship_location)
+		gamma_ship_location = 0
+	else
+		gamma_ship_location = 1
+	return
 
 proc/formatJumpTo(var/location,var/where="")
 	var/turf/loc

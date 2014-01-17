@@ -18,9 +18,10 @@
 /obj/effect/proc_holder/spell/targeted/ethereal_jaunt/cast(list/targets) //magnets, so mostly hardcoded
 	for(var/mob/living/target in targets)
 		spawn(0)
-			var/mobloc = get_turf(target.loc)
-			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( mobloc )
-			var/atom/movable/overlay/animation = new /atom/movable/overlay( mobloc )
+			var/mobloc
+			var/originalloc = get_turf(target.loc)
+			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( originalloc )
+			var/atom/movable/overlay/animation = new /atom/movable/overlay( originalloc )
 			animation.name = "water"
 			animation.density = 0
 			animation.anchored = 1
@@ -38,6 +39,9 @@
 				target.client.eye = holder
 				sleep(jaunt_duration)
 				mobloc = get_turf(target.loc)
+				if(get_area(mobloc) == /area/security/armoury/gamma)
+					target << "A strange energy repels you!"
+					mobloc = originalloc
 				animation.loc = mobloc
 				target.canmove = 0
 				sleep(20)

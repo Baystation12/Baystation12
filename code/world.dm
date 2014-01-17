@@ -6,8 +6,8 @@
 	cache_lifespan = 0	//stops player uploaded stuff from being kept in the rsc past the current session
 
 
+#define RECOMMENDED_VERSION 501
 
-#define RECOMMENDED_VERSION 495
 /world/New()
 	//logs
 	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
@@ -19,7 +19,7 @@
 	diaryofmeanpeople << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
 
 	if(byond_version < RECOMMENDED_VERSION)
-		world.log << "Your server's byond version does not meet the recommended requirements for TGstation code. Please update BYOND"
+		world.log << "Your server's byond version does not meet the recommended requirements for this code. Please update BYOND"
 
 	if(config && config.log_runtimes)
 		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")

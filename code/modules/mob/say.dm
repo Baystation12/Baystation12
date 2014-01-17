@@ -101,28 +101,30 @@
 		//tcomms code is still runtiming somewhere here
 	var/ending = copytext(text, length(text))
 
-	var/speech_verb = "says"
-	var/speech_style = "body"
+	var/speechverb = "<span class='say_quote'>"
 
 	if (speaking)
-		speech_verb = speaking.speech_verb
-		speech_style = speaking.colour
+		speechverb = "[speaking.speech_verb]</span>, \"<span class='[speaking.colour]'>"
 	else if(speak_emote && speak_emote.len)
-		speech_verb = pick(speak_emote)
+		speechverb = "[pick(speak_emote)], \""
 	else if (src.stuttering)
-		speech_verb = "stammers"
+		speechverb = "stammers, \""
 	else if (src.slurring)
-		speech_verb = "slurrs"
+		speechverb = "slurrs, \""
 	else if (ending == "?")
-		speech_verb = "asks"
+		speechverb = "asks, \""
 	else if (ending == "!")
-		speech_verb = "exclaims"
+		speechverb = "exclaims, \""
 	else if(isliving(src))
 		var/mob/living/L = src
 		if (L.getBrainLoss() >= 60)
-			speech_verb = "gibbers"
+			speechverb = "gibbers, \""
+		else
+			speechverb = "says, \""
+	else
+		speechverb = "says, \""
 
-	return "<span class='say_quote'>[speech_verb],</span> \"<span class='[speech_style]'>[text]</span>\""
+	return "[speechverb][text]</span>\""
 
 /mob/proc/emote(var/act, var/type, var/message)
 	if(act == "me")

@@ -53,36 +53,41 @@
 		var/karma=verify_karma()
 		switch(href_list["KarmaBuy"])
 			if("1")
+				if(karma <5)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_job_unlock("Barber",5)
+			if("2")
 				if(karma <15)
 					usr << "You do not have enough karma!"
 				else
 					src.DB_job_unlock("Nanotrasen Representative",15)
-			if("2")
-				if(karma <30)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Customs Officer",30)
 			if("3")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_job_unlock("Blueshield",30)
+					src.DB_job_unlock("Customs Officer",30)
 			if("4")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_species_unlock("Kidan",30)
+					src.DB_job_unlock("Blueshield",30)
 			if("5")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_species_unlock("Grey",30)
+					src.DB_species_unlock("Kidan",30)
 			if("6")
+				if(karma <30)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_species_unlock("Grey",30)
+			if("7")
 				if(karma <45)
 					usr << "You do not have enough karma!"
 				else
 					src.DB_species_unlock("Vox",45)
-			if("7")
+			if("8")
 				if(karma <45)
 					usr << "You do not have enough karma!"
 				else

@@ -925,7 +925,7 @@
 
 			else if(istype(W, /obj/item/weapon/crowbar))
 				user << "You start prying out the circuit."
-				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+				playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
 				if(do_after(user,20))
 					user << "You pry out the circuit!"
 					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
@@ -945,7 +945,7 @@
 				user << "You remove the fire alarm assembly from the wall!"
 				var/obj/item/alarm_frame/frame = new /obj/item/alarm_frame()
 				frame.loc = user.loc
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+				playsound(get_turf(src), 'sound/items/Ratchet.ogg', 50, 1)
 				del(src)
 
 	return ..()
@@ -1120,7 +1120,7 @@ FIRE ALARM
 
 				else if(istype(W, /obj/item/weapon/crowbar))
 					user << "You pry out the circuit!"
-					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+					playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
 					spawn(20)
 						var/obj/item/weapon/firealarm_electronics/circuit = new /obj/item/weapon/firealarm_electronics()
 						circuit.loc = user.loc
@@ -1137,7 +1137,7 @@ FIRE ALARM
 					user << "You remove the fire alarm assembly from the wall!"
 					var/obj/item/firealarm_frame/frame = new /obj/item/firealarm_frame()
 					frame.loc = user.loc
-					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+					playsound(get_turf(src), 'sound/items/Ratchet.ogg', 50, 1)
 					del(src)
 		return
 
@@ -1268,7 +1268,7 @@ FIRE ALARM
 		return
 	A.firealert()
 	update_icon()
-	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
+	//playsound(get_turf(src), 'sound/ambience/signal.ogg', 75, 0)
 	return
 
 /obj/machinery/firealarm/New(loc, dir, building)

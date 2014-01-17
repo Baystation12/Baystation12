@@ -62,7 +62,7 @@
 	energy_drain = 120
 	projectile = /obj/item/projectile/ion
 	fire_sound = 'sound/weapons/Laser.ogg'
-
+	construction_cost = list("silver" = 6000, "metal" = 20000, "uranium" = 2000)
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse
 	equip_cooldown = 30
@@ -196,6 +196,13 @@
 			src.rearm()
 		return
 
+/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/carbine
+	name = "\improper FNX-66 Carbine"
+	icon_state = "mecha_carbine"
+	equip_cooldown = 5
+	projectile = /obj/item/projectile/bullet/incendiary
+	projectiles = 24
+	projectile_energy_cost = 15
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/scattershot
 	name = "LBX AC 10 \"Scattershot\""
@@ -287,6 +294,7 @@
 	equip_cooldown = 60
 	var/missile_speed = 2
 	var/missile_range = 30
+	construction_cost = list("silver" = 8000, "metal" = 22000, "gold" = 6000)
 
 	action(target)
 		if(!action_checks(target)) return
