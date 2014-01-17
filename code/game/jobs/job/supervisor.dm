@@ -98,7 +98,7 @@
 /datum/job/nanotrasenrep
 	title = "Nanotrasen Representative"
 	flag =  NANO
-	department_flag = CIVILIAN
+	department_flag = KARMA
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -144,7 +144,7 @@
 /datum/job/blueshield
 	title = "Blueshield"
 	flag =  BLUESHIELD
-	department_flag = CIVILIAN
+	department_flag = KARMA
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1

@@ -231,7 +231,7 @@
 		src.icon_state = "medibot[src.on]"
 
 /obj/machinery/bot/medbot/process()
-	set background = 1
+	//set background = 1
 
 	if(!src.on)
 		src.stunned = 0
@@ -283,7 +283,8 @@
 			else
 				continue
 
-
+	if(!src.path)
+		src.path = new()
 	if(src.patient && (get_dist(src,src.patient) <= 1))
 		if(!src.currently_healing)
 			src.currently_healing = 1

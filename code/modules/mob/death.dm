@@ -8,6 +8,8 @@
 	icon = null
 	invisibility = 101
 
+	playsound(src.loc, 'sound/effects/gib.ogg', 100, 1, 10)
+
 	animation = new(loc)
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
@@ -15,7 +17,6 @@
 
 //	flick("gibbed-m", animation)
 	gibs(loc, viruses, dna)
-
 	dead_mob_list -= src
 	if(client)
 		respawnable_list += src

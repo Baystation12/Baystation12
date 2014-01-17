@@ -78,7 +78,7 @@ var/global/datum/controller/occupations/job_master
 
 	proc/FreeRole(var/rank)	//making additional slot on the fly
 		var/datum/job/job = GetJob(rank)
-		if(job && job.current_positions >= job.total_positions)
+		if(job && job.current_positions >= job.total_positions && job.total_positions != -1)
 			job.total_positions++
 			return 1
 		return 0
@@ -248,7 +248,7 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in player_list)
 			if(player.ready && player.mind && !player.mind.assigned_role)
 				unassigned += player
-
+				if(player.client.prefs.randomslot) player.client.prefs.random_character()
 		Debug("DO, Len: [unassigned.len]")
 		if(unassigned.len == 0)	return 0
 

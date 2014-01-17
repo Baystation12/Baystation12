@@ -10,7 +10,7 @@
 
 	update_icon()
 		if(health <= 0)
-			playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
+			playsound(get_turf(src), 'sound/effects/splat.ogg', 50, 1)
 			Delete()
 			return
 		return
@@ -21,7 +21,7 @@
 			return 0
 		if(spore_delay > world.time)
 			return 0
-		spore_delay = world.time + 300 // 30 seconds
+		spore_delay = world.time + 150 // 15 seconds
 		new/mob/living/simple_animal/hostile/blobspore(src.loc, src)
 		return 1
 

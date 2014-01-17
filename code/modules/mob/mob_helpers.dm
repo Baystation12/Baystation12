@@ -90,6 +90,11 @@
 		return 1
 	return 0
 
+/proc/isAIEye(A)
+	if(istype(A, /mob/camera/aiEye))
+		return 1
+	return 0
+
 /proc/ispAI(A)
 	if(istype(A, /mob/living/silicon/pai))
 		return 1
@@ -427,3 +432,15 @@ var/list/intents = list("help","disarm","grab","hurt")
 
 	resting = !resting
 	src << "\blue You are now [resting ? "resting" : "getting up"]"
+
+/proc/get_multitool(mob/user as mob)
+	// Check distance for those that need it.
+	if(!isAI(user))
+		if(!in_range(user, src))
+			return null
+
+	// Get tool
+	var/obj/item/device/multitool/P = user.get_multitool()
+	if(!istype(P))
+		return null
+	return P

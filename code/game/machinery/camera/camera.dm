@@ -8,24 +8,17 @@
 	active_power_usage = 10
 	layer = 5
 
+	var/datum/wires/camera/wires = null // Wires datum
 	var/list/network = list("SS13")
 	var/c_tag = null
 	var/c_tag_order = 999
 	var/status = 1.0
 	anchored = 1.0
-	var/panel_open = 0 // 0 = Closed / 1 = Open
 	var/invuln = null
 	var/bugged = 0
 	var/obj/item/weapon/camera_assembly/assembly = null
 	var/watcherslist = list()
 	var/obj/item/device/camera_bug/hasbug = null
-
-	// WIRES
-	var/wires = 63 // 0b111111
-	var/list/IndexToFlag = list()
-	var/list/IndexToWireColor = list()
-	var/list/WireColorToIndex = list()
-	var/list/WireColorToFlag = list()
 
 	//OTHER
 
@@ -37,7 +30,8 @@
 	var/busy = 0
 
 /obj/machinery/camera/New()
-	WireColorToFlag = randomCameraWires()
+	wires = new(src)
+
 	assembly = new(src)
 	assembly.state = 4
 	/* // Use this to look for cameras that have the same c_tag.
@@ -113,7 +107,7 @@
 /obj/machinery/camera/attackby(W as obj, mob/living/user as mob)
 
 	// DECONSTRUCTION
-	if(isscrewdriver(W))
+	if(istype(W, /obj/item/weapon/screwdriver))
 		//user << "<span class='notice'>You start to [panel_open ? "close" : "open"] the camera's panel.</span>"
 		//if(toggle_panel(user)) // No delay because no one likes screwdrivers trying to be hip and have a duration cooldown
 		panel_open = !panel_open
@@ -121,10 +115,10 @@
 		"<span class='notice'>You screw the camera's panel [panel_open ? "open" : "closed"].</span>")
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
-	else if((iswirecutter(W) || ismultitool(W)) && panel_open)
-		interact(user)
+	else if((istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/device/multitool)) && panel_open)
+		wires.Interact(user)
 
-	else if(iswelder(W) && canDeconstruct())
+	else if(istype(W, /obj/item/weapon/weldingtool) && wires.CanDeconstruct())
 		if(weld(W, user))
 			if(assembly)
 				assembly.loc = src.loc
@@ -207,12 +201,20 @@
 	if(choice==1)
 		status = !( src.status )
 		if (!(src.status))
-			visible_message("\red [user] has deactivated [src]!")
+			if(user)
+				visible_message("\red [user] has deactivated [src]!")
+				add_hiddenprint(user)
+			else
+				visible_message("\red \The [src] deactivates!")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			icon_state = "[initial(icon_state)]1"
 			add_hiddenprint(user)
 		else
-			visible_message("\red [user] has reactivated [src]!")
+			if(user)
+				visible_message("\red [user] has reactivated [src]!")
+				add_hiddenprint(user)
+			else
+				visible_message("\red \the [src] reactivates!")
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			icon_state = initial(icon_state)
 			add_hiddenprint(user)

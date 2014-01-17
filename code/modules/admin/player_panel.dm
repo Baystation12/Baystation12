@@ -523,6 +523,17 @@
 				else
 					dat += "<tr><td><i>Vampire not found!</i></td></tr>"
 
+		if(ticker.mode.xenos.len > 0)
+			dat += "<br><table cellspacing=5><tr><td><B>Xenos</B></td><td></td><td></td></tr>"
+			for(var/datum/mind/new_xeno in ticker.mode.xenos)
+				var/mob/M = new_xeno.current
+				if(M)
+					dat += {"<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>
+					<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
+					<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"}
+				else
+					dat += "<tr><td><i>Xenos not found!</i></td></tr>"
+
 		if(ticker.mode.traitors.len > 0)
 			dat += "<br><table cellspacing=5><tr><td><B>Traitors</B></td><td></td><td></td></tr>"
 			for(var/datum/mind/traitor in ticker.mode.traitors)

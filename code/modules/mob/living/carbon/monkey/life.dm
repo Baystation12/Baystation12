@@ -11,7 +11,7 @@
 
 /mob/living/carbon/monkey/Life()
 	set invisibility = 0
-	set background = 1
+	//set background = 1
 	if (monkeyizing)	return
 	..()
 
@@ -454,7 +454,7 @@
 			if(nutrition > 500)
 				nutrition = 500
 			if(light_amount > 2) //if there's enough light, heal
-				heal_overall_damage(1,1)
+				adjustBruteLoss(-1)
 				adjustToxLoss(-1)
 				adjustOxyLoss(-1)
 

@@ -120,10 +120,6 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 			podman << "<B>Memories of a life as [source] drift oddly through a mind unsuited for them, like a skin of oil over a fathomless lake.</B>"
 		podman << "<B>You are now one of the Dionaea, a race of drifting interstellar plantlike creatures that sometimes share their seeds with human traders.</B>"
 		podman << "<B>Too much darkness will send you into shock and starve you, but light will help you heal.</B>"
-		if(!realName)
-			var/newname = input(podman,"Enter a name, or leave blank for the default name.", "Name change","") as text
-			if (newname != "")
-				podman.real_name = newname
 
 	else
 		new /mob/living/carbon/monkey/diona(parent.loc)

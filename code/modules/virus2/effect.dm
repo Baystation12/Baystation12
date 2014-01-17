@@ -51,6 +51,7 @@
 /datum/disease2/effect/alien
 	name = "Unidentified Foreign Body"
 	stage = 4
+	badness = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		mob << "\red You feel something tearing its way out of your stomach..."
 		mob.adjustToxLoss(10)
@@ -106,13 +107,14 @@
 	stage = 4
 	badness = 2
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob.suiciding = 1
-		//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while
-		viewers(mob) << "\red <b>[mob.name] is holding \his breath. It looks like \he's trying to commit suicide.</b>"
-		mob.adjustOxyLoss(175 - mob.getToxLoss() - mob.getFireLoss() - mob.getBruteLoss() - mob.getOxyLoss())
-		mob.updatehealth()
-		spawn(200) //in case they get revived by cryo chamber or something stupid like that, let them suicide again in 20 seconds
-			mob.suiciding = 0
+		if (mob.suiciding == 0)
+			mob.suiciding = 1
+			//instead of killing them instantly, just put them at -175 health and let 'em gasp for a while
+			viewers(mob) << "\red <b>[mob.name] is holding \his breath. It looks like \he's trying to commit suicide.</b>"
+			mob.adjustOxyLoss(175 - mob.getToxLoss() - mob.getFireLoss() - mob.getBruteLoss() - mob.getOxyLoss())
+			mob.updatehealth()
+			spawn(200) //in case they get revived by cryo chamber or something stupid like that, let them suicide again in 20 seconds
+				mob.suiciding = 0
 
 /datum/disease2/effect/killertoxins
 	name = "Toxification Syndrome"

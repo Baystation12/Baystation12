@@ -17,7 +17,6 @@
 	diaryofmeanpeople = file("data/logs/[date_string] Attack.log")
 	diary << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
 	diaryofmeanpeople << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
-	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
 	if(byond_version < RECOMMENDED_VERSION)
 		world.log << "Your server's byond version does not meet the recommended requirements for TGstation code. Please update BYOND"
@@ -203,7 +202,7 @@
 #define DISCONNECTED_DELETE	6000	//10 minutes in ticks (approx)
 /world/proc/KickDisconnectedClients()
 	spawn(-1)
-		set background = 1
+		//set background = 1
 		while(1)
 			sleep(DISCONNECTED_DELETE)
 			for(var/mob/living/carbon/human/C in living_mob_list)
@@ -322,7 +321,7 @@
 //		features += "hosted by <b>[config.hostedby]</b>"
 
 	if (features)
-		s += ": [dd_list2text(features, ", ")]"
+		s += ": [list2text(features, ", ")]"
 
 	/* does this help? I do not know */
 	if (src.status != s)

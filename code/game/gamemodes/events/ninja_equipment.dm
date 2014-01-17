@@ -23,6 +23,7 @@ ________________________________________________________________________________
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/init//suit initialize verb
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_instruction//for AIs
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_holo
+	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja // Experemental
 	//verbs += /obj/item/clothing/suit/space/space_ninja/proc/display_verb_procs//DEBUG. Doesn't work.
 	spark_system = new()//spark initialize
 	spark_system.set_up(5, 0, src)
@@ -114,7 +115,7 @@ ________________________________________________________________________________
 //=======//PROCESS PROCS//=======//
 
 /obj/item/clothing/suit/space/space_ninja/proc/ntick(mob/living/carbon/human/U = affecting)
-	set background = 1
+	//set background = 1
 
 	//Runs in the background while the suit is initialized.
 	spawn while(cell.charge>=0)
@@ -130,11 +131,21 @@ ________________________________________________________________________________
 		//Now let's do the normal processing.
 		if(s_coold)	s_coold--//Checks for ability s_cooldown first.
 		var/A = s_cost//s_cost is the default energy cost each ntick, usually 5.
+		if(U.stat == 2)
+			U << browse(null, "window=spideros")
+			explosion(U.loc, 0, 1, 3, 4)
+			del(n_gloves)
+			del(n_shoes)
+			del(n_mask)
+			del(n_hood)
+			U.gib()
+			return
 		if(!kamikaze)
 			if(blade_check(U))//If there is a blade held in hand.
 				A += s_acost
 			if(s_active)//If stealth is active.
 				A += s_acost
+
 		else
 			if(prob(s_delay))//Suit delay is used as probability. May change later.
 				U.adjustBruteLoss(k_damage)//Default damage done, usually 1.
@@ -144,7 +155,12 @@ ________________________________________________________________________________
 			if(kamikaze)
 				U.say("I DIE TO LIVE AGAIN!")
 				U << browse(null, "window=spideros")//Just in case.
-				U.death()
+				explosion(U.loc, 1, 2, 3, 4)
+				del(n_gloves)
+				del(n_shoes)
+				del(n_mask)
+				del(n_hood)
+				U.gib()
 				return
 			cell.charge=0
 			cancel_stealth()
@@ -176,7 +192,7 @@ ________________________________________________________________________________
 				if(4)
 					U << "\blue VOID-shift device status: <B>ONLINE</B>.\nCLOAK-tech device status: <B>ONLINE</B>."
 				if(5)
-					U << "\blue Primary system status: <B>ONLINE</B>.\nBackup system status: <B>ONLINE</B>.\nCurrent energy capacity: <B>[cell.charge]</B>."
+					U << "\blue Primary system status: <B>ONLINE</B>.\nBackup system status: <B>ONLINE</B>.\nCurrent energy capacity: <B>[cell.maxcharge]</B>."
 				if(6)
 					U << "\blue All systems operational. Welcome to <B>SpiderOS</B>, [U.real_name]."
 					grant_ninja_verbs()
@@ -485,6 +501,7 @@ ________________________________________________________________________________
 	var/mob/living/carbon/human/U = affecting
 	var/mob/living/silicon/ai/A = AI
 	var/display_to = s_control ? U : A//Who do we want to display certain messages to?
+	var/turf/mobloc // For use later on during a check in Kamikaze
 
 	if(s_control)
 		if(!affecting||U.stat||!s_initialized)//Check to make sure the guy is wearing the suit after clicking and it's on.
@@ -578,31 +595,35 @@ ________________________________________________________________________________
 
 		if("Unlock Kamikaze")
 			if(input(U)=="Divine Wind")
-				if( !(U.stat||U.wear_suit!=src||!s_initialized) )
-					if( !(cell.charge<=1||s_busy) )
-						s_busy = 1
-						for(var/i, i<4, i++)
-							switch(i)
-								if(0)
-									U << "\blue Engaging mode...\n\black<b>CODE NAME</b>: \red <b>KAMIKAZE</b>"
-								if(1)
-									U << "\blue Re-routing power nodes... \nUnlocking limiter..."
-								if(2)
-									U << "\blue Power nodes re-routed. \nLimiter unlocked."
-								if(3)
-									grant_kamikaze(U)//Give them verbs and change variables as necessary.
-									U.regenerate_icons()//Update their clothing.
-									ninjablade()//Summon two energy blades.
-									message_admins("\blue [key_name_admin(U)] used KAMIKAZE mode.")//Let the admins know.
-									s_busy = 0
-									return
-							sleep(s_delay)
+				mobloc = get_turf(U.loc)
+				if(mobloc.loc != /area/ninja_outpost)
+					if( !(U.stat||U.wear_suit!=src||!s_initialized))
+						if( !(cell.charge<=1||s_busy) )
+							s_busy = 1
+							for(var/i, i<4, i++)
+								switch(i)
+									if(0)
+										U << "\blue Engaging mode...\n\black<b>CODE NAME</b>: \red <b>KAMIKAZE</b>"
+									if(1)
+										U << "\blue Re-routing power nodes... \nUnlocking limiter..."
+									if(2)
+										U << "\blue Power nodes re-routed. \nLimiter unlocked."
+									if(3)
+										grant_kamikaze(U)//Give them verbs and change variables as necessary.
+										U.regenerate_icons()//Update their clothing.
+										ninjablade()//Summon two energy blades.
+										message_admins("\blue [key_name_admin(U)] used KAMIKAZE mode.")//Let the admins know.
+										s_busy = 0
+										return
+								sleep(s_delay)
+						else
+							U << "\red <b>ERROR<b>: \black Unable to initiate mode."
 					else
-						U << "\red <b>ERROR<b>: \black Unable to initiate mode."
+						U << browse(null, "window=spideros")
+						s_busy = 0
+						return
 				else
-					U << browse(null, "window=spideros")
-					s_busy = 0
-					return
+					U << "\red Your <b>NINJA HONOR</b> prevents you from activating Kamikaze here!"
 			else
 				U << "\red ERROR: WRONG PASSWORD!"
 				k_unlock = 0
@@ -681,6 +702,7 @@ ________________________________________________________________________________
 								if(4)
 									A << "Connection established and secured. Menu updated."
 									U << "\red <b>W�r#nING</b>: #%@!!WȆ|_4�54@ \nUn�B88l3 T� L�-�o-L�CaT2 ##$!�RN�0..%.."
+									verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja // To stop AIs from overriding an overridden Ninja. -- Dave
 									grant_AI_verbs()
 									return
 							sleep(s_delay)
@@ -740,7 +762,7 @@ ________________________________________________________________________________
 	return
 
 /obj/item/clothing/suit/space/space_ninja/proc/ai_holo_process()
-	set background = 1
+	//set background = 1
 
 	spawn while(hologram&&s_initialized&&AI)//Suit on and there is an AI present.
 		if(!s_initialized||get_dist(affecting,hologram.loc)>3)//Once suit is de-initialized or hologram reaches out of bounds.
@@ -772,8 +794,8 @@ ________________________________________________________________________________
 	return
 
 /obj/item/clothing/suit/space/space_ninja/proc/ai_hack_ninja()
-	set name = "Hack SpiderOS"
-	set desc = "Hack directly into the Black Widow(tm) neuro-interface."
+	set name = "Display SpiderOS"
+	set desc = "Hack into SpiderOS and display a modified interface."
 	set category = "AI Ninja Equip"
 	set src = usr.loc
 
@@ -787,11 +809,56 @@ ________________________________________________________________________________
 	set src = usr.loc
 
 	AI << browse(null, "window=spideros")//Close window
-	AI << "You have seized your hacking attempt. [affecting.real_name] has regained control."
+	AI << "You have ceased your hacking attempt. [affecting.real_name] has regained control."
 	affecting << "<b>UPDATE</b>: [AI.real_name] has ceased hacking attempt. All systems clear."
 
+	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja
 	remove_AI_verbs()
 	return
+
+/obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja()// Experemental -- Dave
+	set name = "Hack Ninja Systems"
+	set desc = "Hack directly into the Black Widow(tm) neuro-interface."
+	set category = "AI Ninja Equip"
+	set src = usr.loc
+
+	var/mob/living/carbon/human/U = affecting
+	var/mob/living/silicon/ai/A = AI
+
+	if(A.laws != new /datum/ai_laws/ninja_override && s_busy == 0)
+		s_busy = 1
+		for(var/i,i<6,i++)
+			if(AI==A)
+				switch(i)
+					if(1)
+						A << "\blue <b>NOTICE</b>:\black Beginning hack attempt..."
+						U << "\red <b>WARNING</b>: HACKING AT��TEMP� IN PR0GRESs!"
+						spideros = 0
+						k_unlock = 0
+						U << browse(null, "window=spideros")
+					if(2)
+						A << "<b>Disconnecting neural interface...</b>"
+						U << "\red <b>WAR�NING</b>: �R�O0�Gr�--S 2&3%"
+					if(3)
+						A << "<b>Shutting down external protocol...</b>"
+						U << "\red <b>WARNING</b>: P����RֆGr�5S 677^%"
+						cancel_stealth()
+					if(4)
+						A << "<b>Connecting to kernel...</b>"
+						U << "\red <b>WARNING</b>: �R�r�R_404"
+						A.control_disabled = 0
+					if(5)
+						A << "<b>Connection established and secured. Menu updated.</b>"
+						U << "\red <b>W�r#nING</b>: #%@!!WȆ|_4�54@ \nUn�B88l3 T� L�-�o-L�CaT2 ##$!�RN�0..%.."
+						verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja
+						grant_AI_verbs()
+						return
+				sleep(s_delay)
+			else	break
+		s_busy = 0
+	else
+		A << "\red<b>ALERT</b>:\black Current lawset prevents hacking!"
+
 
 //=======//GENERAL SUIT PROCS//=======//
 
@@ -858,6 +925,7 @@ ________________________________________________________________________________
 				else
 					U << "\red <b>ERROR</b>: \black Procedure interrupted. Process terminated."
 			else
+				U.drop_item()
 				I.loc = src
 				t_disk = I
 				U << "\blue You slot \the [I] into \the [src]."
@@ -955,7 +1023,7 @@ ________________________________________________________________________________
 
 	G.draining = 1
 
-	if(target_type!="RESEARCH")//I lumped research downloading here for ease of use.
+	if(target_type!="RESEARCH" && target_type!="HUMAN")//I lumped research downloading here for ease of use.
 		U << "\blue Now charging battery..."
 
 	switch(target_type)
@@ -1137,6 +1205,31 @@ ________________________________________________________________________________
 				U << "\blue Gained <B>[totaldrain]</B> energy from [src]."
 			else
 				U << "\red The exosuit's battery has run dry. You must find another source of power."
+
+
+
+		/*
+
+		Experimenting with a wrist-mounted hypospray for delivering hallucigenics. Todo: Possibly make it only work on harm intent.
+
+		-- Dave
+
+		*/
+
+		if("HUMAN")
+			var/mob/living/carbon/human/A = target
+			if(S.h_stings > 0)
+				if(A != U) // Because it's bound to happen.
+					S.h_stings -= 1
+					A <<"\red You feel a tiny prick, something doesn't feel right..."
+					U <<"\blue Hallucigen administered to [A], you have <b>[S.h_stings]</b> doses left."
+					A.hallucination += 300
+				else
+					U <<"\red You think for a moment, and decide may not be wise to inject yourself."
+			else
+				U<<"\red You are out of stings!"
+
+
 
 		if("CYBORG")
 			var/mob/living/silicon/robot/A = target
@@ -1441,7 +1534,7 @@ It is possible to destroy the net by the occupant or someone else.
 			tforce = 10
 		else
 			tforce = AM:throwforce
-		playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
+		playsound(get_turf(src), 'sound/weapons/slash.ogg', 80, 1)
 		health = max(0, health - tforce)
 		healthcheck()
 		..()
@@ -1465,7 +1558,7 @@ It is possible to destroy the net by the occupant or someone else.
 		usr << text("\green You claw at the net.")
 		for(var/mob/O in oviewers(src))
 			O.show_message(text("\red [] claws at the energy net!", usr), 1)
-		playsound(src.loc, 'sound/weapons/slash.ogg', 80, 1)
+		playsound(get_turf(src), 'sound/weapons/slash.ogg', 80, 1)
 		health -= rand(10, 20)
 		if(health <= 0)
 			usr << text("\green You slice the energy net to pieces.")

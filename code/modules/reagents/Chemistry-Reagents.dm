@@ -603,7 +603,7 @@ datum
 						for(var/mob/O in viewers(M, null))
 							O.show_message(text("\blue []'s eyes blink and become clearer.", M), 1) // So observers know it worked.
 					// Vamps react to this like acid
-					if(((M.mind in ticker.mode.vampires) || M.mind.vampire) && prob(10))
+					if(((M.mind in ticker.mode.vampires) || M.mind.vampire) && (!(VAMP_FULL in M.mind.vampire.powers)) && prob(10))
 						if(!M) M = holder.my_atom
 						M.adjustToxLoss(1*REM)
 						M.take_organ_damage(0, 1*REM)
@@ -922,6 +922,11 @@ datum
 						M.take_organ_damage(min(15, volume * 2))
 
 			reaction_obj(var/obj/O, var/volume)
+				if(istype(O,/obj/item/weapon/organ/head))
+					new/obj/item/weapon/skeleton/head(O.loc)
+					for(var/mob/M in viewers(5, O))
+						M << "\red \the [O] melts."
+					del(O)
 				if((istype(O,/obj/item) || istype(O,/obj/effect/glowshroom)) && prob(10))
 					if(!O.unacidable)
 						var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
@@ -1000,6 +1005,11 @@ datum
 							M.take_organ_damage(min(15, volume * 4))
 
 			reaction_obj(var/obj/O, var/volume)
+				if(istype(O,/obj/item/weapon/organ/head))
+					new/obj/item/weapon/skeleton/head(O.loc)
+					for(var/mob/M in viewers(5, O))
+						M << "\red \the [O] melts."
+					del(O)
 				if((istype(O,/obj/item) || istype(O,/obj/effect/glowshroom)))
 					if(!O.unacidable)
 						var/obj/effect/decal/cleanable/molten_item/I = new/obj/effect/decal/cleanable/molten_item(O.loc)
@@ -1037,7 +1047,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.apply_effect(2*REM,IRRADIATE,0)
+				M.apply_effect(8*REM,IRRADIATE,0)
 				// radium may increase your chances to cure a disease
 				if(istype(M,/mob/living/carbon)) // make sure to only use it on carbon mobs
 					var/mob/living/carbon/C = M
@@ -1129,7 +1139,7 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M.dna) return //No robots, AIs, aliens, Ians or other mobs should be affected by this.
 				if(!M) M = holder.my_atom
-				M.apply_effect(10,IRRADIATE,0)
+				M.apply_effect(4*REM,IRRADIATE,0)
 				..()
 				return
 

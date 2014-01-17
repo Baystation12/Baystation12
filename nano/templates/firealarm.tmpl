@@ -8,7 +8,7 @@ YOU HAVE TO PUT THIS FILE INTO "send_resources" CLIENT PROC! ELSE IT WON'T WORK!
 		Fire Alarm:
 	</div>
 	<div class="itemContent">
-			{^{:~link('Activated', 'lightbulb', {'alarm': 1}, fire ? 'selected' : null)}}{^{:~link('Deactivated', 'lightbulb', {'reset': 1}, fire ? null : 'selected')}}
+			{{:~link('Activated', 'lightbulb', {'alarm': 1}, fire ? 'selected' : null)}}{{:~link('Deactivated', 'lightbulb', {'reset': 1}, fire ? null : 'selected')}}
 	</div>
 </div>
 <div class="item">
@@ -16,12 +16,12 @@ YOU HAVE TO PUT THIS FILE INTO "send_resources" CLIENT PROC! ELSE IT WON'T WORK!
 		Security Level:
 	</div>
 	<div class="itemContentSmall">
-		{^{if securityLevel == "GREEN"}}
-			<span class='good'>{^{:securityLevel}}</span>
+		{{if securityLevel == "GREEN"}}
+			<span class='good'>{{:securityLevel}}</span>
 		{{else securityLevel == "BLUE"}}
-			<font color="lightblue">{^{:securityLevel}}</font>
+			<font color="lightblue">{{:securityLevel}}</font>
 		{{else}}
-			<span class='bad'>{^{:securityLevel}}</span>
+			<span class='bad'>{{:securityLevel}}</span>
 		{{/if}}
 	</div>
 </div>
@@ -30,21 +30,21 @@ YOU HAVE TO PUT THIS FILE INTO "send_resources" CLIENT PROC! ELSE IT WON'T WORK!
 		Timer System:
 	</div>
 	<div class="itemContentSmall">
-		{^{:~link('Initiate', 'play', {'time': 1}, timing ? 'selected' : null)}}
-		{^{:~link('Stop', 'pause', {'time': 0}, timing? null : 'selected')}}
+		{{:~link('Initiate', 'play', {'time': 1}, timing ? 'selected' : null)}}
+		{{:~link('Stop', 'pause', {'time': 0}, timing? null : 'selected')}}
 	</div>
 </div>
 <div class="item">
 	<div class="itemContent">
-		{^{if working}}
-			Time Left: <b>{^{:time}}</b>
+		{{if working}}
+			Time Left: <b>{{:time}}</b>
 		{{/if}}
 	</div>
 	<div class="itemContent">
 		Time Modifiers:
-		{^{:~link('30', 'minus', {'tp': -30}, null)}}
-		{^{:~link('1', 'minus', {'tp': -1}, null)}}
-		{^{:~link('1', 'plus', {'tp': +1}, null)}}
-		{^{:~link('30', 'plus', {'tp': +30}, null)}}
+		{{:~link('30', 'minus', {'tp': -30}, null)}}
+		{{:~link('1', 'minus', {'tp': -1}, null)}}
+		{{:~link('1', 'plus', {'tp': +1}, null)}}
+		{{:~link('30', 'plus', {'tp': +30}, null)}}
 	</div>
 </div>

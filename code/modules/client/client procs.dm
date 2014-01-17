@@ -53,36 +53,41 @@
 		var/karma=verify_karma()
 		switch(href_list["KarmaBuy"])
 			if("1")
+				if(karma <5)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_job_unlock("Barber",5)
+			if("2")
 				if(karma <15)
 					usr << "You do not have enough karma!"
 				else
 					src.DB_job_unlock("Nanotrasen Representative",15)
-			if("2")
-				if(karma <30)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Customs Officer",30)
 			if("3")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_job_unlock("Blueshield",30)
+					src.DB_job_unlock("Customs Officer",30)
 			if("4")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_species_unlock("Kidan",30)
+					src.DB_job_unlock("Blueshield",30)
 			if("5")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_species_unlock("Grey",30)
+					src.DB_species_unlock("Kidan",30)
 			if("6")
+				if(karma <30)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_species_unlock("Grey",30)
+			if("7")
 				if(karma <45)
 					usr << "You do not have enough karma!"
 				else
 					src.DB_species_unlock("Vox",45)
-			if("7")
+			if("8")
 				if(karma <45)
 					usr << "You do not have enough karma!"
 				else
@@ -280,37 +285,12 @@
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
-//	preload_vox()
+//	preload_vox() //Causes long delays with initial start window and subsequent windows when first logged in.
+
+	// Send NanoUI resources to this client
+	nanomanager.send_resources(src)
+
 	getFiles(
-	//	'nano/js/libraries.min.js',
-		'nano/js/libraries/1-jquery.js',
-		'nano/js/libraries/2-jsviews.js',
-		'nano/js/libraries/3-jquery.timers.js',
-		'nano/js/nano_update.js',
-		'nano/js/nano_config.js',
-		'nano/js/nano_base_helpers.js',
-		'nano/css/shared.css',
-		'nano/css/icons.css',
-		'nano/templates/chem_dispenser.tmpl',
-		'nano/templates/apc.tmpl',
-		'nano/templates/cryo.tmpl',
-		'nano/templates/dna_modifier.tmpl',
-		'nano/templates/geoscanner.tmpl',
-		'nano/templates/air_alarm.tmpl',
-		'nano/templates/atmos_control.tmpl',
-		'nano/templates/firealarm.tmpl',
-		'nano/templates/vending.tmpl',
-		'nano/templates/pda.tmpl',
-		'nano/templates/uplink.tmpl',
-		'nano/images/uiBackground.png',
-		'nano/images/uiBackground-Syndicate.png',
-		'nano/images/uiIcons16.png',
-		'nano/images/uiIcons24.png',
-		'nano/images/uiLinkPendingIcon.gif',
-		'nano/images/uiMaskBackground.png',
-		'nano/images/uiNoticeBackground.jpg',
-		'nano/images/uiTitleFluff.png',
-		'nano/images/uiTitleFluff-Syndicate.png',
 		'html/search.js',
 		'html/panels.css',
 		'icons/pda_icons/pda_atmos.png',

@@ -3,7 +3,7 @@
 	icon = 'icons/mob/animal.dmi'
 	health = 20
 	maxHealth = 20
-
+	universal_understand = 1
 	var/icon_living = ""
 	var/icon_dead = ""
 	var/icon_gib = null	//We only try to show a gibbing animation if this exists.
@@ -399,12 +399,7 @@
 			return
 	else if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(istype(O, /obj/item/weapon/kitchenknife) || istype(O, /obj/item/weapon/butch))
-			new meat_type (get_turf(src))
-			if(prob(95))
-				del(src)
-				return
-			gib()
-			return
+			harvest()
 	else
 		if(O.force)
 			var/damage = O.force
@@ -510,3 +505,13 @@
 			continue
 	if(alone && partner && children < 3)
 		new childtype(loc)
+
+// Harvest an animal's delicious byproducts
+/mob/living/simple_animal/proc/harvest()
+	new meat_type (get_turf(src))
+	if(prob(95))
+		del(src)
+		return
+	gib()
+	return
+

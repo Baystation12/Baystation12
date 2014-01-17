@@ -487,7 +487,10 @@ This function completely restores a damaged organ to perfect condition.
 			if(LOWER_TORSO)
 				owner << "\red You are now sterile."
 			if(HEAD)
-				organ= new /obj/item/weapon/organ/head(owner.loc, owner)
+				if(owner.mutations & SKELETON)
+					organ= new /obj/item/weapon/skeleton/head(owner.loc)
+				else
+					organ= new /obj/item/weapon/organ/head(owner.loc, owner)
 				owner.u_equip(owner.glasses)
 				owner.u_equip(owner.head)
 				owner.u_equip(owner.l_ear)
@@ -608,7 +611,10 @@ This function completely restores a damaged organ to perfect condition.
 	if(status & ORGAN_BROKEN)
 		return
 	owner.visible_message("\red You hear a loud cracking sound coming from \the [owner].","\red <b>Something feels like it shattered in your [display_name]!</b>","You hear a sickening crack.")
-	owner.emote("scream")
+
+	if(owner.species && !(owner.species.flags & NO_PAIN))
+		owner.emote("scream")
+
 	status |= ORGAN_BROKEN
 	broken_description = pick("broken","fracture","hairline fracture")
 	perma_injury = brute_dam
@@ -750,6 +756,7 @@ This function completely restores a damaged organ to perfect condition.
 	min_broken_damage = 40
 	body_part = HEAD
 	var/disfigured = 0
+	var/brained = 0
 
 /datum/organ/external/head/get_icon()
 	if (!owner)
@@ -769,6 +776,10 @@ This function completely restores a damaged organ to perfect condition.
 				disfigure("brute")
 		if (burn_dam > 40)
 			disfigure("burn")
+	if(!brained)
+		if(brute_dam > 25)
+			if(prob(10))
+				breakskull()
 
 /datum/organ/external/head/proc/disfigure(var/type = "brute")
 	if (disfigured)
@@ -782,6 +793,14 @@ This function completely restores a damaged organ to perfect condition.
 		"\red <b>Your face melts off!</b>",	\
 		"\red You hear a sickening sizzle.")
 	disfigured = 1
+
+/datum/organ/external/head/proc/breakskull()
+	if(brained)
+		return
+	owner.visible_message("\red The top of \the [owner]'s skull breaks, exposing the brain help within.",	\
+	"\red <b>Unbearable pain hits you as the top of your skull breaks and exposes your brain!</b>",	\
+	"\red You hear a sickening crack.")
+	owner.expose_brain()
 
 /****************************************************
 			   EXTERNAL ORGAN ITEMS

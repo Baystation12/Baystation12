@@ -68,6 +68,7 @@ datum/controller/game_controller/proc/setup()
 	setupgenetics()
 	setupfactions()
 	setup_economy()
+	SetupXenoarch()
 
 	for(var/i=0, i<max_secret_rooms, i++)
 		make_mining_asteroid_secret()
@@ -109,7 +110,7 @@ datum/controller/game_controller/proc/setup_objects()
 datum/controller/game_controller/proc/process()
 	processing = 1
 	spawn(0)
-		set background = 1
+		//set background = 1
 		while(1)	//far more efficient than recursively calling ourself
 			if(!Failsafe)	new /datum/controller/failsafe()
 
@@ -298,7 +299,7 @@ datum/controller/game_controller/proc/process_nano()
 	var/i = 1
 	while(i<=nanomanager.processing_uis.len)
 		var/datum/nanoui/ui = nanomanager.processing_uis[i]
-		if(ui && ui.src_object && ui.user)
+		if(ui)
 			ui.process()
 			i++
 			continue

@@ -143,13 +143,14 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 
 /client/proc/karmashopmenu()
 	var/dat = {"<B>Karma Shop</B><br>
-		<a href='?src=\ref[src];KarmaBuy=1'>Unlock Nanotrasen Representative -- 15KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=2'>Unlock Customs Officer -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=3'>Unlock BlueShield -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=4'>Unlock Kidan -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Grey -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=6'>Unlock Vox -- 45KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=7'>Unlock Slime People -- 45KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=1'>Unlock Barber -- 5KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=2'>Unlock Nanotrasen Representative -- 15KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=3'>Unlock Customs Officer -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=4'>Unlock BlueShield -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Kidan -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=6'>Unlock Grey -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=7'>Unlock Vox -- 45KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=8'>Unlock Slime People -- 45KP</a><br>
 		<B>PLEASE NOTE THAT PEOPLE WHO TRY TO GAME THE KARMA SYSTEM WILL END UP ON THE WALL OF SHAME. THIS INCLUDES BUT IS NOT LIMITED TO TRADES, OOC KARMA BEGGING, CODE EXPLOITS, ETC.</B>
 		"}
 
@@ -187,7 +188,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 		var/list/joblist = text2list(dbjob,",")
 		if(!(job in joblist))
 			joblist += job
-			var/newjoblist = dd_list2text(joblist,",")
+			var/newjoblist = list2text(joblist,",")
 			query = dbcon.NewQuery("UPDATE whitelist SET job='[newjoblist]' WHERE ckey='[dbckey]'")
 			if(!query.Execute())
 				var/err = query.ErrorMsg()
@@ -233,7 +234,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 		var/list/specieslist = text2list(dbspecies,",")
 		if(!(species in specieslist))
 			specieslist += species
-			var/newspecieslist = dd_list2text(specieslist,",")
+			var/newspecieslist = list2text(specieslist,",")
 			query = dbcon.NewQuery("UPDATE whitelist SET species='[newspecieslist]' WHERE ckey='[dbckey]'")
 			if(!query.Execute())
 				var/err = query.ErrorMsg()

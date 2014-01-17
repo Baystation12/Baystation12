@@ -82,6 +82,9 @@
 	var/alert_desc_red_upto = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
 	var/alert_desc_red_downto = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
 	var/alert_desc_delta = "The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
+	var/alert_desc_epsilon = "Security level EPSILON reached. Consider all contracts terminated."
+	var/alert_desc_gamma = "GAMMA Security level has been set by Centcom, Security is to have weapons at all times, and all civilians are to seek their nearest head for transportation to a safe location. GAMMA Armory unlocked for security personnel."
+
 
 	var/forbid_singulo_possession = 0
 
@@ -133,6 +136,7 @@
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 
+	var/default_laws = 0 //Controls what laws the AI spawns with.
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -180,7 +184,7 @@
 		if(type == "config")
 			switch (name)
 				if ("resource_urls")
-					config.resource_urls = stringsplit(value, " ")
+					config.resource_urls = text2list(value, " ")
 
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
@@ -371,6 +375,12 @@
 				if("alert_delta")
 					config.alert_desc_delta = value
 
+				if("alert_gamma")
+					config.alert_desc_gamma = value
+
+				if("alert_epsilon")
+					config.alert_desc_epsilon = value
+
 				if("forbid_singulo_possession")
 					forbid_singulo_possession = 1
 
@@ -496,6 +506,8 @@
 					config.bones_can_break = value
 				if("limbs_can_break")
 					config.limbs_can_break = value
+				if("default_laws")
+					config.default_laws = text2num(value)
 				else
 					diary << "Unknown setting in configuration: '[name]'"
 

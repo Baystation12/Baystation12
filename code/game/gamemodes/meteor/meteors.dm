@@ -98,7 +98,7 @@
 
 		if (A)
 			A.meteorhit(src)
-			playsound(src.loc, 'sound/effects/meteorimpact.ogg', 40, 1)
+			playsound(get_turf(src), 'sound/effects/meteorimpact.ogg', 40, 1)
 		if (--src.hits <= 0)
 
 			//Prevent meteors from blowing up the singularity's containment.

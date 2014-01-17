@@ -374,7 +374,7 @@
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
 		if(chosen_species)
-			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
+			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & IS_WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
 				switch(chosen_species.name)
 					if("Slime People")
 						new_character = new /mob/living/carbon/human/slime(loc)
@@ -423,6 +423,9 @@
 			if(mind.assigned_role == "Clown")				//give them a clownname if they are a clown
 				new_character.real_name = pick(clown_names)	//I hate this being here of all places but unfortunately dna is based on real_name!
 				new_character.rename_self("clown")
+			else if(new_character.species == "Diona")
+				new_character.real_name = pick(diona_names)	//I hate this being here of all places but unfortunately dna is based on real_name!
+				new_character.rename_self("diona")
 			mind.original = new_character
 			mind.transfer_to(new_character)					//won't transfer key since the mind is not active
 

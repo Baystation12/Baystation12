@@ -77,7 +77,6 @@ proc/age2agedescription(age)
 		else				return "unknown"
 
 
-
 /*
 Proc for attack log creation, because really why not
 1 argument is the actor

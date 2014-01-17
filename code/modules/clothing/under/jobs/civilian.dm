@@ -189,3 +189,10 @@
 	item_state = "miner"
 	_color = "miner"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+
+/obj/item/clothing/under/barber
+	desc = "It's a barber's uniform."
+	name = "barber's uniform"
+	icon_state = "barber"
+	item_state = "barber"
+	_color = "barber"

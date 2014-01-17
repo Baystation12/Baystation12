@@ -518,6 +518,7 @@
 	desc = "Mini-Mecha action figure! Collect them all! 11/11."
 	icon_state = "phazonprize"
 
+
 /obj/item/toy/katana
 	name = "replica katana"
 	desc = "Woefully underpowered in D20."
@@ -531,6 +532,24 @@
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 
+
+/obj/item/toy/nuke
+	name = "\improper Nuclear Fission Explosive toy"
+	desc = "A plastic model of a Nuclear Fission Explosive."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "nuketoyidle"
+	w_class = 2.0
+	var/cooldown = 0
+
+/obj/item/toy/nuke/attack_self(mob/user)
+	if (cooldown < world.time)
+		cooldown = world.time + 3000 //5 minutes
+		user.visible_message("<span class='warning'>[user] presses a button on [src]</span>", "<span class='notice'>You activate [src], it plays a loud noise!</span>", "<span class='notice'>You hear the click of a button.</span>")
+		spawn(5) //gia said so
+			icon_state = "nuketoy"
+			playsound(src, 'sound/machines/Alarm.ogg', 100, 0, surround = 0)
+			sleep(135)
+			icon_state = "nuketoyidle"
 
 /obj/item/weapon/toddler
 	icon_state = "toddler"

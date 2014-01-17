@@ -13,8 +13,8 @@ hr {
 }
 .link, .linkOn, .linkOff, .selected, .disabled {
 	float: left;
-	min-width: 40px;
-	height: 16px;
+    min-width: 15px;
+    height: 16px;
 	text-align: center;
 	color: #ffffff;
 	text-decoration: none;
@@ -139,6 +139,18 @@ h4 {
 	clear: both;
 	padding: 8px;
 }
+
+#uiNoJavaScript {
+    position: relative;
+    background: url(uiNoticeBackground.jpg) 50% 50%;
+    color: #000000;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: bold;
+    padding: 3px 4px 3px 4px;
+    margin: 4px 0 4px 0;
+}
+
 .white {
 	color: white;
 	font-weight: bold;
@@ -162,15 +174,23 @@ h4 {
 .dark {
 	color: #272727;
 }
+.noticePlaceholder {
+    position: relative;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    padding: 3px 4px 3px 4px;
+    margin: 4px 0 4px 0;
+}
 .notice {
-	position: relative;
-	background: url(uiNoticeBackground.jpg) 50% 50%;
-	color: #15345A;
-	font-size: 12px;
-	font-style: italic;
-	font-weight: bold;
-	padding: 3px 4px 3px 4px;
-	margin: 4px 0 4px 0;
+    position: relative;
+    background: url(uiNoticeBackground.jpg) 50% 50%;
+    color: #000000;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    padding: 3px 4px 3px 4px;
+    margin: 4px 0 4px 0;
 }
 .notice.icon {
 	padding: 2px 4px 0 20px;

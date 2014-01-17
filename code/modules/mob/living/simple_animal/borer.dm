@@ -235,8 +235,11 @@
 			src << "\red <B>You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system.</B>"
 			host << "\red <B>You feel a strange shifting sensation behind your eyes as an alien consciousness displaces yours.</B>"
 
+			var/mob/borer = src
 			host_brain.ckey = host.ckey
 			host.ckey = src.ckey
+			if(borer && !borer.ckey)
+				borer.ckey = "@[host.ckey]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 			controlling = 1
 
 			host.verbs += /mob/living/carbon/proc/release_control

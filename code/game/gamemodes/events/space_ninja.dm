@@ -482,27 +482,22 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	if(alert("Are you sure you want to send in a space ninja?",,"Yes","No")=="No")
 		return
 
-	if(alert("Would you like random or custom paramaters?",,"Random","Custom")=="Custom")
-		var/mission
+	var/mission
+	if(alert("Would you the Ninja to have a random or preset mission?",,"Random","Preset")=="Preset")
 		while(!mission)
 			mission = copytext(sanitize(input(src, "Please specify which mission the space ninja shall undertake.", "Specify Mission", "")),1,MAX_MESSAGE_LEN)
 			if(!mission)
 				if(alert("Error, no mission set. Do you want to exit the setup process?",,"Yes","No")=="Yes")
 					return
-
-
-		var/input = ckey(input("Pick character to spawn as the Space Ninja", "Key", ""))
+	var/input
+	if(alert("Would you like the Ninja to be a random ghost or a preset ckey?",,"Random","Preset")=="Preset")
+		input = ckey(input("Pick character to spawn as the Space Ninja", "Key", ""))
 		if(!input)
 			return
 
-		space_ninja_arrival(input, mission)
+	space_ninja_arrival(input, mission)
 
-		message_admins("\blue [key_name_admin(key)] has spawned [input] as a Space Ninja.\nTheir <b>mission</b> is: [mission]")
-
-	else
-		space_ninja_arrival()
-		message_admins("\blue [key_name_admin(key)] has spawned a random player as a Space Ninja.")
-	log_admin("[key] used Spawn Space Ninja.")
+	message_admins("\blue [key_name_admin(usr)] has spawned [(input) ? input : "a random ghost"] as a Space Ninja.\nTheir <b>mission</b> is [(mission) ? ":" + mission : "randomly generated"]")
 
 	return
 
@@ -556,6 +551,12 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	equip_to_slot_or_del(new /obj/item/weapon/plastique(src), slot_r_store)
 	equip_to_slot_or_del(new /obj/item/weapon/plastique(src), slot_l_store)
 	equip_to_slot_or_del(new /obj/item/weapon/tank/emergency_oxygen(src), slot_s_store)
+
+	//var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(src)
+	//E.imp_in = src /* Commented out because a Ninja's EMP could set off his own implant*/
+	//E.implanted = 1
+
+
 	return 1
 
 //=======//HELPER PROCS//=======//

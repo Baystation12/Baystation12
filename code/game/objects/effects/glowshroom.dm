@@ -44,8 +44,10 @@
 
 	processing_objects += src
 
+
 	SetLuminosity(round(potency/10))
 	lastTick = world.timeofday
+
 
 /obj/effect/glowshroom/Del()
 	processing_objects -= src
@@ -67,7 +69,7 @@
 				if(prob(spreadIntoAdjacentChance))
 					spreadsIntoAdjacent = 1
 
-				for(var/turf/unsimulated/floor/plating/airless/asteroid/earth in view(3,src))
+				for(var/turf/simulated/floor/plating/airless/asteroid/earth in view(3,src))
 					if(spreadsIntoAdjacent || !locate(/obj/effect/glowshroom) in view(1,earth))
 						possibleLocs += earth
 
@@ -99,7 +101,7 @@
 			potency += rand(4,6)
 
 /obj/effect/glowshroom/proc/CalcDir(turf/location = loc)
-	set background = 1
+	//set background = 1
 	var/direction = 16
 
 	for(var/wallDir in cardinal)

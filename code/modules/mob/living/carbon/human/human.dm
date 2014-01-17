@@ -189,7 +189,7 @@
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
 		if (istype(wear_suit, /obj/item/clothing/suit/space/space_ninja)&&wear_suit:s_initialized)
-			stat("Energy Charge", round(wear_suit:cell:charge/100))
+			stat("Energy Charge", (wear_suit:cell:charge))
 
 
 /mob/living/carbon/human/ex_act(severity)
@@ -1119,8 +1119,10 @@
 	var/datum/organ/external/head/h = organs_by_name["head"]
 	h.disfigured = 0
 
-	vessel.add_reagent("blood",560-vessel.total_volume)
-	fixblood()
+	if(species && !(species.flags & NO_BLOOD))
+		vessel.add_reagent("blood",560-vessel.total_volume)
+		fixblood()
+
 	for (var/obj/item/weapon/organ/head/H in world)
 		if(H.brainmob)
 			if(H.brainmob.real_name == src.real_name)
@@ -1154,7 +1156,7 @@
 /*
 /mob/living/carbon/human/verb/simulate()
 	set name = "sim"
-	set background = 1
+	//set background = 1
 
 	var/damage = input("Wound damage","Wound damage") as num
 
@@ -1421,5 +1423,15 @@ mob/living/carbon/human/yank_out_object()
 			src << "<span class='warning'>You ran out of blood to write with!</span>"
 
 		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
-		W.message = message
+
 		W.add_fingerprint(src)
+
+/mob/living/carbon/human/proc/expose_brain()
+	var/datum/organ/external/head/H = get_organ("head")
+	if(H)
+		H.brained=1
+		h_style = "Bald"
+		drop_from_inventory(head)
+		update_hair()
+		update_body()
+

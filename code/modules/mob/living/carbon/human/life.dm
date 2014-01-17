@@ -33,7 +33,7 @@
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
-	set background = 1
+	//set background = 1
 
 	if (monkeyizing)	return
 	if(!loc)			return	// Fixing a null error that occurs when the mob isn't found in the world -- TLE
@@ -914,12 +914,15 @@
 			nutrition += light_amount
 			traumatic_shock -= light_amount
 
-			if(nutrition > 500)
-				nutrition = 500
-			if(light_amount > 5) //if there's enough light, heal
-				adjustBruteLoss(-1)
-				adjustToxLoss(-1)
-				adjustOxyLoss(-1)
+			if(species.flags & IS_PLANT)
+				if(nutrition > 500)
+					nutrition = 500
+				if(light_amount >= 3) //if there's enough light, heal
+					adjustBruteLoss(-(light_amount))
+					adjustToxLoss(-(light_amount))
+					adjustOxyLoss(-(light_amount))
+					//TODO: heal wounds, heal broken limbs.
+
 		if(dna && dna.mutantrace == "shadow")
 			var/light_amount = 0
 			if(isturf(loc))
@@ -1328,7 +1331,7 @@
 						if(2)	healths.icon_state = "health7"
 						else
 							//switch(health - halloss)
-							switch(100 - traumatic_shock)
+							switch(100 - ((species && species.flags & NO_PAIN) ? 0 : traumatic_shock))
 								if(100 to INFINITY)		healths.icon_state = "health0"
 								if(80 to 100)			healths.icon_state = "health1"
 								if(60 to 80)			healths.icon_state = "health2"
@@ -1505,7 +1508,7 @@
 	handle_shock()
 		..()
 		if(status_flags & GODMODE)	return 0	//godmode
-		if(analgesic) return // analgesic avoids all traumatic shock temporarily
+		if(analgesic || (species && species.flags & NO_PAIN)) return // analgesic avoids all traumatic shock temporarily
 
 		if(health < 0)// health 0 makes you immediately collapse
 			shock_stage = max(shock_stage, 61)
@@ -1552,7 +1555,10 @@
 
 
 	proc/handle_pulse()
+
 		if(life_tick % 5) return pulse	//update pulse every 5 life ticks (~1 tick/sec, depending on server load)
+
+		if(species && species.flags & NO_BLOOD) return PULSE_NONE //No blood, no pulse.
 
 		if(stat == DEAD)
 			return PULSE_NONE	//that's it, you're dead, nothing can influence your pulse
@@ -1605,7 +1611,7 @@
 		if(decaytime > 27000)
 			decaylevel = 4
 			makeSkeleton()
-
+			return //No puking over skeletons, they don't smell at all!
 
 		for(var/mob/living/carbon/human/H in range(decaylevel, src))
 			if(prob(5))

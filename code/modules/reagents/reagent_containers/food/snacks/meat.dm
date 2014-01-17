@@ -3,6 +3,7 @@
 	desc = "A slab of meat"
 	icon_state = "meat"
 	health = 180
+	filling_color = "#FF1C1C"
 	New()
 		..()
 		reagents.add_reagent("nutriment", 3)

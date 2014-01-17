@@ -90,6 +90,10 @@ datum/preferences
 	var/job_engsec_med = 0
 	var/job_engsec_low = 0
 
+	var/job_karma_high = 0
+	var/job_karma_med = 0
+	var/job_karma_low = 0
+
 	//Keeps track of preferrence for not getting any wanted jobs
 	var/alternate_option = 0
 
@@ -113,6 +117,9 @@ datum/preferences
 		// OOC Metadata:
 	var/metadata = ""
 	var/slot_name = ""
+
+	// Whether or not to use randomized character slots
+	var/randomslot = 0
 
 /datum/preferences/New(client/C)
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
@@ -246,7 +253,6 @@ datum/preferences
 					dat += "\[...\]<br><br>"
 				else
 					dat += "<br><br>"
-
 				if(gender == MALE)
 					dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
 				else
@@ -293,6 +299,7 @@ datum/preferences
 				dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 				dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
+				dat += "<b>Randomized Character Slot:</b> <a href='?_src_=prefs;preference=randomslot'><b>[randomslot ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "Nearest Creatures" : "All Speech"]</b></a><br>"
 				dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "Nearest Creatures" : "All Emotes"]</b></a><br>"
 
@@ -480,9 +487,11 @@ datum/preferences
 			job_civilian_med |= job_civilian_high
 			job_engsec_med |= job_engsec_high
 			job_medsci_med |= job_medsci_high
+			job_karma_med |= job_karma_high
 			job_civilian_high = 0
 			job_engsec_high = 0
 			job_medsci_high = 0
+			job_karma_high = 0
 
 		if (job.department_flag == CIVILIAN)
 			job_civilian_low &= ~job.flag
@@ -526,6 +535,20 @@ datum/preferences
 					job_medsci_low |= job.flag
 
 			return 1
+		else if (job.department_flag == KARMA)
+			job_karma_low &= ~job.flag
+			job_karma_med &= ~job.flag
+			job_karma_high &= ~job.flag
+
+			switch(level)
+				if (1)
+					job_karma_high |= job.flag
+				if (2)
+					job_karma_med |= job.flag
+				if (3)
+					job_karma_low |= job.flag
+
+			return 1
 
 		return 0
 
@@ -556,7 +579,7 @@ datum/preferences
 		return 1
 
 	proc/ShowDisabilityState(mob/user,flag,label)
-		if(flag==DISABILITY_FLAG_FAT && species!="Human")
+		if(flag==DISABILITY_FLAG_FAT && species!=("Human" || "Tajaran" || "Grey"))
 			return "<li><i>[species] cannot be fat.</i></li>"
 		return "<li><b>[label]:</b> <a href=\"?_src_=prefs;task=input;preference=disabilities;disability=[flag]\">[disabilities & flag ? "Yes" : "No"]</a></li>"
 
@@ -672,6 +695,10 @@ datum/preferences
 		job_engsec_med = 0
 		job_engsec_low = 0
 
+		job_karma_high = 0
+		job_karma_med = 0
+		job_karma_low = 0
+
 
 	proc/GetJobDepartment(var/datum/job/job, var/level)
 		if(!job || !level)	return 0
@@ -700,6 +727,14 @@ datum/preferences
 						return job_engsec_med
 					if(3)
 						return job_engsec_low
+			if(KARMA)
+				switch(level)
+					if(1)
+						return job_karma_high
+					if(2)
+						return job_karma_med
+					if(3)
+						return job_karma_low
 		return 0
 
 	proc/SetJobDepartment(var/datum/job/job, var/level)
@@ -709,14 +744,17 @@ datum/preferences
 				job_civilian_high = 0
 				job_medsci_high = 0
 				job_engsec_high = 0
+				job_karma_high = 0
 				return 1
 			if(2)//Set current highs to med, then reset them
 				job_civilian_med |= job_civilian_high
 				job_medsci_med |= job_medsci_high
 				job_engsec_med |= job_engsec_high
+				job_karma_med |= job_karma_high
 				job_civilian_high = 0
 				job_medsci_high = 0
 				job_engsec_high = 0
+				job_karma_high = 0
 
 		switch(job.department_flag)
 			if(CIVILIAN)
@@ -749,6 +787,16 @@ datum/preferences
 						job_engsec_low &= ~job.flag
 					else
 						job_engsec_low |= job.flag
+			if(KARMA)
+				switch(level)
+					if(2)
+						job_karma_high = job.flag
+						job_karma_med &= ~job.flag
+					if(3)
+						job_karma_med |= job.flag
+						job_karma_low &= ~job.flag
+					else
+						job_karma_low |= job.flag
 		return 1
 
 	proc/process_link(mob/user, list/href_list)
@@ -798,7 +846,7 @@ datum/preferences
 				if("input")
 					var/dflag=text2num(href_list["disability"])
 					if(dflag >= 0)
-						if(!(dflag==DISABILITY_FLAG_FAT && species!="Human"))
+						if(!(dflag==DISABILITY_FLAG_FAT && species!=("Human" || "Tajaran" || "Grey")))
 							disabilities ^= text2num(href_list["disability"]) //MAGIC
 					SetDisabilities(user)
 				else
@@ -1197,6 +1245,9 @@ datum/preferences
 					if("name")
 						be_random_name = !be_random_name
 
+					if("randomslot")
+						randomslot = !randomslot
+
 					if("hear_midis")
 						toggles ^= SOUND_MIDI
 
@@ -1305,7 +1356,7 @@ datum/preferences
 				I.mechanize()
 			else continue
 
-		if(disabilities & DISABILITY_FLAG_FAT && species=="Human")//character.species.flags & CAN_BE_FAT)
+		if(disabilities & DISABILITY_FLAG_FAT && character.species.flags & CAN_BE_FAT)//character.species.flags & CAN_BE_FAT)
 			character.mutations += FAT
 		if(disabilities & DISABILITY_FLAG_NEARSIGHTED)
 			character.disabilities|=NEARSIGHTED

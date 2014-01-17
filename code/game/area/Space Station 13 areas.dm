@@ -239,6 +239,20 @@ proc/process_ghost_teleport_locs()
 	luminosity = 0
 	lighting_use_dynamic = 1
 
+/area/shuttle/gamma/space
+	icon_state = "shuttle"
+	name = "\improper Gamma Shuttle Space"
+	requires_power = 1
+	luminosity = 0
+	lighting_use_dynamic = 1
+
+/area/shuttle/gamma/station
+	icon_state = "shuttle"
+	name = "\improper Gamma Shuttle Station"
+	requires_power = 1
+	luminosity = 0
+	lighting_use_dynamic = 1
+
 /area/shuttle/prison/
 	name = "\improper Prison Shuttle"
 
@@ -510,6 +524,11 @@ proc/process_ghost_teleport_locs()
 /area/wizard_station
 	name = "\improper Wizard's Den"
 	icon_state = "yellow"
+	requires_power = 0
+
+/area/ninja_outpost
+	name = "\improper SpiderClan Outpost"
+	icon_state = "ninjabase"
 	requires_power = 0
 
 /area/vox_station/transit
@@ -1867,7 +1886,7 @@ proc/process_ghost_teleport_locs()
 				Obj << mysound
 
 	proc/process()
-		set background = 1
+		//set background = 1
 
 		var/sound/S = null
 		var/sound_delay = 0
@@ -1949,7 +1968,6 @@ var/list/the_station_areas = list (
 	/area/bridge,
 	/area/crew_quarters,
 	/area/holodeck,
-	/area/mint,
 	/area/library,
 	/area/chapel,
 	/area/lawoffice,
@@ -2011,7 +2029,7 @@ var/list/the_station_areas = list (
 				Obj << mysound
 
 	proc/process()
-		set background = 1
+		//set background = 1
 
 		var/sound/S = null
 		var/sound_delay = 0

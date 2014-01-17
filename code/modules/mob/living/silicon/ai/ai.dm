@@ -18,7 +18,7 @@ var/list/ai_list = list()
 	icon_state = "ai"
 	anchored = 1 // -- TLE
 	density = 1
-	status_flags = CANSTUN|CANPARALYSE
+	status_flags = CANSTUN|CANPARALYSE|CANPUSH
 	var/list/network = list("SS13")
 	var/obj/machinery/camera/current = null
 	var/list/connected_robots = list()
@@ -80,7 +80,7 @@ var/list/ai_list = list()
 		if (istype(L, /datum/ai_laws))
 			laws = L
 	else
-		laws = new base_law_type
+		make_laws()
 
 	verbs += /mob/living/silicon/ai/proc/show_laws_verb
 
@@ -260,6 +260,20 @@ var/list/ai_list = list()
 		status_signal.data["command"] = "shuttle"
 		frequency.post_signal(src, status_signal)
 	return
+
+/mob/living/silicon/ai/verb/toggle_anchor()
+        set category = "AI Commands"
+        set name = "Toggle Floor Bolts"
+        if(!isturf(loc)) // if their location isn't a turf
+                return // stop
+        anchored = !anchored // Toggles the anchor
+
+        src << "[anchored ? "<b>You are now anchored.</b>" : "<b>You are now unanchored.</b>"]"
+        // the message in the [] will change depending whether or not the AI is anchored
+
+/mob/living/silicon/ai/update_canmove()
+	return 0
+
 
 /mob/living/silicon/ai/proc/ai_cancel_call()
 	set category = "AI Commands"

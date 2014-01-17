@@ -11,6 +11,8 @@
 	animation.icon = 'icons/mob/mob.dmi'
 	animation.master = src
 
+	playsound(src.loc, 'sound/effects/gib.ogg', 100, 1, 10)
+
 	for(var/datum/organ/external/E in src.organs)
 		if(istype(E, /datum/organ/external/chest))
 			continue
@@ -89,14 +91,8 @@
 	if(!gibbed)
 		emote("deathgasp") //let the world KNOW WE ARE DEAD
 
-		//For ninjas exploding when they die.
-		if( istype(wear_suit, /obj/item/clothing/suit/space/space_ninja) && wear_suit:s_initialized )
-			src << browse(null, "window=spideros")//Just in case.
-			var/location = loc
-			explosion(location, 0, 0, 3, 4)
-
 		update_canmove()
-		if(client)	blind.layer = 0
+		if(client) blind.layer = 0
 
 	tod = worldtime2text()		//weasellos time of death patch
 	if(mind)	mind.store_memory("Time of death: [tod]", 0)

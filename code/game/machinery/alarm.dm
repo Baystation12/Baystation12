@@ -2,32 +2,6 @@
 //CONTAINS: Air Alarms and Fire Alarms//
 ////////////////////////////////////////
 
-/proc/RandomAAlarmWires()
-	//to make this not randomize the wires, just set index to 1 and increment it in the flag for loop (after doing everything else).
-	var/list/AAlarmwires = list(0, 0, 0, 0, 0)
-	AAlarmIndexToFlag = list(0, 0, 0, 0, 0)
-	AAlarmIndexToWireColor = list(0, 0, 0, 0, 0)
-	AAlarmWireColorToIndex = list(0, 0, 0, 0, 0)
-	var/flagIndex = 1
-	for (var/flag=1, flag<32, flag+=flag)
-		var/valid = 0
-		while (!valid)
-			var/colorIndex = rand(1, 5)
-			if (AAlarmwires[colorIndex]==0)
-				valid = 1
-				AAlarmwires[colorIndex] = flag
-				AAlarmIndexToFlag[flagIndex] = flag
-				AAlarmIndexToWireColor[flagIndex] = colorIndex
-				AAlarmWireColorToIndex[colorIndex] = flagIndex
-		flagIndex+=1
-	return AAlarmwires
-
-#define AALARM_WIRE_IDSCAN		1	//Added wires
-#define AALARM_WIRE_POWER		2
-#define AALARM_WIRE_SYPHON		3
-#define AALARM_WIRE_AI_CONTROL	4
-#define AALARM_WIRE_AALARM		5
-
 #define AALARM_MODE_SCRUBBING	1
 #define AALARM_MODE_REPLACEMENT	2 //like scrubbing, but faster.
 #define AALARM_MODE_PANIC		3 //constantly sucks all air
@@ -82,6 +56,7 @@
 	var/rcon_setting = 2
 	var/rcon_time = 0
 	var/locked = 1
+	var/datum/wires/alarm/wires = null
 	var/wiresexposed = 0 // If it's been screwdrivered open.
 	var/aidisabled = 0
 	var/AAlarmwires = 31
@@ -153,6 +128,7 @@
 
 /obj/machinery/alarm/New(var/loc, var/dir, var/building = 0)
 	..()
+	wires = new(src)
 
 	if(building)
 		if(loc)
@@ -279,6 +255,8 @@
 	return
 
 /obj/machinery/alarm/proc/calculate_local_danger_level()
+	if(wires.IsIndexCut(AALARM_WIRE_AALARM))
+		return 2 // MAXIMUM ALARM (With gravelly voice) - N3X
 	var/turf/simulated/location = loc
 	if(!istype(location))	return//returns if loc is not simulated
 
@@ -542,118 +520,7 @@
 					E:air_locked = null
 					E.update_icon()*/
 
-///////////
-//HACKING//
-///////////
-/obj/machinery/alarm/proc/isWireColorCut(var/wireColor)
-	var/wireFlag = AAlarmWireColorToFlag[wireColor]
-	return ((AAlarmwires & wireFlag) == 0)
 
-/obj/machinery/alarm/proc/isWireCut(var/wireIndex)
-	var/wireFlag = AAlarmIndexToFlag[wireIndex]
-	return ((AAlarmwires & wireFlag) == 0)
-
-/obj/machinery/alarm/proc/allWiresCut()
-	var/i = 1
-	while(i<=5)
-		if(AAlarmwires & AAlarmIndexToFlag[i])
-			return 0
-		i++
-	return 1
-
-/obj/machinery/alarm/proc/cut(var/wireColor)
-	var/wireFlag = AAlarmWireColorToFlag[wireColor]
-	var/wireIndex = AAlarmWireColorToIndex[wireColor]
-	AAlarmwires &= ~wireFlag
-	switch(wireIndex)
-		if(AALARM_WIRE_IDSCAN)
-			locked = 1
-
-		if(AALARM_WIRE_POWER)
-			shock(usr, 50)
-			shorted = 1
-			update_icon()
-
-		if (AALARM_WIRE_AI_CONTROL)
-			if (aidisabled == 0)
-				aidisabled = 1
-
-		if(AALARM_WIRE_SYPHON)
-			mode = AALARM_MODE_PANIC
-			apply_mode()
-
-		if(AALARM_WIRE_AALARM)
-			alarmActivated=1
-			alarm_area.updateDangerLevel()
-			spawn(1)
-				updateUsrDialog()
-			update_icon()
-
-	updateDialog()
-
-	return
-
-/obj/machinery/alarm/proc/mend(var/wireColor)
-	var/wireFlag = AAlarmWireColorToFlag[wireColor]
-	var/wireIndex = AAlarmWireColorToIndex[wireColor] //not used in this function
-	AAlarmwires |= wireFlag
-	switch(wireIndex)
-		if(AALARM_WIRE_IDSCAN)
-
-		if(AALARM_WIRE_POWER)
-			shorted = 0
-			shock(usr, 50)
-			update_icon()
-
-		if(AALARM_WIRE_AI_CONTROL)
-			if (aidisabled == 1)
-				aidisabled = 0
-
-	updateDialog()
-	return
-
-/obj/machinery/alarm/proc/pulse(var/wireColor)
-	//var/wireFlag = AAlarmWireColorToFlag[wireColor] //not used in this function
-	var/wireIndex = AAlarmWireColorToIndex[wireColor]
-	switch(wireIndex)
-		if(AALARM_WIRE_IDSCAN)			//unlocks for 30 seconds, if you have a better way to hack I'm all ears
-			locked = 0
-			spawn(300)
-				locked = 1
-
-		if (AALARM_WIRE_POWER)
-			if(shorted == 0)
-				shorted = 1
-				update_icon()
-
-			spawn(1200)
-				if(shorted == 1)
-					shorted = 0
-					update_icon()
-
-
-		if (AALARM_WIRE_AI_CONTROL)
-			if (aidisabled == 0)
-				aidisabled = 1
-			updateDialog()
-			spawn(10)
-				if (aidisabled == 1)
-					aidisabled = 0
-				updateDialog()
-
-		if(AALARM_WIRE_SYPHON)
-			mode = AALARM_MODE_REPLACEMENT
-			apply_mode()
-
-		if(AALARM_WIRE_AALARM)
-			alarmActivated=0
-			alarm_area.updateDangerLevel()
-			spawn(1)
-				updateUsrDialog()
-			update_icon()
-
-	updateDialog()
-	return
 
 /obj/machinery/alarm/proc/shock(mob/user, prb)
 	if((stat & (NOPOWER)))		// unpowered, no shock
@@ -754,22 +621,26 @@
 	data["air"]=ui_air_status()
 	data["alarmActivated"]=alarmActivated || local_danger_level==2
 	data["sensors"]=TLV
-	data["locked"]=fromAtmosConsole || (!(istype(user, /mob/living/silicon)) && locked)
+
+	// Locked when:
+	//   Not sent from atmos console AND
+	//   Not silicon AND locked.
+	data["locked"]=!fromAtmosConsole && (!(istype(user, /mob/living/silicon)) && locked)
 	data["rcon"]=rcon_setting
 	data["target_temp"] = target_temperature - T0C
 	data["atmos_alarm"] = alarm_area.atmosalm
 	data["modes"] = list(
-		AALARM_MODE_SCRUBBING   = list("name"="Filtering","desc"="Scrubs out contaminants"),\
-		AALARM_MODE_REPLACEMENT = list("name"="Replace Air","desc"="Siphons out air while replacing"),\
-		AALARM_MODE_PANIC       = list("name"="Panic","desc"="Siphons air out of the room"),\
-		AALARM_MODE_CYCLE       = list("name"="Cycle","desc"="Siphons air before replacing"),\
-		AALARM_MODE_FILL        = list("name"="Fill","desc"="Shuts off scrubbers and opens vents"),\
-		AALARM_MODE_OFF         = list("name"="Off","desc"="Shuts off vents and scrubbers"))
+		AALARM_MODE_SCRUBBING   = list("name"="Filtering",   "desc"="Scrubs out contaminants"),\
+		AALARM_MODE_REPLACEMENT = list("name"="Replace Air", "desc"="Siphons out air while replacing"),\
+		AALARM_MODE_PANIC       = list("name"="Panic",       "desc"="Siphons air out of the room"),\
+		AALARM_MODE_CYCLE       = list("name"="Cycle",       "desc"="Siphons air before replacing"),\
+		AALARM_MODE_FILL        = list("name"="Fill",        "desc"="Shuts off scrubbers and opens vents"),\
+		AALARM_MODE_OFF         = list("name"="Off",         "desc"="Shuts off vents and scrubbers"))
 	data["mode"]=mode
 	data["presets"]=list(
-		AALARM_PRESET_HUMAN		= list("name"="Human","desc"="Checks for Oxygen and Nitrogen"),\
-		AALARM_PRESET_VOX 		= list("name"="Vox","desc"="Checks for Nitrogen only"),\
-		AALARM_PRESET_SERVER 	= list("name"="Coldroom","desc"="For server rooms and freezers"))
+		AALARM_PRESET_HUMAN		= list("name"="Human",    "desc"="Checks for Oxygen and Nitrogen"),\
+		AALARM_PRESET_VOX 		= list("name"="Vox",      "desc"="Checks for Nitrogen only"),\
+		AALARM_PRESET_SERVER 	= list("name"="Coldroom", "desc"="For server rooms and freezers"))
 	data["preset"]=preset
 	data["screen"]=screen
 
@@ -844,34 +715,11 @@
 			user << browse(null, "window=air_alarm")
 			return
 
-	if(wiresexposed && (!istype(user, /mob/living/silicon)))
-		var/t1 = text("<html><head><title>[alarm_area.name] Air Alarm Wires</title></head><body><B>Access Panel</B><br>\n")
-		var/list/wirecolors = list(
-			"Orange" = 1,
-			"Dark red" = 2,
-			"White" = 3,
-			"Yellow" = 4,
-			"Black" = 5,
-		)
-		for(var/wiredesc in wirecolors)
-			var/is_uncut = AAlarmwires & AAlarmWireColorToFlag[wirecolors[wiredesc]]
-			t1 += "[wiredesc] wire: "
-			if(!is_uncut)
-				t1 += "<a href='?src=\ref[src];AAlarmwires=[wirecolors[wiredesc]]'>Mend</a>"
 
-			else
-				t1 += "<a href='?src=\ref[src];AAlarmwires=[wirecolors[wiredesc]]'>Cut</a> "
-				t1 += "<a href='?src=\ref[src];pulse=[wirecolors[wiredesc]]'>Pulse</a> "
-
-			t1 += "<br>"
-		t1 += text("<br>\n[(locked ? "The Air Alarm is locked." : "The Air Alarm is unlocked.")]<br>\n[((shorted || (stat & (NOPOWER|BROKEN))) ? "The Air Alarm is offline." : "The Air Alarm is working properly!")]<br>\n[(aidisabled ? "The 'AI control allowed' light is off." : "The 'AI control allowed' light is on.")]")
-		t1 += text("<p><a href='?src=\ref[src];close2=1'>Close</a></p></body></html>")
-		user << browse(t1, "window=AAlarmwires")
-		onclose(user, "AAlarmwires")
+	if(wiresexposed && !istype(user, /mob/living/silicon))
+		wires.Interact(user)
 	if(!shorted)
 		ui_interact(user)
-
-	return
 
 /obj/machinery/alarm/Topic(href, href_list)
 	var/changed=0
@@ -971,44 +819,39 @@
 						selected[3] = selected[4]
 
 				apply_mode()
-				changed=1
+				ui_interact(usr)
+				return 1
 
 	if(href_list["screen"])
-		var/prevscreen=screen
 		screen = text2num(href_list["screen"])
-		changed=(prevscreen!=screen)
-
-	/* Unused
-	if(href_list["atmos_unlock"])
-		switch(href_list["atmos_unlock"])
-			if("0")
-				air_doors_close(1)
-			if("1")
-				air_doors_open(1)
-		changed=1
-	*/
+		ui_interact(usr)
+		return 1
 
 	if(href_list["atmos_alarm"])
 		alarmActivated=1
 		alarm_area.updateDangerLevel()
 		update_icon()
-		changed=1
+		ui_interact(usr)
+		return 1
 
 	if(href_list["atmos_reset"])
 		alarmActivated=0
 		alarm_area.updateDangerLevel()
 		update_icon()
-		changed=1
+		ui_interact(usr)
+		return 1
 
 	if(href_list["mode"])
 		mode = text2num(href_list["mode"])
 		apply_mode()
-		changed=1
+		ui_interact(usr)
+		return 1
 
 	if(href_list["preset"])
 		preset = text2num(href_list["preset"])
 		apply_preset()
-		changed=1
+		ui_interact(usr)
+		return 1
 
 	if(href_list["temperature"])
 		var/list/selected = TLV["temperature"]
@@ -1021,35 +864,8 @@
 			usr << "Temperature must be between [min_temperature]C and [max_temperature]C"
 		else
 			target_temperature = input_temperature + T0C
-		changed=1
-
-	if (href_list["AAlarmwires"])
-		var/t1 = text2num(href_list["AAlarmwires"])
-		if (!( istype(usr.equipped(), /obj/item/weapon/wirecutters) ))
-			usr << "You need wirecutters!"
-			return
-		if (isWireColorCut(t1))
-			mend(t1)
-			changed=1
-		else
-			cut(t1)
-			if (AAlarmwires == 0)
-				usr << "<span class='notice'>You cut last of wires inside [src]</span>"
-				update_icon()
-				buildstage = 1
-			return
-
-	else if (href_list["pulse"])
-		var/t1 = text2num(href_list["pulse"])
-		if (!istype(usr.equipped(), /obj/item/device/multitool))
-			usr << "You need a multitool!"
-			return
-		if (isWireColorCut(t1))
-			usr << "You can't pulse a cut wire."
-			return
-		else
-			pulse(t1)
-			changed=1
+		ui_interact(usr)
+		return 1
 	if(changed)
 		updateUsrDialog()
 
@@ -1082,7 +898,7 @@
 					user << "It does nothing"
 					return
 				else
-					if(allowed(usr) && !isWireCut(AALARM_WIRE_IDSCAN))
+					if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
 						locked = !locked
 						user << "\blue You [ locked ? "lock" : "unlock"] the Air Alarm interface."
 						updateUsrDialog()
@@ -1109,7 +925,7 @@
 
 			else if(istype(W, /obj/item/weapon/crowbar))
 				user << "You start prying out the circuit."
-				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+				playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
 				if(do_after(user,20))
 					user << "You pry out the circuit!"
 					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
@@ -1129,7 +945,7 @@
 				user << "You remove the fire alarm assembly from the wall!"
 				var/obj/item/alarm_frame/frame = new /obj/item/alarm_frame()
 				frame.loc = user.loc
-				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+				playsound(get_turf(src), 'sound/items/Ratchet.ogg', 50, 1)
 				del(src)
 
 	return ..()
@@ -1304,7 +1120,7 @@ FIRE ALARM
 
 				else if(istype(W, /obj/item/weapon/crowbar))
 					user << "You pry out the circuit!"
-					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+					playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
 					spawn(20)
 						var/obj/item/weapon/firealarm_electronics/circuit = new /obj/item/weapon/firealarm_electronics()
 						circuit.loc = user.loc
@@ -1321,7 +1137,7 @@ FIRE ALARM
 					user << "You remove the fire alarm assembly from the wall!"
 					var/obj/item/firealarm_frame/frame = new /obj/item/firealarm_frame()
 					frame.loc = user.loc
-					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+					playsound(get_turf(src), 'sound/items/Ratchet.ogg', 50, 1)
 					del(src)
 		return
 
@@ -1452,7 +1268,7 @@ FIRE ALARM
 		return
 	A.firealert()
 	update_icon()
-	//playsound(src.loc, 'sound/ambience/signal.ogg', 75, 0)
+	//playsound(get_turf(src), 'sound/ambience/signal.ogg', 75, 0)
 	return
 
 /obj/machinery/firealarm/New(loc, dir, building)

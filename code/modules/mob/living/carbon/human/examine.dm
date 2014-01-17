@@ -248,7 +248,7 @@
 	if(!key && brain_op_stage != 4 && stat != DEAD)
 		msg += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely</span>\n"
 	else if(!client && brain_op_stage != 4 && stat != DEAD)
-		msg += "[t_He] [t_has] a vacant, braindead stare...\n"
+		msg += "[t_He] [t_has] suddenly fallen asleep.\n"
 
 	var/list/wound_flavor_text = list()
 	var/list/is_destroyed = list()
@@ -388,6 +388,10 @@
 		msg += "<span class='warning'><b>[src] has blood running from [t_his] shoes!</b></span>\n"
 	if(display_gloves)
 		msg += "<span class='warning'><b>[src] has blood running from under [t_his] gloves!</b></span>\n"
+
+	var/datum/organ/external/head/H = get_organ("head")
+	if(H && H.brained)
+		msg += "<span class='warning'><b>[src]'s skull is crushed and the brain is exposed to the air!</b></span>\n"
 
 	for(var/implant in get_visible_implants(1))
 		msg += "<span class='warning'><b>[src] has \a [implant] sticking out of their flesh!</span>\n"

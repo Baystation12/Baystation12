@@ -86,3 +86,26 @@
 	New()
 		..()
 		new /obj/item/weapon/grenade/flashbang/clusterbang(src)
+
+
+/obj/item/weapon/storage/lockbox/medal
+	name = "medal box"
+	desc = "A locked box used to store medals of honor."
+	icon_state = "medalbox+l"
+	item_state = "syringe_kit"
+	w_class = 3
+	max_w_class = 2
+	storage_slots = 6
+	req_access = list(access_captain)
+	icon_locked = "medalbox+l"
+	icon_closed = "medalbox"
+	icon_broken = "medalbox+b"
+
+	New()
+		..()
+		new /obj/item/clothing/tie/medal/silver/valor(src)
+		new /obj/item/clothing/tie/medal/bronze_heart(src)
+		new /obj/item/clothing/tie/medal/conduct(src)
+		new /obj/item/clothing/tie/medal/conduct(src)
+		new /obj/item/clothing/tie/medal/conduct(src)
+		new /obj/item/clothing/tie/medal/gold/captain(src)

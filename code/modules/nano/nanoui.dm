@@ -19,7 +19,7 @@ nanoui is used to open and update nano browser uis
 	// the title of this ui
 	var/title
 	// /vg/ - Whether to write debug information to nano/debug.html
-	var/writeDebug=TRUE
+	var/writeDebug=FALSE
 	// the key of this ui, this is to allow multiple (different) uis for each src_object
 	var/ui_key
 	// window_id is used as the window name/identifier for browse and onclose
@@ -93,12 +93,9 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/add_common_assets()
-	//add_script("libraries.min.js") // The jQuery library
-	add_script("1-jquery.js")
-	add_script("2-jsviews.js")
-	add_script("3-jquery.timers.js")
+	add_script("libraries.min.js") // The jQuery library
+	add_script("nano_config.js") // The NanoConfig JS, this is used to store configuration values.
 	add_script("nano_update.js") // The NanoUpdate JS, this is used to receive updates and apply them.
-	add_script("nano_config.js") // The NanoUpdate JS, this is used to receive updates and apply them.
 	add_script("nano_base_helpers.js") // The NanoBaseHelpers JS, this is used to set up template helpers which are common to all templates
 	add_stylesheet("shared.css") // this CSS sheet is common to all UIs
 	add_stylesheet("icons.css") // this CSS sheet is common to all UIs
@@ -263,8 +260,12 @@ nanoui is used to open and update nano browser uis
   */
 /datum/nanoui/proc/get_header()
 	var/head_content = ""
+
+	for (var/filename in scripts)
+		head_content += "<script type='text/javascript' src='[filename]'></script> "
+
 	for (var/filename in stylesheets)
-		head_content += "<link rel='stylesheet' type='text/css' href='[filename]'>"
+		head_content += "<link rel='stylesheet' type='text/css' href='[filename]'> "
 
 	var/templatel_data[0]
 	for (var/key in templates)
@@ -284,35 +285,24 @@ nanoui is used to open and update nano browser uis
 <html>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<head>
-		[head_content]
-	</head>
-	<body scroll=auto data-url-parameters='[url_parameters_json]' data-template-data='[template_data_json]' data-initial-data='[initial_data_json]'>
 		<script type='text/javascript'>
 			function receiveUpdateData(jsonString)
 			{
-				// We need both jQuery and NanoUpdate to be able to recieve data
+				// We need both jQuery and NanoUpdate to be able to recieve data				
+				// At the moment any data received before those libraries are loaded will be lost
 				if (typeof NanoUpdate != 'undefined' && typeof jQuery != 'undefined')
 				{
 					NanoUpdate.receiveUpdateData(jsonString);
 				}
-				else
-				{
-					alert('receiveUpdateData error: something is not defined!');
-					if (typeof NanoUpdate == 'undefined')
-					{
-						alert('NanoUpdate not defined!');
-					}
-					if (typeof jQuery == 'undefined')
-					{
-						alert('jQuery not defined!');
-					}
-				}
-				// At the moment any data received before those libraries are loaded will be lost
 			}
 		</script>
+		[head_content]
+	</head>
+	<body scroll=auto data-url-parameters='[url_parameters_json]' data-template-data='[template_data_json]' data-initial-data='[initial_data_json]'>		
 		<div id='uiWrapper'>
 			[title ? "<div id='uiTitleWrapper'><div id='uiStatusIcon' class='icon24 uiStatusGood'></div><div id='uiTitle'>[title]</div><div id='uiTitleFluff'></div></div>" : ""]
 			<div id='uiContent'>
+				<div id='uiNoJavaScript'>Initiating...</div>
 	"}
 
  /**
@@ -321,13 +311,8 @@ nanoui is used to open and update nano browser uis
   * @return string HTML footer content
   */
 /datum/nanoui/proc/get_footer()
-	var/scriptsContent = ""
-
-	for (var/filename in scripts)
-		scriptsContent += "<script type='text/javascript' src='[filename]'></script>"
 
 	return {"
-				[scriptsContent]
 			</div>
 		</div>
 	</body>
@@ -427,6 +412,10 @@ nanoui is used to open and update nano browser uis
   * @return nothing
   */
 /datum/nanoui/proc/process(update = 0)
+	if (!src_object || !user)
+		close()
+		return
+
 	if (status && (update || is_auto_updating))
 		src_object.ui_interact(user, ui_key, src) // Update the UI (update_status() is called whenever a UI is updated)
 	else
