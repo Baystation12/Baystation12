@@ -11,6 +11,12 @@ proc/FloodFill(turf/simulated/start)
 	var/list/open = list(start)
 	//The list of tiles which have been evaulated.
 	var/list/closed = list()
+/////// Z-Level stuff
+	//List of all space tiles bordering the zone
+	var/list/list_space = list()
+	//List of all Z-Levels of the zone where it borders space
+	var/list/z_space = list()
+/////// Z-Level stuff
 
 	//Loop through the turfs in the open list in order to find which adjacent turfs should be added to the zone.
 	while(open.len)
@@ -67,9 +73,74 @@ proc/FloodFill(turf/simulated/start)
 							//If it cannot connect either to the north or west, connect it!
 							closed += O
 
+/////// Z-Level stuff
+			if(istype(O,/turf/space))
+				if(!(O in list_space))
+					list_space += O
+					if(!(O.z in z_space))
+						z_space += O.z
+
+		// handle Z-level connections
+		var/turf/controlerlocation = locate(1, 1, T.z)
+		for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
+			// connect upwards
+			if(controler.up)
+				var/turf/above_me = locate(T.x, T.y, controler.up_target)
+				// add the turf above this
+				if(istype(above_me, /turf/simulated/floor/open) && !(above_me in open) && !(above_me in closed))
+					open += above_me
+
+				if(istype(above_me,/turf/space))
+					if(!(above_me in list_space))
+						list_space += above_me
+						if(!(above_me.z in z_space))
+							z_space += above_me.z
+			// connect downwards
+			if(controler.down && istype(T, /turf/simulated/floor/open))
+				var/turf/below_me = locate(T.x, T.y, controler.down_target)
+				// add the turf below this
+				if(!(below_me in open) && !(below_me in closed))
+					open += below_me
+/////// Z-Level stuff
+
 		//This tile is now evaluated, and can be moved to the list of evaluated tiles.
 		open -= T
 		closed += T
+
+/////// Z-Level stuff
+		// once the zone is done, check if there is space that needs to be changed to open space
+		if(!open.len)
+			var/list/temp = list()
+			while(list_space.len)
+				var/turf/S = pick(list_space)
+				//check if the zone has any space borders below the evaluated space tile
+				//if there is some, we dont need to make open_space since the zone can vent and the zone above can vent
+				//through the evaluated tile
+				//if there is none, the zone can connect upwards to either vent from there or connect with the zone there
+				//also check if the turf below the space is actually part of this zone to prevent the edge tiles from transforming
+				var/turf/controlerloc = locate(1, 1, S.z)
+				for(var/obj/effect/landmark/zcontroler/controler in controlerloc)
+					if(controler.down)
+						var/turf/below = locate(S.x, S.y, controler.down_target)
+						if(!((S.z - 1) in z_space) && below in closed)
+							open += S.ChangeTurf(/turf/simulated/floor/open)
+							list_space -= S
+						else
+							list_space -= S
+							temp += S
+					else
+						list_space -= S
+						temp += S
+				// make sure the turf is removed from the list
+				list_space -= S
+			z_space -= z_space
+			while(temp.len)
+				var/turf/S = pick(temp)
+				if(!(S.z in z_space))
+					z_space += S.z
+				list_space += S
+				temp -= S
+/////// Z-Level stuff
 
 	return closed
 
