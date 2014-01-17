@@ -134,6 +134,7 @@ zone/proc/DebugDisplay(client/client)
 
 
 client/proc/TestZASRebuild()
+	set category = "Debug"
 //	var/turf/turf = get_turf(mob)
 	var/zone/current_zone = mob.loc:zone
 	if(!current_zone)
@@ -155,7 +156,7 @@ client/proc/TestZASRebuild()
 
 		for(var/direction in cardinal)
 			var/turf/simulated/adjacent = get_step(current, direction)
-			if(!current.ZAirPass(adjacent))
+			if(!current.ZCanPass(adjacent))
 				continue
 			if(turfs.Find(adjacent))
 				current_adjacents += adjacent
@@ -211,3 +212,8 @@ client/proc/TestZASRebuild()
 		current.overlays -= overlays
 
 	return final_arrangement
+
+/client/proc/ZASSettings()
+	set category = "Debug"
+
+	vsc.SetDefault(mob)

@@ -11,7 +11,7 @@
 #define DETONATION_HALLUCINATION 600
 
 
-#define WARNING_DELAY 60 //45 seconds between warnings.
+#define WARNING_DELAY 30 		//seconds between warnings.
 
 /obj/machinery/power/supermatter
 	name = "Supermatter"
@@ -20,6 +20,7 @@
 	icon_state = "darkmatter"
 	density = 1
 	anchored = 0
+	luminosity = 4
 
 	var/gasefficency = 0.25
 
@@ -39,8 +40,9 @@
 	var/explosion_power = 8
 
 	var/lastwarning = 0                        // Time in 1/10th of seconds since the last sent warning
-
 	var/power = 0
+
+	var/oxygen = 0				  // Moving this up here for easier debugging.
 
 	//Temporary values so that we can optimize this
 	//How much the bullets damage should be multiplied by when it is added to the internal variables
@@ -102,21 +104,20 @@
 		power = min(power, 1600)
 		return 1
 
-	if (!removed)
-		return 1
-
 	damage_archived = damage
 	damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
 
 	if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
-
+			var/stability = num2text(round((damage / explosion_point) * 100))
+			
 			if(damage > emergency_point)
-				radio.autosay(emergency_alert, "Supermatter Monitor")
+
+				radio.autosay(addtext(emergency_alert, " Stability: ",stability,"%"), "Supermatter Monitor")
 				lastwarning = world.timeofday
 
 			else if(damage >= damage_archived) // The damage is still going up
-				radio.autosay(warning_alert, "Supermatter Monitor")
+				radio.autosay(addtext(warning_alert," Stability: ",stability,"%"), "Supermatter Monitor")
 				lastwarning = world.timeofday - 150
 
 			else                                                 // Phew, we're safe
@@ -135,7 +136,7 @@
 
 	//Ok, 100% oxygen atmosphere = best reaction
 	//Maxes out at 100% oxygen pressure
-	var/oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
+	oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
 
 	var/temp_factor = 100
 
@@ -174,7 +175,7 @@
 
 	env.merge(removed)
 
-	for(var/mob/living/carbon/human/l in view(src, round(power ** 0.25))) // you have to be seeing the core to get hallucinations
+	for(var/mob/living/carbon/human/l in view(src, min(7, round(power ** 0.25)))) // If they can see it without mesons on.  Bad on them.
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / get_dist(l, src) ) ) )
 
@@ -188,6 +189,12 @@
 
 
 /obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/Proj)
+	var/turf/L = loc
+	if(!istype(L))		// We don't run process() when we are in space
+		return 0	// This stops people from being able to really power up the supermatter
+				// Then bring it inside to explode instantly upon landing on a valid turf.
+
+
 	if(Proj.flag != "bullet")
 		power += Proj.damage * config_bullet_energy
 	else

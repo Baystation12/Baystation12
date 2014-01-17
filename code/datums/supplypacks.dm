@@ -204,26 +204,6 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Replacement lights"
 	group = "Engineering"
 
-/datum/supply_packs/costume
-	name = "Standard Costume crate"
-	contains = list(/obj/item/weapon/storage/backpack/clown,
-					/obj/item/clothing/shoes/clown_shoes,
-					/obj/item/clothing/mask/gas/clown_hat,
-					/obj/item/clothing/under/rank/clown,
-					/obj/item/weapon/bikehorn,
-					/obj/item/clothing/under/mime,
-					/obj/item/clothing/shoes/black,
-					/obj/item/clothing/gloves/white,
-					/obj/item/clothing/mask/gas/mime,
-					/obj/item/clothing/head/beret,
-					/obj/item/clothing/suit/suspenders,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing)
-	cost = 10
-	containertype = /obj/structure/closet/crate/secure
-	containername = "Standard Costumes"
-	access = access_theatre
-	group = "Operations"
-
 /datum/supply_packs/wizard
 	name = "Wizard costume"
 	contains = list(/obj/item/weapon/staff,
@@ -901,6 +881,27 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "Pizza crate"
 	group = "Hospitality"
+
+/datum/supply_packs/randomised/costume
+	num_contained = 2
+	contains = list(/obj/item/clothing/suit/pirate,
+					/obj/item/clothing/suit/johnny_coat,
+					/obj/item/clothing/suit/judgerobe,
+					/obj/item/clothing/suit/wcoat,
+					/obj/item/clothing/suit/hastur,
+					/obj/item/clothing/suit/imperium_monk,
+					/obj/item/clothing/suit/ianshirt,
+					/obj/item/clothing/suit/leathercoat,
+					/obj/item/clothing/suit/browncoat,
+					/obj/item/clothing/suit/suspenders,
+					/obj/item/clothing/suit/storage/labcoat/mad,
+					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit)
+	name = "Standard Costume crate"
+	cost = 10
+	containertype = /obj/structure/closet/crate/secure
+	containername = "Standard Costumes"
+	access = access_theatre
+	group = "Operations"
 
 /datum/supply_packs/formal_wear
 	contains = list(/obj/item/clothing/head/bowler,

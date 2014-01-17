@@ -272,7 +272,7 @@
 			I.loc = src
 			src.disk = I
 			user << "You insert [I]."
-			nanomanager.update_uis(src) // update all UIs attached to src()
+			nanomanager.update_uis(src) // update all UIs attached to src
 			return
 	else
 		src.attack_hand(user)
@@ -342,7 +342,7 @@
 		W.loc = src
 		src.disk = W
 		user << "You insert [W]."
-		nanomanager.update_uis(src) // update all UIs attached to src()
+		nanomanager.update_uis(src) // update all UIs attached to src
 /*
 /obj/machinery/computer/scan_consolenew/process() //not really used right now
 	if(stat & (NOPOWER|BROKEN))

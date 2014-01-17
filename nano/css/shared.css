@@ -13,7 +13,7 @@ hr {
 }
 .link, .linkOn, .linkOff, .selected, .disabled {
 	float: left;
-    min-width: 40px;
+    min-width: 15px;
     height: 16px;
 	text-align: center;
     color: #ffffff;
@@ -173,6 +173,14 @@ h4 {
 }
 .dark {
     color: #272727;
+}
+.noticePlaceholder {
+    position: relative;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    padding: 3px 4px 3px 4px;
+    margin: 4px 0 4px 0;
 }
 .notice {
     position: relative;
