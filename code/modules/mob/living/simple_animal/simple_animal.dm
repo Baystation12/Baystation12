@@ -506,6 +506,7 @@
 	if(alone && partner && children < 3)
 		new childtype(loc)
 
+
 // Harvest an animal's delicious byproducts
 /mob/living/simple_animal/proc/harvest()
 	new meat_type (get_turf(src))
@@ -515,3 +516,16 @@
 	gib()
 	return
 
+
+/mob/living/simple_animal/proc/CanAttack(var/atom/the_target)
+	if(see_invisible < the_target.invisibility)
+		return 0
+	if (isliving(the_target))
+		var/mob/living/L = the_target
+		if(L.stat != CONSCIOUS)
+			return 0
+	if (istype(the_target, /obj/mecha))
+		var/obj/mecha/M = the_target
+		if (M.occupant)
+			return 0
+	return 1
