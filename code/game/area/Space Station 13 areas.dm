@@ -924,10 +924,18 @@ var/list/ghostteleportlocs = list()
 	engine_smes
 		name = "\improper Engineering SMES"
 		icon_state = "engine_smes"
-		requires_power = 0//This area only covers the batteries and they deal with their own power
+//		requires_power = 0//This area only covers the batteries and they deal with their own power
+
+	engine_room
+		name = "\improper Engine Room"
+		icon_state = "engine"
+
+	engine_monitoring
+		name = "\improper Engine Monitoring Room"
+		icon_state = "engine_monitoring"
 
 	engineering
-		name = "Engineering"
+		name = "\improper Engineering"
 		icon_state = "engine_smes"
 
 	break_room
