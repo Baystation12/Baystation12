@@ -73,6 +73,9 @@
 			ninjastart += loc
 			del(src)
 
+		if("carpspawn")
+			carplist += loc
+
 	landmarks_list += src
 	return 1
 

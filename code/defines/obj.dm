@@ -25,17 +25,12 @@
 	anchored = 1
 	density = 0
 
-	var/list/teleportpoints = list()
-
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 		return attack_hand(user)
 
 
 	attack_hand(mob/user as mob)
-		for(var/obj/effect/landmark/L in landmarks_list)
-			if(L.name == "carpspawn")
-				teleportpoints.Add(L)
 
 
 		if (user.mind.special_role=="Ninja")
@@ -45,7 +40,7 @@
 					if(user.z != src.z)        return
 
 					user.loc.loc.Exited(user)
-					user.loc = pick(teleportpoints) // In the future, possibly make specific NinjaTele landmarks, and give him an option to teleport to North/South/East/West of SS13 instead of just hijacking a carpspawn.
+					user.loc = pick(carplist) // In the future, possibly make specific NinjaTele landmarks, and give him an option to teleport to North/South/East/West of SS13 instead of just hijacking a carpspawn.
 
 
 					playsound(user.loc, 'sound/effects/phasein.ogg', 25, 1)
