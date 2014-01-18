@@ -922,7 +922,7 @@ var/list/ghostteleportlocs = list()
 
 /area/engine
 	engine_smes
-		name = "\improper Engineering SMES"
+		name = "Engineering SMES"
 		icon_state = "engine_smes"
 //		requires_power = 0//This area only covers the batteries and they deal with their own power
 
@@ -931,7 +931,7 @@ var/list/ghostteleportlocs = list()
 		icon_state = "engine"
 
 	engine_airlock
-		name = "\improper Engine Room Airlocck"
+		name = "\improper Engine Room Airlock"
 		icon_state = "engine"
 
 	engine_monitoring
@@ -939,11 +939,11 @@ var/list/ghostteleportlocs = list()
 		icon_state = "engine_monitoring"
 
 	engineering
-		name = "\improper Engineering"
+		name = "Engineering"
 		icon_state = "engine_smes"
 
 	break_room
-		name = "\improper Engineering Foyer"
+		name = "Engineering Foyer"
 		icon_state = "engine"
 
 	chiefs_office
