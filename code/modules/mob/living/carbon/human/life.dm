@@ -1122,6 +1122,7 @@
 				client.images.Remove(hud)
 
 		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
+		client.screen.Remove(global_hud.meson, global_hud.thermal)
 
 		update_action_buttons()
 
@@ -1356,6 +1357,12 @@
 				var/obj/item/clothing/glasses/welding/O = glasses
 				if(!O.up && tinted_weldhelh)
 					client.screen += global_hud.darkMask
+					
+			if(istype(glasses, /obj/item/clothing/glasses/meson) || istype(glasses, /obj/item/clothing/glasses/night) || istype(glasses, /obj/item/clothing/glasses/gglasses))
+				client.screen += global_hud.meson
+
+			if(istype(glasses, /obj/item/clothing/glasses/thermal) )
+				client.screen += global_hud.thermal
 
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)
