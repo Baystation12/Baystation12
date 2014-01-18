@@ -1,39 +1,51 @@
-/proc/GetColors(hex) //Actually converts hex to rgb
-	hex = uppertext(hex)
-	var/hi1 = text2ascii(hex, 2)
-	var/lo1 = text2ascii(hex, 3)
-	var/hi2 = text2ascii(hex, 4)
-	var/lo2 = text2ascii(hex, 5)
-	var/hi3 = text2ascii(hex, 6)
-	var/lo3 = text2ascii(hex, 7)
-	return list(((hi1>= 65 ? hi1-55 : hi1-48)<<4) | (lo1 >= 65 ? lo1-55 : lo1-48),
-		((hi2 >= 65 ? hi2-55 : hi2-48)<<4) | (lo2 >= 65 ? lo2-55 : lo2-48),
-		((hi3 >= 65 ? hi3-55 : hi3-48)<<4) | (lo3 >= 65 ? lo3-55 : lo3-48))
-
 /proc/mix_color_from_reagents(var/list/reagent_list)
-	if(!reagent_list || !reagent_list.len) return 0
+	if(!reagent_list || !length(reagent_list))
+		return 0
 
-	var/list/rgbcolor = list(0,0,0)
-	var/finalcolor = 0
-	for(var/datum/reagent/re in reagent_list) //TODO: weigh final colour by amount of reagents; make this algorithm use hex
-		if(!finalcolor)
-			rgbcolor = GetColors(re.color)
-			finalcolor = re.color
-		else
-			var/newcolor[3]
-			var/prergbcolor[3]
-			prergbcolor = rgbcolor
-			newcolor = GetColors(re.color)
+	var/contents = length(reagent_list)
+	var/list/weight = list(contents)
+	var/list/color = list(contents)
+	var/i
 
-			rgbcolor[1] = (prergbcolor[1]+newcolor[1])/2
-			rgbcolor[2] = (prergbcolor[2]+newcolor[2])/2
-			rgbcolor[3] = (prergbcolor[3]+newcolor[3])/2
+	//fill the list of weights
+	var/listsum = 0
+	for(i=1; i<contents; i++)
+		var/datum/reagent/re = reagent_list[i]
+		var/reagentweight = re.volume
+		if(istype(re, /datum/reagent/paint))
+			reagentweight *= 10 //Paint colours a mixture ten times as much
+		weight[i] = reagentweight
+		listsum += reagentweight
 
-			finalcolor = rgb(rgbcolor[1], rgbcolor[2], rgbcolor[3])
+	//renormalize
+	for(i=1; i<contents; i++)
+		weight[i] /= listsum
+
+	//fill the list of colours
+	for(i=1; i<contents; i++)
+		var/datum/reagent/re = reagent_list[i]
+		var/hue = re.color
+		if(length(hue) != 7)
+			color[i] = 0
+			return
+		color[i]=hex2num(copytext(color,-6))
+
+	//mix them
+	var/mixedcolor
+	for(i=1; i<contents; i++)
+		mixedcolor += weight[i]*color[i]
+	mixedcolor = round(mixedcolor)
+
+	//until someone writes a formal proof for this algorithm, let's keep this in
+	if(mixedcolor<0x0000 || mixedcolor>0xFFFF)
+		return
+
+	//assemble back into #RRGGBB format
+	var/finalcolor = num2hex(mixedcolor)
+	var/colorlength = length(finalcolor)
+	finalcolor = copytext(finalcolor,-colorlength+1) //We don't want every colour to start with "0"
+	while(length(finalcolor)<6)
+		finalcolor = text("0[]",finalcolor) //Takes care of leading zeroes
+	finalcolor = text("#[]",finalcolor)
 
 	return finalcolor
-
-// This isn't a perfect color mixing system, the more reagents that are inside,
-// the darker it gets until it becomes absolutely pitch black! I dunno, maybe
-// that's pretty realistic? I don't do a whole lot of color-mixing anyway.
-// If you add brighter colors to it it'll eventually get lighter, though.
