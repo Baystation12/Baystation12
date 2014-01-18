@@ -24,6 +24,40 @@
 	return
 
 // the power cable object
+/obj/structure/cable
+	level = 1
+	anchored =1
+	var/datum/powernet/powernet
+	name = "power cable"
+	desc = "A flexible superconducting cable for heavy-duty power transfer"
+	icon = 'icons/obj/power_cond_white.dmi'
+	icon_state = "0-1"
+	var/d1 = 0
+	var/d2 = 1
+	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
+	var/cable_color = COLOR_RED
+	var/obj/structure/powerswitch/power_switch
+
+/obj/structure/cable/yellow
+	cable_color = COLOR_YELLOW
+
+/obj/structure/cable/green
+	cable_color = COLOR_GREEN
+
+/obj/structure/cable/blue
+	cable_color = COLOR_BLUE
+
+/obj/structure/cable/pink
+	cable_color = COLOR_PINK
+
+/obj/structure/cable/orange
+	cable_color = COLOR_ORANGE
+
+/obj/structure/cable/cyan
+	cable_color = COLOR_CYAN
+
+/obj/structure/cable/white
+	cable_color = COLOR_WHITE
 
 /obj/structure/cable/New()
 	..()
