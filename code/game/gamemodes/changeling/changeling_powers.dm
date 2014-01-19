@@ -125,35 +125,38 @@
 	T.dna.real_name = T.real_name //Set this again, just to be sure that it's properly set.
 	changeling.absorbed_dna |= T.dna
 	if(src.nutrition < 400) src.nutrition = min((src.nutrition + T.nutrition), 400)
+
 	changeling.chem_charges += 10
 	changeling.geneticpoints += 2
 
-	if(T.mind && T.mind.changeling)
-		if(T.mind.changeling.absorbed_dna)
-			for(var/dna_data in T.mind.changeling.absorbed_dna)	//steal all their loot
-				if(dna_data in changeling.absorbed_dna)
-					continue
-				changeling.absorbed_dna += dna_data
-				changeling.absorbedcount++
-			T.mind.changeling.absorbed_dna.len = 1
+	if(T.mind)
+		T.mind.show_memory(src, 0) //I can read your mind, kekeke. Output all their notes.
+		if(T.mind.changeling)
+			if(T.mind.changeling.absorbed_dna)
+				for(var/dna_data in T.mind.changeling.absorbed_dna)	//steal all their loot
+					if(dna_data in changeling.absorbed_dna)
+						continue
+					changeling.absorbed_dna += dna_data
+					changeling.absorbedcount++
+				T.mind.changeling.absorbed_dna.len = 1
 
-		if(T.mind.changeling.purchasedpowers)
-			for(var/datum/power/changeling/Tp in T.mind.changeling.purchasedpowers)
-				if(Tp in changeling.purchasedpowers)
-					continue
-				else
-					changeling.purchasedpowers += Tp
-
-					if(!Tp.isVerb)
-						call(Tp.verbpath)()
+			if(T.mind.changeling.purchasedpowers)
+				for(var/datum/power/changeling/Tp in T.mind.changeling.purchasedpowers)
+					if(Tp in changeling.purchasedpowers)
+						continue
 					else
-						src.make_changeling()
+						changeling.purchasedpowers += Tp
 
-		changeling.chem_charges += T.mind.changeling.chem_charges
-		changeling.geneticpoints += T.mind.changeling.geneticpoints
-		T.mind.changeling.chem_charges = 0
-		T.mind.changeling.geneticpoints = 0
-		T.mind.changeling.absorbedcount = 0
+						if(!Tp.isVerb)
+							call(Tp.verbpath)()
+						else
+							src.make_changeling()
+
+			changeling.chem_charges += T.mind.changeling.chem_charges
+			changeling.geneticpoints += T.mind.changeling.geneticpoints
+			T.mind.changeling.chem_charges = 0
+			T.mind.changeling.geneticpoints = 0
+			T.mind.changeling.absorbedcount = 0
 
 	changeling.absorbedcount++
 	changeling.isabsorbing = 0
