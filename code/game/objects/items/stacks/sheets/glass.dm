@@ -235,7 +235,6 @@
  * Glass shards - TODO: Move this into code/game/object/item/weapons
  */
 /obj/item/weapon/shard/Bump()
-
 	spawn( 0 )
 		if (prob(20))
 			src.force = 15
@@ -244,6 +243,25 @@
 		..()
 		return
 	return
+
+/obj/item/weapon/shard
+	name = "shard"
+	desc = "A nasty looking shard of glass."
+	icon = 'icons/obj/shards.dmi'
+	icon_state = "large"
+	w_class = 1.0
+	force = 5.0
+	throwforce = 15.0
+	item_state = "shard-glass"
+	g_amt = 3750
+	attack_verb = list("stabbed", "slashed", "sliced", "cut")
+
+	suicide_act(mob/user)
+		viewers(user) << pick("<span class='suicide'>[user] is slitting \his wrists with the shard of glass! It looks like \he's trying to commit suicide.</span>", \
+							"<span class='suicide'>[user] is slitting \his throat with the shard of glass! It looks like \he's trying to commit suicide.</span>")
+		return (BRUTELOSS)
+
+
 
 /obj/item/weapon/shard/New()
 
