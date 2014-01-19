@@ -267,11 +267,11 @@ macro "hotkeymode"
 		is-disabled = false
 	elem 
 		name = "4"
-		command = "a-intent hurt"
+		command = "a-intent harm"
 		is-disabled = false
 	elem 
 		name = "CTRL+4"
-		command = "a-intent hurt"
+		command = "a-intent harm"
 		is-disabled = false
 	elem 
 		name = "A+REP"
@@ -1136,7 +1136,6 @@ window "chemdispenser_reagents"
 		keep-aspect = false
 		align = center
 		text-wrap = false
-
 
 window "mainwindow"
 	elem "mainwindow"

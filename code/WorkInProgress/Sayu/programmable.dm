@@ -502,7 +502,7 @@
 				H << "The boxing machine refuses to acknowledge you unless you face it head on!"
 				return
 			var/damage = 0
-			if(H.a_intent != "hurt")
+			if(H.a_intent != "harm")
 				damage += rand(0,5)
 			else
 				damage += rand(0,10)

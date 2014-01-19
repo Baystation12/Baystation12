@@ -313,7 +313,7 @@
 			usr.a_intent = "help"
 			usr.hud_used.action_intent.icon_state = "intent_help"
 		if("harm")
-			usr.a_intent = "hurt"
+			usr.a_intent = "harm"
 			usr.hud_used.action_intent.icon_state = "intent_hurt"
 		if("grab")
 			usr.a_intent = "grab"

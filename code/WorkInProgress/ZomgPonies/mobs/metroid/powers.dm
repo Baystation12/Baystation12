@@ -178,7 +178,7 @@
 			var/mob/living/carbon/slime/adult/new_slime = new adulttype(loc)
 			new_slime.nutrition = nutrition
 			new_slime.powerlevel = max(0, powerlevel-1)
-			new_slime.a_intent = "hurt"
+			new_slime.a_intent = "harm"
 			new_slime.key = key
 			new_slime.universal_speak = universal_speak
 			new_slime << "<B>You are now an adult slime.</B>"
@@ -242,7 +242,7 @@
 							babies += M
 
 			var/mob/living/carbon/slime/new_slime = pick_n_take(babies)
-			new_slime.a_intent = "hurt"
+			new_slime.a_intent = "harm"
 			new_slime.universal_speak = universal_speak
 			new_slime.key = key
 
@@ -255,7 +255,7 @@
 						var/mob/dead/observer/picked = pick(candidates)
 						var/mob/living/carbon/slime/S = pick(babies)
 						S.key = picked
-						S.a_intent = "hurt"
+						S.a_intent = "harm"
 						S.universal_speak = universal_speak
 						S << "<B>You are now a slime!</B>"
 

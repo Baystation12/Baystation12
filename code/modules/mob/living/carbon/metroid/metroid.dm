@@ -505,7 +505,7 @@
 				if ((O.client && !( O.blinded )))
 					O.show_message(text("\blue [M] caresses [src] with its scythe like arm."), 1)
 
-		if ("hurt")
+		if ("harm")
 
 			if ((prob(95) && health > 0))
 				attacked += 10

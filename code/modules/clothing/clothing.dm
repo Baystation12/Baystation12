@@ -367,7 +367,7 @@ BLIND     // can't see anything
 		if(istype(usr.get_active_hand(),/obj) && istype(usr.get_inactive_hand(),/obj))
 			usr << "\red You need an empty hand to draw the gun!"
 		else
-			if(usr.a_intent == "hurt")
+			if(usr.a_intent == "harm")
 				usr.visible_message("\red \The [usr] draws \the [H.holstered], ready to shoot!", \
 				"\red You draw \the [H.holstered], ready to shoot!")
 			else

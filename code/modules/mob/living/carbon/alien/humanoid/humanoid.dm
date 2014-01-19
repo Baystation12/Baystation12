@@ -283,7 +283,7 @@
 				if ((O.client && !( O.blinded )))
 					O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
 
-		if ("hurt")
+		if ("harm")
 			var/damage = rand(1, 9)
 			if (prob(90))
 				if (HULK in M.mutations)//HULK SMASH
