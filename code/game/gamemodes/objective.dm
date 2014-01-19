@@ -376,8 +376,6 @@ datum/objective/escape
 			return 1
 		if(istype(check_area, /area/shuttle/escape_pod5/centcom))
 			return 1
-		if(istype(check_area, /area/shuttle/arrival/pre_game))
-			return 1
 		else
 			return 0
 
