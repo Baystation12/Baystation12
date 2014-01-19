@@ -17,6 +17,9 @@ var/const/MAX_ACTIVE_TIME = 400
 	origin_tech = "magnets=3;biotech=5"
 	w_class = 1
 	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKCOVERSEYES | MASKINTERNALS
+	body_parts_covered = HEAD
+	slot_flags = SLOT_MASK
+
 /*
 /obj/item/weapon/holder/facehugger/throw_at(atom/target, range, speed)
 	..()
