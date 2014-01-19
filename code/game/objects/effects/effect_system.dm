@@ -138,7 +138,7 @@ steam.start() -- spawns the effect
 					sleep(5)
 					step(steam,direction)
 				spawn(20)
-					steam.delete()
+					if(steam) steam.delete()
 
 /////////////////////////////////////////////
 //SPARK SYSTEM (like steam system)
@@ -211,7 +211,7 @@ steam.start() -- spawns the effect
 					step(sparks,direction)
 				spawn(20)
 					if(sparks)
-						sparks.delete()
+						if(sparks) sparks.delete()
 					src.total_sparks--
 
 
@@ -511,7 +511,7 @@ steam.start() -- spawns the effect
 					sleep(10)
 					step(smoke,direction)
 				spawn(150+rand(10,30))
-					smoke.delete()
+					if(smoke) smoke.delete()
 					src.total_smoke--
 
 
@@ -734,7 +734,7 @@ steam.start() -- spawns the effect
 						flick("ion_fade", I)
 						I.icon_state = "blank"
 						spawn( 20 )
-							I.delete()
+							if(I) I.delete()
 					spawn(2)
 						if(src.on)
 							src.processing = 1
@@ -779,7 +779,7 @@ steam.start() -- spawns the effect
 					src.oldposition = get_turf(holder)
 					I.dir = src.holder.dir
 					spawn(10)
-						I.delete()
+						if(I) I.delete()
 						src.number--
 					spawn(2)
 						if(src.on)
