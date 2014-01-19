@@ -48,4 +48,6 @@
 		finalcolor = text("0[]",finalcolor) //Takes care of leading zeroes
 	finalcolor = text("#[]",finalcolor)
 
+	world << finalcolor
+
 	return finalcolor
