@@ -72,30 +72,10 @@
 				AttemptGrow()
 
 /obj/item/alien_embryo/proc/AttemptGrow(var/gib_on_success = 1)
-	var/list/candidates = get_alien_candidates()
-	var/picked = null
 
-	// To stop clientless larva, we will check that our host has a client
-	// if we find no ghosts to become the alien. If the host has a client
-	// he will become the alien but if he doesn't then we will set the stage
-	// to 2, so we don't do a process heavy check everytime.
-
-	if(candidates && candidates.len)
-		picked = pick(candidates)
-	else if(affected_mob.client)
-		picked = affected_mob.key
-	else
-		stage = 4 // Let's try again later.
-		return
-
-	if(affected_mob.lying)
-		affected_mob.overlays += image('icons/mob/alien.dmi', loc = affected_mob, icon_state = "burst_lie")
-	else
-		affected_mob.overlays += image('icons/mob/alien.dmi', loc = affected_mob, icon_state = "burst_stand")
+	affected_mob.overlays += image('icons/mob/alien.dmi', loc = affected_mob, icon_state = "burst_stand")
 	spawn(6)
 		var/mob/living/carbon/alien/larva/new_xeno = new(affected_mob.loc)
-		new_xeno.key = picked
-		respawnable_list -= picked
 		new_xeno << sound('sound/voice/hiss5.ogg',0,0,0,100)	//To get the player's attention
 		if(gib_on_success)
 			affected_mob.gib()
