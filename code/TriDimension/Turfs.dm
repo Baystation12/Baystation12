@@ -28,7 +28,7 @@
 						if(A.density)
 							blocked = 1
 							break
-						if(istype(A, /obj/machinery/atmospherics/pipe/up) && istype(AM,/obj/item/pipe))
+						if(istype(A, /obj/machinery/atmospherics/pipe/zpipe/up) && istype(AM,/obj/item/pipe))
 							blocked = 1
 							break
 						if(istype(A, /obj/structure/disposalpipe/up) && istype(AM,/obj/item/pipe))

@@ -89,9 +89,9 @@ Buildable meters
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/cap))
 			src.pipe_type = PIPE_CAP
 ///// Z-Level stuff
-		else if(istype(make_from, /obj/machinery/atmospherics/pipe/up))
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/up))
 			src.pipe_type = PIPE_UP
-		else if(istype(make_from, /obj/machinery/atmospherics/pipe/down))
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/down))
 			src.pipe_type = PIPE_DOWN
 ///// Z-Level stuff
 	else
@@ -617,7 +617,7 @@ Buildable meters
 				C.node.build_network()
 ///// Z-Level stuff
 		if(PIPE_UP)		//volume pump
-			var/obj/machinery/atmospherics/pipe/up/P = new(src.loc)
+			var/obj/machinery/atmospherics/pipe/zpipe/up/P = new(src.loc)
 			P.dir = dir
 			P.initialize_directions = pipe_dir
 			if (pipename)
@@ -633,7 +633,7 @@ Buildable meters
 				P.node2.initialize()
 				P.node2.build_network()
 		if(PIPE_DOWN)		//volume pump
-			var/obj/machinery/atmospherics/pipe/down/P = new(src.loc)
+			var/obj/machinery/atmospherics/pipe/zpipe/down/P = new(src.loc)
 			P.dir = dir
 			P.initialize_directions = pipe_dir
 			if (pipename)
