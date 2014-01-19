@@ -30,6 +30,16 @@
 		return 1
 	return 0
 
+proc/isfacehugger(A)
+	if(istype(A, /mob/living/carbon/alien/facehugger))
+		return 1
+	return 0
+
+proc/isembryo(A)
+	if(istype(A, /mob/living/carbon/alien/embryo))
+		return 1
+	return 0
+
 /proc/isslime(A)
 	if(istype(A, /mob/living/carbon/slime))
 		return 1

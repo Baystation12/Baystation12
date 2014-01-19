@@ -236,6 +236,8 @@
 					else if(isalien(M)) //aliens
 						if(islarva(M))
 							M_job = "Alien larva"
+						else if(isfacehugger(M))
+							M_job = "Alien facehugger"
 						else
 							M_job = "Alien"
 					else

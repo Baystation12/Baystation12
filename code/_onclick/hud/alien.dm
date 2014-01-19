@@ -1,3 +1,6 @@
+/datum/hud/proc/embryo_hud()
+	return
+
 /datum/hud/proc/alien_hud()
 
 	src.adding = list(  )
