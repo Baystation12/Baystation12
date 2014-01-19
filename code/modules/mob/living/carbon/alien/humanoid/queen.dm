@@ -23,7 +23,7 @@
 			break
 
 	real_name = src.name
-	verbs.Add(/mob/living/carbon/alien/humanoid/proc/corrosive_acid,/mob/living/carbon/alien/humanoid/proc/neurotoxin,/mob/living/carbon/alien/humanoid/proc/resin)
+	verbs.Add(/mob/living/carbon/alien/humanoid/proc/corrosive_acid,/mob/living/carbon/alien/humanoid/proc/resin)
 	verbs -= /mob/living/carbon/alien/verb/alien_ventcrawl
 	..()
 
@@ -76,6 +76,7 @@
 	icon = 'icons/mob/alienlarge.dmi'
 	icon_state = "queen_s"
 	pixel_x = -16
+	large = 1
 
 /mob/living/carbon/alien/humanoid/queen/large/update_icons()
 	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again

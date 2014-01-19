@@ -27,7 +27,7 @@
 	var/oxygen_alert = 0
 	var/toxins_alert = 0
 	var/fire_alert = 0
-
+	var/large = 0
 	var/heat_protection = 0.5
 
 /mob/living/carbon/alien/adjustToxLoss(amount)
