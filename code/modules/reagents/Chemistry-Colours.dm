@@ -3,51 +3,65 @@
 		return 0
 
 	var/contents = length(reagent_list)
-	var/list/weight = list(contents)
-	var/list/color = list(contents)
+	var/list/weight = new /list(contents)
+	var/list/redcolor = new /list(contents)
+	var/list/greencolor = new /list(contents)
+	var/list/bluecolor = new /list(contents)
 	var/i
 
 	//fill the list of weights
-	var/listsum = 0
-	for(i=1; i<contents; i++)
+	for(i=1; i<=contents; i++)
 		var/datum/reagent/re = reagent_list[i]
 		var/reagentweight = re.volume
 		if(istype(re, /datum/reagent/paint))
-			reagentweight *= 10 //Paint colours a mixture ten times as much
+			reagentweight *= 20 //Paint colours a mixture twenty times as much
 		weight[i] = reagentweight
-		listsum += reagentweight
 
-	//renormalize
-	for(i=1; i<contents; i++)
-		weight[i] /= listsum
 
-	//fill the list of colours
-	for(i=1; i<contents; i++)
+	//fill the lists of colours
+	for(i=1; i<=contents; i++)
 		var/datum/reagent/re = reagent_list[i]
 		var/hue = re.color
 		if(length(hue) != 7)
-			color[i] = 0
-			return
-		color[i]=hex2num(copytext(color,-6))
+			return 0
+		redcolor[i]=hex2num(copytext(hue,2,4))
+		greencolor[i]=hex2num(copytext(hue,4,6))
+		bluecolor[i]=hex2num(copytext(hue,6,8))
+
+	//mix all the colors
+	var/red = mixOneColor(weight,redcolor)
+	var/green = mixOneColor(weight,greencolor)
+	var/blue = mixOneColor(weight,bluecolor)
+
+	//assemble all the pieces
+	var/finalcolor = "#[red][green][blue]"
+	return finalcolor
+
+/proc/mixOneColor(var/list/weight, var/list/color)
+	if (!weight || !color || length(weight)!=length(color))
+		return 0
+
+	var/contents = length(weight)
+	var/i
+
+	//normalize weights
+	var/listsum = 0
+	for(i=1; i<=contents; i++)
+		listsum += weight[i]
+	for(i=1; i<=contents; i++)
+		weight[i] /= listsum
 
 	//mix them
-	var/mixedcolor
-	for(i=1; i<contents; i++)
+	var/mixedcolor = 0
+	for(i=1; i<=contents; i++)
 		mixedcolor += weight[i]*color[i]
 	mixedcolor = round(mixedcolor)
 
 	//until someone writes a formal proof for this algorithm, let's keep this in
-	if(mixedcolor<0x0000 || mixedcolor>0xFFFF)
-		return
+	if(mixedcolor<0x00 || mixedcolor>0xFF)
+		return 0
 
-	//assemble back into #RRGGBB format
 	var/finalcolor = num2hex(mixedcolor)
-	var/colorlength = length(finalcolor)
-	finalcolor = copytext(finalcolor,-colorlength+1) //We don't want every colour to start with "0"
-	while(length(finalcolor)<6)
+	while(length(finalcolor)<2)
 		finalcolor = text("0[]",finalcolor) //Takes care of leading zeroes
-	finalcolor = text("#[]",finalcolor)
-
-	world << finalcolor
-
 	return finalcolor
