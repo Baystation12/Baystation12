@@ -1517,7 +1517,7 @@ datum/design/ammo_9mm
 	req_tech = list("combat" = 4, "materials" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 3750, "$silver" = 100)
-	build_path = "/obj/item/ammo_magazine/c9mm"
+	build_path = "/obj/item/ammo_box/magazine/msmg9mm"
 
 datum/design/stunshell
 	name = "Stun Shell"

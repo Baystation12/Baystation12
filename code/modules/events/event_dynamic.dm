@@ -73,7 +73,7 @@ var/list/event_last_fired = list()
 		possibleEvents[/datum/event/anomaly_grav] = 5 + 5 * active_with_role["Engineer"] * 5 + active_with_role["Scientist"] * 5
 		possibleEvents[/datum/event/anomaly_pyro] = 5 + 5 * active_with_role["Atmospheric Technician"] * 5 + active_with_role["Scientist"] * 5
 		possibleEvents[/datum/event/anomaly_flux] = 5 + 5 * active_with_role["Engineer"] * 5 + active_with_role["Scientist"] * 5
-		possibleEvents[/datum/event/blob] = 20 * active_with_role["Engineer"]
+//		possibleEvents[/datum/event/blob] = 20 * active_with_role["Engineer"] //No blob for futher fixes
 
 	if(minutes_passed >= 60)
 		possibleEvents[/datum/event/anomaly_vortex] = 5 + 2.5 * active_with_role["Engineer"] * 5 + active_with_role["Scientist"] * 5
