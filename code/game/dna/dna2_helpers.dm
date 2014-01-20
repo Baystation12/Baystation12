@@ -170,4 +170,3 @@
 // Used below, simple injection modifier.
 /proc/probinj(var/pr, var/inj)
 	return prob(pr+inj*pr)
-

@@ -63,9 +63,6 @@
 		M.verbs += /mob/living/carbon/human/proc/morph
 
 
-	OnDrawUnderlays(var/mob/M,var/g,var/fat)
-		return "cold[fat]_s"
-
 /datum/dna/gene/basic/cold_resist
 	name="Cold Resistance"
 	activation_messages=list("Your body is filled with warmth.")

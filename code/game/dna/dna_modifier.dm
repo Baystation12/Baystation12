@@ -122,8 +122,72 @@
 	src.add_fingerprint(usr)
 	return
 
+/obj/machinery/dna_scannernew/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
+	if(O.loc == user) //no you can't pull things out of your ass
+		return
+	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis || user.resting) //are you cuffed, dying, lying, stunned or other
+		return
+	if(O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src)) // is the mob anchored, too far away from you, or are you too far away from the source
+		return
+	if(!ismob(O)) //humans only
+		return
+	if(istype(O, /mob/living/simple_animal) || istype(O, /mob/living/silicon)) //animals and robutts dont fit
+		return
+	if(!ishuman(user) && !isrobot(user)) //No ghosts or mice putting people into the sleeper
+		return
+	if(user.loc==null) // just in case someone manages to get a closet into the blue light dimension, as unlikely as that seems
+		return
+	if(!istype(user.loc, /turf) || !istype(O.loc, /turf)) // are you in a container/closet/pod/etc?
+		return
+	if(occupant)
+		user << "\blue <B>The DNA Scanner is already occupied!</B>"
+		return
+	if(isrobot(user))
+		if(!istype(user:module, /obj/item/weapon/robot_module/medical))
+			user << "<span class='warning'>You do not have the means to do this!</span>"
+			return
+	var/mob/living/L = O
+	if(!istype(L) || L.buckled)
+		return
+	if(L.abiotic())
+		user << "\red <B>Subject cannot have abiotic items on.</B>"
+		return
+	for(var/mob/living/carbon/slime/M in range(1,L))
+		if(M.Victim == L)
+			usr << "[L.name] will not fit into the DNA Scanner because they have a slime latched onto their head."
+			return
+	if(L == user)
+		return
+	visible_message("[user] puts [L.name] into the DNA Scanner.", 3)
+	put_in(L)
+
 /obj/machinery/dna_scannernew/attackby(var/obj/item/weapon/item as obj, var/mob/user as mob)
-	if(istype(item, /obj/item/weapon/reagent_containers/glass))
+	if (istype(item, /obj/item/weapon/screwdriver))
+		if (!opened)
+			src.opened = 1
+			user << "You open the maintenance hatch of [src]."
+			//src.icon_state = "autolathe_t"
+		else
+			src.opened = 0
+			user << "You close the maintenance hatch of [src]."
+			//src.icon_state = "autolathe"
+			return 1
+	else if(istype(item, /obj/item/weapon/crowbar))
+		if (occupant)
+			user << "\red You cannot disassemble this [src], it's occupado."
+			return 1
+		if (opened)
+			playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
+			var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
+			M.state = 2
+			M.icon_state = "box_1"
+			for(var/obj/I in component_parts)
+				if(I.reliability != 100 && crit_fail)
+					I.crit_fail = 1
+				I.loc = src.loc
+			del(src)
+			return
+	else if(istype(item, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			user << "\red A beaker is already loaded into the machine."
 			return
@@ -144,15 +208,18 @@
 	if (G.affecting.abiotic())
 		user << "\blue <B>Subject cannot have abiotic items on.</B>"
 		return
-	var/mob/M = G.affecting
+	put_in(G.affecting)
+	src.add_fingerprint(user)
+	del(G)
+	return
+
+/obj/machinery/dna_scannernew/proc/put_in(var/mob/M)
 	if(M.client)
 		M.client.perspective = EYE_PERSPECTIVE
 		M.client.eye = src
 	M.loc = src
 	src.occupant = M
 	src.icon_state = "scanner_1"
-
-	src.add_fingerprint(user)
 
 	// search for ghosts, if the corpse is empty and the scanner is connected to a cloner
 	if(locate(/obj/machinery/computer/cloning, get_step(src, NORTH)) \
@@ -161,18 +228,10 @@
 		|| locate(/obj/machinery/computer/cloning, get_step(src, WEST)))
 
 		if(!M.client && M.mind)
-			message_admins("No client found, searching for compatible mind")
-			for(var/mob/C in respawnable_list)
-				if(C.mind && C.mind.key == M.mind.key)
-					message_admins("Found mind, asking for respawn")
-					switch(alert(C,"Your corpse has been placed into a cloning scanner. Do you want to be resurrected/cloned? Please not if you select 'No', you will be able to be cloned or borged again this round.","Clone Alert","Yes","No"))
-						if("Yes")
-							M.key = C.key
-							return
-						if("No")
-							return
-
-	del(G)
+			for(var/mob/dead/observer/ghost in player_list)
+				if(ghost.mind == M.mind)
+					ghost << "<b><font color = #330033><font size = 3>Your corpse has been placed into a cloning scanner. Return to your body if you want to be resurrected/cloned!</b> (Verbs -> Ghost -> Re-enter corpse)</font color>"
+					break
 	return
 
 /obj/machinery/dna_scannernew/proc/go_out()
@@ -283,7 +342,7 @@
 			I.loc = src
 			src.disk = I
 			user << "You insert [I]."
-			nanomanager.update_uis(src) // update all UIs attached to src
+			nanomanager.update_uis(src) // update all UIs attached to src()
 			return
 	else
 		src.attack_hand(user)
@@ -355,7 +414,7 @@
 		W.loc = src
 		src.disk = W
 		user << "You insert [W]."
-		nanomanager.update_uis(src) // update all UIs attached to src
+		nanomanager.update_uis(src) // update all UIs attached to src()
 /*
 /obj/machinery/computer/scan_consolenew/process() //not really used right now
 	if(stat & (NOPOWER|BROKEN))
@@ -368,6 +427,7 @@
 	ui_interact(user)
 
 /obj/machinery/computer/scan_consolenew/attack_ai(user as mob)
+	src.add_hiddenprint(user)
 	ui_interact(user)
 
 /obj/machinery/computer/scan_consolenew/attack_hand(user as mob)
@@ -377,7 +437,7 @@
  /**
   * The ui_interact proc is used to open and update Nano UIs
   * If ui_interact is not used then the UI will not update correctly
-  * ui_interact is currently defined for /atom/movable (which is inherited by /obj and /mob)
+  * ui_interact is currently defined for /atom/movable
   *
   * @param user /mob The mob who is interacting with this ui
   * @param ui_key string A string key to use for this ui. Allows for multiple unique uis on one obj/mob (defaut value "main")

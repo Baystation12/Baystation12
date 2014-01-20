@@ -315,14 +315,14 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	return add_zero2(num2hex(value,1), 3)
 
 /datum/dna/proc/UpdateUI()
-	src.unique_enzymes=""
+	src.uni_identity=""
 	for(var/block in UI)
 		uni_identity += EncodeDNABlock(block)
 	//testing("New UI: [uni_identity]")
 	dirtyUI=0
 
 /datum/dna/proc/UpdateSE()
-//	var/oldse=struc_enzymes
+	//var/oldse=struc_enzymes
 	struc_enzymes=""
 	for(var/block in SE)
 		struc_enzymes += EncodeDNABlock(block)

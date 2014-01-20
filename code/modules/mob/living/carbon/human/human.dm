@@ -57,9 +57,8 @@
 	..()
 
 /mob/living/carbon/human/New()
-
 	if(!species)
-		set_species("Human")
+		set_species()
 
 	if(species.language)
 		var/datum/language/L = all_languages[species.language]
@@ -72,6 +71,7 @@
 
 	if(!dna)
 		dna = new /datum/dna(null)
+		dna.species=species.name
 
 	for(var/i=0;i<7;i++) // 2 for medHUDs and 5 for secHUDs
 		hud_list += image('icons/mob/hud.dmi', src, "hudunknown")
@@ -82,9 +82,9 @@
 		dna.real_name = real_name
 
 	prev_gender = gender // Debug for plural genders
-
 	make_organs()
 	make_blood()
+
 
 /mob/living/carbon/human/Bump(atom/movable/AM as mob|obj, yes)
 	if ((!( yes ) || now_pushing))
@@ -1346,17 +1346,27 @@ mob/living/carbon/human/yank_out_object()
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/new_species)
+/mob/living/carbon/human/proc/set_species(var/new_species,var/on_spawn=0)
 
-	if(!new_species)
-		new_species = dna.species
+	if(!dna)
+		if(!new_species)
+			new_species = "Human"
 	else
-		dna.species = new_species
+		if(!new_species)
+			new_species = dna.species
+		else
+			dna.species = new_species
 
 	if(species && (species.name && species.name == new_species))
-		return 1
+		return
+
+	if(species && species.language)
+		remove_language(species.language)
 
 	species = all_species[new_species]
+
+	if(species.language)
+		add_language(species.language)
 
 	see_in_dark = species.darksight
 	if(see_in_dark > 2)
@@ -1364,18 +1374,11 @@ mob/living/carbon/human/yank_out_object()
 	else
 		see_invisible = SEE_INVISIBLE_LIVING
 
-
 	if(species.name=="Slime People")
 		dna.mutantrace = "slime"
 
-	if(species.default_mutations.len>0)
-		var/needs_update=0
-		for(var/mutation in species.default_mutations)
-			if(!(mutation in mutations))
-				mutations.Add(mutation)
-				needs_update=1
-		if(needs_update)
-			check_mutations=1 // Can't check here or shit will happen.  Bad shit.
+	if(species.default_mutations.len>0 || species.default_blocks.len>0)
+		do_deferred_species_setup=1
 
 	spawn(0)
 		update_icons()
