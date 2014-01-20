@@ -28,7 +28,6 @@
 /obj/structure/cable/New()
 	..()
 
-
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 
 	var/dash = findtext(icon_state, "-")
@@ -36,6 +35,7 @@
 	d1 = text2num( copytext( icon_state, 1, dash ) )
 
 	d2 = text2num( copytext( icon_state, dash+1 ) )
+
 
 	var/turf/T = src.loc			// hide if turf is not intact
 
@@ -78,6 +78,12 @@
 
 	if(istype(W, /obj/item/weapon/wirecutters))
 
+///// Z-Level Stuff
+		if(src.d1 == 12 || src.d2 == 12)
+			user << "\red You must cut this cable from above."
+			return
+///// Z-Level Stuff
+
 //		if(power_switch)
 //			user << "\red This piece of cable is tied to a power switch. Flip the switch to remove it."
 //			return
@@ -92,6 +98,17 @@
 
 		for(var/mob/O in viewers(src, null))
 			O.show_message("\red [user] cuts the cable.", 1)
+
+///// Z-Level Stuff
+		if(src.d1 == 11 || src.d2 == 11)
+			var/turf/controlerlocation = locate(1, 1, z)
+			for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
+				if(controler.down)
+					var/turf/below = locate(src.x, src.y, controler.down_target)
+					for(var/obj/structure/cable/c in below)
+						if(c.d1 == 12 || c.d2 == 12)
+							c.Del()
+///// Z-Level Stuff
 
 		del(src)
 
@@ -287,33 +304,75 @@
 		else
 			dirn = get_dir(F, user)
 
-		for(var/obj/structure/cable/LC in F)
-			if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
-				user << "There's already a cable at that position."
-				return
+///// Z-Level Stuff
+		// check if the target is open space
+		if(istype(F, /turf/simulated/floor/open))
+			for(var/obj/structure/cable/LC in F)
+				if((LC.d1 == dirn && LC.d2 == 11 ) || ( LC.d2 == dirn && LC.d1 == 11))
+					user << "There's already a cable at that position."
+					return
 
-		var/obj/structure/cable/C = new(F)
+			var/turf/simulated/floor/open/temp = F
+			var/obj/structure/cable/C = new(F)
+			var/obj/structure/cable/D = new(temp.floorbelow)
 
-		C.cableColor(item_color)
+			C.cableColor("red")
 
-		C.d1 = 0
-		C.d2 = dirn
-		C.add_fingerprint(user)
-		C.updateicon()
+			C.d1 = 11
+			C.d2 = dirn
+			C.add_fingerprint(user)
+			C.updateicon()
 
-		C.powernet = new()
-		powernets += C.powernet
-		C.powernet.cables += C
+			C.powernet = new()
+			powernets += C.powernet
+			C.powernet.cables += C
 
-		C.mergeConnectedNetworks(C.d2)
-		C.mergeConnectedNetworksOnTurf()
+			C.mergeConnectedNetworks(C.d2)
+			C.mergeConnectedNetworksOnTurf()
+
+			D.cableColor("red")
+
+			D.d1 = 12
+			D.d2 = 0
+			D.add_fingerprint(user)
+			D.updateicon()
+
+			D.powernet = C.powernet
+			D.powernet.cables += D
+
+			D.mergeConnectedNetworksOnTurf()
+
+		// do the normal stuff
+		else
+///// Z-Level Stuff
+
+			for(var/obj/structure/cable/LC in F)
+				if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
+					user << "There's already a cable at that position."
+					return
+
+			var/obj/structure/cable/C = new(F)
+
+			C.cableColor(item_color)
+
+			C.d1 = 0
+			C.d2 = dirn
+			C.add_fingerprint(user)
+			C.updateicon()
+
+			C.powernet = new()
+			powernets += C.powernet
+			C.powernet.cables += C
+
+			C.mergeConnectedNetworks(C.d2)
+			C.mergeConnectedNetworksOnTurf()
 
 
-		use(1)
-		if (C.shock(user, 50))
-			if (prob(50)) //fail
-				new/obj/item/weapon/cable_coil(C.loc, 1, C.cable_color)
-				del(C)
+			use(1)
+			if (C.shock(user, 50))
+				if (prob(50)) //fail
+					new/obj/item/weapon/cable_coil(C.loc, 1, C.cable_color)
+					del(C)
 		//src.laying = 1
 		//last = C
 
@@ -327,6 +386,12 @@
 		return
 
 	var/turf/T = C.loc
+
+///// Z-Level Stuff
+	if(C.d1 == 12 || C.d2 == 12)
+		turf_place(T,user)
+		return
+///// Z-Level Stuff
 
 	if(!isturf(T) || T.intact)		// sanity checks, also stop use interacting with T-scanner revealed cable
 		return

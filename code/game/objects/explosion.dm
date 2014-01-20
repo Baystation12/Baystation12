@@ -6,27 +6,21 @@
 	if(dx>=dy)	return dx + (0.5*dy)	//The longest side add half the shortest side approximates the hypotenuse
 	else		return dy + (0.5*dx)
 
-
-proc/trange(var/Dist=0,var/turf/Center=null)//alternative to range (ONLY processes turfs and thus less intensive)
-	if(Center==null) return
-
-	//var/x1=((Center.x-Dist)<1 ? 1 : Center.x-Dist)
-	//var/y1=((Center.y-Dist)<1 ? 1 : Center.y-Dist)
-	//var/x2=((Center.x+Dist)>world.maxx ? world.maxx : Center.x+Dist)
-	//var/y2=((Center.y+Dist)>world.maxy ? world.maxy : Center.y+Dist)
-
-	var/turf/x1y1 = locate(((Center.x-Dist)<1 ? 1 : Center.x-Dist),((Center.y-Dist)<1 ? 1 : Center.y-Dist),Center.z)
-	var/turf/x2y2 = locate(((Center.x+Dist)>world.maxx ? world.maxx : Center.x+Dist),((Center.y+Dist)>world.maxy ? world.maxy : Center.y+Dist),Center.z)
-	return block(x1y1,x2y2)
-
-
-proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1)
+///// Z-Level Stuff
+proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = 1)
+///// Z-Level Stuff
 	src = null	//so we don't abort once src is deleted
 	spawn(0)
 		if(config.use_recursive_explosions)
 			var/power = devastation_range * 2 + heavy_impact_range + light_impact_range //The ranges add up, ie light 14 includes both heavy 7 and devestation 3. So this calculation means devestation counts for 4, heavy for 2 and light for 1 power, giving us a cap of 27 power.
 			explosion_rec(epicenter, power)
 			return
+
+///// Z-Level Stuff
+		if(z_transfer && (devastation_range > 0 || heavy_impact_range > 0))
+			//transfer the explosion in both directions
+			explosion_z_transfer(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range)
+///// Z-Level Stuff
 
 		var/start = world.timeofday
 		epicenter = get_turf(epicenter)
@@ -61,7 +55,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 		var/y0 = epicenter.y
 		var/z0 = epicenter.z
 
-		for(var/turf/T in trange(max(devastation_range, heavy_impact_range, light_impact_range), epicenter))
+		for(var/turf/T in range(epicenter, max(devastation_range, heavy_impact_range, light_impact_range)))
 			var/dist = cheap_pythag(T.x - x0,T.y - y0)
 
 			if(dist < devastation_range)		dist = 1
@@ -99,3 +93,20 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 proc/secondaryexplosion(turf/epicenter, range)
 	for(var/turf/tile in range(range, epicenter))
 		tile.ex_act(2)
+
+///// Z-Level Stuff
+proc/explosion_z_transfer(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, up = 1, down = 1)
+	var/turf/controlerlocation = locate(1, 1, epicenter.z)
+	for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
+		if(controler.down)
+			//start the child explosion, no admin log and no additional transfers
+			explosion(locate(epicenter.x, epicenter.y, controler.down_target), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 0)
+			if(devastation_range - 2 > 0 || heavy_impact_range - 2 > 0) //only transfer further if the explosion is still big enough
+				explosion(locate(epicenter.x, epicenter.y, controler.down_target), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 1)
+
+		if(controler.up)
+			//start the child explosion, no admin log and no additional transfers
+			explosion(locate(epicenter.x, epicenter.y, controler.up_target), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 0)
+			if(devastation_range - 2 > 0 || heavy_impact_range - 2 > 0) //only transfer further if the explosion is still big enough
+				explosion(locate(epicenter.x, epicenter.y, controler.up_target), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 1, 0)
+///// Z-Level Stuff
