@@ -150,6 +150,8 @@
 //				D.reagents.reaction(get_turf(D))
 				for(var/atom/atm in get_turf(D))
 					if(!D) return
+					if(istype(atm, /mob/living/carbon/alien))
+						return
 					if(istype(atm, /mob/living/carbon))
 						var/mob/living/carbon/C = atm
 						C.Weaken(5)

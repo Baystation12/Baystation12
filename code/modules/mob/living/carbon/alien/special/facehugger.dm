@@ -142,7 +142,7 @@ var/const/MAX_ACTIVE_TIME = 400
 		var/mob/living/carbon/human/H = L
 		if(H.head && H.head.flags & HEADCOVERSMOUTH)
 			H.visible_message("\red \b [src] smashes against [H]'s [H.head]!")
-			stat = 2
+			death()
 			return
 
 	if(iscarbon(M))
@@ -181,7 +181,7 @@ var/const/MAX_ACTIVE_TIME = 400
 
 /mob/living/carbon/alien/facehugger/proc/Impregnate(mob/living/target as mob)
 	if(!target || !target.wear_mask || (!src in target.wear_mask.contents)  || target.stat == DEAD) //was taken off or something
-		world << "Something went wrong with the impregnation!"
+		message_admins("Something went wrong with the impregnation!")
 		return
 
 	if(!sterile)
@@ -190,7 +190,7 @@ var/const/MAX_ACTIVE_TIME = 400
 		target.status_flags |= XENO_HOST
 
 		loc = get_turf(target.loc)
-		stat = 2
+		death()
 		icon_state = "[initial(icon_state)]_impregnated"
 
 		target.visible_message("\red \b [src] falls limp after violating [target]'s face!")

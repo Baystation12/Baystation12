@@ -33,14 +33,13 @@
 	..()
 	if(!affected_mob)	return
 	if(loc != affected_mob)
-		world << "Problem in contents"
 		affected_mob.status_flags &= ~(XENO_HOST)
 		spawn(0)
 			RemoveInfectionImages(affected_mob)
 			affected_mob = null
 		return
 
-	if(stage < 5 && prob(30))
+	if(stage < 5 && prob(3))
 		stage++
 		spawn(0)
 			RefreshInfectionImage(affected_mob)
