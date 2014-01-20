@@ -71,7 +71,7 @@
 
 /obj/item/weapon/book/manual/supermatter_engine
 	name = "Supermatter Engine User's Guide"
-	icon_state = "bookParticleAccelerator"   //TEMP FIXME
+	icon_state = "bookSupermatter"
 	author = "Waleed Asad"
 	title = "Supermatter Engine User's Guide"
 
