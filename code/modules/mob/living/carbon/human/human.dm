@@ -1388,7 +1388,6 @@ mob/living/carbon/human/yank_out_object()
 	else
 		return 0
 
-
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
 	set name = "Write in blood"
@@ -1447,4 +1446,3 @@ mob/living/carbon/human/yank_out_object()
 		drop_from_inventory(head)
 		update_hair()
 		update_body()
-

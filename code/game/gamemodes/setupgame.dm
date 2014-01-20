@@ -14,6 +14,7 @@
 	if (prob(75))
 		DIFFMUT = rand(0,20)
 
+
 //Thanks to nexis for the fancy code
 // BITCH I AIN'T DONE YET
 
@@ -23,6 +24,7 @@
 		numsToAssign += i
 
 	testing("Assigning DNA blocks:")
+	//message_admins("Assigning DNA blocks:")
 
 	// Standard muts
 	BLINDBLOCK         = getAssignedBlock("BLIND",         numsToAssign)
@@ -105,7 +107,6 @@
 					species.default_blocks.Add(block)
 			if(species.default_blocks.len)
 				all_species[name]=species
-
 
 /proc/setupfactions()
 

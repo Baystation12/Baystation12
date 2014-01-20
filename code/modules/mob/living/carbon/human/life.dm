@@ -29,7 +29,24 @@
 	var/prev_gender = null // Debug for plural genders
 	var/temperature_alert = 0
 	var/in_stasis = 0
+	var/do_deferred_species_setup=0
 
+// Doing this during species init breaks shit.
+/mob/living/carbon/human/proc/DeferredSpeciesSetup()
+	var/mut_update=0
+	if(species.default_mutations.len>0)
+		for(var/mutation in species.default_mutations)
+			if(!(mutation in mutations))
+				mutations.Add(mutation)
+				mut_update=1
+	if(species.default_blocks.len>0)
+		for(var/block in species.default_blocks)
+			if(!dna.GetSEState(block))
+				dna.SetSEState(block,1)
+				mut_update=1
+	if(mut_update)
+		domutcheck(src,null,MUTCHK_FORCED)
+		update_mutations()
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
@@ -40,14 +57,10 @@
 
 	..()
 
-	/*
-	//This code is here to try to determine what causes the gender switch to plural error. Once the error is tracked down and fixed, this code should be deleted
-	//Also delete var/prev_gender once this is removed.
-	if(prev_gender != gender)
-		prev_gender = gender
-		if(gender in list(PLURAL, NEUTER))
-			message_admins("[src] ([ckey]) gender has been changed to plural or neuter. Please record what has happened recently to the person and then notify coders. (<A HREF='?_src_=holder;adminmoreinfo=\ref[src]'>?</A>)  (<A HREF='?_src_=vars;Vars=\ref[src]'>VV</A>) (<A HREF='?priv_msg=\ref[src]'>PM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>)")
-	*/
+	if(do_deferred_species_setup)
+		DeferredSpeciesSetup()
+		do_deferred_species_setup=0
+
 	//Apparently, the person who wrote this code designed it so that
 	//blinded get reset each cycle and then get activated later in the
 	//code. Very ugly. I dont care. Moving this stuff here so its easy
