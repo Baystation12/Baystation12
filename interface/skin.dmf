@@ -1459,6 +1459,34 @@ window "rpane"
 		macro = ""
 		menu = ""
 		on-close = ""
+	elem "donate"
+		type = BUTTON
+		pos = 480,-2
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		font-family = ""
+		font-size = 0
+		font-style = ""
+		text-color = #000000
+		background-color = #8080ff
+		is-visible = true
+		is-disabled = false
+		is-transparent = false
+		is-default = false
+		border = none
+		drop-zone = false
+		right-click = false
+		saved-params = "is-checked"
+		on-size = ""
+		text = "Donate"
+		image = ""
+		command = "Donate"
+		is-flat = false
+		stretch = false
+		is-checked = false
+		group = ""
+		button-type = pushbutton
 	elem "karma"
 		type = BUTTON
 		pos = 410,0
@@ -1655,7 +1683,7 @@ window "rpane"
 		button-type = pushbox
 	elem "browseb"
 		type = BUTTON
-		pos = 507,0
+		pos = 561,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
