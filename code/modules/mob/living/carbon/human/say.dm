@@ -1,6 +1,55 @@
 /mob/living/carbon/human/say(var/message)
 	if(miming)
-		return
+		if(length(message) >= 2)
+			if(mind && mind.changeling)
+				if(copytext(message, 1, 2) != "*" && department_radio_keys[copytext(message, 1, 3)] != "changeling")
+					return
+				else
+					return ..(message)
+			if(stat == DEAD)
+				return ..(message)
+
+		if(length(message) >= 1) //In case people forget the '*help' command, this will slow them the message and prevent people from saying one letter at a time
+			if (copytext(message, 1, 2) != "*")
+				return
+
+	if(dna)
+		if(length(message) >= 2)
+			if (copytext(message, 1, 2) != "*" && department_radio_keys[copytext(message, 1, 3)] != "changeling")
+				for(var/datum/dna/gene/gene in dna_genes)
+					if(!gene.block)
+						continue
+					if(gene.is_active(src))
+						message = gene.OnSay(src,message)
+	/*
+		if(dna.mutantrace == "lizard")
+			if(copytext(message, 1, 2) != "*")
+				message = replacetext(message, "s", stutter("ss"))
+
+		if(dna.mutantrace == "slime" && prob(5))
+			if(copytext(message, 1, 2) != "*")
+				if(copytext(message, 1, 2) == ";")
+					message = ";"
+				else
+					message = ""
+				message += "SKR"
+				var/imax = rand(5,20)
+				for(var/i = 0,i<imax,i++)
+					message += "E"*/
+
+	if(stat != DEAD)
+		for(var/datum/disease/pierrot_throat/D in viruses)
+			var/list/temp_message = text2list(message, " ") //List each word in the message
+			var/list/pick_list = list()
+			for(var/i = 1, i <= temp_message.len, i++) //Create a second list for excluding words down the line
+				pick_list += i
+			for(var/i=1, ((i <= D.stage) && (i <= temp_message.len)), i++) //Loop for each stage of the disease or until we run out of words
+				if(prob(3 * D.stage)) //Stage 1: 3% Stage 2: 6% Stage 3: 9% Stage 4: 12%
+					var/H = pick(pick_list)
+					if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
+					temp_message[H] = "HONK"
+					pick_list -= H //Make sure that you dont HONK the same word twice
+				message = list2text(temp_message, " ")
 
 	if(wear_mask)
 		if(istype(wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja) && wear_mask:voice == "Unknown")

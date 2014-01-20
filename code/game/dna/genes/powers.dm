@@ -63,6 +63,9 @@
 		M.verbs += /mob/living/carbon/human/proc/morph
 
 
+	OnDrawUnderlays(var/mob/M,var/g,var/fat)
+		return "cold[fat]_s"
+
 /datum/dna/gene/basic/cold_resist
 	name="Cold Resistance"
 	activation_messages=list("Your body is filled with warmth.")
@@ -72,11 +75,13 @@
 		block=FIREBLOCK
 
 	can_activate(var/mob/M,var/flags)
-
 		// Probability check
 		var/_prob=30
 		if(probinj(_prob,(flags&MUTCHK_FORCED)))
 			return 1
+
+	OnDrawUnderlays(var/mob/M,var/g,var/fat)
+		return "fire[fat]_s"
 
 /datum/dna/gene/basic/noprints
 	name="No Prints"
@@ -126,6 +131,22 @@
 			return 0
 		return ..(M,flags)
 
+	OnDrawUnderlays(var/mob/M,var/g,var/fat)
+		if(fat)
+			return "hulk_[fat]_s"
+		else
+			return "hulk_[g]_s"
+		return 0
+
+	OnMobLife(var/mob/living/carbon/human/M)
+		if(!istype(M)) return
+		if(M.health <= 25)
+			M.mutations.Remove(HULK)
+			M.update_mutations()		//update our mutation overlays
+			M << "\red You suddenly feel very weak."
+			M.Weaken(3)
+			M.emote("collapse")
+
 /datum/dna/gene/basic/xray
 	name="X-Ray Vision"
 	activation_messages=list("The walls suddenly disappear.")
@@ -142,3 +163,6 @@
 
 	New()
 		block=TELEBLOCK
+
+	OnDrawUnderlays(var/mob/M,var/g,var/fat)
+		return "telekinesishead[fat]_s"
