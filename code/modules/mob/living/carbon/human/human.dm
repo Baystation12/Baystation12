@@ -48,7 +48,7 @@
 
 /mob/living/carbon/human/grey/New()
 	set_species("Grey")
-	mutations.Add(mRemotetalk)
+	mutations.Add(M_REMOTE_TALK)
 	verbs += /mob/living/carbon/human/proc/remotesay
 	..()
 
@@ -525,9 +525,9 @@
 		if(gloves)
 			var/obj/item/clothing/gloves/G = gloves
 			siemens_coeff = G.siemens_coefficient
-			//If they have shock immunity mutation
-		if(mShock in src.mutations)
-			siemens_coeff = 0
+	//If they have shock immunity mutation
+	if(M_NO_SHOCK in src.mutations)
+		siemens_coeff = 0
 	return ..(shock_damage,source,siemens_coeff)
 
 
@@ -953,7 +953,7 @@
 		remoteview_target = null
 		return
 
-	if(!(mMorph in mutations))
+	if(!(M_MORPH in mutations))
 		src.verbs -= /mob/living/carbon/human/proc/morph
 		return
 
@@ -1032,7 +1032,7 @@
 		remoteview_target = null
 		return
 
-	if(!(mRemotetalk in src.mutations))
+	if(!(M_REMOTE_TALK in src.mutations))
 		src.verbs -= /mob/living/carbon/human/proc/remotesay
 		return
 	var/list/creatures = list()
@@ -1043,7 +1043,7 @@
 		return
 
 	var/say = input ("What do you wish to say")
-	if(mRemotetalk in target.mutations)
+	if(M_REMOTE_TALK in target.mutations)
 		target.show_message("\blue You hear [src.real_name]'s voice: [say]")
 	else
 		target.show_message("\blue You hear a voice that seems to echo around the room: [say]")
@@ -1060,7 +1060,7 @@
 		reset_view(0)
 		return
 
-	if(!(mRemote in src.mutations))
+	if(!(M_REMOTE_VIEW in src.mutations))
 		remoteview_target = null
 		reset_view(0)
 		src.verbs -= /mob/living/carbon/human/proc/remoteobserve
