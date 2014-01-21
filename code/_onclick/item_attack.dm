@@ -51,7 +51,7 @@
 	/////////////////////////
 
 	var/power = force
-	if(HULK in user.mutations)
+	if(M_HULK in user.mutations)
 		power *= 2
 
 	if(!istype(M, /mob/living/carbon/human))
