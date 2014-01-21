@@ -83,7 +83,8 @@
 		src << "<span class='warning'>[T] is not compatible with our biology.</span>"
 		return
 
-	if((NOCLONE || SKELETON) in T.mutations)
+
+	if((M_NOCLONE || SKELETON) in T.mutations)
 		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
 		return
 
@@ -727,7 +728,7 @@ var/list/datum/dna/hivemind_bank = list()
 
 	var/mob/living/carbon/T = changeling_sting(40,/mob/proc/changeling_transformation_sting)
 	if(!T)	return 0
-	if((HUSK in T.mutations) || (!ishuman(T) && !ismonkey(T)))
+	if((M_HUSK in T.mutations) || (!ishuman(T) && !ismonkey(T)))
 		src << "<span class='warning'>Our sting appears ineffective against its DNA.</span>"
 		return 0
 	T.visible_message("<span class='warning'>[T] transforms!</span>")
