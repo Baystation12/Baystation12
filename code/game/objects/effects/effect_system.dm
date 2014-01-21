@@ -514,6 +514,33 @@ steam.start() -- spawns the effect
 					if(smoke) smoke.delete()
 					src.total_smoke--
 
+// Goon compat.
+/datum/effect/effect/system/chem_smoke_spread/fart
+
+	set_up(var/mob/M, n = 5, c = 0, loca, direct)
+		if(n > 20)
+			n = 20
+		number = n
+		cardinals = c
+
+		chemholder.reagents.add_reagent("mercury", 50)
+
+		if(istype(loca, /turf/))
+			location = loca
+		else
+			location = get_turf(loca)
+		if(direct)
+			direction = direct
+
+		var/contained = "\[[chemholder.reagents.get_reagent_ids()]\]"
+		var/area/A = get_area(location)
+
+		var/where = "[A.name] | [location.x], [location.y]"
+		var/whereLink=formatJumpTo(location,where)
+
+		var/more = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</a>)"
+		message_admins("[M][more] produced a toxic fart in ([whereLink])[contained].", 0, 1)
+		log_game("[M][more] produced a toxic fart in ([where])[contained].")
 
 
 /////////////////////////////////////////////
@@ -694,7 +721,6 @@ steam.start() -- spawns the effect
 				spawn(100)
 					del(smoke)
 					src.total_smoke--
-
 
 
 /////////////////////////////////////////////
