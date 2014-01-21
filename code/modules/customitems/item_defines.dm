@@ -34,7 +34,7 @@
 
 /obj/item/clothing/under/fluff/BlackSchoolGirl // Black schoolgirl uniform
 	name = "Black Schoolgirl Uniform"
-	desc = "A mint condition Japanese style inspired black schoolgirl uniform."
+	desc = "A Japanese style school uniform for girls"
 	icon= 'icons/obj/clothing/uniforms.dmi'
 	icon_state = "schoolgirl_black"
 	item_state = "schoolgirl_black"
