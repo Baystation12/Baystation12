@@ -31,7 +31,7 @@
 			scan()
 
 /obj/item/device/ano_scanner/proc/scan()
-	set background = 1
+	//set background = 1
 
 	last_scan_time = world.time
 	nearest_artifact_distance = -1

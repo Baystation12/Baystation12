@@ -50,7 +50,7 @@
 		return
 
 	proc/ProcessOrgans()
-		set background = 1
+		//set background = 1
 
 		var/list/organs = GetAllContents()
 		for(var/obj/effect/organ/organ in organs)
@@ -399,7 +399,7 @@
 		return
 
 	proc/ProcessOrgans()
-		set background = 1
+		//set background = 1
 
 		var/list/organs = GetAllContents()
 		for(var/obj/effect/organ/organ in organs)

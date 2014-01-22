@@ -10,7 +10,7 @@
 
 /mob/living/carbon/amorph/Life()
 	set invisibility = 0
-	set background = 1
+	//set background = 1
 
 	if (src.monkeyizing)
 		return
