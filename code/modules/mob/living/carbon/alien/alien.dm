@@ -27,7 +27,7 @@
 	var/oxygen_alert = 0
 	var/toxins_alert = 0
 	var/fire_alert = 0
-
+	var/large = 0
 	var/heat_protection = 0.5
 
 /mob/living/carbon/alien/adjustToxLoss(amount)
@@ -194,7 +194,7 @@ Des: Gives the client of the alien an image on each infected mob.
 	if (client)
 		for (var/mob/living/C in mob_list)
 			if(C.status_flags & XENO_HOST)
-				var/obj/item/alien_embryo/A = locate() in C
+				var/mob/living/carbon/alien/embryo/A = locate() in C
 				var/I = image('icons/mob/alien.dmi', loc = C, icon_state = "infected[A.stage]")
 				client.images += I
 	return

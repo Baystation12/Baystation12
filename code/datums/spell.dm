@@ -19,6 +19,7 @@ var/list/spells = typesof(/obj/effect/proc_holder/spell) //needed for the badmin
 	var/holder_var_type = "bruteloss" //only used if charge_type equals to "holder_var"
 	var/holder_var_amount = 20 //same. The amount adjusted with the mob's var when the spell is used
 
+	var/ghost = 0 // Skip life check.
 	var/clothes_req = 1 //see if it requires clothes
 	var/stat_allowed = 0 //see if it requires being conscious/alive, need to set to 1 for ghostpells
 	var/invocation = "HURP DURP" //what is uttered when the wizard casts the spell
@@ -63,31 +64,28 @@ var/list/spells = typesof(/obj/effect/proc_holder/spell) //needed for the badmin
 					user << "<span class='notice'>[name] has no charges left.</span>"
 					return 0
 
-	if(user.stat && !stat_allowed)
-		user << "<span class='notice'>Not when you're incapacitated.</span>"
-		return 0
-
-	if(ishuman(user))
-
-		var/mob/living/carbon/human/H = user
-
-		if(istype(H.wear_mask, /obj/item/clothing/mask/muzzle))
-			user << "<span class='notice'>You can't get the words out!</span>"
+	if(!ghost)
+		if(usr.stat && !stat_allowed)
+			usr << "Not when you're incapacitated."
 			return 0
 
-		if(clothes_req) //clothes check
-			if(!istype(H.wear_suit, /obj/item/clothing/suit/wizrobe) && !istype(H.wear_suit, /obj/item/clothing/suit/space/rig/wizard))
-				H << "<span class='notice'>I don't feel strong enough without my robe.</span>"
+		if(ishuman(usr) || ismonkey(usr))
+			if(istype(usr.wear_mask, /obj/item/clothing/mask/muzzle))
+				usr << "Mmmf mrrfff!"
 				return 0
-			if(!istype(H.shoes, /obj/item/clothing/shoes/sandal))
-				H << "<span class='notice'>I don't feel strong enough without my sandals.</span>"
-				return 0
-			if(!istype(H.head, /obj/item/clothing/head/wizard) && !istype(H.head, /obj/item/clothing/head/helmet/space/rig/wizard))
-				H << "<span class='notice'>I don't feel strong enough without my hat.</span>"
-				return 0
-	else
-		if(clothes_req)
-			user << "<span class='notice'>This spell can only be casted by humans!</span>"
+	var/obj/effect/proc_holder/spell/noclothes/spell = locate() in user.spell_list
+	if(clothes_req && !(spell && istype(spell)))//clothes check
+		if(!istype(usr, /mob/living/carbon/human))
+			usr << "You aren't a human, Why are you trying to cast a human spell, silly non-human? Casting human spells is for humans."
+			return 0
+		if(!istype(usr:wear_suit, /obj/item/clothing/suit/wizrobe) && !istype(user:wear_suit, /obj/item/clothing/suit/space/rig/wizard))
+			usr << "I don't feel strong enough without my robe."
+			return 0
+		if(!istype(usr:shoes, /obj/item/clothing/shoes/sandal))
+			usr << "I don't feel strong enough without my sandals."
+			return 0
+		if(!istype(usr:head, /obj/item/clothing/head/wizard) && !istype(usr:head, /obj/item/clothing/head/helmet/space/rig/wizard))
+			usr << "<span class='notice'>I don't feel strong enough without my hat.</span>"
 			return 0
 
 	if(!skipcharge)

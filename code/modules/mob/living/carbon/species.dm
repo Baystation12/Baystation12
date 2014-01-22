@@ -35,13 +35,15 @@
 	var/brute_resist    // Physical damage reduction.
 	var/burn_resist     // Burn damage reduction.
 
+	// For grays
+	var/max_hurt_damage = 5 // Max melee damage dealt + 5 if hulk
+	var/list/default_mutations = list()
+	var/list/default_blocks = list() // Don't touch.
+	var/list/default_block_names = list() // Use this instead, using the names from setupgame.dm
+
 	var/flags = 0       // Various specific features.
 	var/bloodflags=0
 	var/bodyflags=0
-
-	// For grays
-	var/max_hurt_damage = 5 // Max melee damage dealt + 5 if hulk
-	var/default_mutations = list()
 
 	var/list/abilities = list()  // For species-derived or admin-given powers
 
@@ -178,16 +180,22 @@
 	bodyflags = FEET_NOSLIP
 	abilities = list(/mob/living/carbon/human/slime/proc/slimepeople_ventcrawl)
 
-/datum/species/grey
+
+/datum/species/grey // /vg/
 	name = "Grey"
 	icobase = 'icons/mob/human_races/r_grey.dmi'
 	deform = 'icons/mob/human_races/r_def_grey.dmi'
-	language = "Galactic Standard"
+	language = "Grey"
 	attack_verb = "punch"
-	path = /mob/living/carbon/human/grey
 	darksight = 5 // BOOSTED from 2
 	eyes = "grey_eyes_s"
-	max_hurt_damage = 3 // From 5 (for humans)
-//	default_mutations=list(mRemotetalk) // TK is also another candidate, but TK is overpowered as fuck.
 
-	flags = IS_WHITELISTED | HAS_LIPS | CAN_BE_FAT
+	max_hurt_damage = 3 // From 5 (for humans)
+
+	primitive = /mob/living/carbon/monkey // TODO
+
+	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
+
+	// Both must be set or it's only a 45% chance of manifesting.
+	default_mutations=list(mRemotetalk)
+	default_block_names=list("REMOTETALK")

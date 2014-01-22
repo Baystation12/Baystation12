@@ -24,6 +24,7 @@
 	anchored = 1
 	use_power = 0
 	req_access = list(access_engine_equip)
+	var/spooky=0
 	var/area/area
 	var/areastring = null
 	var/obj/item/weapon/cell/cell
@@ -165,7 +166,7 @@
 			icon_state = "[basestate]-nocover"
 	else if (stat & BROKEN)
 		icon_state = "apc-b"
-	else if(emagged || malfai)
+	else if(emagged || malfai || spooky)
 		icon_state = "apcemag"
 	else if(wiresexposed)
 		icon_state = "apcewires"
@@ -187,8 +188,15 @@
 			update_icon()
 			updating_icon = 0
 
-//attack with an item - open/close cover, insert cell, or (un)lock interface
+/obj/machinery/power/apc/proc/spookify()
+	if(spooky) return // Fuck you we're already spooky
+	spooky=1
+	update_icon()
+	spawn(10)
+		spooky=0
+		update_icon()
 
+//attack with an item - open/close cover, insert cell, or (un)lock interface
 /obj/machinery/power/apc/attackby(obj/item/W, mob/user)
 
 	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
@@ -299,11 +307,11 @@
 					update_icon()
 				else
 					user << "You fail to [ locked ? "unlock" : "lock"] the APC interface."
-	else if (istype(W, /obj/item/weapon/cable_coil) && !terminal && opened && has_electronics!=2)
+	else if (istype(W, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics!=2)
 		if (src.loc:intact)
 			user << "\red You must remove the floor plating in front of the APC first."
 			return
-		var/obj/item/weapon/cable_coil/C = W
+		var/obj/item/stack/cable_coil/C = W
 		if(C.amount < 10)
 			user << "\red You need more wires."
 			return
@@ -335,7 +343,7 @@
 				s.set_up(5, 1, src)
 				s.start()
 				return
-			new /obj/item/weapon/cable_coil(loc,10)
+			new /obj/item/stack/cable_coil(loc,10)
 			user.visible_message(\
 				"\red [user.name] cut the cables and dismantled the power terminal.",\
 				"You cut the cables and dismantle the power terminal.")
@@ -836,7 +844,6 @@
 	if(!area.requires_power)
 		return
 
-
 	/*
 	if (equipment > 1) // off=0, off auto=1, on=2, on auto=3
 		use_power(src.equip_consumption, EQUIP)
@@ -985,7 +992,6 @@
 		area.poweralert(0, src)
 
 	// update icon & area power if anything changed
-
 	if(last_lt != lighting || last_eq != equipment || last_en != environ)
 		queue_icon_update()
 		update()

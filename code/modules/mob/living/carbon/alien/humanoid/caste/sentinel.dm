@@ -15,7 +15,7 @@
 	if(name == "alien sentinel")
 		name = text("alien sentinel ([rand(1, 1000)])")
 	real_name = name
-	verbs.Add(/mob/living/carbon/alien/humanoid/proc/corrosive_acid,/mob/living/carbon/alien/humanoid/proc/neurotoxin)
+	verbs.Add(/mob/living/carbon/alien/humanoid/proc/corrosive_acid)
 	..()
 
 /mob/living/carbon/alien/humanoid/sentinel
@@ -60,12 +60,15 @@
 	return
 
 /mob/living/carbon/alien/humanoid/sentinel/large
+	name = "alien praetorian"
 	icon = 'icons/mob/alienlarge.dmi'
 	icon_state = "prat_s"
 	pixel_x = -16
 	maxHealth = 200
 	health = 200
 	move_delay_add = 1
+	large = 1
+
 
 /mob/living/carbon/alien/humanoid/sentinel/large/update_icons()
 	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again

@@ -28,6 +28,10 @@
 	amt_weakened = 5
 	amt_dam_fire = 10
 
+/obj/effect/proc_holder/spell/noclothes
+	name = "No Clothes"
+	desc = "This is a placeholder for knowing if you dont need clothes for any spell"
+
 /obj/effect/proc_holder/spell/targeted/genetic/mutate
 	name = "Mutate"
 	desc = "This spell causes you to turn into a hulk and gain laser vision for a short while."

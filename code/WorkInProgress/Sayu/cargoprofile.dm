@@ -135,7 +135,7 @@
 	name = "Building Supplies"
 	id = "supplies"
 	blacklist = null
-	whitelist = list(/obj/item/weapon/cable_coil,/obj/item/stack/rods,
+	whitelist = list(/obj/item/stack/cable_coil,/obj/item/stack/rods,
 					/obj/item/stack/sheet/metal,/obj/item/stack/sheet/plasteel,
 					/obj/item/stack/sheet/glass,/obj/item/stack/sheet/rglass,
 					/obj/item/stack/tile,/obj/item/weapon/light,
@@ -375,7 +375,7 @@
 	universal = 1
 
 	blacklist = null
-	whitelist = list(/obj/item/stack,/obj/item/weapon/cable_coil)
+	whitelist = list(/obj/item/stack,/obj/item/stack/cable_coil)
 
 	dedicated_path = /obj/machinery/programmable/stacker
 
@@ -399,12 +399,12 @@
 			I.loc = master
 			master.types[I.type] = src
 			return I.w_class
-		if(istype(W,/obj/item/weapon/cable_coil))
-			var/obj/item/weapon/cable_coil/I = W
+		if(istype(W,/obj/item/stack/cable_coil))
+			var/obj/item/stack/cable_coil/I = W
 			if(!I.amount) // todo: am I making a bad assumption here?
 				del I
 				return
-			for(var/obj/item/weapon/cable_coil/O in master.contents)
+			for(var/obj/item/stack/cable_coil/O in master.contents)
 				if(O.type == I.type && O.amount < MAXCOIL)
 					if(I.amount + O.amount <= MAXCOIL)
 						O.amount += I.amount
@@ -427,8 +427,8 @@
 			if(src.enabled && (I.amount < I.max_amount))
 				return // Still needs to be stacked
 			..(W,D)
-		if(istype(W,/obj/item/weapon/cable_coil))
-			var/obj/item/weapon/cable_coil/I = W
+		if(istype(W,/obj/item/stack/cable_coil))
+			var/obj/item/stack/cable_coil/I = W
 			if(src.enabled && (I.amount < MAXCOIL))
 				return // Still needs to be stacked
 			..(W,D)
@@ -439,7 +439,7 @@
 	name = "Stack Items"
 	id = "ustacker"
 	blacklist = null
-	whitelist = list(/obj/item/stack,/obj/item/weapon/cable_coil)
+	whitelist = list(/obj/item/stack,/obj/item/stack/cable_coil)
 
 	dedicated_path = /obj/machinery/programmable/unary/stacker
 
@@ -456,11 +456,11 @@
 					return ..(W,S,remaining)
 			return 0
 
-		if(istype(W,/obj/item/weapon/cable_coil))
-			var/obj/item/weapon/cable_coil/I = W
+		if(istype(W,/obj/item/stack/cable_coil))
+			var/obj/item/stack/cable_coil/I = W
 			if(I.amount >= MAXCOIL)
 				return 0
-			for(var/obj/item/weapon/cable_coil/other in S.contents)
+			for(var/obj/item/stack/cable_coil/other in S.contents)
 				if(other != I && other.amount < MAXCOIL)
 					return ..(W,S,remaining)
 			return 0
@@ -481,9 +481,9 @@
 			//end for
 			I.loc = D
 			return
-		if(istype(W,/obj/item/weapon/cable_coil))
-			var/obj/item/weapon/cable_coil/I = W
-			for(var/obj/item/weapon/cable_coil/O in D.contents)
+		if(istype(W,/obj/item/stack/cable_coil))
+			var/obj/item/stack/cable_coil/I = W
+			for(var/obj/item/stack/cable_coil/O in D.contents)
 				if(O.type == I.type && O.amount < MAXCOIL)
 					if(I.amount + O.amount <= MAXCOIL) // Why did they make it a #define.
 						O.amount += I.amount

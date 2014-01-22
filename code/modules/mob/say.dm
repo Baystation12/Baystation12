@@ -37,6 +37,11 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
+	if(!src.client.holder)
+		if(!dsay_allowed)
+			src << "\red Deadchat is globally muted"
+			return
+
 	if(client && !(client.prefs.toggles & CHAT_DEAD))
 		usr << "\red You have deadchat muted."
 		return

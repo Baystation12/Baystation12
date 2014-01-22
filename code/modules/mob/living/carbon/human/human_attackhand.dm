@@ -92,7 +92,7 @@
 			add_logs(src, M, "grabbed", addition="passively")
 			return 1
 
-		if("hurt")
+		if("harm")
 
 			//Vampire code
 			if(M.zone_sel && M.zone_sel.selecting == "head" && src != M)

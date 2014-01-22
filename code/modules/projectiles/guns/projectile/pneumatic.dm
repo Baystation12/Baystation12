@@ -90,7 +90,7 @@
 
 /obj/item/weapon/storage/pneumatic/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
 	if (length(contents) > 0)
-		if(user.a_intent == "hurt")
+		if(user.a_intent == "harm")
 			user.visible_message("\red <b> \The [user] fires \the [src] point blank at [M]!</b>")
 			Fire(M,user)
 			return

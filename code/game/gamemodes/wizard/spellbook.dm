@@ -38,6 +38,9 @@
 		dat += "<B>Memorize which spell:</B><BR>"
 		dat += "<I>The number after the spell name is the cooldown time.</I><BR>"
 
+		dat += "<A href='byond://?src=\ref[src];spell_choice=noclothes'>Remove Clothes Requirement</A>"
+		dat += "<b>Warning: this takes away 2 spell choices.</b><BR>"
+
 		dat += "<A href='byond://?src=\ref[src];spell_choice=magicmissile'>Magic Missile</A> (15)<BR>"
 		dat += "<I>This spell fires several, slow moving, magic projectiles at nearby targets. If they hit a target, it is paralyzed and takes minor damage.</I><BR>"
 
@@ -187,6 +190,11 @@
 			*/
 				if(!already_knows)
 					switch(href_list["spell_choice"])
+						if("noclothes")
+							feedback_add_details("wizard_spell_learned","NC")
+							H.spell_list += new /obj/effect/proc_holder/spell/noclothes
+							temp = "This teaches you how to use your spells without your magical garb, truely you are the wizardest."
+							uses--
 						if("magicmissile")
 							feedback_add_details("wizard_spell_learned","MM") //please do not change the abbreviation to keep data processing consistent. Add a unique id to any new spells
 							H.spell_list += new /obj/effect/proc_holder/spell/targeted/projectile/magic_missile(H)

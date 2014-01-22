@@ -163,7 +163,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/embryo = 0
-		for(var/obj/item/alien_embryo/A in target)
+		for(var/mob/living/carbon/alien/embryo/A in target)
 			embryo = 1
 			break
 		return ..() && embryo && target.op_stage.ribcage == 2
@@ -179,7 +179,7 @@
 		user.visible_message("\red [user] rips the larva out of [target]'s ribcage!",
 							 "You rip the larva out of [target]'s ribcage!")
 
-		for(var/obj/item/alien_embryo/A in target)
+		for(var/mob/living/carbon/alien/embryo/A in target)
 			A.loc = A.loc.loc
 
 

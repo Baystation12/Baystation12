@@ -230,7 +230,7 @@
 
 //world << "[href] ; [href_list[href]]"
 
-	if (!istype(src.loc, /turf) || istype(usr, /mob/living/silicon/ai))
+	if (!istype(src.loc, /turf) && !istype(usr, /mob/living/silicon/))
 		return 0 // Do not update ui
 
 	if( href_list["cmode"] )

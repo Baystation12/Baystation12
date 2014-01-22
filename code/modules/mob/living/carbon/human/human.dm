@@ -57,9 +57,8 @@
 	..()
 
 /mob/living/carbon/human/New()
-
 	if(!species)
-		set_species("Human")
+		set_species()
 
 	if(species.language)
 		var/datum/language/L = all_languages[species.language]
@@ -72,6 +71,7 @@
 
 	if(!dna)
 		dna = new /datum/dna(null)
+		dna.species=species.name
 
 	for(var/i=0;i<7;i++) // 2 for medHUDs and 5 for secHUDs
 		hud_list += image('icons/mob/hud.dmi', src, "hudunknown")
@@ -82,9 +82,9 @@
 		dna.real_name = real_name
 
 	prev_gender = gender // Debug for plural genders
-
 	make_organs()
 	make_blood()
+
 
 /mob/living/carbon/human/Bump(atom/movable/AM as mob|obj, yes)
 	if ((!( yes ) || now_pushing))
@@ -1083,6 +1083,8 @@
 		var/turf/temp_turf = get_turf(h)
 		if((temp_turf.z != 1 && temp_turf.z != 5) || h.stat!=CONSCIOUS) //Not on mining or the station. Or dead
 			continue
+		if(M_PSY_RESIST in h.mutations)
+			continue
 		creatures += h
 
 	var/mob/target = input ("Who do you want to project your mind to ?") as mob in creatures
@@ -1346,15 +1348,27 @@ mob/living/carbon/human/yank_out_object()
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/new_species)
+/mob/living/carbon/human/proc/set_species(var/new_species,var/on_spawn=0)
 
-	if(!new_species)
-		new_species = "Human"
+	if(!dna)
+		if(!new_species)
+			new_species = "Human"
+	else
+		if(!new_species)
+			new_species = dna.species
+		else
+			dna.species = new_species
 
 	if(species && (species.name && species.name == new_species))
-		return 1
+		return
+
+	if(species && species.language)
+		remove_language(species.language)
 
 	species = all_species[new_species]
+
+	if(species.language)
+		add_language(species.language)
 
 	see_in_dark = species.darksight
 	if(see_in_dark > 2)
@@ -1365,7 +1379,8 @@ mob/living/carbon/human/yank_out_object()
 	if(species.name=="Slime People")
 		dna.mutantrace = "slime"
 
-	mutations+=species.default_mutations
+	if(species.default_mutations.len>0 || species.default_blocks.len>0)
+		do_deferred_species_setup=1
 
 	spawn(0)
 		update_icons()
@@ -1374,7 +1389,6 @@ mob/living/carbon/human/yank_out_object()
 		return 1
 	else
 		return 0
-
 
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
@@ -1434,4 +1448,3 @@ mob/living/carbon/human/yank_out_object()
 		drop_from_inventory(head)
 		update_hair()
 		update_body()
-

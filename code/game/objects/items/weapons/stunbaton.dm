@@ -17,7 +17,7 @@
 	origin_tech = "combat=2"
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is putting the live [src.name] in \his mouth! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='suicide'>[user] is putting the live [name] in \his mouth! It looks like \he's trying to commit suicide.</span>"
 		return (FIRELOSS)
 
 /obj/item/weapon/melee/baton/loaded/New()
@@ -115,7 +115,7 @@
 		return
 	var/mob/living/L = M
 
-	if(user.a_intent == "hurt")
+	if(user.a_intent == "harm")
 		..()
 		playsound(loc, "swing_hit", 50, 1, -1)
 

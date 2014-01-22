@@ -381,40 +381,38 @@
 		add_fingerprint(usr)
 		return
 
-	verb/move_inside()
-		set name = "Enter Sleeper"
-		set category = "Object"
-		set src in oview(1)
+/obj/machinery/sleeper/verb/move_inside()
+	set name = "Enter Sleeper"
+	set category = "Object"
+	set src in oview(1)
+	if(usr.stat != 0 || !(ishuman(usr) || ismonkey(usr)))
+		return
 
-		if(usr.stat != 0 || !(ishuman(usr) || ismonkey(usr)))
+	if(src.occupant)
+		usr << "\blue <B>The sleeper is already occupied!</B>"
+		return
+	if(usr.restrained() || usr.stat || usr.weakened || usr.stunned || usr.paralysis || usr.resting) //are you cuffed, dying, lying, stunned or other
+		return
+	for(var/mob/living/carbon/slime/M in range(1,usr))
+		if(M.Victim == usr)
+			usr << "You're too busy getting your life sucked out of you."
 			return
-
+	visible_message("[usr] starts climbing into the sleeper.", 3)
+	if(do_after(usr, 20))
 		if(src.occupant)
 			usr << "\blue <B>The sleeper is already occupied!</B>"
 			return
+		usr.stop_pulling()
+		usr.client.perspective = EYE_PERSPECTIVE
+		usr.client.eye = src
+		usr.loc = src
+		src.occupant = usr
+		src.icon_state = "sleeper_1"
+		if(orient == "RIGHT")
+			icon_state = "sleeper_1-r"
 
-		for(var/mob/living/carbon/slime/M in range(1,usr))
-			if(M.Victim == usr)
-				usr << "You're too busy getting your life sucked out of you."
-				return
-		visible_message("[usr] starts climbing into the sleeper.", 3)
-		if(do_after(usr, 20))
-			if(src.occupant)
-				usr << "\blue <B>The sleeper is already occupied!</B>"
-				return
-			usr.stop_pulling()
-			usr.client.perspective = EYE_PERSPECTIVE
-			usr.client.eye = src
-			usr.loc = src
-			src.occupant = usr
-			src.icon_state = "sleeper_1"
-			if(orient == "RIGHT")
-				icon_state = "sleeper_1-r"
-
-			usr << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
-
-			for(var/obj/O in src)
-				del(O)
-			src.add_fingerprint(usr)
-			return
+		for(var/obj/O in src)
+			del(O)
+		src.add_fingerprint(usr)
 		return
+	return

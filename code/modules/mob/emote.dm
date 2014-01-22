@@ -57,6 +57,12 @@
 		src << "\red You have deadchat muted."
 		return
 
+	if(!src.client.holder)
+		if(!dsay_allowed)
+			src << "\red Deadchat is globally muted"
+			return
+
+
 	var/input
 	if(!message)
 		input = copytext(sanitize(input(src, "Choose an emote to display.") as text|null), 1, MAX_MESSAGE_LEN)
