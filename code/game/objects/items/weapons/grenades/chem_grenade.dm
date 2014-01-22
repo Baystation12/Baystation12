@@ -182,8 +182,8 @@
 		user << "<span class='notice'>You add [A] to [src]!</span>"
 		update_icon()
 
-	else if(stage == EMPTY && istype(I, /obj/item/weapon/cable_coil))
-		var/obj/item/weapon/cable_coil/C = I
+	else if(stage == EMPTY && istype(I, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = I
 		C.use(1)
 
 		stage = WIRED

@@ -557,7 +557,7 @@
 	req_components = list(
 							"/obj/item/weapon/stock_parts/scanning_module" = 1,
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
-							"/obj/item/weapon/cable_coil" = 1)
+							"/obj/item/stack/cable_coil" = 1)
 
 	//Customization of the machine
 	var/datum/cargoprofile/default = new/datum/cargoprofile()
