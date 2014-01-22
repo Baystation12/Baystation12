@@ -72,8 +72,8 @@
 		if(istype(O,/obj/item/weapon))
 			var/obj/item/weapon/W = O
 			dtype = W.damtype
-		if (W.hitsound && W.throwforce > 0)
-			playsound(loc, W.hitsound, 30, 1, -1)
+			if (W.hitsound && W.throwforce > 0)
+				playsound(loc, W.hitsound, 30, 1, -1)
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(zone, "melee", "Your armor has protected your [zone].", "Your armor has softened hit to your [zone].")
 		if(armor < 2)
