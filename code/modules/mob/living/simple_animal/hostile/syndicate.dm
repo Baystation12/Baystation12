@@ -31,7 +31,6 @@
 	min_n2 = 0
 	max_n2 = 0
 	unsuitable_atoms_damage = 15
-	wall_smash = 1
 	faction = "syndicate"
 	status_flags = CANPUSH
 
