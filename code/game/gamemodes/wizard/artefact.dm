@@ -1,4 +1,3 @@
-
 /////////Apprentice Contract//////////
 
 /obj/item/weapon/contract
@@ -121,6 +120,7 @@
 	throwforce = 10
 	w_class = 3
 	var/charged = 1
+	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/effect/rend
 	name = "tear in the fabric of reality"
@@ -203,4 +203,3 @@
 	user << "\blue You can see...everything!"
 	visible_message("\red <B>[usr] stares into [src], their eyes glazing over.</B>")
 	user.ghostize(1)
-	return

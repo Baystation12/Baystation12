@@ -114,6 +114,7 @@
 	force_unwielded = 10
 	force_wielded = 40
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
+	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/weapon/twohanded/fireaxe/update_icon()  //Currently only here to fuck with the on-mob icons.
 	icon_state = "fireaxe[wielded]"

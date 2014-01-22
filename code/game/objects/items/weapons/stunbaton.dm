@@ -221,3 +221,4 @@
 		icon_state = "stunprod_nocell"
 	else
 		icon_state = "stunprod"
+

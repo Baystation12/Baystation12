@@ -381,6 +381,7 @@
 	throwforce = 5
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
+	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /*
  * Crayons

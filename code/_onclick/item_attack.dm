@@ -33,7 +33,7 @@
 
 	if (istype(M,/mob/living/carbon/brain))
 		messagesource = M:container
-	if (hitsound)
+	if (hitsound && force > 0)
 		playsound(loc, hitsound, 50, 1, -1)
 	/////////////////////////
 	user.lastattacked = M

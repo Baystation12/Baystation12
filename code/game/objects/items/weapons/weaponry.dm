@@ -95,6 +95,7 @@
 	icon_state = "claymore"
 	item_state = "claymore"
 	flags = FPRINT | TABLEPASS | CONDUCT
+	hitsound = 'sound/weapons/bladeslice.ogg'
 	slot_flags = SLOT_BELT
 	force = 40
 	throwforce = 10
@@ -107,10 +108,6 @@
 	suicide_act(mob/user)
 		viewers(user) << "<span class='suicide'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>"
 		return(BRUTELOSS)
-
-/obj/item/weapon/claymore/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
-	return ..()
 
 /obj/item/weapon/katana
 	name = "katana"

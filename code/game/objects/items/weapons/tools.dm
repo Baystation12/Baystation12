@@ -48,6 +48,7 @@
 	g_amt = 0
 	m_amt = 75
 	attack_verb = list("stabbed")
+	hitsound = 'sound/weapons/bladeslice.ogg'
 
 	suicide_act(mob/user)
 		viewers(user) << pick("<span class='suicide'>[user] is stabbing the [src.name] into \his temple! It looks like \he's trying to commit suicide.</span>", \
