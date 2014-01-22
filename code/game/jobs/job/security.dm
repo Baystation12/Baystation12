@@ -137,6 +137,7 @@
 
 		H.dna.SetSEState(SOBERBLOCK,1)
 		H.mutations += M_SOBER
+		H.check_mutations = 1
 		return 1
 
 
