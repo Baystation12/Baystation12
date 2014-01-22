@@ -501,7 +501,6 @@ ________________________________________________________________________________
 	var/mob/living/carbon/human/U = affecting
 	var/mob/living/silicon/ai/A = AI
 	var/display_to = s_control ? U : A//Who do we want to display certain messages to?
-	var/turf/mobloc // For use later on during a check in Kamikaze
 
 	if(s_control)
 		if(!affecting||U.stat||!s_initialized)//Check to make sure the guy is wearing the suit after clicking and it's on.
@@ -595,8 +594,7 @@ ________________________________________________________________________________
 
 		if("Unlock Kamikaze")
 			if(input(U)=="Divine Wind")
-				mobloc = get_turf(U.loc)
-				if(mobloc.loc != /area/ninja_outpost)
+				if(U.loc.loc.name != "\improper SpiderClan Outpost")
 					if( !(U.stat||U.wear_suit!=src||!s_initialized))
 						if( !(cell.charge<=1||s_busy) )
 							s_busy = 1
