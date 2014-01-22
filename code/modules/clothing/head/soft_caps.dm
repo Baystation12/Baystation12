@@ -75,6 +75,12 @@
 	icon_state = "purplesoft"
 	_color = "purple"
 
+/obj/item/clothing/head/soft/black
+	name = "black cap"
+	desc = "It's a baseball hat in a tasteless black colour."
+	icon_state = "blacksoft"
+	_color = "black"
+
 /obj/item/clothing/head/soft/rainbow
 	name = "rainbow cap"
 	desc = "It's a baseball hat in a bright rainbow of colors."

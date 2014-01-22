@@ -33,7 +33,7 @@
 
 	if (istype(M,/mob/living/carbon/brain))
 		messagesource = M:container
-	if (hitsound)
+	if (hitsound && force > 0)
 		playsound(loc, hitsound, 50, 1, -1)
 	/////////////////////////
 	user.lastattacked = M
@@ -51,7 +51,7 @@
 	/////////////////////////
 
 	var/power = force
-	if(HULK in user.mutations)
+	if(M_HULK in user.mutations)
 		power *= 2
 
 	if(!istype(M, /mob/living/carbon/human))
@@ -160,7 +160,7 @@
 						if (istype(location, /turf/simulated))
 							location:add_blood_floor(M)
 			if("fire")
-				if (!(COLD_RESISTANCE in M.mutations))
+				if (!(M_RESIST_COLD in M.mutations))
 					M.take_organ_damage(0, power)
 					M << "Aargh it burns!"
 		M.updatehealth()

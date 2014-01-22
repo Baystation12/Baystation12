@@ -256,7 +256,7 @@
 	proc/handle_mutations_and_radiation()
 
 		if(getFireLoss())
-			if((COLD_RESISTANCE in mutations) || (prob(1)))
+			if((M_RESIST_HEAT in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
 
 
@@ -334,7 +334,7 @@
 
 	proc/breathe()
 		if(reagents.has_reagent("lexorin")) return
-		if(mNobreath in mutations) return // No breath mutation means no breathing.
+		if(M_NO_BREATH in mutations) return // No breath mutation means no breathing.
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
 		if(species && species.flags & NO_BREATHE) return
 
@@ -563,7 +563,7 @@
 						spawn(0) emote(pick("giggle", "laugh"))
 				SA.moles = 0
 
-		if( (abs(310.15 - breath.temperature) > 50) && !(COLD_RESISTANCE in mutations)) // Hot air hurts :(
+		if( (abs(310.15 - breath.temperature) > 50) && !(M_RESIST_HEAT in mutations)) // Hot air hurts :(
 			if(status_flags & GODMODE)	return 1	//godmode
 			if(breath.temperature < species.cold_level_1)
 				if(prob(20))
@@ -681,7 +681,7 @@
 		else if(adjusted_pressure >= species.hazard_low_pressure)
 			pressure_alert = -1
 		else
-			if( !(COLD_RESISTANCE in mutations))
+			if( !(M_RESIST_COLD in mutations))
 				adjustBruteLoss( LOW_PRESSURE_DAMAGE )
 				pressure_alert = -2
 			else
@@ -770,6 +770,8 @@
 		var/thermal_protection_flags = get_heat_protection_flags(temperature)
 
 		var/thermal_protection = 0.0
+		if(M_RESIST_HEAT in mutations)
+			return 1
 		if(thermal_protection_flags)
 			if(thermal_protection_flags & HEAD)
 				thermal_protection += THERMAL_PROTECTION_HEAD
@@ -825,7 +827,7 @@
 
 	proc/get_cold_protection(temperature)
 
-		if(COLD_RESISTANCE in mutations)
+		if(M_RESIST_COLD in mutations)
 			return 1 //Fully protected from the cold.
 
 		temperature = max(temperature, 2.7) //There is an occasional bug where the temperature is miscalculated in ares with a small amount of gas on them, so this is necessary to ensure that that bug does not affect this calculation. Space's temperature is 2.7K and most suits that are intended to protect against any cold, protect down to 2.0K.
@@ -961,12 +963,12 @@
 			else if (light_amount < 2) //heal in the dark
 				heal_overall_damage(1,1)
 
-
+		//The fucking M_FAT mutation is the greatest shit ever. It makes everyone so hot and bothered.
 		if(species.flags & CAN_BE_FAT)
-			if(FAT in mutations)
+			if(M_FAT in mutations)
 				if(overeatduration < 100)
 					src << "\blue You feel fit again!"
-					mutations.Remove(FAT)
+					mutations.Remove(M_FAT)
 					update_mutantrace(0)
 					update_mutations(0)
 					update_inv_w_uniform(0)
@@ -974,7 +976,7 @@
 			else
 				if(overeatduration > 500)
 					src << "\red You suddenly feel blubbery!"
-					mutations.Add(FAT)
+					mutations.Add(M_FAT)
 					update_mutantrace(0)
 					update_mutations(0)
 					update_inv_w_uniform(0)
@@ -1036,7 +1038,7 @@
 			silent = 0
 		else				//ALIVE. LIGHTS ARE ON
 
-			if(mRegen in mutations)
+			if(M_REGEN in mutations)
 				if(nutrition)
 					if(prob(10))
 						var/randumb = rand(1,5)
@@ -1281,8 +1283,8 @@
 				if((VAMP_FULL in mind.vampire.powers))
 					sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 					see_in_dark = 8
-					if(!druggy)    see_invisible = SEE_INVISIBLE_LEVEL_TWO
-			if(XRAY in mutations)
+					if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
+			if(M_XRAY in mutations)
 				sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 				see_in_dark = 8
 				if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
@@ -1444,7 +1446,7 @@
 				if(!machine.check_eye(src))		reset_view(null)
 			else
 				var/isRemoteObserve = 0
-				if((mRemote in mutations) && remoteview_target)
+				if((M_REMOTE_VIEW in mutations) && remoteview_target)
 					isRemoteObserve = 1
 					// Is he unconscious or dead?
 					if(remoteview_target.stat!=CONSCIOUS)

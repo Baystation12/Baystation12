@@ -54,7 +54,7 @@
 /datum/dna/gene/disability/hallucinate
 	name="Hallucinate"
 	activation_message="Your mind says 'Hello'."
-	mutation=mHallucination
+	mutation=M_HALLUCINATE
 
 	New()
 		block=HALLUCINATIONBLOCK
@@ -78,7 +78,7 @@
 /datum/dna/gene/disability/clumsy
 	name="Clumsiness"
 	activation_message="You feel lightheaded."
-	mutation=CLUMSY
+	mutation=M_CLUMSY
 
 	New()
 		block=CLUMSYBLOCK

@@ -45,7 +45,7 @@
 	range = -1
 	include_user = 1
 
-	mutations = list(LASER, HULK)
+	mutations = list(M_LASER, M_HULK)
 	duration = 300
 	cooldown_min = 300 //25 deciseconds reduction per rank
 

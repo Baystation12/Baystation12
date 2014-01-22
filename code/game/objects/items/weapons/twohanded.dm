@@ -114,6 +114,7 @@
 	force_unwielded = 10
 	force_wielded = 40
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
+	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/weapon/twohanded/fireaxe/update_icon()  //Currently only here to fuck with the on-mob icons.
 	icon_state = "fireaxe[wielded]"
@@ -161,7 +162,7 @@
 
 /obj/item/weapon/twohanded/dualsaber/attack(target as mob, mob/living/user as mob)
 	..()
-	if((CLUMSY in user.mutations) && (wielded) &&prob(40))
+	if((M_CLUMSY in user.mutations) && (wielded) &&prob(40))
 		user << "\red You twirl around a bit before losing your balance and impaling yourself on the [src]."
 		user.take_organ_damage(20,25)
 		return

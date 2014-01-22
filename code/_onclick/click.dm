@@ -168,10 +168,10 @@
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
 	if(!mutations.len) return
-	if((LASER in mutations) && a_intent == "harm")
+	if((M_LASER in mutations) && a_intent == "harm")
 		LaserEyes(A) // moved into a proc below
 		return
-	else if(TK in mutations)
+	else if(M_TK in mutations)
 		switch(get_dist(src,A))
 			if(0)
 				;

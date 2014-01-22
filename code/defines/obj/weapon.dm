@@ -525,10 +525,7 @@
 	m_amt = 15000
 	origin_tech = "materials=2;combat=1"
 	attack_verb = list("chopped", "torn", "cut")
-
-/obj/item/weapon/hatchet/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
-	return ..()
+	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/weapon/hatchet/unathiknife
 	name = "duelling knife"
@@ -550,6 +547,7 @@
 	slot_flags = SLOT_BACK
 	origin_tech = "materials=2;combat=2"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")
+	hitsound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/weapon/scythe/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return

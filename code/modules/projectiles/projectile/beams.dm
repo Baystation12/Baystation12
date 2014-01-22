@@ -174,6 +174,7 @@ var/list/beam_master = list()
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 40
 	damage_type = BURN
+	hitsound = 'sound/weapons/sear.ogg'
 	flag = "laser"
 	eyeblur = 4
 	var/frequency = 1

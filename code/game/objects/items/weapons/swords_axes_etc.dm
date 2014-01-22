@@ -27,7 +27,7 @@
 	_color = pick("red","blue","green","purple")
 
 /obj/item/weapon/melee/energy/sword/attack_self(mob/living/user as mob)
-	if ((CLUMSY in user.mutations) && prob(50))
+	if ((M_CLUMSY in user.mutations) && prob(50))
 		user << "\red You accidentally cut yourself with [src]."
 		user.take_organ_damage(5,5)
 	active = !active
@@ -82,7 +82,7 @@
 	force = 10
 
 /obj/item/weapon/melee/classic_baton/attack(mob/M as mob, mob/living/user as mob)
-	if ((CLUMSY in user.mutations) && prob(50))
+	if ((M_CLUMSY in user.mutations) && prob(50))
 		user << "\red You club yourself over the head."
 		user.Weaken(3 * force)
 		if(ishuman(user))
@@ -100,8 +100,8 @@
 */
 	if (user.a_intent == "harm")
 		if(!..()) return
-		playsound(src.loc, "swing_hit", 50, 1, -1)
-		if (M.stuttering < 8 && (!(HULK in M.mutations))  /*&& (!istype(H:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
+		playsound(get_turf(src), "swing_hit", 50, 1, -1)
+		if (M.stuttering < 8 && (!(M_HULK in M.mutations))  /*&& (!istype(H:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
 			M.stuttering = 8
 		M.Stun(8)
 		M.Weaken(8)
@@ -181,7 +181,7 @@
 
 /obj/item/weapon/melee/telebaton/attack(mob/target as mob, mob/living/user as mob)
 	if(on)
-		if ((CLUMSY in user.mutations) && prob(50))
+		if ((M_CLUMSY in user.mutations) && prob(50))
 			user << "\red You club yourself over the head."
 			user.Weaken(3 * force)
 			if(ishuman(user))
@@ -272,7 +272,7 @@
 		return 0
 
 /obj/item/weapon/shield/energy/attack_self(mob/living/user as mob)
-	if ((CLUMSY in user.mutations) && prob(50))
+	if ((M_CLUMSY in user.mutations) && prob(50))
 		user << "\red You beat yourself in the head with [src]."
 		user.take_organ_damage(5)
 	active = !active
