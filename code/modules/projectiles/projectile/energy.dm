@@ -17,9 +17,8 @@
 	*/
 	agony = 40
 	damage_type = HALLOSS
+	hitsound = 'sound/weapons/tase.ogg'
 	//Damage will be handled on the MOB side, to prevent window shattering.
-
-
 
 /obj/item/projectile/energy/declone
 	name = "declone"
