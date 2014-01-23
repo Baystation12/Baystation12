@@ -42,6 +42,9 @@
 				M.take_organ_damage(20)
 
 
+/atom/proc/CheckParts()
+	return
+
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	del(giver)
 	return null
