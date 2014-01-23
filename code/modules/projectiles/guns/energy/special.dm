@@ -216,26 +216,32 @@ obj/item/weapon/gun/energy/staff/focus
 	charge_cost = 250
 	fire_delay = 35
 	w_class = 4.0
-
 	var/zoom = 0
 
 /obj/item/weapon/gun/energy/sniperrifle/dropped(mob/user)
 	user.client.view = world.view
-	zoom = 0
 
 /obj/item/weapon/gun/energy/sniperrifle/verb/zoom()
-	set category = "Special Verbs"
-	set name = "Zoom"
+	set category = "Object"
+	set name = "Use Sniper Scope"
 	set popup_menu = 0
 	if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
-		usr << "No."
+		usr << "You are unable to focus down the scope of the rifle."
+		return
+	if(!zoom && usr.get_active_hand() != src)
+		usr << "You are too distracted to look down the scope, perhaps if it was in your active hand this might work better"
 		return
 
-	src.zoom = !src.zoom
-	usr << ("<font color='[src.zoom?"blue":"red"]'>Zoom mode [zoom?"en":"dis"]abled.</font>")
-	if(zoom)
+	if(usr.client.view == world.view)
+		if(!usr.hud_used.hud_shown)
+			usr.button_pressed_F12(1)	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
+		usr.button_pressed_F12(1)
 		usr.client.view = 12
-		usr << sound('sound/mecha/imag_enh.ogg',volume=50)
+		zoom = 1
 	else
-		usr.client.view = world.view  //world.view - default mob view size
+		usr.client.view = world.view
+		if(!usr.hud_used.hud_shown)
+			usr.button_pressed_F12(1)
+		zoom = 0
+	usr << "<font color='[zoom?"blue":"red"]'>Zoom mode [zoom?"en":"dis"]abled.</font>"
 	return
