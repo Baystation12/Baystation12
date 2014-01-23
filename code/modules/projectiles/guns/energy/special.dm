@@ -221,6 +221,14 @@ obj/item/weapon/gun/energy/staff/focus
 /obj/item/weapon/gun/energy/sniperrifle/dropped(mob/user)
 	user.client.view = world.view
 
+
+
+/*
+This is called from 
+modules/mob/mob_movement.dm if you move you will be zoomed out
+modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
+*/
+
 /obj/item/weapon/gun/energy/sniperrifle/verb/zoom()
 	set category = "Object"
 	set name = "Use Sniper Scope"
