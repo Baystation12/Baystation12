@@ -5444,7 +5444,7 @@
 "caJ" = (/obj/machinery/atmospherics/pipe/simple{pipe_color = "red"; dir = 4; icon_state = "intact-r"; level = 2},/obj/structure/sign/securearea,/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/wall,/area/atmos)
 "caK" = (/obj/machinery/atmospherics/pipe/simple{pipe_color = "red"; dir = 4; icon_state = "intact-r"; level = 2},/obj/structure/table,/obj/item/clothing/head/welding{pixel_x = 1; pixel_x = -5; pixel_y = 3},/obj/item/stack/sheet/glass{amount = 50},/obj/item/clothing/head/welding{pixel_x = 0; pixel_x = -5; pixel_y = 3},/obj/item/clothing/glasses/welding,/turf/simulated/floor,/area/atmos)
 "caL" = (/obj/structure/table,/obj/item/stack/sheet/metal{amount = 50; pixel_x = 2; pixel_y = 2},/obj/item/weapon/wrench,/obj/machinery/atmospherics/pipe/simple{pipe_color = "red"; dir = 9; icon_state = "intact-r"; level = 2},/turf/simulated/floor,/area/atmos)
-"caM" = (/obj/structure/table,/obj/item/device/t_scanner,/obj/item/device/multitool{pixel_x = 5},/obj/item/device/radio/headset/headset_eng,/obj/item/weapon/cartridge/atmos,/obj/item/weapon/cartridge/atmos,/obj/item/device/pipe_painter,/turf/simulated/floor,/area/atmos)
+"caM" = (/obj/structure/table,/obj/item/device/t_scanner,/obj/item/device/multitool{pixel_x = 5},/obj/item/device/radio/headset/headset_eng,/obj/item/weapon/cartridge/atmos,/obj/item/weapon/cartridge/atmos,/obj/item/weapon/airlock_painter,/turf/simulated/floor,/area/atmos)
 "caN" = (/obj/machinery/atmospherics/tvalve/mirrored/digital,/turf/simulated/floor,/area/atmos)
 "caO" = (/obj/machinery/atmospherics/binary/pump{dir = 4; name = "Waste to Port"},/turf/simulated/floor,/area/atmos)
 "caP" = (/obj/machinery/atmospherics/pipe/manifold4w/general/visible,/turf/simulated/floor,/area/atmos)
