@@ -228,6 +228,9 @@ obj/item/weapon/gun/energy/staff/focus
 	if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
 		usr << "You are unable to focus down the scope of the rifle."
 		return
+	if(!zoom && global_hud.darkMask[1] in usr.client.screen)
+		usr << "Your welding equipment gets in the way of you looking down the scope"
+		return
 	if(!zoom && usr.get_active_hand() != src)
 		usr << "You are too distracted to look down the scope, perhaps if it was in your active hand this might work better"
 		return
