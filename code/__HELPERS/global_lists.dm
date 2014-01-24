@@ -23,6 +23,9 @@ var/global/list/all_species[0]
 var/global/list/all_languages[0]
 var/global/list/whitelisted_species = list("Human")
 
+// Posters
+var/global/list/datum/poster/poster_designs = typesof(/datum/poster) - /datum/poster
+
 //Preferences stuff
 	//Hairstyles
 var/global/list/hair_styles_list = list()			//stores /datum/sprite_accessory/hair indexed by name
@@ -94,7 +97,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		var/datum/species/S = new T
 		all_species[S.name] = S
 
-		if(S.flags & WHITELISTED)
+		if(S.flags & IS_WHITELISTED)
 			whitelisted_species += S.name
 
 	return 1

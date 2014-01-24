@@ -275,6 +275,8 @@
 			if(Entry[1] == src.ckey && Entry[2] == src.real_name) //They're in the list? Custom sprite time, var and icon change required
 				custom_sprite = 1
 				icon = 'icons/mob/custom-synthetic.dmi'
+				if(icon_state == "robot")
+					icon_state = "[src.ckey]-Standard"
 
 /mob/living/silicon/robot/verb/Namepick()
 	if(custom_name)
@@ -705,8 +707,7 @@
 					locked = 0
 				else
 					user << "You fail to emag the cover lock."
-					if(prob(25))
-						src << "Hack attempt detected."
+					src << "Hack attempt detected."
 			else
 				user << "The cover is already unlocked."
 			return
@@ -723,7 +724,7 @@
 					lawupdate = 0
 					connected_ai = null
 					user << "You emag [src]'s interface."
-//					message_admins("[key_name_admin(user)] emagged cyborg [key_name_admin(src)].  Laws overridden.")
+					message_admins("[key_name_admin(user)] emagged cyborg [key_name_admin(src)].  Laws overridden.")
 					log_game("[key_name(user)] emagged cyborg [key_name(src)].  Laws overridden.")
 					clear_supplied_laws()
 					clear_inherent_laws()
@@ -735,7 +736,7 @@
 					sleep(5)
 					src << "\red Initiating diagnostics..."
 					sleep(20)
-					src << "\red SynBorg v1.7 loaded."
+					src << "\red SynBorg v1.7.1 loaded."
 					sleep(5)
 					src << "\red LAW SYNCHRONISATION ERROR"
 					sleep(5)
@@ -754,9 +755,8 @@
 						src.module.rebuild()
 					updateicon()
 				else
-					user << "You fail to [ locked ? "unlock" : "lock"] [src]'s interface."
-					if(prob(25))
-						src << "Hack attempt detected."
+					user << "You fail to hack [src]'s interface."
+					src << "Hack attempt detected."
 			return
 
 	else if(istype(W, /obj/item/borg/upgrade/))
@@ -795,7 +795,7 @@
 		if ("help")
 			for(var/mob/O in viewers(src, null))
 				if ((O.client && !( O.blinded )))
-					O.show_message(text("\blue [M] caresses [src]'s plating with its scythe like arm."), 1)
+					O.show_message(text("\blue [M] caresses [src]'s plating with its scythe-like arm."), 1)
 
 		if ("grab")
 			if (M == src)
@@ -814,13 +814,6 @@
 		if ("hurt")
 			var/damage = rand(10, 20)
 			if (prob(90))
-				/*
-				if (M.class == "combat")
-					damage += 15
-					if(prob(20))
-						weakened = max(weakened,4)
-						stunned = max(stunned,4)
-				What is this?*/
 
 				playsound(loc, 'sound/weapons/slash.ogg', 25, 1, -1)
 				for(var/mob/O in viewers(src, null))

@@ -532,7 +532,7 @@
 		B.host_brain << "\red <B><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></B>"
 
 //Check for brain worms in head.
-/mob/living/carbon/proc/has_brain_worms()
+/mob/proc/has_brain_worms()
 
 	for(var/I in contents)
 		if(istype(I,/mob/living/simple_animal/borer))

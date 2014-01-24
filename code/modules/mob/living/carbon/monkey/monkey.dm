@@ -10,28 +10,32 @@
 
 	var/obj/item/weapon/card/id/wear_id = null // Fix for station bounced radios -- Skie
 	var/greaterform = "Human"                  // Used when humanizing a monkey.
-	var/uni_append = "12C4E2"                  // Small appearance modifier for different species.
+	icon_state = "monkey1"
+	//var/uni_append = "12C4E2"                // Small appearance modifier for different species.
+	var/list/uni_append = list(0x12C,0x4E2)    // Same as above for DNA2.
+	var/update_muts = 1                        // Monkey gene must be set at start.
+	var/alien = 0								//Used for reagent metabolism.
 
 /mob/living/carbon/monkey/tajara
 	name = "farwa"
 	voice_name = "farwa"
 	speak_emote = list("mews")
 	icon_state = "tajkey1"
-	uni_append = "0A0E00"
+	uni_append = list(0x0A0,0xE00) // 0A0E00
 
 /mob/living/carbon/monkey/skrell
 	name = "neaera"
 	voice_name = "neaera"
 	speak_emote = list("squicks")
 	icon_state = "skrellkey1"
-	uni_append = "01CC92"
+	uni_append = list(0x01C,0xC92) // 01CC92
 
 /mob/living/carbon/monkey/unathi
 	name = "stok"
 	voice_name = "stok"
 	speak_emote = list("hisses")
 	icon_state = "stokkey1"
-	uni_append = "044C5D"
+	uni_append = list(0x044,0xC5D) // 044C5D
 
 /mob/living/carbon/monkey/New()
 	var/datum/reagents/R = new/datum/reagents(1000)
@@ -52,13 +56,20 @@
 		//dna.uni_identity = "00600200A00E0110148FC01300B009"
 		//dna.struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
 		dna.unique_enzymes = md5(name)
-				//////////blah
-		var/gendervar
-		if (gender == MALE)
-			gendervar = add_zero2(num2hex((rand(1,2049)),1), 3)
-		else
-			gendervar = add_zero2(num2hex((rand(2051,4094)),1), 3)
-		dna.uni_identity += "[gendervar][uni_append]"
+
+		// We're a monkey
+		dna.SetSEState(MONKEYBLOCK,   1)
+		// Fix gender
+		dna.SetUIState(DNA_UI_GENDER, gender != MALE, 1)
+
+		// Set the blocks to uni_append, if needed.
+		if(uni_append.len>0)
+			for(var/b=1;b<=uni_append.len;b++)
+				dna.SetUIValue(DNA_UI_LENGTH-(uni_append.len-b),uni_append[b], 1)
+		dna.UpdateUI()
+
+		update_muts=1
+
 	..()
 	update_icons()
 	return
@@ -87,6 +98,7 @@
 /mob/living/carbon/monkey/diona/New()
 
 	..()
+	alien = 1
 	gender = NEUTER
 	dna.mutantrace = "plant"
 	greaterform = "Diona"

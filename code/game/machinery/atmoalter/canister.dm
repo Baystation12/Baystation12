@@ -138,8 +138,6 @@
 
 	if(air_contents.temperature > PLASMA_FLASHPOINT)
 		air_contents.zburn()
-
-	src.updateDialog()
 	return
 
 /obj/machinery/portable_atmospherics/canister/return_air()
@@ -194,6 +192,10 @@
 		return
 
 	..()
+	
+	nanomanager.update_uis(src) // Update all NanoUIs attached to src
+	
+	
 
 /obj/machinery/portable_atmospherics/canister/attack_ai(var/mob/user as mob)
 	return src.attack_hand(user)
@@ -202,94 +204,94 @@
 	return src.attack_hand(user)
 
 /obj/machinery/portable_atmospherics/canister/attack_hand(var/mob/user as mob)
-	return src.interact(user)
+	return src.ui_interact(user)
 
-/obj/machinery/portable_atmospherics/canister/interact(var/mob/user as mob)
+/obj/machinery/portable_atmospherics/canister/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	if (src.destroyed)
 		return
 
-	user.set_machine(src)
-	var/holding_text
-	if(holding)
-		holding_text = {"<BR><B>Tank Pressure</B>: [holding.air_contents.return_pressure()] KPa<BR>
-<A href='?src=\ref[src];remove_tank=1'>Remove Tank</A><BR>
-"}
-	var/output_text = {"<TT><B>[name]</B>[can_label?" <A href='?src=\ref[src];relabel=1'><small>relabel</small></a>":""]<BR>
-Pressure: [air_contents.return_pressure()] KPa<BR>
-Port Status: [(connected_port)?("Connected"):("Disconnected")]
-[holding_text]
-<BR>
-Release Valve: <A href='?src=\ref[src];toggle=1'>[valve_open?("Open"):("Closed")]</A><BR>
-Release Pressure: <A href='?src=\ref[src];pressure_adj=-1000'>-</A> <A href='?src=\ref[src];pressure_adj=-100'>-</A> <A href='?src=\ref[src];pressure_adj=-10'>-</A> <A href='?src=\ref[src];pressure_adj=-1'>-</A> [release_pressure] <A href='?src=\ref[src];pressure_adj=1'>+</A> <A href='?src=\ref[src];pressure_adj=10'>+</A> <A href='?src=\ref[src];pressure_adj=100'>+</A> <A href='?src=\ref[src];pressure_adj=1000'>+</A><BR>
-<HR>
-<A href='?src=\ref[user];mach_close=canister'>Close</A><BR>
-"}
+	// this is the data which will be sent to the ui
+	var/data[0]
+	data["name"] = name
+	data["canLabel"] = can_label ? 1 : 0
+	data["portConnected"] = connected_port ? 1 : 0
+	data["tankPressure"] = round(air_contents.return_pressure() ? air_contents.return_pressure() : 0)
+	data["releasePressure"] = round(release_pressure ? release_pressure : 0)
+	data["minReleasePressure"] = round(ONE_ATMOSPHERE/10)
+	data["maxReleasePressure"] = round(10*ONE_ATMOSPHERE)
+	data["valveOpen"] = valve_open ? 1 : 0
+	
+	data["hasHoldingTank"] = holding ? 1 : 0	
+	if (holding)
+		data["holdingTank"] = list("name" = holding.name, "tankPressure" = round(holding.air_contents.return_pressure()))
 
-	user << browse("<html><head><title>[src]</title></head><body>[output_text]</body></html>", "window=canister;size=600x300")
-	onclose(user, "canister")
-	return
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+	if (!ui)
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "canister.tmpl", "Canister", 480, 400)
+		// when the ui is first opened this is the data it will use
+		ui.set_initial_data(data)
+		// open the new ui window
+		ui.open()
+		// auto update every Master Controller tick
+		ui.set_auto_update(1)
 
 /obj/machinery/portable_atmospherics/canister/Topic(href, href_list)
 
-	//Do not use "if(..()) return" here, canisters will stop working in unpowered areas like space or on the derelict.
-	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
-		usr << browse(null, "window=canister")
-		onclose(usr, "canister")
-		return
-
-	if (((get_dist(src, usr) <= 1) && istype(src.loc, /turf)))
-		usr.set_machine(src)
-
-		if(href_list["toggle"])
-			if (valve_open)
-				if (holding)
-					release_log += "Valve was <b>closed</b> by [usr], stopping the transfer into the [holding]<br>"
-				else
-					release_log += "Valve was <b>closed</b> by [usr], stopping the transfer into the <font color='red'><b>air</b></font><br>"
+	//Do not use "if(..()) return" here, canisters will stop working in unpowered areas like space or on the derelict.	
+	if (!istype(src.loc, /turf))
+		return 0
+		
+	if(href_list["toggle"])
+		if (valve_open)
+			if (holding)
+				release_log += "Valve was <b>closed</b> by [usr] ([usr.ckey]), stopping the transfer into the [holding]<br>"
 			else
-				if (holding)
-					release_log += "Valve was <b>opened</b> by [usr], starting the transfer into the [holding]<br>"
-				else
-					release_log += "Valve was <b>opened</b> by [usr], starting the transfer into the <font color='red'><b>air</b></font><br>"
-			valve_open = !valve_open
-
-		if (href_list["remove_tank"])
-			if(holding)
-				if(istype(holding, /obj/item/weapon/tank))
-					holding.manipulated_by = usr.real_name
-				holding.loc = loc
-				holding = null
-
-		if (href_list["pressure_adj"])
-			var/diff = text2num(href_list["pressure_adj"])
-			if(diff > 0)
-				release_pressure = min(10*ONE_ATMOSPHERE, release_pressure+diff)
+				release_log += "Valve was <b>closed</b> by [usr] ([usr.ckey]), stopping the transfer into the <font color='red'><b>air</b></font><br>"
+		else
+			if (holding)
+				release_log += "Valve was <b>opened</b> by [usr] ([usr.ckey]), starting the transfer into the [holding]<br>"
 			else
-				release_pressure = max(ONE_ATMOSPHERE/10, release_pressure+diff)
+				release_log += "Valve was <b>opened</b> by [usr] ([usr.ckey]), starting the transfer into the <font color='red'><b>air</b></font><br>"
+		valve_open = !valve_open
 
-		if (href_list["relabel"])
-			if (can_label)
-				var/list/colors = list(\
-					"\[N2O\]" = "redws", \
-					"\[N2\]" = "red", \
-					"\[O2\]" = "blue", \
-					"\[Toxin (Bio)\]" = "orange", \
-					"\[CO2\]" = "black", \
-					"\[Air\]" = "grey", \
-					"\[CAUTION\]" = "yellow", \
-				)
-				var/label = input("Choose canister label", "Gas canister") as null|anything in colors
-				if (label)
-					src.canister_color = colors[label]
-					src.icon_state = colors[label]
-					src.name = "Canister: [label]"
-		src.updateUsrDialog()
-		src.add_fingerprint(usr)
-		update_icon()
-	else
-		usr << browse(null, "window=canister")
-		return
-	return
+	if (href_list["remove_tank"])
+		if(holding)
+			if(istype(holding, /obj/item/weapon/tank))
+				holding.manipulated_by = usr.real_name
+			holding.loc = loc
+			holding = null
+
+	if (href_list["pressure_adj"])
+		var/diff = text2num(href_list["pressure_adj"])
+		if(diff > 0)
+			release_pressure = min(10*ONE_ATMOSPHERE, release_pressure+diff)
+		else
+			release_pressure = max(ONE_ATMOSPHERE/10, release_pressure+diff)
+
+	if (href_list["relabel"])
+		if (can_label)
+			var/list/colors = list(\
+				"\[N2O\]" = "redws", \
+				"\[N2\]" = "red", \
+				"\[O2\]" = "blue", \
+				"\[Toxin (Bio)\]" = "orange", \
+				"\[CO2\]" = "black", \
+				"\[Air\]" = "grey", \
+				"\[CAUTION\]" = "yellow", \
+			)
+			var/label = input("Choose canister label", "Gas canister") as null|anything in colors
+			if (label)
+				src.canister_color = colors[label]
+				src.icon_state = colors[label]
+				src.name = "Canister: [label]"
+	
+	src.add_fingerprint(usr)
+	update_icon()
+	
+	return 1
 
 /obj/machinery/portable_atmospherics/canister/toxins/New()
 

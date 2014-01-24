@@ -434,6 +434,13 @@
 
 	var/mob/living/L = usr
 
+	//Getting out of someone's inventory.
+	if(istype(src.loc,/obj/item/weapon/holder))
+		var/obj/item/weapon/holder/H = src.loc
+		src.loc = get_turf(src.loc)
+		del(H)
+		return
+
 	//Resisting control by an alien mind.
 	if(istype(src.loc,/mob/living/simple_animal/borer))
 		var/mob/living/simple_animal/borer/B = src.loc

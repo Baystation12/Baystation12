@@ -6,6 +6,7 @@
 	var/list/fingerprintshidden
 	var/fingerprintslast = null
 	var/list/blood_DNA
+	var/blood_color
 	var/last_bumped = 0
 	var/pass_flags = 0
 	var/throwpass = 0
@@ -361,7 +362,9 @@ its easier to just keep the beam vertical.
 		return 0
 	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialise it.
 		blood_DNA = list()
-
+	blood_color = "#A10808"
+	if (M.species)
+		blood_color = M.species.blood_color
 	//adding blood to humans
 	else if (istype(src, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = src
