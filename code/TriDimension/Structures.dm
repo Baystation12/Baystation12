@@ -12,7 +12,6 @@
 		return airflow || !density
 
 /obj/multiz/ladder
-	icon = 'code/TriDimension/multiz.dmi'
 	icon_state = "ladderdown"
 	name = "ladder"
 	desc = "A ladder.  You climb up and down it."
