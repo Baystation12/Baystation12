@@ -32,7 +32,7 @@
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0) // Standard Security jumpsuit stats
 	siemens_coefficient = 0.
 
-/obj/item/clothing/under/fluff/BlackSchoolGirl // Black schoolgirl uniform
+/obj/item/clothing/under/fluff/blackschoolGirl // Black schoolgirl uniform
 	name = "Black Schoolgirl Uniform"
 	desc = "A Japanese style school uniform for girls"
 	icon= 'icons/obj/clothing/uniforms.dmi'
