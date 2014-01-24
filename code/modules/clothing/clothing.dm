@@ -157,6 +157,7 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/hats.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
+	var/loose = 10 // probability (0..100) of coming off your head when you fall over or lay down
 
 
 //Mask
@@ -209,6 +210,7 @@ BLIND     // can't see anything
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECITON_TEMPERATURE
 	siemens_coefficient = 0.9
 	species_restricted = list("exclude","Diona","Vox")
+	loose = 1 // very rarely falls off
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
