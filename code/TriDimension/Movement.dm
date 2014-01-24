@@ -2,12 +2,12 @@
 	set name = "Move Upwards"
 	set category = "Object"
 	if(allow_thrust(0.01, usr))
-		var/turf/controlerlocation = locate(1, 1, usr.z)
+		var/turf/controllerlocation = locate(1, 1, usr.z)
 		var/legal = 0
-		for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
-			legal = controler.up
-			if (controler.up)
-				var/turf/T = locate(usr.x, usr.y, controler.up_target)
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+			legal = controller.up
+			if (controller.up)
+				var/turf/T = locate(usr.x, usr.y, controller.up_target)
 				if(T && (istype(T, /turf/space) || istype(T, /turf/simulated/floor/open)))
 					var/blocked = 0
 					for(var/atom/A in T.contents)
@@ -28,12 +28,12 @@
 	set name = "Move Downwards"
 	set category = "Object"
 	if(allow_thrust(0.01, usr))
-		var/turf/controlerlocation = locate(1, 1, usr.z)
+		var/turf/controllerlocation = locate(1, 1, usr.z)
 		var/legal = 0
-		for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
-			legal = controler.down
-			if (controler.down == 1)
-				var/turf/T = locate(usr.x, usr.y, controler.down_target)
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+			legal = controller.down
+			if (controller.down == 1)
+				var/turf/T = locate(usr.x, usr.y, controller.down_target)
 				var/turf/S = locate(usr.x, usr.y, usr.z)
 				if(T && (istype(S, /turf/space) || istype(S, /turf/simulated/floor/open)))
 					var/blocked = 0

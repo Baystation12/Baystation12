@@ -1277,7 +1277,7 @@
 #include "code\modules\virus2\helpers.dm"
 #include "code\modules\virus2\isolator.dm"
 #include "code\modules\virus2\items_devices.dm"
-#include "code\TriDimension\controler.dm"
+#include "code\TriDimension\controller.dm"
 #include "code\TriDimension\Movement.dm"
 #include "code\TriDimension\Pipes.dm"
 #include "code\TriDimension\Structures.dm"
@@ -1341,5 +1341,5 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\tgstation2.dmm"
+#include "maps\typhon.0.1.dmm"
 // END_INCLUDE

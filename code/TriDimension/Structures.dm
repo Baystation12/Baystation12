@@ -3,7 +3,7 @@
 ///////////////////////////////////////
 
 /obj/multiz
-	icon = 'code/TriDimension/multiz.dmi'
+	icon = 'icons/obj/structure.dmi'
 	density = 0
 	opacity = 0
 	anchored = 1
@@ -12,9 +12,10 @@
 		return airflow || !density
 
 /obj/multiz/ladder
+	icon = 'code/TriDimension/multiz.dmi'
 	icon_state = "ladderdown"
 	name = "ladder"
-	desc = "A Ladder.  You climb up and down it."
+	desc = "A ladder.  You climb up and down it."
 
 	var/d_state = 1
 	var/obj/multiz/target
@@ -26,11 +27,11 @@
 	proc/connect()
 		if(icon_state == "ladderdown") // the upper will connect to the lower
 			d_state = 1
-			var/turf/controlerlocation = locate(1, 1, z)
-			for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
-				if(controler.down)
-					var/turf/below = locate(src.x, src.y, controler.down_target)
-					for(var/obj/multiz/ladder/L in below)
+			var/turf/controllerlocation = locate(1, 1, z)
+			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+				if(controller.down)
+					var/turf/below = locate(src.x, src.y, controller.down_target)
+					for(var/obj/structure/multiz/ladder/L in below)
 						target = L
 						L.target = src
 						d_state = 0
@@ -62,23 +63,23 @@
 		(..)
 // construction commented out for balance concerns
 /*		if (!target && istype(C, /obj/item/stack/rods))
-			var/turf/controlerlocation = locate(1, 1, z)
+			var/turf/controllerlocation = locate(1, 1, z)
 			var/found = 0
 			var/obj/item/stack/rods/S = C
 			if(S.amount < 2)
 				user << "You dont have enough rods to finish the ladder."
 				return
-			for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
-				if(controler.down)
+			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+				if(controller.down)
 					found = 1
-					var/turf/below = locate(src.x, src.y, controler.down_target)
+					var/turf/below = locate(src.x, src.y, controller.down_target)
 					var/blocked = 0
 					for(var/atom/A in below.contents)
 						if(A.density)
 							blocked = 1
 							break
 					if(!blocked && !istype(below, /turf/simulated/wall))
-						var/obj/multiz/ladder/X = new /obj/multiz/ladder(below)
+						var/obj/structure/multiz/ladder/X = new /obj/multiz/ladder(below)
 						S.amount = S.amount - 2
 						if(S.amount == 0) S.Del()
 						X.icon_state = "ladderup"
@@ -176,8 +177,8 @@
 				return // It is a tiny airlock, only one at a time.
 
 			active = 1
-			var/obj/multiz/ladder/hatch/top_hatch = target
-			var/obj/multiz/ladder/hatch/bottom_hatch = src
+			var/obj/structure/multiz/ladder/hatch/top_hatch = target
+			var/obj/structure/multiz/ladder/hatch/bottom_hatch = src
 			if(icon_state == top_icon_state)
 				top_hatch = src
 				bottom_hatch = target
@@ -211,7 +212,7 @@
 	New()
 		..()
 		var/turf/cl= locate(1, 1, src.z)
-		for(var/obj/effect/landmark/zcontroler/c in cl)
+		for(var/obj/effect/landmark/zcontroller/c in cl)
 			if(c.up)
 				var/turf/O = locate(src.x, src.y, c.up_target)
 				if(istype(O, /turf/space))
@@ -228,10 +229,10 @@
 						src.connected = S
 						src.icon_state = "ramptop"
 						src.density = 1
-						var/turf/controlerlocation = locate(1, 1, src.z)
-						for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
-							if(controler.up)
-								var/turf/above = locate(src.x, src.y, controler.up_target)
+						var/turf/controllerlocation = locate(1, 1, src.z)
+						for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+							if(controller.up)
+								var/turf/above = locate(src.x, src.y, controller.up_target)
 								if(istype(above,/turf/space) || istype(above,/turf/simulated/floor/open))
 									src.target = above
 						break
