@@ -145,7 +145,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			air.group_multiplier++
 
 		T.zone = src
-		
+
 ///// Z-Level Stuff
 		// also add the tile below it if its open space
 		if(istype(T, /turf/simulated/floor/open))
@@ -775,11 +775,11 @@ zone/proc/Rebuild()
 					lowest_id = adjacent_id
 
 /////// Z-Level stuff
-		var/turf/controlerlocation = locate(1, 1, current.z)
-		for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
+		var/turf/controllerlocation = locate(1, 1, current.z)
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 			// upwards
-			if(controler.up)
-				var/turf/simulated/adjacent = locate(current.x, current.y, controler.up_target)
+			if(controller.up)
+				var/turf/simulated/adjacent = locate(current.x, current.y, controller.up_target)
 
 				if(adjacent in turfs && istype(adjacent, /turf/simulated/floor/open))
 					current_adjacents += adjacent
@@ -789,8 +789,8 @@ zone/proc/Rebuild()
 						lowest_id = adjacent_id
 
 			// downwards
-			if(controler.down && istype(current, /turf/simulated/floor/open))
-				var/turf/simulated/adjacent = locate(current.x, current.y, controler.down_target)
+			if(controller.down && istype(current, /turf/simulated/floor/open))
+				var/turf/simulated/adjacent = locate(current.x, current.y, controller.down_target)
 
 				if(adjacent in turfs)
 					current_adjacents += adjacent

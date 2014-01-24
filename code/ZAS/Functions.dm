@@ -81,11 +81,11 @@ proc/FloodFill(turf/simulated/start)
 						z_space += O.z
 
 		// handle Z-level connections
-		var/turf/controlerlocation = locate(1, 1, T.z)
-		for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
+		var/turf/controllerlocation = locate(1, 1, T.z)
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 			// connect upwards
-			if(controler.up)
-				var/turf/above_me = locate(T.x, T.y, controler.up_target)
+			if(controller.up)
+				var/turf/above_me = locate(T.x, T.y, controller.up_target)
 				// add the turf above this
 				if(istype(above_me, /turf/simulated/floor/open) && !(above_me in open) && !(above_me in closed))
 					open += above_me
@@ -96,8 +96,8 @@ proc/FloodFill(turf/simulated/start)
 						if(!(above_me.z in z_space))
 							z_space += above_me.z
 			// connect downwards
-			if(controler.down && istype(T, /turf/simulated/floor/open))
-				var/turf/below_me = locate(T.x, T.y, controler.down_target)
+			if(controller.down && istype(T, /turf/simulated/floor/open))
+				var/turf/below_me = locate(T.x, T.y, controller.down_target)
 				// add the turf below this
 				if(!(below_me in open) && !(below_me in closed))
 					open += below_me
@@ -118,10 +118,10 @@ proc/FloodFill(turf/simulated/start)
 				//through the evaluated tile
 				//if there is none, the zone can connect upwards to either vent from there or connect with the zone there
 				//also check if the turf below the space is actually part of this zone to prevent the edge tiles from transforming
-				var/turf/controlerloc = locate(1, 1, S.z)
-				for(var/obj/effect/landmark/zcontroler/controler in controlerloc)
-					if(controler.down)
-						var/turf/below = locate(S.x, S.y, controler.down_target)
+				var/turf/controllerloc = locate(1, 1, S.z)
+				for(var/obj/effect/landmark/zcontroller/controller in controllerloc)
+					if(controller.down)
+						var/turf/below = locate(S.x, S.y, controller.down_target)
 						if(!((S.z - 1) in z_space) && below in closed)
 							open += S.ChangeTurf(/turf/simulated/floor/open)
 							list_space -= S
