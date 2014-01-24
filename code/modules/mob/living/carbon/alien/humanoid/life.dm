@@ -10,7 +10,7 @@
 
 /mob/living/carbon/alien/humanoid/Life()
 	set invisibility = 0
-	set background = 1
+	//set background = 1
 
 	if (monkeyizing)
 		return
@@ -397,7 +397,7 @@
 			sight |= SEE_TURFS
 			sight &= ~SEE_MOBS
 			see_in_dark = 8
-			see_invisible = BORGMESON	
+			see_invisible = BORGMESON
 
 		if (healths)
 			if (stat != 2)

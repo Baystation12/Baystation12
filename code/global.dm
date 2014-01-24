@@ -90,6 +90,7 @@ var/datum/engine_eject/engine_eject_control = null
 var/host = null
 var/aliens_allowed = 0
 var/ooc_allowed = 1
+var/dsay_allowed = 1
 var/dooc_allowed = 1
 var/traitor_scaling = 1
 //var/goonsay_allowed = 0
