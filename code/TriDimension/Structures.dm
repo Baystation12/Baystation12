@@ -3,7 +3,7 @@
 ///////////////////////////////////////
 
 /obj/multiz
-	icon = 'icons/obj/structure.dmi'
+	icon = 'icons/obj/structures.dmi'
 	density = 0
 	opacity = 0
 	anchored = 1
@@ -31,7 +31,7 @@
 			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 				if(controller.down)
 					var/turf/below = locate(src.x, src.y, controller.down_target)
-					for(var/obj/structure/multiz/ladder/L in below)
+					for(var/obj/multiz/ladder/L in below)
 						target = L
 						L.target = src
 						d_state = 0
