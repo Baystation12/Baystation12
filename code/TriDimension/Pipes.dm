@@ -156,7 +156,7 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 ///////////////////////
 
 obj/machinery/atmospherics/pipe/zpipe/down
-		icon = 'code/TriDimension/multiz_pipe.dmi'
+		icon = 'icons/obj/structures.dmi'
 		icon_state = "down"
 
 		name = "downwards pipe"
