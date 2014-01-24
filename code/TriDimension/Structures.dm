@@ -21,7 +21,6 @@
 
 	New()
 		. = ..()
-		connect()
 
 	proc/connect()
 		if(icon_state == "ladderdown") // the upper will connect to the lower
@@ -31,10 +30,11 @@
 				if(controller.down)
 					var/turf/below = locate(src.x, src.y, controller.down_target)
 					for(var/obj/multiz/ladder/L in below)
-						target = L
-						L.target = src
-						d_state = 0
-						break
+						if(L.icon_state == "ladderup")
+							target = L
+							L.target = src
+							d_state = 0
+							break
 		return
 
 /*	ex_act(severity)
@@ -60,6 +60,7 @@
 
 	attackby(obj/item/C as obj, mob/user as mob)
 		(..)
+
 // construction commented out for balance concerns
 /*		if (!target && istype(C, /obj/item/stack/rods))
 			var/turf/controllerlocation = locate(1, 1, z)
