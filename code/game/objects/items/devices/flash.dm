@@ -86,7 +86,6 @@
 						user << "<span class='warning'>Something seems to be blocking the flash!</span>"
 					else
 						user << "<span class='warning'>This mind seems resistant to the flash!</span>"
-						user << "<span class='warning'>This mind is so vacant that it is not susceptible to influence!</span>"
 		else
 			flashfail = 1
 
