@@ -64,6 +64,7 @@
 	if(M_HULK in mutations)	return
 	..()
 
+
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	..()
 	var/heal_prob = max(0, 80 - getCloneLoss())
@@ -92,6 +93,13 @@
 			if (O.status & ORGAN_MUTATED)
 				O.unmutate()
 				src << "<span class = 'notice'>Your [O.display_name] is shaped normally again.</span>"
+
+/mob/living/carbon/human/update_canmove()
+	var/old_lying = lying
+	. = ..()
+	if(lying && !old_lying && !resting && !buckled) // fell down
+		playsound(loc, "bodyfall", 50, 1, -1)
+
 ////////////////////////////////////////////
 
 //Returns a list of damaged organs
