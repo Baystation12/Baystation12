@@ -94,12 +94,6 @@
 				O.unmutate()
 				src << "<span class = 'notice'>Your [O.display_name] is shaped normally again.</span>"
 
-/mob/living/carbon/human/update_canmove()
-	var/old_lying = lying
-	. = ..()
-	if(lying && !old_lying && !resting && !buckled) // fell down
-		playsound(loc, "bodyfall", 50, 1, -1)
-
 ////////////////////////////////////////////
 
 //Returns a list of damaged organs
@@ -272,6 +266,8 @@
 // incredibly important stuff follows
 /mob/living/carbon/human/fall(var/forced)
 	..()
+	if(forced)
+		playsound(loc, "bodyfall", 50, 1, -1)
 	if(head)
 		var/multiplier = 1
 		if(stat || (status_flags & FAKEDEATH))
