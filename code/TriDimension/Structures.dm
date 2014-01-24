@@ -78,7 +78,7 @@
 							blocked = 1
 							break
 					if(!blocked && !istype(below, /turf/simulated/wall))
-						var/obj/structure/multiz/ladder/X = new /obj/multiz/ladder(below)
+						var/obj/multiz/ladder/X = new /obj/multiz/ladder(below)
 						S.amount = S.amount - 2
 						if(S.amount == 0) S.Del()
 						X.icon_state = "ladderup"
@@ -176,8 +176,8 @@
 				return // It is a tiny airlock, only one at a time.
 
 			active = 1
-			var/obj/structure/multiz/ladder/hatch/top_hatch = target
-			var/obj/structure/multiz/ladder/hatch/bottom_hatch = src
+			var/obj/multiz/ladder/hatch/top_hatch = target
+			var/obj/multiz/ladder/hatch/bottom_hatch = src
 			if(icon_state == top_icon_state)
 				top_hatch = src
 				bottom_hatch = target
