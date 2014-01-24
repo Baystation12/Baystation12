@@ -101,10 +101,10 @@
 
 ///// Z-Level Stuff
 		if(src.d1 == 11 || src.d2 == 11)
-			var/turf/controlerlocation = locate(1, 1, z)
-			for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
-				if(controler.down)
-					var/turf/below = locate(src.x, src.y, controler.down_target)
+			var/turf/controllerlocation = locate(1, 1, z)
+			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+				if(controller.down)
+					var/turf/below = locate(src.x, src.y, controller.down_target)
 					for(var/obj/structure/cable/c in below)
 						if(c.d1 == 12 || c.d2 == 12)
 							c.Del()
