@@ -36,13 +36,13 @@
 
 /obj/item/weapon/reagent_containers/pill/random_drugs/New()
 	..()
-	icon_state = "pill" + pick("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20")
+	icon_state = "pill" + pick("2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20")
 
-	name = pick("lunar","hardcore","willow", "void","loopy","electro", "cyber","heavy", "ninja", "hydro", "blue", "red", "green", "purple", "strong", "divine","carp" ,"deadly","vicious" ,"wild" ,"demon", "chill", "solid", "liquid", "crazy", "super", "hyper", "thunder", "fire", "space", "wizard", "rainbow", "star", "turbo", "prism", "sticky") + " " + pick("jack","null","beat","diablo","nip","bubbles" ,"ice","medicine","venom" ,"spice" ,"shredder", "heart" , "heat", "pill","hopper","scum","fruit", "bolt", "deck", "butter", "runoff", "grease", "flair", "sweat", "zone", "blast")
+	name = pick("lunar","vorpal","hardcore","willow", "void","loopy","electro", "cyber","heavy", "ninja", "hydro", "blue", "red", "green", "purple", "strong", "divine","carp" ,"deadly","dead","vicious" ,"wild" ,"demon", "chill", "solid", "liquid", "crazy", "super", "hyper", "space", "wizard", "rainbow", "star", "turbo", "prism", "sticky") + " " + pick("jack","zero","null","beat","nip","bubbles" ,"ice","medicine","venom","shock","solar" ,"spice" ,"shredder", "heart" , "heat", "pill","hopper","scum","fruit", "bolt", "deck", "butter", "runoff", "grease", "flair", "sweat", "zone", "blast")
 
-	reagents.add_reagent(pick("capsaicin", "tricordrazine","neurotoxin","frostoil", "toxin","stoxin", "carpotoxin", "hippiesdelight","condensedcapsaicin","hyperzine","impedrezene" ,"cryptobiolin", "oxycodone", "psilocybin", "mindbreaker", "chloralhydrate", "space_drugs","holywater" , "inaprovaline", "serotrotium"), pick(3,5,7,10,15))
-	reagents.add_reagent(pick("capsaicin", "tricordrazine","neurotoxin","frostoil", "toxin","stoxin", "carpotoxin", "hippiesdelight","condensedcapsaicin","hyperzine","impedrezene" ,"cryptobiolin", "oxycodone", "psilocybin", "mindbreaker", "chloralhydrate", "space_drugs","holywater" , "inaprovaline", "serotrotium"), pick(3,5,7,10,15))
-	reagents.add_reagent(pick("capsaicin", "tricordrazine","neurotoxin","frostoil", "toxin","stoxin", "carpotoxin", "hippiesdelight","condensedcapsaicin","hyperzine","impedrezene" ,"cryptobiolin", "oxycodone", "psilocybin", "mindbreaker", "chloralhydrate", "space_drugs","holywater" , "inaprovaline", "serotrotium"), pick(3,5,7,10,15))
+	reagents.add_reagent(pick("chloralhydrate","neurotoxin","frostoil", "toxin","stoxin", "carpotoxin", "hippiesdelight","hyperzine","impedrezene" ,"cryptobiolin", "oxycodone", "psilocybin", "mindbreaker", "capsaicin", "space_drugs" , "inaprovaline", "serotrotium"), pick(5,7,10,13,15))
+	reagents.add_reagent(pick("chloralhydrate","neurotoxin","frostoil", "toxin","stoxin", "carpotoxin", "hippiesdelight","hyperzine","impedrezene" ,"cryptobiolin", "oxycodone", "psilocybin", "mindbreaker", "capsaicin", "space_drugs" , "inaprovaline", "serotrotium"), pick(5,7,10,13,15))
+	reagents.add_reagent(pick("chloralhydrate","neurotoxin","frostoil", "toxin","stoxin", "carpotoxin", "hippiesdelight","hyperzine","impedrezene" ,"cryptobiolin", "oxycodone", "psilocybin", "mindbreaker", "capsaicin", "space_drugs" , "inaprovaline", "serotrotium"), pick(5,7,10,13,15))
 
 
 
@@ -52,9 +52,6 @@
 
 /obj/item/weapon/storage/pill_bottle/random_drug_bottle/New()
 	..()
-	new /obj/item/weapon/reagent_containers/pill/random_drugs( src )
-	new /obj/item/weapon/reagent_containers/pill/random_drugs( src )
-	new /obj/item/weapon/reagent_containers/pill/random_drugs( src )
 	new /obj/item/weapon/reagent_containers/pill/random_drugs( src )
 	new /obj/item/weapon/reagent_containers/pill/random_drugs( src )
 	new /obj/item/weapon/reagent_containers/pill/random_drugs( src )
