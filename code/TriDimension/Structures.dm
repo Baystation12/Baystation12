@@ -132,7 +132,7 @@
 
 	attack_hand(var/mob/M)
 		if(!target || !istype(target.loc, /turf))
-			M << "The ladder is incomplete and cant be climbed."
+			M << "The ladder is incomplete and can't be climbed."
 		else
 			var/turf/T = target.loc
 			var/blocked = 0
