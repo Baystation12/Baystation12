@@ -54,6 +54,27 @@
 		dat += text("Bananium coins: [amt_clown] <A href='?src=\ref[src];remove=clown'>Remove one</A><br>")
 	if (amt_adamantine)
 		dat += text("Adamantine coins: [amt_adamantine] <A href='?src=\ref[src];remove=adamantine'>Remove one</A><br>")
+/*
+	var/credits=0
+	var/list/ore=list()
+	for(var/oredata in typesof(/datum/material) - /datum/material)
+		var/datum/material/ore_datum = new oredata
+		ore[ore_datum.id]=ore_datum
+
+	for (var/obj/item/weapon/coin/C in contents)
+		if (istype(C,/obj/item/weapon/coin))
+			var/datum/material/ore_info=ore[C.material]
+			ore_info.stored++
+			ore[C.material]=ore_info
+			credits += C.credits
+
+	var/dat = "<b>The contents of the moneybag reveal...</b><ul>"
+	for(var/ore_id in ore)
+		var/datum/material/ore_info=ore[ore_id]
+		if(ore_info.stored)
+			dat += "<li>[ore_info.processed_name] coins: [ore_info.stored] <A href='?src=\ref[src];remove=[ore_id]'>Remove one</A></li>"
+	dat += "</ul><b>Total haul:</b> $[credits]"
+*/
 	user << browse("[dat]", "window=moneybag")
 
 /obj/item/weapon/moneybag/attackby(obj/item/weapon/W as obj, mob/user as mob)
