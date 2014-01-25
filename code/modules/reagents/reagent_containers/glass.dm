@@ -47,11 +47,10 @@
 		set src in view()
 		..()
 		if (!(usr in view(2)) && usr!=src.loc) return
-		usr << "\blue It contains "
 		if(reagents && reagents.reagent_list.len)
-			usr << "\blue [src.reagents.total_volume] units of liquid."
+			usr << "\blue It contains [src.reagents.total_volume] units of liquid."
 		else
-			usr << "\blue nothing."
+			usr << "\blue It is empty."
 		if (!is_open_container())
 			usr << "\blue Airtight lid seals it completely."
 
