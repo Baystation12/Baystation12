@@ -820,6 +820,7 @@ client
 			usr << "This can only be done to instances of type /mob/living"
 			return
 		var/list/possibleverbs = list()
+		possibleverbs += "Cancel" 								// One for the top...
 		possibleverbs += typesof(/mob/proc,/mob/verb,/mob/living/proc,/mob/living/verb)
 		switch(H.type)
 			if(/mob/living/carbon/human)
@@ -829,12 +830,13 @@ client
 			if(/mob/living/silicon/ai)
 				possibleverbs += typesof(/mob/living/silicon/proc,/mob/living/silicon/ai/proc,/mob/living/silicon/ai/verb)
 		possibleverbs -= H.verbs
+		possibleverbs += "Cancel" 								// ...And one for the bottom
 		
 		var/verb = input("Select a verb!", "Verbs",null) as anything in possibleverbs
 		if(!H)
 			usr << "Mob doesn't exist anymore"
 			return
-		if(!verb)
+		if(!verb || verb == "Cancel")
 			return
 		else
 			H.verbs += verb
