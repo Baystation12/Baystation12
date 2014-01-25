@@ -28,7 +28,7 @@
 
 	return ..()
 
-//Ears: currently only used for headsets and earmuffs
+//Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears
 	name = "ears"
 	w_class = 1.0
@@ -258,7 +258,8 @@ BLIND     // can't see anything
 		if(istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
 			H.update_inv_w_uniform()
-
+		action_button_name = "Use inventory."
+		icon_action_button = "under_use"
 		return
 
 	..()
@@ -328,10 +329,20 @@ BLIND     // can't see anything
 		if(istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
 			H.update_inv_w_uniform()
-
+		action_button_name = null
+		icon_action_button = null
 /obj/item/clothing/under/rank/New()
 	sensor_mode = pick(0,1,2,3)
 	..()
+
+
+/obj/item/clothing/under/attack_self(mob/user)
+	if(hastie)
+		if (istype(hastie,/obj/item/clothing/tie/holster))
+			holster()
+		if (istype(hastie,/obj/item/clothing/tie/storage))
+			storage()
+	
 
 /obj/item/clothing/under/proc/holster()
 	set name = "Holster"
