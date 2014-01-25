@@ -297,7 +297,7 @@ datum
 			id = "plasticide"
 			description = "Liquid plastic, do not eat."
 			reagent_state = LIQUID
-			color = "#CF3600" // rgb: 207, 54, 0
+			color = "#C9C9C9" // rgb: 201, 201, 201
 			custom_metabolism = 0.01
 
 			on_mob_life(var/mob/living/M as mob)
@@ -891,7 +891,7 @@ datum
 		fuel
 			name = "Welding fuel"
 			id = "fuel"
-			description = "Required for welders. Flamable."
+			description = "Required for welders. Flammable."
 			reagent_state = LIQUID
 			color = "#660000" // rgb: 102, 0, 0
 			overdose = REAGENTS_OVERDOSE
@@ -934,6 +934,7 @@ datum
 
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
+					T.color = null //cleans paints
 			reaction_turf(var/turf/simulated/S, var/volume)
 				if(volume >= 1)
 					S.dirt = 0
@@ -1464,7 +1465,6 @@ datum
 			description = "A powerful oxidizer that reacts with ethanol."
 			reagent_state = SOLID
 			color = "#605048" // rgb: 96, 80, 72
-			overdose = REAGENTS_OVERDOSE
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1475,6 +1475,42 @@ datum
 				M.reagents.remove_all_type(/datum/reagent/ethanol, 1*REM, 0, 1)
 				..()
 				return
+
+		paint //generic paint
+			name = "Paint"
+			id = "paint"
+			description = "This paint will only adhere to floor tiles."
+			reagent_state = LIQUID
+			color = "C9C9C9" // rgb: 201, 201, 201; same as plasticide
+			overdose = REAGENTS_OVERDOSE
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.adjustToxLoss(0.4)
+				..()
+				return
+			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				//TODO: colour mobs when splashed with paint
+				return
+			reaction_turf(var/turf/T, var/volume)
+				if(!istype(T) || istype(T, /turf/space))
+					return
+				T.color = color
+				/*
+				var/ind = "[initial(T.icon)][color]"
+				if(!cached_icons[ind]) //Do not make a new icon for every painted tile
+					var/icon/overlay = new/icon(initial(T.icon))
+					overlay.Blend(color,ICON_MULTIPLY)
+					overlay.SetIntensity(1.4)
+					T.icon = overlay
+					cached_icons[ind] = T.icon
+				else
+					T.icon = cached_icons[ind]
+				return*/
+			reaction_obj(var/obj/O, var/volume)
+				//TODO: colour objects when splashed with paint
+				return
+
 
 //////////////////////////Poison stuff///////////////////////
 
@@ -3055,7 +3091,7 @@ datum
 		ethanol/vodka
 			name = "Vodka"
 			id = "vodka"
-			description = "Number one drink AND fueling choice for Russians worldwide."
+			description = "Number one drink and fueling choice for Russians throughout the universe."
 			color = "#0064C8" // rgb: 0, 100, 200
 			boozepwr = 2
 

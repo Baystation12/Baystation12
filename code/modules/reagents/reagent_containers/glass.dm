@@ -90,6 +90,7 @@
 			src.reagents.reaction(target, TOUCH)
 			spawn(5) src.reagents.clear_reagents()
 			return
+
 		else if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
 
 			if(!target.reagents.total_volume && target.reagents)
@@ -125,10 +126,21 @@
 		else if(istype(target, /obj/machinery/radiocarbon_spectrometer))
 			return
 
+		//Paint something from the glass
+		else if(reagents.total_volume >= 5 && reagents.get_reagent_amount("paint")>0.45*reagents.total_volume)
+			for(var/mob/O in viewers(user))
+				O.show_message("\blue [user] coats [target] with the solution.", 1)
+			reagents.reaction(target, TOUCH)
+			spawn(5)
+				reagents.remove_any(5)
+			return
+
 		else if(reagents.total_volume)
+			if(reagents.get_reagent_amount("paint"))
+				user << "\blue The paint is too weak."
 			user << "\blue You splash the solution onto [target]."
-			src.reagents.reaction(target, TOUCH)
-			spawn(5) src.reagents.clear_reagents()
+			reagents.reaction(target, TOUCH)
+			spawn(5) reagents.clear_reagents()
 			return
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)

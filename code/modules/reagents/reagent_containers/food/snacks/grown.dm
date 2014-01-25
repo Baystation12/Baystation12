@@ -244,13 +244,13 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/plastellium
 	seed = "/obj/item/seeds/plastiseed"
 	name = "clump of plastellium"
-	desc = "Hmm, needs some processing"
+	desc = "Hmm, needs some processing."
 	icon_state = "plastellium"
 	filling_color = "#C4C4C4"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
-			reagents.add_reagent("plasticide", 1+round((potency / 10), 1))
+			reagents.add_reagent("plasticide", 5+round((potency / 10), 1))
 			bitesize = 1+round(reagents.total_volume / 2, 1)
 
 

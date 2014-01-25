@@ -467,6 +467,20 @@ datum
 				holder.clear_reagents()
 				return
 
+		paint
+			name = "Paint"
+			id = "paint"
+			result = "paint"
+			required_reagents = list("ethanol" = 2, "plasticide" = 1)
+			result_amount = 3
+
+		paint2
+			name = "Paint 2"
+			id = "paint"
+			result = "paint"
+			required_reagents = list("paint" = 1, "plasticide" = 1)
+			result_amount = 2
+
 		chloralhydrate
 			name = "Chloral Hydrate"
 			id = "chloralhydrate"

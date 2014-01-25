@@ -111,6 +111,8 @@ datum
 					var/current_reagent_transfer = current_reagent.volume * part
 					if(preserve_data)
 						trans_data = current_reagent.data
+					if (current_reagent.id == "paint" && current_reagent.volume > 0)
+						trans_data = current_reagent.color
 
 					R.add_reagent(current_reagent.id, (current_reagent_transfer * multiplier), trans_data)
 					src.remove_reagent(current_reagent.id, current_reagent_transfer)
@@ -400,15 +402,26 @@ datum
 			add_reagent(var/reagent, var/amount, var/list/data=null)
 				if(!isnum(amount)) return 1
 				update_total()
-				if(total_volume + amount > maximum_volume) amount = (maximum_volume - total_volume) //Doesnt fit in. Make it disappear. Shouldnt happen. Will happen.
+				if(total_volume + amount > maximum_volume) //Should never happen
+					amount = (maximum_volume - total_volume)
 
 				for(var/A in reagent_list)
 
 					var/datum/reagent/R = A
 					if (R.id == reagent)
-						R.volume += amount
-						update_total()
-						my_atom.on_reagent_change()
+
+						// mix paints
+						if(R.id == "paint" && reagent == "paint")
+							if(!data) world << "Error: no paint colour data."
+							var/list/bothpaints = new /list
+							bothpaints = reagent_list
+							//make a fictitious paint that has been added to get the colours straight
+							var/datum/reagent/D = chemical_reagents_list[reagent]
+							var/datum/reagent/secondpaint = new D.type()
+							secondpaint.color = data
+							secondpaint.volume = amount
+							bothpaints += secondpaint
+							R.color = mix_color_from_reagents(bothpaints)
 
 						// mix dem viruses
 						if(R.id == "blood" && reagent == "blood")
@@ -435,6 +448,9 @@ datum
 												preserve += D
 										R.data["viruses"] = preserve
 
+						R.volume += amount
+						update_total()
+						my_atom.on_reagent_change()
 						handle_reactions()
 						return 0
 
@@ -446,12 +462,6 @@ datum
 					R.holder = src
 					R.volume = amount
 					SetViruses(R, data) // Includes setting data
-
-					//debug
-					//world << "Adding data"
-					//for(var/D in R.data)
-					//	world << "Container data: [D] = [R.data[D]]"
-					//debug
 					update_total()
 					my_atom.on_reagent_change()
 					handle_reactions()
