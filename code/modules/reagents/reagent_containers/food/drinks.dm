@@ -26,6 +26,25 @@
 			user << "\red None of [src] left, oh no!"
 			return 0
 
+		if (istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/Feeded = M
+			if(Feeded.head)
+				var/obj/item/Head = Feeded.head
+				if(Head.flags & HEADCOVERSMOUTH)
+					if (M == user)
+						user<<"You can't drink it through [Head]"
+					else
+						user<<"You can't feed [Feeded] through [Head]"
+					return
+			if(Feeded.wear_mask)
+				var/obj/item/Mask = Feeded.wear_mask
+				if(Feeded.wear_mask.flags & MASKCOVERSMOUTH)
+					if (M == user)
+						user<<"You can't drink it through [Mask]"
+					else
+						user<<"You can't feed [Feeded] through [Mask]"
+					return
+
 		if(M == user)
 			M << "\blue You swallow a gulp of [src]."
 			if(reagents.total_volume)
