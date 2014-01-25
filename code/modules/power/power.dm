@@ -169,6 +169,9 @@
 					T = locate(src.x, src.y, controler.down_target)
 					if(T)
 						. += power_list(T, src, 12, 1)
+	else if(!d1)
+		if(T)
+			. += power_list(T, src, d1, 1)
 
 	if(d2 == 11 || d2 == 12)
 		var/turf/controlerlocation = locate(1, 1, z)
