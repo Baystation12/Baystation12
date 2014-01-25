@@ -14,16 +14,6 @@
 	force = 10
 	m_amt = 90
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
-<<<<<<< HEAD
-	var/list/reagents_to_log=list(
-		"fuel"=    "welder fuel",
-		"plasma"=  "plasma",
-		"pacid"=   "polytrinic acid",
-		"sacid"=   "sulphuric acid"
-	)
-
-=======
->>>>>>> 6ff7901... Add additional extinguisher logging, transfer logging framework.
 	var/max_water = 50
 	var/last_use = 1.0
 	var/safety = 1
