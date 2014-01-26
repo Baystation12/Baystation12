@@ -12,6 +12,10 @@ var/datum/global_hud/global_hud = new()
 /datum/global_hud
 	var/obj/screen/druggy
 	var/obj/screen/blurry
+	
+	var/obj/screen/meson
+	var/obj/screen/thermal
+	
 	var/list/vimpaired
 	var/list/darkMask
 
@@ -29,6 +33,24 @@ var/datum/global_hud/global_hud = new()
 	blurry.icon_state = "blurry"
 	blurry.layer = 17
 	blurry.mouse_opacity = 0
+
+	//green vision for night googles and meson
+	meson = new /obj/screen()
+	meson.icon = 'icons/effects/alert.dmi'
+	meson.icon_state = "dark128"
+	meson.icon += rgb(0, 130, 0, 90)
+	meson.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	meson.layer = 17
+	meson.mouse_opacity = 0
+
+	//red vision for thermals
+	thermal = new /obj/screen()
+	thermal.icon = 'icons/effects/alert.dmi'
+	thermal.icon_state = "dark128"
+	thermal.icon += rgb(130, 0, 0, 90)
+	thermal.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	thermal.layer = 17
+	thermal.mouse_opacity = 0
 
 	var/obj/screen/O
 	var/i

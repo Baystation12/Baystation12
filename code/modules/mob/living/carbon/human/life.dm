@@ -1072,7 +1072,7 @@
 			else if(eye_blind)			//blindness, heals slowly over time
 				eye_blind = max(eye_blind-1,0)
 				blinded = 1
-			else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold))	//resting your eyes with a blindfold heals blurry eyes faster
+			else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/blindfold) || istype(head, /obj/item/weapon/reagent_containers/glass/bucket))	//resting your eyes with a blindfold heals blurry eyes faster
 				eye_blurry = max(eye_blurry-3, 0)
 				blinded = 1
 			else if(eye_blurry)	//blurry eyes heal slowly
@@ -1122,6 +1122,7 @@
 				client.images.Remove(hud)
 
 		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
+		client.screen.Remove(global_hud.meson, global_hud.thermal)
 
 		update_action_buttons()
 
@@ -1356,6 +1357,12 @@
 				var/obj/item/clothing/glasses/welding/O = glasses
 				if(!O.up && tinted_weldhelh)
 					client.screen += global_hud.darkMask
+					
+			if(istype(glasses, /obj/item/clothing/glasses/meson) || istype(glasses, /obj/item/clothing/glasses/night) || istype(glasses, /obj/item/clothing/glasses/gglasses))
+				client.screen += global_hud.meson
+
+			if(istype(glasses, /obj/item/clothing/glasses/thermal) )
+				client.screen += global_hud.thermal
 
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)
