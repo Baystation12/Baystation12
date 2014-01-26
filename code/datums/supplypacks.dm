@@ -891,8 +891,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/suit/hastur,
 					/obj/item/clothing/suit/imperium_monk,
 					/obj/item/clothing/suit/ianshirt,
-					/obj/item/clothing/suit/leathercoat,
-					/obj/item/clothing/suit/browncoat,
+					/obj/item/clothing/under/gimmick/rank/captain/suit,
+					/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit,
+					/obj/item/clothing/under/lawyer/purpsuit,
 					/obj/item/clothing/suit/suspenders,
 					/obj/item/clothing/suit/storage/labcoat/mad,
 					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit)
