@@ -43,7 +43,7 @@
 
 /obj/machinery/chem_dispenser/process()
 
-	if(recharged < 0)
+	if(recharged <= 0)
 		recharge()
 		recharged = 15
 	else
@@ -68,7 +68,7 @@
 		options[/obj/item/stack/sheet/mineral/gold] = "Wire a golden filament to fix it."
 		options[/obj/item/stack/sheet/plasteel] = "Surround the outside with a plasteel cover to fix it."
 		options[/obj/item/stack/sheet/rglass] = "Insert a pane of reinforced glass to fix it."
-
+		stat |= BROKEN
 		while(amount > 0)
 			amount -= 1
 
@@ -104,13 +104,12 @@
   *
   * @return nothing
   */
-/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
-	if(stat & (BROKEN|NOPOWER)) return
-	if(user.stat || user.restrained()) return
-
+/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)
 	if(broken_requirements.len)
 		user << "<span class='warning'>[src] is broken. [broken_requirements[broken_requirements[1]]]</span>"
 		return
+	if(stat & (BROKEN|NOPOWER)) return
+	if(user.stat || user.restrained()) return
 
 	// this is the data which will be sent to the ui
 	var/data[0]
@@ -140,15 +139,15 @@
 		if(temp)
 			chemicals.Add(list(list("title" = temp.name, "id" = temp.id, "commands" = list("dispense" = temp.id)))) // list in a list because Byond merges the first list...
 	data["chemicals"] = chemicals
-	
+
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "chem_dispenser.tmpl", ui_title, 380, 650)
 		// when the ui is first opened this is the data it will use
-		ui.set_initial_data(data)		
+		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
 
@@ -194,6 +193,8 @@
 		else
 			user.drop_item()
 			del(B)
+		if(broken_requirements.len==0)
+			stat ^= BROKEN
 		return
 	if(src.beaker)
 		user << "Something is already loaded into the machine."

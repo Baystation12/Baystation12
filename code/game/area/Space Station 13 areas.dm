@@ -922,16 +922,28 @@ var/list/ghostteleportlocs = list()
 
 /area/engine
 	engine_smes
-		name = "\improper Engineering SMES"
+		name = "Engineering SMES"
 		icon_state = "engine_smes"
-		requires_power = 0//This area only covers the batteries and they deal with their own power
+//		requires_power = 0//This area only covers the batteries and they deal with their own power
+
+	engine_room
+		name = "\improper Engine Room"
+		icon_state = "engine"
+
+	engine_airlock
+		name = "\improper Engine Room Airlock"
+		icon_state = "engine"
+
+	engine_monitoring
+		name = "\improper Engine Monitoring Room"
+		icon_state = "engine_monitoring"
 
 	engineering
 		name = "Engineering"
 		icon_state = "engine_smes"
 
 	break_room
-		name = "\improper Engineering Foyer"
+		name = "Engineering Foyer"
 		icon_state = "engine"
 
 	chiefs_office

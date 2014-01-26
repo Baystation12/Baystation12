@@ -27,6 +27,12 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	ItemList = text2list(src.items, ";")	// Parsing the items text string
 	uses = ticker.mode.uplink_uses
 	nanoui_items = generate_nanoui_items()
+	for(var/D in ItemList)
+		var/list/O = text2list(D, ":")
+		if(O.len>0)
+			valid_items += O[1]		
+
+
 
 /*
 	Built the Items List for use with NanoUI
@@ -55,16 +61,6 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			items_nano[items_nano.len]["items"] += list(list("Name" = itemname, "Cost" = cost, "obj_path" = path_text))
 
 	return items_nano
-
-
-
-
-
-	//Halfassed fix for href exploit ~Z
-	for(var/D in ItemList)
-		var/list/O = text2list(D, ":")
-		if(O.len>0)
-			valid_items += O[1]
 
 //Let's build a menu!
 /obj/item/device/uplink/proc/generate_menu()

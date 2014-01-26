@@ -1393,13 +1393,6 @@ datum
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		holywater
-			name = "Holy Water"
-			id = "holywater"
-			description = "This was once water, but has been altered by higher powers."
-			reagent_state = LIQUID
-			color = "#535E66" // rgb: 83, 94, 102
-
 		nanites
 			name = "Nanomachines"
 			id = "nanites"

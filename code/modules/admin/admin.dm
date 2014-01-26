@@ -696,7 +696,7 @@ var/global/floorIsLava = 0
 
 /datum/admins/proc/toggleooc()
 	set category = "Server"
-	set desc="Toggle dis bitch"
+	set desc="Globally Toggles OOC"
 	set name="Toggle OOC"
 	ooc_allowed = !( ooc_allowed )
 	if (ooc_allowed)
@@ -706,6 +706,20 @@ var/global/floorIsLava = 0
 	log_admin("[key_name(usr)] toggled OOC.")
 	message_admins("[key_name_admin(usr)] toggled OOC.", 1)
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
+/datum/admins/proc/toggledsay()
+	set category = "Server"
+	set desc="Globally Toggles DSAY"
+	set name="Toggle DSAY"
+	dsay_allowed = !( dsay_allowed )
+	if (dsay_allowed)
+		world << "<B>Deadchat has been globally enabled!</B>"
+	else
+		world << "<B>Deadchat has been globally disabled!</B>"
+	log_admin("[key_name(usr)] toggled deadchat.")
+	message_admins("[key_name_admin(usr)] toggled deadchat.", 1)
+	feedback_add_details("admin_verb","TDSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 
 /datum/admins/proc/toggleoocdead()
 	set category = "Server"

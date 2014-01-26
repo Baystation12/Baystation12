@@ -100,6 +100,7 @@
 		return
 	if( !fire )
 		fire = 1
+		master.fire = 1		//used for firedoor checks
 		updateicon()
 		mouse_opacity = 0
 		for(var/obj/machinery/door/firedoor/D in all_doors)
@@ -122,6 +123,7 @@
 /area/proc/firereset()
 	if (fire)
 		fire = 0
+		master.fire = 0		//used for firedoor checks
 		mouse_opacity = 0
 		updateicon()
 		for(var/obj/machinery/door/firedoor/D in all_doors)

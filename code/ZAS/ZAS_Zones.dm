@@ -27,12 +27,6 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	var/interactions_with_unsim = 0
 	var/progress = "nothing"
 
-
-/datum/gas_mixture/zone
-	Del()
-		CRASH("Something tried to delete a zone's air!")
-		. = ..()
-
 //CREATION AND DELETION
 /zone/New(turf/start)
 	. = ..()
@@ -53,7 +47,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	//Generate the gas_mixture for use in txhis zone by using the average of the gases
 	//defined at startup.
 	//Changed to try and find the source of the error.
-	air = new /datum/gas_mixture/zone()
+	air = new
 	air.group_multiplier = contents.len
 	for(var/turf/simulated/T in contents)
 		if(!T.air)
@@ -151,6 +145,13 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			air.group_multiplier++
 
 		T.zone = src
+
+///// Z-Level Stuff
+		// also add the tile below it if its open space
+		if(istype(T, /turf/simulated/floor/open))
+			var/turf/simulated/floor/open/T2 = T
+			src.AddTurf(T2.floorbelow)
+///// Z-Level Stuff
 
 	else
 		if(!unsimulated_tiles)
@@ -772,6 +773,32 @@ zone/proc/Rebuild()
 
 				if(adjacent_id && (!lowest_id || adjacent_id < lowest_id))
 					lowest_id = adjacent_id
+
+/////// Z-Level stuff
+		var/turf/controllerlocation = locate(1, 1, current.z)
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+			// upwards
+			if(controller.up)
+				var/turf/simulated/adjacent = locate(current.x, current.y, controller.up_target)
+
+				if(adjacent in turfs && istype(adjacent, /turf/simulated/floor/open))
+					current_adjacents += adjacent
+					adjacent_id = turfs[adjacent]
+
+					if(adjacent_id && (!lowest_id || adjacent_id < lowest_id))
+						lowest_id = adjacent_id
+
+			// downwards
+			if(controller.down && istype(current, /turf/simulated/floor/open))
+				var/turf/simulated/adjacent = locate(current.x, current.y, controller.down_target)
+
+				if(adjacent in turfs)
+					current_adjacents += adjacent
+					adjacent_id = turfs[adjacent]
+
+					if(adjacent_id && (!lowest_id || adjacent_id < lowest_id))
+						lowest_id = adjacent_id
+/////// Z-Level stuff
 
 		if(!lowest_id)
 			lowest_id = current_identifier++
