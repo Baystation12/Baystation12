@@ -107,6 +107,7 @@
 				spawn(50) // Not the best fix. There should be an failure proc, for /effect/equip_e/, which is called when the first initital checks fail
 					inuse = 0
 				M.requests += O
+				/* not work with new dna-system
 				if (dnatype == "se")
 					// So you're checking for 14, and yet MONKEYBLOCK is 27 in globals.dm,
                     //  and domutcheck checks MONKEYBLOCK...?  wat. - N3X
@@ -119,6 +120,7 @@
 				else
 	//				message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name]")
 					log_attack("[key_name(user)] injected [key_name(M)] with the [name]")
+				*/
 
 				spawn( 0 )
 					O.process()
@@ -132,6 +134,7 @@
 				if (!(istype(M, /mob/living/carbon/human) || istype(M, /mob/living/carbon/monkey)))
 					user << "\red Apparently it didn't work."
 					return
+				/* not work with new dna-system
 				if (dnatype == "se")
                     // And again... ?
 					//if (isblockon(getblock(dna, 14,3),14) && istype(M, /mob/living/carbon/human))
@@ -144,6 +147,7 @@
 				else
 //					message_admins("[key_name_admin(user)] injected [key_name_admin(M)] with the [name]")
 					log_game("[key_name(user)] injected [key_name(M)] with the [name]")
+				*/
 				inuse = 1
 				inject(M, user)//Now we actually do the heavy lifting.
 				spawn(50)
