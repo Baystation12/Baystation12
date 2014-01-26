@@ -84,7 +84,7 @@
 /datum/dna/gene/disability/speech
 	can_activate(var/mob/M, var/flags)
 		// Can only activate one of these at a time.
-		if(is_type_in_list(/datum/dna/gene/disability/speech,M.mutations))
+		if(is_type_in_list(/datum/dna/gene/disability/speech,M.active_genes))
 			return 0
 		return ..(M,flags)
 
@@ -239,7 +239,7 @@
 		block=STRONGBLOCK
 
 // WAS: /datum/bioEffect/horns
-/datum/dna/gene/disability/strong
+/datum/dna/gene/disability/horns
 	name = "Horns"
 	desc = "Enables the growth of a compacted keratin formation on the subject's head."
 	activation_message = "A pair of horns erupt from your head."

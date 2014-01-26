@@ -36,8 +36,15 @@
 	manual_unbuckle(user)
 	return
 
+
 /obj/structure/stool/bed/MouseDrop(atom/over_object)
 	return
+
+/obj/structure/stool/bed/attack_animal(var/mob/living/simple_animal/M)//No more buckling hostile mobs to chairs to render them immobile forever
+	if(M.environment_smash)
+		new /obj/item/stack/sheet/metal(src.loc)
+		del(src)
+
 
 /obj/structure/stool/bed/MouseDrop_T(mob/M as mob, mob/user as mob)
 	if(!istype(M)) return

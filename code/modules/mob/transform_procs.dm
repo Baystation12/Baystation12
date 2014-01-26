@@ -31,6 +31,7 @@
 
 	O.dna = dna.Clone()
 	O.dna.SetSEState(MONKEYBLOCK,1)
+	O.dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
 	O.loc = loc
 	O.viruses = viruses
 	O.a_intent = "harm"

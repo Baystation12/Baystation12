@@ -179,7 +179,9 @@
 					if(!(original in permutated))
 						Bump(original)
 						sleep(1)
+			Range()
 		return
+
 
 /obj/item/projectile/test //Used to see if you can hit them.
 	invisibility = 101 //Nope!  Can't see me!
@@ -221,3 +223,7 @@
 				M = locate() in get_step(src,target)
 				if(istype(M))
 					return 1
+
+/obj/item/projectile/proc/Range()
+	return
+

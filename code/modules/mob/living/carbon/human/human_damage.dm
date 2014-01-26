@@ -64,6 +64,7 @@
 	if(M_HULK in mutations)	return
 	..()
 
+
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	..()
 	var/heal_prob = max(0, 80 - getCloneLoss())
@@ -92,6 +93,7 @@
 			if (O.status & ORGAN_MUTATED)
 				O.unmutate()
 				src << "<span class = 'notice'>Your [O.display_name] is shaped normally again.</span>"
+
 ////////////////////////////////////////////
 
 //Returns a list of damaged organs
@@ -260,3 +262,20 @@
 			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
 			S.add_blood(src)
 	return 1
+
+// incredibly important stuff follows
+/mob/living/carbon/human/fall(var/forced)
+	..()
+	if(forced)
+		playsound(loc, "bodyfall", 50, 1, -1)
+	if(head)
+		var/multiplier = 1
+		if(stat || (status_flags & FAKEDEATH))
+			multiplier = 2
+		var/obj/item/clothing/head/H = head
+		if(!istype(H) || prob(H.loose * multiplier))
+			drop_from_inventory(H)
+			if(prob(60))
+				step_rand(H)
+			if(!stat)
+				src << "<span class='warning'>Your [H] fell off!</span>"

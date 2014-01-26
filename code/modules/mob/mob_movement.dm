@@ -280,8 +280,10 @@
 
 		else if(mob.confused)
 			step(mob, pick(cardinal))
+			mob.last_movement=world.time
 		else
 			. = ..()
+			mob.last_movement=world.time
 
 		moving = 0
 

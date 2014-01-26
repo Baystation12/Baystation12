@@ -51,6 +51,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 100, bio = 0, rad = 0)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES
 	siemens_coefficient = 0
+	loose = 5
 
 
 /obj/item/clothing/suit/bomb_suit
@@ -90,7 +91,7 @@
 	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 100)
-
+	loose = 8
 
 /obj/item/clothing/suit/radiation
 	name = "Radiation suit"

@@ -118,6 +118,22 @@
 	item_state = "ce_hardsuit"
 	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
 
+
+//Singuloth armor
+/obj/item/clothing/head/helmet/space/rig/singuloth
+	name = "singuloth knight's helmet"
+	desc = "This is an adamantium helmet from the chapter of the Singuloth Knights. It shines with a holy aura."
+	icon_state = "rig0-singuloth"
+	item_state = "singuloth_helm"
+	_color = "singuloth"
+
+/obj/item/clothing/suit/space/rig/singuloth
+	icon_state = "rig-singuloth"
+	name = "singuloth knight's armor"
+	desc = "This is a ceremonial armor from the chapter of the Singuloth Knights. It's made of pure forged adamantium."
+	item_state = "singuloth_hardsuit"
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE
+
 //Mining rig
 /obj/item/clothing/head/helmet/space/rig/mining
 	name = "mining hardsuit helmet"

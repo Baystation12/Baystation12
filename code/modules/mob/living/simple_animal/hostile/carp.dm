@@ -53,3 +53,12 @@
 		if(prob(15))
 			L.Weaken(3)
 			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
+
+
+/mob/living/simple_animal/hostile/carp/holocarp
+	icon_state = "holocarp"
+	icon_living = "holocarp"
+
+/mob/living/simple_animal/hostile/carp/holocarp/Die()
+	del(src)
+	return

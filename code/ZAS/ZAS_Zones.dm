@@ -27,12 +27,6 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	var/interactions_with_unsim = 0
 	var/progress = "nothing"
 
-
-/datum/gas_mixture/zone
-	Del()
-		CRASH("Something tried to delete a zone's air!")
-		. = ..()
-
 //CREATION AND DELETION
 /zone/New(turf/start)
 	. = ..()
@@ -53,7 +47,7 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	//Generate the gas_mixture for use in txhis zone by using the average of the gases
 	//defined at startup.
 	//Changed to try and find the source of the error.
-	air = new /datum/gas_mixture/zone()
+	air = new
 	air.group_multiplier = contents.len
 	for(var/turf/simulated/T in contents)
 		if(!T.air)

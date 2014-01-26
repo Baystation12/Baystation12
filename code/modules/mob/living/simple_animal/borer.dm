@@ -294,9 +294,6 @@
 
 	src << "You begin disconnecting from [host]'s synapses and prodding at their internal ear canal."
 
-	if(!host.stat)
-		host << "An odd, uncomfortable pressure begins to build inside your skull, behind your ear..."
-
 	spawn(200)
 
 		if(!host || !src) return
@@ -306,8 +303,6 @@
 			return
 
 		src << "You wiggle out of [host]'s ear and plop to the ground."
-		if(!host.stat)
-			host << "Something slimy wiggles out of your ear and plops to the ground!"
 
 		detatch()
 
@@ -376,7 +371,7 @@ mob/living/simple_animal/borer/proc/detatch()
 			src << "You cannot get through that host's protective gear."
 			return
 */
-	M << "Something slimy begins probing at the opening of your ear canal..."
+
 	src << "You slither up [M] and begin probing at their ear canal..."
 
 	if(!do_after(src,50))
@@ -395,11 +390,7 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	if(M in view(1, src))
 		src << "You wiggle into [M]'s ear."
-		if(!M.stat)
-			M << "Something disgusting and slimy wiggles into your ear!"
-
-			src.perform_infestation(M)
-
+		src.perform_infestation(M)
 		return
 	else
 		src << "They are no longer in range!"

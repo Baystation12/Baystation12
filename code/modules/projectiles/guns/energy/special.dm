@@ -182,7 +182,7 @@ obj/item/weapon/gun/energy/staff/focus
 	zoom = 0
 
 /obj/item/weapon/gun/energy/sniperrifle/verb/zoom()
-   set category = "Special Verbs"
+   set category = "Object"
    set name = "Zoom"
    set popup_menu = 0
    if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
@@ -197,3 +197,19 @@ obj/item/weapon/gun/energy/staff/focus
    else
       usr.client.view = world.view//world.view - default mob view size
    return
+
+
+/obj/item/weapon/gun/energy/kinetic_accelerator
+	name = "proto-kinetic accelerator"
+	desc = "According to Nanotrasen accounting, this is mining equipment. It's been modified to the legal limit on power output, and often serves as a miner's first defense against hostile alien life; it's not very powerful unless used in a low pressure environment."
+	icon_state = "freezegun"
+	item_state = "shotgun"
+	projectile_type = "/obj/item/projectile/kinetic"
+	cell_type = "/obj/item/weapon/cell/crap"
+	charge_cost = 500
+	fire_delay = 20
+
+/obj/item/weapon/gun/energy/kinetic_accelerator/attack_self(var/mob/living/user/L)
+	power_supply.give(500)
+	playsound(src.loc, 'sound/weapons/shotgunpump.ogg', 60, 1)
+	return
