@@ -1,6 +1,6 @@
-/obj/effect/landmark/zcontroler
-	name = "Z-Level Controler"
-	var/initialized = 0 // when set to 1, turfs will report to the controler
+/obj/effect/landmark/zcontroller
+	name = "Z-Level Controller"
+	var/initialized = 0 // when set to 1, turfs will report to the controller
 	var/up = 0	// 1 allows  up movement
 	var/up_target = 0 // the Z-level that is above the current one
 	var/down = 0 // 1 allows down movement
@@ -14,7 +14,7 @@
 	var/normal_time
 	var/fast_time
 
-/obj/effect/landmark/zcontroler/New()
+/obj/effect/landmark/zcontroller/New()
 	..()
 	for (var/turf/T in world)
 		if (T.z == z)
@@ -28,11 +28,11 @@
 	initialized = 1
 	return 1
 
-/obj/effect/landmark/zcontroler/Del()
+/obj/effect/landmark/zcontroller/Del()
 	processing_objects.Remove(src)
 	return
 
-/obj/effect/landmark/zcontroler/process()
+/obj/effect/landmark/zcontroller/process()
 	if (world.time > fast_time)
 		calc(fast)
 		fast_time = world.time + 10
@@ -46,7 +46,7 @@
 		slow_time = world.time + 3000 */
 	return
 
-/obj/effect/landmark/zcontroler/proc/add(var/list/L, var/I, var/transfer)
+/obj/effect/landmark/zcontroller/proc/add(var/list/L, var/I, var/transfer)
 	while (L.len)
 		var/turf/T = pick(L)
 
@@ -65,15 +65,15 @@
 
 		if(transfer > 0)
 			if(up)
-				var/turf/controler_up = locate(1, 1, up_target)
-				for(var/obj/effect/landmark/zcontroler/c_up in controler_up)
+				var/turf/controller_up = locate(1, 1, up_target)
+				for(var/obj/effect/landmark/zcontroller/c_up in controller_up)
 					var/list/temp = list()
 					temp += locate(T.x, T.y, up_target)
 					c_up.add(temp, I, transfer-1)
 
 			if(down)
-				var/turf/controler_down = locate(1, 1, down_target)
-				for(var/obj/effect/landmark/zcontroler/c_down in controler_down)
+				var/turf/controller_down = locate(1, 1, down_target)
+				for(var/obj/effect/landmark/zcontroller/c_down in controller_down)
 					var/list/temp = list()
 					temp += locate(T.x, T.y, down_target)
 					c_down.add(temp, I, transfer-1)
@@ -85,8 +85,8 @@
 /turf/New()
 	..()
 
-	var/turf/controler = locate(1, 1, z)
-	for(var/obj/effect/landmark/zcontroler/c in controler)
+	var/turf/controller = locate(1, 1, z)
+	for(var/obj/effect/landmark/zcontroller/c in controller)
 		if(c.initialized)
 			var/list/turf = list()
 			turf += src
@@ -95,8 +95,8 @@
 /turf/space/New()
 	..()
 
-	var/turf/controler = locate(1, 1, z)
-	for(var/obj/effect/landmark/zcontroler/c in controler)
+	var/turf/controller = locate(1, 1, z)
+	for(var/obj/effect/landmark/zcontroller/c in controller)
 		if(c.initialized)
 			var/list/turf = list()
 			turf += src
@@ -105,14 +105,14 @@
 atom/movable/Move() //Hackish
 	. = ..()
 
-	var/turf/controlerlocation = locate(1, 1, src.z)
-	for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
-		if(controler.up || controler.down)
+	var/turf/controllerlocation = locate(1, 1, src.z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(controller.up || controller.down)
 			var/list/temp = list()
 			temp += locate(src.x, src.y, src.z)
-			controler.add(temp,3,1)
+			controller.add(temp,3,1)
 
-/obj/effect/landmark/zcontroler/proc/calc(var/list/L)
+/obj/effect/landmark/zcontroller/proc/calc(var/list/L)
 	var/list/slowholder = list()
 	var/list/normalholder = list()
 	var/list/fastholder = list()

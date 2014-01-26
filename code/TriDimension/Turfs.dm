@@ -54,14 +54,14 @@
 		return ..()
 
 /turf/simulated/floor/open/proc/getbelow()
-	var/turf/controlerlocation = locate(1, 1, z)
-	for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
+	var/turf/controllerlocation = locate(1, 1, z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 		// check if there is something to draw below
-		if(!controler.down)
+		if(!controller.down)
 			src.ChangeTurf(/turf/space)
 			return 0
 		else
-			floorbelow = locate(src.x, src.y, controler.down_target)
+			floorbelow = locate(src.x, src.y, controller.down_target)
 			return 1
 	return 1
 

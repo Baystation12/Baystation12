@@ -1277,7 +1277,7 @@
 #include "code\modules\virus2\helpers.dm"
 #include "code\modules\virus2\isolator.dm"
 #include "code\modules\virus2\items_devices.dm"
-#include "code\TriDimension\controler.dm"
+#include "code\TriDimension\controller.dm"
 #include "code\TriDimension\Movement.dm"
 #include "code\TriDimension\Pipes.dm"
 #include "code\TriDimension\Structures.dm"

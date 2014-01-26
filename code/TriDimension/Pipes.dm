@@ -2,7 +2,7 @@
 // parent class for pipes //
 ////////////////////////////
 obj/machinery/atmospherics/pipe/zpipe
-		icon = 'code/TriDimension/multiz_pipe.dmi'
+		icon = 'icons/obj/structures.dmi'
 		icon_state = "up"
 
 		name = "upwards pipe"
@@ -117,7 +117,7 @@ obj/machinery/atmospherics/pipe/zpipe/disconnect(obj/machinery/atmospherics/refe
 // the elusive up pipe //
 /////////////////////////
 obj/machinery/atmospherics/pipe/zpipe/up
-		icon = 'code/TriDimension/multiz_pipe.dmi'
+		icon = 'icons/obj/structures.dmi'
 		icon_state = "up"
 
 		name = "upwards pipe"
@@ -137,10 +137,10 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 			node1 = target
 			break
 
-	var/turf/controlerlocation = locate(1, 1, src.z)
-	for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
-		if(controler.up)
-			var/turf/above = locate(src.x, src.y, controler.up_target)
+	var/turf/controllerlocation = locate(1, 1, src.z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(controller.up)
+			var/turf/above = locate(src.x, src.y, controller.up_target)
 			if(above)
 				for(var/obj/machinery/atmospherics/target in above)
 					if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/down))
@@ -156,7 +156,7 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 ///////////////////////
 
 obj/machinery/atmospherics/pipe/zpipe/down
-		icon = 'code/TriDimension/multiz_pipe.dmi'
+		icon = 'icons/obj/structures.dmi'
 		icon_state = "down"
 
 		name = "downwards pipe"
@@ -176,10 +176,10 @@ obj/machinery/atmospherics/pipe/zpipe/down/initialize()
 			node1 = target
 			break
 
-	var/turf/controlerlocation = locate(1, 1, src.z)
-	for(var/obj/effect/landmark/zcontroler/controler in controlerlocation)
-		if(controler.down)
-			var/turf/below = locate(src.x, src.y, controler.down_target)
+	var/turf/controllerlocation = locate(1, 1, src.z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(controller.down)
+			var/turf/below = locate(src.x, src.y, controller.down_target)
 			if(below)
 				for(var/obj/machinery/atmospherics/target in below)
 					if(target.initialize_directions && istype(target, /obj/machinery/atmospherics/pipe/zpipe/up))
