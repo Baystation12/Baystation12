@@ -1138,7 +1138,7 @@ proc/process_ghost_teleport_locs()
 
 /area/toxins/telesci
 	name = "\improper Telescience Lab"
-	icon_state = "toxmisc"
+	icon_state = "telesci"
 
 
 //MedBay
