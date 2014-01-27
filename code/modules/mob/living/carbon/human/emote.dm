@@ -570,7 +570,7 @@
 							reagents.add_reagent("space_drugs", rand(10,20))
 					else
 						// Was /turf/, now /mob/
-						for(var/mob/M in view(location,aoe_range))
+						for(var/mob/M in range(location,aoe_range))
 							// Now, we don't have this:
 							//new /obj/effects/fart_cloud(T,L)
 							// But:
@@ -599,7 +599,7 @@
 						visible_message("\red <b>[name]</b> unleashes a [pick("tremendous","gigantic","colossal")] fart!","You hear a [pick("tremendous","gigantic","colossal")] fart.")
 						//playsound(L.loc, 'superfart.ogg', 50, 0)
 						if(!wearing_suit)
-							for(var/mob/living/V in view(location,aoe_range))
+							for(var/mob/living/V in range(location,aoe_range))
 								shake_camera(V,10,5)
 								if (V == src)
 									continue
