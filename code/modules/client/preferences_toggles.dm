@@ -25,7 +25,7 @@
 	src << "As a ghost, you will now [(prefs.toggles & CHAT_GHOSTRADIO) ? "hear all radio chat in the world" : "only hear from nearby speakers"]."
 	prefs.save_preferences()
 	feedback_add_details("admin_verb","TGR")
-	
+
 /client/proc/toggle_hear_radio()
 	set name = "Show/Hide RadioChatter"
 	set category = "Preferences"
@@ -84,6 +84,15 @@
 		if(istype(mob, /mob/new_player))
 			src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // stop the jamsz
 	feedback_add_details("admin_verb","TLobby") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/verb/togglevoices()
+	set name = "Toggle player voices"
+	set category = "Preferences"
+	set desc = "Toggle hearing player voice sounds"
+	prefs.toggles ^= SOUND_VOICES
+	prefs.save_preferences()
+	src << "You will [(prefs.toggles & SOUND_VOICES) ? "now" : "no longer"] hear voices of players around you, or your own voice."
+	feedback_add_details("admin_verb","TVoice") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/verb/togglemidis()
 	set name = "Hear/Silence Midis"
