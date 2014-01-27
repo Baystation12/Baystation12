@@ -39,7 +39,7 @@
 	anchored = 1
 	layer = 20
 	dir = NORTH
-	icon = 'icons/misc/buildmode.dmi'
+	icon = 'tauceti/icons/misc/buildmode.dmi'
 	var/obj/effect/bmode/buildholder/master = null
 
 /obj/effect/bmode/builddir
