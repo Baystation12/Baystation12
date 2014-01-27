@@ -580,6 +580,8 @@
 							// So, let's give 'em space drugs.
 							if (M == src)
 								continue
+							if(!airborne_can_reach(get_turf(src), get_turf(M)))
+								continue
 							M.reagents.add_reagent("space_drugs",rand(1,10))
 						/*
 						var/datum/effect/effect/system/smoke_spread/chem/fart/S = new /datum/effect/effect/system/smoke_spread/chem/fart
@@ -591,7 +593,6 @@
 							S.start()
 						*/
 				if(M_SUPER_FART in mutations)
-					message=""
 					playsound(location, 'sound/effects/smoke.ogg', 50, 1, -3)
 					visible_message("\red <b>[name]</b> hunches down and grits their teeth!")
 					if(do_after(usr,30))
@@ -601,6 +602,8 @@
 							for(var/mob/living/V in view(location,aoe_range))
 								shake_camera(V,10,5)
 								if (V == src)
+									continue
+								if(!airborne_can_reach(get_turf(src), get_turf(V)))
 									continue
 								V << "\red You are sent flying!"
 								V.Weaken(5) // why the hell was this set to 12 christ
