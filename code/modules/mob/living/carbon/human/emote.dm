@@ -564,14 +564,13 @@
 
 				// Process toxic farts first.
 				if(M_TOXIC_FARTS in mutations)
-					message=""
 					if(wearing_suit)
 						if(!wearing_mask)
 							src << "\red You gas yourself!"
 							reagents.add_reagent("space_drugs", rand(10,20))
 					else
 						// Was /turf/, now /mob/
-						for(var/mob/M in view(location,2))
+						for(var/mob/M in view(location,aoe_range))
 							// Now, we don't have this:
 							//new /obj/effects/fart_cloud(T,L)
 							// But:
@@ -579,6 +578,8 @@
 							// <[REDACTED]> gets between 1 and 10 units of jenkem added to them...we obviously don't have Jenkem, but Space Drugs do literally the same exact thing as Jenkem
 							// <[REDACTED]> the user, of course, isn't impacted because it's not an actual smoke cloud
 							// So, let's give 'em space drugs.
+							if (M == src)
+								continue
 							M.reagents.add_reagent("space_drugs",rand(1,10))
 						/*
 						var/datum/effect/effect/system/smoke_spread/chem/fart/S = new /datum/effect/effect/system/smoke_spread/chem/fart
@@ -596,8 +597,8 @@
 					if(do_after(usr,30))
 						visible_message("\red <b>[name]</b> unleashes a [pick("tremendous","gigantic","colossal")] fart!","You hear a [pick("tremendous","gigantic","colossal")] fart.")
 						//playsound(L.loc, 'superfart.ogg', 50, 0)
-						if(wearing_suit)
-							for(var/mob/living/V in view(src,aoe_range))
+						if(!wearing_suit)
+							for(var/mob/living/V in view(location,aoe_range))
 								shake_camera(V,10,5)
 								if (V == src)
 									continue
