@@ -34,6 +34,18 @@
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
+			if(istype(H.shoes, /obj/item/clothing/shoes/clown_shoes))
+				var/obj/item/clothing/shoes/clown_shoes/O = H.shoes
+				if(H.m_intent == "run")
+					if(O.footstep >= 2)
+						O.footstep = 0
+						if(prob(25))
+							playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
+					else
+						O.footstep++
+				else
+					if(prob(25))
+						playsound(src, "clownstep", 20, 1)
 
 			var/list/bloodDNA = null
 			if(H.shoes)

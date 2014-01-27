@@ -354,7 +354,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			n_letter = text("[n_letter]")
 		t = text("[t][n_letter]")
 		p=p+n_mod
-	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+	return copytext(t,1,MAX_MESSAGE_LEN)
 
 
 /proc/shake_camera(mob/M, duration, strength=1)
