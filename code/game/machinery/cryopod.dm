@@ -331,9 +331,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		return
 
 	if(orient_right)
-		icon_state = "body_scanner0-r"
+		icon_state = "body_scanner_0-r"
 	else
-		icon_state = "body_scanner0"
+		icon_state = "body_scanner_0"
 
 	src.go_out()
 	add_fingerprint(usr)
