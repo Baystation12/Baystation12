@@ -24,9 +24,44 @@
 	return
 
 // the power cable object
+/obj/structure/cable
+	level = 1
+	anchored =1
+	var/datum/powernet/powernet
+	name = "power cable"
+	desc = "A flexible superconducting cable for heavy-duty power transfer"
+	icon = 'icons/obj/power_cond_white.dmi'
+	icon_state = "0-1"
+	var/d1 = 0
+	var/d2 = 1
+	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
+	var/cable_color = COLOR_RED
+	var/obj/structure/powerswitch/power_switch
+
+/obj/structure/cable/yellow
+	cable_color = COLOR_YELLOW
+
+/obj/structure/cable/green
+	cable_color = COLOR_GREEN
+
+/obj/structure/cable/blue
+	cable_color = COLOR_BLUE
+
+/obj/structure/cable/pink
+	cable_color = COLOR_PINK
+
+/obj/structure/cable/orange
+	cable_color = COLOR_ORANGE
+
+/obj/structure/cable/cyan
+	cable_color = COLOR_CYAN
+
+/obj/structure/cable/white
+	cable_color = COLOR_WHITE
 
 /obj/structure/cable/New()
 	..()
+
 
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 
@@ -35,7 +70,6 @@
 	d1 = text2num( copytext( icon_state, 1, dash ) )
 
 	d2 = text2num( copytext( icon_state, dash+1 ) )
-
 
 	var/turf/T = src.loc			// hide if turf is not intact
 
@@ -57,10 +91,8 @@
 	updateicon()
 
 /obj/structure/cable/proc/updateicon()
-	if(invisibility)
-		icon_state = "[d1]-[d2]-f"
-	else
-		icon_state = "[d1]-[d2]"
+	icon_state = "[d1]-[d2]"
+	alpha = invisibility ? 127 : 255
 
 
 // returns the powernet this cable belongs to
@@ -80,7 +112,7 @@
 
 ///// Z-Level Stuff
 		if(src.d1 == 12 || src.d2 == 12)
-			user << "\red You must cut this cable from above."
+			user << "<span class='warning'>You must cut this cable from above.</span>"
 			return
 ///// Z-Level Stuff
 
@@ -97,7 +129,7 @@
 			new/obj/item/weapon/cable_coil(T, 1, cable_color)
 
 		for(var/mob/O in viewers(src, null))
-			O.show_message("\red [user] cuts the cable.", 1)
+			O.show_message("<span class='warning'>[user] cuts the cable.</span>", 1)
 
 ///// Z-Level Stuff
 		if(src.d1 == 11 || src.d2 == 11)
@@ -124,10 +156,10 @@
 		var/datum/powernet/PN = get_powernet()		// find the powernet
 
 		if(PN && (PN.avail > 0))		// is it powered?
-			user << "\red [PN.avail]W in power network."
+			user << "<span class='warning'>[PN.avail]W in power network.</span>"
 
 		else
-			user << "\red The cable is not powered."
+			user << "<span class='warning'>The cable is not powered.</span>"
 
 		shock(user, 5, 0.2)
 
@@ -171,9 +203,9 @@
 /obj/item/weapon/cable_coil
 	name = "cable coil"
 	icon = 'icons/obj/power.dmi'
-	icon_state = "coil_red"
+	icon_state = "coil"
 	var/amount = MAXCOIL
-	item_color = "red"
+	item_color = COLOR_RED
 	desc = "A coil of power cable."
 	throwforce = 10
 	w_class = 2.0
@@ -183,11 +215,11 @@
 	g_amt = 20
 	flags = TABLEPASS | FPRINT | CONDUCT
 	slot_flags = SLOT_BELT
-	item_state = "coil_red"
+	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='warning'><b>[user] is strangling \himself with the [src.name]! It looks like \he's trying to commit suicide.</b></span>"
 		return(OXYLOSS)
 
 
@@ -202,15 +234,16 @@
 
 /obj/item/weapon/cable_coil/proc/updateicon()
 	if (!item_color)
-		item_color = pick("red", "yellow", "blue", "green")
+		item_color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
+	color = item_color
 	if(amount == 1)
-		icon_state = "coil_[item_color]1"
+		icon_state = "coil1"
 		name = "cable piece"
 	else if(amount == 2)
-		icon_state = "coil_[item_color]2"
+		icon_state = "coil2"
 		name = "cable piece"
 	else
-		icon_state = "coil_[item_color]"
+		icon_state = "coil"
 		name = "cable coil"
 
 /obj/item/weapon/cable_coil/examine()
@@ -231,14 +264,14 @@
 	if(ishuman(M) && !M.restrained() && !M.stat && !M.paralysis && ! M.stunned)
 		if(!istype(usr.loc,/turf)) return
 		if(src.amount <= 14)
-			usr << "\red You need at least 15 lengths to make restraints!"
+			usr << "<span class='warning'>You need at least 15 lengths to make restraints!</span>"
 			return
 		var/obj/item/weapon/handcuffs/cable/B = new /obj/item/weapon/handcuffs/cable(usr.loc)
-		B.icon_state = "cuff_[item_color]"
-		usr << "\blue You wind some cable together to make some restraints."
+		B.color = item_color
+		usr << "<span class='notice'>You wind some cable together to make some restraints.</span>"
 		src.use(15)
 	else
-		usr << "\blue You cannot do that."
+		usr << "<span class='notice'>\blue You cannot do that.</span>"
 	..()
 
 /obj/item/weapon/cable_coil/attackby(obj/item/weapon/W, mob/user)
@@ -246,25 +279,25 @@
 	if( istype(W, /obj/item/weapon/wirecutters) && src.amount > 1)
 		src.amount--
 		new/obj/item/weapon/cable_coil(user.loc, 1,item_color)
-		user << "You cut a piece off the cable coil."
+		user << "<span class='notice'>You cut a piece off the cable coil.</span>"
 		src.updateicon()
 		return
 
 	else if( istype(W, /obj/item/weapon/cable_coil) )
 		var/obj/item/weapon/cable_coil/C = W
 		if(C.amount == MAXCOIL)
-			user << "The coil is too long, you cannot add any more cable to it."
+			user << "<span class='notice'>The coil is too long, you cannot add any more cable to it.</span>"
 			return
 
 		if( (C.amount + src.amount <= MAXCOIL) )
 			C.amount += src.amount
-			user << "You join the cable coils together."
+			user << "<span class='notice'>You join the cable coils together.</span>"
 			C.updateicon()
 			del(src)
 			return
 
 		else
-			user << "You transfer [MAXCOIL - src.amount ] length\s of cable from one coil to the other."
+			user << "<span class='notice'>You transfer [MAXCOIL - src.amount ] length\s of cable from one coil to the other.</span>"
 			src.amount -= (MAXCOIL-C.amount)
 			src.updateicon()
 			C.amount = MAXCOIL
@@ -289,11 +322,11 @@
 		return
 
 	if(get_dist(F,user) > 1)
-		user << "You can't lay cable at a place that far away."
+		user << "<span class='warning'>You can't lay cable at a place that far away.</span>"
 		return
 
 	if(F.intact)		// if floor is intact, complain
-		user << "You can't lay cable there unless the floor tiles are removed."
+		user << "<span class='warning'>You can't lay cable there unless the floor tiles are removed.</span>"
 		return
 
 	else
@@ -304,19 +337,23 @@
 		else
 			dirn = get_dir(F, user)
 
+		for(var/obj/structure/cable/LC in F)
+			if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
+				user << "<span class='warning'>There's already a cable at that position.</span>"
+				return
 ///// Z-Level Stuff
 		// check if the target is open space
 		if(istype(F, /turf/simulated/floor/open))
 			for(var/obj/structure/cable/LC in F)
 				if((LC.d1 == dirn && LC.d2 == 11 ) || ( LC.d2 == dirn && LC.d1 == 11))
-					user << "There's already a cable at that position."
+					user << "<span class='warning'>There's already a cable at that position.</span>"
 					return
 
 			var/turf/simulated/floor/open/temp = F
 			var/obj/structure/cable/C = new(F)
 			var/obj/structure/cable/D = new(temp.floorbelow)
 
-			C.cableColor("red")
+			C.cableColor(item_color)
 
 			C.d1 = 11
 			C.d2 = dirn
@@ -330,7 +367,7 @@
 			C.mergeConnectedNetworks(C.d2)
 			C.mergeConnectedNetworksOnTurf()
 
-			D.cableColor("red")
+			D.cableColor(item_color)
 
 			D.d1 = 12
 			D.d2 = 0
@@ -387,17 +424,11 @@
 
 	var/turf/T = C.loc
 
-///// Z-Level Stuff
-	if(C.d1 == 12 || C.d2 == 12)
-		turf_place(T,user)
-		return
-///// Z-Level Stuff
-
 	if(!isturf(T) || T.intact)		// sanity checks, also stop use interacting with T-scanner revealed cable
 		return
 
 	if(get_dist(C, user) > 1)		// make sure it's close enough
-		user << "You can't lay cable at a place that far away."
+		user << "<span class='warning'>You can't lay cable at a place that far away.</span>"
 		return
 
 
@@ -408,7 +439,7 @@
 
 	if(C.d1 == dirn || C.d2 == dirn)		// one end of the clicked cable is pointing towards us
 		if(U.intact)						// can't place a cable if the floor is complete
-			user << "You can't lay cable there unless the floor tiles are removed."
+			user << "<span class='warning'>You can't lay cable there unless the floor tiles are removed.</span>"
 			return
 		else
 			// cable is pointing at us, we're standing on an open tile
@@ -418,7 +449,7 @@
 
 			for(var/obj/structure/cable/LC in U)		// check to make sure there's not a cable there already
 				if(LC.d1 == fdirn || LC.d2 == fdirn)
-					user << "There's already a cable at that position."
+					user << "<span class='warning'>There's already a cable at that position.</span>"
 					return
 
 			var/obj/structure/cable/NC = new(U)
@@ -456,7 +487,7 @@
 			if(LC == C)			// skip the cable we're interacting with
 				continue
 			if((LC.d1 == nd1 && LC.d2 == nd2) || (LC.d1 == nd2 && LC.d2 == nd1) )	// make sure no cable matches either direction
-				user << "There's already a cable at that position."
+				user << "<span class='warning'>There's already a cable at that position.</span>"
 				return
 
 
@@ -549,30 +580,14 @@
 
 
 obj/structure/cable/proc/cableColor(var/colorC)
-	var/color_n = "red"
+	var/color_n = "#DD0000"
 	if(colorC)
 		color_n = colorC
 	cable_color = color_n
-	switch(colorC)
-		if("red")
-			icon = 'icons/obj/power_cond_red.dmi'
-		if("yellow")
-			icon = 'icons/obj/power_cond_yellow.dmi'
-		if("green")
-			icon = 'icons/obj/power_cond_green.dmi'
-		if("blue")
-			icon = 'icons/obj/power_cond_blue.dmi'
-		if("pink")
-			icon = 'icons/obj/power_cond_pink.dmi'
-		if("orange")
-			icon = 'icons/obj/power_cond_orange.dmi'
-		if("cyan")
-			icon = 'icons/obj/power_cond_cyan.dmi'
-		if("white")
-			icon = 'icons/obj/power_cond_white.dmi'
+	color = color_n
 
 /obj/item/weapon/cable_coil/cut
-	item_state = "coil_red2"
+	item_state = "coil2"
 
 /obj/item/weapon/cable_coil/cut/New(loc)
 	..()
@@ -582,36 +597,28 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	updateicon()
 
 /obj/item/weapon/cable_coil/yellow
-	item_color = "yellow"
-	icon_state = "coil_yellow"
+	item_color = COLOR_YELLOW
 
 /obj/item/weapon/cable_coil/blue
-	item_color = "blue"
-	icon_state = "coil_blue"
+	item_color = COLOR_BLUE
 
 /obj/item/weapon/cable_coil/green
-	item_color = "green"
-	icon_state = "coil_green"
+	item_color = COLOR_GREEN
 
 /obj/item/weapon/cable_coil/pink
-	item_color = "pink"
-	icon_state = "coil_pink"
+	item_color = COLOR_PINK
 
 /obj/item/weapon/cable_coil/orange
-	item_color = "orange"
-	icon_state = "coil_orange"
+	item_color = COLOR_ORANGE
 
 /obj/item/weapon/cable_coil/cyan
-	item_color = "cyan"
-	icon_state = "coil_cyan"
+	item_color = COLOR_CYAN
 
 /obj/item/weapon/cable_coil/white
-	item_color = "white"
-	icon_state = "coil_white"
+	item_color = COLOR_WHITE
 
 /obj/item/weapon/cable_coil/random/New()
-	item_color = pick("red","yellow","green","blue","pink")
-	icon_state = "coil_[item_color]"
+	item_color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	..()
 
 /obj/item/weapon/cable_coil/attack(mob/M as mob, mob/user as mob)
@@ -622,12 +629,12 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(S.burn_dam > 0 && use(1))
 			S.heal_damage(0,15,0,1)
 			if(user != M)
-				user.visible_message("\red \The [user] repairs some burn damage on their [S.display_name] with \the [src]",\
-				"\red You repair some burn damage on your [S.display_name]",\
+				user.visible_message("<span class='notice'>\The [user] repairs some burn damage on [M]'s [S.display_name] with \the [src]</span>",\
+				"<span class='notice'>\The [user] repairs some burn damage on your [S.display_name]</span>",\
 				"You hear wires being cut.")
 			else
-				user.visible_message("\red \The [user] repairs some burn damage on their [S.display_name] with \the [src]",\
-				"\red You repair some burn damage on your [S.display_name]",\
+				user.visible_message("<span class='notice'>\The [user] repairs some burn damage on their [S.display_name] with \the [src]</span>",\
+				"<span class='notice'>You repair some burn damage on your [S.display_name]</span>",\
 				"You hear wires being cut.")
 		else
 			user << "Nothing to fix!"
