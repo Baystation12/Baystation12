@@ -45,6 +45,7 @@ datum/preferences
 	var/be_special = 0					//Special role selection
 	var/UI_style = "Midnight"
 	var/toggles = TOGGLES_DEFAULT
+	var/sound = SOUND_DEFAULT
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
 
@@ -303,13 +304,14 @@ datum/preferences
 				dat += "<b>Custom UI</b>(recommended for White UI):<br>"
 				dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
 				dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
-				dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
-				dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
+				dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(sound & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
+				dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(sound & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
+				dat += "<b>Hear player voices:</b> <a href='?_src_=prefs;preference=player_voices'><b>[(sound & SOUND_VOICES) ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Randomized Character Slot:</b> <a href='?_src_=prefs;preference=randomslot'><b>[randomslot ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "Nearest Creatures" : "All Speech"]</b></a><br>"
 				dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "Nearest Creatures" : "All Emotes"]</b></a><br>"
 				dat += "<b>Ghost radio:</b> <a href='?_src_=prefs;preference=ghost_radio'><b>[(toggles & CHAT_GHOSTRADIO) ? "Nearest Speakers" : "All Chatter"]</b></a><br>"
-				dat += "<b>Hear player voices:</b> <a href='?_src_=prefs;preference=player_voices'><b>[(toggles & SOUND_VOICES) ? "Yes" : "No"]</b></a><br>"
+
 
 				if(config.allow_Metadata)
 					dat += "<b>OOC Notes:</b> <a href='?_src_=prefs;preference=metadata;task=input'> Edit </a><br>"
@@ -1244,7 +1246,7 @@ datum/preferences
 
 
 					if("hear_adminhelps")
-						toggles ^= SOUND_ADMINHELP
+						sound ^= SOUND_ADMINHELP
 
 					if("ui")
 						switch(UI_style)
@@ -1274,11 +1276,11 @@ datum/preferences
 						randomslot = !randomslot
 
 					if("hear_midis")
-						toggles ^= SOUND_MIDI
+						sound ^= SOUND_MIDI
 
 					if("lobby_music")
-						toggles ^= SOUND_LOBBY
-						if(toggles & SOUND_LOBBY)
+						sound ^= SOUND_LOBBY
+						if(sound & SOUND_LOBBY)
 							user << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1)
 						else
 							user << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1)
@@ -1293,7 +1295,7 @@ datum/preferences
 						toggles ^= CHAT_GHOSTRADIO
 
 					if("player_voices")
-						toggles ^= SOUND_VOICES
+						sound ^= SOUND_VOICES
 
 					if("save")
 						save_preferences()
