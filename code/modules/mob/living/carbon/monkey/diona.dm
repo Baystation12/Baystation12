@@ -212,8 +212,8 @@
 		adult.add_language(L.name)
 	adult.regenerate_icons()
 
-	adult.name = src.name
-	adult.real_name = src.real_name
+	adult.name = "diona ([rand(100,999)])"
+	adult.real_name = adult.name
 	adult.ckey = src.ckey
 	adult.real_name = pick(diona_names)	//I hate this being here of all places but unfortunately dna is based on real_name!
 	adult.rename_self("diona")
@@ -258,7 +258,7 @@
 		ready_evolve = 1
 		src << "\green You feel ready to move on to your next stage of growth."
 	else if(donors.len == 3)
-		universal_speak = 1
-		src << "\green You feel your awareness expand, and realize you know how to speak with the creatures around you."
+		universal_understand = 1
+		src << "\green You feel your awareness expand, and realize you know how to understand the creatures around you."
 	else
 		src << "\green The blood seeps into your small form, and you draw out the echoes of memories and personality from it, working them into your budding mind."
