@@ -410,7 +410,7 @@ var/list/department_radio_keys = list(
 				if(M.client)
 					if(M.client.prefs)
 						if(M.client.prefs.sound & SOUND_VOICES)
-							playsound_local(src.loc, "sound/playervoices/[src.ckey].ogg", 70, 0, 5, 1)
+							M.playsound_local(get_turf(src), "sound/playervoices/[src.ckey].ogg", 70, 0, 5, 1)
 			if(!istype(M, /mob/new_player))
 				if(M && M.stat == DEAD)
 					if ((M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
