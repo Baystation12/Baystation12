@@ -30,7 +30,7 @@
 	..()
 
 /obj/item/weapon/holder/process()
-	if(!loc) Del(src)
+	if(!loc) del(src)
 
 	if(istype(loc,/turf) || !(contents.len))
 		for(var/mob/M in contents)

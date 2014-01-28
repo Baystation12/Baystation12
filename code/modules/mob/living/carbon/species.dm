@@ -150,7 +150,7 @@
 	//To avoid duplicates.
 	for(var/obj/item/weapon/implant/cortical/imp in H.contents)
 		affected.implants -= imp
-		Del(imp)
+		del(imp)
 
 	var/obj/item/weapon/implant/cortical/I = new(H)
 	I.imp_in = H
@@ -206,7 +206,7 @@
 		if(D.client)
 			D.loc = H.loc
 		else
-			Del(D)
+			del(D)
 
 	H.visible_message("\red[H] splits apart with a wet slithering noise!")
 
