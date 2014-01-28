@@ -77,9 +77,19 @@
 
 	if(status & ORGAN_DESTROYED)
 		return 0
-	if(status & ORGAN_ROBOT)
-		brute *= 0.66 //~2/3 damage for ROBOLIMBS
-		burn *= 0.66 //~2/3 damage for ROBOLIMBS
+	if(status & ORGAN_ROBOT )
+
+		var/brmod = 0.66
+		var/bumod = 0.66
+
+		if(istype(owner,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = owner
+			if(H.species && H.species.flags & IS_SYNTHETIC)
+				brmod = H.species.brute_mod
+				bumod = H.species.burn_mod
+
+		brute *= brmod //~2/3 damage for ROBOLIMBS
+		burn *= bumod //~2/3 damage for ROBOLIMBS
 
 	//If limb took enough damage, try to cut or tear it off
 	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
@@ -650,7 +660,7 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/get_icon(gender="")
 	if (status & ORGAN_MUTATED)
 		return new /icon(owner.deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
-	else if (status & ORGAN_ROBOT)
+	else if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
 		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 	else
 		return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
@@ -947,7 +957,7 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		switch(brain_op_stage)
 			if(1)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] has \his skull sawed open with [W] by [user].", 1)
+					O.show_message("\red [brainmob] has \his head sawed open with [W] by [user].", 1)
 				brainmob << "\red [user] begins to saw open your head with [W]!"
 				user << "\red You saw [brainmob]'s head open with [W]!"
 
@@ -966,8 +976,16 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 				else
 					brainmob.LAssailant = user
 
-				var/obj/item/brain/B = new(loc)
-				B.transfer_identity(brainmob)
+				var/mob/living/carbon/human/H
+				if(istype(brainmob,/mob/living/carbon/human))
+					H = brainmob
+
+				if(istype(H) && H.species && H.species.flags & IS_SYNTHETIC)
+					var/obj/item/device/mmi/posibrain/B = new(loc)
+					B.transfer_identity(brainmob)
+				else
+					var/obj/item/brain/B = new(loc)
+					B.transfer_identity(brainmob)
 
 				brain_op_stage = 4.0
 			else
