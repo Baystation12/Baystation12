@@ -51,6 +51,10 @@
 	dna.mutantrace = "slime"
 	..()
 
+/mob/living/carbon/human/machine/New()
+	species = new /datum/species/machine(src)
+	..()
+
 /mob/living/carbon/human/grey/New()
 	set_species("Grey")
 	mutations.Add(M_REMOTE_TALK)

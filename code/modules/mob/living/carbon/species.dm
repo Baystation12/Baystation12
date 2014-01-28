@@ -257,6 +257,7 @@
 	name = "Machine"
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
+	path = /mob/living/carbon/human/machine
 	language = "Tradeband"
 	max_hurt_damage = 3
 
