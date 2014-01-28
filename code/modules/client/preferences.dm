@@ -158,9 +158,9 @@ datum/preferences
 				if(path)
 					dat += "<center>"
 					dat += "Slot <b>[slot_name]</b> - "
-					dat += "<a href='?_src_=prefs;preference=open_load_dialog\">Load slot</a> - "
-					dat += "<a href='?_src_=prefs;preference=save\">Save slot</a> - "
-					dat += "<a href='?_src_=prefs;preference=reload\">Reload slot</a>"
+					dat += "<a href=\"byond://?src=\ref[user];preference=open_load_dialog\">Load slot</a> - "
+					dat += "<a href=\"byond://?src=\ref[user];preference=save\">Save slot</a> - "
+					dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Reload slot</a>"
 					dat += "</center>"
 				dat += "<center><h2>Occupation Choices</h2>"
 				dat += "<a href='?_src_=prefs;preference=job;task=menu'>Set Occupation Preferences</a><br></center>"
