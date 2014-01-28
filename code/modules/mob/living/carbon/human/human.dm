@@ -1391,6 +1391,7 @@ mob/living/carbon/human/yank_out_object()
 		update_icons()
 
 	if(species)
+		species.handle_post_spawn(src)
 		return 1
 	else
 		return 0

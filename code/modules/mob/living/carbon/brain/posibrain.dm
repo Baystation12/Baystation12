@@ -46,6 +46,18 @@
 				C.prefs.be_special ^= BE_PAI
 
 
+	transfer_identity(var/mob/living/carbon/H)
+		name = "positronic brain ([H])"
+		brainmob.name = H.real_name
+		brainmob.real_name = H.real_name
+		brainmob.dna = H.dna
+		brainmob.timeofhostdeath = H.timeofdeath
+		brainmob.mind.assigned_role = "Positronic Brain"
+		if(H.mind)
+			H.mind.transfer_to(brainmob)
+		brainmob << "\blue You feel slightly disoriented. That's normal when you're just a metal cube."
+		icon_state = "posibrain-occupied"
+		return
 
 	proc/transfer_personality(var/mob/candidate)
 
