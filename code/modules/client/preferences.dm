@@ -158,9 +158,9 @@ datum/preferences
 				if(path)
 					dat += "<center>"
 					dat += "Slot <b>[slot_name]</b> - "
-					dat += "<a href=\"byond://?src=\ref[user];preference=open_load_dialog\">Load slot</a> - "
-					dat += "<a href=\"byond://?src=\ref[user];preference=save\">Save slot</a> - "
-					dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Reload slot</a>"
+					dat += "<a href='?_src_=prefs;preference=open_load_dialog\">Load slot</a> - "
+					dat += "<a href='?_src_=prefs;preference=save\">Save slot</a> - "
+					dat += "<a href='?_src_=prefs;preference=reload\">Reload slot</a>"
 					dat += "</center>"
 				dat += "<center><h2>Occupation Choices</h2>"
 				dat += "<a href='?_src_=prefs;preference=job;task=menu'>Set Occupation Preferences</a><br></center>"
@@ -178,19 +178,19 @@ datum/preferences
 				dat += "<br><table><tr><td><b>Body</b> "
 				dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 				dat += "<br>"
-				dat += "Species: <a href='byond://?src=\ref[user];preference=species;task=input'>[species]</a><br>"
-				dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
-				dat += "Accent: <a href='byond://?src=\ref[user];preference=accent;task=input'>[accent]</a><br>"
-				dat += "Voice: <a href='byond://?src=\ref[user];preference=voice;task=input'>[voice]</a><br>"
+				dat += "Species: <a href='?_src_=prefs;preference=species;task=input'>[species]</a><br>"
+				dat += "Secondary Language:<br><a href='?_src_=prefs;preference=language;task=input'>[language]</a><br>"
+				dat += "Accent: <a href='?_src_=prefs;preference=accent;task=input'>[accent]</a><br>"
+				dat += "Voice: <a href='?_src_=prefs;preference=voice;task=input'>[voice]</a><br>"
 				dat += "Pitch: <a href='?_src_=prefs;preference=pitch;task=input'>[pitch]</a><br>"
 				dat += "Talking Speed: <a href='?_src_=prefs;preference=talkspeed;task=input'>[talkspeed]</a><br>"
-				dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
+				dat += "Blood Type: <a href='?_src_=prefs;preference=b_type;task=input'>[b_type]</a><br>"
 				dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 		//		dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
 				dat += "<br><b>Handicaps</b><br>"
-				dat += "\t<a href='byond://?src=\ref[user];task=input;preference=disabilities'><b>\[Set Disabilities\]</b></a><br>"
-				dat += "Limbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
-				dat += "Internal Organs: <a href='byond://?src=\ref[user];preference=organs;task=input'>Adjust</a><br>"
+				dat += "\t<a href='?_src_=prefs;preference=disabilities'><b>\[Set Disabilities\]</b></a><br>"
+				dat += "Limbs: <a href='?_src_=prefs;preference=limbs;task=input'>Adjust</a><br>"
+				dat += "Internal Organs: <a href='?_src_=prefs;preference=organs;task=input'>Adjust</a><br>"
 
 				//display limbs below
 				var/ind = 0
@@ -1098,7 +1098,7 @@ datum/preferences
 						ShowChoices(user)
 
 					if("accent")
-						var/new_accent = input(user, "Choose your accent. en-us:American, en:British, en-sc:Scottish", "Character Preference") as null|anything in list("en-us", "en", "en-sc")
+						var/new_accent = input(user, "Choose your accent. en-us:American, en:British, en-sc:Scottish, mb-de4-en:German, mb-fr1-en:French", "Character Preference") as null|anything in list("en-us", "en", "en-sc","mb-de4-en","mb-fr1-en")
 						if(new_accent)
 							accent = new_accent
 					if("voice")
