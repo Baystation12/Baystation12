@@ -500,7 +500,10 @@ This function completely restores a damaged organ to perfect condition.
 			if(LOWER_TORSO)
 				owner << "\red You are now sterile."
 			if(HEAD)
-				organ= new /obj/item/weapon/organ/head(owner.loc, owner)
+				if(owner.species.flags & IS_SYNTHETIC)
+					organ= new /obj/item/weapon/organ/head/posi(owner.loc, owner)
+				else
+					organ= new /obj/item/weapon/organ/head(owner.loc, owner)
 				owner.u_equip(owner.glasses)
 				owner.u_equip(owner.head)
 				owner.u_equip(owner.l_ear)
@@ -852,6 +855,9 @@ obj/item/weapon/organ/head
 	var/mob/living/carbon/brain/brainmob
 	var/brain_op_stage = 0
 
+/obj/item/weapon/organ/head/posi
+	name = "robotic head"
+
 obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 	if(istype(H))
 		src.icon_state = H.gender == MALE? "head_m" : "head_f"
@@ -939,11 +945,7 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 				brainmob.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)])</font>"
 				msg_admin_attack("[user] ([user.ckey]) debrained [brainmob] ([brainmob.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-				var/mob/living/carbon/human/H
-				if(istype(brainmob,/mob/living/carbon/human))
-					H = brainmob
-
-				if(istype(H) && H.species && H.species.flags & IS_SYNTHETIC)
+				if(istype(src,/obj/item/weapon/organ/head/posi))
 					var/obj/item/device/mmi/posibrain/B = new(loc)
 					B.transfer_identity(brainmob)
 				else

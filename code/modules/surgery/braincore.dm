@@ -99,7 +99,7 @@
 			H = target
 
 		var/obj/item/brain/B
-		if(istype(H) && H.species && H.species.flags & IS_SYNTHETIC)
+		if(H && H.species && H.species.flags & IS_SYNTHETIC)
 			var/obj/item/device/mmi/posibrain/P = new(target.loc)
 			P.transfer_identity(target)
 		else
