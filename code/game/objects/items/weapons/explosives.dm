@@ -26,12 +26,21 @@
 	if(user.mind)
 		if(user.mind.special_role)
 			var/role = lowertext(user.mind.special_role)
-			if(role == "traitor" || role == "syndicate")
+			if(role == "traitor" || role == "syndicate" || role == "syndicate commando")
 				message_say = "FOR THE SYNDICATE!"
 			else if(role == "changeling")
 				message_say = "FOR THE HIVE!"
 			else if(role == "cultist")
 				message_say = "FOR NARSIE!"
+			else if(role == "ninja")
+				message_say = "FOR THE CLAN!"
+			else if(role == "wizard")
+				message_say = "FOR THE FEDERATION!"
+			else if(role =="revolutionary" || role == "head revolutionary")
+				message_say = "FOR THE REVOLOUTION!"
+			else if(role == "death commando" || role == "emergency response team")
+				message_say = "FOR NANOTRASEN!"
+
 	user.say(message_say)
 	target = user
 	explode(get_turf(user))

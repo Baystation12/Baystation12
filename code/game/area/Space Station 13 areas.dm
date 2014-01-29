@@ -1630,9 +1630,11 @@ proc/process_ghost_teleport_locs()
 
 //GAYBAR
 /area/secret/gaybar
-	name = "\improper Secret Space Bar"
+	name = "\improper Dance Bar"
 	requires_power = 0
-	icon_state = "pink"
+	icon_state = "dancebar"
+
+
 
 //AI
 
@@ -1699,8 +1701,6 @@ proc/process_ghost_teleport_locs()
 
 
 //Misc
-
-
 
 /area/wreck/ai
 	name = "\improper AI Chamber"

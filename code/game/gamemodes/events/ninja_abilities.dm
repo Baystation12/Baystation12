@@ -68,12 +68,12 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 //=======//9-8 TILE TELEPORT//=======//
  //Click to to teleport 9-10 tiles in direction facing.
 /obj/item/clothing/suit/space/space_ninja/proc/ninjajaunt()
-	set name = "Phase Jaunt (250E)"
+	set name = "Phase Jaunt (500E)"
 	set desc = "Utilizes the internal VOID-shift device to rapidly transit in direction facing."
 	set category = "Ninja Ability"
 	set popup_menu = 0
 
-	var/C = 200
+	var/C = 500
 	if(!ninjacost(C,1))
 		var/mob/living/carbon/human/U = affecting
 		var/turf/destination = get_teleport_loc(U.loc,U,9,1,3,1,0,1)
@@ -108,12 +108,12 @@ Not sure why this would be useful (it's not) but whatever. Ninjas need their smo
 //=======//RIGHT CLICK TELEPORT//=======//
 //Right click to teleport somewhere, almost exactly like admin jump to turf.
 /obj/item/clothing/suit/space/space_ninja/proc/ninjashift(turf/T in oview())
-	set name = "Phase Shift (500E)"
+	set name = "Phase Shift (750E)"
 	set desc = "Utilizes the internal VOID-shift device to rapidly transit to a destination in view."
 	set category = null//So it does not show up on the panel but can still be right-clicked.
 	set src = usr.contents//Fixes verbs not attaching properly for objects. Praise the DM reference guide!
 
-	var/C = 400
+	var/C = 750
 	if(!ninjacost(C,1))
 		var/mob/living/carbon/human/U = affecting
 		var/turf/mobloc = get_turf(U.loc)//To make sure that certain things work properly below.
@@ -230,12 +230,12 @@ This could be a lot better but I'm too tired atm.*/
 /*Allows the ninja to capture people, I guess.
 Must right click on a mob to activate.*/
 /obj/item/clothing/suit/space/space_ninja/proc/ninjanet(mob/living/carbon/M in oview())//Only living carbon mobs.
-	set name = "Energy Net (5,000E)"
+	set name = "Energy Net (2,500E)"
 	set desc = "Captures a fallen opponent in a net of energy. Will teleport them to a holding facility after 30 seconds."
 	set category = null
 	set src = usr.contents
 
-	var/C = 5000
+	var/C = 2500
 	if(!ninjacost(C,1)&&iscarbon(M)) // Nets now cost 8,000
 		var/mob/living/carbon/human/U = affecting
 		//if(M.client)//Monkeys without a client can still step_to() and bypass the net. Also, netting inactive people is lame.
