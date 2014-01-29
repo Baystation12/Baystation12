@@ -52,6 +52,7 @@ h1.alert, h2.alert		{color: #000000;}
 .rose					{color: #ff5050;}
 .info					{color: #0000CC;}
 .notice					{color: #000099;}
+.suicide				{color: #ff5050;	font-style: italic;}
 
 .alien					{color: #543354;}
 .newscaster				{color: #800000;}

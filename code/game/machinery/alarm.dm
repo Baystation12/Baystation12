@@ -907,8 +907,8 @@
 			return
 
 		if(1)
-			if(istype(W, /obj/item/weapon/cable_coil))
-				var/obj/item/weapon/cable_coil/coil = W
+			if(istype(W, /obj/item/stack/cable_coil))
+				var/obj/item/stack/cable_coil/coil = W
 				if(coil.amount < 5)
 					user << "You need more cable for this!"
 					return
@@ -1104,8 +1104,8 @@ FIRE ALARM
 					else
 						user.visible_message("\red [user] has disconnected [src]'s detecting unit!", "You have disconnected [src]'s detecting unit.")
 			if(1)
-				if(istype(W, /obj/item/weapon/cable_coil))
-					var/obj/item/weapon/cable_coil/coil = W
+				if(istype(W, /obj/item/stack/cable_coil))
+					var/obj/item/stack/cable_coil/coil = W
 					if(coil.amount < 5)
 						user << "You need more cable for this!"
 						return

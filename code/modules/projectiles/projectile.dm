@@ -19,6 +19,7 @@
 	flags = FPRINT | TABLEPASS
 	pass_flags = PASSTABLE
 	mouse_opacity = 0
+	hitsound = 'sound/weapons/pierce.ogg'
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
@@ -113,8 +114,10 @@
 				forcedodge = -1
 			else
 				if(silenced)
+					playsound(loc, hitsound, 5, 1, -1)
 					M << "\red You've been shot in the [parse_zone(def_zone)] by the [src.name]!"
 				else
+					playsound(loc, hitsound, 20, 1, -1)
 					visible_message("\red [A.name] is hit by the [src.name] in the [parse_zone(def_zone)]!")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
 				if(istype(firer, /mob))
 					M.attack_log += "\[[time_stamp()]\] <b>[firer]/[firer.ckey]</b> shot <b>[M]/[M.ckey]</b> with a <b>[src.type]</b>"
@@ -176,7 +179,9 @@
 					if(!(original in permutated))
 						Bump(original)
 						sleep(1)
+			Range()
 		return
+
 
 /obj/item/projectile/test //Used to see if you can hit them.
 	invisibility = 101 //Nope!  Can't see me!
@@ -218,3 +223,7 @@
 				M = locate() in get_step(src,target)
 				if(istype(M))
 					return 1
+
+/obj/item/projectile/proc/Range()
+	return
+

@@ -7,12 +7,12 @@
 	w_class = 4
 	force = 30
 	throwforce = 10
+	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 
 /obj/item/weapon/melee/cultblade/attack(mob/living/target as mob, mob/living/carbon/human/user as mob)
 	if(iscultist(user))
-		playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 		return ..()
 	else
 		user.Paralyse(5)
@@ -44,6 +44,7 @@
 /obj/item/clothing/head/culthood/alt
 	icon_state = "cult_hoodalt"
 	item_state = "cult_hoodalt"
+	loose = 5 // one size fits all
 
 /obj/item/clothing/suit/cultrobes/alt
 	icon_state = "cultrobesalt"
@@ -70,6 +71,7 @@
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
 	armor = list(melee = 30, bullet = 30, laser = 30,energy = 20, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0
+	loose = 6 // mostly one size fits all
 
 /obj/item/clothing/suit/magusred
 	name = "magus robes"

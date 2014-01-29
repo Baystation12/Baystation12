@@ -52,7 +52,9 @@ datum/mind
 
 	var/datum/faction/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holder
-	var/datum/vampire/vampire      //vampire holder
+
+	var/datum/vampire/vampire			//vampire holder
+
 	var/rev_cooldown = 0
 
 	// the world.time since the mob has been brigged, or -1 if not at all
@@ -466,6 +468,10 @@ datum/mind
 					new_objective = new /datum/objective/survive
 					new_objective.owner = src
 
+				if ("die")
+					new_objective = new /datum/objective/die
+					new_objective.owner = src
+
 				if ("nuclear")
 					new_objective = new /datum/objective/nuclear
 					new_objective.owner = src
@@ -760,7 +766,7 @@ datum/mind
 					else
 						current.dna = changeling.absorbed_dna[1]
 						current.real_name = current.dna.real_name
-						updateappearance(current, current.dna.uni_identity)
+						current.UpdateAppearance()
 						domutcheck(current, null)
 
 		else if (href_list["vampire"])

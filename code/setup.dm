@@ -129,7 +129,7 @@
 #define PLASMA_MINIMUM_OXYGEN_PLASMA_RATIO	20
 #define PLASMA_OXYGEN_FULLBURN				10
 
-#define T0C 273.15					// 0degC
+#define T0C  273.15					// 0degC
 #define T20C 293.15					// 20degC
 #define TCMB 2.7					// -270.3degC
 
@@ -310,56 +310,65 @@ var/MAX_EXPLOSION_RANGE = 14
 
 // mob/var/list/mutations
 
-#define STRUCDNASIZE 27
-#define UNIDNASIZE 13
-
 // Used in preferences.
 #define DISABILITY_FLAG_NEARSIGHTED 1
 #define DISABILITY_FLAG_FAT         2
 #define DISABILITY_FLAG_EPILEPTIC   4
 #define DISABILITY_FLAG_DEAF        8
 
-	// Generic mutations:
-#define	TK				1
-#define COLD_RESISTANCE	2
-#define XRAY			3
-#define HULK			4
-#define CLUMSY			5
-#define FAT				6
-#define HUSK			7
-#define NOCLONE			8
+///////////////////////////////////////
+// MUTATIONS
+///////////////////////////////////////
+
+// Generic mutations:
+#define	M_TK			1
+#define M_RESIST_COLD	2
+#define M_XRAY			3
+#define M_HULK			4
+#define M_CLUMSY			5
+#define M_FAT				6
+#define M_HUSK			7
+#define M_NOCLONE			8
 
 
-	// Extra powers:
-#define LASER			9 	// harm intent - click anywhere to shoot lasers from eyes
-#define HEAL			10 	// healing people with hands
-#define SHADOW			11 	// shadow teleportation (create in/out portals anywhere) (25%)
-#define SCREAM			12 	// supersonic screaming (25%)
-#define EXPLOSIVE		13 	// exploding on-demand (15%)
-#define REGENERATION	14 	// superhuman regeneration (30%)
-#define REPROCESSOR		15 	// eat anything (50%)
-#define SHAPESHIFTING	16 	// take on the appearance of anything (40%)
-#define PHASING			17 	// ability to phase through walls (40%)
-#define SHIELD			18 	// shielding from all projectile attacks (30%)
-#define SHOCKWAVE		19 	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
-#define ELECTRICITY		20 	// ability to shoot electric attacks (15%)
+// Extra powers:
+#define M_LASER			9 	// harm intent - click anywhere to shoot lasers from eyes
+//#define HEAL			10 	// (Not implemented) healing people with hands
+//#define SHADOW		11 	// (Not implemented) shadow teleportation (create in/out portals anywhere) (25%)
+//#define SCREAM		12 	// (Not implemented) supersonic screaming (25%)
+//#define EXPLOSIVE		13 	// (Not implemented) exploding on-demand (15%)
+//#define REGENERATION	14 	// (Not implemented) superhuman regeneration (30%)
+//#define REPROCESSOR	15 	// (Not implemented) eat anything (50%)
+//#define SHAPESHIFTING	16 	// (Not implemented) take on the appearance of anything (40%)
+//#define PHASING		17 	// (Not implemented) ability to phase through walls (40%)
+//#define SHIELD		18 	// (Not implemented) shielding from all projectile attacks (30%)
+//#define SHOCKWAVE		19 	// (Not implemented) attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
+//#define ELECTRICITY	20 	// (Not implemented) ability to shoot electric attacks (15%)
 
 	//2spooky
 #define SKELETON 29
 #define PLANT 30
 
 // Other Mutations:
-#define mNobreath		100 	// no need to breathe
-#define mRemote			101 	// remote viewing
-#define mRegen			102 	// health regen
-#define mRun			103 	// no slowdown
-#define mRemotetalk		104 	// remote talking
-#define mMorph			105 	// changing appearance
-#define mBlend			106 	// nothing (seriously nothing)
-#define mHallucination	107 	// hallucinations
-#define mFingerprints	108 	// no fingerprints
-#define mShock			109 	// insulated hands
-#define mSmallsize		110 	// table climbing
+#define M_NO_BREATH		100 	// no need to breathe
+#define M_REMOTE_VIEW	101 	// remote viewing
+#define M_REGEN			102 	// health regen
+#define M_RUN			103 	// no slowdown
+#define M_REMOTE_TALK	104 	// remote talking
+#define M_MORPH			105 	// changing appearance
+#define M_RESIST_HEAT	106 	// heat resistance
+#define M_HALLUCINATE	107 	// hallucinations
+#define M_FINGERPRINTS	108 	// no fingerprints
+#define M_NO_SHOCK		109 	// insulated hands
+#define M_DWARF			110 	// table climbing
+
+// Goon muts
+#define M_OBESITY       200		// Decreased metabolism
+#define M_TOXIC_FARTS   201		// Duh
+#define M_STRONG        202		// (Nothing)
+#define M_SOBER         203		// Increased alcohol metabolism
+#define M_PSY_RESIST    204		// Block remoteview
+#define M_SUPER_FART    205		// Duh
 
 //disabilities
 #define NEARSIGHTED		1
@@ -636,22 +645,25 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define R_HOST			65535
 
 //Preference toggles
+#define CHAT_OOC		1
+#define CHAT_DEAD		2
+#define CHAT_GHOSTEARS	4
+#define CHAT_GHOSTSIGHT	8
+#define CHAT_PRAYER		16
+#define CHAT_RADIO		32
+#define CHAT_ATTACKLOGS	64
+#define CHAT_DEBUGLOGS	128
+#define CHAT_LOOC		256
+#define CHAT_GHOSTRADIO 512
+
 #define SOUND_ADMINHELP	1
 #define SOUND_MIDI		2
 #define SOUND_AMBIENCE	4
 #define SOUND_LOBBY		8
-#define CHAT_OOC		16
-#define CHAT_DEAD		32
-#define CHAT_GHOSTEARS	64
-#define CHAT_GHOSTSIGHT	128
-#define CHAT_PRAYER		256
-#define CHAT_RADIO		512
-#define CHAT_ATTACKLOGS	1024
-#define CHAT_DEBUGLOGS	2048
-#define CHAT_LOOC		4096
+#define SOUND_VOICES	16
 
-
-#define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
+#define SOUND_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY)
+#define TOGGLES_DEFAULT (CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 
 #define BE_TRAITOR		1
 #define BE_OPERATIVE	2
@@ -759,6 +771,8 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define FEET_CLAWS		1
 #define FEET_PADDED		2
 #define FEET_NOSLIP		4
+
+#define IS_SYNTHETIC 8192
 
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.

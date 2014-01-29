@@ -8,6 +8,7 @@
 	desc = "The commander in chef's head wear."
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9
+	loose = 35 // why-a do people always push-a me over
 
 //Captain: This probably shouldn't be space-worthy
 /obj/item/clothing/head/caphat
@@ -17,6 +18,7 @@
 	flags = FPRINT|TABLEPASS
 	item_state = "caphat"
 	siemens_coefficient = 0.9
+	loose = 43 // not the answer
 
 //Captain: This probably shouldn't be space-worthy
 /obj/item/clothing/head/helmet/cap
@@ -28,6 +30,7 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECITON_TEMPERATURE
 	siemens_coefficient = 0.9
+	loose = 17
 
 //Chaplain
 /obj/item/clothing/head/chaplain_hood
@@ -36,6 +39,7 @@
 	icon_state = "chaplain_hood"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
 	siemens_coefficient = 0.9
+	loose = 2
 
 //Chaplain
 /obj/item/clothing/head/nun_hood
@@ -44,6 +48,14 @@
 	icon_state = "nun_hood"
 	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
 	siemens_coefficient = 0.9
+	loose = 2
+
+/obj/item/clothing/head/det_hat
+	name = "hat"
+	desc = "Someone who wears this will look very smart."
+	icon_state = "detective"
+	allowed = list(/obj/item/weapon/reagent_containers/food/snacks/candy_corn, /obj/item/weapon/pen)
+	armor = list(melee = 50, bullet = 5, laser = 25,energy = 10, bomb = 0, bio = 0, rad = 0)
 
 //Mime
 /obj/item/clothing/head/beret
@@ -52,6 +64,7 @@
 	icon_state = "beret"
 	flags = FPRINT | TABLEPASS
 	siemens_coefficient = 0.9
+	loose = 16
 
 //Security
 /obj/item/clothing/head/beret/sec
@@ -59,6 +72,7 @@
 	desc = "A beret with the security insignia emblazoned on it. For officers that are more inclined towards style than safety."
 	icon_state = "beret_badge"
 	flags = FPRINT | TABLEPASS
+
 /obj/item/clothing/head/beret/eng
 	name = "engineering beret"
 	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
@@ -71,6 +85,7 @@
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs."
 	icon_state = "surgcap_blue"
 	flags = FPRINT | TABLEPASS | BLOCKHEADHAIR
+	loose = 13
 
 /obj/item/clothing/head/surgery/purple
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is deep purple."

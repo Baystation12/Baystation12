@@ -30,8 +30,6 @@
 
 	a_intent = "harm" //so they don't get pushed around
 
-	wall_smash = 1
-
 	speed = -1
 
 	var/mob/living/simple_animal/space_worm/previous //next/previous segments, correspondingly

@@ -29,7 +29,6 @@
 	max_n2 = 0
 	unsuitable_atoms_damage = 15
 	faction = "alien"
-	wall_smash = 1
 	status_flags = CANPUSH
 	minbodytemp = 0
 	heat_damage_per_tick = 20
@@ -53,6 +52,8 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	ranged = 1
+	retreat_distance = 5
+	minimum_distance = 5
 	projectiletype = /obj/item/projectile/neurotox
 	projectilesound = 'sound/weapons/pierce.ogg'
 
@@ -67,6 +68,8 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	ranged = 1
+	retreat_distance = 5
+	minimum_distance = 5
 	move_to_delay = 3
 	projectiletype = /obj/item/projectile/neurotox
 	projectilesound = 'sound/weapons/pierce.ogg'

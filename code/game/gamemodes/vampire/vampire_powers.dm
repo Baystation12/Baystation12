@@ -68,7 +68,7 @@
 	if(!vampire_power(required_blood, max_stat)) return
 	return T
 
-/client/proc/vampire_rejuvinate()
+/client/vampire/proc/vampire_rejuvinate()
 	set category = "Vampire"
 	set name = "Rejuvinate "
 	set desc= "Flush your system with spare blood to remove any incapacitating effects"
@@ -88,11 +88,11 @@
 					M.current.adjustToxLoss(-2)
 					M.current.adjustFireLoss(-2)
 					sleep(35)
-		M.current.verbs -= /client/proc/vampire_rejuvinate
+		M.current.verbs -= /client/vampire/proc/vampire_rejuvinate
 		spawn(200)
-			M.current.verbs += /client/proc/vampire_rejuvinate
+			M.current.verbs += /client/vampire/proc/vampire_rejuvinate
 
-/client/proc/vampire_hypnotise()
+/client/vampire/proc/vampire_hypnotise()
 	set category = "Vampire"
 	set name = "Hypnotise (20)"
 	set desc= "A piercing stare that incapacitates your victim for a good length of time."
@@ -104,9 +104,9 @@
 	if(!C) return
 	M.current.visible_message("<span class='warning'>[M]'s eyes flash briefly as he stares into [C.name]'s eyes</span>")
 	M.current.remove_vampire_blood(20)
-	M.current.verbs -= /client/proc/vampire_hypnotise
+	M.current.verbs -= /client/vampire/proc/vampire_hypnotise
 	spawn(1800)
-		M.current.verbs += /client/proc/vampire_hypnotise
+		M.current.verbs += /client/vampire/proc/vampire_hypnotise
 	if(do_mob(M.current, C, 50))
 		if(C.mind && C.mind.vampire)
 			M.current << "\red Your piercing gaze fails to knock out [C.name]."
@@ -122,7 +122,7 @@
 		M.current << "\red You broke your gaze."
 		return
 
-/client/proc/vampire_disease()
+/client/vampire/proc/vampire_disease()
 	set category = "Vampire"
 	set name = "Diseased Touch (100)"
 	set desc = "Touches your victim with infected blood giving them the Shutdown Syndrome which quickly shutsdown their major organs resulting in a quick painful death."
@@ -162,10 +162,10 @@
 	shutdown.clicks = 185
 	infect_virus2(C,shutdown,0)
 	M.current.remove_vampire_blood(100)
-	M.current.verbs -= /client/proc/vampire_disease
-	spawn(1800) M.current.verbs += /client/proc/vampire_disease
+	M.current.verbs -= /client/vampire/proc/vampire_disease
+	spawn(1800) M.current.verbs += /client/vampire/proc/vampire_disease
 
-/client/proc/vampire_glare()
+/client/vampire/proc/vampire_glare()
 	set category = "Vampire"
 	set name = "Glare"
 	set desc= "A scary glare that incapacitates people for a short while around you."
@@ -174,9 +174,9 @@
 	if(M.current.vampire_power(0, 1))
 		M.current.visible_message("\red <b>[M.current]'s eyes emit a blinding flash!")
 		//M.vampire.bloodusable -= 10
-		M.current.verbs -= /client/proc/vampire_glare
+		M.current.verbs -= /client/vampire/proc/vampire_glare
 		spawn(300)
-			M.current.verbs += /client/proc/vampire_glare
+			M.current.verbs += /client/vampire/proc/vampire_glare
 		if(istype(M.current:glasses, /obj/item/clothing/glasses/sunglasses/blindfold))
 			M.current << "<span class='warning'>You're blindfolded!</span>"
 			return
@@ -188,7 +188,7 @@
 			C.stuttering = 20
 			C << "\red You are blinded by [M.current]'s glare"
 
-/client/proc/vampire_shapeshift()
+/client/vampire/proc/vampire_shapeshift()
 	set category = "Vampire"
 	set name = "Shapeshift (50)"
 	set desc = "Changes your name and appearance at the cost of 50 blood and has a cooldown of 3 minutes."
@@ -200,10 +200,10 @@
 		M.current.client.prefs.randomize_appearance_for(M.current)
 		M.current.regenerate_icons()
 		M.current.remove_vampire_blood(50)
-		M.current.verbs -= /client/proc/vampire_shapeshift
-		spawn(1800) M.current.verbs += /client/proc/vampire_shapeshift
+		M.current.verbs -= /client/vampire/proc/vampire_shapeshift
+		spawn(1800) M.current.verbs += /client/vampire/proc/vampire_shapeshift
 
-/client/proc/vampire_screech()
+/client/vampire/proc/vampire_screech()
 	set category = "Vampire"
 	set name = "Chiroptean Screech (30)"
 	set desc = "An extremely loud shriek that stuns nearby humans and breaks windows as well."
@@ -227,10 +227,10 @@
 			del(W)
 		playsound(M.current.loc, 'sound/effects/creepyshriek.ogg', 100, 1)
 		M.current.remove_vampire_blood(30)
-		M.current.verbs -= /client/proc/vampire_screech
-		spawn(1800) M.current.verbs += /client/proc/vampire_screech
+		M.current.verbs -= /client/vampire/proc/vampire_screech
+		spawn(1800) M.current.verbs += /client/vampire/proc/vampire_screech
 
-/client/proc/vampire_enthrall()
+/client/vampire/proc/vampire_enthrall()
 	set category = "Vampire"
 	set name = "Enthrall (300)"
 	set desc = "You use a large portion of your power to sway those loyal to none to be loyal to you only."
@@ -248,15 +248,15 @@
 		if(M.current.can_enthrall(C) && M.current.vampire_power(300, 0)) // recheck
 			M.current.handle_enthrall(C)
 			M.current.remove_vampire_blood(300)
-			M.current.verbs -= /client/proc/vampire_enthrall
-			spawn(1800) M.current.verbs += /client/proc/vampire_enthrall
+			M.current.verbs -= /client/vampire/proc/vampire_enthrall
+			spawn(1800) M.current.verbs += /client/vampire/proc/vampire_enthrall
 		else
 			M.current << "\red You or your target either moved or you dont have enough usable blood."
 			return
 
 
 
-/client/proc/vampire_cloak()
+/client/vampire/proc/vampire_cloak()
 	set category = "Vampire"
 	set name = "Cloak of Darkness (toggle)"
 	set desc = "Toggles whether you are currently cloaking yourself in darkness."
@@ -319,7 +319,7 @@
 	ticker.mode.update_vampire_icons_added(src.mind)
 	log_admin("[ckey(src.key)] has mind-slaved [ckey(H.key)].")
 
-/client/proc/vampire_bats()
+/client/vampire/proc/vampire_bats()
 	set category = "Vampire"
 	set name = "Summon Bats (75)"
 	set desc = "You summon a pair of space bats who attack nearby targets until they or their target is dead."
@@ -344,10 +344,10 @@
 			new /mob/living/simple_animal/hostile/scarybat(M.current.loc, M.current)
 			new /mob/living/simple_animal/hostile/scarybat(M.current.loc, M.current)
 		M.current.remove_vampire_blood(75)
-		M.current.verbs -= /client/proc/vampire_bats
-		spawn(1200) M.current.verbs += /client/proc/vampire_bats
+		M.current.verbs -= /client/vampire/proc/vampire_bats
+		spawn(1200) M.current.verbs += /client/vampire/proc/vampire_bats
 
-/client/proc/vampire_jaunt()
+/client/vampire/proc/vampire_jaunt()
 	//AHOY COPY PASTE INCOMING
 	set category = "Vampire"
 	set name = "Mist Form (30)"
@@ -401,12 +401,12 @@
 			del(animation)
 			del(holder)
 		M.current.remove_vampire_blood(30)
-		M.current.verbs -= /client/proc/vampire_jaunt
-		spawn(600) M.current.verbs += /client/proc/vampire_jaunt
+		M.current.verbs -= /client/vampire/proc/vampire_jaunt
+		spawn(600) M.current.verbs += /client/vampire/proc/vampire_jaunt
 
 // Blink for vamps
 // Less smoke spam.
-/client/proc/vampire_shadowstep()
+/client/vampire/proc/vampire_shadowstep()
 	set category = "Vampire"
 	set name = "Shadowstep (30)"
 	set desc = "Vanish into the shadows."
@@ -458,9 +458,9 @@
 			spawn(10)
 				del(animation)
 		M.current.remove_vampire_blood(30)
-		M.current.verbs -= /client/proc/vampire_shadowstep
+		M.current.verbs -= /client/vampire/proc/vampire_shadowstep
 		spawn(20)
-			M.current.verbs += /client/proc/vampire_shadowstep
+			M.current.verbs += /client/vampire/proc/vampire_shadowstep
 
 /mob/proc/remove_vampire_blood(amount = 0)
 	var/bloodold

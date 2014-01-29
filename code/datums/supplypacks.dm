@@ -339,7 +339,8 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/seeds/amanitamycelium,
 					/obj/item/seeds/reishimycelium,
 					/obj/item/seeds/bananaseed,
-					/obj/item/seeds/eggyseed)
+					/obj/item/seeds/eggyseed,
+					/obj/item/seeds/bloodtomatoseed)
 	cost = 15
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Exotic Seeds crate"
@@ -818,11 +819,17 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Operations"
 
 /datum/supply_packs/randomised/contraband
-	num_contained = 5
-	contains = list(/obj/item/seeds/bloodtomatoseed,
-					/obj/item/weapon/storage/pill_bottle/zoom,
+	num_contained = 6
+	contains = list(/obj/item/weapon/storage/pill_bottle/zoom,
 					/obj/item/weapon/storage/pill_bottle/happy,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe)
+					/obj/item/weapon/storage/pill_bottle/random_drug_bottle,
+					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
+					/obj/item/weapon/grenade/smokebomb,
+					/obj/item/clothing/mask/cigarette/cigar/cohiba,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/ale,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/patron,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe,
+					/obj/item/weapon/lipstick/random)
 
 	name = "Contraband crate"
 	cost = 30

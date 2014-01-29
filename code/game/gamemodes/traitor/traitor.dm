@@ -85,9 +85,14 @@
 		kill_objective.find_target()
 		traitor.objectives += kill_objective
 
-		var/datum/objective/survive/survive_objective = new
-		survive_objective.owner = traitor
-		traitor.objectives += survive_objective
+		if(prob(25))
+			var/datum/objective/die/die_objective = new
+			die_objective.owner = traitor
+			traitor.objectives += die_objective
+		else
+			var/datum/objective/survive/survive_objective = new
+			survive_objective.owner = traitor
+			traitor.objectives += survive_objective
 
 		if(prob(10))
 			var/datum/objective/block/block_objective = new
@@ -243,7 +248,7 @@
 	if (traitor_mob.mind)
 		if (traitor_mob.mind.assigned_role == "Clown")
 			traitor_mob << "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself."
-			traitor_mob.mutations.Remove(CLUMSY)
+			traitor_mob.mutations.Remove(M_CLUMSY)
 
 	// find a radio! toolbox(es), backpack, belt, headset
 	var/loc = ""

@@ -281,7 +281,7 @@ Auto Patrol: []"},
 					var/mob/living/carbon/M = src.target
 					var/maxstuns = 4
 					if (istype(M, /mob/living/carbon/human))
-						if (M.stuttering < 10 && (!(HULK in M.mutations))  /*&& (!istype(M:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
+						if (M.stuttering < 10 && (!(M_HULK in M.mutations))  /*&& (!istype(M:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
 							M.stuttering = 10
 						M.Stun(10)
 						M.Weaken(10)
@@ -959,8 +959,8 @@ Auto Patrol: []"},
 				icon_state = "[lasercolor]ed209_prox"
 
 		if(6)
-			if( istype(W, /obj/item/weapon/cable_coil) )
-				var/obj/item/weapon/cable_coil/coil = W
+			if( istype(W, /obj/item/stack/cable_coil) )
+				var/obj/item/stack/cable_coil/coil = W
 				var/turf/T = get_turf(user)
 				user << "<span class='notice'>You start to wire [src]...</span>"
 				sleep(40)

@@ -138,7 +138,7 @@ steam.start() -- spawns the effect
 					sleep(5)
 					step(steam,direction)
 				spawn(20)
-					steam.delete()
+					if(steam) steam.delete()
 
 /////////////////////////////////////////////
 //SPARK SYSTEM (like steam system)
@@ -211,7 +211,7 @@ steam.start() -- spawns the effect
 					step(sparks,direction)
 				spawn(20)
 					if(sparks)
-						sparks.delete()
+						if(sparks) sparks.delete()
 					src.total_sparks--
 
 
@@ -511,9 +511,36 @@ steam.start() -- spawns the effect
 					sleep(10)
 					step(smoke,direction)
 				spawn(150+rand(10,30))
-					smoke.delete()
+					if(smoke) smoke.delete()
 					src.total_smoke--
 
+// Goon compat.
+/datum/effect/effect/system/chem_smoke_spread/fart
+
+	set_up(var/mob/M, n = 5, c = 0, loca, direct)
+		if(n > 20)
+			n = 20
+		number = n
+		cardinals = c
+
+		chemholder.reagents.add_reagent("space_drugs", rand(1,10))
+
+		if(istype(loca, /turf/))
+			location = loca
+		else
+			location = get_turf(loca)
+		if(direct)
+			direction = direct
+
+		var/contained = "\[[chemholder.reagents.get_reagent_ids()]\]"
+		var/area/A = get_area(location)
+
+		var/where = "[A.name] | [location.x], [location.y]"
+		var/whereLink=formatJumpTo(location,where)
+
+		var/more = "(<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</a>)"
+		message_admins("[M][more] produced a toxic fart in ([whereLink])[contained].", 0, 1)
+		log_game("[M][more] produced a toxic fart in ([where])[contained].")
 
 
 /////////////////////////////////////////////
@@ -696,7 +723,6 @@ steam.start() -- spawns the effect
 					src.total_smoke--
 
 
-
 /////////////////////////////////////////////
 //////// Attach an Ion trail to any object, that spawns when it moves (like for the jetpack)
 /// just pass in the object to attach it to in set_up
@@ -734,7 +760,7 @@ steam.start() -- spawns the effect
 						flick("ion_fade", I)
 						I.icon_state = "blank"
 						spawn( 20 )
-							I.delete()
+							if(I) I.delete()
 					spawn(2)
 						if(src.on)
 							src.processing = 1
@@ -779,7 +805,7 @@ steam.start() -- spawns the effect
 					src.oldposition = get_turf(holder)
 					I.dir = src.holder.dir
 					spawn(10)
-						I.delete()
+						if(I) I.delete()
 						src.number--
 					spawn(2)
 						if(src.on)
@@ -993,7 +1019,7 @@ steam.start() -- spawns the effect
 		return
 
 	attack_hand(var/mob/user)
-		if ((HULK in user.mutations) || (prob(75 - metal*25)))
+		if ((M_HULK in user.mutations) || (prob(75 - metal*25)))
 			user << "\blue You smash through the metal foam wall."
 			for(var/mob/O in oviewers(user))
 				if ((O.client && !( O.blinded )))

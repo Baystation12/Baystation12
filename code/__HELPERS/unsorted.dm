@@ -291,6 +291,16 @@ Turf and target are seperate in case you want to teleport some distance from a t
 					PDA.name = "PDA-[newname] ([PDA.ownjob])"
 					if(!search_id)	break
 					search_pda = 0
+
+		//Fixes renames not being reflected in objective text
+		var/list/O = (typesof(/datum/objective)  - /datum/objective)
+		var/length
+		var/pos
+		for(var/datum/objective/objective in O)
+			if(objective.target != mind) continue
+			length = lentext(oldname)
+			pos = findtextEx(objective.explanation_text, oldname)
+			objective.explanation_text = copytext(objective.explanation_text, 1, pos)+newname+copytext(objective.explanation_text, pos+length)
 	return 1
 
 
@@ -1251,7 +1261,7 @@ proc/get_mob_with_client_list()
 
 //Quick type checks for some tools
 var/global/list/common_tools = list(
-/obj/item/weapon/cable_coil,
+/obj/item/stack/cable_coil,
 /obj/item/weapon/wrench,
 /obj/item/weapon/weldingtool,
 /obj/item/weapon/screwdriver,
@@ -1275,7 +1285,7 @@ var/global/list/common_tools = list(
 	return 0
 
 /proc/iscoil(O)
-	if(istype(O, /obj/item/weapon/cable_coil))
+	if(istype(O, /obj/item/stack/cable_coil))
 		return 1
 	return 0
 
@@ -1300,7 +1310,7 @@ var/global/list/common_tools = list(
 	return 0
 
 /proc/iswire(O)
-	if(istype(O, /obj/item/weapon/cable_coil))
+	if(istype(O, /obj/item/stack/cable_coil))
 		return 1
 	return 0
 
@@ -1562,3 +1572,40 @@ proc/check_target_facings(mob/living/initator, mob/living/target)
 		return 2
 	if(initator.dir + 2 == target.dir || initator.dir - 2 == target.dir || initator.dir + 6 == target.dir || initator.dir - 6 == target.dir) //Initating mob is looking at the target, while the target mob is looking in a direction perpendicular to the 1st
 		return 3
+
+
+/proc/texttospeechstrip(var/t_in)
+    var/t_out = ""
+    for(var/i=1, i<=length(t_in), i++)
+        var/ascii_char = text2ascii(t_in,i)
+        switch(ascii_char)
+            // A .. Z
+            if(65 to 90)                        //Uppercase Letters
+                if(lentext(t_out) <= 150)
+                    t_out += ascii2text(ascii_char)
+            // a .. z
+            if(97 to 122)                        //Lowercase Letters
+                if(lentext(t_out) <= 150)
+                    t_out += ascii2text(ascii_char)
+            // 0 .. 9
+            if(48 to 57)                        //Numbers
+                if(lentext(t_out) <= 150)
+                    t_out += ascii2text(ascii_char)
+            // ` , - . ! ? : '
+            if(39,44,45,46,33,63,58,96,60,62)                        //Common name punctuation
+                if(lentext(t_out) <= 150)
+                    t_out += ascii2text(ascii_char)
+            //Space
+            if(32)
+                if(lentext(t_out) <= 150)
+                    t_out += ascii2text(ascii_char)
+    return t_out
+/var/lastspeak = ""
+
+
+/mob/proc/texttospeech(var/text, var/speed, var/pitch, var/accent, var/voice, var/echo)
+    text = texttospeechstrip(text)
+    lastspeak = text
+    ext_python("voice.py", "\"[accent]\" \"[voice]\" \"[pitch]\" \"[echo]\" \"[speed]\" \"[text]\" \"[src.ckey]\"")
+
+

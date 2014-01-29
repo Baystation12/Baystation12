@@ -57,8 +57,8 @@
 			user << "\red This syringe is broken!"
 			return
 
-		if (user.a_intent == "hurt" && ismob(target))
-			if((CLUMSY in user.mutations) && prob(50))
+		if (user.a_intent == "harm" && ismob(target))
+			if((M_CLUMSY in user.mutations) && prob(50))
 				target = user
 			syringestab(target, user)
 			return
@@ -84,7 +84,7 @@
 						if(!T.dna)
 							usr << "You are unable to locate any blood. (To be specific, your target seems to be missing their DNA datum)"
 							return
-						if(NOCLONE in T.mutations) //target done been et, no more blood in him
+						if(M_NOCLONE in T.mutations) //target done been et, no more blood in him
 							user << "\red You are unable to locate any blood."
 							return
 
@@ -172,6 +172,19 @@
 					src.reagents.reaction(target, INGEST)
 				if(ismob(target) && target == user)
 					src.reagents.reaction(target, INGEST)
+
+				if(isobj(target))
+					// /vg/: Logging transfers of bad things
+					if(target.reagents_to_log.len)
+						var/list/badshit=list()
+						for(var/bad_reagent in target.reagents_to_log)
+							if(reagents.has_reagent(bad_reagent))
+								badshit += reagents_to_log[bad_reagent]
+						if(badshit.len)
+							var/hl="\red <b>([english_list(badshit)])</b> \black"
+							message_admins("[user.name] ([user.ckey]) added [reagents.get_reagent_ids(1)] to \a [target] with [src].[hl] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+							log_game("[user.name] ([user.ckey]) added [reagents.get_reagent_ids(1)] to \a [target] with [src].")
+
 				spawn(5)
 					var/datum/reagent/blood/B
 					for(var/datum/reagent/blood/d in src.reagents.reagent_list)

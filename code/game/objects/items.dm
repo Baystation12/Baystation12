@@ -102,7 +102,7 @@
 		if(5.0)
 			size = "huge"
 		else
-	//if ((CLUMSY in usr.mutations) && prob(50)) t = "funny-looking"
+	//if ((M_CLUMSY in usr.mutations) && prob(50)) t = "funny-looking"
 	usr << "This is a [src.blood_DNA ? "bloody " : ""]\icon[src][src.name]. It is a [size] item."
 	if(src.desc)
 		usr << src.desc
@@ -224,7 +224,7 @@
 
 	return
 
-/obj/item/proc/talk_into(mob/M as mob, text)
+/obj/item/proc/talk_into(mob/M as mob, var/text, var/channel=null)
 	return
 
 /obj/item/proc/moved(mob/user as mob, old_loc as turf)
@@ -270,7 +270,7 @@
 
 
 		if(istype(src, /obj/item/clothing/under) || istype(src, /obj/item/clothing/suit))
-			if(FAT in H.mutations)
+			if(M_FAT in H.mutations)
 				testing("[M] TOO FAT TO WEAR [src]!")
 				if(!(flags & ONESIZEFITSALL))
 					if(!disable_warning)
@@ -548,7 +548,7 @@
 		M.LAssailant = user
 
 	src.add_fingerprint(user)
-	//if((CLUMSY in user.mutations) && prob(50))
+	//if((M_CLUMSY in user.mutations) && prob(50))
 	//	M = user
 		/*
 		M << "\red You stab yourself in the eye."

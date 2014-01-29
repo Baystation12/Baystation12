@@ -382,6 +382,11 @@ var/list/sacrificed = list()
 				D.real_name = "[pick(first_names_male)] [pick(last_names)]"
 			D.universal_speak = 1
 			D.status_flags &= ~GODMODE
+			D.s_tone = 35
+			D.b_eyes = 200
+			D.r_eyes = 200
+			D.g_eyes = 200
+			D.underwear = 0
 
 			D.key = ghost.key
 
@@ -983,7 +988,7 @@ var/list/sacrificed = list()
 					if(iscarbon(L))
 						var/mob/living/carbon/C = L
 						flick("e_flash", C.flash)
-						if(C.stuttering < 1 && (!(HULK in C.mutations)))
+						if(C.stuttering < 1 && (!(M_HULK in C.mutations)))
 							C.stuttering = 1
 						C.Weaken(1)
 						C.Stun(1)
@@ -1010,7 +1015,7 @@ var/list/sacrificed = list()
 					else if(iscarbon(T))
 						var/mob/living/carbon/C = T
 						flick("e_flash", C.flash)
-						if (!(HULK in C.mutations))
+						if (!(M_HULK in C.mutations))
 							C.silent += 15
 						C.Weaken(25)
 						C.Stun(25)

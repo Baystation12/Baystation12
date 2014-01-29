@@ -99,8 +99,18 @@
 		else
 			target.LAssailant = user
 
-		var/obj/item/brain/B = new(target.loc)
-		B.transfer_identity(target)
+		var/mob/living/carbon/human/H
+		if(istype(target,/mob/living/carbon/human))
+			H = target
+
+		var/obj/item/brain/B
+		if(istype(H) && H.species && H.species.flags & IS_SYNTHETIC)
+			var/obj/item/device/mmi/posibrain/P = new(target.loc)
+			P.transfer_identity(target)
+		else
+			B = new(target.loc)
+			B.transfer_identity(target)
+
 		target.internal_organs -= B
 
 		target:brain_op_stage = 4.0
@@ -151,7 +161,7 @@
 /datum/surgery_step/brain/hematoma
 	allowed_tools = list(
 	/obj/item/weapon/FixOVein = 100, \
-	/obj/item/weapon/cable_coil = 75
+	/obj/item/stack/cable_coil = 75
 	)
 
 	min_duration = 90

@@ -30,6 +30,16 @@
 		return 1
 	return 0
 
+proc/isfacehugger(A)
+	if(istype(A, /mob/living/carbon/alien/facehugger))
+		return 1
+	return 0
+
+proc/isembryo(A)
+	if(istype(A, /mob/living/carbon/alien/embryo))
+		return 1
+	return 0
+
 /proc/isslime(A)
 	if(istype(A, /mob/living/carbon/slime))
 		return 1
@@ -369,7 +379,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 	return 0
 
 //converts intent-strings into numbers and back
-var/list/intents = list("help","disarm","grab","hurt")
+var/list/intents = list("help","disarm","grab","harm")
 /proc/intent_numeric(argument)
 	if(istext(argument))
 		switch(argument)
@@ -382,7 +392,7 @@ var/list/intents = list("help","disarm","grab","hurt")
 			if(0)			return "help"
 			if(1)			return "disarm"
 			if(2)			return "grab"
-			else			return "hurt"
+			else			return "harm"
 
 //change a mob's act-intent. Input the intent as a string such as "help" or use "right"/"left
 /mob/verb/a_intent_change(input as text)
@@ -391,7 +401,7 @@ var/list/intents = list("help","disarm","grab","hurt")
 
 	if(ishuman(src) || isalienadult(src) || isbrain(src))
 		switch(input)
-			if("help","disarm","grab","hurt")
+			if("help","disarm","grab","harm")
 				a_intent = input
 			if("right")
 				a_intent = intent_numeric((intent_numeric(a_intent)+1) % 4)
@@ -404,12 +414,12 @@ var/list/intents = list("help","disarm","grab","hurt")
 		switch(input)
 			if("help")
 				a_intent = "help"
-			if("hurt")
-				a_intent = "hurt"
+			if("harm")
+				a_intent = "harm"
 			if("right","left")
 				a_intent = intent_numeric(intent_numeric(a_intent) - 3)
 		if(hud_used && hud_used.action_intent)
-			if(a_intent == "hurt")
+			if(a_intent == "harm")
 				hud_used.action_intent.icon_state = "harm"
 			else
 				hud_used.action_intent.icon_state = "help"

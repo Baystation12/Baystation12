@@ -460,7 +460,7 @@
 
 			attacked += 10
 			if (prob(90))
-				if (HULK in M.mutations)
+				if (M_HULK in M.mutations)
 					damage += 5
 					if(Victim)
 						Victim = null
@@ -505,7 +505,7 @@
 				if ((O.client && !( O.blinded )))
 					O.show_message(text("\blue [M] caresses [src] with its scythe like arm."), 1)
 
-		if ("hurt")
+		if ("harm")
 
 			if ((prob(95) && health > 0))
 				attacked += 10
@@ -903,7 +903,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE
 	armor = list(melee = 80, bullet = 20, laser = 20, energy = 10, bomb = 0, bio = 0, rad = 0)
 
-/obj/effect/golemrune
+/obj/effect/goleM_RUNe
 	anchored = 1
 	desc = "a strange rune used to create golems. It glows when spirits are nearby."
 	name = "rune"

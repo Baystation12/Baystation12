@@ -1,6 +1,6 @@
 
 /datum/artifact_effect/hurt
-	effecttype = "hurt"
+	effecttype = "harm"
 	effect_type = 5
 
 /datum/artifact_effect/hurt/DoEffectTouch(var/mob/toucher)

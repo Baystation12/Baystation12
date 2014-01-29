@@ -8,6 +8,7 @@
 	heal_rate = 5
 	plasma_rate = 20
 	move_delay_add = 2
+	max_plasma = 1000
 
 /mob/living/carbon/alien/humanoid/queen/New()
 	var/datum/reagents/R = new/datum/reagents(100)
@@ -23,7 +24,7 @@
 			break
 
 	real_name = src.name
-	verbs.Add(/mob/living/carbon/alien/humanoid/proc/corrosive_acid,/mob/living/carbon/alien/humanoid/proc/neurotoxin,/mob/living/carbon/alien/humanoid/proc/resin)
+	verbs.Add(/mob/living/carbon/alien/humanoid/proc/corrosive_acid,/mob/living/carbon/alien/humanoid/proc/resin)
 	verbs -= /mob/living/carbon/alien/verb/alien_ventcrawl
 	..()
 
@@ -56,7 +57,7 @@
 //Queen verbs
 /mob/living/carbon/alien/humanoid/queen/verb/lay_egg()
 
-	set name = "Lay Egg (75)"
+	set name = "Lay Egg (250)"
 	set desc = "Lay an egg to produce huggers to impregnate prey with."
 	set category = "Alien"
 
@@ -64,8 +65,8 @@
 		src << "There's already an egg here."
 		return
 
-	if(powerc(75,1))//Can't plant eggs on spess tiles. That's silly.
-		adjustToxLoss(-75)
+	if(powerc(250,1))//Can't plant eggs on spess tiles. That's silly.
+		adjustToxLoss(-250)
 		for(var/mob/O in viewers(src, null))
 			O.show_message(text("\green <B>[src] has laid an egg!</B>"), 1)
 		new /obj/effect/alien/egg(loc)
@@ -76,6 +77,7 @@
 	icon = 'icons/mob/alienlarge.dmi'
 	icon_state = "queen_s"
 	pixel_x = -16
+	large = 1
 
 /mob/living/carbon/alien/humanoid/queen/large/update_icons()
 	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
@@ -98,7 +100,7 @@
 	set desc = "The ultimate transformation. Become an alien Empress. Only one empress can exist at a time."
 	set category = "Alien"
 
-	if(powerc(500))
+	if(powerc(1000))
 		// Queen check
 		var/no_queen = 1
 		for(var/mob/living/carbon/alien/humanoid/empress/E in living_mob_list)
@@ -107,7 +109,7 @@
 			no_queen = 0
 
 		if(no_queen)
-			adjustToxLoss(-500)
+			adjustToxLoss(-1000)
 			src << "\green You begin to evolve!"
 			for(var/mob/O in viewers(src, null))
 				O.show_message(text("\green <B>[src] begins to twist and contort!</B>"), 1)

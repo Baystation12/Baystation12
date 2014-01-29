@@ -27,7 +27,7 @@
 			var/datum/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
 			var/armor_block = run_armor_check(affecting, "melee")
 
-			if(HULK in M.mutations)			damage += 5
+			if(M_HULK in M.mutations)			damage += 5
 
 			playsound(loc, "punch", 25, 1, -1)
 
@@ -92,7 +92,7 @@
 			add_logs(src, M, "grabbed", addition="passively")
 			return 1
 
-		if("hurt")
+		if("harm")
 
 			//Vampire code
 			if(M.zone_sel && M.zone_sel.selecting == "head" && src != M)
@@ -137,7 +137,7 @@
 			var/datum/organ/external/affecting = get_organ(ran_zone(M.zone_sel.selecting))
 			var/armor_block = run_armor_check(affecting, "melee")
 
-			if(HULK in M.mutations)			damage += 5
+			if(M_HULK in M.mutations)			damage += 5
 
 
 			if(M.species.attack_verb == "punch")
@@ -196,6 +196,15 @@
 
 				log_attack("[M.name] ([M.ckey]) pushed [src.name] ([src.ckey])")
 				return
+			if(randn <= 45 && !lying)
+				if(head)
+					var/obj/item/clothing/head/H = head
+					if(!istype(H) || prob(H.loose))
+						drop_from_inventory(H)
+						if(prob(60))
+							step_away(H,M)
+						visible_message("<span class='warning'>[M] has knocked [src]'s [H] off!</span>",
+										"<span class='warning'>[M] knocked \the [H] clean off your head!</span>")
 
 			var/talked = 0	// BubbleWrap
 

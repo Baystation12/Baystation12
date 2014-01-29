@@ -455,7 +455,7 @@
 						if(world.system_type == UNIX)
 							config.python_path = "/usr/bin/env python2"
 						else //probably windows, if not this should work anyway
-							config.python_path = "python"
+							config.python_path = "pythonw"
 
 				if("assistant_limit")
 					config.assistantlimit = 1

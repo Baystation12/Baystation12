@@ -117,7 +117,7 @@
 		new /obj/item/weapon/wirecutters(src)
 		new /obj/item/weapon/wrench(src)
 		new /obj/item/device/multitool(src)
-		new /obj/item/weapon/cable_coil(src)
+		new /obj/item/stack/cable_coil(src)
 
 		new /obj/item/weapon/handcuffs(src)
 		new /obj/item/weapon/dnainjector/xraymut(src)
@@ -146,7 +146,7 @@
 		new /obj/item/weapon/wirecutters(src)
 		new /obj/item/weapon/wrench(src)
 		new /obj/item/device/multitool(src)
-		new /obj/item/weapon/cable_coil(src)
+		new /obj/item/stack/cable_coil(src)
 
 		new /obj/item/device/analyzer(src)
 		new /obj/item/device/healthanalyzer(src)

@@ -288,7 +288,7 @@ nanoui is used to open and update nano browser uis
 		<script type='text/javascript'>
 			function receiveUpdateData(jsonString)
 			{
-				// We need both jQuery and NanoUpdate to be able to recieve data				
+				// We need both jQuery and NanoUpdate to be able to recieve data
 				// At the moment any data received before those libraries are loaded will be lost
 				if (typeof NanoUpdate != 'undefined' && typeof jQuery != 'undefined')
 				{
@@ -298,11 +298,11 @@ nanoui is used to open and update nano browser uis
 		</script>
 		[head_content]
 	</head>
-	<body scroll=auto data-url-parameters='[url_parameters_json]' data-template-data='[template_data_json]' data-initial-data='[initial_data_json]'>		
+	<body scroll=auto data-url-parameters='[url_parameters_json]' data-template-data='[template_data_json]' data-initial-data='[initial_data_json]'>
 		<div id='uiWrapper'>
 			[title ? "<div id='uiTitleWrapper'><div id='uiStatusIcon' class='icon24 uiStatusGood'></div><div id='uiTitle'>[title]</div><div id='uiTitleFluff'></div></div>" : ""]
 			<div id='uiContent'>
-				<div id='uiNoJavaScript'>Initiating...</div>
+				<noscript><div id='uiNoJavaScript'>Your browser does not have JavaScript enabled. Please enable JavaScript, then restart SS13.</div></noscript>
 	"}
 
  /**

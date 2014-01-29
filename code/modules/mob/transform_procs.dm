@@ -29,11 +29,12 @@
 
 	O = new species.primitive(loc)
 
-	O.dna = dna
-	O.dna.uni_identity = "000000000000000000DC00000660004DA0A0E00"
-	O.dna.struc_enzymes = "[copytext(O.dna.struc_enzymes,1,1+3*(STRUCDNASIZE-1))]BB8"
+	O.dna = dna.Clone()
+	O.dna.SetSEState(MONKEYBLOCK,1)
+	O.dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
+	O.loc = loc
 	O.viruses = viruses
-	O.a_intent = "hurt"
+	O.a_intent = "harm"
 
 	for(var/datum/disease/D in O.viruses)
 		D.affected_mob = O
@@ -212,7 +213,7 @@
 		if("Drone")
 			new_xeno = new /mob/living/carbon/alien/humanoid/drone(loc)
 
-	new_xeno.a_intent = "hurt"
+	new_xeno.a_intent = "harm"
 	new_xeno.key = key
 
 	new_xeno << "<B>You are now an alien.</B>"
@@ -248,7 +249,7 @@
 			new_slime = new /mob/living/carbon/slime/adult(loc)
 		else
 			new_slime = new /mob/living/carbon/slime(loc)
-	new_slime.a_intent = "hurt"
+	new_slime.a_intent = "harm"
 	new_slime.key = key
 
 	new_slime << "<B>You are now a slime. Skreee!</B>"
@@ -270,7 +271,7 @@
 		del(t)
 
 	var/mob/living/simple_animal/corgi/new_corgi = new /mob/living/simple_animal/corgi (loc)
-	new_corgi.a_intent = "hurt"
+	new_corgi.a_intent = "harm"
 	new_corgi.key = key
 
 	new_corgi << "<B>You are now a Corgi. Yap Yap!</B>"
@@ -304,7 +305,7 @@
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
-	new_mob.a_intent = "hurt"
+	new_mob.a_intent = "harm"
 
 
 	new_mob << "You suddenly feel more... animalistic."
@@ -324,7 +325,7 @@
 	var/mob/new_mob = new mobpath(src.loc)
 
 	new_mob.key = key
-	new_mob.a_intent = "hurt"
+	new_mob.a_intent = "harm"
 	new_mob << "You feel more... animalistic"
 
 	del(src)

@@ -64,7 +64,8 @@
 #define ui_acti_alt "14:28,1:5" //alternative intent switcher for when the interface is hidden (F12)
 
 #define ui_borg_pull "EAST-2:26,SOUTH+1:7"
-#define ui_borg_panel "EAST-1:28,SOUTH+1:7"
+#define ui_borg_radio "EAST-1:28,SOUTH+1:7"
+#define ui_borg_intents "EAST-2:26,SOUTH:5"
 
 //Gun buttons
 #define ui_gun1 "13:26,3:7"

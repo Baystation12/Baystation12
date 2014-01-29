@@ -17,7 +17,7 @@
 	origin_tech = "combat=2"
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is putting the live [src.name] in \his mouth! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='suicide'>[user] is putting the live [name] in \his mouth! It looks like \he's trying to commit suicide.</span>"
 		return (FIRELOSS)
 
 /obj/item/weapon/melee/baton/loaded/New()
@@ -77,8 +77,8 @@
 		..()
 	return
 
-/obj/item/weapon/melee/baton/attack_self(mob/user as mob)
-	if(status && (CLUMSY in user.mutations) && prob(50))
+/obj/item/weapon/melee/baton/attack_self(mob/user)
+	if(status && (M_CLUMSY in user.mutations) && prob(50))
 		user << "\red You grab the [src] on the wrong side."
 		user.Weaken(stunforce*3)
 		deductcharge(hitcost)
@@ -100,9 +100,9 @@
 			user << "<span class='warning'>[src] is out of charge.</span>"
 	add_fingerprint(user)
 
-/obj/item/weapon/melee/baton/attack(mob/M as mob, mob/user as mob)
-	if(status && (CLUMSY in user.mutations) && prob(50))
-		user << "<span class='danger'>You accidentally hit yourself with the [src]!</span>"
+/obj/item/weapon/melee/baton/attack(mob/M, mob/user)
+	if(status && (M_CLUMSY in user.mutations) && prob(50))
+		user << "<span class='danger'>You accidentally hit yourself with [src]!</span>"
 		user.Weaken(stunforce*3)
 		deductcharge(hitcost)
 		return
@@ -115,7 +115,7 @@
 		return
 	var/mob/living/L = M
 
-	if(user.a_intent == "hurt")
+	if(user.a_intent == "harm")
 		..()
 		playsound(loc, "swing_hit", 50, 1, -1)
 
@@ -221,3 +221,4 @@
 		icon_state = "stunprod_nocell"
 	else
 		icon_state = "stunprod"
+

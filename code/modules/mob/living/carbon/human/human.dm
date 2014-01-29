@@ -32,6 +32,11 @@
 	set_species("Vox")
 	..()
 
+/mob/living/carbon/human/skellington/New()
+	h_style = "Bald"
+	set_species("Skellington")
+	..()
+
 /mob/living/carbon/human/diona/New()
 	species = new /datum/species/diona(src)
 	..()
@@ -46,9 +51,13 @@
 	dna.mutantrace = "slime"
 	..()
 
+/mob/living/carbon/human/machine/New()
+	species = new /datum/species/machine(src)
+	..()
+
 /mob/living/carbon/human/grey/New()
 	set_species("Grey")
-	mutations.Add(mRemotetalk)
+	mutations.Add(M_REMOTE_TALK)
 	verbs += /mob/living/carbon/human/proc/remotesay
 	..()
 
@@ -57,9 +66,8 @@
 	..()
 
 /mob/living/carbon/human/New()
-
 	if(!species)
-		set_species("Human")
+		set_species()
 
 	if(species.language)
 		var/datum/language/L = all_languages[species.language]
@@ -72,6 +80,7 @@
 
 	if(!dna)
 		dna = new /datum/dna(null)
+		dna.species=species.name
 
 	for(var/i=0;i<7;i++) // 2 for medHUDs and 5 for secHUDs
 		hud_list += image('icons/mob/hud.dmi', src, "hudunknown")
@@ -82,9 +91,9 @@
 		dna.real_name = real_name
 
 	prev_gender = gender // Debug for plural genders
-
 	make_organs()
 	make_blood()
+
 
 /mob/living/carbon/human/Bump(atom/movable/AM as mob|obj, yes)
 	if ((!( yes ) || now_pushing))
@@ -122,8 +131,8 @@
 					slime.UpdateFeed()
 			return
 
-		if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
-			if(prob(40) && !(FAT in src.mutations))
+		if(istype(tmob, /mob/living/carbon/human) && (M_FAT in tmob.mutations))
+			if(prob(40) && !(M_FAT in src.mutations))
 				src << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
 				now_pushing = 0
 				return
@@ -496,7 +505,7 @@
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when polyacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name()
 	var/datum/organ/external/head/head = get_organ("head")
-	if( !head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (HUSK in mutations) )	//disfigured. use id-name if possible
+	if( !head || head.disfigured || (head.status & ORGAN_DESTROYED) || !real_name || (M_HUSK in mutations) )	//disfigured. use id-name if possible
 		return "Unknown"
 	return real_name
 
@@ -525,9 +534,9 @@
 		if(gloves)
 			var/obj/item/clothing/gloves/G = gloves
 			siemens_coeff = G.siemens_coefficient
-			//If they have shock immunity mutation
-		if(mShock in src.mutations)
-			siemens_coeff = 0
+	//If they have shock immunity mutation
+	if(M_NO_SHOCK in src.mutations)
+		siemens_coeff = 0
 	return ..(shock_damage,source,siemens_coeff)
 
 
@@ -953,7 +962,7 @@
 		remoteview_target = null
 		return
 
-	if(!(mMorph in mutations))
+	if(!(M_MORPH in mutations))
 		src.verbs -= /mob/living/carbon/human/proc/morph
 		return
 
@@ -1032,7 +1041,7 @@
 		remoteview_target = null
 		return
 
-	if(!(mRemotetalk in src.mutations))
+	if(!(M_REMOTE_TALK in src.mutations))
 		src.verbs -= /mob/living/carbon/human/proc/remotesay
 		return
 	var/list/creatures = list()
@@ -1043,7 +1052,7 @@
 		return
 
 	var/say = input ("What do you wish to say")
-	if(mRemotetalk in target.mutations)
+	if(M_REMOTE_TALK in target.mutations)
 		target.show_message("\blue You hear [src.real_name]'s voice: [say]")
 	else
 		target.show_message("\blue You hear a voice that seems to echo around the room: [say]")
@@ -1060,7 +1069,7 @@
 		reset_view(0)
 		return
 
-	if(!(mRemote in src.mutations))
+	if(!(M_REMOTE_VIEW in src.mutations))
 		remoteview_target = null
 		reset_view(0)
 		src.verbs -= /mob/living/carbon/human/proc/remoteobserve
@@ -1082,6 +1091,8 @@
 	for(var/mob/living/carbon/h in world)
 		var/turf/temp_turf = get_turf(h)
 		if((temp_turf.z != 1 && temp_turf.z != 5) || h.stat!=CONSCIOUS) //Not on mining or the station. Or dead
+			continue
+		if(M_PSY_RESIST in h.mutations)
 			continue
 		creatures += h
 
@@ -1346,15 +1357,27 @@ mob/living/carbon/human/yank_out_object()
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/new_species)
+/mob/living/carbon/human/proc/set_species(var/new_species,var/on_spawn=0)
 
-	if(!new_species)
-		new_species = "Human"
+	if(!dna)
+		if(!new_species)
+			new_species = "Human"
+	else
+		if(!new_species)
+			new_species = dna.species
+		else
+			dna.species = new_species
 
 	if(species && (species.name && species.name == new_species))
-		return 1
+		return
+
+	if(species && species.language)
+		remove_language(species.language)
 
 	species = all_species[new_species]
+
+	if(species.language)
+		add_language(species.language)
 
 	see_in_dark = species.darksight
 	if(see_in_dark > 2)
@@ -1365,16 +1388,17 @@ mob/living/carbon/human/yank_out_object()
 	if(species.name=="Slime People")
 		dna.mutantrace = "slime"
 
-	mutations+=species.default_mutations
+	if(species.default_mutations.len>0 || species.default_blocks.len>0)
+		do_deferred_species_setup=1
 
 	spawn(0)
 		update_icons()
 
 	if(species)
+		species.handle_post_spawn(src)
 		return 1
 	else
 		return 0
-
 
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"
@@ -1434,4 +1458,3 @@ mob/living/carbon/human/yank_out_object()
 		drop_from_inventory(head)
 		update_hair()
 		update_body()
-

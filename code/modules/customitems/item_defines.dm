@@ -32,6 +32,16 @@
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0) // Standard Security jumpsuit stats
 	siemens_coefficient = 0.
 
+/obj/item/clothing/under/fluff/blackschoolGirl // Black schoolgirl uniform
+	name = "Black Schoolgirl Uniform"
+	desc = "A Japanese style school uniform for girls"
+	icon= 'icons/obj/clothing/uniforms.dmi'
+	icon_state = "schoolgirl_black"
+	_color = "schoolgirl_black"
+	item_state = "schoolgirl_black"
+	has_sensor = 1 // Just to make sure it has a sensor
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0) // Standar Jumpsuit stats
+
 //////////////////////////////////
 ////////// Fluff Items ///////////
 //////////////////////////////////

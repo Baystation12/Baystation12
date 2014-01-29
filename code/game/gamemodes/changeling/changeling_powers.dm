@@ -83,7 +83,8 @@
 		src << "<span class='warning'>[T] is not compatible with our biology.</span>"
 		return
 
-	if((NOCLONE || SKELETON) in T.mutations)
+
+	if((M_NOCLONE || SKELETON) in T.mutations)
 		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
 		return
 
@@ -125,35 +126,38 @@
 	T.dna.real_name = T.real_name //Set this again, just to be sure that it's properly set.
 	changeling.absorbed_dna |= T.dna
 	if(src.nutrition < 400) src.nutrition = min((src.nutrition + T.nutrition), 400)
+
 	changeling.chem_charges += 10
 	changeling.geneticpoints += 2
 
-	if(T.mind && T.mind.changeling)
-		if(T.mind.changeling.absorbed_dna)
-			for(var/dna_data in T.mind.changeling.absorbed_dna)	//steal all their loot
-				if(dna_data in changeling.absorbed_dna)
-					continue
-				changeling.absorbed_dna += dna_data
-				changeling.absorbedcount++
-			T.mind.changeling.absorbed_dna.len = 1
+	if(T.mind)
+		T.mind.show_memory(src, 0) //I can read your mind, kekeke. Output all their notes.
+		if(T.mind.changeling)
+			if(T.mind.changeling.absorbed_dna)
+				for(var/dna_data in T.mind.changeling.absorbed_dna)	//steal all their loot
+					if(dna_data in changeling.absorbed_dna)
+						continue
+					changeling.absorbed_dna += dna_data
+					changeling.absorbedcount++
+				T.mind.changeling.absorbed_dna.len = 1
 
-		if(T.mind.changeling.purchasedpowers)
-			for(var/datum/power/changeling/Tp in T.mind.changeling.purchasedpowers)
-				if(Tp in changeling.purchasedpowers)
-					continue
-				else
-					changeling.purchasedpowers += Tp
-
-					if(!Tp.isVerb)
-						call(Tp.verbpath)()
+			if(T.mind.changeling.purchasedpowers)
+				for(var/datum/power/changeling/Tp in T.mind.changeling.purchasedpowers)
+					if(Tp in changeling.purchasedpowers)
+						continue
 					else
-						src.make_changeling()
+						changeling.purchasedpowers += Tp
 
-		changeling.chem_charges += T.mind.changeling.chem_charges
-		changeling.geneticpoints += T.mind.changeling.geneticpoints
-		T.mind.changeling.chem_charges = 0
-		T.mind.changeling.geneticpoints = 0
-		T.mind.changeling.absorbedcount = 0
+						if(!Tp.isVerb)
+							call(Tp.verbpath)()
+						else
+							src.make_changeling()
+
+			changeling.chem_charges += T.mind.changeling.chem_charges
+			changeling.geneticpoints += T.mind.changeling.geneticpoints
+			T.mind.changeling.chem_charges = 0
+			T.mind.changeling.geneticpoints = 0
+			T.mind.changeling.absorbedcount = 0
 
 	changeling.absorbedcount++
 	changeling.isabsorbing = 0
@@ -185,10 +189,10 @@
 	changeling.chem_charges -= 5
 	src.visible_message("<span class='warning'>[src] transforms!</span>")
 	changeling.geneticdamage = 30
-	src.dna = chosen_dna
+	src.dna = chosen_dna.Clone()
 	src.real_name = chosen_dna.real_name
 	src.flavor_text = ""
-	updateappearance(src, src.dna.uni_identity)
+	src.UpdateAppearance()
 	domutcheck(src, null)
 
 	src.verbs -= /mob/proc/changeling_transform
@@ -237,7 +241,7 @@
 	del(animation)
 
 	var/mob/living/carbon/monkey/O = new /mob/living/carbon/monkey(src)
-	O.dna = C.dna
+	O.dna = C.dna.Clone()
 	C.dna = null
 
 	for(var/obj/item/W in C)
@@ -252,7 +256,7 @@
 	O.setOxyLoss(C.getOxyLoss())
 	O.adjustFireLoss(C.getFireLoss())
 	O.stat = C.stat
-	O.a_intent = "hurt"
+	O.a_intent = "harm"
 	for(var/obj/item/weapon/implant/I in implants)
 		I.loc = O
 		I.implanted = O
@@ -290,7 +294,7 @@
 	changeling.chem_charges--
 	C.remove_changeling_powers()
 	C.visible_message("<span class='warning'>[C] transforms!</span>")
-	C.dna = chosen_dna
+	C.dna = chosen_dna.Clone()
 
 	var/list/implants = list()
 	for (var/obj/item/weapon/implant/I in C) //Still preserving implants
@@ -319,11 +323,11 @@
 			W.layer = initial(W.layer)
 
 	var/mob/living/carbon/human/O = new /mob/living/carbon/human( src )
-	if (isblockon(getblock(C.dna.uni_identity, 11,3),11))
+	if (C.dna.GetUIState(DNA_UI_GENDER))
 		O.gender = FEMALE
 	else
 		O.gender = MALE
-	O.dna = C.dna
+	O.dna = C.dna.Clone()
 	C.dna = null
 	O.real_name = chosen_dna.real_name
 
@@ -332,7 +336,7 @@
 
 	O.loc = C.loc
 
-	updateappearance(O,O.dna.uni_identity)
+	O.UpdateAppearance()
 	domutcheck(O, null)
 	O.setToxLoss(C.getToxLoss())
 	O.adjustBruteLoss(C.getBruteLoss())
@@ -724,13 +728,13 @@ var/list/datum/dna/hivemind_bank = list()
 
 	var/mob/living/carbon/T = changeling_sting(40,/mob/proc/changeling_transformation_sting)
 	if(!T)	return 0
-	if((HUSK in T.mutations) || (!ishuman(T) && !ismonkey(T)))
+	if((M_HUSK in T.mutations) || (!ishuman(T) && !ismonkey(T)))
 		src << "<span class='warning'>Our sting appears ineffective against its DNA.</span>"
 		return 0
 	T.visible_message("<span class='warning'>[T] transforms!</span>")
-	T.dna = chosen_dna
+	T.dna = chosen_dna.Clone()
 	T.real_name = chosen_dna.real_name
-	updateappearance(T, T.dna.uni_identity)
+	T.UpdateAppearance()
 	domutcheck(T, null)
 	feedback_add_details("changeling_powers","TS")
 	return 1

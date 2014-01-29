@@ -45,6 +45,7 @@ datum/preferences
 	var/be_special = 0					//Special role selection
 	var/UI_style = "Midnight"
 	var/toggles = TOGGLES_DEFAULT
+	var/sound = SOUND_DEFAULT
 	var/UI_style_color = "#ffffff"
 	var/UI_style_alpha = 255
 
@@ -102,7 +103,10 @@ datum/preferences
 	var/list/organ_data = list()
 
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
-
+	var/accent = "en-us"
+	var/voice = "m1"
+	var/pitch = 50
+	var/talkspeed = 175
 	var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
@@ -174,15 +178,19 @@ datum/preferences
 				dat += "<br><table><tr><td><b>Body</b> "
 				dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
 				dat += "<br>"
-				dat += "Species: <a href='byond://?src=\ref[user];preference=species;task=input'>[species]</a><br>"
-				dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
-				dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
+				dat += "Species: <a href='?_src_=prefs;preference=species;task=input'>[species]</a><br>"
+				dat += "Secondary Language:<br><a href='?_src_=prefs;preference=language;task=input'>[language]</a><br>"
+				dat += "Accent: <a href='?_src_=prefs;preference=accent;task=input'>[accent]</a><br>"
+				dat += "Voice: <a href='?_src_=prefs;preference=voice;task=input'>[voice]</a><br>"
+				dat += "Pitch: <a href='?_src_=prefs;preference=pitch;task=input'>[pitch]</a><br>"
+				dat += "Talking Speed: <a href='?_src_=prefs;preference=talkspeed;task=input'>[talkspeed]</a><br>"
+				dat += "Blood Type: <a href='?_src_=prefs;preference=b_type;task=input'>[b_type]</a><br>"
 				dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 		//		dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
 				dat += "<br><b>Handicaps</b><br>"
-				dat += "\t<a href='byond://?src=\ref[user];task=input;preference=disabilities'><b>\[Set Disabilities\]</b></a><br>"
-				dat += "Limbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
-				dat += "Internal Organs: <a href='byond://?src=\ref[user];preference=organs;task=input'>Adjust</a><br>"
+				dat += "\t<a href='?_src_=prefs;preference=disabilities'><b>\[Set Disabilities\]</b></a><br>"
+				dat += "Limbs: <a href='?_src_=prefs;preference=limbs;task=input'>Adjust</a><br>"
+				dat += "Internal Organs: <a href='?_src_=prefs;preference=organs;task=input'>Adjust</a><br>"
 
 				//display limbs below
 				var/ind = 0
@@ -266,7 +274,6 @@ datum/preferences
 					dat += "<b>You are banned from using character records.</b><br>"
 				else
 					dat += "<b><a href=\"byond://?src=\ref[user];preference=records;record=1\">Character Records</a></b><br>"
-
 				dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=input'><b>Set Flavor Text</b></a><br>"
 				if(lentext(flavor_text) <= 40)
 					if(!lentext(flavor_text))
@@ -297,11 +304,14 @@ datum/preferences
 				dat += "<b>Custom UI</b>(recommended for White UI):<br>"
 				dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
 				dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
-				dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
-				dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
+				dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(sound & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
+				dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(sound & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
+				dat += "<b>Hear player voices:</b> <a href='?_src_=prefs;preference=player_voices'><b>[(sound & SOUND_VOICES) ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Randomized Character Slot:</b> <a href='?_src_=prefs;preference=randomslot'><b>[randomslot ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "Nearest Creatures" : "All Speech"]</b></a><br>"
 				dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "Nearest Creatures" : "All Emotes"]</b></a><br>"
+				dat += "<b>Ghost radio:</b> <a href='?_src_=prefs;preference=ghost_radio'><b>[(toggles & CHAT_GHOSTRADIO) ? "Nearest Speakers" : "All Chatter"]</b></a><br>"
+
 
 				if(config.allow_Metadata)
 					dat += "<b>OOC Notes:</b> <a href='?_src_=prefs;preference=metadata;task=input'> Edit </a><br>"
@@ -1087,6 +1097,23 @@ datum/preferences
 							underwear = underwear_options.Find(new_underwear)
 						ShowChoices(user)
 
+					if("accent")
+						var/new_accent = input(user, "Choose your accent. en-us:American, en:British, en-sc:Scottish, mb-de4-en:German, mb-fr1-en:French", "Character Preference") as null|anything in list("en-us", "en", "en-sc","mb-de4-en","mb-fr1-en")
+						if(new_accent)
+							accent = new_accent
+					if("voice")
+						var/new_voice = input(user, "Choose your voice. f:Female, m:Male", "Character Preference") as null|anything in list("f1","m1","f2","m2","f3","m3","f4","m4","f5","m5","m6","m7")
+						if(new_voice)
+							voice = new_voice
+					if("pitch")
+						var/new_pitch = input(user, "Choose your character's voice pitch:\n(0-99) Default is 50.", "Character Preference") as num|null
+						if(new_pitch)
+							pitch = max(min( round(text2num(new_pitch)), 99),0)
+					if("talkspeed")
+						var/new_talkspeed = input(user, "Choose your character's voice talk speed:\n(140-240) Default is 175.", "Character Preference") as num|null
+						if(new_talkspeed)
+							talkspeed = max(min( round(text2num(new_talkspeed)), 240),140)
+
 					if("eyes")
 						var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference") as color|null
 						if(new_eyes)
@@ -1219,7 +1246,7 @@ datum/preferences
 
 
 					if("hear_adminhelps")
-						toggles ^= SOUND_ADMINHELP
+						sound ^= SOUND_ADMINHELP
 
 					if("ui")
 						switch(UI_style)
@@ -1249,11 +1276,11 @@ datum/preferences
 						randomslot = !randomslot
 
 					if("hear_midis")
-						toggles ^= SOUND_MIDI
+						sound ^= SOUND_MIDI
 
 					if("lobby_music")
-						toggles ^= SOUND_LOBBY
-						if(toggles & SOUND_LOBBY)
+						sound ^= SOUND_LOBBY
+						if(sound & SOUND_LOBBY)
 							user << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1)
 						else
 							user << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1)
@@ -1263,6 +1290,12 @@ datum/preferences
 
 					if("ghost_sight")
 						toggles ^= CHAT_GHOSTSIGHT
+
+					if("ghost_radio")
+						toggles ^= CHAT_GHOSTRADIO
+
+					if("player_voices")
+						sound ^= SOUND_VOICES
 
 					if("save")
 						save_preferences()
@@ -1357,7 +1390,8 @@ datum/preferences
 			else continue
 
 		if(disabilities & DISABILITY_FLAG_FAT && character.species.flags & CAN_BE_FAT)//character.species.flags & CAN_BE_FAT)
-			character.mutations += FAT
+			character.mutations += M_FAT
+			character.mutations += M_OBESITY
 		if(disabilities & DISABILITY_FLAG_NEARSIGHTED)
 			character.disabilities|=NEARSIGHTED
 		if(disabilities & DISABILITY_FLAG_EPILEPTIC)

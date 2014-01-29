@@ -12,6 +12,10 @@
 
 	if(reagents.has_reagent("nuka_cola")) return -1
 
+	if((M_RUN in mutations)) return -1
+
+	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
+
 	var/health_deficiency = (100 - health - halloss)
 	if(health_deficiency >= 40) tally += (health_deficiency / 25)
 
@@ -39,12 +43,12 @@
 		tally += back.slowdown
 
 
-	if(FAT in src.mutations)
+	if(M_FAT in src.mutations)
 		tally += 1.5
 	if (bodytemperature < 283.222)
 		tally += (283.222 - bodytemperature) / 10 * 1.75
 
-	if(mRun in mutations)
+	if(M_RUN in mutations)
 		tally = 0
 
 	return (tally+config.human_delay)

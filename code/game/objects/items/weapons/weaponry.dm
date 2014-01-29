@@ -11,8 +11,9 @@
 	throw_range = 15
 	attack_verb = list("banned")
 
-	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is hitting \himself with the [src.name]! It looks like \he's trying to ban \himself from life.</b>"
+
+/obj/item/weapon/banhammer/suicide_act(mob/user)
+		viewers(user) << "<span class='suicide'>[user] is hitting \himself with the [src.name]! It looks like \he's trying to ban \himself from life.</span>"
 		return (BRUTELOSS|FIRELOSS|TOXLOSS|OXYLOSS)
 
 /obj/item/weapon/nullrod
@@ -29,7 +30,7 @@
 	w_class = 1
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='suicide'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>"
 		return (BRUTELOSS|FIRELOSS)
 
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
@@ -48,7 +49,7 @@
 		user << "\red You don't have the dexterity to do this!"
 		return
 
-	if ((CLUMSY in user.mutations) && prob(50))
+	if ((M_CLUMSY in user.mutations) && prob(50))
 		user << "\red The rod slips out of your hand and hits your head."
 		user.take_organ_damage(10)
 		user.Paralyse(20)
@@ -81,7 +82,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='suicide'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>"
 		return(BRUTELOSS)
 
 /obj/item/weapon/sord/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -94,6 +95,7 @@
 	icon_state = "claymore"
 	item_state = "claymore"
 	flags = FPRINT | TABLEPASS | CONDUCT
+	hitsound = 'sound/weapons/bladeslice.ogg'
 	slot_flags = SLOT_BELT
 	force = 40
 	throwforce = 10
@@ -104,12 +106,8 @@
 		return 1
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</b>"
+		viewers(user) << "<span class='suicide'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>"
 		return(BRUTELOSS)
-
-/obj/item/weapon/claymore/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
-	return ..()
 
 /obj/item/weapon/katana
 	name = "katana"
@@ -124,7 +122,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</b>"
+		viewers(user) << "<span class='suicide'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>"
 		return(BRUTELOSS)
 
 /obj/item/weapon/katana/IsShield()

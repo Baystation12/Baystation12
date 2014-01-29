@@ -29,7 +29,24 @@
 	var/prev_gender = null // Debug for plural genders
 	var/temperature_alert = 0
 	var/in_stasis = 0
+	var/do_deferred_species_setup=0
 
+// Doing this during species init breaks shit.
+/mob/living/carbon/human/proc/DeferredSpeciesSetup()
+	var/mut_update=0
+	if(species.default_mutations.len>0)
+		for(var/mutation in species.default_mutations)
+			if(!(mutation in mutations))
+				mutations.Add(mutation)
+				mut_update=1
+	if(species.default_blocks.len>0)
+		for(var/block in species.default_blocks)
+			if(!dna.GetSEState(block))
+				dna.SetSEState(block,1)
+				mut_update=1
+	if(mut_update)
+		domutcheck(src,null,MUTCHK_FORCED)
+		update_mutations()
 
 /mob/living/carbon/human/Life()
 	set invisibility = 0
@@ -40,14 +57,10 @@
 
 	..()
 
-	/*
-	//This code is here to try to determine what causes the gender switch to plural error. Once the error is tracked down and fixed, this code should be deleted
-	//Also delete var/prev_gender once this is removed.
-	if(prev_gender != gender)
-		prev_gender = gender
-		if(gender in list(PLURAL, NEUTER))
-			message_admins("[src] ([ckey]) gender has been changed to plural or neuter. Please record what has happened recently to the person and then notify coders. (<A HREF='?_src_=holder;adminmoreinfo=\ref[src]'>?</A>)  (<A HREF='?_src_=vars;Vars=\ref[src]'>VV</A>) (<A HREF='?priv_msg=\ref[src]'>PM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=\ref[src]'>JMP</A>)")
-	*/
+	if(do_deferred_species_setup)
+		DeferredSpeciesSetup()
+		do_deferred_species_setup=0
+
 	//Apparently, the person who wrote this code designed it so that
 	//blinded get reset each cycle and then get activated later in the
 	//code. Very ugly. I dont care. Moving this stuff here so its easy
@@ -72,6 +85,12 @@
 			if(istype(loc, /obj/))
 				var/obj/location_as_object = loc
 				location_as_object.handle_internal_lifeform(src, 0)
+
+		if(check_mutations)
+			testing("Updating [src.real_name]'s mutations: "+english_list(mutations))
+			domutcheck(src,null)
+			update_mutations()
+			check_mutations=0
 
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
@@ -157,6 +176,12 @@
 					O.show_message(text("\red <B>[src] starts having a seizure!"), 1)
 				Paralyse(10)
 				make_jittery(1000)
+
+		// If we have the gene for being crazy, have random events.
+		if(dna.GetSEState(HALLUCINATIONBLOCK))
+			if(prob(1) && hallucination < 1)
+				hallucination += 20
+
 		if (disabilities & COUGHING)
 			if ((prob(5) && paralysis <= 1))
 				drop_item()
@@ -231,15 +256,15 @@
 	proc/handle_mutations_and_radiation()
 
 		if(getFireLoss())
-			if((COLD_RESISTANCE in mutations) || (prob(1)))
+			if((M_RESIST_HEAT in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
 
-		if ((HULK in mutations) && health <= 25)
-			mutations.Remove(HULK)
-			update_mutations()		//update our mutation overlays
-			src << "\red You suddenly feel very weak."
-			Weaken(3)
-			emote("collapse")
+
+		for(var/datum/dna/gene/gene in dna_genes)
+			if(!gene.block)
+				continue
+			if(gene.is_active(src))
+				gene.OnMobLife(src)
 
 		if (radiation)
 			if (radiation > 100)
@@ -309,9 +334,9 @@
 
 	proc/breathe()
 		if(reagents.has_reagent("lexorin")) return
-		if(mNobreath in mutations) return // No breath mutation means no breathing.
+		if(M_NO_BREATH in mutations) return // No breath mutation means no breathing.
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-		if(species && species.flags & NO_BREATHE) return
+		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
 
 		var/datum/organ/internal/lungs/L = internal_organs["lungs"]
 		L.process()
@@ -538,7 +563,7 @@
 						spawn(0) emote(pick("giggle", "laugh"))
 				SA.moles = 0
 
-		if( (abs(310.15 - breath.temperature) > 50) && !(COLD_RESISTANCE in mutations)) // Hot air hurts :(
+		if( (abs(310.15 - breath.temperature) > 50) && !(M_RESIST_HEAT in mutations)) // Hot air hurts :(
 			if(status_flags & GODMODE)	return 1	//godmode
 			if(breath.temperature < species.cold_level_1)
 				if(prob(20))
@@ -655,8 +680,16 @@
 			pressure_alert = 0
 		else if(adjusted_pressure >= species.hazard_low_pressure)
 			pressure_alert = -1
+
+			if(species && species.flags & IS_SYNTHETIC)
+				bodytemperature += 0.5 * TEMPERATURE_DAMAGE_COEFFICIENT //Synthetics suffer overheating in a vaccuum. ~Z
+
 		else
-			if( !(COLD_RESISTANCE in mutations))
+
+			if(species && species.flags & IS_SYNTHETIC)
+				bodytemperature += 1 * TEMPERATURE_DAMAGE_COEFFICIENT
+
+			if( !(M_RESIST_COLD in mutations))
 				adjustBruteLoss( LOW_PRESSURE_DAMAGE )
 				pressure_alert = -2
 			else
@@ -745,6 +778,8 @@
 		var/thermal_protection_flags = get_heat_protection_flags(temperature)
 
 		var/thermal_protection = 0.0
+		if(M_RESIST_HEAT in mutations)
+			return 1
 		if(thermal_protection_flags)
 			if(thermal_protection_flags & HEAD)
 				thermal_protection += THERMAL_PROTECTION_HEAD
@@ -800,7 +835,7 @@
 
 	proc/get_cold_protection(temperature)
 
-		if(COLD_RESISTANCE in mutations)
+		if(M_RESIST_COLD in mutations)
 			return 1 //Fully protected from the cold.
 
 		temperature = max(temperature, 2.7) //There is an occasional bug where the temperature is miscalculated in ares with a small amount of gas on them, so this is necessary to ensure that that bug does not affect this calculation. Space's temperature is 2.7K and most suits that are intended to protect against any cold, protect down to 2.0K.
@@ -936,12 +971,12 @@
 			else if (light_amount < 2) //heal in the dark
 				heal_overall_damage(1,1)
 
-
+		//The fucking M_FAT mutation is the greatest shit ever. It makes everyone so hot and bothered.
 		if(species.flags & CAN_BE_FAT)
-			if(FAT in mutations)
+			if(M_FAT in mutations)
 				if(overeatduration < 100)
 					src << "\blue You feel fit again!"
-					mutations.Remove(FAT)
+					mutations.Remove(M_FAT)
 					update_mutantrace(0)
 					update_mutations(0)
 					update_inv_w_uniform(0)
@@ -949,7 +984,7 @@
 			else
 				if(overeatduration > 500)
 					src << "\red You suddenly feel blubbery!"
-					mutations.Add(FAT)
+					mutations.Add(M_FAT)
 					update_mutantrace(0)
 					update_mutations(0)
 					update_inv_w_uniform(0)
@@ -962,11 +997,13 @@
 		if (nutrition > 450)
 			if(overeatduration < 800) //capped so people don't take forever to unfat
 				overeatduration++
-/*
+
 		else
 			if(overeatduration > 1)
-				overeatduration -= 2 //doubled the unfat rate
-*/
+				if(M_OBESITY in mutations)
+					overeatduration -= 1 // Those with obesity gene take twice as long to unfat
+				else
+					overeatduration -= 2
 
 		if(species.flags & REQUIRE_LIGHT)
 			if(nutrition < 200)
@@ -1008,7 +1045,8 @@
 			blinded = 1
 			silent = 0
 		else				//ALIVE. LIGHTS ARE ON
-			if(mRegen in mutations)
+
+			if(M_REGEN in mutations)
 				if(nutrition)
 					if(prob(10))
 						var/randumb = rand(1,5)
@@ -1016,6 +1054,11 @@
 						heal_overall_damage(randumb,randumb)
 					if(nutrition < 0)
 						nutrition = 0
+
+			// Sobering multiplier.
+			// Sober block grants quadruple the alcohol metabolism.
+			var/sober_str=(M_SOBER in mutations)?1:4
+
 			updatehealth()	//TODO
 			if(!in_stasis)
 				handle_organs()
@@ -1130,7 +1173,7 @@
 			if(stuttering)
 				stuttering = max(stuttering-1, 0)
 			if (src.slurring)
-				slurring = max(slurring-1, 0)
+				slurring = max(slurring-(1*sober_str), 0)
 			if(silent)
 				silent = max(silent-1, 0)
 
@@ -1248,8 +1291,8 @@
 				if((VAMP_FULL in mind.vampire.powers))
 					sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 					see_in_dark = 8
-					if(!druggy)    see_invisible = SEE_INVISIBLE_LEVEL_TWO
-			if(XRAY in mutations)
+					if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
+			if(M_XRAY in mutations)
 				sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 				see_in_dark = 8
 				if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
@@ -1411,9 +1454,23 @@
 				if(!machine.check_eye(src))		reset_view(null)
 			else
 				var/isRemoteObserve = 0
-				if((mRemote in mutations) && remoteview_target)
-					if(remoteview_target.stat==CONSCIOUS)
-						isRemoteObserve = 1
+				if((M_REMOTE_VIEW in mutations) && remoteview_target)
+					isRemoteObserve = 1
+					// Is he unconscious or dead?
+					if(remoteview_target.stat!=CONSCIOUS)
+						src << "\red Your psy-connection grows too faint to maintain!"
+						isRemoteObserve = 0
+
+					// Does he have psy resist?
+					if(M_PSY_RESIST in remoteview_target.mutations)
+						src << "\red Your mind is shut out!"
+						isRemoteObserve = 0
+
+					// Not on the station or mining?
+					var/turf/temp_turf = get_turf(remoteview_target)
+					if((temp_turf.z != 1 && temp_turf.z != 5) || remoteview_target.stat!=CONSCIOUS)
+						src << "\red Your psy-connection grows too faint to maintain!"
+						isRemoteObserve = 0
 				if(!isRemoteObserve && client && !client.adminobs)
 					remoteview_target = null
 					reset_view(null)

@@ -305,6 +305,7 @@
 				icon = 'icons/mob/custom-synthetic.dmi'
 
 /mob/living/silicon/robot/verb/Namepick()
+	set category = "Robot Commands"
 	if(custom_name)
 		return 0
 
@@ -501,6 +502,43 @@
 	return 2
 
 
+/mob/living/silicon/robot/Bump(atom/movable/AM as mob|obj, yes)
+	spawn( 0 )
+		if ((!( yes ) || now_pushing))
+			return
+		now_pushing = 1
+		if(ismob(AM))
+			var/mob/tmob = AM
+			if(istype(tmob, /mob/living/carbon/human) && (M_FAT in tmob.mutations))
+				if(prob(20))
+					usr << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
+					now_pushing = 0
+					return
+			if(!(tmob.status_flags & CANPUSH))
+				now_pushing = 0
+				return
+		now_pushing = 0
+		..()
+		if (istype(AM, /obj/machinery/recharge_station))
+			var/obj/machinery/recharge_station/F = AM
+			F.move_inside()
+		if (!istype(AM, /atom/movable))
+			return
+		if (!now_pushing)
+			now_pushing = 1
+			if (!AM.anchored)
+				var/t = get_dir(src, AM)
+				if (istype(AM, /obj/structure/window))
+					if(AM:ini_dir == NORTHWEST || AM:ini_dir == NORTHEAST || AM:ini_dir == SOUTHWEST || AM:ini_dir == SOUTHEAST)
+						for(var/obj/structure/window/win in get_step(AM,t))
+							now_pushing = 0
+							return
+				step(AM, t)
+			now_pushing = null
+		return
+	return
+
+
 /mob/living/silicon/robot/triggerAlarm(var/class, area/A, var/O, var/alarmsource)
 	if (stat == 2)
 		return 1
@@ -578,11 +616,11 @@
 			user << "Need more welding fuel!"
 			return
 
-	else if(istype(W, /obj/item/weapon/cable_coil) && wiresexposed)
+	else if(istype(W, /obj/item/stack/cable_coil) && wiresexposed)
 		if (!getFireLoss())
 			user << "Nothing to fix here!"
 			return
-		var/obj/item/weapon/cable_coil/coil = W
+		var/obj/item/stack/cable_coil/coil = W
 		adjustFireLoss(-30)
 		updatehealth()
 		coil.use(1)
@@ -715,6 +753,8 @@
 				sleep(6)
 				if(prob(50))
 					emagged = 1
+					if(user.hud_used)
+						user.hud_used.update_robot_modules_display()	//Shows/hides the emag item if the inventory screen is already open.
 					lawupdate = 0
 					connected_ai = null
 					user << "You emag [src]'s interface."
@@ -816,7 +856,7 @@
 				if ((O.client && !( O.blinded )))
 					O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
 
-		if ("hurt")
+		if ("harm")
 			var/damage = rand(10, 20)
 			if (prob(90))
 				/*

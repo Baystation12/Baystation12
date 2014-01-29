@@ -91,7 +91,7 @@
 		dismantle_wall()
 
 /turf/simulated/wall/attack_paw(mob/user as mob)
-	if ((HULK in user.mutations))
+	if ((M_HULK in user.mutations))
 		if (prob(40))
 			usr << text("\blue You smash through the wall.")
 			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
@@ -103,26 +103,21 @@
 
 	return src.attack_hand(user)
 
-
-/turf/simulated/wall/attack_animal(mob/living/simple_animal/M as mob)
-	if(M.wall_smash)
-		if (istype(src, /turf/simulated/wall/r_wall) && !rotting)
-			M << text("\blue This wall is far too strong for you to destroy.")
-			return
-		else
-			if (prob(40) || rotting)
-				M << text("\blue You smash through the wall.")
+/turf/simulated/wall/attack_animal(var/mob/living/simple_animal/M)
+	if(M.environment_smash >= 2)
+		if(istype(src, /turf/simulated/wall/r_wall))
+			if(M.environment_smash == 3)
 				dismantle_wall(1)
-				return
+				M << "<span class='info'>You smash through the wall.</span>"
 			else
-				M << text("\blue You smash against the wall.")
-				return
-
-	M << "\blue You push the wall but nothing happens!"
-	return
+				M << "<span class='info'>This wall is far too strong for you to destroy.</span>"
+		else
+			M << "<span class='info'>You smash through the wall.</span>"
+			dismantle_wall(1)
+			return
 
 /turf/simulated/wall/attack_hand(mob/user as mob)
-	if (HULK in user.mutations)
+	if (M_HULK in user.mutations)
 		if (prob(40) || rotting)
 			usr << text("\blue You smash through the wall.")
 			usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))

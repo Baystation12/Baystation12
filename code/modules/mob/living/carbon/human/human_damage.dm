@@ -41,28 +41,35 @@
 
 
 /mob/living/carbon/human/adjustBruteLoss(var/amount)
+	if(species && species.brute_mod)
+		amount = amount*species.brute_mod
+
 	if(amount > 0)
 		take_overall_damage(amount, 0)
 	else
 		heal_overall_damage(-amount, 0)
 
 /mob/living/carbon/human/adjustFireLoss(var/amount)
+	if(species && species.burn_mod)
+		amount = amount*species.burn_mod
+
 	if(amount > 0)
 		take_overall_damage(0, amount)
 	else
 		heal_overall_damage(0, -amount)
 
 /mob/living/carbon/human/Stun(amount)
-	if(HULK in mutations)	return
+	if(M_HULK in mutations)	return
 	..()
 
 /mob/living/carbon/human/Weaken(amount)
-	if(HULK in mutations)	return
+	if(M_HULK in mutations)	return
 	..()
 
 /mob/living/carbon/human/Paralyse(amount)
-	if(HULK in mutations)	return
+	if(M_HULK in mutations)	return
 	..()
+
 
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	..()
@@ -92,6 +99,7 @@
 			if (O.status & ORGAN_MUTATED)
 				O.unmutate()
 				src << "<span class = 'notice'>Your [O.display_name] is shaped normally again.</span>"
+
 ////////////////////////////////////////////
 
 //Returns a list of damaged organs
@@ -260,3 +268,20 @@
 			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
 			S.add_blood(src)
 	return 1
+
+// incredibly important stuff follows
+/mob/living/carbon/human/fall(var/forced)
+	..()
+	if(forced)
+		playsound(loc, "bodyfall", 50, 1, -1)
+	if(head)
+		var/multiplier = 1
+		if(stat || (status_flags & FAKEDEATH))
+			multiplier = 2
+		var/obj/item/clothing/head/H = head
+		if(!istype(H) || prob(H.loose * multiplier))
+			drop_from_inventory(H)
+			if(prob(60))
+				step_rand(H)
+			if(!stat)
+				src << "<span class='warning'>Your [H] fell off!</span>"

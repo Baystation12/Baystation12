@@ -1,3 +1,4 @@
+
 /obj/item/clothing/head/hardhat
 	name = "hard hat"
 	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight."
@@ -11,6 +12,7 @@
 	flags_inv = 0
 	icon_action_button = "action_hardhat"
 	siemens_coefficient = 0.9
+	loose = 4
 
 	attack_self(mob/user)
 		if(!isturf(user.loc))
@@ -62,4 +64,3 @@
 	icon_state = "hardhat0_dblue"
 	item_state = "hardhat0_dblue"
 	_color = "dblue"
-

@@ -31,7 +31,6 @@
 	min_n2 = 0
 	max_n2 = 0
 	unsuitable_atoms_damage = 15
-	wall_smash = 1
 	faction = "syndicate"
 	status_flags = CANPUSH
 
@@ -104,6 +103,8 @@
 /mob/living/simple_animal/hostile/syndicate/ranged
 	ranged = 1
 	rapid = 1
+	retreat_distance = 5
+	minimum_distance = 5
 	icon_state = "syndicateranged"
 	icon_living = "syndicateranged"
 	casingtype = /obj/item/ammo_casing/a12mm

@@ -192,7 +192,7 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 	if (vampire.current.mind)
 		if (vampire.current.mind.assigned_role == "Clown")
 			vampire.current << "Your lust for blood has allowed you to overcome your clumsy nature allowing you to wield weapons without harming yourself."
-			vampire.current.mutations.Remove(CLUMSY)
+			vampire.current.mutations.Remove(M_CLUMSY)
 
 	var/obj_count = 1
 	for(var/datum/objective/objective in vampire.objectives)
@@ -217,9 +217,9 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 	if(!mind.vampire)
 		mind.vampire = new /datum/vampire(gender)
 		mind.vampire.owner = src
-	verbs += /client/proc/vampire_rejuvinate
-	verbs += /client/proc/vampire_hypnotise
-	verbs += /client/proc/vampire_glare
+	verbs += /client/vampire/proc/vampire_rejuvinate
+	verbs += /client/vampire/proc/vampire_hypnotise
+	verbs += /client/vampire/proc/vampire_glare
 	//testing purposes REMOVE BEFORE PUSH TO MASTER
 	/*for(var/handler in typesof(/client/proc))
 		if(findtext("[handler]","vampire_"))
@@ -232,27 +232,27 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 	for(var/n in mind.vampire.powers)
 		switch(n)
 			if(VAMP_SHAPE)
-				verbs += /client/proc/vampire_shapeshift
+				verbs += /client/vampire/proc/vampire_shapeshift
 			if(VAMP_VISION)
 				continue
 			if(VAMP_DISEASE)
-				verbs += /client/proc/vampire_disease
+				verbs += /client/vampire/proc/vampire_disease
 			if(VAMP_CLOAK)
-				verbs += /client/proc/vampire_cloak
+				verbs += /client/vampire/proc/vampire_cloak
 			if(VAMP_BATS)
-				verbs += /client/proc/vampire_bats
+				verbs += /client/vampire/proc/vampire_bats
 			if(VAMP_SCREAM)
-				verbs += /client/proc/vampire_screech
+				verbs += /client/vampire/proc/vampire_screech
 			if(VAMP_JAUNT)
-				verbs += /client/proc/vampire_jaunt
+				verbs += /client/vampire/proc/vampire_jaunt
 			if(VAMP_BLINK)
-				verbs += /client/proc/vampire_shadowstep
+				verbs += /client/vampire/proc/vampire_shadowstep
 			if(VAMP_SLAVE)
-				verbs += /client/proc/vampire_enthrall
+				verbs += /client/vampire/proc/vampire_enthrall
 			if(VAMP_FULL)
 				continue
 /mob/proc/remove_vampire_powers()
-	for(var/handler in typesof(/client/proc))
+	for(var/handler in typesof(/client/vampire/proc))
 		if(findtext("[handler]","vampire_"))
 			verbs -= handler
 
@@ -355,31 +355,31 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 			switch(n)
 				if(VAMP_SHAPE)
 					src << "\blue You have gained the shapeshifting ability, at the cost of stored blood you can change your form permanently."
-					verbs += /client/proc/vampire_shapeshift
+					verbs += /client/vampire/proc/vampire_shapeshift
 				if(VAMP_VISION)
 					src << "\blue Your vampiric vision has improved."
 					//no verb
 				if(VAMP_DISEASE)
 					src << "\blue You have gained the Diseased Touch ability which causes those you touch to die shortly after unless treated medically."
-					verbs += /client/proc/vampire_disease
+					verbs += /client/vampire/proc/vampire_disease
 				if(VAMP_CLOAK)
 					src << "\blue You have gained the Cloak of Darkness ability which when toggled makes you near invisible in the shroud of darkness."
-					verbs += /client/proc/vampire_cloak
+					verbs += /client/vampire/proc/vampire_cloak
 				if(VAMP_BATS)
 					src << "\blue You have gained the Summon Bats ability."
-					verbs += /client/proc/vampire_bats // work in progress
+					verbs += /client/vampire/proc/vampire_bats // work in progress
 				if(VAMP_SCREAM)
 					src << "\blue You have gained the Chriopteran Screech ability which stuns anything with ears in a large radius and shatters glass in the process."
-					verbs += /client/proc/vampire_screech
+					verbs += /client/vampire/proc/vampire_screech
 				if(VAMP_JAUNT)
 					src << "\blue You have gained the Mist Form ability which allows you to take on the form of mist for a short period and pass over any obstacle in your path."
-					verbs += /client/proc/vampire_jaunt
+					verbs += /client/vampire/proc/vampire_jaunt
 				if(VAMP_SLAVE)
 					src << "\blue You have gained the Enthrall ability which at a heavy blood cost allows you to enslave a human that is not loyal to any other for a random period of time."
-					verbs += /client/proc/vampire_enthrall
+					verbs += /client/vampire/proc/vampire_enthrall
 				if(VAMP_BLINK)
 					src << "\blue You have gained the ability to shadowstep, which makes you disappear into nearby shadows at the cost of blood."
-					verbs += /client/proc/vampire_shadowstep
+					verbs += /client/vampire/proc/vampire_shadowstep
 				if(VAMP_FULL)
 					src << "\blue You have reached your full potential and are no longer weak to the effects of anything holy and your vision has been improved greatly."
 					//no verb

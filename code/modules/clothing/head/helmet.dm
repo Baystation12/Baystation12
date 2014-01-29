@@ -11,6 +11,22 @@
 	heat_protection = HEAD
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECITON_TEMPERATURE
 	siemens_coefficient = 0.7
+	loose = 4 // generally well seated
+
+/obj/item/clothing/head/helmet/HoS
+	name = "head of security hat"
+	desc = "The hat of the Head of Security. For showing the officers who's in charge."
+	icon_state = "hoscap"
+	flags = HEADCOVERSEYES
+	armor = list(melee = 80, bullet = 60, laser = 50,energy = 10, bomb = 25, bio = 10, rad = 0)
+	flags_inv = 0
+	flags_inv = HIDEEARS
+
+/obj/item/clothing/head/helmet/HoS/dermal
+	name = "Dermal Armour Patch"
+	desc = "You're not quite sure how you manage to take it on and off, but it implants nicely in your head."
+	icon_state = "dermal"
+	item_state = "dermal"
 
 /obj/item/clothing/head/helmet/roman
 	name = "roman helmet"
@@ -30,6 +46,7 @@
 	desc = "It's a special helmet issued to the Warden of a securiy force. Protects the head from impacts."
 	icon_state = "policehelm"
 	flags_inv = 0
+	loose = 12 // no really, you are here beacuse of your exemplary behavior in past jobs.  truly.
 
 /obj/item/clothing/head/helmet/customs
 	name = "customs officer's hat"
@@ -79,3 +96,4 @@
 	item_state = "gladiator"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES
 	siemens_coefficient = 1
+	loose = 0 // full head, won't fall off

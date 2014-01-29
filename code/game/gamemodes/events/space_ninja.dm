@@ -90,7 +90,7 @@ I decided to scrap round-specific objectives since keeping track of them would r
 When I already created about 4 new objectives, this doesn't seem terribly important or needed.
 */
 
-/var/global/toggle_space_ninja = 0//If ninjas can spawn or not.
+/var/global/toggle_space_ninja = 1//If ninjas can spawn or not.
 /var/global/sent_ninja_to_station = 0//If a ninja is already on the station.
 
 var/ninja_selection_id = 1
@@ -303,8 +303,7 @@ Malf AIs/silicons aren't added. Monkeys aren't added. Messes with objective comp
 						if(2)//Steal
 							var/datum/objective/steal/ninja_objective = new
 							ninja_objective.owner = ninja_mind
-							var/target_item = pick(ninja_objective.possible_items_special)
-							ninja_objective.set_target(target_item)
+							ninja_objective.find_target(1) // Find a special target.
 							ninja_mind.objectives += ninja_objective
 
 							objective_list -= 2

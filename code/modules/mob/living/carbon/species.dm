@@ -31,19 +31,32 @@
 	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE     // Dangerously low pressure.
 
-	// This shit is apparently not even wired up.
-	var/brute_resist    // Physical damage reduction.
-	var/burn_resist     // Burn damage reduction.
+	var/brute_mod = null    // Physical damage reduction/malus.
+	var/burn_mod = null     // Burn damage reduction/malus.
+
+	// For grays
+	var/max_hurt_damage = 5 // Max melee damage dealt + 5 if hulk
+	var/list/default_mutations = list()
+	var/list/default_blocks = list() // Don't touch.
+	var/list/default_block_names = list() // Use this instead, using the names from setupgame.dm
 
 	var/flags = 0       // Various specific features.
 	var/bloodflags=0
 	var/bodyflags=0
 
-	// For grays
-	var/max_hurt_damage = 5 // Max melee damage dealt + 5 if hulk
-	var/default_mutations = list()
-
 	var/list/abilities = list()  // For species-derived or admin-given powers
+
+/datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
+
+	if(flags & IS_SYNTHETIC)
+		for(var/datum/organ/external/E in H.organs)
+			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
+			E.status |= ORGAN_ROBOT
+
+	return
+
+/datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
+	return
 
 /datum/species/human
 	name = "Human"
@@ -128,27 +141,27 @@
 
 	flags = NO_SCAN | IS_WHITELISTED | NO_BLOOD
 
-/datum/species/diona
-	name = "Diona"
-	icobase = 'icons/mob/human_races/r_plant.dmi'
-	deform = 'icons/mob/human_races/r_def_plant.dmi'
-	path = /mob/living/carbon/human/diona
-	language = "Rootspeak"
-	attack_verb = "slash"
-	primitive = /mob/living/carbon/monkey/diona
+/datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
 
-	warning_low_pressure = 50
-	hazard_low_pressure = -1
+	var/datum/organ/external/affected = H.get_organ("head")
 
-	cold_level_1 = 50
-	cold_level_2 = -1
-	cold_level_3 = -1
+	//To avoid duplicates.
+	for(var/obj/item/weapon/implant/cortical/imp in H.contents)
+		affected.implants -= imp
+		del(imp)
 
-	heat_level_1 = 300
-	heat_level_2 = 350
-	heat_level_3 = 700
+	var/obj/item/weapon/implant/cortical/I = new(H)
+	I.imp_in = H
+	I.implanted = 1
+	affected.implants += I
+	I.part = affected
 
-	flags = NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
+	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/vox/heist ) ) )
+		var/datum/game_mode/vox/heist/M = ticker.mode
+		M.cortical_stacks += I
+		M.raiders[H.mind] = I
+
+	return ..()
 
 
 
@@ -178,16 +191,92 @@
 	bodyflags = FEET_NOSLIP
 	abilities = list(/mob/living/carbon/human/slime/proc/slimepeople_ventcrawl)
 
-/datum/species/grey
+
+/datum/species/grey // /vg/
 	name = "Grey"
 	icobase = 'icons/mob/human_races/r_grey.dmi'
 	deform = 'icons/mob/human_races/r_def_grey.dmi'
-	language = "Galactic Standard"
+	language = "Grey"
 	attack_verb = "punch"
-	path = /mob/living/carbon/human/grey
 	darksight = 5 // BOOSTED from 2
 	eyes = "grey_eyes_s"
-	max_hurt_damage = 3 // From 5 (for humans)
-//	default_mutations=list(mRemotetalk) // TK is also another candidate, but TK is overpowered as fuck.
 
-	flags = IS_WHITELISTED | HAS_LIPS | CAN_BE_FAT
+	max_hurt_damage = 3 // From 5 (for humans)
+
+	primitive = /mob/living/carbon/monkey // TODO
+
+	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
+
+	// Both must be set or it's only a 45% chance of manifesting.
+	default_mutations=list(M_REMOTE_TALK)
+	default_block_names=list("REMOTETALK")
+
+/datum/species/diona
+	name = "Diona"
+	icobase = 'icons/mob/human_races/r_diona.dmi'
+	deform = 'icons/mob/human_races/r_def_plant.dmi'
+	path = /mob/living/carbon/human/diona
+	language = "Rootspeak"
+	attack_verb = "slash"
+	primitive = /mob/living/carbon/monkey/diona
+
+	warning_low_pressure = 50
+	hazard_low_pressure = -1
+
+	cold_level_1 = 50
+	cold_level_2 = -1
+	cold_level_3 = -1
+
+	heat_level_1 = 300
+	heat_level_2 = 350
+	heat_level_3 = 700
+
+	flags = NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
+
+/datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
+
+	H.gender = NEUTER
+
+/datum/species/diona/handle_death(var/mob/living/carbon/human/H)
+
+	var/mob/living/carbon/monkey/diona/S = new(get_turf(H))
+
+	if(H.mind)
+		H.mind.transfer_to(S)
+		S.key = H
+
+	for(var/mob/living/carbon/monkey/diona/D in H.contents)
+		if(D.client)
+			D.loc = H.loc
+		else
+			del(D)
+
+	H.visible_message("\red[H] splits apart with a wet slithering noise!")
+
+/datum/species/machine
+	name = "Machine"
+	icobase = 'icons/mob/human_races/r_machine.dmi'
+	deform = 'icons/mob/human_races/r_machine.dmi'
+	path = /mob/living/carbon/human/machine
+	language = "Tradeband"
+	max_hurt_damage = 3
+
+	eyes = "blank_eyes"
+	brute_mod = 1.5
+	burn_mod = 1.5
+
+	warning_low_pressure = 50
+	hazard_low_pressure = 10
+
+	cold_level_1 = 50
+	cold_level_2 = -1
+	cold_level_3 = -1
+
+	heat_level_1 = 2000
+	heat_level_2 = 3000
+	heat_level_3 = 4000
+
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+
+//	blood_color = "#FFFFFF"
+//	flesh_color = "#AAAAAA"

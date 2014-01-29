@@ -60,31 +60,39 @@
 	return
 
 /mob/living/simple_animal/construct/Bump(atom/movable/AM as mob|obj, yes)
-	if ((!( yes ) || now_pushing))
-		return
-	now_pushing = 1
-	if(ismob(AM))
-		var/mob/tmob = AM
-		if(!(tmob.status_flags & CANPUSH))
-			now_pushing = 0
+	spawn( 0 )
+		if ((!( yes ) || now_pushing))
 			return
-
-		tmob.LAssailant = src
-	now_pushing = 0
-	..()
-	if (!istype(AM, /atom/movable))
-		return
-	if (!( now_pushing ))
 		now_pushing = 1
-		if (!( AM.anchored ))
-			var/t = get_dir(src, AM)
-			if (istype(AM, /obj/structure/window))
-				if(AM:ini_dir == NORTHWEST || AM:ini_dir == NORTHEAST || AM:ini_dir == SOUTHWEST || AM:ini_dir == SOUTHEAST)
-					for(var/obj/structure/window/win in get_step(AM,t))
-						now_pushing = 0
-						return
-			step(AM, t)
-		now_pushing = null
+		if(ismob(AM))
+			var/mob/tmob = AM
+			if(istype(tmob, /mob/living/carbon/human) && (M_FAT in tmob.mutations))
+				if(prob(5))
+					src << "\red <B>You fail to push [tmob]'s fat ass out of the way.</B>"
+					now_pushing = 0
+					return
+			if(!(tmob.status_flags & CANPUSH))
+				now_pushing = 0
+				return
+
+			tmob.LAssailant = src
+		now_pushing = 0
+		..()
+		if (!( istype(AM, /atom/movable) ))
+			return
+		if (!( now_pushing ))
+			now_pushing = 1
+			if (!( AM.anchored ))
+				var/t = get_dir(src, AM)
+				if (istype(AM, /obj/structure/window))
+					if(AM:ini_dir == NORTHWEST || AM:ini_dir == NORTHEAST || AM:ini_dir == SOUTHWEST || AM:ini_dir == SOUTHEAST)
+						for(var/obj/structure/window/win in get_step(AM,t))
+							now_pushing = 0
+							return
+				step(AM, t)
+			now_pushing = null
+		return
+	return
 
 
 /mob/living/simple_animal/construct/attack_animal(mob/living/simple_animal/M as mob)
@@ -139,7 +147,7 @@
 	melee_damage_upper = 30
 	attacktext = "smashes their armoured gauntlet into"
 	speed = 3
-	wall_smash = 1
+	environment_smash = 2
 	attack_sound = 'sound/weapons/punch3.ogg'
 	status_flags = 0
 	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/conjure/lesserforcewall)
@@ -235,7 +243,7 @@
 	melee_damage_upper = 5
 	attacktext = "rams"
 	speed = 0
-	wall_smash = 1
+	environment_smash = 2
 	attack_sound = 'sound/weapons/punch2.ogg'
 	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/conjure/construct/lesser,
 							/obj/effect/proc_holder/spell/aoe_turf/conjure/wall,
@@ -263,7 +271,7 @@
 	melee_damage_upper = 50
 	attacktext = "brutally crushes"
 	speed = 5
-	wall_smash = 1
+	environment_smash = 2
 	attack_sound = 'sound/weapons/punch4.ogg'
 	var/energy = 0
 	var/max_energy = 1000

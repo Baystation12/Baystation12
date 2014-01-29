@@ -55,7 +55,7 @@ var/const/SURROUND_CAP = 7
 
 /client/proc/playtitlemusic()
 	if(!ticker || !ticker.login_music)	return
-	if(prefs.toggles & SOUND_LOBBY)
+	if(prefs.sound & SOUND_LOBBY)
 		src << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS
 
 /proc/get_rand_frequency()
@@ -68,6 +68,7 @@ var/const/SURROUND_CAP = 7
 			if ("explosion") soundin = pick('sound/effects/Explosion1.ogg','sound/effects/Explosion2.ogg')
 			if ("sparks") soundin = pick('sound/effects/sparks1.ogg','sound/effects/sparks2.ogg','sound/effects/sparks3.ogg','sound/effects/sparks4.ogg')
 			if ("rustle") soundin = pick('sound/effects/rustle1.ogg','sound/effects/rustle2.ogg','sound/effects/rustle3.ogg','sound/effects/rustle4.ogg','sound/effects/rustle5.ogg')
+			if ("bodyfall") soundin = pick('sound/effects/bodyfall1.ogg','sound/effects/bodyfall2.ogg','sound/effects/bodyfall3.ogg','sound/effects/bodyfall4.ogg')
 			if ("punch") soundin = pick('sound/weapons/punch1.ogg','sound/weapons/punch2.ogg','sound/weapons/punch3.ogg','sound/weapons/punch4.ogg')
 			if ("clownstep") soundin = pick('sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
 			if ("jackboot") soundin = pick('sound/effects/jackboot1.ogg','sound/effects/jackboot2.ogg')
