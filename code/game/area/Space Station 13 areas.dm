@@ -881,6 +881,14 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Messaging Server Room"
 	icon_state = "server"
 
+/area/ntrep
+	name = "\improper NanoTrasen Rep Office"
+	icon_state = "bluenew"
+
+/area/blueshield
+	name = "\improper Blueshield's Office"
+	icon_state = "blueold"
+
 //Crew
 
 /area/crew_quarters
