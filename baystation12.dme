@@ -1102,7 +1102,11 @@
 #include "code\modules\mob\living\simple_animal\friendly\farm_animals.dm"
 #include "code\modules\mob\living\simple_animal\friendly\lizard.dm"
 #include "code\modules\mob\living\simple_animal\friendly\mouse.dm"
+<<<<<<< HEAD:baystation12.dme
 #include "code\modules\mob\living\simple_animal\friendly\mushroom.dm"
+=======
+#include "code\modules\mob\living\simple_animal\friendly\pug.dm"
+>>>>>>> d56f48d... Walking mushrooms will now hunt and eat eachother, growing stronger when they do! The stronger they get, the better the quality of the mushroom slices you can butcher out of them! Don't smack em yourself though, or you'll bruise them, and they won't get stronger from being eaten.:tgstation.dme
 #include "code\modules\mob\living\simple_animal\friendly\slime.dm"
 #include "code\modules\mob\living\simple_animal\friendly\spiderbot.dm"
 #include "code\modules\mob\living\simple_animal\friendly\tomato.dm"
@@ -1117,6 +1121,7 @@
 #include "code\modules\mob\living\simple_animal\hostile\hostile.dm"
 #include "code\modules\mob\living\simple_animal\hostile\mimic.dm"
 #include "code\modules\mob\living\simple_animal\hostile\mining_mobs.dm"
+#include "code\modules\mob\living\simple_animal\hostile\mushroom.dm"
 #include "code\modules\mob\living\simple_animal\hostile\pirate.dm"
 #include "code\modules\mob\living\simple_animal\hostile\russian.dm"
 #include "code\modules\mob\living\simple_animal\hostile\syndicate.dm"
