@@ -454,6 +454,37 @@
 	if(!user)
 		return
 	src.add_fingerprint(user)
+
+	//Synthetic human mob goes here.
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.flags & IS_SYNTHETIC && H.a_intent == "grab")
+			if(emagged || stat & BROKEN)
+				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+				s.set_up(3, 1, src)
+				s.start()
+				H << "\red The APC power currents surge eratically, damaging your chassis!"
+				H.adjustFireLoss(10,0)
+			else if(src.cell && src.cell.charge > 0)
+				if(H.nutrition < 450)
+
+					if(src.cell.charge >= 500)
+						H.nutrition += 50
+						src.cell.charge -= 500
+					else
+						H.nutrition += src.cell.charge/10
+						src.cell.charge = 0
+
+					user << "\blue You slot your fingers into the APC interface and siphon off some of the stored charge for your own use."
+					if(src.cell.charge < 0) src.cell.charge = 0
+					if(H.nutrition > 500) H.nutrition = 500
+
+				else
+					user << "\blue You are already fully charged."
+			else
+				user << "There is no charge to draw from that APC."
+			return
+
 	if(usr == user && opened && (!issilicon(user)))
 		if(cell)
 			user.put_in_hands(cell)
@@ -537,7 +568,7 @@
 			return 1 // 1 = APC not hacked.
 	else
 		return 0 // 0 = User is not a Malf AI
-	
+
 /obj/machinery/power/apc/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	if(!user)
 		return
@@ -587,15 +618,15 @@
 			)
 		)
 	)
-	
+
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "apc.tmpl", "[area.name] - APC", 520, data["siliconUser"] ? 465 : 440)
 		// when the ui is first opened this is the data it will use
-		ui.set_initial_data(data)		
+		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
 		// auto update every Master Controller tick
@@ -713,7 +744,7 @@
 			istype(user, /mob/living/carbon/monkey) /*&& ticker && ticker.mode.name == "monkey"*/) )
 		user << "\red You don't have the dexterity to use this [src]!"
 		nanomanager.close_user_uis(user, src)
-		
+
 		return 0
 	if(user.restrained())
 		user << "\red You must have free hands to use this [src]"
@@ -735,12 +766,12 @@
 			if(!loud)
 				user << "\red \The [src] have AI control disabled!"
 				nanomanager.close_user_uis(user, src)
-				
+
 			return 0
 	else
 		if ((!in_range(src, user) || !istype(src.loc, /turf)))
 			nanomanager.close_user_uis(user, src)
-			
+
 			return 0
 
 	var/mob/living/carbon/human/H = user
@@ -758,8 +789,8 @@
 	if(!(isrobot(usr) && (href_list["apcwires"] || href_list["pulse"])))
 		if(!can_use(usr, 1))
 			return
-	src.add_fingerprint(usr)	
-	
+	src.add_fingerprint(usr)
+
 	if (href_list["apcwires"])
 		var/t1 = text2num(href_list["apcwires"])
 		if (!( istype(usr.get_active_hand(), /obj/item/weapon/wirecutters) ))
@@ -822,11 +853,11 @@
 		update()
 	else if( href_list["close"] )
 		nanomanager.close_user_uis(usr, src)
-		
+
 		return
 	else if (href_list["close2"])
 		usr << browse(null, "window=apcwires")
-		
+
 		return
 
 	else if (href_list["overload"])

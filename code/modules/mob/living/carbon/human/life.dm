@@ -874,8 +874,8 @@
 	*/
 
 	proc/handle_chemicals_in_body()
-		if(reagents)
 
+		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
 			var/alien = 0 //Not the best way to handle it, but neater than checking this for every single reagent proc.
 			if(species && species.name == "Diona")
 				alien = 1
@@ -974,7 +974,7 @@
 			dizziness = max(0, dizziness - 3)
 			jitteriness = max(0, jitteriness - 3)
 
-		handle_trace_chems()
+		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
 
 		var/datum/organ/internal/liver/liver = internal_organs["liver"]
 		liver.process()
