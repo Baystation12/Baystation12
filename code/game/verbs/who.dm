@@ -25,6 +25,20 @@
 							entry += " - <font color='black'><b>DEAD</b></font>"
 					else
 						entry += " - <font color='black'><b>DEAD</b></font>"
+
+			var/age
+			if(isnum(C.player_age))
+				age = player_age
+			else
+				age = 0
+
+			if(age <= 1)
+				age = "<font color='red'><b>[age]</b></font>"
+			else if(age < 10)
+				age = "<font color='darkorange'><b>[age]</b></font>"
+
+			entry += " - [age]"
+
 			if(is_special_character(C.mob))
 				entry += " - <b><font color='red'>Antagonist</font></b>"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
