@@ -45,10 +45,11 @@
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 
 	if(flags & IS_SYNTHETIC)
-		for(var/datum/organ/external/E in H.organs)
+		for(var/datum/organ/external/E in H.external_organs)
 			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
 			E.status |= ORGAN_ROBOT
-
+		for(var/datum/organ/internal/I in H.internal_organs)
+			I.robotic = 2
 	return
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
