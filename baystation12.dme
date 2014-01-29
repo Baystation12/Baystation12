@@ -79,6 +79,7 @@
 #include "code\controllers\_DynamicAreaLighting_TG.dm"
 #include "code\controllers\configuration.dm"
 #include "code\controllers\failsafe.dm"
+#include "code\controllers\garbage.dm"
 #include "code\controllers\lighting_controller.dm"
 #include "code\controllers\master_controller.dm"
 #include "code\controllers\shuttle_controller.dm"

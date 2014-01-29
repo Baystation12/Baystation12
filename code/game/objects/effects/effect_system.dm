@@ -1005,7 +1005,7 @@ steam.start() -- spawns the effect
 
 
 	ex_act(severity)
-		del(src)
+		qdel(src)
 
 	blob_act()
 		del(src)

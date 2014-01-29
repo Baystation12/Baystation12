@@ -164,7 +164,7 @@ obj/machinery/atmospherics/pipe
 			var/datum/effect/effect/system/harmless_smoke_spread/smoke = new
 			smoke.set_up(1,0, src.loc, 0)
 			smoke.start()
-			del(src)
+			qdel(src)
 
 		proc/normalize_dir()
 			if(dir==3)
@@ -202,7 +202,7 @@ obj/machinery/atmospherics/pipe
 
 			else
 				if(!node1&&!node2)
-					del(src) //TODO: silent deleting looks weird
+					qdel(src) //TODO: silent deleting looks weird
 				var/have_node1 = node1?1:0
 				var/have_node2 = node2?1:0
 				icon_state = "exposed[have_node1][have_node2][invisibility ? "-f" : "" ]"
@@ -540,7 +540,6 @@ obj/machinery/atmospherics/pipe
 
 		dir = SOUTH
 		initialize_directions = SOUTH
-
 		var/build_killswitch = 1
 
 		var/obj/machinery/atmospherics/node1
@@ -740,7 +739,7 @@ obj/machinery/atmospherics/pipe
 				icon_state = "manifold_[connected]_[unconnected]"
 
 				if(!connected)
-					del(src)
+					qdel(src)
 
 			return
 
@@ -998,7 +997,7 @@ obj/machinery/atmospherics/pipe
 					overlays += new/image(con,dir=8)
 
 				if(!node1 && !node2 && !node3 && !node4)
-					del(src)
+					qdel(src)
 			return
 
 		initialize()
@@ -1228,4 +1227,4 @@ obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/u
 			if (meter.target == src)
 				new /obj/item/pipe_meter(T)
 				del(meter)
-		del(src)
+		qdel(src)

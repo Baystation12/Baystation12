@@ -64,8 +64,7 @@
 /obj/structure/table/proc/destroy()
 	new parts(loc)
 	density = 0
-	del(src)
-
+	qdel(src)
 
 /obj/structure/table/proc/check_contents(datum/table_recipe/TR)
 	check_table()
@@ -362,11 +361,11 @@
 /obj/structure/table/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
@@ -793,14 +792,14 @@
 /obj/structure/rack/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 		if(2.0)
-			del(src)
+			qdel(src)
 			if(prob(50))
 				new /obj/item/weapon/rack_parts(src.loc)
 		if(3.0)
 			if(prob(25))
-				del(src)
+				qdel(src)
 				new /obj/item/weapon/rack_parts(src.loc)
 
 /obj/structure/rack/blob_act()
