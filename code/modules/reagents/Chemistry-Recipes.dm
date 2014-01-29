@@ -197,6 +197,13 @@ datum
 			required_catalysts = list("plasma" = 5)
 			result_amount = 2
 
+		holy_water
+			name = "Holy Water"
+			id = "holywater"
+			result = "holywater"
+			required_reagents = list("water" = 1, "mercury" = 1, "wine" = 1)
+			result_amount = 3
+
 		virus_food
 			name = "Virus Food"
 			id = "virusfood"
@@ -699,8 +706,8 @@ datum
 			name = "Plant-B-Gone"
 			id = "plantbgone"
 			result = "plantbgone"
-			required_reagents = list("toxin" = 1, "water" = 4)
-			result_amount = 5
+			required_reagents = list("chlorine" = 1, "hydrogen" = 1, "nitrogen" = 1)
+			result_amount = 3
 
 
 /////////////////////////////////////OLD SLIME CORE REACTIONS ///////////////////////////////
@@ -1676,7 +1683,7 @@ datum
 			name = "The Doctor's Delight"
 			id = "doctordelight"
 			result = "doctorsdelight"
-			required_reagents = list("limejuice" = 1, "tomatojuice" = 1, "orangejuice" = 1, "cream" = 1, "tricordrazine" = 1)
+			required_reagents = list("limejuice" = 1, "tomatojuice" = 1, "orangejuice" = 1, "cream" = 1)
 			result_amount = 5
 
 		irish_cream
