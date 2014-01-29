@@ -136,13 +136,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/syndicate
 	default_cartridge = /obj/item/weapon/cartridge/syndicate
-	icon_state = "pda-syn"
+	icon_state = "pda-syndi"
 	name = "Military PDA"
 	owner = "John Doe"
 	hidden = 1
 
 /obj/item/device/pda/chaplain
-	icon_state = "pda-holy"
+	icon_state = "pda-chaplain"
 	ttone = "holy"
 
 /obj/item/device/pda/lawyer
@@ -158,7 +158,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon_state = "pda-robot"
 
 /obj/item/device/pda/librarian
-	icon_state = "pda-libb"
+	icon_state = "pda-library"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a WGW-11 series e-reader."
 	note = "Congratulations, your station has chosen the Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant!"
 	silent = 1 //Quiet in the library!
@@ -172,19 +172,19 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon_state = "pda-chef"
 
 /obj/item/device/pda/bar
-	icon_state = "pda-bar"
+	icon_state = "pda-bartender"
 
 /obj/item/device/pda/atmos
 	default_cartridge = /obj/item/weapon/cartridge/atmos
-	icon_state = "pda-atmo"
+	icon_state = "pda-atmos"
 
 /obj/item/device/pda/chemist
 	default_cartridge = /obj/item/weapon/cartridge/chemistry
-	icon_state = "pda-chem"
+	icon_state = "pda-chemistry"
 
 /obj/item/device/pda/geneticist
 	default_cartridge = /obj/item/weapon/cartridge/medical
-	icon_state = "pda-gene"
+	icon_state = "pda-genetics"
 
 
 // Special AI/pAI PDAs that cannot explode.

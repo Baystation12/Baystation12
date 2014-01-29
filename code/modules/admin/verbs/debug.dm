@@ -888,6 +888,16 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/box/matches(M), slot_r_store)
 			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(M), slot_back)
 
+			var/obj/item/device/pda/heads/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Special Operations Officer"
+			pda.icon_state = "pda-syndi"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			pda.desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a special edition designed for military field work."
+			pda.default_cartridge = /obj/item/weapon/cartridge/captain
+
+			M.equip_if_possible(pda, slot_wear_pda)
+
 			var/obj/item/weapon/card/id/W = new(M)
 			W.name = "[M.real_name]'s ID Card"
 			W.icon_state = "centcom"
@@ -899,10 +909,22 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 		if("special ops formal")
 			M.equip_if_possible(new /obj/item/clothing/under/rank/centcom/captain(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/ert(src), slot_l_ear)
 			M.equip_if_possible(new /obj/item/clothing/gloves/white(M), slot_gloves)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/deathsquad/beret(M), slot_head)
 			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle/M1911(M), slot_belt)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(M), slot_back)
+
+			var/obj/item/device/pda/heads/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Special Operations Officer"
+			pda.icon_state = "pda-syndi"
+			pda.name = "PDA-[M.real_name] ([pda.ownjob])"
+			pda.desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a special edition designed for military field work."
+			pda.default_cartridge = /obj/item/weapon/cartridge/captain
+
+			M.equip_if_possible(pda, slot_wear_pda)
 
 			M.equip_if_possible(new /obj/item/clothing/glasses/sunglasses(M), slot_l_store)
 			M.equip_if_possible(new /obj/item/weapon/melee/telebaton(M), slot_r_store)
@@ -915,6 +937,8 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			W.assignment = "Special Operations Officer"
 			W.registered_name = M.real_name
 			M.equip_to_slot_or_del(W, slot_wear_id)
+
+
 
 		if("blue wizard")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/lightpurple(M), slot_w_uniform)
