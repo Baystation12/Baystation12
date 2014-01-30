@@ -13,6 +13,7 @@
 	heat_protection = HEAD
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
 	species_restricted = list("exclude","Unathi","Tajaran","Skrell","Diona","Vox")
+
 	attack_self(mob/user)
 		if(!isturf(user.loc))
 			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
@@ -23,6 +24,10 @@
 
 		if(on)	user.SetLuminosity(user.luminosity + brightness_on)
 		else	user.SetLuminosity(user.luminosity - brightness_on)
+
+		if(istype(user,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = user
+			H.update_inv_head()
 
 	pickup(mob/user)
 		if(on)
