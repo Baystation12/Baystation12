@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm;icons\obj\clothing\belts.dmi;icons\obj\clothing\glasses.dmi;icons\obj\clothing\hats.dmi;icons\obj\clothing\masks.dmi;icons\obj\clothing\suits.dmi;icons\obj\clothing\uniforms.dmi;icons\mob\belt.dmi;icons\mob\eyes.dmi;icons\mob\head.dmi;icons\mob\mask.dmi;icons\mob\suit.dmi;icons\mob\uniform.dmi;code\modules\clothing\suits\armor.dm;code\modules\clothing\under\jobs\security.dm;code\modules\clothing\masks\boxing.dm;code\modules\clothing\head\helmet.dm;code\modules\clothing\glasses\glasses.dm;code\game\objects\items\weapons\storage\belt.dm;code\game\objects\structures\crates_lockers\closets\secure\security.dm;code\game\objects\structures\crates_lockers\closets\wardrobe.dm
-LAST_COMPILE_VERSION: 501.1217
-DIR: code code\game code\game\gamemodes code\game\gamemodes\cult code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\storage code\game\objects\structures code\game\objects\structures\crates_lockers code\game\objects\structures\crates_lockers\closets code\game\objects\structures\crates_lockers\closets\secure code\modules code\modules\clothing code\modules\clothing\glasses code\modules\clothing\head code\modules\clothing\masks code\modules\clothing\spacesuits code\modules\clothing\suits code\modules\clothing\under code\modules\clothing\under\jobs code\modules\projectiles code\modules\projectiles\guns code\modules\projectiles\guns\energy icons icons\mob icons\obj icons\obj\clothing maps 
-FILE: code\game\objects\structures\crates_lockers\closets\wardrobe.dm
-LAST_COMPILE_TIME: 1391038766
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
