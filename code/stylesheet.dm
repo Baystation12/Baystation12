@@ -5,11 +5,11 @@ h1, h2, h3, h4, h5, h6	{color: #0000ff;	font-family: Georgia, Verdana, sans-seri
 
 em						{font-style: normal;	font-weight: bold;}
 
-.motd					{color: #638500;	font-family: Verdana, sans-serif;}
+.motd					{color: #226b4e;	font-family: Verdana, sans-serif;}
 .motd h1, .motd h2, .motd h3, .motd h4, .motd h5, .motd h6
-	{color: #638500;	text-decoration: underline;}
+	{color: #08457e; text-decoration: underline;}
 .motd a, .motd a:link, .motd a:visited, .motd a:active, .motd a:hover
-	{color: #638500;}
+	{color: #1560bd;}
 
 .prefix					{					font-weight: bold;}
 

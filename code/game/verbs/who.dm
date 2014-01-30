@@ -35,7 +35,7 @@
 			if(age <= 1)
 				age = "<font color='red'><b>[age]</b></font>"
 			else if(age < 10)
-				age = "<font color='darkorange'><b>[age]</b></font>"
+				age = "<font color='#ff8c00'><b>[age]</b></font>"
 
 			entry += " - [age]"
 
