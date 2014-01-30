@@ -895,6 +895,13 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/flash_weak_pain()
 	flick("weak_pain",pain)
 
+/mob/proc/get_visible_implants(var/class = 0)
+	var/list/visible_implants = list()
+	for(var/obj/item/O in embedded)
+		if(O.w_class > class)
+			visible_implants += O
+	return visible_implants
+
 mob/proc/yank_out_object()
 	set category = "Object"
 	set name = "Yank out object"
@@ -921,14 +928,7 @@ mob/proc/yank_out_object()
 	if(S == U)
 		self = 1 // Removing object from yourself.
 
-	if(istype(src,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = src
-		valid_objects = H.get_visible_implants(1)
-	else
-		for(var/obj/item/weapon/W in embedded)
-			if(W.w_class >= 2)
-				valid_objects += W
-
+	valid_objects = get_visible_implants(1)
 	if(!valid_objects.len)
 		if(self)
 			src << "You have nothing stuck in your body that is large enough to remove."
@@ -952,7 +952,9 @@ mob/proc/yank_out_object()
 		visible_message("<span class='warning'><b>[src] rips [selection] out of their body.</b></span>","<span class='warning'><b>You rip [selection] out of your body.</b></span>")
 	else
 		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s body.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your body.</b></span>")
-	src.verbs -= /mob/proc/yank_out_object
+	valid_objects = get_visible_implants(0)
+	if(valid_objects.len == 1) //Yanking out last object - removing verb.
+		src.verbs -= /mob/proc/yank_out_object
 
 	if(istype(src,/mob/living/carbon/human))
 

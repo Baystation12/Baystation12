@@ -1103,7 +1103,7 @@
 		del(feet_blood_DNA)
 		return 1
 
-/mob/living/carbon/human/proc/get_visible_implants(var/class = 0)
+/mob/living/carbon/human/get_visible_implants(var/class = 0)
 
 	var/list/visible_implants = list()
 	for(var/datum/organ/external/organ in src.organs)
