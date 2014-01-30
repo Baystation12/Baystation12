@@ -211,20 +211,22 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					frozen_items += W
 
 			//Update any existing objectives involving this mob.
-			for(var/mob/living/M in world) //There has to be a more efficient way to do this.
-				if(!(M.mind) || !(M.mind.objectives.len)) continue
+			for(var/datum/objective/O in all_objectives)
+				if(istype(O,/datum/objective/mutiny)) //We don't want revs to get objectives that aren't for heads of staff. Letting them win or lose based on cryo is silly so we remove the objective.
+					del(O) //TODO: Update rev objectives on login by head (may happen already?) ~ Z
+				else if(O.target && istype(O.target,/datum/mind))
+					if(O.target == occupant.mind)
+						if(O.owner && O.owner.current)
+							O.owner.current << "\red You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]..."
+						O.target = null
+						spawn(1) //This should ideally fire after the occupant is deleted.
+							if(!O) return
+							O.find_target()
+							if(!(O.target))
+								all_objectives -= O
+								O.owner.objectives -= O
+								del(O)
 
-				for(var/datum/objective/O in M.mind.objectives)
-					if(O.target && istype(O.target,/datum/mind))
-						if(O.target == occupant.mind)
-							if(O.owner && O.owner.current)
-								O.owner.current << "\red You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]..."
-							O.target = null
-							spawn(1) //This should ideally fire after the occupant is deleted.
-								if(!O) return
-								O.find_target()
-								if(!(O.target))
-									O.owner.objectives -= O
 
 			//Handle job slot/tater cleanup.
 			var/job = occupant.mind.assigned_role
