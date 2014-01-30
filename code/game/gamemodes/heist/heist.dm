@@ -240,28 +240,6 @@ VOX HEIST ROUNDTYPE
 			feedback_add_details("traitor_objective","[objective.type]|FAIL")
 		count++
 
-	var/text = "<FONT size = 2><B>The vox raiders were:</B></FONT>"
-
-	for(var/datum/mind/vox in raiders)
-		text += "<br>[vox.key] was [vox.name] ("
-		var/obj/stack = raiders[vox]
-		if(get_area(stack) != locate(/area/shuttle/vox/station))
-			text += "left behind)"
-			continue
-		else if(vox.current)
-			if(vox.current.stat == DEAD)
-				text += "died"
-			else
-				text += "survived"
-			if(vox.current.real_name != vox.name)
-				text += " as [vox.current.real_name]"
-		else
-			text += "body destroyed"
-		text += ")"
-
-	world << text
-	return 1
-
 	..()
 
 datum/game_mode/proc/auto_declare_completion_heist()
