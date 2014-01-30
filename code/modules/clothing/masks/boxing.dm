@@ -7,6 +7,15 @@
 	flags_inv = HIDEFACE
 	w_class = 2
 
+/obj/item/clothing/mask/balaclava/tactical
+	name = "green balaclava"
+	desc = "Designed to both hide identities and keep your face comfy and warm."
+	icon_state = "swatclava"
+	item_state = "balaclava"
+	flags = FPRINT|TABLEPASS|BLOCKHAIR
+	flags_inv = HIDEFACE
+	w_class = 2
+
 /obj/item/clothing/mask/luchador
 	name = "Luchador Mask"
 	desc = "Worn by robust fighters, flying high to defeat their foes!"
