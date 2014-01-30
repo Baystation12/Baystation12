@@ -626,9 +626,10 @@
 						for(var/mob/O in viewers(CM))//                                         lags so hard that 40s isn't lenient enough - Quarxink
 							O.show_message("\red <B>[CM] manages to remove the handcuffs!</B>", 1)
 						CM << "\blue You successfully remove \the [CM.handcuffed]."
-						CM.handcuffed.loc = usr.loc
+						CM.drop_from_inventory(CM.handcuffed)
 						CM.handcuffed = null
 						CM.update_inv_handcuffed()
+
 		else if(CM.legcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
@@ -664,7 +665,7 @@
 						for(var/mob/O in viewers(CM))//                                         lags so hard that 40s isn't lenient enough - Quarxink
 							O.show_message("\red <B>[CM] manages to remove the legcuffs!</B>", 1)
 						CM << "\blue You successfully remove \the [CM.legcuffed]."
-						CM.legcuffed.loc = usr.loc
+						CM.drop_from_inventory(CM.legcuffed)
 						CM.legcuffed = null
 						CM.update_inv_legcuffed()
 
