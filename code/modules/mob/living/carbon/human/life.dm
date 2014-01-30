@@ -336,7 +336,7 @@
 		if(reagents.has_reagent("lexorin")) return
 		if(M_NO_BREATH in mutations) return // No breath mutation means no breathing.
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
+		if(species && (species.flags & NO_BREATHE)) return
 
 		var/datum/organ/internal/lungs/L = internal_organs["lungs"]
 		L.process()
