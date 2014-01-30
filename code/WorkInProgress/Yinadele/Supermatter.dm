@@ -175,7 +175,7 @@
 
 	for(var/mob/living/carbon/human/l in view(src, round(power ** 0.25))) // you have to be seeing the core to get hallucinations
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
-			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / get_dist(l, src) ) ) )
+			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
 	for(var/mob/living/l in range(src, round((power / 100) ** 0.25)))
 		var/rads = (power / 10) * sqrt( 1 / get_dist(l, src) )
