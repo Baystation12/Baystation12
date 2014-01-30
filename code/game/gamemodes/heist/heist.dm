@@ -158,10 +158,10 @@ VOX HEIST ROUNDTYPE
 	objs += new /datum/objective/heist/inviolate_crew
 	objs += new /datum/objective/heist/inviolate_death
 
-	for(var/datum/objective/heist/O in raid_objectives)
+	for(var/datum/objective/heist/O in objs)
 		O.choose_target()
 
-	return raid_objectives
+	return objs
 
 /datum/game_mode/heist/proc/greet_vox(var/datum/mind/raider)
 	raider.current << "\blue <B>You are a Vox Raider, fresh from the Shoal!</b>"
