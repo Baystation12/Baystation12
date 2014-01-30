@@ -251,6 +251,7 @@ This function restores all organs.
 		if( (damage > (10*W.w_class)) && ( (sharp && !ismob(W.loc)) || prob(damage/W.w_class) ) )
 			organ.implants += W
 			visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+			src.verbs += /mob/proc/yank_out_object
 			W.add_blood(src)
 			if(ismob(W.loc))
 				var/mob/living/H = W.loc

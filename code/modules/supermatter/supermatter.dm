@@ -93,20 +93,6 @@
 	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
 		return  //Yeah just stop.
 
-	//Ok, get the air from the turf
-	var/datum/gas_mixture/env = L.return_air()
-
-	//Remove gas from surrounding area
-	var/datum/gas_mixture/removed = env.remove(gasefficency * env.total_moles)
-
-	if(!removed || !removed.total_moles)
-		damage += max((power-1600)/10, 0)
-		power = min(power, 1600)
-		return 1
-
-	damage_archived = damage
-	damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
-
 	if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
 			var/stability = num2text(round((damage / explosion_point) * 100))
@@ -134,6 +120,22 @@
 
 			explode()
 
+	//Ok, get the air from the turf
+	var/datum/gas_mixture/env = L.return_air()
+
+	//Remove gas from surrounding area
+	var/datum/gas_mixture/removed = env.remove(gasefficency * env.total_moles)
+
+	if(!removed || !removed.total_moles)
+		damage += max((power-1600)/10, 0)
+		power = min(power, 1600)
+		return 1
+
+	if (!removed)
+		return 1
+
+	damage_archived = damage
+	damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
 	//Ok, 100% oxygen atmosphere = best reaction
 	//Maxes out at 100% oxygen pressure
 	oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
@@ -177,7 +179,7 @@
 
 	for(var/mob/living/carbon/human/l in view(src, min(7, round(power ** 0.25)))) // If they can see it without mesons on.  Bad on them.
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
-			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / get_dist(l, src) ) ) )
+			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
 	for(var/mob/living/l in range(src, round((power / 100) ** 0.25)))
 		var/rads = (power / 10) * sqrt( 1 / get_dist(l, src) )
