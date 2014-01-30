@@ -251,24 +251,13 @@
 			if(!istype(W, /obj/item/weapon/butch/meatcleaver))
 				organ.implants += W
 				visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+				src.verbs += /mob/proc/yank_out_object
 				W.add_blood(src)
 				if(ismob(W.loc))
 					var/mob/living/H = W.loc
 					H.drop_item()
 				W.loc = src
-
-	else if(istype(used_weapon,/obj/item/projectile)) //We don't want to use the actual projectile item, so we spawn some shrapnel.
-		var/obj/item/projectile/P = used_weapon
-		if(prob(75) && P.embed)
-			var/obj/item/weapon/shard/shrapnel/S = new()
-			S.name = "[P.name] shrapnel"
-			S.desc = "[S.desc] It looks like it was fired from [P.shot_from]."
-			S.loc = src
-			organ.implants += S
-			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
-			S.add_blood(src)
 	return 1
-
 // incredibly important stuff follows
 /mob/living/carbon/human/fall(var/forced)
 	..()

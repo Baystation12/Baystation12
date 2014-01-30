@@ -102,7 +102,6 @@ emp_act
 		visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
 		src.verbs += /mob/proc/yank_out_object
 		SP.add_blood(src)
-
 	return (..(P , def_zone))
 
 
