@@ -150,6 +150,11 @@
 		src.hud = new/obj/item/clothing/glasses/hud/security(src)
 		return
 
+/obj/item/clothing/glasses/sunglasses/sechud/tactical
+	name = "tactical HUD"
+	desc = "Flash-resistant goggles with inbuilt combat and security information."
+	icon_state = "swatgoggles"
+
 /obj/item/clothing/glasses/thermal
 	name = "Optical Thermal Scanner"
 	desc = "Thermals in the shape of glasses."
