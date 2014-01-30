@@ -895,7 +895,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/flash_weak_pain()
 	flick("weak_pain",pain)
 
-mob/verb/yank_out_object()
+mob/proc/yank_out_object()
 	set category = "Object"
 	set name = "Yank out object"
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
@@ -921,9 +921,13 @@ mob/verb/yank_out_object()
 	if(S == U)
 		self = 1 // Removing object from yourself.
 
-	for(var/obj/item/weapon/W in embedded)
-		if(W.w_class >= 2)
-			valid_objects += W
+	if(istype(src,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = src
+		valid_objects = H.get_visible_implants(1)
+	else
+		for(var/obj/item/weapon/W in embedded)
+			if(W.w_class >= 2)
+				valid_objects += W
 
 	if(!valid_objects.len)
 		if(self)
@@ -948,6 +952,27 @@ mob/verb/yank_out_object()
 		visible_message("<span class='warning'><b>[src] rips [selection] out of their body.</b></span>","<span class='warning'><b>You rip [selection] out of your body.</b></span>")
 	else
 		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s body.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your body.</b></span>")
+	src.verbs -= /mob/proc/yank_out_object
+
+	if(istype(src,/mob/living/carbon/human))
+
+		var/mob/living/carbon/human/H = src
+		var/datum/organ/external/affected
+
+		for(var/datum/organ/external/organ in H.organs) //Grab the organ holding the implant.
+			for(var/obj/item/weapon/O in organ.implants)
+				if(O == selection)
+					affected = organ
+
+		affected.implants -= selection
+		H.shock_stage+=10
+		H.bloody_hands(S)
+
+		if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
+			var/datum/wound/internal_bleeding/I = new (15)
+			affected.wounds += I
+			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+		return 1
 
 	selection.loc = get_turf(src)
 
