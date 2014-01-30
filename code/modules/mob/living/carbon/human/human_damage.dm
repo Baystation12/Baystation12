@@ -40,12 +40,18 @@
 
 
 /mob/living/carbon/human/adjustBruteLoss(var/amount)
+	if(species && species.brute_mod)
+		amount = amount*species.brute_mod
+
 	if(amount > 0)
 		take_overall_damage(amount, 0)
 	else
 		heal_overall_damage(-amount, 0)
 
 /mob/living/carbon/human/adjustFireLoss(var/amount)
+	if(species && species.burn_mod)
+		amount = amount*species.burn_mod
+
 	if(amount > 0)
 		take_overall_damage(0, amount)
 	else
