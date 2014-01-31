@@ -961,7 +961,7 @@ Auto Patrol: []"},
 				var/turf/T = get_turf(user)
 				user << "<span class='notice'>You start to wire [src]...</span>"
 				sleep(40)
-				if(get_turf(user) == T)
+				if(get_turf(user) == T && build_step == 6)
 					coil.use(1)
 					build_step++
 					user << "<span class='notice'>You wire the ED-209 assembly.</span>"
@@ -996,7 +996,7 @@ Auto Patrol: []"},
 				var/turf/T = get_turf(user)
 				user << "<span class='notice'>Now attaching the gun to the frame...</span>"
 				sleep(40)
-				if(get_turf(user) == T)
+				if(get_turf(user) == T && build_step == 8)
 					build_step++
 					name = "armed [name]"
 					user << "<span class='notice'>Taser gun attached.</span>"
