@@ -277,6 +277,7 @@
 				icon = 'icons/mob/custom-synthetic.dmi'
 
 /mob/living/silicon/robot/verb/Namepick()
+	set category = "Robot Commands"
 	if(custom_name)
 		return 0
 
