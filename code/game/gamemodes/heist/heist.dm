@@ -2,11 +2,6 @@
 VOX HEIST ROUNDTYPE
 */
 
-#define MAX_VOX_KILLS 10 //Number of kills during the round before the Inviolate is broken.
-						 //Would be nice to use vox-specific kills but is currently not feasible.
-
-var/global/vox_kills = 0 //Used to check the Inviolate.
-
 /datum/game_mode/
 	var/list/datum/mind/raiders = list()  //Antags.
 
@@ -163,10 +158,10 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	objs += new /datum/objective/heist/inviolate_crew
 	objs += new /datum/objective/heist/inviolate_death
 
-	for(var/datum/objective/heist/O in raid_objectives)
+	for(var/datum/objective/heist/O in objs)
 		O.choose_target()
 
-	return raid_objectives
+	return objs
 
 /datum/game_mode/heist/proc/greet_vox(var/datum/mind/raider)
 	raider.current << "\blue <B>You are a Vox Raider, fresh from the Shoal!</b>"
@@ -244,28 +239,6 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 			world << "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
 			feedback_add_details("traitor_objective","[objective.type]|FAIL")
 		count++
-
-	var/text = "<FONT size = 2><B>The vox raiders were:</B></FONT>"
-
-	for(var/datum/mind/vox in raiders)
-		text += "<br>[vox.key] was [vox.name] ("
-		var/obj/stack = raiders[vox]
-		if(get_area(stack) != locate(/area/shuttle/vox/station))
-			text += "left behind)"
-			continue
-		else if(vox.current)
-			if(vox.current.stat == DEAD)
-				text += "died"
-			else
-				text += "survived"
-			if(vox.current.real_name != vox.name)
-				text += " as [vox.current.real_name]"
-		else
-			text += "body destroyed"
-		text += ")"
-
-	world << text
-	return 1
 
 	..()
 
