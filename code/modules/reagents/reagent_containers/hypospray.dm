@@ -10,7 +10,7 @@
 	icon_state = "hypo"
 	amount_per_transfer_from_this = 5
 	volume = 30
-	possible_transfer_amounts = null
+	possible_transfer_amounts = list(1,2,3,4,5,10,15,20,25,30)
 	flags = FPRINT | TABLEPASS | OPENCONTAINER
 	slot_flags = SLOT_BELT
 
@@ -20,8 +20,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray/New() //comment this to make hypos start off empty
 	..()
-	reagents.add_reagent("doctorsdelight", 15)
-	reagents.add_reagent("dexalinp", 15)
+	reagents.add_reagent("tricordrazine", 30)
 	return
 
 /obj/item/weapon/reagent_containers/hypospray/attack(mob/M as mob, mob/user as mob)
@@ -64,8 +63,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
-	reagents.remove_reagent("doctorsdelight", 15)
-	reagents.remove_reagent("dexalinp", 15)
+	reagents.remove_reagent("tricordrazine", 30)
 	reagents.add_reagent("tramadol", 4)
 	reagents.add_reagent("hyperzine", 1)
 	update_icon()

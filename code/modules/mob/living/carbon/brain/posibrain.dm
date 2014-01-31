@@ -52,7 +52,8 @@
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna
 		brainmob.timeofhostdeath = H.timeofdeath
-		brainmob.mind.assigned_role = "Positronic Brain"
+		if(brainmob.mind)
+			brainmob.mind.assigned_role = "Positronic Brain"
 		if(H.mind)
 			H.mind.transfer_to(brainmob)
 		brainmob << "\blue You feel slightly disoriented. That's normal when you're just a metal cube."

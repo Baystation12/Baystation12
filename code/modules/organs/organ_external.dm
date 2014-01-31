@@ -497,7 +497,9 @@ This function completely restores a damaged organ to perfect condition.
 			if(LOWER_TORSO)
 				owner << "\red You are now sterile."
 			if(HEAD)
-				if(owner.mutations & SKELETON)
+				if(owner.species.flags & IS_SYNTHETIC)
+					organ= new /obj/item/weapon/organ/head/posi(owner.loc, owner)
+				else if(owner.mutations & SKELETON)
 					organ= new /obj/item/weapon/skeleton/head(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/head(owner.loc, owner)
@@ -884,6 +886,9 @@ obj/item/weapon/organ/head
 	var/mob/living/carbon/brain/brainmob
 	var/brain_op_stage = 0
 
+/obj/item/weapon/organ/head/posi
+	name = "robotic head"
+
 obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 	if(istype(H))
 		src.icon_state = H.gender == MALE? "head_m" : "head_f"
@@ -976,11 +981,7 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 				else
 					brainmob.LAssailant = user
 
-				var/mob/living/carbon/human/H
-				if(istype(brainmob,/mob/living/carbon/human))
-					H = brainmob
-
-				if(istype(H) && H.species && H.species.flags & IS_SYNTHETIC)
+				if(istype(src,/obj/item/weapon/organ/head/posi))
 					var/obj/item/device/mmi/posibrain/B = new(loc)
 					B.transfer_identity(brainmob)
 				else

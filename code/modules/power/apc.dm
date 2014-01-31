@@ -440,7 +440,37 @@
 	if(!user)
 		return
 	src.add_fingerprint(user)
-	if(usr == user && opened)
+	//Synthetic human mob goes here.
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species.flags & IS_SYNTHETIC && H.a_intent == "grab")
+			if(emagged || stat & BROKEN)
+				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+				s.set_up(3, 1, src)
+				s.start()
+				H << "\red The APC power currents surge eratically, damaging your chassis!"
+				H.adjustFireLoss(10,0)
+			else if(src.cell && src.cell.charge > 0)
+				if(H.nutrition < 450)
+
+					if(src.cell.charge >= 500)
+						H.nutrition += 50
+						src.cell.charge -= 500
+					else
+						H.nutrition += src.cell.charge/10
+						src.cell.charge = 0
+
+					user << "\blue You slot your fingers into the APC interface and siphon off some of the stored charge for your own use."
+					if(src.cell.charge < 0) src.cell.charge = 0
+					if(H.nutrition > 500) H.nutrition = 500
+
+				else
+					user << "\blue You are already fully charged."
+			else
+				user << "There is no charge to draw from that APC."
+			return
+
+	if(usr == user && opened && (!issilicon(user)))
 		if(cell)
 			if(issilicon(user))
 				cell.loc=src.loc // Drop it, whoops.
@@ -1045,7 +1075,7 @@ obj/machinery/power/apc/proc/autoset(var/val, var/on)
 			//set_broken() //now Del() do what we need
 			if (cell)
 				cell.ex_act(1.0) // more lags woohoo
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))

@@ -757,22 +757,22 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define HAS_SKIN_TONE 	256
 #define HAS_LIPS 		512
 #define HAS_UNDERWEAR 	1024
-#define HAS_TAIL 		2048
+#define IS_SYNTHETIC	2048
 #define IS_PLANT 		4096
 #define CAN_BE_FAT 		8192
 #define HAS_CHITTIN 	16384
 #define NO_INTORGANS	32768
 
-
+//Species Blood Flags
 #define BLOOD_GREEN 	1
 #define BLOOD_BLUE		2
 #define BLOOD_SLIME		4
-
+//Species Body Flags
 #define FEET_CLAWS		1
 #define FEET_PADDED		2
 #define FEET_NOSLIP		4
+#define HAS_TAIL 		8
 
-#define IS_SYNTHETIC 8192
 
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.

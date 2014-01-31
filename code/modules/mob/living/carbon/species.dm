@@ -52,7 +52,8 @@
 		for(var/datum/organ/external/E in H.organs)
 			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
 			E.status |= ORGAN_ROBOT
-
+		for(var/datum/organ/internal/I in H.internal_organs)
+			I.robotic = 2
 	return
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
@@ -77,8 +78,8 @@
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 
-	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
-	bodyflags = FEET_CLAWS
+	flags = HAS_LIPS | HAS_UNDERWEAR
+	bodyflags = FEET_CLAWS | HAS_TAIL
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -108,8 +109,8 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | CAN_BE_FAT
-	bodyflags = FEET_PADDED
+	flags = HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
+	bodyflags = FEET_PADDED | HAS_TAIL
 
 /datum/species/skrell
 	name = "Skrell"
