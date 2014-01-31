@@ -77,6 +77,7 @@ var/global/list/possibleEvents = list()
 	possibleEvents[/datum/event/electrical_storm] = 10 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Botanist"]
 	possibleEvents[/datum/event/spacevine] = 25 + 5 * active_with_role["Engineer"]
+	possibleEvents[/datum/event/biomass] = 25 + 5 * active_with_role["Engineer"]
 
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
