@@ -344,7 +344,7 @@ var/list/slot_equipment_priority = list( \
 		usr << "\blue <B>You must be dead to use this!</B>"
 		return
 	if (ticker.mode.name == "meteor" || ticker.mode.name == "epidemic") //BS12 EDIT
-		usr << "\blue Respawn is disabled."
+		usr << "\blue Respawn is disabled for this roundtype."
 		return
 	else
 		var/deathtime = world.time - src.timeofdeath

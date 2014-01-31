@@ -12,7 +12,7 @@
 					if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
 					temp_message[H] = ninjaspeak(temp_message[H])
 					pick_list -= H
-				message = dd_list2text(temp_message, " ")
+				message = list2text(temp_message, " ")
 				message = replacetext(message, "o", "¤")
 				message = replacetext(message, "p", "þ")
 				message = replacetext(message, "l", "£")
@@ -71,4 +71,3 @@
 
 /mob/living/carbon/human/proc/GetSpecialVoice()
 	return special_voice
-
