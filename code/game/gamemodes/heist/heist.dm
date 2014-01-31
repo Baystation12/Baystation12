@@ -158,9 +158,6 @@ VOX HEIST ROUNDTYPE
 	objs += new /datum/objective/heist/inviolate_crew
 	objs += new /datum/objective/heist/inviolate_death
 
-	for(var/datum/objective/heist/O in objs)
-		O.choose_target()
-
 	return objs
 
 /datum/game_mode/heist/proc/greet_vox(var/datum/mind/raider)
