@@ -558,6 +558,17 @@ ________________________________________________________________________________
 			P.overlays.Cut()
 			P.overlays += image('icons/obj/pda.dmi', "pda-r")
 
+			var/mob/living/L = null
+			if(P.loc && isliving(P.loc))
+				L = P.loc
+		//Maybe they are a pAI!
+			else
+				L = get(P, /mob/living/silicon)
+
+
+			if(L)
+				L << "\icon[P] <b>Message from [!s_control?(A):"an unknown source"], </b>\"[t]\" (<i>Unable to Reply</i>)"
+
 		if("Inject")
 			if( (href_list["tag"]=="radium"? (reagents.get_reagent_amount("radium"))<=(a_boost*a_transfer) : !reagents.get_reagent_amount(href_list["tag"])) )//Special case for radium. If there are only a_boost*a_transfer radium units left.
 				display_to << "\red Error: the suit cannot perform this function. Out of [href_list["name"]]."
