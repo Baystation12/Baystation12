@@ -60,5 +60,10 @@
 	damage_type = TOX
 	weaken = 10
 
-
+/obj/item/projectile/energy/plasma
+	name = "plasma bolt"
+	icon_state = "energy"
+	damage = 20
+	damage_type = TOX
+	irradiate = 20
 

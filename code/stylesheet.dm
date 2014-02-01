@@ -19,6 +19,7 @@ em						{font-style: normal;	font-weight: bold;}
 
 .adminobserver			{color: #996600;	font-weight: bold;}
 .admin					{color: #386aff;	font-weight: bold;}
+.adminsay				{color: #9611D4;	font-weight: bold;}
 
 .name					{					font-weight: bold;}
 

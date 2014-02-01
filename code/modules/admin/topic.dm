@@ -1668,7 +1668,7 @@
 			alert("Select fewer object types, (max 5)")
 			return
 		else if(length(removed_paths))
-			alert("Removed:\n" + dd_list2text(removed_paths, "\n"))
+			alert("Removed:\n" + list2text(removed_paths, "\n"))
 
 		var/list/offset = text2list(href_list["offset"],",")
 		var/number = dd_range(1, 100, text2num(href_list["object_count"]))
@@ -1839,7 +1839,12 @@
 				log_admin("[key_name(usr)] spawned an alien infestation", 1)
 				message_admins("\blue [key_name_admin(usr)] attempted an alien infestation", 1)
 				new /datum/event/alien_infestation
-
+			if("borers")
+				feedback_inc("admin_secrets_fun_used",1)
+				feedback_add_details("admin_secrets_fun_used","Borers")
+				log_admin("[key_name(usr)] spawned a cortical borer infestation.", 1)
+				message_admins("\blue [key_name_admin(usr)] spawned a cortical borer infestation.", 1)
+				new /datum/event/borer_infestation
 
 			if("power")
 				feedback_inc("admin_secrets_fun_used",1)
