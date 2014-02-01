@@ -48,7 +48,8 @@
 				M.icon = upriser.icon
 				M.icon_state = initial(upriser.icon_state)
 			else
-				explosion(upriser.loc, 2, 4, 3, 5)
+				explosion(upriser.loc, 2, 2, 3, 5)
+				sleep(50)	//return control to lessen lag
 			del(upriser)
 
 		kill()
