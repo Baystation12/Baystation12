@@ -116,9 +116,9 @@ Please contact me on #coderbus IRC. ~Carn x
 #define COLLAR_LAYER			17
 #define HANDCUFF_LAYER			18
 #define LEGCUFF_LAYER			19
-#define L_HAND_LAYER			20
-#define R_HAND_LAYER			21
-#define TAIL_LAYER				22		//bs12 specific. this hack is probably gonna come back to haunt me
+#define TAIL_LAYER				20		//bs12 specific. this hack is probably gonna come back to haunt me
+#define L_HAND_LAYER			21
+#define R_HAND_LAYER			22
 #define TARGETED_LAYER			23		//BS12: Layer for the target overlay from weapon targeting system
 #define TOTAL_LAYERS			23
 //////////////////////////////////
