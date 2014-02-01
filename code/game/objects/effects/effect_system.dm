@@ -665,7 +665,7 @@ steam.start() -- spawns the effect
 				for(var/datum/reagent/R in reagents.reagent_list)
 					var/data
 					if (R.id == "paint" && R.volume > 0)
-						data = R.color
+						data = R.data
 					F.reagents.add_reagent(R.id,1,data)
 
 // foam disolves when heated

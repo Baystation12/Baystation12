@@ -1468,6 +1468,7 @@ datum
 			description = "A powerful oxidizer that reacts with ethanol."
 			reagent_state = SOLID
 			color = "#605048" // rgb: 96, 80, 72
+			overdose = REAGENTS_OVERDOSE
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1487,7 +1488,7 @@ datum
 			//every time the paint reacts or gets transferred.
 			color = "#C9C9C9" // rgb: 201, 201, 201; same as plasticide
 			data = list()
-			data["color"] = 2000 //Thank you, blood system
+			data["color"] = color //Thank you, blood system
 			description = "This paint will only adhere to floor tiles."
 			reagent_state = LIQUID
 			overdose = REAGENTS_OVERDOSE

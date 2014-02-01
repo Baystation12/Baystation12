@@ -21,12 +21,12 @@
 	var/paintcolor = "#75510E"
 
 	New()
-		..()
 		if(paint_type && lentext(paint_type) > 0)
 			name = paint_type + " " + name
 			icon_state = "paint_"+paint_type
 		var/colorlist = new/list("color" = paintcolor)
 		reagents.add_reagent("paint", volume, colorlist)
+		..()
 
 /obj/item/weapon/reagent_containers/glass/paint/red
 	paint_type = "red"
