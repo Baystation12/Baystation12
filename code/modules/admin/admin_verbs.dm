@@ -85,6 +85,7 @@ var/list/admin_verbs_ban = list(
 	)
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
+	/client/proc/play_server_sound,
 	/client/proc/play_sound
 	)
 var/list/admin_verbs_fun = list(
@@ -158,7 +159,10 @@ var/list/admin_verbs_possess = list(
 	/proc/release
 	)
 var/list/admin_verbs_permissions = list(
-	/client/proc/edit_admin_permissions
+	/client/proc/edit_admin_permissions,
+	/client/proc/library_debug_cat,
+	/client/proc/library_debug_remove,
+	/client/proc/library_debug_read
 	)
 var/list/admin_verbs_rejuv = list(
 	/client/proc/respawn_character
