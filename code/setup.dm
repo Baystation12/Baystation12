@@ -345,6 +345,20 @@ var/MAX_EXPLOSION_RANGE = 14
 //#define SHOCKWAVE		19 	// (Not implemented) attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
 //#define ELECTRICITY	20 	// (Not implemented) ability to shoot electric attacks (15%)
 
+//bitflags for mutations
+	// Extra powers:
+#define SHADOW			(1<<10)	// shadow teleportation (create in/out portals anywhere) (25%)
+#define SCREAM			(1<<11)	// supersonic screaming (25%)
+#define EXPLOSIVE		(1<<12)	// exploding on-demand (15%)
+#define REGENERATION	(1<<13)	// superhuman regeneration (30%)
+#define REPROCESSOR		(1<<14)	// eat anything (50%)
+#define SHAPESHIFTING	(1<<15)	// take on the appearance of anything (40%)
+#define PHASING			(1<<16)	// ability to phase through walls (40%)
+#define SHIELD			(1<<17)	// shielding from all projectile attacks (30%)
+#define SHOCKWAVE		(1<<18)	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
+#define ELECTRICITY		(1<<19)	// ability to shoot electric attacks (15%)
+
+
 	//2spooky
 #define SKELETON 29
 #define PLANT 30
