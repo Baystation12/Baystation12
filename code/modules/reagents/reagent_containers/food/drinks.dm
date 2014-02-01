@@ -167,6 +167,7 @@
 		src.pixel_x = rand(-10.0, 10)
 		src.pixel_y = rand(-10.0, 10)
 
+/* Flour is no longer a reagent
 /obj/item/weapon/reagent_containers/food/drinks/flour
 	name = "flour sack"
 	desc = "A big bag of flour. Good for baking!"
@@ -178,6 +179,7 @@
 		reagents.add_reagent("flour", 30)
 		src.pixel_x = rand(-10.0, 10)
 		src.pixel_y = rand(-10.0, 10)
+*/
 
 /obj/item/weapon/reagent_containers/food/drinks/soymilk
 	name = "SoyMilk"

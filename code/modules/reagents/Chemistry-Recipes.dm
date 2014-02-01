@@ -1549,7 +1549,7 @@ datum
 			name = "Space Beer"
 			id = "spacebeer"
 			result = "beer"
-			required_reagents = list("flour" = 10)
+			required_reagents = list("cornoil" = 10)
 			required_catalysts = list("enzyme" = 5)
 			result_amount = 10
 
