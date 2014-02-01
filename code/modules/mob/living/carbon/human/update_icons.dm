@@ -113,13 +113,14 @@ Please contact me on #coderbus IRC. ~Carn x
 #define HAIR_LAYER				14		//TODO: make part of head layer?
 #define FACEMASK_LAYER			15
 #define HEAD_LAYER				16
-#define HANDCUFF_LAYER			17
-#define LEGCUFF_LAYER			18
-#define L_HAND_LAYER			19
-#define R_HAND_LAYER			20
-#define TAIL_LAYER				21		//bs12 specific. this hack is probably gonna come back to haunt me
-#define TARGETED_LAYER			22		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			22
+#define COLLAR_LAYER			17
+#define HANDCUFF_LAYER			18
+#define LEGCUFF_LAYER			19
+#define TAIL_LAYER				20		//bs12 specific. this hack is probably gonna come back to haunt me
+#define L_HAND_LAYER			21
+#define R_HAND_LAYER			22
+#define TARGETED_LAYER			23		//BS12: Layer for the target overlay from weapon targeting system
+#define TOTAL_LAYERS			23
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -620,6 +621,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 		update_tail_showing(0)
 
+	update_collar(0)
+
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_pockets(var/update_icons=1)
@@ -714,6 +717,22 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(update_icons)
 		update_icons()
 
+
+//Adds a collar overlay above the helmet layer if the suit has one
+//	Suit needs an identically named sprite in icons/mob/collar.dmi
+/mob/living/carbon/human/proc/update_collar(var/update_icons=1)
+	var/icon/C = new('icons/mob/collar.dmi')
+	var/image/standing = null
+
+	if(wear_suit)
+		if(wear_suit.icon_state in C.IconStates())
+			standing = image("icon" = C, "icon_state" = "[wear_suit.icon_state]")
+
+	overlays_standing[COLLAR_LAYER]	= standing
+
+	if(update_icons)   update_icons()
+
+
 // Used mostly for creating head items
 /mob/living/carbon/human/proc/generate_head_icon()
 //gender no longer matters for the mouth, although there should probably be seperate base head icons.
@@ -766,6 +785,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 #undef BACK_LAYER
 #undef HAIR_LAYER
 #undef HEAD_LAYER
+#undef COLLAR_LAYER
 #undef HANDCUFF_LAYER
 #undef LEGCUFF_LAYER
 #undef L_HAND_LAYER
