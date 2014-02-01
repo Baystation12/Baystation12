@@ -925,6 +925,8 @@ datum
 				else
 					if(O)
 						O.clean_blood()
+						O.color= null //cleans paints
+
 			reaction_turf(var/turf/T, var/volume)
 				if(volume >= 1)
 					T.overlays.Cut()
@@ -935,6 +937,7 @@ datum
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
 					T.color = null //cleans paints
+
 			reaction_turf(var/turf/simulated/S, var/volume)
 				if(volume >= 1)
 					S.dirt = 0
@@ -968,7 +971,7 @@ datum
 		leporazine
 			name = "Leporazine"
 			id = "leporazine"
-			description = "Leporazine can be use to stabilize an individuals body temperature."
+			description = "Leporazine can be use to stabilize an individual's body temperature."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE
@@ -1479,24 +1482,38 @@ datum
 		paint //generic paint
 			name = "Paint"
 			id = "paint"
-			color = "C9C9C9" // rgb: 201, 201, 201; same as plasticide
-			data = new/list("color" = color) //Thank you blood system
+			//Data holds the actual colour that is updated from reaction to reaction with the
+			//colour mixing system. 'Color' holds the displayed colour, it should get updated
+			//every time the paint reacts or gets transferred.
+			color = "#C9C9C9" // rgb: 201, 201, 201; same as plasticide
+			data = list()
+			data["color"] = 2000 //Thank you, blood system
 			description = "This paint will only adhere to floor tiles."
 			reagent_state = LIQUID
 			overdose = REAGENTS_OVERDOSE
 
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-					M.adjustToxLoss(0.4)
+			on_update(var/atom/A)
+				color = data["color"]
 				..()
 				return
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+				M.adjustToxLoss(0.4)
+				..()
+				return
+
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				..()
 				//TODO: colour mobs when splashed with paint
 				return
 			reaction_turf(var/turf/T, var/volume)
 				if(!istype(T) || istype(T, /turf/space))
 					return
-				T.color = data("color")
+				if(volume < 3)
+					return
+				T.color = data["color"]
+				..()
 				/*
 				var/ind = "[initial(T.icon)][color]"
 				if(!cached_icons[ind]) //Do not make a new icon for every painted tile
@@ -1508,9 +1525,14 @@ datum
 				else
 					T.icon = cached_icons[ind]
 				return*/
+
 			reaction_obj(var/obj/O, var/volume)
-				//TODO: colour objects when splashed with paint
+				if(!istype(O) || !istype(O, /obj/item/weapon))
+					return
+				if(volume < 2)
+					return
 				O.color = data["color"]
+				..()
 				return
 
 

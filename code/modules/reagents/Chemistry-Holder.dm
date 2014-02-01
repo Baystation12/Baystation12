@@ -207,23 +207,23 @@ datum
 						R.on_mob_life(M,alien)
 				update_total()
 
-			conditional_update_move(var/atom/A, var/Running = 0)
+			conditional_update_move(var/atom/A, var/Running = 0) //What is this supposed to do?
 				for(var/datum/reagent/R in reagent_list)
 					R.on_move (A, Running)
 				update_total()
 
-			conditional_update(var/atom/A, )
+			conditional_update()
 				for(var/datum/reagent/R in reagent_list)
-					R.on_update (A)
+					R.on_update()
 				update_total()
 
 			handle_reactions()
 				if(my_atom.flags & NOREACT) return //Yup, no reactions here. No siree.
-
 				var/reaction_occured = 0
 				do
 					reaction_occured = 0
 					for(var/datum/reagent/R in reagent_list) // Usually a small list
+						R.on_update()
 						for(var/reaction in chemical_reactions_list[R.id]) // Was a big list but now it should be smaller since we filtered it with our reagent id
 
 							if(!reaction)
@@ -345,8 +345,6 @@ datum
 						update_total()
 						my_atom.on_reagent_change()
 						return 0
-
-
 				return 1
 
 			update_total()
@@ -371,29 +369,29 @@ datum
 						for(var/datum/reagent/R in reagent_list)
 							if(ismob(A))
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_mob(A, TOUCH, R.volume+volume_modifier)
 							if(isturf(A))
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_turf(A, R.volume+volume_modifier)
 							if(isobj(A))
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_obj(A, R.volume+volume_modifier)
 					if(INGEST)
 						for(var/datum/reagent/R in reagent_list)
 							if(ismob(A) && R)
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_mob(A, INGEST, R.volume+volume_modifier)
 							if(isturf(A) && R)
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_turf(A, R.volume+volume_modifier)
 							if(isobj(A) && R)
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_obj(A, R.volume+volume_modifier)
 				return
 
@@ -404,22 +402,23 @@ datum
 					amount = (maximum_volume - total_volume)
 
 				for(var/A in reagent_list)
-
 					var/datum/reagent/R = A
-					if (R.id == reagent)
+					if (R.id == reagent) //if there is already reagent in the container, some reagents need data transfer
 
 						// mix paints
 						if(R.id == "paint")
 							if(!data) world << "Error: no paint colour data."
-							var/list/bothpaints = new /list
-							bothpaints = reagent_list
-							//make a fictitious paint that has been added to get the colours straight
-							var/datum/reagent/D = chemical_reagents_list[reagent]
+							var/list/bothpaints = new /list(2)
+							bothpaints[1] = R //The one already in the container
+							//Temporarily make the second paint so we can update the colour
+							var/datum/reagent/D = chemical_reagents_list["paint"]
 							var/datum/reagent/secondpaint = new D.type()
-							secondpaint.color = data
+							secondpaint.data = data
+							secondpaint.on_update()
 							secondpaint.volume = amount
-							bothpaints += secondpaint
-							R.color = mix_color_from_reagents(bothpaints)
+							bothpaints[2] = secondpaint
+							R.data["color"] = mix_color_from_reagents(bothpaints)
+							R.on_update()
 
 						// mix dem viruses
 						if(R.id == "blood")
