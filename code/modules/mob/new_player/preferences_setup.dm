@@ -184,6 +184,10 @@ datum/preferences
 			facial_s.Blend(rgb(r_facial, g_facial, b_facial), ICON_ADD)
 			eyes_s.Blend(facial_s, ICON_OVERLAY)
 
+		var/icon/underwear_s = null
+		if(underwear > 0 && underwear < 7 && current_species.flags & HAS_UNDERWEAR)
+			underwear_s = new/icon("icon" = 'icons/mob/human.dmi', "icon_state" = "underwear[underwear]_[g]_s")
+
 		var/icon/clothes_s = null
 		if(job_civilian_low & ASSISTANT)//This gives the preview icon clothes depending on which job(if any) is set to 'high'
 			clothes_s = new /icon('icons/mob/uniform.dmi', "grey_s")
@@ -604,10 +608,13 @@ datum/preferences
 			preview_icon.Blend(new /icon('icons/mob/eyes.dmi', "glasses"), ICON_OVERLAY)
 
 		preview_icon.Blend(eyes_s, ICON_OVERLAY)
+		if(underwear_s)
+			preview_icon.Blend(underwear_s, ICON_OVERLAY)
 		if(clothes_s)
 			preview_icon.Blend(clothes_s, ICON_OVERLAY)
 		preview_icon_front = new(preview_icon, dir = SOUTH)
 		preview_icon_side = new(preview_icon, dir = WEST)
 
 		del(eyes_s)
+		del(underwear_s)
 		del(clothes_s)
