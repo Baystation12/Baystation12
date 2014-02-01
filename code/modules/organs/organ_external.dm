@@ -499,10 +499,12 @@ This function completely restores a damaged organ to perfect condition.
 			if(HEAD)
 				if(owner.species.flags & IS_SYNTHETIC)
 					organ= new /obj/item/weapon/organ/head/posi(owner.loc, owner)
+					owner.death()
 				else if(SKELETON in owner.mutations)
 					organ= new /obj/item/weapon/skeleton/head(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/head(owner.loc, owner)
+					owner.death()
 				owner.u_equip(owner.glasses)
 				owner.u_equip(owner.head)
 				owner.u_equip(owner.l_ear)
