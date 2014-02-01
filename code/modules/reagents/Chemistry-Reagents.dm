@@ -1487,13 +1487,12 @@ datum
 			//colour mixing system. 'Color' holds the displayed colour, it should get updated
 			//every time the paint reacts or gets transferred.
 			color = "#C9C9C9" // rgb: 201, 201, 201; same as plasticide
-			data = list()
-			data["color"] = color //Thank you, blood system
-			description = "This paint will only adhere to floor tiles."
+			data = list("color" = "#C9C9C9")//Thank you, blood system
+			description = "This paint will colour most objects it touches."
 			reagent_state = LIQUID
 			overdose = REAGENTS_OVERDOSE
 
-			on_update(var/atom/A)
+			on_update()
 				color = data["color"]
 				..()
 				return
