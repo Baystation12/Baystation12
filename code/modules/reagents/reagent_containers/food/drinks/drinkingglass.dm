@@ -4,8 +4,8 @@
 	name = "glass"
 	desc = "Your standard drinking glass."
 	icon_state = "glass_empty"
-	amount_per_transfer_from_this = 10
-	volume = 50
+	amount_per_transfer_from_this = 5
+	volume = 25
 
 	on_reagent_change()
 		/*if(reagents.reagent_list.len > 1 )
@@ -492,15 +492,47 @@
 			desc = "Your standard drinking glass"
 			return
 
+	attack(mob/target as mob, mob/user as mob, def_zone)
+		gulp_size = volume
+		if(user.a_intent == "hurt")
+			if(ismob(target) && target.reagents && reagents.total_volume)
+				user << "\red You splash your drink in the [target] face!"
+				var/mob/living/M = target
+				var/list/injected = list()
+				for(var/datum/reagent/R in src.reagents.reagent_list)
+					injected += R.name
+				var/contained = english_list(injected)
+				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been splashed with [src.name] by [user.name] ([user.ckey]). Reagents: [contained]</font>")
+				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to splash [M.name] ([M.key]). Reagents: [contained]</font>")
+				msg_admin_attack("[user.name] ([user.ckey]) splashed [M.name] ([M.key]) with [src.name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+				
+				for(var/mob/O in viewers(world.view, user))
+					O.show_message(text("\red [] has been splashed with [] in the face by []!", target, src, user), 1)
+				src.reagents.reaction(target, TOUCH)
+				spawn(5) src.reagents.clear_reagents()
+				return
+		else
+			if(user.a_intent == "help")
+				gulp_size = volume/10
+				..()
+				return
+		if(icon_state != "glass_empty")
+			var/turf/T = get_turf(user)
+			T.visible_message("[user] gulped down the whole [src]. Wow!")
+		..()
+		return
+		
+		 
+
 // for /obj/machinery/vending/sovietsoda
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/soda
 	New()
 		..()
-		reagents.add_reagent("sodawater", 50)
+		reagents.add_reagent("sodawater", volume)
 		on_reagent_change()
 
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/cola
 	New()
 		..()
-		reagents.add_reagent("cola", 50)
+		reagents.add_reagent("cola", volume)
 		on_reagent_change()
