@@ -52,7 +52,7 @@
 	var/attacktext = "attacks"
 	var/attack_sound = null
 	var/friendly = "nuzzles" //If the mob does no damage with it's attack
-	var/wall_smash = 0 //if they can smash walls
+	var/environment_smash = 0 //Set to 1 to allow breaking of crates,lockers,racks,tables; 2 for walls; 3 for Rwalls
 
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
 
@@ -461,3 +461,16 @@
 	return
 /mob/living/simple_animal/ExtinguishMob()
 	return
+
+/mob/living/simple_animal/proc/CanAttack(var/atom/the_target)
+	if(see_invisible < the_target.invisibility)
+		return 0
+	if (isliving(the_target))
+		var/mob/living/L = the_target
+		if(L.stat != CONSCIOUS)
+			return 0
+	if (istype(the_target, /obj/mecha))
+		var/obj/mecha/M = the_target
+		if (M.occupant)
+			return 0
+	return 1

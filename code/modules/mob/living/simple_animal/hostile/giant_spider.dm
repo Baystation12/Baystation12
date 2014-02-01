@@ -34,6 +34,7 @@
 	pass_flags = PASSTABLE
 	move_to_delay = 6
 	speed = 3
+	environment_smash = 1
 
 //nursemaids - these create webs and eggs
 /mob/living/simple_animal/hostile/giant_spider/nurse
@@ -65,8 +66,8 @@
 
 /mob/living/simple_animal/hostile/giant_spider/AttackingTarget()
 	..()
-	if(isliving(target_mob))
-		var/mob/living/L = target_mob
+	if(isliving(target))
+		var/mob/living/L = target
 		if(L.reagents)
 			L.reagents.add_reagent("toxin", poison_per_bite)
 			if(prob(poison_per_bite))

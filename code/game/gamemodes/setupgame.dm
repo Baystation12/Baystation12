@@ -10,7 +10,7 @@
 	blocksLeft.Remove(assigned)
 	assigned_blocks[assigned]=name
 	dna_activity_bounds[assigned]=activity_bounds
-	//testing("[name] assigned to block #[assigned].")
+	testing("[name] assigned to block #[assigned].")
 	return assigned
 
 /proc/setupgenetics()
@@ -63,7 +63,7 @@
 	for(var/i=1;i<STRUCDNASIZE;i++)
 		numsToAssign += i
 
-	//testing("Assigning DNA blocks:")
+	testing("Assigning DNA blocks:")
 
 	// Standard muts, imported from older code above.
 	BLINDBLOCK         = getAssignedBlock("BLIND",         numsToAssign)
@@ -76,11 +76,11 @@
 	FAKEBLOCK          = getAssignedBlock("FAKE",          numsToAssign)
 
 	// UNUSED!
-	//COUGHBLOCK         = getAssignedBlock("COUGH",         numsToAssign)
-	//GLASSESBLOCK       = getAssignedBlock("GLASSES",       numsToAssign)
-	//EPILEPSYBLOCK      = getAssignedBlock("EPILEPSY",      numsToAssign)
-	//TWITCHBLOCK        = getAssignedBlock("TWITCH",        numsToAssign)
-	//NERVOUSBLOCK       = getAssignedBlock("NERVOUS",       numsToAssign)
+	COUGHBLOCK         = getAssignedBlock("COUGH",         numsToAssign)
+	GLASSESBLOCK       = getAssignedBlock("GLASSES",       numsToAssign)
+	EPILEPSYBLOCK      = getAssignedBlock("EPILEPSY",      numsToAssign)
+	TWITCHBLOCK        = getAssignedBlock("TWITCH",        numsToAssign)
+	NERVOUSBLOCK       = getAssignedBlock("NERVOUS",       numsToAssign)
 
 	// Bay muts (UNUSED)
 	//HEADACHEBLOCK      = getAssignedBlock("HEADACHE",      numsToAssign)

@@ -31,7 +31,7 @@
 	min_n2 = 0
 	max_n2 = 0
 	unsuitable_atoms_damage = 15
-	wall_smash = 1
+	environment_smash = 1
 	faction = "syndicate"
 	status_flags = CANPUSH
 
@@ -109,6 +109,8 @@
 	casingtype = /obj/item/ammo_casing/a12mm
 	projectilesound = 'sound/weapons/Gunshot_smg.ogg'
 	projectiletype = /obj/item/projectile/bullet/midbullet2
+	retreat_distance = 5
+	minimum_distance = 5
 
 	weapon1 = /obj/item/weapon/gun/projectile/automatic/c20r
 
