@@ -458,6 +458,8 @@ datum
 					reagent_list += R
 					R.holder = src
 					R.volume = amount
+/*					if(R.id=="paint" && data)
+						R.data = data*/
 					SetViruses(R, data) // Includes setting data
 					update_total()
 					my_atom.on_reagent_change()

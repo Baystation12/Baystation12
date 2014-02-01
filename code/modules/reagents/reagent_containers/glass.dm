@@ -135,6 +135,7 @@
 			//This will make the proper amount of paint reach the target
 			//Unfortunately it will make all other reagents interact with the target
 			//in equal amounts. TODO: proper fractional reactions in Chem-Holder
+			world << "[volume_modifier]"
 			reagents.reaction(target, TOUCH, volume_modifier)
 			spawn(5)
 				reagents.remove_any(5)

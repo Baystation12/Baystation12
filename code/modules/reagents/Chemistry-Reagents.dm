@@ -1493,7 +1493,9 @@ datum
 			overdose = REAGENTS_OVERDOSE
 
 			on_update()
+				world << "Old colour is [color]"
 				color = data["color"]
+				world << "New colour is [color]"
 				..()
 				return
 
