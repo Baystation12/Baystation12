@@ -1479,14 +1479,15 @@ datum
 		paint //generic paint
 			name = "Paint"
 			id = "paint"
+			color = "C9C9C9" // rgb: 201, 201, 201; same as plasticide
+			data = new/list("color" = color) //Thank you blood system
 			description = "This paint will only adhere to floor tiles."
 			reagent_state = LIQUID
-			color = "C9C9C9" // rgb: 201, 201, 201; same as plasticide
 			overdose = REAGENTS_OVERDOSE
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.adjustToxLoss(0.4)
+					M.adjustToxLoss(0.4)
 				..()
 				return
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
@@ -1495,7 +1496,7 @@ datum
 			reaction_turf(var/turf/T, var/volume)
 				if(!istype(T) || istype(T, /turf/space))
 					return
-				T.color = color
+				T.color = data("color")
 				/*
 				var/ind = "[initial(T.icon)][color]"
 				if(!cached_icons[ind]) //Do not make a new icon for every painted tile
@@ -1509,6 +1510,7 @@ datum
 				return*/
 			reaction_obj(var/obj/O, var/volume)
 				//TODO: colour objects when splashed with paint
+				O.color = data["color"]
 				return
 
 

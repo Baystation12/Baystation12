@@ -111,8 +111,6 @@ datum
 					var/current_reagent_transfer = current_reagent.volume * part
 					if(preserve_data)
 						trans_data = current_reagent.data
-					if (current_reagent.id == "paint" && current_reagent.volume > 0)
-						trans_data = current_reagent.color
 
 					R.add_reagent(current_reagent.id, (current_reagent_transfer * multiplier), trans_data)
 					src.remove_reagent(current_reagent.id, current_reagent_transfer)
@@ -411,7 +409,7 @@ datum
 					if (R.id == reagent)
 
 						// mix paints
-						if(R.id == "paint" && reagent == "paint")
+						if(R.id == "paint")
 							if(!data) world << "Error: no paint colour data."
 							var/list/bothpaints = new /list
 							bothpaints = reagent_list
@@ -424,7 +422,7 @@ datum
 							R.color = mix_color_from_reagents(bothpaints)
 
 						// mix dem viruses
-						if(R.id == "blood" && reagent == "blood")
+						if(R.id == "blood")
 							if(R.data && data)
 
 								if(R.data["viruses"] || data["viruses"])
