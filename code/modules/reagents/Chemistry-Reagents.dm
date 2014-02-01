@@ -2333,6 +2333,7 @@ datum
 				..()
 				return
 
+/* We're back to flour bags
 		flour
 			name = "flour"
 			id = "flour"
@@ -2350,6 +2351,7 @@ datum
 				src = null
 				if(!istype(T, /turf/space))
 					new /obj/effect/decal/cleanable/flour(T)
+*/
 
 		rice
 			name = "Rice"

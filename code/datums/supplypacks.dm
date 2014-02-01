@@ -45,12 +45,13 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/food
 	name = "Food crate"
-	contains = list(/obj/item/weapon/reagent_containers/food/drinks/flour,
+	contains = list(/obj/item/weapon/reagent_containers/food/snacks/flour,
+					/obj/item/weapon/reagent_containers/food/snacks/flour,
+					/obj/item/weapon/reagent_containers/food/snacks/flour,
+					/obj/item/weapon/reagent_containers/food/snacks/flour,
 					/obj/item/weapon/reagent_containers/food/drinks/milk,
 					/obj/item/weapon/reagent_containers/food/drinks/milk,
 					/obj/item/weapon/storage/fancy/egg_box,
-					/obj/item/weapon/reagent_containers/food/condiment/enzyme,
-					/obj/item/weapon/reagent_containers/food/snacks/grown/banana,
 					/obj/item/weapon/reagent_containers/food/snacks/grown/banana,
 					/obj/item/weapon/reagent_containers/food/snacks/grown/banana)
 	cost = 10
