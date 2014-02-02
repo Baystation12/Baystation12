@@ -156,11 +156,14 @@ var/list/department_radio_keys = list(
 			message = uppertext(message)
 
 	// General public key. Special message handling
-	else if (copytext(message, 1, 2) == ";" || prob(braindam/2))
-		if (ishuman(src))
-			message_mode = "headset"
-		else if(ispAI(src) || isrobot(src))
-			message_mode = "pAI"
+	var/mmode
+	var/cprefix = ""
+	if(length(message) >= 2)
+		cprefix = copytext(message, 1, 3)
+		if(cprefix in department_radio_keys)
+			mmode = department_radio_keys[cprefix]
+	if (copytext(message, 1, 2) == ";" || (prob(braindam/2) && !mmode))
+		message_mode = "headset"
 		message = copytext(message, 2)
 	// Begin checking for either a message mode or a language to speak.
 	else if (length(message) >= 2)
@@ -205,10 +208,10 @@ var/list/department_radio_keys = list(
 
 	// Select all always_talk devices
 	//  Carbon lifeforms
-	if(istype(src, /mob/living/carbon))
-		for(var/obj/item/device/radio/R in contents)
-			if(R.always_talk)
-				devices += R
+	//if(istype(src, /mob/living/carbon))
+	for(var/obj/item/device/radio/R in contents)
+		if(R.always_talk)
+			devices += R
 
 	//src << "Speaking on [message_mode]: [message]"
 	if(message_mode)
@@ -235,6 +238,9 @@ var/list/department_radio_keys = list(
 					var/mob/living/carbon/C=src
 					if(C:l_ear) used_radios += C:l_ear
 					if(C:r_ear) used_radios += C:r_ear
+				if(issilicon(src))
+					var/mob/living/silicon/Ro=src
+					if(Ro:radio) devices += Ro:radio
 				message_range = 1
 				italics = 1
 			if ("fake left ear")
@@ -296,7 +302,10 @@ var/list/department_radio_keys = list(
 					if(C:r_ear) devices += C:r_ear
 				if(issilicon(src))
 					var/mob/living/silicon/Ro=src
-					if(Ro:radio) devices += Ro:radio
+					if(Ro:radio)
+						devices += Ro:radio
+					else
+						warning("[src] has no radio!")
 				message_range = 1
 				italics = 1
 	if(devices.len>0)

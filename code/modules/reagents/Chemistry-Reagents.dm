@@ -5,9 +5,16 @@
 #define REAGENTS_OVERDOSE 30
 #define REM REAGENTS_EFFECT_MULTIPLIER
 
+//Some on_mob_life() procs check for alien races.
+#define IS_DIONA 1
+#define IS_VOX 2
+
 //The reaction procs must ALWAYS set src = null, this detaches the proc from the object (the reagent)
 //so that it can continue working when the reagent is deleted while the proc is still active.
 
+//Some on_mob_life() procs check for alien races.
+#define IS_DIONA 1
+#define IS_VOX 2
 
 datum
 	reagent
@@ -69,7 +76,7 @@ datum
 				src = null
 				return
 
-			on_mob_life(var/mob/living/M as mob)
+			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(!istype(M, /mob/living))
 					return //Noticed runtime errors from pacid trying to damage ghosts, this should fix. --NEO
 							// Certain elements in too large amounts cause side-effects
@@ -554,10 +561,15 @@ datum
 			reagent_state = LIQUID
 			color = "#0000FF" // rgb: 0, 0, 255
 
-			on_mob_life(var/mob/living/M as mob)
+			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(!M) M = holder.my_atom
-				if(M.losebreath >= 10)
-					M.losebreath = max(10, M.losebreath-5)
+
+				if(alien && alien == IS_VOX)
+					M.adjustToxLoss(REAGENTS_METABOLISM)
+				else
+					if(M.losebreath >= 10)
+						M.losebreath = max(10, M.losebreath-5)
+
 				holder.remove_reagent(src.id, 0.5 * REAGENTS_METABOLISM)
 				return
 
@@ -685,6 +697,14 @@ datum
 
 			custom_metabolism = 0.01
 
+			on_mob_life(var/mob/living/M as mob, var/alien)
+				if(M.stat == 2) return
+				if(alien && alien == IS_VOX)
+					M.adjustToxLoss(REAGENTS_METABOLISM)
+					holder.remove_reagent(src.id, REAGENTS_METABOLISM) //By default it slowly disappears.
+					return
+				..()
+
 		copper
 			name = "Copper"
 			id = "copper"
@@ -703,6 +723,14 @@ datum
 
 			mildly_toxic = 1
 			custom_metabolism = 0.01
+
+			on_mob_life(var/mob/living/M as mob, var/alien)
+				if(M.stat == 2) return
+				if(alien && alien == IS_VOX)
+					M.adjustOxyLoss(-2*REM)
+					holder.remove_reagent(src.id, REAGENTS_METABOLISM) //By default it slowly disappears.
+					return
+				..()
 
 		hydrogen
 			name = "Hydrogen"
@@ -1483,6 +1511,7 @@ datum
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
+				//This needs a diona check but if one is added they won't be able to heal burn damage at all.
 				M.heal_organ_damage(0,2*REM)
 				..()
 				return
@@ -1494,11 +1523,12 @@ datum
 			reagent_state = LIQUID
 			color = "#F4A460" // rgb: 244, 164, 96
 
-			on_mob_life(var/mob/living/M as mob)
+			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(M.stat == 2.0) //THE GUY IS **DEAD**! BEREFT OF ALL LIFE HE RESTS IN PEACE etc etc. He does NOT metabolise shit anymore, god DAMN
 					return
 				if(!M) M = holder.my_atom
-				M.heal_organ_damage(0,3*REM)
+				if(!alien || alien != IS_DIONA)
+					M.heal_organ_damage(0,3*REM)
 				..()
 				return
 
@@ -1509,11 +1539,16 @@ datum
 			reagent_state = LIQUID
 			color = "#00CED1" // rgb: 0, 206, 209
 
-			on_mob_life(var/mob/living/M as mob)
+			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(M.stat == 2.0)
 					return  //See above, down and around. --Agouri
 				if(!M) M = holder.my_atom
-				M.adjustOxyLoss(-2*REM)
+
+				if(alien && alien == IS_VOX)
+					M.adjustToxLoss(2*REM)
+				else if(!alien || alien != IS_DIONA)
+					M.adjustOxyLoss(-2*REM)
+
 				if(holder.has_reagent("lexorin"))
 					holder.remove_reagent("lexorin", 2*REM)
 				..()
@@ -1526,11 +1561,16 @@ datum
 			reagent_state = LIQUID
 			color = "#00FFFF" // rgb: 0, 255, 255
 
-			on_mob_life(var/mob/living/M as mob)
+			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				M.adjustOxyLoss(-M.getOxyLoss())
+
+				if(alien && alien == IS_VOX)
+					M.adjustOxyLoss()
+				else if(!alien || alien != IS_DIONA)
+					M.adjustOxyLoss(-M.getOxyLoss())
+
 				if(holder.has_reagent("lexorin"))
 					holder.remove_reagent("lexorin", 2*REM)
 				..()
@@ -1543,14 +1583,32 @@ datum
 			reagent_state = LIQUID
 			color = "#DB7093" // rgb: 219, 112, 147
 
-			on_mob_life(var/mob/living/M as mob)
+			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				if(M.getOxyLoss() && prob(80)) M.adjustOxyLoss(-1*REM)
-				if(M.getBruteLoss() && prob(80)) M.heal_organ_damage(1*REM,0)
-				if(M.getFireLoss() && prob(80)) M.heal_organ_damage(0,1*REM)
-				if(M.getToxLoss() && prob(80)) M.adjustToxLoss(-1*REM)
+				if(!alien || alien != IS_DIONA)
+					if(M.getOxyLoss()) M.adjustOxyLoss(-1*REM)
+					if(M.getBruteLoss() && prob(80)) M.heal_organ_damage(1*REM,0)
+					if(M.getFireLoss() && prob(80)) M.heal_organ_damage(0,1*REM)
+					if(M.getToxLoss() && prob(80)) M.adjustToxLoss(-1*REM)
+				..()
+				return
+
+		anti_toxin
+			name = "Anti-Toxin (Dylovene)"
+			id = "anti_toxin"
+			description = "Dylovene is a broad-spectrum antitoxin."
+			reagent_state = LIQUID
+			color = "#C8A5DC" // rgb: 200, 165, 220
+
+			on_mob_life(var/mob/living/M as mob, var/alien)
+				if(!M) M = holder.my_atom
+				if(!alien || alien != IS_DIONA)
+					M.reagents.remove_all_type(/datum/reagent/toxin, 1*REM, 0, 1)
+					M.drowsyness = max(M.drowsyness-2*REM, 0)
+					M.hallucination = max(0, M.hallucination - 5*REM)
+					M.adjustToxLoss(-2*REM)
 				..()
 				return
 
@@ -1772,11 +1830,12 @@ datum
 			reagent_state = LIQUID
 			color = "#FF003F" // rgb: 255, 0, 63
 
-			on_mob_life(var/mob/living/M as mob)
+			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(M.stat == 2.0)
 					return
 				if(!M) M = holder.my_atom
-				M.heal_organ_damage(2*REM,0)
+				if(alien != IS_DIONA)
+					M.heal_organ_damage(2*REM,0)
 				..()
 				return
 
@@ -2547,6 +2606,7 @@ datum
 				..()
 				return
 
+/* We're back to flour bags
 		flour
 			name = "flour"
 			id = "flour"
@@ -2564,6 +2624,7 @@ datum
 				src = null
 				if(!istype(T, /turf/space))
 					new /obj/effect/decal/cleanable/flour(T)
+*/
 
 		rice
 			name = "Rice"

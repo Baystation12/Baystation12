@@ -1415,7 +1415,7 @@ datum
 
 			check_completion()//Basically runs through all the mobs in the area to determine how much they are worth.
 				var/captured_amount = 0
-				var/area/centcom/holding/A = locate()
+				var/area/ninja/holding/A = locate()
 				for(var/mob/living/carbon/human/M in A)//Humans.
 					if(M.stat==2)//Dead folks are worth less.
 						captured_amount+=0.5
