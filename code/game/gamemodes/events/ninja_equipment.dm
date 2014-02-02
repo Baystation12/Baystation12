@@ -186,6 +186,7 @@ ________________________________________________________________________________
 						unlock_suit()
 						break
 					lock_suit(U,1)//Check for icons.
+					U.hud_used.human_hud('icons/mob/screen1_NinjaHUD.dmi',"#ffffff",255)
 					U.regenerate_icons()
 					U << "\blue Linking neural-net interface...\nPattern \green <B>GREEN</B>\blue, continuing operation."
 				if(4)
@@ -238,6 +239,8 @@ ________________________________________________________________________________
 					cancel_stealth()//Shutdowns stealth.
 				if(4)
 					U << "\blue Disconnecting neural-net interface...\green<B>Success</B>\blue."
+					U.hud_used.instantiate()
+					U.regenerate_icons()
 				if(5)
 					U << "\blue Disengaging neural-net interface...\green<B>Success</B>\blue."
 				if(6)
@@ -557,6 +560,17 @@ ________________________________________________________________________________
 					O.show_message(text("\icon[P] *[P.ttone]*"))
 			P.overlays.Cut()
 			P.overlays += image('icons/obj/pda.dmi', "pda-r")
+
+			var/mob/living/L = null
+			if(P.loc && isliving(P.loc))
+				L = P.loc
+		//Maybe they are a pAI!
+			else
+				L = get(P, /mob/living/silicon)
+
+
+			if(L)
+				L << "\icon[P] <b>Message from [!s_control?(A):"an unknown source"], </b>\"[t]\" (<i>Unable to Reply</i>)"
 
 		if("Inject")
 			if( (href_list["tag"]=="radium"? (reagents.get_reagent_amount("radium"))<=(a_boost*a_transfer) : !reagents.get_reagent_amount(href_list["tag"])) )//Special case for radium. If there are only a_boost*a_transfer radium units left.
