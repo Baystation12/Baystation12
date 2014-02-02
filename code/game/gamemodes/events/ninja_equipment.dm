@@ -186,6 +186,7 @@ ________________________________________________________________________________
 						unlock_suit()
 						break
 					lock_suit(U,1)//Check for icons.
+					U.hud_used.human_hud('icons/mob/screen1_NinjaHUD.dmi',"#ffffff",255)
 					U.regenerate_icons()
 					U << "\blue Linking neural-net interface...\nPattern \green <B>GREEN</B>\blue, continuing operation."
 				if(4)
@@ -238,6 +239,8 @@ ________________________________________________________________________________
 					cancel_stealth()//Shutdowns stealth.
 				if(4)
 					U << "\blue Disconnecting neural-net interface...\green<B>Success</B>\blue."
+					U.hud_used.instantiate()
+					U.regenerate_icons()
 				if(5)
 					U << "\blue Disengaging neural-net interface...\green<B>Success</B>\blue."
 				if(6)
