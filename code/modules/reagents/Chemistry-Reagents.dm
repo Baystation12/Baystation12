@@ -1413,7 +1413,7 @@ datum
 			id = "plasma"
 			description = "Plasma in its liquid form."
 			reagent_state = LIQUID
-			color = "#E71B00" // rgb: 231, 27, 0
+			color = "#B233CC" // rgb: 178, 51, 204
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1595,6 +1595,25 @@ datum
 				..()
 				return
 
+		Alchdranine
+			name = "Alchdranine"
+			id = "alchdranine"
+			description = "Alchdranine is an extremely strange chemical substance that can be used to treat almost any injury with a high level of effectiveness "
+			reagent_state = LIQUID
+			color = "#07a4d1" // rgb: 7, 164, 209
+
+			on_mob_life(var/mob/living/M as mob, var/alien)
+				if(M.stat == 2.0)
+					return
+				if(!M) M = holder.my_atom
+				if(!alien || alien != IS_DIONA)
+					M.adjustOxyLoss(-1*REM)
+					M.heal_organ_damage(1*REM,0)
+					M.heal_organ_damage(0,1*REM)
+					M.adjustToxLoss(-1*REM)
+				..()
+				return
+
 		anti_toxin
 			name = "Anti-Toxin (Dylovene)"
 			id = "anti_toxin"
@@ -1678,24 +1697,6 @@ datum
 					D.stage--
 					if(D.stage < 1)
 						D.cure()
-				..()
-				return
-
-		peridaxon
-			name = "Peridaxon"
-			id = "peridaxon"
-			description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."
-			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
-			overdose = 10
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if(ishuman(M))
-					var/mob/living/carbon/human/H = M
-					var/datum/organ/internal/I = H.internal_organs
-					if(I.parent_organ == "chest")
-						I.damage = max(I.damage -1 , 0)
 				..()
 				return
 
