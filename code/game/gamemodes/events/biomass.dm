@@ -142,21 +142,23 @@
 /obj/effect/biomass/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(90))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 	return
 
 /obj/effect/biomass/temperature_expose(null, temp, volume) //hotspots kill biomass
 	del src
 
+/datum/event/biomass/start()
+	biomass_infestation()
 
 /proc/biomass_infestation()
 
@@ -173,3 +175,6 @@
 			var/turf/simulated/floor/T = pick(turfs)
 			new/obj/effect/biomass_controller(T) //spawn a controller at turf
 			message_admins("\blue Event: Biomass spawned at [T.loc.loc] ([T.x],[T.y],[T.z])")
+
+
+

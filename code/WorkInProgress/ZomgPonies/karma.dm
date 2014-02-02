@@ -147,10 +147,12 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 		<a href='?src=\ref[src];KarmaBuy=2'>Unlock Nanotrasen Representative -- 15KP</a><br>
 		<a href='?src=\ref[src];KarmaBuy=3'>Unlock Customs Officer -- 30KP</a><br>
 		<a href='?src=\ref[src];KarmaBuy=4'>Unlock BlueShield -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Kidan -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=6'>Unlock Grey -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=7'>Unlock Vox -- 45KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=8'>Unlock Slime People -- 45KP</a><br>
+		<br>
+		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Machine People -- 15KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=6'>Unlock Kidan -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=7'>Unlock Grey -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=8'>Unlock Vox -- 45KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=9'>Unlock Slime People -- 45KP</a><br>
 		<B>PLEASE NOTE THAT PEOPLE WHO TRY TO GAME THE KARMA SYSTEM WILL END UP ON THE WALL OF SHAME. THIS INCLUDES BUT IS NOT LIMITED TO TRADES, OOC KARMA BEGGING, CODE EXPLOITS, ETC.</B>
 		"}
 

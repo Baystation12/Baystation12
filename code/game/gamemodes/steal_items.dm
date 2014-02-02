@@ -40,11 +40,6 @@
 	typepath = /obj/item/weapon/rcd
 	protected_jobs = list("Chief Engineer")
 
-/datum/theft_objective/rpd
-	name = "an RPD"
-	typepath = /obj/item/weapon/pipe_dispenser
-	protected_jobs = list("Chief Engineer")
-
 /datum/theft_objective/jetpack
 	name = "a jetpack"
 	typepath = /obj/item/weapon/tank/jetpack

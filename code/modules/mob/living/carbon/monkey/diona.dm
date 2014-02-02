@@ -30,7 +30,7 @@
 	..()
 
 /obj/item/weapon/holder/process()
-	if(!loc) return
+	if(!loc) del(src)
 
 	if(istype(loc,/turf) || !(contents.len))
 		for(var/mob/M in contents)
@@ -63,15 +63,32 @@
 
 	//Let people pick the little buggers up.
 	if(M.a_intent == "help")
-		var/obj/item/weapon/holder/diona/D = new(loc)
-		src.loc = D
-		D.name = loc.name
-		D.attack_hand(M)
-		M << "You scoop up [src]."
-		src << "[M] scoops you up."
+		if(M.species && M.species.name == "Diona")
+			M << "You feel your being twine with that of [src] as it merges with your biomass."
+			src << "You feel your being twine with that of [M] as you merge with its biomass."
+			src.verbs += /mob/living/carbon/monkey/diona/proc/split
+			src.verbs -= /mob/living/carbon/monkey/diona/proc/merge
+			src.loc = M
+		else
+			var/obj/item/weapon/holder/diona/D = new(loc)
+			src.loc = D
+			D.name = loc.name
+			D.attack_hand(M)
+			M << "You scoop up [src]."
+			src << "[M] scoops you up."
 		return
 
 	..()
+
+/mob/living/carbon/monkey/diona/New()
+
+	..()
+	gender = NEUTER
+	dna.mutantrace = "plant"
+	greaterform = "Diona"
+	add_language("Rootspeak")
+	src.verbs += /mob/living/carbon/monkey/diona/proc/merge
+
 
 //Verbs after this point.
 /mob/living/carbon/monkey/diona/verb/dionaventcrawl()
@@ -79,6 +96,55 @@
 	set desc = "Enter an air vent and crawl through the pipe system."
 	set category = "Diona"
 	handle_ventcrawl()
+
+/mob/living/carbon/monkey/diona/proc/merge()
+
+	set category = "Diona"
+	set name = "Merge with gestalt"
+	set desc = "Merge with another diona."
+
+	if(istype(src.loc,/mob/living/carbon))
+		src.verbs -= /mob/living/carbon/monkey/diona/proc/merge
+		return
+
+	var/list/choices = list()
+	for(var/mob/living/carbon/C in view(1,src))
+
+		if(!(src.Adjacent(C)) || !(C.client)) continue
+
+		if(istype(C,/mob/living/carbon/human))
+			var/mob/living/carbon/human/D = C
+			if(D.species && D.species.name == "Diona")
+				choices += C
+
+	var/mob/living/M = input(src,"Who do you wish to merge with?") in null|choices
+
+	if(!M || !src || !(src.Adjacent(M))) return
+
+	if(istype(M,/mob/living/carbon/human))
+		M << "You feel your being twine with that of [src] as it merges with your biomass."
+		src << "You feel your being twine with that of [M] as you merge with its biomass."
+		src.loc = M
+		src.verbs += /mob/living/carbon/monkey/diona/proc/split
+		src.verbs -= /mob/living/carbon/monkey/diona/proc/merge
+	else
+		return
+
+/mob/living/carbon/monkey/diona/proc/split()
+
+	set category = "Diona"
+	set name = "Split from gestalt"
+	set desc = "Split away from your gestalt as a lone nymph."
+
+	if(!(istype(src.loc,/mob/living/carbon)))
+		src.verbs -= /mob/living/carbon/monkey/diona/proc/split
+		return
+
+	src.loc << "You feel a pang of loss as [src] splits away from your biomass."
+	src << "You wiggle out of the depths of [src.loc]'s biomass and plop to the ground."
+	src.loc = get_turf(src)
+	src.verbs -= /mob/living/carbon/monkey/diona/proc/split
+	src.verbs += /mob/living/carbon/monkey/diona/proc/merge
 
 /mob/living/carbon/monkey/diona/verb/fertilize_plant()
 
@@ -132,6 +198,7 @@
 		src << "You have not yet consumed enough to grow..."
 		return
 
+	src.split()
 	src.visible_message("\red [src] begins to shift and quiver, and erupts in a shower of shed bark and twigs!","\red You begin to shift and quiver, then erupt in a shower of shed bark and twigs, attaining your adult form!")
 	var/mob/living/carbon/human/adult = new(loc)
 	adult.set_species("Diona")
@@ -145,8 +212,8 @@
 		adult.add_language(L.name)
 	adult.regenerate_icons()
 
-	adult.name = src.name
-	adult.real_name = src.real_name
+	adult.name = "diona ([rand(100,999)])"
+	adult.real_name = adult.name
 	adult.ckey = src.ckey
 	adult.real_name = pick(diona_names)	//I hate this being here of all places but unfortunately dna is based on real_name!
 	adult.rename_self("diona")
@@ -176,6 +243,9 @@
 
 	src.visible_message("\red [src] flicks out a feeler and neatly steals a sample of [M]'s blood.","\red You flick out a feeler and neatly steal a sample of [M]'s blood.")
 	donors += M.real_name
+	for(var/datum/language/L in M.languages)
+		languages += L
+
 	spawn(25)
 		update_progression()
 
@@ -187,11 +257,8 @@
 	if(donors.len == 5)
 		ready_evolve = 1
 		src << "\green You feel ready to move on to your next stage of growth."
-	else if(donors.len == 2)
+	else if(donors.len == 3)
 		universal_understand = 1
 		src << "\green You feel your awareness expand, and realize you know how to understand the creatures around you."
-	else if(donors.len == 4)
-		universal_speak = 1
-		src << "\green You feel your awareness expand, and realize you know how to speak with the creatures around you."
 	else
 		src << "\green The blood seeps into your small form, and you draw out the echoes of memories and personality from it, working them into your budding mind."

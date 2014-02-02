@@ -332,7 +332,7 @@
 	L.lastarea = newarea
 
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
-	if(!(L && L.client && (L.client.prefs.toggles & SOUND_AMBIENCE)))	return
+	if(!(L && L.client && (L.client.prefs.sound & SOUND_AMBIENCE)))	return
 
 	if(!L.client.ambience_playing)
 		L.client.ambience_playing = 1

@@ -301,7 +301,7 @@
 	sleep(3)
 	flick("explosion", src)
 	spawn(13)
-		del(src)
+		qdel(src)
 
 /obj/machinery/turretid
 	name = "turret deactivation control"

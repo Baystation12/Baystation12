@@ -77,9 +77,19 @@
 
 	if(status & ORGAN_DESTROYED)
 		return 0
-	if(status & ORGAN_ROBOT)
-		brute *= 0.66 //~2/3 damage for ROBOLIMBS
-		burn *= 0.66 //~2/3 damage for ROBOLIMBS
+	if(status & ORGAN_ROBOT )
+
+		var/brmod = 0.66
+		var/bumod = 0.66
+
+		if(istype(owner,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = owner
+			if(H.species && H.species.flags & IS_SYNTHETIC)
+				brmod = H.species.brute_mod
+				bumod = H.species.burn_mod
+
+		brute *= brmod //~2/3 damage for ROBOLIMBS
+		burn *= bumod //~2/3 damage for ROBOLIMBS
 
 	//If limb took enough damage, try to cut or tear it off
 	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
@@ -487,10 +497,14 @@ This function completely restores a damaged organ to perfect condition.
 			if(LOWER_TORSO)
 				owner << "\red You are now sterile."
 			if(HEAD)
-				if(owner.mutations & SKELETON)
+				if(owner.species.flags & IS_SYNTHETIC)
+					organ= new /obj/item/weapon/organ/head/posi(owner.loc, owner)
+					owner.death()
+				else if(SKELETON in owner.mutations)
 					organ= new /obj/item/weapon/skeleton/head(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/head(owner.loc, owner)
+					owner.death()
 				owner.u_equip(owner.glasses)
 				owner.u_equip(owner.head)
 				owner.u_equip(owner.l_ear)
@@ -499,55 +513,55 @@ This function completely restores a damaged organ to perfect condition.
 			if(ARM_RIGHT)
 				if(status & ORGAN_ROBOT)
 					organ = new /obj/item/robot_parts/r_arm(owner.loc)
-				else if(owner.mutations & SKELETON)
+				else if(SKELETON in owner.mutations)
 					organ = new /obj/item/weapon/skeleton/r_arm(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/r_arm(owner.loc, owner)
 			if(ARM_LEFT)
 				if(status & ORGAN_ROBOT)
 					organ= new /obj/item/robot_parts/l_arm(owner.loc)
-				else if(owner.mutations & SKELETON)
+				else if(SKELETON in owner.mutations)
 					organ = new /obj/item/weapon/skeleton/l_arm(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/l_arm(owner.loc, owner)
 			if(LEG_RIGHT)
 				if(status & ORGAN_ROBOT)
 					organ = new /obj/item/robot_parts/r_leg(owner.loc)
-				else if(owner.mutations & SKELETON)
+				else if(SKELETON in owner.mutations)
 					organ = new /obj/item/weapon/skeleton/r_leg(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/r_leg(owner.loc, owner)
 			if(LEG_LEFT)
 				if(status & ORGAN_ROBOT)
 					organ = new /obj/item/robot_parts/l_leg(owner.loc)
-				else if(owner.mutations & SKELETON)
+				else if(SKELETON in owner.mutations)
 					organ = new /obj/item/weapon/skeleton/l_leg(owner.loc)
 				else
 					organ= new /obj/item/weapon/organ/l_leg(owner.loc, owner)
 			if(HAND_RIGHT)
 				if(!(status & ORGAN_ROBOT))
-					if(owner.mutations & SKELETON)
+					if(SKELETON in owner.mutations)
 						organ = new /obj/item/weapon/skeleton/r_hand(owner.loc)
 					else
 						organ= new /obj/item/weapon/organ/r_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(HAND_LEFT)
 				if(!(status & ORGAN_ROBOT))
-					if(owner.mutations & SKELETON)
+					if(SKELETON in owner.mutations)
 						organ = new /obj/item/weapon/skeleton/l_hand(owner.loc)
 					else
 						organ= new /obj/item/weapon/organ/l_hand(owner.loc, owner)
 				owner.u_equip(owner.gloves)
 			if(FOOT_RIGHT)
 				if(!(status & ORGAN_ROBOT))
-					if(owner.mutations & SKELETON)
+					if(SKELETON in owner.mutations)
 						organ = new /obj/item/weapon/skeleton/r_foot(owner.loc)
 					else
 						organ= new /obj/item/weapon/organ/r_foot/(owner.loc, owner)
 				owner.u_equip(owner.shoes)
 			if(FOOT_LEFT)
 				if(!(status & ORGAN_ROBOT))
-					if(owner.mutations & SKELETON)
+					if(SKELETON in owner.mutations)
 						organ = new /obj/item/weapon/skeleton/l_foot(owner.loc)
 					else
 						organ = new /obj/item/weapon/organ/l_foot(owner.loc, owner)
@@ -650,7 +664,7 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/get_icon(gender="")
 	if (status & ORGAN_MUTATED)
 		return new /icon(owner.deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
-	else if (status & ORGAN_ROBOT)
+	else if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
 		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 	else
 		return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
@@ -874,6 +888,9 @@ obj/item/weapon/organ/head
 	var/mob/living/carbon/brain/brainmob
 	var/brain_op_stage = 0
 
+/obj/item/weapon/organ/head/posi
+	name = "robotic head"
+
 obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 	if(istype(H))
 		src.icon_state = H.gender == MALE? "head_m" : "head_f"
@@ -947,7 +964,7 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		switch(brain_op_stage)
 			if(1)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] has \his skull sawed open with [W] by [user].", 1)
+					O.show_message("\red [brainmob] has \his head sawed open with [W] by [user].", 1)
 				brainmob << "\red [user] begins to saw open your head with [W]!"
 				user << "\red You saw [brainmob]'s head open with [W]!"
 
@@ -966,8 +983,12 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 				else
 					brainmob.LAssailant = user
 
-				var/obj/item/brain/B = new(loc)
-				B.transfer_identity(brainmob)
+				if(istype(src,/obj/item/weapon/organ/head/posi))
+					var/obj/item/device/mmi/posibrain/B = new(loc)
+					B.transfer_identity(brainmob)
+				else
+					var/obj/item/brain/B = new(loc)
+					B.transfer_identity(brainmob)
 
 				brain_op_stage = 4.0
 			else

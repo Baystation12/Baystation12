@@ -25,7 +25,7 @@
 	src << "As a ghost, you will now [(prefs.toggles & CHAT_GHOSTRADIO) ? "hear all radio chat in the world" : "only hear from nearby speakers"]."
 	prefs.save_preferences()
 	feedback_add_details("admin_verb","TGR")
-	
+
 /client/proc/toggle_hear_radio()
 	set name = "Show/Hide RadioChatter"
 	set category = "Preferences"
@@ -41,7 +41,7 @@
 	set category = "Preferences"
 	set desc = "Toggle hearing a notification when admin PMs are recieved"
 	if(!holder)	return
-	prefs.toggles ^= SOUND_ADMINHELP
+	prefs.sound ^= SOUND_ADMINHELP
 	prefs.save_preferences()
 	usr << "You will [(prefs.toggles & SOUND_ADMINHELP) ? "now" : "no longer"] hear a sound when adminhelps arrive."
 	feedback_add_details("admin_verb","AHS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -73,9 +73,9 @@
 	set name = "Hear/Silence LobbyMusic"
 	set category = "Preferences"
 	set desc = "Toggles hearing the GameLobby music"
-	prefs.toggles ^= SOUND_LOBBY
+	prefs.sound ^= SOUND_LOBBY
 	prefs.save_preferences()
-	if(prefs.toggles & SOUND_LOBBY)
+	if(prefs.sound & SOUND_LOBBY)
 		src << "You will now hear music in the game lobby."
 		if(istype(mob, /mob/new_player))
 			playtitlemusic()
@@ -85,13 +85,22 @@
 			src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // stop the jamsz
 	feedback_add_details("admin_verb","TLobby") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/verb/togglevoices()
+	set name = "Toggle player voices"
+	set category = "Preferences"
+	set desc = "Toggle hearing player voice sounds"
+	prefs.sound ^= SOUND_VOICES
+	prefs.save_preferences()
+	src << "You will [(prefs.sound & SOUND_VOICES) ? "now" : "no longer"] hear voices of players around you, or your own voice."
+	feedback_add_details("admin_verb","TVoice") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /client/verb/togglemidis()
 	set name = "Hear/Silence Midis"
 	set category = "Preferences"
 	set desc = "Toggles hearing sounds uploaded by admins"
-	prefs.toggles ^= SOUND_MIDI
+	prefs.sound ^= SOUND_MIDI
 	prefs.save_preferences()
-	if(prefs.toggles & SOUND_MIDI)
+	if(prefs.sound & SOUND_MIDI)
 		src << "You will now hear any sounds uploaded by admins."
 	else
 		var/sound/break_sound = sound(null, repeat = 0, wait = 0, channel = 777)
@@ -124,9 +133,9 @@
 	set name = "Hear/Silence Ambience"
 	set category = "Preferences"
 	set desc = "Toggles hearing ambient sound effects"
-	prefs.toggles ^= SOUND_AMBIENCE
+	prefs.sound ^= SOUND_AMBIENCE
 	prefs.save_preferences()
-	if(prefs.toggles & SOUND_AMBIENCE)
+	if(prefs.sound & SOUND_AMBIENCE)
 		src << "You will now hear ambient sounds."
 	else
 		src << "You will no longer hear ambient sounds."

@@ -38,7 +38,7 @@
 			new /obj/item/weapon/shard( src.loc )
 			if (occupant)
 				dump()
-			del(src)
+			qdel(src)
 		if (2)
 			if (prob(50))
 				src.health -= 15

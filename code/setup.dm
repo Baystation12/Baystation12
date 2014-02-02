@@ -345,6 +345,20 @@ var/MAX_EXPLOSION_RANGE = 14
 //#define SHOCKWAVE		19 	// (Not implemented) attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
 //#define ELECTRICITY	20 	// (Not implemented) ability to shoot electric attacks (15%)
 
+//bitflags for mutations
+	// Extra powers:
+#define SHADOW			(1<<10)	// shadow teleportation (create in/out portals anywhere) (25%)
+#define SCREAM			(1<<11)	// supersonic screaming (25%)
+#define EXPLOSIVE		(1<<12)	// exploding on-demand (15%)
+#define REGENERATION	(1<<13)	// superhuman regeneration (30%)
+#define REPROCESSOR		(1<<14)	// eat anything (50%)
+#define SHAPESHIFTING	(1<<15)	// take on the appearance of anything (40%)
+#define PHASING			(1<<16)	// ability to phase through walls (40%)
+#define SHIELD			(1<<17)	// shielding from all projectile attacks (30%)
+#define SHOCKWAVE		(1<<18)	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
+#define ELECTRICITY		(1<<19)	// ability to shoot electric attacks (15%)
+
+
 	//2spooky
 #define SKELETON 29
 #define PLANT 30
@@ -368,6 +382,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define M_STRONG        202		// (Nothing)
 #define M_SOBER         203		// Increased alcohol metabolism
 #define M_PSY_RESIST    204		// Block remoteview
+#define M_SUPER_FART    205		// Duh
 
 //disabilities
 #define NEARSIGHTED		1
@@ -644,23 +659,25 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define R_HOST			65535
 
 //Preference toggles
+#define CHAT_OOC		1
+#define CHAT_DEAD		2
+#define CHAT_GHOSTEARS	4
+#define CHAT_GHOSTSIGHT	8
+#define CHAT_PRAYER		16
+#define CHAT_RADIO		32
+#define CHAT_ATTACKLOGS	64
+#define CHAT_DEBUGLOGS	128
+#define CHAT_LOOC		256
+#define CHAT_GHOSTRADIO 512
+
 #define SOUND_ADMINHELP	1
 #define SOUND_MIDI		2
 #define SOUND_AMBIENCE	4
 #define SOUND_LOBBY		8
-#define CHAT_OOC		16
-#define CHAT_DEAD		32
-#define CHAT_GHOSTEARS	64
-#define CHAT_GHOSTSIGHT	128
-#define CHAT_PRAYER		256
-#define CHAT_RADIO		512
-#define CHAT_ATTACKLOGS	1024
-#define CHAT_DEBUGLOGS	2048
-#define CHAT_LOOC		4096
-#define CHAT_GHOSTRADIO 8192
+#define SOUND_VOICES	16
 
-
-#define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
+#define SOUND_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY)
+#define TOGGLES_DEFAULT (CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 
 #define BE_TRAITOR		1
 #define BE_OPERATIVE	2
@@ -754,20 +771,22 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define HAS_SKIN_TONE 	256
 #define HAS_LIPS 		512
 #define HAS_UNDERWEAR 	1024
-#define HAS_TAIL 		2048
+#define IS_SYNTHETIC	2048
 #define IS_PLANT 		4096
 #define CAN_BE_FAT 		8192
 #define HAS_CHITTIN 	16384
 #define NO_INTORGANS	32768
 
-
+//Species Blood Flags
 #define BLOOD_GREEN 	1
 #define BLOOD_BLUE		2
 #define BLOOD_SLIME		4
-
+//Species Body Flags
 #define FEET_CLAWS		1
 #define FEET_PADDED		2
 #define FEET_NOSLIP		4
+#define HAS_TAIL 		8
+
 
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.

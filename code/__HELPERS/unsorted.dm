@@ -1607,3 +1607,5 @@ proc/check_target_facings(mob/living/initator, mob/living/target)
     text = texttospeechstrip(text)
     lastspeak = text
     ext_python("voice.py", "\"[accent]\" \"[voice]\" \"[pitch]\" \"[echo]\" \"[speed]\" \"[text]\" \"[src.ckey]\"")
+
+

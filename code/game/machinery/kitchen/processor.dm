@@ -53,6 +53,13 @@
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/soybeans
 		output = /obj/item/weapon/reagent_containers/food/snacks/soydope
 
+	wheat
+		input = /obj/item/weapon/reagent_containers/food/snacks/grown/wheat
+		output = /obj/item/weapon/reagent_containers/food/snacks/flour
+
+	spaghetti
+		input = /obj/item/weapon/reagent_containers/food/snacks/flour
+		output = /obj/item/weapon/reagent_containers/food/snacks/spagetti
 
 	/* mobs */
 	mob
@@ -143,13 +150,13 @@
 		src.processing = 1
 		user.visible_message("\blue [user] turns on \a [src].", \
 			"You turn on \a [src].", \
-			"You hear a food processor")
+			"You hear a food processor.")
 		playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
 		use_power(500)
 		sleep(P.time)
 		P.process(src.loc, O)
 		src.processing = 0
 	src.visible_message("\blue \the [src] finished processing.", \
-		"You hear food processor stops")
+		"You hear the food processor stopping/")
 
 

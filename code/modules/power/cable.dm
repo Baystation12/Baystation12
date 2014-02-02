@@ -179,16 +179,16 @@
 /obj/structure/cable/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 		if(2.0)
 			if (prob(50))
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, cable_color)
-				del(src)
+				qdel(src)
 
 		if(3.0)
 			if (prob(25))
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, cable_color)
-				del(src)
+				qdel(src)
 	return
 
 // the cable coil object, used for laying cable
@@ -604,3 +604,23 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	_color = pick("red","yellow","green","blue","pink")
 	icon_state = "coil_[_color]"
 	..()
+
+/obj/item/stack/cable_coil/attack(mob/M as mob, mob/user as mob)
+	if(hasorgans(M))
+		var/datum/organ/external/S = M:get_organ(user.zone_sel.selecting)
+		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
+			return ..()
+		if(S.burn_dam > 0 && src.use(1))
+			S.heal_damage(0,15,0,1)
+			if(user != M)
+				user.visible_message("\red \The [user] repairs some burn damage on their [S.display_name] with \the [src]",\
+				"\red You repair some burn damage on your [S.display_name]",\
+				"You hear wires being cut.")
+			else
+				user.visible_message("\red \The [user] repairs some burn damage on their [S.display_name] with \the [src]",\
+				"\red You repair some burn damage on your [S.display_name]",\
+				"You hear wires being cut.")
+		else
+			user << "Nothing to fix!"
+	else
+		return ..()

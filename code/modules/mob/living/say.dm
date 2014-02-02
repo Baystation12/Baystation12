@@ -156,11 +156,14 @@ var/list/department_radio_keys = list(
 			message = uppertext(message)
 
 	// General public key. Special message handling
-	else if (copytext(message, 1, 2) == ";" || prob(braindam/2))
-		if (ishuman(src))
-			message_mode = "headset"
-		else if(ispAI(src) || isrobot(src))
-			message_mode = "pAI"
+	var/mmode
+	var/cprefix = ""
+	if(length(message) >= 2)
+		cprefix = copytext(message, 1, 3)
+		if(cprefix in department_radio_keys)
+			mmode = department_radio_keys[cprefix]
+	if (copytext(message, 1, 2) == ";" || (prob(braindam/2) && !mmode))
+		message_mode = "headset"
 		message = copytext(message, 2)
 	// Begin checking for either a message mode or a language to speak.
 	else if (length(message) >= 2)
@@ -205,10 +208,10 @@ var/list/department_radio_keys = list(
 
 	// Select all always_talk devices
 	//  Carbon lifeforms
-	if(istype(src, /mob/living/carbon))
-		for(var/obj/item/device/radio/R in contents)
-			if(R.always_talk)
-				devices += R
+	//if(istype(src, /mob/living/carbon))
+	for(var/obj/item/device/radio/R in contents)
+		if(R.always_talk)
+			devices += R
 
 	//src << "Speaking on [message_mode]: [message]"
 	if(message_mode)
@@ -235,6 +238,9 @@ var/list/department_radio_keys = list(
 					var/mob/living/carbon/C=src
 					if(C:l_ear) used_radios += C:l_ear
 					if(C:r_ear) used_radios += C:r_ear
+				if(issilicon(src))
+					var/mob/living/silicon/Ro=src
+					if(Ro:radio) devices += Ro:radio
 				message_range = 1
 				italics = 1
 			if ("fake left ear")
@@ -296,7 +302,10 @@ var/list/department_radio_keys = list(
 					if(C:r_ear) devices += C:r_ear
 				if(issilicon(src))
 					var/mob/living/silicon/Ro=src
-					if(Ro:radio) devices += Ro:radio
+					if(Ro:radio)
+						devices += Ro:radio
+					else
+						warning("[src] has no radio!")
 				message_range = 1
 				italics = 1
 	if(devices.len>0)
@@ -375,6 +384,23 @@ var/list/department_radio_keys = list(
 		if(M != src && is_speaking_radio)
 			M:show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "radio"]</span>")
 
+	if(message_mode == null)
+		var/accent = "en-us"
+		var/voice = "m7"
+		var/speed = 175
+		var/pitch = 0
+		var/echo = 10
+		if(istype(src, /mob/living/silicon/ai))
+			echo = 90
+		if(istype(src, /mob/living/silicon/robot))
+			echo = 60
+		if(src.client && src.client.prefs)
+			accent = src.client.prefs.accent
+			voice = src.client.prefs.voice
+			speed = src.client.prefs.talkspeed
+			pitch = src.client.prefs.pitch
+			src:texttospeech(message, speed, pitch, accent, "+[voice]", echo)
+
 	var/rendered = null
 
 	if (length(heard_a))
@@ -389,6 +415,11 @@ var/list/department_radio_keys = list(
 
 		for (var/mob/M in heard_a)
 		//BEGIN TELEPORT CHANGES
+			if(message_mode == null && fexists("sound/playervoices/[src.ckey].ogg"))
+				if(M.client)
+					if(M.client.prefs)
+						if(M.client.prefs.sound & SOUND_VOICES)
+							M.playsound_local(get_turf(src), "sound/playervoices/[src.ckey].ogg", 70, 0, 5, 1)
 			if(!istype(M, /mob/new_player))
 				if(M && M.stat == DEAD)
 					if ((M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
