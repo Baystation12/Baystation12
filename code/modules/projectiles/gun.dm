@@ -14,9 +14,8 @@
 	force = 5.0
 	origin_tech = "combat=1"
 	attack_verb = list("struck", "hit", "bashed")
-
+	var/obj/item/ammo_casing/chambered = null
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
-	var/obj/item/projectile/in_chamber = null
 	var/silenced = 0
 	var/recoil = 0
 	var/clumsy_check = 1
@@ -38,20 +37,26 @@
 		else
 			return 0
 
-	proc/process_chambered()
+	proc/process_chamber()
 		return 0
 
 	proc/special_check(var/mob/M) //Placeholder for any special checks, like detective's revolver.
 		return 1
 
-	proc/prepare_shot(var/obj/item/projectile/proj) //Transfer properties from the gun to the bullet
-		proj.shot_from = src
-		proj.silenced = silenced
-		return
-
 	proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
 		user << "<span class='warning'>*click*</span>"
 		return
+
+	proc/shoot_live_shot(mob/living/user as mob|obj)
+		if(recoil)
+			spawn()
+				shake_camera(user, recoil + 1, recoil)
+
+		if(silenced)
+			playsound(user, fire_sound, 10, 1)
+		else
+			playsound(user, fire_sound, 50, 1)
+			user.visible_message("<span class='danger'>[user] fires [src]!</span>", "<span class='danger'>You fire [src]!</span>", "You hear a [istype(src, /obj/item/weapon/gun/energy) ? "laser blast" : "gunshot"]!")
 
 	emp_act(severity)
 		for(var/obj/O in contents)
@@ -93,11 +98,6 @@
 
 	add_fingerprint(user)
 
-	var/turf/curloc = user.loc
-	var/turf/targloc = get_turf(target)
-	if (!istype(targloc) || !istype(curloc))
-		return
-
 	if(!special_check(user))
 		return
 
@@ -105,70 +105,27 @@
 		if (world.time % 3) //to prevent spam
 			user << "<span class='warning'>[src] is not ready to fire again!"
 		return
-
-	if(!process_chambered())
-		shoot_with_empty_chamber(user)
-
-	if(!in_chamber)
-		return
-
-	in_chamber.firer = user
-	in_chamber.def_zone = user.zone_sel.selecting
-
-
-	if(recoil)
-		spawn()
-			shake_camera(user, recoil + 1, recoil)
-
-	if(silenced)
-		playsound(user, fire_sound, 10, 1)
+	if(chambered)
+		if(!chambered.fire(target, user, params, , silenced))
+			shoot_with_empty_chamber(user)
+		else
+			shoot_live_shot(user)
 	else
-		playsound(user, fire_sound, 50, 1)
-		user.visible_message("<span class='danger'>[user] fires [src]!</span>", "<span class='danger'>You fire [src]!</span>", "You hear a [istype(in_chamber, /obj/item/projectile/beam) ? "laser blast" : "gunshot"]!")
-
-	prepare_shot(in_chamber)				//Set the projectile's properties
-
-
-
-	if(targloc == curloc)			//Fire the projectile
-		user.bullet_act(in_chamber)
-		del(in_chamber)
-		update_icon()
-		return
-	in_chamber.original = target
-	in_chamber.loc = get_turf(user)
-	in_chamber.starting = get_turf(user)
-	in_chamber.current = curloc
-	in_chamber.yo = targloc.y - curloc.y
-	in_chamber.xo = targloc.x - curloc.x
-	user.next_move = world.time + 4
-
-	if(params)
-		var/list/mouse_control = params2list(params)
-		if(mouse_control["icon-x"])
-			in_chamber.p_x = text2num(mouse_control["icon-x"])
-		if(mouse_control["icon-y"])
-			in_chamber.p_y = text2num(mouse_control["icon-y"])
-
-	spawn()
-		if(in_chamber)
-			in_chamber.process()
-	sleep(1)
-	in_chamber = null
-
+		shoot_with_empty_chamber(user)
+	process_chamber()
 	update_icon()
 
 	if(user.hand)
-		user.update_inv_l_hand(0)
+		user.update_inv_l_hand()
 	else
-		user.update_inv_r_hand(0)
+		user.update_inv_r_hand()
 
 
 /obj/item/weapon/gun/proc/can_fire()
-	return process_chambered()
+	return process_chamber()
 
 /obj/item/weapon/gun/proc/can_hit(var/mob/living/target as mob, var/mob/living/user as mob)
-	return in_chamber.check_fire(target,user)
+	return chambered.BB.check_fire(target,user)
 
 /obj/item/weapon/gun/proc/click_empty(mob/user = null)
 	if (user)
@@ -180,51 +137,55 @@
 
 /obj/item/weapon/gun/proc/isHandgun()
 	return 1
-
+/*
 /obj/item/weapon/gun/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
 	//Suicide handling.
 	if (M == user && user.zone_sel.selecting == "mouth" && !mouthshoot)
 		mouthshoot = 1
 		M.visible_message("\red [user] sticks their gun in their mouth, ready to pull the trigger...")
+		world << "[chambered.BB], [chambered]"
 		if(!do_after(user, 40))
 			M.visible_message("\blue [user] decided life was worth living")
 			mouthshoot = 0
 			return
-		if (process_chambered())
+		if (chambered)
+			world << "azaza"
 			user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
 			if(silenced)
 				playsound(user, fire_sound, 10, 1)
 			else
 				playsound(user, fire_sound, 50, 1)
-			if(istype(in_chamber, /obj/item/projectile/beam/lastertag))
+			if(istype(chambered.BB, /obj/item/projectile/beam/lastertag))
 				user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 				mouthshoot = 0
 				return
 
-			in_chamber.on_hit(M)
-			if (in_chamber.damage_type != HALLOSS)
-				user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [in_chamber]")
+			chambered.BB.on_hit(M)
+			if (chambered.BB.damage_type != HALLOSS)
+				user.apply_damage(chambered.BB.damage*2.5, chambered.BB.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [chambered.BB]")
 				user.death()
 			else
 				user << "<span class = 'notice'>Ow...</span>"
 				user.apply_effect(110,AGONY,0)
-			del(in_chamber)
+			chambered.BB = null
+			del(chambered.contents)
 			mouthshoot = 0
+			process_chamber()
 			return
 		else
 			click_empty(user)
 			mouthshoot = 0
 			return
 
-	if (process_chambered())
+	if (chambered)
 		//Point blank shooting if on harm intent or target we were targeting.
 		if(user.a_intent == "hurt")
 			user.visible_message("\red <b> \The [user] fires \the [src] point blank at [M]!</b>")
-			in_chamber.damage *= 1.3
+			chambered.BB.damage *= 1.3
 			Fire(M,user)
 			return
 		else if(target && M in target)
 			Fire(M,user) ///Otherwise, shoot!
 			return
 	else
-		return ..() //Pistolwhippin'
+		return ..()  */

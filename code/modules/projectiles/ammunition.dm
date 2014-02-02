@@ -1,55 +1,3 @@
-/*/obj/item/ammo_casing
-	name = "bullet casing"
-	desc = "A bullet casing."
-	icon = 'icons/obj/ammo.dmi'
-	icon_state = "s-casing"
-	flags = FPRINT | TABLEPASS | CONDUCT
-	slot_flags = SLOT_BELT
-	throwforce = 1
-	w_class = 1.0
-	var/caliber = ""							//Which kind of guns it can be loaded into
-	var/projectile_type = ""//The bullet type to create when New() is called
-	var/obj/item/projectile/BB = null 			//The loaded bullet
-
-
-	New()
-		..()
-		if(projectile_type)
-			BB = new projectile_type(src)
-		pixel_x = rand(-10.0, 10)
-		pixel_y = rand(-10.0, 10)
-		dir = pick(cardinal)
-
-//Boxes of ammo
-/obj/item/ammo_magazine
-	name = "ammo box (.357)"
-	desc = "A box of ammo"
-	icon_state = "357"
-	icon = 'icons/obj/ammo.dmi'
-	flags = FPRINT | TABLEPASS | CONDUCT
-	slot_flags = SLOT_BELT
-	item_state = "syringe_kit"
-	m_amt = 50000
-	throwforce = 2
-	w_class = 1.0
-	throw_speed = 4
-	throw_range = 10
-	var/list/stored_ammo = list()
-	var/ammo_type = "/obj/item/ammo_casing"
-	var/max_ammo = 7
-	var/multiple_sprites = 0
-
-
-	New()
-		for(var/i = 1, i <= max_ammo, i++)
-			stored_ammo += new ammo_type(src)
-		update_icon()
-
-
-	update_icon()
-		if(multiple_sprites)
-			icon_state = "[initial(icon_state)]-[stored_ammo.len]"
-		desc = "There are [stored_ammo.len] shell\s left!" */
 //TG-stuff
 /obj/item/ammo_casing
 	name = "bullet casing"
@@ -63,6 +11,8 @@
 	var/caliber = null							//Which kind of guns it can be loaded into
 	var/projectile_type = null					//The bullet type to create when New() is called
 	var/obj/item/projectile/BB = null 			//The loaded bullet
+	var/pellets = 0								//Pellets for spreadshot
+	var/variance = 0							//Variance for inaccuracy fundamental to the casing
 
 /obj/item/ammo_casing/New()
 	..()
@@ -78,9 +28,14 @@
 	icon_state = "[initial(icon_state)][BB ? "-live" : ""]"
 	desc = "[initial(desc)][BB ? "" : " This one is spent"]"
 
+/obj/item/ammo_casing/proc/newshot() //For energy weapons and shotgun shells.
+	if (!BB)
+		BB = new projectile_type(src)
+	return
+
 //Boxes of ammo
 /obj/item/ammo_box
-	name = "ammo box (.357)"
+	name = "ammo box (null_reference_exception)"
 	desc = "A box of ammo"
 	icon_state = "357"
 	icon = 'icons/obj/ammo.dmi'
@@ -97,6 +52,7 @@
 	var/max_ammo = 7
 	var/multiple_sprites = 0
 	var/caliber
+	var/multiload = 1
 
 /obj/item/ammo_box/New()
 	for(var/i = 1, i <= max_ammo, i++)
@@ -122,15 +78,16 @@
 			return 1
 	return 0
 
-/obj/item/ammo_box/attackby(var/obj/item/A as obj, mob/user as mob)
+/obj/item/ammo_box/attackby(var/obj/item/A as obj, mob/user as mob, var/silent = 0)
 	var/num_loaded = 0
 	if(istype(A, /obj/item/ammo_box))
 		var/obj/item/ammo_box/AM = A
 		for(var/obj/item/ammo_casing/AC in AM.stored_ammo)
-			if(give_round(AC))
+			var/did_load = give_round(AC)
+			if(did_load)
 				AM.stored_ammo -= AC
 				num_loaded++
-			else
+			if(!did_load || !multiload)
 				break
 	if(istype(A, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/AC = A
@@ -139,9 +96,12 @@
 			AC.loc = src
 			num_loaded++
 	if(num_loaded)
-		user << "<span class='notice'>You load [num_loaded] shell\s into \the [src]!</span>"
+		if (!silent)
+			user << "<span class='notice'>You load [num_loaded] shell\s into \the [src]!</span>"
 		A.update_icon()
 		update_icon()
+		return num_loaded
+	return 0
 
 /obj/item/ammo_box/update_icon()
 	switch(multiple_sprites)
@@ -149,7 +109,7 @@
 			icon_state = "[initial(icon_state)]-[stored_ammo.len]"
 		if(2)
 			icon_state = "[initial(icon_state)]-[stored_ammo.len ? "[max_ammo]" : "0"]"
-	desc = "There are [stored_ammo.len] shell\s left!"
+	desc = "[initial(desc)] There are [stored_ammo.len] shell\s left!"
 
 //Behavior for magazines
 /obj/item/ammo_box/magazine/proc/ammo_count()
