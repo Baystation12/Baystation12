@@ -1446,7 +1446,7 @@
 #include "code\ZAS\ZAS_Zones.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\tgstation2.dmm"
+#include "maps\tauceti.1.2.dmm"
 #include "tauceti\datums\uplinks_items.dm"
 #include "tauceti\datums\wires\syndicatebomb.dm"
 #include "tauceti\datums\wires\wires.dm"
@@ -1463,6 +1463,7 @@
 #include "tauceti\items\clothing\suits\suits.dm"
 #include "tauceti\items\clothing\uniforms\uniforms.dm"
 #include "tauceti\items\computers\arrival_shuttle.dm"
+#include "tauceti\items\copyhammer\copyhammer.dm"
 #include "tauceti\items\defibrillator\defibrillator.dm"
 #include "tauceti\items\devices\ai_detector.dm"
 #include "tauceti\items\devices\nuke_modkits.dm"
@@ -1493,6 +1494,5 @@
 #include "tauceti\modules\_anomaly\anomaly_pyro.dm"
 #include "tauceti\modules\_anomaly\anomaly_vortex.dm"
 #include "tauceti\modules\_areas\areas.dm"
-#include "tauceti\modules\_dungeons\plasmavores.dm"
 #include "tauceti\modules\_floor\floor.dm"
 // END_INCLUDE

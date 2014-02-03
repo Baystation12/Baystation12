@@ -138,6 +138,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 	icon_state = "cryosleeper_left"
 	density = 1
 	anchored = 1
+	var/storage = 1	//tc, criopods on centcomm
 
 	var/mob/occupant = null      // Person waiting to be despawned.
 	var/orient_right = null      // Flips the sprite.
@@ -208,7 +209,10 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 				if(!preserve)
 					del(W)
 				else
-					frozen_items += W
+					if(storage)
+						frozen_items += W
+					else
+						del(W)
 
 			//Update any existing objectives involving this mob.
 			for(var/datum/objective/O in all_objectives)
@@ -262,9 +266,10 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 			occupant.ckey = null
 
 			//Make an announcement and log the person entering storage.
-			frozen_crew += "[occupant.real_name]"
+			if(storage)
+				frozen_crew += "[occupant.real_name]"
 
-			announce.autosay("[occupant.real_name] has entered long-term storage.", "Cryogenic Oversight")
+				announce.autosay("[occupant.real_name] has entered long-term storage.", "Cryogenic Oversight")
 			visible_message("\blue The crypod hums and hisses as it moves [occupant.real_name] into storage.", 3)
 
 			// Delete the mob.
