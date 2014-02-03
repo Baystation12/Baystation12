@@ -11,9 +11,15 @@
 	throw_speed = 2
 	throw_range = 10
 	amount_per_transfer_from_this = 10
+	possible_transfer_amounts = list(5,10) //Set to null instead of list, if there is only one.
+	var/spray_size = 3
+	var/list/spray_sizes = list(1,3)
 	volume = 250
-	possible_transfer_amounts = null
 
+
+/obj/item/weapon/reagent_containers/spray/New()
+	..()
+	src.verbs -= /obj/item/weapon/reagent_containers/verb/set_APTFT
 
 /obj/item/weapon/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob)
 	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/rack) || istype(A, /obj/structure/closet) \
@@ -58,13 +64,13 @@
 /obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj)
 	var/obj/effect/decal/chempuff/D = new/obj/effect/decal/chempuff(get_turf(src))
 	D.create_reagents(amount_per_transfer_from_this)
-	reagents.trans_to(D, amount_per_transfer_from_this, 1/3)
+	reagents.trans_to(D, amount_per_transfer_from_this, 1/spray_size)
 	D.icon += mix_color_from_reagents(D.reagents.reagent_list)
 
 	var/turf/A_turf = get_turf(A)//BS12
 
 	spawn(0)
-		for(var/i=0, i<3, i++)
+		for(var/i=0, i<spray_size, i++)
 			step_towards(D,A)
 			D.reagents.reaction(get_turf(D))
 			for(var/atom/T in get_turf(D))
@@ -81,9 +87,11 @@
 	return
 
 /obj/item/weapon/reagent_containers/spray/attack_self(var/mob/user)
-
-	amount_per_transfer_from_this = (amount_per_transfer_from_this == 10 ? 5 : 10)
-	user << "<span class='notice'>You switched [amount_per_transfer_from_this == 10 ? "on" : "off"] the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>"
+	if(!possible_transfer_amounts)
+		return
+	amount_per_transfer_from_this = next_from(amount_per_transfer_from_this, possible_transfer_amounts)
+	spray_size = next_from(spray_size, spray_sizes)
+	user << "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>"
 
 
 /obj/item/weapon/reagent_containers/spray/examine()
@@ -122,8 +130,8 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "pepperspray"
 	item_state = "pepperspray"
+	possible_transfer_amounts = null
 	volume = 40
-	amount_per_transfer_from_this = 10
 
 
 /obj/item/weapon/reagent_containers/spray/pepper/New()
@@ -138,14 +146,12 @@
 	icon_state = "sunflower"
 	item_state = "sunflower"
 	amount_per_transfer_from_this = 1
+	possible_transfer_amounts = null
 	volume = 10
 
 /obj/item/weapon/reagent_containers/spray/waterflower/New()
 	..()
 	reagents.add_reagent("water", 10)
-
-/obj/item/weapon/reagent_containers/spray/waterflower/attack_self(var/mob/user) //Don't allow changing how much the flower sprays
-	return
 
 //chemsprayer
 /obj/item/weapon/reagent_containers/spray/chemsprayer
@@ -156,6 +162,7 @@
 	item_state = "chemsprayer"
 	throwforce = 3
 	w_class = 3.0
+	possible_transfer_amounts = null
 	volume = 600
 	origin_tech = "combat=3;materials=3;engineering=3"
 
