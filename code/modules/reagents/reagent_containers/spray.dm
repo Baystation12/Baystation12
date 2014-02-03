@@ -89,8 +89,8 @@
 /obj/item/weapon/reagent_containers/spray/attack_self(var/mob/user)
 	if(!possible_transfer_amounts)
 		return
-	amount_per_transfer_from_this = next_from(amount_per_transfer_from_this, possible_transfer_amounts)
-	spray_size = next_from(spray_size, spray_sizes)
+	amount_per_transfer_from_this = next_in_list(amount_per_transfer_from_this, possible_transfer_amounts)
+	spray_size = next_in_list(spray_size, spray_sizes)
 	user << "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>"
 
 
@@ -132,11 +132,27 @@
 	item_state = "pepperspray"
 	possible_transfer_amounts = null
 	volume = 40
+	var/safety = 1
 
 
 /obj/item/weapon/reagent_containers/spray/pepper/New()
 	..()
 	reagents.add_reagent("condensedcapsaicin", 40)
+
+/obj/item/weapon/reagent_containers/spray/pepper/examine()
+	..()
+	if(get_dist(usr,src) <= 1)
+		usr << "The safety is [safety ? "on" : "off"]."
+
+/obj/item/weapon/reagent_containers/spray/pepper/attack_self(var/mob/user)
+	safety = !safety
+	usr << "<span class = 'notice'>You switch the safety [safety ? "on" : "off"].</span>"
+
+/obj/item/weapon/reagent_containers/spray/pepper/Spray_at(atom/A as mob|obj)
+	if(safety)
+		usr << "<span class = 'warning'>The safety is on!</span>"
+		return
+	..()
 
 //water flower
 /obj/item/weapon/reagent_containers/spray/waterflower
