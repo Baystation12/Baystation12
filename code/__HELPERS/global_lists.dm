@@ -42,7 +42,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 /////Initial Building/////
 //////////////////////////
 
-/proc/make_datum_references_lists()
+/hook/startup/proc/makeDatumRefLists()
 	var/list/paths
 
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
@@ -94,8 +94,10 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		var/datum/species/S = new T
 		all_species[S.name] = S
 
-		if(S.flags & WHITELISTED)
+		if(S.flags & IS_WHITELISTED)
 			whitelisted_species += S.name
+
+	return 1
 
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()

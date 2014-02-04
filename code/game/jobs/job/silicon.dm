@@ -8,7 +8,7 @@
 	selection_color = "#ccffcc"
 	supervisors = "your laws"
 	req_admin_notify = 1
-	minimal_player_age = 30
+	minimal_player_age = 7
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -25,7 +25,8 @@
 	spawn_positions = 2
 	supervisors = "your laws and the AI"	//Nodrak
 	selection_color = "#ddffdd"
-	minimal_player_age = 21
+	minimal_player_age = 1
+	alt_titles = list("Android", "Robot")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0

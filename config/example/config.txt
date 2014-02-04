@@ -61,6 +61,9 @@ LOG_PDA
 ## log all Topic() calls (for use by coders in tracking down Topic issues)
 # LOG_HREFS
 
+## log world.log and runtime errors to a file
+# LOG_RUNTIME
+
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
@@ -120,6 +123,12 @@ VOTE_AUTOTRANSFER_INTERVAL 36000
 
 ## players' votes default to "No vote" (otherwise,  default to "No change")
 DEFAULT_NO_VOTE
+
+## Allow ghosts to see antagonist through AntagHUD
+ALLOW_ANTAG_HUD
+
+## If ghosts use antagHUD they are no longer allowed to join the round.
+ANTAG_HUD_RESTRICTED
 
 ## allow AI job
 ALLOW_AI
@@ -223,3 +232,9 @@ USEALIENWHITELIST
 ## Path to the python2 executable on the system.  Leave blank for default.
 ## Default is "python" on Windows, "/usr/bin/env python2" on UNIX.
 #PYTHON_PATH
+
+## Uncommen to allow ghosts to write in blood during Cult rounds.
+ALLOW_CULT_GHOSTWRITER
+
+## Sets the minimum number of cultists needed for ghosts to write in blood.
+REQ_CULT_GHOSTWRITER 6

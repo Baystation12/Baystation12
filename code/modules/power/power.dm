@@ -79,6 +79,9 @@
 
 // rebuild all power networks from scratch
 
+/hook/startup/proc/buildPowernets()
+	return makepowernets()
+
 /proc/makepowernets()
 	for(var/datum/powernet/PN in powernets)
 		del(PN)
@@ -100,6 +103,8 @@
 	for(var/obj/machinery/power/M in machines)
 		if(!M.powernet)	continue	// APCs have powernet=0 so they don't count as network nodes directly
 		M.powernet.nodes[M] = M
+
+	return 1
 
 
 // returns a list of all power-related objects (nodes, cable, junctions) in turf,

@@ -46,6 +46,10 @@
 	density = 0
 	del(src)
 
+/obj/structure/rack/proc/destroy()
+	new parts(loc)
+	density = 0
+	del(src)
 
 /obj/structure/table/update_icon()
 	spawn(2) //So it properly updates when deleting
@@ -423,6 +427,8 @@
 	set desc = "Flips a non-reinforced table"
 	set category = "Object"
 	set src in oview(1)
+	if(ismouse(usr))
+		return
 	if (!can_touch(usr))
 		return
 	if(!flip(get_cardinal_dir(usr,src)))
@@ -570,6 +576,7 @@
 	flags = FPRINT
 	anchored = 1.0
 	throwpass = 1	//You can throw objects over this, despite it's density.
+	var/parts = /obj/item/weapon/rack_parts
 
 /obj/structure/rack/ex_act(severity)
 	switch(severity)
@@ -632,33 +639,22 @@
 	if(HULK in user.mutations)
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		new /obj/item/weapon/rack_parts(loc)
-		density = 0
-		del(src)
-
+		destroy()
 
 /obj/structure/rack/attack_paw(mob/user)
 	if(HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		new /obj/item/weapon/rack_parts(loc)
-		density = 0
-		del(src)
-
+		destroy()
 
 /obj/structure/rack/attack_alien(mob/user)
 	visible_message("<span class='danger'>[user] slices [src] apart!</span>")
-	new /obj/item/weapon/rack_parts(loc)
-	density = 0
-	del(src)
-
+	destroy()
 
 /obj/structure/rack/attack_animal(mob/living/simple_animal/user)
 	if(user.wall_smash)
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		new /obj/item/weapon/rack_parts(loc)
-		density = 0
-		del(src)
+		destroy()
 
 /obj/structure/rack/attack_tk() // no telehulk sorry
 	return

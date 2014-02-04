@@ -180,7 +180,7 @@ This function restores the subjects blood to max.
 /mob/living/carbon/human/proc/restore_blood()
 	var/blood_volume = vessel.get_reagent_amount("blood")
 	vessel.add_reagent("blood",560.0-blood_volume)
-	
+
 
 /*
 This function restores all organs.
@@ -245,20 +245,11 @@ This function restores all organs.
 		if( (damage > (10*W.w_class)) && ( (sharp && !ismob(W.loc)) || prob(damage/W.w_class) ) )
 			organ.implants += W
 			visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+			src.verbs += /mob/proc/yank_out_object
 			W.add_blood(src)
 			if(ismob(W.loc))
 				var/mob/living/H = W.loc
 				H.drop_item()
 			W.loc = src
 
-	else if(istype(used_weapon,/obj/item/projectile)) //We don't want to use the actual projectile item, so we spawn some shrapnel.
-		if(prob(75) && damagetype == BRUTE)
-			var/obj/item/projectile/P = used_weapon
-			var/obj/item/weapon/shard/shrapnel/S = new()
-			S.name = "[P.name] shrapnel"
-			S.desc = "[S.desc] It looks like it was fired from [P.shot_from]."
-			S.loc = src
-			organ.implants += S
-			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
-			S.add_blood(src)
 	return 1

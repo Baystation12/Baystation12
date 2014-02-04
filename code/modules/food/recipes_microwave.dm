@@ -33,6 +33,15 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/boiledegg
 
+/datum/recipe/dionaroast
+	reagents = list("radium" = 5)
+	items = list(
+		/obj/item/weapon/holder/diona,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/apple
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/dionaroast
+
+
 /*
 /datum/recipe/bananaphone
 	reagents = list("psilocybin" = 5) //Trippin' balls, man.
@@ -476,6 +485,15 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/grown/corn
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/popcorn
+
+
+/datum/recipe/cookie
+	reagents = list("milk" = 5, "flour" = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/egg,
+		/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/cookie
 
 /datum/recipe/fortunecookie
 	reagents = list("flour" = 5)
@@ -1143,3 +1161,18 @@ I said no!
 /datum/recipe/cracker
 	reagents = list("flour" = 5, "sodiumchloride" = 1)
 	result = /obj/item/weapon/reagent_containers/food/snacks/cracker
+
+/datum/recipe/stuffing
+	reagents = list("water" = 5, "sodiumchloride" = 1, "blackpepper" = 1)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/sliceable/bread,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/stuffing
+
+/datum/recipe/tofurkey
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/tofu,
+		/obj/item/weapon/reagent_containers/food/snacks/tofu,
+		/obj/item/weapon/reagent_containers/food/snacks/stuffing,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/tofurkey

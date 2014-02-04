@@ -52,6 +52,8 @@
 	var/const/WIRE_SHOCK = 3
 	var/const/WIRE_SHOOTINV = 4
 
+	var/check_accounts = 0		// 1 = requires PIN and checks accounts.  0 = You slide an ID, it vends, SPACE COMMUNISM!
+
 /obj/machinery/vending/New()
 	..()
 	spawn(4)
@@ -148,6 +150,14 @@
 	else if(istype(W, /obj/item/weapon/card) && currently_vending)
 		var/obj/item/weapon/card/I = W
 		scan_card(I)
+
+	else if(src.panel_open)
+
+		for(var/datum/data/vending_product/R in product_records)
+			if(istype(W, R.product_path))
+				stock(R, user)
+				del(W)
+
 	else
 		..()
 
@@ -156,46 +166,51 @@
 	if (istype(I, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/C = I
 		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
-		if(vendor_account)
-			var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-			var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
-			if(D)
-				var/transaction_amount = currently_vending.price
-				if(transaction_amount <= D.money)
+		if(check_accounts)
+			if(vendor_account)
+				var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
+				var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
+				if(D)
+					var/transaction_amount = currently_vending.price
+					if(transaction_amount <= D.money)
 
-					//transfer the money
-					D.money -= transaction_amount
-					vendor_account.money += transaction_amount
+						//transfer the money
+						D.money -= transaction_amount
+						vendor_account.money += transaction_amount
 
-					//create entries in the two account transaction logs
-					var/datum/transaction/T = new()
-					T.target_name = "[vendor_account.owner_name] (via [src.name])"
-					T.purpose = "Purchase of [currently_vending.product_name]"
-					if(transaction_amount > 0)
-						T.amount = "([transaction_amount])"
-					else
+						//create entries in the two account transaction logs
+						var/datum/transaction/T = new()
+						T.target_name = "[vendor_account.owner_name] (via [src.name])"
+						T.purpose = "Purchase of [currently_vending.product_name]"
+						if(transaction_amount > 0)
+							T.amount = "([transaction_amount])"
+						else
+							T.amount = "[transaction_amount]"
+						T.source_terminal = src.name
+						T.date = current_date_string
+						T.time = worldtime2text()
+						D.transaction_log.Add(T)
+						//
+						T = new()
+						T.target_name = D.owner_name
+						T.purpose = "Purchase of [currently_vending.product_name]"
 						T.amount = "[transaction_amount]"
-					T.source_terminal = src.name
-					T.date = current_date_string
-					T.time = worldtime2text()
-					D.transaction_log.Add(T)
-					//
-					T = new()
-					T.target_name = D.owner_name
-					T.purpose = "Purchase of [currently_vending.product_name]"
-					T.amount = "[transaction_amount]"
-					T.source_terminal = src.name
-					T.date = current_date_string
-					T.time = worldtime2text()
-					vendor_account.transaction_log.Add(T)
+						T.source_terminal = src.name
+						T.date = current_date_string
+						T.time = worldtime2text()
+						vendor_account.transaction_log.Add(T)
 
-					// Vend the item
-					src.vend(src.currently_vending, usr)
-					currently_vending = null
+						// Vend the item
+						src.vend(src.currently_vending, usr)
+						currently_vending = null
+				else
+					usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
 			else
-				usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
+				usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 		else
-			usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
+			//Just Vend it.
+			src.vend(src.currently_vending, usr)
+			currently_vending = null
 	else
 		usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
 
@@ -407,6 +422,13 @@
 
 	src.updateUsrDialog()
 
+/obj/machinery/vending/proc/stock(var/datum/data/vending_product/R, var/mob/user)
+	if(src.panel_open)
+		user << "\blue You stock the [src] with \a [R.product_name]"
+		R.amount++
+
+	src.updateUsrDialog()
+
 /obj/machinery/vending/process()
 	if(stat & (BROKEN|NOPOWER))
 		return
@@ -589,11 +611,11 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/vermouth = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/rum = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/wine = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua = 5,/obj/item/weapon/reagent_containers/food/drinks/beer = 6,
-					/obj/item/weapon/reagent_containers/food/drinks/ale = 6,/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua = 5,/obj/item/weapon/reagent_containers/food/drinks/cans/beer = 6,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/ale = 6,/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 4,/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 4,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 4,/obj/item/weapon/reagent_containers/food/drinks/tonic = 8,
-					/obj/item/weapon/reagent_containers/food/drinks/cola = 8, /obj/item/weapon/reagent_containers/food/drinks/sodawater = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 4,/obj/item/weapon/reagent_containers/food/drinks/cans/tonic = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 8, /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,/obj/item/weapon/reagent_containers/food/drinks/ice = 9,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao = 2,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5)
@@ -645,15 +667,15 @@
 	icon_state = "Cola_Machine"
 	product_slogans = "Robust Softdrinks: More robust than a toolbox to the head!"
 	product_ads = "Refreshing!;Hope you're thirsty!;Over 1 million drinks sold!;Thirsty? Why not cola?;Please, have a drink!;Drink up!;The best drinks in space."
-	products = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/starkist = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/space_up = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/iced_tea = 10, /obj/item/weapon/reagent_containers/food/drinks/grape_juice = 10)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/thirteenloko = 5)
-	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 1,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/starkist = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/space_up = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/grape_juice = 1)
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 10, /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 10)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko = 5)
+	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1)
 
 //This one's from bay12
 /obj/machinery/vending/cart
@@ -759,8 +781,8 @@
 					/obj/item/seeds/poppyseed = 3,/obj/item/seeds/ambrosiavulgarisseed = 3,/obj/item/seeds/whitebeetseed = 3,/obj/item/seeds/watermelonseed = 3,/obj/item/seeds/limeseed = 3,
 					/obj/item/seeds/lemonseed = 3,/obj/item/seeds/orangeseed = 3,/obj/item/seeds/grassseed = 3,/obj/item/seeds/cocoapodseed = 3,/obj/item/seeds/plumpmycelium = 2,
 					/obj/item/seeds/cabbageseed = 3,/obj/item/seeds/grapeseed = 3,/obj/item/seeds/pumpkinseed = 3,/obj/item/seeds/cherryseed = 3,/obj/item/seeds/plastiseed = 3,/obj/item/seeds/riceseed = 3)
-	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,
-					  /obj/item/seeds/nettleseed = 2,/obj/item/seeds/reishimycelium = 2)
+	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,/obj/item/seeds/mtearseed = 2,
+					  /obj/item/seeds/nettleseed = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/shandseed = 2,)
 	premium = list(/obj/item/toy/waterflower = 1)
 
 

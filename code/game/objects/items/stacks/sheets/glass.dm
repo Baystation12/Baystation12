@@ -2,6 +2,8 @@
  * Contains:
  *		Glass sheets
  *		Reinforced glass sheets
+ *		Plasma Glass Sheets
+ *		Reinforced Plasma Glass Sheets (AKA Holy fuck strong windows)
  *		Glass shards - TODO: Move this into code/game/object/item/weapons
  */
 
@@ -15,6 +17,7 @@
 	icon_state = "sheet-glass"
 	g_amt = 3750
 	origin_tech = "materials=1"
+	var/created_window = /obj/structure/window/basic
 
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
@@ -81,9 +84,8 @@
 				if(!found)
 					dir_to_set = direction
 					break
-
 			var/obj/structure/window/W
-			W = new /obj/structure/window/basic( user.loc, 0 )
+			W = new created_window( user.loc, 0 )
 			W.dir = dir_to_set
 			W.ini_dir = W.dir
 			W.anchored = 0
@@ -98,7 +100,7 @@
 				user << "\red There is a window in the way."
 				return 1
 			var/obj/structure/window/W
-			W = new /obj/structure/window/basic( user.loc, 0 )
+			W = new created_window( user.loc, 0 )
 			W.dir = SOUTHWEST
 			W.ini_dir = SOUTHWEST
 			W.anchored = 0
@@ -283,7 +285,7 @@
 		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			if(!H.shoes && !(H.wear_suit.body_parts_covered & FEET))
+			if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
 				var/datum/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
 				if(affecting.status & ORGAN_ROBOT)
 					return
@@ -293,3 +295,54 @@
 					H.UpdateDamageIcon()
 				H.updatehealth()
 	..()
+
+
+
+
+/*
+ * Plasma Glass sheets
+ */
+/obj/item/stack/sheet/glass/plasmaglass
+	name = "plasma glass"
+	desc = "A very strong and very resistant sheet of a plasma-glass alloy."
+	singular_name = "plasma glass sheet"
+	icon_state = "sheet-plasmaglass"
+	g_amt = 7500
+	origin_tech = "materials=3;plasma=2"
+	created_window = /obj/structure/window/plasmabasic
+
+/obj/item/stack/sheet/glass/plasmaglass/attack_self(mob/user as mob)
+	construct_window(user)
+
+/obj/item/stack/sheet/glass/plasmaglass/attackby(obj/item/W, mob/user)
+	..()
+	if( istype(W, /obj/item/stack/rods) )
+		var/obj/item/stack/rods/V  = W
+		var/obj/item/stack/sheet/glass/plasmarglass/RG = new (user.loc)
+		RG.add_fingerprint(user)
+		RG.add_to_stacks(user)
+		V.use(1)
+		var/obj/item/stack/sheet/glass/G = src
+		src = null
+		var/replace = (user.get_inactive_hand()==G)
+		G.use(1)
+		if (!G && !RG && replace)
+			user.put_in_hands(RG)
+	else
+		return ..()
+
+/*
+ * Reinforced plasma glass sheets
+ */
+/obj/item/stack/sheet/glass/plasmarglass
+	name = "reinforced plasma glass"
+	desc = "Plasma glass which seems to have rods or something stuck in them."
+	singular_name = "reinforced plasma glass sheet"
+	icon_state = "sheet-plasmarglass"
+	g_amt = 7500
+	m_amt = 1875
+	origin_tech = "materials=4;plasma=2"
+	created_window = /obj/structure/window/plasmareinforced
+
+/obj/item/stack/sheet/glass/plasmarglass/attack_self(mob/user as mob)
+	construct_window(user)

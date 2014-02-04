@@ -156,9 +156,17 @@
 
 	return 1
 
-/mob/living/carbon/human/proc/RevConvert(mob/M as mob in oview(src))
+/mob/living/carbon/human/proc/RevConvert()
 	set name = "Rev-Convert"
 	set category = "IC"
+	var/list/Possible = list()
+	for (var/mob/living/carbon/human/P in oview(src))
+		if(!stat && P.client && P.mind && !P.mind.special_role)
+			Possible += P
+	if(!Possible.len)
+		src << "\red There doesn't appear to be anyone available for you to convert here."
+		return
+	var/mob/living/carbon/human/M = input("Select a person to convert", "Viva la revolution!", null) as mob in Possible
 	if(((src.mind in ticker.mode:head_revolutionaries) || (src.mind in ticker.mode:revolutionaries)))
 		if((M.mind in ticker.mode:head_revolutionaries) || (M.mind in ticker.mode:revolutionaries))
 			src << "\red <b>[M] is already be a revolutionary!</b>"

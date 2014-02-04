@@ -74,6 +74,8 @@ datum/mind
 			current.mind = null
 		if(new_character.mind)		//remove any mind currently in our new body's mind variable
 			new_character.mind.current = null
+			
+		nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 
 		current = new_character		//link ourself to our new body
 		new_character.mind = src	//and link our new body to ourself
@@ -550,6 +552,7 @@ datum/mind
 						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a head revolutionary!</B></FONT>"
 						ticker.mode.update_rev_icons_removed(src)
 						special_role = null
+						current.verbs -= /mob/living/carbon/human/proc/RevConvert
 					log_admin("[key_name_admin(usr)] has de-rev'ed [current].")
 
 				if("rev")
@@ -570,7 +573,7 @@ datum/mind
 					if(src in ticker.mode.revolutionaries)
 						ticker.mode.revolutionaries -= src
 						ticker.mode.update_rev_icons_removed(src)
-						current << "\red <FONT size = 3><B>You have proved your devotion to revoltion! Yea are a head revolutionary now!</B></FONT>"
+						current << "\red <FONT size = 3><B>You have proved your devotion to revoltion! You are a head revolutionary now!</B></FONT>"
 					else if(!(src in ticker.mode.head_revolutionaries))
 						current << "\blue You are a member of the revolutionaries' leadership now!"
 					else
@@ -586,6 +589,7 @@ datum/mind
 								rev_obj.explanation_text = "Assassinate [O.target.name], the [O.target.assigned_role]."
 								objectives += rev_obj
 							ticker.mode.greet_revolutionary(src,0)
+					current.verbs += /mob/living/carbon/human/proc/RevConvert
 					ticker.mode.head_revolutionaries += src
 					ticker.mode.update_rev_icons_added(src)
 					special_role = "Head Revolutionary"
@@ -726,7 +730,7 @@ datum/mind
 					else
 						current.dna = changeling.absorbed_dna[1]
 						current.real_name = current.dna.real_name
-						updateappearance(current, current.dna.uni_identity)
+						current.UpdateAppearance()
 						domutcheck(current, null)
 
 		else if (href_list["nuclear"])
