@@ -138,7 +138,11 @@
 	return
 	// no change - sleeper works without power (you just can't inject more)
 
-
+/obj/machinery/sleeper/attack_animal(var/mob/living/simple_animal/M)//Stop putting hostile mobs in things guise
+	if(M.environment_smash)
+		visible_message("<span class='danger'>[M.name] smashes [src] apart!</span>")
+		del(src)
+	return
 
 
 
@@ -421,3 +425,7 @@
 			src.add_fingerprint(usr)
 			return
 		return
+
+/obj/machinery/sleeper/Del()
+	go_out()
+	..()

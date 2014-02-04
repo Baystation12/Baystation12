@@ -10,7 +10,7 @@
 	icon_state = "dispenser"
 	use_power = 0
 	idle_power_usage = 40
-	var/ui_name = "Chem Dispenser 5000"
+	var/ui_title = "Chem Dispenser 5000"
 	var/energy = 100
 	var/max_energy = 100
 	var/amount = 30
@@ -104,7 +104,7 @@
   *
   * @return nothing
   */
-/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main")
+/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)
 	if(broken_requirements.len)
 		user << "<span class='warning'>[src] is broken. [broken_requirements[broken_requirements[1]]]</span>"
 		return
@@ -139,18 +139,17 @@
 		if(temp)
 			chemicals.Add(list(list("title" = temp.name, "id" = temp.id, "commands" = list("dispense" = temp.id)))) // list in a list because Byond merges the first list...
 	data["chemicals"] = chemicals
-
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
+	
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
 	if (!ui)
-		// the ui does not exist, so we'll create a new one
-		ui = new(user, src, ui_key, "chem_dispenser.tmpl", ui_name, 370, 605)
-		// When the UI is first opened this is the data it will use
-		ui.set_initial_data(data)
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "chem_dispenser.tmpl", ui_title, 370, 605)
+		// when the ui is first opened this is the data it will use
+		ui.set_initial_data(data)		
+		// open the new ui window
 		ui.open()
-	else
-		// The UI is already open so push the new data to it
-		ui.push_data(data)
-		return
 
 /obj/machinery/chem_dispenser/Topic(href, href_list)
 	if(stat & (NOPOWER|BROKEN))
@@ -226,7 +225,7 @@
 	icon_state = "soda_dispenser"
 	name = "soda fountain"
 	desc = "A drink fabricating machine, capable of producing many sugary drinks with just one touch."
-	ui_name = "Soda Dispens-o-matic"
+	ui_title = "Soda Dispens-o-matic"
 	energy = 100
 	accept_glass = 1
 	max_energy = 100
@@ -249,7 +248,7 @@
 /obj/machinery/chem_dispenser/beer
 	icon_state = "booze_dispenser"
 	name = "booze dispenser"
-	ui_name = "Booze Portal 9001"
+	ui_title = "Booze Portal 9001"
 	energy = 100
 	accept_glass = 1
 	max_energy = 100

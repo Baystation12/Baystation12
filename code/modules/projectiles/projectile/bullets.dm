@@ -18,6 +18,9 @@
 	weaken = 5
 	embed = 0
 
+/obj/item/projectile/bullet/pellet
+	name = "pellet"
+	damage = 15
 
 /obj/item/projectile/bullet/midbullet
 	damage = 20

@@ -115,7 +115,7 @@
 					iconholder = null
 					reqpower = 700
 
-				if(/obj/item/weapon/gun/energy/staff)
+				if(/obj/item/weapon/gun/magic/staff/)
 					projectile = /obj/item/projectile/change
 					eprojectile = projectile
 					iconholder = 1

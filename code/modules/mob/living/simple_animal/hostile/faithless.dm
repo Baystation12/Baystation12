@@ -12,6 +12,7 @@
 	speed = -1
 	maxHealth = 80
 	health = 80
+	environment_smash = 1
 
 	harm_intent_damage = 10
 	melee_damage_lower = 15

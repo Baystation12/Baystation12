@@ -4,38 +4,27 @@
 	icon_state = "pulse"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	force = 10
-	fire_sound = 'sound/weapons/pulse.ogg'
-	charge_cost = 200
-	projectile_type = "/obj/item/projectile/beam/pulse"
+	ammo_type = list(/obj/item/ammo_casing/energy/laser/pulse, /obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/laser)
 	cell_type = "/obj/item/weapon/cell/super"
 	var/mode = 2
 	fire_delay = 25
 
-	attack_self(mob/living/user as mob)
-		switch(mode)
-			if(2)
-				mode = 0
-				charge_cost = 100
-				fire_sound = 'sound/weapons/Taser.ogg'
-				user << "\red [src.name] is now set to stun."
-				projectile_type = "/obj/item/projectile/energy/electrode"
-			if(0)
-				mode = 1
-				charge_cost = 100
-				fire_sound = 'sound/weapons/Laser.ogg'
-				user << "\red [src.name] is now set to kill."
-				projectile_type = "/obj/item/projectile/beam"
-			if(1)
-				mode = 2
-				charge_cost = 200
-				fire_sound = 'sound/weapons/pulse.ogg'
-				user << "\red [src.name] is now set to DESTROY."
-				projectile_type = "/obj/item/projectile/beam/pulse"
-		return
+/obj/item/weapon/gun/energy/pulse_rifle/attack_self(mob/living/user as mob)
+	select_fire(user)
 
-	isHandgun()
-		return 0
+/obj/item/weapon/gun/energy/pulse_rifle/isHandgun()
+	return 0
 
+/obj/item/weapon/gun/energy/pulse_rifle/cyborg/newshot()
+	if(isrobot(src.loc))
+		var/mob/living/silicon/robot/R = src.loc
+		if(R && R.cell)
+			var/obj/item/ammo_casing/energy/shot = ammo_type[select] //Necessary to find cost of shot
+			if(R.cell.use(shot.e_cost))
+				chambered = shot
+				chambered.newshot()
+	return
+/*
 /obj/item/weapon/gun/energy/pulse_rifle/cyborg/process_chambered()
 	if(in_chamber)
 		return 1
@@ -45,18 +34,16 @@
 			R.cell.use(charge_cost)
 			in_chamber = new/obj/item/projectile/beam(src)
 			return 1
-	return 0
-
+	return 0 */
 
 /obj/item/weapon/gun/energy/pulse_rifle/destroyer
 	name = "pulse destroyer"
 	desc = "A heavy-duty, pulse-based energy weapon."
 	cell_type = "/obj/item/weapon/cell/infinite"
+	ammo_type = list(/obj/item/ammo_casing/energy/laser/pulse)
 
 	attack_self(mob/living/user as mob)
 		user << "\red [src.name] has three settings, and they are all DESTROY."
-
-
 
 /obj/item/weapon/gun/energy/pulse_rifle/M1911
 	name = "m1911-P"

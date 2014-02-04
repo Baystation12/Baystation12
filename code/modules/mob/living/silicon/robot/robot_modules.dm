@@ -171,7 +171,7 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/beer(src)
+		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
 		src.modules += new /obj/item/weapon/pen/robopen(src)
 
@@ -187,7 +187,7 @@
 
 		src.modules += new /obj/item/weapon/tray/robotray(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/shaker(src)
-		src.emag = new /obj/item/weapon/reagent_containers/food/drinks/beer(src)
+		src.emag = new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 
 		var/datum/reagents/R = new/datum/reagents(50)
 		src.emag.reagents = R
@@ -240,15 +240,32 @@
 	name = "science robot module"
 
 	New()
+		..()
 		src.modules += new /obj/item/device/analyzer(src)
+		src.modules += new /obj/item/device/assembly/signaler(src)
+		src.modules += new /obj/item/device/ano_scanner(src)
+
+	//To fuck anomalies up
+
 		src.modules += new /obj/item/device/reagent_scanner/adv(src)
-		src.modules += new /obj/item/weapon/extinguisher/mini(src)
+		src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
+		src.modules += new /obj/item/weapon/reagent_containers/glass/beaker/large(src) //To fuck chemistry up
+
 		src.modules += new /obj/item/device/depth_scanner(src)
+		src.modules += new /obj/item/weapon/pickaxe/cyb(src)
+		src.modules += new /obj/item/device/measuring_tape(src) //To unfuck xenoarcheology up
+
+		src.modules += new /obj/item/weapon/circular_saw(src)
+		src.modules += new /obj/item/weapon/scalpel(src)
+		src.modules += new /obj/item/weapon/extinguisher/mini(src) //To unfuck xenobiology up
+
 		src.modules += new /obj/item/weapon/crowbar/red
 		src.modules += new /obj/item/weapon/wrench(src)
 		src.modules += new /obj/item/weapon/screwdriver(src)
 		src.modules += new /obj/item/weapon/wirecutters(src)
-		src.modules += new /obj/item/device/flashlight/lantern(src)
-		src.modules += new /obj/item/device/assembly/signaler(src)
-		src.emag = new /obj/item/device/lustmodule(src)
+		src.modules += new /obj/item/weapon/weldingtool/largetank(src) //To fuck and unfuck (but mostly fuck) shit up
+
+		src.emag = new /obj/item/device/lustmodule(src) //To fuck people's shit up
+
+		src.emag.name = "Slime bloodlust pulse emitter"
 		return

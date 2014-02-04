@@ -34,7 +34,6 @@ var/global/list/autolathe_recipes = list( \
 		new /obj/item/weapon/reagent_containers/glass/beaker/large(), \
 		new /obj/item/weapon/reagent_containers/glass/beaker/vial(), \
 		new /obj/item/weapon/reagent_containers/syringe(), \
-		new /obj/item/ammo_casing/shotgun/blank(), \
 		new /obj/item/ammo_casing/shotgun/beanbag(), \
 		new /obj/item/ammo_box/magazine/c45r(), \
 		new /obj/item/device/taperecorder(), \
@@ -61,7 +60,7 @@ var/global/list/autolathe_recipes_hidden = list( \
 		new /obj/item/ammo_box/magazine/c45m(), \
 		new /obj/item/ammo_casing/shotgun(), \
 		new /obj/item/ammo_casing/shotgun/dart(), \
-		/* new /obj/item/weapon/shield/riot(), */ \
+		new /obj/item/ammo_casing/shotgun/buckshot(),  \
 	)
 
 /obj/machinery/autolathe

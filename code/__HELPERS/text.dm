@@ -35,7 +35,7 @@
 	return t
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ÿ"="____255_"))
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"=" ","\t"="","ÿ"="____255_"))
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
@@ -216,32 +216,10 @@ proc/checkhtml(var/t)
  * Text modification
  */
 /proc/replacetext(text, find, replacement)
-	var/find_len = length(find)
-	if(find_len < 1)	return text
-	. = ""
-	var/last_found = 1
-	while(1)
-		var/found = findtext(text, find, last_found, 0)
-		. += copytext(text, last_found, found)
-		if(found)
-			. += replacement
-			last_found = found + find_len
-			continue
-		return .
+	return list2text(text2list(text, find), replacement)
 
 /proc/replacetextEx(text, find, replacement)
-	var/find_len = length(find)
-	if(find_len < 1)	return text
-	. = ""
-	var/last_found = 1
-	while(1)
-		var/found = findtextEx(text, find, last_found, 0)
-		. += copytext(text, last_found, found)
-		if(found)
-			. += replacement
-			last_found = found + find_len
-			continue
-		return .
+	return list2text(text2listEx(text, find), replacement)
 
 //Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
@@ -307,10 +285,6 @@ proc/checkhtml(var/t)
 	if(size <= length)
 		return message
 	return copytext(message, 1, length + 1)
-
-/*
- * Misc
- */
 
 /proc/stringsplit(txt, character)
 	var/cur_text = txt

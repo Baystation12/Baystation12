@@ -104,7 +104,7 @@
 				u_equip(c_hand)
 
 				if(broken)
-					emote("me", 1, "screams in pain and drops what they were holding in their [E.display_name?"[E.display_name]":"[E]"]!")
+					emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : "screams in pain and"] drops what they were holding in their [E.display_name?"[E.display_name]":"[E]"]!")
 				if(malfunction)
 					emote("me", 1, "drops what they were holding, their [E.display_name?"[E.display_name]":"[E]"] malfunctioning!")
 					var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -120,7 +120,8 @@
 
 	// standing is poor
 	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(5))
-		emote("scream")
+		if(species && species.flags & NO_PAIN)
+			emote("scream")
 		emote("collapse")
 		paralysis = 10
 

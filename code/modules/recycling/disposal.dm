@@ -1325,7 +1325,7 @@
 
 	src.streak(dirs)
 
-/obj/effect/decal/cleanable/robot_debris/gib/pipe_eject(var/direction)
+/obj/effect/decal/cleanable/blood/gibs/robot/pipe_eject(var/direction)
 	var/list/dirs
 	if(direction)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))
@@ -1333,3 +1333,15 @@
 		dirs = alldirs.Copy()
 
 	src.streak(dirs)
+
+// hostile mob escape from disposals
+/obj/machinery/disposal/attack_animal(var/mob/living/simple_animal/M)
+	if(M.environment_smash)
+		visible_message("<span class='danger'>[M.name] smashes [src] apart!</span>")
+		del(src)
+	return
+
+/obj/machinery/disposal/Del()
+	for(var/atom/movable/AM in contents)
+		AM.loc = src.loc
+	..()

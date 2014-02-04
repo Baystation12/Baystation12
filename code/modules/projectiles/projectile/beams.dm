@@ -89,6 +89,10 @@ var/list/beam_master = list()
 	flag = "laser"
 	eyeblur = 2
 
+/obj/item/projectile/beam/scatter
+	name = "laser pellet"
+	icon_state = "scatterlaser"
+	damage = 5
 
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
@@ -161,3 +165,11 @@ var/list/beam_master = list()
 			if((istype(M.wear_suit, /obj/item/clothing/suit/bluetag))||(istype(M.wear_suit, /obj/item/clothing/suit/redtag)))
 				M.Weaken(5)
 		return 1
+
+/obj/item/projectile/beam/sniper
+	name = "sniper beam"
+	icon_state = "xray"
+	damage = 60
+	stun = 5
+	weaken = 5
+	stutter = 5

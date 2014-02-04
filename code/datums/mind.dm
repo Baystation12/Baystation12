@@ -74,6 +74,8 @@ datum/mind
 			current.mind = null
 		if(new_character.mind)		//remove any mind currently in our new body's mind variable
 			new_character.mind.current = null
+			
+		nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 
 		current = new_character		//link ourself to our new body
 		new_character.mind = src	//and link our new body to ourself

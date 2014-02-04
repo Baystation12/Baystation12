@@ -165,3 +165,18 @@
 		user << "You have spent device's capabilities." //To limit number of uses.
 		return 0
 	return 1
+
+/obj/item/weapon/pickaxe/cyb
+	name = "cyborg pickaxe"
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "pick_hand"
+	digspeed = 30
+	desc = "A smaller, more precise version of the pickaxe (30 centimetre excavation depth)."
+	excavation_amount = 15
+	drill_sound = 'sound/items/Crowbar.ogg'
+	drill_verb = "clearing"
+	w_class = 3
+/obj/item/weapon/pickaxe/cyb/attack_self(mob/user)
+	var/ampr = copytext(reject_bad_text(input(user,"Excavation depth?","Set excavation depth","")),1,MAX_NAME_LEN)
+	excavation_amount = 0 + text2num(ampr)/2
+	desc = "A smaller, more precise version of the pickaxe ([ampr] centimetre excavation depth)."
