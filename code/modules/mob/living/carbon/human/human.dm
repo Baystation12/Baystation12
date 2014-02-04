@@ -1022,9 +1022,11 @@
 		O.status &= ~ORGAN_BROKEN
 		O.status &= ~ORGAN_BLEEDING
 		O.status &= ~ORGAN_SPLINTED
+		O.status &= ~ORGAN_CUT_AWAY
 		O.status &= ~ORGAN_ATTACHABLE
 		if (!O.amputated)
 			O.status &= ~ORGAN_DESTROYED
+			O.destspawn = 0
 		O.wounds.Cut()
 		O.heal_damage(1000,1000,1,1)
 
@@ -1114,7 +1116,7 @@
 		del(feet_blood_DNA)
 		return 1
 
-/mob/living/carbon/human/proc/get_visible_implants(var/class = 0)
+/mob/living/carbon/human/get_visible_implants(var/class = 0)
 
 	var/list/visible_implants = list()
 	for(var/datum/organ/external/organ in src.organs)

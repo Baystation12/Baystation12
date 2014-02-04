@@ -279,6 +279,7 @@
 					icon_state = "[src.ckey]-Standard"
 
 /mob/living/silicon/robot/verb/Namepick()
+	set category = "Robot Commands"
 	if(custom_name)
 		return 0
 

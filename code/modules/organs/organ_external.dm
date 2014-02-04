@@ -603,9 +603,11 @@ This function completely restores a damaged organ to perfect condition.
 	src.status &= ~ORGAN_BROKEN
 	src.status &= ~ORGAN_BLEEDING
 	src.status &= ~ORGAN_SPLINTED
+	src.status &= ~ORGAN_CUT_AWAY
 	src.status &= ~ORGAN_ATTACHABLE
 	src.status &= ~ORGAN_DESTROYED
 	src.status |= ORGAN_ROBOT
+	src.destspawn = 0
 	for (var/datum/organ/external/T in children)
 		if(T)
 			T.robotize()
