@@ -61,9 +61,10 @@ h1.alert, h2.alert		{color: #000000;}
 .modooc					{color: #184880;	font-weight: bold;}
 .adminmod				{color: #402A14;	font-weight: bold;}
 .tajaran				{color: #803B56;}
-.skrell					{color: #00CED1;}
 .soghun					{color: #228B22;}
 .vox					{color: #AA00AA;}
+.slime					{font-family: \"001 Interstellar Log\", Verdana, sans-serif;}
+.skrell					{font-family: \"Plastic Bag\", Verdana, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 
 .interface				{color: #330033;}
