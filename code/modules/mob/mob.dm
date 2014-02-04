@@ -143,7 +143,7 @@
 // Convinience proc.  Collects crap that fails to equip either onto the mob's back, or drops it.
 // Used in job equipping so shit doesn't pile up at the start loc.
 /mob/living/carbon/human/proc/equip_or_collect(var/obj/item/W, var/slot)
-	if(!equip_to_slot_or_drop(W, slot))
+	if(!equip_to_slot_or_del(W, slot))
 		// Do I have a backpack?
 		var/obj/item/weapon/storage/B = back
 
