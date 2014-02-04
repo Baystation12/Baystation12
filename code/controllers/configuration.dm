@@ -69,6 +69,8 @@
 	var/disable_player_mice = 0
 	var/uneducated_mice = 0 //Set to 1 to prevent newly-spawned mice from understanding human speech
 
+	var/rus_language = 0
+
 	var/usealienwhitelist = 0
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
@@ -467,6 +469,9 @@
 
 				if("req_cult_ghostwriter")
 					config.cult_ghostwriter_req_cultists = value
+
+				if("rus_language")
+					config.rus_language = 1
 
 				else
 					diary << "Unknown setting in configuration: '[name]'"
