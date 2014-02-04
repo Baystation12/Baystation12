@@ -5,9 +5,9 @@
 /datum/game_mode/nuclear
 	name = "nuclear emergency"
 	config_tag = "nuclear"
-	required_players = 15
+	required_players = 1
 	required_players_secret = 25 // 25 players - 5 players to be the nuke ops = 20 players remaining
-	required_enemies = 5
+	required_enemies = 1
 	recommended_enemies = 5
 
 	uplink_welcome = "Corporate Backed Uplink Console:"
@@ -118,6 +118,12 @@
 
 	var/list/turf/synd_spawn = list()
 
+	for(var/obj/effect/landmark/A in landmarks_list) //Add commander spawn places first, really should only be one though.
+		if(A.name == "Syndicate-Commander")
+			synd_spawn += get_turf(A)
+			del(A)
+			continue
+
 	for(var/obj/effect/landmark/A in landmarks_list)
 		if(A.name == "Syndicate-Spawn")
 			synd_spawn += get_turf(A)
@@ -141,22 +147,29 @@
 			spawnpos = 1
 		synd_mind.current.loc = synd_spawn[spawnpos]
 
-		synd_mind.current.real_name = "[syndicate_name()] Operative" // placeholder while we get their actual name
+		synd_mind.current.real_name = "Gorlex Maradeurs Operative" // placeholder while we get their actual name
 		spawn(0)
 			NukeNameAssign(synd_mind)
 
 		forge_syndicate_objectives(synd_mind)
-		greet_syndicate(synd_mind)
-		equip_syndicate(synd_mind.current)
 
 		if(!leader_selected)
 			if (max_age > 0)
 				if (max_age <= synd_mind.current.client.player_age)
 					prepare_syndicate_leader(synd_mind, nuke_code)
 					leader_selected = 1
+					greet_syndicate(synd_mind, 1, 1)
+					equip_syndicate(synd_mind.current, 1)
 			else
 				prepare_syndicate_leader(synd_mind, nuke_code)
 				leader_selected = 1
+				greet_syndicate(synd_mind, 1, 1)
+				equip_syndicate(synd_mind.current, 1)
+
+
+		else
+			greet_syndicate(synd_mind)
+			equip_syndicate(synd_mind.current)
 
 		spawnpos++
 		update_synd_icons_added(synd_mind)
@@ -201,9 +214,11 @@
 	syndicate.objectives += syndobj
 
 
-/datum/game_mode/proc/greet_syndicate(var/datum/mind/syndicate, var/you_are=1)
+/datum/game_mode/proc/greet_syndicate(var/datum/mind/syndicate, var/you_are=1, var/boss=0)
 	if (you_are)
 		syndicate.current << "\blue You are a Gorlex Maradeurs agent!"
+		if(boss)
+			syndicate.current <<"\blue You are the Gorlex Maradeurs Commander!"
 	var/obj_count = 1
 	for(var/datum/objective/objective in syndicate.objectives)
 		syndicate.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
@@ -215,7 +230,7 @@
 	return 1337 // WHY??? -- Doohl
 
 
-/datum/game_mode/proc/equip_syndicate(mob/living/carbon/human/synd_mob)
+/datum/game_mode/proc/equip_syndicate(mob/living/carbon/human/synd_mob, var/boss)
 	var/radio_freq = SYND_FREQ
 
 	var/obj/item/device/radio/R = new /obj/item/device/radio/headset/syndicate(synd_mob)
@@ -224,7 +239,6 @@
 
 	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(synd_mob), slot_w_uniform)
 	synd_mob.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(synd_mob), slot_shoes)
-	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/card/id/syndicate(synd_mob), slot_wear_id)
 	if(synd_mob.backbag == 2) synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(synd_mob), slot_back)
 	if(synd_mob.backbag == 3) synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(synd_mob), slot_back)
 	if(synd_mob.backbag == 4) synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(synd_mob), slot_back)
@@ -233,6 +247,10 @@
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/pill/cyanide(synd_mob), slot_in_backpack)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/automatic/c20r(synd_mob), slot_belt)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(synd_mob.back), slot_in_backpack)
+	if(boss)
+		synd_mob.equip_to_slot_or_del(new /obj/item/weapon/card/id/syndicate/commander(synd_mob), slot_wear_id)
+	else
+		synd_mob.equip_to_slot_or_del(new /obj/item/weapon/card/id/syndicate(synd_mob), slot_wear_id)
 
 	if(synd_mob.species)
 		var/race = synd_mob.species.name
@@ -374,7 +392,7 @@
 	return newname
 */
 /proc/NukeNameAssign(var/datum/mind/synd_mind)
-	var/choose_name = input(synd_mind.current, "You are a [syndicate_name()] agent! What is your name?", "Choose a name") as text
+	var/choose_name = input(synd_mind.current, "You are a Gorlex Maradeurs agent! What is your name?", "Choose a name") as text
 
 	if(!choose_name)
 		return
@@ -383,3 +401,9 @@
 		synd_mind.current.name = choose_name
 		synd_mind.current.real_name = choose_name
 		return
+
+/obj/item/weapon/card/id/syndicate/commander
+	name = "syndicate commander ID card"
+	assignment = "Syndicate Commander"
+	icon_state = "centcom_old"
+	access = list(access_maint_tunnels, access_syndicate, access_syndicate_commander)
