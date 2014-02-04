@@ -54,17 +54,23 @@ h1.alert, h2.alert		{color: #000000;}
 .notice					{color: #000099;}
 .suicide				{color: #ff5050;	font-style: italic;}
 
-.alien					{color: #543354;}
+
 .newscaster				{color: #800000;}
 
 .mod					{color: #735638;	font-weight: bold;}
 .modooc					{color: #184880;	font-weight: bold;}
 .adminmod				{color: #402A14;	font-weight: bold;}
+
+.alien					{color: #543354;}
 .tajaran				{color: #803B56;}
 .soghun					{color: #228B22;}
 .vox					{color: #AA00AA;}
 .slime					{font-family: \"001 Interstellar Log\", Verdana, sans-serif;}
 .skrell					{font-family: \"Plastic Bag\", Verdana, sans-serif;}
+
+
+
+
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 
 .interface				{color: #330033;}

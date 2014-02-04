@@ -351,6 +351,7 @@
 
 
 var/list/extra_resources = list(\
-	'fonts/interstellarlog.ttf',
-	'fonts/plasticbag.ttf'
+	'fonts/slime.ttf',
+	'fonts/skrell.ttf',
+	'fonts/binary.ttf'
 	)
