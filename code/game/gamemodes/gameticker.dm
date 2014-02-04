@@ -56,7 +56,8 @@ var/global/datum/controller/gameticker/ticker
 				vote.process()
 			if(going)
 				pregame_timeleft--
-
+			if(pregame_timeleft == config.vote_autogamemode_timeleft)
+				vote.autogamemode()
 			if(pregame_timeleft <= 0)
 				current_state = GAME_STATE_SETTING_UP
 	while (!setup())
