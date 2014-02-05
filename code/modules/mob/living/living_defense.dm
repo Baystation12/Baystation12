@@ -87,7 +87,8 @@
 
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with a thrown [O], last touched by [M.name] ([assailant.ckey])</font>")
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Hit [src.name] ([src.ckey]) with a thrown [O]</font>")
-			msg_admin_attack("[src.name] ([src.ckey]) was hit by a thrown [O], last touched by [M.name] ([assailant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+			if(!istype(src,/mob/living/simple_animal/mouse))
+				msg_admin_attack("[src.name] ([src.ckey]) was hit by a thrown [O], last touched by [M.name] ([assailant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 			if(!iscarbon(M))
 				src.LAssailant = null
 			else
@@ -133,6 +134,7 @@
 	return 0
 
 // End BS12 momentum-transfer code.
+<<<<<<< HEAD
 
 //Mobs on Fire
 /mob/living/proc/IgniteMob()
@@ -171,3 +173,5 @@
 		IgniteMob()
 
 //Mobs on Fire end
+=======
+>>>>>>> 9665e8c... Mouse Attack_Logs disabled.  Admins rejoice.
