@@ -129,7 +129,7 @@ datum/mind
 		if (istype(current, /mob/living/carbon/human) || istype(current, /mob/living/carbon/monkey))
 			/** Impanted**/
 			if(istype(current, /mob/living/carbon/human))
-				if(H.is_loyalty_implanted(H))
+				if(H.is_loyalty_implanted(H)) 
 					text = "Loyalty Implant:<a href='?src=\ref[src];implant=remove'>Remove</a>|<b>Implanted</b></br>"
 				else
 					text = "Loyalty Implant:<b>No Implant</b>|<a href='?src=\ref[src];implant=add'>Implant him!</a></br>"
