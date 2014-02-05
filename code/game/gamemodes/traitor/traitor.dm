@@ -12,7 +12,7 @@
 	recommended_enemies = 4
 
 
-	uplink_welcome = "Syndicate Uplink Console:"
+	uplink_welcome = "AntagCorp Portable Teleportation Relay:"
 	uplink_uses = 10
 
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
@@ -65,7 +65,8 @@
 
 /datum/game_mode/traitor/post_setup()
 	for(var/datum/mind/traitor in traitors)
-		forge_traitor_objectives(traitor)
+		if (!config.objectives_disabled)
+			forge_traitor_objectives(traitor)
 		spawn(rand(10,100))
 			finalize_traitor(traitor)
 			greet_traitor(traitor)
@@ -131,10 +132,13 @@
 
 /datum/game_mode/proc/greet_traitor(var/datum/mind/traitor)
 	traitor.current << "<B><font size=3 color=red>You are the traitor.</font></B>"
-	var/obj_count = 1
-	for(var/datum/objective/objective in traitor.objectives)
-		traitor.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-		obj_count++
+	if (!config.objectives_disabled)
+		var/obj_count = 1
+		for(var/datum/objective/objective in traitor.objectives)
+			traitor.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+			obj_count++
+	else
+		traitor.current << "<i>You have been selected this round as an antagonist- <font color=blue>Within the rules,</font> try to act as an opposing force to the crew- This can be via corporate payoff, personal motives, or maybe just being a dick. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonist.</i></b>"
 	return
 
 
@@ -216,19 +220,20 @@
 				special_role_text = lowertext(traitor.special_role)
 			else
 				special_role_text = "antagonist"
-
-			if(traitorwin)
-				text += "<br><font color='green'><B>The [special_role_text] was successful!</B></font>"
-				feedback_add_details("traitor_success","SUCCESS")
-			else
-				text += "<br><font color='red'><B>The [special_role_text] has failed!</B></font>"
-				feedback_add_details("traitor_success","FAIL")
+			if(!config.objectives_disabled)
+				if(traitorwin)
+					text += "<br><font color='green'><B>The [special_role_text] was successful!</B></font>"
+					feedback_add_details("traitor_success","SUCCESS")
+				else
+					text += "<br><font color='red'><B>The [special_role_text] has failed!</B></font>"
+					feedback_add_details("traitor_success","FAIL")
 
 		world << text
 	return 1
 
 
 /datum/game_mode/proc/equip_traitor(mob/living/carbon/human/traitor_mob, var/safety = 0)
+
 	if (!istype(traitor_mob))
 		return
 	. = 1
@@ -239,12 +244,29 @@
 
 	// find a radio! toolbox(es), backpack, belt, headset
 	var/loc = ""
-	var/obj/item/R = locate(/obj/item/device/pda) in traitor_mob.contents //Hide the uplink in a PDA if available, otherwise radio
-	if(!R)
+	var/obj/item/R = locate() //Hide the uplink in a PDA if available, otherwise radio
+
+	if(traitor_mob.client.prefs.uplinklocation == "Headset")
 		R = locate(/obj/item/device/radio) in traitor_mob.contents
+		if(!R)
+			R = locate(/obj/item/device/pda) in traitor_mob.contents
+			traitor_mob << "Could not locate a Radio, installing in PDA instead!"
+		if (!R)
+			traitor_mob << "Unfortunately, neither a radio or a PDA relay could be installed."
+
+	if(traitor_mob.client.prefs.uplinklocation == "PDA")
+		R = locate(/obj/item/device/pda) in traitor_mob.contents
+		if(!R)
+			R = locate(/obj/item/device/radio) in traitor_mob.contents
+			traitor_mob << "Could not locate a PDA, installing into a Radio instead!"
+		if (!R)
+			traitor_mob << "Unfortunately, neither a radio or a PDA relay could be installed."
+
+	if(traitor_mob.client.prefs.uplinklocation == "None")
+		traitor_mob << "You have elected to not have an AntagCorp portable teleportation relay installed!"
+		R = null
 
 	if (!R)
-		traitor_mob << "Unfortunately, the Syndicate wasn't able to get you a radio."
 		. = 0
 	else
 		if (istype(R, /obj/item/device/radio))
@@ -263,7 +285,7 @@
 			var/obj/item/device/uplink/hidden/T = new(R)
 			target_radio.hidden_uplink = T
 			target_radio.traitor_frequency = freq
-			traitor_mob << "The Syndicate have cunningly disguised a Syndicate Uplink as your [R.name] [loc]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features."
+			traitor_mob << "A portable object teleportation relay has been installed in your [R.name] [loc]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features."
 			traitor_mob.mind.store_memory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name] [loc]).")
 		else if (istype(R, /obj/item/device/pda))
 			// generate a passcode if the uplink is hidden in a PDA
@@ -274,7 +296,7 @@
 			var/obj/item/device/pda/P = R
 			P.lock_code = pda_pass
 
-			traitor_mob << "The Syndicate have cunningly disguised a Syndicate Uplink as your [R.name] [loc]. Simply enter the code \"[pda_pass]\" into the ringtone select to unlock its hidden features."
+			traitor_mob << "A portable object teleportation relay has been installed in your [R.name] [loc]. Simply enter the code \"[pda_pass]\" into the ringtone select to unlock its hidden features."
 			traitor_mob.mind.store_memory("<B>Uplink Passcode:</B> [pda_pass] ([R.name] [loc]).")
 	//Begin code phrase.
 	if(!safety)//If they are not a rev. Can be added on to.
