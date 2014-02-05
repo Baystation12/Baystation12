@@ -184,3 +184,13 @@
 	icon_state = "tdgreen"
 	item_state = "tdgreen"
 	siemens_coefficient = 1
+
+/obj/item/clothing/suit/armor/tactical
+	name = "tactical armor"
+	desc = "A suit of armor most often used by Special Weapons and Tactics squads. Includes padded vest with pockets along with shoulder and kneeguards."
+	icon_state = "swatarmor"
+	item_state = "armor"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	slowdown = 1
+	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
+	siemens_coefficient = 0.7

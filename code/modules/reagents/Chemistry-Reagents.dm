@@ -23,7 +23,7 @@ datum
 		var/list/data = null
 		var/volume = 0
 		var/nutriment_factor = 0
-		var/custom_metabolism = REAGENTS_METABOLISM //Default 0.2
+		var/custom_metabolism = REAGENTS_METABOLISM
 		var/overdose = 0
 		var/overdose_dam = 1
 		//var/list/viruses = list()
@@ -1393,13 +1393,6 @@ datum
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		holywater
-			name = "Holy Water"
-			id = "holywater"
-			description = "This was once water, but has been altered by higher powers."
-			reagent_state = LIQUID
-			color = "#535E66" // rgb: 83, 94, 102
-
 		nanites
 			name = "Nanomachines"
 			id = "nanites"
@@ -2340,6 +2333,7 @@ datum
 				..()
 				return
 
+/* We're back to flour bags
 		flour
 			name = "flour"
 			id = "flour"
@@ -2357,6 +2351,7 @@ datum
 				src = null
 				if(!istype(T, /turf/space))
 					new /obj/effect/decal/cleanable/flour(T)
+*/
 
 		rice
 			name = "Rice"

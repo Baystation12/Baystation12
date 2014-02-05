@@ -382,6 +382,11 @@ var/list/sacrificed = list()
 				D.real_name = "[pick(first_names_male)] [pick(last_names)]"
 			D.universal_speak = 1
 			D.status_flags &= ~GODMODE
+			D.s_tone = 35
+			D.b_eyes = 200
+			D.r_eyes = 200
+			D.g_eyes = 200
+			D.underwear = 0
 
 			D.key = ghost.key
 

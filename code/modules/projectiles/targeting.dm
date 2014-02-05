@@ -177,7 +177,7 @@ mob/living/proc/Targeted(var/obj/item/weapon/gun/I) //Self explanitory.
 					target_locked = image("icon" = 'icons/effects/Targeted.dmi', "icon_state" = "locked")
 					update_targeted()
 
-	//Adding the buttons to the controler person
+	//Adding the buttons to the controller person
 	var/mob/living/T = I.loc
 	if(T)
 		if(T.client)

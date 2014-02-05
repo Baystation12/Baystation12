@@ -286,7 +286,7 @@
 	proc/breathe()
 		if(reagents.has_reagent("lexorin")) return
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-		if(species && species.flags & NO_BREATHE) return
+		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
 
 		var/datum/organ/internal/lungs/L = internal_organs["lungs"]
 		L.process()
@@ -639,7 +639,15 @@
 			pressure_alert = 0
 		else if(adjusted_pressure >= species.hazard_low_pressure)
 			pressure_alert = -1
+
+			if(species && species.flags & IS_SYNTHETIC)
+				bodytemperature += 0.5 * TEMPERATURE_DAMAGE_COEFFICIENT //Synthetics suffer overheating in a vaccuum. ~Z
+
 		else
+
+			if(species && species.flags & IS_SYNTHETIC)
+				bodytemperature += 1 * TEMPERATURE_DAMAGE_COEFFICIENT
+
 			if( !(COLD_RESISTANCE in mutations))
 				adjustBruteLoss( LOW_PRESSURE_DAMAGE )
 				pressure_alert = -2
@@ -866,8 +874,8 @@
 	*/
 
 	proc/handle_chemicals_in_body()
-		if(reagents)
 
+		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
 			var/alien = 0 //Not the best way to handle it, but neater than checking this for every single reagent proc.
 			if(species && species.name == "Diona")
 				alien = 1
@@ -966,7 +974,7 @@
 			dizziness = max(0, dizziness - 3)
 			jitteriness = max(0, jitteriness - 3)
 
-		handle_trace_chems()
+		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
 
 		var/datum/organ/internal/liver/liver = internal_organs["liver"]
 		liver.process()

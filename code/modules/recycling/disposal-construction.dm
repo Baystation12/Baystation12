@@ -65,9 +65,19 @@
 			if(10)
 				base_state = "pipe-j2s"
 				dpdir = dir | left | flip
+///// Z-Level stuff
+			if(11)
+				base_state = "pipe-u"
+				dpdir = dir
+			if(12)
+				base_state = "pipe-d"
+				dpdir = dir
+///// Z-Level stuff
 
 
-		if(ptype<6 || ptype>8)
+///// Z-Level stuff
+		if(ptype<6 || ptype>8 && !(ptype==11 || ptype==12))
+///// Z-Level stuff
 			icon_state = "con[base_state]"
 		else
 			icon_state = base_state
@@ -139,6 +149,12 @@
 				return /obj/machinery/disposal/deliveryChute
 			if(9,10)
 				return /obj/structure/disposalpipe/sortjunction
+///// Z-Level stuff
+			if(11)
+				return /obj/structure/disposalpipe/up
+			if(12)
+				return /obj/structure/disposalpipe/down
+///// Z-Level stuff
 		return
 
 

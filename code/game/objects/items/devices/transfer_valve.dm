@@ -33,6 +33,7 @@
 			user << "<span class='notice'>You attach the tank to the transfer valve.</span>"
 
 		update_icon()
+		nanomanager.update_uis(src) // update all UIs attached to src
 //TODO: Have this take an assemblyholder
 	else if(isassembly(item))
 		var/obj/item/device/assembly/A = item
@@ -53,6 +54,7 @@
 		message_admins("[key_name_admin(user)] attached a [item] to a transfer valve.")
 		log_game("[key_name_admin(user)] attached a [item] to a transfer valve.")
 		attacher = user
+		nanomanager.update_uis(src) // update all UIs attached to src
 	return
 
 
@@ -63,49 +65,60 @@
 
 
 /obj/item/device/transfer_valve/attack_self(mob/user as mob)
-	user.set_machine(src)
-	var/dat = {"<B> Valve properties: </B>
-	<BR> <B> Attachment one:</B> [tank_one] [tank_one ? "<A href='?src=\ref[src];tankone=1'>Remove</A>" : ""]
-	<BR> <B> Attachment two:</B> [tank_two] [tank_two ? "<A href='?src=\ref[src];tanktwo=1'>Remove</A>" : ""]
-	<BR> <B> Valve attachment:</B> [attached_device ? "<A href='?src=\ref[src];device=1'>[attached_device]</A>" : "None"] [attached_device ? "<A href='?src=\ref[src];rem_device=1'>Remove</A>" : ""]
-	<BR> <B> Valve status: </B> [ valve_open ? "<A href='?src=\ref[src];open=1'>Closed</A> <B>Open</B>" : "<B>Closed</B> <A href='?src=\ref[src];open=1'>Open</A>"]"}
+	ui_interact(user)
+	
+/obj/item/device/transfer_valve/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 
-	user << browse(dat, "window=trans_valve;size=600x300")
-	onclose(user, "trans_valve")
-	return
+	// this is the data which will be sent to the ui
+	var/data[0]
+	data["attachmentOne"] = tank_one ? tank_one.name : null
+	data["attachmentTwo"] = tank_two ? tank_two.name : null
+	data["valveAttachment"] = attached_device ? attached_device.name : null
+	data["valveOpen"] = valve_open ? 1 : 0
+
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
+	if (!ui)
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "transfer_valve.tmpl", "Tank Transfer Valve", 460, 280)
+		// when the ui is first opened this is the data it will use
+		ui.set_initial_data(data)		
+		// open the new ui window
+		ui.open()
+		// auto update every Master Controller tick
+		//ui.set_auto_update(1)
 
 /obj/item/device/transfer_valve/Topic(href, href_list)
 	..()
 	if ( usr.stat || usr.restrained() )
-		return
-	if (src.loc == usr)
-		if(tank_one && href_list["tankone"])
-			split_gases()
-			valve_open = 0
-			tank_one.loc = get_turf(src)
-			tank_one = null
+		return 0
+	if (src.loc != usr)
+		return 0
+	if(tank_one && href_list["tankone"])
+		split_gases()
+		valve_open = 0
+		tank_one.loc = get_turf(src)
+		tank_one = null
+		update_icon()
+	else if(tank_two && href_list["tanktwo"])
+		split_gases()
+		valve_open = 0
+		tank_two.loc = get_turf(src)
+		tank_two = null
+		update_icon()
+	else if(href_list["open"])
+		toggle_valve()
+	else if(attached_device)
+		if(href_list["rem_device"])
+			attached_device.loc = get_turf(src)
+			attached_device:holder = null
+			attached_device = null
 			update_icon()
-		else if(tank_two && href_list["tanktwo"])
-			split_gases()
-			valve_open = 0
-			tank_two.loc = get_turf(src)
-			tank_two = null
-			update_icon()
-		else if(href_list["open"])
-			toggle_valve()
-		else if(attached_device)
-			if(href_list["rem_device"])
-				attached_device.loc = get_turf(src)
-				attached_device:holder = null
-				attached_device = null
-				update_icon()
-			if(href_list["device"])
-				attached_device.attack_self(usr)
-
-		src.attack_self(usr)
-		src.add_fingerprint(usr)
-		return
-	return
+		if(href_list["device"])
+			attached_device.attack_self(usr)
+	src.add_fingerprint(usr)
+	return 1 // Returning 1 sends an update to attached UIs
 
 /obj/item/device/transfer_valve/process_activation(var/obj/item/device/D)
 	if(toggle)
