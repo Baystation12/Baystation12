@@ -391,13 +391,33 @@
 		new_character.dna.ready_dna(new_character)
 		new_character.dna.b_type = client.prefs.b_type
 
-		if(client.prefs.disabilities)
+	/*	if(client.prefs.disabilities)
 			// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
 			new_character.dna.SetSEState(GLASSESBLOCK,1,0)
+			new_character.disabilities |= NEARSIGHTED */
+
+		if(client.prefs.disabilities & DISABILITY_NEARSIGHTED)
+			new_character.dna.SetSEState(GLASSESBLOCK,1,1)
 			new_character.disabilities |= NEARSIGHTED
 
+		if(client.prefs.disabilities & DISABILITY_EPILEPTIC)
+			new_character.dna.SetSEState(EPILEPSYBLOCK,1,1)
+			new_character.disabilities |= EPILEPSY
+
+		if(client.prefs.disabilities & DISABILITY_COUGHING)
+			new_character.dna.SetSEState(COUGHBLOCK,1,1)
+			new_character.disabilities |= COUGHING
+
+		if(client.prefs.disabilities & DISABILITY_TOURETTES)
+			new_character.dna.SetSEState(TWITCHBLOCK,1,1)
+			new_character.disabilities |= TOURETTES
+
+		if(client.prefs.disabilities & DISABILITY_NERVOUS)
+			new_character.dna.SetSEState(NERVOUSBLOCK,1,1)
+			new_character.disabilities |= NERVOUS
+
 		// And uncomment this, too.
-		//new_character.dna.UpdateSE()
+		new_character.dna.UpdateSE()
 
 		new_character.key = key		//Manually transfer the key to log them in
 
