@@ -65,7 +65,7 @@
 
 /datum/game_mode/traitor/post_setup()
 	for(var/datum/mind/traitor in traitors)
-		if (config.objectives_disabled == 0)
+		if (!config.objectives_disabled)
 			forge_traitor_objectives(traitor)
 		spawn(rand(10,100))
 			finalize_traitor(traitor)
@@ -132,7 +132,7 @@
 
 /datum/game_mode/proc/greet_traitor(var/datum/mind/traitor)
 	traitor.current << "<B><font size=3 color=red>You are the traitor.</font></B>"
-	if (config.objectives_disabled == 0)
+	if (!config.objectives_disabled)
 		var/obj_count = 1
 		for(var/datum/objective/objective in traitor.objectives)
 			traitor.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
@@ -220,13 +220,13 @@
 				special_role_text = lowertext(traitor.special_role)
 			else
 				special_role_text = "antagonist"
-
-			if(traitorwin)
-				text += "<br><font color='green'><B>The [special_role_text] was successful!</B></font>"
-				feedback_add_details("traitor_success","SUCCESS")
-			else
-				text += "<br><font color='red'><B>The [special_role_text] has failed!</B></font>"
-				feedback_add_details("traitor_success","FAIL")
+			if(!config.objectives_disabled)
+				if(traitorwin)
+					text += "<br><font color='green'><B>The [special_role_text] was successful!</B></font>"
+					feedback_add_details("traitor_success","SUCCESS")
+				else
+					text += "<br><font color='red'><B>The [special_role_text] has failed!</B></font>"
+					feedback_add_details("traitor_success","FAIL")
 
 		world << text
 	return 1

@@ -74,7 +74,7 @@ datum/mind
 			current.mind = null
 		if(new_character.mind)		//remove any mind currently in our new body's mind variable
 			new_character.mind.current = null
-			
+
 		nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 
 		current = new_character		//link ourself to our new body
@@ -562,6 +562,7 @@ datum/mind
 						current << "\red <FONT size = 3><B>Revolution has been disappointed of your leader traits! You are a regular revolutionary now!</B></FONT>"
 					else if(!(src in ticker.mode.revolutionaries))
 						current << "\red <FONT size = 3> You are now a revolutionary! Help your cause. Do not harm your fellow freedom fighters. You can identify your comrades by the red \"R\" icons, and your leaders by the blue \"R\" icons. Help them kill the heads to win the revolution!</FONT>"
+						current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 					else
 						return
 					ticker.mode.revolutionaries += src
@@ -574,6 +575,7 @@ datum/mind
 						ticker.mode.revolutionaries -= src
 						ticker.mode.update_rev_icons_removed(src)
 						current << "\red <FONT size = 3><B>You have proved your devotion to revoltion! You are a head revolutionary now!</B></FONT>"
+						current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 					else if(!(src in ticker.mode.head_revolutionaries))
 						current << "\blue You are a member of the revolutionaries' leadership now!"
 					else
@@ -639,7 +641,8 @@ datum/mind
 						special_role = null
 						var/datum/game_mode/cult/cult = ticker.mode
 						if (istype(cult))
-							cult.memoize_cult_objectives(src)
+							if(!config.objectives_disabled)
+								cult.memoize_cult_objectives(src)
 						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a cultist!</B></FONT>"
 						memory = ""
 						log_admin("[key_name_admin(usr)] has de-cult'ed [current].")
@@ -650,9 +653,11 @@ datum/mind
 						special_role = "Cultist"
 						current << "<font color=\"purple\"><b><i>You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie.</b></i></font>"
 						current << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"
+						current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 						var/datum/game_mode/cult/cult = ticker.mode
 						if (istype(cult))
-							cult.memoize_cult_objectives(src)
+							if(!config.objectives_disabled)
+								cult.memoize_cult_objectives(src)
 						log_admin("[key_name_admin(usr)] has cult'ed [current].")
 				if("tome")
 					var/mob/living/carbon/human/H = current
@@ -691,6 +696,7 @@ datum/mind
 						special_role = "Wizard"
 						//ticker.mode.learn_basic_spells(current)
 						current << "<B>\red You are the Space Wizard!</B>"
+						current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 						log_admin("[key_name_admin(usr)] has wizard'ed [current].")
 				if("lair")
 					current.loc = pick(wizardstart)
@@ -699,8 +705,9 @@ datum/mind
 				if("name")
 					ticker.mode.name_wizard(current)
 				if("autoobjectives")
-					ticker.mode.forge_wizard_objectives(src)
-					usr << "\blue The objectives for wizard [key] have been generated. You can edit them and anounce manually."
+					if(!config.objectives_disabled)
+						ticker.mode.forge_wizard_objectives(src)
+						usr << "\blue The objectives for wizard [key] have been generated. You can edit them and anounce manually."
 
 		else if (href_list["changeling"])
 			switch(href_list["changeling"])
@@ -719,9 +726,12 @@ datum/mind
 						ticker.mode.grant_changeling_powers(current)
 						special_role = "Changeling"
 						current << "<B><font color='red'>Your powers are awoken. A flash of memory returns to us...we are a changeling!</font></B>"
+						if(config.objectives_disabled)
+							current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 						log_admin("[key_name_admin(usr)] has changeling'ed [current].")
 				if("autoobjectives")
-					ticker.mode.forge_changeling_objectives(src)
+					if(!config.objectives_disabled)
+						ticker.mode.forge_changeling_objectives(src)
 					usr << "\blue The objectives for changeling [key] have been generated. You can edit them and anounce manually."
 
 				if("initialdna")
@@ -754,7 +764,10 @@ datum/mind
 							current.real_name = "[syndicate_name()] Operative #[ticker.mode.syndicates.len-1]"
 						special_role = "Syndicate"
 						current << "\blue You are a [syndicate_name()] agent!"
-						ticker.mode.forge_syndicate_objectives(src)
+						if(config.objectives_disabled)
+							current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+						else
+							ticker.mode.forge_syndicate_objectives(src)
 						ticker.mode.greet_syndicate(src)
 						log_admin("[key_name_admin(usr)] has nuke op'ed [current].")
 				if("lair")
@@ -806,7 +819,7 @@ datum/mind
 						special_role = "traitor"
 						current << "<B>\red You are a traitor!</B>"
 						log_admin("[key_name_admin(usr)] has traitor'ed [current].")
-						if (config.objectives_disabled == 1)
+						if (config.objectives_disabled)
 							current << "<i>You have been turned into an antagonist- <font color=blue>Within the rules,</font> try to act as an opposing force to the crew- This can be via corporate payoff, personal motives, or maybe just being a dick. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonist.</i></b>"
 						if(istype(current, /mob/living/silicon))
 							var/mob/living/silicon/A = current
@@ -814,7 +827,7 @@ datum/mind
 							A.show_laws()
 
 				if("autoobjectives")
-					if (config.objectives_disabled == 0)
+					if (!config.objectives_disabled)
 						ticker.mode.forge_traitor_objectives(src)
 						usr << "\blue The objectives for traitor [key] have been generated. You can edit them and anounce manually."
 
@@ -1026,7 +1039,7 @@ datum/mind
 		if(!(src in ticker.mode.traitors))
 			ticker.mode.traitors += src
 			special_role = "traitor"
-			if (config.objectives_disabled == 0)
+			if (!config.objectives_disabled)
 				ticker.mode.forge_traitor_objectives(src)
 			ticker.mode.finalize_traitor(src)
 			ticker.mode.greet_traitor(src)
@@ -1066,7 +1079,8 @@ datum/mind
 			ticker.mode.changelings += src
 			ticker.mode.grant_changeling_powers(current)
 			special_role = "Changeling"
-			ticker.mode.forge_changeling_objectives(src)
+			if(!config.objectives_disabled)
+				ticker.mode.forge_changeling_objectives(src)
 			ticker.mode.greet_changeling(src)
 
 	proc/make_Wizard()
