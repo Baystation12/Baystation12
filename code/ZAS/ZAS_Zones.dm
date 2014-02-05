@@ -27,7 +27,6 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	var/interactions_with_unsim = 0
 	var/progress = "nothing"
 
-
 //CREATION AND DELETION
 /zone/New(turf/start)
 	. = ..()
@@ -47,14 +46,23 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 
 	//Generate the gas_mixture for use in txhis zone by using the average of the gases
 	//defined at startup.
+	//Changed to try and find the source of the error.
 	air = new
 	air.group_multiplier = contents.len
 	for(var/turf/simulated/T in contents)
-		air.oxygen += T.oxygen / air.group_multiplier
-		air.nitrogen += T.nitrogen / air.group_multiplier
-		air.carbon_dioxide += T.carbon_dioxide / air.group_multiplier
-		air.toxins += T.toxins / air.group_multiplier
-		air.temperature += T.temperature / air.group_multiplier
+		if(!T.air)
+			continue
+		air.oxygen += T.air.oxygen / air.group_multiplier
+		air.nitrogen += T.air.nitrogen / air.group_multiplier
+		air.carbon_dioxide += T.air.carbon_dioxide / air.group_multiplier
+		air.toxins += T.air.toxins / air.group_multiplier
+		air.temperature += T.air.temperature / air.group_multiplier
+		for(var/datum/gas/trace in T.air.trace_gases)
+			var/datum/gas/corresponding_gas = locate(trace.type) in air.trace_gases
+			if(!corresponding_gas)
+				corresponding_gas = new trace.type()
+				air.trace_gases.Add(corresponding_gas)
+			corresponding_gas.moles += trace.moles
 	air.update_values()
 
 	//Add this zone to the global list.
@@ -69,40 +77,57 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 	for(var/turf/simulated/T in contents)
 		RemoveTurf(T)
 		air_master.ReconsiderTileZone(T)
-	for(var/zone/Z in connected_zones)
-		if(src in Z.connected_zones)
-			Z.connected_zones.Remove(src)
-	air_master.AddConnectionToCheck(connections)
 
 	if(air_master)
-		air_master.zones.Remove(src)
-		air_master.active_zones.Remove(src)
-		air_master.zones_needing_rebuilt.Remove(src)
+		air_master.AddConnectionToCheck(connections)
+
 	air = null
+
 	. = ..()
 
 
 //Handles deletion via garbage collection.
 /zone/proc/SoftDelete()
+	air = null
+
 	if(air_master)
 		air_master.zones.Remove(src)
 		air_master.active_zones.Remove(src)
 		air_master.zones_needing_rebuilt.Remove(src)
-	air = null
+		air_master.AddConnectionToCheck(connections)
+
+	connections = null
+	for(var/connection/C in direct_connections)
+		if(C.A.zone == src)
+			C.A.zone = null
+		if(C.B.zone == src)
+			C.B.zone = null
+		if(C.zone_A == src)
+			C.zone_A = null
+		if(C.zone_B == src)
+			C.zone_B = null
+	direct_connections = null
 
 	//Ensuring the zone list doesn't get clogged with null values.
 	for(var/turf/simulated/T in contents)
 		RemoveTurf(T)
 		air_master.ReconsiderTileZone(T)
 
+	contents.Cut()
+
 	//Removing zone connections and scheduling connection cleanup
 	for(var/zone/Z in connected_zones)
-		if(src in Z.connected_zones)
-			Z.connected_zones.Remove(src)
-	connected_zones = null
+		Z.connected_zones.Remove(src)
+		if(!Z.connected_zones.len)
+			Z.connected_zones = null
 
-	air_master.AddConnectionToCheck(connections)
-	connections = null
+		if(Z.closed_connection_zones)
+			Z.closed_connection_zones.Remove(src)
+			if(!Z.closed_connection_zones.len)
+				Z.closed_connection_zones = null
+
+	connected_zones = null
+	closed_connection_zones = null
 
 	return 1
 
@@ -120,6 +145,13 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 			air.group_multiplier++
 
 		T.zone = src
+
+///// Z-Level Stuff
+		// also add the tile below it if its open space
+		if(istype(T, /turf/simulated/floor/open))
+			var/turf/simulated/floor/open/T2 = T
+			src.AddTurf(T2.floorbelow)
+///// Z-Level Stuff
 
 	else
 		if(!unsimulated_tiles)
@@ -159,6 +191,10 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 		return
 
 	if(!unsim_air_needs_update && air_unsim) //if air_unsim doesn't exist, we need to create it even if we don't need an update.
+		return
+
+	//Tempfix.
+	if(!air)
 		return
 
 	unsim_air_needs_update = 0
@@ -340,25 +376,26 @@ var/list/CounterDoorDirections = list(SOUTH,EAST) //Which directions doors turfs
 					Z.interactions_with_neighbors++
 					interactions_with_neighbors++
 
-		for(var/zone/Z in closed_connection_zones)
-			//If that zone has already processed, skip it.
-			if(Z.last_update > last_update)
-				continue
-
-			var/handle_temperature = abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta
-
-			if(Z.status == ZONE_SLEEPING)
-				if (handle_temperature)
-					Z.SetStatus(ZONE_ACTIVE)
-				else
+		if(!vsc.connection_insulation)
+			for(var/zone/Z in closed_connection_zones)
+				//If that zone has already processed, skip it.
+				if(Z.last_update > last_update || !Z.air)
 					continue
 
-			if(air && Z.air)
-				if( handle_temperature )
-					ShareHeat(air, Z.air, closed_connection_zones[Z])
+				var/handle_temperature = abs(air.temperature - Z.air.temperature) > vsc.connection_temperature_delta
 
-					Z.interactions_with_neighbors++
-					interactions_with_neighbors++
+				if(Z.status == ZONE_SLEEPING)
+					if (handle_temperature)
+						Z.SetStatus(ZONE_ACTIVE)
+					else
+						continue
+
+				if(air && Z.air)
+					if( handle_temperature )
+						ShareHeat(air, Z.air, closed_connection_zones[Z])
+
+						Z.interactions_with_neighbors++
+						interactions_with_neighbors++
 
 	if(!interactions_with_neighbors && !interactions_with_unsim)
 		SetStatus(ZONE_SLEEPING)
@@ -633,6 +670,18 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 
 
 proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
+	//This implements a simplistic version of the Stefan-Boltzmann law.
+	var/energy_delta = ((A.temperature - B.temperature) ** 4) * 5.6704e-8 * connecting_tiles * 2.5
+	var/maximum_energy_delta = max(0, min(A.temperature * A.heat_capacity() * A.group_multiplier, B.temperature * B.heat_capacity() * B.group_multiplier))
+	if(maximum_energy_delta > abs(energy_delta))
+		if(energy_delta < 0)
+			maximum_energy_delta *= -1
+		energy_delta = maximum_energy_delta
+
+	A.temperature -= energy_delta / (A.heat_capacity() * A.group_multiplier)
+	B.temperature += energy_delta / (B.heat_capacity() * B.group_multiplier)
+
+	/* This was bad an I feel bad.
 	//Shares a specific ratio of gas between mixtures using simple weighted averages.
 	var
 		//WOOT WOOT TOUCH THIS AND YOU ARE A RETARD
@@ -655,7 +704,7 @@ proc/ShareHeat(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 
 	A.temperature = max(0, (A.temperature - temp_avg) * (1- (ratio / max(1,A.group_multiplier)) ) + temp_avg )
 	B.temperature = max(0, (B.temperature - temp_avg) * (1- (ratio / max(1,B.group_multiplier)) ) + temp_avg )
-
+	*/
 
   ///////////////////
  //Zone Rebuilding//
@@ -715,15 +764,41 @@ zone/proc/Rebuild()
 		current_adjacents = list()
 
 		for(var/direction in cardinal)
-			if( !(current.air_check_directions & direction))
-				continue
 			var/turf/simulated/adjacent = get_step(current, direction)
+			if(!current.ZCanPass(adjacent))
+				continue
 			if(adjacent in turfs)
 				current_adjacents += adjacent
 				adjacent_id = turfs[adjacent]
 
 				if(adjacent_id && (!lowest_id || adjacent_id < lowest_id))
 					lowest_id = adjacent_id
+
+/////// Z-Level stuff
+		var/turf/controllerlocation = locate(1, 1, current.z)
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+			// upwards
+			if(controller.up)
+				var/turf/simulated/adjacent = locate(current.x, current.y, controller.up_target)
+
+				if(adjacent in turfs && istype(adjacent, /turf/simulated/floor/open))
+					current_adjacents += adjacent
+					adjacent_id = turfs[adjacent]
+
+					if(adjacent_id && (!lowest_id || adjacent_id < lowest_id))
+						lowest_id = adjacent_id
+
+			// downwards
+			if(controller.down && istype(current, /turf/simulated/floor/open))
+				var/turf/simulated/adjacent = locate(current.x, current.y, controller.down_target)
+
+				if(adjacent in turfs)
+					current_adjacents += adjacent
+					adjacent_id = turfs[adjacent]
+
+					if(adjacent_id && (!lowest_id || adjacent_id < lowest_id))
+						lowest_id = adjacent_id
+/////// Z-Level stuff
 
 		if(!lowest_id)
 			lowest_id = current_identifier++
@@ -747,6 +822,9 @@ zone/proc/Rebuild()
 			final_arrangement[current_identifier] = list(current)
 
 		else
+			//Sanity check.
+			if(!islist(final_arrangement[current_identifier]))
+				final_arrangement[current_identifier] = list()
 			final_arrangement[current_identifier] += current
 
 	//lazy but fast

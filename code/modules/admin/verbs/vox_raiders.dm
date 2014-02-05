@@ -68,19 +68,6 @@ var/global/vox_tick = 1
 	W.handle_item_insertion(C)
 	spawn_money(rand(50,150)*10,W)
 	equip_to_slot_or_del(W, slot_wear_id)
-
-	var/obj/item/weapon/implant/cortical/I = new(src)
-	I.imp_in = src
-	I.implanted = 1
-	var/datum/organ/external/affected = src.get_organ("head")
-	affected.implants += I
-	I.part = affected
-
-	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
-		var/datum/game_mode/heist/M = ticker.mode
-		M.cortical_stacks += I
-		M.raiders[mind] = I
-
 	vox_tick++
 	if (vox_tick > 4) vox_tick = 1
 

@@ -12,7 +12,7 @@
 	var/filled = 0
 
 	afterattack(obj/target, mob/user , flag)
-		if(!target.reagents) return
+		if(!target.reagents || !flag) return
 
 		if(filled)
 

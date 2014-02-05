@@ -81,20 +81,20 @@
 
 	if (W == wear_suit)
 		if(s_store)
-			u_equip(s_store)
+			drop_from_inventory(s_store)
 		if(W)
 			success = 1
 		wear_suit = null
 		update_inv_wear_suit()
 	else if (W == w_uniform)
 		if (r_store)
-			u_equip(r_store)
+			drop_from_inventory(r_store)
 		if (l_store)
-			u_equip(l_store)
+			drop_from_inventory(l_store)
 		if (wear_id)
-			u_equip(wear_id)
+			drop_from_inventory(wear_id)
 		if (belt)
-			u_equip(belt)
+			drop_from_inventory(belt)
 		w_uniform = null
 		success = 1
 		update_inv_w_uniform()

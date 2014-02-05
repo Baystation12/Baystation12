@@ -11,6 +11,13 @@
 	density = 1
 	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
 
+
+/obj/machinery/sleep_console/process()
+	if(stat & (NOPOWER|BROKEN))
+		return
+	src.updateUsrDialog()
+	return
+
 /obj/machinery/sleep_console/ex_act(severity)
 	switch(severity)
 		if(1.0)
@@ -71,10 +78,11 @@
 			if(occupant.reagents)
 				for(var/chemical in connected.available_chemicals)
 					dat += "[connected.available_chemicals[chemical]]: [occupant.reagents.get_reagent_amount(chemical)] units<br>"
-			dat += "<HR><A href='?src=\ref[src];refresh=1'>Refresh meter readings each second</A><BR>"
+			dat += "<A href='?src=\ref[src];refresh=1'>Refresh Meter Readings</A><BR>"
 			if(src.connected.beaker)
+				dat += "<HR><A href='?src=\ref[src];removebeaker=1'>Remove Beaker</A><BR>"
 				if(src.connected.filtering)
-					dat += "<HR><A href='?src=\ref[src];togglefilter=1'>Stop Dialysis</A><BR>"
+					dat += "<A href='?src=\ref[src];togglefilter=1'>Stop Dialysis</A><BR>"
 					dat += text("Output Beaker has [] units of free space remaining<BR><HR>", src.connected.beaker.reagents.maximum_volume - src.connected.beaker.reagents.total_volume)
 				else
 					dat += "<HR><A href='?src=\ref[src];togglefilter=1'>Start Dialysis</A><BR>"
@@ -85,8 +93,10 @@
 			for(var/chemical in connected.available_chemicals)
 				dat += "Inject [connected.available_chemicals[chemical]]: "
 				for(var/amount in connected.amounts)
-					dat += "<a href ='?src=\ref[src];chemical=[chemical];amount=[amount]'>[amount] units</a> "
-				dat += "<br>"
+					dat += "<a href ='?src=\ref[src];chemical=[chemical];amount=[amount]'>[amount] units</a><br> "
+
+
+			dat += "<HR><A href='?src=\ref[src];ejectify=1'>Eject Patient</A>"
 		else
 			dat += "The sleeper is empty."
 		dat += text("<BR><BR><A href='?src=\ref[];mach_close=sleeper'>Close</A>", user)
@@ -108,19 +118,21 @@
 						src.connected.inject_chemical(usr,href_list["chemical"],text2num(href_list["amount"]))
 					else
 						usr << "\red \b This person is not in good enough condition for sleepers to be effective! Use another means of treatment, such as cryogenics!"
+					src.updateUsrDialog()
 		if (href_list["refresh"])
+			src.updateUsrDialog()
+		if (href_list["removebeaker"])
+			src.connected.remove_beaker()
 			src.updateUsrDialog()
 		if (href_list["togglefilter"])
 			src.connected.toggle_filter()
 			src.updateUsrDialog()
+		if (href_list["ejectify"])
+			src.connected.eject()
+			src.updateUsrDialog()
 		src.add_fingerprint(usr)
 	return
 
-/obj/machinery/sleep_console/process()
-	if(stat & (NOPOWER|BROKEN))
-		return
-	src.updateUsrDialog()
-	return
 
 /obj/machinery/sleep_console/power_change()
 	return
@@ -144,7 +156,7 @@
 	anchored = 1
 	var/orient = "LEFT" // "RIGHT" changes the dir suffix to "-r"
 	var/mob/living/carbon/human/occupant = null
-	var/available_chemicals = list("inaprovaline" = "Inaprovaline", "stoxin" = "Soporific", "dermaline" = "Dermaline", "bicaridine" = "Bicaridine", "dexalin" = "Dexalin")
+	var/available_chemicals = list("inaprovaline" = "Inaprovaline", "stoxin" = "Soporific", "paracetamol" = "Paracetamol", "anti_toxin" = "Dylovene", "dexalin" = "Dexalin")
 	var/amounts = list(5, 10)
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/filtering = 0
@@ -169,10 +181,9 @@
 				if(beaker.reagents.total_volume < beaker.reagents.maximum_volume)
 					src.occupant.vessel.trans_to(beaker, 1)
 					for(var/datum/reagent/x in src.occupant.reagents.reagent_list)
-						if(x.volume > 20)
-							src.occupant.reagents.trans_id_to(beaker, x.id, 2)
-							src.occupant.vessel.trans_to(beaker, 1)
-		src.updateDialog()
+						src.occupant.reagents.trans_to(beaker, 3)
+						src.occupant.vessel.trans_to(beaker, 1)
+		src.updateUsrDialog()
 		return
 
 
@@ -191,6 +202,7 @@
 				user.drop_item()
 				G.loc = src
 				user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
+				src.updateUsrDialog()
 				return
 			else
 				user << "\red The sleeper has a beaker already."

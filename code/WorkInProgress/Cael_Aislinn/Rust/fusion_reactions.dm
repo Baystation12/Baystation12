@@ -145,14 +145,14 @@ datum/fusion_reaction/pergium_tritium
 	energy_production = 0
 	radiation = 5
 
-datum/fusion_reaction/pergium_deuterium
+datum/fusion_reaction/pergium_obdurium
 	primary_reactant = "Pergium"
 	secondary_reactant = "Obdurium"
 	energy_consumption = 5
 	energy_production = 0
 	radiation = 5
 
-datum/fusion_reaction/pergium_tritium
+datum/fusion_reaction/pergium_solonium
 	primary_reactant = "Pergium"
 	secondary_reactant = "Solonium"
 	energy_consumption = 5

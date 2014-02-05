@@ -35,6 +35,12 @@
 	icon_state = "amp"
 	siemens_coefficient = 0.8
 
+/obj/item/clothing/head/wizard/cap
+	name = "Gentlemans Cap"
+	desc = "A checkered gray flat cap woven together with the rarest of threads."
+	icon_state = "gentcap"
+	siemens_coefficient = 0.8
+
 /obj/item/clothing/suit/wizrobe
 	name = "wizard robe"
 	desc = "A magnificant, gem-lined robe that seems to radiate power."
@@ -78,6 +84,12 @@
 	desc = "Heavy, royal purple robes threaded with psychic amplifiers and weird, bulbous lenses. Do not machine wash."
 	icon_state = "psyamp"
 	item_state = "psyamp"
+
+/obj/item/clothing/suit/wizrobe/gentlecoat
+	name = "Gentlemans Coat"
+	desc = "A heavy threaded twead gray jacket. For a different sort of Gentleman."
+	icon_state = "gentlecoat"
+	item_state = "gentlecoat"
 
 /obj/item/clothing/suit/wizrobe/fake
 	name = "wizard robe"

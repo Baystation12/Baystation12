@@ -478,6 +478,7 @@
 	siemens_coefficient = 0.30
 	permeability_coefficient = 0.01
 	item_color="white"
+	species_restricted = list("exclude","Unathi")
 
 /obj/item/clothing/gloves/fluff/walter_brooks_1 //botanistpower: Walter Brooks
 	name = "mittens"
@@ -492,12 +493,6 @@
 	desc = "The left one of a pair of black gloves. Wonder where the other one went..."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "chal_appara_1"
-
-/obj/item/clothing/gloves/fluff/ashley_rifler_1 //Vinceluk: Ashley Rifler
-	name = "Purple Glove"
-	desc = "A single, purple glove. Initials A.R. are written on the inside of it."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "ashley_rifler_1"
 
 //////////// Eye Wear ////////////
 
@@ -589,14 +584,6 @@
 	desc = "A suit that protects against minor chemical spills. Has a pink stripe down from the shoulders."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "labcoat_pink_open"
-
-/obj/item/clothing/suit/storage/det_suit/fluff/graycoat //vinceluk: Seth Sealis
-	name = "gray coat"
-	desc = "Old, worn out coat. It's seen better days."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "graycoat"
-	item_state = "graycoat"
-	item_color = "graycoat"
 
 /obj/item/clothing/suit/storage/det_suit/fluff/leatherjack //atomicdog92: Seth Sealis
 	name = "leather jacket"
@@ -746,6 +733,15 @@
 	item_state = "wyatt_uniform"
 	item_color = "wyatt_uniform"
 
+////// Black Dress - Lillian Amsel - PapaDrow
+/obj/item/clothing/under/fluff/lillian_amsel_1
+	name = "Black Dress"
+	desc = "A knee-length, dark gray and black dress made of a soft, velvety material."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "lillian_dress"
+	item_state = "lillian_dress"
+	item_color = "lillian_dress"
+
 //////////// Masks ////////////
 
 /*
@@ -836,6 +832,15 @@
 	flags = FPRINT|TABLEPASS
 	w_class = 1
 
+////// Apollon Pendant - Michael Guess - Dragor23
+/obj/item/clothing/mask/michael_guess_1
+	name = "Apollon Pendant"
+	desc = "A pendant with the form of a sacrificial tripod, used in acient greece. It's a symbol of the Olympian Apollon, a god associated with oracles, poetry, the sun and healing."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "michael_guess_1"
+	flags = FPRINT|TABLEPASS
+	w_class = 1
+	slot_flags = SLOT_MASK
 //////////// Shoes ////////////
 
 /obj/item/clothing/shoes/magboots/fluff/susan_harris_1 //sniperyeti: Susan Harris
@@ -860,6 +865,7 @@
 	desc = "Made of a special fiber that gives special protection against biohazards. Has a cross on the chest denoting that the wearer is trained medical personnel and short sleeves."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "medical_short"
+	item_state = "medical_short"
 	item_color = "medical_short"
 
 /obj/item/clothing/suit/storage/labcoat/fluff/red
@@ -919,3 +925,54 @@
 	if(istype(A, /obj/item/ammo_magazine))
 		flick("leamas-reloading",src)
 	..()
+
+
+///// Custom Items coded by Iamgoofball are Below /////
+/obj/item/weapon/storage/belt/medical/fluff/nashi_belt
+	name = "rainbow medical belt"
+	desc = "A somewhat-worn, modified, rainbow belt."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "nashi_belt"
+	item_state = "fluff_rbelt"
+
+	New()
+		..()
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 14, "Bicaridine")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 15, "Dermaline")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 16, "Dylovene")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 17, "Dexalin Plus")
+		new /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle(src, 18, "Tricordrazine")
+		new /obj/item/weapon/reagent_containers/syringe/(src)
+		new /obj/item/device/healthanalyzer(src)
+
+/obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle
+	icon = 'icons/obj/chemical.dmi'
+	flags = FPRINT | TABLEPASS //Starting them with lids on them.  Safety first!
+	New(loc, var/color, var/labeled)
+		..()
+		name = "[labeled] bottle"
+		desc = "A small bottle.  Contains [labeled]"
+		icon_state = "bottle[color]"
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/fluff/yuri_kornienkovich_flask
+	name = "Yuri's Flask"
+	desc = "An old gold plated flask. Nothing noteworthy about it besides it being gold and the red star on the worn out leather around it. There is also an engraving on the cap that is rather hard to see but it looks like \"Kornienkovich\" "
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "yuri_kornienkovich_flask"
+
+/obj/item/clothing/under/fluff/mai_yang_dress // Mai Yang's pretty pretty dress.
+	name = "White Cheongsam"
+	desc = "It is a white cheongsam dress."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "mai_yang"
+	item_state = "mai_yang"
+	item_color = "mai_yang"
+
+/obj/item/clothing/under/fluff/sakura_hokkaido_kimono
+	name = "Sakura Kimono"
+	desc = "A pale-pink, nearly white, kimono with a red and gold obi. There is a embroidered design of cherry blossom flowers covering the kimono."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "sakura_hokkaido_kimono"
+	item_state = "sakura_hokkaido_kimono"
+	item_color = "sakura_hokkaido_kimono"
+

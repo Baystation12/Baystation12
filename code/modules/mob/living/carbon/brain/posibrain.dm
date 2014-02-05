@@ -27,6 +27,8 @@
 
 	proc/request_player()
 		for(var/mob/dead/observer/O in player_list)
+			if(O.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
+				continue
 			if(jobban_isbanned(O, "pAI"))
 				continue
 			if(O.client)
@@ -44,6 +46,19 @@
 				C.prefs.be_special ^= BE_PAI
 
 
+	transfer_identity(var/mob/living/carbon/H)
+		name = "positronic brain ([H])"
+		brainmob.name = H.real_name
+		brainmob.real_name = H.real_name
+		brainmob.dna = H.dna
+		brainmob.timeofhostdeath = H.timeofdeath
+		if(brainmob.mind)
+			brainmob.mind.assigned_role = "Positronic Brain"
+		if(H.mind)
+			H.mind.transfer_to(brainmob)
+		brainmob << "\blue You feel slightly disoriented. That's normal when you're just a metal cube."
+		icon_state = "posibrain-occupied"
+		return
 
 	proc/transfer_personality(var/mob/candidate)
 

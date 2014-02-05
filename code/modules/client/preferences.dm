@@ -44,6 +44,8 @@ datum/preferences
 	var/be_special = 0					//Special role selection
 	var/UI_style = "Midnight"
 	var/toggles = TOGGLES_DEFAULT
+	var/UI_style_color = "#ffffff"
+	var/UI_style_alpha = 255
 
 	//character preferences
 	var/real_name						//our character's name
@@ -106,6 +108,8 @@ datum/preferences
 	var/disabilities = 0
 
 	var/nanotrasen_relation = "Neutral"
+
+	var/uplinklocation = "PDA"
 
 		// OOC Metadata:
 	var/metadata = ""
@@ -241,10 +245,14 @@ datum/preferences
 
 		dat += "<br>"
 		dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
+		dat += "<b>Custom UI</b>(recommended for White UI):<br>"
+		dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
+		dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 		dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "Nearest Creatures" : "All Speech"]</b></a><br>"
 		dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "Nearest Creatures" : "All Emotes"]</b></a><br>"
+		dat += "<b>Ghost radio:</b> <a href='?_src_=prefs;preference=ghost_radio'><b>[(toggles & CHAT_GHOSTRADIO) ? "Nearest Speakers" : "All Chatter"]</b></a><br>"
 
 		if(config.allow_Metadata)
 			dat += "<b>OOC Notes:</b> <a href='?_src_=prefs;preference=metadata;task=input'> Edit </a><br>"
@@ -262,6 +270,7 @@ datum/preferences
 		//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
 		dat += "Needs Glasses: <a href='?_src_=prefs;preference=disabilities'><b>[disabilities == 0 ? "No" : "Yes"]</b></a><br>"
 		dat += "Limbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
+		dat += "Internal Organs: <a href='byond://?src=\ref[user];preference=organs;task=input'>Adjust</a><br>"
 
 		//display limbs below
 		var/ind = 0
@@ -286,6 +295,10 @@ datum/preferences
 					organ_name = "left hand"
 				if("r_hand")
 					organ_name = "right hand"
+				if("heart")
+					organ_name = "heart"
+				if("eyes")
+					organ_name = "eyes"
 
 			if(status == "cyborg")
 				++ind
@@ -297,6 +310,24 @@ datum/preferences
 				if(ind > 1)
 					dat += ", "
 				dat += "\tAmputated [organ_name]"
+			else if(status == "mechanical")
+				++ind
+				if(ind > 1)
+					dat += ", "
+				dat += "\tMechanical [organ_name]"
+			else if(status == "assisted")
+				++ind
+				if(ind > 1)
+					dat += ", "
+				switch(organ_name)
+					if("heart")
+						dat += "\tPacemaker-assisted [organ_name]"
+					if("voicebox") //on adding voiceboxes for speaking skrell/similar replacements
+						dat += "\tSurgically altered [organ_name]"
+					if("eyes")
+						dat += "\tRetinal overlayed [organ_name]"
+					else
+						dat += "\tMechanically assisted [organ_name]"
 		if(!ind)
 			dat += "\[...\]<br><br>"
 		else
@@ -319,6 +350,8 @@ datum/preferences
 			dat += "<b>You are banned from using character records.</b><br>"
 		else
 			dat += "<b><a href=\"byond://?src=\ref[user];preference=records;record=1\">Character Records</a></b><br>"
+
+		dat += "<b><a href=\"byond://?src=\ref[user];preference=antagoptions;active=0\">Set Antag Options</b></a><br>"
 
 		dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)][used_skillpoints > 0 ? " [used_skillpoints]" : "0"])</i></a><br>"
 
@@ -517,6 +550,24 @@ datum/preferences
 		user << browse(null, "window=preferences")
 		user << browse(HTML, "window=records;size=350x300")
 		return
+
+	proc/SetAntagoptions(mob/user)
+		var/HTML = "<body>"
+		HTML += "<tt><center>"
+		HTML += "<b>Antagonist Options</b> <hr />"
+		HTML += "<br>"
+		HTML +="Uplink Type : <b><a href='?src=\ref[user];preference=antagoptions;antagtask=uplinktype;active=1'>[uplinklocation]</a></b>"
+		HTML +="<br>"
+		HTML +="<hr />"
+		HTML +="<a href='?src=\ref[user];preference=antagoptions;antagtask=done;active=1'>\[Done\]</a>"
+
+		HTML += "</center></tt>"
+
+		user << browse(null, "window=preferences")
+		user << browse(HTML, "window=antagoptions")
+		return
+
+
 
 	proc/GetPlayerAltTitle(datum/job/job)
 		return player_alt_titles.Find(job.title) > 0 \
@@ -752,6 +803,23 @@ datum/preferences
 
 					gen_record = genmsg
 					SetRecords(user)
+
+		else if (href_list["preference"] == "antagoptions")
+			if(text2num(href_list["active"]) == 0)
+				SetAntagoptions(user)
+				return
+			if (href_list["antagtask"] == "uplinktype")
+				if (uplinklocation == "PDA")
+					uplinklocation = "Headset"
+				else if(uplinklocation == "Headset")
+					uplinklocation = "None"
+				else
+					uplinklocation = "PDA"
+				SetAntagoptions(user)
+			if (href_list["antagtask"] == "done")
+				user << browse(null, "window=antagoptions")
+				ShowChoices(user)
+			return 1
 
 		switch(href_list["task"])
 			if("random")
@@ -1048,6 +1116,28 @@ datum/preferences
 								if(second_limb)
 									organ_data[second_limb] = "cyborg"
 
+					if("organs")
+						var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes")
+						if(!organ_name) return
+
+						var/organ = null
+						switch(organ_name)
+							if("Heart")
+								organ = "heart"
+							if("Eyes")
+								organ = "eyes"
+
+						var/new_state = input(user, "What state do you wish the organ to be in?") as null|anything in list("Normal","Assisted","Mechanical")
+						if(!new_state) return
+
+						switch(new_state)
+							if("Normal")
+								organ_data[organ] = null
+							if("Assisted")
+								organ_data[organ] = "assisted"
+							if("Mechanical")
+								organ_data[organ] = "mechanical"
+
 					if("skin_style")
 						var/skin_style_name = input(user, "Select a new skin style") as null|anything in list("default1", "default2", "default3")
 						if(!skin_style_name) return
@@ -1072,8 +1162,20 @@ datum/preferences
 								UI_style = "Orange"
 							if("Orange")
 								UI_style = "old"
+							if("old")
+								UI_style = "White"
 							else
 								UI_style = "Midnight"
+
+					if("UIcolor")
+						var/UI_style_color_new = input(user, "Choose your UI color, dark colors are not recommended!") as color|null
+						if(!UI_style_color_new) return
+						UI_style_color = UI_style_color_new
+
+					if("UIalpha")
+						var/UI_style_alpha_new = input(user, "Select a new alpha(transparence) parametr for UI, between 50 and 255") as num
+						if(!UI_style_alpha_new | !(UI_style_alpha_new <= 255 && UI_style_alpha_new >= 50)) return
+						UI_style_alpha = UI_style_alpha_new
 
 					if("be_special")
 						var/num = text2num(href_list["num"])
@@ -1097,6 +1199,9 @@ datum/preferences
 
 					if("ghost_sight")
 						toggles ^= CHAT_GHOSTSIGHT
+
+					if("ghost_radio")
+						toggles ^= CHAT_GHOSTRADIO
 
 					if("save")
 						save_preferences()
@@ -1167,19 +1272,27 @@ datum/preferences
 		character.skills = skills
 
 		// Destroy/cyborgize organs
+
 		for(var/name in organ_data)
 			var/datum/organ/external/O = character.organs_by_name[name]
-			if(!O) continue
-
+			var/datum/organ/internal/I = character.internal_organs_by_name[name]
 			var/status = organ_data[name]
+
 			if(status == "amputated")
 				O.amputated = 1
 				O.status |= ORGAN_DESTROYED
 				O.destspawn = 1
-			else if(status == "cyborg")
+			if(status == "cyborg")
 				O.status |= ORGAN_ROBOT
+			if(status == "assisted")
+				I.mechassist()
+			else if(status == "mechanical")
+				I.mechanize()
+
+			else continue
+
 		if(underwear > underwear_m.len || underwear < 1)
-			underwear = 1 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me.
+			underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES
 		character.underwear = underwear
 
 		if(backbag > 4 || backbag < 1)

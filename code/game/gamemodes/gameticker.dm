@@ -56,7 +56,8 @@ var/global/datum/controller/gameticker/ticker
 				vote.process()
 			if(going)
 				pregame_timeleft--
-
+			if(pregame_timeleft == config.vote_autogamemode_timeleft)
+				vote.autogamemode()
 			if(pregame_timeleft <= 0)
 				current_state = GAME_STATE_SETTING_UP
 	while (!setup())
@@ -118,6 +119,7 @@ var/global/datum/controller/gameticker/ticker
 	data_core.manifest()
 	current_state = GAME_STATE_PLAYING
 
+	callHook("roundstart")
 
 	//here to initialize the random events nicely at round start
 	setup_economy()
@@ -148,6 +150,7 @@ var/global/datum/controller/gameticker/ticker
 	master_controller.process()		//Start master_controller.process()
 	lighting_controller.process()	//Start processing DynamicAreaLighting updates
 
+	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
 	if(config.sql_enabled)
 		spawn(3000)
@@ -309,6 +312,8 @@ var/global/datum/controller/gameticker/ticker
 				declare_completion()
 
 			spawn(50)
+				callHook("roundend")
+
 				if (mode.station_was_nuked)
 					feedback_set_details("end_proper","nuke")
 					if(!delay_end)

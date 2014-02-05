@@ -23,7 +23,7 @@
  */
 
 /obj/item/weapon/storage/backpack/holding
-	name = "Bag of Holding"
+	name = "bag of holding"
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = "bluespace=4"
 	icon_state = "holdingpack"
@@ -84,7 +84,7 @@
 	icon_state = "cultpack"
 
 /obj/item/weapon/storage/backpack/clown
-	name = "Giggles Von Honkerton"
+	name = "Giggles von Honkerton"
 	desc = "It's a backpack made by Honk! Co."
 	icon_state = "clownpack"
 	item_state = "clownpack"

@@ -5,16 +5,18 @@
 	damage_type = BRUTE
 	nodamage = 0
 	flag = "bullet"
+	embed = 1
 
 	on_hit(var/atom/target, var/blocked = 0)
 		if (..(target, blocked))
 			var/mob/living/L = target
 			shake_camera(L, 3, 2)
 
-/obj/item/projectile/bullet/weakbullet
+/obj/item/projectile/bullet/weakbullet // "rubber" bullets
 	damage = 10
 	stun = 5
 	weaken = 5
+	embed = 0
 
 
 /obj/item/projectile/bullet/midbullet
@@ -48,6 +50,7 @@
 	stun = 10
 	weaken = 10
 	stutter = 10
+	embed = 0
 
 /obj/item/projectile/bullet/a762
 	damage = 25

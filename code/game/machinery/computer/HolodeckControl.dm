@@ -454,6 +454,15 @@
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "wood_table"
 
+/obj/structure/holostool
+	name = "stool"
+	desc = "Apply butt."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "stool"
+	anchored = 1.0
+	flags = FPRINT
+	pressure_resistance = 15
+
 
 /obj/item/clothing/gloves/boxing/hologlove
 	name = "boxing gloves"
@@ -523,6 +532,12 @@
 		w_class = 2
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "\blue [src] can now be concealed."
+
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
+
 	add_fingerprint(user)
 	return
 

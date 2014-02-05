@@ -92,6 +92,8 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 
 /obj/item/seeds/replicapod/proc/request_player()
 	for(var/mob/dead/observer/O in player_list)
+		if(jobban_isbanned(O, "Dionaea"))
+			continue
 		if(O.client)
 			if(O.client.prefs.be_special & BE_PLANT)
 				question(O.client)
