@@ -14,6 +14,13 @@
 		return 1
 	return ..()
 
+
+
+// These Verbs are commented out since we've disabled the AI vocal (VOX) announcements.
+// If you re-enable them there is 3 lines in ai.dm Topic() that you need to uncomment as well.
+// just search for VOX in there.
+
+/*
 var/announcing_vox = 0 // Stores the time of the last announcement
 var/const/VOX_CHANNEL = 200
 var/const/VOX_DELAY = 100 // 10 seconds
@@ -128,3 +135,6 @@ var/const/VOX_PATH = "sound/vox/"
 	//	src << "Downloading [file]"
 		var/sound/S = sound("[VOX_PATH][file]")
 		src << browse_rsc(S)
+
+
+*/
