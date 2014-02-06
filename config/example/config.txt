@@ -92,7 +92,7 @@ ALLOW_RANDOM_EVENTS
 TRAITOR_SCALING
 
 ## if objectives are disabled
-OBJECTIVES_DISABLED
+#OBJECTIVES_DISABLED
 
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
