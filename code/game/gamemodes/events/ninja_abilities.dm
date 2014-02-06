@@ -238,38 +238,38 @@ Must right click on a mob to activate.*/
 	var/C = 2500
 	if(!ninjacost(C,1)&&iscarbon(M)) // Nets now cost 8,000
 		var/mob/living/carbon/human/U = affecting
-		//if(M.client)//Monkeys without a client can still step_to() and bypass the net. Also, netting inactive people is lame.
+		if(M.client)//Monkeys without a client can still step_to() and bypass the net. Also, netting inactive people is lame.
 		//if(M)//DEBUG
-		if(!locate(/obj/effect/energy_net) in M.loc)//Check if they are already being affected by an energy net.
-			for(var/turf/T in getline(U.loc, M.loc))
-				if(T.density)//Don't want them shooting nets through walls. It's kind of cheesy.
-					U << "You may not use an energy net through solid obstacles!"
-					return
-			spawn(0)
-				U.Beam(M,"n_beam",,15)
-			M.anchored = 1//Anchors them so they can't move.
-			var/obj/effect/stop/S
-			S = new /obj/effect/stop
-			S.victim = M
-			S.loc = M.loc
+			if(!locate(/obj/effect/energy_net) in M.loc)//Check if they are already being affected by an energy net.
+				for(var/turf/T in getline(U.loc, M.loc))
+					if(T.density)//Don't want them shooting nets through walls. It's kind of cheesy.
+						U << "You may not use an energy net through solid obstacles!"
+						return
+				spawn(0)
+					U.Beam(M,"n_beam",,15)
+				M.anchored = 1//Anchors them so they can't move.
+				var/obj/effect/stop/S
+				S = new /obj/effect/stop
+				S.victim = M
+				S.loc = M.loc
 
-			var/obj/effect/energy_net/E = new /obj/effect/energy_net(M.loc)
-			E.layer = M.layer+1//To have it appear one layer above the mob.
-			for(var/mob/O in viewers(U, 3))
-				O.show_message(text("\red [] caught [] with an energy net!", U, M), 1)
-			E.affecting = M
-			E.master = U
-			spawn(0)//Parallel processing.
-				E.process(M)
-			cell.charge-=(C)
+				var/obj/effect/energy_net/E = new /obj/effect/energy_net(M.loc)
+				E.layer = M.layer+1//To have it appear one layer above the mob.
+				for(var/mob/O in viewers(U, 3))
+					O.show_message(text("\red [] caught [] with an energy net!", U, M), 1)
+				E.affecting = M
+				E.master = U
+				spawn(0)//Parallel processing.
+					E.process(M)
+				cell.charge-=(C)
+			else
+				U << "They are already trapped inside an energy net."
 		else
-			U << "They are already trapped inside an energy net."
-		//else
-			//U << "They will bring no honor to your Clan!"
+			U << "They will bring no honor to your Clan!"
 	return
 
 //=======//ADRENALINE BOOST//=======//
-/*Wakes the user so they are able to do their thing. Also injects a decent dose of radium.
+/*Wakes the user so they are able to do their thing. Also injects a decent dose of uranium.
 Movement impairing would indicate drugs and the like.*/
 /obj/item/clothing/suit/space/space_ninja/proc/ninjaboost()
 	set name = "Adrenaline Boost"
@@ -280,7 +280,7 @@ Movement impairing would indicate drugs and the like.*/
 	if(!ninjacost(,3))//Have to make sure stat is not counted for this ability.
 		var/mob/living/carbon/human/U = affecting
 		//Wouldn't need to track adrenaline boosters if there was a miracle injection to get rid of paralysis and the like instantly.
-		//For now, adrenaline boosters ARE the miracle injection. Well, radium, really.
+		//For now, adrenaline boosters ARE the miracle injection. Well, uranium, really.
 		U.SetParalysis(0)
 		U.SetStunned(0)
 		U.SetWeakened(0)
@@ -297,7 +297,7 @@ Movement impairing would indicate drugs and the like.*/
 			U.say(pick("A CORNERED FOX IS MORE DANGEROUS THAN A JACKAL!","HURT ME MOOORRREEE!","IMPRESSIVE!"))
 		spawn(70)
 			reagents.reaction(U, 2)
-			reagents.trans_id_to(U, "radium", a_transfer)
+			reagents.trans_id_to(U, "uranium", a_transfer)
 			U << "\red You are beginning to feel the after-effect of the injection."
 		a_boost--
 		s_coold = 3

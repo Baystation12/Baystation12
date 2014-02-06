@@ -326,6 +326,8 @@ proc/trigger_armed_response_team(var/force = 0)
 	W.icon_state = "centcom"
 	W.access = get_all_accesses()
 	W.access += list(access_cent_general, access_cent_living, access_cent_storage)
+	if (leader_selected)
+		W.access += access_cent_teleporter
 	equip_to_slot_or_del(W, slot_wear_id)
 
 	return 1
