@@ -32,11 +32,11 @@ ________________________________________________________________________________
 		stored_research += new T(src)
 	var/reagent_amount//reagent initialize
 	for(var/reagent_id in reagent_list)
-		reagent_amount += reagent_id == "radium" ? r_maxamount+(a_boost*a_transfer) : r_maxamount//AI can inject radium directly.
+		reagent_amount += reagent_id == "uranium" ? r_maxamount+(a_boost*a_transfer) : r_maxamount//AI can inject uranium directly.
 	reagents = new(reagent_amount)
 	reagents.my_atom = src
 	for(var/reagent_id in reagent_list)
-		reagent_id == "radium" ? reagents.add_reagent(reagent_id, r_maxamount+(a_boost*a_transfer)) : reagents.add_reagent(reagent_id, r_maxamount)//It will take into account radium used for adrenaline boosting.
+		reagent_id == "uranium" ? reagents.add_reagent(reagent_id, r_maxamount+(a_boost*a_transfer)) : reagents.add_reagent(reagent_id, r_maxamount)//It will take into account uranium used for adrenaline boosting.
 	cell = new/obj/item/weapon/cell/high//The suit should *always* have a battery because so many things rely on it.
 	cell.charge = 9000//Starting charge should not be higher than maximum charge. It leads to problems with recharging.
 
@@ -320,9 +320,9 @@ ________________________________________________________________________________
 				dat += "Warning: Virus Detected. Name: [D.name].Type: [D.spread]. Stage: [D.stage]/[D.max_stages]. Possible Cure: [D.cure].<br>"
 			dat += "<ul>"
 			for(var/datum/reagent/R in reagents.reagent_list)
-				if(R.id=="radium"&&s_control)//Can only directly inject radium when AI is in control.
+				if(R.id=="uranium"&&s_control)//Can only directly inject uranium when AI is in control.
 					continue
-				dat += "<li><a href='byond://?src=\ref[src];choice=Inject;name=[R.name];tag=[R.id]'><img src=sos_2.png> Inject [R.name]: [(reagents.get_reagent_amount(R.id)-(R.id=="radium"?(a_boost*a_transfer):0))/(R.id=="nutriment"?5:a_transfer)] left</a></li>"
+				dat += "<li><a href='byond://?src=\ref[src];choice=Inject;name=[R.name];tag=[R.id]'><img src=sos_2.png> Inject [R.name]: [(reagents.get_reagent_amount(R.id)-(R.id=="uranium"?(a_boost*a_transfer):0))/(R.id=="nutriment"?5:a_transfer)] left</a></li>"
 			dat += "</ul>"
 		if(1)
 			dat += "<h4><img src=sos_5.png> Atmospheric Scan:</h4>"//Headers don't need breaks. They are automatically placed.
@@ -414,7 +414,7 @@ ________________________________________________________________________________
 					<li>*<b>EM Pulse</b> (<i>1000E</i>) is a highly useful ability that will create an electromagnetic shockwave around the ninja, disabling technology whenever possible. If used properly it can render a security force effectively useless. Of course, getting beat up with a toolbox is not accounted for.</li>
 					<li>*<b>Energy Star</b> (<i>500E</i>) is a ninja star made of green energy AND coated in poison. It works by picking a random living target within range and can be spammed to great effect in incapacitating foes. Just remember that the poison used is also used by the Xeno Hivemind (and will have no effect on them).</li>
 					<li>*<b>Energy Net</b> (<i>2000E</i>) is a non-lethal solution to incapacitating humanoids. The net is made of non-harmful phase energy and will halt movement as long as it remains in effect--it can be destroyed. If the net is not destroyed, after a certain time it will teleport the target to a holding facility for the Spider Clan and then vanish. You will be notified if the net fails or succeeds in capturing a target in this manner. Combine with energy stars or stripping to ensure success. Abduction never looked this leet.</li>
-					<li>*<b>Adrenaline Boost</b> (<i>1 E. Boost/3</i>) recovers the user from stun, weakness, and paralysis. Also injects 20 units of radium into the bloodstream.</li>
+					<li>*<b>Adrenaline Boost</b> (<i>1 E. Boost/3</i>) recovers the user from stun, weakness, and paralysis. Also injects 20 units of uranium into the bloodstream.</li>
 					<li>*<b>Smoke Bomb</b> (<i>1 Sm.Bomb/10</i>) is a weak but potentially useful ability. It creates harmful smoke and can be used in tandem with other powers to confuse enemies.</li>
 					<li>*<b>???</b>: unleash the <b>True Ultimate Power!</b></li>
 					<h4>IMPORTANT:</h4>
@@ -573,7 +573,7 @@ ________________________________________________________________________________
 				L << "\icon[P] <b>Message from [!s_control?(A):"an unknown source"], </b>\"[t]\" (<i>Unable to Reply</i>)"
 
 		if("Inject")
-			if( (href_list["tag"]=="radium"? (reagents.get_reagent_amount("radium"))<=(a_boost*a_transfer) : !reagents.get_reagent_amount(href_list["tag"])) )//Special case for radium. If there are only a_boost*a_transfer radium units left.
+			if( (href_list["tag"]=="uranium"? (reagents.get_reagent_amount("uranium"))<=(a_boost*a_transfer) : !reagents.get_reagent_amount(href_list["tag"])) )//Special case for uranium. If there are only a_boost*a_transfer uranium units left.
 				display_to << "\red Error: the suit cannot perform this function. Out of [href_list["name"]]."
 			else
 				reagents.reaction(U, 2)
@@ -846,9 +846,9 @@ ________________________________________________________________________________
 			var/total_reagent_transfer//Keep track of this stuff.
 			for(var/reagent_id in reagent_list)
 				var/datum/reagent/R = I.reagents.has_reagent(reagent_id)//Mostly to pull up the name of the reagent after calculating. Also easier to use than writing long proc paths.
-				if(R&&reagents.get_reagent_amount(reagent_id)<r_maxamount+(reagent_id == "radium"?(a_boost*a_transfer):0)&&R.volume>=a_transfer)//Radium is always special.
+				if(R&&reagents.get_reagent_amount(reagent_id)<r_maxamount+(reagent_id == "uranium"?(a_boost*a_transfer):0)&&R.volume>=a_transfer)//Uranium is always special.
 					//Here we determine how much reagent will actually transfer if there is enough to transfer or there is a need of transfer. Minimum of max amount available (using a_transfer) or amount needed.
-					var/amount_to_transfer = min( (r_maxamount+(reagent_id == "radium"?(a_boost*a_transfer):0)-reagents.get_reagent_amount(reagent_id)) ,(round(R.volume/a_transfer))*a_transfer)//In the end here, we round the amount available, then multiply it again.
+					var/amount_to_transfer = min( (r_maxamount+(reagent_id == "uranium"?(a_boost*a_transfer):0)-reagents.get_reagent_amount(reagent_id)) ,(round(R.volume/a_transfer))*a_transfer)//In the end here, we round the amount available, then multiply it again.
 					R.volume -= amount_to_transfer//Remove from reagent volume. Don't want to delete the reagent now since we need to perserve the name.
 					reagents.add_reagent(reagent_id, amount_to_transfer)//Add to suit. Reactions are not important.
 					total_reagent_transfer += amount_to_transfer//Add to total reagent trans.
