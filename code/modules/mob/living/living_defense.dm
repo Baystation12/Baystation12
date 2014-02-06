@@ -134,7 +134,6 @@
 	return 0
 
 // End BS12 momentum-transfer code.
-<<<<<<< HEAD
 
 //Mobs on Fire
 /mob/living/proc/IgniteMob()
@@ -173,5 +172,3 @@
 		IgniteMob()
 
 //Mobs on Fire end
-=======
->>>>>>> 9665e8c... Mouse Attack_Logs disabled.  Admins rejoice.
