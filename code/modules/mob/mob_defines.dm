@@ -226,3 +226,4 @@
 
 	var/list/active_genes=list()
 
+	var/last_movement = -100 // Last world.time the mob actually moved of its own accord.

@@ -288,7 +288,7 @@
 		var/area/targetsource = locate(/area/holodeck/source_emptycourt)
 		holographic_items = targetsource.copy_contents_to(linkedholodeck)
 
-		spawn(30)
+/*		spawn(30)
 			for(var/obj/effect/landmark/L in linkedholodeck)
 				if(L.name=="Atmospheric Test Start")
 					spawn(20)
@@ -298,7 +298,7 @@
 						s.start()
 						if(T)
 							T.temperature = 5000
-							T.hotspot_expose(50000,50000,1)
+							T.hotspot_expose(50000,50000,1)*/
 
 		active = 1
 	else

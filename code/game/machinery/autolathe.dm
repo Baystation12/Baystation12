@@ -4,8 +4,8 @@ var/global/list/autolathe_recipes = list( \
 		new /obj/item/stack/sheet/metal(), \
 		new /obj/item/stack/sheet/glass(), \
 		new /obj/item/stack/sheet/rglass(), \
-		new /obj/item/stack/rods(), \
 		new /obj/item/stack/sheet/fur(), \
+		new /obj/item/stack/rods(), \
 		new /obj/item/weapon/crowbar(), \
 		new /obj/item/weapon/screwdriver(), \
 		new /obj/item/weapon/weldingtool(), \
@@ -21,7 +21,6 @@ var/global/list/autolathe_recipes = list( \
 		new /obj/item/weapon/airlock_electronics(), \
 		new /obj/item/weapon/airalarm_electronics(), \
 		new /obj/item/weapon/firealarm_electronics(), \
-		new /obj/item/weapon/rcd_ammo(), \
 		new /obj/item/weapon/kitchenknife(), \
 		new /obj/item/weapon/scalpel(), \
 		new /obj/item/weapon/circular_saw(), \
@@ -32,9 +31,6 @@ var/global/list/autolathe_recipes = list( \
 		new /obj/item/weapon/reagent_containers/glass/beaker(), \
 		new /obj/item/weapon/reagent_containers/glass/beaker/large(), \
 		new /obj/item/weapon/reagent_containers/glass/bucket(), \
-		new /obj/item/weapon/storage/box/blanks(), \
-		new /obj/item/ammo_casing/shotgun/beanbag(), \
-		new /obj/item/ammo_box/c38(), \
 		new /obj/item/device/taperecorder(), \
 		new /obj/item/device/assembly/igniter(), \
 		new /obj/item/device/assembly/signaler(), \
@@ -46,6 +42,12 @@ var/global/list/autolathe_recipes = list( \
 		new /obj/item/weapon/light/tube(), \
 		new /obj/item/weapon/light/bulb(), \
 		new /obj/item/weapon/camera_assembly(), \
+		new /obj/item/weapon/rcd_ammo(), \
+		new /obj/item/ammo_casing/shotgun/beanbag(), \
+		new /obj/item/weapon/storage/box/blanks(), \
+		new /obj/item/ammo_casing/shotgun(), \
+		new /obj/item/ammo_box/c38(), \
+		new /obj/item/ammo_box/a357(), \
 		new /obj/item/clothing/ears/earmuffs/tribblemuffs(), \
 		new /obj/item/clothing/gloves/furgloves(), \
 		new /obj/item/clothing/head/furcap(), \
@@ -60,12 +62,9 @@ var/global/list/autolathe_recipes_hidden = list( \
 		new /obj/item/device/radio/electropack(), \
 		new /obj/item/weapon/weldingtool/largetank(), \
 		new /obj/item/weapon/handcuffs(), \
-		new /obj/item/ammo_box/a357(), \
-		new /obj/item/ammo_casing/shotgun(), \
-		new /obj/item/ammo_casing/shotgun/dart(), \
-		/* new /obj/item/weapon/shield/riot(), */ \
+		/*new /obj/item/ammo_casing/shotgun/dart(), \
+		new /obj/item/weapon/shield/riot(), */ \
 	)
-
 /obj/machinery/autolathe
 	name = "autolathe"
 	desc = "It produces items using metal and glass."

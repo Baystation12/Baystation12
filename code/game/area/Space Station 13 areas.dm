@@ -526,10 +526,17 @@ proc/process_ghost_teleport_locs()
 	icon_state = "yellow"
 	requires_power = 0
 
-/area/ninja_outpost
-	name = "\improper SpiderClan Outpost"
+/area/ninja
+	name = "\improper Ninja Area Parent"
 	icon_state = "ninjabase"
 	requires_power = 0
+
+/area/ninja/outpost
+	name = "\improper SpiderClan Outpost"
+
+/area/ninja/holding
+	name = "\improper SpiderClan Holding Facility"
+
 
 /area/vox_station/transit
 	name = "\improper hyperspace"
@@ -881,6 +888,14 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Messaging Server Room"
 	icon_state = "server"
 
+/area/ntrep
+	name = "\improper NanoTrasen Rep Office"
+	icon_state = "bluenew"
+
+/area/blueshield
+	name = "\improper Blueshield's Office"
+	icon_state = "blueold"
+
 //Crew
 
 /area/crew_quarters
@@ -1138,7 +1153,7 @@ proc/process_ghost_teleport_locs()
 
 /area/toxins/telesci
 	name = "\improper Telescience Lab"
-	icon_state = "toxmisc"
+	icon_state = "telesci"
 
 
 //MedBay
@@ -1630,9 +1645,11 @@ proc/process_ghost_teleport_locs()
 
 //GAYBAR
 /area/secret/gaybar
-	name = "\improper Secret Space Bar"
+	name = "\improper Dance Bar"
 	requires_power = 0
-	icon_state = "pink"
+	icon_state = "dancebar"
+
+
 
 //AI
 
@@ -1699,8 +1716,6 @@ proc/process_ghost_teleport_locs()
 
 
 //Misc
-
-
 
 /area/wreck/ai
 	name = "\improper AI Chamber"

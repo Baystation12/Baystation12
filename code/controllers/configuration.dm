@@ -23,9 +23,6 @@
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
 	var/allow_vote_mode = 0				// allow votes to change mode
-	var/allow_admin_jump = 1			// allows admin jumping
-	var/allow_admin_spawning = 1		// allows admin item spawning
-	var/allow_admin_rev = 1				// allows admin revives
 	var/vote_delay = 6000				// minimum time between voting sessions (deciseconds, 10 minute default)
 	var/vote_period = 600				// length of voting period (deciseconds, default 1 minute)
 	var/vote_autotransfer_initial = 72000 // Length of time before the first autotransfer vote is called
@@ -258,16 +255,7 @@
 				if ("allow_vote_mode")
 					config.allow_vote_mode = 1
 
-				if ("allow_admin_jump")
-					config.allow_admin_jump = 1
-
-				if("allow_admin_rev")
-					config.allow_admin_rev = 1
-
-				if ("allow_admin_spawning")
-					config.allow_admin_spawning = 1
-
-				if ("no_dead_vote")
+				if("no_dead_vote")
 					config.vote_no_dead = 1
 
 				if ("default_no_vote")
@@ -455,7 +443,7 @@
 						if(world.system_type == UNIX)
 							config.python_path = "/usr/bin/env python2"
 						else //probably windows, if not this should work anyway
-							config.python_path = "python"
+							config.python_path = "pythonw"
 
 				if("assistant_limit")
 					config.assistantlimit = 1

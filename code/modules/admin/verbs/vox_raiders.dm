@@ -66,6 +66,7 @@ var/global/vox_tick = 1
 	W.registered_user = src
 	equip_to_slot_or_del(W, slot_wear_id)
 
+/*
 	var/obj/item/weapon/implant/cortical/I = new(src)
 	I.imp_in = src
 	I.implanted = 1
@@ -82,6 +83,7 @@ var/global/vox_tick = 1
 		M.cortical_stacks += I
 		M.traders[mind] = I
 
+*/
 	vox_tick++
 	if (vox_tick > 4) vox_tick = 1
 

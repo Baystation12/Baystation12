@@ -144,11 +144,16 @@
 // Used in job equipping so shit doesn't pile up at the start loc.
 /mob/living/carbon/human/proc/equip_or_collect(var/obj/item/W, var/slot)
 	if(!equip_to_slot_or_del(W, slot))
-		// Do I have a bag?
-		var/obj/item/weapon/storage/bag/plasticbag/B = is_in_hands(/obj/item/weapon/storage/bag/plasticbag)
+		// Do I have a backpack?
+		var/obj/item/weapon/storage/B = back
+
+		// Do I have a plastic bag?
+		if(!B)
+			B=is_in_hands(/obj/item/weapon/storage/bag/plasticbag)
+
 		if(!B)
 			// Gimme one.
-			B=new(null) // Null in case of failed equip.
+			B=new /obj/item/weapon/storage/bag/plasticbag(null) // Null in case of failed equip.
 			if(!put_in_hands(B,slot_back))
 				return // Fuck it
 		B.handle_item_insertion(W,1)
@@ -885,6 +890,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 				stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
 				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
 				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
+				stat(null,"GC-[master_controller.gc_cost]\t#[garbage.queue.len]")
 				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
 			else
 				stat(null,"MasterController-ERROR")
@@ -903,11 +909,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 		for(var/obj/effect/proc_holder/spell/S in spell_list)
 			switch(S.charge_type)
 				if("recharge")
-					statpanel("Spells","[S.charge_counter/10.0]/[S.charge_max/10]",S)
+					statpanel(S.panel,"[S.charge_counter/10.0]/[S.charge_max/10]",S)
 				if("charges")
-					statpanel("Spells","[S.charge_counter]/[S.charge_max]",S)
+					statpanel(S.panel,"[S.charge_counter]/[S.charge_max]",S)
 				if("holdervar")
-					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
+					statpanel(S.panel,"[S.holder_var_type] [S.holder_var_amount]",S)
 
 	if(listed_turf)
 		if(get_dist(listed_turf,src) > 1)

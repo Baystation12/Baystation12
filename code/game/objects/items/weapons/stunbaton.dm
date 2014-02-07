@@ -26,6 +26,10 @@
 	update_icon()
 	return
 
+/obj/item/weapon/melee/baton/CheckParts()
+	bcell = locate(/obj/item/weapon/cell) in contents
+	update_icon()
+
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)
 		if(bcell.rigged)
@@ -221,4 +225,3 @@
 		icon_state = "stunprod_nocell"
 	else
 		icon_state = "stunprod"
-

@@ -32,6 +32,11 @@
 	set_species("Vox")
 	..()
 
+/mob/living/carbon/human/skellington/New()
+	h_style = "Bald"
+	set_species("Skellington")
+	..()
+
 /mob/living/carbon/human/diona/New()
 	species = new /datum/species/diona(src)
 	..()
@@ -44,6 +49,10 @@
 	species = new /datum/species/slime(src)
 	dna = new /datum/dna(null)
 	dna.mutantrace = "slime"
+	..()
+
+/mob/living/carbon/human/machine/New()
+	species = new /datum/species/machine(src)
 	..()
 
 /mob/living/carbon/human/grey/New()
@@ -1112,6 +1121,7 @@
 		O.status &= ~ORGAN_BROKEN
 		O.status &= ~ORGAN_BLEEDING
 		O.status &= ~ORGAN_SPLINTED
+		O.status &= ~ORGAN_CUT_AWAY
 		O.status &= ~ORGAN_ATTACHABLE
 		if (!O.amputated)
 			O.status &= ~ORGAN_DESTROYED
@@ -1386,6 +1396,7 @@ mob/living/carbon/human/yank_out_object()
 		update_icons()
 
 	if(species)
+		species.handle_post_spawn(src)
 		return 1
 	else
 		return 0
@@ -1448,3 +1459,14 @@ mob/living/carbon/human/yank_out_object()
 		drop_from_inventory(head)
 		update_hair()
 		update_body()
+
+/mob/living/carbon/human/canSingulothPull(var/obj/machinery/singularity/singulo)
+	if(!..())
+		return 0
+
+	if(istype(shoes,/obj/item/clothing/shoes/magboots))
+		var/obj/item/clothing/shoes/magboots/M = shoes
+		if(M.magpulse)
+			return 0
+	return 1
+

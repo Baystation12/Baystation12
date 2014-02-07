@@ -109,7 +109,6 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 			else
 				icon_state = "rock_[mineral.name]"
 
-
 	//Not even going to touch this pile of spaghetti
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 

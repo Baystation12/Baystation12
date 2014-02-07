@@ -73,21 +73,26 @@
 				else
 					src.DB_job_unlock("Blueshield",30)
 			if("5")
-				if(karma <30)
+				if(karma <15)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_species_unlock("Kidan",30)
+					src.DB_species_unlock("Machine",15)
 			if("6")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_species_unlock("Grey",30)
+					src.DB_species_unlock("Kidan",30)
 			if("7")
+				if(karma <30)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_species_unlock("Grey",30)
+			if("8")
 				if(karma <45)
 					usr << "You do not have enough karma!"
 				else
 					src.DB_species_unlock("Vox",45)
-			if("8")
+			if("9")
 				if(karma <45)
 					usr << "You do not have enough karma!"
 				else

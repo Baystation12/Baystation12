@@ -130,17 +130,15 @@ var/syndicate_elite_shuttle_timeleft = 0
 						*/
 		elite_squad.readyreset()//Reset firealarm after the team launched.
 	//End Marauder launchpad.
-/*
-	var/obj/explosionmarker = locate("Syndicate Breach Area")
-	if(explosionmarker)
-		var/turf/simulated/T = explosionmarker.loc
-		if(T)
-			explosion(T,4,6,8,10,0)
+
+	for (var/obj/effect/landmark/L in landmarks_list)
+		if (L.name == "Syndicate Breach Area")
+			explosion(L.loc,4,6,8,10,0)
 
 	sleep(40)
 //	proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1)
 
-*/
+
 	var/area/start_location = locate(/area/shuttle/syndicate_elite/mothership)
 	var/area/end_location = locate(/area/shuttle/syndicate_elite/station)
 

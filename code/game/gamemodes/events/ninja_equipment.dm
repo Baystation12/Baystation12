@@ -23,7 +23,6 @@ ________________________________________________________________________________
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/init//suit initialize verb
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_instruction//for AIs
 	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_holo
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja // Experemental
 	//verbs += /obj/item/clothing/suit/space/space_ninja/proc/display_verb_procs//DEBUG. Doesn't work.
 	spark_system = new()//spark initialize
 	spark_system.set_up(5, 0, src)
@@ -33,11 +32,11 @@ ________________________________________________________________________________
 		stored_research += new T(src)
 	var/reagent_amount//reagent initialize
 	for(var/reagent_id in reagent_list)
-		reagent_amount += reagent_id == "radium" ? r_maxamount+(a_boost*a_transfer) : r_maxamount//AI can inject radium directly.
+		reagent_amount += reagent_id == "uranium" ? r_maxamount+(a_boost*a_transfer) : r_maxamount//AI can inject uranium directly.
 	reagents = new(reagent_amount)
 	reagents.my_atom = src
 	for(var/reagent_id in reagent_list)
-		reagent_id == "radium" ? reagents.add_reagent(reagent_id, r_maxamount+(a_boost*a_transfer)) : reagents.add_reagent(reagent_id, r_maxamount)//It will take into account radium used for adrenaline boosting.
+		reagent_id == "uranium" ? reagents.add_reagent(reagent_id, r_maxamount+(a_boost*a_transfer)) : reagents.add_reagent(reagent_id, r_maxamount)//It will take into account uranium used for adrenaline boosting.
 	cell = new/obj/item/weapon/cell/high//The suit should *always* have a battery because so many things rely on it.
 	cell.charge = 9000//Starting charge should not be higher than maximum charge. It leads to problems with recharging.
 
@@ -187,6 +186,7 @@ ________________________________________________________________________________
 						unlock_suit()
 						break
 					lock_suit(U,1)//Check for icons.
+					U.hud_used.human_hud('icons/mob/screen1_NinjaHUD.dmi',"#ffffff",255)
 					U.regenerate_icons()
 					U << "\blue Linking neural-net interface...\nPattern \green <B>GREEN</B>\blue, continuing operation."
 				if(4)
@@ -239,6 +239,8 @@ ________________________________________________________________________________
 					cancel_stealth()//Shutdowns stealth.
 				if(4)
 					U << "\blue Disconnecting neural-net interface...\green<B>Success</B>\blue."
+					U.hud_used.instantiate()
+					U.regenerate_icons()
 				if(5)
 					U << "\blue Disengaging neural-net interface...\green<B>Success</B>\blue."
 				if(6)
@@ -318,9 +320,9 @@ ________________________________________________________________________________
 				dat += "Warning: Virus Detected. Name: [D.name].Type: [D.spread]. Stage: [D.stage]/[D.max_stages]. Possible Cure: [D.cure].<br>"
 			dat += "<ul>"
 			for(var/datum/reagent/R in reagents.reagent_list)
-				if(R.id=="radium"&&s_control)//Can only directly inject radium when AI is in control.
+				if(R.id=="uranium"&&s_control)//Can only directly inject uranium when AI is in control.
 					continue
-				dat += "<li><a href='byond://?src=\ref[src];choice=Inject;name=[R.name];tag=[R.id]'><img src=sos_2.png> Inject [R.name]: [(reagents.get_reagent_amount(R.id)-(R.id=="radium"?(a_boost*a_transfer):0))/(R.id=="nutriment"?5:a_transfer)] left</a></li>"
+				dat += "<li><a href='byond://?src=\ref[src];choice=Inject;name=[R.name];tag=[R.id]'><img src=sos_2.png> Inject [R.name]: [(reagents.get_reagent_amount(R.id)-(R.id=="uranium"?(a_boost*a_transfer):0))/(R.id=="nutriment"?5:a_transfer)] left</a></li>"
 			dat += "</ul>"
 		if(1)
 			dat += "<h4><img src=sos_5.png> Atmospheric Scan:</h4>"//Headers don't need breaks. They are automatically placed.
@@ -407,12 +409,12 @@ ________________________________________________________________________________
 					</ul>
 					<b>Abilities</b>:
 					<ul>
-					<li>*<b>Phase Shift</b> (<i>500E</i>) and <b>Phase Jaunt</b> (<i>250E</i>) are unique powers in that they can both be used for defense and offense. Jaunt launches the ninja forward facing up to 9 squares, somewhat randomly selecting the final destination. Shift can only be used on turf in view but is precise (cannot be used on walls). Any living mob in the area teleported to is instantly gibbed (mechs are damaged, huggers and other similar critters are killed). It is possible to teleport with a target, provided you grab them before teleporting. </li>
+					<li>*<b>Phase Shift</b> (<i>750E</i>) and <b>Phase Jaunt</b> (<i>500E</i>) are unique powers in that they can both be used for defense and offense. Jaunt launches the ninja forward facing up to 9 squares, somewhat randomly selecting the final destination. Shift can only be used on turf in view but is precise (cannot be used on walls). It is possible to teleport with a target, provided you grab them before teleporting. </li>
 					<li>*<b>Energy Blade</b> (<i>200E</i>) is a highly effective weapon. It is summoned directly to the ninja's hand and can also function as an EMAG for certain objects (doors/lockers/etc). You may also use it to cut through walls and disabled doors. Experiment! The blade will crit humans in two hits. This item cannot be placed in containers and when dropped or thrown disappears. Having an energy blade drains more power from the battery each tick.</li>
 					<li>*<b>EM Pulse</b> (<i>1000E</i>) is a highly useful ability that will create an electromagnetic shockwave around the ninja, disabling technology whenever possible. If used properly it can render a security force effectively useless. Of course, getting beat up with a toolbox is not accounted for.</li>
 					<li>*<b>Energy Star</b> (<i>500E</i>) is a ninja star made of green energy AND coated in poison. It works by picking a random living target within range and can be spammed to great effect in incapacitating foes. Just remember that the poison used is also used by the Xeno Hivemind (and will have no effect on them).</li>
-					<li>*<b>Energy Net</b> (<i>5000E</i>) is a non-lethal solution to incapacitating humanoids. The net is made of non-harmful phase energy and will halt movement as long as it remains in effect--it can be destroyed. If the net is not destroyed, after a certain time it will teleport the target to a holding facility for the Spider Clan and then vanish. You will be notified if the net fails or succeeds in capturing a target in this manner. Combine with energy stars or stripping to ensure success. Abduction never looked this leet.</li>
-					<li>*<b>Adrenaline Boost</b> (<i>1 E. Boost/3</i>) recovers the user from stun, weakness, and paralysis. Also injects 20 units of radium into the bloodstream.</li>
+					<li>*<b>Energy Net</b> (<i>2000E</i>) is a non-lethal solution to incapacitating humanoids. The net is made of non-harmful phase energy and will halt movement as long as it remains in effect--it can be destroyed. If the net is not destroyed, after a certain time it will teleport the target to a holding facility for the Spider Clan and then vanish. You will be notified if the net fails or succeeds in capturing a target in this manner. Combine with energy stars or stripping to ensure success. Abduction never looked this leet.</li>
+					<li>*<b>Adrenaline Boost</b> (<i>1 E. Boost/3</i>) recovers the user from stun, weakness, and paralysis. Also injects 20 units of uranium into the bloodstream.</li>
 					<li>*<b>Smoke Bomb</b> (<i>1 Sm.Bomb/10</i>) is a weak but potentially useful ability. It creates harmful smoke and can be used in tandem with other powers to confuse enemies.</li>
 					<li>*<b>???</b>: unleash the <b>True Ultimate Power!</b></li>
 					<h4>IMPORTANT:</h4>
@@ -466,12 +468,12 @@ ________________________________________________________________________________
 			dat += {"
 					<h4><img src=sos_6.png> Activate Abilities:</h4>
 					<ul>
-					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Phase Jaunt;cost= (10E)'><img src=sos_13.png> Phase Jaunt</a></li>
-					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Phase Shift;cost= (20E)'><img src=sos_13.png> Phase Shift</a></li>
-					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Energy Blade;cost= (5E)'><img src=sos_13.png> Energy Blade</a></li>
-					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Energy Star;cost= (5E)'><img src=sos_13.png> Energy Star</a></li>
-					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Energy Net;cost= (20E)'><img src=sos_13.png> Energy Net</a></li>
-					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=EM Burst;cost= (25E)'><img src=sos_13.png> EM Pulse</a></li>
+					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Phase Jaunt;cost= (500E)'><img src=sos_13.png> Phase Jaunt</a></li>
+					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Phase Shift;cost= (750E)'><img src=sos_13.png> Phase Shift</a></li>
+					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Energy Blade;cost= (200E)'><img src=sos_13.png> Energy Blade</a></li>
+					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Energy Star;cost= (500E)'><img src=sos_13.png> Energy Star</a></li>
+					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Energy Net;cost= (2500E)'><img src=sos_13.png> Energy Net</a></li>
+					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=EM Burst;cost= (1000E)'><img src=sos_13.png> EM Pulse</a></li>
 					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Smoke Bomb;cost='><img src=sos_13.png> Smoke Bomb</a></li>
 					<li><a href='byond://?src=\ref[src];choice=Trigger Ability;name=Adrenaline Boost;cost='><img src=sos_13.png> Adrenaline Boost</a></li>
 					</ul>
@@ -559,8 +561,19 @@ ________________________________________________________________________________
 			P.overlays.Cut()
 			P.overlays += image('icons/obj/pda.dmi', "pda-r")
 
+			var/mob/living/L = null
+			if(P.loc && isliving(P.loc))
+				L = P.loc
+		//Maybe they are a pAI!
+			else
+				L = get(P, /mob/living/silicon)
+
+
+			if(L)
+				L << "\icon[P] <b>Message from [!s_control?(A):"an unknown source"], </b>\"[t]\" (<i>Unable to Reply</i>)"
+
 		if("Inject")
-			if( (href_list["tag"]=="radium"? (reagents.get_reagent_amount("radium"))<=(a_boost*a_transfer) : !reagents.get_reagent_amount(href_list["tag"])) )//Special case for radium. If there are only a_boost*a_transfer radium units left.
+			if( (href_list["tag"]=="uranium"? (reagents.get_reagent_amount("uranium"))<=(a_boost*a_transfer) : !reagents.get_reagent_amount(href_list["tag"])) )//Special case for uranium. If there are only a_boost*a_transfer uranium units left.
 				display_to << "\red Error: the suit cannot perform this function. Out of [href_list["name"]]."
 			else
 				reagents.reaction(U, 2)
@@ -700,7 +713,6 @@ ________________________________________________________________________________
 								if(4)
 									A << "Connection established and secured. Menu updated."
 									U << "\red <b>W�r#nING</b>: #%@!!WȆ|_4�54@ \nUn�B88l3 T� L�-�o-L�CaT2 ##$!�RN�0..%.."
-									verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja // To stop AIs from overriding an overridden Ninja. -- Dave
 									grant_AI_verbs()
 									return
 							sleep(s_delay)
@@ -810,53 +822,8 @@ ________________________________________________________________________________
 	AI << "You have ceased your hacking attempt. [affecting.real_name] has regained control."
 	affecting << "<b>UPDATE</b>: [AI.real_name] has ceased hacking attempt. All systems clear."
 
-	verbs += /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja
 	remove_AI_verbs()
 	return
-
-/obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja()// Experemental -- Dave
-	set name = "Hack Ninja Systems"
-	set desc = "Hack directly into the Black Widow(tm) neuro-interface."
-	set category = "AI Ninja Equip"
-	set src = usr.loc
-
-	var/mob/living/carbon/human/U = affecting
-	var/mob/living/silicon/ai/A = AI
-
-	if(A.laws != new /datum/ai_laws/ninja_override && s_busy == 0)
-		s_busy = 1
-		for(var/i,i<6,i++)
-			if(AI==A)
-				switch(i)
-					if(1)
-						A << "\blue <b>NOTICE</b>:\black Beginning hack attempt..."
-						U << "\red <b>WARNING</b>: HACKING AT��TEMP� IN PR0GRESs!"
-						spideros = 0
-						k_unlock = 0
-						U << browse(null, "window=spideros")
-					if(2)
-						A << "<b>Disconnecting neural interface...</b>"
-						U << "\red <b>WAR�NING</b>: �R�O0�Gr�--S 2&3%"
-					if(3)
-						A << "<b>Shutting down external protocol...</b>"
-						U << "\red <b>WARNING</b>: P����RֆGr�5S 677^%"
-						cancel_stealth()
-					if(4)
-						A << "<b>Connecting to kernel...</b>"
-						U << "\red <b>WARNING</b>: �R�r�R_404"
-						A.control_disabled = 0
-					if(5)
-						A << "<b>Connection established and secured. Menu updated.</b>"
-						U << "\red <b>W�r#nING</b>: #%@!!WȆ|_4�54@ \nUn�B88l3 T� L�-�o-L�CaT2 ##$!�RN�0..%.."
-						verbs -= /obj/item/clothing/suit/space/space_ninja/proc/ai_overrideninja
-						grant_AI_verbs()
-						return
-				sleep(s_delay)
-			else	break
-		s_busy = 0
-	else
-		A << "\red<b>ALERT</b>:\black Current lawset prevents hacking!"
-
 
 //=======//GENERAL SUIT PROCS//=======//
 
@@ -879,9 +846,9 @@ ________________________________________________________________________________
 			var/total_reagent_transfer//Keep track of this stuff.
 			for(var/reagent_id in reagent_list)
 				var/datum/reagent/R = I.reagents.has_reagent(reagent_id)//Mostly to pull up the name of the reagent after calculating. Also easier to use than writing long proc paths.
-				if(R&&reagents.get_reagent_amount(reagent_id)<r_maxamount+(reagent_id == "radium"?(a_boost*a_transfer):0)&&R.volume>=a_transfer)//Radium is always special.
+				if(R&&reagents.get_reagent_amount(reagent_id)<r_maxamount+(reagent_id == "uranium"?(a_boost*a_transfer):0)&&R.volume>=a_transfer)//Uranium is always special.
 					//Here we determine how much reagent will actually transfer if there is enough to transfer or there is a need of transfer. Minimum of max amount available (using a_transfer) or amount needed.
-					var/amount_to_transfer = min( (r_maxamount+(reagent_id == "radium"?(a_boost*a_transfer):0)-reagents.get_reagent_amount(reagent_id)) ,(round(R.volume/a_transfer))*a_transfer)//In the end here, we round the amount available, then multiply it again.
+					var/amount_to_transfer = min( (r_maxamount+(reagent_id == "uranium"?(a_boost*a_transfer):0)-reagents.get_reagent_amount(reagent_id)) ,(round(R.volume/a_transfer))*a_transfer)//In the end here, we round the amount available, then multiply it again.
 					R.volume -= amount_to_transfer//Remove from reagent volume. Don't want to delete the reagent now since we need to perserve the name.
 					reagents.add_reagent(reagent_id, amount_to_transfer)//Add to suit. Reactions are not important.
 					total_reagent_transfer += amount_to_transfer//Add to total reagent trans.
@@ -1203,29 +1170,6 @@ ________________________________________________________________________________
 				U << "\blue Gained <B>[totaldrain]</B> energy from [src]."
 			else
 				U << "\red The exosuit's battery has run dry. You must find another source of power."
-
-
-
-		/*
-
-		Experimenting with a wrist-mounted hypospray for delivering hallucigenics. Todo: Possibly make it only work on harm intent.
-
-		-- Dave
-
-		*/
-
-		if("HUMAN")
-			var/mob/living/carbon/human/A = target
-			if(S.h_stings > 0)
-				if(A != U) // Because it's bound to happen.
-					S.h_stings -= 1
-					A <<"\red You feel a tiny prick, something doesn't feel right..."
-					U <<"\blue Hallucigen administered to [A], you have <b>[S.h_stings]</b> doses left."
-					A.hallucination += 300
-				else
-					U <<"\red You think for a moment, and decide may not be wise to inject yourself."
-			else
-				U<<"\red You are out of stings!"
 
 
 

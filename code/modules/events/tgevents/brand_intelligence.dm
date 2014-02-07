@@ -25,7 +25,7 @@
 	originMachine.shut_up = 0
 	originMachine.shoot_inventory = 1
 
-	scaling_factor = num_players() / 25	//Tweak this value to change the number of hostile machines. Lower value = more hostile machines.
+	scaling_factor = num_players() / 60	//Tweak this value to change the number of hostile machines. Lower value = more hostile machines.
 
 
 
@@ -48,7 +48,8 @@
 				M.icon = upriser.icon
 				M.icon_state = initial(upriser.icon_state)
 			else
-				explosion(upriser.loc, -1, 1, 2, 4)
+				explosion(upriser.loc, 2, 2, 3, 5)
+				sleep(50)	//return control to lessen lag
 			del(upriser)
 
 		kill()

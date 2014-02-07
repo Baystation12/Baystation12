@@ -6,6 +6,7 @@
 	allowed = list(/obj/item/weapon/cell)
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 25)
 	siemens_coefficient = 0.2
+	loose = 0
 
 
 /obj/item/clothing/suit/space/space_ninja
@@ -22,7 +23,7 @@
 	var/mob/living/carbon/affecting = null//The wearer.
 	var/obj/item/weapon/cell/cell//Starts out with a high-capacity cell using New().
 	var/datum/effect/effect/system/spark_spread/spark_system//To create sparks.
-	var/reagent_list[] = list("tricordrazine","dexalinp","spaceacillin","anti_toxin","nutriment","radium","hyronalin")//The reagents ids which are added to the suit at New().
+	var/reagent_list[] = list("tricordrazine","dexalinp","spaceacillin","anti_toxin","nutriment","uranium","hyronalin")//The reagents ids which are added to the suit at New().
 	var/stored_research[]//For stealing station research.
 	var/obj/item/weapon/disk/tech_disk/t_disk//To copy design onto disk.
 
@@ -53,7 +54,6 @@
 		//Ability function variables.
 	var/s_bombs = 10.0//Number of starting ninja smoke bombs.
 	var/a_boost = 3.0//Number of adrenaline boosters.
-	var/h_stings = 5.0// Experementing with a wrist-mounted hypospray for delivering various drugs. Right now I'm thinking hallucigenics.
 
 		//Onboard AI related variables.
 	var/mob/living/silicon/ai/AI//If there is an AI inside the suit.

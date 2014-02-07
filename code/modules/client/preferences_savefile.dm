@@ -54,6 +54,7 @@
 	S["be_special"]			>> be_special
 	S["default_slot"]		>> default_slot
 	S["toggles"]			>> toggles
+	S["sound"]				>> sound
 	S["UI_style_color"]		>> UI_style_color
 	S["UI_style_alpha"]		>> UI_style_alpha
 	S["randomslot"]			>> randomslot
@@ -65,6 +66,7 @@
 	be_special		= sanitize_integer(be_special, 0, 65535, initial(be_special))
 	default_slot	= sanitize_integer(default_slot, 1, MAX_SAVE_SLOTS, initial(default_slot))
 	toggles			= sanitize_integer(toggles, 0, 65535, initial(toggles))
+	sound			= sanitize_integer(sound, 0, 65535, initial(toggles))
 	UI_style_color	= sanitize_hexcolor(UI_style_color, initial(UI_style_color))
 	UI_style_alpha	= sanitize_integer(UI_style_alpha, 0, 255, initial(UI_style_alpha))
 	randomslot		= sanitize_integer(randomslot, 0, 1, initial(randomslot))
@@ -85,6 +87,7 @@
 	S["be_special"]			<< be_special
 	S["default_slot"]		<< default_slot
 	S["toggles"]			<< toggles
+	S["sound"]				<< sound
 	S["UI_style_color"]		<< UI_style_color
 	S["UI_style_alpha"]		<< UI_style_alpha
 	S["randomslot"]			<< randomslot
@@ -120,6 +123,10 @@
 	S["underwear"]			>> underwear
 	S["backbag"]			>> backbag
 	S["b_type"]				>> b_type
+	S["accent"]				>> accent
+	S["voice"]				>> voice
+	S["pitch"]				>> pitch
+	S["talkspeed"]			>> talkspeed
 
 	//Jobs
 	S["alternate_option"]	>> alternate_option
@@ -174,6 +181,10 @@
 	underwear		= sanitize_integer(underwear, 1, underwear_m.len, initial(underwear))
 	backbag			= sanitize_integer(backbag, 1, backbaglist.len, initial(backbag))
 	b_type			= sanitize_text(b_type, initial(b_type))
+	accent			= sanitize_text(accent, initial(accent))
+	voice			= sanitize_text(voice, initial(voice))
+	pitch			= sanitize_text(pitch, initial(pitch))
+	talkspeed		= sanitize_text(talkspeed, initial(talkspeed))
 
 	alternate_option = sanitize_integer(alternate_option, 0, 2, initial(alternate_option))
 	job_civilian_high = sanitize_integer(job_civilian_high, 0, 65535, initial(job_civilian_high))
@@ -352,6 +363,10 @@
 	S["underwear"]			<< underwear
 	S["backbag"]			<< backbag
 	S["b_type"]				<< b_type
+	S["accent"]				<< accent
+	S["voice"]				<< voice
+	S["pitch"]				<< pitch
+	S["talkspeed"]			<< talkspeed
 
 	//Jobs
 	S["alternate_option"]	<< alternate_option

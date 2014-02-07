@@ -1572,3 +1572,40 @@ proc/check_target_facings(mob/living/initator, mob/living/target)
 		return 2
 	if(initator.dir + 2 == target.dir || initator.dir - 2 == target.dir || initator.dir + 6 == target.dir || initator.dir - 6 == target.dir) //Initating mob is looking at the target, while the target mob is looking in a direction perpendicular to the 1st
 		return 3
+
+
+/proc/texttospeechstrip(var/t_in)
+    var/t_out = ""
+    for(var/i=1, i<=length(t_in), i++)
+        var/ascii_char = text2ascii(t_in,i)
+        switch(ascii_char)
+            // A .. Z
+            if(65 to 90)                        //Uppercase Letters
+                if(lentext(t_out) <= 150)
+                    t_out += ascii2text(ascii_char)
+            // a .. z
+            if(97 to 122)                        //Lowercase Letters
+                if(lentext(t_out) <= 150)
+                    t_out += ascii2text(ascii_char)
+            // 0 .. 9
+            if(48 to 57)                        //Numbers
+                if(lentext(t_out) <= 150)
+                    t_out += ascii2text(ascii_char)
+            // ` , - . ! ? : '
+            if(39,44,45,46,33,63,58,96,60,62)                        //Common name punctuation
+                if(lentext(t_out) <= 150)
+                    t_out += ascii2text(ascii_char)
+            //Space
+            if(32)
+                if(lentext(t_out) <= 150)
+                    t_out += ascii2text(ascii_char)
+    return t_out
+/var/lastspeak = ""
+
+
+/mob/proc/texttospeech(var/text, var/speed, var/pitch, var/accent, var/voice, var/echo)
+    text = texttospeechstrip(text)
+    lastspeak = text
+    ext_python("voice.py", "\"[accent]\" \"[voice]\" \"[pitch]\" \"[echo]\" \"[speed]\" \"[text]\" \"[src.ckey]\"")
+
+
