@@ -73,12 +73,13 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		// Damaged heart virtually reduces the blood volume, as the blood isn't
 		// being pumped properly anymore.
 		var/datum/organ/internal/heart/heart = internal_organs["heart"]
-		if(heart.damage > 1 && heart.damage < heart.min_bruised_damage)
-			blood_volume *= 0.8
-		else if(heart.damage >= heart.min_bruised_damage && heart.damage < heart.min_broken_damage)
-			blood_volume *= 0.6
-		else if(heart.damage >= heart.min_broken_damage && heart.damage < INFINITY)
-			blood_volume *= 0.3
+		if(heart)
+			if(heart.damage > 1 && heart.damage < heart.min_bruised_damage)
+				blood_volume *= 0.8
+			else if(heart.damage >= heart.min_bruised_damage && heart.damage < heart.min_broken_damage)
+				blood_volume *= 0.6
+			else if(heart.damage >= heart.min_broken_damage && heart.damage < INFINITY)
+				blood_volume *= 0.3
 
 		//Effects of bloodloss
 		switch(blood_volume)
@@ -108,11 +109,16 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 				if(prob(15))
 					Paralyse(rand(1,3))
 					var/word = pick("dizzy","woosey","faint")
-					src << "\red You feel extremely [word]"
+					src << "\red You feel very [word]"
 			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-				oxyloss += 5
-				toxloss += 3
+				if(!pale)
+					pale = 1
+					update_body()
+				if(oxyloss > 20)
+					eye_blurry += 6
+				oxyloss += 12
 				if(prob(15))
+					Paralyse(rand(1,3))
 					var/word = pick("dizzy","woosey","faint")
 					src << "\red You feel extremely [word]"
 			if(0 to BLOOD_VOLUME_SURVIVE)
