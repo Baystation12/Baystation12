@@ -664,6 +664,10 @@ var/list/ghostteleportlocs = list()
 	name = "Waste Disposal"
 	icon_state = "disposal"
 
+/area/maintenance/evahallway
+	name = "\improper EVA Hallway"
+	icon_state = "eva"
+
 //Hallway
 
 /area/hallway/primary/fore
@@ -938,17 +942,37 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Engine Monitoring Room"
 		icon_state = "engine_monitoring"
 
+	engineering_monitoring
+		name = "\improper Engineering Monitoring Room"
+		icon_state = "engine_monitoring"
+
 	engineering
 		name = "Engineering"
 		icon_state = "engine_smes"
 
+	engineering_foyer
+		name = "\improper Engineering Foyer"
+		icon_state = "engine"
+
 	break_room
-		name = "Engineering Foyer"
+		name = "\improper Engineering Break Room"
 		icon_state = "engine"
 
 	chiefs_office
 		name = "\improper Chief Engineer's office"
 		icon_state = "engine_control"
+
+	hallway
+		name = "\improper Engineering Hallway"
+		icon_state = "engine_hallway"
+
+	workshop
+		name = "\improper Engineering Workshop"
+		icon_state = "engine_storage"
+
+	locker_room
+		name = "\improper Engineering Locker Room"
+		icon_state = "engine_storage"
 
 
 //Solars

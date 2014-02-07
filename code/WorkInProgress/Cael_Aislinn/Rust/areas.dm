@@ -68,7 +68,3 @@
 	storage_hard
 		name = "\improper Engineering Hard Storage"
 		icon_state = "engine_storage"
-
-	hallway
-		name = "\improper Engineering storage"
-		icon_state = "engine_hallway"
