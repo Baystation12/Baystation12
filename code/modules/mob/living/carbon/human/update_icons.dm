@@ -365,8 +365,18 @@ proc/get_damage_icon_part(damage_state, body_part)
 	var/add_image = 0
 	var/g = "m"
 	if(gender == FEMALE)	g = "f"
+	// DNA2 - Drawing underlays.
+	for(var/datum/dna/gene/gene in dna_genes)
+		if(!gene.block)
+			continue
+		if(gene.is_active(src))
+			var/underlay=gene.OnDrawUnderlays(src,g,fat)
+			if(underlay)
+				standing.underlays += underlay
+				add_image = 1
 	for(var/mut in mutations)
 		switch(mut)
+			/*
 			if(HULK)
 				if(fat)
 					standing.underlays	+= "hulk_[fat]_s"
@@ -379,6 +389,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 			if(TK)
 				standing.underlays	+= "telekinesishead[fat]_s"
 				add_image = 1
+			*/
 			if(LASER)
 				standing.overlays	+= "lasereyes_s"
 				add_image = 1
