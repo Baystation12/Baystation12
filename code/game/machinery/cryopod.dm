@@ -96,7 +96,6 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 			frozen_items -= I
 
 	else if(href_list["crew"])
-
 		user << "\red Functionality unavailable at this time."
 
 	src.updateUsrDialog()
@@ -184,11 +183,21 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 		if(!occupant.client && occupant.stat<2) //Occupant is living and has no client.
 
-			//Delete all items not on the preservation list and drop all others into the pod.
+			//Drop all items into the pod.
 			for(var/obj/item/W in occupant)
 				occupant.drop_from_inventory(W)
 				W.loc = src
 
+				if(W.contents.len) //Make sure we catch anything not handled by del() on the items.
+					for(var/obj/item/O in W.contents)
+						O.loc = src
+
+			//Delete all items not on the preservation list.
+			var/list/items = src.contents
+			items -= occupant // Don't delete the occupant
+			items -= announce // or the autosay radio.
+
+			for(var/obj/item/W in items)
 				var/preserve = null
 				for(var/T in preserve_items)
 					if(istype(W,T))
@@ -200,12 +209,29 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 				else
 					frozen_items += W
 
+			//Update any existing objectives involving this mob.
+			for(var/datum/objective/O in all_objectives)
+				if(istype(O,/datum/objective/mutiny)) //We don't want revs to get objectives that aren't for heads of staff. Letting them win or lose based on cryo is silly so we remove the objective.
+					del(O) //TODO: Update rev objectives on login by head (may happen already?) ~ Z
+				else if(O.target && istype(O.target,/datum/mind))
+					if(O.target == occupant.mind)
+						if(O.owner && O.owner.current)
+							O.owner.current << "\red You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]..."
+						O.target = null
+						spawn(1) //This should ideally fire after the occupant is deleted.
+							if(!O) return
+							O.find_target()
+							if(!(O.target))
+								all_objectives -= O
+								O.owner.objectives -= O
+								del(O)
+
+			//Handle job slot/tater cleanup.
 			var/job = occupant.mind.assigned_role
-			var/role = occupant.mind.special_role
 
 			job_master.FreeRole(job)
 
-			if(role == "traitor" || role == "MODE")
+			if(occupant.mind.objectives.len)
 				del(occupant.mind.objectives)
 				occupant.mind.special_role = null
 			else
@@ -307,9 +333,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		return
 
 	if(orient_right)
-		icon_state = "body_scanner0-r"
+		icon_state = "body_scanner_0-r"
 	else
-		icon_state = "body_scanner0"
+		icon_state = "body_scanner_0"
 
 	src.go_out()
 	add_fingerprint(usr)

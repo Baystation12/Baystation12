@@ -32,12 +32,28 @@
 	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE     // Dangerously low pressure.
 
-	var/brute_resist    // Physical damage reduction.
-	var/burn_resist     // Burn damage reduction.
+	var/brute_mod = null    // Physical damage reduction/malus.
+	var/burn_mod = null     // Burn damage reduction/malus.
 
 	var/flags = 0       // Various specific features.
 
 	var/list/abilities = list()	// For species-derived or admin-given powers
+
+	var/blood_color = "#A10808" //Red.
+	var/flesh_color = "#FFC896" //Pink.
+
+/datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
+
+	if(flags & IS_SYNTHETIC)
+		for(var/datum/organ/external/E in H.organs)
+			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
+			E.status |= ORGAN_ROBOT
+		for(var/datum/organ/internal/I in H.internal_organs)
+			I.robotic = 2
+	return
+
+/datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
+	return
 
 /datum/species/human
 	name = "Human"
@@ -68,7 +84,9 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+
+	flesh_color = "#34AF10"
 
 /datum/species/tajaran
 	name = "Tajaran"
@@ -90,7 +108,9 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+
+	flesh_color = "#AFA59E"
 
 /datum/species/skrell
 	name = "Skrell"
@@ -99,7 +119,9 @@
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
+
+	flesh_color = "#8CD7A3"
 
 /datum/species/vox
 	name = "Vox"
@@ -117,11 +139,36 @@
 	eyes = "vox_eyes_s"
 	breath_type = "nitrogen"
 
-	flags = NO_SCAN
+	flags = NO_SCAN | NO_BLOOD
+
+	blood_color = "#2299FC"
+	flesh_color = "#808D11"
+
+/datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
+
+	var/datum/organ/external/affected = H.get_organ("head")
+
+	//To avoid duplicates.
+	for(var/obj/item/weapon/implant/cortical/imp in H.contents)
+		affected.implants -= imp
+		del(imp)
+
+	var/obj/item/weapon/implant/cortical/I = new(H)
+	I.imp_in = H
+	I.implanted = 1
+	affected.implants += I
+	I.part = affected
+
+	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
+		var/datum/game_mode/heist/M = ticker.mode
+		M.cortical_stacks += I
+		M.raiders[H.mind] = I
+
+	return ..()
 
 /datum/species/diona
 	name = "Diona"
-	icobase = 'icons/mob/human_races/r_plant.dmi'
+	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
 	attack_verb = "slash"
@@ -139,4 +186,54 @@
 	heat_level_2 = 3000
 	heat_level_3 = 4000
 
-	flags = WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
+	flags = IS_WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
+
+	blood_color = "#004400"
+	flesh_color = "#907E4A"
+
+/datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
+
+	H.gender = NEUTER
+
+/datum/species/diona/handle_death(var/mob/living/carbon/human/H)
+
+	var/mob/living/carbon/monkey/diona/S = new(get_turf(H))
+
+	if(H.mind)
+		H.mind.transfer_to(S)
+		S.key = H
+
+	for(var/mob/living/carbon/monkey/diona/D in H.contents)
+		if(D.client)
+			D.loc = H.loc
+		else
+			del(D)
+
+	H.visible_message("\red[H] splits apart with a wet slithering noise!")
+
+/datum/species/machine
+	name = "Machine"
+	icobase = 'icons/mob/human_races/r_machine.dmi'
+	deform = 'icons/mob/human_races/r_machine.dmi'
+	language = "Tradeband"
+	punch_damage = 2
+
+	eyes = "blank_eyes"
+	brute_mod = 1.5
+	burn_mod = 1.5
+
+	warning_low_pressure = 50
+	hazard_low_pressure = 10
+
+	cold_level_1 = 50
+	cold_level_2 = -1
+	cold_level_3 = -1
+
+	heat_level_1 = 2000
+	heat_level_2 = 3000
+	heat_level_3 = 4000
+
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+
+	blood_color = "#FFFFFF"
+	flesh_color = "#AAAAAA"

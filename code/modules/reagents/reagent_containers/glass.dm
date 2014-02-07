@@ -47,11 +47,10 @@
 		set src in view()
 		..()
 		if (!(usr in view(2)) && usr!=src.loc) return
-		usr << "\blue It contains:"
 		if(reagents && reagents.reagent_list.len)
-			usr << "\blue [src.reagents.total_volume] units of liquid."
+			usr << "\blue It contains [src.reagents.total_volume] units of liquid."
 		else
-			usr << "\blue Nothing."
+			usr << "\blue It is empty."
 		if (!is_open_container())
 			usr << "\blue Airtight lid seals it completely."
 
@@ -66,7 +65,8 @@
 		update_icon()
 
 	afterattack(obj/target, mob/user , flag)
-		if (!is_open_container())
+
+		if (!is_open_container() || !flag)
 			return
 
 		for(var/type in src.can_be_placed_into)
@@ -215,7 +215,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/bluespace
 	name = "bluespace beaker"
-	desc = "A bluespace beaker, powered by experimental bluespace technology and Element Cuban combined with the Compound Pete. Can hold up to 300 units."
+	desc = "A bluespace beaker, powered by experimental bluespace technology. Can hold up to 300 units."
 	icon_state = "beakerbluespace"
 	g_amt = 5000
 	volume = 300

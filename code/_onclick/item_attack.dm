@@ -140,7 +140,7 @@
 
 
 	if(istype(M, /mob/living/carbon/human))
-		M:attacked_by(src, user, def_zone)
+		return M:attacked_by(src, user, def_zone)
 	else
 		switch(damtype)
 			if("brute")

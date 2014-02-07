@@ -99,6 +99,7 @@ emp_act
 			(SP.loc) = organ
 			organ.implants += SP
 			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
+			src.verbs += /mob/proc/yank_out_object
 			SP.add_blood(src)
 
 	return (..(P , def_zone))
@@ -134,6 +135,16 @@ emp_act
 				protection += C.armor[type]
 	return protection
 
+/mob/living/carbon/human/proc/check_head_coverage()
+
+	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform)
+	for(var/bp in body_parts)
+		if(!bp)	continue
+		if(bp && istype(bp ,/obj/item/clothing))
+			var/obj/item/clothing/C = bp
+			if(C.body_parts_covered & HEAD)
+				return 1
+	return 0
 
 /mob/living/carbon/human/proc/check_shields(var/damage = 0, var/attack_text = "the attack")
 	if(l_hand && istype(l_hand, /obj/item/weapon))//Current base is the prob(50-d/3)
@@ -185,14 +196,14 @@ emp_act
 		target_zone = user.zone_sel.selecting
 	if(!target_zone)
 		visible_message("\red <B>[user] misses [src] with \the [I]!")
-		return
+		return 0
 
 	var/datum/organ/external/affecting = get_organ(target_zone)
 	if (!affecting)
-		return
+		return 0
 	if(affecting.status & ORGAN_DESTROYED)
 		user << "What [affecting.display_name]?"
-		return
+		return 0
 	var/hit_area = affecting.display_name
 
 	if((user != src) && check_shields(I.force, "the [I.name]"))
@@ -209,7 +220,7 @@ emp_act
 			var/obj/item/weapon/card/emag/emag = I
 			emag.uses--
 			affecting.sabotaged = 1
-		return
+		return 1
 
 	if(I.attack_verb.len)
 		visible_message("\red <B>[src] has been [pick(I.attack_verb)] in the [hit_area] with [I.name] by [user]!</B>")
@@ -264,6 +275,7 @@ emp_act
 
 				if(bloody)
 					bloody_body(src)
+	return 1
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
 	if (gloves)

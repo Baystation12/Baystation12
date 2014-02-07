@@ -1451,7 +1451,7 @@ datum/design/chemsprayer
 	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000)
 	reliability_base = 100
-	build_path = "/obj/item/weapon/chemsprayer"
+	build_path = "/obj/item/weapon/reagent_containers/spray/chemsprayer"
 
 datum/design/rapidsyringe
 	name = "Rapid Syringe Gun"
@@ -1528,6 +1528,14 @@ datum/design/stunshell
 	materials = list("$metal" = 4000)
 	build_path = "/obj/item/ammo_casing/shotgun/stunshell"
 
+datum/design/plasmapistol
+	name = "plasma pistol"
+	desc = "A specialized firearm designed to fire lethal bolts of toxins."
+	id = "ppistol"
+	req_tech = list("combat" = 5, "plasmatech" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 5000, "$glass" = 1000, "$plasma" = 3000)
+	build_path = "/obj/item/weapon/gun/energy/toxgun"
 /////////////////////////////////////////
 /////////////////Mining//////////////////
 /////////////////////////////////////////
@@ -1765,6 +1773,8 @@ datum/design/cart_janitor
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/janitor"
+
+/*
 datum/design/cart_clown
 	name = "Honkworks 5.0 Cartridge"
 	desc = "A data cartridge for portable microcomputers."
@@ -1781,6 +1791,8 @@ datum/design/cart_mime
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = "/obj/item/weapon/cartridge/mime"
+*/
+
 datum/design/cart_toxins
 	name = "Signal Ace 2 Cartridge"
 	desc = "A data cartridge for portable microcomputers."

@@ -1,4 +1,5 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
+var/global/list/all_objectives = list()
 
 datum/objective
 	var/datum/mind/owner = null			//Who owns the objective.
@@ -8,8 +9,13 @@ datum/objective
 	var/completed = 0					//currently only used for custom objectives.
 
 	New(var/text)
+		all_objectives |= src
 		if(text)
 			explanation_text = text
+
+	Del()
+		all_objectives -= src
+		..()
 
 	proc/check_completion()
 		return completed
@@ -916,8 +922,12 @@ datum/objective/heist/inviolate_crew
 		if(H.is_raider_crew_safe()) return 1
 		return 0
 
+#define MAX_VOX_KILLS 10 //Number of kills during the round before the Inviolate is broken.
+						 //Would be nice to use vox-specific kills but is currently not feasible.
+var/global/vox_kills = 0 //Used to check the Inviolate.
+
 datum/objective/heist/inviolate_death
 	explanation_text = "Follow the Inviolate. Minimise death and loss of resources."
 	check_completion()
-		if(vox_kills>5) return 0
+		if(vox_kills > MAX_VOX_KILLS) return 0
 		return 1

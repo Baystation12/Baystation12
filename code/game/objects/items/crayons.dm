@@ -80,6 +80,7 @@
 		if(instant || do_after(user, 50))
 			new /obj/effect/decal/cleanable/crayon(target,colour,shadeColour,drawtype)
 			user << "You finish drawing."
+			target.add_fingerprint(user)		// Adds their fingerprints to the floor the crayon is drawn on.
 			if(uses)
 				uses--
 				if(!uses)
@@ -89,8 +90,8 @@
 
 /obj/item/toy/crayon/attack(mob/M as mob, mob/user as mob)
 	if(M == user)
-		user << "You take a bite of the crayon. Delicious!"
-		user.nutrition += 5
+		user << "You take a bite of the crayon and swallow it."
+//		user.nutrition += 5
 		if(uses)
 			uses -= 5
 			if(uses <= 0)

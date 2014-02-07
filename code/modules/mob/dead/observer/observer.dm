@@ -21,12 +21,13 @@
 	var/antagHUD = 0
 	universal_speak = 1
 	var/atom/movable/following = null
+
 /mob/dead/observer/New(mob/body)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
 	verbs += /mob/dead/observer/proc/dead_tele
-	
+
 	stat = DEAD
 
 	var/turf/T
@@ -93,12 +94,12 @@ Works together with spawning an observer, noted above.
 
 /mob/dead/observer/Life()
 	..()
-	if(!loc) return		
+	if(!loc) return
 	if(!client) return 0
 
 
 	if(client.images.len)
-		for(var/image/hud in client.images)	
+		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud")
 				client.images.Remove(hud)
 	if(antagHUD)
@@ -145,7 +146,7 @@ Works together with spawning an observer, noted above.
 		var/foundVirus = 0
 		if(patient.virus2.len)
 			foundVirus = 1
-		if(!C) return 
+		if(!C) return
 		holder = patient.hud_list[HEALTH_HUD]
 		if(patient.stat == 2)
 			holder.icon_state = "hudhealth-100"
@@ -160,10 +161,17 @@ Works together with spawning an observer, noted above.
 			holder.icon_state = "hudxeno"
 		else if(foundVirus)
 			holder.icon_state = "hudill"
+		else if(patient.has_brain_worms())
+			var/mob/living/simple_animal/borer/B = patient.has_brain_worms()
+			if(B.controlling)
+				holder.icon_state = "hudbrainworm"
+			else
+				holder.icon_state = "hudhealthy"
 		else
 			holder.icon_state = "hudhealthy"
-		C.images += holder	
-		
+
+		C.images += holder
+
 
 /mob/dead/proc/assess_targets(list/target_list, mob/dead/observer/U)
 	var/icon/tempHud = 'icons/mob/hud.dmi'
@@ -319,7 +327,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(jobban_isbanned(M, "AntagHUD"))
 		src << "\red <B>You have been banned from using this feature</B>"
 		return
-	if(config.antag_hud_restricted && !M.has_enabled_antagHUD &&!client.holder) 
+	if(config.antag_hud_restricted && !M.has_enabled_antagHUD &&!client.holder)
 		var/response = alert(src, "If you turn this on, you will not be able to take any part in the round.","Are you sure you want to turn this feature on?","Yes","No")
 		if(response == "No") return
 		M.can_reenter_corpse = 0
@@ -361,27 +369,30 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Follow" // "Haunt"
 	set desc = "Follow and haunt a mob."
 
-	if(istype(usr, /mob/dead/observer))
-		var/list/mobs = getmobs()
-		var/input = input("Please, select a mob!", "Haunt", null, null) as null|anything in mobs
-		var/mob/target = mobs[input]
-		if(target && target != usr)
-			following = target
-			spawn(0)
-				var/turf/pos = get_turf(src)
-				while(src.loc == pos)
+	var/list/mobs = getmobs()
+	var/input = input("Please, select a mob!", "Haunt", null, null) as null|anything in mobs
+	var/mob/target = mobs[input]
+	ManualFollow(target)
 
-					var/turf/T = get_turf(target)
-					if(!T)
-						break
-					if(following != target)
-						break
-					if(!client)
-						break
-					src.loc = T
-					pos = src.loc
-					sleep(15)
-				following = null
+// This is the ghost's follow verb with an argument
+/mob/dead/observer/proc/ManualFollow(var/atom/movable/target)
+	if(target && target != src)
+		if(following && following == target)
+			return
+		following = target
+		src << "\blue Now following [target]"
+		spawn(0)
+			var/turf/pos = get_turf(src)
+			while(loc == pos && target && following == target && client)
+				var/turf/T = get_turf(target)
+				if(!T)
+					break
+				// To stop the ghost flickering.
+				if(loc != T)
+					loc = T
+				pos = loc
+				sleep(15)
+			following = null
 
 
 /mob/dead/observer/verb/jumptomob() //Moves the ghost instead of just changing the ghosts's eye -Nodrak
@@ -433,6 +444,58 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set hidden = 1
 	src << "\red You are dead! You have no mind to store memory!"
 
+/mob/dead/observer/verb/analyze_air()
+	set name = "Analyze Air"
+	set category = "Ghost"
+	
+	if(!istype(usr, /mob/dead/observer)) return
+	
+	// Shamelessly copied from the Gas Analyzers
+	if (!( istype(usr.loc, /turf) ))
+		return
+
+	var/datum/gas_mixture/environment = usr.loc.return_air()
+
+	var/pressure = environment.return_pressure()
+	var/total_moles = environment.total_moles()
+
+	src << "\blue <B>Results:</B>"
+	if(abs(pressure - ONE_ATMOSPHERE) < 10)
+		src << "\blue Pressure: [round(pressure,0.1)] kPa"
+	else
+		src << "\red Pressure: [round(pressure,0.1)] kPa"
+	if(total_moles)
+		var/o2_concentration = environment.oxygen/total_moles
+		var/n2_concentration = environment.nitrogen/total_moles
+		var/co2_concentration = environment.carbon_dioxide/total_moles
+		var/plasma_concentration = environment.toxins/total_moles
+
+		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
+		if(abs(n2_concentration - N2STANDARD) < 20)
+			src << "\blue Nitrogen: [round(n2_concentration*100)]% ([round(environment.nitrogen,0.01)] moles)"
+		else
+			src << "\red Nitrogen: [round(n2_concentration*100)]% ([round(environment.nitrogen,0.01)] moles)"
+
+		if(abs(o2_concentration - O2STANDARD) < 2)
+			src << "\blue Oxygen: [round(o2_concentration*100)]% ([round(environment.oxygen,0.01)] moles)"
+		else
+			src << "\red Oxygen: [round(o2_concentration*100)]% ([round(environment.oxygen,0.01)] moles)"
+
+		if(co2_concentration > 0.01)
+			src << "\red CO2: [round(co2_concentration*100)]% ([round(environment.carbon_dioxide,0.01)] moles)"
+		else
+			src << "\blue CO2: [round(co2_concentration*100)]% ([round(environment.carbon_dioxide,0.01)] moles)"
+
+		if(plasma_concentration > 0.01)
+			src << "\red Plasma: [round(plasma_concentration*100)]% ([round(environment.toxins,0.01)] moles)"
+
+		if(unknown_concentration > 0.01)
+			src << "\red Unknown: [round(unknown_concentration*100)]% ([round(unknown_concentration*total_moles,0.01)] moles)"
+
+		src << "\blue Temperature: [round(environment.temperature-T0C,0.1)]&deg;C"
+		src << "\blue Heat Capacity: [round(environment.heat_capacity(),0.1)]"
+
+
 /mob/dead/observer/verb/toggle_darkness()
 	set name = "Toggle Darkness"
 	set category = "Ghost"
@@ -446,6 +509,15 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Become mouse"
 	set category = "Ghost"
 
+	if(config.disable_player_mice)
+		src << "<span class='warning'>Spawning as a mouse is currently disabled.</span>"
+		return
+
+	var/mob/dead/observer/M = usr
+	if(config.antag_hud_restricted && M.has_enabled_antagHUD == 1)
+		src << "<span class='warning'>antagHUD restrictions prevent you from spawning in as a mouse.</span>"
+		return
+
 	var/timedifference = world.time - client.time_died_as_mouse
 	if(client.time_died_as_mouse && timedifference <= mouse_respawn_time * 600)
 		var/timedifference_text
@@ -455,7 +527,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/response = alert(src, "Are you -sure- you want to become a mouse?","Are you sure you want to squeek?","Squeek!","Nope!")
 	if(response != "Squeek!") return  //Hit the wrong key...again.
-	
+
 
 	//find a viable mouse candidate
 	var/mob/living/simple_animal/mouse/host
@@ -471,6 +543,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "<span class='warning'>Unable to find any unwelded vents to spawn mice at.</span>"
 
 	if(host)
+		if(config.uneducated_mice)
+			host.universal_understand = 0
 		host.ckey = src.ckey
 		host << "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>"
 
@@ -483,3 +557,79 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	dat += data_core.get_manifest()
 
 	src << browse(dat, "window=manifest;size=370x420;can_close=1")
+
+//Used for drawing on walls with blood puddles as a spooky ghost.
+/mob/dead/verb/bloody_doodle()
+
+	set category = "Ghost"
+	set name = "Write in blood"
+	set desc = "If the round is sufficiently spooky, write a short message in blood on the floor or a wall. Remember, no IC in OOC or OOC in IC."
+
+	if(!(config.cult_ghostwriter))
+		src << "\red That verb is not currently permitted."
+		return
+
+	if (!src.stat)
+		return
+
+	if (usr != src)
+		return 0 //something is terribly wrong
+
+	var/ghosts_can_write
+	if(ticker.mode.name == "cult")
+		var/datum/game_mode/cult/C = ticker.mode
+		if(C.cult.len > config.cult_ghostwriter_req_cultists)
+			ghosts_can_write = 1
+
+	if(!ghosts_can_write)
+		src << "\red The veil is not thin enough for you to do that."
+		return
+
+	var/list/choices = list()
+	for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
+		if(B.amount > 0)
+			choices += B
+
+	if(!choices.len)
+		src << "<span class = 'warning'>There is no blood to use nearby.</span>"
+		return
+
+	var/obj/effect/decal/cleanable/blood/choice = input(src,"What blood would you like to use?") in null|choices
+
+	var/direction = input(src,"Which way?","Tile selection") as anything in list("Here","North","South","East","West")
+	var/turf/simulated/T = src.loc
+	if (direction != "Here")
+		T = get_step(T,text2dir(direction))
+
+	if (!istype(T))
+		src << "<span class='warning'>You cannot doodle there.</span>"
+		return
+
+	if(!choice || choice.amount == 0 || !(src.Adjacent(choice)))
+		return
+
+	var/doodle_color = (choice.basecolor) ? choice.basecolor : "#A10808"
+
+	var/num_doodles = 0
+	for (var/obj/effect/decal/cleanable/blood/writing/W in T)
+		num_doodles++
+	if (num_doodles > 4)
+		src << "<span class='warning'>There is no space to write on!</span>"
+		return
+
+	var/max_length = 50
+
+	var/message = stripped_input(src,"Write a message. It cannot be longer than [max_length] characters.","Blood writing", "")
+
+	if (message)
+
+		if (length(message) > max_length)
+			message += "-"
+			src << "<span class='warning'>You ran out of blood to write with!</span>"
+
+		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
+		W.basecolor = doodle_color
+		W.update_icon()
+		W.message = message
+		W.add_hiddenprint(src)
+		W.visible_message("\red Invisible fingers crudely paint something in blood on [T]...")

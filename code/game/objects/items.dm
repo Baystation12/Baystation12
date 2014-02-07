@@ -1,7 +1,7 @@
 /obj/item
 	name = "item"
 	icon = 'icons/obj/items.dmi'
-	var/icon/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
+	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/abstract = 0
 	var/item_state = null
 	var/r_speed = 1.0
@@ -312,6 +312,8 @@
 			if(slot_l_ear)
 				if(H.l_ear)
 					return 0
+				if( w_class < 2	)
+					return 1
 				if( !(slot_flags & SLOT_EARS) )
 					return 0
 				if( (slot_flags & SLOT_TWOEARS) && H.r_ear )
@@ -320,6 +322,8 @@
 			if(slot_r_ear)
 				if(H.r_ear)
 					return 0
+				if( w_class < 2 )
+					return 1
 				if( !(slot_flags & SLOT_EARS) )
 					return 0
 				if( (slot_flags & SLOT_TWOEARS) && H.l_ear )
@@ -349,7 +353,7 @@
 						H << "\red You need a jumpsuit before you can attach this [name]."
 					return 0
 				if(slot_flags & SLOT_DENYPOCKET)
-					return
+					return 0
 				if( w_class <= 2 || (slot_flags & SLOT_POCKET) )
 					return 1
 			if(slot_r_store)
@@ -484,7 +488,7 @@
 			(H.glasses && H.glasses.flags & GLASSESCOVERSEYES) \
 		))
 		// you can't stab someone in the eyes wearing a mask!
-		user << "\red You're going to need to remove that mask/helmet/glasses first."
+		user << "\red You're going to need to remove the eye covering first."
 		return
 
 	var/mob/living/carbon/monkey/Mo = M
@@ -492,7 +496,7 @@
 			(Mo.wear_mask && Mo.wear_mask.flags & MASKCOVERSEYES) \
 		))
 		// you can't stab someone in the eyes wearing a mask!
-		user << "\red You're going to need to remove that mask/helmet/glasses first."
+		user << "\red You're going to need to remove the eye covering first."
 		return
 
 	if(istype(M, /mob/living/carbon/alien) || istype(M, /mob/living/carbon/slime))//Aliens don't have eyes./N     slimes also don't have eyes!
@@ -569,6 +573,7 @@
 
 	//apply the blood-splatter overlay if it isn't already in there
 	if(!blood_DNA.len)
+		blood_overlay.color = blood_color
 		overlays += blood_overlay
 
 	//if this blood isn't already in the list, add it
@@ -589,4 +594,17 @@
 	//not sure if this is worth it. It attaches the blood_overlay to every item of the same type if they don't have one already made.
 	for(var/obj/item/A in world)
 		if(A.type == type && !A.blood_overlay)
-			A.blood_overlay = I
+			A.blood_overlay = image(I)
+
+/obj/item/proc/showoff(mob/user)
+	for (var/mob/M in view(user))
+		M.show_message("[user] holds up [src]. <a HREF=?src=\ref[M];lookitem=\ref[src]>Take a closer look.</a>",1)
+
+/mob/living/carbon/verb/showoff()
+	set name = "Show Held Item"
+	set category = "Object"
+
+	var/obj/item/I = get_active_hand()
+	if(I && !I.abstract)
+		I.showoff(src)
+

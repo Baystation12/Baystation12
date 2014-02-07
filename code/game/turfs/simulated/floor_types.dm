@@ -9,6 +9,9 @@
 		..()
 		name = "floor"
 
+/turf/simulated/floor/airless/ceiling
+	icon_state = "rockvault"
+
 /turf/simulated/floor/light
 	name = "Light floor"
 	luminosity = 5
@@ -73,7 +76,7 @@
 
 /turf/simulated/floor/engine/n20
 	New()
-		..()
+		. = ..()
 		var/datum/gas_mixture/adding = new
 		var/datum/gas/sleeping_agent/trace_gas = new
 

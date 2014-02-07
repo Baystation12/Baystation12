@@ -252,7 +252,7 @@ datum
 			name = "Dexalin"
 			id = "dexalin"
 			result = "dexalin"
-			required_reagents = list("oxygen" = 2)
+			required_reagents = list("oxygen" = 2, "plasma" = 0.1)
 			required_catalysts = list("plasma" = 5)
 			result_amount = 1
 
@@ -302,7 +302,7 @@ datum
 			name = "Clonexadone"
 			id = "clonexadone"
 			result = "clonexadone"
-			required_reagents = list("cryoxadone" = 1, "sodium" = 1)
+			required_reagents = list("cryoxadone" = 1, "sodium" = 1, "plasma" = 0.1)
 			required_catalysts = list("plasma" = 5)
 			result_amount = 2
 
@@ -477,15 +477,15 @@ datum
 		potassium_chloride
 			name = "Potassium Chloride"
 			id = "potassium_chloride"
-			id = "potassium_chloride"
+			result = "potassium_chloride"
 			required_reagents = list("sodiumchloride" = 1, "potassium" = 1)
 			result_amount = 2
 
 		potassium_chlorophoride
 			name = "Potassium Chlorophoride"
 			id = "potassium_chlorophoride"
-			id = "potassium_chlorophoride"
-			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloral_hydrate" = 1)
+			result = "potassium_chlorophoride"
+			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloralhydrate" = 1)
 			result_amount = 4
 
 		stoxin
@@ -514,7 +514,7 @@ datum
 			id = "mindbreaker"
 			result = "mindbreaker"
 			required_reagents = list("silicon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
-			result_amount = 5
+			result_amount = 3
 
 		lipozine
 			name = "Lipozine"
@@ -1549,7 +1549,7 @@ datum
 			name = "Space Beer"
 			id = "spacebeer"
 			result = "beer"
-			required_reagents = list("flour" = 10)
+			required_reagents = list("cornoil" = 10)
 			required_catalysts = list("enzyme" = 5)
 			result_amount = 10
 
@@ -1835,7 +1835,7 @@ datum
 			required_reagents = list("berryjuice" = 1, "cream" = 1, "vermouth" = 1)
 			result_amount = 3
 
-		grapesoda //Allows Grape Soda to be made
+		grapesoda
 			name = "Grape Soda"
 			id = "grapesoda"
 			result = "grapesoda"

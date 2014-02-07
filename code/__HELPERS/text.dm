@@ -194,7 +194,13 @@ proc/checkhtml(var/t)
 /*
  * Text modification
  */
- //Adds 'u' number of zeros ahead of the text 't'
+/proc/replacetext(text, find, replacement)
+	return list2text(text2list(text, find), replacement)
+
+/proc/replacetextEx(text, find, replacement)
+	return list2text(text2listEx(text, find), replacement)
+
+//Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
 	while (length(t) < u)
 		t = "0[t]"
@@ -259,27 +265,6 @@ proc/checkhtml(var/t)
 		return message
 	return copytext(message, 1, length + 1)
 
-/*
- * Misc
- */
-
-/proc/stringsplit(txt, character)
-	var/cur_text = txt
-	var/last_found = 1
-	var/found_char = findtext(cur_text,character)
-	var/list/list = list()
-	if(found_char)
-		var/fs = copytext(cur_text,last_found,found_char)
-		list += fs
-		last_found = found_char+length(character)
-		found_char = findtext(cur_text,character,last_found)
-	while(found_char)
-		var/found_string = copytext(cur_text,last_found,found_char)
-		last_found = found_char+length(character)
-		list += found_string
-		found_char = findtext(cur_text,character,last_found)
-	list += copytext(cur_text,last_found,length(cur_text)+1)
-	return list
 
 /proc/stringmerge(var/text,var/compare,replace = "*")
 //This proc fills in all spaces with the "replace" var (* by default) with whatever

@@ -11,7 +11,7 @@
 #define DETONATION_HALLUCINATION 600
 
 
-#define WARNING_DELAY 60 //45 seconds between warnings.
+#define WARNING_DELAY 30 		//seconds between warnings.
 
 /obj/machinery/power/supermatter
 	name = "Supermatter"
@@ -20,6 +20,7 @@
 	icon_state = "darkmatter"
 	density = 1
 	anchored = 0
+	luminosity = 4
 
 	var/gasefficency = 0.25
 
@@ -39,8 +40,9 @@
 	var/explosion_power = 8
 
 	var/lastwarning = 0                        // Time in 1/10th of seconds since the last sent warning
-
 	var/power = 0
+
+	var/oxygen = 0				  // Moving this up here for easier debugging.
 
 	//Temporary values so that we can optimize this
 	//How much the bullets damage should be multiplied by when it is added to the internal variables
@@ -91,32 +93,17 @@
 	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
 		return  //Yeah just stop.
 
-	//Ok, get the air from the turf
-	var/datum/gas_mixture/env = L.return_air()
-
-	//Remove gas from surrounding area
-	var/datum/gas_mixture/removed = env.remove(gasefficency * env.total_moles)
-
-	if(!removed || !removed.total_moles)
-		damage += max((power-1600)/10, 0)
-		power = min(power, 1600)
-		return 1
-
-	if (!removed)
-		return 1
-
-	damage_archived = damage
-	damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
-
 	if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
-
+			var/stability = num2text(round((damage / explosion_point) * 100))
+			
 			if(damage > emergency_point)
-				radio.autosay(emergency_alert, "Supermatter Monitor")
+
+				radio.autosay(addtext(emergency_alert, " Stability: ",stability,"%"), "Supermatter Monitor")
 				lastwarning = world.timeofday
 
 			else if(damage >= damage_archived) // The damage is still going up
-				radio.autosay(warning_alert, "Supermatter Monitor")
+				radio.autosay(addtext(warning_alert," Stability: ",stability,"%"), "Supermatter Monitor")
 				lastwarning = world.timeofday - 150
 
 			else                                                 // Phew, we're safe
@@ -133,9 +120,25 @@
 
 			explode()
 
+	//Ok, get the air from the turf
+	var/datum/gas_mixture/env = L.return_air()
+
+	//Remove gas from surrounding area
+	var/datum/gas_mixture/removed = env.remove(gasefficency * env.total_moles)
+
+	if(!removed || !removed.total_moles)
+		damage += max((power-1600)/10, 0)
+		power = min(power, 1600)
+		return 1
+
+	if (!removed)
+		return 1
+
+	damage_archived = damage
+	damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
 	//Ok, 100% oxygen atmosphere = best reaction
 	//Maxes out at 100% oxygen pressure
-	var/oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
+	oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
 
 	var/temp_factor = 100
 
@@ -174,9 +177,9 @@
 
 	env.merge(removed)
 
-	for(var/mob/living/carbon/human/l in view(src, round(power ** 0.25))) // you have to be seeing the core to get hallucinations
+	for(var/mob/living/carbon/human/l in view(src, min(7, round(power ** 0.25)))) // If they can see it without mesons on.  Bad on them.
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
-			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / get_dist(l, src) ) ) )
+			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
 	for(var/mob/living/l in range(src, round((power / 100) ** 0.25)))
 		var/rads = (power / 10) * sqrt( 1 / get_dist(l, src) )
@@ -188,6 +191,12 @@
 
 
 /obj/machinery/power/supermatter/bullet_act(var/obj/item/projectile/Proj)
+	var/turf/L = loc
+	if(!istype(L))		// We don't run process() when we are in space
+		return 0	// This stops people from being able to really power up the supermatter
+				// Then bring it inside to explode instantly upon landing on a valid turf.
+
+
 	if(Proj.flag != "bullet")
 		power += Proj.damage * config_bullet_energy
 	else
@@ -200,15 +209,18 @@
 
 
 /obj/machinery/power/supermatter/attack_robot(mob/user as mob)
-	return attack_hand(user)
+	if(Adjacent(user))
+		return attack_hand(user)
+	else
+		user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
+	return
 
 /obj/machinery/power/supermatter/attack_ai(mob/user as mob)
 	user << "<span class = \"warning\">You attempt to interface with the control circuits but find they are not connected to your network.  Maybe in a future firmware update.</span>"
 
-
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
-	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
-		"<span class=\"danger\">You reach out and touch \the [src], everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\"</span>",\
+	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",\
+		"<span class=\"danger\">You reach out and touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\"</span>",\
 		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 
 	Consume(user)
