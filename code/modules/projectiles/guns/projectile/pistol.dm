@@ -1,10 +1,10 @@
 /obj/item/weapon/gun/projectile/automatic/m2411
 	name = "M2411"
-	desc = "John Browning's classic updated for the modern day. Uses .45 rounds. Has 'VADS' engraved on the grip."
+	desc = "John Browning's classic updated for the modern day. Uses .45 rounds."
 	icon_state = "m2411"
 	w_class = 3.0
 	origin_tech = "combat=3;materials=2"
-	mag_type = /obj/item/ammo_box/magazine/m45
+	mag_type = "/obj/item/ammo_box/magazine/m45"
 
 
 /obj/item/weapon/gun/projectile/automatic/m2411/update_icon()
