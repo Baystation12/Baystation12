@@ -273,7 +273,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	if(istype(M, /mob/living/carbon/human))
 		log_admin("[key_name(src)] has made [M.key] a changeling.")
 		spawn(10)
-			M.absorbed_dna[M.real_name] = M.dna
+			M.absorbed_dna[M.real_name] = M.dna.Clone()
 			M.make_changeling()
 			if(M.mind)
 				M.mind.special_role = "Changeling"
