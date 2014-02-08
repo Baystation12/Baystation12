@@ -200,7 +200,7 @@
 
 	src.split()
 	src.visible_message("\red [src] begins to shift and quiver, and erupts in a shower of shed bark and twigs!","\red You begin to shift and quiver, then erupt in a shower of shed bark and twigs, attaining your adult form!")
-	var/mob/living/carbon/human/adult = new(loc)
+	var/mob/living/carbon/human/diona/adult = new(loc)
 	adult.set_species("Diona")
 
 	if(istype(loc,/obj/item/weapon/holder/diona))

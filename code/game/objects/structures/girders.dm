@@ -176,6 +176,12 @@
 			..()
 
 
+	bullet_act(var/obj/item/projectile/Proj)
+		if(istype(Proj ,/obj/item/projectile/beam/pulse))
+			src.ex_act(1)
+		..()
+		return 0
+
 	blob_act()
 		if(prob(40))
 			del(src)

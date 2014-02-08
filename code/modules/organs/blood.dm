@@ -109,11 +109,16 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 				if(prob(15))
 					Paralyse(rand(1,3))
 					var/word = pick("dizzy","woosey","faint")
-					src << "\red You feel extremely [word]"
+					src << "\red You feel very [word]"
 			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-				oxyloss += 5
-				toxloss += 3
+				if(!pale)
+					pale = 1
+					update_body()
+				if(oxyloss > 20)
+					eye_blurry += 6
+				oxyloss += 12
 				if(prob(15))
+					Paralyse(rand(1,3))
 					var/word = pick("dizzy","woosey","faint")
 					src << "\red You feel extremely [word]"
 			if(0 to BLOOD_VOLUME_SURVIVE)
