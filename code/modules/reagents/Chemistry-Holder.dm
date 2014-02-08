@@ -50,7 +50,7 @@ datum
 
 		proc
 
-			remove_any(var/amount=1)
+/*			remove_any(var/amount=1) //I fail to see how this makes sense
 				var/total_transfered = 0
 				var/current_list_element = 1
 
@@ -70,7 +70,22 @@ datum
 					src.update_total()
 
 				handle_reactions()
-				return total_transfered
+				return total_transfered*/
+
+			remove_any(var/amount=1) //Actual random removal
+				if (total_volume<=0)
+					return
+				amount = min(amount, total_volume)
+				var/part = amount / total_volume
+				for (var/datum/reagent/current_reagent in src.reagent_list)
+					if (!current_reagent)
+						continue
+					var/current_reagent_transfer = current_reagent.volume * part
+					remove_reagent(current_reagent.id, current_reagent_transfer)
+
+				update_total()
+				//handle_reactions()
+				return amount
 
 			get_master_reagent_name()
 				var/the_name = null
@@ -223,7 +238,7 @@ datum
 				do
 					reaction_occured = 0
 					for(var/datum/reagent/R in reagent_list) // Usually a small list
-						R.on_update()
+						//R.on_update()
 						for(var/reaction in chemical_reactions_list[R.id]) // Was a big list but now it should be smaller since we filtered it with our reagent id
 
 							if(!reaction)
@@ -409,17 +424,17 @@ datum
 						// mix paints
 						if(R.id == "paint")
 							if(!data) world << "Error: no paint colour data."
-							var/list/bothpaints = list()
-							bothpaints += R //The one already in the container
+							var/list/bothpaints = reagent_list //Everything already in the container
 							//Temporarily make the second paint so we can update the colour
-							var/datum/reagent/D = chemical_reagents_list["paint"]
-							var/datum/reagent/secondpaint = new D.type()
+							var/datum/reagent/P = chemical_reagents_list["paint"]
+							var/datum/reagent/secondpaint = new P.type()
 							secondpaint.data = data
 							//secondpaint.on_update()
 							secondpaint.volume = amount
 							bothpaints += secondpaint
 							R.data["color"] = mix_color_from_reagents(bothpaints)
 							world << "Mixed color [R.data["color"]]"
+							world << " "
 							//R.on_update()
 
 						// mix dem viruses
@@ -455,15 +470,17 @@ datum
 
 				var/datum/reagent/D = chemical_reagents_list[reagent]
 				if(D)
-
 					var/datum/reagent/R = new D.type()
 					reagent_list += R
 					R.holder = src
 					R.volume = amount
-					SetViruses(R, data) // Includes setting data
+					SetViruses(R, data) // Includes setting data for paint
 					update_total()
 					my_atom.on_reagent_change()
 					handle_reactions()
+					if(reagent == "paint")
+						world << "There is now [amount] of [reagent] with datacolour [R.data["color"]] color [R.color]"
+						//world << " "
 					return 0
 				else
 					warning("[my_atom] attempted to add a reagent called '[reagent]' which doesn't exist. ([usr])")
@@ -471,7 +488,7 @@ datum
 
 				return 1
 
-			remove_reagent(var/reagent, var/amount, var/safety)//Added a safety check for the trans_id_to
+			remove_reagent(var/reagent, var/amount, var/safety=1)//Added a safety check for the trans_id_to
 
 				if(!isnum(amount)) return 1
 

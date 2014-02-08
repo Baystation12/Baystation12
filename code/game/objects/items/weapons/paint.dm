@@ -22,13 +22,14 @@
 
 	New()
 		..()
-		world <<"paintcolor [paintcolor]"
 		if(paint_type && lentext(paint_type) > 0)
 			name = paint_type + " " + name
 			icon_state = "paint_"+paint_type
+			desc = "A bucket of paint with a [paint_type] lid."
+		world <<"A new paint is created: [name] [paintcolor]"
 		var/list/colorlist = list()
 		colorlist["color"] = paintcolor
-		world <<"color list [length(colorlist)] [colorlist["color"]]"
+		//world <<"color list [length(colorlist)] [colorlist["color"]]"
 		reagents.add_reagent("paint", volume, colorlist)
 
 /obj/item/weapon/reagent_containers/glass/paint/red

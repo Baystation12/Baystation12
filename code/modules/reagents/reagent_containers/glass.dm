@@ -138,7 +138,7 @@
 			world << "[volume_modifier]"
 			reagents.reaction(target, TOUCH, volume_modifier)
 			spawn(5)
-				reagents.remove_any(5)
+				reagents.remove_any(amount_per_transfer_from_this)
 			return
 
 		else if(reagents.total_volume)

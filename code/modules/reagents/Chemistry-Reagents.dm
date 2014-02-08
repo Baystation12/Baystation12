@@ -942,6 +942,8 @@ datum
 			reaction_turf(var/turf/simulated/S, var/volume)
 				if(volume >= 1)
 					S.dirt = 0
+					S.color = null //cleans paints
+					world << "turf cleaned with [volume] space cleaner"
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				if(iscarbon(M))
@@ -1387,7 +1389,7 @@ datum
 			id = "spaceacillin"
 			description = "An all-purpose antiviral agent."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#08A5DC" // rgb: 8, 165, 220
 			custom_metabolism = 0.01
 			overdose = REAGENTS_OVERDOSE
 
@@ -1494,33 +1496,39 @@ datum
 			overdose = REAGENTS_OVERDOSE
 
 			on_update()
-				world << "Old colour is [color]"
+				world << "[id]: Old colour is [color] and datacolor is [data["color"]]"
 				if(data["color"])
 					color = data["color"]
 				else
 					data["color"]="#FF0000"
 					color = data["color"]
-					world << "Something went wrong."
-				world << "New colour is [color]"
+					world << "Something went wrong. New color is [color]"
+				world << "[id]: New colour is [color] and datacolor is [data["color"]]"
+				world << " "
 				..()
 				return
 
 			on_mob_life(var/mob/living/M as mob)
+				on_update()
 				if(!M) M = holder.my_atom
 				M.adjustToxLoss(0.4)
 				..()
 				return
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				on_update()
 				..()
 				//TODO: colour mobs when splashed with paint
 				return
+
 			reaction_turf(var/turf/T, var/volume)
+				on_update()
 				if(!istype(T) || istype(T, /turf/space))
 					return
 				if(volume < 3)
 					return
 				T.color = data["color"]
+				world << "turf [T.name] is coloured with datacolour [data["color"]] and colour [color]."
 				..()
 				/*
 				var/ind = "[initial(T.icon)][color]"
@@ -1535,11 +1543,14 @@ datum
 				return*/
 
 			reaction_obj(var/obj/O, var/volume)
-				if(!istype(O) || !istype(O, /obj/item/weapon))
+				on_update()
+				if(!istype(O))// || !istype(O, /obj/item/weapon))
+					//usr << "The paint won't stick." //Just spam
 					return
 				if(volume < 2)
 					return
 				O.color = data["color"]
+				world << "[O.name] is coloured datacolor [data["color"]] colour [color]"
 				..()
 				return
 
