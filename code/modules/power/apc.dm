@@ -138,10 +138,10 @@
 	//if area isn't specified use current
 	if(isarea(A) && src.areastring == null)
 		src.area = A
-		name = "[area.name] APC"
+		name = "\improper [area.name] APC"
 	else
 		src.area = get_area_name(areastring)
-		name = "[area.name] APC"
+		name = "\improper [area.name] APC"
 	update_icon()
 
 	make_terminal()
