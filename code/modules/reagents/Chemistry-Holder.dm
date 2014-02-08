@@ -403,22 +403,24 @@ datum
 
 				for(var/A in reagent_list)
 					var/datum/reagent/R = A
-					if (R.id == reagent) //if there is already reagent in the container, some reagents need data transfer
+					//if there is already reagent in the container, some reagents need data transfer
+					if (R.id == reagent)
 
 						// mix paints
 						if(R.id == "paint")
 							if(!data) world << "Error: no paint colour data."
-							var/list/bothpaints = new /list(2)
-							bothpaints[1] = R //The one already in the container
+							var/list/bothpaints = list()
+							bothpaints += R //The one already in the container
 							//Temporarily make the second paint so we can update the colour
 							var/datum/reagent/D = chemical_reagents_list["paint"]
 							var/datum/reagent/secondpaint = new D.type()
 							secondpaint.data = data
-							secondpaint.on_update()
+							//secondpaint.on_update()
 							secondpaint.volume = amount
-							bothpaints[2] = secondpaint
+							bothpaints += secondpaint
 							R.data["color"] = mix_color_from_reagents(bothpaints)
-							R.on_update()
+							world << "Mixed color [R.data["color"]]"
+							//R.on_update()
 
 						// mix dem viruses
 						if(R.id == "blood")
@@ -458,8 +460,6 @@ datum
 					reagent_list += R
 					R.holder = src
 					R.volume = amount
-/*					if(R.id=="paint" && data)
-						R.data = data*/
 					SetViruses(R, data) // Includes setting data
 					update_total()
 					my_atom.on_reagent_change()
@@ -467,8 +467,7 @@ datum
 					return 0
 				else
 					warning("[my_atom] attempted to add a reagent called '[reagent]' which doesn't exist. ([usr])")
-
-				handle_reactions()
+					handle_reactions()
 
 				return 1
 

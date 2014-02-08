@@ -937,6 +937,7 @@ datum
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
 					T.color = null //cleans paints
+					world << "turf cleaned"
 
 			reaction_turf(var/turf/simulated/S, var/volume)
 				if(volume >= 1)
@@ -1494,7 +1495,12 @@ datum
 
 			on_update()
 				world << "Old colour is [color]"
-				color = data["color"]
+				if(data["color"])
+					color = data["color"]
+				else
+					data["color"]="#FF0000"
+					color = data["color"]
+					world << "Something went wrong."
 				world << "New colour is [color]"
 				..()
 				return
