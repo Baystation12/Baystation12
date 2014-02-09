@@ -849,7 +849,7 @@
 "aqq" = (/obj/machinery/computer/area_atmos/area,/obj/machinery/atmospherics/pipe/simple/hidden,/turf/simulated/floor{icon_state = "red"; dir = 1},/area/security/prison)
 "aqr" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor,/area/security/prison)
 "aqs" = (/obj/machinery/deployable/barrier,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/security/warden)
-"aqt" = (/obj/structure/closet/bombcloset,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/security/warden)
+"aqt" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/closet/bombclosetsecurity,/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/security/warden)
 "aqu" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor{dir = 8; icon_state = "redcorner"},/area/security/main)
 "aqv" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/security/main)
 "aqw" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/structure/disposalpipe/segment,/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 8},/turf/simulated/floor{icon_state = "floorgrime"},/area/security/main)
