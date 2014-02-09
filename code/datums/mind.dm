@@ -74,7 +74,7 @@ datum/mind
 			current.mind = null
 		if(new_character.mind)		//remove any mind currently in our new body's mind variable
 			new_character.mind.current = null
-			
+
 		nanomanager.user_transferred(current, new_character) // transfer active NanoUI instances to new user
 
 		current = new_character		//link ourself to our new body
@@ -743,6 +743,7 @@ datum/mind
 						for (var/datum/objective/nuclear/O in objectives)
 							objectives-=O
 						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a syndicate operative!</B></FONT>"
+						current.faction = "neutral"
 						log_admin("[key_name_admin(usr)] has de-nuke op'ed [current].")
 				if("nuclear")
 					if(!(src in ticker.mode.syndicates))

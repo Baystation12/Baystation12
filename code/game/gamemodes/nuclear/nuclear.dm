@@ -223,6 +223,7 @@
 	for(var/datum/objective/objective in syndicate.objectives)
 		syndicate.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 		obj_count++
+	syndicate.current.faction = "syndicate"
 	return
 
 
@@ -406,4 +407,4 @@
 	name = "syndicate commander ID card"
 	assignment = "Syndicate Commander"
 	icon_state = "centcom_old"
-	access = list(access_maint_tunnels, access_syndicate, access_syndicate_commander)
+	access = list(access_maint_tunnels, access_syndicate, access_syndicate_commander, access_external_airlocks)
