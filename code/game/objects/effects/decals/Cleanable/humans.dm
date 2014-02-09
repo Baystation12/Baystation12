@@ -51,24 +51,25 @@ var/global/list/image/splatter_cache=list()
 	if(amount < 1)
 		return
 
-	if(perp.shoes)
-		perp.shoes.blood_color=basecolor
-		perp.shoes:track_blood = max(amount,perp.shoes:track_blood)                //Adding blood to shoes
+	if(perp.shoes)//Adding blood to shoes
+		perp.shoes.blood_color = basecolor
+		perp.shoes:track_blood = max(amount,perp.shoes:track_blood)
 		if(!perp.shoes.blood_overlay)
 			perp.shoes.generate_blood_overlay()
 		if(!perp.shoes.blood_DNA)
 			perp.shoes.blood_DNA = list()
 			perp.shoes.blood_overlay.color = basecolor
 			perp.shoes.overlays += perp.shoes.blood_overlay
-			perp.update_inv_shoes(1)
 		perp.shoes.blood_DNA |= blood_DNA.Copy()
-	else
-		perp.feet_blood_color=basecolor
-		perp.track_blood = max(amount,perp.track_blood)                                //Or feet
+
+	else//Or feet
+		perp.feet_blood_color = basecolor
+		perp.track_blood = max(amount,perp.track_blood)
 		if(!perp.feet_blood_DNA)
 			perp.feet_blood_DNA = list()
 		perp.feet_blood_DNA |= blood_DNA.Copy()
 
+	perp.update_inv_shoes(1)
 	amount--
 
 /obj/effect/decal/cleanable/blood/proc/dry()
