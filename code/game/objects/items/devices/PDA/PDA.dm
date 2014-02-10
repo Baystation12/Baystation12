@@ -749,7 +749,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	return 1 // return 1 tells it to refresh the UI in NanoUI
 
 /obj/item/device/pda/proc/detonate_act(var/obj/item/device/pda/P)
-	//TODO: sometimes these attacks show up on the message server?
+	//TODO: sometimes these attacks show up on the message server
 	var/i = rand(1,100)
 	var/j = rand(0,1) //Possibility of losing the PDA after the detonation
 	var/message = ""
@@ -765,7 +765,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		j=1
 		if(M && isliving(M))
 			M.apply_damage( rand(30,60) , BURN)
-		message += "You feels a searing heat! Your [P] is burning!"
+		message += "You feel a searing heat! Your [P] is burning!"
 	if(i>=20 && i<=25) //EMP
 		empulse(P.loc, 3, 6, 1)
 		message += "Your [P] emits a wave of electomagnetic energy!"
@@ -783,30 +783,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		playsound(P.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
 		B.start()
 		message += "Large clouds of noxious smoke billow forth from your [P]!"
-	if(i>=45 && i<= 50) //Mustard gas
-		var/datum/effect/effect/system/smoke_spread/mustard/Q = new /datum/effect/effect/system/smoke_spread/mustard
-		Q.attach(P.loc)
-		Q.set_up(P, 10, 0, P.loc)
-		playsound(P.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
-		Q.start()
-		message += "Large clouds of yellowish smoke billow forth from your [P]!"
-	if(i>=50 && i<=55) //Sleepy gas
-		var/datum/effect/effect/system/smoke_spread/sleepy/G = new /datum/effect/effect/system/smoke_spread/sleepy
-		G.attach(P.loc)
-		G.set_up(P, 10, 0, P.loc)
-		playsound(P.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
-		G.start()
-		message += "Large clouds of eerie smoke billow forth from your [P]!"
-	if(i>=55 && i<=60) //Foam
-		var/datum/effect/effect/system/foam_spread/f = new()
-		f.set_up(20, P.loc, P, 0)
-		f.start()
-		message += "Foam starts to bubble from your [P]!"
-	if(i>=60 && i<=65) //Metal foam
-		var/datum/effect/effect/system/foam_spread/K = new()
-		K.set_up(20, P.loc, P, 1)
-		K.start()
-		message += "Dense foam starts to ooze from your [P]!"
 	if(i>=65 && i<=75) //Weaken
 		if(M && isliving(M))
 			M.apply_effects(0,1)
@@ -820,6 +796,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		s.set_up(2, 1, P.loc)
 		s.start()
 		message += "Your [P] begins to spark violently!"
+	if(i>45 && i<65 && prob(50)) //Nothing happens
+		message += "Your [P] bleeps loudly."
+		j = prob(10)
 
 	if(j) //This kills the PDA
 		P.Del()
