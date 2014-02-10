@@ -23,14 +23,14 @@ var/specops_shuttle_timeleft = 0
 	var/specops_shuttle_timereset = 0
 
 /proc/specops_return()
-	var/obj/item/device/radio/intercom/announcer = new /obj/item/device/radio/intercom(null)//We need a fake AI to announce some stuff below. Otherwise it will be wonky.
-	announcer.config(list("Response Team" = 0))
+	var/area/centcom/control/command = locate()//To find announcer. This area should exist for this proc to work.
+	var/mob/living/silicon/decoy/announcer = locate() in command//We need a fake AI to announce some stuff below. Otherwise it will be wonky.
 
 	var/message_tracker[] = list(0,1,2,3,5,10,30,45)//Create a a list with potential time values.
 	var/message = "\"THE SPECIAL OPERATIONS SHUTTLE IS PREPARING TO RETURN\""//Initial message shown.
 	if(announcer)
-		announcer.autosay(message, "A.L.I.C.E.", 144.3)
-		announcer.autosay(message, "A.L.I.C.E.", 144.1)
+		announcer.say(message)
+		announcer.say(message)
 
 	while(specops_shuttle_time - world.timeofday > 0)
 		var/ticksleft = specops_shuttle_time - world.timeofday
@@ -46,7 +46,7 @@ var/specops_shuttle_timeleft = 0
 				message = "\"ALERT: [rounded_time_left] SECOND[(rounded_time_left!=1)?"S":""] REMAIN\""
 				if(rounded_time_left==0)
 					message = "\"ALERT: TAKEOFF\""
-				announcer.autosay(message, "A.L.I.C.E.", )
+				announcer.say(message)
 				message_tracker -= rounded_time_left//Remove the number from the list so it won't be called again next cycle.
 				//Should call all the numbers but lag could mean some issues. Oh well. Not much I can do about that.
 
@@ -95,20 +95,20 @@ var/specops_shuttle_timeleft = 0
 	for(var/obj/machinery/computer/specops_shuttle/S in world)
 		S.specops_shuttle_timereset = world.time + SPECOPS_RETURN_DELAY
 
-	del(announcer)
-
 /proc/specops_process()
 	var/area/centcom/specops/special_ops = locate()//Where is the specops area located?
-	var/obj/item/device/radio/intercom/announcer = new /obj/item/device/radio/intercom(null)//We need a fake AI to announce some stuff below. Otherwise it will be wonky.
-	announcer.config(list("Response Team" = 0))
+	var/area/centcom/control/command = locate()//To find announcer. This area should exist for this proc to work.
+	var/mob/living/silicon/decoy/announcer = locate() in command//We need a fake AI to announce some stuff below. Otherwise it will be wonky.
 
 	var/message_tracker[] = list(0,1,2,3,5,10,30,45)//Create a a list with potential time values.
 	var/message = "\"THE SPECIAL OPERATIONS SHUTTLE IS PREPARING FOR LAUNCH\""//Initial message shown.
 	if(announcer)
-		announcer.autosay(message, "A.L.I.C.E.", 144.3)
-		announcer.autosay(message, "A.L.I.C.E.", 144.1)
+		announcer.say(message)
+		announcer.say(message)
+		/*
 		message = "ARMORED SQUAD TAKE YOUR POSITION ON GRAVITY LAUNCH PAD"
-		announcer.autosay(message, "A.L.I.C.E.", 144.1)
+		announcer.say(message)
+		*/
 
 	while(specops_shuttle_time - world.timeofday > 0)
 		var/ticksleft = specops_shuttle_time - world.timeofday
@@ -124,8 +124,8 @@ var/specops_shuttle_timeleft = 0
 				message = "\"ALERT: [rounded_time_left] SECOND[(rounded_time_left!=1)?"S":""] REMAIN\""
 				if(rounded_time_left==0)
 					message = "\"ALERT: TAKEOFF\""
-				announcer.autosay(message, "A.L.I.C.E.", 144.3)
-				announcer.autosay(message, "A.L.I.C.E.", 144.1)
+				announcer.say(message)
+				announcer.say(message)
 				message_tracker -= rounded_time_left//Remove the number from the list so it won't be called again next cycle.
 				//Should call all the numbers but lag could mean some issues. Oh well. Not much I can do about that.
 
@@ -237,8 +237,6 @@ var/specops_shuttle_timeleft = 0
 
 	for(var/obj/machinery/computer/specops_shuttle/S in world)
 		S.specops_shuttle_timereset = world.time + SPECOPS_RETURN_DELAY
-
-	del(announcer)
 
 /proc/specops_can_move()
 	if(specops_shuttle_moving_to_station || specops_shuttle_moving_to_centcom)

@@ -49,23 +49,23 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/medical
 	default_cartridge = /obj/item/weapon/cartridge/medical
-	icon_state = "pda-m"
+	icon_state = "pda-medical"
 
 /obj/item/device/pda/viro
 	default_cartridge = /obj/item/weapon/cartridge/medical
-	icon_state = "pda-v"
+	icon_state = "pda-virology"
 
 /obj/item/device/pda/engineering
 	default_cartridge = /obj/item/weapon/cartridge/engineering
-	icon_state = "pda-e"
+	icon_state = "pda-engineer"
 
 /obj/item/device/pda/security
 	default_cartridge = /obj/item/weapon/cartridge/security
-	icon_state = "pda-s"
+	icon_state = "pda-security"
 
 /obj/item/device/pda/detective
 	default_cartridge = /obj/item/weapon/cartridge/detective
-	icon_state = "pda-det"
+	icon_state = "pda-security"
 
 /obj/item/device/pda/warden
 	default_cartridge = /obj/item/weapon/cartridge/security
@@ -73,12 +73,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/janitor
 	default_cartridge = /obj/item/weapon/cartridge/janitor
-	icon_state = "pda-j"
+	icon_state = "pda-janitor"
 	ttone = "slip"
 
 /obj/item/device/pda/toxins
 	default_cartridge = /obj/item/weapon/cartridge/signal/toxins
-	icon_state = "pda-tox"
+	icon_state = "pda-science"
 	ttone = "boom"
 
 /obj/item/device/pda/clown
@@ -119,7 +119,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/captain
 	default_cartridge = /obj/item/weapon/cartridge/captain
-	icon_state = "pda-c"
+	icon_state = "pda-captain"
 	detonate = 0
 	//toff = 1
 
@@ -129,7 +129,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/quartermaster
 	default_cartridge = /obj/item/weapon/cartridge/quartermaster
-	icon_state = "pda-q"
+	icon_state = "pda-qm"
 
 /obj/item/device/pda/shaftminer
 	icon_state = "pda-miner"
