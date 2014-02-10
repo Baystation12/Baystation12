@@ -909,11 +909,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 		for(var/obj/effect/proc_holder/spell/S in spell_list)
 			switch(S.charge_type)
 				if("recharge")
-					statpanel("Spells","[S.charge_counter/10.0]/[S.charge_max/10]",S)
+					statpanel(S.panel,"[S.charge_counter/10.0]/[S.charge_max/10]",S)
 				if("charges")
-					statpanel("Spells","[S.charge_counter]/[S.charge_max]",S)
+					statpanel(S.panel,"[S.charge_counter]/[S.charge_max]",S)
 				if("holdervar")
-					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
+					statpanel(S.panel,"[S.holder_var_type] [S.holder_var_amount]",S)
 
 	if(listed_turf)
 		if(get_dist(listed_turf,src) > 1)
@@ -1109,7 +1109,14 @@ note dizziness decrements automatically in the mob's Life() proc.
 /mob/proc/flash_weak_pain()
 	flick("weak_pain",pain)
 
-mob/verb/yank_out_object()
+/mob/proc/get_visible_implants(var/class = 0)
+	var/list/visible_implants = list()
+	for(var/obj/item/O in embedded)
+		if(O.w_class > class)
+			visible_implants += O
+	return visible_implants
+
+mob/proc/yank_out_object()
 	set category = "Object"
 	set name = "Yank out object"
 	set desc = "Remove an embedded item at the cost of bleeding and pain."
@@ -1135,10 +1142,7 @@ mob/verb/yank_out_object()
 	if(S == U)
 		self = 1 // Removing object from yourself.
 
-	for(var/obj/item/weapon/W in embedded)
-		if(W.w_class >= 2)
-			valid_objects += W
-
+	valid_objects = get_visible_implants(1)
 	if(!valid_objects.len)
 		if(self)
 			src << "You have nothing stuck in your body that is large enough to remove."
@@ -1162,6 +1166,29 @@ mob/verb/yank_out_object()
 		visible_message("<span class='warning'><b>[src] rips [selection] out of their body.</b></span>","<span class='warning'><b>You rip [selection] out of your body.</b></span>")
 	else
 		visible_message("<span class='warning'><b>[usr] rips [selection] out of [src]'s body.</b></span>","<span class='warning'><b>[usr] rips [selection] out of your body.</b></span>")
+	valid_objects = get_visible_implants(0)
+	if(valid_objects.len == 1) //Yanking out last object - removing verb.
+		src.verbs -= /mob/proc/yank_out_object
+
+	if(istype(src,/mob/living/carbon/human))
+
+		var/mob/living/carbon/human/H = src
+		var/datum/organ/external/affected
+
+		for(var/datum/organ/external/organ in H.organs) //Grab the organ holding the implant.
+			for(var/obj/item/weapon/O in organ.implants)
+				if(O == selection)
+					affected = organ
+
+		affected.implants -= selection
+		H.shock_stage+=10
+		H.bloody_hands(S)
+
+		if(prob(10)) //I'M SO ANEMIC I COULD JUST -DIE-.
+			var/datum/wound/internal_bleeding/I = new (15)
+			affected.wounds += I
+			H.custom_pain("Something tears wetly in your [affected] as [selection] is pulled free!", 1)
+		return 1
 
 	selection.loc = get_turf(src)
 
