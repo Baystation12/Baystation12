@@ -563,6 +563,12 @@
 	proc/handle_environment(datum/gas_mixture/environment)
 		if(!environment)
 			return
+		if(istype(get_turf(src), /turf/space))
+			if(istype(head, /obj/item/clothing/head/helmet/space) && istype(wear_suit, /obj/item/clothing/suit/space))
+			else
+				if(radiation <= 100)
+					radiation += 10
+
 		if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
 			var/loc_temp = T0C
 			if(istype(loc, /obj/mecha))
@@ -1375,7 +1381,7 @@
 				var/obj/item/clothing/glasses/welding/O = glasses
 				if(!O.up && tinted_weldhelh)
 					client.screen += global_hud.darkMask
-					
+
 			if(istype(glasses, /obj/item/clothing/glasses/meson) || istype(glasses, /obj/item/clothing/glasses/night) || istype(glasses, /obj/item/clothing/glasses/gglasses))
 				client.screen += global_hud.meson
 
