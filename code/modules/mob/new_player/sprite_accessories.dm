@@ -311,6 +311,72 @@
 	bald
 		name = "Bald"
 		icon_state = "bald"
+
+	dave
+		name = "Dave"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_dave"
+
+	aradia
+		name = "Aradia"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_aradia"
+
+	nepeta
+		name = "Nepeta"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_nepeta"
+
+	kanaya
+		name = "Kanaya"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_kanaya"
+
+	terezi
+		name = "Terezi"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_terezi"
+
+	vriska
+		name = "Vriska"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_vriska"
+
+	equius
+		name = "Equius"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_equius"
+
+	gamzee
+		name = "Gamzee"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_gamzee"
+
+	feferi
+		name = "Feferi"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_feferi"
+
+	rose
+		name = "Rose"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_rose"
+
+	dirk
+		name = "Dirk"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_dirk"
+
+	jade
+		name = "Jade"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_jade"
+
+	roxy
+		name = "Roxy"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_roxy"
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
