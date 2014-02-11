@@ -14,8 +14,8 @@
 	response_disarm = "pushes"
 
 	speed = -1
-	maxHealth = 25000
-	health = 25000
+	maxHealth = 2500
+	health = 2500
 
 	harm_intent_damage = 70
 	melee_damage_lower = 68
@@ -47,7 +47,7 @@
 
 	sight = SEE_SELF|SEE_MOBS|SEE_OBJS|SEE_TURFS
 	anchored = 1
-	status_flags = GODMODE // Cannot push also
+//	status_flags = GODMODE // Cannot push also
 
 
 // No movement while seen code.
@@ -128,6 +128,13 @@
 /mob/living/simple_animal/hostile/statue/gib(var/animation = 0)
 	dust(animation)
 
+
+/mob/living/simple_animal/hostile/statue/Die()
+	living_mob_list -= src
+	dead_mob_list += src
+	if(key)
+		respawnable_list += src
+	gib()
 
 // Stop attacking clientless mobs
 
