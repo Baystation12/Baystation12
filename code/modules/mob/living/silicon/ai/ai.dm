@@ -666,10 +666,11 @@ var/list/ai_list = list()
 	camera_light_on = !camera_light_on
 	src << "Camera lights [camera_light_on ? "activated" : "deactivated"]."
 	if(!camera_light_on)
-		if(src.current)
-			src.current.SetLuminosity(0)
+		if(current)
+			current.SetLuminosity(0)
+			current = null
 	else
-		src.lightNearbyCamera()
+		lightNearbyCamera()
 
 
 
