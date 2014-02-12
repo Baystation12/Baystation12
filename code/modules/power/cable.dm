@@ -89,7 +89,7 @@
 			new/obj/item/weapon/cable_coil(T, 2, cable_color)
 		else
 			new/obj/item/weapon/cable_coil(T, 1, cable_color)
-
+		newcable.fingerprintslast = user.key
 		for(var/mob/O in viewers(src, null))
 			O.show_message("\red [user] cuts the cable.", 1)
 
