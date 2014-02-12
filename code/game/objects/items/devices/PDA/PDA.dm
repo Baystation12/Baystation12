@@ -444,7 +444,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "pda.tmpl", title, 630, 600)
+		ui = new(user, src, ui_key, "pda.tmpl", title, 520, 400)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)		
 		// open the new ui window
@@ -806,6 +806,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		useMS.send_pda_message("[P.owner]","[owner]","[t]")
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
 		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
+		for(var/mob/M in player_list)
+			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS)) // src.client is so that ghosts don't have to listen to mice
+				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[t]</span></span>")
+
 		if(!conversations.Find("\ref[P]"))
 			conversations.Add("\ref[P]")
 		if(!P.conversations.Find("\ref[src]"))

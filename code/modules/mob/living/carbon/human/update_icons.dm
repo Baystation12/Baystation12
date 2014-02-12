@@ -562,10 +562,15 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(shoes.blood_DNA)
 			var/image/bloodsies = image("icon" = 'icons/effects/blood.dmi', "icon_state" = "shoeblood")
 			bloodsies.color = shoes.blood_color
-			standing.overlays	+= bloodsies
-		overlays_standing[SHOES_LAYER]	= standing
+			standing.overlays += bloodsies
+		overlays_standing[SHOES_LAYER] = standing
 	else
-		overlays_standing[SHOES_LAYER]		= null
+		if(feet_blood_DNA)
+			var/image/bloodsies = image("icon" = 'icons/effects/blood.dmi', "icon_state" = "shoeblood")
+			bloodsies.color = feet_blood_color
+			overlays_standing[SHOES_LAYER] = bloodsies
+		else
+			overlays_standing[SHOES_LAYER] = null
 	if(update_icons)   update_icons()
 
 /mob/living/carbon/human/update_inv_s_store(var/update_icons=1)
