@@ -68,6 +68,7 @@
 /var/const/access_paramedic = 66
 /var/const/access_blueshield = 67
 /var/const/access_customs = 68
+/var/const/access_salvage_captain = 69 // Salvage ship captain's quarters
 
 	//BEGIN CENTCOM ACCESS
 	/*Should leave plenty of room if we need to add more access levels.
