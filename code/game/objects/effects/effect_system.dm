@@ -392,16 +392,15 @@ steam.start() -- spawns the effect
 	R.my_atom = src
 	return
 
-/obj/effect/effect/smoke/chem/Move()
-	..()
-	for(var/atom/A in view(2, src))
-		if(reagents.has_reagent("radium")||reagents.has_reagent("uranium")||reagents.has_reagent("carbon")||reagents.has_reagent("thermite"))//Prevents unholy radium spam by reducing the number of 'greenglows' down to something reasonable -Sieve
-			if(prob(5))
-				reagents.reaction(A)
-		else
-			reagents.reaction(A)
-
-	return
+/obj/effect/effect/smoke/chem/proc/applyReagents()
+	if(reagents.reagent_list.len)
+		for(var/atom/A in view(1, src))
+			if(!istype(A, src.type))
+				if(reagents.has_reagent("radium")||reagents.has_reagent("uranium")||reagents.has_reagent("carbon")||reagents.has_reagent("thermite"))//Prevents unholy radium spam by reducing the number of 'greenglows' down to something reasonable -Sieve
+					if(prob(5))
+						reagents.reaction(A)
+				else
+					reagents.reaction(A)
 
 /obj/effect/effect/smoke/chem/affect(mob/living/carbon/M as mob )
 	reagents.reaction(M)
@@ -474,7 +473,7 @@ steam.start() -- spawns the effect
 						direction = pick(alldirs)
 
 				if(chemholder.reagents.total_volume != 1) // can't split 1 very well
-					chemholder.reagents.copy_to(smoke, chemholder.reagents.total_volume / number) // copy reagents to each smoke, divide evenly
+					chemholder.reagents.copy_to(smoke, chemholder.reagents.total_volume / number, safety = 1) // copy reagents to each smoke, divide evenly
 
 				if(color)
 					smoke.icon += color // give the smoke color, if it has any to begin with
@@ -486,9 +485,16 @@ steam.start() -- spawns the effect
 				for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
 					sleep(10)
 					step(smoke,direction)
-				spawn(150+rand(10,30))
-					smoke.delete()
-					src.total_smoke--
+
+				//apply the reagents to the environment after the smoke has stopped moving - to reduce reagent spam
+				for(i=0, i<2 + pick(0,1,), i++)
+					smoke.applyReagents()
+					sleep(20)
+
+				sleep(60)
+				smoke.delete()
+				src.total_smoke--
+
 
 /////////////////////////////////////////////
 //////// Attach an Ion trail to any object, that spawns when it moves (like for the jetpack)
@@ -615,6 +621,7 @@ steam.start() -- spawns the effect
 	playsound(src, 'sound/effects/bubbles2.ogg', 80, 1, -3)
 	spawn(3 + metal*3)
 		process()
+		checkReagents()
 	spawn(120)
 		processing_objects.Remove(src)
 		sleep(30)
@@ -629,14 +636,13 @@ steam.start() -- spawns the effect
 		delete()
 	return
 
-// on delete, transfer any reagents to the floor
-/obj/effect/effect/foam/Del()
+// transfer any reagents to the floor
+/obj/effect/effect/foam/proc/checkReagents()
 	if(!metal && reagents)
-		for(var/atom/A in oview(0,src))
+		for(var/atom/A in src.loc.contents)
 			if(A == src)
 				continue
 			reagents.reaction(A, 1, 1)
-	..()
 
 /obj/effect/effect/foam/process()
 	if(--amount < 0)
@@ -663,7 +669,7 @@ steam.start() -- spawns the effect
 			F.create_reagents(10)
 			if (reagents)
 				for(var/datum/reagent/R in reagents.reagent_list)
-					F.reagents.add_reagent(R.id,1)
+					F.reagents.add_reagent(R.id, 1, safety = 1)		//added safety check since reagents in the foam have already had a chance to react
 
 // foam disolves when heated
 // except metal foams
@@ -734,9 +740,9 @@ steam.start() -- spawns the effect
 
 				if(carried_reagents)
 					for(var/id in carried_reagents)
-						F.reagents.add_reagent(id,1)
+						F.reagents.add_reagent(id, 1, null, 1) //makes a safety call because all reagents should have already reacted anyway
 				else
-					F.reagents.add_reagent("water", 1)
+					F.reagents.add_reagent("water", 1, safety = 1)
 
 // wall formed by metal foams
 // dense and opaque, but easy to break
