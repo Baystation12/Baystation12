@@ -178,16 +178,27 @@
 			if (prob(10))
 				stuttering = max(10, stuttering)
 		// No. -- cib
-		/*if (getBrainLoss() >= 60 && stat != 2)
-			if (prob(3))
-				switch(pick(1,2,3))
-					if(1)
-						say(pick("IM A PONY NEEEEEEIIIIIIIIIGH", "without oxigen blob don't evoluate?", "CAPTAINS A COMDOM", "[pick("", "that faggot traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!", "can u give me [pick("telikesis","halk","eppilapse")]?", "THe saiyans screwed", "Bi is THE BEST OF BOTH WORLDS>", "I WANNA PET TEH monkeyS", "stop grifing me!!!!", "SOTP IT#"))
-					if(2)
-						say(pick("FUS RO DAH","fucking 4rries!", "stat me", ">my face", "roll it easy!", "waaaaaagh!!!", "red wonz go fasta", "FOR TEH EMPRAH", "lol2cat", "dem dwarfs man, dem dwarfs", "SPESS MAHREENS", "hwee did eet fhor khayosss", "lifelike texture ;_;", "luv can bloooom", "PACKETS!!!"))
-					if(3)
-						emote("drool")
-		*/
+		//Oh, really?
+		if (getBrainLoss() >= 60 && stat != 2)
+			if(config.rus_language)
+				if(prob(3))
+					switch(pick(1,2,3))
+						if(1)
+							say(sanitize(pick("àçàçàà!", "ß íå ñìàëãåé!", "ÕÎÑ ÕÓÅÑÎÑ!", "[pick("", "åáó÷èé òðåéòîð")] [pick("ìîðãàí", "ìîðãóí", "ìîðãåí", "ìðîãóí")] [pick("äæåìåñ", "äæàìåñ", "äæàåìåñ")] ãðåôîíåò ìèíÿ øïàñèò;å!!!", "òè ìîæûø äàòü ìíå [pick("òèëèïàòèþ","õàëêó","ýïèëëåïñèþ")]?", "ÕÀ÷ó ñòàòü áîðãîì!", "ÏÎÇÎâèòå äåòåêòèâà!", "Õî÷ó ñòàòü ìàðòûøêîé!", "ÕÂÀÒÅÒ ÃÐÈÔÎÍÅÒÜ ÌÈÍß!!!!", "ØÀÒÎË!")))
+						if(2)
+							say(sanitize(pick("Êàê ìèíÿòü ðóêè?","åáó÷èå ôóððè!", "Ïîäåáèë", "Ïðîêëÿòûå òðàïû!", "ëîëêà!", "âæææææææææ!!!", "äæåô ñêâààààä!", "ÁÐÀÍÄÅÍÁÓÐÃ!", "ÁÓÄÀÏÅØÒ!", "ÏÀÓÓÓÓÓÊ!!!!", "ÏÓÊÀÍ ÁÎÌÁÀÍÓË!", "ÏÓØÊÀ", "ÐÅÂÀ ÏÎÖÎÍÛ", "Ïàòè íà õîïà!")))
+						if(3)
+							emote("drool")
+			else
+				if (prob(3))
+					switch(pick(1,2,3))
+						if(1)
+							say(pick("IM A PONY NEEEEEEIIIIIIIIIGH", "without oxigen blob don't evoluate?", "CAPTAINS A COMDOM", "[pick("", "that faggot traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!", "can u give me [pick("telikesis","halk","eppilapse")]?", "THe saiyans screwed", "Bi is THE BEST OF BOTH WORLDS>", "I WANNA PET TEH monkeyS", "stop grifing me!!!!", "SOTP IT#"))
+						if(2)
+							say(pick("FUS RO DAH","fucking 4rries!", "stat me", ">my face", "roll it easy!", "waaaaaagh!!!", "red wonz go fasta", "FOR TEH EMPRAH", "lol2cat", "dem dwarfs man, dem dwarfs", "SPESS MAHREENS", "hwee did eet fhor khayosss", "lifelike texture ;_;", "luv can bloooom", "PACKETS!!!"))
+						if(3)
+							emote("drool")
+
 
 		if(stat != 2)
 			var/rn = rand(0, 200)
