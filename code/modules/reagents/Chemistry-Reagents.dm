@@ -297,7 +297,7 @@ datum
 			id = "plasticide"
 			description = "Liquid plastic, do not eat."
 			reagent_state = LIQUID
-			color = "#CF3600" // rgb: 207, 54, 0
+			color = "#C9C9C9" // rgb: 201, 201, 201
 			custom_metabolism = 0.01
 
 			on_mob_life(var/mob/living/M as mob)
@@ -891,7 +891,7 @@ datum
 		fuel
 			name = "Welding fuel"
 			id = "fuel"
-			description = "Required for welders. Flamable."
+			description = "Required for welders. Flammable."
 			reagent_state = LIQUID
 			color = "#660000" // rgb: 102, 0, 0
 			overdose = REAGENTS_OVERDOSE
@@ -925,6 +925,8 @@ datum
 				else
 					if(O)
 						O.clean_blood()
+						O.color= null //cleans paints
+
 			reaction_turf(var/turf/T, var/volume)
 				if(volume >= 1)
 					T.overlays.Cut()
@@ -934,9 +936,14 @@ datum
 
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
+					T.color = null //cleans paints
+					world << "turf cleaned"
+
 			reaction_turf(var/turf/simulated/S, var/volume)
 				if(volume >= 1)
 					S.dirt = 0
+					S.color = null //cleans paints
+					world << "turf cleaned with [volume] space cleaner"
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				if(iscarbon(M))
@@ -967,7 +974,7 @@ datum
 		leporazine
 			name = "Leporazine"
 			id = "leporazine"
-			description = "Leporazine can be use to stabilize an individuals body temperature."
+			description = "Leporazine can be use to stabilize an individual's body temperature."
 			reagent_state = LIQUID
 			color = "#C8A5DC" // rgb: 200, 165, 220
 			overdose = REAGENTS_OVERDOSE
@@ -1382,7 +1389,7 @@ datum
 			id = "spaceacillin"
 			description = "An all-purpose antiviral agent."
 			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
+			color = "#08A5DC" // rgb: 8, 165, 220
 			custom_metabolism = 0.01
 			overdose = REAGENTS_OVERDOSE
 
@@ -1475,6 +1482,78 @@ datum
 				M.reagents.remove_all_type(/datum/reagent/ethanol, 1*REM, 0, 1)
 				..()
 				return
+
+		paint //generic paint
+			name = "Paint"
+			id = "paint"
+			//Data holds the actual colour that is updated from reaction to reaction with the
+			//colour mixing system. 'Color' holds the displayed colour, it should get updated
+			//every time the paint reacts or gets transferred.
+			color = "#C9C9C9" // rgb: 201, 201, 201; same as plasticide
+			data = list("color" = "#C9C9C9")//Thank you, blood system
+			description = "This paint will colour most objects it touches."
+			reagent_state = LIQUID
+			overdose = REAGENTS_OVERDOSE
+
+			on_update()
+				world << "[id]: Old colour is [color] and datacolor is [data["color"]]"
+				if(data["color"])
+					color = data["color"]
+				else
+					data["color"]="#FF0000"
+					color = data["color"]
+					world << "Something went wrong. New color is [color]"
+				world << "[id]: New colour is [color] and datacolor is [data["color"]]"
+				world << " "
+				..()
+				return
+
+			on_mob_life(var/mob/living/M as mob)
+				on_update()
+				if(!M) M = holder.my_atom
+				M.adjustToxLoss(0.4)
+				..()
+				return
+
+			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				on_update()
+				..()
+				//TODO: colour mobs when splashed with paint
+				return
+
+			reaction_turf(var/turf/T, var/volume)
+				on_update()
+				if(!istype(T) || istype(T, /turf/space))
+					return
+				if(volume < 3)
+					return
+				T.color = data["color"]
+				world << "turf [T.name] is coloured with datacolour [data["color"]] and colour [color]."
+				..()
+				/*
+				var/ind = "[initial(T.icon)][color]"
+				if(!cached_icons[ind]) //Do not make a new icon for every painted tile
+					var/icon/overlay = new/icon(initial(T.icon))
+					overlay.Blend(color,ICON_MULTIPLY)
+					overlay.SetIntensity(1.4)
+					T.icon = overlay
+					cached_icons[ind] = T.icon
+				else
+					T.icon = cached_icons[ind]
+				return*/
+
+			reaction_obj(var/obj/O, var/volume)
+				on_update()
+				if(!istype(O))// || !istype(O, /obj/item/weapon))
+					//usr << "The paint won't stick." //Just spam
+					return
+				if(volume < 2)
+					return
+				O.color = data["color"]
+				world << "[O.name] is coloured datacolor [data["color"]] colour [color]"
+				..()
+				return
+
 
 //////////////////////////Poison stuff///////////////////////
 
@@ -3057,7 +3136,7 @@ datum
 		ethanol/vodka
 			name = "Vodka"
 			id = "vodka"
-			description = "Number one drink AND fueling choice for Russians worldwide."
+			description = "Number one drink and fueling choice for Russians throughout the universe."
 			color = "#0064C8" // rgb: 0, 100, 200
 			boozepwr = 2
 

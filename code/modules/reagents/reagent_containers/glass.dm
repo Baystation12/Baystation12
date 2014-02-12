@@ -90,6 +90,7 @@
 			src.reagents.reaction(target, TOUCH)
 			spawn(5) src.reagents.clear_reagents()
 			return
+
 		else if(istype(target, /obj/structure/reagent_dispensers)) //A dispenser. Transfer FROM it TO us.
 
 			if(!target.reagents.total_volume && target.reagents)
@@ -125,11 +126,29 @@
 		else if(istype(target, /obj/machinery/radiocarbon_spectrometer))
 			return
 
+		//Paint something from the glass
+		else if(reagents.get_reagent_amount("paint"))
+			for(var/mob/O in viewers(user))
+				O.show_message("\blue [user] coats [target] with the solution.", 1)
+			var/transferfraction = min(amount_per_transfer_from_this / reagents.total_volume , 1)
+			var/volume_modifier = transferfraction * reagents.get_reagent_amount("paint") - reagents.total_volume
+			//This will make the proper amount of paint reach the target
+			//Unfortunately it will make all other reagents interact with the target
+			//in equal amounts. TODO: proper fractional reactions in Chem-Holder
+			world << "[volume_modifier]"
+			reagents.reaction(target, TOUCH, volume_modifier)
+			spawn(5)
+				reagents.remove_any(amount_per_transfer_from_this)
+			return
+
 		else if(reagents.total_volume)
 			user << "\blue You splash the solution onto [target]."
-			src.reagents.reaction(target, TOUCH)
-			spawn(5) src.reagents.clear_reagents()
+			reagents.reaction(target, TOUCH)
+			spawn(5) reagents.clear_reagents()
 			return
+
+		else
+			user << "[src] is empty."
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))

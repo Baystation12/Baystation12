@@ -12,7 +12,13 @@
 	//fill the list of weights
 	for(i=1; i<=contents; i++)
 		var/datum/reagent/re = reagent_list[i]
+		re.on_update()
 		var/reagentweight = re.volume
+		if(re.id == "paint")
+			world << "[re.id] datacolor [re.data["color"]] color [re.color] with volume [reagentweight] is being mixed"
+		else
+			world << "[re.id] [re.color] with volume [reagentweight] is being mixed"
+		world << "\red [i]/[contents] is where we are at."
 		if(istype(re, /datum/reagent/paint))
 			reagentweight *= 20 //Paint colours a mixture twenty times as much
 		weight[i] = reagentweight
@@ -35,6 +41,7 @@
 
 	//assemble all the pieces
 	var/finalcolor = "#[red][green][blue]"
+	world << "[finalcolor] is the result"
 	return finalcolor
 
 /proc/mixOneColor(var/list/weight, var/list/color)

@@ -47,6 +47,7 @@
 	else
 		user << "<span class='notice'>You clean \the [target.name].</span>"
 		target.clean_blood()
+		target.color = null //paints
 	return
 
 /obj/item/weapon/soap/attack(mob/target as mob, mob/user as mob)

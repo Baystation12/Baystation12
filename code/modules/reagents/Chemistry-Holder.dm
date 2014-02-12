@@ -50,7 +50,7 @@ datum
 
 		proc
 
-			remove_any(var/amount=1)
+/*			remove_any(var/amount=1) //I fail to see how this makes sense
 				var/total_transfered = 0
 				var/current_list_element = 1
 
@@ -70,7 +70,22 @@ datum
 					src.update_total()
 
 				handle_reactions()
-				return total_transfered
+				return total_transfered*/
+
+			remove_any(var/amount=1) //Actual random removal
+				if (total_volume<=0)
+					return
+				amount = min(amount, total_volume)
+				var/part = amount / total_volume
+				for (var/datum/reagent/current_reagent in src.reagent_list)
+					if (!current_reagent)
+						continue
+					var/current_reagent_transfer = current_reagent.volume * part
+					remove_reagent(current_reagent.id, current_reagent_transfer)
+
+				update_total()
+				//handle_reactions()
+				return amount
 
 			get_master_reagent_name()
 				var/the_name = null
@@ -207,23 +222,23 @@ datum
 						R.on_mob_life(M,alien)
 				update_total()
 
-			conditional_update_move(var/atom/A, var/Running = 0)
+			conditional_update_move(var/atom/A, var/Running = 0) //What is this supposed to do?
 				for(var/datum/reagent/R in reagent_list)
 					R.on_move (A, Running)
 				update_total()
 
-			conditional_update(var/atom/A, )
+			conditional_update()
 				for(var/datum/reagent/R in reagent_list)
-					R.on_update (A)
+					R.on_update()
 				update_total()
 
 			handle_reactions()
 				if(my_atom.flags & NOREACT) return //Yup, no reactions here. No siree.
-
 				var/reaction_occured = 0
 				do
 					reaction_occured = 0
 					for(var/datum/reagent/R in reagent_list) // Usually a small list
+						//R.on_update()
 						for(var/reaction in chemical_reactions_list[R.id]) // Was a big list but now it should be smaller since we filtered it with our reagent id
 
 							if(!reaction)
@@ -345,8 +360,6 @@ datum
 						update_total()
 						my_atom.on_reagent_change()
 						return 0
-
-
 				return 1
 
 			update_total()
@@ -371,47 +384,61 @@ datum
 						for(var/datum/reagent/R in reagent_list)
 							if(ismob(A))
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_mob(A, TOUCH, R.volume+volume_modifier)
 							if(isturf(A))
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_turf(A, R.volume+volume_modifier)
 							if(isobj(A))
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_obj(A, R.volume+volume_modifier)
 					if(INGEST)
 						for(var/datum/reagent/R in reagent_list)
 							if(ismob(A) && R)
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_mob(A, INGEST, R.volume+volume_modifier)
 							if(isturf(A) && R)
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_turf(A, R.volume+volume_modifier)
 							if(isobj(A) && R)
 								spawn(0)
-									if(!R) return
+									if(!R || R.volume+volume_modifier <=0) return
 									else R.reaction_obj(A, R.volume+volume_modifier)
 				return
 
 			add_reagent(var/reagent, var/amount, var/list/data=null)
 				if(!isnum(amount)) return 1
 				update_total()
-				if(total_volume + amount > maximum_volume) amount = (maximum_volume - total_volume) //Doesnt fit in. Make it disappear. Shouldnt happen. Will happen.
+				if(total_volume + amount > maximum_volume) //Should never happen
+					amount = (maximum_volume - total_volume)
 
 				for(var/A in reagent_list)
-
 					var/datum/reagent/R = A
+					//if there is already reagent in the container, some reagents need data transfer
 					if (R.id == reagent)
-						R.volume += amount
-						update_total()
-						my_atom.on_reagent_change()
+
+						// mix paints
+						if(R.id == "paint")
+							if(!data) world << "Error: no paint colour data."
+							var/list/bothpaints = reagent_list //Everything already in the container
+							//Temporarily make the second paint so we can update the colour
+							var/datum/reagent/P = chemical_reagents_list["paint"]
+							var/datum/reagent/secondpaint = new P.type()
+							secondpaint.data = data
+							//secondpaint.on_update()
+							secondpaint.volume = amount
+							bothpaints += secondpaint
+							R.data["color"] = mix_color_from_reagents(bothpaints)
+							world << "Mixed color [R.data["color"]]"
+							world << " "
+							//R.on_update()
 
 						// mix dem viruses
-						if(R.id == "blood" && reagent == "blood")
+						if(R.id == "blood")
 							if(R.data && data)
 
 								if(R.data["viruses"] || data["viruses"])
@@ -435,35 +462,33 @@ datum
 												preserve += D
 										R.data["viruses"] = preserve
 
+						R.volume += amount
+						update_total()
+						my_atom.on_reagent_change()
 						handle_reactions()
 						return 0
 
 				var/datum/reagent/D = chemical_reagents_list[reagent]
 				if(D)
-
 					var/datum/reagent/R = new D.type()
 					reagent_list += R
 					R.holder = src
 					R.volume = amount
-					SetViruses(R, data) // Includes setting data
-
-					//debug
-					//world << "Adding data"
-					//for(var/D in R.data)
-					//	world << "Container data: [D] = [R.data[D]]"
-					//debug
+					SetViruses(R, data) // Includes setting data for paint
 					update_total()
 					my_atom.on_reagent_change()
 					handle_reactions()
+					if(reagent == "paint")
+						world << "There is now [amount] of [reagent] with datacolour [R.data["color"]] color [R.color]"
+						//world << " "
 					return 0
 				else
 					warning("[my_atom] attempted to add a reagent called '[reagent]' which doesn't exist. ([usr])")
-
-				handle_reactions()
+					handle_reactions()
 
 				return 1
 
-			remove_reagent(var/reagent, var/amount, var/safety)//Added a safety check for the trans_id_to
+			remove_reagent(var/reagent, var/amount, var/safety=1)//Added a safety check for the trans_id_to
 
 				if(!isnum(amount)) return 1
 

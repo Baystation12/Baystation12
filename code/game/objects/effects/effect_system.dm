@@ -663,7 +663,10 @@ steam.start() -- spawns the effect
 			F.create_reagents(10)
 			if (reagents)
 				for(var/datum/reagent/R in reagents.reagent_list)
-					F.reagents.add_reagent(R.id,1)
+					var/data
+					if (R.id == "paint" && R.volume > 0)
+						data = R.data
+					F.reagents.add_reagent(R.id,1,data)
 
 // foam disolves when heated
 // except metal foams
@@ -733,7 +736,7 @@ steam.start() -- spawns the effect
 				F.create_reagents(10)
 
 				if(carried_reagents)
-					for(var/id in carried_reagents)
+					for(var/id in carried_reagents) //TODO: make paints retain their colours
 						F.reagents.add_reagent(id,1)
 				else
 					F.reagents.add_reagent("water", 1)

@@ -82,7 +82,7 @@ About the Holder:
 		add_reagent(var/reagent, var/amount, var/data)
 			Attempts to add X of the matching reagent to the holder.
 			You wont use this much. Mostly in new procs for pre-filled
-			objects.
+			objects. Data is both virus information for blood and colour for paint.
 
 		remove_reagent(var/reagent, var/amount)
 			The exact opposite of the add_reagent proc.
