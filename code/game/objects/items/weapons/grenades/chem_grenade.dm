@@ -171,6 +171,13 @@
 			for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
 				G.loc = get_turf(src.loc)*/
 
+	HasEntered(atom/movable/AM as mob|obj)
+		if (detonator)
+			detonator.HasEntered(AM)
+			
+	on_found(mob/finder as mob)
+		if(detonator)
+			detonator.on_found(finder)
 
 /obj/item/weapon/grenade/chem_grenade/large
 	name = "Large Chem Grenade"
