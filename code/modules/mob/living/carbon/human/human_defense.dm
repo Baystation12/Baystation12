@@ -66,13 +66,18 @@ emp_act
 			if(bp && istype(bp ,/obj/item/clothing)) // If it exists, and it's clothed
 				var/obj/item/clothing/C = bp // Then call an argument C to be that clothing!
 				if(C.body_parts_covered & select_area.body_part) // Is that body part being targeted covered?
-					if(istype(C, /obj/item/clothing/suit/space) || istype(C, /obj/item/clothing/suit/armor))
-						visible_message("\red <B>The [P.name] gets deflected by [src]'s [wear_suit.name]!</B>")
+					if(C.flags & THICKMATERIAL )
+						visible_message("\red <B>The [P.name] gets deflected by [src]'s [C.name]!</B>")
 						del P
 						return
 					else
 						P.agony=P.agony*C.siemens_coefficient
+						P.stun=P.stun*C.siemens_coefficient
+						P.weaken=P.weaken*C.siemens_coefficient
 		apply_effect(P.agony,AGONY,0)
+		apply_effect(P.stun,STUN,0)
+		apply_effect(P.weaken, WEAKEN, 0)
+		apply_effect(P.stutter, STUTTER, 0)
 		flash_pain()
 		src <<"\red You have been shot!"
 		del P

@@ -200,6 +200,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define HEADCOVERSMOUTH		2048
 
 #define NOSLIP		1024 		//prevents from slipping on wet floors, in space etc
+#define THICKMATERIAL 1024
 
 #define OPENCONTAINER	4096	// is an open container for chemistry purposes
 
@@ -706,6 +707,8 @@ var/list/be_special_flags = list(
 #define IMPLOYAL_HUD	5 // loyality implant
 #define IMPCHEM_HUD		6 // chemical implant
 #define IMPTRACK_HUD	7 // tracking implant
+#define MINERAL_HUD		8 //mineral type
+#define TOUGH_HUD		9 //rock toughness
 
 //Pulse levels, very simplified
 #define PULSE_NONE		0	//so !M.pulse checks would be possible
