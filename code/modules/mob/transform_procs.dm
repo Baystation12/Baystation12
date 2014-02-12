@@ -29,10 +29,9 @@
 
 	O = new species.primitive(loc)
 
-	O.dna = dna
-	//O.dna.uni_identity = "000000000000000000DC00000660004DA0A0E00"
-	//O.dna.struc_enzymes = "[copytext(O.dna.struc_enzymes,1,1+3*(STRUCDNASIZE-1))]BB8"
+	O.dna = dna.Clone()
 	O.dna.SetSEState(MONKEYBLOCK,1)
+	O.dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
 	O.loc = loc
 	O.viruses = viruses
 	O.a_intent = "hurt"
@@ -166,7 +165,7 @@
 		mind.transfer_to(O)
 		if(O.mind.assigned_role == "Cyborg")
 			O.mind.original = O
-		else if(mind.special_role)
+		else if(mind&&mind.special_role)
 			O.mind.store_memory("In case you look at this after being borged, the objectives are only here until I find a way to make them not show up for you, as I can't simply delete them without screwing up round-end reporting. --NeoFite")
 	else
 		O.key = key

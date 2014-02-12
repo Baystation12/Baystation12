@@ -38,7 +38,7 @@
 /proc/randmuti(var/mob/living/M)
 	if(!M) return
 	M.dna.check_integrity()
-	M.dna.SetUIValue(rand(1,UNIDNASIZE),rand(1,4095))
+	M.dna.SetUIValue(rand(1,DNA_UI_LENGTH),rand(1,4095))
 
 // Scramble UI or SE.
 /proc/scramble(var/UI, var/mob/M, var/prob)
@@ -52,7 +52,7 @@
 		M.UpdateAppearance()
 
 	else
-		for(var/i = 1, i <= STRUCDNASIZE-1, i++)
+		for(var/i = 1, i <= DNA_SE_LENGTH-1, i++)
 			if(prob(prob))
 				M.dna.SetSEValue(i,rand(1,4095),1)
 		M.dna.UpdateSE()
@@ -143,8 +143,7 @@
 		H.g_eyes   = dna.GetUIValueRange(DNA_UI_EYES_G,    255)
 		H.b_eyes   = dna.GetUIValueRange(DNA_UI_EYES_B,    255)
 
-		var/new_s_tone = dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) 
-		H.s_tone = 35 - max(min( round(new_s_tone), 220),1)         //Warning MATH.  Blame the person that wrote modules/client/preferences.dm, line 994
+		H.s_tone   = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
 
 		if (dna.GetUIState(DNA_UI_GENDER))
 			H.gender = FEMALE
@@ -171,5 +170,3 @@
 // Used below, simple injection modifier.
 /proc/probinj(var/pr, var/inj)
 	return prob(pr+inj*pr)
-
-/////////////////////////// DNA MISC-PROCS
