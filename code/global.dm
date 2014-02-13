@@ -298,3 +298,7 @@ var/score_dmgestname = null // who had the most damage on the shuttle (but was s
 var/score_dmgestjob = null
 var/score_dmgestdamage = 0
 var/score_dmgestkey = null
+
+
+// Recall time limit:  2 hours
+var/recall_time_limit=72000
