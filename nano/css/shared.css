@@ -168,6 +168,12 @@ h4 {
     color: #ee0000;
     font-weight: bold;
 }
+.redBackground {
+	background: #ea0000;
+}
+.yellowBackground {
+	background: #cacc00;
+}
 .highlight {
     color: #8BA5C4;
 }
