@@ -1463,7 +1463,6 @@
 #include "tauceti\items\clothing\gloves\gloves.dm"
 #include "tauceti\items\clothing\hats\hats.dm"
 #include "tauceti\items\clothing\masks\masks.dm"
-#include "tauceti\items\clothing\spacesuits\spacesuits.dm"
 #include "tauceti\items\clothing\suits\suits.dm"
 #include "tauceti\items\clothing\uniforms\uniforms.dm"
 #include "tauceti\items\computers\arrival_shuttle.dm"
