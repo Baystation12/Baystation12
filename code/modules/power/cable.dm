@@ -75,6 +75,7 @@
 
 	if(level==1) hide(T.intact)
 	cable_list += src
+	update_icon()
 
 
 /obj/structure/cable/Del()						// called when a cable is deleted
@@ -93,6 +94,7 @@
 /obj/structure/cable/proc/updateicon()
 	icon_state = "[d1]-[d2]"
 	alpha = invisibility ? 127 : 255
+	color = cable_color
 
 
 // returns the powernet this cable belongs to
