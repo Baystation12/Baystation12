@@ -925,18 +925,20 @@ datum
 				else
 					if(O)
 						O.clean_blood()
+
 			reaction_turf(var/turf/T, var/volume)
 				if(volume >= 1)
+					if(istype(T, /turf/simulated))
+						var/turf/simulated/S = T
+						S.dirt = 0
 					T.overlays.Cut()
 					T.clean_blood()
-					for(var/obj/effect/decal/cleanable/C in src)
+					for(var/obj/effect/decal/cleanable/C in T.contents)
+						src.reaction_obj(C, volume)
 						del(C)
 
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
-			reaction_turf(var/turf/simulated/S, var/volume)
-				if(volume >= 1)
-					S.dirt = 0
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				if(iscarbon(M))

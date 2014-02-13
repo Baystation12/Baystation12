@@ -151,12 +151,6 @@
 		for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
 			G.reagents.trans_to(src, G.reagents.total_volume)
 
-		if(src.reagents.total_volume) //The possible reactions didnt use up all reagents.
-			var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
-			steam.set_up(10, 0, get_turf(src))
-			steam.attach(src)
-			steam.start()
-
 			for(var/atom/A in view(affected_area, src.loc))
 				if( A == src ) continue
 				src.reagents.reaction(A, 1, 10)
@@ -165,11 +159,6 @@
 		invisibility = INVISIBILITY_MAXIMUM //Why am i doing this?
 		spawn(50)		   //To make sure all reagents can work
 			del(src)	   //correctly before deleting the grenade.
-		/*else
-			icon_state = initial(icon_state) + "_locked"
-			crit_fail = 1
-			for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
-				G.loc = get_turf(src.loc)*/
 
 
 /obj/item/weapon/grenade/chem_grenade/large
@@ -239,6 +228,8 @@
 		B1.reagents.add_reagent("potassium", 25)
 		B2.reagents.add_reagent("phosphorus", 25)
 		B2.reagents.add_reagent("sugar", 25)
+
+		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
 
 		beakers += B1
 		beakers += B2
