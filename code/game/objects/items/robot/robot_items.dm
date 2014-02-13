@@ -77,3 +77,11 @@
 		..()
 		hud = new /obj/item/clothing/glasses/hud/security(src)
 		return
+
+/obj/item/borg/sight/hud/miner
+	name = "geological hud"
+
+	New()
+		..()
+		hud = new /obj/item/clothing/glasses/hud/mining(src)
+		return

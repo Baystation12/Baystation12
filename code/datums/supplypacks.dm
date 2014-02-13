@@ -5,7 +5,7 @@
 //BIG NOTE: Don't add living things to crates, that's bad, it will break the shuttle.
 //NEW NOTE: Do NOT set the price of any crates below 7 points. Doing so allows infinite points.
 
-var/list/all_supply_groups = list("Operations","Security","Hospitality","Engineering","Medical / Science","Hydroponics")
+var/list/all_supply_groups = list("Operations","Security","Hospitality","Engineering","Medical / Science","Hydroponics","Mining")
 
 /datum/supply_packs
 	var/name = null
@@ -1099,3 +1099,24 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Beekeeping crate"
 	access = access_hydroponics
 	group = "Hydroponics"
+
+/datum/supply_packs/mining
+	name = "Mining Equipment Crate"
+	contains = list(/obj/item/weapon/pickaxe/drill,
+					/obj/item/weapon/pickaxe/drill,
+					/obj/item/weapon/repairkit,
+					/obj/item/weapon/repairkit,
+					/obj/item/weapon/mining_charge,
+					/obj/item/weapon/mining_charge,
+					/obj/item/weapon/mining_charge,
+					/obj/item/weapon/mining_charge,
+					/obj/item/weapon/mining_charge,
+					/obj/item/weapon/mining_charge,
+					/obj/item/weapon/mining_charge,
+					/obj/item/weapon/mining_charge,
+					/obj/item/weapon/mining_charge,)
+	cost = 40
+	containertype = /obj/structure/closet/crate/secure/gear
+	containername = "Mining equipment crate"
+	access = access_mining
+	group = "Mining"

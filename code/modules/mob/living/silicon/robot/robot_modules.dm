@@ -204,12 +204,13 @@
 
 	New()
 		..()
-		src.modules += new /obj/item/borg/sight/meson(src)
+		src.modules += new /obj/item/borg/sight/hud/miner(src)
 		src.emag = new /obj/item/borg/stun(src)
 		src.modules += new /obj/item/weapon/storage/bag/ore(src)
 		src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
 		src.modules += new /obj/item/weapon/storage/bag/sheetsnatcher/borg(src)
-//		src.modules += new /obj/item/weapon/shovel(src) Uneeded due to buffed drill
+		src.modules += new /obj/item/device/geoscanner(src)
+		src.modules += new /obj/item/weapon/shovel(src)
 		return
 
 

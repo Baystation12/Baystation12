@@ -30,12 +30,12 @@
 	new /obj/item/clothing/under/rank/miner(src)
 	new /obj/item/clothing/gloves/black(src)
 	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/device/analyzer(src)
+	new /obj/item/device/geoscanner(src)
 	new /obj/item/weapon/storage/bag/ore(src)
 	new /obj/item/device/flashlight/lantern(src)
 	new /obj/item/weapon/shovel(src)
-	new /obj/item/weapon/pickaxe(src)
-	new /obj/item/clothing/glasses/meson(src)
+//	new /obj/item/weapon/pickaxe(src)
+	new /obj/item/clothing/glasses/hud/mining(src)
 
 
 /**********************Shuttle Computer**************************/
@@ -205,13 +205,14 @@ proc/move_mining_shuttle()
 	item_state = "pickaxe"
 	w_class = 4.0
 	m_amt = 3750 //one sheet, but where can you make them?
-	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
+	var/digspeed = 50 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "picking"
 
 	var/excavation_amount = 100
+	var/hardness = 1
 
 	hammer
 		name = "sledgehammer"
@@ -222,10 +223,10 @@ proc/move_mining_shuttle()
 		name = "silver pickaxe"
 		icon_state = "spickaxe"
 		item_state = "spickaxe"
-		digspeed = 30
+		digspeed = 45
 		origin_tech = "materials=3"
 		desc = "This makes no metallurgic sense."
-
+/*
 	drill
 		name = "mining drill" // Can dig sand as well!
 		icon_state = "handdrill"
@@ -233,12 +234,13 @@ proc/move_mining_shuttle()
 		digspeed = 30
 		origin_tech = "materials=2;powerstorage=3;engineering=2"
 		desc = "Yours is the drill that will pierce through the rock walls."
-
+*/
 	jackhammer
 		name = "sonic jackhammer"
 		icon_state = "jackhammer"
 		item_state = "jackhammer"
-		digspeed = 20 //faster than drill, but cannot dig
+		digspeed = 25 //faster than drill, but cannot dig
+		hardness = 4
 		origin_tech = "materials=3;powerstorage=2;engineering=2"
 		desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
 
@@ -246,7 +248,7 @@ proc/move_mining_shuttle()
 		name = "golden pickaxe"
 		icon_state = "gpickaxe"
 		item_state = "gpickaxe"
-		digspeed = 20
+		digspeed = 45
 		origin_tech = "materials=4"
 		desc = "This makes no metallurgic sense."
 
@@ -257,6 +259,7 @@ proc/move_mining_shuttle()
 		w_class = 3.0 //it is smaller than the pickaxe
 		damtype = "fire"
 		digspeed = 20 //Can slice though normal walls, all girders, or be used in reinforced wall deconstruction/ light thermite on fire
+		hardness = 5
 		origin_tech = "materials=4;plasmatech=3;engineering=3"
 		desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 
@@ -264,15 +267,17 @@ proc/move_mining_shuttle()
 		name = "diamond pickaxe"
 		icon_state = "dpickaxe"
 		item_state = "dpickaxe"
-		digspeed = 10
+		digspeed = 40
 		origin_tech = "materials=6;engineering=4"
 		desc = "A pickaxe with a diamond pick head, this is just like minecraft."
+		hardness = 2
 
 	diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 		name = "diamond mining drill"
 		icon_state = "diamonddrill"
 		item_state = "jackhammer"
-		digspeed = 5 //Digs through walls, girders, and can dig up sand
+		digspeed = 10 //Digs through walls, girders, and can dig up sand
+		hardness = 6
 		origin_tech = "materials=6;powerstorage=4;engineering=5"
 		desc = "Yours is the drill that will pierce the heavens!"
 
@@ -280,7 +285,8 @@ proc/move_mining_shuttle()
 		name = "cyborg mining drill"
 		icon_state = "diamonddrill"
 		item_state = "jackhammer"
-		digspeed = 15
+		hardness = 5
+		digspeed = 25
 		desc = ""
 
 /*****************************Shovel********************************/

@@ -76,7 +76,7 @@
 			loc = A.loc
 			return 0 //cannot shoot yourself
 
-		if(bumped)	return 0
+		if(bumped)	return 1
 		var/forcedodge = 0 // force the projectile to pass
 
 		bumped = 1
@@ -159,6 +159,7 @@
 					if(!(original in permutated))
 						Bump(original)
 						sleep(1)
+			Range()
 		return
 
 /obj/item/projectile/test //Used to see if you can hit them.
@@ -201,3 +202,6 @@
 				M = locate() in get_step(src,target)
 				if(istype(M))
 					return 1
+
+/obj/item/projectile/proc/Range() ///tg/
+	return

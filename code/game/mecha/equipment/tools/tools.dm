@@ -75,6 +75,7 @@
 	equip_cooldown = 30
 	energy_drain = 10
 	force = 15
+	var/penetration = 5
 
 	action(atom/target)
 		if(!action_checks(target)) return
@@ -93,8 +94,11 @@
 					occupant_message("<font color='red'>[target] is too durable to drill through.</font>")
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(chassis,1))
-						if(get_dir(chassis,M)&chassis.dir)
-							M.GetDrilled()
+						if(M.toughness && M.toughness > penetration)
+							occupant_message("<font color='red'>[target] is too tough to drill through.</font>")
+						else
+							if(get_dir(chassis,M)&chassis.dir)
+								M.GetDrilled()
 					log_message("Drilled through [target]")
 					if(locate(/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp) in chassis.equipment)
 						var/obj/structure/ore_box/ore_box = locate(/obj/structure/ore_box) in chassis:cargo
@@ -132,7 +136,7 @@
 	construction_cost = list("metal"=10000,"diamond"=6500)
 	equip_cooldown = 20
 	force = 15
-
+	penetration = 6
 	action(atom/target)
 		if(!action_checks(target)) return
 		if(isobj(target))
