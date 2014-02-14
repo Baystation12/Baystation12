@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: maps\tgstation2.dmm
+DIR: maps 
+FILE: maps\tgstation2.dmm
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
