@@ -166,13 +166,8 @@
 		H.update_inv_r_hand()
 	playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 	add_fingerprint(user)
-<<<<<<< HEAD
 	if (!blood_DNA) return
-	if(blood_overlay && (blood_DNA.len >= 1))							//updates blood overlay, if any
-=======
-
 	if(blood_overlay && (blood_DNA.len >= 1)) //updates blood overlay, if any
->>>>>>> 8850a43... Fixes #3847
 		overlays.Cut()//this might delete other item overlays as well but eeeeeeeh
 
 		var/icon/I = new /icon(src.icon, src.icon_state)
