@@ -122,7 +122,7 @@
 
 
 /obj/item/weapon/gun/proc/can_fire()
-	return process_chamber()
+	return chambered
 
 /obj/item/weapon/gun/proc/can_hit(var/mob/living/target as mob, var/mob/living/user as mob)
 	return chambered.BB.check_fire(target,user)
