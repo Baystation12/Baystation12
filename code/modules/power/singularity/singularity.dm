@@ -103,7 +103,7 @@ var/global/list/uneatable = list(
 	last_warning = world.time
 	var/count = locate(/obj/machinery/containment_field) in orange(30, src)
 	if(!count)	message_admins("A singulo has been created without containment fields active ([x],[y],[z])",1)
-	investigate_log("was created. [count?"":"<font color='red'>No containment fields were active</font>"]","singulo")
+	investigate_log("was created. [count?"":"<font colour='red'>No containment fields were active</font>"]","singulo")
 
 /obj/machinery/singularity/proc/dissipate()
 	if(!dissipate)
@@ -176,7 +176,7 @@ var/global/list/uneatable = list(
 			consume_range = 4
 			dissipate = 0 //It cant go smaller due to e loss
 	if(current_size == allowed_size)
-		investigate_log("<font color='red'>grew to size [current_size]</font>","singulo")
+		investigate_log("<font colour='red'>grew to size [current_size]</font>","singulo")
 		return 1
 	else if(current_size < (--temp_allowed_size))
 		expand(temp_allowed_size)
@@ -473,7 +473,7 @@ var/global/list/uneatable = list(
 
 /obj/machinery/singularity/narsie/large/New()
 	..()
-	world << "<font size='28' color='red'><b>NAR-SIE HAS RISEN</b></font>"
+	world << "<font size='28' colour='red'><b>NAR-SIE HAS RISEN</b></font>"
 	if(emergency_shuttle)
 		emergency_shuttle.incall(0.5) // Cannot recall
 

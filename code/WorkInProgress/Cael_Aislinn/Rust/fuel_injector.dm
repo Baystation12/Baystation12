@@ -148,7 +148,7 @@
 	else
 		dat += "<B>Reactor Core Fuel Injector</B><hr>"
 		dat += "<b>Device ID tag:</b> [id_tag] <a href='?src=\ref[src];modify_tag=1'>\[Modify\]</a><br>"
-		dat += "<b>Status:</b> [injecting ? "<font color=green>Active</font> <a href='?src=\ref[src];toggle_injecting=1'>\[Disable\]</a>" : "<font color=blue>Standby</font> <a href='?src=\ref[src];toggle_injecting=1'>\[Enable\]</a>"]<br>"
+		dat += "<b>Status:</b> [injecting ? "<font colour=green>Active</font> <a href='?src=\ref[src];toggle_injecting=1'>\[Disable\]</a>" : "<font colour=blue>Standby</font> <a href='?src=\ref[src];toggle_injecting=1'>\[Enable\]</a>"]<br>"
 		dat += "<b>Fuel usage:</b> [fuel_usage*100]% <a href='?src=\ref[src];fuel_usage=1'>\[Modify\]</a><br>"
 		dat += "<b>Fuel assembly port:</b> "
 		dat += "<a href='?src=\ref[src];fuel_assembly=1'>\[[cur_assembly ? "Eject assembly to port" : "Draw assembly from port"]\]</a> "
@@ -161,7 +161,7 @@
 			font_colour = "red"
 		else if(cached_power_avail < active_power_usage * 2)
 			font_colour = "orange"
-		dat += "<b>Power status:</b> <font color=[font_colour]>[active_power_usage]/[cached_power_avail] W</font><br>"
+		dat += "<b>Power status:</b> <font colour=[font_colour]>[active_power_usage]/[cached_power_avail] W</font><br>"
 		dat += "<a href='?src=\ref[src];toggle_remote=1'>\[[remote_access_enabled ? "Disable remote access" : "Enable remote access"]\]</a><br>"
 
 		dat += "<hr>"

@@ -123,7 +123,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	changeling.current << "<b>\red Use say \":g message\" to communicate with your fellow changelings. Remember: you get all of their absorbed DNA if you absorb them.</b>"
 
 	if(config.objectives_disabled)
-		changeling.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+		changeling.current << "<font colour=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 
 	if (!config.objectives_disabled)
 		changeling.current << "<B>You must complete the following tasks:</B>"
@@ -193,19 +193,19 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 					var/count = 1
 					for(var/datum/objective/objective in changeling.objectives)
 						if(objective.check_completion())
-							text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='green'><B>Success!</B></font>"
+							text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font colour='green'><B>Success!</B></font>"
 							feedback_add_details("changeling_objective","[objective.type]|SUCCESS")
 						else
-							text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
+							text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font colour='red'>Fail.</font>"
 							feedback_add_details("changeling_objective","[objective.type]|FAIL")
 							changelingwin = 0
 						count++
 				if(!config.objectives_disabled)
 					if(changelingwin)
-						text += "<br><font color='green'><B>The changeling was successful!</B></font>"
+						text += "<br><font colour='green'><B>The changeling was successful!</B></font>"
 						feedback_add_details("changeling_success","SUCCESS")
 					else
-						text += "<br><font color='red'><B>The changeling has failed.</B></font>"
+						text += "<br><font colour='red'><B>The changeling has failed.</B></font>"
 						feedback_add_details("changeling_success","FAIL")
 
 		world << text

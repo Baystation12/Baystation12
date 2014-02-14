@@ -750,7 +750,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define ZONE_ACTIVE 1
 #define ZONE_SLEEPING 0
 
-//some colors
+//some colours
 #define COLOR_RED 		"#FF0000"
 #define COLOR_GREEN 	"#00FF00"
 #define COLOR_BLUE 		"#0000FF"

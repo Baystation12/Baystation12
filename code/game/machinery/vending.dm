@@ -3,7 +3,7 @@
 	var/product_path = null
 	var/amount = 0
 	var/price = 0
-	var/display_color = "blue"
+	var/display_colour = "blue"
 
 
 
@@ -113,7 +113,7 @@
 		R.product_path = typepath
 		R.amount = amount
 		R.price = price
-		R.display_color = pick("red","blue","green")
+		R.display_colour = pick("red","blue","green")
 
 		if(hidden)
 			hidden_records += R
@@ -246,7 +246,7 @@
 		dat += "<b>Coin slot:</b> [coin ? coin : "No coin inserted"] (<a href='byond://?src=\ref[src];remove_coin=1'>Remove</A>)<br><br>"
 
 	if (src.product_records.len == 0)
-		dat += "<font color = 'red'>No product loaded!</font>"
+		dat += "<font colour = 'red'>No product loaded!</font>"
 	else
 		var/list/display_records = src.product_records
 		if(src.extended_inventory)
@@ -257,14 +257,14 @@
 			display_records = src.product_records + src.hidden_records + src.coin_records
 
 		for (var/datum/data/vending_product/R in display_records)
-			dat += "<FONT color = '[R.display_color]'><B>[R.product_name]</B>:"
+			dat += "<FONT colour = '[R.display_colour]'><B>[R.product_name]</B>:"
 			dat += " <b>[R.amount]</b> </font>"
 			if(R.price)
 				dat += " <b>(Price: [R.price])</b>"
 			if (R.amount > 0)
 				dat += " <a href='byond://?src=\ref[src];vend=\ref[R]'>(Vend)</A>"
 			else
-				dat += " <font color = 'red'>SOLD OUT</font>"
+				dat += " <font colour = 'red'>SOLD OUT</font>"
 			dat += "<br>"
 
 		dat += "</TT>"

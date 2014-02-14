@@ -42,16 +42,16 @@
 	var/tank_temperature = internal_tank ? internal_tank.return_temperature() : "Unknown"
 	var/cabin_pressure = round(return_pressure(),0.01)
 	var/output = {"[report_internal_damage()]
-						[integrity<30?"<font color='red'><b>DAMAGE LEVEL CRITICAL</b></font><br>":null]
-						[internal_damage&MECHA_INT_TEMP_CONTROL?"<font color='red'><b>CLOWN SUPPORT SYSTEM MALFUNCTION</b></font><br>":null]
-						[internal_damage&MECHA_INT_TANK_BREACH?"<font color='red'><b>GAS TANK HONK</b></font><br>":null]
-						[internal_damage&MECHA_INT_CONTROL_LOST?"<font color='red'><b>HONK-A-DOODLE</b></font> - <a href='?src=\ref[src];repair_int_control_lost=1'>Recalibrate</a><br>":null]
+						[integrity<30?"<font colour='red'><b>DAMAGE LEVEL CRITICAL</b></font><br>":null]
+						[internal_damage&MECHA_INT_TEMP_CONTROL?"<font colour='red'><b>CLOWN SUPPORT SYSTEM MALFUNCTION</b></font><br>":null]
+						[internal_damage&MECHA_INT_TANK_BREACH?"<font colour='red'><b>GAS TANK HONK</b></font><br>":null]
+						[internal_damage&MECHA_INT_CONTROL_LOST?"<font colour='red'><b>HONK-A-DOODLE</b></font> - <a href='?src=\ref[src];repair_int_control_lost=1'>Recalibrate</a><br>":null]
 						<b>IntegriHONK: </b> [integrity]%<br>
 						<b>PowerHONK charge: </b>[isnull(cell_charge)?"No powercell installed":"[cell.percent()]%"]<br>
 						<b>Air source: </b>[use_internal_tank?"Internal Airtank":"Environment"]<br>
 						<b>AirHONK pressure: </b>[tank_pressure]kPa<br>
 						<b>AirHONK temperature: </b>[tank_temperature]&deg;K|[tank_temperature - T0C]&deg;C<br>
-						<b>HONK pressure: </b>[cabin_pressure>WARNING_HIGH_PRESSURE ? "<font color='red'>[cabin_pressure]</font>": cabin_pressure]kPa<br>
+						<b>HONK pressure: </b>[cabin_pressure>WARNING_HIGH_PRESSURE ? "<font colour='red'>[cabin_pressure]</font>": cabin_pressure]kPa<br>
 						<b>HONK temperature: </b> [return_temperature()]&deg;K|[return_temperature() - T0C]&deg;C<br>
 						<b>Lights: </b>[lights?"on":"off"]<br>
 						[src.dna?"<b>DNA-locked:</b><br> <span style='font-size:10px;letter-spacing:-1px;'>[src.dna]</span> \[<a href='?src=\ref[src];reset_dna=1'>Reset</a>\]<br>":null]
@@ -62,12 +62,12 @@
 	var/output = {"<html>
 						<head><title>[src.name] data</title>
 						<style>
-						body {color: #00ff00; background: #32CD32; font-family:"Courier",monospace; font-size: 12px;}
-						hr {border: 1px solid #0f0; color: #fff; background-color: #000;}
-						a {padding:2px 5px;;color:#0f0;}
+						body {colour: #00ff00; background: #32CD32; font-family:"Courier",monospace; font-size: 12px;}
+						hr {border: 1px solid #0f0; colour: #fff; background-colour: #000;}
+						a {padding:2px 5px;;colour:#0f0;}
 						.wr {margin-bottom: 5px;}
 						.header {cursor:pointer;}
-						.open, .closed {background: #32CD32; color:#000; padding:1px 2px;}
+						.open, .closed {background: #32CD32; colour:#000; padding:1px 2px;}
 						.links a {margin-bottom: 2px;padding-top:3px;}
 						.visible {display: block;}
 						.hidden {display: none;}
@@ -78,17 +78,17 @@
 						function ticker() {
 						    setInterval(function(){
 						        window.location='byond://?src=\ref[src]&update_content=1';
-						        document.body.style.color = get_rand_color_string();
-						      document.body.style.background = get_rand_color_string();
+						        document.body.style.colour = get_rand_colour_string();
+						      document.body.style.background = get_rand_colour_string();
 						    }, 1000);
 						}
 
-						function get_rand_color_string() {
-						    var color = new Array;
+						function get_rand_colour_string() {
+						    var colour = new Array;
 						    for(var i=0;i<3;i++){
-						        color.push(Math.floor(Math.random()*255));
+						        colour.push(Math.floor(Math.random()*255));
 						    }
-						    return "rgb("+color.toString()+")";
+						    return "rgb("+colour.toString()+")";
 						}
 
 						window.onload = function() {
@@ -154,11 +154,11 @@ obj/mecha/combat/honker/Topic(href, href_list)
 				playsound(src, 'sound/misc/sadtrombone.ogg', 50)
 	return
 
-proc/rand_hex_color()
-	var/list/colors = list("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f")
-	var/color=""
+proc/rand_hex_colour()
+	var/list/colours = list("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f")
+	var/colour=""
 	for (var/i=0;i<6;i++)
-		color = color+pick(colors)
-	return color
+		colour = colour+pick(colours)
+	return colour
 
 

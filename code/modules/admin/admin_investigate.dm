@@ -34,7 +34,7 @@
 		if("singulo", "telesci")			//general one-round-only stuff
 			var/F = investigate_subject2file(subject)
 			if(!F)
-				src << "<font color='red'>Error: admin_investigate: [INVESTIGATE_DIR][subject] is an invalid path or cannot be accessed.</font>"
+				src << "<font colour='red'>Error: admin_investigate: [INVESTIGATE_DIR][subject] is an invalid path or cannot be accessed.</font>"
 				return
 			src << browse(F,"window=investigate[subject];size=800x300")
 
@@ -43,8 +43,8 @@
 				if(href_logfile)
 					src << browse(href_logfile,"window=investigate[subject];size=800x300")
 				else
-					src << "<font color='red'>Error: admin_investigate: No href logfile found.</font>"
+					src << "<font colour='red'>Error: admin_investigate: No href logfile found.</font>"
 					return
 			else
-				src << "<font color='red'>Error: admin_investigate: Href Logging is not on.</font>"
+				src << "<font colour='red'>Error: admin_investigate: Href Logging is not on.</font>"
 				return

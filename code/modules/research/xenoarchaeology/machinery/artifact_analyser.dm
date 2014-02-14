@@ -40,7 +40,7 @@
 		owned_scanner = locate() in orange(1, src)
 
 	if(!owned_scanner)
-		dat += "<b><font color=red>Unable to locate analysis pad.</font></b><br>"
+		dat += "<b><font colour=red>Unable to locate analysis pad.</font></b><br>"
 	else if(scan_in_progress)
 		dat += "Please wait. Analysis in progress.<br>"
 		dat += "<a href='?src=\ref[src];halt_scan=1'>Halt scanning.</a><br>"

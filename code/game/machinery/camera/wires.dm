@@ -13,16 +13,16 @@
 	WireColorToIndex = list(0, 0, 0, 0, 0, 0)
 	var/flagIndex = 1
 	//I think it's easier to read this way, also doesn't rely on the random number generator to land on a new wire.
-	var/list/colorIndexList = list(CAMERA_WIRE_FOCUS, CAMERA_WIRE_POWER, CAMERA_WIRE_LIGHT, CAMERA_WIRE_ALARM, CAMERA_WIRE_NOTHING1, CAMERA_WIRE_NOTHING2)
+	var/list/colourIndexList = list(CAMERA_WIRE_FOCUS, CAMERA_WIRE_POWER, CAMERA_WIRE_LIGHT, CAMERA_WIRE_ALARM, CAMERA_WIRE_NOTHING1, CAMERA_WIRE_NOTHING2)
 	for (var/flag=1, flag<=32, flag+=flag)
-		var/colorIndex = pick(colorIndexList)
-		if (wires[colorIndex]==0)
-			wires[colorIndex] = flag
+		var/colourIndex = pick(colourIndexList)
+		if (wires[colourIndex]==0)
+			wires[colourIndex] = flag
 			IndexToFlag[flagIndex] = flag
-			IndexToWireColor[flagIndex] = colorIndex
-			WireColorToIndex[colorIndex] = flagIndex
-			colorIndexList -= colorIndex // Shortens the list.
-		//world.log << "Flag: [flag], CIndex: [colorIndex], FIndex: [flagIndex]"
+			IndexToWireColor[flagIndex] = colourIndex
+			WireColorToIndex[colourIndex] = flagIndex
+			colourIndexList -= colourIndex // Shortens the list.
+		//world.log << "Flag: [flag], CIndex: [colourIndex], FIndex: [flagIndex]"
 		flagIndex+=1
 	return wires
 

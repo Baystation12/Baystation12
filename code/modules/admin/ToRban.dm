@@ -53,7 +53,7 @@
 			if(config)
 				if(config.ToRban)
 					config.ToRban = 0
-					message_admins("<font color='red'>ToR banning disabled.</font>")
+					message_admins("<font colour='red'>ToR banning disabled.</font>")
 				else
 					config.ToRban = 1
 					message_admins("<font colot='green'>ToR banning enabled.</font>")
@@ -79,9 +79,9 @@
 			var/input = input(src,"Please input an IP address to search for:","Find ToR ban",null) as null|text
 			if(input)
 				if(ToRban_isbanned(input))
-					src << "<font color='green'><b>Address is a known ToR address</b></font>"
+					src << "<font colour='green'><b>Address is a known ToR address</b></font>"
 				else
-					src << "<font color='red'><b>Address is not a known ToR address</b></font>"
+					src << "<font colour='red'><b>Address is not a known ToR address</b></font>"
 	return
 
 #undef TORFILE

@@ -15,8 +15,8 @@
 
 	var/obj/item/l_ear = null
 
-	// might use this later to recolor armorphs with icon.SwapColor
-	var/slime_color = null
+	// might use this later to recolour armorphs with icon.SwapColor
+	var/slime_colour = null
 
 	var/examine_text = ""
 

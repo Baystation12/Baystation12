@@ -19,7 +19,7 @@
 	without intervention this attack will succeed in approximately 10 minutes. Required intervention: temporary suspension of affected accounts until the attack has ceased. \
 	Notifications will be sent as updates occur.<br>"
 	var/my_department = "[station_name()] firewall subroutines"
-	var/sending = message + "<font color='blue'><b>Message dispatched by [my_department].</b></font>"
+	var/sending = message + "<font colour='blue'><b>Message dispatched by [my_department].</b></font>"
 
 	var/pass = 0
 	for(var/obj/machinery/message_server/MS in world)
@@ -42,7 +42,7 @@
 					playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 					for (var/mob/O in hearers(5, Console.loc))
 						O.show_message(text("\icon[Console] *The Requests Console beeps: 'PRIORITY Alert in [my_department]'"))
-				Console.messages += "<B><FONT color='red'>High Priority message from [my_department]</FONT></B><BR>[sending]"
+				Console.messages += "<B><FONT colour='red'>High Priority message from [my_department]</FONT></B><BR>[sending]"
 
 /datum/event/money_hacker/tick()
 	if(world.time >= end_time)
@@ -80,7 +80,7 @@
 		message = "The attack has ceased, the affected accounts can now be brought online."
 
 	var/my_department = "[station_name()] firewall subroutines"
-	var/sending = message + "<font color='blue'><b>Message dispatched by [my_department].</b></font>"
+	var/sending = message + "<font colour='blue'><b>Message dispatched by [my_department].</b></font>"
 
 	var/pass = 0
 	for(var/obj/machinery/message_server/MS in world)
@@ -103,4 +103,4 @@
 					playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 					for (var/mob/O in hearers(5, Console.loc))
 						O.show_message(text("\icon[Console] *The Requests Console beeps: 'PRIORITY Alert in [my_department]'"))
-				Console.messages += "<B><FONT color='red'>High Priority message from [my_department]</FONT></B><BR>[sending]"
+				Console.messages += "<B><FONT colour='red'>High Priority message from [my_department]</FONT></B><BR>[sending]"

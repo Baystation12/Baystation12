@@ -63,7 +63,7 @@
 			colour = "green"
 		else if(cell.charge / cell.maxcharge > 0.33)
 			colour = "orange"
-		dat += "<b>Energy cell</b>: <font color='[colour]'>[100 * cell.charge / cell.maxcharge]%</font><br>"
+		dat += "<b>Energy cell</b>: <font colour='[colour]'>[100 * cell.charge / cell.maxcharge]%</font><br>"
 	else
 		dat += "<b>Energy cell</b>: None<br>"
 	if(auth_card)
@@ -100,7 +100,7 @@
 		dat += "<br>"
 		dat += "<br>"
 	dat += "<hr>"
-	dat += "<font color='blue'><b>Always wear safety gear and consult a field manual before operation.</b></font><br>"
+	dat += "<font colour='blue'><b>Always wear safety gear and consult a field manual before operation.</b></font><br>"
 	if(!locked)
 		dat += "<A href='?src=\ref[src];lock=1'>Lock console</A><br>"
 	else

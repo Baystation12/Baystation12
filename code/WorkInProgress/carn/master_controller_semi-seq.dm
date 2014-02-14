@@ -182,7 +182,7 @@ datum/controller/game_controller/proc/process()
 				IL_check++
 				if(IL_check > 200)
 					var/MC_report = "air_master_ready = [air_master_ready]; tension_master_ready = [tension_master_ready]; sun_ready = [sun_ready]; mobs_ready = [mobs_ready]; diseases_ready = [diseases_ready]; machines_ready = [machines_ready]; objects_ready = [objects_ready]; networks_ready = [networks_ready]; powernets_ready = [powernets_ready]; ticker_ready = [ticker_ready];"
-					var/MC_admin_report = "<b><font color='red'>PROC BREAKAGE WARNING:</font> The game's master contorller appears to be stuck in one of it's cycles. It has looped through it's delaying loop [IL_check] times.<br>The master controller reports: [MC_report]</b><br>"
+					var/MC_admin_report = "<b><font colour='red'>PROC BREAKAGE WARNING:</font> The game's master contorller appears to be stuck in one of it's cycles. It has looped through it's delaying loop [IL_check] times.<br>The master controller reports: [MC_report]</b><br>"
 					if(!diseases_ready)
 						if(last_disease_processed)
 							MC_admin_report += "<b>DISEASE PROCESSING stuck on </b><A HREF='?src=%holder_ref%;adminplayervars=\ref[last_disease_processed]'>[last_disease_processed]</A><br>"
@@ -198,7 +198,7 @@ datum/controller/game_controller/proc/process()
 							MC_admin_report += "<b>OBJ PROCESSING stuck on </b><A HREF='?src=ADMINHOLDERREF;adminplayervars=\ref[last_obj_processed]'>[last_obj_processed]</A><br>"
 						else
 							MC_admin_report += "<b>OBJ PROCESSING stuck on </b>unknown<br>"
-					MC_admin_report += "<font color='red'><b>Master controller breaking out of delaying loop. Restarting the round is advised if problem persists. DO NOT manually restart the master controller.</b></font><br>"
+					MC_admin_report += "<font colour='red'><b>Master controller breaking out of delaying loop. Restarting the round is advised if problem persists. DO NOT manually restart the master controller.</b></font><br>"
 					message_admins(MC_admin_report)
 					log_admin("PROC BREAKAGE WARNING: infinite_loop_check = [IL_check]; [MC_report];")
 					break
@@ -238,11 +238,11 @@ datum/controller/game_controller/proc/process()
 							defcon = 5
 							for(var/client/C)
 								if(C.holder)
-									C << "<font color='red' size='2'><b>Warning. The Master Controller has not fired in the last [4*ticks_per_spin] ticks. Automatic restart in [ticks_per_spin] ticks.</b></font>"
+									C << "<font colour='red' size='2'><b>Warning. The Master Controller has not fired in the last [4*ticks_per_spin] ticks. Automatic restart in [ticks_per_spin] ticks.</b></font>"
 						if(5)
 							for(var/client/C)
 								if(C.holder)
-									C << "<font color='red' size='2'><b>Warning. The Master Controller has still not fired within the last [5*ticks_per_spin] ticks. Killing and restarting...</b></font>"
+									C << "<font colour='red' size='2'><b>Warning. The Master Controller has still not fired within the last [5*ticks_per_spin] ticks. Killing and restarting...</b></font>"
 							spawn(0)
 								new /datum/controller/game_controller()	//replace the old master_controller (hence killing the old one's process)
 								master_controller.process()	//Start it rolling again

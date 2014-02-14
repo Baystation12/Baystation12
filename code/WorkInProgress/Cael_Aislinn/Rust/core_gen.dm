@@ -214,7 +214,7 @@ max volume of plasma storeable by the field = the total volume of a number of ti
 			font_colour = "red"
 		else if(cached_power_avail < active_power_usage * 2)
 			font_colour = "orange"
-		dat += "<b>Power status:</b> <font color=[font_colour]>[active_power_usage]/[cached_power_avail] W</font><br>"
+		dat += "<b>Power status:</b> <font colour=[font_colour]>[active_power_usage]/[cached_power_avail] W</font><br>"
 
 	user << browse(dat, "window=core_gen;size=500x300")
 	onclose(user, "core_gen")

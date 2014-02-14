@@ -394,7 +394,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		else if (display_freq == SUP_FREQ) // cargo
 			part_a = "<span class='supradio'><span class='name'>"
 
-		// If all else fails and it's a dept_freq, color me purple!
+		// If all else fails and it's a dept_freq, colour me purple!
 		else if (display_freq in DEPT_FREQS)
 			part_a = "<span class='deptradio'><span class='name'>"
 

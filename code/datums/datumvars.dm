@@ -213,7 +213,7 @@ client
 		body += "<div align='center'><b><font size='1'>[formatted_type]</font></b>"
 
 		if(src.holder && src.holder.marked_datum && src.holder.marked_datum == D)
-			body += "<br><font size='1' color='red'><b>Marked Object</b></font>"
+			body += "<br><font size='1' colour='red'><b>Marked Object</b></font>"
 
 		body += "</div>"
 
@@ -229,7 +229,7 @@ client
 					onchange="loadPage(this.form.elements\[0\])"
 					target="_parent._top"
 					onmouseclick="this.focus()"
-					style="background-color:#ffffff">
+					style="background-colour:#ffffff">
 				"}
 
 		body += {"	<option value>Select option</option>

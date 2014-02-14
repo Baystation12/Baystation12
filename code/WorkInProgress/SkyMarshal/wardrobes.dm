@@ -98,7 +98,7 @@
 		new /obj/item/device/pda(src)
 		new /obj/item/device/radio/headset(src)
 		new /obj/item/clothing/shoes/black(src)
-		new /obj/item/clothing/under/color/grey(src)
+		new /obj/item/clothing/under/colour/grey(src)
 
 /obj/item/wardrobe/chief_engineer
 	name = "\improper Chief Engineer Wardrobe"

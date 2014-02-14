@@ -108,7 +108,7 @@ datum/controller/vote
 						else
 							factor = 1.4
 					choices["Initiate Crew Transfer"] = round(choices["Initiate Crew Transfer"] * factor)
-					world << "<font color='purple'>Crew Transfer Factor: [factor]</font>"
+					world << "<font colour='purple'>Crew Transfer Factor: [factor]</font>"
 					greatest_votes = max(choices["Initiate Crew Transfer"], choices["Continue The Round"])
 
 
@@ -145,7 +145,7 @@ datum/controller/vote
 		else
 			text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 		log_vote(text)
-		world << "<font color='purple'>[text]</font>"
+		world << "<font colour='purple'>[text]</font>"
 		return .
 
 	proc/result()
@@ -165,7 +165,7 @@ datum/controller/vote
 							master_mode = .
 					if(!going)
 						going = 1
-						world << "<font color='red'><b>The round will start soon.</b></font>"
+						world << "<font colour='red'><b>The round will start soon.</b></font>"
 				if("crew_transfer")
 					if(. == "Initiate Crew Transfer")
 						init_shift_change(null, 1)
@@ -238,7 +238,7 @@ datum/controller/vote
 				text += "\n[question]"
 
 			log_vote(text)
-			world << "<font color='purple'><b>[text]</b>\nType vote to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
+			world << "<font colour='purple'><b>[text]</b>\nType vote to place your votes.\nYou have [config.vote_period/10] seconds to vote.</font>"
 			switch(vote_type)
 				if("crew_transfer")
 					world << sound('sound/ambience/alarm4.ogg')
@@ -248,7 +248,7 @@ datum/controller/vote
 					world << sound('sound/ambience/alarm4.ogg')
 			if(mode == "gamemode" && going)
 				going = 0
-				world << "<font color='red'><b>Round start has been delayed.</b></font>"
+				world << "<font colour='red'><b>Round start has been delayed.</b></font>"
 		/*	if(mode == "crew_transfer" && ooc_allowed)
 				auto_muted = 1
 				ooc_allowed = !( ooc_allowed )
@@ -307,12 +307,12 @@ datum/controller/vote
 			if(trialmin || config.allow_vote_restart)
 				. += "<a href='?src=\ref[src];vote=restart'>Restart</a>"
 			else
-				. += "<font color='grey'>Restart (Disallowed)</font>"
+				. += "<font colour='grey'>Restart (Disallowed)</font>"
 			. += "</li><li>"
 			if(trialmin || config.allow_vote_restart)
 				. += "<a href='?src=\ref[src];vote=crew_transfer'>Crew Transfer</a>"
 			else
-				. += "<font color='grey'>Crew Transfer (Disallowed)</font>"
+				. += "<font colour='grey'>Crew Transfer (Disallowed)</font>"
 			if(trialmin)
 				. += "\t(<a href='?src=\ref[src];vote=toggle_restart'>[config.allow_vote_restart?"Allowed":"Disallowed"]</a>)"
 			. += "</li><li>"
@@ -320,7 +320,7 @@ datum/controller/vote
 			if(trialmin || config.allow_vote_mode)
 				. += "<a href='?src=\ref[src];vote=gamemode'>GameMode</a>"
 			else
-				. += "<font color='grey'>GameMode (Disallowed)</font>"
+				. += "<font colour='grey'>GameMode (Disallowed)</font>"
 			if(trialmin)
 				. += "\t(<a href='?src=\ref[src];vote=toggle_gamemode'>[config.allow_vote_mode?"Allowed":"Disallowed"]</a>)"
 

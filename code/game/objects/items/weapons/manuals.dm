@@ -61,7 +61,7 @@
 					<li>Open the control panel</li>
 					<li>Set the speed to 2</li>
 					<li>Start firing at the singularity generator</li>
-					<li><font color='red'><b>When the singularity reaches a large enough size so it starts moving on it's own set the speed down to 0, but don't shut it off</b></font></li>
+					<li><font colour='red'><b>When the singularity reaches a large enough size so it starts moving on it's own set the speed down to 0, but don't shut it off</b></font></li>
 					<li>Remember to wear a radiation suit when working with this machine... we did tell you that at the start, right?</li>
 				</ol>
 
@@ -200,7 +200,7 @@
 
 				A power problem has made the entire station loose power? Could be station-wide wiring problems or syndicate power sinks. In any case follow these steps:
 				<p>
-				<b>Step one:</b> <b><font color='red'>PANIC!</font></b><br>
+				<b>Step one:</b> <b><font colour='red'>PANIC!</font></b><br>
 				<b>Step two:</b> Get your ass over to engineering! <b>QUICKLY!!!</b><br>
 				<b>Step three:</b> Get to the <b>Area Power Controller</b> which controls the power to the emitters.<br>
 				<b>Step four:</b> Swipe it with your <b>ID card</b> - if it doesn't unlock, continue with step 15.<br>
@@ -937,7 +937,7 @@
 				</style>
 				</head>
 				<body>
-				<font face="Verdana" color=black>
+				<font face="Verdana" colour=black>
 
 				<h1><a name="Contents">Contents</a></h1>
 				<ol>
@@ -980,7 +980,7 @@
 
 				<h1><a name="Devices"><B>Devices: </B></a></h1><BR>
 				<I>They actually do something.</I><BR>
-				This is usually where people get frightened, </font><font face="Verdana" color=black>afraid, and start calling on their gods and/or cowering in fear. Yes, I can see you doing that right now.
+				This is usually where people get frightened, </font><font face="Verdana" colour=black>afraid, and start calling on their gods and/or cowering in fear. Yes, I can see you doing that right now.
 				Stop it. It's unbecoming. Most of these are fairly straightforward.<BR>
 
 				<li><I>Gas Pump:</I> Take a wild guess. It moves gas in the direction it's pointing (marked by the red line on one end). It moves it based on pressure, the maximum output being 4500 kPa (kilopascals).
@@ -1034,7 +1034,7 @@
 				</style>
 				</head>
 				<body>
-				<font face="Verdana" color=black>
+				<font face="Verdana" colour=black>
 
 				<h1><a name="Contents">Contents</a></h1>
 				<ol>
@@ -1057,12 +1057,12 @@
 				These suits are the grey ones that are stored in EVA. They're the more simple to get on, but are also a lot bulkier, and provide less protection from environmental hazards such as radiaion or physical impact.
 				As Medical, Engineering, Security, and Mining all have hardsuits of their own, these don't see much use, but knowing how to put them on is quite useful anyways.<BR><BR>
 
-				First, take the suit. It should be in three pieces: A top, a bottom, </font><font face="Verdana" color=black>and a helmet. Put the bottom on first, shoes and the like will fit in it. If you have magnetic boots, however,
+				First, take the suit. It should be in three pieces: A top, a bottom, </font><font face="Verdana" colour=black>and a helmet. Put the bottom on first, shoes and the like will fit in it. If you have magnetic boots, however,
 				put them on on top of the suit's feet. Next, get the top on, as you would a shirt. It can be somewhat awkward putting these pieces on, due to the makeup of the suit,
 				but to an extent they will adjust to you. You can then find the snaps and seals around the waist, where the two pieces meet. Fasten these, and double-check their tightness.
 				The red indicators around the waist of the lower half will turn green when this is done correctly. Next, put on whatever breathing apparatus you're using, be it a gas mask or a breath mask. Make sure the oxygen tube is fastened into it.
 				Put on the helmet now, straight forward, and make sure the tube goes into the small opening specifically for internals. Again, fasten seals around the neck, a small indicator light in the inside of the helmet should go from red to off when all is fastened.
-				There is a small slot on the side of the suit where an emergency oxygen tank or</font><font face="Verdana" color=black> extended emergency oxygen tank will fit,
+				There is a small slot on the side of the suit where an emergency oxygen tank or</font><font face="Verdana" colour=black> extended emergency oxygen tank will fit,
 				but it is reccomended to have a full-sized tank on your back for EVA.<BR><BR>
 
 				<h1><a name="Hardsuit">Hardsuits</a></h1><BR>
@@ -1072,7 +1072,7 @@
 				Similarly to the other suits, these are split into three parts. Fastening the pant and top are mostly the same as the other spacesuits, with the exception that these are a bit heavier,
 				though not as bulky. The helmet goes on differently, with the air tube feeing into the suit and out a hole near the left shoulder, while the helmet goes on turned ninety degrees counter-clockwise,
 				and then is screwed in for one and a quarter full rotations clockwise, leaving the faceplate directly in front of you. There is a small button on the right side of the helmet that activates the helmet light.
-				The tanks that fasten onto the side slot are emergency tanks, as</font><font face="Verdana" color=black> well as full-sized oxygen tanks, leaving your back free for a backpack or satchel.<BR><BR>
+				The tanks that fasten onto the side slot are emergency tanks, as</font><font face="Verdana" colour=black> well as full-sized oxygen tanks, leaving your back free for a backpack or satchel.<BR><BR>
 
 				<h1><a name="Final">FINAL CHECKS:</a></h1><BR>
 				<li>Are all seals fastened correctly?</li>

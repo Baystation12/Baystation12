@@ -95,13 +95,13 @@
 			dat += "<h4>Modules</h4>"
 			//dat += "<a href='byond://?src=\ref[src];relmodules=1'>Reload Modules</a>"
 			if (isnull(src.scanner))
-				dat += " <font color=red>Scanner-ERROR</font><br>"
+				dat += " <font colour=red>Scanner-ERROR</font><br>"
 			else
-				dat += " <font color=green>Scanner-Found!</font><br>"
+				dat += " <font colour=green>Scanner-Found!</font><br>"
 			if (isnull(src.pod1))
-				dat += " <font color=red>Pod-ERROR</font><br>"
+				dat += " <font colour=red>Pod-ERROR</font><br>"
 			else
-				dat += " <font color=green>Pod-Found!</font><br>"
+				dat += " <font colour=green>Pod-Found!</font><br>"
 
 			// Scanner
 			dat += "<h4>Scanner Functions</h4>"
@@ -144,7 +144,7 @@
 			dat += "<a href='byond://?src=\ref[src];menu=2'>Back</a><br>"
 
 			if (!src.active_record)
-				dat += "<font color=red>ERROR: Record not found.</font>"
+				dat += "<font colour=red>ERROR: Record not found.</font>"
 			else
 				dat += {"<br><font size=1><a href='byond://?src=\ref[src];del_rec=1'>Delete Record</a></font><br>
 					<b>Name:</b> [src.active_record.dna.real_name]<br>"}
@@ -155,7 +155,7 @@
 				if ((H) && (istype(H)))
 					dat += "<b>Health:</b> [H.sensehealth()] | OXY-BURN-TOX-BRUTE<br>"
 				else
-					dat += "<font color=red>Unable to locate implant.</font><br>"
+					dat += "<font colour=red>Unable to locate implant.</font><br>"
 
 				if (!isnull(src.diskette))
 					dat += "<a href='byond://?src=\ref[src];disk=load'>Load from disk.</a>"

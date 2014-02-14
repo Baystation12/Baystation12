@@ -38,7 +38,7 @@
 		G.killing = 1
 
 		desc = "It's some kind of human sized, doll-like sculpture, with weird discolourations on some parts of it. It appears to be quite solid. [G ? "\red The sculpture is holding [G.affecting] in a vice-like grip." : ""]"
-		target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been grabbed by SCP-173, and is being strangled!</font>")
+		target.attack_log += text("\[[time_stamp()]\] <font colour='orange'>Has been grabbed by SCP-173, and is being strangled!</font>")
 		log_admin("[target] ([target.ckey]) has been grabbed and is being strangled by SCP-173.")
 		message_admins("Alert: [target.real_name] has been grabbed and is being strangled by SCP-173. Set var/allow_escape = 1 to allow this player to escape temporarily, or var/hibernate = 1 to disable it entirely.")
 

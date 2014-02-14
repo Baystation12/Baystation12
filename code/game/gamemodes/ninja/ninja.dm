@@ -57,7 +57,7 @@
 		if(!config.objectives_disabled)
 			forge_ninja_objectives(ninja)
 		else
-			ninja.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+			ninja.current << "<font colour=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 		var/mob/living/carbon/human/N = ninja.current
 		N.internal = N.s_store
 		N.internals.icon_state = "internal1"
@@ -165,10 +165,10 @@
 				var/count = 1
 				for(var/datum/objective/objective in ninja.objectives)
 					if(objective.check_completion())
-						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='green'><B>Success!</B></font>"
+						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font colour='green'><B>Success!</B></font>"
 						feedback_add_details("traitor_objective","[objective.type]|SUCCESS")
 					else
-						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
+						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font colour='red'>Fail.</font>"
 						feedback_add_details("traitor_objective","[objective.type]|FAIL")
 						ninjawin = 0
 					count++
@@ -181,10 +181,10 @@
 
 			if(!config.objectives_disabled)
 				if(ninjawin)
-					text += "<br><font color='green'><B>The [special_role_text] was successful!</B></font>"
+					text += "<br><font colour='green'><B>The [special_role_text] was successful!</B></font>"
 					feedback_add_details("traitor_success","SUCCESS")
 				else
-					text += "<br><font color='red'><B>The [special_role_text] has failed!</B></font>"
+					text += "<br><font colour='red'><B>The [special_role_text] has failed!</B></font>"
 					feedback_add_details("traitor_success","FAIL")
 
 		world << text

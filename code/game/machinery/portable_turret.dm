@@ -23,7 +23,7 @@
 	req_access = list(access_security)
 	power_channel = EQUIP	// drains power from the EQUIPMENT channel
 
-	var/lasercolor = ""		// Something to do with lasertag turrets, blame Sieve for not adding a comment.
+	var/lasercolour = ""		// Something to do with lasertag turrets, blame Sieve for not adding a comment.
 	var/raised = 0			// if the turret cover is "open" and the turret is raised
 	var/raising= 0			// if the turret is currently opening or closing its cover
 	var/health = 80			// the turret's health
@@ -59,7 +59,7 @@
 
 	New()
 		..()
-		icon_state = "[lasercolor]grey_target_prism"
+		icon_state = "[lasercolour]grey_target_prism"
 		// Sets up a spark system
 		spark_system = new /datum/effect/effect/system/spark_spread
 		spark_system.set_up(5, 0, src)
@@ -80,7 +80,7 @@
 					eprojectile = /obj/item/projectile/beam/lastertag/omni//This bolt will stun ERRYONE with a vest
 					iconholder = null
 					reqpower = 100
-					lasercolor = "b"
+					lasercolour = "b"
 					req_access = list(access_maint_tunnels)
 					check_records = 0
 					criminals = 0
@@ -94,7 +94,7 @@
 					eprojectile = /obj/item/projectile/beam/lastertag/omni
 					iconholder = null
 					reqpower = 100
-					lasercolor = "r"
+					lasercolour = "r"
 					req_access = list(access_maint_tunnels)
 					check_records = 0
 					criminals = 0
@@ -192,7 +192,7 @@
 	var/dat
 
 	// The browse() text, similar to ED-209s and beepskies.
-	if(!(src.lasercolor))//Lasertag turrets have less options
+	if(!(src.lasercolour))//Lasertag turrets have less options
 		dat += text({"
 <TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
 Status: []<BR>
@@ -216,9 +216,9 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 	else
 		if(istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
-			if(((src.lasercolor) == "b") && (istype(H.wear_suit, /obj/item/clothing/suit/redtag)))
+			if(((src.lasercolour) == "b") && (istype(H.wear_suit, /obj/item/clothing/suit/redtag)))
 				return
-			if(((src.lasercolor) == "r") && (istype(H.wear_suit, /obj/item/clothing/suit/bluetag)))
+			if(((src.lasercolour) == "r") && (istype(H.wear_suit, /obj/item/clothing/suit/bluetag)))
 				return
 		dat += text({"
 <TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
@@ -265,22 +265,22 @@ Status: []<BR>"},
 		icon_state = "turretCover"
 		return
 	if(stat & BROKEN)
-		icon_state = "[lasercolor]destroyed_target_prism"
+		icon_state = "[lasercolour]destroyed_target_prism"
 	else
 		if( powered() )
 			if (on)
 				if (installation == /obj/item/weapon/gun/energy/laser || installation == /obj/item/weapon/gun/energy/pulse_rifle)
 					// laser guns and pulse rifles have an orange icon
-					icon_state = "[lasercolor]orange_target_prism"
+					icon_state = "[lasercolour]orange_target_prism"
 				else
 					// anything else has a blue icon
-					icon_state = "[lasercolor]target_prism"
+					icon_state = "[lasercolour]target_prism"
 			else
-				icon_state = "[lasercolor]grey_target_prism"
+				icon_state = "[lasercolour]grey_target_prism"
 			stat &= ~NOPOWER
 		else
 			spawn(rand(0, 15))
-				src.icon_state = "[lasercolor]grey_target_prism"
+				src.icon_state = "[lasercolour]grey_target_prism"
 				stat |= NOPOWER
 
 
@@ -299,7 +299,7 @@ Status: []<BR>"},
 					var/obj/item/weapon/gun/energy/Gun = new installation(src.loc)
 					Gun.power_supply.charge=gun_charge
 					Gun.update_icon()
-					lasercolor = null
+					lasercolour = null
 				if(prob(50)) new /obj/item/stack/sheet/metal( loc, rand(1,4))
 				if(prob(50)) new /obj/item/device/assembly/prox_sensor(locate(x,y,z))
 			else
@@ -327,7 +327,7 @@ Status: []<BR>"},
 		if(!anchored)
 			anchored = 1
 			invisibility = INVISIBILITY_LEVEL_TWO
-			icon_state = "[lasercolor]grey_target_prism"
+			icon_state = "[lasercolour]grey_target_prism"
 			user << "You secure the exterior bolts on the turret."
 			cover=new/obj/machinery/porta_turret_cover(src.loc) // create a new turret. While this is handled in process(), this is to workaround a bug where the turret becomes invisible for a split second
 			cover.Parent_Turret = src // make the cover's parent src
@@ -374,13 +374,13 @@ Status: []<BR>"},
 	if(prob(45) && Proj.damage > 0) src.spark_system.start()
 	if (src.health <= 0)
 		src.die() // the death process :(
-	if((src.lasercolor == "b") && (src.disabled == 0))
+	if((src.lasercolour == "b") && (src.disabled == 0))
 		if(istype(Proj, /obj/item/projectile/beam/lastertag/red))
 			src.disabled = 1
 			del (Proj)
 			sleep(100)
 			src.disabled = 0
-	if((src.lasercolor == "r") && (src.disabled == 0))
+	if((src.lasercolour == "r") && (src.disabled == 0))
 		if(istype(Proj, /obj/item/projectile/beam/lastertag/blue))
 			src.disabled = 1
 			del (Proj)
@@ -414,7 +414,7 @@ Status: []<BR>"},
 	src.health = 0
 	src.density = 0
 	src.stat |= BROKEN // enables the BROKEN bit
-	src.icon_state = "[lasercolor]destroyed_target_prism"
+	src.icon_state = "[lasercolour]destroyed_target_prism"
 	invisibility=0
 	src.spark_system.start() // creates some sparks because they look cool
 	src.density=1
@@ -471,7 +471,7 @@ Status: []<BR>"},
 
 				if(ai) // If it's set to attack all nonsilicons, target them!
 					if(C.lying)
-						if(lasercolor)
+						if(lasercolour)
 							continue
 						else
 							secondarytargets += C
@@ -544,7 +544,7 @@ Status: []<BR>"},
 		cover.icon_state="turretCover"
 		raised=0
 		invisibility=2
-		icon_state="[lasercolor]grey_target_prism"
+		icon_state="[lasercolour]grey_target_prism"
 
 
 /obj/machinery/porta_turret/proc/assess_perp(mob/living/carbon/human/perp as mob)
@@ -560,7 +560,7 @@ Status: []<BR>"},
 	if(auth_weapons) // check for weapon authorization
 		if((isnull(perp.wear_id)) || (istype(perp.wear_id.GetID(), /obj/item/weapon/card/id/syndicate)))
 
-			if((src.allowed(perp)) && !(src.lasercolor)) // if the perp has security access, return 0
+			if((src.allowed(perp)) && !(src.lasercolour)) // if the perp has security access, return 0
 				return 0
 
 			if((istype(perp.l_hand, /obj/item/weapon/gun) && !istype(perp.l_hand, /obj/item/weapon/gun/projectile/shotgun)) || istype(perp.l_hand, /obj/item/weapon/melee/baton))
@@ -572,7 +572,7 @@ Status: []<BR>"},
 			if(istype(perp.belt, /obj/item/weapon/gun) || istype(perp.belt, /obj/item/weapon/melee/baton))
 				threatcount += 2
 
-	if((src.lasercolor) == "b")//Lasertag turrets target the opposing team, how great is that? -Sieve
+	if((src.lasercolour) == "b")//Lasertag turrets target the opposing team, how great is that? -Sieve
 		threatcount = 0//But does not target anyone else
 		if(istype(perp.wear_suit, /obj/item/clothing/suit/redtag))
 			threatcount += 4
@@ -581,7 +581,7 @@ Status: []<BR>"},
 		if(istype(perp.belt, /obj/item/weapon/gun/energy/laser/redtag))
 			threatcount += 2
 
-	if((src.lasercolor) == "r")
+	if((src.lasercolour) == "r")
 		threatcount = 0
 		if(istype(perp.wear_suit, /obj/item/clothing/suit/bluetag))
 			threatcount += 4
@@ -617,7 +617,7 @@ Status: []<BR>"},
 	if(disabled)
 		return
 
-	if(lasercolor && (istype(target,/mob/living/carbon/human)))
+	if(lasercolour && (istype(target,/mob/living/carbon/human)))
 		var/mob/living/carbon/human/H = target
 		if(H.lying)
 			return
@@ -641,9 +641,9 @@ Status: []<BR>"},
 	// any emagged turrets will shoot extremely fast! This not only is deadly, but drains a lot power!
 
 	if(iconholder)
-		icon_state = "[lasercolor]target_prism"
+		icon_state = "[lasercolour]target_prism"
 	else
-		icon_state = "[lasercolor]orange_target_prism"
+		icon_state = "[lasercolour]orange_target_prism"
 	if(sound)
 		playsound(src.loc, 'sound/weapons/Taser.ogg', 75, 1)
 	var/obj/item/projectile/A
@@ -891,7 +891,7 @@ Status: []<BR>"},
 	if (.)
 		return
 	var/dat
-	if(!(Parent_Turret.lasercolor))
+	if(!(Parent_Turret.lasercolour))
 		dat += text({"
 <TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
 Status: []<BR>
@@ -928,7 +928,7 @@ Status: []<BR>"},
 	if (.)
 		return
 	var/dat
-	if(!(Parent_Turret.lasercolor))
+	if(!(Parent_Turret.lasercolour))
 		dat += text({"
 <TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
 Status: []<BR>
@@ -952,9 +952,9 @@ Neutralize All Unidentified Life Signs: []<BR>"},
 	else
 		if(istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
-			if(((Parent_Turret.lasercolor) == "b") && (istype(H.wear_suit, /obj/item/clothing/suit/redtag)))
+			if(((Parent_Turret.lasercolour) == "b") && (istype(H.wear_suit, /obj/item/clothing/suit/redtag)))
 				return
-			if(((Parent_Turret.lasercolor) == "r") && (istype(H.wear_suit, /obj/item/clothing/suit/bluetag)))
+			if(((Parent_Turret.lasercolour) == "r") && (istype(H.wear_suit, /obj/item/clothing/suit/bluetag)))
 				return
 		dat += text({"
 <TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>

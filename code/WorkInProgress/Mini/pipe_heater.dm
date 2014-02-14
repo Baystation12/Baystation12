@@ -47,11 +47,11 @@
 		user.machine = src
 		var/temp_text = ""
 		if(air_contents.temperature > (T0C - 20))
-			temp_text = "<FONT color=red>[air_contents.temperature]</FONT>"
+			temp_text = "<FONT colour=red>[air_contents.temperature]</FONT>"
 		else if(air_contents.temperature < (T0C - 20) && air_contents.temperature > (T0C - 100))
-			temp_text = "<FONT color=black>[air_contents.temperature]</FONT>"
+			temp_text = "<FONT colour=black>[air_contents.temperature]</FONT>"
 		else
-			temp_text = "<FONT color=blue>[air_contents.temperature]</FONT>"
+			temp_text = "<FONT colour=blue>[air_contents.temperature]</FONT>"
 
 		var/dat = {"<B>Cryo gas cooling system</B><BR>
 		Current status: [ on ? "<A href='?src=\ref[src];start=1'>Off</A> <B>On</B>" : "<B>Off</B> <A href='?src=\ref[src];start=1'>On</A>"]<BR>

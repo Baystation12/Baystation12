@@ -59,7 +59,7 @@
 			fullname += ", [O.name]"
 
 		var/image/I = new(src.icon, "sandwich_filling")
-		I.color = O.filling_color
+		I.colour = O.filling_colour
 		I.pixel_x = pick(list(-1,0,1))
 		I.pixel_y = (i*2)+1
 		overlays += I

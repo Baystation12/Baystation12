@@ -34,14 +34,14 @@
 	var/dat
 	dat = text("input connection status: ")
 	if (input)
-		dat += text("<b><font color='green'>CONNECTED</font></b>")
+		dat += text("<b><font colour='green'>CONNECTED</font></b>")
 	else
-		dat += text("<b><font color='red'>NOT CONNECTED</font></b>")
+		dat += text("<b><font colour='red'>NOT CONNECTED</font></b>")
 	dat += text("<br>output connection status: ")
 	if (output)
-		dat += text("<b><font color='green'>CONNECTED</font></b>")
+		dat += text("<b><font colour='green'>CONNECTED</font></b>")
 	else
-		dat += text("<b><font color='red'>NOT CONNECTED</font></b>")
+		dat += text("<b><font colour='red'>NOT CONNECTED</font></b>")
 
 	dat += text("<br><br><A href='?src=\ref[src];extract=[input]'>Extract gas</A>")
 

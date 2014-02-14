@@ -263,7 +263,7 @@ var/list/datum/power/changeling/powerinstances = list()
 
 					body += "<font size='2'><b>"+desc+"</b></font> <BR>"
 
-					body += "<font size='2'><font color = 'red'><b>"+helptext+"</b></font> <BR>"
+					body += "<font size='2'><font colour = 'red'><b>"+helptext+"</b></font> <BR>"
 
 					if(!ownsthis)
 					{
@@ -329,7 +329,7 @@ var/list/datum/power/changeling/powerinstances = list()
 						return;
 					locked_tabs.push(id);
 					var notice_span = document.getElementById(notice_span_id);
-					notice_span.innerHTML = "<font color='red'>Locked</font> ";
+					notice_span.innerHTML = "<font colour='red'>Locked</font> ";
 					//link.setAttribute("onClick","attempt('"+id+"','"+link_id+"','"+notice_span_id+"');");
 					//document.write("removeFromLocked('"+id+"','"+link_id+"','"+notice_span_id+"')");
 					//document.write("aa - "+link.getAttribute("onClick"));
@@ -409,15 +409,15 @@ var/list/datum/power/changeling/powerinstances = list()
 			ownsthis = 1
 
 
-		var/color = "#e6e6e6"
+		var/colour = "#e6e6e6"
 		if(i%2 == 0)
-			color = "#f2f2f2"
+			colour = "#f2f2f2"
 
 
 		dat += {"
 
 			<tr id='data[i]' name='[i]' onClick="addToLocked('item[i]','data[i]','notice_span[i]')">
-				<td align='center' bgcolor='[color]'>
+				<td align='center' bgcolour='[colour]'>
 					<span id='notice_span[i]'></span>
 					<a id='link[i]'
 					onmouseover='expand("item[i]","[P.name]","[P.desc]","[P.helptext]","[P]",[ownsthis])'

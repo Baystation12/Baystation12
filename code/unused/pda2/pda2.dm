@@ -114,7 +114,7 @@
 			else
 				if(src.cartridge)
 					dat += " | <a href='byond://?src=\ref[src];eject_cart=1'>Eject [src.cartridge]</a><br>"
-				dat += "<center><font color=red>Fatal Error 0x17<br>"
+				dat += "<center><font colour=red>Fatal Error 0x17<br>"
 				dat += "No System Software Loaded</font></center>"
 					//To-do: System recovery shit (maybe have a dedicated computer for this kind of thing)
 

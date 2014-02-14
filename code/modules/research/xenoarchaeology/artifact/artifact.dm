@@ -78,7 +78,7 @@
 
 		if(excavation_level > 100)
 			//failure
-			user.visible_message("<font color='red'><b>[src] suddenly crumbles away.</b></font>",\
+			user.visible_message("<font colour='red'><b>[src] suddenly crumbles away.</b></font>",\
 			"\red [src] has disintegrated under your onslaught, any secrets it was holding are long gone.")
 			del(src)
 			return
@@ -92,8 +92,8 @@
 					var/obj/machinery/artifact/X = O
 					if(X.my_effect)
 						X.my_effect.artifact_id = artifact_find.artifact_id
-				src.visible_message("<font color='red'><b>[src] suddenly crumbles away.</b></font>")
+				src.visible_message("<font colour='red'><b>[src] suddenly crumbles away.</b></font>")
 			else
-				user.visible_message("<font color='red'><b>[src] suddenly crumbles away.</b></font>",\
+				user.visible_message("<font colour='red'><b>[src] suddenly crumbles away.</b></font>",\
 				"\blue [src] has been whittled away under your careful excavation, but there was nothing of interest inside.")
 			del(src)

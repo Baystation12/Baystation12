@@ -248,7 +248,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 		if(!announcementConsole)	return
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))
-				M << "<b><font size = 3><font color = red>[department] announcement:</font color> [message]</font size></b>"
+				M << "<b><font size = 3><font colour = red>[department] announcement:</font colour> [message]</font size></b>"
 		announceAuth = 0
 		message = ""
 		screen = 0
@@ -285,7 +285,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 									playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 									for (var/mob/O in hearers(5, Console.loc))
 										O.show_message(text("\icon[Console] *The Requests Console beeps: 'PRIORITY Alert in [department]'"))
-								Console.messages += "<B><FONT color='red'>High Priority message from <A href='?src=\ref[Console];write=[ckey(department)]'>[department]</A></FONT></B><BR>[sending]"
+								Console.messages += "<B><FONT colour='red'>High Priority message from <A href='?src=\ref[Console];write=[ckey(department)]'>[department]</A></FONT></B><BR>[sending]"
 
 		//					if("3")		//Not implemanted, but will be 		//Removed as it doesn't look like anybody intends on implimenting it ~Carn
 		//						if(Console.newmessagepriority < 3)
@@ -295,7 +295,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 		//							playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		//							for (var/mob/O in hearers(7, Console.loc))
 		//								O.show_message(text("\icon[Console] *The Requests Console yells: 'EXTREME PRIORITY alert in [department]'"))
-		//						Console.messages += "<B><FONT color='red'>Extreme Priority message from [ckey(department)]</FONT></B><BR>[message]"
+		//						Console.messages += "<B><FONT colour='red'>Extreme Priority message from [ckey(department)]</FONT></B><BR>[message]"
 
 							else		// Normal priority
 								if(Console.newmessagepriority < 1)
@@ -383,7 +383,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	if (istype(O, /obj/item/weapon/card/id))
 		if(screen == 9)
 			var/obj/item/weapon/card/id/T = O
-			msgVerified = text("<font color='green'><b>Verified by [T.registered_name] ([T.assignment])</b></font>")
+			msgVerified = text("<font colour='green'><b>Verified by [T.registered_name] ([T.assignment])</b></font>")
 			updateUsrDialog()
 		if(screen == 10)
 			var/obj/item/weapon/card/id/ID = O
@@ -396,6 +396,6 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	if (istype(O, /obj/item/weapon/stamp))
 		if(screen == 9)
 			var/obj/item/weapon/stamp/T = O
-			msgStamped = text("<font color='blue'><b>Stamped with the [T.name]</b></font>")
+			msgStamped = text("<font colour='blue'><b>Stamped with the [T.name]</b></font>")
 			updateUsrDialog()
 	return

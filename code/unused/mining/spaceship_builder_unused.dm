@@ -142,7 +142,7 @@
 
 	var/dat
 	dat = text("<b>Ship fabricator</b><br><br>")
-	dat += text("Current ammount of <font color='gray'>Metal: <b>[metal_amount]</b></font><br><hr>")
+	dat += text("Current ammount of <font colour='gray'>Metal: <b>[metal_amount]</b></font><br><hr>")
 
 	if (currentShuttleArea)
 		dat += text("<b>Currently building</b><br><br>[currentShuttleName]<br><br>")

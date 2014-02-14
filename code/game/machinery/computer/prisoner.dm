@@ -38,9 +38,9 @@
 				if((Tr) && (Tr.z != src.z))	continue//Out of range
 				if(!C.implanted) continue
 				dat += "[C.imp_in.name] | Remaining Units: [C.reagents.total_volume] | Inject: "
-				dat += "<A href='?src=\ref[src];inject1=\ref[C]'>(<font color=red>(1)</font>)</A>"
-				dat += "<A href='?src=\ref[src];inject5=\ref[C]'>(<font color=red>(5)</font>)</A>"
-				dat += "<A href='?src=\ref[src];inject10=\ref[C]'>(<font color=red>(10)</font>)</A><BR>"
+				dat += "<A href='?src=\ref[src];inject1=\ref[C]'>(<font colour=red>(1)</font>)</A>"
+				dat += "<A href='?src=\ref[src];inject5=\ref[C]'>(<font colour=red>(5)</font>)</A>"
+				dat += "<A href='?src=\ref[src];inject10=\ref[C]'>(<font colour=red>(10)</font>)</A><BR>"
 				dat += "********************************<BR>"
 			dat += "<HR>Tracking Implants<BR>"
 			for(var/obj/item/weapon/implant/tracking/T in world)
@@ -55,7 +55,7 @@
 				if(T.malfunction)
 					loc_display = pick(teleportlocs)
 				dat += "ID: [T.id] | Location: [loc_display]<BR>"
-				dat += "<A href='?src=\ref[src];warn=\ref[T]'>(<font color=red><i>Message Holder</i></font>)</A> |<BR>"
+				dat += "<A href='?src=\ref[src];warn=\ref[T]'>(<font colour=red><i>Message Holder</i></font>)</A> |<BR>"
 				dat += "********************************<BR>"
 			dat += "<HR><A href='?src=\ref[src];lock=1'>Lock Console</A>"
 

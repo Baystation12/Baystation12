@@ -27,7 +27,7 @@
 		var/pushstring
 
 		if(subpos == subblock && blockpos == block) // if the current block/subblock is selected, mark it
-			pushstring = "</font color><b>[copytext(input, i, i+1)]</b><font color='blue'>"
+			pushstring = "</font colour><b>[copytext(input, i, i+1)]</b><font colour='blue'>"
 		else
 			if(ui) //This is for allowing block clicks to be differentiated
 				pushstring = "<a href='?src=\ref[src];uimenuset=[num2text(blockpos)];uimenusubset=[num2text(subpos)]'>[copytext(input, i, i+1)]</a>"
@@ -37,7 +37,7 @@
 		string += pushstring // push the string to the return string
 
 		if(subpos >= blocksize) // add a line break for every block
-			string += " </font color><font color='#285B5B'>|</font color><font color='blue'> "
+			string += " </font colour><font colour='#285B5B'>|</font colour><font colour='blue'> "
 			subpos = 0
 			blockpos++
 

@@ -85,7 +85,7 @@ turf/simulated/wall/impassable_rock
 
 /obj/effect/landmark/corpse/alien/testsubject
 	name = "Unfortunate Test Subject"
-	corpseuniform = /obj/item/clothing/under/color/white
+	corpseuniform = /obj/item/clothing/under/colour/white
 	corpseid = 0
 
 /obj/effect/landmark/corpse/overseer
@@ -250,7 +250,7 @@ Alien plants should do something if theres a lot of poison
 	name = "warden's jumpsuit"
 	icon_state = "wardendnavyclothes"
 	item_state = "wardendnavyclothes"
-	item_color = "wardendnavyclothes"
+	item_colour = "wardendnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
 
@@ -259,7 +259,7 @@ Alien plants should do something if theres a lot of poison
 	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
 	icon_state = "officerdnavyclothes"
 	item_state = "officerdnavyclothes"
-	item_color = "officerdnavyclothes"
+	item_colour = "officerdnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
 
@@ -268,7 +268,7 @@ Alien plants should do something if theres a lot of poison
 	name = "head of security's jumpsuit"
 	icon_state = "hosdnavyclothes"
 	item_state = "hosdnavyclothes"
-	item_color = "hosdnavyclothes"
+	item_colour = "hosdnavyclothes"
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS
 
@@ -287,7 +287,7 @@ Alien plants should do something if theres a lot of poison
 
 /obj/item/clothing/head/beret/navywarden
 	name = "warden's beret"
-	desc = "A beret with a two-colored security insignia emblazoned on it. For wardens that are more inclined towards style than safety."
+	desc = "A beret with a two-coloured security insignia emblazoned on it. For wardens that are more inclined towards style than safety."
 	icon_state = "wardenberet"
 	flags = FPRINT | TABLEPASS
 

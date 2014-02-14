@@ -21,7 +21,7 @@
 
 	if(istype(M, /mob/living/carbon/human) || istype(M, /mob/living/carbon/monkey))
 		for(var/mob/O in viewers(world.view, src.loc))
-			O << "<font color='red'>[M] triggered the \icon[src] [src]</font>"
+			O << "<font colour='red'>[M] triggered the \icon[src] [src]</font>"
 		triggered = 1
 		call(src,triggerproc)(M)
 

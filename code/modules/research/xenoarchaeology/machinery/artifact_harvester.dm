@@ -62,7 +62,7 @@
 			else
 				dat += "No battery inserted.<BR>"
 	else
-		dat += "<B><font color=red>Unable to locate analysis pad.</font><BR></b>"
+		dat += "<B><font colour=red>Unable to locate analysis pad.</font><BR></b>"
 	//
 	dat += "<HR>"
 	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</A> <A href='?src=\ref[src];close=1'>Close<BR>"

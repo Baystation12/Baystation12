@@ -15,18 +15,18 @@
 			entry += " - Playing as [C.mob.real_name]"
 			switch(C.mob.stat)
 				if(UNCONSCIOUS)
-					entry += " - <font color='darkgray'><b>Unconscious</b></font>"
+					entry += " - <font colour='darkgray'><b>Unconscious</b></font>"
 				if(DEAD)
 					if(isobserver(C.mob))
 						var/mob/dead/observer/O = C.mob
 						if(O.started_as_observer)
-							entry += " - <font color='gray'>Observing</font>"
+							entry += " - <font colour='gray'>Observing</font>"
 						else
-							entry += " - <font color='black'><b>DEAD</b></font>"
+							entry += " - <font colour='black'><b>DEAD</b></font>"
 					else
-						entry += " - <font color='black'><b>DEAD</b></font>"
+						entry += " - <font colour='black'><b>DEAD</b></font>"
 			if(is_special_character(C.mob))
-				entry += " - <b><font color='red'>Antagonist</font></b>"
+				entry += " - <b><font colour='red'>Antagonist</font></b>"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			Lines += entry
 	else

@@ -54,15 +54,15 @@
 
 
 	if(crayon)
-		var/wash_color
+		var/wash_colour
 		if(istype(crayon,/obj/item/toy/crayon))
 			var/obj/item/toy/crayon/CR = crayon
-			wash_color = CR.colourName
+			wash_colour = CR.colourName
 		else if(istype(crayon,/obj/item/weapon/stamp))
 			var/obj/item/weapon/stamp/ST = crayon
-			wash_color = ST.item_color
+			wash_colour = ST.item_colour
 
-		if(wash_color)
+		if(wash_colour)
 			var/new_jumpsuit_icon_state = ""
 			var/new_jumpsuit_item_state = ""
 			var/new_jumpsuit_name = ""
@@ -75,11 +75,11 @@
 			var/new_sheet_name = ""
 			var/new_softcap_icon_state = ""
 			var/new_softcap_name = ""
-			var/new_desc = "The colors are a bit dodgy."
+			var/new_desc = "The colours are a bit dodgy."
 			for(var/T in typesof(/obj/item/clothing/under))
 				var/obj/item/clothing/under/J = new T
-				//world << "DEBUG: [color] == [J.color]"
-				if(wash_color == J.item_color)
+				//world << "DEBUG: [colour] == [J.colour]"
+				if(wash_colour == J.item_colour)
 					new_jumpsuit_icon_state = J.icon_state
 					new_jumpsuit_item_state = J.item_state
 					new_jumpsuit_name = J.name
@@ -89,8 +89,8 @@
 				del(J)
 			for(var/T in typesof(/obj/item/clothing/gloves))
 				var/obj/item/clothing/gloves/G = new T
-				//world << "DEBUG: [color] == [J.color]"
-				if(wash_color == G.item_color)
+				//world << "DEBUG: [colour] == [J.colour]"
+				if(wash_colour == G.item_colour)
 					new_glove_icon_state = G.icon_state
 					new_glove_item_state = G.item_state
 					new_glove_name = G.name
@@ -100,8 +100,8 @@
 				del(G)
 			for(var/T in typesof(/obj/item/clothing/shoes))
 				var/obj/item/clothing/shoes/S = new T
-				//world << "DEBUG: [color] == [J.color]"
-				if(wash_color == S.item_color)
+				//world << "DEBUG: [colour] == [J.colour]"
+				if(wash_colour == S.item_colour)
 					new_shoe_icon_state = S.icon_state
 					new_shoe_name = S.name
 					del(S)
@@ -110,8 +110,8 @@
 				del(S)
 			for(var/T in typesof(/obj/item/weapon/bedsheet))
 				var/obj/item/weapon/bedsheet/B = new T
-				//world << "DEBUG: [color] == [J.color]"
-				if(wash_color == B.item_color)
+				//world << "DEBUG: [colour] == [J.colour]"
+				if(wash_colour == B.item_colour)
 					new_sheet_icon_state = B.icon_state
 					new_sheet_name = B.name
 					del(B)
@@ -120,8 +120,8 @@
 				del(B)
 			for(var/T in typesof(/obj/item/clothing/head/soft))
 				var/obj/item/clothing/head/soft/H = new T
-				//world << "DEBUG: [color] == [J.color]"
-				if(wash_color == H.item_color)
+				//world << "DEBUG: [colour] == [J.colour]"
+				if(wash_colour == H.item_colour)
 					new_softcap_icon_state = H.icon_state
 					new_softcap_name = H.name
 					del(H)
@@ -133,7 +133,7 @@
 					//world << "DEBUG: YUP! FOUND IT!"
 					J.item_state = new_jumpsuit_item_state
 					J.icon_state = new_jumpsuit_icon_state
-					J.item_color = wash_color
+					J.item_colour = wash_colour
 					J.name = new_jumpsuit_name
 					J.desc = new_desc
 			if(new_glove_icon_state && new_glove_item_state && new_glove_name)
@@ -141,7 +141,7 @@
 					//world << "DEBUG: YUP! FOUND IT!"
 					G.item_state = new_glove_item_state
 					G.icon_state = new_glove_icon_state
-					G.item_color = wash_color
+					G.item_colour = wash_colour
 					G.name = new_glove_name
 					G.desc = new_desc
 			if(new_shoe_icon_state && new_shoe_name)
@@ -152,21 +152,21 @@
 						S.slowdown = SHOES_SLOWDOWN
 						new /obj/item/weapon/handcuffs( src )
 					S.icon_state = new_shoe_icon_state
-					S.item_color = wash_color
+					S.item_colour = wash_colour
 					S.name = new_shoe_name
 					S.desc = new_desc
 			if(new_sheet_icon_state && new_sheet_name)
 				for(var/obj/item/weapon/bedsheet/B in contents)
 					//world << "DEBUG: YUP! FOUND IT!"
 					B.icon_state = new_sheet_icon_state
-					B.item_color = wash_color
+					B.item_colour = wash_colour
 					B.name = new_sheet_name
 					B.desc = new_desc
 			if(new_softcap_icon_state && new_softcap_name)
 				for(var/obj/item/clothing/head/soft/H in contents)
 					//world << "DEBUG: YUP! FOUND IT!"
 					H.icon_state = new_softcap_icon_state
-					H.item_color = wash_color
+					H.item_colour = wash_colour
 					H.name = new_softcap_name
 					H.desc = new_desc
 		del(crayon)

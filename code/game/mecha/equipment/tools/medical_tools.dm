@@ -60,7 +60,7 @@
 			if(chassis.loc!=C || target.loc!=T)
 				return
 			if(occupant)
-				occupant_message("<font color=\"red\"><B>The sleeper is already occupied!</B></font>")
+				occupant_message("<font colour=\"red\"><B>The sleeper is already occupied!</B></font>")
 				return
 			target.forceMove(src)
 			occupant = target
@@ -72,7 +72,7 @@
 			*/
 			set_ready_state(0)
 			pr_mech_sleeper.start()
-			occupant_message("<font color='blue'>[target] successfully loaded into [src]. Life support functions engaged.</font>")
+			occupant_message("<font colour='blue'>[target] successfully loaded into [src]. Life support functions engaged.</font>")
 			chassis.visible_message("[chassis] loads [target] into [src].")
 			log_message("[target] loaded. Life support functions engaged.")
 		return
@@ -163,12 +163,12 @@
 				t1 = "*dead*"
 			else
 				t1 = "Unknown"
-		return {"<font color="[occupant.health > 50 ? "blue" : "red"]"><b>Health:</b> [occupant.health]% ([t1])</font><br />
-					<font color="[occupant.bodytemperature > 50 ? "blue" : "red"]"><b>Core Temperature:</b> [src.occupant.bodytemperature-T0C]&deg;C ([src.occupant.bodytemperature*1.8-459.67]&deg;F)</font><br />
-					<font color="[occupant.getBruteLoss() < 60 ? "blue" : "red"]"><b>Brute Damage:</b> [occupant.getBruteLoss()]%</font><br />
-					<font color="[occupant.getOxyLoss() < 60 ? "blue" : "red"]"><b>Respiratory Damage:</b> [occupant.getOxyLoss()]%</font><br />
-					<font color="[occupant.getToxLoss() < 60 ? "blue" : "red"]"><b>Toxin Content:</b> [occupant.getToxLoss()]%</font><br />
-					<font color="[occupant.getFireLoss() < 60 ? "blue" : "red"]"><b>Burn Severity:</b> [occupant.getFireLoss()]%</font><br />
+		return {"<font colour="[occupant.health > 50 ? "blue" : "red"]"><b>Health:</b> [occupant.health]% ([t1])</font><br />
+					<font colour="[occupant.bodytemperature > 50 ? "blue" : "red"]"><b>Core Temperature:</b> [src.occupant.bodytemperature-T0C]&deg;C ([src.occupant.bodytemperature*1.8-459.67]&deg;F)</font><br />
+					<font colour="[occupant.getBruteLoss() < 60 ? "blue" : "red"]"><b>Brute Damage:</b> [occupant.getBruteLoss()]%</font><br />
+					<font colour="[occupant.getOxyLoss() < 60 ? "blue" : "red"]"><b>Respiratory Damage:</b> [occupant.getOxyLoss()]%</font><br />
+					<font colour="[occupant.getToxLoss() < 60 ? "blue" : "red"]"><b>Toxin Content:</b> [occupant.getToxLoss()]%</font><br />
+					<font colour="[occupant.getFireLoss() < 60 ? "blue" : "red"]"><b>Burn Severity:</b> [occupant.getFireLoss()]%</font><br />
 					"}
 
 	proc/get_occupant_reagents()
@@ -276,7 +276,7 @@
 		var/result = load_cable(target)
 		var/message
 		if(isnull(result))
-			message = "<font color='red'>Unable to load [target] - no cable found.</font>"
+			message = "<font colour='red'>Unable to load [target] - no cable found.</font>"
 		else if(!result)
 			message = "Reel is full."
 		else

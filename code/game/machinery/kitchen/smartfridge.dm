@@ -132,12 +132,12 @@
 	var/dat = "<TT><b>Select an item:</b><br>"
 
 	if (contents.len == 0)
-		dat += "<font color = 'red'>No product loaded!</font>"
+		dat += "<font colour = 'red'>No product loaded!</font>"
 	else
 		for (var/O in item_quants)
 			if(item_quants[O] > 0)
 				var/N = item_quants[O]
-				dat += "<FONT color = 'blue'><B>[capitalize(O)]</B>:"
+				dat += "<FONT colour = 'blue'><B>[capitalize(O)]</B>:"
 				dat += " [N] </font>"
 				dat += "<a href='byond://?src=\ref[src];vend=[O];amount=1'>Vend</A> "
 				if(N > 5)

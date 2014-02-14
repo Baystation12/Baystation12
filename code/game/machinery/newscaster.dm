@@ -743,7 +743,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 
 /obj/machinery/newscaster/attack_paw(mob/user as mob)
-	user << "<font color='blue'>The newscaster controls are far too complicated for your tiny brain!</font>"
+	user << "<font colour='blue'>The newscaster controls are far too complicated for your tiny brain!</font>"
 	return
 
 /obj/machinery/newscaster/proc/AttachPhoto(mob/user as mob)

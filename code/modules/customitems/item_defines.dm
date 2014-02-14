@@ -105,8 +105,8 @@
 	icon_state = "matthewriebhardt"
 
 /obj/item/weapon/pen/fluff/multi //spaceman96: Trenna Seber
-	name = "multicolor pen"
-	desc = "It's a cool looking pen. Lots of colors!"
+	name = "multicolour pen"
+	desc = "It's a cool looking pen. Lots of colours!"
 
 /obj/item/weapon/pen/fluff/fancypen //orangebottle: Lillian Levett, Lilliana Reade
 	name = "fancy pen"
@@ -141,7 +141,7 @@
 	desc = "A faded badge, backed with leather, that reads 'NT Security Force' across the front. It bears the emblem of the Forensic division."
 	icon_state = "ana_badge"
 	item_state = "ana_badge"
-	item_color = "ana_badge"
+	item_colour = "ana_badge"
 
 /obj/item/fluff/ana_issek_2/attack_self(mob/user as mob)
 	if(isliving(user))
@@ -360,7 +360,7 @@
 
 /obj/item/weapon/reagent_containers/hypospray/fluff/asher_spock_1
 	name = "strange penlight"
-	desc = "Besides the coloring, this penlight looks rather normal and innocent. However, you get a nagging feeling whenever you see it..."
+	desc = "Besides the colouring, this penlight looks rather normal and innocent. However, you get a nagging feeling whenever you see it..."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "asher_spock_1"
 	amount_per_transfer_from_this = 5
@@ -477,7 +477,7 @@
 	item_state = "lgloves"
 	siemens_coefficient = 0.30
 	permeability_coefficient = 0.01
-	item_color="white"
+	item_colour="white"
 	species_restricted = list("exclude","Unathi")
 
 /obj/item/clothing/gloves/fluff/walter_brooks_1 //botanistpower: Walter Brooks
@@ -486,7 +486,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "walter_brooks_1"
 	item_state = "bluegloves"
-	item_color="blue"
+	item_colour="blue"
 
 /obj/item/clothing/gloves/fluff/chal_appara_1 //furlucis: Chal Appara
 	name = "Left Black Glove"
@@ -567,7 +567,7 @@
 
 /obj/item/clothing/head/fluff/bruce_hachert //Stup1dg33kz: Bruce Hachert
 	name = "worn hat"
-	desc = "A worn-looking hat. It is slightly faded in color."
+	desc = "A worn-looking hat. It is slightly faded in colour."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "brucehachert"
 
@@ -591,7 +591,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "leatherjack"
 	item_state = "leatherjack"
-	item_color = "leatherjack"
+	item_colour = "leatherjack"
 
 /obj/item/clothing/suit/armor/vest/fluff/deus_blueshield //deusdactyl
 	name = "blue shield security armor"
@@ -616,7 +616,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "milohachert"
 	item_state = "milohachert"
-	item_color = "milohachert"
+	item_colour = "milohachert"
 
 /obj/item/clothing/under/fluff/jumpsuitdown //searif: Yuki Matsuda
 	name = "rolled down jumpsuit"
@@ -624,7 +624,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "jumpsuitdown"
 	item_state = "jumpsuitdown"
-	item_color = "jumpsuitdown"
+	item_colour = "jumpsuitdown"
 
 /obj/item/clothing/under/fluff/lilith_vinous_1 //slyhidden: Lilith Vinous
 	name = "casual security uniform"
@@ -632,15 +632,15 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "lilith_uniform"
 	item_state = "lilith_uniform"
-	item_color = "lilith_uniform"
+	item_colour = "lilith_uniform"
 
 /obj/item/clothing/under/fluff/ana_issek_1 //suethecake: Ana Issek
 	name = "retired uniform"
-	desc = "A silken blouse paired with dark-colored slacks. It has the words 'Chief Investigator' embroidered into the shoulder bar."
+	desc = "A silken blouse paired with dark-coloured slacks. It has the words 'Chief Investigator' embroidered into the shoulder bar."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "ana_uniform"
 	item_state = "ana_uniform"
-	item_color = "ana_uniform"
+	item_colour = "ana_uniform"
 
 /obj/item/clothing/under/fluff/olddressuniform //desiderium: Momiji Inubashiri
 	name = "retired dress uniform"
@@ -648,14 +648,14 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "olddressuniform"
 	item_state = "olddressuniform"
-	item_color = "olddressuniform"
+	item_colour = "olddressuniform"
 
 /obj/item/clothing/under/rank/security/fluff/jeremy_wolf_1 //whitewolf41: Jeremy Wolf
 	name = "worn officer's uniform"
 	desc = "An old red security jumpsuit. Seems to have some slight modifications."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "jeremy_wolf_1"
-	item_color = "jeremy_wolf_1"
+	item_colour = "jeremy_wolf_1"
 
 /obj/item/clothing/under/fluff/tian_dress //phaux: Tian Yinhu
 	name = "purple dress"
@@ -663,7 +663,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "tian_dress"
 	item_state = "tian_dress"
-	item_color = "tian_dress"
+	item_colour = "tian_dress"
 
 /obj/item/clothing/under/rank/bartender/fluff/classy	//searif: Ara Al-Jazari
 	name = "classy bartender uniform"
@@ -671,7 +671,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "ara_bar_uniform"
 	item_state = "ara_bar_uniform"
-	item_color = "ara_bar_uniform"
+	item_colour = "ara_bar_uniform"
 
 /obj/item/clothing/under/fluff/callum_suit //roaper: Callum Leamus
 	name = "knockoff suit"
@@ -679,7 +679,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "callum_suit"
 	item_state = "callum_suit"
-	item_color = "callum_suit"
+	item_colour = "callum_suit"
 
 /obj/item/clothing/under/fluff/solara_light_1 //bluefishie: Solara Born-In-Light
 	name = "Elaborate Purple Dress"
@@ -687,7 +687,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "solara_dress"
 	item_state = "solara_dress"
-	item_color = "solara_dress"
+	item_colour = "solara_dress"
 
 /////// NT-SID Suit //Zuhayr: Jane Doe
 
@@ -698,7 +698,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "jane_sid_suit"
 	item_state = "jane_sid_suit"
-	item_color = "jane_sid_suit"
+	item_colour = "jane_sid_suit"
 	has_sensor = 2
 	sensor_mode = 3
 	flags = FPRINT | TABLEPASS
@@ -713,14 +713,14 @@
 		return 0
 
 	if(src.icon_state == "jane_sid_suit_down")
-		src.item_color = "jane_sid_suit"
+		src.item_colour = "jane_sid_suit"
 		usr << "You zip up the [src]."
 	else
-		src.item_color = "jane_sid_suit_down"
+		src.item_colour = "jane_sid_suit_down"
 		usr << "You unzip and roll down the [src]."
 
-	src.icon_state = "[item_color]"
-	src.item_state = "[item_color]"
+	src.icon_state = "[item_colour]"
+	src.item_state = "[item_colour]"
 	usr.update_inv_w_uniform()
 
 ////// Wyatt's Ex-Commander Jumpsuit - RawrTaicho
@@ -731,7 +731,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "wyatt_uniform"
 	item_state = "wyatt_uniform"
-	item_color = "wyatt_uniform"
+	item_colour = "wyatt_uniform"
 
 ////// Black Dress - Lillian Amsel - PapaDrow
 /obj/item/clothing/under/fluff/lillian_amsel_1
@@ -740,7 +740,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "lillian_dress"
 	item_state = "lillian_dress"
-	item_color = "lillian_dress"
+	item_colour = "lillian_dress"
 
 //////////// Masks ////////////
 
@@ -772,7 +772,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "altair_locket"
 	item_state = "altair_locket"
-	item_color = "altair_locket"
+	item_colour = "altair_locket"
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 1
@@ -786,7 +786,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "konaahirano"
 	item_state = "konaahirano"
-	item_color = "konaahirano"
+	item_colour = "konaahirano"
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
 	w_class = 1
@@ -845,7 +845,7 @@
 
 /obj/item/clothing/shoes/magboots/fluff/susan_harris_1 //sniperyeti: Susan Harris
 	name = "Susan's Magboots"
-	desc = "A colorful pair of magboots with the name Susan Harris clearly written on the back."
+	desc = "A colourful pair of magboots with the name Susan Harris clearly written on the back."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "atmosmagboots0"
 
@@ -866,7 +866,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "medical_short"
 	item_state = "medical_short"
-	item_color = "medical_short"
+	item_colour = "medical_short"
 
 /obj/item/clothing/suit/storage/labcoat/fluff/red
 	name = "red labcoat"
@@ -882,7 +882,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "retpolcoat"
 	item_state = "retpolcoat"
-	item_color = "retpolcoat"
+	item_colour = "retpolcoat"
 
 /obj/item/clothing/head/det_hat/fluff/retpolcap
 	name = "retired colony patrolman's cap"
@@ -895,7 +895,7 @@
 	desc = "A meticulously clean police uniform belonging to Precinct 31, Outer Light Colony. The word \"RETIRED\" is engraved tastefully and professionally in the badge below the number, 501."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "retpoluniform"
-	item_color = "retpoluniform"
+	item_colour = "retpoluniform"
 
 //////////// Weapons ////////////
 
@@ -948,11 +948,11 @@
 /obj/item/weapon/reagent_containers/glass/bottle/fluff/nashi_bottle
 	icon = 'icons/obj/chemical.dmi'
 	flags = FPRINT | TABLEPASS //Starting them with lids on them.  Safety first!
-	New(loc, var/color, var/labeled)
+	New(loc, var/colour, var/labeled)
 		..()
 		name = "[labeled] bottle"
 		desc = "A small bottle.  Contains [labeled]"
-		icon_state = "bottle[color]"
+		icon_state = "bottle[colour]"
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/fluff/yuri_kornienkovich_flask
 	name = "Yuri's Flask"
@@ -966,7 +966,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "mai_yang"
 	item_state = "mai_yang"
-	item_color = "mai_yang"
+	item_colour = "mai_yang"
 
 /obj/item/clothing/under/fluff/sakura_hokkaido_kimono
 	name = "Sakura Kimono"
@@ -974,5 +974,5 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "sakura_hokkaido_kimono"
 	item_state = "sakura_hokkaido_kimono"
-	item_color = "sakura_hokkaido_kimono"
+	item_colour = "sakura_hokkaido_kimono"
 

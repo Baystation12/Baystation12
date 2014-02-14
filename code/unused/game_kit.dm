@@ -28,11 +28,11 @@ Which I am commenting out /N
 		dat += "<tr>"
 
 		for (var/x = 1 to 8)
-			var/color = (y + x) % 2 ? "#ffffff" : "#999999"
+			var/colour = (y + x) % 2 ? "#ffffff" : "#999999"
 			var/piece = copytext(src.board_stat, ((y - 1) * 8 + x) * 2 - 1, ((y - 1) * 8 + x) * 2 + 1)
 
 			dat += "<td>"
-			dat += "<td style='background-color:[color]' width=32 height=32>"
+			dat += "<td style='background-colour:[colour]' width=32 height=32>"
 			if (piece != "BB")
 				dat += "<a href='?src=\ref[src];s_board=[x] [y]'><img src='[src.base_url]/board_[piece].png' width=32 height=32 border=0>"
 			else

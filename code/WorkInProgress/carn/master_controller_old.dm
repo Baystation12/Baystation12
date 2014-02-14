@@ -183,7 +183,7 @@ datum/controller/game_controller
 						IL_check++
 						if(IL_check > 600)
 							var/MC_report = "air_master_ready = [air_master_ready]; sun_ready = [sun_ready]; mobs_ready = [mobs_ready]; diseases_ready = [diseases_ready]; machines_ready = [machines_ready]; objects_ready = [objects_ready]; networks_ready = [networks_ready]; powernets_ready = [powernets_ready]; ticker_ready = [ticker_ready];"
-							message_admins("<b><font color='red'>PROC BREAKAGE WARNING:</font> The game's master contorller appears to be stuck in one of it's cycles. It has looped through it's delaying loop [IL_check] times.</b>")
+							message_admins("<b><font colour='red'>PROC BREAKAGE WARNING:</font> The game's master contorller appears to be stuck in one of it's cycles. It has looped through it's delaying loop [IL_check] times.</b>")
 							message_admins("<b>The master controller reports: [MC_report]</b>")
 							if(!diseases_ready)
 								if(last_disease_processed)
@@ -201,7 +201,7 @@ datum/controller/game_controller
 								else
 									message_admins("<b>OBJ PROCESSING stuck on </b>unknown")
 							log_admin("PROC BREAKAGE WARNING: infinite_loop_check = [IL_check]; [MC_report];")
-							message_admins("<font color='red'><b>Master controller breaking out of delaying loop. Restarting the round is advised if problem persists. DO NOT manually restart the master controller.</b></font>")
+							message_admins("<font colour='red'><b>Master controller breaking out of delaying loop. Restarting the round is advised if problem persists. DO NOT manually restart the master controller.</b></font>")
 							break;
 						sleep(1)
 

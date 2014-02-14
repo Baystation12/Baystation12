@@ -52,8 +52,8 @@
 		if (istype(C, /mob/living/carbon/human))
 			if(!C.handcuffed)
 
-				C.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
-				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [C.name] ([C.ckey])</font>")
+				C.attack_log += text("\[[time_stamp()]\] <font colour='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
+				user.attack_log += text("\[[time_stamp()]\] <font colour='red'>Attempted to handcuff [C.name] ([C.ckey])</font>")
 				log_attack("[user.name] ([user.ckey]) Attempted to handcuff [C.name] ([C.ckey])")
 
 				var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human(  )
@@ -99,28 +99,28 @@
 	breakouttime = 300 //Deciseconds = 30s
 
 /obj/item/weapon/handcuffs/cable/red
-	color = "#DD0000"
+	colour = "#DD0000"
 
 /obj/item/weapon/handcuffs/cable/yellow
-	color = "#DDDD00"
+	colour = "#DDDD00"
 
 /obj/item/weapon/handcuffs/cable/blue
-	color = "#0000DD"
+	colour = "#0000DD"
 
 /obj/item/weapon/handcuffs/cable/green
-	color = "#00DD00"
+	colour = "#00DD00"
 
 /obj/item/weapon/handcuffs/cable/pink
-	color = "#DD00DD"
+	colour = "#DD00DD"
 
 /obj/item/weapon/handcuffs/cable/orange
-	color = "#DD8800"
+	colour = "#DD8800"
 
 /obj/item/weapon/handcuffs/cable/cyan
-	color = "#00DDDD"
+	colour = "#00DDDD"
 
 /obj/item/weapon/handcuffs/cable/white
-	color = "#FFFFFF"
+	colour = "#FFFFFF"
 
 /obj/item/weapon/handcuffs/cyborg
 	dispenser = 1

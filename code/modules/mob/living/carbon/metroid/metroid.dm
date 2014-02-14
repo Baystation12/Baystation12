@@ -324,8 +324,8 @@
 			playsound(loc, M.attack_sound, 50, 1, 1)
 		for(var/mob/O in viewers(src, null))
 			O.show_message("\red <B>[M]</B> [M.attacktext] [src]!", 1)
-		M.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name] ([src.ckey])</font>")
-		src.attack_log += text("\[[time_stamp()]\] <font color='orange'>was attacked by [M.name] ([M.ckey])</font>")
+		M.attack_log += text("\[[time_stamp()]\] <font colour='red'>attacked [src.name] ([src.ckey])</font>")
+		src.attack_log += text("\[[time_stamp()]\] <font colour='orange'>was attacked by [M.name] ([M.ckey])</font>")
 		var/damage = rand(M.melee_damage_lower, M.melee_damage_upper)
 		adjustBruteLoss(damage)
 		updatehealth()
@@ -818,7 +818,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 	desc = "a golem's skin"
 	icon_state = "golem"
 	item_state = "golem"
-	item_color = "golem"
+	item_colour = "golem"
 	has_sensor = 0
 	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	canremove = 0
@@ -883,7 +883,7 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 /obj/item/clothing/head/space/golem
 	icon_state = "golem"
 	item_state = "dermal"
-	item_color = "dermal"
+	item_colour = "dermal"
 	name = "golem's head"
 	desc = "a golem's head"
 	canremove = 0

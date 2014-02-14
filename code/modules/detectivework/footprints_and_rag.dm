@@ -4,7 +4,7 @@
 	var/track_blood = 0
 	var/list/feet_blood_DNA
 	var/track_blood_type
-	var/feet_blood_color
+	var/feet_blood_colour
 
 /obj/item/clothing/gloves
 	var/transfer_blood = 0

@@ -127,7 +127,7 @@ proc/move_mining_shuttle()
 	dat = "<center>Mining Shuttle Control<hr>"
 
 	if(mining_shuttle_moving)
-		dat += "Location: <font color='red'>Moving</font> <br>"
+		dat += "Location: <font colour='red'>Moving</font> <br>"
 	else
 		dat += "Location: [mining_shuttle_location ? "Outpost" : "Station"] <br>"
 

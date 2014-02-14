@@ -113,7 +113,7 @@
 	desc = "Needs some butter!"
 	icon_state = "corn"
 	potency = 40
-	filling_color = "#FFEE00"
+	filling_colour = "#FFEE00"
 	trash = /obj/item/weapon/corncob
 
 	New()
@@ -127,7 +127,7 @@
 	name = "cherries"
 	desc = "Great for toppings!"
 	icon_state = "cherry"
-	filling_color = "#FF0000"
+	filling_colour = "#FF0000"
 	gender = PLURAL
 	New()
 		..()
@@ -142,7 +142,7 @@
 	desc = "Long-used as a symbol of rest, peace, and death."
 	icon_state = "poppy"
 	potency = 30
-	filling_color = "#CC6464"
+	filling_colour = "#CC6464"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -156,7 +156,7 @@
 	desc = "\"I'll sweeten thy sad grave: thou shalt not lack the flower that's like thy face, pale primrose, nor the azured hare-bell, like thy veins; no, nor the leaf of eglantine, whom not to slander, out-sweeten’d not thy breath.\""
 	icon_state = "harebell"
 	potency = 1
-	filling_color = "#D4B2C9"
+	filling_colour = "#D4B2C9"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -169,7 +169,7 @@
 	desc = "Boil 'em! Mash 'em! Stick 'em in a stew!"
 	icon_state = "potato"
 	potency = 25
-	filling_color = "#E6E8DA"
+	filling_colour = "#E6E8DA"
 	New()
 		..()
 		reagents.add_reagent("nutriment", 1+round((potency / 10), 1))
@@ -194,7 +194,7 @@
 	name = "bunch of grapes"
 	desc = "Nutritious!"
 	icon_state = "grapes"
-	filling_color = "#A332AD"
+	filling_colour = "#A332AD"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -208,7 +208,7 @@
 	desc = "Nutritious!"
 	icon_state = "greengrapes"
 	potency = 25
-	filling_color = "#A6FFA3"
+	filling_colour = "#A6FFA3"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -222,7 +222,7 @@
 	desc = "Ewwwwwwwwww. Cabbage."
 	icon_state = "cabbage"
 	potency = 25
-	filling_color = "#A2B5A1"
+	filling_colour = "#A2B5A1"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -234,7 +234,7 @@
 	name = "bunch of berries"
 	desc = "Nutritious!"
 	icon_state = "berrypile"
-	filling_color = "#C2C9FF"
+	filling_colour = "#C2C9FF"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -246,7 +246,7 @@
 	name = "clump of plastellium"
 	desc = "Hmm, needs some processing"
 	icon_state = "plastellium"
-	filling_color = "#C4C4C4"
+	filling_colour = "#C4C4C4"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -259,7 +259,7 @@
 	name = "S'rendarr's Hand leaf"
 	desc = "A leaf sample from a lowland thicket shrub, often hid in by prey and predator to staunch their wounds and conceal their scent, allowing the plant to spread far on its native Ahdomai. Smells strongly like wax."
 	icon_state = "shand"
-	filling_color = "#70C470"
+	filling_colour = "#70C470"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -271,7 +271,7 @@
 	name = "sprig of Messa's Tear"
 	desc = "A mountain climate herb with a soft, cold blue flower, known to contain an abundance of chemicals in it's flower useful to treating burns- Bad for the allergic to pollen."
 	icon_state = "mtear"
-	filling_color = "#70C470"
+	filling_colour = "#70C470"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -305,7 +305,7 @@
 	desc = "Nutritious!"
 	var/light_on = 1
 	var/brightness_on = 2 //luminosity when on
-	filling_color = "#D3FF9E"
+	filling_colour = "#D3FF9E"
 	icon_state = "glowberrypile"
 	New()
 		..()
@@ -333,7 +333,7 @@
 	desc = "Fattening... Mmmmm... chucklate."
 	icon_state = "cocoapod"
 	potency = 50
-	filling_color = "#9C8E54"
+	filling_colour = "#9C8E54"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -347,7 +347,7 @@
 	desc = "Sickly sweet."
 	icon_state = "sugarcane"
 	potency = 50
-	filling_color = "#C0C9AD"
+	filling_colour = "#C0C9AD"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -360,7 +360,7 @@
 	icon_state = "poisonberrypile"
 	gender = PLURAL
 	potency = 15
-	filling_color = "#B422C7"
+	filling_colour = "#B422C7"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -375,7 +375,7 @@
 	icon_state = "deathberrypile"
 	gender = PLURAL
 	potency = 50
-	filling_color = "#4E0957"
+	filling_colour = "#4E0957"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -390,7 +390,7 @@
 	desc = "This is a plant containing various healing chemicals."
 	icon_state = "ambrosiavulgaris"
 	potency = 10
-	filling_color = "#125709"
+	filling_colour = "#125709"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -407,7 +407,7 @@
 	desc = "Eating this makes you feel immortal!"
 	icon_state = "ambrosiadeus"
 	potency = 10
-	filling_color = "#229E11"
+	filling_colour = "#229E11"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -424,7 +424,7 @@
 	desc = "It's a little piece of Eden."
 	icon_state = "apple"
 	potency = 15
-	filling_color = "#DFE88B"
+	filling_colour = "#DFE88B"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -438,7 +438,7 @@
 	desc = "It's a little piece of Eden."
 	icon_state = "apple"
 	potency = 15
-	filling_color = "#B3BD5E"
+	filling_colour = "#B3BD5E"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -452,7 +452,7 @@
 	desc = "Emblazoned upon the apple is the word 'Kallisti'."
 	icon_state = "goldapple"
 	potency = 15
-	filling_color = "#F5CB42"
+	filling_colour = "#F5CB42"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -472,7 +472,7 @@
 	desc = "It's full of watery goodness."
 	icon_state = "watermelon"
 	potency = 10
-	filling_color = "#FA2863"
+	filling_colour = "#FA2863"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/watermelonslice
 	slices_num = 5
 	New()
@@ -487,7 +487,7 @@
 	desc = "It's large and scary."
 	icon_state = "pumpkin"
 	potency = 10
-	filling_color = "#FAB728"
+	filling_colour = "#FAB728"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -509,7 +509,7 @@
 	desc = "It's so sour, your face will twist."
 	icon_state = "lime"
 	potency = 20
-	filling_color = "#28FA59"
+	filling_colour = "#28FA59"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -522,7 +522,7 @@
 	desc = "When life gives you lemons, be grateful they aren't limes."
 	icon_state = "lemon"
 	potency = 20
-	filling_color = "#FAF328"
+	filling_colour = "#FAF328"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -535,7 +535,7 @@
 	desc = "It's an tangy fruit."
 	icon_state = "orange"
 	potency = 20
-	filling_color = "#FAAD28"
+	filling_colour = "#FAAD28"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -548,7 +548,7 @@
 	desc = "You can't beat white-beet."
 	icon_state = "whitebeet"
 	potency = 15
-	filling_color = "#FFFCCC"
+	filling_colour = "#FFFCCC"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -563,7 +563,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "banana"
 	item_state = "banana"
-	filling_color = "#FCF695"
+	filling_colour = "#FCF695"
 	trash = /obj/item/weapon/bananapeel
 
 	New()
@@ -579,7 +579,7 @@
 	name = "chili"
 	desc = "It's spicy! Wait... IT'S BURNING ME!!"
 	icon_state = "chilipepper"
-	filling_color = "#FF0000"
+	filling_colour = "#FF0000"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -597,7 +597,7 @@
 	name = "eggplant"
 	desc = "Maybe there's a chicken inside?"
 	icon_state = "eggplant"
-	filling_color = "#550F5C"
+	filling_colour = "#550F5C"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -609,7 +609,7 @@
 	name = "soybeans"
 	desc = "It's pretty bland, but oh the possibilities..."
 	gender = PLURAL
-	filling_color = "#E6E8B7"
+	filling_colour = "#E6E8B7"
 	icon_state = "soybeans"
 	New()
 		..()
@@ -622,7 +622,7 @@
 	name = "tomato"
 	desc = "I say to-mah-to, you say tom-mae-to."
 	icon_state = "tomato"
-	filling_color = "#FF0000"
+	filling_colour = "#FF0000"
 	potency = 10
 	New()
 		..()
@@ -643,7 +643,7 @@
 	desc = "I say to-mah-to, you say tom-mae-to... OH GOD IT'S EATING MY LEGS!!"
 	icon_state = "killertomato"
 	potency = 10
-	filling_color = "#FF0000"
+	filling_colour = "#FF0000"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -673,7 +673,7 @@
 	desc = "So bloody...so...very...bloody....AHHHH!!!!"
 	icon_state = "bloodtomato"
 	potency = 10
-	filling_color = "#FF0000"
+	filling_colour = "#FF0000"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -697,7 +697,7 @@
 	desc = "I say blue-mah-to, you say blue-mae-to."
 	icon_state = "bluetomato"
 	potency = 10
-	filling_color = "#586CFC"
+	filling_colour = "#586CFC"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -733,7 +733,7 @@
 	desc = "Sigh... wheat... a-grain?"
 	gender = PLURAL
 	icon_state = "wheat"
-	filling_color = "#F7E186"
+	filling_colour = "#F7E186"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -746,7 +746,7 @@
 	desc = "Rice to see you."
 	gender = PLURAL
 	icon_state = "rice"
-	filling_color = "#FFF8DB"
+	filling_colour = "#FFF8DB"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -758,7 +758,7 @@
 	name = "kudzu pod"
 	desc = "<I>Pueraria Virallis</I>: An invasive species with vines that rapidly creep and wrap around whatever they contact."
 	icon_state = "kudzupod"
-	filling_color = "#59691B"
+	filling_colour = "#59691B"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -772,7 +772,7 @@
 	desc = "It's a mutant strain of chili"
 	icon_state = "icepepper"
 	potency = 20
-	filling_color = "#66CEED"
+	filling_colour = "#66CEED"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -791,7 +791,7 @@
 	desc = "It's good for the eyes!"
 	icon_state = "carrot"
 	potency = 10
-	filling_color = "#FFC400"
+	filling_colour = "#FFC400"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -805,7 +805,7 @@
 	desc = "<I>Ganoderma lucidum</I>: A special fungus believed to help relieve stress."
 	icon_state = "reishi"
 	potency = 10
-	filling_color = "#FF4800"
+	filling_colour = "#FF4800"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -826,7 +826,7 @@
 	desc = "<I>Amanita Muscaria</I>: Learn poisonous mushrooms by heart. Only pick mushrooms you know."
 	icon_state = "amanita"
 	potency = 10
-	filling_color = "#FF0000"
+	filling_colour = "#FF0000"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -847,7 +847,7 @@
 	desc = "<I>Amanita Virosa</I>: Deadly poisonous basidiomycete fungus filled with alpha amatoxins."
 	icon_state = "angel"
 	potency = 35
-	filling_color = "#FFDEDE"
+	filling_colour = "#FFDEDE"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -868,7 +868,7 @@
 	desc = "<I>Psilocybe Semilanceata</I>: Liberate yourself!"
 	icon_state = "libertycap"
 	potency = 15
-	filling_color = "#F714BE"
+	filling_colour = "#F714BE"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -886,7 +886,7 @@
 	name = "plump-helmet"
 	desc = "<I>Plumus Hellmus</I>: Plump, soft and s-so inviting~"
 	icon_state = "plumphelmet"
-	filling_color = "#F714BE"
+	filling_colour = "#F714BE"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -898,7 +898,7 @@
 	name = "walking mushroom"
 	desc = "<I>Plumus Locomotus</I>: The beginning of the great walk."
 	icon_state = "walkingmushroom"
-	filling_color = "#FFBFEF"
+	filling_colour = "#FFBFEF"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -927,7 +927,7 @@
 	name = "chanterelle cluster"
 	desc = "<I>Cantharellus Cibarius</I>: These jolly yellow little shrooms sure look tasty!"
 	icon_state = "chanterelle"
-	filling_color = "#FFE991"
+	filling_colour = "#FFE991"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -939,7 +939,7 @@
 	name = "glowshroom cluster"
 	desc = "<I>Mycena Bregprox</I>: This species of mushroom glows in the dark. Or does it?"
 	icon_state = "glowshroom"
-	filling_color = "#DAFF91"
+	filling_colour = "#DAFF91"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops
@@ -1037,7 +1037,7 @@
 	icon_state = "bluespacetomato"
 	potency = 20
 	origin_tech = "bluespace=3"
-	filling_color = "#91F8FF"
+	filling_colour = "#91F8FF"
 	New()
 		..()
 		spawn(5)	//So potency can be set in the proc that creates these crops

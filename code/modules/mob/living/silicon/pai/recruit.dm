@@ -112,14 +112,14 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 				<style type="text/css">
 
 				p.top {
-					background-color: #AAAAAA; color: black;
+					background-colour: #AAAAAA; colour: black;
 				}
 
 				tr.d0 td {
-					background-color: #CC9999; color: black;
+					background-colour: #CC9999; colour: black;
 				}
 				tr.d1 td {
-					background-color: #9999CC; color: black;
+					background-colour: #9999CC; colour: black;
 				}
 				</style>
 				"}
@@ -164,17 +164,17 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 				<style type="text/css">
 
 				p.top {
-					background-color: #AAAAAA; color: black;
+					background-colour: #AAAAAA; colour: black;
 				}
 
 				tr.d0 td {
-					background-color: #CC9999; color: black;
+					background-colour: #CC9999; colour: black;
 				}
 				tr.d1 td {
-					background-color: #9999CC; color: black;
+					background-colour: #9999CC; colour: black;
 				}
 				tr.d2 td {
-					background-color: #99CC99; color: black;
+					background-colour: #99CC99; colour: black;
 				}
 				</style>
 				"}

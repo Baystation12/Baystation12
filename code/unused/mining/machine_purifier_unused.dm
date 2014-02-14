@@ -21,18 +21,18 @@
 	var/dat
 	dat = text("input connection status: ")
 	if (input)
-		dat += text("<b><font color='green'>CONNECTED</font></b>")
+		dat += text("<b><font colour='green'>CONNECTED</font></b>")
 	else
-		dat += text("<b><font color='red'>NOT CONNECTED</font></b>")
+		dat += text("<b><font colour='red'>NOT CONNECTED</font></b>")
 	dat += text("<br>output connection status: ")
 	if (output)
-		dat += text("<b><font color='green'>CONNECTED</font></b>")
+		dat += text("<b><font colour='green'>CONNECTED</font></b>")
 	else
-		dat += text("<b><font color='red'>NOT CONNECTED</font></b>")
+		dat += text("<b><font colour='red'>NOT CONNECTED</font></b>")
 
 	dat += text("<br><br><A href='?src=\ref[src];purify=[input]'>Purify</A>")
 
-	dat += text("<br><br>found: <font color='green'><b>[processed]</b></font>")
+	dat += text("<br><br>found: <font colour='green'><b>[processed]</b></font>")
 	user << browse("[dat]", "window=purifier")
 
 /obj/machinery/mineral/purifier/Topic(href, href_list)

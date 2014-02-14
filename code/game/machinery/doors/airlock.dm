@@ -16,7 +16,7 @@
 	pulse - sends a pulse into a wire for hacking purposes
 	cut - cuts a wire and makes any necessary state changes
 	mend - mends a wire and makes any necessary state changes
-	isWireColorCut - returns 1 if that color wire is cut, or 0 if not
+	isWireColorCut - returns 1 if that colour wire is cut, or 0 if not
 	isWireCut - returns 1 if that wire (e.g. AIRLOCK_WIRE_DOOR_BOLTS) is cut, or 0 if not
 	canAIControl - 1 if the AI can control the airlock, 0 if not (then check canAIHack to see if it can hack in)
 	canAIHack - 1 if the AI can hack into the airlock to recover control, 0 if not. Also returns 0 if the AI does not *need* to hack it.
@@ -40,27 +40,27 @@
 	var/flagIndex = 1
 	for (var/flag=1, flag<4096, flag+=flag)
 		var/valid = 0
-		var/list/colorList = list(AIRLOCK_WIRE_IDSCAN, AIRLOCK_WIRE_MAIN_POWER1, AIRLOCK_WIRE_MAIN_POWER2, AIRLOCK_WIRE_DOOR_BOLTS,
+		var/list/colourList = list(AIRLOCK_WIRE_IDSCAN, AIRLOCK_WIRE_MAIN_POWER1, AIRLOCK_WIRE_MAIN_POWER2, AIRLOCK_WIRE_DOOR_BOLTS,
 		AIRLOCK_WIRE_BACKUP_POWER1, AIRLOCK_WIRE_BACKUP_POWER2, AIRLOCK_WIRE_OPEN_DOOR, AIRLOCK_WIRE_AI_CONTROL, AIRLOCK_WIRE_ELECTRIFY,
 		AIRLOCK_WIRE_SAFETY, AIRLOCK_WIRE_SPEED, AIRLOCK_WIRE_LIGHT)
 
 		while (!valid)
-			var/colorIndex = pick(colorList)
-			if(wires[colorIndex]==0)
+			var/colourIndex = pick(colourList)
+			if(wires[colourIndex]==0)
 				valid = 1
-				wires[colorIndex] = flag
+				wires[colourIndex] = flag
 				airlockIndexToFlag[flagIndex] = flag
-				airlockIndexToWireColor[flagIndex] = colorIndex
-				airlockWireColorToIndex[colorIndex] = flagIndex
-				colorList -= colorIndex
+				airlockIndexToWireColor[flagIndex] = colourIndex
+				airlockWireColorToIndex[colourIndex] = flagIndex
+				colourList -= colourIndex
 		flagIndex+=1
 	return wires
 
 /* Example:
-Airlock wires color -> flag are { 64, 128, 256, 2, 16, 4, 8, 32, 1 }.
-Airlock wires color -> index are { 7, 8, 9, 2, 5, 3, 4, 6, 1 }.
+Airlock wires colour -> flag are { 64, 128, 256, 2, 16, 4, 8, 32, 1 }.
+Airlock wires colour -> index are { 7, 8, 9, 2, 5, 3, 4, 6, 1 }.
 Airlock index -> flag are { 1, 2, 4, 8, 16, 32, 64, 128, 256 }.
-Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
+Airlock index -> wire colour are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 */
 
 /obj/machinery/door/airlock
@@ -404,7 +404,7 @@ About the new airlock wires panel:
 			//one wire for electrifying the door. Sending a pulse through this electrifies the door for 30 seconds.
 			if(src.secondsElectrified==0)
 				shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+				usr.attack_log += text("\[[time_stamp()]\] <font colour='red'>Electrified the [name] at [x] [y] [z]</font>")
 				src.secondsElectrified = 30
 				spawn(10)
 					//TODO: Move this into process() and make pulsing reset secondsElectrified to 30
@@ -468,7 +468,7 @@ About the new airlock wires panel:
 			//Cutting this wire electrifies the door, so that the next person to touch the door without insulated gloves gets electrocuted.
 			if(src.secondsElectrified != -1)
 				shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+				usr.attack_log += text("\[[time_stamp()]\] <font colour='red'>Electrified the [name] at [x] [y] [z]</font>")
 				src.secondsElectrified = -1
 		if (AIRLOCK_WIRE_SAFETY)
 			safe = 0
@@ -1075,7 +1075,7 @@ About the new airlock wires panel:
 						usr << text("The door is already electrified. You can't re-electrify it while it's already electrified.<br>\n")
 					else
 						shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+						usr.attack_log += text("\[[time_stamp()]\] <font colour='red'>Electrified the [name] at [x] [y] [z]</font>")
 						src.secondsElectrified = 30
 						spawn(10)
 							while (src.secondsElectrified>0)
@@ -1094,7 +1094,7 @@ About the new airlock wires panel:
 						usr << text("The door is already electrified. You can't re-electrify it while it's already electrified.<br>\n")
 					else
 						shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-						usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+						usr.attack_log += text("\[[time_stamp()]\] <font colour='red'>Electrified the [name] at [x] [y] [z]</font>")
 						src.secondsElectrified = -1
 
 				if (8) // Not in order >.>

@@ -88,8 +88,8 @@
 //Disk stuff.
 /obj/item/weapon/disk/data/New()
 	..()
-	var/diskcolor = pick(0,1,2)
-	src.icon_state = "datadisk[diskcolor]"
+	var/diskcolour = pick(0,1,2)
+	src.icon_state = "datadisk[diskcolour]"
 
 /obj/item/weapon/disk/data/attack_self(mob/user as mob)
 	src.read_only = !src.read_only

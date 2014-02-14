@@ -15,7 +15,7 @@ var/global/list/image/splatter_cache=list()
 	var/base_icon = 'icons/effects/blood.dmi'
 	var/list/viruses = list()
 	blood_DNA = list()
-	var/basecolor="#A10808" // Color when wet.
+	var/basecolour="#A10808" // Color when wet.
 	var/list/datum/disease2/disease/virus2 = list()
 	var/amount = 5
 
@@ -42,8 +42,8 @@ var/global/list/image/splatter_cache=list()
 		dry()
 
 /obj/effect/decal/cleanable/blood/update_icon()
-	if(basecolor == "rainbow") basecolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
-	color = basecolor
+	if(basecolour == "rainbow") basecolour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+	colour = basecolour
 
 /obj/effect/decal/cleanable/blood/HasEntered(mob/living/carbon/human/perp)
 	if (!istype(perp))
@@ -52,18 +52,18 @@ var/global/list/image/splatter_cache=list()
 		return
 
 	if(perp.shoes)//Adding blood to shoes
-		perp.shoes.blood_color = basecolor
+		perp.shoes.blood_colour = basecolour
 		perp.shoes:track_blood = max(amount,perp.shoes:track_blood)
 		if(!perp.shoes.blood_overlay)
 			perp.shoes.generate_blood_overlay()
 		if(!perp.shoes.blood_DNA)
 			perp.shoes.blood_DNA = list()
-			perp.shoes.blood_overlay.color = basecolor
+			perp.shoes.blood_overlay.colour = basecolour
 			perp.shoes.overlays += perp.shoes.blood_overlay
 		perp.shoes.blood_DNA |= blood_DNA.Copy()
 
 	else//Or feet
-		perp.feet_blood_color = basecolor
+		perp.feet_blood_colour = basecolour
 		perp.track_blood = max(amount,perp.track_blood)
 		if(!perp.feet_blood_DNA)
 			perp.feet_blood_DNA = list()
@@ -75,7 +75,7 @@ var/global/list/image/splatter_cache=list()
 /obj/effect/decal/cleanable/blood/proc/dry()
 		name = "dried [src.name]"
 		desc = "It's dry and crusty. Someone is not doing their job."
-		color = adjust_brightness(color, -50)
+		colour = adjust_brightness(colour, -50)
 		amount = 0
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
@@ -91,7 +91,7 @@ var/global/list/image/splatter_cache=list()
 			user.blood_DNA = list()
 		user.blood_DNA |= blood_DNA.Copy()
 		user.bloody_hands += taken
-		user.hand_blood_color = basecolor
+		user.hand_blood_colour = basecolour
 		user.update_inv_gloves(1)
 		user.verbs += /mob/living/carbon/human/proc/bloody_doodle
 
@@ -127,7 +127,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood/writing/examine()
 	..()
-	usr << "It reads: <font color='[basecolor]'>\"[message]\"<font>"
+	usr << "It reads: <font colour='[basecolour]'>\"[message]\"<font>"
 
 /obj/effect/decal/cleanable/blood/gibs
 	name = "gibs"
@@ -139,18 +139,18 @@ var/global/list/image/splatter_cache=list()
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "gibbl5"
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6")
-	var/fleshcolor = "#FFFFFF"
+	var/fleshcolour = "#FFFFFF"
 
 /obj/effect/decal/cleanable/blood/gibs/update_icon()
 
 	var/image/giblets = new(base_icon, "[icon_state]_flesh", dir)
-	if(!fleshcolor || fleshcolor == "rainbow")
-		fleshcolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
-	giblets.color = fleshcolor
+	if(!fleshcolour || fleshcolour == "rainbow")
+		fleshcolour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+	giblets.colour = fleshcolour
 
 	var/icon/blood = new(base_icon,"[icon_state]",dir)
-	if(basecolor == "rainbow") basecolor = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
-	blood.Blend(basecolor,ICON_MULTIPLY)
+	if(basecolour == "rainbow") basecolour = "#[pick(list("FF0000","FF7F00","FFFF00","00FF00","0000FF","4B0082","8F00FF"))]"
+	blood.Blend(basecolour,ICON_MULTIPLY)
 
 	icon = blood
 	overlays.Cut()
@@ -179,7 +179,7 @@ var/global/list/image/splatter_cache=list()
                         sleep(3)
                         if (i > 0)
                                 var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(src.loc)
-                                b.basecolor = src.basecolor
+                                b.basecolour = src.basecolour
                                 b.update_icon()
                                 for(var/datum/disease/D in src.viruses)
                                         var/datum/disease/ND = D.Copy(1)

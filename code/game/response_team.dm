@@ -50,7 +50,7 @@ client/verb/JoinResponseTeam()
 			usr << "An emergency response team has already been sent."
 			return */
 		if(jobban_isbanned(usr, "Syndicate") || jobban_isbanned(usr, "Emergency Response Team") || jobban_isbanned(usr, "Security Officer"))
-			usr << "<font color=red><b>You are jobbanned from the emergency reponse team!"
+			usr << "<font colour=red><b>You are jobbanned from the emergency reponse team!"
 			return
 
 		if(response_team_members.len > 5) usr << "The emergency response team is already full!"
@@ -169,19 +169,19 @@ proc/trigger_armed_response_team(var/force = 0)
 
 	//todo: god damn this.
 	//make it a panel, like in character creation
-	var/new_facial = input("Please select facial hair color.", "Character Generation") as color
+	var/new_facial = input("Please select facial hair colour.", "Character Generation") as colour
 	if(new_facial)
 		M.r_facial = hex2num(copytext(new_facial, 2, 4))
 		M.g_facial = hex2num(copytext(new_facial, 4, 6))
 		M.b_facial = hex2num(copytext(new_facial, 6, 8))
 
-	var/new_hair = input("Please select hair color.", "Character Generation") as color
+	var/new_hair = input("Please select hair colour.", "Character Generation") as colour
 	if(new_facial)
 		M.r_hair = hex2num(copytext(new_hair, 2, 4))
 		M.g_hair = hex2num(copytext(new_hair, 4, 6))
 		M.b_hair = hex2num(copytext(new_hair, 6, 8))
 
-	var/new_eyes = input("Please select eye color.", "Character Generation") as color
+	var/new_eyes = input("Please select eye colour.", "Character Generation") as colour
 	if(new_eyes)
 		M.r_eyes = hex2num(copytext(new_eyes, 2, 4))
 		M.g_eyes = hex2num(copytext(new_eyes, 4, 6))

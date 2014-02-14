@@ -1,4 +1,4 @@
-/datum/hud/proc/human_hud(var/ui_style='icons/mob/screen1_White.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255)
+/datum/hud/proc/human_hud(var/ui_style='icons/mob/screen1_White.dmi', var/ui_colour = "#ffffff", var/ui_alpha = 255)
 
 	src.adding = list()
 	src.other = list()
@@ -73,7 +73,7 @@
 	using.icon_state = (mymob.m_intent == "run" ? "running" : "walking")
 	using.screen_loc = ui_movi
 	using.layer = 20
-	using.color = ui_color
+	using.colour = ui_colour
 	using.alpha = ui_alpha
 	src.adding += using
 	move_intent = using
@@ -84,7 +84,7 @@
 	using.icon_state = "act_drop"
 	using.screen_loc = ui_drop_throw
 	using.layer = 19
-	using.color = ui_color
+	using.colour = ui_colour
 	using.alpha = ui_alpha
 	src.hotkeybuttons += using
 
@@ -96,7 +96,7 @@
 	inv_box.icon_state = "center"
 	inv_box.screen_loc = ui_iclothing
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.other += inv_box
 
@@ -108,7 +108,7 @@
 	inv_box.icon_state = "equip"
 	inv_box.screen_loc = ui_oclothing
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.other += inv_box
 
@@ -122,7 +122,7 @@
 	inv_box.screen_loc = ui_rhand
 	inv_box.slot_id = slot_r_hand
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 
 	src.r_hand_hud_object = inv_box
@@ -138,7 +138,7 @@
 	inv_box.screen_loc = ui_lhand
 	inv_box.slot_id = slot_l_hand
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.l_hand_hud_object = inv_box
 	src.adding += inv_box
@@ -150,7 +150,7 @@
 	using.icon_state = "hand1"
 	using.screen_loc = ui_swaphand1
 	using.layer = 19
-	using.color = ui_color
+	using.colour = ui_colour
 	using.alpha = ui_alpha
 	src.adding += using
 
@@ -161,7 +161,7 @@
 	using.icon_state = "hand2"
 	using.screen_loc = ui_swaphand2
 	using.layer = 19
-	using.color = ui_color
+	using.colour = ui_colour
 	using.alpha = ui_alpha
 	src.adding += using
 
@@ -173,7 +173,7 @@
 	inv_box.screen_loc = ui_id
 	inv_box.slot_id = slot_wear_id
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.adding += inv_box
 
@@ -185,7 +185,7 @@
 	inv_box.screen_loc = ui_mask
 	inv_box.slot_id = slot_wear_mask
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.other += inv_box
 
@@ -197,7 +197,7 @@
 	inv_box.screen_loc = ui_back
 	inv_box.slot_id = slot_back
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.adding += inv_box
 
@@ -208,7 +208,7 @@
 	inv_box.screen_loc = ui_storage1
 	inv_box.slot_id = slot_l_store
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.adding += inv_box
 
@@ -219,7 +219,7 @@
 	inv_box.screen_loc = ui_storage2
 	inv_box.slot_id = slot_r_store
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.adding += inv_box
 
@@ -231,7 +231,7 @@
 	inv_box.screen_loc = ui_sstore1
 	inv_box.slot_id = slot_s_store
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.adding += inv_box
 
@@ -241,7 +241,7 @@
 	using.icon_state = "act_resist"
 	using.screen_loc = ui_pull_resist
 	using.layer = 19
-	using.color = ui_color
+	using.colour = ui_colour
 	using.alpha = ui_alpha
 	src.hotkeybuttons += using
 
@@ -251,7 +251,7 @@
 	using.icon_state = "other"
 	using.screen_loc = ui_inventory
 	using.layer = 20
-	using.color = ui_color
+	using.colour = ui_colour
 	using.alpha = ui_alpha
 	src.adding += using
 
@@ -261,7 +261,7 @@
 	using.icon_state = "act_equip"
 	using.screen_loc = ui_equip
 	using.layer = 20
-	using.color = ui_color
+	using.colour = ui_colour
 	using.alpha = ui_alpha
 	src.adding += using
 
@@ -272,7 +272,7 @@
 	inv_box.screen_loc = ui_gloves
 	inv_box.slot_id = slot_gloves
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.other += inv_box
 
@@ -283,7 +283,7 @@
 	inv_box.screen_loc = ui_glasses
 	inv_box.slot_id = slot_glasses
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.other += inv_box
 
@@ -294,7 +294,7 @@
 	inv_box.screen_loc = ui_l_ear
 	inv_box.slot_id = slot_l_ear
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.other += inv_box
 
@@ -305,7 +305,7 @@
 	inv_box.screen_loc = ui_r_ear
 	inv_box.slot_id = slot_r_ear
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.other += inv_box
 
@@ -316,7 +316,7 @@
 	inv_box.screen_loc = ui_head
 	inv_box.slot_id = slot_head
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.other += inv_box
 
@@ -327,7 +327,7 @@
 	inv_box.screen_loc = ui_shoes
 	inv_box.slot_id = slot_shoes
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.other += inv_box
 
@@ -338,7 +338,7 @@
 	inv_box.screen_loc = ui_belt
 	inv_box.slot_id = slot_belt
 	inv_box.layer = 19
-	inv_box.color = ui_color
+	inv_box.colour = ui_colour
 	inv_box.alpha = ui_alpha
 	src.adding += inv_box
 
@@ -347,7 +347,7 @@
 	mymob.throw_icon.icon_state = "act_throw_off"
 	mymob.throw_icon.name = "throw"
 	mymob.throw_icon.screen_loc = ui_drop_throw
-	mymob.throw_icon.color = ui_color
+	mymob.throw_icon.colour = ui_colour
 	mymob.throw_icon.alpha = ui_alpha
 	src.hotkeybuttons += mymob.throw_icon
 
@@ -433,7 +433,7 @@
 
 	mymob.zone_sel = new /obj/screen/zone_sel( null )
 	mymob.zone_sel.icon = ui_style
-	mymob.zone_sel.color = ui_color
+	mymob.zone_sel.colour = ui_colour
 	mymob.zone_sel.alpha = ui_alpha
 	mymob.zone_sel.overlays.Cut()
 	mymob.zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[mymob.zone_sel.selecting]")
