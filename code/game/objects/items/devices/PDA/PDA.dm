@@ -691,13 +691,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						var/difficulty = 0
 
 						if(P.cartridge)
-							difficulty += P.cartridge.access_medical
-							difficulty += P.cartridge.access_security
-							difficulty += P.cartridge.access_engine
-							difficulty += P.cartridge.access_clown
-							difficulty += P.cartridge.access_janitor
+							difficulty += 1+(P.cartridge.access_medical)
+							difficulty += 1+(P.cartridge.access_security)
+							difficulty += 1+(P.cartridge.access_engine)
+							difficulty += 1+(P.cartridge.access_clown)
+							difficulty += 1+(P.cartridge.access_janitor)
 						else
-							difficulty += 2
+							difficulty += 3
 
 						if(prob(difficulty * 12) || (P.hidden_uplink))
 							U.show_message("\red An error flashes on your [src].", 1)
