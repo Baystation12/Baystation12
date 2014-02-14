@@ -201,7 +201,7 @@ emp_act
 		target_zone = user.zone_sel.selecting
 	if(!target_zone && !src.stat)
 		visible_message("\red <B>[user] misses [src] with \the [I]!")
-		return
+		return 0
 
 	if(istype(I, /obj/item/weapon/butch/meatcleaver) && src.stat == DEAD && user.a_intent == "harm")
 		var/obj/item/weapon/reagent_containers/food/snacks/meat/human/newmeat = new /obj/item/weapon/reagent_containers/food/snacks/meat/human(get_turf(src.loc))
@@ -226,10 +226,10 @@ emp_act
 
 	var/datum/organ/external/affecting = get_organ(target_zone)
 	if (!affecting)
-		return
+		return 0
 	if(affecting.status & ORGAN_DESTROYED)
 		user << "What [affecting.display_name]?"
-		return
+		return 0
 	var/hit_area = affecting.display_name
 
 	if((user != src) && check_shields(I.force, "the [I.name]"))
@@ -246,7 +246,7 @@ emp_act
 			var/obj/item/weapon/card/emag/emag = I
 			emag.uses--
 			affecting.sabotaged = 1
-		return
+		return 1
 
 	if(I.attack_verb.len)
 		visible_message("\red <B>[src] has been [pick(I.attack_verb)] in the [hit_area] with [I.name] by [user]!</B>")
@@ -301,6 +301,7 @@ emp_act
 
 				if(bloody)
 					bloody_body(src)
+	return 1
 
 /mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
 
