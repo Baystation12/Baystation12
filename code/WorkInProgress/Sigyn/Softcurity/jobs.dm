@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-	selection_color = "#ffdddd"
+	selection_colour = "#ffdddd"
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
 
@@ -38,7 +38,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the safety administrator"
-	selection_color = "#ffeeee"
+	selection_colour = "#ffeeee"
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -67,7 +67,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the safety administrator"
-	selection_color = "#ffeeee"
+	selection_colour = "#ffeeee"
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -104,7 +104,7 @@
 	total_positions = 5
 	spawn_positions = 5
 	supervisors = "the safety administrator"
-	selection_color = "#ffeeee"
+	selection_colour = "#ffeeee"
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -131,7 +131,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-	selection_color = "#ddddff"
+	selection_colour = "#ddddff"
 	idtype = /obj/item/weapon/card/id/silver
 	req_admin_notify = 1
 

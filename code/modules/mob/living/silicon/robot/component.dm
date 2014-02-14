@@ -192,8 +192,8 @@
 	var/BU = M.getFireLoss() > 50 	? 	"<b>[M.getFireLoss()]</b>" 		: M.getFireLoss()
 	var/BR = M.getBruteLoss() > 50 	? 	"<b>[M.getBruteLoss()]</b>" 	: M.getBruteLoss()
 	user.show_message("\blue Analyzing Results for [M]:\n\t Overall Status: [M.stat > 1 ? "fully disabled" : "[M.health - M.halloss]% functional"]")
-	user.show_message("\t Key: <font color='#FFA500'>Electronics</font>/<font color='red'>Brute</font>", 1)
-	user.show_message("\t Damage Specifics: <font color='#FFA500'>[BU]</font> - <font color='red'>[BR]</font>")
+	user.show_message("\t Key: <font colour='#FFA500'>Electronics</font>/<font colour='red'>Brute</font>", 1)
+	user.show_message("\t Damage Specifics: <font colour='#FFA500'>[BU]</font> - <font colour='red'>[BR]</font>")
 	if(M.tod && M.stat == DEAD)
 		user.show_message("\blue Time of Disable: [M.tod]")
 
@@ -204,11 +204,11 @@
 		for(var/datum/robot_component/org in damaged)
 			user.show_message(text("\blue \t []: [][] - [] - [] - []",	\
 			capitalize(org.name),					\
-			(org.installed == -1)	?	"<font color='red'><b>DESTROYED</b></font> "							:"",\
-			(org.electronics_damage > 0)	?	"<font color='#FFA500'>[org.electronics_damage]</font>"	:0,	\
-			(org.brute_damage > 0)	?	"<font color='red'>[org.brute_damage]</font>"							:0,		\
-			(org.toggled)	?	"Toggled ON"	:	"<font color='red'>Toggled OFF</font>",\
-			(org.powered)	?	"Power ON"		:	"<font color='red'>Power OFF</font>"),1)
+			(org.installed == -1)	?	"<font colour='red'><b>DESTROYED</b></font> "							:"",\
+			(org.electronics_damage > 0)	?	"<font colour='#FFA500'>[org.electronics_damage]</font>"	:0,	\
+			(org.brute_damage > 0)	?	"<font colour='red'>[org.brute_damage]</font>"							:0,		\
+			(org.toggled)	?	"Toggled ON"	:	"<font colour='red'>Toggled OFF</font>",\
+			(org.powered)	?	"Power ON"		:	"<font colour='red'>Power OFF</font>"),1)
 	else
 		user.show_message("\blue \t Components are OK.",1)
 	if(H.emagged && prob(5))

@@ -151,13 +151,13 @@ obj/machinery/shipcore/attack_hand(user as mob)
 */
 		switch(src.build_status)
 			if("unbuilt")
-				dat += "<h3>Core Status: <font color =#FF3300>Undeployed</font></h3><BR>"
+				dat += "<h3>Core Status: <font colour =#FF3300>Undeployed</font></h3><BR>"
 				dat += "<A href='?src=\ref[src];groupself=1'>Build Ship</A><BR>"
 			if("built")
-				dat += "<h3>Core Status: <font color =#00CC00>Deployed</font></h3><BR>"
+				dat += "<h3>Core Status: <font colour =#00CC00>Deployed</font></h3><BR>"
 				dat += "<A href='?src=\ref[src];move=1'>Move</A><BR>"
 			if("rebuilding")
-				dat += "<h3>Core Status: <font color =#FFCC00>Recalibrating</font></h3><BR>"
+				dat += "<h3>Core Status: <font colour =#FFCC00>Recalibrating</font></h3><BR>"
 		user << browse("<HEAD><TITLE>Ship Core</TITLE></HEAD>[dat]","window=shipcore")
 		onclose(user, "shipcore")
 		return
@@ -276,7 +276,7 @@ obj/machinery/ship_component/control_panel
 			dat += "<h3>Installed Components:</h3><br><br>"
 			dat += "<table>"
 			for(var/obj/machinery/ship_component/C in core.components)
-				dat += "<tr><td><b>[C.name]</b></td><td>[C.active ? "<font color=green>Active</font>" : "<font color=red>Inactive</font>"]</td></tr>"
+				dat += "<tr><td><b>[C.name]</b></td><td>[C.active ? "<font colour=green>Active</font>" : "<font colour=red>Inactive</font>"]</td></tr>"
 				if(istype(C, /obj/machinery/ship_component/engine))
 					dat += "<tr><td></td><td><i>Fuel: [C:charge]/[C:capacity]</i></td></tr>"
 				if(istype(C, /obj/machinery/ship_component/thruster))

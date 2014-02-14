@@ -254,5 +254,5 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		if(!usr.hud_used.hud_shown)
 			usr.button_pressed_F12(1)
 		zoom = 0
-	usr << "<font color='[zoom?"blue":"red"]'>Zoom mode [zoom?"en":"dis"]abled.</font>"
+	usr << "<font colour='[zoom?"blue":"red"]'>Zoom mode [zoom?"en":"dis"]abled.</font>"
 	return

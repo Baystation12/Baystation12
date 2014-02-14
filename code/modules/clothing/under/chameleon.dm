@@ -3,7 +3,7 @@
 	name = "black jumpsuit"
 	icon_state = "black"
 	item_state = "bl_suit"
-	item_color = "black"
+	item_colour = "black"
 	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
 	origin_tech = "syndicate=3"
 	siemens_coefficient = 0.8
@@ -11,7 +11,7 @@
 
 	New()
 		..()
-		for(var/U in typesof(/obj/item/clothing/under/color)-(/obj/item/clothing/under/color))
+		for(var/U in typesof(/obj/item/clothing/under/colour)-(/obj/item/clothing/under/colour))
 			var/obj/item/clothing/under/V = new U
 			src.clothing_choices += V
 
@@ -38,11 +38,11 @@
 		name = "psychedelic"
 		desc = "Groovy!"
 		icon_state = "psyche"
-		item_color = "psyche"
+		item_colour = "psyche"
 		spawn(200)
 			name = "Black Jumpsuit"
 			icon_state = "bl_suit"
-			item_color = "black"
+			item_colour = "black"
 			desc = null
 		..()
 
@@ -68,7 +68,7 @@
 		name = A.name
 		icon_state = A.icon_state
 		item_state = A.item_state
-		item_color = A.item_color
+		item_colour = A.item_colour
 		usr.update_inv_w_uniform()	//so our overlays update.
 
 

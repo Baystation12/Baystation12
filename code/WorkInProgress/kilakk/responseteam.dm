@@ -145,21 +145,21 @@ var/global/admin_emergency_team = 0 // Used for admin-spawned response teams
 					new_member.s_tone = max(min(round(text2num(new_tone)), 220), 1)
 					new_member.s_tone =  -new_member.s_tone + 35
 
-				var/new_hair = input(new_member, "Please select your new hair color.","Character Generation") as color
+				var/new_hair = input(new_member, "Please select your new hair colour.","Character Generation") as colour
 
 				if(new_hair)
 					new_member.r_hair = hex2num(copytext(new_hair, 2, 4))
 					new_member.g_hair = hex2num(copytext(new_hair, 4, 6))
 					new_member.b_hair = hex2num(copytext(new_hair, 6, 8))
 
-				var/new_facial = input(new_member, "Please select your new facial hair color.","Character Generation") as color
+				var/new_facial = input(new_member, "Please select your new facial hair colour.","Character Generation") as colour
 
 				if(new_facial)
 					new_member.r_facial = hex2num(copytext(new_facial, 2, 4))
 					new_member.g_facial = hex2num(copytext(new_facial, 4, 6))
 					new_member.b_facial = hex2num(copytext(new_facial, 6, 8))
 
-				var/new_eyes = input(new_member, "Please select eye color.", "Character Generation") as color
+				var/new_eyes = input(new_member, "Please select eye colour.", "Character Generation") as colour
 
 				if(new_eyes)
 					new_member.r_eyes = hex2num(copytext(new_eyes, 2, 4))

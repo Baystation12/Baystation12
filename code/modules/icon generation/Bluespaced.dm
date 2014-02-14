@@ -22,17 +22,17 @@
 
 	return null
 
-/proc/bsi_split_colors(color)
-	if(color == null)
+/proc/bsi_split_colours(colour)
+	if(colour == null)
 		return list(0, 0, 0, 0)
 
-	var/list/colors = list(0, 0, 0, 0)
-	colors[1] = hex2num(copytext(color, 2, 4))
-	colors[2] = hex2num(copytext(color, 4, 6))
-	colors[3] = hex2num(copytext(color, 6, 8))
-	colors[4] = (length(color) > 7)? hex2num(copytext(color, 8, 10)) : 255
+	var/list/colours = list(0, 0, 0, 0)
+	colours[1] = hex2num(copytext(colour, 2, 4))
+	colours[2] = hex2num(copytext(colour, 4, 6))
+	colours[3] = hex2num(copytext(colour, 6, 8))
+	colours[4] = (length(colour) > 7)? hex2num(copytext(colour, 8, 10)) : 255
 
-	return colors
+	return colours
 
 /proc/bsi_spread(icon/I, list/start_point)
 	var/list/queue = list()
@@ -44,14 +44,14 @@
 		var/x = queue[i][1]
 		var/y = queue[i][2]
 
-		var/list/pixel = bsi_split_colors(I.GetPixel(x, y))
+		var/list/pixel = bsi_split_colours(I.GetPixel(x, y))
 		if(pixel[4] == 0)
 			continue
 
-		var/list/n = (y < I.Height())? bsi_split_colors(I.GetPixel(x, y + 1)) : list(0, 0, 0, 0)
-		var/list/s = (y > 1)? bsi_split_colors(I.GetPixel(x, y - 1)) : list(0, 0, 0, 0)
-		var/list/e = (x < I.Width())? bsi_split_colors(I.GetPixel(x + 1, y)) : list(0, 0, 0, 0)
-		var/list/w = (x > 1)? bsi_split_colors(I.GetPixel(x - 1, y)) : list(0, 0, 0, 0)
+		var/list/n = (y < I.Height())? bsi_split_colours(I.GetPixel(x, y + 1)) : list(0, 0, 0, 0)
+		var/list/s = (y > 1)? bsi_split_colours(I.GetPixel(x, y - 1)) : list(0, 0, 0, 0)
+		var/list/e = (x < I.Width())? bsi_split_colours(I.GetPixel(x + 1, y)) : list(0, 0, 0, 0)
+		var/list/w = (x > 1)? bsi_split_colours(I.GetPixel(x - 1, y)) : list(0, 0, 0, 0)
 
 		var/value = (i == 1)? 16 : max(n[1] - 1, e[1] - 1, s[1] - 1, w[1] - 1)
 
@@ -203,7 +203,7 @@
 			list(0.020, 5),
 		)
 
-	var/list/colors = list(
+	var/list/colours = list(
 			list( 75,  75,  75,   0),
 			list( 25,  25,  25,   0),
 			list( 75,  75,  75,   0),
@@ -225,7 +225,7 @@
 
 		frames[f] = list(0.8, 1)
 
-	var/icon/result = generate_color_animation(bluespaced, colors, frames)
+	var/icon/result = generate_colour_animation(bluespaced, colours, frames)
 	result.Blend(unaffected, ICON_UNDERLAY)
 
 	return result

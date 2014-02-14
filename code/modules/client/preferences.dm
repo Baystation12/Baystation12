@@ -40,11 +40,11 @@ datum/preferences
 
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
-	var/ooccolor = "#b82e00"
+	var/ooccolour = "#b82e00"
 	var/be_special = 0					//Special role selection
 	var/UI_style = "Midnight"
 	var/toggles = TOGGLES_DEFAULT
-	var/UI_style_color = "#ffffff"
+	var/UI_style_colour = "#ffffff"
 	var/UI_style_alpha = 255
 
 	//character preferences
@@ -56,17 +56,17 @@ datum/preferences
 	var/underwear = 1					//underwear type
 	var/backbag = 2						//backpack type
 	var/h_style = "Bald"				//Hair type
-	var/r_hair = 0						//Hair color
-	var/g_hair = 0						//Hair color
-	var/b_hair = 0						//Hair color
+	var/r_hair = 0						//Hair colour
+	var/g_hair = 0						//Hair colour
+	var/b_hair = 0						//Hair colour
 	var/f_style = "Shaved"				//Face hair type
-	var/r_facial = 0					//Face hair color
-	var/g_facial = 0					//Face hair color
-	var/b_facial = 0					//Face hair color
-	var/s_tone = 0						//Skin color
-	var/r_eyes = 0						//Eye color
-	var/g_eyes = 0						//Eye color
-	var/b_eyes = 0						//Eye color
+	var/r_facial = 0					//Face hair colour
+	var/g_facial = 0					//Face hair colour
+	var/b_facial = 0					//Face hair colour
+	var/s_tone = 0						//Skin colour
+	var/r_eyes = 0						//Eye colour
+	var/g_eyes = 0						//Eye colour
+	var/b_eyes = 0						//Eye colour
 	var/species = "Human"
 	var/language = "None"				//Secondary language
 
@@ -198,14 +198,14 @@ datum/preferences
 				var/level = skills[S.ID]
 				HTML += "<tr style='text-align:left;'>"
 				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;skillinfo=\ref[S]'>[S.name]</a></th>"
-				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_NONE]'><font color=[(level == SKILL_NONE) ? "red" : "black"]>\[Untrained\]</font></a></th>"
+				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_NONE]'><font colour=[(level == SKILL_NONE) ? "red" : "black"]>\[Untrained\]</font></a></th>"
 				// secondary skills don't have an amateur level
 				if(S.secondary)
 					HTML += "<th></th>"
 				else
-					HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_BASIC]'><font color=[(level == SKILL_BASIC) ? "red" : "black"]>\[Amateur\]</font></a></th>"
-				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_ADEPT]'><font color=[(level == SKILL_ADEPT) ? "red" : "black"]>\[Trained\]</font></a></th>"
-				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_EXPERT]'><font color=[(level == SKILL_EXPERT) ? "red" : "black"]>\[Professional\]</font></a></th>"
+					HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_BASIC]'><font colour=[(level == SKILL_BASIC) ? "red" : "black"]>\[Amateur\]</font></a></th>"
+				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_ADEPT]'><font colour=[(level == SKILL_ADEPT) ? "red" : "black"]>\[Trained\]</font></a></th>"
+				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_EXPERT]'><font colour=[(level == SKILL_EXPERT) ? "red" : "black"]>\[Professional\]</font></a></th>"
 				HTML += "</tr>"
 		HTML += "</table>"
 		HTML += "<a href=\"byond://?src=\ref[user];preference=skills;cancel=1;\">\[Done\]</a>"
@@ -246,7 +246,7 @@ datum/preferences
 		dat += "<br>"
 		dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
 		dat += "<b>Custom UI</b>(recommended for White UI):<br>"
-		dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
+		dat += "-Color: <a href='?_src_=prefs;preference=UIcolour'><b>[UI_style_colour]</b></a> <table style='display:inline;' bgcolour='[UI_style_colour]'><tr><td>__</td></tr></table><br>"
 		dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 		dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 		dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
@@ -366,15 +366,15 @@ datum/preferences
 		dat += "<br>"
 
 		dat += "<br><b>Hair</b><br>"
-		dat += "<a href='?_src_=prefs;preference=hair;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair)]'><tr><td>__</td></tr></table></font> "
+		dat += "<a href='?_src_=prefs;preference=hair;task=input'>Change Color</a> <font face='fixedsys' size='3' colour='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair, 2)]'><table style='display:inline;' bgcolour='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair)]'><tr><td>__</td></tr></table></font> "
 		dat += " Style: <a href='?_src_=prefs;preference=h_style;task=input'>[h_style]</a><br>"
 
 		dat += "<br><b>Facial</b><br>"
-		dat += "<a href='?_src_=prefs;preference=facial;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial)]'><tr><td>__</td></tr></table></font> "
+		dat += "<a href='?_src_=prefs;preference=facial;task=input'>Change Color</a> <font face='fixedsys' size='3' colour='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial, 2)]'><table  style='display:inline;' bgcolour='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial)]'><tr><td>__</td></tr></table></font> "
 		dat += " Style: <a href='?_src_=prefs;preference=f_style;task=input'>[f_style]</a><br>"
 
 		dat += "<br><b>Eyes</b><br>"
-		dat += "<a href='?_src_=prefs;preference=eyes;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font>"
+		dat += "<a href='?_src_=prefs;preference=eyes;task=input'>Change Color</a> <font face='fixedsys' size='3' colour='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolour='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font>"
 
 		dat += "<br><br>"
 		if(jobban_isbanned(user, "Syndicate"))
@@ -385,10 +385,10 @@ datum/preferences
 			for (var/i in special_roles)
 				if(special_roles[i]) //if mode is available on the server
 					if(jobban_isbanned(user, i))
-						dat += "<b>Be [i]:</b> <font color=red><b> \[BANNED]</b></font><br>"
+						dat += "<b>Be [i]:</b> <font colour=red><b> \[BANNED]</b></font><br>"
 					else if(i == "pai candidate")
 						if(jobban_isbanned(user, "pAI"))
-							dat += "<b>Be [i]:</b> <font color=red><b> \[BANNED]</b></font><br>"
+							dat += "<b>Be [i]:</b> <font colour=red><b> \[BANNED]</b></font><br>"
 					else
 						dat += "<b>Be [i]:</b> <a href='?_src_=prefs;preference=be_special;num=[n]'><b>[src.be_special&(1<<n) ? "Yes" : "No"]</b></a><br>"
 				n++
@@ -421,7 +421,7 @@ datum/preferences
 		HTML += "<table width='100%' cellpadding='1' cellspacing='0'>"
 		var/index = -1
 
-		//The job before the current job. I only use this to get the previous jobs color when I'm filling in blank rows.
+		//The job before the current job. I only use this to get the previous jobs colour when I'm filling in blank rows.
 		var/datum/job/lastJob
 		if (!job_master)		return
 		for(var/datum/job/job in job_master.occupations)
@@ -430,24 +430,24 @@ datum/preferences
 			if((index >= limit) || (job.title in splitJobs))
 				if((index < limit) && (lastJob != null))
 					//If the cells were broken up by a job in the splitJob list then it will fill in the rest of the cells with
-					//the last job's selection color. Creating a rather nice effect.
+					//the last job's selection colour. Creating a rather nice effect.
 					for(var/i = 0, i < (limit - index), i += 1)
-						HTML += "<tr bgcolor='[lastJob.selection_color]'><td width='60%' align='right'><a>&nbsp</a></td><td><a>&nbsp</a></td></tr>"
+						HTML += "<tr bgcolour='[lastJob.selection_colour]'><td width='60%' align='right'><a>&nbsp</a></td><td><a>&nbsp</a></td></tr>"
 				HTML += "</table></td><td width='20%'><table width='100%' cellpadding='1' cellspacing='0'>"
 				index = 0
 
-			HTML += "<tr bgcolor='[job.selection_color]'><td width='60%' align='right'>"
+			HTML += "<tr bgcolour='[job.selection_colour]'><td width='60%' align='right'>"
 			var/rank = job.title
 			lastJob = job
 			if(jobban_isbanned(user, rank))
-				HTML += "<font color=red>[rank]</font></td><td><font color=red><b> \[BANNED]</b></font></td></tr>"
+				HTML += "<font colour=red>[rank]</font></td><td><font colour=red><b> \[BANNED]</b></font></td></tr>"
 				continue
 			if(!job.player_old_enough(user.client))
 				var/available_in_days = job.available_in_days(user.client)
-				HTML += "<font color=red>[rank]</font></td><td><font color=red> \[IN [(available_in_days)] DAYS]</font></td></tr>"
+				HTML += "<font colour=red>[rank]</font></td><td><font colour=red> \[IN [(available_in_days)] DAYS]</font></td></tr>"
 				continue
 			if((job_civilian_low & ASSISTANT) && (rank != "Assistant"))
-				HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
+				HTML += "<font colour=orange>[rank]</font></td><td></td></tr>"
 				continue
 			if((rank in command_positions) || (rank == "AI"))//Bold head jobs
 				HTML += "<b>[rank]</b>"
@@ -460,22 +460,22 @@ datum/preferences
 
 			if(rank == "Assistant")//Assistant is special
 				if(job_civilian_low & ASSISTANT)
-					HTML += " <font color=green>\[Yes]</font>"
+					HTML += " <font colour=green>\[Yes]</font>"
 				else
-					HTML += " <font color=red>\[No]</font>"
+					HTML += " <font colour=red>\[No]</font>"
 				HTML += "</a></td></tr>"
 				continue
 
 			if(GetJobDepartment(job, 1) & job.flag)
-				HTML += " <font color=blue>\[High]</font>"
+				HTML += " <font colour=blue>\[High]</font>"
 			else if(GetJobDepartment(job, 2) & job.flag)
-				HTML += " <font color=green>\[Medium]</font>"
+				HTML += " <font colour=green>\[Medium]</font>"
 			else if(GetJobDepartment(job, 3) & job.flag)
-				HTML += " <font color=orange>\[Low]</font>"
+				HTML += " <font colour=orange>\[Low]</font>"
 			else
-				HTML += " <font color=red>\[NEVER]</font>"
+				HTML += " <font colour=red>\[NEVER]</font>"
 			if(job.alt_titles)
-				HTML += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
+				HTML += "</a></td></tr><tr bgcolour='[lastJob.selection_colour]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
 			HTML += "</a></td></tr>"
 
 		HTML += "</td'></tr></table>"
@@ -484,11 +484,11 @@ datum/preferences
 
 		switch(alternate_option)
 			if(GET_RANDOM_JOB)
-				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=green>Get random job if preferences unavailable</font></a></u></center><br>"
+				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font colour=green>Get random job if preferences unavailable</font></a></u></center><br>"
 			if(BE_ASSISTANT)
-				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=red>Be assistant if preference unavailable</font></a></u></center><br>"
+				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font colour=red>Be assistant if preference unavailable</font></a></u></center><br>"
 			if(RETURN_TO_LOBBY)
-				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=purple>Return to lobby if preference unavailable</font></a></u></center><br>"
+				HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font colour=purple>Return to lobby if preference unavailable</font></a></u></center><br>"
 
 		HTML += "<center><a href='?_src_=prefs;preference=job;task=reset'>\[Reset\]</a></center>"
 		HTML += "</tt>"
@@ -862,7 +862,7 @@ datum/preferences
 						if(new_name)
 							real_name = new_name
 						else
-							user << "<font color='red'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</font>"
+							user << "<font colour='red'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</font>"
 
 					if("age")
 						var/new_age = input(user, "Choose your character's age:\n([AGE_MIN]-[AGE_MAX])", "Character Preference") as num|null
@@ -964,7 +964,7 @@ datum/preferences
 
 					if("hair")
 						if(species == "Human" || species == "Unathi")
-							var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference") as color|null
+							var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference") as colour|null
 							if(new_hair)
 								r_hair = hex2num(copytext(new_hair, 2, 4))
 								g_hair = hex2num(copytext(new_hair, 4, 6))
@@ -984,7 +984,7 @@ datum/preferences
 							h_style = new_h_style
 
 					if("facial")
-						var/new_facial = input(user, "Choose your character's facial-hair colour:", "Character Preference") as color|null
+						var/new_facial = input(user, "Choose your character's facial-hair colour:", "Character Preference") as colour|null
 						if(new_facial)
 							r_facial = hex2num(copytext(new_facial, 2, 4))
 							g_facial = hex2num(copytext(new_facial, 4, 6))
@@ -1020,7 +1020,7 @@ datum/preferences
 						ShowChoices(user)
 
 					if("eyes")
-						var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference") as color|null
+						var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference") as colour|null
 						if(new_eyes)
 							r_eyes = hex2num(copytext(new_eyes, 2, 4))
 							g_eyes = hex2num(copytext(new_eyes, 4, 6))
@@ -1033,10 +1033,10 @@ datum/preferences
 						if(new_s_tone)
 							s_tone = 35 - max(min( round(new_s_tone), 220),1)
 
-					if("ooccolor")
-						var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference") as color|null
-						if(new_ooccolor)
-							ooccolor = new_ooccolor
+					if("ooccolour")
+						var/new_ooccolour = input(user, "Choose your OOC colour:", "Game Preference") as colour|null
+						if(new_ooccolour)
+							ooccolour = new_ooccolour
 
 					if("bag")
 						var/new_backbag = input(user, "Choose your character's style of bag:", "Character Preference")  as null|anything in backbaglist
@@ -1167,10 +1167,10 @@ datum/preferences
 							else
 								UI_style = "Midnight"
 
-					if("UIcolor")
-						var/UI_style_color_new = input(user, "Choose your UI color, dark colors are not recommended!") as color|null
-						if(!UI_style_color_new) return
-						UI_style_color = UI_style_color_new
+					if("UIcolour")
+						var/UI_style_colour_new = input(user, "Choose your UI colour, dark colours are not recommended!") as colour|null
+						if(!UI_style_colour_new) return
+						UI_style_colour = UI_style_colour_new
 
 					if("UIalpha")
 						var/UI_style_alpha_new = input(user, "Select a new alpha(transparence) parametr for UI, between 50 and 255") as num

@@ -97,8 +97,8 @@
 			else O.show_message(text("\red <B>[target] has attacked himself with a bottle of [src.name]!</B>"), 1)
 
 	//Attack logs
-	user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has attacked [target.name] ([target.ckey]) with a bottle!</font>")
-	target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been smashed with a bottle by [user.name] ([user.ckey])</font>")
+	user.attack_log += text("\[[time_stamp()]\] <font colour='red'>Has attacked [target.name] ([target.ckey]) with a bottle!</font>")
+	target.attack_log += text("\[[time_stamp()]\] <font colour='orange'>Has been smashed with a bottle by [user.name] ([user.ckey])</font>")
 	msg_admin_attack("[user.name] ([user.ckey]) attacked [target.name] ([target.ckey]) with a bottle. (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 	//The reagents in the bottle splash all over the target, thanks for the idea Nodrak
@@ -262,7 +262,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine
 	name = "Briar Rose Grenadine Syrup"
-	desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
+	desc = "Sweet and tangy, a bar syrup used to add colour or flavor to drinks."
 	icon_state = "grenadinebottle"
 	New()
 		..()

@@ -76,7 +76,7 @@ proc/check_craftlathe_recipe(var/list/param_recipe)
 
 	dat += text("<b>Crafting Table</b><p>")
 
-	dat += text("	<table bgcolor='#cccccc' cellpadding='4' cellspacing='0'>")
+	dat += text("	<table bgcolour='#cccccc' cellpadding='4' cellspacing='0'>")
 
 	var/j = 0
 	var/k = 0

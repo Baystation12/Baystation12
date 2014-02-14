@@ -74,12 +74,12 @@
 	var/dat = "<TT><b>Select an item:</b><br>"
 
 	if (contents.len == 0)
-		dat += "<font color = 'red'>No seeds loaded!</font>"
+		dat += "<font colour = 'red'>No seeds loaded!</font>"
 	else
 		for (var/O in item_quants)
 			if(item_quants[O] > 0)
 				var/N = item_quants[O]
-				dat += "<FONT color = 'blue'><B>[capitalize(O)]</B>:"
+				dat += "<FONT colour = 'blue'><B>[capitalize(O)]</B>:"
 				dat += " [N] </font>"
 				dat += "<a href='byond://?src=\ref[src];vend=[O]'>Vend</A>"
 				dat += "<br>"
@@ -127,8 +127,8 @@
  */
 
 /obj/item/weapon/grown/sunflower/attack(mob/M as mob, mob/user as mob)
-	M << "<font color='green'><b> [user] smacks you with a sunflower!</font><font color='yellow'><b>FLOWER POWER<b></font>"
-	user << "<font color='green'> Your sunflower's </font><font color='yellow'><b>FLOWER POWER</b></font><font color='green'> strikes [M]</font>"
+	M << "<font colour='green'><b> [user] smacks you with a sunflower!</font><font colour='yellow'><b>FLOWER POWER<b></font>"
+	user << "<font colour='green'> Your sunflower's </font><font colour='yellow'><b>FLOWER POWER</b></font><font colour='green'> strikes [M]</font>"
 
 
 /*
@@ -180,8 +180,8 @@
 	if(istype(M, /mob/living))
 		M << "\red You are stunned by the powerful acid of the Deathnettle!"
 
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Had the [src.name] used on them by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] on [M.name] ([M.ckey])</font>")
+		M.attack_log += text("\[[time_stamp()]\] <font colour='orange'>Had the [src.name] used on them by [user.name] ([user.ckey])</font>")
+		user.attack_log += text("\[[time_stamp()]\] <font colour='red'>Used the [src.name] on [M.name] ([M.ckey])</font>")
 		msg_admin_attack("[user.name] ([user.ckey]) used the [src.name] on [M.name] ([M.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 		playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)

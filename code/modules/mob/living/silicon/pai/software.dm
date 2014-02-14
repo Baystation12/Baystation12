@@ -33,7 +33,7 @@
 	if(temp)
 		left_part = temp
 	else if(src.stat == 2)						// Show some flavor text if the pAI is dead
-		left_part = "<b><font color=red>ÈRrÖR Ða†Ä ÇÖRrÚþ†Ìoñ</font></b>"
+		left_part = "<b><font colour=red>ÈRrÖR Ða†Ä ÇÖRrÚþ†Ìoñ</font></b>"
 		right_part = "<pre>Program index hash not found</pre>"
 
 	else
@@ -77,20 +77,20 @@
 				<style type=\"text/css\">
 					body { background-image:url('html/paigrid.png'); }
 
-					#header { text-align:center; color:white; font-size: 30px; height: 35px; width: 100%; letter-spacing: 2px; z-index: 5}
+					#header { text-align:center; colour:white; font-size: 30px; height: 35px; width: 100%; letter-spacing: 2px; z-index: 5}
 					#content {position: relative; left: 10px; height: 400px; width: 100%; z-index: 0}
 
-					#leftmenu {color: #AAAAAA; background-color:#333333; width: 400px; height: auto; min-height: 340px; position: absolute; z-index: 0}
-					#leftmenu a:link { color: #CCCCCC; }
-					#leftmenu a:hover { color: #CC3333; }
-					#leftmenu a:visited { color: #CCCCCC; }
-					#leftmenu a:active { color: #000000; }
+					#leftmenu {colour: #AAAAAA; background-colour:#333333; width: 400px; height: auto; min-height: 340px; position: absolute; z-index: 0}
+					#leftmenu a:link { colour: #CCCCCC; }
+					#leftmenu a:hover { colour: #CC3333; }
+					#leftmenu a:visited { colour: #CCCCCC; }
+					#leftmenu a:active { colour: #000000; }
 
-					#rightmenu {color: #CCCCCC; background-color:#555555; width: 200px ; height: auto; min-height: 340px; right: 10px; position: absolute; z-index: 1}
-					#rightmenu a:link { color: #CCCCCC; }
-					#rightmenu a:hover { color: #CC3333; }
-					#rightmenu a:visited { color: #CCCCCC; }
-					#rightmenu a:active { color: #000000; }
+					#rightmenu {colour: #CCCCCC; background-colour:#555555; width: 200px ; height: auto; min-height: 340px; right: 10px; position: absolute; z-index: 1}
+					#rightmenu a:link { colour: #CCCCCC; }
+					#rightmenu a:hover { colour: #CC3333; }
+					#rightmenu a:visited { colour: #CCCCCC; }
+					#rightmenu a:active { colour: #000000; }
 
 				</style>
 				<script language='javascript' type='text/javascript'>
@@ -315,7 +315,7 @@
 		if(s == "medical HUD")
 			dat += "<a href='byond://?src=\ref[src];software=medicalhud;sub=0'>Medical Analysis Suite</a> <br>"
 		if(s == "universal translator")
-			dat += "<a href='byond://?src=\ref[src];software=translator;sub=0'>Universal Translator</a>[(src.universal_speak) ? "<font color=#55FF55>•</font>" : "<font color=#FF5555>•</font>"] <br>"
+			dat += "<a href='byond://?src=\ref[src];software=translator;sub=0'>Universal Translator</a>[(src.universal_speak) ? "<font colour=#55FF55>•</font>" : "<font colour=#FF5555>•</font>"] <br>"
 		if(s == "projection array")
 			dat += "<a href='byond://?src=\ref[src];software=projectionarray;sub=0'>Projection Array</a> <br>"
 		if(s == "camera jack")
@@ -377,7 +377,7 @@
 		for (var/mob/v in viewers(T))
 			v.show_message("\blue [M] presses \his thumb against [P].", 3, "\blue [P] makes a sharp clicking sound as it extracts DNA material from [M].", 2)
 		var/datum/dna/dna = M.dna
-		P << "<font color = red><h3>[M]'s UE string : [dna.unique_enzymes]</h3></font>"
+		P << "<font colour = red><h3>[M]'s UE string : [dna.unique_enzymes]</h3></font>"
 		if(dna.unique_enzymes == P.master_dna)
 			P << "<b>DNA is a match to stored Master DNA.</b>"
 		else
@@ -466,7 +466,7 @@
 /mob/living/silicon/pai/proc/softwareTranslator()
 	var/dat = {"<h3>Universal Translator</h3><br>
 				When enabled, this device will automatically convert all spoken and written language into a format that any known recipient can understand.<br><br>
-				The device is currently [ (src.universal_speak) ? "<font color=#55FF55>en" : "<font color=#FF5555>dis" ]abled.</font><br>
+				The device is currently [ (src.universal_speak) ? "<font colour=#55FF55>en" : "<font colour=#FF5555>dis" ]abled.</font><br>
 				<a href='byond://?src=\ref[src];software=translator;sub=0;toggle=1'>Toggle Device</a><br>
 				"}
 	return dat
@@ -475,7 +475,7 @@
 /mob/living/silicon/pai/proc/facialRecognition()
 	var/dat = {"<h3>Facial Recognition Suite</h3><br>
 				When enabled, this package will scan all viewable faces and compare them against the known criminal database, providing real-time graphical data about any detected persons of interest.<br><br>
-				The package is currently [ (src.secHUD) ? "<font color=#55FF55>en" : "<font color=#FF5555>dis" ]abled.</font><br>
+				The package is currently [ (src.secHUD) ? "<font colour=#55FF55>en" : "<font colour=#FF5555>dis" ]abled.</font><br>
 				<a href='byond://?src=\ref[src];software=securityhud;sub=0;toggle=1'>Toggle Package</a><br>
 				"}
 	return dat
@@ -487,7 +487,7 @@
 		dat += {"<h3>Medical Analysis Suite</h3><br>
 				 <h4>Visual Status Overlay</h4><br>
 					When enabled, this package will scan all nearby crewmembers' vitals and provide real-time graphical data about their state of health.<br><br>
-					The suite is currently [ (src.medHUD) ? "<font color=#55FF55>en" : "<font color=#FF5555>dis" ]abled.</font><br>
+					The suite is currently [ (src.medHUD) ? "<font colour=#55FF55>en" : "<font colour=#FF5555>dis" ]abled.</font><br>
 					<a href='byond://?src=\ref[src];software=medicalhud;sub=0;toggle=1'>Toggle Suite</a><br>
 					<br>
 					<a href='byond://?src=\ref[src];software=medicalhud;sub=1'>Host Bioscan</a><br>
@@ -507,10 +507,10 @@
 		dat += {"Bioscan Results for [M]: <br>"
 		Overall Status: [M.stat > 1 ? "dead" : "[M.health]% healthy"] <br>
 		Scan Breakdown: <br>
-		Respiratory: [M.getOxyLoss() > 50 ? "<font color=#FF5555>" : "<font color=#55FF55>"][M.getOxyLoss()]</font><br>
-		Toxicology: [M.getToxLoss() > 50 ? "<font color=#FF5555>" : "<font color=#55FF55>"][M.getToxLoss()]</font><br>
-		Burns: [M.getFireLoss() > 50 ? "<font color=#FF5555>" : "<font color=#55FF55>"][M.getFireLoss()]</font><br>
-		Structural Integrity: [M.getBruteLoss() > 50 ? "<font color=#FF5555>" : "<font color=#55FF55>"][M.getBruteLoss()]</font><br>
+		Respiratory: [M.getOxyLoss() > 50 ? "<font colour=#FF5555>" : "<font colour=#55FF55>"][M.getOxyLoss()]</font><br>
+		Toxicology: [M.getToxLoss() > 50 ? "<font colour=#FF5555>" : "<font colour=#55FF55>"][M.getToxLoss()]</font><br>
+		Burns: [M.getFireLoss() > 50 ? "<font colour=#FF5555>" : "<font colour=#55FF55>"][M.getFireLoss()]</font><br>
+		Structural Integrity: [M.getBruteLoss() > 50 ? "<font colour=#FF5555>" : "<font colour=#55FF55>"][M.getBruteLoss()]</font><br>
 		Body Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)<br>
 		"}
 		for(var/datum/disease/D in M.viruses)
@@ -561,14 +561,14 @@
 	dat += "Cable status : "
 
 	if(!src.cable)
-		dat += "<font color=#FF5555>Retracted</font> <br>"
+		dat += "<font colour=#FF5555>Retracted</font> <br>"
 		return dat
 	if(!src.cable.machine)
-		dat += "<font color=#FFFF55>Extended</font> <br>"
+		dat += "<font colour=#FFFF55>Extended</font> <br>"
 		return dat
 
 	var/obj/machinery/machine = src.cable.machine
-	dat += "<font color=#55FF55>Connected</font> <br>"
+	dat += "<font colour=#55FF55>Connected</font> <br>"
 
 	if(!istype(machine, /obj/machinery/camera))
 		src << "DERP"
@@ -579,15 +579,15 @@
 	var/dat = "<h3>Airlock Jack</h3>"
 	dat += "Cable status : "
 	if(!src.cable)
-		dat += "<font color=#FF5555>Retracted</font> <br>"
+		dat += "<font colour=#FF5555>Retracted</font> <br>"
 		dat += "<a href='byond://?src=\ref[src];software=doorjack;cable=1;sub=0'>Extend Cable</a> <br>"
 		return dat
 	if(!src.cable.machine)
-		dat += "<font color=#FFFF55>Extended</font> <br>"
+		dat += "<font colour=#FFFF55>Extended</font> <br>"
 		return dat
 
 	var/obj/machinery/machine = src.cable.machine
-	dat += "<font color=#55FF55>Connected</font> <br>"
+	dat += "<font colour=#55FF55>Connected</font> <br>"
 	if(!istype(machine, /obj/machinery/door))
 		dat += "Connected device's firmware does not appear to be compatible with Airlock Jack protocols.<br>"
 		return dat
@@ -607,9 +607,9 @@
 	var/turf/T = get_turf_or_move(src.loc)
 	for(var/mob/living/silicon/ai/AI in player_list)
 		if(T.loc)
-			AI << "<font color = red><b>Network Alert: Brute-force encryption crack in progress in [T.loc].</b></font>"
+			AI << "<font colour = red><b>Network Alert: Brute-force encryption crack in progress in [T.loc].</b></font>"
 		else
-			AI << "<font color = red><b>Network Alert: Brute-force encryption crack in progress. Unable to pinpoint location.</b></font>"
+			AI << "<font colour = red><b>Network Alert: Brute-force encryption crack in progress. Unable to pinpoint location.</b></font>"
 	while(src.hackprogress < 100)
 		if(src.cable && src.cable.machine && istype(src.cable.machine, /obj/machinery/door) && src.cable.machine == src.hackdoor && get_dist(src, src.hackdoor) <= 1)
 			hackprogress += rand(1, 10)
@@ -632,9 +632,9 @@
 
 	var/dat = "<h3>Digital Messenger</h3>"
 	dat += {"<b>Signal/Receiver Status:</b> <A href='byond://?src=\ref[src];software=pdamessage;toggler=1'>
-	[(pda.toff) ? "<font color='red'> \[Off\]</font>" : "<font color='green'> \[On\]</font>"]</a><br>
+	[(pda.toff) ? "<font colour='red'> \[Off\]</font>" : "<font colour='green'> \[On\]</font>"]</a><br>
 	<b>Ringer Status:</b> <A href='byond://?src=\ref[src];software=pdamessage;ringer=1'>
-	[(pda.silent) ? "<font color='red'> \[Off\]</font>" : "<font color='green'> \[On\]</font>"]</a><br><br>"}
+	[(pda.silent) ? "<font colour='red'> \[Off\]</font>" : "<font colour='green'> \[On\]</font>"]</a><br><br>"}
 	dat += "<ul>"
 	if(!pda.toff)
 		for (var/obj/item/device/pda/P in sortAtom(PDAs))

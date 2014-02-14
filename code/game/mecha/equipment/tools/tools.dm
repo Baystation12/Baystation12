@@ -40,15 +40,15 @@
 							cargo_holder.cargo += O
 							O.loc = chassis
 							O.anchored = 0
-							occupant_message("<font color='blue'>[target] succesfully loaded.</font>")
+							occupant_message("<font colour='blue'>[target] succesfully loaded.</font>")
 							log_message("Loaded [O]. Cargo compartment capacity: [cargo_holder.cargo_capacity - cargo_holder.cargo.len]")
 						else
-							occupant_message("<font color='red'>You must hold still while handling objects.</font>")
+							occupant_message("<font colour='red'>You must hold still while handling objects.</font>")
 							O.anchored = initial(O.anchored)
 				else
-					occupant_message("<font color='red'>Not enough room in cargo compartment.</font>")
+					occupant_message("<font colour='red'>Not enough room in cargo compartment.</font>")
 			else
-				occupant_message("<font color='red'>[target] is firmly secured.</font>")
+				occupant_message("<font colour='red'>[target] is firmly secured.</font>")
 
 		else if(istype(target,/mob/living))
 			var/mob/living/M = target
@@ -83,14 +83,14 @@
 			if(!target_obj.vars.Find("unacidable") || target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<font color='red'><b>[chassis] starts to drill [target]</b></font>", "You hear the drill.")
-		occupant_message("<font color='red'><b>You start to drill [target]</b></font>")
+		chassis.visible_message("<font colour='red'><b>[chassis] starts to drill [target]</b></font>", "You hear the drill.")
+		occupant_message("<font colour='red'><b>You start to drill [target]</b></font>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
 			if(T == chassis.loc && src == chassis.selected)
 				if(istype(target, /turf/simulated/wall/r_wall))
-					occupant_message("<font color='red'>[target] is too durable to drill through.</font>")
+					occupant_message("<font colour='red'>[target] is too durable to drill through.</font>")
 				else if(istype(target, /turf/simulated/mineral))
 					for(var/turf/simulated/mineral/M in range(chassis,1))
 						if(get_dir(chassis,M)&chassis.dir)
@@ -140,8 +140,8 @@
 			if(target_obj.unacidable)	return
 		set_ready_state(0)
 		chassis.use_power(energy_drain)
-		chassis.visible_message("<font color='red'><b>[chassis] starts to drill [target]</b></font>", "You hear the drill.")
-		occupant_message("<font color='red'><b>You start to drill [target]</b></font>")
+		chassis.visible_message("<font colour='red'><b>[chassis] starts to drill [target]</b></font>", "You hear the drill.")
+		occupant_message("<font colour='red'><b>You start to drill [target]</b></font>")
 		var/T = chassis.loc
 		var/C = target.loc	//why are these backwards? we may never know -Pete
 		if(do_after_cooldown(target))
@@ -535,7 +535,7 @@
 
 	get_equip_info()
 		if(!chassis) return
-		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
+		return "<span style=\"colour:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
 
 	proc/dynattackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(!action_checks(user))
@@ -545,8 +545,8 @@
 			user << "\red The [W] bounces off [chassis] armor."
 			chassis.log_append_to_last("Armor saved.")
 		else
-			chassis.occupant_message("<font color='red'><b>[user] hits [chassis] with [W].</b></font>")
-			user.visible_message("<font color='red'><b>[user] hits [chassis] with [W].</b></font>", "<font color='red'><b>You hit [src] with [W].</b></font>")
+			chassis.occupant_message("<font colour='red'><b>[user] hits [chassis] with [W].</b></font>")
+			user.visible_message("<font colour='red'><b>[user] hits [chassis] with [W].</b></font>", "<font colour='red'><b>You hit [src] with [W].</b></font>")
 			chassis.take_damage(round(W.force*damage_coeff),W.damtype)
 			chassis.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		set_ready_state(0)
@@ -588,7 +588,7 @@
 
 	get_equip_info()
 		if(!chassis) return
-		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
+		return "<span style=\"colour:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
 
 	proc/dynbulletdamage(var/obj/item/projectile/Proj)
 		if(!action_checks(src))
@@ -666,7 +666,7 @@
 
 	get_equip_info()
 		if(!chassis) return
-		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_repairs=1'>[pr_repair_droid.active()?"Dea":"A"]ctivate</a>"
+		return "<span style=\"colour:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_repairs=1'>[pr_repair_droid.active()?"Dea":"A"]ctivate</a>"
 
 
 	Topic(href, href_list)
@@ -789,7 +789,7 @@
 
 	get_equip_info()
 		if(!chassis) return
-		return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_relay=1'>[pr_energy_relay.active()?"Dea":"A"]ctivate</a>"
+		return "<span style=\"colour:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_relay=1'>[pr_energy_relay.active()?"Dea":"A"]ctivate</a>"
 
 /*	proc/dynusepower(amount)
 		if(!equip_ready) //enabled
@@ -887,7 +887,7 @@
 			var/result = load_fuel(target)
 			var/message
 			if(isnull(result))
-				message = "<font color='red'>[fuel] traces in target minimal. [target] cannot be used as fuel.</font>"
+				message = "<font colour='red'>[fuel] traces in target minimal. [target] cannot be used as fuel.</font>"
 			else if(!result)
 				message = "Unit is full."
 			else
@@ -912,7 +912,7 @@
 	attackby(weapon,mob/user)
 		var/result = load_fuel(weapon)
 		if(isnull(result))
-			user.visible_message("[user] tries to shove [weapon] into [src]. What a dumb-ass.","<font color='red'>[fuel] traces minimal. [weapon] cannot be used as fuel.</font>")
+			user.visible_message("[user] tries to shove [weapon] into [src]. What a dumb-ass.","<font colour='red'>[fuel] traces minimal. [weapon] cannot be used as fuel.</font>")
 		else if(!result)
 			user << "Unit is full."
 		else
@@ -1043,15 +1043,15 @@
 							cargo_holder.cargo += O
 							O.loc = chassis
 							O.anchored = 0
-							chassis.occupant_message("<font color='blue'>[target] succesfully loaded.</font>")
+							chassis.occupant_message("<font colour='blue'>[target] succesfully loaded.</font>")
 							chassis.log_message("Loaded [O]. Cargo compartment capacity: [cargo_holder.cargo_capacity - cargo_holder.cargo.len]")
 						else
-							chassis.occupant_message("<font color='red'>You must hold still while handling objects.</font>")
+							chassis.occupant_message("<font colour='red'>You must hold still while handling objects.</font>")
 							O.anchored = initial(O.anchored)
 				else
-					chassis.occupant_message("<font color='red'>Not enough room in cargo compartment.</font>")
+					chassis.occupant_message("<font colour='red'>Not enough room in cargo compartment.</font>")
 			else
-				chassis.occupant_message("<font color='red'>[target] is firmly secured.</font>")
+				chassis.occupant_message("<font colour='red'>[target] is firmly secured.</font>")
 
 		else if(istype(target,/mob/living))
 			var/mob/living/M = target

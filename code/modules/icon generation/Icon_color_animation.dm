@@ -2,7 +2,7 @@
 //
 //   Return a copy of the provided icon,
 //  after calling MapColors on it. The
-//  color values are linearily interpolated
+//  colour values are linearily interpolated
 //  between the pairs provided, based on
 //  the ratio argument.
 //
@@ -33,34 +33,34 @@
 //----------------------------------------
 //
 //   Extension of the above that takes a
-//  list of lists of color values, rather
+//  list of lists of colour values, rather
 //  than a large number of arguments.
 //
 //----------------------------------------
 
-/proc/MapColors_interpolate_list(icon/I, ratio, list/colors)
+/proc/MapColors_interpolate_list(icon/I, ratio, list/colours)
 	var/list/c[10]
 
-	//Provide default values for any missing colors (without altering the original list
+	//Provide default values for any missing colours (without altering the original list
 	for(var/i = 1, i <= 10, i++)
 		c[i] = list(0, 0, 0, (i == 7 || i == 8)? 255 : 0)
 
-		if(istype(colors[i], /list))
+		if(istype(colours[i], /list))
 			for(var/j = 1, j <= 4, j++)
-				if(j <= length(colors[i]) && isnum(colors[i][j]))
-					c[i][j] = colors[i][j]
+				if(j <= length(colours[i]) && isnum(colours[i][j]))
+					c[i][j] = colours[i][j]
 
 	return MapColors_interpolate(I, ratio,
-		 colors[ 1][1], colors[ 1][2], colors[ 1][3], colors[ 1][4], // Red 1
-		 colors[ 2][1], colors[ 2][2], colors[ 2][3], colors[ 2][4], // Red 2
-		 colors[ 3][1], colors[ 3][2], colors[ 3][3], colors[ 3][4], // Green 1
-		 colors[ 4][1], colors[ 4][2], colors[ 4][3], colors[ 4][4], // Green 2
-		 colors[ 5][1], colors[ 5][2], colors[ 5][3], colors[ 5][4], // Blue 1
-		 colors[ 6][1], colors[ 6][2], colors[ 6][3], colors[ 6][4], // Blue 2
-		 colors[ 7][1], colors[ 7][2], colors[ 7][3], colors[ 7][4], // Alpha 1
-		 colors[ 8][1], colors[ 8][2], colors[ 8][3], colors[ 8][4], // Alpha 2
-		 colors[ 9][1], colors[ 9][2], colors[ 9][3], colors[ 9][4], // Added 1
-		 colors[10][1], colors[10][2], colors[10][3], colors[10][4]) // Added 2
+		 colours[ 1][1], colours[ 1][2], colours[ 1][3], colours[ 1][4], // Red 1
+		 colours[ 2][1], colours[ 2][2], colours[ 2][3], colours[ 2][4], // Red 2
+		 colours[ 3][1], colours[ 3][2], colours[ 3][3], colours[ 3][4], // Green 1
+		 colours[ 4][1], colours[ 4][2], colours[ 4][3], colours[ 4][4], // Green 2
+		 colours[ 5][1], colours[ 5][2], colours[ 5][3], colours[ 5][4], // Blue 1
+		 colours[ 6][1], colours[ 6][2], colours[ 6][3], colours[ 6][4], // Blue 2
+		 colours[ 7][1], colours[ 7][2], colours[ 7][3], colours[ 7][4], // Alpha 1
+		 colours[ 8][1], colours[ 8][2], colours[ 8][3], colours[ 8][4], // Alpha 2
+		 colours[ 9][1], colours[ 9][2], colours[ 9][3], colours[ 9][4], // Added 1
+		 colours[10][1], colours[10][2], colours[10][3], colours[10][4]) // Added 2
 
 
 
@@ -70,24 +70,24 @@
 //
 //   Take the source image, and return an animated
 //  version, that transitions between the provided
-//  color mappings, according to the provided
+//  colour mappings, according to the provided
 //  pattern.
 //
 //   Colors should be in a format suitable for
 //  MapColors_interpolate_list, and frames should
 //  be a list of 'frames', where each frame is itself
 //  a list, element 1 being the ratio of the first
-//  color to the second, and element 2 being how
+//  colour to the second, and element 2 being how
 //  long the frame lasts, in tenths of a second.
 //
 //----------------------------------------
 
-/proc/generate_color_animation(icon/icon, list/colors, list/frames)
+/proc/generate_colour_animation(icon/icon, list/colours, list/frames)
 	var/icon/out = icon('icons/effects/uristrunes.dmi', "")
 	var/frame_num = 1
 
 	for(var/frame in frames)
-		var/icon/I = MapColors_interpolate_list(icon, frame[1], colors)
+		var/icon/I = MapColors_interpolate_list(icon, frame[1], colours)
 		out.Insert(I, "", 2, frame_num++, 0, frame[2])
 
 	return out

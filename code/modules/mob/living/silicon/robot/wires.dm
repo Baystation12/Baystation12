@@ -12,16 +12,16 @@
 	BorgWireColorToIndex = list(0, 0, 0, 0, 0)
 	var/flagIndex = 1
 	//I think it's easier to read this way, also doesn't rely on the random number generator to land on a new wire.
-	var/list/colorIndexList = list(BORG_WIRE_LAWCHECK, BORG_WIRE_MAIN_POWER1, BORG_WIRE_MAIN_POWER2, BORG_WIRE_AI_CONTROL, BORG_WIRE_CAMERA)
+	var/list/colourIndexList = list(BORG_WIRE_LAWCHECK, BORG_WIRE_MAIN_POWER1, BORG_WIRE_MAIN_POWER2, BORG_WIRE_AI_CONTROL, BORG_WIRE_CAMERA)
 	for (var/flag=1, flag<=16, flag+=flag)
-		var/colorIndex = pick(colorIndexList)
-		if (Borgwires[colorIndex]==0)
-			Borgwires[colorIndex] = flag
+		var/colourIndex = pick(colourIndexList)
+		if (Borgwires[colourIndex]==0)
+			Borgwires[colourIndex] = flag
 			BorgIndexToFlag[flagIndex] = flag
-			BorgIndexToWireColor[flagIndex] = colorIndex
-			BorgWireColorToIndex[colorIndex] = flagIndex
-			colorIndexList -= colorIndex // Shortens the list.
-		//world.log << "Flag: [flag], CIndex: [colorIndex], FIndex: [flagIndex]"
+			BorgIndexToWireColor[flagIndex] = colourIndex
+			BorgWireColorToIndex[colourIndex] = flagIndex
+			colourIndexList -= colourIndex // Shortens the list.
+		//world.log << "Flag: [flag], CIndex: [colourIndex], FIndex: [flagIndex]"
 		flagIndex+=1
 	return Borgwires
 

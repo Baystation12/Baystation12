@@ -16,9 +16,9 @@
 				recharge_console.mecha_in(mecha)
 				return
 			else if(!recharge_console)
-				mecha.occupant_message("<font color='red'>Control console not found. Terminating.</font>")
+				mecha.occupant_message("<font colour='red'>Control console not found. Terminating.</font>")
 			else if(!recharge_port)
-				mecha.occupant_message("<font color='red'>Power port not found. Terminating.</font>")
+				mecha.occupant_message("<font colour='red'>Power port not found. Terminating.</font>")
 		return
 
 	Exited(atom)
@@ -62,7 +62,7 @@
 
 	proc/start_charge(var/obj/mecha/recharging_mecha)
 		if(stat&(NOPOWER|BROKEN))
-			recharging_mecha.occupant_message("<font color='red'>Power port not responding. Terminating.</font>")
+			recharging_mecha.occupant_message("<font colour='red'>Power port not responding. Terminating.</font>")
 			return 0
 		else
 			if(recharging_mecha.cell)
@@ -116,7 +116,7 @@
 				mecha.give_power(delta)
 				port.use_power(delta*150)
 			else
-				mecha.occupant_message("<font color='blue'><b>Fully charged.</b></font>")
+				mecha.occupant_message("<font colour='blue'><b>Fully charged.</b></font>")
 				port.stop_charge()
 		else
 			port.stop_charge()
@@ -139,7 +139,7 @@
 
 	proc/mecha_in(var/obj/mecha/mecha)
 		if(stat&(NOPOWER|BROKEN))
-			mecha.occupant_message("<font color='red'>Control console not responding. Terminating...</font>")
+			mecha.occupant_message("<font colour='red'>Control console not responding. Terminating...</font>")
 			return
 		if(recharge_port && autostart)
 			var/answer = recharge_port.start_charge(mecha)
@@ -179,7 +179,7 @@
 		if(..()) return
 		var/output = "<html><head><title>[src.name]</title></head><body>"
 		if(!recharge_floor)
-			output += "<font color='red'>Mech Bay Recharge Station not initialized.</font><br>"
+			output += "<font colour='red'>Mech Bay Recharge Station not initialized.</font><br>"
 		else
 			output += {"<b>Mech Bay Recharge Station Data:</b><div style='margin-left: 15px;'>
 							<b>Mecha: </b>[recharge_floor.recharging_mecha||"None"]<br>"}
@@ -188,7 +188,7 @@
 				output += "<b>Cell charge: </b>[isnull(cell_charge)?"No powercell found":"[recharge_floor.recharging_mecha.cell.charge]/[recharge_floor.recharging_mecha.cell.maxcharge]"]<br>"
 			output += "</div>"
 		if(!recharge_port)
-			output += "<font color='red'>Mech Bay Power Port not initialized.</font><br>"
+			output += "<font colour='red'>Mech Bay Power Port not initialized.</font><br>"
 		else
 			output += "<b>Mech Bay Power Port Status: </b>[recharge_port.active()?"Now charging":"On hold"]<br>"
 

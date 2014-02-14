@@ -3,7 +3,7 @@
 	set category = null
 	set name = "Admin PM Mob"
 	if(!holder)
-		src << "<font color='red'>Error: Admin-PM-Context: Only administrators may use this command.</font>"
+		src << "<font colour='red'>Error: Admin-PM-Context: Only administrators may use this command.</font>"
 		return
 	if( !ismob(M) || !M.client )	return
 	cmd_admin_pm(M.client,null)
@@ -14,7 +14,7 @@
 	set category = "Admin"
 	set name = "Admin PM"
 	if(!holder)
-		src << "<font color='red'>Error: Admin-PM-Panel: Only administrators may use this command.</font>"
+		src << "<font colour='red'>Error: Admin-PM-Panel: Only administrators may use this command.</font>"
 		return
 	var/list/client/targets[0]
 	for(var/client/T)
@@ -37,11 +37,11 @@
 //Fetching a message if needed. src is the sender and C is the target client
 /client/proc/cmd_admin_pm(var/client/C, var/msg)
 	if(prefs.muted & MUTE_ADMINHELP)
-		src << "<font color='red'>Error: Private-Message: You are unable to use PM-s (muted).</font>"
+		src << "<font colour='red'>Error: Private-Message: You are unable to use PM-s (muted).</font>"
 		return
 
 	if(!istype(C,/client))
-		if(holder)	src << "<font color='red'>Error: Private-Message: Client not found.</font>"
+		if(holder)	src << "<font colour='red'>Error: Private-Message: Client not found.</font>"
 		else		adminhelp(msg)	//admin we are replying to left. adminhelp instead
 		return
 
@@ -59,7 +59,7 @@
 
 		if(!msg)	return
 		if(!C)
-			if(holder)	src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
+			if(holder)	src << "<font colour='red'>Error: Admin-PM: Client not found.</font>"
 			else		adminhelp(msg)	//admin we are replying to has vanished, adminhelp instead
 			return
 
@@ -71,7 +71,7 @@
 		msg = sanitize(copytext(msg,1,MAX_MESSAGE_LEN))
 		if(!msg)	return
 
-	var/recieve_color = "purple"
+	var/recieve_colour = "purple"
 	var/send_pm_type = " "
 	var/recieve_pm_type = "Player"
 
@@ -81,20 +81,20 @@
 		//PMs sent from admins and mods display their rank
 		if(holder)
 			if( holder.rights & R_ADMIN )
-				recieve_color = "red"
+				recieve_colour = "red"
 			else
-				recieve_color = "maroon"
+				recieve_colour = "maroon"
 			send_pm_type = holder.rank + " "
 			recieve_pm_type = holder.rank
 
 	else if(!C.holder)
-		src << "<font color='red'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</font>"
+		src << "<font colour='red'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</font>"
 		return
 
 	var/recieve_message = ""
 
 	if(holder && !C.holder)
-		recieve_message = "<font color='[recieve_color]' size='4'><b>-- Administrator private message --</b></font>\n"
+		recieve_message = "<font colour='[recieve_colour]' size='4'><b>-- Administrator private message --</b></font>\n"
 
 		//AdminPM popup for ApocStation and anybody else who wants to use it. Set it with POPUP_ADMIN_PM in config.txt ~Carn
 		if(config.popup_admin_pm)
@@ -109,9 +109,9 @@
 						adminhelp(reply)													//sender has left, adminhelp instead
 				return
 
-	recieve_message = "<font color='[recieve_color]'>[recieve_pm_type] PM from-<b>[key_name(src, C, C.holder ? 1 : 0)]</b>: [msg]</font>"
+	recieve_message = "<font colour='[recieve_colour]'>[recieve_pm_type] PM from-<b>[key_name(src, C, C.holder ? 1 : 0)]</b>: [msg]</font>"
 	C << recieve_message
-	src << "<font color='blue'>[send_pm_type]PM to-<b>[key_name(C, src, holder ? 1 : 0)]</b>: [msg]</font>"
+	src << "<font colour='blue'>[send_pm_type]PM to-<b>[key_name(C, src, holder ? 1 : 0)]</b>: [msg]</font>"
 
 	/*if(holder && !C.holder)
 		C.last_pm_recieved = world.time
@@ -126,15 +126,15 @@
 	if(C.holder)
 		if(holder)	//both are admins
 			if(holder.rank == "Moderator") //If moderator
-				C << "<font color='maroon'>Mod PM from-<b>[key_name(src, C, 1)]</b>: [msg]</font>"
-				src << "<font color='blue'>Mod PM to-<b>[key_name(C, src, 1)]</b>: [msg]</font>"
+				C << "<font colour='maroon'>Mod PM from-<b>[key_name(src, C, 1)]</b>: [msg]</font>"
+				src << "<font colour='blue'>Mod PM to-<b>[key_name(C, src, 1)]</b>: [msg]</font>"
 			else
-				C << "<font color='red'>Admin PM from-<b>[key_name(src, C, 1)]</b>: [msg]</font>"
-				src << "<font color='blue'>Admin PM to-<b>[key_name(C, src, 1)]</b>: [msg]</font>"
+				C << "<font colour='red'>Admin PM from-<b>[key_name(src, C, 1)]</b>: [msg]</font>"
+				src << "<font colour='blue'>Admin PM to-<b>[key_name(C, src, 1)]</b>: [msg]</font>"
 
 		else		//recipient is an admin but sender is not
-			C << "<font color='red'>Reply PM from-<b>[key_name(src, C, 1)]</b>: [msg]</font>"
-			src << "<font color='blue'>PM to-<b>Admins</b>: [msg]</font>"
+			C << "<font colour='red'>Reply PM from-<b>[key_name(src, C, 1)]</b>: [msg]</font>"
+			src << "<font colour='blue'>PM to-<b>Admins</b>: [msg]</font>"
 
 		//play the recieving admin the adminhelp sound (if they have them enabled)
 		if(C.prefs.toggles & SOUND_ADMINHELP)
@@ -143,14 +143,14 @@
 	else
 		if(holder)	//sender is an admin but recipient is not. Do BIG RED TEXT
 			if(holder.rank == "Moderator")
-				C << "<font color='maroon'>Mod PM from-<b>[key_name(src, C, 0)]</b>: [msg]</font>"
-				C << "<font color='maroon'><i>Click on the moderators's name to reply.</i></font>"
-				src << "<font color='blue'>Mod PM to-<b>[key_name(C, src, 1)]</b>: [msg]</font>"
+				C << "<font colour='maroon'>Mod PM from-<b>[key_name(src, C, 0)]</b>: [msg]</font>"
+				C << "<font colour='maroon'><i>Click on the moderators's name to reply.</i></font>"
+				src << "<font colour='blue'>Mod PM to-<b>[key_name(C, src, 1)]</b>: [msg]</font>"
 			else
-				C << "<font color='red' size='4'><b>-- Administrator private message --</b></font>"
-				C << "<font color='red'>Admin PM from-<b>[key_name(src, C, 0)]</b>: [msg]</font>"
-				C << "<font color='red'><i>Click on the administrator's name to reply.</i></font>"
-				src << "<font color='blue'>Admin PM to-<b>[key_name(C, src, 1)]</b>: [msg]</font>"
+				C << "<font colour='red' size='4'><b>-- Administrator private message --</b></font>"
+				C << "<font colour='red'>Admin PM from-<b>[key_name(src, C, 0)]</b>: [msg]</font>"
+				C << "<font colour='red'><i>Click on the administrator's name to reply.</i></font>"
+				src << "<font colour='blue'>Admin PM to-<b>[key_name(C, src, 1)]</b>: [msg]</font>"
 
 			//always play non-admin recipients the adminhelp sound
 			C << 'sound/effects/adminhelp.ogg'
@@ -169,7 +169,7 @@
 					return
 
 		else		//neither are admins
-			src << "<font color='red'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</font>"
+			src << "<font colour='red'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</font>"
 			return
 	*/
 
@@ -181,4 +181,4 @@
 		if(X == C || X == src)
 			continue
 		if(X.key!=key && X.key!=C.key && (X.holder.rights & R_ADMIN) || (X.holder.rights & R_MOD) )
-			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)]:</B> \blue [msg]</font>" //inform X
+			X << "<B><font colour='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)]:</B> \blue [msg]</font>" //inform X

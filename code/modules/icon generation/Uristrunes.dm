@@ -3,12 +3,12 @@
 //   Take a source icon, convert into a mask,
 //  then create a border around it.
 //
-//   The output then uses the colors and
+//   The output then uses the colours and
 //  alpha values provided.
 //
 //----------------------------------------
 
-/proc/create_border_image(icon/input, border_color = "#000000", fill_color = "#000000", border_alpha = 255, fill_alpha = 255)
+/proc/create_border_image(icon/input, border_colour = "#000000", fill_colour = "#000000", border_alpha = 255, fill_alpha = 255)
 	var/icon/I = icon('icons/effects/uristrunes.dmi', "blank")
 	I.Blend(input, ICON_OVERLAY)
 
@@ -63,8 +63,8 @@
 
 				I.DrawBox(rgb(255 - a, a, 255 - a, a), x, y)
 
-	//Map the red and green channels to the desired output colors
-	I.MapColors(border_color, fill_color, rgb(0, 0, 0, border_alpha), rgb(0, 0, 0, fill_alpha), "#00000000")
+	//Map the red and green channels to the desired output colours
+	I.MapColors(border_colour, fill_colour, rgb(0, 0, 0, border_alpha), rgb(0, 0, 0, fill_alpha), "#00000000")
 
 	return I
 
@@ -81,65 +81,65 @@
 
 /proc/animate_rune_full(icon/input, rr1, rg1, rb1, ra1, rr2, rg2, rb2, ra2, br1, bg1, bb1, ba1, br2, bg2, bb2, ba2, ar1, ag1, ab1, aa1, ar2, ag2, ab2, aa2, or1, og1, ob1, oa1, or2, og2, ob2, oa2, frames)
 
-	var/list/colors[10]
-	colors[ 1] = list(rr1, rg1, rb1, ra1) //Rune color 1
-	colors[ 2] = list(rr2, rg2, rb2, ra2) //Rune color 2
-	colors[ 3] = list(br1, bg1, bb1, ba1) //Border color 1
-	colors[ 4] = list(br2, bg2, bb2, ba2) //Border color 2
-	colors[ 5] = list(  0,   0,   0,   0) //Unused
-	colors[ 6] = list(  0,   0,   0,   0) //Unused
-	colors[ 7] = list(ar1, ag1, ab1, aa1) //Alpha color 1
-	colors[ 8] = list(ar2, ag2, ab2, aa2) //Alpha color 2
-	colors[ 9] = list(or1, og1, ob1, oa1) //Added color 1
-	colors[10] = list(or2, og2, ob2, oa2) //Added color 2
+	var/list/colours[10]
+	colours[ 1] = list(rr1, rg1, rb1, ra1) //Rune colour 1
+	colours[ 2] = list(rr2, rg2, rb2, ra2) //Rune colour 2
+	colours[ 3] = list(br1, bg1, bb1, ba1) //Border colour 1
+	colours[ 4] = list(br2, bg2, bb2, ba2) //Border colour 2
+	colours[ 5] = list(  0,   0,   0,   0) //Unused
+	colours[ 6] = list(  0,   0,   0,   0) //Unused
+	colours[ 7] = list(ar1, ag1, ab1, aa1) //Alpha colour 1
+	colours[ 8] = list(ar2, ag2, ab2, aa2) //Alpha colour 2
+	colours[ 9] = list(or1, og1, ob1, oa1) //Added colour 1
+	colours[10] = list(or2, og2, ob2, oa2) //Added colour 2
 
 	var/icon/base = create_border_image(input, "#00ff0000", "#ff000000")
 
-	return generate_color_animation(base, colors, frames)
+	return generate_colour_animation(base, colours, frames)
 
 
 
 
 //----------------------------------------
 //
-//   Calls the above, but accepts colors in
+//   Calls the above, but accepts colours in
 //  the form of "#RRGGBBAA", and provides
 //  default values.
 //
 //   Main limit is that it doesn't accept
 //  negative values, which you probably
 //  don't need anyway. Also missing a few
-//  color inputs, which would also be rarely
+//  colour inputs, which would also be rarely
 //  used.
 //
 //----------------------------------------
 
 
-/proc/animate_rune(icon/input, rune_color = "#00000000", border_color = "#c8000000", rune_color2 = "#00000000", border_color2 = "#d8380000", alpha = 255, alpha2 = 255, frames = rune_animation)
-	var/rr1 = hex2num(copytext(rune_color, 2, 4))
-	var/rg1 = hex2num(copytext(rune_color, 4, 6))
-	var/rb1 = hex2num(copytext(rune_color, 6, 8))
-	var/ra1 = hex2num(copytext(rune_color, 8, 10))
-	var/rr2 = hex2num(copytext(rune_color2, 2, 4))
-	var/rg2 = hex2num(copytext(rune_color2, 4, 6))
-	var/rb2 = hex2num(copytext(rune_color2, 6, 8))
-	var/ra2 = hex2num(copytext(rune_color2, 8, 10))
-	var/br1 = hex2num(copytext(border_color, 2, 4))
-	var/bg1 = hex2num(copytext(border_color, 4, 6))
-	var/bb1 = hex2num(copytext(border_color, 6, 8))
-	var/ba1 = hex2num(copytext(border_color, 8, 10))
-	var/br2 = hex2num(copytext(border_color2, 2, 4))
-	var/bg2 = hex2num(copytext(border_color2, 4, 6))
-	var/bb2 = hex2num(copytext(border_color2, 6, 8))
-	var/ba2 = hex2num(copytext(border_color2, 8, 10))
+/proc/animate_rune(icon/input, rune_colour = "#00000000", border_colour = "#c8000000", rune_colour2 = "#00000000", border_colour2 = "#d8380000", alpha = 255, alpha2 = 255, frames = rune_animation)
+	var/rr1 = hex2num(copytext(rune_colour, 2, 4))
+	var/rg1 = hex2num(copytext(rune_colour, 4, 6))
+	var/rb1 = hex2num(copytext(rune_colour, 6, 8))
+	var/ra1 = hex2num(copytext(rune_colour, 8, 10))
+	var/rr2 = hex2num(copytext(rune_colour2, 2, 4))
+	var/rg2 = hex2num(copytext(rune_colour2, 4, 6))
+	var/rb2 = hex2num(copytext(rune_colour2, 6, 8))
+	var/ra2 = hex2num(copytext(rune_colour2, 8, 10))
+	var/br1 = hex2num(copytext(border_colour, 2, 4))
+	var/bg1 = hex2num(copytext(border_colour, 4, 6))
+	var/bb1 = hex2num(copytext(border_colour, 6, 8))
+	var/ba1 = hex2num(copytext(border_colour, 8, 10))
+	var/br2 = hex2num(copytext(border_colour2, 2, 4))
+	var/bg2 = hex2num(copytext(border_colour2, 4, 6))
+	var/bb2 = hex2num(copytext(border_colour2, 6, 8))
+	var/ba2 = hex2num(copytext(border_colour2, 8, 10))
 
 	return animate_rune_full(input, rr1, rg1, rb1, ra1, rr2, rg2, rb2, ra2, br1, bg1, bb1, ba1, br2, bg2, bb2, ba2, 0, 0, 0, alpha, 0, 0, 0, alpha2, 0, 0, 0, 0, 0, 0, 0, 0, frames)
 
 
-/proc/inanimate_rune(icon/input, rune_color = "#00000000", border_color = "#c8000000")
+/proc/inanimate_rune(icon/input, rune_colour = "#00000000", border_colour = "#c8000000")
 	var/icon/base = create_border_image(input, "#00ff0000", "#ff000000")
 
-	base.MapColors(rune_color, border_color, "#00000000", "#000000ff", "#00000000")
+	base.MapColors(rune_colour, border_colour, "#00000000", "#000000ff", "#00000000")
 
 	return base
 
@@ -213,7 +213,7 @@ var/list/rune_animation = list(
 
 
 /*
-/mob/verb/create_rune_custom(rune as num, color1 as color, border1 as color, color2 as color, border2 as color, alpha1 as num, alpha2 as num)
+/mob/verb/create_rune_custom(rune as num, colour1 as colour, border1 as colour, colour2 as colour, border2 as colour, alpha1 as num, alpha2 as num)
 	var/icon/I = icon('icons/effects/uristrunes.dmi', "blank")
 
 	for(var/i = 0, i < 10, i++)
@@ -221,7 +221,7 @@ var/list/rune_animation = list(
 			I.Blend(icon('icons/effects/uristrunes.dmi', "rune-[1 << i]"), ICON_OVERLAY)
 
 	var/obj/o = new(locate(x, y, z))
-	o.icon = animate_rune(I, color1, border1, color2, border2, alpha1, alpha2)
+	o.icon = animate_rune(I, colour1, border1, colour2, border2, alpha1, alpha2)
 
 /mob/verb/spam()
 	for(var/turf/t in range(4))

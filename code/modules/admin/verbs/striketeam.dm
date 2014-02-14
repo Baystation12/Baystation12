@@ -5,13 +5,13 @@ var/global/sent_strike_team = 0
 
 /client/proc/strike_team()
 	if(!ticker)
-		usr << "<font color='red'>The game hasn't started yet!</font>"
+		usr << "<font colour='red'>The game hasn't started yet!</font>"
 		return
 	if(world.time < 6000)
-		usr << "<font color='red'>There are [(6000-world.time)/10] seconds remaining before it may be called.</font>"
+		usr << "<font colour='red'>There are [(6000-world.time)/10] seconds remaining before it may be called.</font>"
 		return
 	if(sent_strike_team == 1)
-		usr << "<font color='red'>CentCom is already sending a team.</font>"
+		usr << "<font colour='red'>CentCom is already sending a team.</font>"
 		return
 	if(alert("Do you want to send in the CentCom death squad? Once enabled, this is irreversible.",,"Yes","No")!="Yes")
 		return
@@ -127,7 +127,7 @@ var/global/sent_strike_team = 0
 	R.set_frequency(1341)
 	equip_to_slot_or_del(R, slot_l_ear)
 	if (leader_selected == 0)
-		equip_to_slot_or_del(new /obj/item/clothing/under/color/green(src), slot_w_uniform)
+		equip_to_slot_or_del(new /obj/item/clothing/under/colour/green(src), slot_w_uniform)
 	else
 		equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(src), slot_w_uniform)
 	equip_to_slot_or_del(new /obj/item/clothing/shoes/swat(src), slot_shoes)

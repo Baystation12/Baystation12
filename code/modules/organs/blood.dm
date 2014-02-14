@@ -159,7 +159,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		this.icon_state = pick(iconL)
 		this.blood_DNA = list()
 		this.blood_DNA[dna.unique_enzymes] = dna.b_type
-		if (species) this.basecolor = species.blood_color
+		if (species) this.basecolour = species.blood_colour
 		this.update_icon()
 
 	else

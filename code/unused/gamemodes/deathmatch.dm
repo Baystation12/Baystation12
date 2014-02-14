@@ -40,7 +40,7 @@
 					M.real_name = newname
 					M.name = newname // there are WAY more things than this to change, I'm almost certain
 
-					M.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(M), slot_w_uniform)
+					M.equip_to_slot_or_del(new /obj/item/clothing/under/colour/black(M), slot_w_uniform)
 					M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
 					M.equip_to_slot_or_del(new /obj/item/clothing/suit/swat_suit/death_commando(M), slot_wear_suit)
 					M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/death_commando(M), slot_wear_mask)

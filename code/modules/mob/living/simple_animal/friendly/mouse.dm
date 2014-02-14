@@ -21,7 +21,7 @@
 	response_disarm = "gently pushes aside the"
 	response_harm   = "stamps on the"
 	density = 0
-	var/body_color //brown, gray and white, leave blank for random
+	var/body_colour //brown, gray and white, leave blank for random
 	layer = MOB_LAYER
 	min_oxy = 16 //Require atleast 16kPA oxygen
 	minbodytemp = 223		//Below -50 Degrees Celcius
@@ -37,14 +37,14 @@
 
 	if(!ckey && stat == CONSCIOUS && prob(0.5))
 		stat = UNCONSCIOUS
-		icon_state = "mouse_[body_color]_sleep"
+		icon_state = "mouse_[body_colour]_sleep"
 		wander = 0
 		speak_chance = 0
 		//snuffles
 	else if(stat == UNCONSCIOUS)
 		if(ckey || prob(1))
 			stat = CONSCIOUS
-			icon_state = "mouse_[body_color]"
+			icon_state = "mouse_[body_colour]"
 			wander = 1
 		else if(prob(5))
 			emote("snuffles")
@@ -52,19 +52,19 @@
 /mob/living/simple_animal/mouse/New()
 	..()
 	name = "[name] ([rand(1, 1000)])"
-	if(!body_color)
-		body_color = pick( list("brown","gray","white") )
-	icon_state = "mouse_[body_color]"
-	icon_living = "mouse_[body_color]"
-	icon_dead = "mouse_[body_color]_dead"
-	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
+	if(!body_colour)
+		body_colour = pick( list("brown","gray","white") )
+	icon_state = "mouse_[body_colour]"
+	icon_living = "mouse_[body_colour]"
+	icon_dead = "mouse_[body_colour]_dead"
+	desc = "It's a small [body_colour] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 
 
 /mob/living/simple_animal/mouse/proc/splat()
 	src.health = 0
 	src.stat = DEAD
-	src.icon_dead = "mouse_[body_color]_splat"
-	src.icon_state = "mouse_[body_color]_splat"
+	src.icon_dead = "mouse_[body_colour]_splat"
+	src.icon_state = "mouse_[body_colour]_splat"
 	layer = MOB_LAYER
 	if(client)
 		client.time_died_as_mouse = world.time
@@ -145,15 +145,15 @@
  */
 
 /mob/living/simple_animal/mouse/white
-	body_color = "white"
+	body_colour = "white"
 	icon_state = "mouse_white"
 
 /mob/living/simple_animal/mouse/gray
-	body_color = "gray"
+	body_colour = "gray"
 	icon_state = "mouse_gray"
 
 /mob/living/simple_animal/mouse/brown
-	body_color = "brown"
+	body_colour = "brown"
 	icon_state = "mouse_brown"
 
 //TOM IS ALIVE! SQUEEEEEEEE~K :)

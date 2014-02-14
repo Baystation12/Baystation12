@@ -536,9 +536,9 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	var/obj/item/device/radio/R = new /obj/item/device/radio/headset(src)
 	equip_to_slot_or_del(R, slot_l_ear)
 	if(gender==FEMALE)
-		equip_to_slot_or_del(new /obj/item/clothing/under/color/blackf(src), slot_w_uniform)
+		equip_to_slot_or_del(new /obj/item/clothing/under/colour/blackf(src), slot_w_uniform)
 	else
-		equip_to_slot_or_del(new /obj/item/clothing/under/color/black(src), slot_w_uniform)
+		equip_to_slot_or_del(new /obj/item/clothing/under/colour/black(src), slot_w_uniform)
 	equip_to_slot_or_del(new /obj/item/clothing/shoes/space_ninja(src), slot_shoes)
 	equip_to_slot_or_del(new /obj/item/clothing/suit/space/space_ninja(src), slot_wear_suit)
 	equip_to_slot_or_del(new /obj/item/clothing/gloves/space_ninja(src), slot_gloves)

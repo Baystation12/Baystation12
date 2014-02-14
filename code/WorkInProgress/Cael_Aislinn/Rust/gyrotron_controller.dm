@@ -34,8 +34,8 @@
 		t += "<hr>"
 		for(var/obj/machinery/rust/gyrotron/gyro in world)
 			if(gyro.remoteenabled && gyro.on)
-				t += "<font color=green>Gyrotron operational</font><br>"
-				t += "Operational mode: <font color=blue>"
+				t += "<font colour=green>Gyrotron operational</font><br>"
+				t += "Operational mode: <font colour=blue>"
 				if(gyro.emitting)
 					t += "Emitting</font> <a href='?src=\ref[gyro];deactivate=1'>\[Deactivate\]</a><br>"
 				else
@@ -44,7 +44,7 @@
 				t += "Beam frequency: [gyro.frequency] <a href='?src=\ref[gyro];modifyfreq=1'>\[Modify\]</a><br>"
 				t += "Beam power: [gyro.mega_energy] <a href='?src=\ref[gyro];modifypower=1'>\[Modify\]</a><br>"
 			else
-				t += "<b><font color=red>Gyrotron unresponsive</font></b>"
+				t += "<b><font colour=red>Gyrotron unresponsive</font></b>"
 			t += "<hr>"
 		/*
 		var/t = "<B>Reactor Core Fuel Control</B><BR>"
@@ -72,13 +72,13 @@
 		t += "</tr>"
 		for(var/stage in fuel_injectors)
 			var/list/cur_stage = fuel_injectors[stage]
-			t += "<tr><td colspan=5><b>Fuel Injection Stage:</b> <font color=blue>[stage]</font> [active_stage == stage ? "<font color=green> (Currently active)</font>" : "<a href='?src=\ref[src];beginstage=[stage]'>Activate</a>"]</td></tr>"
+			t += "<tr><td colspan=5><b>Fuel Injection Stage:</b> <font colour=blue>[stage]</font> [active_stage == stage ? "<font colour=green> (Currently active)</font>" : "<a href='?src=\ref[src];beginstage=[stage]'>Activate</a>"]</td></tr>"
 			for(var/obj/machinery/rust/fuel_injector/Injector in cur_stage)
 				t += "<tr>"
-				t += "<td>[Injector.on && Injector.remote_enabled ? "<font color=green>Operational</font>" : "<font color=red>Unresponsive</font>"]</td>"
+				t += "<td>[Injector.on && Injector.remote_enabled ? "<font colour=green>Operational</font>" : "<font colour=red>Unresponsive</font>"]</td>"
 				t += "<td>[Injector.rate/10] <a href='?src=\ref[Injector];cyclerate=1'>Modify</a></td>"
 				t += "<td>[Injector.fuel_usage*100]% <a href='?src=\ref[Injector];fuel_usage=1'>Modify</a></td>"
-				t += "<td>[Injector.owned_assembly_port ? "[Injector.owned_assembly_port.cur_assembly ? "<font color=green>Loaded</font>": "<font color=blue>Empty</font>"]" : "<font color=red>Disconnected</font>" ]</td>"
+				t += "<td>[Injector.owned_assembly_port ? "[Injector.owned_assembly_port.cur_assembly ? "<font colour=green>Loaded</font>": "<font colour=blue>Empty</font>"]" : "<font colour=red>Disconnected</font>" ]</td>"
 				t += "<td>[Injector.owned_assembly_port && Injector.owned_assembly_port.cur_assembly ? "[Injector.owned_assembly_port.cur_assembly.amount_depleted*100]%" : ""]</td>"
 				t += "</tr>"
 		t += "</table>"

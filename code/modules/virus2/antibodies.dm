@@ -35,7 +35,7 @@ datum/reagent/antibodies
 	name = "Antibodies"
 	id = "antibodies"
 	reagent_state = LIQUID
-	color = "#0050F0"
+	colour = "#0050F0"
 
 	reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 		if(istype(M,/mob/living/carbon))

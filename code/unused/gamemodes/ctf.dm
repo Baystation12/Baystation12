@@ -31,7 +31,7 @@
 				if(M.client)
 					M << "You are in the Red Team!"
 					del(M.wear_suit)
-					M.w_uniform = new /obj/item/clothing/under/color/red(M)
+					M.w_uniform = new /obj/item/clothing/under/colour/red(M)
 					M.w_uniform.layer = 20
 					del(M.shoes)
 					M.wear_suit = new /obj/item/clothing/suit/armor/tdome/red(M)
@@ -71,7 +71,7 @@
 				if(M.client)
 					M << "You are in the Green Team!"
 					del(M.wear_suit)
-					M.w_uniform = new /obj/item/clothing/under/color/green(M)
+					M.w_uniform = new /obj/item/clothing/under/colour/green(M)
 					M.w_uniform.layer = 20
 					del(M.shoes)
 					M.wear_suit = new /obj/item/clothing/suit/armor/tdome/green(M)

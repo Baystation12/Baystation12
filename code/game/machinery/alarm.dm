@@ -12,13 +12,13 @@
 	for (var/flag=1, flag<32, flag+=flag)
 		var/valid = 0
 		while (!valid)
-			var/colorIndex = rand(1, 5)
-			if (AAlarmwires[colorIndex]==0)
+			var/colourIndex = rand(1, 5)
+			if (AAlarmwires[colourIndex]==0)
 				valid = 1
-				AAlarmwires[colorIndex] = flag
+				AAlarmwires[colourIndex] = flag
 				AAlarmIndexToFlag[flagIndex] = flag
-				AAlarmIndexToWireColor[flagIndex] = colorIndex
-				AAlarmWireColorToIndex[colorIndex] = flagIndex
+				AAlarmIndexToWireColor[flagIndex] = colourIndex
+				AAlarmWireColorToIndex[colourIndex] = flagIndex
 		flagIndex+=1
 	return AAlarmwires
 
@@ -661,22 +661,22 @@
 
 	if(wiresexposed && (!istype(user, /mob/living/silicon)))
 		var/t1 = text("<html><head><title>[alarm_area.name] Air Alarm Wires</title></head><body><B>Access Panel</B><br>\n")
-		var/list/wirecolors = list(
+		var/list/wirecolours = list(
 			"Orange" = 1,
 			"Dark red" = 2,
 			"White" = 3,
 			"Yellow" = 4,
 			"Black" = 5,
 		)
-		for(var/wiredesc in wirecolors)
-			var/is_uncut = AAlarmwires & AAlarmWireColorToFlag[wirecolors[wiredesc]]
+		for(var/wiredesc in wirecolours)
+			var/is_uncut = AAlarmwires & AAlarmWireColorToFlag[wirecolours[wiredesc]]
 			t1 += "[wiredesc] wire: "
 			if(!is_uncut)
-				t1 += "<a href='?src=\ref[src];AAlarmwires=[wirecolors[wiredesc]]'>Mend</a>"
+				t1 += "<a href='?src=\ref[src];AAlarmwires=[wirecolours[wiredesc]]'>Mend</a>"
 
 			else
-				t1 += "<a href='?src=\ref[src];AAlarmwires=[wirecolors[wiredesc]]'>Cut</a> "
-				t1 += "<a href='?src=\ref[src];pulse=[wirecolors[wiredesc]]'>Pulse</a> "
+				t1 += "<a href='?src=\ref[src];AAlarmwires=[wirecolours[wiredesc]]'>Cut</a> "
+				t1 += "<a href='?src=\ref[src];pulse=[wirecolours[wiredesc]]'>Pulse</a> "
 
 			t1 += "<br>"
 		t1 += text("<br>\n[(locked ? "The Air Alarm is locked." : "The Air Alarm is unlocked.")]<br>\n[((shorted || (stat & (NOPOWER|BROKEN))) ? "The Air Alarm is offline." : "The Air Alarm is working properly!")]<br>\n[(aidisabled ? "The 'AI control allowed' light is off." : "The 'AI control allowed' light is on.")]")
@@ -703,14 +703,14 @@
 	var/output = "<b>Air Status:</b><br>"
 
 	if(total == 0)
-		output += "<font color='red'><b>Warning: Cannot obtain air sample for analysis.</b></font>"
+		output += "<font colour='red'><b>Warning: Cannot obtain air sample for analysis.</b></font>"
 		return output
 
 	output += {"
 <style>
-.dl0 { color: green; }
-.dl1 { color: orange; }
-.dl2 { color: red; font-weght: bold;}
+.dl0 { colour: green; }
+.dl1 { colour: orange; }
+.dl2 { colour: red; font-weght: bold;}
 </style>
 "}
 
@@ -809,9 +809,9 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 <HR>
 "}
 			if (mode==AALARM_MODE_PANIC)
-				output += "<font color='red'><B>PANIC SYPHON ACTIVE</B></font><br><A href='?src=\ref[src];mode=[AALARM_MODE_SCRUBBING]'>Turn syphoning off</A>"
+				output += "<font colour='red'><B>PANIC SYPHON ACTIVE</B></font><br><A href='?src=\ref[src];mode=[AALARM_MODE_SCRUBBING]'>Turn syphoning off</A>"
 			else
-				output += "<A href='?src=\ref[src];mode=[AALARM_MODE_PANIC]'><font color='red'>ACTIVATE PANIC SYPHON IN AREA</font></A>"
+				output += "<A href='?src=\ref[src];mode=[AALARM_MODE_PANIC]'><font colour='red'>ACTIVATE PANIC SYPHON IN AREA</font></A>"
 
 
 		if (AALARM_SCREEN_VENT)
@@ -886,8 +886,8 @@ Nitrous Oxide
 <BR>
 "}
 					sensor_data += {"
-<B>Panic syphon:</B> [data["panic"]?"<font color='red'><B>PANIC SYPHON ACTIVATED</B></font>":""]
-<A href='?src=\ref[src];id_tag=[id_tag];command=panic_siphon;val=[!data["panic"]]'><font color='[(data["panic"]?"blue'>Dea":"red'>A")]ctivate</font></A><BR>
+<B>Panic syphon:</B> [data["panic"]?"<font colour='red'><B>PANIC SYPHON ACTIVATED</B></font>":""]
+<A href='?src=\ref[src];id_tag=[id_tag];command=panic_siphon;val=[!data["panic"]]'><font colour='[(data["panic"]?"blue'>Dea":"red'>A")]ctivate</font></A><BR>
 <HR>
 "}
 			else
@@ -897,11 +897,11 @@ Nitrous Oxide
 		if (AALARM_SCREEN_MODE)
 			output += "<a href='?src=\ref[src];screen=[AALARM_SCREEN_MAIN]'>Main menu</a><br><b>Air machinery mode for the area:</b><ul>"
 			var/list/modes = list(AALARM_MODE_SCRUBBING   = "Filtering - Scrubs out contaminants",\
-				AALARM_MODE_REPLACEMENT = "<font color='blue'>Replace Air - Siphons out air while replacing</font>",\
-				AALARM_MODE_PANIC       = "<font color='red'>Panic - Siphons air out of the room</font>",\
-				AALARM_MODE_CYCLE       = "<font color='red'>Cycle - Siphons air before replacing</font>",\
-				AALARM_MODE_FILL        = "<font color='green'>Fill - Shuts off scrubbers and opens vents</font>",\
-				AALARM_MODE_OFF         = "<font color='blue'>Off - Shuts off vents and scrubbers</font>",)
+				AALARM_MODE_REPLACEMENT = "<font colour='blue'>Replace Air - Siphons out air while replacing</font>",\
+				AALARM_MODE_PANIC       = "<font colour='red'>Panic - Siphons air out of the room</font>",\
+				AALARM_MODE_CYCLE       = "<font colour='red'>Cycle - Siphons air before replacing</font>",\
+				AALARM_MODE_FILL        = "<font colour='green'>Fill - Shuts off scrubbers and opens vents</font>",\
+				AALARM_MODE_OFF         = "<font colour='blue'>Off - Shuts off vents and scrubbers</font>",)
 			for (var/m=1,m<=modes.len,m++)
 				if (mode==m)
 					output += "<li><A href='?src=\ref[src];mode=[m]'><b>[modes[m]]</b></A> (selected)</li>"
@@ -919,9 +919,9 @@ table td { border-left: 1px solid black; border-top: 1px solid black;}
 table tr:first-child th { border-left: 1px solid black;}
 table th:first-child { border-top: 1px solid black; font-weight: normal;}
 table tr:first-child th:first-child { border: none;}
-.dl0 { color: green; }
-.dl1 { color: orange; }
-.dl2 { color: red; font-weght: bold;}
+.dl0 { colour: green; }
+.dl1 { colour: orange; }
+.dl2 { colour: red; font-weght: bold;}
 </style>
 <table cellspacing=0>
 <TR><th></th><th class=dl2>min2</th><th class=dl1>min1</th><th class=dl1>max1</th><th class=dl2>max2</th></TR>

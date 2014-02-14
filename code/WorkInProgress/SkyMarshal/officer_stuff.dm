@@ -23,7 +23,7 @@
 	name = "\improper NanoTrasen Navy Uniform"
 	icon_state = "officer"
 	item_state = "g_suit"
-	item_color = "officer"
+	item_colour = "officer"
 	displays_id = 0
 
 /obj/item/clothing/under/rank/centcom/officer
@@ -31,7 +31,7 @@
 	name = "\improper NanoTrasen Officers Uniform"
 	icon_state = "officer"
 	item_state = "g_suit"
-	item_color = "officer"
+	item_colour = "officer"
 	displays_id = 0
 
 /obj/item/clothing/under/rank/centcom/captain
@@ -39,5 +39,5 @@
 	name = "\improper NanoTrasen Captains Uniform"
 	icon_state = "centcom"
 	item_state = "dg_suit"
-	item_color = "centcom"
+	item_colour = "centcom"
 	displays_id = 0

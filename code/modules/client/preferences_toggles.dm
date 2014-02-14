@@ -164,17 +164,17 @@
 	var/UI_style_alpha_new = input(usr, "Select a new alpha(transparence) parametr for UI, between 50 and 255") as num
 	if(!UI_style_alpha_new | !(UI_style_alpha_new <= 255 && UI_style_alpha_new >= 50)) return
 
-	var/UI_style_color_new = input(usr, "Choose your UI color, dark colors are not recommended!") as color|null
-	if(!UI_style_color_new) return
+	var/UI_style_colour_new = input(usr, "Choose your UI colour, dark colours are not recommended!") as colour|null
+	if(!UI_style_colour_new) return
 
 	//update UI
 	var/list/icons = usr.hud_used.adding + usr.hud_used.other +usr.hud_used.hotkeybuttons
 	icons.Add(usr.zone_sel)
 
 	for(var/obj/screen/I in icons)
-		if(I.color && I.alpha)
+		if(I.colour && I.alpha)
 			I.icon = ui_style2icon(UI_style_new)
-			I.color = UI_style_color_new
+			I.colour = UI_style_colour_new
 			I.alpha = UI_style_alpha_new
 
 
@@ -182,6 +182,6 @@
 	if(alert("Like it? Save changes?",,"Yes", "No") == "Yes")
 		prefs.UI_style = UI_style_new
 		prefs.UI_style_alpha = UI_style_alpha_new
-		prefs.UI_style_color = UI_style_color_new
+		prefs.UI_style_colour = UI_style_colour_new
 		prefs.save_preferences()
 		usr << "UI was saved"

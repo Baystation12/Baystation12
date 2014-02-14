@@ -1,7 +1,7 @@
 // /tg/ posters.
 /datum/poster/tg_1
 	name = "Free Tonto"
-	desc = "A framed shred of a much larger flag, colors bled together and faded from age."
+	desc = "A framed shred of a much larger flag, colours bled together and faded from age."
 	icon_state="poster1"
 
 /datum/poster/tg_2

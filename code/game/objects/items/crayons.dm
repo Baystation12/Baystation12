@@ -61,8 +61,8 @@
 	uses = 0
 
 /obj/item/toy/crayon/rainbow/attack_self(mob/living/user as mob)
-	colour = input(user, "Please select the main colour.", "Crayon colour") as color
-	shadeColour = input(user, "Please select the shade colour.", "Crayon colour") as color
+	colour = input(user, "Please select the main colour.", "Crayon colour") as colour
+	shadeColour = input(user, "Please select the shade colour.", "Crayon colour") as colour
 	return
 
 /obj/item/toy/crayon/afterattack(atom/target, mob/user as mob, proximity)

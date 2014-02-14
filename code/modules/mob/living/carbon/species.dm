@@ -39,8 +39,8 @@
 
 	var/list/abilities = list()	// For species-derived or admin-given powers
 
-	var/blood_color = "#A10808" //Red.
-	var/flesh_color = "#FFC896" //Pink.
+	var/blood_colour = "#A10808" //Red.
+	var/flesh_colour = "#FFC896" //Pink.
 
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 
@@ -86,7 +86,7 @@
 
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
-	flesh_color = "#34AF10"
+	flesh_colour = "#34AF10"
 
 /datum/species/tajaran
 	name = "Tajaran"
@@ -110,7 +110,7 @@
 
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
 
-	flesh_color = "#AFA59E"
+	flesh_colour = "#AFA59E"
 
 /datum/species/skrell
 	name = "Skrell"
@@ -121,7 +121,7 @@
 
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
 
-	flesh_color = "#8CD7A3"
+	flesh_colour = "#8CD7A3"
 
 /datum/species/vox
 	name = "Vox"
@@ -141,8 +141,8 @@
 
 	flags = NO_SCAN | NO_BLOOD
 
-	blood_color = "#2299FC"
-	flesh_color = "#808D11"
+	blood_colour = "#2299FC"
+	flesh_colour = "#808D11"
 
 /datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
 
@@ -188,8 +188,8 @@
 
 	flags = IS_WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
 
-	blood_color = "#004400"
-	flesh_color = "#907E4A"
+	blood_colour = "#004400"
+	flesh_colour = "#907E4A"
 
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 
@@ -235,5 +235,5 @@
 
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
 
-	blood_color = "#FFFFFF"
-	flesh_color = "#AAAAAA"
+	blood_colour = "#FFFFFF"
+	flesh_colour = "#AAAAAA"

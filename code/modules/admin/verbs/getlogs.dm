@@ -24,16 +24,16 @@
 	set category = null
 
 	if(!src.holder)
-		src << "<font color='red'>Only Admins may use this command.</font>"
+		src << "<font colour='red'>Only Admins may use this command.</font>"
 		return
 
 	var/client/target = input(src,"Choose somebody to grant access to the server's runtime logs (permissions expire at the end of each round):","Grant Permissions",null) as null|anything in clients
 	if(!istype(target,/client))
-		src << "<font color='red'>Error: giveruntimelog(): Client not found.</font>"
+		src << "<font colour='red'>Error: giveruntimelog(): Client not found.</font>"
 		return
 
 	target.verbs |= /client/proc/getruntimelog
-	target << "<font color='red'>You have been granted access to runtime logs. Please use them responsibly or risk being banned.</font>"
+	target << "<font colour='red'>You have been granted access to runtime logs. Please use them responsibly or risk being banned.</font>"
 	return
 
 
@@ -89,7 +89,7 @@
 	if( fexists(path) )
 		src << run( file(path) )
 	else
-		src << "<font color='red'>Error: view_txt_log(): File not found/Invalid path([path]).</font>"
+		src << "<font colour='red'>Error: view_txt_log(): File not found/Invalid path([path]).</font>"
 		return
 	feedback_add_details("admin_verb","VTL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
@@ -104,7 +104,7 @@
 	if( fexists(path) )
 		src << run( file(path) )
 	else
-		src << "<font color='red'>Error: view_atk_log(): File not found/Invalid path([path]).</font>"
+		src << "<font colour='red'>Error: view_atk_log(): File not found/Invalid path([path]).</font>"
 		return
 	usr << run( file(path) )
 	feedback_add_details("admin_verb","SSAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

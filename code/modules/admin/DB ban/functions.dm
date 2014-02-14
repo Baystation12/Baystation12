@@ -48,7 +48,7 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 		validckey = 1
 	if(!validckey)
 		if(!banned_mob || (banned_mob && !IsGuestKey(banned_mob.key)))
-			message_admins("<font color='red'>[key_name_admin(usr)] attempted to ban [ckey], but [ckey] has not been seen yet. Please only ban actual players.</font>",1)
+			message_admins("<font colour='red'>[key_name_admin(usr)] attempted to ban [ckey], but [ckey] has not been seen yet. Please only ban actual players.</font>",1)
 			return
 
 	var/a_ckey
@@ -277,7 +277,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	output += "<h1>Banning panel</h1>"
 	output += "</td>"
 
-	output += "<td width='65%' align='center' bgcolor='#f9f9f9'>"
+	output += "<td width='65%' align='center' bgcolour='#f9f9f9'>"
 
 	output += "<form method='GET' action='?src=\ref[src]'><b>Add custom ban:</b> (ONLY use this if you can't ban through any other method)"
 	output += "<input type='hidden' name='src' value='\ref[src]'>"
@@ -318,12 +318,12 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 
 	if(adminckey || playerckey)
 
-		var/blcolor = "#ffeeee" //banned light
-		var/bdcolor = "#ffdddd" //banned dark
-		var/ulcolor = "#eeffee" //unbanned light
-		var/udcolor = "#ddffdd" //unbanned dark
+		var/blcolour = "#ffeeee" //banned light
+		var/bdcolour = "#ffdddd" //banned dark
+		var/ulcolour = "#eeffee" //unbanned light
+		var/udcolour = "#ddffdd" //unbanned dark
 
-		output += "<table width='90%' bgcolor='#e3e3e3' cellpadding='5' cellspacing='0' align='center'>"
+		output += "<table width='90%' bgcolour='#e3e3e3' cellpadding='5' cellspacing='0' align='center'>"
 		output += "<tr>"
 		output += "<th width='25%'><b>TYPE</b></th>"
 		output += "<th width='20%'><b>CKEY</b></th>"
@@ -359,16 +359,16 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 			var/unbantime = select_query.item[12]
 			var/edits = select_query.item[13]
 
-			var/lcolor = blcolor
-			var/dcolor = bdcolor
+			var/lcolour = blcolour
+			var/dcolour = bdcolour
 			if(unbanned)
-				lcolor = ulcolor
-				dcolor = udcolor
+				lcolour = ulcolour
+				dcolour = udcolour
 
 			var/typedesc =""
 			switch(bantype)
 				if("PERMABAN")
-					typedesc = "<font color='red'><b>PERMABAN</b></font>"
+					typedesc = "<font colour='red'><b>PERMABAN</b></font>"
 				if("TEMPBAN")
 					typedesc = "<b>TEMPBAN</b><br><font size='2'>([duration] minutes [(unbanned) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>))"]<br>Expires [expiration]</font>"
 				if("JOB_PERMABAN")
@@ -376,29 +376,29 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 				if("JOB_TEMPBAN")
 					typedesc = "<b>TEMP JOBBAN</b><br><font size='2'>([job])<br>([duration] minutes<br>Expires [expiration]"
 
-			output += "<tr bgcolor='[dcolor]'>"
+			output += "<tr bgcolour='[dcolour]'>"
 			output += "<td align='center'>[typedesc]</td>"
 			output += "<td align='center'><b>[ckey]</b></td>"
 			output += "<td align='center'>[bantime]</td>"
 			output += "<td align='center'><b>[ackey]</b></td>"
 			output += "<td align='center'>[(unbanned) ? "" : "<b><a href=\"byond://?src=\ref[src];dbbanedit=unban;dbbanid=[banid]\">Unban</a></b>"]</td>"
 			output += "</tr>"
-			output += "<tr bgcolor='[lcolor]'>"
+			output += "<tr bgcolour='[lcolour]'>"
 			output += "<td align='center' colspan='5'><b>Reason: [(unbanned) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=reason;dbbanid=[banid]\">Edit</a>)"]</b> <cite>\"[reason]\"</cite></td>"
 			output += "</tr>"
 			if(edits)
-				output += "<tr bgcolor='[dcolor]'>"
+				output += "<tr bgcolour='[dcolour]'>"
 				output += "<td align='center' colspan='5'><b>EDITS</b></td>"
 				output += "</tr>"
-				output += "<tr bgcolor='[lcolor]'>"
+				output += "<tr bgcolour='[lcolour]'>"
 				output += "<td align='center' colspan='5'><font size='2'>[edits]</font></td>"
 				output += "</tr>"
 			if(unbanned)
-				output += "<tr bgcolor='[dcolor]'>"
-				output += "<td align='center' colspan='5' bgcolor=''><b>UNBANNED by admin [unbanckey] on [unbantime]</b></td>"
+				output += "<tr bgcolour='[dcolour]'>"
+				output += "<td align='center' colspan='5' bgcolour=''><b>UNBANNED by admin [unbanckey] on [unbantime]</b></td>"
 				output += "</tr>"
 			output += "<tr>"
-			output += "<td colspan='5' bgcolor='white'>&nbsp</td>"
+			output += "<td colspan='5' bgcolour='white'>&nbsp</td>"
 			output += "</tr>"
 
 		output += "</table></div>"

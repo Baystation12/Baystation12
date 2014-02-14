@@ -143,7 +143,7 @@ var/datum/controller/air_system/air_master
 	for(var/turf/simulated/S in world)
 		S.update_air_properties()
 
-	world << {"<font color='red'><b>Geometry initialized in [round(0.1*(world.timeofday-start_time),0.1)] seconds.</b>
+	world << {"<font colour='red'><b>Geometry initialized in [round(0.1*(world.timeofday-start_time),0.1)] seconds.</b>
 Total Simulated Turfs: [simulated_turf_count]
 Total Zones: [zones.len]
 Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_count]</font>"}
@@ -166,7 +166,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			if(!success) //Runtimed.
 				failed_ticks++
 				if(failed_ticks > 20)
-					world << "<font color='red'><b>ERROR IN ATMOS TICKER.  Killing air simulation!</font></b>"
+					world << "<font colour='red'><b>ERROR IN ATMOS TICKER.  Killing air simulation!</font></b>"
 					air_processing_killed = 1
 		sleep(max(5,update_delay*tick_multiplier))
 

@@ -6,7 +6,7 @@
 	item_state = "hardhat0_yellow"
 	var/brightness_on = 4 //luminosity when on
 	var/on = 0
-	item_color = "yellow" //Determines used sprites: hardhat[on]_[color] and hardhat[on]_[color]2 (lying down sprite)
+	item_colour = "yellow" //Determines used sprites: hardhat[on]_[colour] and hardhat[on]_[colour]2 (lying down sprite)
 	armor = list(melee = 30, bullet = 5, laser = 20,energy = 10, bomb = 20, bio = 10, rad = 20)
 	flags_inv = 0
 	icon_action_button = "action_hardhat"
@@ -17,8 +17,8 @@
 			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
 			return
 		on = !on
-		icon_state = "hardhat[on]_[item_color]"
-		item_state = "hardhat[on]_[item_color]"
+		icon_state = "hardhat[on]_[item_colour]"
+		item_state = "hardhat[on]_[item_colour]"
 
 		if(on)	user.SetLuminosity(user.luminosity + brightness_on)
 		else	user.SetLuminosity(user.luminosity - brightness_on)
@@ -39,12 +39,12 @@
 /obj/item/clothing/head/hardhat/orange
 	icon_state = "hardhat0_orange"
 	item_state = "hardhat0_orange"
-	item_color = "orange"
+	item_colour = "orange"
 
 /obj/item/clothing/head/hardhat/red
 	icon_state = "hardhat0_red"
 	item_state = "hardhat0_red"
-	item_color = "red"
+	item_colour = "red"
 	name = "firefighter helmet"
 	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE
 	heat_protection = HEAD
@@ -53,7 +53,7 @@
 /obj/item/clothing/head/hardhat/white
 	icon_state = "hardhat0_white"
 	item_state = "hardhat0_white"
-	item_color = "white"
+	item_colour = "white"
 	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE
@@ -61,5 +61,5 @@
 /obj/item/clothing/head/hardhat/dblue
 	icon_state = "hardhat0_dblue"
 	item_state = "hardhat0_dblue"
-	item_color = "dblue"
+	item_colour = "dblue"
 

@@ -114,7 +114,7 @@ var/list/DEPT_FREQS = list(1351, 1355, 1357, 1359, 1213, 1345, 1341, 1347)
 // central command channels, i.e deathsquid & response teams
 var/list/CENT_FREQS = list(1345, 1341)
 
-var/const/COMM_FREQ = 1353 //command, colored gold in chat window
+var/const/COMM_FREQ = 1353 //command, coloured gold in chat window
 var/const/SYND_FREQ = 1213
 
 // department channels

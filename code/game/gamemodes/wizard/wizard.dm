@@ -139,7 +139,7 @@
 			wizard.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 			obj_count++
 	else
-		wizard.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+		wizard.current << "<font colour=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 	return
 
 
@@ -237,19 +237,19 @@
 			if(!config.objectives_disabled)
 				for(var/datum/objective/objective in wizard.objectives)
 					if(objective.check_completion())
-						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='green'><B>Success!</B></font>"
+						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font colour='green'><B>Success!</B></font>"
 						feedback_add_details("wizard_objective","[objective.type]|SUCCESS")
 					else
-						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
+						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font colour='red'>Fail.</font>"
 						feedback_add_details("wizard_objective","[objective.type]|FAIL")
 						wizardwin = 0
 					count++
 
 				if(wizard.current && wizard.current.stat!=2 && wizardwin)
-					text += "<br><font color='green'><B>The wizard was successful!</B></font>"
+					text += "<br><font colour='green'><B>The wizard was successful!</B></font>"
 					feedback_add_details("wizard_success","SUCCESS")
 				else
-					text += "<br><font color='red'><B>The wizard has failed!</B></font>"
+					text += "<br><font colour='red'><B>The wizard has failed!</B></font>"
 					feedback_add_details("wizard_success","FAIL")
 
 		world << text

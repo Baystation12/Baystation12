@@ -62,7 +62,7 @@
 		dat += "<b>Total Power:</b> [inserted_battery.stored_charge]/[inserted_battery.capacity]<BR><BR>"
 		dat += "<b>Timed activation:</b> <A href='?src=\ref[src];neg_changetime_max=-100'>--</a> <A href='?src=\ref[src];neg_changetime=-10'>-</a> [time >= 1000 ? "[time/10]" : time >= 100 ? " [time/10]" : "  [time/10]" ] <A href='?src=\ref[src];changetime=10'>+</a> <A href='?src=\ref[src];changetime_max=100'>++</a><BR>"
 		if(cooldown)
-			dat += "<font color=red>Cooldown in progress.</font><BR>"
+			dat += "<font colour=red>Cooldown in progress.</font><BR>"
 			dat += "<br>"
 		else if(!activated)
 			dat += "<A href='?src=\ref[src];startup=1'>Start</a><BR>"

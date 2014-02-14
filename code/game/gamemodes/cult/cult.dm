@@ -101,7 +101,7 @@
 		if(!config.objectives_disabled)
 			memoize_cult_objectives(cult_mind)
 		else
-			cult_mind.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+			cult_mind.current << "<font colour=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 		cult_mind.special_role = "Cultist"
 
 	spawn (rand(waittime_l, waittime_h))
@@ -301,28 +301,28 @@
 				switch(objectives[obj_count])
 					if("survive")
 						if(!check_survive())
-							explanation = "Make sure at least [acolytes_needed] acolytes escape on the shuttle. <font color='green'><B>Success!</B></font>"
+							explanation = "Make sure at least [acolytes_needed] acolytes escape on the shuttle. <font colour='green'><B>Success!</B></font>"
 							feedback_add_details("cult_objective","cult_survive|SUCCESS|[acolytes_needed]")
 						else
-							explanation = "Make sure at least [acolytes_needed] acolytes escape on the shuttle. <font color='red'>Fail.</font>"
+							explanation = "Make sure at least [acolytes_needed] acolytes escape on the shuttle. <font colour='red'>Fail.</font>"
 							feedback_add_details("cult_objective","cult_survive|FAIL|[acolytes_needed]")
 					if("sacrifice")
 						if(sacrifice_target)
 							if(sacrifice_target in sacrificed)
-								explanation = "Sacrifice [sacrifice_target.name], the [sacrifice_target.assigned_role]. <font color='green'><B>Success!</B></font>"
+								explanation = "Sacrifice [sacrifice_target.name], the [sacrifice_target.assigned_role]. <font colour='green'><B>Success!</B></font>"
 								feedback_add_details("cult_objective","cult_sacrifice|SUCCESS")
 							else if(sacrifice_target && sacrifice_target.current)
-								explanation = "Sacrifice [sacrifice_target.name], the [sacrifice_target.assigned_role]. <font color='red'>Fail.</font>"
+								explanation = "Sacrifice [sacrifice_target.name], the [sacrifice_target.assigned_role]. <font colour='red'>Fail.</font>"
 								feedback_add_details("cult_objective","cult_sacrifice|FAIL")
 						else
-							explanation = "Sacrifice [sacrifice_target.name], the [sacrifice_target.assigned_role]. <font color='red'>Fail (Gibbed).</font>"
+							explanation = "Sacrifice [sacrifice_target.name], the [sacrifice_target.assigned_role]. <font colour='red'>Fail (Gibbed).</font>"
 							feedback_add_details("cult_objective","cult_sacrifice|FAIL|GIBBED")
 					if("eldergod")
 						if(!eldergod)
-							explanation = "Summon Nar-Sie. <font color='green'><B>Success!</B></font>"
+							explanation = "Summon Nar-Sie. <font colour='green'><B>Success!</B></font>"
 							feedback_add_details("cult_objective","cult_narsie|SUCCESS")
 						else
-							explanation = "Summon Nar-Sie. <font color='red'>Fail.</font>"
+							explanation = "Summon Nar-Sie. <font colour='red'>Fail.</font>"
 						feedback_add_details("cult_objective","cult_narsie|FAIL")
 				text += "<br><B>Objective #[obj_count]</B>: [explanation]"
 

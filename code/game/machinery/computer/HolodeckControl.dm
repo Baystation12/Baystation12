@@ -43,20 +43,20 @@
 		dat += "Please ensure that only holographic weapons are used in the holodeck if a combat simulation has been loaded.<BR>"
 
 		if(emagged)
-			dat += "<A href='?src=\ref[src];burntest=1'>(<font color=red>Begin Atmospheric Burn Simulation</font>)</A><BR>"
+			dat += "<A href='?src=\ref[src];burntest=1'>(<font colour=red>Begin Atmospheric Burn Simulation</font>)</A><BR>"
 			dat += "Ensure the holodeck is empty before testing.<BR>"
 			dat += "<BR>"
-			dat += "<A href='?src=\ref[src];wildlifecarp=1'>(<font color=red>Begin Wildlife Simulation</font>)</A><BR>"
+			dat += "<A href='?src=\ref[src];wildlifecarp=1'>(<font colour=red>Begin Wildlife Simulation</font>)</A><BR>"
 			dat += "Ensure the holodeck is empty before testing.<BR>"
 			dat += "<BR>"
 			if(issilicon(user))
-				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=green>Re-Enable Safety Protocols?</font>)</A><BR>"
-			dat += "Safety Protocols are <font color=red> DISABLED </font><BR>"
+				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font colour=green>Re-Enable Safety Protocols?</font>)</A><BR>"
+			dat += "Safety Protocols are <font colour=red> DISABLED </font><BR>"
 		else
 			if(issilicon(user))
-				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font color=red>Override Safety Protocols?</font>)</A><BR>"
+				dat += "<A href='?src=\ref[src];AIoverride=1'>(<font colour=red>Override Safety Protocols?</font>)</A><BR>"
 			dat += "<BR>"
-			dat += "Safety Protocols are <font color=green> ENABLED </font><BR>"
+			dat += "Safety Protocols are <font colour=green> ENABLED </font><BR>"
 
 		user << browse(dat, "window=computer;size=400x500")
 		onclose(user, "computer")
@@ -501,11 +501,11 @@
 
 /obj/item/weapon/holo/esword/green
 	New()
-		item_color = "green"
+		item_colour = "green"
 
 /obj/item/weapon/holo/esword/red
 	New()
-		item_color = "red"
+		item_colour = "red"
 
 /obj/item/weapon/holo/esword/IsShield()
 	if(active)
@@ -516,13 +516,13 @@
 	..()
 
 /obj/item/weapon/holo/esword/New()
-	item_color = pick("red","blue","green","purple")
+	item_colour = pick("red","blue","green","purple")
 
 /obj/item/weapon/holo/esword/attack_self(mob/living/user as mob)
 	active = !active
 	if (active)
 		force = 30
-		icon_state = "sword[item_color]"
+		icon_state = "sword[item_colour]"
 		w_class = 4
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		user << "\blue [src] is now active."

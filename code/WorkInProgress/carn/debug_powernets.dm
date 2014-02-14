@@ -8,7 +8,7 @@ client/verb/powernets_debug()
 
 client/verb/powernet_overlays()
 	for(var/obj/structure/cable/C in cable_list)
-		C.maptext = "<font color='white'>[copytext("\ref[C.powernet]",8,12)]</font>"
+		C.maptext = "<font colour='white'>[copytext("\ref[C.powernet]",8,12)]</font>"
 	for(var/obj/machinery/power/M in machines)
-		M.maptext = "<font color='white'>[copytext("\ref[M.powernet]",8,12)]</font>"
+		M.maptext = "<font colour='white'>[copytext("\ref[M.powernet]",8,12)]</font>"
 */

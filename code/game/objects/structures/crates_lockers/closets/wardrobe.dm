@@ -5,9 +5,9 @@
 	icon_closed = "blue"
 
 /obj/structure/closet/wardrobe/New()
-	new /obj/item/clothing/under/color/blue(src)
-	new /obj/item/clothing/under/color/blue(src)
-	new /obj/item/clothing/under/color/blue(src)
+	new /obj/item/clothing/under/colour/blue(src)
+	new /obj/item/clothing/under/colour/blue(src)
+	new /obj/item/clothing/under/colour/blue(src)
 	new /obj/item/clothing/shoes/brown(src)
 	new /obj/item/clothing/shoes/brown(src)
 	new /obj/item/clothing/shoes/brown(src)
@@ -44,9 +44,9 @@
 	icon_closed = "pink"
 
 /obj/structure/closet/wardrobe/pink/New()
-	new /obj/item/clothing/under/color/pink(src)
-	new /obj/item/clothing/under/color/pink(src)
-	new /obj/item/clothing/under/color/pink(src)
+	new /obj/item/clothing/under/colour/pink(src)
+	new /obj/item/clothing/under/colour/pink(src)
+	new /obj/item/clothing/under/colour/pink(src)
 	new /obj/item/clothing/shoes/brown(src)
 	new /obj/item/clothing/shoes/brown(src)
 	new /obj/item/clothing/shoes/brown(src)
@@ -58,9 +58,9 @@
 	icon_closed = "black"
 
 /obj/structure/closet/wardrobe/black/New()
-	new /obj/item/clothing/under/color/black(src)
-	new /obj/item/clothing/under/color/black(src)
-	new /obj/item/clothing/under/color/black(src)
+	new /obj/item/clothing/under/colour/black(src)
+	new /obj/item/clothing/under/colour/black(src)
+	new /obj/item/clothing/under/colour/black(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
@@ -97,9 +97,9 @@
 	icon_closed = "green"
 
 /obj/structure/closet/wardrobe/green/New()
-	new /obj/item/clothing/under/color/green(src)
-	new /obj/item/clothing/under/color/green(src)
-	new /obj/item/clothing/under/color/green(src)
+	new /obj/item/clothing/under/colour/green(src)
+	new /obj/item/clothing/under/colour/green(src)
+	new /obj/item/clothing/under/colour/green(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
@@ -126,9 +126,9 @@
 	icon_closed = "orange"
 
 /obj/structure/closet/wardrobe/orange/New()
-	new /obj/item/clothing/under/color/orange(src)
-	new /obj/item/clothing/under/color/orange(src)
-	new /obj/item/clothing/under/color/orange(src)
+	new /obj/item/clothing/under/colour/orange(src)
+	new /obj/item/clothing/under/colour/orange(src)
+	new /obj/item/clothing/under/colour/orange(src)
 	new /obj/item/clothing/shoes/orange(src)
 	new /obj/item/clothing/shoes/orange(src)
 	new /obj/item/clothing/shoes/orange(src)
@@ -141,9 +141,9 @@
 	icon_closed = "wardrobe-y"
 
 /obj/structure/closet/wardrobe/yellow/New()
-	new /obj/item/clothing/under/color/yellow(src)
-	new /obj/item/clothing/under/color/yellow(src)
-	new /obj/item/clothing/under/color/yellow(src)
+	new /obj/item/clothing/under/colour/yellow(src)
+	new /obj/item/clothing/under/colour/yellow(src)
+	new /obj/item/clothing/under/colour/yellow(src)
 	new /obj/item/clothing/shoes/orange(src)
 	new /obj/item/clothing/shoes/orange(src)
 	new /obj/item/clothing/shoes/orange(src)
@@ -199,9 +199,9 @@
 	icon_closed = "white"
 
 /obj/structure/closet/wardrobe/white/New()
-	new /obj/item/clothing/under/color/white(src)
-	new /obj/item/clothing/under/color/white(src)
-	new /obj/item/clothing/under/color/white(src)
+	new /obj/item/clothing/under/colour/white(src)
+	new /obj/item/clothing/under/colour/white(src)
+	new /obj/item/clothing/under/colour/white(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
 	new /obj/item/clothing/shoes/white(src)
@@ -336,9 +336,9 @@
 	icon_closed = "grey"
 
 /obj/structure/closet/wardrobe/grey/New()
-	new /obj/item/clothing/under/color/grey(src)
-	new /obj/item/clothing/under/color/grey(src)
-	new /obj/item/clothing/under/color/grey(src)
+	new /obj/item/clothing/under/colour/grey(src)
+	new /obj/item/clothing/under/colour/grey(src)
+	new /obj/item/clothing/under/colour/grey(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/shoes/black(src)
@@ -354,11 +354,11 @@
 	icon_closed = "mixed"
 
 /obj/structure/closet/wardrobe/mixed/New()
-	new /obj/item/clothing/under/color/blue(src)
-	new /obj/item/clothing/under/color/yellow(src)
-	new /obj/item/clothing/under/color/green(src)
-	new /obj/item/clothing/under/color/orange(src)
-	new /obj/item/clothing/under/color/pink(src)
+	new /obj/item/clothing/under/colour/blue(src)
+	new /obj/item/clothing/under/colour/yellow(src)
+	new /obj/item/clothing/under/colour/green(src)
+	new /obj/item/clothing/under/colour/orange(src)
+	new /obj/item/clothing/under/colour/pink(src)
 	new /obj/item/clothing/under/dress/plaid_blue(src)
 	new /obj/item/clothing/under/dress/plaid_red(src)
 	new /obj/item/clothing/under/dress/plaid_purple(src)

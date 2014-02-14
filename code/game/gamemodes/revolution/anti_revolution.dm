@@ -184,10 +184,10 @@
 			var/count = 1
 			for(var/datum/objective/objective in head_mind.objectives)
 				if(objective.check_completion())
-					text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='green'><B>Success!</B></font>"
+					text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font colour='green'><B>Success!</B></font>"
 					feedback_add_details("head_objective","[objective.type]|SUCCESS")
 				else
-					text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
+					text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font colour='red'>Fail.</font>"
 					feedback_add_details("head_objective","[objective.type]|FAIL")
 				count++
 		break // just print once

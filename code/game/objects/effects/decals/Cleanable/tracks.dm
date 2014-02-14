@@ -13,20 +13,20 @@
 // 5 seconds
 #define TRACKS_CRUSTIFY_TIME   50
 
-// color-dir-dry
+// colour-dir-dry
 var/global/list/image/fluidtrack_cache=list()
 
 /datum/fluidtrack
 	var/direction=0
-	var/basecolor="#A10808"
+	var/basecolour="#A10808"
 	var/wet=0
 	var/fresh=1
 	var/crusty=0
 	var/image/overlay
 
-	New(_direction,_color,_wet)
+	New(_direction,_colour,_wet)
 		src.direction=_direction
-		src.basecolor=_color
+		src.basecolour=_colour
 		src.wet=_wet
 
 // Footprints, tire trails...
@@ -52,7 +52,7 @@ var/global/list/image/fluidtrack_cache=list()
 		"128"=0
 	)
 
-	// List of laid tracks and their colors.
+	// List of laid tracks and their colours.
 	var/list/datum/fluidtrack/stack=list()
 
 	/**
@@ -61,9 +61,9 @@ var/global/list/image/fluidtrack_cache=list()
 	* @param DNA bloodDNA to add to collection.
 	* @param comingdir Direction tracks come from, or 0.
 	* @param goingdir Direction tracks are going to (or 0).
-	* @param bloodcolor Color of the blood when wet.
+	* @param bloodcolour Color of the blood when wet.
 	*/
-	proc/AddTracks(var/list/DNA, var/comingdir, var/goingdir, var/bloodcolor="#A10808")
+	proc/AddTracks(var/list/DNA, var/comingdir, var/goingdir, var/bloodcolour="#A10808")
 		var/updated=0
 		// Shift our goingdir 4 spaces to the left so it's in the GOING bitblock.
 		var/realgoing=goingdir<<4
@@ -86,11 +86,11 @@ var/global/list/image/fluidtrack_cache=list()
 				if(dirs&b)
 					var/sid=setdirs["[b]"]
 					track=stack[sid]
-					if(track.wet==t && track.basecolor==bloodcolor)
+					if(track.wet==t && track.basecolour==bloodcolour)
 						continue
 					// Remove existing stack entry
 					stack.Remove(track)
-				track=new /datum/fluidtrack(b,bloodcolor,t)
+				track=new /datum/fluidtrack(b,bloodcolour,t)
 				stack.Add(track)
 				setdirs["[b]"]=stack.Find(track)
 				updatedtracks |= b
@@ -103,11 +103,11 @@ var/global/list/image/fluidtrack_cache=list()
 				if(dirs&b)
 					var/sid=setdirs["[b]"]
 					track=stack[sid]
-					if(track.wet==t && track.basecolor==bloodcolor)
+					if(track.wet==t && track.basecolour==bloodcolour)
 						continue
 					// Remove existing stack entry
 					stack.Remove(track)
-				track=new /datum/fluidtrack(b,bloodcolor,t)
+				track=new /datum/fluidtrack(b,bloodcolour,t)
 				stack.Add(track)
 				setdirs["[b]"]=stack.Find(track)
 				updatedtracks |= b
@@ -120,7 +120,7 @@ var/global/list/image/fluidtrack_cache=list()
 
 	update_icon()
 		overlays.Cut()
-		color = "#FFFFFF"
+		colour = "#FFFFFF"
 		var/truedir=0
 
 		// Update ONLY the overlays that have changed.
@@ -135,7 +135,7 @@ var/global/list/image/fluidtrack_cache=list()
 			if(track.overlay)
 				track.overlay=null
 			var/image/I = image(icon, icon_state=state, dir=num2dir(truedir))
-			I.color = track.basecolor
+			I.colour = track.basecolour
 
 			track.fresh=0
 			track.overlay=I

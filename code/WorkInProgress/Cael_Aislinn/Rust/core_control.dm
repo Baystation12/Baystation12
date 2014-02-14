@@ -43,7 +43,7 @@
 
 		if(cur_viewed_device)
 			dat += "<b>Device tag:</b> [cur_viewed_device.id_tag ? cur_viewed_device.id_tag : "UNSET"]<br>"
-			dat += "<font color=blue>Device [cur_viewed_device.owned_field ? "activated" : "deactivated"].</font><br>"
+			dat += "<font colour=blue>Device [cur_viewed_device.owned_field ? "activated" : "deactivated"].</font><br>"
 			dat += "<a href='?src=\ref[cur_viewed_device];extern_update=\ref[src];toggle_active=1'>\[Bring field [cur_viewed_device.owned_field ? "offline" : "online"]\]</a><br>"
 			dat += "<b>Device [cur_viewed_device.anchored ? "secured" : "unsecured"].</b><br>"
 			dat += "<hr>"

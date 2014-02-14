@@ -199,7 +199,7 @@
 	if(!H) return
 
 	var/filename="crmap[ckey].tmp"
-	var/html="<html><body bgcolor=black><table border=0 cellspacing=0 cellpadding=0>"
+	var/html="<html><body bgcolour=black><table border=0 cellspacing=0 cellpadding=0>"
 	var/denytypes[0]
 	var/tilesizex=32
 	var/tilesizey=32

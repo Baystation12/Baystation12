@@ -616,7 +616,7 @@
 	else
 		if (src.connected)
 			var/mob/occupant = src.connected.occupant
-			dat = "<font color='blue'><B>Occupant Statistics:</B></FONT><BR>"
+			dat = "<font colour='blue'><B>Occupant Statistics:</B></FONT><BR>"
 			if (occupant)
 				var/t1
 				switch(occupant.stat)
@@ -626,7 +626,7 @@
 						t1 = "Unconscious"
 					else
 						t1 = "*dead*"
-				dat += text("[]\tHealth %: [] ([])</FONT><BR><BR>", (occupant.health > 50 ? "<font color='blue'>" : "<font color='red'>"), occupant.health, t1)
+				dat += text("[]\tHealth %: [] ([])</FONT><BR><BR>", (occupant.health > 50 ? "<font colour='blue'>" : "<font colour='red'>"), occupant.health, t1)
 			else
 				dat += "The scanner is empty.<BR>"
 			if (!( src.connected.locked ))

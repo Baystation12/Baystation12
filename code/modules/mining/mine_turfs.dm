@@ -269,7 +269,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 			if(prob(50))
 				pain = 1
 			for(var/mob/living/M in range(src, 200))
-				M << "<font color='red'><b>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</b></font>"
+				M << "<font colour='red'><b>[pick("A high pitched [pick("keening","wailing","whistle")]","A rumbling noise like [pick("thunder","heavy machinery")]")] somehow penetrates your mind before fading away!</b></font>"
 				if(pain)
 					flick("pain",M.pain)
 					if(prob(50))

@@ -101,9 +101,9 @@
 		if ((src.l_set == 0) && (!src.emagged) && (!src.l_setshort))
 			dat += text("<p>\n<b>5-DIGIT PASSCODE NOT SET.<br>ENTER NEW PASSCODE.</b>")
 		if (src.emagged)
-			dat += text("<p>\n<font color=red><b>LOCKING SYSTEM ERROR - 1701</b></font>")
+			dat += text("<p>\n<font colour=red><b>LOCKING SYSTEM ERROR - 1701</b></font>")
 		if (src.l_setshort)
-			dat += text("<p>\n<font color=red><b>ALERT: MEMORY SYSTEM ERROR - 6040 201</b></font>")
+			dat += text("<p>\n<font colour=red><b>ALERT: MEMORY SYSTEM ERROR - 6040 201</b></font>")
 		message = text("[]", src.code)
 		if (!src.locked)
 			message = "*****"
@@ -188,10 +188,10 @@
 			user.Paralyse(2)
 			return
 
-		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
+		M.attack_log += text("\[[time_stamp()]\] <font colour='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
+		user.attack_log += text("\[[time_stamp()]\] <font colour='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
 
-		log_attack("<font color='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
+		log_attack("<font colour='red'>[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])</font>")
 
 		var/t = user:zone_sel.selecting
 		if (t == "head")

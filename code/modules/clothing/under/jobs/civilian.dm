@@ -5,7 +5,7 @@
 	name = "bartender's uniform"
 	icon_state = "ba_suit"
 	item_state = "ba_suit"
-	item_color = "ba_suit"
+	item_colour = "ba_suit"
 	flags = FPRINT | TABLEPASS
 
 
@@ -14,7 +14,7 @@
 	name = "captain's jumpsuit"
 	icon_state = "captain"
 	item_state = "caparmor"
-	item_color = "captain"
+	item_colour = "captain"
 	flags = FPRINT | TABLEPASS
 
 
@@ -23,7 +23,7 @@
 	desc = "It's a jumpsuit worn by the quartermaster. It's specially designed to prevent back injuries caused by pushing paper."
 	icon_state = "qm"
 	item_state = "lb_suit"
-	item_color = "qm"
+	item_colour = "qm"
 
 
 /obj/item/clothing/under/rank/cargotech
@@ -31,7 +31,7 @@
 	desc = "Shooooorts! They're comfy and easy to wear!"
 	icon_state = "cargotech"
 	item_state = "lb_suit"
-	item_color = "cargo"
+	item_colour = "cargo"
 	flags = FPRINT | TABLEPASS
 
 
@@ -40,7 +40,7 @@
 	name = "chaplain's jumpsuit"
 	icon_state = "chaplain"
 	item_state = "bl_suit"
-	item_color = "chapblack"
+	item_colour = "chapblack"
 	flags = FPRINT | TABLEPASS
 
 
@@ -48,7 +48,7 @@
 	desc = "It's an apron which is given only to the most <b>hardcore</b> chefs in space."
 	name = "chef's uniform"
 	icon_state = "chef"
-	item_color = "chef"
+	item_colour = "chef"
 	flags = FPRINT | TABLEPASS
 
 
@@ -57,7 +57,7 @@
 	desc = "<i>'HONK!'</i>"
 	icon_state = "clown"
 	item_state = "clown"
-	item_color = "clown"
+	item_colour = "clown"
 	flags = FPRINT | TABLEPASS
 
 
@@ -66,7 +66,7 @@
 	name = "head of personnel's jumpsuit"
 	icon_state = "hop"
 	item_state = "b_suit"
-	item_color = "hop"
+	item_colour = "hop"
 	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/under/rank/head_of_personnel_whimsy
@@ -74,7 +74,7 @@
 	name = "head of personnel's suit"
 	icon_state = "hopwhimsy"
 	item_state = "hopwhimsy"
-	item_color = "hopwhimsy"
+	item_colour = "hopwhimsy"
 	flags = FPRINT | TABLEPASS
 
 
@@ -83,7 +83,7 @@
 	name = "botanist's jumpsuit"
 	icon_state = "hydroponics"
 	item_state = "g_suit"
-	item_color = "hydroponics"
+	item_colour = "hydroponics"
 	permeability_coefficient = 0.50
 	flags = FPRINT | TABLEPASS
 
@@ -93,7 +93,7 @@
 	name = "Internal Affairs uniform"
 	icon_state = "internalaffairs"
 	item_state = "internalaffairs"
-	item_color = "internalaffairs"
+	item_colour = "internalaffairs"
 	flags = FPRINT | TABLEPASS
 
 
@@ -101,7 +101,7 @@
 	desc = "It's the official uniform of the station's janitor. It has minor protection from biohazards."
 	name = "janitor's jumpsuit"
 	icon_state = "janitor"
-	item_color = "janitor"
+	item_colour = "janitor"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	flags = FPRINT | TABLEPASS
 
@@ -115,25 +115,25 @@
 /obj/item/clothing/under/lawyer/black
 	icon_state = "lawyer_black"
 	item_state = "lawyer_black"
-	item_color = "lawyer_black"
+	item_colour = "lawyer_black"
 
 
 /obj/item/clothing/under/lawyer/female
 	icon_state = "black_suit_fem"
 	item_state = "black_suit_fem"
-	item_color = "black_suit_fem"
+	item_colour = "black_suit_fem"
 
 
 /obj/item/clothing/under/lawyer/red
 	icon_state = "lawyer_red"
 	item_state = "lawyer_red"
-	item_color = "lawyer_red"
+	item_colour = "lawyer_red"
 
 
 /obj/item/clothing/under/lawyer/blue
 	icon_state = "lawyer_blue"
 	item_state = "lawyer_blue"
-	item_color = "lawyer_blue"
+	item_colour = "lawyer_blue"
 
 
 /obj/item/clothing/under/lawyer/bluesuit
@@ -141,21 +141,21 @@
 	desc = "A classy suit and tie"
 	icon_state = "bluesuit"
 	item_state = "bluesuit"
-	item_color = "bluesuit"
+	item_colour = "bluesuit"
 
 
 /obj/item/clothing/under/lawyer/purpsuit
 	name = "Purple Suit"
 	icon_state = "lawyer_purp"
 	item_state = "lawyer_purp"
-	item_color = "lawyer_purp"
+	item_colour = "lawyer_purp"
 
 /obj/item/clothing/under/lawyer/oldman
 	name = "Old Man's Suit"
 	desc = "A classic suit for the older gentleman with built in back support."
 	icon_state = "oldman"
 	item_state = "oldman"
-	item_color = "oldman"
+	item_colour = "oldman"
 
 
 /obj/item/clothing/under/librarian
@@ -163,14 +163,14 @@
 	desc = "It's very... sensible."
 	icon_state = "red_suit"
 	item_state = "red_suit"
-	item_color = "red_suit"
+	item_colour = "red_suit"
 
 /obj/item/clothing/under/mime
 	name = "mime's outfit"
 	desc = "It's not very colourful."
 	icon_state = "mime"
 	item_state = "mime"
-	item_color = "mime"
+	item_colour = "mime"
 	flags = FPRINT | TABLEPASS
 
 /obj/item/clothing/under/rank/miner
@@ -178,4 +178,4 @@
 	name = "shaft miner's jumpsuit"
 	icon_state = "miner"
 	item_state = "miner"
-	item_color = "miner"
+	item_colour = "miner"

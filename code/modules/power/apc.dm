@@ -77,13 +77,13 @@
 	for (var/flag=1, flag<16, flag+=flag)
 		var/valid = 0
 		while (!valid)
-			var/colorIndex = rand(1, 4)
-			if (apcwires[colorIndex]==0)
+			var/colourIndex = rand(1, 4)
+			if (apcwires[colourIndex]==0)
 				valid = 1
-				apcwires[colorIndex] = flag
+				apcwires[colourIndex] = flag
 				APCIndexToFlag[flagIndex] = flag
-				APCIndexToWireColor[flagIndex] = colorIndex
-				APCWireColorToIndex[colorIndex] = flagIndex
+				APCIndexToWireColor[flagIndex] = colourIndex
+				APCWireColorToIndex[colourIndex] = flagIndex
 		flagIndex+=1
 	return apcwires
 

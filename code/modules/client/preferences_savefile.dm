@@ -48,23 +48,23 @@
 			return 0
 
 	//general preferences
-	S["ooccolor"]			>> ooccolor
+	S["ooccolour"]			>> ooccolour
 	S["lastchangelog"]		>> lastchangelog
 	S["UI_style"]			>> UI_style
 	S["be_special"]			>> be_special
 	S["default_slot"]		>> default_slot
 	S["toggles"]			>> toggles
-	S["UI_style_color"]		>> UI_style_color
+	S["UI_style_colour"]		>> UI_style_colour
 	S["UI_style_alpha"]		>> UI_style_alpha
 
 	//Sanitize
-	ooccolor		= sanitize_hexcolor(ooccolor, initial(ooccolor))
+	ooccolour		= sanitize_hexcolour(ooccolour, initial(ooccolour))
 	lastchangelog	= sanitize_text(lastchangelog, initial(lastchangelog))
 	UI_style		= sanitize_inlist(UI_style, list("White", "Midnight","Orange","old"), initial(UI_style))
 	be_special		= sanitize_integer(be_special, 0, 65535, initial(be_special))
 	default_slot	= sanitize_integer(default_slot, 1, MAX_SAVE_SLOTS, initial(default_slot))
 	toggles			= sanitize_integer(toggles, 0, 65535, initial(toggles))
-	UI_style_color	= sanitize_hexcolor(UI_style_color, initial(UI_style_color))
+	UI_style_colour	= sanitize_hexcolour(UI_style_colour, initial(UI_style_colour))
 	UI_style_alpha	= sanitize_integer(UI_style_alpha, 0, 255, initial(UI_style_alpha))
 
 	return 1
@@ -78,13 +78,13 @@
 	S["version"] << savefile_version
 
 	//general preferences
-	S["ooccolor"]			<< ooccolor
+	S["ooccolour"]			<< ooccolour
 	S["lastchangelog"]		<< lastchangelog
 	S["UI_style"]			<< UI_style
 	S["be_special"]			<< be_special
 	S["default_slot"]		<< default_slot
 	S["toggles"]			<< toggles
-	S["UI_style_color"]		<< UI_style_color
+	S["UI_style_colour"]		<< UI_style_colour
 	S["UI_style_alpha"]		<< UI_style_alpha
 
 	return 1
@@ -111,7 +111,7 @@
 	S["species"]			>> species
 	S["language"]			>> language
 
-	//colors to be consolidated into hex strings (requires some work with dna code)
+	//colours to be consolidated into hex strings (requires some work with dna code)
 	S["hair_red"]			>> r_hair
 	S["hair_green"]			>> g_hair
 	S["hair_blue"]			>> b_hair

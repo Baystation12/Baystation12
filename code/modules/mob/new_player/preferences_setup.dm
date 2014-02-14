@@ -9,9 +9,9 @@ datum/preferences
 		s_tone = random_skin_tone()
 		h_style = random_hair_style(gender, species)
 		f_style = random_facial_hair_style(gender, species)
-		randomize_hair_color("hair")
-		randomize_hair_color("facial")
-		randomize_eyes_color()
+		randomize_hair_colour("hair")
+		randomize_hair_colour("facial")
+		randomize_eyes_colour()
 		underwear = rand(1,underwear_m.len)
 		backbag = 2
 		age = rand(AGE_MIN,AGE_MAX)
@@ -19,8 +19,8 @@ datum/preferences
 			copy_to(H,1)
 
 
-	proc/randomize_hair_color(var/target = "hair")
-		if(prob (75) && target == "facial") // Chance to inherit hair color
+	proc/randomize_hair_colour(var/target = "hair")
+		if(prob (75) && target == "facial") // Chance to inherit hair colour
 			r_facial = r_hair
 			g_facial = g_hair
 			b_facial = b_hair
@@ -79,7 +79,7 @@ datum/preferences
 				g_facial = green
 				b_facial = blue
 
-	proc/randomize_eyes_color()
+	proc/randomize_eyes_colour()
 		var/red
 		var/green
 		var/blue

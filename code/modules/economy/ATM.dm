@@ -125,7 +125,7 @@ log transactions
 		dat += "<i>This terminal is</i> [machine_id]. <i>Report this code when contacting NanoTrasen IT Support</i><br/>"
 
 		if(emagged > 0)
-			dat += "Card: <span style='color: red;'>LOCKED</span><br><br><span style='color: red;'>Unauthorized terminal access detected! This ATM has been locked. Please contact NanoTrasen IT Support.</span>"
+			dat += "Card: <span style='colour: red;'>LOCKED</span><br><br><span style='colour: red;'>Unauthorized terminal access detected! This ATM has been locked. Please contact NanoTrasen IT Support.</span>"
 		else
 			dat += "Card: <a href='?src=\ref[src];choice=insert_card'>[held_card ? held_card.name : "------"]</a><br><br>"
 
@@ -179,9 +179,9 @@ log transactions
 							dat += "<form name='transfer' action='?src=\ref[src]' method='get'>"
 							dat += "<input type='hidden' name='src' value='\ref[src]'>"
 							dat += "<input type='hidden' name='choice' value='transfer'>"
-							dat += "Target account number: <input type='text' name='target_acc_number' value='' style='width:200px; background-color:white;'><br>"
-							dat += "Funds to transfer: <input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><br>"
-							dat += "Transaction purpose: <input type='text' name='purpose' value='Funds transfer' style='width:200px; background-color:white;'><br>"
+							dat += "Target account number: <input type='text' name='target_acc_number' value='' style='width:200px; background-colour:white;'><br>"
+							dat += "Funds to transfer: <input type='text' name='funds_amount' value='' style='width:200px; background-colour:white;'><br>"
+							dat += "Transaction purpose: <input type='text' name='purpose' value='Funds transfer' style='width:200px; background-colour:white;'><br>"
 							dat += "<input type='submit' value='Transfer funds'><br>"
 							dat += "</form>"
 						else
@@ -190,7 +190,7 @@ log transactions
 							dat += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
 							dat += "<input type='hidden' name='src' value='\ref[src]'>"
 							dat += "<input type='hidden' name='choice' value='withdrawal'>"
-							dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw funds'><br>"
+							dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-colour:white;'><input type='submit' value='Withdraw funds'><br>"
 							dat += "</form>"
 							dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
 							dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
@@ -201,8 +201,8 @@ log transactions
 				dat += "<form name='atm_auth' action='?src=\ref[src]' method='get'>"
 				dat += "<input type='hidden' name='src' value='\ref[src]'>"
 				dat += "<input type='hidden' name='choice' value='attempt_auth'>"
-				dat += "<b>Account:</b> <input type='text' id='account_num' name='account_num' style='width:250px; background-color:white;'><br>"
-				dat += "<b>PIN:</b> <input type='text' id='account_pin' name='account_pin' style='width:250px; background-color:white;'><br>"
+				dat += "<b>Account:</b> <input type='text' id='account_num' name='account_num' style='width:250px; background-colour:white;'><br>"
+				dat += "<b>PIN:</b> <input type='text' id='account_pin' name='account_pin' style='width:250px; background-colour:white;'><br>"
 				dat += "<input type='submit' value='Submit'><br>"
 				dat += "</form>"
 

@@ -28,7 +28,7 @@ var/global/list/rad_collectors = list()
 /obj/machinery/power/rad_collector/process()
 	if(P)
 		if(P.air_contents.toxins <= 0)
-			investigate_log("<font color='red'>out of fuel</font>.","singulo")
+			investigate_log("<font colour='red'>out of fuel</font>.","singulo")
 			P.air_contents.toxins = 0
 			eject()
 		else
@@ -42,7 +42,7 @@ var/global/list/rad_collectors = list()
 			toggle_power()
 			user.visible_message("[user.name] turns the [src.name] [active? "on":"off"].", \
 			"You turn the [src.name] [active? "on":"off"].")
-			investigate_log("turned [active?"<font color='green'>on</font>":"<font color='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.toxins/0.29)]%":"<font color='red'>It is empty</font>"].","singulo")
+			investigate_log("turned [active?"<font colour='green'>on</font>":"<font colour='red'>off</font>"] by [user.key]. [P?"Fuel: [round(P.air_contents.toxins/0.29)]%":"<font colour='red'>It is empty</font>"].","singulo")
 			return
 		else
 			user << "\red The controls are locked!"

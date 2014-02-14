@@ -200,7 +200,7 @@
 		for(var/ID in list(H.get_active_hand(), H.wear_id, H.belt))
 			if(src.check_access(ID))
 				return 1
-	M << "<font color='red'>You don't have required permissions to use [src]</font>"
+	M << "<font colour='red'>You don't have required permissions to use [src]</font>"
 	return 0
 
 /obj/machinery/mecha_part_fabricator/check_access(obj/item/weapon/card/id/I)
@@ -421,7 +421,7 @@
 			return 0
 		if(!check_resources(part))
 			src.visible_message("\icon[src] <b>[src]</b> beeps, \"Not enough resources. Queue processing stopped\".")
-			temp = {"<font color='red'>Not enough resources to build next part.</font><br>
+			temp = {"<font colour='red'>Not enough resources to build next part.</font><br>
 						<a href='?src=\ref[src];process_queue=1'>Try again</a> | <a href='?src=\ref[src];clear_temp=1'>Return</a><a>"}
 			return 0
 		remove_from_queue(1)
@@ -440,7 +440,7 @@
 			var/obj/item/part = listgetindex(src.queue, i)
 			if(istype(part))
 				if(part.vars.Find("construction_time") && part.vars.Find("construction_cost"))
-					output += "<li[!check_resources(part)?" style='color: #f00;'":null]>[part.name] - [i>1?"<a href='?src=\ref[src];queue_move=-1;index=[i]' class='arrow'>&uarr;</a>":null] [i<queue.len?"<a href='?src=\ref[src];queue_move=+1;index=[i]' class='arrow'>&darr;</a>":null] <a href='?src=\ref[src];remove_from_queue=[i]'>Remove</a></li>"
+					output += "<li[!check_resources(part)?" style='colour: #f00;'":null]>[part.name] - [i>1?"<a href='?src=\ref[src];queue_move=-1;index=[i]' class='arrow'>&uarr;</a>":null] [i<queue.len?"<a href='?src=\ref[src];queue_move=+1;index=[i]' class='arrow'>&darr;</a>":null] <a href='?src=\ref[src];remove_from_queue=[i]'>Remove</a></li>"
 				else//Prevents junk items from even appearing in the list, and they will be silently removed when the fab processes
 					remove_from_queue(i)//Trash it
 					return list_queue()//Rebuild it
@@ -567,7 +567,7 @@
 			  <title>[src.name]</title>
 				<style>
 				.res_name {font-weight: bold; text-transform: capitalize;}
-				.red {color: #f00;}
+				.red {colour: #f00;}
 				.part {margin-bottom: 10px;}
 				.arrow {text-decoration: none; font-size: 10px;}
 				body, table {height: 100%;}
