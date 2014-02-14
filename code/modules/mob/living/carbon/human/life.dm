@@ -581,11 +581,6 @@
 				var/obj/mecha/M = loc
 				loc_temp =  M.return_temperature()
 
-			else if(istype(get_turf(src), /turf/space))
-				if(!istype(head, /obj/item/clothing/head/helmet/space) && !istype(wear_suit, /obj/item/clothing/suit/space))
-					if(radiation <= 100)
-						radiation += 10
-
 			else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 				loc_temp = loc:air_contents.temperature
 			else
@@ -612,6 +607,14 @@
 						var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
 	//					log_debug("[loc_temp] is Heat. Heating up by [amt]")
 						bodytemperature += amt
+
+		else if(istype(get_turf(src), /turf/space))
+			var/protected = 0
+			if( (head && istype(head, /obj/item/clothing/head/helmet/space)) && (wear_suit && istype(wear_suit, /obj/item/clothing/suit/space)) )
+				protected = 1
+			if(!protected && radiation < 100)
+				apply_effect(5, IRRADIATE)
+				apply_damage(10, BURN, used_weapon = "Space Radiation")
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 		if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
