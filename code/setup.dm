@@ -428,6 +428,10 @@ var/MAX_EXPLOSION_RANGE = 14
 #define MAX_STACK_AMOUNT_GLASS	50
 #define MAX_STACK_AMOUNT_RODS	60
 
+#define CC_PER_SHEET_METAL 3750
+#define CC_PER_SHEET_GLASS 3750
+#define CC_PER_SHEET_MISC 2000
+
 #define GAS_O2 	(1 << 0)
 #define GAS_N2	(1 << 1)
 #define GAS_PL	(1 << 2)

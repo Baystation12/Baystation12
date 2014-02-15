@@ -266,9 +266,11 @@
 		var/list/directions = cardinal.Copy()
 		for(var/dir in directions)
 			var/turf/T = get_step(src, dir)
-			if(istype(T, /turf/simulated/wall))
+			if(istype(T, /turf/simulated/wall) && T.Adjacent(src))
 				T.attack_animal(src)
 			for(var/atom/A in T)
+				if(!A.Adjacent(src))
+					continue
 				if(istype(A, /obj/structure/window) || istype(A, /obj/structure/closet) || istype(A, /obj/structure/table) || istype(A, /obj/structure/grille) || istype(A, /obj/structure/rack))
 					A.attack_animal(src)
 	return

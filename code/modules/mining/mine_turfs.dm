@@ -26,6 +26,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	var/excav_overlay = ""
 	var/obj/item/weapon/last_find
 	var/datum/artifact_find/artifact_find
+	var/scan_state = null
 
 
 	New()
@@ -104,10 +105,13 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 		switch(mineral.display_name)
 			if("Iron")
 				icon_state = "rock_Iron[rand(1,3)]"
+				scan_state = "rock_Iron"
 			if("Plasma")
 				icon_state = "rock_Plasma[rand(1,3)]"
+				scan_state = "rock_Plasma"
 			else
 				icon_state = "rock_[mineral.name]"
+				scan_state = "rock_[mineral.name]"
 
 	//Not even going to touch this pile of spaghetti
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -565,9 +569,9 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 ////////////////////////////////Gibtonite
 /turf/simulated/mineral/gibtonite
 	name = "Diamond deposit" //honk
-	icon_state = "rock_Diamond"
+	icon_state = "rock_Gibtonite"
 	mineral = new /mineral/gibtonite
-
+	scan_state = "rock_Gibtonite"
 	var/det_time = 8 //Countdown till explosion, but also rewards the player for how close you were to detonation when you defuse it
 	var/stage = 0 //How far into the lifecycle of gibtonite we are, 0 is untouched, 1 is active and attempting to detonate, 2 is benign and ready for extraction
 	var/activated_ckey = null //These are to track who triggered the gibtonite deposit for logging purposes
@@ -648,6 +652,13 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /turf/simulated/floor/plating/airless/asteroid/cave
 	var/length = 100
+	var/mob_spawn_list = list(
+		/mob/living/simple_animal/hostile/asteroid/goliath  = 5,
+		/mob/living/simple_animal/hostile/asteroid/goldgrub = 1,
+		/mob/living/simple_animal/hostile/asteroid/basilisk = 3,
+		/mob/living/simple_animal/hostile/asteroid/hivelord = 5
+	)
+	var/sanity = 1
 
 /turf/simulated/floor/plating/airless/asteroid/cave/New(loc, var/length, var/go_backwards = 1, var/exclude_dir = -1)
 
@@ -676,6 +687,8 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	var/next_angle = pick(45, -45)
 
 	for(var/i = 0; i < length; i++)
+		if(!sanity)
+			break
 
 		var/list/L = list(45)
 		if(IsOdd(dir2angle(dir))) // We're going at an angle and we want thick angled tunnels.
@@ -707,7 +720,23 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 
 /turf/simulated/floor/plating/airless/asteroid/cave/proc/SpawnFloor(var/turf/T)
-	//var/turf/simulated/floor/t =
-	new /turf/simulated/floor/plating/airless/asteroid(T)
-	//spawn(2)
-	//	t.fullUpdateMineralOverlays()
+	for(var/turf/S in range(2,T))
+		if(istype(S, /turf/space) || istype(S.loc, /area/mine/explored))
+			sanity = 0
+			break
+	if(!sanity)
+		return
+
+	SpawnMonster(T)
+
+
+/turf/simulated/floor/plating/airless/asteroid/cave/proc/SpawnMonster(var/turf/T)
+	if(prob(2))
+		if(istype(loc, /area/mine/explored))
+			return
+		for(var/atom/A in range(7,T))//Lowers chance of mob clumps
+			if(istype(A, /mob/living/simple_animal/hostile/asteroid))
+				return
+		var/randumb = pickweight(mob_spawn_list)
+		new randumb(T)
+	return
