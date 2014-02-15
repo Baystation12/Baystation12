@@ -148,8 +148,6 @@
 			mouthshoot = 0
 			return
 		if (can_fire())
-			if(!chambered.BB)
-				return
 			user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
 			if(silenced)
 				playsound(user, fire_sound, 10, 1)
@@ -168,8 +166,10 @@
 				user << "<span class = 'notice'>Ow...</span>"
 				user.apply_effect(110,AGONY,0)
 			chambered.BB = null
+			chambered.update_icon()
+			update_icon()
 			mouthshoot = 0
-			process_chamber(1,1)
+			process_chamber()
 			return
 		else
 			click_empty(user)

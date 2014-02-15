@@ -23,6 +23,7 @@
 	ammo_type = /obj/item/ammo_casing/a357
 	caliber = "357"
 	max_ammo = 6
+	multiload = 0
 
 /obj/item/ammo_box/magazine/internal/cylinder/rus357/New()
 	stored_ammo += new ammo_type(src)
@@ -33,7 +34,6 @@
 	ammo_type = /obj/item/ammo_casing/c38
 	caliber = "38"
 	max_ammo = 6
-	multiload = 0
 
 /obj/item/ammo_box/magazine/internal/shot
 	name = "shotgun internal magazine"

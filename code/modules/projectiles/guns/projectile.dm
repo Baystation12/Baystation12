@@ -17,8 +17,8 @@
 	return
 
 /obj/item/weapon/gun/projectile/process_chamber(var/eject_casing = 1, var/empty_chamber = 1)
-	if(chambered)
-		return 1
+//	if(chambered)
+//		return 1
 	var/obj/item/ammo_casing/AC = chambered //Find chambered round
 	if(isnull(AC) || !istype(AC))
 		chamber_round()
@@ -43,9 +43,6 @@
 				casting_reagents.delete()
 	return
 
-/obj/item/weapon/gun/projectile/can_fire()
-	return process_chamber()
-
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
 	if (istype(A, /obj/item/ammo_box/magazine))
 		var/obj/item/ammo_box/magazine/AM = A
@@ -61,6 +58,10 @@
 		else if (magazine)
 			user << "<span class='notice'>There's already a magazine in \the [src].</span>"
 	return 0
+
+/obj/item/weapon/gun/projectile/can_fire()
+	if(chambered && chambered.BB)
+		return 1
 
 /obj/item/weapon/gun/projectile/attack_self(mob/living/user as mob)
 	if (magazine)
