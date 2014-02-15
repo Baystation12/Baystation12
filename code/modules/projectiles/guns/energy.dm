@@ -47,6 +47,9 @@
 	chambered = null
 	return
 
+/obj/item/weapon/gun/energy/can_fire()
+	return newshot()
+
 /obj/item/weapon/gun/energy/proc/select_fire(mob/living/user as mob)
 	select++
 	if (select > ammo_type.len)

@@ -17,8 +17,8 @@
 	return
 
 /obj/item/weapon/gun/projectile/process_chamber(var/eject_casing = 1, var/empty_chamber = 1)
-//	if(in_chamber)
-//		return 1
+	if(chambered)
+		return 1
 	var/obj/item/ammo_casing/AC = chambered //Find chambered round
 	if(isnull(AC) || !istype(AC))
 		chamber_round()
@@ -42,6 +42,9 @@
 				casting_reagents.trans_to(chambered.BB, casting_reagents.total_volume) //For chemical darts/bullets
 				casting_reagents.delete()
 	return
+
+/obj/item/weapon/gun/projectile/can_fire()
+	return process_chamber()
 
 /obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
 	if (istype(A, /obj/item/ammo_box/magazine))

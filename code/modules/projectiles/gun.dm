@@ -122,7 +122,7 @@
 
 
 /obj/item/weapon/gun/proc/can_fire()
-	return chambered
+	return
 
 /obj/item/weapon/gun/proc/can_hit(var/mob/living/target as mob, var/mob/living/user as mob)
 	return chambered.BB.check_fire(target,user)
@@ -137,19 +137,19 @@
 
 /obj/item/weapon/gun/proc/isHandgun()
 	return 1
-/*
+
 /obj/item/weapon/gun/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
 	//Suicide handling.
 	if (M == user && user.zone_sel.selecting == "mouth" && !mouthshoot)
 		mouthshoot = 1
 		M.visible_message("\red [user] sticks their gun in their mouth, ready to pull the trigger...")
-		world << "[chambered.BB], [chambered]"
 		if(!do_after(user, 40))
 			M.visible_message("\blue [user] decided life was worth living")
 			mouthshoot = 0
 			return
-		if (chambered)
-			world << "azaza"
+		if (can_fire())
+			if(!chambered.BB)
+				return
 			user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
 			if(silenced)
 				playsound(user, fire_sound, 10, 1)
@@ -168,16 +168,15 @@
 				user << "<span class = 'notice'>Ow...</span>"
 				user.apply_effect(110,AGONY,0)
 			chambered.BB = null
-			del(chambered.contents)
 			mouthshoot = 0
-			process_chamber()
+			process_chamber(1,1)
 			return
 		else
 			click_empty(user)
 			mouthshoot = 0
 			return
 
-	if (chambered)
+	if (can_fire())
 		//Point blank shooting if on harm intent or target we were targeting.
 		if(user.a_intent == "hurt")
 			user.visible_message("\red <b> \The [user] fires \the [src] point blank at [M]!</b>")
@@ -188,4 +187,4 @@
 			Fire(M,user) ///Otherwise, shoot!
 			return
 	else
-		return ..()  */
+		return ..()
