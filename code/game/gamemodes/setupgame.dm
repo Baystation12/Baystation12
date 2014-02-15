@@ -79,11 +79,11 @@
 	FAKEBLOCK          = getAssignedBlock("FAKE",          numsToAssign)
 
 	// UNUSED!
-//	COUGHBLOCK         = getAssignedBlock("COUGH",         numsToAssign)
-//	GLASSESBLOCK       = getAssignedBlock("GLASSES",       numsToAssign)
-//	EPILEPSYBLOCK      = getAssignedBlock("EPILEPSY",      numsToAssign)
-//	TWITCHBLOCK        = getAssignedBlock("TWITCH",        numsToAssign)
-//	NERVOUSBLOCK       = getAssignedBlock("NERVOUS",       numsToAssign)
+	COUGHBLOCK         = getAssignedBlock("COUGH",         numsToAssign)
+	GLASSESBLOCK       = getAssignedBlock("GLASSES",       numsToAssign)
+	EPILEPSYBLOCK      = getAssignedBlock("EPILEPSY",      numsToAssign)
+	TWITCHBLOCK        = getAssignedBlock("TWITCH",        numsToAssign)
+	NERVOUSBLOCK       = getAssignedBlock("NERVOUS",       numsToAssign)
 
 	// Bay muts (UNUSED)
 	//HEADACHEBLOCK      = getAssignedBlock("HEADACHE",      numsToAssign)
