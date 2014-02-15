@@ -50,7 +50,7 @@
 /obj/item/weapon/gun/energy/can_fire()
 	newshot()
 	if(chambered && chambered.BB)
-		return
+		return 1
 
 /obj/item/weapon/gun/energy/proc/select_fire(mob/living/user as mob)
 	select++
