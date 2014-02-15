@@ -45,10 +45,10 @@
 
 	switch(milled_item.type)
 		if(/obj/item/weapon/reagent_containers/food/snacks/grown/wheat)	//Wheat becomes flour
-			var/obj/item/weapon/reagent_containers/food/drinks/flour/F = new(src)
+			var/obj/item/weapon/reagent_containers/food/snacks/flour/F = new(src)
 			output += F
-		if(/obj/item/weapon/reagent_containers/food/drinks/flour)	//Flour is still flour
-			var/obj/item/weapon/reagent_containers/food/drinks/flour/F = new(src)
+		if(/obj/item/weapon/reagent_containers/food/snacks/flour)	//Flour is still flour
+			var/obj/item/weapon/reagent_containers/food/snacks/flour/F = new(src)
 			output += F
 		else
 			error = 1
@@ -117,7 +117,7 @@
 		return	//Not done yet.
 
 	switch(fermenting_item.type)
-		if(/obj/item/weapon/reagent_containers/food/drinks/flour)	//Flour is still flour
+		if(/obj/item/weapon/reagent_containers/food/snacks/flour)	//Flour is still flour
 			var/obj/item/weapon/reagent_containers/food/drinks/cans/beer/B = new(src)
 			output += B
 		else

@@ -23,6 +23,10 @@ Buildable meters
 #define PIPE_MTVALVE			18
 #define PIPE_MANIFOLD4W			19
 #define PIPE_CAP				20
+///// Z-Level stuff
+#define PIPE_UP					21
+#define PIPE_DOWN				22
+///// Z-Level stuff
 
 /obj/item/pipe
 	name = "pipe"
@@ -84,6 +88,12 @@ Buildable meters
 			src.pipe_type = PIPE_MANIFOLD4W
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/cap))
 			src.pipe_type = PIPE_CAP
+///// Z-Level stuff
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/up))
+			src.pipe_type = PIPE_UP
+		else if(istype(make_from, /obj/machinery/atmospherics/pipe/zpipe/down))
+			src.pipe_type = PIPE_DOWN
+///// Z-Level stuff
 	else
 		src.pipe_type = pipe_type
 		src.dir = dir
@@ -117,6 +127,10 @@ Buildable meters
 		"t-valve", \
 		"4-way manifold", \
 		"pipe cap", \
+///// Z-Level stuff
+		"pipe up", \
+		"pipe down", \
+///// Z-Level stuff
 	)
 	name = nlist[pipe_type+1] + " fitting"
 	var/list/islist = list( \
@@ -141,6 +155,10 @@ Buildable meters
 		"mtvalve", \
 		"manifold4w", \
 		"cap", \
+///// Z-Level stuff
+		"cap", \
+		"cap", \
+///// Z-Level stuff
 	)
 	icon_state = islist[pipe_type + 1]
 
@@ -213,6 +231,10 @@ Buildable meters
 			return dir|flip|cw
 		if(PIPE_CAP)
 			return flip
+///// Z-Level stuff
+		if(PIPE_UP,PIPE_DOWN)
+			return dir
+///// Z-Level stuff
 	return 0
 
 /obj/item/pipe/proc/get_pdir() //endpoints for regular pipes
@@ -348,7 +370,7 @@ Buildable meters
 			if (M.node3)
 				M.node3.initialize()
 				M.node3.build_network()
-			
+
 		if(PIPE_MANIFOLD4W)		//4-way manifold
 			var/obj/machinery/atmospherics/pipe/manifold4w/M = new( src.loc )
 			M.dir = dir
@@ -515,7 +537,7 @@ Buildable meters
 			if (P.node2)
 				P.node2.initialize()
 				P.node2.build_network()
-				
+
 		if(PIPE_MTVALVE)		//manual t-valve
 			var/obj/machinery/atmospherics/tvalve/V = new(src.loc)
 			V.dir = dir
@@ -535,7 +557,7 @@ Buildable meters
 			if (V.node3)
 				V.node3.initialize()
 				V.node3.build_network()
-				
+
 		if(PIPE_CAP)
 			var/obj/machinery/atmospherics/pipe/cap/C = new(src.loc)
 			C.dir = dir
@@ -593,6 +615,40 @@ Buildable meters
 			if (C.node)
 				C.node.initialize()
 				C.node.build_network()
+///// Z-Level stuff
+		if(PIPE_UP)		//volume pump
+			var/obj/machinery/atmospherics/pipe/zpipe/up/P = new(src.loc)
+			P.dir = dir
+			P.initialize_directions = pipe_dir
+			if (pipename)
+				P.name = pipename
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+		if(PIPE_DOWN)		//volume pump
+			var/obj/machinery/atmospherics/pipe/zpipe/down/P = new(src.loc)
+			P.dir = dir
+			P.initialize_directions = pipe_dir
+			if (pipename)
+				P.name = pipename
+			var/turf/T = P.loc
+			P.level = T.intact ? 2 : 1
+			P.initialize()
+			P.build_network()
+			if (P.node1)
+				P.node1.initialize()
+				P.node1.build_network()
+			if (P.node2)
+				P.node2.initialize()
+				P.node2.build_network()
+///// Z-Level stuff
 
 	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 	user.visible_message( \

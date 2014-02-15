@@ -77,9 +77,19 @@
 
 	if(status & ORGAN_DESTROYED)
 		return 0
-	if(status & ORGAN_ROBOT)
-		brute *= 0.66 //~2/3 damage for ROBOLIMBS
-		burn *= 0.66 //~2/3 damage for ROBOLIMBS
+	if(status & ORGAN_ROBOT )
+
+		var/brmod = 0.66
+		var/bumod = 0.66
+
+		if(istype(owner,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = owner
+			if(H.species && H.species.flags & IS_SYNTHETIC)
+				brmod = H.species.brute_mod
+				bumod = H.species.burn_mod
+
+		brute *= brmod //~2/3 damage for ROBOLIMBS
+		burn *= bumod //~2/3 damage for ROBOLIMBS
 
 	//If limb took enough damage, try to cut or tear it off
 	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
@@ -490,7 +500,10 @@ This function completely restores a damaged organ to perfect condition.
 			if(LOWER_TORSO)
 				owner << "\red You are now sterile."
 			if(HEAD)
-				organ= new /obj/item/weapon/organ/head(owner.loc, owner)
+				if(owner.species.flags & IS_SYNTHETIC)
+					organ= new /obj/item/weapon/organ/head/posi(owner.loc, owner)
+				else
+					organ= new /obj/item/weapon/organ/head(owner.loc, owner)
 				owner.u_equip(owner.glasses)
 				owner.u_equip(owner.head)
 				owner.u_equip(owner.l_ear)
@@ -630,7 +643,7 @@ This function completely restores a damaged organ to perfect condition.
 	return 0
 
 /datum/organ/external/get_icon(gender="")
-	if (status & ORGAN_ROBOT)
+	if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
 		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 
 	if (status & ORGAN_MUTATED)
@@ -844,6 +857,9 @@ obj/item/weapon/organ/head
 	var/mob/living/carbon/brain/brainmob
 	var/brain_op_stage = 0
 
+/obj/item/weapon/organ/head/posi
+	name = "robotic head"
+
 obj/item/weapon/organ/head/New(loc, mob/living/carbon/human/H)
 	if(istype(H))
 		src.icon_state = H.gender == MALE? "head_m" : "head_f"
@@ -887,7 +903,7 @@ obj/item/weapon/organ/head/proc/transfer_identity(var/mob/living/carbon/human/H)
 	brainmob = new(src)
 	brainmob.name = H.real_name
 	brainmob.real_name = H.real_name
-	brainmob.dna = H.dna
+	brainmob.dna = H.dna.Clone()
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
 	brainmob.container = src
@@ -916,7 +932,7 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 		switch(brain_op_stage)
 			if(1)
 				for(var/mob/O in (oviewers(brainmob) - user))
-					O.show_message("\red [brainmob] has \his skull sawed open with [W] by [user].", 1)
+					O.show_message("\red [brainmob] has \his head sawed open with [W] by [user].", 1)
 				brainmob << "\red [user] begins to saw open your head with [W]!"
 				user << "\red You saw [brainmob]'s head open with [W]!"
 
@@ -931,8 +947,12 @@ obj/item/weapon/organ/head/attackby(obj/item/weapon/W as obj, mob/user as mob)
 				brainmob.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)])</font>"
 				msg_admin_attack("[user] ([user.ckey]) debrained [brainmob] ([brainmob.ckey]) (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-				var/obj/item/brain/B = new(loc)
-				B.transfer_identity(brainmob)
+				if(istype(src,/obj/item/weapon/organ/head/posi))
+					var/obj/item/device/mmi/posibrain/B = new(loc)
+					B.transfer_identity(brainmob)
+				else
+					var/obj/item/brain/B = new(loc)
+					B.transfer_identity(brainmob)
 
 				brain_op_stage = 4.0
 			else

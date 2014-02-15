@@ -1106,6 +1106,7 @@
 	if(blood_DNA[M.dna.unique_enzymes])
 		return 0 //already bloodied with this blood. Cannot add more.
 	blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+	hand_blood_color = blood_color
 	src.update_inv_gloves()	//handles bloody hands overlays and updating
 	verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
@@ -1201,6 +1202,7 @@
 		update_icons()
 
 	if(species)
+		species.handle_post_spawn(src)
 		return 1
 	else
 		return 0

@@ -148,6 +148,8 @@
 			msg += "<span class='warning'>[t_He] [t_is] wearing \icon[shoes] [shoes.gender==PLURAL?"some":"a"] blood-stained [shoes.name] on [t_his] feet!</span>\n"
 		else
 			msg += "[t_He] [t_is] wearing \icon[shoes] \a [shoes] on [t_his] feet.\n"
+	else if(feet_blood_DNA)
+		msg += "<span class='warning'>[t_He] [t_has] blood-stained feet!</span>\n"
 
 	//mask
 	if(wear_mask && !skipmask)

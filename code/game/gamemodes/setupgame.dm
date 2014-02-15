@@ -6,6 +6,9 @@
 // The name is used on /vg/ for species with predefined genetic traits,
 //  and for the DNA panel in the player panel.
 /proc/getAssignedBlock(var/name,var/list/blocksLeft, var/activity_bounds=DNA_DEFAULT_BOUNDS)
+	if(blocksLeft.len==0)
+		warning("[name]: No more blocks left to assign!")
+		return 0
 	var/assigned = pick(blocksLeft)
 	blocksLeft.Remove(assigned)
 	assigned_blocks[assigned]=name
@@ -60,7 +63,7 @@
 	BLINDBLOCK = tempnum
 	*/
 	var/list/numsToAssign=new()
-	for(var/i=1;i<STRUCDNASIZE;i++)
+	for(var/i=1;i<DNA_SE_LENGTH;i++)
 		numsToAssign += i
 
 	//testing("Assigning DNA blocks:")
@@ -96,8 +99,15 @@
 	//SHOCKIMMUNITYBLOCK = getAssignedBlock("SHOCKIMMUNITY", numsToAssign)
 	//SMALLSIZEBLOCK     = getAssignedBlock("SMALLSIZE",     numsToAssign, DNA_HARD_BOUNDS)
 
+	//
+	// Static Blocks
+	/////////////////////////////////////////////.
+
+	// Monkeyblock is always last.
+	MONKEYBLOCK = DNA_SE_LENGTH
+
 	// And the genes that actually do the work. (domutcheck improvements)
-	var/list/blocks_assigned[STRUCDNASIZE]
+	var/list/blocks_assigned[DNA_SE_LENGTH]
 	for(var/gene_type in typesof(/datum/dna/gene))
 		var/datum/dna/gene/G = new gene_type
 		if(G.block)
@@ -109,7 +119,9 @@
 				assignedToBlock=blocks_assigned[G.block]
 			assignedToBlock.Add(G.name)
 			blocks_assigned[G.block]=assignedToBlock
-			testing("DNA2: Gene [G.name] assigned to block [G.block].")
+			//testing("DNA2: Gene [G.name] assigned to block [G.block].")
+
+	testing("DNA2: [numsToAssign.len] blocks are unused: [english_list(numsToAssign)]")
 
 	// HIDDEN MUTATIONS / SUPERPOWERS INITIALIZTION
 

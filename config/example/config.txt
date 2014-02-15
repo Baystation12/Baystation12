@@ -91,6 +91,9 @@ ALLOW_RANDOM_EVENTS
 ## if amount of traitors scales or not
 TRAITOR_SCALING
 
+## if objectives are disabled
+#OBJECTIVES_DISABLED
+
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
 
@@ -117,6 +120,9 @@ VOTE_AUTOTRANSFER_INITIAL 108000
 
 ##autovote delay (deciseconds) before sequential automatic transfer votes are called (default 60 minutes)
 VOTE_AUTOTRANSFER_INTERVAL 36000
+
+## Time left (seconds) before round start when automatic gamemote vote is called (default 100).
+VOTE_AUTOGAMEMODE_TIMELEFT 100
 
 ## prevents dead players from voting or starting votes
 #NO_DEAD_VOTE

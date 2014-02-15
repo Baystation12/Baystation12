@@ -21,10 +21,6 @@
 	electrical_storage
 		name = "\improper Electrical storage"
 
-	engine_monitoring
-		name = "\improper Electrical storage"
-		icon_state = "engine_monitoring"
-
 	reactor_core
 		name = "\improper Reactor Core"
 		//icon_state = "engine_core"
@@ -72,7 +68,3 @@
 	storage_hard
 		name = "\improper Engineering Hard Storage"
 		icon_state = "engine_storage"
-
-	hallway
-		name = "\improper Engineering storage"
-		icon_state = "engine_hallway"

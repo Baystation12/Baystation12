@@ -19,17 +19,18 @@
 
 /datum/dna2/record/proc/GetData()
 	var/list/ser=list("data" = null, "owner" = null, "label" = null, "type" = null, "ue" = 0)
-	ser["ue"] = (types & DNA2_BUF_UE) == DNA2_BUF_UE
-	if(types & DNA2_BUF_SE)
-		ser["data"] = dna.SE
-	else
-		ser["data"] = dna.UI
-	ser["owner"] = src.dna.real_name
-	ser["label"] = name
-	if(types & DNA2_BUF_UI)
-		ser["type"] = "ui"
-	else
-		ser["type"] = "se"
+	if(dna)
+		ser["ue"] = (types & DNA2_BUF_UE) == DNA2_BUF_UE
+		if(types & DNA2_BUF_SE)
+			ser["data"] = dna.SE
+		else
+			ser["data"] = dna.UI
+		ser["owner"] = src.dna.real_name
+		ser["label"] = name
+		if(types & DNA2_BUF_UI)
+			ser["type"] = "ui"
+		else
+			ser["type"] = "se"
 	return ser
 
 /////////////////////////// DNA MACHINES
@@ -272,7 +273,7 @@
 			I.loc = src
 			src.disk = I
 			user << "You insert [I]."
-			nanomanager.update_uis(src) // update all UIs attached to src()
+			nanomanager.update_uis(src) // update all UIs attached to src
 			return
 	else
 		src.attack_hand(user)
@@ -311,6 +312,8 @@
 
 /obj/machinery/computer/scan_consolenew/New()
 	..()
+	for(var/i=0;i<3;i++)
+		buffers[i+1]=new /datum/dna2/record
 	spawn(5)
 		for(dir in list(NORTH,EAST,SOUTH,WEST))
 			connected = locate(/obj/machinery/dna_scannernew, get_step(src, dir))
@@ -342,7 +345,7 @@
 		W.loc = src
 		src.disk = W
 		user << "You insert [W]."
-		nanomanager.update_uis(src) // update all UIs attached to src()
+		nanomanager.update_uis(src) // update all UIs attached to src
 /*
 /obj/machinery/computer/scan_consolenew/process() //not really used right now
 	if(stat & (NOPOWER|BROKEN))
@@ -400,8 +403,8 @@
 	data["disk"] = diskData
 
 	var/list/new_buffers = list()
-	for(var/datum/dna2/record/buf in buffers)
-		new_buffers.Add(buf.GetData())
+	for(var/datum/dna2/record/buf in src.buffers)
+		new_buffers += list(buf.GetData())
 	data["buffers"]=new_buffers
 
 	data["radiationIntensity"] = radiation_intensity
@@ -635,7 +638,7 @@
 	if (href_list["selectSEBlock"] && href_list["selectSESubblock"]) // This chunk of code updates selected block / sub-block based on click (se stands for strutural enzymes)
 		var/select_block = text2num(href_list["selectSEBlock"])
 		var/select_subblock = text2num(href_list["selectSESubblock"])
-		if ((select_block <= STRUCDNASIZE) && (select_block >= 1))
+		if ((select_block <= DNA_SE_LENGTH) && (select_block >= 1))
 			src.selected_se_block = select_block
 		if ((select_subblock <= DNA_BLOCK_SIZE) && (select_subblock >= 1))
 			src.selected_se_subblock = select_subblock
@@ -663,9 +666,9 @@
 				var/real_SE_block=selected_se_block
 				block = miniscramble(block, src.radiation_intensity, src.radiation_duration)
 				if(prob(20))
-					if (src.selected_se_block > 1 && src.selected_se_block < STRUCDNASIZE/2)
+					if (src.selected_se_block > 1 && src.selected_se_block < DNA_SE_LENGTH/2)
 						real_SE_block++
-					else if (src.selected_se_block > STRUCDNASIZE/2 && src.selected_se_block < STRUCDNASIZE)
+					else if (src.selected_se_block > DNA_SE_LENGTH/2 && src.selected_se_block < DNA_SE_LENGTH)
 						real_SE_block--
 
 				//testing("Irradiated SE block [real_SE_block]:[src.selected_se_subblock] ([original_block] now [block]) [(real_SE_block!=selected_se_block) ? "(SHIFTED)":""]!")
@@ -730,7 +733,9 @@
 			if(src.connected.occupant && src.connected.occupant.dna)
 				var/datum/dna2/record/databuf=new
 				databuf.types = DNA2_BUF_UE
-				databuf.dna = src.connected.occupant.dna
+				databuf.dna = src.connected.occupant.dna.Clone()
+				if(ishuman(connected.occupant))
+					databuf.dna.real_name=connected.occupant.name
 				databuf.name = "Unique Identifier"
 				src.buffers[bufferId] = databuf
 			return 1
@@ -739,7 +744,9 @@
 			if(src.connected.occupant && src.connected.occupant.dna)
 				var/datum/dna2/record/databuf=new
 				databuf.types = DNA2_BUF_UI|DNA2_BUF_UE
-				databuf.dna = src.connected.occupant.dna
+				databuf.dna = src.connected.occupant.dna.Clone()
+				if(ishuman(connected.occupant))
+					databuf.dna.real_name=connected.occupant.name
 				databuf.name = "Unique Identifier + Unique Enzymes"
 				src.buffers[bufferId] = databuf
 			return 1
@@ -748,19 +755,21 @@
 			if(src.connected.occupant && src.connected.occupant.dna)
 				var/datum/dna2/record/databuf=new
 				databuf.types = DNA2_BUF_SE
-				databuf.dna = src.connected.occupant.dna
+				databuf.dna = src.connected.occupant.dna.Clone()
+				if(ishuman(connected.occupant))
+					databuf.dna.real_name=connected.occupant.name
 				databuf.name = "Structural Enzymes"
 				src.buffers[bufferId] = databuf
 			return 1
 
 		if (bufferOption == "clear")
-			src.buffers[bufferId]=null
+			src.buffers[bufferId]=new /datum/dna2/record()
 			return 1
 
 		if (bufferOption == "changeLabel")
 			var/datum/dna2/record/buf = src.buffers[bufferId]
-			buf.name = buf.name ? src.buffers[bufferId]["label"] : "New Label"
-			buf.name = sanitize(input("New Label:", "Edit Label", buf.name))
+			var/text = sanitize(input(usr, "New Label:", "Edit Label", buf.name) as text|null)
+			buf.name = text
 			src.buffers[bufferId] = buf
 			return 1
 
@@ -784,7 +793,7 @@
 				if ((buf.types & DNA2_BUF_UE))
 					src.connected.occupant.real_name = buf.dna.real_name
 					src.connected.occupant.name = buf.dna.real_name
-				src.connected.occupant.UpdateAppearance(buf.dna.UI)
+				src.connected.occupant.UpdateAppearance(buf.dna.UI.Copy())
 			else if (buf.types & DNA2_BUF_SE)
 				src.connected.occupant.dna.SE = buf.dna.SE
 				src.connected.occupant.dna.UpdateSE()
@@ -800,7 +809,12 @@
 				var/datum/dna2/record/buf = src.buffers[bufferId]
 				if(href_list["createBlockInjector"])
 					waiting_for_user_input=1
-					var/blk = input(usr,"Select Block","Block") in all_dna_blocks(buf.GetData())
+					var/list/selectedbuf
+					if(buf.types & DNA2_BUF_SE)
+						selectedbuf=buf.dna.SE
+					else
+						selectedbuf=buf.dna.UI
+					var/blk = input(usr,"Select Block","Block") in all_dna_blocks(selectedbuf)
 					success = setInjectorBlock(I,blk,buf)
 				else
 					I.buf = buf

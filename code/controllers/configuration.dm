@@ -30,12 +30,14 @@
 	var/vote_period = 600				// length of voting period (deciseconds, default 1 minute)
 	var/vote_autotransfer_initial = 108000 // Length of time before the first autotransfer vote is called
 	var/vote_autotransfer_interval = 36000 // length of time before next sequential autotransfer vote
+	var/vote_autogamemode_timeleft = 100 //Length of time before round start when autogamemode vote is called (in seconds, default 100).
 	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 //	var/enable_authentication = 0		// goon authentication
 	var/del_new_on_log = 1				// del's new players if they log before they spawn in
 	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
+	var/objectives_disabled = 0 			//if objectives are disabled or not
 	var/protect_roles_from_antagonist = 0// If security and such can be tratior/cult/other
 	var/continous_rounds = 1			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/allow_Metadata = 0				// Metadata is supported.
@@ -285,6 +287,9 @@
 				if ("vote_autotransfer_interval")
 					config.vote_autotransfer_interval = text2num(value)
 
+				if ("vote_autogamemode_timeleft")
+					config.vote_autogamemode_timeleft = text2num(value)
+
 				if ("allow_ai")
 					config.allow_ai = 1
 
@@ -335,6 +340,9 @@
 
 				if ("traitor_scaling")
 					config.traitor_scaling = 1
+
+				if ("objectives_disabled")
+					config.objectives_disabled = 1
 
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
