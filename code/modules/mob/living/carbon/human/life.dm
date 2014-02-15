@@ -958,7 +958,7 @@
 			if(species.flags & IS_PLANT)
 				if(nutrition > 500)
 					nutrition = 500
-				if(light_amount >= 3) //if there's enough light, heal
+				if(light_amount >= 5) //if there's enough light, heal
 					adjustBruteLoss(-(light_amount))
 					adjustToxLoss(-(light_amount))
 					adjustOxyLoss(-(light_amount))
@@ -1013,7 +1013,7 @@
 
 		if(species.flags & REQUIRE_LIGHT)
 			if(nutrition < 200)
-				take_overall_damage(2,0)
+				take_overall_damage(10,0)
 				traumatic_shock++
 
 		if (drowsyness)
