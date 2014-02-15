@@ -291,8 +291,11 @@
 		item.loc = src.loc
 		if(src.client)
 			src.client.screen -= item
-		if(istype(item, /obj/item))
-			item:dropped(src) // let it know it's been dropped
+	//	if(istype(item, /obj/item))
+	//		item:dropped(src) // let it know it's been dropped
+	//
+	//	Excesive proc dropped(). This proc is called in u_equip() proc. Double call of this proc causes light anomalies on mob
+
 
 	//actually throw it!
 	if (item)
