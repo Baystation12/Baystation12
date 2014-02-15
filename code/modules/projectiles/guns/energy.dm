@@ -48,7 +48,9 @@
 	return
 
 /obj/item/weapon/gun/energy/can_fire()
-	return newshot()
+	newshot()
+	if(chambered && chambered.BB)
+		return 1
 
 /obj/item/weapon/gun/energy/proc/select_fire(mob/living/user as mob)
 	select++
