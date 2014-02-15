@@ -251,6 +251,7 @@
 			if(!istype(W, /obj/item/weapon/butch/meatcleaver))
 				organ.implants += W
 				visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+				embedded_flag = 1
 				src.verbs += /mob/proc/yank_out_object
 				W.add_blood(src)
 				if(ismob(W.loc))
