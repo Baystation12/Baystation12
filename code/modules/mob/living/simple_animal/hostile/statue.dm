@@ -4,9 +4,9 @@
 	name = "statue" // matches the name of the statue with the flesh-to-stone spell
 	desc = "An incredibly lifelike marble carving. Its eyes seems to follow you.." // same as an ordinary statue with the added "eye following you" description
 	icon = 'icons/obj/statue.dmi'
-	icon_state = "human_male"
-	icon_living = "human_male"
-	icon_dead = "human_male"
+	icon_state = "angelseen"
+	icon_living = "angelseen"
+	icon_dead = "angelseen"
 	gender = NEUTER
 	a_intent = "harm"
 
@@ -64,9 +64,11 @@
 
 /mob/living/simple_animal/hostile/statue/Move(var/turf/NewLoc)
 	if(can_be_seen(NewLoc))
+		icon_state = "angelseen"
 		if(client)
 			src << "<span class='warning'>You cannot move, there are eyes on you!</span>"
 		return 0
+	icon_state = "angel"
 	return ..()
 
 /mob/living/simple_animal/hostile/statue/Life()
@@ -82,6 +84,7 @@
 
 /mob/living/simple_animal/hostile/statue/AttackingTarget()
 	if(!can_be_seen())
+		icon_state = "angelattack"
 		..()
 
 /mob/living/simple_animal/hostile/statue/DestroySurroundings()
@@ -94,9 +97,11 @@
 
 /mob/living/simple_animal/hostile/statue/UnarmedAttack()
 	if(can_be_seen())
+		icon_state = "angelseen"
 		if(client)
 			src << "<span class='warning'>You cannot attack, there are eyes on you!</span>"
 		return
+	icon_state = "angelattack"
 	..()
 
 /mob/living/simple_animal/hostile/statue/proc/can_be_seen(var/turf/destination)
@@ -118,9 +123,34 @@
 	for(var/atom/check in check_list)
 		for(var/mob/living/M in viewers(world.view + 1, check) - src)
 			if(M.client && CanAttack(M))
-				if(!M.blinded && !(sdisabilities & BLIND))
+				if(M.blinded || (sdisabilities & BLIND))
+					return null
+				var/xdif = M.x - src.x
+				var/ydif = M.y - src.y
+				if(abs(xdif) <  abs(ydif))
+					//mob is either above or below src
+					if(ydif < 0 && M.dir == NORTH)
+						//mob is below src and looking up
+						return M
+					else if(ydif > 0 && M.dir == SOUTH)
+						//mob is above src and looking down
+						return M
+				else if(abs(xdif) >  abs(ydif))
+					//mob is either left or right of src
+					if(xdif < 0 && M.dir == EAST)
+						//mob is to the left of src and looking right
+						return M
+					else if(xdif > 0 && M.dir == WEST)
+						//mob is to the right of src and looking left
+						return M
+				else if (xdif == 0 && ydif == 0)
+					//mob is on the same tile as src
 					return M
 	return null
+
+
+
+
 
 // Cannot talk
 
@@ -182,6 +212,8 @@
 		var/turf/T = get_turf(L.loc)
 		if(T && T in targets)
 			L.eye_blind = max(L.eye_blind, 4)
+			if(issilicon(L))
+				L.Weaken(4)
 	return
 
 //Toggle Night Vision
