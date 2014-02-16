@@ -760,6 +760,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	//switch(i) //Yes, the overlapping cases are intended.
 	if(i<=10) //The traditional explosion
 		P.explode()
+		j=1
 		message += "Your [P] suddenly explodes!"
 	if(i>=10 && i<= 20) //The PDA burns a hole in the holder.
 		j=1
@@ -1165,22 +1166,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/proc/explode() //This needs tuning. //Sure did.
 	if(!src.detonate) return
 	var/turf/T = get_turf(src.loc)
-	if (ismob(loc))
-		var/mob/M = loc
-		M.show_message("\red Your [src] explodes!", 1)
 	if(T)
 		T.hotspot_expose(700,125)
 		explosion(T, 0, 0, 1, rand(1,2))
-	if(prob(90)) //IDs are kept in 90% of the cases
-		Del()
-	else
-		PDAs -= src
-		del(src)
 	return
 
 /obj/item/device/pda/Del()
 	PDAs -= src
-	if (src.id)
+	if (src.id && prob(90)) //IDs are kept in 90% of the cases
 		src.id.loc = get_turf(src.loc)
 	..()
 
