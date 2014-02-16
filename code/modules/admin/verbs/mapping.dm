@@ -214,6 +214,10 @@ var/list/debug_verbs = list (
 
 	var/turf/location = get_turf(usr)
 
+	if(!istype(location, /turf/simulated)) // We're in space, let's not cause runtimes.
+		usr << "\red this debug tool cannot be used from space"
+		return
+
 	var/icon/red = new('icons/misc/debug_group.dmi', "red")		//created here so we don't have to make thousands of these.
 	var/icon/green = new('icons/misc/debug_group.dmi', "green") 
 	var/icon/blue = new('icons/misc/debug_group.dmi', "blue") 
