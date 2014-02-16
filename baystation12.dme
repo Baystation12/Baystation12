@@ -91,6 +91,8 @@
 #define FILE_DIR "tauceti/items/weapons/explosives"
 #define FILE_DIR "tauceti/items/weapons/guns"
 #define FILE_DIR "tauceti/items/weapons/guns/bfg"
+#define FILE_DIR "tauceti/mobs"
+#define FILE_DIR "tauceti/mobs/dogs"
 #define FILE_DIR "tauceti/modules"
 #define FILE_DIR "tauceti/modules/_anomaly"
 #define FILE_DIR "tauceti/modules/_areas"

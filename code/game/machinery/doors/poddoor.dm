@@ -1,7 +1,7 @@
 /obj/machinery/door/poddoor
 	name = "Podlock"
 	desc = "Why it no open!!!"
-	icon = 'icons/obj/doors/rapid_pdoor.dmi'
+	icon = 'tauceti/icons/obj/blast_door.dmi'
 	icon_state = "pdoor1"
 	var/id = 1.0
 	explosion_resistance = 25
