@@ -94,7 +94,11 @@
 		src << "<span class='warning'>We are already absorbing!</span>"
 		return
 
-	changeling.isabsorbing = 1
+	if(changeling.can_absorb_dna(T, usr))
+		changeling.isabsorbing = 1
+	else
+		return
+
 	for(var/stage = 1, stage<=3, stage++)
 		switch(stage)
 			if(1)

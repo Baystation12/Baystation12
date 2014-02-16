@@ -199,7 +199,7 @@ proc/move_mining_shuttle()
 	icon = 'icons/obj/items.dmi'
 	icon_state = "pickaxe"
 	flags = FPRINT | TABLEPASS| CONDUCT
-	slot_flags = SLOT_BELT
+//	slot_flags = SLOT_BELT
 	force = 15.0
 	throwforce = 4.0
 	item_state = "pickaxe"
@@ -280,6 +280,7 @@ proc/move_mining_shuttle()
 		hardness = 6
 		origin_tech = "materials=6;powerstorage=4;engineering=5"
 		desc = "Yours is the drill that will pierce the heavens!"
+		drill_sound = 'tauceti/sounds/items/drill.ogg'
 
 	borgdrill
 		name = "cyborg mining drill"

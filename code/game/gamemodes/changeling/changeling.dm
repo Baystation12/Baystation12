@@ -244,3 +244,28 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 			chosen_dna = DNA
 			break
 	return chosen_dna
+
+//Checks if the target DNA is valid and absorbable.
+/datum/changeling/proc/can_absorb_dna(mob/living/carbon/T, mob/living/carbon/U)
+	if(T)
+		if(NOCLONE in T.mutations || HUSK in T.mutations)
+			U << "<span class='warning'>DNA of [T] is ruined beyond usability!</span>"
+			return 0
+
+		if(!ishuman(T))//Absorbing monkeys is entirely possible, but it can cause issues with transforming. That's what lesser form is for anyway!
+			U << "<span class='warning'>We could gain no benefit from absorbing a lesser creature.</span>"
+			return 0
+
+		for(var/datum/dna/D in absorbed_dna)
+			if(T.dna.uni_identity == D.uni_identity)
+				if(T.dna.struc_enzymes == D.struc_enzymes)
+					if(T.dna.real_name == D.real_name)
+						if(T.dna.mutantrace == D.mutantrace)
+							U << "<span class='warning'>We already have that DNA in storage.</span>"
+							return 0
+
+	//	if(!check_dna_integrity(T))
+	//		U << "<span class='warning'>[T] is not compatible with our biology.</span>"
+	//		return 0
+
+	return 1
