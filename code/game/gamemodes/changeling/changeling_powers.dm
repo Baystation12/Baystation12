@@ -82,10 +82,6 @@
 		src << "<span class='warning'>[T] is not compatible with our biology.</span>"
 		return
 
-	if(NOCLONE in T.mutations)
-		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
-		return
-
 	if(!G.state == GRAB_KILL)
 		src << "<span class='warning'>We must have a tighter grip to absorb this creature.</span>"
 		return
