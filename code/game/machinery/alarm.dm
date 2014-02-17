@@ -92,6 +92,7 @@
 
 	var/target_temperature = T0C+20
 	var/regulating_temperature = 0
+	var/allow_regulate = 0 //Включена ли терморегуляция
 
 	var/datum/radio_frequency/radio_connection
 
@@ -165,7 +166,7 @@
 	var/datum/gas_mixture/environment = location.return_air()
 
 	//Handle temperature adjustment here.
-	if(environment.temperature < target_temperature - 2 || environment.temperature > target_temperature + 2 || regulating_temperature)
+	if( (environment.temperature < target_temperature - 2 || environment.temperature > target_temperature + 2 || regulating_temperature) && allow_regulate)
 		//If it goes too far, we should adjust ourselves back before stopping.
 		if(get_danger_level(target_temperature, TLV["temperature"]))
 			return
@@ -182,6 +183,7 @@
 			target_temperature = T0C + MIN_TEMPERATURE
 
 		var/datum/gas_mixture/gas
+		if(!gas) return
 		gas = location.remove_air(0.25*environment.total_moles)
 		var/heat_capacity = gas.heat_capacity()
 		var/energy_used = min( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
@@ -787,8 +789,9 @@ Toxins: <span class='dl[plasma_dangerlevel]'>[plasma_percent]</span>%<br>
 		dat += "<a href='?src=\ref[src];rcon=[RCON_YES]'>On</a></td>"
 
 	//Hackish, I know.  I didn't feel like bothering to rework all of this.
-	dat += "<td align=\"center\"><b>Thermostat:</b><br><a href='?src=\ref[src];temperature=1'>[target_temperature - T0C]C</a></td></table>"
+	dat += "<td align=\"center\"><b>Thermostat:</b><br><a href='?src=\ref[src];temperature=1'>[target_temperature - T0C]C</a></td>"
 
+	dat += "<td align=\"center\"><b>Toggle thermoregulation:</b><br><a href='?src=\ref[src];allow_regulate=1'>[allow_regulate?"On":"Off"]</a></td></table>"
 	return dat
 
 /obj/machinery/alarm/proc/return_controls()
@@ -1067,6 +1070,9 @@ table tr:first-child th:first-child { border: none;}
 			usr << "Temperature must be between [min_temperature]C and [max_temperature]C"
 		else
 			target_temperature = input_temperature + T0C
+	//Включение регулятора
+	if(href_list["allow_regulate"])
+		allow_regulate = !allow_regulate
 
 	if (href_list["AAlarmwires"])
 		var/t1 = text2num(href_list["AAlarmwires"])
