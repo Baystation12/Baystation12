@@ -7,6 +7,14 @@
 	dir = 1
 	explosion_resistance = 25
 
+/obj/machinery/door/poddoor/New()
+	. = ..()
+	if(density)
+		layer = 3.3		//to override door.New() proc
+	else
+		layer = initial(layer)
+	return
+
 /obj/machinery/door/poddoor/Bumped(atom/AM)
 	if(!density)
 		return ..()
