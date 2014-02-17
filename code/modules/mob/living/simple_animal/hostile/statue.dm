@@ -14,12 +14,12 @@
 	response_disarm = "pushes"
 
 	speed = -1
-	maxHealth = 2500
-	health = 2500
+	maxHealth = 1250
+	health = 1250
 
-	harm_intent_damage = 70
-	melee_damage_lower = 68
-	melee_damage_upper = 83
+	harm_intent_damage = 35
+	melee_damage_lower = 34
+	melee_damage_upper = 42
 	attacktext = "claws"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
 
