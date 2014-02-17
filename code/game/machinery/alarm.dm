@@ -183,7 +183,9 @@
 			target_temperature = T0C + MIN_TEMPERATURE
 
 		var/datum/gas_mixture/gas
-		if(!gas) return
+		if(!gas)
+			allow_regulate = 0
+			return
 		gas = location.remove_air(0.25*environment.total_moles)
 		var/heat_capacity = gas.heat_capacity()
 		var/energy_used = min( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
