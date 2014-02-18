@@ -178,8 +178,8 @@
 	T = 0
 	for(var/obj/item/weapon/stock_parts/manipulator/Ml in component_parts)
 		T += Ml.rating
-	if(T>= 2)
-		T -= 2
+	if(T>= 1)
+		T -= 1
 	diff = round(initial(time_coeff) - (initial(time_coeff)*(T))/25,0.01)
 	if(time_coeff!=diff)
 		time_coeff = diff
