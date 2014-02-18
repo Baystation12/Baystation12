@@ -15,6 +15,7 @@ var/datum/global_hud/global_hud = new()
 	
 	var/obj/screen/meson
 	var/obj/screen/thermal
+	var/obj/screen/science
 	
 	var/list/vimpaired
 	var/list/darkMask
@@ -51,7 +52,17 @@ var/datum/global_hud/global_hud = new()
 	thermal.screen_loc = "WEST,SOUTH to EAST,NORTH"
 	thermal.layer = 17
 	thermal.mouse_opacity = 0
-
+	
+	//violet vision for science googles
+	science = new /obj/screen()
+	science.icon = 'icons/effects/alert.dmi'
+	science.icon_state = "dark128"
+	//science.icon += rgb(56, 0, 130, 90) cold color
+	science.icon += rgb(172, 0, 187, 90)
+	science.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	science.layer = 17
+	science.mouse_opacity = 0
+	
 	var/obj/screen/O
 	var/i
 	//that nasty looking dither you  get when you're short-sighted
