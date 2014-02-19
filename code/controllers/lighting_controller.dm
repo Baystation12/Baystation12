@@ -1,3 +1,5 @@
+#define LIGHTING_ICON 'icons/effects/ss13_dark_alpha7.dmi'	//Icon used for lighting shading effects
+
 var/datum/controller/lighting/lighting_controller = new ()
 
 datum/controller/lighting

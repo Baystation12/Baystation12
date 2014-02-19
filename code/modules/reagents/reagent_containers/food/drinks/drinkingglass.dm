@@ -1,5 +1,5 @@
- 
- 
+
+
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass
 	name = "glass"
 	desc = "Your standard drinking glass."
@@ -505,7 +505,7 @@
 				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been splashed with [src.name] by [user.name] ([user.ckey]). Reagents: [contained]</font>")
 				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to splash [M.name] ([M.key]). Reagents: [contained]</font>")
 				msg_admin_attack("[user.name] ([user.ckey]) splashed [M.name] ([M.key]) with [src.name]. Reagents: [contained] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
-				
+
 				for(var/mob/O in viewers(world.view, user))
 					O.show_message(text("\red [] has been splashed with [] in the face by []!", target, src, user), 1)
 				src.reagents.reaction(target, TOUCH)
@@ -518,12 +518,12 @@
 				return
 		if(icon_state != "glass_empty")
 			var/turf/T = get_turf(user)
-			if(!CanEat(user, M, src, "drink")) return
+			if(!CanEat(user, target, src, "drink")) return
 			T.visible_message("[user] gulped down the whole [src]. Wow!")
 		..()
 		return
-		
-		 
+
+
 
 // for /obj/machinery/vending/sovietsoda
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/soda
