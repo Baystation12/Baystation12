@@ -16,6 +16,14 @@
 		visible_message("\red <B>[M] attempted to touch [src]!</B>")
 		return 0
 
+	//DOG PART
+	if(M.a_intent == "hurt" || M.a_intent == "disarm")
+		if(ishuman(src))
+			var/mob/living/carbon/human/H = src
+			if(H.dog_owner)
+				var/mob/living/simple_animal/dog/D = H.dog_owner
+				D.owner_in_danger(M, src)
+	//DOG PART END
 
 	if(M.gloves && istype(M.gloves,/obj/item/clothing/gloves))
 		var/obj/item/clothing/gloves/G = M.gloves

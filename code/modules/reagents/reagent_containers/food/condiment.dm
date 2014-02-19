@@ -1,4 +1,3 @@
-
 ///////////////////////////////////////////////Condiments
 //Notes by Darem: The condiments food-subtype is for stuff you don't actually eat but you use to modify existing food. They all
 //	leave empty containers when used up and can be filled/re-filled with other items. Formatting for first section is identical
@@ -20,6 +19,9 @@
 	attack_self(mob/user as mob)
 		return
 	attack(mob/M as mob, mob/user as mob, def_zone)
+		
+		if(!CanEat(user, M, src, "swallow")) return
+		
 		var/datum/reagents/R = src.reagents
 
 		if(!R || !R.total_volume)

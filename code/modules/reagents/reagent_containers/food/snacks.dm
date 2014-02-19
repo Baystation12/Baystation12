@@ -38,24 +38,7 @@
 		del(src)
 		return 0
 		
-	if (istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/Feeded = M
-		if(Feeded.head)
-			var/obj/item/Head = Feeded.head
-			if(Head.flags & HEADCOVERSMOUTH)
-				if (M == user)
-					user<<"You can't eat it through [Head]"
-				else
-					user<<"You can't feed [Feeded] through [Head]"
-				return
-		if(Feeded.wear_mask)
-			var/obj/item/Mask = Feeded.wear_mask
-			if(Mask.flags & MASKCOVERSMOUTH)
-				if (M == user)
-					user<<"You can't eat it through [Mask]"
-				else
-					user<<"You can't feed [Feeded] through [Mask]"
-				return
+	if(!CanEat(user, M, src, "eat")) return
 					
 	if(istype(M, /mob/living/carbon))
 		if(M == user)								//If you're eating it yourself.

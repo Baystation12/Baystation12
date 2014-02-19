@@ -138,6 +138,13 @@
 			affecting.attack_log += "\[[time_stamp()]\] <font color='orange'>Has had their neck grabbed by [assailant.name] ([assailant.ckey])</font>"
 			assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Grabbed the neck of [affecting.name] ([affecting.ckey])</font>"
 			log_attack("<font color='red'>[assailant.name] ([assailant.ckey]) grabbed the neck of [affecting.name] ([affecting.ckey])</font>")
+			//DOG PART
+			if(ishuman(affecting))
+				var/mob/living/carbon/human/H = affecting
+				if(H.dog_owner)
+					var/mob/living/simple_animal/dog/D = H.dog_owner
+					D.owner_in_danger(assailant, affecting)
+			//DOG PART END
 			hud.icon_state = "disarm/kill"
 			hud.name = "disarm/kill"
 		else

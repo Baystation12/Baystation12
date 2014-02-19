@@ -3027,6 +3027,65 @@ datum
 				..()
 				return
 
+
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//magic numbers everywhere
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					if(ishuman(M) && volume > 5)
+						var/mob/living/carbon/human/H = M
+						var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+						
+						if(H.head) // check for helmet covering eyes
+							if (H.head.flags & HEADCOVERSEYES)
+								H << "You have your face splashed by [name], but your [H.head] protects your eyes"
+								return
+						if(H.wear_mask) //check for mask covering eyes
+							if (H.wear_mask.flags & MASKCOVERSEYES)
+								H << "You have your face splashed by [name], but your [H.wear_mask] protects your eyes"
+								return
+						
+						var/closedEyes = 0
+						
+						if(H.glasses) //check for glasses protection
+							H << "You have your face splashed by [name], but your eyes are protected by [H.glasses]."
+							return
+						if(H.eye_blind || H.eye_blurry) //check for closed eyes after splash
+							H.eye_blurry = max(H.eye_blurry + 3, 15)
+							H << "You have your face splashed by [name], but your eyes are closed."
+							return
+						
+						if(prob(30)) //check for eyes being closed on reaction
+							if(boozepwr<4)
+								H << "You have your face splashed by [name], but you managed to close your eyes."
+								return
+							else
+								closedEyes += 1 // Good reflexes, but booze is to powerfull
+							
+						switch(boozepwr - closedEyes)
+							if(1)
+								H << "You have your face splashed by [name]."
+								H.eye_blurry += rand(0,2)
+							if(2)
+								H << "\red You have your face splashed by [name]. Your eyes hurts!"
+								H.eye_blurry += rand(2,4)									
+								E.damage += rand(1, 4)
+							if(3)
+								H << "\red You have your face splashed by [name]. Your eyes hurts badly!"
+								H.eye_blurry += rand(4,6)
+								E.damage += rand(2, 5)
+							if(4)
+								H << "\red You have your face splashed by [name]. Your eyes burns!"
+								H.eye_blurry += rand(6,10)
+								H.eye_blind += rand(2,4)
+								E.damage += rand(4, 7)
+							if(5)
+								H << "\red You have your face splashed by [name]. Your can feel your eyes melting!"
+								H.eye_blurry += rand(10,15)
+								H.eye_blind += rand(3,7)
+								E.damage += rand(5, 10)
+
+
 			reaction_obj(var/obj/O, var/volume)
 				if(istype(O,/obj/item/weapon/paper))
 					var/obj/item/weapon/paper/paperaffected = O

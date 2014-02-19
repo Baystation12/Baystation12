@@ -108,7 +108,7 @@
 	handle_fire()
 
 	//Status updates, death etc.
-	handle_regular_status_updates()		//TODO: optimise ~Carn
+	handle_regular_status_updates()		//TODO: optimise ~Carn  NO SHIT ~Ccomp
 	update_canmove()
 
 	//Update our name based on whether our face is obscured/disfigured
@@ -1097,6 +1097,13 @@
 				if(halloss > 0)
 					adjustHalLoss(-1)
 
+			if(embedded_flag && !(life_tick % 10))
+				var/list/E
+				E = get_visible_implants(0)
+				if(!E.len)
+					embedded_flag = 0
+				
+
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
 				blinded = 1
@@ -1153,7 +1160,7 @@
 				client.images.Remove(hud)
 
 		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
-		client.screen.Remove(global_hud.meson, global_hud.thermal)
+		client.screen.Remove(global_hud.meson, global_hud.thermal, global_hud.science)
 
 		update_action_buttons()
 
@@ -1401,6 +1408,9 @@
 
 			if(istype(glasses, /obj/item/clothing/glasses/thermal) )
 				client.screen += global_hud.thermal
+				
+			if(istype(glasses, /obj/item/clothing/glasses/science) )
+				client.screen += global_hud.science
 
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)

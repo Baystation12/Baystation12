@@ -305,7 +305,7 @@ var/list/department_radio_keys = list(
 	var/list/listening
 
 	listening = get_mobs_in_view(message_range, src)
-	var/list/onscreen = get_mobs_in_view(7, src)
+	var/list/onscreen = viewers()
 	for(var/mob/M in player_list)
 		if (!M.client)
 			continue //skip monkeys and leavers
@@ -332,6 +332,12 @@ var/list/department_radio_keys = list(
 			if(P.speech_buffer.len >= 10)
 				P.speech_buffer.Remove(pick(P.speech_buffer))
 			P.speech_buffer.Add(message)
+
+		if(istype(A, /mob/living/simple_animal/dog))
+			if(istype(src, /mob/living/carbon/human))
+				var/mob/living/simple_animal/dog/D = A
+				spawn(0)
+					D.listen_command(message, src)
 
 		if(istype(A, /obj/)) //radio in pocket could work, radio in backpack wouldn't --rastaf0
 			var/obj/O = A

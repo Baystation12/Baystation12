@@ -111,6 +111,14 @@
 					M.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[M]/[M.ckey]</b> with a <b>[src]</b>"
 					msg_admin_attack("UNKNOWN shot [M] ([M.ckey]) with a [src] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[firer.x];Y=[firer.y];Z=[firer.z]'>JMP</a>)") //BS12 EDIT ALG
 
+			//DOG PART
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				if(H.dog_owner)
+					var/mob/living/simple_animal/dog/D = H.dog_owner
+					D.owner_in_danger(firer , M)
+			//DOG PART END
+
 		if(A)
 			if (!forcedodge)
 				forcedodge = A.bullet_act(src, def_zone) // searches for return value

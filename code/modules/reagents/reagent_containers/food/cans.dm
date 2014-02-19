@@ -10,6 +10,9 @@
 			return
 
 	attack(mob/M as mob, mob/user as mob, def_zone)
+	
+		if(!CanEat(user, M, src, "drink")) return
+		
 		if (canopened == 0)
 			user << "<span class='notice'> You need to open the drink!</span>"
 			return

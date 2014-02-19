@@ -518,6 +518,7 @@
 				return
 		if(icon_state != "glass_empty")
 			var/turf/T = get_turf(user)
+			if(!CanEat(user, M, src, "drink")) return
 			T.visible_message("[user] gulped down the whole [src]. Wow!")
 		..()
 		return
