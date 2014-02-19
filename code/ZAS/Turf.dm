@@ -1,11 +1,11 @@
-turf/simulated/var/zone/zone
-turf/simulated/var/open_directions
-turf/simulated/var/gas_graphic
+/turf/simulated/var/zone/zone
+/turf/simulated/var/open_directions
+/turf/simulated/var/gas_graphic
 
-turf/var/needs_air_update = 0
-turf/var/datum/gas_mixture/air
+/turf/var/needs_air_update = 0
+/turf/var/datum/gas_mixture/air
 
-turf/simulated/proc/set_graphic(new_graphic)
+/turf/simulated/proc/set_graphic(new_graphic)
 	if(isnum(new_graphic))
 		if(new_graphic == 1) new_graphic = plmaster
 		else if(new_graphic == 2) new_graphic = slmaster
@@ -13,7 +13,7 @@ turf/simulated/proc/set_graphic(new_graphic)
 	if(new_graphic) overlays += new_graphic
 	gas_graphic = new_graphic
 
-turf/proc/c_update_air_properties()
+/turf/proc/c_update_air_properties()
 	var/block = c_airblock(src)
 	if(block & AIR_BLOCKED)
 		//dbg(blocked)
@@ -35,7 +35,7 @@ turf/proc/c_update_air_properties()
 
 				air_master.connect(sim, src)
 
-turf/simulated/c_update_air_properties()
+/turf/simulated/c_update_air_properties()
 	if(zone && zone.invalid)
 		c_copy_air()
 		zone = null //Easier than iterating through the list at the zone.
@@ -182,15 +182,15 @@ turf/simulated/c_update_air_properties()
 
 	return GM
 
-turf/simulated/assume_air(datum/gas_mixture/giver)
+/turf/simulated/assume_air(datum/gas_mixture/giver)
 	var/datum/gas_mixture/my_air = return_air()
 	my_air.merge(giver)
 
-turf/simulated/remove_air(amount as num)
+/turf/simulated/remove_air(amount as num)
 	var/datum/gas_mixture/my_air = return_air()
 	return my_air.remove(amount)
 
-turf/simulated/return_air()
+/turf/simulated/return_air()
 	if(zone)
 		if(!zone.invalid)
 			air_master.mark_zone_update(zone)
@@ -205,14 +205,14 @@ turf/simulated/return_air()
 			make_air()
 		return air
 
-turf/proc/make_air()
+/turf/proc/make_air()
 	air = new/datum/gas_mixture
 	air.temperature = temperature
 	air.adjust(oxygen, carbon_dioxide, nitrogen, toxins)
 	air.group_multiplier = 1
 	air.volume = CELL_VOLUME
 
-turf/simulated/proc/c_copy_air()
+/turf/simulated/proc/c_copy_air()
 	if(!air) air = new/datum/gas_mixture
 	air.copy_from(zone.air)
 	air.group_multiplier = 1
