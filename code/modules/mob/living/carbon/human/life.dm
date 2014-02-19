@@ -1153,7 +1153,7 @@
 				client.images.Remove(hud)
 
 		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
-		client.screen.Remove(global_hud.meson, global_hud.thermal)
+		client.screen.Remove(global_hud.meson, global_hud.thermal, global_hud.science)
 
 		update_action_buttons()
 
@@ -1401,6 +1401,9 @@
 
 			if(istype(glasses, /obj/item/clothing/glasses/thermal) )
 				client.screen += global_hud.thermal
+				
+			if(istype(glasses, /obj/item/clothing/glasses/science) )
+				client.screen += global_hud.science
 
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)

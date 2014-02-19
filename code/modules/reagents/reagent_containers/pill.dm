@@ -18,28 +18,7 @@
 	attack_self(mob/user as mob)
 		return
 	attack(mob/M as mob, mob/user as mob, def_zone)
-	
-		if (istype(M, /mob/living/carbon/human))
-			var/mob/living/carbon/human/Feeded = M
-			if(Feeded.head)
-				var/obj/item/Head = Feeded.head
-				if(Head.flags & HEADCOVERSMOUTH)
-					if (Feeded == user)
-						user<<"You can't take [src] through [Head]"
-					else
-						user<<"You can't feed [Feeded] with [src] pill through [Head]"
-					return
-				
-			if(Feeded.wear_mask)
-				var/obj/item/Mask = Feeded.wear_mask
-				if(M.wear_mask.flags & MASKCOVERSMOUTH)
-					if (Feeded == user)
-						user<<"You can't take [src] through [Mask]"
-					else
-						user<<"You can't feed [Feeded] with [src] through [Mask]"
-					return
-				
-			
+		if(!CanEat(user, M, src, "take")) return	
 		if(M == user)
 			M << "\blue You swallow [src]."
 			M.drop_from_inventory(src) //icon update

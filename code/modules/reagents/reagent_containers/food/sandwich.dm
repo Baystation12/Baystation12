@@ -84,7 +84,8 @@
 	usr << "\blue You think you can see [O.name] in there."
 
 /obj/item/weapon/reagent_containers/food/snacks/csandwich/attack(mob/M as mob, mob/user as mob, def_zone)
-
+	
+	if(!CanEat(user, M, src, "eat")) return	
 	var/obj/item/shard
 	for(var/obj/item/O in contents)
 		if(istype(O,/obj/item/weapon/shard))
