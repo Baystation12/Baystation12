@@ -187,6 +187,9 @@
 		if(!istype(C) || !C.eye)
 			continue   			//I have no idea when this client check would be needed, but if this runtimes people won't hear anything
 							//So kinda paranoid about runtime avoidance.
+		if(istype(C.eye, /obj/machinery/camera)
+			continue				//No microphones in cameras.
+
 		if(C.mob in hear)
 			continue
 		if(C.eye in (hear|objects))
