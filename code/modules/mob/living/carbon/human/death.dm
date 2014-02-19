@@ -56,6 +56,7 @@
 	stat = DEAD
 	dizziness = 0
 	jitteriness = 0
+	dog_owner = null
 
 	//Handle brain slugs.
 	var/datum/organ/external/head = get_organ("head")

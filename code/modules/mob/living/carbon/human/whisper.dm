@@ -77,6 +77,10 @@
 
 	//Pass whispers on to anything inside the immediate listeners.
 	for(var/mob/L in listening)
+		if(istype(L, /mob/living/simple_animal/dog))
+			var/mob/living/simple_animal/dog/D = L
+			spawn(0)
+				D.listen_command(message, src)
 		for(var/mob/C in L.contents)
 			if(istype(C,/mob/living))
 				listening += C
@@ -151,3 +155,5 @@
 			continue
 		if (M.stat > 1 && !(M in heard_a) && (M.client.prefs.toggles & CHAT_GHOSTEARS))
 			M.show_message(rendered, 2)
+
+

@@ -28,7 +28,7 @@
 
 			var/age
 			if(isnum(C.player_age))
-				age = player_age
+				age = C.player_age
 			else
 				age = 0
 

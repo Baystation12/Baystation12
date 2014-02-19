@@ -6,6 +6,7 @@
 	icon_state = "body_m_s"
 	var/list/hud_list = list()
 	var/datum/species/species //Contains icon generation and language information, set during New().
+	var/dog_owner
 
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
