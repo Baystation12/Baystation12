@@ -175,8 +175,7 @@
 	var/list/range = hear(R, T)
 
 	for(var/mob/M in range)
-		if(M.client)
-			hear += M
+		hear += M
 		
 	var/list/objects = list()
 
@@ -187,24 +186,21 @@
 		if(!istype(C) || !C.eye)
 			continue   			//I have no idea when this client check would be needed, but if this runtimes people won't hear anything
 							//So kinda paranoid about runtime avoidance.
-		if(istype(C.eye, /obj/machinery/camera)
+		if(istype(C.eye, /obj/machinery/camera))
 			continue				//No microphones in cameras.
 
 		if(C.mob in hear)
 			continue
-		if(C.eye in (hear|objects))
-			if(!(C.mob in hear))
-				hear += C.mob
-			
-		else if(!(C.mob in hear))
-			if(C.mob.loc && C.mob.loc in (hear|objects))
-				hear += C.mob
-			else if(C.mob.loc.loc && C.mob.loc.loc in (hear|objects))  
-				hear += C.mob
-			else if(C.mob.loc.loc.loc && C.mob.loc.loc.loc in (hear|objects))   //Going a little deeper
-				hear += C.mob
 
-				
+		var/list/hear_and_objects = (hear|objects)      //Combined these lists here instead of doing the combine 3 more times.
+
+		if(C.eye in hear_and_objects)
+			hear += C.mob
+			
+		else if(C.mob.loc in hear_and_objects)
+			hear += C.mob
+		else if(C.mob.loc.loc in hear_and_objects)
+			hear += C.mob
 	return hear
 
 
