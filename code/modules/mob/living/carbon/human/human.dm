@@ -48,7 +48,7 @@
 
 	if(!dna)
 		dna = new /datum/dna(null)
-		dna.species=species.name	
+		dna.species=species.name
 
 	for(var/i=0;i<7;i++) // 2 for medHUDs and 5 for secHUDs
 		hud_list += image('icons/mob/hud.dmi', src, "hudunknown")
@@ -1194,7 +1194,7 @@
 		if(!new_species)
 			new_species = dna.species
 		else
-			dna.species = new_species	
+			dna.species = new_species
 
 	if(species && (species.name && species.name == new_species))
 		return
@@ -1254,7 +1254,7 @@
 
 	var/max_length = bloody_hands * 30 //tweeter style
 
-	var/message = stripped_input(src,"Write a message. It cannot be longer than [max_length] characters.","Blood writing", "")
+	var/message = sanitize(stripped_input(src,"Write a message. It cannot be longer than [max_length] characters.","Blood writing", ""))
 
 	if (message)
 		var/used_blood_amount = round(length(message) / 30, 1)

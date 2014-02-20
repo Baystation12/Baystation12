@@ -1,7 +1,7 @@
 
 //########################## CONTRABAND ;3333333333333333333 -Agouri ###################################################
 
-#define NUM_OF_POSTER_DESIGNS 10
+#define NUM_OF_POSTER_DESIGNS 11
 
 /obj/item/weapon/contraband
 	name = "contraband item"
@@ -68,7 +68,7 @@
 obj/structure/sign/poster
 	name = "poster"
 	desc = "A large piece of space-resistant printed paper. "
-	icon = 'icons/obj/contraband.dmi'
+	icon = 'tauceti/icons/obj/contraband.dmi'
 	anchored = 1
 	var/serial_number	//Will hold the value of src.loc if nobody initialises it
 	var/ruined = 0
@@ -114,6 +114,9 @@ obj/structure/sign/poster/New(var/serial)
 		if(10)
 			name += " - Hacking Guide"
 			desc += " This poster details the internal workings of the common Nanotrasen airlock."
+		if(11)
+		   name += " - Space Olympics 2558"
+		   desc += " A poster depicting Tau Katie - golden champion of robust disciplines."
 		else
 			name = "This shit just bugged. Report it to Agouri - polyxenitopalidou@gmail.com"
 			desc = "Why are you still here?"
