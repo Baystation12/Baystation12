@@ -6,7 +6,7 @@
 /obj/item/weapon/contraband
 	name = "contraband item"
 	desc = "You probably shouldn't be holding this."
-	icon = 'icons/obj/contraband.dmi'
+	icon = 'tauceti/icons/obj/contraband.dmi'
 	force = 0
 
 
@@ -115,8 +115,8 @@ obj/structure/sign/poster/New(var/serial)
 			name += " - Hacking Guide"
 			desc += " This poster details the internal workings of the common Nanotrasen airlock."
 		if(11)
-		   name += " - Space Olympics 2558"
-		   desc += " A poster depicting Tau Katie - golden champion of robust disciplines."
+			name += " - Space Olympics 2558"
+			desc += " A poster depicting Tau Katie - golden champion of robust disciplines."
 		else
 			name = "This shit just bugged. Report it to Agouri - polyxenitopalidou@gmail.com"
 			desc = "Why are you still here?"
