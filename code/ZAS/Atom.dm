@@ -1,4 +1,4 @@
-//#define ZASDBG
+
 
 /atom/var/pressure_resistance = ONE_ATMOSPHERE
 
@@ -30,17 +30,19 @@ atom/proc/CanPass(atom/movable/mover, turf/target, height=1.5, air_group = 0)
 
 		return 1
 
+//Basically another way of calling CanPass(null, other, 0, 0) and CanPass(null, other, 1.5, 1).
+//Returns:
+// 0 - Not blocked
+// AIR_BLOCKED - Blocked
+// ZONE_BLOCKED - Not blocked, but zone boundaries will not cross.
+// BLOCKED - Blocked, zone boundaries will not cross even if opened.
 atom/proc/c_airblock(turf/other)
 	#ifdef ZASDBG
 	ASSERT(isturf(other))
 	#endif
 	return !CanPass(null, other, 0, 0) + 2*!CanPass(null, other, 1.5, 1)
 
-//Returns:
-// 0 - Not blocked
-// AIR_BLOCKED - Blocked
-// ZONE_BLOCKED - Not blocked, but zone boundaries will not cross.
-// BLOCKED - Blocked, zone boundaries will not cross even if opened.
+
 turf/c_airblock(turf/other)
 	#ifdef ZASDBG
 	ASSERT(isturf(other))

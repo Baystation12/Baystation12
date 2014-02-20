@@ -42,7 +42,7 @@ var/tick_multiplier = 2
 
 	for(var/turf/simulated/S in world)
 		simulated_turf_count++
-		S.c_update_air_properties()
+		S.update_air_properties()
 
 	world << {"<font color='red'><b>Geometry initialized in [round(0.1*(world.timeofday-start_time),0.1)] seconds.</b>
 Total Simulated Turfs: [simulated_turf_count]
@@ -85,7 +85,8 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		var/updated = 0
 		#endif
 		for(var/turf/T in updating)
-			T.c_update_air_properties()
+			T.update_air_properties()
+			T.post_update_air_properties()
 			T.needs_air_update = 0
 			#ifdef ZASDBG
 			T.overlays -= mark
@@ -100,24 +101,23 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 			. = 0
 		#endif
 
-	//Rebuild zones.
+	//Where gas exchange happens.
 	if(.)
-		tick_progress = "rebuilding zones"
-
-	//Check sanity on connection objects.
-	if(.)
-		tick_progress = "checking/creating connections"
-
-	//for(var/connection/c in connections)
-		//if(c.valid()) c.tick()
-		//else connections.Remove(c)
+		tick_progress = "processing edges"
 
 	for(var/connection_edge/edge in edges)
 		edge.tick()
 
+	//Process fires.
+	if(.)
+		tick_progress = "processing fire"
+
+	for(var/obj/fire/fire in active_hotspots)
+		fire.process()
+
 	//Process zones.
 	if(.)
-		tick_progress = "processing zones"
+		tick_progress = "updating zones"
 
 	active_zones = zones_to_update.len
 	if(zones_to_update.len)
@@ -126,20 +126,6 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		for(var/zone/zone in updating)
 			zone.tick()
 			zone.needs_update = 0
-
-	/*for(var/zone/zone in zones)
-		zone.tick()*/
-
-	//Ensure tiles still have zones.
-	if(.)
-		tick_progress = "reconsidering zones on turfs"
-
-	//Process fires.
-	if(.)
-		tick_progress = "processing fire"
-
-	for(var/obj/fire/fire in active_hotspots)
-		fire.process()
 
 	if(.)
 		tick_progress = "success"
@@ -221,7 +207,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	ASSERT(isturf(T))
 	#endif
 	if(T.needs_air_update) return
-	tiles_to_update.Add(T)
+	tiles_to_update |= T
 	#ifdef ZASDBG
 	T.overlays += mark
 	#endif
