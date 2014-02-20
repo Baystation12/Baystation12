@@ -69,10 +69,14 @@
 		edge.add_connection(src)
 
 /connection/proc/mark_direct()
+	edge.remove_connection(src)
 	state |= CONNECTION_DIRECT
+	edge.add_connection(src)
 
 /connection/proc/mark_indirect()
+	edge.remove_connection(src)
 	state &= ~CONNECTION_DIRECT
+	edge.add_connection(src)
 
 /connection/proc/mark_space()
 	state |= CONNECTION_SPACE
@@ -94,10 +98,16 @@
 		erase()
 		return
 
-	if(air_master.air_blocked(A,B))
+	var/block_status = air_master.air_blocked(A,B)
+	if(block_status & AIR_BLOCKED)
 		//world << "Blocked connection."
 		erase()
 		return
+	else if(block_status & ZONE_BLOCKED)
+		if(direct())
+			mark_indirect()
+		else
+			mark_direct()
 
 	var/b_is_space = !istype(B,/turf/simulated)
 

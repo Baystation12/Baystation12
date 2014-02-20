@@ -13,7 +13,7 @@
 	if(new_graphic) overlays += new_graphic
 	gas_graphic = new_graphic
 
-/turf/proc/c_update_air_properties()
+/turf/proc/update_air_properties()
 	var/block = c_airblock(src)
 	if(block & AIR_BLOCKED)
 		//dbg(blocked)
@@ -35,12 +35,10 @@
 
 				air_master.connect(sim, src)
 
-/turf/simulated/c_update_air_properties()
+/turf/simulated/update_air_properties()
 	if(zone && zone.invalid)
 		c_copy_air()
 		zone = null //Easier than iterating through the list at the zone.
-
-	connections.update_all()
 
 	var/s_block = c_airblock(src)
 	if(s_block & AIR_BLOCKED)
@@ -57,6 +55,7 @@
 
 		return 1
 
+	var/previously_open = open_directions
 	open_directions = 0
 
 	var/list/postponed
@@ -71,8 +70,6 @@
 			//unsim.dbg(air_blocked, turn(180,d))
 			#endif
 
-
-
 			continue
 
 		var/r_block = c_airblock(unsim)
@@ -82,6 +79,14 @@
 			if(verbose) world << "[d] is blocked."
 			//dbg(air_blocked, d)
 			#endif
+
+			//Check that our zone hasn't been cut off recently.
+			//This happens when windows move or are constructed. We need to rebuild.
+			if((previously_open & d) && istype(unsim, /turf/simulated))
+				var/turf/simulated/sim = unsim
+				if(sim.zone == zone)
+					zone.rebuild()
+					return
 
 			continue
 
@@ -123,8 +128,11 @@
 
 					air_master.connect(src, sim)
 
+				else
+					//Found our zone connected to us, no need for rebuild.
 			#ifdef ZASDBG
-				else if(verbose) world << "[d] has same zone."
+					if(verbose) world << "[d] has same zone."
+
 			else if(verbose) world << "[d] has invalid zone."
 			#endif
 
@@ -148,6 +156,11 @@
 
 	for(var/turf/T in postponed)
 		air_master.connect(src, T)
+
+/turf/proc/post_update_air_properties()
+
+/turf/simulated/post_update_air_properties()
+	connections.update_all()
 
 /turf/assume_air(datum/gas_mixture/giver) //use this for machines to adjust air
 	del(giver)
