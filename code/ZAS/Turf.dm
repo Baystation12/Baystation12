@@ -128,10 +128,9 @@
 
 					air_master.connect(src, sim)
 
-				else
-					//Found our zone connected to us, no need for rebuild.
+
 			#ifdef ZASDBG
-					if(verbose) world << "[d] has same zone."
+				else if(verbose) world << "[d] has same zone."
 
 			else if(verbose) world << "[d] has invalid zone."
 			#endif
