@@ -63,7 +63,6 @@ obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/u
 		return ..()
 
 	if(istype(W,/obj/item/device/pipe_painter))
-		W.afterattack(src, user)
 		return 1
 
 	if (!istype(W, /obj/item/weapon/wrench))
