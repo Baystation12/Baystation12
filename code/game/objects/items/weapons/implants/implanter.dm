@@ -113,6 +113,9 @@
 	return
 
 /obj/item/weapon/implanter/compressed/attack(mob/M as mob, mob/user as mob)
+	// Attacking things in your hands tends to make this fuck up.
+	if(!istype(M))
+		return
 	var/obj/item/weapon/implant/compressed/c = imp
 	if (!c)	return
 	if (c.scanned == null)
@@ -126,9 +129,11 @@
 		if (c.scanned)
 			user << "\red Something is already scanned inside the implant!"
 			return
-		imp:scanned = A
-		A.loc.contents.Remove(A)
-		update()
+		if(user)
+			user.u_equip(I)
+			user.update_icons()	//update our overlays
+		c.scanned = I
+		c.scanned.loc = c
 
 
 /obj/item/weapon/implanter/deadman
