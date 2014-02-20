@@ -2,29 +2,25 @@ var/datum/controller/air_system/air_master
 
 var/tick_multiplier = 2
 
-var/tolerance_temp = 1
-var/tolerance_kpa = 1
-var/mimic_rate = 2
 
-/datum/controller/air_system
-	//Geometry lists
-	var/list/zones = list()
-	var/list/edges = list()
+//Geometry lists
+/datum/controller/air_system/var/list/zones = list()
+/datum/controller/air_system/var/list/edges = list()
 
-	//Geometry updates lists
-	var/list/tiles_to_update = list()
-	var/list/zones_to_update = list()
-	var/list/active_hotspots = list()
+//Geometry updates lists
+/datum/controller/air_system/var/list/tiles_to_update = list()
+/datum/controller/air_system/var/list/zones_to_update = list()
+/datum/controller/air_system/var/list/active_hotspots = list()
 
-	var/active_zones = 0
+/datum/controller/air_system/var/active_zones = 0
 
-	var/current_cycle = 0
-	var/update_delay = 5 //How long between check should it try to process atmos again.
-	var/failed_ticks = 0 //How many ticks have runtimed?
+/datum/controller/air_system/var/current_cycle = 0
+/datum/controller/air_system/var/update_delay = 5 //How long between check should it try to process atmos again.
+/datum/controller/air_system/var/failed_ticks = 0 //How many ticks have runtimed?
 
-	var/tick_progress = 0
+/datum/controller/air_system/var/tick_progress = 0
 
-	var/next_id = 1
+/datum/controller/air_system/var/next_id = 1 //Used to keep track of zone UIDs.
 
 /datum/controller/air_system/proc/Setup()
 	//Purpose: Call this at the start to setup air groups geometry
@@ -148,12 +144,12 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	if(.)
 		tick_progress = "success"
 
-/datum/controller/air_system/proc/new_zone(zone/z)
+/datum/controller/air_system/proc/add_zone(zone/z)
 	zones.Add(z)
 	z.name = "Zone [next_id++]"
 	mark_zone_update(z)
 
-/datum/controller/air_system/proc/invalid_zone(zone/z)
+/datum/controller/air_system/proc/remove_zone(zone/z)
 	zones.Remove(z)
 
 /datum/controller/air_system/proc/air_blocked(turf/A, turf/B)
@@ -169,7 +165,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	#ifdef ZASDBG
 	ASSERT(istype(T))
 	#endif
-	return T.zone && !T.zone.invalid
+	return istype(T) && T.zone && !T.zone.invalid
 
 /datum/controller/air_system/proc/merge(zone/A, zone/B)
 	#ifdef ZASDBG
@@ -240,14 +236,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	Z.needs_update = 1
 
 /datum/controller/air_system/proc/equivalent_pressure(zone/A, zone/B)
-	if(abs(A.air.return_pressure() - B.air.return_pressure()) > tolerance_kpa) return 0
-	if(abs(A.air.temperature - B.air.temperature) > tolerance_temp) return 0
-	return 1
-
-/datum/controller/air_system/proc/equalize(zone/A, zone/B)
-	A.air.share(B.air)
-	mark_zone_update(A)
-	mark_zone_update(B)
+	return A.air.compare(B.air)
 
 /datum/controller/air_system/proc/active_zones()
 	return active_zones

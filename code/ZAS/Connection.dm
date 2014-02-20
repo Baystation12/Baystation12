@@ -32,12 +32,6 @@
 		if(EAST) E = c
 		if(WEST) W = c
 
-/connection_managerproc/close(d)
-	if(check(N) && (NORTH & d) && !N.direct()) N.erase()
-	if(check(S) && (SOUTH & d) && !S.direct()) S.erase()
-	if(check(E) && (EAST & d) && !E.direct()) E.erase()
-	if(check(W) && (WEST & d) && !W.direct()) W.erase()
-
 /connection_manager/proc/update_all()
 	if(check(N)) N.update()
 	if(check(S)) S.update()

@@ -2,7 +2,6 @@
 /zone/var/name
 /zone/var/invalid = 0
 /zone/var/list/contents = list()
-/zone/var/list/unsimulated_contents = list()
 
 /zone/var/needs_update = 0
 
@@ -11,7 +10,7 @@
 /zone/var/datum/gas_mixture/air = new
 
 /zone/New()
-	air_master.new_zone(src)
+	air_master.add_zone(src)
 	air.temperature = TCMB
 	air.group_multiplier = 1
 	air.volume = CELL_VOLUME
@@ -28,15 +27,6 @@
 	T.zone = src
 	contents.Add(T)
 	T.set_graphic(air.graphic)
-
-
-/zone/proc/add_unsimulated(turf/T)
-#ifdef ZASDBG
-	ASSERT(!invalid)
-	ASSERT(istype(T))
-	ASSERT(!istype(T,/turf/simulated))
-#endif
-	unsimulated_contents |= T
 
 /zone/proc/remove(turf/simulated/T)
 #ifdef ZASDBG
@@ -64,11 +54,10 @@
 		#ifdef ZASDBG
 		T.dbg(merged)
 		#endif
-	into.unsimulated_contents |= unsimulated_contents
 
 /zone/proc/c_invalidate()
 	invalid = 1
-	air_master.invalid_zone(src)
+	air_master.remove_zone(src)
 	#ifdef ZASDBG
 	for(var/turf/simulated/T in contents)
 		T.dbg(invalid_zone)
