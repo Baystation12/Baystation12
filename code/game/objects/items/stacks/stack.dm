@@ -21,7 +21,7 @@
 		src.amount=amount
 	return
 
-/obj/item/stack/Del()
+/obj/item/stack/Destroy()
 	if (src && usr && usr.machine==src)
 		usr << browse(null, "window=stack")
 	..()

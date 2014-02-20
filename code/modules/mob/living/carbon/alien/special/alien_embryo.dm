@@ -22,7 +22,7 @@
 	else
 		del(src)
 
-/mob/living/carbon/alien/embryo/Del()
+/mob/living/carbon/alien/embryo/Destroy()
 	if(affected_mob)
 		affected_mob.status_flags &= ~(XENO_HOST)
 		spawn(0)

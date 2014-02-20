@@ -47,7 +47,7 @@
 	return
 
 
-/obj/machinery/door/Del()
+/obj/machinery/door/Destroy()
 	density = 0
 	update_nearby_tiles()
 	..()

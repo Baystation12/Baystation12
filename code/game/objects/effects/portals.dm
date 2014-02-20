@@ -29,7 +29,7 @@
 		return
 	return
 
-/obj/effect/portal/Del()
+/obj/effect/portal/Destroy()
 	portals -= src
 	return ..()
 

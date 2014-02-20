@@ -16,7 +16,7 @@
 	var/list/datum/disease2/disease/virus2 = list()
 	var/amount = 5
 
-/obj/effect/decal/cleanable/blood/Del()
+/obj/effect/decal/cleanable/blood/Destroy()
 	for(var/datum/disease/D in viruses)
 		D.cure(0)
 	..()
@@ -68,7 +68,7 @@
 	icon = I
 	amount = 0
 	spawn(DRYING_TIME)
-		Del()
+		Destroy()
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
 	..()
