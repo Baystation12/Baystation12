@@ -1,3 +1,44 @@
+/*
+
+Overview:
+	Each zone is a self-contained area where gas values would be the same if tile-based equalization were run indefinitely.
+	If you're unfamiliar with ZAS, FEA's air groups would have similar functionality if they didn't break in a stiff breeze.
+
+Class Vars:
+	name - A name of the format "Zone [#]", used for debugging.
+	invalid - True if the zone has been erased and is no longer eligible for processing.
+	needs_update - True if the zone has been added to the update list.
+	edges - A list of edges that connect to this zone.
+	air - The gas mixture that any turfs in this zone will return. Values are per-tile with a group multiplier.
+
+Class Procs:
+	add(turf/simulated/T)
+		Adds a turf to the contents, sets its zone and merges its air.
+
+	remove(turf/simulated/T)
+		Removes a turf, sets its zone to null and erases any gas graphics.
+		Invalidates the zone if it has no more tiles.
+
+	c_merge(zone/into)
+		Invalidates this zone and adds all its former contents to into.
+
+	c_invalidate()
+		Marks this zone as invalid and removes it from processing.
+
+	rebuild()
+		Invalidates the zone and marks all its former tiles for updates.
+
+	add_tile_air(turf/simulated/T)
+		Adds the air contained in T.air to the zone's air supply. Called when adding a turf.
+
+	tick()
+		Called only when the gas content is changed. Archives values and changes gas graphics.
+
+	dbg_data(mob/M)
+		Sends M a printout of important figures for the zone.
+
+*/
+
 
 /zone/var/name
 /zone/var/invalid = 0
@@ -85,12 +126,6 @@
 	if(air.check_tile_graphic())
 		for(var/turf/simulated/T in contents)
 			T.set_graphic(air.graphic)
-
-/zone/proc/remove_connection(connection/c)
-	return
-
-/zone/proc/add_connection(connection/c)
-	return
 
 /zone/proc/dbg_data(mob/M)
 	M << name

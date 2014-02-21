@@ -2,78 +2,52 @@
 #define CONNECTION_SPACE 4
 #define CONNECTION_INVALID 8
 
-/turf/var/tmp/connection_manager/connections
+/*
 
+Overview:
+	Connections are made between turfs by air_master.connect(). They represent a single point where two zones converge.
 
-/connection_manager/var/connection/N
-/connection_manager/var/connection/S
-/connection_manager/var/connection/E
-/connection_manager/var/connection/W
+Class Vars:
+	A - Always a simulated turf.
+	B - A simulated or unsimulated turf.
 
-#ifdef ZLEVELS
-/connection_manager/var/connection/U
-/connection_manager/var/connection/D
-#endif
+	zoneA - The archived zone of A. Used to check that the zone hasn't changed.
+	zoneB - The archived zone of B. May be null in case of unsimulated connections.
 
-/connection_manager/proc/get(d)
-	switch(d)
-		if(NORTH)
-			if(check(N)) return N
-			else return null
-		if(SOUTH)
-			if(check(S)) return S
-			else return null
-		if(EAST)
-			if(check(E)) return E
-			else return null
-		if(WEST)
-			if(check(W)) return W
-			else return null
+	edge - Stores the edge this connection is in. Can reference an edge that is no longer processed
+		   after this connection is removed, so make sure to check edge.coefficient > 0 before re-adding it.
 
-		#ifdef ZLEVELS
-		if(UP)
-			if(check(U)) return U
-			else return null
-		if(DOWN)
-			if(check(D)) return D
-			else return null
-		#endif
+Class Procs:
 
-/connection_manager/proc/place(connection/c, d)
-	switch(d)
-		if(NORTH) N = c
-		if(SOUTH) S = c
-		if(EAST) E = c
-		if(WEST) W = c
+	mark_direct()
+		Marks this connection as direct. Does not update the edge.
+		Called when the connection is made and there are no doors between A and B.
+		Also called by update() as a correction.
 
-		#ifdef ZLEVELS
-		if(UP) U = c
-		if(DOWN) D = c
-		#endif
+	mark_indirect()
+		Unmarks this connection as direct. Does not update the edge.
+		Called by update() as a correction.
 
-/connection_manager/proc/update_all()
-	if(check(N)) N.update()
-	if(check(S)) S.update()
-	if(check(E)) E.update()
-	if(check(W)) W.update()
-	#ifdef ZLEVELS
-	if(check(U)) U.update()
-	if(check(D)) D.update()
-	#endif
+	mark_space()
+		Marks this connection as unsimulated. Updating the connection will check the validity of this.
+		Called when the connection is made.
+		This will not be called as a correction, any connections failing a check against this mark are erased and rebuilt.
 
-/connection_manager/proc/erase_all()
-	if(check(N)) N.erase()
-	if(check(S)) S.erase()
-	if(check(E)) E.erase()
-	if(check(W)) W.erase()
-	#ifdef ZLEVELS
-	if(check(U)) U.erase()
-	if(check(D)) D.erase()
-	#endif
+	direct()
+		Returns 1 if no doors are in between A and B.
 
-/connection_manager/proc/check(connection/c)
-	return c && c.valid()
+	valid()
+		Returns 1 if the connection has not been erased.
 
+	erase()
+		Called by update() and connection_manager/erase_all().
+		Marks the connection as erased and removes it from its edge.
+
+	update()
+		Called by connection_manager/update_all().
+		Makes numerous checks to decide whether the connection is still valid. Erases it automatically if not.
+
+*/
 
 /connection/var/turf/simulated/A
 /connection/var/turf/simulated/B
