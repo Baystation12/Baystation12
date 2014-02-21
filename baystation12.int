@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-LAST_COMPILE_VERSION: 503.1224
-WINDOW: code\modules\admin\verbs\mapping.dm;code\ZAS\ConnectionGroup.dm;code\ZAS\Debug.dm;code\ZAS\_docs.dm
-DIR: code code\modules code\modules\admin code\modules\admin\verbs code\ZAS 
-FILE: code\ZAS\_docs.dm
-LAST_COMPILE_TIME: 1392997541
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
