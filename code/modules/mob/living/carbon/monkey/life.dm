@@ -250,22 +250,6 @@
 					var/breath_moles = environment.total_moles()*BREATH_PERCENTAGE
 					breath = loc.remove_air(breath_moles)
 
-					if(istype(wear_mask, /obj/item/clothing/mask/gas))
-						var/obj/item/clothing/mask/gas/G = wear_mask
-						var/datum/gas_mixture/filtered = new
-
-						filtered.copy_from(breath)
-						filtered.toxins *= G.gas_filter_strength
-						for(var/datum/gas/gas in filtered.trace_gases)
-							gas.moles *= G.gas_filter_strength
-						filtered.update_values()
-						loc.assume_air(filtered)
-
-						breath.toxins *= 1 - G.gas_filter_strength
-						for(var/datum/gas/gas in breath.trace_gases)
-							gas.moles *= 1 - G.gas_filter_strength
-						breath.update_values()
-
 					// Handle chem smoke effect  -- Doohl
 					var/block = 0
 					if(wear_mask)

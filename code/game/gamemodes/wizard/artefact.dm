@@ -54,7 +54,7 @@
 			if(candidates.len)
 				src.used = 1
 				var/client/C = pick(candidates)
-				new /obj/effect/effect/harmless_smoke(H.loc)
+				new /obj/effect/effect/smoke(H.loc)
 				var/mob/living/carbon/human/M = new/mob/living/carbon/human(H.loc)
 				M.key = C.key
 				M << "<B>You are the [H.real_name]'s apprentice! You are bound by magic contract to follow their orders and help them in accomplishing their goals."
