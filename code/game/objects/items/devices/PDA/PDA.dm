@@ -682,7 +682,33 @@ var/global/list/obj/item/device/pda/PDAs = list()
 							M.close()
 
 		if("Detonate")//Detonate PDA... maybe
+			// check if telecomms I/O route 1459 is stable
+			//var/telecomms_intact = telecomms_process(P.owner, owner, t)
+			var/obj/machinery/message_server/useMS = null
+			if(message_servers)
+				for (var/obj/machinery/message_server/MS in message_servers)
+				//PDAs are now dependant on the Message Server.
+					if(MS.active)
+						useMS = MS
+						break
+
+			var/datum/signal/signal = src.telecomms_process()
+
+			var/useTC = 0
+			if(signal)
+				if(signal.data["done"])
+					useTC = 1
+					var/turf/pos = get_turf(src)
+					if(pos.z in signal.data["level"])
+						useTC = 2
+
 			if(istype(cartridge, /obj/item/weapon/cartridge/syndicate))
+				if(!(useMS && useTC))
+					U.show_message("\red An error flashes on your [src]: Connection unavailable", 1)
+					return
+				if(useTC != 2) // Does our recepient have a broadcaster on their level?
+					U.show_message("\red An error flashes on your [src]: Recipient unavailable", 1)
+					return
 				var/obj/item/device/pda/P = locate(href_list["target"])
 				if(!isnull(P))
 					if (!P.toff && cartridge.charges > 0)
@@ -866,13 +892,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	if(useMS && useTC) // only send the message if it's stable
 		if(useTC != 2) // Does our recepient have a broadcaster on their level?
-			U << "ERROR: Cannot reach recepient."
+			U << "ERROR: Cannot reach recipient."
 			return
 		useMS.send_pda_message("[P.owner]","[owner]","[t]")
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
 		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS)) // src.client is so that ghosts don't have to listen to mice
+				if(istype(M, /mob/new_player))
+					continue
 				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[t]</span></span>")
 
 		if(!conversations.Find("\ref[P]"))
