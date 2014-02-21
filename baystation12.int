@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-LAST_COMPILE_VERSION: 503.1224
-WINDOW: code\ZAS\_gas_mixture.dm;code\ZAS\Airflow.dm;code\ZAS\Atom.dm;code\ZAS\Connection.dm;code\ZAS\ConnectionGroup.dm;code\ZAS\Controller.dm;code\ZAS\Debug.dm;code\ZAS\Diagnostic.dm;code\ZAS\Fire.dm;code\ZAS\Plasma.dm;code\ZAS\Turf.dm;code\ZAS\Variable Settings.dm;code\ZAS\Zone.dm;code\ZAS\_docs.dm;code\modules\admin\verbs\mapping.dm;code\game\turfs\turf.dm;code\modules\admin\verbs\diagnostics.dm;code\game\machinery\shieldgen.dm;code\game\machinery\doors\door.dm;code\game\machinery\doors\windowdoor.dm;code\game\objects\effects\effect_system.dm;code\game\objects\structures\mineral_doors.dm;code\game\objects\structures\windoor_assembly.dm;code\game\objects\structures\window.dm
-DIR: code code\game code\game\machinery code\game\machinery\doors code\game\objects code\game\objects\effects code\game\objects\structures code\modules\admin\verbs code\ZAS 
-FILE: code\ZAS\Controller.dm
-LAST_COMPILE_TIME: 1392858199
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
