@@ -12,6 +12,13 @@
 	icon_action_button = "action_hardhat"
 	siemens_coefficient = 0.9
 
+	Colored = 1
+	
+	var/RLumin = 1
+	var/GLumin = 1
+	var/BLumin = 0
+
+
 	attack_self(mob/user)
 		if(!isturf(user.loc))
 			user << "You cannot turn the light on while in this [user.loc]" //To prevent some lighting anomalities.
@@ -19,22 +26,19 @@
 		on = !on
 		icon_state = "hardhat[on]_[item_color]"
 		item_state = "hardhat[on]_[item_color]"
-		usr.update_inv_head()
 
-		if(on)	user.SetLuminosity(user.luminosity + brightness_on)
-		else	user.SetLuminosity(user.luminosity - brightness_on)
-
+		if(on)	user.AddLuminosityRGB(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
+		else	user.RemLuminosityRGB(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
+	
 	pickup(mob/user)
 		if(on)
-			user.SetLuminosity(user.luminosity + brightness_on)
-//			user.UpdateLuminosity()	//TODO: Carn
+			user.AddLuminosityRGB(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
 			SetLuminosity(0)
-
+	
 	dropped(mob/user)
 		if(on)
-			user.SetLuminosity(user.luminosity - brightness_on)
-//			user.UpdateLuminosity()
-			SetLuminosity(brightness_on)
+			user.RemLuminosityRGB(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
+			SetUniqueLuminosity(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
 
 
 /obj/item/clothing/head/hardhat/orange
