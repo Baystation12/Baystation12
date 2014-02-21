@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\ZAS\Turf.dm;code\game\turfs\turf.dm;code\ZAS\Zone.dm
+DIR: code code\game code\game\turfs code\ZAS 
+FILE: code\game\turfs\turf.dm
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

@@ -216,6 +216,9 @@
 
 	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
 
+	if(!ispath(N,/turf/simulated) && istype(src,/turf/simulated))
+		src:zone:remove(src)
+
 	if(ispath(N, /turf/simulated/floor))
 		//if the old turf had a zone, connect the new turf to it as well - Cael
 		//Adjusted by SkyMarshal 5/10/13 - The air master will handle the addition of the new turf.
