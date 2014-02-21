@@ -279,7 +279,6 @@
 	s += "</a>"
 	s += ")"
 	s += "<br>The Perfect Mix of RP & Action<br>"
-	s += "<b>NEW HOST. NO LAG. NO CRASH.</b><br>"
 
 
 
