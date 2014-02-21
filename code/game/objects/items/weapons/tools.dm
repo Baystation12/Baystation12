@@ -353,6 +353,11 @@
 		src.icon_state = "welder"
 		src.welding = 0
 
+	if(usr.hand)
+		usr.update_inv_l_hand()
+	else
+		usr.update_inv_r_hand()
+
 //Decides whether or not to damage a player's eyes based on what they're wearing as protection
 //Note: This should probably be moved to mob
 /obj/item/weapon/weldingtool/proc/eyecheck(mob/user as mob)
