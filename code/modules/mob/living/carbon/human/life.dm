@@ -105,7 +105,7 @@
 	handle_environment(environment)
 
 	//Status updates, death etc.
-	handle_regular_status_updates()		//TODO: optimise ~Carn
+	handle_regular_status_updates()		//TODO: optimise ~Carn  NO SHIT ~Ccomp
 	update_canmove()
 
 	//Update our name based on whether our face is obscured/disfigured
@@ -1066,6 +1066,13 @@
 				stat = CONSCIOUS
 				if(halloss > 0)
 					adjustHalLoss(-1)
+
+			if(embedded_flag && !(life_tick % 10))
+				var/list/E
+				E = get_visible_implants(0)
+				if(!E.len)
+					embedded_flag = 0
+				
 
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own

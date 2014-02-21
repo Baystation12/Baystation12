@@ -47,6 +47,7 @@ Buildable meters
 	if (make_from)
 		src.dir = make_from.dir
 		src.pipename = make_from.name
+		color = make_from.color
 		var/is_bent
 		if  (make_from.initialize_directions in list(NORTH|SOUTH, WEST|EAST))
 			is_bent = 0
@@ -299,6 +300,7 @@ Buildable meters
 	switch(pipe_type)
 		if(PIPE_SIMPLE_STRAIGHT, PIPE_SIMPLE_BENT)
 			var/obj/machinery/atmospherics/pipe/simple/P = new( src.loc )
+			P.color = color
 			P.dir = src.dir
 			P.initialize_directions = pipe_dir
 			var/turf/T = P.loc
@@ -351,6 +353,7 @@ Buildable meters
 
 		if(PIPE_MANIFOLD)		//manifold
 			var/obj/machinery/atmospherics/pipe/manifold/M = new( src.loc )
+			M.color = color
 			M.dir = dir
 			M.initialize_directions = pipe_dir
 			//M.New()
@@ -373,6 +376,7 @@ Buildable meters
 
 		if(PIPE_MANIFOLD4W)		//4-way manifold
 			var/obj/machinery/atmospherics/pipe/manifold4w/M = new( src.loc )
+			M.color = color
 			M.dir = dir
 			M.initialize_directions = pipe_dir
 			//M.New()

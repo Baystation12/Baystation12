@@ -63,7 +63,7 @@ obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/u
 		return ..()
 
 	if(istype(W,/obj/item/device/pipe_painter))
-		return 1
+		return 0
 
 	if (!istype(W, /obj/item/weapon/wrench))
 		return ..()
@@ -118,6 +118,7 @@ obj/machinery/atmospherics/pipe/simple
 
 obj/machinery/atmospherics/pipe/simple/New()
 	..()
+	alpha = 255
 	switch(dir)
 		if(SOUTH || NORTH)
 			initialize_directions = SOUTH|NORTH
@@ -220,15 +221,15 @@ obj/machinery/atmospherics/pipe/simple/pipeline_expansion()
 
 obj/machinery/atmospherics/pipe/simple/update_icon()
 	if(node1&&node2)
-		var/C = ""
 		switch(pipe_color)
-			if ("red") C = "-r"
-			if ("blue") C = "-b"
-			if ("cyan") C = "-c"
-			if ("green") C = "-g"
-			if ("yellow") C = "-y"
-			if ("purple") C = "-p"
-		icon_state = "intact[C][invisibility ? "-f" : "" ]"
+			if ("red") color = COLOR_RED
+			if ("blue") color = COLOR_BLUE
+			if ("cyan") color = COLOR_CYAN
+			if ("green") color = COLOR_GREEN
+			if ("yellow") color = "#FFCC00"
+			if ("purple") color = "#5C1EC0"
+			if ("grey") color = null
+		icon_state = "intact[invisibility ? "-f" : "" ]"
 
 		//var/node1_direction = get_dir(src, node1)
 		//var/node2_direction = get_dir(src, node2)
@@ -294,42 +295,43 @@ obj/machinery/atmospherics/pipe/simple/visible
 
 obj/machinery/atmospherics/pipe/simple/visible/scrubbers
 	name="Scrubbers pipe"
-	color="#FF0000"
+	color=COLOR_RED
 
 obj/machinery/atmospherics/pipe/simple/visible/supply
 	name="Air supply pipe"
-	color="#0000FF"
+	color=COLOR_BLUE
 
 obj/machinery/atmospherics/pipe/simple/visible/yellow
 	color="#FFCC00"
 
 obj/machinery/atmospherics/pipe/simple/visible/cyan
-	color="#00FFFF"
+	color=COLOR_CYAN
 
 obj/machinery/atmospherics/pipe/simple/visible/green
-	color="#00FF00"
+	color=COLOR_GREEN
 
 
 obj/machinery/atmospherics/pipe/simple/hidden
 	level = 1
 	icon_state = "intact-f"
+	alpha = 192		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
 obj/machinery/atmospherics/pipe/simple/hidden/scrubbers
 	name="Scrubbers pipe"
-	color="#FF0000"
+	color=COLOR_RED
 
 obj/machinery/atmospherics/pipe/simple/hidden/supply
 	name="Air supply pipe"
-	color="#0000FF"
+	color=COLOR_BLUE
 
 obj/machinery/atmospherics/pipe/simple/hidden/yellow
 	color="#FFCC00"
 
 obj/machinery/atmospherics/pipe/simple/hidden/cyan
-	color="#00FFFF"
+	color=COLOR_CYAN
 
 obj/machinery/atmospherics/pipe/simple/hidden/green
-	color="#00FF00"
+	color=COLOR_GREEN
 
 
 obj/machinery/atmospherics/pipe/simple/insulated
@@ -364,6 +366,7 @@ obj/machinery/atmospherics/pipe/manifold
 	layer = 2.4 //under wires with their 2.44
 
 obj/machinery/atmospherics/pipe/manifold/New()
+	alpha = 255
 	switch(dir)
 		if(NORTH)
 			initialize_directions = EAST|SOUTH|WEST
@@ -442,15 +445,15 @@ obj/machinery/atmospherics/pipe/manifold/disconnect(obj/machinery/atmospherics/r
 
 obj/machinery/atmospherics/pipe/manifold/update_icon()
 	if(node1&&node2&&node3)
-		var/C = ""
 		switch(pipe_color)
-			if ("red") C = "-r"
-			if ("blue") C = "-b"
-			if ("cyan") C = "-c"
-			if ("green") C = "-g"
-			if ("yellow") C = "-y"
-			if ("purple") C = "-p"
-		icon_state = "manifold[C][invisibility ? "-f" : ""]"
+			if ("red") color = COLOR_RED
+			if ("blue") color = COLOR_BLUE
+			if ("cyan") color = COLOR_CYAN
+			if ("green") color = COLOR_GREEN
+			if ("yellow") color = "#FFCC00"
+			if ("purple") color = "#5C1EC0"
+			if ("grey") color = null
+		icon_state = "manifold[invisibility ? "-f" : "" ]"
 
 	else
 		var/connected = 0
@@ -520,48 +523,48 @@ obj/machinery/atmospherics/pipe/manifold/visible
 
 obj/machinery/atmospherics/pipe/manifold/visible/supply
 	name="Air supply pipe"
-	color="#0000FF"
+	color=COLOR_BLUE
 
 obj/machinery/atmospherics/pipe/manifold/visible/scrubbers
 	name="Scrubbers pipe"
-	color="#FF0000"
+	color=COLOR_RED
 
 obj/machinery/atmospherics/pipe/manifold/visible/yellow
 	color="#FFCC00"
 
 obj/machinery/atmospherics/pipe/manifold/visible/cyan
-	color="#00FFFF"
+	color=COLOR_CYAN
 
 obj/machinery/atmospherics/pipe/manifold/visible/green
-	color="#00FF00"
+	color=COLOR_GREEN
 
 
 obj/machinery/atmospherics/pipe/manifold/hidden
 	level = 1
 	icon_state = "manifold-f"
+	alpha = 192		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
 obj/machinery/atmospherics/pipe/manifold/hidden/supply
 	name="Air supply pipe"
-	color="#0000FF"
+	color=COLOR_BLUE
 
 obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers
 	name="Scrubbers pipe"
-	color="#FF0000"
+	color = COLOR_RED
 
 obj/machinery/atmospherics/pipe/manifold/hidden/yellow
 	color="#FFCC00"
 
 obj/machinery/atmospherics/pipe/manifold/hidden/cyan
-	color="#00FFFF"
+	color=COLOR_CYAN
 
 obj/machinery/atmospherics/pipe/manifold/hidden/green
-	color="#00FF00"
+	color=COLOR_GREEN
 
 
 
 obj/machinery/atmospherics/pipe/manifold4w
 	icon = 'icons/obj/atmospherics/pipe_manifold.dmi'
-	icon_state = "manifold4w-f"
 
 	name = "4-way pipe manifold"
 	desc = "A manifold composed of regular pipes"
@@ -578,6 +581,10 @@ obj/machinery/atmospherics/pipe/manifold4w
 
 	level = 1
 	layer = 2.4 //under wires with their 2.44
+
+obj/machinery/atmospherics/pipe/manifold4w/New()
+	..()
+	alpha = 255
 
 obj/machinery/atmospherics/pipe/manifold4w/hide(var/i)
 	if(level == 1 && istype(loc, /turf/simulated))
@@ -651,15 +658,15 @@ obj/machinery/atmospherics/pipe/manifold4w/disconnect(obj/machinery/atmospherics
 obj/machinery/atmospherics/pipe/manifold4w/update_icon()
 	overlays.Cut()
 	if(node1&&node2&&node3&&node4)
-		var/C = ""
 		switch(pipe_color)
-			if ("red") C = "-r"
-			if ("blue") C = "-b"
-			if ("cyan") C = "-c"
-			if ("green") C = "-g"
-			if ("yellow") C = "-y"
-			if ("purple") C = "-p"
-		icon_state = "manifold4w[C][invisibility ? "-f" : ""]"
+			if ("red") color = COLOR_RED
+			if ("blue") color = COLOR_BLUE
+			if ("cyan") color = COLOR_CYAN
+			if ("green") color = COLOR_GREEN
+			if ("yellow") color = "#FFCC00"
+			if ("purple") color = "#5C1EC0"
+			if ("grey") color = null
+		icon_state = "manifold4w[invisibility ? "-f" : "" ]"
 
 	else
 		icon_state = "manifold4w_ex"
@@ -712,42 +719,43 @@ obj/machinery/atmospherics/pipe/manifold4w/visible
 
 obj/machinery/atmospherics/pipe/manifold4w/visible/supply
 	name="Air supply pipe"
-	color="#0000FF"
+	color=COLOR_BLUE
 
 obj/machinery/atmospherics/pipe/manifold4w/visible/scrubbers
 	name="Scrubbers pipe"
-	color="#FF0000"
+	color=COLOR_RED
 
 obj/machinery/atmospherics/pipe/manifold4w/visible/yellow
 	color="#FFCC00"
 
 obj/machinery/atmospherics/pipe/manifold4w/visible/cyan
-	color="#00FFFF"
+	color=COLOR_CYAN
 
 obj/machinery/atmospherics/pipe/manifold4w/visible/green
-	color="#00FF00"
+	color=COLOR_GREEN
 
 
 obj/machinery/atmospherics/pipe/manifold4w/hidden
 	level = 1
 	icon_state = "manifold4w-f"
+	alpha = 192		//set for the benefit of mapping - this is reset to opaque when the pipe is spawned in game
 
 obj/machinery/atmospherics/pipe/manifold4w/hidden/supply
 	name="Air supply pipe"
-	color="#0000FF"
+	color=COLOR_BLUE
 
 obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers
 	name="Scrubbers pipe"
-	color="#FF0000"
+	color=COLOR_RED
 
 obj/machinery/atmospherics/pipe/manifold4w/hidden/yellow
 	color="#FFCC00"
 
 obj/machinery/atmospherics/pipe/manifold4w/hidden/cyan
-	color="#00FFFF"
+	color=COLOR_CYAN
 
 obj/machinery/atmospherics/pipe/manifold4w/hidden/green
-	color="#00FF00"
+	color=COLOR_GREEN
 
 
 obj/machinery/atmospherics/pipe/cap
