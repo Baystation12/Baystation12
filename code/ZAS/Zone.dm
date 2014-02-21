@@ -33,9 +33,11 @@
 	ASSERT(!invalid)
 	ASSERT(istype(T))
 	ASSERT(T.zone == src)
+	ASSERT(T in contents)
 #endif
 	contents.Remove(T)
 	T.zone = null
+	T.set_graphic(0)
 	if(contents.len)
 		air.group_multiplier = contents.len
 	else
