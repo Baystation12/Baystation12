@@ -32,6 +32,11 @@
 			//unsim.dbg(air_blocked, turn(180,d))
 			continue
 
+		var/r_block = c_airblock(unsim)
+
+		if(r_block & AIR_BLOCKED)
+			continue
+
 		if(istype(unsim, /turf/simulated))
 
 			var/turf/simulated/sim = unsim
@@ -165,9 +170,7 @@
 		air_master.connect(src, T)
 
 /turf/proc/post_update_air_properties()
-
-/turf/simulated/post_update_air_properties()
-	connections.update_all()
+	if(connections) connections.update_all()
 
 /turf/assume_air(datum/gas_mixture/giver) //use this for machines to adjust air
 	del(giver)

@@ -2,7 +2,7 @@
 #define CONNECTION_SPACE 4
 #define CONNECTION_INVALID 8
 
-/turf/simulated/var/tmp/connection_manager/connections = new
+/turf/var/tmp/connection_manager/connections
 
 
 /connection_manager/var/connection/N
@@ -61,6 +61,16 @@
 	if(check(D)) D.update()
 	#endif
 
+/connection_manager/proc/erase_all()
+	if(check(N)) N.erase()
+	if(check(S)) S.erase()
+	if(check(E)) E.erase()
+	if(check(W)) W.erase()
+	#ifdef ZLEVELS
+	if(check(U)) U.erase()
+	if(check(D)) D.erase()
+	#endif
+
 /connection_manager/proc/check(connection/c)
 	return c && c.valid()
 
@@ -92,14 +102,12 @@
 		edge.add_connection(src)
 
 /connection/proc/mark_direct()
-	edge.remove_connection(src)
 	state |= CONNECTION_DIRECT
-	edge.add_connection(src)
+	//world << "Marked direct."
 
 /connection/proc/mark_indirect()
-	edge.remove_connection(src)
 	state &= ~CONNECTION_DIRECT
-	edge.add_connection(src)
+	//world << "Marked indirect."
 
 /connection/proc/mark_space()
 	state |= CONNECTION_SPACE
@@ -113,6 +121,7 @@
 /connection/proc/erase()
 	edge.remove_connection(src)
 	state |= CONNECTION_INVALID
+	//world << "Connection Erased: [state]"
 
 /connection/proc/update()
 	//world << "Updated, \..."

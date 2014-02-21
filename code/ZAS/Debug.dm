@@ -14,6 +14,9 @@ var/image/mark = image('icons/Testing/Zone.dmi', icon_state = "mark")
 	overlays += img
 	dbg_img = img
 
+proc/soft_assert(thing,fail)
+	if(!thing) message_admins(fail)
+
 /turf/simulated/var/verbose = 0
 /turf/simulated/verb/Verbose()
 	set src in world

@@ -11,10 +11,10 @@
 
 /connection_edge/proc/add_connection(connection/c)
 	coefficient++
-	//world << "Connection added. Coefficient: [coefficient]"
+	//world << "Connection added: [type] Coefficient: [coefficient]"
 
 /connection_edge/proc/remove_connection(connection/c)
-	//world << "Connection removed. Coefficient: [coefficient-1]"
+	//world << "Connection removed: [type] Coefficient: [coefficient-1]"
 	coefficient--
 	if(coefficient <= 0)
 		erase()
@@ -23,7 +23,7 @@
 
 /connection_edge/proc/erase()
 	air_master.remove_edge(src)
-	//world << "Erased."
+	//world << "[type] Erased."
 
 /connection_edge/proc/tick()
 
@@ -130,9 +130,15 @@
 /connection_edge/unsimulated/add_connection(connection/c)
 	. = ..()
 	connecting_turfs.Add(c.B)
+	air.group_multiplier = coefficient
 
 /connection_edge/unsimulated/remove_connection(connection/c)
 	connecting_turfs.Remove(c.B)
+	air.group_multiplier = coefficient
+	. = ..()
+
+/connection_edge/unsimulated/erase()
+	A.edges.Remove(src)
 	. = ..()
 
 /connection_edge/unsimulated/contains_zone(zone/Z)

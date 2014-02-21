@@ -216,8 +216,14 @@
 
 	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
 
-	if(!ispath(N,/turf/simulated) && istype(src,/turf/simulated))
-		src:zone:remove(src)
+	//world << "Replacing [src.type] with [N]"
+
+	if(connections) connections.erase_all()
+
+	if(istype(src,/turf/simulated))
+		//world << "Removed from zone."
+		var/turf/simulated/S = src
+		if(S.zone) S.zone.remove(S)
 
 	if(ispath(N, /turf/simulated/floor))
 		//if the old turf had a zone, connect the new turf to it as well - Cael

@@ -33,7 +33,7 @@
 	ASSERT(!invalid)
 	ASSERT(istype(T))
 	ASSERT(T.zone == src)
-	ASSERT(T in contents)
+	soft_assert(T in contents, "Lists are weird broseph")
 #endif
 	contents.Remove(T)
 	T.zone = null
