@@ -158,8 +158,8 @@ var/list/debug_verbs = list (
         ,/client/proc/Test_ZAS_Connection
         ,/client/proc/ZoneTick
         ,/client/proc/hide_debug_verbs
-	,/client/proc/testZAScolors
-	,/client/proc/testZAScolors_remove
+	//,/client/proc/testZAScolors
+	//,/client/proc/testZAScolors_remove
 	)
 
 
@@ -183,6 +183,8 @@ var/list/debug_verbs = list (
 
 	feedback_add_details("admin_verb","hDV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+
+/* *****
 
 /client/var/list/testZAScolors_turfs = list()
 /client/var/list/testZAScolors_zones = list()
@@ -263,6 +265,8 @@ var/list/debug_verbs = list (
 			if(i.icon_state == "zasdebug")
 				images.Remove(i)
 
+
+***** */
 
 /client/proc/count_objects_on_z_level()
 	set category = "Mapping"
