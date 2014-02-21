@@ -1,10 +1,10 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm
+WINDOW: maps\tgstation2 (2).dmm
 LAST_COMPILE_VERSION: 503.1224
 DIR: code code\game code\game\area code\game\objects\random code\modules\library icons\turf maps 
-FILE: maps\tgstation2.dmm
+FILE: maps\tgstation2 (2).dmm
 LAST_COMPILE_TIME: 1392624530
 AUTO_FILE_DIR: OFF
 */
