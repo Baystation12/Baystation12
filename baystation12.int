@@ -1,11 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: maps\tgstation2.dmm
 LAST_COMPILE_VERSION: 503.1224
-DIR: code code\game code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\random code\modules code\modules\library icons icons\turf maps 
-FILE: maps\tgstation2.dmm
-LAST_COMPILE_TIME: 1392478062
+DIR: code code\game code\game\area code\game\objects\random code\modules\library icons\turf maps 
+LAST_COMPILE_TIME: 1392624530
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
