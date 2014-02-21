@@ -19,7 +19,11 @@
 		//dbg(blocked)
 		return 1
 
+	#ifdef ZLEVELS
+	for(var/d = 1, d < 64, d *= 2)
+	#else
 	for(var/d = 1, d < 16, d *= 2)
+	#endif
 
 		var/turf/unsim = get_step(src, d)
 		block = unsim.c_airblock(src)
@@ -59,7 +63,11 @@
 	open_directions = 0
 
 	var/list/postponed
+	#ifdef ZLEVELS
+	for(var/d = 1, d < 64, d *= 2)
+	#else
 	for(var/d = 1, d < 16, d *= 2)
+	#endif
 
 		var/turf/unsim = get_step(src, d)
 		var/block = unsim.c_airblock(src)

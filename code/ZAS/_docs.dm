@@ -22,6 +22,7 @@ air_master.mark_for_update(turf)
 */
 
 //#define ZASDBG
+#define ZLEVELS
 
 #define AIR_BLOCKED 1
 #define ZONE_BLOCKED 2

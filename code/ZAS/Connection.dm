@@ -10,6 +10,11 @@
 /connection_manager/var/connection/E
 /connection_manager/var/connection/W
 
+#ifdef ZLEVELS
+/connection_manager/var/connection/U
+/connection_manager/var/connection/D
+#endif
+
 /connection_manager/proc/get(d)
 	switch(d)
 		if(NORTH)
@@ -25,6 +30,15 @@
 			if(check(W)) return W
 			else return null
 
+		#ifdef ZLEVELS
+		if(UP)
+			if(check(U)) return U
+			else return null
+		if(DOWN)
+			if(check(D)) return D
+			else return null
+		#endif
+
 /connection_manager/proc/place(connection/c, d)
 	switch(d)
 		if(NORTH) N = c
@@ -32,11 +46,20 @@
 		if(EAST) E = c
 		if(WEST) W = c
 
+		#ifdef ZLEVELS
+		if(UP) U = c
+		if(DOWN) D = c
+		#endif
+
 /connection_manager/proc/update_all()
 	if(check(N)) N.update()
 	if(check(S)) S.update()
 	if(check(E)) E.update()
 	if(check(W)) W.update()
+	#ifdef ZLEVELS
+	if(check(U)) U.update()
+	if(check(D)) D.update()
+	#endif
 
 /connection_manager/proc/check(connection/c)
 	return c && c.valid()

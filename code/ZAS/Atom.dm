@@ -49,9 +49,18 @@ turf/c_airblock(turf/other)
 	#endif
 	if(blocks_air)
 		return BLOCKED
-	else
-		var/result = 0
-		for(var/atom/movable/M in contents)
-			result |= M.c_airblock(other)
-			if(result == BLOCKED) return BLOCKED
-		return result
+
+	//Z-level handling code. Always block if there isn't an open space.
+	#ifdef ZLEVELS
+	if(other.z != src.z)
+		if(other.z < src.z)
+			if(!istype(src, /turf/simulated/floor/open)) return BLOCKED
+		else
+			if(!istype(other, /turf/simulated/floor/open)) return BLOCKED
+	#endif
+
+	var/result = 0
+	for(var/atom/movable/M in contents)
+		result |= M.c_airblock(other)
+		if(result == BLOCKED) return BLOCKED
+	return result
