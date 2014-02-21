@@ -1,6 +1,8 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser gun"
 	desc = "a basic weapon designed kill with concentrated energy bolts"
+	icon = 'tauceti/icons/obj/guns.dmi'
+	tc_custom = 'tauceti/icons/obj/guns.dmi'
 	icon_state = "laser"
 	item_state = "laser"
 	w_class = 3.0
@@ -19,11 +21,13 @@
 
 obj/item/weapon/gun/energy/laser/retro
 	name ="retro laser"
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "retro"
 	desc = "An older model of the basic lasergun, no longer used by Nanotrasen's security or military forces. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
 
 
 /obj/item/weapon/gun/energy/laser/captain
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "caplaser"
 	desc = "This is an antique laser gun. All craftsmanship is of the highest quality. It is decorated with assistant leather and chrome. The object menaces with spikes of energy. On the item is an image of Space Station 13. The station is exploding."
 	force = 10
@@ -65,6 +69,8 @@ obj/item/weapon/gun/energy/laser/retro
 
 /obj/item/weapon/gun/energy/laser/scatter
 	name = "scatter laser gun"
+	icon = 'icons/obj/gun.dmi'
+	icon_state = "oldlaser"
 	desc = "A laser gun equipped with a refraction kit that spreads bolts."
 	ammo_type = list(/obj/item/ammo_casing/energy/laser, /obj/item/ammo_casing/energy/laser/scatter)
 

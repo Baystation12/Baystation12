@@ -368,7 +368,7 @@
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/shade))
 		return 1
-	if(ispath(MP, /mob/living/simple_animal/tomato))
+	if(ispath(MP, /mob/living/simple_animal/hostile/tomato)) //no good anymore
 		return 1
 	if(ispath(MP, /mob/living/simple_animal/mouse))
 		return 1 //It is impossible to pull up the player panel for mice (Fixed! - Nodrak)

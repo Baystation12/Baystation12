@@ -662,7 +662,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/killertomato/attack_self(mob/user as mob)
 	if(istype(user.loc,/turf/space))
 		return
-	new /mob/living/simple_animal/tomato(user.loc)
+	new /mob/living/simple_animal/hostile/tomato(user.loc)
 	del(src)
 
 	user << "<span class='notice'>You plant the killer-tomato.</span>"

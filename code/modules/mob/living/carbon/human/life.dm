@@ -165,7 +165,7 @@
 						if(1)
 							emote("twitch")
 						if(2 to 3)
-							say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
+							say("[pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
 					var/old_x = pixel_x
 					var/old_y = pixel_y
 					pixel_x += rand(-2,2)
@@ -1102,7 +1102,7 @@
 				E = get_visible_implants(0)
 				if(!E.len)
 					embedded_flag = 0
-				
+
 
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
@@ -1408,7 +1408,7 @@
 
 			if(istype(glasses, /obj/item/clothing/glasses/thermal) )
 				client.screen += global_hud.thermal
-				
+
 			if(istype(glasses, /obj/item/clothing/glasses/science) )
 				client.screen += global_hud.science
 
