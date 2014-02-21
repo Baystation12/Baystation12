@@ -108,7 +108,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 		A.fire_act(air_contents, air_contents.temperature, air_contents.return_volume())
 	//spread
 	for(var/direction in cardinal)
-		if(S.air_check_directions&direction) //Grab all valid bordering tiles
+		if(S.open_directions & direction) //Grab all valid bordering tiles
 
 			var/turf/simulated/enemy_tile = get_step(S, direction)
 
