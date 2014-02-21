@@ -13,24 +13,16 @@
 </div>
 <div class="item" style="padding-top: 10px">
 	<div class="item">
-		<div class="itemContent" style="width: 100%">
+		<div class="itemContent">
 			{{:~link('Cycle to Exterior', 'arrowthickstop-1-w', {'command' : 'cycle_ext'}, processing ? 'disabled' : null)}}
 			{{:~link('Cycle to Interior', 'arrowthickstop-1-e', {'command' : 'cycle_int'}, processing ? 'disabled' : null)}}
 		</div>
-		<div class="itemContent" style="padding-top: 2px; width: 100%">
-		{{if interior_status.state == "open"}}
-			{{:~link('Force exterior door', 'alert', {'command' : 'force_ext'}, null, 'redBackground')}}
-		{{else}}
+		<div class="itemContent" style="padding-top: 2px">
 			{{:~link('Force exterior door', 'alert', {'command' : 'force_ext'}, null, processing ? 'yellowBackground' : null)}}
-		{{/if}}
-		{{if exterior_status.state == "open"}}
-			{{:~link('Force interior door', 'alert', {'command' : 'force_int'}, null, 'redBackground')}}
-		{{else}}
 			{{:~link('Force interior door', 'alert', {'command' : 'force_int'}, null, processing ? 'yellowBackground' : null)}}
-		{{/if}}
 		</div>
 	</div>
-	<div class="item" style="padding-top: 10px; width: 100%">
+	<div class="item" style="padding-top: 10px">
 			{{:~link('Abort', 'cancel', {'command' : 'abort'}, processing ? null : 'disabled', processing ? 'redBackground' : null)}}
 	</div>
 </div>

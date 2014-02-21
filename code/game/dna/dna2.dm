@@ -51,9 +51,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 /////////////////
 // GENE DEFINES
 /////////////////
-// Skip checking if it's already active.
-// Used for genes that check for value rather than a binary on/off.
-#define GENE_ALWAYS_ACTIVATE 1
 
 // Skip checking if it's already active.
 // Used for genes that check for value rather than a binary on/off.
@@ -99,6 +96,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.UpdateUI()
 	new_dna.UpdateSE()
 	return new_dna
+
 ///////////////////////////////////////
 // UNIQUE IDENTITY
 ///////////////////////////////////////
@@ -152,7 +150,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 // Set a DNA UI block's raw value.
 /datum/dna/proc/SetUIValue(var/block,var/value,var/defer=0)
 	if (block<=0) return
-	ASSERT(value>0)
+	ASSERT(value>=0)
 	ASSERT(value<=4095)
 	UI[block]=value
 	dirtyUI=1
@@ -168,7 +166,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 // Used in hair and facial styles (value being the index and maxvalue being the len of the hairstyle list)
 /datum/dna/proc/SetUIValueRange(var/block,var/value,var/maxvalue,var/defer=0)
 	if (block<=0) return
-	if (value==0) value = 1   // FIXME: hair/beard/eye RGB values if they are 0 are not set, this is a work around we'll encode it in the DNA to be 1 instead.
 	ASSERT(maxvalue<=4095)
 	var/range = (4095 / maxvalue)
 	if(value)

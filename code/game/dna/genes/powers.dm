@@ -191,5 +191,6 @@
 
 	New()
 		block=TELEBLOCK
+
 	OnDrawUnderlays(var/mob/M,var/g,var/fat)
 		return "telekinesishead[fat]_s"

@@ -6,7 +6,6 @@
 	icon_state = "body_m_s"
 	var/list/hud_list = list()
 	var/datum/species/species //Contains icon generation and language information, set during New().
-	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
@@ -47,7 +46,6 @@
 
 	if(!dna)
 		dna = new /datum/dna(null)
-		dna.species=species.name	
 
 	for(var/i=0;i<7;i++) // 2 for medHUDs and 5 for secHUDs
 		hud_list += image('icons/mob/hud.dmi', src, "hudunknown")
@@ -1186,14 +1184,8 @@
 
 /mob/living/carbon/human/proc/set_species(var/new_species)
 
-	if(!dna)
-		if(!new_species)
-			new_species = "Human"
-	else
-		if(!new_species)
-			new_species = dna.species
-		else
-			dna.species = new_species	
+	if(!new_species)
+		new_species = "Human"
 
 	if(species && (species.name && species.name == new_species))
 		return

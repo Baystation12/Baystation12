@@ -6,7 +6,6 @@
 	var/rate
 	var/list/solars			// for debugging purposes, references solars_list at the constructor
 	var/nexttime = 3600		// Replacement for var/counter to force the sun to move every X IC minutes
-	var/lastAngleUpdate
 
 /datum/sun/New()
 
@@ -29,25 +28,15 @@
 	counter = 0 */
 
 	angle = ((rate*world.time/100)%360 + 360)%360
-
 	/*
 		Yields a 45 - 75 IC minute rotational period
 		Rotation rate can vary from 4.8 deg/min to 8 deg/min (288 to 480 deg/hr)
 	*/
 
-	if(lastAngleUpdate != angle)
-		for(var/obj/machinery/power/tracker/T in solars_list)
-			if(!T.powernet)
-				solars_list.Remove(T)
-				continue
-			T.set_angle(angle)
-	lastAngleUpdate=angle
-
-
-
-	if(nexttime > world.time)
+	//  To prevent excess server load the server only updates the sun's sight lines every 6 minutes
+	if(nexttime < world.time)
 		return
-	nexttime = nexttime + 600	// 600 world.time ticks = 1 minute
+	nexttime = nexttime + 3600	// 600 world.time ticks = 1 minute, 3600 = 6 minutes.
 
 	// now calculate and cache the (dx,dy) increments for line drawing
 
@@ -69,13 +58,22 @@
 		dy = c / abs(s)
 
 
-	for(var/obj/machinery/power/solar/S in solars_list)
+	for(var/obj/machinery/power/M in solars_list)
 
-		if(!S.powernet)
-			solars_list.Remove(S)
+		if(!M.powernet)
+			solars_list.Remove(M)
 			continue
-		if(S.control)
-			occlusion(S)
+
+		// Solar Tracker
+		if(istype(M, /obj/machinery/power/tracker))
+			var/obj/machinery/power/tracker/T = M
+			T.set_angle(angle)
+
+		// Solar Panel
+		else if(istype(M, /obj/machinery/power/solar))
+			var/obj/machinery/power/solar/S = M
+			if(S.control)
+				occlusion(S)
 
 
 

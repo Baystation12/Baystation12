@@ -6,7 +6,7 @@
 		alert(usr,"Master_controller or air_master not found.","Air Report")
 		return
 
-	var/active_groups = air_master.active_zones
+	var/active_groups = air_master.active_zones.len
 	var/inactive_groups = air_master.zones.len - active_groups
 
 	var/hotspots = 0
@@ -18,7 +18,7 @@
 	for(var/zone/zone in air_master.zones)
 		var/turf/simulated/turf = locate() in zone.contents
 		if(turf && turf.z == 1)
-			if(zone.needs_update)
+			if(zone.status)
 				active_on_main_station++
 			else
 				inactive_on_main_station++

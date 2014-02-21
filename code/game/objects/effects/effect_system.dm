@@ -833,7 +833,7 @@ steam.start() -- spawns the effect
 		if(!air_master)
 			return 0
 
-		air_master.mark_for_update(get_turf(src))
+		air_master.AddTurfToUpdate(get_turf(src))
 
 		return 1
 

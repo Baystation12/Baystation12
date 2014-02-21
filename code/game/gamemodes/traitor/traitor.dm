@@ -254,7 +254,7 @@
 		if (!R)
 			traitor_mob << "Unfortunately, neither a radio or a PDA relay could be installed."
 
-	else if(traitor_mob.client.prefs.uplinklocation == "PDA")
+	if(traitor_mob.client.prefs.uplinklocation == "PDA")
 		R = locate(/obj/item/device/pda) in traitor_mob.contents
 		if(!R)
 			R = locate(/obj/item/device/radio) in traitor_mob.contents
@@ -262,18 +262,9 @@
 		if (!R)
 			traitor_mob << "Unfortunately, neither a radio or a PDA relay could be installed."
 
-	else if(traitor_mob.client.prefs.uplinklocation == "None")
+	if(traitor_mob.client.prefs.uplinklocation == "None")
 		traitor_mob << "You have elected to not have an AntagCorp portable teleportation relay installed!"
 		R = null
-
-	else
-		traitor_mob << "You have not selected a location for your relay in the antagonist options! Defaulting to PDA!"
-		R = locate(/obj/item/device/pda) in traitor_mob.contents
-		if (!R)
-			R = locate(/obj/item/device/radio) in traitor_mob.contents
-			traitor_mob << "Could not locate a PDA, installing into a Radio instead!"
-		if (!R)
-			traitor_mob << "Unfortunately, neither a radio or a PDA relay could be installed."
 
 	if (!R)
 		. = 0

@@ -14,7 +14,7 @@
 	//var/uni_append = "12C4E2"                // Small appearance modifier for different species.
 	var/list/uni_append = list(0x12C,0x4E2)    // Same as above for DNA2.
 	var/update_muts = 1                        // Monkey gene must be set at start.
-	var/alien = 0				   //Used for reagent metabolism.
+	var/alien = 0								//Used for reagent metabolism.
 
 /mob/living/carbon/monkey/tajara
 	name = "farwa"

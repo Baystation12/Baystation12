@@ -99,7 +99,6 @@ emp_act
 		(SP.loc) = organ
 		organ.implants += SP
 		visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
-		embedded_flag = 1
 		src.verbs += /mob/proc/yank_out_object
 		SP.add_blood(src)
 
