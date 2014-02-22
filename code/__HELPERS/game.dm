@@ -35,12 +35,17 @@
 
 // Like view but bypasses luminosity check
 
-/proc/hear(var/range, var/atom/source)
+/proc/hear(var/range, var/turf/source)
 
+	var/Alum = source.loc.luminosity
 	var/lum = source.luminosity
+	source.loc.luminosity = 6
 	source.luminosity = 6
 
-	var/list/heard = view(range, source)
+	var/list/heard = hearers(range, source) //Only lists mobs, but does a better job then view of getting the mobs.
+	heard |= view(range, source)
+
+	source.loc.luminosity = Alum
 	source.luminosity = lum
 
 	return heard
@@ -173,34 +178,47 @@
 		return hear
 
 	var/list/range = hear(R, T)
-
-	for(var/mob/M in range)
-		hear += M
-		
 	var/list/objects = list()
+	var/list/clients_minus_checked = list()
+	clients_minus_checked |= clients
 
-	for(var/obj/O in range)				//Get a list of objects in hearing range.  We'll check to see if any clients have their "eye" set to the object 
-		objects += O
+	for(var/I in range)
+		if(istype(I, /mob))
+			var/mob/M = I
+			if(istype(M, /mob/living))
+				hear += M
+			else if(istype(M, /mob/dead))
+				hear += M
+			else
+				objects += M					//We still need to check if they contain entities that can hear
+				continue
 
-	for(var/client/C in clients)
-		if(!istype(C) || !C.eye)
-			continue   			//I have no idea when this client check would be needed, but if this runtimes people won't hear anything
-							//So kinda paranoid about runtime avoidance.
-		if(istype(C.eye, /obj/machinery/camera))
-			continue				//No microphones in cameras.
+			if(M.client)
+				clients_minus_checked -= M.client		
 
-		if(C.mob in hear)
+		else
+			objects += I
+
+	var/list/hear_and_objects = (hear|objects)
+
+	for(var/client/C in clients_minus_checked)
+		if(!istype(C) || !C.eye || istype(C.mob, /mob/dead) || istype(C.eye, /mob/aiEye))
 			continue
 
-		var/list/hear_and_objects = (hear|objects)      //Combined these lists here instead of doing the combine 3 more times.
+		if(istype(C.eye, /obj/machinery/camera))
+			continue					//No microphones in cameras.
 
 		if(C.eye in hear_and_objects)
 			hear += C.mob
-			
+			hear_and_objects += C.mob
 		else if(C.mob.loc in hear_and_objects)
 			hear += C.mob
+			hear_and_objects += C.mob
+
 		else if(C.mob.loc.loc in hear_and_objects)
 			hear += C.mob
+			hear_and_objects += C.mob
+
 	return hear
 
 

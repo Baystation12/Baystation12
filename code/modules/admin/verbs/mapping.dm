@@ -161,6 +161,9 @@ var/list/debug_verbs = list (
         ,/client/proc/hide_debug_verbs
 	,/client/proc/testZAScolors
 	,/client/proc/testZAScolors_remove
+	,/client/proc/test_viewers
+	,/client/proc/test_view
+	,/client/proc/test_hear
 	)
 
 
@@ -183,6 +186,70 @@ var/list/debug_verbs = list (
 	verbs -= debug_verbs
 
 	feedback_add_details("admin_verb","hDV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
+
+/client/proc/test_viewers()
+	set category = "Debug"
+	set name = "Test Viewers"
+
+	var/turf/T = get_turf(usr)
+	var/lum = T.loc.luminosity
+	T.loc.luminosity = 1
+	
+
+	var/list/inviewers = viewers(7, usr)
+	T.loc.luminosity = lum
+	var/list/M = list()
+	var/list/O = list()
+
+	for(var/obj/OBJ in inviewers)
+		O += OBJ
+	for(var/mob/MOB in inviewers)
+		M += MOB
+
+	usr << "VIEWERS MOB: [list2text(M,", ")]"
+	usr << "VIEWERS OBJ: [list2text(O,", ")]"
+
+
+
+/client/proc/test_view()
+	set category = "Debug"
+	set name = "Test View"
+
+	var/list/inview = view(7, usr)
+	var/list/M = list()
+	var/list/O = list()
+
+	for(var/obj/OBJ in inview)
+		O += OBJ
+	for(var/mob/MOB in inview)
+		M += MOB
+
+	usr << "VIEW MOB:  [list2text(M,", ")]"
+	usr << "VIEW OBJ:  [list2text(O,", ")]"
+
+/client/proc/test_hear()
+	set category = "Debug"
+	set name = "Test Hear"
+
+	var/turf/T = get_turf(usr)
+	var/list/hearers = hear(7, T)
+	var/list/M = list()
+	var/list/O = list()
+
+	for(var/obj/OBJ in hearers)
+		O += OBJ
+	for(var/mob/MOB in hearers)
+		M += MOB
+
+
+	usr << "HEAR MOB:  [list2text(M,", ")]"
+	usr << "HEAR OBJ:  [list2text(O,", ")]"
+
+
+
+
 
 
 /client/var/list/testZAScolors_turfs = list()
