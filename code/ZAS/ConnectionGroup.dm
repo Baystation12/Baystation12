@@ -143,6 +143,9 @@ Class Procs:
 	. = ..()
 
 /connection_edge/zone/tick()
+	if(A.invalid || B.invalid)
+		erase()
+		return
 	//world << "[id]: Tick [air_master.current_cycle]: \..."
 	if(direct)
 		if(air_master.equivalent_pressure(A, B))
@@ -207,6 +210,9 @@ Class Procs:
 	return A == Z
 
 /connection_edge/unsimulated/tick()
+	if(A.invalid)
+		erase()
+		return
 	//world << "[id]: Tick [air_master.current_cycle]: To [B]!"
 	//A.air.mimic(B, coefficient)
 	ShareSpace(A.air,air)

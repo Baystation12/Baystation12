@@ -220,6 +220,8 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	#ifdef ZASDBG
 	ASSERT(istype(A))
 	ASSERT(istype(B))
+	ASSERT(!A.invalid)
+	ASSERT(!B.invalid)
 	ASSERT(A != B)
 	#endif
 	if(A.contents.len < B.contents.len)
@@ -234,6 +236,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	ASSERT(istype(A))
 	ASSERT(isturf(B))
 	ASSERT(A.zone)
+	ASSERT(!A.zone.invalid)
 	//ASSERT(B.zone)
 	ASSERT(A != B)
 	#endif
