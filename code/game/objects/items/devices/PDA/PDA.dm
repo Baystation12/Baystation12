@@ -20,6 +20,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/mode = 0 //Controls what menu the PDA will display. 0 is hub; the rest are either built in or based on cartridge.
 
 	//Secondary variables
+	
+	Colored = 1
+	
+	var/RLumin = 0
+	var/GLumin = 0
+	var/BLumin = 1
+	
 	var/scanmode = 0 //1 is medical scanner, 2 is forensics, 3 is reagent scanner.
 	var/fon = 0 //Is the flashlight function on?
 	var/f_lum = 2 //Luminosity for the flashlight function
@@ -289,12 +296,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/pickup(mob/user)
 	if(fon)
 		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity + f_lum)
+		SetUniqueLuminosity(0,0,0)
+		//user.SetLuminosity(user.luminosity + f_lum)
+		user.AddLuminosityRGB(RLumin*f_lum,GLumin*f_lum,BLumin*f_lum)
 
 /obj/item/device/pda/dropped(mob/user)
 	if(fon)
-		user.SetLuminosity(user.luminosity - f_lum)
-		SetLuminosity(f_lum)
+		user.RemLuminosityRGB(RLumin*f_lum,GLumin*f_lum,BLumin*f_lum)
+		SetUniqueLuminosity(RLumin*f_lum,GLumin*f_lum,BLumin*f_lum)
 
 /obj/item/device/pda/New()
 	..()
@@ -562,12 +571,17 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if("Light")
 			if(fon)
 				fon = 0
-				if(src in U.contents)	U.SetLuminosity(U.luminosity - f_lum)
-				else					SetLuminosity(0)
+				if(src in U.contents)
+					U.RemLuminosityRGB(RLumin*f_lum,GLumin*f_lum,BLumin*f_lum)
+				else
+					SetLuminosity(0)
+					SetUniqueLuminosity(0,0,0)
 			else
 				fon = 1
-				if(src in U.contents)	U.SetLuminosity(U.luminosity + f_lum)
-				else					SetLuminosity(f_lum)
+				if(src in U.contents)	
+					U.AddLuminosityRGB(RLumin*f_lum,GLumin*f_lum,BLumin*f_lum)
+				else
+					SetUniqueLuminosity(RLumin*f_lum,GLumin*f_lum,BLumin*f_lum)
 		if("Medical Scan")
 			if(scanmode == 1)
 				scanmode = 0
