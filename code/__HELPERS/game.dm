@@ -35,17 +35,12 @@
 
 // Like view but bypasses luminosity check
 
-/proc/hear(var/range, var/turf/source)
+/proc/hear(var/range, var/atom/source)
 
-	var/Alum = source.loc.luminosity
 	var/lum = source.luminosity
-	source.loc.luminosity = 6
 	source.luminosity = 6
 
-	var/list/heard = hearers(range, source) //Only lists mobs, but does a better job then view of getting the mobs.
-	heard |= view(range, source)
-
-	source.loc.luminosity = Alum
+	var/list/heard = view(range, source)
 	source.luminosity = lum
 
 	return heard
@@ -166,8 +161,6 @@
 // The old system would loop through lists for a total of 5000 per function call, in an empty server.
 // This new system will loop at around 1000 in an empty server.
 
-// SCREW THAT SHIT, we're not recursing.
-
 /proc/get_mobs_in_view(var/R, var/atom/source)
 	// Returns a list of mobs in range of R from source. Used in radio and say code.
 
@@ -178,46 +171,18 @@
 		return hear
 
 	var/list/range = hear(R, T)
-	var/list/objects = list()
-	var/list/clients_minus_checked = list()
-	clients_minus_checked |= clients
 
-	for(var/I in range)
-		if(istype(I, /mob))
-			var/mob/M = I
-			if(istype(M, /mob/living))
-				hear += M
-			else if(istype(M, /mob/dead))
-				hear += M
-			else
-				objects += M					//We still need to check if they contain entities that can hear
-				continue
-
+	for(var/atom/A in range)
+		if(ismob(A))
+			var/mob/M = A
 			if(M.client)
-				clients_minus_checked -= M.client		
+				hear += M
+			//world.log << "Start = [M] - [get_turf(M)] - ([M.x], [M.y], [M.z])"
+		else if(istype(A, /obj/item/device/radio))
+			hear += A
 
-		else
-			objects += I
-
-	var/list/hear_and_objects = (hear|objects)
-
-	for(var/client/C in clients_minus_checked)
-		if(!istype(C) || !C.eye || istype(C.mob, /mob/dead) || istype(C.eye, /mob/aiEye))
-			continue
-
-		if(istype(C.eye, /obj/machinery/camera))
-			continue					//No microphones in cameras.
-
-		if(C.eye in hear_and_objects)
-			hear += C.mob
-			hear_and_objects += C.mob
-		else if(C.mob.loc in hear_and_objects)
-			hear += C.mob
-			hear_and_objects += C.mob
-
-		else if(C.mob.loc.loc in hear_and_objects)
-			hear += C.mob
-			hear_and_objects += C.mob
+		if(isobj(A) || ismob(A))
+			hear |= recursive_mob_check(A, hear, 3, 1, 0, 1)
 
 	return hear
 
