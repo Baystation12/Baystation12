@@ -179,7 +179,8 @@
 
 	var/list/range = hear(R, T)
 	var/list/objects = list()
-	var/list/clients_minus_checked = clients
+	var/list/clients_minus_checked = list()
+	clients_minus_checked |= clients
 
 	for(var/I in range)
 		if(istype(I, /mob))
