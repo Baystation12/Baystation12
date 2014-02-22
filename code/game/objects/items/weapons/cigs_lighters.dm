@@ -21,6 +21,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "match_unlit"
 	var/lit = 0
+	var/burnt = 0
 	var/smoketime = 5
 	w_class = 1.0
 	origin_tech = "materials=1"
@@ -30,23 +31,26 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/turf/location = get_turf(src)
 	smoketime--
 	if(smoketime < 1)
-		icon_state = "match_burnt"
-		lit = -1
-		processing_objects.Remove(src)
+		burn_out()
 		return
 	if(location)
 		location.hotspot_expose(700, 5)
 		return
 
 /obj/item/weapon/match/dropped(mob/user as mob)
-	if(lit == 1)
-		lit = -1
-		damtype = "brute"
-		icon_state = "match_burnt"
-		item_state = "cigoff"
-		name = "burnt match"
-		desc = "A match. This one has seen better days."
+	if(lit)
+		burn_out()
 	return ..()
+
+/obj/item/weapon/match/proc/burn_out()
+	lit = 0
+	burnt = 1
+	damtype = "brute"
+	icon_state = "match_burnt"
+	item_state = "cigoff"
+	name = "burnt match"
+	desc = "A match. This one has seen better days."
+	processing_objects.Remove(src)
 
 //////////////////
 //FINE SMOKABLES//
