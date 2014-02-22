@@ -42,7 +42,7 @@
 	source.loc.luminosity = 6
 	source.luminosity = 6
 
-	var/list/heard = viewers(range, source) //Only lists mobs, but does a better job then view of getting the mobs.
+	var/list/heard = hearers(range, source) //Only lists mobs, but does a better job then view of getting the mobs.
 	heard |= view(range, source)
 
 	source.loc.luminosity = Alum
@@ -178,23 +178,30 @@
 		return hear
 
 	var/list/range = hear(R, T)
-
+	var/list/objects = list()
 	var/list/clients_minus_checked = clients
 
-	for(var/mob/M in range)						//Only looking for living mobs because ghosts are automatically added.
-		hear += M
-		if(M.client)
-			clients_minus_checked -= M.client
-		
-	var/list/objects = list()
+	for(var/I in range)
+		if(istype(I, /mob))
+			var/mob/M = I
+			if(istype(M, /mob/living))
+				hear += M
+			else if(istype(M, /mob/dead))
+				hear += M
+			else
+				objects += M					//We still need to check if they contain entities that can hear
+				continue
 
-	for(var/obj/O in range)						//Get a list of objects in hearing range.  We'll check to see if any clients have their "eye" set to the object 
-		objects += O
+			if(M.client)
+				clients_minus_checked -= M.client		
+
+		else
+			objects += I
 
 	var/list/hear_and_objects = (hear|objects)
 
 	for(var/client/C in clients_minus_checked)
-		if(!istype(C) || !C.eye || istype(C.mob, /mob/dead)) 
+		if(!istype(C) || !C.eye || istype(C.mob, /mob/dead) || istype(C.eye, /mob/aiEye))
 			continue
 
 		if(istype(C.eye, /obj/machinery/camera))
