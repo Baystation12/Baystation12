@@ -107,6 +107,7 @@ Class Procs:
 	#endif
 
 /zone/proc/rebuild()
+	if(invalid) return //Short circuit for explosions where rebuild is called many times over.
 	c_invalidate()
 	for(var/turf/simulated/T in contents)
 		//T.dbg(invalid_zone)

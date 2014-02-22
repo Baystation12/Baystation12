@@ -221,9 +221,11 @@
 	if(connections) connections.erase_all()
 
 	if(istype(src,/turf/simulated))
-		//world << "Removed from zone."
+		//Yeah, we're just going to rebuild the whole thing.
+		//Despite this being called a bunch during explosions,
+		//the zone will only really do heavy lifting once.
 		var/turf/simulated/S = src
-		if(S.zone) S.zone.remove(S)
+		if(S.zone) S.zone.rebuild()
 
 	if(ispath(N, /turf/simulated/floor))
 		//if the old turf had a zone, connect the new turf to it as well - Cael
