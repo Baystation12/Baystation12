@@ -384,19 +384,20 @@ var/list/department_radio_keys = list(
 		rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] <span class='message'>[message_a]</span></span>"
 		var/rendered_ghost = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] <span class='message'>[message_ghost]</span></span>"
 		for (var/mob/M in heard_a)
-			if(hascall(M,"show_message"))
-				var/deaf_message = ""
-				var/deaf_type = 1
-				if(M != src)
-					deaf_message = "<span class='name'>[name]</span>[alt_name] talks but you cannot hear them."
-				else
-					deaf_message = "<span class='notice'>You cannot hear yourself!</span>"
-					deaf_type = 2 // Since you should be able to hear yourself without looking
-				if (M.stat == DEAD && (M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
-					M:show_message(rendered_ghost, 2, deaf_message, deaf_type)
-				else
-					M:show_message(rendered, 2, deaf_message, deaf_type)
-				M << speech_bubble
+			if(M.client)
+				if(hascall(M,"show_message"))
+					var/deaf_message = ""
+					var/deaf_type = 1
+					if(M != src)
+						deaf_message = "<span class='name'>[name]</span>[alt_name] talks but you cannot hear them."
+					else
+						deaf_message = "<span class='notice'>You cannot hear yourself!</span>"
+						deaf_type = 2 // Since you should be able to hear yourself without looking
+					if (M.stat == DEAD && (M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
+						M:show_message(rendered_ghost, 2, deaf_message, deaf_type)
+					else
+						M:show_message(rendered, 2, deaf_message, deaf_type)
+					M << speech_bubble
 
 	if (length(heard_b))
 
