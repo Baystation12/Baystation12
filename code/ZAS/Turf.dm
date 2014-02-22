@@ -57,7 +57,7 @@
 		#endif
 		if(zone)
 			var/zone/z = zone
-			if(s_block & ZONE_BLOCKED)
+			if(locate(/obj/machinery/door/airlock) in src) //Hacky, but prevents normal airlocks from rebuilding zones all the time
 				z.remove(src)
 			else
 				z.rebuild()
