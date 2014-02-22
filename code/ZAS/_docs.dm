@@ -27,7 +27,7 @@ Notes for people who used ZAS before:
 
 */
 
-#define ZASDBG
+//#define ZASDBG
 //#define ZLEVELS
 
 #define AIR_BLOCKED 1

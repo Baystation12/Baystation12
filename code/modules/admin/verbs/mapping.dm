@@ -157,6 +157,7 @@ var/list/debug_verbs = list (
         ,/client/proc/Zone_Info
         ,/client/proc/Test_ZAS_Connection
         ,/client/proc/ZoneTick
+        ,/client/proc/rebootAirMaster
         ,/client/proc/hide_debug_verbs
 	,/client/proc/testZAScolors
 	,/client/proc/testZAScolors_remove
@@ -265,6 +266,19 @@ var/list/debug_verbs = list (
 		for(var/image/i in images)
 			if(i.icon_state == "zasdebug")
 				images.Remove(i)
+
+/client/proc/rebootAirMaster()
+	set category = "ZAS"
+	set name = "Reboot ZAS"
+
+	if(alert("This will destroy and remake all zone geometry on the whole map.","Reboot ZAS","Reboot ZAS","Nevermind") == "Reboot ZAS")
+		var/datum/controller/air_system/old_air = air_master
+		for(var/zone/zone in old_air.zones)
+			zone.c_invalidate()
+		del old_air
+		air_master = new
+		air_master.Setup()
+		spawn air_master.Start()
 
 
 /client/proc/count_objects_on_z_level()
