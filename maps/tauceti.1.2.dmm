@@ -8488,7 +8488,7 @@
 "dhl" = (/obj/machinery/status_display{layer = 4; pixel_x = -32; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-greenfull"; icon_state = "greenfull"},/area/centcom/evac)
 "dhm" = (/turf/unsimulated/floor{tag = "icon-greenfull"; icon_state = "greenfull"},/area/centcom/evac)
 "dhn" = (/obj/machinery/status_display{layer = 4; pixel_x = 32; pixel_y = 0},/turf/unsimulated/floor{tag = "icon-greenfull"; icon_state = "greenfull"},/area/centcom/evac)
-"dho" = (/obj/structure/grille,/obj/structure/window/reinforced/shuttle/default,/turf/simulated/shuttle/plating,/area/shuttle/escape/centcom)
+"dho" = (/obj/structure/grille,/obj/structure/window/reinforced/shuttle/default{icon_state = "1"},/turf/simulated/shuttle/plating,/area/shuttle/escape/centcom)
 "dhp" = (/obj/structure/sign/marksymbol_b{tag = "icon-O"; icon_state = "O"},/turf/unsimulated/wall,/area/tdome)
 "dhq" = (/obj/machinery/atmospherics/pipe/vent,/turf/unsimulated/floor,/area/tdome)
 "dhr" = (/obj/machinery/camera{pixel_x = 10; network = list("thunder"); c_tag = "Arena"},/turf/unsimulated/floor,/area/tdome)
