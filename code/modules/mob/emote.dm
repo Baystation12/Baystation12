@@ -38,15 +38,13 @@
 
 		// Type 1 (Visual) emotes are sent to anyone in view of the item
 		if (m_type & 1)
-			var/list/can_see = get_mobs_in_view(1,src)  //Allows silicon & mmi mobs carried around to see the emotes of the person carrying them around.
-			can_see |= viewers(src,null)
-			for (var/mob/O in can_see)
+			for (var/mob/O in viewers(src, null))
 				O.show_message(message, m_type)
 
 		// Type 2 (Audible) emotes are sent to anyone in hear range
 		// of the *LOCATION* -- this is important for pAIs to be heard
 		else if (m_type & 2)
-			for (var/mob/O in get_mobs_in_view(7,src))
+			for (var/mob/O in hearers(get_turf(src), null))
 				O.show_message(message, m_type)
 
 /mob/proc/emote_dead(var/message)
