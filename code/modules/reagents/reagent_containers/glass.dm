@@ -279,6 +279,7 @@
 		if (istype(D, /obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/WT = D
 			if(WT.remove_fuel(0,user))
+				user.before_take_item(src)
 				var/obj/item/clothing/head/helmet/battlebucket/BBucket = new(usr.loc)
 				for (var/mob/M in viewers(src))
 					M.show_message("\red [src] is shaped into [BBucket] by [user.name] with the weldingtool.", 3, "\red You hear welding.", 2)
