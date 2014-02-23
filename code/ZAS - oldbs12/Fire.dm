@@ -28,6 +28,12 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	if(!air_contents || exposed_temperature < PLASMA_MINIMUM_BURN_TEMPERATURE)
 		return 0
 
+	var/obj/structure/reagent_dispensers/fueltank/FT = locate() in src
+	if(exposed_temperature >= AUTOIGNITION_WELDERFUEL)
+		if (FT)
+			FT.explode()
+			return 1
+
 	var/igniting = 0
 	var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in src
 
@@ -75,12 +81,12 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 	//since the air is processed in fractions, we need to make sure not to have any minuscle residue or
 	//the amount of moles might get to low for some functions to catch them and thus result in wonky behaviour
-	if(air_contents.oxygen < 0.1)
+	if(air_contents.oxygen < 0.001)
 		air_contents.oxygen = 0
-	if(air_contents.toxins < 0.1)
+	if(air_contents.toxins < 0.001)
 		air_contents.toxins = 0
 	if(fuel)
-		if(fuel.moles < 0.1)
+		if(fuel.moles < 0.001)
 			air_contents.trace_gases.Remove(fuel)
 
 	//check if there is something to combust
@@ -108,7 +114,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 		A.fire_act(air_contents, air_contents.temperature, air_contents.return_volume())
 	//spread
 	for(var/direction in cardinal)
-		if(S.open_directions & direction) //Grab all valid bordering tiles
+		if(S.air_check_directions&direction) //Grab all valid bordering tiles
 
 			var/turf/simulated/enemy_tile = get_step(S, direction)
 
@@ -162,7 +168,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	air_master.active_hotspots.Add(src)
 
 
-/obj/fire/Del()
+/obj/fire/Destroy()
 	if (istype(loc, /turf/simulated))
 		SetLuminosity(0)
 
@@ -200,7 +206,7 @@ datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, forc
 
 		if(liquid)
 		//Liquid Fuel
-			if(liquid.amount <= 0.1)
+			if(liquid.amount <= 0)
 				del liquid
 			else
 				total_fuel += liquid.amount
@@ -257,9 +263,9 @@ datum/gas_mixture/proc/check_recombustability(obj/effect/decal/cleanable/liquid_
 	if(oxygen && (toxins || fuel || liquid))
 		if(liquid)
 			return 1
-		if(toxins >= 0.1)
+		if (toxins)
 			return 1
-		if(fuel && fuel.moles >= 0.1)
+		if(fuel)
 			return 1
 
 	return 0
@@ -272,9 +278,9 @@ datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fu
 	if(oxygen && (toxins || fuel || liquid))
 		if(liquid)
 			return 1
-		if (toxins >= 0.1)
+		if (toxins >= 0.7)
 			return 1
-		if(fuel && fuel.moles >= 0.1)
+		if(fuel && fuel.moles >= 1.4)
 			return 1
 
 	return 0

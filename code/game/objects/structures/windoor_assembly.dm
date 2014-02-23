@@ -296,10 +296,6 @@ obj/structure/windoor_assembly/Destroy()
 /obj/structure/windoor_assembly/proc/update_nearby_tiles(need_rebuild)
 	if(!air_master) return 0
 
-	var/turf/simulated/source = loc
-	var/turf/simulated/target = get_step(source,dir)
-
-	if(istype(source)) air_master.tiles_to_update += source
-	if(istype(target)) air_master.tiles_to_update += target
+	air_master.mark_for_update(loc)
 
 	return 1
