@@ -19,7 +19,7 @@
 			feedback_add_details("admin_verb","RFailsafe")
 		if("Lighting")
 			new /datum/controller/lighting()
-			lighting_controller.process()
+			//lighting_controller.process()
 			feedback_add_details("admin_verb","RLighting")
 		if("Supply Shuttle")
 			supply_shuttle.process()

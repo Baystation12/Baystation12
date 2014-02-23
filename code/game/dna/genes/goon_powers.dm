@@ -53,7 +53,7 @@
 		var/turf/simulated/T = get_turf(M)
 		if(!istype(T))
 			return
-		if(T.lighting_lumcount <= 2)
+		if(T.lit_value <= 2)
 			M.alpha = 0
 		else
 			M.alpha = round(255 * 0.80)
