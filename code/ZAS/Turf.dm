@@ -19,13 +19,22 @@
 		//dbg(blocked)
 		return 1
 
+	#ifdef ZLEVELS
+	for(var/d = 1, d < 64, d *= 2)
+	#else
 	for(var/d = 1, d < 16, d *= 2)
+	#endif
 
 		var/turf/unsim = get_step(src, d)
 		block = unsim.c_airblock(src)
 
 		if(block & AIR_BLOCKED)
 			//unsim.dbg(air_blocked, turn(180,d))
+			continue
+
+		var/r_block = c_airblock(unsim)
+
+		if(r_block & AIR_BLOCKED)
 			continue
 
 		if(istype(unsim, /turf/simulated))
@@ -48,7 +57,7 @@
 		#endif
 		if(zone)
 			var/zone/z = zone
-			if(s_block & ZONE_BLOCKED)
+			if(locate(/obj/machinery/door/airlock) in src) //Hacky, but prevents normal airlocks from rebuilding zones all the time
 				z.remove(src)
 			else
 				z.rebuild()
@@ -59,7 +68,11 @@
 	open_directions = 0
 
 	var/list/postponed
+	#ifdef ZLEVELS
+	for(var/d = 1, d < 64, d *= 2)
+	#else
 	for(var/d = 1, d < 16, d *= 2)
+	#endif
 
 		var/turf/unsim = get_step(src, d)
 		var/block = unsim.c_airblock(src)
@@ -157,9 +170,7 @@
 		air_master.connect(src, T)
 
 /turf/proc/post_update_air_properties()
-
-/turf/simulated/post_update_air_properties()
-	connections.update_all()
+	if(connections) connections.update_all()
 
 /turf/assume_air(datum/gas_mixture/giver) //use this for machines to adjust air
 	del(giver)
