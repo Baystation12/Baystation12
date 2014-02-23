@@ -34,8 +34,10 @@ Class Procs:
 */
 
 var/datum/controller/lighting/lighting_controller
-var/list/initial_lights = list()
+
 var/all_lightpoints_made = 0
+
+var/list/lit_z_levels = list(1,5)
 
 /datum/controller/lighting
 
@@ -44,6 +46,8 @@ var/all_lightpoints_made = 0
 
 	var/list/light_border = list()
 
+	var/started = 0
+
 	//var/icon/border = icon('Icons/Test.dmi', "border")
 
 /datum/controller/lighting/New()
@@ -51,46 +55,44 @@ var/all_lightpoints_made = 0
 
 /datum/controller/lighting/proc/Initialize()
 
+	set background = 1
+
 	var/start_time = world.timeofday
 	world << "<b><font color=red>Processing lights...</font></b>"
 
-	var/turfs_updated = 0
+	sleep(1)
 
-	for(var/z = 1, z <= world.maxz, z++)
+	var/turfs_updated = 0
+	var/total_turfs = world.maxx*world.maxy*lit_z_levels.len
+
+	for(var/z in lit_z_levels)
 		for(var/y = 0, y <= world.maxy, y++)
 			for(var/x = 0, x <= world.maxx, x++)
 				if(x > 0 && y > 0)
-					var/turf/T = locate(x,y,z)
-					if(!T.light_overlay)
-						T.light_overlay = new(T)
-					T.CheckForOpaqueObjects()
+
 					turfs_updated++
+					if((turfs_updated % 5000) == 0)
+						sleep(1)
+						world << "<font color=red>Progress: [round((turfs_updated/total_turfs)*100, 0.01)]% ([turfs_updated]/[total_turfs])"
+
+					var/turf/T = locate(x,y,z)
+					if(!T.light_overlay && !T.is_outside)
+						T.light_overlay = new(T)
+					T.ResetValue()
 				if(!all_lightpoints_made) new/lightpoint(x+0.5,y+0.5,z)
 
+
+
+				//world << "[x],[y],[z]"
+
 	all_lightpoints_made = 1
+	started = 1
 
-	for(var/atom/movable/M in initial_lights)
-		if(!M.light)
-			M.SetLight(M.luminosity,M.luminosity)
-		else
-			M.light.Reset()
-
-	StarLight(starlight)
-	initial_lights = null
+	for(var/turf/T)
+		if(!T.is_outside) T.UpdateLight()
 
 	world << "<b><font color=red>Lighting initialization took [(world.timeofday-start_time)/world.fps] seconds.</font></b>"
 	world << "<font color=red>Updated [turfs_updated] turfs.</font>"
-
-/datum/controller/lighting/proc/StarLight(n)
-	starlight = n
-	for(var/turf/T in light_border)
-		T.SetLight(5,n-1)
-
-	for(var/turf/T)
-		if(T.is_outside)
-			T.ResetValue()
-
-	FlushIconUpdates()
 
 /datum/controller/lighting/proc/MarkIconUpdate(turf/T)
 	if(!T.needs_light_update)

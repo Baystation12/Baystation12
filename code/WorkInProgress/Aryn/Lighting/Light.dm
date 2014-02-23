@@ -37,8 +37,9 @@ light/proc/Reset()
 
 	if(intensity > 0)
 		for(var/turf/T in view(atom,radius+1))
-			T.AddLight(src)
-			lit_turfs.Add(T)
+			if(!T.is_outside)
+				T.AddLight(src)
+				lit_turfs.Add(T)
 
 light/proc/Off()
 	for(var/turf/T in lit_turfs)
