@@ -243,7 +243,7 @@ var/turf_light_data/old_lights = new
 		//W.Assimilate_Air()
 
 		old_lights.copy_to(W)
-		W.ResetValue()
+		W.ResetAllLights()
 
 		if(old_opacity)
 			W.opacity = 1
@@ -267,7 +267,7 @@ var/turf_light_data/old_lights = new
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
 
 		old_lights.copy_to(W)
-		W.ResetValue()
+		W.ResetAllLights()
 
 		if(air_master)
 			air_master.mark_for_update(src)

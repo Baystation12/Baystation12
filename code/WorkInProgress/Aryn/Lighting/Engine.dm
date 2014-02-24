@@ -162,6 +162,11 @@ turf/proc/RemoveLight(light/light)
 			ResetValue()
 		if(!lit_by.len) lit_by = null
 
+//Only called by ChangeTurf, because it really needs it.
+turf/proc/ResetAllLights()
+	for(var/light/light in lit_by)
+		light.Reset()
+
 turf/proc/ResetValue()
 	if(is_outside)
 		max_brightness = lighting_controller.starlight
