@@ -108,7 +108,6 @@ Class Procs:
 
 /zone/proc/rebuild()
 	if(invalid) return //Short circuit for explosions where rebuild is called many times over.
-	if(air_master.current_cycle == 0) return //Why would you rebuild when you're building?
 	c_invalidate()
 	for(var/turf/simulated/T in contents)
 		//T.dbg(invalid_zone)
