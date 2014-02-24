@@ -100,21 +100,21 @@ atom/movable/Move()
 			if(lighting_ready()) lighting_controller.FlushIconUpdates()
 
 atom/proc/SetLight(intensity, radius)
-	if(lights_verbose) world << "SetLight([intensity],[radius])"
+	//if(lights_verbose) world << "SetLight([intensity],[radius])"
 	if(!intensity)
 		if(!light || !light.intensity)
-			if(lights_verbose) world << "Still off."
+			//if(lights_verbose) world << "Still off."
 			return
-		if(lights_verbose) world << "Shut off light with [light.lit_turfs.len] turfs lit."
+		//if(lights_verbose) world << "Shut off light with [light.lit_turfs.len] turfs lit."
 		light.Off()
 		light.intensity = 0
 		if(lighting_ready()) lighting_controller.FlushIconUpdates()
 		return
 	if(!light)
-		if(lights_verbose) world << "New light."
+		//if(lights_verbose) world << "New light."
 		light = new(src)
 	if(light.intensity == intensity)
-		if(lights_verbose) world << "Same intensity."
+		//if(lights_verbose) world << "Same intensity."
 		return
 	light.radius = min(radius,15)
 	light.intensity = intensity
