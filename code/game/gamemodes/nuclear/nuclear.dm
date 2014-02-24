@@ -332,6 +332,9 @@ proc/issyndicate(mob/living/M as mob)
 	if( syndicates.len || (ticker && istype(ticker.mode,/datum/game_mode/nuclear)) )
 		var/text = "<FONT size = 2><B>The syndicate operatives were:</B></FONT>"
 
+		var/purchases = ""
+		var/TC_uses = 0
+
 		for(var/datum/mind/syndicate in syndicates)
 
 			text += "<br>[syndicate.key] was [syndicate.name] ("
@@ -345,6 +348,14 @@ proc/issyndicate(mob/living/M as mob)
 			else
 				text += "body destroyed"
 			text += ")"
+
+			for(var/obj/item/device/uplink/H in world_uplinks)
+				if(H && H.uplink_owner && H.uplink_owner==syndicate.name)
+					TC_uses += H.used_TC
+					purchases += H.purchase_log
+
+
+		text += "(Syndicates used [TC_uses] TC) [purchases]"
 
 		world << text
 	return 1
