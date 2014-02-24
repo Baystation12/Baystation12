@@ -71,7 +71,7 @@ var/list/lit_z_levels = list(1,5)
 				if(x > 0 && y > 0)
 
 					turfs_updated++
-					if((turfs_updated % 5000) == 0)
+					if((turfs_updated % (total_turfs>>2)) == 0)
 						sleep(1)
 						world << "<font color=red>Progress: [round((turfs_updated/total_turfs)*100, 0.01)]% ([turfs_updated]/[total_turfs])"
 
