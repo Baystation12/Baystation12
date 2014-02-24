@@ -3,7 +3,7 @@
 MAP_ICON_TYPE: 0
 WINDOW: maps\tgstation2.dmm
 LAST_COMPILE_VERSION: 503.1224
-DIR: code code\game\objects\random code\modules code\modules\admin code\modules\admin\verbs code\modules\library icons\turf maps 
+DIR: code code\modules\admin\verbs code\modules\library icons\turf maps 
 FILE: maps\tgstation2.dmm
 LAST_COMPILE_TIME: 1392624530
 AUTO_FILE_DIR: OFF
