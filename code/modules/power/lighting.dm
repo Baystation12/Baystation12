@@ -605,7 +605,7 @@
 
 /obj/machinery/light/process()//TODO: remove/add this from machines to save on processing as needed ~Carn PRIORITY
 	if(on && light)
-		use_power(light.radius * LIGHTING_POWER_FACTOR, LIGHT)
+		use_power(luminosity * LIGHTING_POWER_FACTOR, LIGHT)
 
 // called when area power state changes
 /obj/machinery/light/power_change()

@@ -89,7 +89,9 @@ var/list/lit_z_levels = list(1,5)
 	started = 1
 
 	for(var/turf/T)
-		if(!T.is_outside) T.UpdateLight()
+		if(!T.is_outside)
+			if(!T.lit_value) T.ResetValue()
+			T.UpdateLight()
 
 	world << "<b><font color=red>Lighting initialization took [(world.timeofday-start_time)/world.fps] seconds.</font></b>"
 	world << "<font color=red>Updated [turfs_updated] turfs.</font>"
