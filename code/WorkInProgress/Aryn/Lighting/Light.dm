@@ -31,19 +31,21 @@ light/New(atom/atom)
 	src.atom = atom
 
 light/proc/Reset()
+	if(atom.lights_verbose) world << "light.Reset()"
 	Off()
-
-	lit_turfs = list()
-
 	if(intensity > 0)
-		for(var/turf/T in view(atom,radius+1))
+		if(atom.lights_verbose) world << "Restoring light."
+		for(var/turf/T in view(get_turf(atom),radius+1))
 			if(!T.is_outside)
 				T.AddLight(src)
 				lit_turfs.Add(T)
+		if(atom.lights_verbose) world << "[lit_turfs.len] turfs added."
 
 light/proc/Off()
+	if(atom.lights_verbose) world << "light.Off()"
 	for(var/turf/T in lit_turfs)
 		T.RemoveLight(src)
+	lit_turfs = list()
 
 light/proc/CalculateBrightness(turf/T)
 	var/square = get_square_dist(atom.x,atom.y,atom.z,T.x,T.y,T.z)

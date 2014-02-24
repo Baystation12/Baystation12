@@ -208,6 +208,8 @@ var/turf_light_data/old_lights = new
 
 	//world << "Replacing [src.type] with [N]"
 
+	var/old_opacity = opacity
+
 	old_lights.copy_from(src)
 
 	if(connections) connections.erase_all()
@@ -231,6 +233,11 @@ var/turf_light_data/old_lights = new
 		//W.Assimilate_Air()
 
 		old_lights.copy_to(W)
+		W.ResetValue()
+
+		if(old_opacity)
+			W.opacity = 1
+			W.SetOpacity(0)
 
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
@@ -250,6 +257,7 @@ var/turf_light_data/old_lights = new
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
 
 		old_lights.copy_to(W)
+		W.ResetValue()
 
 		if(air_master)
 			air_master.mark_for_update(src)

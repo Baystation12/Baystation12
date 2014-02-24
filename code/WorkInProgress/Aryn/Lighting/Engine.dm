@@ -77,7 +77,7 @@ turf/var/lightpoint/lightSE
 turf/var/lightpoint/lightSW
 turf/var/list/lit_by
 
-atom/New()
+atom/movable/New()
 	. = ..()
 	if(luminosity)
 		if(!light)
@@ -97,17 +97,25 @@ atom/movable/Move()
 		if(o) SetOpacity(1)
 		if(light)
 			light.Reset()
-			lighting_controller.FlushIconUpdates()
+			if(lighting_ready()) lighting_controller.FlushIconUpdates()
 
 atom/proc/SetLight(intensity, radius)
+	if(lights_verbose) world << "SetLight([intensity],[radius])"
 	if(!intensity)
-		if(!light) return
+		if(!light || !light.intensity)
+			if(lights_verbose) world << "Still off."
+			return
+		if(lights_verbose) world << "Shut off light with [light.lit_turfs.len] turfs lit."
 		light.Off()
-		light = null
+		light.intensity = 0
 		if(lighting_ready()) lighting_controller.FlushIconUpdates()
 		return
-	if(!light) light = new(src)
-	if(light.intensity == intensity) return
+	if(!light)
+		if(lights_verbose) world << "New light."
+		light = new(src)
+	if(light.intensity == intensity)
+		if(lights_verbose) world << "Same intensity."
+		return
 	light.radius = min(radius,15)
 	light.intensity = intensity
 	light.Reset()
@@ -128,12 +136,14 @@ turf/proc/UpdateLight()
 
 turf/proc/AddLight(light/light)
 	if(is_outside) return
-	if(has_opaque) return
+
+	var/brightness = light.CalculateBrightness(src)
+	if(brightness <= 0) return
 
 	if(!lit_by) lit_by = list()
 	lit_by.Add(light)
 
-	var/brightness = light.CalculateBrightness(src)
+
 	lit_by[light] = brightness
 
 	if(!has_opaque && lighting_ready())
@@ -145,7 +155,6 @@ turf/proc/AddLight(light/light)
 				lighting_controller.MarkIconUpdate(T)
 
 turf/proc/RemoveLight(light/light)
-	if(has_opaque) return
 	if(lit_by)
 		var/brightness = lit_by[light]
 		lit_by.Remove(light)
@@ -159,15 +168,13 @@ turf/proc/ResetValue()
 		lit_value = LIGHTCLAMP(lighting_controller.starlight)
 		return
 
-	var/old_value = lit_value
-
 	CheckForOpaqueObjects()
 	if(has_opaque)
 		lit_value = 0
 	else
 		the_part_where_I_calculate_brightness()
 
-	if(lighting_ready() && lit_value != old_value)
+	if(lighting_ready())
 		the_part_where_I_use_range()
 
 turf/proc

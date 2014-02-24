@@ -1,6 +1,7 @@
 area/var/lighting_use_dynamic
 
 turf/space/is_outside = 1
+turf/simulated/shuttle/is_outside = 1
 
 /datum/controller/lighting/var/processing = 1
 /datum/controller/lighting/var/iteration = 0
@@ -36,6 +37,9 @@ turf_light_data/proc/copy_to(turf/T)
 
 atom/proc/SetLuminosity(n)
 	n = min(n,10) //Caelcode.
-	SetLight(n>>1,n)
+	if(n > 0)
+		SetLight(max(1,n>>1),n)
+	else
+		SetLight(0,0)
 	luminosity = n
 	//else lighting_controller.initial_lights.Add(src)
