@@ -59,6 +59,7 @@ obj/effect/lighting_overlay
 	mouse_opacity = 0
 	icon = 'icons/effects/ArynLights.dmi'
 	icon_state = "0000"
+	invisibility = INVISIBILITY_LIGHTING
 
 atom/var/light/light
 
