@@ -78,7 +78,7 @@ var/list/lit_z_levels = list(1,5)
 					var/turf/T = locate(x,y,z)
 					if(!T.light_overlay && !T.is_outside)
 						T.light_overlay = new(T)
-					T.ResetValue()
+					//T.ResetValue()
 				if(!all_lightpoints_made) new/lightpoint(x+0.5,y+0.5,z)
 
 
@@ -89,8 +89,8 @@ var/list/lit_z_levels = list(1,5)
 	started = 1
 
 	for(var/turf/T)
-		if(!T.is_outside)
-			if(!T.lit_value) T.ResetValue()
+		if(T.light_overlay)
+			T.ResetValue()
 			T.UpdateLight()
 
 	world << "<b><font color=red>Lighting initialization took [(world.timeofday-start_time)/world.fps] seconds.</font></b>"
