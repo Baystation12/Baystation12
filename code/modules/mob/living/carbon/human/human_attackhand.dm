@@ -114,7 +114,7 @@
 
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>[M.species.attack_verb]ed [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [M.species.attack_verb]ed by [M.name] ([M.ckey])</font>")
-			log_attack("[M.name] ([M.ckey]) [M.species.attack_verb]ed [src.name] ([src.ckey])")
+			msg_admin_attack("[key_name(M)] [M.species.attack_verb]ed [key_name(src)]")
 
 			var/damage = rand(0, 5)//BS12 EDIT
 			if(!damage)
@@ -153,7 +153,7 @@
 			M.attack_log += text("\[[time_stamp()]\] <font color='red'>Disarmed [src.name] ([src.ckey])</font>")
 			src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been disarmed by [M.name] ([M.ckey])</font>")
 
-			log_attack("[M.name] ([M.ckey]) disarmed [src.name] ([src.ckey])")
+			msg_admin_attack("[key_name(M)] disarmed [src.name] ([src.ckey])")
 
 			if(w_uniform)
 				w_uniform.add_fingerprint(M)
