@@ -935,8 +935,9 @@ datum
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
 			reaction_turf(var/turf/simulated/S, var/volume)
-				if(volume >= 1)
-					S.dirt = 0
+				if(istype(S))
+					if(volume >= 1)
+						S.dirt = 0
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				if(iscarbon(M))
