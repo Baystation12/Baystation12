@@ -47,7 +47,7 @@
 
 	if(!dna)
 		dna = new /datum/dna(null)
-		dna.species=species.name	
+		dna.species=species.name
 
 	for(var/i=0;i<7;i++) // 2 for medHUDs and 5 for secHUDs
 		hud_list += image('icons/mob/hud.dmi', src, "hudunknown")
@@ -1113,10 +1113,12 @@
 	verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
-/mob/living/carbon/human/clean_blood()
+/mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
-	if(istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
+	if(clean_feet && !shoes && istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
+		feet_blood_color = null
 		del(feet_blood_DNA)
+		update_inv_shoes(1)
 		return 1
 
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
@@ -1193,7 +1195,7 @@
 		if(!new_species)
 			new_species = dna.species
 		else
-			dna.species = new_species	
+			dna.species = new_species
 
 	if(species && (species.name && species.name == new_species))
 		return

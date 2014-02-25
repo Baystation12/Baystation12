@@ -962,6 +962,9 @@ datum
 						if(H.shoes)
 							if(H.shoes.clean_blood())
 								H.update_inv_shoes(0)
+						else
+							H.clean_blood(1)
+							return
 					M.clean_blood()
 
 		leporazine
