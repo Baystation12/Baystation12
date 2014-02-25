@@ -195,7 +195,7 @@
 		tried_to_add_revheads = world.time+50
 		var/active_revs = 0
 		for(var/datum/mind/rev_mind in head_revolutionaries)
-			if(rev_mind.current.client && rev_mind.current.client.inactivity <= 10*60*20) // 20 minutes inactivity are OK
+			if(rev_mind.current && rev_mind.current.client && rev_mind.current.client.inactivity <= 10*60*20) // 20 minutes inactivity are OK
 				active_revs++
 
 		if(active_revs == 0)
