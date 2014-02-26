@@ -325,7 +325,7 @@
 
 					breath = loc.remove_air(breath_moles)
 
-					if(istype(wear_mask, /obj/item/clothing/mask/gas))
+					if(istype(wear_mask, /obj/item/clothing/mask/gas) && breath)
 						var/obj/item/clothing/mask/gas/G = wear_mask
 						var/datum/gas_mixture/filtered = new
 

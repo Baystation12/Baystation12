@@ -482,7 +482,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return 0
 	if(!can_use()) //Why reinvent the wheel? There's a proc that does exactly that.
 		U.unset_machine()
-		ui.close()
+		if(ui)
+			ui.close()
 		return 0
 
 	add_fingerprint(U)
