@@ -200,7 +200,7 @@
 	name = "\improper FNX-66 Carbine"
 	icon_state = "mecha_carbine"
 	equip_cooldown = 5
-	projectile = /obj/item/projectile/bullet/incendiary
+	projectile = /obj/item/projectile/bullet/incendiary/mech
 	projectiles = 24
 	projectile_energy_cost = 15
 
