@@ -161,8 +161,6 @@
 // The old system would loop through lists for a total of 5000 per function call, in an empty server.
 // This new system will loop at around 1000 in an empty server.
 
-// SCREW THAT SHIT, we're not recursing.
-
 /proc/get_mobs_in_view(var/R, var/atom/source)
 	// Returns a list of mobs in range of R from source. Used in radio and say code.
 
@@ -174,33 +172,18 @@
 
 	var/list/range = hear(R, T)
 
-	for(var/mob/M in range)
-		hear += M
-		
-	var/list/objects = list()
+	for(var/atom/A in range)
+		if(ismob(A))
+			var/mob/M = A
+			if(M.client)
+				hear += M
+			//world.log << "Start = [M] - [get_turf(M)] - ([M.x], [M.y], [M.z])"
+		else if(istype(A, /obj/item/device/radio))
+			hear += A
 
-	for(var/obj/O in range)				//Get a list of objects in hearing range.  We'll check to see if any clients have their "eye" set to the object 
-		objects += O
+		if(isobj(A) || ismob(A))
+			hear |= recursive_mob_check(A, hear, 3, 1, 0, 1)
 
-	for(var/client/C in clients)
-		if(!istype(C) || !C.eye)
-			continue   			//I have no idea when this client check would be needed, but if this runtimes people won't hear anything
-							//So kinda paranoid about runtime avoidance.
-		if(istype(C.eye, /obj/machinery/camera))
-			continue				//No microphones in cameras.
-
-		if(C.mob in hear)
-			continue
-
-		var/list/hear_and_objects = (hear|objects)      //Combined these lists here instead of doing the combine 3 more times.
-
-		if(C.eye in hear_and_objects)
-			hear += C.mob
-			
-		else if(C.mob.loc in hear_and_objects)
-			hear += C.mob
-		else if(C.mob.loc.loc in hear_and_objects)
-			hear += C.mob
 	return hear
 
 

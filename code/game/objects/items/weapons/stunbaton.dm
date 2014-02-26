@@ -88,7 +88,7 @@
 
 		user.attack_log += "\[[time_stamp()]\]<font color='red'> Stunned [H.name] ([H.ckey]) with [src.name]</font>"
 		H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by [user.name] ([user.ckey]) with [src.name]</font>"
-		log_attack("[user.name] ([user.ckey]) stunned [H.name] ([H.ckey]) with [src.name]")
+		msg_admin_attack("[key_name(user)] stunned [key_name(H)] with [src.name]")
 
 		playsound(src.loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 		if(charges < 1)
@@ -115,7 +115,7 @@
 				H.visible_message("<span class='danger'>[src], thrown by [foundmob.name], strikes [H] and stuns them!</span>")
 
 				H.attack_log += "\[[time_stamp()]\]<font color='orange'> Stunned by thrown [src.name] last touched by ([src.fingerprintslast])</font>"
-				log_attack("Flying [src.name], last touched by ([src.fingerprintslast]) stunned [H.name] ([H.ckey])" )
+				msg_admin_attack("Flying [src.name], last touched by ([src.fingerprintslast]) stunned [key_name(H)]" )
 
 /obj/item/weapon/melee/baton/emp_act(severity)
 	switch(severity)
