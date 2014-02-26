@@ -95,11 +95,15 @@
 
 /obj/item/clothing/shoes/orange/attackby(H as obj, loc)
 	..()
-	if ((istype(H, /obj/item/weapon/handcuffs) && !( src.chained )))
+	if ( (istype(H, /obj/item/weapon/handcuffs) && !( src.chained ) && !istype(H, /obj/item/weapon/handcuffs/cable)  ))
 		//H = null
 		if (src.icon_state != "orange") return
 		del(H)
 		src.chained = 1
 		src.slowdown = 15
 		src.icon_state = "orange1"
+		if(usr.hand)
+			usr.update_inv_l_hand()
+		else
+			usr.update_inv_r_hand()
 	return
