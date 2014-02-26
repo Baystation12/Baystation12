@@ -1151,7 +1151,7 @@
 				E = get_visible_implants(0)
 				if(!E.len)
 					embedded_flag = 0
-				
+
 
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
@@ -1461,7 +1461,7 @@
 			if(!masked && istype(glasses, /obj/item/clothing/glasses/welding) )
 				var/obj/item/clothing/glasses/welding/O = glasses
 				if(!O.up && tinted_weldhelh)
-					client.screen += O.getMask()
+					client.screen += global_hud.darkMask
 
 			if(machine)
 				if(!machine.check_eye(src))		reset_view(null)

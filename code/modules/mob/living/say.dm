@@ -422,7 +422,7 @@ var/list/department_radio_keys = list(
 							M.playsound_local(get_turf(src), "sound/playervoices/[src.ckey].ogg", 70, 0, 5, 1)
 			if(!istype(M, /mob/new_player))
 				if(M && M.stat == DEAD)
-					if ((M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
+					if (M.client && M.client.prefs && (M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
 						rendered2 = "<span class='game say'><span class='name'>[GetVoice()]</span></span> [alt_name] <a href='byond://?src=\ref[M];follow2=\ref[M];follow=\ref[src]'>(Follow)</a> <span class='message'>[message_ghost]</span></span>"
 					else
 						rendered2 = "<span class='game say'><span class='name'>[GetVoice()]</span></span> [alt_name] <a href='byond://?src=\ref[M];follow2=\ref[M];follow=\ref[src]'>(Follow)</a> <span class='message'>[message_a]</span></span>"
