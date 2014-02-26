@@ -145,6 +145,7 @@ Class Procs:
 		else
 			space_edges++
 			space_coefficient += E.coefficient
+			M << "[E:air:return_pressure()]kPa"
 
 	M << "Zone Edges: [zone_edges]"
 	M << "Space Edges: [space_edges] ([space_coefficient] connections)"
