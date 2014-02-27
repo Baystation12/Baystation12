@@ -83,6 +83,12 @@
 	item_state = "sunglasses"
 	darkness_view = -1
 
+/obj/item/clothing/glasses/threedglasses
+	desc = "A long time ago, people used these glasses to makes images from screens threedimensional."
+	name = "3D glasses"
+	icon_state = "3d"
+	item_state = "3d"
+
 /obj/item/clothing/glasses/welding
 	name = "welding goggles"
 	desc = "Protects the eyes from welders, approved by the mad scientist association."
