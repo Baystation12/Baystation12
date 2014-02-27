@@ -20,7 +20,7 @@
 	var/range
 	var/list/targetTurfs
 	var/list/wallList
-	var/floorArea
+	var/density
 
 
 /datum/effect/effect/system/smoke_spread/chem/New()
@@ -46,6 +46,8 @@
 		location = loca
 	else
 		location = get_turf(loca)
+	if(!location)
+		return
 
 	targetTurfs = new()
 
@@ -62,7 +64,8 @@
 	//pathing check
 	smokeFlow(location, targetTurfs, wallList)
 
-	floorArea = targetTurfs.len
+	//set the density of the cloud - for diluting reagents
+	density = max(1, targetTurfs.len / 4)	//clamp the cloud density minimum to 1 so it cant multiply the reagents
 
 	//Admin messaging
 	var/contained = ""
@@ -97,14 +100,17 @@
 //------------------------------------------
 /datum/effect/effect/system/smoke_spread/chem/start()
 
-	//reagent application
+	if(!location)	//kill grenade if it somehow ends up in nullspace
+		return
+
+	//reagent application - only run if there are extra reagents in the smoke
 	if(chemholder.reagents.reagent_list.len)
 		for(var/datum/reagent/R in chemholder.reagents.reagent_list)
 			var/proba = 100
 			var/runs = 5
 
-			//dilute the reagents according to affected area
-			R.volume /= floorArea / 4
+			//dilute the reagents according to cloud density
+			R.volume /= density
 			chemholder.reagents.update_total()
 
 			//apply wall affecting reagents to walls
@@ -170,12 +176,11 @@
 			var/x = round(radius * cos(a) + location.x, 1)
 			var/y = round(radius * sin(a) + location.y, 1)
 			var/turf/T = locate(x,y,location.z)
+			if(!T)
+				continue
 			if(T in targetTurfs)
-				var/dist = cheap_pythag(T.x - location.x, T.y - location.y)
-				if(!dist)
-					dist = 1
 				spawn(0)
-					spawnSmoke(T, I, dist)
+					spawnSmoke(T, I, range)
 
 //------------------------------------------
 // Randomizes and spawns the smoke effect.
@@ -183,7 +188,8 @@
 //------------------------------------------
 /datum/effect/effect/system/smoke_spread/chem/proc/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1)
 	var/obj/effect/effect/smoke/chem/smoke = new(location)
-	chemholder.reagents.copy_to(smoke, chemholder.reagents.total_volume / dist, safety = 1)	//copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
+	if(chemholder.reagents.reagent_list.len)
+		chemholder.reagents.copy_to(smoke, chemholder.reagents.total_volume / dist, safety = 1)	//copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
 	smoke.icon = I
 	smoke.layer = 6
 	smoke.dir = pick(cardinal)
