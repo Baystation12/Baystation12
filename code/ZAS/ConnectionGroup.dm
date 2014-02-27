@@ -190,7 +190,7 @@ Class Procs:
 	A.edges.Add(src)
 	air = B.return_air()
 	//id = 52*A.id
-	//world << "New edge from [A.id] to [B]."
+	//world << "New edge from [A] to [B]."
 
 /connection_edge/unsimulated/add_connection(connection/c)
 	. = ..()
@@ -215,7 +215,7 @@ Class Procs:
 		return
 	//world << "[id]: Tick [air_master.current_cycle]: To [B]!"
 	//A.air.mimic(B, coefficient)
-	ShareSpace(A.air,air)
+	ShareSpace(A.air,air,dbg_out)
 	air_master.mark_zone_update(A)
 
 	var/differential = A.air.return_pressure() - air.return_pressure()
@@ -333,6 +333,9 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 		share_size = max(1, max(size + 3, 1) + avg_unsim.group_multiplier)
 		tileslen = avg_unsim.group_multiplier
 
+		if(dbg_output)
+			world << "O2: [unsim_oxygen] N2: [unsim_nitrogen] Size: [share_size] Tiles: [tileslen]"
+
 	else if(istype(unsimulated_tiles, /list))
 		if(!unsimulated_tiles.len)
 			return 0
@@ -376,10 +379,10 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 
 		full_heat_capacity = A.heat_capacity() * size
 
-		oxy_avg = (full_oxy + unsim_oxygen) / (size + share_size)
-		nit_avg = (full_nitro + unsim_nitrogen) / (size + share_size)
-		co2_avg = (full_co2 + unsim_co2) / (size + share_size)
-		plasma_avg = (full_plasma + unsim_plasma) / (size + share_size)
+		oxy_avg = (full_oxy + unsim_oxygen*share_size) / (size + share_size)
+		nit_avg = (full_nitro + unsim_nitrogen*share_size) / (size + share_size)
+		co2_avg = (full_co2 + unsim_co2*share_size) / (size + share_size)
+		plasma_avg = (full_plasma + unsim_plasma*share_size) / (size + share_size)
 
 		temp_avg = 0
 
@@ -388,6 +391,10 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 
 	if(sharing_lookup_table.len >= tileslen) //6 or more interconnecting tiles will max at 42% of air moved per tick.
 		ratio = sharing_lookup_table[tileslen]
+
+	if(dbg_output)
+		world << "Ratio: [ratio]"
+		world << "Avg O2: [oxy_avg] N2: [nit_avg]"
 
 	A.oxygen = max(0, (A.oxygen - oxy_avg) * (1 - ratio) + oxy_avg )
 	A.nitrogen = max(0, (A.nitrogen - nit_avg) * (1 - ratio) + nit_avg )
@@ -401,6 +408,8 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 		G.moles = (G.moles - G_avg) * (1 - ratio) + G_avg
 
 	A.update_values()
+
+	if(dbg_output) world << "Result: [abs(old_pressure - A.return_pressure())] kPa"
 
 	return abs(old_pressure - A.return_pressure())
 
