@@ -184,3 +184,46 @@
 	icon_state = "tdgreen"
 	item_state = "tdgreen"
 	siemens_coefficient = 1
+
+/obj/item/clothing/suit/armor/tactical
+	name = "tactical armor"
+	desc = "A suit of armor most often used by Special Weapons and Tactics squads. Includes padded vest with pockets along with shoulder and kneeguards."
+	icon_state = "swatarmor"
+	item_state = "armor"
+	var/obj/item/weapon/gun/holstered = null
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	slowdown = 1
+	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 20, bio = 0, rad = 0)
+	siemens_coefficient = 0.7
+
+	/obj/item/clothing/suit/armor/tactical/verb/holster()
+		set name = "Holster"
+		set category = "Object"
+		set src in usr
+		if(!istype(usr, /mob/living)) return
+		if(usr.stat) return
+
+		if(!holstered)
+			if(!istype(usr.get_active_hand(), /obj/item/weapon/gun))
+				usr << "\blue You need your gun equiped to holster it."
+				return
+			var/obj/item/weapon/gun/W = usr.get_active_hand()
+			if (!W.isHandgun())
+				usr << "\red This gun won't fit in \the belt!"
+				return
+			holstered = usr.get_active_hand()
+			usr.drop_item()
+			holstered.loc = src
+			usr.visible_message("\blue \The [usr] holsters \the [holstered].", "You holster \the [holstered].")
+		else
+			if(istype(usr.get_active_hand(),/obj) && istype(usr.get_inactive_hand(),/obj))
+				usr << "\red You need an empty hand to draw the gun!"
+			else
+				if(usr.a_intent == "hurt")
+					usr.visible_message("\red \The [usr] draws \the [holstered], ready to shoot!", \
+					"\red You draw \the [holstered], ready to shoot!")
+				else
+					usr.visible_message("\blue \The [usr] draws \the [holstered], pointing it at the ground.", \
+					"\blue You draw \the [holstered], pointing it at the ground.")
+				usr.put_in_hands(holstered)
+			holstered = null

@@ -682,7 +682,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 						else
 							M.close()
 
-		if("Detonate")//Detonate PDA
+		if("Detonate")//Detonate PDA... maybe
 			// check if telecomms I/O route 1459 is stable
 			//var/telecomms_intact = telecomms_process(P.owner, owner, t)
 			var/obj/machinery/message_server/useMS = null
@@ -715,7 +715,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					if (!P.toff && cartridge.charges > 0)
 						cartridge.charges--
 
-						var/difficulty = 0
+						var/difficulty = 2
 
 						if(P.cartridge)
 							difficulty += P.cartridge.access_medical
@@ -723,22 +723,23 @@ var/global/list/obj/item/device/pda/PDAs = list()
 							difficulty += P.cartridge.access_engine
 							difficulty += P.cartridge.access_clown
 							difficulty += P.cartridge.access_janitor
-						else
-							difficulty += 2
+							difficulty += 3 * P.hidden_uplink
 
-						if(prob(difficulty * 12) || (P.hidden_uplink))
+						if(prob(difficulty))
 							U.show_message("\red An error flashes on your [src].", 1)
-						else if (prob(difficulty * 3))
+						else if (prob(difficulty * 7))
 							U.show_message("\red Energy feeds back into your [src]!", 1)
 							ui.close()
-							explode()
+							detonate_act(src)
 							log_admin("[key_name(U)] just attempted to blow up [P] with the Detomatix cartridge but failed, blowing themselves up")
-							message_admins("[key_name_admin(U)] just attempted to blow up [P] with the Detomatix cartridge but failed, blowing themselves up", 1)
+							message_admins("[key_name_admin(U)] just attempted to blow up [P] with the Detomatix cartridge but failed.", 1)
 						else
 							U.show_message("\blue Success!", 1)
-							log_admin("[key_name(U)] just attempted to blow up [P] with the Detomatix cartridge and succeded")
-							message_admins("[key_name_admin(U)] just attempted to blow up [P] with the Detomatix cartridge and succeded", 1)
-							P.explode()
+							log_admin("[key_name(U)] just attempted to blow up [P] with the Detomatix cartridge and succeeded")
+							message_admins("[key_name_admin(U)] just attempted to blow up [P] with the Detomatix cartridge and succeeded.", 1)
+							detonate_act(P)
+					else
+						U << "No charges left."
 				else
 					U << "PDA not found."
 			else
@@ -773,6 +774,70 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		playsound(loc, 'sound/items/bikehorn.ogg', 30, 1)
 
 	return 1 // return 1 tells it to refresh the UI in NanoUI
+
+/obj/item/device/pda/proc/detonate_act(var/obj/item/device/pda/P)
+	//TODO: sometimes these attacks show up on the message server
+	var/i = rand(1,100)
+	var/j = rand(0,1) //Possibility of losing the PDA after the detonation
+	var/message = ""
+	var/mob/living/M = null
+	if(ismob(P.loc))
+		M = P.loc
+
+	//switch(i) //Yes, the overlapping cases are intended.
+	if(i<=10) //The traditional explosion
+		P.explode()
+		j=1
+		message += "Your [P] suddenly explodes!"
+	if(i>=10 && i<= 20) //The PDA burns a hole in the holder.
+		j=1
+		if(M && isliving(M))
+			M.apply_damage( rand(30,60) , BURN)
+		message += "You feel a searing heat! Your [P] is burning!"
+	if(i>=20 && i<=25) //EMP
+		empulse(P.loc, 3, 6, 1)
+		message += "Your [P] emits a wave of electomagnetic energy!"
+	if(i>=25 && i<=40) //Smoke
+		var/datum/effect/effect/system/smoke_spread/chem/S = new /datum/effect/effect/system/smoke_spread/chem
+		S.attach(P.loc)
+		S.set_up(P, 10, 0, P.loc)
+		playsound(P.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
+		S.start()
+		message += "Large clouds of smoke billow forth from your [P]!"
+	if(i>=40 && i<=45) //Bad smoke
+		var/datum/effect/effect/system/smoke_spread/bad/B = new /datum/effect/effect/system/smoke_spread/bad
+		B.attach(P.loc)
+		B.set_up(P, 10, 0, P.loc)
+		playsound(P.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
+		B.start()
+		message += "Large clouds of noxious smoke billow forth from your [P]!"
+	if(i>=65 && i<=75) //Weaken
+		if(M && isliving(M))
+			M.apply_effects(0,1)
+		message += "Your [P] flashes with a blinding white light! You feel weaker."
+	if(i>=75 && i<=85) //Stun and stutter
+		if(M && isliving(M))
+			M.apply_effects(1,0,0,0,1)
+		message += "Your [P] flashes with a blinding white light! You feel weaker."
+	if(i>=85) //Sparks
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(2, 1, P.loc)
+		s.start()
+		message += "Your [P] begins to spark violently!"
+	if(i>45 && i<65 && prob(50)) //Nothing happens
+		message += "Your [P] bleeps loudly."
+		j = prob(10)
+
+	if(j) //This kills the PDA
+		P.Del()
+		if(message)
+			message += "It melts in a puddle of plastic."
+		else
+			message += "Your [P] shatters in a thousand pieces!"
+
+	if(M && isliving(M))
+		message = "\red" + message
+		M.show_message(message, 1)
 
 /obj/item/device/pda/proc/remove_id()
 	if (id)
@@ -1127,25 +1192,17 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		user << "\blue Paper scanned." //concept of scanning paper copyright brainoblivion 2009
 
 
-/obj/item/device/pda/proc/explode() //This needs tuning.
+/obj/item/device/pda/proc/explode() //This needs tuning. //Sure did.
 	if(!src.detonate) return
 	var/turf/T = get_turf(src.loc)
-
-	if (ismob(loc))
-		var/mob/M = loc
-		M.show_message("\red Your [src] explodes!", 1)
-
 	if(T)
 		T.hotspot_expose(700,125)
-
-		explosion(T, -1, -1, 2, 3)
-
-	del(src)
+		explosion(T, 0, 0, 1, rand(1,2))
 	return
 
 /obj/item/device/pda/Del()
 	PDAs -= src
-	if (src.id)
+	if (src.id && prob(90)) //IDs are kept in 90% of the cases
 		src.id.loc = get_turf(src.loc)
 	..()
 

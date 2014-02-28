@@ -154,8 +154,8 @@
 		if("power_toggle" in signal.data)
 			on = !on
 
-		if("set_direction" in signal.data)
-			pump_direction = text2num(signal.data["set_direction"])
+		if("direction" in signal.data)
+			pump_direction = text2num(signal.data["direction"])
 
 		if("checks" in signal.data)
 			pressure_checks = text2num(signal.data["checks"])

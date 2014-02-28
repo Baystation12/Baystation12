@@ -664,6 +664,10 @@ var/list/ghostteleportlocs = list()
 	name = "Waste Disposal"
 	icon_state = "disposal"
 
+/area/maintenance/evahallway
+	name = "\improper EVA Hallway"
+	icon_state = "eva"
+
 //Hallway
 
 /area/hallway/primary/fore
@@ -786,6 +790,14 @@ var/list/ghostteleportlocs = list()
 
 /area/crew_quarters/sleep/sec
 	name = "\improper Security Dormitories"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/bedrooms
+	name = "\improper Dormitory Bedroom"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/cryo
+	name = "\improper Cryogenic Storage"
 	icon_state = "Sleep"
 
 /area/crew_quarters/sleep_male
@@ -922,21 +934,53 @@ var/list/ghostteleportlocs = list()
 
 /area/engine
 	engine_smes
-		name = "\improper Engineering SMES"
+		name = "Engineering SMES"
 		icon_state = "engine_smes"
-		requires_power = 0//This area only covers the batteries and they deal with their own power
+//		requires_power = 0//This area only covers the batteries and they deal with their own power
+
+	engine_room
+		name = "\improper Engine Room"
+		icon_state = "engine"
+
+	engine_airlock
+		name = "\improper Engine Room Airlock"
+		icon_state = "engine"
+
+	engine_monitoring
+		name = "\improper Engine Monitoring Room"
+		icon_state = "engine_monitoring"
+
+	engineering_monitoring
+		name = "\improper Engineering Monitoring Room"
+		icon_state = "engine_monitoring"
 
 	engineering
 		name = "Engineering"
 		icon_state = "engine_smes"
 
-	break_room
+	engineering_foyer
 		name = "\improper Engineering Foyer"
+		icon_state = "engine"
+
+	break_room
+		name = "\improper Engineering Break Room"
 		icon_state = "engine"
 
 	chiefs_office
 		name = "\improper Chief Engineer's office"
 		icon_state = "engine_control"
+
+	hallway
+		name = "\improper Engineering Hallway"
+		icon_state = "engine_hallway"
+
+	workshop
+		name = "\improper Engineering Workshop"
+		icon_state = "engine_storage"
+
+	locker_room
+		name = "\improper Engineering Locker Room"
+		icon_state = "engine_storage"
 
 
 //Solars
