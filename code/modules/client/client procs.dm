@@ -347,10 +347,5 @@
 		'icons/stamp_icons/large_stamp-cap.png',
 		'icons/stamp_icons/large_stamp-qm.png',
 		'icons/stamp_icons/large_stamp-law.png'
-		)
 
-var/list/extra_resources = list(\
-	'fonts/slime.ttf',
-	'fonts/skrell.ttf',
-	'fonts/binary.ttf'
-	)
+		)
