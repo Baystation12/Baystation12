@@ -155,7 +155,6 @@
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
 	var/module_sprites[0] //Used to store the associations between sprite names and sprite index.
-	var/channels = list()
 
 	if(module)
 		return
@@ -177,7 +176,7 @@
 
 		if("Miner")
 			module = new /obj/item/weapon/robot_module/miner(src)
-			channels = list("Supply" = 1)
+			module.channels = list("Supply" = 1)
 			if(camera && "Robots" in camera.network)
 				camera.network.Add("MINE")
 			module_sprites["Basic"] = "Miner_old"
@@ -186,7 +185,7 @@
 
 		if("Medical")
 			module = new /obj/item/weapon/robot_module/medical(src)
-			channels = list("Medical" = 1)
+			module.channels = list("Medical" = 1)
 			if(camera && "Robots" in camera.network)
 				camera.network.Add("Medical")
 			module_sprites["Basic"] = "Medbot"
@@ -196,7 +195,7 @@
 
 		if("Security")
 			module = new /obj/item/weapon/robot_module/security(src)
-			channels = list("Security" = 1)
+			module.channels = list("Security" = 1)
 			module_sprites["Basic"] = "secborg"
 			module_sprites["Red Knight"] = "Security"
 			module_sprites["Black Knight"] = "securityrobot"
@@ -204,7 +203,7 @@
 
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
-			channels = list("Engineering" = 1)
+			module.channels = list("Engineering" = 1)
 			if(camera && "Robots" in camera.network)
 				camera.network.Add("Engineering")
 			module_sprites["Basic"] = "Engineering"
@@ -220,7 +219,7 @@
 		if("Combat")
 			module = new /obj/item/weapon/robot_module/combat(src)
 			module_sprites["Combat Android"] = "droid-combat"
-			channels = list("Security" = 1)
+			module.channels = list("Security" = 1)
 
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
@@ -234,7 +233,7 @@
 		status_flags &= ~CANPUSH
 
 	choose_icon(6,module_sprites)
-	radio.config(channels)
+	radio.config(module.channels)
 
 /mob/living/silicon/robot/proc/updatename(var/prefix as text)
 	if(prefix)
