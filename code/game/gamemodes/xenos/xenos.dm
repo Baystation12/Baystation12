@@ -5,7 +5,7 @@
 /datum/game_mode/xenos
 	name = "xenos"
 	config_tag = "xenos"
-	required_players = 15
+	required_players = 0
 	recommended_players = 20
 	required_players_secret = 15
 	required_enemies = 3
@@ -93,7 +93,10 @@
 					loc_landmark = sloc
 			O.loc = loc_landmark.loc
 			O.icon_state = "ai-alien"
-			O.verbs.Remove(/mob/living/silicon/ai/verb/pick_icon)
+			O.verbs.Remove(,/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
+					/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
+					/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
+					/mob/living/silicon/ai/proc/toggle_camera_light,/mob/living/silicon/ai/verb/pick_icon)
 			O.laws = new /datum/ai_laws/alienmov
 			O.name = "Alien AI"
 			xenoai_selected = 1
