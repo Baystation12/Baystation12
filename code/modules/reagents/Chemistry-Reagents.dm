@@ -1475,7 +1475,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.make_dizzy(1)
+				M.Dizzy(1)
 				if(!M.confused) M.confused = 1
 				M.confused = max(M.confused, 20)
 				holder.remove_reagent(src.id, 0.5 * REAGENTS_METABOLISM)
@@ -1906,8 +1906,8 @@ datum
 						M.status_flags &= ~DISFIGURED
 					if(35 to INFINITY)
 						M.adjustToxLoss(1)
-						M.make_dizzy(5)
-						M.make_jittery(5)
+						M.Dizzy(5)
+						M.Jitter(5)
 
 				..()
 				return
@@ -2036,7 +2036,7 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!data) data = 1
 				data++
-				M.make_dizzy(5)
+				M.Dizzy(5)
 				M.jitteriness = max(M.jitteriness-5,0)
 				if(data >= 25)
 					if (!M.stuttering) M.stuttering = 1
@@ -2464,18 +2464,18 @@ datum
 				switch(data)
 					if(1 to 5)
 						if (!M.stuttering) M.stuttering = 1
-						M.make_dizzy(5)
+						M.Dizzy(5)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 					if(5 to 10)
 						if (!M.stuttering) M.stuttering = 1
-						M.make_jittery(10)
-						M.make_dizzy(10)
+						M.Jitter(10)
+						M.Dizzy(10)
 						M.druggy = max(M.druggy, 35)
 						if(prob(20)) M.emote(pick("twitch","giggle"))
 					if (10 to INFINITY)
 						if (!M.stuttering) M.stuttering = 1
-						M.make_jittery(20)
-						M.make_dizzy(20)
+						M.Jitter(20)
+						M.Dizzy(20)
 						M.druggy = max(M.druggy, 40)
 						if(prob(30)) M.emote(pick("twitch","giggle"))
 				holder.remove_reagent(src.id, 0.2)
@@ -2731,6 +2731,7 @@ datum
 					if(M.getToxLoss() && prob(20)) M.adjustToxLoss(-1)
 					return
 
+
 			carrotjuice
 				name = "Carrot juice"
 				id = "carrotjuice"
@@ -2860,7 +2861,7 @@ datum
 
 				on_mob_life(var/mob/living/M as mob)
 					..()
-					M.make_jittery(5)
+					M.Jitter(5)
 					if(adj_temp > 0 && holder.has_reagent("frostoil"))
 						holder.remove_reagent("frostoil", 10*REAGENTS_METABOLISM)
 
@@ -2916,12 +2917,13 @@ datum
 						M.adjustToxLoss(-1)
 					return
 
-				icetea
-					name = "Iced Tea"
-					id = "icetea"
-					description = "No relation to a certain rap artist/ actor."
-					color = "#104038" // rgb: 16, 64, 56
-					adj_temp = -5
+
+			icetea
+				name = "Iced Tea"
+				id = "icetea"
+				description = "No relation to a certain rap artist/ actor."
+				color = "#104038" // rgb: 16, 64, 56
+				adj_temp = -5
 
 			kahlua
 				name = "Kahlua"
@@ -2934,7 +2936,7 @@ datum
 
 				on_mob_life(var/mob/living/M as mob)
 					..()
-					M.make_jittery(5)
+					M.Jitter(5)
 					return
 
 			cold
@@ -2981,7 +2983,7 @@ datum
 					adj_sleepy = -2
 
 					on_mob_life(var/mob/living/M as mob)
-						M.make_jittery(20)
+						M.Jitter(20)
 						M.druggy = max(M.druggy, 30)
 						M.dizziness +=5
 						M.drowsyness = 0
@@ -3075,7 +3077,7 @@ datum
 
 					on_mob_life(var/mob/living/M as mob)
 						..()
-						M.make_jittery(5)
+						M.Jitter(5)
 						return
 
 		hippies_delight
@@ -3092,18 +3094,18 @@ datum
 				switch(data)
 					if(1 to 5)
 						if (!M.stuttering) M.stuttering = 1
-						M.make_dizzy(10)
+						M.Dizzy(10)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 					if(5 to 10)
 						if (!M.stuttering) M.stuttering = 1
-						M.make_jittery(20)
-						M.make_dizzy(20)
+						M.Jitter(20)
+						M.Dizzy(20)
 						M.druggy = max(M.druggy, 45)
 						if(prob(20)) M.emote(pick("twitch","giggle"))
 					if (10 to INFINITY)
 						if (!M.stuttering) M.stuttering = 1
-						M.make_jittery(40)
-						M.make_dizzy(40)
+						M.Jitter(40)
+						M.Dizzy(40)
 						M.druggy = max(M.druggy, 60)
 						if(prob(30)) M.emote(pick("twitch","giggle"))
 				holder.remove_reagent(src.id, 0.2)
@@ -3164,7 +3166,6 @@ datum
 						if (istype(L))
 							L.take_damage(0.1, 1)
 						H.adjustToxLoss(0.1)
-
 				holder.remove_reagent(src.id, 0.4)
 				..()
 				return
@@ -3327,7 +3328,7 @@ datum
 					//	M:sleeping = max(0,M.sleeping-2)
 					if (M.bodytemperature > 310)
 						M.bodytemperature = max(310, M.bodytemperature-5)
-					M.make_jittery(1)
+					M.Jitter(1)
 					return
 
 
