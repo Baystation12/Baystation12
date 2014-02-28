@@ -153,10 +153,11 @@
 		return ..(M,flags)
 
 	OnDrawUnderlays(var/mob/M,var/g,var/fat)
-		if(fat)
-			return "hulk_[fat]_s"
-		else
-			return "hulk_[g]_s"
+		if(M_HULK in M.mutations)
+			if(fat)
+				return "hulk_[fat]_s"
+			else
+				return "hulk_[g]_s"
 		return 0
 
 	OnMobLife(var/mob/living/carbon/human/M)
