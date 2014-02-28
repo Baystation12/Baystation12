@@ -744,7 +744,9 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 
 		if(keyslot.syndie)
 			src.syndie = 1
-
+	var/mob/living/silicon/robot/Ro = usr
+	if(Ro.module)
+		src.config(Ro.module.channels)
 
 	for (var/ch_name in channels)
 		if(!radio_controller)
@@ -761,12 +763,16 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	if(usr.stat || !on)
 		return
 	if (href_list["mode"])
-		subspace_transmission = !subspace_transmission
-		if(!subspace_transmission)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
+		if(subspace_transmission != 1)
+			subspace_transmission = 1
+			usr << "Subspace Transmission is disabled"
+		else
+			subspace_transmission = 0
+			usr << "Subspace Transmission is enabled"
+		if(subspace_transmission == 1)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
 			channels = list()
 		else
 			recalculateChannels()
-		usr << "Subspace Transmission is [(subspace_transmission) ? "enabled" : "disabled"]"
 	..()
 
 /obj/item/device/radio/borg/interact(mob/user as mob)
@@ -785,7 +791,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 				<A href='byond://?src=\ref[src];mode=1'>Toggle Broadcast Mode</A><BR>
 				"}
 
-	if(subspace_transmission)//Don't even bother if subspace isn't turned on
+	if(!subspace_transmission)//Don't even bother if subspace isn't turned on
 		for (var/ch_name in channels)
 			dat+=text_sec_channel(ch_name, channels[ch_name])
 	dat+={"[text_wires()]</TT></body></html>"}
