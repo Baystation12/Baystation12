@@ -131,7 +131,7 @@
 			O.name = "Alien Cyborg"
 			O.module = new /obj/item/weapon/robot_module/alien/hunter(src)
 			O.hands.icon_state = "standard"
-			O.icon = "icons/mob/alien.dmi"
+			O.icon = 'icons/mob/alien.dmi'
 			O.icon_state = "xenoborg-state-a"
 			O.modtype = "Xeno-Hu"
 			feedback_inc("xeborg_hunter",1)
