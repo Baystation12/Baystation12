@@ -244,12 +244,19 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 
 	   //#### Grab the connection datum ####//
 		var/datum/radio_frequency/connection = null
-		if(channel && channels && channels.len > 0)
-			if (channel == "department")
-				//world << "DEBUG: channel=\"[channel]\" switching to \"[channels[1]]\""
-				channel = channels[1]
-			connection = secure_radio_connections[channel]
-		else
+		if(channel == "headset")
+			channel = null
+		if(channel) // If a channel is specified, look for it.
+			if(channels && channels.len > 0)
+				if (channel == "department")
+					//world << "DEBUG: channel=\"[channel]\" switching to \"[channels[1]]\""
+					channel = channels[1]
+				connection = secure_radio_connections[channel]
+				if (!channels[channel]) // if the channel is turned off, don't broadcast
+					return
+			else
+				// If we were to send to a channel we don't have, drop it.
+		else // If a channel isn't specified, send to common.
 			connection = radio_connection
 			channel = null
 		if (!istype(connection))
