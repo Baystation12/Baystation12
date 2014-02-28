@@ -63,7 +63,6 @@ h1.alert, h2.alert		{color: #000000;}
 
 .alien					{color: #543354;}
 .tajaran				{color: #803B56;}
-.skrell					{color: #00CED1;}
 .soghun					{color: #228B22;}
 .vox					{color: #AA00AA;}
 .slime					{font-family: \"001 Interstellar Log\", Verdana, sans-serif;}
