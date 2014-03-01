@@ -3192,7 +3192,7 @@
 "bjt" = (/obj/machinery/power/apc{dir = 1; name = "Starboard Emergency Storage APC"; pixel_y = 24},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/maintenance/asmaint2)
 "bju" = (/obj/machinery/portable_atmospherics/canister/air,/turf/simulated/floor/plating,/area/maintenance/asmaint2)
 "bjv" = (/obj/machinery/camera{c_tag = "Arrivals Auxiliary Docking"; dir = 8; network = list("SS13")},/turf/simulated/floor,/area/hallway/secondary/entry/south)
-"bjw" = (/obj/machinery/conveyor{dir = 1; id = "garbage"},/obj/structure/sign/vacuum{pixel_x = -32},/turf/simulated/floor/plating,/area/maintenance/disposal)
+"bjw" = (/obj/machinery/conveyor{dir = 1; id = "garbage"},/obj/structure/sign/vacuum{pixel_x = -32},/obj/machinery/recycler,/turf/simulated/floor/plating,/area/maintenance/disposal)
 "bjx" = (/obj/machinery/door_control{id = "Disposal Exit"; name = "Disposal Vent Control"; pixel_x = -25; pixel_y = 4; req_access_txt = "12"},/obj/machinery/driver_button{id = "trash"; pixel_x = -26; pixel_y = -6},/turf/simulated/floor/plating,/area/maintenance/disposal)
 "bjy" = (/obj/machinery/conveyor_switch/oneway{convdir = -1; id = "garbage"; name = "disposal coveyor"},/turf/simulated/floor/plating,/area/maintenance/disposal)
 "bjz" = (/turf/simulated/floor/plating,/area/maintenance/disposal)
