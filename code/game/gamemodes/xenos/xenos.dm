@@ -6,10 +6,10 @@
 	name = "xenos"
 	config_tag = "xenos"
 	required_players = 0
-	recommended_players = 20
-	required_players_secret = 15
-	required_enemies = 3
-	recommended_enemies = 5
+	recommended_players = 30
+	required_players_secret = 20
+	required_enemies = 5
+	recommended_enemies = 8
 
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
@@ -133,6 +133,9 @@
 			O.icon = 'icons/mob/alien.dmi'
 			O.icon_state = "xenoborg-state-a"
 			O.modtype = "Xeno-Hu"
+			O.laws = new /datum/ai_laws/alienmov()
+			O.connected_ai = select_active_alien_ai()
+			O.scrambledcodes = 1
 			feedback_inc("xeborg_hunter",1)
 
 
