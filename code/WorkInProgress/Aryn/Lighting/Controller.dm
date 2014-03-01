@@ -76,8 +76,10 @@ var/list/lit_z_levels = list(1,5)
 						world << "<font color=red>Progress: [round((turfs_updated/total_turfs)*100, 0.01)]% ([turfs_updated]/[total_turfs])"
 
 					var/turf/T = locate(x,y,z)
-					if(!T.light_overlay && !T.is_outside)
-						T.light_overlay = new(T)
+					if(!T.is_outside)
+						T.light_overlay = image(icon='icons/effects/ArynLights.dmi',icon_state="0000",layer=9)
+						T.light_overlay.invisibility = INVISIBILITY_LIGHTING
+						T.mouse_opacity = 0
 					//T.ResetValue()
 				if(!all_lightpoints_made) new/lightpoint(x+0.5,y+0.5,z)
 
@@ -89,7 +91,8 @@ var/list/lit_z_levels = list(1,5)
 	started = 1
 
 	for(var/turf/T)
-		if(T.light_overlay)
+		if(!T.is_outside && T.light_overlay)
+
 			T.ResetValue()
 			T.UpdateLight()
 

@@ -53,17 +53,18 @@ Turf Procs:
 
 #define LIGHTCLAMP(x) ( max(0,min(3,round(x,1))) )
 
-obj/effect/lighting_overlay
+//This is now an image because weird shit happens with /obj
+/*obj/effect/lighting_overlay
 	//anchored = 1
 	layer = 9
 	mouse_opacity = 0
 	icon = 'icons/effects/ArynLights.dmi'
 	icon_state = "0000"
-	invisibility = INVISIBILITY_LIGHTING
+	invisibility = INVISIBILITY_LIGHTING*/
 
 atom/var/light/light
 
-turf/var/obj/effect/lighting_overlay/light_overlay
+turf/var/image/light_overlay
 
 turf/var/lit_value = 0
 turf/var/max_brightness = 0
