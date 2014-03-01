@@ -99,14 +99,14 @@
 	if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
 			var/stability = num2text(round((damage / explosion_point) * 100))
-			
+
 			if(damage > emergency_point)
 
-				radio.autosay(addtext(emergency_alert, " Stability: ",stability,"%"), "Supermatter Monitor")
+				radio.autosay(addtext(emergency_alert, " Instability: ",stability,"%"), "Supermatter Monitor")
 				lastwarning = world.timeofday
 
 			else if(damage >= damage_archived) // The damage is still going up
-				radio.autosay(addtext(warning_alert," Stability: ",stability,"%"), "Supermatter Monitor")
+				radio.autosay(addtext(warning_alert," Instability: ",stability,"%"), "Supermatter Monitor")
 				lastwarning = world.timeofday - 150
 
 			else                                                 // Phew, we're safe
