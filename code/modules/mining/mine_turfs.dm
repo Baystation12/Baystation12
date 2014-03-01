@@ -578,6 +578,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	var/activated_name = null
 
 /turf/simulated/mineral/gibtonite/New()
+	icon_state="rock_Diamond"
 	det_time = rand(8,10) //So you don't know exactly when the hot potato will explode
 	..()
 
@@ -617,7 +618,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /turf/simulated/mineral/gibtonite/proc/defuse()
 	if(stage == 1)
-		icon_state = "rock_Gibtonite"
+		icon_state = "rock_Gibtonite_inactive"
 		desc = "An inactive gibtonite reserve. The ore can be extracted."
 		stage = 2
 		if(det_time < 0)
