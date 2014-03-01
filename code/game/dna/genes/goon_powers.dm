@@ -130,7 +130,7 @@
 	range = 7
 	selection_type = "range"
 	include_user = 1
-	centcomm_cancast = 0
+//	centcomm_cancast = 0
 	var/list/compatible_mobs = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 
 /obj/effect/proc_holder/spell/targeted/cryokinesis/cast(list/targets)

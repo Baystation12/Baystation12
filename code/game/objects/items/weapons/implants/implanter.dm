@@ -46,11 +46,11 @@
 						var/datum/organ/external/affected = H.get_organ(user.zone_sel.selecting)
 						affected.implants += src.imp
 						imp.part = affected
-
 				M:implanting = 0
 				src.imp = null
 				update()
 	return
+
 
 /obj/item/weapon/implanter/traitor
 	name = "implanter-greytide"
@@ -95,6 +95,10 @@
 	name = "implanter (C)"
 	icon_state = "cimplanter1"
 
+	var/list/forbidden_types=list(
+		// /obj/item/weapon/storage/bible // VG #11 - Recursion.
+	)
+
 /obj/item/weapon/implanter/compressed/New()
 	imp = new /obj/item/weapon/implant/compressed( src )
 	..()
@@ -123,8 +127,11 @@
 		return
 	..()
 
-/obj/item/weapon/implanter/compressed/afterattack(atom/A, mob/user as mob)
-	if(istype(A,/obj/item) && imp)
+/obj/item/weapon/implanter/compressed/afterattack(var/obj/item/I, mob/user as mob)
+	if(is_type_in_list(I,forbidden_types))
+		user << "\red A red light flickers on the implanter."
+		return
+	if(istype(I) && imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if (c.scanned)
 			user << "\red Something is already scanned inside the implant!"
@@ -134,24 +141,4 @@
 			user.update_icons()	//update our overlays
 		c.scanned = I
 		c.scanned.loc = c
-
-
-/obj/item/weapon/implanter/deadman
-	name = "implanter-deadman"
-	desc = "Switch it."
-
-	New()
-		src.imp = new /obj/item/weapon/implant/deadman(src)
-		..()
 		update()
-		return
-
-/obj/item/weapon/implanter/death_alarm
-	name = "implanter-death alarm"
-	desc = "Announces the death of the implanted person over radio"
-
-	New()
-		src.imp = new /obj/item/weapon/implant/death_alarm(src)
-		..()
-		update()
-		return
