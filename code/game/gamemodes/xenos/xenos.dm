@@ -74,10 +74,9 @@
 	for(var/datum/mind/xeno_mind in xenos)
 		if(spawnpos > xenos_spawn.len)
 			spawnpos = 1
-		xeno_mind.current.loc = xenos_spawn[spawnpos]
 //XenoAI selection
 		if(!xenoai_selected)
-			var/mob/living/silicon/ai/O = new(xeno_mind.current.loc,,,1)//No MMI but safety is in effect.
+			var/mob/living/silicon/ai/O = new(xenos_spawn[spawnpos],,,1)//No MMI but safety is in effect.
 			O.invisibility = 0
 			O.aiRestorePowerRoutine = 0
 
@@ -104,7 +103,7 @@
 			continue
 //XenoQueen Selection
 		if(!xenoqueen_selected)
-			var/mob/living/carbon/alien/humanoid/queen/large/O = new(xeno_mind.current.loc)
+			var/mob/living/carbon/alien/humanoid/queen/large/O = new(xenos_spawn[spawnpos])
 			if(xeno_mind.current)
 				xeno_mind.transfer_to(O)
 			else
@@ -115,7 +114,7 @@
 			continue
 //XenoBorg Selection
 		if(!xenoborg_selected)
-			var/mob/living/silicon/robot/O = new(xeno_mind.current.loc,0,0,1)
+			var/mob/living/silicon/robot/O = new(xenos_spawn[spawnpos],0,0,1)
 			O.mmi = new /obj/item/device/mmi(O)
 			O.mmi.alien = 1
 			O.mmi.transfer_identity(xeno_mind.current)//Does not transfer key/client.
@@ -142,7 +141,7 @@
 			continue
 //Additional larvas if playercount > 20
 		else
-			var/mob/living/carbon/alien/larva/O = new(xeno_mind.current.loc)
+			var/mob/living/carbon/alien/larva/O = new(xenos_spawn[spawnpos])
 			if(xeno_mind.current)
 				xeno_mind.transfer_to(O)
 			else
