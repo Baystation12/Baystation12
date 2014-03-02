@@ -244,6 +244,7 @@
 
 	if(H.mind)
 		H.mind.transfer_to(S)
+	else
 		S.key = H.key
 
 	for(var/mob/living/carbon/monkey/diona/D in H.contents)

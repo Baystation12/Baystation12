@@ -55,7 +55,10 @@
 		for(var/mob/O in viewers(src, null))
 			O.show_message(text("\green <B>[src] begins to twist and contort!</B>"), 1)
 		var/mob/living/carbon/alien/humanoid/sentinel/large/new_xeno = new (loc)
-		mind.transfer_to(new_xeno)
+		if(mind)
+			mind.transfer_to(new_xeno)
+		else
+			new_xeno.key = key
 		del(src)
 	return
 
