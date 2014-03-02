@@ -636,22 +636,18 @@ proc/process_ghost_teleport_locs()
 /area/xenos_station/start
 	name = "\improper start area"
 	icon_state = "north"
-	requires_power = 0
 
 /area/xenos_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
-	requires_power = 0
 
 /area/xenos_station/southwest
 	name = "\improper aft port solars"
 	icon_state = "southwest"
-	requires_power = 0
 
 /area/xenos_station/northwest
 	name = "\improper fore port solars"
 	icon_state = "northwest"
-	requires_power = 0
 
 /area/xenos_station/northeast
 	name = "\improper fore starboard solars"
@@ -661,17 +657,14 @@ proc/process_ghost_teleport_locs()
 /area/xenos_station/southeast
 	name = "\improper aft starboard solars"
 	icon_state = "southeast"
-	requires_power = 0
 
 /area/xenos_station/north
-	name = "\improper north landing area"
+	name = "\improper west landing area"
 	icon_state = "north"
-	requires_power = 0
 
 /area/xenos_station/south
-	name = "\improper south landing area"
+	name = "\improper east landing area"
 	icon_state = "south"
-	requires_power = 0
 
 //PRISON
 /area/prison
