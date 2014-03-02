@@ -54,6 +54,7 @@ Turf Procs:
 #define LIGHTCLAMP(x) ( max(0,min(3,round(x,1))) )
 
 atom/movable/lighting_overlay
+	name = ""
 	anchored = 1
 	layer = 9
 	mouse_opacity = 0
