@@ -143,6 +143,9 @@ obj/item/weapon/gun/energy/staff/focus
 	w_class = 4.0
 	var/zoom = 0
 
+/obj/item/weapon/gun/energy/sniperrifle/isHandgun()
+	return 0
+
 /obj/item/weapon/gun/energy/sniperrifle/dropped(mob/user)
 	user.client.view = world.view
 

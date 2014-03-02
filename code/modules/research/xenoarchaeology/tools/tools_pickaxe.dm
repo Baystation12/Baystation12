@@ -13,6 +13,7 @@
 	drill_sound = 'sound/weapons/thudswoosh.ogg'
 	drill_verb = "brushing"
 	w_class = 2
+	hardness = 6
 
 /obj/item/weapon/pickaxe/one_pick
 	name = "1/6 pick"
@@ -25,6 +26,7 @@
 	drill_sound = 'sound/items/Screwdriver.ogg'
 	drill_verb = "delicately picking"
 	w_class = 2
+	hardness = 6
 
 /obj/item/weapon/pickaxe/two_pick
 	name = "1/3 pick"
@@ -37,6 +39,7 @@
 	drill_sound = 'sound/items/Screwdriver.ogg'
 	drill_verb = "delicately picking"
 	w_class = 2
+	hardness = 6
 
 /obj/item/weapon/pickaxe/three_pick
 	name = "1/2 pick"
@@ -49,6 +52,7 @@
 	drill_sound = 'sound/items/Screwdriver.ogg'
 	drill_verb = "delicately picking"
 	w_class = 2
+	hardness = 6
 
 /obj/item/weapon/pickaxe/four_pick
 	name = "2/3 pick"
@@ -61,6 +65,7 @@
 	drill_sound = 'sound/items/Screwdriver.ogg'
 	drill_verb = "delicately picking"
 	w_class = 2
+	hardness = 6
 
 /obj/item/weapon/pickaxe/five_pick
 	name = "5/6 pick"
@@ -73,6 +78,7 @@
 	drill_sound = 'sound/items/Screwdriver.ogg'
 	drill_verb = "delicately picking"
 	w_class = 2
+	hardness = 6
 
 /obj/item/weapon/pickaxe/six_pick
 	name = "1/1 pick"
@@ -85,6 +91,7 @@
 	drill_sound = 'sound/items/Screwdriver.ogg'
 	drill_verb = "delicately picking"
 	w_class = 2
+	hardness = 6
 
 /obj/item/weapon/pickaxe/hand
 	name = "hand pickaxe"
@@ -97,6 +104,7 @@
 	drill_sound = 'sound/items/Crowbar.ogg'
 	drill_verb = "clearing"
 	w_class = 3
+	hardness = 6
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Pack for holding pickaxes
