@@ -55,9 +55,9 @@
 
 	//Moving to the next stage
 	if(clicks > stage*100 && prob(10))
-		if(stage == max_stage)
+		/*if(stage == max_stage)
 			src.cure(mob)
-			mob.antibodies |= src.antigen
+			mob.antibodies |= src.antigen*/ //NO AUTOCURE FOR YOU
 		stage++
 		clicks = 0
 	//Do nasty effects

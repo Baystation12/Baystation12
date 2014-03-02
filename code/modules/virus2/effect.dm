@@ -209,7 +209,7 @@
 
 /datum/disease2/effect/bones
 	name = "Fragile Bones Syndrome"
-	stage = 4
+	stage = 3
 	activate(var/mob/living/carbon/mob,var/multiplier)
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
