@@ -583,18 +583,14 @@ This function completely restores a damaged organ to perfect condition.
 			"\The [owner.handcuffed.name] falls off of [owner.name].",\
 			"\The [owner.handcuffed.name] falls off you.")
 
-		owner.handcuffed.loc = owner.loc
-		owner.handcuffed = null
-		owner.update_inv_handcuffed()
+		owner.drop_from_inventory(owner.handcuffed)
 
 	if (owner.legcuffed && body_part in list(FOOT_LEFT, FOOT_RIGHT, LEG_LEFT, LEG_RIGHT))
 		owner.visible_message(\
 			"\The [owner.legcuffed.name] falls off of [owner.name].",\
 			"\The [owner.legcuffed.name] falls off you.")
 
-		owner.legcuffed.loc = owner.loc
-		owner.legcuffed = null
-		owner.update_inv_legcuffed()
+		owner.drop_from_inventory(owner.legcuffed)
 
 /datum/organ/external/proc/bandage()
 	var/rval = 0
