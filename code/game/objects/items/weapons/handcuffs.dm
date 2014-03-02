@@ -92,6 +92,28 @@
 			return
 	return
 
+var/last_chew = 0
+/mob/living/carbon/human/RestrainedClickOn(var/atom/A)
+	if (A != src) return ..()
+	if (last_chew + 26 > world.time) return
+
+	var/mob/living/carbon/human/H = A
+	if (H.a_intent != "hurt") return
+	if (H.zone_sel.selecting != "mouth") return
+
+	var/datum/organ/external/O = H.organs_by_name[H.hand?"l_hand":"r_hand"]
+	if (!O) return
+
+	var/s = "\red [H.name] chews on \his [O.display_name]!"
+	H.visible_message(s, "\red You chew on your [O.display_name]!")
+	H.attack_log += text("\[[time_stamp()]\] <font color='red'>[s] ([H.ckey])</font>")
+	log_attack("[s] ([H.ckey])")
+
+	if(O.take_damage(3,0,1,"teeth marks"))
+		H:UpdateDamageIcon()
+
+	last_chew = world.time
+
 /obj/item/weapon/handcuffs/cable
 	name = "cable restraints"
 	desc = "Looks like some cables tied together. Could be used to tie something up."
