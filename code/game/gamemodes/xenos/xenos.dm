@@ -98,6 +98,7 @@
 					/mob/living/silicon/ai/proc/toggle_camera_light,/mob/living/silicon/ai/verb/pick_icon)
 			O.laws = new /datum/ai_laws/alienmov
 			O.name = "Alien AI"
+			O.alienAI = 1
 			xenoai_selected = 1
 			spawnpos++
 			continue
@@ -133,8 +134,8 @@
 			O.icon = 'icons/mob/alien.dmi'
 			O.icon_state = "xenoborg-state-a"
 			O.modtype = "Xeno-Hu"
-			O.laws = new /datum/ai_laws/alienmov()
 			O.connected_ai = select_active_alien_ai()
+			O.laws = new /datum/ai_laws/alienmov()
 			O.scrambledcodes = 1
 			feedback_inc("xeborg_hunter",1)
 
