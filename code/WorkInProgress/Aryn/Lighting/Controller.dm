@@ -77,9 +77,7 @@ var/list/lit_z_levels = list(1,5)
 
 					var/turf/T = locate(x,y,z)
 					if(!T.is_outside)
-						T.light_overlay = image(icon='icons/effects/ArynLights.dmi',icon_state="0000",layer=9)
-						T.light_overlay.invisibility = INVISIBILITY_LIGHTING
-						T.mouse_opacity = 0
+						T.light_overlay = new(T)
 					//T.ResetValue()
 				if(!all_lightpoints_made) new/lightpoint(x+0.5,y+0.5,z)
 

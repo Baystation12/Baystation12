@@ -53,18 +53,17 @@ Turf Procs:
 
 #define LIGHTCLAMP(x) ( max(0,min(3,round(x,1))) )
 
-//This is now an image because weird shit happens with /obj
-/*obj/effect/lighting_overlay
-	//anchored = 1
+atom/movable/lighting_overlay
+	anchored = 1
 	layer = 9
 	mouse_opacity = 0
 	icon = 'icons/effects/ArynLights.dmi'
 	icon_state = "0000"
-	invisibility = INVISIBILITY_LIGHTING*/
+	invisibility = INVISIBILITY_LIGHTING
 
 atom/var/light/light
 
-turf/var/image/light_overlay
+turf/var/atom/movable/lighting_overlay/light_overlay
 
 turf/var/lit_value = 0
 turf/var/max_brightness = 0
@@ -168,6 +167,13 @@ turf/proc/RemoveLight(light/light)
 turf/proc/ResetAllLights()
 	for(var/light/light in lit_by)
 		light.Reset()
+
+/turf/space/ResetAllLights()
+	var/atom/movable/lighting_overlay/overlay = locate() in src
+	overlay.loc = null
+	light_overlay = null
+	is_outside = 1
+	. = ..()
 
 turf/proc/ResetValue()
 	if(is_outside)
