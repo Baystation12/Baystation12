@@ -15,8 +15,8 @@
 		affected_mob = loc
 		spawn(0)
 			AddInfectionImages(affected_mob)
-		if(name == "alien embryo")
-			name = "alien embryo ([rand(1, 1000)])"
+//		if(name == "alien embryo")
+//			name = "alien embryo ([rand(1, 1000)])"
 		real_name = name
 		regenerate_icons()
 	else
