@@ -22,6 +22,7 @@
 	var/sql_enabled = 1					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
+	var/ert_admin_call_only = 0
 	var/allow_vote_mode = 0				// allow votes to change mode
 	var/allow_admin_jump = 1			// allows admin jumping
 	var/allow_admin_spawning = 1		// allows admin item spawning
@@ -289,6 +290,9 @@
 
 				if ("vote_autogamemode_timeleft")
 					config.vote_autogamemode_timeleft = text2num(value)
+
+				if("ert_admin_only")
+					config.ert_admin_call_only = 1
 
 				if ("allow_ai")
 					config.allow_ai = 1
