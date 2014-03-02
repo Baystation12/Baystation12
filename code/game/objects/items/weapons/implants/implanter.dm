@@ -142,3 +142,23 @@
 		c.scanned = I
 		c.scanned.loc = c
 		update()
+
+/obj/item/weapon/implanter/deadman
+	name = "implanter-deadman"
+	desc = "Switch it."
+
+	New()
+		src.imp = new /obj/item/weapon/implant/deadman(src)
+		..()
+		update()
+		return
+
+/obj/item/weapon/implanter/death_alarm
+	name = "implanter-death alarm"
+	desc = "Announces the death of the implanted person over radio"
+
+	New()
+		src.imp = new /obj/item/weapon/implant/death_alarm(src)
+		..()
+		update()
+		return
