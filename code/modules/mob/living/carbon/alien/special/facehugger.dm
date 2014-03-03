@@ -181,7 +181,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	return
 
 /mob/living/carbon/alien/facehugger/proc/Impregnate(mob/living/target as mob)
-	if(!target || !target.wear_mask || (!src in target.wear_mask.contents)  || target.stat == DEAD) //was taken off or something
+	if(!target || !target.wear_mask || (!src in target.wear_mask.contents)  || target.stat == DEAD || target.status_flags & XENO_HOST) //was taken off or something
 		return
 
 	if(!sterile)
