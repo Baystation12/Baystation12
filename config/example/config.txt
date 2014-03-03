@@ -94,6 +94,9 @@ TRAITOR_SCALING
 ## if objectives are disabled
 #OBJECTIVES_DISABLED
 
+## make ERT's be only called by admins
+#ERT_ADMIN_ONLY
+
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
 
