@@ -12,19 +12,12 @@
 	icon_action_button = "action_flashlight"
 	var/on = 0
 	var/brightness_on = 4 //luminosity when on
-	
-	Colored = 1
-	
-	var/RLumin = 1
-	var/GLumin = 1
-	var/BLumin = 0
 
 /obj/item/device/flashlight/initialize()
 	..()
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		//SetLuminosity(brightness_on)
-		SetUniqueLuminosity(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
+		SetLuminosity(brightness_on)
 	else
 		icon_state = initial(icon_state)
 		SetLuminosity(0)
@@ -33,18 +26,15 @@
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
 		if(loc == user)
-			//user.SetLuminosity(user.luminosity + brightness_on)
-			user.AddLuminosityRGB(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
+			user.SetLuminosity(user.luminosity + brightness_on)
 		else if(isturf(loc))
-			//SetLuminosity(brightness_on)
-			SetUniqueLuminosity(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
+			SetLuminosity(brightness_on)
 	else
 		icon_state = initial(icon_state)
 		if(loc == user)
-			//user.SetLuminosity(user.luminosity - brightness_on)
-			user.RemLuminosityRGB(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
+			user.SetLuminosity(user.luminosity - brightness_on)
 		else if(isturf(loc))
-			SetUniqueLuminosity(0,0,0)
+			SetLuminosity(0)
 
 /obj/item/device/flashlight/attack_self(mob/user)
 	if(!isturf(user.loc))
@@ -100,16 +90,14 @@
 
 /obj/item/device/flashlight/pickup(mob/user)
 	if(on)
-		//user.SetLuminosity(user.luminosity + brightness_on)
-		user.AddLuminosityRGB(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
+		user.SetLuminosity(user.luminosity + brightness_on)
 		SetLuminosity(0)
-		SetUniqueLuminosity(0,0,0)
 
 
 /obj/item/device/flashlight/dropped(mob/user)
 	if(on)
-		user.RemLuminosityRGB(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
-		SetUniqueLuminosity(RLumin*brightness_on,GLumin*brightness_on,BLumin*brightness_on)
+		user.SetLuminosity(user.luminosity - brightness_on)
+		SetLuminosity(brightness_on)
 
 
 /obj/item/device/flashlight/pen
@@ -165,10 +153,6 @@
 	var/on_damage = 7
 	var/produce_heat = 1500
 
-	RLumin = 1
-	GLumin = 0
-	BLumin = 0
-
 /obj/item/device/flashlight/flare/New()
 	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.
 	..()
@@ -193,7 +177,6 @@
 		update_brightness(U)
 	else
 		update_brightness(null)
-
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
 
