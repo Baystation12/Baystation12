@@ -72,7 +72,7 @@ var/list/uncollectable_vars=list(
 			if(dels >= GC_FORCE_DEL_PER_TICK)
 //				testing("GC: Reached max force dels per tick [dels] vs [GC_FORCE_DEL_PER_TICK]")
 				break // Server's already pretty pounded, everything else can wait 2 seconds
-			testing("GC: -- \ref[A] | [A.type] was unable to be garbage collected and was force del() --")
+//			testing("GC: -- \ref[A] | [A.type] was unable to be garbage collected and was force del() --")
 			del(A)
 			dels++
 //		else
