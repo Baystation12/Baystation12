@@ -50,6 +50,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	var/strength=5
 	var/sterile = 0
 	var/attached = 0
+	var/icon_dead = "facehugger_dead"
 
 /mob/living/carbon/alien/facehugger/New()
 	if(aliens_allowed)
@@ -217,3 +218,11 @@ var/const/MAX_ACTIVE_TIME = 400
 		if(H.head && H.head.flags & HEADCOVERSMOUTH)
 			return 0
 	return 1
+
+/mob/living/carbon/alien/facehugger/Login()
+	..()
+	sleeping = 0
+
+/mob/living/carbon/alien/facehugger/death(gibbed)
+	icon_state = icon_dead
+	return ..(gibbed)
