@@ -107,7 +107,8 @@ var/list/ai_list = list()
 				if(B.alien)
 					B.brainmob.mind.transfer_to(src)
 					icon_state = "ai-alien"
-					verbs.Remove(,/mob/living/silicon/ai/proc/ai_call_shuttle, \
+					verbs.Remove(,/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
+					/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
 					/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
 					/mob/living/silicon/ai/proc/toggle_camera_light,/mob/living/silicon/ai/verb/pick_icon)
 					laws = new /datum/ai_laws/alienmov

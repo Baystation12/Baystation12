@@ -193,7 +193,10 @@ Class Procs:
 	src.add_fingerprint(usr)
 	return 0
 
-/obj/machinery/attack_ai(mob/user as mob)
+/obj/machinery/attack_ai(var/mob/user as mob)
+	if(isAI(user))
+		var/mob/living/silicon/ai/A = user
+		if(A.alienAI) return
 	if(isrobot(user))
 		// For some reason attack_robot doesn't work
 		// This is to stop robots from using cameras to remotely control machines.

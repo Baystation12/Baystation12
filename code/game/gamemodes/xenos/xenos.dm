@@ -92,11 +92,13 @@
 					loc_landmark = sloc
 			O.loc = loc_landmark.loc
 			O.icon_state = "ai-alien"
-			O.verbs.Remove(,/mob/living/silicon/ai/proc/ai_call_shuttle, \
-					/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
-					/mob/living/silicon/ai/proc/toggle_camera_light,/mob/living/silicon/ai/verb/pick_icon)
+			O.verbs.Remove(,/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
+			/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
+			/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
+			/mob/living/silicon/ai/proc/toggle_camera_light,/mob/living/silicon/ai/verb/pick_icon)
 			O.laws = new /datum/ai_laws/alienmov
 			O.name = "Alien AI"
+			O.real_name = name
 			O.alienAI = 1
 			O.network = list("SS13","Xeno")
 			O.holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo3"))
@@ -131,6 +133,7 @@
 			del(xeno_mind)
 			O.job = "Alien Cyborg"
 			O.name = "Alien Cyborg"
+			O.real_name = name
 			O.module = new /obj/item/weapon/robot_module/alien/hunter(src)
 			O.hands.icon_state = "standard"
 			O.icon = 'icons/mob/alien.dmi'

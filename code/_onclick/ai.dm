@@ -32,6 +32,8 @@
 		build_click(src, client.buildmode, params, A)
 		return
 
+	if(alienAI) return
+
 	var/list/modifiers = params2list(params)
 	if(modifiers["middle"])
 		MiddleClickOn(A)
