@@ -106,6 +106,7 @@
 	unset_machine()
 
 	if(src.eyeobj && src.loc)
+		src.eyeobj.z = src.z
 		src.eyeobj.loc = src.loc
 	else
 		src << "ERROR: Eyeobj not found. Creating new eye..."

@@ -92,13 +92,15 @@
 					loc_landmark = sloc
 			O.loc = loc_landmark.loc
 			O.icon_state = "ai-alien"
-			O.verbs.Remove(,/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
-					/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
+			O.verbs.Remove(,/mob/living/silicon/ai/proc/ai_call_shuttle, \
 					/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
 					/mob/living/silicon/ai/proc/toggle_camera_light,/mob/living/silicon/ai/verb/pick_icon)
 			O.laws = new /datum/ai_laws/alienmov
 			O.name = "Alien AI"
 			O.alienAI = 1
+			O.network = list("SS13","Xeno")
+			O.holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo3"))
+			O.alien_talk_understand = 1
 			xenoai_selected = 1
 			spawnpos++
 			continue
@@ -137,6 +139,7 @@
 			O.connected_ai = select_active_alien_ai()
 			O.laws = new /datum/ai_laws/alienmov()
 			O.scrambledcodes = 1
+			O.alien_talk_understand = 1
 			feedback_inc("xeborg_hunter",1)
 
 
