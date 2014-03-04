@@ -47,11 +47,11 @@ DLL_EXPORT const char * nudge(int n, char *v[])
     {
         return "";
     }
-    
+
     size_t out_c = san_c(v[0]) + san_c(v[2]) + san_c(v[3]);
 
     char * san_out = malloc(out_c + 56);
-    
+
     char * san_i = san_out;
     strcpy(san_i, "(dp1\nS'ip'\np2\nS'");
     san_i += 16;
@@ -67,7 +67,9 @@ DLL_EXPORT const char * nudge(int n, char *v[])
     socket_t nudge_sock = connect_sock(v[1], "45678");
     send_n(nudge_sock, san_out, out_c + 56);
     close_socket(nudge_sock);
-    
+
+    free(san_out);
+
     return "1";
 }
 
