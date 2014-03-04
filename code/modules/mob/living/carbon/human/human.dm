@@ -676,6 +676,8 @@
 								if(setmedical != "Cancel")
 									R.fields["p_stat"] = setmedical
 									modified = 1
+									if(PDA_Manifest.len)
+										PDA_Manifest.Cut()
 
 									spawn()
 										if(istype(usr,/mob/living/carbon/human))
