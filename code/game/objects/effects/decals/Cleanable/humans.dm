@@ -19,6 +19,7 @@
 /obj/effect/decal/cleanable/blood/Destroy()
 	for(var/datum/disease/D in viruses)
 		D.cure(0)
+		D.holder = null
 	..()
 
 /obj/effect/decal/cleanable/blood/New()

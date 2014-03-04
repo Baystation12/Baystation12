@@ -25,7 +25,7 @@
 /obj/effect/portal/New()
 	portals += src
 	spawn(300)
-		del(src)
+		qdel(src)
 		return
 	return
 
