@@ -98,8 +98,11 @@ var/last_chew = 0
 	if (last_chew + 26 > world.time) return
 
 	var/mob/living/carbon/human/H = A
+	if (!H.handcuffed) return
 	if (H.a_intent != "hurt") return
 	if (H.zone_sel.selecting != "mouth") return
+	if (H.wear_mask) return
+	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket)) return
 
 	var/datum/organ/external/O = H.organs_by_name[H.hand?"l_hand":"r_hand"]
 	if (!O) return
