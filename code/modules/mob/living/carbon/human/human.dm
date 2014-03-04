@@ -37,6 +37,10 @@
 	species = new /datum/species/diona(src)
 	..()
 
+/mob/living/carbon/human/machine/New()
+	species = new /datum/species/machine(src)
+	h_style = "blue IPC screen"
+
 /mob/living/carbon/human/New()
 
 	if(!species)
@@ -1114,10 +1118,12 @@
 	verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
-/mob/living/carbon/human/clean_blood()
+/mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
-	if(istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
+	if(clean_feet && !shoes && istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
+		feet_blood_color = null
 		del(feet_blood_DNA)
+		update_inv_shoes(1)
 		return 1
 
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
@@ -1211,6 +1217,7 @@
 		update_icons()
 
 	if(species)
+		species.handle_post_spawn(src)
 		return 1
 	else
 		return 0

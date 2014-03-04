@@ -21,7 +21,7 @@
 	recommended_enemies = 3
 
 
-	uplink_welcome = "Revolutionary Uplink Console:"
+	uplink_welcome = "AntagCorp Uplink Console:"
 	uplink_uses = 10
 
 	var/finished = 0
@@ -73,14 +73,14 @@
 
 /datum/game_mode/revolution/post_setup()
 	var/list/heads = get_living_heads()
-
 	for(var/datum/mind/rev_mind in head_revolutionaries)
-		for(var/datum/mind/head_mind in heads)
-			var/datum/objective/mutiny/rev_obj = new
-			rev_obj.owner = rev_mind
-			rev_obj.target = head_mind
-			rev_obj.explanation_text = "Assassinate [head_mind.name], the [head_mind.assigned_role]."
-			rev_mind.objectives += rev_obj
+		if(!config.objectives_disabled)
+			for(var/datum/mind/head_mind in heads)
+				var/datum/objective/mutiny/rev_obj = new
+				rev_obj.owner = rev_mind
+				rev_obj.target = head_mind
+				rev_obj.explanation_text = "Assassinate [head_mind.name], the [head_mind.assigned_role]."
+				rev_mind.objectives += rev_obj
 
 	//	equip_traitor(rev_mind.current, 1) //changing how revs get assigned their uplink so they can get PDA uplinks. --NEO
 	//	Removing revolutionary uplinks.	-Pete
@@ -107,22 +107,26 @@
 
 
 /datum/game_mode/proc/forge_revolutionary_objectives(var/datum/mind/rev_mind)
-	var/list/heads = get_living_heads()
-	for(var/datum/mind/head_mind in heads)
-		var/datum/objective/mutiny/rev_obj = new
-		rev_obj.owner = rev_mind
-		rev_obj.target = head_mind
-		rev_obj.explanation_text = "Assassinate [head_mind.name], the [head_mind.assigned_role]."
-		rev_mind.objectives += rev_obj
+	if(!config.objectives_disabled)
+		var/list/heads = get_living_heads()
+		for(var/datum/mind/head_mind in heads)
+			var/datum/objective/mutiny/rev_obj = new
+			rev_obj.owner = rev_mind
+			rev_obj.target = head_mind
+			rev_obj.explanation_text = "Assassinate [head_mind.name], the [head_mind.assigned_role]."
+			rev_mind.objectives += rev_obj
 
 /datum/game_mode/proc/greet_revolutionary(var/datum/mind/rev_mind, var/you_are=1)
 	var/obj_count = 1
 	if (you_are)
 		rev_mind.current << "\blue You are a member of the revolutionaries' leadership!"
-	for(var/datum/objective/objective in rev_mind.objectives)
-		rev_mind.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-		rev_mind.special_role = "Head Revolutionary"
-		obj_count++
+	if(!config.objectives_disabled)
+		for(var/datum/objective/objective in rev_mind.objectives)
+			rev_mind.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+			rev_mind.special_role = "Head Revolutionary"
+			obj_count++
+	else
+		rev_mind.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 
 /////////////////////////////////////////////////////////////////////////////////
 //This are equips the rev heads with their gear, and makes the clown not clumsy//
@@ -193,6 +197,8 @@
 	revolutionaries += rev_mind
 	rev_mind.current << "\red <FONT size = 3> You are now a revolutionary! Help your cause. Do not harm your fellow freedom fighters. You can identify your comrades by the red \"R\" icons, and your leaders by the blue \"R\" icons. Help them kill the heads to win the revolution!</FONT>"
 	rev_mind.special_role = "Revolutionary"
+	if(config.objectives_disabled)
+		rev_mind.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 	update_rev_icons_added(rev_mind)
 	return 1
 //////////////////////////////////////////////////////////////////////////////
@@ -342,13 +348,14 @@
 //Announces the end of the game with all relavent information stated//
 //////////////////////////////////////////////////////////////////////
 /datum/game_mode/revolution/declare_completion()
-	if(finished == 1)
-		feedback_set_details("round_end_result","win - heads killed")
-		world << "\red <FONT size = 3><B> The heads of staff were killed or abandoned the station! The revolutionaries win!</B></FONT>"
-	else if(finished == 2)
-		feedback_set_details("round_end_result","loss - rev heads killed")
-		world << "\red <FONT size = 3><B> The heads of staff managed to stop the revolution!</B></FONT>"
-	..()
+	if(!config.objectives_disabled)
+		if(finished == 1)
+			feedback_set_details("round_end_result","win - heads killed")
+			world << "\red <FONT size = 3><B> The heads of staff were killed or abandoned the station! The revolutionaries win!</B></FONT>"
+		else if(finished == 2)
+			feedback_set_details("round_end_result","loss - rev heads killed")
+			world << "\red <FONT size = 3><B> The heads of staff managed to stop the revolution!</B></FONT>"
+		..()
 	return 1
 
 /datum/game_mode/proc/auto_declare_completion_revolution()

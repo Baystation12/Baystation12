@@ -151,7 +151,10 @@
 		spawn(0)
 			NukeNameAssign(synd_mind)
 
-		forge_syndicate_objectives(synd_mind)
+		if(!config.objectives_disabled)
+			forge_syndicate_objectives(synd_mind)
+		greet_syndicate(synd_mind)
+		equip_syndicate(synd_mind.current)
 
 		if(!leader_selected)
 			if (max_age > 0)
@@ -220,10 +223,13 @@
 		if(boss)
 			syndicate.current <<"\blue You are the Gorlex Maradeurs Commander!"
 	var/obj_count = 1
-	for(var/datum/objective/objective in syndicate.objectives)
-		syndicate.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-		obj_count++
-	syndicate.current.faction = "syndicate"
+
+	if(!config.objectives_disabled)
+		for(var/datum/objective/objective in syndicate.objectives)
+			syndicate.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+			obj_count++
+	else
+		syndicate.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 	return
 
 
@@ -292,6 +298,8 @@
 
 
 /datum/game_mode/nuclear/declare_completion()
+	if(config.objectives_disabled)
+		return
 	var/disk_rescued = 1
 	for(var/obj/item/weapon/disk/nuclear/D in world)
 		var/disk_area = get_area(D)

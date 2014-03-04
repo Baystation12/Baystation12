@@ -177,7 +177,7 @@ mob/living/proc/Targeted(var/obj/item/weapon/gun/I) //Self explanitory.
 					target_locked = image("icon" = 'icons/effects/Targeted.dmi', "icon_state" = "locked")
 					update_targeted()
 
-	//Adding the buttons to the controler person
+	//Adding the buttons to the controller person
 	var/mob/living/T = I.loc
 	if(T)
 		if(T.client)
@@ -269,7 +269,7 @@ client/proc/add_gun_icons()
 		screen += usr.gun_run_icon
 
 client/proc/remove_gun_icons()
-	if(isnull(usr)) return 1 // Runtime prevention on N00k agents spawning with SMG
+	if(!usr) return 1 // Runtime prevention on N00k agents spawning with SMG
 	screen -= usr.item_use_icon
 	screen -= usr.gun_move_icon
 	if (target_can_move)

@@ -23,7 +23,7 @@ datum
 		var/list/data = null
 		var/volume = 0
 		var/nutriment_factor = 0
-		var/custom_metabolism = REAGENTS_METABOLISM //Default 0.2
+		var/custom_metabolism = REAGENTS_METABOLISM
 		var/overdose = 0
 		var/overdose_dam = 1
 		//var/list/viruses = list()
@@ -253,15 +253,6 @@ datum
 					if(!cube.wrapped)
 						cube.Expand()
 				return
-
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with water can help put them out!
-				if(!istype(M, /mob/living))
-					return
-				if(method == TOUCH)
-					M.adjust_fire_stacks(-(volume / 10))
-					if(M.fire_stacks <= 0)
-						M.ExtinguishMob()
-					return
 
 		water/holywater
 			name = "Holy Water"
@@ -919,12 +910,6 @@ datum
 				M.adjustToxLoss(1)
 				..()
 				return
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!
-				if(!istype(M, /mob/living))
-					return
-				if(method == TOUCH)
-					M.adjust_fire_stacks(volume / 10)
-					return
 
 		space_cleaner
 			name = "Space cleaner"
@@ -940,23 +925,20 @@ datum
 				else
 					if(O)
 						O.clean_blood()
+
 			reaction_turf(var/turf/T, var/volume)
 				if(volume >= 1)
-					T.overlays.Cut()
-					T.clean_blood()
-
 					if(istype(T, /turf/simulated))
 						var/turf/simulated/S = T
 						S.dirt = 0
-
-					for(var/obj/effect/decal/cleanable/C in src)
+					T.overlays.Cut()
+					T.clean_blood()
+					for(var/obj/effect/decal/cleanable/C in T.contents)
+						src.reaction_obj(C, volume)
 						del(C)
 
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
-			/*reaction_turf(var/turf/simulated/S, var/volume)
-				if(volume >= 1)
-					S.dirt = 0*/
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				if(iscarbon(M))
@@ -982,6 +964,9 @@ datum
 						if(H.shoes)
 							if(H.shoes.clean_blood())
 								H.update_inv_shoes(0)
+						else
+							H.clean_blood(1)
+							return
 					M.clean_blood()
 
 		leporazine
@@ -1413,13 +1398,6 @@ datum
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		holywater
-			name = "Holy Water"
-			id = "holywater"
-			description = "This was once water, but has been altered by higher powers."
-			reagent_state = LIQUID
-			color = "#535E66" // rgb: 83, 94, 102
-
 		nanites
 			name = "Nanomachines"
 			id = "nanites"
@@ -1590,12 +1568,6 @@ datum
 				napalm.trace_gases += fuel
 				T.assume_air(napalm)
 				return
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with plasma is stronger than fuel!
-				if(!istype(M, /mob/living))
-					return
-				if(method == TOUCH)
-					M.adjust_fire_stacks(volume / 5)
-					return
 
 		toxin/lexorin
 			name = "Lexorin"
@@ -1967,20 +1939,6 @@ datum
 			color = "#8E18A9" // rgb: 142, 24, 169
 			toxpwr = 2
 			meltprob = 30
-
-		toxin/spore  //TG Blob spore toxin
-			name = "Spore Toxin"
-			id = "spore"
-			description = "A toxic spore cloud which blocks vision when ingested."
-			reagent_state = LIQUID
-			color = "#9ACD32"
-			toxpwr = 0.5
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				M.damageoverlaytemp = 60
-				M.eye_blurry = max(M.eye_blurry, 3)
-				return
 
 /////////////////////////Food Reagents////////////////////////////
 // Part of the food code. Nutriment is used instead of the old "heal_amt" code. Also is where all the food
@@ -2380,6 +2338,7 @@ datum
 				..()
 				return
 
+/* We're back to flour bags
 		flour
 			name = "flour"
 			id = "flour"
@@ -2397,6 +2356,7 @@ datum
 				src = null
 				if(!istype(T, /turf/space))
 					new /obj/effect/decal/cleanable/flour(T)
+*/
 
 		rice
 			name = "Rice"
@@ -2443,7 +2403,7 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				M.nutrition += nutriment_factor
-				//holder.remove_reagent(src.id, FOOD_METABOLISM)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
 				// Drinks should be used up faster than other reagents.
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
 				if (adj_dizzy) M.dizziness = max(0,M.dizziness + adj_dizzy)
@@ -2988,7 +2948,7 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				M:nutrition += nutriment_factor
-				holder.remove_reagent(src.id, REAGENTS_METABOLISM)
+				holder.remove_reagent(src.id, FOOD_METABOLISM)
 
 				if (adj_drowsy)	M.drowsyness = max(0,M.drowsyness + adj_drowsy)
 				if (adj_sleepy) M.sleeping = max(0,M.sleeping + adj_sleepy)
@@ -3002,22 +2962,19 @@ datum
 				for(var/datum/reagent/ethanol/A in holder.reagent_list)
 					if(isnum(A.data)) d += A.data
 
-				M.make_dizzy(dizzy_adj.)
+				M.dizziness += dizzy_adj.
 				if(d >= slur_start && d < pass_out)
 					if (!M:slurring) M:slurring = 1
 					M:slurring += slurr_adj
 				if(d >= confused_start && prob(33))
 					if (!M:confused) M:confused = 1
 					M.confused = max(M:confused+confused_adj,0)
-					M.dizziness = min(M.dizziness,200)
 				if(d >= blur_start)
 					M.eye_blurry = max(M.eye_blurry, 10)
 					M:drowsyness  = max(M:drowsyness, 0)
-					M.dizziness = min(M.dizziness,350)
 				if(d >= pass_out)
 					M:paralysis = max(M:paralysis, 20)
 					M:drowsyness  = max(M:drowsyness, 30)
-					M.dizziness = min(M.dizziness,500)
 					if(ishuman(M))
 						var/mob/living/carbon/human/H = M
 						var/datum/organ/internal/liver/L = H.internal_organs["liver"]
@@ -3026,65 +2983,6 @@ datum
 						H.adjustToxLoss(0.1)
 				..()
 				return
-
-
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//magic numbers everywhere
-				if(!istype(M, /mob/living))
-					return
-				if(method == TOUCH)
-					if(ishuman(M) && volume > 5)
-						var/mob/living/carbon/human/H = M
-						var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
-						
-						if(H.head) // check for helmet covering eyes
-							if (H.head.flags & HEADCOVERSEYES)
-								H << "You have your face splashed by [name], but your [H.head] protects your eyes"
-								return
-						if(H.wear_mask) //check for mask covering eyes
-							if (H.wear_mask.flags & MASKCOVERSEYES)
-								H << "You have your face splashed by [name], but your [H.wear_mask] protects your eyes"
-								return
-						
-						var/closedEyes = 0
-						
-						if(H.glasses) //check for glasses protection
-							H << "You have your face splashed by [name], but your eyes are protected by [H.glasses]."
-							return
-						if(H.eye_blind || H.eye_blurry) //check for closed eyes after splash
-							H.eye_blurry = max(H.eye_blurry + 3, 15)
-							H << "You have your face splashed by [name], but your eyes are closed."
-							return
-						
-						if(prob(30)) //check for eyes being closed on reaction
-							if(boozepwr<4)
-								H << "You have your face splashed by [name], but you managed to close your eyes."
-								return
-							else
-								closedEyes += 1 // Good reflexes, but booze is to powerfull
-							
-						switch(boozepwr - closedEyes)
-							if(1)
-								H << "You have your face splashed by [name]."
-								H.eye_blurry += rand(0,2)
-							if(2)
-								H << "\red You have your face splashed by [name]. Your eyes hurts!"
-								H.eye_blurry += rand(2,4)									
-								E.damage += rand(1, 4)
-							if(3)
-								H << "\red You have your face splashed by [name]. Your eyes hurts badly!"
-								H.eye_blurry += rand(4,6)
-								E.damage += rand(2, 5)
-							if(4)
-								H << "\red You have your face splashed by [name]. Your eyes burns!"
-								H.eye_blurry += rand(6,10)
-								H.eye_blind += rand(2,4)
-								E.damage += rand(4, 7)
-							if(5)
-								H << "\red You have your face splashed by [name]. Your can feel your eyes melting!"
-								H.eye_blurry += rand(10,15)
-								H.eye_blind += rand(3,7)
-								E.damage += rand(5, 10)
-
 
 			reaction_obj(var/obj/O, var/volume)
 				if(istype(O,/obj/item/weapon/paper))

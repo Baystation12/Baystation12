@@ -234,7 +234,9 @@ proc/move_mining_shuttle()
 		digspeed = 30
 		origin_tech = "materials=2;powerstorage=3;engineering=2"
 		desc = "Yours is the drill that will pierce through the rock walls."
+		drill_verb = "drilling"
 */
+
 	jackhammer
 		name = "sonic jackhammer"
 		icon_state = "jackhammer"
@@ -243,6 +245,7 @@ proc/move_mining_shuttle()
 		hardness = 4
 		origin_tech = "materials=3;powerstorage=2;engineering=2"
 		desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
+		drill_verb = "hammering"
 
 	gold
 		name = "golden pickaxe"
@@ -262,6 +265,7 @@ proc/move_mining_shuttle()
 		hardness = 5
 		origin_tech = "materials=4;plasmatech=3;engineering=3"
 		desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
+		drill_verb = "cutting"
 
 	diamond
 		name = "diamond pickaxe"
@@ -281,6 +285,7 @@ proc/move_mining_shuttle()
 		origin_tech = "materials=6;powerstorage=4;engineering=5"
 		desc = "Yours is the drill that will pierce the heavens!"
 		drill_sound = 'tauceti/sounds/items/drill.ogg'
+		drill_verb = "drilling"
 
 	borgdrill
 		name = "cyborg mining drill"
@@ -289,6 +294,7 @@ proc/move_mining_shuttle()
 		hardness = 5
 		digspeed = 25
 		desc = ""
+		drill_verb = "drilling"
 
 /*****************************Shovel********************************/
 

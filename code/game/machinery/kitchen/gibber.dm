@@ -204,6 +204,8 @@
 			src.occupant.attack_log += "\[[time_stamp()]\] Was gibbed by <b>[user]/[user.ckey]</b>"
 			user.attack_log += "\[[time_stamp()]\] Gibbed <b>[src.occupant]/[src.occupant.ckey]</b>"
 			log_attack("\[[time_stamp()]\] <b>[user]/[user.ckey]</b> gibbed <b>[src.occupant]/[src.occupant.ckey]</b>")
+			msg_admin_attack("\[[time_stamp()]\] <b>[key_name(user)]</b> gibbed <b>[key_name(src.occupant)]</b>")
+
 			//DOG PART
 			if(ishuman(src.occupant))
 				var/mob/living/carbon/human/H = src.occupant
@@ -211,7 +213,6 @@
 					var/mob/living/simple_animal/dog/D = H.dog_owner
 					D.owner_in_danger(user, src.occupant)
 			//DOG PART END
-
 
 		src.occupant.death(1)
 		src.occupant.ghostize()

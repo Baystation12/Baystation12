@@ -171,11 +171,11 @@ We can't just insert in HTML into the nanoUI so we need the raw data to play wit
 	var/heads[0]
 	var/sec[0]
 	var/eng[0]
-	var/med[0] 
+	var/med[0]
 	var/sci[0]
-	var/civ[0]  
-	var/bot[0]  
-	var/misc[0]  
+	var/civ[0]
+	var/bot[0]
+	var/misc[0]
 	for(var/datum/data/record/t in data_core.general)
 		var/name = sanitize(t.fields["name"])
 		var/rank = sanitize(t.fields["rank"])
@@ -195,7 +195,7 @@ We can't just insert in HTML into the nanoUI so we need the raw data to play wit
 			department = 1
 			if(depthead && sec.len != 1)
 				sec.Swap(1,sec.len)
-			
+
 		if(real_rank in engineering_positions)
 			eng[++eng.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
@@ -256,49 +256,6 @@ We can't just insert in HTML into the nanoUI so we need the raw data to play wit
 	var/master = null
 
 	var/list/container = list(  )
-
-
-/obj/structure/cable
-	level = 1
-	anchored =1
-	var/datum/powernet/powernet
-	name = "power cable"
-	desc = "A flexible superconducting cable for heavy-duty power transfer"
-	icon = 'icons/obj/power_cond_red.dmi'
-	icon_state = "0-1"
-	var/d1 = 0
-	var/d2 = 1
-	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
-	var/cable_color = "red"
-	var/obj/structure/powerswitch/power_switch
-
-/obj/structure/cable/yellow
-	cable_color = "yellow"
-	icon = 'icons/obj/power_cond_yellow.dmi'
-
-/obj/structure/cable/green
-	cable_color = "green"
-	icon = 'icons/obj/power_cond_green.dmi'
-
-/obj/structure/cable/blue
-	cable_color = "blue"
-	icon = 'icons/obj/power_cond_blue.dmi'
-
-/obj/structure/cable/pink
-	cable_color = "pink"
-	icon = 'icons/obj/power_cond_pink.dmi'
-
-/obj/structure/cable/orange
-	cable_color = "orange"
-	icon = 'icons/obj/power_cond_orange.dmi'
-
-/obj/structure/cable/cyan
-	cable_color = "cyan"
-	icon = 'icons/obj/power_cond_cyan.dmi'
-
-/obj/structure/cable/white
-	cable_color = "white"
-	icon = 'icons/obj/power_cond_white.dmi'
 
 /obj/effect/projection
 	name = "Projection"

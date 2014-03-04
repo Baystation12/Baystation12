@@ -9,6 +9,9 @@
 		..()
 		name = "floor"
 
+/turf/simulated/floor/airless/ceiling
+	icon_state = "rockvault"
+
 /turf/simulated/floor/light
 	name = "Light floor"
 	luminosity = 5

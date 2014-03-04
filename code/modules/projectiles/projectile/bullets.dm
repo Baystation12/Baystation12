@@ -22,6 +22,12 @@
 	name = "pellet"
 	damage = 15
 
+/obj/item/projectile/bullet/weakbullet/beanbag		//because beanbags are not bullets
+	name = "beanbag"
+
+/obj/item/projectile/bullet/weakbullet/rubber
+	name = "rubber bullet"
+
 /obj/item/projectile/bullet/midbullet
 	damage = 20
 	stun = 5
