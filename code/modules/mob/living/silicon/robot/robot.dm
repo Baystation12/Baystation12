@@ -180,7 +180,7 @@
 		if("Science")
 			tc_borg = 1
 			module = new /obj/item/weapon/robot_module/science(src)
-			channels = list("Science" = 1)
+			module.channels = list("Science" = 1)
 			if(camera && "Robots" in camera.network)
 				camera.network.Add("Science")
 			module_sprites["Toxin"] = "toxbot"
