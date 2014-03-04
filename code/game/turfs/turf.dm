@@ -195,6 +195,8 @@
 	if(L)
 		del L
 
+var/turf_light_data/old_lights = new
+
 //Creates a new turf
 /turf/proc/ChangeTurf(var/turf/N)
 	if (!N)
@@ -214,7 +216,20 @@
 					return W
 ///// Z-Level Stuff
 
-	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
+	//world << "Replacing [src.type] with [N]"
+
+	var/old_opacity = opacity
+
+	old_lights.copy_from(src)
+
+	if(connections) connections.erase_all()
+
+	if(istype(src,/turf/simulated))
+		//Yeah, we're just going to rebuild the whole thing.
+		//Despite this being called a bunch during explosions,
+		//the zone will only really do heavy lifting once.
+		var/turf/simulated/S = src
+		if(S.zone) S.zone.rebuild()
 
 	if(ispath(N, /turf/simulated/floor))
 		//if the old turf had a zone, connect the new turf to it as well - Cael
@@ -227,10 +242,12 @@
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 		//W.Assimilate_Air()
 
-		W.lighting_lumcount += old_lumcount
-		if(old_lumcount != W.lighting_lumcount)
-			W.lighting_changed = 1
-			lighting_controller.changed_turfs += W
+		old_lights.copy_to(W)
+		W.ResetAllLights()
+
+		if(old_opacity)
+			W.opacity = 1
+			W.SetOpacity(0)
 
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
@@ -248,10 +265,9 @@
 		//		zone.SetStatus(ZONE_ACTIVE)
 
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
-		W.lighting_lumcount += old_lumcount
-		if(old_lumcount != W.lighting_lumcount)
-			W.lighting_changed = 1
-			lighting_controller.changed_turfs += W
+
+		old_lights.copy_to(W)
+		W.ResetAllLights()
 
 		if(air_master)
 			air_master.mark_for_update(src)

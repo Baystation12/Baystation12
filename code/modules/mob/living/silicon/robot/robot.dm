@@ -1180,7 +1180,7 @@
 							if(cleaned_human.shoes)
 								cleaned_human.shoes.clean_blood()
 								cleaned_human.update_inv_shoes(0)
-							cleaned_human.clean_blood()
+							cleaned_human.clean_blood(1)
 							cleaned_human << "\red [src] cleans your face!"
 		return
 

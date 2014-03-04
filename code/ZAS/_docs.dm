@@ -19,9 +19,16 @@ air_master.mark_for_update(turf)
 	When stuff happens, call this. It works on everything. You basically don't need to worry about any other
 	functions besides CanPass().
 
+Notes for people who used ZAS before:
+	There is no connected_zones anymore.
+	To get the zones that are connected to a zone, use this loop:
+	for(var/connection_edge/zone/edge in zone.edges)
+		var/zone/connected_zone = edge.get_connected_zone(zone)
+
 */
 
 //#define ZASDBG
+//#define ZLEVELS
 
 #define AIR_BLOCKED 1
 #define ZONE_BLOCKED 2

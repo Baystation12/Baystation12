@@ -1,3 +1,44 @@
+/*
+
+Overview:
+	Each zone is a self-contained area where gas values would be the same if tile-based equalization were run indefinitely.
+	If you're unfamiliar with ZAS, FEA's air groups would have similar functionality if they didn't break in a stiff breeze.
+
+Class Vars:
+	name - A name of the format "Zone [#]", used for debugging.
+	invalid - True if the zone has been erased and is no longer eligible for processing.
+	needs_update - True if the zone has been added to the update list.
+	edges - A list of edges that connect to this zone.
+	air - The gas mixture that any turfs in this zone will return. Values are per-tile with a group multiplier.
+
+Class Procs:
+	add(turf/simulated/T)
+		Adds a turf to the contents, sets its zone and merges its air.
+
+	remove(turf/simulated/T)
+		Removes a turf, sets its zone to null and erases any gas graphics.
+		Invalidates the zone if it has no more tiles.
+
+	c_merge(zone/into)
+		Invalidates this zone and adds all its former contents to into.
+
+	c_invalidate()
+		Marks this zone as invalid and removes it from processing.
+
+	rebuild()
+		Invalidates the zone and marks all its former tiles for updates.
+
+	add_tile_air(turf/simulated/T)
+		Adds the air contained in T.air to the zone's air supply. Called when adding a turf.
+
+	tick()
+		Called only when the gas content is changed. Archives values and changes gas graphics.
+
+	dbg_data(mob/M)
+		Sends M a printout of important figures for the zone.
+
+*/
+
 
 /zone/var/name
 /zone/var/invalid = 0
@@ -33,9 +74,11 @@
 	ASSERT(!invalid)
 	ASSERT(istype(T))
 	ASSERT(T.zone == src)
+	soft_assert(T in contents, "Lists are weird broseph")
 #endif
 	contents.Remove(T)
 	T.zone = null
+	T.set_graphic(0)
 	if(contents.len)
 		air.group_multiplier = contents.len
 	else
@@ -64,6 +107,7 @@
 	#endif
 
 /zone/proc/rebuild()
+	if(invalid) return //Short circuit for explosions where rebuild is called many times over.
 	c_invalidate()
 	for(var/turf/simulated/T in contents)
 		//T.dbg(invalid_zone)
@@ -84,12 +128,6 @@
 		for(var/turf/simulated/T in contents)
 			T.set_graphic(air.graphic)
 
-/zone/proc/remove_connection(connection/c)
-	return
-
-/zone/proc/add_connection(connection/c)
-	return
-
 /zone/proc/dbg_data(mob/M)
 	M << name
 	M << "O2: [air.oxygen] N2: [air.nitrogen] CO2: [air.carbon_dioxide] P: [air.toxins]"
@@ -107,6 +145,7 @@
 		else
 			space_edges++
 			space_coefficient += E.coefficient
+			M << "[E:air:return_pressure()]kPa"
 
 	M << "Zone Edges: [zone_edges]"
 	M << "Space Edges: [space_edges] ([space_coefficient] connections)"

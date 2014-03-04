@@ -54,7 +54,7 @@
 
 				C.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been handcuffed (attempt) by [user.name] ([user.ckey])</font>")
 				user.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to handcuff [C.name] ([C.ckey])</font>")
-				log_attack("[user.name] ([user.ckey]) Attempted to handcuff [C.name] ([C.ckey])")
+				msg_admin_attack("[key_name(user)] attempted to handcuff [key_name(C)]")
 
 				var/obj/effect/equip_e/human/O = new /obj/effect/equip_e/human(  )
 				O.source = user
@@ -91,6 +91,31 @@
 					O.process()
 			return
 	return
+
+var/last_chew = 0
+/mob/living/carbon/human/RestrainedClickOn(var/atom/A)
+	if (A != src) return ..()
+	if (last_chew + 26 > world.time) return
+
+	var/mob/living/carbon/human/H = A
+	if (!H.handcuffed) return
+	if (H.a_intent != "hurt") return
+	if (H.zone_sel.selecting != "mouth") return
+	if (H.wear_mask) return
+	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket)) return
+
+	var/datum/organ/external/O = H.organs_by_name[H.hand?"l_hand":"r_hand"]
+	if (!O) return
+
+	var/s = "\red [H.name] chews on \his [O.display_name]!"
+	H.visible_message(s, "\red You chew on your [O.display_name]!")
+	H.attack_log += text("\[[time_stamp()]\] <font color='red'>[s] ([H.ckey])</font>")
+	log_attack("[s] ([H.ckey])")
+
+	if(O.take_damage(3,0,1,"teeth marks"))
+		H:UpdateDamageIcon()
+
+	last_chew = world.time
 
 /obj/item/weapon/handcuffs/cable
 	name = "cable restraints"

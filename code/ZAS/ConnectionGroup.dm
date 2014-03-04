@@ -1,20 +1,78 @@
+/*
+
+Overview:
+	These are what handle gas transfers between zones and into space.
+	They are found in a zone's edges list and in air_master.edges.
+	Each edge updates every air tick due to their role in gas transfer.
+	They come in two flavors, /connection_edge/zone and /connection_edge/unsimulated.
+	As the type names might suggest, they handle inter-zone and spacelike connections respectively.
+
+Class Vars:
+
+	A - This always holds a zone. In unsimulated edges, it holds the only zone.
+
+	connecting_turfs - This holds a list of connected turfs, mainly for the sake of airflow.
+
+	coefficent - This is a marker for how many connections are on this edge. Used to determine the ratio of flow.
+
+	connection_edge/zone
+
+		B - This holds the second zone with which the first zone equalizes.
+
+		direct - This counts the number of direct (i.e. with no doors) connections on this edge.
+		         Any value of this is sufficient to make the zones mergeable.
+
+	connection_edge/unsimulated
+
+		B - This holds an unsimulated turf which has the gas values this edge is mimicing.
+
+		air - Retrieved from B on creation and used as an argument for the legacy ShareSpace() proc.
+
+Class Procs:
+
+	add_connection(connection/c)
+		Adds a connection to this edge. Usually increments the coefficient and adds a turf to connecting_turfs.
+
+	remove_connection(connection/c)
+		Removes a connection from this edge. This works even if c is not in the edge, so be careful.
+		If the coefficient reaches zero as a result, the edge is erased.
+
+	contains_zone(zone/Z)
+		Returns true if either A or B is equal to Z. Unsimulated connections return true only on A.
+
+	erase()
+		Removes this connection from processing and zone edge lists.
+
+	tick()
+		Called every air tick on edges in the processing list. Equalizes gas.
+
+	flow(list/movable, differential, repelled)
+		Airflow proc causing all objects in movable to be checked against a pressure differential.
+		If repelled is true, the objects move away from any turf in connecting_turfs, otherwise they approach.
+		A check against vsc.lightest_airflow_pressure should generally be performed before calling this.
+
+	get_connected_zone(zone/from)
+		Helper proc that allows getting the other zone of an edge given one of them.
+		Only on /connection_edge/zone, otherwise use A.
+
+*/
+
 
 /connection_edge/var/zone/A
 
 /connection_edge/var/list/connecting_turfs = list()
 
 /connection_edge/var/coefficient = 0
-/connection_edge/var/id
 
 /connection_edge/New()
 	CRASH("Cannot make connection edge without specifications.")
 
 /connection_edge/proc/add_connection(connection/c)
 	coefficient++
-	//world << "Connection added. Coefficient: [coefficient]"
+	//world << "Connection added: [type] Coefficient: [coefficient]"
 
 /connection_edge/proc/remove_connection(connection/c)
-	//world << "Connection removed. Coefficient: [coefficient-1]"
+	//world << "Connection removed: [type] Coefficient: [coefficient-1]"
 	coefficient--
 	if(coefficient <= 0)
 		erase()
@@ -23,7 +81,7 @@
 
 /connection_edge/proc/erase()
 	air_master.remove_edge(src)
-	//world << "Erased."
+	//world << "[type] Erased."
 
 /connection_edge/proc/tick()
 
@@ -85,6 +143,9 @@
 	. = ..()
 
 /connection_edge/zone/tick()
+	if(A.invalid || B.invalid)
+		erase()
+		return
 	//world << "[id]: Tick [air_master.current_cycle]: \..."
 	if(direct)
 		if(air_master.equivalent_pressure(A, B))
@@ -115,6 +176,10 @@
 	flow(attracted, abs(differential), 0)
 	flow(repelled, abs(differential), 1)
 
+//Helper proc to get connections for a zone.
+/connection_edge/zone/proc/get_connected_zone(zone/from)
+	if(A == from) return B
+	else return A
 
 /connection_edge/unsimulated/var/turf/B
 /connection_edge/unsimulated/var/datum/gas_mixture/air
@@ -125,23 +190,32 @@
 	A.edges.Add(src)
 	air = B.return_air()
 	//id = 52*A.id
-	//world << "New edge from [A.id] to [B]."
+	//world << "New edge from [A] to [B]."
 
 /connection_edge/unsimulated/add_connection(connection/c)
 	. = ..()
 	connecting_turfs.Add(c.B)
+	air.group_multiplier = coefficient
 
 /connection_edge/unsimulated/remove_connection(connection/c)
 	connecting_turfs.Remove(c.B)
+	air.group_multiplier = coefficient
+	. = ..()
+
+/connection_edge/unsimulated/erase()
+	A.edges.Remove(src)
 	. = ..()
 
 /connection_edge/unsimulated/contains_zone(zone/Z)
 	return A == Z
 
 /connection_edge/unsimulated/tick()
+	if(A.invalid)
+		erase()
+		return
 	//world << "[id]: Tick [air_master.current_cycle]: To [B]!"
 	//A.air.mimic(B, coefficient)
-	ShareSpace(A.air,air)
+	ShareSpace(A.air,air,dbg_out)
 	air_master.mark_zone_update(A)
 
 	var/differential = A.air.return_pressure() - air.return_pressure()
@@ -259,6 +333,9 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 		share_size = max(1, max(size + 3, 1) + avg_unsim.group_multiplier)
 		tileslen = avg_unsim.group_multiplier
 
+		if(dbg_output)
+			world << "O2: [unsim_oxygen] N2: [unsim_nitrogen] Size: [share_size] Tiles: [tileslen]"
+
 	else if(istype(unsimulated_tiles, /list))
 		if(!unsimulated_tiles.len)
 			return 0
@@ -302,10 +379,10 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 
 		full_heat_capacity = A.heat_capacity() * size
 
-		oxy_avg = (full_oxy + unsim_oxygen) / (size + share_size)
-		nit_avg = (full_nitro + unsim_nitrogen) / (size + share_size)
-		co2_avg = (full_co2 + unsim_co2) / (size + share_size)
-		plasma_avg = (full_plasma + unsim_plasma) / (size + share_size)
+		oxy_avg = (full_oxy + unsim_oxygen*share_size) / (size + share_size)
+		nit_avg = (full_nitro + unsim_nitrogen*share_size) / (size + share_size)
+		co2_avg = (full_co2 + unsim_co2*share_size) / (size + share_size)
+		plasma_avg = (full_plasma + unsim_plasma*share_size) / (size + share_size)
 
 		temp_avg = 0
 
@@ -314,6 +391,10 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 
 	if(sharing_lookup_table.len >= tileslen) //6 or more interconnecting tiles will max at 42% of air moved per tick.
 		ratio = sharing_lookup_table[tileslen]
+
+	if(dbg_output)
+		world << "Ratio: [ratio]"
+		world << "Avg O2: [oxy_avg] N2: [nit_avg]"
 
 	A.oxygen = max(0, (A.oxygen - oxy_avg) * (1 - ratio) + oxy_avg )
 	A.nitrogen = max(0, (A.nitrogen - nit_avg) * (1 - ratio) + nit_avg )
@@ -327,6 +408,8 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 		G.moles = (G.moles - G_avg) * (1 - ratio) + G_avg
 
 	A.update_values()
+
+	if(dbg_output) world << "Result: [abs(old_pressure - A.return_pressure())] kPa"
 
 	return abs(old_pressure - A.return_pressure())
 
