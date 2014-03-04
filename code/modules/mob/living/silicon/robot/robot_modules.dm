@@ -165,7 +165,8 @@
 		F.times_used--
 	var/obj/item/weapon/gun/energy/taser/cyborg/T = locate() in src.modules
 	if(T.power_supply.charge < T.power_supply.maxcharge)
-		T.power_supply.give(T.charge_cost)
+		var/obj/item/ammo_casing/energy/S = T.ammo_type[T.select]
+		T.power_supply.give(S.e_cost)
 		T.update_icon()
 	else
 		T.charge_tick = 0
