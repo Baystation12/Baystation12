@@ -139,7 +139,7 @@
 	var/main_irc = ""
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
-
+	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -473,6 +473,9 @@
 							config.python_path = "/usr/bin/env python2"
 						else //probably windows, if not this should work anyway
 							config.python_path = "python"
+
+				if("use_lib_nudge")
+					config.use_lib_nudge = 1
 
 				if("allow_cult_ghostwriter")
 					config.cult_ghostwriter = 1
