@@ -242,6 +242,10 @@ USEALIENWHITELIST
 ## Default is "python" on Windows, "/usr/bin/env python2" on UNIX.
 #PYTHON_PATH
 
+## Uncomment to use the C library nudge instead of the python script.
+## This helps security and stability on Linux, but you need to compile the library first.
+#USE_LIB_NUDGE
+
 ## Uncommen to allow ghosts to write in blood during Cult rounds.
 ALLOW_CULT_GHOSTWRITER
 
