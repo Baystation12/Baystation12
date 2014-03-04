@@ -216,13 +216,16 @@
 	set desc = "Take a blood sample from a suitable donor."
 
 	var/list/choices = list()
-	for(var/mob/living/carbon/C in view(1,src))
-		if(C.real_name != real_name)
-			choices += C
+	for(var/mob/living/carbon/human/H in oview(1,src))
+		choices += H
 
-	var/mob/living/M = input(src,"Who do you wish to take a sample from?") in null|choices
+	var/mob/living/carbon/human/M = input(src,"Who do you wish to take a sample from?") in null|choices
 
 	if(!M || !src) return
+
+	if(M.species.flags & NO_BLOOD)
+		src << "\red That donor has no blood to take."
+		return
 
 	if(donors.Find(M.real_name))
 		src << "\red That donor offers you nothing new."
