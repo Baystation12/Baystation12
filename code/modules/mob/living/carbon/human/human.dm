@@ -36,6 +36,10 @@
 	species = new /datum/species/diona(src)
 	..()
 
+/mob/living/carbon/human/machine/New()
+	species = new /datum/species/machine(src)
+	h_style = "blue IPC screen"
+
 /mob/living/carbon/human/New()
 
 	if(!species)

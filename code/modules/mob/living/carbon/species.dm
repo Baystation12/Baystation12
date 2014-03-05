@@ -233,7 +233,7 @@
 	heat_level_2 = 3000
 	heat_level_3 = 4000
 
-	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+	flags = NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
 
 	blood_color = "#FFFFFF"
 	flesh_color = "#AAAAAA"
