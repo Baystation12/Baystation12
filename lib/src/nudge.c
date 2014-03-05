@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -50,7 +49,7 @@ DLL_EXPORT const char * nudge(int n, char *v[])
 
     size_t out_c = san_c(v[0]) + san_c(v[2]) + san_c(v[3]);
 
-    char * san_out = malloc(out_c + 56);
+    char * san_out = malloc(out_c + 57);
 
     char * san_i = san_out;
     strcpy(san_i, "(dp1\nS'ip'\np2\nS'");
