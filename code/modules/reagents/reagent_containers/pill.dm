@@ -24,7 +24,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
 				spawn(5)
-					reagents.trans_to(M, reagents.total_volume)
+					reagents.trans_to_ingest(M, reagents.total_volume)
 					del(src)
 			else
 				del(src)
@@ -48,7 +48,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
 				spawn(5)
-					reagents.trans_to(M, reagents.total_volume)
+					reagents.trans_to_ingest(M, reagents.total_volume)
 					del(src)
 			else
 				del(src)

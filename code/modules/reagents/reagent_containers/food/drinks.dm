@@ -31,7 +31,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
 				spawn(5)
-					reagents.trans_to(M, gulp_size)
+					reagents.trans_to_ingest(M, gulp_size)
 
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
@@ -50,7 +50,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
 				spawn(5)
-					reagents.trans_to(M, gulp_size)
+					reagents.trans_to_ingest(M, gulp_size)
 
 			if(isrobot(user)) //Cyborg modules that include drinks automatically refill themselves, but drain the borg's cell
 				var/mob/living/silicon/robot/bro = user

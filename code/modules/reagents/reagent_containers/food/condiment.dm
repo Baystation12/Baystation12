@@ -31,7 +31,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
 				spawn(5)
-					reagents.trans_to(M, 10)
+					reagents.trans_to_ingest(M, 10)
 
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
@@ -50,7 +50,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
 				spawn(5)
-					reagents.trans_to(M, 10)
+					reagents.trans_to_ingest(M, 10)
 
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
