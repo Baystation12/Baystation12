@@ -5,7 +5,7 @@
 	w_class = 100.0
 	item_state = "electronic"
 	flags = FPRINT|TABLEPASS | CONDUCT
-
+	var/channels = list()
 	var/list/modules = list()
 	var/obj/item/emag = null
 	var/obj/item/borg/upgrade/jetpack = null
