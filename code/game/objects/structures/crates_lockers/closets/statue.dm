@@ -143,3 +143,10 @@
 	dump_contents()
 	visible_message("\red [src] shatters!. ")
 	del(src)
+
+
+obj/structure/closet/statue/angel
+	icon_state = "angelseen"
+
+obj/structure/closet/statue/corgi
+	icon_state = "corgi"
