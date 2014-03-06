@@ -3161,7 +3161,7 @@
 	name = "flat dough"
 	desc = "A flattened dough."
 	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "flat dough"
+	icon_state = "flatdough"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/doughslice
 	slices_num = 3
 	New()
