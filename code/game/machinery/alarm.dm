@@ -183,9 +183,6 @@
 			target_temperature = T0C + MIN_TEMPERATURE
 
 		var/datum/gas_mixture/gas
-		if(!gas)
-			allow_regulate = 0
-			return
 		gas = location.remove_air(0.25*environment.total_moles)
 		if(gas)
 			var/heat_capacity = gas.heat_capacity()
@@ -206,6 +203,9 @@
 				regulating_temperature = 0
 				visible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
 				"You hear a click as a faint electronic humming stops.")
+		else
+			allow_regulate = 0
+			return
 
 	var/old_level = danger_level
 	danger_level = overall_danger_level()
