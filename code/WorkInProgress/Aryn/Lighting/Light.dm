@@ -28,6 +28,7 @@ light/var/list/lit_turfs
 light/var/atom/atom
 
 light/New(atom/atom)
+	ASSERT(atom)
 	src.atom = atom
 
 light/proc/Reset()
@@ -48,8 +49,7 @@ light/proc/Off()
 	lit_turfs = list()
 
 light/proc/CalculateBrightness(turf/T)
-	if (!atom)
-		return 0
+	ASSERT(T)
 	var/square = get_square_dist(atom.x,atom.y,atom.z,T.x,T.y,T.z)
 	if(square > (radius+2)*(radius+2)) return 0
 		//+2 offset gives an ambient light effect.
