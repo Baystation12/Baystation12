@@ -91,6 +91,11 @@ atom/movable/New()
 			opacity = 0
 			SetOpacity(1)
 
+atom/movable/Del()
+	if(light) light.Off()
+	if(opacity) SetOpacity(0)
+	. = ..()
+
 atom/movable/Move()
 	var/o = opacity
 	if(o) SetOpacity(0)
@@ -171,10 +176,9 @@ turf/proc/ResetAllLights()
 
 /turf/space/ResetAllLights()
 	var/atom/movable/lighting_overlay/overlay = locate() in src
-	if (overlay)
-		overlay.loc = null
-		light_overlay = null
-		is_outside = 1
+	if(overlay) overlay.loc = null
+	light_overlay = null
+	is_outside = 1
 	. = ..()
 
 turf/proc/ResetValue()

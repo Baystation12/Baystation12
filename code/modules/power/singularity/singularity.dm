@@ -2,7 +2,8 @@
 
 var/global/list/uneatable = list(
 	/turf/space,
-	/obj/effect/overlay
+	/obj/effect/overlay,
+	/atom/movable/lighting_overlay //Because apparently this needs to be outright stated and even /atom/movable gives energy regardless.
 	)
 
 /obj/machinery/singularity/
