@@ -163,9 +163,11 @@ datum
 
 				src.trans_to(B, amount)
 
-				spawn(100)
-					BR.trans_to(target, BR.total_volume)
-					del(B)
+				spawn(95)
+					BR.reaction(target, INGEST)
+					spawn(5)
+						BR.trans_to(target, BR.total_volume)
+						del(B)
 
 				return amount
 

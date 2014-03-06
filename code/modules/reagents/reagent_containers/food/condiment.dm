@@ -29,9 +29,7 @@
 		if(M == user)
 			M << "\blue You swallow some of contents of the [src]."
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					reagents.trans_to_ingest(M, 10)
+				reagents.trans_to_ingest(M, 10)
 
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
@@ -48,9 +46,7 @@
 			msg_admin_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					reagents.trans_to_ingest(M, 10)
+				reagents.trans_to_ingest(M, 10)
 
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1

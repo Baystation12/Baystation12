@@ -78,20 +78,18 @@
 		if(reagents)								//Handle ingestion of the reagent.
 			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					if(reagents.total_volume > bitesize)
-						/*
-						 * I totally cannot understand what this code supposed to do.
-						 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
-						var/temp_bitesize =  max(reagents.total_volume /2, bitesize)
-						reagents.trans_to(M, temp_bitesize)
-						*/
-						reagents.trans_to_ingest(M, bitesize)
-					else
-						reagents.trans_to_ingest(M, reagents.total_volume)
-					bitecount++
-					On_Consume(M)
+				if(reagents.total_volume > bitesize)
+					/*
+					 * I totally cannot understand what this code supposed to do.
+					 * Right now every snack consumes in 2 bites, my popcorn does not work right, so I simplify it. -- rastaf0
+					var/temp_bitesize =  max(reagents.total_volume /2, bitesize)
+					reagents.trans_to(M, temp_bitesize)
+					*/
+					reagents.trans_to_ingest(M, bitesize)
+				else
+					reagents.trans_to_ingest(M, reagents.total_volume)
+				bitecount++
+				On_Consume(M)
 			return 1
 
 	return 0
