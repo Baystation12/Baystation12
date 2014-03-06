@@ -31,7 +31,7 @@
 						user << "No exposed cable here to attach to."
 						return
 					else
-						attached.attached = src
+//						attached.attached = src
 						anchored = 1
 						mode = 1
 						user << "You attach the device to the cable."
@@ -48,7 +48,7 @@
 				anchored = 0
 				mode = 0
 				user << "You detach	the device from the cable."
-				attached.attached = null
+//				attached.attached = null
 				attached = null
 				for(var/mob/M in viewers(user))
 					if(M == user) continue
@@ -63,7 +63,7 @@
 	Destroy()
 		SetLuminosity(0)
 		processing_objects.Remove(src)
-		attached.attached = null
+//		attached.attached = null
 		attached = null
 		..()
 
