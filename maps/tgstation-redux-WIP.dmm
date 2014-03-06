@@ -3462,7 +3462,7 @@
 "boD" = (/obj/machinery/turret{dir = 4},/turf/simulated/floor/bluegrid,/area/turret_protected/ai_upload)
 "boE" = (/turf/simulated/floor{tag = "icon-vault (WEST)"; icon_state = "vault"; dir = 8},/area/turret_protected/ai_upload)
 "boF" = (/obj/machinery/turret{dir = 8},/turf/simulated/floor/bluegrid,/area/turret_protected/ai_upload)
-"boG" = (/obj/structure/displaycase,/obj/machinery/light/small{dir = 1},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/simulated/floor/carpet,/area/crew_quarters/captain)
+"boG" = (/obj/machinery/light/small{dir = 1},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/structure/displaycase/captains_laser,/turf/simulated/floor/carpet,/area/crew_quarters/captain)
 "boH" = (/obj/machinery/light_switch{pixel_y = 28},/obj/machinery/atmospherics/unary/vent_pump{dir = 4; on = 1},/turf/simulated/floor/carpet,/area/crew_quarters/captain)
 "boI" = (/obj/machinery/door/airlock{name = "Private Restroom"; req_access_txt = "0"},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/turf/simulated/floor{icon_state = "freezerfloor"},/area/crew_quarters/captain)
 "boJ" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/obj/structure/mirror{pixel_x = 28},/obj/machinery/light{dir = 1},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/turf/simulated/floor{icon_state = "freezerfloor"},/area/crew_quarters/captain)
