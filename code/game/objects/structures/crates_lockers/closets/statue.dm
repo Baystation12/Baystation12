@@ -151,6 +151,7 @@
 	icon = 'icons/obj/statue.dmi'
 	icon_state = "human_male"
 	density = 1
+	anchored = 1
 
 obj/structure/statue/angel
 	icon_state = "angelseen"

@@ -103,3 +103,6 @@
 	reagents.add_reagent("hyperzine", 5)
 	update_icon()
 	return
+
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/hyperzine/attack(mob/M as mob, mob/user as mob)
+	..()
