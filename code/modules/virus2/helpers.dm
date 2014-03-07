@@ -60,6 +60,11 @@ proc/airborne_can_reach(turf/source, turf/target, var/radius=5)
 	// if one of the antibodies in the mob's body matches one of the disease's antigens, don't infect
 	if(M.antibodies & disease.antigen != 0)
 		return 0
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		if (H.species.flags & IS_SYNTHETIC)
+			return 0
+//	log_debug("Infecting [M]")
 
 	if(prob(disease.infectionchance) || forced)
 		// certain clothes can prevent an infection
