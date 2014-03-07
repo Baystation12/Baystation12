@@ -49,7 +49,7 @@ light/proc/Off()
 
 light/proc/CalculateBrightness(turf/T)
 	if (!atom)
-		retun 0
+		return 0
 	var/square = get_square_dist(atom.x,atom.y,atom.z,T.x,T.y,T.z)
 	if(square > (radius+2)*(radius+2)) return 0
 		//+2 offset gives an ambient light effect.
