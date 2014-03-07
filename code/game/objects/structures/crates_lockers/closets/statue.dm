@@ -145,8 +145,15 @@
 	del(src)
 
 
-obj/structure/closet/statue/angel
+/obj/structure/statue
+	name = "statue"
+	desc = "An incredibly lifelike marble carving"
+	icon = 'icons/obj/statue.dmi'
+	icon_state = "human_male"
+	density = 1
+
+obj/structure/statue/angel
 	icon_state = "angelseen"
 
-obj/structure/closet/statue/corgi
+obj/structure/statue/corgi
 	icon_state = "corgi"
