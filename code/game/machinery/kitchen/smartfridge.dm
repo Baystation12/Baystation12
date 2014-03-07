@@ -50,7 +50,7 @@
 /obj/machinery/smartfridge/secure/medbay
 	name = "\improper Refrigerated Medicine Storage"
 	desc = "A refrigerated storage unit for storing medicine and chemicals."
-	icon_state = "smartfridge_chem"
+	icon_state = "smartfridge"
 	icon_on = "smartfridge_chem"
 	req_access_txt = "5;33"
 
@@ -63,6 +63,20 @@
 		return 1
 	return 0
 
+/obj/machinery/smartfridge/secure/virology
+	name = "\improper Refrigerated Virus Storage"
+	desc = "A refrigerated storage unit for storing viral material."
+	req_access_txt = "39"
+	icon_state = "smartfridge_virology"
+	icon_on = "smartfridge_virology"
+	icon_off = "smartfridge_virology-off"
+
+/obj/machinery/smartfridge/secure/virology/accept_check(var/obj/item/O as obj)
+	if(istype(O,/obj/item/weapon/reagent_containers/glass/beaker/vial/))
+		return 1
+	if(istype(O,/obj/item/weapon/virusdish/))
+		return 1
+	return 0
 
 /obj/machinery/smartfridge/chemistry
 	name = "\improper Smart Chemical Storage"
