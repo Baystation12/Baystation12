@@ -41,7 +41,7 @@
 
 	fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 		..()
-		var/damage = Clamp(0.01 * exposed_temperature / fire_resist, 0, 4 - fire_resist)
+		var/damage = Clamp(0.03 * exposed_temperature / fire_resist, 0, 7 - fire_resist)
 		if(damage)
 			health -= damage
 			update_icon()

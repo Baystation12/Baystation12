@@ -28,9 +28,6 @@
 		..()
 		return
 
-	fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-		return
-
 	update_icon()
 		if(health <= 0)
 			playsound(get_turf(src), 'sound/effects/splat.ogg', 50, 1)
