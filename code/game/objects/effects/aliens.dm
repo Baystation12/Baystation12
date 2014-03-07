@@ -276,6 +276,13 @@ Alien plants should do something if theres a lot of poison
 				qdel(src)
 	return
 
+
+/obj/effect/alien/weeds/fire_act(null, temperature, volume)
+	if(temperature > T0C+200)
+		health -= 1 * temperature
+		healthcheck()
+
+
 /obj/effect/alien/weeds/attackby(var/obj/item/weapon/W, var/mob/user)
 	if(W.attack_verb.len)
 		visible_message("\red <B>\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]")
