@@ -65,6 +65,15 @@ proc/airborne_can_reach(turf/source, turf/target)
 	// if one of the antibodies in the mob's body matches one of the disease's antigens, don't infect
 	if(M.antibodies & disease.antigen != 0)
 		return
+	if(istype(M,/mob/living/carbon/monkey))
+		var/mob/living/carbon/monkey/chimp = M
+		if (!(chimp.greaterform in disease.affected_species))
+			return
+
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/chump = M
+		if (!(chump.species.name in disease.affected_species))
+			return
 
 //	log_debug("Infecting [M]")
 
@@ -83,13 +92,13 @@ proc/airborne_can_reach(turf/source, turf/target)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 	D.makerandom()
 	D.infectionchance = 1
-	M.virus2["[D.uniqueID]"] = D
+	infect_virus2(M,D,1)
 
 //Infects mob M with random greated disease, if he doesn't have one
 /proc/infect_mob_random_greater(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 	D.makerandom(1)
-	M.virus2["[D.uniqueID]"] = D
+	infect_virus2(M,D,1)
 
 //Fancy prob() function.
 /proc/dprob(var/p)

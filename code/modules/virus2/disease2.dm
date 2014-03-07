@@ -10,6 +10,7 @@
 	var/list/datum/disease2/effectholder/effects = list()
 	var/antigen = 0 // 16 bits describing the antigens, when one bit is set, a cure with that bit can dock here
 	var/max_stage = 4
+	var/list/affected_species = list("Human","Unathi","Skrell","Tajaran")
 
 /datum/disease2/disease/New()
 	uniqueID = rand(0,10000)
@@ -29,6 +30,19 @@
 	antigen |= text2num(pick(ANTIGENS))
 	antigen |= text2num(pick(ANTIGENS))
 	spreadtype = prob(70) ? "Airborne" : "Contact"
+
+	if(all_species.len)
+		affected_species.Cut()
+		var/list/meat = list()
+		for (var/datum/species/S in all_species)
+			if(!(S.flags & IS_SYNTHETIC))
+				meat += S.name
+
+		var/num = rand(1,meat.len)
+		for(var/i=0,i<num,i++)
+			var/picked = pick(meat)
+			meat -= picked
+			affected_species += picked
 
 /datum/disease2/disease/proc/activate(var/mob/living/carbon/mob)
 	if(dead)
@@ -101,6 +115,7 @@
 	disease.stageprob = stageprob
 	disease.antigen   = antigen
 	disease.uniqueID = uniqueID
+	disease.affected_species = affected_species.Copy()
 	for(var/datum/disease2/effectholder/holder in effects)
 		var/datum/disease2/effectholder/newholder = new /datum/disease2/effectholder
 		newholder.effect = new holder.effect.type
@@ -151,6 +166,9 @@ var/global/list/virusDB = list()
 	r += "<BR>Infection rate : [infectionchance * 10]"
 	r += "<BR>Spread form : [spreadtype]"
 	r += "<BR>Progress Speed : [stageprob * 10]"
+	r += "<BR>Affected species:"
+	for(var/S in affected_species)
+		r += "<BR>[S]"
 	for(var/datum/disease2/effectholder/E in effects)
 		r += "<BR>Effect:[E.effect.name]. Strength : [E.multiplier * 8]. Verosity : [E.chance * 15]. Type : [5-E.stage]."
 
