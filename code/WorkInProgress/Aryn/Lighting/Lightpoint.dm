@@ -52,9 +52,14 @@ lightpoint
 	proc/max_value()
 		if(cached_value < 0)
 			var
-				valueA = (NW?(NW.lit_value):0)
-				valueB = (NE?(NE.lit_value):0)
-				valueC = (SW?(SW.lit_value):0)
-				valueD = (SE?(SE.lit_value):0)
+				valueA = value_of(NW)
+				valueB = value_of(NE)
+				valueC = value_of(SW)
+				valueD = value_of(SE)
 			cached_value = max(valueA,valueB,valueC,valueD)
 		return cached_value
+
+	proc/value_of(turf/T)
+		if(!T) return 0
+		if(T.is_outside) return min(lighting_controller.starlight,3)
+		return T.lit_value
