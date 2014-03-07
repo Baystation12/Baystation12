@@ -5903,7 +5903,7 @@
 "cjA" = (/obj/machinery/door/firedoor/border_only{dir = 1; layer = 2.4; name = "Engineering Firelock"},/obj/machinery/door/airlock/engineering{name = "Engineering Hard Storage"; req_access_txt = "11"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/engine/workshop)
 "cjB" = (/obj/structure/disposalpipe/segment{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/atmos)
 "cjC" = (/obj/structure/disposalpipe/segment{dir = 1; icon_state = "pipe-c"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/atmos)
-"cjD" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 8; on = 1},/obj/machinery/smartfridge/extract,/turf/simulated/floor{dir = 2; icon_state = "whitecorner"},/area/toxins/xenobiology)
+"cjD" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 8; on = 1},/obj/machinery/smartfridge/secure/extract,/turf/simulated/floor{dir = 2; icon_state = "whitecorner"},/area/toxins/xenobiology)
 "cjE" = (/obj/machinery/optable{name = "Xenobiology Operating Table"},/obj/machinery/status_display{density = 0; layer = 4; pixel_x = 0; pixel_y = 32},/obj/machinery/light{dir = 1},/turf/simulated/floor{icon_state = "whitehall"; dir = 2},/area/toxins/xenobiology)
 "cjF" = (/obj/machinery/computer/operating{name = "Xenobiology Operating Computer"},/turf/simulated/floor{dir = 8; icon_state = "whitecorner"},/area/toxins/xenobiology)
 "cjG" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating/airless,/area/solar/starboard)
