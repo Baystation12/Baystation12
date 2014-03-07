@@ -2,6 +2,7 @@
 	desc = "A silent, fast, and nigh-invisible miming exosuit. Popular among mimes and mime assassins."
 	name = "\improper Recitence"
 	icon_state = "mime"
+	initial_icon = "mime"
 	step_in = 2
 	dir_in = 1 //Facing North.
 	health = 100
@@ -12,7 +13,7 @@
 	internal_damage_threshold = 25
 	max_equip = 2
 	step_energy_drain = 3
-	color = "#87878715"
+//	color = "#87878715"
 	stepsound = null
 
 /obj/mecha/combat/recitence/loaded/New()
