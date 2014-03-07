@@ -183,7 +183,7 @@
 
 /datum/game_mode/wizard/check_finished()
 
-	if(config.continous_rounds || mixed)
+	if(config.continous_rounds)
 		return ..()
 
 	var/wizards_alive = 0
