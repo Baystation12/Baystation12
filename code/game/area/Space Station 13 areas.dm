@@ -14,6 +14,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 */
 
 
+
 /area
 	var/fire = null
 	var/atmos = 1
@@ -31,6 +32,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/eject = null
 
+	var/debug = 0
+	var/powerupdate = 0
 	var/requires_power = 1
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 

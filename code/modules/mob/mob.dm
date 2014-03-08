@@ -32,6 +32,13 @@
 
 	usr.show_message(t, 1)
 
+/mob/verb/check_area()
+	var/area/a = get_area(src)
+	if(a in active_areas)
+		src << "Yep [a] is in the active_areas list"
+	else
+		src << "Nope, FUCK."
+
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 
 	if(!client)	return
