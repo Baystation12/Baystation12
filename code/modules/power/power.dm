@@ -62,8 +62,6 @@
 		chan = power_channel
 	A.master.use_power(amount, chan)
 	if(!autocalled)
-		if(A.master.debug)
-			world << "Yeah we're setting this to 2 source: [src] / [src.type]"
 		A.master.powerupdate = 2	// Decremented by 2 each GC tick, since it's not auto power change we're going to update power twice.
 
 /obj/machinery/proc/power_change()		// called whenever the power settings of the containing area change
