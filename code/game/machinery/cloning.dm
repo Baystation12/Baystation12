@@ -273,7 +273,7 @@
 			src.locked = 0
 		if (!src.mess)
 			icon_state = "pod_0"
-		use_power(200)
+		//use_power(200)
 		return
 
 	return

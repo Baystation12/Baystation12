@@ -266,15 +266,16 @@ datum/controller/game_controller/proc/process_machines()
 	while(i<=active_areas.len)
 		var/area/A = active_areas[i]
 		if(A.powerupdate)
-			if(A.debug)
-				world << "process_machines [A] powerupdate is [A.powerupdate]"
 			A.powerupdate -= 1
 			for(var/obj/machinery/M in A)
 				if(M)
 					if(M.use_power)
 						M.auto_use_power()
 			
-		i++
+		if(A.apc.len)
+			i++
+			continue
+		active_areas.Cut(i,i+1)
 		
 
 datum/controller/game_controller/proc/process_objects()
