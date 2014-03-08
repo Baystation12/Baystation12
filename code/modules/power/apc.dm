@@ -1182,8 +1182,8 @@
 	if(terminal && terminal.powernet)
 		perapc = terminal.powernet.perapc
 
-	if(debug)
-		world << "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light]"
+	//if(debug)
+		//world << "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light]"
 
 	if(cell && !shorted)
 		var/cell_charge = cell.charge
