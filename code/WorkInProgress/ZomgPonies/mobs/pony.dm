@@ -87,3 +87,21 @@ mob/living/simple_animal/pony/applejack
 	icon_state = "applejack"
 	icon_living = "applejack"
 
+mob/living/simple_animal/pony/luna
+	name = "Luna"
+	real_name = name
+	icon_state = "luna"
+	icon_living = "luna"
+
+mob/living/simple_animal/pony/clownie
+	name = "Clownie"
+	real_name = name
+	icon_state = "clownie"
+	icon_living = "clownie"
+
+mob/living/simple_animal/pony/tia
+	name = "Tia"
+	real_name = name
+	icon_state = "tia"
+	icon_living = "tia"
+
