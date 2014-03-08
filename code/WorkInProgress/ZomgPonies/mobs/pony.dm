@@ -105,3 +105,45 @@ mob/living/simple_animal/pony/tia
 	icon_state = "tia"
 	icon_living = "tia"
 
+mob/living/simple_animal/pony/trixie
+	name = "Trixie"
+	real_name = name
+	icon_state = "trixie_a_full"
+	icon_living = "trixing_a_full"
+
+mob/living/simple_animal/pony/lyra
+	name = "Lyra"
+	real_name = name
+	icon_state = "lyra"
+	icon_living = "lyra"
+
+mob/living/simple_animal/pony/vinyl
+	name = "Vinyl"
+	real_name = name
+	icon_state = "vinyl"
+	icon_living = "vinyl"
+
+mob/living/simple_animal/pony/rarity
+	name = "Rarity"
+	real_name = name
+	icon_state = "rarity"
+	icon_living = "rarity"
+
+mob/living/simple_animal/pony/whooves
+	name = "Whooves"
+	real_name = name
+	icon_state = "whooves"
+	icon_living = "whooves"
+
+mob/living/simple_animal/pony/fleur
+	name = "Fleur"
+	real_name = name
+	icon_state = "fleur"
+	icon_living = "fleur"
+
+mob/living/simple_animal/pony/mac
+	name = "Mac"
+	real_name = name
+	icon_state = "mac"
+	icon_living = "mac"
+
