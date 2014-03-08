@@ -122,6 +122,9 @@
 		else if(istype(target, /obj/machinery/bunsen_burner))
 			return
 
+		else if(istype(target, /obj/machinery/smartfridge))
+			return
+
 		else if(istype(target, /obj/machinery/radiocarbon_spectrometer))
 			return
 
