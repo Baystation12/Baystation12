@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\modules\virus2\disease2.dm;code\modules\virus2\helpers.dm;code\modules\virus2\effect.dm
+LAST_COMPILE_VERSION: 503.1224
+DIR: code code\__HELPERS code\modules code\modules\mob code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\human code\modules\mob\new_player code\modules\virus2 code\unused 
+FILE: code\modules\virus2\effect.dm
+LAST_COMPILE_TIME: 1394235692
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
