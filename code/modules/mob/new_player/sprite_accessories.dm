@@ -331,6 +331,61 @@
 		icon_state = "ipc_blue"
 		species_allowed = list("Machine")
 
+	icp_screen_breakout
+		name = "breakout IPC screen"
+		icon_state = "ipc_breakout"
+		species_allowed = list("Machine")
+
+	icp_screen_eight
+		name = "eight IPC screen"
+		icon_state = "ipc_eight"
+		species_allowed = list("Machine")
+
+	icp_screen_goggles
+		name = "goggles IPC screen"
+		icon_state = "ipc_goggles"
+		species_allowed = list("Machine")
+
+	icp_screen_heart
+		name = "heart IPC screen"
+		icon_state = "ipc_heart"
+		species_allowed = list("Machine")
+
+	icp_screen_monoeye
+		name = "monoeye IPC screen"
+		icon_state = "ipc_monoeye"
+		species_allowed = list("Machine")
+
+	icp_screen_nature
+		name = "nature IPC screen"
+		icon_state = "ipc_nature"
+		species_allowed = list("Machine")
+
+	icp_screen_orange
+		name = "orange IPC screen"
+		icon_state = "ipc_orange"
+		species_allowed = list("Machine")
+
+	icp_screen_purple
+		name = "purple IPC screen"
+		icon_state = "ipc_purple"
+		species_allowed = list("Machine")
+
+	icp_screen_shower
+		name = "shower IPC screen"
+		icon_state = "ipc_shower"
+		species_allowed = list("Machine")
+
+	icp_screen_static
+		name = "static IPC screen"
+		icon_state = "ipc_static"
+		species_allowed = list("Machine")
+
+	icp_screen_yellow
+		name = "yellow IPC screen"
+		icon_state = "ipc_yellow"
+		species_allowed = list("Machine")
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /

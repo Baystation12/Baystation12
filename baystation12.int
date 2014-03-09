@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: icons\mob\human_face.dmi
+DIR: code code\modules code\modules\mob code\modules\mob\new_player icons icons\mob 
+FILE: icons\mob\human_face.dmi
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
