@@ -13,14 +13,19 @@ proc/get_infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 				score += 5
 				if(istype(M:wear_mask, /obj/item/clothing/mask/surgical) && !M.internal)
 					score += 10
-			if(istype(M:wear_suit, /obj/item/clothing/suit/space) && istype(M:head, /obj/item/clothing/head/helmet/space)) score += 15
-			if(istype(M:wear_suit, /obj/item/clothing/suit/bio_suit) && istype(M:head, /obj/item/clothing/head/bio_hood)) score += 15
+			if(istype(M:wear_suit, /obj/item/clothing/suit/space) && istype(M:head, /obj/item/clothing/head/helmet/space))
+				score += 20
+			if(istype(M:wear_suit, /obj/item/clothing/suit/bio_suit) && istype(M:head, /obj/item/clothing/head/bio_hood))
+				score += 30
 
 
 		if (vector == "Contact")
 			if(M:gloves) score += 15
-			if(istype(M:wear_suit, /obj/item/clothing/suit/space)) score += 10
-			if(istype(M:wear_suit, /obj/item/clothing/suit/bio_suit)) score += 10
+			if(istype(M:wear_suit, /obj/item/clothing/suit/space) && istype(M:head, /obj/item/clothing/head/helmet/space))
+				score += 15
+			if(istype(M:wear_suit, /obj/item/clothing/suit/bio_suit) && istype(M:head, /obj/item/clothing/head/bio_hood))
+				score += 15
+
 
 //	log_debug("[M]'s resistance to [vector] viruses: [score]")
 
