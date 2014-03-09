@@ -98,6 +98,7 @@ proc/RoundHealth(health)
 			return "health-100"
 	return "0"
 
+
 /*
 Proc for attack log creation, because really why not
 1 argument is the actor
@@ -116,3 +117,4 @@ proc/add_logs(mob/target, mob/user, what_done, var/object=null, var/addition=nul
 	if(target.client)
 		if(what_done != ("shaked" || "CPRed" || "grabbed"))
 			message_admins("[user.name][ismob(user) ? "([user.ckey])" : ""] [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition](<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
+

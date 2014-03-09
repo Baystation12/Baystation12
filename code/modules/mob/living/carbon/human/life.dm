@@ -1263,7 +1263,6 @@
 		if(hud_updateflag)
 			handle_hud_list()
 
-
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
@@ -1734,6 +1733,9 @@
 			makeSkeleton()
 			return //No puking over skeletons, they don't smell at all!
 
+//		if(loc == /obj/structure/morgue)
+//			return
+
 		for(var/mob/living/carbon/human/H in range(decaylevel, src))
 			if(prob(5))
 				if(airborne_can_reach(get_turf(src), get_turf(H)))
@@ -1817,7 +1819,6 @@
 			var/obj/item/weapon/card/id/I = wear_id.GetID()
 			if(I)
 				perpname = I.registered_name
-
 		for(var/datum/data/record/E in data_core.general)
 			if(E.fields["name"] == perpname)
 				for (var/datum/data/record/R in data_core.security)

@@ -273,7 +273,7 @@
 
 /mob/living/proc/restore_all_organs()
 	return
-	
+
 /mob/living/proc/revive()
 	rejuvenate()
 	buckled = initial(src.buckled)
@@ -318,12 +318,12 @@
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 		C.handcuffed = initial(C.handcuffed)
-		
+
 		// restore all of the human's blood
 		if(ishuman(src))
 			var/mob/living/carbon/human/human_mob = src
 			human_mob.restore_blood()
-			
+
 	for(var/datum/disease/D in viruses)
 		D.cure(0)
 	restore_all_organs()
@@ -335,7 +335,6 @@
 	regenerate_icons()
 	hud_updateflag |= 1 << HEALTH_HUD
 	hud_updateflag |= 1 << STATUS_HUD
-	..()
 	return
 
 /mob/living/proc/UpdateDamageIcon()
