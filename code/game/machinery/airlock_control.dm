@@ -156,7 +156,7 @@ obj/machinery/airlock_sensor/process()
 		var/datum/gas_mixture/air_sample = return_air()
 		var/pressure = round(air_sample.return_pressure(),0.1)
 
-		if(pressure != previousPressure)
+		if(abs(pressure - previousPressure) > 0.001 || previousPressure == null)
 			var/datum/signal/signal = new
 			signal.transmission_method = 1 //radio signal
 			signal.data["tag"] = id_tag
@@ -181,8 +181,6 @@ obj/machinery/airlock_sensor/initialize()
 
 obj/machinery/airlock_sensor/New()
 	..()
-	update_icon()
-
 	if(radio_controller)
 		set_frequency(frequency)
 
