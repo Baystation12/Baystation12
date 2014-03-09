@@ -107,6 +107,11 @@
 		cooldown = 2
 		spawn(10)
 			process_cooldown()
+		var/time_pulse = time2text(world.realtime,"hh:mm:ss")
+		var/turf/T = get_turf(src)
+		lastsignalers.Add("[time_pulse] <B>:</B> [src] activated  @ location ([T.x],[T.y],[T.z])")
+		message_admins("[src] activated  @ location ([T.x],[T.y],[T.z])",0,1)
+		log_game("[src] activated  @ location ([T.x],[T.y],[T.z])")
 		return
 
 
@@ -131,6 +136,16 @@
 		if(href_list["state"])
 			on = !(on)
 			update_icon()
+			var/time_start = time2text(world.realtime,"hh:mm:ss")
+			var/turf/T = get_turf(src)
+			if(usr)
+				lastsignalers.Add("[time_start] <B>:</B> [usr.key] set [src] [on?"On":"Off"] @ location ([T.x],[T.y],[T.z])")
+				message_admins("[key_name(usr, usr.client)] set [src] [on?"On":"Off"], location ([T.x],[T.y],[T.z])",0,1)
+				log_game("[usr.ckey]([usr]) set [src] [on?"On":"Off"], location ([T.x],[T.y],[T.z])")
+			else
+				lastsignalers.Add("[time_start] <B>:</B> (NO USER FOUND) set [src] [on?"On":"Off"] @ location ([T.x],[T.y],[T.z])")
+				message_admins("( NO USER FOUND) set [src] [on?"On":"Off"], location ([T.x],[T.y],[T.z])",0,1)
+				log_game("(NO USER FOUND) set [src] [on?"On":"Off"], location ([T.x],[T.y],[T.z])")
 
 		if(href_list["visible"])
 			visible = !(visible)

@@ -109,7 +109,20 @@
 		signal.encryption = code
 		signal.data["message"] = "ACTIVATE"
 		radio_connection.post_signal(src, signal)
+
+		var/time = time2text(world.realtime,"hh:mm:ss")
+		var/turf/T = get_turf(src)
+		if(usr)
+			lastsignalers.Add("[time] <B>:</B> [usr.key] used [src] @ location ([T.x],[T.y],[T.z]) <B>:</B> [format_frequency(frequency)]/[code]")
+			message_admins("[key_name(usr, usr.client)] used [src], location ([T.x],[T.y],[T.z]) <B>:</B> [format_frequency(frequency)]/[code]",0,1)
+			log_game("[usr.ckey]([usr]) used [src], location ([T.x],[T.y],[T.z]),frequency: [format_frequency(frequency)], code:[code]")
+		else
+			lastsignalers.Add("[time] <B>:</B> (\red NO USER FOUND) used [src] @ location ([T.x],[T.y],[T.z]) <B>:</B> [format_frequency(frequency)]/[code]")
+			message_admins("(\red NO USER FOUND)  used [src], location ([T.x],[T.y],[T.z]) <B>:</B> [format_frequency(frequency)]/[code]",0,1)
+			log_game("(NO USER FOUND) used [src], location ([T.x],[T.y],[T.z]),frequency: [format_frequency(frequency)], code:[code]")
+
 		return
+
 /*
 		for(var/obj/item/device/assembly/signaler/S in world)
 			if(!S)	continue
@@ -129,6 +142,9 @@
 		else
 			..(radio)
 		return 1
+
+
+
 
 
 	receive_signal(datum/signal/signal)
