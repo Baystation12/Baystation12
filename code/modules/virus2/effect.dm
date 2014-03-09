@@ -251,7 +251,8 @@
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
 			var/datum/organ/internal/brain/B = H.internal_organs["brain"]
-			B.take_damage(5)
+			if (B.damage < B.min_broken_damage)
+				B.take_damage(5)
 		else
 			mob.setBrainLoss(50)
 
