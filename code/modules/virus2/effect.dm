@@ -47,23 +47,6 @@
 	proc/activate(var/mob/living/carbon/mob,var/multiplier)
 	proc/deactivate(var/mob/living/carbon/mob)
 
-////////////////////////SPECIAL/////////////////////////////////
-/*/datum/disease2/effect/alien
-	name = "Unidentified Foreign Body"
-	stage = 4
-	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob << "\red You feel something tearing its way out of your stomach..."
-		mob.adjustToxLoss(10)
-		mob.updatehealth()
-		if(prob(40))
-			if(mob.client)
-				mob.client.mob = new/mob/living/carbon/alien/larva(mob.loc)
-			else
-				new/mob/living/carbon/alien/larva(mob.loc)
-			var/datum/disease2/disease/D = mob:virus2
-			mob:gib()
-			del D*/
-
 /datum/disease2/effect/invisible
 	name = "Waiting Syndrome"
 	stage = 1
@@ -219,7 +202,8 @@
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
 			var/datum/organ/internal/brain/B = H.internal_organs["brain"]
-			B.take_damage(5)
+			if (B.damage < B.min_broken_damage)
+				B.take_damage(5)
 		else
 			mob.setBrainLoss(50)
 
