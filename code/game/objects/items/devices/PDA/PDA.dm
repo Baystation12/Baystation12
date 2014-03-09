@@ -20,6 +20,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/obj/item/weapon/cartridge/cartridge = null //current cartridge
 	var/mode = 0 //Controls what menu the PDA will display. 0 is hub; the rest are either built in or based on cartridge.
 
+	var/lastmode = 0
+	var/ui_tick = 0
+
 	//Secondary variables
 	var/scanmode = 0 //1 is medical scanner, 2 is forensics, 3 is reagent scanner.
 	var/fon = 0 //Is the flashlight function on?
@@ -41,6 +44,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/active_conversation = null // New variable that allows us to only view a single conversation.
 	var/list/conversations = list()    // For keeping up with who we have PDA messsages from.
 	var/newmessage = 0			//To remove hackish overlay check
+
+	var/list/cartmodes = list(40, 42, 43, 433, 44, 441, 45, 451, 46, 48, 47, 49) // If you add more cartridge modes add them to this list as well.
+	var/list/no_auto_update = list(1, 40, 43, 44, 441, 45, 451)		     // These modes we turn off autoupdate
+	var/list/update_every_five = list(3, 41, 433, 46, 47, 48, 49)			     // These we update every 5 ticks
 
 	var/obj/item/weapon/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above
@@ -287,6 +294,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/New()
 	..()
 	PDAs += src
+	PDAs = sortAtom(PDAs)
 	if(default_cartridge)
 		cartridge = new default_cartridge(src)
 	new /obj/item/weapon/pen(src)
@@ -319,7 +327,17 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return attack_self(M)
 	return
 
+
 /obj/item/device/pda/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+	ui_tick++
+	var/auto_update = 1
+	if(mode in no_auto_update)
+		auto_update = 0
+	if(mode == lastmode && ui_tick % 5 && mode in update_every_five)
+		return
+
+	lastmode = mode
+		
 	var/title = "Personal Data Assistant"
 
 	var/data[0]  // This is the data that will be sent to the PDA
@@ -345,35 +363,38 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(cartridge)
 		var/cartdata[0]
 
-		data["records"] = cartridge.create_NanoUI_values()
+		if(mode in cartmodes)
+			data["records"] = cartridge.create_NanoUI_values()
 
-		cartdata["name"] = cartridge.name
-		cartdata["access"] = list(\
-				"access_security" = cartridge.access_security,\
-				"access_engine" = cartridge.access_engine,\
-				"access_atmos" = cartridge.access_atmos,\
-				"access_medical" = cartridge.access_medical,\
-				"access_clown" = cartridge.access_clown,\
-				"access_mime" = cartridge.access_mime,\
-				"access_janitor" = cartridge.access_janitor,\
-				"access_quartermaster" = cartridge.access_quartermaster,\
-				"access_hydroponics" = cartridge.access_hydroponics,\
-				"access_reagent_scanner" = cartridge.access_reagent_scanner,\
-				"access_remote_door" = cartridge.access_remote_door,\
-				"access_status_display" = cartridge.access_status_display\
-				)
-		if(isnull(cartridge.radio))
-			cartdata["radio"] = 0
-		else
-			if(istype(cartridge.radio, /obj/item/radio/integrated/beepsky))
-				cartdata["radio"] = 1
-			if(istype(cartridge.radio, /obj/item/radio/integrated/signal))
-				cartdata["radio"] = 2
-			if(istype(cartridge.radio, /obj/item/radio/integrated/mule))
-				cartdata["radio"] = 3
+		if(mode == 0)	
+			cartdata["name"] = cartridge.name
+			cartdata["access"] = list(\
+					"access_security" = cartridge.access_security,\
+					"access_engine" = cartridge.access_engine,\
+					"access_atmos" = cartridge.access_atmos,\
+					"access_medical" = cartridge.access_medical,\
+					"access_clown" = cartridge.access_clown,\
+					"access_mime" = cartridge.access_mime,\
+					"access_janitor" = cartridge.access_janitor,\
+					"access_quartermaster" = cartridge.access_quartermaster,\
+					"access_hydroponics" = cartridge.access_hydroponics,\
+					"access_reagent_scanner" = cartridge.access_reagent_scanner,\
+					"access_remote_door" = cartridge.access_remote_door,\
+					"access_status_display" = cartridge.access_status_display\
+			)
+			if(isnull(cartridge.radio))
+				cartdata["radio"] = 0
+			else
+				if(istype(cartridge.radio, /obj/item/radio/integrated/beepsky))
+					cartdata["radio"] = 1
+				if(istype(cartridge.radio, /obj/item/radio/integrated/signal))
+					cartdata["radio"] = 2
+				if(istype(cartridge.radio, /obj/item/radio/integrated/mule))
+					cartdata["radio"] = 3
 
-		cartdata["type"] = cartridge.type
-		cartdata["charges"] = cartridge.charges ? cartridge.charges : 0
+		if(mode == 2)
+			cartdata["type"] = cartridge.type
+			cartdata["charges"] = cartridge.charges ? cartridge.charges : 0
 		data["cartridge"] = cartdata
 
 	data["stationTime"] = worldtime2text()
@@ -383,7 +404,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		var/convopdas[0]
 		var/pdas[0]
 		var/count = 0
-		for (var/obj/item/device/pda/P in sortAtom(PDAs))
+		for (var/obj/item/device/pda/P in PDAs)
 			if (!P.owner||P.toff||P == src||P.hidden)       continue
 			if(conversations.Find("\ref[P]"))
 				convopdas.Add(list(list("Name" = "[P]", "Reference" = "\ref[P]", "Detonate" = "[P.detonate]", "inconvo" = "1")))
@@ -413,8 +434,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 
 	if(mode==3)
-		var/turf/T = get_turf_or_move(user.loc)
-		if(!isnull(T) || mode!=3)
+		var/turf/T = get_turf(user.loc)
+		if(!isnull(T))
 			var/datum/gas_mixture/environment = T.return_air()
 
 			var/pressure = environment.return_pressure()
@@ -449,8 +470,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
-		// auto update every Master Controller tick
-		ui.set_auto_update(1)
+	// auto update every Master Controller tick
+	ui.set_auto_update(auto_update)
 
 //NOTE: graphic resources are loaded on client login
 /obj/item/device/pda/attack_self(mob/user as mob)
