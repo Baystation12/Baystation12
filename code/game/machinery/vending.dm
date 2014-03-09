@@ -43,6 +43,8 @@
 	//var/emagged = 0			//Ignores if somebody doesn't have card access to that machine.
 	var/seconds_electrified = 0	//Shock customers like an airlock.
 	var/shoot_inventory = 0		//Fire items at customers! We're broken!
+	var/shoot_speed = 3			//How hard are we firing the items?
+	var/shoot_chance = 2		//How often are we firing the items?
 	var/shut_up = 0				//Stop spouting those godawful pitches!
 	var/extended_inventory = 0	//can we access the hidden inventory?
 	var/scan_id = 1
@@ -463,7 +465,7 @@
 		src.speak(slogan)
 		src.last_slogan = world.time
 
-	if(src.shoot_inventory && prob(2))
+	if(src.shoot_inventory && prob(shoot_chance))
 		src.throw_item()
 
 	return
@@ -529,7 +531,7 @@
 	if (!throw_item)
 		return 0
 	spawn(0)
-		throw_item.throw_at(target, 16, 3)
+		throw_item.throw_at(target, 16, shoot_speed)
 	src.visible_message("\red <b>[src] launches [throw_item.name] at [target.name]!</b>")
 	return 1
 
