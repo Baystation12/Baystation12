@@ -65,6 +65,8 @@ proc/airborne_can_reach(turf/source, turf/target)
 	// if one of the antibodies in the mob's body matches one of the disease's antigens, don't infect
 	if(M.antibodies & disease.antigen != 0)
 		return
+	if(M.reagents.has_reagent("spaceacillin"))
+		return
 	if(istype(M,/mob/living/carbon/monkey))
 		var/mob/living/carbon/monkey/chimp = M
 		if (!(chimp.greaterform in disease.affected_species))
@@ -99,10 +101,6 @@ proc/airborne_can_reach(turf/source, turf/target)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 	D.makerandom(1)
 	infect_virus2(M,D,1)
-
-//Fancy prob() function.
-/proc/dprob(var/p)
-	return(prob(sqrt(p)) && prob(sqrt(p)))
 
 /mob/living/carbon/proc/spread_disease_to(var/mob/living/carbon/victim, var/vector = "Airborne")
 	if (src == victim)
