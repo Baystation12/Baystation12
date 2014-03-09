@@ -1085,7 +1085,6 @@ var/list/ghostteleportlocs = list()
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
 
-
 /area/medical/biostorage
 	name = "\improper Secondary Storage"
 	icon_state = "medbay2"
@@ -1111,7 +1110,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "patients"
 
 /area/medical/ward
-	name = "\improper Medbay Patient Ward"
+	name = "\improper Recovery Ward"
 	icon_state = "patients"
 
 /area/medical/patient_a
@@ -1126,8 +1125,8 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Isolation C"
 	icon_state = "patients"
 
-/area/medical/iso_access
-	name = "\improper Isolation Access"
+/area/medical/patient_wing
+	name = "\improper Patient Wing"
 	icon_state = "patients"
 
 /area/medical/cmo
@@ -1150,6 +1149,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Virology"
 	icon_state = "virology"
 
+/area/medical/virologyaccess
+	name = "\improper Virology Access"
+	icon_state = "virology"
+
 /area/medical/morgue
 	name = "\improper Morgue"
 	icon_state = "morgue"
@@ -1159,11 +1162,19 @@ var/list/ghostteleportlocs = list()
 	icon_state = "chem"
 
 /area/medical/surgery
-	name = "\improper Surgery"
+	name = "\improper Operating Theatre 1"
+	icon_state = "surgery"
+
+/area/medical/surgery2
+	name = "\improper Operating Theatre 2"
 	icon_state = "surgery"
 
 /area/medical/surgeryobs
-	name = "\improper Surgery Observation"
+	name = "\improper Operation Observation Room"
+	icon_state = "surgery"
+
+/area/medical/surgeryprep
+	name = "\improper Pre-Op Prep Room"
 	icon_state = "surgery"
 
 /area/medical/cryo
@@ -1183,7 +1194,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "cloning"
 
 /area/medical/sleeper
-	name = "\improper Medical Treatment Center"
+	name = "\improper Emergency Treatment Centre"
 	icon_state = "exam_room"
 
 //Security
