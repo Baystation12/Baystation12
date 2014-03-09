@@ -102,10 +102,11 @@ Works together with spawning an observer, noted above.
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud")
 				client.images.Remove(hud)
+
 	if(antagHUD)
 		var/list/target_list = list()
-		for(var/mob/living/target in oview(src))
-			if( target.mind&&(target.mind.special_role||issilicon(target)) )
+		for(var/mob/living/target in oview(src, 14))
+			if(target.mind&&(target.mind.special_role||issilicon(target)) )
 				target_list += target
 		if(target_list.len)
 			assess_targets(target_list, src)
@@ -113,91 +114,19 @@ Works together with spawning an observer, noted above.
 		process_medHUD(src)
 
 
-// Direct copied from medical HUD glasses proc, used to determine what health bar to put over the targets head.
-/mob/dead/proc/RoundHealth(var/health)
-	switch(health)
-		if(100 to INFINITY)
-			return "health100"
-		if(70 to 100)
-			return "health80"
-		if(50 to 70)
-			return "health60"
-		if(30 to 50)
-			return "health40"
-		if(18 to 30)
-			return "health25"
-		if(5 to 18)
-			return "health10"
-		if(1 to 5)
-			return "health1"
-		if(-99 to 0)
-			return "health0"
-		else
-			return "health-100"
-	return "0"
-
-
-// Pretty much a direct copy of Medical HUD stuff, except will show ill if they are ill instead of also checking for known illnesses.
-
 /mob/dead/proc/process_medHUD(var/mob/M)
 	var/client/C = M.client
-	var/image/holder
-	for(var/mob/living/carbon/human/patient in oview(M))
-		var/foundVirus = 0
-		if(patient.virus2.len)
-			foundVirus = 1
-		if(!C) return
-		holder = patient.hud_list[HEALTH_HUD]
-		if(patient.stat == 2)
-			holder.icon_state = "hudhealth-100"
-		else
-			holder.icon_state = "hud[RoundHealth(patient.health)]"
-		C.images += holder
-
-		holder = patient.hud_list[STATUS_HUD]
-		if(patient.stat == 2)
-			holder.icon_state = "huddead"
-		else if(patient.status_flags & XENO_HOST)
-			holder.icon_state = "hudxeno"
-		else if(foundVirus)
-			holder.icon_state = "hudill"
-		else if(patient.has_brain_worms())
-			var/mob/living/simple_animal/borer/B = patient.has_brain_worms()
-			if(B.controlling)
-				holder.icon_state = "hudbrainworm"
-			else
-				holder.icon_state = "hudhealthy"
-		else
-			holder.icon_state = "hudhealthy"
-
-		C.images += holder
-
+	for(var/mob/living/carbon/human/patient in oview(M, 14))
+		C.images += patient.hud_list[HEALTH_HUD]
+		C.images += patient.hud_list[STATUS_HUD_OOC]
 
 /mob/dead/proc/assess_targets(list/target_list, mob/dead/observer/U)
-	var/icon/tempHud = 'icons/mob/hud.dmi'
-	for(var/mob/living/target in target_list)
-		if(iscarbon(target))
-			switch(target.mind.special_role)
-				if("traitor","Syndicate")
-					U.client.images += image(tempHud,target,"hudsyndicate")
-				if("Revolutionary")
-					U.client.images += image(tempHud,target,"hudrevolutionary")
-				if("Head Revolutionary")
-					U.client.images += image(tempHud,target,"hudheadrevolutionary")
-				if("Cultist")
-					U.client.images += image(tempHud,target,"hudcultist")
-				if("Changeling")
-					U.client.images += image(tempHud,target,"hudchangeling")
-				if("Wizard","Fake Wizard")
-					U.client.images += image(tempHud,target,"hudwizard")
-				if("Hunter","Sentinel","Drone","Queen")
-					U.client.images += image(tempHud,target,"hudalien")
-				if("Death Commando")
-					U.client.images += image(tempHud,target,"huddeathsquad")
-				if("Ninja")
-					U.client.images += image(tempHud,target,"hudninja")
-				else//If we don't know what role they have but they have one.
-					U.client.images += image(tempHud,target,"hudunknown1")
+	var/client/C = U.client
+	for(var/mob/living/carbon/human/target in target_list)
+		C.images += target.hud_list[SPECIALROLE_HUD]
+
+
+/*
 		else//If the silicon mob has no law datum, no inherent laws, or a law zero, add them to the hud.
 			var/mob/living/silicon/silicon_target = target
 			if(!silicon_target.laws||(silicon_target.laws&&(silicon_target.laws.zeroth||!silicon_target.laws.inherent.len))||silicon_target.mind.special_role=="traitor")
@@ -205,6 +134,7 @@ Works together with spawning an observer, noted above.
 					U.client.images += image(tempHud,silicon_target,"hudmalborg")
 				else
 					U.client.images += image(tempHud,silicon_target,"hudmalai")
+*/
 	return 1
 
 /mob/proc/ghostize(var/can_reenter_corpse = 1)
