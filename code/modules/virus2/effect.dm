@@ -22,7 +22,8 @@
 		if(f.stage == src.stage)
 			list += f
 	effect = pick(list)
-	chance = rand(1,6)
+	chance = rand(0,effect.chance_maxm)
+	multiplier = rand(1,effect.maxm)
 
 /datum/disease2/effectholder/proc/minormutate()
 	switch(pick(1,2,3,4,5))
