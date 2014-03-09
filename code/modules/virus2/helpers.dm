@@ -74,6 +74,7 @@ proc/airborne_can_reach(turf/source, turf/target, var/radius=5)
 		var/datum/disease2/disease/D = disease.getcopy()
 		D.minormutate()
 		M.virus2["[D.uniqueID]"] = D
+		M.hud_updateflag |= 1 << STATUS_HUD
 		return 1
 	return 0
 
@@ -83,12 +84,14 @@ proc/airborne_can_reach(turf/source, turf/target, var/radius=5)
 	D.makerandom()
 	D.infectionchance = 1
 	M.virus2["[D.uniqueID]"] = D
+	M.hud_updateflag |= 1 << STATUS_HUD
 
 //Infects mob M with random greated disease, if he doesn't have one
 /proc/infect_mob_random_greater(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 	D.makerandom(1)
 	M.virus2["[D.uniqueID]"] = D
+	M.hud_updateflag |= 1 << STATUS_HUD
 
 //Fancy prob() function.
 /proc/dprob(var/p)

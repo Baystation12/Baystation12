@@ -46,9 +46,11 @@
 						var/datum/organ/external/affected = H.get_organ(user.zone_sel.selecting)
 						affected.implants += src.imp
 						imp.part = affected
+						H.hud_updateflag |= 1 << IMPLOYAL_HUD
 				M:implanting = 0
 				src.imp = null
 				update()
+
 	return
 
 
