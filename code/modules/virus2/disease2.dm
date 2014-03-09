@@ -32,18 +32,22 @@
 	spreadtype = prob(70) ? "Airborne" : "Contact"
 
 	if(all_species.len)
-		affected_species.Cut()
-		var/list/meat = list()
-		for (var/specie in all_species)
-			var/datum/species/S = all_species[specie]
-			if(!(S.flags & IS_SYNTHETIC))
-				meat += S.name
-		if(meat.len)
-			var/num = rand(1,meat.len)
-			for(var/i=0,i<num,i++)
-				var/picked = pick(meat)
-				meat -= picked
-				affected_species += picked
+		affected_species = get_infectable_species()
+
+/proc/get_infectable_species()
+	var/list/meat = list()
+	var/list/res = list()
+	for (var/specie in all_species)
+		var/datum/species/S = all_species[specie]
+		if(!(S.flags & IS_SYNTHETIC))
+			meat += S.name
+	if(meat.len)
+		var/num = rand(1,meat.len)
+		for(var/i=0,i<num,i++)
+			var/picked = pick(meat)
+			meat -= picked
+			res += picked
+	return res
 
 /datum/disease2/disease/proc/activate(var/mob/living/carbon/mob)
 	if(dead)
@@ -110,6 +114,8 @@
 	if (prob(5))
 		antigen = text2num(pick(ANTIGENS))
 		antigen |= text2num(pick(ANTIGENS))
+	if (prob(5) && all_species.len)
+		affected_species = get_infectable_species()
 
 /datum/disease2/disease/proc/getcopy()
 	var/datum/disease2/disease/disease = new /datum/disease2/disease
