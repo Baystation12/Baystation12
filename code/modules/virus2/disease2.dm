@@ -34,15 +34,16 @@
 	if(all_species.len)
 		affected_species.Cut()
 		var/list/meat = list()
-		for (var/datum/species/S in all_species)
+		for (var/specie in all_species)
+			var/datum/species/S = all_species[specie]
 			if(!(S.flags & IS_SYNTHETIC))
 				meat += S.name
-
-		var/num = rand(1,meat.len)
-		for(var/i=0,i<num,i++)
-			var/picked = pick(meat)
-			meat -= picked
-			affected_species += picked
+		if(meat.len)
+			var/num = rand(1,meat.len)
+			for(var/i=0,i<num,i++)
+				var/picked = pick(meat)
+				meat -= picked
+				affected_species += picked
 
 /datum/disease2/disease/proc/activate(var/mob/living/carbon/mob)
 	if(dead)
