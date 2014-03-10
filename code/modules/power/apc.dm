@@ -27,6 +27,7 @@
 #define APC_UPOVERLAY_ENVIRON1 1024
 #define APC_UPOVERLAY_ENVIRON2 2048
 #define APC_UPOVERLAY_LOCKED 4096
+#define APC_UPOVERLAY_OPERATING 8192
 
 #define APC_UPDATE_ICON_COOLDOWN 100 // 10 seconds
 
@@ -327,6 +328,9 @@
 		update_state |= UPSTATE_WIREEXP
 	if(update_state <= 1)
 		update_state |= UPSTATE_ALLGOOD
+
+	if(operating)
+		update_overlay |= APC_UPOVERLAY_OPERATING
 
 	if(update_state & UPSTATE_ALLGOOD)
 		if(locked)

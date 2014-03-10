@@ -168,7 +168,7 @@ to destroy them and players will be able to make replacements.
 	build_path = "/obj/machinery/r_n_d/destructive_analyzer"
 	board_type = "machine"
 	origin_tech = "magnets=2;engineering=2;programming=2"
-	frame_desc = "Requires 1 Scanning Module, 1 Manipulator, and 1 Micro-Laser."
+	frame_desc = "Requires 1 Scanning Module, 1 Micro Manipulator, and 1 Micro-Laser."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/scanning_module" = 1,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
@@ -179,7 +179,7 @@ to destroy them and players will be able to make replacements.
 	build_path = "/obj/machinery/autolathe"
 	board_type = "machine"
 	origin_tech = "engineering=2;programming=2"
-	frame_desc = "Requires 3 Matter Bins, 1 Manipulator, and 1 Console Screen."
+	frame_desc = "Requires 3 Matter Bins, 1 Micro Manipulator, and 1 Console Screen."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 3,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
@@ -190,7 +190,7 @@ to destroy them and players will be able to make replacements.
 	build_path = "/obj/machinery/r_n_d/protolathe"
 	board_type = "machine"
 	origin_tech = "engineering=2;programming=2"
-	frame_desc = "Requires 2 Matter Bins, 2 Manipulators, and 2 Beakers."
+	frame_desc = "Requires 2 Matter Bins, 2 Micro Manipulators, and 2 Beakers."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 2,
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
@@ -202,7 +202,7 @@ to destroy them and players will be able to make replacements.
 	build_path = "/obj/machinery/r_n_d/circuit_imprinter"
 	board_type = "machine"
 	origin_tech = "engineering=2;programming=2"
-	frame_desc = "Requires 1 Matter Bin, 1 Manipulator, and 2 Beakers."
+	frame_desc = "Requires 1 Matter Bin, 1 Micro Manipulator, and 2 Beakers."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 1,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
@@ -245,7 +245,7 @@ obj/item/weapon/circuitboard/rdserver
 	build_path = "/obj/machinery/mecha_part_fabricator"
 	board_type = "machine"
 	origin_tech = "programming=3;engineering=3"
-	frame_desc = "Requires 2 Matter Bins, 1 Manipulator, 1 Micro-Laser and 1 Console Screen."
+	frame_desc = "Requires 2 Matter Bins, 1 Micro Manipulator, 1 Micro-Laser and 1 Console Screen."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/matter_bin" = 2,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
@@ -269,7 +269,7 @@ obj/item/weapon/circuitboard/rdserver
 	build_path = "/obj/machinery/dna_scannernew"
 	board_type = "machine"
 	origin_tech = "programming=2;biotech=2"
-	frame_desc = "Requires 1 Scanning module, 1 Manipulator, 1 Micro-Laser, 2 pieces of cable and 1 Console Screen."
+	frame_desc = "Requires 1 Scanning module, 1 Micro Manipulator, 1 Micro-Laser, 2 pieces of cable and 1 Console Screen."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/scanning_module" = 1,
 							"/obj/item/weapon/stock_parts/manipulator" = 1,
@@ -285,7 +285,7 @@ obj/item/weapon/circuitboard/rdserver
 	build_path = "/obj/machinery/telecomms/receiver"
 	board_type = "machine"
 	origin_tech = "programming=4;engineering=3;bluespace=2"
-	frame_desc = "Requires 1 Subspace Ansible, 1 Hyperwave Filter, 2 Manipulators, and 1 Micro-Laser."
+	frame_desc = "Requires 1 Subspace Ansible, 1 Hyperwave Filter, 2 Micro Manipulators, and 1 Micro-Laser."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/subspace/ansible" = 1,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 1,
@@ -297,7 +297,7 @@ obj/item/weapon/circuitboard/rdserver
 	build_path = "/obj/machinery/telecomms/hub"
 	board_type = "machine"
 	origin_tech = "programming=4;engineering=4"
-	frame_desc = "Requires 2 Manipulators, 2 Cable Coil and 2 Hyperwave Filter."
+	frame_desc = "Requires 2 Micro Manipulators, 2 Cable Coil and 2 Hyperwave Filter."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
 							"/obj/item/weapon/cable_coil" = 2,
@@ -308,7 +308,7 @@ obj/item/weapon/circuitboard/rdserver
 	build_path = "/obj/machinery/telecomms/relay"
 	board_type = "machine"
 	origin_tech = "programming=3;engineering=4;bluespace=3"
-	frame_desc = "Requires 2 Manipulators, 2 Cable Coil and 2 Hyperwave Filters."
+	frame_desc = "Requires 2 Micro Manipulators, 2 Cable Coil and 2 Hyperwave Filters."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
 							"/obj/item/weapon/cable_coil" = 2,
@@ -319,7 +319,7 @@ obj/item/weapon/circuitboard/rdserver
 	build_path = "/obj/machinery/telecomms/bus"
 	board_type = "machine"
 	origin_tech = "programming=4;engineering=4"
-	frame_desc = "Requires 2 Manipulators, 1 Cable Coil and 1 Hyperwave Filter."
+	frame_desc = "Requires 2 Micro Manipulators, 1 Cable Coil and 1 Hyperwave Filter."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
 							"/obj/item/weapon/cable_coil" = 1,
@@ -330,7 +330,7 @@ obj/item/weapon/circuitboard/rdserver
 	build_path = "/obj/machinery/telecomms/processor"
 	board_type = "machine"
 	origin_tech = "programming=4;engineering=4"
-	frame_desc = "Requires 3 Manipulators, 1 Hyperwave Filter, 2 Treatment Disks, 1 Wavelength Analyzer, 2 Cable Coils and 1 Subspace Amplifier."
+	frame_desc = "Requires 3 Micro Manipulators, 1 Hyperwave Filter, 2 Treatment Disks, 1 Wavelength Analyzer, 2 Cable Coils and 1 Subspace Amplifier."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 3,
 							"/obj/item/weapon/stock_parts/subspace/filter" = 1,
@@ -344,7 +344,7 @@ obj/item/weapon/circuitboard/rdserver
 	build_path = "/obj/machinery/telecomms/server"
 	board_type = "machine"
 	origin_tech = "programming=4;engineering=4"
-	frame_desc = "Requires 2 Manipulators, 1 Cable Coil and 1 Hyperwave Filter."
+	frame_desc = "Requires 2 Micro Manipulators, 1 Cable Coil and 1 Hyperwave Filter."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
 							"/obj/item/weapon/cable_coil" = 1,
@@ -355,7 +355,7 @@ obj/item/weapon/circuitboard/rdserver
 	build_path = "/obj/machinery/telecomms/broadcaster"
 	board_type = "machine"
 	origin_tech = "programming=4;engineering=4;bluespace=2"
-	frame_desc = "Requires 2 Manipulators, 1 Cable Coil, 1 Hyperwave Filter, 1 Ansible Crystal and 2 High-Powered Micro-Lasers. "
+	frame_desc = "Requires 2 Micro Manipulators, 1 Cable Coil, 1 Hyperwave Filter, 1 Ansible Crystal and 2 High-Powered Micro-Lasers. "
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator" = 2,
 							"/obj/item/weapon/cable_coil" = 1,
