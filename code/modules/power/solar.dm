@@ -370,7 +370,7 @@ var/list/solars_list = list()
 	if(stat & (NOPOWER | BROKEN))
 		return
 
-	use_power(250)
+	//use_power(250)
 	if(track==1 && nexttime < world.time && trackdir*trackrate)
 		// Increments nexttime using itself and not world.time to prevent drift
 		nexttime = nexttime + 6000/trackrate
