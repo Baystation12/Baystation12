@@ -7,7 +7,7 @@
 	var/analysed = 0
 	var/obj/item/weapon/virusdish/dish = null
 	var/burning = 0
-
+	
 	var/splicing = 0
 	var/scanning = 0
 
@@ -90,7 +90,7 @@
 /obj/machinery/computer/diseasesplicer/process()
 	if(stat & (NOPOWER|BROKEN))
 		return
-	use_power(500)
+	//use_power(500)
 
 	if(scanning)
 		scanning -= 1

@@ -100,6 +100,7 @@
 	for(var/datum/disease2/effectholder/e in effects)
 		e.effect.deactivate(mob)
 	mob.virus2.Remove("[uniqueID]")
+	mob.hud_updateflag |= 1 << STATUS_HUD
 
 /datum/disease2/disease/proc/minormutate()
 	//uniqueID = rand(0,10000)
@@ -202,6 +203,7 @@ proc/virus2_lesser_infection()
 	for(var/mob/living/carbon/human/G in player_list)
 		if(G.client && G.stat != DEAD)
 			candidates += G
+
 	if(!candidates.len)	return
 
 	candidates = shuffle(candidates)
