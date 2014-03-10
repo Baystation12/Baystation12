@@ -276,7 +276,7 @@
 	dat += "Status: [(active?"Injecting":"Standby")] <BR>"
 	dat += "<A href='?src=\ref[src];togglestatus=1'>Toggle Status</A><BR>"
 
-	dat += "Stability: [stability]%<BR>"
+	dat += "Instability: [stability]%<BR>"
 	dat += "Reactor parts: [linked_shielding.len]<BR>"//TODO: perhaps add some sort of stability check
 	dat += "Cores: [linked_cores.len]<BR><BR>"
 	dat += "-Current Efficiency: [reported_core_efficiency]<BR>"

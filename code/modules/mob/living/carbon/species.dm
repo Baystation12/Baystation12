@@ -53,6 +53,13 @@
 	return
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
+	if(flags & IS_SYNTHETIC)
+		//H.make_jittery(200) //S-s-s-s-sytem f-f-ai-i-i-i-i-lure-ure-ure-ure
+		H.h_style = ""
+		spawn(100)
+			//H.is_jittery = 0
+			//H.jitteriness = 0
+			H.update_hair()
 	return
 
 /datum/species/human
@@ -219,8 +226,8 @@
 	punch_damage = 2
 
 	eyes = "blank_eyes"
-	brute_mod = 1.5
-	burn_mod = 1.5
+	brute_mod = 0.5
+	burn_mod = 1
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 10
@@ -235,5 +242,5 @@
 
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
 
-	blood_color = "#FFFFFF"
-	flesh_color = "#AAAAAA"
+	blood_color = "#1F181F"
+	flesh_color = "#575757"
