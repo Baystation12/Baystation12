@@ -1146,6 +1146,7 @@ datum
 			overdose = 60
 
 			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
 				..()
 				if (volume > overdose)
 					M.hallucination = max(M.hallucination, 2)
