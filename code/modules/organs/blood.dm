@@ -218,7 +218,8 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	if (!injected)
 		return
 	var/list/sniffles = virus_copylist(injected.data["virus2"])
-	for(var/datum/disease2/disease/sniffle in sniffles)
+	for(var/ID in sniffles)
+		var/datum/disease2/disease/sniffle = sniffles[ID]
 		infect_virus2(src,sniffle,1)
 	if (injected.data["antibodies"] && prob(5))
 		antibodies |= injected.data["antibodies"]
