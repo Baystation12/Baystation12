@@ -630,6 +630,7 @@
 					user << "\blue You slot your fingers into the APC interface and siphon off some of the stored charge for your own use."
 					if(src.cell.charge < 0) src.cell.charge = 0
 					if(H.nutrition > 500) H.nutrition = 500
+					src.charging = 1
 
 				else
 					user << "\blue You are already fully charged."
