@@ -473,7 +473,7 @@ This function completely restores a damaged organ to perfect condition.
 		O.setAmputatedTree()
 
 //Handles dismemberment
-/datum/organ/external/proc/droplimb(var/override = 0,var/no_explode = 0, var/spawn_limb=1)
+/datum/organ/external/proc/droplimb(var/override = 0,var/no_explode = 0, var/spawn_limb=0)
 	if(destspawn) return
 	if(override)
 		status |= ORGAN_DESTROYED
