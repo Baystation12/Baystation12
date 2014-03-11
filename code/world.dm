@@ -40,6 +40,7 @@
 	appearance_loadbanfile()
 	jobban_updatelegacybans()
 	LoadBans()
+	SetupHooks() // /vg/
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~

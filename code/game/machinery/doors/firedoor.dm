@@ -136,7 +136,7 @@
 		user << "\red \The [src] is welded solid!"
 		return
 
-	var/area/A = get_area(src)
+	var/area/A = get_area_master(src)
 	ASSERT(istype(A))
 	if(A.master)
 		A = A.master
