@@ -1,6 +1,7 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+DIR: code code\game code\game\area code\game\machinery code\game\machinery\computer code\game\objects\items\weapons code\game\objects\items\weapons\storage code\modules code\modules\scripting code\modules\scripting\Scanner icons icons\obj icons\obj\clothing 
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

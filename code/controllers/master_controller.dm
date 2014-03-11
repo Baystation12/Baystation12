@@ -30,6 +30,7 @@ datum/controller/game_controller
 	var/total_cost		= 0
 
 	var/last_thing_processed
+	var/mob/list/expensive_mobs = list()
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -227,11 +228,15 @@ datum/controller/game_controller/proc/process()
 
 datum/controller/game_controller/proc/process_mobs()
 	var/i = 1
+	expensive_mobs.Cut()
 	while(i<=mob_list.len)
 		var/mob/M = mob_list[i]
 		if(M)
+			var/clock = world.timeofday
 			last_thing_processed = M.type
 			M.Life()
+			if((world.timeofday - clock) > 1)
+				expensive_mobs += M
 			i++
 			continue
 		mob_list.Cut(i,i+1)
@@ -255,11 +260,28 @@ datum/controller/game_controller/proc/process_machines()
 			last_thing_processed = Machine.type
 			if(Machine.process() != PROCESS_KILL)
 				if(Machine)
-					if(Machine.use_power)
-						Machine.auto_use_power()
+
+//					if(Machine.use_power)
+//						Machine.auto_use_power()
+
 					i++
 					continue
 		machines.Cut(i,i+1)
+	i=1
+	while(i<=active_areas.len)
+		var/area/A = active_areas[i]
+		if(A.powerupdate)
+			A.powerupdate -= 1
+			for(var/obj/machinery/M in A)
+				if(M)
+					if(M.use_power)
+						M.auto_use_power()
+			
+		if(A.apc.len)
+			i++
+			continue
+		active_areas.Cut(i,i+1)
+		
 
 datum/controller/game_controller/proc/process_objects()
 	var/i = 1
