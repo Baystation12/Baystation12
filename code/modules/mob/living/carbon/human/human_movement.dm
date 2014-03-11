@@ -6,10 +6,14 @@
 
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 
-	if(embedded_flag) 
+	if(embedded_flag)
 		handle_embedded_objects() //Moving with objects stuck in you can cause bad times.
 
-	if(reagents.has_reagent("hyperzine")) return -1
+	var/hyperizine = reagents.has_reagent("hyperizine")
+	if(hyperizine && dna.mutantrace == "slime")
+		tally *= 2
+	else if(hyperizine || M_RUN in mutations || istype(loc, /turf/space))
+		return -1
 
 	if(reagents.has_reagent("nuka_cola")) return -1
 
