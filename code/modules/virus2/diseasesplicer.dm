@@ -7,7 +7,7 @@
 	var/analysed = 0
 	var/obj/item/weapon/virusdish/dish = null
 	var/burning = 0
-	
+
 	var/splicing = 0
 	var/scanning = 0
 
@@ -137,6 +137,7 @@
 				if(e.stage == memorybank.stage)
 					e.effect = memorybank.effect
 			splicing = 10
+			dish.virus2.uniqueID = rand(0,10000)
 //			dish.virus2.spreadtype = "Blood"
 
 	else if(href_list["disk"])
