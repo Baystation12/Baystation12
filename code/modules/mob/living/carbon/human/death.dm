@@ -53,9 +53,19 @@
 /mob/living/carbon/human/death(gibbed)
 	if(stat == DEAD)	return
 	if(healths)		healths.icon_state = "health5"
+
 	stat = DEAD
 	dizziness = 0
 	jitteriness = 0
+
+	
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
+
+	handle_hud_list()
+	
+	//Handle species-specific deaths.
+	if(species) species.handle_death(src)
 
 	//Handle brain slugs.
 	var/datum/organ/external/head = get_organ("head")
@@ -104,6 +114,8 @@
 		sql_report_death(src)
 		ticker.mode.check_win()		//Calls the rounds wincheck, mainly for wizard, malf, and changeling now
 	return ..(gibbed)
+
+
 
 /mob/living/carbon/human/proc/makeSkeleton()
 	if(SKELETON in src.mutations)	return
