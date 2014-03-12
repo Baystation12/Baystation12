@@ -2797,7 +2797,7 @@
 "bbO" = (/obj/machinery/door/airlock/command{name = "Conference Room"; req_access = null; req_access_txt = "19"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/turf/simulated/floor/wood,/area/bridge/meeting_room)
 "bbP" = (/obj/machinery/door/airlock/command{name = "Captain's Office"; req_access = null; req_access_txt = "20"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; tag = ""},/obj/structure/disposalpipe/segment,/turf/simulated/floor/wood,/area/crew_quarters/captain)
 "bbQ" = (/obj/machinery/computer/arcade,/turf/simulated/floor/wood,/area/crew_quarters/bar)
-"bbR" = (/obj/machinery/media/jukebox,/turf/simulated/floor/wood,/area/crew_quarters/bar)
+"bbR" = (/obj/machinery/media/jukebox/bar,/turf/simulated/floor/wood,/area/crew_quarters/bar)
 "bbS" = (/obj/machinery/light,/obj/machinery/firealarm{dir = 1; pixel_y = -24},/turf/simulated/floor/wood,/area/crew_quarters/bar)
 "bbT" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 1},/turf/simulated/floor/wood,/area/crew_quarters/bar)
 "bbU" = (/obj/machinery/light,/turf/simulated/floor/wood,/area/crew_quarters/bar)
