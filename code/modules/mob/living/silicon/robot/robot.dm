@@ -225,6 +225,7 @@
 			module_sprites["Basic"] = "Engineering"
 			module_sprites["Antique"] = "engineerrobot"
 			module_sprites["Landmate"] = "landmate"
+			module_sprites["Custom"] = "custom_astra_t3"
 
 		if("Janitor")
 			tc_borg = 0
@@ -1013,13 +1014,22 @@
 		else
 			overlays += "[src.ckey]-openpanel -c"
 
-	if(opened)
+	if(opened && icon_state == "custom_astra_t3")
+		if(wiresexposed)
+			overlays += "ov-[icon_state] +w"
+		else if(cell)
+			overlays += "ov-[icon_state] +c"
+		else
+			overlays += "ov-[icon_state] -c"
+	else if(opened)
 		if(wiresexposed)
 			overlays += "ov-openpanel +w"
 		else if(cell)
 			overlays += "ov-openpanel +c"
 		else
 			overlays += "ov-openpanel -c"
+
+
 
 	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
 		overlays += "[icon_state]-shield"
@@ -1282,6 +1292,11 @@
 		src << "Something is badly wrong with the sprite selection. Harass a coder."
 		icon_state = module_sprites[1]
 		return
+
+	if(icontype == "Custom")
+		icon = 'tauceti/icons/mob/robot.dmi'
+	else
+		icon = 'icons/mob/robots.dmi'
 
 	overlays -= "eyes"
 	updateicon()

@@ -376,6 +376,11 @@
 		icon = 'tauceti/icons/mob/human_face.dmi'
 		icon_state = "hair_roxy"
 
+	rosa
+		name = "Rosa"
+		icon = 'tauceti/icons/mob/human_face.dmi'
+		icon_state = "hair_rosa"
+
 	icp_screen_pink
 		name = "pink IPC screen"
 		icon_state = "ipc_pink"
