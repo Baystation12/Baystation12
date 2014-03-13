@@ -48,6 +48,7 @@
 		take_overall_damage(amount, 0)
 	else
 		heal_overall_damage(-amount, 0)
+	hud_updateflag |= 1 << HEALTH_HUD
 
 /mob/living/carbon/human/adjustFireLoss(var/amount)
 	if(species && species.burn_mod)
@@ -57,6 +58,7 @@
 		take_overall_damage(0, amount)
 	else
 		heal_overall_damage(0, -amount)
+	hud_updateflag |= 1 << HEALTH_HUD
 
 /mob/living/carbon/human/Stun(amount)
 	if(M_HULK in mutations)	return
@@ -99,6 +101,7 @@
 			if (O.status & ORGAN_MUTATED)
 				O.unmutate()
 				src << "<span class = 'notice'>Your [O.display_name] is shaped normally again.</span>"
+	hud_updateflag |= 1 << HEALTH_HUD
 
 ////////////////////////////////////////////
 
@@ -127,6 +130,7 @@
 	var/datum/organ/external/picked = pick(parts)
 	if(picked.heal_damage(brute,burn))
 		UpdateDamageIcon()
+		hud_updateflag |= 1 << HEALTH_HUD
 	updatehealth()
 
 //Damages ONE external organ, organ gets randomly selected from damagable ones.
@@ -138,6 +142,7 @@
 	var/datum/organ/external/picked = pick(parts)
 	if(picked.take_damage(brute,burn,sharp))
 		UpdateDamageIcon()
+		hud_updateflag |= 1 << HEALTH_HUD
 	updatehealth()
 
 
@@ -159,6 +164,7 @@
 
 		parts -= picked
 	updatehealth()
+	hud_updateflag |= 1 << HEALTH_HUD
 	if(update)	UpdateDamageIcon()
 
 // damage MANY external organs, in random order
@@ -178,6 +184,7 @@
 
 		parts -= picked
 	updatehealth()
+	hud_updateflag |= 1 << HEALTH_HUD
 	if(update)	UpdateDamageIcon()
 
 
@@ -188,6 +195,7 @@
 	if(istype(E, /datum/organ/external))
 		if (E.heal_damage(brute, burn))
 			UpdateDamageIcon()
+			hud_updateflag |= 1 << HEALTH_HUD
 	else
 		return 0
 	return
@@ -242,32 +250,25 @@
 
 	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
 	updatehealth()
+	hud_updateflag |= 1 << HEALTH_HUD
 
 	//Embedded projectile code.
 	if(!organ) return
 	if(istype(used_weapon,/obj/item/weapon))
 		var/obj/item/weapon/W = used_weapon  //Sharp objects will always embed if they do enough damage.
 		if( (damage > (10*W.w_class)) && ( (sharp && !ismob(W.loc)) || prob(damage/W.w_class) ) )
-			if(!istype(W, /obj/item/weapon/butch/meatcleaver))
-				organ.implants += W
-				visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
-				W.add_blood(src)
-				if(ismob(W.loc))
-					var/mob/living/H = W.loc
-					H.drop_item()
-				W.loc = src
-
-	else if(istype(used_weapon,/obj/item/projectile)) //We don't want to use the actual projectile item, so we spawn some shrapnel.
-		var/obj/item/projectile/P = used_weapon
-		if(prob(75) && P.embed)
-			var/obj/item/weapon/shard/shrapnel/S = new()
-			S.name = "[P.name] shrapnel"
-			S.desc = "[S.desc] It looks like it was fired from [P.shot_from]."
-			S.loc = src
-			organ.implants += S
-			visible_message("<span class='danger'>The projectile sticks in the wound!</span>")
-			S.add_blood(src)
+			organ.implants += W
+			visible_message("<span class='danger'>\The [W] sticks in the wound!</span>")
+			embedded_flag = 1
+			src.verbs += /mob/proc/yank_out_object
+			W.add_blood(src)
+			if(ismob(W.loc))
+				var/mob/living/H = W.loc
+				H.drop_item()
+			W.loc = src
 	return 1
+
+
 
 // incredibly important stuff follows
 /mob/living/carbon/human/fall(var/forced)

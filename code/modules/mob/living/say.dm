@@ -329,7 +329,7 @@ var/list/department_radio_keys = list(
 	var/list/listening
 
 	listening = get_mobs_in_view(message_range, src)
-	var/list/onscreen = get_mobs_in_view(7, src)
+	var/list/onscreen = viewers()
 	for(var/mob/M in player_list)
 		if (!M.client)
 			continue //skip monkeys and leavers
@@ -384,7 +384,7 @@ var/list/department_radio_keys = list(
 		if(M != src && is_speaking_radio)
 			M:show_message("<span class='notice'>[src] talks into [used_radios.len ? used_radios[1] : "radio"]</span>")
 
-	if(message_mode == null)
+/*	if(message_mode == null)
 		var/accent = "en-us"
 		var/voice = "m7"
 		var/speed = 175
@@ -399,7 +399,7 @@ var/list/department_radio_keys = list(
 			voice = src.client.prefs.voice
 			speed = src.client.prefs.talkspeed
 			pitch = src.client.prefs.pitch
-			src:texttospeech(message, speed, pitch, accent, "+[voice]", echo)
+			src:texttospeech(message, speed, pitch, accent, "+[voice]", echo)*/
 
 	var/rendered = null
 
@@ -415,14 +415,14 @@ var/list/department_radio_keys = list(
 
 		for (var/mob/M in heard_a)
 		//BEGIN TELEPORT CHANGES
-			if(message_mode == null && fexists("sound/playervoices/[src.ckey].ogg"))
+/*			if(message_mode == null && fexists("sound/playervoices/[src.ckey].ogg"))
 				if(M.client)
 					if(M.client.prefs)
 						if(M.client.prefs.sound & SOUND_VOICES)
-							M.playsound_local(get_turf(src), "sound/playervoices/[src.ckey].ogg", 70, 0, 5, 1)
+							M.playsound_local(get_turf(src), "sound/playervoices/[src.ckey].ogg", 70, 0, 5, 1)*/
 			if(!istype(M, /mob/new_player))
 				if(M && M.stat == DEAD)
-					if ((M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
+					if (M.client && M.client.prefs && (M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
 						rendered2 = "<span class='game say'><span class='name'>[GetVoice()]</span></span> [alt_name] <a href='byond://?src=\ref[M];follow2=\ref[M];follow=\ref[src]'>(Follow)</a> <span class='message'>[message_ghost]</span></span>"
 					else
 						rendered2 = "<span class='game say'><span class='name'>[GetVoice()]</span></span> [alt_name] <a href='byond://?src=\ref[M];follow2=\ref[M];follow=\ref[src]'>(Follow)</a> <span class='message'>[message_a]</span></span>"

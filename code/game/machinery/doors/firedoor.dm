@@ -35,7 +35,7 @@
 			areas_added += A
 
 
-/obj/machinery/door/firedoor/Del()
+/obj/machinery/door/firedoor/Destroy()
 	for(var/area/A in areas_added)
 		A.all_doors.Remove(src)
 	. = ..()
@@ -136,7 +136,7 @@
 		user << "\red \The [src] is welded solid!"
 		return
 
-	var/area/A = get_area(src)
+	var/area/A = get_area_master(src)
 	ASSERT(istype(A))
 	if(A.master)
 		A = A.master

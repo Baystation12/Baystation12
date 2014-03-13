@@ -8,6 +8,7 @@
 	opacity = 0
 	anchored = 1
 	var/health = 30
+	var/health_timestamp = 0
 	var/brute_resist = 4
 	var/fire_resist = 1
 
@@ -22,7 +23,7 @@
 		return
 
 
-	Del()
+	Destroy()
 		blobs -= src
 		..()
 		return
@@ -40,7 +41,7 @@
 
 	fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 		..()
-		var/damage = Clamp(0.01 * exposed_temperature / fire_resist, 0, 4 - fire_resist)
+		var/damage = Clamp(0.03 * exposed_temperature / fire_resist, 0, 7 - fire_resist)
 		if(damage)
 			health -= damage
 			update_icon()

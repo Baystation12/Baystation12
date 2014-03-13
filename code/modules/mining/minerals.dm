@@ -28,6 +28,9 @@ mineral
 		if(!display_name)
 			display_name = name
 
+	proc/UpdateTurf(var/turf/simulated/mineral/T)
+		T.UpdateMineral()
+
 mineral/uranium
 	name = "Uranium"
 	result_amount = 5
@@ -70,3 +73,28 @@ mineral/clown
 	result_amount = 3
 	spread = 0
 	ore = /obj/item/weapon/ore/clown
+
+mineral/gibtonite
+	display_name = "Gibtonite"
+	name = "Gibtonite"
+	result_amount = 1
+	spread_chance = 10
+	ore = /obj/item/weapon/twohanded/required/gibtonite
+	UpdateTurf(var/turf/T)
+		if(!istype(T,/turf/simulated/mineral/gibtonite))
+			T.ChangeTurf(/turf/simulated/mineral/gibtonite)
+		else
+			..()
+
+mineral/cave
+	display_name = "Cave"
+	name = "Cave"
+	result_amount = 1
+	spread_chance = 10
+	ore = null
+	UpdateTurf(var/turf/T)
+		if(!istype(T,/turf/simulated/floor/plating/airless/asteroid/cave))
+			T.ChangeTurf(/turf/simulated/floor/plating/airless/asteroid/cave)
+		else
+			..()
+

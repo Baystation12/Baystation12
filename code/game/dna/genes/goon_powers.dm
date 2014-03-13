@@ -1,4 +1,4 @@
-
+#define EAT_MOB_DELAY 300 // 30s
 
 // WAS: /datum/bioEffect/alcres
 /datum/dna/gene/basic/sober
@@ -53,7 +53,7 @@
 		var/turf/simulated/T = get_turf(M)
 		if(!istype(T))
 			return
-		if(T.lighting_lumcount <= 2)
+		if(T.lit_value <= 2)
 			M.alpha = 0
 		else
 			M.alpha = round(255 * 0.80)
@@ -70,7 +70,7 @@
 
 	OnMobLife(var/mob/M)
 		if((world.time - M.last_movement) >= 30 && !M.stat && M.canmove && !M.restrained())
-			M.alpha = round(255 * 0.10)
+			M.alpha = 0
 		else
 			M.alpha = round(255 * 0.80)
 
@@ -129,6 +129,8 @@
 	invocation_type = "none"
 	range = 7
 	selection_type = "range"
+	include_user = 1
+//	centcomm_cancast = 0
 	var/list/compatible_mobs = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 
 /obj/effect/proc_holder/spell/targeted/cryokinesis/cast(list/targets)
@@ -195,16 +197,19 @@
 	stat_allowed = 0
 	invocation_type = "none"
 	range = 1
-	selection_type = "range"
+	selection_type = "view"
+
+	var/list/types_allowed=list(/obj/item,/mob/living/simple_animal, /mob/living/carbon/monkey, /mob/living/carbon/human)
 
 /obj/effect/proc_holder/spell/targeted/eat/choose_targets(mob/user = usr)
 	var/list/targets = list()
 	var/list/possible_targets = list()
 
-	for(var/obj/item/O in view_or_range(range, user, selection_type))
-		possible_targets += O
+	for(var/atom/movable/O in view_or_range(range, user, selection_type))
+		if(is_type_in_list(O,types_allowed))
+			possible_targets += O
 
-	targets += input("Choose the target for the spell.", "Targeting") as mob in possible_targets
+	targets += input("Choose the target of your hunger.", "Targeting") as anything in possible_targets
 
 	if(!targets.len) //doesn't waste the spell
 		revert_cast(user)
@@ -217,12 +222,50 @@
 		usr << "<span class='notice'>No target found in range.</span>"
 		return
 
-	var/obj/item/the_item = targets[1]
-
-	usr.visible_message("\red [usr] eats [the_item].")
-	playsound(usr.loc, 'sound/items/eatfood.ogg', 50, 0)
-
-	del(the_item)
+	var/atom/movable/the_item = targets[1]
+	if(ismob(the_item))
+		//My gender
+		var/m_his="his"
+		if(usr.gender==FEMALE)
+			m_his="her"
+		// Their gender
+		var/t_his="his"
+		if(the_item.gender==FEMALE)
+			t_his="her"
+		usr.visible_message("\red <b>[usr] begins stuffing [the_item] into [m_his] gaping maw!")
+		var/mob/living/carbon/human/H = the_item
+		var/datum/organ/external/limb = H.get_organ(usr.zone_sel.selecting)
+		if(!istype(limb))
+			usr << "\red You can't eat this part of them!"
+			return 0
+		if(!istype(limb,/datum/organ/external/head))
+			// Bullshit, but prevents being unable to clone someone.
+			usr << "\red You try to put \the [limb] in your mouth, but [t_his] ears tickle your throat!"
+			return 0
+		var/oldloc = H.loc
+		if(do_after(usr,EAT_MOB_DELAY))
+			if(!limb || !H)
+				return
+			if(H.loc!=oldloc)
+				usr << "\red \The [limb] moved away from your mouth!"
+				return
+			usr.visible_message("\red [usr] [pick("chomps","bites")] off [the_item]'s [limb]!")
+			playsound(usr.loc, 'sound/items/eatfood.ogg', 50, 0)
+			var/mob/M=the_item
+			M.drop_l_hand()
+			M.drop_r_hand()
+			M.death(1)
+			if(ishuman(M) && ishuman(usr))
+				var/datum/organ/external/head = M:get_organ("head")
+				if(head)
+					head.droplimb(1,1)
+					var/datum/organ/external/chest=usr:get_organ("chest")
+					chest.implants += head
+			del(M)
+	else
+		usr.visible_message("\red [usr] eats \the [the_item].")
+		playsound(usr.loc, 'sound/items/eatfood.ogg', 50, 0)
+		del(the_item)
 
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H=usr

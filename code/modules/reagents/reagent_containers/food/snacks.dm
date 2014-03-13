@@ -178,7 +178,7 @@
 	del(src)
 	return
 
-/obj/item/weapon/reagent_containers/food/snacks/Del()
+/obj/item/weapon/reagent_containers/food/snacks/Destroy()
 	if(contents)
 		for(var/atom/movable/something in contents)
 			something.loc = get_turf(src)
@@ -3161,7 +3161,7 @@
 	name = "flat dough"
 	desc = "A flattened dough."
 	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "flat dough"
+	icon_state = "flatdough"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/doughslice
 	slices_num = 3
 	New()

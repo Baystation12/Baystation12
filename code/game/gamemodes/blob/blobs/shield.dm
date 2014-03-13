@@ -15,9 +15,6 @@
 			return
 		return
 
-	fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-		return
-
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 		if(istype(mover) && mover.checkpass(PASSBLOB))	return 1
 		return 0

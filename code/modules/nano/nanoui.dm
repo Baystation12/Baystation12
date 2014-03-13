@@ -19,7 +19,7 @@ nanoui is used to open and update nano browser uis
 	// the title of this ui
 	var/title
 	// /vg/ - Whether to write debug information to nano/debug.html
-	var/writeDebug=FALSE
+	var/writeDebug=TRUE
 	// the key of this ui, this is to allow multiple (different) uis for each src_object
 	var/ui_key
 	// window_id is used as the window name/identifier for browse and onclose
@@ -142,6 +142,8 @@ nanoui is used to open and update nano browser uis
 			set_status(STATUS_DISABLED, push_update) // no updates, completely disabled (red visibility)
 		else if (user.restrained() || user.lying)
 			set_status(STATUS_UPDATE, push_update) // update only (orange visibility)
+		else if (istype(src_object, /obj/item/device/uplink/hidden)) // You know what if they have the uplink open let them use the UI
+			set_status(STATUS_INTERACTIVE, push_update)	     // Will build in distance checks on the topics for sanity.
 		else if (!(src_object in view(4, user))) // If the src object is not in visable, set status to 0
 			set_status(STATUS_DISABLED, push_update) // interactive (green visibility)
 		else if (dist <= 1)

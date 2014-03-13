@@ -68,6 +68,7 @@
 /var/const/access_paramedic = 66
 /var/const/access_blueshield = 67
 /var/const/access_customs = 68
+/var/const/access_salvage_captain = 69 // Salvage ship captain's quarters
 
 	//BEGIN CENTCOM ACCESS
 	/*Should leave plenty of room if we need to add more access levels.
@@ -92,29 +93,6 @@
 /obj/var/req_access_txt = "0"
 /obj/var/list/req_one_access = null
 /obj/var/req_one_access_txt = "0"
-
-/obj/New()
-	..()
-	//NOTE: If a room requires more than one access (IE: Morgue + medbay) set the req_acesss_txt to "5;6" if it requires 5 and 6
-	if(src.req_access_txt)
-		var/list/req_access_str = text2list(req_access_txt,";")
-		if(!req_access)
-			req_access = list()
-		for(var/x in req_access_str)
-			var/n = text2num(x)
-			if(n)
-				req_access += n
-
-	if(src.req_one_access_txt)
-		var/list/req_one_access_str = text2list(req_one_access_txt,";")
-		if(!req_one_access)
-			req_one_access = list()
-		for(var/x in req_one_access_str)
-			var/n = text2num(x)
-			if(n)
-				req_one_access += n
-
-
 
 //returns 1 if this mob has sufficient access to use this object
 /obj/proc/allowed(mob/M)
@@ -143,9 +121,25 @@
 	return null
 
 /obj/proc/check_access(obj/item/I)
+	//These generations have been moved out of /obj/New() because they were slowing down the creation of objects that never even used the access system.
+	if(!src.req_access)
+		src.req_access = list()
+		if(src.req_access_txt)
+			var/list/req_access_str = text2list(req_access_txt,";")
+			for(var/x in req_access_str)
+				var/n = text2num(x)
+				if(n)
+					req_access += n
 
-	if(!src.req_access && !src.req_one_access) //no requirements
-		return 1
+	if(!src.req_one_access)
+		src.req_one_access = list()
+		if(src.req_one_access_txt)
+			var/list/req_one_access_str = text2list(req_one_access_txt,";")
+			for(var/x in req_one_access_str)
+				var/n = text2num(x)
+				if(n)
+					req_one_access += n
+
 	if(!istype(src.req_access, /list)) //something's very wrong
 		return 1
 
@@ -449,10 +443,10 @@
 		rank = src:rank
 		assignment = src:assignment
 
-	if( rank in get_all_jobs() )
+	if( rank in joblist )
 		return rank
 
-	if( assignment in get_all_jobs() )
+	if( assignment in joblist )
 		return assignment
 
 	return "Unknown"
@@ -505,7 +499,7 @@ proc/FindNameFromID(var/mob/living/carbon/human/H)
 			return ID.registered_name
 
 proc/get_all_job_icons() //For all existing HUD icons
-	return get_all_jobs() + list("Prisoner")
+	return joblist + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation
 	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))

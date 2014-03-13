@@ -83,7 +83,7 @@
 
 
 /obj/item/weapon/gun/projectile/revolver/detective/special_check(var/mob/living/carbon/human/M)
-	if(magazine.caliber == initial(magazine.caliber))
+	if(!ghettomodded)
 		return 1
 	if(prob(70 - (magazine.ammo_count() * 10)))	//minimum probability of 10, maximum of 60
 		M << "<span class='danger'>[src] blows up in your face!</span>"
@@ -127,7 +127,7 @@
 
 /obj/item/weapon/gun/projectile/revolver/detective/attackby(var/obj/item/A as obj, mob/user as mob)
 	..()
-	if(istype(A, /obj/item/weapon/screwdriver))
+	if(istype(A, /obj/item/weapon/screwdriver) || istype(A, /obj/item/weapon/conversion_kit))
 		if(magazine.caliber == "38")
 			user << "<span class='notice'>You begin to reinforce the barrel of [src].</span>"
 			if(magazine.ammo_count())
@@ -138,6 +138,10 @@
 				if(magazine.ammo_count())
 					user << "<span class='notice'>You can't modify it!</span>"
 					return
+				if (istype(A, /obj/item/weapon/conversion_kit))
+					ghettomodded = 0
+				else
+					ghettomodded = 1
 				magazine.caliber = "357"
 				desc = "[initial(desc)] The barrel and chamber assembly seems to have been modified."
 				user << "<span class='warning'>You reinforce the barrel of [src]! Now it will fire .357 rounds.</span>"
@@ -151,6 +155,7 @@
 				if(magazine.ammo_count())
 					user << "<span class='notice'>You can't modify it!</span>"
 					return
+				ghettomodded = 0
 				magazine.caliber = "38"
 				desc = initial(desc)
 				user << "<span class='warning'>You remove the modifications on [src]! Now it will fire .38 rounds.</span>"

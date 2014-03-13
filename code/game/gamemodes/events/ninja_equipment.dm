@@ -40,7 +40,7 @@ ________________________________________________________________________________
 	cell = new/obj/item/weapon/cell/high//The suit should *always* have a battery because so many things rely on it.
 	cell.charge = 9000//Starting charge should not be higher than maximum charge. It leads to problems with recharging.
 
-/obj/item/clothing/suit/space/space_ninja/Del()
+/obj/item/clothing/suit/space/space_ninja/Destroy()
 	if(affecting)//To make sure the window is closed.
 		affecting << browse(null, "window=hack spideros")
 	if(AI)//If there are AIs present when the ninja kicks the bucket.
@@ -1340,6 +1340,34 @@ ________________________________________________________________________________
 	usr << "Voice mimicking algorithm is set <B>[!vchange?"inactive":"active"]</B>."
 
 /*
+=======================================================================================
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<SPACE NINJA HACKBUG>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+=======================================================================================
+*/
+
+/*
+Currently WIP, once finished they will, in theory, allow the Ninja to plant bugs on Computers/APCs/SMES units.
+Possibly more later, but for now I want to get basic function working.
+*/
+
+/obj/item/weapon/hackbug
+	name = "hack-bug"
+	desc = "A strange device. Where did this even come from?"
+	gender = PLURAL
+	icon = 'icons/obj/ninjaobjects.dmi'
+	icon_state = "hackbug"
+	flags = FPRINT | TABLEPASS | USEDELAY
+	w_class = 1.0
+
+/obj/item/weapon/hackbug/afterattack(atom/target as obj|turf, mob/user as mob, flag)
+	if (!flag)
+		return
+	if (istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/weapon/storage/) || istype(target, /obj/machinery/door/airlock/hatch/gamma))
+		return
+	user << "Planting bug..."
+	target.overlays += image('icons/obj/ninjaobjects.dmi', "compoverlay")
+
+/*
 ===================================================================================
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<SPACE NINJA NET>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ===================================================================================
@@ -1387,7 +1415,7 @@ It is possible to destroy the net by the occupant or someone else.
 		var/check = 30//30 seconds before teleportation. Could be extended I guess.
 		var/mob_name = affecting.name//Since they will report as null if terminated before teleport.
 		//The person can still try and attack the net when inside.
-		while(!isnull(M)&&!isnull(src)&&check>0)//While M and net exist, and 60 seconds have not passed.
+		while(!isnull(M)&&!isnull(src)&&check>0)//While M and net exist, and 30 seconds have not passed.
 			check--
 			sleep(10)
 

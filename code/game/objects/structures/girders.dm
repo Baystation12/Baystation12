@@ -178,7 +178,7 @@
 
 	bullet_act(var/obj/item/projectile/Proj)
 		if(istype(Proj ,/obj/item/projectile/beam/pulse))
-			src.ex_act(1)
+			src.ex_act(2)
 		..()
 		return 0
 
@@ -186,6 +186,11 @@
 		if(prob(40))
 			del(src)
 
+	bullet_act(var/obj/item/projectile/Proj)
+		if(istype(Proj ,/obj/item/projectile/beam/pulse))
+			src.ex_act(2)
+		..()
+		return 0
 
 	ex_act(severity)
 		switch(severity)
@@ -193,13 +198,13 @@
 				qdel(src)
 				return
 			if(2.0)
-				if (prob(30))
+				if (prob(75))
 					var/remains = pick(/obj/item/stack/rods,/obj/item/stack/sheet/metal)
 					new remains(loc)
 					qdel(src)
 				return
 			if(3.0)
-				if (prob(5))
+				if (prob(30))
 					var/remains = pick(/obj/item/stack/rods,/obj/item/stack/sheet/metal)
 					new remains(loc)
 					qdel(src)

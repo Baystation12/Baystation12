@@ -76,6 +76,9 @@
 	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
 	if(in_stasis) loc:used++
 
+	if(life_tick%30==15)
+		hud_updateflag = 1022
+
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !in_stasis)
 		if(air_master.current_cycle%4==2 || failed_last_breath) 	//First, resolve location and get a breath
@@ -130,7 +133,7 @@
 	handle_environment(environment)
 
 	//Status updates, death etc.
-	handle_regular_status_updates()		//TODO: optimise ~Carn
+	handle_regular_status_updates()		//TODO: optimise ~Carn  NO SHIT ~Ccomp
 	update_canmove()
 
 	//Update our name based on whether our face is obscured/disfigured
@@ -164,6 +167,7 @@
 	else
 		return ONE_ATMOSPHERE - pressure_difference
 
+
 /mob/living/carbon/human
 
 	proc/handle_disabilities()
@@ -175,7 +179,7 @@
 						continue
 					O.show_message(text("\red <B>[src] starts having a seizure!"), 1)
 				Paralyse(10)
-				make_jittery(1000)
+				Jitter(1000)
 
 		// If we have the gene for being crazy, have random events.
 		if(dna.GetSEState(HALLUCINATIONBLOCK))
@@ -185,26 +189,19 @@
 		if (disabilities & COUGHING)
 			if ((prob(5) && paralysis <= 1))
 				drop_item()
-				spawn( 0 )
-					emote("cough")
-					return
+				emote("cough")
 		if (disabilities & TOURETTES)
 			if ((prob(10) && paralysis <= 1))
 				Stun(10)
-				spawn( 0 )
-					switch(rand(1, 3))
-						if(1)
-							emote("twitch")
-						if(2 to 3)
-							say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
-					var/old_x = pixel_x
-					var/old_y = pixel_y
-					pixel_x += rand(-2,2)
-					pixel_y += rand(-1,1)
-					sleep(2)
-					pixel_x = old_x
-					pixel_y = old_y
-					return
+				switch(rand(1, 3))
+					if(1)
+						emote("twitch")
+					if(2 to 3)
+						say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]")
+				var/x_offset = pixel_x + rand(-2,2) //Should probably be moved into the twitch emote at some point.
+				var/y_offset = pixel_y + rand(-1,1)
+				animate(src, pixel_x = pixel_x + x_offset, pixel_y = pixel_y + y_offset, time = 1)
+				animate(pixel_x = pixel_x - x_offset, pixel_y = pixel_y - y_offset, time = 1)
 		if (disabilities & NERVOUS)
 			if (prob(10))
 				stuttering = max(10, stuttering)
@@ -950,7 +947,7 @@
 				var/turf/T = loc
 				var/area/A = T.loc
 				if(A)
-					if(A.lighting_use_dynamic)	light_amount = min(10,T.lighting_lumcount) - 5 //hardcapped so it's not abused by having a ton of flashlights
+					if(A.lighting_use_dynamic)	light_amount = min(10,T.lit_value) - 5 //hardcapped so it's not abused by having a ton of flashlights
 					else						light_amount =  5
 			nutrition += light_amount
 			traumatic_shock -= light_amount
@@ -958,7 +955,7 @@
 			if(species.flags & IS_PLANT)
 				if(nutrition > 500)
 					nutrition = 500
-				if(light_amount >= 3) //if there's enough light, heal
+				if(light_amount >= 5) //if there's enough light, heal
 					adjustBruteLoss(-(light_amount))
 					adjustToxLoss(-(light_amount))
 					adjustOxyLoss(-(light_amount))
@@ -970,7 +967,7 @@
 				var/turf/T = loc
 				var/area/A = T.loc
 				if(A)
-					if(A.lighting_use_dynamic)	light_amount = T.lighting_lumcount
+					if(A.lighting_use_dynamic)	light_amount = T.lit_value
 					else						light_amount =  10
 			if(light_amount > 2) //if there's enough light, start dying
 				take_overall_damage(1,1)
@@ -1013,7 +1010,7 @@
 
 		if(species.flags & REQUIRE_LIGHT)
 			if(nutrition < 200)
-				take_overall_damage(2,0)
+				take_overall_damage(10,0)
 				traumatic_shock++
 
 		if (drowsyness)
@@ -1063,7 +1060,7 @@
 
 			// Sobering multiplier.
 			// Sober block grants quadruple the alcohol metabolism.
-			var/sober_str=(M_SOBER in mutations)?1:4
+			var/sober_str=!(M_SOBER in mutations)?1:4
 
 			updatehealth()	//TODO
 			if(!in_stasis)
@@ -1146,6 +1143,13 @@
 				if(halloss > 0)
 					adjustHalLoss(-1)
 
+			if(embedded_flag && !(life_tick % 10))
+				var/list/E
+				E = get_visible_implants(0)
+				if(!E.len)
+					embedded_flag = 0
+
+
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
 				blinded = 1
@@ -1168,6 +1172,50 @@
 				ear_deaf = max(ear_deaf, 1)
 			else if(ear_damage < 25)	//ear damage heals slowly under this threshold. otherwise you'll need earmuffs
 				ear_damage = max(ear_damage-0.05, 0)
+
+			//Dizziness
+			if(dizziness)
+				var/client/C = client
+				var/pixel_x_diff = 0
+				var/pixel_y_diff = 0
+				var/temp
+				var/saved_dizz = dizziness
+				dizziness = max(dizziness-1, 0)
+				if(C)
+					var/oldsrc = src
+					var/amplitude = dizziness*(sin(dizziness * 0.044 * world.time) + 1) / 70 // This shit is annoying at high strength
+					src = null
+					spawn(0)
+						if(C)
+							temp = amplitude * sin(0.008 * saved_dizz * world.time)
+							pixel_x_diff += temp
+							C.pixel_x += temp
+							temp = amplitude * cos(0.008 * saved_dizz * world.time)
+							pixel_y_diff += temp
+							C.pixel_y += temp
+							sleep(3)
+							if(C)
+								temp = amplitude * sin(0.008 * saved_dizz * world.time)
+								pixel_x_diff += temp
+								C.pixel_x += temp
+								temp = amplitude * cos(0.008 * saved_dizz * world.time)
+								pixel_y_diff += temp
+								C.pixel_y += temp
+							sleep(3)
+							if(C)
+								C.pixel_x -= pixel_x_diff
+								C.pixel_y -= pixel_y_diff
+					src = oldsrc
+
+			//Jitteryness
+			if(jitteriness)
+				var/amplitude = min(4, (jitteriness/100) + 1)
+				var/pixel_x_diff = rand(-amplitude, amplitude)
+				var/pixel_y_diff = rand(-amplitude/3, amplitude/3)
+
+				animate(src, pixel_x = pixel_x + pixel_x_diff, pixel_y = pixel_y + pixel_y_diff , time = 2, loop = -1)
+				animate(pixel_x = pixel_x - pixel_x_diff, pixel_y = pixel_y - pixel_y_diff, time = 2)
+				jitteriness = max(jitteriness-1, 0)
 
 			//Other
 			if(stunned)
@@ -1196,6 +1244,10 @@
 
 	proc/handle_regular_hud_updates()
 		if(!client)	return 0
+
+		if(hud_updateflag)
+			handle_hud_list()
+
 
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
@@ -1491,7 +1543,7 @@
 		//0.1% chance of playing a scary sound to someone who's in complete darkness
 		if(isturf(loc) && rand(1,1000) == 1)
 			var/turf/currentTurf = loc
-			if(!currentTurf.lighting_lumcount)
+			if(!currentTurf.lit_value)
 				playsound_local(src,pick(scarySounds),50, 1, -1)
 
 	// Separate proc so we can jump out of it when we've succeeded in spreading disease.
@@ -1681,6 +1733,153 @@
 				if(airborne_can_reach(get_turf(src), get_turf(H)))
 					H << "<spawn class='warning'>You smell something foul..."
 					H.vomit()
+
+/*
+	Called by life(), instead of having the individual hud items update icons each tick and check for status changes
+	we only set those statuses and icons upon changes.  Then those HUD items will simply add those pre-made images.
+	This proc below is only called when those HUD elements need to change as determined by the mobs hud_updateflag.
+*/
+
+
+/mob/living/carbon/human/proc/handle_hud_list()
+
+	if(hud_updateflag & 1 << HEALTH_HUD)
+		var/image/holder = hud_list[HEALTH_HUD]
+		if(stat == 2)
+			holder.icon_state = "hudhealth-100" 	// X_X
+		else
+			holder.icon_state = "hud[RoundHealth(health)]"
+
+		hud_list[HEALTH_HUD] = holder
+
+	if(hud_updateflag & 1 << STATUS_HUD)
+		var/foundVirus = 0
+		for(var/datum/disease/D in viruses)
+			if(!D.hidden[SCANNER])
+				foundVirus++
+		for (var/ID in virus2)
+			if (ID in virusDB)
+				foundVirus = 1
+				break
+
+		var/image/holder = hud_list[STATUS_HUD]
+		var/image/holder2 = hud_list[STATUS_HUD_OOC]
+		if(stat == 2)
+			holder.icon_state = "huddead"
+			holder2.icon_state = "huddead"
+		else if(status_flags & XENO_HOST)
+			holder.icon_state = "hudxeno"
+			holder2.icon_state = "hudxeno"
+		else if(foundVirus)
+			holder.icon_state = "hudill"
+		else if(has_brain_worms())
+			var/mob/living/simple_animal/borer/B = has_brain_worms()
+			if(B.controlling)
+				holder.icon_state = "hudbrainworm"
+			else
+				holder.icon_state = "hudhealthy"
+			holder2.icon_state = "hudbrainworm"
+		else
+			holder.icon_state = "hudhealthy"
+			if(virus2.len)
+				holder2.icon_state = "hudill"
+			else
+				holder2.icon_state = "hudhealthy"
+
+		hud_list[STATUS_HUD] = holder
+		hud_list[STATUS_HUD_OOC] = holder2
+
+	if(hud_updateflag & 1 << ID_HUD)
+		var/image/holder = hud_list[ID_HUD]
+		if(wear_id)
+			var/obj/item/weapon/card/id/I = wear_id.GetID()
+			if(I)
+				holder.icon_state = "hud[ckey(I.GetJobName())]"
+			else
+				holder.icon_state = "hudunknown"
+		else
+			holder.icon_state = "hudunknown"
+
+
+		hud_list[ID_HUD] = holder
+
+	if(hud_updateflag & 1 << WANTED_HUD)
+		var/image/holder = hud_list[WANTED_HUD]
+		holder.icon_state = "hudblank"
+		var/perpname = name
+		if(wear_id)
+			var/obj/item/weapon/card/id/I = wear_id.GetID()
+			if(I)
+				perpname = I.registered_name
+
+		for(var/datum/data/record/E in data_core.general)
+			if(E.fields["name"] == perpname)
+				for (var/datum/data/record/R in data_core.security)
+					if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "*Arrest*"))
+						holder.icon_state = "hudwanted"
+						break
+					else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Incarcerated"))
+						holder.icon_state = "hudprisoner"
+						break
+					else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Parolled"))
+						holder.icon_state = "hudparolled"
+						break
+					else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Released"))
+						holder.icon_state = "hudreleased"
+						break
+		hud_list[WANTED_HUD] = holder
+
+	if(hud_updateflag & 1 << IMPLOYAL_HUD || hud_updateflag & 1 << IMPCHEM_HUD || hud_updateflag & 1 << IMPTRACK_HUD)
+		var/image/holder1 = hud_list[IMPTRACK_HUD]
+		var/image/holder2 = hud_list[IMPLOYAL_HUD]
+		var/image/holder3 = hud_list[IMPCHEM_HUD]
+
+		holder1.icon_state = "hudblank"
+		holder2.icon_state = "hudblank"
+		holder3.icon_state = "hudblank"
+
+		for(var/obj/item/weapon/implant/I in src)
+			if(I.implanted)
+				if(istype(I,/obj/item/weapon/implant/tracking))
+					holder1.icon_state = "hud_imp_tracking"
+				if(istype(I,/obj/item/weapon/implant/loyalty))
+					holder2.icon_state = "hud_imp_loyal"
+				if(istype(I,/obj/item/weapon/implant/chem))
+					holder3.icon_state = "hud_imp_chem"
+
+		hud_list[IMPTRACK_HUD] = holder1
+		hud_list[IMPLOYAL_HUD] = holder2
+		hud_list[IMPCHEM_HUD] = holder3
+
+	if(hud_updateflag & 1 << SPECIALROLE_HUD)
+		var/image/holder = hud_list[SPECIALROLE_HUD]
+		holder.icon_state = "hudblank"
+		switch(mind.special_role)
+			if("traitor","Syndicate")
+				holder.icon_state = "hudsyndicate"
+			if("Revolutionary")
+				holder.icon_state = "hudrevolutionary"
+			if("Head Revolutionary")
+				holder.icon_state = "hudheadrevolutionary"
+			if("Cultist")
+				holder.icon_state = "hudcultist"
+			if("Changeling")
+				holder.icon_state = "hudchangeling"
+			if("Wizard","Fake Wizard")
+				holder.icon_state = "hudwizard"
+			if("Death Commando")
+				holder.icon_state = "huddeathsquad"
+			if("Ninja")
+				holder.icon_state = "hudninja"
+			if("Vampire")
+				holder.icon_state = "hudvampire"
+			if("VampThrall")
+				holder.icon_state = "hudvampthrall"
+
+		hud_list[SPECIALROLE_HUD] = holder
+
+	hud_updateflag = 0
+
 
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS

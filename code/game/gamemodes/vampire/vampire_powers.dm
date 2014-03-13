@@ -220,7 +220,7 @@
 			C.ear_deaf = 20
 			C.stuttering = 20
 			C.Stun(8)
-			C.make_jittery(150)
+			C.Jitter(150)
 		for(var/obj/structure/window/W in oview(3))
 			new W.shardtype(W.loc)
 			if(W.reinf) new /obj/item/stack/rods(W.loc)
@@ -278,7 +278,7 @@
 	if(!mind.vampire.iscloaking)
 		alpha = 255
 		return 0
-	if(T.lighting_lumcount <= 2)
+	if(T.lit_value <= 2)
 		alpha = round((255 * 0.15))
 		return 1
 	else
@@ -432,7 +432,7 @@
 				if(T.y>world.maxy-outer_tele_radius || T.y<outer_tele_radius)	continue
 
 				// LIGHTING CHECK
-				if(T.lighting_lumcount > max_lum) continue
+				if(T.lit_value > max_lum) continue
 				turfs += T
 
 			if(!turfs.len)

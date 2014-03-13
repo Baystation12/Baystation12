@@ -39,9 +39,12 @@ var/global/datum/controller/gameticker/ticker
 
 /datum/controller/gameticker/proc/pregame()
 	login_music = pick(\
+	'sound/music/therock.ogg',\
+	'sound/music/klendathu.ogg',\
 	'sound/music/knights.ogg',\
 	'sound/music/space.ogg',\
-	'sound/music/traitor.ogg',\
+	'sound/music/Title1.ogg',\
+	'sound/music/Title2.ogg',\
 	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
 	do
 		pregame_timeleft = 180
@@ -152,7 +155,7 @@ var/global/datum/controller/gameticker/ticker
 
 	supply_shuttle.process() 		//Start the supply shuttle regenerating points -- TLE
 	master_controller.process()		//Start master_controller.process()
-	lighting_controller.process()	//Start processing DynamicAreaLighting updates
+	//lighting_controller.process()	//Start processing DynamicAreaLighting updates
 
 
 	if(config.sql_enabled)

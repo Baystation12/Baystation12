@@ -75,8 +75,7 @@ move an amendment</a> to the drawing.</p>
 
 /obj/item/blueprints/proc/get_area()
 	var/turf/T = get_turf_loc(usr)
-	var/area/A = T.loc
-	A = A.master
+	var/area/A = get_area_master(T)
 	return A
 
 /obj/item/blueprints/proc/get_area_type(var/area/A = get_area())
@@ -133,9 +132,6 @@ move an amendment</a> to the drawing.</p>
 	move_turfs_to_area(turfs, A)
 
 	A.always_unpowered = 0
-	for(var/turf/T in A.contents)
-		T.lighting_changed = 1
-		lighting_controller.changed_turfs += T
 
 	spawn(5)
 		//ma = A.master ? "[A.master]" : "(null)"

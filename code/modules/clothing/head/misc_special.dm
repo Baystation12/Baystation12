@@ -132,15 +132,6 @@
 	brightness_on = 2 //luminosity when on
 	loose = 80
 
-/*
- * Kitty ears
- */
-/obj/item/clothing/head/kitty
-	name = "kitty ears"
-	desc = "A pair of kitty ears. Meow!"
-	icon_state = "kitty"
-	loose = 4 // meow
-
 
 /obj/item/clothing/head/hardhat/reindeer
 	name = "novelty reindeer hat"
@@ -164,19 +155,32 @@
 	icon_state = "kitty"
 	flags = FPRINT | TABLEPASS
 	var/icon/mob
-	var/icon/mob2
 	siemens_coefficient = 1.5
+	loose = 33
 
 	update_icon(var/mob/living/carbon/human/user)
 		if(!istype(user)) return
 		mob = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kitty")
-		mob2 = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kitty2")
+//		mob2 = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kitty2") - Commented out because it seemingly does nothing.
 		mob.Blend(rgb(user.r_hair, user.g_hair, user.b_hair), ICON_ADD)
-		mob2.Blend(rgb(user.r_hair, user.g_hair, user.b_hair), ICON_ADD)
+//		mob2.Blend(rgb(user.r_hair, user.g_hair, user.b_hair), ICON_ADD) - Commented out because it seemingly does nothing.
 
 		var/icon/earbit = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kittyinner")
-		var/icon/earbit2 = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kittyinner2")
+//		var/icon/earbit2 = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "kittyinner2") - Commented out because it seemingly does nothing.
 		mob.Blend(earbit, ICON_OVERLAY)
-		mob2.Blend(earbit2, ICON_OVERLAY)
+//		mob2.Blend(earbit2, ICON_OVERLAY) - Commented out because it seemingly does nothing.
 
-	loose = 33
+
+
+/obj/item/clothing/head/kitty/mouse
+	name = "mouse ears"
+	desc = "A pair of mouse ears. Squeak!"
+	icon_state = "mousey"
+
+	update_icon(var/mob/living/carbon/human/user)
+		if(!istype(user)) return
+		mob = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "mousey")
+		mob.Blend(rgb(user.r_hair, user.g_hair, user.b_hair), ICON_ADD)
+
+		var/icon/earbit = new/icon("icon" = 'icons/mob/head.dmi', "icon_state" = "mouseyinner")
+		mob.Blend(earbit, ICON_OVERLAY)

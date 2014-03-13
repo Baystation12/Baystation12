@@ -21,7 +21,7 @@
 	New()
 		..()
 		spawn(1200)// 2 minutes
-			del(src)
+			qdel(src)
 
 /obj/effect/decal/cleanable/dirt
 	name = "dirt"
@@ -97,9 +97,10 @@
 	var/list/datum/disease2/disease/virus2 = list()
 	var/list/viruses = list()
 
-	Del()
+	Destroy()
 		for(var/datum/disease/D in viruses)
 			D.cure(0)
+			D.holder = null
 		..()
 
 /obj/effect/decal/cleanable/poop

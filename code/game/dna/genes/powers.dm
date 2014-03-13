@@ -153,16 +153,18 @@
 		return ..(M,flags)
 
 	OnDrawUnderlays(var/mob/M,var/g,var/fat)
-		if(fat)
-			return "hulk_[fat]_s"
-		else
-			return "hulk_[g]_s"
+		if(M_HULK in M.mutations)
+			if(fat)
+				return "hulk_[fat]_s"
+			else
+				return "hulk_[g]_s"
 		return 0
 
 	OnMobLife(var/mob/living/carbon/human/M)
 		if(!istype(M)) return
 		if(M.health <= 25)
 			M.mutations.Remove(M_HULK)
+			M.dna.SetSEState(HULKBLOCK,0)
 			M.update_mutations()		//update our mutation overlays
 			M << "\red You suddenly feel very weak."
 			M.Weaken(3)

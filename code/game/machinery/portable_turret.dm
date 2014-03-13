@@ -176,7 +176,7 @@
 					egun = 1
 					reqpower = 200
 
-	Del()
+	Destroy()
 		// deletes its own cover with it
 		del(cover)
 		..()
@@ -450,8 +450,12 @@ Status: []<BR>"},
 
 	if(src.check_anomalies) // if its set to check for xenos/carps, check for non-mob "crittersssss"(And simple_animals)
 		for(var/mob/living/simple_animal/C in view(7,src))
-			if(!C.stat)
-				targets += C
+			if(C.stat)
+				continue
+			// Ignore lazarus-injected mobs.
+			if(C.faction == "lazarus")
+				continue
+			targets += C
 
 	for (var/mob/living/carbon/C in view(7,src)) // loops through all living carbon-based lifeforms in view(12)
 		if(istype(C, /mob/living/carbon/alien) && src.check_anomalies) // git those fukken xenos

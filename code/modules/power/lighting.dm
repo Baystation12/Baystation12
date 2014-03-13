@@ -253,7 +253,7 @@
 		spawn(1)
 			update(0)
 
-/obj/machinery/light/Del()
+/obj/machinery/light/Destroy()
 	var/area/A = get_area(src)
 	if(A)
 		on = 0
@@ -602,15 +602,16 @@
 
 #define LIGHTING_POWER_FACTOR 20		//20W per unit luminosity
 
+/*
 /obj/machinery/light/process()//TODO: remove/add this from machines to save on processing as needed ~Carn PRIORITY
 	if(on)
 		use_power(luminosity * LIGHTING_POWER_FACTOR, LIGHT)
+*/
 
 // called when area power state changes
 /obj/machinery/light/power_change()
 	spawn(10)
-		var/area/A = src.loc.loc
-		A = A.master
+		var/area/A = get_area_master(src)
 		seton(A.lightswitch && A.power_light)
 
 // called when on fire

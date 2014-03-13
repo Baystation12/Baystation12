@@ -1,4 +1,5 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
+var/global/list/all_objectives = list()
 
 var/list/potential_theft_objectives=typesof(/datum/theft_objective) \
 	- /datum/theft_objective \
@@ -14,8 +15,13 @@ datum/objective
 	var/completed = 0					//currently only used for custom objectives.
 
 	New(var/text)
+		all_objectives |= src
 		if(text)
 			explanation_text = text
+
+	Del()
+		all_objectives -= src
+		..()
 
 	proc/check_completion()
 		return completed

@@ -24,7 +24,7 @@
 				I.loc = src
 
 // Fix for #383 - C4 deleting fridges with corpses
-/obj/structure/closet/Del()
+/obj/structure/closet/Destroy()
 	dump_contents()
 	..()
 
