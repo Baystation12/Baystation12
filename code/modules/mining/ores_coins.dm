@@ -81,6 +81,7 @@
 	throwforce = 0.0
 	w_class = 1.0
 	var/string_attached
+	var/sides = 2
 
 /obj/item/weapon/coin/New()
 	pixel_x = rand(0,16)-8
