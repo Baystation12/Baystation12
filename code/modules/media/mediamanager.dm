@@ -51,7 +51,7 @@ function SetMusic(url, time, volume) {
 /datum/media_manager
 	var/url = ""
 	var/start_time = 0
-	var/volume = 100
+	var/volume = 25
 
 	var/client/owner
 	var/mob/mob
@@ -84,7 +84,7 @@ function SetMusic(url, time, volume) {
 	proc/update_music()
 		var/targetURL = ""
 		var/targetStartTime = 0
-		var/targetVolume = 100
+		var/targetVolume = 25
 
 		if (!owner)
 			//testing("owner is null")
