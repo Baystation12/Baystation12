@@ -1414,6 +1414,10 @@ var/list/ghostteleportlocs = list()
 	name = "Port Emergency Storage"
 	icon_state = "emergencystorage"
 
+/area/storage/emergency3
+	name = "Central Emergency Storage"
+	icon_state = "emergencystorage"
+
 /area/storage/tech
 	name = "Technical Storage"
 	icon_state = "auxstorage"

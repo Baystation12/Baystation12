@@ -59,6 +59,12 @@
 	jitteriness = 0
 	dog_owner = null
 
+	
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
+
+	handle_hud_list()
+	
 	//Handle species-specific deaths.
 	if(species) species.handle_death(src)
 
