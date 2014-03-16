@@ -1126,11 +1126,11 @@
 		return 1
 
 	proc/handle_regular_hud_updates()
-		if(!client)	return 0
-
 		if(hud_updateflag)
 			handle_hud_list()
-	
+
+
+		if(!client)	return 0
 
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
@@ -1671,25 +1671,27 @@
 	if(hud_updateflag & 1 << SPECIALROLE_HUD)
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
-		switch(mind.special_role)
-			if("traitor","Syndicate")
-				holder.icon_state = "hudsyndicate"
-			if("Revolutionary")
-				holder.icon_state = "hudrevolutionary"
-			if("Head Revolutionary")
-				holder.icon_state = "hudheadrevolutionary"
-			if("Cultist")
-				holder.icon_state = "hudcultist"
-			if("Changeling")
-				holder.icon_state = "hudchangeling"
-			if("Wizard","Fake Wizard")
-				holder.icon_state = "hudwizard"
-			if("Death Commando")
-				holder.icon_state = "huddeathsquad"
-			if("Ninja")
-				holder.icon_state = "hudninja"
-
-		hud_list[SPECIALROLE_HUD] = holder
+		if(mind)
+		
+			switch(mind.special_role)
+				if("traitor","Syndicate")
+					holder.icon_state = "hudsyndicate"
+				if("Revolutionary")
+					holder.icon_state = "hudrevolutionary"
+				if("Head Revolutionary")
+					holder.icon_state = "hudheadrevolutionary"
+				if("Cultist")
+					holder.icon_state = "hudcultist"
+				if("Changeling")
+					holder.icon_state = "hudchangeling"
+				if("Wizard","Fake Wizard")
+					holder.icon_state = "hudwizard"
+				if("Death Commando")
+					holder.icon_state = "huddeathsquad"
+				if("Ninja")
+					holder.icon_state = "hudninja"
+	
+			hud_list[SPECIALROLE_HUD] = holder
 
 	hud_updateflag = 0
 
