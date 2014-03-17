@@ -1003,9 +1003,6 @@ var/global/floorIsLava = 0
 	if(ispath(chosen,/turf))
 		var/turf/T = get_turf(usr.loc)
 		T.ChangeTurf(chosen)
-	else if(ispath(chosen,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = new chosen(usr.loc)
-		H.species.handle_post_spawn(H)
 	else
 		new chosen(usr.loc)
 

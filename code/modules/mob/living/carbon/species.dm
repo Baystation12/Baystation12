@@ -152,25 +152,26 @@
 	flesh_color = "#808D11"
 
 /datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
-	for(var/datum/organ/external/head/C in H.organs)
 
-		//To avoid duplicates.
-		for(var/obj/item/weapon/implant/cortical/imp in H.contents)
-			C.implants -= imp
-			del(imp)
+	var/datum/organ/external/affected = H.get_organ("head")
 
-		var/obj/item/weapon/implant/cortical/I = new(H)
-		I.imp_in = H
-		I.implanted = 1
-		C.implants += I
-		I.part = C
+	//To avoid duplicates.
+	for(var/obj/item/weapon/implant/cortical/imp in H.contents)
+		affected.implants -= imp
+		del(imp)
 
-		if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
-			var/datum/game_mode/heist/M = ticker.mode
-			M.cortical_stacks += I
-			M.raiders[H.mind] = I
+	var/obj/item/weapon/implant/cortical/I = new(H)
+	I.imp_in = H
+	I.implanted = 1
+	affected.implants += I
+	I.part = affected
 
-		return ..()
+	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
+		var/datum/game_mode/heist/M = ticker.mode
+		M.cortical_stacks += I
+		M.raiders[H.mind] = I
+
+	return ..()
 
 /datum/species/diona
 	name = "Diona"
