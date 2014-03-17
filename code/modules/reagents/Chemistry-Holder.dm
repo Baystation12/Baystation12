@@ -110,7 +110,7 @@ datum
 						continue
 					var/current_reagent_transfer = current_reagent.volume * part
 					if(preserve_data)
-						trans_data = current_reagent.data
+						trans_data = copy_data(current_reagent)
 
 					R.add_reagent(current_reagent.id, (current_reagent_transfer * multiplier), trans_data, safety = 1)	//safety checks on these so all chemicals are transferred
 					src.remove_reagent(current_reagent.id, current_reagent_transfer, safety = 1)							// to the target container before handling reactions
@@ -183,7 +183,7 @@ datum
 				for (var/datum/reagent/current_reagent in src.reagent_list)
 					var/current_reagent_transfer = current_reagent.volume * part
 					if(preserve_data)
-						trans_data = current_reagent.data
+						trans_data = copy_data(current_reagent)
 					R.add_reagent(current_reagent.id, (current_reagent_transfer * multiplier), trans_data, safety = 1)	//safety check so all chemicals are transferred before reacting
 
 				src.update_total()
@@ -207,7 +207,7 @@ datum
 				for (var/datum/reagent/current_reagent in src.reagent_list)
 					if(current_reagent.id == reagent)
 						if(preserve_data)
-							trans_data = current_reagent.data
+							trans_data = copy_data(current_reagent)
 						R.add_reagent(current_reagent.id, amount, trans_data)
 						src.remove_reagent(current_reagent.id, amount, 1)
 						break
@@ -600,6 +600,24 @@ datum
 				if(my_atom)
 					my_atom.reagents = null
 
+			copy_data(var/datum/reagent/current_reagent)
+				if (!current_reagent || !current_reagent.data) return null
+				if (!istype(current_reagent.data, /list)) return current_reagent.data
+
+				var/list/trans_data = current_reagent.data.Copy()
+
+				// We do this so that introducing a virus to a blood sample
+				// doesn't automagically infect all other blood samples from
+				// the same donor.
+				//
+				// Technically we should probably copy all data lists, but
+				// that could possibly eat up a lot of memory needlessly
+				// if most data lists are read-only.
+				if (trans_data["virus2"])
+					var/list/v = trans_data["virus2"]
+					trans_data["virus2"] = v.Copy()
+
+				return trans_data
 
 ///////////////////////////////////////////////////////////////////////////////////
 
