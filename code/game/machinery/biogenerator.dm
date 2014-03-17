@@ -34,7 +34,7 @@
 /obj/machinery/biogenerator/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			user << "\red The biogenerator already occupied."
+			user << "\red The biogenerator is already loaded."
 		else
 			user.before_take_item(O)
 			O.loc = src
