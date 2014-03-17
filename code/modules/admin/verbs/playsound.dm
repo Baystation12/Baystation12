@@ -41,7 +41,7 @@ var/global/list/sounds_cache = list()
 	set name = "Play Server Sound"
 	if(!check_rights(R_SOUNDS))	return
 
-	var/list/sounds = file2list("sound/music/list.txt");
+	var/list/sounds = file2list("tauceti/sounds/list.txt");
 	sounds += "--CANCEL--"
 	sounds += sounds_cache //i don't know, how long stored music on server. Hope, all round
 

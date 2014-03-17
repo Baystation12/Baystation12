@@ -174,6 +174,7 @@ BLIND     // can't see anything
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
 	species_restricted = list("exclude","Unathi","Tajaran")
+	var/footstep = 1	//used for squeeks whilst walking(tc)
 
 //Suit
 /obj/item/clothing/suit

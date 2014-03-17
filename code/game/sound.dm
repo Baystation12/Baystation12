@@ -11,6 +11,9 @@
 		if ("swing_hit") soundin = pick('sound/weapons/genhit1.ogg', 'sound/weapons/genhit2.ogg', 'sound/weapons/genhit3.ogg')
 		if ("hiss") soundin = pick('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
 		if ("pageturn") soundin = pick('sound/effects/pageturn1.ogg', 'sound/effects/pageturn2.ogg','sound/effects/pageturn3.ogg')
+		//tc addition
+		if ("footsteps") soundin = pick('tauceti/sounds/effects/tile1.wav','tauceti/sounds/effects/tile2.wav','tauceti/sounds/effects/tile3.wav','tauceti/sounds/effects/tile4.wav')
+//		if ("footsteps") soundin = pick('tauceti/sounds/effects/footsteps.ogg','tauceti/sounds/effects/footsteps2.ogg')
 
 	var/sound/S = sound(soundin)
 	S.wait = 0 //No queue

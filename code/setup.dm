@@ -769,8 +769,4 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define COLOR_PINK 		"#FF00FF"
 #define COLOR_YELLOW 	"#FFFF00"
 #define COLOR_ORANGE 	"#FF9900"
-<<<<<<< HEAD
 #define COLOR_WHITE 	"#FFFFFF"
-=======
-#define COLOR_WHITE 	"#FFFFFF"
->>>>>>> upstream/master

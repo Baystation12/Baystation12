@@ -41,18 +41,23 @@
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(istype(H.shoes, /obj/item/clothing/shoes/clown_shoes))
-				var/obj/item/clothing/shoes/clown_shoes/O = H.shoes
+			if(istype(H:shoes, /obj/item/clothing/shoes))
+				var/obj/item/clothing/shoes/O = H.shoes
+
+				var/footstepsound = "footsteps"
+
+				if(istype(H.shoes, /obj/item/clothing/shoes/clown_shoes))
+					if(prob(25))
+						footstepsound = "clownstep"
+
 				if(H.m_intent == "run")
 					if(O.footstep >= 2)
 						O.footstep = 0
-						if(prob(25))
-							playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
+						playsound(src, footstepsound, 50, 1)
 					else
 						O.footstep++
 				else
-					if(prob(25))
-						playsound(src, "clownstep", 20, 1)
+					playsound(src, footstepsound, 20, 1)
 
 			// Tracking blood
 			var/list/bloodDNA = null

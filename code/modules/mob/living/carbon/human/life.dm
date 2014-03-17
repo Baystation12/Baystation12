@@ -102,6 +102,8 @@
 
 		handle_medical_side_effects()
 
+		handle_heart_beat()
+
 	handle_stasis_bag()
 
 	//Handle temperature/pressure differences between body and environment
@@ -1168,7 +1170,7 @@
 
 		if(hud_updateflag)
 			handle_hud_list()
-	
+
 
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
@@ -1586,7 +1588,7 @@
 			if(R.id in tachycardics)
 				if(temp <= PULSE_FAST && temp >= PULSE_NONE)
 					temp++
-					break
+					//break
 		for(var/datum/reagent/R in reagents.reagent_list) //To avoid using fakedeath
 			if(R.id in heartstopper)
 				temp = PULSE_NONE
@@ -1635,7 +1637,7 @@
 		else if(status_flags & XENO_HOST)
 			holder.icon_state = "hudxeno"
 			holder2.icon_state = "hudxeno"
-		else if(foundVirus)							
+		else if(foundVirus)
 			holder.icon_state = "hudill"
 		else if(has_brain_worms())
 			var/mob/living/simple_animal/borer/B = has_brain_worms()
@@ -1676,7 +1678,7 @@
 			var/obj/item/weapon/card/id/I = wear_id.GetID()
 			if(I)
 				perpname = I.registered_name
-				
+
 		for(var/datum/data/record/E in data_core.general)
 			if(E.fields["name"] == perpname)
 				for (var/datum/data/record/R in data_core.security)
@@ -1697,7 +1699,7 @@
 	if(hud_updateflag & 1 << IMPLOYAL_HUD || hud_updateflag & 1 << IMPCHEM_HUD || hud_updateflag & 1 << IMPTRACK_HUD)
 		var/image/holder1 = hud_list[IMPTRACK_HUD]
 		var/image/holder2 = hud_list[IMPLOYAL_HUD]
-		var/image/holder3 = hud_list[IMPCHEM_HUD]			
+		var/image/holder3 = hud_list[IMPCHEM_HUD]
 
 		holder1.icon_state = "hudblank"
 		holder2.icon_state = "hudblank"
