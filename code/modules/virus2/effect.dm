@@ -22,7 +22,8 @@
 		if(f.stage == src.stage)
 			list += f
 	effect = pick(list)
-	chance = rand(1,6)
+	chance = rand(0,effect.chance_maxm)
+	multiplier = rand(1,effect.maxm)
 
 /datum/disease2/effectholder/proc/minormutate()
 	switch(pick(1,2,3,4,5))
@@ -251,7 +252,8 @@
 		if(istype(mob, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = mob
 			var/datum/organ/internal/brain/B = H.internal_organs["brain"]
-			B.take_damage(5)
+			if (B.damage < B.min_broken_damage)
+				B.take_damage(5)
 		else
 			mob.setBrainLoss(50)
 
@@ -391,7 +393,12 @@
 	name = "Coldingtons Effect"
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
+		if (prob(30))
+			mob << "<span class='warning'>You feel like you are about to sneeze!</span>"
+		sleep(5)
 		mob.say("*sneeze")
+		for(var/mob/living/carbon/M in get_step(mob,mob.dir))
+			mob.spread_disease_to(M)
 		if (prob(50))
 			var/obj/effect/decal/cleanable/mucus/M= locate(/obj/effect/decal/cleanable/mucus) in get_turf(mob)
 			if(M==null)

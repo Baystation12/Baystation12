@@ -33,10 +33,11 @@ function SetMusic(url, time, volume) {
 
 	// Update when moving between areas.
 	proc/OnMobAreaChange(var/list/args)
-		//testing("Received OnMobAreaChange.")
 		var/mob/M = args["mob"]
-
-		M.update_music()
+		//if(istype(M, /mob/living/carbon/human)||istype(M, /mob/dead/observer))
+		//	testing("Received OnMobAreaChange for [M.type] [M] (M.client=[M.client==null?"null":"/client"]).")
+		if(M.client)
+			M.update_music()
 
 /mob/proc/update_music()
 	if (client && client.media)
@@ -51,7 +52,7 @@ function SetMusic(url, time, volume) {
 /datum/media_manager
 	var/url = ""
 	var/start_time = 0
-	var/volume = 100
+	var/volume = 25
 
 	var/client/owner
 	var/mob/mob
@@ -84,7 +85,7 @@ function SetMusic(url, time, volume) {
 	proc/update_music()
 		var/targetURL = ""
 		var/targetStartTime = 0
-		var/targetVolume = 100
+		var/targetVolume = 25
 
 		if (!owner)
 			//testing("owner is null")
