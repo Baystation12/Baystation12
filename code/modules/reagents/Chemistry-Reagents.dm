@@ -2236,7 +2236,6 @@ datum
 				return
 
 
-
 /////////////////////////Food Reagents////////////////////////////
 // Part of the food code. Nutriment is used instead of the old "heal_amt" code. Also is where all the food
 // 	condiments, additives, and such go.
@@ -3869,4 +3868,7 @@ datum
 				M.adjustBrainLoss(10*REM)
 				return
 
+
 */
+// Undefine the alias for REAGENTS_EFFECT_MULTIPLER
+#undef REM

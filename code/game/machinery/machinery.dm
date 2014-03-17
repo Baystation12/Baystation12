@@ -277,3 +277,15 @@ Class Procs:
 		panel_open = 0
 		icon_state = icon_state_closed
 		user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
+
+/obj/machinery/proc/state(var/msg)
+  for(var/mob/O in hearers(src, null))
+    O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
+
+/obj/machinery/proc/ping(text=null)
+  if (!text)
+    text = "\The [src] pings."
+
+  state(text, "blue")
+  playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+
