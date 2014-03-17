@@ -101,14 +101,14 @@
 			machine.selected_diamond = 0
 
 		//bananium
-		if(machine.ore_clown)
+/*		if(machine.ore_clown)
 			if (machine.selected_clown==1)
 				dat += text("<A href='?src=\ref[src];sel_clown=no'><font color='green'>Smelting</font></A> ")
 			else
 				dat += text("<A href='?src=\ref[src];sel_clown=yes'><font color='red'>Not smelting</font></A> ")
 			dat += text("Bananium: [machine.ore_clown]<br>")
 		else
-			machine.selected_clown = 0
+			machine.selected_clown = 0*/
 
 
 		//On or off
@@ -165,11 +165,11 @@
 			machine.selected_diamond = 1
 		else
 			machine.selected_diamond = 0
-	if(href_list["sel_clown"])
+/*	if(href_list["sel_clown"])
 		if (href_list["sel_clown"] == "yes")
 			machine.selected_clown = 1
 		else
-			machine.selected_clown = 0
+			machine.selected_clown = 0*/
 	if(href_list["set_on"])
 		if (href_list["set_on"] == "on")
 			machine.on = 1
@@ -292,7 +292,7 @@
 					else
 						on = 0
 					continue
-				if (selected_glass == 0 && selected_gold == 0 && selected_silver == 0 && selected_diamond == 0 && selected_plasma == 0 && selected_uranium == 0 && selected_iron == 0 && selected_clown == 1)
+/*				if (selected_glass == 0 && selected_gold == 0 && selected_silver == 0 && selected_diamond == 0 && selected_plasma == 0 && selected_uranium == 0 && selected_iron == 0 && selected_clown == 1)
 					if (ore_clown > 0)
 						ore_clown--;
 						new /obj/item/stack/sheet/mineral/clown(output.loc)
@@ -311,25 +311,6 @@
 						ore_iron--;
 						ore_plasma--;
 						new /obj/item/stack/sheet/glass/plasmarglass(output.loc)
-					else
-						on = 0
-					continue
-				//THESE TWO ARE CODED FOR URIST TO USE WHEN HE GETS AROUND TO IT.
-				//They were coded on 18 Feb 2012. If you're reading this in 2015, then firstly congratulations on the world not ending on 21 Dec 2012 and secondly, Urist is apparently VERY lazy. ~Errorage
-				//Iamgoofball here, this comment I'm typing right now was made in 11/1/2013. If you're reading this in 2020, then please let me know if the world has gone into a nuclear apocalypse. Also Urist has been tried and hung for how lazy he was. That and he was jaywalking.
-				/*if (selected_glass == 0 && selected_gold == 0 && selected_silver == 0 && selected_diamond == 1 && selected_plasma == 0 && selected_uranium == 1 && selected_iron == 0 && selected_clown == 0)
-					if (ore_uranium >= 2 && ore_diamond >= 1)
-						ore_uranium -= 2
-						ore_diamond -= 1
-						new /obj/item/stack/sheet/mineral/adamantine(output.loc)
-					else
-						on = 0
-					continue
-				if (selected_glass == 0 && selected_gold == 0 && selected_silver == 1 && selected_diamond == 0 && selected_plasma == 1 && selected_uranium == 0 && selected_iron == 0 && selected_clown == 0)
-					if (ore_silver >= 1 && ore_plasma >= 3)
-						ore_silver -= 1
-						ore_plasma -= 3
-						new /obj/item/stack/sheet/mineral/mythril(output.loc)
 					else
 						on = 0
 					continue*/
