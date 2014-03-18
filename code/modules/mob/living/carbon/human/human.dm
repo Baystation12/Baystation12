@@ -28,9 +28,9 @@
 	..()
 
 /mob/living/carbon/human/vox/New()
+	..()
 	h_style = "Short Vox Quills"
 	set_species("Vox")
-	..()
 
 /mob/living/carbon/human/diona/New()
 	species = new /datum/species/diona(src)
@@ -63,7 +63,7 @@
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
-		
+
 
 	..()
 
