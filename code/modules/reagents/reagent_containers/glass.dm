@@ -38,7 +38,10 @@
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/obj/machinery/computer/centrifuge,
 		/obj/machinery/sleeper,
-		/obj/machinery/smartfridge/	)
+		/obj/machinery/smartfridge/,
+		/obj/machinery/biogenerator,
+		/obj/machinery/hydroponics,
+		/obj/machinery/constructable_frame)
 
 	New()
 		..()

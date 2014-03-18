@@ -448,7 +448,7 @@ obj/machinery/hydroponics/proc/mutatepest()  // Until someone makes a spaceworm,
 obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 
 	//Called when mob user "attacks" it with object O
-	if (istype(O, /obj/item/weapon/reagent_containers/glass/bucket))
+	if (istype(O, /obj/item/weapon/reagent_containers/glass))
 		var/b_amount = O.reagents.get_reagent_amount("water")
 		if(b_amount > 0 && waterlevel < 100)
 			if(b_amount + waterlevel > 100)
@@ -456,17 +456,17 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 			O.reagents.remove_reagent("water", b_amount)
 			waterlevel += b_amount
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
-			user << "You fill the [src] with [b_amount] units of water."
+			user << "You fill \the [src] with [b_amount] units of water."
 
-	//		Toxicity dilutation code. The more water you put in, the lesser the toxin concentration.
+			// Toxicity dilutation code. The more water you put in, the lesser the toxin concentration.
 			toxic -= round(b_amount/4)
-			if (toxic < 0 ) // Make sure it won't go overoboard
+			if (toxic < 0 ) // Make sure it won't go overboard
 				toxic = 0
 
 		else if(waterlevel >= 100)
-			user << "\red The [src] is already full."
+			user << "\red \The [src] is already full."
 		else
-			user << "\red The bucket is not filled with water."
+			user << "\red \The [O] is not filled with water."
 		updateicon()
 
 	else if ( istype(O, /obj/item/nutrient) )
@@ -484,7 +484,7 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 		if (planted)
 			if (S.mode == 1)
 				if(!S.reagents.total_volume)
-					user << "\red The syringe is empty."
+					user << "\red \The [O] is empty."
 					return
 				user << "\red You inject the [myseed.plantname] with a chemical solution."
 
