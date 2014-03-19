@@ -39,7 +39,7 @@
 	if(destination)
 		if(loc)
 			loc.Exited(src)
-		loc = destination
+		setloc(destination)
 		loc.Entered(src)
 		return 1
 	return 0

@@ -21,6 +21,7 @@
 #include "code\__HELPERS\global_lists.dm"
 #include "code\__HELPERS\icons.dm"
 #include "code\__HELPERS\lists.dm"
+#include "code\__HELPERS\loc.dm"
 #include "code\__HELPERS\logging.dm"
 #include "code\__HELPERS\maths.dm"
 #include "code\__HELPERS\mobs.dm"
