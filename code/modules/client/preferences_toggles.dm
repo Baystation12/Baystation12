@@ -195,7 +195,7 @@
 	set category = "Preferences"
 	set desc = "Toggle hearing streaming media (radios, jukeboxes, etc)"
 
-	prefs.toggles ^= SOUND_STREAMING
+	prefs.sound ^= SOUND_STREAMING
 	prefs.save_preferences()
 	usr << "You will [(prefs.toggles & SOUND_STREAMING) ? "now" : "no longer"] hear streamed media."
 	// Restart.
