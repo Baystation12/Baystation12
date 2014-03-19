@@ -46,7 +46,7 @@
 	usr.pulling = null
 	usr.client.perspective = EYE_PERSPECTIVE
 	usr.client.eye = src
-	usr.loc = src
+	usr.setloc(src)
 	src.occupant = usr
 	src.icon_state = "body_scanner_1"
 	for(var/obj/O in src)
@@ -60,12 +60,12 @@
 	if ((!( src.occupant ) || src.locked))
 		return
 	for(var/obj/O in src)
-		O.loc = src.loc
+		O.setloc(src.loc)
 		//Foreach goto(30)
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
 		src.occupant.client.perspective = MOB_PERSPECTIVE
-	src.occupant.loc = src.loc
+	src.occupant.setloc(src.loc)
 	src.occupant = null
 	src.icon_state = "body_scanner_0"
 	return
@@ -83,11 +83,11 @@
 	if (M.client)
 		M.client.perspective = EYE_PERSPECTIVE
 		M.client.eye = src
-	M.loc = src
+	M.setloc(src)
 	src.occupant = M
 	src.icon_state = "body_scanner_1"
 	for(var/obj/O in src)
-		O.loc = src.loc
+		O.setloc(src.loc)
 		//Foreach goto(154)
 	src.add_fingerprint(user)
 	//G = null
@@ -98,7 +98,7 @@
 	switch(severity)
 		if(1.0)
 			for(var/atom/movable/A as mob|obj in src)
-				A.loc = src.loc
+				A.setloc(src.loc)
 				ex_act(severity)
 				//Foreach goto(35)
 			//SN src = null
@@ -107,7 +107,7 @@
 		if(2.0)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.setloc(src.loc)
 					ex_act(severity)
 					//Foreach goto(108)
 				//SN src = null
@@ -116,7 +116,7 @@
 		if(3.0)
 			if (prob(25))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.setloc(src.loc)
 					ex_act(severity)
 					//Foreach goto(181)
 				//SN src = null
@@ -128,7 +128,7 @@
 /obj/machinery/bodyscanner/blob_act()
 	if(prob(50))
 		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
+			A.setloc(src.loc)
 		del(src)
 
 /obj/machinery/body_scanconsole/ex_act(severity)

@@ -410,7 +410,7 @@
 
 		src.OCCUPANT.client.eye = src.OCCUPANT.client.mob
 		src.OCCUPANT.client.perspective = MOB_PERSPECTIVE
-	src.OCCUPANT.loc = src.loc
+	src.OCCUPANT.setloc(src.loc)
 	src.OCCUPANT = null
 	if(!src.isopen)
 		src.isopen = 1
@@ -453,7 +453,7 @@
 		usr.stop_pulling()
 		usr.client.perspective = EYE_PERSPECTIVE
 		usr.client.eye = src
-		usr.loc = src
+		usr.setloc(src)
 //		usr.metabslow = 1
 		src.OCCUPANT = usr
 		src.isopen = 0 //Close the thing after the guy gets inside
@@ -499,7 +499,7 @@
 			if (M.client)
 				M.client.perspective = EYE_PERSPECTIVE
 				M.client.eye = src
-			M.loc = src
+			M.setloc(src)
 			src.OCCUPANT = M
 			src.isopen = 0 //close ittt
 
@@ -520,7 +520,7 @@
 			return
 		user << "You load the [S.name] into the storage compartment."
 		user.drop_item()
-		S.loc = src
+		S.setloc(src)
 		src.SUIT = S
 		src.update_icon()
 		src.updateUsrDialog()
@@ -534,7 +534,7 @@
 			return
 		user << "You load the [H.name] into the storage compartment."
 		user.drop_item()
-		H.loc = src
+		H.setloc(src)
 		src.HELMET = H
 		src.update_icon()
 		src.updateUsrDialog()
@@ -548,7 +548,7 @@
 			return
 		user << "You load the [M.name] into the storage compartment."
 		user.drop_item()
-		M.loc = src
+		M.setloc(src)
 		src.MASK = M
 		src.update_icon()
 		src.updateUsrDialog()

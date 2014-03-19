@@ -142,7 +142,7 @@ obj/machinery/computer/forensic_scanning
 					temp = null
 			if("eject")
 				if(scanning)
-					scanning.loc = loc
+					scanning.setloc(loc)
 					scanning = null
 				else
 					temp = "Eject Failed: No Object"
@@ -152,13 +152,13 @@ obj/machinery/computer/forensic_scanning
 				if(I && istype(I))
 					if(istype(I, /obj/item/weapon/evidencebag))
 						scanning = I.contents[1]
-						scanning.loc = src
+						scanning.setloc(src)
 						I.overlays -= scanning
 						I.icon_state = "evidenceobj"
 					else
 						scanning = I
 						M.drop_item()
-						I.loc = src
+						I.setloc(src)
 				else
 					usr << "Invalid Object Rejected."
 			if("card")  //Processing a fingerprint card.
@@ -173,11 +173,11 @@ obj/machinery/computer/forensic_scanning
 					if(card.amount > 1 || !card.fingerprints.len)
 						usr << "\red ERROR: No prints/too many cards."
 						if(card.loc == src)
-							card.loc = src.loc
+							card.setloc(src.loc)
 						card = null
 						return
 					M.drop_item()
-					I.loc = src
+					I.setloc(src)
 					process_card()
 				else
 					usr << "\red Invalid Object Rejected."
@@ -607,7 +607,7 @@ obj/machinery/computer/forensic_scanning
 		else
 			usr << "\red ERROR: No prints/too many cards."
 			if(card.loc == src)
-				card.loc = src.loc
+				card.setloc(src.loc)
 			card = null
 			return
 		return
