@@ -90,7 +90,7 @@
 /obj/machinery/computer/diseasesplicer/process()
 	if(stat & (NOPOWER|BROKEN))
 		return
-	use_power(500)
+	//use_power(500)
 
 	if(scanning)
 		scanning -= 1
@@ -137,6 +137,7 @@
 				if(e.stage == memorybank.stage)
 					e.effect = memorybank.effect
 			splicing = 10
+			dish.virus2.uniqueID = rand(0,10000)
 //			dish.virus2.spreadtype = "Blood"
 
 	else if(href_list["disk"])
