@@ -53,8 +53,9 @@ Turf Procs:
 
 #define LIGHTCLAMP(x) ( max(0,min(3,round(x,1))) )
 
-obj/effect/lighting_overlay
-	//anchored = 1
+atom/movable/lighting_overlay
+	name = ""
+	anchored = 1
 	layer = 9
 	mouse_opacity = 0
 	icon = 'icons/effects/ArynLights.dmi'
@@ -63,7 +64,7 @@ obj/effect/lighting_overlay
 
 atom/var/light/light
 
-turf/var/obj/effect/lighting_overlay/light_overlay
+turf/var/atom/movable/lighting_overlay/light_overlay
 
 turf/var/lit_value = 0
 turf/var/max_brightness = 0
@@ -167,6 +168,14 @@ turf/proc/RemoveLight(light/light)
 turf/proc/ResetAllLights()
 	for(var/light/light in lit_by)
 		light.Reset()
+
+/turf/space/ResetAllLights()
+	var/atom/movable/lighting_overlay/overlay = locate() in src
+	if (overlay)
+		overlay.loc = null
+		light_overlay = null
+		is_outside = 1
+	. = ..()
 
 turf/proc/ResetValue()
 	if(is_outside)

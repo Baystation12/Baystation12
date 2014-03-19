@@ -37,7 +37,11 @@
 		/mob/living/simple_animal/cow,
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/obj/machinery/computer/centrifuge,
-		/obj/machinery/sleeper	)
+		/obj/machinery/sleeper,
+		/obj/machinery/smartfridge/,
+		/obj/machinery/biogenerator,
+		/obj/machinery/hydroponics,
+		/obj/machinery/constructable_frame)
 
 	New()
 		..()
@@ -120,6 +124,9 @@
 			return
 
 		else if(istype(target, /obj/machinery/bunsen_burner))
+			return
+
+		else if(istype(target, /obj/machinery/smartfridge))
 			return
 
 		else if(istype(target, /obj/machinery/radiocarbon_spectrometer))

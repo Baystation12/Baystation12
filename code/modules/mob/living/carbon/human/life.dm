@@ -383,7 +383,7 @@
 
 			//spread some viruses while we are at it
 			if (virus2.len > 0)
-				if (get_infection_chance(src) && prob(20))
+				if (prob(10) && get_infection_chance(src))
 //					log_debug("[src] : Exhaling some viruses")
 					for(var/mob/living/carbon/M in view(1,src))
 						src.spread_disease_to(M)
@@ -1132,6 +1132,10 @@
 
 		if(!client)	return 0
 
+		if(hud_updateflag)
+			handle_hud_list()
+	
+
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
@@ -1692,7 +1696,6 @@
 					holder.icon_state = "hudninja"
 	
 			hud_list[SPECIALROLE_HUD] = holder
-
 	hud_updateflag = 0
 
 
