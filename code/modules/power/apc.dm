@@ -217,7 +217,7 @@
 // update the APC icon to show the three base states
 // also add overlays for indicator lights
 /obj/machinery/power/apc/update_icon()
-	
+
 	if (!status_overlays)
 		status_overlays = 1
 		status_overlays_lock = new
@@ -235,9 +235,9 @@
 		status_overlays_lock[1] = image(icon, "apcox-0")    // 0=blue 1=red
 		status_overlays_lock[2] = image(icon, "apcox-1")
 
-		status_overlays_charging[1] = image(icon, "apco3-0") 
+		status_overlays_charging[1] = image(icon, "apco3-0")
 		status_overlays_charging[2] = image(icon, "apco3-1")
-		status_overlays_charging[3] = image(icon, "apco3-2")		
+		status_overlays_charging[3] = image(icon, "apco3-2")
 
 		status_overlays_equipment[1] = image(icon, "apco0-0") // 0=red, 1=green, 2=blue
 		status_overlays_equipment[2] = image(icon, "apco0-1")
@@ -248,13 +248,13 @@
 		status_overlays_lighting[2] = image(icon, "apco1-1")
 		status_overlays_lighting[3] = image(icon, "apco1-2")
 		status_overlays_lighting[4] = image(icon, "apco1-3")
-		
+
 		status_overlays_environ[1] = image(icon, "apco2-0")
 		status_overlays_environ[2] = image(icon, "apco2-1")
 		status_overlays_environ[3] = image(icon, "apco2-2")
 		status_overlays_environ[4] = image(icon, "apco2-3")
 
-	
+
 
 	var/update = check_updates() 		//returns 0 if no need to update icons.
 						// 1 if we need to update the icon_state
@@ -280,7 +280,7 @@
 			icon_state = "apcemag"
 		else if(update_state & UPSTATE_WIREEXP)
 			icon_state = "apcewires"
-			
+
 
 
 	if(!(update_state & UPSTATE_ALLGOOD))
@@ -291,7 +291,7 @@
 
 
 	if(update & 2)
-		
+
 		if(overlays.len)
 			overlays = 0
 
@@ -306,7 +306,7 @@
 
 /obj/machinery/power/apc/proc/check_updates()
 
-	var/last_update_state = update_state 
+	var/last_update_state = update_state
 	var/last_update_overlay = update_overlay
 	update_state = 0
 	update_overlay = 0
@@ -349,7 +349,7 @@
 			update_overlay |= APC_UPOVERLAY_EQUIPMENT1
 		else if(equipment == 2)
 			update_overlay |= APC_UPOVERLAY_EQUIPMENT2
-		
+
 		if(!lighting)
 			update_overlay |= APC_UPOVERLAY_LIGHTING0
 		else if(lighting == 1)
@@ -649,6 +649,7 @@
 					user << "\blue You slot your fingers into the APC interface and siphon off some of the stored charge for your own use."
 					if(src.cell.charge < 0) src.cell.charge = 0
 					if(H.nutrition > 500) H.nutrition = 500
+					src.charging = 1
 
 				else
 					user << "\blue You are already fully charged."
