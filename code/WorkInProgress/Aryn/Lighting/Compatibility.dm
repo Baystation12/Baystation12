@@ -36,10 +36,14 @@ turf_light_data/proc/copy_to(turf/T)
 	//T.ResetValue()
 
 atom/proc/SetLuminosity(n)
+	ASSERT(n >= 0)
+
 	n = min(n,10) //Caelcode.
 	if(n > 0)
+		//world << "[name].SetLuminosity([n]) \[[max(1,n>>1)],[n]\]"
 		SetLight(max(1,n>>1),n)
 	else
+		//world << "[name].SetLuminosity(0)"
 		SetLight(0,0)
 	luminosity = n
 	//else lighting_controller.initial_lights.Add(src)
