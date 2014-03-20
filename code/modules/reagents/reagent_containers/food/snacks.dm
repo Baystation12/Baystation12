@@ -670,10 +670,10 @@
 		reagents.add_reagent("nutriment", 3)
 		src.bitesize = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/faggot
-	name = "Faggot"
-	desc = "A great meal all round. Not a cord of wood."
-	icon_state = "faggot"
+/obj/item/weapon/reagent_containers/food/snacks/meatball
+	name = "meatball"
+	desc = "A great meal all round."
+	icon_state = "meatball"
 	filling_color = "#DB0000"
 
 	New()
@@ -2837,7 +2837,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	// Bun + meatball = burger
-	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/faggot))
+	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/meatball))
 		new /obj/item/weapon/reagent_containers/food/snacks/monkeyburger(src)
 		user << "You make a burger."
 		del(W)
@@ -2908,7 +2908,7 @@
 		..()
 		reagents.add_reagent("nutriment", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/rawfaggot
+/obj/item/weapon/reagent_containers/food/snacks/rawmeatball
 	name = "raw meatball"
 	desc = "A raw meatball."
 	icon = 'icons/obj/food_ingredients.dmi'
