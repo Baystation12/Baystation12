@@ -41,7 +41,7 @@ atom/proc/SetLuminosity(n)
 	n = min(n,10) //Caelcode.
 	if(n > 0)
 		//world << "[name].SetLuminosity([n]) \[[max(1,n>>1)],[n]\]"
-		SetLight(max(1,n>>1),n)
+		SetLight(max(1,n),n)
 	else
 		//world << "[name].SetLuminosity(0)"
 		SetLight(0,0)
