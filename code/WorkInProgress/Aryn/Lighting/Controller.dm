@@ -95,6 +95,5 @@ var/list/lit_z_levels = list(1,5)
 	world << "<font color=red>Updated [turfs_updated] turfs.</font>"
 
 /datum/controller/lighting/proc/GetLightIcon(a,b,c,d)
-	if(a <= 1) return LIGHT_ICON_1
-	else if(a <= 3) return LIGHT_ICON_2
-	else return LIGHT_ICON_3
+	if(a <= 2) return LIGHT_ICON_1
+	else return LIGHT_ICON_2
