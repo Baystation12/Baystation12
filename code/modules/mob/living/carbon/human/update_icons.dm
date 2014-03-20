@@ -504,7 +504,10 @@ proc/get_damage_icon_part(damage_state, body_part)
 		if(w_uniform:hastie)	//WE CHECKED THE TYPE ABOVE. THIS REALLY SHOULD BE FINE.
 			var/tie_color = w_uniform:hastie.item_color
 			if(!tie_color) tie_color = w_uniform:hastie.icon_state
-			standing.overlays	+= image("icon" = 'icons/mob/ties.dmi', "icon_state" = "[tie_color]")
+			if(w_uniform:hastie:tc_custom)
+				standing.overlays	+= image("icon" = w_uniform:hastie:tc_custom, "icon_state" = "[tie_color]_mob")
+			else
+				standing.overlays	+= image("icon" = 'icons/mob/ties.dmi', "icon_state" = "[tie_color]")
 
 		overlays_standing[UNIFORM_LAYER]	= standing
 	else
