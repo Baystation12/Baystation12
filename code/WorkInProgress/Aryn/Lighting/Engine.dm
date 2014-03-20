@@ -55,9 +55,11 @@ atom/movable/lighting_overlay
 	anchored = 1
 	layer = 9
 	mouse_opacity = 0
-	icon = 'icons/effects/ArynLights.dmi'
-	icon_state = "0000"
 	invisibility = INVISIBILITY_LIGHTING
+
+atom/movable/lighting_overlay/proc/set_state(a,b,c,d)
+	icon_state = "[a][b][c][d]"
+	icon = lighting_controller.GetLightIcon(a,b,c,d)
 
 atom/var/light/light
 
@@ -172,7 +174,7 @@ turf/proc/AddLight(light/light, brightness)
 
 			for(var/turf/T in range(1,src))
 				if(T.light_overlay)
-					T.light_overlay.icon_state = "[MAX_VALUE(T.lightSE)][MAX_VALUE(T.lightSW)][MAX_VALUE(T.lightNW)][MAX_VALUE(T.lightNE)]"
+					T.light_overlay.set_state(MAX_VALUE(T.lightSE), MAX_VALUE(T.lightSW), MAX_VALUE(T.lightNW), MAX_VALUE(T.lightNE))
 
 turf/proc/RemoveLight(light/light)
 	if(lit_by)
@@ -218,7 +220,7 @@ turf/proc/ResetValue()
 		if(lightSW) lightSW.cached_value = -1
 		for(var/turf/T in range(1,src))
 			if(T.light_overlay)
-				T.light_overlay.icon_state = "[MAX_VALUE(T.lightSE)][MAX_VALUE(T.lightSW)][MAX_VALUE(T.lightNW)][MAX_VALUE(T.lightNE)]"
+				T.light_overlay.set_state(MAX_VALUE(T.lightSE), MAX_VALUE(T.lightSW), MAX_VALUE(T.lightNW), MAX_VALUE(T.lightNE))
 
 turf/proc/CheckForOpaqueObjects()
 	has_opaque = opacity

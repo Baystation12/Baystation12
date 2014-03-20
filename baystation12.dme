@@ -1404,6 +1404,7 @@
 #include "code\WorkInProgress\Aryn\Lighting\Engine.dm"
 #include "code\WorkInProgress\Aryn\Lighting\Light.dm"
 #include "code\WorkInProgress\Aryn\Lighting\Lightpoint.dm"
+#include "code\WorkInProgress\Aryn\Lighting\Verbs.dm"
 #include "code\WorkInProgress\Cael_Aislinn\sculpture.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Jungle\falsewall.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Jungle\jungle.dm"

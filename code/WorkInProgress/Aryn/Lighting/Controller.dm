@@ -41,11 +41,8 @@ var/list/lit_z_levels = list(1,5)
 
 /datum/controller/lighting
 
-	var/starlight = 4
+	var/starlight = LIGHT_STATES
 	var/list/icon_updates = list()
-
-	var/list/light_border = list()
-
 	var/started = 0
 
 	//var/icon/border = icon('Icons/Test.dmi', "border")
@@ -92,18 +89,12 @@ var/list/lit_z_levels = list(1,5)
 		if(T.light_overlay)
 
 			T.ResetValue()
-			T.light_overlay.icon_state = "[MAX_VALUE(T.lightSE)][MAX_VALUE(T.lightSW)][MAX_VALUE(T.lightNW)][MAX_VALUE(T.lightNE)]"
+			T.light_overlay.set_state(MAX_VALUE(T.lightSE), MAX_VALUE(T.lightSW), MAX_VALUE(T.lightNW), MAX_VALUE(T.lightNE))
 
 	world << "<b><font color=red>Lighting initialization took [(world.timeofday-start_time)/world.fps] seconds.</font></b>"
 	world << "<font color=red>Updated [turfs_updated] turfs.</font>"
 
-/datum/controller/lighting/proc/AddBorder(turf/T)
-	if(!T.is_border)
-		light_border.Add(T)
-		T.is_border = 1
-		//T.overlays.Add(border)
-
-/datum/controller/lighting/proc/RemoveBorder(turf/T)
-	if(T.is_border)
-		light_border.Remove(T)
-		T.is_border = 0
+/datum/controller/lighting/proc/GetLightIcon(a,b,c,d)
+	if(a <= 1) return LIGHT_ICON_1
+	else if(a <= 3) return LIGHT_ICON_2
+	else return LIGHT_ICON_3
