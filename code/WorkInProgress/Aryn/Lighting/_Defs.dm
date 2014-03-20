@@ -1,7 +1,6 @@
-#define LIGHT_ICON_1 'icons/effects/lights/lighting1.dmi'
-#define LIGHT_ICON_2 'icons/effects/lights/lighting2.dmi'
-#define LIGHT_ICON_3 'icons/effects/lights/lighting3.dmi'
-#define LIGHT_STATES 5
+#define LIGHT_ICON_1 'icons/effects/lights/lighting5-1.dmi'
+#define LIGHT_ICON_2 'icons/effects/lights/lighting5-2.dmi'
+#define LIGHT_STATES 4
 
 #define SQ(X) ((X)*(X))
 #define DISTSQ3(A,B,C) (SQ(A)+SQ(B)+SQ(C))
