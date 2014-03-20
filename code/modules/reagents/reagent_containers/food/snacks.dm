@@ -2832,7 +2832,7 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 4)
-
+/* Commenting out for now, dough and buns are being used for customizable foods.
 /obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	// Bun + meatball = burger
 	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/faggot))
@@ -2876,7 +2876,7 @@
 		return
 	else
 		..()
-
+*/
 /obj/item/weapon/reagent_containers/food/snacks/taco
 	name = "taco"
 	desc = "Take a bite!"
