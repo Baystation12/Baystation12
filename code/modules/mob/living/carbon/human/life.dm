@@ -957,7 +957,6 @@
 					nutrition = 500
 				if(light_amount >= 5) //if there's enough light, heal
 					adjustBruteLoss(-(light_amount))
-					adjustToxLoss(-(light_amount))
 					adjustOxyLoss(-(light_amount))
 					//TODO: heal wounds, heal broken limbs.
 

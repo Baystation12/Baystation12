@@ -58,7 +58,10 @@
 		data["alarm"] = "\ref[current]"
 
 	var/list/alarms=list()
-	for(var/obj/machinery/alarm/alarm in sortAtom(machines))
+	var/list/alarm_list=list()
+	for(var/obj/machinery/alarm/alarm in machines)
+		alarm_list+=alarm
+	for(var/obj/machinery/alarm/alarm in sortAtom(alarm_list))
 		if(!is_in_filter(alarm.alarm_area.type))
 			continue // NO ACCESS 4 U
 

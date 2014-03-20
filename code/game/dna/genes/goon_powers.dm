@@ -122,7 +122,7 @@
 	panel = "Mutant Powers"
 
 	charge_type = "recharge"
-	charge_max = 600
+	charge_max = 1200
 
 	clothes_req = 0
 	stat_allowed = 0
@@ -144,7 +144,7 @@
 		usr << "\red This will only work on normal organic beings."
 		return
 
-	C.bodytemperature = -1500
+	C.bodytemperature = -300
 	C.ExtinguishMob()
 
 	C.visible_message("\red A cloud of fine ice crystals engulfs [C]!")
