@@ -198,7 +198,10 @@ This function completely restores a damaged organ to perfect condition.
 */
 /datum/organ/external/proc/rejuvenate()
 	damage_state = "00"
-	status = 0
+	if(status & 128)	//Robotic organs stay robotic.  Fix because right click rejuvinate makes IPC's organs organic.
+		status = 128
+	else
+		status = 0
 	perma_injury = 0
 	brute_dam = 0
 	burn_dam = 0
