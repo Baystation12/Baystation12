@@ -1,11 +1,6 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-LAST_COMPILE_VERSION: 504.1234
-WINDOW: code\game\machinery\vending.dm;code\modules\reagents\reagent_containers\food\customizable.dm;code\modules\reagents\reagent_containers\food\snacks.dm;icons\obj\food.dmi;icons\obj\food_ingredients.dmi;code\game\objects\items\weapons\manuals.dm
-DIR: code code\game code\game\machinery code\game\objects code\game\objects\items code\game\objects\items\weapons code\modules code\modules\mob code\modules\mob\new_player code\modules\reagents code\modules\reagents\reagent_containers code\modules\reagents\reagent_containers\food icons icons\obj 
-FILE: code\modules\reagents\reagent_containers\food\customizable.dm
-LAST_COMPILE_TIME: 1395281317
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
