@@ -24,7 +24,7 @@
 		var/obj/item/weapon/reagent_containers/food/snacks/customizable/pasta/S = new(get_turf(user))
 		S.attackby(W,user)
 		del(src)
-
+	..()
 /obj/item/trash/bowl
 	name = "bowl"
 	desc = "An empty bowl. Put some food in it to start making a soup."
@@ -48,7 +48,7 @@
 	var/top = 1	//Do we have a top?
 	var/add_overlays = 1	//Do we stack?
 //	var/offsetstuff = 1 //Do we offset the overlays?
-	var/sandwich_limit = 3
+	var/sandwich_limit = 40
 	trash = /obj/item/trash/plate
 	bitesize = 2
 
@@ -60,6 +60,7 @@
 	icon_state = "personal_pizza"
 	baseicon = "personal_pizza"
 	basename = "personal pizza"
+	sandwich_limit = 9999999 // this isn't a massive stack of food
 	add_overlays = 0
 	top = 0
 
@@ -69,6 +70,7 @@
 	icon_state = "pasta_bot"
 	baseicon = "pasta_bot"
 	basename = "spagetti"
+	sandwich_limit = 9999999 // this isn't a massive stack of food
 	add_overlays = 0
 	top = 0
 
@@ -78,6 +80,7 @@
 	icon_state = "soup"
 	baseicon = "soup"
 	basename = "soup"
+	sandwich_limit = 9999999 // this isn't a massive stack of food
 	add_overlays = 0
 	trash = /obj/item/trash/bowl
 	top = 0
@@ -88,23 +91,12 @@
 	icon_state = "burger"
 	baseicon = "burger"
 	basename = "burger"
+	sandwich_limit = 40
 	trash = null
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/attackby(obj/item/W as obj, mob/user as mob)
-
-	var/sandwich_limit = 4
-	for(var/obj/item/O in ingredients)
-		if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/breadslice))
-			sandwich_limit += 4
-
 	if(src.contents.len > sandwich_limit)
-		user << "<span class='warning'>If you put anything else on [src] it's going to collapse. Try adding some more bread slices.</span>"
-		return
-	else if(istype(W,/obj/item/weapon/shard))
-		user << "<span class='notice'> You hide [W] in [src].</span>"
-		user.drop_item()
-		W.loc = src
-		update()
+		user << "<span class='warning'>If you put anything else on [src] it's going to make a mess.</span>"
 		return
 	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks))
 		user << "<span class='notice'> You add [W] to [src].</span>"
@@ -160,20 +152,3 @@
 	var/whatsinside = pick(ingredients)
 
 	usr << "<span class='notice'> You think you can see [whatsinside] in there.</span>"
-
-/obj/item/weapon/reagent_containers/food/snacks/customizable/attack(mob/M as mob, mob/user as mob, def_zone)
-
-	var/obj/item/shard
-	for(var/obj/item/O in contents)
-		if(istype(O,/obj/item/weapon/shard))
-			shard = O
-			break
-
-	var/mob/living/H
-	if(istype(M,/mob/living))
-		H = M
-
-	if(H && shard && M == user) //This needs a check for feeding the food to other people, but that could be abusable.
-		H << "<span class='warning'> You lacerate your mouth on a [shard.name] in the [src.basename]!</span>"
-		H.adjustBruteLoss(5) //TODO: Target head if human.
-	..()
