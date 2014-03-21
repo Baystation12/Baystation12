@@ -1403,11 +1403,7 @@
 #include "code\WorkInProgress\Aryn\Lighting\Engine.dm"
 #include "code\WorkInProgress\Aryn\Lighting\Light.dm"
 #include "code\WorkInProgress\Aryn\Lighting\Lightpoint.dm"
-<<<<<<< HEAD
-#include "code\WorkInProgress\Aryn\Lighting\Math.dm"
 #include "code\WorkInProgress\Cael_Aislinn\sculpture.dm"
-=======
->>>>>>> 9007aed... Fixed an annoying bug with giving another player a flashlight,
 #include "code\WorkInProgress\Cael_Aislinn\Jungle\falsewall.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Jungle\jungle.dm"
 #include "code\WorkInProgress\Cael_Aislinn\Jungle\jungle_animals.dm"
