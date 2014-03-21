@@ -259,6 +259,10 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 			U << "<span class='warning'>DNA of [T] is ruined beyond usability!</span>"
 			return 0
 
+		if(T:species.flags & IS_SYNTHETIC || T:species.flags & IS_PLANT)
+			U << "<span class='warning'>[T] is not compatible with our biology.</span>"
+			return 0
+
 		for(var/datum/dna/D in absorbed_dna)
 			if(T.dna.uni_identity == D.uni_identity)
 				if(T.dna.struc_enzymes == D.struc_enzymes)
