@@ -46,6 +46,8 @@
 	var/icon/stand_icon = null
 	var/icon/lying_icon = null
 
+	var/speech_problem_flag = 0
+
 	var/miming = null //Toggle for the mime's abilities.
 	var/special_voice = "" // For changing our voice. Used by a symptom.
 	var/said_last_words=0
