@@ -59,7 +59,9 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], signal.data["level"], signal.frequency)
+							  signal.data["realname"], signal.data["vname"],, 
+							  signal.data["compression"], signal.data["level"], signal.frequency,
+							  signal.data["verb"], signal.data["language"]	)
 
 
 	   /** #### - Simple Broadcast - #### **/
@@ -84,7 +86,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 4, signal.data["compression"], signal.data["level"], signal.frequency)
+							  signal.data["realname"], signal.data["vname"], 4, signal.data["compression"], signal.data["level"], signal.frequency,
+							  signal.data["verb"], signal.data["language"])
 
 		if(!message_delay)
 			message_delay = 1
@@ -147,14 +150,16 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency)
+							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
+							  signal.data["verb"], signal.data["language"])
 		else
 			if(intercept)
 				Broadcast_Message(signal.data["connection"], signal.data["mob"],
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
-							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency)
+							  signal.data["realname"], signal.data["vname"], 3, signal.data["compression"], list(0), connection.frequency,
+							  signal.data["verb"], signal.data["language"])
 
 
 
@@ -218,7 +223,9 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 /proc/Broadcast_Message(var/datum/radio_frequency/connection, var/mob/M,
 						var/vmask, var/vmessage, var/obj/item/device/radio/radio,
 						var/message, var/name, var/job, var/realname, var/vname,
-						var/data, var/compression, var/list/level, var/freq)
+						var/data, var/compression, var/list/level, var/freq, var/verbage = "says", var/datum/language/speaking = null)
+
+	world << "in broadcast_message, verb = [verbage], language = [speaking ? speaking.name : null] ([src])"
 
   /* ###### Prepare the radio connection ###### */
 
@@ -369,7 +376,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		// syndies!
 		if (display_freq == SYND_FREQ)
 			part_a = "<span class='syndradio'><span class='name'>"
-
 		// centcomm channels (deathsquid and ert)
 		else if (display_freq in CENT_FREQS)
 			part_a = "<span class='centradio'><span class='name'>"
@@ -449,6 +455,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		if (length(heard_masked))
 			var/N = name
 			var/J = job
+			world << "heard_masked"
 			var/rendered = "[part_a][N][part_b][quotedmsg][part_c]"
 			for (var/mob/R in heard_masked)
 				aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];track=\ref[M]'>"
@@ -456,24 +463,25 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];faketrack=\ref[M]'>"
 
 				if(istype(R, /mob/living/silicon/ai))
-					R.show_message("[part_a][aitrack][N] ([J]) </a>[part_b][quotedmsg][part_c]", 2)
+					//R.show_message("[part_a][aitrack][N] ([J]) </a>[part_b][quotedmsg][part_c]", 2)
 				else
-					R.show_message(rendered, 2)
+					//R.show_message(rendered, 2)
 
 		/* --- Process all the mobs that heard the voice normally (understood) --- */
 
 		if (length(heard_normal))
 			var/rendered = "[part_a][realname][part_b][quotedmsg][part_c]"
-
+			world << "heard_normal"
 			for (var/mob/R in heard_normal)
 				aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];track=\ref[M]'>"
 				if(data == 4)
 					aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];faketrack=\ref[M]'>"
 
-				if(istype(R, /mob/living/silicon/ai))
-					R.show_message("[part_a][aitrack][realname] ([job]) </a>[part_b][quotedmsg][part_c]", 2)
-				else
-					R.show_message(rendered, 2)
+				//if(istype(R, /mob/living/silicon/ai))
+				R.hear_radio(message, verbage, speaking, part_a, part_b, M)
+					//R.show_message("[part_a][aitrack][realname] ([job]) </a>[part_b][quotedmsg][part_c]", 2)
+				//else
+					//R.show_message(rendered, 2)
 
 		/* --- Process all the mobs that heard the voice normally (did not understand) --- */
 
@@ -485,11 +493,13 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 				if(data == 4)
 					aitrack = "<a href='byond://?src=\ref[radio];track2=\ref[R];faketrack=\ref[M]'>"
 
-
+				R.hear_radio(message,verbage, speaking, part_a, part_b, M)
+/*
 				if(istype(R, /mob/living/silicon/ai))
 					R.show_message("[part_a][aitrack][vname] ([job]) </a>[part_b][vmessage]][part_c]", 2)
 				else
 					R.show_message(rendered, 2)
+*/
 
 		/* --- Process all the mobs that heard a garbled voice (did not understand) --- */
 			// Displays garbled message (ie "f*c* **u, **i*er!")
