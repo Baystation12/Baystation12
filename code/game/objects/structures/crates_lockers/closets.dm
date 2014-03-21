@@ -21,7 +21,7 @@
 		if(!opened)		// if closed, any item at the crate's loc is put in the contents
 			for(var/obj/item/I in src.loc)
 				if(I.density || I.anchored || I == src) continue
-				I.loc = src
+				I.setloc(src)
 
 /obj/structure/closet/alter_health()
 	return get_turf(src)
@@ -44,13 +44,13 @@
 /obj/structure/closet/proc/dump_contents()
 	//Cham Projector Exception
 	for(var/obj/effect/dummy/chameleon/AD in src)
-		AD.loc = src.loc
+		AD.setloc(src.loc)
 
 	for(var/obj/I in src)
-		I.loc = src.loc
+		I.setloc(src.loc)
 
 	for(var/mob/M in src)
-		M.loc = src.loc
+		M.setloc(src.loc)
 		if(M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
@@ -85,14 +85,14 @@
 	for(var/obj/effect/dummy/chameleon/AD in src.loc)
 		if(itemcount >= storage_capacity)
 			break
-		AD.loc = src
+		AD.setloc(src)
 		itemcount++
 
 	for(var/obj/item/I in src.loc)
 		if(itemcount >= storage_capacity)
 			break
 		if(!I.anchored)
-			I.loc = src
+			I.setloc(src)
 			itemcount++
 
 	for(var/mob/M in src.loc)
@@ -107,7 +107,7 @@
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 
-		M.loc = src
+		M.setloc(src)
 		itemcount++
 
 	src.icon_state = src.icon_closed
@@ -130,19 +130,19 @@
 	switch(severity)
 		if(1)
 			for(var/atom/movable/A as mob|obj in src)//pulls everything out of the locker and hits it with an explosion
-				A.loc = src.loc
+				A.setloc(src.loc)
 				A.ex_act(severity++)
 			del(src)
 		if(2)
 			if(prob(50))
 				for (var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.setloc(src.loc)
 					A.ex_act(severity++)
 				del(src)
 		if(3)
 			if(prob(5))
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.setloc(src.loc)
 					A.ex_act(severity++)
 				del(src)
 
@@ -151,7 +151,7 @@
 	..()
 	if(health <= 0)
 		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
+			A.setloc(src.loc)
 		del(src)
 
 	return
@@ -160,14 +160,14 @@
 	if(user.wall_smash)
 		visible_message("\red [user] destroys the [src]. ")
 		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
+			A.setloc(src.loc)
 		del(src)
 
 // this should probably use dump_contents()
 /obj/structure/closet/blob_act()
 	if(prob(75))
 		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
+			A.setloc(src.loc)
 		del(src)
 
 /obj/structure/closet/meteorhit(obj/O as obj)
@@ -197,7 +197,7 @@
 			return
 		usr.drop_item()
 		if(W)
-			W.loc = src.loc
+			W.setloc(src.loc)
 	else if(istype(W, /obj/item/weapon/packageWrap))
 		return
 	else if(istype(W, /obj/item/weapon/weldingtool))

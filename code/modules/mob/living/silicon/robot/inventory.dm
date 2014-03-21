@@ -9,44 +9,48 @@
 /mob/living/silicon/robot/proc/uneq_active()
 	if(isnull(module_active))
 		return
+
+	//In checking borglights, I simplified this a bit.
+	var/obj/item/module = module_active
+
+	module.dropped(src)
+
+	if(istype(module,/obj/item/borg/sight))
+		var/obj/item/borg/sight/sight_module = module
+		sight_mode &= ~sight_module.sight_mode
+
+	if (client)
+		client.screen -= module
+
+	contents -= module
+
 	if(module_state_1 == module_active)
-		if(istype(module_state_1,/obj/item/borg/sight))
-			sight_mode &= ~module_state_1:sight_mode
-		if (client)
-			client.screen -= module_state_1
-		contents -= module_state_1
-		module_active = null
 		module_state_1 = null
 		inv1.icon_state = "inv1"
 	else if(module_state_2 == module_active)
-		if(istype(module_state_2,/obj/item/borg/sight))
-			sight_mode &= ~module_state_2:sight_mode
-		if (client)
-			client.screen -= module_state_2
-		contents -= module_state_2
-		module_active = null
 		module_state_2 = null
 		inv2.icon_state = "inv2"
 	else if(module_state_3 == module_active)
-		if(istype(module_state_3,/obj/item/borg/sight))
-			sight_mode &= ~module_state_3:sight_mode
-		if (client)
-			client.screen -= module_state_3
-		contents -= module_state_3
-		module_active = null
 		module_state_3 = null
 		inv3.icon_state = "inv3"
+
+	module_active = null
+
+	//src << "[module.name] deactivated."
+
 	updateicon()
 
 /mob/living/silicon/robot/proc/uneq_all()
 	module_active = null
-
+	var/obj/item/module
 	if(module_state_1)
 		if(istype(module_state_1,/obj/item/borg/sight))
 			sight_mode &= ~module_state_1:sight_mode
 		if (client)
 			client.screen -= module_state_1
 		contents -= module_state_1
+		module = module_state_1
+		module.dropped(src)
 		module_state_1 = null
 		inv1.icon_state = "inv1"
 	if(module_state_2)
@@ -55,6 +59,8 @@
 		if (client)
 			client.screen -= module_state_2
 		contents -= module_state_2
+		module = module_state_2
+		module.dropped(src)
 		module_state_2 = null
 		inv2.icon_state = "inv2"
 	if(module_state_3)
@@ -63,8 +69,11 @@
 		if (client)
 			client.screen -= module_state_3
 		contents -= module_state_3
+		module = module_state_3
+		module.dropped(src)
 		module_state_3 = null
 		inv3.icon_state = "inv3"
+
 	updateicon()
 
 /mob/living/silicon/robot/proc/activated(obj/item/O)

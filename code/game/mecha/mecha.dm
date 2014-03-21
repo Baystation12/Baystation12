@@ -529,7 +529,7 @@
 				var/obj/mecha/working/ripley/R = src
 				if(R.cargo)
 					for(var/obj/O in R.cargo) //Dump contents of stored cargo
-						O.loc = T
+						O.setloc(T)
 						R.cargo -= O
 						T.Entered(O)
 

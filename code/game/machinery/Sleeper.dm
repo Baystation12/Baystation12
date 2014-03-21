@@ -190,7 +190,7 @@
 	blob_act()
 		if(prob(75))
 			for(var/atom/movable/A as mob|obj in src)
-				A.loc = src.loc
+				A.setloc(src.loc)
 				A.blob_act()
 			del(src)
 		return
@@ -200,7 +200,7 @@
 			if(!beaker)
 				beaker = G
 				user.drop_item()
-				G.loc = src
+				G.setloc(src)
 				user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
 				src.updateUsrDialog()
 				return
@@ -232,7 +232,7 @@
 				if(M.client)
 					M.client.perspective = EYE_PERSPECTIVE
 					M.client.eye = src
-				M.loc = src
+				M.setloc(src)
 				src.occupant = M
 				src.icon_state = "sleeper_1"
 				if(orient == "RIGHT")
@@ -252,21 +252,21 @@
 		switch(severity)
 			if(1.0)
 				for(var/atom/movable/A as mob|obj in src)
-					A.loc = src.loc
+					A.setloc(src.loc)
 					ex_act(severity)
 				del(src)
 				return
 			if(2.0)
 				if(prob(50))
 					for(var/atom/movable/A as mob|obj in src)
-						A.loc = src.loc
+						A.setloc(src.loc)
 						ex_act(severity)
 					del(src)
 					return
 			if(3.0)
 				if(prob(25))
 					for(var/atom/movable/A as mob|obj in src)
-						A.loc = src.loc
+						A.setloc(src.loc)
 						ex_act(severity)
 					del(src)
 					return
@@ -312,7 +312,7 @@
 		if(src.occupant.client)
 			src.occupant.client.eye = src.occupant.client.mob
 			src.occupant.client.perspective = MOB_PERSPECTIVE
-		src.occupant.loc = src.loc
+		src.occupant.setloc(src.loc)
 		src.occupant = null
 		if(orient == "RIGHT")
 			icon_state = "sleeper_0-r"
@@ -408,7 +408,7 @@
 			usr.stop_pulling()
 			usr.client.perspective = EYE_PERSPECTIVE
 			usr.client.eye = src
-			usr.loc = src
+			usr.setloc(src)
 			src.occupant = usr
 			src.icon_state = "sleeper_1"
 			if(orient == "RIGHT")

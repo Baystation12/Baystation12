@@ -21,6 +21,7 @@ turf/verb/ShowData()
 	set src in world
 
 	usr << "<b>[src]</b>"
+	usr << "[MAX_VALUE(lightSE)][MAX_VALUE(lightSW)][MAX_VALUE(lightNW)][MAX_VALUE(lightNE)]"
 	usr << "Lit Value: [lit_value]"
 	usr << "Max Brightness: [max_brightness]"
 

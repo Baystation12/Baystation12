@@ -126,7 +126,7 @@
 		var/datum/robot_component/cell_component = components["power cell"]
 		cell_component.wrapped = cell
 		cell_component.installed = 1
-	
+
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
 	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudblank")
@@ -135,9 +135,9 @@
 	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
-	
 
-	
+
+
 
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
@@ -1093,44 +1093,48 @@
 		if(activated(O))
 			src << "Already activated"
 			return
+
 		if(!module_state_1)
 			module_state_1 = O
-			O.layer = 20
-			contents += O
-			if(istype(module_state_1,/obj/item/borg/sight))
-				sight_mode |= module_state_1:sight_mode
 		else if(!module_state_2)
 			module_state_2 = O
-			O.layer = 20
-			contents += O
-			if(istype(module_state_2,/obj/item/borg/sight))
-				sight_mode |= module_state_2:sight_mode
 		else if(!module_state_3)
 			module_state_3 = O
-			O.layer = 20
-			contents += O
-			if(istype(module_state_3,/obj/item/borg/sight))
-				sight_mode |= module_state_3:sight_mode
 		else
 			src << "You need to disable a module first!"
+			return
+
+		O.pickup(src)
+		O.layer = 20
+		contents += O
+		if(istype(O,/obj/item/borg/sight))
+			var/obj/item/borg/sight/sight = O
+			sight_mode |= sight.sight_mode
+
 		installed_modules()
 
 	if (href_list["deact"])
 		var/obj/item/O = locate(href_list["deact"])
+
 		if(activated(O))
 			if(module_state_1 == O)
 				module_state_1 = null
-				contents -= O
 			else if(module_state_2 == O)
 				module_state_2 = null
-				contents -= O
 			else if(module_state_3 == O)
 				module_state_3 = null
-				contents -= O
 			else
 				src << "Module isn't activated."
+				return
 		else
 			src << "Module isn't activated"
+			return
+
+		O.dropped(src)
+		contents -= O
+
+		src << "[O.name] deactivated."
+
 		installed_modules()
 
 	if (href_list["lawc"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
