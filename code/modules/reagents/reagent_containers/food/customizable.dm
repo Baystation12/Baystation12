@@ -139,7 +139,7 @@
 		overlays += T
 
 	name = lowertext("[fullname] [basename]")
-	if(length(name) > 80) name = "[pick(list("absurd","colossal","enormous","ridiculous","massive","oversized","cardiac-arresting","pipe-clogging","edible but sickening","sickening","gargantuan","mega","belly-burster","chest-burster"))] [basename]"
+	if(length(name) > 80) name = "[pick(list("absurd","enormous","ridiculous","massive","oversized"))] [basename]"
 	w_class = n_ceil(Clamp((ingredients.len/2),1,3))
 
 /obj/item/weapon/reagent_containers/food/snacks/customizable/Del()
