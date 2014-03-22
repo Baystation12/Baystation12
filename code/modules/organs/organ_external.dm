@@ -12,6 +12,7 @@
 	var/burn_dam = 0
 	var/max_damage = 0
 	var/max_size = 0
+	var/last_dam = -1
 
 	var/display_name
 	var/list/wounds = list()
@@ -272,6 +273,19 @@ This function completely restores a damaged organ to perfect condition.
 /****************************************************
 			   PROCESSING & UPDATING
 ****************************************************/
+
+//Determines if we even need to process this organ.
+
+/datum/organ/external/proc/need_process()
+	if(status && status != ORGAN_ROBOT) // If it's robotic, that's fine it will have a status.
+		return 1
+	if(brute_dam || burn_dam)
+		return 1
+	if(last_dam != brute_dam + burn_dam) // Process when we are fully healed up.
+		last_dam = brute_dam + burn_dam
+		return 1
+	last_dam = brute_dam + burn_dam
+	return 0
 
 /datum/organ/external/process()
 	// Process wounds, doing healing etc. Only do this every few ticks to save processing power
