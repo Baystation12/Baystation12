@@ -1066,7 +1066,7 @@
 
 			updatehealth()	//TODO
 			if(!in_stasis)
-				handle_organs()
+				handle_organs()	//Optimized.
 				handle_blood()
 
 			if(health <= config.health_threshold_dead || brain_op_stage == 4.0)
@@ -1228,20 +1228,23 @@
 
 			if(stuttering)
 				stuttering = max(stuttering-1, 0)
-			if (src.slurring)
-				slurring = max(slurring-(1*sober_str), 0)
+
+			if (slurring)
+				slurring = max(slurring-1, 0)
+
 			if(silent)
 				silent = max(silent-1, 0)
 
 			if(druggy)
 				druggy = max(druggy-1, 0)
-
+/*
 			// Increase germ_level regularly
 			if(prob(40))
 				germ_level += 1
 			// If you're dirty, your gloves will become dirty, too.
 			if(gloves && germ_level > gloves.germ_level && prob(10))
 				gloves.germ_level += 1
+*/
 		return 1
 
 	proc/handle_regular_hud_updates()
