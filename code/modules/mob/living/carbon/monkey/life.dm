@@ -214,7 +214,6 @@
 			// check if we're immune
 			if(V.antigen & src.antibodies)
 				V.dead = 1
-
 		return
 
 	proc/breathe()
