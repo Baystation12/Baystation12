@@ -1414,30 +1414,35 @@
 				var/datum/disease2/disease/V = virus2[ID]
 				V.cure(src)
 
-		for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
-			if(B.virus2.len)
-				for (var/ID in B.virus2)
-					var/datum/disease2/disease/V = B.virus2[ID]
-					infect_virus2(src,V)
+		for(var/obj/effect/decal/cleanable/O in view(1,src))
+			if(istype(O,/obj/effect/decal/cleanable/blood))
+				var/obj/effect/decal/cleanable/blood/B = O
+				if(B.virus2.len)
+					for (var/ID in B.virus2)
+						var/datum/disease2/disease/V = B.virus2[ID]
+						infect_virus2(src,V)
 
-		for(var/obj/effect/decal/cleanable/mucus/M in view(1,src))
-			if(M.virus2.len)
-				for (var/ID in M.virus2)
-					var/datum/disease2/disease/V = M.virus2[ID]
-					infect_virus2(src,V)
+			else if(istype(O,/obj/effect/decal/cleanable/mucus))
+				var/obj/effect/decal/cleanable/mucus/M = O
+				if(M.virus2.len)
+					for (var/ID in M.virus2)
+						var/datum/disease2/disease/V = M.virus2[ID]
+						infect_virus2(src,V)
 
-		for (var/ID in virus2)
-			var/datum/disease2/disease/V = virus2[ID]
-			if(isnull(V)) // Trying to figure out a runtime error that keeps repeating
-				CRASH("virus2 nulled before calling activate()")
-			else
-				V.activate(src)
-			// activate may have deleted the virus
-			if(!V) continue
 
-			// check if we're immune
-			if(V.antigen & src.antibodies)
-				V.dead = 1
+		if(virus2.len)
+			for (var/ID in virus2)
+				var/datum/disease2/disease/V = virus2[ID]
+				if(isnull(V)) // Trying to figure out a runtime error that keeps repeating
+					CRASH("virus2 nulled before calling activate()")
+				else
+					V.activate(src)
+				// activate may have deleted the virus
+				if(!V) continue
+	
+				// check if we're immune
+				if(V.antigen & src.antibodies)
+					V.dead = 1
 
 		return
 
