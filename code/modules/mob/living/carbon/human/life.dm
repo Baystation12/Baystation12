@@ -104,11 +104,14 @@
 
 	handle_stasis_bag()
 
+	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
+		return											//We go ahead and process them 5 times for HUD images and other stuff though.
+
 	//Handle temperature/pressure differences between body and environment
-	handle_environment(environment)
+	handle_environment(environment)		//Optimized a good bit.
 
 	//Status updates, death etc.
-	handle_regular_status_updates()		//TODO: optimise ~Carn  NO SHIT ~Ccomp
+	handle_regular_status_updates()		//Optimized a bit
 	update_canmove()
 
 	//Update our name based on whether our face is obscured/disfigured
@@ -575,25 +578,23 @@
 			else
 				loc_temp = environment.temperature
 
-			//world << "Loc temp: [loc_temp] - Body temp: [bodytemperature] - Fireloss: [getFireLoss()] - Thermal protection: [get_thermal_protection()] - Fire protection: [thermal_protection + add_fire_protection(loc_temp)] - Heat capacity: [environment_heat_capacity] - Location: [loc] - src: [src]"
+			if(abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PLASMA_VISIBLE)
+				return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
 			if(stat != 2)
 				stabilize_temperature_from_calories()
 
-	//		log_debug("Adjusting to atmosphere.")
 			//After then, it reacts to the surrounding atmosphere based on your thermal protection
 			if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
 				var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 				if(thermal_protection < 1)
 					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
-	//				log_debug("[loc_temp] is Cold. Cooling by [amt]")
 					bodytemperature += amt
 			else if (loc_temp > BODYTEMP_HEAT_DAMAGE_LIMIT)			//Place is hotter than we are
 				var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 				if(thermal_protection < 1)
 					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
-	//				log_debug("[loc_temp] is Heat. Heating up by [amt]")
 					bodytemperature += amt
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
@@ -683,7 +684,7 @@
 
 	proc/stabilize_temperature_from_calories()
 		var/body_temperature_difference = 310.15 - bodytemperature
-		if (abs(body_temperature_difference) < 0.01)
+		if (abs(body_temperature_difference) < 0.5)
 			return //fuck this precision
 		switch(bodytemperature)
 			if(-INFINITY to 260.15) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
