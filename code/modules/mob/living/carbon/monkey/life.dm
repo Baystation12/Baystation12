@@ -78,6 +78,8 @@
 
 		if(prob(1))
 			emote(pick("scratch","jump","roll","tail"))
+	updatehealth()
+	
 
 /mob/living/carbon/monkey/calculate_affecting_pressure(var/pressure)
 	..()
@@ -132,7 +134,6 @@
 				heal_overall_damage(rads,rads)
 				adjustOxyLoss(-(rads))
 				adjustToxLoss(-(rads))
-				updatehealth()
 				return
 
 			if (radiation > 100)
@@ -146,7 +147,6 @@
 					radiation--
 					if(prob(25))
 						adjustToxLoss(1)
-						updatehealth()
 
 				if(50 to 74)
 					radiation -= 2
@@ -156,7 +156,6 @@
 						Weaken(3)
 						src << "\red You feel weak."
 						emote("collapse")
-					updatehealth()
 
 				if(75 to 100)
 					radiation -= 3
@@ -166,7 +165,6 @@
 						randmutb(src)
 						domutcheck(src,null)
 						emote("gasp")
-					updatehealth()
 
 	proc/handle_virus_updates()
 		if(status_flags & GODMODE)	return 0	//godmode
@@ -392,6 +390,10 @@
 	proc/handle_environment(datum/gas_mixture/environment)
 		if(!environment)
 			return
+
+		if(abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PLASMA_VISIBLE)
+			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp		
+		
 		var/environment_heat_capacity = environment.heat_capacity()
 		if(istype(get_turf(src), /turf/space))
 			var/turf/heat_turf = get_turf(src)
@@ -460,7 +462,8 @@
 				adjustToxLoss(-1)
 				adjustOxyLoss(-1)
 
-		if(reagents) reagents.metabolize(src,alien)
+		if(reagents && reagents.reagent_list.len) 
+			reagents.metabolize(src,alien)
 
 		if (drowsyness)
 			drowsyness--
@@ -469,24 +472,23 @@
 				sleeping += 1
 				Paralyse(5)
 
-		confused = max(0, confused - 1)
-		// decrement dizziness counter, clamped to 0
+		if(confused)
+			confused = max(0, confused - 1)
+
 		if(resting)
 			dizziness = max(0, dizziness - 5)
 		else
 			dizziness = max(0, dizziness - 1)
 
-		updatehealth()
-
 		return //TODO: DEFERRED
 
 	proc/handle_regular_status_updates()
-		updatehealth()
 
 		if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 			blinded = 1
 			silent = 0
 		else				//ALIVE. LIGHTS ARE ON
+			updatehealth()
 			if(health < config.health_threshold_dead || brain_op_stage == 4.0)
 				death()
 				blinded = 1
