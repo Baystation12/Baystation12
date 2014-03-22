@@ -1049,7 +1049,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Engineering"
 	access = access_atmospherics
 
-/datum/supply_packs/bee_keeper
+/*/datum/supply_packs/bee_keeper
 	name = "Beekeeping Crate"
 	contains = list(/obj/item/beezeez,
 					/obj/item/beezeez,
@@ -1062,4 +1062,4 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Beekeeping crate"
 	access = access_hydroponics
-	group = "Hydroponics"
+	group = "Hydroponics"*/
