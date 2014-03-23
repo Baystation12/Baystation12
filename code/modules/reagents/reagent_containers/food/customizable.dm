@@ -60,7 +60,7 @@
 	icon_state = "personal_pizza"
 	baseicon = "personal_pizza"
 	basename = "personal pizza"
-	sandwich_limit = 9999999 // this isn't a massive stack of food
+	sandwich_limit = 40
 	add_overlays = 0
 	top = 0
 
@@ -70,7 +70,7 @@
 	icon_state = "pasta_bot"
 	baseicon = "pasta_bot"
 	basename = "spagetti"
-	sandwich_limit = 9999999 // this isn't a massive stack of food
+	sandwich_limit = 40
 	add_overlays = 0
 	top = 0
 
@@ -80,7 +80,7 @@
 	icon_state = "soup"
 	baseicon = "soup"
 	basename = "soup"
-	sandwich_limit = 9999999 // this isn't a massive stack of food
+	sandwich_limit = 40
 	add_overlays = 0
 	trash = /obj/item/trash/bowl
 	top = 0
