@@ -5,7 +5,8 @@ var/list/potential_theft_objectives=typesof(/datum/theft_objective) \
 	- /datum/theft_objective \
 	- /datum/theft_objective/special \
 	- /datum/theft_objective/number \
-	- /datum/theft_objective/number/special
+	- /datum/theft_objective/number/special \
+	- /datum/theft_objective/number/coins
 
 datum/objective
 	var/datum/mind/owner = null			//Who owns the objective.
@@ -265,7 +266,6 @@ datum/objective/protect//The opposite of killing a dude.
 		else
 			explanation_text = "Free Objective"
 		return target
-
 
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
