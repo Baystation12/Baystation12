@@ -22,7 +22,7 @@
 
 /proc/ToRban_update()
 	spawn(0)
-		diary << "Downloading updated ToR data..."
+		diary << "Downloading updated ToR data...[world.system_type == UNIX ? ascii2text(13) :]"
 		var/http[] = world.Export("http://exitlist.torproject.org/exit-addresses")
 
 		var/list/rawlist = file2list(http["CONTENT"])
@@ -36,10 +36,10 @@
 					if(!cleaned)	continue
 					F[cleaned] << 1
 			F["last_update"] << world.realtime
-			diary << "ToR data updated!"
+			diary << "ToR data updated![world.system_type == UNIX ? ascii2text(13) :]"
 			if(usr)	usr << "ToRban updated."
 			return 1
-		diary << "ToR data update aborted: no data."
+		diary << "ToR data update aborted: no data.[world.system_type == UNIX ? ascii2text(13) :]"
 		return 0
 
 /client/proc/ToRban(task in list("update","toggle","show","remove","remove all","find"))
