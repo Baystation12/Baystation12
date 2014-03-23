@@ -1230,7 +1230,7 @@
 				stuttering = max(stuttering-1, 0)
 
 			if (slurring)
-				slurring = max(slurring-1, 0)
+				slurring = max(slurring-(1*sober_str), 0)
 
 			if(silent)
 				silent = max(silent-1, 0)
