@@ -102,10 +102,10 @@
 				kill_objective.find_target()
 				traitor.objectives += kill_objective
 			if(34 to 50)
-				var/datum/objective/brig/brig_objective = new
-				brig_objective.owner = traitor
-				brig_objective.find_target()
-				traitor.objectives += brig_objective
+				var/datum/objective/debrain/debrain_objective = new
+				debrain_objective.owner = traitor
+				debrain_objective.find_target()
+				traitor.objectives += debrain_objective
 			if(51 to 66)
 				var/datum/objective/harm/harm_objective = new
 				harm_objective.owner = traitor
