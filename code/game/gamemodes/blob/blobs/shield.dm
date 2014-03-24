@@ -4,7 +4,7 @@
 	icon_state = "blob_idle"
 	desc = "Some blob creature thingy"
 	health = 60
-	brute_resist = 1
+	brute_resist = 4
 	fire_resist = 2
 
 
