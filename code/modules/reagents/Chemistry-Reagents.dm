@@ -2027,7 +2027,11 @@ datum
 
 			on_mob_life(var/mob/living/M)
 				if(!M) M = holder.my_atom
-				if (prob(1) && prob(50))
+				if (holder.has_reagent("plantbgone",45))
+					holder.del_reagent("spore")
+				if (prob(1))
+					M << "\red Your mouth tastes funny."
+				if (prob(1) && prob(25))
 					if(iscarbon(M))
 						var/mob/living/carbon/C = M
 						if(directory[ckey(C.key)])
