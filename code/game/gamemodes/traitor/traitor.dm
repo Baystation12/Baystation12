@@ -158,10 +158,11 @@
 						hijack_objective.owner = traitor
 						traitor.objectives += hijack_objective
 				else // Honk
-					if (!(locate(/datum/objective/minimize_casualties) in traitor.objectives))
-						var/datum/objective/minimize_casualties/escape_objective = new
-						escape_objective.owner = traitor
-						traitor.objectives += escape_objective
+					if (!(locate(/datum/objective/speciesist) in traitor.objectives))
+						var/datum/objective/speciesist/speciesist_objective = new
+						speciesist_objective.owner = traitor
+						speciesist_objective.find_target()
+						traitor.objectives += speciesist_objective
 	return
 
 
