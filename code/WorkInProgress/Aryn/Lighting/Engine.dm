@@ -171,10 +171,9 @@ turf/proc/ResetAllLights()
 
 /turf/space/ResetAllLights()
 	var/atom/movable/lighting_overlay/overlay = locate() in src
-	if (overlay)
-		overlay.loc = null
-		light_overlay = null
-		is_outside = 1
+	overlay.loc = null
+	light_overlay = null
+	is_outside = 1
 	. = ..()
 
 turf/proc/ResetValue()
