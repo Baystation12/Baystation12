@@ -76,7 +76,7 @@ var/list/lit_z_levels = list(1,5)
 						world << "<font color=red>Progress: [round((turfs_updated/total_turfs)*100, 0.01)]% ([turfs_updated]/[total_turfs])"
 
 					var/turf/T = locate(x,y,z)
-					if(!T.is_outside)
+					if(!T.light_overlay && !T.is_outside)
 						T.light_overlay = new(T)
 					//T.ResetValue()
 				if(!all_lightpoints_made) new/lightpoint(x+0.5,y+0.5,z)
@@ -89,8 +89,7 @@ var/list/lit_z_levels = list(1,5)
 	started = 1
 
 	for(var/turf/T)
-		if(!T.is_outside && T.light_overlay)
-
+		if(T.light_overlay)
 			T.ResetValue()
 			T.UpdateLight()
 
