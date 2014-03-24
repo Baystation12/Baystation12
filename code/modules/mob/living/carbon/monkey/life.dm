@@ -447,7 +447,7 @@
 				var/turf/T = loc
 				var/area/A = T.loc
 				if(A)
-					if(A.lighting_use_dynamic)	light_amount = min(10,T.lit_value) - 5 //hardcapped so it's not abused by having a ton of flashlights
+					if(A.lighting_use_dynamic)	light_amount = min(10,T.lighting_lumcount) - 5 //hardcapped so it's not abused by having a ton of flashlights
 					else						light_amount =  5
 
 			nutrition += light_amount

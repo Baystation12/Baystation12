@@ -45,8 +45,7 @@ var/datum/controller/failsafe/Failsafe
 						MC_defcon = 0
 						MC_iteration = controller_iteration
 
-				//Lighting controller now neither processes nor iterates.
-				/*if(lighting_controller.processing)
+				if(lighting_controller.processing)
 					if(lighting_iteration == lighting_controller.iteration)	//master_controller hasn't finished processing in the defined interval
 						switch(lighting_defcon)
 							if(0 to 3)
@@ -61,7 +60,7 @@ var/datum/controller/failsafe/Failsafe
 								lighting_defcon = 0
 					else
 						lighting_defcon = 0
-						lighting_iteration = lighting_controller.iteration*/
+						lighting_iteration = lighting_controller.iteration
 			else
 				MC_defcon = 0
 				lighting_defcon = 0
