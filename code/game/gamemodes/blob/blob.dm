@@ -175,10 +175,10 @@ var/list/blob_nodes = list()
 			return
 
 		if (1)
-			command_alert("Confirmed outbreak of level 7 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+			command_alert("NanoTrasen has issued a directive 7-10 for [station_name()]. The station is to be considered quarantined.", "Biohazard Alert")
 			for(var/mob/M in player_list)
 				if(!istype(M,/mob/new_player))
-					M << sound('sound/AI/outbreak7.ogg')
+					M << sound('sound/AI/blob_confirmed.ogg')
 			return
 
 		if (2)
