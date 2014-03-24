@@ -614,6 +614,8 @@
 						bodytemperature += amt
 
 		else if(istype(get_turf(src), /turf/space) && !(species.flags & IS_SYNTHETIC) && !(species.flags & IS_PLANT))
+			if(istype(loc, /obj/mecha))
+				return
 			var/protected = 0
 			if( (head && istype(head, /obj/item/clothing/head/helmet/space)) && (wear_suit && istype(wear_suit, /obj/item/clothing/suit/space)) )
 				protected = 1
