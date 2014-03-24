@@ -84,7 +84,10 @@
 			Targets = FoundTarget
 			break
 		if(CanAttack(A))//Can we attack it?
-			Targets.Add(A)
+			if(istype(src, /mob/living/simple_animal/hostile/scarybat))
+				if(A == src:owner)
+					continue
+			Targets += A
 			continue
 	Target = PickTarget(Targets)
 	return Target //We now have a target
