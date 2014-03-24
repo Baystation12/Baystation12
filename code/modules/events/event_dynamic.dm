@@ -44,9 +44,9 @@ var/global/list/possibleEvents = list()
 	//see:
 	// Code/WorkInProgress/Cael_Aislinn/Economy/Economy_Events.dm
 	// Code/WorkInProgress/Cael_Aislinn/Economy/Economy_Events_Mundane.dm
-	possibleEvents[/datum/event/economic_event] = 200
-	possibleEvents[/datum/event/trivial_news] = 300
-	possibleEvents[/datum/event/mundane_news] = 200
+	possibleEvents[/datum/event/economic_event] = 150
+	possibleEvents[/datum/event/trivial_news] = 200
+	possibleEvents[/datum/event/mundane_news] = 150
 
 	possibleEvents[/datum/event/mass_hallucination] = 200
 	possibleEvents[/datum/event/falsealarm] = 300
@@ -88,7 +88,7 @@ var/global/list/possibleEvents = list()
 		possibleEvents[/datum/event/anomaly/anomaly_bluespace] = 50 + 25 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/anomaly/anomaly_flux] = 50 + 50 * active_with_role["Engineer"]
 
-	possibleEvents[/datum/event/viral_infection] = 25 + active_with_role["Medical"] * 100
+	possibleEvents[/datum/event/viral_infection] = 25 + active_with_role["Medical"] * 50
 	if(active_with_role["Medical"] > 0)
 		possibleEvents[/datum/event/radiation_storm] = active_with_role["Medical"] * 50
 		possibleEvents[/datum/event/spontaneous_appendicitis] = active_with_role["Medical"] * 150

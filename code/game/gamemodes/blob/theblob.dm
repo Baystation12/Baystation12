@@ -2,7 +2,7 @@
 /obj/effect/blob
 	name = "blob"
 	icon = 'icons/mob/blob.dmi'
-	luminosity = 3
+	luminosity = 0
 	desc = "Some blob creature thingy"
 	density = 0
 	opacity = 0
@@ -47,6 +47,8 @@
 			update_icon()
 
 	proc/Life()
+		for(var/atom/A in src.loc)//Hit everything in the turf
+			A.blob_act()
 		return
 
 
@@ -57,7 +59,7 @@
 		if(run_action())//If we can do something here then we dont need to pulse more
 			return
 
-		if(pulse > 30)
+		if(pulse > 20)
 			return//Inf loop check
 
 		//Looking for another blob to pulse

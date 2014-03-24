@@ -5,7 +5,8 @@ var/list/potential_theft_objectives=typesof(/datum/theft_objective) \
 	- /datum/theft_objective \
 	- /datum/theft_objective/special \
 	- /datum/theft_objective/number \
-	- /datum/theft_objective/number/special
+	- /datum/theft_objective/number/special \
+	- /datum/theft_objective/number/coins
 
 datum/objective
 	var/datum/mind/owner = null			//Who owns the objective.
@@ -266,7 +267,6 @@ datum/objective/protect//The opposite of killing a dude.
 			explanation_text = "Free Objective"
 		return target
 
-
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
 		if(target && target.current)
@@ -303,6 +303,36 @@ datum/objective/hijack
 				if(player.stat != DEAD)			//they're not dead!
 					if(get_turf(player) in shuttle)
 						return 0
+		return 1
+
+datum/objective/speciesist
+	var/datum/species/speciesist_target = null
+
+	find_target()
+		var/list/possible_targets = list()
+		var/mob/living/carbon/human/O = owner.current
+		for(var/datum/mind/possible_target in ticker.minds)
+			if(ishuman(possible_target.current))
+				var/mob/living/carbon/human/M = possible_target.current
+				if (M.species != O.species)
+					possible_targets += M.species
+		if(possible_targets.len > 0)
+			speciesist_target = pick(possible_targets)
+			explanation_text = "Do not allow any [speciesist_target.name]s to escape on the shuttle."
+		else
+			explanation_text = "Free Objective"
+		return speciesist_target
+
+	check_completion()
+		if(emergency_shuttle.location<2)
+			return 0
+		var/area/shuttle = locate(/area/shuttle/escape/centcom)
+		for(var/mob/living/carbon/human/player in player_list)
+			if (player.mind)
+				if (player.species == speciesist_target)
+					if(player.stat != DEAD)			//they're not dead!
+						if(get_turf(player) in shuttle)
+							return 0
 		return 1
 
 
