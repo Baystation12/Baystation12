@@ -204,7 +204,7 @@
 			user << "<span class='notice'>This machine only accepts beakers</span>"
 		src.beaker =  B
 		user.drop_item()
-		B.setloc(src)
+		B.loc = src
 		user << "You set [B] on the machine."
 		nanomanager.update_uis(src) // update all UIs attached to src
 		return
@@ -331,7 +331,7 @@
 			return
 		src.beaker = B
 		user.drop_item()
-		B.setloc(src)
+		B.loc = src
 		user << "You add the beaker to the machine!"
 		src.updateUsrDialog()
 		icon_state = "mixer1"
@@ -344,7 +344,7 @@
 
 		src.loaded_pill_bottle = B
 		user.drop_item()
-		B.setloc(src)
+		B.loc = src
 		user << "You add the pill bottle into the dispenser slot!"
 		src.updateUsrDialog()
 	return
@@ -360,7 +360,7 @@
 
 	if (href_list["ejectp"])
 		if(loaded_pill_bottle)
-			loaded_pill_bottle.setloc(src.loc)
+			loaded_pill_bottle.loc = src.loc
 			loaded_pill_bottle = null
 	else if(href_list["close"])
 		usr << browse(null, "window=chemmaster")
@@ -462,7 +462,7 @@
 				reagents.trans_to(P,amount_per_pill)
 				if(src.loaded_pill_bottle)
 					if(loaded_pill_bottle.contents.len < loaded_pill_bottle.storage_slots)
-						P.setloc(loaded_pill_bottle)
+						P.loc = loaded_pill_bottle
 						src.updateUsrDialog()
 
 		else if (href_list["createbottle"])
@@ -958,7 +958,7 @@
 		else
 			src.beaker =  O
 			user.drop_item()
-			O.setloc(src)
+			O.loc = src
 			update_icon()
 			src.updateUsrDialog()
 			return 0
@@ -972,7 +972,7 @@
 
 		for (var/obj/item/weapon/reagent_containers/food/snacks/grown/G in O.contents)
 			O.contents -= G
-			G.setloc(src)
+			G.loc = src
 			holdingitems += G
 			if(holdingitems && holdingitems.len >= limit) //Sanity checking so the blender doesn't overfill
 				user << "You fill the All-In-One grinder to the brim."
@@ -989,7 +989,7 @@
 		return 1
 
 	user.before_take_item(O)
-	O.setloc(src)
+	O.loc = src
 	holdingitems += O
 	src.updateUsrDialog()
 	return 0
@@ -1072,7 +1072,7 @@
 		return
 	if (!beaker)
 		return
-	beaker.setloc(src.loc)
+	beaker.loc = src.loc
 	beaker = null
 	update_icon()
 
@@ -1084,7 +1084,7 @@
 		return
 
 	for(var/obj/item/O in holdingitems)
-		O.setloc(src.loc)
+		O.loc = src.loc
 		holdingitems -= O
 	holdingitems = list()
 

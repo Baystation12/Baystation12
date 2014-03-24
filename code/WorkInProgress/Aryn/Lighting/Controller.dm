@@ -41,8 +41,11 @@ var/list/lit_z_levels = list(1,5)
 
 /datum/controller/lighting
 
-	var/starlight = LIGHT_STATES
+	var/starlight = 4
 	var/list/icon_updates = list()
+
+	var/list/light_border = list()
+
 	var/started = 0
 
 	//var/icon/border = icon('Icons/Test.dmi', "border")
@@ -86,14 +89,32 @@ var/list/lit_z_levels = list(1,5)
 	started = 1
 
 	for(var/turf/T)
-		if(T.light_overlay)
+		if(!T.is_outside && T.light_overlay)
 
 			T.ResetValue()
-			T.light_overlay.set_state(MAX_VALUE(T.lightSE), MAX_VALUE(T.lightSW), MAX_VALUE(T.lightNW), MAX_VALUE(T.lightNE))
+			T.UpdateLight()
 
 	world << "<b><font color=red>Lighting initialization took [(world.timeofday-start_time)/world.fps] seconds.</font></b>"
 	world << "<font color=red>Updated [turfs_updated] turfs.</font>"
 
-/datum/controller/lighting/proc/GetLightIcon(a,b,c,d)
-	if(a <= 2) return LIGHT_ICON_1
-	else return LIGHT_ICON_2
+/datum/controller/lighting/proc/MarkIconUpdate(turf/T)
+	if(!T.needs_light_update)
+		icon_updates.Add(T)
+		T.needs_light_update = 1
+
+/datum/controller/lighting/proc/FlushIconUpdates()
+	for(var/turf/T in icon_updates)
+		T.UpdateLight()
+		T.needs_light_update = 0
+	icon_updates = list()
+
+/datum/controller/lighting/proc/AddBorder(turf/T)
+	if(!T.is_border)
+		light_border.Add(T)
+		T.is_border = 1
+		//T.overlays.Add(border)
+
+/datum/controller/lighting/proc/RemoveBorder(turf/T)
+	if(T.is_border)
+		light_border.Remove(T)
+		T.is_border = 0

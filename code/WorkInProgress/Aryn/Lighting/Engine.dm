@@ -50,16 +50,17 @@ Turf Procs:
 		Resets the opacity cache and looks for opaque objects. Also responsible for adding and removing borders to space.
 */
 
+
+#define LIGHTCLAMP(x) ( max(0,min(3,round(x,1))) )
+
 atom/movable/lighting_overlay
 	name = ""
 	anchored = 1
 	layer = 9
 	mouse_opacity = 0
+	icon = 'icons/effects/ArynLights.dmi'
+	icon_state = "0000"
 	invisibility = INVISIBILITY_LIGHTING
-
-atom/movable/lighting_overlay/proc/set_state(a,b,c,d)
-	icon_state = "[a][b][c][d]"
-	icon = lighting_controller.GetLightIcon(a,b,c,d)
 
 atom/var/light/light
 
@@ -67,9 +68,10 @@ turf/var/atom/movable/lighting_overlay/light_overlay
 
 turf/var/lit_value = 0
 turf/var/max_brightness = 0
-turf/var/has_opaque = -1
+turf/var/has_opaque = 0
 turf/var/is_outside = 0
 turf/var/is_border = 0
+turf/var/needs_light_update = 0
 
 turf/var/lightpoint/lightNE
 turf/var/lightpoint/lightNW
@@ -83,31 +85,21 @@ atom/movable/New()
 		if(!light)
 			SetLight(luminosity,luminosity)
 		else
-			light.atom = src
 			light.Reset()
-	else if(light)
-		light.atom = src
-		light.Reset()
 	if(opacity)
 		if(lighting_ready())
 			opacity = 0
 			SetOpacity(1)
 
-atom/movable/Del()
-	if(light) light.Off()
-	if(opacity) SetOpacity(0)
-	. = ..()
-
-atom/movable/Move(turf/newloc)
+atom/movable/Move()
 	var/o = opacity
 	if(o) SetOpacity(0)
 	. = ..()
 	if(.)
 		if(o) SetOpacity(1)
-
-turf/Entered(atom/movable/M)
-	. = ..()
-	if(M.light) M.light.Reset()
+		if(light)
+			light.Reset()
+			if(lighting_ready()) lighting_controller.FlushIconUpdates()
 
 atom/proc/SetLight(intensity, radius)
 	//if(lights_verbose) world << "SetLight([intensity],[radius])"
@@ -118,7 +110,7 @@ atom/proc/SetLight(intensity, radius)
 		//if(lights_verbose) world << "Shut off light with [light.lit_turfs.len] turfs lit."
 		light.Off()
 		light.intensity = 0
-		//if(lighting_ready()) lighting_controller.FlushIconUpdates()
+		if(lighting_ready()) lighting_controller.FlushIconUpdates()
 		return
 	if(!light)
 		//if(lights_verbose) world << "New light."
@@ -129,31 +121,25 @@ atom/proc/SetLight(intensity, radius)
 	light.radius = min(radius,15)
 	light.intensity = intensity
 	light.Reset()
-	//if(lighting_ready()) lighting_controller.FlushIconUpdates()
+	if(lighting_ready()) lighting_controller.FlushIconUpdates()
 
 atom/proc/SetOpacity(o)
 	if(o == opacity) return
 	opacity = o
 	var/turf/T = loc
 	if(isturf(T))
-		T.CheckForOpaqueObjects()
 		for(var/light/A in T.lit_by)
 			A.Reset()
+		lighting_controller.FlushIconUpdates()
 
-		//lighting_controller.FlushIconUpdates()
+turf/proc/UpdateLight()
+	if(light_overlay)
+		light_overlay.icon_state = "[lightSE.max_value()][lightSW.max_value()][lightNW.max_value()][lightNE.max_value()]"
 
-atom/proc/UpdateLights()
-	if(light) light.Reset()
-	for(var/atom/movable/A in src)
-		if(A.light) A.light.Reset()
-
-//turf/proc/UpdateLight()
-//	if(light_overlay)
-//		light_overlay.icon_state = "[lightSE.max_value()][lightSW.max_value()][lightNW.max_value()][lightNE.max_value()]"
-
-turf/proc/AddLight(light/light, brightness)
+turf/proc/AddLight(light/light)
 	if(is_outside) return
 
+	var/brightness = light.CalculateBrightness(src)
 	if(brightness <= 0) return
 
 	if(!lit_by) lit_by = list()
@@ -162,19 +148,13 @@ turf/proc/AddLight(light/light, brightness)
 
 	lit_by[light] = brightness
 
-	if(lighting_ready())
+	if(!has_opaque && lighting_ready())
 		if(brightness > max_brightness)
 			lit_value = LIGHTCLAMP(brightness)
 			max_brightness = brightness
-
-			if(lightNE) lightNE.cached_value = -1
-			if(lightNW) lightNW.cached_value = -1
-			if(lightSE) lightSE.cached_value = -1
-			if(lightSW) lightSW.cached_value = -1
-
+			ResetCachedValues()
 			for(var/turf/T in range(1,src))
-				if(T.light_overlay)
-					T.light_overlay.set_state(MAX_VALUE(T.lightSE), MAX_VALUE(T.lightSW), MAX_VALUE(T.lightNW), MAX_VALUE(T.lightNE))
+				lighting_controller.MarkIconUpdate(T)
 
 turf/proc/RemoveLight(light/light)
 	if(lit_by)
@@ -191,9 +171,10 @@ turf/proc/ResetAllLights()
 
 /turf/space/ResetAllLights()
 	var/atom/movable/lighting_overlay/overlay = locate() in src
-	if(overlay) overlay.loc = null
-	light_overlay = null
-	is_outside = 1
+	if (overlay)
+		overlay.loc = null
+		light_overlay = null
+		is_outside = 1
 	. = ..()
 
 turf/proc/ResetValue()
@@ -202,10 +183,17 @@ turf/proc/ResetValue()
 		lit_value = LIGHTCLAMP(lighting_controller.starlight)
 		return
 
-	if(has_opaque < 0) CheckForOpaqueObjects()
+	CheckForOpaqueObjects()
 	if(has_opaque)
 		lit_value = 0
 	else
+		the_part_where_I_calculate_brightness()
+
+	if(lighting_ready())
+		the_part_where_I_use_range()
+
+turf/proc
+	the_part_where_I_calculate_brightness()
 		max_brightness = 0
 		for(var/light/light in lit_by)
 			var/brightness = lit_by[light]//light.CalculateBrightness(src)
@@ -213,14 +201,20 @@ turf/proc/ResetValue()
 				max_brightness = brightness
 		lit_value = LIGHTCLAMP(max_brightness)
 
-	if(lighting_ready())
-		if(lightNE) lightNE.cached_value = -1
-		if(lightNW) lightNW.cached_value = -1
-		if(lightSE) lightSE.cached_value = -1
-		if(lightSW) lightSW.cached_value = -1
+	the_part_where_I_use_range()
+		ResetCachedValues()
 		for(var/turf/T in range(1,src))
-			if(T.light_overlay)
-				T.light_overlay.set_state(MAX_VALUE(T.lightSE), MAX_VALUE(T.lightSW), MAX_VALUE(T.lightNW), MAX_VALUE(T.lightNE))
+			lighting_controller.MarkIconUpdate(T)
+
+turf/proc/ResetCachedValues()
+	if(lightNE)
+		lightNE.cached_value = -1
+	if(lightNW)
+		lightNW.cached_value = -1
+	if(lightSE)
+		lightSE.cached_value = -1
+	if(lightSW)
+		lightSW.cached_value = -1
 
 turf/proc/CheckForOpaqueObjects()
 	has_opaque = opacity
@@ -229,3 +223,5 @@ turf/proc/CheckForOpaqueObjects()
 			if(M.opacity)
 				has_opaque = 1
 				break
+
+#undef LIGHTCLAMP

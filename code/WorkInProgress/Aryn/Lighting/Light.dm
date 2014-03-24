@@ -24,30 +24,20 @@ Class Procs:
 
 light/var/radius = 0
 light/var/intensity = 0
-light/var/ambient_extension = 3
-light/var/list/lit_turfs = list()
+light/var/list/lit_turfs
 light/var/atom/atom
 
-light/New(atom/atom, radius, ambience=3)
-	ASSERT(atom)
-
-	if(istype(atom))
-		src.atom = atom
-	else
-		src.intensity = atom
-		src.radius = radius
-		src.ambient_extension = ambience
+light/New(atom/atom)
+	src.atom = atom
 
 light/proc/Reset()
 	//if(atom.lights_verbose) world << "light.Reset()"
 	Off()
 	if(intensity > 0)
 		//if(atom.lights_verbose) world << "Restoring light."
-		var/turf/loc = atom
-		for(var/turf/T in view(loc,radius+ambient_extension))
+		for(var/turf/T in view(get_turf(atom),radius+1))
 			if(!T.is_outside)
-				var/brightness = CalculateBrightness(T, loc)
-				T.AddLight(src, brightness)
+				T.AddLight(src)
 				lit_turfs.Add(T)
 		//if(atom.lights_verbose) world << "[lit_turfs.len] turfs added."
 
@@ -55,20 +45,16 @@ light/proc/Off()
 	//if(atom.lights_verbose) world << "light.Off()"
 	for(var/turf/T in lit_turfs)
 		T.RemoveLight(src)
-	lit_turfs.Cut()
+	lit_turfs = list()
 
-light/proc/Flash(t)
-	Reset()
-	spawn(t)
-		Off()
-
-light/proc/CalculateBrightness(turf/T, turf/loc)
-	ASSERT(T)
-	var/square = DISTSQ3(loc.x-T.x,loc.y-T.y,loc.z-T.z)
-	if(square > (radius+ambient_extension)*(radius+ambient_extension)) return 0
+light/proc/CalculateBrightness(turf/T)
+	if (!atom)
+		return 0
+	var/square = get_square_dist(atom.x,atom.y,atom.z,T.x,T.y,T.z)
+	if(square > (radius+2)*(radius+2)) return 0
 		//+2 offset gives an ambient light effect.
 
-	var/value = ((radius)/(2*FSQRT(square) + 1)) * intensity - 0.48
+	var/value = ((radius)/(2*fsqrt(square) + 1)) * intensity - 0.48
 		/*
 			  lightRadius
 			---------------- * lightValue - 0.48
