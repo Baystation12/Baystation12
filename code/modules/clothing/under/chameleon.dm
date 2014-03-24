@@ -27,7 +27,7 @@
 		icon_state = "psyche"
 		item_color = "psyche"
 		update_icon()
-		usr.update_icons()
+		usr.update_inv_w_uniform()
 
 	verb/change()
 		set name = "Change Jumpsuit Appearance"
@@ -79,7 +79,7 @@
 		icon_state = "greysoft"
 		item_color = "grey"
 		update_icon()
-		usr.update_icons()
+		usr.update_inv_head()
 
 	verb/change()
 		set name = "Change Hat/Helmet Appearance"
@@ -132,7 +132,7 @@
 		icon_state = "armor"
 		item_color = "armor"
 		update_icon()
-		usr.update_icons()
+		usr.update_inv_wear_suit()
 
 	verb/change()
 		set name = "Change Exosuit Appearance"
@@ -185,7 +185,7 @@
 		item_state = "black"
 		item_color = "black"
 		update_icon()
-		usr.update_icons()
+		usr.update_inv_shoes()
 
 	verb/change()
 		set name = "Change Footwear Appearance"
@@ -234,7 +234,7 @@
 		icon_state = "backpack"
 		item_state = "backpack"
 		update_icon()
-		usr.update_icons()
+		usr.update_inv_back()
 
 	verb/change()
 		set name = "Change Backpack Appearance"
@@ -285,7 +285,7 @@
 		icon_state = "black"
 		item_color = "brown"
 		update_icon()
-		usr.update_icons()
+		usr.update_inv_gloves()
 
 	verb/change()
 		set name = "Change Gloves Appearance"
@@ -336,7 +336,7 @@
 		desc = "It's a gas mask."
 		icon_state = "gas_alt"
 		update_icon()
-		usr.update_icons()
+		usr.update_inv_wear_mask()
 	verb/change()
 		set name = "Change Mask Appearance"
 		set category = "Object"
@@ -384,7 +384,7 @@
 		desc = "It's a set of mesons."
 		icon_state = "meson"
 		update_icon()
-		usr.update_icons()
+		usr.update_inv_glasses()
 
 	verb/change()
 		set name = "Change Glasses Appearance"
@@ -435,7 +435,8 @@
 		desc = "It's a desert eagle."
 		icon_state = "deagle"
 		update_icon()
-		usr.update_icons()
+		usr.update_inv_r_hand()
+		usr.update_inv_l_hand()
 
 	verb/change()
 		set name = "Change Gun Appearance"
