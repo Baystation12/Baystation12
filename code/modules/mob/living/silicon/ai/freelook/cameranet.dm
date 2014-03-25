@@ -135,7 +135,15 @@ var/datum/cameranet/cameranet = new()
 		if(chunk.visibleTurfs[position])
 			return 1
 	return 0
-
+//tg-stuff
+/datum/cameranet/proc/checkTurfVis(var/turf/position)
+	var/datum/camerachunk/chunk = getCameraChunk(position.x, position.y, position.z)
+	if(chunk)
+		if(chunk.changed)
+			chunk.hasChanged(1) // Update now, no matter if it's visible or not.
+		if(chunk.visibleTurfs[position])
+			return 1
+	return 0
 
 // Debug verb for VVing the chunk that the turf is in.
 /*
