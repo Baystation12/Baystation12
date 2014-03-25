@@ -118,7 +118,7 @@
 
 	New()
 		..()
-		var/blocked = list(/obj/item/clothing/suit/chameleon,
+		var/blocked = list(/obj/item/clothing/suit/chameleon, /obj/item/clothing/suit/space/space_ninja,
 			/obj/item/clothing/suit/golem, /obj/item/clothing/suit/suit, /obj/item/clothing/suit/cyborg_suit, /obj/item/clothing/suit/justice,
 			/obj/item/clothing/suit/greatcoat)//Prevent infinite loops and bad suits.
 		for(var/U in typesof(/obj/item/clothing/suit)-blocked)
