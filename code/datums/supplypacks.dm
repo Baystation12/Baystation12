@@ -42,6 +42,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Special Ops crate"
 	group = "Security"
 	hidden = 1
+/datum/supply_packs/iamthelaw
+	name = "Law Crate"
+	contains = list(/obj/item/weapon/grenade/spawnergrenade/thelawrules)
+	cost = 50
+	containertype = /obj/structure/closet/crate
+	containername = "Crate of LAW"
+	group = "Security"
+	hidden = 1
 
 /datum/supply_packs/food
 	name = "Food crate"
