@@ -34,21 +34,21 @@
 	switch(severity)
 		if(1.0)
 			for(var/atom/movable/A as mob|obj in src)
-				A.setloc(src.loc)
+				A.loc = src.loc
 				ex_act(severity)
 			del(src)
 			return
 		if(2.0)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
-					A.setloc(src.loc)
+					A.loc = src.loc
 					ex_act(severity)
 				del(src)
 				return
 		if(3.0)
 			if (prob(5))
 				for(var/atom/movable/A as mob|obj in src)
-					A.setloc(src.loc)
+					A.loc = src.loc
 					ex_act(severity)
 				del(src)
 				return
@@ -64,7 +64,7 @@
 	if (src.connected)
 		for(var/atom/movable/A as mob|obj in src.connected.loc)
 			if (!( A.anchored ))
-				A.setloc(src)
+				A.loc = src
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		//src.connected = null
 		del(src.connected)
@@ -78,7 +78,7 @@
 			src.connected.connected = src
 			src.icon_state = "morgue0"
 			for(var/atom/movable/A as mob|obj in src)
-				A.setloc(src.connected.loc)
+				A.loc = src.connected.loc
 			src.connected.icon_state = "morguet"
 			src.connected.dir = src.dir
 		else
@@ -114,7 +114,7 @@
 		src.connected.connected = src
 		src.icon_state = "morgue0"
 		for(var/atom/movable/A as mob|obj in src)
-			A.setloc(src.connected.loc)
+			A.loc = src.connected.loc
 			//Foreach goto(106)
 		src.connected.icon_state = "morguet"
 	else
@@ -144,7 +144,7 @@
 	if (src.connected)
 		for(var/atom/movable/A as mob|obj in src.loc)
 			if (!( A.anchored ))
-				A.setloc(src.connected)
+				A.loc = src.connected
 			//Foreach goto(26)
 		src.connected.connected = null
 		src.connected.update()
@@ -161,7 +161,7 @@
 		return
 	if (!ismob(user) || user.stat || user.lying || user.stunned)
 		return
-	O.setloc(src.loc)
+	O.loc = src.loc
 	if (user != O)
 		for(var/mob/B in viewers(user, 3))
 			if ((B.client && !( B.blinded )))
@@ -199,21 +199,21 @@
 	switch(severity)
 		if(1.0)
 			for(var/atom/movable/A as mob|obj in src)
-				A.setloc(src.loc)
+				A.loc = src.loc
 				ex_act(severity)
 			del(src)
 			return
 		if(2.0)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
-					A.setloc(src.loc)
+					A.loc = src.loc
 					ex_act(severity)
 				del(src)
 				return
 		if(3.0)
 			if (prob(5))
 				for(var/atom/movable/A as mob|obj in src)
-					A.setloc(src.loc)
+					A.loc = src.loc
 					ex_act(severity)
 				del(src)
 				return
@@ -238,7 +238,7 @@
 	if ((src.connected) && (src.locked == 0))
 		for(var/atom/movable/A as mob|obj in src.connected.loc)
 			if (!( A.anchored ))
-				A.setloc(src)
+				A.loc = src
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		//src.connected = null
 		del(src.connected)
@@ -252,7 +252,7 @@
 			src.connected.connected = src
 			src.icon_state = "crema0"
 			for(var/atom/movable/A as mob|obj in src)
-				A.setloc(src.connected.loc)
+				A.loc = src.connected.loc
 			src.connected.icon_state = "cremat"
 		else
 			//src.connected = null
@@ -286,7 +286,7 @@
 		src.connected.connected = src
 		src.icon_state = "crema0"
 		for(var/atom/movable/A as mob|obj in src)
-			A.setloc(src.connected.loc)
+			A.loc = src.connected.loc
 			//Foreach goto(106)
 		src.connected.icon_state = "cremat"
 	else
@@ -360,7 +360,7 @@
 	if (src.connected)
 		for(var/atom/movable/A as mob|obj in src.loc)
 			if (!( A.anchored ))
-				A.setloc(src.connected)
+				A.loc = src.connected
 			//Foreach goto(26)
 		src.connected.connected = null
 		src.connected.update()
@@ -377,7 +377,7 @@
 		return
 	if (!ismob(user) || user.stat || user.lying || user.stunned)
 		return
-	O.setloc(src.loc)
+	O.loc = src.loc
 	if (user != O)
 		for(var/mob/B in viewers(user, 3))
 			if ((B.client && !( B.blinded )))

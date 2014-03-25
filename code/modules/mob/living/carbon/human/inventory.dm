@@ -717,11 +717,8 @@ It can still be worn/put on as normal.
 			if(item && target.has_organ_for_slot(slot_to_process)) //Placing an item on the mob
 				if(item.mob_can_equip(target, slot_to_process, 0))
 					source.u_equip(item)
-					item.dropped(source)
-
 					target.equip_to_slot_if_possible(item, slot_to_process, 0, 1, 1)
-					item.pickup(target)
-
+					item.dropped(source)
 					source.update_icons()
 					target.update_icons()
 
