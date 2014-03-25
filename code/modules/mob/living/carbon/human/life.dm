@@ -1138,7 +1138,7 @@
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
 
-		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
+		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg)
 
 		update_action_buttons()
 
@@ -1277,8 +1277,9 @@
 					see_in_dark += G.darkness_view
 					if(G.vision_flags)
 						sight |= G.vision_flags
-						if(!druggy)
-							see_invisible = SEE_INVISIBLE_MINIMUM
+				if(istype(G,/obj/item/clothing/glasses/night))
+					see_invisible = SEE_INVISIBLE_MINIMUM
+					client.screen += global_hud.nvg
 
 	/* HUD shit goes here, as long as it doesn't modify sight flags */
 	// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
@@ -1295,6 +1296,8 @@
 
 			else if(!seer)
 				see_invisible = SEE_INVISIBLE_LIVING
+
+			
 
 			if(healths)
 				if (analgesic)

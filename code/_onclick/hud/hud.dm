@@ -14,6 +14,7 @@ var/datum/global_hud/global_hud = new()
 	var/obj/screen/blurry
 	var/list/vimpaired
 	var/list/darkMask
+	var/obj/screen/nvg
 
 /datum/global_hud/New()
 	//420erryday psychedellic colours screen overlay for when you are high
@@ -29,6 +30,13 @@ var/datum/global_hud/global_hud = new()
 	blurry.icon_state = "blurry"
 	blurry.layer = 17
 	blurry.mouse_opacity = 0
+
+	nvg = new /obj/screen()
+	nvg.screen_loc = "1,1"
+	nvg.icon = 'icons/obj/nvg_hud_full.dmi'
+	nvg.icon_state = "nvg_hud"
+	nvg.layer = 17
+	nvg.mouse_opacity = 0
 
 	var/obj/screen/O
 	var/i
