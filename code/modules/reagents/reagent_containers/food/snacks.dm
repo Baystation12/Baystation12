@@ -1947,6 +1947,18 @@
 		reagents.add_reagent("nutriment", 4)
 		bitesize = 3
 
+
+/obj/item/weapon/reagent_containers/food/snacks/lollipop
+	name = "Lollipop"
+	desc = "Aw, shucks, thanks, doctor man!"
+	icon_state = "lollipop"
+	filling_color = "#FF525A"
+
+	New()
+		..()
+		reagents.add_reagent("nutriment", 10)
+		bitesize = 1
+
 /obj/item/weapon/reagent_containers/food/snacks/twobread
 	name = "Two Bread"
 	desc = "It is very bitter and winy."
