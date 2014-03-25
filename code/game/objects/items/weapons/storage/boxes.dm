@@ -479,3 +479,43 @@
 		new /obj/item/weapon/light/tube(src)
 	for(var/i = 0; i < 7; i++)
 		new /obj/item/weapon/light/bulb(src)
+
+/obj/item/weapon/storage/box/lollipop
+	name = "Lollipop Box"
+	desc = "Full of tasty treats for good patients!"
+	storage_slots = 20
+/obj/item/weapon/storage/box/lollipop/New()
+	..()
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/lollipop(src)
+
+/obj/item/weapon/storage/box/mints
+	name = "Mint Box"
+	desc = "Full of mints for good defendants."
+	storage_slots = 20
+/obj/item/weapon/storage/box/mints/New()
+	..()
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/mint(src)

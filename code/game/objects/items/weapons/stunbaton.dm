@@ -8,15 +8,16 @@
 	force = 10
 	throwforce = 7
 	w_class = 3
+	var/emagged = 0
 	var/charges = 10
 	var/status = 0
 	var/mob/foundmob = "" //Used in throwing proc.
 
 	origin_tech = "combat=2"
 
-	suicide_act(mob/user)
-		viewers(user) << "\red <b>[user] is putting the live [src.name] in \his mouth! It looks like \he's trying to commit suicide.</b>"
-		return (FIRELOSS)
+/obj/item/weapon/melee/baton/suicide_act(mob/user)
+	viewers(user) << "\red <b>[user] is putting the live [src.name] in \his mouth! It looks like \he's trying to commit suicide.</b>"
+	return (FIRELOSS)
 
 /obj/item/weapon/melee/baton/update_icon()
 	if(status)
@@ -28,6 +29,15 @@
 	if(status && (CLUMSY in user.mutations) && prob(50))
 		user << "\red You grab the [src] on the wrong side."
 		user.Weaken(30)
+		charges--
+		if(charges < 1)
+			status = 0
+			update_icon()
+		return
+	if(emagged)
+		user << "<span class='danger'>You are suddenly shocked by the [src]!</span>"
+		user.Weaken(30)
+		playsound(src.loc, "sparks", 75, 1, -1)
 		charges--
 		if(charges < 1)
 			status = 0
@@ -126,3 +136,9 @@
 	if(charges < 1)
 		status = 0
 		update_icon()
+/obj/item/weapon/melee/baton/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if(istype(W, /obj/item/weapon/card/emag))
+		emagged = 1
+		user << "\blue You emag the stun baton, making it stun anyone who turns it on!"
+		return

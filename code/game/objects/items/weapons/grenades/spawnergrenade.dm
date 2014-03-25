@@ -42,3 +42,10 @@
 	spawner_type = /mob/living/simple_animal/hostile/carp
 	deliveryamt = 5
 	origin_tech = "materials=3;magnets=4;syndicate=4"
+
+/obj/item/weapon/grenade/spawnergrenade/thelawrules
+	name = "law delivery grenade"
+	desc = "I<BR>AM<BR>THE<BR>LAW<BR>"
+	spawner_type = /obj/machinery/bot/secbot/beepsky
+	deliveryamt = 5
+	origin_tech = "materials=3;magnets=4;combat=9"
