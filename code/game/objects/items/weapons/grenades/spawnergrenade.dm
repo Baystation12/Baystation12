@@ -47,5 +47,5 @@
 	name = "law delivery grenade"
 	desc = "I<BR>AM<BR>THE<BR>LAW<BR>"
 	spawner_type = /obj/machinery/bot/secbot/beepsky
-	deliveryamt = 10
+	deliveryamt = 5
 	origin_tech = "materials=3;magnets=4;combat=9"
