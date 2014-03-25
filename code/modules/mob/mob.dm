@@ -758,6 +758,9 @@ note dizziness decrements automatically in the mob's Life() proc.
 		anchored = 1
 		canmove = 0
 		lying = 0
+	else if (crawling)
+		lying = 1
+		canmove = 1
 	else
 		lying = !can_stand
 		canmove = has_limbs

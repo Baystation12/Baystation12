@@ -4,9 +4,12 @@
 	if(species && species.flags & IS_SLOW)
 		tally = 7
 
+	if(crawling)
+		tally += 7
+
 	if (istype(loc, /turf/space)) return -1 // It's hard to be slowed down in space by... anything
 
-	if(embedded_flag) 
+	if(embedded_flag)
 		handle_embedded_objects() //Moving with objects stuck in you can cause bad times.
 
 	if(reagents.has_reagent("hyperzine")) return -1

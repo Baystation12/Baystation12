@@ -1289,3 +1289,17 @@
 		W.update_icon()
 		W.message = message
 		W.add_fingerprint(src)
+
+/mob/living/carbon/human/verb/crawl()
+	set name = "Crawl"
+	set category = "IC"
+
+	crawling = !crawling
+	if(crawling)
+		layer = 2.7
+		pass_flags += PASSTABLE
+	else
+		layer = 4.0
+		pass_flags -= PASSTABLE
+	update_canmove()
+	src << "\blue You are now [crawling ? "crawling" : "getting up"]"

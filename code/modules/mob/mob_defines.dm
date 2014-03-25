@@ -81,6 +81,7 @@
 	var/resting = 0			//Carbon
 	var/lying = 0
 	var/lying_prev = 0
+	var/crawling = 0 //Для ползанья
 	var/canmove = 1
 	var/lastpuke = 0
 	var/unacidable = 0

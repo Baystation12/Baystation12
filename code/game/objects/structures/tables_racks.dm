@@ -540,6 +540,10 @@
 	var/status = 2
 	parts = /obj/item/weapon/table_parts/reinforced
 
+/obj/structure/table/reinforced/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(istype(mover) && mover:crawling)	return 0
+	..()
+
 /obj/structure/table/reinforced/flip(var/direction)
 	if (status == 2)
 		return 0
@@ -613,6 +617,7 @@
 	if(air_group || (height==0)) return 1
 	if(src.density == 0) //Because broken racks -Agouri |TODO: SPRITE!|
 		return 1
+	if(istype(mover) && mover:crawling)	return 0
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
 	else
