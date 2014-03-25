@@ -30,19 +30,6 @@
 	new /obj/item/stack/sheet/mineral/sandstone(location)
 	del(src)
 
-/obj/item/weapon/ore/glass/throw_impact(atom/hit_atom)//POCKET SAND!
-	if(ishuman(hit_atom))
-		var/mob/living/carbon/human/H = hit_atom
-		if(( \
-			(H.head && H.head.flags & HEADCOVERSEYES) || \
-			(H.wear_mask && H.wear_mask.flags & MASKCOVERSEYES) || \
-			(H.glasses && H.glasses.flags & GLASSESCOVERSEYES) \
-		))
-			H <<"<span class='warning'>The sand harmlessly hits your eye protection.</span>"
-		else
-			H.apply_effect(rand(2,3), EYE_BLUR)
-			H << "<span class='warning'>You got sand in your eyes!</span>"
-
 /obj/item/weapon/ore/plasma
 	name = "Plasma ore"
 	icon_state = "Plasma ore"
