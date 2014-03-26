@@ -1275,8 +1275,10 @@
 				var/obj/item/clothing/glasses/G = glasses
 				if(istype(G))
 					see_in_dark += G.darkness_view
-					if(G.vision_flags)
+					if(G.vision_flags)		// MESONS
 						sight |= G.vision_flags
+						if(!druggy)
+							see_invisible = SEE_INVISIBLE_MINIMUM
 				if(istype(G,/obj/item/clothing/glasses/night))
 					see_invisible = SEE_INVISIBLE_MINIMUM
 					client.screen += global_hud.nvg
