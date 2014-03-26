@@ -15,6 +15,7 @@
 
 	if(dish)
 		user << "\The [src] is already loaded."
+		return
 
 	dish = O
 	user.drop_item()
