@@ -642,14 +642,14 @@ This function completely restores a damaged organ to perfect condition.
 			return 1
 	return 0
 
-/datum/organ/external/get_icon(gender="")
+/datum/organ/external/get_icon(gender="",fat="")
 	if (status & ORGAN_ROBOT && !(owner.species && owner.species.flags & IS_SYNTHETIC))
 		return new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 
 	if (status & ORGAN_MUTATED)
-		return new /icon(owner.deform_icon, "[icon_name][gender ? "_[gender]" : ""]")
+		return new /icon(owner.deform_icon, "[icon_name][gender ? "_[gender]" : ""][fat ? "_[fat]" : ""]")
 
-	return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""]")
+	return new /icon(owner.race_icon, "[icon_name][gender ? "_[gender]" : ""][fat ? "_[fat]" : ""]")
 
 
 /datum/organ/external/proc/is_usable()

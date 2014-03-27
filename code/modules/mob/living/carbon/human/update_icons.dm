@@ -227,7 +227,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 	var/necrosis_color_mod = rgb(10,50,0)
 
 	var/husk = (HUSK in src.mutations)  //100% unnecessary -Agouri	//nope, do you really want to iterate through src.mutations repeatedly? -Pete
-	var/fat = (FAT in src.mutations)
+	var/fat
+	if( FAT in mutations )
+		fat = "fat"
 	var/hulk = (HULK in src.mutations)
 	var/skeleton = (SKELETON in src.mutations)
 
@@ -235,7 +237,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(gender == FEMALE)	g = "f"
 
 	var/datum/organ/external/chest = get_organ("chest")
-	stand_icon = chest.get_icon(g)
+	stand_icon = chest.get_icon(g,fat)
 	if(!skeleton)
 		if(husk)
 			stand_icon.ColorTone(husk_color_mod)
@@ -491,6 +493,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		var/t_color = w_uniform.item_color
 		if(!t_color)		t_color = icon_state
 		var/image/standing = image("icon_state" = "[t_color]_s")
+
 		if(w_uniform:tc_custom)
 			standing = image("icon"= ((w_uniform.icon_override) ? w_uniform.icon_override : w_uniform:tc_custom), "icon_state" = "[t_color]_mob")
 		else
@@ -508,6 +511,14 @@ proc/get_damage_icon_part(damage_state, body_part)
 				standing.overlays	+= image("icon" = w_uniform:hastie:tc_custom, "icon_state" = "[tie_color]_mob")
 			else
 				standing.overlays	+= image("icon" = 'icons/mob/ties.dmi', "icon_state" = "[tie_color]")
+
+		if(FAT in mutations)
+			if(w_uniform.flags&ONESIZEFITSALL)
+				standing.icon	= 'icons/mob/uniform_fat.dmi'
+			else
+				src << "\red You burst out of \the [w_uniform]!"
+				drop_from_inventory(w_uniform)
+				return
 
 		overlays_standing[UNIFORM_LAYER]	= standing
 	else
@@ -659,6 +670,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 			standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : wear_suit:tc_custom), "icon_state" = "[wear_suit.icon_state]_mob")
 		else
 			standing = image("icon" = ((wear_suit.icon_override) ? wear_suit.icon_override : 'icons/mob/suit.dmi'), "icon_state" = "[wear_suit.icon_state]")
+
 		if( istype(wear_suit, /obj/item/clothing/suit/straight_jacket) )
 			drop_from_inventory(handcuffed)
 			drop_l_hand()
@@ -669,6 +681,12 @@ proc/get_damage_icon_part(damage_state, body_part)
 			var/image/bloodsies = image("icon" = 'icons/effects/blood.dmi', "icon_state" = "[S.blood_overlay_type]blood")
 			bloodsies.color = wear_suit.blood_color
 			standing.overlays	+= bloodsies
+
+		if(FAT in mutations)
+			if( !(wear_suit.flags & ONESIZEFITSALL) )
+				src << "\red You burst out of \the [wear_suit]!"
+				drop_from_inventory(wear_suit)
+				return
 
 		overlays_standing[SUIT_LAYER]	= standing
 

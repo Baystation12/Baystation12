@@ -39,7 +39,7 @@
 	icon_state = "waiter"
 	item_state = "waiter"
 	item_color = "waiter"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/rank/mailman
 	name = "mailman's jumpsuit"

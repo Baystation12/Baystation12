@@ -247,6 +247,14 @@
 	if(ishuman(M))
 		//START HUMAN
 		var/mob/living/carbon/human/H = M
+		//fat mutation
+		if(istype(src, /obj/item/clothing/under) || istype(src, /obj/item/clothing/suit))
+			if(FAT in H.mutations)
+				testing("[M] TOO FAT TO WEAR [src]!")
+				if(!(flags & ONESIZEFITSALL))
+					if(!disable_warning)
+						H << "\red You're too fat to wear the [name]."
+					return 0
 
 		switch(slot)
 			if(slot_l_hand)

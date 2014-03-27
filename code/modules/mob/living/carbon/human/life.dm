@@ -969,11 +969,12 @@
 			else if (light_amount < 2) //heal in the dark
 				heal_overall_damage(1,1)
 
-/*		//The fucking FAT mutation is the dumbest shit ever. It makes the code so difficult to work with
+		//The fucking FAT mutation is the dumbest shit ever. It makes the code so difficult to work with
 		if(FAT in mutations)
 			if(overeatduration < 100)
 				src << "\blue You feel fit again!"
 				mutations.Remove(FAT)
+				update_body()
 				update_mutantrace(0)
 				update_mutations(0)
 				update_inv_w_uniform(0)
@@ -982,11 +983,12 @@
 			if(overeatduration > 500)
 				src << "\red You suddenly feel blubbery!"
 				mutations.Add(FAT)
+				update_body()
 				update_mutantrace(0)
 				update_mutations(0)
 				update_inv_w_uniform(0)
 				update_inv_wear_suit()
-*/
+
 
 		// nutrition decrease
 		if (nutrition > 0 && stat != 2)
