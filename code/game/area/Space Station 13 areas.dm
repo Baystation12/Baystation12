@@ -857,7 +857,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "chapeloffice"
 
 /area/lawoffice
-	name = "\improper Law Office"
+	name = "\improper Internal Affairs"
 	icon_state = "law"
 
 
@@ -1403,6 +1403,10 @@ var/list/ghostteleportlocs = list()
 
 /area/storage/emergency2
 	name = "Port Emergency Storage"
+	icon_state = "emergencystorage"
+
+/area/storage/emergency3
+	name = "Central Emergency Storage"
 	icon_state = "emergencystorage"
 
 /area/storage/tech

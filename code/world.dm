@@ -14,8 +14,8 @@
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
 	diaryofmeanpeople = file("data/logs/[date_string] Attack.log")
-	diary << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
-	diaryofmeanpeople << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
+	diary << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")][world.system_type == UNIX ? ascii2text(13) :]\n---------------------[world.system_type == UNIX ? ascii2text(13) :]"
+	diaryofmeanpeople << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")][world.system_type == UNIX ? ascii2text(13) :]\n---------------------"
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
 	if(byond_version < RECOMMENDED_VERSION)
@@ -67,7 +67,7 @@
 //		..()
 
 /world/Topic(T, addr, master, key)
-	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
+	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][world.system_type == UNIX ? ascii2text(13) :]"
 
 	if (T == "ping")
 		var/x = 1
@@ -147,7 +147,7 @@
 	if(Lines.len)
 		if(Lines[1])
 			master_mode = Lines[1]
-			diary << "Saved mode is '[master_mode]'"
+			diary << "Saved mode is '[master_mode]'[world.system_type == UNIX ? ascii2text(13) :]"
 
 /world/proc/save_mode(var/the_mode)
 	var/F = file("data/mode.txt")
@@ -181,7 +181,7 @@
 	if(config.admin_legacy_system)
 		var/text = file2text("config/moderators.txt")
 		if (!text)
-			diary << "Failed to load config/mods.txt\n"
+			diary << "Failed to load config/mods.txt[world.system_type == UNIX ? ascii2text(13) :]"
 		else
 			var/list/lines = text2list(text, "\n")
 			for(var/line in lines)

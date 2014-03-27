@@ -433,10 +433,10 @@
 		rank = src:rank
 		assignment = src:assignment
 
-	if( rank in get_all_jobs() )
+	if( rank in joblist )
 		return rank
 
-	if( assignment in get_all_jobs() )
+	if( assignment in joblist )
 		return assignment
 
 	return "Unknown"
@@ -489,7 +489,7 @@ proc/FindNameFromID(var/mob/living/carbon/human/H)
 			return ID.registered_name
 
 proc/get_all_job_icons() //For all existing HUD icons
-	return get_all_jobs() + list("Prisoner")
+	return joblist + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation
 	if (!istype(src, /obj/item/device/pda) && !istype(src,/obj/item/weapon/card/id))

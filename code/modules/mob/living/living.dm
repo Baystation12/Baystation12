@@ -258,6 +258,12 @@
 		var/mob/living/carbon/C = src
 		C.handcuffed = initial(C.handcuffed)
 
+		if (C.legcuffed && !initial(C.legcuffed))
+			C.drop_from_inventory(C.legcuffed)
+		C.legcuffed = initial(C.legcuffed)
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
+
 /mob/living/proc/rejuvenate()
 
 	// shut down various types of badness
@@ -303,7 +309,9 @@
 
 	// make the icons look correct
 	regenerate_icons()
-
+	
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
 	return
 
 /mob/living/proc/UpdateDamageIcon()

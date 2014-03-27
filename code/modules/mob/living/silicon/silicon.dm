@@ -7,7 +7,7 @@
 	var/list/alarms_to_show = list()
 	var/list/alarms_to_clear = list()
 	immune_to_ssd = 1
-
+	var/list/hud_list[9]
 	var/list/alarm_types_show = list("Motion" = 0, "Fire" = 0, "Atmosphere" = 0, "Power" = 0, "Camera" = 0)
 	var/list/alarm_types_clear = list("Motion" = 0, "Fire" = 0, "Atmosphere" = 0, "Power" = 0, "Camera" = 0)
 

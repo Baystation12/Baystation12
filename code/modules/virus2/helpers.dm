@@ -65,7 +65,10 @@ proc/airborne_can_reach(turf/source, turf/target)
 	// if one of the antibodies in the mob's body matches one of the disease's antigens, don't infect
 	if(M.antibodies & disease.antigen != 0)
 		return
-
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		if (H.species.flags & IS_SYNTHETIC)
+			return
 //	log_debug("Infecting [M]")
 
 	if(prob(disease.infectionchance) || forced)
@@ -77,6 +80,7 @@ proc/airborne_can_reach(turf/source, turf/target)
 		D.minormutate()
 //		log_debug("Adding virus")
 		M.virus2["[D.uniqueID]"] = D
+		M.hud_updateflag |= 1 << STATUS_HUD
 
 //Infects mob M with random lesser disease, if he doesn't have one
 /proc/infect_mob_random_lesser(var/mob/living/carbon/M)
@@ -84,12 +88,14 @@ proc/airborne_can_reach(turf/source, turf/target)
 	D.makerandom()
 	D.infectionchance = 1
 	M.virus2["[D.uniqueID]"] = D
+	M.hud_updateflag |= 1 << STATUS_HUD
 
 //Infects mob M with random greated disease, if he doesn't have one
 /proc/infect_mob_random_greater(var/mob/living/carbon/M)
 	var/datum/disease2/disease/D = new /datum/disease2/disease
 	D.makerandom(1)
 	M.virus2["[D.uniqueID]"] = D
+	M.hud_updateflag |= 1 << STATUS_HUD
 
 //Fancy prob() function.
 /proc/dprob(var/p)

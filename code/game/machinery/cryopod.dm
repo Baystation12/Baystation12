@@ -240,6 +240,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					current_mode.possible_traitors.Remove(occupant)
 
 			// Delete them from datacore.
+			
+			if(PDA_Manifest.len)
+				PDA_Manifest.Cut()
 			for(var/datum/data/record/R in data_core.medical)
 				if ((R.fields["name"] == occupant.real_name))
 					del(R)

@@ -30,6 +30,7 @@ datum/controller/game_controller
 	var/total_cost		= 0
 
 	var/last_thing_processed
+	var/mob/list/expensive_mobs = list()
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -226,11 +227,15 @@ datum/controller/game_controller/proc/process()
 
 datum/controller/game_controller/proc/process_mobs()
 	var/i = 1
+	expensive_mobs.Cut()
 	while(i<=mob_list.len)
 		var/mob/M = mob_list[i]
 		if(M)
+			var/clock = world.timeofday
 			last_thing_processed = M.type
 			M.Life()
+			if((world.timeofday - clock) > 1)
+				expensive_mobs += M
 			i++
 			continue
 		mob_list.Cut(i,i+1)

@@ -258,8 +258,9 @@
 				continue
 			if(temp.status & ORGAN_ROBOT)
 				if(!(temp.brute_dam + temp.burn_dam))
-					wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name]!</span>\n"
-					continue
+					if(!species.flags & IS_SYNTHETIC)
+						wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name]!</span>\n"
+						continue
 				else
 					wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name], it has"
 				if(temp.brute_dam) switch(temp.brute_dam)
@@ -274,7 +275,8 @@
 						wound_flavor_text["[temp.display_name]"] += " some burns"
 					if(21 to INFINITY)
 						wound_flavor_text["[temp.display_name]"] += pick(" a lot of burns"," severe melting")
-				wound_flavor_text["[temp.display_name]"] += "!</span>\n"
+				if(wound_flavor_text["[temp.display_name]"])
+					wound_flavor_text["[temp.display_name]"] += "!</span>\n"
 			else if(temp.wounds.len > 0)
 				var/list/wound_descriptors = list()
 				for(var/datum/wound/W in temp.wounds)
