@@ -1242,14 +1242,14 @@
 				area.poweralert(1, src)
 				if(cell_charge >= 4000)
 					area.poweralert(1, src)                
-		else if(cell_charge < 1250 && longtermpower < 0)                       // <30%, turn off equipment
+		else if(cell_charge < 1250 && cell_charge > 750 && longtermpower < 0)                       // <30%, turn off equipment
 			if(autoflag != 2)
 				equipment = autoset(equipment, 2)
 				lighting = autoset(lighting, 1)
 				environ = autoset(environ, 1)
 				area.poweralert(0, src)
 				autoflag = 2
-		else if(cell_charge < 750 && longtermpower < 0)        // <15%, turn off lighting & equipment
+		else if(cell_charge < 750 && cell_charge > 10 && longtermpower < 0)        // <15%, turn off lighting & equipment
 			if(autoflag != 1)
 				equipment = autoset(equipment, 2)
 				lighting = autoset(lighting, 2)

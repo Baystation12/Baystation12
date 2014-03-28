@@ -34,8 +34,8 @@ world/IsBanned(key,address,computer_id)
 		var/ckeytext = ckey(key)
 
 		if(!establish_db_connection())
-			world.log << "Ban database connection failure. Key [ckeytext] not checked"
-			diary << "Ban database connection failure. Key [ckeytext] not checked"
+			error("Ban database connection failure. Key [ckeytext] not checked")
+			log_misc("Ban database connection failure. Key [ckeytext] not checked")
 			return
 
 		var/failedcid = 1
