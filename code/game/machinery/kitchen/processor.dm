@@ -158,5 +158,3 @@
 	src.visible_message("\blue \the [src] finished processing.", \
 		"You hear the food processor stopping/")
 
-
-\red The processor is in the process of processing.
