@@ -113,7 +113,7 @@
 //Telescopic baton
 /obj/item/weapon/melee/telebaton
 	name = "telescopic baton"
-	desc = "A compact yet robust personal defense weapon. Can be concealed when folded."
+	desc = "A compact yet rebalanced personal defense weapon. Can be concealed when folded."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "telebaton_0"
 	item_state = "telebaton_0"
@@ -178,7 +178,6 @@
 			return
 		if(..())
 			playsound(src.loc, "swing_hit", 50, 1, -1)
-			target.Weaken(4)
 			return
 	else
 		return ..()
