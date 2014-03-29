@@ -350,6 +350,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 				freq_text = "Special Ops"
 			if(1345)
 				freq_text = "Response Team"
+			if(1447)
+				freq_text = "AI Private"
 		//There's probably a way to use the list var of channels in code\game\communications.dm to make the dept channels non-hardcoded, but I wasn't in an experimentive mood. --NEO
 
 
@@ -377,6 +379,10 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		// command channel
 		else if (display_freq == COMM_FREQ)
 			part_a = "<span class='comradio'><span class='name'>"
+
+		// AI private channel
+		else if (display_freq == 1447)
+			part_a = "<span class='airadio'><span class='name'>"
 
 		// department radio formatting (poorly optimized, ugh)
 		else if (display_freq == SEC_FREQ)
