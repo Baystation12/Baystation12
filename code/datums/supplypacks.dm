@@ -52,6 +52,10 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/reagent_containers/food/drinks/milk,
 					/obj/item/weapon/reagent_containers/food/drinks/milk,
 					/obj/item/weapon/storage/fancy/egg_box,
+					/obj/item/weapon/reagent_containers/food/snacks/tofu,
+					/obj/item/weapon/reagent_containers/food/snacks/tofu,
+					/obj/item/weapon/reagent_containers/food/snacks/meat,
+					/obj/item/weapon/reagent_containers/food/snacks/meat,
 					/obj/item/weapon/reagent_containers/food/snacks/grown/banana,
 					/obj/item/weapon/reagent_containers/food/snacks/grown/banana)
 	cost = 10
@@ -125,6 +129,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	name = "Party equipment"
 	contains = list(/obj/item/weapon/storage/box/drinkingglasses,
 					/obj/item/weapon/reagent_containers/food/drinks/shaker,
+					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/patron,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager,
 					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
@@ -288,9 +293,14 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/seeds/cornseed,
 					/obj/item/seeds/eggplantseed,
 					/obj/item/seeds/tomatoseed,
+					/obj/item/seeds/appleseed,
 					/obj/item/seeds/soyaseed,
 					/obj/item/seeds/wheatseed,
 					/obj/item/seeds/carrotseed,
+					/obj/item/seeds/harebell,
+					/obj/item/seeds/lemonseed,
+					/obj/item/seeds/orangeseed,
+					/obj/item/seeds/grassseed,
 					/obj/item/seeds/sunflowerseed,
 					/obj/item/seeds/chantermycelium,
 					/obj/item/seeds/potatoseed,
@@ -324,6 +334,10 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/seeds/amanitamycelium,
 					/obj/item/seeds/reishimycelium,
 					/obj/item/seeds/bananaseed,
+					/obj/item/seeds/riceseed,
+					/obj/item/seeds/eggplantseed,
+					/obj/item/seeds/limeseed,
+					/obj/item/seeds/grapeseed,
 					/obj/item/seeds/eggyseed)
 	cost = 15
 	containertype = /obj/structure/closet/crate/hydroponics
@@ -754,7 +768,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Security"
 
 /datum/supply_packs/randomised
-	var/num_contained = 3 //number of items picked to be contained in a randomised crate
+	var/num_contained = 4 //number of items picked to be contained in a randomised crate
 	contains = list(/obj/item/clothing/head/collectable/chef,
 					/obj/item/clothing/head/collectable/paper,
 					/obj/item/clothing/head/collectable/tophat,
@@ -886,22 +900,36 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/randomised/costume
 	num_contained = 2
 	contains = list(/obj/item/clothing/suit/pirate,
-					/obj/item/clothing/suit/johnny_coat,
 					/obj/item/clothing/suit/judgerobe,
 					/obj/item/clothing/suit/wcoat,
 					/obj/item/clothing/suit/hastur,
+					/obj/item/clothing/suit/holidaypriest,
+					/obj/item/clothing/suit/nun,
 					/obj/item/clothing/suit/imperium_monk,
 					/obj/item/clothing/suit/ianshirt,
 					/obj/item/clothing/under/gimmick/rank/captain/suit,
 					/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit,
 					/obj/item/clothing/under/lawyer/purpsuit,
+					/obj/item/clothing/under/rank/mailman,
+					/obj/item/clothing/under/dress/dress_saloon,
 					/obj/item/clothing/suit/suspenders,
 					/obj/item/clothing/suit/storage/labcoat/mad,
-					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit)
-	name = "Standard Costume crate"
+					/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,
+					/obj/item/clothing/under/schoolgirl,
+					/obj/item/clothing/under/owl,
+					/obj/item/clothing/under/waiter,
+					/obj/item/clothing/under/gladiator,
+					/obj/item/clothing/under/soviet,
+					/obj/item/clothing/under/scratch,
+					/obj/item/clothing/under/wedding/bride_white,
+					/obj/item/clothing/suit/chef,
+					/obj/item/clothing/suit/apron/overalls,
+					/obj/item/clothing/under/redcoat,
+					/obj/item/clothing/under/kilt)
+	name = "Costumes crate"
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure
-	containername = "Standard Costumes"
+	containername = "Actor Costumes"
 	access = access_theatre
 	group = "Operations"
 
@@ -914,8 +942,11 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/clothing/under/suit_jacket/female,
 					/obj/item/clothing/under/suit_jacket/really_black,
 					/obj/item/clothing/under/suit_jacket/red,
+					/obj/item/clothing/under/lawyer/bluesuit,
+					/obj/item/clothing/under/lawyer/purpsuit,
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/black,
+					/obj/item/clothing/shoes/leather,
 					/obj/item/clothing/suit/wcoat)
 	name = "Formalwear closet"
 	cost = 30
