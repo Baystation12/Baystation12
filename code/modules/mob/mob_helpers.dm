@@ -454,3 +454,7 @@ var/list/intents = list("help","disarm","grab","harm")
 	if(!istype(P))
 		return null
 	return P
+
+/proc/get_both_hands(mob/living/carbon/M)
+	var/list/hands = list(M.l_hand, M.r_hand)
+	return hands
