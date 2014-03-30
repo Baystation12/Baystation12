@@ -40,7 +40,6 @@
 		overlays.Cut()
 		on = 0
 		icon_state = "grill_off"
-		O.reagents.del_reagent("rawfood")
 		O.reagents.add_reagent("nutriment", 10)
 		O.loc = get_turf(src)
 		O.loc = get_turf(src)

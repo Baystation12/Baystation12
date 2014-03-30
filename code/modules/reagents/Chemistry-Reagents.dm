@@ -1515,13 +1515,6 @@ datum
 			reagent_state = LIQUID
 			color = "#CF3600"
 			toxpwr = 0.7
-		toxin/rawfood
-			name = "Raw Food"
-			id = "rawfood"
-			description = "Don't eat raw foods, kids."
-			reagent_state = LIQUID
-			color = "#CF3600"
-			toxpwr = 0.5
 		toxin/amatoxin
 			name = "Amatoxin"
 			id = "amatoxin"

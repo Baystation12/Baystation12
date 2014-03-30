@@ -2944,7 +2944,6 @@
 	New()
 		..()
 		reagents.add_reagent("nutriment", 1)
-		reagents.add_reagent("rawfood", 3)
 
 /obj/item/weapon/reagent_containers/food/snacks/cutlet
 	name = "cutlet"
