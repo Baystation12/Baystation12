@@ -264,6 +264,8 @@
 			if(!gene.block)
 				continue
 			if(gene.is_active(src))
+				if (prob(10) && prob(gene.instability))
+					adjustCloneLoss(1)
 				gene.OnMobLife(src)
 
 		if (radiation)
