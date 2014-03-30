@@ -1096,7 +1096,7 @@
 	var/tdamage = 0
 	var/ticks = 0
 	while (germs < 2501 && ticks < 100000 && round(damage/10)*20)
-		diary << "VIRUS TESTING: [ticks] : germs [germs] tdamage [tdamage] prob [round(damage/10)*20]"
+		log_misc("VIRUS TESTING: [ticks] : germs [germs] tdamage [tdamage] prob [round(damage/10)*20]")
 		ticks++
 		if (prob(round(damage/10)*20))
 			germs++

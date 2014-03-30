@@ -330,10 +330,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	ui_tick++
+	var/datum/nanoui/old_ui = nanomanager.get_open_ui(user, src, "main")
 	var/auto_update = 1
 	if(mode in no_auto_update)
 		auto_update = 0
-	if(mode == lastmode && ui_tick % 5 && mode in update_every_five)
+	if(old_ui && (mode == lastmode && ui_tick % 5 && mode in update_every_five))
 		return
 
 	lastmode = mode
