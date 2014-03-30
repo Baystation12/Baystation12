@@ -33,6 +33,7 @@
 		..()
 		sleep(2)
 		new /obj/item/clothing/under/rank/cargo(src)
+		new /obj/item/clothing/under/rank/cargo_fem(src)
 		new /obj/item/clothing/shoes/brown(src)
 		new /obj/item/device/radio/headset/headset_cargo(src)
 		new /obj/item/clothing/gloves/black(src)
