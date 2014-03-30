@@ -297,6 +297,6 @@ obj/structure/windoor_assembly/Del()
 	if(!air_master)
 		return 0
 
-	air_master.AddTurfToUpdate(loc)
+	air_master.mark_for_update(loc)
 
 	return 1

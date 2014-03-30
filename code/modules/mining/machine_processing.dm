@@ -119,7 +119,6 @@
 		else
 			machine.selected &= ~ORE_PROC_CLOWN
 
-
 		//On or off
 		dat += text("Machine is currently ")
 		if (machine.on==1)
@@ -179,6 +178,7 @@
 			machine.selected |= ORE_PROC_CLOWN
 		else
 			machine.selected &= ~ORE_PROC_CLOWN
+
 	if(href_list["set_on"])
 		if (href_list["set_on"] == "on")
 			machine.on = 1
@@ -316,6 +316,7 @@
 					else
 						on = 0
 					continue
+			/*
 				if (selected == ORE_PROC_GLASS + ORE_PROC_PLASMA)
 					if (ore_glass > 0 && ore_plasma > 0)
 						ore_glass--;
@@ -333,8 +334,8 @@
 					else
 						on = 0
 					continue
+			*/
 
-		/*
 
 				if (selected == ORE_PROC_URANIUM + ORE_PROC_DIAMOND)
 					if (ore_uranium >= 2 && ore_diamond >= 1)
@@ -353,7 +354,6 @@
 						on = 0
 					continue
 
-		*/
 
 
 				//if a non valid combination is selected

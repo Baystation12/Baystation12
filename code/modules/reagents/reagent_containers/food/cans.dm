@@ -23,12 +23,10 @@
 		if(M == user)
 			M << "\blue You swallow a gulp of [src]."
 			if(reagents.total_volume)
+				reagents.trans_to_ingest(M, gulp_size)
 				reagents.reaction(M, INGEST)
 				spawn(5)
 					reagents.trans_to(M, gulp_size)
-		else if (canopened == 0)
-			user << "<span class='notice'>You need to open the drink!</span>"
-			return
 
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
@@ -49,9 +47,7 @@
 			msg_admin_attack("[key_name(user)] fed [key_name(M)] with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					reagents.trans_to(M, gulp_size)
+				reagents.trans_to_ingest(M, gulp_size)
 
 			if(isrobot(user)) //Cyborg modules that include drinks automatically refill themselves, but drain the borg's cell
 				var/mob/living/silicon/robot/bro = user

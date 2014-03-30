@@ -259,11 +259,28 @@ datum/controller/game_controller/proc/process_machines()
 			last_thing_processed = Machine.type
 			if(Machine.process() != PROCESS_KILL)
 				if(Machine)
-					if(Machine.use_power)
-						Machine.auto_use_power()
+
+//					if(Machine.use_power)
+//						Machine.auto_use_power()
+
 					i++
 					continue
 		machines.Cut(i,i+1)
+	i=1
+	while(i<=active_areas.len)
+		var/area/A = active_areas[i]
+		if(A.powerupdate)
+			A.powerupdate -= 1
+			for(var/obj/machinery/M in A)
+				if(M)
+					if(M.use_power)
+						M.auto_use_power()
+			
+		if(A.apc.len)
+			i++
+			continue
+		active_areas.Cut(i,i+1)
+		
 
 datum/controller/game_controller/proc/process_objects()
 	var/i = 1

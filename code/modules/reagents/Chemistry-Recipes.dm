@@ -462,8 +462,6 @@ datum
 				playsound(location, 'sound/effects/smoke.ogg', 50, 1, -3)
 				spawn(0)
 					S.start()
-					sleep(10)
-					S.start()
 				holder.clear_reagents()
 				return
 

@@ -22,10 +22,8 @@
 			M << "\blue You swallow [src]."
 			M.drop_from_inventory(src) //icon update
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					reagents.trans_to(M, reagents.total_volume)
-					del(src)
+				reagents.trans_to_ingest(M, reagents.total_volume)
+				del(src)
 			else
 				del(src)
 			return 1
@@ -46,10 +44,8 @@
 			msg_admin_attack("[user.name] ([user.ckey]) fed [M.name] ([M.ckey]) with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					reagents.trans_to(M, reagents.total_volume)
-					del(src)
+				reagents.trans_to_ingest(M, reagents.total_volume)
+				del(src)
 			else
 				del(src)
 

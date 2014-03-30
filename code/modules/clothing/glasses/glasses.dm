@@ -70,6 +70,12 @@
 	icon_state = "hipster_glasses"
 	item_state = "hipster_glasses"
 
+/obj/item/clothing/glasses/threedglasses
+	desc = "A long time ago, people used these glasses to makes images from screens threedimensional."
+	name = "3D glasses"
+	icon_state = "3d"
+	item_state = "3d"
+
 /obj/item/clothing/glasses/gglasses
 	name = "Green Glasses"
 	desc = "Forest green glasses, like the kind you'd wear when hatching a nasty scheme."

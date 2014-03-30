@@ -13,6 +13,8 @@
 	master = src //moved outside the spawn(1) to avoid runtimes in lighting.dm when it references loc.loc.master ~Carn
 	uid = ++global_uid
 	related = list(src)
+	active_areas += src
+	all_areas += src
 
 	if(type == /area)	// override defaults for space. TODO: make space areas of type /area/space rather than /area
 		requires_power = 1
@@ -220,6 +222,7 @@
 // called when power status changes
 
 /area/proc/power_change()
+	master.powerupdate = 2
 	for(var/area/RA in related)
 		for(var/obj/machinery/M in RA)	// for each machine in the area
 			M.power_change()				// reverify power status (to update icons etc.)

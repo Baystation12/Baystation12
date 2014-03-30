@@ -268,7 +268,7 @@
 
 	for(var/turf/simulated/turf in locs)
 		update_heat_protection(turf)
-		air_master.AddTurfToUpdate(turf)
+		air_master.mark_for_update(turf)
 
 	return 1
 
