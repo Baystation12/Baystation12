@@ -219,10 +219,6 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	return
 
 /obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, var/verb = "says", var/datum/language/speaking = null)
-	if(speaking)
-		world << "radio talk_into language = [speaking.name]"
-	else
-		world << "radio talk_into language = null"
 	if(!on) return // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return
@@ -429,7 +425,6 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 		//THIS IS TEMPORARY.
 		if(!connection)	return	//~Carn
 
-		world << "WTF, WE'RE JUST DOING A STRAIGHT BROADCAST"
 		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 						  src, message, displayname, jobname, real_name, M.voice_name,
 		                  filter_type, signal.data["compression"], list(position.z), connection.frequency,verb,speaking)
@@ -438,7 +433,6 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 
 	else // OLD RADIO SYSTEMS: By Goons?
 
-		world << "WTF we're in old system"
 		var/datum/radio_frequency/connection = null
 		if(channel && channels && channels.len > 0)
 			if (channel == "department")

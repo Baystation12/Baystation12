@@ -48,6 +48,8 @@
 	var/icon/stand_icon = null
 	var/icon/lying_icon = null
 	
+	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
+
 	var/speech_problem_flag = 0
 
 	var/miming = null //Toggle for the mime's abilities.
