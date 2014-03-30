@@ -1508,7 +1508,20 @@ datum
 					M.adjustToxLoss(toxpwr*REM)
 				..()
 				return
-
+		toxin/notfood
+			name = "Inedible Food"
+			id = "notfood"
+			description = "The hell are you trying to do eating this shit?"
+			reagent_state = LIQUID
+			color = "#CF3600"
+			toxpwr = 0.7
+		toxin/rawfood
+			name = "Raw Food"
+			id = "rawfood"
+			description = "Don't eat raw foods, kids."
+			reagent_state = LIQUID
+			color = "#CF3600"
+			toxpwr = 0.5
 		toxin/amatoxin
 			name = "Amatoxin"
 			id = "amatoxin"
