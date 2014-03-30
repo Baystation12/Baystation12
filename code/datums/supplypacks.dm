@@ -1052,13 +1052,11 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/bee_keeper
 	name = "Beekeeping Crate"
 	contains = list(/obj/item/beezeez,
-					/obj/item/beezeez,
 					/obj/item/weapon/bee_net,
 					/obj/item/apiary,
-					/obj/item/queen_bee,
-					/obj/item/queen_bee,
 					/obj/item/queen_bee)
-	cost = 20
+	cost = 40
+	contraband = 1
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Beekeeping crate"
 	access = access_hydroponics
