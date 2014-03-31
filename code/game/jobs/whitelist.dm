@@ -53,7 +53,6 @@ var/list/whitelist = list()
 
 	return 0
 
-<<<<<<< HEAD
 client/proc/get_alienwhitelist()
 	set category = "Server"
 	set name = "Whitelist(Alien): Check"
