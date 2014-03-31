@@ -53,13 +53,8 @@
 			update_icon()
 		return
 
-	//DOG PART
-	if(ishuman(M))
-		var/mob/living/carbon/human/H1 = M
-		if(H1.dog_owner)
-			var/mob/living/simple_animal/dog/D = H1.dog_owner
-			D.owner_in_danger(user, M)
-	//DOG PART END
+	for(var/mob/living/simple_animal/smart_animal/SA in view(7))
+		SA.fight(user, M)
 
 	var/mob/living/carbon/human/H = M
 	if(isrobot(M))

@@ -137,13 +137,10 @@
 				affecting.loc = assailant.loc
 			affecting.attack_log += "\[[time_stamp()]\] <font color='orange'>Has had their neck grabbed by [assailant.name] ([assailant.ckey])</font>"
 			assailant.attack_log += "\[[time_stamp()]\] <font color='red'>Grabbed the neck of [affecting.name] ([affecting.ckey])</font>"
-			//DOG PART
-			if(ishuman(affecting))
-				var/mob/living/carbon/human/H = affecting
-				if(H.dog_owner)
-					var/mob/living/simple_animal/dog/D = H.dog_owner
-					D.owner_in_danger(assailant, affecting)
-			//DOG PART END
+
+			for(var/mob/living/simple_animal/smart_animal/SA in view(7))
+				SA.fight(assailant, affecting)
+
 			msg_admin_attack("[key_name(assailant)] grabbed the neck of [key_name(affecting)]")
 			hud.icon_state = "disarm/kill"
 			hud.name = "disarm/kill"
