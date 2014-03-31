@@ -1,12 +1,14 @@
 //Lallander was here
-/mob/living/carbon/human/whisper(message as text)
+/mob/living/carbon/human/whisper(message as text, already_sanitize as num)
 
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	message = trim(copytext(strip_html_simple(message), 1, MAX_MESSAGE_LEN))
-	message = sanitize(copytext(message,1,MAX_MESSAGE_LEN))
+	//if from say(), text already been sanitize
+	if(!already_sanitize)
+		message = trim(copytext(strip_html_simple(message), 1, MAX_MESSAGE_LEN))
+		message = sanitize(copytext(message,1,MAX_MESSAGE_LEN))
 
 	if (!message || silent || miming)
 		return

@@ -230,7 +230,7 @@ var/list/department_radio_keys = list(
 
 		//I see no reason to restrict such way of whispering
 		if ("whisper")
-			whisper(message)
+			whisper(message, 1)
 			return
 
 		if ("binary")
