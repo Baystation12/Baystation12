@@ -77,10 +77,8 @@
 			//Cameras can't track people wearing an agent card or a ninja hood.
 			if(H.wear_id && istype(H.wear_id.GetID(), /obj/item/weapon/card/id/syndicate))
 				continue
-		 	if(istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja))
-		 		var/obj/item/clothing/head/helmet/space/space_ninja/hood = H.head
-	 			if(!hood.canremove)
-	 				continue
+			if(istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja))
+				continue
 
 		 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
 		if(!near_camera(M))
@@ -137,8 +135,8 @@
 					U << "Follow camera mode terminated."
 					U.cameraFollow = null
 					return
-		 		if(istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja) && !H.head.canremove)
-		 			U << "Follow camera mode terminated."
+				if(istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja))
+					U << "Follow camera mode terminated."
 					U.cameraFollow = null
 					return
 				if(H.digitalcamo)

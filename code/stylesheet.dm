@@ -30,6 +30,7 @@ em						{font-style: normal;	font-weight: bold;}
 .comradio				{color: #193A7A;}
 .syndradio				{color: #6D3F40;}
 .centradio				{color: #5C5C8A;}
+.airadio				{color: #FF00FF;}
 
 .secradio				{color: #A30000;}
 .engradio				{color: #A66300;}

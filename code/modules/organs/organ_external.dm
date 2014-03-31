@@ -12,6 +12,7 @@
 	var/burn_dam = 0
 	var/max_damage = 0
 	var/max_size = 0
+	var/last_dam = -1
 
 	var/display_name
 	var/list/wounds = list()
@@ -198,7 +199,10 @@ This function completely restores a damaged organ to perfect condition.
 */
 /datum/organ/external/proc/rejuvenate()
 	damage_state = "00"
-	status = 0
+	if(status & 128)	//Robotic organs stay robotic.  Fix because right click rejuvinate makes IPC's organs organic.
+		status = 128
+	else
+		status = 0
 	perma_injury = 0
 	brute_dam = 0
 	burn_dam = 0
@@ -269,6 +273,19 @@ This function completely restores a damaged organ to perfect condition.
 /****************************************************
 			   PROCESSING & UPDATING
 ****************************************************/
+
+//Determines if we even need to process this organ.
+
+/datum/organ/external/proc/need_process()
+	if(status && status != ORGAN_ROBOT) // If it's robotic, that's fine it will have a status.
+		return 1
+	if(brute_dam || burn_dam)
+		return 1
+	if(last_dam != brute_dam + burn_dam) // Process when we are fully healed up.
+		last_dam = brute_dam + burn_dam
+		return 1
+	last_dam = brute_dam + burn_dam
+	return 0
 
 /datum/organ/external/process()
 	// Process wounds, doing healing etc. Only do this every few ticks to save processing power
@@ -570,10 +587,27 @@ This function completely restores a damaged organ to perfect condition.
 
 			owner.update_body(1)
 
+			// OK so maybe your limb just flew off, but if it was attached to a pair of cuffs then hooray! Freedom!
+			release_restraints()
 
 /****************************************************
 			   HELPERS
 ****************************************************/
+
+/datum/organ/external/proc/release_restraints()
+	if (owner.handcuffed && body_part in list(ARM_LEFT, ARM_RIGHT, HAND_LEFT, HAND_RIGHT))
+		owner.visible_message(\
+			"\The [owner.handcuffed.name] falls off of [owner.name].",\
+			"\The [owner.handcuffed.name] falls off you.")
+
+		owner.drop_from_inventory(owner.handcuffed)
+
+	if (owner.legcuffed && body_part in list(FOOT_LEFT, FOOT_RIGHT, LEG_LEFT, LEG_RIGHT))
+		owner.visible_message(\
+			"\The [owner.legcuffed.name] falls off of [owner.name].",\
+			"\The [owner.legcuffed.name] falls off you.")
+
+		owner.drop_from_inventory(owner.legcuffed)
 
 /datum/organ/external/proc/bandage()
 	var/rval = 0
@@ -603,7 +637,10 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/proc/fracture()
 	if(status & ORGAN_BROKEN)
 		return
-	owner.visible_message("\red You hear a loud cracking sound coming from \the [owner].","\red <b>Something feels like it shattered in your [display_name]!</b>","You hear a sickening crack.")
+	owner.visible_message(\
+		"\red You hear a loud cracking sound coming from \the [owner].",\
+		"\red <b>Something feels like it shattered in your [display_name]!</b>",\
+		"You hear a sickening crack.")
 
 	if(owner.species && !(owner.species.flags & NO_PAIN))
 		owner.emote("scream")
@@ -611,6 +648,10 @@ This function completely restores a damaged organ to perfect condition.
 	status |= ORGAN_BROKEN
 	broken_description = pick("broken","fracture","hairline fracture")
 	perma_injury = brute_dam
+
+	// Fractures have a chance of getting you out of restraints
+	if (prob(25))
+		release_restraints()
 
 /datum/organ/external/proc/robotize()
 	src.status &= ~ORGAN_BROKEN

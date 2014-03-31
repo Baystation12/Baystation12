@@ -28,7 +28,7 @@ var/list/whitelist = list()
 /proc/load_alienwhitelist()
 	var/text = file2text("config/alienwhitelist.txt")
 	if (!text)
-		diary << "Failed to load config/alienwhitelist.txt\n"
+		log_misc("Failed to load config/alienwhitelist.txt")
 	else
 		alien_whitelist = text2list(text, "\n")
 
@@ -53,6 +53,7 @@ var/list/whitelist = list()
 
 	return 0
 
+<<<<<<< HEAD
 client/proc/get_alienwhitelist()
 	set category = "Server"
 	set name = "Whitelist(Alien): Check"
