@@ -16,10 +16,10 @@ atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed
 	return null
 
 
-turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
+turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0, atom/firestarter = null)
 
 
-turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
+turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh, atom/firestarter)
 	if(fire_protection > world.time-300)
 		return 0
 	if(locate(/obj/fire) in src)
@@ -37,6 +37,14 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 		if(! (locate(/obj/fire) in src))
 
 			new /obj/fire(src,1000)
+
+			if(firestarter)
+				if (firestarter.fingerprintslast && istype(firestarter,/obj/item))
+					message_admins("Fire started at ([x],[y],[z]) by [firestarter] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>). Last touched by: <B>[firestarter.fingerprintslast]</B>")
+					log_game("Fire started at ([x],[y],[z]) by [firestarter]. Last touched by: [firestarter.fingerprintslast].")
+				else
+					message_admins("Fire started at ([x],[y],[z]) by [firestarter] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
+					log_game("Fire started at ([x],[y],[z]) by [firestarter].")
 
 	return igniting
 
@@ -108,7 +116,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	for(var/mob/living/carbon/monkey/A in loc)
 		A.fire_act()
 	for(var/mob/living/carbon/alien/humanoid/X in loc)
-		X.fire_act()		
+		X.fire_act()
 	for(var/atom/A in loc)
 		A.fire_act(air_contents, air_contents.temperature, air_contents.return_volume())
 	//spread
@@ -157,7 +165,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 
 /obj/fire/New(newLoc,fl)
 	..()
-	
+
 	if(!istype(loc, /turf))
 		del src
 
