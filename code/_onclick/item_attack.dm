@@ -41,13 +41,8 @@
 	M.attack_log += "\[[time_stamp()]\]<font color='orange'> Attacked by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
 	msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
 
-	//DOG PART
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.dog_owner)
-			var/mob/living/simple_animal/dog/D = H.dog_owner
-			D.owner_in_danger(user, M)
-	//DOG PART END
+	for(var/mob/living/simple_animal/smart_animal/SA in view(7))
+		SA.fight(user, M)
 
 	//spawn(1800)            // this wont work right
 	//	M.lastattacker = null

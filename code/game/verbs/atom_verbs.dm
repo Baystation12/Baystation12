@@ -31,10 +31,5 @@
 
 	usr.visible_message("<b>[usr]</b> points to [this]")
 
-	//DOG PART
-	if(ishuman(usr))
-		var/mob/living/carbon/human/H = usr
-		if(H.dog_owner)
-			var/mob/living/simple_animal/dog/D = H.dog_owner
-			D.target_point(this, usr)
-	//DOG PART END
+	for(var/mob/living/simple_animal/smart_animal/SA in view(7))
+		SA.target_point(this, usr)

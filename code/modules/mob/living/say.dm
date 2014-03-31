@@ -333,11 +333,10 @@ var/list/department_radio_keys = list(
 				P.speech_buffer.Remove(pick(P.speech_buffer))
 			P.speech_buffer.Add(message)
 
-		if(istype(A, /mob/living/simple_animal/dog))
-			if(istype(src, /mob/living/carbon/human))
-				var/mob/living/simple_animal/dog/D = A
-				spawn(0)
-					D.listen_command(message, src)
+		if(istype(A, /mob/living/simple_animal/smart_animal))
+			var/mob/living/simple_animal/smart_animal/D = A
+			spawn(0)
+				D.listen_talks(message, src)
 
 		if(istype(A, /obj/)) //radios in pockets and backpacks work
 			var/obj/O = A
