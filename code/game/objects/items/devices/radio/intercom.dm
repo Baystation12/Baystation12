@@ -11,6 +11,18 @@
 	var/mob/living/silicon/ai/ai = list()
 	var/last_tick //used to delay the powercheck
 
+/obj/item/device/radio/intercom/north
+	pixel_y = 22
+
+/obj/item/device/radio/intercom/south
+	pixel_y = -26
+
+/obj/item/device/radio/intercom/west
+	pixel_x = -26
+
+/obj/item/device/radio/intercom/east
+	pixel_x = 26
+
 /obj/item/device/radio/intercom/New()
 	..()
 	processing_objects += src

@@ -310,6 +310,9 @@ obj/machinery/atmospherics/pipe/simple/visible/cyan
 obj/machinery/atmospherics/pipe/simple/visible/green
 	color=COLOR_GREEN
 
+obj/machinery/atmospherics/pipe/simple/visible/general
+	color=COLOR_WHITE
+
 
 obj/machinery/atmospherics/pipe/simple/hidden
 	level = 1
@@ -333,6 +336,8 @@ obj/machinery/atmospherics/pipe/simple/hidden/cyan
 obj/machinery/atmospherics/pipe/simple/hidden/green
 	color=COLOR_GREEN
 
+obj/machinery/atmospherics/pipe/simple/hidden/general
+	color=COLOR_WHITE
 
 obj/machinery/atmospherics/pipe/simple/insulated
 	icon = 'icons/obj/atmospherics/red_pipe.dmi'

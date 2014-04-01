@@ -299,3 +299,28 @@
 	desc = "A cup with the British flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30
+
+/obj/item/weapon/reagent_containers/food/drinks/mug/britcup
+	name = "cup"
+	desc = "A cup with the British flag emblazoned on it."
+	icon_state = "britcup"
+	volume = 30
+
+/obj/item/weapon/reagent_containers/food/drinks/mug
+	name = "cup"
+	icon = 'icons/obj/cup.dmi'
+	icon_state = "big"
+	item_state = "coffee"
+
+	mesa/icon_state = "mesa"
+	lambda/icon_state = "lambda"
+	nt/icon_state = "nt"
+	power_b/icon_state = "power_b"
+	power_y/icon_state = "power_y"
+	med/icon_state = "med"
+	med_b/icon_state = "med_b"
+	soviet/icon_state = "soviet"
+	creeper/icon_state = "creeper"
+	cult/icon_state = "cult"
+	no1/icon_state = "no1"
+	death/icon_state = "death"

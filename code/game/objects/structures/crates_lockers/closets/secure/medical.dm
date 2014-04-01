@@ -102,6 +102,34 @@
 		new /obj/item/weapon/storage/belt/medical(src)
 		return
 
+/obj/structure/closet/secure_closet/medical4
+	name = "Blood Freezer"
+	desc = "Contains blood packs used for transfusion."
+	icon_state = "medical1"
+	icon_closed = "medical"
+	icon_locked = "medical1"
+	icon_opened = "medicalopen"
+	icon_broken = "medicalbroken"
+	icon_off = "medicaloff"
+	req_access = list(access_medical)
+
+	New()
+		..()
+		sleep(2)
+		new /obj/item/weapon/reagent_containers/blood/APlus(src)
+		new /obj/item/weapon/reagent_containers/blood/APlus(src)
+		new /obj/item/weapon/reagent_containers/blood/AMinus(src)
+		new /obj/item/weapon/reagent_containers/blood/AMinus(src)
+		new /obj/item/weapon/reagent_containers/blood/BPlus(src)
+		new /obj/item/weapon/reagent_containers/blood/BPlus(src)
+		new /obj/item/weapon/reagent_containers/blood/BMinus(src)
+		new /obj/item/weapon/reagent_containers/blood/BMinus(src)
+		new /obj/item/weapon/reagent_containers/blood/OPlus(src)
+		new /obj/item/weapon/reagent_containers/blood/OPlus(src)
+		new /obj/item/weapon/reagent_containers/blood/OMinus(src)
+		new /obj/item/weapon/reagent_containers/blood/OMinus(src)
+		return
+
 
 
 /obj/structure/closet/secure_closet/CMO

@@ -75,3 +75,38 @@
 		icon_state = "speedspace_ew_14"
 	shuttlespace_ew15
 		icon_state = "speedspace_ew_15"
+
+/turf/space/transit/west // moving to the east
+
+	pushdirection = EAST
+
+	shuttlespace_we1
+		icon_state = "speedspace_we_1"
+	shuttlespace_we2
+		icon_state = "speedspace_we_2"
+	shuttlespace_we3
+		icon_state = "speedspace_we_3"
+	shuttlespace_we4
+		icon_state = "speedspace_we_4"
+	shuttlespace_we5
+		icon_state = "speedspace_we_5"
+	shuttlespace_we6
+		icon_state = "speedspace_we_6"
+	shuttlespace_we7
+		icon_state = "speedspace_we_7"
+	shuttlespace_we8
+		icon_state = "speedspace_we_8"
+	shuttlespace_we9
+		icon_state = "speedspace_we_9"
+	shuttlespace_we10
+		icon_state = "speedspace_we_10"
+	shuttlespace_we11
+		icon_state = "speedspace_we_11"
+	shuttlespace_we12
+		icon_state = "speedspace_we_12"
+	shuttlespace_we13
+		icon_state = "speedspace_we_13"
+	shuttlespace_we14
+		icon_state = "speedspace_we_14"
+	shuttlespace_we15
+		icon_state = "speedspace_we_15"

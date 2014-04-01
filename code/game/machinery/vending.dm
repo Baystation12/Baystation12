@@ -678,6 +678,9 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1)
 
+/obj/machinery/vending/cola/soda
+	icon_state = "soda"
+
 //This one's from bay12
 /obj/machinery/vending/cart
 	name = "PTech"

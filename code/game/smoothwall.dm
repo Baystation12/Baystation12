@@ -6,6 +6,8 @@
 	if(istype(src,/turf/simulated/floor/vault)||istype(src,/turf/simulated/wall/vault)) //HACK!!!
 		return
 
+	if(istype(src,/turf/simulated/wall/heatshield))
+		return
 	var/junction = 0 //will be used to determine from which side the wall is connected to other walls
 
 	if(!istype(src,/turf/simulated/shuttle/wall)) //or else we'd have wacky shuttle merging with walls action

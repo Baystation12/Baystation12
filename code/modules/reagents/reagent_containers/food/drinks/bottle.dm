@@ -172,6 +172,17 @@
 		..()
 		reagents.add_reagent("nothing", 100)
 
+/obj/item/weapon/reagent_containers/food/drinks/bottle/beer
+	name = "Space Beer"
+	desc = "Contains only water, malt and hops."
+	icon_state = "beer"
+	isGlass = 0
+	New()
+		..()
+		reagents.add_reagent("beer", 100)
+		src.pixel_x = rand(-10.0, 10)
+		src.pixel_y = rand(-10.0, 10)
+
 /obj/item/weapon/reagent_containers/food/drinks/bottle/patron
 	name = "Wrapp Artiste Patron"
 	desc = "Silver laced tequilla, served in space night clubs across the galaxy."

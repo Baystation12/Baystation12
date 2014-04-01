@@ -73,3 +73,7 @@
 		T.apply_damage(20)
 		return
 	..()
+
+/obj/structure/stool/barstool
+	name = "barstool"
+	icon_state = "barstool"

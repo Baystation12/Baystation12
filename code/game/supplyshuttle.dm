@@ -355,7 +355,7 @@ var/list/mechtoys = list(
 		dat = temp
 	else
 		dat += {"<BR><B>Supply shuttle</B><HR>
-		Location: [supply_shuttle.moving ? "Moving to station ([supply_shuttle.eta] Mins.)":supply_shuttle.at_station ? "Station":"Dock"]<BR>
+		Location: [supply_shuttle.moving ? "Moving to ship ([supply_shuttle.eta] Mins.)":supply_shuttle.at_station ? "Ship":"Dock"]<BR>
 		<HR>Supply points: [supply_shuttle.points]<BR>
 		<BR>\n<A href='?src=\ref[src];order=categories'>Request items</A><BR><BR>
 		<A href='?src=\ref[src];vieworders=1'>View approved orders</A><BR><BR>
@@ -480,7 +480,7 @@ var/list/mechtoys = list(
 		dat = temp
 	else
 		dat += {"<BR><B>Supply shuttle</B><HR>
-		\nLocation: [supply_shuttle.moving ? "Moving to station ([supply_shuttle.eta] Mins.)":supply_shuttle.at_station ? "Station":"Away"]<BR>
+		\nLocation: [supply_shuttle.moving ? "Moving to ship ([supply_shuttle.eta] Mins.)":supply_shuttle.at_station ? "Ship":"Away"]<BR>
 		<HR>\nSupply points: [supply_shuttle.points]<BR>\n<BR>
 		[supply_shuttle.moving ? "\n*Must be away to order items*<BR>\n<BR>":supply_shuttle.at_station ? "\n*Must be away to order items*<BR>\n<BR>":"\n<A href='?src=\ref[src];order=categories'>Order items</A><BR>\n<BR>"]
 		[supply_shuttle.moving ? "\n*Shuttle already called*<BR>\n<BR>":supply_shuttle.at_station ? "\n<A href='?src=\ref[src];send=1'>Send away</A><BR>\n<BR>":"\n<A href='?src=\ref[src];send=1'>Send to station</A><BR>\n<BR>"]

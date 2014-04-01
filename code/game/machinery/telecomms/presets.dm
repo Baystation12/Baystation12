@@ -34,6 +34,27 @@
 	heatgen = 0
 	autolinkers = list("c_relay")
 
+/obj/machinery/telecomms/relay/preset/luna/desk1
+	id = "Luna Desk 1 Relay"
+	listening_level = 4
+	autolinkers = list("ld1_relay")
+
+/obj/machinery/telecomms/relay/preset/luna/desk2
+	id = "Luna Desk 2 Relay"
+	listening_level = 3
+	autolinkers = list("ld2_relay")
+
+/obj/machinery/telecomms/relay/preset/luna/desk3
+	id = "Luna Desk 3 Relay"
+	listening_level = 2
+	autolinkers = list("ld3_relay")
+
+/obj/machinery/telecomms/relay/preset/luna/desk4
+	id = "Luna Desk 4 Relay"
+	listening_level = 1
+	autolinkers = list("ld4_relay")
+
+
 //HUB
 
 /obj/machinery/telecomms/hub/preset

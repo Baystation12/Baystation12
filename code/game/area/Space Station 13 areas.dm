@@ -530,6 +530,106 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Prison Security Quarters"
 	icon_state = "security"
 
+/area/crew_quarters/captain
+	name = "\improper Captain's Office"
+	icon_state = "captain"
+
+/area/crew_quarters/heads/hop
+	name = "\improper Head of Personnel's Quarters"
+	icon_state = "head_quarters"
+
+/area/crew_quarters/heads/hor
+	name = "\improper Research Director's Quarters"
+	icon_state = "head_quarters"
+
+/area/crew_quarters/heads/chief
+	name = "\improper Chief Engineer's Quarters"
+	icon_state = "head_quarters"
+
+/area/crew_quarters/heads/hos
+	name = "\improper Head of Security's Quarters"
+	icon_state = "head_quarters"
+
+/area/crew_quarters/heads/cmo
+	name = "\improper Chief Medical Officer's Quarters"
+	icon_state = "head_quarters"
+
+/area/crew_quarters/courtroom
+	name = "\improper Courtroom"
+	icon_state = "courtroom"
+
+/area/crew_quarters/courtlobby
+	name = "\improper Courtroom Lobby"
+	icon_state = "courtroom"
+
+/area/crew_quarters/heads
+	name = "\improper Head of Personnel's Office"
+	icon_state = "head_quarters"
+
+/area/crew_quarters/hor
+	name = "\improper Research Director's Office"
+	icon_state = "head_quarters"
+
+/area/crew_quarters/hos
+	name = "\improper Head of Security's Office"
+	icon_state = "head_quarters"
+
+/area/crew_quarters/chief
+	name = "\improper Chief Engineer's Office"
+	icon_state = "head_quarters"
+
+/area/crew_quarters/sleep
+	name = "\improper Dormitories"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/rooms/dorm1
+	name = "\improper Dormitory A"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/rooms/dorm2
+	name = "\improper Dormitory B"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/rooms/dorm3
+	name = "\improper Dormitory C"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/engi
+	name = "\improper Engineering Dormitories"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/sec
+	name = "\improper Security Dormitories"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep_male
+	name = "\improper Male Dorm"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep_male/toilet_male
+	name = "\improper Male Toilets"
+	icon_state = "toilet"
+
+/area/crew_quarters/sleep_female
+	name = "\improper Female Dorm"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep_female/toilet_female
+	name = "\improper Female Toilets"
+	icon_state = "toilet"
+
+/area/crew_quarters/laundry
+	name = "\improper Laundry Room"
+	icon_state = "Sleep"
+
+/area/crew_quarters/observation
+	name = "\improper Observation Deck"
+	icon_state = "Sleep"
+
+/area/crew_quarters/lounge
+	name = "\improper Crew Lounge"
+	icon_state = "Sleep"
+
 /area/prison/rec_room
 	name = "\improper Prison Rec Room"
 	icon_state = "green"

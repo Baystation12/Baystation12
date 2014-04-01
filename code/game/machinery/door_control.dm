@@ -31,6 +31,36 @@
 	idle_power_usage = 2
 	active_power_usage = 4
 
+/obj/machinery/door_control/vent_control
+	name = "Remote Vent Control"
+	icon_state = "leverbig00"
+	desc = "A heavy hydraulic control switch for the core vents. Pushing it towards the reactor opens the vents, pulling it away from the reactor closes the vents."
+	var/icon_toggled = "leverbig01"
+	var/icon_normal = "leverbig0"
+	var/toggled = "0"
+	use_power = 0
+
+	proc/update_state()
+		if(toggled == "1")
+			icon_state = icon_toggled
+		else
+			icon_state = icon_normal
+		return
+
+/obj/machinery/door_control/vent_control/power_change()
+	return
+
+
+/obj/machinery/door_control/vent_control/attack_ai(mob/user as mob)
+	if (in_range(src, user) && get_dist(src, user) <= 1 && istype(user, /mob/living/silicon/robot))
+		src.attack_hand(user)
+		return
+	else
+		user << "This switch is operated by hydraulics, you cannot use it remotely."
+		return	//lolno
+	return	//just in case
+
+
 /obj/machinery/door_control/attack_ai(mob/user as mob)
 	if(wires & 2)
 		return src.attack_hand(user)

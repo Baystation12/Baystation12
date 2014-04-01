@@ -162,7 +162,7 @@
 
 // this function displays the station time in the status panel
 /mob/living/silicon/proc/show_station_time()
-	stat(null, "Station Time: [worldtime2text()]")
+	stat(null, "Vessel Time: [worldtime2text()]")
 
 
 // this function displays the shuttles ETA in the status panel if the shuttle has been called
