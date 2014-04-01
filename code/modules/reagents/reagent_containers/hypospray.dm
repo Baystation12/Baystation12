@@ -88,3 +88,21 @@
 		usr << "\blue It is currently loaded."
 	else
 		usr << "\blue It is spent."
+
+
+/obj/item/weapon/reagent_containers/hypospray/hyperzine
+	name = "emergency stimulant autoinjector"
+	desc = "A potent mix of pain killers and muscle stimulants."
+	icon_state = "autoinjector"
+	item_state = "autoinjector"
+	amount_per_transfer_from_this = 5
+	volume = 5
+
+/obj/item/weapon/reagent_containers/hypospray/hyperzine/New()
+	..()
+	reagents.add_reagent("hyperzine", 5)
+	update_icon()
+	return
+
+/obj/item/weapon/reagent_containers/hypospray/hyperzine/attack(mob/M as mob, mob/user as mob)
+	..()

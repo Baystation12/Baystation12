@@ -5,6 +5,8 @@
 	var/maxHealth = 100 //Maximum health that should be possible.
 	var/health = 100 	//A mob's health
 
+	var/hud_updateflag = 0
+
 	//Damage related vars, NOTE: THESE SHOULD ONLY BE MODIFIED BY PROCS
 	var/bruteloss = 0.0	//Brutal damage caused by brute force (punching, being clubbed by a toolbox ect... this also accounts for pressure damage)
 	var/oxyloss = 0.0	//Oxygen depravation damage (no air in lungs)
@@ -37,6 +39,6 @@
 	var/update_slimes = 1
 	var/on_fire = 0 //The "Are we on fire?" var
 	var/fire_stacks = 0 //Tracks how many stacks of fire we have on, max is usually 20
-	var/silent = null 		//Can't talk. Value goes down every life proc.
 	var/specialsauce = 0 //Has this person consumed enough special sauce? IF so they're a ticking time bomb of death.
 	var/implanting = 0 //Used for the mind-slave implant
+	var/silent = null 		//Can't talk. Value goes down every life proc.

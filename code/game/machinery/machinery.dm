@@ -49,7 +49,7 @@ Class Variables:
 Class Procs:
    New()                     'game/machinery/machine.dm'
 
-   Del()                     'game/machinery/machine.dm'
+   Destroy()                     'game/machinery/machine.dm'
 
    auto_use_power()            'game/machinery/machine.dm'
       This proc determines how power mode power is deducted by the machine.
@@ -67,8 +67,10 @@ Class Procs:
       Checks to see if area that contains the object has power available for power
       channel given in 'chan'.
 
-   use_power(amount, chan=EQUIP)   'modules/power/power.dm'
+   use_power(amount, chan=EQUIP, autocalled)   'modules/power/power.dm'
       Deducts 'amount' from the power channel 'chan' of the area that contains the object.
+      If it's autocalled then everything is normal, if something else calls use_power we are going to
+      need to recalculate the power two ticks in a row.
 
    power_change()               'modules/power/power.dm'
       Called by the area that contains the object when ever that area under goes a
@@ -115,7 +117,7 @@ Class Procs:
 	..()
 	machines += src
 
-/obj/machinery/Del()
+/obj/machinery/Destroy()
 	machines -= src
 	..()
 
@@ -161,9 +163,9 @@ Class Procs:
 	if(!powered(power_channel))
 		return 0
 	if(src.use_power == 1)
-		use_power(idle_power_usage,power_channel)
+		use_power(idle_power_usage,power_channel, 1)
 	else if(src.use_power >= 2)
-		use_power(active_power_usage,power_channel)
+		use_power(active_power_usage,power_channel, 1)
 	return 1
 
 /obj/machinery/Topic(href, href_list)
@@ -191,9 +193,16 @@ Class Procs:
 			return 1
 
 	src.add_fingerprint(usr)
+
+	var/area/A = get_area(src)
+	A.powerupdate = 1
+
 	return 0
 
-/obj/machinery/attack_ai(mob/user as mob)
+/obj/machinery/attack_ai(var/mob/user as mob)
+	if(isAI(user))
+		var/mob/living/silicon/ai/A = user
+		if(A.alienAI) return
 	if(isrobot(user))
 		// For some reason attack_robot doesn't work
 		// This is to stop robots from using cameras to remotely control machines.
@@ -230,6 +239,10 @@ Class Procs:
 			return 1
 
 	src.add_fingerprint(user)
+
+	var/area/A = get_area(src)
+	A.powerupdate = 1
+
 	return 0
 
 /obj/machinery/CheckParts()

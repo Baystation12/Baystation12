@@ -74,7 +74,7 @@
 	radio = new (src)
 
 
-/obj/machinery/power/supermatter/Del()
+/obj/machinery/power/supermatter/Destroy()
 	del radio
 	. = ..()
 
@@ -92,6 +92,9 @@
 
 	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
 		return  //Yeah just stop.
+
+	if(istype(L, /turf/space))	// Stop processing this stuff if we've been ejected.
+		return
 
 	//Ok, get the air from the turf
 	var/datum/gas_mixture/env = L.return_air()
@@ -177,7 +180,7 @@
 
 	for(var/mob/living/carbon/human/l in view(src, min(7, round(power ** 0.25)))) // If they can see it without mesons on.  Bad on them.
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
-			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / get_dist(l, src) ) ) )
+			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
 	for(var/mob/living/l in range(src, round((power / 100) ** 0.25)))
 		var/rads = (power / 10) * sqrt( 1 / get_dist(l, src) )

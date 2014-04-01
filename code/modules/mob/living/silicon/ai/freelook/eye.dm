@@ -50,7 +50,7 @@
 	spawn(5)
 		eyeobj.loc = src.loc
 
-/mob/living/silicon/ai/Del()
+/mob/living/silicon/ai/Destroy()
 	eyeobj.ai = null
 	del(eyeobj) // No AI, no Eye
 	..()
@@ -106,6 +106,7 @@
 	unset_machine()
 
 	if(src.eyeobj && src.loc)
+		src.eyeobj.z = src.z
 		src.eyeobj.loc = src.loc
 	else
 		src << "ERROR: Eyeobj not found. Creating new eye..."

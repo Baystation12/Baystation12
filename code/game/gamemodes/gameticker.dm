@@ -39,6 +39,8 @@ var/global/datum/controller/gameticker/ticker
 
 /datum/controller/gameticker/proc/pregame()
 	login_music = pick(\
+	'sound/music/therock.ogg',\
+	'sound/music/klendathu.ogg',\
 	'sound/music/knights.ogg',\
 	'sound/music/space.ogg',\
 	'sound/music/Title1.ogg',\
@@ -136,6 +138,15 @@ var/global/datum/controller/gameticker/ticker
 			//Deleting Startpoints but we need the ai point to AI-ize people later
 			if (S.name != "AI")
 				del(S)
+		var/list/obj/effect/landmark/spacepod/random/L = list()
+		for(var/obj/effect/landmark/spacepod/random/SS in landmarks_list)
+			if(istype(SS))
+				L += SS
+		var/obj/effect/landmark/spacepod/random/S = pick(L)
+		new /obj/spacepod/random(S.loc)
+		for(var/obj in L)
+			if(istype(obj, /obj/effect/landmark/spacepod/random))
+				del(obj)
 		world << "<FONT color='blue'><B>Enjoy the game!</B></FONT>"
 		world << sound('sound/AI/welcome.ogg') // Skie
 		//Holiday Round-start stuff	~Carn
@@ -153,7 +164,7 @@ var/global/datum/controller/gameticker/ticker
 
 	supply_shuttle.process() 		//Start the supply shuttle regenerating points -- TLE
 	master_controller.process()		//Start master_controller.process()
-	lighting_controller.process()	//Start processing DynamicAreaLighting updates
+	//lighting_controller.process()	//Start processing DynamicAreaLighting updates
 
 
 	if(config.sql_enabled)

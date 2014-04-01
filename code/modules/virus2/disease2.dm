@@ -10,6 +10,7 @@
 	var/list/datum/disease2/effectholder/effects = list()
 	var/antigen = 0 // 16 bits describing the antigens, when one bit is set, a cure with that bit can dock here
 	var/max_stage = 4
+	var/list/affected_species = list("Human","Unathi","Skrell","Tajaran")
 
 /datum/disease2/disease/New()
 	uniqueID = rand(0,10000)
@@ -30,6 +31,24 @@
 	antigen |= text2num(pick(ANTIGENS))
 	spreadtype = prob(70) ? "Airborne" : "Contact"
 
+	if(all_species.len)
+		affected_species = get_infectable_species()
+
+/proc/get_infectable_species()
+	var/list/meat = list()
+	var/list/res = list()
+	for (var/specie in all_species)
+		var/datum/species/S = all_species[specie]
+		if(!(S.flags & IS_SYNTHETIC))
+			meat += S.name
+	if(meat.len)
+		var/num = rand(1,meat.len)
+		for(var/i=0,i<num,i++)
+			var/picked = pick(meat)
+			meat -= picked
+			res += picked
+	return res
+
 /datum/disease2/disease/proc/activate(var/mob/living/carbon/mob)
 	if(dead)
 		cure(mob)
@@ -44,8 +63,10 @@
 		if(prob(1))
 			majormutate()
 
-	//Space antibiotics stop disease completely (temporary)
+	//Space antibiotics stop disease completely
 	if(mob.reagents.has_reagent("spaceacillin"))
+		if(stage == 1 && prob(20))
+			src.cure()
 		return
 
 	//Virus food speeds up disease progress
@@ -55,9 +76,9 @@
 
 	//Moving to the next stage
 	if(clicks > stage*100 && prob(10))
-		if(stage == max_stage)
+		/*if(stage == max_stage)
 			src.cure(mob)
-			mob.antibodies |= src.antigen
+			mob.antibodies |= src.antigen*/ //NO AUTOCURE FOR YOU
 		stage++
 		clicks = 0
 	//Do nasty effects
@@ -78,6 +99,7 @@
 	for(var/datum/disease2/effectholder/e in effects)
 		e.effect.deactivate(mob)
 	mob.virus2.Remove("[uniqueID]")
+	mob.hud_updateflag |= 1 << STATUS_HUD
 
 /datum/disease2/disease/proc/minormutate()
 	//uniqueID = rand(0,10000)
@@ -92,6 +114,8 @@
 	if (prob(5))
 		antigen = text2num(pick(ANTIGENS))
 		antigen |= text2num(pick(ANTIGENS))
+	if (prob(5) && all_species.len)
+		affected_species = get_infectable_species()
 
 /datum/disease2/disease/proc/getcopy()
 	var/datum/disease2/disease/disease = new /datum/disease2/disease
@@ -103,6 +127,7 @@
 	disease.speed = speed
 	disease.stage = stage
 	disease.clicks = clicks
+	disease.affected_species = affected_species.Copy()
 	for(var/datum/disease2/effectholder/holder in effects)
 		var/datum/disease2/effectholder/newholder = new /datum/disease2/effectholder
 		newholder.effect = new holder.effect.type
@@ -156,6 +181,9 @@ var/global/list/virusDB = list()
 	r += "<BR>Infection rate : [infectionchance * 10]"
 	r += "<BR>Spread form : [spreadtype]"
 	r += "<BR>Progress Speed : [stageprob * 10]"
+	r += "<BR>Affected species:"
+	for(var/S in affected_species)
+		r += "<BR>[S]"
 	for(var/datum/disease2/effectholder/E in effects)
 		r += "<BR>Effect:[E.effect.name]. Strength : [E.multiplier * 8]. Verosity : [E.chance * 15]. Type : [5-E.stage]."
 
@@ -180,6 +208,7 @@ proc/virus2_lesser_infection()
 	for(var/mob/living/carbon/human/G in player_list)
 		if(G.client && G.stat != DEAD)
 			candidates += G
+
 	if(!candidates.len)	return
 
 	candidates = shuffle(candidates)

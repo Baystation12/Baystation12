@@ -42,7 +42,7 @@
 	*/
 
 	// Grab the info we want.
-	var/DBQuery/query = dbcon.NewQuery("SELECT cuiPath, cuiPropAdjust, cuiJobMask FROM CustomUserItems WHERE cuiCKey='[M.ckey]' AND (cuiRealName='[M.real_name]' OR cuiRealName='*')")
+	var/DBQuery/query = dbcon.NewQuery("SELECT cuiPath, cuiPropAdjust, cuiJobMask, cuiDescription FROM CustomUserItems WHERE cuiCKey='[M.ckey]' AND (cuiRealName='[M.real_name]' OR cuiRealName='*')")
 	query.Execute()
 
 	while(query.NextRow())
@@ -63,6 +63,7 @@
 
 
 		var/obj/item/Item = new path()
+		var/description = query.item[4]
 		testing("Adding new custom item [query.item[1]] to [key_name_admin(M)]...")
 		if(istype(Item,/obj/item/weapon/card/id))
 			var/obj/item/weapon/card/id/I = Item
@@ -94,6 +95,8 @@
 					testing("Added to [S]!")
 					M << "\blue Your [Item.name] has been added to your [S.name]."
 					break
+		if(description)
+			Item.desc = description
 
 		//skip:
 		if (ok == 0) // Finally, since everything else failed, place it on the ground

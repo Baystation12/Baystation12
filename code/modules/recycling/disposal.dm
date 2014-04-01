@@ -22,6 +22,8 @@
 	var/flush_every_ticks = 30 //Every 30 ticks it will look whether it is ready to flush
 	var/flush_count = 0 //this var adds 1 once per tick. When it reaches flush_every_ticks it resets and tries to flush.
 	var/last_sound = 0
+	active_power_usage = 600
+	idle_power_usage = 100
 
 	// create a new disposal
 	// find the attached trunk (if present) and init gas resvr.
@@ -110,7 +112,7 @@
 					if (GM.client)
 						GM.client.perspective = EYE_PERSPECTIVE
 						GM.client.eye = src
-					GM.loc = src
+					GM.setloc(src)
 					for (var/mob/C in viewers(src))
 						C.show_message("\red [GM.name] has been placed in the [src] by [user].", 3)
 					del(G)
@@ -123,7 +125,7 @@
 
 		user.drop_item()
 		if(I)
-			I.loc = src
+			I.setloc(src)
 
 		user << "You place \the [I] into the [src]."
 		for(var/mob/M in viewers(src))
@@ -168,7 +170,7 @@
 		if (target.client)
 			target.client.perspective = EYE_PERSPECTIVE
 			target.client.eye = src
-		target.loc = src
+		target.setloc(src)
 
 		for (var/mob/C in viewers(src))
 			if(C == user)
@@ -195,7 +197,7 @@
 		if (user.client)
 			user.client.eye = user.client.mob
 			user.client.perspective = MOB_PERSPECTIVE
-		user.loc = src.loc
+		user.setloc(src.loc)
 		update()
 		return
 
@@ -306,7 +308,7 @@
 	// eject the contents of the disposal unit
 	proc/eject()
 		for(var/atom/movable/AM in src)
-			AM.loc = src.loc
+			AM.setloc(src.loc)
 			AM.pipe_eject(0)
 		update()
 
@@ -340,6 +342,7 @@
 	// timed process
 	// charge the gas reservoir and perform flush if ready
 	process()
+		use_power = 0
 		if(stat & BROKEN)			// nothing can happen if broken
 			return
 
@@ -363,13 +366,13 @@
 		if(stat & NOPOWER)			// won't charge if no power
 			return
 
-		use_power(100)		// base power usage
+		use_power = 1
 
 		if(mode != 1)		// if off or ready, no need to charge
 			return
 
 		// otherwise charge
-		use_power(500)		// charging power usage
+		use_power = 2
 
 		var/atom/L = loc						// recharging from loc turf
 
@@ -444,7 +447,7 @@
 			for(var/atom/movable/AM in H)
 				target = get_offset_target_turf(src.loc, rand(5)-rand(5), rand(5)-rand(5))
 
-				AM.loc = src.loc
+				AM.setloc(src.loc)
 				AM.pipe_eject(0)
 				spawn(1)
 					if(AM)
@@ -459,7 +462,7 @@
 			if(istype(I, /obj/item/projectile))
 				return
 			if(prob(75))
-				I.loc = src
+				I.setloc(src)
 				for(var/mob/M in viewers(src))
 					M.show_message("\the [I] lands in \the [src].", 3)
 			else
@@ -507,7 +510,7 @@
 		// now everything inside the disposal gets put into the holder
 		// note AM since can contain mobs or objs
 		for(var/atom/movable/AM in D)
-			AM.loc = src
+			AM.setloc(src)
 			if(istype(AM, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = AM
 				if(M_FAT in H.mutations)		// is a human and fat?
@@ -584,7 +587,7 @@
 	// used when a a holder meets a stuck holder
 	proc/merge(var/obj/structure/disposalholder/other)
 		for(var/atom/movable/AM in other)
-			AM.loc = src		// move everything in other holder to this one
+			AM.setloc(src)		// move everything in other holder to this one
 			if(ismob(AM))
 				var/mob/M = AM
 				if(M.client)	// if a client mob, update eye to follow this holder
@@ -635,7 +638,7 @@
 
 	// pipe is deleted
 	// ensure if holder is present, it is expelled
-	Del()
+	Destroy()
 		var/obj/structure/disposalholder/H = locate() in src
 		if(H)
 			// holder was present
@@ -646,7 +649,7 @@
 				// this is unlikely, but just dump out everything into the turf in case
 
 				for(var/atom/movable/AM in H)
-					AM.loc = T
+					AM.setloc(T)
 					AM.pipe_eject(0)
 				del(H)
 				..()
@@ -677,9 +680,9 @@
 			if(H2 && !H2.active)
 				H.merge(H2)
 
-			H.loc = P
+			H.setloc(P)
 		else			// if wasn't a pipe, then set loc to turf
-			H.loc = T
+			H.setloc(T)
 			return null
 
 		return P
@@ -718,7 +721,7 @@
 
 		if(T.density)		// dense ouput turf, so stop holder
 			H.active = 0
-			H.loc = src
+			H.setloc(src)
 			return
 		if(T.intact && istype(T,/turf/simulated/floor)) //intact floor, pop the tile
 			var/turf/simulated/floor/F = T
@@ -738,7 +741,7 @@
 			playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 			if(H)
 				for(var/atom/movable/AM in H)
-					AM.loc = T
+					AM.setloc(T)
 					AM.pipe_eject(direction)
 					spawn(1)
 						if(AM)
@@ -753,7 +756,7 @@
 				for(var/atom/movable/AM in H)
 					target = get_offset_target_turf(T, rand(5)-rand(5), rand(5)-rand(5))
 
-					AM.loc = T
+					AM.setloc(T)
 					AM.pipe_eject(0)
 					spawn(1)
 						if(AM)
@@ -786,7 +789,7 @@
 				// this is unlikely, but just dump out everything into the turf in case
 
 				for(var/atom/movable/AM in H)
-					AM.loc = T
+					AM.setloc(T)
 					AM.pipe_eject(0)
 				del(H)
 				return
@@ -899,9 +902,6 @@
 
 		update()
 		return
-
-
-
 
 //a three-way junction with dir being the dominant direction
 /obj/structure/disposalpipe/junction
@@ -1025,9 +1025,9 @@
 			if(H2 && !H2.active)
 				H.merge(H2)
 
-			H.loc = P
+			H.setloc(P)
 		else			// if wasn't a pipe, then set loc to turf
-			H.loc = T
+			H.setloc(T)
 			return null
 
 		return P
@@ -1087,9 +1087,9 @@
 			if(H2 && !H2.active)
 				H.merge(H2)
 
-			H.loc = P
+			H.setloc(P)
 		else			// if wasn't a pipe, then set loc to turf
-			H.loc = T
+			H.setloc(T)
 			return null
 
 		return P
@@ -1256,7 +1256,7 @@
 
 		if(H)
 			for(var/atom/movable/AM in H)
-				AM.loc = src.loc
+				AM.setloc(src.loc)
 				AM.pipe_eject(dir)
 				spawn(5)
 					AM.throw_at(target, 3, 1)

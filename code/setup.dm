@@ -428,6 +428,10 @@ var/MAX_EXPLOSION_RANGE = 14
 #define MAX_STACK_AMOUNT_GLASS	50
 #define MAX_STACK_AMOUNT_RODS	60
 
+#define CC_PER_SHEET_METAL 3750
+#define CC_PER_SHEET_GLASS 3750
+#define CC_PER_SHEET_MISC 2000
+
 #define GAS_O2 	(1 << 0)
 #define GAS_N2	(1 << 1)
 #define GAS_PL	(1 << 2)
@@ -675,8 +679,9 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define SOUND_AMBIENCE	4
 #define SOUND_LOBBY		8
 #define SOUND_VOICES	16
+#define SOUND_STREAMING 32
 
-#define SOUND_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY)
+#define SOUND_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|SOUND_STREAMING)
 #define TOGGLES_DEFAULT (CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
 
 #define BE_TRAITOR		1
@@ -728,13 +733,15 @@ var/list/be_special_flags = list(
 #define RIGHT 2
 
 // for secHUDs and medHUDs and variants. The number is the location of the image on the list hud_list of humans.
-#define HEALTH_HUD		1 // dead, alive, sick, health status
-#define STATUS_HUD		2 // a simple line rounding the mob's number health
+#define HEALTH_HUD		1 // a simple line rounding the mob's number health
+#define STATUS_HUD		2 // alive, dead, diseased, etc.
 #define ID_HUD			3 // the job asigned to your ID
 #define WANTED_HUD		4 // wanted, released, parroled, security status
-#define IMPLOYAL_HUD	5 // loyality implant
+#define IMPLOYAL_HUD		5 // loyality implant
 #define IMPCHEM_HUD		6 // chemical implant
-#define IMPTRACK_HUD	7 // tracking implant
+#define IMPTRACK_HUD		7 // tracking implant
+#define SPECIALROLE_HUD 	8 // AntagHUD image
+#define STATUS_HUD_OOC		9 // STATUS_HUD without virus db check for someone being ill.
 
 //Pulse levels, very simplified
 #define PULSE_NONE		0	//so !M.pulse checks would be possible
@@ -825,3 +832,14 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define CENTCOMM_Z 2
 #define TELECOMM_Z 3
 #define ASTEROID_Z 5
+
+//some colors
+#define COLOR_RED 		"#FF0000"
+#define COLOR_GREEN 	"#00FF00"
+#define COLOR_BLUE 		"#0000FF"
+#define COLOR_CYAN 		"#00FFFF"
+#define COLOR_PINK 		"#FF00FF"
+#define COLOR_YELLOW 	"#FFFF00"
+#define COLOR_ORANGE 	"#FF9900"
+#define COLOR_WHITE 	"#FFFFFF"
+

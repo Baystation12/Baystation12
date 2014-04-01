@@ -50,11 +50,12 @@ var/const/MAX_ACTIVE_TIME = 400
 	var/strength=5
 	var/sterile = 0
 	var/attached = 0
+	var/icon_dead = "facehugger_dead"
 
 /mob/living/carbon/alien/facehugger/New()
 	if(aliens_allowed)
-		if(name == "alien facehugger")
-			name = "alien facehugger ([rand(1, 1000)])"
+//		if(name == "alien facehugger")
+//			name = "alien facehugger ([rand(1, 1000)])"
 		real_name = name
 		regenerate_icons()
 		..()
@@ -180,8 +181,7 @@ var/const/MAX_ACTIVE_TIME = 400
 	return
 
 /mob/living/carbon/alien/facehugger/proc/Impregnate(mob/living/target as mob)
-	if(!target || !target.wear_mask || (!src in target.wear_mask.contents)  || target.stat == DEAD) //was taken off or something
-		message_admins("Something went wrong with the impregnation!")
+	if(!target || !target.wear_mask || (!src in target.wear_mask.contents)  || target.stat == DEAD || target.status_flags & XENO_HOST) //was taken off or something
 		return
 
 	if(!sterile)
@@ -218,3 +218,11 @@ var/const/MAX_ACTIVE_TIME = 400
 		if(H.head && H.head.flags & HEADCOVERSMOUTH)
 			return 0
 	return 1
+
+/mob/living/carbon/alien/facehugger/Login()
+	..()
+	sleeping = 0
+
+/mob/living/carbon/alien/facehugger/death(gibbed)
+	icon_state = icon_dead
+	return ..(gibbed)

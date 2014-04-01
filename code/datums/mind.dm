@@ -389,7 +389,7 @@ datum/mind
 		if(!check_rights(R_ADMIN))	return
 
 		if (href_list["role_edit"])
-			var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in get_all_jobs()
+			var/new_role = input("Select new role", "Assigned role", assigned_role) as null|anything in joblist
 			if (!new_role) return
 			assigned_role = new_role
 
@@ -414,7 +414,7 @@ datum/mind
 				if(!def_value)//If it's a custom objective, it will be an empty string.
 					def_value = "custom"
 
-			var/new_obj_type = input("Select objective type:", "Objective type", def_value) as null|anything in list("assassinate", "blood", "debrain", "protect", "prevent", "harm", "brig", "hijack", "escape", "survive", "steal", "download", "nuclear", "capture", "absorb", "custom")
+			var/new_obj_type = input("Select objective type:", "Objective type", def_value) as null|anything in list("assassinate", "blood", "debrain", "protect", "prevent", "harm", "speciesist", "brig", "hijack", "escape", "survive", "steal", "download", "nuclear", "capture", "absorb", "custom")
 			if (!new_obj_type) return
 
 			var/datum/objective/new_objective = null
@@ -451,6 +451,11 @@ datum/mind
 						new_objective:target = new_target:mind
 						//Will display as special role if the target is set as MODE. Ninjas/commandos/nuke ops.
 						new_objective.explanation_text = "[objective_type] [new_target:real_name], the [new_target:mind:assigned_role=="MODE" ? (new_target:mind:special_role) : (new_target:mind:assigned_role)]."
+
+				if ("speciesist")
+					new_objective = new /datum/objective/speciesist
+					new_objective.owner = src
+					new_objective.find_target()
 
 				if ("prevent")
 					new_objective = new /datum/objective/block
@@ -538,12 +543,15 @@ datum/mind
 
 		else if(href_list["implant"])
 			var/mob/living/carbon/human/H = current
+
+			H.hud_updateflag |= (1 << IMPLOYAL_HUD)   // updates that players HUD images so secHUD's pick up they are implanted or not.
+
 			switch(href_list["implant"])
 				if("remove")
 					for(var/obj/item/weapon/implant/loyalty/I in H.contents)
 						for(var/datum/organ/external/organs in H.organs)
 							if(I in organs.implants)
-								I.Del()
+								I.Destroy()
 					H << "\blue <Font size =3><B>Your loyalty implant has been deactivated.</B></FONT>"
 				if("add")
 					var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
@@ -578,6 +586,8 @@ datum/mind
 						log_admin("[key_name_admin(usr)] has de-traitor'ed [current].")
 
 		else if (href_list["revolution"])
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+
 			switch(href_list["revolution"])
 				if("clear")
 					if(src in ticker.mode.revolutionaries)
@@ -667,6 +677,7 @@ datum/mind
 						usr << "\red Reequipping revolutionary goes wrong!"
 
 		else if (href_list["cult"])
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
 			switch(href_list["cult"])
 				if("clear")
 					if(src in ticker.mode.cult)
@@ -713,6 +724,8 @@ datum/mind
 						usr << "\red Spawning amulet failed!"
 
 		else if (href_list["wizard"])
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+
 			switch(href_list["wizard"])
 				if("clear")
 					if(src in ticker.mode.wizards)
@@ -739,6 +752,7 @@ datum/mind
 					usr << "\blue The objectives for wizard [key] have been generated. You can edit them and anounce manually."
 
 		else if (href_list["changeling"])
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
 			switch(href_list["changeling"])
 				if("clear")
 					if(src in ticker.mode.changelings)
@@ -792,6 +806,10 @@ datum/mind
 
 
 		else if (href_list["nuclear"])
+			var/mob/living/carbon/human/H = current
+
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+
 			switch(href_list["nuclear"])
 				if("clear")
 					if(src in ticker.mode.syndicates)
@@ -818,7 +836,6 @@ datum/mind
 				if("lair")
 					current.loc = get_turf(locate("landmark*Syndicate-Spawn"))
 				if("dressup")
-					var/mob/living/carbon/human/H = current
 					del(H.belt)
 					del(H.back)
 					del(H.l_ear)
@@ -846,6 +863,7 @@ datum/mind
 						usr << "\red No valid nuke found!"
 
 		else if (href_list["traitor"])
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
 			switch(href_list["traitor"])
 				if("clear")
 					if(src in ticker.mode.traitors)
@@ -925,6 +943,7 @@ datum/mind
 						current.radiation -= 50
 
 		else if (href_list["silicon"])
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
 			switch(href_list["silicon"])
 				if("unmalf")
 					if(src in ticker.mode.malf_ai)

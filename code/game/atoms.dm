@@ -21,6 +21,9 @@
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
 
+	// Garbage collection
+	var/gc_destroyed=null
+
 /atom/proc/throw_impact(atom/hit_atom, var/speed)
 	if(istype(hit_atom,/mob/living))
 		var/mob/living/M = hit_atom
@@ -40,6 +43,15 @@
 			if(istype(src,/mob/living))
 				var/mob/living/M = src
 				M.take_organ_damage(20)
+
+/atom/Del()
+	// Pass to Destroy().
+	if(!gc_destroyed)
+		Destroy()
+	..()
+
+/atom/proc/Destroy()
+	gc_destroyed=world.time
 
 
 /atom/proc/CheckParts()

@@ -186,12 +186,12 @@
 		msg += "[t_He] [t_is] wearing \icon[wear_id] \a [wear_id].\n"
 
 	//Jitters
-	if(is_jittery)
-		if(jitteriness >= 300)
+	switch(jitteriness)
+		if(300 to INFINITY)
 			msg += "<span class='warning'><B>[t_He] [t_is] convulsing violently!</B></span>\n"
-		else if(jitteriness >= 200)
+		if(200 to 300)
 			msg += "<span class='warning'>[t_He] [t_is] extremely jittery.</span>\n"
-		else if(jitteriness >= 100)
+		if(100 to 200)
 			msg += "<span class='warning'>[t_He] [t_is] twitching ever so slightly.</span>\n"
 
 	//splints
@@ -261,8 +261,9 @@
 				continue
 			if(temp.status & ORGAN_ROBOT)
 				if(!(temp.brute_dam + temp.burn_dam))
-					wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name]!</span>\n"
-					continue
+					if(!species.flags & IS_SYNTHETIC)
+						wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name]!</span>\n"
+						continue
 				else
 					wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name], it has"
 				if(temp.brute_dam) switch(temp.brute_dam)
@@ -277,7 +278,8 @@
 						wound_flavor_text["[temp.display_name]"] += " some burns"
 					if(21 to INFINITY)
 						wound_flavor_text["[temp.display_name]"] += pick(" a lot of burns"," severe melting")
-				wound_flavor_text["[temp.display_name]"] += "!</span>\n"
+				if(wound_flavor_text["[temp.display_name]"])
+					wound_flavor_text["[temp.display_name]"] += "!</span>\n"
 			else if(temp.wounds.len > 0)
 				var/list/wound_descriptors = list()
 				for(var/datum/wound/W in temp.wounds)

@@ -413,6 +413,8 @@
 		return 1
 	if(ispath(MP, /mob/living/carbon/alien))
 		return 1
+	if(ispath(MP, /mob/living/simple_animal/hostile/statue))
+		return 1
 
 //Friendly Creatures!
 	if(ispath(MP, /mob/living/carbon/monkey/diona))

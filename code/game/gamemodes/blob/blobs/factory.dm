@@ -118,7 +118,7 @@
 	del(src)
 
 
-/mob/living/simple_animal/hostile/blobspore/Del()
+/mob/living/simple_animal/hostile/blobspore/Destroy()
 	if(factory)
 		factory.spores -= src
 	if(contents)

@@ -119,7 +119,7 @@
 		goodbye_horses(loc)
 	..()
 
-/obj/item/clothing/mask/horsehead/Del()
+/obj/item/clothing/mask/horsehead/Destroy()
 	if(!canremove)
 		goodbye_horses(loc)
 	..()

@@ -8,7 +8,7 @@
 	name = "traitor"
 	config_tag = "traitor"
 	restricted_jobs = list("Cyborg")//They are part of the AI if he is traitor so are they, they use to get double chances
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Blueshield", "Nanotrasen Representative")//AI", Currently out of the list as malf does not work for shit
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Internal Affairs Agent", "Captain", "Head of Personnel", "Blueshield", "Nanotrasen Representative")//AI", Currently out of the list as malf does not work for shit
 	required_players = 0
 	required_enemies = 1
 	recommended_enemies = 4
@@ -96,16 +96,23 @@
 
 	else
 		switch(rand(1,100))
-			if(1 to 33)
+			if(1 to 25)
 				var/datum/objective/assassinate/kill_objective = new
 				kill_objective.owner = traitor
 				kill_objective.find_target()
 				traitor.objectives += kill_objective
-			if(34 to 50)
-				var/datum/objective/brig/brig_objective = new
-				brig_objective.owner = traitor
-				brig_objective.find_target()
-				traitor.objectives += brig_objective
+			if(26 to 40)
+				var/datum/objective/debrain/debrain_objective = new
+				debrain_objective.owner = traitor
+				debrain_objective.find_target()
+				traitor.objectives += debrain_objective
+			if(41 to 50)
+				var/datum/objective/protect/protect_objective = new
+				protect_objective.owner = traitor
+				protect_objective.find_target_by_role("Traitor",0)	//Protect your fellow traitor
+				if (!protect_objective.target)
+					protect_objective.find_target()					//We could not find any traitors, protect somebody
+				traitor.objectives += protect_objective
 			if(51 to 66)
 				var/datum/objective/harm/harm_objective = new
 				harm_objective.owner = traitor
@@ -118,10 +125,27 @@
 				traitor.objectives += steal_objective
 		switch(rand(1,100))
 			if(1 to 30) // Die glorious death
-				if (!(locate(/datum/objective/die) in traitor.objectives))
+				if (!(locate(/datum/objective/die) in traitor.objectives) && !(locate(/datum/objective/steal) in traitor.objectives))
 					var/datum/objective/die/die_objective = new
 					die_objective.owner = traitor
 					traitor.objectives += die_objective
+				else
+					if(prob(85))
+						if (!(locate(/datum/objective/escape) in traitor.objectives))
+							var/datum/objective/escape/escape_objective = new
+							escape_objective.owner = traitor
+							traitor.objectives += escape_objective
+					else
+						if(prob(50))
+							if (!(locate(/datum/objective/hijack) in traitor.objectives))
+								var/datum/objective/hijack/hijack_objective = new
+								hijack_objective.owner = traitor
+								traitor.objectives += hijack_objective
+						else
+							if (!(locate(/datum/objective/minimize_casualties) in traitor.objectives))
+								var/datum/objective/minimize_casualties/escape_objective = new
+								escape_objective.owner = traitor
+								traitor.objectives += escape_objective
 			if(31 to 90)
 				if (!(locate(/datum/objective/escape) in traitor.objectives))
 					var/datum/objective/escape/escape_objective = new
@@ -134,10 +158,11 @@
 						hijack_objective.owner = traitor
 						traitor.objectives += hijack_objective
 				else // Honk
-					if (!(locate(/datum/objective/minimize_casualties) in traitor.objectives))
-						var/datum/objective/minimize_casualties/escape_objective = new
-						escape_objective.owner = traitor
-						traitor.objectives += escape_objective
+					if (!(locate(/datum/objective/speciesist) in traitor.objectives))
+						var/datum/objective/speciesist/speciesist_objective = new
+						speciesist_objective.owner = traitor
+						speciesist_objective.find_target()
+						traitor.objectives += speciesist_objective
 	return
 
 

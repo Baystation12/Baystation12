@@ -76,7 +76,6 @@ proc/age2agedescription(age)
 		if(70 to INFINITY)	return "elderly"
 		else				return "unknown"
 
-
 /*
 Proc for attack log creation, because really why not
 1 argument is the actor
@@ -95,3 +94,26 @@ proc/add_logs(mob/target, mob/user, what_done, var/object=null, var/addition=nul
 	if(target.client)
 		if(what_done != ("shaked" || "CPRed" || "grabbed"))
 			message_admins("[user.name][ismob(user) ? "([user.ckey])" : ""] [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition](<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
+
+proc/RoundHealth(health)
+	switch(health)
+		if(100 to INFINITY)
+			return "health100"
+		if(70 to 100)
+			return "health80"
+		if(50 to 70)
+			return "health60"
+		if(30 to 50)
+			return "health40"
+		if(18 to 30)
+			return "health25"
+		if(5 to 18)
+			return "health10"
+		if(1 to 5)
+			return "health1"
+		if(-99 to 0)
+			return "health0"
+		else
+			return "health-100"
+	return "0"
+

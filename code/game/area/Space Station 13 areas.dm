@@ -14,6 +14,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 */
 
 
+
 /area
 	var/fire = null
 	var/atmos = 1
@@ -32,6 +33,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/eject = null
 
+	var/debug = 0
+	var/powerupdate = 10		//We give everything 10 ticks to settle out it's power usage.
 	var/requires_power = 1
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 
@@ -44,7 +47,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/used_environ = 0
 
 	var/has_gravity = 1
-
+	var/list/apc = list()
 	var/no_air = null
 	var/area/master				// master area used for power calcluations
 								// (original area before splitting due to sd_DAL)
@@ -352,6 +355,63 @@ proc/process_ghost_teleport_locs()
 	icon_state = "yellow"
 	requires_power = 0
 
+/area/shuttle/salvage
+	name = "\improper Salvage Ship"
+	icon_state = "yellow"
+	requires_power = 0
+
+/area/shuttle/salvage/start
+	name = "\improper Middle of Nowhere"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/arrivals
+	name = "\improper Space Station Auxiliary Docking"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/derelict
+	name = "\improper Derelict Station"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/djstation
+	name = "\improper Ruskie DJ Station"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/north
+	name = "\improper North of the Station"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/east
+	name = "\improper East of the Station"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/south
+	name = "\improper South of the Station"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/commssat
+	name = "\improper The Communications Satellite"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/mining
+	name = "\improper South-West of the Mining Asteroid"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/abandoned_ship
+	name = "\improper Abandoned Ship"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/clown_asteroid
+	name = "\improper Clown Asteroid"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/trading_post
+	name = "\improper Trading Post"
+	icon_state = "yellow"
+
+/area/shuttle/salvage/transit
+	name = "\improper hyperspace"
+	icon_state = "shuttle"
+
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
 /area/dummy/           // Referenced in engine.dm:261
@@ -579,22 +639,18 @@ proc/process_ghost_teleport_locs()
 /area/xenos_station/start
 	name = "\improper start area"
 	icon_state = "north"
-	requires_power = 0
 
 /area/xenos_station/transit
 	name = "\improper hyperspace"
 	icon_state = "shuttle"
-	requires_power = 0
 
 /area/xenos_station/southwest
 	name = "\improper aft port solars"
 	icon_state = "southwest"
-	requires_power = 0
 
 /area/xenos_station/northwest
 	name = "\improper fore port solars"
 	icon_state = "northwest"
-	requires_power = 0
 
 /area/xenos_station/northeast
 	name = "\improper fore starboard solars"
@@ -604,17 +660,14 @@ proc/process_ghost_teleport_locs()
 /area/xenos_station/southeast
 	name = "\improper aft starboard solars"
 	icon_state = "southeast"
-	requires_power = 0
 
 /area/xenos_station/north
-	name = "\improper north landing area"
+	name = "\improper west landing area"
 	icon_state = "north"
-	requires_power = 0
 
 /area/xenos_station/south
-	name = "\improper south landing area"
+	name = "\improper east landing area"
 	icon_state = "south"
-	requires_power = 0
 
 //PRISON
 /area/prison

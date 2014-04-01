@@ -21,14 +21,25 @@
 			return 0
 
 		if(M == user)
-			M << "\blue You swallow a gulp of [src]."
-			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					reagents.trans_to(M, gulp_size)
+			if(!src.reagents.total_volume && user.a_intent == "harm" && user.zone_sel.selecting == "head")
+				user.visible_message("<span class='notice'>[user] crushes the can of [src] on \his forehead!</span>", "<span class='notice'>You crush the can of [src] on your forehead!</span>")
+				playsound(user.loc,'sound/weapons/pierce.ogg', rand(10,50), 1)
+				var/obj/item/trash/can/crushed_can = new /obj/item/trash/can(user.loc)
+				crushed_can.icon_state = icon_state
+				del(src)
 
-			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
-			return 1
+			else
+				M << "\blue You swallow a gulp of [src]."
+				if(reagents.total_volume)
+					reagents.reaction(M, INGEST)
+					spawn(5)
+						reagents.trans_to(M, gulp_size)
+
+				playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
+				return 1
+
+
+
 		else if( istype(M, /mob/living/carbon/human) )
 
 			for(var/mob/O in viewers(world.view, user))

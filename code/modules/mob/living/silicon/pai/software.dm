@@ -643,5 +643,12 @@
 			dat += "</li>"
 	dat += "</ul>"
 	dat += "<br><br>"
-	dat += "Messages: <hr> [pda.tnote]"
+	for(var/index in pda.tnote)
+		if(index["sent"])
+			dat += addtext("<i><b>&rarr; To <a href='byond://?src=\ref[src];software=pdamessage;target=",index["src"],"'>", index["owner"],"</a>:</b></i><br>", index["message"], "<br>")
+		else
+			dat += addtext("<i><b>&larr; From <a href='byond://?src=\ref[src];software=pdamessage;target=",index["target"],"'>", index["owner"],"</a>:</b></i><br>", index["message"], "<br>")
+
+
+
 	return dat

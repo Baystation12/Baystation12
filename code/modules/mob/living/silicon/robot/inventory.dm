@@ -12,6 +12,7 @@
 	if(!O)
 		return 0
 
+
 	if(istype(O,/obj/item/borg/sight))
 		var/obj/item/borg/sight/S = O
 		sight_mode &= ~S.sight_mode
@@ -76,6 +77,7 @@
 	uneq_module(module_state_1)
 	uneq_module(module_state_2)
 	uneq_module(module_state_3)
+
 
 /mob/living/silicon/robot/proc/activated(obj/item/O)
 	if(module_state_1 == O)

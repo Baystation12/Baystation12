@@ -246,7 +246,7 @@
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	heat_capacity = 700000
 
-	lighting_lumcount = 4		//starlight
+	lit_value = 4		//starlight
 //	accepts_lighting=0 			// Don't apply overlays
 
 	New()

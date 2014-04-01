@@ -18,6 +18,7 @@
 	var/fire_sound = 'sound/weapons/Gunshot.ogg'
 	var/obj/item/projectile/in_chamber = null
 	var/silenced = 0
+	var/ghettomodded = 0
 	var/recoil = 0
 	var/clumsy_check = 1
 	var/obj/item/ammo_casing/chambered = null // The round (not bullet) that is in the chamber. THIS MISPLACED ITEM BROUGHT TO YOU BY HACKY BUCKSHOT.
@@ -82,7 +83,7 @@
 				del(src)
 				return
 
-	if (!user.IsAdvancedToolUser())
+	if (!user.IsAdvancedToolUser() || istype(user, /mob/living/carbon/monkey/diona))
 		user << "\red You don't have the dexterity to do this!"
 		return
 	if(istype(user, /mob/living))

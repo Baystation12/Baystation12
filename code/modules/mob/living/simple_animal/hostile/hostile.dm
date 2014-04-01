@@ -84,7 +84,10 @@
 			Targets = FoundTarget
 			break
 		if(CanAttack(A))//Can we attack it?
-			Targets.Add(A)
+			if(istype(src, /mob/living/simple_animal/hostile/scarybat))
+				if(A == src:owner)
+					continue
+			Targets += A
 			continue
 	Target = PickTarget(Targets)
 	return Target //We now have a target
@@ -154,7 +157,7 @@
 	LostTarget()
 
 /mob/living/simple_animal/hostile/proc/Goto(var/target, var/delay, var/minimum_distance)
-        walk_to(src, target, minimum_distance, delay)
+	walk_to(src, target, minimum_distance, delay)
 
 /mob/living/simple_animal/hostile/adjustBruteLoss(var/damage)
 	..(damage)
@@ -266,9 +269,13 @@
 		var/list/directions = cardinal.Copy()
 		for(var/dir in directions)
 			var/turf/T = get_step(src, dir)
-			if(istype(T, /turf/simulated/wall))
+			if(istype(T, /turf/simulated/wall) && T.Adjacent(src))
 				T.attack_animal(src)
 			for(var/atom/A in T)
-				if(istype(A, /obj/structure/window) || istype(A, /obj/structure/closet) || istype(A, /obj/structure/table) || istype(A, /obj/structure/grille) || istype(A, /obj/structure/rack))
+				if(!A.Adjacent(src))
+					continue
+				if(istype(A, /obj/structure/window) || istype(A, /obj/structure/closet) || \
+					istype(A, /obj/structure/table) || istype(A, /obj/structure/grille) || \
+					istype(A, /obj/structure/rack) || istype(A, /obj/machinery/door/window))
 					A.attack_animal(src)
 	return

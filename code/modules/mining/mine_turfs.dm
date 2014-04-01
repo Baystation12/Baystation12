@@ -26,6 +26,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	var/excav_overlay = ""
 	var/obj/item/weapon/last_find
 	var/datum/artifact_find/artifact_find
+	var/scan_state = null
 
 
 	New()
@@ -104,10 +105,13 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 		switch(mineral.display_name)
 			if("Iron")
 				icon_state = "rock_Iron[rand(1,3)]"
+				scan_state = "rock_Iron"
 			if("Plasma")
 				icon_state = "rock_Plasma[rand(1,3)]"
+				scan_state = "rock_Plasma"
 			else
 				icon_state = "rock_[mineral.name]"
+				scan_state = "rock_[mineral.name]"
 
 	//Not even going to touch this pile of spaghetti
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -363,7 +367,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
-	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25)//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25, "Gibtonite" = 5, "Cave" = 1)//Currently, Adamantine won't spawn as it has no uses. -Durandan
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 	New()
@@ -560,3 +564,180 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 				attackby(R.module_state_3,R)
 			else
 				return
+
+
+////////////////////////////////Gibtonite
+/turf/simulated/mineral/gibtonite
+	name = "Diamond deposit" //honk
+	icon_state = "rock_Gibtonite"
+	mineral = new /mineral/gibtonite
+	scan_state = "rock_Gibtonite"
+	var/det_time = 8 //Countdown till explosion, but also rewards the player for how close you were to detonation when you defuse it
+	var/stage = 0 //How far into the lifecycle of gibtonite we are, 0 is untouched, 1 is active and attempting to detonate, 2 is benign and ready for extraction
+	var/activated_ckey = null //These are to track who triggered the gibtonite deposit for logging purposes
+	var/activated_name = null
+
+/turf/simulated/mineral/gibtonite/New()
+	icon_state="rock_Diamond"
+	det_time = rand(8,10) //So you don't know exactly when the hot potato will explode
+	..()
+
+/turf/simulated/mineral/gibtonite/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/device/analyzer) && stage == 1)
+		user.visible_message("<span class='notice'>You use the analyzer to locate where to cut off the chain reaction and attempt to stop it...</span>")
+		defuse()
+	if(istype(I, /obj/item/weapon/pickaxe))
+		src.activated_ckey = "[user.ckey]"
+		src.activated_name = "[user.name]"
+	..()
+
+/turf/simulated/mineral/gibtonite/proc/explosive_reaction()
+	if(stage == 0)
+		icon_state = "rock_Gibtonite_active"
+		name = "Gibtonite deposit"
+		desc = "An active gibtonite reserve. Run!"
+		stage = 1
+		visible_message("<span class='warning'>There was gibtonite inside! It's going to explode!</span>")
+		var/turf/bombturf = get_turf(src)
+		var/area/A = get_area(bombturf)
+		var/log_str = "[src.activated_ckey]<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A> [src.activated_name] has triggered a gibtonite deposit reaction <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[bombturf.x];Y=[bombturf.y];Z=[bombturf.z]'>[A.name] (JMP)</a>."
+		log_game(log_str)
+		countdown()
+
+/turf/simulated/mineral/gibtonite/proc/countdown()
+	spawn(0)
+		while(stage == 1 && det_time > 0 && mineral.result_amount >= 1)
+			det_time--
+			sleep(5)
+		if(stage == 1 && det_time <= 0 && mineral.result_amount >= 1)
+			var/turf/bombturf = get_turf(src)
+			mineral.result_amount = 0
+			explosion(bombturf,1,3,5, adminlog = 0)
+		if(stage == 0 || stage == 2)
+			return
+
+/turf/simulated/mineral/gibtonite/proc/defuse()
+	if(stage == 1)
+		icon_state = "rock_Gibtonite_inactive"
+		desc = "An inactive gibtonite reserve. The ore can be extracted."
+		stage = 2
+		if(det_time < 0)
+			det_time = 0
+		visible_message("<span class='notice'>The chain reaction was stopped! The gibtonite had [src.det_time] reactions left till the explosion!</span>")
+
+/turf/simulated/mineral/gibtonite/GetDrilled()
+	if(stage == 0 && mineral.result_amount >= 1) //Gibtonite deposit is activated
+		playsound(src,'sound/effects/hit_on_shattered_glass.ogg',50,1)
+		explosive_reaction()
+		return
+	if(stage == 1 && mineral.result_amount >= 1) //Gibtonite deposit goes kaboom
+		var/turf/bombturf = get_turf(src)
+		mineral.result_amount = 0
+		explosion(bombturf,1,2,5, adminlog = 0)
+	if(stage == 2) //Gibtonite deposit is now benign and extractable. Depending on how close you were to it blowing up before defusing, you get better quality ore.
+		var/obj/item/weapon/twohanded/required/gibtonite/G = new /obj/item/weapon/twohanded/required/gibtonite/(src)
+		if(det_time <= 0)
+			G.quality = 3
+			G.icon_state = "Gibtonite ore 3"
+		if(det_time >= 1 && det_time <= 2)
+			G.quality = 2
+			G.icon_state = "Gibtonite ore 2"
+	var/turf/simulated/floor/plating/airless/asteroid/gibtonite_remains/G = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid/gibtonite_remains)
+	G.fullUpdateMineralOverlays()
+
+/turf/simulated/floor/plating/airless/asteroid/gibtonite_remains
+	var/det_time = 0
+	var/stage = 0
+
+////////////////////////////////End Gibtonite
+
+/turf/simulated/floor/plating/airless/asteroid/cave
+	var/length = 100
+	var/mob_spawn_list = list(
+		/mob/living/simple_animal/hostile/asteroid/goliath  = 5,
+		/mob/living/simple_animal/hostile/asteroid/goldgrub = 1,
+		/mob/living/simple_animal/hostile/asteroid/basilisk = 3,
+		/mob/living/simple_animal/hostile/asteroid/hivelord = 5
+	)
+	var/sanity = 1
+
+/turf/simulated/floor/plating/airless/asteroid/cave/New(loc, var/length, var/go_backwards = 1, var/exclude_dir = -1)
+
+	// If length (arg2) isn't defined, get a random length; otherwise assign our length to the length arg.
+	if(!length)
+		src.length = rand(25, 50)
+	else
+		src.length = length
+
+	// Get our directiosn
+	var/forward_cave_dir = pick(alldirs - exclude_dir)
+	// Get the opposite direction of our facing direction
+	var/backward_cave_dir = angle2dir(dir2angle(forward_cave_dir) + 180)
+
+	// Make our tunnels
+	make_tunnel(forward_cave_dir)
+	if(go_backwards)
+		make_tunnel(backward_cave_dir)
+	// Kill ourselves by replacing ourselves with a normal floor.
+	SpawnFloor(src)
+	..()
+
+/turf/simulated/floor/plating/airless/asteroid/cave/proc/make_tunnel(var/dir)
+
+	var/turf/simulated/mineral/tunnel = src
+	var/next_angle = pick(45, -45)
+
+	for(var/i = 0; i < length; i++)
+		if(!sanity)
+			break
+
+		var/list/L = list(45)
+		if(IsOdd(dir2angle(dir))) // We're going at an angle and we want thick angled tunnels.
+			L += -45
+
+		// Expand the edges of our tunnel
+		for(var/edge_angle in L)
+			var/turf/simulated/mineral/edge = get_step(tunnel, angle2dir(dir2angle(dir) + edge_angle))
+			if(istype(edge))
+				SpawnFloor(edge)
+
+		// Move our tunnel forward
+		tunnel = get_step(tunnel, dir)
+
+		if(istype(tunnel))
+			// Small chance to have forks in our tunnel; otherwise dig our tunnel.
+			if(i > 3 && prob(20))
+				new src.type(tunnel, rand(10, 15), 0, dir)
+			else
+				SpawnFloor(tunnel)
+		else //if(!istype(tunnel, src.parent)) // We hit space/normal/wall, stop our tunnel.
+			break
+
+		// Chance to change our direction left or right.
+		if(i > 2 && prob(33))
+			// We can't go a full loop though
+			next_angle = -next_angle
+			dir = angle2dir(dir2angle(dir) + next_angle)
+
+
+/turf/simulated/floor/plating/airless/asteroid/cave/proc/SpawnFloor(var/turf/T)
+	for(var/turf/S in range(2,T))
+		if(istype(S, /turf/space) || istype(S.loc, /area/mine/explored))
+			sanity = 0
+			break
+	if(!sanity)
+		return
+
+	SpawnMonster(T)
+
+
+/turf/simulated/floor/plating/airless/asteroid/cave/proc/SpawnMonster(var/turf/T)
+	if(prob(2))
+		if(istype(loc, /area/mine/explored))
+			return
+		for(var/atom/A in range(7,T))//Lowers chance of mob clumps
+			if(istype(A, /mob/living/simple_animal/hostile/asteroid))
+				return
+		var/randumb = pickweight(mob_spawn_list)
+		new randumb(T)
+	return

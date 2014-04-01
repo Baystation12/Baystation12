@@ -32,10 +32,9 @@
 		src.throw_impact(A)
 		src.throwing = 0
 
-	spawn( 0 )
-		if ((A && yes))
-			A.last_bumped = world.time
-			A.Bumped(src)
+	if ((A && yes))
+		A.last_bumped = world.time
+		A.Bumped(src)
 		return
 	..()
 	return
@@ -44,7 +43,7 @@
 	if(destination)
 		if(loc)
 			loc.Exited(src)
-		loc = destination
+		setloc(destination)
 		loc.Entered(src)
 		for(var/atom/movable/AM in loc)
 			AM.Crossed(src)
@@ -166,8 +165,7 @@
 	anchored = 1
 
 /atom/movable/overlay/New()
-	for(var/x in src.verbs)
-		src.verbs -= x
+	verbs.Cut()
 	return
 
 /atom/movable/overlay/attackby(a, b)

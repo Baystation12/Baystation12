@@ -100,9 +100,10 @@
 
 	..()*/
 
-/turf/simulated/wall/Del()
+/turf/simulated/wall/Destroy()
 
-	var/temploc = src.loc
+//This proc performs really badly with qdel relativewall gets called a over ten thousand times. Commenting it out until I get to figure out what exactly goes wrong here. uc
+/*	var/temploc = src.loc
 
 	spawn(10)
 		for(var/turf/simulated/wall/W in range(temploc,1))
@@ -110,7 +111,7 @@
 
 		for(var/obj/structure/falsewall/W in range(temploc,1))
 			W.relativewall()
-
+*/
 	for(var/direction in cardinal)
 		for(var/obj/effect/glowshroom/shroom in get_step(src,direction))
 			if(!shroom.floor) //shrooms drop to the floor
@@ -121,7 +122,7 @@
 
 	..()
 
-/*/turf/simulated/shuttle/wall/Del()
+/*/turf/simulated/shuttle/wall/Destroy()
 
 	var/temploc = src.loc
 

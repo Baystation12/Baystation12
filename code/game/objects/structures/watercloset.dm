@@ -31,7 +31,7 @@
 			if(ishuman(user))
 				user.put_in_hands(I)
 			else
-				I.loc = get_turf(src)
+				I.setloc(get_turf(src))
 			user << "<span class='notice'>You find \an [I] in the cistern.</span>"
 			w_items -= I.w_class
 			return
@@ -84,7 +84,7 @@
 			user << "<span class='notice'>The cistern is full.</span>"
 			return
 		user.drop_item()
-		I.loc = src
+		I.setloc(src)
 		w_items += I.w_class
 		user << "You carefully place \the [I] into the cistern."
 		return

@@ -1,5 +1,5 @@
 #define SAVEFILE_VERSION_MIN	8
-#define SAVEFILE_VERSION_MAX	10
+#define SAVEFILE_VERSION_MAX	11
 
 //handles converting savefiles to new formats
 //MAKE SURE YOU KEEP THIS UP TO DATE!

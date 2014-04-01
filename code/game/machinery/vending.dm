@@ -43,6 +43,8 @@
 	//var/emagged = 0			//Ignores if somebody doesn't have card access to that machine.
 	var/seconds_electrified = 0	//Shock customers like an airlock.
 	var/shoot_inventory = 0		//Fire items at customers! We're broken!
+	var/shoot_speed = 3			//How hard are we firing the items?
+	var/shoot_chance = 2		//How often are we firing the items?
 	var/shut_up = 0				//Stop spouting those godawful pitches!
 	var/extended_inventory = 0	//can we access the hidden inventory?
 	var/scan_id = 1
@@ -463,7 +465,7 @@
 		src.speak(slogan)
 		src.last_slogan = world.time
 
-	if(src.shoot_inventory && prob(2))
+	if(src.shoot_inventory && prob(shoot_chance))
 		src.throw_item()
 
 	return
@@ -529,7 +531,7 @@
 	if (!throw_item)
 		return 0
 	spawn(0)
-		throw_item.throw_at(target, 16, 3)
+		throw_item.throw_at(target, 16, shoot_speed)
 	src.visible_message("\red <b>[src] launches [throw_item.name] at [target.name]!</b>")
 	return 1
 
@@ -792,7 +794,7 @@
 					/obj/item/clothing/under/schoolgirl = 1,/obj/item/clothing/head/kitty = 1,/obj/item/clothing/under/blackskirt = 1,/obj/item/clothing/head/beret = 1,
 					/obj/item/clothing/suit/wcoat = 1,/obj/item/clothing/under/suit_jacket = 1,/obj/item/clothing/head/that =1,/obj/item/clothing/head/cueball = 1,
 					/obj/item/clothing/under/scratch = 1,/obj/item/clothing/under/kilt = 1,/obj/item/clothing/head/beret = 1,/obj/item/clothing/suit/wcoat = 1,
-					/obj/item/clothing/glasses/monocle =1,/obj/item/clothing/head/bowler = 1,/obj/item/weapon/cane = 1,/obj/item/clothing/under/sl_suit = 1,
+					/obj/item/clothing/glasses/monocle =1,/obj/item/clothing/head/bowlerhat = 1,/obj/item/weapon/cane = 1,/obj/item/clothing/under/sl_suit = 1,
 					/obj/item/clothing/mask/fakemoustache = 1,/obj/item/clothing/suit/bio_suit/plaguedoctorsuit = 1,/obj/item/clothing/head/plaguedoctorhat = 1,/obj/item/clothing/mask/gas/plaguedoctor = 1,
 					/obj/item/clothing/under/owl = 1,/obj/item/clothing/mask/gas/owl_mask = 1,/obj/item/clothing/suit/apron = 1,/obj/item/clothing/under/waiter = 1,
 					/obj/item/clothing/under/pirate = 1,/obj/item/clothing/suit/pirate = 1,/obj/item/clothing/head/pirate = 1,/obj/item/clothing/head/bandana = 1,
@@ -872,6 +874,7 @@
 					/obj/item/weapon/screwdriver = 5,/obj/item/weapon/crowbar = 5)
 	//everything after the power cell had no amounts, I improvised.  -Sayu
 
+
 /obj/machinery/vending/eva
 	name = "Hardsuit Kits"
 	desc = "Conversion kits for your alien hardsuit needs."
@@ -888,3 +891,34 @@
 					/obj/item/weapon/reagent_containers/food/drinks/ice = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/candy_corn = 6)
 	contraband = list(/obj/item/weapon/kitchen/utensil/knife = 6)
+
+/obj/machinery/vending/hatdispenser
+	name = "Hatlord 9000"
+	desc = "It doesn't seem the slightist bit unusual. This frustrates you immensly."
+	icon_state = "hats"
+	product_ads = "Warning, not all hats are dog/monkey compatable. Apply forcefully with care.;Apply directly to the forehead.;Who doesn't love spending cash on hats?!;From the people that brought you collectable hat crates, Hatlord!"
+	products = list(/obj/item/clothing/head/bowlerhat = 10,/obj/item/clothing/head/beaverhat = 10,/obj/item/clothing/head/boaterhat = 10,/obj/item/clothing/head/fedora = 10,/obj/item/clothing/head/fez = 10)
+	contraband = list(/obj/item/clothing/head/bearpelt = 5)
+	premium = list(/obj/item/clothing/head/soft/rainbow = 1)
+
+/obj/machinery/vending/suitdispenser
+	name = "Suitlord 9000"
+	desc = "You wonder for a moment why all of your shirts and pants come conjoined. This hurts your head and you stop thinking about it."
+	icon_state = "suits"
+	product_ads = "Pre-Ironed, Pre-Washed, Pre-Wor-*BZZT*;Blood of your enemys washes right out!;Who are YOU wearing?;Look dapper! Look like an idiot!;Dont carry your size? How about you shave off some pounds you fat lazy- *BZZT*"
+	products = list(/obj/item/clothing/under/color/black = 10,/obj/item/clothing/under/color/blue = 10,/obj/item/clothing/under/color/green = 10,/obj/item/clothing/under/color/grey = 10,/obj/item/clothing/under/color/pink = 10,/obj/item/clothing/under/color/red = 10,
+					/obj/item/clothing/under/color/white = 10, /obj/item/clothing/under/color/yellow = 10,/obj/item/clothing/under/lightblue = 10,/obj/item/clothing/under/aqua = 10,/obj/item/clothing/under/purple = 10,/obj/item/clothing/under/lightgreen = 10,
+					/obj/item/clothing/under/lightblue = 10,/obj/item/clothing/under/lightbrown = 10,/obj/item/clothing/under/brown = 10,/obj/item/clothing/under/yellowgreen = 10,/obj/item/clothing/under/darkblue = 10,/obj/item/clothing/under/lightred = 10, /obj/item/clothing/under/darkred = 10)
+	contraband = list(/obj/item/clothing/under/syndicate/tacticool = 5,/obj/item/clothing/under/color/orange = 5,/obj/item/clothing/under/psyche = 5)
+	premium = list(/obj/item/clothing/under/rainbow = 1)
+
+//THIS IS WHERE THE FEET LIVE, GIT YE SOME
+/obj/machinery/vending/shoedispenser
+	name = "Shoelord 9000"
+	desc = "Wow, hatlord looked fancy, suitlord looked streamlined, and this is just normal. The guy who disigned these must be an idiot."
+	icon_state = "shoes"
+	product_ads = "Put your foot down!;One size fits all!;IM WALKING ON SUNSHINE!;No hobbits allowed.;NO PLEASE WILLY, DONT HURT ME- *BZZT*"
+	products = list(/obj/item/clothing/shoes/black = 10,/obj/item/clothing/shoes/brown = 10,/obj/item/clothing/shoes/blue = 10,/obj/item/clothing/shoes/green = 10,/obj/item/clothing/shoes/yellow = 10,/obj/item/clothing/shoes/purple = 10,/obj/item/clothing/shoes/red = 10,/obj/item/clothing/shoes/white = 10)
+	contraband = list(/obj/item/clothing/shoes/jackboots = 5,/obj/item/clothing/shoes/orange = 5)
+	premium = list(/obj/item/clothing/shoes/rainbow = 1)
+

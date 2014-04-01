@@ -40,6 +40,7 @@
 	appearance_loadbanfile()
 	jobban_updatelegacybans()
 	LoadBans()
+	SetupHooks() // /vg/
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
@@ -279,7 +280,6 @@
 	s += "</a>"
 	s += ")"
 	s += "<br>The Perfect Mix of RP & Action<br>"
-	s += "<b>NEW HOST. NO LAG. NO CRASH.</b><br>"
 
 
 

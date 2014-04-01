@@ -29,7 +29,7 @@
 	set name = "Toggle Mister"
 	set category = "Object"
 	on = !on
-	
+
 	var/mob/living/carbon/human/user = usr
 	if(on)
 		//Detach the nozzle into the user's hands
@@ -53,7 +53,7 @@
 		M.u_equip(noz)
 	return
 
-/obj/item/weapon/watertank/Del()
+/obj/item/weapon/watertank/Destroy()
 	if (noz)
 		var/M = get(noz, /mob)
 		remove_noz(M)
@@ -83,7 +83,7 @@
 	if (!parent_tank || !istype(parent_tank, /obj/item/weapon/watertank))	//To avoid weird issues from admin spawns
 		var/mob/living/carbon/human/M = usr
 		M.u_equip(src)
-		Del()
+		Destroy()
 	else
 		tank = parent_tank
 		reagents = tank.reagents	//This mister is really just a proxy for the tank's reagents
@@ -92,4 +92,4 @@
 /obj/item/weapon/reagent_containers/glass/mister/dropped(mob/user as mob)
 	user << "<span class='notice'>The mister snaps back onto the watertank!</span>"
 	tank.on = 0
-	Del()
+	Destroy()

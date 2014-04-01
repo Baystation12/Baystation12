@@ -17,11 +17,7 @@
 /obj/machinery/door/window/update_nearby_tiles(need_rebuild)
 	if(!air_master) return 0
 
-	var/turf/simulated/source = get_turf(src)
-	var/turf/simulated/target = get_step(source,dir)
-
-	if(istype(source)) air_master.tiles_to_update |= source
-	if(istype(target)) air_master.tiles_to_update |= target
+	air_master.mark_for_update(get_turf(src))
 
 	return 1
 
@@ -35,7 +31,7 @@
 	color = color_windows()
 	return
 
-/obj/machinery/door/window/Del()
+/obj/machinery/door/window/Destroy()
 	density = 0
 	playsound(src, "shatter", 70, 1)
 	..()
@@ -135,6 +131,8 @@
 		var/obj/item/weapon/airlock_electronics/ae
 		if(!electronics)
 			ae = new/obj/item/weapon/airlock_electronics( src.loc )
+			if(!src.req_access)
+				src.check_access()
 			if(src.req_access.len)
 				ae.conf_access = src.req_access
 			else if (src.req_one_access.len)
@@ -191,6 +189,14 @@
 /obj/machinery/door/window/attack_hand(mob/user as mob)
 	return src.attackby(user, user)
 
+/obj/machinery/door/window/attack_animal(mob/user as mob)
+	if(!isanimal(user)) return
+	var/mob/living/simple_animal/M = user
+	if(M.melee_damage_upper <= 0) return
+	playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+	visible_message("\red <B>[user] smashes against the [src.name].</B>", 1)
+	take_damage(M.melee_damage_upper)
+
 /obj/machinery/door/window/attackby(obj/item/weapon/I as obj, mob/user as mob)
 
 	//If it's in the process of opening/closing, ignore the click
@@ -234,6 +240,8 @@
 			var/obj/item/weapon/airlock_electronics/ae
 			if(!electronics)
 				ae = new/obj/item/weapon/airlock_electronics( src.loc )
+				if(!src.req_access)
+					src.check_access()
 				if(src.req_access.len)
 					ae.conf_access = src.req_access
 				else if (src.req_one_access.len)
@@ -350,4 +358,3 @@
 	dir = SOUTH
 	icon_state = "rightsecure"
 	base_state = "rightsecure"
-

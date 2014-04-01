@@ -143,6 +143,18 @@
 		cell_component.wrapped = cell
 		cell_component.installed = 1
 
+	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
+	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
+
+
+
+
 	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
 // setup the PDA and its name
@@ -153,7 +165,7 @@
 
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
 //Improved /N
-/mob/living/silicon/robot/Del()
+/mob/living/silicon/robot/Destroy()
 	if(mmi)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
 		var/turf/T = get_turf(loc)//To hopefully prevent run time errors.
 		if(T)	mmi.loc = T
@@ -645,7 +657,7 @@
 				C.r_arm = new/obj/item/robot_parts/r_arm(C)
 				C.updateicon()
 				new/obj/item/robot_parts/chest(loc)
-				src.Del()
+				src.Destroy()
 			else
 				// Okay we're not removing the cell or an MMI, but maybe something else?
 				var/list/removable_components = list()
@@ -1141,20 +1153,26 @@
 
 	if (href_list["deact"])
 		var/obj/item/O = locate(href_list["deact"])
+
 		if(activated(O))
 			if(module_state_1 == O)
 				module_state_1 = null
-				contents -= O
 			else if(module_state_2 == O)
 				module_state_2 = null
-				contents -= O
 			else if(module_state_3 == O)
 				module_state_3 = null
-				contents -= O
 			else
 				src << "Module isn't activated."
+				return
 		else
 			src << "Module isn't activated"
+			return
+
+		O.dropped(src)
+		contents -= O
+
+		src << "[O.name] deactivated."
+
 		installed_modules()
 	return
 

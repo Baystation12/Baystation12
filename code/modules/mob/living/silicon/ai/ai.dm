@@ -107,7 +107,10 @@ var/list/ai_list = list()
 				if(B.alien)
 					B.brainmob.mind.transfer_to(src)
 					icon_state = "ai-alien"
-					verbs.Remove(/mob/living/silicon/ai/verb/pick_icon)
+					verbs.Remove(,/mob/living/silicon/ai/proc/ai_call_shuttle,/mob/living/silicon/ai/proc/ai_camera_track, \
+					/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
+					/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
+					/mob/living/silicon/ai/proc/toggle_camera_light,/mob/living/silicon/ai/verb/pick_icon)
 					laws = new /datum/ai_laws/alienmov
 				else
 					B.brainmob.mind.transfer_to(src)
@@ -122,14 +125,60 @@ var/list/ai_list = list()
 				src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
 
 			job = "AI"
+
+	spawn(5)
+		new /obj/machinery/ai_powersupply(src)
+
+
+	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
+
+
 	ai_list += src
 	..()
 	return
 
-/mob/living/silicon/ai/Del()
+/mob/living/silicon/ai/Destroy()
 	ai_list -= src
 	..()
 
+
+/*
+	The AI Power supply is a dummy object used for powering the AI since only machinery should be using power.
+	The alternative was to rewrite a bunch of AI code instead here we are.
+*/
+/obj/machinery/ai_powersupply
+	name="Power Supply"
+	active_power_usage=1000
+	use_power = 2
+	power_channel = EQUIP
+	var/mob/living/silicon/ai/powered_ai = null
+	invisibility = 100
+
+/obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
+	powered_ai = ai
+	if(isnull(powered_ai))
+		Del()
+
+	loc = powered_ai.loc
+	use_power(1) // Just incase we need to wake up the power system.
+
+	..()
+
+/obj/machinery/ai_powersupply/process()
+	if(!powered_ai || powered_ai.stat & DEAD)
+		Del()
+	if(!powered_ai.anchored)
+		loc = powered_ai.loc
+		use_power = 0
+	if(powered_ai.anchored)
+		use_power = 2
 
 /mob/living/silicon/ai/verb/pick_icon()
 	set category = "AI Commands"
@@ -156,7 +205,7 @@ var/list/ai_list = list()
 		//if(icon_state == initial(icon_state))
 	var/icontype = ""
 	if (custom_sprite == 1) icontype = ("Custom")//automagically selects custom sprite if one is available
-	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Blue", "Clown", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Red October", "Sparkles")
+	else icontype = input("Select an icon!", "AI", null, null) in list("Monochrome", "Blue", "Clown", "Inverted", "Text", "Smiley", "Angry", "Dorf", "Matrix", "Bliss", "Firewall", "Green", "Red", "Static", "Triumvirate", "Triumvirate Static", "Red October", "Sparkles", "ANIMA", "President")
 	switch(icontype)
 		if("Custom") icon_state = "[src.ckey]-ai"
 		if("Clown") icon_state = "ai-clown2"
@@ -176,6 +225,8 @@ var/list/ai_list = list()
 		if("Triumvirate Static") icon_state = "ai-triumvirate-malf"
 		if("Red October") icon_state = "ai-redoctober"
 		if("Sparkles") icon_state = "ai-sparkles"
+		if("ANIMA") icon_state = "ai-anima"
+		if("President") icon_state = "ai-president"
 		else icon_state = "ai"
 	//else
 			//usr <<"You can only change your display once!"
@@ -286,7 +337,7 @@ var/list/ai_list = list()
 		if(AI.control_disabled)
 			src	 << "Wireless control is disabled!"
 			return
-	cancel_call_proc(src)
+	recall_shuttle(src)
 	return
 
 /mob/living/silicon/ai/check_eye(var/mob/user as mob)
@@ -692,10 +743,11 @@ var/list/ai_list = list()
 	camera_light_on = !camera_light_on
 	src << "Camera lights [camera_light_on ? "activated" : "deactivated"]."
 	if(!camera_light_on)
-		if(src.current)
-			src.current.SetLuminosity(0)
+		if(current)
+			current.SetLuminosity(0)
+			current = null
 	else
-		src.lightNearbyCamera()
+		lightNearbyCamera()
 
 
 

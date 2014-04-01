@@ -57,6 +57,11 @@
 	dizziness = 0
 	jitteriness = 0
 
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
+
+	handle_hud_list()
+
 	//Handle species-specific deaths.
 	if(species) species.handle_death(src)
 

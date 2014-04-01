@@ -35,7 +35,7 @@
 	//height=42
 	icon='icons/fence-ns.dmi'
 
-/obj/structure/grille/Del()
+/obj/structure/grille/Destroy()
 	loc = null //garbage collect
 
 

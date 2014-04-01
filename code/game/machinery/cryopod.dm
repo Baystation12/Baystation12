@@ -80,7 +80,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 		visible_message("\blue The console beeps happily as it disgorges \the [I].", 3)
 
-		I.loc = get_turf(src)
+		I.setloc(get_turf(src))
 		frozen_items -= I
 
 	else if(href_list["allitems"])
@@ -92,11 +92,10 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		visible_message("\blue The console beeps happily as it disgorges the desired objects.", 3)
 
 		for(var/obj/item/I in frozen_items)
-			I.loc = get_turf(src)
+			I.setloc(get_turf(src))
 			frozen_items -= I
 
 	else if(href_list["crew"])
-
 		user << "\red Functionality unavailable at this time."
 
 	src.updateUsrDialog()
@@ -187,11 +186,11 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 			//Drop all items into the pod.
 			for(var/obj/item/W in occupant)
 				occupant.drop_from_inventory(W)
-				W.loc = src
+				W.setloc(src)
 
 				if(W.contents.len) //Make sure we catch anything not handled by del() on the items.
 					for(var/obj/item/O in W.contents)
-						O.loc = src
+						O.setloc(src)
 
 			//Delete all items not on the preservation list.
 			var/list/items = src.contents
@@ -211,20 +210,21 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					frozen_items += W
 
 			//Update any existing objectives involving this mob.
-			for(var/mob/living/M in world) //There has to be a more efficient way to do this.
-				if(!(M.mind) || !(M.mind.objectives.len)) continue
-
-				for(var/datum/objective/O in M.mind.objectives)
-					if(O.target && istype(O.target,/datum/mind))
-						if(O.target == occupant.mind)
-							if(O.owner && O.owner.current)
-								O.owner.current << "\red You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]..."
-							O.target = null
-							spawn(1) //This should ideally fire after the occupant is deleted.
-								if(!O) return
-								O.find_target()
-								if(!(O.target))
-									O.owner.objectives -= O
+			for(var/datum/objective/O in all_objectives)
+				if(istype(O,/datum/objective/mutiny) && O.target == occupant.mind) //We don't want revs to get objectives that aren't for heads of staff. Letting them win or lose based on cryo is silly so we remove the objective.
+					del(O) //TODO: Update rev objectives on login by head (may happen already?) ~ Z
+				else if(O.target && istype(O.target,/datum/mind))
+					if(O.target == occupant.mind)
+						if(O.owner && O.owner.current)
+							O.owner.current << "\red You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]..."
+						O.target = null
+						spawn(1) //This should ideally fire after the occupant is deleted.
+							if(!O) return
+							O.find_target()
+							if(!(O.target))
+								all_objectives -= O
+								O.owner.objectives -= O
+								del(O)
 
 			//Handle job slot/tater cleanup.
 			var/job = occupant.mind.assigned_role
@@ -240,6 +240,9 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					current_mode.possible_traitors.Remove(occupant)
 
 			// Delete them from datacore.
+
+			if(PDA_Manifest.len)
+				PDA_Manifest.Cut()
 			for(var/datum/data/record/R in data_core.medical)
 				if ((R.fields["name"] == occupant.real_name))
 					del(R)
@@ -302,7 +305,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 			if(do_after(user, 20))
 				if(!M || !G || !G:affecting) return
 
-				M.loc = src
+				M.setloc(src)
 
 				if(M.client)
 					M.client.perspective = EYE_PERSPECTIVE
@@ -372,7 +375,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		usr.stop_pulling()
 		usr.client.perspective = EYE_PERSPECTIVE
 		usr.client.eye = src
-		usr.loc = src
+		usr.setloc(src)
 		src.occupant = usr
 
 		if(orient_right)
@@ -398,7 +401,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		occupant.client.eye = src.occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 
-	occupant.loc = get_turf(src)
+	occupant.setloc(get_turf(src))
 	occupant = null
 
 	if(orient_right)

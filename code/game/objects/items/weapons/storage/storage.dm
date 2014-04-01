@@ -250,7 +250,7 @@
 	if(usr)
 		usr.u_equip(W)
 		usr.update_icons()	//update our overlays
-	W.loc = src
+	W.setloc(src)
 	W.on_enter_storage(src)
 	if(usr)
 		if (usr.client && usr.s_active != src)
@@ -293,9 +293,9 @@
 			W.layer = 20
 		else
 			W.layer = initial(W.layer)
-		W.loc = new_location
+		W.setloc(new_location)
 	else
-		W.loc = get_turf(src)
+		W.setloc(get_turf(src))
 
 	if(usr)
 		src.orient2hud(usr)
@@ -325,7 +325,7 @@
 				user << "\red The tray won't fit in [src]."
 				return 1
 			else
-				W.loc = user.loc
+				W.setloc(user.loc)
 				if ((user.client && user.s_active != src))
 					user.client.screen -= W
 				W.dropped(user)

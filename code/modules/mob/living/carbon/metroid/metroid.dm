@@ -1072,3 +1072,30 @@ mob/living/carbon/slime/var/temperature_resistance = T0C+75
 	else
 		..()
 */
+
+/obj/item/slime_color
+	name = "slimeperson color selector"
+	desc = "Allows you to change your slimeperson color, once."
+	icon = 'icons/obj/device.dmi'
+	icon_state = "t-ray0"
+	flags = TABLEPASS
+	force = 1.0
+	w_class = 1.0
+	throwforce = 1.0
+	throw_speed = 3
+	throw_range = 6
+	origin_tech = "biotech=4"
+	_color = "grey"
+	var/Uses = 1 // uses before it goes inert
+	var/list/slimecolor = list("grey","gold","silver","metal","purple","darkpurple","orange","yellow","red","blue","darkblue","pink","green","lightpink","black","oil","adamantine")
+
+
+/obj/item/slime_color/attack(mob/living/carbon/human/M as mob, mob/user as mob) //changing slime people colors
+	if(M.dna.mutantrace != "slime" || M != user) return
+
+
+	var/pickedcolor = input("Please select a slime color", "Slimeperson color chooser")  as null|anything in slimecolor
+	M.slime_color = pickedcolor
+	user << "You absorb the pigment and your color shifts!"
+	M.update_mutantrace()
+	del(src) //Finally a tidy way to remove all the used cores lying about

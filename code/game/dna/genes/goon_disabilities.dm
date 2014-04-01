@@ -66,6 +66,7 @@
 // SPEECH MANIPULATORS //
 /////////////////////////
 
+/* Duplicate
 // WAS: /datum/bioEffect/stutter
 /datum/dna/gene/disability/stutter
 	name = "Stutter"
@@ -87,6 +88,7 @@
 		if(is_type_in_list(/datum/dna/gene/disability/speech,M.active_genes))
 			return 0
 		return ..(M,flags)
+*/
 
 /* Figure out what the fuck this one does.
 // WAS: /datum/bioEffect/smile
@@ -130,6 +132,7 @@
 		block=CHAVBLOCK
 
 	OnSay(var/mob/M, var/message)
+		// THIS ENTIRE THING BEGS FOR REGEX
 		message = replacetext(message,"dick","prat")
 		message = replacetext(message,"comdom","knob'ead")
 		message = replacetext(message,"looking at","gawpin' at")
@@ -144,7 +147,7 @@
 		message = replacetext(message,"i don't know","wot mate")
 		message = replacetext(message,"no","naw")
 		message = replacetext(message,"robust","chin")
-		message = replacetext(message,"hi","how what how")
+		message = replacetext(message," hi ","how what how")
 		message = replacetext(message,"hello","sup bruv")
 		message = replacetext(message,"kill","bang")
 		message = replacetext(message,"murder","bang")
@@ -308,16 +311,15 @@
 	invocation_type = "none"
 	range = -1
 	selection_type = "range"
+	var/list/compatible_mobs = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	include_user = 1
 
 /obj/effect/proc_holder/spell/targeted/immolate/cast(list/targets)
-	if (istype(usr,/mob/living/))
-		var/mob/living/L = usr
+	var/mob/living/L = usr
 
-		L.adjust_fire_stacks(0.5) // Same as walking into fire. Was 100 (goon fire)
-		L.visible_message("\red <b>[L.name]</b> suddenly bursts into flames!")
-		//playsound(L.loc, 'mag_fireballlaunch.ogg', 50, 0)
-
-	return
+	L.adjust_fire_stacks(0.5) // Same as walking into fire. Was 100 (goon fire)
+	L.visible_message("\red <b>[L.name]</b> suddenly bursts into flames!")
+	//playsound(L.loc, 'mag_fireballlaunch.ogg', 50, 0)
 
 ////////////////////////////////////////////////////////////////////////
 

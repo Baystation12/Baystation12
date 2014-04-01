@@ -62,7 +62,7 @@ proc/load_alienwhitelist()
 		usr << "\red Unable to connect to whitelist database. Please try again later.<br>"
 		return 0
 	else
-		var/DBQuery/query = dbcon.NewQuery("SELECT species FROM whitelist WHERE ckey='[M.ckey]'")
+		var/DBQuery/query = dbcon.NewQuery("SELECT species FROM whitelist WHERE ckey='[M.key]'")
 		query.Execute()
 
 		while(query.NextRow())

@@ -183,11 +183,21 @@
 			I.color = UI_style_color_new
 			I.alpha = UI_style_alpha_new
 
-
-
 	if(alert("Like it? Save changes?",,"Yes", "No") == "Yes")
 		prefs.UI_style = UI_style_new
 		prefs.UI_style_alpha = UI_style_alpha_new
 		prefs.UI_style_color = UI_style_color_new
 		prefs.save_preferences()
 		usr << "UI was saved"
+
+/client/verb/toggle_media()
+	set name = "Hear/Silence Streaming"
+	set category = "Preferences"
+	set desc = "Toggle hearing streaming media (radios, jukeboxes, etc)"
+
+	prefs.sound ^= SOUND_STREAMING
+	prefs.save_preferences()
+	usr << "You will [(prefs.toggles & SOUND_STREAMING) ? "now" : "no longer"] hear streamed media."
+	// Restart.
+	media.stop_music()
+	media.update_music()

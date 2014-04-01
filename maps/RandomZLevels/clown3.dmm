@@ -144,7 +144,7 @@
 "cN" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/planet/clown)
 "cO" = (/obj/structure/table,/obj/item/weapon/pen,/turf/simulated/floor,/area/planet/clown)
 "cP" = (/obj/effect/landmark/corpse/mime,/turf/simulated/floor,/area/planet/clown)
-"cQ" = (/obj/structure/rack,/obj/item/clothing/head/bowler,/turf/simulated/floor,/area/planet/clown)
+"cQ" = (/obj/structure/rack,/obj/item/clothing/head/bowlerhat,/turf/simulated/floor,/area/planet/clown)
 "cR" = (/obj/effect/landmark/corpse/clown,/obj/effect/decal/cleanable/blood,/turf/unsimulated/floor/plating/snow,/area/planet/clown)
 "cS" = (/obj/structure/table,/obj/item/weapon/crossbow/french,/turf/simulated/floor,/area/planet/clown)
 "cT" = (/turf/simulated/floor{icon_state = "floorgrime"},/area/planet/clown)

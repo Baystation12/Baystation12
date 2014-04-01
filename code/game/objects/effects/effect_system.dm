@@ -33,6 +33,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 /obj/effect/proc/delete()
 	loc = null
 	if(reagents)
+		reagents.my_atom = null
 		reagents.delete()
 	return
 
@@ -47,10 +48,11 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		return
 	return
 
-/obj/effect/effect/water/Del()
+/obj/effect/effect/water/Destroy()
 	//var/turf/T = src.loc
 	//if (istype(T, /turf))
 	//	T.firelevel = 0 //TODO: FIX
+	src.delete()
 	..()
 	return
 
@@ -164,7 +166,7 @@ steam.start() -- spawns the effect
 		delete()
 	return
 
-/obj/effect/effect/sparks/Del()
+/obj/effect/effect/sparks/Destroy()
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
@@ -775,7 +777,62 @@ steam.start() -- spawns the effect
 		src.processing = 0
 		src.on = 0
 
-
+/datum/effect/effect/system/ion_trail_follow/space_trail
+	var/turf/oldloc // secondary ion trail loc
+	var/turf/currloc
+/datum/effect/effect/system/ion_trail_follow/space_trail/start()
+	if(!src.on)
+		src.on = 1
+		src.processing = 1
+	if(src.processing)
+		src.processing = 0
+		spawn(0)
+			var/turf/T = get_turf(src.holder)
+			if(currloc != T)
+				switch(holder.dir)
+					if(NORTH)
+						src.oldposition = T
+						src.oldposition = get_step(oldposition, SOUTH)
+						src.oldloc = get_step(oldposition,EAST)
+						//src.oldloc = get_step(oldloc, SOUTH)
+					if(SOUTH) // More difficult, offset to the north!
+						src.oldposition = get_step(holder,NORTH)
+						src.oldposition = get_step(oldposition,NORTH)
+						src.oldloc = get_step(oldposition,EAST)
+						//src.oldloc = get_step(oldloc,NORTH)
+					if(EAST) // Just one to the north should suffice
+						src.oldposition = T
+						src.oldposition = get_step(oldposition, WEST)
+						src.oldloc = get_step(oldposition,NORTH)
+						//src.oldloc = get_step(oldloc,WEST)
+					if(WEST) // One to the east and north from there
+						src.oldposition = get_step(holder,EAST)
+						src.oldposition = get_step(oldposition,EAST)
+						src.oldloc = get_step(oldposition,NORTH)
+						//src.oldloc = get_step(oldloc,EAST)
+				if(istype(T, /turf/space))
+					var/obj/effect/effect/ion_trails/I = new /obj/effect/effect/ion_trails(src.oldposition)
+					var/obj/effect/effect/ion_trails/II = new /obj/effect/effect/ion_trails(src.oldloc)
+					//src.oldposition = T
+					I.dir = src.holder.dir
+					II.dir = src.holder.dir
+					flick("ion_fade", I)
+					flick("ion_fade", II)
+					I.icon_state = "blank"
+					II.icon_state = "blank"
+					spawn( 20 )
+						if(I) I.delete()
+						if(II) II.delete()
+				spawn(2)
+					if(src.on)
+						src.processing = 1
+						src.start()
+			else
+				spawn(2)
+					if(src.on)
+						src.processing = 1
+						src.start()
+			currloc = T
 
 
 /////////////////////////////////////////////
@@ -863,7 +920,7 @@ steam.start() -- spawns the effect
 	return
 
 // on delete, transfer any reagents to the floor
-/obj/effect/effect/foam/Del()
+/obj/effect/effect/foam/Destroy()
 	if(!metal && reagents)
 		for(var/atom/A in oview(0,src))
 			if(A == src)
@@ -991,7 +1048,7 @@ steam.start() -- spawns the effect
 
 
 
-	Del()
+	Destroy()
 
 		density = 0
 		update_nearby_tiles(1)
@@ -1058,19 +1115,10 @@ steam.start() -- spawns the effect
 
 
 	proc/update_nearby_tiles(need_rebuild)
-		if(!air_master) return 0
+		if(!air_master)
+			return 0
 
-		var/turf/simulated/source = get_turf(src)
-		var/turf/simulated/north = get_step(source,NORTH)
-		var/turf/simulated/south = get_step(source,SOUTH)
-		var/turf/simulated/east = get_step(source,EAST)
-		var/turf/simulated/west = get_step(source,WEST)
-
-		if(istype(source)) air_master.tiles_to_update |= source
-		if(istype(north)) air_master.tiles_to_update |= north
-		if(istype(south)) air_master.tiles_to_update |= south
-		if(istype(east)) air_master.tiles_to_update |= east
-		if(istype(west)) air_master.tiles_to_update |= west
+		air_master.mark_for_update(get_turf(src))
 
 		return 1
 
@@ -1170,7 +1218,7 @@ steam.start() -- spawns the effect
 		del(src)
 	return
 
-/obj/effects/sparkels/Del()
+/obj/effects/sparkels/Destroy()
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(3000,100)
