@@ -980,7 +980,7 @@
 				update_inv_w_uniform(0)
 				update_inv_wear_suit()
 		else
-			if(overeatduration > 500)
+			if(overeatduration > 500 && !(species.flags & IS_SYNTHETIC) && !(species.flags & IS_PLANT))
 				src << "\red You suddenly feel blubbery!"
 				mutations.Add(FAT)
 				update_body()

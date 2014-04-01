@@ -38,8 +38,8 @@ var/list/whitelist = list()
 		return 1
 	if(species == "human" || species == "Human")
 		return 1
-	if(species == "machine" || species == "Machine")
-		return 1
+//	if(species == "machine" || species == "Machine")
+//		return 1
 	if(check_rights(R_ADMIN, 0))
 		return 1
 	if(!alien_whitelist)
@@ -76,7 +76,7 @@ client/proc/get_alienwhitelist()
 	if(length(player) == 0)
 		return
 	player += " - "
-	player += input("Input alien species, e.g. Soghun, Tajaran, Skrell, Diona") as text
+	player += input("Input alien species, e.g. Soghun, Tajaran, Skrell, Diona, Machine") as text
 	player += " ,added by [src.key]\n"
 	if(fexists(path))
 		text2file(player,path)
