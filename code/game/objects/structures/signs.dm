@@ -175,22 +175,6 @@
 	desc = "A warning sign which reads 'HYDROPONICS'"
 	icon_state = "hydro1"
 
-//Leshiy CenCom
-/obj/structure/sign/mark
-	layer = 2
-	icon = 'icons/misc/mark.dmi'
-	name = "\improper Symbol"
-	desc = "You look at a symbol"
-	icon_state = "b1"
-
-//Leshiy CenCom
-/obj/structure/sign/marksymbol_b
-	layer = 2
-	icon = 'icons/misc/blue_symbol.dmi'
-	name = "\improper Symbol"
-	desc = "You look at a blue symbol"
-	icon_state = "C"
-
 /obj/structure/sign/directions/science
 	name = "\improper Science department"
 	desc = "A direction sign, pointing out which way Science department is."
