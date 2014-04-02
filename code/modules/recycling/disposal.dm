@@ -135,7 +135,7 @@
 
 	// mouse drop another mob or self
 	//
-	MouseDrop_T(mob/target, mob/user)
+	proc/MouseDrop_T2(mob/target, mob/user)
 		if (!istype(target) || target.buckled || get_dist(user, src) > 1 || get_dist(user, target) > 1 || user.stat || istype(user, /mob/living/silicon/ai))
 			return
 		if(isanimal(user) && target != user) return //animals cannot put mobs other than themselves into disposal
@@ -177,6 +177,45 @@
 
 		update()
 		return
+
+	//tc, temporary hack
+	MouseDrop_T(atom/A, mob/user)
+		if(ismob(A))
+			MouseDrop_T2(A, user)
+		else if(istype(A, /obj/structure/closet/body_bag))
+			var/obj/structure/closet/body_bag/target = A
+
+			if(get_dist(user, src) > 1 || get_dist(user, target) > 1 || user.stat || istype(user, /mob/living/silicon/ai)) return
+			if(isanimal(user)) return
+			src.add_fingerprint(user)
+			var/target_loc = target.loc
+			var/msg
+
+			if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis) return
+			for (var/mob/V in viewers(usr))
+				V.show_message("[usr] starts stuffing [target.name] into the disposal.", 3)
+			if(!do_after(usr, 20))
+				return
+			if(target_loc != target.loc)
+				return
+
+			if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis) return
+			msg = "[user.name] stuffs [target.name] into the [src]!"
+			user << "You stuff [target.name] into the [src]!"
+
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has placed [target.name] () in disposals.</font>")
+			//target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been placed in disposals by [user.name] ([user.ckey])</font>")
+			//msg_admin_attack("[user] ([user.ckey]) placed [target] ([target.ckey]) in a disposals unit. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
+
+			target.loc = src
+
+			for (var/mob/C in viewers(src))
+				if(C == user)
+					continue
+				C.show_message(msg, 3)
+
+			update()
+			return
 
 	// can breath normally in the disposal
 	alter_health()
