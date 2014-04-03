@@ -935,55 +935,62 @@ var/list/ghostteleportlocs = list()
 
 //Engineering
 
-/area/engine
-	engine_smes
-		name = "Engineering SMES"
-		icon_state = "engine_smes"
-//		requires_power = 0//This area only covers the batteries and they deal with their own power
+/area/engine/engine_smes
+	name = "Engineering SMES"
+	icon_state = "engine_smes"
+//	requires_power = 0//This area only covers the batteries and they deal with their own power
 
-	engine_room
-		name = "\improper Engine Room"
-		icon_state = "engine"
+/area/engine/engine_room
+	name = "\improper Engine Room"
+	icon_state = "engine"
 
-	engine_airlock
-		name = "\improper Engine Room Airlock"
-		icon_state = "engine"
+/area/engine/engine_airlock
+	name = "\improper Engine Room Airlock"
+	icon_state = "engine"
 
-	engine_monitoring
-		name = "\improper Engine Monitoring Room"
-		icon_state = "engine_monitoring"
+/area/engine/engine_monitoring
+	name = "\improper Engine Monitoring Room"
+	icon_state = "engine_monitoring"
 
-	engineering_monitoring
-		name = "\improper Engineering Monitoring Room"
-		icon_state = "engine_monitoring"
+/area/engine/engineering_monitoring
+	name = "\improper Engineering Monitoring Room"
+	icon_state = "engine_monitoring"
 
-	engineering
-		name = "Engineering"
-		icon_state = "engine_smes"
+/area/engine/atmos_monitoring
+	name = "\improper Atmospherics Monitoring Room"
+	icon_state = "engine_monitoring"
+	
+/area/engine/engineering
+	name = "Engineering"
+	icon_state = "engine_smes"
 
-	engineering_foyer
-		name = "\improper Engineering Foyer"
-		icon_state = "engine"
+/area/engine/engineering_foyer
+	name = "\improper Engineering Foyer"
+	icon_state = "engine"
 
-	break_room
-		name = "\improper Engineering Break Room"
-		icon_state = "engine"
+/area/engine/break_room
+	name = "\improper Engineering Break Room"
+	icon_state = "engine"
 
-	chiefs_office
-		name = "\improper Chief Engineer's office"
-		icon_state = "engine_control"
+/area/engine/chiefs_office
+	name = "\improper Chief Engineer's office"
+	icon_state = "engine_control"
 
-	hallway
-		name = "\improper Engineering Hallway"
-		icon_state = "engine_hallway"
+/area/engine/hallway
+	name = "\improper Engine Hallway"
+	icon_state = "engine_hallway"
+	
+/area/engine/hallwaya
+	name = "\improper Engineering Hallway"
+	icon_state = "engine_hallway"	
 
-	workshop
-		name = "\improper Engineering Workshop"
-		icon_state = "engine_storage"
+/area/engine/workshop
+	name = "\improper Engineering Workshop"
+	icon_state = "engine_storage"
 
-	locker_room
-		name = "\improper Engineering Locker Room"
-		icon_state = "engine_storage"
+/area/engine/locker_room
+	name = "\improper Engineering Locker Room"
+	icon_state = "engine_storage"
 
 
 //Solars
