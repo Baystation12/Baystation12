@@ -1209,8 +1209,7 @@
 
 			if( (cell_charge/CELLRATE+perapc) >= lastused_total)		// can we draw enough from cell+grid to cover last usage?
 
-				cell_charge = min(cell_maxcharge, cell_charge + CELLRATE * perapc)	//recharge with what we can
-				cell.charge = cell_charge
+				cell.give(cell_charge + CELLRATE * perapc)  //recharge with what we can
 				add_load(perapc)		// so draw what we can from the grid
 				charging = 0
 
