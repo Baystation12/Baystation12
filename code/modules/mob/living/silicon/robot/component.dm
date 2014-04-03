@@ -164,7 +164,7 @@
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
-	w_class = 1.0
+	w_class = 2.0
 	throw_speed = 5
 	throw_range = 10
 	m_amt = 200
