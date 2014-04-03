@@ -218,6 +218,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define PASSGLASS	2
 #define PASSGRILLE	4
 #define PASSBLOB	8
+#define PASSCRAWL	16  //ползанье
 
 //turf-only flags
 #define NOJAUNT		1

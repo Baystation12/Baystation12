@@ -1294,12 +1294,13 @@
 	set name = "Crawl"
 	set category = "IC"
 
+	if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH) || buckled) return
+
 	crawling = !crawling
 	if(crawling)
-		layer = 2.7
-		pass_flags += PASSTABLE
+		pass_flags += PASSCRAWL
 	else
-		layer = 4.0
-		pass_flags -= PASSTABLE
+		pass_flags -= PASSCRAWL
+
 	update_canmove()
 	src << "\blue You are now [crawling ? "crawling" : "getting up"]"
