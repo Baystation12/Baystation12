@@ -1041,7 +1041,7 @@
 			updatehealth()	//TODO
 			if(!in_stasis)
 				handle_organs()	//Optimized.
-				handle_blood()  
+				handle_blood()
 
 			if(health <= config.health_threshold_dead || brain_op_stage == 4.0)
 				death()
@@ -1118,7 +1118,7 @@
 				E = get_visible_implants(0)
 				if(!E.len)
 					embedded_flag = 0
-				
+
 
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
@@ -1329,7 +1329,7 @@
 							see_invisible = SEE_INVISIBLE_MINIMUM
 				if(istype(G,/obj/item/clothing/glasses/night))
 					see_invisible = SEE_INVISIBLE_MINIMUM
-					client.screen += global_hud.nvg
+//					client.screen += global_hud.nvg
 
 	/* HUD shit goes here, as long as it doesn't modify sight flags */
 	// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
@@ -1347,7 +1347,7 @@
 			else if(!seer)
 				see_invisible = SEE_INVISIBLE_LIVING
 
-			
+
 
 			if(healths)
 				if (analgesic)
@@ -1501,7 +1501,7 @@
 					V.activate(src)
 				// activate may have deleted the virus
 				if(!V) continue
-	
+
 				// check if we're immune
 				if(V.antigen & src.antibodies)
 					V.dead = 1

@@ -6057,7 +6057,7 @@
 "cmy" = (/obj/structure/table,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/reagentgrinder,/turf/simulated/floor{icon_state = "white"},/area/toxins/xenobiology)
 "cmz" = (/obj/structure/stool/bed/chair{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor{icon_state = "white"},/area/toxins/xenobiology)
 "cmA" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor{icon_state = "white"},/area/toxins/xenobiology)
-"cmB" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 8; on = 1},/obj/machinery/smartfridge/extract,/turf/simulated/floor{dir = 2; icon_state = "whitecorner"},/area/toxins/xenobiology)
+"cmB" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 8; on = 1},/obj/machinery/smartfridge/secure/extract,/turf/simulated/floor{dir = 2; icon_state = "whitecorner"},/area/toxins/xenobiology)
 "cmC" = (/obj/machinery/optable{name = "Xenobiology Operating Table"},/obj/machinery/status_display{density = 0; layer = 4; pixel_x = 0; pixel_y = 32},/obj/machinery/light{dir = 1},/turf/simulated/floor{icon_state = "whitehall"; dir = 2},/area/toxins/xenobiology)
 "cmD" = (/obj/machinery/computer/operating{name = "Xenobiology Operating Computer"},/turf/simulated/floor{dir = 8; icon_state = "whitecorner"},/area/toxins/xenobiology)
 "cmE" = (/obj/structure/stool/bed/chair,/obj/item/weapon/storage/fancy/cigarettes,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/maintenance/asmaint2)

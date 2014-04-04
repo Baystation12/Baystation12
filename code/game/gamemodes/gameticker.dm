@@ -58,7 +58,7 @@ var/global/datum/controller/gameticker/ticker
 				vote.process()
 			if(going)
 				pregame_timeleft--
-				if(pregame_timeleft == config.vote_autogamemode_timeleft)
+			if(pregame_timeleft == config.vote_autogamemode_timeleft)
 				if(!vote.time_remaining)
 					vote.autogamemode()	//Quit calling this over and over and over and over.
 					while(vote.time_remaining)
