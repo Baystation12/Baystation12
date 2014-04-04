@@ -257,7 +257,7 @@ proc/n_inrange(var/num, var/min=-1, var/max=1)
 		var/list/dat = list()
 		while (i < lenh)
 			var/found = findtext(haystack, a, i, 0)
-			//diary << "findtext([haystack], [a], [i], 0)=[found]"
+			//log_misc("findtext([haystack], [a], [i], 0)=[found]")
 			if (found == 0) // Not found
 				break
 			else
@@ -265,9 +265,9 @@ proc/n_inrange(var/num, var/min=-1, var/max=1)
 					dat+=found
 					count+=1
 				else
-					//diary << "Script found [a] [count] times, aborted"
+					//log_misc("Script found [a] [count] times, aborted")
 					break
-			//diary << "Found [a] at [found]! Moving up..."
+			//log_misc("Found [a] at [found]! Moving up...")
 			i = found + lena
 		if (count == 0)
 			return haystack
@@ -281,11 +281,11 @@ proc/n_inrange(var/num, var/min=-1, var/max=1)
 			//CharCopy (dest + targetIndex, src + sourceIndex, count);
 			//CharCopy (dest + curPos, source + lastReadPos, precopy);
 			buf+=copytext(haystack,lastReadPos,precopy)
-			diary << "buf+=copytext([haystack],[lastReadPos],[precopy])"
-			diary<<"[buf]"
+			log_misc("buf+=copytext([haystack],[lastReadPos],[precopy])")
+			log_misc("[buf]")
 			lastReadPos = dat[i] + lena
 			//CharCopy (dest + curPos, replace, newValue.length);
 			buf+=b
-			diary<<"[buf]"
+			log_misc("[buf]")
 		buf+=copytext(haystack,lastReadPos, 0)
 		return buf

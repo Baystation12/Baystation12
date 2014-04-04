@@ -460,6 +460,7 @@ var/global/list/uneatable = list(
 	move_self = 1 //Do we move on our own?
 	grav_pull = 10 //How many tiles out do we pull?
 	consume_range = 3 //How many tiles out do we eat
+	var/last_boom = 0
 
 /obj/machinery/singularity/narsie/large
 	name = "Nar-Sie"
@@ -490,9 +491,11 @@ var/global/list/uneatable = list(
 		return 0
 	if (istype(A,/mob/living))//Mobs get gibbed
 		A:gib()
-	else if(istype(A,/obj/))
-		A:ex_act(1.0)
-		if(A) del(A)
+	else if(istype(A,/obj))
+		var/obj/O = A
+		machines -= O
+		processing_objects -= O
+		O.loc = null
 	else if(isturf(A))
 		var/turf/T = A
 		if(T.intact)
@@ -502,6 +505,9 @@ var/global/list/uneatable = list(
 				if(O.invisibility == 101)
 					src.consume(O)
 		A:ChangeTurf(/turf/space)
+	if(last_boom + 100 < world.time && prob(5))
+		explosion(loc, -1, -1, -1, 1, 0) //Since we're not exploding everything in consume() toss out an explosion effect every now and again
+		last_boom = world.time
 	return
 
 /obj/machinery/singularity/narsie/ex_act() //No throwing bombs at it either. --NEO

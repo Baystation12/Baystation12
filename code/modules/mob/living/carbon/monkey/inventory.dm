@@ -58,6 +58,8 @@
 					message = text("\red <B>[] is trying to remove []'s internals</B>", source, target)
 				else
 					message = text("\red <B>[] is trying to set on []'s internals.</B>", source, target)
+			if("pockets")
+				message = text("\red <B>[] is trying to empty []'s pockets</B>",source, target)
 			else
 		for(var/mob/M in viewers(target, null))
 			M.show_message(message, 1)

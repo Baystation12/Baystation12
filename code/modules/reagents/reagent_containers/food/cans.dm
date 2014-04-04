@@ -14,7 +14,7 @@
 		if(!CanEat(user, M, src, "drink")) return
 		
 		if (canopened == 0)
-			user << "<span class='notice'> You need to open the drink!</span>"
+			user << "<span class='notice'>You need to open the drink!</span>"
 			return
 		var/datum/reagents/R = src.reagents
 		var/fillevel = gulp_size
@@ -26,6 +26,7 @@
 		if(M == user)
 			M << "\blue You swallow a gulp of [src]."
 			if(reagents.total_volume)
+				reagents.trans_to_ingest(M, gulp_size)
 				reagents.reaction(M, INGEST)
 				spawn(5)
 					reagents.trans_to(M, gulp_size)
@@ -33,7 +34,11 @@
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 			return 1
 		else if( istype(M, /mob/living/carbon/human) )
+			if (canopened == 0)
+				user << "<span class='notice'> You need to open the drink!</span>"
+				return
 
+		else if (canopened == 1)
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message("\red [user] attempts to feed [M] [src].", 1)
 			if(!do_mob(user, M)) return
@@ -45,9 +50,7 @@
 			msg_admin_attack("[key_name(user)] fed [key_name(M)] with [src.name] Reagents: [reagentlist(src)] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
 			if(reagents.total_volume)
-				reagents.reaction(M, INGEST)
-				spawn(5)
-					reagents.trans_to(M, gulp_size)
+				reagents.trans_to_ingest(M, gulp_size)
 
 			if(isrobot(user)) //Cyborg modules that include drinks automatically refill themselves, but drain the borg's cell
 				var/mob/living/silicon/robot/bro = user
@@ -75,8 +78,10 @@
 				user << "\red [src] is full."
 				return
 
-			var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
-			user << "\blue You fill [src] with [trans] units of the contents of [target]."
+				var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
+				user << "\blue You fill [src] with [trans] units of the contents of [target]."
+		if (canopened == 0)
+			user << "<span class='notice'>You need to open the drink!</span>"
 
 		else if(target.is_open_container()) //Something like a glass. Player probably wants to transfer TO it.
 			if(!reagents.total_volume)

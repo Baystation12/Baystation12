@@ -206,7 +206,7 @@
 		for(var/obj/effect/landmark/zcontroller/c in controller)
 			if(c.down)
 				var/turf/below = locate(src.x, src.y, c.down_target)
-				if((below.zone || zone) && !istype(below, /turf/space)) // dont make open space into space, its pointless and makes people drop out of the station
+				if((air_master.has_valid_zone(below) || air_master.has_valid_zone(src)) && !istype(below, /turf/space)) // dont make open space into space, its pointless and makes people drop out of the station
 					var/turf/W = src.ChangeTurf(/turf/simulated/floor/open)
 					var/list/temp = list()
 					temp += W
@@ -216,13 +216,24 @@
 
 	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
 
+	//world << "Replacing [src.type] with [N]"
+
+	if(connections) connections.erase_all()
+
+	if(istype(src,/turf/simulated))
+		//Yeah, we're just going to rebuild the whole thing.
+		//Despite this being called a bunch during explosions,
+		//the zone will only really do heavy lifting once.
+		var/turf/simulated/S = src
+		if(S.zone) S.zone.rebuild()
+
 	if(ispath(N, /turf/simulated/floor))
 		//if the old turf had a zone, connect the new turf to it as well - Cael
 		//Adjusted by SkyMarshal 5/10/13 - The air master will handle the addition of the new turf.
-		if(zone)
-			zone.RemoveTurf(src)
-			if(!zone.CheckStatus())
-				zone.SetStatus(ZONE_ACTIVE)
+		//if(zone)
+		//	zone.RemoveTurf(src)
+		//	if(!zone.CheckStatus())
+		//		zone.SetStatus(ZONE_ACTIVE)
 
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 		//W.Assimilate_Air()
@@ -236,16 +247,16 @@
 			W.RemoveLattice()
 
 		if(air_master)
-			air_master.AddTurfToUpdate(src)
+			air_master.mark_for_update(src)
 
 		W.levelupdate()
 		return W
 
 	else
-		if(zone)
-			zone.RemoveTurf(src)
-			if(!zone.CheckStatus())
-				zone.SetStatus(ZONE_ACTIVE)
+		//if(zone)
+		//	zone.RemoveTurf(src)
+		//	if(!zone.CheckStatus())
+		//		zone.SetStatus(ZONE_ACTIVE)
 
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
 		W.lighting_lumcount += old_lumcount
@@ -254,7 +265,7 @@
 			lighting_controller.changed_turfs += W
 
 		if(air_master)
-			air_master.AddTurfToUpdate(src)
+			air_master.mark_for_update(src)
 
 		W.levelupdate()
 		return W
