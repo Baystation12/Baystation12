@@ -116,10 +116,10 @@
 		if(scrubbing)
 			// Are we scrubbing gasses that are present?
 			if(\
-				(scrub_Toxins && environment.toxins > 0) ||\
-				(scrub_CO2 && environment.carbon_dioxide > 0) ||\
+				(scrub_Toxins && environment.toxins > 0.001) ||\
+				(scrub_CO2 && environment.carbon_dioxide > 0.001) ||\
 				(scrub_N2O && environment.trace_gases.len > 0) ||\
-				(scrub_O2 && environment.oxygen > 0))
+				(scrub_O2 && environment.oxygen > 0.001))
 				var/transfer_moles = min(1, volume_rate/environment.volume)*environment.total_moles()
 
 				//Take a gas sample
