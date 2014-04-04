@@ -211,7 +211,7 @@ datum/controller/game_controller/proc/process()
 
 				//EVENTS
 				timer = world.timeofday
-				process_events()
+				processEvents()
 				events_cost = (world.timeofday - timer) / 10
 
 				//TICKER
@@ -309,16 +309,16 @@ datum/controller/game_controller/proc/process_pipenets()
 
 		nanomanager.processing_uis = nanomanager.processing_uis - Nanoui
 
-datum/controller/game_controller/proc/process_events()
+/datum/controller/game_controller/proc/processEvents()
 	last_thing_processed = /datum/event
-	var/i = 1
-	while(i<=events.len)
-		var/datum/event/Event = events[i]
-		if(Event)
+
+	for (var/datum/event/Event in events)
+		if (Event)
 			Event.process()
-			i++
 			continue
-		events.Cut(i,i+1)
+
+		events = events - Event
+
 	checkEvent()
 
 datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
