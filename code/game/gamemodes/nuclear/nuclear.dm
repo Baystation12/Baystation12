@@ -6,7 +6,7 @@
 	name = "nuclear emergency"
 	config_tag = "nuclear"
 	required_players = 1
-	required_players_secret = 25 // 25 players - 5 players to be the nuke ops = 20 players remaining
+	required_players_secret = 1 // 25 players - 5 players to be the nuke ops = 20 players remaining
 	required_enemies = 1
 	recommended_enemies = 5
 
@@ -230,6 +230,7 @@
 			obj_count++
 	else
 		syndicate.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+		syndicate.current.faction = "syndicate"
 	return
 
 

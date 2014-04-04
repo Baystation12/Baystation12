@@ -543,7 +543,7 @@ datum/mind
 						log_admin("[key_name_admin(usr)] has de-traitor'ed [current].")
 
 		else if (href_list["revolution"])
-			current.hud_updateflag |= (1 << SPECIALROLE_HUD)   
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
 
 			switch(href_list["revolution"])
 				if("clear")
@@ -777,6 +777,7 @@ datum/mind
 						else
 							current.real_name = "Gorlex Maradeurs Operative #[ticker.mode.syndicates.len-1]"
 						special_role = "Syndicate"
+						current.faction = "syndicate"
 						current << "\blue You are a Gorlex Maradeurs agent!"
 
 						if(config.objectives_disabled)
@@ -1069,6 +1070,7 @@ datum/mind
 			else
 				current.real_name = "Gorlex Maradeurs Operative #[ticker.mode.syndicates.len-1]"
 			special_role = "Syndicate"
+			current.faction = "syndicate"
 			assigned_role = "MODE"
 			current << "\blue You are a Gorlex Maradeurs agent!"
 			ticker.mode.forge_syndicate_objectives(src)
