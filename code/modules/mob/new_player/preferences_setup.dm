@@ -13,6 +13,7 @@ datum/preferences
 		randomize_hair_color("facial")
 		randomize_eyes_color()
 		underwear = rand(1,underwear_m.len)
+		undershirt = rand(1,undershirt_t.len)
 		backbag = 2
 		age = rand(AGE_MIN,AGE_MAX)
 		if(H)
@@ -190,6 +191,10 @@ datum/preferences
 		var/icon/underwear_s = null
 		if(underwear > 0 && underwear < 7 && current_species.flags & HAS_UNDERWEAR)
 			underwear_s = new/icon("icon" = 'icons/mob/human.dmi', "icon_state" = "underwear[underwear]_[g]_s")
+
+		var/icon/undershirt_s = null
+		if(undershirt > 0 && undershirt < 5 && current_species.flags & HAS_UNDERWEAR)
+			undershirt_s = new/icon("icon" = 'icons/mob/human.dmi', "icon_state" = "undershirt[undershirt]_s")
 
 		var/icon/clothes_s = null
 		var/uniform_dmi='icons/mob/uniform.dmi'
@@ -626,6 +631,8 @@ datum/preferences
 		preview_icon.Blend(eyes_s, ICON_OVERLAY)
 		if(underwear_s)
 			preview_icon.Blend(underwear_s, ICON_OVERLAY)
+		if(undershirt_s)
+			preview_icon.Blend(undershirt_s, ICON_OVERLAY)
 		if(clothes_s)
 			preview_icon.Blend(clothes_s, ICON_OVERLAY)
 		preview_icon_front = new(preview_icon, dir = SOUTH)
@@ -633,4 +640,5 @@ datum/preferences
 
 		del(eyes_s)
 		del(underwear_s)
+		del(undershirt_s)
 		del(clothes_s)
