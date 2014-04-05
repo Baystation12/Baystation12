@@ -39,6 +39,8 @@ var/global/list/skin_styles_female_list = list()		//unused
 	//Underwear
 var/global/list/underwear_m = list("White", "Grey", "Green", "Blue", "Black", "Mankini", "None") //Curse whoever made male/female underwear diffrent colours
 var/global/list/underwear_f = list("Red", "White", "Yellow", "Blue", "Black", "Thong", "None")
+	//undershirt
+var/global/list/undershirt_t = list("Black Tank top", "White Tank top", "Black shirt", "White shirt", "None")
 	//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt")
 
