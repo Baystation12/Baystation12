@@ -3,7 +3,7 @@
 	name = "universal recorder"
 	icon_state = "taperecorderidle"
 	item_state = "analyzer"
-	w_class = 1.0
+	w_class = 2.0
 	m_amt = 60
 	g_amt = 30
 	var/emagged = 0.0

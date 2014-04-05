@@ -663,3 +663,22 @@
 
 	for(var/mob/M in currentarea)
 		M << "FIGHT!"
+
+//Holorack
+
+/obj/structure/rack/holorack
+	name = "rack"
+	desc = "Different from the Middle Ages version."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "rack"
+
+/obj/structure/rack/holorack/attack_alien(mob/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
+	return attack_hand(user)
+
+/obj/structure/rack/holorack/attack_hand(mob/user as mob)
+	return
+
+/obj/structure/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/weapon/wrench))
+		user << "It's a holorack!  You can't unwrench it!"
+		return

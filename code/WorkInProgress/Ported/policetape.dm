@@ -4,7 +4,7 @@
 	icon = 'icons/policetape.dmi'
 	icon_state = "rollstart"
 	flags = FPRINT
-	w_class = 1.0
+	w_class = 2.0
 	var/turf/start
 	var/turf/end
 	var/tape_type = /obj/item/tape

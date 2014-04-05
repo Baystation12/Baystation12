@@ -26,16 +26,20 @@
 //		lighting_state = 4
 		//has_gravity = 0    // Space has gravity.  Because.. because.
 
-	if(!requires_power)
+	if(requires_power)
+		luminosity = 0
+	else
 		power_light = 0			//rastaf0
 		power_equip = 0			//rastaf0
 		power_environ = 0		//rastaf0
+		luminosity = 1
 		lighting_use_dynamic = 0
 
 	..()
 
 //	spawn(15)
 	power_change()		// all machines set to current power level, also updates lighting icon
+	InitializeLighting()
 
 
 /area/proc/poweralert(var/state, var/obj/source as obj)
@@ -240,7 +244,6 @@
 	return used
 
 /area/proc/clear_usage()
-
 	master.used_equip = 0
 	master.used_light = 0
 	master.used_environ = 0

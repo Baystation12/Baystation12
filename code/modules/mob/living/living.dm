@@ -359,8 +359,8 @@
 				return
 			else
 				if(Debug)
-					diary <<"pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]"
-					diary <<"REPORT THIS"
+					log_debug("pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]")
+					log_debug("REPORT THIS")
 
 		/////
 		if(pulling && pulling.anchored)

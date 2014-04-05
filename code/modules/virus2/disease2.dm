@@ -10,6 +10,7 @@
 	var/list/datum/disease2/effectholder/effects = list()
 	var/antigen = 0 // 16 bits describing the antigens, when one bit is set, a cure with that bit can dock here
 	var/max_stage = 4
+	var/list/affected_species = list("Human","Unathi","Skrell","Tajaran")
 
 /datum/disease2/disease/New()
 	uniqueID = rand(0,10000)
@@ -30,6 +31,24 @@
 	antigen |= text2num(pick(ANTIGENS))
 	spreadtype = prob(70) ? "Airborne" : "Contact"
 
+	if(all_species.len)
+		affected_species = get_infectable_species()
+
+/proc/get_infectable_species()
+	var/list/meat = list()
+	var/list/res = list()
+	for (var/specie in all_species)
+		var/datum/species/S = all_species[specie]
+		if(!(S.flags & IS_SYNTHETIC))
+			meat += S.name
+	if(meat.len)
+		var/num = rand(1,meat.len)
+		for(var/i=0,i<num,i++)
+			var/picked = pick(meat)
+			meat -= picked
+			res += picked
+	return res
+
 /datum/disease2/disease/proc/activate(var/mob/living/carbon/mob)
 	if(dead)
 		cure(mob)
@@ -45,8 +64,10 @@
 		if(prob(1))
 			majormutate()
 
-	//Space antibiotics stop disease completely (temporary)
+	//Space antibiotics stop disease completely
 	if(mob.reagents.has_reagent("spaceacillin"))
+		if(stage == 1 && prob(20))
+			src.cure()
 		return
 
 	//Virus food speeds up disease progress
@@ -94,6 +115,8 @@
 	if (prob(5))
 		antigen = text2num(pick(ANTIGENS))
 		antigen |= text2num(pick(ANTIGENS))
+	if (prob(5) && all_species.len)
+		affected_species = get_infectable_species()
 
 /datum/disease2/disease/proc/getcopy()
 	var/datum/disease2/disease/disease = new /datum/disease2/disease
@@ -102,6 +125,7 @@
 	disease.stageprob = stageprob
 	disease.antigen   = antigen
 	disease.uniqueID = uniqueID
+	disease.affected_species = affected_species.Copy()
 	for(var/datum/disease2/effectholder/holder in effects)
 		var/datum/disease2/effectholder/newholder = new /datum/disease2/effectholder
 		newholder.effect = new holder.effect.type
@@ -148,14 +172,21 @@ var/global/list/virusDB = list()
 		.= V.fields["name"]
 
 /datum/disease2/disease/proc/get_info()
-	var/r = "GNAv2 based virus lifeform - [name()], #[add_zero("[uniqueID]", 4)]"
-	r += "<BR>Infection rate : [infectionchance * 10]"
-	r += "<BR>Spread form : [spreadtype]"
-	r += "<BR>Progress Speed : [stageprob * 10]"
-	for(var/datum/disease2/effectholder/E in effects)
-		r += "<BR>Effect:[E.effect.name]. Strength : [E.multiplier * 8]. Verosity : [E.chance * 15]. Type : [5-E.stage]."
+	var/r = {"
+	<small>Analysis determined the existence of a GNAv2-based viral lifeform.</small><br>
+	<u>Designation:</u> [name()]<br>
+	<u>Antigen:</u> [antigens2string(antigen)]<br>
+	<u>Transmitted By:</u> [spreadtype]<br>
+	<u>Rate of Progression:</u> [stageprob * 10]<br>
+	<u>Species Affected:</u> [list2text(affected_species, ", ")]<br>
+"}
 
-	r += "<BR>Antigen pattern: [antigens2string(antigen)]"
+	r += "<u>Symptoms:</u><br>"
+	for(var/datum/disease2/effectholder/E in effects)
+		r += "([E.stage]) [E.effect.name]    "
+		r += "<small><u>Strength:</u> [E.multiplier >= 3 ? "Severe" : E.multiplier > 1 ? "Above Average" : "Average"]    "
+		r += "<u>Verosity:</u> [E.chance * 15]</small><br>"
+
 	return r
 
 /datum/disease2/disease/proc/addToDB()
@@ -194,3 +225,10 @@ proc/virus2_greater_infection()
 	candidates = shuffle(candidates)
 
 	infect_mob_random_greater(candidates[1])
+
+proc/virology_letterhead(var/report_name)
+	return {"
+		<center><h1><b>[report_name]</b></h1></center>
+		<center><small><i>[station_name()] Virology Lab</i></small></center>
+		<hr>
+"}

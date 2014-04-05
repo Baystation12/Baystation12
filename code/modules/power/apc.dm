@@ -217,7 +217,7 @@
 // update the APC icon to show the three base states
 // also add overlays for indicator lights
 /obj/machinery/power/apc/update_icon()
-	
+
 	if (!status_overlays)
 		status_overlays = 1
 		status_overlays_lock = new
@@ -235,9 +235,9 @@
 		status_overlays_lock[1] = image(icon, "apcox-0")    // 0=blue 1=red
 		status_overlays_lock[2] = image(icon, "apcox-1")
 
-		status_overlays_charging[1] = image(icon, "apco3-0") 
+		status_overlays_charging[1] = image(icon, "apco3-0")
 		status_overlays_charging[2] = image(icon, "apco3-1")
-		status_overlays_charging[3] = image(icon, "apco3-2")		
+		status_overlays_charging[3] = image(icon, "apco3-2")
 
 		status_overlays_equipment[1] = image(icon, "apco0-0") // 0=red, 1=green, 2=blue
 		status_overlays_equipment[2] = image(icon, "apco0-1")
@@ -248,13 +248,13 @@
 		status_overlays_lighting[2] = image(icon, "apco1-1")
 		status_overlays_lighting[3] = image(icon, "apco1-2")
 		status_overlays_lighting[4] = image(icon, "apco1-3")
-		
+
 		status_overlays_environ[1] = image(icon, "apco2-0")
 		status_overlays_environ[2] = image(icon, "apco2-1")
 		status_overlays_environ[3] = image(icon, "apco2-2")
 		status_overlays_environ[4] = image(icon, "apco2-3")
 
-	
+
 
 	var/update = check_updates() 		//returns 0 if no need to update icons.
 						// 1 if we need to update the icon_state
@@ -280,7 +280,7 @@
 			icon_state = "apcemag"
 		else if(update_state & UPSTATE_WIREEXP)
 			icon_state = "apcewires"
-			
+
 
 
 	if(!(update_state & UPSTATE_ALLGOOD))
@@ -291,7 +291,7 @@
 
 
 	if(update & 2)
-		
+
 		if(overlays.len)
 			overlays = 0
 
@@ -306,7 +306,7 @@
 
 /obj/machinery/power/apc/proc/check_updates()
 
-	var/last_update_state = update_state 
+	var/last_update_state = update_state
 	var/last_update_overlay = update_overlay
 	update_state = 0
 	update_overlay = 0
@@ -349,7 +349,7 @@
 			update_overlay |= APC_UPOVERLAY_EQUIPMENT1
 		else if(equipment == 2)
 			update_overlay |= APC_UPOVERLAY_EQUIPMENT2
-		
+
 		if(!lighting)
 			update_overlay |= APC_UPOVERLAY_LIGHTING0
 		else if(lighting == 1)
@@ -649,6 +649,7 @@
 					user << "\blue You slot your fingers into the APC interface and siphon off some of the stored charge for your own use."
 					if(src.cell.charge < 0) src.cell.charge = 0
 					if(H.nutrition > 500) H.nutrition = 500
+					src.charging = 1
 
 				else
 					user << "\blue You are already fully charged."
@@ -1163,6 +1164,7 @@
 	lastused_equip = area.usage(EQUIP)
 	lastused_environ = area.usage(ENVIRON)
 	if(area.powerupdate)
+		if(debug) log_debug("power update in [area.name] / [name]")
 		area.clear_usage()
 
 	lastused_total = lastused_light + lastused_equip + lastused_environ
@@ -1186,16 +1188,16 @@
 	if(terminal && terminal.powernet)
 		perapc = terminal.powernet.perapc
 
-	//if(debug)
-		//world << "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light]"
+	if(debug)
+		log_debug( "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light]")
 
 	if(cell && !shorted)
-		var/cell_charge = cell.charge
+		//var/cell_charge = cell.charge
 		var/cell_maxcharge = cell.maxcharge
 
 		// draw power from cell as before
 
-		var/cellused = min(cell_charge, CELLRATE * lastused_total)	// clamp deduction to a max, amount left in cell
+		var/cellused = min(cell.charge, CELLRATE * lastused_total)	// clamp deduction to a max, amount left in cell
 		cell.use(cellused)
 
 		if(excess > 0 || perapc > lastused_total)		// if power excess, or enough anyway, recharge the cell
@@ -1206,10 +1208,9 @@
 
 		else		// no excess, and not enough per-apc
 
-			if( (cell_charge/CELLRATE+perapc) >= lastused_total)		// can we draw enough from cell+grid to cover last usage?
+			if( (cell.charge/CELLRATE+perapc) >= lastused_total)		// can we draw enough from cell+grid to cover last usage?
 
-				cell_charge = min(cell_maxcharge, cell_charge + CELLRATE * perapc)	//recharge with what we can
-				cell.charge = cell_charge
+				cell.give(CELLRATE * perapc)	//recharge with what we can
 				add_load(perapc)		// so draw what we can from the grid
 				charging = 0
 
@@ -1232,30 +1233,30 @@
 			longtermpower -= 2
 
 
-		if(cell_charge >= 1250 || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
+		if(cell.charge >= 1250 || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
 			if(autoflag != 3)
 				equipment = autoset(equipment, 1)
 				lighting = autoset(lighting, 1)
 				environ = autoset(environ, 1)
 				autoflag = 3
 				area.poweralert(1, src)
-				if(cell_charge >= 4000)
+				if(cell.charge >= 4000)
 					area.poweralert(1, src)                
-		else if(cell_charge < 1250 && longtermpower < 0)                       // <30%, turn off equipment
+		else if(cell.charge < 1250 && cell.charge > 750 && longtermpower < 0)                       // <30%, turn off equipment
 			if(autoflag != 2)
 				equipment = autoset(equipment, 2)
 				lighting = autoset(lighting, 1)
 				environ = autoset(environ, 1)
 				area.poweralert(0, src)
 				autoflag = 2
-		else if(cell_charge < 750 && longtermpower < 0)        // <15%, turn off lighting & equipment
+		else if(cell.charge < 750 && cell.charge > 10 && longtermpower < 0)        // <15%, turn off lighting & equipment
 			if(autoflag != 1)
 				equipment = autoset(equipment, 2)
 				lighting = autoset(lighting, 2)
 				environ = autoset(environ, 1)
 				area.poweralert(0, src)
 				autoflag = 1
-		else if(cell_charge <= 0)                                   // zero charge, turn all off
+		else if(cell.charge <= 0)                                   // zero charge, turn all off
 			if(autoflag != 0)
 				equipment = autoset(equipment, 0)
 				lighting = autoset(lighting, 0)
@@ -1268,7 +1269,7 @@
 		if(chargemode && charging == 1 && operating)
 			if(excess > 0)		// check to make sure we have enough to charge
 				// Max charge is perapc share, capped to cell capacity, or % per second constant (Whichever is smallest)
-				var/ch = min(perapc*CELLRATE, (cell_maxcharge - cell_charge), (cell_maxcharge*CHARGELEVEL))
+				var/ch = min(perapc*CELLRATE, (cell_maxcharge - cell.charge), (cell_maxcharge*CHARGELEVEL))
 				add_load(ch/CELLRATE) // Removes the power we're taking from the grid
 				cell.give(ch) // actually recharge the cell
 

@@ -35,7 +35,7 @@
 	icon_state = "night"
 	item_state = "glasses"
 	origin_tech = "magnets=2"
-	darkness_view = 3
+	darkness_view = 7
 
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"

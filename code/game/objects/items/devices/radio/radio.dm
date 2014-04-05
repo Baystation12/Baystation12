@@ -742,20 +742,25 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	src.channels = list()
 	src.syndie = 0
 
+	var/mob/living/silicon/robot/D = src.loc
+	if(D.module)
+		for(var/ch_name in D.module.channels)
+			if(ch_name in src.channels)
+				continue
+			src.channels += ch_name
+			src.channels[ch_name] += D.module.channels[ch_name]
 	if(keyslot)
 		for(var/ch_name in keyslot.channels)
 			if(ch_name in src.channels)
 				continue
 			src.channels += ch_name
-			src.channels[ch_name] = keyslot.channels[ch_name]
-
+			src.channels[ch_name] += keyslot.channels[ch_name]
+			
 		if(keyslot.syndie)
 			src.syndie = 1
-	var/mob/living/silicon/robot/Ro = usr
-	if(Ro.module)
-		src.config(Ro.module.channels)
+	
 
-	for (var/ch_name in channels)
+	for (var/ch_name in src.channels)
 		if(!radio_controller)
 			sleep(30) // Waiting for the radio_controller to be created.
 		if(!radio_controller)
