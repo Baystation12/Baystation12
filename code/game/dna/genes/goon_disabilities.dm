@@ -29,6 +29,7 @@
 	desc = "The subject suffers from constant radiation sickness and causes the same on nearby organics."
 	activation_message = "You feel a strange sickness permeate your whole body."
 	deactivation_message = "You no longer feel awful and sick all over."
+	instability=5
 
 	New()
 		..()
@@ -216,6 +217,7 @@
 	desc = "Causes the subject's digestion to create a significant amount of noxious gas."
 	activation_message = "Your stomach grumbles unpleasantly."
 	deactivation_message = "Your stomach stops acting up. Phew!"
+	instability=2
 
 	mutation = M_TOXIC_FARTS
 
@@ -291,6 +293,7 @@
 	desc = "The subject becomes able to convert excess cellular energy into thermal energy."
 	activation_messages = list("You suddenly feel rather hot.")
 	deactivation_messages = list("You no longer feel uncomfortably hot.")
+	instability=5
 
 	spelltype=/obj/effect/proc_holder/spell/targeted/immolate
 
@@ -329,6 +332,7 @@
 	desc = "The subject becomes able to transform the matter of their cells into a liquid state."
 	activation_messages = list("You feel strange and jiggly.")
 	deactivation_messages = list("You feel more solid.")
+	instability=2
 
 	verbtype=/proc/bioproc_melt
 
