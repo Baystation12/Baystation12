@@ -4,7 +4,7 @@
 //Added by Jack Rost
 /obj/item/trash
 	icon = 'icons/obj/trash.dmi'
-	w_class = 1.0
+	w_class = 2.0
 	desc = "This is rubbish."
 	raisins
 		name = "4no raisins"
