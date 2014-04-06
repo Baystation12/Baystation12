@@ -250,7 +250,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(WT.isOn())
-			light("<span class='notice'>[user] insults [name] with [W].</span>")
+			light("<span class='notice'>[user] insults [name] by lighting it with [W].</span>")
 
 	else if(istype(W, /obj/item/weapon/lighter/zippo))
 		var/obj/item/weapon/lighter/zippo/Z = W
@@ -260,7 +260,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	else if(istype(W, /obj/item/weapon/lighter))
 		var/obj/item/weapon/lighter/L = W
 		if(L.lit)
-			light("<span class='notice'>[user] manages to offend their [name] with [W].</span>")
+			light("<span class='notice'>[user] manages to offend their [name] by lighting it with [W].</span>")
 
 	else if(istype(W, /obj/item/weapon/match))
 		var/obj/item/weapon/match/M = W
