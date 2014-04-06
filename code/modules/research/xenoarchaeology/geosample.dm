@@ -57,44 +57,45 @@
 
 	age = rand(1,999)
 
-	switch(container.mineralName)
-		if("Uranium")
-			age_million = rand(1, 704)
-			age_thousand = rand(1,999)
-			find_presence["potassium"] = rand(1,1000) / 100
-			source_mineral = "potassium"
-		if("Iron")
-			age_thousand = rand(1, 999)
-			age_million = rand(1, 999)
-			find_presence["iron"] = rand(1,1000) / 100
-			source_mineral = "iron"
-		if("Diamond")
-			age_thousand = rand(1,999)
-			age_million = rand(1,999)
-			find_presence["nitrogen"] = rand(1,1000) / 100
-			source_mineral = "nitrogen"
-		if("Gold")
-			age_thousand = rand(1,999)
-			age_million = rand(1,999)
-			age_billion = rand(3,4)
-			find_presence["iron"] = rand(1,1000) / 100
-			source_mineral = "iron"
-		if("Silver")
-			age_thousand = rand(1,999)
-			age_million = rand(1,999)
-			find_presence["iron"] = rand(1,1000) / 100
-			source_mineral = "iron"
-		if("Plasma")
-			age_thousand = rand(1,999)
-			age_million = rand(1,999)
-			age_billion = rand(10, 13)
-			find_presence["plasma"] = rand(1,1000) / 100
-			source_mineral = "plasma"
-		if("Clown")
-			age = rand(-1,-999)				//thats the joke
-			age_thousand = rand(-1,-999)
-			find_presence["plasma"] = rand(1,1000) / 100
-			source_mineral = "plasma"
+	if(container.mineral)
+		switch(container.mineral.name)
+			if("Uranium")
+				age_million = rand(1, 704)
+				age_thousand = rand(1,999)
+				find_presence["potassium"] = rand(1,1000) / 100
+				source_mineral = "potassium"
+			if("Iron")
+				age_thousand = rand(1, 999)
+				age_million = rand(1, 999)
+				find_presence["iron"] = rand(1,1000) / 100
+				source_mineral = "iron"
+			if("Diamond")
+				age_thousand = rand(1,999)
+				age_million = rand(1,999)
+				find_presence["nitrogen"] = rand(1,1000) / 100
+				source_mineral = "nitrogen"
+			if("Gold")
+				age_thousand = rand(1,999)
+				age_million = rand(1,999)
+				age_billion = rand(3,4)
+				find_presence["iron"] = rand(1,1000) / 100
+				source_mineral = "iron"
+			if("Silver")
+				age_thousand = rand(1,999)
+				age_million = rand(1,999)
+				find_presence["iron"] = rand(1,1000) / 100
+				source_mineral = "iron"
+			if("Plasma")
+				age_thousand = rand(1,999)
+				age_million = rand(1,999)
+				age_billion = rand(10, 13)
+				find_presence["plasma"] = rand(1,1000) / 100
+				source_mineral = "plasma"
+			if("Clown")
+				age = rand(-1,-999)				//thats the joke
+				age_thousand = rand(-1,-999)
+				find_presence["plasma"] = rand(1,1000) / 100
+				source_mineral = "plasma"
 
 	if(prob(75))
 		find_presence["phosphorus"] = rand(1,500) / 100

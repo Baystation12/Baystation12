@@ -18,7 +18,7 @@ Mineral Sheets
  * Sandstone
  */
 /obj/item/stack/sheet/mineral/sandstone
-	name = "sandstone bricks"
+	name = "sandstone brick"
 	desc = "This appears to be a combination of both sand and stone."
 	singular_name = "sandstone brick"
 	icon_state = "sheet-sandstone"

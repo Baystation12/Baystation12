@@ -81,7 +81,7 @@
  */
 
 /obj/item/weapon/storage/fancy/candle_box
-	name = "Candle pack"
+	name = "candle pack"
 	desc = "A pack of red candles."
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candlebox5"
@@ -173,7 +173,6 @@
 
 /obj/item/weapon/storage/fancy/cigarettes/update_icon()
 	icon_state = "[initial(icon_state)][contents.len]"
-	desc = "There are [contents.len] cig\s left!"
 	return
 
 /obj/item/weapon/storage/fancy/cigarettes/remove_from_storage(obj/item/W as obj, atom/new_location)
@@ -254,4 +253,3 @@
 /obj/item/weapon/storage/lockbox/vials/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	update_icon()
-

@@ -262,7 +262,7 @@
 		if(locked)
 			user << "\red Circuit controls are locked."
 			return
-		var/existing_networks = dd_list2text(network,",")
+		var/existing_networks = list2text(network,",")
 		var/input = strip_html(input(usr, "Which networks would you like to connect this camera console circuit to? Seperate networks with a comma. No Spaces!\nFor example: SS13,Security,Secret ", "Multitool-Circuitboard interface", existing_networks))
 		if(!input)
 			usr << "No input found please hang up and try your call again."

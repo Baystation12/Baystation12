@@ -15,6 +15,20 @@ NanoBaseHelpers = function ()
 	var initHelpers = function ()
 	{
 		$.views.helpers({
+
+			syndicateMode: function() {
+				$('body').css("background-color","#8f1414");
+				$('body').css("background-image","url('uiBackground-Syndicate.png')");
+				$('body').css("background-position","50% 0");
+				$('body').css("background-repeat","repeat-x");
+
+				$('#uiTitleFluff').css("background-image","url('uiTitleFluff-Syndicate.png')");
+				$('#uiTitleFluff').css("background-position","50% 50%");
+				$('#uiTitleFluff').css("background-repeat", "no-repeat");
+
+			return '';
+			},
+
 			// Generate a Byond link
 			link: function( text, icon, parameters, status, elementClass, elementId) {
 	
@@ -172,7 +186,7 @@ NanoBaseHelpers = function ()
 				return html;
 			}
 		});
-	}
+	};
 	
 	// generate a Byond href, combines _urlParameters with parameters
 	var generateHref = function (parameters)
@@ -203,7 +217,7 @@ NanoBaseHelpers = function ()
 			}
 		}
 		return queryString;
-	}
+	};
 
 	return {
         init: function () 

@@ -372,18 +372,21 @@
 				usr << "\red Your thermals intensify the welder's glow. Your eyes itch and burn severely."
 				user.eye_blurry += rand(12,20)
 				E.damage += rand(12, 16)
-		if(E.damage > 10 && safety < 2)
-			user << "\red Your eyes are really starting to hurt. This can't be good for you!"
-		if (E.damage >= E.min_broken_damage)
-			user << "\red You go blind!"
-			user.sdisabilities |= BLIND
-		else if (E.damage >= E.min_bruised_damage)
-			user << "\red You go blind!"
-			user.eye_blind = 5
-			user.eye_blurry = 5
-			user.disabilities |= NEARSIGHTED
-			spawn(100)
-				user.disabilities &= ~NEARSIGHTED
+		if(safety<2)
+
+			if(E.damage > 10)
+				user << "\red Your eyes are really starting to hurt. This can't be good for you!"
+
+			if (E.damage >= E.min_broken_damage)
+				user << "\red You go blind!"
+				user.sdisabilities |= BLIND
+			else if (E.damage >= E.min_bruised_damage)
+				user << "\red You go blind!"
+				user.eye_blind = 5
+				user.eye_blurry = 5
+				user.disabilities |= NEARSIGHTED
+				spawn(100)
+					user.disabilities &= ~NEARSIGHTED
 	return
 
 

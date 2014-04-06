@@ -16,8 +16,8 @@
 
 /obj/item/weapon/storage/bible/booze/New()
 	..()
-	new /obj/item/weapon/reagent_containers/food/drinks/beer(src)
-	new /obj/item/weapon/reagent_containers/food/drinks/beer(src)
+	new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
+	new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 	new /obj/item/weapon/spacecash(src)
 	new /obj/item/weapon/spacecash(src)
 	new /obj/item/weapon/spacecash(src)

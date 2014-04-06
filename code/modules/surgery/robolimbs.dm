@@ -16,7 +16,7 @@
 		if (affected.parent)
 			if (affected.parent.status & ORGAN_DESTROYED)
 				return 0
-		return 1
+		return affected.name != "head"
 
 
 /datum/surgery_step/limb/cut
@@ -28,6 +28,10 @@
 
 	min_duration = 80
 	max_duration = 100
+
+	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		return ..() && !(affected.status & ORGAN_CUT_AWAY)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -61,7 +65,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.status & ORGAN_CUT_AWAY
+		return ..() && affected.status & ORGAN_CUT_AWAY && affected.open < 3 && !(affected.status & ORGAN_ATTACHABLE)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)

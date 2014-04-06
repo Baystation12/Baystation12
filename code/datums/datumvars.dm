@@ -258,6 +258,11 @@ client
 			body += "<option value='?_src_=vars;regenerateicons=\ref[D]'>Regenerate Icons</option>"
 			body += "<option value='?_src_=vars;addlanguage=\ref[D]'>Add Language</option>"
 			body += "<option value='?_src_=vars;remlanguage=\ref[D]'>Remove Language</option>"
+
+			body += "<option value='?_src_=vars;fix_nano=\ref[D]'>Fix NanoUI</option>"
+
+			body += "<option value='?_src_=vars;addverb=\ref[D]'>Add Verb</option>"
+			body += "<option value='?_src_=vars;remverb=\ref[D]'>Remove Verb</option>"
 			if(ishuman(D))
 				body += "<option value>---</option>"
 				body += "<option value='?_src_=vars;setmutantrace=\ref[D]'>Set Mutantrace</option>"
@@ -807,6 +812,74 @@ client
 			usr << "Removed [rem_language] from [H]."
 		else
 			usr << "Mob doesn't know that language."
+
+	else if(href_list["addverb"])
+		if(!check_rights(R_DEBUG))      return
+		
+		var/mob/living/H = locate(href_list["addverb"])
+		
+		if(!istype(H))
+			usr << "This can only be done to instances of type /mob/living"
+			return
+		var/list/possibleverbs = list()
+		possibleverbs += "Cancel" 								// One for the top...
+		possibleverbs += typesof(/mob/proc,/mob/verb,/mob/living/proc,/mob/living/verb)
+		switch(H.type)
+			if(/mob/living/carbon/human)
+				possibleverbs += typesof(/mob/living/carbon/proc,/mob/living/carbon/verb,/mob/living/carbon/human/verb,/mob/living/carbon/human/proc)
+			if(/mob/living/silicon/robot)
+				possibleverbs += typesof(/mob/living/silicon/proc,/mob/living/silicon/robot/proc,/mob/living/silicon/robot/verb)
+			if(/mob/living/silicon/ai)
+				possibleverbs += typesof(/mob/living/silicon/proc,/mob/living/silicon/ai/proc,/mob/living/silicon/ai/verb)
+		possibleverbs -= H.verbs
+		possibleverbs += "Cancel" 								// ...And one for the bottom
+		
+		var/verb = input("Select a verb!", "Verbs",null) as anything in possibleverbs
+		if(!H)
+			usr << "Mob doesn't exist anymore"
+			return
+		if(!verb || verb == "Cancel")
+			return
+		else
+			H.verbs += verb
+		
+	else if(href_list["remverb"])
+		if(!check_rights(R_DEBUG))      return
+
+		var/mob/H = locate(href_list["remverb"])
+
+		if(!istype(H))
+			usr << "This can only be done to instances of type /mob"
+			return
+		var/verb = input("Please choose a verb to remove.","Verbs",null) as null|anything in H.verbs
+		if(!H)
+			usr << "Mob doesn't exist anymore"
+			return
+		if(!verb)
+			return
+		else
+			H.verbs -= verb
+
+	
+	else if(href_list["fix_nano"])
+		if(!check_rights(R_DEBUG)) return
+
+		var/mob/H = locate(href_list["fix_nano"])
+
+		if(!istype(H) || !H.client)
+			usr << "This can only be done on mobs with clients"
+			return
+		
+				
+
+		nanomanager.send_resources(H.client)
+		
+		usr << "Resource files sent"
+		H << "Your NanoUI Resource files have been refreshed"
+
+		log_admin("[key_name(usr)] resent the NanoUI resource files to [key_name(H)] ")
+
+
 
 	else if(href_list["regenerateicons"])
 		if(!check_rights(0))	return

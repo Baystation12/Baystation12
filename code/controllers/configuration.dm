@@ -22,6 +22,7 @@
 	var/sql_enabled = 1					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
+	var/ert_admin_call_only = 0
 	var/allow_vote_mode = 0				// allow votes to change mode
 	var/allow_admin_jump = 1			// allows admin jumping
 	var/allow_admin_spawning = 1		// allows admin item spawning
@@ -30,12 +31,14 @@
 	var/vote_period = 600				// length of voting period (deciseconds, default 1 minute)
 	var/vote_autotransfer_initial = 108000 // Length of time before the first autotransfer vote is called
 	var/vote_autotransfer_interval = 36000 // length of time before next sequential autotransfer vote
+	var/vote_autogamemode_timeleft = 100 //Length of time before round start when autogamemode vote is called (in seconds, default 100).
 	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 //	var/enable_authentication = 0		// goon authentication
 	var/del_new_on_log = 1				// del's new players if they log before they spawn in
 	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
+	var/objectives_disabled = 0 			//if objectives are disabled or not
 	var/protect_roles_from_antagonist = 0// If security and such can be tratior/cult/other
 	var/continous_rounds = 1			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/allow_Metadata = 0				// Metadata is supported.
@@ -62,6 +65,9 @@
 	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
+
+	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
+	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
 	var/disable_player_mice = 0
 	var/uneducated_mice = 0 //Set to 1 to prevent newly-spawned mice from understanding human speech
@@ -133,7 +139,7 @@
 	var/main_irc = ""
 	var/admin_irc = ""
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
-
+	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -144,7 +150,7 @@
 
 		if (M.config_tag)
 			if(!(M.config_tag in modes))		// ensure each mode is added only once
-				diary << "Adding game mode [M.name] ([M.config_tag]) to configuration."
+				log_misc("Adding game mode [M.name] ([M.config_tag]) to configuration.")
 				src.modes += M.config_tag
 				src.mode_names[M.config_tag] = M.name
 				src.probabilities[M.config_tag] = M.probability
@@ -181,7 +187,7 @@
 		if(type == "config")
 			switch (name)
 				if ("resource_urls")
-					config.resource_urls = stringsplit(value, " ")
+					config.resource_urls = text2list(value, " ")
 
 				if ("admin_legacy_system")
 					config.admin_legacy_system = 1
@@ -282,6 +288,12 @@
 				if ("vote_autotransfer_interval")
 					config.vote_autotransfer_interval = text2num(value)
 
+				if ("vote_autogamemode_timeleft")
+					config.vote_autogamemode_timeleft = text2num(value)
+
+				if("ert_admin_only")
+					config.ert_admin_call_only = 1
+
 				if ("allow_ai")
 					config.allow_ai = 1
 
@@ -333,6 +345,9 @@
 				if ("traitor_scaling")
 					config.traitor_scaling = 1
 
+				if ("objectives_disabled")
+					config.objectives_disabled = 1
+
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
 
@@ -347,9 +362,9 @@
 						if (prob_name in config.modes)
 							config.probabilities[prob_name] = text2num(prob_value)
 						else
-							diary << "Unknown game mode probability configuration definition: [prob_name]."
+							log_misc("Unknown game mode probability configuration definition: [prob_name].")
 					else
-						diary << "Incorrect probability configuration definition: [prob_name]  [prob_value]."
+						log_misc("Incorrect probability configuration definition: [prob_name]  [prob_value].")
 
 				if("allow_random_events")
 					config.allow_random_events = 1
@@ -459,13 +474,21 @@
 						else //probably windows, if not this should work anyway
 							config.python_path = "python"
 
-				else
-					diary << "Unknown setting in configuration: '[name]'"
+				if("use_lib_nudge")
+					config.use_lib_nudge = 1
 
+				if("allow_cult_ghostwriter")
+					config.cult_ghostwriter = 1
+
+				if("req_cult_ghostwriter")
+					config.cult_ghostwriter_req_cultists = value
+
+				else
+					log_misc("Unknown setting in configuration: '[name]'")
 
 		else if(type == "game_options")
 			if(!value)
-				diary << "Unknown value for setting [name] in [filename]."
+				log_misc("Unknown value for setting [name] in [filename].")
 			value = text2num(value)
 
 			switch(name)
@@ -506,7 +529,7 @@
 				if("limbs_can_break")
 					config.limbs_can_break = value
 				else
-					diary << "Unknown setting in configuration: '[name]'"
+					log_misc("Unknown setting in configuration: '[name]'")
 
 /datum/configuration/proc/loadsql(filename)  // -- TLE
 	var/list/Lines = file2list(filename)
@@ -552,7 +575,7 @@
 			if ("enable_stat_tracking")
 				sqllogging = 1
 			else
-				diary << "Unknown setting in configuration: '[name]'"
+				log_misc("Unknown setting in configuration: '[name]'")
 
 /datum/configuration/proc/loadforumsql(filename)  // -- TLE
 	var/list/Lines = file2list(filename)
@@ -594,7 +617,7 @@
 			if ("authenticatedgroup")
 				forum_authenticated_group = value
 			else
-				diary << "Unknown setting in configuration: '[name]'"
+				log_misc("Unknown setting in configuration: '[name]'")
 
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up

@@ -77,12 +77,8 @@
 				if(ticker.hide_mode == 0)
 					stat("Game Mode:", "[master_mode]") // Old setting for showing the game mode
 
-			if((ticker.current_state == GAME_STATE_PREGAME) && going)
-				stat("Time To Start:", ticker.pregame_timeleft)
-			if((ticker.current_state == GAME_STATE_PREGAME) && !going)
-				stat("Time To Start:", "DELAYED")
-
 			if(ticker.current_state == GAME_STATE_PREGAME)
+				stat("Time To Start:", "[ticker.pregame_timeleft][going ? "" : " (DELAYED)"]")
 				stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
 				totalPlayers = 0
 				totalPlayersReady = 0
@@ -114,7 +110,7 @@
 				spawning = 1
 				src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
 
-				
+
 				observer.started_as_observer = 1
 				close_spawn_windows()
 				var/obj/O = locate("landmark*Observer-Start")
@@ -287,6 +283,9 @@
 			src << alert("[rank] is not available. Please try another.")
 			return 0
 
+		spawning = 1
+		close_spawn_windows()
+
 		job_master.AssignRole(src, rank, 1)
 
 		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
@@ -357,10 +356,8 @@
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
 		if(chosen_species)
-			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
+			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & IS_WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
 				new_character.set_species(client.prefs.species)
-				if(chosen_species.language)
-					new_character.add_language(chosen_species.language)
 
 		var/datum/language/chosen_language
 		if(client.prefs.language)
@@ -392,7 +389,7 @@
 
 		if(client.prefs.disabilities)
 			// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
-			new_character.dna.SetSEState(GLASSESBLOCK,1,0) 
+			new_character.dna.SetSEState(GLASSESBLOCK,1,0)
 			new_character.disabilities |= NEARSIGHTED
 
 		// And uncomment this, too.

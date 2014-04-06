@@ -204,13 +204,13 @@
 				var/obj/structure/closet/crate/freezer/C = new(src.loc)
 				var/num = rand(2,6)
 				var/new_type = pick(
-				/obj/item/weapon/reagent_containers/food/drinks/beer, \
+				/obj/item/weapon/reagent_containers/food/drinks/cans/beer, \
 				/obj/item/weapon/reagent_containers/food/drinks/tea, \
 				/obj/item/weapon/reagent_containers/food/drinks/dry_ramen, \
 				/obj/item/weapon/reagent_containers/food/snacks/candiedapple, \
 				/obj/item/weapon/reagent_containers/food/snacks/chocolatebar, \
 				/obj/item/weapon/reagent_containers/food/snacks/cookie, \
-				/obj/item/weapon/reagent_containers/food/snacks/faggot, \
+				/obj/item/weapon/reagent_containers/food/snacks/meatball, \
 				/obj/item/weapon/reagent_containers/food/snacks/plump_pie, \
 				)
 				for(var/i=0,i<num,i++)

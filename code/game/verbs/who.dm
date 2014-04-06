@@ -42,11 +42,12 @@
 	msg += "<b>Total Players: [length(Lines)]</b>"
 	src << msg
 
-/client/verb/adminwho()
+/client/verb/staffwho()
 	set category = "Admin"
-	set name = "Adminwho"
+	set name = "Staffwho"
 
 	var/msg = ""
+	var/modmsg = ""
 	var/num_mods_online = 0
 	var/num_admins_online = 0
 	if(holder)
@@ -70,7 +71,20 @@
 
 				num_admins_online++
 			else
+				modmsg += "\t[C] is a [C.holder.rank]"
+
+				if(isobserver(C.mob))
+					modmsg += " - Observing"
+				else if(istype(C.mob,/mob/new_player))
+					modmsg += " - Lobby"
+				else
+					modmsg += " - Playing"
+
+				if(C.is_afk())
+					modmsg += " (AFK)"
+				modmsg += "\n"
 				num_mods_online++
+
 	else
 		for(var/client/C in admins)
 			if(R_ADMIN & C.holder.rights || !(R_MOD & C.holder.rights))
@@ -78,44 +92,8 @@
 					msg += "\t[C] is a [C.holder.rank]\n"
 					num_admins_online++
 			else
+				modmsg += "\t[C] is a [C.holder.rank]\n"
 				num_mods_online++
 
-	msg = "<b>Current Admins ([num_admins_online]):</b>\n" + msg
-	msg += "<b>There are also [num_mods_online] moderators online.</b> To view online moderators, type 'modwho'\n"
-	src << msg
-
-/client/verb/modwho()
-	set category = "Admin"
-	set name = "Modwho"
-
-	var/msg = ""
-	var/num_admins_online = 0
-	var/num_mods_online = 0
-	if(holder)
-		for(var/client/C in admins)
-			if(R_ADMIN & C.holder.rights || !(R_MOD & C.holder.rights))
-				num_admins_online++
-			else
-				msg += "\t[C] is a [C.holder.rank]"
-
-				if(isobserver(C.mob))
-					msg += " - Observing"
-				else if(istype(C.mob,/mob/new_player))
-					msg += " - Lobby"
-				else
-					msg += " - Playing"
-
-				if(C.is_afk())
-					msg += " (AFK)"
-				msg += "\n"
-				num_mods_online++
-	else
-		for(var/client/C in admins)
-			if(R_ADMIN & C.holder.rights || !(R_MOD & C.holder.rights))
-				num_admins_online++
-			else
-				msg += "\t[C] is a [C.holder.rank]\n"
-
-	msg = "<b>Current Moderators ([num_mods_online]):</b>\n" + msg
-	msg += "<b>There are also [num_admins_online] admins online.</b> To view online admins, type 'adminwho'\n"
+	msg = "<b>Current Admins ([num_admins_online]):</b>\n" + msg + "\n<b> Current Moderators([num_mods_online]):</b>\n" + modmsg
 	src << msg

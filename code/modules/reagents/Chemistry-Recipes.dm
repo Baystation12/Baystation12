@@ -252,7 +252,7 @@ datum
 			name = "Dexalin"
 			id = "dexalin"
 			result = "dexalin"
-			required_reagents = list("oxygen" = 2)
+			required_reagents = list("oxygen" = 2, "plasma" = 0.1)
 			required_catalysts = list("plasma" = 5)
 			result_amount = 1
 
@@ -302,7 +302,7 @@ datum
 			name = "Clonexadone"
 			id = "clonexadone"
 			result = "clonexadone"
-			required_reagents = list("cryoxadone" = 1, "sodium" = 1)
+			required_reagents = list("cryoxadone" = 1, "sodium" = 1, "plasma" = 0.1)
 			required_catalysts = list("plasma" = 5)
 			result_amount = 2
 
@@ -452,17 +452,15 @@ datum
 			id = "chemsmoke"
 			result = null
 			required_reagents = list("potassium" = 1, "sugar" = 1, "phosphorus" = 1)
-			result_amount = null
+			result_amount = 0.4
 			secondary = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
 				var/datum/effect/effect/system/smoke_spread/chem/S = new /datum/effect/effect/system/smoke_spread/chem
 				S.attach(location)
-				S.set_up(holder, 10, 0, location)
+				S.set_up(holder, created_volume, 0, location)
 				playsound(location, 'sound/effects/smoke.ogg', 50, 1, -3)
 				spawn(0)
-					S.start()
-					sleep(10)
 					S.start()
 				holder.clear_reagents()
 				return
@@ -485,7 +483,7 @@ datum
 			name = "Potassium Chlorophoride"
 			id = "potassium_chlorophoride"
 			result = "potassium_chlorophoride"
-			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloral_hydrate" = 1)
+			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloralhydrate" = 1)
 			result_amount = 4
 
 		stoxin
@@ -514,7 +512,7 @@ datum
 			id = "mindbreaker"
 			result = "mindbreaker"
 			required_reagents = list("silicon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
-			result_amount = 5
+			result_amount = 3
 
 		lipozine
 			name = "Lipozine"
@@ -851,7 +849,7 @@ datum
 					var/list/flashers = list()
 					for(var/mob/living/carbon/human/M in viewers(TO, null))
 						if(M:eyecheck() <= 0)
-							flick("e_flash", M.flash) // flash dose faggots
+							flick("e_flash", M.flash)
 							flashers += M
 
 					var/y_distance = TO.y - FROM.y
@@ -1549,7 +1547,7 @@ datum
 			name = "Space Beer"
 			id = "spacebeer"
 			result = "beer"
-			required_reagents = list("flour" = 10)
+			required_reagents = list("cornoil" = 10)
 			required_catalysts = list("enzyme" = 5)
 			result_amount = 10
 
@@ -1835,7 +1833,7 @@ datum
 			required_reagents = list("berryjuice" = 1, "cream" = 1, "vermouth" = 1)
 			result_amount = 3
 
-		grapesoda //Allows Grape Soda to be made
+		grapesoda
 			name = "Grape Soda"
 			id = "grapesoda"
 			result = "grapesoda"

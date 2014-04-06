@@ -13,21 +13,25 @@
 	set invisibility = 0
 	set background = 1
 	if (monkeyizing)	return
+	if (update_muts)
+		update_muts=0
+		domutcheck(src,null,MUTCHK_FORCED)
 	..()
 
 	var/datum/gas_mixture/environment // Added to prevent null location errors-- TLE
 	if(loc)
 		environment = loc.return_air()
 
-	if (stat != DEAD) //still breathing
-		//First, resolve location and get a breath
-		if(air_master.current_cycle%4==2)
-			//Only try to take a breath every 4 seconds, unless suffocating
-			breathe()
-		else //Still give containing object the chance to interact
-			if(istype(loc, /obj/))
-				var/obj/location_as_object = loc
-				location_as_object.handle_internal_lifeform(src, 0)
+	if (stat != DEAD) 
+		if(!istype(src,/mob/living/carbon/monkey/diona)) //still breathing
+			//First, resolve location and get a breath
+			if(air_master.current_cycle%4==2)
+				//Only try to take a breath every 4 seconds, unless suffocating
+				breathe()
+			else //Still give containing object the chance to interact
+				if(istype(loc, /obj/))
+					var/obj/location_as_object = loc
+					location_as_object.handle_internal_lifeform(src, 0)
 
 
 		//Updates the number of stored chemicals for powers
@@ -74,6 +78,8 @@
 
 		if(prob(1))
 			emote(pick("scratch","jump","roll","tail"))
+	updatehealth()
+	
 
 /mob/living/carbon/monkey/calculate_affecting_pressure(var/pressure)
 	..()
@@ -128,7 +134,6 @@
 				heal_overall_damage(rads,rads)
 				adjustOxyLoss(-(rads))
 				adjustToxLoss(-(rads))
-				updatehealth()
 				return
 
 			if (radiation > 100)
@@ -142,7 +147,6 @@
 					radiation--
 					if(prob(25))
 						adjustToxLoss(1)
-						updatehealth()
 
 				if(50 to 74)
 					radiation -= 2
@@ -152,7 +156,6 @@
 						Weaken(3)
 						src << "\red You feel weak."
 						emote("collapse")
-					updatehealth()
 
 				if(75 to 100)
 					radiation -= 3
@@ -162,7 +165,6 @@
 						randmutb(src)
 						domutcheck(src,null)
 						emote("gasp")
-					updatehealth()
 
 	proc/handle_virus_updates()
 		if(status_flags & GODMODE)	return 0	//godmode
@@ -172,30 +174,36 @@
 			for (var/ID in virus2)
 				var/datum/disease2/disease/V = virus2[ID]
 				V.cure(src)
+		
+		for(var/obj/effect/decal/cleanable/O in view(1,src))
+			if(istype(O,/obj/effect/decal/cleanable/blood)) 
+				var/obj/effect/decal/cleanable/blood/B = O
+				if(B.virus2.len)
+					for (var/ID in B.virus2)
+						var/datum/disease2/disease/V = B.virus2[ID]
+						infect_virus2(src,V)
 
-		for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
-			if(B.virus2.len)
-				for (var/ID in B.virus2)
-					var/datum/disease2/disease/V = B.virus2[ID]
-					infect_virus2(src,V)
-		for(var/obj/effect/decal/cleanable/mucus/M in view(1,src))
-			if(M.virus2.len)
-				for (var/ID in M.virus2)
-					var/datum/disease2/disease/V = M.virus2[ID]
-					infect_virus2(src,V)
+			else if(istype(O,/obj/effect/decal/cleanable/mucus))
+				var/obj/effect/decal/cleanable/mucus/M = O
 
-		for (var/ID in virus2)
-			var/datum/disease2/disease/V = virus2[ID]
-			if(isnull(V)) // Trying to figure out a runtime error that keeps repeating
-				CRASH("virus2 nulled before calling activate()")
-			else
-				V.activate(src)
-			// activate may have deleted the virus
-			if(!V) continue
+				if(M.virus2.len)
+					for (var/ID in M.virus2)
+						var/datum/disease2/disease/V = M.virus2[ID]
+						infect_virus2(src,V)
 
-			// check if we're immune
-			if(V.antigen & src.antibodies)
-				V.dead = 1
+		if(virus2.len)
+			for (var/ID in virus2)
+				var/datum/disease2/disease/V = virus2[ID]
+				if(isnull(V)) // Trying to figure out a runtime error that keeps repeating
+					CRASH("virus2 nulled before calling activate()")
+				else
+					V.activate(src)
+				// activate may have deleted the virus
+				if(!V) continue
+
+				// check if we're immune
+				if(V.antigen & src.antibodies)
+					V.dead = 1
 
 		return
 
@@ -388,6 +396,10 @@
 	proc/handle_environment(datum/gas_mixture/environment)
 		if(!environment)
 			return
+
+		if(abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PLASMA_VISIBLE)
+			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp		
+		
 		var/environment_heat_capacity = environment.heat_capacity()
 		if(istype(get_turf(src), /turf/space))
 			var/turf/heat_turf = get_turf(src)
@@ -437,7 +449,7 @@
 
 	proc/handle_chemicals_in_body()
 
-		if(istype(src,/mob/living/carbon/monkey/diona)) //Filthy check. Dionaea nymphs need light or they get sad.
+		if(alien) //Diona nymphs are the only alien monkey currently.
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light
 				var/turf/T = loc
@@ -452,11 +464,12 @@
 			if(nutrition > 500)
 				nutrition = 500
 			if(light_amount > 2) //if there's enough light, heal
-				heal_overall_damage(1,1)
+				adjustBruteLoss(-1)
 				adjustToxLoss(-1)
 				adjustOxyLoss(-1)
 
-		if(reagents) reagents.metabolize(src)
+		if(reagents && reagents.reagent_list.len) 
+			reagents.metabolize(src,alien)
 
 		if (drowsyness)
 			drowsyness--
@@ -465,24 +478,23 @@
 				sleeping += 1
 				Paralyse(5)
 
-		confused = max(0, confused - 1)
-		// decrement dizziness counter, clamped to 0
+		if(confused)
+			confused = max(0, confused - 1)
+
 		if(resting)
 			dizziness = max(0, dizziness - 5)
 		else
 			dizziness = max(0, dizziness - 1)
 
-		updatehealth()
-
 		return //TODO: DEFERRED
 
 	proc/handle_regular_status_updates()
-		updatehealth()
 
 		if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 			blinded = 1
 			silent = 0
 		else				//ALIVE. LIGHTS ARE ON
+			updatehealth()
 			if(health < config.health_threshold_dead || brain_op_stage == 4.0)
 				death()
 				blinded = 1

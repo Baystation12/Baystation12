@@ -55,7 +55,7 @@
 
 	//get message text, limit it's length.and clean/escape html
 	if(!msg)
-		msg = input(src,"Message:", "Private message to [C.key]") as text|null
+		msg = input(src,"Message:", "Private message to [key_name(C, 0, holder ? 1 : 0)]") as text|null
 
 		if(!msg)	return
 		if(!C)
@@ -80,10 +80,10 @@
 		//mod PMs are maroon
 		//PMs sent from admins and mods display their rank
 		if(holder)
-			if( holder.rights & R_MOD )
-				recieve_color = "maroon"
-			else
+			if( holder.rights & R_ADMIN )
 				recieve_color = "red"
+			else
+				recieve_color = "maroon"
 			send_pm_type = holder.rank + " "
 			recieve_pm_type = holder.rank
 

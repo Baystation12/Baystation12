@@ -44,20 +44,20 @@
 #define BODYTEMP_HEAT_DAMAGE_LIMIT 360.15 // The limit the human body can take before it starts taking damage from heat.
 #define BODYTEMP_COLD_DAMAGE_LIMIT 260.15 // The limit the human body can take before it starts taking damage from coldness.
 
-#define SPACE_HELMET_MIN_COLD_PROTECITON_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-helmet quality headwear. MUST NOT BE 0.
-#define SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-suit quality jumpsuits or suits. MUST NOT BE 0.
-#define SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE 5000	//These need better heat protect
-#define FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE 30000 //what max_heat_protection_temperature is set to for firesuit quality headwear. MUST NOT BE 0.
-#define FIRE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE 30000 //for fire helmet quality items (red and white hardhats)
-#define HELMET_MIN_COLD_PROTECITON_TEMPERATURE 160	//For normal helmets
-#define HELMET_MAX_HEAT_PROTECITON_TEMPERATURE 600	//For normal helmets
-#define ARMOR_MIN_COLD_PROTECITON_TEMPERATURE 160	//For armor
-#define ARMOR_MAX_HEAT_PROTECITON_TEMPERATURE 600	//For armor
+#define SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-helmet quality headwear. MUST NOT BE 0.
+#define SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-suit quality jumpsuits or suits. MUST NOT BE 0.
+#define SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE 5000	//These need better heat protect
+#define FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE 30000 //what max_heat_protection_temperature is set to for firesuit quality headwear. MUST NOT BE 0.
+#define FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE 30000 //for fire helmet quality items (red and white hardhats)
+#define HELMET_MIN_COLD_PROTECTION_TEMPERATURE 160	//For normal helmets
+#define HELMET_MAX_HEAT_PROTECTION_TEMPERATURE 600	//For normal helmets
+#define ARMOR_MIN_COLD_PROTECTION_TEMPERATURE 160	//For armor
+#define ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE 600	//For armor
 
-#define GLOVES_MIN_COLD_PROTECITON_TEMPERATURE 2.0	//For some gloves (black and)
-#define GLOVES_MAX_HEAT_PROTECITON_TEMPERATURE 1500		//For some gloves
-#define SHOE_MIN_COLD_PROTECITON_TEMPERATURE 2.0	//For gloves
-#define SHOE_MAX_HEAT_PROTECITON_TEMPERATURE 1500		//For gloves
+#define GLOVES_MIN_COLD_PROTECTION_TEMPERATURE 2.0	//For some gloves (black and)
+#define GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE 1500		//For some gloves
+#define SHOE_MIN_COLD_PROTECTION_TEMPERATURE 2.0	//For gloves
+#define SHOE_MAX_HEAT_PROTECTION_TEMPERATURE 1500		//For gloves
 
 
 #define PRESSURE_DAMAGE_COEFFICIENT 4 //The amount of pressure damage someone takes is equal to (pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT, with the maximum of MAX_PRESSURE_DAMAGE
@@ -639,6 +639,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define CHAT_ATTACKLOGS	1024
 #define CHAT_DEBUGLOGS	2048
 #define CHAT_LOOC		4096
+#define CHAT_GHOSTRADIO 8192
 
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
@@ -690,13 +691,15 @@ var/list/be_special_flags = list(
 #define RIGHT 2
 
 // for secHUDs and medHUDs and variants. The number is the location of the image on the list hud_list of humans.
-#define HEALTH_HUD		1 // dead, alive, sick, health status
-#define STATUS_HUD		2 // a simple line rounding the mob's number health
+#define HEALTH_HUD		1 // a simple line rounding the mob's number health
+#define STATUS_HUD		2 // alive, dead, diseased, etc.
 #define ID_HUD			3 // the job asigned to your ID
 #define WANTED_HUD		4 // wanted, released, parroled, security status
-#define IMPLOYAL_HUD	5 // loyality implant
+#define IMPLOYAL_HUD		5 // loyality implant
 #define IMPCHEM_HUD		6 // chemical implant
-#define IMPTRACK_HUD	7 // tracking implant
+#define IMPTRACK_HUD		7 // tracking implant
+#define SPECIALROLE_HUD 	8 // AntagHUD image
+#define STATUS_HUD_OOC		9 // STATUS_HUD without virus db check for someone being ill.
 
 //Pulse levels, very simplified
 #define PULSE_NONE		0	//so !M.pulse checks would be possible
@@ -722,19 +725,24 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 	)
 
 //Species flags.
-#define NO_EAT 1
+#define NO_BLOOD 1
 #define NO_BREATHE 2
-#define NO_SLEEP 4
-#define RAD_ABSORB 8
-#define NO_SCAN 16
-#define NON_GENDERED 32
-#define REQUIRE_LIGHT 64
-#define WHITELISTED 128
-#define HAS_SKIN_TONE 256
-#define HAS_LIPS 512
-#define HAS_UNDERWEAR 1024
-#define HAS_TAIL 2048
-#define IS_PLANT 4096
+#define NO_SCAN 4
+#define NO_PAIN 8
+
+#define HAS_SKIN_TONE 16
+#define HAS_LIPS 32
+#define HAS_UNDERWEAR 64
+#define HAS_TAIL 128
+
+#define IS_SLOW 256
+#define IS_PLANT 512
+#define IS_WHITELISTED 1024
+
+#define RAD_ABSORB 2048
+#define REQUIRE_LIGHT 4096
+
+#define IS_SYNTHETIC 8192
 
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
@@ -743,3 +751,13 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1
 #define ZONE_SLEEPING 0
+
+//some colors
+#define COLOR_RED 		"#FF0000"
+#define COLOR_GREEN 	"#00FF00"
+#define COLOR_BLUE 		"#0000FF"
+#define COLOR_CYAN 		"#00FFFF"
+#define COLOR_PINK 		"#FF00FF"
+#define COLOR_YELLOW 	"#FFFF00"
+#define COLOR_ORANGE 	"#FF9900"
+#define COLOR_WHITE 	"#FFFFFF"

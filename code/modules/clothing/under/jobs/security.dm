@@ -58,6 +58,16 @@
 	item_state = "warden_corporate"
 	item_color = "warden_corporate"
 
+/obj/item/clothing/under/tactical
+	name = "tactical jumpsuit"
+	desc = "It's made of a slightly sturdier material than standard jumpsuits, to allow for robust protection."
+	icon_state = "swatunder"
+	item_state = "swatunder"
+	item_color = "swatunder"
+	armor = list(melee = 10, bullet = 5, laser = 5,energy = 0, bomb = 0, bio = 0, rad = 0)
+	flags = FPRINT | TABLEPASS
+	siemens_coefficient = 0.9
+
 /*
  * Detective
  */

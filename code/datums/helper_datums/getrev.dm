@@ -63,7 +63,7 @@ var/global/datum/getrev/revdata = new("config/svndir.txt")
 				s_archive = s
 			if(!revision)
 				abort()
-			diary << "Revision info loaded succesfully"
+			log_misc("Revision info loaded succesfully")
 			return
 		return abort()
 

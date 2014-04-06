@@ -135,7 +135,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	)
 
 /obj/item/stack/sheet/wood
-	name = "wooden planks"
+	name = "wooden plank"
 	desc = "One can only guess that this is a bunch of wood."
 	singular_name = "wood plank"
 	icon_state = "sheet-wood"
@@ -166,7 +166,14 @@ var/global/list/datum/stack_recipe/cardboard_recipes = list ( \
 	new/datum/stack_recipe("cardborg suit", /obj/item/clothing/suit/cardborg, 3), \
 	new/datum/stack_recipe("cardborg helmet", /obj/item/clothing/head/cardborg), \
 	new/datum/stack_recipe("pizza box", /obj/item/pizzabox), \
-	new/datum/stack_recipe("folder", /obj/item/weapon/folder), \
+	null, \
+	new/datum/stack_recipe_list("folders",list( \
+		new/datum/stack_recipe("blue folder", /obj/item/weapon/folder/blue), \
+		new/datum/stack_recipe("grey folder", /obj/item/weapon/folder), \
+		new/datum/stack_recipe("red folder", /obj/item/weapon/folder/red), \
+		new/datum/stack_recipe("white folder", /obj/item/weapon/folder/white), \
+		new/datum/stack_recipe("yellow folder", /obj/item/weapon/folder/yellow), \
+		)) \
 )
 
 /obj/item/stack/sheet/cardboard	//BubbleWrap

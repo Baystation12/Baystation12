@@ -35,7 +35,7 @@
 	icon_state = "night"
 	item_state = "glasses"
 	origin_tech = "magnets=2"
-	darkness_view = 3
+	darkness_view = 7
 
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"
@@ -69,6 +69,12 @@
 	desc = "Made by Uncool. Co."
 	icon_state = "hipster_glasses"
 	item_state = "hipster_glasses"
+
+/obj/item/clothing/glasses/threedglasses
+	desc = "A long time ago, people used these glasses to makes images from screens threedimensional."
+	name = "3D glasses"
+	icon_state = "3d"
+	item_state = "3d"
 
 /obj/item/clothing/glasses/gglasses
 	name = "Green Glasses"
@@ -149,6 +155,11 @@
 		..()
 		src.hud = new/obj/item/clothing/glasses/hud/security(src)
 		return
+
+/obj/item/clothing/glasses/sunglasses/sechud/tactical
+	name = "tactical HUD"
+	desc = "Flash-resistant goggles with inbuilt combat and security information."
+	icon_state = "swatgoggles"
 
 /obj/item/clothing/glasses/thermal
 	name = "Optical Thermal Scanner"

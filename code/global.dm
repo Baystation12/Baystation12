@@ -6,6 +6,8 @@ var/global/obj/effect/overlay/plmaster = null
 var/global/obj/effect/overlay/slmaster = null
 
 
+var/global/list/active_areas = list()
+var/global/list/all_areas = list()
 var/global/list/machines = list()
 var/global/list/processing_objects = list()
 var/global/list/active_diseases = list()
@@ -90,6 +92,7 @@ var/datum/engine_eject/engine_eject_control = null
 var/host = null
 var/aliens_allowed = 0
 var/ooc_allowed = 1
+var/dsay_allowed = 1
 var/dooc_allowed = 1
 var/traitor_scaling = 1
 //var/goonsay_allowed = 0
@@ -112,8 +115,8 @@ var/list/reg_dna = list(  )
 
 var/mouse_respawn_time = 5 //Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
 
-var/CELLRATE = 0.002  // multiplier for watts per tick <> cell storage (eg: .002 means if there is a load of 1000 watts, 20 units will be taken from a cell per second)
-var/CHARGELEVEL = 0.001 // Cap for how fast cells charge, as a percentage-per-tick (.001 means cellcharge is capped to 1% per second)
+var/CELLRATE = 0.002  // multiplier for watts per tick <> cell storage (eg: 0.02 means if there is a load of 1000 watts, 20 units will be taken from a cell per second)
+var/CHARGELEVEL = 0.0005 // Cap for how fast cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 
 var/shuttle_z = 2	//default
 var/airtunnel_start = 68 // default

@@ -183,24 +183,25 @@
 
 		var/datum/gas_mixture/gas
 		gas = location.remove_air(0.25*environment.total_moles)
-		var/heat_capacity = gas.heat_capacity()
-		var/energy_used = min( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
+		if(gas)
+			var/heat_capacity = gas.heat_capacity()
+			var/energy_used = min( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
 
-		//Use power.  Assuming that each power unit represents 1000 watts....
-		use_power(energy_used/1000, ENVIRON)
+			//Use power.  Assuming that each power unit represents 1000 watts....
+			use_power(energy_used/1000, ENVIRON)
 
-		//We need to cool ourselves.
-		if(environment.temperature > target_temperature)
-			gas.temperature -= energy_used/heat_capacity
-		else
-			gas.temperature += energy_used/heat_capacity
+			//We need to cool ourselves.
+			if(environment.temperature > target_temperature)
+				gas.temperature -= energy_used/heat_capacity
+			else
+				gas.temperature += energy_used/heat_capacity
 
-		environment.merge(gas)
+			environment.merge(gas)
 
-		if(abs(environment.temperature - target_temperature) <= 0.5)
-			regulating_temperature = 0
-			visible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
-			"You hear a click as a faint electronic humming stops.")
+			if(abs(environment.temperature - target_temperature) <= 0.5)
+				regulating_temperature = 0
+				visible_message("\The [src] clicks quietly as it stops [environment.temperature > target_temperature ? "cooling" : "heating"] the room.",\
+				"You hear a click as a faint electronic humming stops.")
 
 	var/old_level = danger_level
 	danger_level = overall_danger_level()

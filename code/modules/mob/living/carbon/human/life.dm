@@ -63,6 +63,9 @@
 	in_stasis = istype(loc, /obj/structure/closet/body_bag/cryobag) && loc:opened == 0
 	if(in_stasis) loc:used++
 
+	if(life_tick%30==15)
+		hud_updateflag = 1022
+
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !in_stasis)
 		if(air_master.current_cycle%4==2 || failed_last_breath) 	//First, resolve location and get a breath
@@ -101,11 +104,14 @@
 
 	handle_stasis_bag()
 
+	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
+		return											//We go ahead and process them 5 times for HUD images and other stuff though.
+
 	//Handle temperature/pressure differences between body and environment
-	handle_environment(environment)
+	handle_environment(environment)		//Optimized a good bit.
 
 	//Status updates, death etc.
-	handle_regular_status_updates()		//TODO: optimise ~Carn
+	handle_regular_status_updates()		//Optimized a bit
 	update_canmove()
 
 	//Update our name based on whether our face is obscured/disfigured
@@ -179,7 +185,7 @@
 			if (prob(3))
 				switch(pick(1,2,3))
 					if(1)
-						say(pick("IM A PONY NEEEEEEIIIIIIIIIGH", "without oxigen blob don't evoluate?", "CAPTAINS A COMDOM", "[pick("", "that faggot traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!", "can u give me [pick("telikesis","halk","eppilapse")]?", "THe saiyans screwed", "Bi is THE BEST OF BOTH WORLDS>", "I WANNA PET TEH monkeyS", "stop grifing me!!!!", "SOTP IT#"))
+						say(pick("IM A PONY NEEEEEEIIIIIIIIIGH", "without oxigen blob don't evoluate?", "CAPTAINS A COMDOM", "[pick("", "that meatball traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!", "can u give me [pick("telikesis","halk","eppilapse")]?", "THe saiyans screwed", "Bi is THE BEST OF BOTH WORLDS>", "I WANNA PET TEH monkeyS", "stop grifing me!!!!", "SOTP IT#"))
 					if(2)
 						say(pick("FUS RO DAH","fucking 4rries!", "stat me", ">my face", "roll it easy!", "waaaaaagh!!!", "red wonz go fasta", "FOR TEH EMPRAH", "lol2cat", "dem dwarfs man, dem dwarfs", "SPESS MAHREENS", "hwee did eet fhor khayosss", "lifelike texture ;_;", "luv can bloooom", "PACKETS!!!"))
 					if(3)
@@ -220,12 +226,13 @@
 			if((COLD_RESISTANCE in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
 
-		if ((HULK in mutations) && health <= 25)
-			mutations.Remove(HULK)
-			update_mutations()		//update our mutation overlays
-			src << "\red You suddenly feel very weak."
-			Weaken(3)
-			emote("collapse")
+		// DNA2 - Gene processing.
+		// The HULK stuff that was here is now in the hulk gene.
+		for(var/datum/dna/gene/gene in dna_genes)
+			if(!gene.block)
+				continue
+			if(gene.is_active(src))
+				gene.OnMobLife(src)
 
 		if (radiation)
 			if (radiation > 100)
@@ -286,7 +293,7 @@
 	proc/breathe()
 		if(reagents.has_reagent("lexorin")) return
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
-		if(species && species.flags & NO_BREATHE) return
+		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
 
 		var/datum/organ/internal/lungs/L = internal_organs["lungs"]
 		L.process()
@@ -324,7 +331,7 @@
 
 					breath = loc.remove_air(breath_moles)
 
-					if(istype(wear_mask, /obj/item/clothing/mask/gas))
+					if(istype(wear_mask, /obj/item/clothing/mask/gas) && breath)
 						var/obj/item/clothing/mask/gas/G = wear_mask
 						var/datum/gas_mixture/filtered = new
 
@@ -379,7 +386,7 @@
 
 			//spread some viruses while we are at it
 			if (virus2.len > 0)
-				if (get_infection_chance(src) && prob(20))
+				if (prob(10) && get_infection_chance(src))
 //					log_debug("[src] : Exhaling some viruses")
 					for(var/mob/living/carbon/M in view(1,src))
 						src.spread_disease_to(M)
@@ -571,25 +578,23 @@
 			else
 				loc_temp = environment.temperature
 
-			//world << "Loc temp: [loc_temp] - Body temp: [bodytemperature] - Fireloss: [getFireLoss()] - Thermal protection: [get_thermal_protection()] - Fire protection: [thermal_protection + add_fire_protection(loc_temp)] - Heat capacity: [environment_heat_capacity] - Location: [loc] - src: [src]"
+			if(abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PLASMA_VISIBLE)
+				return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
 			if(stat != 2)
 				stabilize_temperature_from_calories()
 
-	//		log_debug("Adjusting to atmosphere.")
 			//After then, it reacts to the surrounding atmosphere based on your thermal protection
 			if(loc_temp < BODYTEMP_COLD_DAMAGE_LIMIT)			//Place is colder than we are
 				var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 				if(thermal_protection < 1)
 					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
-	//				log_debug("[loc_temp] is Cold. Cooling by [amt]")
 					bodytemperature += amt
 			else if (loc_temp > BODYTEMP_HEAT_DAMAGE_LIMIT)			//Place is hotter than we are
 				var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 				if(thermal_protection < 1)
 					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
-	//				log_debug("[loc_temp] is Heat. Heating up by [amt]")
 					bodytemperature += amt
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
@@ -639,7 +644,15 @@
 			pressure_alert = 0
 		else if(adjusted_pressure >= species.hazard_low_pressure)
 			pressure_alert = -1
+
+			if(species && species.flags & IS_SYNTHETIC)
+				bodytemperature += 0.5 * TEMPERATURE_DAMAGE_COEFFICIENT //Synthetics suffer overheating in a vaccuum. ~Z
+
 		else
+
+			if(species && species.flags & IS_SYNTHETIC)
+				bodytemperature += 1 * TEMPERATURE_DAMAGE_COEFFICIENT
+
 			if( !(COLD_RESISTANCE in mutations))
 				adjustBruteLoss( LOW_PRESSURE_DAMAGE )
 				pressure_alert = -2
@@ -671,7 +684,7 @@
 
 	proc/stabilize_temperature_from_calories()
 		var/body_temperature_difference = 310.15 - bodytemperature
-		if (abs(body_temperature_difference) < 0.01)
+		if (abs(body_temperature_difference) < 0.5)
 			return //fuck this precision
 		switch(bodytemperature)
 			if(-INFINITY to 260.15) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
@@ -866,7 +879,15 @@
 	*/
 
 	proc/handle_chemicals_in_body()
-		if(reagents) reagents.metabolize(src)
+
+		if(reagents && !(species.flags & IS_SYNTHETIC)) //Synths don't process reagents.
+			var/alien = 0 //Not the best way to handle it, but neater than checking this for every single reagent proc.
+			if(species && species.name == "Diona")
+				alien = 1
+			else if(species && species.name == "Vox")
+				alien = 2
+			reagents.metabolize(src,alien)
+
 		var/total_plasmaloss = 0
 		for(var/obj/item/I in src)
 			if(I.contaminated)
@@ -885,12 +906,15 @@
 			nutrition += light_amount
 			traumatic_shock -= light_amount
 
-			if(nutrition > 500)
-				nutrition = 500
-			if(light_amount > 5) //if there's enough light, heal
-				adjustBruteLoss(-1)
-				adjustToxLoss(-1)
-				adjustOxyLoss(-1)
+			if(species.flags & IS_PLANT)
+				if(nutrition > 500)
+					nutrition = 500
+				if(light_amount >= 3) //if there's enough light, heal
+					adjustBruteLoss(-(light_amount))
+					adjustToxLoss(-(light_amount))
+					adjustOxyLoss(-(light_amount))
+					//TODO: heal wounds, heal broken limbs.
+
 		if(dna && dna.mutantrace == "shadow")
 			var/light_amount = 0
 			if(isturf(loc))
@@ -955,7 +979,7 @@
 			dizziness = max(0, dizziness - 3)
 			jitteriness = max(0, jitteriness - 3)
 
-		handle_trace_chems()
+		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
 
 		var/datum/organ/internal/liver/liver = internal_organs["liver"]
 		liver.process()
@@ -974,8 +998,8 @@
 		else				//ALIVE. LIGHTS ARE ON
 			updatehealth()	//TODO
 			if(!in_stasis)
-				handle_organs()
-				handle_blood()
+				handle_organs()	//Optimized.
+				handle_blood()  
 
 			if(health <= config.health_threshold_dead || brain_op_stage == 4.0)
 				death()
@@ -1047,6 +1071,13 @@
 				if(halloss > 0)
 					adjustHalLoss(-1)
 
+			if(embedded_flag && !(life_tick % 10))
+				var/list/E
+				E = get_visible_implants(0)
+				if(!E.len)
+					embedded_flag = 0
+				
+
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
 				blinded = 1
@@ -1079,30 +1110,39 @@
 
 			if(stuttering)
 				stuttering = max(stuttering-1, 0)
-			if (src.slurring)
+			if (slurring)
 				slurring = max(slurring-1, 0)
 			if(silent)
 				silent = max(silent-1, 0)
 
 			if(druggy)
 				druggy = max(druggy-1, 0)
-
+/*
 			// Increase germ_level regularly
 			if(prob(40))
 				germ_level += 1
 			// If you're dirty, your gloves will become dirty, too.
 			if(gloves && germ_level > gloves.germ_level && prob(10))
 				gloves.germ_level += 1
+*/
 		return 1
 
 	proc/handle_regular_hud_updates()
+		if(hud_updateflag)
+			handle_hud_list()
+
+
 		if(!client)	return 0
+
+		if(hud_updateflag)
+			handle_hud_list()
+	
 
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
 
-		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
+		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask, global_hud.nvg)
 
 		update_action_buttons()
 
@@ -1181,6 +1221,13 @@
 			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 			if(healths)		healths.icon_state = "health7"	//DEAD healthmeter
+			if(client)
+				if(client.view != world.view)
+					if(locate(/obj/item/weapon/gun/energy/sniperrifle, contents))
+						var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in src
+						if(s.zoom)
+							s.zoom()
+
 		else
 			sight &= ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
 			see_in_dark = species.darksight
@@ -1232,10 +1279,13 @@
 				var/obj/item/clothing/glasses/G = glasses
 				if(istype(G))
 					see_in_dark += G.darkness_view
-					if(G.vision_flags)
+					if(G.vision_flags)		// MESONS
 						sight |= G.vision_flags
 						if(!druggy)
 							see_invisible = SEE_INVISIBLE_MINIMUM
+				if(istype(G,/obj/item/clothing/glasses/night))
+					see_invisible = SEE_INVISIBLE_MINIMUM
+					client.screen += global_hud.nvg
 
 	/* HUD shit goes here, as long as it doesn't modify sight flags */
 	// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
@@ -1253,6 +1303,8 @@
 			else if(!seer)
 				see_invisible = SEE_INVISIBLE_LIVING
 
+			
+
 			if(healths)
 				if (analgesic)
 					healths.icon_state = "health_health_numb"
@@ -1262,7 +1314,7 @@
 						if(2)	healths.icon_state = "health7"
 						else
 							//switch(health - halloss)
-							switch(100 - traumatic_shock)
+							switch(100 - ((species && species.flags & NO_PAIN & !IS_SYNTHETIC) ? 0 : traumatic_shock))
 								if(100 to INFINITY)		healths.icon_state = "health0"
 								if(80 to 100)			healths.icon_state = "health1"
 								if(60 to 80)			healths.icon_state = "health2"
@@ -1371,30 +1423,35 @@
 				var/datum/disease2/disease/V = virus2[ID]
 				V.cure(src)
 
-		for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
-			if(B.virus2.len)
-				for (var/ID in B.virus2)
-					var/datum/disease2/disease/V = B.virus2[ID]
-					infect_virus2(src,V)
+		for(var/obj/effect/decal/cleanable/O in view(1,src))
+			if(istype(O,/obj/effect/decal/cleanable/blood))
+				var/obj/effect/decal/cleanable/blood/B = O
+				if(B.virus2.len)
+					for (var/ID in B.virus2)
+						var/datum/disease2/disease/V = B.virus2[ID]
+						infect_virus2(src,V)
 
-		for(var/obj/effect/decal/cleanable/mucus/M in view(1,src))
-			if(M.virus2.len)
-				for (var/ID in M.virus2)
-					var/datum/disease2/disease/V = M.virus2[ID]
-					infect_virus2(src,V)
+			else if(istype(O,/obj/effect/decal/cleanable/mucus))
+				var/obj/effect/decal/cleanable/mucus/M = O
+				if(M.virus2.len)
+					for (var/ID in M.virus2)
+						var/datum/disease2/disease/V = M.virus2[ID]
+						infect_virus2(src,V)
 
-		for (var/ID in virus2)
-			var/datum/disease2/disease/V = virus2[ID]
-			if(isnull(V)) // Trying to figure out a runtime error that keeps repeating
-				CRASH("virus2 nulled before calling activate()")
-			else
-				V.activate(src)
-			// activate may have deleted the virus
-			if(!V) continue
 
-			// check if we're immune
-			if(V.antigen & src.antibodies)
-				V.dead = 1
+		if(virus2.len)
+			for (var/ID in virus2)
+				var/datum/disease2/disease/V = virus2[ID]
+				if(isnull(V)) // Trying to figure out a runtime error that keeps repeating
+					CRASH("virus2 nulled before calling activate()")
+				else
+					V.activate(src)
+				// activate may have deleted the virus
+				if(!V) continue
+	
+				// check if we're immune
+				if(V.antigen & src.antibodies)
+					V.dead = 1
 
 		return
 
@@ -1422,7 +1479,7 @@
 	handle_shock()
 		..()
 		if(status_flags & GODMODE)	return 0	//godmode
-		if(analgesic) return // analgesic avoids all traumatic shock temporarily
+		if(analgesic || (species && species.flags & NO_PAIN)) return // analgesic avoids all traumatic shock temporarily
 
 		if(health < config.health_threshold_softcrit)// health 0 makes you immediately collapse
 			shock_stage = max(shock_stage, 61)
@@ -1471,7 +1528,10 @@
 			Weaken(20)
 
 	proc/handle_pulse()
+
 		if(life_tick % 5) return pulse	//update pulse every 5 life ticks (~1 tick/sec, depending on server load)
+
+		if(species && species.flags & NO_BLOOD) return PULSE_NONE //No blood, no pulse.
 
 		if(stat == DEAD)
 			return PULSE_NONE	//that's it, you're dead, nothing can influence your pulse
@@ -1506,6 +1566,149 @@
 					break
 
 		return temp
+
+/*
+	Called by life(), instead of having the individual hud items update icons each tick and check for status changes
+	we only set those statuses and icons upon changes.  Then those HUD items will simply add those pre-made images.
+	This proc below is only called when those HUD elements need to change as determined by the mobs hud_updateflag.
+*/
+
+
+/mob/living/carbon/human/proc/handle_hud_list()
+
+	if(hud_updateflag & 1 << HEALTH_HUD)
+		var/image/holder = hud_list[HEALTH_HUD]
+		if(stat == 2)
+			holder.icon_state = "hudhealth-100" 	// X_X
+		else
+			holder.icon_state = "hud[RoundHealth(health)]"
+
+		hud_list[HEALTH_HUD] = holder
+
+	if(hud_updateflag & 1 << STATUS_HUD)
+		var/foundVirus = 0
+		for(var/datum/disease/D in viruses)
+			if(!D.hidden[SCANNER])
+				foundVirus++
+		for (var/ID in virus2)
+			if (ID in virusDB)
+				foundVirus = 1
+				break
+
+		var/image/holder = hud_list[STATUS_HUD]
+		var/image/holder2 = hud_list[STATUS_HUD_OOC]
+		if(stat == 2)
+			holder.icon_state = "huddead"
+			holder2.icon_state = "huddead"
+		else if(status_flags & XENO_HOST)
+			holder.icon_state = "hudxeno"
+			holder2.icon_state = "hudxeno"
+		else if(foundVirus)
+			holder.icon_state = "hudill"
+		else if(has_brain_worms())
+			var/mob/living/simple_animal/borer/B = has_brain_worms()
+			if(B.controlling)
+				holder.icon_state = "hudbrainworm"
+			else
+				holder.icon_state = "hudhealthy"
+			holder2.icon_state = "hudbrainworm"
+		else
+			holder.icon_state = "hudhealthy"
+			if(virus2.len)
+				holder2.icon_state = "hudill"
+			else
+				holder2.icon_state = "hudhealthy"
+
+		hud_list[STATUS_HUD] = holder
+		hud_list[STATUS_HUD_OOC] = holder2
+
+	if(hud_updateflag & 1 << ID_HUD)
+		var/image/holder = hud_list[ID_HUD]
+		if(wear_id)
+			var/obj/item/weapon/card/id/I = wear_id.GetID()
+			if(I)
+				holder.icon_state = "hud[ckey(I.GetJobName())]"
+			else
+				holder.icon_state = "hudunknown"
+		else
+			holder.icon_state = "hudunknown"
+
+
+		hud_list[ID_HUD] = holder
+
+	if(hud_updateflag & 1 << WANTED_HUD)
+		var/image/holder = hud_list[WANTED_HUD]
+		holder.icon_state = "hudblank"
+		var/perpname = name
+		if(wear_id)
+			var/obj/item/weapon/card/id/I = wear_id.GetID()
+			if(I)
+				perpname = I.registered_name
+
+		for(var/datum/data/record/E in data_core.general)
+			if(E.fields["name"] == perpname)
+				for (var/datum/data/record/R in data_core.security)
+					if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "*Arrest*"))
+						holder.icon_state = "hudwanted"
+						break
+					else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Incarcerated"))
+						holder.icon_state = "hudprisoner"
+						break
+					else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Parolled"))
+						holder.icon_state = "hudparolled"
+						break
+					else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Released"))
+						holder.icon_state = "hudreleased"
+						break
+		hud_list[WANTED_HUD] = holder
+
+	if(hud_updateflag & 1 << IMPLOYAL_HUD || hud_updateflag & 1 << IMPCHEM_HUD || hud_updateflag & 1 << IMPTRACK_HUD)
+		var/image/holder1 = hud_list[IMPTRACK_HUD]
+		var/image/holder2 = hud_list[IMPLOYAL_HUD]
+		var/image/holder3 = hud_list[IMPCHEM_HUD]
+
+		holder1.icon_state = "hudblank"
+		holder2.icon_state = "hudblank"
+		holder3.icon_state = "hudblank"
+
+		for(var/obj/item/weapon/implant/I in src)
+			if(I.implanted)
+				if(istype(I,/obj/item/weapon/implant/tracking))
+					holder1.icon_state = "hud_imp_tracking"
+				if(istype(I,/obj/item/weapon/implant/loyalty))
+					holder2.icon_state = "hud_imp_loyal"
+				if(istype(I,/obj/item/weapon/implant/chem))
+					holder3.icon_state = "hud_imp_chem"
+
+		hud_list[IMPTRACK_HUD] = holder1
+		hud_list[IMPLOYAL_HUD] = holder2
+		hud_list[IMPCHEM_HUD] = holder3
+
+	if(hud_updateflag & 1 << SPECIALROLE_HUD)
+		var/image/holder = hud_list[SPECIALROLE_HUD]
+		holder.icon_state = "hudblank"
+		if(mind)
+
+			switch(mind.special_role)
+				if("traitor","Syndicate")
+					holder.icon_state = "hudsyndicate"
+				if("Revolutionary")
+					holder.icon_state = "hudrevolutionary"
+				if("Head Revolutionary")
+					holder.icon_state = "hudheadrevolutionary"
+				if("Cultist")
+					holder.icon_state = "hudcultist"
+				if("Changeling")
+					holder.icon_state = "hudchangeling"
+				if("Wizard","Fake Wizard")
+					holder.icon_state = "hudwizard"
+				if("Death Commando")
+					holder.icon_state = "huddeathsquad"
+				if("Ninja")
+					holder.icon_state = "hudninja"
+
+			hud_list[SPECIALROLE_HUD] = holder
+	hud_updateflag = 0
 
 
 #undef HUMAN_MAX_OXYLOSS

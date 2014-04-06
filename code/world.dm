@@ -14,8 +14,8 @@
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
 	diaryofmeanpeople = file("data/logs/[date_string] Attack.log")
-	diary << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
-	diaryofmeanpeople << "\n\nStarting up. [time2text(world.timeofday, "hh:mm.ss")]\n---------------------"
+	diary << "[log_end]\n[log_end]\nStarting up. [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
+	diaryofmeanpeople << "[log_end]\n[log_end]\nStarting up. [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
 	if(byond_version < RECOMMENDED_VERSION)
@@ -67,7 +67,7 @@
 //		..()
 
 /world/Topic(T, addr, master, key)
-	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
+	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
 
 	if (T == "ping")
 		var/x = 1
@@ -147,7 +147,7 @@
 	if(Lines.len)
 		if(Lines[1])
 			master_mode = Lines[1]
-			diary << "Saved mode is '[master_mode]'"
+			log_misc("Saved mode is '[master_mode]'")
 
 /world/proc/save_mode(var/the_mode)
 	var/F = file("data/mode.txt")
@@ -181,7 +181,7 @@
 	if(config.admin_legacy_system)
 		var/text = file2text("config/moderators.txt")
 		if (!text)
-			diary << "Failed to load config/mods.txt\n"
+			error("Failed to load config/mods.txt")
 		else
 			var/list/lines = text2list(text, "\n")
 			for(var/line in lines)
@@ -249,7 +249,7 @@
 		features += "hosted by <b>[config.hostedby]</b>"
 
 	if (features)
-		s += ": [dd_list2text(features, ", ")]"
+		s += ": [list2text(features, ", ")]"
 
 	/* does this help? I do not know */
 	if (src.status != s)

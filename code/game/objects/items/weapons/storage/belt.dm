@@ -167,3 +167,32 @@
 	desc = "No bother to sink or swim when you can just float!"
 	icon_state = "inflatable"
 	item_state = "inflatable"
+
+/obj/item/weapon/storage/belt/security/tactical
+	name = "combat belt"
+	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
+	icon_state = "swatbelt"
+	item_state = "swatbelt"
+	storage_slots = 9
+	max_w_class = 3
+	max_combined_w_class = 21
+	can_hold = list(
+		"/obj/item/weapon/grenade/flashbang",
+		"/obj/item/weapon/reagent_containers/spray/pepper",
+		"/obj/item/weapon/handcuffs",
+		"/obj/item/device/flash",
+		"/obj/item/clothing/glasses",
+		"/obj/item/ammo_casing/shotgun",
+		"/obj/item/ammo_magazine",
+		"/obj/item/weapon/reagent_containers/food/snacks/donut/normal",
+		"/obj/item/weapon/reagent_containers/food/snacks/donut/jelly",
+		"/obj/item/weapon/melee/baton",
+		"/obj/item/weapon/gun/energy/taser",
+		"/obj/item/weapon/lighter/zippo",
+		"/obj/item/weapon/cigpacket",
+		"/obj/item/clothing/glasses/hud/security",
+		"/obj/item/device/flashlight",
+		"/obj/item/device/pda",
+		"/obj/item/device/radio/headset",
+		"/obj/item/weapon/melee"
+		)

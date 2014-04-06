@@ -181,10 +181,12 @@
 		return
 	return
 
+/*
+
 /obj/machinery/body_scanconsole/process() //not really used right now
 	if(stat & (NOPOWER|BROKEN))
 		return
-	use_power(250) // power stuff
+	//use_power(250) // power stuff
 
 //	var/mob/M //occupant
 //	if (!( src.status )) //remove this
@@ -199,6 +201,8 @@
 //			src.status = null
 //	src.updateDialog()
 //	return
+
+*/
 
 
 /obj/machinery/body_scanconsole/attack_paw(user as mob)
@@ -249,6 +253,9 @@
 					dat += text("[]\tApprox. Brain Damage %: []</FONT><BR>", (occupant.getBrainLoss() < 1 ?"<font color='blue'>" : "<font color='red'>"), occupant.getBrainLoss())
 					dat += text("Paralysis Summary %: [] ([] seconds left!)<BR>", occupant.paralysis, round(occupant.paralysis / 4))
 					dat += text("Body Temperature: [occupant.bodytemperature-T0C]&deg;C ([occupant.bodytemperature*1.8-459.67]&deg;F)<BR><HR>")
+
+					if(occupant.has_brain_worms())
+						dat += "Large growth detected in frontal lobe, possibly cancerous. Surgical removal is recommended.<BR/>"
 
 					if(occupant.vessel)
 						var/blood_volume = round(occupant.vessel.get_reagent_amount("blood"))

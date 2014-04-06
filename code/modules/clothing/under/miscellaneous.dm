@@ -88,7 +88,7 @@
 	flags = FPRINT | TABLEPASS
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | ARMS //Needs gloves and shoes with cold protection to be fully protected.
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/under/acj
 	name = "administrative cybernetic jumpsuit"
@@ -102,7 +102,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	armor = list(melee = 100, bullet = 100, laser = 100,energy = 100, bomb = 100, bio = 100, rad = 100)
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
 
 /obj/item/clothing/under/owl
@@ -137,6 +137,13 @@
 	icon_state = "psysuit"
 	item_state = "psysuit"
 	item_color = "psysuit"
+
+/obj/item/clothing/under/gentlesuit
+	name = "Gentlemans Suit"
+	desc = "A silk black shirt with a white tie and a matching gray vest and slacks. Feels proper."
+	icon_state = "gentlesuit"
+	item_state = "gentlesuit"
+	item_color = "gentlesuit"
 
 /obj/item/clothing/under/gimmick/rank/captain/suit
 	name = "captain's suit"
@@ -285,11 +292,6 @@
 	icon_state = "dress_saloon"
 	item_color = "dress_saloon"
 
-/obj/item/clothing/under/dress/dress_rd
-	name = "research director dress uniform"
-	desc = "Feminine fashion for the style concious RD."
-	icon_state = "dress_rd"
-	item_color = "dress_rd"
 
 /obj/item/clothing/under/dress/dress_cap
 	name = "captain dress uniform"
@@ -358,7 +360,7 @@
 	flags_inv = HIDESHOES
 
 /obj/item/clothing/under/wedding/bride_white
-	name = "orange wedding dress"
+	name = "silky wedding dress"
 	desc = "A white wedding gown made from the finest silk."
 	icon_state = "bride_white"
 	item_color = "bride_white"

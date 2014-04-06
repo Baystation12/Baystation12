@@ -30,24 +30,41 @@
 	icon_state = "datadisk0" //Gosh I hope syndies don't mistake them for the nuke disk.
 	item_state = "card-id"
 	w_class = 1.0
-	var/data = ""
-	var/ue = 0
-	var/data_type = "ui" //ui|se
-	var/owner = "God Emperor of Mankind"
+	var/datum/dna2/record/buf=null
 	var/read_only = 0 //Well,it's still a floppy disk
+
+/obj/item/weapon/disk/data/proc/Initialize()
+	buf = new
+	buf.dna=new
 
 /obj/item/weapon/disk/data/demo
 	name = "data disk - 'God Emperor of Mankind'"
-	data = "066000033000000000AF00330660FF4DB002690"
-	//data = "0C80C80C80C80C80C8000000000000161FBDDEF" - Farmer Jeff
-	ue = 1
 	read_only = 1
+
+	New()
+		Initialize()
+		buf.types=DNA2_BUF_UE|DNA2_BUF_UI
+		//data = "066000033000000000AF00330660FF4DB002690"
+		//data = "0C80C80C80C80C80C8000000000000161FBDDEF" - Farmer Jeff
+		buf.dna.real_name="God Emperor of Mankind"
+		buf.dna.unique_enzymes = md5(buf.dna.real_name)
+		buf.dna.UI=list(0x066,0x000,0x033,0x000,0x000,0x000,0xAF0,0x033,0x066,0x0FF,0x4DB,0x002,0x690)
+		//buf.dna.UI=list(0x0C8,0x0C8,0x0C8,0x0C8,0x0C8,0x0C8,0x000,0x000,0x000,0x000,0x161,0xFBD,0xDEF) // Farmer Jeff
+		buf.dna.UpdateUI()
 
 /obj/item/weapon/disk/data/monkey
 	name = "data disk - 'Mr. Muggles'"
-	data_type = "se"
-	data = "0983E840344C39F4B059D5145FC5785DC6406A4FFF"
 	read_only = 1
+
+	New()
+		Initialize()
+		buf.types=DNA2_BUF_SE
+		var/list/new_SE=list(0x098,0x3E8,0x403,0x44C,0x39F,0x4B0,0x59D,0x514,0x5FC,0x578,0x5DC,0x640,0x6A4)
+		for(var/i=new_SE.len;i<=DNA_SE_LENGTH;i++)
+			new_SE += rand(1,1024)
+		buf.dna.SE=new_SE
+		buf.dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
+
 
 //Find a dead mob with a brain and client.
 /proc/find_dead_player(var/find_key)
@@ -102,6 +119,7 @@
 		return src.healthstring
 
 /obj/machinery/clonepod/attack_ai(mob/user as mob)
+	src.add_hiddenprint(user)
 	return attack_hand(user)
 /obj/machinery/clonepod/attack_paw(mob/user as mob)
 	return attack_hand(user)
@@ -116,20 +134,20 @@
 //Clonepod
 
 //Start growing a human clone in the pod!
-/obj/machinery/clonepod/proc/growclone(var/ckey, var/clonename, var/list/ui, var/list/se, var/mindref, var/datum/species/mrace, var/languages)
+/obj/machinery/clonepod/proc/growclone(var/datum/dna2/record/R)
 	if(mess || attempting)
 		return 0
-	var/datum/mind/clonemind = locate(mindref)
+	var/datum/mind/clonemind = locate(R.mind)
 	if(!istype(clonemind,/datum/mind))	//not a mind
 		return 0
 	if( clonemind.current && clonemind.current.stat != DEAD )	//mind is associated with a non-dead body
 		return 0
 	if(clonemind.active)	//somebody is using that mind
-		if( ckey(clonemind.key)!=ckey )
+		if( ckey(clonemind.key)!=R.ckey )
 			return 0
 	else
 		for(var/mob/dead/observer/G in player_list)
-			if(G.ckey == ckey)
+			if(G.ckey == R.ckey)
 				if(G.can_reenter_corpse)
 					break
 				else
@@ -147,9 +165,9 @@
 	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src)
 	occupant = H
 
-	if(!clonename)	//to prevent null names
-		clonename = "clone ([rand(0,999)])"
-	H.real_name = clonename
+	if(!R.dna.real_name)	//to prevent null names
+		R.dna.real_name = "clone ([rand(0,999)])"
+	H.real_name = R.dna.real_name
 
 	src.icon_state = "pod_1"
 	//Get the clone body ready
@@ -161,7 +179,7 @@
 	H.updatehealth()
 
 	clonemind.transfer_to(H)
-	H.ckey = ckey
+	H.ckey = R.ckey
 	H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
 
 	// -- Mode/mind specific stuff goes here
@@ -180,24 +198,24 @@
 
 	// -- End mode specific stuff
 
-	if(!H.dna)
+	if(!R.dna)
 		H.dna = new /datum/dna()
 		H.dna.real_name = H.real_name
-	if(ui)
-		H.UpdateAppearance(ui)
-	if(se)
-		H.dna.SE = se
-		H.dna.UpdateSE()
-		randmutb(H) //Sometimes the clones come out wrong.
+	else
+		H.dna=R.dna
+	H.UpdateAppearance()
+	randmutb(H) //Sometimes the clones come out wrong.
+	H.dna.UpdateSE()
+	H.dna.UpdateUI()
 
 	H.f_style = "Shaved"
-	if(mrace.name == "Human") //no more xenos losing ears/tentacles
+	if(R.dna.species == "Human") //no more xenos losing ears/tentacles
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
 
-	H.species = mrace
-	for(var/datum/language/L in languages)
-		H.add_language(L.name)
-	H.update_mutantrace()
+	H.set_species(R.dna.species)
+
+	//for(var/datum/language/L in languages)
+	//	H.add_language(L.name)
 	H.suiciding = 0
 	src.attempting = 0
 	return 1
@@ -231,6 +249,12 @@
 			if (src.occupant.reagents.get_reagent_amount("inaprovaline") < 30)
 				src.occupant.reagents.add_reagent("inaprovaline", 60)
 
+			//So clones will remain asleep for long enough to get them into cryo (Bay RP edit)
+			if (src.occupant.reagents.get_reagent_amount("stoxin") < 10)
+				src.occupant.reagents.add_reagent("stoxin", 5)
+			if (src.occupant.reagents.get_reagent_amount("chloralhydrate") < 1)
+				src.occupant.reagents.add_reagent("chloralhydrate", 1)
+
 			//Also heal some oxyloss ourselves because inaprovaline is so bad at preventing it!!
 			src.occupant.adjustOxyLoss(-4)
 
@@ -249,7 +273,7 @@
 			src.locked = 0
 		if (!src.mess)
 			icon_state = "pod_0"
-		use_power(200)
+		//use_power(200)
 		return
 
 	return

@@ -69,61 +69,78 @@
 /mob/living/carbon/human/proc/handle_organs()
 	number_wounds = 0
 	var/leg_tally = 2
-	for(var/datum/organ/external/E in organs)
+	var/force_process = 0
+	var/damage_this_tick = getBruteLoss() + getFireLoss() + getToxLoss()
+	if(damage_this_tick > last_dam)
+		force_process = 1
+	last_dam = damage_this_tick
+	if(!force_process && !bad_external_organs.len)
+		return
+	if(force_process)
+		bad_external_organs.Cut()
+		for(var/datum/organ/external/Ex in organs)
+			bad_external_organs += Ex
+			
+	for(var/datum/organ/external/E in bad_external_organs)
 		if(!E)
 			continue
-		E.process()
-		number_wounds += E.number_wounds
+		if(!E.need_process())
+			bad_external_organs -= E
+			continue
+		else
+			E.process()
+			number_wounds += E.number_wounds
 
-		//Robotic limb malfunctions
-		var/malfunction = 0
-		if (E.status & ORGAN_ROBOT && prob(E.brute_dam + E.burn_dam))
-			malfunction = 1
+			//Robotic limb malfunctions
+			var/malfunction = 0
+			if (E.status & ORGAN_ROBOT && prob(E.brute_dam + E.burn_dam))
+				malfunction = 1
 
-		//Broken limbs hurt too
-		var/broken = 0
-		if(E.status & ORGAN_BROKEN && !(E.status & ORGAN_SPLINTED) )
-			broken = 1
+			//Broken limbs hurt too
+			var/broken = 0
+			if(E.status & ORGAN_BROKEN && !(E.status & ORGAN_SPLINTED) )
+				broken = 1
 
-		//Moving around with fractured ribs won't do you any good
-		if (broken && E.internal_organs && prob(15))
-			if (!lying && world.timeofday - l_move_time < 15)
-				var/datum/organ/internal/I = pick(E.internal_organs)
-				custom_pain("You feel broken bones moving in your [E.display_name]!", 1)
-				I.take_damage(rand(3,5))
+			//Moving around with fractured ribs won't do you any good
+			if (broken && E.internal_organs && prob(15))
+				if (!lying && world.timeofday - l_move_time < 15)
+					var/datum/organ/internal/I = pick(E.internal_organs)
+					custom_pain("You feel broken bones moving in your [E.display_name]!", 1)
+					I.take_damage(rand(3,5))
 
-		//Special effects for limbs.
-		if(E.name in list("l_hand","l_arm","r_hand","r_arm") && (broken||malfunction))
-			var/obj/item/c_hand		//Getting what's in this hand
-			if(E.name == "l_hand" || E.name == "l_arm")
-				c_hand = l_hand
-			if(E.name == "r_hand" || E.name == "r_arm")
-				c_hand = r_hand
+			//Special effects for limbs.
+			if(E.name in list("l_hand","l_arm","r_hand","r_arm") && (broken||malfunction))
+				var/obj/item/c_hand		//Getting what's in this hand
+				if(E.name == "l_hand" || E.name == "l_arm")
+					c_hand = l_hand
+				if(E.name == "r_hand" || E.name == "r_arm")
+					c_hand = r_hand
 
-			if (c_hand)
-				u_equip(c_hand)
+				if (c_hand)
+					u_equip(c_hand)
 
-				if(broken)
-					emote("me", 1, "screams in pain and drops what they were holding in their [E.display_name?"[E.display_name]":"[E]"]!")
-				if(malfunction)
-					emote("me", 1, "drops what they were holding, their [E.display_name?"[E.display_name]":"[E]"] malfunctioning!")
-					var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-					spark_system.set_up(5, 0, src)
-					spark_system.attach(src)
-					spark_system.start()
-					spawn(10)
-						del(spark_system)
+					if(broken)
+						emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : "screams in pain and"] drops what they were holding in their [E.display_name?"[E.display_name]":"[E]"]!")
+					if(malfunction)
+						emote("me", 1, "drops what they were holding, their [E.display_name?"[E.display_name]":"[E]"] malfunctioning!")
+						var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+						spark_system.set_up(5, 0, src)
+						spark_system.attach(src)
+						spark_system.start()
+						spawn(10)
+							del(spark_system)
 
-		else if(E.name in list("l_leg","l_foot","r_leg","r_foot") && !lying)
-			if (!E.is_usable() || malfunction || (broken && !(E.status & ORGAN_SPLINTED)))
-				leg_tally--			// let it fail even if just foot&leg
+			else if(E.name in list("l_leg","l_foot","r_leg","r_foot") && !lying)
+				if (!E.is_usable() || malfunction || (broken && !(E.status & ORGAN_SPLINTED)))
+					leg_tally--			// let it fail even if just foot&leg
 
 	// standing is poor
 	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(5))
-		emote("scream")
+		if(species && species.flags & NO_PAIN)
+			emote("scream")
 		emote("collapse")
 		paralysis = 10
-
+	
 	//Check arms and legs for existence
 	can_stand = 2 //can stand on both legs
 	var/datum/organ/external/E = organs_by_name["l_foot"]
