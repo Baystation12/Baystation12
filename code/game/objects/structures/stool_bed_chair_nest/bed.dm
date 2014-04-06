@@ -99,6 +99,25 @@
 	src.add_fingerprint(user)
 	return
 
+/obj/structure/stool/bed/CanPass(atom/movable/mover)
+	if(ishuman(mover) && mover.checkpass(PASSCRAWL))
+		mover.layer = 2.7
+	return ..()
+
+
+/obj/structure/stool/bed/CheckExit(atom/movable/O as mob|obj)
+	if(istype(O) && O.checkpass(PASSCRAWL))
+		O.layer = 4.0
+	return ..()
+
+/obj/structure/stool/bed/examine()
+	..()
+	var/T = get_turf(src)
+	var/mob/living/carbon/human/H = locate() in T
+	if(H && H.crawling)
+		usr << "Some jerk hiding under [src]"
+	return
+
 /*
  * Roller beds
  */
@@ -107,6 +126,11 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
+
+/obj/structure/stool/bed/roller/CanPass(atom/movable/mover)
+	if(ishuman(mover) && mover.checkpass(PASSCRAWL))
+		return 0
+	return ..()
 
 /obj/item/roller
 	name = "roller bed"
