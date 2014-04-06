@@ -18,7 +18,8 @@
 
 
 /mob/dead/observer/emote(var/act, var/type, var/message)
-	message = sanitize(copytext(message, 1, MAX_MESSAGE_LEN))
+	//message = sanitize(copytext(message, 1, MAX_MESSAGE_LEN))
+	message = copytext(message, 1, MAX_MESSAGE_LEN)
 
 	if(!message)
 		return

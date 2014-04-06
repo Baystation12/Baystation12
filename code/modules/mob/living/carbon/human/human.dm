@@ -1296,11 +1296,16 @@
 
 	if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH) || buckled) return
 
-	crawling = !crawling
-	if(crawling)
-		pass_flags += PASSCRAWL
+	var/T = get_turf(src)
+	if( (locate(/obj/structure/table) in T) || (locate(/obj/structure/stool/bed) in T) )
+		return
 	else
-		pass_flags -= PASSCRAWL
+		if(crawling)
+			pass_flags += PASSCRAWL
+		else
+			pass_flags -= PASSCRAWL
+			layer = 4.0
+		crawling = !crawling
 
 	update_canmove()
 	src << "\blue You are now [crawling ? "crawling" : "getting up"]"
