@@ -353,12 +353,12 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 				if(5)
 					var/quantity = rand(1,3)
 					for(var/i=0, i<quantity, i++)
-						new /obj/item/weapon/shard(src)
+						getFromPool(/obj/item/weapon/shard, loc)
 
 				if(6)
 					var/quantity = rand(1,3)
 					for(var/i=0, i<quantity, i++)
-						new /obj/item/weapon/shard/plasma(src)
+						getFromPool(/obj/item/weapon/shard/plasma, loc)
 
 				if(7)
 					var/obj/item/stack/sheet/mineral/uranium/R = new(src)
@@ -387,6 +387,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 /turf/simulated/mineral/random/high_chance
 	mineralChance = 25
 	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 25)
+
 
 /turf/simulated/mineral/random/high_chance_clown
 	mineralChance = 40
