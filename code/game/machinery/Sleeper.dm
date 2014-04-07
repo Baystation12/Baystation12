@@ -187,7 +187,7 @@
 	blob_act()
 		if(prob(75))
 			for(var/atom/movable/A as mob|obj in src)
-				A.setloc(src.loc)
+				A.loc = src.loc
 				A.blob_act()
 			del(src)
 		return
@@ -198,7 +198,7 @@
 			if(!beaker)
 				beaker = G
 				user.drop_item()
-				G.setloc(src)
+				G.loc = src
 				user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
 				src.updateUsrDialog()
 				return
@@ -228,7 +228,7 @@
 				if(M.client)
 					M.client.perspective = EYE_PERSPECTIVE
 					M.client.eye = src
-				M.setloc(src)
+				M.loc = src
 				src.occupant = M
 				src.icon_state = "sleeper_1"
 				if(orient == "RIGHT")
@@ -248,21 +248,21 @@
 		switch(severity)
 			if(1.0)
 				for(var/atom/movable/A as mob|obj in src)
-					A.setloc(src.loc)
+					A.loc = src.loc
 					ex_act(severity)
 				qdel(src)
 				return
 			if(2.0)
 				if(prob(50))
 					for(var/atom/movable/A as mob|obj in src)
-						A.setloc(src.loc)
+						A.loc = src.loc
 						ex_act(severity)
 					qdel(src)
 					return
 			if(3.0)
 				if(prob(25))
 					for(var/atom/movable/A as mob|obj in src)
-						A.setloc(src.loc)
+						A.loc = src.loc
 						ex_act(severity)
 					qdel(src)
 					return
@@ -309,7 +309,7 @@
 		if(src.occupant.client)
 			src.occupant.client.eye = src.occupant.client.mob
 			src.occupant.client.perspective = MOB_PERSPECTIVE
-		src.occupant.setloc(src.loc)
+		src.occupant.loc = src.loc
 		src.occupant = null
 		if(orient == "RIGHT")
 			icon_state = "sleeper_0-r"
@@ -411,29 +411,8 @@
 		if(orient == "RIGHT")
 			icon_state = "sleeper_1-r"
 
-		for(var/mob/living/carbon/slime/M in range(1,usr))
-			if(M.Victim == usr)
-				usr << "You're too busy getting your life sucked out of you."
-				return
-		visible_message("[usr] starts climbing into the sleeper.", 3)
-		if(do_after(usr, 20))
-			if(src.occupant)
-				usr << "\blue <B>The sleeper is already occupied!</B>"
-				return
-			usr.stop_pulling()
-			usr.client.perspective = EYE_PERSPECTIVE
-			usr.client.eye = src
-			usr.setloc(src)
-			src.occupant = usr
-			src.icon_state = "sleeper_1"
-			if(orient == "RIGHT")
-				icon_state = "sleeper_1-r"
-
-			usr << "\blue <b>You feel cool air surround you. You go numb as your senses turn inward.</b>"
-
-			for(var/obj/O in src)
-				del(O)
-			src.add_fingerprint(usr)
-			return
+		for(var/obj/O in src)
+			del(O)
+		src.add_fingerprint(usr)
 		return
 	return
