@@ -40,13 +40,13 @@
 
 
 /obj/structure/grille/ex_act(severity)
-	qdel(src)
+	returnToPool(src)
 
 /obj/structure/grille/blob_act()
-	qdel(src)
+	returnToPool(src)
 
 /obj/structure/grille/meteorhit(var/obj/M)
-	qdel(src)
+	returnToPool(src)
 
 
 /obj/structure/grille/Bumped(atom/user)
