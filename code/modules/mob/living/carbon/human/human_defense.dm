@@ -56,7 +56,7 @@ emp_act
 		return 2
 
 //BEGIN BOOK'S TASER NERF.
-	if(istype(P, /obj/item/projectile/energy/electrode))
+	if(istype(P, /obj/item/projectile/beam/stun))
 		var/datum/organ/external/select_area = get_organ(def_zone) // We're checking the outside, buddy!
 		var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
 		// var/deflectchance=90 //Is it a CRITICAL HIT with that taser?
