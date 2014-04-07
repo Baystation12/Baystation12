@@ -449,6 +449,10 @@
 	del(src)
 //BubbleWrap END
 
-
+/obj/item/weapon/storage/hear_talk(mob/M as mob, text)
+	for (var/atom/A in src)
+		if(istype(A,/obj/))
+			var/obj/O = A
+			O.hear_talk(M, text)
 
 
