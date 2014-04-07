@@ -134,7 +134,6 @@
 				heal_overall_damage(rads,rads)
 				adjustOxyLoss(-(rads))
 				adjustToxLoss(-(rads))
-				updatehealth()
 				return
 
 			if (radiation > 100)
@@ -148,7 +147,6 @@
 					radiation--
 					if(prob(25))
 						adjustToxLoss(1)
-						updatehealth()
 
 				if(50 to 74)
 					radiation -= 2
@@ -158,7 +156,6 @@
 						Weaken(3)
 						src << "\red You feel weak."
 						emote("collapse")
-					updatehealth()
 
 				if(75 to 100)
 					radiation -= 3
@@ -257,7 +254,8 @@
 							block = 1
 
 					if(!block)
-						for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
+
+						for(var/obj/effect/effect/chem_smoke/smoke in view(1, src))
 							if(smoke.reagents.total_volume)
 								smoke.reagents.reaction(src, INGEST)
 								spawn(5)
@@ -483,12 +481,9 @@
 		else
 			dizziness = max(0, dizziness - 1)
 
-		updatehealth()
-
 		return //TODO: DEFERRED
 
 	proc/handle_regular_status_updates()
-		updatehealth()
 
 		if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
 			blinded = 1
