@@ -86,3 +86,29 @@
 		icon_state = "paper_bin0"
 	else
 		icon_state = "paper_bin1"
+
+
+/obj/item/weapon/paper_bin/carbon
+	name = "carbonless paper bin"
+	icon_state = "paper_bin2"
+
+/obj/item/weapon/paper_bin/carbon/attack_hand(mob/user as mob)
+	if(amount >= 1)
+		amount--
+		if(amount==0)
+			update_icon()
+
+		var/obj/item/weapon/paper/carbon/P
+		if(papers.len > 0)	//If there's any custom paper on the stack, use that instead of creating a new paper.
+			P = papers[papers.len]
+			papers.Remove(P)
+		else
+			P = new /obj/item/weapon/paper/carbon
+		P.loc = user.loc
+		user.put_in_hands(P)
+		user << "<span class='notice'>You take [P] out of the [src].</span>"
+	else
+		user << "<span class='notice'>[src] is empty!</span>"
+
+	add_fingerprint(user)
+	return
