@@ -103,6 +103,7 @@ obj/item/weapon/gun/energy/laser/retro
 /obj/item/weapon/gun/energy/xray
 	name = "xray laser gun"
 	desc = "A high-power laser gun capable of expelling concentrated xray blasts."
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "xray"
 	origin_tech = "combat=5;materials=3;magnets=2;syndicate=2"
 	ammo_type = list(/obj/item/ammo_casing/energy/xray)
@@ -111,6 +112,7 @@ obj/item/weapon/gun/energy/laser/retro
 
 /obj/item/weapon/gun/energy/laser/bluetag
 	name = "laser tag gun"
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "bluetag"
 	desc = "Standard issue weapon of the Imperial Guard"
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/bluetag)
@@ -146,6 +148,7 @@ obj/item/weapon/gun/energy/laser/retro
 
 /obj/item/weapon/gun/energy/laser/redtag
 	name = "laser tag gun"
+	icon = 'icons/obj/gun.dmi'
 	icon_state = "redtag"
 	desc = "Standard issue weapon of the Imperial Guard"
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/redtag)
