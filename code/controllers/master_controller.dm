@@ -31,10 +31,12 @@ datum/controller/game_controller
 
 	var/last_thing_processed
 	var/mob/list/expensive_mobs = list()
+	var/rebuild_active_areas = 0
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
 	if(master_controller != src)
+		log_debug("Rebuilding Master Controller")
 		if(istype(master_controller))
 			Recover()
 			del(master_controller)
@@ -78,7 +80,6 @@ datum/controller/game_controller/proc/setup()
 		if(ticker)
 			ticker.pregame()
 
-	new/datum/controller/lighting()
 	lighting_controller.Initialize()
 
 
@@ -260,27 +261,37 @@ datum/controller/game_controller/proc/process_machines()
 			last_thing_processed = Machine.type
 			if(Machine.process() != PROCESS_KILL)
 				if(Machine)
-
-//					if(Machine.use_power)
-//						Machine.auto_use_power()
-
 					i++
 					continue
 		machines.Cut(i,i+1)
+
 	i=1
 	while(i<=active_areas.len)
 		var/area/A = active_areas[i]
-		if(A.powerupdate)
+		if(A.powerupdate && A.master == A)
 			A.powerupdate -= 1
-			for(var/obj/machinery/M in A)
-				if(M)
-					if(M.use_power)
-						M.auto_use_power()
+			for(var/area/SubArea in A.related)
+				for(var/obj/machinery/M in SubArea)
+					if(M)
+						if(M.use_power)
+							M.auto_use_power()
 			
-		if(A.apc.len)
+		if(A.apc.len && A.master == A)
 			i++
 			continue
+
+		A.powerupdate = 0
 		active_areas.Cut(i,i+1)
+
+
+	if(controller_iteration % 150 == 0 || rebuild_active_areas)	//Every 300 seconds we retest every area/machine
+		for(var/area/A in all_areas)
+			if(A == A.master)
+				A.powerupdate += 1
+				active_areas |= A
+		rebuild_active_areas = 0
+
+	
 		
 
 datum/controller/game_controller/proc/process_objects()

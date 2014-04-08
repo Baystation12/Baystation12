@@ -195,8 +195,6 @@
 	if(L)
 		del L
 
-var/turf_light_data/old_lights = new
-
 //Creates a new turf
 /turf/proc/ChangeTurf(var/turf/N)
 	if (!N)
@@ -216,11 +214,9 @@ var/turf_light_data/old_lights = new
 					return W
 ///// Z-Level Stuff
 
+	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
+
 	//world << "Replacing [src.type] with [N]"
-
-	var/old_opacity = opacity
-
-	old_lights.copy_from(src)
 
 	if(connections) connections.erase_all()
 
@@ -242,12 +238,10 @@ var/turf_light_data/old_lights = new
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 		//W.Assimilate_Air()
 
-		old_lights.copy_to(W)
-		W.ResetAllLights()
-
-		if(old_opacity)
-			W.opacity = 1
-			W.SetOpacity(0)
+		W.lighting_lumcount += old_lumcount
+		if(old_lumcount != W.lighting_lumcount)
+			W.lighting_changed = 1
+			lighting_controller.changed_turfs += W
 
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
@@ -265,9 +259,10 @@ var/turf_light_data/old_lights = new
 		//		zone.SetStatus(ZONE_ACTIVE)
 
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
-
-		old_lights.copy_to(W)
-		W.ResetAllLights()
+		W.lighting_lumcount += old_lumcount
+		if(old_lumcount != W.lighting_lumcount)
+			W.lighting_changed = 1
+			lighting_controller.changed_turfs += W
 
 		if(air_master)
 			air_master.mark_for_update(src)

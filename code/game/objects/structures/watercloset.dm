@@ -323,15 +323,23 @@
 	anchored = 1
 	var/busy = 0 	//Something's being washed at the moment
 
-/obj/structure/sink/attack_hand(mob/M as mob)
-	if(isrobot(M) || isAI(M))
+/obj/structure/sink/attack_hand(mob/user as mob)
+	if (hasorgans(user))
+		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
+		if (user.hand)
+			temp = user:organs_by_name["l_hand"]
+		if(temp && !temp.is_usable())
+			user << "<span class='notice'>You try to move your [temp.display_name], but cannot!"
+			return
+
+	if(isrobot(user) || isAI(user))
 		return
 
-	if(!Adjacent(M))
+	if(!Adjacent(user))
 		return
 
 	if(busy)
-		M << "\red Someone's already washing here."
+		user << "\red Someone's already washing here."
 		return
 
 	usr << "\blue You start washing your hands."
@@ -340,13 +348,14 @@
 	sleep(40)
 	busy = 0
 
-	if(!Adjacent(M)) return		//Person has moved away from the sink
+	if(!Adjacent(user)) return		//Person has moved away from the sink
 
-	M.clean_blood()
-	if(ishuman(M))
-		M:update_inv_gloves()
+	user.clean_blood()
+	if(ishuman(user))
+		user:update_inv_gloves()
 	for(var/mob/V in viewers(src, null))
-		V.show_message("\blue [M] washes their hands using \the [src].")
+		V.show_message("\blue [user] washes their hands using \the [src].")
+
 
 /obj/structure/sink/attackby(obj/item/O as obj, mob/user as mob)
 	if(busy)

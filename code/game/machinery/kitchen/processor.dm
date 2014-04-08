@@ -1,4 +1,3 @@
-
 /obj/machinery/processor
 	name = "Food Processor"
 	icon = 'icons/obj/kitchen.dmi'
@@ -27,23 +26,23 @@
 	/* objs */
 	meat
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat
-		output = /obj/item/weapon/reagent_containers/food/snacks/faggot
+		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 
 	meat2
 		input = /obj/item/weapon/syntiflesh
-		output = /obj/item/weapon/reagent_containers/food/snacks/faggot
+		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 /*
 	monkeymeat
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
-		output = /obj/item/weapon/reagent_containers/food/snacks/faggot
+		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 
 	humanmeat
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat/human
-		output = /obj/item/weapon/reagent_containers/food/snacks/faggot
+		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 */
 	potato
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/potato
-		output = /obj/item/weapon/reagent_containers/food/snacks/fries
+		output = /obj/item/weapon/reagent_containers/food/snacks/rawsticks
 
 	carrot
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/carrot
@@ -158,5 +157,4 @@
 		src.processing = 0
 	src.visible_message("\blue \the [src] finished processing.", \
 		"You hear the food processor stopping/")
-
 

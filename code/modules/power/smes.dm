@@ -218,6 +218,10 @@
 	if (!istype(src.loc, /turf) && !istype(usr, /mob/living/silicon/))
 		return 0 // Do not update ui
 
+	for(var/area/A in active_areas)
+		A.master.powerupdate = 3
+
+
 	if( href_list["cmode"] )
 		chargemode = !chargemode
 		if(!chargemode)

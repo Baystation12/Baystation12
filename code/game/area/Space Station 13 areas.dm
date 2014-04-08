@@ -860,7 +860,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "chapeloffice"
 
 /area/lawoffice
-	name = "\improper Law Office"
+	name = "\improper Internal Affairs"
 	icon_state = "law"
 
 
@@ -976,6 +976,10 @@ var/list/ghostteleportlocs = list()
 	hallway
 		name = "\improper Engineering Hallway"
 		icon_state = "engine_hallway"
+
+	engine_eva
+		name = "\improper Engine EVA"
+		icon_state = "engine_eva"
 
 	workshop
 		name = "\improper Engineering Workshop"
@@ -1237,6 +1241,11 @@ var/list/ghostteleportlocs = list()
 /area/security/range
 	name = "\improper Firing Range"
 	icon_state = "firingrange"
+
+/area/security/tactical
+	name = "\improper Tactical Equipment"
+	icon_state = "Tactical"
+
 
 /*
 	New()
