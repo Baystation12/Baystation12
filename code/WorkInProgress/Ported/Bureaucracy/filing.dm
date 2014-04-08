@@ -8,7 +8,7 @@
 
 /obj/structure/filingcabinet/attackby(obj/item/weapon/paper/P,mob/M)
 	if(istype(P))
-		M << "You put the [P] in the [src]."
+		M << "You put \the [P] in the [src]."
 		M.drop_item()
 		P.loc = src
 	else

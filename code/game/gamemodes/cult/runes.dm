@@ -815,7 +815,7 @@ var/list/sacrificed = list()
 				if (cultist == user) //just to be sure.
 					return
 				if(cultist.buckled || cultist.handcuffed || (!isturf(cultist.loc) && !istype(cultist.loc, /obj/structure/closet)))
-					user << "\red You cannot summon the [cultist], for his shackles of blood are strong"
+					user << "\red You cannot summon the [cultist], for his shackles of blood are strong."
 					return fizzle()
 				cultist.loc = src.loc
 				cultist.lying = 1
