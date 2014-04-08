@@ -261,6 +261,7 @@ client
 
 			body += "<option value='?_src_=vars;addverb=\ref[D]'>Add Verb</option>"
 			body += "<option value='?_src_=vars;remverb=\ref[D]'>Remove Verb</option>"
+			body += "<option value='?_src_=vars;setckey=\ref[D]'>Set Client</option>"
 			if(ishuman(D))
 				body += "<option value>---</option>"
 				body += "<option value='?_src_=vars;setmutantrace=\ref[D]'>Set Mutantrace</option>"
@@ -813,9 +814,9 @@ client
 
 	else if(href_list["addverb"])
 		if(!check_rights(R_DEBUG))      return
-		
+
 		var/mob/living/H = locate(href_list["addverb"])
-		
+
 		if(!istype(H))
 			usr << "This can only be done to instances of type /mob/living"
 			return
@@ -831,7 +832,7 @@ client
 				possibleverbs += typesof(/mob/living/silicon/proc,/mob/living/silicon/ai/proc,/mob/living/silicon/ai/verb)
 		possibleverbs -= H.verbs
 		possibleverbs += "Cancel" 								// ...And one for the bottom
-		
+
 		var/verb = input("Select a verb!", "Verbs",null) as anything in possibleverbs
 		if(!H)
 			usr << "Mob doesn't exist anymore"
@@ -840,7 +841,7 @@ client
 			return
 		else
 			H.verbs += verb
-		
+
 	else if(href_list["remverb"])
 		if(!check_rights(R_DEBUG))      return
 
@@ -858,7 +859,7 @@ client
 		else
 			H.verbs -= verb
 
-	
+
 
 	else if(href_list["regenerateicons"])
 		if(!check_rights(0))	return
@@ -898,6 +899,25 @@ client
 			log_admin("[key_name(usr)] dealt [amount] amount of [Text] damage to [L] ")
 			message_admins("\blue [key_name(usr)] dealt [amount] amount of [Text] damage to [L] ")
 			href_list["datumrefresh"] = href_list["mobToDamage"]
+
+	else if(href_list["setckey"])
+		if(!check_rights(R_FUN))	return
+
+		var/mob/C = locate(href_list["setckey"])
+		if(C.ckey)
+			if(copytext(C.ckey, 1, 2) != "@")
+				usr << "\red This mob already controlled by [C.ckey]."
+				return
+
+		var/list/clients_list = clients + "Cancel"
+		var/client/new_client = input("Select client:","Clients","Cancel") in clients_list
+
+		if(new_client == "Cancel") return
+
+		message_admins("\blue [key_name_admin(usr)] set client [new_client.ckey] to [C.name].", 1)
+		log_admin("[key_name(usr)] set client [new_client.ckey] to [C.name].")
+
+		C.ckey = new_client.ckey
 
 	if(href_list["datumrefresh"])
 		var/datum/DAT = locate(href_list["datumrefresh"])
