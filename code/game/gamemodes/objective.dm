@@ -229,7 +229,7 @@ datum/objective/debrain//I want braaaainssss
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Steal the brain of [target.current.real_name]."
+			explanation_text = "Steal the brain of [target.current.real_name] the [target.assigned_role]."
 		else
 			explanation_text = "Free Objective"
 		return target
