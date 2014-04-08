@@ -431,9 +431,8 @@
 
 /area/proc/get_apc()
 	for(var/area/RA in src.related)
-		var/obj/machinery/power/apc/FINDME = locate() in RA
-		if (FINDME)
-			return FINDME
+		if (RA.apc.len >= 1)
+			return RA.apc[1]
 
 
 //Determines how strong could be shock, deals damage to mob, uses power.
