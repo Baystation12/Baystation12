@@ -14,7 +14,7 @@
 	return src.attack_hand(user)
 
 /obj/machinery/igniter/attack_paw(mob/user as mob)
-	src.attack_hand(user)
+	return
 
 /obj/machinery/igniter/attack_hand(mob/user as mob)
 	if(..())
