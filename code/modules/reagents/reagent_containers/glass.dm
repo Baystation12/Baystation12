@@ -41,6 +41,7 @@
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
 		/obj/machinery/hydroponics,
+		/obj/machinery/seed_splicer,
 		/obj/machinery/constructable_frame)
 
 	New()
