@@ -49,6 +49,15 @@ function SetMusic(url, time, volume) {
 	// One media source per area.
 	var/obj/machinery/media/media_source = null
 
+
+#ifdef DEBUG_MEDIAPLAYER
+#define MP_DEBUG(x) owner << x
+#warning Please comment out #define DEBUG_MEDIAPLAYER before committing.
+#else
+#define MP_DEBUG(x)
+#endif
+
+
 /datum/media_manager
 	var/url = ""
 	var/start_time = 0
@@ -73,7 +82,7 @@ function SetMusic(url, time, volume) {
 	proc/send_update()
 		if(!(owner.prefs.toggles & SOUND_STREAMING))
 			return // Nope.
-		//testing("Sending update to WMP...")
+		MP_DEBUG("\green Sending update to WMP ([url])...")
 		owner << output(list2params(list(url, (world.time - start_time) / 10, volume)), "[window]:SetMusic")
 
 	proc/stop_music()
