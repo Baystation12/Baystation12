@@ -174,7 +174,6 @@
 
 
 /mob/living/carbon/human
-
 	proc/handle_disabilities()
 		if (disabilities & EPILEPSY)
 			if ((prob(1) && paralysis < 1))
@@ -196,6 +195,7 @@
 				drop_item()
 				emote("cough")
 		if (disabilities & TOURETTES)
+			speech_problem_flag = 1
 			if ((prob(10) && paralysis <= 1))
 				Stun(10)
 				switch(rand(1, 3))
@@ -208,6 +208,7 @@
 				animate(src, pixel_x = pixel_x + x_offset, pixel_y = pixel_y + y_offset, time = 1)
 				animate(pixel_x = pixel_x - x_offset, pixel_y = pixel_y - y_offset, time = 1)
 		if (disabilities & NERVOUS)
+			speech_problem_flag = 1
 			if (prob(10))
 				stuttering = max(10, stuttering)
 
@@ -268,6 +269,7 @@
 			if(gene.is_active(src))
 				if (prob(10) && prob(gene.instability))
 					adjustCloneLoss(1)
+				speech_problem_flag = 1
 				gene.OnMobLife(src)
 
 		if (radiation)
@@ -1125,6 +1127,7 @@
 				if(halloss > 0)
 					adjustHalLoss(-3)
 			else if(sleeping)
+				speech_problem_flag = 1
 				handle_dreams()
 				adjustHalLoss(-3)
 				if (mind)
@@ -1226,18 +1229,21 @@
 
 			//Other
 			if(stunned)
+				speech_problem_flag = 1
 				AdjustStunned(-1)
 
 			if(weakened)
 				weakened = max(weakened-1,0)	//before you get mad Rockdtben: I done this so update_canmove isn't called multiple times
 
 			if(stuttering)
+				speech_problem_flag = 1
 				stuttering = max(stuttering-1, 0)
 
 			if (slurring)
 				slurring = max(slurring-(1*sober_str), 0)
 
 			if(silent)
+				speech_problem_flag = 1
 				silent = max(silent-1, 0)
 
 			if(druggy)
