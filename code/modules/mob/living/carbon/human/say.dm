@@ -4,6 +4,11 @@
 	var/message_range = world.view
 	var/italics = 0
 
+	if(client)
+		if(client.prefs.muted & MUTE_IC)
+			src << "\red You cannot speak in IC (Muted)."
+			return
+	
 	if(stat == 2)
 		return say_dead(message)
 
@@ -161,11 +166,6 @@
 	if(silent)
 		message = ""
 		handled = 1
-	if(client)
-		if(client.prefs.muted & MUTE_IC)
-			src << "\red You cannot speak in IC (Muted)."
-			message = ""
-			handled = 1
 	if(sdisabilities & MUTE)
 		message = ""
 		handled = 1

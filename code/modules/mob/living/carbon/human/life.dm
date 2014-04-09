@@ -142,7 +142,6 @@
 		return ONE_ATMOSPHERE - pressure_difference
 
 /mob/living/carbon/human
-
 	proc/handle_disabilities()
 		if (disabilities & EPILEPSY)
 			if ((prob(1) && paralysis < 1))
@@ -160,6 +159,7 @@
 					emote("cough")
 					return
 		if (disabilities & TOURETTES)
+			speech_problem_flag = 1
 			if ((prob(10) && paralysis <= 1))
 				Stun(10)
 				spawn( 0 )
@@ -177,6 +177,7 @@
 					pixel_y = old_y
 					return
 		if (disabilities & NERVOUS)
+			speech_problem_flag = 1
 			if (prob(10))
 				stuttering = max(10, stuttering)
 		// No. -- cib
@@ -231,6 +232,7 @@
 			if(!gene.block)
 				continue
 			if(gene.is_active(src))
+				speech_problem_flag = 1
 				gene.OnMobLife(src)
 
 		if (radiation)
@@ -1053,6 +1055,7 @@
 				if(halloss > 0)
 					adjustHalLoss(-3)
 			else if(sleeping)
+				speech_problem_flag = 1
 				handle_dreams()
 				adjustHalLoss(-3)
 				if (mind)
@@ -1104,16 +1107,19 @@
 
 			//Other
 			if(stunned)
+				speech_problem_flag = 1
 				AdjustStunned(-1)
 
 			if(weakened)
 				weakened = max(weakened-1,0)	//before you get mad Rockdtben: I done this so update_canmove isn't called multiple times
 
 			if(stuttering)
+				speech_problem_flag = 1
 				stuttering = max(stuttering-1, 0)
 			if (src.slurring)
 				slurring = max(slurring-1, 0)
 			if(silent)
+				speech_problem_flag = 1
 				silent = max(silent-1, 0)
 
 			if(druggy)
