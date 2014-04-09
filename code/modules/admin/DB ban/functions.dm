@@ -263,7 +263,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	holder.DB_ban_panel()
 
 
-/datum/admins/proc/DB_ban_panel(var/playerckey = null, var/adminckey = null)
+/datum/admins/proc/DB_ban_panel(var/playerckey = null, var/adminckey = null, var/playerip = null, var/playercid = null, var/match = null)
 	if(!usr.client)
 		return
 
@@ -285,18 +285,18 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	output += "<form method='GET' action='?src=\ref[src]'><b>Add custom ban:</b> (ONLY use this if you can't ban through any other method)"
 	output += "<input type='hidden' name='src' value='\ref[src]'>"
 	output += "<table width='100%'><tr>"
-	output += "<td><b>Ban type:</b><select name='dbbanaddtype'>"
+	output += "<td width='50%' align='right'><b>Ban type:</b><select name='dbbanaddtype'>"
 	output += "<option value=''>--</option>"
 	output += "<option value='[BANTYPE_PERMA]'>PERMABAN</option>"
 	output += "<option value='[BANTYPE_TEMP]'>TEMPBAN</option>"
 	output += "<option value='[BANTYPE_JOB_PERMA]'>JOB PERMABAN</option>"
 	output += "<option value='[BANTYPE_JOB_TEMP]'>JOB TEMPBAN</option>"
 	output += "</select></td>"
-	output += "<td><b>Ckey:</b> <input type='text' name='dbbanaddckey'></td></tr>"
-	output += "<tr><td><b>IP:</b> <input type='text' name='dbbanaddip'></td>"
-	output += "<td><b>Computer id:</b> <input type='text' name='dbbanaddcid'></td></tr>"
-	output += "<tr><td><b>Duration:</b> <input type='text' name='dbbaddduration'></td>"
-	output += "<td><b>Job:</b><select name='dbbanaddjob'>"
+	output += "<td width='50%' align='right'><b>Ckey:</b> <input type='text' name='dbbanaddckey'></td></tr>"
+	output += "<tr><td width='50%' align='right'><b>IP:</b> <input type='text' name='dbbanaddip'></td>"
+	output += "<td width='50%' align='right'><b>CID:</b> <input type='text' name='dbbanaddcid'></td></tr>"
+	output += "<tr><td width='50%' align='right'><b>Duration:</b> <input type='text' name='dbbaddduration'></td>"
+	output += "<td width='50%' align='right'><b>Job:</b><select name='dbbanaddjob'>"
 	output += "<option value=''>--</option>"
 	for(var/j in get_all_jobs())
 		output += "<option value='[j]'>[j]</option>"
@@ -313,15 +313,18 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	output += "</tr>"
 	output += "</table>"
 
-	output += "<form method='GET' action='?src=\ref[src]'><b>Search:</b> "
-	output += "<input type='hidden' name='src' value='\ref[src]'>"
-	output += "<b>Ckey:</b> <input type='text' name='dbsearchckey' value='[playerckey]'>"
-	output += "<b>Admin ckey:</b> <input type='text' name='dbsearchadmin' value='[adminckey]'>"
-	output += "<input type='submit' value='search'>"
+	output += "<form method='GET' action='?src=\ref[src]'><table width='60%'><tr><td colspan='2' align='left'><b>Search:</b>"
+	output += "<input type='hidden' name='src' value='\ref[src]'></td></tr>"
+	output += "<tr><td width='50%' align='right'><b>Ckey:</b> <input type='text' name='dbsearchckey' value='[playerckey]'></td>"
+	output += "<td width='50%' align='right'><b>Admin ckey:</b> <input type='text' name='dbsearchadmin' value='[adminckey]'></td></tr>"
+	output += "<tr><td width='50%' align='right'><b>IP:</b> <input type='text' name='dbsearchip' value='[playerip]'></td>"
+	output += "<td width='50%' align='right'><b>CID:</b> <input type='text' name='dbsearchcid' value='[playercid]'></td></tr></table>"
+	output += "<br><input type='submit' value='search'><br>"
+	output += "<input type='checkbox' value='[match]' name='dbmatch' [match? "checked=\"1\"" : null]> Match(min. 3 characters to search)<br>"
 	output += "</form>"
 	output += "Please note that all jobban bans or unbans are in-effect the following round."
 
-	if(adminckey || playerckey)
+	if(adminckey || playerckey || playerip || playercid)
 
 		var/blcolor = "#ffeeee" //banned light
 		var/bdcolor = "#ffdddd" //banned dark
@@ -339,14 +342,33 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 
 		adminckey = ckey(adminckey)
 		playerckey = ckey(playerckey)
+		playerip = sql_sanitize_text(playerip)
+		playercid = sql_sanitize_text(playercid)
+
 		var/adminsearch = ""
 		var/playersearch = ""
-		if(adminckey)
-			adminsearch = "AND a_ckey = '[adminckey]' "
-		if(playerckey)
-			playersearch = "AND ckey = '[playerckey]' "
+		var/ipsearch = ""
+		var/cidsearch = ""
+		if(!match)
+			if(adminckey)
+				adminsearch = "AND a_ckey = '[adminckey]' "
+			if(playerckey)
+				playersearch = "AND ckey = '[playerckey]' "
+			if(playerip)
+				ipsearch  = "AND ip = '[playerip]' "
+			if(playercid)
+				cidsearch  = "AND computerid = '[playercid]' "
+		else
+			if(adminckey && lentext(adminckey) > 3)
+				adminsearch = "AND a_ckey LIKE '[adminckey]%' "
+			if(playerckey && lentext(playerckey) > 3)
+				playersearch = "AND ckey LIKE '[playerckey]%' "
+			if(playerip && lentext(playerip) > 3)
+				ipsearch  = "AND ip LIKE '[playerip]%' "
+			if(playercid && lentext(playercid) > 3)
+				cidsearch  = "AND computerid LIKE '[playercid]%' "
 
-		var/DBQuery/select_query = dbcon.NewQuery("SELECT id, bantime, bantype, reason, job, duration, expiration_time, ckey, a_ckey, unbanned, unbanned_ckey, unbanned_datetime, edits FROM erro_ban WHERE 1 [playersearch] [adminsearch] ORDER BY bantime DESC")
+		var/DBQuery/select_query = dbcon.NewQuery("SELECT id, bantime, bantype, reason, job, duration, expiration_time, ckey, a_ckey, unbanned, unbanned_ckey, unbanned_datetime, edits, ip, computerid FROM erro_ban WHERE 1 [playersearch] [adminsearch] [ipsearch] [cidsearch] ORDER BY bantime DESC")
 		select_query.Execute()
 
 		while(select_query.NextRow())
@@ -363,6 +385,8 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 			var/unbanckey = select_query.item[11]
 			var/unbantime = select_query.item[12]
 			var/edits = select_query.item[13]
+			var/ip = select_query.item[14]
+			var/cid = select_query.item[15]
 
 			var/lcolor = blcolor
 			var/dcolor = bdcolor
@@ -388,6 +412,10 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 			output += "<td align='center'><b>[ackey]</b></td>"
 			output += "<td align='center'>[(unbanned) ? "" : "<b><a href=\"byond://?src=\ref[src];dbbanedit=unban;dbbanid=[banid]\">Unban</a></b>"]</td>"
 			output += "</tr>"
+			output += "<tr bgcolor='[dcolor]'>"
+			output += "<td align='center' colspan='2' bgcolor=''><b>IP:</b> [ip]</td>"
+			output += "<td align='center' colspan='3' bgcolor=''><b>CIP:</b> [cid]</td>"
+			output += "</tr>"
 			output += "<tr bgcolor='[lcolor]'>"
 			output += "<td align='center' colspan='5'><b>Reason: [(unbanned) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=reason;dbbanid=[banid]\">Edit</a>)"]</b> <cite>\"[reason]\"</cite></td>"
 			output += "</tr>"
@@ -408,4 +436,4 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 
 		output += "</table></div>"
 
-	usr << browse(output,"window=lookupbans;size=900x500")
+	usr << browse(output,"window=lookupbans;size=900x700")
