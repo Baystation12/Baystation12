@@ -330,10 +330,10 @@ var/list/department_radio_keys = list(
 				P.speech_buffer.Remove(pick(P.speech_buffer))
 			P.speech_buffer.Add(message)
 
-		if(istype(A, /obj/)) //radio in pocket could work, radio in backpack wouldn't --rastaf0
+		if(istype(A, /obj/)) //radios in pockets and backpacks work
 			var/obj/O = A
 			spawn (0)
-				if(O && !istype(O.loc, /obj/item/weapon/storage))
+				if(O)
 					O.hear_talk(src, message)
 
 
