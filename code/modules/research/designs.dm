@@ -1567,7 +1567,7 @@ datum/design/stunshell
 
 datum/design/phoronpistol
 	name = "phoron pistol"
-	desc = "A specialized firearm designed to fire lethal bolts of toxins."
+	desc = "A specialized firearm designed to fire lethal bolts of phoron."
 	id = "ppistol"
 	req_tech = list("combat" = 5, "phorontech" = 4)
 	build_type = PROTOLATHE
@@ -1830,14 +1830,14 @@ datum/design/cart_mime
 	build_path = "/obj/item/weapon/cartridge/mime"
 */
 
-datum/design/cart_toxins
+datum/design/cart_science
 	name = "Signal Ace 2 Cartridge"
 	desc = "A data cartridge for portable microcomputers."
-	id = "cart_toxins"
+	id = "cart_science"
 	req_tech = list("engineering" = 2, "powerstorage" = 3)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
-	build_path = "/obj/item/weapon/cartridge/toxins"
+	build_path = "/obj/item/weapon/cartridge/science"
 datum/design/cart_quartermaster
 	name = "Space Parts & Space Vendors Cartridge"
 	desc = "A data cartridge for portable microcomputers."

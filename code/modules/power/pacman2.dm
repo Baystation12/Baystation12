@@ -13,21 +13,21 @@
 /*
 	process()
 		if(P)
-			if(P.air_contents.toxins <= 0)
-				P.air_contents.toxins = 0
+			if(P.air_contents.phoron <= 0)
+				P.air_contents.phoron = 0
 				eject()
 			else
-				P.air_contents.toxins -= 0.001
+				P.air_contents.phoron -= 0.001
 		return
 */
 
 	HasFuel()
-		if(P.air_contents.toxins >= 0.1)
+		if(P.air_contents.phoron >= 0.1)
 			return 1
 		return 0
 
 	UseFuel()
-		P.air_contents.toxins -= 0.01
+		P.air_contents.phoron -= 0.01
 		return
 
 	New()
@@ -56,7 +56,7 @@
 
 	examine()
 		..()
-		usr << "\blue The generator has [P.air_contents.toxins] units of fuel left, producing [power_gen] per cycle."
+		usr << "\blue The generator has [P.air_contents.phoron] units of fuel left, producing [power_gen] per cycle."
 		if(crit_fail) usr << "\red The generator seems to have broken down."
 
 	handleInactive()
@@ -144,7 +144,7 @@
 			else
 				dat += text("Generator: <A href='?src=\ref[src];action=enable'>Off</A><br>")
 			if(P)
-				dat += text("Currently loaded phoron tank: [P.air_contents.toxins]<br>")
+				dat += text("Currently loaded phoron tank: [P.air_contents.phoron]<br>")
 			else
 				dat += text("No phoron tank currently loaded.<br>")
 			dat += text("Power output: <A href='?src=\ref[src];action=lower_power'>-</A> [power_gen * power_output] <A href='?src=\ref[src];action=higher_power'>+</A><br>")

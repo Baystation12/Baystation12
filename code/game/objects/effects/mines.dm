@@ -69,7 +69,7 @@
 
 			var/datum/gas_mixture/payload = new
 
-			payload.toxins = 30
+			payload.phoron = 30
 
 			target.zone.air.merge(payload)
 

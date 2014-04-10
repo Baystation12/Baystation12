@@ -197,7 +197,7 @@ obj/item/weapon/gun/energy/staff/focus
 
 /obj/item/weapon/gun/energy/toxgun
 	name = "phoron pistol"
-	desc = "A specialized firearm designed to fire lethal bolts of toxins."
+	desc = "A specialized firearm designed to fire lethal bolts of phoron."
 	icon_state = "toxgun"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	w_class = 3.0

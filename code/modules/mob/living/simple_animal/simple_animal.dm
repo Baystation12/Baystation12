@@ -154,7 +154,7 @@
 		if(istype(T,/turf/simulated))
 			var/turf/simulated/ST = T
 			if(ST.air)
-				var/tox = ST.air.toxins
+				var/tox = ST.air.phoron
 				var/oxy = ST.air.oxygen
 				var/n2  = ST.air.nitrogen
 				var/co2 = ST.air.carbon_dioxide

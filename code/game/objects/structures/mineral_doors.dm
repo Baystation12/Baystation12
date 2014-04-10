@@ -207,15 +207,15 @@
 
 			var/datum/gas_mixture/napalm = new
 
-			var/toxinsToDeduce = temperature/10
+			var/phoronToDeduce = temperature/10
 
-			napalm.toxins = toxinsToDeduce
+			napalm.phoron = phoronToDeduce
 			napalm.temperature = 200+T0C
 
 			target_tile.assume_air(napalm)
 			spawn (0) target_tile.hotspot_expose(temperature, 400)
 
-			hardness -= toxinsToDeduce/100
+			hardness -= phoronToDeduce/100
 			CheckHardness()
 
 /obj/structure/mineral_door/transparent/diamond

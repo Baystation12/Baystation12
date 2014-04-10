@@ -100,7 +100,7 @@
 	return
 
 /obj/item/weapon/tank/proc/ignite()	//This happens when a bomb is told to explode
-	var/fuel_moles = air_contents.toxins + air_contents.oxygen/6
+	var/fuel_moles = air_contents.phoron + air_contents.oxygen/6
 	var/strength = 1
 
 	var/turf/ground_zero = get_turf(loc)

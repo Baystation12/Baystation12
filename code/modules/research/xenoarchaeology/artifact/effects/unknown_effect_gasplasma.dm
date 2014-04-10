@@ -14,10 +14,10 @@
 	if(holder)
 		var/datum/gas_mixture/env = holder.loc.return_air()
 		if(env)
-			env.toxins += rand(2,15)
+			env.phoron += rand(2,15)
 
 /datum/artifact_effect/gasphoron/DoEffectAura()
 	if(holder)
 		var/datum/gas_mixture/env = holder.loc.return_air()
 		if(env && env.total_moles < max_pressure)
-			env.toxins += pick(0, 0, 0.1, rand())
+			env.phoron += pick(0, 0, 0.1, rand())

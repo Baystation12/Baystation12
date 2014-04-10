@@ -884,7 +884,7 @@ obj/machinery/atmospherics/pipe/tank/carbon_dioxide
 
 		..()
 
-obj/machinery/atmospherics/pipe/tank/toxins
+obj/machinery/atmospherics/pipe/tank/phoron
 	icon = 'icons/obj/atmospherics/orange_pipe_tank.dmi'
 	name = "Pressure Tank (Phoron)"
 
@@ -893,7 +893,7 @@ obj/machinery/atmospherics/pipe/tank/toxins
 		air_temporary.volume = volume
 		air_temporary.temperature = T20C
 
-		air_temporary.toxins = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
+		air_temporary.phoron = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
 
 		..()
 
@@ -1005,7 +1005,7 @@ obj/machinery/atmospherics/pipe/tank/attackby(var/obj/item/weapon/W as obj, var/
 			var/o2_concentration = parent.air.oxygen/total_moles
 			var/n2_concentration = parent.air.nitrogen/total_moles
 			var/co2_concentration = parent.air.carbon_dioxide/total_moles
-			var/phoron_concentration = parent.air.toxins/total_moles
+			var/phoron_concentration = parent.air.phoron/total_moles
 
 			var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 

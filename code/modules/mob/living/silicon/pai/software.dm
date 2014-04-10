@@ -542,7 +542,7 @@
 			var/o2_level = environment.oxygen/total_moles
 			var/n2_level = environment.nitrogen/total_moles
 			var/co2_level = environment.carbon_dioxide/total_moles
-			var/phoron_level = environment.toxins/total_moles
+			var/phoron_level = environment.phoron/total_moles
 			var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
 			dat += "Nitrogen: [round(n2_level*100)]%<br>"
 			dat += "Oxygen: [round(o2_level*100)]%<br>"

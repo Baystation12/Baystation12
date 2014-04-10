@@ -111,7 +111,7 @@ obj/var/contaminated = 0
 	if(vsc.plc.GENETIC_CORRUPTION)
 		if(rand(1,10000) < vsc.plc.GENETIC_CORRUPTION)
 			randmutb(src)
-			src << "\red High levels of toxins cause you to spontaneously mutate."
+			src << "\red High levels of phoron cause you to spontaneously mutate."
 			domutcheck(src,null)
 
 
@@ -158,6 +158,6 @@ turf/Entered(obj/item/I)
 		var/datum/gas_mixture/env = return_air(1)
 		if(!env)
 			return
-		if(env.toxins > MOLES_PHORON_VISIBLE + 1)
+		if(env.phoron > MOLES_PHORON_VISIBLE + 1)
 			if(I.can_contaminate())
 				I.contaminate()

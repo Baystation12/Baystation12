@@ -143,7 +143,7 @@ var/list/valid_secondary_effect_types = list(\
 			else if(env.temperature > 375)
 				trigger_hot = 1
 
-			if(env.toxins >= 10)
+			if(env.phoron >= 10)
 				trigger_phoron = 1
 			if(env.oxygen >= 10)
 				trigger_oxy = 1

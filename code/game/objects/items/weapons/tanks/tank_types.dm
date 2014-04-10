@@ -105,7 +105,7 @@
 /obj/item/weapon/tank/phoron/New()
 	..()
 
-	src.air_contents.toxins = (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C)
+	src.air_contents.phoron = (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C)
 	//
 	src.air_contents.update_values()
 	return

@@ -84,8 +84,8 @@ Filter types:
 
 			switch(filter_type)
 				if(0) //removing hydrocarbons
-					filtered_out.toxins = removed.toxins
-					removed.toxins = 0
+					filtered_out.phoron = removed.phoron
+					removed.phoron = 0
 
 					if(removed.trace_gases.len>0)
 						for(var/datum/gas/trace_gas in removed.trace_gases)

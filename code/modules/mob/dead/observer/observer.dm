@@ -398,7 +398,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		var/o2_concentration = environment.oxygen/total_moles
 		var/n2_concentration = environment.nitrogen/total_moles
 		var/co2_concentration = environment.carbon_dioxide/total_moles
-		var/phoron_concentration = environment.toxins/total_moles
+		var/phoron_concentration = environment.phoron/total_moles
 
 		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 		if(abs(n2_concentration - N2STANDARD) < 20)
@@ -417,7 +417,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			src << "\blue CO2: [round(co2_concentration*100)]% ([round(environment.carbon_dioxide,0.01)] moles)"
 
 		if(phoron_concentration > 0.01)
-			src << "\red Phoron: [round(phoron_concentration*100)]% ([round(environment.toxins,0.01)] moles)"
+			src << "\red Phoron: [round(phoron_concentration*100)]% ([round(environment.phoron,0.01)] moles)"
 
 		if(unknown_concentration > 0.01)
 			src << "\red Unknown: [round(unknown_concentration*100)]% ([round(unknown_concentration*total_moles,0.01)] moles)"

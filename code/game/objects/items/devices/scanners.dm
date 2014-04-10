@@ -238,7 +238,7 @@ REAGENT SCANNER
 		var/o2_concentration = environment.oxygen/total_moles
 		var/n2_concentration = environment.nitrogen/total_moles
 		var/co2_concentration = environment.carbon_dioxide/total_moles
-		var/phoron_concentration = environment.toxins/total_moles
+		var/phoron_concentration = environment.phoron/total_moles
 
 		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 		if(abs(n2_concentration - N2STANDARD) < 20)

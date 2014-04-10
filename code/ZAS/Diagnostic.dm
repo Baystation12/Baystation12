@@ -19,7 +19,7 @@ client/proc/Zone_Info(turf/T as null|turf)
 			mob << "No zone here."
 			var/datum/gas_mixture/mix = T.return_air()
 			mob << "[mix.return_pressure()] kPa [mix.temperature]C"
-			mob << "O2: [mix.oxygen] N2: [mix.nitrogen] CO2: [mix.carbon_dioxide] TX: [mix.toxins]"
+			mob << "O2: [mix.oxygen] N2: [mix.nitrogen] CO2: [mix.carbon_dioxide] TX: [mix.phoron]"
 	else
 		if(zone_debug_images)
 			for(var/zone in  zone_debug_images)
@@ -105,7 +105,7 @@ client/proc/Test_ZAS_Connection(var/turf/simulated/T as turf)
 		client << "<u>Zone Air Contents</u>"
 		client << "Oxygen: [air.oxygen]"
 		client << "Nitrogen: [air.nitrogen]"
-		client << "Phoron: [air.toxins]"
+		client << "Phoron: [air.phoron]"
 		client << "Carbon Dioxide: [air.carbon_dioxide]"
 		client << "Temperature: [air.temperature] K"
 		client << "Heat Energy: [air.temperature * air.heat_capacity()] J"

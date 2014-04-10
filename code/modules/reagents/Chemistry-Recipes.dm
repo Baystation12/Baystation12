@@ -1186,7 +1186,7 @@ datum
 
 					var/datum/gas_mixture/napalm = new
 
-					napalm.toxins = 25
+					napalm.phoron = 25
 					napalm.temperature = 1400
 
 					target_tile.assume_air(napalm)
@@ -1651,10 +1651,10 @@ datum
 			required_reagents = list("tequilla" = 2, "orangejuice" = 1)
 			result_amount = 3
 
-		toxins_special
+		phoron_special
 			name = "Toxins Special"
-			id = "toxinsspecial"
-			result = "toxinsspecial"
+			id = "phoronspecial"
+			result = "phoronspecial"
 			required_reagents = list("rum" = 2, "vermouth" = 1, "phoron" = 2)
 			result_amount = 5
 

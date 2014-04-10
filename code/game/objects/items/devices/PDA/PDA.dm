@@ -83,8 +83,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon_state = "pda-j"
 	ttone = "slip"
 
-/obj/item/device/pda/toxins
-	default_cartridge = /obj/item/weapon/cartridge/signal/toxins
+/obj/item/device/pda/science
+	default_cartridge = /obj/item/weapon/cartridge/signal/science
 	icon_state = "pda-tox"
 	ttone = "boom"
 
@@ -446,7 +446,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				var/o2_level = environment.oxygen/total_moles
 				var/n2_level = environment.nitrogen/total_moles
 				var/co2_level = environment.carbon_dioxide/total_moles
-				var/phoron_level = environment.toxins/total_moles
+				var/phoron_level = environment.phoron/total_moles
 				var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
 				data["aircontents"] = list(\
 					"pressure" = "[round(pressure,0.1)]",\
@@ -1165,7 +1165,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					var/o2_concentration = A:air_contents.oxygen/total_moles
 					var/n2_concentration = A:air_contents.nitrogen/total_moles
 					var/co2_concentration = A:air_contents.carbon_dioxide/total_moles
-					var/phoron_concentration = A:air_contents.toxins/total_moles
+					var/phoron_concentration = A:air_contents.phoron/total_moles
 
 					var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 
@@ -1194,7 +1194,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					var/o2_concentration = T.parent.air.oxygen/total_moles
 					var/n2_concentration = T.parent.air.nitrogen/total_moles
 					var/co2_concentration = T.parent.air.carbon_dioxide/total_moles
-					var/phoron_concentration = T.parent.air.toxins/total_moles
+					var/phoron_concentration = T.parent.air.phoron/total_moles
 
 					var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 
@@ -1293,7 +1293,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		var/newcart = pick(	/obj/item/weapon/cartridge/engineering,
 							/obj/item/weapon/cartridge/security,
 							/obj/item/weapon/cartridge/medical,
-							/obj/item/weapon/cartridge/signal/toxins,
+							/obj/item/weapon/cartridge/signal/science,
 							/obj/item/weapon/cartridge/quartermaster)
 		new newcart(src)
 
