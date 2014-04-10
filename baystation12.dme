@@ -14,6 +14,7 @@
 #include "code\hub.dm"
 #include "code\names.dm"
 #include "code\setup.dm"
+#include "code\stylesheet.dm"
 #include "code\world.dm"
 #include "code\__HELPERS\files.dm"
 #include "code\__HELPERS\game.dm"
