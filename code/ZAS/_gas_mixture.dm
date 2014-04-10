@@ -206,7 +206,7 @@ What are the archived variables for?
 	//Outputs: 1 if graphic changed, 0 if unchanged
 
 	graphic = 0
-	if(toxins > MOLES_PLASMA_VISIBLE)
+	if(toxins > MOLES_PHORON_VISIBLE)
 		graphic = 1
 	else if(length(trace_gases))
 		var/datum/gas/sleeping_agent = locate(/datum/gas/sleeping_agent) in trace_gases

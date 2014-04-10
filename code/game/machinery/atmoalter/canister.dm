@@ -171,7 +171,7 @@ update_flag
 	else
 		can_label = 0
 
-	if(air_contents.temperature > PLASMA_FLASHPOINT)
+	if(air_contents.temperature > PHORON_FLASHPOINT)
 		air_contents.zburn()
 	return
 

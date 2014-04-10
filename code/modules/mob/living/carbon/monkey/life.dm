@@ -364,7 +364,7 @@
 			var/ratio = (breath.toxins/safe_toxins_max) * 10
 			//adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))	//Limit amount of damage toxin exposure can do per second
 			if(reagents)
-				reagents.add_reagent("plasma", Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
+				reagents.add_reagent("plasma", Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
 		else
 			toxins_alert = 0
@@ -397,7 +397,7 @@
 		if(!environment)
 			return
 
-		if(abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PLASMA_VISIBLE)
+		if(abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PHORON_VISIBLE)
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp		
 		
 		var/environment_heat_capacity = environment.heat_capacity()

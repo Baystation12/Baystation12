@@ -508,13 +508,13 @@
 
 		if(Toxins_pp > safe_toxins_max) // Too much toxins
 			var/ratio = (breath.toxins/safe_toxins_max) * 10
-			//adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))	//Limit amount of damage toxin exposure can do per second
+			//adjustToxLoss(Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))	//Limit amount of damage toxin exposure can do per second
 			if(reagents)
-				reagents.add_reagent("plasma", Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
+				reagents.add_reagent("plasma", Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
 		else if(O2_pp > vox_oxygen_max && species.name == "Vox") //Oxygen is toxic to vox.
 			var/ratio = (breath.oxygen/vox_oxygen_max) * 1000
-			adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
+			adjustToxLoss(Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
 		else
 			toxins_alert = 0
@@ -578,7 +578,7 @@
 			else
 				loc_temp = environment.temperature
 
-			if(abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PLASMA_VISIBLE)
+			if(abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PHORON_VISIBLE)
 				return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
@@ -659,7 +659,7 @@
 			else
 				pressure_alert = -1
 
-		if(environment.toxins > MOLES_PLASMA_VISIBLE)
+		if(environment.toxins > MOLES_PHORON_VISIBLE)
 			pl_effects()
 		return
 

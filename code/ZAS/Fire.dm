@@ -25,7 +25,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	if(locate(/obj/fire) in src)
 		return 1
 	var/datum/gas_mixture/air_contents = return_air()
-	if(!air_contents || exposed_temperature < PLASMA_MINIMUM_BURN_TEMPERATURE)
+	if(!air_contents || exposed_temperature < PHORON_MINIMUM_BURN_TEMPERATURE)
 		return 0
 
 	var/igniting = 0
@@ -139,7 +139,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 			//Ensure flow temperature is higher than minimum fire temperatures.
 				//this creates some energy ex nihilo but is necessary to get a fire started
 				//lets just pretend this energy comes from the ignition source and dont mention this again
-			//flow.temperature = max(PLASMA_MINIMUM_BURN_TEMPERATURE+0.1,flow.temperature)
+			//flow.temperature = max(PHORON_MINIMUM_BURN_TEMPERATURE+0.1,flow.temperature)
 
 			//burn baby burn!
 
@@ -188,7 +188,7 @@ turf/simulated/apply_fire_protection()
 datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, force_burn)
 	var/value = 0
 
-	if((temperature > PLASMA_MINIMUM_BURN_TEMPERATURE || force_burn) && check_recombustability(liquid))
+	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && check_recombustability(liquid))
 		var/total_fuel = 0
 		var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
 

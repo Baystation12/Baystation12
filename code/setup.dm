@@ -16,9 +16,9 @@
 #define MOLES_O2STANDARD MOLES_CELLSTANDARD*O2STANDARD	// O2 standard value (21%)
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
-#define MOLES_PLASMA_VISIBLE	0.7 //Moles in a standard cell after which plasma is visible
-#define MIN_PLASMA_DAMAGE 1
-#define MAX_PLASMA_DAMAGE 10
+#define MOLES_PHORON_VISIBLE	0.7 //Moles in a standard cell after which plasma is visible
+#define MIN_PHORON_DAMAGE 1
+#define MAX_PHORON_DAMAGE 10
 
 #define BREATH_VOLUME 0.5	//liters in a normal breath
 #define BREATH_MOLES (ONE_ATMOSPHERE * BREATH_VOLUME /(T20C*R_IDEAL_GAS_EQUATION))
@@ -112,7 +112,7 @@
 #define FIRE_MINIMUM_TEMPERATURE_TO_EXIST	100+T0C
 #define FIRE_SPREAD_RADIOSITY_SCALE		0.85
 #define FIRE_CARBON_ENERGY_RELEASED	  500000 //Amount of heat released per mole of burnt carbon into the tile
-#define FIRE_PLASMA_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt plasma into the tile
+#define FIRE_PHORON_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt plasma into the tile
 #define FIRE_GROWTH_RATE			40000 //For small fires
 
 #define WATER_BOIL_TEMP 393 */
@@ -122,12 +122,12 @@
 #define CARBON_LIFEFORM_FIRE_DAMAGE		4
 
 //Plasma fire properties
-#define PLASMA_MINIMUM_BURN_TEMPERATURE		100+T0C
-#define PLASMA_FLASHPOINT 					246+T0C
-#define PLASMA_UPPER_TEMPERATURE			1370+T0C
-#define PLASMA_MINIMUM_OXYGEN_NEEDED		2
-#define PLASMA_MINIMUM_OXYGEN_PLASMA_RATIO	20
-#define PLASMA_OXYGEN_FULLBURN				10
+#define PHORON_MINIMUM_BURN_TEMPERATURE		100+T0C
+#define PHORON_FLASHPOINT 					246+T0C
+#define PHORON_UPPER_TEMPERATURE			1370+T0C
+#define PHORON_MINIMUM_OXYGEN_NEEDED		2
+#define PHORON_MINIMUM_OXYGEN_PHORON_RATIO	20
+#define PHORON_OXYGEN_FULLBURN				10
 
 #define T0C 273.15					// 0degC
 #define T20C 293.15					// 20degC
@@ -205,7 +205,7 @@ var/MAX_EXPLOSION_RANGE = 14
 
 #define BLOCK_GAS_SMOKE_EFFECT 8192	// blocks the effect that chemical clouds would have on a mob --glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
 #define ONESIZEFITSALL 8192
-#define PLASMAGUARD 16384			//Does not get contaminated by plasma.
+#define PHORONGUARD 16384			//Does not get contaminated by plasma.
 
 #define	NOREACT		16384 			//Reagents dont' react inside this container.
 

@@ -199,38 +199,38 @@ var/global/vs_control/vsc = new
 	switch(def)
 		if("Plasma - Standard")
 			plc.CLOTH_CONTAMINATION = 1 //If this is on, plasma does damage by getting into cloth.
-			plc.PLASMAGUARD_ONLY = 0
+			plc.PHORONGUARD_ONLY = 0
 			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000.
 			plc.SKIN_BURNS = 0       //Plasma has an effect similar to mustard gas on the un-suited.
 			plc.EYE_BURNS = 1 //Plasma burns the eyes of anyone not wearing eye protection.
-			plc.PLASMA_HALLUCINATION = 0
+			plc.PHORON_HALLUCINATION = 0
 			plc.CONTAMINATION_LOSS = 0.02
 
 		if("Plasma - Low Hazard")
 			plc.CLOTH_CONTAMINATION = 0 //If this is on, plasma does damage by getting into cloth.
-			plc.PLASMAGUARD_ONLY = 0
+			plc.PHORONGUARD_ONLY = 0
 			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000
 			plc.SKIN_BURNS = 0       //Plasma has an effect similar to mustard gas on the un-suited.
 			plc.EYE_BURNS = 1 //Plasma burns the eyes of anyone not wearing eye protection.
-			plc.PLASMA_HALLUCINATION = 0
+			plc.PHORON_HALLUCINATION = 0
 			plc.CONTAMINATION_LOSS = 0.01
 
 		if("Plasma - High Hazard")
 			plc.CLOTH_CONTAMINATION = 1 //If this is on, plasma does damage by getting into cloth.
-			plc.PLASMAGUARD_ONLY = 0
+			plc.PHORONGUARD_ONLY = 0
 			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000.
 			plc.SKIN_BURNS = 1       //Plasma has an effect similar to mustard gas on the un-suited.
 			plc.EYE_BURNS = 1 //Plasma burns the eyes of anyone not wearing eye protection.
-			plc.PLASMA_HALLUCINATION = 1
+			plc.PHORON_HALLUCINATION = 1
 			plc.CONTAMINATION_LOSS = 0.05
 
 		if("Plasma - Oh Shit!")
 			plc.CLOTH_CONTAMINATION = 1 //If this is on, plasma does damage by getting into cloth.
-			plc.PLASMAGUARD_ONLY = 1
+			plc.PHORONGUARD_ONLY = 1
 			plc.GENETIC_CORRUPTION = 5 //Chance of genetic corruption as well as toxic damage, X in 1000.
 			plc.SKIN_BURNS = 1       //Plasma has an effect similar to mustard gas on the un-suited.
 			plc.EYE_BURNS = 1 //Plasma burns the eyes of anyone not wearing eye protection.
-			plc.PLASMA_HALLUCINATION = 1
+			plc.PHORON_HALLUCINATION = 1
 			plc.CONTAMINATION_LOSS = 0.075
 
 		if("ZAS - Normal")

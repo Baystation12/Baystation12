@@ -2,7 +2,7 @@
 #define ORE_PROC_SILVER 2
 #define ORE_PROC_DIAMOND 4
 #define ORE_PROC_GLASS 8
-#define ORE_PROC_PLASMA 16
+#define ORE_PROC_PHORON 16
 #define ORE_PROC_URANIUM 32
 #define ORE_PROC_IRON 64
 #define ORE_PROC_CLOWN 128
@@ -61,13 +61,13 @@
 
 		//plasma
 		if(machine.ore_plasma)
-			if (machine.selected & ORE_PROC_PLASMA)
+			if (machine.selected & ORE_PROC_PHORON)
 				dat += text("<A href='?src=\ref[src];sel_plasma=no'><font color='green'>Smelting</font></A> ")
 			else
 				dat += text("<A href='?src=\ref[src];sel_plasma=yes'><font color='red'>Not smelting</font></A> ")
 			dat += text("Plasma: [machine.ore_plasma]<br>")
 		else
-			machine.selected &= ~ORE_PROC_PLASMA
+			machine.selected &= ~ORE_PROC_PHORON
 
 		//uranium
 		if(machine.ore_uranium)
@@ -150,9 +150,9 @@
 			machine.selected &= ~ORE_PROC_GLASS
 	if(href_list["sel_plasma"])
 		if (href_list["sel_plasma"] == "yes")
-			machine.selected |= ORE_PROC_PLASMA
+			machine.selected |= ORE_PROC_PHORON
 		else
-			machine.selected &= ~ORE_PROC_PLASMA
+			machine.selected &= ~ORE_PROC_PHORON
 	if(href_list["sel_uranium"])
 		if (href_list["sel_uranium"] == "yes")
 			machine.selected |= ORE_PROC_URANIUM
@@ -280,7 +280,7 @@
 					else
 						on = 0
 					continue
-				if (selected == ORE_PROC_PLASMA)
+				if (selected == ORE_PROC_PHORON)
 					if (ore_plasma > 0)
 						ore_plasma--;
 						new /obj/item/stack/sheet/mineral/plasma(output.loc)
@@ -301,7 +301,7 @@
 					else
 						on = 0
 					continue
-				if (selected == ORE_PROC_IRON + ORE_PROC_PLASMA)
+				if (selected == ORE_PROC_IRON + ORE_PROC_PHORON)
 					if (ore_iron > 0 && ore_plasma > 0)
 						ore_iron--;
 						ore_plasma--;
@@ -317,7 +317,7 @@
 						on = 0
 					continue
 			/*
-				if (selected == ORE_PROC_GLASS + ORE_PROC_PLASMA)
+				if (selected == ORE_PROC_GLASS + ORE_PROC_PHORON)
 					if (ore_glass > 0 && ore_plasma > 0)
 						ore_glass--;
 						ore_plasma--;
@@ -325,7 +325,7 @@
 					else
 						on = 0
 					continue
-				if (selected == ORE_PROC_GLASS + ORE_PROC_IRON + ORE_PROC_PLASMA)
+				if (selected == ORE_PROC_GLASS + ORE_PROC_IRON + ORE_PROC_PHORON)
 					if (ore_glass > 0 && ore_plasma > 0 && ore_iron > 0)
 						ore_glass--;
 						ore_iron--;
@@ -345,7 +345,7 @@
 					else
 						on = 0
 					continue
-				if (selected == ORE_PROC_SILVER + ORE_PROC_PLASMA)
+				if (selected == ORE_PROC_SILVER + ORE_PROC_PHORON)
 					if (ore_silver >= 1 && ore_plasma >= 3)
 						ore_silver -= 1
 						ore_plasma -= 3
@@ -375,7 +375,7 @@
 				if (selected & ORE_PROC_URANIUM)
 					if (ore_uranium <= 0)
 						b = 0
-				if (selected & ORE_PROC_PLASMA)
+				if (selected & ORE_PROC_PHORON)
 					if (ore_plasma <= 0)
 						b = 0
 				if (selected & ORE_PROC_IRON)
@@ -397,7 +397,7 @@
 						ore_diamond--
 					if (selected & ORE_PROC_URANIUM)
 						ore_uranium--
-					if (selected & ORE_PROC_PLASMA)
+					if (selected & ORE_PROC_PHORON)
 						ore_plasma--
 					if (selected & ORE_PROC_IRON)
 						ore_iron--

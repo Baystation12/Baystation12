@@ -13,7 +13,7 @@
 #define TRIGGER_ENERGY 6
 #define TRIGGER_HEAT 7
 #define TRIGGER_COLD 8
-#define TRIGGER_PLASMA 9
+#define TRIGGER_PHORON 9
 #define TRIGGER_OXY 10
 #define TRIGGER_CO2 11
 #define TRIGGER_NITRO 12
@@ -108,7 +108,7 @@ var/list/valid_secondary_effect_types = list(\
 		if(prob(25))
 			my_effect.trigger = rand(1,4)
 
-#define TRIGGER_PLASMA 9
+#define TRIGGER_PHORON 9
 #define TRIGGER_OXY 10
 #define TRIGGER_CO2 11
 #define TRIGGER_NITRO 12
@@ -176,16 +176,16 @@ var/list/valid_secondary_effect_types = list(\
 		if(secondary_effect && secondary_effect.trigger == TRIGGER_HEAT && !secondary_effect.activated)
 			secondary_effect.ToggleActivate(0)
 
-	//PLASMA GAS ACTIVATION
+	//PHORON GAS ACTIVATION
 	if(trigger_plasma)
-		if(my_effect.trigger == TRIGGER_PLASMA && !my_effect.activated)
+		if(my_effect.trigger == TRIGGER_PHORON && !my_effect.activated)
 			my_effect.ToggleActivate()
-		if(secondary_effect && secondary_effect.trigger == TRIGGER_PLASMA && !secondary_effect.activated)
+		if(secondary_effect && secondary_effect.trigger == TRIGGER_PHORON && !secondary_effect.activated)
 			secondary_effect.ToggleActivate(0)
 	else
-		if(my_effect.trigger == TRIGGER_PLASMA && my_effect.activated)
+		if(my_effect.trigger == TRIGGER_PHORON && my_effect.activated)
 			my_effect.ToggleActivate()
-		if(secondary_effect && secondary_effect.trigger == TRIGGER_PLASMA && !secondary_effect.activated)
+		if(secondary_effect && secondary_effect.trigger == TRIGGER_PHORON && !secondary_effect.activated)
 			secondary_effect.ToggleActivate(0)
 
 	//OXYGEN GAS ACTIVATION
