@@ -1037,6 +1037,19 @@ var/list/ghostteleportlocs = list()
 	name = "Fore Starboard Solar Maintenance"
 	icon_state = "SolarcontrolA"
 
+/area/maintenance/Entered()
+	..()	
+	if(istype(usr,/mob/living/carbon/human))
+		usr.area_movement_delay = max(8-config.run_speed,0)
+
+	else if(istype(usr,/mob/living/silicon/robot))
+		usr.area_movement_delay = max(12-config.run_speed,0)
+		
+
+/area/maintenance/Exited()
+	if(istype(usr,/mob/living))
+		usr.area_movement_delay = 0
+
 
 /area/assembly/chargebay
 	name = "\improper Mech Bay"

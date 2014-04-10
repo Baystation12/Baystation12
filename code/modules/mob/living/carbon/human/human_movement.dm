@@ -44,6 +44,8 @@
 	if(mRun in mutations)
 		tally = 0
 
+	tally += area_movement_delay
+
 	return (tally+config.human_delay)
 
 /mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
