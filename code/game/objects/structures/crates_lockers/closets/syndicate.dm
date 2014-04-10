@@ -86,7 +86,7 @@
 		if(pickednum >= 10)
 			new /obj/item/stack/sheet/plasteel(src, rand(common_min, common_max))
 
-		//Plasma (rare ore)
+		//Phoron (rare ore)
 		if(pickednum >= 15)
 			new /obj/item/stack/sheet/mineral/plasma(src, rand(rare_min, rare_max))
 

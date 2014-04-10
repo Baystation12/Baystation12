@@ -178,7 +178,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 
 	//if there is too much plasma in the field, lose some
 	/*if( held_plasma.toxins > (MOLES_CELLSTANDARD * 7) * (50 / field_strength) )
-		LosePlasma()*/
+		LosePhoron()*/
 	if(held_plasma.toxins > 1)
 		//lose a random amount of plasma back into the air, increased by the field strength (want to switch this over to frequency eventually)
 		var/loss_ratio = rand() * (0.05 + (0.05 * 50 / field_strength))

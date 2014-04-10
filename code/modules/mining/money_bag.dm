@@ -47,7 +47,7 @@
 	if (amt_diamond)
 		dat += text("Diamond coins: [amt_diamond] <A href='?src=\ref[src];remove=diamond'>Remove one</A><br>")
 	if (amt_plasma)
-		dat += text("Plasma coins: [amt_plasma] <A href='?src=\ref[src];remove=plasma'>Remove one</A><br>")
+		dat += text("Phoron coins: [amt_plasma] <A href='?src=\ref[src];remove=plasma'>Remove one</A><br>")
 	if (amt_uranium)
 		dat += text("Uranium coins: [amt_uranium] <A href='?src=\ref[src];remove=uranium'>Remove one</A><br>")
 	if (amt_clown)

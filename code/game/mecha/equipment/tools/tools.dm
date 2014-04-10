@@ -830,7 +830,7 @@
 
 
 /obj/item/mecha_parts/mecha_equipment/generator
-	name = "Plasma Converter"
+	name = "Phoron Generator"
 	desc = "Generates power using solid plasma as fuel. Pollutes the environment."
 	icon_state = "tesla"
 	origin_tech = "plasmatech=2;powerstorage=2;engineering=1"

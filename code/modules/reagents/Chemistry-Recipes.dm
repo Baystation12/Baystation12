@@ -522,7 +522,7 @@ datum
 			result_amount = 3
 
 		plasmasolidification
-			name = "Solid Plasma"
+			name = "Solid Phoron"
 			id = "solidplasma"
 			result = null
 			required_reagents = list("iron" = 5, "frostoil" = 5, "plasma" = 20)

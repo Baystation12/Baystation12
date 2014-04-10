@@ -600,7 +600,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	group = "Engineering"
 
 /datum/supply_packs/plasma
-	name = "Plasma assembly crate"
+	name = "Phoron assembly crate"
 	contains = list(/obj/item/weapon/tank/plasma,
 					/obj/item/weapon/tank/plasma,
 					/obj/item/weapon/tank/plasma,
@@ -615,7 +615,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/device/assembly/timer)
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/plasma
-	containername = "Plasma assembly crate"
+	containername = "Phoron assembly crate"
 	access = access_tox_storage
 	group = "Medical / Science"
 

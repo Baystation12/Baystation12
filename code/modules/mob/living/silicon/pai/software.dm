@@ -547,7 +547,7 @@
 			dat += "Nitrogen: [round(n2_level*100)]%<br>"
 			dat += "Oxygen: [round(o2_level*100)]%<br>"
 			dat += "Carbon Dioxide: [round(co2_level*100)]%<br>"
-			dat += "Plasma: [round(plasma_level*100)]%<br>"
+			dat += "Phoron: [round(plasma_level*100)]%<br>"
 			if(unknown_level > 0.01)
 				dat += "OTHER: [round(unknown_level)]%<br>"
 		dat += "Temperature: [round(environment.temperature-T0C)]&deg;C<br>"

@@ -78,7 +78,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if("silver")
 				return_name = "Silver"
 			if("plasma")
-				return_name = "Solid Plasma"
+				return_name = "Solid Phoron"
 			if("uranium")
 				return_name = "Uranium"
 			if("diamond")
@@ -786,8 +786,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_lathe.silver_amount >= 10000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=silver;lathe_ejectsheet_amt=5'>(5 Sheets)</A> "
 			if(linked_lathe.silver_amount >= 2000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=silver;lathe_ejectsheet_amt=50'>(Max Sheets)</A>"
 			dat += "<BR>"
-			//Plasma
-			dat += "* [linked_lathe.plasma_amount] cm<sup>3</sup> of Solid Plasma || "
+			//Phoron
+			dat += "* [linked_lathe.plasma_amount] cm<sup>3</sup> of Solid Phoron || "
 			dat += "Eject: "
 			if(linked_lathe.plasma_amount >= 2000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=plasma;lathe_ejectsheet_amt=1'>(1 Sheet)</A> "
 			if(linked_lathe.plasma_amount >= 10000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=plasma;lathe_ejectsheet_amt=5'>(5 Sheets)</A> "

@@ -85,7 +85,7 @@
 				age_million = rand(1,999)
 				find_presence["iron"] = rand(1,1000) / 100
 				source_mineral = "iron"
-			if("Plasma")
+			if("Phoron")
 				age_thousand = rand(1,999)
 				age_million = rand(1,999)
 				age_billion = rand(10, 13)

@@ -186,50 +186,50 @@ var/global/vs_control/vsc = new
 				newvalue = vars[V]
 		V = newvalue
 
-/vs_control/proc/ChangePlasma()
+/vs_control/proc/ChangePhoron()
 	for(var/V in plc.settings)
 		plc.Randomize(V)
 
 /vs_control/proc/SetDefault(var/mob/user)
-	var/list/setting_choices = list("Plasma - Standard", "Plasma - Low Hazard", "Plasma - High Hazard", "Plasma - Oh Shit!",\
+	var/list/setting_choices = list("Phoron - Standard", "Phoron - Low Hazard", "Phoron - High Hazard", "Phoron - Oh Shit!",\
 	"ZAS - Normal", "ZAS - Forgiving", "ZAS - Dangerous", "ZAS - Hellish")
 	var/def = input(user, "Which of these presets should be used?") as null|anything in setting_choices
 	if(!def)
 		return
 	switch(def)
-		if("Plasma - Standard")
+		if("Phoron - Standard")
 			plc.CLOTH_CONTAMINATION = 1 //If this is on, plasma does damage by getting into cloth.
 			plc.PHORONGUARD_ONLY = 0
 			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000.
-			plc.SKIN_BURNS = 0       //Plasma has an effect similar to mustard gas on the un-suited.
-			plc.EYE_BURNS = 1 //Plasma burns the eyes of anyone not wearing eye protection.
+			plc.SKIN_BURNS = 0       //Phoron has an effect similar to mustard gas on the un-suited.
+			plc.EYE_BURNS = 1 //Phoron burns the eyes of anyone not wearing eye protection.
 			plc.PHORON_HALLUCINATION = 0
 			plc.CONTAMINATION_LOSS = 0.02
 
-		if("Plasma - Low Hazard")
+		if("Phoron - Low Hazard")
 			plc.CLOTH_CONTAMINATION = 0 //If this is on, plasma does damage by getting into cloth.
 			plc.PHORONGUARD_ONLY = 0
 			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000
-			plc.SKIN_BURNS = 0       //Plasma has an effect similar to mustard gas on the un-suited.
-			plc.EYE_BURNS = 1 //Plasma burns the eyes of anyone not wearing eye protection.
+			plc.SKIN_BURNS = 0       //Phoron has an effect similar to mustard gas on the un-suited.
+			plc.EYE_BURNS = 1 //Phoron burns the eyes of anyone not wearing eye protection.
 			plc.PHORON_HALLUCINATION = 0
 			plc.CONTAMINATION_LOSS = 0.01
 
-		if("Plasma - High Hazard")
+		if("Phoron - High Hazard")
 			plc.CLOTH_CONTAMINATION = 1 //If this is on, plasma does damage by getting into cloth.
 			plc.PHORONGUARD_ONLY = 0
 			plc.GENETIC_CORRUPTION = 0 //Chance of genetic corruption as well as toxic damage, X in 1000.
-			plc.SKIN_BURNS = 1       //Plasma has an effect similar to mustard gas on the un-suited.
-			plc.EYE_BURNS = 1 //Plasma burns the eyes of anyone not wearing eye protection.
+			plc.SKIN_BURNS = 1       //Phoron has an effect similar to mustard gas on the un-suited.
+			plc.EYE_BURNS = 1 //Phoron burns the eyes of anyone not wearing eye protection.
 			plc.PHORON_HALLUCINATION = 1
 			plc.CONTAMINATION_LOSS = 0.05
 
-		if("Plasma - Oh Shit!")
+		if("Phoron - Oh Shit!")
 			plc.CLOTH_CONTAMINATION = 1 //If this is on, plasma does damage by getting into cloth.
 			plc.PHORONGUARD_ONLY = 1
 			plc.GENETIC_CORRUPTION = 5 //Chance of genetic corruption as well as toxic damage, X in 1000.
-			plc.SKIN_BURNS = 1       //Plasma has an effect similar to mustard gas on the un-suited.
-			plc.EYE_BURNS = 1 //Plasma burns the eyes of anyone not wearing eye protection.
+			plc.SKIN_BURNS = 1       //Phoron has an effect similar to mustard gas on the un-suited.
+			plc.EYE_BURNS = 1 //Phoron burns the eyes of anyone not wearing eye protection.
 			plc.PHORON_HALLUCINATION = 1
 			plc.CONTAMINATION_LOSS = 0.075
 

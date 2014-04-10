@@ -89,7 +89,7 @@
 		return
 	..()
 
-/turf/simulated/wall/mineral/plasma/proc/PlasmaBurn(temperature)
+/turf/simulated/wall/mineral/plasma/proc/PhoronBurn(temperature)
 	spawn(2)
 	new /obj/structure/girder(src)
 	src.ChangeTurf(/turf/simulated/floor)
@@ -113,17 +113,17 @@
 
 /turf/simulated/wall/mineral/plasma/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air :(
 	if(exposed_temperature > 300)
-		PlasmaBurn(exposed_temperature)
+		PhoronBurn(exposed_temperature)
 
 /turf/simulated/wall/mineral/plasma/proc/ignite(exposed_temperature)
 	if(exposed_temperature > 300)
-		PlasmaBurn(exposed_temperature)
+		PhoronBurn(exposed_temperature)
 
 /turf/simulated/wall/mineral/plasma/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj,/obj/item/projectile/beam))
-		PlasmaBurn(2500)
+		PhoronBurn(2500)
 	else if(istype(Proj,/obj/item/projectile/ion))
-		PlasmaBurn(500)
+		PhoronBurn(500)
 	..()
 
 /*

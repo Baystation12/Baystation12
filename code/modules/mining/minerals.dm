@@ -59,7 +59,7 @@ mineral/silver
 	ore = /obj/item/weapon/ore/silver
 
 mineral/plasma
-	name = "Plasma"
+	name = "Phoron"
 	result_amount = 5
 	spread_chance = 25
 	ore = /obj/item/weapon/ore/plasma

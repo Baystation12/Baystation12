@@ -2,8 +2,8 @@
  * Contains:
  *		Glass sheets
  *		Reinforced glass sheets
- *		Plasma Glass Sheets
- *		Reinforced Plasma Glass Sheets (AKA Holy fuck strong windows)
+ *		Phoron Glass Sheets
+ *		Reinforced Phoron Glass Sheets (AKA Holy fuck strong windows)
  *		Glass shards - TODO: Move this into code/game/object/item/weapons
  */
 
@@ -300,7 +300,7 @@
 
 
 /*
- * Plasma Glass sheets
+ * Phoron Glass sheets
  */
 /obj/item/stack/sheet/glass/plasmaglass
 	name = "plasma glass"
@@ -336,7 +336,7 @@
  */
 /obj/item/stack/sheet/glass/plasmarglass
 	name = "reinforced plasma glass"
-	desc = "Plasma glass which seems to have rods or something stuck in them."
+	desc = "Phoron glass which seems to have rods or something stuck in them."
 	singular_name = "reinforced plasma glass sheet"
 	icon_state = "sheet-plasmarglass"
 	g_amt = 7500

@@ -804,8 +804,8 @@ datum/design/mech_repair_droid
 	category = "Exosuit Equipment"
 
 datum/design/mech_plasma_generator
-	name = "Exosuit Module Design (Plasma Converter Module)"
-	desc = "Exosuit-mounted plasma converter."
+	name = "Exosuit Module Design (Phoron Generator Module)"
+	desc = "Exosuit-mounted phoron generator."
 	id = "mech_plasma_generator"
 	build_type = MECHFAB
 	req_tech = list("plasmatech" = 2, "powerstorage"= 2, "engineering" = 2)

@@ -886,7 +886,7 @@ obj/machinery/atmospherics/pipe/tank/carbon_dioxide
 
 obj/machinery/atmospherics/pipe/tank/toxins
 	icon = 'icons/obj/atmospherics/orange_pipe_tank.dmi'
-	name = "Pressure Tank (Plasma)"
+	name = "Pressure Tank (Phoron)"
 
 	New()
 		air_temporary = new
@@ -899,7 +899,7 @@ obj/machinery/atmospherics/pipe/tank/toxins
 
 obj/machinery/atmospherics/pipe/tank/oxygen_agent_b
 	icon = 'icons/obj/atmospherics/red_orange_pipe_tank.dmi'
-	name = "Pressure Tank (Oxygen + Plasma)"
+	name = "Pressure Tank (Oxygen + Phoron)"
 
 	New()
 		air_temporary = new
@@ -1013,7 +1013,7 @@ obj/machinery/atmospherics/pipe/tank/attackby(var/obj/item/weapon/W as obj, var/
 			user << "\blue Nitrogen: [round(n2_concentration*100)]%"
 			user << "\blue Oxygen: [round(o2_concentration*100)]%"
 			user << "\blue CO2: [round(co2_concentration*100)]%"
-			user << "\blue Plasma: [round(plasma_concentration*100)]%"
+			user << "\blue Phoron: [round(plasma_concentration*100)]%"
 			if(unknown_concentration>0.01)
 				user << "\red Unknown: [round(unknown_concentration*100)]%"
 			user << "\blue Temperature: [round(parent.air.temperature-T0C)]&deg;C"

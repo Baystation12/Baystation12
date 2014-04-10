@@ -4,7 +4,7 @@ Mineral Sheets
 		- Sandstone
 		- Diamond
 		- Uranium
-		- Plasma
+		- Phoron
 		- Gold
 		- Silver
 		- Clown
@@ -90,7 +90,7 @@ var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	..()
 
 /*
- * Plasma
+ * Phoron
  */
 /obj/item/stack/sheet/mineral/plasma
 	name = "solid plasma"

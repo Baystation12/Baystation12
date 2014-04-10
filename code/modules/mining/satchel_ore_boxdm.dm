@@ -63,7 +63,7 @@
 	if (amt_diamond)
 		dat += text("Diamond ore: [amt_diamond]<br>")
 	if (amt_plasma)
-		dat += text("Plasma ore: [amt_plasma]<br>")
+		dat += text("Phoron ore: [amt_plasma]<br>")
 	if (amt_uranium)
 		dat += text("Uranium ore: [amt_uranium]<br>")
 	if (amt_clown)

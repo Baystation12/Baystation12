@@ -30,8 +30,8 @@
 		del(src)
 
 /obj/item/weapon/ore/plasma
-	name = "Plasma ore"
-	icon_state = "Plasma ore"
+	name = "Phoron ore"
+	icon_state = "Phoron ore"
 	origin_tech = "materials=2"
 
 /obj/item/weapon/ore/silver

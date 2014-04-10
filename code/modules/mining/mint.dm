@@ -100,7 +100,7 @@
 		dat += text("chosen")
 	else
 		dat += text("<A href='?src=\ref[src];choose=diamond'>Choose</A>")
-	dat += text("<br><font color='#FF8800'><b>Plasma inserted: </b>[amt_plasma]</font> ")
+	dat += text("<br><font color='#FF8800'><b>Phoron inserted: </b>[amt_plasma]</font> ")
 	if (chosen == "plasma")
 		dat += text("chosen")
 	else

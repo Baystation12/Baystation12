@@ -3,7 +3,7 @@
  *		Oxygen
  *		Anesthetic
  *		Air
- *		Plasma
+ *		Phoron
  *		Emergency Oxygen
  */
 
@@ -92,7 +92,7 @@
 
 
 /*
- * Plasma
+ * Phoron
  */
 /obj/item/weapon/tank/plasma
 	name = "plasma tank"
