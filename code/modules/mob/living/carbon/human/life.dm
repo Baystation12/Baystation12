@@ -510,7 +510,7 @@
 			var/ratio = (breath.toxins/safe_toxins_max) * 10
 			//adjustToxLoss(Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))	//Limit amount of damage toxin exposure can do per second
 			if(reagents)
-				reagents.add_reagent("plasma", Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
+				reagents.add_reagent("phoron", Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
 		else if(O2_pp > vox_oxygen_max && species.name == "Vox") //Oxygen is toxic to vox.
 			var/ratio = (breath.oxygen/vox_oxygen_max) * 1000
@@ -888,12 +888,12 @@
 				alien = 2
 			reagents.metabolize(src,alien)
 
-		var/total_plasmaloss = 0
+		var/total_phoronloss = 0
 		for(var/obj/item/I in src)
 			if(I.contaminated)
-				total_plasmaloss += vsc.plc.CONTAMINATION_LOSS
+				total_phoronloss += vsc.plc.CONTAMINATION_LOSS
 		if(status_flags & GODMODE)	return 0	//godmode
-		adjustToxLoss(total_plasmaloss)
+		adjustToxLoss(total_phoronloss)
 
 		if(species.flags & REQUIRE_LIGHT)
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing

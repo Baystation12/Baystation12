@@ -238,9 +238,9 @@ REAGENT SCANNER
 		var/o2_concentration = environment.oxygen/total_moles
 		var/n2_concentration = environment.nitrogen/total_moles
 		var/co2_concentration = environment.carbon_dioxide/total_moles
-		var/plasma_concentration = environment.toxins/total_moles
+		var/phoron_concentration = environment.toxins/total_moles
 
-		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
+		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 		if(abs(n2_concentration - N2STANDARD) < 20)
 			user.show_message("\blue Nitrogen: [round(n2_concentration*100)]%", 1)
 		else
@@ -256,8 +256,8 @@ REAGENT SCANNER
 		else
 			user.show_message("\blue CO2: [round(co2_concentration*100)]%", 1)
 
-		if(plasma_concentration > 0.01)
-			user.show_message("\red Phoron: [round(plasma_concentration*100)]%", 1)
+		if(phoron_concentration > 0.01)
+			user.show_message("\red Phoron: [round(phoron_concentration*100)]%", 1)
 
 		if(unknown_concentration > 0.01)
 			user.show_message("\red Unknown: [round(unknown_concentration*100)]%", 1)

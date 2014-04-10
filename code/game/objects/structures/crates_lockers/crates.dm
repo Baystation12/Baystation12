@@ -375,12 +375,12 @@
 	icon_opened = "weaponcrateopen"
 	icon_closed = "weaponcrate"
 
-/obj/structure/closet/crate/secure/plasma
-	desc = "A secure plasma crate."
+/obj/structure/closet/crate/secure/phoron
+	desc = "A secure phoron crate."
 	name = "Phoron crate"
-	icon_state = "plasmacrate"
-	icon_opened = "plasmacrateopen"
-	icon_closed = "plasmacrate"
+	icon_state = "phoroncrate"
+	icon_opened = "phoroncrateopen"
+	icon_closed = "phoroncrate"
 
 /obj/structure/closet/crate/secure/gear
 	desc = "A secure gear crate."

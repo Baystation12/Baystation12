@@ -7,7 +7,7 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 
 	var/CLOTH_CONTAMINATION = 1
 	var/CLOTH_CONTAMINATION_NAME = "Cloth Contamination"
-	var/CLOTH_CONTAMINATION_DESC = "If this is on, plasma does damage by getting into cloth."
+	var/CLOTH_CONTAMINATION_DESC = "If this is on, phoron does damage by getting into cloth."
 
 	var/PHORONGUARD_ONLY = 0
 	var/PHORONGUARD_ONLY_NAME = "\"PhoronGuard Only\""
@@ -31,7 +31,7 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 
 	var/PHORON_HALLUCINATION = 0
 	var/PHORON_HALLUCINATION_NAME = "Phoron Hallucination"
-	var/PHORON_HALLUCINATION_DESC = "Does being in plasma cause you to hallucinate?"
+	var/PHORON_HALLUCINATION_DESC = "Does being in phoron cause you to hallucinate?"
 
 	var/N2O_HALLUCINATION = 1
 	var/N2O_HALLUCINATION_NAME = "N2O Hallucination"
@@ -75,7 +75,7 @@ obj/var/contaminated = 0
 /mob/proc/pl_effects()
 
 /mob/living/carbon/human/pl_effects()
-	//Handles all the bad things plasma can do.
+	//Handles all the bad things phoron can do.
 
 	//Contamination
 	if(vsc.plc.CLOTH_CONTAMINATION) contaminate()
@@ -153,7 +153,7 @@ obj/var/contaminated = 0
 
 turf/Entered(obj/item/I)
 	. = ..()
-	//Items that are in plasma, but not on a mob, can still be contaminated.
+	//Items that are in phoron, but not on a mob, can still be contaminated.
 	if(istype(I) && vsc.plc.CLOTH_CONTAMINATION)
 		var/datum/gas_mixture/env = return_air(1)
 		if(!env)

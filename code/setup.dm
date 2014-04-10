@@ -16,7 +16,7 @@
 #define MOLES_O2STANDARD MOLES_CELLSTANDARD*O2STANDARD	// O2 standard value (21%)
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
-#define MOLES_PHORON_VISIBLE	0.7 //Moles in a standard cell after which plasma is visible
+#define MOLES_PHORON_VISIBLE	0.7 //Moles in a standard cell after which phoron is visible
 #define MIN_PHORON_DAMAGE 1
 #define MAX_PHORON_DAMAGE 10
 
@@ -112,7 +112,7 @@
 #define FIRE_MINIMUM_TEMPERATURE_TO_EXIST	100+T0C
 #define FIRE_SPREAD_RADIOSITY_SCALE		0.85
 #define FIRE_CARBON_ENERGY_RELEASED	  500000 //Amount of heat released per mole of burnt carbon into the tile
-#define FIRE_PHORON_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt plasma into the tile
+#define FIRE_PHORON_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt phoron into the tile
 #define FIRE_GROWTH_RATE			40000 //For small fires
 
 #define WATER_BOIL_TEMP 393 */
@@ -205,7 +205,7 @@ var/MAX_EXPLOSION_RANGE = 14
 
 #define BLOCK_GAS_SMOKE_EFFECT 8192	// blocks the effect that chemical clouds would have on a mob --glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
 #define ONESIZEFITSALL 8192
-#define PHORONGUARD 16384			//Does not get contaminated by plasma.
+#define PHORONGUARD 16384			//Does not get contaminated by phoron.
 
 #define	NOREACT		16384 			//Reagents dont' react inside this container.
 

@@ -11,7 +11,7 @@ they are simply references used as part of a "has materials?" type proc. They al
 The currently supporting non-reagent materials:
 - $metal (/obj/item/stack/metal). One sheet = 3750 units.
 - $glass (/obj/item/stack/glass). One sheet = 3750 units.
-- $plasma (/obj/item/stack/plasma). One sheet = 3750 units.
+- $phoron (/obj/item/stack/phoron). One sheet = 3750 units.
 - $silver (/obj/item/stack/silver). One sheet = 3750 units.
 - $gold (/obj/item/stack/gold). One sheet = 3750 units.
 - $uranium (/obj/item/stack/uranium). One sheet = 3750 units.
@@ -24,7 +24,7 @@ Don't add new keyword/IDs if they are made from an existing one (such as rods wh
 Design Guidlines
 - The reliability formula for all R&D built items is reliability_base (a fixed number) + total tech levels required to make it +
 reliability_mod (starts at 0, gets improved through experimentation). Example: PACMAN generator. 79 base reliablity + 6 tech
-(3 plasmatech, 3 powerstorage) + 0 (since it's completely new) = 85% reliability. Reliability is the chance it works CORRECTLY.
+(3 phorontech, 3 powerstorage) + 0 (since it's completely new) = 85% reliability. Reliability is the chance it works CORRECTLY.
 - When adding new designs, check rdreadme.dm to see what kind of things have already been made and where new stuff is needed.
 - A single sheet of anything is 3750 units of material. Materials besides metal/glass require help from other jobs (mining for
 other types of metals and chemistry for reagents).
@@ -585,7 +585,7 @@ datum/design/posibrain
 	req_tech = list("engineering" = 4, "materials" = 6, "bluespace" = 2, "programming" = 4)
 
 	build_type = PROTOLATHE
-	materials = list("$metal" = 2000, "$glass" = 1000, "$silver" = 1000, "$gold" = 500, "$plasma" = 500, "$diamond" = 100)
+	materials = list("$metal" = 2000, "$glass" = 1000, "$silver" = 1000, "$gold" = 500, "$phoron" = 500, "$diamond" = 100)
 	build_path = "/obj/item/device/mmi/posibrain"
 
 ///////////////////////////////////
@@ -803,13 +803,13 @@ datum/design/mech_repair_droid
 	build_path = "/obj/item/mecha_parts/mecha_equipment/repair_droid"
 	category = "Exosuit Equipment"
 
-datum/design/mech_plasma_generator
+datum/design/mech_phoron_generator
 	name = "Exosuit Module Design (Phoron Generator Module)"
 	desc = "Exosuit-mounted phoron generator."
-	id = "mech_plasma_generator"
+	id = "mech_phoron_generator"
 	build_type = MECHFAB
-	req_tech = list("plasmatech" = 2, "powerstorage"= 2, "engineering" = 2)
-	build_path = "/obj/item/mecha_parts/mecha_equipment/plasma_generator"
+	req_tech = list("phorontech" = 2, "powerstorage"= 2, "engineering" = 2)
+	build_path = "/obj/item/mecha_parts/mecha_equipment/phoron_generator"
 	category = "Exosuit Equipment"
 
 datum/design/mech_energy_relay
@@ -1228,7 +1228,7 @@ datum/design/pacman
 	name = "PACMAN-type Generator Board"
 	desc = "The circuit board that for a PACMAN-type portable generator."
 	id = "pacman"
-	req_tech = list("programming" = 3, "plasmatech" = 3, "powerstorage" = 3, "engineering" = 3)
+	req_tech = list("programming" = 3, "phorontech" = 3, "powerstorage" = 3, "engineering" = 3)
 	build_type = IMPRINTER
 	reliability_base = 79
 	materials = list("$glass" = 2000, "sacid" = 20)
@@ -1384,7 +1384,7 @@ datum/design/bluespacebeaker
 	id = "bluespacebeaker"
 	req_tech = list("bluespace" = 2, "materials" = 6)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 3000, "$plasma" = 3000, "$diamond" = 500)
+	materials = list("$metal" = 3000, "$phoron" = 3000, "$diamond" = 500)
 	reliability_base = 76
 	build_path = "/obj/item/weapon/reagent_containers/glass/beaker/bluespace"
 
@@ -1565,13 +1565,13 @@ datum/design/stunshell
 	materials = list("$metal" = 4000)
 	build_path = "/obj/item/ammo_casing/shotgun/stunshell"
 
-datum/design/plasmapistol
-	name = "plasma pistol"
+datum/design/phoronpistol
+	name = "phoron pistol"
 	desc = "A specialized firearm designed to fire lethal bolts of toxins."
 	id = "ppistol"
-	req_tech = list("combat" = 5, "plasmatech" = 4)
+	req_tech = list("combat" = 5, "phorontech" = 4)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 5000, "$glass" = 1000, "$plasma" = 3000)
+	materials = list("$metal" = 5000, "$glass" = 1000, "$phoron" = 3000)
 	build_path = "/obj/item/weapon/gun/energy/toxgun"
 /////////////////////////////////////////
 /////////////////Mining//////////////////
@@ -1599,9 +1599,9 @@ datum/design/plasmacutter
 	name = "Plasma Cutter"
 	desc = "You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	id = "plasmacutter"
-	req_tech = list("materials" = 4, "plasmatech" = 3, "engineering" = 3)
+	req_tech = list("materials" = 4, "phorontech" = 3, "engineering" = 3)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 1500, "$glass" = 500, "$gold" = 500, "$plasma" = 500)
+	materials = list("$metal" = 1500, "$glass" = 500, "$gold" = 500, "$phoron" = 500)
 	reliability_base = 79
 	build_path = "/obj/item/weapon/pickaxe/plasmacutter"
 
@@ -1662,7 +1662,7 @@ datum/design/bluespace_crystal
 	id = "bluespace_crystal"
 	req_tech = list("bluespace" = 5, "materials" = 7)
 	build_type = PROTOLATHE
-	materials = list("$gold" = 1500, "$diamond" = 3000, "$plasma" = 1500)
+	materials = list("$gold" = 1500, "$diamond" = 3000, "$phoron" = 1500)
 	reliability_base = 100
 	build_path = "/obj/item/bluespace_crystal/artificial"
 

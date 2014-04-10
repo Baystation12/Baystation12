@@ -364,7 +364,7 @@
 			var/ratio = (breath.toxins/safe_toxins_max) * 10
 			//adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))	//Limit amount of damage toxin exposure can do per second
 			if(reagents)
-				reagents.add_reagent("plasma", Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
+				reagents.add_reagent("phoron", Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
 			toxins_alert = max(toxins_alert, 1)
 		else
 			toxins_alert = 0

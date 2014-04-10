@@ -44,7 +44,7 @@ var/list/valid_secondary_effect_types = list(\
 	/datum/artifact_effect/gasco2,\
 	/datum/artifact_effect/gasnitro,\
 	/datum/artifact_effect/gasoxy,\
-	/datum/artifact_effect/gasplasma,\
+	/datum/artifact_effect/gasphoron,\
 /*	/datum/artifact_effect/gassleeping,\*/
 	/datum/artifact_effect/goodfeeling,\
 	/datum/artifact_effect/heal,\
@@ -130,7 +130,7 @@ var/list/valid_secondary_effect_types = list(\
 	//if either of our effects rely on environmental factors, work that out
 	var/trigger_cold = 0
 	var/trigger_hot = 0
-	var/trigger_plasma = 0
+	var/trigger_phoron = 0
 	var/trigger_oxy = 0
 	var/trigger_co2 = 0
 	var/trigger_nitro = 0
@@ -144,7 +144,7 @@ var/list/valid_secondary_effect_types = list(\
 				trigger_hot = 1
 
 			if(env.toxins >= 10)
-				trigger_plasma = 1
+				trigger_phoron = 1
 			if(env.oxygen >= 10)
 				trigger_oxy = 1
 			if(env.carbon_dioxide >= 10)
@@ -177,7 +177,7 @@ var/list/valid_secondary_effect_types = list(\
 			secondary_effect.ToggleActivate(0)
 
 	//PHORON GAS ACTIVATION
-	if(trigger_plasma)
+	if(trigger_phoron)
 		if(my_effect.trigger == TRIGGER_PHORON && !my_effect.activated)
 			my_effect.ToggleActivate()
 		if(secondary_effect && secondary_effect.trigger == TRIGGER_PHORON && !secondary_effect.activated)
@@ -262,7 +262,7 @@ var/list/valid_secondary_effect_types = list(\
 				my_effect.ToggleActivate()
 			if(secondary_effect && secondary_effect.trigger == TRIGGER_ACID && prob(25))
 				secondary_effect.ToggleActivate(0)
-		else if(W.reagents.has_reagent("plasma", 1) || W.reagents.has_reagent("thermite", 1))
+		else if(W.reagents.has_reagent("phoron", 1) || W.reagents.has_reagent("thermite", 1))
 			if(my_effect.trigger == TRIGGER_VOLATILE)
 				my_effect.ToggleActivate()
 			if(secondary_effect && secondary_effect.trigger == TRIGGER_VOLATILE && prob(25))

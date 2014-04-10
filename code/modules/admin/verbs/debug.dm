@@ -955,7 +955,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for(var/obj/machinery/power/rad_collector/Rad in world)
 		if(Rad.anchored)
 			if(!Rad.P)
-				var/obj/item/weapon/tank/plasma/Phoron = new/obj/item/weapon/tank/plasma(Rad)
+				var/obj/item/weapon/tank/phoron/Phoron = new/obj/item/weapon/tank/phoron(Rad)
 				Phoron.air_contents.toxins = 70
 				Rad.drainratio = 0
 				Rad.P = Phoron

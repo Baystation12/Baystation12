@@ -3,8 +3,8 @@
 Making Bombs with ZAS:
 Make burny fire with lots of burning
 Draw off 5000K gas from burny fire
-Separate gas into oxygen and plasma components
-Obtain plasma and oxygen tanks filled up about 50-75% with normal-temp gas
+Separate gas into oxygen and phoron components
+Obtain phoron and oxygen tanks filled up about 50-75% with normal-temp gas
 Fill rest with super hot gas from separated canisters, they should be about 125C now.
 Attach to transfer valve and open. BOOM.
 

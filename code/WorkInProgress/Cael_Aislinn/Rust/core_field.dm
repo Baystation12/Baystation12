@@ -4,7 +4,7 @@ Deuterium-deuterium fusion : 40 x 10^7 K
 Deuterium-tritium fusion: 4.5 x 10^7 K
 */
 
-//#DEFINE MAX_STORED_ENERGY (held_plasma.toxins * held_plasma.toxins * SPECIFIC_HEAT_TOXIN)
+//#DEFINE MAX_STORED_ENERGY (held_phoron.toxins * held_phoron.toxins * SPECIFIC_HEAT_TOXIN)
 
 /obj/effect/rust_em_field
 	name = "EM Field"
@@ -29,7 +29,7 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 	var/field_strength = 0.01						//in teslas, max is 50T
 
 	var/obj/machinery/rust/rad_source/radiator
-	var/datum/gas_mixture/held_plasma = new
+	var/datum/gas_mixture/held_phoron = new
 	var/particle_catchers[13]
 
 	var/emp_overload = 0
@@ -128,34 +128,34 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 	radiation = 0
 
 	//update values
-	var/transfer_ratio = field_strength / 50			//higher field strength will result in faster plasma aggregation
+	var/transfer_ratio = field_strength / 50			//higher field strength will result in faster phoron aggregation
 	major_radius = field_strength * 0.21875// max = 8.75m
 	minor_radius = field_strength * 0.2125// max = 8.625m
 	volume_covered = PI * major_radius * minor_radius * 2.5 * 2.5 * 2.5 * 7 * 7 * transfer_ratio	//one tile = 2.5m*2.5m*2.5m
 
-	//add plasma from the surrounding environment
+	//add phoron from the surrounding environment
 	var/datum/gas_mixture/environment = loc.return_air()
 
-	//hack in some stuff to remove plasma from the air because SCIENCE
-	//the amount of plasma pulled in each update is relative to the field strength, with 50T (max field strength) = 100% of area covered by the field
+	//hack in some stuff to remove phoron from the air because SCIENCE
+	//the amount of phoron pulled in each update is relative to the field strength, with 50T (max field strength) = 100% of area covered by the field
 	//at minimum strength, 0.25% of the field volume is pulled in per update (?)
 	//have a max of 1000 moles suspended
-	if(held_plasma.toxins < transfer_ratio * 1000)
+	if(held_phoron.toxins < transfer_ratio * 1000)
 		var/moles_covered = environment.return_pressure()*volume_covered/(environment.temperature * R_IDEAL_GAS_EQUATION)
 		//world << "\blue moles_covered: [moles_covered]"
 		//
 		var/datum/gas_mixture/gas_covered = environment.remove(moles_covered)
-		var/datum/gas_mixture/plasma_captured = new /datum/gas_mixture()
+		var/datum/gas_mixture/phoron_captured = new /datum/gas_mixture()
 		//
-		plasma_captured.toxins = round(gas_covered.toxins * transfer_ratio)
-		//world << "\blue[plasma_captured.toxins] moles of plasma captured"
-		plasma_captured.temperature = gas_covered.temperature
-		plasma_captured.update_values()
+		phoron_captured.toxins = round(gas_covered.toxins * transfer_ratio)
+		//world << "\blue[phoron_captured.toxins] moles of phoron captured"
+		phoron_captured.temperature = gas_covered.temperature
+		phoron_captured.update_values()
 		//
-		gas_covered.toxins -= plasma_captured.toxins
+		gas_covered.toxins -= phoron_captured.toxins
 		gas_covered.update_values()
 		//
-		held_plasma.merge(plasma_captured)
+		held_phoron.merge(phoron_captured)
 		//
 		environment.merge(gas_covered)
 
@@ -169,35 +169,35 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 		mega_energy -= energy_lost
 		radiation += energy_lost*/
 
-	//change held plasma temp according to energy levels
+	//change held phoron temp according to energy levels
 	//SPECIFIC_HEAT_TOXIN
-	if(mega_energy > 0 && held_plasma.toxins)
-		var/heat_capacity = held_plasma.heat_capacity()//200 * number of plasma moles
+	if(mega_energy > 0 && held_phoron.toxins)
+		var/heat_capacity = held_phoron.heat_capacity()//200 * number of phoron moles
 		if(heat_capacity > 0.0003)	//formerly MINIMUM_HEAT_CAPACITY
-			held_plasma.temperature = (heat_capacity + mega_energy * 35000)/heat_capacity
+			held_phoron.temperature = (heat_capacity + mega_energy * 35000)/heat_capacity
 
-	//if there is too much plasma in the field, lose some
-	/*if( held_plasma.toxins > (MOLES_CELLSTANDARD * 7) * (50 / field_strength) )
+	//if there is too much phoron in the field, lose some
+	/*if( held_phoron.toxins > (MOLES_CELLSTANDARD * 7) * (50 / field_strength) )
 		LosePhoron()*/
-	if(held_plasma.toxins > 1)
-		//lose a random amount of plasma back into the air, increased by the field strength (want to switch this over to frequency eventually)
+	if(held_phoron.toxins > 1)
+		//lose a random amount of phoron back into the air, increased by the field strength (want to switch this over to frequency eventually)
 		var/loss_ratio = rand() * (0.05 + (0.05 * 50 / field_strength))
-		//world << "lost [loss_ratio*100]% of held plasma"
+		//world << "lost [loss_ratio*100]% of held phoron"
 		//
-		var/datum/gas_mixture/plasma_lost = new
-		plasma_lost.temperature = held_plasma.temperature
+		var/datum/gas_mixture/phoron_lost = new
+		phoron_lost.temperature = held_phoron.temperature
 		//
-		plasma_lost.toxins = held_plasma.toxins * loss_ratio
-		//plasma_lost.update_values()
-		held_plasma.toxins -= held_plasma.toxins * loss_ratio
-		//held_plasma.update_values()
+		phoron_lost.toxins = held_phoron.toxins * loss_ratio
+		//phoron_lost.update_values()
+		held_phoron.toxins -= held_phoron.toxins * loss_ratio
+		//held_phoron.update_values()
 		//
-		environment.merge(plasma_lost)
+		environment.merge(phoron_lost)
 		radiation += loss_ratio * mega_energy * 0.1
 		mega_energy -= loss_ratio * mega_energy * 0.1
 	else
-		held_plasma.toxins = 0
-		//held_plasma.update_values()
+		held_phoron.toxins = 0
+		//held_phoron.update_values()
 
 	//handle some reactants formatting
 	for(var/reactant in dormant_reactant_quantities)
@@ -256,9 +256,9 @@ Deuterium-tritium fusion: 4.5 x 10^7 K
 	radiation += mega_energy
 	mega_energy = 0
 
-	//lose all held plasma back into the air
+	//lose all held phoron back into the air
 	var/datum/gas_mixture/environment = loc.return_air()
-	environment.merge(held_plasma)
+	environment.merge(held_phoron)
 
 /obj/effect/rust_em_field/proc/change_size(var/newsize = 1)
 	//

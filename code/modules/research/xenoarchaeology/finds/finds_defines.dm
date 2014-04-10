@@ -119,7 +119,7 @@
 			return "carbon"
 		if(ARCHAEO_REMAINS_XENO)
 			return "carbon"
-	return "plasma"
+	return "phoron"
 
 //see /turf/simulated/mineral/New() in code/modules/mining/mine_turfs.dm
 /proc/get_random_digsite_type()
@@ -215,7 +215,7 @@ var/list/responsive_carriers = list( \
 	"iron", \
 	"chlorine", \
 	"phosphorus", \
-	"plasma")
+	"phoron")
 
 var/list/finds_as_strings = list( \
 	"Trace organic cells", \
