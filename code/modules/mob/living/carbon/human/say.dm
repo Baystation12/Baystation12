@@ -55,6 +55,12 @@
 	if(!message || stat)
 		return
 
+	var/ending = copytext(message, length(message))
+	if(ending=="!")
+		verb=pick("exclaims","shouts","yells")
+	if(ending=="?")
+		verb="asks"
+
 	var/list/obj/item/used_radios = new
 
 	switch (message_mode)
@@ -180,7 +186,7 @@
 
 	if((HULK in mutations) && health >= 25 && length(message))
 		message = "[uppertext(message)]!!!"
-		verb = pick("yells","roars","hollars")
+		verb = pick("yells","roars","hollers")
 		handled = 1
 	if(slurring)
 		message = slur(message)

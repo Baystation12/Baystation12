@@ -11,13 +11,6 @@
 		verb = language.speech_verb
 		style = language.colour
 		
-	if(verb == "says")
-		var/ending = copytext(message, length(message))
-		if(ending=="!")
-			verb="exclaims"
-		if(ending=="?")
-			verb="asks"
-
 	var/speaker_name = speaker.name
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
@@ -57,13 +50,6 @@
 
 	if(hard_to_hear)
 		message = stars(message)
-
-	if(verb == "says")
-		var/ending = copytext(message,length(message))
-		if(ending=="!")
-			verb="exclaims"
-		if(ending=="?")
-			verb="asks"
 
 	var/speaker_name = speaker.name
 	if(istype(speaker, /mob/living/carbon/human))
