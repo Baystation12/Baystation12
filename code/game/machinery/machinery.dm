@@ -174,7 +174,7 @@ Class Procs:
 		return 1
 	if ( ! (istype(usr, /mob/living/carbon/human) || \
 			istype(usr, /mob/living/silicon) || \
-			istype(usr, /mob/living/carbon/monkey) && ticker && ticker.mode.name == "monkey") )
+			istype(usr, /mob/living/carbon/monkey)) )
 		usr << "\red You don't have the dexterity to do this!"
 		return 1
 
@@ -193,7 +193,7 @@ Class Procs:
 	src.add_fingerprint(usr)
 
 	var/area/A = get_area(src)
-	A.powerupdate = 1
+	A.master.powerupdate = 1
 
 	return 0
 
@@ -216,7 +216,7 @@ Class Procs:
 		return 1
 	if ( ! (istype(usr, /mob/living/carbon/human) || \
 			istype(usr, /mob/living/silicon) || \
-			istype(usr, /mob/living/carbon/monkey) && ticker && ticker.mode.name == "monkey") )
+			istype(usr, /mob/living/carbon/monkey)) )
 		usr << "\red You don't have the dexterity to do this!"
 		return 1
 /*
@@ -236,7 +236,7 @@ Class Procs:
 	src.add_fingerprint(user)
 
 	var/area/A = get_area(src)
-	A.powerupdate = 1
+	A.master.powerupdate = 1
 
 	return 0
 
@@ -248,3 +248,13 @@ Class Procs:
 	uid = gl_uid
 	gl_uid++
 
+/obj/machinery/proc/state(var/msg)
+  for(var/mob/O in hearers(src, null))
+    O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
+
+/obj/machinery/proc/ping(text=null)
+  if (!text)
+    text = "\The [src] pings."
+
+  state(text, "blue")
+  playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)

@@ -172,17 +172,21 @@ var/global/list/virusDB = list()
 		.= V.fields["name"]
 
 /datum/disease2/disease/proc/get_info()
-	var/r = "GNAv2 based virus lifeform - [name()], #[add_zero("[uniqueID]", 4)]"
-	r += "<BR>Infection rate : [infectionchance * 10]"
-	r += "<BR>Spread form : [spreadtype]"
-	r += "<BR>Progress Speed : [stageprob * 10]"
-	r += "<BR>Affected species:"
-	for(var/S in affected_species)
-		r += "<BR>[S]"
-	for(var/datum/disease2/effectholder/E in effects)
-		r += "<BR>Effect:[E.effect.name]. Strength : [E.multiplier * 8]. Verosity : [E.chance * 15]. Type : [5-E.stage]."
+	var/r = {"
+	<small>Analysis determined the existence of a GNAv2-based viral lifeform.</small><br>
+	<u>Designation:</u> [name()]<br>
+	<u>Antigen:</u> [antigens2string(antigen)]<br>
+	<u>Transmitted By:</u> [spreadtype]<br>
+	<u>Rate of Progression:</u> [stageprob * 10]<br>
+	<u>Species Affected:</u> [list2text(affected_species, ", ")]<br>
+"}
 
-	r += "<BR>Antigen pattern: [antigens2string(antigen)]"
+	r += "<u>Symptoms:</u><br>"
+	for(var/datum/disease2/effectholder/E in effects)
+		r += "([E.stage]) [E.effect.name]    "
+		r += "<small><u>Strength:</u> [E.multiplier >= 3 ? "Severe" : E.multiplier > 1 ? "Above Average" : "Average"]    "
+		r += "<u>Verosity:</u> [E.chance * 15]</small><br>"
+
 	return r
 
 /datum/disease2/disease/proc/addToDB()
@@ -221,3 +225,10 @@ proc/virus2_greater_infection()
 	candidates = shuffle(candidates)
 
 	infect_mob_random_greater(candidates[1])
+
+proc/virology_letterhead(var/report_name)
+	return {"
+		<center><h1><b>[report_name]</b></h1></center>
+		<center><small><i>[station_name()] Virology Lab</i></small></center>
+		<hr>
+"}

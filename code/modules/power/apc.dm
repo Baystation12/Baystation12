@@ -144,7 +144,7 @@
 		init()
 	else
 		area = src.loc.loc:master
-		area.apc |= src	
+		area.apc |= src
 		opened = 1
 		operating = 0
 		name = "[area.name] APC"
@@ -171,7 +171,7 @@
 		cell.charge = start_charge * cell.maxcharge / 100.0 		// (convert percentage to actual value)
 
 	var/area/A = src.loc.loc
-	
+
 
 	//if area isn't specified use current
 	if(isarea(A) && src.areastring == null)
@@ -913,7 +913,7 @@
 		return 0
 	if ( ! (istype(user, /mob/living/carbon/human) || \
 			istype(user, /mob/living/silicon) || \
-			istype(user, /mob/living/carbon/monkey) /*&& ticker && ticker.mode.name == "monkey"*/) )
+			istype(user, /mob/living/carbon/monkey)) )
 		user << "\red You don't have the dexterity to use this [src]!"
 		nanomanager.close_user_uis(user, src)
 
@@ -1164,6 +1164,7 @@
 	lastused_equip = area.usage(EQUIP)
 	lastused_environ = area.usage(ENVIRON)
 	if(area.powerupdate)
+		if(debug) log_debug("power update in [area.name] / [name]")
 		area.clear_usage()
 
 	lastused_total = lastused_light + lastused_equip + lastused_environ
@@ -1187,16 +1188,16 @@
 	if(terminal && terminal.powernet)
 		perapc = terminal.powernet.perapc
 
-	//if(debug)
-		//world << "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light]"
+	if(debug)
+		log_debug( "Status: [main_status] - Excess: [excess] - Last Equip: [lastused_equip] - Last Light: [lastused_light]")
 
 	if(cell && !shorted)
-		var/cell_charge = cell.charge
+		//var/cell_charge = cell.charge
 		var/cell_maxcharge = cell.maxcharge
 
 		// draw power from cell as before
 
-		var/cellused = min(cell_charge, CELLRATE * lastused_total)	// clamp deduction to a max, amount left in cell
+		var/cellused = min(cell.charge, CELLRATE * lastused_total)	// clamp deduction to a max, amount left in cell
 		cell.use(cellused)
 
 		if(excess > 0 || perapc > lastused_total)		// if power excess, or enough anyway, recharge the cell
@@ -1207,10 +1208,9 @@
 
 		else		// no excess, and not enough per-apc
 
-			if( (cell_charge/CELLRATE+perapc) >= lastused_total)		// can we draw enough from cell+grid to cover last usage?
+			if( (cell.charge/CELLRATE+perapc) >= lastused_total)		// can we draw enough from cell+grid to cover last usage?
 
-				cell_charge = min(cell_maxcharge, cell_charge + CELLRATE * perapc)	//recharge with what we can
-				cell.charge = cell_charge
+				cell.give(CELLRATE * perapc)	//recharge with what we can
 				add_load(perapc)		// so draw what we can from the grid
 				charging = 0
 
@@ -1233,30 +1233,30 @@
 			longtermpower -= 2
 
 
-		if(cell_charge >= 1250 || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
+		if(cell.charge >= 1250 || longtermpower > 0)              // Put most likely at the top so we don't check it last, effeciency 101
 			if(autoflag != 3)
 				equipment = autoset(equipment, 1)
 				lighting = autoset(lighting, 1)
 				environ = autoset(environ, 1)
 				autoflag = 3
 				area.poweralert(1, src)
-				if(cell_charge >= 4000)
-					area.poweralert(1, src)                
-		else if(cell_charge < 1250 && cell_charge > 750 && longtermpower < 0)                       // <30%, turn off equipment
+				if(cell.charge >= 4000)
+					area.poweralert(1, src)
+		else if(cell.charge < 1250 && cell.charge > 750 && longtermpower < 0)                       // <30%, turn off equipment
 			if(autoflag != 2)
 				equipment = autoset(equipment, 2)
 				lighting = autoset(lighting, 1)
 				environ = autoset(environ, 1)
 				area.poweralert(0, src)
 				autoflag = 2
-		else if(cell_charge < 750 && cell_charge > 10 && longtermpower < 0)        // <15%, turn off lighting & equipment
+		else if(cell.charge < 750 && cell.charge > 10 && longtermpower < 0)        // <15%, turn off lighting & equipment
 			if(autoflag != 1)
 				equipment = autoset(equipment, 2)
 				lighting = autoset(lighting, 2)
 				environ = autoset(environ, 1)
 				area.poweralert(0, src)
 				autoflag = 1
-		else if(cell_charge <= 0)                                   // zero charge, turn all off
+		else if(cell.charge <= 0)                                   // zero charge, turn all off
 			if(autoflag != 0)
 				equipment = autoset(equipment, 0)
 				lighting = autoset(lighting, 0)
@@ -1269,7 +1269,7 @@
 		if(chargemode && charging == 1 && operating)
 			if(excess > 0)		// check to make sure we have enough to charge
 				// Max charge is perapc share, capped to cell capacity, or % per second constant (Whichever is smallest)
-				var/ch = min(perapc*CELLRATE, (cell_maxcharge - cell_charge), (cell_maxcharge*CHARGELEVEL))
+				var/ch = min(perapc*CELLRATE, (cell_maxcharge - cell.charge), (cell_maxcharge*CHARGELEVEL))
 				add_load(ch/CELLRATE) // Removes the power we're taking from the grid
 				cell.give(ch) // actually recharge the cell
 
@@ -1307,7 +1307,7 @@
 		environ = autoset(environ, 0)
 		area.poweralert(0, src)
 		autoflag = 0
-		
+
 
 	// update icon & area power if anything changed
 

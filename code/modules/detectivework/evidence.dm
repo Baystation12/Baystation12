@@ -6,7 +6,7 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "evidenceobj"
 	item_state = ""
-	w_class = 1
+	w_class = 2
 
 /obj/item/weapon/evidencebag/afterattack(obj/item/I, mob/user as mob, proximity)
 	if(!proximity) return

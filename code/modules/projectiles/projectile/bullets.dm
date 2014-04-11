@@ -59,3 +59,6 @@
 
 /obj/item/projectile/bullet/a762
 	damage = 25
+
+/obj/item/projectile/bullet/chameleon
+	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
