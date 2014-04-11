@@ -339,12 +339,11 @@ var/list/department_radio_keys = list(
 				spawn(0)
 					D.listen_command(message, src)
 
-		if(istype(A, /obj/)) //radio in pocket could work, radio in backpack wouldn't --rastaf0
+		if(istype(A, /obj/)) //radios in pockets and backpacks work
 			var/obj/O = A
 			spawn (0)
-				if(O && !istype(O.loc, /obj/item/weapon/storage))
+				if(O)
 					O.hear_talk(src, message)
-
 
 /*			Commented out as replaced by code above from BS12
 	for (var/obj/O in ((V | contents)-used_radios)) //radio in pocket could work, radio in backpack wouldn't --rastaf0
