@@ -40,7 +40,7 @@
 /obj/item/projectile/energy/bolt
 	name = "bolt"
 	icon_state = "cbbolt"
-	damage = 10
+	damage = 15
 	damage_type = TOX
 	nodamage = 0
 	agony = 35
