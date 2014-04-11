@@ -43,7 +43,7 @@
 	damage = 10
 	damage_type = TOX
 	nodamage = 0
-	agony = 30
+	agony = 35
 	stutter = 10
 
 
