@@ -84,7 +84,7 @@
 
 /obj/item/weapon/storage/photo_album/MouseDrop(obj/over_object as obj)
 
-	if((istype(usr, /mob/living/carbon/human) || (ticker && ticker.mode.name == "monkey")))
+	if((istype(usr, /mob/living/carbon/human)))
 		var/mob/M = usr
 		if(!( istype(over_object, /obj/screen) ))
 			return ..()
