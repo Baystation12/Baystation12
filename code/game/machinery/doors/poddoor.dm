@@ -63,7 +63,7 @@
 	if (src.operating)
 		return
 	src.operating = 1
-	layer = 3.0
+	layer = 2.8
 	flick("pdoorc1", src)
 	src.icon_state = "pdoor1"
 	src.density = 1
