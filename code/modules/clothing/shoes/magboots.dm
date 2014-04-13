@@ -8,16 +8,6 @@
 	action_button_name = "Toggle the magboots"
 //	flags = NOSLIP //disabled by default
 
-
-	verb/toggle()
-		set name = "Toggle Magboots"
-		set category = "Object"
-		set src in usr
-		if(usr.stat)
-			return
-		
-		src.attack_self(usr)
-
 	attack_self(mob/user)
 		if(magpulse)
 			flags &= ~NOSLIP
