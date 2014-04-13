@@ -276,6 +276,36 @@
 	new /obj/item/weapon/rcd_ammo(src)
 	new /obj/item/weapon/rcd(src)
 
+/obj/structure/closet/crate/solar
+	name = "Solar Pack crate"
+
+/obj/structure/closet/crate/solar/New()
+	..()
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/weapon/circuitboard/solar_control(src)
+	new /obj/item/weapon/tracker_electronics(src)
+	new /obj/item/weapon/paper/solar(src)
+
 /obj/structure/closet/crate/freezer
 	desc = "A freezer."
 	name = "Freezer"
@@ -303,6 +333,15 @@
 			newgas.temperature = target_temp
 		return newgas
 
+/obj/structure/closet/crate/freezer/rations //Fpr use in the escape shuttle
+	desc = "A crate of emergency rations."
+	name = "Emergency Rations"
+
+
+/obj/structure/closet/crate/freezer/rations/New()
+	..()
+	new /obj/item/weapon/storage/box/donkpockets(src)
+	new /obj/item/weapon/storage/box/donkpockets(src)
 
 /obj/structure/closet/crate/bin
 	desc = "A large bin."

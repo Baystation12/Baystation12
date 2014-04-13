@@ -156,6 +156,8 @@
 	S["nanotrasen_relation"] >> nanotrasen_relation
 	//S["skin_style"]			>> skin_style
 
+	S["uplinklocation"] >> uplinklocation
+
 	//Sanitize
 	metadata		= sanitize_text(metadata, initial(metadata))
 	real_name		= reject_bad_name(real_name)
@@ -259,6 +261,8 @@
 
 	S["nanotrasen_relation"] << nanotrasen_relation
 	//S["skin_style"]			<< skin_style
+
+	S["uplinklocation"] << uplinklocation
 
 	return 1
 

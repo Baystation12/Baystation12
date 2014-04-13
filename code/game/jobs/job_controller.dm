@@ -439,6 +439,10 @@ var/global/datum/controller/occupations/job_master
 				var/obj/item/clothing/glasses/G = H.glasses
 				G.prescription = 1
 //		H.update_icons()
+
+		H.hud_updateflag |= (1 << ID_HUD)
+		H.hud_updateflag |= (1 << IMPLOYAL_HUD)
+		H.hud_updateflag |= (1 << SPECIALROLE_HUD)
 		return 1
 
 

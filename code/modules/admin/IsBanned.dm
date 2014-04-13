@@ -34,8 +34,8 @@ world/IsBanned(key,address,computer_id)
 		var/ckeytext = ckey(key)
 
 		if(!establish_db_connection())
-			world.log << "Ban database connection failure. Key [ckeytext] not checked"
-			diary << "Ban database connection failure. Key [ckeytext] not checked"
+			error("Ban database connection failure. Key [ckeytext] not checked")
+			log_misc("Ban database connection failure. Key [ckeytext] not checked")
 			return
 
 		var/failedcid = 1
@@ -51,7 +51,7 @@ world/IsBanned(key,address,computer_id)
 			failedcid = 0
 			cidquery = " OR computerid = '[computer_id]' "
 
-		var/DBQuery/query = dbcon.NewQuery("SELECT ckey, ip, computerid, a_ckey, reason, expiration_time, duration, bantime, bantype FROM erro_Ban WHERE (ckey = '[ckeytext]' [ipquery] [cidquery]) AND (bantype = 'PERMABAN'  OR (bantype = 'TEMPBAN' AND expiration_time > Now())) AND isnull(unbanned)")
+		var/DBQuery/query = dbcon.NewQuery("SELECT ckey, ip, computerid, a_ckey, reason, expiration_time, duration, bantime, bantype FROM erro_ban WHERE (ckey = '[ckeytext]' [ipquery] [cidquery]) AND (bantype = 'PERMABAN'  OR (bantype = 'TEMPBAN' AND expiration_time > Now())) AND isnull(unbanned)")
 
 		query.Execute()
 

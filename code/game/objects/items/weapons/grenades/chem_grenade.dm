@@ -161,15 +161,14 @@
 				if( A == src ) continue
 				src.reagents.reaction(A, 1, 10)
 
+		if(istype(loc, /mob/living/carbon))		//drop dat grenade if it goes off in your hand
+			var/mob/living/carbon/C = loc
+			C.drop_from_inventory(src)
+			C.throw_mode_off()
 
 		invisibility = INVISIBILITY_MAXIMUM //Why am i doing this?
 		spawn(50)		   //To make sure all reagents can work
 			del(src)	   //correctly before deleting the grenade.
-		/*else
-			icon_state = initial(icon_state) + "_locked"
-			crit_fail = 1
-			for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
-				G.loc = get_turf(src.loc)*/
 
 
 /obj/item/weapon/grenade/chem_grenade/large
@@ -239,6 +238,8 @@
 		B1.reagents.add_reagent("potassium", 25)
 		B2.reagents.add_reagent("phosphorus", 25)
 		B2.reagents.add_reagent("sugar", 25)
+
+		detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
 
 		beakers += B1
 		beakers += B2

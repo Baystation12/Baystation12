@@ -302,7 +302,7 @@ var/list/department_radio_keys = list(
 	var/list/listening
 
 	listening = get_mobs_in_view(message_range, src)
-	var/list/onscreen = get_mobs_in_view(7, src)
+	var/list/onscreen = viewers()
 	for(var/mob/M in player_list)
 		if (!M.client)
 			continue //skip monkeys and leavers
@@ -330,10 +330,10 @@ var/list/department_radio_keys = list(
 				P.speech_buffer.Remove(pick(P.speech_buffer))
 			P.speech_buffer.Add(message)
 
-		if(istype(A, /obj/)) //radio in pocket could work, radio in backpack wouldn't --rastaf0
+		if(istype(A, /obj/)) //radios in pockets and backpacks work
 			var/obj/O = A
 			spawn (0)
-				if(O && !istype(O.loc, /obj/item/weapon/storage))
+				if(O)
 					O.hear_talk(src, message)
 
 
@@ -384,19 +384,20 @@ var/list/department_radio_keys = list(
 		rendered = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] <span class='message'>[message_a]</span></span>"
 		var/rendered_ghost = "<span class='game say'><span class='name'>[GetVoice()]</span>[alt_name] <span class='message'>[message_ghost]</span></span>"
 		for (var/mob/M in heard_a)
-			if(hascall(M,"show_message"))
-				var/deaf_message = ""
-				var/deaf_type = 1
-				if(M != src)
-					deaf_message = "<span class='name'>[name]</span>[alt_name] talks but you cannot hear them."
-				else
-					deaf_message = "<span class='notice'>You cannot hear yourself!</span>"
-					deaf_type = 2 // Since you should be able to hear yourself without looking
-				if (M.stat == DEAD && (M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
-					M:show_message(rendered_ghost, 2, deaf_message, deaf_type)
-				else
-					M:show_message(rendered, 2, deaf_message, deaf_type)
-				M << speech_bubble
+			if(M.client)
+				if(hascall(M,"show_message"))
+					var/deaf_message = ""
+					var/deaf_type = 1
+					if(M != src)
+						deaf_message = "<span class='name'>[name]</span>[alt_name] talks but you cannot hear them."
+					else
+						deaf_message = "<span class='notice'>You cannot hear yourself!</span>"
+						deaf_type = 2 // Since you should be able to hear yourself without looking
+					if (M.stat == DEAD && (M.client.prefs.toggles & CHAT_GHOSTEARS) &&  M in onscreen)
+						M:show_message(rendered_ghost, 2, deaf_message, deaf_type)
+					else
+						M:show_message(rendered, 2, deaf_message, deaf_type)
+					M << speech_bubble
 
 	if (length(heard_b))
 

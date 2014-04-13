@@ -154,7 +154,7 @@
 	attack_generic(user, rand(10, 15))
 
 
-/obj/structure/window/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
 
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
@@ -313,7 +313,7 @@
 /obj/structure/window/proc/update_nearby_tiles(need_rebuild)
 	if(!air_master)
 		return 0
-	air_master.AddTurfToUpdate(get_turf(src))
+	air_master.mark_for_update(get_turf(src))
 
 	return 1
 

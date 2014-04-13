@@ -57,7 +57,7 @@
 		return
 
 	if(changeling.geneticdamage > max_genetic_damage)
-		src << "<span class='warning'>Our geneomes are still reassembling. We need time to recover first.</span>"
+		src << "<span class='warning'>Our genomes are still reassembling. We need time to recover first.</span>"
 		return
 
 	return changeling

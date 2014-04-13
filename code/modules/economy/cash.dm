@@ -17,7 +17,7 @@
 	var/worth = 0
 
 /obj/item/weapon/spacecash/c1
-	name = "1 credip chip"
+	name = "1 credit chip"
 	icon_state = "spacecash"
 	desc = "It's worth 1 credit."
 	worth = 1

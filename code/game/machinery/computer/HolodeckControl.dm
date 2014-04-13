@@ -489,7 +489,7 @@
 	damtype = HALLOSS
 
 /obj/item/weapon/holo/esword
-	desc = "May the force be within you. Sorta"
+	desc = "May the force be within you. Sorta."
 	icon_state = "sword0"
 	force = 3.0
 	throw_speed = 1
@@ -607,11 +607,11 @@
 	power_channel = ENVIRON
 
 /obj/machinery/readybutton/attack_ai(mob/user as mob)
-	user << "The station AI is not to interact with these devices"
+	user << "The station AI is not to interact with these devices!"
 	return
 
 /obj/machinery/readybutton/attack_paw(mob/user as mob)
-	user << "You are too primitive to use this device"
+	user << "You are too primitive to use this device."
 	return
 
 /obj/machinery/readybutton/New()
@@ -663,3 +663,22 @@
 
 	for(var/mob/M in currentarea)
 		M << "FIGHT!"
+
+//Holorack
+
+/obj/structure/rack/holorack
+	name = "rack"
+	desc = "Different from the Middle Ages version."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "rack"
+
+/obj/structure/rack/holorack/attack_alien(mob/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
+	return attack_hand(user)
+
+/obj/structure/rack/holorack/attack_hand(mob/user as mob)
+	return
+
+/obj/structure/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/weapon/wrench))
+		user << "It's a holorack!  You can't unwrench it!"
+		return

@@ -307,10 +307,30 @@
 		icon_state = "hair_e"
 		gender = MALE // turnoff!
 
-
 	bald
 		name = "Bald"
 		icon_state = "bald"
+
+	icp_screen_pink
+		name = "pink IPC screen"
+		icon_state = "ipc_pink"
+		species_allowed = list("Machine")
+
+	icp_screen_red
+		name = "red IPC screen"
+		icon_state = "ipc_red"
+		species_allowed = list("Machine")
+
+	icp_screen_green
+		name = "green IPC screen"
+		icon_state = "ipc_green"
+		species_allowed = list("Machine")
+
+	icp_screen_blue
+		name = "blue IPC screen"
+		icon_state = "ipc_blue"
+		species_allowed = list("Machine")
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
@@ -328,7 +348,7 @@
 		name = "Shaved"
 		icon_state = "bald"
 		gender = NEUTER
-		species_allowed = list("Human","Unathi","Tajaran","Skrell","Vox")
+		species_allowed = list("Human","Unathi","Tajaran","Skrell","Vox","Machine")
 
 	watson
 		name = "Watson Mustache"

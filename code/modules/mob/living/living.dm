@@ -256,7 +256,16 @@
 	buckled = initial(src.buckled)
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
+
+		if (C.handcuffed && !initial(C.handcuffed))
+			C.drop_from_inventory(C.handcuffed)
 		C.handcuffed = initial(C.handcuffed)
+
+		if (C.legcuffed && !initial(C.legcuffed))
+			C.drop_from_inventory(C.legcuffed)
+		C.legcuffed = initial(C.legcuffed)
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
 
 /mob/living/proc/rejuvenate()
 
@@ -303,7 +312,9 @@
 
 	// make the icons look correct
 	regenerate_icons()
-
+	
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
 	return
 
 /mob/living/proc/UpdateDamageIcon()
@@ -348,8 +359,8 @@
 				return
 			else
 				if(Debug)
-					diary <<"pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]"
-					diary <<"REPORT THIS"
+					log_debug("pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]")
+					log_debug("REPORT THIS")
 
 		/////
 		if(pulling && pulling.anchored)
@@ -627,8 +638,6 @@
 							O.show_message("\red <B>[CM] manages to remove the handcuffs!</B>", 1)
 						CM << "\blue You successfully remove \the [CM.handcuffed]."
 						CM.drop_from_inventory(CM.handcuffed)
-						CM.handcuffed = null
-						CM.update_inv_handcuffed()
 
 		else if(CM.legcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100

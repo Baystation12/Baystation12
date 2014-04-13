@@ -91,6 +91,12 @@ ALLOW_RANDOM_EVENTS
 ## if amount of traitors scales or not
 TRAITOR_SCALING
 
+## if objectives are disabled
+#OBJECTIVES_DISABLED
+
+## make ERT's be only called by admins
+#ERT_ADMIN_ONLY
+
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
 
@@ -117,6 +123,9 @@ VOTE_AUTOTRANSFER_INITIAL 108000
 
 ##autovote delay (deciseconds) before sequential automatic transfer votes are called (default 60 minutes)
 VOTE_AUTOTRANSFER_INTERVAL 36000
+
+## Time left (seconds) before round start when automatic gamemote vote is called (default 100).
+VOTE_AUTOGAMEMODE_TIMELEFT 100
 
 ## prevents dead players from voting or starting votes
 #NO_DEAD_VOTE
@@ -232,6 +241,10 @@ USEALIENWHITELIST
 ## Path to the python2 executable on the system.  Leave blank for default.
 ## Default is "python" on Windows, "/usr/bin/env python2" on UNIX.
 #PYTHON_PATH
+
+## Uncomment to use the C library nudge instead of the python script.
+## This helps security and stability on Linux, but you need to compile the library first.
+#USE_LIB_NUDGE
 
 ## Uncommen to allow ghosts to write in blood during Cult rounds.
 ALLOW_CULT_GHOSTWRITER

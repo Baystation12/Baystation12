@@ -312,22 +312,22 @@
 			if(slot_l_ear)
 				if(H.l_ear)
 					return 0
+				if( w_class < 2	)
+					return 1
 				if( !(slot_flags & SLOT_EARS) )
 					return 0
 				if( (slot_flags & SLOT_TWOEARS) && H.r_ear )
 					return 0
-				if( w_class < 2	)
-					return 1
 				return 1
 			if(slot_r_ear)
 				if(H.r_ear)
 					return 0
+				if( w_class < 2 )
+					return 1
 				if( !(slot_flags & SLOT_EARS) )
 					return 0
 				if( (slot_flags & SLOT_TWOEARS) && H.l_ear )
 					return 0
-				if( w_class < 2 )
-					return 1
 				return 1
 			if(slot_w_uniform)
 				if(H.w_uniform)
@@ -378,10 +378,6 @@
 				if(!H.wear_suit.allowed)
 					if(!disable_warning)
 						usr << "You somehow have a suit with no defined allowed items for suit storage, stop that."
-					return 0
-				if(src.w_class > 3)
-					if(!disable_warning)
-						usr << "The [name] is too big to attach."
 					return 0
 				if( istype(src, /obj/item/device/pda) || istype(src, /obj/item/weapon/pen) || is_type_in_list(src, H.wear_suit.allowed) )
 					return 1
@@ -488,7 +484,7 @@
 			(H.glasses && H.glasses.flags & GLASSESCOVERSEYES) \
 		))
 		// you can't stab someone in the eyes wearing a mask!
-		user << "\red You're going to need to remove that mask/helmet/glasses first."
+		user << "\red You're going to need to remove the eye covering first."
 		return
 
 	var/mob/living/carbon/monkey/Mo = M
@@ -496,7 +492,7 @@
 			(Mo.wear_mask && Mo.wear_mask.flags & MASKCOVERSEYES) \
 		))
 		// you can't stab someone in the eyes wearing a mask!
-		user << "\red You're going to need to remove that mask/helmet/glasses first."
+		user << "\red You're going to need to remove the eye covering first."
 		return
 
 	if(istype(M, /mob/living/carbon/alien) || istype(M, /mob/living/carbon/slime))//Aliens don't have eyes./N     slimes also don't have eyes!

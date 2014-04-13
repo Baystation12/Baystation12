@@ -23,7 +23,7 @@ datum
 		var/list/data = null
 		var/volume = 0
 		var/nutriment_factor = 0
-		var/custom_metabolism = REAGENTS_METABOLISM //Default 0.2
+		var/custom_metabolism = REAGENTS_METABOLISM
 		var/overdose = 0
 		var/overdose_dam = 1
 		//var/list/viruses = list()
@@ -35,31 +35,32 @@ datum
 				var/datum/reagent/self = src
 				src = null										  //of the reagent to the mob on TOUCHING it.
 
-				if(!istype(self.holder.my_atom, /obj/effect/effect/smoke/chem))
-					// If the chemicals are in a smoke cloud, do not try to let the chemicals "penetrate" into the mob's system (balance station 13) -- Doohl
+				if(self.holder)		//for catching rare runtimes
+					if(!istype(self.holder.my_atom, /obj/effect/effect/smoke/chem))
+						// If the chemicals are in a smoke cloud, do not try to let the chemicals "penetrate" into the mob's system (balance station 13) -- Doohl
 
-					if(method == TOUCH)
+						if(method == TOUCH)
 
-						var/chance = 1
-						var/block  = 0
+							var/chance = 1
+							var/block  = 0
 
-						for(var/obj/item/clothing/C in M.get_equipped_items())
-							if(C.permeability_coefficient < chance) chance = C.permeability_coefficient
-							if(istype(C, /obj/item/clothing/suit/bio_suit))
-								// bio suits are just about completely fool-proof - Doohl
-								// kind of a hacky way of making bio suits more resistant to chemicals but w/e
-								if(prob(75))
-									block = 1
+							for(var/obj/item/clothing/C in M.get_equipped_items())
+								if(C.permeability_coefficient < chance) chance = C.permeability_coefficient
+								if(istype(C, /obj/item/clothing/suit/bio_suit))
+									// bio suits are just about completely fool-proof - Doohl
+									// kind of a hacky way of making bio suits more resistant to chemicals but w/e
+									if(prob(75))
+										block = 1
 
-							if(istype(C, /obj/item/clothing/head/bio_hood))
-								if(prob(75))
-									block = 1
+								if(istype(C, /obj/item/clothing/head/bio_hood))
+									if(prob(75))
+										block = 1
 
-						chance = chance * 100
+							chance = chance * 100
 
-						if(prob(chance) && !block)
-							if(M.reagents)
-								M.reagents.add_reagent(self.id,self.volume/2)
+							if(prob(chance) && !block)
+								if(M.reagents)
+									M.reagents.add_reagent(self.id,self.volume/2)
 				return 1
 
 			reaction_obj(var/obj/O, var/volume) //By default we transfer a small part of the reagent to the object
@@ -582,7 +583,12 @@ datum
 			reaction_turf(var/turf/T, var/volume)
 				src = null
 				if(!istype(T, /turf/space))
-					new /obj/effect/decal/cleanable/dirt(T)
+					var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, T)
+					if (!dirtoverlay)
+						dirtoverlay = new/obj/effect/decal/cleanable/dirt(T)
+						dirtoverlay.alpha = volume*30
+					else
+						dirtoverlay.alpha = min(dirtoverlay.alpha+volume*30, 255)
 
 		chlorine
 			name = "Chlorine"
@@ -708,7 +714,9 @@ datum
 				src = null
 				if(volume >= 3)
 					if(!istype(T, /turf/space))
-						new /obj/effect/decal/cleanable/greenglow(T)
+						var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
+						if(!glow)
+							new /obj/effect/decal/cleanable/greenglow(T)
 						return
 
 
@@ -748,9 +756,9 @@ datum
 				src = null
 				if(volume >= 5)
 					if(istype(T, /turf/simulated/wall))
-						T:thermite = 1
-						T.overlays.Cut()
-						T.overlays = image('icons/effects/effects.dmi',icon_state = "thermite")
+						var/turf/simulated/wall/W = T
+						W.thermite = 1
+						W.overlays += image('icons/effects/effects.dmi',icon_state = "#673910")
 				return
 
 			on_mob_life(var/mob/living/M as mob)
@@ -872,7 +880,10 @@ datum
 				src = null
 				if(volume >= 3)
 					if(!istype(T, /turf/space))
-						new /obj/effect/decal/cleanable/greenglow(T)
+						var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
+						if(!glow)
+							new /obj/effect/decal/cleanable/greenglow(T)
+						return
 
 		aluminum
 			name = "Aluminum"
@@ -925,18 +936,19 @@ datum
 				else
 					if(O)
 						O.clean_blood()
+
 			reaction_turf(var/turf/T, var/volume)
 				if(volume >= 1)
-					T.overlays.Cut()
+					if(istype(T, /turf/simulated))
+						var/turf/simulated/S = T
+						S.dirt = 0
 					T.clean_blood()
-					for(var/obj/effect/decal/cleanable/C in src)
+					for(var/obj/effect/decal/cleanable/C in T.contents)
+						src.reaction_obj(C, volume)
 						del(C)
 
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
-			reaction_turf(var/turf/simulated/S, var/volume)
-				if(volume >= 1)
-					S.dirt = 0
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				if(iscarbon(M))
@@ -962,6 +974,9 @@ datum
 						if(H.shoes)
 							if(H.shoes.clean_blood())
 								H.update_inv_shoes(0)
+						else
+							H.clean_blood(1)
+							return
 					M.clean_blood()
 
 		leporazine
@@ -1392,13 +1407,6 @@ datum
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		holywater
-			name = "Holy Water"
-			id = "holywater"
-			description = "This was once water, but has been altered by higher powers."
-			reagent_state = LIQUID
-			color = "#535E66" // rgb: 83, 94, 102
 
 		nanites
 			name = "Nanomachines"
@@ -2340,6 +2348,7 @@ datum
 				..()
 				return
 
+/* We're back to flour bags
 		flour
 			name = "flour"
 			id = "flour"
@@ -2357,6 +2366,7 @@ datum
 				src = null
 				if(!istype(T, /turf/space))
 					new /obj/effect/decal/cleanable/flour(T)
+*/
 
 		rice
 			name = "Rice"

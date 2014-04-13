@@ -1,27 +1,3 @@
-atom/movable/var/list/adjacent_z_levels
-atom/movable/var/archived_z_level
-
-atom/movable/Move() //Hackish
-
-	if(adjacent_z_levels && adjacent_z_levels["up"])
-		var/turf/above_me = locate(x,y,adjacent_z_levels["up"])
-		if(istype(above_me, /turf/simulated/floor/open))
-			above_me:RemoveImage(src)
-
-	. = ..()
-
-	if(archived_z_level != z)
-		archived_z_level = z
-		if(z in levels_3d)
-			adjacent_z_levels = global_adjacent_z_levels["[z]"]
-		else
-			adjacent_z_levels = null
-
-	if(adjacent_z_levels && adjacent_z_levels["up"])
-		var/turf/above_me = locate(x,y,adjacent_z_levels["up"])
-		if(istype(above_me, /turf/simulated/floor/open))
-			above_me:AddImage(src)
-
 /turf/simulated/floor/open
 	name = "open space"
 	intact = 0
@@ -31,66 +7,109 @@ atom/movable/Move() //Hackish
 	var/icon/darkoverlays = null
 	var/turf/floorbelow
 	var/list/overlay_references
-	mouse_opacity = 2
 
 	New()
 		..()
-		spawn(1)
-			if(!(z in levels_3d))
-				ReplaceWithSpace()
-			var/list/adjacent_to_me = global_adjacent_z_levels["[z]"]
-			if(!("down" in adjacent_to_me))
-				ReplaceWithSpace()
-
-			floorbelow = locate(x, y, adjacent_to_me["down"])
-			if(floorbelow)
-				if(!istype(floorbelow,/turf))
-					del src
-				else if(floorbelow.density)
-					ReplaceWithPlating()
-				else
-					set_up()
-			else
-				ReplaceWithSpace()
-
+		getbelow()
+		return
 
 	Enter(var/atom/movable/AM)
 		if (..()) //TODO make this check if gravity is active (future use) - Sukasa
 			spawn(1)
+				// only fall down in defined areas (read: areas with artificial gravitiy)
+				if(!floorbelow) //make sure that there is actually something below
+					if(!getbelow())
+						return
 				if(AM)
-					AM.Move(floorbelow)
-					if (istype(AM, /mob/living/carbon/human))
-						var/mob/living/carbon/human/H = AM
-						var/damage = rand(5,15)
-						H.apply_damage(2*damage, BRUTE, "head")
-						H.apply_damage(2*damage, BRUTE, "chest")
-						H.apply_damage(0.5*damage, BRUTE, "l_leg")
-						H.apply_damage(0.5*damage, BRUTE, "r_leg")
-						H.apply_damage(0.5*damage, BRUTE, "l_arm")
-						H.apply_damage(0.5*damage, BRUTE, "r_arm")
-						H:weakened = max(H:weakened,2)
-						H:updatehealth()
+					var/area/areacheck = get_area(src)
+					var/blocked = 0
+					var/soft = 0
+					for(var/atom/A in floorbelow.contents)
+						if(A.density)
+							blocked = 1
+							break
+						if(istype(A, /obj/machinery/atmospherics/pipe/zpipe/up) && istype(AM,/obj/item/pipe))
+							blocked = 1
+							break
+						if(istype(A, /obj/structure/disposalpipe/up) && istype(AM,/obj/item/pipe))
+							blocked = 1
+							break
+						if(istype(A, /obj/multiz/stairs))
+							soft = 1
+							//dont break here, since we still need to be sure that it isnt blocked
+
+					if (soft || (!blocked && !(areacheck.name == "Space")))
+						AM.Move(floorbelow)
+						if (!soft && istype(AM, /mob/living/carbon/human))
+							var/mob/living/carbon/human/H = AM
+							var/damage = 5
+							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "head")
+							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "chest")
+							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "l_leg")
+							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "r_leg")
+							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "l_arm")
+							H.apply_damage(min(rand(-damage,damage),0), BRUTE, "r_arm")
+							H:weakened = max(H:weakened,2)
+							H:updatehealth()
 		return ..()
 
-	attackby()
-		return //nothing
+/turf/simulated/floor/open/proc/getbelow()
+	var/turf/controllerlocation = locate(1, 1, z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		// check if there is something to draw below
+		if(!controller.down)
+			src.ChangeTurf(/turf/space)
+			return 0
+		else
+			floorbelow = locate(src.x, src.y, controller.down_target)
+			return 1
+	return 1
 
-	proc/set_up() //Update the overlays to make the openspace turf show what's down a level
-		if(!overlay_references)
-			overlay_references = list()
-		if(!floorbelow) return
-		overlays += floorbelow
-		for(var/obj/o in floorbelow)
-			var/image/o_img = image(o, dir=o.dir, layer = TURF_LAYER+0.05*o.layer)
-			overlays += o_img
-			overlay_references[o] = o_img
+// override to make sure nothing is hidden
+/turf/simulated/floor/open/levelupdate()
+	for(var/obj/O in src)
+		if(O.level == 1)
+			O.hide(0)
 
-	proc/AddImage(var/atom/movable/o)
-		var/o_img = image(o, dir=o.dir, layer = TURF_LAYER+0.05*o.layer)
-		overlays += o_img
-		overlay_references[o] = o_img
+//overwrite the attackby of space to transform it to openspace if necessary
+/turf/space/attackby(obj/item/C as obj, mob/user as mob)
+	if (istype(C, /obj/item/weapon/cable_coil))
+		var/turf/simulated/floor/open/W = src.ChangeTurf(/turf/simulated/floor/open)
+		W.attackby(C, user)
+		return
+	..()
 
-	proc/RemoveImage(var/atom/movable/o)
-		var/o_img = overlay_references[o]
-		overlays -= o_img
-		overlay_references -= o
+/turf/simulated/floor/open/ex_act(severity)
+	// cant destroy empty space with an ordinary bomb
+	return
+
+/turf/simulated/floor/open/attackby(obj/item/C as obj, mob/user as mob)
+	(..)
+	if (istype(C, /obj/item/weapon/cable_coil))
+		var/obj/item/weapon/cable_coil/cable = C
+		cable.turf_place(src, user)
+		return
+
+	if (istype(C, /obj/item/stack/rods))
+		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
+		if(L)
+			return
+		var/obj/item/stack/rods/R = C
+		user << "\blue Constructing support lattice ..."
+		playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+		ReplaceWithLattice()
+		R.use(1)
+		return
+
+	if (istype(C, /obj/item/stack/tile/plasteel))
+		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
+		if(L)
+			var/obj/item/stack/tile/plasteel/S = C
+			del(L)
+			playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
+			S.build(src)
+			S.use(1)
+			return
+		else
+			user << "\red The plating is going to need some support."
+	return

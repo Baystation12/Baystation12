@@ -71,13 +71,13 @@
 
 /obj/item/weapon/book/manual/supermatter_engine
 	name = "Supermatter Engine User's Guide"
-	icon_state = "bookParticleAccelerator"   //TEMP FIXME
+	icon_state = "bookSupermatter"
 	author = "Waleed Asad"
 	title = "Supermatter Engine User's Guide"
 
 	dat = {"Engineering notes on single-stage Supermatter engine,</br>
 			-Waleed Asad</br>
-	
+
 			Station,</br>
 			Exodus</br>
 
@@ -713,6 +713,52 @@
 		"}
 
 
+
+/obj/item/weapon/book/manual/medical_diagnostics_manual
+	name = "NT Medical Diagnostics Manual"
+	desc = "First, do no harm. A detailed medical practitioner's guide."
+	icon_state = "bookMedical"
+	author = "Nanotrasen Medicine Department"
+	title = "NT Medical Diagnostics Manual"
+
+	dat = {"
+
+		<html><head>
+		</head>
+
+		<body>
+		<b>The Oath</b><br>
+		<i>The Medical Oath sworn by recognised medical practitioners in the employ of Nanotrasen</i><br>
+<br>
+		Now, as a new doctor, I solemnly promise that I will to the best of my ability serve humanity-caring for the sick, promoting good health, and alleviating pain and suffering.<br>
+<br>
+		I recognise that the practice of medicine is a privilege with which comes considerable responsibility and I will not abuse my position.<br>
+<br>
+		I will practise medicine with integrity, humility, honesty, and compassion-working with my fellow doctors and other colleagues to meet the needs of my patients.<br>
+<br>
+		I shall never intentionally do or administer anything to the overall harm of my patients.<br>
+<br>
+		I will not permit considerations of gender, race, religion, political affiliation, sexual orientation, nationality, or social standing to influence my duty of care.<br>
+<br>
+		I will oppose policies in breach of human rights and will not participate in them. I will strive to change laws that are contrary to my profession's ethics and will work towards a fairer distribution of health resources.<br>
+<br>
+		I will assist my patients to make informed decisions that coincide with their own values and beliefs and will uphold patient confidentiality.<br>
+<br>
+		I will recognise the limits of my knowledge and seek to maintain and increase my understanding and skills throughout my professional life. I will acknowledge and try to remedy my own mistakes and honestly assess and respond to those of others.<br>
+<br>
+		I will seek to promote the advancement of medical knowledge through teaching and research.<br>
+<br>
+		I make this declaration solemnly, freely, and upon my honour.<br>
+
+<HR COLOR="steelblue" WIDTH="60%" ALIGN="LEFT">
+
+<iframe width='100%' height='100%' src="http://baystation12.net/wiki/index.php?title=Guide_to_Medicine&printable=yes&removelinks=1" frameborder="0" id="main_frame"></iframe>
+		</body>
+		</html>
+
+		"}
+
+
 /obj/item/weapon/book/manual/engineering_guide
 	name = "Engineering Textbook"
 	icon_state ="bookEngineering2"
@@ -725,7 +771,7 @@
 		</head>
 
 		<body>
-		<iframe width='100%' height='97%' src="http://baystation12.net/wiki/index.php?title=Guide_to_Engineering&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
+		<iframe width='100%' height='100%' src="http://baystation12.net/wiki/index.php?title=Guide_to_Engineering&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
 
 		</html>
 
@@ -735,7 +781,7 @@
 /obj/item/weapon/book/manual/chef_recipes
 	name = "Chef Recipes"
 	icon_state = "cooked_book"
-	author = "Lord Frenrir Cageth"
+	author = "Victoria Ponsonby"
 	title = "Chef Recipes"
 
 	dat = {"<html>
@@ -753,32 +799,35 @@
 				<h1>Food for Dummies</h1>
 				Here is a guide on basic food recipes and also how to not poison your customers accidentally.
 
+				<h2>Basics:<h2>
+				Knead an egg and some flour to make dough. Bake that to make a bun or flatten and cut it.
+
 				<h2>Burger:<h2>
-				Put 1 meat and 1 flour into the microwave and turn it on. Then wait.
+				Put a bun and some meat into the microwave and turn it on. Then wait.
 
 				<h2>Bread:<h2>
-				Put 3 flour into the microwave and then wait.
+				Put some dough and an egg into the microwave and then wait.
 
 				<h2>Waffles:<h2>
-				Add 2 flour and 2 egg to the microwave and then wait.
+				Add two lumps of dough and 10u of sugar to the microwave and then wait.
 
 				<h2>Popcorn:<h2>
 				Add 1 corn to the microwave and wait.
 
 				<h2>Meat Steak:<h2>
-				Put 1 meat, 1 unit of salt and 1 unit of pepper into the microwave and wait.
+				Put a slice of meat, 1 unit of salt and 1 unit of pepper into the microwave and wait.
 
 				<h2>Meat Pie:<h2>
-				Put 1 meat and 2 flour into the microwave and wait.
+				Put a flattened piece of dough and some meat into the microwave and wait.
 
-				<h2>Boiled Spagetti:<h2>
-				Put 1 spagetti and 5 units of water into the microwave and wait.
+				<h2>Boiled Spaghetti:<h2>
+				Put the spaghetti (processed flour) and 5 units of water into the microwave and wait.
 
 				<h2>Donuts:<h2>
-				Add 1 egg and 1 flour to the microwave and wait.
+				Add some dough and 5 units of sugar to the microwave and wait.
 
 				<h2>Fries:<h2>
-				Add one potato to the processor and wait.
+				Add one potato to the processor, then bake them in the microwave.
 
 
 				</body>

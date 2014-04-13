@@ -32,8 +32,8 @@
 	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE     // Dangerously low pressure.
 
-	var/brute_resist    // Physical damage reduction.
-	var/burn_resist     // Burn damage reduction.
+	var/brute_mod = null    // Physical damage reduction/malus.
+	var/burn_mod = null     // Burn damage reduction/malus.
 
 	var/flags = 0       // Various specific features.
 
@@ -41,6 +41,26 @@
 
 	var/blood_color = "#A10808" //Red.
 	var/flesh_color = "#FFC896" //Pink.
+
+/datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
+
+	if(flags & IS_SYNTHETIC)
+		for(var/datum/organ/external/E in H.organs)
+			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
+			E.status |= ORGAN_ROBOT
+		for(var/datum/organ/internal/I in H.internal_organs)
+			I.robotic = 2
+	return
+
+/datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
+	if(flags & IS_SYNTHETIC)
+		//H.make_jittery(200) //S-s-s-s-sytem f-f-ai-i-i-i-i-lure-ure-ure-ure
+		H.h_style = ""
+		spawn(100)
+			//H.is_jittery = 0
+			//H.jitteriness = 0
+			H.update_hair()
+	return
 
 /datum/species/human
 	name = "Human"
@@ -131,9 +151,31 @@
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
 
+/datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
+
+	var/datum/organ/external/affected = H.get_organ("head")
+
+	//To avoid duplicates.
+	for(var/obj/item/weapon/implant/cortical/imp in H.contents)
+		affected.implants -= imp
+		del(imp)
+
+	var/obj/item/weapon/implant/cortical/I = new(H)
+	I.imp_in = H
+	I.implanted = 1
+	affected.implants += I
+	I.part = affected
+
+	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
+		var/datum/game_mode/heist/M = ticker.mode
+		M.cortical_stacks += I
+		M.raiders[H.mind] = I
+
+	return ..()
+
 /datum/species/diona
 	name = "Diona"
-	icobase = 'icons/mob/human_races/r_plant.dmi'
+	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
 	attack_verb = "slash"
@@ -156,3 +198,49 @@
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
 
+/datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
+
+	H.gender = NEUTER
+
+/datum/species/diona/handle_death(var/mob/living/carbon/human/H)
+
+	var/mob/living/carbon/monkey/diona/S = new(get_turf(H))
+
+	if(H.mind)
+		H.mind.transfer_to(S)
+		S.key = H
+
+	for(var/mob/living/carbon/monkey/diona/D in H.contents)
+		if(D.client)
+			D.loc = H.loc
+		else
+			del(D)
+
+	H.visible_message("\red[H] splits apart with a wet slithering noise!")
+
+/datum/species/machine
+	name = "Machine"
+	icobase = 'icons/mob/human_races/r_machine.dmi'
+	deform = 'icons/mob/human_races/r_machine.dmi'
+	language = "Tradeband"
+	punch_damage = 2
+
+	eyes = "blank_eyes"
+	brute_mod = 0.5
+	burn_mod = 1
+
+	warning_low_pressure = 50
+	hazard_low_pressure = 10
+
+	cold_level_1 = 50
+	cold_level_2 = -1
+	cold_level_3 = -1
+
+	heat_level_1 = 2000
+	heat_level_2 = 3000
+	heat_level_3 = 4000
+
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+
+	blood_color = "#1F181F"
+	flesh_color = "#575757"

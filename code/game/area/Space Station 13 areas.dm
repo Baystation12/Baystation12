@@ -14,6 +14,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 */
 
 
+
 /area
 	var/fire = null
 	var/atmos = 1
@@ -31,6 +32,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/eject = null
 
+	var/debug = 0
+	var/powerupdate = 10		//We give everything 10 ticks to settle out it's power usage.
 	var/requires_power = 1
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 
@@ -43,7 +46,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/used_environ = 0
 
 	var/has_gravity = 1
-
+	var/list/apc = list()
 	var/no_air = null
 	var/area/master				// master area used for power calcluations
 								// (original area before splitting due to sd_DAL)
@@ -664,6 +667,10 @@ var/list/ghostteleportlocs = list()
 	name = "Waste Disposal"
 	icon_state = "disposal"
 
+/area/maintenance/evahallway
+	name = "\improper EVA Hallway"
+	icon_state = "eva"
+
 //Hallway
 
 /area/hallway/primary/fore
@@ -788,6 +795,14 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Security Dormitories"
 	icon_state = "Sleep"
 
+/area/crew_quarters/sleep/bedrooms
+	name = "\improper Dormitory Bedroom"
+	icon_state = "Sleep"
+
+/area/crew_quarters/sleep/cryo
+	name = "\improper Cryogenic Storage"
+	icon_state = "Sleep"
+
 /area/crew_quarters/sleep_male
 	name = "\improper Male Dorm"
 	icon_state = "Sleep"
@@ -845,7 +860,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "chapeloffice"
 
 /area/lawoffice
-	name = "\improper Law Office"
+	name = "\improper Internal Affairs"
 	icon_state = "law"
 
 
@@ -922,21 +937,53 @@ var/list/ghostteleportlocs = list()
 
 /area/engine
 	engine_smes
-		name = "\improper Engineering SMES"
+		name = "Engineering SMES"
 		icon_state = "engine_smes"
-		requires_power = 0//This area only covers the batteries and they deal with their own power
+//		requires_power = 0//This area only covers the batteries and they deal with their own power
+
+	engine_room
+		name = "\improper Engine Room"
+		icon_state = "engine"
+
+	engine_airlock
+		name = "\improper Engine Room Airlock"
+		icon_state = "engine"
+
+	engine_monitoring
+		name = "\improper Engine Monitoring Room"
+		icon_state = "engine_monitoring"
+
+	engineering_monitoring
+		name = "\improper Engineering Monitoring Room"
+		icon_state = "engine_monitoring"
 
 	engineering
 		name = "Engineering"
 		icon_state = "engine_smes"
 
-	break_room
+	engineering_foyer
 		name = "\improper Engineering Foyer"
+		icon_state = "engine"
+
+	break_room
+		name = "\improper Engineering Break Room"
 		icon_state = "engine"
 
 	chiefs_office
 		name = "\improper Chief Engineer's office"
 		icon_state = "engine_control"
+
+	hallway
+		name = "\improper Engineering Hallway"
+		icon_state = "engine_hallway"
+
+	workshop
+		name = "\improper Engineering Workshop"
+		icon_state = "engine_storage"
+
+	locker_room
+		name = "\improper Engineering Locker Room"
+		icon_state = "engine_storage"
 
 
 //Solars
@@ -1041,7 +1088,6 @@ var/list/ghostteleportlocs = list()
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
 
-
 /area/medical/biostorage
 	name = "\improper Secondary Storage"
 	icon_state = "medbay2"
@@ -1067,7 +1113,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "patients"
 
 /area/medical/ward
-	name = "\improper Medbay Patient Ward"
+	name = "\improper Recovery Ward"
 	icon_state = "patients"
 
 /area/medical/patient_a
@@ -1082,8 +1128,8 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Isolation C"
 	icon_state = "patients"
 
-/area/medical/iso_access
-	name = "\improper Isolation Access"
+/area/medical/patient_wing
+	name = "\improper Patient Wing"
 	icon_state = "patients"
 
 /area/medical/cmo
@@ -1106,6 +1152,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Virology"
 	icon_state = "virology"
 
+/area/medical/virologyaccess
+	name = "\improper Virology Access"
+	icon_state = "virology"
+
 /area/medical/morgue
 	name = "\improper Morgue"
 	icon_state = "morgue"
@@ -1115,11 +1165,19 @@ var/list/ghostteleportlocs = list()
 	icon_state = "chem"
 
 /area/medical/surgery
-	name = "\improper Surgery"
+	name = "\improper Operating Theatre 1"
+	icon_state = "surgery"
+
+/area/medical/surgery2
+	name = "\improper Operating Theatre 2"
 	icon_state = "surgery"
 
 /area/medical/surgeryobs
-	name = "\improper Surgery Observation"
+	name = "\improper Operation Observation Room"
+	icon_state = "surgery"
+
+/area/medical/surgeryprep
+	name = "\improper Pre-Op Prep Room"
 	icon_state = "surgery"
 
 /area/medical/cryo
@@ -1139,7 +1197,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "cloning"
 
 /area/medical/sleeper
-	name = "\improper Medical Treatment Center"
+	name = "\improper Emergency Treatment Centre"
 	icon_state = "exam_room"
 
 //Security
@@ -1359,6 +1417,10 @@ var/list/ghostteleportlocs = list()
 
 /area/storage/emergency2
 	name = "Port Emergency Storage"
+	icon_state = "emergencystorage"
+
+/area/storage/emergency3
+	name = "Central Emergency Storage"
 	icon_state = "emergencystorage"
 
 /area/storage/tech

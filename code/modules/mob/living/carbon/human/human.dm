@@ -4,8 +4,9 @@
 	voice_name = "unknown"
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
-	var/list/hud_list = list()
+	var/list/hud_list[9]
 	var/datum/species/species //Contains icon generation and language information, set during New().
+	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
@@ -35,6 +36,11 @@
 	species = new /datum/species/diona(src)
 	..()
 
+/mob/living/carbon/human/machine/New()
+	h_style = "blue IPC screen"
+	set_species("Machine")
+	..()
+
 /mob/living/carbon/human/New()
 
 	if(!species)
@@ -46,9 +52,18 @@
 
 	if(!dna)
 		dna = new /datum/dna(null)
+		dna.species=species.name
 
-	for(var/i=0;i<7;i++) // 2 for medHUDs and 5 for secHUDs
-		hud_list += image('icons/mob/hud.dmi', src, "hudunknown")
+	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
+	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
+	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudunknown")
+	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
+		
 
 	..()
 
@@ -546,6 +561,7 @@
 										modified = 1
 
 										spawn()
+											hud_updateflag |= 1 << WANTED_HUD
 											if(istype(usr,/mob/living/carbon/human))
 												var/mob/living/carbon/human/U = usr
 												U.handle_regular_hud_updates()
@@ -670,6 +686,8 @@
 								if(setmedical != "Cancel")
 									R.fields["p_stat"] = setmedical
 									modified = 1
+									if(PDA_Manifest.len)
+										PDA_Manifest.Cut()
 
 									spawn()
 										if(istype(usr,/mob/living/carbon/human))
@@ -1078,7 +1096,7 @@
 	var/tdamage = 0
 	var/ticks = 0
 	while (germs < 2501 && ticks < 100000 && round(damage/10)*20)
-		diary << "VIRUS TESTING: [ticks] : germs [germs] tdamage [tdamage] prob [round(damage/10)*20]"
+		log_misc("VIRUS TESTING: [ticks] : germs [germs] tdamage [tdamage] prob [round(damage/10)*20]")
 		ticks++
 		if (prob(round(damage/10)*20))
 			germs++
@@ -1111,10 +1129,12 @@
 	verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
-/mob/living/carbon/human/clean_blood()
+/mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
-	if(istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
+	if(clean_feet && !shoes && istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
+		feet_blood_color = null
 		del(feet_blood_DNA)
+		update_inv_shoes(1)
 		return 1
 
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
@@ -1184,8 +1204,14 @@
 
 /mob/living/carbon/human/proc/set_species(var/new_species)
 
-	if(!new_species)
-		new_species = "Human"
+	if(!dna)
+		if(!new_species)
+			new_species = "Human"
+	else
+		if(!new_species)
+			new_species = dna.species
+		else
+			dna.species = new_species
 
 	if(species && (species.name && species.name == new_species))
 		return
@@ -1202,6 +1228,7 @@
 		update_icons()
 
 	if(species)
+		species.handle_post_spawn(src)
 		return 1
 	else
 		return 0
