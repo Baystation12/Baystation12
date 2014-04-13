@@ -12,7 +12,7 @@
 	var/obj/machinery/atmospherics/pipe/P = A
 
 	var/turf/T = P.loc
-	if (T.level==1 && isturf(T) && T.intact)
+	if (P.level < 2 && T.level==1 && isturf(T) && T.intact)
 		user << "\red You must remove the plating first."
 		return
 
