@@ -429,3 +429,11 @@
 	icon_state = "mafiatan"
 	item_state = "mafiatan"
 	_color = "mafiatan"
+
+
+/obj/item/clothing/under/bane
+	name = "Bane Harness"
+	desc = "Wear this harness to become the bane of the station."
+	icon_state = "bane_harness"
+	item_state = "bane"
+	_color = "bane"

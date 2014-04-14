@@ -10,6 +10,21 @@
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
 
+
+//Bane gas mask
+/obj/item/clothing/mask/banemask
+	name = "bane mask"
+	desc = "Only when the station is in flames, do you have my permission to robust."
+	icon_state = "bane_mask"
+	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
+	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
+	w_class = 3.0
+	item_state = "bane_mask"
+	gas_transfer_coefficient = 0.01
+	permeability_coefficient = 0.01
+	siemens_coefficient = 0.9
+
+
 //Plague Dr suit can be found in clothing/suits/bio.dm
 /obj/item/clothing/mask/gas/plaguedoctor
 	name = "plague doctor mask"
