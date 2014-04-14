@@ -111,7 +111,7 @@
 		// Don't check it twice if our destination is the tile we are on or we can't even get to our destination
 		if(T == destination)
 			destination = null
-		else if(!T.lit_value && !destination.lit_value) // No one can see us in the darkness, right?
+		else if(!T.lighting_lumcount && !destination.lighting_lumcount) // No one can see us in the darkness, right?
 			return null
 
 	// We aren't in darkness, loop for viewers.

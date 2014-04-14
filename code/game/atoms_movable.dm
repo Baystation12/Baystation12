@@ -43,7 +43,7 @@
 	if(destination)
 		if(loc)
 			loc.Exited(src)
-		setloc(destination)
+		loc = destination
 		loc.Entered(src)
 		for(var/atom/movable/AM in loc)
 			AM.Crossed(src)

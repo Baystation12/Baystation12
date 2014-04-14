@@ -33,7 +33,7 @@
 				if(reagents.total_volume)
 					reagents.reaction(M, INGEST)
 					spawn(5)
-						reagents.trans_to(M, gulp_size)
+						reagents.trans_to_ingest(M, gulp_size)
 
 				playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 				return 1
@@ -55,7 +55,7 @@
 			if(reagents.total_volume)
 				reagents.reaction(M, INGEST)
 				spawn(5)
-					reagents.trans_to(M, gulp_size)
+					reagents.trans_to_ingest(M, gulp_size)
 
 			if(isrobot(user)) //Cyborg modules that include drinks automatically refill themselves, but drain the borg's cell
 				var/mob/living/silicon/robot/bro = user
@@ -191,7 +191,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko
 	name = "Thirteen Loko"
-	desc = "The CMO has advised crew members that consumption of Thirteen Loko may result in seizures, blindness, drunkeness, or even death. Please Drink Responsably."
+	desc = "The CMO has advised crew members that consumption of Thirteen Loko may result in seizures, blindness, drunkeness, or even death. Please Drink Responsibly."
 	icon_state = "thirteen_loko"
 	New()
 		..()

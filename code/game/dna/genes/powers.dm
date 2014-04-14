@@ -6,6 +6,7 @@
 	name="No Breathing"
 	activation_messages=list("You feel no need to breathe.")
 	mutation=M_NO_BREATH
+	instability=2
 
 	New()
 		block=NOBREATHBLOCK
@@ -14,6 +15,7 @@
 	name="Remote Viewing"
 	activation_messages=list("Your mind expands.")
 	mutation=M_REMOTE_VIEW
+	instability=3
 
 	New()
 		block=REMOTEVIEWBLOCK
@@ -26,6 +28,7 @@
 	name="Regenerate"
 	activation_messages=list("You feel better.")
 	mutation=M_REGEN
+	instability=2
 
 	New()
 		block=REGENERATEBLOCK
@@ -34,6 +37,7 @@
 	name="Super Speed"
 	activation_messages=list("Your leg muscles pulsate.")
 	mutation=M_RUN
+	instability=1
 
 	New()
 		block=INCREASERUNBLOCK
@@ -42,6 +46,7 @@
 	name="Telepathy"
 	activation_messages=list("You expand your mind outwards.")
 	mutation=M_REMOTE_TALK
+	instability=1
 
 	New()
 		block=REMOTETALKBLOCK
@@ -54,6 +59,7 @@
 	name="Morph"
 	activation_messages=list("Your skin feels strange.")
 	mutation=M_MORPH
+	instability=2
 
 	New()
 		block=MORPHBLOCK
@@ -66,6 +72,7 @@
 	name="Heat Resistance"
 	activation_messages=list("Your skin is icy to the touch.")
 	mutation=M_RESIST_HEAT
+	instability=2
 
 	New()
 		block=COLDBLOCK
@@ -87,6 +94,7 @@
 	name="Cold Resistance"
 	activation_messages=list("Your body is filled with warmth.")
 	mutation=M_RESIST_COLD
+	instability=2
 
 	New()
 		block=FIREBLOCK
@@ -108,6 +116,7 @@
 	name="No Prints"
 	activation_messages=list("Your fingers feel numb.")
 	mutation=M_FINGERPRINTS
+	instability=1
 
 	New()
 		block=NOPRINTSBLOCK
@@ -116,6 +125,7 @@
 	name="Shock Immunity"
 	activation_messages=list("Your skin feels strange.")
 	mutation=M_NO_SHOCK
+	instability=2
 
 	New()
 		block=SHOCKIMMUNITYBLOCK
@@ -124,6 +134,7 @@
 	name="Midget"
 	activation_messages=list("Your skin feels rubbery.")
 	mutation=M_DWARF
+	instability=1
 
 	New()
 		block=SMALLSIZEBLOCK
@@ -175,6 +186,7 @@
 	name="X-Ray Vision"
 	activation_messages=list("The walls suddenly disappear.")
 	mutation=M_XRAY
+	instability=2
 
 	New()
 		block=XRAYBLOCK
@@ -184,6 +196,7 @@
 	activation_messages=list("You feel smarter.")
 	mutation=M_TK
 	activation_prob=15
+	instability=5
 
 	New()
 		block=TELEBLOCK
