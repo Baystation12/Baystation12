@@ -53,7 +53,7 @@
 	fire_sound = 'sound/weapons/Gunshot.ogg'
 	origin_tech = "combat=3;materials=3;powerstorage=2"
 	charge_cost = 125
-	projectile_type = "/obj/item/projectile/energy/electrode"
+	projectile_type = "/obj/item/projectile/energy/electroderevolver"
 	cell_type = "/obj/item/weapon/cell"
 
 
