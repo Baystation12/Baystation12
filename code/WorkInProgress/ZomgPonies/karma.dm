@@ -144,8 +144,8 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 /client/proc/karmashopmenu()
 	var/dat = {"<B>Karma Shop</B><br>
 		<a href='?src=\ref[src];KarmaBuy=1'>Unlock Barber -- 5KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=2'>Unlock Nanotrasen Representative -- 15KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=3'>Unlock Customs Officer -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=2'>Unlock Nanotrasen Representative -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=3'>Unlock Customs Officer -- 15KP</a><br>
 		<a href='?src=\ref[src];KarmaBuy=4'>Unlock BlueShield -- 30KP</a><br>
 		<br>
 		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Machine People -- 15KP</a><br>

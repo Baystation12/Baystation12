@@ -58,15 +58,15 @@
 				else
 					src.DB_job_unlock("Barber",5)
 			if("2")
-				if(karma <15)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Nanotrasen Representative",15)
-			if("3")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_job_unlock("Customs Officer",30)
+					src.DB_job_unlock("Nanotrasen Representative",30)
+			if("3")
+				if(karma <15)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_job_unlock("Customs Officer",15)
 			if("4")
 				if(karma <30)
 					usr << "You do not have enough karma!"
