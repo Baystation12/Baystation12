@@ -72,3 +72,9 @@ proc/spawn_money(var/sum, spawnloc)
 			sum -= i
 			new cash_type(spawnloc)
 	return
+
+//Fae changes
+/obj/item/weapon/spacecash/ewallet
+	name = "E-Wallet"
+	icon_state = "spacecash1000"
+	desc = "Worth: [worth] credits."
