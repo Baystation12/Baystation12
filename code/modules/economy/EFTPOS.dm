@@ -102,6 +102,38 @@
 			scan_card(I)
 		else
 			usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
+	//fae changes {
+	else if (istype(O, /obj/item/weapon/spacecash/ewallet))
+		var/obj/item/weapon/spacecash/ewallet/E = O
+		if (linked_account)
+			if(!linked_account.suspended)
+				if(transaction_locked && !transaction_paid)
+					if(transaction_amount <= E.worth)
+						playsound(src, 'sound/machines/chime.ogg', 50, 1)
+						src.visible_message("\icon[src] The [src] chimes.")
+						transaction_paid = 1
+
+						//transfer the money
+						E.worth -= transaction_amount
+						linked_account.money += transaction_amount
+
+						//create entry in the EFTPOS linked account transaction log
+						var/datum/transaction/T = new()
+						T = new()
+						T.target_name = E.owner_name //D.owner_name
+						T.purpose = transaction_purpose
+						T.amount = "[transaction_amount]"
+						T.source_terminal = machine_id
+						T.date = current_date_string
+						T.time = worldtime2text()
+						linked_account.transaction_log.Add(T)
+					else
+						usr << "\icon[src]<span class='warning'>The e-wallet doesn't have that much money!</span>"
+			else
+				usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
+		else
+			usr << "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>"
+	//}
 	else
 		..()
 

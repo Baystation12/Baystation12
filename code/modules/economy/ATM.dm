@@ -411,4 +411,5 @@ log transactions
 /obj/machinery/atm/proc/spawn_ewallet(var/sum, loc)
 	var/obj/item/weapon/spacecash/ewallet/E = new /obj/item/weapon/spacecash/ewallet(loc)
 	E.worth = sum
+	E.owner_name = authenticated_account.owner_name
 //}

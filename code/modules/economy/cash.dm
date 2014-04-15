@@ -77,4 +77,5 @@ proc/spawn_money(var/sum, spawnloc)
 /obj/item/weapon/spacecash/ewallet
 	name = "E-Wallet"
 	icon_state = "spacecash1000"
-	desc = "Worth: [worth] credits."
+	desc = "Worth: Some credits."
+	var/owner_name = ""
