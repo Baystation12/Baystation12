@@ -33,28 +33,20 @@
 
 /mob/living/silicon/robot/proc/use_power()
 
-	if (is_component_functioning("power cell") && cell)
-		if(src.cell.charge <= 0)
-			uneq_all()
-			src.stat = 1
-		else
-			if(src.module_state_1)
-				src.cell.use(3)
-			if(src.module_state_2)
-				src.cell.use(3)
-			if(src.module_state_3)
-				src.cell.use(3)
+	for(var/V in components)
+		var/datum/robot_component/C = components[V]
+		C.update_power_state()
 
-			for(var/V in components)
-				var/datum/robot_component/C = components[V]
-				C.consume_power()
+	if ( cell && is_component_functioning("power cell") && src.cell.charge > 0 )
+		if(src.module_state_1)
+			src.cell.use(3)
+		if(src.module_state_2)
+			src.cell.use(3)
+		if(src.module_state_3)
+			src.cell.use(3)
 
-			if(!is_component_functioning("actuator"))
-				Paralyse(3)
-
-			src.stat = 0
+		src.stat = 0
 	else
-		uneq_all()
 		src.stat = 1
 
 
@@ -124,6 +116,10 @@
 		src.druggy--
 		src.druggy = max(0, src.druggy)
 
+	//update modules and components here
+	if (src.stat != 0)
+		uneq_all()
+	
 	if(!is_component_functioning("radio"))
 		radio.on = 0
 	else
@@ -133,6 +129,9 @@
 		src.blinded = 0
 	else
 		src.blinded = 1
+		
+	if(!is_component_functioning("actuator"))
+		Paralyse(3)
 
 
 	return 1
