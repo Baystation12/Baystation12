@@ -323,13 +323,13 @@ the implant may become unstable and either pre-maturely inject the subject or si
 <b>Name:</b> Nanotrasen Employee Management Implant<BR>
 <b>Life:</b> Ten years.<BR>
 <b>Important Notes:</b> Personnel injected with this device tend to be much more loyal to the company.<BR>
+<b>Warning:</b> Usage without special equipment may cause heavy injuries and severe brain damage.<BR>
 <HR>
 <b>Implant Details:</b><BR>
 <b>Function:</b> Contains a small pod of nanobots that manipulate the host's mental functions.<BR>
 <b>Special Features:</b> Will prevent and cure most forms of brainwashing.<BR>
 <b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
 		return dat
-
 
 	implanted(mob/M)
 		if(!istype(M, /mob/living/carbon/human))	return 0
@@ -339,9 +339,37 @@ the implant may become unstable and either pre-maturely inject the subject or si
 			return 0
 		else if(H.mind in ticker.mode:revolutionaries)
 			ticker.mode:remove_revolutionary(H.mind)
+
+		if(prob(50))
+			H.visible_message("[H] suddenly goes very red and starts writhing. There is a strange smell in the air...", \
+				"\red Suddenly the horrible pain strikes your body! Your mind is in complete disorder! Blood pulses and starts burning! The pain is impossible!!!")
+			H.adjustBrainLoss(80)
+
 		H << "\blue You feel a surge of loyalty towards Nanotrasen."
+		processing_objects.Add(src)
 		return 1
 
+	New()
+		..()
+		processing_objects.Add(src)
+
+	process()
+		if (!implanted)
+			processing_objects.Remove(src)
+			return
+
+		var/mob/M = imp_in
+
+		if(M.stat == 2 || isnull(M))
+			processing_objects.Remove(src)
+			return
+
+		if(prob(1) && prob(25))//1/400
+			switch(rand(1, 4))
+				if(1)	M << "\italic You [pick("are sure", "think")] that NanoTrasen - is the best corporation in the whole Universe!"
+				if(2)	M << "\italic You [pick("are sure", "think")] that Captain is the greatest man who ever lived!"
+				if(3)	M << "\italic You want to give your life away in the name of NanoTrasen!"
+				if(4)	M << "\italic You are confident that all what Heads of station do - is for a greater good!"
 
 /obj/item/weapon/implant/adrenalin
 	name = "adrenalin"
