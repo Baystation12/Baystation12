@@ -73,9 +73,10 @@ var/global/loopModeNames=list(
 	// Must be defined on your server.
 	playlists=list(
 		"bar"  = "Bar Mix",
-		"jazz" = "Jazz",
+		"aussie" = "Aussie",
 		"rock" = "Rock",
 		"lounge" = "Portishead - Dummy"
+		"customs" = "Customs Music"
 	)
 
 /obj/machinery/media/jukebox/attack_ai(var/mob/user)
