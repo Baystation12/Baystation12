@@ -1386,6 +1386,7 @@
 #include "tauceti\items\makeshift_items_TG\ghettobomb.dm"
 #include "tauceti\items\makeshift_items_TG\makeshift.dm"
 #include "tauceti\items\musical_instruments\guitar.dm"
+#include "tauceti\items\musical_instruments\harmonica.dm"
 #include "tauceti\items\musical_instruments\royal.dm"
 #include "tauceti\items\painter\airlock_painter.dm"
 #include "tauceti\items\pdapainter\PDApainter.dm"
