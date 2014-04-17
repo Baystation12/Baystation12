@@ -109,6 +109,47 @@
 
 		return list2params(s)
 
+	else if(copytext(T,1,9) == "adminmsg")
+		/*
+			We got an adminmsg from IRC bot lets split the input then validate the input.
+			expected output:
+				1. adminmsg = ckey of person the message is to
+				2. msg = contents of message, parems2list requires
+				3. validatationkey = the key the bot has, it should match the gameservers commspassword in it's configuration.
+				4. sender = the ircnick that send the message.
+		*/
+
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			return "Bad Key"
+		
+		var/client/C
+		
+		for(var/client/K in clients)
+			if(K.ckey == input["adminmsg"])
+				C = K
+				break
+		if(!C)
+			return "No client with that name on server"
+
+		var/message =	"<font color='red'>IRC-Admin PM from <b><a href='?irc_msg=1'>[C.holder ? "IRC-" + input["sender"] : "Administrator"]</a></b>: [input["msg"]]</font>"
+		var/amessage =  "<font color='blue'>IRC-Admin PM from <a href='?irc_msg=1'>IRC-[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
+
+		C.received_irc_pm = world.time
+		C.irc_admin = input["sender"]
+
+		C << 'sound/effects/adminhelp.ogg'
+		C << message
+
+		
+		for(var/client/A in admins)
+			if(A != C)
+				A << amessage
+
+		return "Message Successful"
+
+		
+
 
 /world/Reboot(var/reason)
 	/*spawn(0)
