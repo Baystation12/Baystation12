@@ -133,7 +133,7 @@
 	if(custom_event_msg && custom_event_msg != "")
 		src << "<h1 class='alert'>Custom Event</h1>"
 		src << "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>"
-		src << "<span class='alert'>[html_encode(custom_event_msg)]</span>"
+		src << "<span class='alert'>[html_encode_russian(custom_event_msg)]</span>"
 		src << "<br>"
 
 	if( (world.address == address || !address) && !host )
@@ -174,7 +174,7 @@
 	if(!dbcon.IsConnected())
 		return
 
-	var/sql_ckey = sql_sanitize_text(src.ckey)
+	var/sql_ckey = sql_sanitize_russian_text(src.ckey)
 
 	var/DBQuery/query = dbcon.NewQuery("SELECT id, datediff(Now(),firstseen) as age FROM erro_player WHERE ckey = '[sql_ckey]'")
 	query.Execute()
@@ -209,9 +209,9 @@
 	if(src.holder)
 		admin_rank = src.holder.rank
 
-	var/sql_ip = sql_sanitize_text(src.address)
-	var/sql_computerid = sql_sanitize_text(src.computer_id)
-	var/sql_admin_rank = sql_sanitize_text(admin_rank)
+	var/sql_ip = sql_sanitize_russian_text(src.address)
+	var/sql_computerid = sql_sanitize_russian_text(src.computer_id)
+	var/sql_admin_rank = sql_sanitize_russian_text(admin_rank)
 
 
 	if(sql_id)
@@ -242,7 +242,7 @@
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
 //	preload_vox() //Causes long delays with initial start window and subsequent windows when first logged in.
-	
+
 	// Send NanoUI resources to this client
 	nanomanager.send_resources(src)
 

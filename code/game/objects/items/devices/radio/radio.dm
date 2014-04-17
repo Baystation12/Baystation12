@@ -19,7 +19,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	var/b_stat = 0
 	var/broadcasting = 0
 	var/listening = 1
-	var/freerange = 0 // 0 - Sanitize frequencies, 1 - Full range
+	var/freerange = 0 // 0 - sanitize_russian frequencies, 1 - Full range
 	var/list/channels = list() //see communications.dm for full list. First channes is a "default" for :h
 	var/subspace_transmission = 0
 	var/syndie = 0//Holder to see if it's a syndicate encrpyed radio
@@ -58,11 +58,11 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 
 	if(freerange)
 		if(frequency < 1200 || frequency > 1600)
-			frequency = sanitize_frequency(frequency, maxf)
+			frequency = sanitize_russian_frequency(frequency, maxf)
 	// The max freq is higher than a regular headset to decrease the chance of people listening in, if you use the higher channels.
 	else if (frequency < 1441 || frequency > maxf)
 		//world.log << "[src] ([type]) has a frequency of [frequency], sanitizing."
-		frequency = sanitize_frequency(frequency, maxf)
+		frequency = sanitize_russian_frequency(frequency, maxf)
 
 	set_frequency(frequency)
 
@@ -157,7 +157,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	else if (href_list["freq"])
 		var/new_frequency = (frequency + text2num(href_list["freq"]))
 		if (!freerange || (frequency < 1200 || frequency > 1600))
-			new_frequency = sanitize_frequency(new_frequency, maxf)
+			new_frequency = sanitize_russian_frequency(new_frequency, maxf)
 		set_frequency(new_frequency)
 		if(hidden_uplink)
 			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
@@ -755,10 +755,10 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 				continue
 			src.channels += ch_name
 			src.channels[ch_name] += keyslot.channels[ch_name]
-			
+
 		if(keyslot.syndie)
 			src.syndie = 1
-	
+
 
 	for (var/ch_name in src.channels)
 		if(!radio_controller)

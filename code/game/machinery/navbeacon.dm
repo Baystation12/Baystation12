@@ -189,11 +189,11 @@ Transponder Codes:<UL>"}
 				usr.set_machine(src)
 
 				if (href_list["freq"])
-					freq = sanitize_frequency(freq + text2num(href_list["freq"]))
+					freq = sanitize_russian_frequency(freq + text2num(href_list["freq"]))
 					updateDialog()
 
 				else if(href_list["locedit"])
-					var/newloc = copytext(sanitize(input("Enter New Location", "Navigation Beacon", location) as text|null),1,MAX_MESSAGE_LEN)
+					var/newloc = copytext(sanitize_russian(input("Enter New Location", "Navigation Beacon", location) as text|null),1,MAX_MESSAGE_LEN)
 					if(newloc)
 						location = newloc
 						updateDialog()

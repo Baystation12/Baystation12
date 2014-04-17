@@ -237,7 +237,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return 1
 
 //Ensure the frequency is within bounds of what it should be sending/recieving at
-/proc/sanitize_frequency(var/f)
+/proc/sanitize_russian_frequency(var/f)
 	f = round(f)
 	f = max(1441, f) // 144.1
 	f = min(1489, f) // 148.9

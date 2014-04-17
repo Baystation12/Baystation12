@@ -776,30 +776,30 @@ datum/preferences
 			else
 				user << browse(null, "window=records")
 			if(href_list["task"] == "med_record")
-				var/medmsg = input(usr,"Set your medical notes here.","Medical Records",html_decode(med_record)) as message
+				var/medmsg = input(usr,"Set your medical notes here.","Medical Records",html_decode_russian(med_record)) as message
 
 				if(medmsg != null)
 					medmsg = copytext(medmsg, 1, MAX_PAPER_MESSAGE_LEN)
-					medmsg = html_encode(medmsg)
+					medmsg = html_encode_russian(medmsg)
 
 					med_record = medmsg
 					SetRecords(user)
 
 			if(href_list["task"] == "sec_record")
-				var/secmsg = input(usr,"Set your security notes here.","Security Records",html_decode(sec_record)) as message
+				var/secmsg = input(usr,"Set your security notes here.","Security Records",html_decode_russian(sec_record)) as message
 
 				if(secmsg != null)
 					secmsg = copytext(secmsg, 1, MAX_PAPER_MESSAGE_LEN)
-					secmsg = html_encode(secmsg)
+					secmsg = html_encode_russian(secmsg)
 
 					sec_record = secmsg
 					SetRecords(user)
 			if(href_list["task"] == "gen_record")
-				var/genmsg = input(usr,"Set your employment notes here.","Employment Records",html_decode(gen_record)) as message
+				var/genmsg = input(usr,"Set your employment notes here.","Employment Records",html_decode_russian(gen_record)) as message
 
 				if(genmsg != null)
 					genmsg = copytext(genmsg, 1, MAX_PAPER_MESSAGE_LEN)
-					genmsg = html_encode(genmsg)
+					genmsg = html_encode_russian(genmsg)
 
 					gen_record = genmsg
 					SetRecords(user)
@@ -955,7 +955,7 @@ datum/preferences
 					if("metadata")
 						var/new_metadata = input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , metadata)  as message|null
 						if(new_metadata)
-							metadata = sanitize(copytext(new_metadata,1,MAX_MESSAGE_LEN))
+							metadata = sanitize_russian(copytext(new_metadata,1,MAX_MESSAGE_LEN))
 
 					if("b_type")
 						var/new_b_type = input(user, "Choose your character's blood-type:", "Character Preference") as null|anything in list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
@@ -1049,11 +1049,11 @@ datum/preferences
 							nanotrasen_relation = new_relation
 
 					if("flavor_text")
-						var/msg = input(usr,"Set the flavor text in your 'examine' verb. This can also be used for OOC notes and preferences!","Flavor Text",html_decode(flavor_text)) as message
+						var/msg = input(usr,"Set the flavor text in your 'examine' verb. This can also be used for OOC notes and preferences!","Flavor Text",html_decode_russian(flavor_text)) as message
 
 						if(msg != null)
 							msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-							msg = html_encode(msg)
+							msg = html_encode_russian(msg)
 
 							flavor_text = msg
 

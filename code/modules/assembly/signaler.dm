@@ -81,7 +81,7 @@
 		if (href_list["freq"])
 			var/new_frequency = (frequency + text2num(href_list["freq"]))
 			if(new_frequency < 1200 || new_frequency > 1600)
-				new_frequency = sanitize_frequency(new_frequency)
+				new_frequency = sanitize_russian_frequency(new_frequency)
 			set_frequency(new_frequency)
 
 		if(href_list["code"])

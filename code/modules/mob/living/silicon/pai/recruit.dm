@@ -57,32 +57,32 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 				if("name")
 					t = input("Enter a name for your pAI", "pAI Name", candidate.name) as text
 					if(t)
-						candidate.name = copytext(sanitize(t),1,MAX_NAME_LEN)
+						candidate.name = copytext(sanitize_russian(t),1,MAX_NAME_LEN)
 				if("desc")
 					t = input("Enter a description for your pAI", "pAI Description", candidate.description) as message
 					if(t)
-						candidate.description = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+						candidate.description = copytext(sanitize_russian(t),1,MAX_MESSAGE_LEN)
 				if("role")
 					t = input("Enter a role for your pAI", "pAI Role", candidate.role) as text
 					if(t)
-						candidate.role = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+						candidate.role = copytext(sanitize_russian(t),1,MAX_MESSAGE_LEN)
 				if("ooc")
 					t = input("Enter any OOC comments", "pAI OOC Comments", candidate.comments) as message
 					if(t)
-						candidate.comments = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+						candidate.comments = copytext(sanitize_russian(t),1,MAX_MESSAGE_LEN)
 				if("save")
 					candidate.savefile_save(usr)
 				if("load")
 					candidate.savefile_load(usr)
-					//In case people have saved unsanitized stuff.
+					//In case people have saved unsanitize_russiand stuff.
 					if(candidate.name)
-						candidate.name = copytext(sanitize(candidate.name),1,MAX_NAME_LEN)
+						candidate.name = copytext(sanitize_russian(candidate.name),1,MAX_NAME_LEN)
 					if(candidate.description)
-						candidate.description = copytext(sanitize(candidate.description),1,MAX_MESSAGE_LEN)
+						candidate.description = copytext(sanitize_russian(candidate.description),1,MAX_MESSAGE_LEN)
 					if(candidate.role)
-						candidate.role = copytext(sanitize(candidate.role),1,MAX_MESSAGE_LEN)
+						candidate.role = copytext(sanitize_russian(candidate.role),1,MAX_MESSAGE_LEN)
 					if(candidate.comments)
-						candidate.comments = copytext(sanitize(candidate.comments),1,MAX_MESSAGE_LEN)
+						candidate.comments = copytext(sanitize_russian(candidate.comments),1,MAX_MESSAGE_LEN)
 
 				if("submit")
 					if(candidate)

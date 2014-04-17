@@ -419,7 +419,7 @@
 					//Enter message
 					if("Message")
 						custommessage	= input(usr, "Please enter your message.") as text|null
-						custommessage	= copytext(sanitize(custommessage), 1, MAX_MESSAGE_LEN)
+						custommessage	= copytext(sanitize_russian(custommessage), 1, MAX_MESSAGE_LEN)
 
 					//Send message
 					if("Send")

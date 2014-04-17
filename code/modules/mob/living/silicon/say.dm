@@ -20,7 +20,7 @@
 			return
 
 	if (stat == 2)
-		message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+		message = trim(copytext(sanitize_russian(message), 1, MAX_MESSAGE_LEN))
 		return say_dead(message)
 
 	//Must be concious to speak
@@ -33,7 +33,7 @@
 			if(istype(src, /mob/living/silicon/pai))
 				return ..(message)
 			message = copytext(message, 3)
-			message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+			message = trim(copytext(sanitize_russian(message), 1, MAX_MESSAGE_LEN))
 
 			// TODO: move the component system up to silicon so we don't have to use this ugly hack..
 			if(istype(src, /mob/living/silicon/robot))
@@ -47,7 +47,7 @@
 			if(isAI(src)&&client)//For patching directly into AI holopads.
 				var/mob/living/silicon/ai/U = src
 				message = copytext(message, 3)
-				message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+				message = trim(copytext(sanitize_russian(message), 1, MAX_MESSAGE_LEN))
 				U.holopad_talk(message)
 			else//Will not allow anyone by an active AI to use this function.
 				src << "This function is not available to you."

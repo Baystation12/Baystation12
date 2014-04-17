@@ -43,23 +43,30 @@
 			index = findtext(t, char)
 	return t
 
-//Runs byond's sanitization proc along-side sanitize_simple
+//Runs byond's sanitization proc along-side sanitize_russian_simple_russian
 /proc/sanitize(var/t,var/list/repl_chars = null)
 	return html_encode(sanitize_simple(t,repl_chars))
 
-//Runs sanitize and strip_html_simple
-//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()
+//Runs sanitize_russian and strip_html_simple
+//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize_russian() calls byond's html_encode_russian()
 /proc/strip_html(var/t,var/limit=MAX_MESSAGE_LEN)
 	return copytext((sanitize(strip_html_simple(t))),1,limit)
 
 //Runs byond's sanitization proc along-side strip_html_simple
-//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode() would cause
+//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode_russian() would cause
 /proc/adminscrub(var/t,var/limit=MAX_MESSAGE_LEN)
 	return copytext((html_encode(strip_html_simple(t))),1,limit)
 
 ////////////////////////////
 //Main encode/decode procs//
 ////////////////////////////
+/proc/just_fix_ja(var/msg)
+	var/index = findtext(msg, "ÿ")
+	while(index)
+		msg = copytext(msg, 1, index) + "&#255;" + copytext(msg, index + 1)
+		index = findtext(msg, "ÿ")
+	return msg
+
 /proc/sanitize_simple_russian(var/msg, var/list/repl_chars = null)
 	var/index = findtext(msg, "ÿ")
 	while(index)
@@ -68,7 +75,7 @@
 	return sanitize_simple(msg, repl_chars)
 
 /proc/sanitize_russian(var/msg,var/list/repl_chars = null)
-	return html_encode_russian(sanitize_simple_russian(msg, repl_chars))
+	return html_encode_russian(sanitize(msg, repl_chars))
 
 /proc/html_encode_russian(var/msg)
 	var/list/c = text2list(msg, "ÿ")
@@ -115,7 +122,7 @@
 			else			non_whitespace = 1
 	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
 
-// Used to get a sanitized input.
+// Used to get a sanitize_russiand input.
 /proc/stripped_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
 	var/name = input(user, message, title, default)
 	return strip_html_simple(name, max_length)

@@ -6,7 +6,7 @@
 	if (length(message) >= 2)
 		if (department_radio_keys[copytext(message, 1, 3)] == "alientalk")
 			message = copytext(message, 3)
-			message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+			message = trim(copytext(sanitize_russian(message), 1, MAX_MESSAGE_LEN))
 			if (stat == 2)
 				return say_dead(message)
 			else

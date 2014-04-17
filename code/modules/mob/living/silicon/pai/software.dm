@@ -181,7 +181,7 @@
 
 				var/new_frequency = (sradio.frequency + text2num(href_list["freq"]))
 				if(new_frequency < 1200 || new_frequency > 1600)
-					new_frequency = sanitize_frequency(new_frequency)
+					new_frequency = sanitize_russian_frequency(new_frequency)
 				sradio.set_frequency(new_frequency)
 
 			if(href_list["code"])

@@ -150,7 +150,7 @@ Implant Specifics:<BR>"}
 
 	hear(var/msg)
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
-		msg = sanitize_simple(msg, replacechars)
+		msg = sanitize_simple_russian(msg, replacechars)
 		if(findtext(msg,phrase))
 			activate()
 			del(src)
@@ -204,7 +204,7 @@ Implant Specifics:<BR>"}
 		elevel = alert("What sort of explosion would you prefer?", "Implant Intent", "Localized Limb", "Destroy Body", "Full Explosion")
 		phrase = input("Choose activation phrase:") as text
 		var/list/replacechars = list("'" = "","\"" = "",">" = "","<" = "","(" = "",")" = "")
-		phrase = sanitize_simple(phrase, replacechars)
+		phrase = sanitize_simple_russian(phrase, replacechars)
 		usr.mind.store_memory("Explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate.", 0, 0)
 		usr << "The implanted explosive implant in [source] can be activated by saying something containing the phrase ''[src.phrase]'', <B>say [src.phrase]</B> to attempt to activate."
 		return 1
