@@ -157,12 +157,12 @@
 /datum/poster/bay_32
 	icon_state="bsposter32"
 	name = "Eat!"
-	desc = "A poster depicting a hamburger.The poster orders you to consume the hamburger."
+	desc = "A poster depicting a hamburger. The poster orders you to consume the hamburger."
 
 /datum/poster/bay_33
 	icon_state="bsposter33"
 	name = "Tools,tools,tools"
-	desc = "You can never have enough tools,thats for sure!"
+	desc = "You can never have enough tools, thats for sure!"
 
 /datum/poster/bay_34
 	icon_state="bsposter34"
