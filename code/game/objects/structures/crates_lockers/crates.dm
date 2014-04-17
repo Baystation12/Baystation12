@@ -322,7 +322,7 @@
 		newgas.oxygen = gas.oxygen
 		newgas.carbon_dioxide = gas.carbon_dioxide
 		newgas.nitrogen = gas.nitrogen
-		newgas.toxins = gas.toxins
+		newgas.phoron = gas.phoron
 		newgas.volume = gas.volume
 		newgas.temperature = gas.temperature
 		if(newgas.temperature <= target_temp)	return
@@ -375,12 +375,12 @@
 	icon_opened = "weaponcrateopen"
 	icon_closed = "weaponcrate"
 
-/obj/structure/closet/crate/secure/plasma
-	desc = "A secure plasma crate."
-	name = "Plasma crate"
-	icon_state = "plasmacrate"
-	icon_opened = "plasmacrateopen"
-	icon_closed = "plasmacrate"
+/obj/structure/closet/crate/secure/phoron
+	desc = "A secure phoron crate."
+	name = "Phoron crate"
+	icon_state = "phoroncrate"
+	icon_opened = "phoroncrateopen"
+	icon_closed = "phoroncrate"
 
 /obj/structure/closet/crate/secure/gear
 	desc = "A secure gear crate."

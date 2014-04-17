@@ -52,7 +52,7 @@
 /datum/poster/bay_11
 	icon_state="bsposter11"
 	name = "Underwater Laboratory"
-	desc = "This particular one is of the fabled last crew of Nanotrasen's previous project before going big on plasma research."
+	desc = "This particular one is of the fabled last crew of Nanotrasen's previous project before going big on phoron research."
 
 /datum/poster/bay_12
 	icon_state="bsposter12"

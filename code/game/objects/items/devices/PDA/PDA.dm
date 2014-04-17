@@ -83,8 +83,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon_state = "pda-j"
 	ttone = "slip"
 
-/obj/item/device/pda/toxins
-	default_cartridge = /obj/item/weapon/cartridge/signal/toxins
+/obj/item/device/pda/science
+	default_cartridge = /obj/item/weapon/cartridge/signal/science
 	icon_state = "pda-tox"
 	ttone = "boom"
 
@@ -446,14 +446,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				var/o2_level = environment.oxygen/total_moles
 				var/n2_level = environment.nitrogen/total_moles
 				var/co2_level = environment.carbon_dioxide/total_moles
-				var/plasma_level = environment.toxins/total_moles
-				var/unknown_level =  1-(o2_level+n2_level+co2_level+plasma_level)
+				var/phoron_level = environment.phoron/total_moles
+				var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
 				data["aircontents"] = list(\
 					"pressure" = "[round(pressure,0.1)]",\
 					"nitrogen" = "[round(n2_level*100,0.1)]",\
 					"oxygen" = "[round(o2_level*100,0.1)]",\
 					"carbon_dioxide" = "[round(co2_level*100,0.1)]",\
-					"plasma" = "[round(plasma_level*100,0.01)]",\
+					"phoron" = "[round(phoron_level*100,0.01)]",\
 					"other" = "[round(unknown_level, 0.01)]",\
 					"temp" = "[round(environment.temperature-T0C,0.1)]",\
 					"reading" = 1\
@@ -1165,15 +1165,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					var/o2_concentration = A:air_contents.oxygen/total_moles
 					var/n2_concentration = A:air_contents.nitrogen/total_moles
 					var/co2_concentration = A:air_contents.carbon_dioxide/total_moles
-					var/plasma_concentration = A:air_contents.toxins/total_moles
+					var/phoron_concentration = A:air_contents.phoron/total_moles
 
-					var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
+					var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 
 					user << "\blue Pressure: [round(pressure,0.1)] kPa"
 					user << "\blue Nitrogen: [round(n2_concentration*100)]%"
 					user << "\blue Oxygen: [round(o2_concentration*100)]%"
 					user << "\blue CO2: [round(co2_concentration*100)]%"
-					user << "\blue Plasma: [round(plasma_concentration*100)]%"
+					user << "\blue Phoron: [round(phoron_concentration*100)]%"
 					if(unknown_concentration>0.01)
 						user << "\red Unknown: [round(unknown_concentration*100)]%"
 					user << "\blue Temperature: [round(A:air_contents.temperature-T0C)]&deg;C"
@@ -1194,15 +1194,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					var/o2_concentration = T.parent.air.oxygen/total_moles
 					var/n2_concentration = T.parent.air.nitrogen/total_moles
 					var/co2_concentration = T.parent.air.carbon_dioxide/total_moles
-					var/plasma_concentration = T.parent.air.toxins/total_moles
+					var/phoron_concentration = T.parent.air.phoron/total_moles
 
-					var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
+					var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 
 					user << "\blue Pressure: [round(pressure,0.1)] kPa"
 					user << "\blue Nitrogen: [round(n2_concentration*100)]%"
 					user << "\blue Oxygen: [round(o2_concentration*100)]%"
 					user << "\blue CO2: [round(co2_concentration*100)]%"
-					user << "\blue Plasma: [round(plasma_concentration*100)]%"
+					user << "\blue Phoron: [round(phoron_concentration*100)]%"
 					if(unknown_concentration>0.01)
 						user << "\red Unknown: [round(unknown_concentration*100)]%"
 					user << "\blue Temperature: [round(T.parent.air.temperature-T0C)]&deg;C"
@@ -1293,7 +1293,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		var/newcart = pick(	/obj/item/weapon/cartridge/engineering,
 							/obj/item/weapon/cartridge/security,
 							/obj/item/weapon/cartridge/medical,
-							/obj/item/weapon/cartridge/signal/toxins,
+							/obj/item/weapon/cartridge/signal/science,
 							/obj/item/weapon/cartridge/quartermaster)
 		new newcart(src)
 

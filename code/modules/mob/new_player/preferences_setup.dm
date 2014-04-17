@@ -379,7 +379,7 @@ datum/preferences
 						if(4)
 							clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
 				if(SCIENTIST)
-					clothes_s = new /icon('icons/mob/uniform.dmi', "toxinswhite_s")
+					clothes_s = new /icon('icons/mob/uniform.dmi', "sciencewhite_s")
 					clothes_s.Blend(new /icon('icons/mob/feet.dmi', "white"), ICON_UNDERLAY)
 					clothes_s.Blend(new /icon('icons/mob/suit.dmi', "labcoat_tox_open"), ICON_OVERLAY)
 					if(prob(1))

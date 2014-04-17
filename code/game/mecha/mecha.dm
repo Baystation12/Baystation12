@@ -628,7 +628,7 @@
 /obj/mecha/proc/dynattackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.log_message("Attacked by [W]. Attacker - [user]")
 	if(prob(src.deflect_chance))
-		user << "\red The [W] bounces off [src.name] armor."
+		user << "\red \The [W] bounces off [src.name]."
 		src.log_append_to_last("Armor saved.")
 /*
 		for (var/mob/V in viewers(src))

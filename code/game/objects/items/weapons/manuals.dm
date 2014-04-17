@@ -87,7 +87,7 @@
 
 			<center><b>Notes on starting the basic function mode, dubbed .Heat-Primary Mode..</b></center></br></br>
 
-			1. Prepare collector arrays. This is done standard to any text on their function by wrenching them down, filling six plasma tanks with a plasma canister, and inserting the tank into the collectors one by one. Finally, initialize each collector.</br></br>
+			1. Prepare collector arrays. This is done standard to any text on their function by wrenching them down, filling six phoron tanks with a phoron canister, and inserting the tank into the collectors one by one. Finally, initialize each collector.</br></br>
 
 			2. Prepare gas system. Before introducing any gas to the Supermatter engine room, it is important to remember the small but vital steps to preparing this section. First, set the input gas pump and output gas flow pump to 4500, or maximum flow. Second, switch the digital switching valve into the .up. position, in order to circulate the gas back toward the coolers and collectors.</br></br>
 
@@ -111,11 +111,11 @@
 
 			Additionally, this mode can be used for what is called a .Cold Start.. If the station has no power in the SMES to run the emitters, using this mode will allow enough power output to run them, and quickly reach an acceptable level of power output.</br></br>
 
-			1. Prepare collector arrays. This is done standard to any text on their function by wrenching them down, filling six plasma tanks with a plasma canister, and inserting the tank into the collectors one by one. Finally, initialize each collector.</br></br>
+			1. Prepare collector arrays. This is done standard to any text on their function by wrenching them down, filling six phoron tanks with a phoron canister, and inserting the tank into the collectors one by one. Finally, initialize each collector.</br></br>
 
 			2. Prepare gas system. Before introducing any gas to the Supermatter engine room, it is important to remember the small but vital steps to preparing this section. First, set the input gas pump and output gas flow pump to 4500, or maximum flow. Second, switch the digital switching valve into the .up. position, in order to circulate the gas back toward the coolers and collectors.</br></br>
 
-			3. Modify the engine room filters. Unlike the Heat-Primary Mode, it is important to change the filters attached to the gas system to stop filtering O2, and start filtering Carbon Molecules. O2-Reaction Mode produces far more plasma than Heat-Primary, therefor filtering it off is essential.</br></br>
+			3. Modify the engine room filters. Unlike the Heat-Primary Mode, it is important to change the filters attached to the gas system to stop filtering O2, and start filtering Carbon Molecules. O2-Reaction Mode produces far more phoron than Heat-Primary, therefor filtering it off is essential.</br></br>
 
 			4. Switch SMES units to primary settings. Maximize input and set the devices to automatically charge, additionally turn their outputs on if they are off unless power is to be saved (Which can be useful in case of later failures.) If you check the power in the system lines at this point you will find that it is constantly going up. Indeed, with just the addition of O2 to the Supermatter, it will begin outputting power.</br></br>
 
@@ -131,18 +131,18 @@
 
 			*Radiation (which is converted into power by the collectors,)</br>
 			*Heat (which is removed via the gas exchange system and coolers,)</br>
-			*External gas (in the form of plasma and O2.)</br>
+			*External gas (in the form of phoron and O2.)</br>
 
-			When in Heat-Primary mode, far more heat and plasma are produced than radiation. In O2-Reaction mode, very little heat and only moderate amounts of plasma are produced, however HUGE amounts of energy leaving the Supermatter is in the form of radiation.</br></br>
+			When in Heat-Primary mode, far more heat and phoron are produced than radiation. In O2-Reaction mode, very little heat and only moderate amounts of phoron are produced, however HUGE amounts of energy leaving the Supermatter is in the form of radiation.</br></br>
 
-			The O2-Reaction engine mode has a single drawback which has been eluded to more than once so far and that is very simple. The engine room will continue to grow hotter as the constant reaction continues. Eventually, there will be what he calls the .critical gas mix.. This is the point at which the constant adding of plasma to the mix of air around the Supermatter changes the gas concentration to below the tolerance. When this happens, two things occur. First, the Supermatter switches to its primary mode of operation where in huge amounts of heat are produced by the engine rather than low amounts with high power output. Second, an uncontrollable increase in heat within the Supermatter chamber will occur. This will lead to a spark-up, igniting the plasma in the Supermatter chamber, wildly increasing both pressure and temperature.</br></br>
+			The O2-Reaction engine mode has a single drawback which has been eluded to more than once so far and that is very simple. The engine room will continue to grow hotter as the constant reaction continues. Eventually, there will be what he calls the .critical gas mix.. This is the point at which the constant adding of phoron to the mix of air around the Supermatter changes the gas concentration to below the tolerance. When this happens, two things occur. First, the Supermatter switches to its primary mode of operation where in huge amounts of heat are produced by the engine rather than low amounts with high power output. Second, an uncontrollable increase in heat within the Supermatter chamber will occur. This will lead to a spark-up, igniting the phoron in the Supermatter chamber, wildly increasing both pressure and temperature.</br></br>
 
 			While the O2-Reaction mode is dangerous, it does produce heavy amounts of energy. Consider using this mode only in short amounts to fill the SMES, and switch back later in the shift to keep things flowing normally.</br></br>
 
 
 			Notes on Supermatter Containment and Emergency Procedures-</br></br>
 
-			While a constant vigil on the Supermatter is not required, regular checkups are important. Verify the temp of gas leaving the Supermatter chamber for unsafe levels, and ensure that the plasma in the chamber is at a safe concentration. Of course, also make sure the chamber is not on fire. A fire in the core chamber is very difficult to put out. As any Toxin scientist can tell you, even low amounts of plasma can burn at very high temperatures. This burning creates a huge increase in pressure and more importantly, temperature of the crystal itself.</br></br>
+			While a constant vigil on the Supermatter is not required, regular checkups are important. Verify the temp of gas leaving the Supermatter chamber for unsafe levels, and ensure that the phoron in the chamber is at a safe concentration. Of course, also make sure the chamber is not on fire. A fire in the core chamber is very difficult to put out. As any Toxin scientist can tell you, even low amounts of phoron can burn at very high temperatures. This burning creates a huge increase in pressure and more importantly, temperature of the crystal itself.</br></br>
 
 			The Supermatter is strong, but not invincible. When the Supermatter is heated too much, its crystal structure will attempt to liquify. The change in atomic structure of the Supermatter leads to a single reaction, a massive explosion. The computer chip attached to the Supermatter core will warn the station when stability is threatened. It will then offer a second warning, when things have become dangerously close to total destruction of the core.</br></br>
 
@@ -470,7 +470,7 @@
 				This machine, along with the Protolathe, is used to actually produce new devices. The Circuit Imprinter takes glass and various chemicals (depends on the design) to produce new circuit boards to build new machines or computers. It can even be used to print AI modules.
 
 				<h2>Protolathe</h2>
-				This machine is an advanced form of the Autolathe that produce non-circuit designs. Unlike the Autolathe, it can use processed metal, glass, solid plasma, silver, gold, and diamonds along with a variety of chemicals to produce devices.
+				This machine is an advanced form of the Autolathe that produce non-circuit designs. Unlike the Autolathe, it can use processed metal, glass, solid phoron, silver, gold, and diamonds along with a variety of chemicals to produce devices.
 				The downside is that, again, not all devices you make are 100% reliable when you first discover them.
 
 				<h1>Reliability and You</h1>

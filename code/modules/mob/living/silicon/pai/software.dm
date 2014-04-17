@@ -542,12 +542,12 @@
 			var/o2_level = environment.oxygen/total_moles
 			var/n2_level = environment.nitrogen/total_moles
 			var/co2_level = environment.carbon_dioxide/total_moles
-			var/plasma_level = environment.toxins/total_moles
-			var/unknown_level =  1-(o2_level+n2_level+co2_level+plasma_level)
+			var/phoron_level = environment.phoron/total_moles
+			var/unknown_level =  1-(o2_level+n2_level+co2_level+phoron_level)
 			dat += "Nitrogen: [round(n2_level*100)]%<br>"
 			dat += "Oxygen: [round(o2_level*100)]%<br>"
 			dat += "Carbon Dioxide: [round(co2_level*100)]%<br>"
-			dat += "Plasma: [round(plasma_level*100)]%<br>"
+			dat += "Phoron: [round(phoron_level*100)]%<br>"
 			if(unknown_level > 0.01)
 				dat += "OTHER: [round(unknown_level)]%<br>"
 		dat += "Temperature: [round(environment.temperature-T0C)]&deg;C<br>"

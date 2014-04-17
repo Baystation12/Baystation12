@@ -136,9 +136,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!src.lit)
 		src.lit = 1
 		damtype = "fire"
-		if(reagents.get_reagent_amount("plasma")) // the plasma explodes when exposed to fire
+		if(reagents.get_reagent_amount("phoron")) // the phoron explodes when exposed to fire
 			var/datum/effect/effect/system/reagents_explosion/e = new()
-			e.set_up(round(reagents.get_reagent_amount("plasma") / 2.5, 1), get_turf(src), 0, 0)
+			e.set_up(round(reagents.get_reagent_amount("phoron") / 2.5, 1), get_turf(src), 0, 0)
 			e.start()
 			del(src)
 			return
@@ -201,9 +201,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette/cigar
 	name = "premium cigar"
 	desc = "A brown roll of tobacco and... well, you're not quite sure. This thing's huge!"
-	icon_state = "cigaroff"
-	icon_on = "cigaron"
-	icon_off = "cigaroff"
+	icon_state = "cigar2off"
+	icon_on = "cigar2on"
+	icon_off = "cigar2off"
 	type_butt = /obj/item/weapon/cigbutt/cigarbutt
 	throw_speed = 0.5
 	item_state = "cigaroff"
@@ -219,7 +219,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/cigarette/cigar/havana
 	name = "premium Havanian cigar"
-	desc = "A cigar fit for only the best for the best."
+	desc = "A cigar fit for only the best of the best."
 	icon_state = "cigar2off"
 	icon_on = "cigar2on"
 	icon_off = "cigar2off"
@@ -247,10 +247,33 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 
 /obj/item/clothing/mask/cigarette/cigar/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/match))
-		..()
-	else
-		user << "<span class='notice'>\The [src] straight out REFUSES to be lit by such uncivilized means.</span>"
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.isOn())
+			light("<span class='notice'>[user] insults [name] by lighting it with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/lighter/zippo))
+		var/obj/item/weapon/lighter/zippo/Z = W
+		if(Z.lit)
+			light("<span class='rose'>With a flick of their wrist, [user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/lighter))
+		var/obj/item/weapon/lighter/L = W
+		if(L.lit)
+			light("<span class='notice'>[user] manages to offend their [name] by lighting it with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/match))
+		var/obj/item/weapon/match/M = W
+		if(M.lit)
+			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/melee/energy/sword))
+		var/obj/item/weapon/melee/energy/sword/S = W
+		if(S.active)
+			light("<span class='warning'>[user] swings their [W], barely missing their nose. They light their [name] in the process.</span>")
+
+	else if(istype(W, /obj/item/device/assembly/igniter))
+		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
 
 /////////////////
 //SMOKING PIPES//
@@ -306,10 +329,28 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	return
 
 /obj/item/clothing/mask/cigarette/pipe/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/match))
-		..()
-	else
-		user << "<span class='notice'>\The [src] straight out REFUSES to be lit by such means.</span>"
+	if(istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.isOn())//
+			light("<span class='notice'>[user] recklessly lights [name] with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/lighter/zippo))
+		var/obj/item/weapon/lighter/zippo/Z = W
+		if(Z.lit)
+			light("<span class='rose'>With much care, [user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/lighter))
+		var/obj/item/weapon/lighter/L = W
+		if(L.lit)
+			light("<span class='notice'>[user] manages to light their [name] with [W].</span>")
+
+	else if(istype(W, /obj/item/weapon/match))
+		var/obj/item/weapon/match/M = W
+		if(M.lit)
+			light("<span class='notice'>[user] lights their [name] with their [W].</span>")
+
+	else if(istype(W, /obj/item/device/assembly/igniter))
+		light("<span class='notice'>[user] fiddles with [W], and manages to light their [name] with the power of science.</span>")
 
 /obj/item/clothing/mask/cigarette/pipe/cobpipe
 	name = "corn cob pipe"
