@@ -87,7 +87,7 @@ var/list/department_radio_keys = list(
 		Formatting and sanitizing.
 	*/
 
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = trim(copytext(sanitize_russian(message), 1, MAX_MESSAGE_LEN))
 
 	/*
 		Sanity checking and speech failure.
@@ -232,13 +232,13 @@ var/list/department_radio_keys = list(
 
 		if ("binary")
 			if(robot_talk_understand || binarycheck())
-			//message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN)) //seems redundant
+			//message = trim(copytext(sanitize_russian(message), 1, MAX_MESSAGE_LEN)) //seems redundant
 				robot_talk(message)
 			return
 
 		if ("alientalk")
 			if(alien_talk_understand || hivecheck())
-			//message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN)) //seems redundant
+			//message = trim(copytext(sanitize_russian(message), 1, MAX_MESSAGE_LEN)) //seems redundant
 				alien_talk(message)
 			return
 

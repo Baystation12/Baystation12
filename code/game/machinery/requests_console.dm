@@ -233,7 +233,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			priority = -1
 
 	if(href_list["writeAnnouncement"])
-		var/new_message = copytext(reject_bad_text(input(usr, "Write your message:", "Awaiting Input", "")),1,MAX_MESSAGE_LEN)
+		var/new_message = copytext(reject_bad_text(just_fix_ya(input(usr, "Write your message:", "Awaiting Input", ""))),1,MAX_MESSAGE_LEN)
 		if(new_message)
 			message = new_message
 			switch(href_list["priority"])

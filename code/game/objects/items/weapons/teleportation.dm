@@ -106,7 +106,7 @@ Frequency:
 		else
 			if (href_list["freq"])
 				src.frequency += text2num(href_list["freq"])
-				src.frequency = sanitize_frequency(src.frequency)
+				src.frequency = sanitize_russian_frequency(src.frequency)
 			else
 				if (href_list["temp"])
 					src.temp = null

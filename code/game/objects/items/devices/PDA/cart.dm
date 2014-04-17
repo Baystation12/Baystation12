@@ -245,12 +245,12 @@
 
 	/*		Signaler (Mode: 40)				*/
 
-	
+
 	if(istype(radio,/obj/item/radio/integrated/signal) && (mode==40))
 		var/obj/item/radio/integrated/signal/R = radio
 		values["signal_freq"] = format_frequency(R.frequency)
 		values["signal_code"] = R.code
-		
+
 
 	/*		Station Display (Mode: 42)			*/
 
@@ -266,8 +266,8 @@
 		for(var/obj/machinery/power/monitor/pMon in world)
 			if(!(pMon.stat & (NOPOWER|BROKEN)) )
 				pMonData[++pMonData.len] = list ("Name" = pMon.name, "ref" = "\ref[pMon]")
-				if(isnull(powmonitor)) powmonitor = pMon 
-						
+				if(isnull(powmonitor)) powmonitor = pMon
+
 		values["powermonitors"] = pMonData
 
 		values["poweravail"] = powmonitor.powernet.avail
@@ -283,23 +283,23 @@
 		var/list/chg = list(0,1,1)	// Charging: nope, charging, full
 		var/apcData[0]
 		for(var/obj/machinery/power/apc/A in L)
-			apcData[++apcData.len] = list("Name" = html_encode(A.area.name), "Equipment" = Status[A.equipment+1], "Lights" = Status[A.lighting+1], "Environment" = Status[A.environ+1], "CellPct" = A.cell ? round(A.cell.percent(),1) : -1, "CellStatus" = A.cell ? chg[A.charging+1] : 0)
-	
+			apcData[++apcData.len] = list("Name" = html_encode_russian(A.area.name), "Equipment" = Status[A.equipment+1], "Lights" = Status[A.lighting+1], "Environment" = Status[A.environ+1], "CellPct" = A.cell ? round(A.cell.percent(),1) : -1, "CellStatus" = A.cell ? chg[A.charging+1] : 0)
+
 		values["apcs"] = apcData
 
-				      
-	
-	
+
+
+
 
 	/*		General Records (Mode: 44 / 441 / 45 / 451)	*/
 	if(mode == 44 || mode == 441 || mode == 45 || mode ==451)
 		if(istype(active1, /datum/data/record) && (active1 in data_core.general))
 			values["general"] = active1.fields
 			values["general_exists"] = 1
-								
+
 		else
 			values["general_exists"] = 0
-	
+
 
 
 	/*		Medical Records (Mode: 44 / 441)	*/
@@ -316,7 +316,7 @@
 		else
 			values["medical_exists"] = 0
 
-	/*		Security Records (Mode:45 / 451)	*/	
+	/*		Security Records (Mode:45 / 451)	*/
 
 	if(mode == 45 || mode == 451)
 		var/secData[0]
@@ -340,7 +340,7 @@
 			beepskyData["active"] = SC.active
 			if(SC.active && !isnull(SC.botstatus))
 				var/area/loca = SC.botstatus["loca"]
-				var/loca_name = sanitize(loca.name)
+				var/loca_name = sanitize_russian(loca.name)
 				beepskyData["botstatus"] = list("loca" = loca_name, "mode" = SC.botstatus["mode"])
 			else
 				beepskyData["botstatus"] = list("loca" = null, "mode" = -1)
@@ -348,15 +348,15 @@
 			if(SC.botlist && SC.botlist.len)
 				for(var/obj/machinery/bot/B in SC.botlist)
 					botsCount++
-					if(B.loc) 
-						botsData[++botsData.len] = list("Name" = sanitize(B.name), "Location" = sanitize(B.loc.loc.name), "ref" = "\ref[B]")
-		
+					if(B.loc)
+						botsData[++botsData.len] = list("Name" = sanitize_russian(B.name), "Location" = sanitize_russian(B.loc.loc.name), "ref" = "\ref[B]")
+
 			if(!botsData.len)
 				botsData[++botsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
 
 			beepskyData["bots"] = botsData
 			beepskyData["count"] = botsCount
-		
+
 		else
 			beepskyData["active"] = 0
 			botsData[++botsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
@@ -377,18 +377,18 @@
 			muleData["active"] = QC.active
 			if(QC.active && !isnull(QC.botstatus))
 				var/area/loca = QC.botstatus["loca"]
-				var/loca_name = sanitize(loca.name)
-				muleData["botstatus"] =  list("loca" = loca_name, "mode" = QC.botstatus["mode"],"home"=QC.botstatus["home"],"powr" = QC.botstatus["powr"],"retn" =QC.botstatus["retn"], "pick"=QC.botstatus["pick"], "load" = QC.botstatus["load"], "dest" = sanitize(QC.botstatus["dest"]))
-	  
+				var/loca_name = sanitize_russian(loca.name)
+				muleData["botstatus"] =  list("loca" = loca_name, "mode" = QC.botstatus["mode"],"home"=QC.botstatus["home"],"powr" = QC.botstatus["powr"],"retn" =QC.botstatus["retn"], "pick"=QC.botstatus["pick"], "load" = QC.botstatus["load"], "dest" = sanitize_russian(QC.botstatus["dest"]))
+
 			else
 				muleData["botstatus"] = list("loca" = null, "mode" = -1,"home"=null,"powr" = null,"retn" =null, "pick"=null, "load" = null, "dest" = null)
-		
+
 
 			var/mulebotsCount=0
 			for(var/obj/machinery/bot/B in QC.botlist)
 				mulebotsCount++
 				if(B.loc)
-					mulebotsData[++mulebotsData.len] = list("Name" = sanitize(B.name), "Location" = sanitize(B.loc.loc.name), "ref" = "\ref[B]")
+					mulebotsData[++mulebotsData.len] = list("Name" = sanitize_russian(B.name), "Location" = sanitize_russian(B.loc.loc.name), "ref" = "\ref[B]")
 
 			if(!mulebotsData.len)
 				mulebotsData[++mulebotsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
@@ -397,7 +397,7 @@
 			muleData["count"] = mulebotsCount
 
 		else
-			muleData["botstatus"] =  list("loca" = null, "mode" = -1,"home"=null,"powr" = null,"retn" =null, "pick"=null, "load" = null, "dest" = null) 
+			muleData["botstatus"] =  list("loca" = null, "mode" = -1,"home"=null,"powr" = null,"retn" =null, "pick"=null, "load" = null, "dest" = null)
 			muleData["active"] = 0
 			mulebotsData[++mulebotsData.len] = list("Name" = "No bots found", "Location" = "Invalid", "ref"= null)
 			muleData["bots"] = mulebotsData
@@ -418,36 +418,36 @@
 		var/supplyOrderData[0]
 		for(var/S in supply_shuttle.shoppinglist)
 			var/datum/supply_order/SO = S
-		
-			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "ApprovedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
+
+			supplyOrderData[++supplyOrderData.len] = list("Number" = SO.ordernum, "Name" = html_encode_russian(SO.object.name), "ApprovedBy" = SO.orderedby, "Comment" = html_encode_russian(SO.comment))
 		if(!supplyOrderData.len)
 			supplyOrderData[++supplyOrderData.len] = list("Number" = null, "Name" = null, "OrderedBy"=null)
-		
+
 		supplyData["approved"] = supplyOrderData
-		supplyData["approved_count"] = supplyOrderCount	
+		supplyData["approved_count"] = supplyOrderCount
 
 		var/requestCount = 0
 		var/requestData[0]
 		for(var/S in supply_shuttle.requestlist)
 			var/datum/supply_order/SO = S
 			requestCount++
-			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = html_encode(SO.object.name), "OrderedBy" = SO.orderedby, "Comment" = html_encode(SO.comment))
+			requestData[++requestData.len] = list("Number" = SO.ordernum, "Name" = html_encode_russian(SO.object.name), "OrderedBy" = SO.orderedby, "Comment" = html_encode_russian(SO.comment))
 		if(!requestData.len)
 			requestData[++requestData.len] = list("Number" = null, "Name" = null, "orderedBy" = null, "Comment" = null)
-	
+
 		supplyData["requests"] = requestData
 		supplyData["requests_count"] = requestCount
 
 
 		values["supply"] = supplyData
 
-	
+
 
 	/* 	Janitor Supplies Locator  (Mode: 49)      */
 	if(mode==49)
 		var/JaniData[0]
 		var/turf/cl = get_turf(src)
-	
+
 		if(cl)
 			JaniData["user_loc"] = list("x" = cl.x, "y" = cl.y)
 		else
@@ -460,14 +460,14 @@
 					continue
 				var/direction = get_dir(src, M)
 				MopData[++MopData.len] = list ("x" = ml.x, "y" = ml.y, "dir" = uppertext(dir2text(direction)), "status" = M.reagents.total_volume ? "Wet" : "Dry")
-	
+
 		if(!MopData.len)
 			MopData[++MopData.len] = list("x" = 0, "y" = 0, dir=null, status = null)
-	
+
 
 		var/BucketData[0]
 		for(var/obj/structure/mopbucket/B in world)
-			var/turf/bl = get_turf(B)	
+			var/turf/bl = get_turf(B)
 			if(bl)
 				if(bl.z != cl.z)
 					continue
@@ -485,8 +485,8 @@
 					continue
 				var/direction = get_dir(src,B)
 				CbotData[++CbotData.len] = list("x" = bl.x, "y" = bl.y, "dir" = uppertext(dir2text(direction)), "status" = B.on ? "Online" : "Offline")
-	
-	
+
+
 		if(!CbotData.len)
 			CbotData[++CbotData.len] = list("x" = 0, "y" = 0, dir=null, status = null)
 		var/CartData[0]
@@ -499,7 +499,7 @@
 				CartData[++CartData.len] = list("x" = bl.x, "y" = bl.y, "dir" = uppertext(dir2text(direction)), "status" = B.reagents.total_volume/100)
 		if(!CartData.len)
 			CartData[++CartData.len] = list("x" = 0, "y" = 0, dir=null, status = null)
-	
+
 
 
 
@@ -510,7 +510,7 @@
 		values["janitor"] = JaniData
 
 	return values
-			
+
 
 
 
@@ -523,8 +523,8 @@
 		usr << browse(null, "window=pda")
 		return
 
-		
-		
+
+
 
 	switch(href_list["choice"])
 		if("Medical Records")
@@ -559,7 +559,7 @@
 				return
 
 		if("Signal Frequency")
-			var/new_frequency = sanitize_frequency(radio:frequency + text2num(href_list["sfreq"]))
+			var/new_frequency = sanitize_russian_frequency(radio:frequency + text2num(href_list["sfreq"]))
 			radio:set_frequency(new_frequency)
 
 		if("Signal Code")

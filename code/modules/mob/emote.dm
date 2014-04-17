@@ -10,7 +10,7 @@
 
 	var/input
 	if(!message)
-		input = copytext(sanitize(input(src,"Choose an emote to display.") as text|null),1,MAX_MESSAGE_LEN)
+		input = copytext(sanitize_russian(input(src,"Choose an emote to display.") as text|null),1,MAX_MESSAGE_LEN)
 	else
 		input = message
 	if(input)
@@ -65,7 +65,7 @@
 
 	var/input
 	if(!message)
-		input = copytext(sanitize(input(src, "Choose an emote to display.") as text|null), 1, MAX_MESSAGE_LEN)
+		input = copytext(sanitize_russian(input(src, "Choose an emote to display.") as text|null), 1, MAX_MESSAGE_LEN)
 	else
 		input = message
 

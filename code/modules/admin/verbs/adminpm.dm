@@ -68,7 +68,7 @@
 
 	//clean the message if it's not sent by a high-rank admin
 	if(!check_rights(R_SERVER|R_DEBUG,0))
-		msg = sanitize(copytext(msg,1,MAX_MESSAGE_LEN))
+		msg = sanitize_russian(copytext(msg,1,MAX_MESSAGE_LEN))
 		if(!msg)	return
 
 	var/recieve_color = "purple"

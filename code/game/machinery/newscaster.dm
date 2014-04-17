@@ -901,7 +901,7 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 			user << "<FONT COLOR='blue'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</FONT>"
 		else
 			var/s = strip_html( input(user, "Write something", "Newspaper", "") )
-			s = copytext(sanitize(s), 1, MAX_MESSAGE_LEN)
+			s = copytext(sanitize_russian(s), 1, MAX_MESSAGE_LEN)
 			if (!s)
 				return
 			if (!in_range(src, usr) && src.loc != usr)

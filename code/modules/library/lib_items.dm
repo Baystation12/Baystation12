@@ -35,7 +35,7 @@
 		if(!newname)
 			return
 		else
-			name = ("bookcase ([sanitize(newname)])")
+			name = ("bookcase ([sanitize_russian(newname)])")
 	else
 		..()
 

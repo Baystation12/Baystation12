@@ -57,15 +57,15 @@
 	S["UI_style_color"]		>> UI_style_color
 	S["UI_style_alpha"]		>> UI_style_alpha
 
-	//Sanitize
-	ooccolor		= sanitize_hexcolor(ooccolor, initial(ooccolor))
-	lastchangelog	= sanitize_text(lastchangelog, initial(lastchangelog))
-	UI_style		= sanitize_inlist(UI_style, list("White", "Midnight","Orange","old"), initial(UI_style))
-	be_special		= sanitize_integer(be_special, 0, 65535, initial(be_special))
-	default_slot	= sanitize_integer(default_slot, 1, MAX_SAVE_SLOTS, initial(default_slot))
-	toggles			= sanitize_integer(toggles, 0, 65535, initial(toggles))
-	UI_style_color	= sanitize_hexcolor(UI_style_color, initial(UI_style_color))
-	UI_style_alpha	= sanitize_integer(UI_style_alpha, 0, 255, initial(UI_style_alpha))
+	//sanitize_russian
+	ooccolor		= sanitize_russian_hexcolor(ooccolor, initial(ooccolor))
+	lastchangelog	= sanitize_russian_text(lastchangelog, initial(lastchangelog))
+	UI_style		= sanitize_russian_inlist(UI_style, list("White", "Midnight","Orange","old"), initial(UI_style))
+	be_special		= sanitize_russian_integer(be_special, 0, 65535, initial(be_special))
+	default_slot	= sanitize_russian_integer(default_slot, 1, MAX_SAVE_SLOTS, initial(default_slot))
+	toggles			= sanitize_russian_integer(toggles, 0, 65535, initial(toggles))
+	UI_style_color	= sanitize_russian_hexcolor(UI_style_color, initial(UI_style_color))
+	UI_style_alpha	= sanitize_russian_integer(UI_style_alpha, 0, 255, initial(UI_style_alpha))
 
 	return 1
 
@@ -96,7 +96,7 @@
 	if(!S)					return 0
 	S.cd = "/"
 	if(!slot)	slot = default_slot
-	slot = sanitize_integer(slot, 1, MAX_SAVE_SLOTS, initial(default_slot))
+	slot = sanitize_russian_integer(slot, 1, MAX_SAVE_SLOTS, initial(default_slot))
 	if(slot != default_slot)
 		default_slot = slot
 		S["default_slot"] << slot
@@ -158,42 +158,42 @@
 
 	S["uplinklocation"] >> uplinklocation
 
-	//Sanitize
-	metadata		= sanitize_text(metadata, initial(metadata))
+	//sanitize_russian
+	metadata		= sanitize_russian_text(metadata, initial(metadata))
 	real_name		= reject_bad_name(real_name)
 	if(isnull(species)) species = "Human"
 	if(isnull(language)) language = "None"
 	if(isnull(nanotrasen_relation)) nanotrasen_relation = initial(nanotrasen_relation)
 	if(!real_name) real_name = random_name(gender)
-	be_random_name	= sanitize_integer(be_random_name, 0, 1, initial(be_random_name))
-	gender			= sanitize_gender(gender)
-	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
-	r_hair			= sanitize_integer(r_hair, 0, 255, initial(r_hair))
-	g_hair			= sanitize_integer(g_hair, 0, 255, initial(g_hair))
-	b_hair			= sanitize_integer(b_hair, 0, 255, initial(b_hair))
-	r_facial		= sanitize_integer(r_facial, 0, 255, initial(r_facial))
-	g_facial		= sanitize_integer(g_facial, 0, 255, initial(g_facial))
-	b_facial		= sanitize_integer(b_facial, 0, 255, initial(b_facial))
-	s_tone			= sanitize_integer(s_tone, -185, 34, initial(s_tone))
-	h_style			= sanitize_inlist(h_style, hair_styles_list, initial(h_style))
-	f_style			= sanitize_inlist(f_style, facial_hair_styles_list, initial(f_style))
-	r_eyes			= sanitize_integer(r_eyes, 0, 255, initial(r_eyes))
-	g_eyes			= sanitize_integer(g_eyes, 0, 255, initial(g_eyes))
-	b_eyes			= sanitize_integer(b_eyes, 0, 255, initial(b_eyes))
-	underwear		= sanitize_integer(underwear, 1, underwear_m.len, initial(underwear))
-	backbag			= sanitize_integer(backbag, 1, backbaglist.len, initial(backbag))
-	b_type			= sanitize_text(b_type, initial(b_type))
+	be_random_name	= sanitize_russian_integer(be_random_name, 0, 1, initial(be_random_name))
+	gender			= sanitize_russian_gender(gender)
+	age				= sanitize_russian_integer(age, AGE_MIN, AGE_MAX, initial(age))
+	r_hair			= sanitize_russian_integer(r_hair, 0, 255, initial(r_hair))
+	g_hair			= sanitize_russian_integer(g_hair, 0, 255, initial(g_hair))
+	b_hair			= sanitize_russian_integer(b_hair, 0, 255, initial(b_hair))
+	r_facial		= sanitize_russian_integer(r_facial, 0, 255, initial(r_facial))
+	g_facial		= sanitize_russian_integer(g_facial, 0, 255, initial(g_facial))
+	b_facial		= sanitize_russian_integer(b_facial, 0, 255, initial(b_facial))
+	s_tone			= sanitize_russian_integer(s_tone, -185, 34, initial(s_tone))
+	h_style			= sanitize_russian_inlist(h_style, hair_styles_list, initial(h_style))
+	f_style			= sanitize_russian_inlist(f_style, facial_hair_styles_list, initial(f_style))
+	r_eyes			= sanitize_russian_integer(r_eyes, 0, 255, initial(r_eyes))
+	g_eyes			= sanitize_russian_integer(g_eyes, 0, 255, initial(g_eyes))
+	b_eyes			= sanitize_russian_integer(b_eyes, 0, 255, initial(b_eyes))
+	underwear		= sanitize_russian_integer(underwear, 1, underwear_m.len, initial(underwear))
+	backbag			= sanitize_russian_integer(backbag, 1, backbaglist.len, initial(backbag))
+	b_type			= sanitize_russian_text(b_type, initial(b_type))
 
-	alternate_option = sanitize_integer(alternate_option, 0, 2, initial(alternate_option))
-	job_civilian_high = sanitize_integer(job_civilian_high, 0, 65535, initial(job_civilian_high))
-	job_civilian_med = sanitize_integer(job_civilian_med, 0, 65535, initial(job_civilian_med))
-	job_civilian_low = sanitize_integer(job_civilian_low, 0, 65535, initial(job_civilian_low))
-	job_medsci_high = sanitize_integer(job_medsci_high, 0, 65535, initial(job_medsci_high))
-	job_medsci_med = sanitize_integer(job_medsci_med, 0, 65535, initial(job_medsci_med))
-	job_medsci_low = sanitize_integer(job_medsci_low, 0, 65535, initial(job_medsci_low))
-	job_engsec_high = sanitize_integer(job_engsec_high, 0, 65535, initial(job_engsec_high))
-	job_engsec_med = sanitize_integer(job_engsec_med, 0, 65535, initial(job_engsec_med))
-	job_engsec_low = sanitize_integer(job_engsec_low, 0, 65535, initial(job_engsec_low))
+	alternate_option = sanitize_russian_integer(alternate_option, 0, 2, initial(alternate_option))
+	job_civilian_high = sanitize_russian_integer(job_civilian_high, 0, 65535, initial(job_civilian_high))
+	job_civilian_med = sanitize_russian_integer(job_civilian_med, 0, 65535, initial(job_civilian_med))
+	job_civilian_low = sanitize_russian_integer(job_civilian_low, 0, 65535, initial(job_civilian_low))
+	job_medsci_high = sanitize_russian_integer(job_medsci_high, 0, 65535, initial(job_medsci_high))
+	job_medsci_med = sanitize_russian_integer(job_medsci_med, 0, 65535, initial(job_medsci_med))
+	job_medsci_low = sanitize_russian_integer(job_medsci_low, 0, 65535, initial(job_medsci_low))
+	job_engsec_high = sanitize_russian_integer(job_engsec_high, 0, 65535, initial(job_engsec_high))
+	job_engsec_med = sanitize_russian_integer(job_engsec_med, 0, 65535, initial(job_engsec_med))
+	job_engsec_low = sanitize_russian_integer(job_engsec_low, 0, 65535, initial(job_engsec_low))
 
 	if(!skills) skills = list()
 	if(!used_skillpoints) used_skillpoints= 0

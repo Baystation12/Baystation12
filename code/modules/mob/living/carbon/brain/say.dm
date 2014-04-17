@@ -7,7 +7,7 @@
 	else
 		if ((department_radio_keys[copytext(message, 1, 3)] == "binary") && (container && istype(container, /obj/item/device/mmi/posibrain)))
 			message = copytext(message, 3)
-			message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+			message = trim(copytext(sanitize_russian(message), 1, MAX_MESSAGE_LEN))
 			robot_talk(message)
 			return
 		if(prob(emp_damage*4))
@@ -18,5 +18,5 @@
 		if(istype(container, /obj/item/device/mmi/radio_enabled))
 			var/obj/item/device/mmi/radio_enabled/R = container
 			if(R.radio)
-				spawn(0) R.radio.hear_talk(src, sanitize(message))
+				spawn(0) R.radio.hear_talk(src, sanitize_russian(message))
 		..()
