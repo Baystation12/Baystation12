@@ -315,7 +315,7 @@
 		if(world.time < (last_change + 15))//To prevent super-spam clicking, reduced process size and annoyance -Sieve
 			return
 		for(var/mob/M in range(3,src))
-			M.show_message("\b ERROR. Recalibrating projetion apparatus.")
+			M.show_message("\b ERROR. Recalibrating projection apparatus.")
 			last_change = world.time
 			return
 
@@ -447,6 +447,8 @@
 
 	if(isrobot(user))
 		return
+		
+	..()
 
 /obj/structure/table/holotable/wood
 	name = "table"
@@ -489,7 +491,7 @@
 	damtype = HALLOSS
 
 /obj/item/weapon/holo/esword
-	desc = "May the force be within you. Sorta"
+	desc = "May the force be within you. Sorta."
 	icon_state = "sword0"
 	force = 3.0
 	throw_speed = 1
@@ -607,11 +609,11 @@
 	power_channel = ENVIRON
 
 /obj/machinery/readybutton/attack_ai(mob/user as mob)
-	user << "The station AI is not to interact with these devices"
+	user << "The station AI is not to interact with these devices!"
 	return
 
 /obj/machinery/readybutton/attack_paw(mob/user as mob)
-	user << "You are too primitive to use this device"
+	user << "You are too primitive to use this device."
 	return
 
 /obj/machinery/readybutton/New()

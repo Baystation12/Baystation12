@@ -159,5 +159,5 @@
 		comment = "tails"
 	else if(result == 2)
 		comment = "heads"
-	user.visible_message("<span class='notice'>[user] has thrown the [src]. It lands on [comment]! </span>", \
-						 "<span class='notice'>You throw the [src]. It lands on [comment]! </span>")
+	user.visible_message("<span class='notice'>[user] has thrown \the [src]. It lands on [comment]! </span>", \
+						 "<span class='notice'>You throw \the [src]. It lands on [comment]! </span>")
