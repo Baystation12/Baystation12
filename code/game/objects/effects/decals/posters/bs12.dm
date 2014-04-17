@@ -161,7 +161,7 @@
 
 /datum/poster/bay_33
 	icon_state="bsposter33"
-	name = "Tools,tools,tools"
+	name = "Tools, tools, tools"
 	desc = "You can never have enough tools, thats for sure!"
 
 /datum/poster/bay_34
