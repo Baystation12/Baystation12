@@ -176,7 +176,7 @@
 			D << "\red You carefully and thoroughly decompile your downed fellow, storing as much of its resources as you can within yourself."
 
 			del(M)
-			new/obj/effect/decal/cleanable/blood/oil(get_turf(src))
+			new/obj/effect/decal/cleanable/oil(get_turf(src))
 
 			stored_comms["metal"] += 15
 			stored_comms["glass"] += 15

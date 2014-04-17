@@ -12,3 +12,8 @@
 	if(config.use_irc_bot && config.admin_irc && config.irc_bot_host)
 		ext_python("ircbot_message.py", "[config.comms_password] [config.irc_bot_host] [config.admin_irc] [msg]")
 	return
+
+/hook/startup/proc/ircNotify()
+	send2mainirc("Server starting up on [config.server? "byond://[config.server]" : "byond://[world.address]:[world.port]"]")
+	return 1
+
