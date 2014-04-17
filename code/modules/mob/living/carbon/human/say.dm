@@ -1,39 +1,132 @@
 /mob/living/carbon/human/say(var/message)
+	var/verb = "says"
+	var/alt_name = ""
+	var/message_range = world.view
+	var/italics = 0
 
-	if(wear_mask)
-		if(istype(wear_mask, /obj/item/clothing/mask/gas/voice/space_ninja) && wear_mask:voice == "Unknown")
-			if(copytext(message, 1, 2) != "*")
-				var/list/temp_message = text2list(message, " ")
-				var/list/pick_list = list()
-				for(var/i = 1, i <= temp_message.len, i++)
-					pick_list += i
-				for(var/i=1, i <= abs(temp_message.len/3), i++)
-					var/H = pick(pick_list)
-					if(findtext(temp_message[H], "*") || findtext(temp_message[H], ";") || findtext(temp_message[H], ":")) continue
-					temp_message[H] = ninjaspeak(temp_message[H])
-					pick_list -= H
-				message = list2text(temp_message, " ")
-				message = replacetext(message, "o", "¤")
-				message = replacetext(message, "p", "þ")
-				message = replacetext(message, "l", "£")
-				message = replacetext(message, "s", "§")
-				message = replacetext(message, "u", "µ")
-				message = replacetext(message, "b", "ß")
+	if(client)
+		if(client.prefs.muted & MUTE_IC)
+			src << "\red You cannot speak in IC (Muted)."
+			return
+	
+	if(stat == 2)
+		return say_dead(message)
 
-		else if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
-			var/obj/item/clothing/mask/horsehead/hoers = wear_mask
-			if(hoers.voicechange)
-				if(!(copytext(message, 1, 2) == "*" || (mind && mind.changeling && department_radio_keys[copytext(message, 1, 3)] != "changeling")))
-					message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
+	if(copytext(message,1,2) == "*")
+		return emote(copytext(message,2))
 
-	if ((HULK in mutations) && health >= 25 && length(message))
-		if(copytext(message, 1, 2) != "*")
-			message = "[uppertext(message)]!!" //because I don't know how to code properly in getting vars from other files -Bro
+	if(name != GetVoice())
+		alt_name = "(as [get_id_name("Unknown")])"
+	
+	var/message_mode = null
+	var/datum/language/speaking = null
+	
+	if(copytext(message,1,2) == ";")
+		message_mode = "headset"
+		message = copytext(message,2)
 
-	if (src.slurring)
-		if(copytext(message, 1, 2) != "*")
-			message = slur(message)
-	..(message)
+	if(length(message) >= 2)
+		var/channel_prefix = copytext(message, 1 ,3)
+		var/check_language_and_radio = copytext(message,3,5)
+		if(languages.len)
+			for(var/datum/language/L in languages)
+				if(lowertext(channel_prefix) == ":[L.key]" || lowertext(check_language_and_radio) == ":[L.key]")
+					verb = L.speech_verb
+					speaking = L
+					break
+		if(!message_mode)
+			message_mode = department_radio_keys[channel_prefix]
+
+	if(speaking || copytext(message,1,2) == ":")
+		var/positioncut = 3
+		if(speaking && (message_mode && copytext(message,3,4)==":")) 
+			positioncut += 2
+		message = trim(copytext(message,positioncut))
+	
+
+	message = capitalize(trim_left(message))
+
+	if(speech_problem_flag)
+		var/list/handle_r = handle_speech_problems(message)
+		message = handle_r[1]
+		verb = handle_r[2]
+		speech_problem_flag = handle_r[3]
+
+	if(!message || stat)
+		return
+
+	var/ending = copytext(message, length(message))
+	if(ending=="!")
+		verb=pick("exclaims","shouts","yells")
+	if(ending=="?")
+		verb="asks"
+
+	var/list/obj/item/used_radios = new
+
+	switch (message_mode)
+		if("headset")
+			if(l_ear && istype(l_ear,/obj/item/device/radio))
+				var/obj/item/device/radio/R = l_ear
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += l_ear
+			else if(r_ear && istype(r_ear,/obj/item/device/radio))
+				var/obj/item/device/radio/R = r_ear
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += r_ear
+
+		if("right_ear")
+			if(r_ear && istype(r_ear,/obj/item/device/radio))
+				var/obj/item/device/radio/R = r_ear		
+				R.talk_into(src,message,verb,speaking)
+				used_radios += r_ear
+
+
+		if("left_ear")
+			if(l_ear && istype(l_ear,/obj/item/device/radio))
+				var/obj/item/device/radio/R = l_ear
+				R.talk_into(src,message,verb,speaking)
+				used_radios += l_ear
+
+		if("intercom")
+			for(var/obj/item/device/radio/intercom/I in view(1, null))
+				I.talk_into(src, message, verb, speaking)
+				used_radios += I
+		if("whisper")
+			whisper(message)
+			return
+		if("binary")
+			if(robot_talk_understand || binarycheck())
+				robot_talk(message)
+			return
+		if("changeling")
+			if(mind && mind.changeling)
+				for(var/mob/Changeling in mob_list)
+					if((Changeling.mind && Changeling.mind.changeling) || istype(Changeling, /mob/dead/observer))
+						Changeling << "<i><font color=#800080><b>[mind.changeling.changelingID]:</b> [message]</font></i>"
+			return
+		else
+			if(message_mode)
+				if(message_mode in radiochannels)
+					if(l_ear && istype(l_ear,/obj/item/device/radio))
+						l_ear.talk_into(src,message, message_mode, verb, speaking)
+						used_radios += l_ear
+					else if(r_ear && istype(r_ear,/obj/item/device/radio))
+						r_ear.talk_into(src,message, message_mode, verb, speaking)
+						used_radios += r_ear	
+
+
+	if(used_radios.len)
+		italics = 1
+		message_range = 3
+
+	var/datum/gas_mixture/environment = loc.return_air()
+	if(environment)
+		var/pressure = environment.return_pressure()
+		if(pressure < SAY_MINIMUM_PRESSURE)
+			italics = 1
+			message_range =1
+
+	..(message, speaking, verb, alt_name, italics, message_range, used_radios)
 
 /mob/living/carbon/human/say_understands(var/other,var/datum/language/speaking = null)
 
@@ -71,3 +164,47 @@
 
 /mob/living/carbon/human/proc/GetSpecialVoice()
 	return special_voice
+
+/mob/living/carbon/human/proc/handle_speech_problems(var/message)
+	var/list/returns[3]
+	var/verb = "says"
+	var/handled = 0
+	if(silent)
+		message = ""
+		handled = 1
+	if(sdisabilities & MUTE)
+		message = ""
+		handled = 1
+	if(wear_mask)
+		if(istype(wear_mask, /obj/item/clothing/mask/horsehead))
+			var/obj/item/clothing/mask/horsehead/hoers = wear_mask
+			if(hoers.voicechange)
+				if(mind && mind.changeling && department_radio_keys[copytext(message, 1, 3)] != "changeling")
+					message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
+					verb = pick("whinnies","neighs", "says")
+					handled = 1
+
+	if((HULK in mutations) && health >= 25 && length(message))
+		message = "[uppertext(message)]!!!"
+		verb = pick("yells","roars","hollers")
+		handled = 1
+	if(slurring)
+		message = slur(message)
+		verb = pick("stammers","stutters")
+		handled = 1
+
+	var/braindam = getBrainLoss()
+	if(braindam >= 60)
+		handled = 1
+		if(prob(braindam/4))
+			message = stutter(message)
+			verb = pick("stammers", "stutters")
+		if(prob(braindam))
+			message = uppertext(message)
+			verb = pick("yells like an idiot","says rather loudly")
+
+	returns[1] = message
+	returns[2] = verb
+	returns[3] = handled
+	
+	return returns
