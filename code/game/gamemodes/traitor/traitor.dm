@@ -109,7 +109,7 @@
 			if(41 to 50)
 				var/datum/objective/protect/protect_objective = new
 				protect_objective.owner = traitor
-				protect_objective.find_target_by_role("Traitor",0)	//Protect your fellow traitor
+				protect_objective.find_target_with_special_role(null,0)
 				if (!protect_objective.target)
 					protect_objective.find_target()					//We could not find any traitors, protect somebody
 				traitor.objectives += protect_objective
