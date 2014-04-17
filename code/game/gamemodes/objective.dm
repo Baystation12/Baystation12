@@ -35,13 +35,22 @@ datum/objective
 		if(possible_targets.len > 0)
 			target = pick(possible_targets)
 
-
 	proc/find_target_by_role(role, role_type=0)//Option sets either to check assigned role or special role. Default to assigned.
+		var/list/possible_targets = list()
 		for(var/datum/mind/possible_target in ticker.minds)
-			if((possible_target != owner) && ishuman(possible_target.current) && ((role_type ? possible_target.special_role : possible_target.assigned_role) == role) )
-				target = possible_target
-				break
+			if((possible_target != owner) && ishuman(possible_target.current) && ((role_type ? possible_target.special_role : possible_target.assigned_role) == role) && (possible_target.current.stat != 2) )
+				possible_targets += possible_target
+		if(possible_targets.len > 0)
+			target = pick(possible_targets)
 
+//Selects someone with a specific special role if role is != null. Or just anyone with a special role
+	proc/find_target_with_special_role(role)
+		var/list/possible_targets = list()
+		for(var/datum/mind/possible_target in ticker.minds)
+			if((possible_target != owner) && ishuman(possible_target.current) && (role && possible_target.special_role == role || !role && possible_target.special_role) && (possible_target.current.stat != 2) )
+				possible_targets += possible_target
+		if(possible_targets.len > 0)
+			target = pick(possible_targets)
 
 
 datum/objective/assassinate
@@ -229,7 +238,7 @@ datum/objective/debrain//I want braaaainssss
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Steal the brain of [target.current.real_name]."
+			explanation_text = "Steal the brain of [target.current.real_name] the [target.assigned_role]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -269,6 +278,14 @@ datum/objective/protect//The opposite of killing a dude.
 
 	find_target_by_role(role, role_type=0)
 		..(role, role_type)
+		if(target && target.current)
+			explanation_text = "Protect [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
+		else
+			explanation_text = "Free Objective"
+		return target
+
+	find_target_with_special_role(role,role_type=0)
+		..(role)
 		if(target && target.current)
 			explanation_text = "Protect [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
 		else
