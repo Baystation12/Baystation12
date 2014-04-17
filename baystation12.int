@@ -1,6 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\__HELPERS\text.dm;code\modules\mob\say.dm;code\modules\mob\dead\observer\say.dm;code\modules\mob\emote.dm;code\modules\mob\living\say.dm;code\modules\mob\living\carbon\alien\say.dm;code\modules\mob\living\silicon\say.dm
+DIR: code code\__HELPERS code\game code\modules code\modules\mob code\modules\mob\dead code\modules\mob\dead\observer code\modules\mob\living code\modules\mob\living\carbon code\modules\mob\living\carbon\alien code\modules\mob\living\silicon maps 
+FILE: code\modules\mob\living\silicon\say.dm
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

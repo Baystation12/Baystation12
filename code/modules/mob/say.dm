@@ -22,7 +22,7 @@
 		usr << "\red Speech is currently admin-disabled."
 		return
 
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = trim(copytext(sanitize_russian(message), 1, MAX_MESSAGE_LEN))
 
 	if(use_me)
 		usr.emote("me",usr.emote_type,message)
@@ -53,7 +53,7 @@
 	if(name != real_name)
 		alt_name = " (died as [real_name])"
 
-	message = src.say_quote(message)
+	message = src.say_quote(sanitize_simple_russian(message))
 	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] <span class='message'>[message]</span></span>"
 
 	for(var/mob/M in player_list)

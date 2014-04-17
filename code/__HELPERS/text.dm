@@ -35,7 +35,7 @@
 	return t
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#","ï¿½"="ï¿½"))
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#","\t"="#"))
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
@@ -57,6 +57,50 @@
 /proc/adminscrub(var/t,var/limit=MAX_MESSAGE_LEN)
 	return copytext((html_encode(strip_html_simple(t))),1,limit)
 
+////////////////////////////
+//Main encode/decode procs//
+////////////////////////////
+/proc/sanitize_simple_russian(var/msg, var/list/repl_chars = null)
+	var/index = findtext(msg, "ÿ")
+	while(index)
+		msg = copytext(msg, 1, index) + "&#255;" + copytext(msg, index + 1)
+		index = findtext(msg, "ÿ")
+	return sanitize_simple(msg, repl_chars)
+
+/proc/sanitize_russian(var/msg,var/list/repl_chars = null)
+	return html_encode_russian(sanitize_simple_russian(msg, repl_chars))
+
+/proc/html_encode_russian(var/msg)
+	var/list/c = text2list(msg, "ÿ")
+	if(c.len == 1)
+		c = text2list(msg, "&#255;")
+		if(c.len == 1)
+			return html_encode(msg)
+	var/out = ""
+	var/first = 1
+	for(var/text in c)
+		if(!first)
+			out += "&#255;"
+		else
+			first = 0
+		out += html_encode(text)
+	return out
+
+/proc/html_decode_russian(var/msg)
+	var/list/c = text2list(msg, "ÿ")
+	if(c.len == 1)
+		c = text2list(msg, "&#255;")
+		if(c.len == 1)
+			return html_decode(msg)
+	var/out = ""
+	var/first = 1
+	for(var/text in c)
+		if(!first)
+			out += "&#255;"
+		else
+			first = 0
+		out += html_decode(text)
+	return out
 
 //Returns null if there is any bad text in the string
 /proc/reject_bad_text(var/text, var/max_length=512)

@@ -87,7 +87,7 @@ var/list/department_radio_keys = list(
 		Formatting and sanitizing.
 	*/
 
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = trim(copytext(sanitize_russian(message), 1, MAX_MESSAGE_LEN))
 
 	/*
 		Sanity checking and speech failure.
