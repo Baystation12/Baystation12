@@ -22,6 +22,7 @@
 		//create a short manual as well
 		var/obj/item/weapon/paper/R = new(src.loc)
 		R.name = "Steps to success: Correct EFTPOS Usage"
+		/*
 		R.info += "<b>When first setting up your EFTPOS device:</b>"
 		R.info += "1. Memorise your EFTPOS command code (provided with all EFTPOS devices).<br>"
 		R.info += "2. Confirm that your EFTPOS device is connected to your local accounts database. For additional assistance with this step, contact NanoTrasen IT Support<br>"
@@ -33,6 +34,17 @@
 		R.info += "4. If at this stage you wish to modify or cancel your transaction, you may simply reset (unlock) your EFTPOS device.<br>"
 		R.info += "5. Give your EFTPOS device to the customer, they must authenticate the transaction by swiping their ID card and entering their PIN number.<br>"
 		R.info += "6. If done correctly, the transaction will be logged to both accounts with the reference you have entered, the terminal ID of your EFTPOS device and the money transferred across accounts.<br>"
+		*/
+		//Temptative new manual:
+		R.info += "<b>First EFTPOS setup:</b><br>"
+		R.info += "1. Memorise your EFTPOS command code (provided with all EFTPOS devices).<br>"
+		R.info += "2. Connect the EFTPOS to the account in which you want to receive the funds.<br><br>"
+		R.info += "<b>When starting a new transaction:</b><br>"
+		R.info += "1. Enter the amount of money you want to charge and a purpose message for the new transaction.<br>"
+		R.info += "2. Lock the new transaction. If you want to modify or cancel the transaction, you simply have to reset your EFTPOS device.<br>"
+		R.info += "3. Give the EFTPOS device to your customer, he/she must finish the transaction by swiping their ID card or a charge card with enough funds.<br>"
+		R.info += "4. If everything is done correctly, the money will be transferred. To unlock the device you will have to reset the EFTPOS device.<br>"
+
 
 		//stamp the paper
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
@@ -102,7 +114,6 @@
 			scan_card(I)
 		else
 			usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
-	//fae changes {
 	else if (istype(O, /obj/item/weapon/spacecash/ewallet))
 		var/obj/item/weapon/spacecash/ewallet/E = O
 		if (linked_account)
@@ -119,21 +130,20 @@
 
 						//create entry in the EFTPOS linked account transaction log
 						var/datum/transaction/T = new()
-						T = new()
 						T.target_name = E.owner_name //D.owner_name
 						T.purpose = transaction_purpose
-						T.amount = "[transaction_amount]"
+						T.amount = transaction_amount
 						T.source_terminal = machine_id
 						T.date = current_date_string
 						T.time = worldtime2text()
 						linked_account.transaction_log.Add(T)
 					else
-						usr << "\icon[src]<span class='warning'>The e-wallet doesn't have that much money!</span>"
+						usr << "\icon[src]<span class='warning'>The charge card doesn't have that much money!</span>"
 			else
 				usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
 		else
 			usr << "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>"
-	//}
+
 	else
 		..()
 

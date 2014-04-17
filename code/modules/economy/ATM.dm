@@ -190,7 +190,7 @@ log transactions
 							dat += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
 							dat += "<input type='hidden' name='src' value='\ref[src]'>"
 							dat += "<input type='hidden' name='choice' value='withdrawal'>"
-							dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw e-wallet'>" //fae change: fuck it, ewallet
+							dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw charge card'>"
 							dat += "</form>"
 							dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
 							dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
@@ -310,10 +310,8 @@ log transactions
 						//remove the money
 						authenticated_account.money -= amount
 
-						//fae change {
 						//	spawn_money(amount,src.loc)
 						spawn_ewallet(amount,src.loc)
-						//}
 
 						//create an entry in the account transaction log
 						var/datum/transaction/T = new()
@@ -407,9 +405,8 @@ log transactions
 		human_user.put_in_hands(held_card)
 	held_card = null
 
-//fae change {
+
 /obj/machinery/atm/proc/spawn_ewallet(var/sum, loc)
 	var/obj/item/weapon/spacecash/ewallet/E = new /obj/item/weapon/spacecash/ewallet(loc)
 	E.worth = sum
 	E.owner_name = authenticated_account.owner_name
-//}

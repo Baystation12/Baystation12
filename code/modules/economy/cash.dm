@@ -73,9 +73,14 @@ proc/spawn_money(var/sum, spawnloc)
 			new cash_type(spawnloc)
 	return
 
-//Fae changes
 /obj/item/weapon/spacecash/ewallet
-	name = "E-Wallet"
+	name = "Charge card"
 	icon_state = "spacecash1000"
-	desc = "Worth: Some credits."
-	var/owner_name = ""
+	desc = "A card that holds an amount of money."
+	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.
+
+/obj/item/weapon/spacecash/ewallet/examine()
+	set src in view()
+	..()
+	if (!(usr in view(2)) && usr!=src.loc) return
+	usr << "\blue Charge card's owner: [src.owner_name]. Credits remaining: [src.worth]."
