@@ -2,10 +2,10 @@
 /*
 MAP_ICON_TYPE: 0
 LAST_COMPILE_VERSION: 504.1234
-WINDOW: baystation12.dme;code\__HELPERS\text.dm;code\modules\mob\emote.dm;code\modules\mob\say.dm;code\modules\mob\living\say.dm;code\game\objects\items\weapons\implants\implant.dm;code\defines\procs\statistics.dm;code\game\machinery\newscaster.dm;code\modules\library\lib_machines.dm;code\world.dm
-DIR: code code\__HELPERS code\game code\game\machinery code\game\objects code\game\objects\items code\game\objects\items\weapons code\game\objects\items\weapons\implants code\modules code\modules\library code\modules\mob code\modules\mob\living 
-FILE: code\__HELPERS\text.dm
-LAST_COMPILE_TIME: 1397751987
+WINDOW: baystation12.dme
+DIR: code code\game\machinery\computer 
+FILE: baystation12.dme
+LAST_COMPILE_TIME: 1397752945
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
