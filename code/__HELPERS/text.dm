@@ -75,7 +75,7 @@
 	return sanitize_simple(msg, repl_chars)
 
 /proc/sanitize_russian(var/msg,var/list/repl_chars = null)
-	return html_encode_russian(sanitize(msg, repl_chars))
+	return html_encode_russian(sanitize_simple_russian(msg, repl_chars))
 
 /proc/html_encode_russian(var/msg)
 	var/list/c = text2list(msg, "ÿ")
@@ -116,7 +116,7 @@
 	for(var/i=1, i<=length(text), i++)
 		switch(text2ascii(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
-			if(127 to 255)	return			//rejects weird letters like ï¿½
+			//if(127 to 255)	return			//rejects weird letters like ï¿½
 			if(0 to 31)		return			//more weird stuff
 			if(32)			continue		//whitespace
 			else			non_whitespace = 1
