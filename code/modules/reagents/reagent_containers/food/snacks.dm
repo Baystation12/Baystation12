@@ -1227,7 +1227,7 @@
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/spagetti
-	name = "Spagetti"
+	name = "Spaghetti"
 	desc = "A bundle of raw spaghetti."
 	icon_state = "spagetti"
 	filling_color = "#EDDD00"
@@ -1807,7 +1807,7 @@
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/boiledspagetti
-	name = "Boiled Spagetti"
+	name = "Boiled Spaghetti"
 	desc = "A plain dish of noodles, this sucks."
 	icon_state = "spagettiboiled"
 	trash = /obj/item/trash/plate
@@ -1843,7 +1843,7 @@
 		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/pastatomato
-	name = "Spagetti"
+	name = "Spaghetti"
 	desc = "Spaghetti and crushed tomatoes. Just like your abusive father used to make!"
 	icon_state = "pastatomato"
 	trash = /obj/item/trash/plate
@@ -1856,7 +1856,7 @@
 		bitesize = 4
 
 /obj/item/weapon/reagent_containers/food/snacks/meatballspagetti
-	name = "Spagetti & Meatballs"
+	name = "Spaghetti & Meatballs"
 	desc = "Now thats a nic'e meatball!"
 	icon_state = "meatballspagetti"
 	trash = /obj/item/trash/plate
