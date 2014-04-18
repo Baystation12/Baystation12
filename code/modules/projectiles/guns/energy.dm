@@ -69,9 +69,18 @@
 	var/obj/item/ammo_casing/energy/shot = ammo_type[select]
 	switch(modifystate)
 		if (0)
-			icon_state = "[initial(icon_state)][ratio]"
+			if(ratio > 100)
+				icon_state = "[initial(icon_state)]100"
+			else
+				icon_state = "[initial(icon_state)][ratio]"
 		if (1)
-			icon_state = "[initial(icon_state)][shot.mod_name][ratio]"
+			if(ratio > 100)
+				icon_state = "[initial(icon_state)][shot.mod_name]100"
+			else
+				icon_state = "[initial(icon_state)][shot.mod_name][ratio]"
 		if (2)
-			icon_state = "[initial(icon_state)][shot.select_name][ratio]"
+			if(ratio > 100)
+				icon_state = "[initial(icon_state)][shot.select_name]100"
+			else
+				icon_state = "[initial(icon_state)][shot.select_name][ratio]"
 	return

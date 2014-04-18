@@ -66,6 +66,12 @@
 
 		desc = A.desc
 		name = A.name
+		if(A:tc_custom)
+			icon = A.tc_custom
+			tc_custom = A.tc_custom
+		else
+			icon = 'icons/obj/clothing/uniforms.dmi'
+			tc_custom = null
 		icon_state = A.icon_state
 		item_state = A.item_state
 		item_color = A.item_color
