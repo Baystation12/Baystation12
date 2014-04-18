@@ -125,13 +125,12 @@
 
 			// Damaged liver means some chemicals are very dangerous
 			if(src.damage >= src.min_bruised_damage)
-				var/list/toxins = list("toxin", "plasma", "sacid", "pacid", "cyanide", "lexorin", "amatoxin", "chloralhydrate", "carpotoxin", "zombiepowder", "mindbreaker")
 				for(var/datum/reagent/R in owner.reagents.reagent_list)
 					// Ethanol and all drinks are bad
 					if(istype(R, /datum/reagent/ethanol))
 						owner.adjustToxLoss(0.1 * process_accuracy)
 					// Can't cope with toxins at all
-					if(R.id in toxins)
+					if(istype(R, /datum/reagent/toxin))
 						owner.adjustToxLoss(0.3 * process_accuracy)
 
 /datum/organ/internal/kidney
