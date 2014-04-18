@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+WINDOW: code\modules\economy\EFTPOS.dm;code\modules\economy\cash.dm;icons\obj\items.dmi
+LAST_COMPILE_VERSION: 504.1234
+DIR: code code\game code\game\gamemodes code\game\gamemodes\revolution code\game\gamemodes\traitor code\game\machinery code\modules code\modules\economy code\modules\reagents\reagent_containers icons icons\obj 
+FILE: code\modules\economy\cash.dm
+LAST_COMPILE_TIME: 1397694119
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS

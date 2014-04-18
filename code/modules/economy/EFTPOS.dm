@@ -84,7 +84,7 @@
 		var/dat = "<b>[eftpos_name]</b><br>"
 		dat += "<i>This terminal is</i> [machine_id]. <i>Report this code when contacting NanoTrasen IT Support</i><br>"
 		if(transaction_locked)
-			dat += "<a href='?src=\ref[src];choice=toggle_lock'>Reset[transaction_paid ? "" : " (authentication required)"]</a><br><br>"
+			dat += "<a href='?src=\ref[src];choice=toggle_lock'>Back[transaction_paid ? "" : " (authentication required)"]</a><br><br>"
 
 			dat += "Transaction purpose: <b>[transaction_purpose]</b><br>"
 			dat += "Value: <b>$[transaction_amount]</b><br>"
@@ -185,10 +185,14 @@
 					transaction_amount = try_num
 			if("toggle_lock")
 				if(transaction_locked)
-					var/attempt_code = input("Enter EFTPOS access code", "Reset Transaction") as num
-					if(attempt_code == access_code)
+					if (transaction_paid)
 						transaction_locked = 0
 						transaction_paid = 0
+					else
+						var/attempt_code = input("Enter EFTPOS access code", "Reset Transaction") as num
+						if(attempt_code == access_code)
+							transaction_locked = 0
+							transaction_paid = 0
 				else if(linked_account)
 					transaction_locked = 1
 				else
