@@ -21,7 +21,7 @@ obj/effect/decal/cleanable/liquid_fuel
 
 	proc/Spread()
 		//Allows liquid fuels to sometimes flow into other tiles.
-		if(amount < 0.5) return
+		if(amount < 5.0) return
 		var/turf/simulated/S = loc
 		if(!istype(S)) return
 		for(var/d in cardinal)
