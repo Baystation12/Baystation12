@@ -143,3 +143,21 @@
 	icon_state="bsposter29"
 	name = "Winter Is Coming"
 	desc = "On the poster is a frighteningly large wolf, he warns: \"Only YOU can keep the station from freezing during planetary occultation!\""
+
+/datum/poster/bay_30
+	icon_state="bsposter30"
+	name = "Toaster Love"
+	desc = "This is a poster of a toaster containing two slices of bread. The word LOVE is writting in big pink letters underneath."
+
+/datum/poster/bay_31
+	icon_state="bsposter31"
+	name = "Responsible medbay habits, No #91"
+	desc = "A safety poster with a chemist holding a vial. \"Always wear safety gear while handling dangerous chemicals, even if it concerns only small amounts.\""
+
+/datum/poster/bay_31
+	icon_state="bsposter32"
+	name = "Agreeable work environment"
+	desc = "This poster depicts a young woman in a stylish dress. \"Try to aim for a pleasant atmosphere in the workspace. A friendly word can do more than forms in triplicate.\""
+
+
+
