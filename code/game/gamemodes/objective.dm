@@ -323,22 +323,14 @@ datum/objective/hijack
 		return 1
 
 datum/objective/speciesist
-	var/datum/species/speciesist_target = null
-
+	var/is_human = 0
 	find_target()
-		var/list/possible_targets = list()
-		var/mob/living/carbon/human/O = owner.current
-		for(var/datum/mind/possible_target in ticker.minds)
-			if(ishuman(possible_target.current))
-				var/mob/living/carbon/human/M = possible_target.current
-				if (M.species != O.species)
-					possible_targets += M.species
-		if(possible_targets.len > 0)
-			speciesist_target = pick(possible_targets)
-			explanation_text = "Do not allow any [speciesist_target.name]s to escape on the shuttle."
+		if(istype(owner.current,/mob/living/carbon/human/human))
+			explanation_text = "Do not allow any non-humans to escape on the shuttle."
+			is_human = 1
 		else
-			explanation_text = "Free Objective"
-		return speciesist_target
+			explanation_text = "Do not allow any humans to escape on the shuttle."
+		return 1
 
 	check_completion()
 		if(emergency_shuttle.location<2)
@@ -346,7 +338,7 @@ datum/objective/speciesist
 		var/area/shuttle = locate(/area/shuttle/escape/centcom)
 		for(var/mob/living/carbon/human/player in player_list)
 			if (player.mind)
-				if (player.species == speciesist_target)
+				if (is_human ? !istype(player,/mob/living/carbon/human/human) : istype(player,/mob/living/carbon/human/human))
 					if(player.stat != DEAD)			//they're not dead!
 						if(get_turf(player) in shuttle)
 							return 0
