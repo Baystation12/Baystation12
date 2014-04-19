@@ -1087,3 +1087,12 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		log_admin("[key_name(src)] has toggled [M.key]'s [blockname] block [state]!")
 	else
 		alert("Invalid mob")
+
+/client/proc/gib_money()
+	set category = "Fun"
+	set name = "Dispense Money"
+	set desc = "Honk"
+
+	var/response = input(src,"How much moneys?") as num
+	if( response < 1) return
+	dispense_cash(response, mob.loc)

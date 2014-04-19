@@ -72,7 +72,7 @@ log transactions
 			//short out the machine, shoot sparks, spew money!
 			emagged = 1
 			spark_system.start()
-			spawn_money(rand(100,500),src.loc)
+			dispense_cash(rand(100,500),src.loc)
 			//we don't want to grief people by locking their id in an emagged ATM
 			release_held_id(user)
 
@@ -309,7 +309,7 @@ log transactions
 
 						//remove the money
 						authenticated_account.money -= amount
-						spawn_money(amount,src.loc)
+						dispense_cash(amount,src.loc)
 
 						//create an entry in the account transaction log
 						var/datum/transaction/T = new()
@@ -364,6 +364,11 @@ log transactions
 				//usr << browse(null,"window=atm")
 
 	src.attack_hand(usr)
+
+//create the most effective combination of notes to make up the requested amount
+/obj/machinery/atm/proc/withdraw_arbitrary_sum(var/arbitrary_sum)
+	dispense_cash(arbitrary_sum,get_turf(src))
+
 
 //stolen wholesale and then edited a bit from newscasters, which are awesome and by Agouri
 /obj/machinery/atm/proc/scan_user(mob/living/carbon/human/human_user as mob)
