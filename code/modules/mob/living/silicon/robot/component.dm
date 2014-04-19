@@ -95,7 +95,7 @@
 /datum/robot_component/binary_communication
 	name = "binary communication device"
 	external_type = /obj/item/robot_parts/robot_component/binary_communication_device
-	energy_consumption = 1
+	energy_consumption = 0
 	max_damage = 30
 
 /datum/robot_component/camera
