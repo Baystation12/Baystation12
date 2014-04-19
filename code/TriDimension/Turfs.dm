@@ -71,6 +71,7 @@
 		if(O.level == 1)
 			O.hide(0)
 
+/*	WHY?! WHY IS THIS HERE?!
 //overwrite the attackby of space to transform it to openspace if necessary
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
 	if (istype(C, /obj/item/weapon/cable_coil))
@@ -78,6 +79,7 @@
 		W.attackby(C, user)
 		return
 	..()
+*/
 
 /turf/simulated/floor/open/ex_act(severity)
 	// cant destroy empty space with an ordinary bomb

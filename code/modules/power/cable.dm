@@ -327,93 +327,47 @@
 		user << "<span class='warning'>You can't lay cable at a place that far away.</span>"
 		return
 
-	if(F.intact)		// if floor is intact, complain
-		user << "<span class='warning'>You can't lay cable there unless the floor tiles are removed.</span>"
-		return
+	var/dirn
 
+	if(user.loc == F)
+		dirn = user.dir			// if laying on the tile we're on, lay in the direction we're facing
 	else
-		var/dirn
+		dirn = get_dir(F, user)
 
-		if(user.loc == F)
-			dirn = user.dir			// if laying on the tile we're on, lay in the direction we're facing
-		else
-			dirn = get_dir(F, user)
+	for(var/obj/structure/cable/LC in F)
+		if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
+			user << "<span class='warning'>There's already a cable at that position.</span>"
+			return
 
-		for(var/obj/structure/cable/LC in F)
-			if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
-				user << "<span class='warning'>There's already a cable at that position.</span>"
-				return
-///// Z-Level Stuff
-		// check if the target is open space
-		if(istype(F, /turf/simulated/floor/open))
-			for(var/obj/structure/cable/LC in F)
-				if((LC.d1 == dirn && LC.d2 == 11 ) || ( LC.d2 == dirn && LC.d1 == 11))
-					user << "<span class='warning'>There's already a cable at that position.</span>"
-					return
+	for(var/obj/structure/cable/LC in F)
+		if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
+			user << "There's already a cable at that position."
+			return
 
-			var/turf/simulated/floor/open/temp = F
-			var/obj/structure/cable/C = new(F)
-			var/obj/structure/cable/D = new(temp.floorbelow)
+	var/obj/structure/cable/C = new(F)
 
-			C.cableColor(item_color)
+	C.cableColor(item_color)
 
-			C.d1 = 11
-			C.d2 = dirn
-			C.add_fingerprint(user)
-			C.updateicon()
+	C.d1 = 0
+	C.d2 = dirn
+	C.add_fingerprint(user)
+	C.updateicon()
 
-			C.powernet = new()
-			powernets += C.powernet
-			C.powernet.cables += C
+	C.powernet = new()
+	powernets += C.powernet
+	C.powernet.cables += C
 
-			C.mergeConnectedNetworks(C.d2)
-			C.mergeConnectedNetworksOnTurf()
-
-			D.cableColor(item_color)
-
-			D.d1 = 12
-			D.d2 = 0
-			D.add_fingerprint(user)
-			D.updateicon()
-
-			D.powernet = C.powernet
-			D.powernet.cables += D
-
-			D.mergeConnectedNetworksOnTurf()
-
-		// do the normal stuff
-		else
-///// Z-Level Stuff
-
-			for(var/obj/structure/cable/LC in F)
-				if((LC.d1 == dirn && LC.d2 == 0 ) || ( LC.d2 == dirn && LC.d1 == 0))
-					user << "There's already a cable at that position."
-					return
-
-			var/obj/structure/cable/C = new(F)
-
-			C.cableColor(item_color)
-
-			C.d1 = 0
-			C.d2 = dirn
-			C.add_fingerprint(user)
-			C.updateicon()
-
-			C.powernet = new()
-			powernets += C.powernet
-			C.powernet.cables += C
-
-			C.mergeConnectedNetworks(C.d2)
-			C.mergeConnectedNetworksOnTurf()
+	C.mergeConnectedNetworks(C.d2)
+	C.mergeConnectedNetworksOnTurf()
 
 
-			use(1)
-			if (C.shock(user, 50))
-				if (prob(50)) //fail
-					new/obj/item/weapon/cable_coil(C.loc, 1, C.cable_color)
-					del(C)
-		//src.laying = 1
-		//last = C
+	use(1)
+	if (C.shock(user, 50))
+		if (prob(50)) //fail
+			new/obj/item/weapon/cable_coil(C.loc, 1, C.cable_color)
+			del(C)
+	//src.laying = 1
+	//last = C
 
 
 // called when cable_coil is click on an installed obj/cable
