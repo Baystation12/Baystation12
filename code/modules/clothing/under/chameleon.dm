@@ -324,7 +324,7 @@
 
 	New()
 		..()
-		var/blocked = list(/obj/item/clothing/mask/chameleon)//Prevent infinite loops and bad hats.
+		var/blocked = list(/obj/item/clothing/mask/chameleon, /obj/item/clothing/mask/gas/golem)//Prevent infinite loops and bad hats.
 		for(var/U in typesof(/obj/item/clothing/mask)-blocked)
 			var/obj/item/clothing/mask/V = new U
 			if(V)

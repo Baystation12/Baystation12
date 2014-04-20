@@ -821,26 +821,6 @@
 	flags = FPRINT|TABLEPASS
 	w_class = 2
 	slot_flags = SLOT_MASK
-
-////// Emerald necklace - Ty Foster - Nega
-
-/obj/item/clothing/mask/mara_kilpatrick_1
-	name = "emerald necklace"
-	desc = "A brass necklace with a green emerald placed at the end. It has a small inscription on the top of the chain, saying \'Foster\'"
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "ty_foster"
-	flags = FPRINT|TABLEPASS
-	w_class = 2
-
-////// Apollon Pendant - Michael Guess - Dragor23
-/obj/item/clothing/mask/michael_guess_1
-	name = "Apollon Pendant"
-	desc = "A pendant with the form of a sacrificial tripod, used in acient greece. It's a symbol of the Olympian Apollon, a god associated with oracles, poetry, the sun and healing."
-	icon = 'icons/obj/custom_items.dmi'
-	icon_state = "michael_guess_1"
-	flags = FPRINT|TABLEPASS
-	w_class = 2
-	slot_flags = SLOT_MASK
 //////////// Shoes ////////////
 
 /obj/item/clothing/shoes/magboots/fluff/susan_harris_1 //sniperyeti: Susan Harris
