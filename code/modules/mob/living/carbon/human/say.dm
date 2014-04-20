@@ -8,7 +8,7 @@
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (Muted)."
 			return
-	
+
 	if(stat == 2)
 		return say_dead(message)
 
@@ -128,8 +128,8 @@
 	..(message, speaking, verb, alt_name, italics, message_range, used_radios)
 
 
+/mob/living/carbon/human/say_understands(var/mob/other,var/datum/language/speaking = null)
 
-/mob/living/carbon/human/say_understands(var/other,var/datum/language/speaking = null)
 
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
 		return 1
@@ -139,6 +139,11 @@
 		return 1
 	if (istype(other, /mob/living/carbon/slime))
 		return 1
+	if (istype(other, /mob/living/simple_animal))
+		if(other.universal_speak || src.universal_speak || src.universal_understand)
+			return 1
+		return 0
+
 	return ..()
 
 /mob/living/carbon/human/GetVoice()
