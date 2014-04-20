@@ -267,7 +267,7 @@ datum/controller/game_controller/proc/process()
 
 					continue
 
-		machines = machines - Machinery
+		Machinery.removeAtProcessing()
 
 /datum/controller/game_controller/proc/processObjects()
 	for (var/obj/Object in processing_objects)
