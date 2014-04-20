@@ -552,6 +552,8 @@ datum/preferences
 		return
 
 	proc/SetAntagoptions(mob/user)
+		if(uplinklocation == "")
+			uplinklocation = "PDA"
 		var/HTML = "<body>"
 		HTML += "<tt><center>"
 		HTML += "<b>Antagonist Options</b> <hr />"
