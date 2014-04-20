@@ -182,7 +182,7 @@ datum
 					var/current_reagent_transfer = current_reagent.volume * part
 					if(preserve_data)
 						trans_data = copy_data(current_reagent)
-					R.add_reagent(current_reagent.id, (current_reagent_transfer * multiplier), trans_data, safety = 1)	//safety check so all chemicals are transferred before reacting
+					R.add_reagent(current_reagent.id, (current_reagent_transfer * multiplier), trans_data)
 
 				src.update_total()
 				R.update_total()
