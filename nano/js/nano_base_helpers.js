@@ -207,15 +207,11 @@ NanoBaseHelpers = function ()
                     {
                         status = 'selected';
                     }
-<<<<<<< HEAD
-                    
-                    html += '<div class="link ' + status + ' dnaSubBlock" data-href="' + generateHref(parameters) + '" id="dnaBlock' + index + '">' + characters[index] + '</div>';
-                    
-=======
+
 
                     html += '<div class="link ' + status + ' dnaSubBlock" data-href="' + generateHref(parameters) + '" id="dnaBlock' + index + '">' + characters[index] + '</div>'
 
->>>>>>> 16f787a... Virology - NanoUI, gameplay tweaks, bugfixes
+
                     index++;
                     if (index % blockSize == 0 && index < characters.length)
                     {
