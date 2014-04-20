@@ -92,6 +92,7 @@
 		s["ai"] = config.allow_ai
 		s["host"] = host ? host : null
 		s["players"] = list()
+		s["stationtime"] = worldtime2text()
 		var/n = 0
 		var/admins = 0
 
