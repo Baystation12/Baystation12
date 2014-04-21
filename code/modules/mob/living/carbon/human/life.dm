@@ -287,6 +287,8 @@
 					adjustToxLoss(-(rads))
 					updatehealth()
 					return
+				if(flags & IS_SYNTHETIC)
+					return
 
 				var/damage = 0
 				switch(radiation)
@@ -1256,6 +1258,11 @@
 
 		if(!client)	return 0
 
+
+		if(hud_updateflag)
+			handle_hud_list()
+
+
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
@@ -1429,6 +1436,7 @@
 			else if(!seer)
 				see_in_dark = species.darksight
 				see_invisible = SEE_INVISIBLE_LIVING
+
 
 			if(healths)
 				if (analgesic)
