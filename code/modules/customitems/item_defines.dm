@@ -612,7 +612,7 @@
 
 /obj/item/clothing/under/fluff/milo_hachert //Field Dress Uniform - Milo Hachert - Commissar_Drew
 	name = "field dress uniform"
-	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacket’s shoulder bar."
+	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacketï¿½s shoulder bar."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "milohachert"
 	item_state = "milohachert"
@@ -999,4 +999,4 @@
 
 /obj/item/weapon/fluff/farwadoll/attack_self(mob/user as mob)
 	user.visible_message("<span class='notice'>[user] hugs [src]! How cute! </span>", \
-						 "<span class='notice'>You hug [src]. Dawwww... </span>", \
+						 "<span class='notice'>You hug [src]. Dawwww... </span>", \)
