@@ -23,7 +23,7 @@
 
 /mob/living/carbon/human
 	var/oxygen_alert = 0
-	var/toxins_alert = 0
+	var/phoron_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
 	var/prev_gender = null // Debug for plural genders
@@ -340,13 +340,13 @@
 						var/datum/gas_mixture/filtered = new
 
 						filtered.copy_from(breath)
-						filtered.toxins *= G.gas_filter_strength
+						filtered.phoron *= G.gas_filter_strength
 						for(var/datum/gas/gas in filtered.trace_gases)
 							gas.moles *= G.gas_filter_strength
 						filtered.update_values()
 						loc.assume_air(filtered)
 
-						breath.toxins *= 1 - G.gas_filter_strength
+						breath.phoron *= 1 - G.gas_filter_strength
 						for(var/datum/gas/gas in breath.trace_gases)
 							gas.moles *= 1 - G.gas_filter_strength
 						breath.update_values()
@@ -435,7 +435,7 @@
 		var/safe_oxygen_min = 16 // Minimum safe partial pressure of O2, in kPa
 		//var/safe_oxygen_max = 140 // Maximum safe partial pressure of O2, in kPa (Not used for now)
 		var/safe_co2_max = 10 // Yes it's an arbitrary value who cares?
-		var/safe_toxins_max = 0.005
+		var/safe_phoron_max = 0.005
 		var/SA_para_min = 1
 		var/SA_sleep_min = 5
 		var/oxygen_used = 0
@@ -445,8 +445,8 @@
 
 		//Partial pressure of the O2 in our breath
 		var/O2_pp = (breath.oxygen/breath.total_moles())*breath_pressure
-		// Same, but for the toxins
-		var/Toxins_pp = (breath.toxins/breath.total_moles())*breath_pressure
+		// Same, but for the phoron
+		var/Toxins_pp = (breath.phoron/breath.total_moles())*breath_pressure
 		// And CO2, lets say a PP of more than 10 will be bad (It's a little less really, but eh, being passed out all round aint no fun)
 		var/CO2_pp = (breath.carbon_dioxide/breath.total_moles())*breath_pressure // Tweaking to fit the hacky bullshit I've done with atmo -- TLE
 		//var/CO2_pp = (breath.carbon_dioxide/breath.total_moles())*0.5 // The default pressure value
@@ -510,18 +510,18 @@
 		else
 			co2overloadtime = 0
 
-		if(Toxins_pp > safe_toxins_max) // Too much toxins
-			var/ratio = (breath.toxins/safe_toxins_max) * 10
-			//adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))	//Limit amount of damage toxin exposure can do per second
+		if(Toxins_pp > safe_phoron_max) // Too much phoron
+			var/ratio = (breath.phoron/safe_phoron_max) * 10
+			//adjustToxLoss(Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))	//Limit amount of damage toxin exposure can do per second
 			if(reagents)
-				reagents.add_reagent("plasma", Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
-			toxins_alert = max(toxins_alert, 1)
+				reagents.add_reagent("phoron", Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
+			phoron_alert = max(phoron_alert, 1)
 		else if(O2_pp > vox_oxygen_max && species.name == "Vox") //Oxygen is toxic to vox.
 			var/ratio = (breath.oxygen/vox_oxygen_max) * 1000
-			adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
-			toxins_alert = max(toxins_alert, 1)
+			adjustToxLoss(Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
+			phoron_alert = max(phoron_alert, 1)
 		else
-			toxins_alert = 0
+			phoron_alert = 0
 
 		if(breath.trace_gases.len)	// If there's some other shit in the air lets deal with it here.
 			for(var/datum/gas/sleeping_agent/SA in breath.trace_gases)
@@ -582,7 +582,7 @@
 			else
 				loc_temp = environment.temperature
 
-			if(abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PLASMA_VISIBLE)
+			if(abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.phoron < MOLES_PHORON_VISIBLE)
 				return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
@@ -663,7 +663,7 @@
 			else
 				pressure_alert = -1
 
-		if(environment.toxins > MOLES_PLASMA_VISIBLE)
+		if(environment.phoron > MOLES_PHORON_VISIBLE)
 			pl_effects()
 		return
 
@@ -892,12 +892,12 @@
 				alien = 2
 			reagents.metabolize(src,alien)
 
-		var/total_plasmaloss = 0
+		var/total_phoronloss = 0
 		for(var/obj/item/I in src)
 			if(I.contaminated)
-				total_plasmaloss += vsc.plc.CONTAMINATION_LOSS
+				total_phoronloss += vsc.plc.CONTAMINATION_LOSS
 		if(status_flags & GODMODE)	return 0	//godmode
-		adjustToxLoss(total_plasmaloss)
+		adjustToxLoss(total_phoronloss)
 
 		if(species.flags & REQUIRE_LIGHT)
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
@@ -1349,7 +1349,7 @@
 //				if(resting || lying || sleeping)		rest.icon_state = "rest1"
 //				else									rest.icon_state = "rest0"
 			if(toxin)
-				if(hal_screwyhud == 4 || toxins_alert)	toxin.icon_state = "tox1"
+				if(hal_screwyhud == 4 || phoron_alert)	toxin.icon_state = "tox1"
 				else									toxin.icon_state = "tox0"
 			if(oxygen)
 				if(hal_screwyhud == 3 || oxygen_alert)	oxygen.icon_state = "oxy1"

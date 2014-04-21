@@ -3,8 +3,8 @@
 Making Bombs with ZAS:
 Make burny fire with lots of burning
 Draw off 5000K gas from burny fire
-Separate gas into oxygen and plasma components
-Obtain plasma and oxygen tanks filled up about 50-75% with normal-temp gas
+Separate gas into oxygen and phoron components
+Obtain phoron and oxygen tanks filled up about 50-75% with normal-temp gas
 Fill rest with super hot gas from separated canisters, they should be about 125C now.
 Attach to transfer valve and open. BOOM.
 
@@ -25,7 +25,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	if(locate(/obj/fire) in src)
 		return 1
 	var/datum/gas_mixture/air_contents = return_air()
-	if(!air_contents || exposed_temperature < PLASMA_MINIMUM_BURN_TEMPERATURE)
+	if(!air_contents || exposed_temperature < PHORON_MINIMUM_BURN_TEMPERATURE)
 		return 0
 
 	var/igniting = 0
@@ -77,8 +77,8 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 	//the amount of moles might get to low for some functions to catch them and thus result in wonky behaviour
 	if(air_contents.oxygen < 0.1)
 		air_contents.oxygen = 0
-	if(air_contents.toxins < 0.1)
-		air_contents.toxins = 0
+	if(air_contents.phoron < 0.1)
+		air_contents.phoron = 0
 	if(fuel)
 		if(fuel.moles < 0.1)
 			air_contents.trace_gases.Remove(fuel)
@@ -139,7 +139,7 @@ turf/simulated/hotspot_expose(exposed_temperature, exposed_volume, soh)
 			//Ensure flow temperature is higher than minimum fire temperatures.
 				//this creates some energy ex nihilo but is necessary to get a fire started
 				//lets just pretend this energy comes from the ignition source and dont mention this again
-			//flow.temperature = max(PLASMA_MINIMUM_BURN_TEMPERATURE+0.1,flow.temperature)
+			//flow.temperature = max(PHORON_MINIMUM_BURN_TEMPERATURE+0.1,flow.temperature)
 
 			//burn baby burn!
 
@@ -188,11 +188,11 @@ turf/simulated/apply_fire_protection()
 datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, force_burn)
 	var/value = 0
 
-	if((temperature > PLASMA_MINIMUM_BURN_TEMPERATURE || force_burn) && check_recombustability(liquid))
+	if((temperature > PHORON_MINIMUM_BURN_TEMPERATURE || force_burn) && check_recombustability(liquid))
 		var/total_fuel = 0
 		var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
 
-		total_fuel += toxins
+		total_fuel += phoron
 
 		if(fuel)
 		//Volatile Fuel
@@ -227,9 +227,9 @@ datum/gas_mixture/proc/zburn(obj/effect/decal/cleanable/liquid_fuel/liquid, forc
 		//remove and add gasses as calculated
 		oxygen -= min(oxygen, total_oxygen * used_reactants_ratio )
 
-		toxins -= min(toxins, (toxins * used_fuel_ratio * used_reactants_ratio ) * 3)
-		if(toxins < 0)
-			toxins = 0
+		phoron -= min(phoron, (phoron * used_fuel_ratio * used_reactants_ratio ) * 3)
+		if(phoron < 0)
+			phoron = 0
 
 		carbon_dioxide += max(2 * total_fuel, 0)
 
@@ -254,10 +254,10 @@ datum/gas_mixture/proc/check_recombustability(obj/effect/decal/cleanable/liquid_
 
 	var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
 
-	if(oxygen && (toxins || fuel || liquid))
+	if(oxygen && (phoron || fuel || liquid))
 		if(liquid)
 			return 1
-		if(toxins >= 0.1)
+		if(phoron >= 0.1)
 			return 1
 		if(fuel && fuel.moles >= 0.1)
 			return 1
@@ -269,10 +269,10 @@ datum/gas_mixture/proc/check_combustability(obj/effect/decal/cleanable/liquid_fu
 
 	var/datum/gas/volatile_fuel/fuel = locate() in trace_gases
 
-	if(oxygen && (toxins || fuel || liquid))
+	if(oxygen && (phoron || fuel || liquid))
 		if(liquid)
 			return 1
-		if (toxins >= 0.1)
+		if (phoron >= 0.1)
 			return 1
 		if(fuel && fuel.moles >= 0.1)
 			return 1
@@ -288,7 +288,7 @@ datum/gas_mixture/proc/calculate_firelevel(obj/effect/decal/cleanable/liquid_fue
 
 	if(check_recombustability(liquid))
 
-		total_fuel += toxins
+		total_fuel += phoron
 
 		if(liquid)
 			total_fuel += liquid.amount

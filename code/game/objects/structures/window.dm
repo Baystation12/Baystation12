@@ -154,7 +154,7 @@
 	attack_generic(user, rand(10, 15))
 
 
-/obj/structure/window/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
 
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
@@ -368,29 +368,29 @@
 	icon_state = "window"
 	basestate = "window"
 
-/obj/structure/window/plasmabasic
-	name = "plasma window"
-	desc = "A plasma-glass alloy window. It looks insanely tough to break. It appears it's also insanely tough to burn through."
-	basestate = "plasmawindow"
-	icon_state = "plasmawindow"
-	shardtype = /obj/item/weapon/shard/plasma
+/obj/structure/window/phoronbasic
+	name = "phoron window"
+	desc = "A phoron-glass alloy window. It looks insanely tough to break. It appears it's also insanely tough to burn through."
+	basestate = "phoronwindow"
+	icon_state = "phoronwindow"
+	shardtype = /obj/item/weapon/shard/phoron
 	health = 120
 
-/obj/structure/window/plasmabasic/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/structure/window/phoronbasic/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > T0C + 32000)
 		hit(round(exposed_volume / 1000), 0)
 	..()
 
-/obj/structure/window/plasmareinforced
-	name = "reinforced plasma window"
-	desc = "A plasma-glass alloy window, with rods supporting it. It looks hopelessly tough to break. It also looks completely fireproof, considering how basic plasma windows are insanely fireproof."
-	basestate = "plasmarwindow"
-	icon_state = "plasmarwindow"
-	shardtype = /obj/item/weapon/shard/plasma
+/obj/structure/window/phoronreinforced
+	name = "reinforced phoron window"
+	desc = "A phoron-glass alloy window, with rods supporting it. It looks hopelessly tough to break. It also looks completely fireproof, considering how basic phoron windows are insanely fireproof."
+	basestate = "phoronrwindow"
+	icon_state = "phoronrwindow"
+	shardtype = /obj/item/weapon/shard/phoron
 	reinf = 1
 	health = 160
 
-/obj/structure/window/plasmareinforced/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/obj/structure/window/phoronreinforced/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return
 
 /obj/structure/window/reinforced

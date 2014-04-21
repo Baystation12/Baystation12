@@ -2,7 +2,7 @@
 #define ORE_PROC_SILVER 2
 #define ORE_PROC_DIAMOND 4
 #define ORE_PROC_GLASS 8
-#define ORE_PROC_PLASMA 16
+#define ORE_PROC_PHORON 16
 #define ORE_PROC_URANIUM 32
 #define ORE_PROC_IRON 64
 #define ORE_PROC_CLOWN 128
@@ -39,7 +39,7 @@
 
 	var/dat = "<b>Smelter control console</b><br><br>"
 	//iron
-	if(machine.ore_iron || machine.ore_glass || machine.ore_plasma || machine.ore_uranium || machine.ore_gold || machine.ore_silver || machine.ore_diamond || machine.ore_clown || machine.ore_adamantine)
+	if(machine.ore_iron || machine.ore_glass || machine.ore_phoron || machine.ore_uranium || machine.ore_gold || machine.ore_silver || machine.ore_diamond || machine.ore_clown || machine.ore_adamantine)
 		if(machine.ore_iron)
 			if (machine.selected & ORE_PROC_IRON)
 				dat += text("<A href='?src=\ref[src];sel_iron=no'><font color='green'>Smelting</font></A> ")
@@ -59,15 +59,15 @@
 		else
 			machine.selected &= ~ORE_PROC_GLASS
 
-		//plasma
-		if(machine.ore_plasma)
-			if (machine.selected & ORE_PROC_PLASMA)
-				dat += text("<A href='?src=\ref[src];sel_plasma=no'><font color='green'>Smelting</font></A> ")
+		//phoron
+		if(machine.ore_phoron)
+			if (machine.selected & ORE_PROC_PHORON)
+				dat += text("<A href='?src=\ref[src];sel_phoron=no'><font color='green'>Smelting</font></A> ")
 			else
-				dat += text("<A href='?src=\ref[src];sel_plasma=yes'><font color='red'>Not smelting</font></A> ")
-			dat += text("Plasma: [machine.ore_plasma]<br>")
+				dat += text("<A href='?src=\ref[src];sel_phoron=yes'><font color='red'>Not smelting</font></A> ")
+			dat += text("Phoron: [machine.ore_phoron]<br>")
 		else
-			machine.selected &= ~ORE_PROC_PLASMA
+			machine.selected &= ~ORE_PROC_PHORON
 
 		//uranium
 		if(machine.ore_uranium)
@@ -148,11 +148,11 @@
 			machine.selected |= ORE_PROC_GLASS
 		else
 			machine.selected &= ~ORE_PROC_GLASS
-	if(href_list["sel_plasma"])
-		if (href_list["sel_plasma"] == "yes")
-			machine.selected |= ORE_PROC_PLASMA
+	if(href_list["sel_phoron"])
+		if (href_list["sel_phoron"] == "yes")
+			machine.selected |= ORE_PROC_PHORON
 		else
-			machine.selected &= ~ORE_PROC_PLASMA
+			machine.selected &= ~ORE_PROC_PHORON
 	if(href_list["sel_uranium"])
 		if (href_list["sel_uranium"] == "yes")
 			machine.selected |= ORE_PROC_URANIUM
@@ -204,7 +204,7 @@
 	var/ore_silver = 0;
 	var/ore_diamond = 0;
 	var/ore_glass = 0;
-	var/ore_plasma = 0;
+	var/ore_phoron = 0;
 	var/ore_uranium = 0;
 	var/ore_iron = 0;
 	var/ore_clown = 0;
@@ -280,10 +280,10 @@
 					else
 						on = 0
 					continue
-				if (selected == ORE_PROC_PLASMA)
-					if (ore_plasma > 0)
-						ore_plasma--;
-						new /obj/item/stack/sheet/mineral/plasma(output.loc)
+				if (selected == ORE_PROC_PHORON)
+					if (ore_phoron > 0)
+						ore_phoron--;
+						new /obj/item/stack/sheet/mineral/phoron(output.loc)
 					else
 						on = 0
 					continue
@@ -301,10 +301,10 @@
 					else
 						on = 0
 					continue
-				if (selected == ORE_PROC_IRON + ORE_PROC_PLASMA)
-					if (ore_iron > 0 && ore_plasma > 0)
+				if (selected == ORE_PROC_IRON + ORE_PROC_PHORON)
+					if (ore_iron > 0 && ore_phoron > 0)
 						ore_iron--;
-						ore_plasma--;
+						ore_phoron--;
 						new /obj/item/stack/sheet/plasteel(output.loc)
 					else
 						on = 0
@@ -317,7 +317,7 @@
 						on = 0
 					continue
 			/*
-				if (selected == ORE_PROC_GLASS + ORE_PROC_PLASMA)
+				if (selected == ORE_PROC_GLASS + ORE_PROC_PHORON)
 					if (ore_glass > 0 && ore_plasma > 0)
 						ore_glass--;
 						ore_plasma--;
@@ -325,7 +325,7 @@
 					else
 						on = 0
 					continue
-				if (selected == ORE_PROC_GLASS + ORE_PROC_IRON + ORE_PROC_PLASMA)
+				if (selected == ORE_PROC_GLASS + ORE_PROC_IRON + ORE_PROC_PHORON)
 					if (ore_glass > 0 && ore_plasma > 0 && ore_iron > 0)
 						ore_glass--;
 						ore_iron--;
@@ -345,10 +345,10 @@
 					else
 						on = 0
 					continue
-				if (selected == ORE_PROC_SILVER + ORE_PROC_PLASMA)
-					if (ore_silver >= 1 && ore_plasma >= 3)
+				if (selected == ORE_PROC_SILVER + ORE_PROC_PHORON)
+					if (ore_silver >= 1 && ore_phoron >= 3)
 						ore_silver -= 1
-						ore_plasma -= 3
+						ore_phoron -= 3
 						new /obj/item/stack/sheet/mineral/mythril(output.loc)
 					else
 						on = 0
@@ -375,8 +375,8 @@
 				if (selected & ORE_PROC_URANIUM)
 					if (ore_uranium <= 0)
 						b = 0
-				if (selected & ORE_PROC_PLASMA)
-					if (ore_plasma <= 0)
+				if (selected & ORE_PROC_PHORON)
+					if (ore_phoron <= 0)
 						b = 0
 				if (selected & ORE_PROC_IRON)
 					if (ore_iron <= 0)
@@ -397,8 +397,8 @@
 						ore_diamond--
 					if (selected & ORE_PROC_URANIUM)
 						ore_uranium--
-					if (selected & ORE_PROC_PLASMA)
-						ore_plasma--
+					if (selected & ORE_PROC_PHORON)
+						ore_phoron--
 					if (selected & ORE_PROC_IRON)
 						ore_iron--
 					if (selected & ORE_PROC_CLOWN)
@@ -430,8 +430,8 @@
 					O.loc = null
 					//del(O)
 					continue
-				if (istype(O,/obj/item/weapon/ore/plasma))
-					ore_plasma++
+				if (istype(O,/obj/item/weapon/ore/phoron))
+					ore_phoron++
 					O.loc = null
 					//del(O)
 					continue

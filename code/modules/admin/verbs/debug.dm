@@ -144,7 +144,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/t = ""
 	t+= "Nitrogen : [env.nitrogen]\n"
 	t+= "Oxygen : [env.oxygen]\n"
-	t+= "Plasma : [env.toxins]\n"
+	t+= "Phoron : [env.phoron]\n"
 	t+= "CO2: [env.carbon_dioxide]\n"
 
 	usr.show_message(t, 1)
@@ -955,11 +955,11 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	for(var/obj/machinery/power/rad_collector/Rad in world)
 		if(Rad.anchored)
 			if(!Rad.P)
-				var/obj/item/weapon/tank/plasma/Plasma = new/obj/item/weapon/tank/plasma(Rad)
-				Plasma.air_contents.toxins = 70
+				var/obj/item/weapon/tank/phoron/Phoron = new/obj/item/weapon/tank/phoron(Rad)
+				Phoron.air_contents.phoron = 70
 				Rad.drainratio = 0
-				Rad.P = Plasma
-				Plasma.loc = Rad
+				Rad.P = Phoron
+				Phoron.loc = Rad
 
 			if(!Rad.active)
 				Rad.toggle_power()

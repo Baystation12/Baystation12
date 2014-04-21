@@ -23,9 +23,9 @@
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
 
 	//Interaction
-	var/response_help   = "You try to help"
-	var/response_disarm = "You try to disarm"
-	var/response_harm   = "You try to hurt"
+	var/response_help   = "tries to help"
+	var/response_disarm = "tries to disarm"
+	var/response_harm   = "tries to hurt"
 	var/harm_intent_damage = 3
 
 	//Temperature effect
@@ -34,7 +34,7 @@
 	var/heat_damage_per_tick = 3	//amount of damage applied if animal's body temperature is higher than maxbodytemp
 	var/cold_damage_per_tick = 2	//same as heat_damage_per_tick, only if the bodytemperature it's lower than minbodytemp
 
-	//Atmos effect - Yes, you can make creatures that require plasma or co2 to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
+	//Atmos effect - Yes, you can make creatures that require phoron or co2 to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/min_oxy = 5
 	var/max_oxy = 0					//Leaving something at 0 means it's off - has no maximum
 	var/min_tox = 0
@@ -154,7 +154,7 @@
 		if(istype(T,/turf/simulated))
 			var/turf/simulated/ST = T
 			if(ST.air)
-				var/tox = ST.air.toxins
+				var/tox = ST.air.phoron
 				var/oxy = ST.air.oxygen
 				var/n2  = ST.air.nitrogen
 				var/co2 = ST.air.carbon_dioxide

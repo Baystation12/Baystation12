@@ -16,7 +16,7 @@
  */
 /obj/item/weapon/wrench
 	name = "wrench"
-	desc = "A wrench with common uses. Can be found in your hand."
+	desc = "A wrench with many common uses. Can be usually found in your hand."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrench"
 	flags = FPRINT | TABLEPASS| CONDUCT
@@ -411,7 +411,7 @@
 	w_class = 3.0
 	m_amt = 70
 	g_amt = 120
-	origin_tech = "engineering=4;plasma=3"
+	origin_tech = "engineering=4;phoron=3"
 	var/last_gen = 0
 
 
@@ -428,7 +428,7 @@
 
 /obj/item/weapon/crowbar
 	name = "crowbar"
-	desc = "Used to hit floors"
+	desc = "Used to remove floors and to pry open doors."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "crowbar"
 	flags = FPRINT | TABLEPASS| CONDUCT

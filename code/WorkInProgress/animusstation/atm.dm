@@ -49,7 +49,7 @@ log transactions
 				A.loc = src
 				inserted += 50
 				return
-			if(istype(A,/obj/item/weapon/coin/plasma))
+			if(istype(A,/obj/item/weapon/coin/phoron))
 				cashes += A
 				user.drop_item()
 				A.loc = src
