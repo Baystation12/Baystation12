@@ -788,7 +788,7 @@
 	product_slogans = "Dress for success!;Suited and booted!;It's show time!;Why leave style up to fate? Use AutoDrobe!"
 	vend_delay = 15
 	vend_reply = "Thank you for using AutoDrobe!"
-	products = list(/obj/item/clothing/suit/chickensuit = 1,/obj/item/clothing/head/chicken = 1, /obj/item/clothing/head/corgi = 1, /obj/item/clothing/suit/corgisuit = 1, /obj/item/clothing/under/gladiator = 1,
+	products = list(/obj/item/clothing/mask/fawkes = 1, /obj/item/clothing/suit/chickensuit = 1,/obj/item/clothing/head/chicken = 1, /obj/item/clothing/head/corgi = 1, /obj/item/clothing/suit/corgisuit = 1, /obj/item/clothing/under/gladiator = 1,
 					/obj/item/clothing/head/helmet/gladiator = 1,/obj/item/clothing/under/gimmick/rank/captain/suit = 1,/obj/item/clothing/head/flatcap = 1,
 					/obj/item/clothing/glasses/gglasses = 1,/obj/item/clothing/shoes/jackboots = 1,
 					/obj/item/clothing/under/schoolgirl = 1,/obj/item/clothing/head/kitty = 1,/obj/item/clothing/under/blackskirt = 1,/obj/item/clothing/head/beret = 1,

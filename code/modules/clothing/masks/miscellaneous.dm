@@ -129,3 +129,11 @@
 		return
 	if(user.real_name == "[originalname][temporaryname]" || user.real_name == "A Horse With No Name") //if it's somehow changed while the mask is on it doesn't revert
 		user.real_name = originalname
+
+/obj/item/clothing/mask/fawkes
+	name = "Guy Fawkes mask"
+	desc = "A mask designed to help you remember a specific date."
+	icon_state = "fawkes"
+	item_state = "fawkes"
+	flags_inv = HIDEFACE
+	w_class = 2
