@@ -168,7 +168,7 @@
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
 	if(!mutations.len) return
-	if(ishuman(src) && (istype(src:gloves, /obj/item/clothing/gloves/yellow/power)) && a_intent == "hurt")
+	if(ishuman(src) && (istype(src:gloves, /obj/item/clothing/gloves/yellow/power)) && a_intent == "harm")
 		PowerGlove(A)
 	if((M_LASER in mutations) && a_intent == "harm")
 		LaserEyes(A) // moved into a proc below
