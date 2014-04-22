@@ -4,14 +4,14 @@
 	icon_state = "rig0-taj-helmet"
 	item_state = "rig0-taj-helmet"
 	item_color = "taj-helmet"
-	species_restricted = list("Tajaran")
+	species_restricted = list("Tajaran","Tajaran (Black)","Tajaran (Orange)","Tajaran (Siamese)","Tajaran (Brown)","Tajaran (Blue)")
 
 /obj/item/clothing/suit/space/rig/tajara
 	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding. This one doesn't look like it was made for humans."
 	icon_state = "rig-taj"
 	item_state = "rig-taj"
 	item_color = "rig-taj"
-	species_restricted = list("Tajaran")
+	species_restricted = list("Tajaran","Tajaran (Black)","Tajaran (Orange)","Tajaran (Siamese)","Tajaran (Brown)","Tajaran (Blue)")
 
 //Skrell space gear. Sleek like a wetsuit.
 
@@ -209,7 +209,7 @@
 		if (!is_equipped())
 			user << "You will have to put on the [src] before you can do that."
 			return
-		
+
 		flags |= NOSLIP
 		magpulse = 1
 		canremove = 0	//kinda hard to take off magclaws when you are gripping them tightly.

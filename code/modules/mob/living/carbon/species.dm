@@ -119,6 +119,36 @@
 
 	flesh_color = "#AFA59E"
 
+/datum/species/tajaran/black
+	name = "Tajaran (Black)"
+	icobase = 'icons/mob/human_races/r_tajaranblack.dmi'
+	deform = 'icons/mob/human_races/r_tajaranblackdef.dmi'
+	tail = "tajtailblack"
+
+/datum/species/tajaran/orange
+	name = "Tajaran (Orange)"
+	icobase = 'icons/mob/human_races/r_tajaranorange.dmi'
+	deform = 'icons/mob/human_races/r_tajaranorangedef.dmi'
+	tail = "tajtailorange"
+
+/datum/species/tajaran/siamese
+	name = "Tajaran (Siamese)"
+	icobase = 'icons/mob/human_races/r_tajaransiamese.dmi'
+	deform = 'icons/mob/human_races/r_tajaransiamesedef.dmi'
+	tail = "tajtailsiam"
+
+/datum/species/tajaran/blue
+	name = "Tajaran (Blue)"
+	icobase = 'icons/mob/human_races/r_tajaranblue.dmi'
+	deform = 'icons/mob/human_races/r_tajaranbluedef.dmi'
+	tail = "tajtailblue"
+
+/datum/species/tajaran/tabby
+	name = "Tajaran (Brown)"
+	icobase = 'icons/mob/human_races/r_tajaranbrown.dmi'
+	deform = 'icons/mob/human_races/r_tajaranbrowndef.dmi'
+	tail = "tajtailtabby"
+
 /datum/species/skrell
 	name = "Skrell"
 	icobase = 'icons/mob/human_races/r_skrell.dmi'
