@@ -183,3 +183,64 @@
 	icon_state="bsposter37"
 	name = "Fancier Borg"
 	desc = "A poster depicting a cyborg using the service module. 'Fancy Borg' is written on it. This is even fancier than the first poster."
+
+/datum/poster/bay_38
+	icon_state="bsposter38"
+	name = "Toaster Love"
+	desc = "This is a poster of a toaster containing two slices of bread. The word LOVE is written in big pink letters underneath."
+
+/datum/poster/bay_39
+	icon_state="bsposter39"
+	name = "Responsible medbay habits, No #91"
+	desc = "A safety poster with a chemist holding a vial. \"Always wear safety gear while handling dangerous chemicals, even if it concerns only small amounts.\""
+
+/datum/poster/bay_40
+	icon_state="bsposter40"
+	name = "Agreeable work environment"
+	desc = "This poster depicts a young woman in a stylish dress. \"Try to aim for a pleasant atmosphere in the workspace. A friendly word can do more than forms in triplicate.\""
+
+/datum/poster/bay_41
+	icon_state="bsposter41"
+	name = "Professional work environment"
+	desc = "A safety poster featuring a green haired woman in a shimmering blue dress. \"As an Internal Affairs Agent, your job is to create a fair and agreeable work environment for the crewmembers, as discreetly and professionally as possible.\""
+
+/datum/poster/bay_42
+	icon_state="bsposter42"
+	name = "Engineering pinup"
+	desc = "This is pin-up poster. A half-naked girl with white hair, toned muscles and stunning blue eyes looks back at you from the poster. Her welding helmet, tattoos and grey jumpsuit hanging around her waist gives a bit of a rugged feel."
+
+/datum/poster/bay_43
+	icon_state="bsposter43"
+	name = "Responsible medbay habits, No #3"
+	desc = "A safety poster with a purple-haired surgeon. She looks a bit cross. \"Let the surgeons do their work. NEVER replace or remove a surgery tool from where the surgeon put it.\""
+
+/datum/poster/bay_44
+	icon_state="bsposter44"
+	name = "Time for a drink?"
+	desc = "This poster depicts a friendly-looking Tajara holding a tray of drinks."
+
+/datum/poster/bay_45
+	icon_state="bsposter45"
+	name = "Responsible engineering habits, No #1"
+	desc = "A safety poster featuring a blue haired engineer. \"When repairing a machine or construction, always aim for long-term solutions.\""
+
+/datum/poster/bay_46
+	icon_state="bsposter46"
+	name = "Inspirational lawyer"
+	desc = "An inspirational poster depicting a Skrellian lawyer. He seems to be shouting something, while pointing fiercely to the right."
+
+/datum/poster/bay_47
+	icon_state="bsposter47"
+	name = "Security pinup"
+	desc = "This is a pin-up poster. A dark skinned white haired girl poses in the sunlight wearing a tank top with her stomach exposed. The text on the poster states \"M, Succubus of Security.\" and a lipstick mark stains the top right corner, as if kissed by the model herself."
+
+ /datum/poster/bay_48
+	icon_state="bsposter48"
+	name = "Borg pinup?"
+	desc = "This is a.. pin-up poster? It is a diagram on an old model of cyborg with a note scribbled in marker on the bottom, on the top there is a large XO written in red marker."
+
+ /datum/poster/bay_49
+	icon_state="bsposter49"
+	name = "Engineering recruitment"
+	desc = "This is a poster showing an engineer relaxing by a computer, the text states \"Living the life! Join Engineering today!\""
+
