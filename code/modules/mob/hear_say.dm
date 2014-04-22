@@ -42,7 +42,7 @@
 		else
 			src << "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear them."
 	else
-		src << "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track]<span class='[style]'>[verb], <span class='message'>\"[message]\"</span></span></span>"
+		src << "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='[style]'>\"[message]\"</span></span></span>"
 
 
 
@@ -110,11 +110,12 @@
 		if(prob(20))
 			src << "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>"
 	else if(track)
-		src << "[part_a][track][part_b]<span class=\"[style]\"> [verb], \"[message]\"</span></span></span>"
+		src << "[part_a][track][part_b][verb], <span class=\"[style]\">\"[message]\"</span></span></span>"
 	else
-		src << "[part_a][speaker_name][part_b]<span class=\"[style]\"> [verb], \"[message]\"</span></span></span>"
+		src << "[part_a][speaker_name][part_b][verb], <span class=\"[style]\">\"[message]\"</span></span></span>"
 
 /mob/proc/hear_sleep(var/message)
+	var/heard = ""
 	if(prob(15))
 		var/list/punctuation = list(",", "!", ".", ";", "?")
 		var/list/messages = text2list(message, " ")
@@ -126,12 +127,7 @@
 			heardword = copytext(heardword,1,lentext(heardword))
 		var/heard = "<span class = 'game_say'>...You hear something about...[heardword]</span>"
 
-		src << heard
 	else
 		var/heard = "<span class = 'game_say'>...<i>You almost hear someone talking</i>...</span>"
 
-		src << heard
-		
-
-
-	
+	src << heard
