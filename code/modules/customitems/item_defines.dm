@@ -612,7 +612,7 @@
 
 /obj/item/clothing/under/fluff/milo_hachert //Field Dress Uniform - Milo Hachert - Commissar_Drew
 	name = "field dress uniform"
-	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacket’s shoulder bar."
+	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacketï¿½s shoulder bar."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "milohachert"
 	item_state = "milohachert"
@@ -976,3 +976,27 @@
 	item_state = "sakura_hokkaido_kimono"
 	item_color = "sakura_hokkaido_kimono"
 
+///////////////////////////// Astronovus - Harold's Cane ////////////////////////////
+
+/obj/item/weapon/cane/fluff/harold
+	name = "Harold's Cane"
+	desc = "A cane with a wooden handle and a plastic frame capable of folding itself to make it more storable."
+	w_class = 1.0
+	icon = 'icons/obj/custom_items.dmi'
+	item_state = "foldcane"
+	icon_state = "foldcane"
+
+
+//////////////////////////// Footman - Farwa  Plush Doll //////////////////////////////////
+
+/obj/item/weapon/fluff/farwadoll
+	name = "Farwa plush doll"
+	desc = "A Farwa plush doll. It's soft and comforting!"
+	w_class = 1.0
+	icon = 'icons/obj/custom_items.dmi'
+	item_state = "farwaplush"
+	icon_state = "farwaplush"
+
+/obj/item/weapon/fluff/farwadoll/attack_self(mob/user as mob)
+	user.visible_message("<span class='notice'>[user] hugs [src]! How cute! </span>", \
+						 "<span class='notice'>You hug [src]. Dawwww... </span>")
