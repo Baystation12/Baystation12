@@ -29,7 +29,7 @@
 	{
 		ui = get_open_ui(user, src, ui_key)
 	}
-	if (ui)
+	if (!isnull(ui))
 		// The UI is already open so push the data to it
 		ui.push_data(data)
 		return ui
@@ -77,7 +77,6 @@
 				ui.process(1)
 				update_count++
 	return update_count
-
 
  /**
   * Update /nanoui uis belonging to user
@@ -190,7 +189,7 @@
   * @return nothing
   */
 /datum/nanomanager/proc/user_transferred(var/mob/oldMob, var/mob/newMob)
-	if (isnull(oldMob.open_uis) || !istype(oldMob.open_uis, /list) || open_uis.len == 0)
+	if (!oldMob || isnull(oldMob.open_uis) || !istype(oldMob.open_uis, /list) || open_uis.len == 0)
 		return 0 // has no open uis
 
 	if (isnull(newMob.open_uis) || !istype(newMob.open_uis, /list))
