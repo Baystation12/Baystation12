@@ -608,6 +608,14 @@
 	item_state = "mantle-unathi"
 	body_parts_covered = UPPER_TORSO
 
+/obj/item/clothing/suit/storage/hazardvest/fluff/ARVest //Vinceluk Ashley Rifler
+	name = "custom utility vest"
+	desc = "Utility vest used for storage. This one was modified a bit and looks worn out in places. 'Ash' has been sewn into its right shoulder pad, and on the left one there is a dark blue logo in the shape of wings."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "ARVest"
+	item_state = "ARVest"
+	item_color = "ARVest"
+
 //////////// Uniforms ////////////
 
 /obj/item/clothing/under/fluff/milo_hachert //Field Dress Uniform - Milo Hachert - Commissar_Drew
