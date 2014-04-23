@@ -63,10 +63,9 @@ var/global/list/possibleEvents = list()
 //		possibleEvents[/datum/event/money_hacker] = max(min(25, player_list.len) * 4, 200)
 
 	possibleEvents[/datum/event/carp_migration] = 50 + 25 * active_with_role["Engineer"]
-	possibleEvents[/datum/event/spider_infestation] = 50 + 25 * active_with_role["Security"]
 	possibleEvents[/datum/event/dust] = 50 + 50 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/dust/meaty] = 50 + 50 * active_with_role["Engineer"]
-	possibleEvents[/datum/event/brand_intelligence] = 50 + 25 * active_with_role["Engineer"]
+
 
 	possibleEvents[/datum/event/rogue_drone] = 25 + 25 * active_with_role["Engineer"] + 25 * active_with_role["Security"]
 	possibleEvents[/datum/event/infestation] = 50 + 25 * active_with_role["Janitor"]
@@ -82,11 +81,15 @@ var/global/list/possibleEvents = list()
 	if(minutes_passed >= 30) // Give engineers time to set up engine
 		possibleEvents[/datum/event/meteor_wave] = 10 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/meteor_shower] = 40 * active_with_role["Engineer"]
-		possibleEvents[/datum/event/blob] = 20 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/anomaly/anomaly_pyro] = 100 + 60 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/anomaly/anomaly_vortex] = 50 + 25 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/anomaly/anomaly_bluespace] = 50 + 25 * active_with_role["Engineer"]
 		possibleEvents[/datum/event/anomaly/anomaly_flux] = 50 + 50 * active_with_role["Engineer"]
+
+	if(minutes_passed >= 60) //Delay for potentially destructive events.
+		possibleEvents[/datum/event/blob] = 20 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/brand_intelligence] = 50 + 25 * active_with_role["Engineer"]
+		possibleEvents[/datum/event/spider_infestation] = 50 + 25 * active_with_role["Security"]
 
 	possibleEvents[/datum/event/viral_infection] = 25 + active_with_role["Medical"] * 50
 	if(active_with_role["Medical"] > 0)
