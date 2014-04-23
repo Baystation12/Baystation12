@@ -115,19 +115,6 @@
 				m_type = 2
 				if(miming)
 					m_type = 1
-		if ("flap")
-			if (!src.restrained())
-				message = "<B>[src]</B> flaps his wings."
-				m_type = 2
-				if(miming)
-					m_type = 1
-
-		if ("aflap")
-			if (!src.restrained())
-				message = "<B>[src]</B> flaps his wings ANGRILY!"
-				m_type = 2
-				if(miming)
-					m_type = 1
 
 		if ("drool")
 			message = "<B>[src]</B> drools."
@@ -344,20 +331,6 @@
 				message = "<B>[src]</B> moans!"
 				m_type = 2
 
-		if ("johnny")
-			var/M
-			if (param)
-				M = param
-			if (!M)
-				param = null
-			else
-				if(miming)
-					message = "<B>[src]</B> takes a drag from a cigarette and blows \"[M]\" out in smoke."
-					m_type = 1
-				else
-					message = "<B>[src]</B> says, \"[M], please. He had a family.\" [src.name] takes a drag from a cigarette and blows his name out in smoke."
-					m_type = 2
-
 		if ("point")
 			if (!src.restrained())
 				var/mob/M = null
@@ -512,20 +485,6 @@
 						message = "<B>[src]</B> shakes hands with [M]."
 					else
 						message = "<B>[src]</B> holds out \his hand to [M]."
-
-		if("dap")
-			m_type = 1
-			if (!src.restrained())
-				var/M = null
-				if (param)
-					for (var/mob/A in view(1, null))
-						if (param == A.name)
-							M = A
-							break
-				if (M)
-					message = "<B>[src]</B> gives daps to [M]."
-				else
-					message = "<B>[src]</B> sadly can't find anybody to give daps to, and daps \himself. Shameful."
 
 		if ("scream")
 			if (miming)
