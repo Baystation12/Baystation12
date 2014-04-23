@@ -63,15 +63,6 @@
 			if (!src.restrained())
 				message = "<B>[src]</B> claps."
 				m_type = 2
-		if ("flap")
-			if (!src.restrained())
-				message = "<B>[src]</B> flaps his wings."
-				m_type = 2
-
-		if ("aflap")
-			if (!src.restrained())
-				message = "<B>[src]</B> flaps his wings ANGRILY!"
-				m_type = 2
 
 		if ("twitch")
 			message = "<B>[src]</B> twitches violently."
@@ -206,7 +197,7 @@
 				src << "You are not security."
 
 		if ("help")
-			src << "salute, bow-(none)/mob, clap, flap, aflap, twitch, twitch_s, nod, deathgasp, glare-(none)/mob, stare-(none)/mob, look, beep, ping, \nbuzz, law, halt"
+			src << "salute, bow-(none)/mob, clap, twitch, twitch_s, nod, deathgasp, glare-(none)/mob, stare-(none)/mob, look, beep, ping, \nbuzz, law, halt"
 		else
 			src << "\blue Unusable emote '[act]'. Say *help for a list."
 
