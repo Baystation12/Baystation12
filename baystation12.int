@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 504.1234
+WINDOW: code\modules\customitems\item_defines.dm;code\modules\customitems\item_spawning.dm;icons\mob\uniform.dmi;icons\mob\head.dmi;icons\obj\clothing\hats.dmi;icons\obj\custom_items.dmi
+DIR: code code\modules code\modules\customitems icons icons\mob icons\obj icons\obj\clothing 
+FILE: icons\obj\custom_items.dmi
+LAST_COMPILE_TIME: 1398280014
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
