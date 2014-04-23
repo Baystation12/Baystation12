@@ -628,6 +628,379 @@
 		icon_state = "vox_shortquills"
 		species_allowed = list("Vox")
 
+/datum/sprite_accessory/hair
+
+// black tajaran shit goes here
+
+	tajb_ears
+		name = "Tajaran Ears (black)"
+		icon_state = "ears_plainb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_straight
+		name = "Tajara Straight (black)"
+		icon_state = "hair_straightb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_clean
+		name = "Tajara Clean (black)"
+		icon_state = "hair_cleanb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_bangs
+		name = "Tajara Bangs (black)"
+		icon_state = "hair_bangsb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_braid
+		name = "Tajara Braid (black)"
+		icon_state = "hair_tbraidb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_shaggy
+		name = "Tajara Shaggy (black)"
+		icon_state = "hair_shaggyb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_mohawk
+		name = "Tajaran Mohawk (black)"
+		icon_state = "hair_mohawkb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_plait
+		name = "Tajara Plait (black)"
+		icon_state = "hair_plaitb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_long
+		name = "Tajara Long (black)"
+		icon_state = "hair_longb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_rattail
+		name = "Tajara Rat Tail (black)"
+		icon_state = "hair_rattailb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_spiky
+		name = "Tajara Spiky (black)"
+		icon_state = "hair_tajspikyb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_ears_messy
+		name = "Tajara Messy (black)"
+		icon_state = "hair_messyb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+//orange tajaran shit goes here
+
+	tajo_ears
+		name = "Tajaran Ears (orange)"
+		icon_state = "ears_plaino"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_clean
+		name = "Tajara Clean (orange)"
+		icon_state = "hair_cleano"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_bangs
+		name = "Tajara Bangs (orange)"
+		icon_state = "hair_bangso"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_braid
+		name = "Tajara Braid (orange)"
+		icon_state = "hair_tbraido"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_shaggy
+		name = "Tajara Shaggy (orange)"
+		icon_state = "hair_shaggyo"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_mohawk
+		name = "Tajaran Mohawk (orange)"
+		icon_state = "hair_mohawko"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_plait
+		name = "Tajara Plait (orange)"
+		icon_state = "hair_plaito"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_straight
+		name = "Tajara Straight (orange)"
+		icon_state = "hair_straighto"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_long
+		name = "Tajara Long (orange)"
+		icon_state = "hair_longo"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_rattail
+		name = "Tajara Rat Tail (orange)"
+		icon_state = "hair_rattailo"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_spiky
+		name = "Tajara Spiky (orange)"
+		icon_state = "hair_tajspikyo"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_ears_messy
+		name = "Tajara Messy (orange)"
+		icon_state = "hair_messyo"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+//siamese tajaran shit goes here
+
+	tajs_ears
+		name = "Tajaran Ears (light)"
+		icon_state = "ears_plains"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_clean
+		name = "Tajara Clean (light)"
+		icon_state = "hair_cleans"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_bangs
+		name = "Tajara Bangs (light)"
+		icon_state = "hair_bangss"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_braid
+		name = "Tajara Braid (light)"
+		icon_state = "hair_tbraids"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_shaggy
+		name = "Tajara Shaggy (light)"
+		icon_state = "hair_shaggys"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_mohawk
+		name = "Tajaran Mohawk (light)"
+		icon_state = "hair_mohawks"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_plait
+		name = "Tajara Plait (light)"
+		icon_state = "hair_plaits"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_straight
+		name = "Tajara Straight (light)"
+		icon_state = "hair_straights"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_long
+		name = "Tajara Long (light)"
+		icon_state = "hair_longs"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_rattail
+		name = "Tajara Rat Tail (light)"
+		icon_state = "hair_rattails"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_spiky
+		name = "Tajara Spiky (light)"
+		icon_state = "hair_tajspikys"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_ears_messy
+		name = "Tajara Messy (light)"
+		icon_state = "hair_messys"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+//russian blue tajaran shit goes here
+
+	tajl_ears
+		name = "Tajaran Ears (blue)"
+		icon_state = "ears_plainl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_clean
+		name = "Tajara Clean (blue)"
+		icon_state = "hair_cleanl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_bangs
+		name = "Tajara Bangs (blue)"
+		icon_state = "hair_bangsl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_braid
+		name = "Tajara Braid (blue)"
+		icon_state = "hair_tbraidl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_shaggy
+		name = "Tajara Shaggy (blue)"
+		icon_state = "hair_shaggyl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_mohawk
+		name = "Tajaran Mohawk (blue)"
+		icon_state = "hair_mohawkl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_plait
+		name = "Tajara Plait (blue)"
+		icon_state = "hair_plaitl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_straight
+		name = "Tajara Straight (blue)"
+		icon_state = "hair_straightl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_long
+		name = "Tajara Long (blue)"
+		icon_state = "hair_long"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_rattail
+		name = "Tajara Rat Tail (blue)"
+		icon_state = "hair_rattaill"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_spiky
+		name = "Tajara Spiky (blue)"
+		icon_state = "hair_tajspikyl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_ears_messy
+		name = "Tajara Messy (blue)"
+		icon_state = "hair_messyl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+//brown tabby tajaran shit goes here
+
+	tajt_ears
+		name = "Tajaran Ears (brown)"
+		icon_state = "ears_plaint"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_clean
+		name = "Tajara Clean (brown)"
+		icon_state = "hair_cleant"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_bangs
+		name = "Tajara Bangs (brown)"
+		icon_state = "hair_bangst"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_braid
+		name = "Tajara Braid (brown)"
+		icon_state = "hair_tbraidt"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_shaggy
+		name = "Tajara Shaggy (brown)"
+		icon_state = "hair_shaggyt"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_mohawk
+		name = "Tajaran Mohawk (brown)"
+		icon_state = "hair_mohawkt"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_plait
+		name = "Tajara Plait (brown)"
+		icon_state = "hair_plaitt"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_straight
+		name = "Tajara Straight (brown)"
+		icon_state = "hair_straightt"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_long
+		name = "Tajara Long (brown)"
+		icon_state = "hair_longt"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_rattail
+		name = "Tajara Rat Tail (brown)"
+		icon_state = "hair_rattailt"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_spiky
+		name = "Tajara Spiky (brown)"
+		icon_state = "hair_tajspikyt"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_ears_messy
+		name = "Tajara Messy (brown)"
+		icon_state = "hair_messyt"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+
 /datum/sprite_accessory/facial_hair
 
 	taj_sideburns
@@ -665,6 +1038,201 @@
 		icon_state = "facial_smallstache"
 		species_allowed = list("Tajaran")
 		do_colouration = 0
+
+/datum/sprite_accessory/facial_hair
+
+//black tajaran shit goes here
+
+	tajb_sideburns
+		name = "Tajara Sideburns (black)"
+		icon_state = "facial_muttonb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_mutton
+		name = "Tajara Mutton (black)"
+		icon_state = "facial_muttonb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_pencilstache
+		name = "Tajara Pencilstache (black)"
+		icon_state = "facial_pencilstacheb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_moustache
+		name = "Tajara Moustache (black)"
+		icon_state = "facial_moustacheb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_goatee
+		name = "Tajara Goatee (black)"
+		icon_state = "facial_goateeb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+	tajb_smallstache
+		name = "Tajara Smallsatche (black)"
+		icon_state = "facial_smallstacheb"
+		species_allowed = list("Tajaran (Black)")
+		do_colouration = 0
+
+//orange tajaran shit goes here
+
+	tajo_sideburns
+		name = "Tajara Sideburns (orange)"
+		icon_state = "facial_muttono"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_mutton
+		name = "Tajara Mutton (orange)"
+		icon_state = "facial_muttono"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_pencilstache
+		name = "Tajara Pencilstache (orange)"
+		icon_state = "facial_pencilstacheo"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_moustache
+		name = "Tajara Moustache (orange)"
+		icon_state = "facial_moustacheo"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_goatee
+		name = "Tajara Goatee (orange)"
+		icon_state = "facial_goateeo"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+	tajo_smallstache
+		name = "Tajara Smallsatche (orange)"
+		icon_state = "facial_smallstacheo"
+		species_allowed = list("Tajaran (Orange)")
+		do_colouration = 0
+
+//siamese tajaran shit goes here
+
+	tajs_sideburns
+		name = "Tajara Sideburns (light)"
+		icon_state = "facial_muttons"
+		species_allowed = list("Tajaran")
+		do_colouration = 0
+
+	tajs_mutton
+		name = "Tajara Mutton (light)"
+		icon_state = "facial_muttons"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_pencilstache
+		name = "Tajara Pencilstache (light)"
+		icon_state = "facial_pencilstaches"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_moustache
+		name = "Tajara Moustache (light)"
+		icon_state = "facial_moustaches"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_goatee
+		name = "Tajara Goatee (light)"
+		icon_state = "facial_goatees"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+	tajs_smallstache
+		name = "Tajara Smallsatches (light)"
+		icon_state = "facial_smallstache"
+		species_allowed = list("Tajaran (Siamese)")
+		do_colouration = 0
+
+//russian blue tajaran shit goes here
+
+	tajl_sideburns
+		name = "Tajara Sideburns (blue)"
+		icon_state = "facial_muttonl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_mutton
+		name = "Tajara Mutton (blue)"
+		icon_state = "facial_muttonl"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_pencilstache
+		name = "Tajara Pencilstache (blue)"
+		icon_state = "facial_pencilstachel"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_moustache
+		name = "Tajara Moustache (blue)"
+		icon_state = "facial_moustachel"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_goatee
+		name = "Tajara Goatee (blue)"
+		icon_state = "facial_goateel"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+	tajl_smallstache
+		name = "Tajara Smallsatche (blue)"
+		icon_state = "facial_smallstachel"
+		species_allowed = list("Tajaran (Blue)")
+		do_colouration = 0
+
+//brown tabby tajaran shit goes here
+
+	tajt_sideburns
+		name = "Tajara Sideburns (brown)"
+		icon_state = "facial_muttont"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_mutton
+		name = "Tajara Mutton (brown)"
+		icon_state = "facial_muttont"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_pencilstache
+		name = "Tajara Pencilstache (brown)"
+		icon_state = "facial_pencilstachet"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_moustache
+		name = "Tajara Moustache (brown)"
+		icon_state = "facial_moustachet"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_goatee
+		name = "Tajara Goatee (brown)"
+		icon_state = "facial_goateet"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+	tajt_smallstache
+		name = "Tajara Smallsatche (brown)"
+		icon_state = "facial_smallstachet"
+		species_allowed = list("Tajaran (Brown)")
+		do_colouration = 0
+
+
+
 
 //skin styles - WIP
 //going to have to re-integrate this with surgery
