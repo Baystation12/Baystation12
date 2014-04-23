@@ -125,9 +125,9 @@
 			heardword = copytext(heardword,2)
 		if(copytext(heardword,-1) in punctuation)
 			heardword = copytext(heardword,1,lentext(heardword))
-		var/heard = "<span class = 'game_say'>...You hear something about...[heardword]</span>"
+		heard = "<span class = 'game_say'>...You hear something about...[heardword]</span>"
 
 	else
-		var/heard = "<span class = 'game_say'>...<i>You almost hear someone talking</i>...</span>"
+		heard = "<span class = 'game_say'>...<i>You almost hear someone talking</i>...</span>"
 
 	src << heard
