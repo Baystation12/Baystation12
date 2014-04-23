@@ -571,6 +571,12 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "brucehachert"
 
+/obj/item/clothing/head/fluff/kaine_kalim_2 //Kocoa: Kaine Kalim
+    name = "Formal Medical Cap"
+    desc = "An unusually sterile and folded cap. It seems to bare the Nanotrasen logo."
+    icon = 'icons/obj/custom_items.dmi'
+    icon_state = "formalcmohat"
+
 //////////// Suits ////////////
 
 /obj/item/clothing/suit/storage/labcoat/fluff/aeneas_rinil //Robotics Labcoat - Aeneas Rinil [APPR]
@@ -689,6 +695,14 @@
 	item_state = "solara_dress"
 	item_color = "solara_dress"
 
+/obj/item/clothing/under/fluff/kaine_kalim_1 // Kocoa: Kaine Kalim
+     name = "Formal Medical Uniform"
+     desc = "An unusually sterile and pressed uniform. It seems to have a string of vials crossing the chest."
+     icon = 'icons/obj/custom_items.dmi'
+     icon_state = "formalmedicaluniform"
+     item_state = "formalmedicaluniform"
+     item_color = "formalmedicaluniform"
+
 /////// NT-SID Suit //Zuhayr: Jane Doe
 
 /obj/item/clothing/under/fluff/jane_sidsuit
@@ -702,6 +716,7 @@
 	has_sensor = 2
 	sensor_mode = 3
 	flags = FPRINT | TABLEPASS
+
 
 //Suit roll-down toggle.
 /obj/item/clothing/under/fluff/jane_sidsuit/verb/toggle_zipper()
