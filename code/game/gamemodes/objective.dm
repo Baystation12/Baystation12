@@ -358,7 +358,7 @@ datum/objective/escape
 		if(!location)
 			return 0
 
-		if(istype(location, /turf/simulated/shuttle/floor4)) // Fails tratiors if they are in the shuttle brig -- Polymorph
+		if(istype(location, /turf/simulated/shuttle/floor4)) // Fails traitors if they are in the shuttle brig -- Polymorph
 			if(istype(owner.current, /mob/living/carbon))
 				var/mob/living/carbon/C = owner.current
 				if (!C.handcuffed)
