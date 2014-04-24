@@ -570,6 +570,12 @@
 	desc = "A worn-looking hat. It is slightly faded in color."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "brucehachert"
+	
+/obj/item/clothing/head/beret/fluff/marine_beret	//Von2531: Jack Washington
+	name = "colonial marine beret"
+	desc = "A well-worn navy blue beret. The insignia of the Martian Colonial Marine Corps is affixed to the front."
+	icon_state = "officerberet"
+	flags = FPRINT | TABLEPASS
 
 //////////// Suits ////////////
 
