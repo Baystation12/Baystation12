@@ -144,7 +144,8 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		<br>
 		<h3><a href='byond://?src=\ref[src];option=submit;new=1;candidate=\ref[candidate]'>Submit Personality</a></h3><br>
 		<a href='byond://?src=\ref[src];option=save;new=1;candidate=\ref[candidate]'>Save Personality</a><br>
-		<a href='byond://?src=\ref[src];option=load;new=1;candidate=\ref[candidate]'>Load Personality</a><br>"}
+		<a href='byond://?src=\ref[src];option=load;new=1;candidate=\ref[candidate]'>Load Personality</a><br>
+		"}
 
 		M << browse(dat, "window=paiRecruit")
 
