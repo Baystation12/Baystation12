@@ -25,7 +25,7 @@
 	if (!in_range(src, user))
 		return
 	user.set_machine(src)
-	var/dat = "<TT><B>Personal AI Device</B><BR>"
+	var/dat = "<h2>Personal AI Device</h2>"
 	if(pai && (!pai.master_dna || !pai.master))
 		dat += "<a href='byond://?src=\ref[src];setdna=1'>Imprint Master DNA</a><br>"
 	if(pai)
@@ -34,7 +34,7 @@
 		dat += "Additional directives: <br>[pai.pai_laws]<br>"
 		dat += "<a href='byond://?src=\ref[src];setlaws=1'>Configure Directives</a><br>"
 		dat += "<br>"
-		dat += "<h3>Device Settings</h3><br>"
+		dat += "<h2>Device Settings</h2>"
 		if(radio)
 			dat += "<b>Radio Uplink</b><br>"
 			dat += "Transmit: <A href='byond://?src=\ref[src];wires=4'>[(radio.wires & 4) ? "Enabled" : "Disabled"]</A><br>"

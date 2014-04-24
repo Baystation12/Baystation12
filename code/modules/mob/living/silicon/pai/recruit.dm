@@ -138,12 +138,13 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		<tr class=\"d0\"><td>OOC Comments:</td><td>[candidate.comments]</td></tr>
 		<tr class=\"d1\"><td><a href='byond://?src=\ref[src];option=ooc;new=1;candidate=\ref[candidate]'>\[Edit\]</a></td><td>Anything you'd like to address specifically to the player reading this in an OOC manner. \"I prefer more serious RP.\", \"I'm still learning the interface!\", etc. Feel free to leave this blank if you want.</td></tr>
 
-		</table>"
+		</table>
 
 		<br>
 		<h3><a href='byond://?src=\ref[src];option=submit;new=1;candidate=\ref[candidate]'>Submit Personality</a></h3><br>
 		<a href='byond://?src=\ref[src];option=save;new=1;candidate=\ref[candidate]'>Save Personality</a><br>
-		<a href='byond://?src=\ref[src];option=load;new=1;candidate=\ref[candidate]'>Load Personality</a><br>"}
+		<a href='byond://?src=\ref[src];option=load;new=1;candidate=\ref[candidate]'>Load Personality</a><br>
+		"}
 
 		M << browse(dat, "window=paiRecruit")
 
