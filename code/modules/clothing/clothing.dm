@@ -404,8 +404,7 @@ BLIND     // can't see anything
 
 	if (!istype(W.hold))
 		return
-
-	W.hold.loc = usr
-	W.hold.attack_hand(usr)
+	
+	W.hold.open(usr)
 
 

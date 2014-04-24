@@ -204,10 +204,6 @@
 	name = "storage"
 	var/master_item		//item it belongs to
 
-/obj/item/weapon/storage/pockets/close(mob/user as mob)
-	..()
-	loc = master_item
-
 /obj/item/clothing/tie/storage/webbing
 	name = "webbing"
 	desc = "Strudy mess of synthcotton belts and buckles, ready to share your burden."

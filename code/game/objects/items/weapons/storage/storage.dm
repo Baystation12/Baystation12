@@ -25,16 +25,12 @@
 
 /obj/item/weapon/storage/MouseDrop(obj/over_object as obj)
 	if (ishuman(usr) || ismonkey(usr)) //so monkeys can take off their backpacks -- Urist
-		var/mob/M = usr
 
 		if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
 			return
 
-		if(over_object == M && Adjacent(M)) // this must come before the screen objects only block
-			orient2hud(M)          // dunno why it wasn't before
-			if(M.s_active)
-				M.s_active.close(M)
-			show_to(M)
+		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
+			src.open(usr)
 			return
 
 		if (!( istype(over_object, /obj/screen) ))
@@ -42,20 +38,15 @@
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
 			return
 		playsound(src.loc, "rustle", 50, 1, -5)
-		if (!( M.restrained() ) && !( M.stat ))
+		if (!( usr.restrained() ) && !( usr.stat ))
 			switch(over_object.name)
 				if("r_hand")
-					M.u_equip(src)
-					M.put_in_r_hand(src)
+					usr.u_equip(src)
+					usr.put_in_r_hand(src)
 				if("l_hand")
-					M.u_equip(src)
-					M.put_in_l_hand(src)
+					usr.u_equip(src)
+					usr.put_in_l_hand(src)
 			src.add_fingerprint(usr)
-			return
-		if(over_object == usr && in_range(src, usr) || usr.contents.Find(src))
-			if (usr.s_active)
-				usr.s_active.close(usr)
-			src.show_to(usr)
 			return
 	return
 
@@ -100,6 +91,12 @@
 	if(user.s_active == src)
 		user.s_active = null
 	return
+
+/obj/item/weapon/storage/proc/open(mob/user as mob)
+	orient2hud(user)
+	if (user.s_active)
+		user.s_active.close(user)
+	show_to(user)
 
 /obj/item/weapon/storage/proc/close(mob/user as mob)
 
@@ -350,12 +347,9 @@
 			H.put_in_hands(src)
 			H.r_store = null
 			return
-
-	src.orient2hud(user)
+	
 	if (src.loc == user)
-		if (user.s_active)
-			user.s_active.close(user)
-		src.show_to(user)
+		src.open(user)
 	else
 		..()
 		for(var/mob/M in range(1))
