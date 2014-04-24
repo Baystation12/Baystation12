@@ -144,7 +144,6 @@
 		UpdateDamageIcon()
 		hud_updateflag |= 1 << HEALTH_HUD
 	updatehealth()
-	speech_problem_flag = 1
 
 
 //Heal MANY external organs, in random order
@@ -166,7 +165,6 @@
 		parts -= picked
 	updatehealth()
 	hud_updateflag |= 1 << HEALTH_HUD
-	speech_problem_flag = 1
 	if(update)	UpdateDamageIcon()
 
 // damage MANY external organs, in random order
