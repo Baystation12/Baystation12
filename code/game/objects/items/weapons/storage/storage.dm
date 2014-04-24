@@ -93,6 +93,8 @@
 	return
 
 /obj/item/weapon/storage/proc/open(mob/user as mob)
+	playsound(src.loc, "rustle", 50, 1, -5)
+	
 	orient2hud(user)
 	if (user.s_active)
 		user.s_active.close(user)
@@ -335,10 +337,9 @@
 	return
 
 /obj/item/weapon/storage/attack_hand(mob/user as mob)
-	playsound(src.loc, "rustle", 50, 1, -5)
-
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
+		playsound(src.loc, "rustle", 50, 1, -5)
 		if(H.l_store == src && !H.get_active_hand())	//Prevents opening if it's in a pocket.
 			H.put_in_hands(src)
 			H.l_store = null
@@ -352,6 +353,7 @@
 		src.open(user)
 	else
 		..()
+		playsound(src.loc, "rustle", 50, 1, -5)
 		for(var/mob/M in range(1))
 			if (M.s_active == src)
 				src.close(M)
