@@ -33,8 +33,10 @@
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.display_name], but cannot!"
 			return
-	var/response = alert(user, "Do you take regular paper, or Carbon copy paper?", "Paper type request", "Regular", "Carbon-Copy", "Cancel")
-	if (response == "Canel")
+	var/response = ""
+	if(!papers.len > 0)
+		response = alert(user, "Do you take regular paper, or Carbon copy paper?", "Paper type request", "Regular", "Carbon-Copy", "Cancel")
+	if (response != "Regular" | "Carbon-Copy")
 		add_fingerprint(user)
 		return
 	if(amount >= 1)
