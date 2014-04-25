@@ -206,9 +206,13 @@
 		user << "You relax your deathgrip on the flooring."
 	else
 		//make sure these can only be used when equipped.
-		if (!is_equipped())
+		if(!ishuman(user))
+			return
+		var/mob/living/carbon/human/H = user
+		if (H.shoes != src)
 			user << "You will have to put on the [src] before you can do that."
 			return
+		
 		
 		flags |= NOSLIP
 		magpulse = 1
