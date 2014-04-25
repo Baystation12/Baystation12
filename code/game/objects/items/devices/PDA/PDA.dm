@@ -556,7 +556,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			mode = 1
 		if("2")//Messenger
 			mode = 2
-		if("21")//Read messeges
+		if("21")//Read messages
 			mode = 21
 		if("3")//Atmos scan
 			mode = 3

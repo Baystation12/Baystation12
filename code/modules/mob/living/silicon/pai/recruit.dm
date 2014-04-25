@@ -165,7 +165,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 				<style type="text/css">
 
 				p.top {
-					background-color: #AAAAAA; color: black;
+					background-color: color: black;
 				}
 
 				tr.d0 td {

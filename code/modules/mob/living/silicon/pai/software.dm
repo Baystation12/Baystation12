@@ -33,7 +33,7 @@
 	if(temp)
 		left_part = temp
 	else if(src.stat == 2)						// Show some flavor text if the pAI is dead
-		left_part = "<b><font color=red>√àRr√ñR √êa‚Ä†√Ñ √á√ñRr√ö√æ‚Ä†√åo√±</font></b>"
+		left_part = "<b><font color=red>»Rr÷R –aÜƒ «÷Rr⁄˛ÜÃoÒ</font></b>"	//This file has to be save as ANSI or this will not display correctly
 		right_part = "<pre>Program index hash not found</pre>"
 
 	else
@@ -75,19 +75,19 @@
 			<html>
 			<head>
 				<style type=\"text/css\">
-					body { background-image:url(\"http://puu.sh/8lja7/6edc979417.png\"); background-color:#333333; background-repeat:no-repeat; margin-top:8px; }
+					body { background-image:url(\"painew.png\"); background-color:#333333; background-repeat:no-repeat; margin-top:14px; margin-left:2px; }
 
 					#header { text-align:center; color:white; font-size: 30px; height: 37px; width: 660px; letter-spacing: 2px; z-index: 4; font-family:\"Courier New\"; font-weight:bold; }
 					#content { position: absolute; left: 10px; height: 320px; width: 640px; z-index: 0; font-family: \"Verdana\"; font-size:13px; }
 					p { font-size:13px; }
 
-					#leftmenu {color: #CCCCCC; padding:5px; background-color:#333333; width: 400px; height: 385px; overflow: auto; min-height: 330px; position: absolute; z-index: 0; }
+					#leftmenu {color: #CCCCCC; padding:12px; width: 399px; height: 381px; overflow: auto; min-height: 330px; position: absolute; z-index: 0; }
 					#leftmenu a:link { color: #CCCCCC; }
 					#leftmenu a:hover { color: #CC3333; }
 					#leftmenu a:visited { color: #CCCCCC; }
 					#leftmenu a:active { color: #CCCCCC; }
 
-					#rightmenu {color: #CCCCCC; padding:5px; background-color:#333333; width: 210px; height: 385px; overflow: auto; min-height: 330px; left: 420px; position: absolute; z-index: 0; }
+					#rightmenu {color: #CCCCCC; padding:12px; width: 209px; height: 381px; overflow: auto; min-height: 330px; left: 420px; position: absolute; z-index: 0; }
 					#rightmenu a:link { color: #CCCCCC; }
 					#rightmenu a:hover { color: #CC3333; }
 					#rightmenu a:visited { color: #CCCCCC; }
@@ -108,7 +108,7 @@
 				</div>
 			</body>
 			</html>"}
-	usr << browse(dat, "window=pai;size=680x480;border=0;can_close=1;can_resize=1;can_minimize=1;titlebar=1")
+	usr << browse(dat, "window=pai;size=680x470;border=0;can_close=1;can_resize=1;can_minimize=1;titlebar=1")
 	onclose(usr, "pai")
 	temp = null
 	return
@@ -215,7 +215,7 @@
 					pda.silent = !pda.silent
 				else if(href_list["target"])
 					if(silence_time)
-						return alert("Communications circuits remain unitialized.")
+						return alert("Communications circuits remain uninitialized.")
 
 					var/target = locate(href_list["target"])
 					pda.create_message(src, target)
@@ -291,7 +291,7 @@
 	dat += "<b>Basic</b> <br>"
 	for(var/s in src.software)
 		if(s == "digital messenger")
-			dat += "<a href='byond://?src=\ref[src];software=pdamessage;sub=0'>Digital Messenger</a> <br>"
+			dat += "<a href='byond://?src=\ref[src];software=pdamessage;sub=0'>Digital Messenger</a> [(src.secHUD) ? "<font color=#55FF55>ï</font>" : "<font color=#FF5555>ï</font>"] <br>"
 		if(s == "crew manifest")
 			dat += "<a href='byond://?src=\ref[src];software=manifest;sub=0'>Crew Manifest</a> <br>"
 		if(s == "medical records")
@@ -311,12 +311,12 @@
 			dat += "<a href='byond://?src=\ref[src];software=atmosensor;sub=0'>Atmospheric Sensor</a> <br>"
 		if(s == "heartbeat sensor")
 			dat += "<a href='byond://?src=\ref[src];software=[s]'>Heartbeat Sensor</a> <br>"
-		if(s == "security HUD")
-			dat += "<a href='byond://?src=\ref[src];software=securityhud;sub=0'>Facial Recognition Suite</a> <br>"
-		if(s == "medical HUD")
-			dat += "<a href='byond://?src=\ref[src];software=medicalhud;sub=0'>Medical Analysis Suite</a> <br>"
-		if(s == "universal translator")
-			dat += "<a href='byond://?src=\ref[src];software=translator;sub=0'>Universal Translator</a>[(src.universal_speak) ? "<font color=#55FF55>‚Ä¢</font>" : "<font color=#FF5555>‚Ä¢</font>"] <br>"
+		if(s == "security HUD")	//This file has to be save as ANSI or this will not display correctly
+			dat += "<a href='byond://?src=\ref[src];software=securityhud;sub=0'>Facial Recognition Suite</a> [(src.secHUD) ? "<font color=#55FF55>ï</font>" : "<font color=#FF5555>ï</font>"] <br>"
+		if(s == "medical HUD")	//This file has to be save as ANSI or this will not display correctly
+			dat += "<a href='byond://?src=\ref[src];software=medicalhud;sub=0'>Medical Analysis Suite</a> [(src.medHUD) ? "<font color=#55FF55>ï</font>" : "<font color=#FF5555>ï</font>"] <br>"
+		if(s == "universal translator")	//This file has to be save as ANSI or this will not display correctly
+			dat += "<a href='byond://?src=\ref[src];software=translator;sub=0'>Universal Translator</a> [(src.universal_speak) ? "<font color=#55FF55>ï</font>" : "<font color=#FF5555>ï</font>"] <br>"
 		if(s == "projection array")
 			dat += "<a href='byond://?src=\ref[src];software=projectionarray;sub=0'>Projection Array</a> <br>"
 		if(s == "camera jack")
