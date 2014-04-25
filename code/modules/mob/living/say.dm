@@ -88,6 +88,7 @@ var/list/department_radio_keys = list(
 	var/list/listening = list()
 	if(T)
 
+		var/list/objects = list()
 		var/list/hear = hear(message_range, T)
 		var/list/hearturfs = list()
 
@@ -96,21 +97,22 @@ var/list/department_radio_keys = list(
 				var/mob/M = I
 				listening += M
 				hearturfs += M.locs[1]
-				for(var/obj/item/device/radio/R in contents)
-					spawn(0)
-						R.hear_talk(src, message, verb, speaking)
+				for(var/obj/O in M.contents)
+					objects |= O
 			else if(istype(I, /obj/))
 				var/obj/O = I
 				hearturfs += O.locs[1]
-				if(istype(O, /obj/item/device/radio))
-					spawn(0)
-						O.hear_talk(src, message, verb, speaking)
+				objects |= O
+		
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
 				listening |= M
 				continue
 			if(M.locs[1] in hearturfs)
 				listening |= M
+
+		for(var/obj/O in objects)
+			O.hear_talk(src, message, verb, speaking)	
 
 	var/speech_bubble_test = say_test(message)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
