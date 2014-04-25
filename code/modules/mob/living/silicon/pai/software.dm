@@ -66,6 +66,8 @@
 				left_part = src.softwareCamera()
 			if("signaller")
 				left_part = src.softwareSignal()
+			if("radio")
+				left_part = src.softwareRadio()
 
 	//usr << browse_rsc('windowbak.png')		// This has been moved to the mob's Login() proc
 
@@ -113,8 +115,6 @@
 	temp = null
 	return
 
-
-
 /mob/living/silicon/pai/Topic(href, href_list)
 	..()
 
@@ -143,7 +143,16 @@
 
 		// Configuring onboard radio
 		if("radio")
-			src.card.radio.attack_self(src)
+			if(href_list["freq"])
+				var/new_frequency = (radio.frequency + text2num(href_list["freq"]))
+				if(new_frequency < 1441 || new_frequency > 1591)
+					new_frequency = sanitize_frequency(new_frequency)
+				else
+					radio.set_frequency(new_frequency)
+			else if (href_list["talk"])
+				radio.broadcasting = text2num(href_list["talk"])
+			else if (href_list["listen"])
+				radio.listening = text2num(href_list["listen"])
 
 		if("image")
 			var/newImage = input("Select your new display image.", "Display Image", "Happy") in list("Happy", "Cat", "Extremely Happy", "Face", "Laugh", "Off", "Sad", "Angry", "What")
@@ -386,7 +395,7 @@
 	else
 		P << "[M] does not seem like \he is going to provide a DNA sample willingly."
 
-// -=-=-=-= Software =-=-=-=-=- //
+// -=-=-=-= Software =-=-=-=- //
 
 //Remote Signaller
 /mob/living/silicon/pai/proc/softwareSignal()
@@ -410,6 +419,30 @@
 	<A href='byond://?src=\ref[src];software=signaller;send=1'>Send Signal</A><BR>"}
 	return dat
 
+//Station Bounced Radio - TESTING
+/mob/living/silicon/pai/proc/softwareRadio()
+	var/dat = ""
+	dat += "<h2>Station Bounced Radio</h2><hr>"
+	if(!istype(src, /obj/item/device/radio/headset)) //Headsets don't get a mic button
+		dat += "Microphone: [radio.broadcasting ? "<A href='byond://?src=\ref[src];software=radio;talk=0'>Engaged</A>" : "<A href='byond://?src=\ref[src];software=radio;talk=1'>Disengaged</A>"]<BR>"
+	dat += {"
+		Speaker: [radio.listening ? "<A href='byond://?src=\ref[src];software=radio;listen=0'>Engaged</A>" : "<A href='byond://?src=\ref[src];software=radio;listen=1'>Disengaged</A>"]<BR>
+		Frequency:
+		<A href='byond://?src=\ref[src];software=radio;freq=-10'>-</A>
+		<A href='byond://?src=\ref[src];software=radio;freq=-2'>-</A>
+		[format_frequency(radio.frequency)]
+		<A href='byond://?src=\ref[src];software=radio;freq=2'>+</A>
+		<A href='byond://?src=\ref[src];software=radio;freq=10'>+</A><BR>
+	"}
+
+	for (var/ch_name in radio.channels)
+		dat+=radio.text_sec_channel(ch_name, radio.channels[ch_name])
+	dat+={"[radio.text_wires()]</TT></body></html>"}
+	
+//	var/left_part = dat
+	
+	return dat
+	
 // Crew Manifest
 /mob/living/silicon/pai/proc/softwareManifest()
 	var/dat = ""
@@ -431,7 +464,7 @@
 	if(src.subscreen == 1)
 		dat += "<CENTER><B>Medical Record</B></CENTER><BR>"
 		if ((istype(src.medicalActive1, /datum/data/record) && data_core.general.Find(src.medicalActive1)))
-			dat += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>",
+			dat += text("Name: []<BR>\nID: []<BR>\nSex: []<BR>\nAge: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>",
 			 src.medicalActive1.fields["name"], src.medicalActive1.fields["id"], src.medicalActive1.fields["sex"], src.medicalActive1.fields["age"], src.medicalActive1.fields["fingerprint"], src.medicalActive1.fields["p_stat"], src.medicalActive1.fields["m_stat"])
 		else
 			dat += "<pre>Requested medical record not found.</pre><BR>"
@@ -453,7 +486,7 @@
 	if(src.subscreen == 1)
 		dat += "<h3>Security Record</h3>"
 		if ((istype(src.securityActive1, /datum/data/record) && data_core.general.Find(src.securityActive1)))
-			dat += text("Name: <A href='?src=\ref[];field=name'>[]</A> ID: <A href='?src=\ref[];field=id'>[]</A><BR>\nSex: <A href='?src=\ref[];field=sex'>[]</A><BR>\nAge: <A href='?src=\ref[];field=age'>[]</A><BR>\nRank: <A href='?src=\ref[];field=rank'>[]</A><BR>\nFingerprint: <A href='?src=\ref[];field=fingerprint'>[]</A><BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", src, src.securityActive1.fields["name"], src, src.securityActive1.fields["id"], src, src.securityActive1.fields["sex"], src, src.securityActive1.fields["age"], src, src.securityActive1.fields["rank"], src, src.securityActive1.fields["fingerprint"], src.securityActive1.fields["p_stat"], src.securityActive1.fields["m_stat"])
+			dat += text("Name: <A href='?src=\ref[];field=name'>[]</A><BR>\nID: <A href='?src=\ref[];field=id'>[]</A><BR>\nSex: <A href='?src=\ref[];field=sex'>[]</A><BR>\nAge: <A href='?src=\ref[];field=age'>[]</A><BR>\nRank: <A href='?src=\ref[];field=rank'>[]</A><BR>\nFingerprint: <A href='?src=\ref[];field=fingerprint'>[]</A><BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", src, src.securityActive1.fields["name"], src, src.securityActive1.fields["id"], src, src.securityActive1.fields["sex"], src, src.securityActive1.fields["age"], src, src.securityActive1.fields["rank"], src, src.securityActive1.fields["fingerprint"], src.securityActive1.fields["p_stat"], src.securityActive1.fields["m_stat"])
 		else
 			dat += "<pre>Requested security record not found,</pre><BR>"
 		if ((istype(src.securityActive2, /datum/data/record) && data_core.security.Find(src.securityActive2)))
