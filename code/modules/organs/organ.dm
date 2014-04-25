@@ -90,7 +90,6 @@
 		else
 			E.process()
 			number_wounds += E.number_wounds
-
 			//Robotic limb malfunctions
 			var/malfunction = 0
 			if (E.status & ORGAN_ROBOT && prob(E.brute_dam + E.burn_dam))
@@ -109,20 +108,24 @@
 					I.take_damage(rand(3,5))
 
 			//Special effects for limbs.
-			if(E.name in list("l_hand","l_arm","r_hand","r_arm") && (broken||malfunction))
+			if(E.name in list("l_hand","l_arm","r_hand","r_arm"))
 				var/obj/item/c_hand		//Getting what's in this hand
+				var/hand
 				if(E.name == "l_hand" || E.name == "l_arm")
 					c_hand = l_hand
+					hand = "left hand"
 				if(E.name == "r_hand" || E.name == "r_arm")
 					c_hand = r_hand
-
+					hand = "right hand"
 				if (c_hand)
-					u_equip(c_hand)
 
 					if(broken)
-						emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : "screams in pain and"] drops what they were holding in their [E.display_name?"[E.display_name]":"[E]"]!")
+						u_equip(c_hand)
+						var/emote_scream = pick("screams in pain and", "let's out a sharp hiss and", "cries out and")
+						emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ] drops what they were holding in their [hand]!")
 					if(malfunction)
-						emote("me", 1, "drops what they were holding, their [E.display_name?"[E.display_name]":"[E]"] malfunctioning!")
+						u_equip(c_hand)
+						emote("me", 1, "drops what they were holding, their [hand] malfunctioning!")
 						var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 						spark_system.set_up(5, 0, src)
 						spark_system.attach(src)

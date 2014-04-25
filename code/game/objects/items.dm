@@ -237,6 +237,18 @@
 /obj/item/proc/equipped(var/mob/user, var/slot)
 	return
 
+//returns 1 if the item is equipped by a mob, 0 otherwise.
+//This might need some error trapping, not sure if get_equipped_items() is safe for non-human mobs.
+/obj/item/proc/is_equipped()
+	if(!ismob(loc)) 
+		return 0
+	
+	var/mob/M = loc
+	if(src in M.get_equipped_items())
+		return 1
+	else
+		return 0
+
 //the mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.
 //If you are making custom procs but would like to retain partial or complete functionality of this one, include a 'return ..()' to where you want this to happen.
 //Set disable_warning to 1 if you wish it to not give you outputs.

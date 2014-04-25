@@ -16,7 +16,7 @@
  */
 /obj/item/weapon/wrench
 	name = "wrench"
-	desc = "A wrench with common uses. Can be found in your hand."
+	desc = "A wrench with many common uses. Can be usually found in your hand."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrench"
 	flags = FPRINT | TABLEPASS| CONDUCT
@@ -357,6 +357,8 @@
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+		if(H.species.flags & IS_SYNTHETIC)
+			return
 		switch(safety)
 			if(1)
 				usr << "\red Your eyes sting a little."
@@ -428,7 +430,7 @@
 
 /obj/item/weapon/crowbar
 	name = "crowbar"
-	desc = "Used to hit floors"
+	desc = "Used to remove floors and to pry open doors."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "crowbar"
 	flags = FPRINT | TABLEPASS| CONDUCT
