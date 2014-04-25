@@ -22,6 +22,7 @@
 	var/allow_quick_gather	//Set this variable to allow the object to have the 'toggle mode' verb, which quickly collects all items from a tile.
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/foldable = null	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
+	var/use_sound = "rustle"	//sound played when used. null for no sound.
 
 /obj/item/weapon/storage/MouseDrop(obj/over_object as obj)
 	if (ishuman(usr) || ismonkey(usr)) //so monkeys can take off their backpacks -- Urist
@@ -37,7 +38,7 @@
 			return ..()
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
 			return
-		playsound(src.loc, "rustle", 50, 1, -5)
+		
 		if (!( usr.restrained() ) && !( usr.stat ))
 			switch(over_object.name)
 				if("r_hand")
@@ -93,7 +94,8 @@
 	return
 
 /obj/item/weapon/storage/proc/open(mob/user as mob)
-	playsound(src.loc, "rustle", 50, 1, -5)
+	if (src.use_sound)
+		playsound(src.loc, src.use_sound, 50, 1, -5)
 	
 	orient2hud(user)
 	if (user.s_active)
@@ -339,7 +341,6 @@
 /obj/item/weapon/storage/attack_hand(mob/user as mob)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		playsound(src.loc, "rustle", 50, 1, -5)
 		if(H.l_store == src && !H.get_active_hand())	//Prevents opening if it's in a pocket.
 			H.put_in_hands(src)
 			H.l_store = null
@@ -353,7 +354,6 @@
 		src.open(user)
 	else
 		..()
-		playsound(src.loc, "rustle", 50, 1, -5)
 		for(var/mob/M in range(1))
 			if (M.s_active == src)
 				src.close(M)
