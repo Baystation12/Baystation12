@@ -123,9 +123,8 @@ var/list/department_radio_keys = list(
 
 
 	for(var/mob/M in listening)
-		if(M.client)
-			M << speech_bubble
-			M.hear_say(message,verb,speaking,alt_name, italics, src)
+		M << speech_bubble
+		M.hear_say(message,verb,speaking,alt_name, italics, src)
 
 
 	log_say("[name]/[key] : [message]")
