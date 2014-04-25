@@ -5,7 +5,7 @@
 	icon_state = "rup"
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 
-	
+
 // creates a new object and deletes itself
 /obj/random/New()
 	..()
@@ -37,8 +37,8 @@
 					/obj/item/weapon/crowbar,\
 					/obj/item/weapon/wrench,\
 					/obj/item/device/flashlight)
-					
-					
+
+
 /obj/random/technology_scanner
 	name = "Random Scanner"
 	desc = "This is a random technology scanner."
@@ -46,10 +46,10 @@
 	icon_state = "atmos"
 	item_to_spawn()
 		return pick(prob(5);/obj/item/device/t_scanner,\
-					prob(2);/obj/item/device/radio/intercom,\
+					prob(2);/obj/item/device/radio,\
 					prob(5);/obj/item/device/analyzer)
-		
-	
+
+
 /obj/random/powercell
 	name = "Random Powercell"
 	desc = "This is a random powercell."
@@ -61,8 +61,8 @@
 					prob(40);/obj/item/weapon/cell/high,\
 					prob(9);/obj/item/weapon/cell/super,\
 					prob(1);/obj/item/weapon/cell/hyper)
-					
-					
+
+
 /obj/random/bomb_supply
 	name = "Bomb Supply"
 	desc = "This is a random bomb supply."
@@ -71,7 +71,8 @@
 	item_to_spawn()
 		return pick(/obj/item/device/assembly/igniter,\
 					/obj/item/device/assembly/prox_sensor,\
-					/obj/item/device/assembly/signaler)
+					/obj/item/device/assembly/signaler,\
+					/obj/item/device/multitool)
 
 
 /obj/random/toolbox
@@ -83,8 +84,8 @@
 		return pick(prob(3);/obj/item/weapon/storage/toolbox/mechanical,\
 					prob(2);/obj/item/weapon/storage/toolbox/electrical,\
 					prob(1);/obj/item/weapon/storage/toolbox/emergency)
-					
-					
+
+
 /obj/random/tech_supply
 	name = "Random Tech Supply"
 	desc = "This is a random piece of technology supplies."

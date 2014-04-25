@@ -2,7 +2,7 @@
 //changes: rad protection up to 100 from 20/50 respectively
 /obj/item/clothing/suit/bio_suit/anomaly
 	name = "Anomaly suit"
-	desc = "A sealed bio suit capable of insulating against exotic alien energies"
+	desc = "A sealed bio suit capable of insulating against exotic alien energies."
 	icon_state = "engspace_suit"
 	item_state = "engspace_suit"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 100)

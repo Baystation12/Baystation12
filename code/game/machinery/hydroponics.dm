@@ -783,6 +783,15 @@ obj/machinery/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
 			del(src)
 	return
 
+/obj/machinery/hydroponics/attack_tk(mob/user as mob)
+	if(harvest)
+		myseed.harvest(src)
+	else if(dead)
+		planted = 0
+		dead = 0
+		usr << text("You remove the dead plant from the [src].")
+		del(myseed)
+		updateicon()
 
 /obj/machinery/hydroponics/attack_hand(mob/user as mob)
 	if(istype(usr,/mob/living/silicon))		//How does AI know what plant is?
