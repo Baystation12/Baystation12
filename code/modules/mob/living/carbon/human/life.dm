@@ -254,6 +254,8 @@
 					adjustToxLoss(-(rads))
 					updatehealth()
 					return
+				if(species.flags & IS_SYNTHETIC)
+					return
 
 				var/damage = 0
 				switch(radiation)
@@ -999,7 +1001,7 @@
 			updatehealth()	//TODO
 			if(!in_stasis)
 				handle_organs()	//Optimized.
-				handle_blood()  
+				handle_blood()
 
 			if(health <= config.health_threshold_dead || brain_op_stage == 4.0)
 				death()
@@ -1076,7 +1078,7 @@
 				E = get_visible_implants(0)
 				if(!E.len)
 					embedded_flag = 0
-				
+
 
 			//Eyes
 			if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
@@ -1136,7 +1138,7 @@
 
 		if(hud_updateflag)
 			handle_hud_list()
-	
+
 
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
@@ -1303,7 +1305,7 @@
 			else if(!seer)
 				see_invisible = SEE_INVISIBLE_LIVING
 
-			
+
 
 			if(healths)
 				if (analgesic)
@@ -1448,7 +1450,7 @@
 					V.activate(src)
 				// activate may have deleted the virus
 				if(!V) continue
-	
+
 				// check if we're immune
 				if(V.antigen & src.antibodies)
 					V.dead = 1
