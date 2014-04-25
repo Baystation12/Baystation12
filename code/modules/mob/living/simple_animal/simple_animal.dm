@@ -455,14 +455,21 @@
 	if (targeted_by && target_locked)
 		overlays += target_locked
 
+/mob/living/simple_animal/say(var/message)
+	if(stat)
+		return
 
-/mob/living/simple_animal/say(var/message, var/datum/language/speaking= null, var/verb = "says")
+	if(copytext(message,1,2) == "*")
+		return emote(copytext(message,2))
 
 	if(stat)	
 		return
+
+	var/verb = "says"
+
 	if(speak_emote.len)
 		verb = pick(speak_emote)
 
+	message = capitalize(trim_left(message))
+
 	..(message, null, verb)
-
-
