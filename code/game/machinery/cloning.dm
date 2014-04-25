@@ -162,7 +162,7 @@
 	spawn(30)
 		src.eject_wait = 0
 
-	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src)
+	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src, R.dna.species)
 	occupant = H
 
 	if(!R.dna.real_name)	//to prevent null names
@@ -211,8 +211,6 @@
 	H.f_style = "Shaved"
 	if(R.dna.species == "Human") //no more xenos losing ears/tentacles
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
-
-	H.set_species(R.dna.species)
 
 	//for(var/datum/language/L in languages)
 	//	H.add_language(L.name)

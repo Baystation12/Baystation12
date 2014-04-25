@@ -492,7 +492,7 @@ client/proc/one_click_antag()
 
 /datum/admins/proc/create_vox_raider(obj/spawn_location, leader_chosen = 0)
 
-	var/mob/living/carbon/human/new_vox = new(spawn_location.loc)
+	var/mob/living/carbon/human/new_vox = new(spawn_location.loc, "Vox")
 
 	new_vox.gender = pick(MALE, FEMALE)
 	new_vox.h_style = "Short Vox Quills"
@@ -512,8 +512,6 @@ client/proc/one_click_antag()
 
 	new_vox.dna.ready_dna(new_vox) // Creates DNA.
 	new_vox.dna.mutantrace = "vox"
-	new_vox.set_species("Vox") // Actually makes the vox! How about that.
-	new_vox.add_language("Vox-pidgin")
 	new_vox.mind_initialize()
 	new_vox.mind.assigned_role = "MODE"
 	new_vox.mind.special_role = "Vox Raider"
