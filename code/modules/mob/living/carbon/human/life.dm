@@ -254,7 +254,7 @@
 					adjustToxLoss(-(rads))
 					updatehealth()
 					return
-				if(flags & IS_SYNTHETIC)
+				if(species.flags & IS_SYNTHETIC)
 					return
 
 				var/damage = 0

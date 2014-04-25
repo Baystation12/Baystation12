@@ -357,7 +357,7 @@
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
-		if(H.flags & IS_SYNTHETIC)
+		if(H.species.flags & IS_SYNTHETIC)
 			return
 		switch(safety)
 			if(1)
