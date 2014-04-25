@@ -36,7 +36,7 @@
 		src << "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='[style]'>\"[message]\"</span></span></span>"
 
 
-/mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/mob/speaker = null, var/hard_to_hear = 0)
+/mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
 	if(!client)
 		return
 	var/track = null
@@ -48,10 +48,16 @@
 		verb = language.speech_verb
 		style = language.colour
 
+	
+
 	if(hard_to_hear)
 		message = stars(message)
 
 	var/speaker_name = speaker.name
+
+	if(vname)
+		speaker_name = vname
+
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
 		if(H.voice)
