@@ -110,43 +110,117 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		var/dat = ""
 		dat += {"
 				<style type="text/css">
-
-				p.top {
-					background-color: #AAAAAA; color: black;
-				}
-
-				tr.d0 td {
-					background-color: #CC9999; color: black;
-				}
-				tr.d1 td {
-					background-color: #9999CC; color: black;
-				}
+					body {
+						margin-top:5px;
+						font-family:Verdana;
+						color:white;
+						font-size:13px;
+						background-image:url('uiBackground.png');
+						background-repeat:no-repeat;
+						background-color:#272727;
+					}
+					table {
+						border-collapse:collapse;
+						font-size:13px;
+					}
+					th, td {
+						border: 1px solid #333333;
+					}
+					p.top {
+						background-color: none;
+						color: white;
+					}
+					tr.d0 td {
+						background-color: #c0c0c0;
+						color: black;
+						border:0px;
+						border: 1px solid #333333;
+					}
+					tr.d0 th {
+						background-color: none;
+						color: #4477E0;
+						text-align:right;
+						vertical-align:top;
+						width:120px;
+						border:0px;
+					}
+					tr.d1 td {
+						background-color: #555555;
+						color: white;
+					}
+					td.button {
+						border: 1px solid #161616;
+						background-color: #40628a;
+					}
+					td.desc {
+						font-weight:bold;
+					}
+					a {
+						color:#4477E0;
+					}
+					a.button {
+						color:white;
+						text-decoration: none;
+					}
 				</style>
 				"}
 
-		dat += {"<p class=\"top\">Please configure your pAI personality's options. Remember, what you enter here could determine whether or not the user requesting a personality chooses you!</p>
-		<table>
-		<tr class=\"d0\"><td>Name:</td><td>[candidate.name]</td></tr>
-		<tr class=\"d1\"><td><a href='byond://?src=\ref[src];option=name;new=1;candidate=\ref[candidate]'>\[Edit\]</a></td><td>What you plan to call yourself. Suggestions: Any character name you would choose for a station character OR an AI.</td></tr>
+		dat += {"
+		<body>
+			<b><font size="3px">pAI Personality Configuration</font></b>
+			<p class="top">Please configure your pAI personality's options. Remember, what you enter here could determine whether or not the user requesting a personality chooses you!</p>
 
-		<tr class=\"d0\"><td>Description:</td><td>[candidate.description]</td></tr>
-		<tr class=\"d1\"><td><a href='byond://?src=\ref[src];option=desc;new=1;candidate=\ref[candidate]'>\[Edit\]</a></td><td>What sort of pAI you typically play; your mannerisms, your quirks, etc. This can be as sparse or as detailed as you like.</td></tr>
+			<table>
+				<tr class="d0">
+					<th rowspan="2"><a href='byond://?src=\ref[src];option=name;new=1;candidate=\ref[candidate]'>Name</a>:</th>
+					<td class="desc">[candidate.name]&nbsp;</td>
+				</tr>
+				<tr class="d1">
+					<td>What you plan to call yourself. Suggestions: Any character name you would choose for a station character OR an AI.</td>
+				</tr>
+				<tr class="d0">
+					<th rowspan="2"><a href='byond://?src=\ref[src];option=desc;new=1;candidate=\ref[candidate]'>Description</a>:</th>
+					<td class="desc">[candidate.description]&nbsp;</td>
+				</tr>
+				<tr class="d1">
+					<td>What sort of pAI you typically play; your mannerisms, your quirks, etc. This can be as sparse or as detailed as you like.</td>
+				</tr>
+				<tr class="d0">
+					<th rowspan="2"><a href='byond://?src=\ref[src];option=role;new=1;candidate=\ref[candidate]'>Preferred Role</a>:</th>
+					<td class="desc">[candidate.role]&nbsp;</td>
+				</tr>
+				<tr class="d1">
+					<td>Do you like to partner with sneaky social ninjas? Like to help security hunt down thugs? Enjoy watching an engineer's back while he saves the station yet again? This doesn't have to be limited to just station jobs. Pretty much any general descriptor for what you'd like to be doing works here.</td>
+				</tr>
+				<tr class="d0">
+					<th rowspan="2"><a href='byond://?src=\ref[src];option=ooc;new=1;candidate=\ref[candidate]'>OOC Comments</a>:</th>
+					<td class="desc">[candidate.comments]&nbsp;</td>
+				</tr>
+				<tr class="d1">
+					<td>Anything you'd like to address specifically to the player reading this in an OOC manner. \"I prefer more serious RP.\", \"I'm still learning the interface!\", etc. Feel free to leave this blank if you want.</td>
+				</tr>
+			</table>
+			<br>
+			<table>
+				<tr>
+					<td class="button">
+						<a href='byond://?src=\ref[src];option=save;new=1;candidate=\ref[candidate]' class="button">Save Personality</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="button">
+						<a href='byond://?src=\ref[src];option=load;new=1;candidate=\ref[candidate]' class="button">Load Personality</a>
+					</td>
+				</tr>
+			</table><br>
+			<table>
+				<td class="button"><a href='byond://?src=\ref[src];option=submit;new=1;candidate=\ref[candidate]' class="button"><b><font size="4px">Submit Personality</font></b></a></td>
+			</table><br>
 
-		<tr class=\"d0\"><td>Preferred Role:</td><td>[candidate.role]</td></tr>
-		<tr class=\"d1\"><td><a href='byond://?src=\ref[src];option=role;new=1;candidate=\ref[candidate]'>\[Edit\]</a></td><td>Do you like to partner with sneaky social ninjas? Like to help security hunt down thugs? Enjoy watching an engineer's back while he saves the station yet again? This doesn't have to be limited to just station jobs. Pretty much any general descriptor for what you'd like to be doing works here.</td></tr>
-
-		<tr class=\"d0\"><td>OOC Comments:</td><td>[candidate.comments]</td></tr>
-		<tr class=\"d1\"><td><a href='byond://?src=\ref[src];option=ooc;new=1;candidate=\ref[candidate]'>\[Edit\]</a></td><td>Anything you'd like to address specifically to the player reading this in an OOC manner. \"I prefer more serious RP.\", \"I'm still learning the interface!\", etc. Feel free to leave this blank if you want.</td></tr>
-
-		</table>
-
-		<br>
-		<h3><a href='byond://?src=\ref[src];option=submit;new=1;candidate=\ref[candidate]'>Submit Personality</a></h3><br>
-		<a href='byond://?src=\ref[src];option=save;new=1;candidate=\ref[candidate]'>Save Personality</a><br>
-		<a href='byond://?src=\ref[src];option=load;new=1;candidate=\ref[candidate]'>Load Personality</a><br>
+		<body>
 		"}
 
-		M << browse(dat, "window=paiRecruit")
+		M << browse(dat, "window=paiRecruit;size=580x580;")
 
 	proc/findPAI(var/obj/item/device/paicard/p, var/mob/user)
 		requestRecruits()
