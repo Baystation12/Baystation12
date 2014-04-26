@@ -106,7 +106,7 @@
 			return
 		else
 			if(message_mode)
-				if(message_mode in radiochannels)
+				if(message_mode in (radiochannels | "department"))
 					if(l_ear && istype(l_ear,/obj/item/device/radio))
 						l_ear.talk_into(src,message, message_mode, verb, speaking)
 						used_radios += l_ear
@@ -117,7 +117,7 @@
 
 	if(used_radios.len)
 		italics = 1
-		message_range = 3
+		message_range = 1
 
 	var/datum/gas_mixture/environment = loc.return_air()
 	if(environment)
