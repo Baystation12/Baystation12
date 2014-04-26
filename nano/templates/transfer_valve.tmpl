@@ -37,6 +37,9 @@
 			<i>None</i>
 		{{/if}}		
 		{{:~link('Remove', 'eject', {'rem_device' : 1}, valveAttachment ? null : 'disabled')}}
+		{{if valveAttachment}}
+			{{:~link('View', 'wrench', {'device' : 1})}}
+		{{/if}}		
 	</div>
 </div>
 
