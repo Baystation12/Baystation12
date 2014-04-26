@@ -105,3 +105,9 @@
 	icon_state = "rocketshell"
 	projectile_type = "/obj/item/missile"
 	caliber = "rocket"
+
+/obj/item/ammo_casing/chameleon
+	name = "chameleon bullets"
+	desc = "A set of bullets for the Chameleon Gun."
+	projectile_type = "/obj/item/projectile/bullet/chameleon"
+	caliber = ".45"

@@ -66,7 +66,7 @@
 		spark_system.attach(src)
 		sleep(10)
 		if(!installation)// if for some reason the turret has no gun (ie, admin spawned) it resorts to basic taser shots
-			projectile = /obj/item/projectile/energy/electrode//holder for the projectile, here it is being set
+			projectile = /obj/item/projectile/beam/stun//holder for the projectile, here it is being set
 			eprojectile = /obj/item/projectile/beam//holder for the projectile when emagged, if it is different
 			reqpower = 200
 			sound = 1
@@ -128,7 +128,7 @@
 					reqpower = 700
 
 				if(/obj/item/weapon/gun/energy/taser)
-					projectile = /obj/item/projectile/energy/electrode
+					projectile = /obj/item/projectile/beam/stun
 					eprojectile = projectile
 					iconholder = 1
 					reqpower = 200
@@ -170,7 +170,7 @@
 					reqpower = 500
 
 				else // Energy gun shots
-					projectile = /obj/item/projectile/energy/electrode// if it hasn't been emagged, it uses normal taser shots
+					projectile = /obj/item/projectile/beam/stun// if it hasn't been emagged, it uses normal taser shots
 					eprojectile = /obj/item/projectile/beam//If it has, going to kill mode
 					iconholder = 1
 					egun = 1

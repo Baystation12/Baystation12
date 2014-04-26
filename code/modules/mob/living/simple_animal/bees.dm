@@ -31,7 +31,7 @@
 	if(stat == CONSCIOUS)
 		//if we're strong enough, sting some people
 		var/mob/living/carbon/human/M = target_mob
-		var/sting_prob = 100 // Bees will always try to sting.
+		var/sting_prob = 40 // Bees will always try to sting.
 		if(M in view(src,1)) // Can I see my target?
 			if(prob(max(feral * 10, 0)))	// Am I mad enough to want to sting? And yes, when I initially appear, I AM mad enough
 				var/obj/item/clothing/worn_suit = M.wear_suit
@@ -42,17 +42,17 @@
 					sting_prob -= min(worn_helmet.armor["bio"],30) // Is your helmet sealed? I can't get to 30% of your body.
 				if( prob(sting_prob) && (M.stat == CONSCIOUS || (M.stat == UNCONSCIOUS && prob(25))) ) // Try to sting! If you're not moving, think about stinging.
 					M.apply_damage(min(strength,2)+mut, BRUTE) // Stinging. The more mutated I am, the harder I sting.
-					M.apply_damage((round(feral/5,1)*(max((round(strength/10,1)),1)))+toxic, TOX) // Bee venom based on how angry I am and how many there are of me!
+					M.apply_damage((round(feral/10,1)*(max((round(strength/20,1)),1)))+toxic, TOX) // Bee venom based on how angry I am and how many there are of me!
 					M << "\red You have been stung!"
 					M.flash_pain()
 
 		//if we're chasing someone, get a little bit angry
-		if(target_mob && prob(10))
+		if(target_mob && prob(5))
 			feral++
 
 		//calm down a little bit
 		if(feral > 0)
-			if(prob(feral * 10))
+			if(prob(feral * 20))
 				feral -= 1
 		else
 			//if feral is less than 0, we're becalmed by smoke or steam

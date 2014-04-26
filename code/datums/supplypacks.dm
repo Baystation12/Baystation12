@@ -179,6 +179,16 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Emergency crate"
 	group = "Engineering"
 
+/datum/supply_packs/evacuation
+	name = "Inflatable barriers"
+	contains = list(/obj/item/weapon/storage/briefcase/inflatable,
+					/obj/item/weapon/storage/briefcase/inflatable,
+					/obj/item/weapon/storage/briefcase/inflatable)
+	cost = 20
+	containertype = /obj/structure/closet/crate
+	containername = "Inflatable Barrier Crate"
+	group = "Engineering"
+
 /datum/supply_packs/janitor
 	name = "Janitorial supplies"
 	contains = list(/obj/item/weapon/reagent_containers/glass/bucket,
@@ -1084,13 +1094,11 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 /datum/supply_packs/bee_keeper
 	name = "Beekeeping crate"
 	contains = list(/obj/item/beezeez,
-					/obj/item/beezeez,
 					/obj/item/weapon/bee_net,
 					/obj/item/apiary,
-					/obj/item/queen_bee,
-					/obj/item/queen_bee,
 					/obj/item/queen_bee)
-	cost = 20
+	cost = 40
+	contraband = 1
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Beekeeping crate"
 	access = access_hydroponics

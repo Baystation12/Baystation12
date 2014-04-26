@@ -53,7 +53,7 @@ var/list/datum/power/changeling/powerinstances = list()
 /datum/power/changeling/lesser_form
 	name = "Lesser Form"
 	desc = "We debase ourselves and become lesser.  We become a monkey."
-	genomecost = 1
+	genomecost = 4
 	verbpath = /mob/proc/changeling_lesser_form
 
 /datum/power/changeling/deaf_sting
@@ -74,7 +74,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Silence Sting"
 	desc = "We silently sting a human, completely silencing them for a short time."
 	helptext = "Does not provide a warning to a victim that they have been stung, until they try to speak and cannot."
-	genomecost = 2
+	genomecost = 3
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_silence_sting
 
@@ -82,14 +82,14 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Mimic Voice"
 	desc = "We shape our vocal glands to sound like a desired voice."
 	helptext = "Will turn your voice into the name that you enter. We must constantly expend chemicals to maintain our form like this"
-	genomecost = 3
+	genomecost = 1
 	verbpath = /mob/proc/changeling_mimicvoice
 
 /datum/power/changeling/extractdna
 	name = "Extract DNA"
 	desc = "We stealthily sting a target and extract the DNA from them."
 	helptext = "Will give you the DNA of your target, allowing you to transform into them. Does not count towards absorb objectives."
-	genomecost = 4
+	genomecost = 2
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_extract_dna_sting
 
@@ -103,7 +103,7 @@ var/list/datum/power/changeling/powerinstances = list()
 /datum/power/changeling/paralysis_sting
 	name = "Paralysis Sting"
 	desc = "We silently sting a human, paralyzing them for a short time."
-	genomecost = 3
+	genomecost = 8
 	verbpath = /mob/proc/changeling_paralysis_sting
 
 /datum/power/changeling/LSDSting
@@ -136,7 +136,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Epinephrine sacs"
 	desc = "We evolve additional sacs of adrenaline throughout our body."
 	helptext = "Gives the ability to instantly recover from stuns.  High chemical cost."
-	genomecost = 4
+	genomecost = 3
 	verbpath = /mob/proc/changeling_unstun
 
 /datum/power/changeling/ChemicalSynth
@@ -167,7 +167,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Digital Camoflauge"
 	desc = "We evolve the ability to distort our form and proprtions, defeating common altgorthms used to detect lifeforms on cameras."
 	helptext = "We cannot be tracked by camera while using this skill.  However, humans looking at us will find us.. uncanny.  We must constantly expend chemicals to maintain our form like this."
-	genomecost = 3
+	genomecost = 1
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_digitalcamo
 
@@ -175,7 +175,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	name = "Rapid Regeneration"
 	desc = "We evolve the ability to rapidly regenerate, negating the need for stasis."
 	helptext = "Heals a moderate amount of damage every tick."
-	genomecost = 8
+	genomecost = 7
 	verbpath = /mob/proc/changeling_rapidregen
 
 

@@ -405,9 +405,13 @@ var/list/ai_list = list()
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in mob_list
+/*
 		var/mob/living/silicon/ai/A = locate(href_list["track2"]) in mob_list
 		if(A && target)
 			A.ai_actual_track(target)
+*/
+		if(target)
+			ai_actual_track(target)
 		return
 
 	else if (href_list["faketrack"])

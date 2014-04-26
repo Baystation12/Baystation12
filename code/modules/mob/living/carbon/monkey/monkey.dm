@@ -513,7 +513,23 @@
 
 
 /mob/living/carbon/monkey/IsAdvancedToolUser()//Unless its monkey mode monkeys cant use advanced tools
-	if(!ticker)	return 0
-	if(!ticker.mode.name == "monkey")	return 0
-	return 1
+	return 0
 
+/mob/living/carbon/monkey/say(var/message)
+        if(stat)
+                return
+
+        if(copytext(message,1,2) == "*")
+                return emote(copytext(message,2))
+
+        if(stat)
+                return
+
+        var/verb = "says"
+
+        if(speak_emote.len)
+                verb = pick(speak_emote)
+
+        message = capitalize(trim_left(message))
+
+        ..(message, null, verb)

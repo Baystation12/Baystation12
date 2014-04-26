@@ -1835,7 +1835,7 @@ datum
 		toxin/beer2	//disguised as normal beer for use by emagged brobots
 			name = "Beer"
 			id = "beer2"
-			description = "An alcoholic beverage made from malted grains, hops, yeast, and water. The fermentation appears to be imcomplete." //If the players manage to analyze this, they deserve to know something is wrong.
+			description = "An alcoholic beverage made from malted grains, hops, yeast, and water. The fermentation appears to be incomplete." //If the players manage to analyze this, they deserve to know something is wrong.
 			reagent_state = LIQUID
 			color = "#664300" // rgb: 102, 67, 0
 			custom_metabolism = 0.15 // Sleep toxins should always be consumed pretty fast

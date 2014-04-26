@@ -10,7 +10,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pda"
 	item_state = "electronic"
-	w_class = 1.0
+	w_class = 2.0
 	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_ID | SLOT_BELT
 
@@ -338,7 +338,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return
 
 	lastmode = mode
-		
+
 	var/title = "Personal Data Assistant"
 
 	var/data[0]  // This is the data that will be sent to the PDA
@@ -367,7 +367,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(mode in cartmodes)
 			data["records"] = cartridge.create_NanoUI_values()
 
-		if(mode == 0)	
+		if(mode == 0)
 			cartdata["name"] = cartridge.name
 			cartdata["access"] = list(\
 					"access_security" = cartridge.access_security,\

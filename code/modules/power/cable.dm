@@ -233,6 +233,7 @@
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	updateicon()
+	update_wclass()
 
 /obj/item/weapon/cable_coil/proc/updateicon()
 	if (!item_color)
@@ -247,6 +248,12 @@
 	else
 		icon_state = "coil"
 		name = "cable coil"
+
+/obj/item/weapon/cable_coil/proc/update_wclass()
+	if(amount == 1)
+		w_class = 1.0
+	else
+		w_class = 2.0
 
 /obj/item/weapon/cable_coil/examine()
 	set src in view(1)
@@ -283,6 +290,7 @@
 		new/obj/item/weapon/cable_coil(user.loc, 1,item_color)
 		user << "<span class='notice'>You cut a piece off the cable coil.</span>"
 		src.updateicon()
+		src.update_wclass()
 		return
 
 	else if( istype(W, /obj/item/weapon/cable_coil) )
@@ -295,6 +303,7 @@
 			C.amount += src.amount
 			user << "<span class='notice'>You join the cable coils together.</span>"
 			C.updateicon()
+			C.update_wclass()
 			del(src)
 			return
 
@@ -302,8 +311,10 @@
 			user << "<span class='notice'>You transfer [MAXCOIL - src.amount ] length\s of cable from one coil to the other.</span>"
 			src.amount -= (MAXCOIL-C.amount)
 			src.updateicon()
+			src.update_wclass()
 			C.amount = MAXCOIL
 			C.updateicon()
+			C.update_wclass()
 			return
 
 /obj/item/weapon/cable_coil/proc/use(var/used)
@@ -314,6 +325,7 @@
 	else
 		amount -= used
 		updateicon()
+		update_wclass()
 		return 1
 
 // called when cable_coil is clicked on a turf/simulated/floor
@@ -597,6 +609,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	updateicon()
+	update_wclass()
 
 /obj/item/weapon/cable_coil/yellow
 	item_color = COLOR_YELLOW

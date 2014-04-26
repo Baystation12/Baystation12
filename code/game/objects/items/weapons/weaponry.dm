@@ -6,7 +6,7 @@
 	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_BELT
 	throwforce = 0
-	w_class = 1.0
+	w_class = 2.0
 	throw_speed = 7
 	throw_range = 15
 	attack_verb = list("banned")
@@ -26,7 +26,7 @@
 	throw_speed = 1
 	throw_range = 4
 	throwforce = 10
-	w_class = 1
+	w_class = 2
 
 	suicide_act(mob/user)
 		viewers(user) << "\red <b>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</b>"
