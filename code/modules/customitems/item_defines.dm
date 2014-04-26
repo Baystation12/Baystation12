@@ -523,6 +523,13 @@
 
 //////////// Hats ////////////
 
+
+/obj/item/clothing/head/fluff/kaine_kalim_1
+    name = "Formal Medical Cap"
+    desc = "An unusually sterile and folded cap. It seems to bare the Nanotrasen logo."
+    icon = 'icons/obj/custom_items.dmi'
+    icon_state = "kainecap"
+
 /obj/item/clothing/head/secsoft/fluff/swatcap //deusdactyl: James Girard
 	name = "\improper SWAT hat"
 	desc = "A black hat.  The inside has the words, \"Lieutenant James Girard, LPD SWAT Team Four.\""
@@ -570,7 +577,7 @@
 	desc = "A worn-looking hat. It is slightly faded in color."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "brucehachert"
-	
+
 /obj/item/clothing/head/beret/fluff/marine_beret	//Von2531: Jack Washington
 	name = "colonial marine beret"
 	desc = "A well-worn navy blue beret. The insignia of the Martian Colonial Marine Corps is affixed to the front."
@@ -623,6 +630,15 @@
 	icon_state = "milohachert"
 	item_state = "milohachert"
 	item_color = "milohachert"
+
+
+/obj/item/clothing/under/fluff/kaine_kalim_2
+    name = "Formal Medical Uniform"
+    desc = "An unusually sterile and pressed uniform. It seems to have a string of vials crossing the chest."
+    icon = 'icons/obj/custom_items.dmi'
+    icon_state = "kaineuniform"
+    item_state = "kaineuniform"
+    item_color = "kaineuniform"
 
 /obj/item/clothing/under/fluff/jumpsuitdown //searif: Yuki Matsuda
 	name = "rolled down jumpsuit"
