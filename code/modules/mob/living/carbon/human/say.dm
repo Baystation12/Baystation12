@@ -117,7 +117,7 @@
 
 	if(used_radios.len)
 		italics = 1
-		message_range = 3
+		message_range = 1
 
 	var/datum/gas_mixture/environment = loc.return_air()
 	if(environment)
