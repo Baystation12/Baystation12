@@ -59,6 +59,10 @@
 					if(G.can_reenter_corpse && G.mind == B.brainmob.mind)
 						ghost_can_reenter = 1
 						break
+				for(var/mob/living/simple_animal/S in player_list)
+					if(S in respawnable_list)
+						ghost_can_reenter = 1
+						break
 			if(!ghost_can_reenter)
 				user << "<span class='notice'>[O] is completely unresponsive; there's no point.</span>"
 				return
