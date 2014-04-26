@@ -25,6 +25,9 @@
 	else
 		msg += "Its cover is closed.\n"
 
+	if(!has_power)
+		msg += "<span class='warning'>It appears to be running on backup power.</span>\n"
+	
 	switch(src.stat)
 		if(CONSCIOUS)
 			if(!src.client)	msg += "It appears to be in stand-by mode.\n" //afk
