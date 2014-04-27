@@ -295,11 +295,15 @@ proc/get_damage_icon_part(damage_state, body_part)
 				stand_icon.Blend(temp, ICON_OVERLAY)
 
 	//Skin tone
-	if(!skeleton && !husk && !hulk && (species.flags & HAS_SKIN_TONE))
+	if(!skeleton && !husk && !hulk && (species.bodyflags & HAS_SKIN_TONE))
 		if(s_tone >= 0)
 			stand_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
 		else
 			stand_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
+
+	//Skin color
+	if(!skeleton && !husk && !hulk && (species.flags & HAS_SKIN_COLOR))
+		stand_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
 
 	if(husk)
 		var/icon/mask = new(stand_icon)
@@ -852,7 +856,11 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	if(species.tail && species.bodyflags & HAS_TAIL)
 		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
-			overlays_standing[TAIL_LAYER] = image("icon" = 'icons/effects/species.dmi', "icon_state" = "[species.tail]_s")
+			var/icon/tail_s = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[species.tail]_s")
+			tail_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+
+			stand_icon.Blend(tail_s, ICON_OVERLAY)
+			overlays_standing[TAIL_LAYER]	= image(stand_icon)
 
 	if(update_icons)
 		update_icons()

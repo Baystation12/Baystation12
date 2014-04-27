@@ -43,7 +43,7 @@
 	var/flags = 0       // Various specific features.
 	var/bloodflags=0
 	var/bodyflags=0
-
+	var/flesh_color = "#FFC896" //Pink.
 	var/list/abilities = list()  // For species-derived or admin-given powers
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
@@ -104,7 +104,8 @@
 	deform = 'icons/mob/human_races/r_def_human.dmi'
 	primitive = /mob/living/carbon/monkey
 	path = /mob/living/carbon/human/human
-	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
+	flags = HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
+	bodyflags = HAS_SKIN_TONE
 
 /datum/species/unathi
 	name = "Unathi"
@@ -118,7 +119,7 @@
 	darksight = 3
 
 	flags = HAS_LIPS | HAS_UNDERWEAR
-	bodyflags = FEET_CLAWS | HAS_TAIL
+	bodyflags = FEET_CLAWS | HAS_TAIL | HAS_SKIN_COLOR
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -127,6 +128,9 @@
 	heat_level_1 = 420 //Default 360 - Higher is better
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
+
+	flesh_color = "#34AF10"
+
 
 /datum/species/tajaran
 	name = "Tajaran"
@@ -149,7 +153,9 @@
 	primitive = /mob/living/carbon/monkey/tajara
 
 	flags = HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
-	bodyflags = FEET_PADDED | HAS_TAIL
+	bodyflags = FEET_PADDED | HAS_TAIL | HAS_SKIN_COLOR
+
+	flesh_color = "#AFA59E"
 
 /datum/species/skrell
 	name = "Skrell"
@@ -161,6 +167,9 @@
 
 	flags = HAS_LIPS | HAS_UNDERWEAR
 	bloodflags = BLOOD_GREEN
+	bodyflags = HAS_SKIN_COLOR
+
+	flesh_color = "#8CD7A3"
 
 /datum/species/vox
 	name = "Vox"
@@ -319,5 +328,4 @@
 
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
 
-//	blood_color = "#FFFFFF"
-//	flesh_color = "#AAAAAA"
+	flesh_color = "#AAAAAA"
