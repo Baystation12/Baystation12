@@ -466,17 +466,16 @@ turf/simulated/floor/proc/update_icon()
 
 		return
 
-	if(istype(C, /obj/item/weapon/screwdriver))
-		if(is_wood_floor())
-			if(broken || burnt)
-				return
-			else
-				if(is_wood_floor())
-					user << "\red You unscrew the planks."
-					new floor_tile.type(src)
 
-			make_plating()
-			playsound(src, 'sound/items/Screwdriver.ogg', 80, 1)
+	if(istype(C, /obj/item/weapon/screwdriver) && is_wood_floor())
+		if(broken || burnt)
+			return
+		else
+			if(is_wood_floor())
+				user << "\red You unscrew the planks."
+				new floor_tile.type(src)
+		make_plating()
+		playsound(src, 'sound/items/Screwdriver.ogg', 80, 1)
 		if(is_catwalk())
 			if(broken) return
 			ReplaceWithLattice()
