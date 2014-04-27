@@ -42,3 +42,32 @@
 			icon_state = "[modifystate][ratio]"
 		else
 			icon_state = "[initial(icon_state)][ratio]"
+
+
+	attackby(obj/item/weapon/W, mob/user)
+		if(istype(W, /obj/item/weapon/cell))
+			if(!power_supply)
+				user.drop_item()
+				W.loc = src
+				power_supply = W
+				user << "<span class='notice'>You install a cell in [src].</span>"
+				update_icon()
+			else
+				user << "<span class='notice'>[src] already has a cell.</span>"
+
+		else if(istype(W, /obj/item/weapon/screwdriver))
+			if(power_supply)
+				power_supply.updateicon()
+				power_supply.loc = get_turf(src.loc)
+				power_supply = null
+				user << "<span class='notice'>You remove the cell from the [src].</span>"
+				update_icon()
+				return
+			..()
+		return
+
+	examine()
+		set src in view(1)
+		..()
+		if(!power_supply)
+			usr <<"<span class='warning'>The weapon does not have a power source installed.</span>"
