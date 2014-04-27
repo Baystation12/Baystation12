@@ -2,6 +2,7 @@
 	name = "ion rifle"
 	desc = "A man portable anti-armor weapon designed to disable mechanical threats"
 	icon_state = "ionrifle"
+	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Laser.ogg'
 	origin_tech = "combat=2;magnets=4"
 	w_class = 4.0
