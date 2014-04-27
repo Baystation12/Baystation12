@@ -72,7 +72,7 @@
 	//usr << browse_rsc('windowbak.png')		// This has been moved to the mob's Login() proc
 
 
-												// Declaring a doctype is necessary to enable BYOND's crappy browser's more advanced CSS functionality
+	// Declaring a doctype is necessary to enable BYOND's crappy browser's more advanced CSS functionality
 	dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
 			<html>
 			<head>
@@ -419,7 +419,7 @@
 	<A href='byond://?src=\ref[src];software=signaller;send=1'>Send Signal</A><BR>"}
 	return dat
 
-//Station Bounced Radio - TESTING
+//Station Bounced Radio
 /mob/living/silicon/pai/proc/softwareRadio()
 	var/dat = ""
 	dat += "<h2>Station Bounced Radio</h2><hr>"
@@ -438,8 +438,6 @@
 	for (var/ch_name in radio.channels)
 		dat+=radio.text_sec_channel(ch_name, radio.channels[ch_name])
 	dat+={"[radio.text_wires()]</TT></body></html>"}
-	
-//	var/left_part = dat
 	
 	return dat
 	
