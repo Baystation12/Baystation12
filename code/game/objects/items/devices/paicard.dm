@@ -30,86 +30,169 @@
 			<head>
 				<style>
 					body {
-						margin-top:5px;
-						font-family:Verdana;
-						color:white;
-						font-size:13px;
-						background-image:url('uiBackground.png');
-						background-repeat:no-repeat;
-						background-color:#272727;
+					    margin-top:5px;
+					    font-family:Verdana;
+					    color:white;
+					    font-size:13px;
+					    background-image:url('uiBackground.png');
+					    background-repeat:no-repeat;
+					    background-color:#272727;
 					}
 					table {
-						font-size:13px;
+					    font-size:13px;
+					    margin-left:-2px;
+					}
+					table.request {
+					    border-collapse:collapse;
 					}
 					table.desc {
-						border-collapse:collapse;
-						font-size:13px;
-						border: 1px solid #161616;
-						width:100%;
+					    border-collapse:collapse;
+					    font-size:13px;
+					    border: 1px solid #161616;
+					    width:100%;
 					}
 					table.download {
-						border-collapse:collapse;
-						font-size:13px;
-						border: 1px solid #161616;
-						width:100%;
+					    border-collapse:collapse;
+					    font-size:13px;
+					    border: 1px solid #161616;
+					    width:100%;
 					}
 					tr.d0 td, tr.d0 th {
-						background-color: #506070;
-						color: white;
+					    background-color: #506070;
+					    color: white;
 					}
 					tr.d1 td, tr.d1 th {
-						background-color: #708090;
-						color: white;
+					    background-color: #708090;
+					    color: white;
 					}
 					tr.d2 td {
-						background-color: #00FF00;
-						color: white;
-						text-align:center;
+					    background-color: #00FF00;
+					    color: white;
+					    text-align:center;
 					}
 					td.button {
-						border: 1px solid #161616;
-						background-color: #40628a;
-						text-align: center;
+					    border: 1px solid #161616;
+					    background-color: #40628a;
+					}
+					td.button {
+					    border: 1px solid #161616;
+					    background-color: #40628a;
+					    text-align: center;
+					}
+					td.button_red {
+					    border: 1px solid #161616;
+					    background-color: #B04040;
+					    text-align: center;
 					}
 					td.download {
-						border: 1px solid #161616;
-						background-color: #40628a;
-						text-align: center;
+					    border: 1px solid #161616;
+					    background-color: #40628a;
+					    text-align: center;
 					}
 					th {
-						text-align:left;
-						width:125px;
+					    text-align:left;
+					    width:125px;
+					}
+					td.request {
+					    width:140px;
+					    vertical-align:top;
+					}
+					td.radio {
+					    width:90px;
+					    vertical-align:top;
+					}
+					td.request {
+					    vertical-align:top;
+					}
+					a {
+					    color:#4477E0;
 					}
 					a.button {
-						color:white;
-						text-decoration: none;
+					    color:white;
+					    text-decoration: none;
+					}
+					h2 {
+					    font-size:15px;
 					}
 				</style>
 			</head>
 			<body>
-				<b><font size='3px'>pAI Request Module</font></b><br><br>
 	"}
-	if(pai && (!pai.master_dna || !pai.master))
-		dat += "<a href='byond://?src=\ref[src];setdna=1'>Imprint Master DNA</a><br>"
+
 	if(pai)
-		dat += "Installed Personality: [pai.name]<br>"
-		dat += "Prime directive: <br>[pai.pai_law0]<br>"
-		dat += "Additional directives: <br>[pai.pai_laws]<br>"
-		dat += "<a href='byond://?src=\ref[src];setlaws=1'>Configure Directives</a><br>"
+		dat += {"
+			<b><font size='3px'>Personal AI Device</font></b><br><br>
+			<table class="request">
+				<tr>
+					<td class="request">Installed Personality:</td>
+					<td>[pai.name]</td>
+				</tr>
+				<tr>
+					<td class="request">Prime directive:</td>
+					<td>[pai.pai_law0]</td>
+				</tr>
+				<tr>
+					<td class="request">Additional directives:</td>
+					<td>[pai.pai_laws]</td>
+				</tr>
+			</table>
+			<br>
+		"}
+		dat += {"
+			<table>
+				<td class="button">
+					<a href='byond://?src=\ref[src];setlaws=1' class='button'>Configure Directives</a>
+				</td>
+			</table>
+		"}
+		if(pai && (!pai.master_dna || !pai.master))
+			dat += {"
+				<table>
+					<td class="button">
+						<a href='byond://?src=\ref[src];setdna=1' class='button'>Imprint Master DNA</a>
+					</td>
+				</table>
+			"}
 		dat += "<br>"
-		dat += "<h2>Device Settings</h2>"
 		if(radio)
-			dat += "<b>Radio Uplink</b><br>"
-			dat += "Transmit: <A href='byond://?src=\ref[src];wires=4'>[(radio.wires & 4) ? "Enabled" : "Disabled"]</A><br>"
-			dat += "Receive: <A href='byond://?src=\ref[src];wires=2'>[(radio.wires & 2) ? "Enabled" : "Disabled"]</A><br>"
-			dat += "Signal Pulser: <A href='byond://?src=\ref[src];wires=1'>[(radio.wires & 1) ? "Enabled" : "Disabled"]</A><br>"
+			dat += "<b>Radio Uplink</b>"
+			dat += {"
+				<table class="request">
+					<tr>
+						<td class="radio">Transmit:</td>
+						<td><a href='byond://?src=\ref[src];wires=4'>[(radio.wires & 4) ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
+
+						</td>
+					</tr>
+					<tr>
+						<td class="radio">Receive:</td>
+						<td><a href='byond://?src=\ref[src];wires=2'>[(radio.wires & 2) ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
+
+						</td>
+					</tr>
+					<tr>
+						<td class="radio">Signal Pulser:</td>
+						<td><a href='byond://?src=\ref[src];wires=1'>[(radio.wires & 1) ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
+
+						</td>
+					</tr>
+				</table>
+				<br>
+			"}
 		else
 			dat += "<b>Radio Uplink</b><br>"
 			dat += "<font color=red><i>Radio firmware not loaded. Please install a pAI personality to load firmware.</i></font><br>"
-		dat += "<A href='byond://?src=\ref[src];wipe=1'>\[Wipe current pAI personality\]</a><br>"
+		dat += {"
+			<table>
+				<td class="button_red"><a href='byond://?src=\ref[src];wipe=1' class='button'>Wipe current pAI personality</a>
+
+				</td>
+			</table>
+		"}
 	else
 		if(looking_for_personality)
 			dat += {"
+				<b><font size='3px'>pAI Request Module</font></b><br><br>
 				<p>Requesting AI personalities from central database... If there are no entries, or if a suitable entry is not listed, check again later as more personalities may be added.</p>
 				<img src='loading.gif' /> Searching for personalities<br><br>
 				
@@ -177,7 +260,7 @@
 		if(newlaws)
 			pai.pai_laws = newlaws
 			pai << "Your supplemental directives have been updated. Your new directives are:"
-			pai << "Prime Directive : <br>[pai.pai_law0]"
+			pai << "Prime Directive: <br>[pai.pai_law0]"
 			pai << "Supplemental Directives: <br>[pai.pai_laws]"
 	attack_self(usr)
 

@@ -304,7 +304,6 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 		for(var/datum/paiCandidate/c in available)
 			dat += {"
-					<br>
 					<table class="desc">
 						<tr class="d0">
 							<th>Name:</th>
@@ -327,6 +326,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 						<td class="download"><a href='byond://?src=\ref[src];download=1;candidate=\ref[c];device=\ref[p]' class="button"><b>Download [c.name]</b></a>
 						</td>
 					</table>
+					<br>
 			"}
 
 		dat += {"
