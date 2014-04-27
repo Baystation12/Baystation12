@@ -83,6 +83,7 @@
 		for(var/datum/organ/internal/I in H.internal_organs)
 			I.mechanize()
 
+
 	return
 
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
@@ -90,6 +91,12 @@
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
+
+
+/datum/species/proc/say_filter(mob/M, message, datum/language/speaking)
+	return message
+
+/datum/species/proc/equip(var/mob/living/carbon/human/H)
 
 /datum/species/human
 	name = "Human"

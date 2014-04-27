@@ -732,10 +732,10 @@
 									counter++
 								if(istype(usr,/mob/living/carbon/human))
 									var/mob/living/carbon/human/U = usr
-									R.fields[text("com_[counter]")] = text("Made by [U.get_authentification_name()] ([U.get_assignment()]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], 2557<BR>[t1]")
+									R.fields[text("com_[counter]")] = text("Made by [U.get_authentification_name()] ([U.get_assignment()]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], [game_year]<BR>[t1]")
 								if(istype(usr,/mob/living/silicon/robot))
 									var/mob/living/silicon/robot/U = usr
-									R.fields[text("com_[counter]")] = text("Made by [U.name] ([U.braintype]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], 2557<BR>[t1]")
+									R.fields[text("com_[counter]")] = text("Made by [U.name] ([U.modtype] [U.braintype]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], [game_year]<BR>[t1]")
 
 	if (href_list["medical"])
 		if(hasHUD(usr,"medical"))
@@ -861,10 +861,18 @@
 									counter++
 								if(istype(usr,/mob/living/carbon/human))
 									var/mob/living/carbon/human/U = usr
-									R.fields[text("com_[counter]")] = text("Made by [U.get_authentification_name()] ([U.get_assignment()]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], 2557<BR>[t1]")
+									R.fields[text("com_[counter]")] = text("Made by [U.get_authentification_name()] ([U.get_assignment()]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], [game_year]<BR>[t1]")
 								if(istype(usr,/mob/living/silicon/robot))
 									var/mob/living/silicon/robot/U = usr
-									R.fields[text("com_[counter]")] = text("Made by [U.name] ([U.braintype]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], 2557<BR>[t1]")
+									R.fields[text("com_[counter]")] = text("Made by [U.name] ([U.modtype] [U.braintype]) on [time2text(world.realtime, "DDD MMM DD hh:mm:ss")], [game_year]<BR>[t1]")
+
+	if (href_list["lookitem"])
+		var/obj/item/I = locate(href_list["lookitem"])
+		I.examine()
+
+	if (href_list["lookmob"])
+		var/mob/M = locate(href_list["lookmob"])
+		M.examine()
 	..()
 	return
 
@@ -1133,6 +1141,7 @@
 		O.status &= ~ORGAN_ATTACHABLE
 		if (!O.amputated)
 			O.status &= ~ORGAN_DESTROYED
+			O.destspawn = 0
 		O.wounds.Cut()
 		O.heal_damage(1000,1000,1,1)
 
@@ -1219,10 +1228,11 @@
 	verbs += /mob/living/carbon/human/proc/bloody_doodle
 	return 1 //we applied blood to the item
 
-/mob/living/carbon/human/clean_blood()
+/mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
-	if(istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
+	if(clean_feet && !shoes && istype(feet_blood_DNA, /list) && feet_blood_DNA.len)
 		del(feet_blood_DNA)
+		update_inv_shoes(1)
 		return 1
 
 /mob/living/carbon/human/get_visible_implants(var/class = 0)
@@ -1289,7 +1299,6 @@
 		usr << "You moved while counting. Try again."
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
-
 
 /mob/living/carbon/human/proc/set_species(var/new_species, var/force_organs)
 
