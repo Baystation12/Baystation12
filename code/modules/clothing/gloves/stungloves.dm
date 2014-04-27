@@ -50,6 +50,11 @@
 				desc = "[desc] They have had the fingertips cut off of them."
 				species_restricted -= "Unathi"
 				species_restricted -= "Tajaran"
+				species_restricted -= "Tajaran (Black)"
+				species_restricted -= "Tajaran (Orange)"
+				species_restricted -= "Tajaran (Siamese)"
+				species_restricted -= "Tajaran (Blue)"
+				species_restricted -= "Tajaran (Brown)"
 				species_restricted += "stunglove"
 		else if(clipped == 1)
 			user << "<span class='notice'>[src] have already been clipped!</span>"
