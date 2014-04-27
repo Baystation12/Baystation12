@@ -25,7 +25,70 @@
 	if (!in_range(src, user))
 		return
 	user.set_machine(src)
-	var/dat = "<h2>Personal AI Device</h2>"
+	var/dat = {"
+		<html>
+			<head>
+				<style>
+					body {
+						margin-top:5px;
+						font-family:Verdana;
+						color:white;
+						font-size:13px;
+						background-image:url('uiBackground.png');
+						background-repeat:no-repeat;
+						background-color:#272727;
+					}
+					table {
+						font-size:13px;
+					}
+					table.desc {
+						border-collapse:collapse;
+						font-size:13px;
+						border: 1px solid #161616;
+						width:100%;
+					}
+					table.download {
+						border-collapse:collapse;
+						font-size:13px;
+						border: 1px solid #161616;
+						width:100%;
+					}
+					tr.d0 td, tr.d0 th {
+						background-color: #506070;
+						color: white;
+					}
+					tr.d1 td, tr.d1 th {
+						background-color: #708090;
+						color: white;
+					}
+					tr.d2 td {
+						background-color: #00FF00;
+						color: white;
+						text-align:center;
+					}
+					td.button {
+						border: 1px solid #161616;
+						background-color: #40628a;
+						text-align: center;
+					}
+					td.download {
+						border: 1px solid #161616;
+						background-color: #40628a;
+						text-align: center;
+					}
+					th {
+						text-align:left;
+						width:125px;
+					}
+					a.button {
+						color:white;
+						text-decoration: none;
+					}
+				</style>
+			</head>
+			<body>
+				<b><font size='3px'>pAI Request Module</font></b><br><br>
+	"}
 	if(pai && (!pai.master_dna || !pai.master))
 		dat += "<a href='byond://?src=\ref[src];setdna=1'>Imprint Master DNA</a><br>"
 	if(pai)
@@ -46,12 +109,30 @@
 		dat += "<A href='byond://?src=\ref[src];wipe=1'>\[Wipe current pAI personality\]</a><br>"
 	else
 		if(looking_for_personality)
-			dat += "Searching for a personality..."
-			dat += "<A href='byond://?src=\ref[src];request=1'>\[View available personalities\]</a><br>"
+			dat += {"
+				<p>Requesting AI personalities from central database... If there are no entries, or if a suitable entry is not listed, check again later as more personalities may be added.</p>
+				<img src='loading.gif' /> Searching for personalities<br><br>
+				
+				<table>
+					<tr>
+						<td class="button">
+							<a href='byond://?src=\ref[src];request=1' class="button">Refresh available personalities</a>
+						</td>
+					</tr>
+				</table><br>
+			"}
 		else
-			dat += "No personality is installed.<br>"
-			dat += "<A href='byond://?src=\ref[src];request=1'>\[Request personal AI personality\]</a><br>"
-			dat += "Each time this button is pressed, a request will be sent out to any available personalities. Check back often and alot time for personalities to respond. This process could take anywhere from 15 seconds to several minutes, depending on the available personalities' timeliness."
+			dat += {"
+			    <p>No personality is installed.</p>
+				<table>
+					<tr>
+						<td class="button"><a href='byond://?src=\ref[src];request=1' class="button">Request personality</a>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<p>Each time this button is pressed, a request will be sent out to any available personalities. Check back often give plenty of time for personalities to respond. This process could take anywhere from 15 seconds to several minutes, depending on the available personalities' timeliness.</p>
+			"}
 	user << browse(dat, "window=paicard")
 	onclose(user, "paicard")
 	return

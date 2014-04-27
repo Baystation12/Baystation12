@@ -236,35 +236,103 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		var/dat = ""
 
 		dat += {"
-				<style type="text/css">
-
-				p.top {
-					background-color: color: black;
-				}
-
-				tr.d0 td {
-					background-color: #CC9999; color: black;
-				}
-				tr.d1 td {
-					background-color: #9999CC; color: black;
-				}
-				tr.d2 td {
-					background-color: #99CC99; color: black;
-				}
-				</style>
-				"}
-		dat += "<p class=\"top\">Requesting AI personalities from central database... If there are no entries, or if a suitable entry is not listed, check again later as more personalities may be added.</p>"
-
-		dat += "<table>"
+			<html>
+				<head>
+					<style>
+						body {
+							margin-top:5px;
+							font-family:Verdana;
+							color:white;
+							font-size:13px;
+							background-image:url('uiBackground.png');
+							background-repeat:no-repeat;
+							background-color:#272727;
+						}
+						table {
+							font-size:13px;
+						}
+						table.desc {
+							border-collapse:collapse;
+							font-size:13px;
+							border: 1px solid #161616;
+							width:100%;
+						}
+						table.download {
+							border-collapse:collapse;
+							font-size:13px;
+							border: 1px solid #161616;
+							width:100%;
+						}
+						tr.d0 td, tr.d0 th {
+							background-color: #506070;
+							color: white;
+						}
+						tr.d1 td, tr.d1 th {
+							background-color: #708090;
+							color: white;
+						}
+						tr.d2 td {
+							background-color: #00FF00;
+							color: white;
+							text-align:center;
+						}
+						td.button {
+							border: 1px solid #161616;
+							background-color: #40628a;
+							text-align: center;
+						}
+						td.download {
+							border: 1px solid #161616;
+							background-color: #40628a;
+							text-align: center;
+						}
+						th {
+							text-align:left;
+							width:125px;
+							vertical-align:top;
+						}
+						a.button {
+							color:white;
+							text-decoration: none;
+						}
+					</style>
+				</head>
+				<body>
+					<b><font size='3px'>pAI Availability List</font></b><br><br>
+		"}
+		dat += "<p>Displaying available AI personalities from central database... If there are no entries, or if a suitable entry is not listed, check again later as more personalities may be added.</p>"
 
 		for(var/datum/paiCandidate/c in available)
-			dat += {"<tr class=\"d0\"><td>Name:</td><td>[c.name]</td></tr>
-			<tr class=\"d1\"><td>Description:</td><td>[c.description]</td></tr>
-			<tr class=\"d0\"><td>Preferred Role:</td><td>[c.role]</td></tr>
-			<tr class=\"d1\"><td>OOC Comments:</td><td>[c.comments]</td></tr>
-			<tr class=\"d2\"><td><a href='byond://?src=\ref[src];download=1;candidate=\ref[c];device=\ref[p]'>\[Download [c.name]\]</a></td><td></td></tr>"}
+			dat += {"
+					<br>
+					<table class="desc">
+						<tr class="d0">
+							<th>Name:</th>
+							<td>[c.name]</td>
+						</tr>
+						<tr class="d1">
+							<th>Description:</th>
+							<td>[c.description]</td>
+						</tr>
+						<tr class="d0">
+							<th>Preferred Role:</th>
+							<td>[c.role]</td>
+						</tr>
+						<tr class="d1">
+							<th>OOC Comments:</th>
+							<td>[c.comments]</td>
+						</tr>
+					</table>
+					<table class="download">
+						<td class="download"><a href='byond://?src=\ref[src];download=1;candidate=\ref[c];device=\ref[p]' class="button"><b>Download [c.name]</b></a>
+						</td>
+					</table>
+			"}
 
-		dat += "</table>"
+		dat += {"
+				</body>
+			</html>
+		"}
 
 		user << browse(dat, "window=findPai")
 
