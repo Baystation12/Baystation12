@@ -39,15 +39,22 @@
 	update_icon()
 	update_adjacent()
 
+	craft_holder = new craft_holder()
+	craft_holder.recipes = crafting_master.all_crafting_recipes
+
 /obj/structure/table/Destroy()
 	update_adjacent()
 	..()
-
 
 /obj/structure/table/proc/destroy()
 	new parts(loc)
 	density = 0
 	qdel(src)
+
+/obj/structure/table/MouseDrop(atom/over)
+	if(usr.stat || usr.lying || !Adjacent(usr) || (over != usr))
+		return
+	craft_holder.interact(usr)
 
 /obj/structure/table/update_icon()
 	if(flipped)
