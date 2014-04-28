@@ -27,6 +27,9 @@
 		message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 		return say_dead(message)
 
+	if(copytext(message,1,2) == "*")
+		return emote(copytext(message,2))
+
 	var/bot_type = 0			//Let's not do a fuck ton of type checks, thanks.
 	if(istype(src, /mob/living/silicon/ai))
 		bot_type = IS_AI
@@ -132,17 +135,16 @@
 
 	var/obj/machinery/hologram/holopad/T = src.current
 	if(istype(T) && T.hologram && T.master == src)//If there is a hologram and its master is the user.
-		var/message_a = say_quote(message)
+		var/verb = say_quote(message)
 
 		//Human-like, sorta, heard by those who understand humans.
-		var/rendered_a = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[message_a]</span></span>"
+		var/rendered_a = "<span class='game say'><span class='name'>[name]</span> [verb], <span class='message'>\"[message]\"</span></span>"
 
 		//Speach distorted, heard by those who do not understand AIs.
-		message = stars(message)
-		var/message_b = say_quote(message)
-		var/rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> <span class='message'>[message_b]</span></span>"
+		var/message_stars = stars(message)
+		var/rendered_b = "<span class='game say'><span class='name'>[voice_name]</span> [verb], <span class='message'>\"[message_stars]\"</span></span>"
 
-		src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> <span class='message'>[message_a]</span></span></i>"//The AI can "hear" its own message.
+		src << "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'>[message]</span></span></i>"//The AI can "hear" its own message.
 		for(var/mob/M in hearers(T.loc))//The location is the object, default distance.
 			if(M.say_understands(src))//If they understand AI speak. Humans and the like will be able to.
 				M.show_message(rendered_a, 2)

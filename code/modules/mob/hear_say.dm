@@ -4,7 +4,7 @@
 	if(!client)
 		return
 
-	if(sleeping)
+	if(sleeping || stat == 1)
 		hear_sleep(message)
 		return
 
@@ -30,6 +30,8 @@
 
 	var/track = null
 	if(istype(src, /mob/dead/observer))
+		if(italics && client.prefs.toggles & CHAT_GHOSTRADIO)
+			return
 		if(speaker_name != speaker.real_name)
 			speaker_name = "[speaker.real_name] ([speaker_name])"
 		track = "(<a href='byond://?src=\ref[src];track=\ref[speaker]'>follow</a>) "
@@ -50,7 +52,7 @@
 	if(!client)
 		return
 
-	if(sleeping)
+	if(sleeping || stat==1) //If unconscious or sleeping
 		hear_sleep(message)
 		return
 
