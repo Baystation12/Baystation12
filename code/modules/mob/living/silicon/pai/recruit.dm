@@ -116,7 +116,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 						color:white;
 						font-size:13px;
 						background-image:url('uiBackground.png');
-						background-repeat:x-repeat;
+						background-repeat:repeat-x;
 						background-color:#272727;
 						background-position:center top;
 					}
@@ -237,6 +237,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 		var/dat = ""
 
 		dat += {"
+			<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
 			<html>
 				<head>
 					<style>
@@ -246,7 +247,7 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 							color:white;
 							font-size:13px;
 							background-image:url('uiBackground.png');
-							background-repeat:x-repeat;
+							background-repeat:repeat-x;
 							background-color:#272727;
 							background-position:center top;
 						}
