@@ -208,6 +208,7 @@
 			"}
 		else
 			dat += {"
+				<b><font size='3px'>pAI Request Module</font></b><br><br>
 			    <p>No personality is installed.</p>
 				<table>
 					<tr>
