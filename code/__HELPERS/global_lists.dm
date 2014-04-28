@@ -19,7 +19,6 @@ var/global/list/landmarks_list = list()				//list of all landmarks created
 var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
-var/global/list/table_recipes = list()				//list of all table craft recipes
 var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 
 //Languages/species/whitelist.
@@ -110,8 +109,6 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 
 		if(S.flags & IS_WHITELISTED)
 			whitelisted_species += S.name
-
-	init_subtypes(/datum/table_recipe, table_recipes)
 
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()
