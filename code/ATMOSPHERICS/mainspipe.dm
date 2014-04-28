@@ -36,8 +36,9 @@ obj/machinery/atmospherics/mains_pipe
 	icon = 'icons/obj/atmospherics/mainspipe.dmi'
 	layer = 2.4 //under wires with their 2.5
 
+	force = 20
+	
 	var/volume = 0
-	var/force = 20
 
 	var/alert_pressure = 80*ONE_ATMOSPHERE
 
@@ -535,6 +536,8 @@ obj/machinery/atmospherics/mains_pipe/cap
 		level = 2
 		icon_state = "cap"
 
+//TODO: Get Mains valves working!
+/*
 obj/machinery/atmospherics/mains_pipe/valve
 	icon_state = "mvalve0"
 
@@ -701,3 +704,4 @@ obj/machinery/atmospherics/mains_pipe/valve
 						close()
 					else
 						open()
+*/
