@@ -6228,7 +6228,7 @@
 "cpN" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 4},/turf/simulated/floor{dir = 1; icon_state = "blue"},/area/medical/morgue)
 "cpO" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/machinery/light,/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/rnd/misc_lab)
 "cpP" = (/obj/structure/lattice,/obj/structure/grille,/obj/structure/lattice,/turf/space,/area)
-"cpQ" = (/obj/machinery/shield_gen,/turf/simulated/floor/plating,/area/engine/storage_hard)
+"cpQ" = (/obj/machinery/shield_gen/external,/turf/simulated/floor/plating,/area/engine/storage_hard)
 "cpR" = (/obj/structure/disposalpipe/segment,/obj/machinery/firealarm{dir = 4; pixel_x = 24},/turf/simulated/floor,/area/construction)
 "cpS" = (/obj/structure/disposalpipe/segment,/turf/simulated/floor{icon_state = "floorgrime"},/area/engine/engine_eva)
 "cpT" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor{icon_state = "floorgrime"},/area/engine/engine_eva)
