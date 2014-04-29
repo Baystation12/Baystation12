@@ -134,6 +134,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/gloves/emp_act(severity)
 	if(cell)
+		//why is this not part of the powercell code?
 		cell.charge -= 1000 / severity
 		if (cell.charge < 0)
 			cell.charge = 0
@@ -170,6 +171,7 @@ BLIND     // can't see anything
 	siemens_coefficient = 0.9
 	body_parts_covered = FEET
 	slot_flags = SLOT_FEET
+	w_class = 3
 
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
@@ -186,6 +188,7 @@ BLIND     // can't see anything
 	slot_flags = SLOT_OCLOTHING
 	var/blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
+	w_class = 3
 
 //Spacesuit
 //Note: Everything in modules/clothing/spacesuits should have the entire suit grouped together.
@@ -232,6 +235,7 @@ BLIND     // can't see anything
 	flags = FPRINT | TABLEPASS
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	w_class = 3
 	var/has_sensor = 1//For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0
 		/*
