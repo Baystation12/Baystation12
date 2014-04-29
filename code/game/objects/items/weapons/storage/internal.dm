@@ -7,6 +7,7 @@
 	loc = master_item
 	name = master_item.name
 	verbs -= /obj/item/verb/verb_pickup	//make sure this is never picked up.
+	..()
 
 /obj/item/weapon/storage/internal/attack_hand()
 	return		//make sure this is never picked up
@@ -71,7 +72,7 @@
 		src.open(user)
 		return 0
 	
-	for(var/mob/M in range(1,master_item))
+	for(var/mob/M in range(1))
 		if (M.s_active == src)
 			src.close(M)
 	return 1
