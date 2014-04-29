@@ -52,9 +52,40 @@
 	var/agony = 0
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
 
+
 	proc/delete()
 		// Garbage collect the projectiles
 		loc = null
+
+	resetVariables()
+		bumped = initial(bumped)
+		def_zone = initial(def_zone)
+		firer = initial(firer)
+		silenced = initial(silenced)
+		yo = initial(yo)
+		xo = initial(xo)
+		current = initial(current)
+		shot_from = initial(shot_from)
+		original = initial(original)
+		starting = initial(starting)
+		permutated = initial(permutated)
+		p_x = initial(p_x)
+		p_y = initial(p_y)
+		damage = initial(damage)
+		damage_type = initial(damage_type)
+		nodamage = initial(nodamage)
+		flag = initial(flag)
+		projectile_type = initial(projectile_type)
+		kill_count = initial(kill_count)
+		stun = initial(stun)
+		weaken = initial(weaken)
+		paralyze = initial(paralyze)
+		irradiate = initial(irradiate)
+		stutter = initial(stutter)
+		eyeblur = initial(eyeblur)
+		drowsy = initial(drowsy)
+		agony = initial(agony)
+		return ..()
 
 	proc/on_hit(var/atom/target, var/blocked = 0)
 		if(blocked >= 2)		return 0//Full block
