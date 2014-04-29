@@ -75,17 +75,31 @@
 				used_radios += r_ear
 
 		if("right_ear")
+			var/obj/item/device/radio/R
+			var/has_radio = 0
 			if(r_ear && istype(r_ear,/obj/item/device/radio))
-				var/obj/item/device/radio/R = r_ear		
-				R.talk_into(src,message,verb,speaking)
-				used_radios += r_ear
+				R = r_ear
+				has_radio = 1
+			if(r_hand && istype(r_hand, /obj/item/device/radio))
+				R = r_hand
+				has_radio = 1
+			if(has_radio)
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += R
 
 
 		if("left_ear")
+			var/obj/item/device/radio/R
+			var/has_radio = 0
 			if(l_ear && istype(l_ear,/obj/item/device/radio))
-				var/obj/item/device/radio/R = l_ear
-				R.talk_into(src,message,verb,speaking)
-				used_radios += l_ear
+				R = l_ear
+				has_radio = 1
+			if(l_hand && istype(l_hand,/obj/item/device/radio))
+				R = l_hand				
+				has_radio = 1
+			if(has_radio)
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += R
 
 		if("intercom")
 			for(var/obj/item/device/radio/intercom/I in view(1, null))
