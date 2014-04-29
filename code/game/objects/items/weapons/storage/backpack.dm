@@ -24,11 +24,12 @@
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	..(user, slot)
 
+/*
 /obj/item/weapon/storage/backpack/dropped(mob/user as mob)
-	//dont play sound when dropped on the floor
 	if (loc == user && src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	..(user)
+*/
 
 /*
  * Backpack Types
