@@ -203,7 +203,7 @@ obj/item/projectile/kinetic/New()
 			var/turf/target_turf = get_turf(A)
 			//testing("Bumped [A.type], on [target_turf.type].")
 			if(istype(target_turf, /turf/unsimulated/mineral))
-				var/turf/unsimulated/mineral/M = target_turf
+				var/turf/simulated/mineral/M = target_turf
 				M.GetDrilled()
 			// Now we bump as a bullet, if the atom is a non-turf.
 			if(!isturf(A))
