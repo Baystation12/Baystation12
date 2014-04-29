@@ -161,6 +161,7 @@ var/list/debug_verbs = list (
         ,/client/proc/hide_debug_verbs
 	,/client/proc/testZAScolors
 	,/client/proc/testZAScolors_remove
+	,/client/proc/setup_supermatter_engine
 	)
 
 
