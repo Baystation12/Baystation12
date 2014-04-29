@@ -36,6 +36,9 @@
 
 		if (!( istype(over_object, /obj/screen) ))
 			return ..()
+		
+		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
+		//there's got to be a better way of doing this.
 		if (!(src.loc == usr) || (src.loc && src.loc.loc == usr))
 			return
 		
