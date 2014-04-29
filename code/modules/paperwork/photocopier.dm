@@ -57,6 +57,19 @@
 						c.info += "</font>"
 						c.name = copy.name // -- Doohl
 						c.fields = copy.fields
+						c.stamps = copy.stamps
+						c.stamped = copy.stamped
+						var/list/temp_overlays = copy.overlays       //Iterates through stamps and puts a matching
+						for (var/j = 1, j <= temp_overlays.len, j++) //gray overlay onto the copy
+							var/icon/I = icon('icons/obj/bureaucracy.dmi', "[copy.ico[j]]")
+							if (toner > 10) //plenty of toner
+								I.MapColors(rgb(57,57,57), rgb(120,120,120), rgb(18,18,18), rgb(0,0,0))
+							else            //not much toner, lightened stamp
+								I.MapColors(rgb(57,57,57), rgb(120,120,120), rgb(18,18,18), rgb(100,100,100))
+							var/image/img = image(I)
+							img.pixel_x = copy.offset_x[j]
+							img.pixel_y = copy.offset_y[j]
+							c.overlays += img
 						c.updateinfolinks()
 						toner--
 						sleep(15)
