@@ -61,6 +61,8 @@ obj/item/weapon/gun/energy/laser/retro
 			return 1
 	return 0
 
+/obj/item/weapon/gun/energy/laser/cyborg/emp_act()
+	return
 
 
 /obj/item/weapon/gun/energy/lasercannon
