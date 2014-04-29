@@ -152,6 +152,7 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/hats.dmi'
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
+	w_class = 2.0
 
 
 //Mask
@@ -171,7 +172,6 @@ BLIND     // can't see anything
 	siemens_coefficient = 0.9
 	body_parts_covered = FEET
 	slot_flags = SLOT_FEET
-	w_class = 3
 
 	permeability_coefficient = 0.50
 	slowdown = SHOES_SLOWDOWN
