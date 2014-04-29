@@ -39,7 +39,7 @@
 							holder.icon_state = "hudprisoner"
 							client.images += holder
 							break
-						else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Paroled"))
+						else if((R.fields["id"] == E.fields["id"]) && (R.fields["criminal"] == "Parolled"))
 							holder.icon_state = "hudparolled"
 							client.images += holder
 							break
