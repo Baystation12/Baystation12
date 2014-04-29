@@ -302,7 +302,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 			stand_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 
 	//Skin color
-	if(!skeleton && !husk && !hulk && (species.flags & HAS_SKIN_COLOR))
+	if(!skeleton && !husk && !hulk && (species.bodyflags & HAS_SKIN_COLOR))
 		stand_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
 
 	if(husk)
