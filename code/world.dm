@@ -56,6 +56,7 @@
 	sun = new /datum/sun()
 	radio_controller = new /datum/controller/radio()
 	data_core = new /obj/effect/datacore()
+	crafting_master = new /datum/crafting_controller()
 	paiController = new /datum/paiController()
 
 	if(!setup_database_connection())
