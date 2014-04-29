@@ -249,6 +249,8 @@
 	getFiles(
 		'html/search.js',
 		'html/panels.css',
+		'html/painew.png',
+		'html/loading.gif',
 		'icons/pda_icons/pda_atmos.png',
 		'icons/pda_icons/pda_back.png',
 		'icons/pda_icons/pda_bell.png',
