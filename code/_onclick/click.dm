@@ -92,8 +92,8 @@
 
 		return
 
-	// operate two levels deep here (item in backpack in src; NOT item in box in backpack in src)
-	if(A == loc || (A in loc) || (A in contents) || (A.loc in contents))
+	// operate two STORAGE levels deep here (item in backpack in src; NOT item in box in backpack in src)
+	if(A == loc || (A in loc) || A.storage_depth(src) <= 1)
 
 		// faster access to objects already on you
 		if(A in contents)

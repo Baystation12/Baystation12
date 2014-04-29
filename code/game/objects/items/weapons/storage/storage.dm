@@ -454,4 +454,15 @@
 			var/obj/O = A
 			O.hear_talk(M, text)
 
-
+//Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
+//If user is specified, this proc returns the storage depth to the user's contents.
+/atom/proc/storage_depth(mob/user=null)
+	var/depth = 0
+	var/atom/cur_atom = src
+	
+	while (cur_atom && !isarea(cur_atom) && (!(user) || !(cur_atom in user.contents)))
+		if (istype(cur_atom.loc, /obj/item/weapon/storage))
+			depth++
+		cur_atom = cur_atom.loc
+	
+	return depth
