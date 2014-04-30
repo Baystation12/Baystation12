@@ -173,12 +173,100 @@
 	icon_state = "medgreen"
 	item_color = "medgreen"
 
+//holsters
 /obj/item/clothing/tie/holster
 	name = "shoulder holster"
 	desc = "A handgun holster."
 	icon_state = "holster"
 	item_color = "holster"
 	var/obj/item/weapon/gun/holstered = null
+
+//subtypes can override this to specify what can be holstered
+/obj/item/clothing/tie/holster/proc/can_holster(obj/item/weapon/gun/W)
+	return W.isHandgun()
+
+/obj/item/clothing/tie/holster/proc/holster(obj/item/I, mob/user as mob)
+	if(holstered)
+		user << "\red There is already a [holstered] holstered here!"
+	
+	if (!istype(I, /obj/item/weapon/gun))
+		user << "\red Only guns can be holstered!"
+	
+	var/obj/item/weapon/gun/W = I
+	if (!can_holster(W))
+		user << "\red This [W] won't fit in the [src]!"
+		return
+	
+	holstered = W
+	user.drop_from_inventory(holstered)
+	holstered.loc = src
+	holstered.add_fingerprint(user)
+	user.visible_message("\blue [user] holsters the [holstered].", "You holster the [holstered].")
+
+/obj/item/clothing/tie/holster/proc/unholster(mob/user as mob)
+	if(!holstered)
+		return
+	
+	if(istype(user.get_active_hand(),/obj) && istype(user.get_inactive_hand(),/obj))
+		user << "\red You need an empty hand to draw the [holstered]!"
+	else
+		if(user.a_intent == "hurt")
+			usr.visible_message("\red [user] draws the [holstered], ready to shoot!", \
+			"\red You draw the [holstered], ready to shoot!")
+		else
+			user.visible_message("\blue [user] draws the [holstered], pointing it at the ground.", \
+			"\blue You draw the [holstered], pointing it at the ground.")
+		user.put_in_hands(holstered)
+		holstered.add_fingerprint(user)
+		holstered = null
+
+/obj/item/clothing/tie/holster/attack_hand(mob/user as mob)
+	if (has_suit)	//if we are part of a suit
+		if (holstered)
+			unholster(user)
+		return
+	
+	..(user)
+
+/obj/item/clothing/tie/holster/attackby(obj/item/W as obj, mob/user as mob)
+	holster(W, user)
+
+/obj/item/clothing/tie/holster/emp_act(severity)
+	if (holstered)
+		holstered.emp_act(severity)
+	..()
+
+/obj/item/clothing/tie/holster/examine()
+	set src in view()
+	..()
+	if (holstered)
+		usr << "A [holstered] is holstered here."
+	else
+		usr << "It is empty."
+
+/obj/item/clothing/tie/holster/attach_to(obj/item/clothing/under/S, mob/user as mob)
+	..()
+	has_suit.verbs += /obj/item/clothing/tie/holster/verb/holster_verb
+
+/obj/item/clothing/tie/holster/remove(mob/user as mob)
+	has_suit.verbs -= /obj/item/clothing/tie/holster/verb/holster_verb
+	..()
+
+/obj/item/clothing/tie/holster/verb/holster_verb()
+	set name = "Holster"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+
+	if(!holstered)
+		if(!istype(usr.get_active_hand(), /obj/item/weapon/gun))
+			usr << "\blue You need your gun equiped to holster it."
+			return
+		var/obj/item/weapon/gun/W = usr.get_active_hand()
+		holster(W, usr)
+	else
+		unholster(usr)
 
 /obj/item/clothing/tie/holster/armpit
 	name = "shoulder holster"
@@ -221,7 +309,6 @@
 		..(over_object)
 
 /obj/item/clothing/tie/storage/attackby(obj/item/W as obj, mob/user as mob)
-	..()
 	hold.attackby(W, user)
 
 /obj/item/clothing/tie/storage/emp_act(severity)
@@ -343,27 +430,14 @@
 	item_color = "unathiharness2"
 	slots = 2
 
-/obj/item/clothing/tie/storage/knifeharness/attackby(var/obj/item/O as obj, mob/user as mob)
-	..()
-	update()
-
-/obj/item/clothing/tie/storage/knifeharness/proc/update()
-	var/count = 0
-	for(var/obj/item/I in hold)
-		if(istype(I,/obj/item/weapon/hatchet/unathiknife))
-			count++
-	if(count>2) count = 2
-	item_state = "unathiharness[count]"
-	icon_state = item_state
-	item_color = item_state
-
-	if(istype(loc, /obj/item/clothing))
-		var/obj/item/clothing/U = loc
-		if(istype(U.loc, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = U.loc
-			H.update_inv_w_uniform()
-
 /obj/item/clothing/tie/storage/knifeharness/New()
 	..()
+	hold.max_combined_w_class = 4
+	hold.can_hold = list("/obj/item/weapon/hatchet/unathiknife",\
+	"/obj/item/weapon/kitchen/utensil/knife",\
+	"/obj/item/weapon/kitchen/utensil/pknife",\
+	"/obj/item/weapon/kitchenknife",\
+	"/obj/item/weapon/kitchenknife/ritual")
+	
 	new /obj/item/weapon/hatchet/unathiknife(hold)
 	new /obj/item/weapon/hatchet/unathiknife(hold)

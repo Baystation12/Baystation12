@@ -456,14 +456,19 @@
 			O.hear_talk(M, text)
 
 //Returns the storage depth of an atom. This is the number of storage items the atom is contained in before reaching toplevel (the area).
-//If user is specified, this proc returns the storage depth to the user's contents.
-/atom/proc/storage_depth(mob/user=null)
+//Returns -1 if the atom was not found on user.
+/atom/proc/storage_depth(mob/user)
 	var/depth = 0
 	var/atom/cur_atom = src
 	
-	while (cur_atom && !isarea(cur_atom) && (!(user) || !(cur_atom in user.contents)))
+	while (cur_atom && !(cur_atom in user.contents))
+		if (isarea(cur_atom))
+			return -1
 		if (istype(cur_atom.loc, /obj/item/weapon/storage))
 			depth++
 		cur_atom = cur_atom.loc
+	
+	if (!cur_atom)
+		return -1	//inside something with a null loc.
 	
 	return depth
