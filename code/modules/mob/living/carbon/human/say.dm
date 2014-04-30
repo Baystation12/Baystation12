@@ -74,7 +74,7 @@
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += r_ear
 
-		if("right_ear")
+		if("right ear")
 			var/obj/item/device/radio/R
 			var/has_radio = 0
 			if(r_ear && istype(r_ear,/obj/item/device/radio))
@@ -88,7 +88,7 @@
 				used_radios += R
 
 
-		if("left_ear")
+		if("left ear")
 			var/obj/item/device/radio/R
 			var/has_radio = 0
 			if(l_ear && istype(l_ear,/obj/item/device/radio))
