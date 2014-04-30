@@ -239,6 +239,10 @@
 	bodyflags = FEET_NOSLIP
 	abilities = list(/mob/living/carbon/human/slime/proc/slimepeople_ventcrawl)
 
+/datum/species/slime/handle_post_spawn(var/mob/living/carbon/human/H)
+	H.dna.mutantrace = "slime"
+	H.update_mutantrace()
+
 
 /datum/species/grey // /vg/
 	name = "Grey"

@@ -33,17 +33,12 @@
 	h_style = "Bald"
 	..(new_loc, "Skellington")
 
-
 /mob/living/carbon/human/kidan/New(var/new_loc)
 	..(new_loc, "Kidan")
 
 /mob/living/carbon/human/slime/New(var/new_loc)
 	..(new_loc, "Slime People")
-	dna = new /datum/dna(null)
-	dna.species=species.name
-	dna.mutantrace = "slime"
-	update_mutantrace()
-
+	verbs += /mob/living/carbon/human/slime/proc/slimepeople_ventcrawl
 
 /mob/living/carbon/human/grey/New(var/new_loc)
 	..(new_loc, "Grey")
