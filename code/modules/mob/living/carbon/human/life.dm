@@ -1410,14 +1410,14 @@
 	/* HUD shit goes here, as long as it doesn't modify sight flags */
 	// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
 
-				else if(istype(glasses, /obj/item/clothing/glasses/sunglasses))
+				if(istype(glasses, /obj/item/clothing/glasses/sunglasses))
 					see_in_dark = 1
 					if(istype(glasses, /obj/item/clothing/glasses/sunglasses/sechud))
 						var/obj/item/clothing/glasses/sunglasses/sechud/O = glasses
 						if(O.hud)		O.hud.process_hud(src)
 						if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
 
-				else if(istype(glasses, /obj/item/clothing/glasses/hud))
+				if(istype(glasses, /obj/item/clothing/glasses/hud))
 					var/obj/item/clothing/glasses/hud/O = glasses
 					O.process_hud(src)
 					if(!druggy)
