@@ -23,6 +23,9 @@
 	var/stamps		//The (text for the) stamps on the paper.
 	var/fields		//Amount of user created fields
 	var/list/stamped
+	var/ico[0]      //Icons and
+	var/offset_x[0] //offsets stored for later
+	var/offset_y[0] //usage by the photocopier
 	var/rigged = 0
 	var/spam_flag = 0
 
@@ -36,6 +39,7 @@
 	..()
 	pixel_y = rand(-8, 8)
 	pixel_x = rand(-9, 9)
+	stamps = ""
 	spawn(2)
 		update_icon()
 		updateinfolinks()
@@ -320,14 +324,21 @@
 		stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the [P.name].</i>"
 
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		stampoverlay.pixel_x = rand(-2, 2)
-		stampoverlay.pixel_y = rand(-3, 2)
+		var/x = rand(-2, 2)
+		var/y = rand(-3, 2)
+		offset_x += x
+		offset_y += y
+		stampoverlay.pixel_x = x
+		stampoverlay.pixel_y = y
 
 		if(istype(P, /obj/item/weapon/stamp/clown))
 			if(!clown)
 				user << "<span class='notice'>You are totally unable to use the stamp. HONK!</span>"
 				return
 
+		if(!ico)
+			ico = new
+		ico += "paper_[P.icon_state]"
 		stampoverlay.icon_state = "paper_[P.icon_state]"
 
 		if(!stamped)
