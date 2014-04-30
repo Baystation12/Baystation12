@@ -481,7 +481,7 @@
 					config.cult_ghostwriter = 1
 
 				if("req_cult_ghostwriter")
-					config.cult_ghostwriter_req_cultists = value
+					config.cult_ghostwriter_req_cultists = text2num(value)
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
