@@ -252,21 +252,33 @@
 	has_suit.verbs -= /obj/item/clothing/tie/holster/verb/holster_verb
 	..()
 
+//For the holster hotkey
 /obj/item/clothing/tie/holster/verb/holster_verb()
 	set name = "Holster"
 	set category = "Object"
 	set src in usr
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
+	
+	var/obj/item/clothing/tie/holster/H = null
+	if (istype(src, /obj/item/clothing/tie/holster))
+		H = src
+	else if (istype(src, /obj/item/clothing/under))
+		var/obj/item/clothing/under/S = src
+		if (S.hastie)
+			H = S.hastie
+	
+	if (!H)
+		usr << "/red Something is very wrong."
 
-	if(!holstered)
+	if(!H.holstered)
 		if(!istype(usr.get_active_hand(), /obj/item/weapon/gun))
 			usr << "\blue You need your gun equiped to holster it."
 			return
 		var/obj/item/weapon/gun/W = usr.get_active_hand()
-		holster(W, usr)
+		H.holster(W, usr)
 	else
-		unholster(usr)
+		H.unholster(usr)
 
 /obj/item/clothing/tie/holster/armpit
 	name = "shoulder holster"
