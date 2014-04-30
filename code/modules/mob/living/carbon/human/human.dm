@@ -40,7 +40,9 @@
 /mob/living/carbon/human/slime/New(var/new_loc)
 	..(new_loc, "Slime People")
 	dna = new /datum/dna(null)
+	dna.species=species.name
 	dna.mutantrace = "slime"
+	update_mutantrace()
 
 
 /mob/living/carbon/human/grey/New(var/new_loc)
