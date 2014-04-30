@@ -317,17 +317,17 @@
 
 	if(isrobot(user))
 		user << "\blue You're a robot. No."
-		return 1 //Robots can't interact with storage items.
+		return //Robots can't interact with storage items.
 
 	if(!can_be_inserted(W))
-		return 0
+		return
 
 	if(istype(W, /obj/item/weapon/tray))
 		var/obj/item/weapon/tray/T = W
 		if(T.calc_carry() > 0)
 			if(prob(85))
 				user << "\red The tray won't fit in [src]."
-				return 1
+				return
 			else
 				W.loc = user.loc
 				if ((user.client && user.s_active != src))
@@ -335,8 +335,9 @@
 				W.dropped(user)
 				user << "\red God damnit!"
 
+	W.add_fingerprint(user)
 	handle_item_insertion(W)
-	return 1
+	return
 
 /obj/item/weapon/storage/dropped(mob/user as mob)
 	return

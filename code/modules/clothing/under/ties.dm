@@ -8,6 +8,23 @@
 	flags = FPRINT | TABLEPASS
 	slot_flags = 0
 	w_class = 2.0
+	var/obj/item/clothing/under/has_suit = null		//the suit the tie may be attached to
+
+//when user attached an accessory to S
+/obj/item/clothing/tie/proc/attach_to(obj/item/clothing/under/S, mob/user as mob)
+	if(!istype(S))
+		return
+	has_suit = S
+	loc = has_suit
+	user << "<span class='notice'>You attach [src] to [has_suit].</span>"
+	src.add_fingerprint(user)
+
+/obj/item/clothing/tie/proc/remove(mob/user as mob)
+	if(!has_suit)
+		return
+	has_suit = null
+	usr.put_in_hands(src)
+	src.add_fingerprint(user)
 
 /obj/item/clothing/tie/blue
 	name = "blue tie"
@@ -116,7 +133,7 @@
 //Armbands
 /obj/item/clothing/tie/armband
 	name = "red armband"
-	desc = "An fancy red armband!"
+	desc = "A fancy red armband!"
 	icon_state = "red"
 	item_color = "red"
 
@@ -177,16 +194,43 @@
 
 /obj/item/clothing/tie/storage
 	name = "load bearing equipment"
-	desc = "Used to hold things when you don't have enough hands for that."
+	desc = "Used to hold things when you don't have enough hands."
 	icon_state = "webbing"
 	item_color = "webbing"
 	var/slots = 3
-	var/obj/item/weapon/storage/pockets/hold
+	var/obj/item/weapon/storage/internal/hold
 
 /obj/item/clothing/tie/storage/New()
-	hold = new /obj/item/weapon/storage/pockets(src)
-	hold.master_item = src
+	..()
+	hold = new/obj/item/weapon/storage/internal(src)
 	hold.storage_slots = slots
+
+/obj/item/clothing/tie/storage/attack_hand(mob/user as mob)
+	if (has_suit)	//if we are part of a suit
+		hold.open(user)
+		return
+	
+	if (hold.handle_attack_hand(user))	//otherwise interact as a regular storage item
+		..(user)
+
+/obj/item/clothing/tie/storage/MouseDrop(obj/over_object as obj)
+	if (has_suit)
+		return
+	
+	if (hold.handle_mousedrop(usr, over_object))
+		..(over_object)
+
+/obj/item/clothing/tie/storage/attackby(obj/item/W as obj, mob/user as mob)
+	..()
+	hold.attackby(W, user)
+
+/obj/item/clothing/tie/storage/emp_act(severity)
+	hold.emp_act(severity)
+	..()
+
+/obj/item/clothing/tie/storage/hear_talk(mob/M, var/msg)
+	hold.hear_talk(M, msg)
+	..()
 
 /obj/item/clothing/tie/storage/attack_self(mob/user as mob)
 	user << "<span class='notice'>You empty [src].</span>"
@@ -195,14 +239,6 @@
 	for(var/obj/item/I in hold.contents)
 		hold.remove_from_storage(I, T)
 	src.add_fingerprint(user)
-
-/obj/item/clothing/tie/storage/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	hold.attackby(W,user)
-	src.add_fingerprint(user)
-
-/obj/item/weapon/storage/pockets
-	name = "storage"
-	var/master_item		//item it belongs to
 
 /obj/item/clothing/tie/storage/webbing
 	name = "webbing"

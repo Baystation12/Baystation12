@@ -250,17 +250,17 @@ BLIND     // can't see anything
 
 
 /obj/item/clothing/under/attackby(obj/item/I, mob/user)
+	if(hastie)
+		hastie.attackby(I, user)
+		return
+	
 	if(!hastie && istype(I, /obj/item/clothing/tie))
 		user.drop_item()
 		hastie = I
-		I.loc = src
-		user << "<span class='notice'>You attach [I] to [src].</span>"
+		hastie.attach_to(src, user)
 
 		if (istype(hastie,/obj/item/clothing/tie/holster))
 			verbs += /obj/item/clothing/under/proc/holster
-
-		if (istype(hastie,/obj/item/clothing/tie/storage))
-			verbs += /obj/item/clothing/under/proc/storage
 
 		if(istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
@@ -269,6 +269,33 @@ BLIND     // can't see anything
 		return
 
 	..()
+	
+/obj/item/clothing/under/attack_hand(mob/user as mob)
+	//only forward to the attached accessory if the clothing is equipped (not in a storage)
+	if(hastie && src.loc == user)
+		hastie.attack_hand(user)
+		return
+	
+	..()
+
+//This is to allow people to take off suits when there is an attached accessory
+/obj/item/weapon/storage/MouseDrop(obj/over_object as obj)
+	if (ishuman(usr) || ismonkey(usr))
+		//makes sure that the clothing is equipped so that we can't drag it into our hand from miles away.
+		if (!(src.loc == usr))
+			return
+		
+		if (!( usr.restrained() ) && !( usr.stat ))
+			switch(over_object.name)
+				if("r_hand")
+					usr.u_equip(src)
+					usr.put_in_r_hand(src)
+				if("l_hand")
+					usr.u_equip(src)
+					usr.put_in_l_hand(src)
+			src.add_fingerprint(usr)
+			return
+	return
 
 /obj/item/clothing/under/examine()
 	set src in view()
@@ -340,13 +367,7 @@ BLIND     // can't see anything
 		if (istype(hastie,/obj/item/clothing/tie/holster))
 			verbs -= /obj/item/clothing/under/proc/holster
 
-		if (istype(hastie,/obj/item/clothing/tie/storage))
-			verbs -= /obj/item/clothing/under/proc/storage
-			var/obj/item/clothing/tie/storage/W = hastie
-			if (W.hold)
-				W.hold.close(usr)
-
-		usr.put_in_hands(hastie)
+		hastie.remove(usr)
 		hastie = null
 
 		if(istype(loc, /mob/living/carbon/human))
@@ -393,22 +414,3 @@ BLIND     // can't see anything
 				"\blue You draw \the [H.holstered], pointing it at the ground.")
 			usr.put_in_hands(H.holstered)
 			H.holstered = null
-
-/obj/item/clothing/under/proc/storage()
-	set name = "Look in storage"
-	set category = "Object"
-	set src in usr
-	if(!istype(usr, /mob/living)) return
-	if(usr.stat) return
-
-	if (!hastie || !istype(hastie,/obj/item/clothing/tie/storage))
-		usr << "\red You need something to store items in for that!"
-		return
-	var/obj/item/clothing/tie/storage/W = hastie
-
-	if (!istype(W.hold))
-		return
-	
-	W.hold.open(usr)
-
-
