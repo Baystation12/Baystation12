@@ -292,7 +292,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 		var/turf/simulated/floor/plating/airless/asteroid/N = ChangeTurf(/turf/simulated/floor/plating/airless/asteroid)
 		N.fullUpdateMineralOverlays()
 
-		if(rand(1,500) == 1)
+		if(rand(1,750) == 1)
 			visible_message("<span class='notice'>An old dusty crate was buried within!</span>")
 			new /obj/structure/closet/crate/secure/loot(src)
 

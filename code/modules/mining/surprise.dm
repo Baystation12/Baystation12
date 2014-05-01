@@ -89,8 +89,8 @@ var/global/list/mining_surprises = typesof(/mining_surprise)-/mining_surprise
 	// What to place if true
 	var/placetype=null
 
-	var/min_to_place=0 // Force placement at ALL candidates.
-	var/max_to_place=0 // 0 = max amount of ALL candidates.
+	var/min_to_place=5 // Force placement at ALL candidates.
+	var/max_to_place=10 // 0 = max amount of ALL candidates.
 
 	var/placed_times=0
 
