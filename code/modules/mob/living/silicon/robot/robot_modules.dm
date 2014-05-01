@@ -206,7 +206,9 @@
 		modules += new /obj/item/weapon/storage/bag/ore(src)
 		modules += new /obj/item/weapon/pickaxe/borgdrill(src)
 		modules += new /obj/item/weapon/storage/bag/sheetsnatcher/borg(src)
-
+		modules += new /obj/item/weapon/wrench(src)
+		modules += new /obj/item/weapon/pickaxe/robotic(src)
+		modules += new /obj/item/device/depth_scanner(src)
 
 /obj/item/weapon/robot_module/syndicate
 	name = "syndicate robot module"
