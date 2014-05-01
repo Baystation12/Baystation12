@@ -2166,7 +2166,7 @@
 "aPH" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area)
 "aPI" = (/turf/simulated/floor{dir = 4; icon_state = "warning"},/area/hallway/secondary/entry)
 "aPJ" = (/obj/structure/plasticflaps{opacity = 0},/turf/simulated/floor{icon_state = "delivery"},/area)
-"aPK" = (/obj/machinery/transformer/xray/conveyor,/turf/simulated/floor{icon_state = "delivery"},/area)
+"aPK" = (/obj/machinery/transformer/xray/conveyor{dir = 1},/turf/simulated/floor{icon_state = "delivery"},/area)
 "aPL" = (/turf/simulated/floor{dir = 8; icon_state = "warning"},/area/hallway/secondary/entry)
 "aPM" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"; tag = ""},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 6},/turf/simulated/floor,/area/hallway/secondary/entry)
 "aPN" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; tag = ""},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 9; pixel_y = 0},/turf/simulated/floor,/area/hallway/secondary/entry)
