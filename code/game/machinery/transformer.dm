@@ -159,6 +159,11 @@
 	name = "Automatic X-Ray 5000"
 	desc = "A large metalic machine with an entrance and an exit. A sign on the side reads, 'backpack go in, backpack come out', 'human go in, irradiated human come out'."
 
+/obj/machinery/transformer/xray/New()
+	// On us
+	..()
+	new /obj/machinery/conveyor/auto(loc, EAST)
+
 /obj/machinery/transformer/xray/conveyor/New()
 	..()
 	var/turf/T = loc
@@ -168,13 +173,21 @@
 		//East
 		var/turf/east = locate(T.x + 1, T.y, T.z)
 		if(istype(east, /turf/simulated/floor))
-			new /obj/machinery/conveyor/auto(east, WEST)
+			new /obj/machinery/conveyor/auto(east, EAST)
+		//East2
+		var/turf/east2 = locate(T.x + 2, T.y, T.z)
+		if(istype(east2, /turf/simulated/floor))
+			new /obj/machinery/conveyor/auto(east2, EAST)
 
 		// West
 		var/turf/west = locate(T.x - 1, T.y, T.z)
 		if(istype(west, /turf/simulated/floor))
-			new /obj/machinery/conveyor/auto(west, WEST)
+			new /obj/machinery/conveyor/auto(west, EAST)
 
+		// West2
+		var/turf/west2 = locate(T.x - 2, T.y, T.z)
+		if(istype(west2, /turf/simulated/floor))
+			new /obj/machinery/conveyor/auto(west2, EAST)
 
 /obj/machinery/transformer/xray/power_change()
 	..()
@@ -197,11 +210,11 @@
 		// Only humans can enter from the west side, while lying down.
 		var/move_dir = get_dir(loc, AM.loc)
 		var/mob/living/carbon/human/H = AM
-		if(H.lying && move_dir == EAST)// || move_dir == WEST)
+		if(H.lying && move_dir == WEST)// || move_dir == WEST)
 			AM.loc = src.loc
 			irradiate(AM)
 
-	if(isobject(AM))
+	else if(isobject(AM))
 		AM.loc = src.loc
 		scan(AM)
 
@@ -210,7 +223,7 @@
 		return
 
 	flick("separator-AO0",src)
-	playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+	playsound(src.loc, 'sound/effects/alert.ogg', 50, 0)
 	sleep(5)
 	H.apply_effect((rand(40,70)),IRRADIATE,0)
 	if (prob(5))
@@ -220,9 +233,6 @@
 		else
 			randmutg(H) // Applies good mutation
 			domutcheck(H,null,1)
-
-
-
 
 
 /obj/machinery/transformer/xray/proc/scan(var/obj/item/I)
@@ -240,7 +250,7 @@
 	for(var/obj/item/weapon/melee/ML in src.loc)
 		badcount++
 	if(badcount)
-		playsound(src.loc, 'sound/effects/alert.ogg', 60, 0)
+		playsound(src.loc, 'sound/effects/alert.ogg', 50, 0)
 		flick("separator-AO0",src)
 	else
 		playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
