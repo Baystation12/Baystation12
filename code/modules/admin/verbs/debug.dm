@@ -997,9 +997,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 				Rad.anchored = 1
 				Rad.connect_to_network()
 
-				var/obj/item/weapon/tank/plasma/Plasma = new/obj/item/weapon/tank/plasma(Rad)
+				var/obj/item/weapon/tank/phoron/Plasma = new/obj/item/weapon/tank/phoron(Rad)
 
-				Plasma.air_contents.toxins = 29.1154	//This is a full tank if you filled it from a canister
+				Plasma.air_contents.phoron = 29.1154	//This is a full tank if you filled it from a canister
 				Rad.P = Plasma
 
 				Plasma.loc = Rad
@@ -1043,13 +1043,13 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		T.zone.air.nitrogen += 450
 		T.zone.air.temperature = 50
 		T.zone.air.update_values()
-				
-				
+
+
 	log_admin("[key_name(usr)] setup the supermatter engine [response == "Setup except coolant" ? "without coolant" : ""]")
 	message_admins("\blue [key_name_admin(usr)] setup the supermatter engine  [response == "Setup except coolant" ? "without coolant": ""]", 1)
 	return
-			
-	
+
+
 
 /client/proc/cmd_debug_mob_lists()
 	set category = "Debug"
