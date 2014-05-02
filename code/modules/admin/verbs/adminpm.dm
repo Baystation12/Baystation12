@@ -188,9 +188,13 @@
 		src << "<font color='red'>Error: Private-Message: You are unable to use PM-s (muted).</font>"
 		return
 
-	var/msg = input(src,"Message:", "Private message to admins on IRC") as text|null
+	var/msg = input(src,"Message:", "Private message to admins on IRC / 400 character limit") as text|null
 	sanitize(msg)
 
+	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into seperate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
+		src << "\red Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting"
+		src << "\blue [msg]"
+		return
 
 	send2adminirc("PlayerPM from [key_name(src)]: [html_decode(msg)]")
 
@@ -201,7 +205,5 @@
 		if(X == src)
 			continue
 		if((X.holder.rights & R_ADMIN) || (X.holder.rights & R_MOD))
-			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;IRC-Admins:</B> \blue [msg]</font>"
-	
-	
+			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;IRC-Admins:</B> \blue [msg]</font>"	
 
