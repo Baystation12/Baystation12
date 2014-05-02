@@ -209,7 +209,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/suit/space
 	name = "Space suit"
-	desc = "A suit that protects against low pressure environments. Has a big 13 on the back."
+	desc = "A suit that protects against low pressure environments. \"NSS EXODUS\" is written in large block letters on the back."
 	icon_state = "space"
 	item_state = "s_suit"
 	w_class = 4//bulky item
@@ -220,7 +220,7 @@ BLIND     // can't see anything
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen)
 	slowdown = 3
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL 
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
