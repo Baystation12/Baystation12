@@ -66,9 +66,12 @@
 //		world << "End of Topic() call."
 //		..()
 
+var/world_topic_spam_protect_ip = "0.0.0.0"
+var/world_topic_spam_protect_time = world.timeofday
+
 /world/Topic(T, addr, master, key)
 	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
-
+	
 	if (T == "ping")
 		var/x = 1
 		for (var/client/C)
@@ -120,8 +123,18 @@
 				4. sender = the ircnick that send the message.
 		*/
 
+
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+
 			return "Bad Key"
 		
 		var/client/C
@@ -148,6 +161,28 @@
 				A << amessage
 
 		return "Message Successful"
+
+	else if(copytext(T,1,6) == "notes")
+		/*
+			We got a request for notes from the IRC Bot
+			expected output:
+				1. notes = ckey of person the notes lookup is for
+				2. validationkey = the key the bot has, it should match the gameservers commspassword in it's configuration.
+		*/
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+			return "Bad Key"
+
+		return show_player_info_irc(input["notes"])
+		
 
 		
 
