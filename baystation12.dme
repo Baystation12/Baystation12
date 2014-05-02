@@ -265,6 +265,7 @@
 #include "code\game\supplyshuttle.dm"
 #include "code\game\area\ai_monitored.dm"
 #include "code\game\area\areas.dm"
+#include "code\game\area\Dynamic areas.dm"
 #include "code\game\area\Space Station 13 areas.dm"
 #include "code\game\dna\dna2.dm"
 #include "code\game\dna\dna2_domutcheck.dm"
