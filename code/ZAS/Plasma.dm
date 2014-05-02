@@ -141,8 +141,10 @@ obj/var/contaminated = 0
 		if(vsc.plc.PLASMAGUARD_ONLY)
 			if(wear_suit.flags & PLASMAGUARD) return 1
 		else
-			if(wear_suit.flags_inv & HIDEJUMPSUIT) return 1
-		//should check HIDETAIL as well, but for the moment tails are not a part that can be damaged separately
+			if(wear_suit.flags_inv & HIDEJUMPSUIT)
+				if((species.flags & HAS_TAIL) && !(wear_suit.flags_inv & HIDETAIL))
+					if(prob(1)) return 0 //Plasma can sometimes get through such an open suit.
+				return 1
 	return 0
 
 /mob/living/carbon/human/proc/suit_contamination()
