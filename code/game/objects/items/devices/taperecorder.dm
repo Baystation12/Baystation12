@@ -211,7 +211,7 @@
 	for(var/i=1,storedinfo.len >= i,i++)
 		t1 += "[storedinfo[i]]<BR>"
 	P.info = t1
-	P.name = "paper- 'Transcript'"
+	P.name = "Transcript"
 	canprint = 0
 	sleep(300)
 	canprint = 1
