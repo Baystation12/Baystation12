@@ -161,8 +161,8 @@
 
 /obj/machinery/transformer/xray/New()
 	// On us
-	..()
 	new /obj/machinery/conveyor/auto(loc, EAST)
+	addAtProcessing()
 
 /obj/machinery/transformer/xray/conveyor/New()
 	..()
