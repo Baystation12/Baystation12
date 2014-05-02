@@ -132,12 +132,25 @@ obj/var/contaminated = 0
 
 /mob/living/carbon/human/proc/pl_head_protected()
 	//Checks if the head is adequately sealed.
-	if(head)
-		if(vsc.plc.PLASMAGUARD_ONLY)
-			if(head.flags & PLASMAGUARD)
-				return 1
-		else if ((head.flags & HIDEMASK) && (head.flags & HIDEEARS) && (head.flags & HIDEEYES))	//dont use HIDEFACE here. That only indicates whether the face is obscured, not protected - things like biosuit hoods don't obscure the face.
+	if(vsc.plc.PLASMAGUARD_ONLY)
+		if(head && (head.flags & PLASMAGUARD))
 			return 1
+	else
+		var/face_protected = 0
+		var/eyes_protected = 0
+		var/ears_protected = 0
+		
+		if (wear_mask) 
+			//if (wear_mask.flags_inv & HIDEFACE) face_protected = 1	//not so sure about this one, uncommenting this will mean a gasmask alone will protect your head.
+			if (wear_mask.flags_inv & HIDEEYES) eyes_protected = 1
+			if (wear_mask.flags_inv & HIDEEARS) ears_protected = 1
+		
+		if (head)
+			if (head.flags_inv & HIDEMASK) face_protected = 1
+			if (head.flags_inv & HIDEEYES) eyes_protected = 1
+			if (head.flags_inv & HIDEEARS) ears_protected = 1
+		
+		return face_protected && eyes_protected && ears_protected
 	return 0
 
 /mob/living/carbon/human/proc/pl_hands_protected()
