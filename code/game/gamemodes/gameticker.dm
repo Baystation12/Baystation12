@@ -152,6 +152,31 @@ var/global/datum/controller/gameticker/ticker
 		//Holiday Round-start stuff	~Carn
 		Holiday_Game_Start()
 
+	spawn(0) // Forking dynamic room selection
+		var/list/area/dynamic_area_source_paths = typesof(/area/dynamic/source) - /area/dynamic/source
+		var/list/area/dynamic_area_destination_paths = typesof(/area/dynamic/destination) - /area/dynamic/destination
+
+		for (var/dynamic_area_destination_path in dynamic_area_destination_paths)
+			var/area/dynamic_area_destination = locate(dynamic_area_destination_path)
+
+			if (!dynamic_area_destination)
+				continue
+
+
+			var/dynamic_area_source_path = pick(dynamic_area_source_paths)
+			dynamic_area_source_paths -= dynamic_area_source_path
+
+			var/area/dynamic_area_source = locate(dynamic_area_source_path)
+
+			if (!dynamic_area_source)
+				continue
+
+			dynamic_area_source.copy_contents_to(dynamic_area_destination, 0)
+
+			// Turn the lights off.
+			dynamic_area_destination.power_light = 0
+			dynamic_area_destination.power_change()
+
 	//start_events() //handles random events and space dust.
 	//new random event system is handled from the MC.
 

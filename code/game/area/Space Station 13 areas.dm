@@ -1040,7 +1040,35 @@ proc/process_ghost_teleport_locs()
 	icon_state = "Theatre"
 
 
+// Dynamic rooms
 
+/area/dynamic // Do not use.
+	name = "dynamic area"
+	icon_state = "purple"
+
+/area/dynamic/destination // Do not use.
+	name = "dynamic area destination"
+
+/area/dynamic/destination/a
+	name = "dynamic area destination a"
+
+/area/dynamic/source // Do not use.
+	name = "dynamic area source"
+
+/area/dynamic/source/ai
+	name = "\improper AI Core"
+
+/area/dynamic/source/bar
+	name = "\improper Bar"
+
+/area/dynamic/source/russian
+	name = "\improper Russian Lounge"
+
+/area/dynamic/source/kitchen
+	name = "\improper Kitchen"
+
+/area/dynamic/source/chemistry
+	name = "\improper Chemistry"
 
 
 /area/holodeck
