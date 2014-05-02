@@ -65,7 +65,7 @@ obj/var/contaminated = 0
 	if(!pl_suit_protected())
 		suit_contamination()
 
-	if(!pl_head_protected())
+	if(!pl_head_protected() || !pl_hands_protected() || !pl_feet_protected() || !pl_tail_protected())
 		if(prob(1)) suit_contamination() //Plasma can sometimes get through such an open suit.
 
 //Cannot wash backpacks currently.
@@ -86,10 +86,15 @@ obj/var/contaminated = 0
 
 	//Burn skin if exposed.
 	if(vsc.plc.SKIN_BURNS)
-		if(!pl_head_protected() || !pl_suit_protected())
+		if(!pl_head_protected() || !pl_suit_protected())	//major areas
 			burn_skin(0.75)
 			if(prob(20)) src << "\red Your skin burns!"
 			updatehealth()
+		else if(!pl_hands_protected() || !pl_feet_protected() || !pl_tail_protected())	//minor areas
+			if(prob(1))		//Plasma can sometimes get through such an open suit.
+				burn_skin(0.75)		//Apply burn to whole body as plasma spreads inside the suit.
+				if(prob(20)) src << "\red Your skin burns!"
+				updatehealth()
 
 	//Burn eyes if exposed.
 	if(vsc.plc.EYE_BURNS)
@@ -131,7 +136,35 @@ obj/var/contaminated = 0
 		if(vsc.plc.PLASMAGUARD_ONLY)
 			if(head.flags & PLASMAGUARD)
 				return 1
-		else if(head.flags & HEADCOVERSEYES)
+		else if ((head.flags & HIDEMASK) && (head.flags & HIDEEARS) && (head.flags & HIDEEYES))	//dont use HIDEFACE here. That only indicates whether the face is obscured, not protected - things like biosuit hoods don't obscure the face.
+			return 1
+	return 0
+
+/mob/living/carbon/human/proc/pl_hands_protected()
+	if(vsc.plc.PLASMAGUARD_ONLY)
+		if(gloves && (gloves.flags & PLASMAGUARD)) return 1
+		if(wear_suit && ((wear_suit.flags_inv & HIDEGLOVES) && (wear_suit.flags & PLASMAGUARD))) return 1
+	else
+		if(gloves) return 1
+		if(wear_suit && (wear_suit.flags_inv & HIDEGLOVES)) return 1
+	return 0
+
+/mob/living/carbon/human/proc/pl_feet_protected()
+	if(vsc.plc.PLASMAGUARD_ONLY)
+		if(shoes && (shoes.flags & PLASMAGUARD)) return 1
+		if(wear_suit && ((wear_suit.flags_inv & HIDESHOES) && (wear_suit.flags & PLASMAGUARD))) return 1
+	else
+		if(shoes) return 1
+		if(wear_suit && (wear_suit.flags_inv & HIDESHOES)) return 1
+	return 0
+
+/mob/living/carbon/human/proc/pl_tail_protected()
+	if(!(species.flags & HAS_TAIL))
+		return 1
+	if(wear_suit && (wear_suit.flags_inv & HIDETAIL))
+		if(vsc.plc.PLASMAGUARD_ONLY)
+			if(wear_suit.flags & PLASMAGUARD) return 1
+		else
 			return 1
 	return 0
 
@@ -141,10 +174,7 @@ obj/var/contaminated = 0
 		if(vsc.plc.PLASMAGUARD_ONLY)
 			if(wear_suit.flags & PLASMAGUARD) return 1
 		else
-			if(wear_suit.flags_inv & HIDEJUMPSUIT)
-				if((species.flags & HAS_TAIL) && !(wear_suit.flags_inv & HIDETAIL))
-					if(prob(1)) return 0 //Plasma can sometimes get through such an open suit.
-				return 1
+			if(wear_suit.flags_inv & HIDEJUMPSUIT) return 1
 	return 0
 
 /mob/living/carbon/human/proc/suit_contamination()
