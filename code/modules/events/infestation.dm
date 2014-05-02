@@ -7,7 +7,7 @@
 #define LOC_VAULT 6
 #define LOC_CONSTR 7
 #define LOC_TECH 8
-#define LOC_ASSEMBLY 9
+#define LOC_TACTICAL 9
 
 #define VERM_MICE 0
 #define VERM_LIZARDS 1
@@ -54,9 +54,9 @@
 		if(LOC_TECH)
 			spawn_area_type = /area/storage/tech
 			locstring = "technical storage"
-		if(LOC_ASSEMBLY)
-			spawn_area_type = /area/assembly/assembly_line
-			locstring = "the unused assembly line"
+		if(LOC_TACTICAL)
+			spawn_area_type = /area/security/tactical
+			locstring = "tactical equipment storage"
 
 	//world << "looking for [spawn_area_type]"
 	for(var/areapath in typesof(spawn_area_type))
@@ -83,6 +83,7 @@
 			vermstring = "lizards"
 		if(VERM_SPIDERS)
 			spawn_types = list(/obj/effect/spider/spiderling)
+			max_number = 3
 			vermstring = "spiders"
 
 	spawn(0)
@@ -92,7 +93,6 @@
 			turfs.Remove(T)
 			num--
 
-			
 			if(vermin == VERM_SPIDERS)
 				var/obj/effect/spider/spiderling/S = new(T)
 				S.amount_grown = -1
@@ -112,7 +112,7 @@
 #undef LOC_HYDRO
 #undef LOC_VAULT
 #undef LOC_TECH
-#undef LOC_ASSEMBLY
+#undef LOC_TACTICAL
 
 #undef VERM_MICE
 #undef VERM_LIZARDS
