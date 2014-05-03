@@ -28,11 +28,11 @@
 
 		if(M == user)
 
-		    if(istype(M,/mob/living/carbon/human))
-		    	var/mob/living/carbon/human/H = M
-		    	if(H.species.flags & IS_SYNTHETIC)
-		    		H << "\red You have a monitor for a head, where do you think you're going to put that?"
-		    		return
+			if(istype(M,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				if(H.species.flags & IS_SYNTHETIC)
+					H << "\red You have a monitor for a head, where do you think you're going to put that?"
+					return
 
 			M << "\blue You swallow a gulp of [src]."
 			if(reagents.total_volume)
@@ -42,10 +42,10 @@
 			return 1
 		else if( istype(M, /mob/living/carbon/human) )
 
-	    	var/mob/living/carbon/human/H = M
-	    	if(H.species.flags & IS_SYNTHETIC)
-	    		H << "\red They have a monitor for a head, where do you think you're going to put that?"
-	    		return
+			var/mob/living/carbon/human/H = M
+			if(H.species.flags & IS_SYNTHETIC)
+				H << "\red They have a monitor for a head, where do you think you're going to put that?"
+				return
 
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message("\red [user] attempts to feed [M] [src].", 1)
