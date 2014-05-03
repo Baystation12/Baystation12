@@ -1359,7 +1359,7 @@ Possibly more later, but for now I want to get basic function working.
 	flags = FPRINT | TABLEPASS | USEDELAY
 	w_class = 1.0
 
-/obj/item/weapon/hackbug/afterattack(atom/target as obj|turf, mob/user as mob, flag)
+/obj/item/weapon/hackbug/attack(atom/target as obj|turf, mob/user as mob, flag)
 	if (!flag)
 		return
 	if (istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/weapon/storage/) || istype(target, /obj/machinery/door/airlock/hatch/gamma))

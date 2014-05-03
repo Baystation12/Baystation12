@@ -1253,6 +1253,29 @@
 		log_admin("[key_name(usr)] has sent [key_name(M)] to the thunderdome. (Observer.)")
 		message_admins("[key_name_admin(usr)] has sent [key_name_admin(M)] to the thunderdome. (Observer.)", 1)
 
+	else if(href_list["aroomwarp"])
+		if(!check_rights(R_FUN))	return
+
+		if(alert(usr, "Confirm?", "Message", "Yes", "No") != "Yes")
+			return
+
+		var/mob/M = locate(href_list["aroomwarp"])
+		if(!ismob(M))
+			usr << "This can only be used on instances of type /mob"
+			return
+		if(istype(M, /mob/living/silicon/ai))
+			usr << "This cannot be used on instances of type /mob/living/silicon/ai"
+			return
+
+		M.Paralyse(5)
+		sleep(5)
+		M.loc = pick(aroomwarp)
+		spawn(50)
+			M << "\blue You have been sent to the <b>Admin Room!</b>."
+		log_admin("[key_name(usr)] has sent [key_name(M)] to the Admin Room")
+		message_admins("[key_name_admin(usr)] has sent [key_name_admin(M)] to the Admin Room", 1)
+
+
 	else if(href_list["revive"])
 		if(!check_rights(R_REJUVINATE))	return
 

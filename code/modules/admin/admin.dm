@@ -170,6 +170,7 @@ var/global/floorIsLava = 0
 			<b>Other actions:</b>
 			<br>
 			<A href='?src=\ref[src];forcespeech=\ref[M]'>Forcesay</A> |
+			<A href='?src=\ref[src];aroomwarp=\ref[M]'>Admin Room</A> |
 			<A href='?src=\ref[src];tdome1=\ref[M]'>Thunderdome 1</A> |
 			<A href='?src=\ref[src];tdome2=\ref[M]'>Thunderdome 2</A> |
 			<A href='?src=\ref[src];tdomeadmin=\ref[M]'>Thunderdome Admin</A> |

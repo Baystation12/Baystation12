@@ -167,6 +167,7 @@ var/list/team_alpha = list()
 var/list/team_bravo = list()
 var/list/tdomeobserve = list()
 var/list/tdomeadmin = list()
+var/list/aroomwarp = list()
 var/list/prisonsecuritywarp = list()	//prison security goes to these
 var/list/prisonwarped = list()	//list of players already warped
 var/list/blobstart = list()
