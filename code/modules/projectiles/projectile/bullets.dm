@@ -62,3 +62,4 @@
 
 /obj/item/projectile/bullet/chameleon
 	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
+	embed = 0 // nope

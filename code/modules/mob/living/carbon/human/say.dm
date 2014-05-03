@@ -74,18 +74,32 @@
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += r_ear
 
-		if("right_ear")
+		if("right ear")
+			var/obj/item/device/radio/R
+			var/has_radio = 0
 			if(r_ear && istype(r_ear,/obj/item/device/radio))
-				var/obj/item/device/radio/R = r_ear		
-				R.talk_into(src,message,verb,speaking)
-				used_radios += r_ear
+				R = r_ear
+				has_radio = 1
+			if(r_hand && istype(r_hand, /obj/item/device/radio))
+				R = r_hand
+				has_radio = 1
+			if(has_radio)
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += R
 
 
-		if("left_ear")
+		if("left ear")
+			var/obj/item/device/radio/R
+			var/has_radio = 0
 			if(l_ear && istype(l_ear,/obj/item/device/radio))
-				var/obj/item/device/radio/R = l_ear
-				R.talk_into(src,message,verb,speaking)
-				used_radios += l_ear
+				R = l_ear
+				has_radio = 1
+			if(l_hand && istype(l_hand,/obj/item/device/radio))
+				R = l_hand				
+				has_radio = 1
+			if(has_radio)
+				R.talk_into(src,message,null,verb,speaking)
+				used_radios += R
 
 		if("intercom")
 			for(var/obj/item/device/radio/intercom/I in view(1, null))
@@ -106,7 +120,7 @@
 			return
 		else
 			if(message_mode)
-				if(message_mode in radiochannels)
+				if(message_mode in (radiochannels | "department"))
 					if(l_ear && istype(l_ear,/obj/item/device/radio))
 						l_ear.talk_into(src,message, message_mode, verb, speaking)
 						used_radios += l_ear
@@ -117,7 +131,7 @@
 
 	if(used_radios.len)
 		italics = 1
-		message_range = 3
+		message_range = 1
 
 	var/datum/gas_mixture/environment = loc.return_air()
 	if(environment)
@@ -128,7 +142,7 @@
 
 	..(message, speaking, verb, alt_name, italics, message_range, used_radios)
 
-/mob/living/carbon/human/say_understands(var/other,var/datum/language/speaking = null)
+/mob/living/carbon/human/say_understands(var/mob/other,var/datum/language/speaking = null)
 
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
 		return 1
@@ -138,6 +152,11 @@
 		return 1
 	if (istype(other, /mob/living/carbon/slime))
 		return 1
+	if (istype(other, /mob/living/simple_animal))
+		if(other.universal_speak || src.universal_speak || src.universal_understand)
+			return 1
+		return 0
+
 	return ..()
 
 /mob/living/carbon/human/GetVoice()
