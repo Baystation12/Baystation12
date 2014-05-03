@@ -101,9 +101,9 @@
 						M.stop_pulling()
 						step(M, M.dir)
 						M << "\blue You slipped on the wet floor!"
-						playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-						M.Stun(8)
-						M.Weaken(5)
+						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
+						M.Stun(5)
+						M.Weaken(3)
 					else
 						M.inertia_dir = 0
 						return
@@ -112,9 +112,9 @@
 						M.stop_pulling()
 						step(M, M.dir)
 						M << "\blue You slipped on the wet floor!"
-						playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
-						M.Stun(8)
-						M.Weaken(5)
+						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
+						M.Stun(5)
+						M.Weaken(3)
 					else
 						M.inertia_dir = 0
 						return
@@ -129,7 +129,7 @@
 					spawn(4) step(M, M.dir)
 					M.take_organ_damage(2) // Was 5 -- TLE
 					M << "\blue You slipped on the floor!"
-					playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+					playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 					M.Weaken(10)
 
 			if(3) // Ice
@@ -138,7 +138,7 @@
 						M.stop_pulling()
 						step(M, M.dir)
 						M << "\blue You slipped on the icy floor!"
-						playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 						M.Stun(4)
 						M.Weaken(5)
 					else
@@ -149,7 +149,7 @@
 						M.stop_pulling()
 						step(M, M.dir)
 						M << "\blue You slipped on the icy floor!"
-						playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 						M.Stun(4)
 						M.Weaken(5)
 					else
@@ -210,3 +210,4 @@
 
 	else if( istype(M, /mob/living/silicon/robot ))
 		new /obj/effect/decal/cleanable/oil(src)
+

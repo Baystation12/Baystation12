@@ -2,6 +2,7 @@
 	name = "ion rifle"
 	desc = "A man portable anti-armor weapon designed to disable mechanical threats"
 	icon_state = "ionrifle"
+	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Laser.ogg'
 	origin_tech = "combat=2;magnets=4"
 	w_class = 4.0
@@ -171,7 +172,7 @@ obj/item/weapon/gun/energy/staff/focus
 	origin_tech = "combat=6;materials=5;powerstorage=4"
 	projectile_type = "/obj/item/projectile/beam/sniper"
 	slot_flags = SLOT_BACK
-	charge_cost = 250
+	charge_cost = 2500
 	fire_delay = 35
 	w_class = 4.0
 	var/zoom = 0

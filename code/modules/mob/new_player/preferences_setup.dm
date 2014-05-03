@@ -12,7 +12,9 @@ datum/preferences
 		randomize_hair_color("hair")
 		randomize_hair_color("facial")
 		randomize_eyes_color()
+		randomize_skin_color()
 		underwear = rand(1,underwear_m.len)
+		undershirt = rand(1,undershirt_t.len)
 		backbag = 2
 		age = rand(AGE_MIN,AGE_MAX)
 		if(H)
@@ -127,6 +129,54 @@ datum/preferences
 		g_eyes = green
 		b_eyes = blue
 
+	proc/randomize_skin_color()
+		var/red
+		var/green
+		var/blue
+
+		var/col = pick ("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino")
+		switch(col)
+			if("black")
+				red = 0
+				green = 0
+				blue = 0
+			if("grey")
+				red = rand (100, 200)
+				green = red
+				blue = red
+			if("brown")
+				red = 102
+				green = 51
+				blue = 0
+			if("chestnut")
+				red = 153
+				green = 102
+				blue = 0
+			if("blue")
+				red = 51
+				green = 102
+				blue = 204
+			if("lightblue")
+				red = 102
+				green = 204
+				blue = 255
+			if("green")
+				red = 0
+				green = 102
+				blue = 0
+			if("albino")
+				red = rand (200, 255)
+				green = rand (0, 150)
+				blue = rand (0, 150)
+
+		red = max(min(red + rand (-25, 25), 255), 0)
+		green = max(min(green + rand (-25, 25), 255), 0)
+		blue = max(min(blue + rand (-25, 25), 255), 0)
+
+		r_skin = red
+		g_skin = green
+		b_skin = blue
+
 
 	proc/update_preview_icon(var/for_observer=0)		//seriously. This is horrendous.
 		del(preview_icon_front)
@@ -165,6 +215,10 @@ datum/preferences
 
 			preview_icon.Blend(temp, ICON_OVERLAY)
 
+		// Skin color
+		if(current_species && (current_species.bodyflags & HAS_SKIN_COLOR))
+			preview_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+
 		// Skin tone
 		if(current_species && (current_species.flags & HAS_SKIN_TONE))
 			if (s_tone >= 0)
@@ -190,6 +244,10 @@ datum/preferences
 		var/icon/underwear_s = null
 		if(underwear > 0 && underwear < 7 && current_species.flags & HAS_UNDERWEAR)
 			underwear_s = new/icon("icon" = 'icons/mob/human.dmi', "icon_state" = "underwear[underwear]_[g]_s")
+
+		var/icon/undershirt_s = null
+		if(undershirt > 0 && undershirt < 5 && current_species.flags & HAS_UNDERWEAR)
+			undershirt_s = new/icon("icon" = 'icons/mob/human.dmi', "icon_state" = "undershirt[undershirt]_s")
 
 		var/icon/clothes_s = null
 		var/uniform_dmi='icons/mob/uniform.dmi'
@@ -626,6 +684,8 @@ datum/preferences
 		preview_icon.Blend(eyes_s, ICON_OVERLAY)
 		if(underwear_s)
 			preview_icon.Blend(underwear_s, ICON_OVERLAY)
+		if(undershirt_s)
+			preview_icon.Blend(undershirt_s, ICON_OVERLAY)
 		if(clothes_s)
 			preview_icon.Blend(clothes_s, ICON_OVERLAY)
 		preview_icon_front = new(preview_icon, dir = SOUTH)
@@ -633,4 +693,5 @@ datum/preferences
 
 		del(eyes_s)
 		del(underwear_s)
+		del(undershirt_s)
 		del(clothes_s)

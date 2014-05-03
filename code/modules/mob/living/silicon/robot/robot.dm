@@ -142,6 +142,18 @@
 		var/datum/robot_component/cell_component = components["power cell"]
 		cell_component.wrapped = cell
 		cell_component.installed = 1
+	
+	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
+	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
+	
+
+	
 
 	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
@@ -540,11 +552,10 @@
 			now_pushing = 1
 			if (!AM.anchored)
 				var/t = get_dir(src, AM)
-				if (istype(AM, /obj/structure/window))
-					if(AM:ini_dir == NORTHWEST || AM:ini_dir == NORTHEAST || AM:ini_dir == SOUTHWEST || AM:ini_dir == SOUTHEAST)
-						for(var/obj/structure/window/win in get_step(AM,t))
-							now_pushing = 0
-							return
+				if (istype(AM, /obj/structure/window/full))
+					for(var/obj/structure/window/win in get_step(AM,t))
+						now_pushing = 0
+						return
 				step(AM, t)
 			now_pushing = null
 		return
@@ -1153,26 +1164,20 @@
 
 	if (href_list["deact"])
 		var/obj/item/O = locate(href_list["deact"])
-
 		if(activated(O))
 			if(module_state_1 == O)
 				module_state_1 = null
+				contents -= O
 			else if(module_state_2 == O)
 				module_state_2 = null
+				contents -= O
 			else if(module_state_3 == O)
 				module_state_3 = null
+				contents -= O
 			else
 				src << "Module isn't activated."
-				return
 		else
 			src << "Module isn't activated"
-			return
-
-		O.dropped(src)
-		contents -= O
-
-		src << "[O.name] deactivated."
-
 		installed_modules()
 	return
 
@@ -1292,13 +1297,16 @@
 		icontype = "Custom"
 		triesleft = 0
 	else
+		lockcharge = 1  //Locks borg until it select an icon to avoid secborgs running around with a standard sprite
 		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chances." : "This is your last try."]", "Robot", null, null) in module_sprites
 
 	if(icontype)
 		icon_state = module_sprites[icontype]
+		lockcharge = null
 	else
 		src << "Something is badly wrong with the sprite selection. Harass a coder."
 		icon_state = module_sprites[1]
+		lockcharge = null
 		return
 
 	overlays -= "eyes"

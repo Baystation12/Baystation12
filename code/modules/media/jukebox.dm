@@ -20,6 +20,8 @@
 	var/url    = ""
 	var/length = 0 // decaseconds
 
+	var/emagged = 0
+
 	New(var/list/json)
 		title  = json["title"]
 		artist = json["artist"]
@@ -35,6 +37,18 @@
 			str += ", by [artist]"
 		if(album!="")
 			str += ", from '[album]'"
+		return str
+
+	proc/displaytitle()
+		if(artist==""&&title=="")
+			return "\[NO TAGS\]"
+		var/str=""
+		if(artist!="")
+			str += "[artist] - "
+		if(title!="")
+			str += "\"[title]\""
+		else
+			str += "Untitled"
 		return str
 
 
@@ -73,9 +87,10 @@ var/global/loopModeNames=list(
 	// Must be defined on your server.
 	playlists=list(
 		"bar"  = "Bar Mix",
-		"jazz" = "Jazz",
-		"rock" = "Rock",
-		"lounge" = "Portishead - Dummy"
+		"aussie" = "Aussie",
+		"club" = "Club",
+		"lounge" = "Portishead - Dummy",
+		"customs" = "Customs Music",
 	)
 
 /obj/machinery/media/jukebox/attack_ai(var/mob/user)
@@ -86,23 +101,39 @@ var/global/loopModeNames=list(
 
 /obj/machinery/media/jukebox/power_change()
 	..()
+	if(emagged && !(stat & (NOPOWER|BROKEN)))
+		playing = 1
 	update_icon()
 
 /obj/machinery/media/jukebox/update_icon()
 	overlays = 0
 	if(stat & (NOPOWER|BROKEN))
-		icon_state = "jukebox2-nopower"
+		if(stat & BROKEN)
+			icon_state = "jukebox2-broken"
+		else
+			icon_state = "jukebox2-nopower"
 		stop_playing()
 		return
 	icon_state = "jukebox2"
 	if(playing)
-		overlays += "jukebox2-running"
+		if(emagged)
+			overlays += "jukebox2-emagged"
+		else
+			overlays += "jukebox2-running"
 
 /obj/machinery/media/jukebox/proc/check_reload()
 	return world.time > last_reload + JUKEBOX_RELOAD_COOLDOWN
 
 /obj/machinery/media/jukebox/attack_hand(var/mob/user)
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & NOPOWER)
+		usr << "\red You don't see anything to mess with."
+		return
+	if(stat & BROKEN && playlist!=null)
+		user.visible_message("\red <b>[user.name] smacks the side of \the [src.name].</b>","\red You hammer the side of \the [src.name].")
+		stat &= ~BROKEN
+		playlist=null
+		playing=emagged
+		update_icon()
 		return
 	var/t = "<h1>Jukebox Interface</h1>"
 	t += "<b>Power:</b> <a href='?src=\ref[src];power=1'>[playing?"On":"Off"]</a><br />"
@@ -114,7 +145,9 @@ var/global/loopModeNames=list(
 			t += "<b>Playlist:</b> "
 			for(var/plid in playlists)
 				t += "<a href='?src=\ref[src];playlist=[plid]'>[playlists[plid]]</a>"
-			t += "<br />"
+		else
+			t += "<i>Please wait before changing playlists.<i>"
+		t += "<br />"
 		if(current_song)
 			var/datum/song_info/song=playlist[current_song]
 			t += "<b>Current song:</b> [song.artist] - [song.title]<br />"
@@ -122,7 +155,7 @@ var/global/loopModeNames=list(
 		var/i
 		for(i = 1,i <= playlist.len,i++)
 			var/datum/song_info/song=playlist[i]
-			t += "<tr><th>#[i]</th><td><A href='?src=\ref[src];song=[i]'>[song.artist] - [song.title]</A></td><td>[song.album]</td></tr>"
+			t += "<tr><th>#[i]</th><td><A href='?src=\ref[src];song=[i]' class='nobg'>[song.displaytitle()]</A></td><td>[song.album]</td></tr>"
 		t += "</table>"
 	user.set_machine(src)
 	var/datum/browser/popup = new (user,"jukebox",name,420,700)
@@ -131,8 +164,27 @@ var/global/loopModeNames=list(
 	popup.open()
 
 
+/obj/machinery/media/jukebox/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/weapon/card/emag))
+		current_song=0
+		if(!emagged)
+			playlist_id = "emagged"
+			last_reload=world.time
+			playlist=null
+			loop_mode = JUKEMODE_SHUFFLE
+			emagged = 1
+			playing = 1
+			user.visible_message("[user.name] slides something into the [src.name]'s card-reader.","\red You short out the [src.name].")
+			update_icon()
+			update_music()
+		return
+
 /obj/machinery/media/jukebox/Topic(href, href_list)
 	..()
+	if(emagged)
+		usr << "\red You touch the bluescreened menu. Nothing happens. You feel dumber."
+		return
+
 	if (href_list["power"])
 		playing=!playing
 		update_music()
@@ -178,9 +230,14 @@ var/global/loopModeNames=list(
 			var/songdata = reader.read_value()
 			for(var/list/record in songdata)
 				playlist += new /datum/song_info(record)
+			if(playlist.len==0)
+				visible_message("<span class='warning'>\icon[src] \The [src] buzzes, unable to update its playlist.</span>","<em>You hear a buzz.</em>")
+				stat &= BROKEN
+				update_icon()
+				return
 			visible_message("<span class='notice'>\icon[src] \The [src] beeps, and the menu on its front fills with [playlist.len] items.</span>","<em>You hear a beep.</em>")
 		else
-			//testing("Failed to update playlist: Response null.")
+			testing("[src] failed to update playlist: Response null.")
 			stat &= BROKEN
 			update_icon()
 			return

@@ -4,7 +4,6 @@
 var/global/list/uneatable = list(
 	/turf/space,
 	/obj/effect/overlay,
-	/atom/movable/lighting_overlay,
 	/mob/dead,
 	/mob/camera,
 	/mob/new_player
@@ -483,8 +482,9 @@ var/global/list/uneatable = list(
 	contained = 0 //Are we going to move around?
 	dissipate = 0 //Do we lose energy over time?
 	move_self = 1 //Do we move on our own?
-	grav_pull = 5 //How many tiles out do we pull?
-	consume_range = 6 //How many tiles out do we eat
+	grav_pull = 10 //How many tiles out do we pull?
+	consume_range = 3 //How many tiles out do we eat
+	var/last_boom = 0
 
 /obj/machinery/singularity/narsie/large
 	name = "Nar-Sie"
@@ -542,18 +542,25 @@ var/global/list/uneatable = list(
 /obj/machinery/singularity/narsie/consume(var/atom/A)
 	if(is_type_in_list(A, uneatable))
 		return 0
-
-	if(istype(A,/mob/living/))
-		var/mob/living/C = A
-		C.dust()
-
-	if(isturf(A))
+	if (istype(A,/mob/living))//Mobs get gibbed
+		A:gib()
+	else if(istype(A,/obj))
+		var/obj/O = A
+		machines -= O
+		processing_objects -= O
+		O.loc = null
+	else if(isturf(A))
 		var/turf/T = A
-		if(istype(T, /turf/simulated/floor) && !istype(T, /turf/simulated/floor/engine/cult))
-			if(prob(20)) T.ChangeTurf(/turf/simulated/floor/engine/cult)
-
-		else if(istype(T,/turf/simulated/wall) && !istype(T, /turf/simulated/wall/cult))
-			if(prob(20)) T.ChangeTurf(/turf/simulated/wall/cult)
+		if(T.intact)
+			for(var/obj/O in T.contents)
+				if(O.level != 1)
+					continue
+				if(O.invisibility == 101)
+					src.consume(O)
+		A:ChangeTurf(/turf/space)
+	if(last_boom + 100 < world.time && prob(5))
+		explosion(loc, -1, -1, -1, 1, 0) //Since we're not exploding everything in consume() toss out an explosion effect every now and again
+		last_boom = world.time
 	return
 
 /obj/machinery/singularity/narsie/ex_act() //No throwing bombs at it either. --NEO

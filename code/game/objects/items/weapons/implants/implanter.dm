@@ -51,7 +51,6 @@
 				src.imp = null
 				update()
 
-	return
 
 
 /obj/item/weapon/implanter/traitor

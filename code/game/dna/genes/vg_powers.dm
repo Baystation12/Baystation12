@@ -16,6 +16,7 @@ Obviously, requires DNA2.
 	desc = "Allows the subject to become the motherfucking Hulk."
 	activation_messages = list("Your muscles hurt.")
 	deactivation_messages = list("Your muscles quit tensing.")
+	instability=7
 
 	spelltype = /obj/effect/proc_holder/spell/targeted/hulk
 

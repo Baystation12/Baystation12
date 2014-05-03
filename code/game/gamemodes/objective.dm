@@ -35,13 +35,22 @@ datum/objective
 		if(possible_targets.len > 0)
 			target = pick(possible_targets)
 
-
 	proc/find_target_by_role(role, role_type=0)//Option sets either to check assigned role or special role. Default to assigned.
+		var/list/possible_targets = list()
 		for(var/datum/mind/possible_target in ticker.minds)
-			if((possible_target != owner) && ishuman(possible_target.current) && ((role_type ? possible_target.special_role : possible_target.assigned_role) == role) )
-				target = possible_target
-				break
+			if((possible_target != owner) && ishuman(possible_target.current) && ((role_type ? possible_target.special_role : possible_target.assigned_role) == role) && (possible_target.current.stat != 2) )
+				possible_targets += possible_target
+		if(possible_targets.len > 0)
+			target = pick(possible_targets)
 
+//Selects someone with a specific special role if role is != null. Or just anyone with a special role
+	proc/find_target_with_special_role(role)
+		var/list/possible_targets = list()
+		for(var/datum/mind/possible_target in ticker.minds)
+			if((possible_target != owner) && ishuman(possible_target.current) && (role && possible_target.special_role == role || !role && possible_target.special_role) && (possible_target.current.stat != 2) )
+				possible_targets += possible_target
+		if(possible_targets.len > 0)
+			target = pick(possible_targets)
 
 
 datum/objective/assassinate
@@ -229,7 +238,7 @@ datum/objective/debrain//I want braaaainssss
 	find_target()
 		..()
 		if(target && target.current)
-			explanation_text = "Steal the brain of [target.current.real_name]."
+			explanation_text = "Steal the brain of [target.current.real_name] the [target.assigned_role]."
 		else
 			explanation_text = "Free Objective"
 		return target
@@ -275,6 +284,14 @@ datum/objective/protect//The opposite of killing a dude.
 			explanation_text = "Free Objective"
 		return target
 
+	find_target_with_special_role(role,role_type=0)
+		..(role)
+		if(target && target.current)
+			explanation_text = "Protect [target.current.real_name], the [!role_type ? target.assigned_role : target.special_role]."
+		else
+			explanation_text = "Free Objective"
+		return target
+
 	check_completion()
 		if(!target)			//If it's a free objective.
 			return 1
@@ -306,22 +323,14 @@ datum/objective/hijack
 		return 1
 
 datum/objective/speciesist
-	var/datum/species/speciesist_target = null
-
+	var/is_human = 0
 	find_target()
-		var/list/possible_targets = list()
-		var/mob/living/carbon/human/O = owner.current
-		for(var/datum/mind/possible_target in ticker.minds)
-			if(ishuman(possible_target.current))
-				var/mob/living/carbon/human/M = possible_target.current
-				if (M.species != O.species)
-					possible_targets += M.species
-		if(possible_targets.len > 0)
-			speciesist_target = pick(possible_targets)
-			explanation_text = "Do not allow any [speciesist_target.name]s to escape on the shuttle."
+		if(istype(owner.current,/mob/living/carbon/human/human))
+			explanation_text = "Do not allow any non-humans to escape on the shuttle."
+			is_human = 1
 		else
-			explanation_text = "Free Objective"
-		return speciesist_target
+			explanation_text = "Do not allow any humans to escape on the shuttle."
+		return 1
 
 	check_completion()
 		if(emergency_shuttle.location<2)
@@ -329,7 +338,7 @@ datum/objective/speciesist
 		var/area/shuttle = locate(/area/shuttle/escape/centcom)
 		for(var/mob/living/carbon/human/player in player_list)
 			if (player.mind)
-				if (player.species == speciesist_target)
+				if (is_human ? !istype(player,/mob/living/carbon/human/human) : istype(player,/mob/living/carbon/human/human))
 					if(player.stat != DEAD)			//they're not dead!
 						if(get_turf(player) in shuttle)
 							return 0

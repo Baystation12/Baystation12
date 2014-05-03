@@ -54,15 +54,23 @@
 
 // increment the power usage stats for an area
 
+
 /obj/machinery/proc/use_power(var/amount, var/chan = -1, var/autocalled = 0) // defaults to power_channel
-	var/area/A = src.loc.loc		// make sure it's in an area
-	if(!A || !isarea(A) || !A.master)
+	var/A = getArea()
+
+	if(!A || !isarea(A))
 		return
-	if(chan == -1)
+
+	var/area/B = A
+
+	if (!B.master)
+		return
+
+	if (-1 == chan)
 		chan = power_channel
-	A.master.use_power(amount, chan)
-	if(!autocalled)
-		A.master.powerupdate = 2	// Decremented by 2 each GC tick, since it's not auto power change we're going to update power twice.
+
+
+	B.master.use_power(amount, chan)
 
 /obj/machinery/proc/power_change()		// called whenever the power settings of the containing area change
 										// by default, check equipment channel & set flag
@@ -431,9 +439,8 @@
 
 /area/proc/get_apc()
 	for(var/area/RA in src.related)
-		var/obj/machinery/power/apc/FINDME = locate() in RA
-		if (FINDME)
-			return FINDME
+		if (RA.apc.len >= 1)
+			return RA.apc[1]
 
 
 //Determines how strong could be shock, deals damage to mob, uses power.

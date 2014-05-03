@@ -52,6 +52,7 @@ var/global/datum/controller/occupations/job_master
 			if(!job)	return 0
 			if(jobban_isbanned(player, rank))	return 0
 			if(!job.player_old_enough(player.client)) return 0
+			if(!is_job_whitelisted(player, rank)) return 0
 			var/position_limit = job.total_positions
 			if(!latejoin)
 				position_limit = job.spawn_positions
@@ -306,6 +307,10 @@ var/global/datum/controller/occupations/job_master
 
 					if(!job.player_old_enough(player.client))
 						Debug("DO player not old enough, Player: [player], Job:[job.title]")
+						continue
+
+					if(!is_job_whitelisted(player, job.title))
+						Debug("DO player not whitelisted, Player: [player], Job:[job.title]")
 						continue
 
 					// If the player wants that job on this level, then try give it to him.

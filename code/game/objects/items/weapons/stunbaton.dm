@@ -12,7 +12,7 @@
 	var/status = 0
 	var/mob/foundmob = "" //Used in throwing proc.
 	var/obj/item/weapon/cell/high/bcell = 0
-	var/hitcost = 1000
+	var/hitcost = 1500
 
 	origin_tech = "combat=2"
 

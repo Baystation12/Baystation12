@@ -43,21 +43,60 @@
 	var/flags = 0       // Various specific features.
 	var/bloodflags=0
 	var/bodyflags=0
-
+	var/flesh_color = "#FFC896" //Pink.
 	var/list/abilities = list()  // For species-derived or admin-given powers
 
-/datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
+/datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
+	//This is a basic humanoid limb setup.
+	H.organs = list()
+	H.organs_by_name["chest"] = new/datum/organ/external/chest()
+	H.organs_by_name["groin"] = new/datum/organ/external/groin(H.organs_by_name["chest"])
+	H.organs_by_name["head"] = new/datum/organ/external/head(H.organs_by_name["chest"])
+	H.organs_by_name["l_arm"] = new/datum/organ/external/l_arm(H.organs_by_name["chest"])
+	H.organs_by_name["r_arm"] = new/datum/organ/external/r_arm(H.organs_by_name["chest"])
+	H.organs_by_name["r_leg"] = new/datum/organ/external/r_leg(H.organs_by_name["groin"])
+	H.organs_by_name["l_leg"] = new/datum/organ/external/l_leg(H.organs_by_name["groin"])
+	H.organs_by_name["l_hand"] = new/datum/organ/external/l_hand(H.organs_by_name["l_arm"])
+	H.organs_by_name["r_hand"] = new/datum/organ/external/r_hand(H.organs_by_name["r_arm"])
+	H.organs_by_name["l_foot"] = new/datum/organ/external/l_foot(H.organs_by_name["l_leg"])
+	H.organs_by_name["r_foot"] = new/datum/organ/external/r_foot(H.organs_by_name["r_leg"])
+
+	if (name!="Slime People")
+		H.internal_organs = list()
+		H.internal_organs_by_name["heart"] = new/datum/organ/internal/heart(H)
+		H.internal_organs_by_name["lungs"] = new/datum/organ/internal/lungs(H)
+		H.internal_organs_by_name["liver"] = new/datum/organ/internal/liver(H)
+		H.internal_organs_by_name["kidney"] = new/datum/organ/internal/kidney(H)
+		H.internal_organs_by_name["brain"] = new/datum/organ/internal/brain(H)
+		H.internal_organs_by_name["eyes"] = new/datum/organ/internal/eyes(H)
+
+	for(var/name in H.organs_by_name)
+		H.organs += H.organs_by_name[name]
+
+	for(var/datum/organ/external/O in H.organs)
+		O.owner = H
 
 	if(flags & IS_SYNTHETIC)
 		for(var/datum/organ/external/E in H.organs)
 			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
 			E.status |= ORGAN_ROBOT
 		for(var/datum/organ/internal/I in H.internal_organs)
-			I.robotic = 2
+			I.mechanize()
+
+
+	return
+
+/datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	return
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
+
+
+/datum/species/proc/say_filter(mob/M, message, datum/language/speaking)
+	return message
+
+/datum/species/proc/equip(var/mob/living/carbon/human/H)
 
 /datum/species/human
 	name = "Human"
@@ -65,7 +104,8 @@
 	deform = 'icons/mob/human_races/r_def_human.dmi'
 	primitive = /mob/living/carbon/monkey
 	path = /mob/living/carbon/human/human
-	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
+	flags = HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
+	bodyflags = HAS_SKIN_TONE
 
 /datum/species/unathi
 	name = "Unathi"
@@ -79,7 +119,7 @@
 	darksight = 3
 
 	flags = HAS_LIPS | HAS_UNDERWEAR
-	bodyflags = FEET_CLAWS | HAS_TAIL
+	bodyflags = FEET_CLAWS | HAS_TAIL | HAS_SKIN_COLOR
 
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
@@ -88,6 +128,9 @@
 	heat_level_1 = 420 //Default 360 - Higher is better
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
+
+	flesh_color = "#34AF10"
+
 
 /datum/species/tajaran
 	name = "Tajaran"
@@ -110,7 +153,9 @@
 	primitive = /mob/living/carbon/monkey/tajara
 
 	flags = HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
-	bodyflags = FEET_PADDED | HAS_TAIL
+	bodyflags = FEET_PADDED | HAS_TAIL | HAS_SKIN_COLOR
+
+	flesh_color = "#AFA59E"
 
 /datum/species/skrell
 	name = "Skrell"
@@ -122,6 +167,9 @@
 
 	flags = HAS_LIPS | HAS_UNDERWEAR
 	bloodflags = BLOOD_GREEN
+	bodyflags = HAS_SKIN_COLOR
+
+	flesh_color = "#8CD7A3"
 
 /datum/species/vox
 	name = "Vox"
@@ -143,7 +191,6 @@
 	flags = NO_SCAN | IS_WHITELISTED | NO_BLOOD
 
 /datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
-
 	var/datum/organ/external/affected = H.get_organ("head")
 
 	//To avoid duplicates.
@@ -192,6 +239,10 @@
 	bodyflags = FEET_NOSLIP
 	abilities = list(/mob/living/carbon/human/slime/proc/slimepeople_ventcrawl)
 
+/datum/species/slime/handle_post_spawn(var/mob/living/carbon/human/H)
+	H.dna.mutantrace = "slime"
+	H.update_mutantrace()
+
 
 /datum/species/grey // /vg/
 	name = "Grey"
@@ -235,8 +286,9 @@
 	flags = NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
 
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
-
 	H.gender = NEUTER
+
+	return ..()
 
 /datum/species/diona/handle_death(var/mob/living/carbon/human/H)
 
@@ -280,5 +332,4 @@
 
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
 
-//	blood_color = "#FFFFFF"
-//	flesh_color = "#AAAAAA"
+	flesh_color = "#AAAAAA"

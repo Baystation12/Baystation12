@@ -58,7 +58,7 @@
 		return
 	if(istype(C, /obj/item/weapon/wrench))
 		user << "\blue Removing rods..."
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 80, 1)
+		playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
 		if(do_after(user, 30))
 			new /obj/item/stack/rods(src, 2)
 			ChangeTurf(/turf/simulated/floor)
@@ -246,7 +246,7 @@
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	heat_capacity = 700000
 
-	lit_value = 4		//starlight
+	lighting_lumcount = 4		//starlight
 //	accepts_lighting=0 			// Don't apply overlays
 
 	New()

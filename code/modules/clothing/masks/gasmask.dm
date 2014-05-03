@@ -10,6 +10,21 @@
 	permeability_coefficient = 0.01
 	siemens_coefficient = 0.9
 
+
+//Bane gas mask
+/obj/item/clothing/mask/banemask
+	name = "bane mask"
+	desc = "Only when the station is in flames, do you have my permission to robust."
+	icon_state = "bane_mask"
+	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
+	flags_inv = HIDEEARS|HIDEEYES|HIDEFACE
+	w_class = 3.0
+	item_state = "bane_mask"
+	gas_transfer_coefficient = 0.01
+	permeability_coefficient = 0.01
+	siemens_coefficient = 0.9
+
+
 //Plague Dr suit can be found in clothing/suits/bio.dm
 /obj/item/clothing/mask/gas/plaguedoctor
 	name = "plague doctor mask"
@@ -52,6 +67,22 @@
 	icon_state = "clown"
 	item_state = "clown_hat"
 	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS | BLOCKHAIR
+
+/obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
+
+	var/mob/M = usr
+	var/list/options = list()
+	options["True Form"] = "clown"
+	options["The Feminist"] = "sexyclown"
+	options["The Madman"] = "joker"
+	options["The Rainbow Color"] ="rainbow"
+
+	var/choice = input(M,"To what form do you wish to Morph this mask?","Morph Mask") in options
+
+	if(src && choice && !M.stat && in_range(M,src))
+		icon_state = options[choice]
+		M << "Your Clown Mask has now morphed into [choice], all praise the Honk Mother!"
+		return 1
 
 /obj/item/clothing/mask/gas/sexyclown
 	name = "sexy-clown wig and mask"

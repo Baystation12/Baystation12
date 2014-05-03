@@ -125,7 +125,7 @@
 /obj/machinery/door/window/proc/take_damage(var/damage)
 	src.health = max(0, src.health - damage)
 	if (src.health <= 0)
-		new /obj/item/weapon/shard(src.loc)
+		getFromPool(/obj/item/weapon/shard, loc)
 		var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
 		CC.amount = 2
 		var/obj/item/weapon/airlock_electronics/ae
@@ -181,7 +181,12 @@
 			return
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("\red <B>[user] smashes against the [src.name].</B>", 1)
-		take_damage(25)
+		if (src.health <= 0)
+			getFromPool(/obj/item/weapon/shard, loc)
+			var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
+			CC.amount = 2
+			src.density = 0
+			del(src)
 	else
 		return src.attack_hand(user)
 
@@ -259,11 +264,14 @@
 
 	//If it's a weapon, smash windoor. Unless it's an id card, agent card, ect.. then ignore it (Cards really shouldnt damage a door anyway)
 	if(src.density && istype(I, /obj/item/weapon) && !istype(I, /obj/item/weapon/card))
-		var/aforce = I.force
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("\red <B>[src] was hit by [I].</B>")
-		if(I.damtype == BRUTE || I.damtype == BURN)
-			take_damage(aforce)
+		if (src.health <= 0)
+			getFromPool(/obj/item/weapon/shard, loc)
+			var/obj/item/stack/cable_coil/CC = new /obj/item/stack/cable_coil(src.loc)
+			CC.amount = 2
+			src.density = 0
+			del(src)
 		return
 
 

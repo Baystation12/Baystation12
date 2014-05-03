@@ -57,6 +57,7 @@ datum/preferences
 	var/age = 30						//age of character
 	var/b_type = "A+"					//blood type (not-chooseable)
 	var/underwear = 1					//underwear type
+	var/undershirt = 1					//undershirt type
 	var/backbag = 2						//backpack type
 	var/h_style = "Bald"				//Hair type
 	var/r_hair = 0						//Hair color
@@ -66,7 +67,10 @@ datum/preferences
 	var/r_facial = 0					//Face hair color
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color
-	var/s_tone = 0						//Skin color
+	var/s_tone = 0						//Skin tone
+	var/r_skin = 0						//Skin color
+	var/g_skin = 0						//Skin color
+	var/b_skin = 0						//Skin color
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
@@ -125,6 +129,8 @@ datum/preferences
 	// Whether or not to use randomized character slots
 	var/randomslot = 0
 
+	// jukebox volume
+	var/volume = 100
 /datum/preferences/New(client/C)
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 	if(istype(C))
@@ -148,7 +154,6 @@ datum/preferences
 		dat += "<a href='?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Game Preferences</a>"
 		if(!path)
 			dat += "Please create an account to save your preferences."
-
 
 		dat += "</center>"
 		dat += "<HR>"
@@ -180,10 +185,10 @@ datum/preferences
 				dat += "<br>"
 				dat += "Species: <a href='?_src_=prefs;preference=species;task=input'>[species]</a><br>"
 				dat += "Secondary Language:<br><a href='?_src_=prefs;preference=language;task=input'>[language]</a><br>"
-				dat += "Accent: <a href='?_src_=prefs;preference=accent;task=input'>[accent]</a><br>"
+/*				dat += "Accent: <a href='?_src_=prefs;preference=accent;task=input'>[accent]</a><br>"
 				dat += "Voice: <a href='?_src_=prefs;preference=voice;task=input'>[voice]</a><br>"
 				dat += "Pitch: <a href='?_src_=prefs;preference=pitch;task=input'>[pitch]</a><br>"
-				dat += "Talking Speed: <a href='?_src_=prefs;preference=talkspeed;task=input'>[talkspeed]</a><br>"
+				dat += "Talking Speed: <a href='?_src_=prefs;preference=talkspeed;task=input'>[talkspeed]</a><br>"*/
 				dat += "Blood Type: <a href='?_src_=prefs;preference=b_type;task=input'>[b_type]</a><br>"
 				dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 		//		dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
@@ -265,6 +270,7 @@ datum/preferences
 					dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
 				else
 					dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_f[underwear]]</b></a><br>"
+				dat += "Undershirt: <a href='?_src_=prefs;preference=undershirt;task=input'><b>[undershirt_t[undershirt]]</b></a><br>"
 				dat += "Backpack Type:<br><a href ='?_src_=prefs;preference=bag;task=input'><b>[backbaglist[backbag]]</b></a><br>"
 				dat += "Nanotrasen Relation:<br><a href ='?_src_=prefs;preference=nt_relation;task=input'><b>[nanotrasen_relation]</b></a><br>"
 				dat += "</td><td><b>Preview</b><br><img src=previewicon.png height=64 width=64><img src=previewicon2.png height=64 width=64></td></tr></table>"
@@ -293,7 +299,10 @@ datum/preferences
 				dat += " Style: <a href='?_src_=prefs;preference=f_style;task=input'>[f_style]</a><br>"
 
 				dat += "<br><b>Eyes</b><br>"
-				dat += "<a href='?_src_=prefs;preference=eyes;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font>"
+				dat += "<a href='?_src_=prefs;preference=eyes;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font><br>"
+
+				dat += "<br><b>Body Color</b><br>"
+				dat += "<a href='?_src_=prefs;preference=skin;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin)]'><tr><td>__</td></tr></table></font>"
 
 				dat += "</td></tr></table><hr><center>"
 
@@ -920,12 +929,19 @@ datum/preferences
 					if("underwear")
 						underwear = rand(1,underwear_m.len)
 						ShowChoices(user)
+					if("undershirt")
+						undershirt = rand(1,undershirt_t.len)
+						ShowChoices(user)
 					if("eyes")
 						r_eyes = rand(0,255)
 						g_eyes = rand(0,255)
 						b_eyes = rand(0,255)
 					if("s_tone")
 						s_tone = random_skin_tone()
+					if("s_color")
+						r_skin = rand(0,255)
+						g_skin = rand(0,255)
+						b_skin = rand(0,255)
 					if("bag")
 						backbag = rand(1,4)
 					/*if("skin_style")
@@ -1097,6 +1113,15 @@ datum/preferences
 							underwear = underwear_options.Find(new_underwear)
 						ShowChoices(user)
 
+					if("undershirt")
+						var/list/undershirt_options
+						undershirt_options = undershirt_t
+
+						var/new_undershirt = input(user, "Choose your character's undershirt:", "Character Preference") as null|anything in undershirt_options
+						if (new_undershirt)
+							undershirt = undershirt_options.Find(new_undershirt)
+						ShowChoices(user)
+
 					if("accent")
 						var/new_accent = input(user, "Choose your accent. en-us:American, en:British, en-sc:Scottish, mb-de4-en:German, mb-fr1-en:French", "Character Preference") as null|anything in list("en-us", "en", "en-sc","mb-de4-en","mb-fr1-en")
 						if(new_accent)
@@ -1127,6 +1152,14 @@ datum/preferences
 						var/new_s_tone = input(user, "Choose your character's skin-tone:\n(Light 1 - 220 Dark)", "Character Preference")  as num|null
 						if(new_s_tone)
 							s_tone = 35 - max(min( round(new_s_tone), 220),1)
+
+					if("skin")
+						if(species == "Unathi" || species == "Tajaran" || species == "Skrell")
+							var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference") as color|null
+							if(new_skin)
+								r_skin = hex2num(copytext(new_skin, 2, 4))
+								g_skin = hex2num(copytext(new_skin, 4, 6))
+								b_skin = hex2num(copytext(new_skin, 6, 8))
 
 					if("ooccolor")
 						var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference") as color|null
@@ -1361,6 +1394,10 @@ datum/preferences
 		character.g_facial = g_facial
 		character.b_facial = b_facial
 
+		character.r_skin = r_skin
+		character.g_skin = g_skin
+		character.b_skin = b_skin
+
 		character.s_tone = s_tone
 
 		character.h_style = h_style
@@ -1402,6 +1439,10 @@ datum/preferences
 		if(underwear > underwear_m.len || underwear < 1)
 			underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES
 		character.underwear = underwear
+
+		if(undershirt > undershirt_t.len || undershirt < 1)
+			undershirt = 0
+		character.undershirt = undershirt
 
 		if(backbag > 4 || backbag < 1)
 			backbag = 1 //Same as above

@@ -126,15 +126,18 @@
 	if(href_list["select_field"])
 		field_type = href_list["select_field"]
 	else if(href_list["insertcard"])
-		var/obj/item/I = usr.get_active_hand()
-		if (istype(I, /obj/item/weapon/card))
-			usr.drop_item()
-			I.loc = src
-			auth_card = I
-			if(attempt_unlock(I))
-				usr << "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</a>\'</span>"
-			else
-				usr << "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</a>\'</span>"
+		if (istype(usr, /mob/living/silicon))
+			locked = 0
+		else
+			var/obj/item/I = usr.get_active_hand()
+			if (istype(I, /obj/item/weapon/card))
+				usr.drop_item()
+				I.loc = src
+				auth_card = I
+				if(attempt_unlock(I))
+					usr << "<span class='info'>You insert [I], the console flashes \'<i>Access granted.</a>\'</span>"
+				else
+					usr << "<span class='warning'>You insert [I], the console flashes \'<i>Access denied.</a>\'</span>"
 	else if(href_list["ejectcard"])
 		if(auth_card)
 			if(ishuman(usr))

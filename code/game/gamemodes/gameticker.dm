@@ -152,6 +152,51 @@ var/global/datum/controller/gameticker/ticker
 		//Holiday Round-start stuff	~Carn
 		Holiday_Game_Start()
 
+	spawn(0) // Forking dynamic room selection
+		var/list/area/dynamic/source/available_source_candidates = typesof(/area/dynamic/source) - /area/dynamic/source
+		var/list/area/dynamic/destination/available_destination_candidates = typesof(/area/dynamic/destination) - /area/dynamic/destination
+
+		for (var/area/dynamic/destination/current_destination_candidate in available_destination_candidates)
+			var/area/dynamic/destination/current_destination = locate(current_destination_candidate)
+
+			if (!current_destination)
+				continue
+
+			if (current_destination.match_width == 0 || current_destination.match_height == 0)
+				message_admins("Dynamic area destination '[current_destination.name]' does not have its size requirements set.")
+				continue
+
+			var/list/area/dynamic/source/candidate_source_areas = new /list(0)
+			for (var/area/dynamic/source/candidate_source_area in available_source_candidates)
+				var/area/dynamic/source/candidate_source = locate(candidate_source_area)
+
+				if (!candidate_source)
+					continue
+
+				if (candidate_source.match_tag != current_destination.match_tag)
+					continue
+
+				if (candidate_source.match_width != current_destination.match_width || \
+					candidate_source.match_height != current_destination.match_height)
+					continue
+
+				candidate_source_areas += candidate_source
+
+			if (candidate_source_areas.len == 0)
+				message_admins("Failed to find a matching source for dynamic area: [current_destination.name]")
+				continue
+
+			var/area/dynamic/source/selected_source = pick(candidate_source_areas)
+			available_source_candidates -= selected_source
+
+			selected_source.copy_contents_to(current_destination, 0)
+
+			if (current_destination.enable_lights || selected_source.enable_lights)
+				current_destination.power_light = 1
+			else
+				current_destination.power_light = 0
+			current_destination.power_change()
+
 	//start_events() //handles random events and space dust.
 	//new random event system is handled from the MC.
 
@@ -164,7 +209,7 @@ var/global/datum/controller/gameticker/ticker
 
 	supply_shuttle.process() 		//Start the supply shuttle regenerating points -- TLE
 	master_controller.process()		//Start master_controller.process()
-	//lighting_controller.process()	//Start processing DynamicAreaLighting updates
+	lighting_controller.process()	//Start processing DynamicAreaLighting updates
 
 
 	if(config.sql_enabled)

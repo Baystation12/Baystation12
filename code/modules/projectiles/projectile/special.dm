@@ -32,6 +32,8 @@
 	flag = "energy"
 	var/temperature = 300
 
+	resetVariables()
+		temperature = initial(temperature)
 
 	on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
 		if(istype(target, /mob/living))
@@ -161,6 +163,9 @@
 	flag = "bomb"
 	var/range = 2
 
+	resetVariables()
+		range = initial(range)
+
 obj/item/projectile/kinetic/New()
 	var/turf/proj_turf = get_turf(src)
 	if(!istype(proj_turf, /turf))
@@ -184,7 +189,32 @@ obj/item/projectile/kinetic/New()
 		var/turf/simulated/mineral/M = target_turf
 		M.GetDrilled()
 	new /obj/item/effect/kinetic_blast(target_turf)
-	..()
+	..(target,blocked)
+
+/obj/item/projectile/kinetic/Bump(atom/A as mob|obj|turf|area)
+	if(!loc) return
+	if(A == firer)
+		loc = A.loc
+		return
+
+	if(src)//Do not add to this if() statement, otherwise the meteor won't delete them
+
+		if(A)
+			var/turf/target_turf = get_turf(A)
+			//testing("Bumped [A.type], on [target_turf.type].")
+			if(istype(target_turf, /turf/unsimulated/mineral))
+				var/turf/simulated/mineral/M = target_turf
+				M.GetDrilled()
+			// Now we bump as a bullet, if the atom is a non-turf.
+			if(!isturf(A))
+				..(A)
+			//qdel(src) // Comment this out if you want to shoot through the asteroid, ERASER-style.
+			returnToPool(src) // Comment this out if you want to shoot through the asteroid, ERASER-style.
+			return 1
+	else
+		//qdel(src)
+		returnToPool(src)
+		return 0
 
 /obj/item/effect/kinetic_blast
 	name = "kinetic explosion"

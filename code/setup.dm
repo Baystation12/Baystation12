@@ -767,6 +767,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 	)
 
 //Species flags.
+
 #define NO_BLOOD		1
 #define NO_BREATHE 		2
 #define IS_SLOW 		4
@@ -775,7 +776,6 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define NO_PAIN 	32
 #define REQUIRE_LIGHT 	64
 #define IS_WHITELISTED 	128
-#define HAS_SKIN_TONE 	256
 #define HAS_LIPS 		512
 #define HAS_UNDERWEAR 	1024
 #define IS_SYNTHETIC	2048
@@ -793,6 +793,8 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define FEET_PADDED		2
 #define FEET_NOSLIP		4
 #define HAS_TAIL 		8
+#define HAS_SKIN_TONE 	16
+#define HAS_SKIN_COLOR	32
 
 
 //Language flags.
@@ -842,4 +844,3 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define COLOR_YELLOW 	"#FFFF00"
 #define COLOR_ORANGE 	"#FF9900"
 #define COLOR_WHITE 	"#FFFFFF"
-

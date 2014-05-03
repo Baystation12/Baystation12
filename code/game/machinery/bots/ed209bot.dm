@@ -824,7 +824,7 @@ Auto Patrol: []"},
 			if (src.emagged == 2)
 				projectile = /obj/item/projectile/beam
 			else
-				projectile = /obj/item/projectile/energy/electrode
+				projectile = /obj/item/projectile/beam/stun
 		else if(lasercolor == "b")
 			if (src.emagged == 2)
 				projectile = /obj/item/projectile/beam/lastertag/omni
@@ -1020,7 +1020,8 @@ Auto Patrol: []"},
 	if((src.lasercolor == "b") && (src.disabled == 0))
 		if(istype(Proj, /obj/item/projectile/beam/lastertag/red))
 			src.disabled = 1
-			del (Proj)
+			//del (Proj)
+			returnToPool(Proj)
 			sleep(100)
 			src.disabled = 0
 		else
@@ -1028,7 +1029,8 @@ Auto Patrol: []"},
 	else if((src.lasercolor == "r") && (src.disabled == 0))
 		if(istype(Proj, /obj/item/projectile/beam/lastertag/blue))
 			src.disabled = 1
-			del (Proj)
+			//del (Proj)
+			returnToPool(Proj)
 			sleep(100)
 			src.disabled = 0
 		else

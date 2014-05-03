@@ -266,9 +266,26 @@
 
 
 		src.updateUsrDialog()
-	else
-		..()
-	return
+	else if(istype(I, /obj/item/weapon/screwdriver))
+		playsound(get_turf(src), 'sound/items/Screwdriver.ogg', 50, 1)
+		if(do_after(user, 20))
+			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
+			var/obj/item/weapon/circuitboard/arcade/M = new /obj/item/weapon/circuitboard/arcade( A )
+			for (var/obj/C in src)
+				C.loc = src.loc
+			A.circuit = M
+			A.anchored = 1
+
+			if (src.stat & BROKEN)
+				user << "\blue The broken glass falls out."
+				getFromPool(/obj/item/weapon/shard, loc)
+				A.state = 3
+				A.icon_state = "3"
+			else
+				user << "\blue You disconnect the monitor."
+				A.state = 4
+				A.icon_state = "4"
+
 
 
 

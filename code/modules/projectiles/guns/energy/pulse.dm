@@ -19,7 +19,7 @@
 				fire_delay = 5
 				fire_sound = 'sound/weapons/Taser.ogg'
 				user << "\red [src.name] is now set to stun."
-				projectile_type = "/obj/item/projectile/energy/electrode"
+				projectile_type = "/obj/item/projectile/beam/stun"
 			if(0)
 				mode = 1
 				charge_cost = 100

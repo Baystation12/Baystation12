@@ -338,7 +338,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return
 
 	lastmode = mode
-		
+
 	var/title = "Personal Data Assistant"
 
 	var/data[0]  // This is the data that will be sent to the PDA
@@ -367,7 +367,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(mode in cartmodes)
 			data["records"] = cartridge.create_NanoUI_values()
 
-		if(mode == 0)	
+		if(mode == 0)
 			cartdata["name"] = cartridge.name
 			cartdata["access"] = list(\
 					"access_security" = cartridge.access_security,\
@@ -557,7 +557,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			mode = 1
 		if("2")//Messenger
 			mode = 2
-		if("21")//Read messeges
+		if("21")//Read messages
 			mode = 21
 		if("3")//Atmos scan
 			mode = 3
@@ -771,6 +771,71 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 	return 1 // return 1 tells it to refresh the UI in NanoUI
 
+
+/obj/item/device/pda/proc/detonate_act(var/obj/item/device/pda/P)
+	//TODO: sometimes these attacks show up on the message server
+	var/i = rand(1,100)
+	var/j = rand(0,1) //Possibility of losing the PDA after the detonation
+	var/message = ""
+	var/mob/living/M = null
+	if(ismob(P.loc))
+		M = P.loc
+
+	//switch(i) //Yes, the overlapping cases are intended.
+	if(i<=10) //The traditional explosion
+		P.explode()
+		j=1
+		message += "Your [P] suddenly explodes!"
+	if(i>=10 && i<= 20) //The PDA burns a hole in the holder.
+		j=1
+		if(M && isliving(M))
+			M.apply_damage( rand(30,60) , BURN)
+		message += "You feel a searing heat! Your [P] is burning!"
+	if(i>=20 && i<=25) //EMP
+		empulse(P.loc, 3, 6, 1)
+		message += "Your [P] emits a wave of electromagnetic energy!"
+	if(i>=25 && i<=40) //Smoke
+		var/datum/effect/effect/system/chem_smoke_spread/S = new /datum/effect/effect/system/chem_smoke_spread
+		S.attach(P.loc)
+		S.set_up(P, 10, 0, P.loc)
+		playsound(P.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
+		S.start()
+		message += "Large clouds of smoke billow forth from your [P]!"
+	if(i>=40 && i<=45) //Bad smoke
+		var/datum/effect/effect/system/bad_smoke_spread/B = new /datum/effect/effect/system/bad_smoke_spread
+		B.attach(P.loc)
+		B.set_up(P, 10, 0, P.loc)
+		playsound(P.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
+		B.start()
+		message += "Large clouds of noxious smoke billow forth from your [P]!"
+	if(i>=65 && i<=75) //Weaken
+		if(M && isliving(M))
+			M.apply_effects(0,1)
+		message += "Your [P] flashes with a blinding white light! You feel weaker."
+	if(i>=75 && i<=85) //Stun and stutter
+		if(M && isliving(M))
+			M.apply_effects(1,0,0,0,1)
+		message += "Your [P] flashes with a blinding white light! You feel weaker."
+	if(i>=85) //Sparks
+		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		s.set_up(2, 1, P.loc)
+		s.start()
+		message += "Your [P] begins to spark violently!"
+	if(i>45 && i<65 && prob(50)) //Nothing happens
+		message += "Your [P] bleeps loudly."
+		j = prob(10)
+
+	if(j) //This kills the PDA
+		P.Del()
+		if(message)
+			message += "It melts in a puddle of plastic."
+		else
+			message += "Your [P] shatters in a thousand pieces!"
+
+	if(M && isliving(M))
+		message = "\red" + message
+		M.show_message(message, 1)
+
 /obj/item/device/pda/proc/remove_id()
 	if (id)
 		if (ismob(loc))
@@ -805,7 +870,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/obj/machinery/message_server/useMS = null
 	if(message_servers)
 		for (var/obj/machinery/message_server/MS in message_servers)
-		//PDAs are now dependant on the Message Server.
+		//PDAs are now dependent on the Message Server.
 			if(MS.active)
 				useMS = MS
 				break
@@ -824,8 +889,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					t = Gibberish(t, signal.data["compression"] + 50)
 
 	if(useMS && useTC) // only send the message if it's stable
-		if(useTC != 2) // Does our recepient have a broadcaster on their level?
-			U << "ERROR: Cannot reach recepient."
+		if(useTC != 2) // Does our recipient have a broadcaster on their level?
+			U << "ERROR: Cannot reach recipient."
 			return
 		useMS.send_pda_message("[P.owner]","[owner]","[t]")
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
@@ -867,7 +932,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 		if(L)
 			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[t]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
-			nanomanager.update_user_uis(L, P) // Update the recieving user's PDA UI so that they can see the new message
+			nanomanager.update_user_uis(L, P) // Update the receiving user's PDA UI so that they can see the new message
 
 		nanomanager.update_user_uis(U, P) // Update the sending user's PDA UI so that they can see the new message
 

@@ -249,6 +249,9 @@ BLIND     // can't see anything
 		*/
 	var/obj/item/clothing/tie/hastie = null
 	var/displays_id = 1
+	var/rolled_down = 0
+	var/basecolor
+
 
 /obj/item/clothing/under/attackby(obj/item/I, mob/user)
 	if(!hastie && istype(I, /obj/item/clothing/tie))
@@ -312,6 +315,22 @@ BLIND     // can't see anything
 		if(3)
 			usr << "Your suit will now report your vital lifesigns as well as your coordinate position."
 	..()
+
+/obj/item/clothing/under/verb/rollsuit()
+	set name = "Roll Down Jumpsuit"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+
+	if(copytext(_color,-2) != "_d")
+		basecolor = _color
+	usr << "DEBUG:[basecolor]"
+	if(basecolor + "_d_s" in icon_states('icons/mob/uniform.dmi'))
+		_color = _color == "[basecolor]" ? "[basecolor]_d" : "[basecolor]"
+		usr.update_inv_w_uniform()
+	else
+		usr << "<span class='notice'>You cannot roll down the uniform!</span>"
 
 /obj/item/clothing/under/verb/removetie()
 	set name = "Remove Accessory"

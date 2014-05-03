@@ -49,6 +49,15 @@ function SetMusic(url, time, volume) {
 	// One media source per area.
 	var/obj/machinery/media/media_source = null
 
+
+#ifdef DEBUG_MEDIAPLAYER
+#define MP_DEBUG(x) owner << x
+#warning Please comment out #define DEBUG_MEDIAPLAYER before committing.
+#else
+#define MP_DEBUG(x)
+#endif
+
+
 /datum/media_manager
 	var/url = ""
 	var/start_time = 0
@@ -73,7 +82,7 @@ function SetMusic(url, time, volume) {
 	proc/send_update()
 		if(!(owner.prefs.toggles & SOUND_STREAMING))
 			return // Nope.
-		//testing("Sending update to WMP...")
+		MP_DEBUG("\green Sending update to WMP ([url])...")
 		owner << output(list2params(list(url, (world.time - start_time) / 10, volume)), "[window]:SetMusic")
 
 	proc/stop_music()
@@ -85,7 +94,7 @@ function SetMusic(url, time, volume) {
 	proc/update_music()
 		var/targetURL = ""
 		var/targetStartTime = 0
-		var/targetVolume = 25
+		//var/targetVolume = volume
 
 		if (!owner)
 			//testing("owner is null")
@@ -104,8 +113,26 @@ function SetMusic(url, time, volume) {
 		//else
 		//	testing("M is not playing or null.")
 
-		if (url != targetURL || abs(targetStartTime - start_time) > 1 || targetVolume != volume)
+		if (url != targetURL || abs(targetStartTime - start_time) > 1)
 			url = targetURL
 			start_time = targetStartTime
-			volume = targetVolume
+			//volume = targetVolume
 			send_update()
+
+	proc/update_volume(var/value)
+		volume = value
+		send_update()
+
+/client/verb/change_volume()
+	set name = "Set Volume"
+	set category = "Preferences"
+	set desc = "Set jukebox volume"
+	if(!media || !istype(media))
+		usr << "You have no media datum to change, if you're not in the lobby tell an admin."
+		return
+	var/value = input("Choose your Jukebox volume.", "Jukebox volume", media.volume)
+	value = round(max(0, min(100, value)))
+	media.update_volume(value)
+	if(prefs)
+		prefs.volume = value
+		prefs.save_volume()

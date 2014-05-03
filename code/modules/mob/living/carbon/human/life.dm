@@ -132,6 +132,7 @@
 	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
 
+
 	//Handle temperature/pressure differences between body and environment
 	handle_environment(environment)		//Optimized a good bit.
 
@@ -264,6 +265,8 @@
 			if(!gene.block)
 				continue
 			if(gene.is_active(src))
+				if (prob(10) && prob(gene.instability))
+					adjustCloneLoss(1)
 				gene.OnMobLife(src)
 
 		if (radiation)
@@ -280,10 +283,12 @@
 					var/rads = radiation/25
 					radiation -= rads
 					nutrition += rads
-					heal_overall_damage(rads,rads)
+					adjustBruteLoss(-(rads))
 					adjustOxyLoss(-(rads))
 					adjustToxLoss(-(rads))
 					updatehealth()
+					return
+				if(species.flags & IS_SYNTHETIC)
 					return
 
 				var/damage = 0
@@ -951,7 +956,7 @@
 				var/turf/T = loc
 				var/area/A = T.loc
 				if(A)
-					if(A.lighting_use_dynamic)	light_amount = min(10,T.lit_value) - 5 //hardcapped so it's not abused by having a ton of flashlights
+					if(A.lighting_use_dynamic)	light_amount = min(10,T.lighting_lumcount) - 5 //hardcapped so it's not abused by having a ton of flashlights
 					else						light_amount =  5
 			nutrition += light_amount
 			traumatic_shock -= light_amount
@@ -970,7 +975,7 @@
 				var/turf/T = loc
 				var/area/A = T.loc
 				if(A)
-					if(A.lighting_use_dynamic)	light_amount = T.lit_value
+					if(A.lighting_use_dynamic)	light_amount = T.lighting_lumcount
 					else						light_amount =  10
 			if(light_amount > 2) //if there's enough light, start dying
 				take_overall_damage(1,1)
@@ -1252,13 +1257,17 @@
 		if(hud_updateflag)
 			handle_hud_list()
 
+
 		if(!client)	return 0
+
+		if(hud_updateflag)
+			handle_hud_list()
 
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud") //ugly, but icon comparison is worse, I believe
 				client.images.Remove(hud)
 
-		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask)
+		client.screen.Remove(global_hud.blurry, global_hud.druggy, global_hud.vimpaired, global_hud.darkMask/*, global_hud.nvg*/)
 
 		update_action_buttons()
 
@@ -1390,34 +1399,25 @@
 						if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
 
 			if(glasses)
-				if(istype(glasses, /obj/item/clothing/glasses/meson))
-					sight |= SEE_TURFS
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
-				else if(istype(glasses, /obj/item/clothing/glasses/night))
-					see_in_dark = 5
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
-				else if(istype(glasses, /obj/item/clothing/glasses/thermal))
-					sight |= SEE_MOBS
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
-				else if(istype(glasses, /obj/item/clothing/glasses/material))
-					sight |= SEE_OBJS
-					if(!druggy)
-						see_invisible = SEE_INVISIBLE_MINIMUM
+				var/obj/item/clothing/glasses/G = glasses
+				if(istype(G))
+					see_in_dark += G.darkness_view
+					if(G.vision_flags)		// MESONS
+						sight |= G.vision_flags
+						if(!druggy)
+							see_invisible = SEE_INVISIBLE_MINIMUM
 
 	/* HUD shit goes here, as long as it doesn't modify sight flags */
 	// The purpose of this is to stop xray and w/e from preventing you from using huds -- Love, Doohl
 
-				else if(istype(glasses, /obj/item/clothing/glasses/sunglasses))
+				if(istype(glasses, /obj/item/clothing/glasses/sunglasses))
 					see_in_dark = 1
 					if(istype(glasses, /obj/item/clothing/glasses/sunglasses/sechud))
 						var/obj/item/clothing/glasses/sunglasses/sechud/O = glasses
 						if(O.hud)		O.hud.process_hud(src)
 						if(!druggy)		see_invisible = SEE_INVISIBLE_LIVING
 
-				else if(istype(glasses, /obj/item/clothing/glasses/hud))
+				if(istype(glasses, /obj/item/clothing/glasses/hud))
 					var/obj/item/clothing/glasses/hud/O = glasses
 					O.process_hud(src)
 					if(!druggy)
@@ -1427,6 +1427,7 @@
 			else if(!seer)
 				see_in_dark = species.darksight
 				see_invisible = SEE_INVISIBLE_LIVING
+
 
 			if(healths)
 				if (analgesic)
@@ -1548,7 +1549,7 @@
 		//0.1% chance of playing a scary sound to someone who's in complete darkness
 		if(isturf(loc) && rand(1,1000) == 1)
 			var/turf/currentTurf = loc
-			if(!currentTurf.lit_value)
+			if(!currentTurf.lighting_lumcount)
 				playsound_local(src,pick(scarySounds),50, 1, -1)
 
 	// Separate proc so we can jump out of it when we've succeeded in spreading disease.
@@ -1732,6 +1733,9 @@
 			makeSkeleton()
 			return //No puking over skeletons, they don't smell at all!
 
+//		if(loc == /obj/structure/morgue)
+//			return
+
 		for(var/mob/living/carbon/human/H in range(decaylevel, src))
 			if(prob(5))
 				if(airborne_can_reach(get_turf(src), get_turf(H)))
@@ -1815,7 +1819,6 @@
 			var/obj/item/weapon/card/id/I = wear_id.GetID()
 			if(I)
 				perpname = I.registered_name
-
 		for(var/datum/data/record/E in data_core.general)
 			if(E.fields["name"] == perpname)
 				for (var/datum/data/record/R in data_core.security)
@@ -1858,29 +1861,33 @@
 	if(hud_updateflag & 1 << SPECIALROLE_HUD)
 		var/image/holder = hud_list[SPECIALROLE_HUD]
 		holder.icon_state = "hudblank"
-		switch(mind.special_role)
-			if("traitor","Syndicate")
-				holder.icon_state = "hudsyndicate"
-			if("Revolutionary")
-				holder.icon_state = "hudrevolutionary"
-			if("Head Revolutionary")
-				holder.icon_state = "hudheadrevolutionary"
-			if("Cultist")
-				holder.icon_state = "hudcultist"
-			if("Changeling")
-				holder.icon_state = "hudchangeling"
-			if("Wizard","Fake Wizard")
-				holder.icon_state = "hudwizard"
-			if("Death Commando")
-				holder.icon_state = "huddeathsquad"
-			if("Ninja")
-				holder.icon_state = "hudninja"
-			if("Vampire")
-				holder.icon_state = "hudvampire"
-			if("VampThrall")
-				holder.icon_state = "hudvampthrall"
 
-		hud_list[SPECIALROLE_HUD] = holder
+		if(mind)
+
+			switch(mind.special_role)
+				if("traitor","Syndicate")
+					holder.icon_state = "hudsyndicate"
+				if("Revolutionary")
+					holder.icon_state = "hudrevolutionary"
+				if("Head Revolutionary")
+					holder.icon_state = "hudheadrevolutionary"
+				if("Cultist")
+					holder.icon_state = "hudcultist"
+				if("Changeling")
+					holder.icon_state = "hudchangeling"
+				if("Wizard","Fake Wizard")
+					holder.icon_state = "hudwizard"
+				if("Death Commando")
+					holder.icon_state = "huddeathsquad"
+				if("Ninja")
+					holder.icon_state = "hudninja"
+				if("Vampire") // TODO: Check this
+					holder.icon_state = "hudvampire"
+				if("VampThrall")
+					holder.icon_state = "hudvampthrall"
+
+
+			hud_list[SPECIALROLE_HUD] = holder
 
 	hud_updateflag = 0
 

@@ -58,15 +58,15 @@
 				else
 					src.DB_job_unlock("Barber",5)
 			if("2")
-				if(karma <15)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Nanotrasen Representative",15)
-			if("3")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_job_unlock("Customs Officer",30)
+					src.DB_job_unlock("Nanotrasen Representative",30)
+			if("3")
+				if(karma <15)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_job_unlock("Customs Officer",15)
 			if("4")
 				if(karma <30)
 					usr << "You do not have enough karma!"
@@ -292,12 +292,11 @@
 /client/proc/send_resources()
 //	preload_vox() //Causes long delays with initial start window and subsequent windows when first logged in.
 
-	// Send NanoUI resources to this client
-	nanomanager.send_resources(src)
-
 	getFiles(
 		'html/search.js',
 		'html/panels.css',
+		'html/painew.png',
+		'html/loading.gif',
 		'icons/pda_icons/pda_atmos.png',
 		'icons/pda_icons/pda_back.png',
 		'icons/pda_icons/pda_bell.png',

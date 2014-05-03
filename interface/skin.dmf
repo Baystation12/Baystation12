@@ -314,6 +314,14 @@ macro "hotkeymode"
 		command = "a-intent right"
 		is-disabled = false
 	elem 
+		name = "H"
+		command = "holster"
+		is-disabled = false
+	elem 
+		name = "CTRL+H"
+		command = "holster"
+		is-disabled = false
+	elem 
 		name = "Q"
 		command = ".northwest"
 		is-disabled = false

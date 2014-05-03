@@ -96,12 +96,12 @@
 
 	else
 		switch(rand(1,100))
-			if(1 to 25)
+			if(1 to 30)
 				var/datum/objective/assassinate/kill_objective = new
 				kill_objective.owner = traitor
 				kill_objective.find_target()
 				traitor.objectives += kill_objective
-			if(26 to 40)
+			if(31 to 40)
 				var/datum/objective/debrain/debrain_objective = new
 				debrain_objective.owner = traitor
 				debrain_objective.find_target()
@@ -109,7 +109,7 @@
 			if(41 to 50)
 				var/datum/objective/protect/protect_objective = new
 				protect_objective.owner = traitor
-				protect_objective.find_target_by_role("Traitor",0)	//Protect your fellow traitor
+				protect_objective.find_target_with_special_role(null,0)
 				if (!protect_objective.target)
 					protect_objective.find_target()					//We could not find any traitors, protect somebody
 				traitor.objectives += protect_objective

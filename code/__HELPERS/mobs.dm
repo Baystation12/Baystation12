@@ -76,25 +76,6 @@ proc/age2agedescription(age)
 		if(70 to INFINITY)	return "elderly"
 		else				return "unknown"
 
-/*
-Proc for attack log creation, because really why not
-1 argument is the actor
-2 argument is the target of action
-3 is the description of action(like punched, throwed, or any other verb)
-4 is the tool with which the action was made(usually item)
-5 is additional information, anything that needs to be added
-*/
-
-proc/add_logs(mob/target, mob/user, what_done, var/object=null, var/addition=null)
-	if(ismob(user))
-		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition]</font>")
-	if(ismob(target))
-		target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [what_done] by [user.name][ismob(user) ? "([user.ckey])" : ""][object ? " with [object]" : " "][addition]</font>")
-	log_attack("<font color='red'>[user.name][ismob(user) ? "([user.ckey])" : ""] [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition]</font>")
-	if(target.client)
-		if(what_done != ("shaked" || "CPRed" || "grabbed"))
-			message_admins("[user.name][ismob(user) ? "([user.ckey])" : ""] [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition](<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
-
 proc/RoundHealth(health)
 	switch(health)
 		if(100 to INFINITY)
@@ -116,4 +97,24 @@ proc/RoundHealth(health)
 		else
 			return "health-100"
 	return "0"
+
+
+/*
+Proc for attack log creation, because really why not
+1 argument is the actor
+2 argument is the target of action
+3 is the description of action(like punched, throwed, or any other verb)
+4 is the tool with which the action was made(usually item)
+5 is additional information, anything that needs to be added
+*/
+
+proc/add_logs(mob/target, mob/user, what_done, var/object=null, var/addition=null)
+	if(ismob(user))
+		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Has [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition]</font>")
+	if(ismob(target))
+		target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [what_done] by [user.name][ismob(user) ? "([user.ckey])" : ""][object ? " with [object]" : " "][addition]</font>")
+	log_attack("<font color='red'>[user.name][ismob(user) ? "([user.ckey])" : ""] [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition]</font>")
+	if(target.client)
+		if(what_done != ("shaked" || "CPRed" || "grabbed"))
+			message_admins("[user.name][ismob(user) ? "([user.ckey])" : ""] [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition](<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
 

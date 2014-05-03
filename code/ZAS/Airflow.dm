@@ -86,7 +86,7 @@ obj/item/check_airflow_movable(n)
 				return
 			if(src:shoes)
 				if(istype(src:shoes, /obj/item/clothing/shoes/magboots))
-					if(src:shoes:magpulse)
+					if(src:shoes.flags & NOSLIP)
 						return
 		src << "\red You are sucked away by airflow!"
 	var/airflow_falloff = 9 - ul_FalloffAmount(airflow_dest) //It's a fast falloff calc.  Very useful.

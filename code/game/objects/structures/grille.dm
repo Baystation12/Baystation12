@@ -12,6 +12,11 @@
 	var/health = 10
 	var/destroyed = 0
 
+
+	resetVariables()
+		destroyed = initial(destroyed)
+		health = initial(health)
+
 /obj/structure/grille/fence/
 	var/width = 3
 	health = 50
@@ -40,13 +45,13 @@
 
 
 /obj/structure/grille/ex_act(severity)
-	qdel(src)
+	returnToPool(src)
 
 /obj/structure/grille/blob_act()
-	qdel(src)
+	returnToPool(src)
 
 /obj/structure/grille/meteorhit(var/obj/M)
-	qdel(src)
+	returnToPool(src)
 
 
 /obj/structure/grille/Bumped(atom/user)
@@ -67,7 +72,7 @@
 	if(M_HULK in user.mutations)
 		health -= 5
 	else
-		health -= 3
+		health -= 1
 	healthcheck()
 
 /obj/structure/grille/attack_alien(mob/user as mob)
@@ -129,7 +134,7 @@
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			new /obj/item/stack/rods(loc, 2)
-			del(src)
+			returnToPool(src)
 	else if((isscrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
@@ -210,7 +215,7 @@
 		else
 			if(health <= -6)
 				new /obj/item/stack/rods(loc)
-				del(src)
+				returnToPool(src)
 				return
 	return
 

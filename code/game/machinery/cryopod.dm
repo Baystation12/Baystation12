@@ -80,7 +80,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 		visible_message("\blue The console beeps happily as it disgorges \the [I].", 3)
 
-		I.setloc(get_turf(src))
+		I.loc = get_turf(src)
 		frozen_items -= I
 
 	else if(href_list["allitems"])
@@ -92,7 +92,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		visible_message("\blue The console beeps happily as it disgorges the desired objects.", 3)
 
 		for(var/obj/item/I in frozen_items)
-			I.setloc(get_turf(src))
+			I.loc = get_turf(src)
 			frozen_items -= I
 
 	else if(href_list["crew"])
@@ -186,11 +186,11 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 			//Drop all items into the pod.
 			for(var/obj/item/W in occupant)
 				occupant.drop_from_inventory(W)
-				W.setloc(src)
+				W.loc = src
 
 				if(W.contents.len) //Make sure we catch anything not handled by del() on the items.
 					for(var/obj/item/O in W.contents)
-						O.setloc(src)
+						O.loc = src
 
 			//Delete all items not on the preservation list.
 			var/list/items = src.contents
@@ -240,7 +240,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 					current_mode.possible_traitors.Remove(occupant)
 
 			// Delete them from datacore.
-
+			
 			if(PDA_Manifest.len)
 				PDA_Manifest.Cut()
 			for(var/datum/data/record/R in data_core.medical)
@@ -305,7 +305,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 			if(do_after(user, 20))
 				if(!M || !G || !G:affecting) return
 
-				M.setloc(src)
+				M.loc = src
 
 				if(M.client)
 					M.client.perspective = EYE_PERSPECTIVE
@@ -375,7 +375,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		usr.stop_pulling()
 		usr.client.perspective = EYE_PERSPECTIVE
 		usr.client.eye = src
-		usr.setloc(src)
+		usr.loc = src
 		src.occupant = usr
 
 		if(orient_right)
@@ -401,7 +401,7 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 		occupant.client.eye = src.occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 
-	occupant.setloc(get_turf(src))
+	occupant.loc = get_turf(src)
 	occupant = null
 
 	if(orient_right)

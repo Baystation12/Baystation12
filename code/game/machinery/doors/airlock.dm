@@ -1079,11 +1079,13 @@ About the new airlock wires panel:
 	if(istype(src, /obj/machinery/door/airlock/clown))
 		playsound(src.loc, 'sound/items/bikehorn.ogg', 30, 1)
 	else
-		playsound(src.loc, 'sound/machines/airlock.ogg', 30, 1)
-	for(var/turf/turf in locs)
-		var/obj/structure/window/killthis = (locate(/obj/structure/window) in turf)
-		if(killthis)
-			killthis.ex_act(2)//Smashin windows
+		playsound(get_turf(src), 'sound/machines/airlock.ogg', 30, 1)
+
+	for(var/turf/T in loc)
+		var/obj/structure/window/W = locate(/obj/structure/window) in T
+		if (W)
+			W.destroy()
+
 	..()
 	return
 

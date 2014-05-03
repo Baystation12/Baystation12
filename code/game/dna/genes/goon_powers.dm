@@ -17,6 +17,7 @@
 	desc = "Boosts efficiency in sectors of the brain commonly associated with meta-mental energies."
 	activation_messages = list("Your mind feels closed.")
 	deactivation_messages = list("You feel oddly exposed.")
+	instability=2
 
 	mutation=M_PSY_RESIST
 
@@ -28,6 +29,7 @@
 /////////////////////////
 
 /datum/dna/gene/basic/stealth
+	instability=7
 	can_activate(var/mob/M, var/flags)
 		// Can only activate one of these at a time.
 		if(is_type_in_list(/datum/dna/gene/basic/stealth,M.active_genes))
@@ -53,7 +55,7 @@
 		var/turf/simulated/T = get_turf(M)
 		if(!istype(T))
 			return
-		if(T.lit_value <= 2)
+		if(T.lighting_lumcount <= 2)
 			M.alpha = 0
 		else
 			M.alpha = round(255 * 0.80)
@@ -109,6 +111,7 @@
 	desc = "Allows the subject to lower the body temperature of others."
 	activation_messages = list("You notice a strange cold tingle in your fingertips.")
 	deactivation_messages = list("Your fingers feel warmer.")
+	instability=10
 
 	spelltype = /obj/effect/proc_holder/spell/targeted/cryokinesis
 
@@ -144,7 +147,12 @@
 		usr << "\red This will only work on normal organic beings."
 		return
 
-	C.bodytemperature = -300
+	if (M_RESIST_COLD in C.mutations)
+		C.visible_message("\red A cloud of fine ice crystals engulfs [C.name], but disappears almost instantly!")
+		return
+
+	C.bodytemperature = 0
+	C.adjustFireLoss(20)
 	C.ExtinguishMob()
 
 	C.visible_message("\red A cloud of fine ice crystals engulfs [C]!")
@@ -178,6 +186,7 @@
 	desc = "Allows the subject to eat just about anything without harm."
 	activation_messages = list("You feel hungry.")
 	deactivation_messages = list("You don't feel quite so hungry anymore.")
+	instability=3
 
 	spelltype=/obj/effect/proc_holder/spell/targeted/eat
 
@@ -198,6 +207,7 @@
 	invocation_type = "none"
 	range = 1
 	selection_type = "view"
+
 
 	var/list/types_allowed=list(/obj/item,/mob/living/simple_animal, /mob/living/carbon/monkey, /mob/living/carbon/human)
 
@@ -297,6 +307,7 @@
 	//cooldown = 30
 	activation_messages = list("Your leg muscles feel taut and strong.")
 	deactivation_messages = list("Your leg muscles shrink back to normal.")
+	instability=2
 
 	spelltype =/obj/effect/proc_holder/spell/targeted/leap
 
@@ -327,7 +338,7 @@
 		usr.visible_message("\red <b>[usr.name]</b> takes a huge leap!")
 		playsound(usr.loc, 'sound/weapons/thudswoosh.ogg', 50, 1)
 		var/prevLayer = usr.layer
-		usr.layer = 15
+		usr.layer = 9
 
 		for(var/i=0, i<10, i++)
 			step(usr, usr.dir)
@@ -374,6 +385,7 @@
 	//cooldown = 1800
 	activation_messages = list("You don't feel entirely like yourself somehow.")
 	deactivation_messages = list("You feel secure in your identity.")
+	instability=5
 
 	New()
 		..()
@@ -420,6 +432,7 @@
 	verbtype = /proc/bioproc_empath
 	activation_messages = list("You suddenly notice more about others than you did before.")
 	deactivation_messages = list("You no longer feel able to sense intentions.")
+	instability=1
 
 	New()
 		..()
@@ -515,6 +528,7 @@
 	desc = "Vastly increases the gas capacity of the subject's digestive tract."
 	activation_messages = list("You feel bloated and gassy.")
 	deactivation_messages = list("You no longer feel gassy. What a relief!")
+	instability=1
 
 	mutation = M_SUPER_FART
 

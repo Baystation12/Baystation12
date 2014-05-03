@@ -94,7 +94,6 @@ Works together with spawning an observer, noted above.
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud")
 				client.images.Remove(hud)
-
 	if(antagHUD)
 		var/list/target_list = list()
 		for(var/mob/living/target in oview(src, 14))
