@@ -22,8 +22,8 @@ datum/design/shield_gen_ex
 	id = "shield_gen"
 	req_tech = list("bluespace" = 4, "plasmatech" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 10000, "$diamond" = 5000, "$gold" = 10000)
-	build_path = "/obj/machinery/shield_gen/external"
+	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 5000, "$gold" = 10000)
+	build_path = "/obj/item/weapon/circuitboard/shield_gen_ex"
 
 ////////////////////////////////////////
 // Shield Generator
@@ -48,8 +48,8 @@ datum/design/shield_gen
 	id = "shield_gen"
 	req_tech = list("bluespace" = 4, "plasmatech" = 3)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 10000, "$diamond" = 5000, "$gold" = 10000)
-	build_path = "/obj/machinery/shield_gen/external"
+	materials = list("$glass" = 2000, "sacid" = 20, "$diamond" = 5000, "$gold" = 10000)
+	build_path = "/obj/item/weapon/circuitboard/shield_gen"
 
 ////////////////////////////////////////
 // Shield Capacitor
@@ -74,5 +74,5 @@ datum/design/shield_cap
 	id = "shield_cap"
 	req_tech = list("magnets" = 3, "powerstorage" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 10000, "$diamond" = 5000, "$silver" = 10000)
-	build_path = "/obj/machinery/shield_gen/external"
+	materials = list("$glass" = 2000, "sacid" = 20, "$gold" = 10000, "$diamond" = 5000)
+	build_path = "/obj/item/weapon/circuitboard/shield_cap"

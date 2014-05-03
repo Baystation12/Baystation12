@@ -101,7 +101,7 @@
 		t += "[owned_capacitor ? "<font color=green>Charge capacitor connected.</font>" : "<font color=red>Unable to locate charge capacitor!</font>"]<br>"
 		t += "This generator is: [active ? "<font color=green>Online</font>" : "<font color=red>Offline</font>" ] <a href='?src=\ref[src];toggle=1'>[active ? "\[Deactivate\]" : "\[Activate\]"]</a><br>"
 		t += "[time_since_fail > 2 ? "<font color=green>Field is stable.</font>" : "<font color=red>Warning, field is unstable!</font>"]<br>"
-		t += "Coverage radius (restart required): \
+		t += "Coverage diameter (restart required): \
 		<a href='?src=\ref[src];change_radius=-5'>--</a> \
 		<a href='?src=\ref[src];change_radius=-1'>-</a> \
 		[field_radius * 2]m \
