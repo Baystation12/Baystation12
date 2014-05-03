@@ -56,6 +56,9 @@
 			tdomeadmin	+= loc
 		if("tdomeobserve")
 			tdomeobserve += loc
+		if("aroomwarp")
+			aroomwarp += loc
+
 		//not prisoners
 		if("prisonsecuritywarp")
 			prisonsecuritywarp += loc
