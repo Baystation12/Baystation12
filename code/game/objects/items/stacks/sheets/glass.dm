@@ -286,7 +286,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 
-			if(H.flags & IS_SYNTHETIC)
+			if(H.species.flags & IS_SYNTHETIC)
 				return
 
 			if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
