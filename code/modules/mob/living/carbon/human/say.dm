@@ -9,6 +9,8 @@
 			src << "\red You cannot speak in IC (Muted)."
 			return
 	
+	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN)) 
+
 	if(stat == 2)
 		return say_dead(message)
 
