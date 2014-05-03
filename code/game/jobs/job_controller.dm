@@ -309,7 +309,7 @@ var/global/datum/controller/occupations/job_master
 						Debug("DO player not old enough, Player: [player], Job:[job.title]")
 						continue
 
-					if(!is_job_whitelisted(player, rank))
+					if(!is_job_whitelisted(player, job.title))
 						Debug("DO player not whitelisted, Player: [player], Job:[job.title]")
 						continue
 
