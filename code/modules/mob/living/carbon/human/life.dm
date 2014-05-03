@@ -256,6 +256,9 @@
 
 	proc/handle_mutations_and_radiation()
 
+		if(species.flags & IS_SYNTHETIC) //Robots don't suffer from mutations or radloss.
+			return
+
 		if(getFireLoss())
 			if((M_RESIST_HEAT in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
@@ -279,6 +282,7 @@
 				radiation = 0
 
 			else
+
 				if(species.flags & RAD_ABSORB)
 					var/rads = radiation/25
 					radiation -= rads
@@ -287,8 +291,6 @@
 					adjustOxyLoss(-(rads))
 					adjustToxLoss(-(rads))
 					updatehealth()
-					return
-				if(species.flags & IS_SYNTHETIC)
 					return
 
 				var/damage = 0
