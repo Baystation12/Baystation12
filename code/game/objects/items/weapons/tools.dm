@@ -476,16 +476,16 @@
 
 			if(H.species.flags & IS_SYNTHETIC)
 
-				if(H.getFireLoss() > 0)
+				if(H.getBruteLoss() > 0)
 
 					if(M == user)
 						user << "\red You can't repair damage to your own body - it's against OH&S."
 						return
 
 					user.visible_message("\red \The [user] patches some dents on \the [M] with \the [src]",\
-						"\red \The [user] patches some of your dents.",\
+						"\red \You patches some of the dents on \the [M].",\
 						"You hear a welder.")
-					H.heal_organ_damage(5,0)
+					H.heal_overall_damage(5,0)
 					return
 
 		user << "Nothing to fix!"

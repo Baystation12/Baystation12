@@ -670,9 +670,9 @@ obj/structure/cable/proc/cableColor(var/colorC)
 						return
 
 					user.visible_message("<span class='notice'>\The [user] repairs some burn damage on [M]  with \the [src]</span>",\
-						"<span class='notice'>\The [user] repairs some of your burn damage.</span>",\
+						"<span class='notice'>You repair some of \the [M]'s burn damage.</span>",\
 						"You hear wires being cut.")
-					H.heal_organ_damage(0,5)
+					H.heal_overall_damage(0,5)
 					return
 
 		user << "Nothing to fix!"
