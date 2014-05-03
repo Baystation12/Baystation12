@@ -14,11 +14,14 @@
 	if(on)
 		user << "<span class='notice'>[src] is already processing, please wait.</span>"
 		return
-	if(!istype(I, /obj/item/weapon/reagent_containers/food/snacks/))
-		user << "<span class='warning'>Budget cuts won't let you put that in there.</span>"
-		return
-	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/cereal/))
+	if(istype(I, /obj/item/weapon/grab)||istype(I, /obj/item/tk_grab))
 		user << "<span class='warning'>That isn't going to fit.</span>"
+		return
+	if(istype(I, /obj/item/weapon/reagent_containers/glass/))
+		user << "<span class='warning'>That would probably break [src].</span>"
+		return
+	if(istype(I, /obj/item/weapon/disk/nuclear))
+		user << "Central command would kill you if you made nuke disk cereal."
 		return
 	else
 		user << "<span class='notice'>You put [I] into [src].</span>"

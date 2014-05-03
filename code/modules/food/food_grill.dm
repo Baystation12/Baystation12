@@ -28,15 +28,15 @@
 		img.pixel_y = 5
 		overlays += img
 		sleep(200)
-		overlays.Cut()
+		overlays = 0
 		img.color = "#C28566"
 		overlays += img
 		sleep(200)
-		overlays.Cut()
+		overlays = 0
 		img.color = "#A34719"
 		overlays += img
 		sleep(50)
-		overlays.Cut()
+		overlays = 0
 
 		on = FALSE
 		icon_state = "grill_off"
