@@ -449,11 +449,15 @@
 	item_state = "crowbar_red"
 
 /obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
+
 	if(hasorgans(M))
+
 		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
+
 		if (!S) return
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
+
 		if(S.brute_dam)
 			S.heal_damage(15,0,0,1)
 			if(user != M)
@@ -464,7 +468,26 @@
 				user.visible_message("\red \The [user] patches some dents on their [S.display_name] with \the [src]",\
 				"\red You patch some dents on your [S.display_name]",\
 				"You hear a welder.")
-		else
-			user << "Nothing to fix!"
+			return
+
+		if(istype(M,/mob/living/carbon/human))
+
+			var/mob/living/carbon/human/H = M
+
+			if(H.species.flags & IS_SYNTHETIC)
+
+				if(H.getFireLoss() > 0)
+
+					if(M == user)
+						user << "\red You can't repair damage to your own body - it's against OH&S."
+						return
+
+					user.visible_message("\red \The [user] patches some dents on \the [M] with \the [src]",\
+						"\red \The [user] patches some of your dents.",\
+						"You hear a welder.")
+					H.heal_organ_damage(5,0)
+					return
+
+		user << "Nothing to fix!"
 	else
 		return ..()

@@ -638,11 +638,14 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/weapon/cable_coil/attack(mob/M as mob, mob/user as mob)
 	if(hasorgans(M))
+
 		var/datum/organ/external/S = M:get_organ(user.zone_sel.selecting)
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
+
 		if(S.burn_dam > 0 && use(1))
 			S.heal_damage(0,15,0,1)
+
 			if(user != M)
 				user.visible_message("<span class='notice'>\The [user] repairs some burn damage on [M]'s [S.display_name] with \the [src]</span>",\
 				"<span class='notice'>\The [user] repairs some burn damage on your [S.display_name]</span>",\
@@ -651,7 +654,28 @@ obj/structure/cable/proc/cableColor(var/colorC)
 				user.visible_message("<span class='notice'>\The [user] repairs some burn damage on their [S.display_name] with \the [src]</span>",\
 				"<span class='notice'>You repair some burn damage on your [S.display_name]</span>",\
 				"You hear wires being cut.")
-		else
-			user << "Nothing to fix!"
+
+			return
+
+		if(istype(M,/mob/living/carbon/human))
+
+			var/mob/living/carbon/human/H = M
+
+			if(H.species.flags & IS_SYNTHETIC)
+
+				if(H.getFireLoss() > 0)
+
+					if(M == user)
+						user << "\red You can't repair damage to your own body - it's against OH&S."
+						return
+
+					user.visible_message("<span class='notice'>\The [user] repairs some burn damage on [M]  with \the [src]</span>",\
+						"<span class='notice'>\The [user] repairs some of your burn damage.</span>",\
+						"You hear wires being cut.")
+					H.heal_organ_damage(0,5)
+					return
+
+		user << "Nothing to fix!"
+
 	else
 		return ..()
