@@ -210,6 +210,7 @@
 /obj/item/proc/moved(mob/user as mob, old_loc as turf)
 	return
 
+// apparently called whenever an item is removed from a slot, container, or anything else.
 /obj/item/proc/dropped(mob/user as mob)
 	..()
 
