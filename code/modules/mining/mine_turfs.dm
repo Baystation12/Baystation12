@@ -478,6 +478,12 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 			for(var/obj/item/weapon/ore/O in contents)
 				O.attackby(W,user)
 				return
+	else if(istype(W,/obj/item/weapon/storage/bag/fossils))
+		var/obj/item/weapon/storage/bag/fossils/S = W
+		if(S.collection_mode)
+			for(var/obj/item/weapon/fossil/F in contents)
+				F.attackby(W,user)
+				return
 
 	else
 		..(W,user)
