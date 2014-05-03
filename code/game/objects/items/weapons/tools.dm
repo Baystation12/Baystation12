@@ -483,7 +483,7 @@
 						return
 
 					user.visible_message("\red \The [user] patches some dents on \the [M] with \the [src]",\
-						"\red \You patches some of the dents on \the [M].",\
+						"\red You patch some of the dents on \the [M].",\
 						"You hear a welder.")
 					H.heal_overall_damage(5,0)
 					return
