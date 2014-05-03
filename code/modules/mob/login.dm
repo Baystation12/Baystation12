@@ -55,3 +55,5 @@
 		var/mob/living/carbon/human/H = src
 		if(H.species && H.species.abilities)
 			client.verbs |= H.species.abilities
+
+	nanomanager.send_resources(client)

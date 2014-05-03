@@ -129,10 +129,8 @@
 					// Ethanol and all drinks are bad
 					if(istype(R, /datum/reagent/ethanol))
 						owner.adjustToxLoss(0.1 * process_accuracy)
-
-				// Can't cope with toxins at all
-				for(var/toxin in list("toxin", "phoron", "sacid", "pacid", "cyanide", "lexorin", "amatoxin", "chloralhydrate", "carpotoxin", "zombiepowder", "mindbreaker"))
-					if(owner.reagents.has_reagent(toxin))
+					// Can't cope with toxins at all
+					if(istype(R, /datum/reagent/toxin))
 						owner.adjustToxLoss(0.3 * process_accuracy)
 
 /datum/organ/internal/kidney

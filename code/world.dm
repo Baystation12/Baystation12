@@ -66,9 +66,12 @@
 //		world << "End of Topic() call."
 //		..()
 
+var/world_topic_spam_protect_ip = "0.0.0.0"
+var/world_topic_spam_protect_time = world.timeofday
+
 /world/Topic(T, addr, master, key)
 	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
-
+	
 	if (T == "ping")
 		var/x = 1
 		for (var/client/C)
@@ -92,6 +95,7 @@
 		s["ai"] = config.allow_ai
 		s["host"] = host ? host : null
 		s["players"] = list()
+		s["stationtime"] = worldtime2text()
 		var/n = 0
 		var/admins = 0
 
@@ -108,6 +112,79 @@
 		s["admins"] = admins
 
 		return list2params(s)
+
+	else if(copytext(T,1,9) == "adminmsg")
+		/*
+			We got an adminmsg from IRC bot lets split the input then validate the input.
+			expected output:
+				1. adminmsg = ckey of person the message is to
+				2. msg = contents of message, parems2list requires
+				3. validatationkey = the key the bot has, it should match the gameservers commspassword in it's configuration.
+				4. sender = the ircnick that send the message.
+		*/
+
+
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+
+			return "Bad Key"
+		
+		var/client/C
+		
+		for(var/client/K in clients)
+			if(K.ckey == input["adminmsg"])
+				C = K
+				break
+		if(!C)
+			return "No client with that name on server"
+
+		var/message =	"<font color='red'>IRC-Admin PM from <b><a href='?irc_msg=1'>[C.holder ? "IRC-" + input["sender"] : "Administrator"]</a></b>: [input["msg"]]</font>"
+		var/amessage =  "<font color='blue'>IRC-Admin PM from <a href='?irc_msg=1'>IRC-[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
+
+		C.received_irc_pm = world.time
+		C.irc_admin = input["sender"]
+
+		C << 'sound/effects/adminhelp.ogg'
+		C << message
+
+		
+		for(var/client/A in admins)
+			if(A != C)
+				A << amessage
+
+		return "Message Successful"
+
+	else if(copytext(T,1,6) == "notes")
+		/*
+			We got a request for notes from the IRC Bot
+			expected output:
+				1. notes = ckey of person the notes lookup is for
+				2. validationkey = the key the bot has, it should match the gameservers commspassword in it's configuration.
+		*/
+		var/input[] = params2list(T)
+		if(input["key"] != config.comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+			return "Bad Key"
+
+		return show_player_info_irc(input["notes"])
+		
+
+		
 
 
 /world/Reboot(var/reason)
