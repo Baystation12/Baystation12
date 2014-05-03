@@ -189,6 +189,10 @@
 		return
 
 	var/msg = input(src,"Message:", "Private message to admins on IRC / 400 character limit") as text|null
+
+	if(!msg)
+		return
+
 	sanitize(msg)
 
 	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into seperate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
