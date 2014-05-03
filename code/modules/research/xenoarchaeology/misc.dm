@@ -152,6 +152,7 @@ proc/SetupXenoarch()
 		new /obj/item/weapon/pickaxe(src)
 		new /obj/item/device/measuring_tape(src)
 		new /obj/item/weapon/pickaxe/hand(src)
+		new /obj/item/weapon/storage/bag/fossils(src)
 		return
 
 //---- Isolation room air alarms
