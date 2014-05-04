@@ -117,37 +117,46 @@ var/const/MAX_ACTIVE_TIME = 400
 				O << text("[] slowly peaks up from the ground...", src)
 
 
-/mob/living/carbon/alien/facehugger/verb/Attach(M as mob)
+/mob/living/carbon/alien/facehugger/verb/Attach()
 	set name = "Facehug"
 	set desc = "Allows you to molest someone's mouth-hole in the hope of impregnating them with an embryo."
 	set category = "Alien"
+
+	var/list/choices = list()
+	for(var/mob/living/L in view(1,src))
+		if(L.stat != 2 && src.Adjacent(L))
+			choices += L
+
+	var/mob/living/M = input(src,"Who do you wish to infest?") in null|choices
+
+	if(!M || !src) return
+
+	if(!(src.Adjacent(M))) return
 
 	if( (!iscorgi(M) && !iscarbon(M)) || isalien(M))
 		return
 	if(attached)
 		return
-	else
-		attached++
-		spawn(MAX_IMPREGNATION_TIME)
-			attached = 0
 
-	var/mob/living/L = M //just so I don't need to use :
+	attached++
+	spawn(MAX_IMPREGNATION_TIME)
+		attached = 0
 
-	if(loc == L) return
+	if(loc == M) return
 	if(stat != CONSCIOUS)	return
-	if(!sterile) L.take_organ_damage(strength,0) //done here so that even borgs and humans in helmets take damage
+	if(!sterile) M.take_organ_damage(strength,0) //done here so that even borgs and humans in helmets take damage
 
-	L.visible_message("\red \b [src] leaps at [L]'s face!")
+	M.visible_message("\red \b [src] leaps at [M]'s face!")
 
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
 		if(H.head && H.head.flags & HEADCOVERSMOUTH)
 			H.visible_message("\red \b [src] smashes against [H]'s [H.head]!")
 			death()
 			return
 
 	if(iscarbon(M))
-		var/mob/living/carbon/target = L
+		var/mob/living/carbon/target = M
 
 		if(target.wear_mask)
 			if(prob(20))	return
@@ -163,7 +172,8 @@ var/const/MAX_ACTIVE_TIME = 400
 		target.equip_to_slot(FH, slot_wear_mask)
 		target.regenerate_icons()
 
-		if(!sterile) L.Paralyse(MAX_IMPREGNATION_TIME/6) //something like 25 ticks = 20 seconds with the default settings
+		if(!sterile) M.Paralyse(MAX_IMPREGNATION_TIME/6) //something like 25 ticks = 20 seconds with the default settings
+
 	else if (iscorgi(M))
 		var/mob/living/simple_animal/corgi/C = M
 		var/obj/item/weapon/holder/facehugger/FH = new(loc)
@@ -176,7 +186,7 @@ var/const/MAX_ACTIVE_TIME = 400
 
 
 	spawn(rand(MIN_IMPREGNATION_TIME,MAX_IMPREGNATION_TIME))
-		Impregnate(L)
+		Impregnate(M)
 
 	return
 
