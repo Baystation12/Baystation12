@@ -515,8 +515,6 @@ This function completely restores a damaged organ to perfect condition.
 
 		var/obj/organ	//Dropped limb object
 		switch(body_part)
-			if(LOWER_TORSO)
-				owner << "\red You are now sterile."
 			if(HEAD)
 				if(owner.species.flags & IS_SYNTHETIC)
 					organ= new /obj/item/weapon/organ/head/posi(owner.loc, owner)
