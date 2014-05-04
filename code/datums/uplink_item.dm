@@ -182,11 +182,41 @@ var/list/uplink_items = list()
 	item = /obj/item/weapon/gun/projectile/revolver
 	cost = 6
 
+/datum/uplink_item/dangerous/smg
+	name = "C-20r Submachine Gun"
+	desc = "A fully-loaded Scarborough Arms-developed submachine gun that fires 12mm automatic rounds with a 20-round magazine."
+	item = /obj/item/weapon/gun/projectile/automatic/c20r
+	cost = 6
+	gamemodes = list("nuclear emergency")
+
+/datum/uplink_item/dangerous/machinegun
+	name = "L6 Squad Automatic Weapon"
+	desc = "A traditionally constructed machine gun made by AA-2531. This deadly weapon has a massive 50-round magazine of 7.62×51mm ammunition."
+	item = /obj/item/weapon/gun/projectile/automatic/l6_saw
+	cost = 10
+	gamemodes = list("nuclear emergency")
+
+
 /datum/uplink_item/dangerous/ammo
 	name = "Ammo-357"
 	desc = "Seven additional rounds for the revolver. Reports indicate the presence of machinery aboard Nanotrasen space stations suitable for producing extra .357 cartridges."
 	item = /obj/item/ammo_box/a357
 	cost = 2
+
+/datum/uplink_item/ammo/smg
+	name = "Ammo-12mm"
+	desc = "A 20-round 12mm magazine for use in the C-20r submachine gun."
+	item = /obj/item/ammo_box/magazine/m12mm
+	cost = 1
+	gamemodes = list("nuclear emergency")
+
+
+/datum/uplink_item/ammo/machinegun
+	name = "Ammo-7.62×51mm"
+	desc = "A 50-round magazine of 7.62×51mm ammunition for use in the L6 SAW machinegun. By the time you need to use this, you'll already be on a pile of corpses."
+	item = /obj/item/ammo_box/magazine/m762
+	cost = 3
+	gamemodes = list("nuclear emergency")
 
 /datum/uplink_item/dangerous/crossbow
 	name = "Energy Crossbow"
@@ -236,6 +266,12 @@ var/list/uplink_items = list()
 	item = /obj/item/weapon/cartridge/syndicate
 	cost = 3
 
+/datum/uplink_item/stealthy_weapons/silencer
+	name = "Stetchkin Silencer"
+	desc = "Fitted for use on the Stetchkin pistol, this silencer will make its shots quieter when equipped onto it."
+	item = /obj/item/weapon/silencer
+	cost = 1
+	gamemodes = list("nuclear emergency")
 
 // STEALTHY TOOLS
 
@@ -290,6 +326,15 @@ var/list/uplink_items = list()
 	desc = "The syndicate toolbox is a suspicious black and red. Aside from tools, it comes with cable and a multitool. Insulated gloves are not included."
 	item = /obj/item/weapon/storage/toolbox/syndicate
 	cost = 1
+
+
+/datum/uplink_item/device_tools/medkit
+	name = "Syndicate Medical Supply Kit"
+	desc = "A basic medical kit for treating injuries in the field."
+	item = /obj/item/weapon/storage/firstaid/adv
+	cost = 3
+	gamemodes = list("nuclear emergency")
+
 
 /datum/uplink_item/device_tools/space_suit
 	name = "Space Suit"
