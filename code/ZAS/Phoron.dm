@@ -142,6 +142,7 @@ obj/var/contaminated = 0
 			if(wear_suit.flags & PHORONGUARD) return 1
 		else
 			if(wear_suit.flags_inv & HIDEJUMPSUIT) return 1
+		//should check HIDETAIL as well, but for the moment tails are not a part that can be damaged separately
 	return 0
 
 /mob/living/carbon/human/proc/suit_contamination()

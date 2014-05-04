@@ -53,6 +53,13 @@
 							H:updatehealth()
 		return ..()
 
+/turf/proc/hasbelow()
+	var/turf/controllerlocation = locate(1, 1, z)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(controller.down)
+			return 1
+	return 0
+
 /turf/simulated/floor/open/proc/getbelow()
 	var/turf/controllerlocation = locate(1, 1, z)
 	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
@@ -73,7 +80,7 @@
 
 //overwrite the attackby of space to transform it to openspace if necessary
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
-	if (istype(C, /obj/item/weapon/cable_coil))
+	if (istype(C, /obj/item/weapon/cable_coil) && src.hasbelow())
 		var/turf/simulated/floor/open/W = src.ChangeTurf(/turf/simulated/floor/open)
 		W.attackby(C, user)
 		return
