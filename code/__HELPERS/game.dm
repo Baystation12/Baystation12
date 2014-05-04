@@ -35,7 +35,7 @@
 
 // Like view but bypasses luminosity check
 
-/proc/hear(var/range, var/atom/source)
+/proc/view_no_luminosity(var/range, var/atom/source)
 
 	var/lum = source.luminosity
 	source.luminosity = 6
@@ -170,7 +170,7 @@
 	if(!T)
 		return hear
 
-	var/list/range = hear(R, T)
+	var/list/range = view_no_luminosity(R, T)
 
 	for(var/atom/A in range)
 		if(ismob(A))
@@ -199,7 +199,7 @@
 		if(R)
 			var/turf/speaker = get_turf(R)
 			if(speaker)
-				for(var/turf/T in hear(R.canhear_range,speaker))
+				for(var/turf/T in view_no_luminosity(R.canhear_range,speaker))
 					speaker_coverage[T] = T
 
 
