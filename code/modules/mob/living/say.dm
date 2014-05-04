@@ -89,7 +89,7 @@ var/list/department_radio_keys = list(
 	if(T)
 
 		var/list/objects = list()
-		var/list/hear = hear(message_range, T)
+		var/list/hear = hearers(message_range, T)
 		var/list/hearturfs = list()
 
 		for(var/I in hear)
