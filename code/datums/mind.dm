@@ -229,6 +229,39 @@ datum/mind
 //				text += "<br>All the changelings are dead! Restart in [round((changeling.TIME_TO_GET_REVIVED-(world.time-changeling.changelingdeathtime))/10)] seconds."
 			sections["changeling"] = text
 
+	/** NINJA ***/
+			text = "ninja"
+			if (ticker.mode.config_tag=="ninja")
+				text = uppertext(text)
+			text = "<i><b>[text]</b></i>: "
+			if (src in ticker.mode.ninjas)
+				text += "<b>YES</b>|<a href='?src=\ref[src];ninja=clear'>no</a>"
+				text += "<br><a href='?src=\ref[src];ninja=outpost'>To outpost</a>, <a href='?src=\ref[src];common=undress'>undress</a>, <a href='?src=\ref[src];ninja=dressup'>dress up</a>."
+				//if (objectives.len==0)
+					//text += "<br>Objectives are empty! <a href='?src=\ref[src];wizard=autoobjectives'>Randomize!</a>"
+			else
+				text += "<a href='?src=\ref[src];ninja=ninja'>yes</a>|<b>NO</b>"
+			sections["ninja"] = text
+
+			/** CHANGELING ***/
+			text = "changeling"
+			if (ticker.mode.config_tag=="changeling" || ticker.mode.config_tag=="traitorchan")
+				text = uppertext(text)
+			text = "<i><b>[text]</b></i>: "
+			if (src in ticker.mode.changelings)
+				text += "<b>YES</b>|<a href='?src=\ref[src];changeling=clear'>no</a>"
+				if (objectives.len==0)
+					text += "<br>Objectives are empty! <a href='?src=\ref[src];changeling=autoobjectives'>Randomize!</a>"
+				if( changeling && changeling.absorbed_dna.len && (current.real_name != changeling.absorbed_dna[1]) )
+					text += "<br><a href='?src=\ref[src];changeling=initialdna'>Transform to initial appearance.</a>"
+			else
+				text += "<a href='?src=\ref[src];changeling=changeling'>yes</a>|<b>NO</b>"
+//			var/datum/game_mode/changeling/changeling = ticker.mode
+//			if (istype(changeling) && changeling.changelingdeath)
+//				text += "<br>All the changelings are dead! Restart in [round((changeling.TIME_TO_GET_REVIVED-(world.time-changeling.changelingdeathtime))/10)] seconds."
+			sections["changeling"] = text
+
+
 			/** VAMPIRE ***/
 			text = "vampire"
 			if (ticker.mode.config_tag=="vampire")
@@ -750,6 +783,27 @@ datum/mind
 				if("autoobjectives")
 					ticker.mode.forge_wizard_objectives(src)
 					usr << "\blue The objectives for wizard [key] have been generated. You can edit them and anounce manually."
+
+		else if (href_list["ninja"])
+			current.hud_updateflag |= (1 << SPECIALROLE_HUD)
+
+			switch(href_list["ninja"])
+				if("clear")
+					if(src in ticker.mode.ninjas)
+						ticker.mode.ninjas -= src
+						special_role = null
+						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a Ninja!</B></FONT>"
+						log_admin("[key_name_admin(usr)] has de-ninja'ed [current].")
+				if("ninja")
+					if(!(src in ticker.mode.ninjas))
+						ticker.mode.ninjas += src
+						special_role = "Ninja"
+						current << "<B>\blue Your mind awakens, your true potential is realized! You are a <i>Space Ninja</i>!</B>"
+						log_admin("[key_name_admin(usr)] has ninja'ed [current].")
+				if("outpost")
+					current.loc = pick(ninjastart)
+				if("dressup")
+					current:equip_space_ninja()
 
 		else if (href_list["changeling"])
 			current.hud_updateflag |= (1 << SPECIALROLE_HUD)

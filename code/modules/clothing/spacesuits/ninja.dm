@@ -43,6 +43,7 @@
 	var/s_delay = 40.0//How fast the suit does certain things, lower is faster. Can be overridden in specific procs. Also determines adverse probability.
 	var/a_transfer = 20.0//How much reagent is transferred when injecting.
 	var/r_maxamount = 80.0//How much reagent in total there is.
+	//var/s_rank = "Master" The three ranks are "Initiate", "Assassin", and "Master". Master is the base case.
 
 		//Support function variables.
 	var/spideros = 0//Mode of SpiderOS. This can change so I won't bother listing the modes here (0 is hub). Check ninja_equipment.dm for how it all works.
