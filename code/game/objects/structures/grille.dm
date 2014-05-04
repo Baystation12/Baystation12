@@ -13,10 +13,6 @@
 	var/destroyed = 0
 
 
-	resetVariables()
-		destroyed = initial(destroyed)
-		health = initial(health)
-
 /obj/structure/grille/fence/
 	var/width = 3
 	health = 50
@@ -29,6 +25,7 @@
 		else
 			bound_width = world.icon_size
 			bound_height = width * world.icon_size
+
 
 /obj/structure/grille/fence/east_west
 	//width=80

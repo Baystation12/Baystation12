@@ -14,10 +14,6 @@
 			return 1
 		return 0
 
-	resetVariables()
-		embed = initial(embed)
-		return ..()
-
 
 /obj/item/projectile/bullet/slug
 	name = "slug"
