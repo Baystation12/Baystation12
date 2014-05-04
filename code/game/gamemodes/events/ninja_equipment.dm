@@ -38,7 +38,19 @@ ________________________________________________________________________________
 	for(var/reagent_id in reagent_list)
 		reagent_id == "uranium" ? reagents.add_reagent(reagent_id, r_maxamount+(a_boost*a_transfer)) : reagents.add_reagent(reagent_id, r_maxamount)//It will take into account uranium used for adrenaline boosting.
 	cell = new/obj/item/weapon/cell/high//The suit should *always* have a battery because so many things rely on it.
-	cell.charge = 9000//Starting charge should not be higher than maximum charge. It leads to problems with recharging.
+	cell.charge = 9990//Starting charge should not be higher than maximum charge. It leads to problems with recharging.
+	cell.maxcharge = 10000 // Due to Ponies' overhaul Ninjas began starting with a 15000 energy cell. This should fix that issue.
+
+	/*switch(s_rank) In preparation for Ninja overhaul, differeing starting charge levels for each rank of Ninja.
+		if("Initiate")
+			cell.charge = 7490
+			cell.maxcharge = 7500
+		if("Assassin")
+			cell.charge = 9990
+			cell.maxcharge = 10000
+		if("Master")
+			cell.maxcharge = 15000
+			cell.charge = 14990*/
 
 /obj/item/clothing/suit/space/space_ninja/Destroy()
 	if(affecting)//To make sure the window is closed.

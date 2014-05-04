@@ -452,7 +452,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	if(ishuman(M))
 		log_admin("[key_name(src)] turned [M.key] into a Space Ninja.")
 		spawn(10)
-			M:create_mind_space_ninja()
+			M.mind.assigned_role = "MODE"
+			M.mind.special_role = "Ninja"
 			M:equip_space_ninja(1)
 			if(istype(M:wear_suit, /obj/item/clothing/suit/space/space_ninja))
 				M:wear_suit:randomize_param()
@@ -521,7 +522,8 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 	mind.assigned_role = "MODE"
 	mind.special_role = "Ninja"
 
-	//ticker.mode.ninjas |= mind
+	ticker.mode.ninjas += mind
+
 	return 1
 
 /mob/living/carbon/human/proc/equip_space_ninja(safety=0)//Safety in case you need to unequip stuff for existing characters.
