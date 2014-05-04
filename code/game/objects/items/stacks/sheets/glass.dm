@@ -235,7 +235,9 @@
  */
 /obj/item/weapon/shard
 	resetVariables()
-		..("pixel_y", "pixel_x", "icon_state")
+		var/list/exclude = list("pixel_y", "pixel_x", "icon_state")
+		exclude += args
+		..(exclude)
 
 /obj/item/weapon/shard/Bump()
 	spawn( 0 )
