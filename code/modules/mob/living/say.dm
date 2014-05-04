@@ -105,7 +105,7 @@ var/list/department_radio_keys = list(
 				objects |= O
 		
 		for(var/mob/M in player_list)
-			if(M.stat == DEAD && client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
+			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
 				listening |= M
 				continue
 			if(M.loc && M.locs[1] in hearturfs)
