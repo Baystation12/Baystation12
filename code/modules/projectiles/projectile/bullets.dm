@@ -46,10 +46,9 @@
 
 
 /obj/item/projectile/bullet/midbullet12
-	damage = 20
+	damage = 25
 	stun = 5
 	weaken = 5
-	embed = 0
 
 /obj/item/projectile/bullet/midbullet9
 	damage = 25
@@ -95,7 +94,7 @@
 	stutter = 10
 
 /obj/item/projectile/bullet/a762
-	damage = 25
+	damage = 35
 
 
 /obj/item/projectile/bullet/incendiary
