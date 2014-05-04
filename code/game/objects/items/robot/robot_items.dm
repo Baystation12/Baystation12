@@ -47,12 +47,15 @@
 /obj/item/borg/sight/thermal
 	name = "\proper thermal vision"
 	sight_mode = BORGTHERM
+	icon_state = "thermal"
+	icon = 'icons/obj/clothing/glasses.dmi'
 
 
 /obj/item/borg/sight/meson
 	name = "\proper meson vision"
 	sight_mode = BORGMESON
-
+	icon_state = "meson"
+	icon = 'icons/obj/clothing/glasses.dmi'
 
 /obj/item/borg/sight/hud
 	name = "hud"
@@ -61,7 +64,8 @@
 
 /obj/item/borg/sight/hud/med
 	name = "medical hud"
-
+	icon_state = "healthhud"
+	icon = 'icons/obj/clothing/glasses.dmi'
 
 	New()
 		..()
@@ -71,7 +75,8 @@
 
 /obj/item/borg/sight/hud/sec
 	name = "security hud"
-
+	icon_state = "securityhud"
+	icon = 'icons/obj/clothing/glasses.dmi'
 
 	New()
 		..()
