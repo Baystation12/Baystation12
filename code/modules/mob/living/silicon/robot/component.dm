@@ -132,7 +132,8 @@
 	icon_state = "working"
 	construction_time = 200
 	construction_cost = list("metal"=5000)
-
+	var/brute = 0
+	var/burn = 0
 
 
 /obj/item/robot_parts/robot_component/binary_communication_device
@@ -158,3 +159,4 @@
 /obj/item/robot_parts/robot_component/radio
 	name = "radio"
 	icon_state = "radio"
+
