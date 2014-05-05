@@ -185,7 +185,7 @@
 								}
 								function hideAll(){
 									var allJobsSlot = document.getElementById('alljobsslot');
-									allJobsSlot.innerHTML = "<a href='#' onclick='showAll()'>show</a>";
+									allJobsSlot.innerHTML = "<a href='#' onclick='showAll()'>[(modify.assignment) ? modify.assignment : "Unassgied"]</a>";
 								}
 							</script>"}
 			carddesc += "<form name='cardcomp' action='?src=\ref[src]' method='get'>"
