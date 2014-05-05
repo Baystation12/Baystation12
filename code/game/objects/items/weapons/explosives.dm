@@ -101,7 +101,7 @@
 	if(!target)
 		target = src
 	if(location)
-		explosion(location, -1, -1, 4, 4)
+		explosion(location, 0, 1, 3, 6)
 
 	if(target)
 		if (istype(target, /turf/simulated/wall))
