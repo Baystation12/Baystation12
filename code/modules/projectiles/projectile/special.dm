@@ -32,9 +32,6 @@
 	flag = "energy"
 	var/temperature = 300
 
-	resetVariables()
-		temperature = initial(temperature)
-
 	on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
 		if(istype(target, /mob/living))
 			var/mob/M = target
@@ -162,9 +159,6 @@
 	damage_type = BRUTE
 	flag = "bomb"
 	var/range = 2
-
-	resetVariables()
-		range = initial(range)
 
 obj/item/projectile/kinetic/New()
 	var/turf/proj_turf = get_turf(src)

@@ -20,6 +20,12 @@
 	result = /obj/item/weapon/reagent_containers/food/snacks/telebacon
 
 
+/datum/recipe/bun
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/dough
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/bun
+
 /datum/recipe/friedegg
 	reagents = list("sodiumchloride" = 1, "blackpepper" = 1)
 	items = list(

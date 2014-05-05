@@ -233,6 +233,12 @@
 /*
  * Glass shards - TODO: Move this into code/game/object/item/weapons
  */
+/obj/item/weapon/shard
+	resetVariables()
+		var/list/exclude = list("pixel_y", "pixel_x", "icon_state")
+		exclude += args
+		..(exclude)
+
 /obj/item/weapon/shard/Bump()
 	spawn( 0 )
 		if (prob(20))
@@ -304,16 +310,18 @@
 		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-			if(!H.shoes)
-				if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
-					var/datum/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
-					if(affecting.status & ORGAN_ROBOT)
-						return
 
-					H.Weaken(3)
-					if(affecting.take_damage(5, 0))
-						H.UpdateDamageIcon()
-					H.updatehealth()
+			if(H.species.flags & IS_SYNTHETIC)
+				return
+
+			if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
+				var/datum/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
+				if(affecting.status & ORGAN_ROBOT)
+					return
+				H.Weaken(3)
+				if(affecting.take_damage(5, 0))
+					H.UpdateDamageIcon()
+				H.updatehealth()
 	..()
 
 

@@ -56,6 +56,7 @@
 	sun = new /datum/sun()
 	radio_controller = new /datum/controller/radio()
 	data_core = new /obj/effect/datacore()
+	crafting_master = new /datum/crafting_controller()
 	paiController = new /datum/paiController()
 
 	if(!setup_database_connection())
@@ -262,9 +263,12 @@
 				if (copytext(line, 1, 2) == ";")
 					continue
 
-				var/rights = admin_ranks["Moderator"]
+				var/title = "Moderator"
+				if(config.mods_are_mentors) title = "Mentor"
+				var/rights = admin_ranks[title]
+				
 				var/ckey = copytext(line, 1, length(line)+1)
-				var/datum/admins/D = new /datum/admins("Moderator", rights, ckey)
+				var/datum/admins/D = new /datum/admins(title, rights, ckey)
 				D.associate(directory[ckey])
 
 /world/proc/update_status()
