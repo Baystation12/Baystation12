@@ -109,9 +109,9 @@
 						adminhelp(reply)													//sender has left, adminhelp instead
 				return
 
-	recieve_message = "<font color='[recieve_color]'>[recieve_pm_type] PM from-<b>[key_name(src, C, C.holder ? 1 : 0)]</b>: [msg]</font>"
+	recieve_message = "<font color='[recieve_color]'>[recieve_pm_type] PM from-<b>[get_options_bar(C, 1, C.holder ? 1 : 0, 1)]</b>: [msg]</font>"
 	C << recieve_message
-	src << "<font color='blue'>[send_pm_type]PM to-<b>[key_name(C, src, holder ? 1 : 0)]</b>: [msg]</font>"
+	src << "<font color='blue'>[send_pm_type]PM to-<b>[get_options_bar(C, 1, holder ? 1 : 0, 1)]: [msg]</font>"
 
 	/*if(holder && !C.holder)
 		C.last_pm_recieved = world.time
@@ -209,5 +209,5 @@
 		if(X == src)
 			continue
 		if((X.holder.rights & R_ADMIN) || (X.holder.rights & R_MOD))
-			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;IRC-Admins:</B> \blue [msg]</font>"	
+			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;IRC-Admins:</B> \blue [msg]</font>"
 
