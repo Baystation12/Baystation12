@@ -108,10 +108,57 @@
 		header += "<hr>"
 
 		var/jobs_all = ""
-		var/list/alljobs = (istype(src,/obj/machinery/computer/card/centcom)? get_all_centcom_jobs() : joblist) + "Custom"
-		for(var/job in alljobs)
-			jobs_all += "<a href='?src=\ref[src];choice=assign;assign_target=[job]'>[replacetext(job, " ", "&nbsp")]</a> " //make sure there isn't a line break in the middle of a job
+		var/counter = 0
+		jobs_all += "<table><tr><td></td><td><b>Command</b></td>"
 
+		jobs_all += "</tr><tr height='20'><td><b>Special</b></font></td>"//Captain in special because he is head of heads ~Intercross21
+		jobs_all += "<td weight='100'><a href='?src=\ref[src];choice=assign;assign_target=Captain'>Captain</a></td>"
+		jobs_all += "<td weight='100'><a href='?src=\ref[src];choice=assign;assign_target=Custom'>Custom</a></td>"
+
+		counter = 0
+		jobs_all += "</tr><tr><td><font color='#FFA500'><b>Engineering</b></font></td>"//Orange
+		for(var/job in engineering_positions)
+			counter++
+			if(counter >= 6)
+				jobs_all += "</tr><tr height='20'><td></td><td></td>"
+				counter = 0
+			jobs_all += "<td height='20' weight='100'><a href='?src=\ref[src];choice=assign;assign_target=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+
+		counter = 0
+		jobs_all += "</tr><tr height='20'><td><font color='#008000'><b>Medical</b></font></td>"//Green
+		for(var/job in medical_positions)
+			counter++
+			if(counter >= 6)
+				jobs_all += "</tr><tr height='20'><td></td><td></td>"
+				counter = 0
+			jobs_all += "<td weight='100'><a href='?src=\ref[src];choice=assign;assign_target=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+
+		counter = 0
+		jobs_all += "</tr><tr height='20'><td><font color='#800080'><b>Science</b></font></td>"//Purple
+		for(var/job in science_positions)
+			counter++
+			if(counter >= 6)
+				jobs_all += "</tr><tr height='20'><td></td><td></td>"
+				counter = 0
+			jobs_all += "<td weight='100'><a href='?src=\ref[src];choice=assign;assign_target=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+
+		counter = 0
+		jobs_all += "</tr><tr height='20'><td><font color='#808080'><b>Civilian</b></font></td>"//Grey
+		for(var/job in civilian_positions)
+			counter++
+			if(counter >= 6)
+				jobs_all += "</tr><tr height='20'><td></td><td></td>"
+				counter = 0
+			jobs_all += "<td weight='100'><a href='?src=\ref[src];choice=assign;assign_target=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+
+		if(istype(src,/obj/machinery/computer/card/centcom))
+			counter = 0
+			jobs_all += "</tr><tr><td><font color='#A52A2A'><b>CentComm</b></font></td>"//Brown
+			for(var/job in get_all_centcom_jobs())
+				if(counter >= 6)
+					jobs_all += "</tr><tr><td></td><td></td>"
+					counter = 0
+				jobs_all += "<td><a href='?src=\ref[src];choice=assign;assign_target=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
 
 		var/body
 		if (authenticated && modify)
@@ -138,7 +185,7 @@
 								}
 								function hideAll(){
 									var allJobsSlot = document.getElementById('alljobsslot');
-									allJobsSlot.innerHTML = "<a href='#' onclick='showAll()'>show</a>";
+									allJobsSlot.innerHTML = "<a href='#' onclick='showAll()'>[(modify.assignment) ? modify.assignment : "Unassgied"]</a>";
 								}
 							</script>"}
 			carddesc += "<form name='cardcomp' action='?src=\ref[src]' method='get'>"

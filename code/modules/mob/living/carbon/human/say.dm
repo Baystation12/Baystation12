@@ -9,6 +9,8 @@
 			src << "\red You cannot speak in IC (Muted)."
 			return
 	
+	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN)) 
+
 	if(stat == 2)
 		return say_dead(message)
 
@@ -146,6 +148,10 @@
 
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
 		return 1
+	if (istype(other, /mob/living/carbon/monkey/diona) && !speaking)
+		if(other.languages.len >= 2)			//They've sucked down some blood and can speak common now.
+			return 1
+
 	if (istype(other, /mob/living/silicon))
 		return 1
 	if (istype(other, /mob/living/carbon/brain))
