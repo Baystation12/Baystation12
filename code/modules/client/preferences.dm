@@ -404,9 +404,9 @@ datum/preferences
 		dat += "<a href='?_src_=prefs;preference=reset_all'>Reset Setup</a>"
 		dat += "</center></body></html>"
 
-		user << browse(dat, "window=preferences;size=560x580")
+		user << browse(dat, "window=preferences;size=560x736")
 
-	proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 550)
+	proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 660)
 		if(!job_master)
 			return
 
