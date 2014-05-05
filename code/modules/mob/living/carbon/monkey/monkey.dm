@@ -515,7 +515,7 @@
 /mob/living/carbon/monkey/IsAdvancedToolUser()//Unless its monkey mode monkeys cant use advanced tools
 	return 0
 
-/mob/living/carbon/monkey/say(var/message)
+/mob/living/carbon/monkey/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", var/italics=0, var/message_range = world.view, var/list/used_radios = list())
         if(stat)
                 return
 
@@ -525,11 +525,9 @@
         if(stat)
                 return
 
-        var/verb = "says"
-
         if(speak_emote.len)
                 verb = pick(speak_emote)
 
         message = capitalize(trim_left(message))
 
-        ..(message, null, verb)
+        ..(message, speaking, verb, alt_name, italics, message_range, used_radios)
