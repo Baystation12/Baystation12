@@ -22,7 +22,7 @@
 	set name = "Msay"
 	set hidden = 1
 
-	if(!check_rights(R_ADMIN|R_MOD))	return
+	if(!check_rights(R_ADMIN|R_MOD|R_MENTOR))	return
 
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	log_admin("MOD: [key_name(src)] : [msg]")
