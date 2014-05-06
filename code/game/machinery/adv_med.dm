@@ -282,6 +282,7 @@
 					dat += "</tr>"
 
 					for(var/datum/organ/external/e in occupant.organs)
+
 						dat += "<tr>"
 						var/AN = ""
 						var/open = ""
@@ -307,13 +308,15 @@
 							robot = "Prosthetic:"
 						if(e.open)
 							open = "Open:"
+
 						var/unknown_body = 0
 						for(var/I in e.implants)
 							if(is_type_in_list(I,known_implants))
 								imp += "[I] implanted:"
 							else
 								unknown_body++
-						if(unknown_body)
+
+						if(unknown_body || e.hidden)
 							imp += "Unknown body present:"
 						if(!AN && !open && !infected & !imp)
 							AN = "None:"
