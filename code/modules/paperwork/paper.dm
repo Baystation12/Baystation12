@@ -315,6 +315,26 @@
 	if(user.mind && (user.mind.assigned_role == "Clown"))
 		clown = 1
 
+	if(istype(P, /obj/item/weapon/paper))
+		var/obj/item/weapon/paper_bundle/B = new(usr.loc)
+		B.icon_state = icon_state
+		if (name != "paper")
+			B.name = name
+		usr.drop_item()
+		B.loc = usr
+		if (usr.hand)
+			usr.l_hand = B
+			B.layer = 20
+		else
+			usr.r_hand = B
+			B.layer = 20
+		if(istype(usr,/mob/living/carbon/human))
+			usr:update_inv_l_hand()
+			usr:update_inv_r_hand()
+		del(P)
+		del(src)
+
+
 	if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
 		if ( istype(P, /obj/item/weapon/pen/robopen) && P:mode == 2 )
 			P:RenamePaper(user,src)
