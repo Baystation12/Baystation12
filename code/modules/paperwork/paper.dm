@@ -315,14 +315,11 @@
 	if(user.mind && (user.mind.assigned_role == "Clown"))
 		clown = 1
 
-	if(istype(P, /obj/item/weapon/paper))
+	if(istype(P, /obj/item/weapon/paper) || istype(P, /obj/item/weapon/photo))
 		var/obj/item/weapon/paper_bundle/B = new(src.loc)
-		B.icon_state = icon_state
-		B.overlays = overlays
-		B:add_item(icon_state)
 		if (name != "paper")
 			B.name = name
-		else if (P.name != "paper")
+		else if (P.name != "paper" && P.name != "photo")
 			B.name = P.name
 		user.drop_from_inventory(P)
 		if (user.r_hand == src)
@@ -338,11 +335,13 @@
 		if(istype(user,/mob/living/carbon/human))
 			user:update_inv_l_hand()
 			user:update_inv_r_hand()
-		user << "<span class='notice'>You clip the papers together to create a bundle.</span>"
-		P.loc = B
+		user << "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>"
 		src.loc = B
+		P.loc = B
+		B.amount++
+		B.update_icon()
 
-	if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
+	else if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
 		if ( istype(P, /obj/item/weapon/pen/robopen) && P:mode == 2 )
 			P:RenamePaper(user,src)
 		else
