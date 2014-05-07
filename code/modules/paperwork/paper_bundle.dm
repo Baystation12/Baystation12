@@ -105,7 +105,7 @@
 			page--
 			playsound(src.loc, "pageturn", 50, 1)
 	else
-		usr << "<span class='notice'>You need to hold it in hands.</span>"
+		usr << "<span class='notice'>You need to hold it in hands!</span>"
 	if (istype(src.loc, /mob))
 		src.attack_self(src.loc)
 
