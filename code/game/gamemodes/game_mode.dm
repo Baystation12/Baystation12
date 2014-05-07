@@ -28,6 +28,7 @@
 	var/required_enemies = 0
 	var/recommended_enemies = 0
 	var/newscaster_announcements = null
+	var/ert_disabled = 0
 	var/uplink_welcome = "Syndicate Uplink Console:"
 	var/uplink_uses = 10
 	var/uplink_items = {"Highly Visible and Dangerous Weapons;
@@ -406,6 +407,9 @@ Implants;
 		if(player.mind && (player.mind.assigned_role in command_positions))
 			heads += player.mind
 	return heads
+
+/datum/game_mode/proc/check_antagonists_topic(href, href_list[])
+	return 0
 
 /datum/game_mode/New()
 	newscaster_announcements = pick(newscaster_standard_feeds)

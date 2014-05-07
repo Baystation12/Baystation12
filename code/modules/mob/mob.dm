@@ -600,6 +600,9 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/is_active()
 	return (0 >= usr.stat)
 
+/mob/proc/is_dead()
+	return stat == DEAD
+
 /mob/proc/see(message)
 	if(!is_active())
 		return 0
