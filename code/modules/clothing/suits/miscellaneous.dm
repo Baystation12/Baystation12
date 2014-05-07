@@ -69,6 +69,8 @@
 /obj/item/clothing/suit/johnny_coat
 	name = "johnny~~ coat"
 	desc = "Johnny~~"
+	icon = 'tauceti/items/clothing/suits/suits.dmi'
+	tc_custom = 'tauceti/items/clothing/suits/suits.dmi'
 	icon_state = "johnny"
 	item_state = "johnny"
 	flags = FPRINT | TABLEPASS

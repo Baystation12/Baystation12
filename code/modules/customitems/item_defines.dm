@@ -526,7 +526,8 @@
 /obj/item/clothing/head/secsoft/fluff/swatcap //deusdactyl: James Girard
 	name = "\improper SWAT hat"
 	desc = "A black hat.  The inside has the words, \"Lieutenant James Girard, LPD SWAT Team Four.\""
-	icon = 'icons/obj/custom_items.dmi'
+	icon = 'tauceti/items/clothing/hats/hats.dmi'
+	tc_custom = 'tauceti/items/clothing/hats/hats.dmi'
 	icon_state = "swatcap"
 
 /obj/item/clothing/head/welding/fluff/alice_mccrea_1 //madmalicemccrea: Alice McCrea
@@ -879,7 +880,8 @@
 /obj/item/clothing/suit/storage/det_suit/fluff/retpolcoat
 	name = "retired colony patrolman's coat"
 	desc = "A clean, black nylon windbreaker with the words \"OUTER LIGHT POLICE\" embroidered in gold-dyed thread on the back. \"RETIRED\" is tastefully embroidered below in a smaller font."
-	icon = 'icons/obj/custom_items.dmi'
+	icon = 'tauceti/items/clothing/suits/suits.dmi'
+	tc_custom = 'tauceti/items/clothing/suits/suits.dmi'
 	icon_state = "retpolcoat"
 	item_state = "retpolcoat"
 	item_color = "retpolcoat"
@@ -887,7 +889,8 @@
 /obj/item/clothing/head/det_hat/fluff/retpolcap
 	name = "retired colony patrolman's cap"
 	desc = "A clean and properly creased colony police cap. The badge is shined and polished, the word \"RETIRED\" engraved professionally under the words \"OUTER LIGHT POLICE.\""
-	icon = 'icons/obj/custom_items.dmi'
+	icon = 'tauceti/items/clothing/hats/hats.dmi'
+	tc_custom = 'tauceti/items/clothing/hats/hats.dmi'
 	icon_state = "retpolcap"
 
 /obj/item/clothing/under/det/fluff/retpoluniform
