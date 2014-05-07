@@ -234,12 +234,14 @@
 	path = /mob/living/carbon/human/slime
 	primitive = /mob/living/carbon/slime/adult
 
-	flags = IS_WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS
+	flags = IS_WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS | NO_SCAN
 	bloodflags = BLOOD_SLIME
 	bodyflags = FEET_NOSLIP
 	abilities = list(/mob/living/carbon/human/slime/proc/slimepeople_ventcrawl)
 
 /datum/species/slime/handle_post_spawn(var/mob/living/carbon/human/H)
+	H.dna = new /datum/dna(null)
+	H.dna.species=H.species.name
 	H.dna.mutantrace = "slime"
 	H.update_mutantrace()
 
