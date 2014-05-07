@@ -243,6 +243,7 @@
 	H.dna.mutantrace = "slime"
 	H.update_mutantrace()
 
+	return ..()
 
 /datum/species/grey // /vg/
 	name = "Grey"
