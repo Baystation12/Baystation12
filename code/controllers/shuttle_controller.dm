@@ -36,7 +36,7 @@ datum/shuttle_controller
 			if(direction == -1)
 				setdirection(1)
 		else
-			settimeleft(SHUTTLEARRIVETIME*coeff)
+			settimeleft(get_shuttle_arrive_time()*coeff)
 			online = 1
 			if(always_fake_recall)
 				fake_recall = rand(300,500)		//turning on the red lights in hallways
@@ -45,9 +45,15 @@ datum/shuttle_controller
 				if(istype(A, /area/hallway))
 					A.readyalert()
 
+	proc/get_shuttle_arrive_time()
+		// During mutiny rounds, the shuttle takes twice as long.
+		if(ticker && istype(ticker.mode,/datum/game_mode/mutiny))
+			return SHUTTLEARRIVETIME * 2
+
+		return SHUTTLEARRIVETIME
+
 datum/shuttle_controller/proc/shuttlealert(var/X)
 		alert = X
-
 
 datum/shuttle_controller/proc/recall()
 	if(direction == 1)
@@ -78,9 +84,9 @@ datum/shuttle_controller/proc/timeleft()
 		if(direction == 1 || direction == 2)
 			return timeleft
 		else
-			return SHUTTLEARRIVETIME-timeleft
+			return get_shuttle_arrive_time()-timeleft
 	else
-		return SHUTTLEARRIVETIME
+		return get_shuttle_arrive_time()
 
 	// sets the time left to a given delay (in seconds)
 datum/shuttle_controller/proc/settimeleft(var/delay)
@@ -95,7 +101,7 @@ datum/shuttle_controller/proc/setdirection(var/dirn)
 	direction = dirn
 	// if changing direction, flip the timeleft by SHUTTLEARRIVETIME
 	var/ticksleft = endtime - world.timeofday
-	endtime = world.timeofday + (SHUTTLEARRIVETIME*10 - ticksleft)
+	endtime = world.timeofday + (get_shuttle_arrive_time()*10 - ticksleft)
 	return
 
 datum/shuttle_controller/proc/process()

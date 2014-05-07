@@ -6,6 +6,10 @@
 		message_admins("[usr.key] has attempted to override the admin panel!")
 		return
 
+	if(ticker.mode && ticker.mode.check_antagonists_topic(href, href_list))
+		check_antagonists()
+		return
+
 	if(href_list["makeAntag"])
 		switch(href_list["makeAntag"])
 			if("1")

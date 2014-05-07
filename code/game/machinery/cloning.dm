@@ -185,6 +185,7 @@
 	H << "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>"
 
 	// -- Mode/mind specific stuff goes here
+	callHook("clone", list(H))
 
 	if((H.mind in ticker.mode:revolutionaries) || (H.mind in ticker.mode:head_revolutionaries))
 		ticker.mode.update_all_rev_icons() //So the icon actually appears

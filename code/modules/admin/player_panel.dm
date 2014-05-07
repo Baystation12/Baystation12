@@ -7,182 +7,182 @@
 	//javascript, the part that does most of the work~
 	dat += {"
 
-		<head>
-			<script type='text/javascript'>
+	<head>
+		<script type='text/javascript'>
 
-				var locked_tabs = new Array();
+		var locked_tabs = new Array();
 
-				function updateSearch(){
+		function updateSearch(){
 
 
-					var filter_text = document.getElementById('filter');
-					var filter = filter_text.value.toLowerCase();
+			var filter_text = document.getElementById('filter');
+			var filter = filter_text.value.toLowerCase();
 
-					if(complete_list != null && complete_list != ""){
-						var mtbl = document.getElementById("maintable_data_archive");
-						mtbl.innerHTML = complete_list;
-					}
+			if(complete_list != null && complete_list != ""){
+				var mtbl = document.getElementById("maintable_data_archive");
+			mtbl.innerHTML = complete_list;
+			}
 
-					if(filter.value == ""){
-						return;
-					}else{
+			if(filter.value == ""){
+				return;
+			}else{
 
-						var maintable_data = document.getElementById('maintable_data');
-						var ltr = maintable_data.getElementsByTagName("tr");
-						for ( var i = 0; i < ltr.length; ++i )
-						{
-							try{
-								var tr = ltr\[i\];
-								if(tr.getAttribute("id").indexOf("data") != 0){
-									continue;
-								}
-								var ltd = tr.getElementsByTagName("td");
-								var td = ltd\[0\];
-								var lsearch = td.getElementsByTagName("b");
-								var search = lsearch\[0\];
-								//var inner_span = li.getElementsByTagName("span")\[1\] //Should only ever contain one element.
-								//document.write("<p>"+search.innerText+"<br>"+filter+"<br>"+search.innerText.indexOf(filter))
-								if ( search.innerText.toLowerCase().indexOf(filter) == -1 )
-								{
-									//document.write("a");
-									//ltr.removeChild(tr);
-									td.innerHTML = "";
-									i--;
-								}
-							}catch(err) {   }
-						}
-					}
-
-					var count = 0;
-					var index = -1;
-					var debug = document.getElementById("debug");
-
-					locked_tabs = new Array();
-
+				var maintable_data = document.getElementById('maintable_data');
+				var ltr = maintable_data.getElementsByTagName("tr");
+				for ( var i = 0; i < ltr.length; ++i )
+				{
+				try{
+				var tr = ltr\[i\];
+				if(tr.getAttribute("id").indexOf("data") != 0){
+					continue;
 				}
-
-				function expand(id,job,name,real_name,image,key,ip,antagonist,ref){
-
-					clearAll();
-
-					var span = document.getElementById(id);
-
-					body = "<table><tr><td>";
-
-					body += "</td><td align='center'>";
-
-					body += "<font size='2'><b>"+job+" "+name+"</b><br><b>Real name "+real_name+"</b><br><b>Played by "+key+" ("+ip+")</b></font>"
-
-					body += "</td><td align='center'>";
-
-					body += "<a href='?src=\ref[src];adminplayeropts="+ref+"'>PP</a> - "
-					body += "<a href='?src=\ref[src];notes=show;mob="+ref+"'>N</a> - "
-					body += "<a href='?_src_=vars;Vars="+ref+"'>VV</a> - "
-					body += "<a href='?src=\ref[src];traitor="+ref+"'>TP</a> - "
-					body += "<a href='?src=\ref[usr];priv_msg=\ref"+ref+"'>PM</a> - "
-					body += "<a href='?src=\ref[src];subtlemessage="+ref+"'>SM</a> - "
-					body += "<a href='?src=\ref[src];adminplayerobservejump="+ref+"'>JMP</a><br>"
-					if(antagonist > 0)
-						body += "<font size='2'><a href='?src=\ref[src];check_antagonist=1'><font color='red'><b>Antagonist</b></font></a></font>";
-
-					body += "</td></tr></table>";
-
-
-					span.innerHTML = body
-				}
-
-				function clearAll(){
-					var spans = document.getElementsByTagName('span');
-					for(var i = 0; i < spans.length; i++){
-						var span = spans\[i\];
-
-						var id = span.getAttribute("id");
-
-						if(!(id.indexOf("item")==0))
-							continue;
-
-						var pass = 1;
-
-						for(var j = 0; j < locked_tabs.length; j++){
-							if(locked_tabs\[j\]==id){
-								pass = 0;
-								break;
-							}
-						}
-
-						if(pass != 1)
-							continue;
-
-
-
-
-						span.innerHTML = "";
-					}
-				}
-
-				function addToLocked(id,link_id,notice_span_id){
-					var link = document.getElementById(link_id);
-					var decision = link.getAttribute("name");
-					if(decision == "1"){
-						link.setAttribute("name","2");
-					}else{
-						link.setAttribute("name","1");
-						removeFromLocked(id,link_id,notice_span_id);
-						return;
-					}
-
-					var pass = 1;
-					for(var j = 0; j < locked_tabs.length; j++){
-						if(locked_tabs\[j\]==id){
-							pass = 0;
-							break;
-						}
-					}
-					if(!pass)
-						return;
-					locked_tabs.push(id);
-					var notice_span = document.getElementById(notice_span_id);
-					notice_span.innerHTML = "<font color='red'>Locked</font> ";
-					//link.setAttribute("onClick","attempt('"+id+"','"+link_id+"','"+notice_span_id+"');");
-					//document.write("removeFromLocked('"+id+"','"+link_id+"','"+notice_span_id+"')");
-					//document.write("aa - "+link.getAttribute("onClick"));
-				}
-
-				function attempt(ab){
-					return ab;
-				}
-
-				function removeFromLocked(id,link_id,notice_span_id){
+				var ltd = tr.getElementsByTagName("td");
+				var td = ltd\[0\];
+				var lsearch = td.getElementsByTagName("b");
+				var search = lsearch\[0\];
+				//var inner_span = li.getElementsByTagName("span")\[1\] //Should only ever contain one element.
+				//document.write("<p>"+search.innerText+"<br>"+filter+"<br>"+search.innerText.indexOf(filter))
+				if ( search.innerText.toLowerCase().indexOf(filter) == -1 )
+				{
 					//document.write("a");
-					var index = 0;
-					var pass = 0;
-					for(var j = 0; j < locked_tabs.length; j++){
-						if(locked_tabs\[j\]==id){
-							pass = 1;
-							index = j;
-							break;
-						}
-					}
-					if(!pass)
-						return;
-					locked_tabs\[index\] = "";
-					var notice_span = document.getElementById(notice_span_id);
-					notice_span.innerHTML = "";
-					//var link = document.getElementById(link_id);
-					//link.setAttribute("onClick","addToLocked('"+id+"','"+link_id+"','"+notice_span_id+"')");
+					//ltr.removeChild(tr);
+					td.innerHTML = "";
+					i--;
 				}
+			}catch(err) {   }
+			}
+		}
 
-				function selectTextField(){
-					var filter_text = document.getElementById('filter');
-					filter_text.focus();
-					filter_text.select();
-				}
+			var count = 0;
+			var index = -1;
+			var debug = document.getElementById("debug");
 
-			</script>
-		</head>
+			locked_tabs = new Array();
+
+		}
+
+        function expand(id,job,name,real_name,image,key,ip,antagonist,ref){
+
+          clearAll();
+
+          var span = document.getElementById(id);
+
+          body = "<table><tr><td>";
+
+          body += "</td><td align='center'>";
+
+          body += "<font size='2'><b>"+job+" "+name+"</b><br><b>Real name "+real_name+"</b><br><b>Played by "+key+" ("+ip+")</b></font>"
+
+          body += "</td><td align='center'>";
+
+          body += "<a href='?src=\ref[src];adminplayeropts="+ref+"'>PP</a> - "
+          body += "<a href='?src=\ref[src];notes=show;mob="+ref+"'>N</a> - "
+          body += "<a href='?_src_=vars;Vars="+ref+"'>VV</a> - "
+          body += "<a href='?src=\ref[src];traitor="+ref+"'>TP</a> - "
+          body += "<a href='?src=\ref[usr];priv_msg=\ref"+ref+"'>PM</a> - "
+          body += "<a href='?src=\ref[src];subtlemessage="+ref+"'>SM</a> - "
+          body += "<a href='?src=\ref[src];adminplayerobservejump="+ref+"'>JMP</a><br>"
+          if(antagonist > 0)
+            body += "<font size='2'><a href='?src=\ref[src];check_antagonist=1'><font color='red'><b>Antagonist</b></font></a></font>";
+
+          body += "</td></tr></table>";
 
 
-	"}
+          span.innerHTML = body
+        }
+
+        function clearAll(){
+          var spans = document.getElementsByTagName('span');
+          for(var i = 0; i < spans.length; i++){
+            var span = spans\[i\];
+
+            var id = span.getAttribute("id");
+
+            if(!(id.indexOf("item")==0))
+              continue;
+
+            var pass = 1;
+
+            for(var j = 0; j < locked_tabs.length; j++){
+              if(locked_tabs\[j\]==id){
+                pass = 0;
+                break;
+              }
+            }
+
+            if(pass != 1)
+              continue;
+
+
+
+
+            span.innerHTML = "";
+          }
+        }
+
+        function addToLocked(id,link_id,notice_span_id){
+          var link = document.getElementById(link_id);
+          var decision = link.getAttribute("name");
+          if(decision == "1"){
+            link.setAttribute("name","2");
+          }else{
+            link.setAttribute("name","1");
+            removeFromLocked(id,link_id,notice_span_id);
+            return;
+          }
+
+          var pass = 1;
+          for(var j = 0; j < locked_tabs.length; j++){
+            if(locked_tabs\[j\]==id){
+              pass = 0;
+              break;
+            }
+          }
+          if(!pass)
+            return;
+          locked_tabs.push(id);
+          var notice_span = document.getElementById(notice_span_id);
+          notice_span.innerHTML = "<font color='red'>Locked</font> ";
+          //link.setAttribute("onClick","attempt('"+id+"','"+link_id+"','"+notice_span_id+"');");
+          //document.write("removeFromLocked('"+id+"','"+link_id+"','"+notice_span_id+"')");
+          //document.write("aa - "+link.getAttribute("onClick"));
+        }
+
+        function attempt(ab){
+          return ab;
+        }
+
+        function removeFromLocked(id,link_id,notice_span_id){
+          //document.write("a");
+          var index = 0;
+          var pass = 0;
+          for(var j = 0; j < locked_tabs.length; j++){
+            if(locked_tabs\[j\]==id){
+              pass = 1;
+              index = j;
+              break;
+            }
+          }
+          if(!pass)
+            return;
+          locked_tabs\[index\] = "";
+          var notice_span = document.getElementById(notice_span_id);
+          notice_span.innerHTML = "";
+          //var link = document.getElementById(link_id);
+          //link.setAttribute("onClick","addToLocked('"+id+"','"+link_id+"','"+notice_span_id+"')");
+        }
+
+        function selectTextField(){
+          var filter_text = document.getElementById('filter');
+          filter_text.focus();
+          filter_text.select();
+        }
+
+      </script>
+    </head>
+
+
+  "}
 
 	//body tag start + onload and onkeypress (onkeyup) javascript event calls
 	dat += "<body onload='selectTextField(); updateSearch();' onkeyup='updateSearch();'>"
@@ -190,27 +190,27 @@
 	//title + search bar
 	dat += {"
 
-		<table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable'>
-			<tr id='title_tr'>
-				<td align='center'>
-					<font size='5'><b>Player panel</b></font><br>
-					Hover over a line to see more information - <a href='?src=\ref[src];check_antagonist=1'>Check antagonists</a>
-					<p>
-				</td>
-			</tr>
-			<tr id='search_tr'>
-				<td align='center'>
-					<b>Search:</b> <input type='text' id='filter' value='' style='width:300px;'>
-				</td>
-			</tr>
-	</table>
+    <table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable'>
+      <tr id='title_tr'>
+        <td align='center'>
+          <font size='5'><b>Player panel</b></font><br>
+          Hover over a line to see more information - <a href='?src=\ref[src];check_antagonist=1'>Check antagonists</a>
+          <p>
+        </td>
+      </tr>
+      <tr id='search_tr'>
+        <td align='center'>
+          <b>Search:</b> <input type='text' id='filter' value='' style='width:300px;'>
+        </td>
+      </tr>
+  </table>
 
-	"}
+  "}
 
 	//player table header
 	dat += {"
-		<span id='maintable_data_archive'>
-		<table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable_data'>"}
+    <span id='maintable_data_archive'>
+    <table width='560' align='center' cellspacing='0' cellpadding='5' id='maintable_data'>"}
 
 	var/list/mobs = sortmobs()
 	var/i = 1
@@ -236,8 +236,6 @@
 					else if(isalien(M)) //aliens
 						if(islarva(M))
 							M_job = "Alien larva"
-						else if(isfacehugger(M))
-							M_job = "Alien facehugger"
 						else
 							M_job = "Alien"
 					else
@@ -289,94 +287,94 @@
 			//output for each mob
 			dat += {"
 
-				<tr id='data[i]' name='[i]' onClick="addToLocked('item[i]','data[i]','notice_span[i]')">
-					<td align='center' bgcolor='[color]'>
-						<span id='notice_span[i]'></span>
-						<a id='link[i]'
-						onmouseover='expand("item[i]","[M_job]","[M_name]","[M_rname]","--unused--","[M_key]","[M.lastKnownIP]",[is_antagonist],"\ref[M]")'
-						>
-						<b id='search[i]'>[M_name] - [M_rname] - [M_key] ([M_job])</b>
-						</a>
-						<br><span id='item[i]'></span>
-					</td>
-				</tr>
+        <tr id='data[i]' name='[i]' onClick="addToLocked('item[i]','data[i]','notice_span[i]')">
+          <td align='center' bgcolor='[color]'>
+            <span id='notice_span[i]'></span>
+            <a id='link[i]'
+            onmouseover='expand("item[i]","[M_job]","[M_name]","[M_rname]","--unused--","[M_key]","[M.lastKnownIP]",[is_antagonist],"\ref[M]")'
+            >
+            <b id='search[i]'>[M_name] - [M_rname] - [M_key] ([M_job])</b>
+            </a>
+            <br><span id='item[i]'></span>
+          </td>
+        </tr>
 
-			"}
+      "}
 
 			i++
 
 
 	//player table ending
 	dat += {"
-		</table>
-		</span>
+    </table>
+    </span>
 
-		<script type='text/javascript'>
-			var maintable = document.getElementById("maintable_data_archive");
-			var complete_list = maintable.innerHTML;
-		</script>
-	</body></html>
-	"}
+    <script type='text/javascript'>
+      var maintable = document.getElementById("maintable_data_archive");
+      var complete_list = maintable.innerHTML;
+    </script>
+  </body></html>
+  "}
 
 	usr << browse(dat, "window=players;size=600x480")
 
 //The old one
 /datum/admins/proc/player_panel_old()
-	if (!usr.client.holder)
-		return
-	var/dat = "<html><head><title>Player Menu</title></head>"
-	dat += "<body><table border=1 cellspacing=5><B><tr><th>Name</th><th>Real Name</th><th>Assigned Job</th><th>Key</th><th>Options</th><th>PM</th><th>Traitor?</th></tr></B>"
-	//add <th>IP:</th> to this if wanting to add back in IP checking
-	//add <td>(IP: [M.lastKnownIP])</td> if you want to know their ip to the lists below
-	var/list/mobs = sortmobs()
+  if (!usr.client.holder)
+    return
+  var/dat = "<html><head><title>Player Menu</title></head>"
+  dat += "<body><table border=1 cellspacing=5><B><tr><th>Name</th><th>Real Name</th><th>Assigned Job</th><th>Key</th><th>Options</th><th>PM</th><th>Traitor?</th></tr></B>"
+  //add <th>IP:</th> to this if wanting to add back in IP checking
+  //add <td>(IP: [M.lastKnownIP])</td> if you want to know their ip to the lists below
+  var/list/mobs = sortmobs()
 
-	for(var/mob/M in mobs)
-		if(!M.ckey)	continue
+  for(var/mob/M in mobs)
+    if(!M.ckey) continue
 
-		dat += "<tr><td>[M.name]</td>"
-		if(isAI(M))
-			dat += "<td>AI</td>"
-		else if(isrobot(M))
-			dat += "<td>Cyborg</td>"
-		else if(ishuman(M))
-			dat += "<td>[M.real_name]</td>"
-		else if(istype(M, /mob/living/silicon/pai))
-			dat += "<td>pAI</td>"
-		else if(istype(M, /mob/new_player))
-			dat += "<td>New Player</td>"
-		else if(isobserver(M))
-			dat += "<td>Ghost</td>"
-		else if(ismonkey(M))
-			dat += "<td>Monkey</td>"
-		else if(isalien(M))
-			dat += "<td>Alien</td>"
-		else
-			dat += "<td>Unknown</td>"
-
-
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			if(H.mind && H.mind.assigned_role)
-				dat += "<td>[H.mind.assigned_role]</td>"
-		else
-			dat += "<td>NA</td>"
+    dat += "<tr><td>[M.name]</td>"
+    if(isAI(M))
+      dat += "<td>AI</td>"
+    else if(isrobot(M))
+      dat += "<td>Cyborg</td>"
+    else if(ishuman(M))
+      dat += "<td>[M.real_name]</td>"
+    else if(istype(M, /mob/living/silicon/pai))
+      dat += "<td>pAI</td>"
+    else if(istype(M, /mob/new_player))
+      dat += "<td>New Player</td>"
+    else if(isobserver(M))
+      dat += "<td>Ghost</td>"
+    else if(ismonkey(M))
+      dat += "<td>Monkey</td>"
+    else if(isalien(M))
+      dat += "<td>Alien</td>"
+    else
+      dat += "<td>Unknown</td>"
 
 
-		dat += {"<td>[(M.client ? "[M.client]" : "No client")]</td>
-		<td align=center><A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>X</A></td>
-		<td align=center><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
-		"}
-		switch(is_special_character(M))
-			if(0)
-				dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>Traitor?</A></td>"}
-			if(1)
-				dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red>Traitor?</font></A></td>"}
-			if(2)
-				dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red><b>Traitor?</b></font></A></td>"}
+    if(istype(M,/mob/living/carbon/human))
+      var/mob/living/carbon/human/H = M
+      if(H.mind && H.mind.assigned_role)
+        dat += "<td>[H.mind.assigned_role]</td>"
+    else
+      dat += "<td>NA</td>"
 
-	dat += "</table></body></html>"
 
-	usr << browse(dat, "window=players;size=640x480")
+    dat += {"<td>[(M.client ? "[M.client]" : "No client")]</td>
+    <td align=center><A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>X</A></td>
+    <td align=center><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
+    "}
+    switch(is_special_character(M))
+      if(0)
+        dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>Traitor?</A></td>"}
+      if(1)
+        dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red>Traitor?</font></A></td>"}
+      if(2)
+        dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red><b>Traitor?</b></font></A></td>"}
+
+  dat += "</table></body></html>"
+
+  usr << browse(dat, "window=players;size=640x480")
 
 
 
@@ -417,8 +415,8 @@
 					if(istype(disk_loc, /obj))
 						var/obj/O = disk_loc
 						dat += "in \a [O.name] "
-					disk_loc = disk_loc.loc
-				dat += "in [disk_loc.loc] at ([disk_loc.x], [disk_loc.y], [disk_loc.z])</td></tr>"
+						disk_loc = disk_loc.loc
+					dat += "in [disk_loc.loc] at ([disk_loc.x], [disk_loc.y], [disk_loc.z])</td></tr>"
 			dat += "</table>"
 
 		if(ticker.mode.head_revolutionaries.len || ticker.mode.revolutionaries.len)
@@ -447,108 +445,68 @@
 					dat += "<tr><td><i>Head not found!</i></td></tr>"
 			dat += "</table>"
 
-		if(ticker.mode.changelings.len > 0)
-			dat += "<br><table cellspacing=5><tr><td><B>Changelings</B></td><td></td><td></td></tr>"
-			for(var/datum/mind/changeling in ticker.mode.changelings)
-				var/mob/M = changeling.current
-				if(M)
-					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
-					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
-					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
-				else
-					dat += "<tr><td><i>Changeling not found!</i></td></tr>"
-			dat += "</table>"
+		if(ticker.mode.changelings.len)
+			dat += check_role_table("Changelings", ticker.mode.changelings, src)
 
-		if(ticker.mode.wizards.len > 0)
-			dat += "<br><table cellspacing=5><tr><td><B>Wizards</B></td><td></td><td></td></tr>"
-			for(var/datum/mind/wizard in ticker.mode.wizards)
-				var/mob/M = wizard.current
-				if(M)
-					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
-					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
-					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
-				else
-					dat += "<tr><td><i>Wizard not found!</i></td></tr>"
-			dat += "</table>"
+		if(ticker.mode.wizards.len)
+			dat += check_role_table("Wizards", ticker.mode.wizards, src)
 
-		if(ticker.mode.raiders.len > 0)
-			dat += "<br><table cellspacing=5><tr><td><B>Raiders</B></td><td></td><td></td></tr>"
-			for(var/datum/mind/raider in ticker.mode.raiders)
-				var/mob/M = raider.current
-				if(M)
-					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
-					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
-					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
-			dat += "</table>"
+		if(ticker.mode.raiders.len)
+			dat += check_role_table("Raiders", ticker.mode.raiders, src)
 
-
-		if(ticker.mode.ninjas.len > 0)
-			dat += "<br><table cellspacing=5><tr><td><B>Ninjas</B></td><td></td><td></td></tr>"
-			for(var/datum/mind/ninja in ticker.mode.ninjas)
-				var/mob/M = ninja.current
-				if(M)
-					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
-					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
-					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
-				else
-					dat += "<tr><td><i>Ninja not found!</i></td></tr>"
-			dat += "</table>"
-
+		if(ticker.mode.ninjas.len)
+			dat += check_role_table("Ninjas", ticker.mode.ninjas, src)
 
 		if(ticker.mode.cult.len)
-			dat += "<br><table cellspacing=5><tr><td><B>Cultists</B></td><td></td></tr>"
-			for(var/datum/mind/N in ticker.mode.cult)
-				var/mob/M = N.current
-				if(M)
-					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
-					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td></tr>"
-			dat += "</table>"
-/*
-		if(istype(ticker.mode, /datum/game_mode/anti_revolution) && ticker.mode:heads.len)	//comment out anti-revolution
-			dat += "<br><table cellspacing=5><tr><td><B>Corrupt Heads</B></td><td></td></tr>"
-			for(var/datum/mind/N in ticker.mode:heads)
-				var/mob/M = N.current
-				if(M)
-					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
-					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td></tr>"
-			dat += "</table>"
-*/
+			dat += check_role_table("Cultists", ticker.mode.cult, src, 0)
 
-		if(ticker.mode.vampires.len > 0)
-			dat += "<br><table cellspacing=5><tr><td><B>Vampires</B></td><td></td><td></td></tr>"
-			for(var/datum/mind/vampire in ticker.mode.vampires)
-				var/mob/M = vampire.current
-				if(M)
-					dat += {"<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>
-					<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
-					<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"}
-				else
-					dat += "<tr><td><i>Vampire not found!</i></td></tr>"
+		if(ticker.mode.traitors.len)
+			dat += check_role_table("Traitors", ticker.mode.traitors, src)
 
-		if(ticker.mode.xenos.len > 0)
-			dat += "<br><table cellspacing=5><tr><td><B>Xenos</B></td><td></td><td></td></tr>"
-			for(var/datum/mind/new_xeno in ticker.mode.xenos)
-				var/mob/M = new_xeno.current
-				if(M)
-					dat += {"<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>
-					<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
-					<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"}
-				else
-					dat += "<tr><td><i>Xenos not found!</i></td></tr>"
+		if(ticker.mode.vampires.len)
+			dat += check_role_table("Vampires", ticker.mode.vampires, src)
 
-		if(ticker.mode.traitors.len > 0)
-			dat += "<br><table cellspacing=5><tr><td><B>Traitors</B></td><td></td><td></td></tr>"
-			for(var/datum/mind/traitor in ticker.mode.traitors)
-				var/mob/M = traitor.current
-				if(M)
-					dat += "<tr><td><a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a>[M.client ? "" : " <i>(logged out)</i>"][M.stat == 2 ? " <b><font color=red>(DEAD)</font></b>" : ""]</td>"
-					dat += "<td><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>"
-					dat += "<td><A HREF='?src=\ref[src];traitor=\ref[M]'>Show Objective</A></td></tr>"
-				else
-					dat += "<tr><td><i>Traitor not found!</i></td></tr>"
-			dat += "</table>"
+		if(ticker.mode.xenos.len)
+			dat += check_role_table("Xenos", ticker.mode.xenos, src)
+
+		var/datum/game_mode/mutiny/mutiny = get_mutiny_mode()
+		if(mutiny)
+			dat += mutiny.check_antagonists_ui(src)
 
 		dat += "</body></html>"
 		usr << browse(dat, "window=roundstatus;size=400x500")
 	else
 		alert("The game hasn't started yet!")
+
+/proc/check_role_table(name, list/members, admins, show_objectives=1)
+	var/txt = "<br><table cellspacing=5><tr><td><b>[name]</b></td><td></td></tr>"
+	for(var/datum/mind/M in members)
+		txt += check_role_table_row(M.current, admins, show_objectives)
+	txt += "</table>"
+	return txt
+
+/proc/check_role_table_row(mob/M, admins=src, show_objectives)
+	if (!istype(M))
+		return "<tr><td><i>Not found!</i></td></tr>"
+
+	var/txt = {"
+    <tr>
+      <td>
+        <a href='?src=\ref[admins];adminplayeropts=\ref[M]'>[M.real_name]</a>
+        [M.client ? "" : " <i>(logged out)</i>"]
+        [M.is_dead() ? " <b><font color='red'>(DEAD)</font></b>" : ""]
+      </td>
+      <td>
+        <a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a>
+      </td>
+  "}
+
+	if (show_objectives)
+		txt += {"
+      <td>
+        <a href='?src=\ref[admins];traitor=\ref[M]'>Show Objective</a>
+      </td>
+    "}
+
+	txt += "</tr>"
+	return txt

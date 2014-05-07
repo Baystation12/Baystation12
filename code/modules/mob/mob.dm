@@ -558,6 +558,10 @@ var/list/slot_equipment_priority = list( \
 		else
 			return "\blue [copytext(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>"
 
+/mob/proc/is_dead()
+	return stat == DEAD
+
+
 /*
 /mob/verb/help()
 	set name = "Help"
@@ -1195,4 +1199,3 @@ mob/proc/yank_out_object()
 	if(host)
 		host.ckey = src.ckey
 		host << "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>"
-

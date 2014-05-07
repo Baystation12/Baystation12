@@ -57,6 +57,7 @@
 	dizziness = 0
 	jitteriness = 0
 
+
 	hud_updateflag |= 1 << HEALTH_HUD
 	hud_updateflag |= 1 << STATUS_HUD
 
@@ -83,6 +84,8 @@
 			B.host_brain.real_name = "host brain"
 
 		verbs -= /mob/living/carbon/proc/release_control
+
+	callHook("death", list(src, gibbed))
 
 	//Check for heist mode kill count.
 	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/vox/heist) || istype( ticker.mode,/datum/game_mode/vox/trade) ) )
