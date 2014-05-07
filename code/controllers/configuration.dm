@@ -60,6 +60,7 @@
 	var/respawn = 1
 	var/guest_jobban = 1
 	var/usewhitelist = 0
+	var/mods_are_mentors = 0
 	var/kick_inactive = 0				//force disconnect for inactive players
 	var/load_jobs_from_txt = 0
 	var/ToRban = 0
@@ -251,6 +252,9 @@
 
 				if ("log_runtime")
 					config.log_runtime = 1
+
+				if ("mentors")
+					config.mods_are_mentors = 1
 
 				if("allow_admin_ooccolor")
 					config.allow_admin_ooccolor = 1
