@@ -26,6 +26,7 @@
 			icon_state = "magboots1"
 			user << "You enable the mag-pulse traction system."
 		user.update_inv_shoes()	//so our mob-overlays update
+		user.update_gravity(user.mob_has_gravity())
 
 	examine()
 		set src in view()
@@ -34,3 +35,6 @@
 		if(src.flags&NOSLIP)
 			state = "enabled"
 		usr << "Its mag-pulse traction system appears to be [state]."
+
+/obj/item/clothing/shoes/magboots/negates_gravity()
+	return flags & NOSLIP

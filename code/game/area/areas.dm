@@ -409,3 +409,16 @@
 
 	M << "Gravity!"
 
+/proc/has_gravity(atom/AT, turf/T)
+	if(!T)
+		T = get_turf(AT)
+	var/area/A = get_area(T)
+	if(istype(T, /turf/space)) // Turf never has gravity
+		return 0
+	else if(A && A.has_gravity) // Areas which always has gravity
+		return 1
+	else
+		// There's a gravity generator on our z level
+		if(T && gravity_generators["[T.z]"] && length(gravity_generators["[T.z]"]))
+			return 1
+	return 0

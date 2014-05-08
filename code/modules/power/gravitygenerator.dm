@@ -1,3 +1,4 @@
+
 //
 // Gravity Generator
 //
@@ -30,6 +31,9 @@ var/const/GRAV_NEEDS_WRENCH = 3
 /obj/machinery/gravity_generator/ex_act(severity)
 	if(severity == 1) // Very sturdy.
 		set_broken()
+
+/obj/machinery/gravity_generator/blob_act()
+	set_broken()
 
 /obj/machinery/gravity_generator/meteorhit()
 	return
@@ -138,10 +142,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 		var/obj/machinery/gravity_generator/part/part = new(T)
 		if(count == 5) // Middle
 			middle = part
-		if(count <= 3) // Their sprite is the top part of the generator
-			part.density = 0
-			part.layer = MOB_LAYER + 0.1
-		part.sprite_number = count
+		part.sprite_number = count;
 		part.main_part = src
 		parts += part
 		part.update_icon()
@@ -289,24 +290,15 @@ var/const/GRAV_NEEDS_WRENCH = 3
 			alert = 1
 			investigate_log("was brought online and is now producing gravity for this level.", "gravity")
 			message_admins("The gravity generator was brought online. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>[area.name]</a>)")
-			for(var/area/A in world)
-				if (A.z != 1) continue
-				A.gravitychange(1,A)
 	else
 		if(gravity_in_level() == 1)
 			alert = 1
 			investigate_log("was brought offline and there is now no gravity for this level.", "gravity")
 			message_admins("The gravity generator was brought offline with no backup generator. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>[area.name]</a>)")
-			for(var/area/A in world)
-				if (A.z != 1) continue
-				A.gravitychange(0,A)
-
 
 	update_icon()
-	update_list()
+	update_list(alert)
 	src.updateUsrDialog()
-	if(alert)
-		shake_everyone()
 
 // Charge/Discharge and turn on/off gravity when you reach 0/100 percent.
 // Also emit radiation and handle the overlays.
@@ -325,7 +317,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 				charge_count -= 2
 
 			if(charge_count % 4 == 0 && prob(75)) // Let them know it is charging/discharging.
-				playsound(src.loc, 'sound/effects/EMPulse.ogg', 75, 1)
+				playsound(src.loc, 'sound/effects/EMPulse.ogg', 100, 1)
 
 			updateDialog()
 			if(prob(25)) // To help stop "Your clothes feel warm" spam.
@@ -357,15 +349,19 @@ var/const/GRAV_NEEDS_WRENCH = 3
 		L.apply_effect(20, IRRADIATE)
 
 // Shake everyone on the z level to let them know that gravity was enagaged/disenagaged.
-/obj/machinery/gravity_generator/main/proc/shake_everyone()
+// Update their gravity floatness
+/obj/machinery/gravity_generator/main/proc/check_everyone(var/alert)
+	if(!ticker)
+		return
 	var/turf/our_turf = get_turf(src)
-	for(var/mob/M in player_list)
+	for(var/mob/M in mob_list)
 		var/turf/their_turf = get_turf(M)
-		if(M.client && their_turf.z == our_turf.z)
+		M.update_gravity(M.mob_has_gravity(their_turf))
+		if(alert && M.client && their_turf.z == our_turf.z)
 			shake_camera(M, 15, 1)
-			M.playsound_local(our_turf, 'sound/machines/signal.ogg', 100)
+			M.playsound_local(our_turf, 'sound/effects/alert.ogg', 100, 1, 0.5)
 
-/obj/machinery/gravity_generator/main/proc/gravity_in_level()
+/obj/machinery/gravity_generator/main/proc/gravity_in_level(var/alert)
 	var/turf/T = get_turf(src)
 	if(!T)
 		return 0
@@ -373,7 +369,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 		return length(gravity_generators["[T.z]"])
 	return 0
 
-/obj/machinery/gravity_generator/main/proc/update_list()
+/obj/machinery/gravity_generator/main/proc/update_list(var/alert)
 	var/turf/T = get_turf(src.loc)
 	if(T)
 		if(!gravity_generators["[T.z]"])
@@ -382,6 +378,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 			gravity_generators["[T.z]"] |= src
 		else
 			gravity_generators["[T.z]"] -= src
+	check_everyone(alert)
 
 // Misc
 
