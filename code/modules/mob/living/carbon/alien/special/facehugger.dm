@@ -124,10 +124,10 @@ var/const/MAX_ACTIVE_TIME = 400
 
 	var/list/choices = list()
 	for(var/mob/living/L in view(1,src))
-		if(L.stat != 2 && src.Adjacent(L))
+		if(L.stat != 2 && !istype(L,/mob/living/carbon/alien) && src.Adjacent(L))
 			choices += L
 
-	var/mob/living/M = input(src,"Who do you wish to infest?") in null|choices
+	var/mob/living/M = pick(choices)
 
 	if(!M || !src) return
 
