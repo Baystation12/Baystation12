@@ -32,12 +32,17 @@
 			user:update_inv_r_hand()
 	else if(istype(W, /obj/item/weapon/photo))
 		amount++
+		if(screen == 2)
+			screen = 1
+		user << "<span class='notice'>You add [(W.name == "photo") ? "the photo" : W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
 		user.drop_from_inventory(W)
 		W.loc = src
 		if(istype(user,/mob/living/carbon/human))
 			user:update_inv_l_hand()
 			user:update_inv_r_hand()
-	else// if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon) || istype(W, /obj/item/weapon/stamp))
+	else
+		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
+			usr << browse("", "window=[name]") //Closes the dialog
 		P = src[page]
 		P.attackby(W, user)
 	update_icon()
@@ -48,7 +53,7 @@
 /obj/item/weapon/paper_bundle/examine()
 	set src in oview(1)
 
-	..()
+	usr << desc
 	if(in_range(usr, src))
 		src.attack_self(usr)
 	else
@@ -94,17 +99,21 @@
 
 /obj/item/weapon/paper_bundle/Topic(href, href_list)
 	..()
-	if(src in usr.contents)
+	if((src in usr.contents) || (src.loc in usr.contents))
 		usr.set_machine(src)
 		if(href_list["next_page"])
 			if(page == amount)
 				screen = 2
 			else if(page == 1)
 				screen = 1
+			else if(page == amount+1)
+				return
 			page++
 			playsound(src.loc, "pageturn", 50, 1)
 		if(href_list["prev_page"])
-			if(page == 2)
+			if(page == 1)
+				return
+			else if(page == 2)
 				screen = 0
 			else if(page == amount+1)
 				screen = 1
@@ -151,10 +160,12 @@
 				usr:update_inv_l_hand()
 				usr:update_inv_r_hand()
 			amount--
+			update_icon()
 	else
 		usr << "<span class='notice'>You need to hold it in hands!</span>"
-	if (istype(src.loc, /mob))
+	if (istype(src.loc, /mob) ||istype(src.loc.loc, /mob))
 		src.attack_self(src.loc)
+		updateUsrDialog()
 
 
 
@@ -190,7 +201,9 @@
 	var/obj/item/weapon/paper/P = src[1]
 	icon_state = P.icon_state
 	overlays = P.overlays
+	underlays = 0
 	var/i = 0
+	var/photo
 	for(var/obj/O in src)
 		var/image/img = image('icons/obj/bureaucracy.dmi')
 		if(istype(O, /obj/item/weapon/paper))
@@ -203,6 +216,13 @@
 			i++
 		else if(istype(O, /obj/item/weapon/photo))
 			img.icon_state = "photo"
+			photo = 1
 			overlays += img
+	if(i>1)
+		desc =  "[i] papers clipped to each other."
+	else
+		desc = "A single sheet of paper."
+	if(photo)
+		desc += "\nThere is a photo attached to it."
 	overlays += image('icons/obj/bureaucracy.dmi', "clip")
 	return
