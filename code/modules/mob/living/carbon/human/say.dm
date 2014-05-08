@@ -14,6 +14,9 @@
 	if(stat == 2)
 		return say_dead(message)
 
+	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))  //Todo:  Add this to speech_problem_flag checks.
+		return
+
 	if(copytext(message,1,2) == "*")
 		return emote(copytext(message,2))
 
