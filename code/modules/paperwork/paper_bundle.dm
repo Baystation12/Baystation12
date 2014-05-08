@@ -60,21 +60,27 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/human_user = user
 		var/dat
+		var/obj/item/weapon/W = src[page]
 		switch(screen)
 			if(0)
-				dat+= "<DIV STYLE='float:right;'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
+				dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'></DIV>"
+				dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/weapon/paper)) ? "paper" : "photo"]</A></DIV>"
+				dat+= "<DIV STYLE='float:left; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
 			if(1)
-				dat+= "<DIV STYLE='float:left;'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
-				dat+= "<DIV STYLE='float:right;'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
+				dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
+				dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/weapon/paper)) ? "paper" : "photo"]</A></DIV>"
+				dat+= "<DIV STYLE='float:left; text-align:right; width:33.33333%'><A href='?src=\ref[src];next_page=1'>Next Page</A></DIV><BR><HR>"
 			if(2)
-				dat+= "<DIV STYLE='float:left;'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV><BR><HR>"
+				dat+= "<DIV STYLE='float:left; text-align:left; width:33.33333%'><A href='?src=\ref[src];prev_page=1'>Previous Page</A></DIV>"
+				dat+= "<DIV STYLE='float:left; text-align:center; width:33.33333%'><A href='?src=\ref[src];remove=1'>Remove [(istype(W, /obj/item/weapon/paper)) ? "paper" : "photo"]</A></DIV><BR><HR>"
+				dat+= "<DIV STYLE='float;left; text-align:right; with:33.33333%'></DIV>"
 		if(istype(src[page], /obj/item/weapon/paper))
-			var/obj/item/weapon/paper/P = src[page]
+			var/obj/item/weapon/paper/P = W
 			dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>"
 			human_user << browse(dat, "window=[name]")
 			P.add_fingerprint(usr)
 		else if(istype(src[page], /obj/item/weapon/photo))
-			var/obj/item/weapon/photo/P = src[page]
+			var/obj/item/weapon/photo/P = W
 			human_user << browse_rsc(P.img, "tmp_photo.png")
 			human_user << browse(dat + "<html><head><title>[P.name]</title></head>" \
 			+ "<body style='overflow:hidden'>" \
@@ -104,6 +110,47 @@
 				screen = 1
 			page--
 			playsound(src.loc, "pageturn", 50, 1)
+		if(href_list["remove"])
+			var/obj/item/weapon/W = src[page]
+			W.loc = usr.loc
+			if(istype(usr,/mob/living/carbon))
+				//Place the item in the user's hand if possible
+				if(!usr.r_hand)
+					W.loc = usr
+					usr.r_hand = W
+					W.layer = 20
+				else if(!usr.l_hand)
+					W.loc = usr
+					usr.l_hand = W
+					W.layer = 20
+			usr << "<span class='notice'>You remove the [W.name] from the bundle.</span>"
+
+			if(amount == 1)
+				var/obj/item/weapon/paper/P = src[1]
+				P.loc = usr.loc
+				if (usr.r_hand == src)
+					usr.drop_from_inventory(src)
+					P.loc = usr
+					usr.r_hand = P
+					P.layer = 20
+				else if (usr.l_hand == src)
+					usr.drop_from_inventory(src)
+					P.loc = usr
+					usr.l_hand = P
+					P.layer = 20
+				if(istype(usr,/mob/living/carbon/human))
+					usr:update_inv_l_hand()
+					usr:update_inv_r_hand()
+				del(src)
+			else if(page == amount)
+				screen = 2
+			else if(page == amount+1)
+				page--
+
+			if(istype(usr,/mob/living/carbon/human))
+				usr:update_inv_l_hand()
+				usr:update_inv_r_hand()
+			amount--
 	else
 		usr << "<span class='notice'>You need to hold it in hands!</span>"
 	if (istype(src.loc, /mob))
