@@ -317,7 +317,43 @@ its easier to just keep the beam vertical.
 		var/full_print = md5(H.dna.uni_identity)
 
 		// Add the fingerprints
-		fingerprints[full_print] = full_print
+		// 
+		if(fingerprints[full_print])
+			switch(stringpercent(fingerprints[full_print]))		//tells us how many stars are in the current prints.
+
+				if(28 to 32)
+					if(prob(1))
+						fingerprints[full_print] = full_print 		// You rolled a one buddy.
+					else
+						fingerprints[full_print] = stars(full_print, rand(0,40)) // 24 to 32
+						
+				if(24 to 27)
+					if(prob(3))
+						fingerprints[full_print] = full_print     	//Sucks to be you.
+					else
+						fingerprints[full_print] = stars(full_print, rand(15, 55)) // 20 to 29
+
+				if(20 to 23)
+					if(prob(5))
+						fingerprints[full_print] = full_print		//Had a good run didn't ya.
+					else
+						fingerprints[full_print] = stars(full_print, rand(30, 70)) // 15 to 25
+
+				if(16 to 19)
+					if(prob(5))
+						fingerprints[full_print] = full_print		//Welp.
+					else
+						fingerprints[full_print]  = stars(full_print, rand(40, 100))  // 0 to 21
+
+				if(0 to 15)
+					if(prob(5))
+						fingerprints[full_print] = stars(full_print, rand(0,50)) 	// small chance you can smudge.
+					else
+						fingerprints[full_print] = full_print
+
+		else
+			fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial touch, not leaving much evidence the first time.
+		
 
 		return 1
 	else

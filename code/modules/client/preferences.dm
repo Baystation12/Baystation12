@@ -424,7 +424,7 @@ datum/preferences
 
 		var/HTML = "<body>"
 		HTML += "<tt><center>"
-		HTML += "<b>Choose occupation chances</b><br>Unavailable occupations are in red.<br><br>"
+		HTML += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br><br>"
 		HTML += "<center><a href='?_src_=prefs;preference=job;task=close'>\[Done\]</a></center><br>" // Easier to press up here.
 		HTML += "<table width='100%' cellpadding='1' cellspacing='0'><tr><td width='20%'>" // Table within a table for alignment, also allows you to easily add more colomns.
 		HTML += "<table width='100%' cellpadding='1' cellspacing='0'>"
@@ -449,11 +449,11 @@ datum/preferences
 			var/rank = job.title
 			lastJob = job
 			if(jobban_isbanned(user, rank))
-				HTML += "<font color=red>[rank]</font></td><td><font color=red><b> \[BANNED]</b></font></td></tr>"
+				HTML += "<del>[rank]</del></td><td><b> \[BANNED]</b></td></tr>"
 				continue
 			if(!job.player_old_enough(user.client))
 				var/available_in_days = job.available_in_days(user.client)
-				HTML += "<font color=red>[rank]</font></td><td><font color=red> \[IN [(available_in_days)] DAYS]</font></td></tr>"
+				HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
 				continue
 			if((job_civilian_low & ASSISTANT) && (rank != "Assistant"))
 				HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
