@@ -1,6 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
+LAST_COMPILE_VERSION: 504.1234
+WINDOW: code\modules\customitems\item_defines.dm;icons\obj\custom_items.dmi;icons\mob\eyes.dmi;icons\obj\eyes.dmi;icons\obj\clothing\glasses.dmi
+DIR: code code\modules code\modules\customitems icons icons\obj icons\obj\clothing 
+FILE: code\modules\customitems\item_defines.dm
+LAST_COMPILE_TIME: 1399632266
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
