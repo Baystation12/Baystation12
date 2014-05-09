@@ -21,6 +21,13 @@
 	var/created_window = /obj/structure/window/basic
 	var/full_window = /obj/structure/window/full/basic
 
+/obj/item/stack/sheet/glass/cyborg
+	name = "glass"
+	desc = "HOLY SHEET! That is a lot of glass."
+	singular_name = "glass sheet"
+	icon_state = "sheet-glass"
+	g_amt = 0
+	created_window = /obj/structure/window/basic
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
 	construct_window(user)

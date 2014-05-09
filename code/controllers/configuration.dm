@@ -61,8 +61,13 @@
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 
+
 	var/assistantlimit = 0 //enables assistant limiting
 	var/assistantratio = 2 //how many assistants to security members
+
+	var/max_maint_drones = 5				//This many drones can spawn,
+	var/allow_drone_spawn = 1				//assuming the admin allow them to.
+	var/drone_build_time = 1200				//A drone will become available every X ticks since last drone spawn. Default is 2 minutes.
 
 	var/usealienwhitelist = 0
 	var/limitalienplayers = 0
@@ -462,6 +467,15 @@
 
 				if("media_base_url")
 					media_base_url = value
+
+				if("allow_drone_spawn")
+					config.allow_drone_spawn = text2num(value)
+
+				if("drone_build_time")
+					config.drone_build_time = text2num(value)
+
+				if("max_maint_drones")
+					config.max_maint_drones = text2num(value)
 
 				else
 					diary << "Unknown setting in configuration: '[name]'"

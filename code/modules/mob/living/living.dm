@@ -458,7 +458,9 @@
 			M.drop_from_inventory(H)
 			M << "[H] wriggles out of your grip!"
 			src << "You wriggle out of [M]'s grip!"
-
+		else if(istype(H.loc,/obj/item))
+			src << "You struggle free of [H.loc]."
+			H.loc = get_turf(H)
 		return
 
 	//Resisting control by an alien mind.

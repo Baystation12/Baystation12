@@ -57,7 +57,7 @@
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
 	var/datum/effect/effect/system/spark_spread/spark_system//So they can initialize sparks whenever/N
 	var/jeton = 0
-
+	var/has_power = 1
 	var/killswitch = 0
 	var/killswitch_time = 60
 	var/weapon_lock = 0
@@ -100,6 +100,12 @@
 		hands.icon_state = "standard"
 		icon_state = "secborg"
 		modtype = "Security"
+	else if(istype(src,/mob/living/silicon/robot/drone))
+		laws = new /datum/ai_laws/drone()
+		connected_ai = select_active_ai_with_fewest_borgs()
+		if(connected_ai)
+			connected_ai.connected_robots += src
+			lawsync()
 	else
 		if(mmi.alien || alien)
 			laws = new /datum/ai_laws/alienmov()
@@ -152,22 +158,10 @@
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 
-
-
-
-	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
-	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
-
-
-
-
-	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
+	if(istype(src,/mob/living/silicon/robot/drone))
+		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
+	else
+		playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
 // setup the PDA and its name
 /mob/living/silicon/robot/proc/setup_PDA()
