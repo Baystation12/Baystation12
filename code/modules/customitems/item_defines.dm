@@ -976,3 +976,43 @@
 	item_state = "sakura_hokkaido_kimono"
 	item_color = "sakura_hokkaido_kimono"
 
+
+/obj/item/clothing/glasses/sunglasses/sechud/syrus_seto  //Syrus Seto's retractable HUDshades.
+	name = "retractable HUDsunglasses"
+	desc = "Bioaugmentation implants featuring retractable HUDsunglasses, capable of accessing station security records."
+	item_state = "syrushud_open"
+	icon_state = "syrushud_open"
+	var/up = 0
+
+	verb/toggle()
+		set name = "Toggle Lens"
+		set category = "Object"
+		set src in usr
+
+		if(usr.canmove && !usr.stat && !usr.restrained())
+			if(src.up)
+				src.up = !src.up
+				src.item_state = "syrushud_open"
+				src.icon_state = "syrushud_open"
+				src.flags &= ~HEADCOVERSEYES
+				flags_inv &= ~HIDEEYES
+				usr << "The lens slide away from your eyes."
+					//user.visible_message("<span class='notice'>[user]'s [src] cleanly slide back into their housing, no longer covering their eyes.</span>")
+
+			else
+				src.up = !src.up
+				src.item_state = "syrushud"
+				src.icon_state = "syrudhud"
+				src.flags |= GLASSESCOVERSEYES
+				flags_inv |= HIDEEYES
+				usr << "With a quiet click, your lens snap into place."
+					//user.visible_message("<span class='notice'>With a quiet click,[user]'s [src] snap into place, covering their eyes!</span>")
+					/*If someone could be so kind as to make a way for these user.visible message operations to work properly, please do so.
+					Every variation that I've tried results in an 'undefined var' error.*/
+
+
+
+				return
+
+
+
