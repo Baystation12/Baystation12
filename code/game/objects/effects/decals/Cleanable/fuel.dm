@@ -1,5 +1,5 @@
 obj/effect/decal/cleanable/liquid_fuel
-	//Liquid fuel is used for things that used to rely on volatile fuels or plasma being contained to a couple tiles.
+	//Liquid fuel is used for things that used to rely on volatile fuels or phoron being contained to a couple tiles.
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "fuel"
 	layer = TURF_LAYER+0.2
@@ -21,7 +21,7 @@ obj/effect/decal/cleanable/liquid_fuel
 
 	proc/Spread()
 		//Allows liquid fuels to sometimes flow into other tiles.
-		if(amount < 0.5) return
+		if(amount < 5.0) return
 		var/turf/simulated/S = loc
 		if(!istype(S)) return
 		for(var/d in cardinal)

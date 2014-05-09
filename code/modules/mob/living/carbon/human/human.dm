@@ -12,39 +12,36 @@
 	real_name = "Test Dummy"
 	status_flags = GODMODE|CANPUSH
 
-/mob/living/carbon/human/skrell/New()
+/mob/living/carbon/human/skrell/New(var/new_loc)
 	h_style = "Skrell Male Tentacles"
-	set_species("Skrell")
-	..()
+	..(new_loc, "Skrell")
 
-/mob/living/carbon/human/tajaran/New()
+/mob/living/carbon/human/tajaran/New(var/new_loc)
 	h_style = "Tajaran Ears"
-	set_species("Tajaran")
-	..()
+	..(new_loc, "Tajaran")
 
-/mob/living/carbon/human/unathi/New()
+/mob/living/carbon/human/unathi/New(var/new_loc)
 	h_style = "Unathi Horns"
-	set_species("Unathi")
-	..()
+	..(new_loc, "Unathi")
 
-/mob/living/carbon/human/vox/New()
+/mob/living/carbon/human/vox/New(var/new_loc)
 	h_style = "Short Vox Quills"
-	set_species("Vox")
-	..()
+	..(new_loc, "Vox")
 
-/mob/living/carbon/human/diona/New()
-	species = new /datum/species/diona(src)
-	..()
+/mob/living/carbon/human/diona/New(var/new_loc)
+	..(new_loc, "Diona")
 
-/mob/living/carbon/human/machine/New()
+/mob/living/carbon/human/machine/New(var/new_loc)
 	h_style = "blue IPC screen"
-	set_species("Machine")
-	..()
+	..(new_loc, "Machine")
 
-/mob/living/carbon/human/New()
+/mob/living/carbon/human/New(var/new_loc, var/new_species = null)
 
 	if(!species)
-		set_species()
+		if(new_species)
+			set_species(new_species)
+		else
+			set_species()
 
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
@@ -71,7 +68,6 @@
 		dna.real_name = real_name
 
 	prev_gender = gender // Debug for plural genders
-	make_organs()
 	make_blood()
 
 /mob/living/carbon/human/Bump(atom/movable/AM as mob|obj, yes)
@@ -1206,7 +1202,7 @@
 	else
 		usr << "\blue [self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)]."
 
-/mob/living/carbon/human/proc/set_species(var/new_species)
+/mob/living/carbon/human/proc/set_species(var/new_species, var/force_organs)
 
 	if(!dna)
 		if(!new_species)
@@ -1224,6 +1220,9 @@
 		remove_language(species.language)
 
 	species = all_species[new_species]
+
+	if(force_organs || !organs || !organs.len)
+		species.create_organs(src)
 
 	if(species.language)
 		add_language(species.language)

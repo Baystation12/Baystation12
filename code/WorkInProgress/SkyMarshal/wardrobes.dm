@@ -340,7 +340,7 @@
 		var/obj/item/weapon/storage/backpack/BPK = new /obj/item/weapon/storage/backpack(src)
 		new /obj/item/weapon/storage/box(BPK)
 		new /obj/item/weapon/pen(src)
-		new /obj/item/device/pda/toxins(src)
+		new /obj/item/device/pda/science(src)
 		new /obj/item/weapon/tank/oxygen(src)
 		new /obj/item/clothing/mask/gas(src)
 		new /obj/item/clothing/suit/storage/labcoat/science(src)
@@ -360,7 +360,7 @@
 		new /obj/item/device/radio/headset/headset_medsci(src)
 		new /obj/item/clothing/under/rank/chemist(src)
 		new /obj/item/clothing/shoes/white(src)
-		new /obj/item/device/pda/toxins(src)
+		new /obj/item/device/pda/science(src)
 		new /obj/item/clothing/suit/storage/labcoat/chemist(src)
 
 /obj/item/wardrobe/hos

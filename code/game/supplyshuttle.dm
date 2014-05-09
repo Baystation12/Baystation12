@@ -134,7 +134,7 @@ var/list/mechtoys = list(
 	var/points_per_process = 1
 	var/points_per_slip = 2
 	var/points_per_crate = 5
-	var/plasma_per_point = 2 // 2 plasma for 1 point
+	var/phoron_per_point = 2 // 2 phoron for 1 point
 	//control
 	var/ordernum
 	var/list/shoppinglist = list()
@@ -234,7 +234,7 @@ var/list/mechtoys = list(
 		var/area/shuttle = locate(shuttle_at)
 		if(!shuttle)	return
 
-		var/plasma_count = 0
+		var/phoron_count = 0
 
 		for(var/atom/movable/MA in shuttle)
 			if(MA.anchored)	continue
@@ -254,14 +254,14 @@ var/list/mechtoys = list(
 							find_slip = 0
 						continue
 
-					// Sell plasma
-					if(istype(A, /obj/item/stack/sheet/mineral/plasma))
-						var/obj/item/stack/sheet/mineral/plasma/P = A
-						plasma_count += P.amount
+					// Sell phoron
+					if(istype(A, /obj/item/stack/sheet/mineral/phoron))
+						var/obj/item/stack/sheet/mineral/phoron/P = A
+						phoron_count += P.amount
 			del(MA)
 
-		if(plasma_count)
-			points += Floor(plasma_count / plasma_per_point)
+		if(phoron_count)
+			points += Floor(phoron_count / phoron_per_point)
 
 	//Buyin
 	proc/buy()

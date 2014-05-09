@@ -14,7 +14,7 @@ obj/machinery/atmospherics/trinary/filter
 /*
 Filter types:
 -1: Nothing
- 0: Carbon Molecules: Plasma Toxin, Oxygen Agent B
+ 0: Phoron: Phoron, Oxygen Agent B
  1: Oxygen: Oxygen ONLY
  2: Nitrogen: Nitrogen ONLY
  3: Carbon Dioxide: Carbon Dioxide ONLY
@@ -84,8 +84,8 @@ Filter types:
 
 			switch(filter_type)
 				if(0) //removing hydrocarbons
-					filtered_out.toxins = removed.toxins
-					removed.toxins = 0
+					filtered_out.phoron = removed.phoron
+					removed.phoron = 0
 
 					if(removed.trace_gases.len>0)
 						for(var/datum/gas/trace_gas in removed.trace_gases)
@@ -170,7 +170,7 @@ obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob) // -- TLE
 	var/current_filter_type
 	switch(filter_type)
 		if(0)
-			current_filter_type = "Carbon Molecules"
+			current_filter_type = "Phoron"
 		if(1)
 			current_filter_type = "Oxygen"
 		if(2)
@@ -188,7 +188,7 @@ obj/machinery/atmospherics/trinary/filter/attack_hand(user as mob) // -- TLE
 			<b>Power: </b><a href='?src=\ref[src];power=1'>[on?"On":"Off"]</a><br>
 			<b>Filtering: </b>[current_filter_type]<br><HR>
 			<h4>Set Filter Type:</h4>
-			<A href='?src=\ref[src];filterset=0'>Carbon Molecules</A><BR>
+			<A href='?src=\ref[src];filterset=0'>Phoron</A><BR>
 			<A href='?src=\ref[src];filterset=1'>Oxygen</A><BR>
 			<A href='?src=\ref[src];filterset=2'>Nitrogen</A><BR>
 			<A href='?src=\ref[src];filterset=3'>Carbon Dioxide</A><BR>
@@ -234,4 +234,45 @@ obj/machinery/atmospherics/trinary/filter/Topic(href, href_list) // -- TLE
 */
 	return
 
+obj/machinery/atmospherics/trinary/filter/m_filter
+	icon = 'icons/obj/atmospherics/m_filter.dmi'
+	icon_state = "intact_off"
 
+	dir = SOUTH
+	initialize_directions = SOUTH|NORTH|EAST
+
+obj/machinery/atmospherics/trinary/filter/m_filter/New()
+	..()
+	switch(dir)
+		if(NORTH)
+			initialize_directions = WEST|NORTH|SOUTH
+		if(SOUTH)
+			initialize_directions = SOUTH|EAST|NORTH
+		if(EAST)
+			initialize_directions = EAST|WEST|NORTH
+		if(WEST)
+			initialize_directions = WEST|SOUTH|EAST
+
+obj/machinery/atmospherics/trinary/filter/m_filter/initialize()
+	if(node1 && node2 && node3) return
+
+	var/node1_connect = turn(dir, -180)
+	var/node2_connect = turn(dir, 90)
+	var/node3_connect = dir
+
+	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
+		if(target.initialize_directions & get_dir(target,src))
+			node1 = target
+			break
+
+	for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
+		if(target.initialize_directions & get_dir(target,src))
+			node2 = target
+			break
+
+	for(var/obj/machinery/atmospherics/target in get_step(src,node3_connect))
+		if(target.initialize_directions & get_dir(target,src))
+			node3 = target
+			break
+
+	update_icon()

@@ -103,7 +103,7 @@
 	name = "generic signaler cartridge"
 	desc = "A data cartridge with an integrated radio signaler module."
 
-/obj/item/weapon/cartridge/signal/toxins
+/obj/item/weapon/cartridge/signal/science
 	name = "Signal Ace 2"
 	desc = "Complete with integrated radio signaler!"
 	icon_state = "cart-tox"
