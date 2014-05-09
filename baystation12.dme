@@ -1109,6 +1109,7 @@
 #include "code\modules\projectiles\targeting.dm"
 #include "code\modules\projectiles\ammunition\boxes.dm"
 #include "code\modules\projectiles\ammunition\bullets.dm"
+#include "code\modules\projectiles\guns\alien.dm"
 #include "code\modules\projectiles\guns\energy.dm"
 #include "code\modules\projectiles\guns\projectile.dm"
 #include "code\modules\projectiles\guns\energy\laser.dm"
