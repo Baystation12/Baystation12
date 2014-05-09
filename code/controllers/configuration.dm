@@ -70,6 +70,10 @@
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
+	var/max_maint_drones = 5				//This many drones can spawn,
+	var/allow_drone_spawn = 1				//assuming the admin allow them to.
+	var/drone_build_time = 1200				//A drone will become available every X ticks since last drone spawn. Default is 2 minutes.
+
 	var/disable_player_mice = 0
 	var/uneducated_mice = 0 //Set to 1 to prevent newly-spawned mice from understanding human speech
 
@@ -486,6 +490,15 @@
 
 				if("req_cult_ghostwriter")
 					config.cult_ghostwriter_req_cultists = text2num(value)
+
+				if("allow_drone_spawn")
+					config.allow_drone_spawn = text2num(value)
+
+				if("drone_build_time")
+					config.drone_build_time = text2num(value)
+
+				if("max_maint_drones")
+					config.max_maint_drones = text2num(value)
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
