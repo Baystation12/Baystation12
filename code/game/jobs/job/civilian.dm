@@ -93,7 +93,7 @@
 		H.equip_to_slot_or_del(new /obj/item/device/pda/botanist(H), slot_belt)
 		if(H.backbag == 3)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_hyd(H), slot_back)
-		if(H.backbag == 1)
+		else if(H.backbag == 1)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
