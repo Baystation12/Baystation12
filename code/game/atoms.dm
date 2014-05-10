@@ -100,8 +100,10 @@
 /atom/proc/emp_act(var/severity)
 	return
 
-/atom/proc/bullet_act(var/obj/item/projectile/Proj)
-	return 0
+
+/atom/proc/bullet_act(obj/item/projectile/P, def_zone)
+	P.on_hit(src, 0, def_zone)
+	. = 0
 
 /atom/proc/in_contents_of(container)//can take class or object instance as argument
 	if(ispath(container))
@@ -317,7 +319,7 @@ its easier to just keep the beam vertical.
 		var/full_print = md5(H.dna.uni_identity)
 
 		// Add the fingerprints
-		// 
+		//
 		if(fingerprints[full_print])
 			switch(stringpercent(fingerprints[full_print]))		//tells us how many stars are in the current prints.
 
@@ -326,7 +328,7 @@ its easier to just keep the beam vertical.
 						fingerprints[full_print] = full_print 		// You rolled a one buddy.
 					else
 						fingerprints[full_print] = stars(full_print, rand(0,40)) // 24 to 32
-						
+
 				if(24 to 27)
 					if(prob(3))
 						fingerprints[full_print] = full_print     	//Sucks to be you.
@@ -353,7 +355,7 @@ its easier to just keep the beam vertical.
 
 		else
 			fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial touch, not leaving much evidence the first time.
-		
+
 
 		return 1
 	else
