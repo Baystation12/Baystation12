@@ -20,21 +20,21 @@
 	..()
 	processing_objects.Add(src)
 
-/obj/item/weapon/holder/Destroy()
-	//Hopefully this will stop the icon from remaining on human mobs.
-	if(istype(loc,/mob/living))
-		var/mob/living/A = src.loc
-		src.loc = null
-		A.update_icons()
+/obj/item/weapon/holder/Del()
 	processing_objects.Remove(src)
 	..()
 
 /obj/item/weapon/holder/process()
-	if(!loc) del(src)
 
 	if(istype(loc,/turf) || !(contents.len))
+
 		for(var/mob/M in contents)
-			M.loc = get_turf(src)
+
+			var/atom/movable/mob_container
+			mob_container = M
+			mob_container.forceMove(get_turf(src))
+			M.reset_view()
+
 		del(src)
 
 /obj/item/weapon/holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -199,8 +199,9 @@
 		return
 
 	src.split()
-	src.visible_message("\red [src] begins to shift and quiver, and erupts in a shower of shed bark and twigs!","\red You begin to shift and quiver, then erupt in a shower of shed bark and twigs, attaining your adult form!")
-	var/mob/living/carbon/human/diona/adult = new(loc)
+	src.visible_message("\red [src] begins to shift and quiver, and erupts in a shower of shed bark as it splits into a tangle of nearly a dozen new dionaea.","\red You begin to shift and quiver, feeling your awareness splinter. All at once, we consume our stored nutrients to surge with growth, splitting into a tangle of at least a dozen new dionaea. We have attained our gestalt form.")
+
+	var/mob/living/carbon/human/diona/adult = new(get_turf(src.loc))
 	adult.set_species("Diona")
 
 	if(istype(loc,/obj/item/weapon/holder/diona))

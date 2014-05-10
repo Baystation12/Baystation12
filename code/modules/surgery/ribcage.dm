@@ -181,6 +181,7 @@
 
 		for(var/mob/living/carbon/alien/embryo/A in target)
 			A.loc = A.loc.loc
+			A.death()
 
 
 //////////////////////////////////////////////////////////////////

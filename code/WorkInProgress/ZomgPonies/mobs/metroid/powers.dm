@@ -14,7 +14,7 @@
 		if(C!=src && !istype(C,/mob/living/carbon/slime) && Adjacent(C))
 			choices += C
 
-	var/mob/living/carbon/M = input(src,"Who do you wish to feed on?") in null|choices
+	var/mob/living/carbon/M = pick(choices)
 	if(!M) return
 	if(Adjacent(M))
 

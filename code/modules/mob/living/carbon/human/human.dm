@@ -1333,9 +1333,6 @@
 	else
 		see_invisible = SEE_INVISIBLE_LIVING
 
-	if(species.name=="Slime People")
-		dna.mutantrace = "slime"
-
 	if(species.default_mutations.len>0 || species.default_blocks.len>0)
 		do_deferred_species_setup=1
 

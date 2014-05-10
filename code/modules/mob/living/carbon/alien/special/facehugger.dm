@@ -124,10 +124,10 @@ var/const/MAX_ACTIVE_TIME = 400
 
 	var/list/choices = list()
 	for(var/mob/living/L in view(1,src))
-		if(L.stat != 2 && src.Adjacent(L))
+		if(L.stat != 2 && !istype(L,/mob/living/carbon/alien) && src.Adjacent(L))
 			choices += L
 
-	var/mob/living/M = input(src,"Who do you wish to infest?") in null|choices
+	var/mob/living/M = pick(choices)
 
 	if(!M || !src) return
 
@@ -236,3 +236,83 @@ var/const/MAX_ACTIVE_TIME = 400
 /mob/living/carbon/alien/facehugger/death(gibbed)
 	icon_state = icon_dead
 	return ..(gibbed)
+
+/mob/living/carbon/alien/facehugger/Life()
+	..()
+	//Status updates, death etc.
+	handle_regular_status_updates()
+
+/mob/living/carbon/alien/facehugger/proc/handle_regular_status_updates()
+	updatehealth()
+
+	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP
+		blinded = 1
+		silent = 0
+	else				//ALIVE. LIGHTS ARE ON
+		if(health < -5 || brain_op_stage == 4.0)
+			death()
+			blinded = 1
+			silent = 0
+			return 1
+
+		//UNCONSCIOUS. NO-ONE IS HOME
+		if( (getOxyLoss() > 5) || (0 > health) )
+			//if( health <= 20 && prob(1) )
+			//	spawn(0)
+			//		emote("gasp")
+			if(!reagents.has_reagent("inaprovaline"))
+				adjustOxyLoss(1)
+			Paralyse(3)
+
+		if(paralysis)
+			AdjustParalysis(-2)
+			blinded = 1
+			stat = UNCONSCIOUS
+		else if(sleeping)
+			sleeping = max(sleeping-1, 0)
+			blinded = 1
+			stat = UNCONSCIOUS
+			if( prob(10) && health )
+				spawn(0)
+					emote("hiss_")
+		//CONSCIOUS
+		else
+			stat = CONSCIOUS
+
+		/*	What in the living hell is this?*/
+		if(move_delay_add > 0)
+			move_delay_add = max(0, move_delay_add - rand(1, 2))
+
+		//Eyes
+		if(sdisabilities & BLIND)	//disabled-blind, doesn't get better on its own
+			blinded = 1
+		else if(eye_blind)			//blindness, heals slowly over time
+			eye_blind = max(eye_blind-1,0)
+			blinded = 1
+		else if(eye_blurry)	//blurry eyes heal slowly
+			eye_blurry = max(eye_blurry-1, 0)
+
+		//Ears
+		if(sdisabilities & DEAF)	//disabled-deaf, doesn't get better on its own
+			ear_deaf = max(ear_deaf, 1)
+		else if(ear_deaf)			//deafness, heals slowly over time
+			ear_deaf = max(ear_deaf-1, 0)
+		else if(ear_damage < 5)	//ear damage heals slowly under this threshold.
+			ear_damage = max(ear_damage-0.05, 0)
+
+		//Other
+		if(stunned)
+			AdjustStunned(-1)
+
+		if(weakened)
+			weakened = max(weakened-1,0)	//before you get mad Rockdtben: I done this so update_canmove isn't called multiple times
+
+		if(stuttering)
+			stuttering = max(stuttering-1, 0)
+
+		if(silent)
+			silent = max(silent-1, 0)
+
+		if(druggy)
+			druggy = max(druggy-1, 0)
+	return 1

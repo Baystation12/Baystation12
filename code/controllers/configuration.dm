@@ -252,6 +252,9 @@
 				if ("mentors")
 					config.mods_are_mentors = 1
 
+				if ("mentors")
+					config.mods_are_mentors = 1
+
 				if("allow_admin_ooccolor")
 					config.allow_admin_ooccolor = 1
 
