@@ -94,6 +94,7 @@
 			+ "</body></html>", "window=[name]")
 			P.add_fingerprint(usr)
 		add_fingerprint(usr)
+		update_icon()
 	return
 
 
