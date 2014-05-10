@@ -55,7 +55,7 @@
 
 /obj/item/weapon/storage/firstaid/toxin
 	name = "toxin first aid"
-	desc = "Used to treat when you have a high amoutn of toxins in your body."
+	desc = "Used to treat when you have a high amount of toxins in your body."
 	icon_state = "antitoxin"
 	item_state = "firstaid-toxin"
 
@@ -109,6 +109,25 @@
 	new /obj/item/stack/medical/advanced/ointment(src)
 	new /obj/item/stack/medical/splint(src)
 	return
+
+/obj/item/weapon/storage/firstaid/purplepsy
+	name = "psychiatry first-aid kit"
+	desc = "A first-aid kit filled with psychiatric supplies!"
+	icon_state = "purplefirstaid"
+	item_state = "purplefirstaid"
+
+	New()
+		..()
+		if (empty) return
+		new /obj/item/weapon/reagent_containers/pill/citalopram(src)
+		new /obj/item/weapon/reagent_containers/pill/citalopram(src)
+		new /obj/item/weapon/reagent_containers/pill/methylphenidate(src)
+		new /obj/item/weapon/reagent_containers/pill/methylphenidate(src)
+		new /obj/item/weapon/reagent_containers/pill/tramadol(src)
+		new /obj/item/weapon/reagent_containers/pill/tramadol(src)
+		new /obj/item/weapon/reagent_containers/pill/stox(src)
+		return
+
 /*
  * Pill Bottles
  */
