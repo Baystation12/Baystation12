@@ -87,6 +87,9 @@
 		new /obj/item/weapon/weldingtool/largetank(src)
 		new /obj/item/weapon/weldingtool/largetank(src)
 		new /obj/item/weapon/weldingtool/largetank(src)
+		new /obj/item/weapon/weldpack(src)
+		new /obj/item/weapon/weldpack(src)
+		new /obj/item/weapon/weldpack(src)
 		return
 
 

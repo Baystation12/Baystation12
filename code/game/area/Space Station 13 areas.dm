@@ -14,6 +14,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 */
 
 
+
 /area
 	var/fire = null
 	var/atmos = 1
@@ -31,6 +32,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 	var/eject = null
 
+	var/debug = 0
+	var/powerupdate = 10		//We give everything 10 ticks to settle out it's power usage.
 	var/requires_power = 1
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 
@@ -43,7 +46,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/used_environ = 0
 
 	var/has_gravity = 1
-
+	var/list/apc = list()
 	var/no_air = null
 	var/area/master				// master area used for power calcluations
 								// (original area before splitting due to sd_DAL)
@@ -857,7 +860,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "chapeloffice"
 
 /area/lawoffice
-	name = "\improper Law Office"
+	name = "\improper Internal Affairs"
 	icon_state = "law"
 
 
@@ -973,6 +976,10 @@ var/list/ghostteleportlocs = list()
 	hallway
 		name = "\improper Engineering Hallway"
 		icon_state = "engine_hallway"
+
+	engine_eva
+		name = "\improper Engine EVA"
+		icon_state = "engine_eva"
 
 	workshop
 		name = "\improper Engineering Workshop"
@@ -1235,6 +1242,11 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Firing Range"
 	icon_state = "firingrange"
 
+/area/security/tactical
+	name = "\improper Tactical Equipment"
+	icon_state = "Tactical"
+
+
 /*
 	New()
 		..()
@@ -1370,10 +1382,6 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Miscellaneous Research"
 	icon_state = "toxmisc"
 
-/area/toxins/telesci
-	name = "\improper Telescience Lab"
-	icon_state = "toxmisc"
-
 /area/toxins/server
 	name = "\improper Server Room"
 	icon_state = "server"
@@ -1414,6 +1422,10 @@ var/list/ghostteleportlocs = list()
 
 /area/storage/emergency2
 	name = "Port Emergency Storage"
+	icon_state = "emergencystorage"
+
+/area/storage/emergency3
+	name = "Central Emergency Storage"
 	icon_state = "emergencystorage"
 
 /area/storage/tech

@@ -262,7 +262,7 @@ datum/tech/robotics
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk2"
 	item_state = "card-id"
-	w_class = 1.0
+	w_class = 2.0
 	m_amt = 30
 	g_amt = 10
 	var/datum/tech/stored

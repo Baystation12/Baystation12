@@ -60,6 +60,7 @@
 	var/respawn = 1
 	var/guest_jobban = 1
 	var/usewhitelist = 0
+	var/mods_are_mentors = 0
 	var/kick_inactive = 0				//force disconnect for inactive players
 	var/load_jobs_from_txt = 0
 	var/ToRban = 0
@@ -150,7 +151,7 @@
 
 		if (M.config_tag)
 			if(!(M.config_tag in modes))		// ensure each mode is added only once
-				diary << "Adding game mode [M.name] ([M.config_tag]) to configuration."
+				log_misc("Adding game mode [M.name] ([M.config_tag]) to configuration.")
 				src.modes += M.config_tag
 				src.mode_names[M.config_tag] = M.name
 				src.probabilities[M.config_tag] = M.probability
@@ -251,6 +252,9 @@
 
 				if ("log_runtime")
 					config.log_runtime = 1
+
+				if ("mentors")
+					config.mods_are_mentors = 1
 
 				if("allow_admin_ooccolor")
 					config.allow_admin_ooccolor = 1
@@ -362,9 +366,9 @@
 						if (prob_name in config.modes)
 							config.probabilities[prob_name] = text2num(prob_value)
 						else
-							diary << "Unknown game mode probability configuration definition: [prob_name]."
+							log_misc("Unknown game mode probability configuration definition: [prob_name].")
 					else
-						diary << "Incorrect probability configuration definition: [prob_name]  [prob_value]."
+						log_misc("Incorrect probability configuration definition: [prob_name]  [prob_value].")
 
 				if("allow_random_events")
 					config.allow_random_events = 1
@@ -481,14 +485,14 @@
 					config.cult_ghostwriter = 1
 
 				if("req_cult_ghostwriter")
-					config.cult_ghostwriter_req_cultists = value
+					config.cult_ghostwriter_req_cultists = text2num(value)
 
 				else
-					diary << "Unknown setting in configuration: '[name]'"
+					log_misc("Unknown setting in configuration: '[name]'")
 
 		else if(type == "game_options")
 			if(!value)
-				diary << "Unknown value for setting [name] in [filename]."
+				log_misc("Unknown value for setting [name] in [filename].")
 			value = text2num(value)
 
 			switch(name)
@@ -529,7 +533,7 @@
 				if("limbs_can_break")
 					config.limbs_can_break = value
 				else
-					diary << "Unknown setting in configuration: '[name]'"
+					log_misc("Unknown setting in configuration: '[name]'")
 
 /datum/configuration/proc/loadsql(filename)  // -- TLE
 	var/list/Lines = file2list(filename)
@@ -575,7 +579,7 @@
 			if ("enable_stat_tracking")
 				sqllogging = 1
 			else
-				diary << "Unknown setting in configuration: '[name]'"
+				log_misc("Unknown setting in configuration: '[name]'")
 
 /datum/configuration/proc/loadforumsql(filename)  // -- TLE
 	var/list/Lines = file2list(filename)
@@ -617,7 +621,7 @@
 			if ("authenticatedgroup")
 				forum_authenticated_group = value
 			else
-				diary << "Unknown setting in configuration: '[name]'"
+				log_misc("Unknown setting in configuration: '[name]'")
 
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up

@@ -211,6 +211,9 @@
 		O.emp_act(severity)
 	..()
 
+/mob/living/proc/can_inject()
+	return 1
+
 /mob/living/proc/get_organ_target()
 	var/mob/shooter = src
 	var/t = shooter:zone_sel.selecting
@@ -264,6 +267,8 @@
 		if (C.legcuffed && !initial(C.legcuffed))
 			C.drop_from_inventory(C.legcuffed)
 		C.legcuffed = initial(C.legcuffed)
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
 
 /mob/living/proc/rejuvenate()
 
@@ -311,6 +316,8 @@
 	// make the icons look correct
 	regenerate_icons()
 
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
 	return
 
 /mob/living/proc/UpdateDamageIcon()
@@ -355,8 +362,8 @@
 				return
 			else
 				if(Debug)
-					diary <<"pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]"
-					diary <<"REPORT THIS"
+					log_debug("pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]")
+					log_debug("REPORT THIS")
 
 		/////
 		if(pulling && pulling.anchored)
@@ -443,9 +450,14 @@
 
 	//Getting out of someone's inventory.
 	if(istype(src.loc,/obj/item/weapon/holder))
-		var/obj/item/weapon/holder/H = src.loc
-		src.loc = get_turf(src.loc)
-		del(H)
+		var/obj/item/weapon/holder/H = src.loc //Get our item holder.
+		var/mob/M = H.loc                      //Get our mob holder (if any).
+
+		if(istype(M))
+			M.drop_from_inventory(H)
+			M << "[H] wriggles out of your grip!"
+			src << "You wriggle out of [M]'s grip!"
+
 		return
 
 	//Resisting control by an alien mind.

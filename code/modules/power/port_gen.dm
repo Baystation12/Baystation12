@@ -93,6 +93,7 @@ display round(lastgen) and plasmatank amount
 	else
 		usr << "\blue The generator is off."
 
+//A power generator that runs on solid plasma sheets.
 /obj/machinery/power/port_gen/pacman
 	name = "P.A.C.M.A.N.-type Portable Generator"
 	var/sheets = 0

@@ -47,6 +47,7 @@
 		take_overall_damage(amount, 0)
 	else
 		heal_overall_damage(-amount, 0)
+	hud_updateflag |= 1 << HEALTH_HUD
 
 /mob/living/carbon/human/adjustFireLoss(var/amount)
 	if(species && species.burn_mod)
@@ -56,6 +57,7 @@
 		take_overall_damage(0, amount)
 	else
 		heal_overall_damage(0, -amount)
+	hud_updateflag |= 1 << HEALTH_HUD
 
 /mob/living/carbon/human/Stun(amount)
 	if(HULK in mutations)	return
@@ -71,6 +73,10 @@
 
 /mob/living/carbon/human/adjustCloneLoss(var/amount)
 	..()
+
+	if(species.flags & IS_SYNTHETIC)
+		return
+
 	var/heal_prob = max(0, 80 - getCloneLoss())
 	var/mut_prob = min(80, getCloneLoss()+10)
 	if (amount > 0)
@@ -97,6 +103,8 @@
 			if (O.status & ORGAN_MUTATED)
 				O.unmutate()
 				src << "<span class = 'notice'>Your [O.display_name] is shaped normally again.</span>"
+	hud_updateflag |= 1 << HEALTH_HUD
+
 ////////////////////////////////////////////
 
 //Returns a list of damaged organs
@@ -124,6 +132,7 @@
 	var/datum/organ/external/picked = pick(parts)
 	if(picked.heal_damage(brute,burn))
 		UpdateDamageIcon()
+		hud_updateflag |= 1 << HEALTH_HUD
 	updatehealth()
 
 //Damages ONE external organ, organ gets randomly selected from damagable ones.
@@ -135,7 +144,9 @@
 	var/datum/organ/external/picked = pick(parts)
 	if(picked.take_damage(brute,burn,sharp))
 		UpdateDamageIcon()
+		hud_updateflag |= 1 << HEALTH_HUD
 	updatehealth()
+	speech_problem_flag = 1
 
 
 //Heal MANY external organs, in random order
@@ -156,6 +167,8 @@
 
 		parts -= picked
 	updatehealth()
+	hud_updateflag |= 1 << HEALTH_HUD
+	speech_problem_flag = 1
 	if(update)	UpdateDamageIcon()
 
 // damage MANY external organs, in random order
@@ -175,6 +188,7 @@
 
 		parts -= picked
 	updatehealth()
+	hud_updateflag |= 1 << HEALTH_HUD
 	if(update)	UpdateDamageIcon()
 
 
@@ -184,8 +198,9 @@
 This function restores the subjects blood to max.
 */
 /mob/living/carbon/human/proc/restore_blood()
-	var/blood_volume = vessel.get_reagent_amount("blood")
-	vessel.add_reagent("blood",560.0-blood_volume)
+	if(!species.flags & NO_BLOOD)
+		var/blood_volume = vessel.get_reagent_amount("blood")
+		vessel.add_reagent("blood",560.0-blood_volume)
 
 
 /*
@@ -200,6 +215,7 @@ This function restores all organs.
 	if(istype(E, /datum/organ/external))
 		if (E.heal_damage(brute, burn))
 			UpdateDamageIcon()
+			hud_updateflag |= 1 << HEALTH_HUD
 	else
 		return 0
 	return
@@ -243,6 +259,7 @@ This function restores all organs.
 
 	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
 	updatehealth()
+	hud_updateflag |= 1 << HEALTH_HUD
 
 	//Embedded projectile code.
 	if(!organ) return

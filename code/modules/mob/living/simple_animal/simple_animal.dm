@@ -15,7 +15,7 @@
 
 	var/turns_per_move = 1
 	var/turns_since_move = 0
-	universal_speak = 1
+	universal_speak = 0		//No, just no.
 	var/meat_amount = 0
 	var/meat_type
 	var/stop_automated_movement = 0 //Use this to temporarely stop random movement or to if you write special movement code for animals.
@@ -23,9 +23,9 @@
 	var/stop_automated_movement_when_pulled = 1 //When set to 1 this stops the animal from moving when someone is pulling it.
 
 	//Interaction
-	var/response_help   = "You try to help"
-	var/response_disarm = "You try to disarm"
-	var/response_harm   = "You try to hurt"
+	var/response_help   = "tries to help"
+	var/response_disarm = "tries to disarm"
+	var/response_harm   = "tries to hurt"
 	var/harm_intent_damage = 3
 
 	//Temperature effect
@@ -454,3 +454,22 @@
 	overlays = null
 	if (targeted_by && target_locked)
 		overlays += target_locked
+
+/mob/living/simple_animal/say(var/message)
+	if(stat)
+		return
+
+	if(copytext(message,1,2) == "*")
+		return emote(copytext(message,2))
+
+	if(stat)	
+		return
+
+	var/verb = "says"
+
+	if(speak_emote.len)
+		verb = pick(speak_emote)
+
+	message = capitalize(trim_left(message))
+
+	..(message, null, verb)

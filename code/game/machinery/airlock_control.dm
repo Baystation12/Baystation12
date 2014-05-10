@@ -90,7 +90,7 @@ obj/machinery/door/airlock/Bumped(atom/AM)
 
 			radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
 	return
-		
+
 obj/machinery/door/airlock/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	if(new_frequency)
@@ -131,7 +131,7 @@ obj/machinery/airlock_sensor
 
 	var/on = 1
 	var/alert = 0
-
+	var/previousPressure
 
 obj/machinery/airlock_sensor/update_icon()
 	if(on)
@@ -153,21 +153,23 @@ obj/machinery/airlock_sensor/attack_hand(mob/user)
 
 obj/machinery/airlock_sensor/process()
 	if(on)
-		var/datum/signal/signal = new
-		signal.transmission_method = 1 //radio signal
-		signal.data["tag"] = id_tag
-		signal.data["timestamp"] = world.time
-
 		var/datum/gas_mixture/air_sample = return_air()
-
 		var/pressure = round(air_sample.return_pressure(),0.1)
-		alert = (pressure < ONE_ATMOSPHERE*0.8)
 
-		signal.data["pressure"] = num2text(pressure)
+		if(abs(pressure - previousPressure) > 0.001 || previousPressure == null)
+			var/datum/signal/signal = new
+			signal.transmission_method = 1 //radio signal
+			signal.data["tag"] = id_tag
+			signal.data["timestamp"] = world.time
+			signal.data["pressure"] = num2text(pressure)
 
-		radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
+			radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, filter = RADIO_AIRLOCK)
 
-	update_icon()
+			previousPressure = pressure
+
+			alert = (pressure < ONE_ATMOSPHERE*0.8)
+
+			update_icon()
 
 obj/machinery/airlock_sensor/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
@@ -179,7 +181,6 @@ obj/machinery/airlock_sensor/initialize()
 
 obj/machinery/airlock_sensor/New()
 	..()
-
 	if(radio_controller)
 		set_frequency(frequency)
 

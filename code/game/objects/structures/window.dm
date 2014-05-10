@@ -18,6 +18,11 @@
 
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
+
+	//Tasers and the like should not damage windows.
+	if(Proj.damage_type == HALLOSS)
+		return
+
 	health -= Proj.damage
 	..()
 	if(health <= 0)
@@ -154,7 +159,7 @@
 	attack_generic(user, rand(10, 15))
 
 
-/obj/structure/window/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
 
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)

@@ -233,6 +233,7 @@
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	updateicon()
+	update_wclass()
 
 /obj/item/weapon/cable_coil/proc/updateicon()
 	if (!item_color)
@@ -247,6 +248,12 @@
 	else
 		icon_state = "coil"
 		name = "cable coil"
+
+/obj/item/weapon/cable_coil/proc/update_wclass()
+	if(amount == 1)
+		w_class = 1.0
+	else
+		w_class = 2.0
 
 /obj/item/weapon/cable_coil/examine()
 	set src in view(1)
@@ -283,6 +290,7 @@
 		new/obj/item/weapon/cable_coil(user.loc, 1,item_color)
 		user << "<span class='notice'>You cut a piece off the cable coil.</span>"
 		src.updateicon()
+		src.update_wclass()
 		return
 
 	else if( istype(W, /obj/item/weapon/cable_coil) )
@@ -295,6 +303,7 @@
 			C.amount += src.amount
 			user << "<span class='notice'>You join the cable coils together.</span>"
 			C.updateicon()
+			C.update_wclass()
 			del(src)
 			return
 
@@ -302,8 +311,10 @@
 			user << "<span class='notice'>You transfer [MAXCOIL - src.amount ] length\s of cable from one coil to the other.</span>"
 			src.amount -= (MAXCOIL-C.amount)
 			src.updateicon()
+			src.update_wclass()
 			C.amount = MAXCOIL
 			C.updateicon()
+			C.update_wclass()
 			return
 
 /obj/item/weapon/cable_coil/proc/use(var/used)
@@ -314,6 +325,7 @@
 	else
 		amount -= used
 		updateicon()
+		update_wclass()
 		return 1
 
 // called when cable_coil is clicked on a turf/simulated/floor
@@ -597,6 +609,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	updateicon()
+	update_wclass()
 
 /obj/item/weapon/cable_coil/yellow
 	item_color = COLOR_YELLOW
@@ -625,11 +638,14 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/weapon/cable_coil/attack(mob/M as mob, mob/user as mob)
 	if(hasorgans(M))
+
 		var/datum/organ/external/S = M:get_organ(user.zone_sel.selecting)
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
+
 		if(S.burn_dam > 0 && use(1))
 			S.heal_damage(0,15,0,1)
+
 			if(user != M)
 				user.visible_message("<span class='notice'>\The [user] repairs some burn damage on [M]'s [S.display_name] with \the [src]</span>",\
 				"<span class='notice'>\The [user] repairs some burn damage on your [S.display_name]</span>",\
@@ -638,7 +654,28 @@ obj/structure/cable/proc/cableColor(var/colorC)
 				user.visible_message("<span class='notice'>\The [user] repairs some burn damage on their [S.display_name] with \the [src]</span>",\
 				"<span class='notice'>You repair some burn damage on your [S.display_name]</span>",\
 				"You hear wires being cut.")
-		else
-			user << "Nothing to fix!"
+
+			return
+
+		if(istype(M,/mob/living/carbon/human))
+
+			var/mob/living/carbon/human/H = M
+
+			if(H.species.flags & IS_SYNTHETIC)
+
+				if(H.getFireLoss() > 0)
+
+					if(M == user)
+						user << "\red You can't repair damage to your own body - it's against OH&S."
+						return
+
+					user.visible_message("<span class='notice'>\The [user] repairs some burn damage on [M]  with \the [src]</span>",\
+						"<span class='notice'>You repair some of \the [M]'s burn damage.</span>",\
+						"You hear wires being cut.")
+					H.heal_overall_damage(0,5)
+					return
+
+		user << "Nothing to fix!"
+
 	else
 		return ..()

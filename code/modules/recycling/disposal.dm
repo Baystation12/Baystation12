@@ -22,6 +22,8 @@
 	var/flush_every_ticks = 30 //Every 30 ticks it will look whether it is ready to flush
 	var/flush_count = 0 //this var adds 1 once per tick. When it reaches flush_every_ticks it resets and tries to flush.
 	var/last_sound = 0
+	active_power_usage = 600
+	idle_power_usage = 100
 
 	// create a new disposal
 	// find the attached trunk (if present) and init gas resvr.
@@ -340,6 +342,7 @@
 	// timed process
 	// charge the gas reservoir and perform flush if ready
 	process()
+		use_power = 0
 		if(stat & BROKEN)			// nothing can happen if broken
 			return
 
@@ -363,13 +366,13 @@
 		if(stat & NOPOWER)			// won't charge if no power
 			return
 
-		use_power(100)		// base power usage
-
+		use_power = 1
+		
 		if(mode != 1)		// if off or ready, no need to charge
 			return
 
 		// otherwise charge
-		use_power(500)		// charging power usage
+		use_power = 2
 
 		var/atom/L = loc						// recharging from loc turf
 

@@ -231,8 +231,6 @@ Auto Patrol: []"},
 			continue
 		if (istype(C, /mob/living/carbon/human))
 			threatlevel = src.assess_perp(C)
-		else if ((istype(C, /mob/living/carbon/monkey)) && (C.client) && (ticker.mode.name == "monkey"))
-			threatlevel = 4
 		//src.speak(C.real_name + text(": threat: []", threatlevel))
 		if (threatlevel < 4 )
 			continue
@@ -637,8 +635,6 @@ Auto Patrol: []"},
 
 		if (istype(C, /mob/living/carbon/human))
 			src.threatlevel = src.assess_perp(C)
-		else if ((istype(C, /mob/living/carbon/monkey)) && (C.client) && (ticker.mode.name == "monkey"))
-			src.threatlevel = 4
 
 		if (!src.threatlevel)
 			continue
@@ -821,7 +817,7 @@ Auto Patrol: []"},
 			if (src.emagged == 2)
 				projectile = /obj/item/projectile/beam
 			else
-				projectile = /obj/item/projectile/energy/electrode
+				projectile = /obj/item/projectile/beam/stun
 		else if(lasercolor == "b")
 			if (src.emagged == 2)
 				projectile = /obj/item/projectile/beam/lastertag/omni

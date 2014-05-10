@@ -28,12 +28,23 @@
 		user << "<span class='notice'>They are too far away!</span>"
 		return
 
-	var/obj/item/clothing/mask/horsehead/magichead = new /obj/item/clothing/mask/horsehead
-	magichead.canremove = 0		//curses!
-	magichead.flags_inv = null	//so you can still see their face
-	magichead.voicechange = 1	//NEEEEIIGHH
+	var/obj/item/clothing/mask/horsehead/magic/magichead = new /obj/item/clothing/mask/horsehead/magic
 	target.visible_message(	"<span class='danger'>[target]'s face  lights up in fire, and after the event a horse's head takes its place!</span>", \
 							"<span class='danger'>Your face burns up, and shortly after the fire you realise you have the face of a horse!</span>")
 	target.equip_to_slot(magichead, slot_wear_mask)
 
 	flick("e_flash", target.flash)
+
+//item used by the horsehead spell
+/obj/item/clothing/mask/horsehead/magic
+	//flags_inv = null	//so you can still see their face... no. How can you recognize someone when their face is completely different?
+	voicechange = 1		//NEEEEIIGHH
+
+	dropped(mob/user as mob)
+		canremove = 1
+		..()
+	
+	equipped(var/mob/user, var/slot)
+		if (slot == slot_wear_mask)
+			canremove = 0		//curses!
+		..()

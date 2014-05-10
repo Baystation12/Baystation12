@@ -67,8 +67,10 @@ Class Procs:
       Checks to see if area that contains the object has power available for power
       channel given in 'chan'.
 
-   use_power(amount, chan=EQUIP)   'modules/power/power.dm'
+   use_power(amount, chan=EQUIP, autocalled)   'modules/power/power.dm'
       Deducts 'amount' from the power channel 'chan' of the area that contains the object.
+      If it's autocalled then everything is normal, if something else calls use_power we are going to
+      need to recalculate the power two ticks in a row.
 
    power_change()               'modules/power/power.dm'
       Called by the area that contains the object when ever that area under goes a
@@ -159,9 +161,9 @@ Class Procs:
 	if(!powered(power_channel))
 		return 0
 	if(src.use_power == 1)
-		use_power(idle_power_usage,power_channel)
+		use_power(idle_power_usage,power_channel, 1)
 	else if(src.use_power >= 2)
-		use_power(active_power_usage,power_channel)
+		use_power(active_power_usage,power_channel, 1)
 	return 1
 
 /obj/machinery/Topic(href, href_list)
@@ -172,7 +174,7 @@ Class Procs:
 		return 1
 	if ( ! (istype(usr, /mob/living/carbon/human) || \
 			istype(usr, /mob/living/silicon) || \
-			istype(usr, /mob/living/carbon/monkey) && ticker && ticker.mode.name == "monkey") )
+			istype(usr, /mob/living/carbon/monkey)) )
 		usr << "\red You don't have the dexterity to do this!"
 		return 1
 
@@ -189,6 +191,10 @@ Class Procs:
 			return 1
 
 	src.add_fingerprint(usr)
+
+	var/area/A = get_area(src)
+	A.master.powerupdate = 1
+
 	return 0
 
 /obj/machinery/attack_ai(mob/user as mob)
@@ -210,7 +216,7 @@ Class Procs:
 		return 1
 	if ( ! (istype(usr, /mob/living/carbon/human) || \
 			istype(usr, /mob/living/silicon) || \
-			istype(usr, /mob/living/carbon/monkey) && ticker && ticker.mode.name == "monkey") )
+			istype(usr, /mob/living/carbon/monkey)) )
 		usr << "\red You don't have the dexterity to do this!"
 		return 1
 /*
@@ -228,6 +234,10 @@ Class Procs:
 			return 1
 
 	src.add_fingerprint(user)
+
+	var/area/A = get_area(src)
+	A.master.powerupdate = 1
+
 	return 0
 
 /obj/machinery/proc/RefreshParts() //Placeholder proc for machines that are built using frames.
@@ -238,3 +248,13 @@ Class Procs:
 	uid = gl_uid
 	gl_uid++
 
+/obj/machinery/proc/state(var/msg)
+  for(var/mob/O in hearers(src, null))
+    O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
+
+/obj/machinery/proc/ping(text=null)
+  if (!text)
+    text = "\The [src] pings."
+
+  state(text, "blue")
+  playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)

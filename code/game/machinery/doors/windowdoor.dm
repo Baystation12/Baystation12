@@ -130,6 +130,8 @@
 		var/obj/item/weapon/airlock_electronics/ae
 		if(!electronics)
 			ae = new/obj/item/weapon/airlock_electronics( src.loc )
+			if(!src.req_access)
+				src.check_access()
 			if(src.req_access.len)
 				ae.conf_access = src.req_access
 			else if (src.req_one_access.len)
@@ -227,6 +229,8 @@
 			var/obj/item/weapon/airlock_electronics/ae
 			if(!electronics)
 				ae = new/obj/item/weapon/airlock_electronics( src.loc )
+				if(!src.req_access)
+					src.check_access()
 				if(src.req_access.len)
 					ae.conf_access = src.req_access
 				else if (src.req_one_access.len)
@@ -343,4 +347,3 @@
 	dir = SOUTH
 	icon_state = "rightsecure"
 	base_state = "rightsecure"
-
