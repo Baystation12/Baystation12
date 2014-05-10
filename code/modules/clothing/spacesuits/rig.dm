@@ -238,7 +238,7 @@
 	icon_state = "rig0-sec"
 	item_state = "sec_helm"
 	_color = "sec"
-	armor = list(melee = 60, bullet = 10, laser = 30, energy = 15, bomb = 45, bio = 100, rad = 10)
+	armor = list(melee = 50, bullet = 10, laser = 30, energy = 15, bomb = 45, bio = 100, rad = 10)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/suit/space/rig/security
@@ -246,7 +246,7 @@
 	name = "security hardsuit"
 	desc = "A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor."
 	item_state = "sec_hardsuit"
-	armor = list(melee = 60, bullet = 10, laser = 30, energy = 15, bomb = 45, bio = 100, rad = 10)
+	armor = list(melee = 50, bullet = 10, laser = 30, energy = 15, bomb = 45, bio = 100, rad = 10)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/melee/baton)
 	siemens_coefficient = 0.7
 	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
@@ -282,7 +282,7 @@
 	icon_state = "rig0-atmos"
 	item_state = "atmos_helm"
 	_color = "atmos"
-	armor = list(melee = 30, bullet = 0, laser = 0, energy = 0, bomb = 25, bio = 100, rad = 0)
+	armor = list(melee = 30, bullet = 0, laser = 0, energy = 0, bomb = 20, bio = 100, rad = 0)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE
 
 /obj/item/clothing/suit/space/rig/atmos
@@ -290,6 +290,6 @@
 	icon_state = "rig-atmos"
 	name = "atmos hardsuit"
 	item_state = "atmos_hardsuit"
-	armor = list(melee = 30, bullet = 0, laser = 0, energy = 0, bomb = 25, bio = 100, rad = 0)
+	armor = list(melee = 30, bullet = 0, laser = 0, energy = 0, bomb = 20, bio = 100, rad = 0)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE
 	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
