@@ -51,7 +51,6 @@
 	if(M.a_intent == "help")
 		var/obj/item/weapon/holder/drone/D = new(loc)
 		src.loc = D
-		D.name = loc.name
 		D.attack_hand(M)
 		M << "You scoop up [src]."
 		src << "[M] scoops you up."
