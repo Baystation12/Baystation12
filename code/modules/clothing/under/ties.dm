@@ -11,7 +11,7 @@
 	var/obj/item/clothing/under/has_suit = null		//the suit the tie may be attached to
 
 //when user attached an accessory to S
-/obj/item/clothing/tie/proc/attach_to(obj/item/clothing/under/S, mob/user as mob)
+/obj/item/clothing/tie/proc/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	if(!istype(S))
 		return
 	has_suit = S
@@ -19,12 +19,23 @@
 	user << "<span class='notice'>You attach [src] to [has_suit].</span>"
 	src.add_fingerprint(user)
 
-/obj/item/clothing/tie/proc/remove(mob/user as mob)
+/obj/item/clothing/tie/proc/on_removed(mob/user as mob)
 	if(!has_suit)
 		return
 	has_suit = null
 	usr.put_in_hands(src)
 	src.add_fingerprint(user)
+
+//default attackby behaviour
+/obj/item/clothing/tie/attackby(obj/item/I, mob/user)
+	..()
+
+//default attack_hand behaviour
+/obj/item/clothing/tie/attack_hand(mob/user as mob)
+	if(has_suit)
+		has_suit.remove_accessory(user)
+		return	//we aren't an object on the ground so don't call parent
+	..()
 
 /obj/item/clothing/tie/blue
 	name = "blue tie"
@@ -244,11 +255,11 @@
 	else
 		usr << "It is empty."
 
-/obj/item/clothing/tie/holster/attach_to(obj/item/clothing/under/S, mob/user as mob)
+/obj/item/clothing/tie/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()
 	has_suit.verbs += /obj/item/clothing/tie/holster/verb/holster_verb
 
-/obj/item/clothing/tie/holster/remove(mob/user as mob)
+/obj/item/clothing/tie/holster/on_removed(mob/user as mob)
 	has_suit.verbs -= /obj/item/clothing/tie/holster/verb/holster_verb
 	..()
 
