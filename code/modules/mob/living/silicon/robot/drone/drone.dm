@@ -169,7 +169,7 @@
 		if(stat == 2)
 
 			user << "\red You swipe your ID card through [src], attempting to reboot it."
-			if(!config.	 || emagged || health < -35) //It's dead, Dave.
+			if(!config.allow_drone_spawn || emagged || health < -35) //It's dead, Dave.
 				user << "\red The interface is fried, and a distressing burned smell wafts from the robot's interior. You're not rebooting this one."
 				return
 
