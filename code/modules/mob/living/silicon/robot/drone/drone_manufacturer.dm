@@ -9,7 +9,7 @@
 	active_power_usage = 5000
 
 	var/drone_progress = 0
-	var/produce_drones = 0
+	var/produce_drones = 1
 	var/time_last_drone = 500
 
 	icon = 'icons/obj/machines/drone_fab.dmi'
@@ -93,6 +93,9 @@
 	if (usr != src)
 		return 0 //something is terribly wrong
 
+	if(jobban_isbanned(src,"Cyborg"))
+		usr << "\red You are banned from playing synthetics and cannot spawn as a drone."
+		return
 
 	var/deathtime = world.time - src.timeofdeath
 	if(istype(src,/mob/dead/observer))
@@ -119,11 +122,14 @@
 	for(var/obj/machinery/drone_fabricator/DF in world)
 		if(DF.stat & NOPOWER || !DF.produce_drones)
 			continue
+
 		if(DF.count_drones() >= config.max_maint_drones)
 			src << "\red There are too many active drones in the world for you to spawn."
 			return
 
-		DF.create_drone(src.client)
+		if(DF.drone_progress >= 100)
+			DF.create_drone(src.client)
+
 		return
 
 	src << "\red There are no available drone spawn points, sorry."
