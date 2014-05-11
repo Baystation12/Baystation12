@@ -418,10 +418,10 @@ var/list/ai_list = list()
 		if(index)
 			seeking = copytext(seeking, 1, index-1)
 
-		if(target && href_list["trackname"] == seeking)
+		if(target && html_decode(href_list["trackname"]) == seeking)
 			ai_actual_track(target)
 		else
-			src << "\red System error. Cannot locate [href_list["trackname"]]."
+			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
 
 	else if (href_list["faketrack"])
