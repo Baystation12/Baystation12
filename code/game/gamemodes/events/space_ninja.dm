@@ -564,10 +564,10 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 
 //Randomizes suit parameters.
 /obj/item/clothing/suit/space/space_ninja/proc/randomize_param()
-	s_cost = rand(1,20)
-	s_acost = rand(20,100)
+	s_regen = rand(1,15)
+	s_cost = rand(20,100)
 	k_cost = rand(100,500)
-	k_damage = rand(1,20)
+	k_damage = rand(1,10)
 	s_delay = rand(10,100)
 	s_bombs = rand(5,20)
 	a_boost = rand(1,7)

@@ -59,6 +59,7 @@
 	icon_state = "s-ninja(norm)"
 	item_state = "s-ninja_mask"
 	vchange = 1
+	unacidable = 1
 	siemens_coefficient = 0.2
 
 /obj/item/clothing/mask/gas/voice/space_ninja/scar
