@@ -136,8 +136,8 @@
 	PT.master = V
 	OT.master = V
 
-	PT.air_contents.temperature = PLASMA_FLASHPOINT
-	PT.air_contents.toxins = 12
+	PT.air_contents.temperature = PHORON_FLASHPOINT
+	PT.air_contents.phoron = 12
 	PT.air_contents.carbon_dioxide = 8	
 	PT.air_contents.update_values()
 
