@@ -936,6 +936,11 @@ var/list/ghostteleportlocs = list()
 //Engineering
 
 /area/engine
+
+	drone_fabrication
+		name = "\improper Drone Fabrication"
+		icon_state = "engine"
+
 	engine_smes
 		name = "Engineering SMES"
 		icon_state = "engine_smes"

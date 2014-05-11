@@ -557,7 +557,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 	"Atmospherics", "Security", "HoS Office", "Medbay",
 	"CMO Office", "Chemistry", "Research", "RD Office",
 	"Robotics", "HoP Office", "Library", "Chapel", "Theatre",
-	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics")
+	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics","Drone Fabrication")
 
 #define HOSTILE_STANCE_IDLE 1
 #define HOSTILE_STANCE_ALERT 2
