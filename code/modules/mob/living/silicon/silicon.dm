@@ -201,3 +201,9 @@
 	dat += "<br>"
 	src << browse(dat, "window=airoster")
 	onclose(src, "airoster")
+
+//can't inject synths
+/mob/living/silicon/can_inject(var/mob/user, var/error_msg)
+	if(error_msg)
+		user << "<span class='alert'>The armoured plating is too tough.</span>"
+	return 0
