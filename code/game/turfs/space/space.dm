@@ -116,6 +116,12 @@
 						del(N)//Make the disk respawn if it is floating on its own
 				return
 
+			var/mob/living/MOB = null
+			var/obj/was_pulling = null
+			if(isliving(A))
+				MOB = A
+				was_pulling = MOB.pulling
+
 			var/move_to_z = src.z
 			var/safety = 1
 
@@ -147,10 +153,11 @@
 				A.y = TRANSITIONEDGE + 1
 				A.x = rand(TRANSITIONEDGE + 2, world.maxx - TRANSITIONEDGE - 2)
 
-
-
-
 			spawn (0)
+				if(was_pulling)
+					was_pulling.loc = MOB.loc
+					MOB.pulling = was_pulling
+					was_pulling.pulledby = MOB
 				if ((A && A.loc))
 					A.loc.Entered(A)
 
