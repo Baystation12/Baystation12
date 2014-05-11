@@ -73,6 +73,12 @@ LOG_PDA
 ## disconnect players who did nothing during 10 minutes
 # KICK_INACTIVE
 
+## Use Mentors instead of Moderators.  Mentors are designed with the idea that
+###they help in pushing new people to be better at roleplay.  If you uncomment
+###this it will reduce the rights that your mods have.
+#MENTORS
+
+
 ## probablities for game modes chosen in "secret" and "random" modes
 ## 
 ## default probablity is 1, increase to make that mode more likely to be picked

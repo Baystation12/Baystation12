@@ -135,7 +135,8 @@
 	icon_state = "working"
 	construction_time = 200
 	construction_cost = list("metal"=5000)
-
+	var/brute = 0
+	var/burn = 0
 
 // TODO: actual icons ;)
 /obj/item/robot_parts/robot_component/binary_communication_device

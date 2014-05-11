@@ -266,3 +266,73 @@
 		src.modules += new /obj/item/weapon/wrench(src) //Is a combat android really going to be stopped by a chair?
 		src.emag = new /obj/item/weapon/gun/energy/lasercannon/cyborg(src)
 		return
+
+
+/obj/item/weapon/robot_module/drone
+	name = "drone module"
+
+
+	New()
+		//TODO: Replace with shittier flashlight and work out why we can't remove the flash. ~Z
+		..()
+		src.modules += new /obj/item/weapon/weldingtool(src)
+		src.modules += new /obj/item/weapon/screwdriver(src)
+		src.modules += new /obj/item/weapon/wrench(src)
+		src.modules += new /obj/item/weapon/crowbar(src)
+		src.modules += new /obj/item/weapon/wirecutters(src)
+		src.modules += new /obj/item/device/multitool(src)
+		src.modules += new /obj/item/device/lightreplacer(src)
+		src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner(src)
+		src.modules += new /obj/item/weapon/gripper(src)
+		src.modules += new /obj/item/weapon/matter_decompiler(src)
+
+		src.emag = new /obj/item/weapon/card/emag(src)
+		src.emag.name = "Cryptographic Sequencer"
+
+
+		var/list/stacktypes = list(
+			/obj/item/stack/rods = 10,
+			/obj/item/stack/tile/plasteel = 10,
+			/obj/item/stack/sheet/metal/cyborg = 10,
+			/obj/item/stack/sheet/wood/cyborg = 1,
+			/obj/item/weapon/cable_coil = 30,
+			/obj/item/stack/sheet/glass/cyborg = 10,
+			/obj/item/stack/sheet/mineral/plastic/cyborg = 1
+			)
+
+		for(var/T in stacktypes)
+			var/obj/item/stack/sheet/W = new T(src)
+			W.amount = stacktypes[T]
+			src.modules += W
+
+		return
+
+/obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R)
+	var/obj/item/weapon/reagent_containers/spray/cleaner/C = locate() in src.modules
+	C.reagents.add_reagent("cleaner", 10)
+
+	var/list/stacks = list (
+		/obj/item/stack/sheet/metal,
+		/obj/item/weapon/cable_coil,
+		/obj/item/stack/sheet/glass/cyborg,
+		/obj/item/stack/rods,
+		/obj/item/stack/tile/plasteel
+	)
+
+	for(var/T in stacks)
+		var/O = locate(T) in src.modules
+		var/obj/item/stack/sheet/S = O
+
+		if(!S)
+			src.modules -= null
+			S = new T(src)
+			src.modules += S
+			S.amount = 0
+
+		if(istype(S) && S.amount < 15)
+			S.amount++
+
+	var/obj/item/device/lightreplacer/LR = locate() in src.modules
+	LR.Charge(R)
+
+	return

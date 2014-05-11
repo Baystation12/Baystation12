@@ -125,6 +125,16 @@ var/global/list/datum/stack_recipe/phoron_recipes = list ( \
 	origin_tech = "materials=3"
 	perunit = 2000
 
+/obj/item/stack/sheet/mineral/plastic/cyborg
+	name = "plastic sheets"
+	icon_state = "sheet-plastic"
+	force = 5.0
+	throwforce = 5
+	w_class = 3.0
+	throw_speed = 3
+	throw_range = 3
+	perunit = 2000
+
 var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	new/datum/stack_recipe("plastic crate", /obj/structure/closet/crate/plastic, 10, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("plastic ashtray", /obj/item/ashtray/plastic, 2, one_per_turf = 1, on_floor = 1), \
