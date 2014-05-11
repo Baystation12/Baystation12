@@ -531,10 +531,17 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		. += "*no key*"
 
 	if(include_name && M)
+		var/name
+
 		if(M.real_name)
-			. += "/([M.real_name])"
+			name = M.real_name
 		else if(M.name)
-			. += "/([M.name])"
+			name = M.name
+
+		if(is_special_character(M))
+			. += "/(<font color='#FFA500'>[name]</font>)" //Orange
+		else
+			. += "/([name])"
 
 	return .
 

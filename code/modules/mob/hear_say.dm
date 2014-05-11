@@ -19,7 +19,7 @@
 	if(language)
 		verb = language.speech_verb
 		style = language.colour
-		
+
 	var/speaker_name = speaker.name
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
@@ -71,7 +71,7 @@
 		verb = language.speech_verb
 		style = language.colour
 
-	
+
 
 	if(hard_to_hear)
 		message = stars(message)
@@ -89,11 +89,28 @@
 	if(hard_to_hear)
 		speaker_name = "unknown"
 
+	var/changed_voice
+
 	if(istype(src, /mob/living/silicon/ai) && !hard_to_hear)
 		var/jobname // the mob's "job"
+		var/mob/living/carbon/human/impersonating //The crewmember being impersonated, if any.
+
 		if (ishuman(speaker))
 			var/mob/living/carbon/human/H = speaker
-			jobname = H.get_assignment()
+
+			if((H.wear_id && istype(H.wear_id,/obj/item/weapon/card/id/syndicate)) && (H.wear_mask && istype(H.wear_mask,/obj/item/clothing/mask/gas/voice)))
+
+				changed_voice = 1
+				var/mob/living/carbon/human/I = locate(speaker_name)
+
+				if(I)
+					impersonating = I
+					jobname = impersonating.get_assignment()
+				else
+					jobname = "Unknown"
+			else
+				jobname = H.get_assignment()
+
 		else if (iscarbon(speaker)) // Nonhuman carbon mob
 			jobname = "No id"
 		else if (isAI(speaker))
@@ -105,7 +122,13 @@
 		else
 			jobname = "Unknown"
 
-		track = "<a href='byond://?src=\ref[src];track=\ref[speaker]'>[speaker_name] ([jobname])</a>"
+		if(changed_voice)
+			if(impersonating)
+				track = "<a href='byond://?src=\ref[src];trackname=[html_encode(speaker_name)];track=\ref[impersonating]'>[speaker_name] ([jobname])</a>"
+			else
+				track = "[speaker_name] ([jobname])"
+		else
+			track = "<a href='byond://?src=\ref[src];trackname=[html_encode(speaker_name)];track=\ref[speaker]'>[speaker_name] ([jobname])</a>"
 
 	if(istype(src, /mob/dead/observer))
 		if(speaker_name != speaker.real_name && !isAI(speaker)) //Announce computer and various stuff that broadcasts doesn't use it's real name but AI's can't pretend to be other mobs.
