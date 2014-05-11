@@ -48,6 +48,12 @@
 
 
 /mob/proc/death(gibbed)
+
+	//Quick fix for corpses kept propped up in chairs. ~Z
+	drop_r_hand()
+	drop_l_hand()
+	//End of fix.
+
 	timeofdeath = world.time
 
 	living_mob_list -= src
