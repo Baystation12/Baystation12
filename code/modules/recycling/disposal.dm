@@ -610,8 +610,17 @@
 
 	// called when player tries to move while in a pipe
 	relaymove(mob/user as mob)
-		if (user.stat)
+
+		if(!istype(user,/mob/living))
 			return
+
+		var/mob/living/U = user
+
+		if (U.stat || U.last_special <= world.time)
+			return
+
+		U.last_special = world.time+100
+
 		if (src.loc)
 			for (var/mob/M in hearers(src.loc.loc))
 				M << "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>"
