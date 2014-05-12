@@ -4,7 +4,7 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "power"
 	req_access = list(access_engine_equip)
-	circuit = "/obj/item/weapon/circuitboard/robotics"
+	circuit = "/obj/item/weapon/circuitboard/drone_control"
 
 	//Used when pinging drones.
 	var/drone_call_area = "Engineering"
