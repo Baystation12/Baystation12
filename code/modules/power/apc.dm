@@ -574,9 +574,7 @@
 				opened = 1
 			update_icon()
 	else
-		// The extra crowbar thing fixes MoMMIs not being able to remove APCs.
-		// They can just pop them off with a crowbar.
-		if (	((stat & BROKEN) || malfhack) \
+		if (((stat & BROKEN) || malfhack) \
 				&& !opened \
 				&& ( \
 					(W.force >= 5 && W.w_class >= 3.0) \
