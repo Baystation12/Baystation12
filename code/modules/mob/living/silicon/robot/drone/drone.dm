@@ -212,6 +212,8 @@
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
 
 	if(health <= -35 && src.stat != 2)
+		timeofdeath = world.time
+		death() //Possibly redundant, having trouble making death() cooperate.
 		gib()
 		return
 	..()
@@ -257,7 +259,7 @@
 
 /mob/living/silicon/robot/drone/proc/request_player()
 	for(var/mob/dead/observer/O in player_list)
-		if(jobban_isbanned(O, "Maintenance Drone"))
+		if(jobban_isbanned(O, "Cyborg"))
 			continue
 		if(O.client)
 			if(O.client.prefs.be_special & BE_PAI)
