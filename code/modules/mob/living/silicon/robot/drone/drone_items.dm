@@ -245,7 +245,7 @@
 	dat += tools
 
 	if (emagged)
-		if (module.emag)
+		if (!module.emag)
 			dat += text("<B>Resource depleted</B><BR>")
 		else if(activated(module.emag))
 			dat += text("[module.emag]: <B>Activated</B><BR>")
