@@ -49,7 +49,6 @@
 	var/w_uniform_icons = null
 	var/gloves_icons = null
 	var/glasses_icons = null
-	var/ears_icons
 	var/shoes_icons = null
 	var/head_icons = null
 	var/belt_icons = null
