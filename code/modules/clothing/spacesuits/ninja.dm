@@ -36,8 +36,8 @@
 		//Main function variables.
 	var/s_initialized = 0//Suit starts off.
 	var/s_coold = 0//If the suit is on cooldown. Can be used to attach different cooldowns to abilities. Ticks down every second based on suit ntick().
-	var/s_cost = 5.0//Base energy cost each ntick.
-	var/s_acost = 25.0//Additional cost for additional powers active.
+	var/s_regen = 5.0//Base energy regen each ntick.
+	var/s_cost = 25.0//Additional cost for additional powers active.
 	var/k_cost = 200.0//Kamikaze energy cost each ntick.
 	var/k_damage = 1.0//Brute damage potentially done by Kamikaze each ntick.
 	var/s_delay = 40.0//How fast the suit does certain things, lower is faster. Can be overridden in specific procs. Also determines adverse probability.
