@@ -270,7 +270,17 @@
 
 /obj/item/weapon/robot_module/drone
 	name = "drone module"
-
+	var/list/stacktypes = list(
+		/obj/item/stack/sheet/wood/cyborg = 1,
+		/obj/item/stack/sheet/mineral/plastic/cyborg = 1,
+		/obj/item/stack/sheet/rglass/cyborg = 5,
+		/obj/item/stack/tile/wood = 5,
+		/obj/item/stack/rods = 15,
+		/obj/item/stack/tile/plasteel = 15,
+		/obj/item/stack/sheet/metal/cyborg = 20,
+		/obj/item/stack/sheet/glass/cyborg = 20,
+		/obj/item/weapon/cable_coil = 30
+		)
 
 	New()
 		//TODO: Replace with shittier flashlight and work out why we can't remove the flash. ~Z
@@ -289,17 +299,6 @@
 		src.emag = new /obj/item/weapon/card/emag(src)
 		src.emag.name = "Cryptographic Sequencer"
 
-
-		var/list/stacktypes = list(
-			/obj/item/stack/rods = 10,
-			/obj/item/stack/tile/plasteel = 10,
-			/obj/item/stack/sheet/metal/cyborg = 10,
-			/obj/item/stack/sheet/wood/cyborg = 1,
-			/obj/item/weapon/cable_coil = 30,
-			/obj/item/stack/sheet/glass/cyborg = 10,
-			/obj/item/stack/sheet/mineral/plastic/cyborg = 1
-			)
-
 		for(var/T in stacktypes)
 			var/obj/item/stack/sheet/W = new T(src)
 			W.amount = stacktypes[T]
@@ -316,7 +315,9 @@
 		/obj/item/weapon/cable_coil,
 		/obj/item/stack/sheet/glass/cyborg,
 		/obj/item/stack/rods,
-		/obj/item/stack/tile/plasteel
+		/obj/item/stack/sheet/rglass/cyborg,
+		/obj/item/stack/tile/plasteel,
+		/obj/item/stack/tile/wood
 	)
 
 	for(var/T in stacks)
@@ -327,9 +328,12 @@
 			src.modules -= null
 			S = new T(src)
 			src.modules += S
-			S.amount = 0
+			S.amount = 1
+		var/max = 15
+		if(stacktypes[T])
+			max = stacktypes[T]
 
-		if(S && S.amount < 15)
+		if(S && S.amount < max)
 			S.amount++
 
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
