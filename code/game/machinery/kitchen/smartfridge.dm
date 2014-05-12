@@ -45,6 +45,17 @@
 		return 1
 	return 0
 
+/obj/machinery/smartfridge/medbay
+	name = "\improper Medical Fridge"
+	desc = "Am refridgerated storage unit for medicine."
+	icon = 'icons/obj/vending.dmi'
+	req_one_access_txt = "5;33"
+
+/obj/machinery/smartfridge/medbay/accept_check(var/obj/item/O as obj)
+	if(istype(O,/obj/item/weapon/reagent_containers/) || istype(O,/obj/item/weapon/storage/pill_bottle))
+		return 1
+	return 0
+
 
 /obj/machinery/smartfridge/power_change()
 	if( powered() )
@@ -58,6 +69,7 @@
 		stat |= NOPOWER
 		if(!isbroken)
 			icon_state = icon_off
+
 
 /*******************
 *   Item Adding
@@ -115,7 +127,6 @@
 
 	updateUsrDialog()
 
-	..()
 
 /obj/machinery/smartfridge/attack_paw(mob/user as mob)
 	return attack_hand(user)
@@ -123,11 +134,15 @@
 /obj/machinery/smartfridge/attack_ai(mob/user as mob)
 	return 0
 
+/obj/machinery/smartfridge/attack_hand(mob/user as mob)
+
 	ui_interact(user)
 
 /*******************
 *   SmartFridge Menu
 ********************/
+
+
 
 /obj/machinery/smartfridge/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	user.set_machine(src)
@@ -186,3 +201,67 @@
 		return 1
 
 	return 0
+
+
+
+
+
+
+
+/*
+
+/obj/machinery/smartfridge/interact(mob/user as mob)
+	if(!src.ispowered)
+		return
+
+	var/dat = "<TT><b>Select an item:</b><br>"
+
+	if (contents.len == 0)
+		dat += "<font color = 'red'>No product loaded!</font>"
+	else
+		for (var/O in item_quants)
+			if(item_quants[O] > 0)
+				var/N = item_quants[O]
+				dat += "<FONT color = 'blue'><B>[capitalize(O)]</B>:"
+				dat += " [N] </font>"
+				dat += "<a href='byond://?src=\ref[src];vend=[O];amount=1'>Vend</A> "
+				if(N > 5)
+					dat += "(<a href='byond://?src=\ref[src];vend=[O];amount=5'>x5</A>)"
+						if(N > 10)
+							dat += "(<a href='byond://?src=\ref[src];vend=[O];amount=10'>x10</A>)"
+								if(N > 25)
+									dat += "(<a href='byond://?src=\ref[src];vend=[O];amount=25'>x25</A>)"
+				if(N > 1)
+					dat += "(<a href='?src=\ref[src];vend=[O];amount=[N]'>All</A>)"
+				dat += "<br>"
+
+		dat += "</TT>"
+	user << browse("<HEAD><TITLE>[src] Supplies</TITLE></HEAD><TT>[dat]</TT>", "window=smartfridge")
+	onclose(user, "smartfridge")
+	return
+
+/obj/machinery/smartfridge/Topic(href, href_list)
+	if(..())
+		return
+	usr.set_machine(src)
+
+	var/N = href_list["vend"]
+	var/amount = text2num(href_list["amount"])
+
+	if(item_quants[N] <= 0) // Sanity check, there are probably ways to press the button when it shouldn't be possible.
+		return
+
+	item_quants[N] = max(item_quants[N] - amount, 0)
+
+	var/i = amount
+		for(var/obj/O in contents)
+			if(O.name == N)
+				O.loc = src.loc
+				i--
+				if(i <= 0)
+					break
+
+	src.updateUsrDialog()
+	return
+
+*/
