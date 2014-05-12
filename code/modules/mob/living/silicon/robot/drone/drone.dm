@@ -105,6 +105,19 @@
 				src << "\red Your binary communications component isn't functional."
 				return
 			robot_talk(trim(copytext(message,3)))
+		else
+
+			var/list/listeners = hearers(5,src)
+			listeners |= src
+
+			for(var/mob/living/silicon/robot/drone/D in listeners)
+				if(D.client) D << "<b>[src]</b> transmits, \"[message]\""
+
+			for (var/mob/M in player_list)
+				if (istype(M, /mob/new_player))
+					continue
+				else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
+					if(M.client) M << "<b>[src]</b> transmits, \"[message]\""
 
 //Sick of trying to get this to display properly without redefining it.
 /mob/living/silicon/robot/drone/show_system_integrity()
