@@ -104,6 +104,23 @@
 		else
 			user << "\red Your gripper cannot hold \the [target]."
 
+	else if(istype(target,/obj/machinery/power/apc))
+		var/obj/machinery/power/apc/A = target
+		if(A.opened)
+			if(A.cell)
+
+				wrapped = A.cell
+
+				A.cell.add_fingerprint(user)
+				A.cell.updateicon()
+				A.cell.loc = src
+				A.cell = null
+
+				A.charging = 0
+				A.update_icon()
+
+				user.visible_message("\red [user] removes the power cell from [A]!", "You remove the power cell.")
+
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler
 
