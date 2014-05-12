@@ -141,7 +141,8 @@ ________________________________________________________________________________
 
 		//Now let's do the normal processing.
 		if(s_coold)	s_coold--//Checks for ability s_cooldown first.
-		var/A = s_cost//s_cost is the default energy cost each ntick, usually 5.
+		var/A = 0 - s_regen//s_regen is the default energy regen each ntick, usually 5.
+
 		if(U.stat == 2)
 			U << browse(null, "window=spideros")
 			explosion(U.loc, 0, 1, 3, 4)
@@ -153,15 +154,20 @@ ________________________________________________________________________________
 			return
 		if(!kamikaze)
 			if(blade_check(U))//If there is a blade held in hand.
-				A += s_acost
+				A += s_cost
 			if(s_active)//If stealth is active.
-				A += s_acost
+				A += s_cost
 
 		else
 			if(prob(s_delay))//Suit delay is used as probability. May change later.
 				U.adjustBruteLoss(k_damage)//Default damage done, usually 1.
 			A = k_cost//kamikaze cost.
+
 		cell.charge-=A
+
+		if(src.cell.maxcharge < src.cell.charge)
+			src.cell.charge = src.cell.maxcharge
+
 		if(cell.charge<=0)
 			if(kamikaze)
 				U.say("I DIE TO LIVE AGAIN!")
