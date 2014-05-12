@@ -37,7 +37,7 @@
 //Item holder.
 /obj/item/weapon/holder/drone
 
-	name = "maintenance bot"
+	name = "maintenance drone"
 	desc = "It's a small maintenance robot."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "drone"

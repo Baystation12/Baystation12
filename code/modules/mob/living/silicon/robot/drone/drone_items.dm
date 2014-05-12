@@ -130,21 +130,63 @@
 	//Used to give the right message.
 	var/grabbed_something = 0
 
-	for(var/obj/item/W in T)
+	for(var/mob/M in T)
+		if(istype(M,/mob/living/simple_animal/lizard) || istype(M,/mob/living/simple_animal/mouse))
+			src.loc.visible_message("\red [src.loc] sucks [M] into its decompiler. There's a horrible crunching noise.","\red It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises.")
+			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
+			del(M)
+			stored_comms["wood"]++
+			stored_comms["wood"]++
+			stored_comms["plastic"]++
+			stored_comms["plastic"]++
+			return
+		else
+			continue
+
+	for(var/obj/W in T)
 		//Different classes of items give different commodities.
-		if(istype(W,/obj/item/trash))
+		if(istype(W,/obj/effect/spider/spiderling))
+			stored_comms["wood"]++
+			stored_comms["wood"]++
+			stored_comms["plastic"]++
+			stored_comms["plastic"]++
+		else if(istype(W,/obj/item/weapon/light))
+			var/obj/item/weapon/light/L = W
+			if(L.status >= 2) //In before someone changes the inexplicably local defines. ~ Z
+				stored_comms["metal"]++
+				stored_comms["glass"]++
+			else
+				continue
+		else if(istype(W,/obj/effect/decal/remains/robot))
 			stored_comms["metal"]++
+			stored_comms["metal"]++
+			stored_comms["plastic"]++
+			stored_comms["plastic"]++
+			stored_comms["glass"]++
+		else if(istype(W,/obj/item/trash))
+			stored_comms["metal"]++
+			stored_comms["plastic"]++
+			stored_comms["plastic"]++
 			stored_comms["plastic"]++
 		else if(istype(W,/obj/effect/decal/cleanable/blood/gibs/robot))
 			stored_comms["metal"]++
+			stored_comms["metal"]++
+			stored_comms["glass"]++
 			stored_comms["glass"]++
 		else if(istype(W,/obj/item/ammo_casing))
 			stored_comms["metal"]++
 		else if(istype(W,/obj/item/weapon/shard/shrapnel))
 			stored_comms["metal"]++
+			stored_comms["metal"]++
+			stored_comms["metal"]++
 		else if(istype(W,/obj/item/weapon/shard))
 			stored_comms["glass"]++
+			stored_comms["glass"]++
+			stored_comms["glass"]++
 		else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/grown))
+			stored_comms["wood"]++
+			stored_comms["wood"]++
+			stored_comms["wood"]++
 			stored_comms["wood"]++
 		else
 			continue
@@ -203,7 +245,7 @@
 	dat += tools
 
 	if (emagged)
-		if (module.emag)
+		if (!module.emag)
 			dat += text("<B>Resource depleted</B><BR>")
 		else if(activated(module.emag))
 			dat += text("[module.emag]: <B>Activated</B><BR>")

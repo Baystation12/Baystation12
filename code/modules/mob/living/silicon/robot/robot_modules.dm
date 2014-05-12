@@ -329,7 +329,7 @@
 			src.modules += S
 			S.amount = 0
 
-		if(istype(S) && S.amount < 15)
+		if(S && S.amount < 15)
 			S.amount++
 
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
