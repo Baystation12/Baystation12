@@ -104,6 +104,23 @@
 		else
 			user << "\red Your gripper cannot hold \the [target]."
 
+	else if(istype(target,/obj/machinery/power/apc))
+		var/obj/machinery/power/apc/A = target
+		if(A.opened)
+			if(A.cell)
+
+				wrapped = A.cell
+
+				A.cell.add_fingerprint(user)
+				A.cell.updateicon()
+				A.cell.loc = src
+				A.cell = null
+
+				A.charging = 0
+				A.update_icon()
+
+				user.visible_message("\red [user] removes the power cell from [A]!", "You remove the power cell.")
+
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler
 
@@ -140,12 +157,41 @@
 			stored_comms["plastic"]++
 			stored_comms["plastic"]++
 			return
+
+		else if(istype(M,/mob/living/silicon/robot/drone) && M.stat == 2 && !M.client)
+
+			var/mob/living/silicon/robot/drone/D = src.loc
+
+			if(!istype(D))
+				return
+
+			D << "\red You begin decompiling the other drone."
+
+			if(!do_after(D,50))
+				D << "\red You need to remain still while decompiling such a large object."
+				return
+
+			if(!M || !D) return
+
+			D << "\red You carefully and thoroughly decompile your downed fellow, storing as much of its resources as you can within yourself."
+
+			del(M)
+			new/obj/effect/decal/cleanable/blood/oil(get_turf(src))
+
+			stored_comms["metal"] += 15
+			stored_comms["glass"] += 15
+			stored_comms["wood"] += 5
+			stored_comms["plastic"] += 5
+
+			return
 		else
 			continue
 
 	for(var/obj/W in T)
 		//Different classes of items give different commodities.
-		if(istype(W,/obj/effect/spider/spiderling))
+		if (istype(W,/obj/item/weapon/cigbutt))
+			stored_comms["plastic"]++
+		else if(istype(W,/obj/effect/spider/spiderling))
 			stored_comms["wood"]++
 			stored_comms["wood"]++
 			stored_comms["plastic"]++
