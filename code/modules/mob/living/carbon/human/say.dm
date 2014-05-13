@@ -14,6 +14,9 @@
 	if(stat == 2)
 		return say_dead(message)
 
+	if (istype(wear_mask, /obj/item/clothing/mask/muzzle))  //Todo:  Add this to speech_problem_flag checks.
+		return
+
 	if(copytext(message,1,2) == "*")
 		return emote(copytext(message,2))
 
@@ -148,6 +151,10 @@
 
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
 		return 1
+	if (istype(other, /mob/living/carbon/monkey/diona) && !speaking)
+		if(other.languages.len >= 2)			//They've sucked down some blood and can speak common now.
+			return 1
+
 	if (istype(other, /mob/living/silicon))
 		return 1
 	if (istype(other, /mob/living/carbon/brain))

@@ -268,9 +268,12 @@ var/world_topic_spam_protect_time = world.timeofday
 				if (copytext(line, 1, 2) == ";")
 					continue
 
-				var/rights = admin_ranks["Moderator"]
+				var/title = "Moderator"
+				if(config.mods_are_mentors) title = "Mentor"
+				var/rights = admin_ranks[title]
+				
 				var/ckey = copytext(line, 1, length(line)+1)
-				var/datum/admins/D = new /datum/admins("Moderator", rights, ckey)
+				var/datum/admins/D = new /datum/admins(title, rights, ckey)
 				D.associate(directory[ckey])
 
 /world/proc/update_status()

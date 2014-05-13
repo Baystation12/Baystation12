@@ -93,7 +93,13 @@
 			return !density
 
 /obj/structure/grille/bullet_act(var/obj/item/projectile/Proj)
+
 	if(!Proj)	return
+
+	//Tasers and the like should not damage grilles.
+	if(Proj.damage_type == HALLOSS)
+		return
+
 	src.health -= Proj.damage*0.2
 	healthcheck()
 	return 0

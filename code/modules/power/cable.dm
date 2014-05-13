@@ -35,29 +35,29 @@
 	var/d1 = 0
 	var/d2 = 1
 	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
-	var/cable_color = COLOR_RED
+	color = COLOR_RED
 	var/obj/structure/powerswitch/power_switch
 
 /obj/structure/cable/yellow
-	cable_color = COLOR_YELLOW
+	color = COLOR_YELLOW
 
 /obj/structure/cable/green
-	cable_color = COLOR_GREEN
+	color = COLOR_GREEN
 
 /obj/structure/cable/blue
-	cable_color = COLOR_BLUE
+	color = COLOR_BLUE
 
 /obj/structure/cable/pink
-	cable_color = COLOR_PINK
+	color = COLOR_PINK
 
 /obj/structure/cable/orange
-	cable_color = COLOR_ORANGE
+	color = COLOR_ORANGE
 
 /obj/structure/cable/cyan
-	cable_color = COLOR_CYAN
+	color = COLOR_CYAN
 
 /obj/structure/cable/white
-	cable_color = COLOR_WHITE
+	color = COLOR_WHITE
 
 /obj/structure/cable/New()
 	..()
@@ -94,7 +94,6 @@
 /obj/structure/cable/proc/updateicon()
 	icon_state = "[d1]-[d2]"
 	alpha = invisibility ? 127 : 255
-	color = cable_color
 
 
 // returns the powernet this cable belongs to
@@ -126,9 +125,9 @@
 			return
 
 		if(src.d1)	// 0-X cables are 1 unit, X-X cables are 2 units long
-			new/obj/item/weapon/cable_coil(T, 2, cable_color)
+			new/obj/item/weapon/cable_coil(T, 2, color)
 		else
-			new/obj/item/weapon/cable_coil(T, 1, cable_color)
+			new/obj/item/weapon/cable_coil(T, 1, color)
 
 		for(var/mob/O in viewers(src, null))
 			O.show_message("<span class='warning'>[user] cuts the cable.</span>", 1)
@@ -190,12 +189,12 @@
 			del(src)
 		if(2.0)
 			if (prob(50))
-				new/obj/item/weapon/cable_coil(src.loc, src.d1 ? 2 : 1, cable_color)
+				new/obj/item/weapon/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				del(src)
 
 		if(3.0)
 			if (prob(25))
-				new/obj/item/weapon/cable_coil(src.loc, src.d1 ? 2 : 1, cable_color)
+				new/obj/item/weapon/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				del(src)
 	return
 
@@ -229,16 +228,15 @@
 	..()
 	src.amount = length
 	if (param_color)
-		item_color = param_color
+		color = param_color
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	updateicon()
 	update_wclass()
 
 /obj/item/weapon/cable_coil/proc/updateicon()
-	if (!item_color)
-		item_color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
-	color = item_color
+	if (!color)
+		color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	if(amount == 1)
 		icon_state = "coil1"
 		name = "cable piece"
@@ -422,7 +420,7 @@
 			use(1)
 			if (C.shock(user, 50))
 				if (prob(50)) //fail
-					new/obj/item/weapon/cable_coil(C.loc, 1, C.cable_color)
+					new/obj/item/weapon/cable_coil(C.loc, 1, C.color)
 					del(C)
 		//src.laying = 1
 		//last = C
@@ -482,7 +480,7 @@
 			use(1)
 			if (NC.shock(user, 50))
 				if (prob(50)) //fail
-					new/obj/item/weapon/cable_coil(NC.loc, 1, NC.cable_color)
+					new/obj/item/weapon/cable_coil(NC.loc, 1, NC.color)
 					del(NC)
 
 			return
@@ -521,7 +519,7 @@
 		use(1)
 		if (C.shock(user, 50))
 			if (prob(50)) //fail
-				new/obj/item/weapon/cable_coil(C.loc, 2, C.cable_color)
+				new/obj/item/weapon/cable_coil(C.loc, 2, C.color)
 				del(C)
 
 		return
@@ -597,7 +595,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	var/color_n = "#DD0000"
 	if(colorC)
 		color_n = colorC
-	cable_color = color_n
 	color = color_n
 
 /obj/item/weapon/cable_coil/cut

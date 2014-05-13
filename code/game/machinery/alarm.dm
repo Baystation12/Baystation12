@@ -187,8 +187,8 @@
 			var/heat_capacity = gas.heat_capacity()
 			var/energy_used = min( abs( heat_capacity*(gas.temperature - target_temperature) ), MAX_ENERGY_CHANGE)
 
-			//Use power.  Assuming that each power unit represents 1000 watts....
-			use_power(energy_used/1000, ENVIRON)
+			//Use power.  Assuming that each power unit represents 1 watts....
+			use_power(energy_used, ENVIRON)
 
 			//We need to cool ourselves.
 			if(environment.temperature > target_temperature)
