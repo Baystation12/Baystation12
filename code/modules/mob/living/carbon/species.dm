@@ -46,6 +46,17 @@
 	var/flesh_color = "#FFC896" //Pink.
 	var/list/abilities = list()  // For species-derived or admin-given powers
 
+	var/w_uniform_icons = null
+	var/gloves_icons = null
+	var/glasses_icons = null
+	var/ears_icons
+	var/shoes_icons = null
+	var/head_icons = null
+	var/belt_icons = null
+	var/wear_suit_icons = null
+	var/wear_mask_icons = null
+	var/back_icons = null
+
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 	//This is a basic humanoid limb setup.
 	H.organs = list()
@@ -188,6 +199,9 @@
 	eyes = "vox_eyes_s"
 	breath_type = "nitrogen"
 
+	w_uniform_icons = 'icons/mob/species/vox_w_uniform.dmi'
+	shoes_icons = 'icons/mob/species/vox_shoes.dmi'
+
 	flags = NO_SCAN | IS_WHITELISTED | NO_BLOOD
 
 /datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
@@ -265,6 +279,7 @@
 	// Both must be set or it's only a 45% chance of manifesting.
 	default_mutations=list(M_REMOTE_TALK)
 	default_block_names=list("REMOTETALK")
+
 
 /datum/species/diona
 	name = "Diona"

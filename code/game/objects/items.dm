@@ -39,6 +39,7 @@
 	var/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/list/allowed = null //suit storage stuff.
 	var/obj/item/device/uplink/hidden/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
+	var/list/species_fit = null //This object has a different appearance when worn by these species
 
 /obj/item/Destroy()
 	if(istype(src.loc, /mob))
@@ -274,9 +275,9 @@
 //returns 1 if the item is equipped by a mob, 0 otherwise.
 //This might need some error trapping, not sure if get_equipped_items() is safe for non-human mobs.
 /obj/item/proc/is_equipped()
-	if(!ismob(loc)) 
+	if(!ismob(loc))
 		return 0
-	
+
 	var/mob/M = loc
 	if(src in M.get_equipped_items())
 		return 1
