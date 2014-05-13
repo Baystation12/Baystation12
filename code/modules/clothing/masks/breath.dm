@@ -43,6 +43,7 @@
 	icon_state = "voxmask"
 	item_state = "voxmask"
 	permeability_coefficient = 0.01
+	species_restricted = ("Vox")
 
 	toggle()
 		set category = "Object"
@@ -50,11 +51,3 @@
 		set src in usr
 
 		usr << "You can't really adjust this mask - it's moulded to your beak!"
-
-/obj/item/clothing/mask/breath/vox/mob_can_equip(M as mob, slot)
-	var/mob/living/carbon/human/V = M
-	if(V.species.name != "Vox")
-		V << "<span class='warning'>This clearly isn't designed for your species!</span>"
-		return 0
-
-	return ..()

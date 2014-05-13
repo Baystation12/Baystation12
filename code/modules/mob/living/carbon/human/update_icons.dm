@@ -865,12 +865,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(r_hand)
 		r_hand.screen_loc = ui_rhand	//TODO
 		var/t_state = r_hand.item_state
-		if(!t_state)
-			t_state = r_hand.icon_state
-		var/dmi='icons/mob/items_righthand.dmi'
-		if(r_hand.custom)
-			dmi=r_hand.icon
-		overlays_standing[R_HAND_LAYER] = image("icon" = dmi, "icon_state" = "[t_state]")
+		if(!t_state)	t_state = r_hand.icon_state
+		if(r_hand.icon_override) t_state = "[t_state]_r"
+		overlays_standing[R_HAND_LAYER] = image("icon" = ((r_hand.icon_override) ? r_hand.icon_override : 'icons/mob/items_righthand.dmi'), "icon_state" = "[t_state]")
 		if (handcuffed) drop_r_hand()
 	else
 		overlays_standing[R_HAND_LAYER] = null
@@ -881,12 +878,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(l_hand)
 		l_hand.screen_loc = ui_lhand	//TODO
 		var/t_state = l_hand.item_state
-		if(!t_state)
-			t_state = l_hand.icon_state
-		var/dmi='icons/mob/items_lefthand.dmi'
-		if(l_hand.custom)
-			dmi=l_hand.icon
-		overlays_standing[L_HAND_LAYER] = image("icon" = dmi, "icon_state" = "[t_state]")
+		if(!t_state)	t_state = l_hand.icon_state
+		if(l_hand.icon_override) t_state = "[t_state]_l"
+		overlays_standing[L_HAND_LAYER] = image("icon" = ((l_hand.icon_override) ? l_hand.icon_override : 'icons/mob/items_lefthand.dmi'), "icon_state" = "[t_state]")
 		if (handcuffed) drop_l_hand()
 	else
 		overlays_standing[L_HAND_LAYER] = null
@@ -896,7 +890,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	overlays_standing[TAIL_LAYER] = null
 
 	if(species.tail && species.bodyflags & HAS_TAIL)
-		if(!wear_suit || !(wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space))
+		if(!wear_suit || !(wear_suit.flags_inv & HIDETAIL) && !istype(wear_suit, /obj/item/clothing/suit/space))
 			var/icon/tail_s = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[species.tail]_s")
 			tail_s.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
 

@@ -84,8 +84,11 @@
 	if (src.slurring)
 		if(copytext(message, 1, 2) != "*")
 			message = slur(message)
-	..(message)
 
+	if((species.name == "Vox" || species.name == "Vox Armalis") && prob(20))
+		playsound(src.loc, 'sound/voice/shriek1.ogg', 50, 1)
+
+	..(message)
 
 
 /mob/living/carbon/human/say_understands(var/other,var/datum/language/speaking = null)

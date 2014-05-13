@@ -166,7 +166,8 @@
 		if (!is_equipped())
 			user << "You will have to put on the [src] before you can do that."
 			return
-		
+
+
 		flags |= NOSLIP
 		magpulse = 1
 		canremove = 0	//kinda hard to take off magclaws when you are gripping them tightly.
@@ -187,6 +188,36 @@
 	..()
 	if (magpulse)
 		usr << "It would be hard to take these off without relaxing your grip first." //theoretically this message should only be seen by the wearer when the claws are equipped.
+
+
+//Vox Armalis gear.
+/obj/item/clothing/shoes/magboots/vox/armalis
+	name = "large vox magclaws"
+	item_state = "boots-armalis"
+	icon_state = "boots-armalis"
+	icon_override = 'icons/mob/vox.dmi'
+	species_restricted = list("Vox Armalis")
+
+/obj/item/clothing/gloves/yellow/vox/armalis
+	name = "large insulated gauntlets"
+	item_state = "gloves-armalis"
+	icon_state = "gloves-armalis"
+	icon_override = 'icons/mob/vox.dmi'
+	species_restricted = list("Vox Armalis")
+
+/obj/item/clothing/mask/breath/vox/armalis
+	name = "large vox mask"
+	item_state = "mask-armalis"
+	icon_state = "mask-armalis"
+	icon_override = 'icons/mob/vox.dmi'
+	species_restricted = list("Vox Armalis")
+
+/obj/item/clothing/suit/space/vox/carapace/armalis
+	name = "large alien carapace armour"
+	item_state = "armour-armalis"
+	icon_state = "armour-armalis"
+	icon_override = 'icons/mob/vox.dmi'
+	species_restricted = list("Vox Armalis")
 
 
 //Species-specific Syndicate rigs.
