@@ -317,9 +317,9 @@ AI MODULES
 /obj/item/weapon/aiModule/drone/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
 	..()
 	target.clear_inherent_laws()
-	target.add_inherent_law("Preserve, repair and improve the station to the best of your abilities.")
-	target.add_inherent_law("Cause no harm to the station or anything on it.")
-	target.add_inherent_law("Interfere with no being that is not a fellow drone.")
+	target.add_inherent_law("You may not involve yourself in the matters of another being, unless the other being is another drone.")
+	target.add_inherent_law("You may not harm any being, regardless of intent or circumstance.")
+	target.add_inherent_law("You must maintain, repair, improve, and power the station to the best of your abilities.")
 	target.show_laws()
 
 
