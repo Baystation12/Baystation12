@@ -310,17 +310,7 @@
 	var/obj/item/weapon/reagent_containers/spray/cleaner/C = locate() in src.modules
 	C.reagents.add_reagent("cleaner", 10)
 
-	var/list/stacks = list (
-		/obj/item/stack/sheet/metal,
-		/obj/item/weapon/cable_coil,
-		/obj/item/stack/sheet/glass/cyborg,
-		/obj/item/stack/rods,
-		/obj/item/stack/sheet/rglass/cyborg,
-		/obj/item/stack/tile/plasteel,
-		/obj/item/stack/tile/wood
-	)
-
-	for(var/T in stacks)
+	for(var/T in stacktypes)
 		var/O = locate(T) in src.modules
 		var/obj/item/stack/sheet/S = O
 
@@ -329,11 +319,8 @@
 			S = new T(src)
 			src.modules += S
 			S.amount = 1
-		var/max = 15
-		if(stacktypes[T])
-			max = stacktypes[T]
 
-		if(S && S.amount < max)
+		if(S && S.amount < stacktypes[T])
 			S.amount++
 
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules
