@@ -95,6 +95,7 @@ var/list/ai_list = list()
 		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
 		/mob/living/silicon/ai/proc/toggle_camera_light)
 
+
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
 			new/obj/structure/AIcore/deactivated(loc)//New empty terminal.
@@ -114,6 +115,21 @@ var/list/ai_list = list()
 				src << "<b>These laws may be changed by other players, or by you being the traitor.</b>"
 
 			job = "AI"
+
+	spawn(5)
+		new /obj/machinery/ai_powersupply(src)
+
+
+	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
+
+
 	ai_list += src
 	..()
 	return
@@ -122,6 +138,37 @@ var/list/ai_list = list()
 	ai_list -= src
 	..()
 
+
+/*
+	The AI Power supply is a dummy object used for powering the AI since only machinery should be using power.
+	The alternative was to rewrite a bunch of AI code instead here we are.
+*/
+/obj/machinery/ai_powersupply
+	name="Power Supply"
+	active_power_usage=1000
+	use_power = 2
+	power_channel = EQUIP
+	var/mob/living/silicon/ai/powered_ai = null
+	invisibility = 100
+
+/obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
+	powered_ai = ai
+	if(isnull(powered_ai))
+		Del()
+
+	loc = powered_ai.loc
+	use_power(1) // Just incase we need to wake up the power system.
+
+	..()
+
+/obj/machinery/ai_powersupply/process()
+	if(!powered_ai || powered_ai.stat & DEAD)
+		Del()
+	if(!powered_ai.anchored)
+		loc = powered_ai.loc
+		use_power = 0
+	if(powered_ai.anchored)
+		use_power = 2
 
 /mob/living/silicon/ai/verb/pick_icon()
 	set category = "AI Commands"
@@ -338,9 +385,12 @@ var/list/ai_list = list()
 //		src << text ("Switching Law [L]'s report status to []", lawcheck[L+1])
 		checklaws()
 
+	//Uncomment this line of code if you are enabling the AI Vocal (VOX) announcements.
+/*
 	if(href_list["say_word"])
 		play_vox_word(href_list["say_word"], null, src)
 		return
+*/
 
 	if (href_list["lawi"]) // Toggling whether or not a law gets stated by the State Laws verb --NeoFite
 		var/L = text2num(href_list["lawi"])
@@ -355,9 +405,23 @@ var/list/ai_list = list()
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in mob_list
+/*
 		var/mob/living/silicon/ai/A = locate(href_list["track2"]) in mob_list
 		if(A && target)
 			A.ai_actual_track(target)
+*/
+
+		//Strip off any "(as Derplord)".
+		//If there's a way to do this via a var that doesn't give the AI extra info, please let me know.
+		var/seeking = target.name
+		var/index = findtext(seeking, "(as ")
+		if(index)
+			seeking = copytext(seeking, 1, index-1)
+
+		if(target && html_decode(href_list["trackname"]) == seeking)
+			ai_actual_track(target)
+		else
+			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
 
 	else if (href_list["faketrack"])
@@ -662,10 +726,11 @@ var/list/ai_list = list()
 	camera_light_on = !camera_light_on
 	src << "Camera lights [camera_light_on ? "activated" : "deactivated"]."
 	if(!camera_light_on)
-		if(src.current)
-			src.current.SetLuminosity(0)
+		if(current)
+			current.SetLuminosity(0)
+			current = null
 	else
-		src.lightNearbyCamera()
+		lightNearbyCamera()
 
 
 

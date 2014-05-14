@@ -21,7 +21,7 @@
 	var/path = root
 
 	for(var/i=0, i<max_iterations, i++)
-		var/list/choices = flist(path)
+		var/list/choices = sortList(flist(path))
 		if(path != root)
 			choices.Insert(1,"/")
 

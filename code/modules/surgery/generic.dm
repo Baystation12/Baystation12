@@ -6,6 +6,8 @@
 /datum/surgery_step/generic/
 	can_infect = 1
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if (isslime(target))
+			return 0
 		if (target_zone == "eyes")	//there are specific steps for eye surgery
 			return 0
 		if (!hasorgans(target))
@@ -15,9 +17,91 @@
 			return 0
 		if (affected.status & ORGAN_DESTROYED)
 			return 0
+		if (target_zone == "head" && target.species && (target.species.flags & IS_SYNTHETIC))
+			return 1
 		if (affected.status & ORGAN_ROBOT)
 			return 0
 		return 1
+
+/datum/surgery_step/generic/cut_with_laser
+	allowed_tools = list(
+	/obj/item/weapon/scalpel/laser3 = 95, \
+	/obj/item/weapon/scalpel/laser2 = 85, \
+	/obj/item/weapon/scalpel/laser1 = 75, \
+	/obj/item/weapon/melee/energy/sword = 5
+	)
+
+	min_duration = 90
+	max_duration = 110
+
+	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		return ..() && affected.open == 0 && target_zone != "mouth"
+
+	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("[user] starts the bloodless incision on [target]'s [affected.display_name] with \the [tool].", \
+		"You start the bloodless incision on [target]'s [affected.display_name] with \the [tool].")
+		target.custom_pain("You feel a horrible, searing pain in your [affected.display_name]!",1)
+		..()
+
+	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("\blue [user] has made a bloodless incision on [target]'s [affected.display_name] with \the [tool].", \
+		"\blue You have made a bloodless incision on [target]'s [affected.display_name] with \the [tool].",)
+		//Could be cleaner ...
+		affected.open = 1
+		affected.status |= ORGAN_BLEEDING
+		affected.createwound(CUT, 1)
+		affected.clamp()
+		spread_germs_to_organ(affected, user)
+		if (target_zone == "head")
+			target.brain_op_stage = 1
+
+	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("\red [user]'s hand slips as the blade sputters, searing a long gash in [target]'s [affected.display_name] with \the [tool]!", \
+		"\red Your hand slips as the blade sputters, searing a long gash in [target]'s [affected.display_name] with \the [tool]!")
+		affected.createwound(CUT, 7.5)
+		affected.createwound(BURN, 12.5)
+
+/datum/surgery_step/generic/incision_manager
+	allowed_tools = list(
+	/obj/item/weapon/scalpel/manager = 100
+	)
+
+	min_duration = 80
+	max_duration = 120
+
+	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		return ..() && affected.open == 0 && target_zone != "mouth"
+
+	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("[user] starts to construct a prepared incision on and within [target]'s [affected.display_name] with \the [tool].", \
+		"You start to construct a prepared incision on and within [target]'s [affected.display_name] with \the [tool].")
+		target.custom_pain("You feel a horrible, searing pain in your [affected.display_name] as it is pushed apart!",1)
+		..()
+
+	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("\blue [user] has constructed a prepared incision on and within [target]'s [affected.display_name] with \the [tool].", \
+		"\blue You have constructed a prepared incision on and within [target]'s [affected.display_name] with \the [tool].",)
+		affected.open = 1
+		affected.status |= ORGAN_BLEEDING
+		affected.createwound(CUT, 1)
+		affected.clamp()
+		affected.open = 2
+		if (target_zone == "head")
+			target.brain_op_stage = 1
+
+	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		user.visible_message("\red [user]'s hand jolts as the system sparks, ripping a gruesome hole in [target]'s [affected.display_name] with \the [tool]!", \
+		"\red Your hand jolts as the system sparks, ripping a gruesome hole in [target]'s [affected.display_name] with \the [tool]!")
+		affected.createwound(CUT, 20)
+		affected.createwound(BURN, 15)
 
 /datum/surgery_step/generic/cut_open
 	allowed_tools = list(
@@ -30,6 +114,8 @@
 	max_duration = 110
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if(isslime(target))
+			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		return ..() && affected.open == 0 && target_zone != "mouth"
 

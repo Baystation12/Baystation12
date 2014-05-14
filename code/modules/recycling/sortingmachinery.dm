@@ -165,7 +165,7 @@
 	//If you don't want to fuck up disposals, add to this list, and don't change the order.
 	//If you insist on changing the order, you'll have to change every sort junction to reflect the new order. --Pete
 
-	w_class = 1
+	w_class = 2
 	item_state = "electronic"
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
@@ -218,7 +218,7 @@
 		return
 
 	Bumped(var/atom/movable/AM) //Go straight into the chute
-		if(istype(AM, /obj/item/projectile))	return
+		if(istype(AM, /obj/item/projectile) || istype(AM, /obj/effect))	return
 		switch(dir)
 			if(NORTH)
 				if(AM.loc.y != src.loc.y+1) return

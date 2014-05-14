@@ -16,9 +16,9 @@
 #define MOLES_O2STANDARD MOLES_CELLSTANDARD*O2STANDARD	// O2 standard value (21%)
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
-#define MOLES_PLASMA_VISIBLE	0.7 //Moles in a standard cell after which plasma is visible
-#define MIN_PLASMA_DAMAGE 1
-#define MAX_PLASMA_DAMAGE 10
+#define MOLES_PHORON_VISIBLE	0.7 //Moles in a standard cell after which phoron is visible
+#define MIN_PHORON_DAMAGE 1
+#define MAX_PHORON_DAMAGE 10
 
 #define BREATH_VOLUME 0.5	//liters in a normal breath
 #define BREATH_MOLES (ONE_ATMOSPHERE * BREATH_VOLUME /(T20C*R_IDEAL_GAS_EQUATION))
@@ -44,20 +44,20 @@
 #define BODYTEMP_HEAT_DAMAGE_LIMIT 360.15 // The limit the human body can take before it starts taking damage from heat.
 #define BODYTEMP_COLD_DAMAGE_LIMIT 260.15 // The limit the human body can take before it starts taking damage from coldness.
 
-#define SPACE_HELMET_MIN_COLD_PROTECITON_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-helmet quality headwear. MUST NOT BE 0.
-#define SPACE_SUIT_MIN_COLD_PROTECITON_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-suit quality jumpsuits or suits. MUST NOT BE 0.
-#define SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE 5000	//These need better heat protect
-#define FIRESUIT_MAX_HEAT_PROTECITON_TEMPERATURE 30000 //what max_heat_protection_temperature is set to for firesuit quality headwear. MUST NOT BE 0.
-#define FIRE_HELMET_MAX_HEAT_PROTECITON_TEMPERATURE 30000 //for fire helmet quality items (red and white hardhats)
-#define HELMET_MIN_COLD_PROTECITON_TEMPERATURE 160	//For normal helmets
-#define HELMET_MAX_HEAT_PROTECITON_TEMPERATURE 600	//For normal helmets
-#define ARMOR_MIN_COLD_PROTECITON_TEMPERATURE 160	//For armor
-#define ARMOR_MAX_HEAT_PROTECITON_TEMPERATURE 600	//For armor
+#define SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-helmet quality headwear. MUST NOT BE 0.
+#define SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-suit quality jumpsuits or suits. MUST NOT BE 0.
+#define SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE 5000	//These need better heat protect, but not as good heat protect as firesuits.
+#define FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE 30000 //what max_heat_protection_temperature is set to for firesuit quality headwear. MUST NOT BE 0.
+#define FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE 30000 //for fire helmet quality items (red and white hardhats)
+#define HELMET_MIN_COLD_PROTECTION_TEMPERATURE 160	//For normal helmets
+#define HELMET_MAX_HEAT_PROTECTION_TEMPERATURE 600	//For normal helmets
+#define ARMOR_MIN_COLD_PROTECTION_TEMPERATURE 160	//For armor
+#define ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE 600	//For armor
 
-#define GLOVES_MIN_COLD_PROTECITON_TEMPERATURE 2.0	//For some gloves (black and)
-#define GLOVES_MAX_HEAT_PROTECITON_TEMPERATURE 1500		//For some gloves
-#define SHOE_MIN_COLD_PROTECITON_TEMPERATURE 2.0	//For gloves
-#define SHOE_MAX_HEAT_PROTECITON_TEMPERATURE 1500		//For gloves
+#define GLOVES_MIN_COLD_PROTECTION_TEMPERATURE 2.0	//For some gloves (black and)
+#define GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE 1500		//For some gloves
+#define SHOE_MIN_COLD_PROTECTION_TEMPERATURE 2.0	//For gloves
+#define SHOE_MAX_HEAT_PROTECTION_TEMPERATURE 1500		//For gloves
 
 
 #define PRESSURE_DAMAGE_COEFFICIENT 4 //The amount of pressure damage someone takes is equal to (pressure / HAZARD_HIGH_PRESSURE)*PRESSURE_DAMAGE_COEFFICIENT, with the maximum of MAX_PRESSURE_DAMAGE
@@ -112,7 +112,7 @@
 #define FIRE_MINIMUM_TEMPERATURE_TO_EXIST	100+T0C
 #define FIRE_SPREAD_RADIOSITY_SCALE		0.85
 #define FIRE_CARBON_ENERGY_RELEASED	  500000 //Amount of heat released per mole of burnt carbon into the tile
-#define FIRE_PLASMA_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt plasma into the tile
+#define FIRE_PHORON_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt phoron into the tile
 #define FIRE_GROWTH_RATE			40000 //For small fires
 
 #define WATER_BOIL_TEMP 393 */
@@ -121,13 +121,13 @@
 #define CARBON_LIFEFORM_FIRE_RESISTANCE 200+T0C
 #define CARBON_LIFEFORM_FIRE_DAMAGE		4
 
-//Plasma fire properties
-#define PLASMA_MINIMUM_BURN_TEMPERATURE		100+T0C
-#define PLASMA_FLASHPOINT 					246+T0C
-#define PLASMA_UPPER_TEMPERATURE			1370+T0C
-#define PLASMA_MINIMUM_OXYGEN_NEEDED		2
-#define PLASMA_MINIMUM_OXYGEN_PLASMA_RATIO	20
-#define PLASMA_OXYGEN_FULLBURN				10
+//Phoron fire properties
+#define PHORON_MINIMUM_BURN_TEMPERATURE		100+T0C
+#define PHORON_FLASHPOINT 					246+T0C
+#define PHORON_UPPER_TEMPERATURE			1370+T0C
+#define PHORON_MINIMUM_OXYGEN_NEEDED		2
+#define PHORON_MINIMUM_OXYGEN_PHORON_RATIO	20
+#define PHORON_OXYGEN_FULLBURN				10
 
 #define T0C 273.15					// 0degC
 #define T20C 293.15					// 20degC
@@ -199,13 +199,14 @@ var/MAX_EXPLOSION_RANGE = 14
 #define MASKCOVERSMOUTH		2048		// on other items, these are just for mask/head
 #define HEADCOVERSMOUTH		2048
 
+#define THICKMATERIAL 1024		//From /tg: prevents syringes, parapens and hypos if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body. (NOTE: flag shared with NOSLIP for shoes)
 #define NOSLIP		1024 		//prevents from slipping on wet floors, in space etc
 
 #define OPENCONTAINER	4096	// is an open container for chemistry purposes
 
 #define BLOCK_GAS_SMOKE_EFFECT 8192	// blocks the effect that chemical clouds would have on a mob --glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
 #define ONESIZEFITSALL 8192
-#define PLASMAGUARD 16384			//Does not get contaminated by plasma.
+#define PHORONGUARD 16384			//Does not get contaminated by phoron.
 
 #define	NOREACT		16384 			//Reagents dont' react inside this container.
 
@@ -227,6 +228,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define HIDESUITSTORAGE	2	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDEJUMPSUIT	4	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDESHOES		8	//APPLIES ONLY TO THE EXTERIOR SUIT!!
+#define HIDETAIL 		16	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDEMASK	1	//APPLIES ONLY TO HELMETS/MASKS!!
 #define HIDEEARS	2	//APPLIES ONLY TO HELMETS/MASKS!! (ears means headsets and such)
 #define HIDEEYES	4	//APPLIES ONLY TO HELMETS/MASKS!! (eyes means glasses)
@@ -559,7 +561,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 	"Atmospherics", "Security", "HoS Office", "Medbay",
 	"CMO Office", "Chemistry", "Research", "RD Office",
 	"Robotics", "HoP Office", "Library", "Chapel", "Theatre",
-	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics")
+	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics","Drone Fabrication")
 
 #define HOSTILE_STANCE_IDLE 1
 #define HOSTILE_STANCE_ALERT 2
@@ -623,8 +625,9 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define R_SOUNDS		2048
 #define R_SPAWN			4096
 #define R_MOD			8192
+#define R_MENTOR		16384
 
-#define R_MAXPERMISSION 8192 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
+#define R_MAXPERMISSION 16384 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
 #define R_HOST			65535
 
@@ -642,6 +645,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define CHAT_ATTACKLOGS	1024
 #define CHAT_DEBUGLOGS	2048
 #define CHAT_LOOC		4096
+#define CHAT_GHOSTRADIO 8192
 
 
 #define TOGGLES_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
@@ -693,13 +697,15 @@ var/list/be_special_flags = list(
 #define RIGHT 2
 
 // for secHUDs and medHUDs and variants. The number is the location of the image on the list hud_list of humans.
-#define HEALTH_HUD		1 // dead, alive, sick, health status
-#define STATUS_HUD		2 // a simple line rounding the mob's number health
+#define HEALTH_HUD		1 // a simple line rounding the mob's number health
+#define STATUS_HUD		2 // alive, dead, diseased, etc.
 #define ID_HUD			3 // the job asigned to your ID
 #define WANTED_HUD		4 // wanted, released, parroled, security status
-#define IMPLOYAL_HUD	5 // loyality implant
+#define IMPLOYAL_HUD		5 // loyality implant
 #define IMPCHEM_HUD		6 // chemical implant
-#define IMPTRACK_HUD	7 // tracking implant
+#define IMPTRACK_HUD		7 // tracking implant
+#define SPECIALROLE_HUD 	8 // AntagHUD image
+#define STATUS_HUD_OOC		9 // STATUS_HUD without virus db check for someone being ill.
 
 //Pulse levels, very simplified
 #define PULSE_NONE		0	//so !M.pulse checks would be possible
@@ -725,19 +731,25 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 	)
 
 //Species flags.
-#define NO_EAT 1
+#define NO_BLOOD 1
 #define NO_BREATHE 2
-#define NO_SLEEP 4
-#define RAD_ABSORB 8
-#define NO_SCAN 16
-#define NON_GENDERED 32
-#define REQUIRE_LIGHT 64
-#define WHITELISTED 128
-#define HAS_SKIN_TONE 256
-#define HAS_LIPS 512
-#define HAS_UNDERWEAR 1024
-#define HAS_TAIL 2048
-#define IS_PLANT 4096
+#define NO_SCAN 4
+#define NO_PAIN 8
+
+#define HAS_SKIN_TONE 16
+#define HAS_SKIN_COLOR 32
+#define HAS_LIPS 64
+#define HAS_UNDERWEAR 128
+#define HAS_TAIL 256
+
+#define IS_SLOW 512
+#define IS_PLANT 1024
+#define IS_WHITELISTED 2048
+
+#define RAD_ABSORB 4096
+#define REQUIRE_LIGHT 8192
+
+#define IS_SYNTHETIC 16384
 
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
@@ -746,3 +758,13 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1
 #define ZONE_SLEEPING 0
+
+//some colors
+#define COLOR_RED 		"#FF0000"
+#define COLOR_GREEN 	"#00FF00"
+#define COLOR_BLUE 		"#0000FF"
+#define COLOR_CYAN 		"#00FFFF"
+#define COLOR_PINK 		"#FF00FF"
+#define COLOR_YELLOW 	"#FFFF00"
+#define COLOR_ORANGE 	"#FF9900"
+#define COLOR_WHITE 	"#FFFFFF"

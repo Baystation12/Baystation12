@@ -68,7 +68,7 @@ REAGENT SCANNER
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
-	w_class = 1.0
+	w_class = 2.0
 	throw_speed = 5
 	throw_range = 10
 	m_amt = 200
@@ -143,7 +143,9 @@ REAGENT SCANNER
 			user.show_message(text("\red <b>Warning: [D.form] Detected</b>\nName: [D.name].\nType: [D.spread].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure]"))
 	if (M.reagents && M.reagents.get_reagent_amount("inaprovaline"))
 		user.show_message("\blue Bloodstream Analysis located [M.reagents:get_reagent_amount("inaprovaline")] units of rejuvenation chemicals.")
-	if (M.getBrainLoss() >= 100 || istype(M, /mob/living/carbon/human) && M:brain_op_stage == 4.0)
+	if (M.has_brain_worms())
+		user.show_message("\red Subject suffering from aberrant brain activity. Recommend further scanning.")
+	else if (M.getBrainLoss() >= 100 || istype(M, /mob/living/carbon/human) && M:brain_op_stage == 4.0)
 		user.show_message("\red Subject is brain dead.")
 	else if (M.getBrainLoss() >= 60)
 		user.show_message("\red Severe brain damage detected. Subject likely to have mental retardation.")
@@ -236,9 +238,9 @@ REAGENT SCANNER
 		var/o2_concentration = environment.oxygen/total_moles
 		var/n2_concentration = environment.nitrogen/total_moles
 		var/co2_concentration = environment.carbon_dioxide/total_moles
-		var/plasma_concentration = environment.toxins/total_moles
+		var/phoron_concentration = environment.phoron/total_moles
 
-		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
+		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 		if(abs(n2_concentration - N2STANDARD) < 20)
 			user.show_message("\blue Nitrogen: [round(n2_concentration*100)]%", 1)
 		else
@@ -254,8 +256,8 @@ REAGENT SCANNER
 		else
 			user.show_message("\blue CO2: [round(co2_concentration*100)]%", 1)
 
-		if(plasma_concentration > 0.01)
-			user.show_message("\red Plasma: [round(plasma_concentration*100)]%", 1)
+		if(phoron_concentration > 0.01)
+			user.show_message("\red Phoron: [round(phoron_concentration*100)]%", 1)
 
 		if(unknown_concentration > 0.01)
 			user.show_message("\red Unknown: [round(unknown_concentration*100)]%", 1)

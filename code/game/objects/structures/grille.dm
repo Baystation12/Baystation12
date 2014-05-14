@@ -41,7 +41,7 @@
 	if(HULK in user.mutations)
 		health -= 5
 	else
-		health -= 3
+		health -= 1
 	healthcheck()
 
 /obj/structure/grille/attack_alien(mob/user as mob)
@@ -93,7 +93,13 @@
 			return !density
 
 /obj/structure/grille/bullet_act(var/obj/item/projectile/Proj)
+
 	if(!Proj)	return
+
+	//Tasers and the like should not damage grilles.
+	if(Proj.damage_type == HALLOSS)
+		return
+
 	src.health -= Proj.damage*0.2
 	healthcheck()
 	return 0
@@ -145,9 +151,9 @@
 					return
 			var/obj/structure/window/WD
 			if(istype(W,/obj/item/stack/sheet/rglass))
-				WD = new/obj/structure/window(loc,1) //reinforced window
+				WD = new/obj/structure/window/reinforced(loc) //reinforced window
 			else
-				WD = new/obj/structure/window(loc,0) //normal window
+				WD = new/obj/structure/window/basic(loc) //normal window
 			WD.dir = dir_to_set
 			WD.ini_dir = dir_to_set
 			WD.anchored = 0
@@ -155,6 +161,7 @@
 			var/obj/item/stack/ST = W
 			ST.use(1)
 			user << "<span class='notice'>You place the [WD] on [src].</span>"
+			WD.update_icon()
 		return
 //window placing end
 

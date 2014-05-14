@@ -315,7 +315,7 @@
 		if(world.time < (last_change + 15))//To prevent super-spam clicking, reduced process size and annoyance -Sieve
 			return
 		for(var/mob/M in range(3,src))
-			M.show_message("\b ERROR. Recalibrating projetion apparatus.")
+			M.show_message("\b ERROR. Recalibrating projection apparatus.")
 			last_change = world.time
 			return
 
@@ -447,6 +447,8 @@
 
 	if(isrobot(user))
 		return
+		
+	..()
 
 /obj/structure/table/holotable/wood
 	name = "table"
@@ -489,7 +491,7 @@
 	damtype = HALLOSS
 
 /obj/item/weapon/holo/esword
-	desc = "May the force be within you. Sorta"
+	desc = "May the force be within you. Sorta."
 	icon_state = "sword0"
 	force = 3.0
 	throw_speed = 1
@@ -532,6 +534,12 @@
 		w_class = 2
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		user << "\blue [src] can now be concealed."
+
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
+
 	add_fingerprint(user)
 	return
 
@@ -601,11 +609,11 @@
 	power_channel = ENVIRON
 
 /obj/machinery/readybutton/attack_ai(mob/user as mob)
-	user << "The station AI is not to interact with these devices"
+	user << "The station AI is not to interact with these devices!"
 	return
 
 /obj/machinery/readybutton/attack_paw(mob/user as mob)
-	user << "You are too primitive to use this device"
+	user << "You are too primitive to use this device."
 	return
 
 /obj/machinery/readybutton/New()
@@ -657,3 +665,22 @@
 
 	for(var/mob/M in currentarea)
 		M << "FIGHT!"
+
+//Holorack
+
+/obj/structure/rack/holorack
+	name = "rack"
+	desc = "Different from the Middle Ages version."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "rack"
+
+/obj/structure/rack/holorack/attack_alien(mob/user as mob) //Removed code for larva since it doesn't work. Previous code is now a larva ability. /N
+	return attack_hand(user)
+
+/obj/structure/rack/holorack/attack_hand(mob/user as mob)
+	return
+
+/obj/structure/rack/holorack/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/weapon/wrench))
+		user << "It's a holorack!  You can't unwrench it!"
+		return

@@ -33,6 +33,8 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	null, \
 	new/datum/stack_recipe("canister", /obj/machinery/portable_atmospherics/canister, 10, time = 15, one_per_turf = 1, on_floor = 1), \
 	null, \
+	new/datum/stack_recipe("cannon frame", /obj/item/weapon/cannonframe, 10, time = 15, one_per_turf = 0, on_floor = 0), \
+	null, \
 	new/datum/stack_recipe("floor tile", /obj/item/stack/tile/plasteel, 1, 4, 20), \
 	new/datum/stack_recipe("metal rod", /obj/item/stack/rods, 1, 2, 60), \
 	null, \
@@ -108,7 +110,7 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 /obj/item/stack/sheet/plasteel
 	name = "plasteel"
 	singular_name = "plasteel sheet"
-	desc = "This sheet is an alloy of iron and plasma."
+	desc = "This sheet is an alloy of iron and phoron."
 	icon_state = "sheet-plasteel"
 	item_state = "sheet-metal"
 	m_amt = 7500
@@ -129,17 +131,24 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts/wood, 2), \
 	new/datum/stack_recipe("wooden chair", /obj/structure/stool/bed/chair/wood/normal, 3, time = 10, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("wooden barricade", /obj/structure/barricade/wooden, 5, time = 50, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("crossbow frame", /obj/item/weapon/crossbowframe, 5, time = 25, one_per_turf = 0, on_floor = 0), \
 	new/datum/stack_recipe("wooden door", /obj/structure/mineral_door/wood, 10, time = 20, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("coffin", /obj/structure/closet/coffin, 5, time = 15, one_per_turf = 1, on_floor = 1), \
-	new/datum/stack_recipe("apiary", /obj/item/apiary, 10, time = 25, one_per_turf = 0, on_floor = 0), \
+//	new/datum/stack_recipe("apiary", /obj/item/apiary, 10, time = 25, one_per_turf = 0, on_floor = 0)
 	)
 
 /obj/item/stack/sheet/wood
-	name = "wooden planks"
+	name = "wooden plank"
 	desc = "One can only guess that this is a bunch of wood."
 	singular_name = "wood plank"
 	icon_state = "sheet-wood"
 	origin_tech = "materials=1;biotech=1"
+
+/obj/item/stack/sheet/wood/cyborg
+	name = "wooden plank"
+	desc = "One can only guess that this is a bunch of wood."
+	singular_name = "wood plank"
+	icon_state = "sheet-wood"
 
 /obj/item/stack/sheet/wood/New(var/loc, var/amount=null)
 	recipes = wood_recipes
@@ -166,7 +175,14 @@ var/global/list/datum/stack_recipe/cardboard_recipes = list ( \
 	new/datum/stack_recipe("cardborg suit", /obj/item/clothing/suit/cardborg, 3), \
 	new/datum/stack_recipe("cardborg helmet", /obj/item/clothing/head/cardborg), \
 	new/datum/stack_recipe("pizza box", /obj/item/pizzabox), \
-	new/datum/stack_recipe("folder", /obj/item/weapon/folder), \
+	null, \
+	new/datum/stack_recipe_list("folders",list( \
+		new/datum/stack_recipe("blue folder", /obj/item/weapon/folder/blue), \
+		new/datum/stack_recipe("grey folder", /obj/item/weapon/folder), \
+		new/datum/stack_recipe("red folder", /obj/item/weapon/folder/red), \
+		new/datum/stack_recipe("white folder", /obj/item/weapon/folder/white), \
+		new/datum/stack_recipe("yellow folder", /obj/item/weapon/folder/yellow), \
+		)) \
 )
 
 /obj/item/stack/sheet/cardboard	//BubbleWrap

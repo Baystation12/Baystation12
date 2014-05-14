@@ -57,44 +57,45 @@
 
 	age = rand(1,999)
 
-	switch(container.mineralName)
-		if("Uranium")
-			age_million = rand(1, 704)
-			age_thousand = rand(1,999)
-			find_presence["potassium"] = rand(1,1000) / 100
-			source_mineral = "potassium"
-		if("Iron")
-			age_thousand = rand(1, 999)
-			age_million = rand(1, 999)
-			find_presence["iron"] = rand(1,1000) / 100
-			source_mineral = "iron"
-		if("Diamond")
-			age_thousand = rand(1,999)
-			age_million = rand(1,999)
-			find_presence["nitrogen"] = rand(1,1000) / 100
-			source_mineral = "nitrogen"
-		if("Gold")
-			age_thousand = rand(1,999)
-			age_million = rand(1,999)
-			age_billion = rand(3,4)
-			find_presence["iron"] = rand(1,1000) / 100
-			source_mineral = "iron"
-		if("Silver")
-			age_thousand = rand(1,999)
-			age_million = rand(1,999)
-			find_presence["iron"] = rand(1,1000) / 100
-			source_mineral = "iron"
-		if("Plasma")
-			age_thousand = rand(1,999)
-			age_million = rand(1,999)
-			age_billion = rand(10, 13)
-			find_presence["plasma"] = rand(1,1000) / 100
-			source_mineral = "plasma"
-		if("Clown")
-			age = rand(-1,-999)				//thats the joke
-			age_thousand = rand(-1,-999)
-			find_presence["plasma"] = rand(1,1000) / 100
-			source_mineral = "plasma"
+	if(container.mineral)
+		switch(container.mineral.name)
+			if("Uranium")
+				age_million = rand(1, 704)
+				age_thousand = rand(1,999)
+				find_presence["potassium"] = rand(1,1000) / 100
+				source_mineral = "potassium"
+			if("Iron")
+				age_thousand = rand(1, 999)
+				age_million = rand(1, 999)
+				find_presence["iron"] = rand(1,1000) / 100
+				source_mineral = "iron"
+			if("Diamond")
+				age_thousand = rand(1,999)
+				age_million = rand(1,999)
+				find_presence["nitrogen"] = rand(1,1000) / 100
+				source_mineral = "nitrogen"
+			if("Gold")
+				age_thousand = rand(1,999)
+				age_million = rand(1,999)
+				age_billion = rand(3,4)
+				find_presence["iron"] = rand(1,1000) / 100
+				source_mineral = "iron"
+			if("Silver")
+				age_thousand = rand(1,999)
+				age_million = rand(1,999)
+				find_presence["iron"] = rand(1,1000) / 100
+				source_mineral = "iron"
+			if("Phoron")
+				age_thousand = rand(1,999)
+				age_million = rand(1,999)
+				age_billion = rand(10, 13)
+				find_presence["phoron"] = rand(1,1000) / 100
+				source_mineral = "phoron"
+			if("Clown")
+				age = rand(-1,-999)				//thats the joke
+				age_thousand = rand(-1,-999)
+				find_presence["phoron"] = rand(1,1000) / 100
+				source_mineral = "phoron"
 
 	if(prob(75))
 		find_presence["phosphorus"] = rand(1,500) / 100
@@ -126,14 +127,15 @@
 		artifact_distance = rand()
 		artifact_id = container.artifact_find.artifact_id
 	else
-		for(var/turf/simulated/mineral/T in master_controller.artifact_spawning_turfs)
-			if(T.artifact_find)
-				var/cur_dist = get_dist(container, T) * 2
-				if( (artifact_distance < 0 || cur_dist < artifact_distance) && cur_dist <= T.artifact_find.artifact_detect_range )
-					artifact_distance = cur_dist + rand() * 2 - 1
-					artifact_id = T.artifact_find.artifact_id
-			else
-				master_controller.artifact_spawning_turfs.Remove(T)
+		if(master_controller) //Sanity check due to runtimes ~Z
+			for(var/turf/simulated/mineral/T in master_controller.artifact_spawning_turfs)
+				if(T.artifact_find)
+					var/cur_dist = get_dist(container, T) * 2
+					if( (artifact_distance < 0 || cur_dist < artifact_distance) && cur_dist <= T.artifact_find.artifact_detect_range )
+						artifact_distance = cur_dist + rand() * 2 - 1
+						artifact_id = T.artifact_find.artifact_id
+				else
+					master_controller.artifact_spawning_turfs.Remove(T)
 
 /*
 #undef FIND_PLANT

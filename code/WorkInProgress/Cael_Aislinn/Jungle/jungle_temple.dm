@@ -204,13 +204,13 @@
 				var/obj/structure/closet/crate/freezer/C = new(src.loc)
 				var/num = rand(2,6)
 				var/new_type = pick(
-				/obj/item/weapon/reagent_containers/food/drinks/beer, \
+				/obj/item/weapon/reagent_containers/food/drinks/cans/beer, \
 				/obj/item/weapon/reagent_containers/food/drinks/tea, \
 				/obj/item/weapon/reagent_containers/food/drinks/dry_ramen, \
 				/obj/item/weapon/reagent_containers/food/snacks/candiedapple, \
 				/obj/item/weapon/reagent_containers/food/snacks/chocolatebar, \
 				/obj/item/weapon/reagent_containers/food/snacks/cookie, \
-				/obj/item/weapon/reagent_containers/food/snacks/faggot, \
+				/obj/item/weapon/reagent_containers/food/snacks/meatball, \
 				/obj/item/weapon/reagent_containers/food/snacks/plump_pie, \
 				)
 				for(var/i=0,i<num,i++)
@@ -289,8 +289,8 @@
 	var/trap_type
 
 	New()
-		trap_type = pick(50;"thrower","sawburst","poison_dart","flame_burst",10;"plasma_gas",5;"n2_gas")
-		if( (trap_type == "plasma_gas" || trap_type == "n2_gas") && prob(10))
+		trap_type = pick(50;"thrower","sawburst","poison_dart","flame_burst",10;"phoron_gas",5;"n2_gas")
+		if( (trap_type == "phoron_gas" || trap_type == "n2_gas") && prob(10))
 			new /obj/effect/glowshroom(src.loc)
 
 		//hint that this tile is dangerous
@@ -337,8 +337,8 @@
 				myloc.overlays -= flicker
 				del flicker
 			//flick("flameburst",src)
-		if("plasma_gas")
-			//spawn a bunch of plasma
+		if("phoron_gas")
+			//spawn a bunch of phoron
 		if("n2_gas")
 			//spawn a bunch of sleeping gas
 		if("thrower")

@@ -19,6 +19,7 @@ em						{font-style: normal;	font-weight: bold;}
 
 .adminobserver			{color: #996600;	font-weight: bold;}
 .admin					{color: #386aff;	font-weight: bold;}
+.adminsay				{color: #9611D4;	font-weight: bold;}
 
 .name					{					font-weight: bold;}
 
@@ -29,6 +30,7 @@ em						{font-style: normal;	font-weight: bold;}
 .comradio				{color: #193A7A;}
 .syndradio				{color: #6D3F40;}
 .centradio				{color: #5C5C8A;}
+.airadio				{color: #FF00FF;}
 
 .secradio				{color: #A30000;}
 .engradio				{color: #A66300;}
@@ -63,6 +65,7 @@ h1.alert, h2.alert		{color: #000000;}
 .skrell					{color: #00CED1;}
 .soghun					{color: #228B22;}
 .vox					{color: #AA00AA;}
+.rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 
 .interface				{color: #330033;}

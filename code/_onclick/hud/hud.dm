@@ -14,6 +14,7 @@ var/datum/global_hud/global_hud = new()
 	var/obj/screen/blurry
 	var/list/vimpaired
 	var/list/darkMask
+	var/obj/screen/nvg
 
 /datum/global_hud/New()
 	//420erryday psychedellic colours screen overlay for when you are high
@@ -29,6 +30,13 @@ var/datum/global_hud/global_hud = new()
 	blurry.icon_state = "blurry"
 	blurry.layer = 17
 	blurry.mouse_opacity = 0
+
+	nvg = new /obj/screen()
+	nvg.screen_loc = "1,1"
+	nvg.icon = 'icons/obj/nvg_hud_full.dmi'
+	nvg.icon_state = "nvg_hud"
+	nvg.layer = 17
+	nvg.mouse_opacity = 0
 
 	var/obj/screen/O
 	var/i
@@ -166,9 +174,11 @@ datum/hud/New(mob/owner)
 	if(!ismob(mymob)) return 0
 	if(!mymob.client) return 0
 	var/ui_style = ui_style2icon(mymob.client.prefs.UI_style)
+	var/ui_color = mymob.client.prefs.UI_style_color
+	var/ui_alpha = mymob.client.prefs.UI_style_alpha
 
 	if(ishuman(mymob))
-		human_hud(ui_style) // Pass the player the UI style chosen in preferences
+		human_hud(ui_style, ui_color, ui_alpha) // Pass the player the UI style chosen in preferences
 	else if(ismonkey(mymob))
 		monkey_hud(ui_style)
 	else if(isbrain(mymob))
@@ -186,14 +196,15 @@ datum/hud/New(mob/owner)
 
 
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
-/mob/verb/button_pressed_F12()
+/mob/verb/button_pressed_F12(var/full = 0 as null)
 	set name = "F12"
 	set hidden = 1
 
 	if(hud_used)
 		if(ishuman(src))
-			if(!src.client) return
-
+			if(!client) return
+			if(client.view != world.view)
+				return
 			if(hud_used.hud_shown)
 				hud_used.hud_shown = 0
 				if(src.hud_used.adding)
@@ -207,10 +218,15 @@ datum/hud/New(mob/owner)
 
 				//Due to some poor coding some things need special treatment:
 				//These ones are a part of 'adding', 'other' or 'hotkeybuttons' but we want them to stay
-				src.client.screen += src.hud_used.l_hand_hud_object	//we want the hands to be visible
-				src.client.screen += src.hud_used.r_hand_hud_object	//we want the hands to be visible
-				src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
-				src.hud_used.action_intent.screen_loc = ui_acti_alt	//move this to the alternative position, where zone_select usually is.
+				if(!full)
+					src.client.screen += src.hud_used.l_hand_hud_object	//we want the hands to be visible
+					src.client.screen += src.hud_used.r_hand_hud_object	//we want the hands to be visible
+					src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
+					src.hud_used.action_intent.screen_loc = ui_acti_alt	//move this to the alternative position, where zone_select usually is.
+				else
+					src.client.screen -= src.healths
+					src.client.screen -= src.internals
+					src.client.screen -= src.gun_setting_icon
 
 				//These ones are not a part of 'adding', 'other' or 'hotkeybuttons' but we want them gone.
 				src.client.screen -= src.zone_sel	//zone_sel is a mob variable for some reason.
@@ -223,7 +239,12 @@ datum/hud/New(mob/owner)
 					src.client.screen += src.hud_used.other
 				if(src.hud_used.hotkeybuttons && !src.hud_used.hotkey_ui_hidden)
 					src.client.screen += src.hud_used.hotkeybuttons
-
+				if(src.healths)
+					src.client.screen |= src.healths
+				if(src.internals)
+					src.client.screen |= src.internals
+				if(src.gun_setting_icon)
+					src.client.screen |= src.gun_setting_icon
 
 				src.hud_used.action_intent.screen_loc = ui_acti //Restore intent selection to the original position
 				src.client.screen += src.zone_sel				//This one is a special snowflake

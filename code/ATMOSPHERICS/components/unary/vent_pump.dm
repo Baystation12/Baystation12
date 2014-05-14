@@ -100,7 +100,7 @@
 			if(pressure_checks&2)
 				pressure_delta = min(pressure_delta, (air_contents.return_pressure() - internal_pressure_bound))
 
-			if(pressure_delta > 0)
+			if(pressure_delta > 0.5)
 				if(air_contents.temperature > 0)
 					var/transfer_moles = pressure_delta*environment.volume/(air_contents.temperature * R_IDEAL_GAS_EQUATION)
 
@@ -118,7 +118,7 @@
 			if(pressure_checks&2)
 				pressure_delta = min(pressure_delta, (internal_pressure_bound - air_contents.return_pressure()))
 
-			if(pressure_delta > 0)
+			if(pressure_delta > 0.5)
 				if(environment.temperature > 0)
 					var/transfer_moles = pressure_delta*air_contents.volume/(environment.temperature * R_IDEAL_GAS_EQUATION)
 
@@ -338,13 +338,13 @@
 	return
 
 /*
-	Alt-click to ventcrawl - Monkeys, aliens, and slimes
+	Alt-click to ventcrawl - Monkeys, aliens, slimes and mice.
 	This is a little buggy but somehow that just seems to plague ventcrawl.
 	I am sorry, I don't know why.
 */
-/obj/machinery/atmospherics/unary/vent_pump/AltClick(var/mob/living/carbon/ML)
+/obj/machinery/atmospherics/unary/vent_pump/AltClick(var/mob/living/ML)
 	if(istype(ML))
-		var/list/ventcrawl_verbs = list(/mob/living/carbon/monkey/verb/ventcrawl, /mob/living/carbon/alien/verb/ventcrawl, /mob/living/carbon/slime/verb/ventcrawl)
+		var/list/ventcrawl_verbs = list(/mob/living/carbon/monkey/verb/ventcrawl, /mob/living/carbon/alien/verb/ventcrawl, /mob/living/carbon/slime/verb/ventcrawl,/mob/living/simple_animal/mouse/verb/ventcrawl)
 		if(length(ML.verbs & ventcrawl_verbs)) // alien queens have this removed, an istype would be complicated
 			ML.handle_ventcrawl(src)
 			return

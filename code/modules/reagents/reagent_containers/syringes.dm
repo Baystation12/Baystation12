@@ -15,6 +15,7 @@
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = null //list(5,10,15)
 	volume = 15
+	w_class = 1
 	var/mode = SYRINGE_DRAW
 
 	on_reagent_change()
@@ -89,7 +90,15 @@
 							user << "\red You are unable to locate any blood."
 							return
 
-						var/datum/reagent/B = T.take_blood(src,amount)
+						var/datum/reagent/B
+						if(istype(T,/mob/living/carbon/human))
+							var/mob/living/carbon/human/H = T
+							if(H.species && H.species.flags & NO_BLOOD)
+								H.reagents.trans_to(src,amount)
+							else
+								B = T.take_blood(src,amount)
+						else
+							B = T.take_blood(src,amount)
 
 						if (B)
 							src.reagents.reagent_list += B
@@ -131,11 +140,23 @@
 					return
 
 				if(ismob(target) && target != user)
+
 					var/time = 30 //Injecting through a hardsuit takes longer due to needing to find a port.
+
 					if(istype(target,/mob/living/carbon/human))
+
 						var/mob/living/carbon/human/H = target
-						if(H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space))
-							time = 60
+						if(H.wear_suit)
+							if(istype(H.wear_suit,/obj/item/clothing/suit/space))
+								time = 60
+							else if(!H.can_inject(user, 1))
+								return
+
+					else if(isliving(target))
+
+						var/mob/living/M = target
+						if(!M.can_inject(user, 1))
+							return
 
 					for(var/mob/O in viewers(world.view, user))
 						if(time == 30)

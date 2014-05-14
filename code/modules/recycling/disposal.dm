@@ -22,6 +22,8 @@
 	var/flush_every_ticks = 30 //Every 30 ticks it will look whether it is ready to flush
 	var/flush_count = 0 //this var adds 1 once per tick. When it reaches flush_every_ticks it resets and tries to flush.
 	var/last_sound = 0
+	active_power_usage = 600
+	idle_power_usage = 100
 
 	// create a new disposal
 	// find the attached trunk (if present) and init gas resvr.
@@ -340,6 +342,7 @@
 	// timed process
 	// charge the gas reservoir and perform flush if ready
 	process()
+		use_power = 0
 		if(stat & BROKEN)			// nothing can happen if broken
 			return
 
@@ -363,13 +366,13 @@
 		if(stat & NOPOWER)			// won't charge if no power
 			return
 
-		use_power(100)		// base power usage
+		use_power = 1
 
 		if(mode != 1)		// if off or ready, no need to charge
 			return
 
 		// otherwise charge
-		use_power(500)		// charging power usage
+		use_power = 2
 
 		var/atom/L = loc						// recharging from loc turf
 
@@ -398,7 +401,11 @@
 
 		var/wrapcheck = 0
 		var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
-											// travels through the pipes.
+													// travels through the pipes.
+		//Hacky test to get drones to mail themselves through disposals.
+		for(var/mob/living/silicon/robot/drone/D in src)
+			wrapcheck = 1
+
 		for(var/obj/item/smallDelivery/O in src)
 			wrapcheck = 1
 
@@ -446,9 +453,10 @@
 
 				AM.loc = src.loc
 				AM.pipe_eject(0)
-				spawn(1)
-					if(AM)
-						AM.throw_at(target, 5, 1)
+				if(!istype(AM,/mob/living/silicon/robot/drone)) //Poor drones kept smashing windows and taking system damage being fired out of disposals. ~Z
+					spawn(1)
+						if(AM)
+							AM.throw_at(target, 5, 1)
 
 			H.vent_gas(loc)
 			del(H)
@@ -493,7 +501,7 @@
 		//Check for any living mobs trigger hasmob.
 		//hasmob effects whether the package goes to cargo or its tagged destination.
 		for(var/mob/living/M in D)
-			if(M && M.stat != 2)
+			if(M && M.stat != 2 && !istype(M,/mob/living/silicon/robot/drone))
 				hasmob = 1
 
 		//Checks 1 contents level deep. This means that players can be sent through disposals...
@@ -501,7 +509,7 @@
 		for(var/obj/O in D)
 			if(O.contents)
 				for(var/mob/living/M in O.contents)
-					if(M && M.stat != 2)
+					if(M && M.stat != 2 && !istype(M,/mob/living/silicon/robot/drone))
 						hasmob = 1
 
 		// now everything inside the disposal gets put into the holder
@@ -518,6 +526,10 @@
 			if(istype(AM, /obj/item/smallDelivery) && !hasmob)
 				var/obj/item/smallDelivery/T = AM
 				src.destinationTag = T.sortTag
+			//Drones can mail themselves through maint.
+			if(istype(AM, /mob/living/silicon/robot/drone))
+				var/mob/living/silicon/robot/drone/drone = AM
+				src.destinationTag = drone.mail_destination
 
 
 	// start the movement process
@@ -541,7 +553,8 @@
 		while(active)
 			if(hasmob && prob(3))
 				for(var/mob/living/H in src)
-					H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
+					if(!istype(H,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
+						H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
 
 			if(has_fat_guy && prob(2)) // chance of becoming stuck per segment if contains a fat guy
 				active = 0
@@ -597,8 +610,17 @@
 
 	// called when player tries to move while in a pipe
 	relaymove(mob/user as mob)
-		if (user.stat)
+
+		if(!istype(user,/mob/living))
 			return
+
+		var/mob/living/U = user
+
+		if (U.stat || U.last_special <= world.time)
+			return
+
+		U.last_special = world.time+100
+
 		if (src.loc)
 			for (var/mob/M in hearers(src.loc.loc))
 				M << "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>"
@@ -873,6 +895,12 @@
 				C.ptype = 9
 			if("pipe-j2s")
 				C.ptype = 10
+///// Z-Level stuff
+			if("pipe-u")
+				C.ptype = 11
+			if("pipe-d")
+				C.ptype = 12
+///// Z-Level stuff
 		src.transfer_fingerprints_to(C)
 		C.dir = dir
 		C.density = 0
@@ -900,8 +928,113 @@
 		update()
 		return
 
+///// Z-Level stuff
+/obj/structure/disposalpipe/up
+	icon_state = "pipe-u"
 
+	New()
+		..()
+		dpdir = dir
+		update()
+		return
 
+	nextdir(var/fromdir)
+		var/nextdir
+		if(fromdir == 11)
+			nextdir = dir
+		else
+			nextdir = 12
+		return nextdir
+
+	transfer(var/obj/structure/disposalholder/H)
+		var/nextdir = nextdir(H.dir)
+		H.dir = nextdir
+
+		var/turf/T
+		var/obj/structure/disposalpipe/P
+
+		if(nextdir == 12)
+			var/turf/controllerlocation = locate(1, 1, src.z)
+			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+				if(controller.up)
+					T = locate(src.x, src.y, controller.up_target)
+			if(!T)
+				H.loc = src.loc
+				return
+			else
+				for(var/obj/structure/disposalpipe/down/F in T)
+					P = F
+
+		else
+			T = get_step(src.loc, H.dir)
+			P = H.findpipe(T)
+
+		if(P)
+			// find other holder in next loc, if inactive merge it with current
+			var/obj/structure/disposalholder/H2 = locate() in P
+			if(H2 && !H2.active)
+				H.merge(H2)
+
+			H.loc = P
+		else			// if wasn't a pipe, then set loc to turf
+			H.loc = T
+			return null
+
+		return P
+
+/obj/structure/disposalpipe/down
+	icon_state = "pipe-d"
+
+	New()
+		..()
+		dpdir = dir
+		update()
+		return
+
+	nextdir(var/fromdir)
+		var/nextdir
+		if(fromdir == 12)
+			nextdir = dir
+		else
+			nextdir = 11
+		return nextdir
+
+	transfer(var/obj/structure/disposalholder/H)
+		var/nextdir = nextdir(H.dir)
+		H.dir = nextdir
+
+		var/turf/T
+		var/obj/structure/disposalpipe/P
+
+		if(nextdir == 11)
+			var/turf/controllerlocation = locate(1, 1, src.z)
+			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+				if(controller.down)
+					T = locate(src.x, src.y, controller.down_target)
+			if(!T)
+				H.loc = src.loc
+				return
+			else
+				for(var/obj/structure/disposalpipe/up/F in T)
+					P = F
+
+		else
+			T = get_step(src.loc, H.dir)
+			P = H.findpipe(T)
+
+		if(P)
+			// find other holder in next loc, if inactive merge it with current
+			var/obj/structure/disposalholder/H2 = locate() in P
+			if(H2 && !H2.active)
+				H.merge(H2)
+
+			H.loc = P
+		else			// if wasn't a pipe, then set loc to turf
+			H.loc = T
+			return null
+
+		return P
+///// Z-Level stuff
 
 //a three-way junction with dir being the dominant direction
 /obj/structure/disposalpipe/junction
@@ -1258,8 +1391,9 @@
 			for(var/atom/movable/AM in H)
 				AM.loc = src.loc
 				AM.pipe_eject(dir)
-				spawn(5)
-					AM.throw_at(target, 3, 1)
+				if(!istype(AM,/mob/living/silicon/robot/drone)) //Drones keep smashing windows from being fired out of chutes. Bad for the station. ~Z
+					spawn(5)
+						AM.throw_at(target, 3, 1)
 			H.vent_gas(src.loc)
 			del(H)
 
@@ -1325,7 +1459,7 @@
 
 	src.streak(dirs)
 
-/obj/effect/decal/cleanable/robot_debris/gib/pipe_eject(var/direction)
+/obj/effect/decal/cleanable/blood/gibs/robot/pipe_eject(var/direction)
 	var/list/dirs
 	if(direction)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))

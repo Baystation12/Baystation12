@@ -61,7 +61,7 @@
 		if(C.cell && C.z == 1)
 			C.cell.charge = C.cell.maxcharge
 	for(var/obj/machinery/power/smes/S in world)
-		if(S.z != 1)
+		if(istype(get_area(S), /area/turret_protected) || S.z != 1)
 			continue
 		S.charge = S.last_charge
 		S.output = S.last_output

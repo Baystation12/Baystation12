@@ -16,6 +16,13 @@
 	icon_state = "ash"
 	anchored = 1
 
+/obj/effect/decal/cleanable/ash/attack_hand(mob/user as mob)
+	user << "<span class='notice'>[src] sifts through your fingers.</span>"
+	var/turf/simulated/floor/F = get_turf(src)
+	if (istype(F))
+		F.dirt += 4
+	del(src)
+
 /obj/effect/decal/cleanable/greenglow
 
 	New()
@@ -32,6 +39,7 @@
 	layer = 2
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "dirt"
+	mouse_opacity = 0
 
 /obj/effect/decal/cleanable/flour
 	name = "flour"

@@ -35,14 +35,14 @@
 	set src in usr
 
 	if (t)
-		src.name = text("Data Disk- '[]'", t)
+		src.name = text("data disk- '[]'", t)
 	else
-		src.name = "Data Disk"
+		src.name = "data disk"
 	src.add_fingerprint(usr)
 	return
 
 /obj/item/weapon/card/data/clown
-	name = "coordinates to clown planet"
+	name = "\proper the coordinates to clown planet"
 	icon_state = "data"
 	item_state = "card-id"
 	layer = 3
@@ -203,23 +203,12 @@
 	
 /obj/item/weapon/card/id/syndicate/New(mob/user as mob)
 	..()
-	var/t = reject_bad_name(input(user, "What name would you like to put on this card?\nNode:  You can change this later by clicking on the ID card while it's in your hand.", "Agent card name", ishuman(user) ? user.real_name : user.name))
-	if(!t) 
-		alert("Invalid name.")
-		if(!registered_name) 
-			registered_name = ishuman(user) ? user.real_name : user.name
+	if(!isnull(user)) // Runtime prevention on laggy starts or where users log out because of lag at round start.
+		registered_name = ishuman(user) ? user.real_name : user.name
 	else
-		registered_name = t
-	var/u = copytext(sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Assistant")),1,MAX_MESSAGE_LEN)
-	if(!u)
-		alert("Invalid assignment.")
-		assignment = "Assistant"
-	else
-		assignment = u
-	name = "[registered_name]'s ID Card ([assignment])"
-	user << "\blue You successfully forge the ID card."
-	registered_user = user
-	
+		registered_name = "Agent Card"
+	assignment = "Agent"
+	name = "[registered_name]'s ID Card ([assignment])"		
 
 /obj/item/weapon/card/id/syndicate/afterattack(var/obj/item/weapon/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
@@ -239,7 +228,7 @@
 			return
 		src.registered_name = t
 
-		var u = copytext(sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Assistant")),1,MAX_MESSAGE_LEN)
+		var u = copytext(sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Agent")),1,MAX_MESSAGE_LEN)
 		if(!u)
 			alert("Invalid assignment.")
 			src.registered_name = ""
@@ -250,7 +239,7 @@
 		registered_user = user
 	else if(!registered_user || registered_user == user)
 
-		if(!registered_user) registered_user = user  // First one to pick it up is the owner if there is ever a wild case New() doens't work.
+		if(!registered_user) registered_user = user  // 
 
 		switch(alert("Would you like to display the ID, or retitle it?","Choose.","Rename","Show"))
 			if("Rename")
@@ -263,7 +252,6 @@
 				var u = copytext(sanitize(input(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels other than Maintenance.", "Agent card job assignment", "Assistant")),1,MAX_MESSAGE_LEN)
 				if(!u)
 					alert("Invalid assignment.")
-					src.registered_name = ""
 					return
 				src.assignment = u
 				src.name = "[src.registered_name]'s ID Card ([src.assignment])"

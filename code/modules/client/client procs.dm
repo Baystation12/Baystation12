@@ -45,6 +45,18 @@
 		cmd_admin_pm(C,null)
 		return
 
+	if(href_list["irc_msg"])
+		if(!holder && received_irc_pm < world.time - 6000) //Worse they can do is spam IRC for 10 minutes
+			usr << "<span class='warning'>You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you</span>"
+			return
+		if(mute_irc)
+			usr << "<span class='warning'You cannot use this as your client has been muted from sending messages to the admins on IRC</span>"
+			return
+		cmd_admin_irc_pm()
+		return
+		
+
+
 	//Logs all hrefs
 	if(config && config.log_hrefs && href_logfile)
 		href_logfile << "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>"
@@ -179,6 +191,7 @@
 	var/DBQuery/query = dbcon.NewQuery("SELECT id, datediff(Now(),firstseen) as age FROM erro_player WHERE ckey = '[sql_ckey]'")
 	query.Execute()
 	var/sql_id = 0
+	player_age = 0	// New players won't have an entry so knowing we have a connection we set this to zero to be updated if their is a record.
 	while(query.NextRow())
 		sql_id = query.item[1]
 		player_age = text2num(query.item[2])
@@ -242,27 +255,12 @@
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
 //	preload_vox() //Causes long delays with initial start window and subsequent windows when first logged in.
+	
 	getFiles(
-		'nano/js/libraries.min.js',
-		'nano/js/nano_update.js',
-		'nano/js/nano_config.js',
-		'nano/js/nano_base_helpers.js',
-		'nano/css/shared.css',
-		'nano/css/icons.css',
-		'nano/templates/chem_dispenser.tmpl',
-		'nano/templates/cryo.tmpl',
-		'nano/templates/geoscanner.tmpl',
-		'nano/templates/dna_modifier.tmpl',
-		'nano/templates/telescience_console.tmpl',
-		'nano/images/uiBackground.png',
-		'nano/images/uiIcons16.png',
-		'nano/images/uiIcons24.png',
-		'nano/images/uiLinkPendingIcon.gif',
-		'nano/images/uiMaskBackground.png',
-		'nano/images/uiNoticeBackground.jpg',
-		'nano/images/uiTitleFluff.png',
 		'html/search.js',
 		'html/panels.css',
+		'html/painew.png',
+		'html/loading.gif',
 		'icons/pda_icons/pda_atmos.png',
 		'icons/pda_icons/pda_back.png',
 		'icons/pda_icons/pda_bell.png',

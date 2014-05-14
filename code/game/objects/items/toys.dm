@@ -294,7 +294,7 @@
 
 /obj/item/toy/ammo/crossbow
 	name = "foam dart"
-	desc = "Its nerf or nothing! Ages 8 and up."
+	desc = "It's nerf or nothing! Ages 8 and up."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "foamdart"
 	flags = FPRINT | TABLEPASS
@@ -337,6 +337,12 @@
 			src.icon_state = "sword0"
 			src.item_state = "sword0"
 			src.w_class = 2
+
+		if(istype(user,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = user
+			H.update_inv_l_hand()
+			H.update_inv_r_hand()
+
 		src.add_fingerprint(user)
 		return
 
@@ -359,7 +365,7 @@
 
 /obj/item/toy/crayon
 	name = "crayon"
-	desc = "A colourful crayon. Looks tasty. Mmmm..."
+	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose."
 	icon = 'icons/obj/crayons.dmi'
 	icon_state = "crayonred"
 	w_class = 1.0

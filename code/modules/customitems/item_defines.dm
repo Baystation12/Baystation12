@@ -523,6 +523,13 @@
 
 //////////// Hats ////////////
 
+
+/obj/item/clothing/head/fluff/kaine_kalim_1
+    name = "Formal Medical Cap"
+    desc = "An unusually sterile and folded cap. It seems to bare the Nanotrasen logo."
+    icon = 'icons/obj/custom_items.dmi'
+    icon_state = "kainecap"
+
 /obj/item/clothing/head/secsoft/fluff/swatcap //deusdactyl: James Girard
 	name = "\improper SWAT hat"
 	desc = "A black hat.  The inside has the words, \"Lieutenant James Girard, LPD SWAT Team Four.\""
@@ -571,6 +578,12 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "brucehachert"
 
+/obj/item/clothing/head/beret/fluff/marine_beret	//Von2531: Jack Washington
+	name = "colonial marine beret"
+	desc = "A well-worn navy blue beret. The insignia of the Martian Colonial Marine Corps is affixed to the front."
+	icon_state = "officerberet"
+	flags = FPRINT | TABLEPASS
+
 //////////// Suits ////////////
 
 /obj/item/clothing/suit/storage/labcoat/fluff/aeneas_rinil //Robotics Labcoat - Aeneas Rinil [APPR]
@@ -612,11 +625,20 @@
 
 /obj/item/clothing/under/fluff/milo_hachert //Field Dress Uniform - Milo Hachert - Commissar_Drew
 	name = "field dress uniform"
-	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacket’s shoulder bar."
+	desc = "A uniform jacket, its buttons polished to a shine, coupled with a dark pair of trousers. 'Hachert' is embroidered upon the jacketï¿½s shoulder bar."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "milohachert"
 	item_state = "milohachert"
 	item_color = "milohachert"
+
+
+/obj/item/clothing/under/fluff/kaine_kalim_2
+    name = "Formal Medical Uniform"
+    desc = "An unusually sterile and pressed uniform. It seems to have a string of vials crossing the chest."
+    icon = 'icons/obj/custom_items.dmi'
+    icon_state = "kaineuniform"
+    item_state = "kaineuniform"
+    item_color = "kaineuniform"
 
 /obj/item/clothing/under/fluff/jumpsuitdown //searif: Yuki Matsuda
 	name = "rolled down jumpsuit"
@@ -733,6 +755,15 @@
 	item_state = "wyatt_uniform"
 	item_color = "wyatt_uniform"
 
+////// Black Dress - Lillian Amsel - PapaDrow
+/obj/item/clothing/under/fluff/lillian_amsel_1
+	name = "Black Dress"
+	desc = "A knee-length, dark gray and black dress made of a soft, velvety material."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "lillian_dress"
+	item_state = "lillian_dress"
+	item_color = "lillian_dress"
+
 //////////// Masks ////////////
 
 /*
@@ -753,7 +784,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "mara_kilpatrick_1"
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 
 ////// Small locket - Altair An-Nasaqan - Serithi
 
@@ -766,7 +797,7 @@
 	item_color = "altair_locket"
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 	slot_flags = SLOT_MASK
 
 ////// Silver locket - Konaa Hirano - Konaa_Hirano
@@ -780,7 +811,7 @@
 	item_color = "konaahirano"
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 	slot_flags = SLOT_MASK
 	var/obj/item/held //Item inside locket.
 
@@ -810,7 +841,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "nasir_khayyam_1"
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 	slot_flags = SLOT_MASK
 
 ////// Emerald necklace - Ty Foster - Nega
@@ -821,8 +852,17 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "ty_foster"
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 
+////// Apollon Pendant - Michael Guess - Dragor23
+/obj/item/clothing/mask/michael_guess_1
+	name = "Apollon Pendant"
+	desc = "A pendant with the form of a sacrificial tripod, used in acient greece. It's a symbol of the Olympian Apollon, a god associated with oracles, poetry, the sun and healing."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "michael_guess_1"
+	flags = FPRINT|TABLEPASS
+	w_class = 2
+	slot_flags = SLOT_MASK
 //////////// Shoes ////////////
 
 /obj/item/clothing/shoes/magboots/fluff/susan_harris_1 //sniperyeti: Susan Harris
@@ -958,3 +998,27 @@
 	item_state = "sakura_hokkaido_kimono"
 	item_color = "sakura_hokkaido_kimono"
 
+///////////////////////////// Astronovus - Harold's Cane ////////////////////////////
+
+/obj/item/weapon/cane/fluff/harold
+	name = "Harold's Cane"
+	desc = "A cane with a wooden handle and a plastic frame capable of folding itself to make it more storable."
+	w_class = 1.0
+	icon = 'icons/obj/custom_items.dmi'
+	item_state = "foldcane"
+	icon_state = "foldcane"
+
+
+//////////////////////////// Footman - Farwa  Plush Doll //////////////////////////////////
+
+/obj/item/weapon/fluff/farwadoll
+	name = "Farwa plush doll"
+	desc = "A Farwa plush doll. It's soft and comforting!"
+	w_class = 1.0
+	icon = 'icons/obj/custom_items.dmi'
+	item_state = "farwaplush"
+	icon_state = "farwaplush"
+
+/obj/item/weapon/fluff/farwadoll/attack_self(mob/user as mob)
+	user.visible_message("<span class='notice'>[user] hugs [src]! How cute! </span>", \
+						 "<span class='notice'>You hug [src]. Dawwww... </span>")

@@ -14,7 +14,7 @@
 		if (affected.parent)
 			if (affected.parent.status & ORGAN_DESTROYED)
 				return 0
-		return target_zone == "head"
+		return affected.name == "head"
 
 
 /datum/surgery_step/head/peel
@@ -27,6 +27,9 @@
 	min_duration = 80
 	max_duration = 100
 
+	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		var/datum/organ/external/affected = target.get_organ(target_zone)
+		return ..() && !(affected.status & ORGAN_CUT_AWAY)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts peeling back tattered flesh where [target]'s head used to be with \the [tool].", \
@@ -59,7 +62,7 @@
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.status & ORGAN_CUT_AWAY
+		return ..() && affected.status & ORGAN_CUT_AWAY && affected.open < 3 && !(affected.status & ORGAN_ATTACHABLE)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -177,7 +180,8 @@
 		target.updatehealth()
 		target.UpdateDamageIcon()
 		var/obj/item/weapon/organ/head/B = tool
-		B.brainmob.mind.transfer_to(target)
+		if (B.brainmob.mind)
+			B.brainmob.mind.transfer_to(target)
 		del(B)
 
 

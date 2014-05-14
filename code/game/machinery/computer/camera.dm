@@ -180,7 +180,7 @@
 
 /obj/machinery/computer/security/telescreen/entertainment
 	name = "entertainment monitor"
-	desc = "Damn, they better have /tg/thechannel on these things."
+	desc = "Damn, why do they never have anything interesting on these things?"
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "entertainment"
 

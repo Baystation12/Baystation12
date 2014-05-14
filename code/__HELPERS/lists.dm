@@ -142,6 +142,13 @@ proc/listclearnulls(list/list)
 		return picked
 	return null
 
+//Returns the next element in parameter list after first appearance of parameter element. If it is the last element of the list or not present in list, returns first element.
+/proc/next_in_list(element, list/L)
+	for(var/i=1, i<L.len, i++)
+		if(L[i] == element)
+			return L[i+1]
+	return L[1]
+
 /*
  * Sorting
  */

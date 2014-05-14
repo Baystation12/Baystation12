@@ -68,11 +68,11 @@ for reference:
 	attackby(obj/item/W as obj, mob/user as mob)
 		if (istype(W, /obj/item/stack/sheet/wood))
 			if (src.health < src.maxhealth)
-				visible_message("\red [user] begins to repair the [src]!")
+				visible_message("\red [user] begins to repair \the [src]!")
 				if(do_after(user,20))
 					src.health = src.maxhealth
 					W:use(1)
-					visible_message("\red [user] repairs the [src]!")
+					visible_message("\red [user] repairs \the [src]!")
 					return
 			else
 				return
@@ -181,7 +181,7 @@ for reference:
 			if (src.emagged == 0)
 				src.emagged = 1
 				src.req_access = null
-				user << "You break the ID authentication lock on the [src]."
+				user << "You break the ID authentication lock on \the [src]."
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(2, 1, src)
 				s.start()
@@ -189,7 +189,7 @@ for reference:
 				return
 			else if (src.emagged == 1)
 				src.emagged = 2
-				user << "You short out the anchoring mechanism on the [src]."
+				user << "You short out the anchoring mechanism on \the [src]."
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(2, 1, src)
 				s.start()
@@ -200,12 +200,12 @@ for reference:
 				src.health = src.maxhealth
 				src.emagged = 0
 				src.req_access = list(access_security)
-				visible_message("\red [user] repairs the [src]!")
+				visible_message("\red [user] repairs \the [src]!")
 				return
 			else if (src.emagged > 0)
 				src.emagged = 0
 				src.req_access = list(access_security)
-				visible_message("\red [user] repairs the [src]!")
+				visible_message("\red [user] repairs \the [src]!")
 				return
 			return
 		else

@@ -82,57 +82,57 @@
 
 /obj/structure/sign/biohazard
 	name = "\improper BIOHAZARD"
-	desc = "A warning sign which reads 'BIOHAZARD'"
+	desc = "A warning sign which reads 'BIOHAZARD'."
 	icon_state = "bio"
 
 /obj/structure/sign/electricshock
 	name = "\improper HIGH VOLTAGE"
-	desc = "A warning sign which reads 'HIGH VOLTAGE'"
+	desc = "A warning sign which reads 'HIGH VOLTAGE'."
 	icon_state = "shock"
 
 /obj/structure/sign/examroom
 	name = "\improper EXAM"
-	desc = "A guidance sign which reads 'EXAM ROOM'"
+	desc = "A guidance sign which reads 'EXAM ROOM'."
 	icon_state = "examroom"
 
 /obj/structure/sign/vacuum
 	name = "\improper HARD VACUUM AHEAD"
-	desc = "A warning sign which reads 'HARD VACUUM AHEAD'"
+	desc = "A warning sign which reads 'HARD VACUUM AHEAD'."
 	icon_state = "space"
 
 /obj/structure/sign/deathsposal
 	name = "\improper DISPOSAL LEADS TO SPACE"
-	desc = "A warning sign which reads 'DISPOSAL LEADS TO SPACE'"
+	desc = "A warning sign which reads 'DISPOSAL LEADS TO SPACE'."
 	icon_state = "deathsposal"
 
 /obj/structure/sign/pods
 	name = "\improper ESCAPE PODS"
-	desc = "A warning sign which reads 'ESCAPE PODS'"
+	desc = "A warning sign which reads 'ESCAPE PODS'."
 	icon_state = "pods"
 
 /obj/structure/sign/fire
 	name = "\improper DANGER: FIRE"
-	desc = "A warning sign which reads 'DANGER: FIRE'"
+	desc = "A warning sign which reads 'DANGER: FIRE'."
 	icon_state = "fire"
 
 /obj/structure/sign/nosmoking_1
 	name = "\improper NO SMOKING"
-	desc = "A warning sign which reads 'NO SMOKING'"
+	desc = "A warning sign which reads 'NO SMOKING'."
 	icon_state = "nosmoking"
 
 /obj/structure/sign/nosmoking_2
 	name = "\improper NO SMOKING"
-	desc = "A warning sign which reads 'NO SMOKING'"
+	desc = "A warning sign which reads 'NO SMOKING'."
 	icon_state = "nosmoking2"
 
 /obj/structure/sign/redcross
 	name = "medbay"
-	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here.'"
+	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
 	icon_state = "redcross"
 
 /obj/structure/sign/greencross
 	name = "medbay"
-	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here.'"
+	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
 	icon_state = "greencross"
 
 /obj/structure/sign/goldenplaque
@@ -162,15 +162,40 @@
 
 /obj/structure/sign/science			//These 3 have multiple types, just var-edit the icon_state to whatever one you want on the map
 	name = "\improper SCIENCE!"
-	desc = "A warning sign which reads 'SCIENCE!'"
+	desc = "A warning sign which reads 'SCIENCE!'."
 	icon_state = "science1"
 
 /obj/structure/sign/chemistry
 	name = "\improper CHEMISTRY"
-	desc = "A warning sign which reads 'CHEMISTRY'"
+	desc = "A warning sign which reads 'CHEMISTRY'."
 	icon_state = "chemistry1"
 
 /obj/structure/sign/botany
 	name = "\improper HYDROPONICS"
-	desc = "A warning sign which reads 'HYDROPONICS'"
+	desc = "A warning sign which reads 'HYDROPONICS'."
 	icon_state = "hydro1"
+
+/obj/structure/sign/directions/science
+	name = "\improper Science department"
+	desc = "A direction sign, pointing out which way the Science department is."
+	icon_state = "direction_sci"
+
+/obj/structure/sign/directions/engineering
+	name = "\improper Engineering department"
+	desc = "A direction sign, pointing out which way the Engineering department is."
+	icon_state = "direction_eng"
+
+/obj/structure/sign/directions/security
+	name = "\improper Security department"
+	desc = "A direction sign, pointing out which way the Security department is."
+	icon_state = "direction_sec"
+
+/obj/structure/sign/directions/medical
+	name = "\improper Medical Bay"
+	desc = "A direction sign, pointing out which way the Medical Bay is."
+	icon_state = "direction_med"
+
+/obj/structure/sign/directions/evac
+	name = "\improper Escape Arm"
+	desc = "A direction sign, pointing out which way the escape shuttle dock is."
+	icon_state = "direction_evac"

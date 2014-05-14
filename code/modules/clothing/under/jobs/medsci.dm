@@ -10,12 +10,30 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	flags = FPRINT | TABLEPASS
 
+/obj/item/clothing/under/rank/research_director/rdalt
+	desc = "A dress suit and slacks stained with hard work and dedication to science. Perhaps other things as well, but mostly hard work and dedication."
+	name = "head researcher uniform"
+	icon_state = "rdalt"
+	item_state = "rdalt"
+	item_color = "rdalt"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	flags = FPRINT | TABLEPASS
+
+/obj/item/clothing/under/rank/research_director/dress_rd
+	name = "research director dress uniform"
+	desc = "Feminine fashion for the style concious RD. Its fabric provides minor protection from biological contaminants."
+	icon_state = "dress_rd"
+	item_color = "dress_rd"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	flags = FPRINT | TABLEPASS
+
+
 /obj/item/clothing/under/rank/scientist
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has markings that denote the wearer as a scientist."
 	name = "scientist's jumpsuit"
-	icon_state = "toxins"
+	icon_state = "science"
 	item_state = "w_suit"
-	item_color = "toxinswhite"
+	item_color = "sciencewhite"
 	permeability_coefficient = 0.50
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
 	flags = FPRINT | TABLEPASS

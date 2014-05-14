@@ -392,6 +392,11 @@ var/list/sacrificed = list()
 		D.real_name = "[pick(first_names_male)] [pick(last_names)]"
 	D.universal_speak = 1
 	D.status_flags &= ~GODMODE
+	D.s_tone = 35
+	D.b_eyes = 200
+	D.r_eyes = 200
+	D.g_eyes = 200
+	D.underwear = 0
 
 	D.key = ghost.key
 
@@ -839,7 +844,7 @@ var/list/sacrificed = list()
 		if (cultist == user) //just to be sure.
 			return
 		if(cultist.buckled || cultist.handcuffed || (!isturf(cultist.loc) && !istype(cultist.loc, /obj/structure/closet)))
-			user << "\red You cannot summon the [cultist], for his shackles of blood are strong"
+			user << "\red You cannot summon \the [cultist], for his shackles of blood are strong."
 			return fizzle()
 		cultist.loc = src.loc
 		cultist.lying = 1

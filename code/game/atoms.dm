@@ -6,6 +6,7 @@
 	var/list/fingerprintshidden
 	var/fingerprintslast = null
 	var/list/blood_DNA
+	var/blood_color
 	var/last_bumped = 0
 	var/pass_flags = 0
 	var/throwpass = 0
@@ -43,7 +44,6 @@
 
 
 /atom/proc/assume_air(datum/gas_mixture/giver)
-	del(giver)
 	return null
 
 /atom/proc/remove_air(amount)
@@ -100,8 +100,10 @@
 /atom/proc/emp_act(var/severity)
 	return
 
-/atom/proc/bullet_act(var/obj/item/projectile/Proj)
-	return 0
+
+/atom/proc/bullet_act(obj/item/projectile/P, def_zone)
+	P.on_hit(src, 0, def_zone)
+	. = 0
 
 /atom/proc/in_contents_of(container)//can take class or object instance as argument
 	if(ispath(container))
@@ -317,7 +319,43 @@ its easier to just keep the beam vertical.
 		var/full_print = md5(H.dna.uni_identity)
 
 		// Add the fingerprints
-		fingerprints[full_print] = full_print
+		//
+		if(fingerprints[full_print])
+			switch(stringpercent(fingerprints[full_print]))		//tells us how many stars are in the current prints.
+
+				if(28 to 32)
+					if(prob(1))
+						fingerprints[full_print] = full_print 		// You rolled a one buddy.
+					else
+						fingerprints[full_print] = stars(full_print, rand(0,40)) // 24 to 32
+
+				if(24 to 27)
+					if(prob(3))
+						fingerprints[full_print] = full_print     	//Sucks to be you.
+					else
+						fingerprints[full_print] = stars(full_print, rand(15, 55)) // 20 to 29
+
+				if(20 to 23)
+					if(prob(5))
+						fingerprints[full_print] = full_print		//Had a good run didn't ya.
+					else
+						fingerprints[full_print] = stars(full_print, rand(30, 70)) // 15 to 25
+
+				if(16 to 19)
+					if(prob(5))
+						fingerprints[full_print] = full_print		//Welp.
+					else
+						fingerprints[full_print]  = stars(full_print, rand(40, 100))  // 0 to 21
+
+				if(0 to 15)
+					if(prob(5))
+						fingerprints[full_print] = stars(full_print, rand(0,50)) 	// small chance you can smudge.
+					else
+						fingerprints[full_print] = full_print
+
+		else
+			fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial touch, not leaving much evidence the first time.
+
 
 		return 1
 	else
@@ -333,17 +371,22 @@ its easier to just keep the beam vertical.
 
 
 /atom/proc/transfer_fingerprints_to(var/atom/A)
+
 	if(!istype(A.fingerprints,/list))
 		A.fingerprints = list()
+
 	if(!istype(A.fingerprintshidden,/list))
 		A.fingerprintshidden = list()
+
+	if(!istype(fingerprintshidden, /list))
+		fingerprintshidden = list()
 
 	//skytodo
 	//A.fingerprints |= fingerprints            //detective
 	//A.fingerprintshidden |= fingerprintshidden    //admin
-	if(fingerprints)
+	if(A.fingerprints && fingerprints)
 		A.fingerprints |= fingerprints.Copy()            //detective
-	if(fingerprintshidden)
+	if(A.fingerprintshidden && fingerprintshidden)
 		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin	A.fingerprintslast = fingerprintslast
 
 
@@ -361,16 +404,9 @@ its easier to just keep the beam vertical.
 		return 0
 	if(!blood_DNA || !istype(blood_DNA, /list))	//if our list of DNA doesn't exist yet (or isn't a list) initialise it.
 		blood_DNA = list()
-
-	//adding blood to humans
-	else if (istype(src, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = src
-		//if this blood isn't already in the list, add it
-		if(blood_DNA[H.dna.unique_enzymes])
-			return 0 //already bloodied with this blood. Cannot add more.
-		blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
-		H.update_inv_gloves()	//handles bloody hands overlays and updating
-		return 1 //we applied blood to the item
+	blood_color = "#A10808"
+	if (M.species)
+		blood_color = M.species.blood_color
 	return
 
 /atom/proc/add_vomit_floor(mob/living/carbon/M as mob, var/toxvomit = 0)

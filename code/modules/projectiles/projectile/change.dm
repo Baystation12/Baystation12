@@ -13,6 +13,8 @@
 /obj/item/projectile/change/proc/wabbajack (mob/M as mob in living_mob_list)
 	if(istype(M, /mob/living) && M.stat != DEAD)
 		if(M.monkeyizing)	return
+		if(M.has_brain_worms()) return //Borer stuff - RR
+
 		M.monkeyizing = 1
 		M.canmove = 0
 		M.icon = null
@@ -59,7 +61,7 @@
 					else			new_mob = new /mob/living/carbon/alien/larva(M.loc)
 				new_mob.universal_speak = 1
 			if("human")
-				new_mob = new /mob/living/carbon/human(M.loc)
+				new_mob = new /mob/living/carbon/human(M.loc, pick(all_species))
 				if(M.gender == MALE)
 					new_mob.gender = MALE
 					new_mob.name = pick(first_names_male)
@@ -71,10 +73,6 @@
 
 				var/datum/preferences/A = new()	//Randomize appearance for the human
 				A.randomize_appearance_for(new_mob)
-
-				var/mob/living/carbon/human/H = new_mob
-				var/newspecies = pick(all_species)
-				H.set_species(newspecies)
 			else
 				return
 

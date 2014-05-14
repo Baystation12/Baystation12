@@ -69,7 +69,9 @@
 	if(screen == 1)
 		dat += "Select an event to trigger:<ul>"
 		dat += "<li><A href='?src=\ref[src];triggerevent=Red alert'>Red alert</A></li>"
-		dat += "<li><A href='?src=\ref[src];triggerevent=Emergency Response Team'>Emergency Response Team</A></li>"
+		if(!config.ert_admin_call_only)
+			dat += "<li><A href='?src=\ref[src];triggerevent=Emergency Response Team'>Emergency Response Team</A></li>"
+		
 		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Emergency Maintenance Access'>Grant Emergency Maintenance Access</A></li>"
 		dat += "<li><A href='?src=\ref[src];triggerevent=Revoke Emergency Maintenance Access'>Revoke Emergency Maintenance Access</A></li>"
 		dat += "</ul>"
@@ -152,8 +154,9 @@
 			revoke_maint_all_access()
 			feedback_inc("alert_keycard_auth_maintRevoke",1)
 		if("Emergency Response Team")
-			trigger_armed_response_team(1)
-			feedback_inc("alert_keycard_auth_ert",1)
+			if(!config.ert_admin_call_only)
+				trigger_armed_response_team(1)
+				feedback_inc("alert_keycard_auth_ert",1)
 
 var/global/maint_all_access = 0
 

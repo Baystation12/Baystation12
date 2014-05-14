@@ -34,7 +34,7 @@
 		return
 
 	if(IsMultiple(activeFor, 5))
-		if(prob(25))
+		if(prob(15))
 			var/obj/machinery/vending/infectedMachine = pick(vendingMachines)
 			vendingMachines.Remove(infectedMachine)
 			infectedVendingMachines.Add(infectedMachine)
@@ -43,7 +43,7 @@
 
 			if(IsMultiple(activeFor, 12))
 				originMachine.speak(pick("Try our aggressive new marketing strategies!", \
-										 "You should buy products to feed your lifestyle obession!", \
+										 "You should buy products to feed your lifestyle obsession!", \
 										 "Consume!", \
 										 "Your money can buy happiness!", \
 										 "Engage direct marketing!", \
@@ -52,6 +52,5 @@
 
 /datum/event/brand_intelligence/end()
 	for(var/obj/machinery/vending/infectedMachine in infectedVendingMachines)
-		if(prob(90))
-			infectedMachine.shut_up = 1
-			infectedMachine.shoot_inventory = 0
+		infectedMachine.shut_up = 1
+		infectedMachine.shoot_inventory = 0

@@ -8,6 +8,42 @@
 	flags = FPRINT | TABLEPASS
 	slot_flags = 0
 	w_class = 2.0
+	var/obj/item/clothing/under/has_suit = null		//the suit the tie may be attached to
+	var/image/inv_overlay = null	//overlay used when attached to clothing.
+
+/obj/item/clothing/tie/New()
+	..()
+	inv_overlay = image("icon" = 'icons/obj/clothing/ties_overlay.dmi', "icon_state" = "[item_color? "[item_color]" : "[icon_state]"]")
+
+//when user attached an accessory to S
+/obj/item/clothing/tie/proc/on_attached(obj/item/clothing/under/S, mob/user as mob)
+	if(!istype(S))
+		return
+	has_suit = S
+	loc = has_suit
+	has_suit.overlays += inv_overlay
+	
+	user << "<span class='notice'>You attach [src] to [has_suit].</span>"
+	src.add_fingerprint(user)
+
+/obj/item/clothing/tie/proc/on_removed(mob/user as mob)
+	if(!has_suit)
+		return
+	has_suit.overlays -= inv_overlay
+	has_suit = null
+	usr.put_in_hands(src)
+	src.add_fingerprint(user)
+
+//default attackby behaviour
+/obj/item/clothing/tie/attackby(obj/item/I, mob/user)
+	..()
+
+//default attack_hand behaviour
+/obj/item/clothing/tie/attack_hand(mob/user as mob)
+	if(has_suit)
+		has_suit.remove_accessory(user)
+		return	//we aren't an object on the ground so don't call parent
+	..()
 
 /obj/item/clothing/tie/blue
 	name = "blue tie"
@@ -116,7 +152,7 @@
 //Armbands
 /obj/item/clothing/tie/armband
 	name = "red armband"
-	desc = "An fancy red armband!"
+	desc = "A fancy red armband!"
 	icon_state = "red"
 	item_color = "red"
 
@@ -156,12 +192,112 @@
 	icon_state = "medgreen"
 	item_color = "medgreen"
 
+//holsters
 /obj/item/clothing/tie/holster
 	name = "shoulder holster"
 	desc = "A handgun holster."
 	icon_state = "holster"
 	item_color = "holster"
 	var/obj/item/weapon/gun/holstered = null
+
+//subtypes can override this to specify what can be holstered
+/obj/item/clothing/tie/holster/proc/can_holster(obj/item/weapon/gun/W)
+	return W.isHandgun()
+
+/obj/item/clothing/tie/holster/proc/holster(obj/item/I, mob/user as mob)
+	if(holstered)
+		user << "\red There is already a [holstered] holstered here!"
+	
+	if (!istype(I, /obj/item/weapon/gun))
+		user << "\red Only guns can be holstered!"
+	
+	var/obj/item/weapon/gun/W = I
+	if (!can_holster(W))
+		user << "\red This [W] won't fit in the [src]!"
+		return
+	
+	holstered = W
+	user.drop_from_inventory(holstered)
+	holstered.loc = src
+	holstered.add_fingerprint(user)
+	user.visible_message("\blue [user] holsters the [holstered].", "You holster the [holstered].")
+
+/obj/item/clothing/tie/holster/proc/unholster(mob/user as mob)
+	if(!holstered)
+		return
+	
+	if(istype(user.get_active_hand(),/obj) && istype(user.get_inactive_hand(),/obj))
+		user << "\red You need an empty hand to draw the [holstered]!"
+	else
+		if(user.a_intent == "hurt")
+			usr.visible_message("\red [user] draws the [holstered], ready to shoot!", \
+			"\red You draw the [holstered], ready to shoot!")
+		else
+			user.visible_message("\blue [user] draws the [holstered], pointing it at the ground.", \
+			"\blue You draw the [holstered], pointing it at the ground.")
+		user.put_in_hands(holstered)
+		holstered.add_fingerprint(user)
+		holstered = null
+
+/obj/item/clothing/tie/holster/attack_hand(mob/user as mob)
+	if (has_suit)	//if we are part of a suit
+		if (holstered)
+			unholster(user)
+		return
+	
+	..(user)
+
+/obj/item/clothing/tie/holster/attackby(obj/item/W as obj, mob/user as mob)
+	holster(W, user)
+
+/obj/item/clothing/tie/holster/emp_act(severity)
+	if (holstered)
+		holstered.emp_act(severity)
+	..()
+
+/obj/item/clothing/tie/holster/examine()
+	set src in view()
+	..()
+	if (holstered)
+		usr << "A [holstered] is holstered here."
+	else
+		usr << "It is empty."
+
+/obj/item/clothing/tie/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
+	..()
+	has_suit.verbs += /obj/item/clothing/tie/holster/verb/holster_verb
+
+/obj/item/clothing/tie/holster/on_removed(mob/user as mob)
+	has_suit.verbs -= /obj/item/clothing/tie/holster/verb/holster_verb
+	..()
+
+//For the holster hotkey
+/obj/item/clothing/tie/holster/verb/holster_verb()
+	set name = "Holster"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+	
+	var/obj/item/clothing/tie/holster/H = null
+	if (istype(src, /obj/item/clothing/tie/holster))
+		H = src
+	else if (istype(src, /obj/item/clothing/under))
+		var/obj/item/clothing/under/S = src
+		if (S.hastie)
+			H = S.hastie
+	
+	if (!H)
+		usr << "/red Something is very wrong."
+
+	if(!H.holstered)
+		if(!istype(usr.get_active_hand(), /obj/item/weapon/gun))
+			usr << "\blue You need your gun equiped to holster it."
+			return
+		var/obj/item/weapon/gun/W = usr.get_active_hand()
+		H.holster(W, usr)
+	else
+		H.unholster(usr)
 
 /obj/item/clothing/tie/holster/armpit
 	name = "shoulder holster"
@@ -177,16 +313,42 @@
 
 /obj/item/clothing/tie/storage
 	name = "load bearing equipment"
-	desc = "Used to hold things when you don't have enough hands for that."
+	desc = "Used to hold things when you don't have enough hands."
 	icon_state = "webbing"
 	item_color = "webbing"
 	var/slots = 3
-	var/obj/item/weapon/storage/pockets/hold
+	var/obj/item/weapon/storage/internal/hold
 
 /obj/item/clothing/tie/storage/New()
-	hold = new /obj/item/weapon/storage/pockets(src)
-	hold.master_item = src
+	..()
+	hold = new/obj/item/weapon/storage/internal(src)
 	hold.storage_slots = slots
+
+/obj/item/clothing/tie/storage/attack_hand(mob/user as mob)
+	if (has_suit)	//if we are part of a suit
+		hold.open(user)
+		return
+	
+	if (hold.handle_attack_hand(user))	//otherwise interact as a regular storage item
+		..(user)
+
+/obj/item/clothing/tie/storage/MouseDrop(obj/over_object as obj)
+	if (has_suit)
+		return
+	
+	if (hold.handle_mousedrop(usr, over_object))
+		..(over_object)
+
+/obj/item/clothing/tie/storage/attackby(obj/item/W as obj, mob/user as mob)
+	hold.attackby(W, user)
+
+/obj/item/clothing/tie/storage/emp_act(severity)
+	hold.emp_act(severity)
+	..()
+
+/obj/item/clothing/tie/storage/hear_talk(mob/M, var/msg)
+	hold.hear_talk(M, msg)
+	..()
 
 /obj/item/clothing/tie/storage/attack_self(mob/user as mob)
 	user << "<span class='notice'>You empty [src].</span>"
@@ -195,18 +357,6 @@
 	for(var/obj/item/I in hold.contents)
 		hold.remove_from_storage(I, T)
 	src.add_fingerprint(user)
-
-/obj/item/clothing/tie/storage/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	hold.attackby(W,user)
-	src.add_fingerprint(user)
-
-/obj/item/weapon/storage/pockets
-	name = "storage"
-	var/master_item		//item it belongs to
-
-/obj/item/weapon/storage/pockets/close(mob/user as mob)
-	..()
-	loc = master_item
 
 /obj/item/clothing/tie/storage/webbing
 	name = "webbing"
@@ -311,27 +461,14 @@
 	item_color = "unathiharness2"
 	slots = 2
 
-/obj/item/clothing/tie/storage/knifeharness/attackby(var/obj/item/O as obj, mob/user as mob)
-	..()
-	update()
-
-/obj/item/clothing/tie/storage/knifeharness/proc/update()
-	var/count = 0
-	for(var/obj/item/I in hold)
-		if(istype(I,/obj/item/weapon/hatchet/unathiknife))
-			count++
-	if(count>2) count = 2
-	item_state = "unathiharness[count]"
-	icon_state = item_state
-	item_color = item_state
-
-	if(istype(loc, /obj/item/clothing))
-		var/obj/item/clothing/U = loc
-		if(istype(U.loc, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = U.loc
-			H.update_inv_w_uniform()
-
 /obj/item/clothing/tie/storage/knifeharness/New()
 	..()
+	hold.max_combined_w_class = 4
+	hold.can_hold = list("/obj/item/weapon/hatchet/unathiknife",\
+	"/obj/item/weapon/kitchen/utensil/knife",\
+	"/obj/item/weapon/kitchen/utensil/pknife",\
+	"/obj/item/weapon/kitchenknife",\
+	"/obj/item/weapon/kitchenknife/ritual")
+	
 	new /obj/item/weapon/hatchet/unathiknife(hold)
 	new /obj/item/weapon/hatchet/unathiknife(hold)

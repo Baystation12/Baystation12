@@ -15,15 +15,28 @@
 	max_combined_w_class = 21
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	playsound(src.loc, "rustle", 50, 1, -5)
+	if (src.use_sound)
+		playsound(src.loc, src.use_sound, 50, 1, -5)
 	..()
+
+/obj/item/weapon/storage/backpack/equipped(var/mob/user, var/slot)
+	if (slot == slot_back && src.use_sound)
+		playsound(src.loc, src.use_sound, 50, 1, -5)
+	..(user, slot)
+
+/*
+/obj/item/weapon/storage/backpack/dropped(mob/user as mob)
+	if (loc == user && src.use_sound)
+		playsound(src.loc, src.use_sound, 50, 1, -5)
+	..(user)
+*/
 
 /*
  * Backpack Types
  */
 
 /obj/item/weapon/storage/backpack/holding
-	name = "Bag of Holding"
+	name = "bag of holding"
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = "bluespace=4"
 	icon_state = "holdingpack"
@@ -84,7 +97,7 @@
 	icon_state = "cultpack"
 
 /obj/item/weapon/storage/backpack/clown
-	name = "Giggles Von Honkerton"
+	name = "Giggles von Honkerton"
 	desc = "It's a backpack made by Honk! Co."
 	icon_state = "clownpack"
 	item_state = "clownpack"

@@ -18,12 +18,18 @@
 
 	var/s_tone = 0	//Skin tone
 
+	//Skin colour
+	var/r_skin = 0
+	var/g_skin = 0
+	var/b_skin = 0
+
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
 
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
 
 	var/underwear = 1	//Which underwear the player wants
+	var/undershirt = 1	//Which undershirt the player wants.
 	var/backbag = 2		//Which backpack type the player has chosen. Nothing, Satchel or Backpack.
 
 	//Equipment slots
@@ -48,11 +54,19 @@
 	var/icon/stand_icon = null
 	var/icon/lying_icon = null
 
+	var/voice = ""	//Instead of new say code calling GetVoice() over and over and over, we're just going to ask this variable, which gets updated in Life()
+
+	var/speech_problem_flag = 0
+
 	var/miming = null //Toggle for the mime's abilities.
 	var/special_voice = "" // For changing our voice. Used by a symptom.
 
 	var/failed_last_breath = 0 //This is used to determine if the mob failed a breath. If they did fail a brath, they will attempt to breathe each tick, otherwise just once per 4 ticks.
 
+	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
+	var/list/bad_external_organs = list()// organs we check until they are good.
+
 	var/xylophone = 0 //For the spoooooooky xylophone cooldown
 
 	var/mob/remoteview_target = null
+	var/hand_blood_color

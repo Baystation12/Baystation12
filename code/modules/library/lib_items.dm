@@ -87,6 +87,9 @@
 	New()
 		..()
 		new /obj/item/weapon/book/manual/medical_cloning(src)
+		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
+		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
+		new /obj/item/weapon/book/manual/medical_diagnostics_manual(src)
 		update_icon()
 
 
@@ -234,6 +237,12 @@
 	else
 		..()
 
+/obj/item/weapon/book/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if(user.zone_sel.selecting == "eyes")
+		user.visible_message("<span class='notice'>You open up the book and show it to [M]. </span>", \
+			"<span class='notice'> [user] opens up a book and shows it to [M]. </span>")
+		M << browse("<TT><I>Penned by [author].</I></TT> <BR>" + "[dat]", "window=book")
+
 
 /*
  * Barcode Scanner
@@ -244,7 +253,7 @@
 	icon_state ="scanner"
 	throw_speed = 1
 	throw_range = 5
-	w_class = 1.0
+	w_class = 2.0
 	flags = FPRINT | TABLEPASS
 	var/obj/machinery/librarycomp/computer // Associated computer - Modes 1 to 3 use this
 	var/obj/item/weapon/book/book	 //  Currently scanned book

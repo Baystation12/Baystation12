@@ -37,7 +37,11 @@
 		/mob/living/simple_animal/cow,
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/obj/machinery/computer/centrifuge,
-		/obj/machinery/sleeper	)
+		/obj/machinery/sleeper,
+		/obj/machinery/smartfridge/,
+		/obj/machinery/biogenerator,
+		/obj/machinery/hydroponics,
+		/obj/machinery/constructable_frame)
 
 	New()
 		..()
@@ -47,11 +51,10 @@
 		set src in view()
 		..()
 		if (!(usr in view(2)) && usr!=src.loc) return
-		usr << "\blue It contains:"
 		if(reagents && reagents.reagent_list.len)
-			usr << "\blue [src.reagents.total_volume] units of liquid."
+			usr << "\blue It contains [src.reagents.total_volume] units of liquid."
 		else
-			usr << "\blue Nothing."
+			usr << "\blue It is empty."
 		if (!is_open_container())
 			usr << "\blue Airtight lid seals it completely."
 
@@ -66,7 +69,8 @@
 		update_icon()
 
 	afterattack(obj/target, mob/user , flag)
-		if (!is_open_container())
+
+		if (!is_open_container() || !flag)
 			return
 
 		for(var/type in src.can_be_placed_into)
@@ -120,6 +124,9 @@
 			return
 
 		else if(istype(target, /obj/machinery/bunsen_burner))
+			return
+
+		else if(istype(target, /obj/machinery/smartfridge))
 			return
 
 		else if(istype(target, /obj/machinery/radiocarbon_spectrometer))
@@ -215,7 +222,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/bluespace
 	name = "bluespace beaker"
-	desc = "A bluespace beaker, powered by experimental bluespace technology and Element Cuban combined with the Compound Pete. Can hold up to 300 units."
+	desc = "A bluespace beaker, powered by experimental bluespace technology. Can hold up to 300 units."
 	icon_state = "beakerbluespace"
 	g_amt = 5000
 	volume = 300
@@ -273,6 +280,13 @@
 			user.put_in_hands(new /obj/item/weapon/bucket_sensor)
 			user.drop_from_inventory(src)
 			del(src)
+			
+	update_icon()
+		overlays.Cut()
+
+		if (!is_open_container())
+			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
+			overlays += lid
 
 // vials are defined twice, what?
 /*

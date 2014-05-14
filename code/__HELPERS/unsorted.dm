@@ -352,7 +352,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/select = null
 	var/list/borgs = list()
 	for (var/mob/living/silicon/robot/A in player_list)
-		if (A.stat == 2 || A.connected_ai || A.scrambledcodes)
+		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || istype(A,/mob/living/silicon/robot/drone))
 			continue
 		var/name = "[A.real_name] ([A.modtype] [A.braintype])"
 		borgs[name] = A
@@ -531,10 +531,17 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		. += "*no key*"
 
 	if(include_name && M)
+		var/name
+
 		if(M.real_name)
-			. += "/([M.real_name])"
+			name = M.real_name
 		else if(M.name)
-			. += "/([M.name])"
+			name = M.name
+
+		if(is_special_character(M))
+			. += "/(<font color='#FFA500'>[name]</font>)" //Orange
+		else
+			. += "/([name])"
 
 	return .
 
@@ -1267,6 +1274,7 @@ proc/is_hot(obj/item/W as obj)
 
 //Is this even used for anything besides balloons? Yes I took out the W:lit stuff because : really shouldnt be used.
 /proc/is_sharp(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
+	if(!W) return 0
 	if(W.sharp) return 1
 	return ( \
 		W.sharp													  || \

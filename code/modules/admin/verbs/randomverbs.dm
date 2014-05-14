@@ -65,6 +65,37 @@
 	message_admins("\blue \bold SubtleMessage: [key_name_admin(usr)] -> [key_name_admin(M)] : [msg]", 1)
 	feedback_add_details("admin_verb","SMS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/cmd_mentor_check_new_players()	//Allows mentors / admins to determine who the newer players are.
+	set category = "Admin"
+	set name = "Check new Players"
+	if(!holder)
+		src << "Only staff members may use this command."
+
+	var/age = alert(src, "Age check", "Show accounts yonger then _____ days","7", "30" , "All")
+
+	if(age == "All") 
+		age = 9999999
+	else
+		age = text2num(age)
+
+	var/missing_ages = 0
+	var/msg = ""
+	for(var/client/C in clients)
+		if(C.player_age == "Requires database")
+			missing_ages = 1
+			continue
+		if(C.player_age < age)
+			msg += "[key_name_admin(C)]: account is [C.player_age] days old<br>"
+	
+	if(missing_ages)
+		src << "Some accounts did not have proper ages set in their clients.  This function requires database to be present"
+
+	if(msg != "")
+		src << browse(msg, "window=Player_age_check")
+	else
+		src << "No matches for that age range found."
+
+
 /client/proc/cmd_admin_world_narrate() // Allows administrators to fluff events a little easier -- TLE
 	set category = "Special Verbs"
 	set name = "Global Narrate"
@@ -447,9 +478,13 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(record_found)//Pull up their name from database records if they did have a mind.
 		new_character.dna = new()//Let's first give them a new DNA.
 		new_character.dna.unique_enzymes = record_found.fields["b_dna"]//Enzymes are based on real name but we'll use the record for conformity.
-		new_character.dna.SE = record_found.fields["enzymes"]//This is the default of enzymes so I think it's safe to go with.
+
+		// I HATE BYOND.  HATE.  HATE. - N3X
+		var/list/newSE= record_found.fields["enzymes"]
+		var/list/newUI = record_found.fields["identity"]
+		new_character.dna.SE = newSE.Copy() //This is the default of enzymes so I think it's safe to go with.
 		new_character.dna.UpdateSE()
-		new_character.UpdateAppearance(record_found.fields["identity"])//Now we configure their appearance based on their unique identity, same as with a DNA machine or somesuch.
+		new_character.UpdateAppearance(newUI.Copy())//Now we configure their appearance based on their unique identity, same as with a DNA machine or somesuch.
 	else//If they have no records, we just do a random DNA for them, based on their random appearance/savefile.
 		new_character.dna.ready_dna(new_character)
 
@@ -793,7 +828,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	feedback_add_details("admin_verb","CC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /* This proc is DEFERRED. Does not do anything.
-/client/proc/cmd_admin_remove_plasma()
+/client/proc/cmd_admin_remove_phoron()
 	set category = "Debug"
 	set name = "Stabilize Atmos."
 	if(!holder)

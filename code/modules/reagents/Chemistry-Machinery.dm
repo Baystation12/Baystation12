@@ -10,7 +10,7 @@
 	icon_state = "dispenser"
 	use_power = 0
 	idle_power_usage = 40
-	var/ui_name = "Chem Dispenser 5000"
+	var/ui_title = "Chem Dispenser 5000"
 	var/energy = 100
 	var/max_energy = 100
 	var/amount = 30
@@ -43,7 +43,7 @@
 
 /obj/machinery/chem_dispenser/process()
 
-	if(recharged < 0)
+	if(recharged <= 0)
 		recharge()
 		recharged = 15
 	else
@@ -63,12 +63,12 @@
 		options[/obj/item/weapon/stock_parts/matter_bin/adv] = "Give it an advanced matter bin to fix it."
 		options[/obj/item/stack/sheet/mineral/diamond] = "Line up a cut diamond with the nozzle to fix it."
 		options[/obj/item/stack/sheet/mineral/uranium] = "Position a uranium sheet inside to fix it."
-		options[/obj/item/stack/sheet/mineral/plasma] = "Enter a block of plasma to fix it."
+		options[/obj/item/stack/sheet/mineral/phoron] = "Enter a block of phoron to fix it."
 		options[/obj/item/stack/sheet/mineral/silver] = "Cover the internals with a silver lining to fix it."
 		options[/obj/item/stack/sheet/mineral/gold] = "Wire a golden filament to fix it."
 		options[/obj/item/stack/sheet/plasteel] = "Surround the outside with a plasteel cover to fix it."
 		options[/obj/item/stack/sheet/rglass] = "Insert a pane of reinforced glass to fix it."
-
+		stat |= BROKEN
 		while(amount > 0)
 			amount -= 1
 
@@ -104,13 +104,12 @@
   *
   * @return nothing
   */
-/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main")
-	if(stat & (BROKEN|NOPOWER)) return
-	if(user.stat || user.restrained()) return
-
+/obj/machinery/chem_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null)
 	if(broken_requirements.len)
 		user << "<span class='warning'>[src] is broken. [broken_requirements[broken_requirements[1]]]</span>"
 		return
+	if(stat & (BROKEN|NOPOWER)) return
+	if(user.stat || user.restrained()) return
 
 	// this is the data which will be sent to the ui
 	var/data[0]
@@ -141,17 +140,16 @@
 			chemicals.Add(list(list("title" = temp.name, "id" = temp.id, "commands" = list("dispense" = temp.id)))) // list in a list because Byond merges the first list...
 	data["chemicals"] = chemicals
 
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
-		// the ui does not exist, so we'll create a new one
-		ui = new(user, src, ui_key, "chem_dispenser.tmpl", ui_name, 370, 605)
-		// When the UI is first opened this is the data it will use
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		ui = new(user, src, ui_key, "chem_dispenser.tmpl", ui_title, 380, 650)
+		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
+		// open the new ui window
 		ui.open()
-	else
-		// The UI is already open so push the new data to it
-		ui.push_data(data)
-		return
 
 /obj/machinery/chem_dispenser/Topic(href, href_list)
 	if(stat & (NOPOWER|BROKEN))
@@ -195,6 +193,8 @@
 		else
 			user.drop_item()
 			del(B)
+		if(broken_requirements.len==0)
+			stat ^= BROKEN
 		return
 	if(src.beaker)
 		user << "Something is already loaded into the machine."
@@ -225,7 +225,7 @@
 	icon_state = "soda_dispenser"
 	name = "soda fountain"
 	desc = "A drink fabricating machine, capable of producing many sugary drinks with just one touch."
-	ui_name = "Soda Dispens-o-matic"
+	ui_title = "Soda Dispens-o-matic"
 	energy = 100
 	accept_glass = 1
 	max_energy = 100
@@ -248,7 +248,7 @@
 /obj/machinery/chem_dispenser/beer
 	icon_state = "booze_dispenser"
 	name = "booze dispenser"
-	ui_name = "Booze Portal 9001"
+	ui_title = "Booze Portal 9001"
 	energy = 100
 	accept_glass = 1
 	max_energy = 100
@@ -890,7 +890,7 @@
 	var/list/blend_items = list (
 
 		//Sheets
-		/obj/item/stack/sheet/mineral/plasma = list("plasma" = 20),
+		/obj/item/stack/sheet/mineral/phoron = list("phoron" = 20),
 		/obj/item/stack/sheet/mineral/uranium = list("uranium" = 20),
 		/obj/item/stack/sheet/mineral/clown = list("banana" = 20),
 		/obj/item/stack/sheet/mineral/silver = list("silver" = 20),
@@ -902,7 +902,7 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/soybeans = list("soymilk" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/tomato = list("ketchup" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/corn = list("cornoil" = 0),
-		/obj/item/weapon/reagent_containers/food/snacks/grown/wheat = list("flour" = -5),
+		///obj/item/weapon/reagent_containers/food/snacks/grown/wheat = list("flour" = -5),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ricestalk = list("rice" = -5),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/cherries = list("cherryjelly" = 0),
 		/obj/item/weapon/reagent_containers/food/snacks/grown/plastellium = list("plasticide" = 5),

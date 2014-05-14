@@ -26,7 +26,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "photo"
 	item_state = "paper"
-	w_class = 1.0
+	w_class = 2.0
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
 
@@ -84,7 +84,7 @@
 
 /obj/item/weapon/storage/photo_album/MouseDrop(obj/over_object as obj)
 
-	if((istype(usr, /mob/living/carbon/human) || (ticker && ticker.mode.name == "monkey")))
+	if((istype(usr, /mob/living/carbon/human)))
 		var/mob/M = usr
 		if(!( istype(over_object, /obj/screen) ))
 			return ..()

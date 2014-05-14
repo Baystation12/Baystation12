@@ -120,6 +120,25 @@ var/global/floorIsLava = 0
 			else
 				body += "<A href='?src=\ref[src];makeanimal=\ref[M]'>Animalize</A> | "
 
+			// DNA2 - Admin Hax
+			if(iscarbon(M))
+				body += "<br><br>"
+				body += "<b>DNA Blocks:</b><br><table border='0'><tr><th>&nbsp;</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>"
+				var/bname
+				for(var/block=1;block<=DNA_SE_LENGTH;block++)
+					if(((block-1)%5)==0)
+						body += "</tr><tr><th>[block-1]</th>"
+					bname = assigned_blocks[block]
+					body += "<td>"
+					if(bname)
+						var/bstate=M.dna.GetSEState(block)
+						var/bcolor="[(bstate)?"#006600":"#ff0000"]"
+						body += "<A href='?src=\ref[src];togmutate=\ref[M];block=[block]' style='color:[bcolor];'>[bname]</A><sub>[block]</sub>"
+					else
+						body += "[block]"
+					body+="</td>"
+				body += "</tr></table>"
+
 			body += {"<br><br>
 				<b>Rudimentary transformation:</b><font size=2><br>These transformations only create a new mob type and copy stuff over. They do not take into account MMIs and similar mob-specific things. The buttons in 'Transformations' are preferred, when possible.</font><br>
 				<A href='?src=\ref[src];simplemake=observer;mob=\ref[M]'>Observer</A> |
@@ -257,7 +276,7 @@ var/global/floorIsLava = 0
 				I.rank = "N/A"
 				update_file = 1
 			dat += "<font color=#008800>[I.content]</font> <i>by [I.author] ([I.rank])</i> on <i><font color=blue>[I.timestamp]</i></font> "
-			if(I.author == usr.key)
+			if(I.author == usr.key || I.author == "Adminbot")
 				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
 			dat += "<br><br>"
 		if(update_file) info << infos
@@ -545,7 +564,7 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];create_turf=1'>Create Turf</A><br>
 		<A href='?src=\ref[src];create_mob=1'>Create Mob</A><br>
 		<br><A href='?src=\ref[src];vsc=airflow'>Edit Airflow Settings</A><br>
-		<A href='?src=\ref[src];vsc=plasma'>Edit Plasma Settings</A><br>
+		<A href='?src=\ref[src];vsc=phoron'>Edit Phoron Settings</A><br>
 		<A href='?src=\ref[src];vsc=default'>Choose a default ZAS setting</A><br>
 		"}
 
@@ -582,7 +601,8 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=gravanomalies'>Spawn a gravitational anomaly (aka lagitational anomolag)</A><BR>
 			<A href='?src=\ref[src];secretsfun=timeanomalies'>Spawn wormholes</A><BR>
 			<A href='?src=\ref[src];secretsfun=goblob'>Spawn blob</A><BR>
-			<A href='?src=\ref[src];secretsfun=aliens'>Trigger an Alien infestation</A><BR>
+			<A href='?src=\ref[src];secretsfun=aliens'>Trigger a Xenomorph infestation</A><BR>
+			<A href='?src=\ref[src];secretsfun=borers'>Trigger a Cortical Borer infestation</A><BR>
 			<A href='?src=\ref[src];secretsfun=alien_silent'>Spawn an Alien silently</A><BR>
 			<A href='?src=\ref[src];secretsfun=spiders'>Trigger a Spider infestation</A><BR>
 			<A href='?src=\ref[src];secretsfun=spaceninja'>Send in a space ninja</A><BR>
@@ -696,7 +716,7 @@ var/global/floorIsLava = 0
 
 /datum/admins/proc/toggleooc()
 	set category = "Server"
-	set desc="Toggle dis bitch"
+	set desc="Globally Toggles OOC"
 	set name="Toggle OOC"
 	ooc_allowed = !( ooc_allowed )
 	if (ooc_allowed)
@@ -706,6 +726,20 @@ var/global/floorIsLava = 0
 	log_admin("[key_name(usr)] toggled OOC.")
 	message_admins("[key_name_admin(usr)] toggled OOC.", 1)
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+
+/datum/admins/proc/toggledsay()
+	set category = "Server"
+	set desc="Globally Toggles DSAY"
+	set name="Toggle DSAY"
+	dsay_allowed = !( dsay_allowed )
+	if (dsay_allowed)
+		world << "<B>Deadchat has been globally enabled!</B>"
+	else
+		world << "<B>Deadchat has been globally disabled!</B>"
+	log_admin("[key_name(usr)] toggled deadchat.")
+	message_admins("[key_name_admin(usr)] toggled deadchat.", 1)
+	feedback_add_details("admin_verb","TDSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 
 /datum/admins/proc/toggleoocdead()
 	set category = "Server"
@@ -928,7 +962,7 @@ var/global/floorIsLava = 0
 /datum/admins/proc/get_sab_desc(var/target)
 	switch(target)
 		if(1)
-			return "Destroy at least 70% of the plasma canisters on the station"
+			return "Destroy at least 70% of the phoron canisters on the station"
 		if(2)
 			return "Destroy the AI"
 		if(3)
@@ -967,7 +1001,11 @@ var/global/floorIsLava = 0
 		if(!chosen)
 			return
 
-	new chosen(usr.loc)
+	if(ispath(chosen,/turf))
+		var/turf/T = get_turf(usr.loc)
+		T.ChangeTurf(chosen)
+	else
+		new chosen(usr.loc)
 
 	log_admin("[key_name(usr)] spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
 	feedback_add_details("admin_verb","SA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -1061,6 +1099,30 @@ var/global/floorIsLava = 0
 
 	if(istype(H))
 		H.regenerate_icons()
+
+proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
+	if(!whom)
+		return "<b>(*null*)</b>"
+	var/mob/M
+	var/client/C
+	if(istype(whom, /client))
+		C = whom
+		M = C.mob
+	else if(istype(whom, /mob))
+		M = whom
+		C = M.client
+	else
+		return "<b>(*not an mob*)</b>"
+	switch(detail)
+		if(0)
+			return "<b>[key_name(C, link, name)]</b>"
+		if(1)
+			return "<b>[key_name(C, link, name)](<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>)</b>"
+		if(2)
+			var/ref_mob = "\ref[M]"
+			return "<b>[key_name(C, link, name)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)</b>"
+
+
 
 //
 //

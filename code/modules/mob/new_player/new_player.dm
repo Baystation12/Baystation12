@@ -77,12 +77,8 @@
 				if(ticker.hide_mode == 0)
 					stat("Game Mode:", "[master_mode]") // Old setting for showing the game mode
 
-			if((ticker.current_state == GAME_STATE_PREGAME) && going)
-				stat("Time To Start:", ticker.pregame_timeleft)
-			if((ticker.current_state == GAME_STATE_PREGAME) && !going)
-				stat("Time To Start:", "DELAYED")
-
 			if(ticker.current_state == GAME_STATE_PREGAME)
+				stat("Time To Start:", "[ticker.pregame_timeleft][going ? "" : " (DELAYED)"]")
 				stat("Players: [totalPlayers]", "Players Ready: [totalPlayersReady]")
 				totalPlayers = 0
 				totalPlayersReady = 0
@@ -114,7 +110,7 @@
 				spawning = 1
 				src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
 
-				
+
 				observer.started_as_observer = 1
 				close_spawn_windows()
 				var/obj/O = locate("landmark*Observer-Start")
@@ -143,7 +139,6 @@
 				return
 
 			if(client.prefs.species != "Human")
-
 				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
 					src << alert("You are currently not whitelisted to play [client.prefs.species].")
 					return 0
@@ -159,9 +154,10 @@
 				usr << "\blue There is an administrative lock on entering the game!"
 				return
 
-			if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
-				src << alert("You are currently not whitelisted to play [client.prefs.species].")
-				return 0
+			if(client.prefs.species != "Human")
+				if(!is_alien_whitelisted(src, client.prefs.species) && config.usealienwhitelist)
+					src << alert("You are currently not whitelisted to play [client.prefs.species].")
+					return 0
 
 			AttemptLateSpawn(href_list["SelectedJob"])
 			return
@@ -287,6 +283,9 @@
 			src << alert("[rank] is not available. Please try another.")
 			return 0
 
+		spawning = 1
+		close_spawn_windows()
+
 		job_master.AssignRole(src, rank, 1)
 
 		var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
@@ -350,17 +349,19 @@
 		spawning = 1
 		close_spawn_windows()
 
-		var/mob/living/carbon/human/new_character = new(loc)
-		new_character.lastarea = get_area(loc)
+		var/mob/living/carbon/human/new_character
 
 		var/datum/species/chosen_species
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
 		if(chosen_species)
-			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
-				new_character.set_species(client.prefs.species)
-				if(chosen_species.language)
-					new_character.add_language(chosen_species.language)
+			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & IS_WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
+				new_character = new(loc, client.prefs.species)
+
+		if(!new_character)
+			new_character = new(loc)
+
+		new_character.lastarea = get_area(loc)
 
 		var/datum/language/chosen_language
 		if(client.prefs.language)
@@ -392,7 +393,7 @@
 
 		if(client.prefs.disabilities)
 			// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
-			new_character.dna.SetSEState(GLASSESBLOCK,1,0) 
+			new_character.dna.SetSEState(GLASSESBLOCK,1,0)
 			new_character.disabilities |= NEARSIGHTED
 
 		// And uncomment this, too.
@@ -416,3 +417,10 @@
 	proc/close_spawn_windows()
 		src << browse(null, "window=latechoices") //closes late choices window
 		src << browse(null, "window=playersetup") //closes the player setup window
+
+
+/mob/new_player/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
+	return
+
+/mob/new_player/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/mob/speaker = null, var/hard_to_hear = 0)
+	return

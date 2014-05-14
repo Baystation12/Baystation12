@@ -1,0 +1,81 @@
+<div class="item">
+  {{:~link('Close', 'gear', {'close' : 1}, null, 'fixedLeft')}}
+  {{:~link('Print', 'print', { 'print' : 1 }, antibodies || pathogens ? null : 'disabled', 'fixedLeft')}}
+</div>
+
+{{if busy}}
+  <h5 class='average'>The Centrifuge is currently busy.</h5>
+  <div class='notice'>
+    <center><span class='bad'>{{:busy}}</span></center>
+  </div>
+  <p>
+    Thank you for your patience!
+  </p>
+{{else}}
+  <div class="item">
+    <h2>{{:is_antibody_sample ?  'Antibody Sample' : 'Blood Sample'}}</h2>
+  </div>
+  <div class='item'>
+    {{:~link('Eject Vial', 'eject', { 'action' : 'sample' }, sample_inserted ? null : 'disabled')}}
+  </div>
+  {{if sample_inserted}}
+    {{if antibodies || pathogens}}
+      <div class="statusDisplay">
+        {{if antibodies}}
+          <div class='item'>
+            <div class='itemLabel'>
+              <span class='good'>Antibodies:</span>
+            </div>
+            <div class='itemContent'>
+              {{:antibodies}}
+            </div>
+          </div>
+        {{/if}}
+        {{if pathogens}}
+          <div class='item'>
+            <div class='itemLabel'>
+              <span class='good'>Pathogens:</span>
+            </div>
+            <div class='itemContent'>
+              {{for pathogens}}
+                <div class='highlight'>
+                  {{:name}} ({{:spread_type}})
+                </div>
+              {{/for}}
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    {{else}}
+    <div class='item'>
+      <span class='average'>No antibodies or viral strains detected.</span>
+    </div>
+    {{/if}}
+  {{else}}
+    <div class='item'>
+      <span class='average'>No vial detected.</span>
+    </div>
+  {{/if}}
+  {{if antibodies && !is_antibody_sample}}
+    <div class='item'>
+      <div class='itemLabelWide'>
+        Isolate Antibodies:
+      </div>
+      <div class='itemContent'>
+        {{:~link(antibodies, 'pencil', { 'action' : 'antibody' })}}
+      </div>
+    </div>
+  {{/if}}
+  {{if pathogens}}
+    <div class='item'>
+      <div class='itemLabelWide'>
+        Isolate Strain:
+      </div>
+      <div class='itemContent'>
+        {{for pathogens}}
+          {{:~link(name, 'pencil', { 'isolate' : reference })}}
+        {{/for}}
+      </div>
+    </div>
+  {{/if}}
+{{/if}}

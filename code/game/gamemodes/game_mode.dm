@@ -22,7 +22,7 @@
 	var/explosion_in_progress = 0 //sit back and relax
 	var/list/datum/mind/modePlayer = new
 	var/list/restricted_jobs = list()	// Jobs it doesn't make sense to be.  I.E chaplain or AI cultist
-	var/list/protected_jobs = list()	// Jobs that can't be tratiors because
+	var/list/protected_jobs = list()	// Jobs that can't be traitors because
 	var/required_players = 0
 	var/required_players_secret = 0 //Minimum number of players for that game mode to be chose in Secret
 	var/required_enemies = 0
@@ -44,7 +44,7 @@ Stealthy and Inconspicuous Weapons;
 /obj/item/weapon/cartridge/syndicate:3:Detomatix PDA Cartridge;
 Whitespace:Seperator;
 Stealth and Camouflage Items;
-/obj/item/clothing/under/chameleon:3:Chameleon Jumpsuit;
+/obj/item/weapon/storage/box/syndie_kit/chameleon:3:Chameleon Kit;
 /obj/item/clothing/shoes/syndigaloshes:2:No-Slip Syndicate Shoes;
 /obj/item/weapon/card/id/syndicate:2:Agent ID card;
 /obj/item/clothing/mask/gas/voice:4:Voice Changer;
@@ -213,7 +213,7 @@ Implants;
 	for(var/mob/living/carbon/human/man in player_list) if(man.client && man.mind)
 		// NT relation option
 		var/special_role = man.mind.special_role
-		if (special_role == "Wizard" || special_role == "Ninja" || special_role == "Syndicate")
+		if (special_role == "Wizard" || special_role == "Ninja" || special_role == "Syndicate" || special_role == "Vox Raider")
 			continue	//NT intelligence ruled out possiblity that those are too classy to pretend to be a crew.
 		if(man.client.prefs.nanotrasen_relation == "Opposed" && prob(50) || \
 		   man.client.prefs.nanotrasen_relation == "Skeptical" && prob(20))

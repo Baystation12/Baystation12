@@ -32,9 +32,9 @@
 	siemens_coefficient = 0.6
 
 	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECITON_TEMPERATURE
+	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECITON_TEMPERATURE
+	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/shoes/space_ninja
 	name = "ninja shoes"
@@ -46,9 +46,9 @@
 	siemens_coefficient = 0.2
 
 	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECITON_TEMPERATURE
+	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECITON_TEMPERATURE
+	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = null
 
 /obj/item/clothing/shoes/sandal
@@ -98,9 +98,9 @@
 	siemens_coefficient = 0.7
 
 	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECITON_TEMPERATURE
+	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECITON_TEMPERATURE
+	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = null
 
 /obj/item/clothing/shoes/cyborg
@@ -114,12 +114,14 @@
 	icon_state = "slippers"
 	item_state = "slippers"
 	species_restricted = null
+	w_class = 2
 
 /obj/item/clothing/shoes/slippers_worn
 	name = "worn bunny slippers"
 	desc = "Fluffy..."
 	icon_state = "slippers_worn"
 	item_state = "slippers_worn"
+	w_class = 2
 
 /obj/item/clothing/shoes/laceup
 	name = "laceup shoes"
@@ -129,7 +131,7 @@
 /obj/item/clothing/shoes/swimmingfins
 	desc = "Help you swim good."
 	name = "swimming fins"
-	icon_state = "flippers"
+	icon_state = "flipperfeet"
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null

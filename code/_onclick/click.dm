@@ -92,8 +92,9 @@
 
 		return
 
-	// operate two levels deep here (item in backpack in src; NOT item in box in backpack in src)
-	if(A == loc || (A in loc) || (A in contents) || (A.loc in contents))
+	// operate two STORAGE levels deep here (item in backpack in src; NOT item in box in backpack in src)
+	var/sdepth = A.storage_depth(src)
+	if(A == loc || (A in loc) || (sdepth != -1 && sdepth <= 1))
 
 		// faster access to objects already on you
 		if(A in contents)
@@ -117,7 +118,8 @@
 		return
 
 	// Allows you to click on a box's contents, if that box is on the ground, but no deeper than that
-	if(isturf(A) || isturf(A.loc) || (A.loc && isturf(A.loc.loc)))
+	sdepth = A.storage_depth_turf()
+	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		next_move = world.time + 10
 
 		if(A.Adjacent(src)) // see adjacent.dm
@@ -291,7 +293,7 @@
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(var/atom/A)
-	if( buckled || !A || !x || !y || !A.x || !A.y ) return
+	if( stat || buckled || !A || !x || !y || !A.x || !A.y ) return
 	var/dx = A.x - x
 	var/dy = A.y - y
 	if(!dx && !dy) return

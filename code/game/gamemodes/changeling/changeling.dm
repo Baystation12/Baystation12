@@ -72,7 +72,8 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	for(var/datum/mind/changeling in changelings)
 		grant_changeling_powers(changeling.current)
 		changeling.special_role = "Changeling"
-		forge_changeling_objectives(changeling)
+		if(!config.objectives_disabled)
+			forge_changeling_objectives(changeling)
 		greet_changeling(changeling)
 
 	spawn (rand(waittime_l, waittime_h))
@@ -120,18 +121,24 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	if (you_are)
 		changeling.current << "<B>\red You are a changeling!</B>"
 	changeling.current << "<b>\red Use say \":g message\" to communicate with your fellow changelings. Remember: you get all of their absorbed DNA if you absorb them.</b>"
-	changeling.current << "<B>You must complete the following tasks:</B>"
+
+	if(config.objectives_disabled)
+		changeling.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
+
+	if (!config.objectives_disabled)
+		changeling.current << "<B>You must complete the following tasks:</B>"
 
 	if (changeling.current.mind)
 		if (changeling.current.mind.assigned_role == "Clown")
 			changeling.current << "You have evolved beyond your clownish nature, allowing you to wield weapons without harming yourself."
 			changeling.current.mutations.Remove(CLUMSY)
 
-	var/obj_count = 1
-	for(var/datum/objective/objective in changeling.objectives)
-		changeling.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-		obj_count++
-	return
+	if (!config.objectives_disabled)
+		var/obj_count = 1
+		for(var/datum/objective/objective in changeling.objectives)
+			changeling.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+			obj_count++
+		return
 
 /*/datum/game_mode/changeling/check_finished()
 	var/changelings_alive = 0
@@ -181,25 +188,25 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 			//Removed sanity if(changeling) because we -want- a runtime to inform us that the changelings list is incorrect and needs to be fixed.
 			text += "<br><b>Changeling ID:</b> [changeling.changeling.changelingID]."
 			text += "<br><b>Genomes Absorbed:</b> [changeling.changeling.absorbedcount]"
-
-			if(changeling.objectives.len)
-				var/count = 1
-				for(var/datum/objective/objective in changeling.objectives)
-					if(objective.check_completion())
-						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='green'><B>Success!</B></font>"
-						feedback_add_details("changeling_objective","[objective.type]|SUCCESS")
+			if(!config.objectives_disabled)
+				if(changeling.objectives.len)
+					var/count = 1
+					for(var/datum/objective/objective in changeling.objectives)
+						if(objective.check_completion())
+							text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='green'><B>Success!</B></font>"
+							feedback_add_details("changeling_objective","[objective.type]|SUCCESS")
+						else
+							text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
+							feedback_add_details("changeling_objective","[objective.type]|FAIL")
+							changelingwin = 0
+						count++
+				if(!config.objectives_disabled)
+					if(changelingwin)
+						text += "<br><font color='green'><B>The changeling was successful!</B></font>"
+						feedback_add_details("changeling_success","SUCCESS")
 					else
-						text += "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
-						feedback_add_details("changeling_objective","[objective.type]|FAIL")
-						changelingwin = 0
-					count++
-
-			if(changelingwin)
-				text += "<br><font color='green'><B>The changeling was successful!</B></font>"
-				feedback_add_details("changeling_success","SUCCESS")
-			else
-				text += "<br><font color='red'><B>The changeling has failed.</B></font>"
-				feedback_add_details("changeling_success","FAIL")
+						text += "<br><font color='red'><B>The changeling has failed.</B></font>"
+						feedback_add_details("changeling_success","FAIL")
 
 		world << text
 
@@ -208,6 +215,8 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 
 /datum/changeling //stores changeling powers, changeling recharge thingie, changeling absorbed DNA and changeling ID (for changeling hivemind)
 	var/list/absorbed_dna = list()
+	var/list/absorbed_species = list()
+	var/list/absorbed_languages = list()
 	var/absorbedcount = 0
 	var/chem_charges = 20
 	var/chem_recharge_rate = 0.5

@@ -13,6 +13,8 @@
 	master = src //moved outside the spawn(1) to avoid runtimes in lighting.dm when it references loc.loc.master ~Carn
 	uid = ++global_uid
 	related = list(src)
+	active_areas += src
+	all_areas += src
 
 	if(type == /area)	// override defaults for space. TODO: make space areas of type /area/space rather than /area
 		requires_power = 1
@@ -100,6 +102,7 @@
 		return
 	if( !fire )
 		fire = 1
+		master.fire = 1		//used for firedoor checks
 		updateicon()
 		mouse_opacity = 0
 		for(var/obj/machinery/door/firedoor/D in all_doors)
@@ -122,6 +125,7 @@
 /area/proc/firereset()
 	if (fire)
 		fire = 0
+		master.fire = 0		//used for firedoor checks
 		mouse_opacity = 0
 		updateicon()
 		for(var/obj/machinery/door/firedoor/D in all_doors)
@@ -218,6 +222,7 @@
 // called when power status changes
 
 /area/proc/power_change()
+	master.powerupdate = 2
 	for(var/area/RA in related)
 		for(var/obj/machinery/M in RA)	// for each machine in the area
 			M.power_change()				// reverify power status (to update icons etc.)
@@ -239,7 +244,6 @@
 	return used
 
 /area/proc/clear_usage()
-
 	master.used_equip = 0
 	master.used_light = 0
 	master.used_environ = 0

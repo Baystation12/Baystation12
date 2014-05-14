@@ -1,7 +1,7 @@
 obj/structure/door_assembly
 	icon = 'icons/obj/doors/door_assembly.dmi'
 
-	name = "Airlock Assembly"
+	name = "airlock assembly"
 	icon_state = "door_as_0"
 	anchored = 0
 	density = 1

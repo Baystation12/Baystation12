@@ -23,5 +23,5 @@
 		new /obj/item/clothing/head/greenbandana(src)
 		new /obj/item/weapon/minihoe(src)
 		new /obj/item/weapon/hatchet(src)
-		new /obj/item/weapon/bee_net(src)
+//		new /obj/item/weapon/bee_net(src) //No more bees, March 2014
 		return

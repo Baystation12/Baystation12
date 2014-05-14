@@ -10,7 +10,7 @@
  */
 /obj/item/clothing/suit/bluetag
 	name = "blue laser tag armour"
-	desc = "Blue Pride, Station Wide"
+	desc = "Blue Pride, Station Wide."
 	icon_state = "bluetag"
 	item_state = "bluetag"
 	blood_overlay_type = "armor"
@@ -20,7 +20,7 @@
 
 /obj/item/clothing/suit/redtag
 	name = "red laser tag armour"
-	desc = "Pew pew pew"
+	desc = "Reputed to go faster."
 	icon_state = "redtag"
 	item_state = "redtag"
 	blood_overlay_type = "armor"
@@ -76,7 +76,7 @@
 
 /obj/item/clothing/suit/justice
 	name = "justice suit"
-	desc = "this pretty much looks ridiculous"
+	desc = "This pretty much looks ridiculous."
 	icon_state = "justice"
 	item_state = "justice"
 	flags = FPRINT | TABLEPASS
@@ -187,7 +187,7 @@
 	icon_state = "straight_jacket"
 	item_state = "straight_jacket"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 
 /obj/item/clothing/suit/ianshirt
 	name = "worn shirt"

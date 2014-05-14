@@ -211,6 +211,9 @@
 		O.emp_act(severity)
 	..()
 
+/mob/living/proc/can_inject()
+	return 1
+
 /mob/living/proc/get_organ_target()
 	var/mob/shooter = src
 	var/t = shooter:zone_sel.selecting
@@ -256,7 +259,16 @@
 	buckled = initial(src.buckled)
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
+
+		if (C.handcuffed && !initial(C.handcuffed))
+			C.drop_from_inventory(C.handcuffed)
 		C.handcuffed = initial(C.handcuffed)
+
+		if (C.legcuffed && !initial(C.legcuffed))
+			C.drop_from_inventory(C.legcuffed)
+		C.legcuffed = initial(C.legcuffed)
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
 
 /mob/living/proc/rejuvenate()
 
@@ -304,6 +316,8 @@
 	// make the icons look correct
 	regenerate_icons()
 
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
 	return
 
 /mob/living/proc/UpdateDamageIcon()
@@ -348,8 +362,8 @@
 				return
 			else
 				if(Debug)
-					diary <<"pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]"
-					diary <<"REPORT THIS"
+					log_debug("pulling disappeared? at [__LINE__] in mob.dm - pulling = [pulling]")
+					log_debug("REPORT THIS")
 
 		/////
 		if(pulling && pulling.anchored)
@@ -433,6 +447,20 @@
 	usr.next_move = world.time + 20
 
 	var/mob/living/L = usr
+
+	//Getting out of someone's inventory.
+	if(istype(src.loc,/obj/item/weapon/holder))
+		var/obj/item/weapon/holder/H = src.loc //Get our item holder.
+		var/mob/M = H.loc                      //Get our mob holder (if any).
+
+		if(istype(M))
+			M.drop_from_inventory(H)
+			M << "[H] wriggles out of your grip!"
+			src << "You wriggle out of [M]'s grip!"
+		else if(istype(H.loc,/obj/item))
+			src << "You struggle free of [H.loc]."
+			H.loc = get_turf(H)
+		return
 
 	//Resisting control by an alien mind.
 	if(istype(src.loc,/mob/living/simple_animal/borer))
@@ -619,9 +647,8 @@
 						for(var/mob/O in viewers(CM))//                                         lags so hard that 40s isn't lenient enough - Quarxink
 							O.show_message("\red <B>[CM] manages to remove the handcuffs!</B>", 1)
 						CM << "\blue You successfully remove \the [CM.handcuffed]."
-						CM.handcuffed.loc = usr.loc
-						CM.handcuffed = null
-						CM.update_inv_handcuffed()
+						CM.drop_from_inventory(CM.handcuffed)
+
 		else if(CM.legcuffed && CM.canmove && (CM.last_special <= world.time))
 			CM.next_move = world.time + 100
 			CM.last_special = world.time + 100
@@ -657,7 +684,7 @@
 						for(var/mob/O in viewers(CM))//                                         lags so hard that 40s isn't lenient enough - Quarxink
 							O.show_message("\red <B>[CM] manages to remove the legcuffs!</B>", 1)
 						CM << "\blue You successfully remove \the [CM.legcuffed]."
-						CM.legcuffed.loc = usr.loc
+						CM.drop_from_inventory(CM.legcuffed)
 						CM.legcuffed = null
 						CM.update_inv_legcuffed()
 
@@ -667,3 +694,97 @@
 
 	resting = !resting
 	src << "\blue You are now [resting ? "resting" : "getting up"]"
+
+/mob/living/proc/handle_ventcrawl(var/obj/machinery/atmospherics/unary/vent_pump/vent_found = null, var/ignore_items = 0) // -- TLE -- Merged by Carn
+	if(stat)
+		src << "You must be conscious to do this!"
+		return
+	if(lying)
+		src << "You can't vent crawl while you're stunned!"
+		return
+
+	if(vent_found) // one was passed in, probably from vent/AltClick()
+		if(vent_found.welded)
+			src << "That vent is welded shut."
+			return
+		if(!vent_found.Adjacent(src))
+			return // don't even acknowledge that
+	else
+		for(var/obj/machinery/atmospherics/unary/vent_pump/v in range(1,src))
+			if(!v.welded)
+				if(v.Adjacent(src))
+					vent_found = v
+	if(!vent_found)
+		src << "You'll need a non-welded vent to crawl into!"
+		return
+
+	if(!vent_found.network || !vent_found.network.normal_members.len)
+		src << "This vent is not connected to anything."
+		return
+
+	var/list/vents = list()
+	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in vent_found.network.normal_members)
+		if(temp_vent.welded)
+			continue
+		if(temp_vent in loc)
+			continue
+		var/turf/T = get_turf(temp_vent)
+
+		if(!T || T.z != loc.z)
+			continue
+
+		var/i = 1
+		var/index = "[T.loc.name]\[[i]\]"
+		while(index in vents)
+			i++
+			index = "[T.loc.name]\[[i]\]"
+		vents[index] = temp_vent
+	if(!vents.len)
+		src << "\red There are no available vents to travel to, they could be welded."
+		return
+
+	var/obj/selection = input("Select a destination.", "Duct System") as null|anything in sortAssoc(vents)
+	if(!selection)	return
+
+	if(!vent_found.Adjacent(src))
+		src << "Never mind, you left."
+		return
+
+	if(!ignore_items)
+		for(var/obj/item/carried_item in contents)//If the monkey got on objects.
+			if( !istype(carried_item, /obj/item/weapon/implant) && !istype(carried_item, /obj/item/clothing/mask/facehugger) )//If it's not an implant or a facehugger
+				src << "\red You can't be carrying items or have items equipped when vent crawling!"
+				return
+
+	if(isslime(src))
+		var/mob/living/carbon/slime/S = src
+		if(S.Victim)
+			src << "\red You'll have to let [S.Victim] go or finish eating \him first."
+			return
+
+	var/obj/machinery/atmospherics/unary/vent_pump/target_vent = vents[selection]
+	if(!target_vent)
+		return
+
+	for(var/mob/O in viewers(src, null))
+		O.show_message(text("<B>[src] scrambles into the ventillation ducts!</B>"), 1)
+	loc = target_vent
+
+	var/travel_time = round(get_dist(loc, target_vent.loc) / 2)
+
+	spawn(travel_time)
+
+		if(!target_vent)	return
+		for(var/mob/O in hearers(target_vent,null))
+			O.show_message("You hear something squeezing through the ventilation ducts.",2)
+
+		sleep(travel_time)
+
+		if(!target_vent)	return
+		if(target_vent.welded)			//the vent can be welded while alien scrolled through the list or travelled.
+			target_vent = vent_found 	//travel back. No additional time required.
+			src << "\red The vent you were heading to appears to be welded."
+		loc = target_vent.loc
+		var/area/new_area = get_area(loc)
+		if(new_area)
+			new_area.Entered(src)

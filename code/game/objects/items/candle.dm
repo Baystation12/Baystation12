@@ -27,7 +27,7 @@
 		if(istype(W, /obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/WT = W
 			if(WT.isOn()) //Badasses dont get blinded by lighting their candle with a welding tool
-				light("\red [user] casually lights the [name] with [W], what a badass.")
+				light("\red [user] casually lights the [name] with [W].")
 		else if(istype(W, /obj/item/weapon/lighter))
 			var/obj/item/weapon/lighter/L = W
 			if(L.lit)

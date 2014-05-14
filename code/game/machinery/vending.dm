@@ -52,6 +52,10 @@
 	var/const/WIRE_SHOCK = 3
 	var/const/WIRE_SHOOTINV = 4
 
+	var/check_accounts = 0		// 1 = requires PIN and checks accounts.  0 = You slide an ID, it vends, SPACE COMMUNISM!
+	var/obj/item/weapon/spacecash/ewallet/ewallet
+
+
 /obj/machinery/vending/New()
 	..()
 	spawn(4)
@@ -148,6 +152,11 @@
 	else if(istype(W, /obj/item/weapon/card) && currently_vending)
 		var/obj/item/weapon/card/I = W
 		scan_card(I)
+	else if (istype(W, /obj/item/weapon/spacecash/ewallet))
+		user.drop_item()
+		W.loc = src
+		ewallet = W
+		user << "\blue You insert the [W] into the [src]"
 
 	else if(src.panel_open)
 
@@ -164,46 +173,51 @@
 	if (istype(I, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/C = I
 		visible_message("<span class='info'>[usr] swipes a card through [src].</span>")
-		if(vendor_account)
-			var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
-			var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
-			if(D)
-				var/transaction_amount = currently_vending.price
-				if(transaction_amount <= D.money)
+		if(check_accounts)
+			if(vendor_account)
+				var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
+				var/datum/money_account/D = attempt_account_access(C.associated_account_number, attempt_pin, 2)
+				if(D)
+					var/transaction_amount = currently_vending.price
+					if(transaction_amount <= D.money)
 
-					//transfer the money
-					D.money -= transaction_amount
-					vendor_account.money += transaction_amount
+						//transfer the money
+						D.money -= transaction_amount
+						vendor_account.money += transaction_amount
 
-					//create entries in the two account transaction logs
-					var/datum/transaction/T = new()
-					T.target_name = "[vendor_account.owner_name] (via [src.name])"
-					T.purpose = "Purchase of [currently_vending.product_name]"
-					if(transaction_amount > 0)
-						T.amount = "([transaction_amount])"
-					else
+						//create entries in the two account transaction logs
+						var/datum/transaction/T = new()
+						T.target_name = "[vendor_account.owner_name] (via [src.name])"
+						T.purpose = "Purchase of [currently_vending.product_name]"
+						if(transaction_amount > 0)
+							T.amount = "([transaction_amount])"
+						else
+							T.amount = "[transaction_amount]"
+						T.source_terminal = src.name
+						T.date = current_date_string
+						T.time = worldtime2text()
+						D.transaction_log.Add(T)
+						//
+						T = new()
+						T.target_name = D.owner_name
+						T.purpose = "Purchase of [currently_vending.product_name]"
 						T.amount = "[transaction_amount]"
-					T.source_terminal = src.name
-					T.date = current_date_string
-					T.time = worldtime2text()
-					D.transaction_log.Add(T)
-					//
-					T = new()
-					T.target_name = D.owner_name
-					T.purpose = "Purchase of [currently_vending.product_name]"
-					T.amount = "[transaction_amount]"
-					T.source_terminal = src.name
-					T.date = current_date_string
-					T.time = worldtime2text()
-					vendor_account.transaction_log.Add(T)
+						T.source_terminal = src.name
+						T.date = current_date_string
+						T.time = worldtime2text()
+						vendor_account.transaction_log.Add(T)
 
-					// Vend the item
-					src.vend(src.currently_vending, usr)
-					currently_vending = null
+						// Vend the item
+						src.vend(src.currently_vending, usr)
+						currently_vending = null
+				else
+					usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
 			else
-				usr << "\icon[src]<span class='warning'>You don't have that much money!</span>"
+				usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
 		else
-			usr << "\icon[src]<span class='warning'>Unable to access account. Check security settings and try again.</span>"
+			//Just Vend it.
+			src.vend(src.currently_vending, usr)
+			currently_vending = null
 	else
 		usr << "\icon[src]<span class='warning'>Unable to access vendor account. Please record the machine ID and call CentComm Support.</span>"
 
@@ -236,7 +250,10 @@
 	dat += "<b>Select an item: </b><br><br>" //the rest is just general spacing and bolding
 
 	if (premium.len > 0)
-		dat += "<b>Coin slot:</b> [coin ? coin : "No coin inserted"] (<a href='byond://?src=\ref[src];remove_coin=1'>Remove</A>)<br><br>"
+		dat += "<b>Coin slot:</b> [coin ? coin : "No coin inserted"] (<a href='byond://?src=\ref[src];remove_coin=1'>Remove</A>)<br>"
+
+	if (ewallet)
+		dat += "<b>Charge card's credits:</b> [ewallet ? ewallet.worth : "No charge card inserted"] (<a href='byond://?src=\ref[src];remove_ewallet=1'>Remove</A>)<br><br>"
 
 	if (src.product_records.len == 0)
 		dat += "<font color = 'red'>No product loaded!</font>"
@@ -310,6 +327,15 @@
 		usr << "\blue You remove the [coin] from the [src]"
 		coin = null
 
+	if(href_list["remove_ewallet"] && !istype(usr,/mob/living/silicon))
+		if (!ewallet)
+			usr << "There is no charge card in this machine."
+			return
+		ewallet.loc = src.loc
+		if(!usr.get_active_hand())
+			usr.put_in_hands(ewallet)
+		usr << "\blue You remove the [ewallet] from the [src]"
+		ewallet = null
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
 		usr.set_machine(src)
@@ -337,9 +363,17 @@
 			if(R.price == null)
 				src.vend(R, usr)
 			else
-				src.currently_vending = R
-				src.updateUsrDialog()
-
+				if (ewallet)
+					if (R.price <= ewallet.worth)
+						ewallet.worth -= R.price
+						src.vend(R, usr)
+					else
+						usr << "\red The ewallet doesn't have enough money to pay for that."
+						src.currently_vending = R
+						src.updateUsrDialog()
+				else
+					src.currently_vending = R
+					src.updateUsrDialog()
 			return
 
 		else if (href_list["cancel_buying"])
@@ -590,7 +624,7 @@
 	desc = "A vendor with a wide variety of masks and gas tanks."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "dispenser"
-	product_paths = "/obj/item/weapon/tank/oxygen;/obj/item/weapon/tank/plasma;/obj/item/weapon/tank/emergency_oxygen;/obj/item/weapon/tank/emergency_oxygen/engi;/obj/item/clothing/mask/breath"
+	product_paths = "/obj/item/weapon/tank/oxygen;/obj/item/weapon/tank/phoron;/obj/item/weapon/tank/emergency_oxygen;/obj/item/weapon/tank/emergency_oxygen/engi;/obj/item/clothing/mask/breath"
 	product_amounts = "10;10;10;5;25"
 	vend_delay = 0
 */
@@ -604,11 +638,12 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/vermouth = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/rum = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/wine = 5,/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac = 5,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua = 5,/obj/item/weapon/reagent_containers/food/drinks/beer = 6,
-					/obj/item/weapon/reagent_containers/food/drinks/ale = 6,/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua = 5,/obj/item/weapon/reagent_containers/food/drinks/cans/beer = 6,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/ale = 6,/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 4,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 4,/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 4,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 4,/obj/item/weapon/reagent_containers/food/drinks/tonic = 8,
-					/obj/item/weapon/reagent_containers/food/drinks/cola = 8, /obj/item/weapon/reagent_containers/food/drinks/sodawater = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 4,/obj/item/weapon/reagent_containers/food/drinks/cans/tonic = 8,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 8, /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask = 2, /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask = 2,
 					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 30,/obj/item/weapon/reagent_containers/food/drinks/ice = 9,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao = 2,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 2,/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5)
@@ -640,7 +675,7 @@
 
 /obj/machinery/vending/snack
 	name = "Getmore Chocolate Corp"
-	desc = "A snack machine courtesy of the Getmore Chocolate Corporation, based out of Mars"
+	desc = "A snack machine courtesy of the Getmore Chocolate Corporation, based out of Mars."
 	product_slogans = "Try our new nougat bar!;Twice the calories for half the price!"
 	product_ads = "The healthiest!;Award-winning chocolate bars!;Mmm! So good!;Oh my god it's so juicy!;Have a snack.;Snacks are good for you!;Have some more Getmore!;Best quality snacks straight from mars.;We love chocolate!;Try our new jerky!"
 	icon_state = "snack"
@@ -660,31 +695,31 @@
 	icon_state = "Cola_Machine"
 	product_slogans = "Robust Softdrinks: More robust than a toolbox to the head!"
 	product_ads = "Refreshing!;Hope you're thirsty!;Over 1 million drinks sold!;Thirsty? Why not cola?;Please, have a drink!;Drink up!;The best drinks in space."
-	products = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/starkist = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/space_up = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/iced_tea = 10, /obj/item/weapon/reagent_containers/food/drinks/grape_juice = 10)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/thirteenloko = 5)
-	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cola = 1,/obj/item/weapon/reagent_containers/food/drinks/space_mountain_wind = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/starkist = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/space_up = 1,
-					/obj/item/weapon/reagent_containers/food/drinks/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/grape_juice = 1)
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 10, /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 10)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko = 5)
+	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1)
 
 //This one's from bay12
 /obj/machinery/vending/cart
 	name = "PTech"
-	desc = "Cartridges for PDAs"
+	desc = "Cartridges for PDAs."
 	product_slogans = "Carts to go!"
 	icon_state = "cart"
 	icon_deny = "cart-deny"
 	products = list(/obj/item/weapon/cartridge/medical = 10,/obj/item/weapon/cartridge/engineering = 10,/obj/item/weapon/cartridge/security = 10,
-					/obj/item/weapon/cartridge/janitor = 10,/obj/item/weapon/cartridge/signal/toxins = 10,/obj/item/device/pda/heads = 10,
+					/obj/item/weapon/cartridge/janitor = 10,/obj/item/weapon/cartridge/signal/science = 10,/obj/item/device/pda/heads = 10,
 					/obj/item/weapon/cartridge/captain = 3,/obj/item/weapon/cartridge/quartermaster = 10)
 
 
 /obj/machinery/vending/cigarette
 	name = "Cigarette machine" //OCD had to be uppercase to look nice with the new formating
-	desc = "If you want to get cancer, might as well do it in style"
+	desc = "If you want to get cancer, might as well do it in style!"
 	product_slogans = "Space cigs taste good like a cigarette should.;I'd rather toolbox than switch.;Smoke!;Don't believe the reports - smoke today!"
 	product_ads = "Probably not bad for you!;Don't believe the scientists!;It's good for you!;Don't quit, buy more!;Smoke!;Nicotine heaven.;Best cigarettes since 2150.;Award-winning cigs."
 	vend_delay = 34
@@ -711,7 +746,7 @@
 
 
 //This one's from bay12
-/obj/machinery/vending/plasmaresearch
+/obj/machinery/vending/phoronresearch
 	name = "Toximate 3000"
 	desc = "All the fine parts you need in one vending machine!"
 	products = list(/obj/item/clothing/under/rank/scientist = 6,/obj/item/clothing/suit/bio_suit = 6,/obj/item/clothing/head/bio_hood = 6,
@@ -742,7 +777,7 @@
 
 /obj/machinery/vending/security
 	name = "SecTech"
-	desc = "A security equipment vendor"
+	desc = "A security equipment vendor."
 	product_ads = "Crack capitalist skulls!;Beat some heads in!;Don't forget - harm is good!;Your weapons are right here.;Handcuffs!;Freeze, scumbag!;Don't tase me bro!;Tase them, bro.;Why not have a donut?"
 	icon_state = "sec"
 	icon_deny = "sec-deny"
@@ -753,12 +788,12 @@
 
 /obj/machinery/vending/hydronutrients
 	name = "NutriMax"
-	desc = "A plant nutrients vendor"
+	desc = "A plant nutrients vendor."
 	product_slogans = "Aren't you glad you don't have to fertilize the natural way?;Now with 50% less stink!;Plants are people too!"
 	product_ads = "We like plants!;Don't you want some?;The greenest thumbs ever.;We like big plants.;Soft soil..."
 	icon_state = "nutri"
 	icon_deny = "nutri-deny"
-	products = list(/obj/item/beezeez = 45,/obj/item/nutrient/ez = 35,/obj/item/nutrient/l4z = 25,/obj/item/nutrient/rh = 15,/obj/item/weapon/pestspray = 20,
+	products = list(/obj/item/nutrient/ez = 35,/obj/item/nutrient/l4z = 25,/obj/item/nutrient/rh = 15,/obj/item/weapon/pestspray = 20,
 					/obj/item/weapon/reagent_containers/syringe = 5,/obj/item/weapon/storage/bag/plants = 5)
 	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
 
@@ -771,7 +806,7 @@
 	products = list(/obj/item/seeds/bananaseed = 3,/obj/item/seeds/berryseed = 3,/obj/item/seeds/carrotseed = 3,/obj/item/seeds/chantermycelium = 3,/obj/item/seeds/chiliseed = 3,
 					/obj/item/seeds/cornseed = 3, /obj/item/seeds/eggplantseed = 3, /obj/item/seeds/potatoseed = 3, /obj/item/seeds/replicapod = 3,/obj/item/seeds/soyaseed = 3,
 					/obj/item/seeds/sunflowerseed = 3,/obj/item/seeds/tomatoseed = 3,/obj/item/seeds/towermycelium = 3,/obj/item/seeds/wheatseed = 3,/obj/item/seeds/appleseed = 3,
-					/obj/item/seeds/poppyseed = 3,/obj/item/seeds/ambrosiavulgarisseed = 3,/obj/item/seeds/whitebeetseed = 3,/obj/item/seeds/watermelonseed = 3,/obj/item/seeds/limeseed = 3,
+					/obj/item/seeds/poppyseed = 3,/obj/item/seeds/sugarcaneseed = 3,/obj/item/seeds/ambrosiavulgarisseed = 3,/obj/item/seeds/whitebeetseed = 3,/obj/item/seeds/watermelonseed = 3,/obj/item/seeds/limeseed = 3,
 					/obj/item/seeds/lemonseed = 3,/obj/item/seeds/orangeseed = 3,/obj/item/seeds/grassseed = 3,/obj/item/seeds/cocoapodseed = 3,/obj/item/seeds/plumpmycelium = 2,
 					/obj/item/seeds/cabbageseed = 3,/obj/item/seeds/grapeseed = 3,/obj/item/seeds/pumpkinseed = 3,/obj/item/seeds/cherryseed = 3,/obj/item/seeds/plastiseed = 3,/obj/item/seeds/riceseed = 3)
 	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,/obj/item/seeds/mtearseed = 2,
@@ -792,7 +827,7 @@
 
 /obj/machinery/vending/dinnerware
 	name = "Dinnerware"
-	desc = "A kitchen and restaurant equipment vendor"
+	desc = "A kitchen and restaurant equipment vendor."
 	product_ads = "Mm, food stuffs!;Food and food accessories.;Get your plates!;You like forks?;I like forks.;Woo, utensils.;You don't really need these..."
 	icon_state = "dinnerware"
 	products = list(/obj/item/weapon/tray = 8,/obj/item/weapon/kitchen/utensil/fork = 6,/obj/item/weapon/kitchenknife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2)
@@ -800,7 +835,7 @@
 
 /obj/machinery/vending/sovietsoda
 	name = "BODA"
-	desc = "Old sweet water vending machine"
+	desc = "An old sweet water vending machine,how did this end up here?"
 	icon_state = "sovietsoda"
 	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/soda = 30)

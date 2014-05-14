@@ -57,6 +57,23 @@
 						c.info += "</font>"
 						c.name = copy.name // -- Doohl
 						c.fields = copy.fields
+						c.stamps = copy.stamps
+						c.stamped = copy.stamped
+						c.ico = copy.ico
+						c.offset_x = copy.offset_x
+						c.offset_y = copy.offset_y
+						var/list/temp_overlays = copy.overlays       //Iterates through stamps
+						var/image/img                                //and puts a matching
+						for (var/j = 1, j <= temp_overlays.len, j++) //gray overlay onto the copy
+							if (findtext(copy.ico[j], "cap") || findtext(copy.ico[j], "cent"))
+								img = image('icons/obj/bureaucracy.dmi', "paper_stamp-circle")
+							else if (findtext(copy.ico[j], "deny"))
+								img = image('icons/obj/bureaucracy.dmi', "paper_stamp-x")
+							else
+								img = image('icons/obj/bureaucracy.dmi', "paper_stamp-dots")
+							img.pixel_x = copy.offset_x[j]
+							img.pixel_y = copy.offset_y[j]
+							c.overlays += img
 						c.updateinfolinks()
 						toner--
 						sleep(15)
@@ -66,7 +83,7 @@
 			else if(photocopy)
 				for(var/i = 0, i < copies, i++)
 					if(toner > 0)
-						var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (loc)
+						var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (src.loc)
 						var/icon/I = icon(photocopy.icon, photocopy.icon_state)
 						var/icon/img = icon(photocopy.img)
 						if(toner > 10)	//plenty of toner, go straight greyscale
@@ -152,12 +169,12 @@
 					del(src)
 				else
 					if(toner > 0)
-						new /obj/effect/decal/cleanable/oil(get_turf(src))
+						new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
 						toner = 0
 			else
 				if(prob(50))
 					if(toner > 0)
-						new /obj/effect/decal/cleanable/oil(get_turf(src))
+						new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
 						toner = 0
 		return
 
@@ -166,7 +183,7 @@
 			del(src)
 		else
 			if(toner > 0)
-				new /obj/effect/decal/cleanable/oil(get_turf(src))
+				new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
 				toner = 0
 		return
 

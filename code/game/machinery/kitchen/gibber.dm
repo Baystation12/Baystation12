@@ -30,7 +30,7 @@
 						break
 
 			if(!input_plate)
-				diary << "a [src] didn't find an input plate."
+				log_misc("a [src] didn't find an input plate.")
 				return
 
 	Bumped(var/atom/A)
@@ -203,7 +203,7 @@
 		if(src.occupant.client) // Gibbed a cow with a client in it? log that shit
 			src.occupant.attack_log += "\[[time_stamp()]\] Was gibbed by <b>[user]/[user.ckey]</b>"
 			user.attack_log += "\[[time_stamp()]\] Gibbed <b>[src.occupant]/[src.occupant.ckey]</b>"
-			log_attack("\[[time_stamp()]\] <b>[user]/[user.ckey]</b> gibbed <b>[src.occupant]/[src.occupant.ckey]</b>")
+			msg_admin_attack("\[[time_stamp()]\] <b>[key_name(user)]</b> gibbed <b>[key_name(src.occupant)]</b>")
 
 		src.occupant.death(1)
 		src.occupant.ghostize()

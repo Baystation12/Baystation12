@@ -1,15 +1,17 @@
 //admin verb groups - They can overlap if you so wish. Only one of each verb will exist in the verbs list regardless
 var/list/admin_verbs_default = list(
-	/datum/admins/proc/show_player_panel,	/*shows an interface for individual players, with various links (links require additional flags*/
+//	/datum/admins/proc/show_player_panel,	/*shows an interface for individual players, with various links (links require additional flags*/
 	/client/proc/toggleadminhelpsound,	/*toggles whether we hear a sound when adminhelps/PMs are used*/
 	/client/proc/deadmin_self,			/*destroys our own admin datum so we can play as a regular player*/
 	/client/proc/hide_verbs,			/*hides all our adminverbs*/
 	/client/proc/hide_most_verbs,		/*hides all our hideable adminverbs*/
 	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify*/
-	/client/proc/check_antagonists		/*shows all antags*/
+	/client/proc/check_antagonists,		/*shows all antags*/
+	/client/proc/cmd_mentor_check_new_players
 //	/client/proc/deadchat				/*toggles deadchat on/off*/
 	)
 var/list/admin_verbs_admin = list(
+	/datum/admins/proc/show_player_panel,
 	/client/proc/player_panel,			/*shows an interface for all players, with links to various panels (old style)*/
 	/client/proc/player_panel_new,		/*shows an interface for all players, with links to various panels*/
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
@@ -29,7 +31,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_check_contents,	/*displays the contents of an instance*/
 	/datum/admins/proc/access_news_network,	/*allows access of newscasters*/
 	/client/proc/giveruntimelog,		/*allows us to give access to runtime logs to somebody*/
-	/client/proc/getruntimelog,			/*allows us to access runtime logs to somebody*/
 	/client/proc/getserverlog,			/*allows us to fetch server logs (diary) for other days*/
 	/client/proc/jumptocoord,			/*we ghost and jump to a coordinate*/
 	/client/proc/Getmob,				/*teleports a mob to our location*/
@@ -55,6 +56,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/secrets,
 	/datum/admins/proc/toggleooc,		/*toggles ooc on/off for everyone*/
 	/datum/admins/proc/toggleoocdead,	/*toggles ooc on/off for everyone who is dead*/
+	/datum/admins/proc/toggledsay,		/*toggles dsay on/off for everyone*/
 	/client/proc/game_panel,			/*game panel, allows to change game-mode etc*/
 	/client/proc/cmd_admin_say,			/*admin-only ooc chat*/
 	/datum/admins/proc/PlayerNotes,
@@ -65,6 +67,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/toggleattacklogs,
 	/client/proc/toggledebuglogs,
+	/client/proc/toggleghostwriters,
+	/client/proc/toggledrones,
 	/datum/admins/proc/show_skills,
 	/client/proc/check_customitem_activity,
 	/client/proc/man_up,
@@ -72,7 +76,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/response_team, // Response Teams admin verb
 	/client/proc/toggle_antagHUD_use,
 	/client/proc/toggle_antagHUD_restrictions,
-	/client/proc/allow_character_respawn    /* Allows a ghost to respawn */	
+	/client/proc/allow_character_respawn    /* Allows a ghost to respawn */
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -87,6 +91,7 @@ var/list/admin_verbs_fun = list(
 	/client/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
+        /client/proc/everyone_random,
 	/client/proc/cinematic,
 	/client/proc/one_click_antag,
 	/datum/admins/proc/toggle_aliens,
@@ -125,9 +130,11 @@ var/list/admin_verbs_server = list(
 	/client/proc/check_customitem_activity
 	)
 var/list/admin_verbs_debug = list(
+        /client/proc/getruntimelog,                     /*allows us to access runtime logs to somebody*/
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/Debug2,
 	/client/proc/kill_air,
+	/client/proc/ZASSettings,
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/kill_airgroup,
 	/client/proc/debug_controller,
@@ -238,9 +245,22 @@ var/list/admin_verbs_mod = list(
 	/client/proc/player_panel_new,
 	/client/proc/dsay,
 	/datum/admins/proc/show_skills,
+	/datum/admins/proc/show_player_panel,
 	/client/proc/jobbans,
 	/client/proc/cmd_admin_subtle_message 	/*send an message to somebody as a 'voice in their head'*/
 )
+
+var/list/admin_verbs_mentor = list(
+	/client/proc/cmd_admin_pm_context,
+	/client/proc/cmd_admin_pm_panel,
+	/datum/admins/proc/PlayerNotes,
+	/client/proc/admin_ghost,
+	/client/proc/cmd_mod_say,
+	/datum/admins/proc/show_player_info,
+//	/client/proc/dsay,
+	/client/proc/cmd_admin_subtle_message
+)
+
 /client/proc/add_admin_verbs()
 	if(holder)
 		verbs += admin_verbs_default
@@ -257,6 +277,7 @@ var/list/admin_verbs_mod = list(
 		if(holder.rights & R_SOUNDS)		verbs += admin_verbs_sounds
 		if(holder.rights & R_SPAWN)			verbs += admin_verbs_spawn
 		if(holder.rights & R_MOD)			verbs += admin_verbs_mod
+		if(holder.rights & R_MENTOR)		verbs += admin_verbs_mentor
 
 /client/proc/remove_admin_verbs()
 	verbs.Remove(
@@ -359,14 +380,11 @@ var/list/admin_verbs_mod = list(
 		if(mob.invisibility == INVISIBILITY_OBSERVER)
 			mob.invisibility = initial(mob.invisibility)
 			mob << "\red <b>Invisimin off. Invisibility reset.</b>"
-			mob.icon_state = "ghost"
-			mob.icon = 'icons/mob/human.dmi'
-			mob.update_icons()
+			mob.alpha = max(mob.alpha + 100, 255)
 		else
 			mob.invisibility = INVISIBILITY_OBSERVER
 			mob << "\blue <b>Invisimin on. You are now as invisible as a ghost.</b>"
-			mob.icon_state = "ghost"
-			mob.icon = 'icons/mob/mob.dmi'
+			mob.alpha = max(mob.alpha - 100, 0)
 
 
 /client/proc/player_panel()
@@ -667,6 +685,12 @@ var/list/admin_verbs_mod = list(
 		M.g_eyes = hex2num(copytext(new_eyes, 4, 6))
 		M.b_eyes = hex2num(copytext(new_eyes, 6, 8))
 
+	var/new_skin = input("Please select body color. This is for Tajaran, Unathi, and Skrell only!", "Character Generation") as color
+	if(new_skin)
+		M.r_skin = hex2num(copytext(new_skin, 2, 4))
+		M.g_skin = hex2num(copytext(new_skin, 4, 6))
+		M.b_skin = hex2num(copytext(new_skin, 6, 8))
+
 	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
 
 	if (new_tone)
@@ -726,6 +750,34 @@ var/list/admin_verbs_mod = list(
 	else
 		usr << "You now won't get attack log messages"
 
+
+/client/proc/toggleghostwriters()
+	set name = "Toggle ghost writers"
+	set category = "Server"
+	if(!holder)	return
+	if(config)
+		if(config.cult_ghostwriter)
+			config.cult_ghostwriter = 0
+			src << "<b>Disallowed ghost writers.</b>"
+			message_admins("Admin [key_name_admin(usr)] has disabled ghost writers.", 1)
+		else
+			config.cult_ghostwriter = 1
+			src << "<b>Enabled ghost writers.</b>"
+			message_admins("Admin [key_name_admin(usr)] has enabled ghost writers.", 1)
+
+/client/proc/toggledrones()
+	set name = "Toggle maintenance drones"
+	set category = "Server"
+	if(!holder)	return
+	if(config)
+		if(config.allow_drone_spawn)
+			config.allow_drone_spawn = 0
+			src << "<b>Disallowed maint drones.</b>"
+			message_admins("Admin [key_name_admin(usr)] has disabled maint drones.", 1)
+		else
+			config.allow_drone_spawn = 1
+			src << "<b>Enabled maint drones.</b>"
+			message_admins("Admin [key_name_admin(usr)] has enabled maint drones.", 1)
 
 /client/proc/toggledebuglogs()
 	set name = "Toggle Debug Log Messages"

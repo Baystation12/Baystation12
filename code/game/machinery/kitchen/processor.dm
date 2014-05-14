@@ -1,4 +1,3 @@
-
 /obj/machinery/processor
 	name = "Food Processor"
 	icon = 'icons/obj/kitchen.dmi'
@@ -27,23 +26,23 @@
 	/* objs */
 	meat
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat
-		output = /obj/item/weapon/reagent_containers/food/snacks/faggot
+		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 
 	meat2
 		input = /obj/item/weapon/syntiflesh
-		output = /obj/item/weapon/reagent_containers/food/snacks/faggot
+		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 /*
 	monkeymeat
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
-		output = /obj/item/weapon/reagent_containers/food/snacks/faggot
+		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 
 	humanmeat
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat/human
-		output = /obj/item/weapon/reagent_containers/food/snacks/faggot
+		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
 */
 	potato
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/potato
-		output = /obj/item/weapon/reagent_containers/food/snacks/fries
+		output = /obj/item/weapon/reagent_containers/food/snacks/rawsticks
 
 	carrot
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/carrot
@@ -53,6 +52,13 @@
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/soybeans
 		output = /obj/item/weapon/reagent_containers/food/snacks/soydope
 
+	wheat
+		input = /obj/item/weapon/reagent_containers/food/snacks/grown/wheat
+		output = /obj/item/weapon/reagent_containers/food/snacks/flour
+
+	spaghetti
+		input = /obj/item/weapon/reagent_containers/food/snacks/flour
+		output = /obj/item/weapon/reagent_containers/food/snacks/spagetti
 
 	/* mobs */
 	mob
@@ -143,13 +149,12 @@
 		src.processing = 1
 		user.visible_message("\blue [user] turns on \a [src].", \
 			"You turn on \a [src].", \
-			"You hear a food processor")
+			"You hear a food processor.")
 		playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
 		use_power(500)
 		sleep(P.time)
 		P.process(src.loc, O)
 		src.processing = 0
 	src.visible_message("\blue \the [src] finished processing.", \
-		"You hear food processor stops")
-
+		"You hear the food processor stopping/")
 

@@ -13,6 +13,7 @@
 /obj/machinery/pipedispenser/attack_hand(user as mob)
 	if(..())
 		return
+///// Z-Level stuff
 	var/dat = {"
 <b>Regular pipes:</b><BR>
 <A href='?src=\ref[src];make=0;dir=1'>Pipe</A><BR>
@@ -22,6 +23,8 @@
 <A href='?src=\ref[src];make=20;dir=1'>Pipe Cap</A><BR>
 <A href='?src=\ref[src];make=19;dir=1'>4-Way Manifold</A><BR>
 <A href='?src=\ref[src];make=18;dir=1'>Manual T-Valve</A><BR>
+<A href='?src=\ref[src];make=21;dir=1'>upward Pipe</A><BR>
+<A href='?src=\ref[src];make=22;dir=1'>downward Pipe</A><BR>
 <b>Devices:</b><BR>
 <A href='?src=\ref[src];make=4;dir=1'>Connector</A><BR>
 <A href='?src=\ref[src];make=7;dir=1'>Unary Vent</A><BR>
@@ -31,7 +34,10 @@
 <A href='?src=\ref[src];make=10;dir=1'>Scrubber</A><BR>
 <A href='?src=\ref[src];makemeter=1'>Meter</A><BR>
 <A href='?src=\ref[src];make=13;dir=1'>Gas Filter</A><BR>
+<A href='?src=\ref[src];make=23;dir=1'>Gas Filter-Mirrored</A><BR>
 <A href='?src=\ref[src];make=14;dir=1'>Gas Mixer</A><BR>
+<A href='?src=\ref[src];make=25;dir=1'>Gas Mixer-Mirrored</A><BR>
+<A href='?src=\ref[src];make=24;dir=1'>Gas Mixer-T</A><BR>
 <b>Heat exchange:</b><BR>
 <A href='?src=\ref[src];make=2;dir=1'>Pipe</A><BR>
 <A href='?src=\ref[src];make=3;dir=5'>Bent Pipe</A><BR>
@@ -42,6 +48,7 @@
 <A href='?src=\ref[src];make=12;dir=5'>Bent Pipe</A><BR>
 
 "}
+///// Z-Level stuff
 //What number the make points to is in the define # at the top of construction.dm in same folder
 
 	user << browse("<HEAD><TITLE>[src]</TITLE></HEAD><TT>[dat]</TT>", "window=pipedispenser")
@@ -143,6 +150,7 @@ Nah
 	if(..())
 		return
 
+///// Z-Level stuff
 	var/dat = {"<b>Disposal Pipes</b><br><br>
 <A href='?src=\ref[src];dmake=0'>Pipe</A><BR>
 <A href='?src=\ref[src];dmake=1'>Bent Pipe</A><BR>
@@ -152,7 +160,10 @@ Nah
 <A href='?src=\ref[src];dmake=5'>Bin</A><BR>
 <A href='?src=\ref[src];dmake=6'>Outlet</A><BR>
 <A href='?src=\ref[src];dmake=7'>Chute</A><BR>
+<A href='?src=\ref[src];dmake=21'>Upwards</A><BR>
+<A href='?src=\ref[src];dmake=22'>Downwards</A><BR>
 "}
+///// Z-Level stuff
 
 	user << browse("<HEAD><TITLE>[src]</TITLE></HEAD><TT>[dat]</TT>", "window=pipedispenser")
 	return
@@ -192,6 +203,12 @@ Nah
 				if(7)
 					C.ptype = 8
 					C.density = 1
+///// Z-Level stuff
+				if(21)
+					C.ptype = 11
+				if(22)
+					C.ptype = 12
+///// Z-Level stuff
 			C.add_fingerprint(usr)
 			C.update()
 			wait = 1
@@ -203,7 +220,7 @@ Nah
 /obj/machinery/pipedispenser/orderable
 	anchored = 0
 	unwrenched = 1
-	
+
 /obj/machinery/pipedispenser/disposal/orderable
 	anchored = 0
 	unwrenched = 1

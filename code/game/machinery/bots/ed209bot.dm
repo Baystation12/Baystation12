@@ -231,8 +231,6 @@ Auto Patrol: []"},
 			continue
 		if (istype(C, /mob/living/carbon/human))
 			threatlevel = src.assess_perp(C)
-		else if ((istype(C, /mob/living/carbon/monkey)) && (C.client) && (ticker.mode.name == "monkey"))
-			threatlevel = 4
 		//src.speak(C.real_name + text(": threat: []", threatlevel))
 		if (threatlevel < 4 )
 			continue
@@ -637,8 +635,6 @@ Auto Patrol: []"},
 
 		if (istype(C, /mob/living/carbon/human))
 			src.threatlevel = src.assess_perp(C)
-		else if ((istype(C, /mob/living/carbon/monkey)) && (C.client) && (ticker.mode.name == "monkey"))
-			src.threatlevel = 4
 
 		if (!src.threatlevel)
 			continue
@@ -796,7 +792,7 @@ Auto Patrol: []"},
 	s.set_up(3, 1, src)
 	s.start()
 
-	new /obj/effect/decal/cleanable/oil(src.loc)
+	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 	del(src)
 
 
@@ -821,7 +817,7 @@ Auto Patrol: []"},
 			if (src.emagged == 2)
 				projectile = /obj/item/projectile/beam
 			else
-				projectile = /obj/item/projectile/energy/electrode
+				projectile = /obj/item/projectile/beam/stun
 		else if(lasercolor == "b")
 			if (src.emagged == 2)
 				projectile = /obj/item/projectile/beam/lastertag/omni
@@ -961,7 +957,7 @@ Auto Patrol: []"},
 				var/turf/T = get_turf(user)
 				user << "<span class='notice'>You start to wire [src]...</span>"
 				sleep(40)
-				if(get_turf(user) == T)
+				if(get_turf(user) == T && build_step == 6)
 					coil.use(1)
 					build_step++
 					user << "<span class='notice'>You wire the ED-209 assembly.</span>"
@@ -996,7 +992,7 @@ Auto Patrol: []"},
 				var/turf/T = get_turf(user)
 				user << "<span class='notice'>Now attaching the gun to the frame...</span>"
 				sleep(40)
-				if(get_turf(user) == T)
+				if(get_turf(user) == T && build_step == 8)
 					build_step++
 					name = "armed [name]"
 					user << "<span class='notice'>Taser gun attached.</span>"

@@ -32,12 +32,66 @@
 	var/warning_low_pressure = WARNING_LOW_PRESSURE   // Low pressure warning.
 	var/hazard_low_pressure = HAZARD_LOW_PRESSURE     // Dangerously low pressure.
 
-	var/brute_resist    // Physical damage reduction.
-	var/burn_resist     // Burn damage reduction.
+	var/brute_mod = null    // Physical damage reduction/malus.
+	var/burn_mod = null     // Burn damage reduction/malus.
 
 	var/flags = 0       // Various specific features.
 
 	var/list/abilities = list()	// For species-derived or admin-given powers
+
+	var/blood_color = "#A10808" //Red.
+	var/flesh_color = "#FFC896" //Pink.
+
+/datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
+	//This is a basic humanoid limb setup.
+	H.organs = list()
+	H.organs_by_name["chest"] = new/datum/organ/external/chest()
+	H.organs_by_name["groin"] = new/datum/organ/external/groin(H.organs_by_name["chest"])
+	H.organs_by_name["head"] = new/datum/organ/external/head(H.organs_by_name["chest"])
+	H.organs_by_name["l_arm"] = new/datum/organ/external/l_arm(H.organs_by_name["chest"])
+	H.organs_by_name["r_arm"] = new/datum/organ/external/r_arm(H.organs_by_name["chest"])
+	H.organs_by_name["r_leg"] = new/datum/organ/external/r_leg(H.organs_by_name["groin"])
+	H.organs_by_name["l_leg"] = new/datum/organ/external/l_leg(H.organs_by_name["groin"])
+	H.organs_by_name["l_hand"] = new/datum/organ/external/l_hand(H.organs_by_name["l_arm"])
+	H.organs_by_name["r_hand"] = new/datum/organ/external/r_hand(H.organs_by_name["r_arm"])
+	H.organs_by_name["l_foot"] = new/datum/organ/external/l_foot(H.organs_by_name["l_leg"])
+	H.organs_by_name["r_foot"] = new/datum/organ/external/r_foot(H.organs_by_name["r_leg"])
+
+	H.internal_organs = list()
+	H.internal_organs_by_name["heart"] = new/datum/organ/internal/heart(H)
+	H.internal_organs_by_name["lungs"] = new/datum/organ/internal/lungs(H)
+	H.internal_organs_by_name["liver"] = new/datum/organ/internal/liver(H)
+	H.internal_organs_by_name["kidney"] = new/datum/organ/internal/kidney(H)
+	H.internal_organs_by_name["brain"] = new/datum/organ/internal/brain(H)
+	H.internal_organs_by_name["eyes"] = new/datum/organ/internal/eyes(H)
+
+	for(var/name in H.organs_by_name)
+		H.organs += H.organs_by_name[name]
+
+	for(var/datum/organ/external/O in H.organs)
+		O.owner = H
+
+	if(flags & IS_SYNTHETIC)
+		for(var/datum/organ/external/E in H.organs)
+			if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
+			E.status |= ORGAN_ROBOT
+		for(var/datum/organ/internal/I in H.internal_organs)
+			I.mechanize()
+
+	return
+
+/datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
+	return
+
+/datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
+	if(flags & IS_SYNTHETIC)
+		//H.make_jittery(200) //S-s-s-s-sytem f-f-ai-i-i-i-i-lure-ure-ure-ure
+		H.h_style = ""
+		spawn(100)
+			//H.is_jittery = 0
+			//H.jitteriness = 0
+			H.update_hair()
+	return
 
 /datum/species/human
 	name = "Human"
@@ -68,7 +122,9 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
+
+	flesh_color = "#34AF10"
 
 /datum/species/tajaran
 	name = "Tajaran"
@@ -90,7 +146,9 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_TAIL | HAS_SKIN_COLOR
+
+	flesh_color = "#AFA59E"
 
 /datum/species/skrell
 	name = "Skrell"
@@ -99,7 +157,9 @@
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
 
-	flags = WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
+	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+
+	flesh_color = "#8CD7A3"
 
 /datum/species/vox
 	name = "Vox"
@@ -117,11 +177,35 @@
 	eyes = "vox_eyes_s"
 	breath_type = "nitrogen"
 
-	flags = NO_SCAN
+	flags = NO_SCAN | NO_BLOOD
+
+	blood_color = "#2299FC"
+	flesh_color = "#808D11"
+
+/datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
+	var/datum/organ/external/affected = H.get_organ("head")
+
+	//To avoid duplicates.
+	for(var/obj/item/weapon/implant/cortical/imp in H.contents)
+		affected.implants -= imp
+		del(imp)
+
+	var/obj/item/weapon/implant/cortical/I = new(H)
+	I.imp_in = H
+	I.implanted = 1
+	affected.implants += I
+	I.part = affected
+
+	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
+		var/datum/game_mode/heist/M = ticker.mode
+		M.cortical_stacks += I
+		M.raiders[H.mind] = I
+
+	return ..()
 
 /datum/species/diona
 	name = "Diona"
-	icobase = 'icons/mob/human_races/r_plant.dmi'
+	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
 	attack_verb = "slash"
@@ -139,4 +223,55 @@
 	heat_level_2 = 3000
 	heat_level_3 = 4000
 
-	flags = WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NON_GENDERED | NO_SCAN | IS_PLANT | RAD_ABSORB
+	flags = IS_WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
+
+	blood_color = "#004400"
+	flesh_color = "#907E4A"
+
+/datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
+	H.gender = NEUTER
+
+	return ..()
+
+/datum/species/diona/handle_death(var/mob/living/carbon/human/H)
+
+	var/mob/living/carbon/monkey/diona/S = new(get_turf(H))
+
+	if(H.mind)
+		H.mind.transfer_to(S)
+		S.key = H
+
+	for(var/mob/living/carbon/monkey/diona/D in H.contents)
+		if(D.client)
+			D.loc = H.loc
+		else
+			del(D)
+
+	H.visible_message("\red[H] splits apart with a wet slithering noise!")
+
+/datum/species/machine
+	name = "Machine"
+	icobase = 'icons/mob/human_races/r_machine.dmi'
+	deform = 'icons/mob/human_races/r_machine.dmi'
+	language = "Tradeband"
+	punch_damage = 2
+
+	eyes = "blank_eyes"
+	brute_mod = 0.5
+	burn_mod = 1
+
+	warning_low_pressure = 50
+	hazard_low_pressure = 10
+
+	cold_level_1 = 50
+	cold_level_2 = -1
+	cold_level_3 = -1
+
+	heat_level_1 = 2000
+	heat_level_2 = 3000
+	heat_level_3 = 4000
+
+	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+
+	blood_color = "#1F181F"
+	flesh_color = "#575757"
