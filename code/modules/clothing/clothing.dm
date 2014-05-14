@@ -248,7 +248,6 @@ BLIND     // can't see anything
 	var/rolled_down = 0
 	var/basecolor
 
-
 /obj/item/clothing/under/attackby(obj/item/I, mob/user)
 	if(hastie)
 		hastie.attackby(I, user)
@@ -257,7 +256,7 @@ BLIND     // can't see anything
 	if(!hastie && istype(I, /obj/item/clothing/tie))
 		user.drop_item()
 		hastie = I
-		hastie.attach_to(src, user)
+		hastie.on_attached(src, user)
 
 		if(istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
@@ -274,7 +273,7 @@ BLIND     // can't see anything
 		return
 	..()
 
-//This is to allow people to take off suits when there is an attached accessory
+//This is to ensure people can take off suits when there is an attached accessory
 /obj/item/clothing/under/MouseDrop(obj/over_object as obj)
 	if (ishuman(usr) || ismonkey(usr))
 		//makes sure that the clothing is equipped so that we can't drag it into our hand from miles away.
@@ -352,6 +351,17 @@ BLIND     // can't see anything
 	else
 		usr << "<span class='notice'>You cannot roll down the uniform!</span>"
 
+/obj/item/clothing/under/proc/remove_accessory(mob/user as mob)
+	if(!hastie)
+		return
+	
+	hastie.on_removed(user)
+	hastie = null
+
+	if(istype(loc, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = loc
+		H.update_inv_w_uniform()
+
 /obj/item/clothing/under/verb/removetie()
 	set name = "Remove Accessory"
 	set category = "Object"
@@ -359,13 +369,7 @@ BLIND     // can't see anything
 	if(!istype(usr, /mob/living)) return
 	if(usr.stat) return
 
-	if(hastie)
-		hastie.remove(usr)
-		hastie = null
-
-		if(istype(loc, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = loc
-			H.update_inv_w_uniform()
+	src.remove_accessory(usr)
 
 /obj/item/clothing/under/rank/New()
 	sensor_mode = pick(0,1,2,3)

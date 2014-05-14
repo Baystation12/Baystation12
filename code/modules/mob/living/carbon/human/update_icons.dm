@@ -501,6 +501,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		overlays_standing[UNIFORM_LAYER]	= standing
 	else
 		overlays_standing[UNIFORM_LAYER]	= null
+		// This really, really seems like it should not be mixed in the middle of display code...
 		// Automatically drop anything in store / id / belt if you're not wearing a uniform.	//CHECK IF NECESARRY
 		for( var/obj/item/thing in list(r_store, l_store, wear_id, belt) )						//
 			if(thing)																			//
