@@ -2,45 +2,48 @@
 VOX HEIST ROUNDTYPE
 */
 
-/datum/game_mode/
-	var/list/datum/mind/raiders = list()  //Antags.
+#define MAX_VOX_KILLS 10 //Number of kills during the round before the Inviolate is broken.
+						 //Would be nice to use vox-specific kills but is currently not feasible.
 
-/datum/game_mode/vox/heist
-	name = "heist"
-	config_tag = "heist"
-	required_players = 15
-	required_players_secret = 15
-	required_enemies = 4
-	recommended_enemies = 5
+var/global/vox_kills = 0 //Used to check the Inviolate.
+var/global/vox_sent=0
 
-	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
-	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
+var/global/list/datum/mind/raiders = list()  //Antags.
 
+/datum/event/heist
 	var/list/raid_objectives = list()     //Raid objectives.
+	var/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' objective.
+
+	announceWhen	= 600
+	oneShot			= 1
+
+	var/required_candidates = 4
+	var/max_candidates = 6
+	var/successSpawn = 0	//So we don't make a command report if nothing gets spawned.
+
+/datum/event/heist/setup()
+	announceWhen = rand(announceWhen, announceWhen + 50)
+	sent_aliens_to_station = 1
+
+/datum/event/heist/announce()
+	return
 
 
-/datum/game_mode/vox/heist/announce()
-	world << "<B>The current game mode is - Heist!</B>"
-	world << "<B>An unidentified bluespace signature has slipped past the Icarus and is approaching [station_name()]!</B>"
-	world << "Whoever they are, they're likely up to no good. Protect the crew and station resources against this dastardly threat!"
-	world << "<B>Raiders:</B> Loot [station_name()] for anything and everything you need."
-	world << "<B>Personnel:</B> Repel the raiders and their low, low prices and/or crossbows."
-
-/datum/game_mode/vox/heist/can_start()
+/datum/event/heist/start()
 
 	if(!..())
 		return 0
 
-	var/list/candidates = get_players_for_role(BE_VOX)
+	var/list/candidates = get_candidates(BE_RAIDER)
 	var/raider_num = 0
 
 	//Check that we have enough vox.
-	if(candidates.len < required_enemies)
+	if(candidates.len < required_candidates)
 		return 0
-	else if(candidates.len < recommended_enemies)
+	else if(candidates.len < max_candidates)
 		raider_num = candidates.len
 	else
-		raider_num = recommended_enemies
+		raider_num = max_candidates
 
 	//Grab candidates randomly until we have enough.
 	while(raider_num > 0)
@@ -52,12 +55,6 @@ VOX HEIST ROUNDTYPE
 	for(var/datum/mind/raider in raiders)
 		raider.assigned_role = "MODE"
 		raider.special_role = "Vox Raider"
-	return 1
-
-/datum/game_mode/vox/heist/pre_setup()
-	return 1
-
-/datum/game_mode/vox/heist/post_setup()
 
 	//Build a list of spawn points.
 	var/list/turf/raider_spawn = list()
@@ -82,9 +79,7 @@ VOX HEIST ROUNDTYPE
 		raider.current.loc = raider_spawn[index]
 		index++
 
-
 		var/mob/living/carbon/human/vox = raider.current
-		raider.name = vox.name
 		vox.age = rand(12,20)
 		vox.dna.mutantrace = "vox"
 		vox.set_species("Vox")
@@ -102,12 +97,27 @@ VOX HEIST ROUNDTYPE
 		raider.objectives = raid_objectives
 		greet_vox(raider)
 
-	spawn (rand(waittime_l, waittime_h))
-		send_intercept()
+	vox_sent=1
 
+/datum/event/heist/proc/is_raider_crew_safe()
 
+	if(cortical_stacks.len == 0)
+		return 0
 
-/datum/game_mode/vox/heist/proc/forge_vox_objectives()
+	for(var/obj/stack in cortical_stacks)
+		if (get_area(stack) != locate(/area/shuttle/vox/station))
+			return 0
+	return 1
+
+/datum/event/heist/proc/is_raider_crew_alive()
+
+	for(var/datum/mind/raider in raiders)
+		if(raider.current)
+			if(istype(raider.current,/mob/living/carbon/human) && raider.current.stat != 2)
+				return 1
+	return 0
+
+/datum/event/heist/proc/forge_vox_objectives()
 
 
 	//Commented out for testing.
@@ -135,30 +145,30 @@ VOX HEIST ROUNDTYPE
 	objs += new /datum/objective/heist/inviolate_crew
 	objs += new /datum/objective/heist/inviolate_death */
 
-	if(prob(25))
-		raid_objectives += new /datum/objective/vox/heist/kidnap
-	raid_objectives += new /datum/objective/vox/heist/loot
-	raid_objectives += new /datum/objective/vox/heist/salvage
-	raid_objectives += new /datum/objective/vox/inviolate_crew
-	raid_objectives += new /datum/objective/vox/inviolate_death
+	if(prob(25)) // This is an asspain.
+		raid_objectives += new /datum/objective/heist/kidnap
+	raid_objectives += new /datum/objective/heist/loot
+	raid_objectives += new /datum/objective/heist/salvage
+	raid_objectives += new /datum/objective/heist/inviolate_crew
+	raid_objectives += new /datum/objective/heist/inviolate_death
 
-	for(var/datum/objective/vox/heist/O in raid_objectives)
+	for(var/datum/objective/heist/O in raid_objectives)
 		O.choose_target()
 
 	return raid_objectives
 
-/datum/game_mode/vox/heist/proc/greet_vox(var/datum/mind/raider)
-	raider.current << "\blue <B>You are a Vox Raider, fresh from the Shoal!</b>"
-	raider.current << "\blue The Vox are a race of cunning, sharp-eyed nomadic raiders and traders endemic to Tau Ceti and much of the unexplored galaxy. You and the crew have come to the Exodus for plunder."
-	raider.current << "\blue Vox are cowardly and will flee from larger groups, but corner one or find them en masse and they are vicious."
-	raider.current << "\blue Use :V to voxtalk, :H to talk on your encrypted channel, and don't forget to turn on your nitrogen internals!"
+/datum/event/heist/proc/greet_vox(var/datum/mind/raider)
+	raider.current << {"\blue <B>You are a Vox Raider, fresh from the Shoal!</b>
+The Vox are a race of cunning, sharp-eyed nomadic raiders and traders endemic to Tau Ceti and much of the unexplored galaxy. You and the crew have come to the [station_name()] for plunder, trade or both.
+Vox are cowardly and will flee from larger groups, but corner one or find them en masse and they are vicious.
+Use :V to voxtalk, :H to talk on your encrypted channel, and <b>don't forget to turn on your nitrogen internals!</b>"}
 	var/obj_count = 1
 	for(var/datum/objective/objective in raider.objectives)
 		raider.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 		obj_count++
 
 
-/datum/game_mode/vox/heist/declare_completion()
+/datum/event/heist/proc/declare_completion()
 
 	//No objectives, go straight to the feedback.
 	if(!(raid_objectives.len)) return ..()
@@ -185,13 +195,13 @@ VOX HEIST ROUNDTYPE
 		win_group = "Crew"
 
 	//Now we modify that result by the state of the vox crew.
-	if(!is_vox_crew_alive())
+	if(!is_raider_crew_alive())
 
 		win_type = "Major"
 		win_group = "Crew"
 		win_msg += "<B>The Vox Raiders have been wiped out!</B>"
 
-	else if(!is_vox_crew_safe())
+	else if(!is_raider_crew_safe())
 
 		if(win_group == "Crew" && win_type == "Minor")
 			win_type = "Major"
@@ -209,8 +219,8 @@ VOX HEIST ROUNDTYPE
 		else
 			win_msg += "<B>The Vox Raiders were repelled!</B>"
 
-	world << "\red <FONT size = 3><B>[win_type] [win_group] victory!</B></FONT>"
-	world << "[win_msg]"
+	world << {"\red <FONT size = 3><B>[win_type] [win_group] victory!</B></FONT>
+		[win_msg]"}
 	feedback_set_details("round_end_result","heist - [win_type] [win_group]")
 
 	var/count = 1
@@ -225,43 +235,7 @@ VOX HEIST ROUNDTYPE
 
 	..()
 
-datum/game_mode/proc/auto_declare_completion_heist()
-	if(raiders.len)
-		var/check_return = 0
-		if(ticker && istype(ticker.mode,/datum/game_mode/vox/heist))
-			check_return = 1
-		var/text = "<FONT size = 2><B>The vox raiders were:</B></FONT>"
-
-		for(var/datum/mind/vox in raiders)
-			text += "<br>[vox.key] was [vox.name] ("
-			if(check_return)
-				var/obj/stack = raiders[vox]
-				if(get_area(stack) != locate(/area/shuttle/vox/station))
-					text += "left behind)"
-					continue
-			if(vox.current)
-				if(vox.current.stat == DEAD)
-					text += "died"
-				else
-					text += "survived"
-				if(vox.current.real_name != vox.name)
-					text += " as [vox.current.real_name]"
-			else
-				text += "body destroyed"
-			text += ")"
-
-		world << text
-	return 1
-
-/datum/game_mode/vox/heist/check_finished()
-	if (!(is_vox_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
+/datum/event/heist/proc/check_finished()
+	if (!(is_raider_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
 		return 1
 	return ..()
-
-/datum/game_mode/vox/heist/proc/is_vox_crew_alive()
-
-	for(var/datum/mind/raider in raiders)
-		if(raider.current)
-			if(istype(raider.current,/mob/living/carbon/human) && raider.current.stat != 2)
-				return 1
-	return 0

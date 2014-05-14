@@ -43,18 +43,22 @@
 	var/flags = 0       // Various specific features.
 	var/bloodflags=0
 	var/bodyflags=0
-	var/flesh_color = "#FFC896" //Pink.
-	var/list/abilities = list()  // For species-derived or admin-given powers
 
-	var/w_uniform_icons = null
-	var/gloves_icons = null
-	var/glasses_icons = null
-	var/shoes_icons = null
-	var/head_icons = null
-	var/belt_icons = null
-	var/wear_suit_icons = null
-	var/wear_mask_icons = null
-	var/back_icons = null
+	var/list/abilities = list()	// For species-derived or admin-given powers
+
+	var/blood_color = "#A10808" // Red.
+	var/flesh_color = "#FFC896" // Pink.
+
+	var/uniform_icons = 'icons/mob/uniform.dmi'
+	var/fat_uniform_icons = 'icons/mob/uniform_fat.dmi'
+	var/gloves_icons = 'icons/mob/hands.dmi'
+	var/glasses_icons = 'icons/mob/eyes.dmi'
+	var/shoes_icons = 'icons/mob/feet.dmi'
+	var/head_icons = 'icons/mob/head.dmi'
+	var/belt_icons = 'icons/mob/belt.dmi'
+	var/wear_suit_icons = 'icons/mob/suit.dmi'
+	var/wear_mask_icons = 'icons/mob/mask.dmi'
+	var/back_icons = 'icons/mob/back.dmi'
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 	//This is a basic humanoid limb setup.
@@ -98,6 +102,11 @@
 
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	return
+
+// Used for species-specific names (Vox, etc)
+/datum/species/proc/makeName(var/gender,var/mob/living/carbon/human/H=null)
+	if(gender==FEMALE)	return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+	else				return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
@@ -198,8 +207,8 @@
 	eyes = "vox_eyes_s"
 	breath_type = "nitrogen"
 
-	w_uniform_icons = 'icons/mob/species/vox_w_uniform.dmi'
-	shoes_icons = 'icons/mob/species/vox_shoes.dmi'
+	uniform_icons = 'icons/mob/species/vox/uniform.dmi'
+	shoes_icons = 'icons/mob/species/vox/shoes.dmi'
 
 	flags = NO_SCAN | IS_WHITELISTED | NO_BLOOD
 
@@ -279,6 +288,16 @@
 	default_mutations=list(M_REMOTE_TALK)
 	default_block_names=list("REMOTETALK")
 
+
+	makeName(var/gender,var/mob/living/carbon/human/H=null)
+		var/sounds = rand(2,8)
+		var/i = 0
+		var/newname = ""
+
+		while(i<=sounds)
+			i++
+			newname += pick(vox_name_syllables)
+		return capitalize(newname)
 
 /datum/species/diona
 	name = "Diona"
