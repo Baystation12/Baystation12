@@ -250,10 +250,11 @@
 							P.info += "  [get_access_desc(A)]"
 
 		if ("terminate")
-			modify.assignment = "Terminated"
-			modify.access = list()
+			if (is_authenticated())
+				modify.assignment = "Terminated"
+				modify.access = list()
 
-			callHook("terminate_employee", list(modify))
+				callHook("terminate_employee", list(modify))
 
 	if (modify)
 		modify.name = text("[modify.registered_name]'s ID Card ([modify.assignment])")
