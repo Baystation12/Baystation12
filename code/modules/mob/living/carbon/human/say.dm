@@ -8,8 +8,8 @@
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (Muted)."
 			return
-	
-	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN)) 
+
+	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 
 	if(stat == 2)
 		return say_dead(message)
@@ -22,10 +22,10 @@
 
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
-	
+
 	var/message_mode = null
 	var/datum/language/speaking = null
-	
+
 	if(copytext(message,1,2) == ";")
 		message_mode = "headset"
 		message = copytext(message,2)
@@ -44,10 +44,10 @@
 
 	if(speaking || copytext(message,1,2) == ":")
 		var/positioncut = 3
-		if(speaking && (message_mode && copytext(message,3,4)==":")) 
+		if(speaking && (message_mode && copytext(message,3,4)==":"))
 			positioncut += 2
 		message = trim(copytext(message,positioncut))
-	
+
 
 	message = capitalize(trim_left(message))
 
@@ -100,7 +100,7 @@
 				R = l_ear
 				has_radio = 1
 			if(l_hand && istype(l_hand,/obj/item/device/radio))
-				R = l_hand				
+				R = l_hand
 				has_radio = 1
 			if(has_radio)
 				R.talk_into(src,message,null,verb,speaking)
@@ -131,7 +131,7 @@
 						used_radios += l_ear
 					else if(r_ear && istype(r_ear,/obj/item/device/radio))
 						r_ear.talk_into(src,message, message_mode, verb, speaking)
-						used_radios += r_ear	
+						used_radios += r_ear
 
 
 	if(used_radios.len)
@@ -144,6 +144,9 @@
 		if(pressure < SAY_MINIMUM_PRESSURE)
 			italics = 1
 			message_range =1
+
+	if((species.name == "Vox" || species.name == "Vox Armalis") && prob(20))
+		playsound(src.loc, 'sound/voice/shriek1.ogg', 50, 1)
 
 	..(message, speaking, verb, alt_name, italics, message_range, used_radios)
 
@@ -234,5 +237,5 @@
 	returns[1] = message
 	returns[2] = verb
 	returns[3] = handled
-	
+
 	return returns

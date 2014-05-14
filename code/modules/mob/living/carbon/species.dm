@@ -182,6 +182,29 @@
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
 
+/datum/species/vox/armalis
+	name = "Vox Armalis"
+	icobase = 'icons/mob/human_races/r_armalis.dmi'
+	deform = 'icons/mob/human_races/r_armalis.dmi'
+	language = "Vox-pidgin"
+
+	warning_low_pressure = 50
+	hazard_low_pressure = 0
+
+	cold_level_1 = 80
+	cold_level_2 = 50
+	cold_level_3 = 0
+
+	eyes = "blank_eyes"
+	breath_type = "nitrogen"
+
+	flags = NO_SCAN | NO_BLOOD | HAS_TAIL
+
+	blood_color = "#2299FC"
+	flesh_color = "#808D11"
+
+	tail = "armalis_tail"
+
 /datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
 	var/datum/organ/external/affected = H.get_organ("head")
 
