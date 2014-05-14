@@ -209,7 +209,7 @@
 
 	uniform_icons = 'icons/mob/species/vox/uniform.dmi'
 	shoes_icons = 'icons/mob/species/vox/shoes.dmi'
-	wear_mask_icons = 'icons/mob/species/vox/mask.dmi'
+	wear_mask_icons = 'icons/mob/species/vox/masks.dmi'
 
 	flags = NO_SCAN | IS_WHITELISTED | NO_BLOOD
 

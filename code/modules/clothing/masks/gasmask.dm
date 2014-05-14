@@ -86,6 +86,7 @@
 	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
 	icon_state = "clown"
 	item_state = "clown_hat"
+	species_fit = list("Vox")
 	flags = FPRINT | TABLEPASS | MASKCOVERSMOUTH | MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS | BLOCKHAIR
 
 /obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
@@ -115,6 +116,7 @@
 	desc = "The traditional mime's mask. It has an eerie facial posture."
 	icon_state = "mime"
 	item_state = "mime"
+	species_fit = list("Vox")
 
 /obj/item/clothing/mask/gas/monkeymask
 	name = "monkey mask"
@@ -143,6 +145,7 @@
 	name = "owl mask"
 	desc = "Twoooo!"
 	icon_state = "owl"
+	species_fit = list("Vox")
 
 
 // ********************************************************************
@@ -273,3 +276,4 @@
 
 
 // ********************************************************************
+
