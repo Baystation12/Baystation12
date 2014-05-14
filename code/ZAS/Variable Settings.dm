@@ -310,14 +310,14 @@ var/global/vs_control/vsc = new
 			connection_insulation 			= initial(connection_insulation)
 			connection_temperature_delta 	= initial(connection_temperature_delta)
 
-			plc.PLASMA_DMG 					= initial(plc.PLASMA_DMG)
+			plc.PHORON_DMG 					= initial(plc.PHORON_DMG)
 			plc.CLOTH_CONTAMINATION 		= initial(plc.CLOTH_CONTAMINATION)
-			plc.PLASMAGUARD_ONLY 			= initial(plc.PLASMAGUARD_ONLY)
+			plc.PHORONGUARD_ONLY 			= initial(plc.PHORONGUARD_ONLY)
 			plc.GENETIC_CORRUPTION 			= initial(plc.GENETIC_CORRUPTION)
 			plc.SKIN_BURNS 					= initial(plc.SKIN_BURNS)
 			plc.EYE_BURNS 					= initial(plc.EYE_BURNS)
 			plc.CONTAMINATION_LOSS 			= initial(plc.CONTAMINATION_LOSS)
-			plc.PLASMA_HALLUCINATION 		= initial(plc.PLASMA_HALLUCINATION)
+			plc.PHORON_HALLUCINATION 		= initial(plc.PHORON_HALLUCINATION)
 			plc.N2O_HALLUCINATION 			= initial(plc.N2O_HALLUCINATION)
 
 
