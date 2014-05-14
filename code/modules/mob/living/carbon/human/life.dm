@@ -575,6 +575,11 @@
 	proc/handle_environment(datum/gas_mixture/environment)
 		if(!environment)
 			return
+
+		//Moved pressure calculations here for use in skip-processing check.
+		var/pressure = environment.return_pressure()
+		var/adjusted_pressure = calculate_affecting_pressure(pressure)
+
 		if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
 			var/loc_temp = T0C
 			if(istype(loc, /obj/mecha))
@@ -586,7 +591,7 @@
 			else
 				loc_temp = environment.temperature
 
-			if(abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.phoron < MOLES_PHORON_VISIBLE)
+			if(adjusted_pressure < species.warning_low_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.phoron < MOLES_PHORON_VISIBLE)
 				return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
@@ -638,9 +643,6 @@
 
 		// Account for massive pressure differences.  Done by Polymorph
 		// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
-
-		var/pressure = environment.return_pressure()
-		var/adjusted_pressure = calculate_affecting_pressure(pressure) //Returns how much pressure actually affects the mob.
 		if(status_flags & GODMODE)	return 1	//godmode
 
 		if(adjusted_pressure >= species.hazard_high_pressure)
