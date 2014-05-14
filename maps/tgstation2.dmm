@@ -5684,7 +5684,7 @@
 "cfp" = (/obj/machinery/atmospherics/pipe/simple/visible/green{tag = "icon-intact (SOUTHEAST)"; icon_state = "intact"; dir = 6},/turf/simulated/floor,/area/atmos)
 "cfq" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4},/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/atmos)
 "cfr" = (/obj/structure/closet/crate/solar,/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/plating,/area/engine/storage_hard)
-"cfs" = (/obj/machinery/power/port_gen,/turf/simulated/floor/plating,/area/engine/storage_hard)
+"cfs" = (/obj/machinery/power/port_gen/pacman,/turf/simulated/floor/plating,/area/engine/storage_hard)
 "cft" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/unary/vent_scrubber{on = 1; scrub_N2O = 0; scrub_Toxins = 0},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor,/area/engine/workshop)
 "cfu" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor,/area/engine/workshop)
 "cfv" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/turf/simulated/floor,/area/engine/workshop)
