@@ -51,6 +51,14 @@
 	key = "q"
 	flags = RESTRICTED
 
+/datum/language/kidan
+	name = "Chittin"
+	desc = "The noise made by rubbing it's antennae together is actually a complex form of communication for Kidan."
+	speech_verb = "rubs it's antenna together"
+	colour = "tajaran"
+	key = "l"
+	flags = RESTRICTED
+
 /datum/language/slime
 	name = "Bubblish"
 	desc = "Languages of slimes, a mixture of bubbling noises and pops. Almost impossible to speak without mechanical aid for non slime people."
