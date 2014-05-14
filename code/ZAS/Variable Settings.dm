@@ -290,6 +290,36 @@ var/global/vs_control/vsc = new
 			airflow_mob_slowdown = 3
 			connection_insulation = 0
 
+		if("ZAS/Phoron - Initial")
+			fire_consuption_rate 			= initial(fire_consuption_rate)
+			fire_firelevel_multiplier 		= initial(fire_firelevel_multiplier)
+			fire_fuel_energy_release 		= initial(fire_fuel_energy_release)
+			IgnitionLevel 					= initial(IgnitionLevel)
+			airflow_lightest_pressure 		= initial(airflow_lightest_pressure)
+			airflow_light_pressure 			= initial(airflow_light_pressure)
+			airflow_medium_pressure 		= initial(airflow_medium_pressure)
+			airflow_heavy_pressure 			= initial(airflow_heavy_pressure)
+			airflow_dense_pressure 			= initial(airflow_dense_pressure)
+			airflow_stun_pressure 			= initial(airflow_stun_pressure)
+			airflow_stun_cooldown 			= initial(airflow_stun_cooldown)
+			airflow_stun 					= initial(airflow_stun)
+			airflow_damage 					= initial(airflow_damage)
+			airflow_speed_decay 			= initial(airflow_speed_decay)
+			airflow_delay 					= initial(airflow_delay)
+			airflow_mob_slowdown 			= initial(airflow_mob_slowdown)
+			connection_insulation 			= initial(connection_insulation)
+			connection_temperature_delta 	= initial(connection_temperature_delta)
+
+			plc.PLASMA_DMG 					= initial(plc.PLASMA_DMG)
+			plc.CLOTH_CONTAMINATION 		= initial(plc.CLOTH_CONTAMINATION)
+			plc.PLASMAGUARD_ONLY 			= initial(plc.PLASMAGUARD_ONLY)
+			plc.GENETIC_CORRUPTION 			= initial(plc.GENETIC_CORRUPTION)
+			plc.SKIN_BURNS 					= initial(plc.SKIN_BURNS)
+			plc.EYE_BURNS 					= initial(plc.EYE_BURNS)
+			plc.CONTAMINATION_LOSS 			= initial(plc.CONTAMINATION_LOSS)
+			plc.PLASMA_HALLUCINATION 		= initial(plc.PLASMA_HALLUCINATION)
+			plc.N2O_HALLUCINATION 			= initial(plc.N2O_HALLUCINATION)
+
 
 	world << "\blue <b>[key_name(user)] changed the global phoron/ZAS settings to \"[def]\"</b>"
 
