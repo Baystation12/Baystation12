@@ -205,7 +205,7 @@
 	eyes = "blank_eyes"
 	breath_type = "nitrogen"
 
-	flags = NO_SCAN | NO_BLOOD | HAS_TAIL | NO_PAIN
+	flags = NO_SCAN | NO_BLOOD | HAS_TAIL | NO_PAIN | IS_WHITELISTED
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
