@@ -28,7 +28,10 @@
 
 /obj/machinery/drone_fabricator/process()
 
-	if(stat & NOPOWER || !produce_drones)
+	if(ticker.current_state < GAME_STATE_PLAYING)
+		return
+
+	if((stat & NOPOWER || !produce_drones) && icon_state != "drone_fab_nopower")
 		icon_state = "drone_fab_nopower"
 		return
 
@@ -82,6 +85,11 @@
 	set category = "Ghost"
 	set name = "Join As Drone"
 	set desc = "If there is a powered, enabled fabricator in the game world with a prepared chassis, join as a maintenance drone."
+
+
+	if(ticker.current_state < GAME_STATE_PLAYING)
+		src << "\red The game hasn't started yet!"
+		return
 
 	if(!(config.allow_drone_spawn))
 		src << "\red That verb is not currently permitted."
