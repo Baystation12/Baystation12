@@ -1889,6 +1889,10 @@
 					holder.icon_state = "hudvampire"
 				if("VampThrall")
 					holder.icon_state = "hudvampthrall"
+				if("head_loyalist")
+					holder.icon_state = "loyalist"
+				if("head_mutineer")
+					holder.icon_state = "mutineer"
 
 
 			hud_list[SPECIALROLE_HUD] = holder

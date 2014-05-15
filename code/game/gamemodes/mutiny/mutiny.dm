@@ -180,8 +180,8 @@ datum/game_mode/mutiny
     return 1
 
   proc/check_antagonists_ui(admins)
-    var/turf/captains_key_loc = captains_key ? captains_key.get_turf() : "Lost or Destroyed"
-    var/turf/secondary_key_loc = secondary_key ? secondary_key.get_turf() : "Lost or Destroyed"
+    var/turf/captains_key_loc = captains_key ? get_turf(captains_key) : "Lost or Destroyed"
+    var/turf/secondary_key_loc = secondary_key ? get_turf(secondary_key) : "Lost or Destroyed"
     var/txt = {"
       <h5>Context:</h5>
       <p>
@@ -305,7 +305,7 @@ datum/game_mode/mutiny
     log_admin("[src]([src.ckey]) attempted to recruit [M] as a loyalist.")
     message_admins("\red [src]([src.ckey]) attempted to recruit [M] as a loyalist.")
 
-    var/choice = alert(M, "Asked by [src]: Will you help me complete Directive X?", "Loyalist recruitment", "No", "Yes")
+    var/choice = alert(M, "Asked by [src]: Will you help me complete Directive X?", "Loyalist recruitment", "Yes", "No")
     if(choice == "Yes")
       mode.add_loyalist(M.mind)
     else if(choice == "No")
@@ -336,7 +336,7 @@ datum/game_mode/mutiny
     log_admin("[src]([src.ckey]) attempted to recruit [M] as a mutineer.")
     message_admins("\red [src]([src.ckey]) attempted to recruit [M] as a mutineer.")
 
-    var/choice = alert(M, "Asked by [src]: Will you help me stop Directive X?", "Mutineer recruitment", "No", "Yes")
+    var/choice = alert(M, "Asked by [src]: Will you help me stop Directive X?", "Mutineer recruitment", "Yes", "No")
     if(choice == "Yes")
       mode.add_mutineer(M.mind)
     else if(choice == "No")
