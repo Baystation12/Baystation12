@@ -8,7 +8,7 @@
 	gas_transfer_coefficient = 0.10
 	permeability_coefficient = 0.50
 	var/hanging = 0
-	species_fit = list("Vox")
+	species_fit = list("Vox", "Vox Armalis")
 
 	verb/toggle()
 		set category = "Object"
