@@ -956,6 +956,7 @@
 #include "code\modules\mob\living\carbon\monkey\monkey.dm"
 #include "code\modules\mob\living\carbon\monkey\powers.dm"
 #include "code\modules\mob\living\carbon\monkey\update_icons.dm"
+#include "code\modules\mob\living\silicon\alarm.dm"
 #include "code\modules\mob\living\silicon\death.dm"
 #include "code\modules\mob\living\silicon\login.dm"
 #include "code\modules\mob\living\silicon\say.dm"
