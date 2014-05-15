@@ -42,6 +42,26 @@
 	var/blood_color = "#A10808" //Red.
 	var/flesh_color = "#FFC896" //Pink.
 
+	/* Species-specific sprites, concept stolen from Paradise//vg/.
+	ex:
+	sprite_sheets = list(
+		"held" = 'icons/mob/path',
+		"uniform" = 'icons/mob/path',
+		"suit" = 'icons/mob/path',
+		"belt" = 'icons/mob/path'
+		"head" = 'icons/mob/path',
+		"back" = 'icons/mob/path',
+		"mask" = 'icons/mob/path',
+		"ears" = 'icons/mob/path',
+		"eyes" = 'icons/mob/path',
+		"feet" = 'icons/mob/path',
+		"gloves" = 'icons/mob/path'
+		)
+	If index term exists and icon_override is not set, this sprite sheet will be used.
+	*/
+
+	var/list/sprite_sheets = list()
+
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 	//This is a basic humanoid limb setup.
 	H.organs = list()
@@ -78,14 +98,12 @@
 		for(var/datum/organ/internal/I in H.internal_organs)
 			I.mechanize()
 
-	return
-
 /datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
 	return
 
 /datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	if(flags & IS_SYNTHETIC)
-		//H.make_jittery(200) //S-s-s-s-sytem f-f-ai-i-i-i-i-lure-ure-ure-ure
+ //H.make_jittery(200) //S-s-s-s-sytem f-f-ai-i-i-i-i-lure-ure-ure-ure
 		H.h_style = ""
 		spawn(100)
 			//H.is_jittery = 0
@@ -182,11 +200,20 @@
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
 
+	sprite_sheets = list(
+		"suit" = 'icons/mob/species/vox/suit.dmi',
+		"head" = 'icons/mob/species/vox/head.dmi',
+		"mask" = 'icons/mob/species/vox/mask.dmi',
+		"feet" = 'icons/mob/species/vox/feet.dmi',
+		"gloves" = 'icons/mob/species/vox/gloves.dmi'
+		)
+
 /datum/species/vox/armalis
 	name = "Vox Armalis"
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	language = "Vox-pidgin"
+	attack_verb = "slash"
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -212,14 +239,19 @@
 
 	tail = "armalis_tail"
 
-/datum/species/vox/armalis/handle_post_spawn(var/mob/living/carbon/human/H)
-	H.verbs += /mob/living/carbon/human/proc/gut
-	..()
+	sprite_sheets = list(
+		"suit" = 'icons/mob/species/armalis/suit.dmi',
+		"gloves" = 'icons/mob/species/armalis/gloves.dmi',
+		"feet" = 'icons/mob/species/armalis/feet.dmi',
+		"head" = 'icons/mob/species/armalis/head.dmi',
+		"held" = 'icons/mob/species/armalis/held.dmi'
+		)
 
-/datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
+/datum/species/vox/create_organs(var/mob/living/carbon/human/H)
 
-	H.verbs += /mob/living/carbon/human/proc/leap
+	..() //create organs first.
 
+	//Now apply cortical stack.
 	var/datum/organ/external/affected = H.get_organ("head")
 
 	//To avoid duplicates.
@@ -237,8 +269,6 @@
 		var/datum/game_mode/heist/M = ticker.mode
 		M.cortical_stacks += I
 		M.raiders[H.mind] = I
-
-	return ..()
 
 /datum/species/diona
 	name = "Diona"

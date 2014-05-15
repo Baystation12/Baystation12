@@ -130,12 +130,14 @@
 	icon_state = "vox-carapace"
 	item_state = "vox-carapace"
 	desc = "A glowing visor, perhaps stolen from a depressed Cylon."
+	species_restricted = list("Vox","Vox Armalis")
 
 /obj/item/clothing/suit/space/vox/carapace
 	name = "alien carapace armour"
 	icon_state = "vox-carapace"
 	item_state = "vox-carapace"
 	desc = "An armoured, segmented carapace with glowing purple lights. It looks pretty run-down."
+	species_restricted = list("Vox","Vox Armalis")
 
 /obj/item/clothing/head/helmet/space/vox/stealth
 	name = "alien stealth helmet"
@@ -187,7 +189,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	item_color="gloves-vox"
-	species_restricted = list("Vox")
+	species_restricted = list("Vox","Vox Armalis")
 
 /obj/item/clothing/shoes/magboots/vox
 
@@ -195,7 +197,7 @@
 	name = "vox magclaws"
 	item_state = "boots-vox"
 	icon_state = "boots-vox"
-	species_restricted = list("Vox")
+	species_restricted = list("Vox","Vox Armalis")
 	action_button_name = "Toggle the magclaws"
 
 /obj/item/clothing/shoes/magboots/vox/attack_self(mob/user)
@@ -234,35 +236,6 @@
 	..()
 	if (magpulse)
 		usr << "It would be hard to take these off without relaxing your grip first." //theoretically this message should only be seen by the wearer when the claws are equipped.
-
-//Vox Armalis gear.
-/obj/item/clothing/shoes/magboots/vox/armalis
-	name = "large vox magclaws"
-	item_state = "boots-armalis"
-	icon_state = "boots-armalis"
-	icon_override = 'icons/mob/vox.dmi'
-	species_restricted = list("Vox Armalis")
-
-/obj/item/clothing/gloves/yellow/vox/armalis
-	name = "large insulated gauntlets"
-	item_state = "gloves-armalis"
-	icon_state = "gloves-armalis"
-	icon_override = 'icons/mob/vox.dmi'
-	species_restricted = list("Vox Armalis")
-
-/obj/item/clothing/mask/breath/vox/armalis
-	name = "large vox mask"
-	item_state = "mask-armalis"
-	icon_state = "mask-armalis"
-	icon_override = 'icons/mob/vox.dmi'
-	species_restricted = list("Vox Armalis")
-
-/obj/item/clothing/suit/space/vox/carapace/armalis
-	name = "large alien carapace armour"
-	item_state = "armour-armalis"
-	icon_state = "armour-armalis"
-	icon_override = 'icons/mob/vox.dmi'
-	species_restricted = list("Vox Armalis")
 
 //Species-specific Syndicate rigs.
 
