@@ -35,8 +35,8 @@ datum/game_mode/mutiny
   proc/get_head_loyalist_candidates()
     var/list/candidates[0]
     for(var/mob/loyalist in player_list)
-      if(loyalist.mind.assigned_role == "Captain")
-        candidates.Add(loyalist.mind)
+      if(loyalist.mind && loyalist.mind.assigned_role == "Captain")
+        candidates+=loyalist.mind
     return candidates
 
   proc/get_head_mutineer_candidates()
@@ -44,8 +44,8 @@ datum/game_mode/mutiny
     for(var/mob/mutineer in player_list)
       if(mutineer.client.prefs.be_special & BE_MUTINEER)
         for(var/job in command_positions - "Captain")
-          if(mutineer.mind.assigned_role == job)
-            candidates.Add(mutineer.mind)
+          if(mutineer.mind && mutineer.mind.assigned_role == job)
+            candidates+=mutineer.mind
     return candidates
 
   proc/get_directive_candidates()
@@ -53,7 +53,7 @@ datum/game_mode/mutiny
     for(var/T in typesof(/datum/directive) - /datum/directive)
       var/datum/directive/D = new T(src)
       if (D.meets_prerequisites())
-        candidates.Add(D)
+        candidates+=D
     return candidates
 
   proc/send_pda_message()
@@ -96,18 +96,18 @@ datum/game_mode/mutiny
     H.verbs += /mob/living/carbon/human/proc/recruit_mutineer
 
   proc/add_loyalist(datum/mind/M)
-    loyalists.Add(M)
+    loyalists+=M
     if (M in mutineers)
-      mutineers.Remove(M)
+      mutineers-=M
 
     M.current << fluff.loyalist_tag("You have joined the loyalists!")
     head_loyalist.current << fluff.loyalist_tag("[M] has joined the loyalists!")
     update_icon(M)
 
   proc/add_mutineer(datum/mind/M)
-    mutineers.Add(M)
+    mutineers+=M
     if (M in loyalists)
-      loyalists.Remove(M)
+      loyalists-=M
 
     M.current << fluff.mutineer_tag("You have joined the mutineers!")
     head_mutineer.current << fluff.mutineer_tag("[M] has joined the mutineers!")
@@ -255,8 +255,8 @@ datum/game_mode/mutiny
   head_mutineer.special_role = "head_mutineer"
   equip_head_mutineer()
 
-  loyalists.Add(head_loyalist)
-  mutineers.Add(head_mutineer)
+  loyalists+=head_loyalist
+  mutineers+=head_mutineer
 
   replace_nuke_with_ead()
   current_directive.initialize()
