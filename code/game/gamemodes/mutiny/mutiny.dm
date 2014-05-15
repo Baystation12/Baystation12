@@ -340,7 +340,7 @@ datum/game_mode/mutiny
 		log_admin("[src]([src.ckey]) attempted to recruit [M] as a loyalist.")
 		message_admins("\red [src]([src.ckey]) attempted to recruit [M] as a loyalist.")
 
-		var/choice = alert(M, "Asked by [src]: Will you help me complete Directive X?", "Loyalist recruitment", "No", "Yes")
+		var/choice = alert(M, "Asked by [src]: Will you help me complete Directive X?", "Loyalist recruitment", "Yes", "No")
 		if(choice == "Yes")
 			mode.add_loyalist(M.mind)
 		else if(choice == "No")
@@ -377,7 +377,7 @@ datum/game_mode/mutiny
 		log_admin("[src]([src.ckey]) attempted to recruit [M] as a mutineer.")
 		message_admins("\red [src]([src.ckey]) attempted to recruit [M] as a mutineer.")
 
-		var/choice = alert(M, "Asked by [src]: Will you help me stop Directive X?", "Mutineer recruitment", "No", "Yes")
+		var/choice = alert(M, "Asked by [src]: Will you help me stop Directive X?", "Mutineer recruitment", "Yes", "No")
 		if(choice == "Yes")
 			mode.add_mutineer(M.mind)
 		else if(choice == "No")
