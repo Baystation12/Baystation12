@@ -42,6 +42,10 @@
 	var/blood_color = "#A10808" //Red.
 	var/flesh_color = "#FFC896" //Pink.
 
+	//Used in icon caching.
+	var/race_key = 0
+	var/icon/icon_template
+
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
 	sprite_sheets = list(
@@ -238,6 +242,7 @@
 	flesh_color = "#808D11"
 
 	tail = "armalis_tail"
+	icon_template = 'icons/mob/human_races/r_armalis.dmi'
 
 	sprite_sheets = list(
 		"suit" = 'icons/mob/species/armalis/suit.dmi',
