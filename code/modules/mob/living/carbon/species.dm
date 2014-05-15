@@ -46,9 +46,6 @@
 
 	var/list/abilities = list()	// For species-derived or admin-given powers
 
-	var/blood_color = "#A10808" // Red.
-	var/flesh_color = "#FFC896" // Pink.
-
 	var/uniform_icons = 'icons/mob/uniform.dmi'
 	var/fat_uniform_icons = 'icons/mob/uniform_fat.dmi'
 	var/gloves_icons = 'icons/mob/hands.dmi'
@@ -59,6 +56,13 @@
 	var/wear_suit_icons = 'icons/mob/suit.dmi'
 	var/wear_mask_icons = 'icons/mob/mask.dmi'
 	var/back_icons = 'icons/mob/back.dmi'
+
+	var/blood_color = "#A10808" //Red.
+	var/flesh_color = "#FFC896" //Pink.
+
+	//Used in icon caching.
+	var/race_key = 0
+	var/icon/icon_template
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 	//This is a basic humanoid limb setup.
@@ -242,6 +246,7 @@
 	flesh_color = "#808D11"
 
 	tail = "armalis_tail"
+	icon_template = 'icons/mob/human_races/r_armalis.dmi'
 
 	wear_mask_icons = 'icons/mob/species/vox/armalis/mask.dmi'
 	shoes_icons = 'icons/mob/species/vox/armalis/shoes.dmi'
