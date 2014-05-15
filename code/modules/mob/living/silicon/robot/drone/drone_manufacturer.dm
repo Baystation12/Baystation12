@@ -17,7 +17,6 @@
 
 /obj/machinery/drone_fabricator/New()
 	..()
-	produce_drones = config.allow_drone_spawn
 
 /obj/machinery/drone_fabricator/power_change()
 	if (powered())
