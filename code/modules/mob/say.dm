@@ -145,3 +145,26 @@
 	else if (ending == "!")
 		return "2"
 	return "0"
+
+//parses the message mode code (e.g. :h, ;) from text, such as that supplied to say.
+//returns the message mode string or null for no message mode.
+/mob/proc/parse_message_mode(var/message)
+	if(length(message) >= 1 && copytext(message,1,2) == ";")
+		return "headset"
+
+	if(length(message) >= 2)
+		var/channel_prefix = copytext(message, 1 ,3)
+		return department_radio_keys[channel_prefix]
+	
+	return null
+
+//parses the language code (e.g. :j) from text, such as that supplied to say.
+//returns the language object only if the code corresponds to a language that src knows, otherwise null.
+/mob/proc/parse_language(var/message)
+	if(length(message) >= 2)
+		var/language_prefix = lowertext(copytext(message, 1 ,3))
+		for(var/datum/language/L in src.languages)
+			if(language_prefix == ":[L.key]")
+				return L
+	return null
+

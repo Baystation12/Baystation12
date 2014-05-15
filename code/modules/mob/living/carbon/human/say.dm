@@ -22,34 +22,22 @@
 
 	if(name != GetVoice())
 		alt_name = "(as [get_id_name("Unknown")])"
-
-	var/message_mode = null
-	var/datum/language/speaking = null
-
-	if(copytext(message,1,2) == ";")
-		message_mode = "headset"
-		message = copytext(message,2)
-
-	if(length(message) >= 2)
-		var/channel_prefix = copytext(message, 1 ,3)
-		var/check_language_and_radio = copytext(message,3,5)
-		if(languages.len)
-			for(var/datum/language/L in languages)
-				if(lowertext(channel_prefix) == ":[L.key]" || lowertext(check_language_and_radio) == ":[L.key]")
-					verb = L.speech_verb
-					speaking = L
-					break
-		if(!message_mode)
-			message_mode = department_radio_keys[channel_prefix]
-
-	if(speaking || copytext(message,1,2) == ":")
-		var/positioncut = 3
-		if(speaking && (message_mode && copytext(message,3,4)==":"))
-			positioncut += 2
-		message = trim(copytext(message,positioncut))
-
-
-	message = capitalize(trim_left(message))
+	
+	//parse the radio code and consume it
+	var/message_mode = parse_message_mode(message)
+	if (message_mode)
+		if (message_mode == "headset")
+			message = copytext(message,2)
+		else
+			message = copytext(message,3)
+	
+	//parse the language code and consume it
+	var/datum/language/speaking = parse_language(message)
+	if (speaking)
+		verb = speaking.speech_verb
+		message = copytext(message,3)
+	
+	message = capitalize(trim(message))
 
 	if(speech_problem_flag)
 		var/list/handle_r = handle_speech_problems(message)
