@@ -209,6 +209,7 @@
 
 	uniform_icons = 'icons/mob/species/vox/uniform.dmi'
 	shoes_icons = 'icons/mob/species/vox/shoes.dmi'
+	wear_mask_icons = 'icons/mob/species/vox/mask.dmi'
 
 	flags = NO_SCAN | IS_WHITELISTED | NO_BLOOD
 
@@ -241,6 +242,10 @@
 	flesh_color = "#808D11"
 
 	tail = "armalis_tail"
+
+	wear_mask_icons = 'icons/mob/species/vox/armalis/mask.dmi'
+	shoes_icons = 'icons/mob/species/vox/armalis/shoes.dmi'
+	gloves_icons = 'icons/mob/species/vox/armalis/hands.dmi'
 
 /datum/species/vox/armalis/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.verbs += /mob/living/carbon/human/proc/gut

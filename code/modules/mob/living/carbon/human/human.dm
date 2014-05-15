@@ -29,7 +29,7 @@
 	h_style = "Short Vox Quills"
 	..(new_loc, "Vox")
 
-/mob/living/carbon/human/voxarmalis/New(var/new_loc)
+/mob/living/carbon/human/vox/armalis/New(var/new_loc)
 	h_style = "Bald"
 	..(new_loc, "Vox Armalis")
 

@@ -144,7 +144,9 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	_color="gloves-vox"
-	species_restricted = list("Vox")
+	species_restricted = list("Vox","Vox Armalis")
+	species_fit = list("Vox Armalis")
+
 
 /obj/item/clothing/shoes/magboots/vox
 
@@ -152,7 +154,8 @@
 	name = "vox magclaws"
 	item_state = "boots-vox"
 	icon_state = "boots-vox"
-	species_restricted = list("Vox")
+	species_restricted = list("Vox","Vox Armalis")
+	species_fit = list("Vox Armalis")
 	action_button_name = "Toggle the magclaws"
 
 /obj/item/clothing/shoes/magboots/vox/attack_self(mob/user)
@@ -191,34 +194,12 @@
 
 
 //Vox Armalis gear.
-/obj/item/clothing/shoes/magboots/vox/armalis
-	name = "large vox magclaws"
-	item_state = "boots-armalis"
-	icon_state = "boots-armalis"
-	icon_override = 'icons/mob/vox.dmi'
-	species_restricted = list("Vox Armalis")
-
-/obj/item/clothing/gloves/yellow/vox/armalis
-	name = "large insulated gauntlets"
-	item_state = "gloves-armalis"
-	icon_state = "gloves-armalis"
-	icon_override = 'icons/mob/vox.dmi'
-	species_restricted = list("Vox Armalis")
-
-/obj/item/clothing/mask/breath/vox/armalis
-	name = "large vox mask"
-	item_state = "mask-armalis"
-	icon_state = "mask-armalis"
-	icon_override = 'icons/mob/vox.dmi'
-	species_restricted = list("Vox Armalis")
-
 /obj/item/clothing/suit/space/vox/carapace/armalis
 	name = "large alien carapace armour"
 	item_state = "armour-armalis"
 	icon_state = "armour-armalis"
 	icon_override = 'icons/mob/vox.dmi'
 	species_restricted = list("Vox Armalis")
-
 
 //Species-specific Syndicate rigs.
 /obj/item/clothing/head/helmet/space/rig/syndi/tajara
