@@ -202,6 +202,11 @@
 				parts -= part
 		return
 
+
+/obj/effect/decal/mecha_wreckage/durand/old
+	name = "Durand wreckage"
+	icon_state = "old_durand-broken"
+
 /obj/effect/decal/mecha_wreckage/phazon
 	name = "Phazon wreckage"
 	icon_state = "phazon-broken"
