@@ -216,7 +216,9 @@
 			underlays += img
 			i++
 		else if(istype(O, /obj/item/weapon/photo))
-			img.icon_state = "photo"
+			var/obj/item/weapon/photo/Ph = O
+//			img.icon_state = "photo"
+			img = Ph.tiny
 			photo = 1
 			overlays += img
 	if(i>1)
