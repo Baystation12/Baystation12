@@ -1,5 +1,5 @@
 /proc/EquipRacialItems(mob/living/carbon/human/M)
-	if(istype(M,/mob/living/carbon/human/vox))
+	if(M.species.name == "Vox" || M.species.name == "Vox Armalis")
 		M.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(M), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
 		M.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(M), slot_wear_mask)
 		M.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(M), slot_back)

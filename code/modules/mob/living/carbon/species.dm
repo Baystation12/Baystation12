@@ -218,7 +218,7 @@
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	language = "Vox-pidgin"
-
+	path = /mob/living/carbon/human/voxarmalis
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
 

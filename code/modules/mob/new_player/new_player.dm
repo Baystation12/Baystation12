@@ -388,6 +388,8 @@
 						new_character = new /mob/living/carbon/human/diona(loc)
 					if("Vox")
 						new_character = new /mob/living/carbon/human/vox(loc)
+					if("Vox Armalis")
+						new_character = new /mob/living/carbon/human/voxarmalis(loc)
 					if("Kidan")
 						new_character = new /mob/living/carbon/human/kidan(loc)
 					if("Grey")
