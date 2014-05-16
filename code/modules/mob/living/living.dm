@@ -590,6 +590,7 @@
 					sleep(10)
 					SC.broken = 1
 					SC.locked = 0
+					SC.update_icon()
 					usr << "\red You successfully break out!"
 					for(var/mob/O in viewers(L.loc))
 						O.show_message("\red <B>\the [usr] successfully broke out of \the [SC]!</B>", 1)
@@ -599,6 +600,7 @@
 					SC.open()
 				else
 					C.welded = 0
+					C.update_icon()
 					usr << "\red You successfully break out!"
 					for(var/mob/O in viewers(L.loc))
 						O.show_message("\red <B>\the [usr] successfully broke out of \the [C]!</B>", 1)
