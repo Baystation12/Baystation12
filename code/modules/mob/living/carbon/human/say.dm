@@ -142,20 +142,24 @@
 
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
 		return 1
-	if (istype(other, /mob/living/carbon/monkey/diona) && !speaking)
-		if(other.languages.len >= 2)			//They've sucked down some blood and can speak common now.
-			return 1
 
-	if (istype(other, /mob/living/silicon))
-		return 1
-	if (istype(other, /mob/living/carbon/brain))
-		return 1
-	if (istype(other, /mob/living/carbon/slime))
-		return 1
-	if (istype(other, /mob/living/simple_animal))
-		if(other.universal_speak || src.universal_speak || src.universal_understand)
+	//These only pertain to common. Languages are handled by mob/say_understands()
+	if (!speaking)
+		if (istype(other, /mob/living/carbon/monkey/diona))
+			if(other.languages.len >= 2)			//They've sucked down some blood and can speak common now.
+				return 1
+		if (istype(other, /mob/living/silicon))
 			return 1
-		return 0
+		if (istype(other, /mob/living/carbon/brain))
+			return 1
+		if (istype(other, /mob/living/carbon/slime))
+			return 1
+	
+	//This is already covered by mob/say_understands()
+	//if (istype(other, /mob/living/simple_animal))
+	//	if((other.universal_speak && !speaking) || src.universal_speak || src.universal_understand)
+	//		return 1
+	//	return 0
 
 	return ..()
 
