@@ -266,6 +266,9 @@
 			else if(isobserver(M))
 				M_job = "Ghost"
 
+			else if(isSpirit(M))
+				M_job = (ismask(M)) ? "Mask" : "Spirit"
+
 			M_job = replacetext(M_job, "'", "")
 			M_job = replacetext(M_job, "\"", "")
 			M_job = replacetext(M_job, "\\", "")
@@ -320,61 +323,65 @@
 
 //The old one
 /datum/admins/proc/player_panel_old()
-  if (!usr.client.holder)
-    return
-  var/dat = "<html><head><title>Player Menu</title></head>"
-  dat += "<body><table border=1 cellspacing=5><B><tr><th>Name</th><th>Real Name</th><th>Assigned Job</th><th>Key</th><th>Options</th><th>PM</th><th>Traitor?</th></tr></B>"
-  //add <th>IP:</th> to this if wanting to add back in IP checking
-  //add <td>(IP: [M.lastKnownIP])</td> if you want to know their ip to the lists below
-  var/list/mobs = sortmobs()
+	if (!usr.client.holder)
+		return
+	var/dat = "<html><head><title>Player Menu</title></head>"
+	dat += "<body><table border=1 cellspacing=5><B><tr><th>Name</th><th>Real Name</th><th>Assigned Job</th><th>Key</th><th>Options</th><th>PM</th><th>Traitor?</th></tr></B>"
+	//add <th>IP:</th> to this if wanting to add back in IP checking
+	//add <td>(IP: [M.lastKnownIP])</td> if you want to know their ip to the lists below
+	var/list/mobs = sortmobs()
 
-  for(var/mob/M in mobs)
-    if(!M.ckey) continue
+	for(var/mob/M in mobs)
+		if(!M.ckey)	continue
 
-    dat += "<tr><td>[M.name]</td>"
-    if(isAI(M))
-      dat += "<td>AI</td>"
-    else if(isrobot(M))
-      dat += "<td>Cyborg</td>"
-    else if(ishuman(M))
-      dat += "<td>[M.real_name]</td>"
-    else if(istype(M, /mob/living/silicon/pai))
-      dat += "<td>pAI</td>"
-    else if(istype(M, /mob/new_player))
-      dat += "<td>New Player</td>"
-    else if(isobserver(M))
-      dat += "<td>Ghost</td>"
-    else if(ismonkey(M))
-      dat += "<td>Monkey</td>"
-    else if(isalien(M))
-      dat += "<td>Alien</td>"
-    else
-      dat += "<td>Unknown</td>"
-
-
-    if(istype(M,/mob/living/carbon/human))
-      var/mob/living/carbon/human/H = M
-      if(H.mind && H.mind.assigned_role)
-        dat += "<td>[H.mind.assigned_role]</td>"
-    else
-      dat += "<td>NA</td>"
+		dat += "<tr><td>[M.name]</td>"
+		if(isAI(M))
+			dat += "<td>AI</td>"
+		else if(isrobot(M))
+			dat += "<td>Cyborg</td>"
+		else if(ishuman(M))
+			dat += "<td>[M.real_name]</td>"
+		else if(istype(M, /mob/living/silicon/pai))
+			dat += "<td>pAI</td>"
+		else if(istype(M, /mob/new_player))
+			dat += "<td>New Player</td>"
+		else if(isobserver(M))
+			dat += "<td>Ghost</td>"
+		else if(ismonkey(M))
+			dat += "<td>Monkey</td>"
+		else if(isalien(M))
+			dat += "<td>Alien</td>"
+		else if(ismask(M))
+			dat += "<td>Mask</td>"
+		else if(isSpirit(M))
+			dat += "<td>Spirit</td>"
+		else
+			dat += "<td>Unknown</td>"
 
 
-    dat += {"<td>[(M.client ? "[M.client]" : "No client")]</td>
-    <td align=center><A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>X</A></td>
-    <td align=center><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
-    "}
-    switch(is_special_character(M))
-      if(0)
-        dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>Traitor?</A></td>"}
-      if(1)
-        dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red>Traitor?</font></A></td>"}
-      if(2)
-        dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red><b>Traitor?</b></font></A></td>"}
+		if(istype(M,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.mind && H.mind.assigned_role)
+				dat += "<td>[H.mind.assigned_role]</td>"
+		else
+			dat += "<td>NA</td>"
 
-  dat += "</table></body></html>"
 
-  usr << browse(dat, "window=players;size=640x480")
+		dat += {"<td>[(M.client ? "[M.client]" : "No client")]</td>
+		<td align=center><A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>X</A></td>
+		<td align=center><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
+		"}
+		switch(is_special_character(M))
+			if(0)
+				dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>Traitor?</A></td>"}
+			if(1)
+				dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red>Traitor?</font></A></td>"}
+			if(2)
+				dat += {"<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'><font color=red><b>Traitor?</b></font></A></td>"}
+
+	dat += "</table></body></html>"
+
+	usr << browse(dat, "window=players;size=640x480")
 
 
 

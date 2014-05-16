@@ -129,7 +129,7 @@ proc/isobserver(A)
 	if(istype(A, /mob/dead/observer))
 		return 1
 	return 0
-	
+
 /proc/isSpirit(A)
 	if(istype(A, /mob/spirit))
 		return 1
@@ -137,6 +137,11 @@ proc/isobserver(A)
 
 proc/isovermind(A)
 	if(istype(A, /mob/camera/blob))
+		return 1
+	return 0
+
+/proc/ismask(A)
+	if(istype(A, /mob/spirit/mask))
 		return 1
 	return 0
 
