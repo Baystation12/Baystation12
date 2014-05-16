@@ -240,6 +240,10 @@
 			module_sprites["Combat Android"] = "droid-combat"
 			module.channels = list("Security" = 1)
 
+	//languages
+	for (var/language_name in module.language_names)
+		add_language(language_name)
+	
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
 		module_sprites["Custom"] = "[src.ckey]-[modtype]"

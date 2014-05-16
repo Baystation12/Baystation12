@@ -9,6 +9,7 @@
 	var/list/modules = list()
 	var/obj/item/emag = null
 	var/obj/item/borg/upgrade/jetpack = null
+	var/list/language_names = list("Sol Common", "Tradeband")	//Just the basic set of languages
 
 
 	emp_act(severity)
@@ -40,6 +41,7 @@
 	for(var/obj/O in temp_list)
 		if(O)
 			modules += O
+
 
 /obj/item/weapon/robot_module/standard
 	name = "standard robot module"
@@ -197,6 +199,7 @@
 
 /obj/item/weapon/robot_module/butler
 	name = "service robot module"
+	language_names = list("Sol Common", "Sinta'unathi", "Siik'Mas", "Skrellian", "Rootspeak", "Tradeband", "Gutter")	//full set of languages
 
 	New()
 		..()

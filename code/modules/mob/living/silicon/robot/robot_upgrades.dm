@@ -34,6 +34,7 @@
 	R.base_icon = "robot"
 	R.icon_state = "robot"
 	R.updateicon()
+	R.languages = list()
 
 	return 1
 
