@@ -488,7 +488,7 @@
 		// Nitrogen, for Vox.
 		var/Nitrogen_pp = (breath.nitrogen/breath.total_moles())*breath_pressure
 
-		if(O2_pp < safe_oxygen_min && (species.name != "Vox" || species.name != "Vox Armalis")) 	// Too little oxygen
+		if(O2_pp < safe_oxygen_min && (species.name != "Vox" && species.name != "Vox Armalis")) 	// Too little oxygen
 			if(prob(20))
 				spawn(0) emote("gasp")
 			if(O2_pp > 0)
