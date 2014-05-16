@@ -37,4 +37,4 @@
 	icon_state = "medical"
 	item_state = "medical"
 	permeability_coefficient = 0.01
-	species_fit = list()
+	species_fit = list("Vox")
