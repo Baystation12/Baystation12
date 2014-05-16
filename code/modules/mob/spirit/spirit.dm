@@ -55,9 +55,6 @@ mob/spirit/Del()
 	
 	
 mob/spirit/Topic(href, href_list)
-	world << "Spirit Topic!"
-	usr << "Topic: usr [usr], src [src]"
-	src << "Topic: usr [usr], src [src]"
 	
 	if(usr != src)
 		return
