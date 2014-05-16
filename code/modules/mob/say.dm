@@ -143,11 +143,12 @@
 		return "2"
 	return "0"
 
-//parses the message mode code (e.g. :h, ;) from text, such as that supplied to say.
+//parses the message mode code (e.g. :h, :w) from text, such as that supplied to say.
 //returns the message mode string or null for no message mode.
-/mob/proc/parse_message_mode(var/message)
+//standard mode is the mode returned for the special ';' radio code.
+/mob/proc/parse_message_mode(var/message, var/standard_mode="headset")
 	if(length(message) >= 1 && copytext(message,1,2) == ";")
-		return "headset"
+		return standard_mode
 
 	if(length(message) >= 2)
 		var/channel_prefix = copytext(message, 1 ,3)
@@ -156,12 +157,13 @@
 	return null
 
 //parses the language code (e.g. :j) from text, such as that supplied to say.
-//returns the language object only if the code corresponds to a language that src knows, otherwise null.
+//returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
 	if(length(message) >= 2)
 		var/language_prefix = lowertext(copytext(message, 1 ,3))
-		for(var/datum/language/L in src.languages)
-			if(language_prefix == ":[L.key]")
-				return L
+		var/datum/language/L = language_keys[language_prefix]
+		if (can_speak(L))
+			return L
+	
 	return null
 

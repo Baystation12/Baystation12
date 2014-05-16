@@ -24,10 +24,10 @@
 		alt_name = "(as [get_id_name("Unknown")])"
 	
 	//parse the radio code and consume it
-	var/message_mode = parse_message_mode(message)
+	var/message_mode = parse_message_mode(message, "headset")
 	if (message_mode)
 		if (message_mode == "headset")
-			message = copytext(message,2)
+			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
 		else
 			message = copytext(message,3)
 	

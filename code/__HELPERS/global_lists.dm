@@ -23,6 +23,7 @@ var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 //Languages/species/whitelist.
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
+var/global/list/language_keys[0]					//table of say codes for all languages
 var/global/list/whitelisted_species = list("Human")
 
 // Posters
@@ -100,6 +101,9 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	for(var/T in paths)
 		var/datum/language/L = new T
 		all_languages[L.name] = L
+	
+	for (var/datum/language/L in all_languages)
+		language_keys[L.key] = L
 
 	var/rkey = 0
 	paths = typesof(/datum/species)-/datum/species
