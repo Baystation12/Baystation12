@@ -120,6 +120,11 @@ proc/isobserver(A)
 		return 1
 	return 0
 
+/proc/ismask(A)
+	if(istype(A, /mob/spirit/mask))
+		return 1
+	return 0
+	
 proc/isorgan(A)
 	if(istype(A, /datum/organ/external))
 		return 1
