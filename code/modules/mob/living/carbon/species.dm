@@ -17,6 +17,8 @@
 	var/mutantrace               // Safeguard due to old code.
 
 	var/breath_type = "oxygen"   // Non-oxygen gas breathed, if any.
+	var/poison_type = "phoron"   // Poisonous air.
+	var/exhale_type = "C02"      // Exhaled gas type.
 
 	var/cold_level_1 = 260  // Cold damage level 1 below this point.
 	var/cold_level_2 = 200  // Cold damage level 2 below this point.
@@ -41,6 +43,10 @@
 
 	var/blood_color = "#A10808" //Red.
 	var/flesh_color = "#FFC896" //Pink.
+
+	//Used in icon caching.
+	var/race_key = 0
+	var/icon/icon_template
 
 	/* Species-specific sprites, concept stolen from Paradise//vg/.
 	ex:
@@ -193,7 +199,9 @@
 	cold_level_3 = 0
 
 	eyes = "vox_eyes_s"
+
 	breath_type = "nitrogen"
+	poison_type = "oxygen"
 
 	flags = NO_SCAN | NO_BLOOD
 
@@ -231,6 +239,7 @@
 
 	eyes = "blank_eyes"
 	breath_type = "nitrogen"
+	poison_type = "oxygen"
 
 	flags = NO_SCAN | NO_BLOOD | HAS_TAIL | NO_PAIN | IS_WHITELISTED
 
@@ -238,6 +247,7 @@
 	flesh_color = "#808D11"
 
 	tail = "armalis_tail"
+	icon_template = 'icons/mob/human_races/r_armalis.dmi'
 
 	sprite_sheets = list(
 		"suit" = 'icons/mob/species/armalis/suit.dmi',
