@@ -733,6 +733,15 @@ datum/design/honker_targ
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/mecha/honker/targeting"
 
+/datum/design/spacepod_main
+	name = "Circuit Design (Space Pod Mainboard)"
+	desc = "Allows for the construction of a Space Pod mainboard."
+	id = "spacepod_main"
+	req_tech = list("programming" = 4)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/mecha/pod
+
 ////////////////////////////////////////
 /////////// Mecha Equpment /////////////
 ////////////////////////////////////////
