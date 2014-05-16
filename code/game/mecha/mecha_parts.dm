@@ -479,4 +479,8 @@
 		name = "Circuit board (Odysseus Central Control module)"
 		icon_state = "mainboard"
 
+	pod
+		name = "Circuit board (Space Pod Mainboard)"
+		icon_state = "mainboard"
+
 
