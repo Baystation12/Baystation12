@@ -20,7 +20,7 @@
 	flags = WHITELISTED
 
 /datum/language/tajaran
-	name = "Siik'tajr"
+	name = "Siik'Mas"	//should be Siik'Mas as per lore.
 	desc = "An expressive language that combines yowls and chirps with posture, tail and ears. Native to the Tajaran."
 	speech_verb = "mrowls"
 	colour = "tajaran"
