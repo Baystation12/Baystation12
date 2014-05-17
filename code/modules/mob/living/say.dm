@@ -113,7 +113,7 @@ var/list/department_radio_keys = list(
 
 		for(var/obj/O in objects)
 			spawn(0)
-				O.hear_talk(src, message, verb, speaking)	
+				O.hear_talk(src, message, verb, speaking)
 
 	var/speech_bubble_test = say_test(message)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")

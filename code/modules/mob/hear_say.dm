@@ -42,7 +42,7 @@
 		if(speaker == src)
 			src << "<span class='warning'>You cannot hear yourself speak!</span>"
 		else
-			src << "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear them."
+			src << "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear \him."
 	else
 		src << "<span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [track][verb], <span class='message'><span class='[style]'>\"[message]\"</span></span></span>"
 
