@@ -73,11 +73,13 @@
 		src << "\red Your radio isn't functional at this time."
 		return
 	
+	
 	//parse language key and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
 		verb = speaking.speech_verb
 		message = copytext(message,3)
+	
 	
 	switch(message_mode)
 		if("department")
@@ -86,10 +88,10 @@
 					AI.holopad_talk(message)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
-					R.radio.talk_into(src,message,message_mode,verb)
+					R.radio.talk_into(src,message,message_mode,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
-					P.radio.talk_into(src,message,message_mode,verb)
+					P.radio.talk_into(src,message,message_mode,verb,speaking)
 			return
 
 		if("binary")
@@ -110,10 +112,10 @@
 					src << "Yeah, not yet, sorry"
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
-					R.radio.talk_into(src,message,null,verb)
+					R.radio.talk_into(src,message,null,verb,speaking)
 				if(IS_PAI)
 					log_say("[key_name(src)] : [message]")
-					P.radio.talk_into(src,message,null,verb)
+					P.radio.talk_into(src,message,null,verb,speaking)
 			return
 
 		else
@@ -124,10 +126,10 @@
 						return
 					if(IS_ROBOT)
 						log_say("[key_name(src)] : [message]")
-						R.radio.talk_into(src,message,message_mode,verb)
+						R.radio.talk_into(src,message,message_mode,verb,speaking)
 					if(IS_PAI)
 						log_say("[key_name(src)] : [message]")
-						P.radio.talk_into(src,message,message_mode,verb)	
+						P.radio.talk_into(src,message,message_mode,verb,speaking)
 				return
 		
 
