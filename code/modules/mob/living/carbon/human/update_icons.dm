@@ -263,7 +263,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		//Icon is cached, use existing icon.
 		base_icon = human_icon_cache[icon_key]
 
-		log_debug("Retrieved cached mob icon ([icon_key] \icon[human_icon_cache[icon_key]]) for [src].")
+		//log_debug("Retrieved cached mob icon ([icon_key] \icon[human_icon_cache[icon_key]]) for [src].")
 
 	else
 
@@ -346,7 +346,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 		human_icon_cache[icon_key] = base_icon
 
-		log_debug("Generated new cached mob icon ([icon_key] \icon[human_icon_cache[icon_key]]) for [src]. [human_icon_cache.len] cached mob icons.")
+		//log_debug("Generated new cached mob icon ([icon_key] \icon[human_icon_cache[icon_key]]) for [src]. [human_icon_cache.len] cached mob icons.")
 
 	//END CACHED ICON GENERATION.
 
