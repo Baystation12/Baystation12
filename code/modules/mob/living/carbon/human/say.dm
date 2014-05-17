@@ -100,7 +100,7 @@
 				I.talk_into(src, message, verb, speaking)
 				used_radios += I
 		if("whisper")
-			whisper(message)
+			whisper_say(message, speaking, alt_name)
 			return
 		if("binary")
 			if(robot_talk_understand || binarycheck())

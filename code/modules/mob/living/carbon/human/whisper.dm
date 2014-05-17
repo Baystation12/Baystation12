@@ -1,11 +1,6 @@
 //Lallander was here
 /mob/living/carbon/human/whisper(message as text)
-	var/verb = "whispers"
 	var/alt_name = ""
-	var/message_range = 1
-	var/eavesdropping_range = 2
-	var/watching_range = 5
-	var/italics = 1
 
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
@@ -29,20 +24,32 @@
 	
 	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))	//made consistent with say
 
+	if(name != GetVoice())
+		alt_name = "(as [get_id_name("Unknown")])"
+	
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
-		verb = speaking.speech_verb + pick(" quietly", " softly")
 		message = copytext(message,3)
+	
+	whisper_say(message, speaking, alt_name)
+
+
+//This is used by both the whisper verb and human/say() to handle whispering
+/mob/living/carbon/human/proc/whisper_say(var/message, var/datum/language/speaking = null, var/alt_name="", var/verb="whispers")
+	var/message_range = 1
+	var/eavesdropping_range = 2
+	var/watching_range = 5
+	var/italics = 1
+
+	if (speaking)
+		verb = speaking.speech_verb + pick(" quietly", " softly")
 	
 	message = capitalize(trim(message))
 	
 	//TODO: handle_speech_problems for silent
 	if (!message || silent || miming)
 		return
-	
-	if(name != GetVoice())
-		alt_name = "(as [get_id_name("Unknown")])"
 	
 	// Mute disability
 	//TODO: handle_speech_problems
