@@ -584,6 +584,14 @@
 	icon_state = "officerberet"
 	flags = FPRINT | TABLEPASS
 
+////////////////////////////// Serithi - Adapted Security Helmet //////////////////////////////
+
+/obj/item/clothing/head/helmet/fluff/adapted
+	name = "Adapted helmet"
+	desc = "Standard Security gear. Protects the head from impacts. This helmet is specially made for horned Unathi."
+	item_state = "adapted_h"
+	icon_state = "adapted_h"
+
 //////////// Suits ////////////
 
 /obj/item/clothing/suit/storage/labcoat/fluff/aeneas_rinil //Robotics Labcoat - Aeneas Rinil [APPR]
@@ -785,6 +793,15 @@
 	icon_state = "mara_kilpatrick_1"
 	flags = FPRINT|TABLEPASS
 	w_class = 2
+
+/////////////// Oen'g Issek Medical Mask //////////////////////////
+
+/obj/item/clothing/mask/surgical/fluff/primitive
+	name = "primitive mask"
+	desc = "A decorated and creepy gas mask with the filters removed."
+	icon = 'icons/obj/mask.dmi'
+	item_state = "head_m"
+	icon_state = "head_m"
 
 ////// Small locket - Altair An-Nasaqan - Serithi
 
@@ -1022,3 +1039,11 @@
 /obj/item/weapon/fluff/farwadoll/attack_self(mob/user as mob)
 	user.visible_message("<span class='notice'>[user] hugs [src]! How cute! </span>", \
 						 "<span class='notice'>You hug [src]. Dawwww... </span>")
+
+////////////////////////////// Meyar - Cane /////////////////////////////////////////////////
+
+/obj/item/weapon/cane/fluff/ryals
+	 name = "cane"
+	 desc = "This cane seems to have 'Ryals' engraved on its handle."
+	 icon_state = "cane"
+	 item_state = "stick"
