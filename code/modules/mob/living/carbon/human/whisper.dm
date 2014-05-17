@@ -32,7 +32,7 @@
 	//parse the language code and consume it
 	var/datum/language/speaking = parse_language(message)
 	if (speaking)
-		verb = speaking.speech_verb
+		verb = speaking.speech_verb + pick(" quietly", " softly")
 		message = copytext(message,3)
 	
 	message = capitalize(trim(message))

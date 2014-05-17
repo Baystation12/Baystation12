@@ -17,7 +17,6 @@
 			message = stars(message)
 
 	if(language)
-		verb = language.speech_verb
 		style = language.colour
 
 	var/speaker_name = speaker.name
