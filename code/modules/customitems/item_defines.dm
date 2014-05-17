@@ -104,6 +104,14 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "matthewriebhardt"
 
+/////////////////////// Serveris: Officer's Notebook ////////////////////
+
+/obj/item/weapon/folder/blue/fluff/officer_notebook
+	name = "Officer's Notebook"
+	desc = "A simple, spiral bound notebook. A holographic crescent moon is printed on the cover, as well as 'S. Seto' beneath it. Numerous paper flags divide the pages, titled everything from incident reports to personal notes."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "syrus_notebook"
+
 /obj/item/weapon/pen/fluff/multi //spaceman96: Trenna Seber
 	name = "multicolor pen"
 	desc = "It's a cool looking pen. Lots of colors!"
@@ -635,7 +643,7 @@
 /obj/item/clothing/suit/fluff/b_dress
 	name = "Blue dress"
 	desc = "A blue dress, worn with a white blouse. It is small, and looks like it won't fit a full grown human."
-	icon = 'icon/obj/custom_items.dmi'
+	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "br_dress"
 	item_state = "br_dress"
 
