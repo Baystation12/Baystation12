@@ -5,8 +5,7 @@
 	icon_state = "robot"
 	maxHealth = 200
 	health = 200
-	universal_speak = 1
-
+	
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
