@@ -48,11 +48,12 @@
 	if(!message || stat)
 		return
 
-	var/ending = copytext(message, length(message))
-	if(ending=="!")
-		verb=pick("exclaims","shouts","yells")
-	if(ending=="?")
-		verb="asks"
+	if (!speaking)
+		var/ending = copytext(message, length(message))
+		if(ending=="!")
+			verb=pick("exclaims","shouts","yells")
+		if(ending=="?")
+			verb="asks"
 
 	var/list/obj/item/used_radios = new
 

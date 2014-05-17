@@ -102,8 +102,9 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		var/datum/language/L = new T
 		all_languages[L.name] = L
 	
-	for (var/datum/language/L in all_languages)
-		language_keys[L.key] = L
+	for (var/language_name in all_languages)
+		var/datum/language/L = all_languages[language_name]
+		language_keys[":[lowertext(L.key)]"] = L
 
 	var/rkey = 0
 	paths = typesof(/datum/species)-/datum/species
