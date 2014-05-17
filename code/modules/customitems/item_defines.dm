@@ -591,6 +591,7 @@
 	desc = "Standard Security gear. Protects the head from impacts. This helmet is specially made for horned Unathi."
 	item_state = "adapted_h"
 	icon_state = "adapted_h"
+	icon = 'icons/obj/custom_items.dmi'
 
 //////////// Suits ////////////
 
@@ -799,7 +800,7 @@
 /obj/item/clothing/mask/surgical/fluff/primitive
 	name = "primitive mask"
 	desc = "A decorated and creepy gas mask with the filters removed."
-	icon = 'icons/obj/mask.dmi'
+	icon = 'icons/obj/custom_items.dmi'
 	item_state = "head_m"
 	icon_state = "head_m"
 
