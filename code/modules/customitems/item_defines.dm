@@ -630,6 +630,15 @@
 	item_state = "mantle-unathi"
 	body_parts_covered = UPPER_TORSO
 
+/////////////////////////////// 50_n00b - R.A.N.G.E.'s blue dress //////////////////////////
+
+/obj/item/clothing/suit/fluff/b_dress
+	name = "Blue dress"
+	desc = "A blue dress, worn with a white blouse. It is small, and looks like it won't fit a full grown human."
+	icon = 'icon/obj/custom_items.dmi'
+	icon_state = "br_dress"
+	item_state = "br_dress"
+
 //////////// Uniforms ////////////
 
 /obj/item/clothing/under/fluff/milo_hachert //Field Dress Uniform - Milo Hachert - Commissar_Drew
