@@ -154,7 +154,7 @@
 	name = "Tajaran"
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
-	language = "Siik'tajr"
+	language = "Siik'maas"
 	tail = "tajtail"
 	attack_verb = "scratch"
 	punch_damage = 5

@@ -20,12 +20,20 @@
 	flags = WHITELISTED
 
 /datum/language/tajaran
-	name = "Siik'Mas"	//should be Siik'Mas as per lore.
-	desc = "An expressive language that combines yowls and chirps with posture, tail and ears. Native to the Tajaran."
+	name = "Siik'maas"
+	desc = "The traditionally employed tongue of Ahdomai, composed of expressive yowls and chirps. Native to the Tajaran."
 	speech_verb = "mrowls"
 	colour = "tajaran"
 	key = "j"
 	flags = WHITELISTED
+
+/datum/language/tajaran_sign
+	name = "Siik'tajr"
+	desc = "An expressive language that combines yowls and chirps with posture, tail and ears. Spoken by many Tajaran."
+	speech_verb = "mrowls"
+	colour = "tajaran"
+	key = "y"		//only "dfpqyz" left.
+	flags = WHITELISTED | NONVERBAL
 
 /datum/language/skrell
 	name = "Skrellian"
