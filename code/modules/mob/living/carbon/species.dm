@@ -221,6 +221,16 @@
 
 	flags = NO_SCAN | IS_WHITELISTED | NO_BLOOD
 
+/datum/species/vox/handle_post_spawn()
+
+	verbs += /mob/living/carbon/human/proc/leap
+	..()
+
+/datum/species/vox/armalis/handle_post_spawn()
+
+	verbs += /mob/living/carbon/human/proc/gut
+	..()
+
 /datum/species/vox/armalis
 	name = "Vox Armalis"
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
