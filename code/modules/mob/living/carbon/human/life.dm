@@ -436,111 +436,162 @@
 
 			return 0
 
-		var/safe_oxygen_min = 16 // Minimum safe partial pressure of O2, in kPa
-		//var/safe_oxygen_max = 140 // Maximum safe partial pressure of O2, in kPa (Not used for now)
-		var/safe_co2_max = 10 // Yes it's an arbitrary value who cares?
-		var/safe_phoron_max = 0.005
+		var/safe_pressure_min = 16 // Minimum safe partial pressure of breathable gas in kPa
+		//var/safe_pressure_max = 140 // Maximum safe partial pressure of breathable gas in kPa (Not used for now)
+		var/safe_exhaled_max = 10 // Yes it's an arbitrary value who cares?
+		var/safe_toxins_max = 0.005
 		var/SA_para_min = 1
 		var/SA_sleep_min = 5
-		var/oxygen_used = 0
-		var/nitrogen_used = 0
+		var/inhaled_gas_used = 0
+
 		var/breath_pressure = (breath.total_moles()*R_IDEAL_GAS_EQUATION*breath.temperature)/BREATH_VOLUME
-		var/vox_oxygen_max = 1 // For vox.
 
-		//Partial pressure of the O2 in our breath
-		var/O2_pp = (breath.oxygen/breath.total_moles())*breath_pressure
-		// Same, but for the phoron
-		var/Toxins_pp = (breath.phoron/breath.total_moles())*breath_pressure
-		// And CO2, lets say a PP of more than 10 will be bad (It's a little less really, but eh, being passed out all round aint no fun)
-		var/CO2_pp = (breath.carbon_dioxide/breath.total_moles())*breath_pressure // Tweaking to fit the hacky bullshit I've done with atmo -- TLE
-		//var/CO2_pp = (breath.carbon_dioxide/breath.total_moles())*0.5 // The default pressure value
-		// Nitrogen, for Vox.
-		var/Nitrogen_pp = (breath.nitrogen/breath.total_moles())*breath_pressure
+		var/inhaling
+		var/exhaling
+		var/poison
+		var/no_exhale
 
-		if(O2_pp < safe_oxygen_min && species.name != "Vox") 	// Too little oxygen
-			if(prob(20))
-				spawn(0) emote("gasp")
-			if(O2_pp > 0)
-				var/ratio = safe_oxygen_min/O2_pp
-				adjustOxyLoss(min(5*ratio, HUMAN_MAX_OXYLOSS)) // Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
-				failed_last_breath = 1
-				oxygen_used = breath.oxygen*ratio/6
+		switch(species.breath_type)
+			if("nitrogen")
+				inhaling = breath.nitrogen
+			if("phoron")
+				inhaling = breath.phoron
+			if("C02")
+				inhaling = breath.carbon_dioxide
 			else
-				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
-				failed_last_breath = 1
-			oxygen_alert = max(oxygen_alert, 1)
-		/*else if (O2_pp > safe_oxygen_max) 		// Too much oxygen (commented this out for now, I'll deal with pressure damage elsewhere I suppose)
-			spawn(0) emote("cough")
-			var/ratio = O2_pp/safe_oxygen_max
-			oxyloss += 5*ratio
-			oxygen_used = breath.oxygen*ratio/6
-			oxygen_alert = max(oxygen_alert, 1)*/
-		else if(Nitrogen_pp < safe_oxygen_min && species.name == "Vox")  //Vox breathe nitrogen, not oxygen.
+				inhaling = breath.oxygen
 
+		switch(species.poison_type)
+			if("oxygen")
+				poison = breath.oxygen
+			if("nitrogen")
+				poison = breath.nitrogen
+			if("C02")
+				poison = breath.carbon_dioxide
+			else
+				poison = breath.phoron
+
+		switch(species.exhale_type)
+			if("C02")
+				exhaling = breath.carbon_dioxide
+			if("oxygen")
+				exhaling = breath.oxygen
+			if("nitrogen")
+				exhaling = breath.nitrogen
+			if("phoron")
+				exhaling = breath.phoron
+			else
+				no_exhale = 1
+
+		var/inhale_pp = (inhaling/breath.total_moles())*breath_pressure
+		var/toxins_pp = (poison/breath.total_moles())*breath_pressure
+		var/exhaled_pp = (exhaling/breath.total_moles())*breath_pressure
+
+		if(inhale_pp < safe_pressure_min)
 			if(prob(20))
 				spawn(0) emote("gasp")
-			if(Nitrogen_pp > 0)
-				var/ratio = safe_oxygen_min/Nitrogen_pp
+			if(inhale_pp > 0)
+				var/ratio = safe_pressure_min/inhale_pp
+
+				 // Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
 				adjustOxyLoss(min(5*ratio, HUMAN_MAX_OXYLOSS))
 				failed_last_breath = 1
-				nitrogen_used = breath.nitrogen*ratio/6
+				inhaled_gas_used = inhaling*ratio/6
+
 			else
+
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 				failed_last_breath = 1
+
 			oxygen_alert = max(oxygen_alert, 1)
 
-		else								// We're in safe limits
+		else
+			// We're in safe limits
 			failed_last_breath = 0
 			adjustOxyLoss(-5)
-			oxygen_used = breath.oxygen/6
+			inhaled_gas_used = inhaling/6
 			oxygen_alert = 0
 
-		breath.oxygen -= oxygen_used
-		breath.nitrogen -= nitrogen_used
-		breath.carbon_dioxide += oxygen_used
+		switch(species.breath_type)
+			if("nitrogen")
+				breath.nitrogen -= inhaled_gas_used
+			else
+				breath.oxygen -= inhaled_gas_used
 
-		//CO2 does not affect failed_last_breath. So if there was enough oxygen in the air but too much co2, this will hurt you, but only once per 4 ticks, instead of once per tick.
-		if(CO2_pp > safe_co2_max)
-			if(!co2overloadtime) // If it's the first breath with too much CO2 in it, lets start a counter, then have them pass out after 12s or so.
+		if(!no_exhale)
+			switch(species.exhale_type)
+				if("oxygen")
+					breath.oxygen += inhaled_gas_used
+				if("nitrogen")
+					breath.nitrogen += inhaled_gas_used
+				if("phoron")
+					breath.phoron += inhaled_gas_used
+				if("C02")
+					breath.carbon_dioxide += inhaled_gas_used
+
+		// CO2 does not affect failed_last_breath. So if there was enough oxygen in the air but too much co2,
+		// this will hurt you, but only once per 4 ticks, instead of once per tick.
+
+		if(exhaled_pp > safe_exhaled_max)
+
+			// If it's the first breath with too much CO2 in it, lets start a counter,
+			// then have them pass out after 12s or so.
+			if(!co2overloadtime)
 				co2overloadtime = world.time
+
 			else if(world.time - co2overloadtime > 120)
+
+				// Lets hurt em a little, let them know we mean business
 				Paralyse(3)
-				adjustOxyLoss(3) // Lets hurt em a little, let them know we mean business
-				if(world.time - co2overloadtime > 300) // They've been in here 30s now, lets start to kill them for their own good!
+				adjustOxyLoss(3)
+
+				// They've been in here 30s now, lets start to kill them for their own good!
+				if(world.time - co2overloadtime > 300)
 					adjustOxyLoss(8)
-			if(prob(20)) // Lets give them some chance to know somethings not right though I guess.
+
+			// Lets give them some chance to know somethings not right though I guess.
+			if(prob(20))
 				spawn(0) emote("cough")
 
 		else
 			co2overloadtime = 0
 
-		if(Toxins_pp > safe_phoron_max) // Too much phoron
-			var/ratio = (breath.phoron/safe_phoron_max) * 10
-			//adjustToxLoss(Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))	//Limit amount of damage toxin exposure can do per second
+		// Too much poison in the air.
+		if(toxins_pp > safe_toxins_max)
+			var/ratio = (poison/safe_toxins_max) * 10
 			if(reagents)
+				//TODO: Fix Ravensdale's shit, make toxins toxins again instead of phoron.
 				reagents.add_reagent("phoron", Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
-			phoron_alert = max(phoron_alert, 1)
-		else if(O2_pp > vox_oxygen_max && species.name == "Vox") //Oxygen is toxic to vox.
-			var/ratio = (breath.oxygen/vox_oxygen_max) * 1000
-			adjustToxLoss(Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
 			phoron_alert = max(phoron_alert, 1)
 		else
 			phoron_alert = 0
 
-		if(breath.trace_gases.len)	// If there's some other shit in the air lets deal with it here.
+		// If there's some other shit in the air lets deal with it here.
+		if(breath.trace_gases.len)
 			for(var/datum/gas/sleeping_agent/SA in breath.trace_gases)
 				var/SA_pp = (SA.moles/breath.total_moles())*breath_pressure
-				if(SA_pp > SA_para_min) // Enough to make us paralysed for a bit
-					Paralyse(3) // 3 gives them one second to wake up and run away a bit!
-					if(SA_pp > SA_sleep_min) // Enough to make us sleep as well
+
+				// Enough to make us paralysed for a bit
+				if(SA_pp > SA_para_min)
+
+					// 3 gives them one second to wake up and run away a bit!
+					Paralyse(3)
+
+					// Enough to make us sleep as well
+					if(SA_pp > SA_sleep_min)
 						sleeping = min(sleeping+2, 10)
-				else if(SA_pp > 0.15)	// There is sleeping gas in their lungs, but only a little, so give them a bit of a warning
+
+				// There is sleeping gas in their lungs, but only a little, so give them a bit of a warning
+				else if(SA_pp > 0.15)
 					if(prob(20))
 						spawn(0) emote(pick("giggle", "laugh"))
 				SA.moles = 0
 
 		if( (abs(310.15 - breath.temperature) > 50) && !(COLD_RESISTANCE in mutations)) // Hot air hurts :(
-			if(status_flags & GODMODE)	return 1	//godmode
+
+			if(status_flags & GODMODE)
+				return 1
+
 			if(breath.temperature < species.cold_level_1)
 				if(prob(20))
 					src << "\red You feel your face freezing and an icicle forming in your lungs!"
