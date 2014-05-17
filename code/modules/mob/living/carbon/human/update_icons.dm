@@ -622,11 +622,11 @@ proc/get_damage_icon_part(damage_state, body_part)
 	if(l_ear || r_ear)
 		if(l_ear)
 			var/t_type = l_ear.icon_state
-			if(l_ear.icon_override) t_type = "[t_type]_l"
+			if(l_ear.icon_override || species.sprite_sheets["ears"]) t_type = "[t_type]_l"
 			overlays_standing[EARS_LAYER] = image("icon" = ((l_ear.icon_override) ? l_ear.icon_override : (species.sprite_sheets["ears"] ? species.sprite_sheets["ears"] : 'icons/mob/ears.dmi')), "icon_state" = "[t_type]")
 		if(r_ear)
 			var/t_type = r_ear.icon_state
-			if(r_ear.icon_override) t_type = "[t_type]_r"
+			if(r_ear.icon_override || species.sprite_sheets["ears"]) t_type = "[t_type]_r"
 			overlays_standing[EARS_LAYER] = image("icon" = ((r_ear.icon_override) ? r_ear.icon_override : (species.sprite_sheets["ears"] ? species.sprite_sheets["ears"] : 'icons/mob/ears.dmi')), "icon_state" = "t_type]")
 	else
 		overlays_standing[EARS_LAYER]	= null
@@ -781,7 +781,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		r_hand.screen_loc = ui_rhand	//TODO
 		var/t_state = r_hand.item_state
 		if(!t_state)	t_state = r_hand.icon_state
-		if(r_hand.icon_override) t_state = "[t_state]_r"
+		if(r_hand.icon_override || species.sprite_sheets["held"]) t_state = "[t_state]_r"
 		overlays_standing[R_HAND_LAYER] = image("icon" = ((r_hand.icon_override) ? r_hand.icon_override : (species.sprite_sheets["held"] ? species.sprite_sheets["held"] : 'icons/mob/items_righthand.dmi')), "icon_state" = "[t_state]")
 		if (handcuffed) drop_r_hand()
 	else
@@ -794,7 +794,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		l_hand.screen_loc = ui_lhand	//TODO
 		var/t_state = l_hand.item_state
 		if(!t_state)	t_state = l_hand.icon_state
-		if(l_hand.icon_override) t_state = "[t_state]_l"
+		if(l_hand.icon_override || species.sprite_sheets["held"]) t_state = "[t_state]_l"
 		overlays_standing[L_HAND_LAYER] = image("icon" = ((l_hand.icon_override) ? l_hand.icon_override : (species.sprite_sheets["held"] ? species.sprite_sheets["held"] : 'icons/mob/items_lefthand.dmi')), "icon_state" = "[t_state]")
 		if (handcuffed) drop_l_hand()
 	else
