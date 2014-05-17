@@ -21,6 +21,8 @@
 		/obj/item/weapon/table_parts,
 		/obj/item/weapon/rack_parts,
 		/obj/item/weapon/camera_assembly,
+		/obj/item/weapon/tank,
+		/obj/item/weapon/circuitboard
 		)
 
 	//Item currently being held.
