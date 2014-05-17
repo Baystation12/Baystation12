@@ -13,7 +13,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	opacity = 1
 	density = 1
 	blocks_air = 1
-	temperature = TCMB
+	temperature = T0C
 	var/mineral/mineral
 	var/mined_ore = 0
 	var/last_act = 0
@@ -349,7 +349,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 				if(6)
 					var/quantity = rand(1,3)
 					for(var/i=0, i<quantity, i++)
-						new /obj/item/weapon/shard/plasma(src)
+						new /obj/item/weapon/shard/phoron(src)
 
 				if(7)
 					var/obj/item/stack/sheet/mineral/uranium/R = new(src)
@@ -358,7 +358,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
-	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Plasma" = 25)//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 25)//Currently, Adamantine won't spawn as it has no uses. -Durandan
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 	New()
@@ -377,7 +377,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /turf/simulated/mineral/random/high_chance
 	mineralChance = 25
-	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Plasma" = 25)
+	mineralSpawnChanceList = list("Uranium" = 10, "Iron" = 30, "Diamond" = 2, "Gold" = 10, "Silver" = 10, "Phoron" = 25)
 
 
 /**********************Asteroid**************************/
@@ -389,7 +389,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	icon_state = "asteroid"
 	oxygen = 0.01
 	nitrogen = 0.01
-	temperature = TCMB
+	temperature = T0C
 	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
 

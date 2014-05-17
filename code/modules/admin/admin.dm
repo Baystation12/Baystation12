@@ -108,6 +108,7 @@ var/global/floorIsLava = 0
 				body += "<B>Is an AI</B> "
 			else if(ishuman(M))
 				body += {"<A href='?src=\ref[src];makeai=\ref[M]'>Make AI</A> |
+					<A href='?src=\ref[src];makemask=\ref[M]'>Make Mask</A> |
 					<A href='?src=\ref[src];makerobot=\ref[M]'>Make Robot</A> |
 					<A href='?src=\ref[src];makealien=\ref[M]'>Make Alien</A> |
 					<A href='?src=\ref[src];makeslime=\ref[M]'>Make slime</A>
@@ -563,7 +564,7 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];create_turf=1'>Create Turf</A><br>
 		<A href='?src=\ref[src];create_mob=1'>Create Mob</A><br>
 		<br><A href='?src=\ref[src];vsc=airflow'>Edit Airflow Settings</A><br>
-		<A href='?src=\ref[src];vsc=plasma'>Edit Plasma Settings</A><br>
+		<A href='?src=\ref[src];vsc=phoron'>Edit Phoron Settings</A><br>
 		<A href='?src=\ref[src];vsc=default'>Choose a default ZAS setting</A><br>
 		"}
 
@@ -961,7 +962,7 @@ var/global/floorIsLava = 0
 /datum/admins/proc/get_sab_desc(var/target)
 	switch(target)
 		if(1)
-			return "Destroy at least 70% of the plasma canisters on the station"
+			return "Destroy at least 70% of the phoron canisters on the station"
 		if(2)
 			return "Destroy the AI"
 		if(3)
@@ -1098,6 +1099,30 @@ var/global/floorIsLava = 0
 
 	if(istype(H))
 		H.regenerate_icons()
+
+proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
+	if(!whom)
+		return "<b>(*null*)</b>"
+	var/mob/M
+	var/client/C
+	if(istype(whom, /client))
+		C = whom
+		M = C.mob
+	else if(istype(whom, /mob))
+		M = whom
+		C = M.client
+	else
+		return "<b>(*not an mob*)</b>"
+	switch(detail)
+		if(0)
+			return "<b>[key_name(C, link, name)]</b>"
+		if(1)
+			return "<b>[key_name(C, link, name)](<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>)</b>"
+		if(2)
+			var/ref_mob = "\ref[M]"
+			return "<b>[key_name(C, link, name)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;subtlemessage=[ref_mob]'>SM</A>) (<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</A>) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)</b>"
+
+
 
 //
 //

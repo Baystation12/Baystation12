@@ -24,7 +24,6 @@ var/list/ai_list = list()
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
 	//var/list/laws = list()
-	var/alarms = list("Motion"=list(), "Fire"=list(), "Atmosphere"=list(), "Power"=list(), "Camera"=list())
 	var/viewalerts = 0
 	var/lawcheck[1]
 	var/ioncheck[1]
@@ -94,7 +93,7 @@ var/list/ai_list = list()
 		/mob/living/silicon/ai/proc/ai_camera_list, /mob/living/silicon/ai/proc/ai_network_change, \
 		/mob/living/silicon/ai/proc/ai_statuschange, /mob/living/silicon/ai/proc/ai_hologram_change, \
 		/mob/living/silicon/ai/proc/toggle_camera_light)
-		
+
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -146,7 +145,7 @@ var/list/ai_list = list()
 /obj/machinery/ai_powersupply
 	name="Power Supply"
 	active_power_usage=1000
-	use_power = 2	
+	use_power = 2
 	power_channel = EQUIP
 	var/mob/living/silicon/ai/powered_ai = null
 	invisibility = 100
@@ -155,12 +154,12 @@ var/list/ai_list = list()
 	powered_ai = ai
 	if(isnull(powered_ai))
 		Del()
-	
+
 	loc = powered_ai.loc
 	use_power(1) // Just incase we need to wake up the power system.
 
 	..()
-	
+
 /obj/machinery/ai_powersupply/process()
 	if(!powered_ai || powered_ai.stat & DEAD)
 		Del()
@@ -237,26 +236,20 @@ var/list/ai_list = list()
 	dat += "<A HREF='?src=\ref[src];mach_close=aialerts'>Close</A><BR><BR>"
 	for (var/cat in alarms)
 		dat += text("<B>[]</B><BR>\n", cat)
-		var/list/L = alarms[cat]
-		if (L.len)
-			for (var/alarm in L)
-				var/list/alm = L[alarm]
-				var/area/A = alm[1]
-				var/C = alm[2]
-				var/list/sources = alm[3]
+		var/list/alarmlist = alarms[cat]
+		if (alarmlist.len)
+			for (var/area_name in alarmlist)
+				var/datum/alarm/alarm = alarmlist[area_name]
 				dat += "<NOBR>"
-				if (C && istype(C, /list))
-					var/dat2 = ""
-					for (var/obj/machinery/camera/I in C)
-						dat2 += text("[]<A HREF=?src=\ref[];switchcamera=\ref[]>[]</A>", (dat2=="") ? "" : " | ", src, I, I.c_tag)
-					dat += text("-- [] ([])", A.name, (dat2!="") ? dat2 : "No Camera")
-				else if (C && istype(C, /obj/machinery/camera))
-					var/obj/machinery/camera/Ctmp = C
-					dat += text("-- [] (<A HREF=?src=\ref[];switchcamera=\ref[]>[]</A>)", A.name, src, C, Ctmp.c_tag)
-				else
-					dat += text("-- [] (No Camera)", A.name)
-				if (sources.len > 1)
-					dat += text("- [] sources", sources.len)
+				
+				var/cameratext = ""
+				if (alarm.cameras)
+					for (var/obj/machinery/camera/I in alarm.cameras)
+						cameratext += text("[]<A HREF=?src=\ref[];switchcamera=\ref[]>[]</A>", (cameratext=="") ? "" : " | ", src, I, I.c_tag)
+				dat += text("-- [] ([])", alarm.area.name, (cameratext)? cameratext : "No Camera")
+				
+				if (alarm.sources.len > 1)
+					dat += text(" - [] sources", alarm.sources.len)
 				dat += "</NOBR><BR>\n"
 		else
 			dat += "-- All Systems Nominal<BR>\n"
@@ -365,7 +358,7 @@ var/list/ai_list = list()
 		unset_machine()
 		src << browse(null, t1)
 	if (href_list["switchcamera"])
-		switchCamera(locate(href_list["switchcamera"])) in cameranet.cameras
+		switchCamera(locate(href_list["switchcamera"])) in cameranet.viewpoints
 	if (href_list["showalerts"])
 		ai_alerts()
 	//Carn: holopad requests
@@ -410,8 +403,18 @@ var/list/ai_list = list()
 		if(A && target)
 			A.ai_actual_track(target)
 */
-		if(target)
+
+		//Strip off any "(as Derplord)".
+		//If there's a way to do this via a var that doesn't give the AI extra info, please let me know.
+		var/seeking = target.name
+		var/index = findtext(seeking, "(as ")
+		if(index)
+			seeking = copytext(seeking, 1, index-1)
+
+		if(target && html_decode(href_list["trackname"]) == seeking)
 			ai_actual_track(target)
+		else
+			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
 
 	else if (href_list["faketrack"])
@@ -524,59 +527,28 @@ var/list/ai_list = list()
 
 	return 1
 
-/mob/living/silicon/ai/triggerAlarm(var/class, area/A, var/O, var/alarmsource)
+/mob/living/silicon/ai/triggerAlarm(var/class, area/A, list/cameralist, var/source)
 	if (stat == 2)
 		return 1
-	var/list/L = alarms[class]
-	for (var/I in L)
-		if (I == A.name)
-			var/list/alarm = L[I]
-			var/list/sources = alarm[3]
-			if (!(alarmsource in sources))
-				sources += alarmsource
-			return 1
-	var/obj/machinery/camera/C = null
-	var/list/CL = null
-	if (O && istype(O, /list))
-		CL = O
-		if (CL.len == 1)
-			C = CL[1]
-	else if (O && istype(O, /obj/machinery/camera))
-		C = O
-	L[A.name] = list(A, (C) ? C : O, list(alarmsource))
-	if (O)
-		if (C && C.can_use())
-			queueAlarm("--- [class] alarm detected in [A.name]! (<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>)", class)
-		else if (CL && CL.len)
-			var/foo = 0
-			var/dat2 = ""
-			for (var/obj/machinery/camera/I in CL)
-				dat2 += text("[]<A HREF=?src=\ref[];switchcamera=\ref[]>[]</A>", (!foo) ? "" : " | ", src, I, I.c_tag)	//I'm not fixing this shit...
-				foo = 1
-			queueAlarm(text ("--- [] alarm detected in []! ([])", class, A.name, dat2), class)
-		else
-			queueAlarm(text("--- [] alarm detected in []! (No Camera)", class, A.name), class)
-	else
-		queueAlarm(text("--- [] alarm detected in []! (No Camera)", class, A.name), class)
+	
+	..()
+	
+	var/cameratext = ""
+	for (var/obj/machinery/camera/C in cameralist)
+		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
+			
+	queueAlarm("--- [class] alarm detected in [A.name]! ([(cameratext)? cameratext : "No Camera"])", class)
+	
 	if (viewalerts) ai_alerts()
-	return 1
 
-/mob/living/silicon/ai/cancelAlarm(var/class, area/A as area, obj/origin)
-	var/list/L = alarms[class]
-	var/cleared = 0
-	for (var/I in L)
-		if (I == A.name)
-			var/list/alarm = L[I]
-			var/list/srcs  = alarm[3]
-			if (origin in srcs)
-				srcs -= origin
-			if (srcs.len == 0)
-				cleared = 1
-				L -= I
-	if (cleared)
+/mob/living/silicon/ai/cancelAlarm(var/class, area/A as area, var/source)
+	var/has_alarm = ..()
+	
+	if (!has_alarm)
 		queueAlarm(text("--- [] alarm in [] has been cleared.", class, A.name), class, 0)
 		if (viewalerts) ai_alerts()
-	return !cleared
+	
+	return has_alarm
 
 /mob/living/silicon/ai/cancel_camera()
 	set category = "AI Commands"
@@ -602,7 +574,7 @@ var/list/ai_list = list()
 
 	var/mob/living/silicon/ai/U = usr
 
-	for (var/obj/machinery/camera/C in cameranet.cameras)
+	for (var/obj/machinery/camera/C in cameranet.viewpoints)
 		if(!C.can_use())
 			continue
 
@@ -620,7 +592,7 @@ var/list/ai_list = list()
 	if(isnull(network))
 		network = old_network // If nothing is selected
 	else
-		for(var/obj/machinery/camera/C in cameranet.cameras)
+		for(var/obj/machinery/camera/C in cameranet.viewpoints)
 			if(!C.can_use())
 				continue
 			if(network in C.network)

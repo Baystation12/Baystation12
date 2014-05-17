@@ -11,7 +11,7 @@
 	throw_range = 5
 	w_class = 3.0
 	m_amt = 500
-	origin_tech = "combat=1;plasmatech=1"
+	origin_tech = "combat=1;phorontech=1"
 	var/status = 0
 	var/throw_amount = 100
 	var/lit = 0	//on or off
@@ -19,7 +19,7 @@
 	var/turf/previousturf = null
 	var/obj/item/weapon/weldingtool/weldtool = null
 	var/obj/item/device/assembly/igniter/igniter = null
-	var/obj/item/weapon/tank/plasma/ptank = null
+	var/obj/item/weapon/tank/phoron/ptank = null
 
 
 /obj/item/weapon/flamethrower/Del()
@@ -102,9 +102,9 @@
 		update_icon()
 		return
 
-	if(istype(W,/obj/item/weapon/tank/plasma))
+	if(istype(W,/obj/item/weapon/tank/phoron))
 		if(ptank)
-			user << "<span class='notice'>There appears to already be a plasma tank loaded in [src]!</span>"
+			user << "<span class='notice'>There appears to already be a phoron tank loaded in [src]!</span>"
 			return
 		user.drop_item()
 		ptank = W
@@ -123,15 +123,15 @@
 			var/o2_concentration = ptank.air_contents.oxygen/total_moles
 			var/n2_concentration = ptank.air_contents.nitrogen/total_moles
 			var/co2_concentration = ptank.air_contents.carbon_dioxide/total_moles
-			var/plasma_concentration = ptank.air_contents.toxins/total_moles
+			var/phoron_concentration = ptank.air_contents.phoron/total_moles
 
-			var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
+			var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 
 			user << "\blue Pressure: [round(pressure,0.1)] kPa"
 			user << "\blue Nitrogen: [round(n2_concentration*100)]%"
 			user << "\blue Oxygen: [round(o2_concentration*100)]%"
 			user << "\blue CO2: [round(co2_concentration*100)]%"
-			user << "\blue Plasma: [round(plasma_concentration*100)]%"
+			user << "\blue Phoron: [round(phoron_concentration*100)]%"
 			if(unknown_concentration>0.01)
 				user << "\red Unknown: [round(unknown_concentration*100)]%"
 			user << "\blue Temperature: [round(ptank.air_contents.temperature-T0C)]&deg;C"
@@ -146,9 +146,9 @@
 	if(user.stat || user.restrained() || user.lying)	return
 	user.set_machine(src)
 	if(!ptank)
-		user << "<span class='notice'>Attach a plasma tank first!</span>"
+		user << "<span class='notice'>Attach a phoron tank first!</span>"
 		return
-	var/dat = text("<TT><B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [ptank.air_contents.return_pressure()]<BR>\nAmount to throw: <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [throw_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove plasmatank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
+	var/dat = text("<TT><B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [ptank.air_contents.return_pressure()]<BR>\nAmount to throw: <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [throw_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove phorontank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
 	user << browse(dat, "window=flamethrower;size=600x300")
 	onclose(user, "flamethrower")
 	return
@@ -163,7 +163,7 @@
 	usr.set_machine(src)
 	if(href_list["light"])
 		if(!ptank)	return
-		if(ptank.air_contents.toxins < 1)	return
+		if(ptank.air_contents.phoron < 1)	return
 		if(!status)	return
 		lit = !lit
 		if(lit)
@@ -212,8 +212,8 @@
 	//Transfer 5% of current tank air contents to turf
 	var/datum/gas_mixture/air_transfer = ptank.air_contents.remove_ratio(0.02*(throw_amount/100))
 	//air_transfer.toxins = air_transfer.toxins * 5 // This is me not comprehending the air system. I realize this is retarded and I could probably make it work without fucking it up like this, but there you have it. -- TLE
-	new/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(target,air_transfer.toxins,get_dir(loc,target))
-	air_transfer.toxins = 0
+	new/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(target,air_transfer.phoron,get_dir(loc,target))
+	air_transfer.phoron = 0
 	target.assume_air(air_transfer)
 	//Burn it based on transfered gas
 	//target.hotspot_expose(part4.air_contents.temperature*2,300)

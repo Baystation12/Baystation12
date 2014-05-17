@@ -58,7 +58,7 @@ var/intercom_range_display_status = 0
 		del(C)
 
 	if(camera_range_display_status)
-		for(var/obj/machinery/camera/C in cameranet.cameras)
+		for(var/obj/machinery/camera/C in cameranet.viewpoints)
 			new/obj/effect/debugging/camera_range(C.loc)
 	feedback_add_details("admin_verb","mCRD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -74,7 +74,7 @@ var/intercom_range_display_status = 0
 
 	var/list/obj/machinery/camera/CL = list()
 
-	for(var/obj/machinery/camera/C in cameranet.cameras)
+	for(var/obj/machinery/camera/C in cameranet.viewpoints)
 		CL += C
 
 	var/output = {"<B>CAMERA ANNOMALITIES REPORT</B><HR>
@@ -161,6 +161,7 @@ var/list/debug_verbs = list (
         ,/client/proc/hide_debug_verbs
 	,/client/proc/testZAScolors
 	,/client/proc/testZAScolors_remove
+	,/client/proc/setup_supermatter_engine
 	)
 
 

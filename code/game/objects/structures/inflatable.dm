@@ -146,6 +146,9 @@
 		set category = "Object"
 		set src in oview(1)
 
+		if(isobserver(usr)) //to stop ghosts from deflating
+			return
+
 		deflate()
 
 /obj/item/inflatable/door/

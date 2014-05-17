@@ -62,7 +62,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	throw_speed = 0.5
 	item_state = "cigoff"
 	w_class = 1
-	body_parts_covered = null
+	body_parts_covered = 0
 	attack_verb = list("burnt", "singed")
 	var/lit = 0
 	var/icon_on = "cigon"  //Note - these are in masks.dmi not in cigarette.dmi
@@ -136,9 +136,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!src.lit)
 		src.lit = 1
 		damtype = "fire"
-		if(reagents.get_reagent_amount("plasma")) // the plasma explodes when exposed to fire
+		if(reagents.get_reagent_amount("phoron")) // the phoron explodes when exposed to fire
 			var/datum/effect/effect/system/reagents_explosion/e = new()
-			e.set_up(round(reagents.get_reagent_amount("plasma") / 2.5, 1), get_turf(src), 0, 0)
+			e.set_up(round(reagents.get_reagent_amount("phoron") / 2.5, 1), get_turf(src), 0, 0)
 			e.start()
 			del(src)
 			return

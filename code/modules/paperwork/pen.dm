@@ -90,12 +90,17 @@
 	origin_tech = "materials=2;syndicate=5"
 
 
-/obj/item/weapon/pen/paralysis/attack(mob/M as mob, mob/user as mob)
+/obj/item/weapon/pen/paralysis/attack(mob/living/M as mob, mob/user as mob)
+
 	if(!(istype(M,/mob)))
 		return
+
 	..()
-	if(reagents.total_volume)
-		if(M.reagents) reagents.trans_to(M, 50)
+
+
+	if(M.can_inject(user,1))
+		if(reagents.total_volume)
+			if(M.reagents) reagents.trans_to(M, 50)
 	return
 
 

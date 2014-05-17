@@ -163,13 +163,14 @@ datum/controller/vote
 							restart = 1
 						else
 							master_mode = .
-					if(!going)
-						going = 1
-						world << "<font color='red'><b>The round will start soon.</b></font>"
 				if("crew_transfer")
 					if(. == "Initiate Crew Transfer")
 						init_shift_change(null, 1)
 
+		if(mode == "gamemode") //fire this even if the vote fails.
+			if(!going)
+				going = 1
+				world << "<font color='red'><b>The round will start soon.</b></font>"
 
 		if(restart)
 			world << "World restarting due to vote..."

@@ -123,7 +123,7 @@
 
 
 				<h2>O2-Reaction Mode</h2>
-				
+
 				The second mode for running the engine uses a gas mixture to produce a reaction within the supermatter. This mode requires the CE's or Atmospheric's help to set up. This is called 'O2-Reaction Mode.'</br></br>
 
 				<b><u>THIS MODE CAN CAUSE A RUNAWAY REACTION, LEADING TO CATASTROPHIC FAILURE IF NOT MAINTAINED. NEVER FORGET ABOUT THE ENGINE IN THIS MODE.</u></b></br></br>
@@ -225,7 +225,7 @@
 				<h2>Power outage</h2>
 
 				A power problem has made the entire station lose power? Could be station-wide wiring problems or syndicate power sinks. In any case follow these steps:
-				
+
 				<ol>
 					<li><b><font color='red'>PANIC!</font></b></li>
 					<li>Get your ass over to engineering! <b>QUICKLY!!!</b></li>
@@ -284,7 +284,7 @@
 				</ol>
 				<p>
 				Note that for a successful harvest, the body from which the blood was taken from must be dead BEFORE harvesting the pod, however the pod can be growing while they are still alive. Otherwise, the soul would not be able to migrate to the new Diona body.<br><br>
-				
+
 				It really is that easy! Good luck!
 
 				</body>
@@ -447,7 +447,7 @@
 					<li>Secure the external reinforced armor plating with a wrench.</li>
 					<li>Weld the external reinforced armor plating to the chassis.</li>
 				</ol>
-				
+
 				<h2>Additional Information:</h2>
 				<ul>
 					<li>The firefighting variation is made in a similar fashion.</li>
@@ -499,7 +499,7 @@
 				In addition to this important purpose, the R&D console has a disk menu that lets you transfer data from the database onto disk or from the disk into the database.
 				It also has a settings menu that lets you re-sync with nearby R&D devices (if they've become disconnected), lock the console from the unworthy,
 				upload the data to all other R&D consoles in the network (all R&D consoles are networked by default), connect/disconnect from the network, and purge all data from the database.<br><br>
-				
+
 				<b>NOTE:</b> The technology list screen, circuit imprinter, and protolathe menus are accessible by non-scientists. This is intended to allow 'public' systems for the plebians to utilize some new devices.
 
 				<h2>Destructive Analyzer</h2>
@@ -512,7 +512,7 @@
 				This machine, along with the Protolathe, is used to actually produce new devices. The Circuit Imprinter takes glass and various chemicals (depends on the design) to produce new circuit boards to build new machines or computers. It can even be used to print AI modules.
 
 				<h2>Protolathe</h2>
-				This machine is an advanced form of the Autolathe that produce non-circuit designs. Unlike the Autolathe, it can use processed metal, glass, solid plasma, silver, gold, and diamonds along with a variety of chemicals to produce devices.
+				This machine is an advanced form of the Autolathe that produce non-circuit designs. Unlike the Autolathe, it can use processed metal, glass, solid phoron, silver, gold, and diamonds along with a variety of chemicals to produce devices.
 				The downside is that, again, not all devices you make are 100% reliable when you first discover them.
 
 				<h2>Reliability and You</h2>
@@ -687,7 +687,7 @@
 
 				<h2><a name="Repairs">Cyborg Repairs</h2>
 				Occasionally a Cyborg may become damaged. This could be in the form of impact damage from a heavy or fast-travelling object, or it could be heat damage from high temperatures, or even lasers or Electromagnetic Pulses (EMPs).
-	
+
 				<h3>Dents</h3>
 				If a cyborg becomes damaged due to impact from heavy or fast-moving objects, it will become dented. Sure, a dent may not seem like much, but it can compromise the structural integrity of the cyborg, possibly causing a critical failure.
 				Dents in a cyborg's frame are rather easy to repair, all you need is to apply a welding tool to the dented area, and the high-tech cyborg frame will repair the dent under the heat of the welder.
@@ -779,9 +779,9 @@
 				<body>
 				<br>
 				<h1>The Oath</h1>
-				
+
 				<i>The Medical Oath sworn by recognised medical practitioners in the employ of NanoTrasen</i><br>
-				
+
 				<ol>
 					<li>Now, as a new doctor, I solemnly promise that I will, to the best of my ability, serve humanity-caring for the sick, promoting good health, and alleviating pain and suffering.</li>
 					<li>I recognise that the practice of medicine is a privilege with which comes considerable responsibility and I will not abuse my position.</li>
@@ -922,7 +922,7 @@
 
 				<h3>Irish Cream:</h3>
 				Mix cream and whiskey into a glass.
-				
+
 				<h3>The Manly Dorf:</h3>
 				Mix ale and beer into a glass.
 
@@ -1000,9 +1000,9 @@
 				<body>
 				<h1>Nuclear Explosives 101</h1>
 				Hello and thank you for choosing the Syndicate for your nuclear information needs. Today's crash course will deal with the operation of a Fusion Class NanoTrasen made Nuclear Device.<br><br>
-				
+
 				First and foremost, DO NOT TOUCH ANYTHING UNTIL THE BOMB IS IN PLACE. Pressing any button on the compacted bomb will cause it to extend and bolt itself into place. If this is done, to unbolt it, one must completely log in, which at this time may not be possible.<br>
-				
+
 				<h2>To make the nuclear device functional</h2>
 				<ul>
 					<li>Place the nuclear device in the designated detonation zone.</li>
@@ -1012,20 +1012,20 @@
 					<b>Note</b>: If you make a mistake, press R to reset the device.
 					<li>Press the E button to log on to the device.</li>
 				</ul><br>
-				
+
 				You now have activated the device. To deactivate the buttons at anytime, for example when you've already prepped the bomb for detonation, remove the authentication disk OR press R on the keypad.<br><br>
 				Now the bomb CAN ONLY be detonated using the timer. Manual detonation is not an option. Toggle off the SAFETY.<br>
 				<b>Note</b>: You wouldn't believe how many Syndicate Operatives with doctorates have forgotten this step.<br><br>
-				
-				So use the - - and + + to set a detonation time between 5 seconds and 10 minutes. Then press the timer toggle button to start the countdown. Now remove the authentication disk so that the buttons deactivate.<br>				
+
+				So use the - - and + + to set a detonation time between 5 seconds and 10 minutes. Then press the timer toggle button to start the countdown. Now remove the authentication disk so that the buttons deactivate.<br>
 				<b>Note</b>: THE BOMB IS STILL SET AND WILL DETONATE<br><br>
-				
+
 				Now before you remove the disk, if you need to move the bomb, you can toggle off the anchor, move it, and re-anchor.<br><br>
-				
+
 				Remember the order:<br>
 				<b>Disk, Code, Safety, Timer, Disk, RUN!</b><br><br>
 				Intelligence Analysts believe that normal NanoTrasen procedure is for the Captain to secure the nuclear authentication disk.<br><br>
-				
+
 				Good luck!
 				</body>
 			</html>
@@ -1048,7 +1048,7 @@
 				</style>
 				</head>
 				<body>
-				
+
 				<h1><a name="Contents">Contents</a></h1>
 				<ol>
 					<li><a href="#Foreword">Author's Foreword</a></li>
@@ -1077,7 +1077,6 @@
 				<ul>
 				<li><b>Straight pipes:</b> They're pipes. One-meter sections. Straight line. Pretty simple. Just about every pipe and device is based around this
 				standard one-meter size, so most things will take up as much space as one of these.</li>
-<<<<<<< HEAD
 				<li><b>Bent pipes:</b> Pipes with a 90 degree bend at the half-meter mark. My goodness.</li>
 				<li><b>Pipe manifolds:</b> Pipes that are essentially a "T" shape, allowing you to connect three things at one point.</li>
 				<li><b>4-way manifold:</b> A four-way junction.</li>
@@ -1085,9 +1084,8 @@
 				<li><b>Manual valve:</b> A valve that will block off airflow when turned. Can't be used by the AI or cyborgs, because they don't have hands.</li>
 				<li><b>Manual T-valve:</b> Like a manual valve, but at the center of a manifold instead of a straight pipe.</li><BR><BR>
 				</ul>
-				
+
 				<h1><a name="Insulated"><B>Insulated Pipes</B></a></h1>
-=======
 				<li><I>Bent pipes:</I> Pipes with a 90 degree bend at the half-meter mark. My goodness.</li>
 				<li><I>Pipe manifolds:</I> Pipes that are essentially a "T" shape, allowing you to connect three things at one point.</li>
 				<li><I>4-way manifold:</I> A four-way junction.</li>
@@ -1096,7 +1094,6 @@
 				<li><I>Manual T-Valve:</I> Like a manual valve, but at the center of a manifold instead of a straight pipe.</li><BR><BR>
 
 				<h1><a name="Insulated"><B>Insulated Pipes</B></a></h1><BR>
->>>>>>> 4b04be7536168ccf4a73c91dcaa4681e4db18a4e
 				<I>Special Public Service Announcement.</I><BR>
 				Our regular pipes are already insulated. These are completely worthless. Punch anyone who uses them.<BR><BR>
 
@@ -1105,12 +1102,8 @@
 				This is usually where people get frightened, afraid, and start calling on their gods and/or cowering in fear. Yes, I can see you doing that right now.
 				Stop it. It's unbecoming. Most of these are fairly straightforward.<BR>
 
-<<<<<<< HEAD
 				<ul>
 				<li><b>Gas pump:</b> Take a wild guess. It moves gas in the direction it's pointing (marked by the red line on one end). It moves it based on pressure, the maximum output being 4500 kPa (kilopascals).
-=======
-				<li><I>Gas pump:</I> Take a wild guess. It moves gas in the direction it's pointing (marked by the red line on one end). It moves it based on pressure, the maximum output being 4500 kPa (kilopascals).
->>>>>>> 4b04be7536168ccf4a73c91dcaa4681e4db18a4e
 				Ordinary atmospheric pressure, for comparison, is 101.3 kPa, and the minimum pressure of room-temperature pure oxygen needed to not suffocate in a matter of minutes is 16 kPa
 				(though 18 kPa is preferred using internals, for various reasons).</li>
 				<li><b>Volume pump:</b> This pump goes based on volume, instead of pressure, and the possible maximum pressure it can create in the pipe on the receiving end is double the gas pump because of this,
@@ -1127,28 +1120,17 @@
 				<li><b>Gas filter:</b> Essentially the opposite of a gas mixer. One side is input. The other two sides are output. One gas type will be filtered into the perpendicular output pipe,
 				the rest will continue out the other side. Can also output from 0-4500 kPa.</li>
 				</ul>
-				
+
 				<h1><a name="HES"><B>Heat Exchange Systems</B></a></h1>
 				<I>Will not set you on fire.</I><BR>
 				These systems are used to only transfer heat between two pipes. They will not move gases or any other element, but will equalize the temperature (eventually). Note that because of how gases work (remember: pv=nRt),
 				a higher temperature will raise pressure, and a lower one will lower temperature.<BR>
 
-<<<<<<< HEAD
-				<ul>
-				<li><b>Pipe:</b> This is a pipe that will exchange heat with the surrounding atmosphere. Place in fire for superheating. Place in space for supercooling.</li>
-				<li><b>Bent pipe:</b> Take a wild guess.</li>
-				<li><b>Junction:</b> The point where you connect your normal pipes to heat exchange pipes. Not necessary for heat exchangers, but necessary for H/E pipes/bent pipes.</li>
-				<li><b>Heat exchanger:</b> These funky-looking bits attach to an open pipe end. Put another heat exchanger directly across from it, and you can transfer heat across two pipes without having to have the gases touch.
-				This normally shouldn't exchange with the ambient air, despite being totally exposed. Just don't ask questions...</li>
-				</ul><BR>
-=======
 				<li><I>Pipe:</I> This is a pipe that will exchange heat with the surrounding atmosphere. Place in fire for superheating. Place in space for supercooling.</li>
 				<li><I>Bent pipe:</I> Take a wild guess.</li>
 				<li><I>Junction:</I> The point where you connect your normal pipes to heat exchange pipes. Not necessary for heat exchangers, but necessary for H/E pipes/bent pipes.</li>
 				<li><I>Heat exchanger:</I> These funky-looking bits attach to an open pipe end. Put another heat exchanger directly across from it, and you can transfer heat across two pipes without having to have the gases touch.
 				This normally shouldn't exchange with the ambient air, despite being totally exposed. Just don't ask questions...</li><BR>
->>>>>>> 4b04be7536168ccf4a73c91dcaa4681e4db18a4e
-
 
 				That's about it for pipes. Go forth, armed with this knowledge, and try not to break, burn down, or kill anything. Please.
 
@@ -1173,10 +1155,10 @@
 				</style>
 				</head>
 				<body>
-				
+
 				<h1><a name="Foreword">EVA Gear and You: Not Spending All Day Inside</a></h1>
 				<I>Or: How not to suffocate because there's a hole in your shoes</I><BR>
-				
+
 				<h2><a name="Contents">Contents</a></h2>
 				<ol>
 					<li><a href="#Foreword">A foreword on using EVA gear</a></li>

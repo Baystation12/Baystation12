@@ -130,7 +130,7 @@ Class Procs:
 
 /zone/proc/dbg_data(mob/M)
 	M << name
-	M << "O2: [air.oxygen] N2: [air.nitrogen] CO2: [air.carbon_dioxide] P: [air.toxins]"
+	M << "O2: [air.oxygen] N2: [air.nitrogen] CO2: [air.carbon_dioxide] P: [air.phoron]"
 	M << "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)"
 	M << "O2 per N2: [(air.nitrogen ? air.oxygen/air.nitrogen : "N/A")] Moles: [air.total_moles]"
 	M << "Simulated: [contents.len] ([air.group_multiplier])"

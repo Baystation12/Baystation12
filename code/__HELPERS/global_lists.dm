@@ -7,6 +7,7 @@ var/list/directory = list()							//list of all ckeys with associated client
 
 var/global/list/player_list = list()				//List of all mobs **with clients attached**. Excludes /mob/new_player
 var/global/list/mob_list = list()					//List of all mobs, including clientless
+var/global/list/spirits = list()					//List of all the spirits, including Masks
 var/global/list/living_mob_list = list()			//List of all alive mobs, including clientless. Excludes /mob/new_player
 var/global/list/dead_mob_list = list()				//List of all dead mobs, including clientless. Excludes /mob/new_player
 
@@ -100,9 +101,12 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 		var/datum/language/L = new T
 		all_languages[L.name] = L
 
+	var/rkey = 0
 	paths = typesof(/datum/species)-/datum/species
 	for(var/T in paths)
+		rkey++
 		var/datum/species/S = new T
+		S.race_key = rkey //Used in mob icon caching.
 		all_species[S.name] = S
 
 		if(S.flags & IS_WHITELISTED)
