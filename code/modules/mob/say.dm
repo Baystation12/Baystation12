@@ -90,8 +90,9 @@
 	//Language check.
 	for(var/datum/language/L in src.languages)
 		if(speaking.name == L.name)
-			if ((L.flags & NONVERBAL) && ((usr.sdisabilities & BLIND || usr.blinded || usr.stat) && !istype(usr,/mob/dead/observer)) && !(other in view(src)))
-				return 0
+			if (L.flags & NONVERBAL)
+				if ((src.sdisabilities & BLIND || src.blinded || src.stat) || !(other in view(src)))
+					return 0
 			
 			return 1
 	
