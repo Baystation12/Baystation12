@@ -737,6 +737,14 @@
 	item_state = "solara_dress"
 	item_color = "solara_dress"
 
+/obj/item/clothing/under/rank/nursesuit/fluff/sasha
+	name = "RN Uniform"
+	desc = "A nurse's uniform that is dark blue and gold. It looks like it's been tailored for a short person."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "sasha_s"
+	item_state = "sasha_s"
+	item_color = "sasha_s"
+
 /////// NT-SID Suit //Zuhayr: Jane Doe
 
 /obj/item/clothing/under/fluff/jane_sidsuit
