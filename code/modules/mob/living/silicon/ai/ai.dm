@@ -95,13 +95,13 @@ var/list/ai_list = list()
 		/mob/living/silicon/ai/proc/toggle_camera_light)
 
 	//Languages
-	add_language("Sol Common")
-	add_language("Sinta'unathi")
-	add_language("Siik'Mas")
-	add_language("Skrellian")
-	add_language("Rootspeak")
-	add_language("Tradeband")
-	add_language("Gutter")
+	add_language("Sol Common", 0)
+	add_language("Sinta'unathi", 0)
+	add_language("Siik'Mas", 0)
+	add_language("Skrellian", 0)
+	add_language("Rootspeak", 0)
+	add_language("Tradeband", 1)
+	add_language("Gutter", 0)
 	
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.

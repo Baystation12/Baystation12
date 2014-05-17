@@ -91,9 +91,9 @@
 	return 0
 
 // Can we speak this language, as opposed to just understanding it?
-/mob/proc/can_speak(datum/language/language)
+/mob/proc/can_speak(datum/language/speaking)
 
-	return (universal_speak || language in src.languages)
+	return (universal_speak || speaking in src.languages)
 
 //TBD
 /mob/verb/check_languages()

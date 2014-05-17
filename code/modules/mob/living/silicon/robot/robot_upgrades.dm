@@ -35,6 +35,7 @@
 	R.icon_state = "robot"
 	R.updateicon()
 	R.languages = list()
+	R.speech_synthesizer_langs = list()
 
 	return 1
 
