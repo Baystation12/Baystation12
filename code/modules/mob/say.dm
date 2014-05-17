@@ -90,7 +90,11 @@
 	//Language check.
 	for(var/datum/language/L in src.languages)
 		if(speaking.name == L.name)
+			if (L.flags & NONVERBAL && (!(other in view(src)))
+				return 0
+			
 			return 1
+	
 	return 0
 
 /mob/proc/say_quote(var/text,var/datum/language/speaking)
