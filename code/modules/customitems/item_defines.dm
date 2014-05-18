@@ -104,6 +104,14 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "matthewriebhardt"
 
+/////////////////////// Serveris: Officer's Notebook ////////////////////
+
+/obj/item/weapon/folder/blue/fluff/officer_notebook
+	name = "Officer's Notebook"
+	desc = "A simple, spiral bound notebook. A holographic crescent moon is printed on the cover, as well as 'S. Seto' beneath it. Numerous paper flags divide the pages, titled everything from incident reports to personal notes."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "syrus_notebook"
+
 /obj/item/weapon/pen/fluff/multi //spaceman96: Trenna Seber
 	name = "multicolor pen"
 	desc = "It's a cool looking pen. Lots of colors!"
@@ -584,6 +592,15 @@
 	icon_state = "officerberet"
 	flags = FPRINT | TABLEPASS
 
+////////////////////////////// Serithi - Adapted Security Helmet //////////////////////////////
+
+/obj/item/clothing/head/helmet/fluff/adapted
+	name = "Adapted helmet"
+	desc = "Standard Security gear. Protects the head from impacts. This helmet is specially made for horned Unathi."
+	item_state = "adapted_h"
+	icon_state = "adapted_h"
+	icon = 'icons/obj/custom_items.dmi'
+
 //////////// Suits ////////////
 
 /obj/item/clothing/suit/storage/labcoat/fluff/aeneas_rinil //Robotics Labcoat - Aeneas Rinil [APPR]
@@ -620,6 +637,15 @@
 	icon_state = "mantle-unathi"
 	item_state = "mantle-unathi"
 	body_parts_covered = UPPER_TORSO
+
+/////////////////////////////// 50_n00b - R.A.N.G.E.'s blue dress //////////////////////////
+
+/obj/item/clothing/suit/fluff/b_dress
+	name = "Blue dress"
+	desc = "A blue dress, worn with a white blouse. It is small, and looks like it won't fit a full grown human."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "br_dress"
+	item_state = "br_dress"
 
 //////////// Uniforms ////////////
 
@@ -711,6 +737,14 @@
 	item_state = "solara_dress"
 	item_color = "solara_dress"
 
+/obj/item/clothing/under/rank/nursesuit/fluff/sasha
+	name = "RN Uniform"
+	desc = "A nurse's uniform that is dark blue and gold. It looks like it's been tailored for a short person."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "sasha_s"
+	item_state = "sasha_s"
+	item_color = "sasha_s"
+
 /////// NT-SID Suit //Zuhayr: Jane Doe
 
 /obj/item/clothing/under/fluff/jane_sidsuit
@@ -785,6 +819,15 @@
 	icon_state = "mara_kilpatrick_1"
 	flags = FPRINT|TABLEPASS
 	w_class = 2
+
+/////////////// Oen'g Issek Medical Mask //////////////////////////
+
+/obj/item/clothing/mask/surgical/fluff/primitive
+	name = "primitive mask"
+	desc = "A decorated and creepy gas mask with the filters removed."
+	icon = 'icons/obj/custom_items.dmi'
+	item_state = "head_m"
+	icon_state = "head_m"
 
 ////// Small locket - Altair An-Nasaqan - Serithi
 
@@ -1022,3 +1065,11 @@
 /obj/item/weapon/fluff/farwadoll/attack_self(mob/user as mob)
 	user.visible_message("<span class='notice'>[user] hugs [src]! How cute! </span>", \
 						 "<span class='notice'>You hug [src]. Dawwww... </span>")
+
+////////////////////////////// Meyar - Cane /////////////////////////////////////////////////
+
+/obj/item/weapon/cane/fluff/ryals
+	 name = "cane"
+	 desc = "This cane seems to have 'Ryals' engraved on its handle."
+	 icon_state = "cane"
+	 item_state = "stick"
