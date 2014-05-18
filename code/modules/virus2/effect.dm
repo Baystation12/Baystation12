@@ -214,7 +214,6 @@
 	name = "Spontaneous Cellular Collapse"
 	stage = 4
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		var/mob/living/carbon/human/H = mob
 		mob.reagents.add_reagent("pacid", 1)
 		mob << "<span class = 'warning'> Your body burns as your cells break down.</span>"
 		shake_camera(mob,5*multiplier)
