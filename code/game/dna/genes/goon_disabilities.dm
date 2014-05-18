@@ -304,7 +304,7 @@
 /obj/effect/proc_holder/spell/targeted/immolate
 	name = "Incendiary Mitochondria"
 	desc = "The subject becomes able to convert excess cellular energy into thermal energy."
-	panel = "Mutant Powers"
+	panel = "Abilities"
 
 	charge_type = "recharge"
 	charge_max = 600

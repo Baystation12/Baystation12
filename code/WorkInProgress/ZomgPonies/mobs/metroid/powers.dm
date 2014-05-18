@@ -1,5 +1,5 @@
 /mob/living/carbon/slime/verb/Feed()
-	set category = "Slime"
+	set category = "Abilities"
 	set desc = "This will let you feed on any valid creature in the surrounding area. This should also be used to halt the feeding process."
 	if(Victim)
 		Feedstop()
@@ -167,7 +167,7 @@
 
 
 /mob/living/carbon/slime/verb/Evolve()
-	set category = "Slime"
+	set category = "Abilities"
 	set desc = "This will let you evolve from baby to adult slime."
 
 	if(stat)
@@ -189,7 +189,7 @@
 		src << "<i>I have already evolved...</i>"
 
 /mob/living/carbon/slime/verb/Reproduce()
-	set category = "Slime"
+	set category = "Abilities"
 	set desc = "This will make you split into four Slimes. NOTE: this will KILL you, but you will be transferred into one of the babies."
 
 	if(stat)
@@ -272,6 +272,6 @@
 /mob/living/carbon/slime/verb/ventcrawl()
 	set name = "Crawl through Vent"
 	set desc = "Enter an air vent and crawl through the pipe system."
-	set category = "Slime"
+	set category = "Abilities"
 	if(Victim)	return
 	handle_ventcrawl()

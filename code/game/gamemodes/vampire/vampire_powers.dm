@@ -69,7 +69,7 @@
 	return T
 
 /client/vampire/proc/vampire_rejuvinate()
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Rejuvinate "
 	set desc= "Flush your system with spare blood to remove any incapacitating effects"
 	var/datum/mind/M = usr.mind
@@ -93,7 +93,7 @@
 			M.current.verbs += /client/vampire/proc/vampire_rejuvinate
 
 /client/vampire/proc/vampire_hypnotise()
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Hypnotise (20)"
 	set desc= "A piercing stare that incapacitates your victim for a good length of time."
 	var/datum/mind/M = usr.mind
@@ -123,7 +123,7 @@
 		return
 
 /client/vampire/proc/vampire_disease()
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Diseased Touch (100)"
 	set desc = "Touches your victim with infected blood giving them the Shutdown Syndrome which quickly shutsdown their major organs resulting in a quick painful death."
 	var/datum/mind/M = usr.mind
@@ -166,7 +166,7 @@
 	spawn(1800) M.current.verbs += /client/vampire/proc/vampire_disease
 
 /client/vampire/proc/vampire_glare()
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Glare"
 	set desc= "A scary glare that incapacitates people for a short while around you."
 	var/datum/mind/M = usr.mind
@@ -189,7 +189,7 @@
 			C << "\red You are blinded by [M.current]'s glare"
 
 /client/vampire/proc/vampire_shapeshift()
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Shapeshift (50)"
 	set desc = "Changes your name and appearance at the cost of 50 blood and has a cooldown of 3 minutes."
 	var/datum/mind/M = usr.mind
@@ -204,7 +204,7 @@
 		spawn(1800) M.current.verbs += /client/vampire/proc/vampire_shapeshift
 
 /client/vampire/proc/vampire_screech()
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Chiroptean Screech (30)"
 	set desc = "An extremely loud shriek that stuns nearby humans and breaks windows as well."
 	var/datum/mind/M = usr.mind
@@ -229,7 +229,7 @@
 		spawn(1800) M.current.verbs += /client/vampire/proc/vampire_screech
 
 /client/vampire/proc/vampire_enthrall()
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Enthrall (300)"
 	set desc = "You use a large portion of your power to sway those loyal to none to be loyal to you only."
 	var/datum/mind/M = usr.mind
@@ -255,7 +255,7 @@
 
 
 /client/vampire/proc/vampire_cloak()
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Cloak of Darkness (toggle)"
 	set desc = "Toggles whether you are currently cloaking yourself in darkness."
 	var/datum/mind/M = usr.mind
@@ -318,7 +318,7 @@
 	log_admin("[ckey(src.key)] has mind-slaved [ckey(H.key)].")
 
 /client/vampire/proc/vampire_bats()
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Summon Bats (75)"
 	set desc = "You summon a pair of space bats who attack nearby targets until they or their target is dead."
 	var/datum/mind/M = usr.mind
@@ -347,7 +347,7 @@
 
 /client/vampire/proc/vampire_jaunt()
 	//AHOY COPY PASTE INCOMING
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Mist Form (30)"
 	set desc = "You take on the form of mist for a short period of time."
 	var/jaunt_duration = 50 //in deciseconds
@@ -405,7 +405,7 @@
 // Blink for vamps
 // Less smoke spam.
 /client/vampire/proc/vampire_shadowstep()
-	set category = "Vampire"
+	set category = "Abilities"
 	set name = "Shadowstep (30)"
 	set desc = "Vanish into the shadows."
 	var/datum/mind/M = usr.mind

@@ -984,7 +984,7 @@
 
 /mob/living/carbon/human/proc/morph()
 	set name = "Morph"
-	set category = "Superpower"
+	set category = "Abilities"
 
 	if(stat!=CONSCIOUS)
 		reset_view(0)
@@ -1063,7 +1063,7 @@
 
 /mob/living/carbon/human/proc/remotesay()
 	set name = "Project mind"
-	set category = "Superpower"
+	set category = "Abilities"
 
 	if(stat!=CONSCIOUS)
 		reset_view(0)
@@ -1091,7 +1091,7 @@
 
 /mob/living/carbon/human/proc/remoteobserve()
 	set name = "Remote View"
-	set category = "Superpower"
+	set category = "Abilities"
 
 	if(stat!=CONSCIOUS)
 		remoteview_target = null
@@ -1435,7 +1435,7 @@
 //Mostly going to be used for Vox and Vox Armalis, but other human mobs might like them (for adminbuse).
 
 /mob/living/carbon/human/proc/leap()
-	set category = "IC"
+	set category = "Abilities"
 	set name = "Leap"
 	set desc = "Leap at a target and grab them aggressively."
 
@@ -1497,7 +1497,7 @@
 
 /mob/living/carbon/human/proc/gut()
 	set category = "IC"
-	set name = "Gut"
+	set name = "Abilities"
 	set desc = "While grabbing someone aggressively, rip their guts out or tear them apart."
 
 	if(last_special > world.time)

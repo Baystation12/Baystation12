@@ -54,7 +54,7 @@ Obviously, requires DNA2.
 
 /obj/effect/proc_holder/spell/targeted/hulk
 	name = "Hulk Out"
-	panel = "Mutant Powers"
+	panel = "Abilities"
 	range = -1
 	include_user = 1
 

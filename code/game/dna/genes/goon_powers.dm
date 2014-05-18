@@ -122,7 +122,7 @@
 /obj/effect/proc_holder/spell/targeted/cryokinesis
 	name = "Cryokinesis"
 	desc = "Drops the bodytemperature of another person."
-	panel = "Mutant Powers"
+	panel = "Abilities"
 
 	charge_type = "recharge"
 	charge_max = 1200
@@ -197,7 +197,7 @@
 /obj/effect/proc_holder/spell/targeted/eat
 	name = "Eat"
 	desc = "Eat just about anything!"
-	panel = "Mutant Powers"
+	panel = "Abilities"
 
 	charge_type = "recharge"
 	charge_max = 300
@@ -318,7 +318,7 @@
 /obj/effect/proc_holder/spell/targeted/leap
 	name = "Jump"
 	desc = "Leap great distances!"
-	panel = "Mutant Powers"
+	panel = "Abilities"
 	range = -1
 	include_user = 1
 
@@ -394,7 +394,7 @@
 /obj/effect/proc_holder/spell/targeted/polymorph
 	name = "Polymorph"
 	desc = "Mimic the appearance of others!"
-	panel = "Mutant Powers"
+	panel = "Abilities"
 	charge_max = 1800
 
 	clothes_req = 0
