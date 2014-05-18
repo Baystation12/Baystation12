@@ -1127,6 +1127,9 @@ proc/process_ghost_teleport_locs()
 		name = "\improper Chief Engineer's office"
 		icon_state = "engine_control"
 
+	mechanic_workshop
+		name = "\improper Mechanic Workshop"
+		icon_state = "engine"
 
 //Solars
 
