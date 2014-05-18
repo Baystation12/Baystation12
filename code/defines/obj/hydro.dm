@@ -115,6 +115,24 @@
 	plant_type = 0
 	growthstages = 2
 
+/obj/item/seeds/peanutseed
+	name = "pack of peanut seeds"
+	desc = "These seeds grow into peanut vines."
+	icon_state = "seed-peanut"
+	mypath = "/obj/item/seeds/peanutseed"
+	species = "peanut"
+	plantname = "Peanuts"
+	productname = "/obj/item/weapon/reagent_containers/food/snacks/grown/peanut"
+	lifespan = 55
+	endurance = 50
+	maturation = 6
+	production = 6
+	yield = 6
+	potency = 10
+	plant_type = 0
+	growthstages = 6
+
+
 /obj/item/seeds/cabbageseed
 	name = "pack of cabbage seeds"
 	desc = "These seeds grow into cabbages."
