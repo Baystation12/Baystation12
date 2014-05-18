@@ -596,7 +596,7 @@
 				opened = 1
 			update_icon()
 	else
-		if (	((stat & BROKEN) || malfhack) \
+		if (((stat & BROKEN) || malfhack) \
 				&& !opened \
 				&& W.force >= 5 \
 				&& W.w_class >= 3.0 \

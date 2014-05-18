@@ -265,6 +265,9 @@
 
 			else if(isobserver(M))
 				M_job = "Ghost"
+			
+			else if(isSpirit(M))
+				M_job = (ismask(M)) ? "Mask" : "Spirit"
 
 			M_job = replacetext(M_job, "'", "")
 			M_job = replacetext(M_job, "\"", "")
@@ -348,6 +351,10 @@
 			dat += "<td>Monkey</td>"
 		else if(isalien(M))
 			dat += "<td>Alien</td>"
+		else if(ismask(M))
+			dat += "<td>Mask</td>"
+		else if(isSpirit(M))
+			dat += "<td>Spirit</td>"
 		else
 			dat += "<td>Unknown</td>"
 

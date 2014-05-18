@@ -549,9 +549,14 @@ var/list/admin_verbs_mentor = list(
 	set category = "Fun"
 	set name = "Give Spell"
 	set desc = "Gives a spell to a mob."
-	var/obj/effect/proc_holder/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spells
+	var/list/spell_names = list()
+	for(var/v in spells)
+	//	"/obj/effect/proc_holder/spell/" 30 symbols ~Intercross21
+		spell_names.Add(copytext("[v]", 31, 0))
+	var/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spell_names
 	if(!S) return
-	T.spell_list += new S
+	var/path = text2path("/obj/effect/proc_holder/spell/[S]")
+	T.spell_list += new path
 	feedback_add_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] the spell [S].")
 	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the spell [S].", 1)
@@ -560,9 +565,14 @@ var/list/admin_verbs_mentor = list(
 	set category = "Fun"
 	set name = "Give Disease"
 	set desc = "Gives a Disease to a mob."
-	var/datum/disease/D = input("Choose the disease to give to that guy", "ACHOO") as null|anything in diseases
+	var/list/disease_names = list()
+	for(var/v in diseases)
+	//	"/datum/disease/" 15 symbols ~Intercross
+		disease_names.Add(copytext("[v]", 16, 0))
+	var/datum/disease/D = input("Choose the disease to give to that guy", "ACHOO") as null|anything in disease_names
 	if(!D) return
-	T.contract_disease(new D, 1)
+	var/path = text2path("/datum/disease/[D]")
+	T.contract_disease(new path, 1)
 	feedback_add_details("admin_verb","GD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] the disease [D].")
 	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the disease [D].", 1)

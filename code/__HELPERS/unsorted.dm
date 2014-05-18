@@ -443,36 +443,29 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	return creatures
 
+var/list/sortMobsOrder = list(	"/mob/living/silicon/ai",
+								"/mob/living/silicon/pai",
+								"/mob/living/silicon/robot",
+								"/mob/living/carbon/human",
+								"/mob/spirit/mask",
+								"/mob/living/carbon/brain",
+								"/mob/living/carbon/alien",
+								"/mob/dead/observer",
+								"/mob/new_player",
+								"/mob/living/carbon/monkey",
+								"/mob/living/carbon/slime",
+								"/mob/living/simple_animal",
+								"/mob/living/silicon/hivebot",
+								"/mob/living/silicon/hive_mainframe"	)
+
 //Orders mobs by type then by name
 /proc/sortmobs()
 	var/list/moblist = list()
 	var/list/sortmob = sortAtom(mob_list)
-	for(var/mob/living/silicon/ai/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/pai/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/robot/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/human/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/brain/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/alien/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/dead/observer/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/new_player/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/monkey/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/slime/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/simple_animal/M in sortmob)
-		moblist.Add(M)
-//	for(var/mob/living/silicon/hivebot/M in world)
-//		mob_list.Add(M)
-//	for(var/mob/living/silicon/hive_mainframe/M in world)
-//		mob_list.Add(M)
+	for (var/path in sortMobsOrder)
+		for (var/mob/sorting in sortmob)
+			if (istype(sorting,text2path(path)))
+				moblist.Add(sorting)
 	return moblist
 
 //E = MC^2
@@ -538,7 +531,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		else if(M.name)
 			name = M.name
 
-		if(is_special_character(M))
+		if(include_link && is_special_character(M))
 			. += "/(<font color='#FFA500'>[name]</font>)" //Orange
 		else
 			. += "/([name])"
@@ -727,14 +720,14 @@ proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,fl
 		return 0
 
 	var/delayfraction = round(delay/numticks)
-	var/turf/T = get_turf(user)
+	var/original_loc = user.loc
 	var/holding = user.get_active_hand()
 
 	for(var/i = 0, i<numticks, i++)
 		sleep(delayfraction)
 
 
-		if(!user || user.stat || user.weakened || user.stunned || !(user.loc == T))
+		if(!user || user.stat || user.weakened || user.stunned || (user.loc != original_loc))
 			return 0
 		if(needhand && !(user.get_active_hand() == holding))	//Sometimes you don't want the user to have to keep their active hand
 			return 0

@@ -81,7 +81,10 @@
 				dat+= "<DIV STYLE='float;left; text-align:right; with:33.33333%'></DIV>"
 		if(istype(src[page], /obj/item/weapon/paper))
 			var/obj/item/weapon/paper/P = W
-			dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>"
+			if(!(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon)))
+				dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>"
+			else
+				dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>"
 			human_user << browse(dat, "window=[name]")
 			P.add_fingerprint(usr)
 		else if(istype(src[page], /obj/item/weapon/photo))
@@ -94,6 +97,7 @@
 			+ "</body></html>", "window=[name]")
 			P.add_fingerprint(usr)
 		add_fingerprint(usr)
+		update_icon()
 	return
 
 
@@ -215,7 +219,9 @@
 			underlays += img
 			i++
 		else if(istype(O, /obj/item/weapon/photo))
-			img.icon_state = "photo"
+			var/obj/item/weapon/photo/Ph = O
+//			img.icon_state = "photo"
+			img = Ph.tiny
 			photo = 1
 			overlays += img
 	if(i>1)

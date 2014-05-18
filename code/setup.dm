@@ -452,6 +452,7 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define CANWEAKEN	2
 #define CANPARALYSE	4
 #define CANPUSH		8
+#define LEAPING		16
 #define GODMODE		4096
 #define FAKEDEATH	8192	//Replaces stuff like changeling.changeling_fakedeath
 #define DISFIGURED	16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
@@ -530,6 +531,9 @@ var/list/liftable_structures = list(\
 
 #define SEE_INVISIBLE_LEVEL_TWO 45	//Used by some other stuff in code. It's really poorly organized.
 #define INVISIBILITY_LEVEL_TWO 45	//Used by some other stuff in code. It's really poorly organized.
+
+#define INVISIBILITY_SPIRIT 50
+#define SEE_SPIRITS 50
 
 #define INVISIBILITY_OBSERVER 60
 #define SEE_INVISIBLE_OBSERVER 60
@@ -753,6 +757,7 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.
 #define RESTRICTED 2   // Language can only be accquired by spawning or an admin.
+#define NONVERBAL 4    // Language has a significant non-verbal component.
 
 //Flags for zone sleeping
 #define ZONE_ACTIVE 1

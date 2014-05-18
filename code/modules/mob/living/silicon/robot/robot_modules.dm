@@ -10,7 +10,6 @@
 	var/obj/item/emag = null
 	var/obj/item/borg/upgrade/jetpack = null
 
-
 	emp_act(severity)
 		if(modules)
 			for(var/obj/O in modules)
@@ -40,6 +39,9 @@
 	for(var/obj/O in temp_list)
 		if(O)
 			modules += O
+
+/obj/item/weapon/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
+	R.add_language("Tradeband", 0)
 
 /obj/item/weapon/robot_module/standard
 	name = "standard robot module"
@@ -224,6 +226,17 @@
 		R.add_reagent("beer2", 50)
 		src.emag.name = "Mickey Finn's Special Brew"
 		return
+	
+	add_languages(var/mob/living/silicon/robot/R)
+		//full set of languages
+		R.add_language("Sol Common", 1)
+		R.add_language("Sinta'unathi", 1)
+		R.add_language("Siik'maas", 1)
+		R.add_language("Siik'tajr", 0)
+		R.add_language("Skrellian", 1)
+		R.add_language("Rootspeak", 1)
+		R.add_language("Tradeband", 1)
+		R.add_language("Gutter", 1)
 
 /obj/item/weapon/robot_module/butler/respawn_consumable(var/mob/living/silicon/robot/R)
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
@@ -270,7 +283,17 @@
 
 /obj/item/weapon/robot_module/drone
 	name = "drone module"
-
+	var/list/stacktypes = list(
+		/obj/item/stack/sheet/wood/cyborg = 1,
+		/obj/item/stack/sheet/mineral/plastic/cyborg = 1,
+		/obj/item/stack/sheet/rglass/cyborg = 5,
+		/obj/item/stack/tile/wood = 5,
+		/obj/item/stack/rods = 15,
+		/obj/item/stack/tile/plasteel = 15,
+		/obj/item/stack/sheet/metal/cyborg = 20,
+		/obj/item/stack/sheet/glass/cyborg = 20,
+		/obj/item/weapon/cable_coil = 30
+		)
 
 	New()
 		//TODO: Replace with shittier flashlight and work out why we can't remove the flash. ~Z
@@ -289,37 +312,21 @@
 		src.emag = new /obj/item/weapon/card/emag(src)
 		src.emag.name = "Cryptographic Sequencer"
 
-
-		var/list/stacktypes = list(
-			/obj/item/stack/rods = 10,
-			/obj/item/stack/tile/plasteel = 10,
-			/obj/item/stack/sheet/metal/cyborg = 10,
-			/obj/item/stack/sheet/wood/cyborg = 1,
-			/obj/item/weapon/cable_coil = 30,
-			/obj/item/stack/sheet/glass/cyborg = 10,
-			/obj/item/stack/sheet/mineral/plastic/cyborg = 1
-			)
-
 		for(var/T in stacktypes)
 			var/obj/item/stack/sheet/W = new T(src)
 			W.amount = stacktypes[T]
 			src.modules += W
 
 		return
+	
+	add_languages(var/mob/living/silicon/robot/R)
+		return	//not much ROM to spare in that tiny microprocessor!
 
 /obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R)
 	var/obj/item/weapon/reagent_containers/spray/cleaner/C = locate() in src.modules
 	C.reagents.add_reagent("cleaner", 10)
 
-	var/list/stacks = list (
-		/obj/item/stack/sheet/metal,
-		/obj/item/weapon/cable_coil,
-		/obj/item/stack/sheet/glass/cyborg,
-		/obj/item/stack/rods,
-		/obj/item/stack/tile/plasteel
-	)
-
-	for(var/T in stacks)
+	for(var/T in stacktypes)
 		var/O = locate(T) in src.modules
 		var/obj/item/stack/sheet/S = O
 
@@ -327,9 +334,9 @@
 			src.modules -= null
 			S = new T(src)
 			src.modules += S
-			S.amount = 0
+			S.amount = 1
 
-		if(istype(S) && S.amount < 15)
+		if(S && S.amount < stacktypes[T])
 			S.amount++
 
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules

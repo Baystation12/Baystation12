@@ -21,6 +21,8 @@
 		/obj/item/weapon/table_parts,
 		/obj/item/weapon/rack_parts,
 		/obj/item/weapon/camera_assembly,
+		/obj/item/weapon/tank,
+		/obj/item/weapon/circuitboard
 		)
 
 	//Item currently being held.
@@ -104,6 +106,23 @@
 		else
 			user << "\red Your gripper cannot hold \the [target]."
 
+	else if(istype(target,/obj/machinery/power/apc))
+		var/obj/machinery/power/apc/A = target
+		if(A.opened)
+			if(A.cell)
+
+				wrapped = A.cell
+
+				A.cell.add_fingerprint(user)
+				A.cell.updateicon()
+				A.cell.loc = src
+				A.cell = null
+
+				A.charging = 0
+				A.update_icon()
+
+				user.visible_message("\red [user] removes the power cell from [A]!", "You remove the power cell.")
+
 //TODO: Matter decompiler.
 /obj/item/weapon/matter_decompiler
 
@@ -130,21 +149,92 @@
 	//Used to give the right message.
 	var/grabbed_something = 0
 
-	for(var/obj/item/W in T)
+	for(var/mob/M in T)
+		if(istype(M,/mob/living/simple_animal/lizard) || istype(M,/mob/living/simple_animal/mouse))
+			src.loc.visible_message("\red [src.loc] sucks [M] into its decompiler. There's a horrible crunching noise.","\red It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises.")
+			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
+			del(M)
+			stored_comms["wood"]++
+			stored_comms["wood"]++
+			stored_comms["plastic"]++
+			stored_comms["plastic"]++
+			return
+
+		else if(istype(M,/mob/living/silicon/robot/drone) && M.stat == 2 && !M.client)
+
+			var/mob/living/silicon/robot/drone/D = src.loc
+
+			if(!istype(D))
+				return
+
+			D << "\red You begin decompiling the other drone."
+
+			if(!do_after(D,50))
+				D << "\red You need to remain still while decompiling such a large object."
+				return
+
+			if(!M || !D) return
+
+			D << "\red You carefully and thoroughly decompile your downed fellow, storing as much of its resources as you can within yourself."
+
+			del(M)
+			new/obj/effect/decal/cleanable/blood/oil(get_turf(src))
+
+			stored_comms["metal"] += 15
+			stored_comms["glass"] += 15
+			stored_comms["wood"] += 5
+			stored_comms["plastic"] += 5
+
+			return
+		else
+			continue
+
+	for(var/obj/W in T)
 		//Different classes of items give different commodities.
-		if(istype(W,/obj/item/trash))
+		if (istype(W,/obj/item/weapon/cigbutt))
+			stored_comms["plastic"]++
+		else if(istype(W,/obj/effect/spider/spiderling))
+			stored_comms["wood"]++
+			stored_comms["wood"]++
+			stored_comms["plastic"]++
+			stored_comms["plastic"]++
+		else if(istype(W,/obj/item/weapon/light))
+			var/obj/item/weapon/light/L = W
+			if(L.status >= 2) //In before someone changes the inexplicably local defines. ~ Z
+				stored_comms["metal"]++
+				stored_comms["glass"]++
+			else
+				continue
+		else if(istype(W,/obj/effect/decal/remains/robot))
 			stored_comms["metal"]++
+			stored_comms["metal"]++
+			stored_comms["plastic"]++
+			stored_comms["plastic"]++
+			stored_comms["glass"]++
+		else if(istype(W,/obj/item/trash))
+			stored_comms["metal"]++
+			stored_comms["plastic"]++
+			stored_comms["plastic"]++
 			stored_comms["plastic"]++
 		else if(istype(W,/obj/effect/decal/cleanable/blood/gibs/robot))
 			stored_comms["metal"]++
+			stored_comms["metal"]++
+			stored_comms["glass"]++
 			stored_comms["glass"]++
 		else if(istype(W,/obj/item/ammo_casing))
 			stored_comms["metal"]++
 		else if(istype(W,/obj/item/weapon/shard/shrapnel))
 			stored_comms["metal"]++
+			stored_comms["metal"]++
+			stored_comms["metal"]++
 		else if(istype(W,/obj/item/weapon/shard))
 			stored_comms["glass"]++
+			stored_comms["glass"]++
+			stored_comms["glass"]++
 		else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/grown))
+			stored_comms["wood"]++
+			stored_comms["wood"]++
+			stored_comms["wood"]++
 			stored_comms["wood"]++
 		else
 			continue
@@ -203,7 +293,7 @@
 	dat += tools
 
 	if (emagged)
-		if (module.emag)
+		if (!module.emag)
 			dat += text("<B>Resource depleted</B><BR>")
 		else if(activated(module.emag))
 			dat += text("[module.emag]: <B>Activated</B><BR>")
@@ -228,22 +318,22 @@
 			switch(type)
 				if("metal")
 					if(!stack_metal)
-						stack_metal = new(src.module)
+						stack_metal = new /obj/item/stack/sheet/metal/cyborg(src.module)
 						stack_metal.amount = 1
 					stack = stack_metal
 				if("glass")
 					if(!stack_glass)
-						stack_glass = new(src.module)
+						stack_glass = new /obj/item/stack/sheet/glass/cyborg(src.module)
 						stack_glass.amount = 1
 					stack = stack_glass
 				if("wood")
 					if(!stack_wood)
-						stack_wood = new(src.module)
+						stack_wood = new /obj/item/stack/sheet/wood/cyborg(src.module)
 						stack_wood.amount = 1
 					stack = stack_wood
 				if("plastic")
 					if(!stack_plastic)
-						stack_plastic = new(src.module)
+						stack_plastic = new /obj/item/stack/sheet/mineral/plastic/cyborg(src.module)
 						stack_plastic.amount = 1
 					stack = stack_plastic
 

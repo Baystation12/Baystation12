@@ -130,12 +130,14 @@
 	icon_state = "vox-carapace"
 	item_state = "vox-carapace"
 	desc = "A glowing visor, perhaps stolen from a depressed Cylon."
+	species_restricted = list("Vox","Vox Armalis")
 
 /obj/item/clothing/suit/space/vox/carapace
 	name = "alien carapace armour"
 	icon_state = "vox-carapace"
 	item_state = "vox-carapace"
 	desc = "An armoured, segmented carapace with glowing purple lights. It looks pretty run-down."
+	species_restricted = list("Vox","Vox Armalis")
 
 /obj/item/clothing/head/helmet/space/vox/stealth
 	name = "alien stealth helmet"
@@ -187,7 +189,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	item_color="gloves-vox"
-	species_restricted = list("Vox")
+	species_restricted = list("Vox","Vox Armalis")
 
 /obj/item/clothing/shoes/magboots/vox
 
@@ -195,7 +197,7 @@
 	name = "vox magclaws"
 	item_state = "boots-vox"
 	icon_state = "boots-vox"
-	species_restricted = list("Vox")
+	species_restricted = list("Vox","Vox Armalis")
 	action_button_name = "Toggle the magclaws"
 
 /obj/item/clothing/shoes/magboots/vox/attack_self(mob/user)
@@ -212,8 +214,8 @@
 		if (H.shoes != src)
 			user << "You will have to put on the [src] before you can do that."
 			return
-		
-		
+
+
 		flags |= NOSLIP
 		magpulse = 1
 		canremove = 0	//kinda hard to take off magclaws when you are gripping them tightly.

@@ -42,6 +42,8 @@
 			dat += "<A href='?src=\ref[src];screen=2'>2. Emergency Full Destruct</A><BR>"
 		if(screen == 1)
 			for(var/mob/living/silicon/robot/R in mob_list)
+				if(istype(R, /mob/living/silicon/robot/drone))
+					continue //There's a specific console for drones.
 				if(istype(user, /mob/living/silicon/ai))
 					if (R.connected_ai != user)
 						continue
@@ -220,8 +222,7 @@
 	while(src.timeleft)
 
 	for(var/mob/living/silicon/robot/R in mob_list)
-		if(!R.scrambledcodes)
+		if(!R.scrambledcodes && !istype(R, /mob/living/silicon/robot/drone))
 			R.self_destruct()
 
 	return
-

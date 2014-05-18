@@ -105,6 +105,19 @@
 				src << "\red Your binary communications component isn't functional."
 				return
 			robot_talk(trim(copytext(message,3)))
+		else
+
+			var/list/listeners = hearers(5,src)
+			listeners |= src
+
+			for(var/mob/living/silicon/robot/drone/D in listeners)
+				if(D.client) D << "<b>[src]</b> transmits, \"[message]\""
+
+			for (var/mob/M in player_list)
+				if (istype(M, /mob/new_player))
+					continue
+				else if(M.stat == 2 &&  M.client.prefs.toggles & CHAT_GHOSTEARS)
+					if(M.client) M << "<b>[src]</b> transmits, \"[message]\""
 
 //Sick of trying to get this to display properly without redefining it.
 /mob/living/silicon/robot/drone/show_system_integrity()
@@ -212,6 +225,8 @@
 /mob/living/silicon/robot/drone/handle_regular_status_updates()
 
 	if(health <= -35 && src.stat != 2)
+		timeofdeath = world.time
+		death() //Possibly redundant, having trouble making death() cooperate.
 		gib()
 		return
 	..()
@@ -257,7 +272,7 @@
 
 /mob/living/silicon/robot/drone/proc/request_player()
 	for(var/mob/dead/observer/O in player_list)
-		if(jobban_isbanned(O, "Maintenance Drone"))
+		if(jobban_isbanned(O, "Cyborg"))
 			continue
 		if(O.client)
 			if(O.client.prefs.be_special & BE_PAI)
