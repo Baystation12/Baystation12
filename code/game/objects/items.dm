@@ -476,7 +476,7 @@
 /obj/item/proc/IsShield()
 	return 0
 
-/obj/item/proc/get_turf()
+/obj/item/proc/get_loc_turf()
 	var/atom/L = loc
 	while(L && !istype(L, /turf/))
 		L = L.loc
