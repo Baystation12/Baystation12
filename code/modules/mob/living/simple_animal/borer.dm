@@ -58,7 +58,6 @@
 
 	..()
 
-
 	if(host)
 
 		if(!stat && !host.stat)
@@ -335,7 +334,13 @@ mob/living/simple_animal/borer/proc/detatch()
 		host_brain.name = "host brain"
 		host_brain.real_name = "host brain"
 
+	var/mob/living/H = host
 	host = null
+
+	for(var/atom/A in H.contents)
+		if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
+			return
+	H.status_flags &= ~PASSEMOTES
 
 /mob/living/simple_animal/borer/verb/infest()
 	set category = "Alien"
@@ -390,23 +395,20 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	if(M in view(1, src))
 		src << "You wiggle into [M]'s ear."
-		src.perform_infestation(M)
-		return
-	else
-		src << "They are no longer in range!"
-		return
+		if(!M.stat)
+			M << "Something disgusting and slimy wiggles into your ear!"
 
-/mob/living/simple_animal/borer/proc/perform_infestation(var/mob/living/carbon/M)
-	src.host = M
-	src.loc = M
+		src.host = M
+		src.loc = M
 
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		var/datum/organ/external/head = H.get_organ("head")
-		head.implants += src
+		if(istype(M,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			var/datum/organ/external/head = H.get_organ("head")
+			head.implants += src
 
-	host_brain.name = M.name
-	host_brain.real_name = M.real_name
+		host_brain.name = M.name
+		host_brain.real_name = M.real_name
+		host.status_flags |= PASSEMOTES
 
 /mob/living/simple_animal/borer/verb/ventcrawl()
 	set name = "Crawl through Vent"

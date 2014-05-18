@@ -76,6 +76,7 @@
 			D.attack_hand(M)
 			M << "You scoop up [src]."
 			src << "[M] scoops you up."
+		M.status_flags |= PASSEMOTES
 		return
 
 	..()
@@ -123,6 +124,8 @@
 
 	if(istype(M,/mob/living/carbon/human))
 		M << "You feel your being twine with that of [src] as it merges with your biomass."
+		M.status_flags |= PASSEMOTES
+
 		src << "You feel your being twine with that of [M] as you merge with its biomass."
 		src.loc = M
 		src.verbs += /mob/living/carbon/monkey/diona/proc/split
@@ -142,9 +145,18 @@
 
 	src.loc << "You feel a pang of loss as [src] splits away from your biomass."
 	src << "You wiggle out of the depths of [src.loc]'s biomass and plop to the ground."
+
+	var/mob/living/M = src.loc
+
 	src.loc = get_turf(src)
 	src.verbs -= /mob/living/carbon/monkey/diona/proc/split
 	src.verbs += /mob/living/carbon/monkey/diona/proc/merge
+
+	if(istype(M))
+		for(var/atom/A in M.contents)
+			if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
+				return
+	M.status_flags &= ~PASSEMOTES
 
 /mob/living/carbon/monkey/diona/verb/fertilize_plant()
 
