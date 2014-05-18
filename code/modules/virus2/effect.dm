@@ -555,6 +555,8 @@ var/list/compatible_mobs = list(/mob/living/carbon/human, /mob/living/carbon/mon
 		..()
 
 
+//Lets not make people nearly immortal. ~Alex-gh
+/*
 /datum/disease2/effect/spaceadapt
 	name = "Space Adaptation Effect"
 	stage = 3
@@ -568,7 +570,7 @@ var/list/compatible_mobs = list(/mob/living/carbon/human, /mob/living/carbon/mon
 		var/datum/organ/external/chest/chest = H.get_organ("chest")
 		for(var/datum/organ/internal/I in chest.internal_organs)
 			I.damage = 0
-
+*/
 
 ////////////////////////STAGE 2/////////////////////////////////
 
