@@ -188,10 +188,10 @@ datum/tech/engineering
 	desc = "Development of new and improved engineering parts and."
 	id = "engineering"
 
-datum/tech/plasmatech
-	name = "Plasma Research"
-	desc = "Research into the mysterious substance colloqually known as 'plasma'."
-	id = "plasmatech"
+datum/tech/phorontech
+	name = "Phoron Research"
+	desc = "Research into the mysterious substance colloqually known as 'phoron'."
+	id = "phorontech"
 
 datum/tech/powerstorage
 	name = "Power Manipulation Technology"
@@ -262,7 +262,7 @@ datum/tech/robotics
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk2"
 	item_state = "card-id"
-	w_class = 1.0
+	w_class = 2.0
 	m_amt = 30
 	g_amt = 10
 	var/datum/tech/stored

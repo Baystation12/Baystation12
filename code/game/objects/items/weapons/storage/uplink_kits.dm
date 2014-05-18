@@ -69,12 +69,12 @@
 				return
 
 /obj/item/weapon/storage/box/syndie_kit
-	name = "Box"
+	name = "box"
 	desc = "A sleek, sturdy box"
 	icon_state = "box_of_doom"
 
 /obj/item/weapon/storage/box/syndie_kit/imp_freedom
-	name = "Freedom Implant (with injector)"
+	name = "boxed freedom implant (with injector)"
 
 /obj/item/weapon/storage/box/syndie_kit/imp_freedom/New()
 	..()
@@ -100,7 +100,7 @@
 	return
 
 /obj/item/weapon/storage/box/syndie_kit/imp_uplink
-	name = "Uplink Implant (with injector)"
+	name = "boxed uplink implant (with injector)"
 
 /obj/item/weapon/storage/box/syndie_kit/imp_uplink/New()
 	..()
@@ -110,10 +110,27 @@
 	return
 
 /obj/item/weapon/storage/box/syndie_kit/space
-	name = "Space Suit and Helmet"
+	name = "boxed space suit and helmet"
 
 /obj/item/weapon/storage/box/syndie_kit/space/New()
 	..()
 	new /obj/item/clothing/suit/space/syndicate(src)
 	new /obj/item/clothing/head/helmet/space/syndicate(src)
 	return
+/obj/item/weapon/storage/box/syndie_kit/chameleon
+	name = "Chameleon Kit"
+	desc = "Comes with all the clothes you need to impersonate most people.  Acting lessons sold seperately."
+	storage_slots = 10
+
+/obj/item/weapon/storage/box/syndie_kit/chameleon/New()
+	..()
+	new /obj/item/clothing/under/chameleon(src)
+	new /obj/item/clothing/head/chameleon(src)
+	new /obj/item/clothing/suit/chameleon(src)
+	new /obj/item/clothing/shoes/chameleon(src)
+	new /obj/item/weapon/storage/backpack/chameleon(src)
+	new /obj/item/clothing/gloves/chameleon(src)
+	new /obj/item/clothing/mask/chameleon(src)
+	new /obj/item/clothing/glasses/chameleon(src)
+	new /obj/item/weapon/gun/projectile/chameleon(src)
+	new /obj/item/ammo_magazine/chameleon(src)

@@ -148,6 +148,8 @@
 			msg += "<span class='warning'>[t_He] [t_is] wearing \icon[shoes] [shoes.gender==PLURAL?"some":"a"] blood-stained [shoes.name] on [t_his] feet!</span>\n"
 		else
 			msg += "[t_He] [t_is] wearing \icon[shoes] \a [shoes] on [t_his] feet.\n"
+	else if(feet_blood_DNA)
+		msg += "<span class='warning'>[t_He] [t_has] blood-stained feet!</span>\n"
 
 	//mask
 	if(wear_mask && !skipmask)
@@ -243,7 +245,7 @@
 	if(!key && brain_op_stage != 4 && stat != DEAD)
 		msg += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely</span>\n"
 	else if(!client && brain_op_stage != 4 && stat != DEAD)
-		msg += "[t_He] [t_has] a vacant, braindead stare...\n"
+		msg += "[t_He] [t_has] suddenly fallen asleep.\n"
 
 	var/list/wound_flavor_text = list()
 	var/list/is_destroyed = list()
@@ -256,8 +258,9 @@
 				continue
 			if(temp.status & ORGAN_ROBOT)
 				if(!(temp.brute_dam + temp.burn_dam))
-					wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name]!</span>\n"
-					continue
+					if(!species.flags & IS_SYNTHETIC)
+						wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name]!</span>\n"
+						continue
 				else
 					wound_flavor_text["[temp.display_name]"] = "<span class='warning'>[t_He] has a robot [temp.display_name], it has"
 				if(temp.brute_dam) switch(temp.brute_dam)
@@ -272,7 +275,8 @@
 						wound_flavor_text["[temp.display_name]"] += " some burns"
 					if(21 to INFINITY)
 						wound_flavor_text["[temp.display_name]"] += pick(" a lot of burns"," severe melting")
-				wound_flavor_text["[temp.display_name]"] += "!</span>\n"
+				if(wound_flavor_text["[temp.display_name]"])
+					wound_flavor_text["[temp.display_name]"] += "!</span>\n"
 			else if(temp.wounds.len > 0)
 				var/list/wound_descriptors = list()
 				for(var/datum/wound/W in temp.wounds)

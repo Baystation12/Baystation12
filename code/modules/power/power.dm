@@ -54,13 +54,15 @@
 
 // increment the power usage stats for an area
 
-/obj/machinery/proc/use_power(var/amount, var/chan = -1) // defaults to power_channel
+/obj/machinery/proc/use_power(var/amount, var/chan = -1, var/autocalled = 0) // defaults to power_channel
 	var/area/A = src.loc.loc		// make sure it's in an area
 	if(!A || !isarea(A) || !A.master)
 		return
 	if(chan == -1)
 		chan = power_channel
 	A.master.use_power(amount, chan)
+	if(!autocalled)
+		A.master.powerupdate = 2	// Decremented by 2 each GC tick, since it's not auto power change we're going to update power twice.
 
 /obj/machinery/proc/power_change()		// called whenever the power settings of the containing area change
 										// by default, check equipment channel & set flag
@@ -112,7 +114,17 @@
 // if unmarked==1, only return those with no powernet
 /proc/power_list(var/turf/T, var/source, var/d, var/unmarked=0)
 	. = list()
-	var/fdir = (!d)? 0 : turn(d, 180)			// the opposite direction to d (or 0 if d==0)
+	var/fdir = (!d)? 0 : turn(d, 180)
+			// the opposite direction to d (or 0 if d==0)
+///// Z-Level Stuff
+	var/Zdir
+	if(d==11)
+		Zdir = 11
+	else if (d==12)
+		Zdir = 12
+	else
+		Zdir = 999
+///// Z-Level Stuff
 //	world.log << "d=[d] fdir=[fdir]"
 	for(var/AM in T)
 		if(AM == source)	continue			//we don't want to return source
@@ -129,7 +141,9 @@
 			var/obj/structure/cable/C = AM
 
 			if(!unmarked || !C.powernet)
-				if(C.d1 == fdir || C.d2 == fdir)
+///// Z-Level Stuff
+				if(C.d1 == fdir || C.d2 == fdir || C.d1 == Zdir || C.d2 == Zdir)
+///// Z-Level Stuff
 					. += C
 				else if(C.d1 == turn(C.d2, 180))
 					. += C
@@ -140,11 +154,43 @@
 	. = list()	// this will be a list of all connected power objects
 	var/turf/T = loc
 
-	if(d1)	T = get_step(src, d1)
-	if(T)	. += power_list(T, src, d1, 1)
+///// Z-Level Stuff
+	if(d1)
+		if(d1 <= 10)
+			T = get_step(src, d1)
+			if(T)
+				. += power_list(T, src, d1, 1)
+		else if (d1 == 11 || d1 == 12)
+			var/turf/controllerlocation = locate(1, 1, z)
+			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+				if(controller.up && d1 == 12)
+					T = locate(src.x, src.y, controller.up_target)
+					if(T)
+						. += power_list(T, src, 11, 1)
+				if(controller.down && d1 == 11)
+					T = locate(src.x, src.y, controller.down_target)
+					if(T)
+						. += power_list(T, src, 12, 1)
+	else if(!d1)
+		if(T)
+			. += power_list(T, src, d1, 1)
 
-	T = get_step(src, d2)
-	if(T)	. += power_list(T, src, d2, 1)
+	if(d2 == 11 || d2 == 12)
+		var/turf/controllerlocation = locate(1, 1, z)
+		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+			if(controller.up && d2 == 12)
+				T = locate(src.x, src.y, controller.up_target)
+				if(T)
+					. += power_list(T, src, 11, 1)
+			if(controller.down && d2 == 11)
+				T = locate(src.x, src.y, controller.down_target)
+				if(T)
+					. += power_list(T, src, 12, 1)
+	else
+		T = get_step(src, d2)
+		if(T)
+			. += power_list(T, src, d2, 1)
+///// Z-Level Stuff
 
 	return .
 

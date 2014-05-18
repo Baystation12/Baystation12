@@ -29,7 +29,7 @@
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk0" //Gosh I hope syndies don't mistake them for the nuke disk.
 	item_state = "card-id"
-	w_class = 1.0
+	w_class = 2.0
 	var/datum/dna2/record/buf=null
 	var/read_only = 0 //Well,it's still a floppy disk
 
@@ -60,10 +60,10 @@
 		Initialize()
 		buf.types=DNA2_BUF_SE
 		var/list/new_SE=list(0x098,0x3E8,0x403,0x44C,0x39F,0x4B0,0x59D,0x514,0x5FC,0x578,0x5DC,0x640,0x6A4)
-		for(var/i=new_SE.len;i<=STRUCDNASIZE;i++)
+		for(var/i=new_SE.len;i<=DNA_SE_LENGTH;i++)
 			new_SE += rand(1,1024)
 		buf.dna.SE=new_SE
-		buf.dna.SetSEValue(MONKEYBLOCK,0xFFF)
+		buf.dna.SetSEValueRange(MONKEYBLOCK,0xDAC, 0xFFF)
 
 
 //Find a dead mob with a brain and client.
@@ -162,7 +162,7 @@
 	spawn(30)
 		src.eject_wait = 0
 
-	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src)
+	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src, R.dna.species)
 	occupant = H
 
 	if(!R.dna.real_name)	//to prevent null names
@@ -212,8 +212,6 @@
 	if(R.dna.species == "Human") //no more xenos losing ears/tentacles
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
 
-	H.set_species(R.dna.species)
-
 	//for(var/datum/language/L in languages)
 	//	H.add_language(L.name)
 	H.suiciding = 0
@@ -249,6 +247,12 @@
 			if (src.occupant.reagents.get_reagent_amount("inaprovaline") < 30)
 				src.occupant.reagents.add_reagent("inaprovaline", 60)
 
+			//So clones will remain asleep for long enough to get them into cryo (Bay RP edit)
+			if (src.occupant.reagents.get_reagent_amount("stoxin") < 10)
+				src.occupant.reagents.add_reagent("stoxin", 5)
+			if (src.occupant.reagents.get_reagent_amount("chloralhydrate") < 1)
+				src.occupant.reagents.add_reagent("chloralhydrate", 1)
+
 			//Also heal some oxyloss ourselves because inaprovaline is so bad at preventing it!!
 			src.occupant.adjustOxyLoss(-4)
 
@@ -267,7 +271,7 @@
 			src.locked = 0
 		if (!src.mess)
 			icon_state = "pod_0"
-		use_power(200)
+		//use_power(200)
 		return
 
 	return

@@ -21,6 +21,7 @@
 	var/antagHUD = 0
 	universal_speak = 1
 	var/atom/movable/following = null
+
 /mob/dead/observer/New(mob/body)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	see_invisible = SEE_INVISIBLE_OBSERVER
@@ -68,6 +69,15 @@
 	..()
 
 
+
+/mob/dead/observer/Topic(href, href_list)
+	if (href_list["track"])
+		var/mob/target = locate(href_list["track"]) in mob_list
+		if(target)
+			ManualFollow(target)
+
+
+
 /mob/dead/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/weapon/tome))
 		var/mob/dead/M = src
@@ -101,10 +111,11 @@ Works together with spawning an observer, noted above.
 		for(var/image/hud in client.images)
 			if(copytext(hud.icon_state,1,4) == "hud")
 				client.images.Remove(hud)
+
 	if(antagHUD)
 		var/list/target_list = list()
-		for(var/mob/living/target in oview(src))
-			if( target.mind&&(target.mind.special_role||issilicon(target)) )
+		for(var/mob/living/target in oview(src, 14))
+			if(target.mind&&(target.mind.special_role||issilicon(target)) )
 				target_list += target
 		if(target_list.len)
 			assess_targets(target_list, src)
@@ -112,91 +123,19 @@ Works together with spawning an observer, noted above.
 		process_medHUD(src)
 
 
-// Direct copied from medical HUD glasses proc, used to determine what health bar to put over the targets head.
-/mob/dead/proc/RoundHealth(var/health)
-	switch(health)
-		if(100 to INFINITY)
-			return "health100"
-		if(70 to 100)
-			return "health80"
-		if(50 to 70)
-			return "health60"
-		if(30 to 50)
-			return "health40"
-		if(18 to 30)
-			return "health25"
-		if(5 to 18)
-			return "health10"
-		if(1 to 5)
-			return "health1"
-		if(-99 to 0)
-			return "health0"
-		else
-			return "health-100"
-	return "0"
-
-
-// Pretty much a direct copy of Medical HUD stuff, except will show ill if they are ill instead of also checking for known illnesses.
-
 /mob/dead/proc/process_medHUD(var/mob/M)
 	var/client/C = M.client
-	var/image/holder
-	for(var/mob/living/carbon/human/patient in oview(M))
-		var/foundVirus = 0
-		if(patient.virus2.len)
-			foundVirus = 1
-		if(!C) return
-		holder = patient.hud_list[HEALTH_HUD]
-		if(patient.stat == 2)
-			holder.icon_state = "hudhealth-100"
-		else
-			holder.icon_state = "hud[RoundHealth(patient.health)]"
-		C.images += holder
-
-		holder = patient.hud_list[STATUS_HUD]
-		if(patient.stat == 2)
-			holder.icon_state = "huddead"
-		else if(patient.status_flags & XENO_HOST)
-			holder.icon_state = "hudxeno"
-		else if(foundVirus)
-			holder.icon_state = "hudill"
-		else if(patient.has_brain_worms())
-			var/mob/living/simple_animal/borer/B = patient.has_brain_worms()
-			if(B.controlling)
-				holder.icon_state = "hudbrainworm"
-			else
-				holder.icon_state = "hudhealthy"
-		else
-			holder.icon_state = "hudhealthy"
-
-		C.images += holder
-
+	for(var/mob/living/carbon/human/patient in oview(M, 14))
+		C.images += patient.hud_list[HEALTH_HUD]
+		C.images += patient.hud_list[STATUS_HUD_OOC]
 
 /mob/dead/proc/assess_targets(list/target_list, mob/dead/observer/U)
-	var/icon/tempHud = 'icons/mob/hud.dmi'
-	for(var/mob/living/target in target_list)
-		if(iscarbon(target))
-			switch(target.mind.special_role)
-				if("traitor","Syndicate")
-					U.client.images += image(tempHud,target,"hudsyndicate")
-				if("Revolutionary")
-					U.client.images += image(tempHud,target,"hudrevolutionary")
-				if("Head Revolutionary")
-					U.client.images += image(tempHud,target,"hudheadrevolutionary")
-				if("Cultist")
-					U.client.images += image(tempHud,target,"hudcultist")
-				if("Changeling")
-					U.client.images += image(tempHud,target,"hudchangeling")
-				if("Wizard","Fake Wizard")
-					U.client.images += image(tempHud,target,"hudwizard")
-				if("Hunter","Sentinel","Drone","Queen")
-					U.client.images += image(tempHud,target,"hudalien")
-				if("Death Commando")
-					U.client.images += image(tempHud,target,"huddeathsquad")
-				if("Ninja")
-					U.client.images += image(tempHud,target,"hudninja")
-				else//If we don't know what role they have but they have one.
-					U.client.images += image(tempHud,target,"hudunknown1")
+	var/client/C = U.client
+	for(var/mob/living/carbon/human/target in target_list)
+		C.images += target.hud_list[SPECIALROLE_HUD]
+
+
+/*
 		else//If the silicon mob has no law datum, no inherent laws, or a law zero, add them to the hud.
 			var/mob/living/silicon/silicon_target = target
 			if(!silicon_target.laws||(silicon_target.laws&&(silicon_target.laws.zeroth||!silicon_target.laws.inherent.len))||silicon_target.mind.special_role=="traitor")
@@ -204,6 +143,7 @@ Works together with spawning an observer, noted above.
 					U.client.images += image(tempHud,silicon_target,"hudmalborg")
 				else
 					U.client.images += image(tempHud,silicon_target,"hudmalai")
+*/
 	return 1
 
 /mob/proc/ghostize(var/can_reenter_corpse = 1)
@@ -368,27 +308,30 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Follow" // "Haunt"
 	set desc = "Follow and haunt a mob."
 
-	if(istype(usr, /mob/dead/observer))
-		var/list/mobs = getmobs()
-		var/input = input("Please, select a mob!", "Haunt", null, null) as null|anything in mobs
-		var/mob/target = mobs[input]
-		if(target && target != usr)
-			following = target
-			spawn(0)
-				var/turf/pos = get_turf(src)
-				while(src.loc == pos)
+	var/list/mobs = getmobs()
+	var/input = input("Please, select a mob!", "Haunt", null, null) as null|anything in mobs
+	var/mob/target = mobs[input]
+	ManualFollow(target)
 
-					var/turf/T = get_turf(target)
-					if(!T)
-						break
-					if(following != target)
-						break
-					if(!client)
-						break
-					src.loc = T
-					pos = src.loc
-					sleep(15)
-				following = null
+// This is the ghost's follow verb with an argument
+/mob/dead/observer/proc/ManualFollow(var/atom/movable/target)
+	if(target && target != src)
+		if(following && following == target)
+			return
+		following = target
+		src << "\blue Now following [target]"
+		spawn(0)
+			var/turf/pos = get_turf(src)
+			while(loc == pos && target && following == target && client)
+				var/turf/T = get_turf(target)
+				if(!T)
+					break
+				// To stop the ghost flickering.
+				if(loc != T)
+					loc = T
+				pos = loc
+				sleep(15)
+			following = null
 
 
 /mob/dead/observer/verb/jumptomob() //Moves the ghost instead of just changing the ghosts's eye -Nodrak
@@ -440,6 +383,58 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set hidden = 1
 	src << "\red You are dead! You have no mind to store memory!"
 
+/mob/dead/observer/verb/analyze_air()
+	set name = "Analyze Air"
+	set category = "Ghost"
+	
+	if(!istype(usr, /mob/dead/observer)) return
+	
+	// Shamelessly copied from the Gas Analyzers
+	if (!( istype(usr.loc, /turf) ))
+		return
+
+	var/datum/gas_mixture/environment = usr.loc.return_air()
+
+	var/pressure = environment.return_pressure()
+	var/total_moles = environment.total_moles()
+
+	src << "\blue <B>Results:</B>"
+	if(abs(pressure - ONE_ATMOSPHERE) < 10)
+		src << "\blue Pressure: [round(pressure,0.1)] kPa"
+	else
+		src << "\red Pressure: [round(pressure,0.1)] kPa"
+	if(total_moles)
+		var/o2_concentration = environment.oxygen/total_moles
+		var/n2_concentration = environment.nitrogen/total_moles
+		var/co2_concentration = environment.carbon_dioxide/total_moles
+		var/phoron_concentration = environment.phoron/total_moles
+
+		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
+		if(abs(n2_concentration - N2STANDARD) < 20)
+			src << "\blue Nitrogen: [round(n2_concentration*100)]% ([round(environment.nitrogen,0.01)] moles)"
+		else
+			src << "\red Nitrogen: [round(n2_concentration*100)]% ([round(environment.nitrogen,0.01)] moles)"
+
+		if(abs(o2_concentration - O2STANDARD) < 2)
+			src << "\blue Oxygen: [round(o2_concentration*100)]% ([round(environment.oxygen,0.01)] moles)"
+		else
+			src << "\red Oxygen: [round(o2_concentration*100)]% ([round(environment.oxygen,0.01)] moles)"
+
+		if(co2_concentration > 0.01)
+			src << "\red CO2: [round(co2_concentration*100)]% ([round(environment.carbon_dioxide,0.01)] moles)"
+		else
+			src << "\blue CO2: [round(co2_concentration*100)]% ([round(environment.carbon_dioxide,0.01)] moles)"
+
+		if(phoron_concentration > 0.01)
+			src << "\red Phoron: [round(phoron_concentration*100)]% ([round(environment.phoron,0.01)] moles)"
+
+		if(unknown_concentration > 0.01)
+			src << "\red Unknown: [round(unknown_concentration*100)]% ([round(unknown_concentration*total_moles,0.01)] moles)"
+
+		src << "\blue Temperature: [round(environment.temperature-T0C,0.1)]&deg;C"
+		src << "\blue Heat Capacity: [round(environment.heat_capacity(),0.1)]"
+
+
 /mob/dead/observer/verb/toggle_darkness()
 	set name = "Toggle Darkness"
 	set category = "Ghost"
@@ -455,6 +450,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(config.disable_player_mice)
 		src << "<span class='warning'>Spawning as a mouse is currently disabled.</span>"
+		return
+
+	var/mob/dead/observer/M = usr
+	if(config.antag_hud_restricted && M.has_enabled_antagHUD == 1)
+		src << "<span class='warning'>antagHUD restrictions prevent you from spawning in as a mouse.</span>"
 		return
 
 	var/timedifference = world.time - client.time_died_as_mouse
@@ -496,3 +496,79 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	dat += data_core.get_manifest()
 
 	src << browse(dat, "window=manifest;size=370x420;can_close=1")
+
+//Used for drawing on walls with blood puddles as a spooky ghost.
+/mob/dead/verb/bloody_doodle()
+
+	set category = "Ghost"
+	set name = "Write in blood"
+	set desc = "If the round is sufficiently spooky, write a short message in blood on the floor or a wall. Remember, no IC in OOC or OOC in IC."
+
+	if(!(config.cult_ghostwriter))
+		src << "\red That verb is not currently permitted."
+		return
+
+	if (!src.stat)
+		return
+
+	if (usr != src)
+		return 0 //something is terribly wrong
+
+	var/ghosts_can_write
+	if(ticker.mode.name == "cult")
+		var/datum/game_mode/cult/C = ticker.mode
+		if(C.cult.len > config.cult_ghostwriter_req_cultists)
+			ghosts_can_write = 1
+
+	if(!ghosts_can_write)
+		src << "\red The veil is not thin enough for you to do that."
+		return
+
+	var/list/choices = list()
+	for(var/obj/effect/decal/cleanable/blood/B in view(1,src))
+		if(B.amount > 0)
+			choices += B
+
+	if(!choices.len)
+		src << "<span class = 'warning'>There is no blood to use nearby.</span>"
+		return
+
+	var/obj/effect/decal/cleanable/blood/choice = input(src,"What blood would you like to use?") in null|choices
+
+	var/direction = input(src,"Which way?","Tile selection") as anything in list("Here","North","South","East","West")
+	var/turf/simulated/T = src.loc
+	if (direction != "Here")
+		T = get_step(T,text2dir(direction))
+
+	if (!istype(T))
+		src << "<span class='warning'>You cannot doodle there.</span>"
+		return
+
+	if(!choice || choice.amount == 0 || !(src.Adjacent(choice)))
+		return
+
+	var/doodle_color = (choice.basecolor) ? choice.basecolor : "#A10808"
+
+	var/num_doodles = 0
+	for (var/obj/effect/decal/cleanable/blood/writing/W in T)
+		num_doodles++
+	if (num_doodles > 4)
+		src << "<span class='warning'>There is no space to write on!</span>"
+		return
+
+	var/max_length = 50
+
+	var/message = stripped_input(src,"Write a message. It cannot be longer than [max_length] characters.","Blood writing", "")
+
+	if (message)
+
+		if (length(message) > max_length)
+			message += "-"
+			src << "<span class='warning'>You ran out of blood to write with!</span>"
+
+		var/obj/effect/decal/cleanable/blood/writing/W = new(T)
+		W.basecolor = doodle_color
+		W.update_icon()
+		W.message = message
+		W.add_hiddenprint(src)
+		W.visible_message("\red Invisible fingers crudely paint something in blood on [T]...")

@@ -8,6 +8,7 @@
 	icon_dead = "shade_dead"
 	maxHealth = 50
 	health = 50
+	universal_speak = 1
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
 	response_help  = "puts their hand through"

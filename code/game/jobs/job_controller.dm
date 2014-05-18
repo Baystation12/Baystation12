@@ -67,7 +67,7 @@ var/global/datum/controller/occupations/job_master
 
 	proc/FreeRole(var/rank)	//making additional slot on the fly
 		var/datum/job/job = GetJob(rank)
-		if(job && job.current_positions >= job.total_positions)
+		if(job && job.current_positions >= job.total_positions && job.total_positions != -1)
 			job.total_positions++
 			return 1
 		return 0
@@ -439,6 +439,10 @@ var/global/datum/controller/occupations/job_master
 				var/obj/item/clothing/glasses/G = H.glasses
 				G.prescription = 1
 //		H.update_icons()
+
+		H.hud_updateflag |= (1 << ID_HUD)
+		H.hud_updateflag |= (1 << IMPLOYAL_HUD)
+		H.hud_updateflag |= (1 << SPECIALROLE_HUD)
 		return 1
 
 

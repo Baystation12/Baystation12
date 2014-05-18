@@ -237,7 +237,7 @@
 		target = safepick(view(3,target))
 		if(!target)
 			return
-	if(get_dist(src, target)>1)
+	if(!target.Adjacent(src))
 		if(selected && selected.is_ranged())
 			selected.action(target)
 	else if(selected && selected.is_melee())
@@ -628,7 +628,7 @@
 /obj/mecha/proc/dynattackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.log_message("Attacked by [W]. Attacker - [user]")
 	if(prob(src.deflect_chance))
-		user << "\red The [W] bounces off [src.name] armor."
+		user << "\red \The [W] bounces off [src.name]."
 		src.log_append_to_last("Armor saved.")
 /*
 		for (var/mob/V in viewers(src))

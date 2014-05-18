@@ -176,8 +176,15 @@
 				return
 
 	if(mob.stat==2)	return
-
-	if(isAI(mob))	return AIMove(n,direct,mob)
+	
+// handle possible spirit movement
+	if(istype(mob,/mob/spirit))
+		var/mob/spirit/currentSpirit = mob
+		return currentSpirit.Spirit_Move(direct)
+	
+	// handle possible AI movement
+	if(isAI(mob))
+		return AIMove(n,direct,mob)
 
 	if(mob.monkeyizing)	return//This is sota the goto stop mobs from moving var
 
@@ -186,6 +193,12 @@
 		if(L.incorporeal_move)//Move though walls
 			Process_Incorpmove(direct)
 			return
+		if(mob.client)
+			if(mob.client.view != world.view)
+				if(locate(/obj/item/weapon/gun/energy/sniperrifle, mob.contents))		// If mob moves while zoomed in with sniper rifle, unzoom them.
+					var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in mob
+					if(s.zoom)
+						s.zoom()
 
 	if(Process_Grab())	return
 

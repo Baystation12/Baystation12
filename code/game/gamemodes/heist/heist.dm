@@ -2,11 +2,6 @@
 VOX HEIST ROUNDTYPE
 */
 
-#define MAX_VOX_KILLS 10 //Number of kills during the round before the Inviolate is broken.
-						 //Would be nice to use vox-specific kills but is currently not feasible.
-
-var/global/vox_kills = 0 //Used to check the Inviolate.
-
 /datum/game_mode/
 	var/list/datum/mind/raiders = list()  //Antags.
 
@@ -74,7 +69,8 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 			continue
 
 	//Generate objectives for the group.
-	raid_objectives = forge_vox_objectives()
+	if(!config.objectives_disabled)
+		raid_objectives = forge_vox_objectives()
 
 	var/index = 1
 
@@ -163,10 +159,7 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	objs += new /datum/objective/heist/inviolate_crew
 	objs += new /datum/objective/heist/inviolate_death
 
-	for(var/datum/objective/heist/O in raid_objectives)
-		O.choose_target()
-
-	return raid_objectives
+	return objs
 
 /datum/game_mode/heist/proc/greet_vox(var/datum/mind/raider)
 	raider.current << "\blue <B>You are a Vox Raider, fresh from the Shoal!</b>"
@@ -175,9 +168,12 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	raider.current << "\blue Use :V to voxtalk, :H to talk on your encrypted channel, and don't forget to turn on your nitrogen internals!"
 	raider.current << "\red IF YOU HAVE NOT PLAYED A VOX BEFORE, REVIEW THIS THREAD: http://baystation12.net/forums/viewtopic.php?f=6&t=8657."
 	var/obj_count = 1
-	for(var/datum/objective/objective in raider.objectives)
-		raider.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-		obj_count++
+	if(!config.objectives_disabled)
+		for(var/datum/objective/objective in raider.objectives)
+			raider.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
+			obj_count++
+	else
+		raider.current << "<font color=blue>Within the rules,</font> try to act as an opposing force to the crew or come up with other fun ideas. Further RP and try to make sure other players have </i>fun<i>! If you are confused or at a loss, always adminhelp, and before taking extreme actions, please try to also contact the administration! Think through your actions and make the roleplay immersive! <b>Please remember all rules aside from those without explicit exceptions apply to antagonists.</i></b>"
 
 
 /datum/game_mode/heist/declare_completion()
@@ -244,28 +240,6 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 			world << "<br><B>Objective #[count]</B>: [objective.explanation_text] <font color='red'>Fail.</font>"
 			feedback_add_details("traitor_objective","[objective.type]|FAIL")
 		count++
-
-	var/text = "<FONT size = 2><B>The vox raiders were:</B></FONT>"
-
-	for(var/datum/mind/vox in raiders)
-		text += "<br>[vox.key] was [vox.name] ("
-		var/obj/stack = raiders[vox]
-		if(get_area(stack) != locate(/area/shuttle/vox/station))
-			text += "left behind)"
-			continue
-		else if(vox.current)
-			if(vox.current.stat == DEAD)
-				text += "died"
-			else
-				text += "survived"
-			if(vox.current.real_name != vox.name)
-				text += " as [vox.current.real_name]"
-		else
-			text += "body destroyed"
-		text += ")"
-
-	world << text
-	return 1
 
 	..()
 

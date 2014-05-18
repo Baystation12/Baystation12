@@ -46,7 +46,7 @@
 			continue // could not leave T0 in that direction
 
 		var/turf/T1 = get_step(T0,d)
-		if(!T1 || T1.density || !T1.ClickCross(get_dir(T1,T0) & get_dir(T1,src), border_only = 0))
+		if(!T1 || T1.density || !T1.ClickCross(get_dir(T1,T0) | get_dir(T1,src), border_only = 0))
 			continue // couldn't enter or couldn't leave T1
 
 		if(!src.ClickCross(get_dir(src,T1), border_only = 1, target_atom = target))
@@ -54,6 +54,21 @@
 
 		return 1 // we don't care about our own density
 	return 0
+
+/*
+Quick adjacency (to turf):
+* If you are in the same turf, always true
+* If you are not adjacent, then false
+*/
+/turf/proc/AdjacentQuick(var/atom/neighbor, var/atom/target = null)
+	var/turf/T0 = get_turf(neighbor)
+	if(T0 == src)
+		return 1
+
+	if(get_dist(src,T0) > 1)
+		return 0
+
+	return 1
 
 /*
 	Adjacency (to anything else):
@@ -108,7 +123,12 @@
 
 		if( O.flags&ON_BORDER) // windows have throwpass but are on border, check them first
 			if( O.dir & target_dir || O.dir&(O.dir-1) ) // full tile windows are just diagonals mechanically
-				return 0
+				var/obj/structure/window/W = target_atom
+				if(istype(W))
+					if(!W.is_fulltile())	//exception for breaking full tile windows on top of single pane windows
+						return 0
+				else
+					return 0
 
 		else if( !border_only ) // dense, not on border, cannot pass over
 			return 0

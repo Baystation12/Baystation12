@@ -18,14 +18,9 @@ var/global/vox_tick = 1
 			equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/monocle(src), slot_glasses) // REPLACE WITH CODED VOX ALTERNATIVE.
 			equip_to_slot_or_del(new /obj/item/device/chameleon(src), slot_l_store)
 
-			var/obj/item/weapon/crossbow/W = new(src)
-			W.cell = new /obj/item/weapon/cell/crap(W)
-			W.cell.charge = 500
+			var/obj/item/weapon/spikethrower/W = new(src)
 			equip_to_slot_or_del(W, slot_r_hand)
 
-			var/obj/item/stack/rods/A = new(src)
-			A.amount = 20
-			equip_to_slot_or_del(A, slot_l_hand)
 
 		if(2) // Vox engineer!
 			equip_to_slot_or_del(new /obj/item/clothing/suit/space/vox/pressure(src), slot_wear_suit)
@@ -68,19 +63,6 @@ var/global/vox_tick = 1
 	W.handle_item_insertion(C)
 	spawn_money(rand(50,150)*10,W)
 	equip_to_slot_or_del(W, slot_wear_id)
-
-	var/obj/item/weapon/implant/cortical/I = new(src)
-	I.imp_in = src
-	I.implanted = 1
-	var/datum/organ/external/affected = src.get_organ("head")
-	affected.implants += I
-	I.part = affected
-
-	if(ticker.mode && ( istype( ticker.mode,/datum/game_mode/heist ) ) )
-		var/datum/game_mode/heist/M = ticker.mode
-		M.cortical_stacks += I
-		M.raiders[mind] = I
-
 	vox_tick++
 	if (vox_tick > 4) vox_tick = 1
 

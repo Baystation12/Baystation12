@@ -104,7 +104,7 @@
 		M.Weaken(5)
 		M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been attacked with [src.name] by [user.name] ([user.ckey])</font>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>Used the [src.name] to attack [M.name] ([M.ckey])</font>")
-		log_attack("[user.name] ([user.ckey]) attacked [M.name] ([M.ckey]) with [src.name] (INTENT: [uppertext(user.a_intent)])")
+		msg_admin_attack("[key_name(user)] attacked [key_name(user)] with [src.name] (INTENT: [uppertext(user.a_intent)])")
 		src.add_fingerprint(user)
 
 		for(var/mob/O in viewers(M))
@@ -113,7 +113,7 @@
 //Telescopic baton
 /obj/item/weapon/melee/telebaton
 	name = "telescopic baton"
-	desc = "A compact yet robust personal defense weapon. Can be concealed when folded."
+	desc = "A compact yet rebalanced personal defense weapon. Can be concealed when folded."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "telebaton_0"
 	item_state = "telebaton_0"
@@ -153,7 +153,7 @@
 	playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 	add_fingerprint(user)
 
-	if(blood_overlay && (blood_DNA.len >= 1))							//updates blood overlay, if any
+	if(blood_overlay && blood_DNA && (blood_DNA.len >= 1)) //updates blood overlay, if any
 		overlays.Cut()//this might delete other item overlays as well but eeeeeeeh
 
 		var/icon/I = new /icon(src.icon, src.icon_state)
@@ -176,12 +176,9 @@
 			else
 				user.take_organ_damage(2*force)
 			return
-
-		if(!..()) return
-		playsound(src.loc, "swing_hit", 50, 1, -1)
-		//target.Stun(4)	//naaah
-		target.Weaken(4)
-		return
+		if(..())
+			playsound(src.loc, "swing_hit", 50, 1, -1)
+			return
 	else
 		return ..()
 
@@ -216,8 +213,6 @@
 /*
  * Energy Axe
  */
-/obj/item/weapon/melee/energy/axe/attack(target as mob, mob/user as mob)
-	..()
 
 /obj/item/weapon/melee/energy/axe/attack_self(mob/user as mob)
 	src.active = !( src.active )

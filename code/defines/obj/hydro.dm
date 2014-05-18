@@ -18,7 +18,7 @@
 	icon = 'icons/obj/seeds.dmi'
 	icon_state = "seed" // unknown plant seed - these shouldn't exist in-game
 	flags = FPRINT | TABLEPASS
-	w_class = 1.0 // Makes them pocketable
+	w_class = 2.0 // Makes them pocketable
 	var/mypath = "/obj/item/seeds"
 	var/plantname = "Plants"
 	var/productname = ""
@@ -1167,7 +1167,7 @@
 
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || (istype(W, /obj/item/weapon/twohanded/fireaxe) && W:wielded) || istype(W, /obj/item/weapon/melee/energy))
-			user.show_message("<span class='notice'>You make planks out of the [src]!</span>", 1)
+			user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
 			for(var/i=0,i<2,i++)
 				var/obj/item/stack/sheet/wood/NG = new (user.loc)
 				for (var/obj/item/stack/sheet/wood/G in user.loc)
@@ -1205,7 +1205,7 @@
 	force = 0
 	flags = TABLEPASS
 	throwforce = 1
-	w_class = 1.0
+	w_class = 2.0
 	throw_speed = 1
 	throw_range = 3
 	plant_type = 1
@@ -1229,7 +1229,7 @@
 	force = 15
 	flags = TABLEPASS
 	throwforce = 1
-	w_class = 1.0
+	w_class = 2.0
 	throw_speed = 1
 	throw_range = 3
 	plant_type = 1
@@ -1251,7 +1251,7 @@
 	force = 30
 	flags = TABLEPASS
 	throwforce = 1
-	w_class = 1.0
+	w_class = 2.0
 	throw_speed = 1
 	throw_range = 3
 	plant_type = 1
@@ -1417,7 +1417,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle16"
 	flags = FPRINT |  TABLEPASS
-	w_class = 1.0
+	w_class = 2.0
 	var/mutmod = 0
 	var/yieldmod = 0
 	New()

@@ -8,11 +8,12 @@
 	icon_state = "dropper0"
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(1,2,3,4,5)
+	w_class = 1
 	volume = 5
 	var/filled = 0
 
 	afterattack(obj/target, mob/user , flag)
-		if(!target.reagents) return
+		if(!target.reagents || !flag) return
 
 		if(filled)
 

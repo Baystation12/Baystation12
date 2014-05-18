@@ -36,7 +36,7 @@
 			user.set_machine(src)
 
 		var/list/L = list()
-		for (var/obj/machinery/camera/C in cameranet.cameras)
+		for (var/obj/machinery/camera/C in cameranet.viewpoints)
 			L.Add(C)
 
 		camera_sort(L)
@@ -180,7 +180,7 @@
 
 /obj/machinery/computer/security/telescreen/entertainment
 	name = "entertainment monitor"
-	desc = "Damn, they better have /tg/thechannel on these things."
+	desc = "Damn, why do they never have anything interesting on these things?"
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "entertainment"
 

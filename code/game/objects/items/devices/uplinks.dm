@@ -7,8 +7,10 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 */
 
 /obj/item/device/uplink
+
 	var/welcome 					// Welcoming menu message
 	var/items						// List of items
+	var/valid_items = list()
 	var/item_data					// raw item text
 	var/list/ItemList				// Parsed list of items
 	var/uses 						// Numbers of crystals
@@ -25,6 +27,12 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	ItemList = text2list(src.items, ";")	// Parsing the items text string
 	uses = ticker.mode.uplink_uses
 	nanoui_items = generate_nanoui_items()
+	for(var/D in ItemList)
+		var/list/O = text2list(D, ":")
+		if(O.len>0)
+			valid_items += O[1]		
+
+
 
 /*
 	Built the Items List for use with NanoUI
@@ -33,7 +41,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 /obj/item/device/uplink/proc/generate_nanoui_items()
 	var/items_nano[0]
 	for(var/D in ItemList)
-		var/list/O = stringsplit(D, ":")
+		var/list/O = text2list(D, ":")
 		if(O.len != 3)  //If it is not an actual item, make a break in the menu.
 			if(O.len == 1)  //If there is one item, it's probably a title
 				items_nano[++items_nano.len] = list("Category" = "[O[1]]", "items" = list())
@@ -51,12 +59,8 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		else
 			var/itemname = O[3]
 			items_nano[items_nano.len]["items"] += list(list("Name" = itemname, "Cost" = cost, "obj_path" = path_text))
-			
+
 	return items_nano
-
-
-
-
 
 //Let's build a menu!
 /obj/item/device/uplink/proc/generate_menu()
@@ -75,7 +79,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	var/category_items = 1 //To prevent stupid :P
 
 	for(var/D in ItemList)
-		var/list/O = stringsplit(D, ":")
+		var/list/O = text2list(D, ":")
 		if(O.len != 3)	//If it is not an actual item, make a break in the menu.
 			if(O.len == 1)	//If there is one item, it's probably a title
 				dat += "<b>[O[1]]</b><br>"
@@ -87,7 +91,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 			continue
 
 		path_text = O[1]
-		cost = text2num(O[2])
+		cost = Clamp(text2num(O[2]),1,20) //Another halfassed fix for href exploit ~Z
 
 		if(cost>uses)
 			continue
@@ -265,7 +269,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 /obj/item/device/uplink/Topic(href, href_list)
 	if (href_list["buy_item"])
-		
+
 		if(href_list["buy_item"] == "random")
 			var/boughtItem = chooseRandomItem()
 			if(boughtItem)
@@ -336,25 +340,24 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 /*
 	NANO UI FOR UPLINK WOOP WOOP
 */
-/obj/item/device/uplink/hidden/ui_interact(mob/user, ui_key = "main")
+/obj/item/device/uplink/hidden/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/title = "Syndicate Uplink"
 	var/data[0]
-	
+
 	data["crystals"] = uses
 	data["nano_items"] = nanoui_items
 	data["welcome"] = welcome
 
-	var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, ui_key)
+	// update the ui if it exists, returns null if no ui is passed/found
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
-		// the ui does not exist, so we'll create a new one
+		// the ui does not exist, so we'll create a new() one
+        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600)
-		// When the UI is first opened this is the data it will use
+		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)
+		// open the new ui window
 		ui.open()
-	else
-		// The UI is already open so push the new data to it
-		ui.push_data(data)
-		return
 
 // Interaction code. Gathers a list of items purchasable from the paren't uplink and displays it. It also adds a lock button.
 /obj/item/device/uplink/hidden/interact(mob/user)
@@ -374,11 +377,16 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 		usr.set_machine(src)
 		if(href_list["lock"])
 			toggle()
-			ui.close()		
+			ui.close()
 			return 1
 
 		if(..(href, href_list) == 1)
+
+			if(!(href_list["buy_item"] in valid_items))
+				return
+
 			var/path_obj = text2path(href_list["buy_item"])
+
 			var/obj/I = new path_obj(get_turf(usr))
 			if(ishuman(usr))
 				var/mob/living/carbon/human/A = usr
@@ -427,6 +435,3 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	..()
 	hidden_uplink = new(src)
 	hidden_uplink.uses = 10
-
-
-

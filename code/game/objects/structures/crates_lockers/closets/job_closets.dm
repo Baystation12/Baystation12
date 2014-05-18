@@ -65,6 +65,7 @@
 	icon_closed = "blue"
 
 /obj/structure/closet/lawcloset/New()
+	..()
 	new /obj/item/clothing/under/lawyer/female(src)
 	new /obj/item/clothing/under/lawyer/black(src)
 	new /obj/item/clothing/under/lawyer/red(src)

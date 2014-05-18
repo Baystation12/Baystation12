@@ -218,7 +218,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	del(A)
 	return
 
-/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel)
+/obj/item/device/radio/talk_into(mob/living/M as mob, message, channel, var/verb = "says", var/datum/language/speaking = null)
 	if(!on) return // the device has to be on
 	//  Fix for permacell radios, but kinda eh about actually fixing them.
 	if(!M || !message) return
@@ -244,12 +244,19 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 
 	   //#### Grab the connection datum ####//
 		var/datum/radio_frequency/connection = null
-		if(channel && channels && channels.len > 0)
-			if (channel == "department")
-				//world << "DEBUG: channel=\"[channel]\" switching to \"[channels[1]]\""
-				channel = channels[1]
-			connection = secure_radio_connections[channel]
-		else
+		if(channel == "headset")
+			channel = null
+		if(channel) // If a channel is specified, look for it.
+			if(channels && channels.len > 0)
+				if (channel == "department")
+					//world << "DEBUG: channel=\"[channel]\" switching to \"[channels[1]]\""
+					channel = channels[1]
+				connection = secure_radio_connections[channel]
+				if (!channels[channel]) // if the channel is turned off, don't broadcast
+					return
+			else
+				// If we were to send to a channel we don't have, drop it.
+		else // If a channel isn't specified, send to common.
 			connection = radio_connection
 			channel = null
 		if (!istype(connection))
@@ -341,7 +348,9 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 				"type" = 0, // determines what type of radio input it is: normal broadcast
 				"server" = null, // the last server to log this signal
 				"reject" = 0,	// if nonzero, the signal will not be accepted by any broadcasting machinery
-				"level" = position.z // The source's z level
+				"level" = position.z, // The source's z level
+				"language" = speaking,
+				"verb" = verb
 			)
 			signal.frequency = connection.frequency // Quick frequency set
 
@@ -394,7 +403,9 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 			"type" = 0,
 			"server" = null,
 			"reject" = 0,
-			"level" = position.z
+			"level" = position.z,
+			"language" = speaking,
+			"verb" = verb
 		)
 		signal.frequency = connection.frequency // Quick frequency set
 
@@ -416,7 +427,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 
 		Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 						  src, message, displayname, jobname, real_name, M.voice_name,
-		                  filter_type, signal.data["compression"], list(position.z), connection.frequency)
+		                  filter_type, signal.data["compression"], list(position.z), connection.frequency,verb,speaking)
 
 
 
@@ -589,11 +600,13 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 					else
 						R.show_message(rendered, 2)
 
-/obj/item/device/radio/hear_talk(mob/M as mob, msg)
+/obj/item/device/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)
 
 	if (broadcasting)
 		if(get_dist(src, M) <= canhear_range)
-			talk_into(M, msg)
+			talk_into(M, msg,null,verb,speaking)
+
+
 /*
 /obj/item/device/radio/proc/accept_rad(obj/item/device/radio/R as obj, message)
 
@@ -735,18 +748,25 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	src.channels = list()
 	src.syndie = 0
 
+	var/mob/living/silicon/robot/D = src.loc
+	if(D.module)
+		for(var/ch_name in D.module.channels)
+			if(ch_name in src.channels)
+				continue
+			src.channels += ch_name
+			src.channels[ch_name] += D.module.channels[ch_name]
 	if(keyslot)
 		for(var/ch_name in keyslot.channels)
 			if(ch_name in src.channels)
 				continue
 			src.channels += ch_name
-			src.channels[ch_name] = keyslot.channels[ch_name]
-
+			src.channels[ch_name] += keyslot.channels[ch_name]
+			
 		if(keyslot.syndie)
 			src.syndie = 1
+	
 
-
-	for (var/ch_name in channels)
+	for (var/ch_name in src.channels)
 		if(!radio_controller)
 			sleep(30) // Waiting for the radio_controller to be created.
 		if(!radio_controller)
@@ -761,12 +781,16 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 	if(usr.stat || !on)
 		return
 	if (href_list["mode"])
-		subspace_transmission = !subspace_transmission
-		if(!subspace_transmission)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
+		if(subspace_transmission != 1)
+			subspace_transmission = 1
+			usr << "Subspace Transmission is disabled"
+		else
+			subspace_transmission = 0
+			usr << "Subspace Transmission is enabled"
+		if(subspace_transmission == 1)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
 			channels = list()
 		else
 			recalculateChannels()
-		usr << "Subspace Transmission is [(subspace_transmission) ? "enabled" : "disabled"]"
 	..()
 
 /obj/item/device/radio/borg/interact(mob/user as mob)
@@ -785,7 +809,7 @@ var/GLOBAL_RADIO_TYPE = 1 // radio type to use
 				<A href='byond://?src=\ref[src];mode=1'>Toggle Broadcast Mode</A><BR>
 				"}
 
-	if(subspace_transmission)//Don't even bother if subspace isn't turned on
+	if(!subspace_transmission)//Don't even bother if subspace isn't turned on
 		for (var/ch_name in channels)
 			dat+=text_sec_channel(ch_name, channels[ch_name])
 	dat+={"[text_wires()]</TT></body></html>"}

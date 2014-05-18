@@ -276,6 +276,36 @@
 	new /obj/item/weapon/rcd_ammo(src)
 	new /obj/item/weapon/rcd(src)
 
+/obj/structure/closet/crate/solar
+	name = "Solar Pack crate"
+
+/obj/structure/closet/crate/solar/New()
+	..()
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/solar_assembly(src)
+	new /obj/item/weapon/circuitboard/solar_control(src)
+	new /obj/item/weapon/tracker_electronics(src)
+	new /obj/item/weapon/paper/solar(src)
+
 /obj/structure/closet/crate/freezer
 	desc = "A freezer."
 	name = "Freezer"
@@ -292,7 +322,7 @@
 		newgas.oxygen = gas.oxygen
 		newgas.carbon_dioxide = gas.carbon_dioxide
 		newgas.nitrogen = gas.nitrogen
-		newgas.toxins = gas.toxins
+		newgas.phoron = gas.phoron
 		newgas.volume = gas.volume
 		newgas.temperature = gas.temperature
 		if(newgas.temperature <= target_temp)	return
@@ -303,6 +333,15 @@
 			newgas.temperature = target_temp
 		return newgas
 
+/obj/structure/closet/crate/freezer/rations //Fpr use in the escape shuttle
+	desc = "A crate of emergency rations."
+	name = "Emergency Rations"
+
+
+/obj/structure/closet/crate/freezer/rations/New()
+	..()
+	new /obj/item/weapon/storage/box/donkpockets(src)
+	new /obj/item/weapon/storage/box/donkpockets(src)
 
 /obj/structure/closet/crate/bin
 	desc = "A large bin."
@@ -336,12 +375,12 @@
 	icon_opened = "weaponcrateopen"
 	icon_closed = "weaponcrate"
 
-/obj/structure/closet/crate/secure/plasma
-	desc = "A secure plasma crate."
-	name = "Plasma crate"
-	icon_state = "plasmacrate"
-	icon_opened = "plasmacrateopen"
-	icon_closed = "plasmacrate"
+/obj/structure/closet/crate/secure/phoron
+	desc = "A secure phoron crate."
+	name = "Phoron crate"
+	icon_state = "phoroncrate"
+	icon_opened = "phoroncrateopen"
+	icon_closed = "phoroncrate"
 
 /obj/structure/closet/crate/secure/gear
 	desc = "A secure gear crate."

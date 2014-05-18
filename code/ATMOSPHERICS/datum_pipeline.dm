@@ -39,7 +39,7 @@ datum/pipeline
 
 			member.air_temporary.oxygen = air.oxygen*member.volume/air.volume
 			member.air_temporary.nitrogen = air.nitrogen*member.volume/air.volume
-			member.air_temporary.toxins = air.toxins*member.volume/air.volume
+			member.air_temporary.phoron = air.phoron*member.volume/air.volume
 			member.air_temporary.carbon_dioxide = air.carbon_dioxide*member.volume/air.volume
 
 			member.air_temporary.temperature = air.temperature
@@ -149,10 +149,6 @@ datum/pipeline
 			air.merge(air_sample)
 			//turf_air already modified by equalize_gases()
 
-		if(istype(target) && !target.processing)
-			if(target.air)
-				if(target.air.check_tile_graphic())
-					target.update_visuals(target.air)
 		if(network)
 			network.update = 1
 

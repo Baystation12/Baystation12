@@ -25,7 +25,7 @@
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 
 	if(use_me)
-		usr.emote("me",1,message)
+		usr.emote("me",usr.emote_type,message)
 	else
 		usr.emote(message)
 
@@ -36,6 +36,11 @@
 	if(say_disabled)	//This is here to try to identify lag problems
 		usr << "\red Speech is currently admin-disabled."
 		return
+
+	if(!src.client.holder)
+		if(!dsay_allowed)
+			src << "\red Deadchat is globally muted"
+			return
 
 	if(client && !(client.prefs.toggles & CHAT_DEAD))
 		usr << "\red You have deadchat muted."
@@ -98,30 +103,28 @@
 		//tcomms code is still runtiming somewhere here
 	var/ending = copytext(text, length(text))
 
-	var/speechverb = "<span class='say_quote'>"
+	var/speech_verb = "says"
+	var/speech_style = "body"
 
 	if (speaking)
-		speechverb = "[speaking.speech_verb]</span>, \"<span class='[speaking.colour]'>"
+		speech_verb = speaking.speech_verb
+		speech_style = speaking.colour
 	else if(speak_emote && speak_emote.len)
-		speechverb = "[pick(speak_emote)], \""
+		speech_verb = pick(speak_emote)
 	else if (src.stuttering)
-		speechverb = "stammers, \""
+		speech_verb = "stammers"
 	else if (src.slurring)
-		speechverb = "slurrs, \""
+		speech_verb = "slurrs"
 	else if (ending == "?")
-		speechverb = "asks, \""
+		speech_verb = "asks"
 	else if (ending == "!")
-		speechverb = "exclaims, \""
+		speech_verb = "exclaims"
 	else if(isliving(src))
 		var/mob/living/L = src
 		if (L.getBrainLoss() >= 60)
-			speechverb = "gibbers, \""
-		else
-			speechverb = "says, \""
-	else
-		speechverb = "says, \""
+			speech_verb = "gibbers"
 
-	return "[speechverb][text]</span>\""
+	return "<span class='say_quote'>[speech_verb],</span> \"<span class='[speech_style]'>[text]</span>\""
 
 /mob/proc/emote(var/act, var/type, var/message)
 	if(act == "me")
@@ -142,3 +145,26 @@
 	else if (ending == "!")
 		return "2"
 	return "0"
+
+//parses the message mode code (e.g. :h, ;) from text, such as that supplied to say.
+//returns the message mode string or null for no message mode.
+/mob/proc/parse_message_mode(var/message)
+	if(length(message) >= 1 && copytext(message,1,2) == ";")
+		return "headset"
+
+	if(length(message) >= 2)
+		var/channel_prefix = copytext(message, 1 ,3)
+		return department_radio_keys[channel_prefix]
+	
+	return null
+
+//parses the language code (e.g. :j) from text, such as that supplied to say.
+//returns the language object only if the code corresponds to a language that src knows, otherwise null.
+/mob/proc/parse_language(var/message)
+	if(length(message) >= 2)
+		var/language_prefix = lowertext(copytext(message, 1 ,3))
+		for(var/datum/language/L in src.languages)
+			if(language_prefix == ":[L.key]")
+				return L
+	return null
+

@@ -1,4 +1,5 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
+var/global/list/all_objectives = list()
 
 datum/objective
 	var/datum/mind/owner = null			//Who owns the objective.
@@ -8,8 +9,13 @@ datum/objective
 	var/completed = 0					//currently only used for custom objectives.
 
 	New(var/text)
+		all_objectives |= src
 		if(text)
 			explanation_text = text
+
+	Del()
+		all_objectives -= src
+		..()
 
 	proc/check_completion()
 		return completed
@@ -352,7 +358,7 @@ datum/objective/escape
 		if(!location)
 			return 0
 
-		if(istype(location, /turf/simulated/shuttle/floor4)) // Fails tratiors if they are in the shuttle brig -- Polymorph
+		if(istype(location, /turf/simulated/shuttle/floor4)) // Fails traitors if they are in the shuttle brig -- Polymorph
 			if(istype(owner.current, /mob/living/carbon))
 				var/mob/living/carbon/C = owner.current
 				if (!C.handcuffed)
@@ -483,7 +489,7 @@ datum/objective/steal
 		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
 		"the station blueprints" = /obj/item/blueprints,
 		"a nasa voidsuit" = /obj/item/clothing/suit/space/nasavoid,
-		"28 moles of plasma (full tank)" = /obj/item/weapon/tank,
+		"28 moles of phoron (full tank)" = /obj/item/weapon/tank,
 		"a sample of slime extract" = /obj/item/slime_extract,
 		"a piece of corgi meat" = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
 		"a research director's jumpsuit" = /obj/item/clothing/under/rank/research_director,
@@ -545,13 +551,13 @@ datum/objective/steal
 		if(!isliving(owner.current))	return 0
 		var/list/all_items = owner.current.get_contents()
 		switch (target_name)
-			if("28 moles of plasma (full tank)","10 diamonds","50 gold bars","25 refined uranium bars")
+			if("28 moles of phoron (full tank)","10 diamonds","50 gold bars","25 refined uranium bars")
 				var/target_amount = text2num(target_name)//Non-numbers are ignored.
 				var/found_amount = 0.0//Always starts as zero.
 
-				for(var/obj/item/I in all_items) //Check for plasma tanks
+				for(var/obj/item/I in all_items) //Check for phoron tanks
 					if(istype(I, steal_target))
-						found_amount += (target_name=="28 moles of plasma (full tank)" ? (I:air_contents:toxins) : (I:amount))
+						found_amount += (target_name=="28 moles of phoron (full tank)" ? (I:air_contents:phoron) : (I:amount))
 				return found_amount>=target_amount
 
 			if("50 coins (in bag)")
@@ -861,7 +867,7 @@ datum/objective/heist/salvage
 				target = "plasteel"
 				target_amount = 100
 			if(4)
-				target = "plasma"
+				target = "phoron"
 				target_amount = 100
 			if(5)
 				target = "silver"
@@ -916,8 +922,12 @@ datum/objective/heist/inviolate_crew
 		if(H.is_raider_crew_safe()) return 1
 		return 0
 
+#define MAX_VOX_KILLS 10 //Number of kills during the round before the Inviolate is broken.
+						 //Would be nice to use vox-specific kills but is currently not feasible.
+var/global/vox_kills = 0 //Used to check the Inviolate.
+
 datum/objective/heist/inviolate_death
 	explanation_text = "Follow the Inviolate. Minimise death and loss of resources."
 	check_completion()
-		if(vox_kills>5) return 0
+		if(vox_kills > MAX_VOX_KILLS) return 0
 		return 1

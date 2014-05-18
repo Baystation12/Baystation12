@@ -4,7 +4,7 @@ Mineral Sheets
 		- Sandstone
 		- Diamond
 		- Uranium
-		- Plasma
+		- Phoron
 		- Gold
 		- Silver
 		- Clown
@@ -18,7 +18,7 @@ Mineral Sheets
  * Sandstone
  */
 /obj/item/stack/sheet/mineral/sandstone
-	name = "sandstone bricks"
+	name = "sandstone brick"
 	desc = "This appears to be a combination of both sand and stone."
 	singular_name = "sandstone brick"
 	icon_state = "sheet-sandstone"
@@ -90,26 +90,26 @@ var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	..()
 
 /*
- * Plasma
+ * Phoron
  */
-/obj/item/stack/sheet/mineral/plasma
-	name = "solid plasma"
-	icon_state = "sheet-plasma"
+/obj/item/stack/sheet/mineral/phoron
+	name = "solid phoron"
+	icon_state = "sheet-phoron"
 	force = 5.0
 	throwforce = 5
 	w_class = 3.0
 	throw_speed = 3
 	throw_range = 3
-	origin_tech = "plasmatech=2;materials=2"
+	origin_tech = "phorontech=2;materials=2"
 	perunit = 2000
-	sheettype = "plasma"
+	sheettype = "phoron"
 
-var/global/list/datum/stack_recipe/plasma_recipes = list ( \
-	new/datum/stack_recipe("plasma door", /obj/structure/mineral_door/transparent/plasma, 10, one_per_turf = 1, on_floor = 1), \
+var/global/list/datum/stack_recipe/phoron_recipes = list ( \
+	new/datum/stack_recipe("phoron door", /obj/structure/mineral_door/transparent/phoron, 10, one_per_turf = 1, on_floor = 1), \
 	)
 
-/obj/item/stack/sheet/mineral/plasma/New(var/loc, var/amount=null)
-	recipes = plasma_recipes
+/obj/item/stack/sheet/mineral/phoron/New(var/loc, var/amount=null)
+	recipes = phoron_recipes
 	pixel_x = rand(0,4)-4
 	pixel_y = rand(0,4)-4
 	..()
@@ -123,6 +123,16 @@ var/global/list/datum/stack_recipe/plasma_recipes = list ( \
 	throw_speed = 3
 	throw_range = 3
 	origin_tech = "materials=3"
+	perunit = 2000
+
+/obj/item/stack/sheet/mineral/plastic/cyborg
+	name = "plastic sheets"
+	icon_state = "sheet-plastic"
+	force = 5.0
+	throwforce = 5
+	w_class = 3.0
+	throw_speed = 3
+	throw_range = 3
 	perunit = 2000
 
 var/global/list/datum/stack_recipe/plastic_recipes = list ( \

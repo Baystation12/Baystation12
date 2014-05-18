@@ -194,3 +194,65 @@ obj/item/weapon/gun/energy/staff/focus
 			user << "\red The [src.name] will now strike only a single person."
 			projectile_type = "/obj/item/projectile/forcebolt"
 	*/
+
+/obj/item/weapon/gun/energy/toxgun
+	name = "phoron pistol"
+	desc = "A specialized firearm designed to fire lethal bolts of phoron."
+	icon_state = "toxgun"
+	fire_sound = 'sound/effects/stealthoff.ogg'
+	w_class = 3.0
+	origin_tech = "combat=5;phorontech=4"
+	projectile_type = "/obj/item/projectile/energy/phoron"
+
+/obj/item/weapon/gun/energy/sniperrifle
+	name = "L.W.A.P. Sniper Rifle"
+	desc = "A rifle constructed of lightweight materials, fitted with a SMART aiming-system scope."
+	icon = 'icons/obj/gun.dmi'
+	icon_state = "sniper"
+	fire_sound = 'sound/weapons/marauder.ogg'
+	origin_tech = "combat=6;materials=5;powerstorage=4"
+	projectile_type = "/obj/item/projectile/beam/sniper"
+	slot_flags = SLOT_BACK
+	charge_cost = 250
+	fire_delay = 35
+	w_class = 4.0
+	var/zoom = 0
+
+/obj/item/weapon/gun/energy/sniperrifle/dropped(mob/user)
+	user.client.view = world.view
+
+
+
+/*
+This is called from 
+modules/mob/mob_movement.dm if you move you will be zoomed out
+modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
+*/
+
+/obj/item/weapon/gun/energy/sniperrifle/verb/zoom()
+	set category = "Object"
+	set name = "Use Sniper Scope"
+	set popup_menu = 0
+	if(usr.stat || !(istype(usr,/mob/living/carbon/human)))
+		usr << "You are unable to focus down the scope of the rifle."
+		return
+	if(!zoom && global_hud.darkMask[1] in usr.client.screen)
+		usr << "Your welding equipment gets in the way of you looking down the scope"
+		return
+	if(!zoom && usr.get_active_hand() != src)
+		usr << "You are too distracted to look down the scope, perhaps if it was in your active hand this might work better"
+		return
+
+	if(usr.client.view == world.view)
+		if(!usr.hud_used.hud_shown)
+			usr.button_pressed_F12(1)	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
+		usr.button_pressed_F12(1)
+		usr.client.view = 12
+		zoom = 1
+	else
+		usr.client.view = world.view
+		if(!usr.hud_used.hud_shown)
+			usr.button_pressed_F12(1)
+		zoom = 0
+	usr << "<font color='[zoom?"blue":"red"]'>Zoom mode [zoom?"en":"dis"]abled.</font>"
+	return

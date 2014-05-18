@@ -30,12 +30,12 @@
 		if(M.lying)        return
 		dirt++
 		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
-		if (dirt >= 30)
+		if (dirt >= 50)
 			if (!dirtoverlay)
 				dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
 				dirtoverlay.alpha = 15
-			else if (dirt > 30)
-				dirtoverlay.alpha = min(dirtoverlay.alpha+20, 255)
+			else if (dirt > 50)
+				dirtoverlay.alpha = min(dirtoverlay.alpha+5, 255)
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
@@ -80,7 +80,7 @@
 						M.stop_pulling()
 						step(M, M.dir)
 						M << "\blue You slipped on the wet floor!"
-						playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 						M.Stun(5)
 						M.Weaken(3)
 					else
@@ -91,7 +91,7 @@
 						M.stop_pulling()
 						step(M, M.dir)
 						M << "\blue You slipped on the wet floor!"
-						playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 						M.Stun(5)
 						M.Weaken(3)
 					else
@@ -108,7 +108,7 @@
 					spawn(4) step(M, M.dir)
 					M.take_organ_damage(2) // Was 5 -- TLE
 					M << "\blue You slipped on the floor!"
-					playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+					playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 					M.Weaken(10)
 			if(3) // Ice
 				if(istype(M, /mob/living/carbon/human)) // Added check since monkeys don't have shoes
@@ -116,7 +116,7 @@
 						M.stop_pulling()
 						step(M, M.dir)
 						M << "\blue You slipped on the icy floor!"
-						playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 						M.Stun(4)
 						M.Weaken(3)
 					else
@@ -127,7 +127,7 @@
 						M.stop_pulling()
 						step(M, M.dir)
 						M << "\blue You slipped on the icy floor!"
-						playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+						playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 						M.Stun(4)
 						M.Weaken(3)
 					else

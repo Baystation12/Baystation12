@@ -94,8 +94,18 @@
 		target.attack_log += "\[[time_stamp()]\]<font color='orange'> Debrained by [user.name] ([user.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)])</font>"
 		msg_admin_attack("[user.name] ([user.ckey]) debrained [target.name] ([target.ckey]) with [tool.name] (INTENT: [uppertext(user.a_intent)]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-		var/obj/item/brain/B = new(target.loc)
-		B.transfer_identity(target)
+		var/mob/living/carbon/human/H
+		if(istype(target,/mob/living/carbon/human))
+			H = target
+
+		var/obj/item/brain/B
+		if(H && H.species && H.species.flags & IS_SYNTHETIC)
+			var/obj/item/device/mmi/posibrain/P = new(target.loc)
+			P.transfer_identity(target)
+		else
+			B = new(target.loc)
+			B.transfer_identity(target)
+
 		target.internal_organs -= B
 
 		target:brain_op_stage = 4.0

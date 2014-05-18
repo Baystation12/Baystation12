@@ -47,8 +47,11 @@
 						affected.implants += src.imp
 						imp.part = affected
 
+						H.hud_updateflag |= 1 << IMPLOYAL_HUD
+
 				src.imp = null
 				update()
+
 	return
 
 
@@ -117,6 +120,12 @@
 		if (c.scanned)
 			user << "\red Something is already scanned inside the implant!"
 			return
-		imp:scanned = A
+		c.scanned = A
+		if(istype(A.loc,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = A.loc
+			H.u_equip(A)
+		else if(istype(A.loc,/obj/item/weapon/storage))
+			var/obj/item/weapon/storage/S = A.loc
+			S.remove_from_storage(A)
 		A.loc.contents.Remove(A)
 		update()

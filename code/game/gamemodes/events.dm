@@ -163,8 +163,8 @@
 				continue
 			var/datum/disease/dnaspread/D = new
 			D.strain_data["name"] = H.real_name
-			D.strain_data["UI"] = H.dna.UI
-			D.strain_data["SE"] = H.dna.SE
+			D.strain_data["UI"] = H.dna.uni_identity
+			D.strain_data["SE"] = H.dna.struc_enzymes
 			D.carrier = 1
 			D.holder = H
 			D.affected_mob = H
@@ -233,10 +233,10 @@
 			if (prob(25))
 				if (prob(75))
 					randmutb(H)
-					domutcheck(H,null,1)
+					domutcheck(H,null,MUTCHK_FORCED)
 				else
 					randmutg(H)
-					domutcheck(H,null,1)
+					domutcheck(H,null,MUTCHK_FORCED)
 	for(var/mob/living/carbon/monkey/M in living_mob_list)
 		var/turf/T = get_turf(M)
 		if(!T)

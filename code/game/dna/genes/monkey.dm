@@ -9,6 +9,7 @@
 
 /datum/dna/gene/monkey/activate(var/mob/living/M, var/connected, var/flags)
 	if(!istype(M,/mob/living/carbon/human))
+		//testing("Cannot monkey-ify [M], type is [M.type].")
 		return
 	var/mob/living/carbon/human/H = M
 	H.monkeyizing = 1
@@ -44,7 +45,7 @@
 
 	if(M)
 		if (M.dna)
-			O.dna = M.dna
+			O.dna = M.dna.Clone()
 			M.dna = null
 
 		if (M.suiciding)
@@ -86,6 +87,7 @@
 
 /datum/dna/gene/monkey/deactivate(var/mob/living/M, var/connected, var/flags)
 	if(!istype(M,/mob/living/carbon/monkey))
+		//testing("Cannot humanize [M], type is [M.type].")
 		return
 	var/mob/living/carbon/monkey/Mo = M
 	Mo.monkeyizing = 1
@@ -108,9 +110,11 @@
 		sleep(48)
 		del(animation)
 
-	var/mob/living/carbon/human/O = new( src )
+	var/mob/living/carbon/human/O
 	if(Mo.greaterform)
-		O.set_species(Mo.greaterform)
+		O = new(src, Mo.greaterform)
+	else
+		O = new(src)
 
 	if (M.dna.GetUIState(DNA_UI_GENDER))
 		O.gender = FEMALE
@@ -119,7 +123,7 @@
 
 	if (M)
 		if (M.dna)
-			O.dna = M.dna
+			O.dna = M.dna.Clone()
 			M.dna = null
 
 		if (M.suiciding)

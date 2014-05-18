@@ -30,7 +30,7 @@
 	if(!air_master)
 		return 0
 
-	air_master.AddTurfToUpdate(get_turf(src))
+	air_master.mark_for_update(get_turf(src))
 
 	return 1
 
@@ -48,7 +48,7 @@
 
 
 	if (src.health <= 0)
-		visible_message("\blue The [src] dissapates")
+		visible_message("\blue The [src] dissipates!")
 		del(src)
 		return
 
@@ -61,7 +61,7 @@
 	src.health -= max_health*0.75 //3/4 health as damage
 
 	if(src.health <= 0)
-		visible_message("\blue The [src] dissapates")
+		visible_message("\blue The [src] dissipates!")
 		del(src)
 		return
 
@@ -73,7 +73,7 @@
 	health -= Proj.damage
 	..()
 	if(health <=0)
-		visible_message("\blue The [src] dissapates")
+		visible_message("\blue The [src] dissipates!")
 		del(src)
 		return
 	opacity = 1
@@ -122,7 +122,7 @@
 
 	//Handle the destruction of the shield
 	if (src.health <= 0)
-		visible_message("\blue The [src] dissapates")
+		visible_message("\blue The [src] dissipates!")
 		del(src)
 		return
 
@@ -384,7 +384,7 @@
 		user.visible_message("[user] turned the shield generator off.", \
 			"You turn off the shield generator.", \
 			"You hear heavy droning fade out.")
-		src.cleanup()
+		for(var/dir in list(1,2,4,8)) src.cleanup(dir)
 	else
 		src.active = 1
 		icon_state = "Shield_Gen +a"
@@ -424,14 +424,7 @@
 				"You hear heavy droning fade out")
 			icon_state = "Shield_Gen"
 			src.active = 0
-			spawn(1)
-				src.cleanup(1)
-			spawn(1)
-				src.cleanup(2)
-			spawn(1)
-				src.cleanup(4)
-			spawn(1)
-				src.cleanup(8)
+			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
 
 /obj/machinery/shieldwallgen/proc/setup_field(var/NSEW = 0)
 	var/turf/T = src.loc
@@ -507,7 +500,7 @@
 
 	else
 		src.add_fingerprint(user)
-		visible_message("\red The [src.name] has been hit with the [W.name] by [user.name]!")
+		visible_message("\red The [src.name] has been hit with \the [W.name] by [user.name]!")
 
 /obj/machinery/shieldwallgen/proc/cleanup(var/NSEW)
 	var/obj/machinery/shieldwall/F

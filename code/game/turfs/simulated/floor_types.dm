@@ -9,6 +9,9 @@
 		..()
 		name = "floor"
 
+/turf/simulated/floor/airless/ceiling
+	icon_state = "rockvault"
+
 /turf/simulated/floor/light
 	name = "Light floor"
 	luminosity = 5
@@ -58,7 +61,7 @@
 		return
 	if(istype(C, /obj/item/weapon/wrench))
 		user << "\blue Removing rods..."
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 80, 1)
+		playsound(src, 'sound/items/Ratchet.ogg', 80, 1)
 		if(do_after(user, 30))
 			new /obj/item/stack/rods(src, 2)
 			ChangeTurf(/turf/simulated/floor)
@@ -73,7 +76,7 @@
 
 /turf/simulated/floor/engine/n20
 	New()
-		..()
+		. = ..()
 		var/datum/gas_mixture/adding = new
 		var/datum/gas/sleeping_agent/trace_gas = new
 

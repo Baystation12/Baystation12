@@ -9,6 +9,7 @@
  * Stacks
  */
 /obj/item/stack
+	gender = PLURAL
 	origin_tech = "materials=1"
 	var/list/datum/stack_recipe/recipes
 	var/singular_name
@@ -147,7 +148,7 @@
 			src = null //dont kill proc after del()
 			usr.before_take_item(oldsrc)
 			del(oldsrc)
-			if (istype(O,/obj/item))
+			if (istype(O,/obj/item) && istype(usr,/mob/living/carbon))
 				usr.put_in_hands(O)
 		O.add_fingerprint(usr)
 		//BubbleWrap - so newly formed boxes are empty
@@ -188,7 +189,7 @@
 
 /obj/item/stack/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
-		var/obj/item/stack/F = new src.type( user, amount=1)
+		var/obj/item/stack/F = new src.type( user, 1)
 		F.copy_evidences(src)
 		user.put_in_hands(F)
 		src.add_fingerprint(user)

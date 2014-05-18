@@ -4,7 +4,7 @@
 	icon = 'icons/obj/items.dmi'
 	amount = 5
 	max_amount = 5
-	w_class = 1
+	w_class = 2
 	throw_speed = 4
 	throw_range = 20
 	var/heal_brute = 0
@@ -17,7 +17,7 @@
 
 	if ( ! (istype(user, /mob/living/carbon/human) || \
 			istype(user, /mob/living/silicon) || \
-			istype(user, /mob/living/carbon/monkey) && ticker && ticker.mode.name == "monkey") )
+			istype(user, /mob/living/carbon/monkey)) )
 		user << "\red You don't have the dexterity to do this!"
 		return 1
 

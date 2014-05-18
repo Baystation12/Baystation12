@@ -5,7 +5,7 @@
 	icon_state = "brain2"
 	flags = TABLEPASS
 	force = 1.0
-	w_class = 1.0
+	w_class = 2.0
 	throwforce = 1.0
 	throw_speed = 3
 	throw_range = 5
@@ -28,7 +28,7 @@
 			brainmob = new(src)
 			brainmob.name = H.real_name
 			brainmob.real_name = H.real_name
-			brainmob.dna = H.dna
+			brainmob.dna = H.dna.Clone()
 			brainmob.timeofhostdeath = H.timeofdeath
 			if(H.mind)
 				H.mind.transfer_to(brainmob)

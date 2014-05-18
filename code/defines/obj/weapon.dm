@@ -31,7 +31,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "banana_peel"
 	item_state = "banana_peel"
-	w_class = 1.0
+	w_class = 2.0
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
@@ -42,7 +42,7 @@
 	icon = 'icons/obj/harvest.dmi'
 	icon_state = "corncob"
 	item_state = "corncob"
-	w_class = 1.0
+	w_class = 2.0
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
@@ -53,13 +53,13 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "soap"
-	w_class = 1.0
+	w_class = 2.0
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
 
 /obj/item/weapon/soap/nanotrasen
-	desc = "A Nanotrasen brand bar of soap. Smells of plasma."
+	desc = "A Nanotrasen brand bar of soap. Smells of phoron."
 	icon_state = "soapnt"
 
 /obj/item/weapon/soap/deluxe
@@ -90,7 +90,7 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "c_tube"
 	throwforce = 1
-	w_class = 1.0
+	w_class = 2.0
 	throw_speed = 4
 	throw_range = 5
 
@@ -117,7 +117,7 @@
 	desc = "Better keep this safe."
 	icon_state = "nucleardisk"
 	item_state = "card-id"
-	w_class = 1.0
+	w_class = 2.0
 
 /*
 /obj/item/weapon/game_kit
@@ -229,7 +229,7 @@
 	icon_state = "large"
 	sharp = 1
 	desc = "Could probably be used as ... a throwing weapon?"
-	w_class = 1.0
+	w_class = 2.0
 	force = 5.0
 	throwforce = 8.0
 	item_state = "shard-glass"
@@ -401,6 +401,8 @@
 	name = "power control module"
 	icon_state = "power_mod"
 	desc = "Heavy-duty switching circuits for power control."
+	m_amt = 50
+	g_amt = 50
 
 /obj/item/weapon/module/id_auth
 	name = "\improper ID authentication module"
@@ -429,7 +431,7 @@
 
 /obj/item/weapon/camera_bug/attack_self(mob/usr as mob)
 	var/list/cameras = new/list()
-	for (var/obj/machinery/camera/C in cameranet.cameras)
+	for (var/obj/machinery/camera/C in cameranet.viewpoints)
 		if (C.bugged && C.status)
 			cameras.Add(C)
 	if (length(cameras) == 0)
@@ -459,7 +461,7 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "meat"
 	flags = FPRINT | TABLEPASS | CONDUCT
-	w_class = 1.0
+	w_class = 2.0
 	origin_tech = "biotech=2"
 
 /obj/item/weapon/hatchet

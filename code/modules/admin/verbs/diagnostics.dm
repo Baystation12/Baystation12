@@ -6,7 +6,7 @@
 		alert(usr,"Master_controller or air_master not found.","Air Report")
 		return
 
-	var/active_groups = air_master.active_zones.len
+	var/active_groups = air_master.active_zones
 	var/inactive_groups = air_master.zones.len - active_groups
 
 	var/hotspots = 0
@@ -18,7 +18,7 @@
 	for(var/zone/zone in air_master.zones)
 		var/turf/simulated/turf = locate() in zone.contents
 		if(turf && turf.z == 1)
-			if(zone.status)
+			if(zone.needs_update)
 				active_on_main_station++
 			else
 				inactive_on_main_station++
@@ -56,7 +56,7 @@
 		if(T.active_hotspot)
 			burning = 1
 
-	usr << "\blue @[target.x],[target.y] ([GM.group_multiplier]): O:[GM.oxygen] T:[GM.toxins] N:[GM.nitrogen] C:[GM.carbon_dioxide] w [GM.temperature] Kelvin, [GM.return_pressure()] kPa [(burning)?("\red BURNING"):(null)]"
+	usr << "\blue @[target.x],[target.y] ([GM.group_multiplier]): O:[GM.oxygen] T:[GM.phoron] N:[GM.nitrogen] C:[GM.carbon_dioxide] w [GM.temperature] Kelvin, [GM.return_pressure()] kPa [(burning)?("\red BURNING"):(null)]"
 	for(var/datum/gas/trace_gas in GM.trace_gases)
 		usr << "[trace_gas.type]: [trace_gas.moles]"
 	feedback_add_details("admin_verb","DAST") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

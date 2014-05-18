@@ -72,11 +72,11 @@
 
 	syndicate
 		icon_state = "target_s"
-		desc = "A shooting target that looks like a syndicate scum."
+		desc = "A shooting target that looks like a hostile agent."
 		hp = 2600 // i guess syndie targets are sturdier?
 	alien
 		icon_state = "target_q"
-		desc = "A shooting target that looks like a xenomorphic alien."
+		desc = "A shooting target with a threatening silhouette."
 		hp = 2350 // alium onest too kinda
 
 /obj/item/target/bullet_act(var/obj/item/projectile/Proj)

@@ -5,6 +5,8 @@
 	var/maxHealth = 100 //Maximum health that should be possible.
 	var/health = 100 	//A mob's health
 
+	var/hud_updateflag = 0
+
 	//Damage related vars, NOTE: THESE SHOULD ONLY BE MODIFIED BY PROCS
 	var/bruteloss = 0.0	//Brutal damage caused by brute force (punching, being clubbed by a toolbox ect... this also accounts for pressure damage)
 	var/oxyloss = 0.0	//Oxygen depravation damage (no air in lungs)
@@ -24,7 +26,7 @@
 	//Allows mobs to move through dense areas without restriction. For instance, in space or out of holder objects.
 	var/incorporeal_move = 0 //0 is off, 1 is normal, 2 is for ninjas.
 
-	var/t_plasma = null
+	var/t_phoron = null
 	var/t_oxygen = null
 	var/t_sl_gas = null
 	var/t_n2 = null
