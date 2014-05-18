@@ -1787,12 +1787,12 @@
 			makeSkeleton()
 			return //No puking over skeletons, they don't smell at all!
 
-//		if(loc == /obj/structure/morgue)
-//			return
 
 		for(var/mob/living/carbon/human/H in range(decaylevel, src))
 			if(prob(5))
 				if(airborne_can_reach(get_turf(src), get_turf(H)))
+					if(loc == istype(loc,/obj/item/bodybag)) return
+					if(H.wear_mask && H.wear_mask == istype(H.wear_mask,/obj/item/clothing/mask/surgical)) return
 					H << "<spawn class='warning'>You smell something foul..."
 					H.vomit()
 
