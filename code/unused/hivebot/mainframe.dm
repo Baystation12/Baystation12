@@ -63,16 +63,16 @@
 
 
 /mob/living/silicon/hive_mainframe/say_understands(var/other)
-	if (istype(other, /mob/living/carbon/human))
-		return 1
-	if (istype(other, /mob/living/silicon/robot))
-		return 1
-	if (istype(other, /mob/living/silicon/hivebot))
-		return 1
-	if (istype(other, /mob/living/silicon/ai))
-		return 1
-	if (istype(other, /mob/living/carbon/human/tajaran))
-		return 1
+	//These only pertain to common. Languages are handled by mob/say_understands()
+	if (!speaking)
+		if (istype(other, /mob/living/carbon/human))
+			return 1
+		if (istype(other, /mob/living/silicon/robot))
+			return 1
+		if (istype(other, /mob/living/silicon/hivebot))
+			return 1
+		if (istype(other, /mob/living/silicon/ai))
+			return 1
 	return ..()
 
 /mob/living/silicon/hive_mainframe/say_quote(var/text)

@@ -10,7 +10,6 @@
 	var/obj/item/emag = null
 	var/obj/item/borg/upgrade/jetpack = null
 
-
 	emp_act(severity)
 		if(modules)
 			for(var/obj/O in modules)
@@ -40,6 +39,9 @@
 	for(var/obj/O in temp_list)
 		if(O)
 			modules += O
+
+/obj/item/weapon/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
+	R.add_language("Tradeband", 0)
 
 /obj/item/weapon/robot_module/standard
 	name = "standard robot module"
@@ -224,6 +226,17 @@
 		R.add_reagent("beer2", 50)
 		src.emag.name = "Mickey Finn's Special Brew"
 		return
+	
+	add_languages(var/mob/living/silicon/robot/R)
+		//full set of languages
+		R.add_language("Sol Common", 1)
+		R.add_language("Sinta'unathi", 1)
+		R.add_language("Siik'maas", 1)
+		R.add_language("Siik'tajr", 0)
+		R.add_language("Skrellian", 1)
+		R.add_language("Rootspeak", 1)
+		R.add_language("Tradeband", 1)
+		R.add_language("Gutter", 1)
 
 /obj/item/weapon/robot_module/butler/respawn_consumable(var/mob/living/silicon/robot/R)
 	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
@@ -305,6 +318,9 @@
 			src.modules += W
 
 		return
+	
+	add_languages(var/mob/living/silicon/robot/R)
+		return	//not much ROM to spare in that tiny microprocessor!
 
 /obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R)
 	var/obj/item/weapon/reagent_containers/spray/cleaner/C = locate() in src.modules
