@@ -395,20 +395,24 @@ mob/living/simple_animal/borer/proc/detatch()
 
 	if(M in view(1, src))
 		src << "You wiggle into [M]'s ear."
-		if(!M.stat)
-			M << "Something disgusting and slimy wiggles into your ear!"
+		src.perform_infestation(M)
+		return
+	else
+		src << "They are no longer in range!"
+		return
 
-		src.host = M
-		src.loc = M
+/mob/living/simple_animal/borer/proc/perform_infestation(var/mob/living/carbon/M)
+	src.host = M
+	src.loc = M
 
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			var/datum/organ/external/head = H.get_organ("head")
-			head.implants += src
+	if(istype(M,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = M
+		var/datum/organ/external/head = H.get_organ("head")
+		head.implants += src
 
-		host_brain.name = M.name
-		host_brain.real_name = M.real_name
-		host.status_flags |= PASSEMOTES
+	host_brain.name = M.name
+	host_brain.real_name = M.real_name
+	host.status_flags |= PASSEMOTES
 
 /mob/living/simple_animal/borer/verb/ventcrawl()
 	set name = "Crawl through Vent"
