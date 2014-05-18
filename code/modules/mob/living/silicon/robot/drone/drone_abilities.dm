@@ -54,6 +54,7 @@
 		D.attack_hand(M)
 		M << "You scoop up [src]."
 		src << "[M] scoops you up."
+		M.status_flags |= PASSEMOTES
 		return
 
 	..()

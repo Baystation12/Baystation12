@@ -58,7 +58,6 @@
 
 	..()
 
-
 	if(host)
 
 		if(!stat && !host.stat)
@@ -338,7 +337,13 @@ mob/living/simple_animal/borer/proc/detatch()
 		host_brain.name = "host brain"
 		host_brain.real_name = "host brain"
 
+	var/mob/living/H = host
 	host = null
+
+	for(var/atom/A in H.contents)
+		if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
+			return
+	H.status_flags &= ~PASSEMOTES
 
 /mob/living/simple_animal/borer/verb/infest()
 	set category = "Alien"
@@ -406,6 +411,7 @@ mob/living/simple_animal/borer/proc/detatch()
 
 		host_brain.name = M.name
 		host_brain.real_name = M.real_name
+		host.status_flags |= PASSEMOTES
 
 		return
 	else

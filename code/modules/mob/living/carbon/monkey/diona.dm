@@ -67,6 +67,7 @@
 			D.attack_hand(M)
 			M << "You scoop up [src]."
 			src << "[M] scoops you up."
+		M.status_flags |= PASSEMOTES
 		return
 
 	..()
@@ -108,6 +109,8 @@
 
 	if(istype(M,/mob/living/carbon/human))
 		M << "You feel your being twine with that of [src] as it merges with your biomass."
+		M.status_flags |= PASSEMOTES
+
 		src << "You feel your being twine with that of [M] as you merge with its biomass."
 		src.loc = M
 		src.verbs += /mob/living/carbon/monkey/diona/proc/split
@@ -127,9 +130,18 @@
 
 	src.loc << "You feel a pang of loss as [src] splits away from your biomass."
 	src << "You wiggle out of the depths of [src.loc]'s biomass and plop to the ground."
+
+	var/mob/living/M = src.loc
+
 	src.loc = get_turf(src)
 	src.verbs -= /mob/living/carbon/monkey/diona/proc/split
 	src.verbs += /mob/living/carbon/monkey/diona/proc/merge
+
+	if(istype(M))
+		for(var/atom/A in M.contents)
+			if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
+				return
+	M.status_flags &= ~PASSEMOTES
 
 /mob/living/carbon/monkey/diona/verb/fertilize_plant()
 
@@ -269,16 +281,16 @@
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (Muted)."
 			return
-	
+
 	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
-	
+
 
 	if(stat == 2)
 		return say_dead(message)
 
 	var/datum/language/speaking = null
 
-	
+
 
 	if(length(message) >= 2)
 		var/channel_prefix = copytext(message, 1 ,3)
@@ -292,7 +304,7 @@
 	if(speaking)
 		message = trim(copytext(message,3))
 
-	message = capitalize(trim_left(message))	
+	message = capitalize(trim_left(message))
 
 	if(!message || stat)
 		return
