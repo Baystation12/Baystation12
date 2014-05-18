@@ -75,7 +75,7 @@ var/global/loopModeNames=list(
 	var/list/playlists=list() // ID = Label
 
 	// Playlist to load at startup.
-	var/playlist_id=""
+	var/playlist_id = ""
 
 	var/list/playlist
 	var/current_song  = 0
@@ -93,6 +93,14 @@ var/global/loopModeNames=list(
 		"customs" = "Customs Music",
 	)
 
+/obj/machinery/media/jukebox/shuttle
+	playlist_id="shuttle"
+	// Must be defined on your server.
+	playlists=list(
+		"shuttle"  = "Shuttle Mix"
+	)
+	invisibility=101 // FAK U NO SONG 4 U
+
 /obj/machinery/media/jukebox/attack_ai(var/mob/user)
 	attack_hand(user)
 
@@ -107,7 +115,7 @@ var/global/loopModeNames=list(
 
 /obj/machinery/media/jukebox/update_icon()
 	overlays = 0
-	if(stat & (NOPOWER|BROKEN))
+	if(stat & (NOPOWER|BROKEN) || !anchored)
 		if(stat & BROKEN)
 			icon_state = "jukebox2-broken"
 		else
@@ -146,7 +154,7 @@ var/global/loopModeNames=list(
 			for(var/plid in playlists)
 				t += "<a href='?src=\ref[src];playlist=[plid]'>[playlists[plid]]</a>"
 		else
-			t += "<i>Please wait before changing playlists.<i>"
+			t += "<i>Please wait before changing playlists.</i>"
 		t += "<br />"
 		if(current_song)
 			var/datum/song_info/song=playlist[current_song]
@@ -169,15 +177,24 @@ var/global/loopModeNames=list(
 		current_song=0
 		if(!emagged)
 			playlist_id = "emagged"
-			last_reload=world.time
+			last_reload=world.realtime
 			playlist=null
 			loop_mode = JUKEMODE_SHUFFLE
 			emagged = 1
 			playing = 1
-			user.visible_message("[user.name] slides something into the [src.name]'s card-reader.","\red You short out the [src.name].")
+			user.visible_message("\red [user.name] slides something into the [src.name]'s card-reader.","\red You short out the [src.name].")
 			update_icon()
 			update_music()
-		return
+	else if(istype(W,/obj/item/weapon/wrench))
+		var/un = !anchored ? "" : "un"
+		user.visible_message("\blue [user.name] begins [un]locking \the [src.name]'s casters.","\blue You begin [un]locking \the [src.name]'s casters.")
+		if(do_after(user,5 SECONDS))
+			playsound(get_turf(src), 'sound/items/Ratchet.ogg', 50, 1)
+			anchored = !anchored
+			user.visible_message("\blue [user.name] [un]locks \the [src.name]'s casters.","\red You [un]lock \the [src.name]'s casters.")
+			playing = emagged
+			update_music()
+			update_icon()
 
 /obj/machinery/media/jukebox/Topic(href, href_list)
 	..()
@@ -195,7 +212,7 @@ var/global/loopModeNames=list(
 			usr << "\red You must wait 60 seconds between playlist reloads."
 			return
 		playlist_id=href_list["playlist"]
-		last_reload=world.time
+		last_reload=world.realtime
 		playlist=null
 		current_song=0
 		update_music()
@@ -245,7 +262,7 @@ var/global/loopModeNames=list(
 		var/datum/song_info/song
 		if(current_song)
 			song = playlist[current_song]
-		if(!current_song || (song && world.time >= media_start_time + song.length))
+		if(!current_song || (song && world.realtime >= media_start_time + song.length))
 			current_song=1
 			switch(loop_mode)
 				if(JUKEMODE_SHUFFLE)
@@ -262,7 +279,7 @@ var/global/loopModeNames=list(
 	if(current_song && playing)
 		var/datum/song_info/song = playlist[current_song]
 		media_url = song.url
-		media_start_time = world.time
+		media_start_time = world.realtime
 		visible_message("<span class='notice'>\icon[src] \The [src] begins to play [song.display()].</span>","<em>You hear music.</em>")
 		//visible_message("<span class='notice'>\icon[src] \The [src] warbles: [song.length/10]s @ [song.url]</notice>")
 	else
@@ -271,7 +288,7 @@ var/global/loopModeNames=list(
 	..()
 
 /obj/machinery/media/jukebox/proc/stop_playing()
-	current_song=0
+	//current_song=0
 	playing=0
 	update_music()
 	return
