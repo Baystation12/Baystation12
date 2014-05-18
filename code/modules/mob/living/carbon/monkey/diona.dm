@@ -2,45 +2,6 @@
   Tiny babby plant critter plus procs.
 */
 
-//Helper object for picking dionaea (and other creatures) up.
-/obj/item/weapon/holder
-	name = "holder"
-	desc = "You shouldn't ever see this."
-
-/obj/item/weapon/holder/diona
-
-	name = "diona nymph"
-	desc = "It's a tiny plant critter."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "nymph"
-	slot_flags = SLOT_HEAD
-	origin_tech = "magnets=3;biotech=5"
-
-/obj/item/weapon/holder/New()
-	..()
-	processing_objects.Add(src)
-
-/obj/item/weapon/holder/Del()
-	processing_objects.Remove(src)
-	..()
-
-/obj/item/weapon/holder/process()
-
-	if(istype(loc,/turf) || !(contents.len))
-
-		for(var/mob/M in contents)
-
-			var/atom/movable/mob_container
-			mob_container = M
-			mob_container.forceMove(get_turf(src))
-			M.reset_view()
-
-		del(src)
-
-/obj/item/weapon/holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	for(var/mob/M in src.contents)
-		M.attackby(W,user)
-
 //Mob defines.
 /mob/living/carbon/monkey/diona
 	name = "diona nymph"

@@ -33,18 +33,6 @@
 		layer = MOB_LAYER
 		src << text("\blue You have stopped hiding.")
 
-//DRONE PICKUP.
-//Item holder.
-/obj/item/weapon/holder/drone
-
-	name = "maintenance drone"
-	desc = "It's a small maintenance robot."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "drone"
-	slot_flags = SLOT_HEAD
-	origin_tech = "magnets=3;engineering=5"
-
-
 //Actual picking-up event.
 /mob/living/silicon/robot/drone/attack_hand(mob/living/carbon/human/M as mob)
 
