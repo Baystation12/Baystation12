@@ -234,7 +234,7 @@
 		tiny.MapColors(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(100,100,100))
 	p.icon = I
 	p.img = img
-	P.tiny = tiny
+	p.tiny = tiny
 	p.name = photocopy.name
 	p.desc = photocopy.desc
 	p.scribble = photocopy.scribble
