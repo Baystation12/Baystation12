@@ -145,14 +145,16 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 	var/dat = {"<B>Karma Shop</B><br>
 		<a href='?src=\ref[src];KarmaBuy=1'>Unlock Barber -- 5KP</a><br>
 		<a href='?src=\ref[src];KarmaBuy=2'>Unlock Nanotrasen Representative -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=3'>Unlock Customs Officer -- 15KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=4'>Unlock BlueShield -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=3'>Unlock Customs Officer -- 30P</a><br>
+		<a href='?src=\ref[src];KarmaBuy=4'>Unlock Blueshield -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Mechanic -- 30KP</a><br>
+
 		<br>
-		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Machine People -- 15KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=6'>Unlock Kidan -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=7'>Unlock Grey -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=8'>Unlock Vox -- 45KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=9'>Unlock Slime People -- 45KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy2=1'>Unlock Machine People -- 15KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy2=2'>Unlock Kidan -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy2=3'>Unlock Grey -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy2=4'>Unlock Vox -- 45KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy2=5'>Unlock Slime People -- 45KP</a><br>
 		<B>PLEASE NOTE THAT PEOPLE WHO TRY TO GAME THE KARMA SYSTEM WILL END UP ON THE WALL OF SHAME. THIS INCLUDES BUT IS NOT LIMITED TO TRADES, OOC KARMA BEGGING, CODE EXPLOITS, ETC.</B>
 		"}
 

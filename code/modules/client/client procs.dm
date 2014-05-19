@@ -54,7 +54,7 @@
 			return
 		cmd_admin_irc_pm()
 		return
-		
+
 
 
 	//Logs all hrefs
@@ -75,36 +75,45 @@
 				else
 					src.DB_job_unlock("Nanotrasen Representative",30)
 			if("3")
-				if(karma <15)
+				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_job_unlock("Customs Officer",15)
+					src.DB_job_unlock("Customs Officer",30)
 			if("4")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
 					src.DB_job_unlock("Blueshield",30)
 			if("5")
+				if(karma <30)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_job_unlock("Mechanic",30)
+
+	if(href_list["KarmaBuy2"])
+		var/karma=verify_karma()
+		switch(href_list["KarmaBuy2"])
+			if("1")
 				if(karma <15)
 					usr << "You do not have enough karma!"
 				else
 					src.DB_species_unlock("Machine",15)
-			if("6")
+			if("2")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
 					src.DB_species_unlock("Kidan",30)
-			if("7")
+			if("3")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
 					src.DB_species_unlock("Grey",30)
-			if("8")
+			if("4")
 				if(karma <45)
 					usr << "You do not have enough karma!"
 				else
 					src.DB_species_unlock("Vox",45)
-			if("9")
+			if("5")
 				if(karma <45)
 					usr << "You do not have enough karma!"
 				else
