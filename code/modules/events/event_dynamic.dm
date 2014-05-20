@@ -54,7 +54,7 @@ var/global/list/possibleEvents = list()
 	possibleEvents[/datum/event/vent_clog] = 300
 	possibleEvents[/datum/event/anomaly/anomaly_grav] = 200
 
-	possibleEvents[/datum/event/weightless] = 150
+//	possibleEvents[/datum/event/weightless] = 150
 	possibleEvents[/datum/event/wormholes] = 150
 
 	possibleEvents[/datum/event/pda_spam] = max(min(25, player_list.len) * 4, 200)
