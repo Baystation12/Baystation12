@@ -10,7 +10,8 @@
 
 /obj/structure/ore_box/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/ore))
-		src.contents += W;
+		user.u_equip(W)
+		src.contents += W
 	if (istype(W, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = W
 		S.hide_from(usr)
@@ -25,7 +26,7 @@
 	var/amt_diamond = 0
 	var/amt_glass = 0
 	var/amt_iron = 0
-	var/amt_plasma = 0
+	var/amt_phoron = 0
 	var/amt_uranium = 0
 	var/amt_clown = 0
 	var/amt_strange = 0
@@ -36,8 +37,8 @@
 			amt_diamond++;
 		if (istype(C,/obj/item/weapon/ore/glass))
 			amt_glass++;
-		if (istype(C,/obj/item/weapon/ore/plasma))
-			amt_plasma++;
+		if (istype(C,/obj/item/weapon/ore/phoron))
+			amt_phoron++;
 		if (istype(C,/obj/item/weapon/ore/iron))
 			amt_iron++;
 		if (istype(C,/obj/item/weapon/ore/silver))
@@ -62,8 +63,8 @@
 		dat += text("Sand: [amt_glass]<br>")
 	if (amt_diamond)
 		dat += text("Diamond ore: [amt_diamond]<br>")
-	if (amt_plasma)
-		dat += text("Plasma ore: [amt_plasma]<br>")
+	if (amt_phoron)
+		dat += text("Phoron ore: [amt_phoron]<br>")
 	if (amt_uranium)
 		dat += text("Uranium ore: [amt_uranium]<br>")
 	if (amt_clown)

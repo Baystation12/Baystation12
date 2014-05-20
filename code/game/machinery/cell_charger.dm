@@ -10,6 +10,7 @@
 	power_channel = EQUIP
 	var/obj/item/weapon/cell/charging = null
 	var/chargelevel = -1
+	var/efficiency = 0.875	//<1.0 means some power is lost in the charging process, >1.0 means free energy.
 	proc
 		updateicon()
 			icon_state = "ccharger[charging ? 1 : 0]"
@@ -91,8 +92,10 @@
 		//world << "ccpt [charging] [stat]"
 		if(!charging || (stat & (BROKEN|NOPOWER)) || !anchored)
 			return
-
-		use_power(200)		//this used to use CELLRATE, but CELLRATE is fucking awful. feel free to fix this properly!
-		charging.give(175)	//inefficiency.
-
+		
+		var/power_used = 100000	//for 200 units of charge. Yes, thats right, 100 kW. Is something wrong with CELLRATE?
+		
+		power_used = charging.give(power_used*CELLRATE*efficiency)
+		use_power(power_used)
+		
 		updateicon()

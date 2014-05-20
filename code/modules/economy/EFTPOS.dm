@@ -22,6 +22,7 @@
 		//create a short manual as well
 		var/obj/item/weapon/paper/R = new(src.loc)
 		R.name = "Steps to success: Correct EFTPOS Usage"
+		/*
 		R.info += "<b>When first setting up your EFTPOS device:</b>"
 		R.info += "1. Memorise your EFTPOS command code (provided with all EFTPOS devices).<br>"
 		R.info += "2. Confirm that your EFTPOS device is connected to your local accounts database. For additional assistance with this step, contact NanoTrasen IT Support<br>"
@@ -33,6 +34,17 @@
 		R.info += "4. If at this stage you wish to modify or cancel your transaction, you may simply reset (unlock) your EFTPOS device.<br>"
 		R.info += "5. Give your EFTPOS device to the customer, they must authenticate the transaction by swiping their ID card and entering their PIN number.<br>"
 		R.info += "6. If done correctly, the transaction will be logged to both accounts with the reference you have entered, the terminal ID of your EFTPOS device and the money transferred across accounts.<br>"
+		*/
+		//Temptative new manual:
+		R.info += "<b>First EFTPOS setup:</b><br>"
+		R.info += "1. Memorise your EFTPOS command code (provided with all EFTPOS devices).<br>"
+		R.info += "2. Connect the EFTPOS to the account in which you want to receive the funds.<br><br>"
+		R.info += "<b>When starting a new transaction:</b><br>"
+		R.info += "1. Enter the amount of money you want to charge and a purpose message for the new transaction.<br>"
+		R.info += "2. Lock the new transaction. If you want to modify or cancel the transaction, you simply have to reset your EFTPOS device.<br>"
+		R.info += "3. Give the EFTPOS device to your customer, he/she must finish the transaction by swiping their ID card or a charge card with enough funds.<br>"
+		R.info += "4. If everything is done correctly, the money will be transferred. To unlock the device you will have to reset the EFTPOS device.<br>"
+
 
 		//stamp the paper
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
@@ -72,7 +84,7 @@
 		var/dat = "<b>[eftpos_name]</b><br>"
 		dat += "<i>This terminal is</i> [machine_id]. <i>Report this code when contacting NanoTrasen IT Support</i><br>"
 		if(transaction_locked)
-			dat += "<a href='?src=\ref[src];choice=toggle_lock'>Reset[transaction_paid ? "" : " (authentication required)"]</a><br><br>"
+			dat += "<a href='?src=\ref[src];choice=toggle_lock'>Back[transaction_paid ? "" : " (authentication required)"]</a><br><br>"
 
 			dat += "Transaction purpose: <b>[transaction_purpose]</b><br>"
 			dat += "Value: <b>$[transaction_amount]</b><br>"
@@ -102,6 +114,36 @@
 			scan_card(I)
 		else
 			usr << "\icon[src]<span class='warning'>Unable to connect to linked account.</span>"
+	else if (istype(O, /obj/item/weapon/spacecash/ewallet))
+		var/obj/item/weapon/spacecash/ewallet/E = O
+		if (linked_account)
+			if(!linked_account.suspended)
+				if(transaction_locked && !transaction_paid)
+					if(transaction_amount <= E.worth)
+						playsound(src, 'sound/machines/chime.ogg', 50, 1)
+						src.visible_message("\icon[src] The [src] chimes.")
+						transaction_paid = 1
+
+						//transfer the money
+						E.worth -= transaction_amount
+						linked_account.money += transaction_amount
+
+						//create entry in the EFTPOS linked account transaction log
+						var/datum/transaction/T = new()
+						T.target_name = E.owner_name //D.owner_name
+						T.purpose = transaction_purpose
+						T.amount = transaction_amount
+						T.source_terminal = machine_id
+						T.date = current_date_string
+						T.time = worldtime2text()
+						linked_account.transaction_log.Add(T)
+					else
+						usr << "\icon[src]<span class='warning'>The charge card doesn't have that much money!</span>"
+			else
+				usr << "\icon[src]<span class='warning'>Connected account has been suspended.</span>"
+		else
+			usr << "\icon[src]<span class='warning'>EFTPOS is not connected to an account.</span>"
+
 	else
 		..()
 
@@ -143,10 +185,14 @@
 					transaction_amount = try_num
 			if("toggle_lock")
 				if(transaction_locked)
-					var/attempt_code = input("Enter EFTPOS access code", "Reset Transaction") as num
-					if(attempt_code == access_code)
+					if (transaction_paid)
 						transaction_locked = 0
 						transaction_paid = 0
+					else
+						var/attempt_code = input("Enter EFTPOS access code", "Reset Transaction") as num
+						if(attempt_code == access_code)
+							transaction_locked = 0
+							transaction_paid = 0
 				else if(linked_account)
 					transaction_locked = 1
 				else

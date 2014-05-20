@@ -376,20 +376,21 @@ This function completely restores a damaged organ to perfect condition.
 
 		// Internal wounds get worse over time. Low temperatures (cryo) stop them.
 		if(W.internal && !W.is_treated() && owner.bodytemperature >= 170)
-			if(!owner.reagents.has_reagent("bicaridine"))	//bicard stops internal wounds from growing bigger with time, and also stop bleeding
+			var/bicardose = owner.reagents.get_reagent_amount("bicaridine")
+			if(!bicardose)	//bicard stops internal wounds from growing bigger with time, and also stop bleeding
 				W.open_wound(0.1 * wound_update_accuracy)
 				owner.vessel.remove_reagent("blood",0.05 * W.damage * wound_update_accuracy)
+			if(bicardose >= 30)	//overdose of bicaridine begins healing IB
+				W.damage = max(0, W.damage - 0.2)
+
 			if(!owner.reagents.has_reagent("inaprovaline")) //This little copypaste will allow inaprovaline to work too, giving it a much needed buff to help medical.
 				W.open_wound(0.1 * wound_update_accuracy)
 				owner.vessel.remove_reagent("blood",0.05 * W.damage * wound_update_accuracy)
 
-			owner.vessel.remove_reagent("blood",0.02 * W.damage * wound_update_accuracy)//Bicaridine slows Internal Bleeding
+			owner.vessel.remove_reagent("blood",0.02 * W.damage * wound_update_accuracy)
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
-			//overdose of bicaridine begins healing IB
-			if(owner.reagents.get_reagent_amount("bicaridine") >= 30)
-				W.damage = max(0, W.damage - 0.2)
 
 		// slow healing
 		var/heal_amt = 0
@@ -514,8 +515,6 @@ This function completely restores a damaged organ to perfect condition.
 
 		var/obj/organ	//Dropped limb object
 		switch(body_part)
-			if(LOWER_TORSO)
-				owner << "\red You are now sterile."
 			if(HEAD)
 				if(owner.species.flags & IS_SYNTHETIC)
 					organ= new /obj/item/weapon/organ/head/posi(owner.loc, owner)
@@ -858,6 +857,11 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 				base.Blend(rgb(H.s_tone, H.s_tone, H.s_tone), ICON_ADD)
 			else
 				base.Blend(rgb(-H.s_tone,  -H.s_tone,  -H.s_tone), ICON_SUBTRACT)
+
+	if(base)
+		//Changing limb's skin color to match owner
+		if(!H.species || H.species.flags & HAS_SKIN_COLOR)
+			base.Blend(rgb(H.r_skin, H.g_skin, H.b_skin), ICON_ADD)
 
 	icon = base
 	dir = SOUTH

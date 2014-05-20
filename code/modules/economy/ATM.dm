@@ -173,6 +173,7 @@ log transactions
 								dat += "<td>[T.source_terminal]</td>"
 								dat += "</tr>"
 							dat += "</table>"
+							dat += "<A href='?src=\ref[src];choice=print_transaction'>Print</a><br>"
 						if(TRANSFER_FUNDS)
 							dat += "<b>Account balance:</b> $[authenticated_account.money]<br>"
 							dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=0'>Back</a><br><br>"
@@ -190,7 +191,7 @@ log transactions
 							dat += "<form name='withdrawal' action='?src=\ref[src]' method='get'>"
 							dat += "<input type='hidden' name='src' value='\ref[src]'>"
 							dat += "<input type='hidden' name='choice' value='withdrawal'>"
-							dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw funds'><br>"
+							dat += "<input type='text' name='funds_amount' value='' style='width:200px; background-color:white;'><input type='submit' value='Withdraw charge card'>"
 							dat += "</form>"
 							dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=1'>Change account security level</a><br>"
 							dat += "<A href='?src=\ref[src];choice=view_screen;view_screen=2'>Make transfer</a><br>"
@@ -309,7 +310,9 @@ log transactions
 
 						//remove the money
 						authenticated_account.money -= amount
-						spawn_money(amount,src.loc)
+
+						//	spawn_money(amount,src.loc)
+						spawn_ewallet(amount,src.loc)
 
 						//create an entry in the account transaction log
 						var/datum/transaction/T = new()
@@ -346,6 +349,49 @@ log transactions
 					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
 				else
 					playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
+			if ("print_transaction")
+				if(authenticated_account)
+					var/obj/item/weapon/paper/R = new(src.loc)
+					R.name = "Transaction logs: [authenticated_account.owner_name]"
+					R.info = "<b>Transaction logs</b><br>"
+					R.info += "<i>Account holder:</i> [authenticated_account.owner_name]<br>"
+					R.info += "<i>Account number:</i> [authenticated_account.account_number]<br>"
+					R.info += "<i>Date and time:</i> [worldtime2text()], [current_date_string]<br><br>"
+					R.info += "<i>Service terminal ID:</i> [machine_id]<br>"
+					R.info += "<table border=1 style='width:100%'>"
+					R.info += "<tr>"
+					R.info += "<td><b>Date</b></td>"
+					R.info += "<td><b>Time</b></td>"
+					R.info += "<td><b>Target</b></td>"
+					R.info += "<td><b>Purpose</b></td>"
+					R.info += "<td><b>Value</b></td>"
+					R.info += "<td><b>Source terminal ID</b></td>"
+					R.info += "</tr>"
+					for(var/datum/transaction/T in authenticated_account.transaction_log)
+						R.info += "<tr>"
+						R.info += "<td>[T.date]</td>"
+						R.info += "<td>[T.time]</td>"
+						R.info += "<td>[T.target_name]</td>"
+						R.info += "<td>[T.purpose]</td>"
+						R.info += "<td>$[T.amount]</td>"
+						R.info += "<td>[T.source_terminal]</td>"
+						R.info += "</tr>"
+					R.info += "</table>"
+
+					//stamp the paper
+					var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
+					stampoverlay.icon_state = "paper_stamp-cent"
+					if(!R.stamped)
+						R.stamped = new
+					R.stamped += /obj/item/weapon/stamp
+					R.overlays += stampoverlay
+					R.stamps += "<HR><i>This paper has been stamped by the Automatic Teller Machine.</i>"
+
+				if(prob(50))
+					playsound(loc, 'sound/items/polaroid1.ogg', 50, 1)
+				else
+					playsound(loc, 'sound/items/polaroid2.ogg', 50, 1)
+
 			if("insert_card")
 				if(!held_card)
 					//this might happen if the user had the browser window open when somebody emagged it
@@ -402,3 +448,9 @@ log transactions
 	if(ishuman(human_user) && !human_user.get_active_hand())
 		human_user.put_in_hands(held_card)
 	held_card = null
+
+
+/obj/machinery/atm/proc/spawn_ewallet(var/sum, loc)
+	var/obj/item/weapon/spacecash/ewallet/E = new /obj/item/weapon/spacecash/ewallet(loc)
+	E.worth = sum
+	E.owner_name = authenticated_account.owner_name

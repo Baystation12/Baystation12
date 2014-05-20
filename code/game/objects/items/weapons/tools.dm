@@ -16,7 +16,7 @@
  */
 /obj/item/weapon/wrench
 	name = "wrench"
-	desc = "A wrench with common uses. Can be found in your hand."
+	desc = "A wrench with many common uses. Can be usually found in your hand."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrench"
 	flags = FPRINT | TABLEPASS| CONDUCT
@@ -357,6 +357,8 @@
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+		if(H.species.flags & IS_SYNTHETIC)
+			return
 		switch(safety)
 			if(1)
 				usr << "\red Your eyes sting a little."
@@ -411,7 +413,7 @@
 	w_class = 3.0
 	m_amt = 70
 	g_amt = 120
-	origin_tech = "engineering=4;plasma=3"
+	origin_tech = "engineering=4;phoron=3"
 	var/last_gen = 0
 
 
@@ -428,7 +430,7 @@
 
 /obj/item/weapon/crowbar
 	name = "crowbar"
-	desc = "Used to hit floors"
+	desc = "Used to remove floors and to pry open doors."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "crowbar"
 	flags = FPRINT | TABLEPASS| CONDUCT
@@ -447,11 +449,15 @@
 	item_state = "crowbar_red"
 
 /obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
+
 	if(hasorgans(M))
+
 		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
+
 		if (!S) return
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
+
 		if(S.brute_dam)
 			S.heal_damage(15,0,0,1)
 			if(user != M)
@@ -462,7 +468,26 @@
 				user.visible_message("\red \The [user] patches some dents on their [S.display_name] with \the [src]",\
 				"\red You patch some dents on your [S.display_name]",\
 				"You hear a welder.")
-		else
-			user << "Nothing to fix!"
+			return
+
+		if(istype(M,/mob/living/carbon/human))
+
+			var/mob/living/carbon/human/H = M
+
+			if(H.species.flags & IS_SYNTHETIC)
+
+				if(H.getBruteLoss() > 0)
+
+					if(M == user)
+						user << "\red You can't repair damage to your own body - it's against OH&S."
+						return
+
+					user.visible_message("\red \The [user] patches some dents on \the [M] with \the [src]",\
+						"\red You patch some of the dents on \the [M].",\
+						"You hear a welder.")
+					H.heal_overall_damage(5,0)
+					return
+
+		user << "Nothing to fix!"
 	else
 		return ..()

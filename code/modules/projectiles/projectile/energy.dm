@@ -43,7 +43,7 @@
 	damage = 10
 	damage_type = TOX
 	nodamage = 0
-	weaken = 10
+	agony = 40
 	stutter = 10
 
 
@@ -59,8 +59,8 @@
 	damage_type = TOX
 	weaken = 5
 
-/obj/item/projectile/energy/plasma
-	name = "plasma bolt"
+/obj/item/projectile/energy/phoron
+	name = "phoron bolt"
 	icon_state = "energy"
 	damage = 20
 	damage_type = TOX

@@ -15,17 +15,17 @@
 
 /obj/structure/closet/walllocker/emerglocker
 	name = "emergency locker"
-	desc = "A wall mounted locker with emergency supplies"
+	desc = "A wall mounted locker with emergency supplies."
 	var/list/spawnitems = list(/obj/item/weapon/tank/emergency_oxygen,/obj/item/clothing/mask/breath)
 	var/amount = 2 // spawns each items X times.
 	icon_state = "emerg"
 
 /obj/structure/closet/walllocker/emerglocker/toggle(mob/user as mob)
 	src.attack_hand(user)
-	return 
+	return
 
 /obj/structure/closet/walllocker/emerglocker/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	return 
+	return
 
 /obj/structure/closet/walllocker/emerglocker/attack_hand(mob/user as mob)
 	if (istype(user, /mob/living/silicon/ai))	//Added by Strumpetplaya - AI shouldn't be able to

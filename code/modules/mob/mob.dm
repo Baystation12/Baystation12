@@ -25,7 +25,7 @@
 	t+= "\red Temperature: [environment.temperature] \n"
 	t+= "\blue Nitrogen: [environment.nitrogen] \n"
 	t+= "\blue Oxygen: [environment.oxygen] \n"
-	t+= "\blue Plasma : [environment.toxins] \n"
+	t+= "\blue Phoron : [environment.phoron] \n"
 	t+= "\blue Carbon Dioxide: [environment.carbon_dioxide] \n"
 	for(var/datum/gas/trace_gas in environment.trace_gases)
 		usr << "\blue [trace_gas.type]: [trace_gas.moles] \n"
@@ -333,6 +333,9 @@ var/list/slot_equipment_priority = list( \
 	return
 */
 
+/mob
+	var/newPlayerType = /mob/new_player
+
 /mob/verb/abandon_mob()
 	set name = "Respawn"
 	set category = "OOC"
@@ -382,14 +385,12 @@ var/list/slot_equipment_priority = list( \
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
 
-	var/mob/new_player/M = new /mob/new_player()
+	var/mob/newPlayer = new newPlayerType()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
-		del(M)
+		del(newPlayer)
 		return
-
-	M.key = key
-//	M.Login()	//wat
+	newPlayer.key = key
 	return
 
 /client/verb/changes()

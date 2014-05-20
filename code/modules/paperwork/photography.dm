@@ -29,6 +29,7 @@
 	w_class = 2.0
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
+	var/icon/tiny
 
 /obj/item/weapon/photo/attack_self(mob/user as mob)
 	examine()
@@ -84,7 +85,7 @@
 
 /obj/item/weapon/storage/photo_album/MouseDrop(obj/over_object as obj)
 
-	if((istype(usr, /mob/living/carbon/human) || (ticker && ticker.mode.name == "monkey")))
+	if((istype(usr, /mob/living/carbon/human)))
 		var/mob/M = usr
 		if(!( istype(over_object, /obj/screen) ))
 			return ..()
@@ -242,10 +243,15 @@
 	if(!user.get_inactive_hand())
 		user.put_in_inactive_hand(P)
 	var/icon/small_img = icon(temp)
+	var/icon/tiny_img = icon(temp)
 	var/icon/ic = icon('icons/obj/items.dmi',"photo")
+	var/icon/pc = icon('icons/obj/bureaucracy.dmi', "photo")
 	small_img.Scale(8, 8)
+	tiny_img.Scale(4, 4)
 	ic.Blend(small_img,ICON_OVERLAY, 10, 13)
+	pc.Blend(tiny_img,ICON_OVERLAY, 12, 19)
 	P.icon = ic
+	P.tiny = pc
 	P.img = temp
 	P.desc = mobs
 	P.pixel_x = rand(-10, 10)

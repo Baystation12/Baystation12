@@ -26,6 +26,12 @@ var/list/datum/power/changeling/powerinstances = list()
 	genomecost = 0
 	verbpath = /mob/proc/changeling_transform
 
+/datum/power/changeling/change_species
+	name = "Change Species"
+	desc = "We take on the apperance of a species that we have absorbed."
+	genomecost = 0
+	verbpath = /mob/proc/changeling_change_species
+
 /datum/power/changeling/fakedeath
 	name = "Regenerative Stasis"
 	desc = "We become weakened to a death-like state, where we will rise again from death."
@@ -119,11 +125,11 @@ var/list/datum/power/changeling/powerinstances = list()
 	genomecost = 10
 	verbpath = /mob/proc/changeling_DEATHsting
 
-/datum/power/changeling/unfat_sting
-	name = "Unfat Sting"
-	desc = "We silently sting a human, forcing them to rapidly metobolize their fat."
-	genomecost = 1
-	verbpath = /mob/proc/changeling_unfat_sting
+///datum/power/changeling/unfat_sting
+//	name = "Unfat Sting"
+//	desc = "We silently sting a human, forcing them to rapidly metabolize their fat."
+//	genomecost = 1
+//	verbpath = /mob/proc/changeling_unfat_sting
 
 /datum/power/changeling/boost_range
 	name = "Boost Range"

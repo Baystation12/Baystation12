@@ -93,9 +93,17 @@
 						M.attack_log += "\[[time_stamp()]\] <b>UNKNOWN SUBJECT (No longer exists)</b> shot <b>[M]/[M.ckey]</b> with a <b>syringegun</b> ([R])"
 						msg_admin_attack("UNKNOWN shot [M] ([M.ckey]) with a <b>syringegun</b> ([R]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[user.x];Y=[user.y];Z=[user.z]'>JMP</a>)")
 
-					if(D.reagents)
-						D.reagents.trans_to(M, 15)
+					var/mob/living/T
+					if(istype(M,/mob/living))
+						T = M
+
 					M.visible_message("<span class='danger'>[M] is hit by the syringe!</span>")
+
+					if(T && istype(T) && T.can_inject())
+						if(D.reagents)
+							D.reagents.trans_to(M, 15)
+					else
+						M.visible_message("<span class='danger'>The syringe bounces off [M]!</span>")
 
 					del(D)
 					break

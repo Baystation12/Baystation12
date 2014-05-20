@@ -193,12 +193,12 @@
 	return
 
 
-/obj/structure/closet/wardrobe/toxins_white
-	name = "toxins wardrobe"
+/obj/structure/closet/wardrobe/science_white
+	name = "science wardrobe"
 	icon_state = "white"
 	icon_closed = "white"
 
-/obj/structure/closet/wardrobe/toxins_white/New()
+/obj/structure/closet/wardrobe/science_white/New()
 	new /obj/item/clothing/under/rank/scientist(src)
 	new /obj/item/clothing/under/rank/scientist(src)
 	new /obj/item/clothing/under/rank/scientist(src)

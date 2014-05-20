@@ -29,7 +29,7 @@
 	return
 
 /obj/item/weapon/folder/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/photo))
+	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/photo) || istype(W, /obj/item/weapon/paper_bundle))
 		user.drop_item()
 		W.loc = src
 		user << "<span class='notice'>You put the [W] into \the [src].</span>"
@@ -47,6 +47,8 @@
 		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
 	for(var/obj/item/weapon/photo/Ph in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
+	for(var/obj/item/weapon/paper_bundle/Pb in src)
+		dat += "<A href='?src=\ref[src];remove=\ref[Pb]'>Remove</A> - <A href='?src=\ref[src];browse=\ref[Pb]'>[Pb.name]</A><BR>"
 	user << browse(dat, "window=folder")
 	onclose(user, "folder")
 	add_fingerprint(usr)
@@ -78,6 +80,11 @@
 			var/obj/item/weapon/photo/P = locate(href_list["look"])
 			if(P)
 				P.show(usr)
+		if(href_list["browse"])
+			var/obj/item/weapon/paper_bundle/P = locate(href_list["browse"])
+			if(P)
+				P.attack_self(usr)
+				onclose(usr, "[P.name]")
 
 		//Update everything
 		attack_self(usr)

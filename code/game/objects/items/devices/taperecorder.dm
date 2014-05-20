@@ -19,10 +19,11 @@
 	throw_speed = 4
 	throw_range = 20
 
-/obj/item/device/taperecorder/hear_talk(mob/living/M as mob, msg)
+/obj/item/device/taperecorder/hear_talk(mob/living/M as mob, msg, var/verb="says")
 	if(recording)
-		var/ending = copytext(msg, length(msg))
+		//var/ending = copytext(msg, length(msg))
 		timestamp+= timerecorded
+	/*
 		if(M.stuttering)
 			storedinfo += "\[[time2text(timerecorded*10,"mm:ss")]\] [M.name] stammers, \"[msg]\""
 			return
@@ -35,7 +36,8 @@
 		else if(ending == "!")
 			storedinfo += "\[[time2text(timerecorded*10,"mm:ss")]\] [M.name] exclaims, \"[msg]\""
 			return
-		storedinfo += "\[[time2text(timerecorded*10,"mm:ss")]\] [M.name] says, \"[msg]\""
+	*/
+		storedinfo += "\[[time2text(timerecorded*10,"mm:ss")]\] [M.name] [verb], \"[msg]\""
 		return
 
 /obj/item/device/taperecorder/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -211,7 +213,7 @@
 	for(var/i=1,storedinfo.len >= i,i++)
 		t1 += "[storedinfo[i]]<BR>"
 	P.info = t1
-	P.name = "paper- 'Transcript'"
+	P.name = "Transcript"
 	canprint = 0
 	sleep(300)
 	canprint = 1

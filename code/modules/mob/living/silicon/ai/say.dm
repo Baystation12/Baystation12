@@ -5,17 +5,6 @@
 		//If there is a defined "parent" AI, it is actually an AI, and it is alive, anything the AI tries to say is said by the parent instead.
 	..(message)
 
-/mob/living/silicon/say_understands(var/other)
-	if (istype(other, /mob/living/carbon/human))
-		return 1
-	if (istype(other, /mob/living/silicon))
-		return 1
-	if (istype(other, /mob/living/carbon/brain))
-		return 1
-	return ..()
-
-
-
 // These Verbs are commented out since we've disabled the AI vocal (VOX) announcements.
 // If you re-enable them there is 3 lines in ai.dm Topic() that you need to uncomment as well.
 // just search for VOX in there.

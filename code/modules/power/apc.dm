@@ -144,7 +144,7 @@
 		init()
 	else
 		area = src.loc.loc:master
-		area.apc |= src	
+		area.apc |= src
 		opened = 1
 		operating = 0
 		name = "[area.name] APC"
@@ -171,7 +171,7 @@
 		cell.charge = start_charge * cell.maxcharge / 100.0 		// (convert percentage to actual value)
 
 	var/area/A = src.loc.loc
-	
+
 
 	//if area isn't specified use current
 	if(isarea(A) && src.areastring == null)
@@ -596,7 +596,7 @@
 				opened = 1
 			update_icon()
 	else
-		if (	((stat & BROKEN) || malfhack) \
+		if (((stat & BROKEN) || malfhack) \
 				&& !opened \
 				&& W.force >= 5 \
 				&& W.w_class >= 3.0 \
@@ -913,7 +913,7 @@
 		return 0
 	if ( ! (istype(user, /mob/living/carbon/human) || \
 			istype(user, /mob/living/silicon) || \
-			istype(user, /mob/living/carbon/monkey) /*&& ticker && ticker.mode.name == "monkey"*/) )
+			istype(user, /mob/living/carbon/monkey)) )
 		user << "\red You don't have the dexterity to use this [src]!"
 		nanomanager.close_user_uis(user, src)
 
@@ -1241,7 +1241,7 @@
 				autoflag = 3
 				area.poweralert(1, src)
 				if(cell.charge >= 4000)
-					area.poweralert(1, src)                
+					area.poweralert(1, src)
 		else if(cell.charge < 1250 && cell.charge > 750 && longtermpower < 0)                       // <30%, turn off equipment
 			if(autoflag != 2)
 				equipment = autoset(equipment, 2)
@@ -1307,7 +1307,7 @@
 		environ = autoset(environ, 0)
 		area.poweralert(0, src)
 		autoflag = 0
-		
+
 
 	// update icon & area power if anything changed
 

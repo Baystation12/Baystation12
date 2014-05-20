@@ -25,13 +25,13 @@
 
 /obj/item/clothing/glasses/science
 	name = "Science Goggles"
-	desc = "nothing"
+	desc = "The goggles do nothing!"
 	icon_state = "purple"
 	item_state = "glasses"
 
 /obj/item/clothing/glasses/night
 	name = "Night Vision Goggles"
-	desc = "You can totally see in the dark now!."
+	desc = "You can totally see in the dark now!"
 	icon_state = "night"
 	item_state = "glasses"
 	origin_tech = "magnets=2"
@@ -112,13 +112,13 @@
 			src.flags |= GLASSESCOVERSEYES
 			flags_inv |= HIDEEYES
 			icon_state = initial(icon_state)
-			usr << "You flip the [src] down to protect your eyes."
+			usr << "You flip \the [src] down to protect your eyes."
 		else
 			src.up = !src.up
 			src.flags &= ~HEADCOVERSEYES
 			flags_inv &= ~HIDEEYES
 			icon_state = "[initial(icon_state)]up"
-			usr << "You push the [src] up out of your face."
+			usr << "You push \the [src] up out of your face."
 
 		usr.update_inv_glasses()
 
