@@ -303,6 +303,9 @@ update_flag
 
 	if (href_list["remove_tank"])
 		if(holding)
+			if (valve_open)
+				valve_open = 0
+				release_log += "Valve was <b>closed</b> by [usr] ([usr.ckey]), stopping the transfer into the [holding]<br>"
 			holding.loc = loc
 			holding = null
 
