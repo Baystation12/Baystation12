@@ -239,21 +239,21 @@ proc/ShareRatio(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 		full_oxy = A.oxygen * size
 		full_nitro = A.nitrogen * size
 		full_co2 = A.carbon_dioxide * size
-		full_plasma = A.toxins * size
+		full_phoron = A.phoron * size
 
 		full_heat_capacity = A.heat_capacity() * size
 
 		s_full_oxy = B.oxygen * share_size
 		s_full_nitro = B.nitrogen * share_size
 		s_full_co2 = B.carbon_dioxide * share_size
-		s_full_plasma = B.toxins * share_size
+		s_full_phoron = B.phoron * share_size
 
 		s_full_heat_capacity = B.heat_capacity() * share_size
 
 		oxy_avg = (full_oxy + s_full_oxy) / (size + share_size)
 		nit_avg = (full_nitro + s_full_nitro) / (size + share_size)
 		co2_avg = (full_co2 + s_full_co2) / (size + share_size)
-		plasma_avg = (full_plasma + s_full_plasma) / (size + share_size)
+		phoron_avg = (full_phoron + s_full_phoron) / (size + share_size)
 
 		temp_avg = (A.temperature * full_heat_capacity + B.temperature * s_full_heat_capacity) / (full_heat_capacity + s_full_heat_capacity)
 
@@ -265,14 +265,14 @@ proc/ShareRatio(datum/gas_mixture/A, datum/gas_mixture/B, connecting_tiles)
 	A.oxygen = max(0, (A.oxygen - oxy_avg) * (1-ratio) + oxy_avg )
 	A.nitrogen = max(0, (A.nitrogen - nit_avg) * (1-ratio) + nit_avg )
 	A.carbon_dioxide = max(0, (A.carbon_dioxide - co2_avg) * (1-ratio) + co2_avg )
-	A.toxins = max(0, (A.toxins - plasma_avg) * (1-ratio) + plasma_avg )
+	A.phoron = max(0, (A.phoron - phoron_avg) * (1-ratio) + phoron_avg )
 
 	A.temperature = max(0, (A.temperature - temp_avg) * (1-ratio) + temp_avg )
 
 	B.oxygen = max(0, (B.oxygen - oxy_avg) * (1-ratio) + oxy_avg )
 	B.nitrogen = max(0, (B.nitrogen - nit_avg) * (1-ratio) + nit_avg )
 	B.carbon_dioxide = max(0, (B.carbon_dioxide - co2_avg) * (1-ratio) + co2_avg )
-	B.toxins = max(0, (B.toxins - plasma_avg) * (1-ratio) + plasma_avg )
+	B.phoron = max(0, (B.phoron - phoron_avg) * (1-ratio) + phoron_avg )
 
 	B.temperature = max(0, (B.temperature - temp_avg) * (1-ratio) + temp_avg )
 
@@ -314,7 +314,7 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 		unsim_oxygen = 0
 		unsim_nitrogen = 0
 		unsim_co2 = 0
-		unsim_plasma = 0
+		unsim_phoron = 0
 		unsim_heat_capacity = 0
 		unsim_temperature = 0
 
@@ -328,7 +328,7 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 		unsim_oxygen = avg_unsim.oxygen
 		unsim_co2 = avg_unsim.carbon_dioxide
 		unsim_nitrogen = avg_unsim.nitrogen
-		unsim_plasma = avg_unsim.toxins
+		unsim_phoron = avg_unsim.phoron
 		unsim_temperature = avg_unsim.temperature
 		share_size = max(1, max(size + 3, 1) + avg_unsim.group_multiplier)
 		tileslen = avg_unsim.group_multiplier
@@ -352,20 +352,20 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 			unsim_oxygen += T.oxygen
 			unsim_co2 += T.carbon_dioxide
 			unsim_nitrogen += T.nitrogen
-			unsim_plasma += T.toxins
+			unsim_phoron += T.phoron
 			unsim_temperature += T.temperature/unsimulated_tiles.len
 
 		//These values require adjustment in order to properly represent a room of the specified size.
 		unsim_oxygen *= correction_ratio
 		unsim_co2 *= correction_ratio
 		unsim_nitrogen *= correction_ratio
-		unsim_plasma *= correction_ratio
+		unsim_phoron *= correction_ratio
 		tileslen = unsimulated_tiles.len
 
 	else //invalid input type
 		return 0
 
-	unsim_heat_capacity = HEAT_CAPACITY_CALCULATION(unsim_oxygen, unsim_co2, unsim_nitrogen, unsim_plasma)
+	unsim_heat_capacity = HEAT_CAPACITY_CALCULATION(unsim_oxygen, unsim_co2, unsim_nitrogen, unsim_phoron)
 
 	var
 		ratio = sharing_lookup_table[6]
@@ -375,14 +375,14 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 		full_oxy = A.oxygen * size
 		full_nitro = A.nitrogen * size
 		full_co2 = A.carbon_dioxide * size
-		full_plasma = A.toxins * size
+		full_phoron = A.phoron * size
 
 		full_heat_capacity = A.heat_capacity() * size
 
 		oxy_avg = (full_oxy + unsim_oxygen*share_size) / (size + share_size)
 		nit_avg = (full_nitro + unsim_nitrogen*share_size) / (size + share_size)
 		co2_avg = (full_co2 + unsim_co2*share_size) / (size + share_size)
-		plasma_avg = (full_plasma + unsim_plasma*share_size) / (size + share_size)
+		phoron_avg = (full_phoron + unsim_phoron*share_size) / (size + share_size)
 
 		temp_avg = 0
 
@@ -399,7 +399,7 @@ proc/ShareSpace(datum/gas_mixture/A, list/unsimulated_tiles, dbg_output)
 	A.oxygen = max(0, (A.oxygen - oxy_avg) * (1 - ratio) + oxy_avg )
 	A.nitrogen = max(0, (A.nitrogen - nit_avg) * (1 - ratio) + nit_avg )
 	A.carbon_dioxide = max(0, (A.carbon_dioxide - co2_avg) * (1 - ratio) + co2_avg )
-	A.toxins = max(0, (A.toxins - plasma_avg) * (1 - ratio) + plasma_avg )
+	A.phoron = max(0, (A.phoron - phoron_avg) * (1 - ratio) + phoron_avg )
 
 	A.temperature = max(TCMB, (A.temperature - temp_avg) * (1 - ratio) + temp_avg )
 

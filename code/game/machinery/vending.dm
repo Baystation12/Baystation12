@@ -53,6 +53,8 @@
 	var/const/WIRE_SHOOTINV = 4
 
 	var/check_accounts = 0		// 1 = requires PIN and checks accounts.  0 = You slide an ID, it vends, SPACE COMMUNISM!
+	var/obj/item/weapon/spacecash/ewallet/ewallet
+
 
 /obj/machinery/vending/New()
 	..()
@@ -150,6 +152,11 @@
 	else if(istype(W, /obj/item/weapon/card) && currently_vending)
 		var/obj/item/weapon/card/I = W
 		scan_card(I)
+	else if (istype(W, /obj/item/weapon/spacecash/ewallet))
+		user.drop_item()
+		W.loc = src
+		ewallet = W
+		user << "\blue You insert the [W] into the [src]"
 
 	else if(src.panel_open)
 
@@ -243,7 +250,10 @@
 	dat += "<b>Select an item: </b><br><br>" //the rest is just general spacing and bolding
 
 	if (premium.len > 0)
-		dat += "<b>Coin slot:</b> [coin ? coin : "No coin inserted"] (<a href='byond://?src=\ref[src];remove_coin=1'>Remove</A>)<br><br>"
+		dat += "<b>Coin slot:</b> [coin ? coin : "No coin inserted"] (<a href='byond://?src=\ref[src];remove_coin=1'>Remove</A>)<br>"
+
+	if (ewallet)
+		dat += "<b>Charge card's credits:</b> [ewallet ? ewallet.worth : "No charge card inserted"] (<a href='byond://?src=\ref[src];remove_ewallet=1'>Remove</A>)<br><br>"
 
 	if (src.product_records.len == 0)
 		dat += "<font color = 'red'>No product loaded!</font>"
@@ -317,6 +327,15 @@
 		usr << "\blue You remove the [coin] from the [src]"
 		coin = null
 
+	if(href_list["remove_ewallet"] && !istype(usr,/mob/living/silicon))
+		if (!ewallet)
+			usr << "There is no charge card in this machine."
+			return
+		ewallet.loc = src.loc
+		if(!usr.get_active_hand())
+			usr.put_in_hands(ewallet)
+		usr << "\blue You remove the [ewallet] from the [src]"
+		ewallet = null
 
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
 		usr.set_machine(src)
@@ -344,9 +363,17 @@
 			if(R.price == null)
 				src.vend(R, usr)
 			else
-				src.currently_vending = R
-				src.updateUsrDialog()
-
+				if (ewallet)
+					if (R.price <= ewallet.worth)
+						ewallet.worth -= R.price
+						src.vend(R, usr)
+					else
+						usr << "\red The ewallet doesn't have enough money to pay for that."
+						src.currently_vending = R
+						src.updateUsrDialog()
+				else
+					src.currently_vending = R
+					src.updateUsrDialog()
 			return
 
 		else if (href_list["cancel_buying"])
@@ -597,7 +624,7 @@
 	desc = "A vendor with a wide variety of masks and gas tanks."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "dispenser"
-	product_paths = "/obj/item/weapon/tank/oxygen;/obj/item/weapon/tank/plasma;/obj/item/weapon/tank/emergency_oxygen;/obj/item/weapon/tank/emergency_oxygen/engi;/obj/item/clothing/mask/breath"
+	product_paths = "/obj/item/weapon/tank/oxygen;/obj/item/weapon/tank/phoron;/obj/item/weapon/tank/emergency_oxygen;/obj/item/weapon/tank/emergency_oxygen/engi;/obj/item/clothing/mask/breath"
 	product_amounts = "10;10;10;5;25"
 	vend_delay = 0
 */
@@ -686,7 +713,7 @@
 	icon_state = "cart"
 	icon_deny = "cart-deny"
 	products = list(/obj/item/weapon/cartridge/medical = 10,/obj/item/weapon/cartridge/engineering = 10,/obj/item/weapon/cartridge/security = 10,
-					/obj/item/weapon/cartridge/janitor = 10,/obj/item/weapon/cartridge/signal/toxins = 10,/obj/item/device/pda/heads = 10,
+					/obj/item/weapon/cartridge/janitor = 10,/obj/item/weapon/cartridge/signal/science = 10,/obj/item/device/pda/heads = 10,
 					/obj/item/weapon/cartridge/captain = 3,/obj/item/weapon/cartridge/quartermaster = 10)
 
 
@@ -719,7 +746,7 @@
 
 
 //This one's from bay12
-/obj/machinery/vending/plasmaresearch
+/obj/machinery/vending/phoronresearch
 	name = "Toximate 3000"
 	desc = "All the fine parts you need in one vending machine!"
 	products = list(/obj/item/clothing/under/rank/scientist = 6,/obj/item/clothing/suit/bio_suit = 6,/obj/item/clothing/head/bio_hood = 6,

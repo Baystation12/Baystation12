@@ -160,3 +160,93 @@ obj/machinery/atmospherics/trinary/mixer
 		src.update_icon()
 		src.updateUsrDialog()
 		return
+
+obj/machinery/atmospherics/trinary/mixer/t_mixer
+	icon = 'icons/obj/atmospherics/t_mixer.dmi'
+	icon_state = "intact_off"
+
+	dir = SOUTH
+	initialize_directions = SOUTH|EAST|WEST
+
+	//node 3 is the outlet, nodes 1 & 2 are intakes
+
+obj/machinery/atmospherics/trinary/mixer/t_mixer/New()
+	..()
+	switch(dir)
+		if(NORTH)
+			initialize_directions = EAST|NORTH|WEST
+		if(SOUTH)
+			initialize_directions = SOUTH|WEST|EAST
+		if(EAST)
+			initialize_directions = EAST|NORTH|SOUTH
+		if(WEST)
+			initialize_directions = WEST|NORTH|SOUTH
+
+obj/machinery/atmospherics/trinary/mixer/t_mixer/initialize()
+	if(node1 && node2 && node3) return
+
+	var/node1_connect = turn(dir, -90)
+	var/node2_connect = turn(dir, 90)
+	var/node3_connect = dir
+
+	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
+		if(target.initialize_directions & get_dir(target,src))
+			node1 = target
+			break
+
+	for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
+		if(target.initialize_directions & get_dir(target,src))
+			node2 = target
+			break
+
+	for(var/obj/machinery/atmospherics/target in get_step(src,node3_connect))
+		if(target.initialize_directions & get_dir(target,src))
+			node3 = target
+			break
+
+	update_icon()
+
+obj/machinery/atmospherics/trinary/mixer/m_mixer
+	icon = 'icons/obj/atmospherics/m_mixer.dmi'
+	icon_state = "intact_off"
+
+	dir = SOUTH
+	initialize_directions = SOUTH|NORTH|EAST
+
+	//node 3 is the outlet, nodes 1 & 2 are intakes
+
+obj/machinery/atmospherics/trinary/mixer/m_mixer/New()
+	..()
+	switch(dir)
+		if(NORTH)
+			initialize_directions = WEST|NORTH|SOUTH
+		if(SOUTH)
+			initialize_directions = SOUTH|EAST|NORTH
+		if(EAST)
+			initialize_directions = EAST|WEST|NORTH
+		if(WEST)
+			initialize_directions = WEST|SOUTH|EAST
+
+obj/machinery/atmospherics/trinary/mixer/m_mixer/initialize()
+	if(node1 && node2 && node3) return
+
+	var/node1_connect = turn(dir, -180)
+	var/node2_connect = turn(dir, 90)
+	var/node3_connect = dir
+
+	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
+		if(target.initialize_directions & get_dir(target,src))
+			node1 = target
+			break
+
+	for(var/obj/machinery/atmospherics/target in get_step(src,node2_connect))
+		if(target.initialize_directions & get_dir(target,src))
+			node2 = target
+			break
+
+	for(var/obj/machinery/atmospherics/target in get_step(src,node3_connect))
+		if(target.initialize_directions & get_dir(target,src))
+			node3 = target
+			break
+
+	update_icon()
