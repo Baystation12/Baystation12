@@ -24,6 +24,7 @@
 	var/atom/movable/following = null
 	var/medHUD = 0
 
+
 /mob/dead/observer/New(var/mob/body=null, var/flags=1)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	see_invisible = SEE_INVISIBLE_OBSERVER

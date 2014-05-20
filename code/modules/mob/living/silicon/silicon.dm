@@ -11,6 +11,12 @@
 	var/list/alarm_types_show = list("Motion" = 0, "Fire" = 0, "Atmosphere" = 0, "Power" = 0, "Camera" = 0)
 	var/list/alarm_types_clear = list("Motion" = 0, "Fire" = 0, "Atmosphere" = 0, "Power" = 0, "Camera" = 0)
 
+/mob/living/silicon/hasFullAccess()
+	return 1
+
+/mob/living/silicon/GetAccess()
+	return get_all_accesses()
+
 /mob/living/silicon/proc/cancelAlarm()
 	return
 
@@ -180,7 +186,6 @@
 		var/timeleft = emergency_shuttle.timeleft()
 		if (timeleft)
 			stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
-
 
 
 // This adds the basic clock, shuttle recall timer, and malf_ai info to all silicon lifeforms
