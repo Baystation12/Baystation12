@@ -40,7 +40,7 @@ datum/game_mode/mutiny
 		var/list/candidates[0]
 		for(var/mob/loyalist in player_list)
 			if(loyalist.mind && loyalist.mind.assigned_role == "Captain")
-				candidates.Add(loyalist.mind)
+				candidates+=loyalist.mind
 		return candidates
 
 	proc/get_head_mutineer_candidates()
@@ -49,7 +49,7 @@ datum/game_mode/mutiny
 			if(mutineer.client.prefs.be_special & BE_MUTINEER)
 				for(var/job in command_positions - "Captain")
 					if(mutineer.mind && mutineer.mind.assigned_role == job)
-						candidates.Add(mutineer.mind)
+						candidates+=mutineer.mind
 		return candidates
 
 	proc/get_directive_candidates()
@@ -57,7 +57,7 @@ datum/game_mode/mutiny
 		for(var/T in typesof(/datum/directive) - /datum/directive)
 			var/datum/directive/D = new T(src)
 			if (D.meets_prerequisites())
-				candidates.Add(D)
+				candidates+=D
 		return candidates
 
 	proc/send_pda_message()
@@ -112,13 +112,13 @@ datum/game_mode/mutiny
 			return
 
 		if(M in loyalists)
-			loyalists.Remove(M)
+			loyalists-=M
 
 		if(M in mutineers)
-			mutineers.Remove(M)
+			mutineers-=M
 
 		M.special_role = faction
-		faction_list.Add(M)
+		faction_list+=M
 
 		if(faction == "mutineer")
 			M.current << fluff.mutineer_tag("You have joined the mutineers!")
@@ -284,8 +284,8 @@ datum/game_mode/mutiny
 	head_mutineer.special_role = "head_mutineer"
 	equip_head_mutineer()
 
-	loyalists.Add(head_loyalist)
-	mutineers.Add(head_mutineer)
+	loyalists+=head_loyalist
+	mutineers+=head_mutineer
 
 	replace_nuke_with_ead()
 	current_directive.initialize()
@@ -340,7 +340,7 @@ datum/game_mode/mutiny
 		log_admin("[src]([src.ckey]) attempted to recruit [M] as a loyalist.")
 		message_admins("\red [src]([src.ckey]) attempted to recruit [M] as a loyalist.")
 
-		var/choice = alert(M, "Asked by [src]: Will you help me complete Directive X?", "Loyalist recruitment", "No", "Yes")
+		var/choice = alert(M, "Asked by [src]: Will you help me complete Directive X?", "Loyalist recruitment", "Yes", "No")
 		if(choice == "Yes")
 			mode.add_loyalist(M.mind)
 		else if(choice == "No")
@@ -377,7 +377,7 @@ datum/game_mode/mutiny
 		log_admin("[src]([src.ckey]) attempted to recruit [M] as a mutineer.")
 		message_admins("\red [src]([src.ckey]) attempted to recruit [M] as a mutineer.")
 
-		var/choice = alert(M, "Asked by [src]: Will you help me stop Directive X?", "Mutineer recruitment", "No", "Yes")
+		var/choice = alert(M, "Asked by [src]: Will you help me stop Directive X?", "Mutineer recruitment", "Yes", "No")
 		if(choice == "Yes")
 			mode.add_mutineer(M.mind)
 		else if(choice == "No")
