@@ -77,7 +77,7 @@
 
 
 /datum/job/atmos
-	title = "Atmospheric Technician"
+	title = "Life Support Specialist"
 	flag = ATMOSTECH
 	department_flag = ENGSEC
 	faction = "Station"
@@ -87,7 +87,7 @@
 	selection_color = "#fff5cc"
 	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics)
 	minimal_access = list(access_eva, access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction)
-
+	alt_titles = list("Atmospheric Technician")
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
