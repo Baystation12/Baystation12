@@ -403,8 +403,8 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				M.adjustToxLoss(4)
-				M.adjustOxyLoss(4)
+				M.adjustToxLoss(14)
+				M.adjustOxyLoss(14)
 				M.sleeping += 1
 				..()
 				return
@@ -1866,8 +1866,22 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
+				if(!data) data = 1
 				if(prob(5)) M.emote(pick("twitch","blink_r","shiver"))
+				data++
+				switch(data)
+					if(35 to 50)
+						M.adjustOxyLoss(1) //They basically run out of breath
+
+					if(51 to 79) // Their cells burn more oxygen than the body can distribute
+						M.adjustToxLoss(1)
+						M.adjustOxyLoss(2)
+
+					if(80 to INFINITY) // At this point you're fucked
+						M.adjustOxyLoss(5) //you'll pass out pretty fucking quick, and die shortly after
 				..()
+
+
 				return
 
 		cryoxadone
