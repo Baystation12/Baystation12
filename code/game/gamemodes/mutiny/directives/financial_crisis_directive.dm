@@ -9,7 +9,7 @@ datum/directive/terminations/financial_crisis/get_crew_to_terminate()
 	var/list/candidates = civilian_positions - "Head of Personnel"
 	for(var/mob/living/carbon/human/H in player_list)
 		if (candidates.Find(H.mind.assigned_role))
-			civilians.Add(H)
+			civilians+=H
 	return civilians
 
 datum/directive/terminations/financial_crisis/get_description()

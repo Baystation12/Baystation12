@@ -8,7 +8,7 @@ datum/directive/research_to_ripleys
 		var/list/researchers[0]
 		for(var/mob/living/carbon/human/H in player_list)
 			if (H.mind.assigned_role in science_positions - "Research Director")
-				researchers.Add(H)
+				researchers+=H
 		return researchers
 
 	proc/count_researchers_reassigned()

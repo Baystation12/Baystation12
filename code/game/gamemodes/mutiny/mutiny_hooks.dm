@@ -2,7 +2,7 @@
 	var/datum/game_mode/mutiny/mode = get_mutiny_mode()
 	if (!mode) return 1
 
-	mode.body_count.Add(deceased.mind)
+	mode.body_count+=deceased.mind
 	return 1
 
 /hook/clone/proc/update_icon(mob/living/carbon/human/H)

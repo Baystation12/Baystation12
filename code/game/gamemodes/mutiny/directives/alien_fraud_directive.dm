@@ -8,7 +8,7 @@ datum/directive/terminations/alien_fraud/get_crew_to_terminate()
 	var/list/aliens[0]
 	for(var/mob/living/carbon/human/H in player_list)
 		if (H.species.name == "Tajaran" || H.species.name == "Unathi")
-			aliens.Add(H)
+			aliens+=H
 	return aliens
 
 datum/directive/terminations/alien_fraud/get_description()

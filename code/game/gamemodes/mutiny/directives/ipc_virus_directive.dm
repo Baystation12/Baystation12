@@ -17,21 +17,21 @@ datum/directive/ipc_virus
 		var/list/machines[0]
 		for(var/mob/living/carbon/human/H in player_list)
 			if (H.species.name == "Machine")
-				machines.Add(H)
+				machines+=H
 		return machines
 
 	proc/get_roboticists()
 		var/list/roboticists[0]
 		for(var/mob/living/carbon/human/H in player_list)
 			if (roboticist_roles.Find(H.mind.assigned_role))
-				roboticists.Add(H)
+				roboticists+=H
 		return roboticists
 
 datum/directive/ipc_virus/initialize()
 	for(var/mob/living/carbon/human/H in get_ipcs())
-		brains_to_enslave.Add(H.mind)
-		cyborgs_to_make.Add(H.mind)
-		ids_to_terminate.Add(H.wear_id)
+		brains_to_enslave+=H.mind
+		cyborgs_to_make+=H.mind
+		ids_to_terminate+=H.wear_id
 
 datum/directive/ipc_virus/get_description()
 	return {"
@@ -54,7 +54,7 @@ datum/directive/ipc_virus/directives_complete()
 	if (!D) return 1
 
 	if(D.brains_to_enslave.Find(B.brainmob.mind))
-		D.brains_to_enslave.Remove(B.brainmob.mind)
+		D.brains_to_enslave-=B.brainmob.mind
 
 	return 1
 
@@ -63,13 +63,13 @@ datum/directive/ipc_virus/directives_complete()
 	if (!D) return 1
 
 	if(D.cyborgs_to_make.Find(cyborg.mind))
-		D.cyborgs_to_make.Remove(cyborg.mind)
+		D.cyborgs_to_make-=cyborg.mind
 
 	// In case something glitchy happened and the victim got
 	// borged without us tracking the brain removal, go ahead
 	// and update that list too.
 	if(D.brains_to_enslave.Find(cyborg.mind))
-		D.brains_to_enslave.Remove(cyborg.mind)
+		D.brains_to_enslave-=cyborg.mind
 
 	return 1
 
@@ -78,6 +78,6 @@ datum/directive/ipc_virus/directives_complete()
 	if (!D) return 1
 
 	if(D.ids_to_terminate && D.ids_to_terminate.Find(id))
-		D.ids_to_terminate.Remove(id)
+		D.ids_to_terminate-=id
 
 	return 1
