@@ -10,21 +10,21 @@ datum/directive/tau_ceti_needs_women
 		var/list/targets[0]
 		for(var/mob/living/carbon/human/H in player_list)
 			if(H.species.name != "Machine" && H.gender == get_target_gender())
-				targets.Add(H)
+				targets+=H
 		return targets
 
 	proc/get_target_heads()
 		var/list/heads[0]
 		for(var/mob/living/carbon/human/H in get_crew_of_target_gender())
 			if(command_positions.Find(H.mind.assigned_role))
-				heads.Add(H)
+				heads+=H
 		return heads
 
 	proc/get_target_aliens()
 		var/list/aliens[0]
 		for(var/mob/living/carbon/human/H in get_crew_of_target_gender())
 			if (H.species.name == "Tajaran" || H.species.name == "Unathi" || H.species.name == "Skrell")
-				aliens.Add(H)
+				aliens+=H
 		return aliens
 
 	proc/count_heads_reassigned()
@@ -48,7 +48,7 @@ datum/directive/tau_ceti_needs_women/initialize()
 		command_targets[H.wear_id] = 0
 
 	for(var/mob/living/carbon/human/H in get_target_aliens())
-		alien_targets.Add(H.wear_id)
+		alien_targets+=H.wear_id
 
 	special_orders = list(
 		"Remove [get_target_gender()] personnel from Command positions.",
@@ -75,7 +75,7 @@ datum/directive/tau_ceti_needs_women/directives_complete()
 	if (!D) return 1
 
 	if(D.alien_targets && D.alien_targets.Find(id))
-		D.alien_targets.Remove(id)
+		D.alien_targets-=id
 
 	if(D.command_targets && D.command_targets.Find(id))
 		D.command_targets[id] = 1
