@@ -30,9 +30,9 @@
 /datum/language/tajaran_sign
 	name = "Siik'tajr"
 	desc = "An expressive language that combines yowls and chirps with posture, tail and ears. Spoken by many Tajaran."
-	speech_verb = "mrowls"
-	colour = "tajaran"
-	key = "y"		//only "dfpqyz" left.
+	speech_verb = "mrowls and gestures"
+	colour = "tajaran_signlang"
+	key = "y"		//only "dfpqxyz" left.
 	flags = WHITELISTED | NONVERBAL
 
 /datum/language/skrell
