@@ -1205,11 +1205,3 @@ mob/proc/yank_out_object()
 	if(host)
 		host.ckey = src.ckey
 		host << "<span class='info'>You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent.</span>"
-
-// Mobs tell access what access levels it has.
-/mob/proc/GetAccess()
-	return list()
-
-// Skip over all the complex list checks.
-/mob/proc/hasFullAccess()
-	return 0

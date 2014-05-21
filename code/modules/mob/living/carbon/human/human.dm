@@ -1531,14 +1531,3 @@
 		M.apply_damage(50,BRUTE)
 		if(M.stat == 2)
 			M.gib()
-
-// Get ALL accesses available.
-/mob/living/carbon/human/GetAccess()
-	var/list/ACL=list()
-	var/obj/item/I = get_active_hand()
-	if(istype(I))
-		ACL |= I.GetAccess()
-	if(wear_id)
-		ACL |= wear_id.GetAccess()
-	return ACL
-
