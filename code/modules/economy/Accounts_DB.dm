@@ -11,6 +11,7 @@
 	var/obj/item/weapon/card/id/held_card
 	var/datum/money_account/detailed_account_view
 	var/creating_new_account = 0
+	var/activated = 1
 
 	proc/get_access_level()
 		if (!held_card)
