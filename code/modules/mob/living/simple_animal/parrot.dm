@@ -48,6 +48,7 @@
 	response_disarm = "gently moves aside the"
 	response_harm   = "swats the"
 	stop_automated_movement = 1
+	universal_speak = 1
 
 	var/parrot_state = PARROT_WANDER //Hunt for a perch when created
 	var/parrot_sleep_max = 25 //The time the parrot sits while perched before looking around. Mosly a way to avoid the parrot's AI in life() being run every single tick.
@@ -703,3 +704,55 @@
 	ears = new /obj/item/device/radio/headset/headset_eng(src)
 	available_channels = list(":e")
 	..()
+
+/mob/living/simple_animal/parrot/say(var/message)
+
+	if(stat)
+		return
+
+	var/verb = "says"
+	if(speak_emote.len)
+		verb = pick(speak_emote)
+
+
+	var/message_mode=""
+	if(copytext(message,1,2) == ";")
+		message_mode = "headset"
+		message = copytext(message,2)
+
+	if(length(message) >= 2)
+		var/channel_prefix = copytext(message, 1 ,3)
+		message_mode = department_radio_keys[channel_prefix]
+
+	if(copytext(message,1,2) == ":")
+		var/positioncut = 3
+		message = trim(copytext(message,positioncut))
+
+	message = capitalize(trim_left(message))
+
+	if(message_mode)
+		if(message_mode in radiochannels)
+			if(ears && istype(ears,/obj/item/device/radio))
+				ears.talk_into(src,message, message_mode, verb, null)
+
+
+	..(message)
+
+
+/mob/living/simple_animal/parrot/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
+	if(prob(50))
+		parrot_hear(message)
+	..(message,verb,language,alt_name,italics,speaker)
+
+
+
+/mob/living/simple_animal/parrot/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/mob/speaker = null, var/hard_to_hear = 0)
+	if(prob(50))
+		parrot_hear("[pick(available_channels)] [message]")
+	..(message,verb,language,part_a,part_b,speaker,hard_to_hear)
+
+
+/mob/living/simple_animal/parrot/proc/parrot_hear(var/message="")
+	if(!message || stat)
+		return
+	speech_buffer.Add(message)

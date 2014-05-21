@@ -99,6 +99,8 @@
 			return
 		if(target in user)
 			return
+		if(user in target) //no wrapping closets that you are inside - it's not physically possible
+			return
 
 		user.attack_log += text("\[[time_stamp()]\] <font color='blue'>Has used [src.name] on \ref[target]</font>")
 
@@ -165,7 +167,7 @@
 	//If you don't want to fuck up disposals, add to this list, and don't change the order.
 	//If you insist on changing the order, you'll have to change every sort junction to reflect the new order. --Pete
 
-	w_class = 1
+	w_class = 2
 	item_state = "electronic"
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT

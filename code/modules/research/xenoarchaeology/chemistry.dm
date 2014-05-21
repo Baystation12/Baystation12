@@ -77,7 +77,7 @@ datum
 	icon_state = "solution_tray"
 	m_amt = 0
 	g_amt = 5
-	w_class = 1.0
+	w_class = 2.0
 	amount_per_transfer_from_this = 1
 	possible_transfer_amounts = list(1, 2)
 	volume = 2

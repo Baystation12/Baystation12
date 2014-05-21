@@ -135,7 +135,8 @@
 	icon_state = "working"
 	construction_time = 200
 	construction_cost = list("metal"=5000)
-
+	var/brute = 0
+	var/burn = 0
 
 // TODO: actual icons ;)
 /obj/item/robot_parts/robot_component/binary_communication_device
@@ -167,7 +168,7 @@
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	throwforce = 3
-	w_class = 1.0
+	w_class = 2.0
 	throw_speed = 5
 	throw_range = 10
 	m_amt = 200

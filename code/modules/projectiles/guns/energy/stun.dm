@@ -6,7 +6,7 @@
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
 	charge_cost = 100
-	projectile_type = "/obj/item/projectile/energy/electrode"
+	projectile_type = "/obj/item/projectile/beam/stun"
 	cell_type = "/obj/item/weapon/cell/crap"
 
 /obj/item/weapon/gun/energy/taser/cyborg
@@ -15,7 +15,7 @@
 	icon_state = "taser"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	charge_cost = 100
-	projectile_type = "/obj/item/projectile/energy/electrode"
+	projectile_type = "/obj/item/projectile/beam/stun"
 	cell_type = "/obj/item/weapon/cell/secborg"
 	var/charge_tick = 0
 	var/recharge_time = 10 //Time it takes for shots to recharge (in ticks)
@@ -33,16 +33,16 @@
 		charge_tick++
 		if(charge_tick < recharge_time) return 0
 		charge_tick = 0
-		
+
 		if(!power_supply) return 0 //sanity
 		if(power_supply.charge >= power_supply.maxcharge) return 0 // check if we actually need to recharge
-		
+
 		if(isrobot(src.loc))
 			var/mob/living/silicon/robot/R = src.loc
 			if(R && R.cell)
 				R.cell.use(charge_cost) 		//Take power from the borg...
 				power_supply.give(charge_cost)	//... to recharge the shot
-				
+
 		update_icon()
 		return 1
 
@@ -51,10 +51,10 @@
 	name = "stun revolver"
 	desc = "A high-tech revolver that fires stun cartridges. The stun cartridges can be recharged using a conventional energy weapon recharger."
 	icon_state = "stunrevolver"
-	fire_sound = 'sound/weapons/Gunshot.ogg'
+	fire_sound = 'sound/weapons/Taser.ogg'
 	origin_tech = "combat=3;materials=3;powerstorage=2"
 	charge_cost = 125
-	projectile_type = "/obj/item/projectile/energy/electrode"
+	projectile_type = "/obj/item/projectile/beam/stun"
 	cell_type = "/obj/item/weapon/cell"
 
 
