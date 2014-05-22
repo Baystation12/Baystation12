@@ -70,6 +70,8 @@
 	..()
 	if((ishuman(hit_atom)))
 		var/mob/living/carbon/human/H = hit_atom
+		if(src in H.r_hand) return
+		if(src in H.l_hand) return
 		var/mob/A = H.LAssailant
 		if((H in team_alpha) && (A in team_alpha))
 			A << "\red He's on your team!"
