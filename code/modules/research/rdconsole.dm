@@ -47,7 +47,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/id = 0			//ID of the computer (for server restrictions).
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
 
-	req_access = list(access_tox)	//Data and setting manipulation requires scientist access.
+	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
 
 
 /obj/machinery/computer/rdconsole/proc/CallTechName(var/ID) //A simple helper proc to find the name of a tech with a given ID.
