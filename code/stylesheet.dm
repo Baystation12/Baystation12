@@ -59,7 +59,7 @@ h1.alert, h2.alert		{color: #000000;}
 
 .mod					{color: #735638;	font-weight: bold;}
 .modooc					{color: #184880;	font-weight: bold;}
-.adminchat				{color: #9000FF;	font-weight: bold;}
+.adminchat				{color: #9A04D1;	font-weight: bold;}
 .adminmod				{color: #402A14;	font-weight: bold;}
 
 .alien					{color: #543354;}

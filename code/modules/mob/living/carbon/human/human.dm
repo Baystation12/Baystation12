@@ -1496,8 +1496,8 @@
 	G.synch()
 
 /mob/living/carbon/human/proc/gut()
-	set category = "IC"
-	set name = "Abilities"
+	set category = "Abilities"
+	set name = "Gut"
 	set desc = "While grabbing someone aggressively, rip their guts out or tear them apart."
 
 	if(last_special > world.time)
