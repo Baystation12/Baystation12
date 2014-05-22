@@ -26,7 +26,7 @@ datum/directive/terminations/initialize()
 		var/datum/money_account/account = A.mind.initial_account
 		accounts_to_revoke["[account.account_number]"] = 0
 		accounts_to_suspend["[account.account_number]"] = account.suspended
-		ids_to_terminate.Add(A.wear_id)
+		ids_to_terminate+=A.wear_id
 
 /hook/revoke_payroll/proc/payroll_directive(datum/money_account/account)
 	var/datum/directive/terminations/D = get_directive("terminations")
@@ -51,6 +51,6 @@ datum/directive/terminations/initialize()
 	if (!D) return 1
 
 	if(D.ids_to_terminate && D.ids_to_terminate.Find(id))
-		D.ids_to_terminate.Remove(id)
+		D.ids_to_terminate-=id
 
 	return 1

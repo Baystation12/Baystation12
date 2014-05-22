@@ -21,9 +21,9 @@ datum/directive/bluespace_contagion/initialize()
 			break
 
 		var/mob/living/carbon/human/candidate = pick(candidates)
-		candidates.Remove(candidate)
-		infected.Add(candidate)
-		infected_names.Add("[candidate.mind.assigned_role] [candidate.mind.name]")
+		candidates-=candidate
+		infected+=candidate
+		infected_names+="[candidate.mind.assigned_role] [candidate.mind.name]"
 
 	special_orders = list(
 		"Quarantine these personnel: [list2text(infected_names, ", ")].",
@@ -41,5 +41,5 @@ datum/directive/bluespace_contagion/directives_complete()
 	if(!D) return 1
 
 	if(deceased in D.infected)
-		D.infected.Remove(deceased)
+		D.infected-=deceased
 	return 1
