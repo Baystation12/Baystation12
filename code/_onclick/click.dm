@@ -118,7 +118,8 @@
 		return
 
 	// Allows you to click on a box's contents, if that box is on the ground, but no deeper than that
-	if(isturf(A) || isturf(A.loc) || (A.loc && isturf(A.loc.loc)))
+	sdepth = A.storage_depth_turf()
+	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		next_move = world.time + 10
 
 		if(A.Adjacent(src)) // see adjacent.dm
@@ -246,7 +247,7 @@
 
 /atom/proc/AltClick(var/mob/user)
 	var/turf/T = get_turf(src)
-	if(T && T.Adjacent(user))
+	if(T && T.AdjacentQuick(user))
 		if(user.listed_turf == T)
 			user.listed_turf = null
 		else

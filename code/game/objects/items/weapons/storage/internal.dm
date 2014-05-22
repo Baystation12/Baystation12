@@ -80,8 +80,6 @@
 		if (M.s_active == src)
 			src.close(M)
 	return 1
-	
-	
-	
-	
-	
+
+/obj/item/weapon/storage/internal/Adjacent(var/atom/neighbor)
+	return master_item.Adjacent(neighbor)

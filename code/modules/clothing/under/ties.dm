@@ -9,22 +9,41 @@
 	slot_flags = 0
 	w_class = 2.0
 	var/obj/item/clothing/under/has_suit = null		//the suit the tie may be attached to
+	var/image/inv_overlay = null	//overlay used when attached to clothing.
+
+/obj/item/clothing/tie/New()
+	..()
+	inv_overlay = image("icon" = 'icons/obj/clothing/ties_overlay.dmi', "icon_state" = "[item_color? "[item_color]" : "[icon_state]"]")
 
 //when user attached an accessory to S
-/obj/item/clothing/tie/proc/attach_to(obj/item/clothing/under/S, mob/user as mob)
+/obj/item/clothing/tie/proc/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	if(!istype(S))
 		return
 	has_suit = S
 	loc = has_suit
+	has_suit.overlays += inv_overlay
+	
 	user << "<span class='notice'>You attach [src] to [has_suit].</span>"
 	src.add_fingerprint(user)
 
-/obj/item/clothing/tie/proc/remove(mob/user as mob)
+/obj/item/clothing/tie/proc/on_removed(mob/user as mob)
 	if(!has_suit)
 		return
+	has_suit.overlays -= inv_overlay
 	has_suit = null
 	usr.put_in_hands(src)
 	src.add_fingerprint(user)
+
+//default attackby behaviour
+/obj/item/clothing/tie/attackby(obj/item/I, mob/user)
+	..()
+
+//default attack_hand behaviour
+/obj/item/clothing/tie/attack_hand(mob/user as mob)
+	if(has_suit)
+		has_suit.remove_accessory(user)
+		return	//we aren't an object on the ground so don't call parent
+	..()
 
 /obj/item/clothing/tie/blue
 	name = "blue tie"
@@ -244,11 +263,11 @@
 	else
 		usr << "It is empty."
 
-/obj/item/clothing/tie/holster/attach_to(obj/item/clothing/under/S, mob/user as mob)
+/obj/item/clothing/tie/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()
 	has_suit.verbs += /obj/item/clothing/tie/holster/verb/holster_verb
 
-/obj/item/clothing/tie/holster/remove(mob/user as mob)
+/obj/item/clothing/tie/holster/on_removed(mob/user as mob)
 	has_suit.verbs -= /obj/item/clothing/tie/holster/verb/holster_verb
 	..()
 
