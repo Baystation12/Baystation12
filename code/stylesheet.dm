@@ -62,7 +62,7 @@ h1.alert, h2.alert		{color: #000000;}
 .modooc					{color: #184880;	font-weight: bold;}
 .adminmod				{color: #402A14;	font-weight: bold;}
 .tajaran				{color: #803B56;}
-.tajaran_signlang		{color: #4D0C26;}
+.tajaran_signlang		{color: #941C1C;}
 .skrell					{color: #00CED1;}
 .soghun					{color: #228B22;}
 .vox					{color: #AA00AA;}
