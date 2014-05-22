@@ -277,7 +277,7 @@
 
 /obj/item/weapon/circuitboard/rdconsole/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I,/obj/item/weapon/screwdriver))
-		user << "\blue You adjust the jumper on the access protocol pins."
+		user.visible_message("\blue \the [user] adjusts the jumper on the [src]'s access protocol pins.", "\blue You adjust the jumper on the access protocol pins.")
 		if(src.build_path == "/obj/machinery/computer/rdconsole/core")
 			src.name = "Circuit Board (RD Console - Robotics)"
 			src.build_path = "/obj/machinery/computer/rdconsole/robotics"
