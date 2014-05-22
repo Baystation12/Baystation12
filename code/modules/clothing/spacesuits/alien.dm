@@ -194,6 +194,35 @@
 
 
 //Vox Armalis gear.
+//Vox Armalis gear.
+/obj/item/clothing/shoes/magboots/vox/armalis
+ 	name = "large vox magclaws"
+ 	item_state = "boots-armalis"
+ 	icon_state = "boots-armalis"
+ 	icon_override = 'icons/mob/species/vox/armalis/shoes.dmi'
+ 	species_restricted = list("Vox Armalis")
+
+/obj/item/clothing/gloves/yellow/vox/armalis
+ 	name = "large insulated gauntlets"
+ 	item_state = "gloves-armalis"
+ 	icon_state = "gloves-armalis"
+ 	icon_override = 'icons/mob/species/vox/armalis/hands.dmi'
+ 	species_restricted = list("Vox Armalis")
+
+/obj/item/clothing/mask/breath/vox/armalis
+ 	name = "large vox mask"
+ 	item_state = "mask-armalis"
+ 	icon_state = "mask-armalis"
+ 	icon_override = 'icons/mob/species/vox/armalis/mask.dmi'
+ 	species_restricted = list("Vox Armalis")
+
+/obj/item/clothing/suit/space/vox/carapace/armalis
+	name = "large alien carapace armour"
+	item_state = "armour-armalis"
+	icon_state = "armour-armalis"
+	icon_override = 'icons/mob/vox.dmi'
+	species_restricted = list("Vox Armalis")
+
 /obj/item/clothing/suit/space/vox/carapace/armalis
 	name = "large alien carapace armour"
 	item_state = "armour-armalis"
