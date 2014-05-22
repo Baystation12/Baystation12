@@ -277,14 +277,15 @@
 
 /obj/item/weapon/circuitboard/rdconsole/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I,/obj/item/weapon/screwdriver))
+		user << "\blue You adjust the jumper on the access protocol pins."
 		if(src.build_path == "/obj/machinery/computer/rdconsole/core")
 			src.name = "Circuit Board (RD Console - Robotics)"
 			src.build_path = "/obj/machinery/computer/rdconsole/robotics"
-			user << "\blue Access protocols succesfully updated."
+			user << "\blue Access protocols set to robotics."
 		else
 			src.name = "Circuit Board (RD Console)"
 			src.build_path = "/obj/machinery/computer/rdconsole/core"
-			user << "\blue Defaulting access protocols."
+			user << "\blue Access protocols set to default."
 	return
 
 /obj/structure/computerframe/attackby(obj/item/P as obj, mob/user as mob)
