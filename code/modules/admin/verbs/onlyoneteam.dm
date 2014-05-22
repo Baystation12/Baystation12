@@ -17,7 +17,7 @@
 				continue
 			del(I)
 
-
+		H << "<B>You are part of the Cyberiad dodgeball tournament. Throw dodgeballs at crewmembers wearing a different color than you. OOC: Use THROW on an EMPTY-HAND to catch thrown dodgeballs.</B>"
 
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/heads/captain(H), slot_l_ear)
 //		H.equip_to_slot_or_del(new /obj/item/clothing/head/beret(H), slot_head)
@@ -36,9 +36,10 @@
 			W.icon_state = "centcom"
 			W.access = get_all_accesses()
 			W.access += get_all_centcom_access()
-			W.assignment = "Highlander"
+			W.assignment = "Professional Pee-Wee League Dodgeball Player"
 			W.registered_name = H.real_name
 			H.equip_to_slot_or_del(W, slot_wear_id)
+			H.regenerate_icons()
 
 		else
 			team_bravo += H
@@ -53,6 +54,7 @@
 			W.assignment = "Professional Pee-Wee League Dodgeball Player"
 			W.registered_name = H.real_name
 			H.equip_to_slot_or_del(W, slot_wear_id)
+			H.regenerate_icons()
 	message_admins("\blue [key_name_admin(usr)] used DODGEBAWWWWWWWL!", 1)
 	log_admin("[key_name(usr)] used dodgeball.")
 
@@ -65,23 +67,21 @@
 	desc = "Used for playing the most violent and degrading of childhood games."
 
 /obj/item/weapon/beach_ball/dodgeball/throw_impact(atom/hit_atom)
+	..()
 	if((ishuman(hit_atom)))
-		var/mob/living/carbon/M = hit_atom
-		if(!dir&get_dir(src,M))
-			if(M.in_throw_mode && !M.get_active_hand())  //empty active hand and we're in throw mode
-				if(M.canmove && !M.restrained())
-					M.hitby(src)
+		var/mob/living/carbon/human/H = hit_atom
+		var/mob/A = H.LAssailant
+		if((H in team_alpha) && (A in team_alpha))
+			A << "\red He's on your team!"
+			return
+		else if((H in team_bravo) && (A in team_bravo))
+			A << "\red He's on your team!"
+			return
+		else if(!A in team_alpha && !A in team_bravo)
+			A << "\red You're not part of the dodgeball game, sorry!"
+			return
 		else
 			playsound(src, 'sound/items/dodgeball.ogg', 50, 1)
-			visible_message("\red [M] HAS BEEN ELIMINATED!!", 3)
-/*			spawn(0)
-				var/mobloc = get_turf(M.loc)
-				var/atom/movable/overlay/animation = new /atom/movable/overlay( mobloc )
-				animation.name = "water"
-				animation.density = 0
-				animation.anchored = 1
-				animation.icon = 'icons/mob/mob.dmi'
-				animation.icon_state = "liquify"
-				animation.layer = 5
-//				animation.master = holder
-				del(M)*/
+			visible_message("\red [H] HAS BEEN ELIMINATED!!", 3)
+			H.melt()
+			return
