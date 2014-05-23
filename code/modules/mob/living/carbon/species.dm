@@ -12,6 +12,7 @@
 	var/primitive                // Lesser form, if any (ie. monkey for humans)
 	var/tail                     // Name of tail image in species effects icon file.
 	var/language                 // Default racial language, if any.
+	var/secondary_langs = list() // The names of secondary languages that are available to this species.
 	var/attack_verb = "punch"    // Empty hand hurt intent verb.
 	var/punch_damage = 0		 // Extra empty hand attack damage.
 	var/mutantrace               // Safeguard due to old code.
@@ -155,6 +156,7 @@
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
 	language = "Siik'maas"
+	secondary_langs = list("Siik'tajr")
 	tail = "tajtail"
 	attack_verb = "scratch"
 	punch_damage = 5
