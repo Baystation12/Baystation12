@@ -63,7 +63,7 @@
 	name = "dodgeball"
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "dodgeball"
-	item_state = "dodgeball"
+	item_state = "basketball"
 	desc = "Used for playing the most violent and degrading of childhood games."
 
 /obj/item/weapon/beach_ball/dodgeball/throw_impact(atom/hit_atom)
