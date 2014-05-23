@@ -1948,6 +1948,7 @@ datum
 			description = "An all-purpose antiviral agent."
 			reagent_state = LIQUID
 			color = "#228B22" // rgb: 34, 139, 34
+			custom_metabolism = 0.01
 
 			on_mob_life(var/mob/living/M as mob)
 				..()
