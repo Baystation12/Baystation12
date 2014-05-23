@@ -21,6 +21,13 @@
 	var/obj/item/weapon/paper/P
 	if(istype(W, /obj/item/weapon/paper))
 		P = W
+		if (istype(P, /obj/item/weapon/paper/carbon))
+			var/obj/item/weapon/paper/carbon/C = P
+			if (!C.iscopy && !C.copied)
+				user << "<span class='notice'>Take off the carbon copy first.</span>"
+				add_fingerprint(user)
+				return
+
 		amount++
 		if(screen == 2)
 			screen = 1
@@ -37,9 +44,6 @@
 		user << "<span class='notice'>You add [(W.name == "photo") ? "the photo" : W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
 		user.drop_from_inventory(W)
 		W.loc = src
-		if(istype(user,/mob/living/carbon/human))
-			user:update_inv_l_hand()
-			user:update_inv_r_hand()
 	else
 		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
 			usr << browse("", "window=[name]") //Closes the dialog
@@ -103,7 +107,7 @@
 
 /obj/item/weapon/paper_bundle/Topic(href, href_list)
 	..()
-	if((src in usr.contents) || (src.loc in usr.contents))
+	if((src in usr.contents) || (istype(src.loc, /obj/item/weapon/folder) && (src.loc in usr.contents)))
 		usr.set_machine(src)
 		if(href_list["next_page"])
 			if(page == amount)
@@ -125,44 +129,18 @@
 			playsound(src.loc, "pageturn", 50, 1)
 		if(href_list["remove"])
 			var/obj/item/weapon/W = src[page]
-			W.loc = usr.loc
-			if(istype(usr,/mob/living/carbon))
-				//Place the item in the user's hand if possible
-				if(!usr.r_hand)
-					W.loc = usr
-					usr.r_hand = W
-					W.layer = 20
-				else if(!usr.l_hand)
-					W.loc = usr
-					usr.l_hand = W
-					W.layer = 20
+			usr.put_in_hands(W)
 			usr << "<span class='notice'>You remove the [W.name] from the bundle.</span>"
-
 			if(amount == 1)
 				var/obj/item/weapon/paper/P = src[1]
-				P.loc = usr.loc
-				if (usr.r_hand == src)
-					usr.drop_from_inventory(src)
-					P.loc = usr
-					usr.r_hand = P
-					P.layer = 20
-				else if (usr.l_hand == src)
-					usr.drop_from_inventory(src)
-					P.loc = usr
-					usr.l_hand = P
-					P.layer = 20
-				if(istype(usr,/mob/living/carbon/human))
-					usr:update_inv_l_hand()
-					usr:update_inv_r_hand()
+				usr.drop_from_inventory(src)
+				usr.put_in_hands(P)
 				del(src)
 			else if(page == amount)
 				screen = 2
 			else if(page == amount+1)
 				page--
 
-			if(istype(usr,/mob/living/carbon/human))
-				usr:update_inv_l_hand()
-				usr:update_inv_r_hand()
 			amount--
 			update_icon()
 	else
@@ -193,10 +171,8 @@
 	usr << "<span class='notice'>You loosen the bundle.</span>"
 	for(var/obj/O in src)
 		O.loc = usr.loc
+		O.layer = initial(O.layer)
 	usr.drop_from_inventory(src)
-	if(istype(usr,/mob/living/carbon/human))
-		usr:update_inv_l_hand()
-		usr:update_inv_r_hand()
 	del(src)
 	return
 
@@ -220,7 +196,6 @@
 			i++
 		else if(istype(O, /obj/item/weapon/photo))
 			var/obj/item/weapon/photo/Ph = O
-//			img.icon_state = "photo"
 			img = Ph.tiny
 			photo = 1
 			overlays += img
