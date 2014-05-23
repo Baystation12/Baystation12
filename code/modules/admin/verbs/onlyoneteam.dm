@@ -29,7 +29,7 @@
 		if(prob(50))
 			team_alpha += H
 
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/red(H), slot_w_uniform)
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/red/dodgeball(H), slot_w_uniform)
 
 			var/obj/item/weapon/card/id/W = new(H)
 			W.name = "[H.real_name]'s ID Card"
@@ -44,7 +44,7 @@
 		else
 			team_bravo += H
 
-			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/blue(H), slot_w_uniform)
+			H.equip_to_slot_or_del(new /obj/item/clothing/under/color/blue/dodgeball(H), slot_w_uniform)
 
 			var/obj/item/weapon/card/id/W = new(H)
 			W.name = "[H.real_name]'s ID Card"
