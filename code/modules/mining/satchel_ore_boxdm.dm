@@ -7,20 +7,6 @@
 	name = "Ore Box"
 	desc = "A heavy box used for storing ore."
 	density = 1
-
-/obj/structure/ore_box/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/ore))
-		user.u_equip(W)
-		src.contents += W
-	if (istype(W, /obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = W
-		S.hide_from(usr)
-		for(var/obj/item/weapon/ore/O in S.contents)
-			S.remove_from_storage(O, src) //This will move the item to this item's contents
-		user << "\blue You empty the satchel into the box."
-	return
-
-/obj/structure/ore_box/attack_hand(obj, mob/user as mob)
 	var/amt_gold = 0
 	var/amt_silver = 0
 	var/amt_diamond = 0
@@ -31,27 +17,94 @@
 	var/amt_clown = 0
 	var/amt_strange = 0
 
+// Adds ore to running tally - call whenever ore is added
+/obj/structure/ore_box/proc/add_orecount(obj/item/weapon/ore/O as obj)
+	if(!istype(O))
+		return
 
-	for (var/obj/item/weapon/ore/C in contents)
-		if (istype(C,/obj/item/weapon/ore/diamond))
-			amt_diamond++;
-		if (istype(C,/obj/item/weapon/ore/glass))
-			amt_glass++;
-		if (istype(C,/obj/item/weapon/ore/plasma))
-			amt_plasma++;
-		if (istype(C,/obj/item/weapon/ore/iron))
-			amt_iron++;
-		if (istype(C,/obj/item/weapon/ore/silver))
-			amt_silver++;
-		if (istype(C,/obj/item/weapon/ore/gold))
-			amt_gold++;
-		if (istype(C,/obj/item/weapon/ore/uranium))
-			amt_uranium++;
-		if (istype(C,/obj/item/weapon/ore/clown))
-			amt_clown++;
-		if (istype(C,/obj/item/weapon/ore/strangerock))
-			amt_strange++;
+	if (istype(O, /obj/item/weapon/ore/iron))
+		amt_iron++
+		return
+	if (istype(O, /obj/item/weapon/ore/glass))
+		amt_glass++
+		return
+	if (istype(O, /obj/item/weapon/ore/plasma))
+		amt_plasma++
+		return
+	if (istype(O, /obj/item/weapon/ore/uranium))
+		amt_uranium++
+		return
+	if (istype(O, /obj/item/weapon/ore/silver))
+		amt_silver++
+		return
+	if (istype(O, /obj/item/weapon/ore/gold))
+		amt_gold++
+		return
+	if (istype(O, /obj/item/weapon/ore/diamond))
+		amt_diamond++
+		return
+	if (istype(O, /obj/item/weapon/ore/strangerock))
+		amt_strange++
+		return
+	if (istype(O, /obj/item/weapon/ore/clown))
+		amt_clown++
+		return
 
+	return
+
+// Removes ore from running tally - call whenever ore is removed
+/obj/structure/ore_box/proc/remove_orecount(obj/item/weapon/ore/O as obj)
+	if(!istype(O))
+		return
+
+	if (istype(O, /obj/item/weapon/ore/iron))
+		amt_iron--
+		return
+	if (istype(O, /obj/item/weapon/ore/glass))
+		amt_glass--
+		return
+	if (istype(O, /obj/item/weapon/ore/plasma))
+		amt_plasma--
+		return
+	if (istype(O, /obj/item/weapon/ore/uranium))
+		amt_uranium--
+		return
+	if (istype(O, /obj/item/weapon/ore/silver))
+		amt_silver--
+		return
+	if (istype(O, /obj/item/weapon/ore/gold))
+		amt_gold--
+		return
+	if (istype(O, /obj/item/weapon/ore/diamond))
+		amt_diamond--
+		return
+	if (istype(O, /obj/item/weapon/ore/strangerock))
+		amt_strange--
+		return
+	if (istype(O, /obj/item/weapon/ore/clown))
+		amt_clown--
+		return
+
+	return
+
+/obj/structure/ore_box/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/weapon/ore))
+		user.u_equip(W)
+		src.contents += W
+		add_orecount(W)
+	if (istype(W, /obj/item/weapon/storage))
+		var/obj/item/weapon/storage/S = W
+		S.hide_from(usr)
+		for(var/obj/item/weapon/ore/O in S.contents)
+			S.remove_from_storage(O, src) //This will move the item to this item's contents
+			add_orecount(O)
+		user << "\blue You empty the satchel into the box."
+
+
+
+	return
+
+/obj/structure/ore_box/attack_hand(mob/user as mob)
 	var/dat = text("<b>The contents of the ore box reveal...</b><br>")
 	if (amt_gold)
 		dat += text("Gold ore: [amt_gold]<br>")
@@ -84,8 +137,8 @@
 	if(href_list["removeall"])
 		for (var/obj/item/weapon/ore/O in contents)
 			contents -= O
-			O.loc = src.loc
+			remove_orecount(O)
+			O.loc = get_turf(src)
 		usr << "\blue You empty the box"
 	src.updateUsrDialog()
 	return
-

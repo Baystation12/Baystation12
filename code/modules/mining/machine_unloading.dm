@@ -30,7 +30,8 @@
 			var/i = 0
 			for (var/obj/item/weapon/ore/O in BOX.contents)
 				BOX.contents -= O
-				O.loc = output.loc
+				BOX.remove_orecount(O)
+				O.loc = get_turf(output)
 				i++
 				if (i>=10)
 					return
