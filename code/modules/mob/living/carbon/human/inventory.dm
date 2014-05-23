@@ -513,8 +513,8 @@
 					message = "\red <B>[source] is trying to take off \a [target.w_uniform] from [target]'s body!</B>"
 			if("tie")
 				var/obj/item/clothing/under/suit = target.w_uniform
-				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their accessoire ([suit.hastie]) removed by [source.name] ([source.ckey])</font>")
-				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) accessoire ([suit.hastie])</font>")
+				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their accessory ([suit.hastie]) removed by [source.name] ([source.ckey])</font>")
+				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) accessory ([suit.hastie])</font>")
 				if(istype(suit.hastie, /obj/item/clothing/tie/holobadge) || istype(suit.hastie, /obj/item/clothing/tie/medal))
 					for(var/mob/M in viewers(target, null))
 						M.show_message("\red <B>[source] tears off \the [suit.hastie] from [target]'s suit!</B>" , 1)
