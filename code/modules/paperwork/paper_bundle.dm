@@ -46,6 +46,13 @@
 		W.loc = src
 	else if(istype(W, /obj/item/weapon/lighter))
 		burnpaper(W, user)
+	else if(istype(W, /obj/item/weapon/paper_bundle))
+		user.drop_from_inventory(W)
+		for(var/obj/O in W)
+			O.loc = src
+			O.add_fingerprint(usr)
+		user << "<span class='notice'>You add \the [W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
+		del(W)
 	else
 		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
 			usr << browse("", "window=[name]") //Closes the dialog
@@ -199,6 +206,7 @@
 	for(var/obj/O in src)
 		O.loc = usr.loc
 		O.layer = initial(O.layer)
+		O.add_fingerprint(usr)
 	usr.drop_from_inventory(src)
 	del(src)
 	return
