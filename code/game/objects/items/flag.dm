@@ -1,5 +1,6 @@
 /obj/item/flag
 	icon = 'icons/obj/flag.dmi'
+	 w_class = 4
 
 /obj/item/flag/nt
 	name = "Nanotrasen flag"
