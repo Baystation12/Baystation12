@@ -9,7 +9,9 @@
 +++ Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\right\flags_left.dmi
  + cargoflag
  + clownflag
+ + medflag
  + ntflag
+ + secflag
  + syndiflag
 --- Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\left\guns.dmi
 +++ Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\right\guns.dmi
