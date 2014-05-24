@@ -55,7 +55,8 @@
 			W.registered_name = H.real_name
 			H.equip_to_slot_or_del(W, slot_wear_id)
 			H.regenerate_icons()
-	message_admins("\blue [key_name_admin(usr)] used DODGEBAWWWWWWWL!", 1)
+	message_admins("\blue [key_name_admin(usr)] used DODGEBAWWWWWWWL! -NO ATTACK LOGS WILL BE SENT TO ADMINS FROM THIS POINT FORTH-", 1)
+	nologevent = 1
 	log_admin("[key_name(usr)] used dodgeball.")
 	world << sound('sound/music/nowyouman.ogg')
 

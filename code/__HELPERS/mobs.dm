@@ -115,6 +115,6 @@ proc/add_logs(mob/target, mob/user, what_done, var/object=null, var/addition=nul
 		target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been [what_done] by [user.name][ismob(user) ? "([user.ckey])" : ""][object ? " with [object]" : " "][addition]</font>")
 	log_attack("<font color='red'>[user.name][ismob(user) ? "([user.ckey])" : ""] [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition]</font>")
 	if(target.client)
-		if(what_done != ("shaked" || "CPRed" || "grabbed"))
+		if(what_done != ("shaked" && "CPRed" && "grabbed"))
 			message_admins("[user.name][ismob(user) ? "([user.ckey])" : ""] [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition](<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
 
