@@ -12,6 +12,13 @@
 	desc = "The banner of His Majesty, King Squiggles the Eighth."
 	icon_state = "clownflag"
 
+/obj/item/flag/syndi
+	name = "Syndicate flag"
+	desc = "A flag proudly boasting the logo of the Syndicate, in defiance of NT."
+	icon_state = "syndiflag"
+
+
+//Nations/Department flags
 /obj/item/flag/cargo
 	name = "Cargonia flag"
 	desc = "The flag of the independant, sovereign nation of Cargonia."
