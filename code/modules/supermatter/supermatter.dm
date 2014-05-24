@@ -9,7 +9,7 @@
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
 
 //Controls how much power is produced by each collector in range.
-#define COLLECTION_FACTOR 1.0               //Aiming to make 400 kW output the equivalent of what 4 MW (power=1210) was from before by adjusting this
+#define COLLECTION_FACTOR 0.1               //Aiming to make 400 kW output the equivalent of what 4 MW (power=1210) was from before by adjusting this
 
 
 //These would be what you would get at point blank, decreases with distance
