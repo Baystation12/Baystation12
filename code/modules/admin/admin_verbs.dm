@@ -558,7 +558,7 @@ var/list/admin_verbs_mentor = list(
 /client/proc/give_disease(mob/T as mob in mob_list) // -- Giacom
 	set category = "Fun"
 	set name = "Give Disease (old)"
-	set desc = "Gives an (old-style) Disease to a mob."
+	set desc = "Gives a (tg-style) Disease to a mob."
 	var/datum/disease/D = input("Choose the disease to give to that guy", "ACHOO") as null|anything in diseases
 	if(!D) return
 	T.contract_disease(new D, 1)
