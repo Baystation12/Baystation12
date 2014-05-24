@@ -51,6 +51,9 @@
 		for(var/obj/O in W)
 			O.loc = src
 			O.add_fingerprint(usr)
+			src.amount++
+			if(screen == 2)
+				screen = 1
 		user << "<span class='notice'>You add \the [W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
 		del(W)
 	else
