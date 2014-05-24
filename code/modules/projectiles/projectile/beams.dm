@@ -180,3 +180,4 @@ var/list/beam_master = list()
 	nodamage = 1
 	agony = 40
 	damage_type = HALLOSS
+	stutter = 5
