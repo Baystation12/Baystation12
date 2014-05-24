@@ -1,0 +1,7 @@
+*.pyc
+/doc/_build
+*.bak
+/.tox
+/BYONDTools.egg-info
+/build
+/dist
