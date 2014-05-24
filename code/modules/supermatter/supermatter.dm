@@ -8,8 +8,11 @@
 #define OXYGEN_RELEASE_MODIFIER 1500        //Higher == less oxygen released at high temperature/power
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
 
-//Controls how much power is produced by each collector in range.
-#define COLLECTION_FACTOR 0.1               //Aiming to make 400 kW output the equivalent of what 4 MW (power=1210) was from before by adjusting this
+//Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
+#define POWER_FACTOR 0.35              //Obtained from testing. Aiming to make the ideal running output (600 kW) run the SM to ~85% of the safety level. 
+
+#define CHARGING_FACTOR 0.55
+#define DAMAGE_RATE_LIMIT 5                 //damage rate cap at power = 900, scales linearly with power
 
 
 //These would be what you would get at point blank, decreases with distance
@@ -130,18 +133,18 @@
 	var/datum/gas_mixture/removed = null
 	var/datum/gas_mixture/env = null
 	
+	//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We dont want the SM exploding before anyone can react.
+	//We want the cap to scale linearly with power (and explosion_point). Let's aim for a cap of 5 at power = 900 (based on testing, equals roughly 5% per SM alert announcement).
+	var/damage_inc_limit = (power/900)*(explosion_point/1000)*DAMAGE_RATE_LIMIT
+	
 	if(!istype(L, /turf/space))
 		env = L.return_air()
 		removed = env.remove(gasefficency * env.total_moles)	//Remove gas from surrounding area
-
+	
 	if(!env || !removed || !removed.total_moles)
-		damage += max((power-1600)/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
+		damage += max(((power-(1600*POWER_FACTOR)))/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
 	else
 		damage_archived = damage
-		
-		//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We dont want the SM exploding before anyone can react.
-		//want the cap to scale linearly with power. Let's aim for a cap of 5 at power = 900 (based on testing, equals roughly 5% per SM alert announcement).
-		var/damage_inc_limit = (explosion_point*0.005)*(power/900)
 		
 		damage = max( damage + min( ( (removed.temperature - 800) / 150 ), damage_inc_limit ) , 0 )
 		//Ok, 100% oxygen atmosphere = best reaction
@@ -190,7 +193,7 @@
 		removed.update_values()
 		
 		env.merge(removed)
-
+	
 	for(var/mob/living/carbon/human/l in view(src, min(7, round(power ** 0.25)))) // If they can see it without mesons on.  Bad on them.
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
@@ -214,7 +217,7 @@
 
 
 	if(Proj.flag != "bullet")
-		power += Proj.damage * config_bullet_energy	* COLLECTION_FACTOR	//multiply by COLLECTION_FACTOR so the amount of shots you will need to give with an emitter is unaffected.
+		power += Proj.damage * config_bullet_energy	* CHARGING_FACTOR
 	else
 		damage += Proj.damage * config_bullet_energy
 	return 0
@@ -244,7 +247,7 @@
 /obj/machinery/power/supermatter/proc/transfer_energy()
 	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
 		if(get_dist(R, src) <= 15) // Better than using orange() every process
-			R.receive_pulse(power * COLLECTION_FACTOR)
+			R.receive_pulse(power * POWER_FACTOR)
 	return
 
 /obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
