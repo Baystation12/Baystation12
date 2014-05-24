@@ -22,6 +22,10 @@
 	desc = "A flag proudly boasting the logo of the Syndicate, in defiance of NT."
 	icon_state = "syndiflag"
 
+/obj/item/flag/wiz
+	name = "Wizard Federation flag"
+	desc = "A flag proudly boasting the logo of the Wizard Federation, sworn enemies of NT."
+	icon_state = "wizflag"
 
 //Nations/Department flags
 /obj/item/flag/cargo

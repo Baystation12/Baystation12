@@ -15,6 +15,7 @@
  + rndflag
  + secflag
  + syndiflag
+ + wizflag
 --- Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\left\guns.dmi
 +++ Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\right\guns.dmi
  + scythe0
