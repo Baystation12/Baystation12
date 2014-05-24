@@ -23,3 +23,13 @@
 	name = "Cargonia flag"
 	desc = "The flag of the independant, sovereign nation of Cargonia."
 	icon_state = "cargoflag"
+
+/obj/item/flag/med
+	name = "Medistan flag"
+	desc = "The flag of the independant, sovereign nation of Medistan."
+	icon_state = "medflag"
+
+/obj/item/flag/sec
+	name = "Brigston flag"
+	desc = "The flag of the independant, sovereign nation of Brigston."
+	icon_state = "secflag"
