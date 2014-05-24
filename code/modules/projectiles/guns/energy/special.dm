@@ -8,7 +8,6 @@
 	w_class = 4.0
 	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BACK
-	charge_cost = 100
 	projectile_type = "/obj/item/projectile/ion"
 
 /obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
@@ -24,7 +23,6 @@
 	icon_state = "decloner"
 	fire_sound = 'sound/weapons/pulse3.ogg'
 	origin_tech = "combat=5;materials=4;powerstorage=3"
-	charge_cost = 100
 	projectile_type = "/obj/item/projectile/energy/declone"
 
 
@@ -34,7 +32,6 @@
 	icon_state = "floramut100"
 	item_state = "obj/item/gun.dmi"
 	fire_sound = 'sound/effects/stealthoff.ogg'
-	charge_cost = 100
 	projectile_type = "/obj/item/projectile/energy/floramut"
 	origin_tech = "materials=2;biotech=3;powerstorage=3"
 	modifystate = "floramut"
@@ -56,7 +53,7 @@
 		if(charge_tick < 4) return 0
 		charge_tick = 0
 		if(!power_supply) return 0
-		power_supply.give(100)
+		power_supply.give(1000)
 		update_icon()
 		return 1
 
@@ -64,13 +61,13 @@
 		switch(mode)
 			if(0)
 				mode = 1
-				charge_cost = 100
+				charge_cost = 1000
 				user << "\red The [src.name] is now set to increase yield."
 				projectile_type = "/obj/item/projectile/energy/florayield"
 				modifystate = "florayield"
 			if(1)
 				mode = 0
-				charge_cost = 100
+				charge_cost = 1000
 				user << "\red The [src.name] is now set to induce mutations."
 				projectile_type = "/obj/item/projectile/energy/floramut"
 				modifystate = "floramut"
@@ -84,7 +81,6 @@
 	item_state = "c20r"
 	w_class = 4
 	projectile_type = "/obj/item/projectile/meteor"
-	charge_cost = 100
 	cell_type = "/obj/item/weapon/cell/potato"
 	clumsy_check = 0 //Admin spawn only, might as well let clowns use it.
 	var/charge_tick = 0
@@ -104,7 +100,7 @@
 		if(charge_tick < recharge_time) return 0
 		charge_tick = 0
 		if(!power_supply) return 0
-		power_supply.give(100)
+		power_supply.give(1000)
 
 	update_icon()
 		return
@@ -212,10 +208,10 @@ obj/item/weapon/gun/energy/staff/focus
 	item_state = "shotgun"
 	projectile_type = "/obj/item/projectile/kinetic"
 	cell_type = "/obj/item/weapon/cell/crap"
-	charge_cost = 500
+	charge_cost = 5000
 	fire_delay = 20
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/attack_self(var/mob/living/user/L)
-	power_supply.give(500)
+	power_supply.give(5000)
 	playsound(src.loc, 'sound/weapons/shotgunpump.ogg', 60, 1)
 	return
