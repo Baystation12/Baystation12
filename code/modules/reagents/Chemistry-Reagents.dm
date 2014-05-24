@@ -1862,7 +1862,6 @@ datum
 			description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
 			reagent_state = LIQUID
 			color = "#CCFF00" // rgb: 204, 255, 0
-			custom_metabolism = 0.05
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1875,10 +1874,11 @@ datum
 
 					if(51 to 79) // Their cells burn more oxygen than the body can distribute
 						M.adjustToxLoss(1)
-						M.adjustOxyLoss(2)
+						M.adjustOxyLoss(1)
 
 					if(80 to INFINITY) // At this point you're fucked
-						M.adjustOxyLoss(5) //you'll pass out pretty fucking quick, and die shortly after
+						M.adjustOxyLoss(2) //you'll pass out pretty fucking quick, and die shortly after
+
 				..()
 
 
