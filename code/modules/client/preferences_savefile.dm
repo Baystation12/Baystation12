@@ -84,8 +84,6 @@
 	S["be_special"]			<< be_special
 	S["default_slot"]		<< default_slot
 	S["toggles"]			<< toggles
-	S["UI_style_color"]		<< UI_style_color
-	S["UI_style_alpha"]		<< UI_style_alpha
 
 	return 1
 
@@ -125,6 +123,7 @@
 	S["eyes_green"]			>> g_eyes
 	S["eyes_blue"]			>> b_eyes
 	S["underwear"]			>> underwear
+	S["undershirt"]			>> undershirt
 	S["backbag"]			>> backbag
 	S["b_type"]				>> b_type
 
@@ -158,6 +157,9 @@
 
 	S["uplinklocation"] >> uplinklocation
 
+	S["UI_style_color"]		<< UI_style_color
+	S["UI_style_alpha"]		<< UI_style_alpha
+
 	//Sanitize
 	metadata		= sanitize_text(metadata, initial(metadata))
 	real_name		= reject_bad_name(real_name)
@@ -181,6 +183,7 @@
 	g_eyes			= sanitize_integer(g_eyes, 0, 255, initial(g_eyes))
 	b_eyes			= sanitize_integer(b_eyes, 0, 255, initial(b_eyes))
 	underwear		= sanitize_integer(underwear, 1, underwear_m.len, initial(underwear))
+	undershirt		= sanitize_integer(undershirt, 1, undershirt_t.len, initial(undershirt))
 	backbag			= sanitize_integer(backbag, 1, backbaglist.len, initial(backbag))
 	b_type			= sanitize_text(b_type, initial(b_type))
 
@@ -231,6 +234,7 @@
 	S["eyes_green"]			<< g_eyes
 	S["eyes_blue"]			<< b_eyes
 	S["underwear"]			<< underwear
+	S["undershirt"]			<< undershirt
 	S["backbag"]			<< backbag
 	S["b_type"]				<< b_type
 
@@ -263,6 +267,9 @@
 	//S["skin_style"]			<< skin_style
 
 	S["uplinklocation"] << uplinklocation
+
+	S["UI_style_color"]		<< UI_style_color
+	S["UI_style_alpha"]		<< UI_style_alpha
 
 	return 1
 

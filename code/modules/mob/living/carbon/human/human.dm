@@ -862,6 +862,10 @@
 	return
 
 /mob/living/carbon/human/proc/vomit()
+
+	if(species.flags & IS_SYNTHETIC)
+		return //Machines don't throw up.
+
 	if(!lastpuke)
 		lastpuke = 1
 		src << "<spawn class='warning'>You feel nauseous..."
@@ -1309,3 +1313,22 @@
 
 	update_canmove()
 	src << "\blue You are now [crawling ? "crawling" : "getting up"]"
+
+/mob/living/carbon/human/can_inject(var/mob/user, var/error_msg, var/target_zone)
+	. = 1
+
+	if(!user)
+		target_zone = pick("chest","chest","chest","left leg","right leg","left arm", "right arm", "head")
+	else if(!target_zone)
+		target_zone = user.zone_sel.selecting
+
+	switch(target_zone)
+		if("head")
+			if(head && head.flags & THICKMATERIAL)
+				. = 0
+		else
+			if(wear_suit && wear_suit.flags & THICKMATERIAL)
+				. = 0
+	if(!. && error_msg && user)
+ 		// Might need re-wording.
+		user << "<span class='alert'>There is no exposed flesh or thin material [target_zone == "head" ? "on their head" : "on their body"] to inject into.</span>"

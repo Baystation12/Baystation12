@@ -66,7 +66,7 @@
 			else if(photocopy)
 				for(var/i = 0, i < copies, i++)
 					if(toner > 0)
-						var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (loc)
+						var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (src.loc)
 						var/icon/I = icon(photocopy.icon, photocopy.icon_state)
 						var/icon/img = icon(photocopy.img)
 						if(toner > 10)	//plenty of toner, go straight greyscale

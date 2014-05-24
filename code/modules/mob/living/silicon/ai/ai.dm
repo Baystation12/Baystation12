@@ -145,7 +145,7 @@ var/list/ai_list = list()
 /obj/machinery/ai_powersupply
 	name="Power Supply"
 	active_power_usage=1000
-	use_power = 2	
+	use_power = 2
 	power_channel = EQUIP
 	var/mob/living/silicon/ai/powered_ai = null
 	invisibility = 100
@@ -154,12 +154,12 @@ var/list/ai_list = list()
 	powered_ai = ai
 	if(isnull(powered_ai))
 		Del()
-	
+
 	loc = powered_ai.loc
 	use_power(1) // Just incase we need to wake up the power system.
 
 	..()
-	
+
 /obj/machinery/ai_powersupply/process()
 	if(!powered_ai || powered_ai.stat & DEAD)
 		Del()
@@ -416,9 +416,23 @@ var/list/ai_list = list()
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in mob_list
+/*
 		var/mob/living/silicon/ai/A = locate(href_list["track2"]) in mob_list
 		if(A && target)
 			A.ai_actual_track(target)
+*/
+
+		//Strip off any "(as Derplord)".
+		//If there's a way to do this via a var that doesn't give the AI extra info, please let me know.
+		var/seeking = target.name
+		var/index = findtext(seeking, "(as ")
+		if(index)
+			seeking = copytext(seeking, 1, index-1)
+
+		if(target && html_decode(href_list["trackname"]) == seeking)
+			ai_actual_track(target)
+		else
+			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
 
 	else if (href_list["faketrack"])

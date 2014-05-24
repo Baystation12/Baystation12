@@ -66,6 +66,8 @@
 	if(life_tick%30==15)
 		hud_updateflag = 1022
 
+	voice = GetVoice()
+
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !in_stasis)
 		if(air_master.current_cycle%4==2 || failed_last_breath) 	//First, resolve location and get a breath
@@ -148,7 +150,6 @@
 		return ONE_ATMOSPHERE - pressure_difference
 
 /mob/living/carbon/human
-
 	proc/handle_disabilities()
 		if (disabilities & EPILEPSY)
 			if ((prob(1) && paralysis < 1))
@@ -166,6 +167,7 @@
 					emote("cough")
 					return
 		if (disabilities & TOURETTES)
+			speech_problem_flag = 1
 			if ((prob(10) && paralysis <= 1))
 				Stun(10)
 				spawn( 0 )
@@ -183,6 +185,7 @@
 					pixel_y = old_y
 					return
 		if (disabilities & NERVOUS)
+			speech_problem_flag = 1
 			if (prob(10))
 				stuttering = max(10, stuttering)
 		// No. -- cib
@@ -236,6 +239,9 @@
 
 	proc/handle_mutations_and_radiation()
 
+		if(species.flags & IS_SYNTHETIC) //Robots don't suffer from mutations or radloss.
+			return
+
 		if(getFireLoss())
 			if((COLD_RESISTANCE in mutations) || (prob(1)))
 				heal_organ_damage(0,1)
@@ -246,6 +252,7 @@
 			if(!gene.block)
 				continue
 			if(gene.is_active(src))
+				speech_problem_flag = 1
 				gene.OnMobLife(src)
 
 		if (radiation)
@@ -259,6 +266,7 @@
 				radiation = 0
 
 			else
+
 				if(species.flags & RAD_ABSORB)
 					var/rads = radiation/25
 					radiation -= rads
@@ -581,6 +589,11 @@
 	proc/handle_environment(datum/gas_mixture/environment)
 		if(!environment)
 			return
+
+		//Moved pressure calculations here for use in skip-processing check.
+		var/pressure = environment.return_pressure()
+		var/adjusted_pressure = calculate_affecting_pressure(pressure)
+
 		if(!istype(get_turf(src), /turf/space)) //space is not meant to change your body temperature.
 			var/loc_temp = T0C
 			if(istype(loc, /obj/mecha))
@@ -592,7 +605,7 @@
 			else
 				loc_temp = environment.temperature
 
-			if(abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PLASMA_VISIBLE)
+			if(adjusted_pressure < species.warning_low_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.toxins < MOLES_PLASMA_VISIBLE)
 				return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 			//Body temperature is adjusted in two steps. Firstly your body tries to stabilize itself a bit.
@@ -659,9 +672,6 @@
 
 		// Account for massive pressure differences.  Done by Polymorph
 		// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
-
-		var/pressure = environment.return_pressure()
-		var/adjusted_pressure = calculate_affecting_pressure(pressure) //Returns how much pressure actually affects the mob.
 		if(status_flags & GODMODE)	return 1	//godmode
 
 		if(adjusted_pressure >= species.hazard_high_pressure)
@@ -1094,6 +1104,7 @@
 				if(halloss > 0)
 					adjustHalLoss(-3)
 			else if(sleeping)
+				speech_problem_flag = 1
 				handle_dreams()
 				adjustHalLoss(-3)
 				if (mind)
@@ -1145,16 +1156,20 @@
 
 			//Other
 			if(stunned)
+				speech_problem_flag = 1
 				AdjustStunned(-1)
 
 			if(weakened)
 				weakened = max(weakened-1,0)	//before you get mad Rockdtben: I done this so update_canmove isn't called multiple times
 
 			if(stuttering)
+				speech_problem_flag = 1
 				stuttering = max(stuttering-1, 0)
 			if (slurring)
+				speech_problem_flag = 1
 				slurring = max(slurring-1, 0)
 			if(silent)
+				speech_problem_flag = 1
 				silent = max(silent-1, 0)
 
 			if(druggy)

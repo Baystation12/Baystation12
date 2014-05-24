@@ -211,6 +211,9 @@
 		O.emp_act(severity)
 	..()
 
+/mob/living/proc/can_inject()
+	return 1
+
 /mob/living/proc/get_organ_target()
 	var/mob/shooter = src
 	var/t = shooter:zone_sel.selecting
@@ -314,7 +317,7 @@
 
 	// make the icons look correct
 	regenerate_icons()
-	
+
 	hud_updateflag |= 1 << HEALTH_HUD
 	hud_updateflag |= 1 << STATUS_HUD
 	return
@@ -449,9 +452,14 @@
 
 	//Getting out of someone's inventory.
 	if(istype(src.loc,/obj/item/weapon/holder))
-		var/obj/item/weapon/holder/H = src.loc
-		src.loc = get_turf(src.loc)
-		del(H)
+		var/obj/item/weapon/holder/H = src.loc //Get our item holder.
+		var/mob/M = H.loc                      //Get our mob holder (if any).
+
+		if(istype(M))
+			M.drop_from_inventory(H)
+			M << "[H] wriggles out of your grip!"
+			src << "You wriggle out of [M]'s grip!"
+
 		return
 
 	//Resisting control by an alien mind.
@@ -584,6 +592,7 @@
 					sleep(10)
 					SC.broken = 1
 					SC.locked = 0
+					SC.update_icon()
 					usr << "\red You successfully break out!"
 					for(var/mob/O in viewers(L.loc))
 						O.show_message("\red <B>\the [usr] successfully broke out of \the [SC]!</B>", 1)
@@ -593,6 +602,7 @@
 					SC.open()
 				else
 					C.welded = 0
+					C.update_icon()
 					usr << "\red You successfully break out!"
 					for(var/mob/O in viewers(L.loc))
 						O.show_message("\red <B>\the [usr] successfully broke out of \the [C]!</B>", 1)

@@ -1369,13 +1369,13 @@ datum/design/implant_free
 	build_path = "/obj/item/weapon/implant/freedom"
 
 datum/design/chameleon
-	name = "Chameleon Jumpsuit"
-	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
+	name = "Chameleon Kit"
+	desc = "It's a set of clothes with dials on them."
 	id = "chameleon"
 	req_tech = list("syndicate" = 2)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 500)
-	build_path = "/obj/item/clothing/under/chameleon"
+	build_path = "/obj/item/weapon/storage/box/syndie_kit/chameleon"
 
 
 datum/design/bluespacebeaker
@@ -1712,7 +1712,7 @@ datum/design/security_hud
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk2"
 	item_state = "card-id"
-	w_class = 1.0
+	w_class = 2.0
 	m_amt = 30
 	g_amt = 10
 	var/datum/design/blueprint

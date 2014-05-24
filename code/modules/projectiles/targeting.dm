@@ -1,8 +1,10 @@
 /obj/item/weapon/gun/verb/toggle_firerate()
 	set name = "Toggle Firerate"
 	set category = "Object"
+
 	firerate = !firerate
-	if (firerate == 0)
+
+	if (firerate)
 		loc << "You will now continue firing when your target moves."
 	else
 		loc << "You will now only fire once, then lower your aim, when your target moves."

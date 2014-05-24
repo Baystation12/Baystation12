@@ -294,6 +294,14 @@
 					M.show_message("\red [src] is shaped into [BBucket] by [user.name] with the weldingtool.", 3, "\red You hear welding.", 2)
 				del(src)
 			return
+			
+	update_icon()
+		overlays.Cut()
+
+		if (!is_open_container())
+			var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
+			overlays += lid
+
 // vials are defined twice, what?
 /*
 /obj/item/weapon/reagent_containers/glass/beaker/vial

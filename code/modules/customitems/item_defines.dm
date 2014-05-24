@@ -763,7 +763,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "mara_kilpatrick_1"
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 
 ////// Small locket - Altair An-Nasaqan - Serithi
 
@@ -776,7 +776,7 @@
 	item_color = "altair_locket"
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 	slot_flags = SLOT_MASK
 
 ////// Silver locket - Konaa Hirano - Konaa_Hirano
@@ -790,7 +790,7 @@
 	item_color = "konaahirano"
 	slot_flags = 0
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 	slot_flags = SLOT_MASK
 	var/obj/item/held //Item inside locket.
 
@@ -820,7 +820,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "nasir_khayyam_1"
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 	slot_flags = SLOT_MASK
 
 ////// Emerald necklace - Ty Foster - Nega
@@ -831,7 +831,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "ty_foster"
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 
 ////// Apollon Pendant - Michael Guess - Dragor23
 /obj/item/clothing/mask/michael_guess_1
@@ -840,7 +840,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "michael_guess_1"
 	flags = FPRINT|TABLEPASS
-	w_class = 1
+	w_class = 2
 	slot_flags = SLOT_MASK
 //////////// Shoes ////////////
 

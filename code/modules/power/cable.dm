@@ -35,29 +35,29 @@
 	var/d1 = 0
 	var/d2 = 1
 	layer = 2.44 //Just below unary stuff, which is at 2.45 and above pipes, which are at 2.4
-	var/cable_color = COLOR_RED
+	color = COLOR_RED
 	var/obj/structure/powerswitch/power_switch
 
 /obj/structure/cable/yellow
-	cable_color = COLOR_YELLOW
+	color = COLOR_YELLOW
 
 /obj/structure/cable/green
-	cable_color = COLOR_GREEN
+	color = COLOR_GREEN
 
 /obj/structure/cable/blue
-	cable_color = COLOR_BLUE
+	color = COLOR_BLUE
 
 /obj/structure/cable/pink
-	cable_color = COLOR_PINK
+	color = COLOR_PINK
 
 /obj/structure/cable/orange
-	cable_color = COLOR_ORANGE
+	color = COLOR_ORANGE
 
 /obj/structure/cable/cyan
-	cable_color = COLOR_CYAN
+	color = COLOR_CYAN
 
 /obj/structure/cable/white
-	cable_color = COLOR_WHITE
+	color = COLOR_WHITE
 
 /obj/structure/cable/New()
 	..()
@@ -94,7 +94,6 @@
 /obj/structure/cable/proc/updateicon()
 	icon_state = "[d1]-[d2]"
 	alpha = invisibility ? 127 : 255
-	color = cable_color
 
 
 // returns the powernet this cable belongs to
@@ -131,6 +130,7 @@
 		else
 			newcable = new/obj/item/weapon/cable_coil(T, 1, cable_color)
 		newcable.fingerprintslast = user.key
+
 		for(var/mob/O in viewers(src, null))
 			O.show_message("<span class='warning'>[user] cuts the cable.</span>", 1)
 
@@ -191,12 +191,12 @@
 			del(src)
 		if(2.0)
 			if (prob(50))
-				new/obj/item/weapon/cable_coil(src.loc, src.d1 ? 2 : 1, cable_color)
+				new/obj/item/weapon/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				del(src)
 
 		if(3.0)
 			if (prob(25))
-				new/obj/item/weapon/cable_coil(src.loc, src.d1 ? 2 : 1, cable_color)
+				new/obj/item/weapon/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				del(src)
 	return
 
@@ -230,15 +230,15 @@
 	..()
 	src.amount = length
 	if (param_color)
-		item_color = param_color
+		color = param_color
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	updateicon()
+	update_wclass()
 
 /obj/item/weapon/cable_coil/proc/updateicon()
-	if (!item_color)
-		item_color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
-	color = item_color
+	if (!color)
+		color = pick(COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_ORANGE, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN)
 	if(amount == 1)
 		icon_state = "coil1"
 		name = "cable piece"
@@ -248,6 +248,12 @@
 	else
 		icon_state = "coil"
 		name = "cable coil"
+
+/obj/item/weapon/cable_coil/proc/update_wclass()
+	if(amount == 1)
+		w_class = 1.0
+	else
+		w_class = 2.0
 
 /obj/item/weapon/cable_coil/examine()
 	set src in view(1)
@@ -284,6 +290,7 @@
 		new/obj/item/weapon/cable_coil(user.loc, 1,item_color)
 		user << "<span class='notice'>You cut a piece off the cable coil.</span>"
 		src.updateicon()
+		src.update_wclass()
 		return
 
 	else if( istype(W, /obj/item/weapon/cable_coil) )
@@ -296,6 +303,7 @@
 			C.amount += src.amount
 			user << "<span class='notice'>You join the cable coils together.</span>"
 			C.updateicon()
+			C.update_wclass()
 			del(src)
 			return
 
@@ -303,8 +311,10 @@
 			user << "<span class='notice'>You transfer [MAXCOIL - src.amount ] length\s of cable from one coil to the other.</span>"
 			src.amount -= (MAXCOIL-C.amount)
 			src.updateicon()
+			src.update_wclass()
 			C.amount = MAXCOIL
 			C.updateicon()
+			C.update_wclass()
 			return
 
 /obj/item/weapon/cable_coil/proc/use(var/used)
@@ -315,6 +325,7 @@
 	else
 		amount -= used
 		updateicon()
+		update_wclass()
 		return 1
 
 // called when cable_coil is clicked on a turf/simulated/floor
@@ -411,7 +422,7 @@
 			use(1)
 			if (C.shock(user, 50))
 				if (prob(50)) //fail
-					new/obj/item/weapon/cable_coil(C.loc, 1, C.cable_color)
+					new/obj/item/weapon/cable_coil(C.loc, 1, C.color)
 					del(C)
 		//src.laying = 1
 		//last = C
@@ -471,7 +482,7 @@
 			use(1)
 			if (NC.shock(user, 50))
 				if (prob(50)) //fail
-					new/obj/item/weapon/cable_coil(NC.loc, 1, NC.cable_color)
+					new/obj/item/weapon/cable_coil(NC.loc, 1, NC.color)
 					del(NC)
 
 			return
@@ -510,7 +521,7 @@
 		use(1)
 		if (C.shock(user, 50))
 			if (prob(50)) //fail
-				new/obj/item/weapon/cable_coil(C.loc, 2, C.cable_color)
+				new/obj/item/weapon/cable_coil(C.loc, 2, C.color)
 				del(C)
 
 		return
@@ -586,7 +597,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	var/color_n = "#DD0000"
 	if(colorC)
 		color_n = colorC
-	cable_color = color_n
 	color = color_n
 
 /obj/item/weapon/cable_coil/cut
@@ -598,6 +608,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
 	updateicon()
+	update_wclass()
 
 /obj/item/weapon/cable_coil/yellow
 	item_color = COLOR_YELLOW
@@ -626,11 +637,14 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/weapon/cable_coil/attack(mob/M as mob, mob/user as mob)
 	if(hasorgans(M))
+
 		var/datum/organ/external/S = M:get_organ(user.zone_sel.selecting)
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
+
 		if(S.burn_dam > 0 && use(1))
 			S.heal_damage(0,15,0,1)
+
 			if(user != M)
 				user.visible_message("<span class='notice'>\The [user] repairs some burn damage on [M]'s [S.display_name] with \the [src]</span>",\
 				"<span class='notice'>\The [user] repairs some burn damage on your [S.display_name]</span>",\
@@ -639,7 +653,28 @@ obj/structure/cable/proc/cableColor(var/colorC)
 				user.visible_message("<span class='notice'>\The [user] repairs some burn damage on their [S.display_name] with \the [src]</span>",\
 				"<span class='notice'>You repair some burn damage on your [S.display_name]</span>",\
 				"You hear wires being cut.")
-		else
-			user << "Nothing to fix!"
+
+			return
+
+		if(istype(M,/mob/living/carbon/human))
+
+			var/mob/living/carbon/human/H = M
+
+			if(H.species.flags & IS_SYNTHETIC)
+
+				if(H.getFireLoss() > 0)
+
+					if(M == user)
+						user << "\red You can't repair damage to your own body - it's against OH&S."
+						return
+
+					user.visible_message("<span class='notice'>\The [user] repairs some burn damage on [M]  with \the [src]</span>",\
+						"<span class='notice'>You repair some of \the [M]'s burn damage.</span>",\
+						"You hear wires being cut.")
+					H.heal_overall_damage(0,5)
+					return
+
+		user << "Nothing to fix!"
+
 	else
 		return ..()

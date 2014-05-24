@@ -254,6 +254,10 @@ datum/controller/game_controller/proc/process_diseases()
 		active_diseases.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_machines()
+	process_machines_process()
+	process_machines_power()
+	process_machines_rebuild()
+datum/controller/game_controller/proc/process_machines_process()
 	var/i = 1
 	while(i<=machines.len)
 		var/obj/machinery/Machine = machines[i]
@@ -265,7 +269,8 @@ datum/controller/game_controller/proc/process_machines()
 					continue
 		machines.Cut(i,i+1)
 
-	i=1
+datum/controller/game_controller/proc/process_machines_power()
+	var/i=1
 	while(i<=active_areas.len)
 		var/area/A = active_areas[i]
 		if(A.powerupdate && A.master == A)
@@ -283,15 +288,13 @@ datum/controller/game_controller/proc/process_machines()
 		A.powerupdate = 0
 		active_areas.Cut(i,i+1)
 
-
+datum/controller/game_controller/proc/process_machines_rebuild()
 	if(controller_iteration % 150 == 0 || rebuild_active_areas)	//Every 300 seconds we retest every area/machine
 		for(var/area/A in all_areas)
 			if(A == A.master)
 				A.powerupdate += 1
 				active_areas |= A
 		rebuild_active_areas = 0
-
-	
 		
 
 datum/controller/game_controller/proc/process_objects()

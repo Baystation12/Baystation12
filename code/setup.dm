@@ -46,7 +46,7 @@
 
 #define SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-helmet quality headwear. MUST NOT BE 0.
 #define SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE 2.0 //what min_cold_protection_temperature is set to for space-suit quality jumpsuits or suits. MUST NOT BE 0.
-#define SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE 5000	//These need better heat protect
+#define SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE 5000	//These need better heat protect, but not as good heat protect as firesuits.
 #define FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE 30000 //what max_heat_protection_temperature is set to for firesuit quality headwear. MUST NOT BE 0.
 #define FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE 30000 //for fire helmet quality items (red and white hardhats)
 #define HELMET_MIN_COLD_PROTECTION_TEMPERATURE 160	//For normal helmets
@@ -199,6 +199,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define MASKCOVERSMOUTH		2048		// on other items, these are just for mask/head
 #define HEADCOVERSMOUTH		2048
 
+#define THICKMATERIAL 1024		//From /tg: prevents syringes, parapens and hypos if the external suit or helmet (if targeting head) has this flag. Example: space suits, biosuit, bombsuits, thick suits that cover your body. (NOTE: flag shared with NOSLIP for shoes)
 #define NOSLIP		1024 		//prevents from slipping on wet floors, in space etc
 #define THICKMATERIAL 1024
 
@@ -628,8 +629,9 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define R_SOUNDS		2048
 #define R_SPAWN			4096
 #define R_MOD			8192
+#define R_MENTOR		16384
 
-#define R_MAXPERMISSION 8192 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
+#define R_MAXPERMISSION 16384 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
 #define R_HOST			65535
 

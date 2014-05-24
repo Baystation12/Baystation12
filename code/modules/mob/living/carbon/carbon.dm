@@ -195,17 +195,22 @@
 			if (istype(src,/mob/living/carbon/human) && src:w_uniform)
 				var/mob/living/carbon/human/H = src
 				H.w_uniform.add_fingerprint(M)
-			src.sleeping = max(0,src.sleeping-5)
-			if(src.sleeping == 0)
-				src.resting = 0
+				
+			if(lying)
+				src.sleeping = max(0,src.sleeping-5)
+				if(src.sleeping == 0)
+					src.resting = 0
+				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!", \
+									"<span class='notice'>You shake [src] trying to wake [t_him] up!")
+			else
+				M.visible_message("<span class='notice'>[M] hugs [src] to make [t_him] feel better!</span>", \
+								"<span class='notice'>You hug [src] to make [t_him] feel better!</span>")
+								
 			AdjustParalysis(-3)
 			AdjustStunned(-3)
 			AdjustWeakened(-3)
+
 			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			M.visible_message( \
-				"\blue [M] shakes [src] trying to wake [t_him] up!", \
-				"\blue You shake [src] trying to wake [t_him] up!", \
-				)
 
 /mob/living/carbon/proc/eyecheck()
 	return 0
