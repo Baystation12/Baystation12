@@ -138,7 +138,12 @@
 		damage += max((power-1600)/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
 	else
 		damage_archived = damage
-		damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
+		
+		//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We dont want the SM exploding before anyone can react.
+		//want the cap to scale linearly with power. Let's aim for a cap of 5 at power = 900 (based on testing, equals roughly 5% per SM alert announcement).
+		var/damage_inc_limit = (explosion_point*0.005)*(power/900)
+		
+		damage = max( damage + min( ( (removed.temperature - 800) / 150 ), damage_inc_limit ) , 0 )
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
 		oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
