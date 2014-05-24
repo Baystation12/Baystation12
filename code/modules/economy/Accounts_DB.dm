@@ -40,6 +40,19 @@
 		"}
 
 /obj/machinery/account_database/New()
+	if(!station_account)
+		create_station_account()
+
+	if(department_accounts.len == 0)
+		for(var/department in station_departments)
+			create_department_account(department)
+	if(!vendor_account)
+		create_department_account("Vendor")
+		vendor_account = department_accounts["Vendor"]
+
+	if(!current_date_string)
+		current_date_string = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], 2557"
+
 	machine_id = "[station_name()] Acc. DB #[num_financial_terminals++]"
 	..()
 
