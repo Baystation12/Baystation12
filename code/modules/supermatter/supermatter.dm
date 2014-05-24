@@ -8,6 +8,9 @@
 #define OXYGEN_RELEASE_MODIFIER 1500        //Higher == less oxygen released at high temperature/power
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
 
+//Controls how much power is produced by each collector in range.
+#define COLLECTION_FACTOR 1.0               //Aiming to make 400 kW output the equivalent of what 4 MW was from before by adjusting this
+
 
 //These would be what you would get at point blank, decreases with distance
 #define DETONATION_RADS 200
@@ -204,7 +207,7 @@
 
 
 	if(Proj.flag != "bullet")
-		power += Proj.damage * config_bullet_energy
+		power += Proj.damage * config_bullet_energy	* COLLECTION_FACTOR	//multiply by COLLECTION_FACTOR so the amount of shots you will need to give with an emitter is unaffected.
 	else
 		damage += Proj.damage * config_bullet_energy
 	return 0
@@ -234,7 +237,7 @@
 /obj/machinery/power/supermatter/proc/transfer_energy()
 	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
 		if(get_dist(R, src) <= 15) // Better than using orange() every process
-			R.receive_pulse(power)
+			R.receive_pulse(power * COLLECTION_FACTOR)
 	return
 
 /obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
