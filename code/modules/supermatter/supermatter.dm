@@ -9,7 +9,7 @@
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
 
 //Controls how much power is produced by each collector in range.
-#define COLLECTION_FACTOR 1.0               //Aiming to make 400 kW output the equivalent of what 4 MW was from before by adjusting this
+#define COLLECTION_FACTOR 1.0               //Aiming to make 400 kW output the equivalent of what 4 MW (power=1210) was from before by adjusting this
 
 
 //These would be what you would get at point blank, decreases with distance
@@ -190,11 +190,13 @@
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
-	for(var/mob/living/l in range(src, round((power / 100) ** 0.25)))
+	//adjusted range so that a power of 600 (pretty high) results in 8 tiles, roughly the distance from the core to the engine monitoring room.
+	//at power of 1210 this becomes 9 tiles --> increases very very slowly.
+	for(var/mob/living/l in range(src, round((power / 0.146484375) ** 0.25)))
 		var/rads = (power / 10) * sqrt( 1 / get_dist(l, src) )
 		l.apply_effect(rads, IRRADIATE)
 
-	power -= (power/500)**3		//losses due to radiation
+	power -= (power/500)**3		//energy losses due to radiation
 
 	return 1
 
