@@ -557,14 +557,42 @@ var/list/admin_verbs_mentor = list(
 
 /client/proc/give_disease(mob/T as mob in mob_list) // -- Giacom
 	set category = "Fun"
-	set name = "Give Disease"
-	set desc = "Gives a Disease to a mob."
+	set name = "Give Disease (old)"
+	set desc = "Gives an (old-style) Disease to a mob."
 	var/datum/disease/D = input("Choose the disease to give to that guy", "ACHOO") as null|anything in diseases
 	if(!D) return
 	T.contract_disease(new D, 1)
 	feedback_add_details("admin_verb","GD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] the disease [D].")
 	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the disease [D].", 1)
+	
+/client/proc/give_disease2(mob/T as mob in mob_list) // -- Giacom
+	set category = "Fun"
+	set name = "Give Disease"
+	set desc = "Gives a Disease to a mob."
+	
+	var/datum/disease2/disease/D = new /datum/disease2/disease()
+	
+	var/greater = ((input("Is this a lesser or greater disease?", "Give Disease") in list("Lesser", "Greater")) == "Greater")
+	
+	D.makerandom(greater)
+	if (!greater)
+		D.infectionchance = 1
+		
+	D.infectionchance = input("How virulent is this disease? (1-100)", "Give Disease", D.infectionchance) as num
+	
+	if(istype(T,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = T
+		if (H.species)
+			D.affected_species = list(H.species.name)
+	if(istype(T,/mob/living/carbon/monkey))
+		var/mob/living/carbon/monkey/M = T
+		D.affected_species = list(M.greaterform)
+	infect_virus2(T,D,1)
+	
+	feedback_add_details("admin_verb","GD2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	log_admin("[key_name(usr)] gave [key_name(T)] a [(greater)? "greater":"lesser"] disease2 with infection chance [D.infectionchance].")
+	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] a [(greater)? "greater":"lesser"] disease2 with infection chance [D.infectionchance].", 1)
 
 /client/proc/make_sound(var/obj/O in world) // -- TLE
 	set category = "Special Verbs"
