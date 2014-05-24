@@ -56,7 +56,7 @@ datum/game_mode/mutiny
 		var/list/candidates[0]
 		for(var/T in (typesof(/datum/directive) - /datum/directive))
 			var/datum/directive/D = new T(src)
-			world << D.name
+//			world << D.name
 			if (D.meets_prerequisites())
 				candidates+=D
 		return candidates
