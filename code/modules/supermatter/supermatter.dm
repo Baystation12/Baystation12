@@ -166,9 +166,11 @@
 		//is on. An increase of 4*C @ 25% efficiency here results in an increase of 1*C / (#tilesincore) overall.
 		
 		var/thermal_power = THERMAL_RELEASE_MODIFIER
-		if(removed.total_moles < 35) thermal_power += 750   //If you don't add coolant, you are going to have a bad time.
 		
-		removed.temperature += ((device_energy * thermal_power) / max(1, removed.heat_capacity()))
+		//This shouldn't be necessary. If the number of moles is low, then heat_capacity should be tiny.
+		//if(removed.total_moles < 35) thermal_power += 750   //If you don't add coolant, you are going to have a bad time.
+		
+		removed.temperature += ((device_energy * thermal_power) / removed.heat_capacity())
 		
 		removed.temperature = max(0, min(removed.temperature, 10000))
 		
