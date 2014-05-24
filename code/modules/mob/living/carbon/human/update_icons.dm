@@ -370,7 +370,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
 
 	//Skin colour. Not in cache because highly variable (and relatively benign).
-	if (species.flags & HAS_SKIN_COLOR)
+	if (species.bodyflags & HAS_SKIN_COLOR)
 		stand_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
 
 	if(has_head)
