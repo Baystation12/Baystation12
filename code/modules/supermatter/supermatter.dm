@@ -96,9 +96,6 @@
 	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
 		return  //Yeah just stop.
 
-	if(istype(L, /turf/space))	// Stop processing this stuff if we've been ejected.
-		return
-
 	if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
 			var/stability = num2text(round((damage / explosion_point) * 100))
@@ -127,65 +124,62 @@
 			explode()
 
 	//Ok, get the air from the turf
-	var/datum/gas_mixture/env = L.return_air()
-
-	//Remove gas from surrounding area
-	var/datum/gas_mixture/removed = env.remove(gasefficency * env.total_moles)
-
-	if(!removed || !removed.total_moles)
-		damage += max((power-1600)/10, 0)
-		power = min(power, 1600)
-		return 1
-
-	if (!removed)
-		return 1
-
-	damage_archived = damage
-	damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
-	//Ok, 100% oxygen atmosphere = best reaction
-	//Maxes out at 100% oxygen pressure
-	oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
-
-	var/temp_factor = 100
-
-	if(oxygen > 0.8)
-		// with a perfect gas mix, make the power less based on heat
-		icon_state = "[base_icon_state]_glow"
-	else
-		// in normal mode, base the produced energy around the heat
-		temp_factor = 60
-		icon_state = base_icon_state
-
-	power = max( (removed.temperature * temp_factor / T0C) * oxygen + power, 0) //Total laser power plus an overload
-
-	//We've generated power, now let's transfer it to the collectors for storing/usage
-	transfer_energy()
-
-	var/device_energy = power * REACTION_POWER_MODIFIER
-
-	//To figure out how much temperature to add each tick, consider that at one atmosphere's worth
-	//of pure oxygen, with all four lasers firing at standard energy and no N2 present, at room temperature
-	//that the device energy is around 2140. At that stage, we don't want too much heat to be put out
-	//Since the core is effectively "cold"
-
-	//Also keep in mind we are only adding this temperature to (efficiency)% of the one tile the rock
-	//is on. An increase of 4*C @ 25% efficiency here results in an increase of 1*C / (#tilesincore) overall.
+	var/datum/gas_mixture/removed = null
+	var/datum/gas_mixture/env = null
 	
-	var/thermal_power = THERMAL_RELEASE_MODIFIER
-	if(removed.total_moles < 35) thermal_power += 750   //If you don't add coolant, you are going to have a bad time.
+	if(!istype(L, /turf/space))
+		env = L.return_air()
+		removed = env.remove(gasefficency * env.total_moles)	//Remove gas from surrounding area
 
-	removed.temperature += ((device_energy * thermal_power) / max(1, removed.heat_capacity()))
-
-	removed.temperature = max(0, min(removed.temperature, 10000))
-
-	//Calculate how much gas to release
-	removed.phoron += max(device_energy / PHORON_RELEASE_MODIFIER, 0)
-
-	removed.oxygen += max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
-
-	removed.update_values()
-
-	env.merge(removed)
+	if(!env || !removed || !removed.total_moles)
+		damage += max((power-1600)/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
+	else
+		damage_archived = damage
+		damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
+		//Ok, 100% oxygen atmosphere = best reaction
+		//Maxes out at 100% oxygen pressure
+		oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
+		
+		var/temp_factor = 100
+		
+		if(oxygen > 0.8)
+			// with a perfect gas mix, make the power less based on heat
+			icon_state = "[base_icon_state]_glow"
+		else
+			// in normal mode, base the produced energy around the heat
+			temp_factor = 60
+			icon_state = base_icon_state
+		
+		power = max( (removed.temperature * temp_factor / T0C) * oxygen + power, 0) //Total laser power plus an overload
+		
+		//We've generated power, now let's transfer it to the collectors for storing/usage
+		transfer_energy()
+		
+		var/device_energy = power * REACTION_POWER_MODIFIER
+		
+		//To figure out how much temperature to add each tick, consider that at one atmosphere's worth
+		//of pure oxygen, with all four lasers firing at standard energy and no N2 present, at room temperature
+		//that the device energy is around 2140. At that stage, we don't want too much heat to be put out
+		//Since the core is effectively "cold"
+		
+		//Also keep in mind we are only adding this temperature to (efficiency)% of the one tile the rock
+		//is on. An increase of 4*C @ 25% efficiency here results in an increase of 1*C / (#tilesincore) overall.
+		
+		var/thermal_power = THERMAL_RELEASE_MODIFIER
+		if(removed.total_moles < 35) thermal_power += 750   //If you don't add coolant, you are going to have a bad time.
+		
+		removed.temperature += ((device_energy * thermal_power) / max(1, removed.heat_capacity()))
+		
+		removed.temperature = max(0, min(removed.temperature, 10000))
+		
+		//Calculate how much gas to release
+		removed.phoron += max(device_energy / PHORON_RELEASE_MODIFIER, 0)
+		
+		removed.oxygen += max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
+		
+		removed.update_values()
+		
+		env.merge(removed)
 
 	for(var/mob/living/carbon/human/l in view(src, min(7, round(power ** 0.25)))) // If they can see it without mesons on.  Bad on them.
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
@@ -195,7 +189,7 @@
 		var/rads = (power / 10) * sqrt( 1 / get_dist(l, src) )
 		l.apply_effect(rads, IRRADIATE)
 
-	power -= (power/500)**3
+	power -= (power/500)**3		//losses due to radiation
 
 	return 1
 
