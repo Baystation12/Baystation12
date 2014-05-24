@@ -5,8 +5,7 @@
 	icon_state = "robot"
 	maxHealth = 200
 	health = 200
-	universal_speak = 1
-
+	
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
@@ -46,7 +45,6 @@
 	var/list/req_access = list(access_robotics)
 	var/ident = 0
 	//var/list/laws = list()
-	var/alarms = list("Motion"=list(), "Fire"=list(), "Atmosphere"=list(), "Power"=list(), "Camera"=list())
 	var/viewalerts = 0
 	var/modtype = "Default"
 	var/lower_mod = 0
@@ -90,6 +88,12 @@
 		hands.icon_state = "standard"
 		icon_state = "secborg"
 		modtype = "Security"
+	else if(istype(src,/mob/living/silicon/robot/drone))
+		laws = new /datum/ai_laws/drone()
+		connected_ai = select_active_ai_with_fewest_borgs()
+		if(connected_ai)
+			connected_ai.connected_robots += src
+			lawsync()
 	else
 		laws = new /datum/ai_laws/nanotrasen()
 		connected_ai = select_active_ai_with_fewest_borgs()
@@ -138,9 +142,10 @@
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 
 
-
-
-	playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
+	if(istype(src,/mob/living/silicon/robot/drone))
+		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
+	else
+		playsound(loc, 'sound/voice/liveagain.ogg', 75, 1)
 
 // setup the PDA and its name
 /mob/living/silicon/robot/proc/setup_PDA()
@@ -234,6 +239,9 @@
 			module_sprites["Combat Android"] = "droid-combat"
 			module.channels = list("Security" = 1)
 
+	//languages
+	module.add_languages(src)
+	
 	//Custom_sprite check and entry
 	if (custom_sprite == 1)
 		module_sprites["Custom"] = "[src.ckey]-[modtype]"
@@ -321,16 +329,14 @@
 	dat += "<A HREF='?src=\ref[src];mach_close=robotalerts'>Close</A><BR><BR>"
 	for (var/cat in alarms)
 		dat += text("<B>[cat]</B><BR>\n")
-		var/list/L = alarms[cat]
-		if (L.len)
-			for (var/alarm in L)
-				var/list/alm = L[alarm]
-				var/area/A = alm[1]
-				var/list/sources = alm[3]
+		var/list/alarmlist = alarms[cat]
+		if (alarmlist.len)
+			for (var/area_name in alarmlist)
+				var/datum/alarm/alarm = alarmlist[area_name]
 				dat += "<NOBR>"
-				dat += text("-- [A.name]")
-				if (sources.len > 1)
-					dat += text("- [sources.len] sources")
+				dat += text("-- [area_name]")
+				if (alarm.sources.len > 1)
+					dat += text("- [alarm.sources.len] sources")
 				dat += "</NOBR><BR>\n"
 		else
 			dat += "-- All Systems Nominal<BR>\n"
@@ -522,47 +528,22 @@
 	return
 
 
-/mob/living/silicon/robot/triggerAlarm(var/class, area/A, var/O, var/alarmsource)
+/mob/living/silicon/robot/triggerAlarm(var/class, area/A, list/cameralist, var/source)
 	if (stat == 2)
 		return 1
-	var/list/L = alarms[class]
-	for (var/I in L)
-		if (I == A.name)
-			var/list/alarm = L[I]
-			var/list/sources = alarm[3]
-			if (!(alarmsource in sources))
-				sources += alarmsource
-			return 1
-	var/obj/machinery/camera/C = null
-	var/list/CL = null
-	if (O && istype(O, /list))
-		CL = O
-		if (CL.len == 1)
-			C = CL[1]
-	else if (O && istype(O, /obj/machinery/camera))
-		C = O
-	L[A.name] = list(A, (C) ? C : O, list(alarmsource))
+	
+	..()
+	
 	queueAlarm(text("--- [class] alarm detected in [A.name]!"), class)
-//	if (viewalerts) robot_alerts()
-	return 1
 
 
 /mob/living/silicon/robot/cancelAlarm(var/class, area/A as area, obj/origin)
-	var/list/L = alarms[class]
-	var/cleared = 0
-	for (var/I in L)
-		if (I == A.name)
-			var/list/alarm = L[I]
-			var/list/srcs  = alarm[3]
-			if (origin in srcs)
-				srcs -= origin
-			if (srcs.len == 0)
-				cleared = 1
-				L -= I
-	if (cleared)
+	var/has_alarm = ..()
+	
+	if (!has_alarm)
 		queueAlarm(text("--- [class] alarm in [A.name] has been cleared."), class, 0)
 //		if (viewalerts) robot_alerts()
-	return !cleared
+	return has_alarm
 
 
 /mob/living/silicon/robot/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -606,7 +587,7 @@
 			user << "Need more welding fuel!"
 			return
 
-	else if(istype(W, /obj/item/weapon/cable_coil) && wiresexposed)
+	else if(istype(W, /obj/item/weapon/cable_coil) && (wiresexposed || istype(src,/mob/living/silicon/robot/drone)))
 		if (!getFireLoss())
 			user << "Nothing to fix here!"
 			return

@@ -20,12 +20,20 @@
 	flags = WHITELISTED
 
 /datum/language/tajaran
-	name = "Siik'tajr"
-	desc = "An expressive language that combines yowls and chirps with posture, tail and ears. Native to the Tajaran."
+	name = "Siik'maas"
+	desc = "The traditionally employed tongue of Ahdomai, composed of expressive yowls and chirps. Native to the Tajaran."
 	speech_verb = "mrowls"
 	colour = "tajaran"
 	key = "j"
 	flags = WHITELISTED
+
+/datum/language/tajaran_sign
+	name = "Siik'tajr"
+	desc = "An expressive language that combines yowls and chirps with posture, tail and ears. Spoken by many Tajaran."
+	speech_verb = "mrowls"
+	colour = "tajaran"
+	key = "y"		//only "dfpqyz" left.
+	flags = WHITELISTED | NONVERBAL
 
 /datum/language/skrell
 	name = "Skrellian"
@@ -89,6 +97,11 @@
 	languages.Remove(all_languages[rem_language])
 
 	return 0
+
+// Can we speak this language, as opposed to just understanding it?
+/mob/proc/can_speak(datum/language/speaking)
+
+	return (universal_speak || speaking in src.languages)
 
 //TBD
 /mob/verb/check_languages()

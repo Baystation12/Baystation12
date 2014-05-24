@@ -167,16 +167,12 @@
 		if ((src.loc == user) && (src.locked == 1))
 			usr << "\red [src] is locked and cannot be opened!"
 		else if ((src.loc == user) && (!src.locked))
-			playsound(src.loc, "rustle", 50, 1, -5)
-			if (user.s_active)
-				user.s_active.close(user) //Close and re-open
-			src.show_to(user)
+			src.open(usr)
 		else
 			..()
 			for(var/mob/M in range(1))
 				if (M.s_active == src)
 					src.close(M)
-			src.orient2hud(user)
 		src.add_fingerprint(user)
 		return
 

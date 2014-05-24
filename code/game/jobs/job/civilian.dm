@@ -91,7 +91,9 @@
 		H.equip_to_slot_or_del(new /obj/item/clothing/suit/apron(H), slot_wear_suit)
 		H.equip_to_slot_or_del(new /obj/item/device/analyzer/plant_analyzer(H), slot_s_store)
 		H.equip_to_slot_or_del(new /obj/item/device/pda/botanist(H), slot_belt)
-		if(H.backbag == 1)
+		if(H.backbag == 3)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_hyd(H), slot_back)
+		else if(H.backbag == 1)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)

@@ -349,15 +349,19 @@
 		spawning = 1
 		close_spawn_windows()
 
-		var/mob/living/carbon/human/new_character = new(loc)
-		new_character.lastarea = get_area(loc)
+		var/mob/living/carbon/human/new_character
 
 		var/datum/species/chosen_species
 		if(client.prefs.species)
 			chosen_species = all_species[client.prefs.species]
 		if(chosen_species)
 			if(is_alien_whitelisted(src, client.prefs.species) || !config.usealienwhitelist || !(chosen_species.flags & IS_WHITELISTED) || (client.holder.rights & R_ADMIN) )// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
-				new_character.set_species(client.prefs.species)
+				new_character = new(loc, client.prefs.species)
+
+		if(!new_character)
+			new_character = new(loc)
+
+		new_character.lastarea = get_area(loc)
 
 		var/datum/language/chosen_language
 		if(client.prefs.language)

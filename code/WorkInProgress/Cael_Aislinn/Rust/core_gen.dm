@@ -2,7 +2,7 @@
 
 /*
 when the core is turned on, it generates [creates] an electromagnetic field
-the em field attracts plasma, and suspends it in a controlled torus (doughnut) shape, oscillating around the core
+the em field attracts phoron, and suspends it in a controlled torus (doughnut) shape, oscillating around the core
 
 the field strength is directly controllable by the user
 field strength = sqrt(energy used by the field generator)
@@ -16,27 +16,27 @@ the size of the EM field = field strength / k
 7 tilewidth = between 20T and 50T
 (can't go higher than 40T)
 
-energy is added by a gyrotron, and lost when plasma escapes
+energy is added by a gyrotron, and lost when phoron escapes
 energy transferred from the gyrotron beams is reduced by how different the frequencies are (closer frequencies = more energy transferred)
 
-frequency = field strength * (stored energy / stored moles of plasma) * x
+frequency = field strength * (stored energy / stored moles of phoron) * x
 (where x is an arbitrary constant to make the frequency something realistic)
-the gyrotron beams' frequency and energy are hardcapped low enough that they won't heat the plasma much
+the gyrotron beams' frequency and energy are hardcapped low enough that they won't heat the phoron much
 
 energy is generated in considerable amounts by fusion reactions from injected particles
 fusion reactions only occur when the existing energy is above a certain level, and it's near the max operating level of the gyrotron. higher energy reactions only occur at higher energy levels
 a small amount of energy constantly bleeds off in the form of radiation
 
-the field is constantly pulling in plasma from the surrounding [local] atmosphere
-at random intervals, the field releases a random percentage of stored plasma in addition to a percentage of energy as intense radiation
+the field is constantly pulling in phoron from the surrounding [local] atmosphere
+at random intervals, the field releases a random percentage of stored phoron in addition to a percentage of energy as intense radiation
 
-the amount of plasma is a percentage of the field strength, increased by frequency
+the amount of phoron is a percentage of the field strength, increased by frequency
 */
 
 /*
 - VALUES -
 
-max volume of plasma storeable by the field = the total volume of a number of tiles equal to the (field tilewidth)^2
+max volume of phoron storeable by the field = the total volume of a number of tiles equal to the (field tilewidth)^2
 
 */
 
