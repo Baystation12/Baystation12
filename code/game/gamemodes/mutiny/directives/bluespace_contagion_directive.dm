@@ -1,5 +1,3 @@
-#define INFECTION_COUNT 5
-
 datum/directive/bluespace_contagion
 	var/infection_count = 5
 	var/list/infected = list()
@@ -14,9 +12,16 @@ datum/directive/bluespace_contagion/get_description()
 	"}
 
 datum/directive/bluespace_contagion/initialize()
-	var/list/candidates = player_list.Copy()
+	var/list/candidates = list()
+	
+	for (var/mob/living/M in player_list)
+		if (is_valid_candidate(M))
+			candidates += M
+	
+	infection_count = min(infection_count, candidates.len)
+	
 	var/list/infected_names = list()
-	for(var/i=0, i < INFECTION_COUNT, i++)
+	for(var/i=0, i < infection_count, i++)
 		if(!candidates.len)
 			break
 
@@ -30,8 +35,19 @@ datum/directive/bluespace_contagion/initialize()
 		"Allow one hour for a cure to be manufactured.",
 		"If no cure arrives after that time, execute the infected.")
 
+datum/directive/bluespace_contagion/proc/is_valid_candidate(mob/M)
+	//don't select observers, dead, or disconnected people
+	if(istype(M, /mob/new_player) || !M.client || M.stat == DEAD)
+		return 0
+	
+	//don't allow AI, robots, simple_animals and the like
+	if(!istype(M, /mob/living/carbon))
+		return 0
+	
+	return 1
+
 datum/directive/bluespace_contagion/meets_prerequisites()
-	return player_list.len >= 7
+	return player_list.len >= 7		//would be better to count the number of valid candidates but I don't know if that is possible here.
 
 datum/directive/bluespace_contagion/directives_complete()
 	return infected.len == 0
