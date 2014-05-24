@@ -47,3 +47,8 @@
 	name = "Scientopia flag"
 	desc = "The flag of the independant, sovereign nation of Scientopia."
 	icon_state = "rndflag"
+
+/obj/item/flag/atmos
+	name = "Atmosia flag"
+	desc = "The flag of the independant, sovereign nation of Atmosia."
+	icon_state = "atmosflag"

@@ -7,6 +7,7 @@
  + cuff_white
 --- Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\left\flags_left.dmi
 +++ Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\right\flags_left.dmi
+ + atmosflag
  + cargoflag
  + clownflag
  + medflag
