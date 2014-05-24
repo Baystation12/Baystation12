@@ -12,6 +12,11 @@
 	desc = "The banner of His Majesty, King Squiggles the Eighth."
 	icon_state = "clownflag"
 
+/obj/item/flag/mime
+	name = "Mime Revolution flag"
+	desc = "The banner of the glorious revolutionary forces fighting the oppressors on Clown Planet."
+	icon_state = "mimeflag"
+
 /obj/item/flag/syndi
 	name = "Syndicate flag"
 	desc = "A flag proudly boasting the logo of the Syndicate, in defiance of NT."
@@ -33,3 +38,8 @@
 	name = "Brigston flag"
 	desc = "The flag of the independant, sovereign nation of Brigston."
 	icon_state = "secflag"
+
+/obj/item/flag/rnd
+	name = "Scientopia flag"
+	desc = "The flag of the independant, sovereign nation of Scientopia."
+	icon_state = "rndflag"
