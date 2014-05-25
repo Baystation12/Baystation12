@@ -174,7 +174,7 @@
 		if(href_list["alarm"])
 			alarm()
 		if(href_list["drive"])
-			for(var/obj/machinery/mass_driver/M in world)
+			for(var/obj/machinery/mass_driver/M in machines)
 				if(M.id == id)
 					M.power = connected.power
 					M.drive()
