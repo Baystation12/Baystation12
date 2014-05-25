@@ -115,6 +115,10 @@ var/global/datum/crafting_controller/crafting_master
 	var/list/all_crafting_points = list()
 	var/list/all_crafting_recipes = list()
 
+/hook/startup/proc/setupCraftingMaster()
+	crafting_master = new /datum/crafting_controller()
+	return 1
+
 /datum/crafting_controller/New()
 	crafting_master = src
 	add_family("table")
