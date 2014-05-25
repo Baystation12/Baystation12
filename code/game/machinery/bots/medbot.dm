@@ -284,7 +284,7 @@
 				continue
 
 
-	if(src.patient && (get_dist(src,src.patient) <= 1))
+	if(src.patient && Adjacent(patient))
 		if(!src.currently_healing)
 			src.currently_healing = 1
 			src.frustration = 0
