@@ -7,6 +7,11 @@
 	desc = "A flag proudly boasting the logo of NT."
 	icon_state = "ntflag"
 
+/obj/item/flag/grey
+	name = "Greytide flag"
+	desc = "A banner made from an old grey jumpsuit."
+	icon_state = "greyflag"
+
 /obj/item/flag/clown
 	name = "Clown Planet flag"
 	desc = "The banner of His Majesty, King Squiggles the Eighth."
@@ -52,3 +57,10 @@
 	name = "Atmosia flag"
 	desc = "The flag of the independant, sovereign nation of Atmosia."
 	icon_state = "atmosflag"
+
+//Species flags
+
+/obj/item/flag/slime
+	name = "Slime People flag"
+	desc = "A flag proudly proclaiming the superior heritage of Slime People."
+	icon_state = "slimeflag"
