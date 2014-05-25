@@ -28,9 +28,8 @@
 			var/mob/living/carbon/C = src.loc
 			var/turf/location = get_turf(C)
 			new /obj/effect/decal/cleanable/ash(location)
-			var/obj/item/stack/rods/R = new /obj/item/stack/rods
+			new /obj/item/stack/rods(location)
 			del(src)
-			C.put_in_hands(R)
 			return
 		else
 			del(src)
@@ -77,7 +76,7 @@
 /obj/item/flag/proc/update_icons()
 	overlays = null
 	overlays += image('icons/obj/flag.dmi', src , "fire")
-//	item_state = "[icon_state]_fire" Waiting for new in-hands
+	item_state = "[icon_state]_fire"
 
 /obj/item/flag/nt
 	name = "Nanotrasen flag"
