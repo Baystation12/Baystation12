@@ -10,7 +10,7 @@ var/global/datum/controller/gameticker/ticker
 	var/const/restart_timeout = 600
 	var/current_state = GAME_STATE_PREGAME
 
-	var/hide_mode = 1
+	var/hide_mode = 0 // leave here at 0 ! setup() will take care of it when needed for Secret mode -walter0o
 	var/datum/game_mode/mode = null
 	var/event_time = null
 	var/event = 0
@@ -140,15 +140,18 @@ var/global/datum/controller/gameticker/ticker
 			//Deleting Startpoints but we need the ai point to AI-ize people later
 			if (S.name != "AI")
 				del(S)
+		
+		// take care of random spesspod spawning
 		var/list/obj/effect/landmark/spacepod/random/L = list()
 		for(var/obj/effect/landmark/spacepod/random/SS in landmarks_list)
 			if(istype(SS))
 				L += SS
-		var/obj/effect/landmark/spacepod/random/S = pick(L)
-		new /obj/spacepod/random(S.loc)
-		for(var/obj in L)
-			if(istype(obj, /obj/effect/landmark/spacepod/random))
-				del(obj)
+		if(L.len)
+			var/obj/effect/landmark/spacepod/random/S = pick(L)
+			new /obj/spacepod/random(S.loc)
+			for(var/obj/effect/landmark/spacepod/random/R in L)
+				del(R)
+		
 		world << "<FONT color='blue'><B>Enjoy the game!</B></FONT>"
 		world << sound('sound/AI/welcome.ogg') // Skie
 		//Holiday Round-start stuff	~Carn
