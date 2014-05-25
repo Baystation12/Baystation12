@@ -34,7 +34,7 @@
 	for(var/obj/machinery/door/poddoor/M in world)
 		if(M.id == id)
 			M.open()
-			return
+
 	sleep(20)
 
 	for(var/obj/machinery/mass_driver/M in world)
@@ -173,6 +173,12 @@
 				connected.power = t
 		if(href_list["alarm"])
 			alarm()
+		if(href_list["drive"])
+			for(var/obj/machinery/mass_driver/M in world)
+				if(M.id == id)
+					M.power = connected.power
+					M.drive()
+
 		if(href_list["time"])
 			timing = text2num(href_list["time"])
 		if(href_list["tp"])
