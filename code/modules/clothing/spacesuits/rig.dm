@@ -165,14 +165,17 @@
 	set category = "Object"
 	set src in usr
 
+	if(!istype(src.loc,/mob/living)) return
+
 	if(!helmet)
 		usr << "There is no helmet installed."
 		return
 
 	var/mob/living/carbon/human/H = usr
-	if(!istype(H)) return
 
+	if(!istype(H)) return
 	if(H.stat) return
+	if(H.wear_suit != src) return
 
 	if(H.head == helmet)
 		helmet.canremove = 1
