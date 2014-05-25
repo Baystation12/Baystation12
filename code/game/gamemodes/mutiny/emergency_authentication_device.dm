@@ -43,7 +43,7 @@
 		return
 
 	if(!mode.current_directive.directives_complete())
-		state("Command aborted. Communication with CentComm is prohibited until Directive X has been completed.")
+		state("Command aborted. Communication with CentCom is prohibited until Directive X has been completed.")
 		return
 
 	check_key_existence()
