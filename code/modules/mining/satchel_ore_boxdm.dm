@@ -40,13 +40,16 @@
 	usr << "That's an [src]."
 	usr << desc
 
-	if(!(src in view(1, usr))) //If you can't physically get to the ore box to open it, you can't see what's in it.
+	if(!istype(usr, /mob/living/carbon/human)) //Only living, intelligent creatures with hands can check the contents of ore boxes.
+		return
+
+	if(!Adjacent(usr)) //Can only check the contents of ore boxes if you can physically reach them.
 		return
 
 	add_fingerprint(usr)
 
 	if(contents.len < 1)
-		usr << "It is empty"
+		usr << "It is empty."
 		return
 
 	if(world.time > last_update + 10)
@@ -81,9 +84,17 @@
 /obj/structure/ore_box/verb/empty_box()
 	set name = "Empty Ore Box"
 	set category = "Object"
-	set src in view(1) //You can only empty the box if you can physically reach it
+	set src in view(1)
+
+	if(!istype(usr, /mob/living/carbon/human)) //Only living, intelligent creatures with hands can empty ore boxes.
+		usr << "\red You are physically incapable of emptying the ore box."
+		return
 
 	if( usr.stat || usr.restrained() )
+		return
+
+	if(!Adjacent(usr)) //You can only empty the box if you can physically reach it
+		usr << "You cannot reach the ore box."
 		return
 
 	add_fingerprint(usr)
@@ -98,6 +109,7 @@
 	usr << "\blue You empty the ore box"
 
 	return
+
 
 // Updates ore tally
 /obj/structure/ore_box/proc/update_orecount()
