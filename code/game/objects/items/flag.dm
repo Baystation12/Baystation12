@@ -37,6 +37,11 @@
 	desc = "A flag proudly boasting the logo of the Wizard Federation, sworn enemies of NT."
 	icon_state = "wizflag"
 
+/obj/item/flag/pony
+	name = "Equestria flag"
+	desc = "The flag of the independant, sovereign nation of Equestria, whatever the fuck that is."
+	icon_state = "ponyflag"
+
 //Nations/Department flags
 /obj/item/flag/cargo
 	name = "Cargonia flag"
@@ -74,3 +79,8 @@
 	name = "Skrell flag"
 	desc = "A flag proudly proclaiming the superior heritage of Skrell."
 	icon_state = "skrellflag"
+
+/obj/item/flag/vox
+	name = "Vox flag"
+	desc = "A flag proudly proclaiming the superior heritage of Vox."
+	icon_state = "voxflag"

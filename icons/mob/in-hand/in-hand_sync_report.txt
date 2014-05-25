@@ -16,12 +16,14 @@
  + mimeflag
  + ninjaflag
  + ntflag
+ + ponyflag
  + rndflag
  + secflag
  + secflag_old
  + skrellflag
  + slimeflag
  + syndiflag
+ + voxflag
  + wizflag
 --- Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\left\guns.dmi
 +++ Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\right\guns.dmi
