@@ -4,11 +4,14 @@ datum/directive/research_to_ripleys
 	var/list/ids_to_reassign = list()
 	var/materials_shipped = 0
 
+	proc/is_researcher(mob/M)
+		return M.mind.assigned_role in science_positions - "Research Director"
+
 	proc/get_researchers()
 		var/list/researchers[0]
-		for(var/mob/living/carbon/human/H in player_list)
-			if (H.mind.assigned_role in science_positions - "Research Director")
-				researchers.Add(H)
+		for(var/mob/M in player_list)
+			if (is_researcher(M) && M.is_ready())
+				researchers.Add(M)
 		return researchers
 
 	proc/count_researchers_reassigned()

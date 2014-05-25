@@ -7,8 +7,8 @@ datum/directive/terminations/test
 
 datum/directive/terminations/test/get_crew_to_terminate()
 	var/list/uglies[0]
-	for(var/mob/living/carbon/human/H in player_list)
-		uglies.Add(H)
+	for(var/mob/M in player_list)
+		uglies.Add(M)
 	return uglies
 
 datum/directive/terminations/test/get_description()

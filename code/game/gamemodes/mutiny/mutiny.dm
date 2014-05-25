@@ -256,17 +256,17 @@ datum/game_mode/mutiny
 /datum/game_mode/mutiny/pre_setup()
 	var/list/loyalist_candidates = get_head_loyalist_candidates()
 	if(!loyalist_candidates || loyalist_candidates.len == 0)
-		world << "Mutiny mode aborted: no valid candidates for head loyalist."
+		world << "\red Mutiny mode aborted: no valid candidates for head loyalist."
 		return 0
 
 	var/list/mutineer_candidates = get_head_mutineer_candidates()
 	if(!mutineer_candidates || mutineer_candidates.len == 0)
-		world << "Mutiny mode aborted: no valid candidates for head mutineer."
+		world << "\red Mutiny mode aborted: no valid candidates for head mutineer."
 		return 0
 
 	var/list/directive_candidates = get_directive_candidates()
 	if(!directive_candidates || directive_candidates.len == 0)
-		world << "Mutiny mode aborted: no valid candidates for Directive X."
+		world << "\red Mutiny mode aborted: no valid candidates for Directive X."
 		return 0
 
 	head_loyalist = pick(loyalist_candidates)

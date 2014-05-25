@@ -15,16 +15,16 @@ datum/directive/ipc_virus
 
 	proc/get_ipcs()
 		var/list/machines[0]
-		for(var/mob/living/carbon/human/H in player_list)
-			if (H.species.name == "Machine")
-				machines.Add(H)
+		for(var/mob/M in player_list)
+			if (M.get_species() == "Machine" && M.is_ready())
+				machines.Add(M)
 		return machines
 
 	proc/get_roboticists()
 		var/list/roboticists[0]
-		for(var/mob/living/carbon/human/H in player_list)
-			if (roboticist_roles.Find(H.mind.assigned_role))
-				roboticists.Add(H)
+		for(var/mob/M in player_list)
+			if (roboticist_roles.Find(M.mind.assigned_role) && M.is_ready())
+				roboticists.Add(M)
 		return roboticists
 
 datum/directive/ipc_virus/initialize()
@@ -37,7 +37,7 @@ datum/directive/ipc_virus/get_description()
 	return {"
 		<p>
 			IPC units have been found to be infected with a violent and undesired virus in Virgus Ferrorus system.
-			Risk to NSS Exodus IPC units has not been assessed. Further information is classified.
+			Risk to [station_name()] IPC units has not been assessed. Further information is classified.
 		</p>
 	"}
 

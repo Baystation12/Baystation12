@@ -4,11 +4,15 @@ datum/directive/terminations/alien_fraud
 		"Transfer their payrolls to the station account.",
 		"Terminate their employment.")
 
+	proc/is_alien(mob/M)
+		var/species = M.get_species()
+		return species == "Tajaran" || species == "Unathi"
+
 datum/directive/terminations/alien_fraud/get_crew_to_terminate()
 	var/list/aliens[0]
-	for(var/mob/living/carbon/human/H in player_list)
-		if (H.species.name == "Tajaran" || H.species.name == "Unathi")
-			aliens.Add(H)
+	for(var/mob/M in player_list)
+		if (is_alien(M) && M.is_ready())
+			aliens.Add(M)
 	return aliens
 
 datum/directive/terminations/alien_fraud/get_description()
@@ -24,10 +28,11 @@ datum/directive/terminations/alien_fraud/meets_prerequisites()
 	// of the Tajarans and Unathi combined can't be more than 1/3rd of the crew.
 	var/tajarans = 0
 	var/unathi = 0
-	for(var/mob/living/carbon/human/H in player_list)
-		if (H.species.name == "Tajaran")
+	for(var/mob/M in player_list)
+		var/species = M.get_species()
+		if(species == "Tajaran")
 			tajarans++
-		if (H.species.name == "Unathi")
+		if(species == "Unathi")
 			unathi++
 
 	if (!tajarans || !unathi)
