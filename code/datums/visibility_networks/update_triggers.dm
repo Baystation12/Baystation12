@@ -71,8 +71,8 @@
 
 /mob/Move(n,direct)
 	var/oldLoc = src.loc
-	. = ..()
-	if(.)
+	//. = ..()
+	if(..(n,direct))
 		if(src.visibilityNetworks.len)
 			if(!src.updatingVisibilityNetworks)
 				src.updatingVisibilityNetworks = 1
@@ -81,7 +81,7 @@
 						for (var/datum/visibility_network/currentNetwork in src.visibilityNetworks)
 							currentNetwork.updateMob(src)
 					src.updatingVisibilityNetworks = 0
-	return ..(n,direct)
+	return .
 
 /mob/proc/addToVisibilityNetwork(var/datum/visibility_network/network)
 	if(network)
