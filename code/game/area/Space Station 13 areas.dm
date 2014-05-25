@@ -962,6 +962,10 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Engineering Monitoring Room"
 		icon_state = "engine_monitoring"
 
+	atmos_monitoring
+		name = "\improper Atmospherics Monitoring Room"
+		icon_state = "engine_monitoring"
+
 	engineering
 		name = "Engineering"
 		icon_state = "engine_smes"
@@ -982,8 +986,16 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Engineering Hallway"
 		icon_state = "engine_hallway"
 
+	engine_hallway
+		name = "\improper Engine Room Hallway"
+		icon_state = "engine_hallway"
+
 	engine_eva
 		name = "\improper Engine EVA"
+		icon_state = "engine_eva"
+
+	engine_eva_maintenance
+		name = "\improper Engine EVA Maintenance"
 		icon_state = "engine_eva"
 
 	workshop

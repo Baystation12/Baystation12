@@ -453,6 +453,7 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define CANPARALYSE	4
 #define CANPUSH		8
 #define LEAPING		16
+#define PASSEMOTES	32      //Mob has a cortical borer or holders inside of it that need to see emotes.
 #define GODMODE		4096
 #define FAKEDEATH	8192	//Replaces stuff like changeling.changeling_fakedeath
 #define DISFIGURED	16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system

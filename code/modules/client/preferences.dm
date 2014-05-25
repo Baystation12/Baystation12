@@ -562,7 +562,7 @@ datum/preferences
 		return
 
 	proc/SetAntagoptions(mob/user)
-		if(uplinklocation == "")
+		if(uplinklocation == "" || !uplinklocation)
 			uplinklocation = "PDA"
 		var/HTML = "<body>"
 		HTML += "<tt><center>"
@@ -953,11 +953,12 @@ datum/preferences
 					if("language")
 						var/languages_available
 						var/list/new_languages = list("None")
+						var/datum/species/S = all_species[species]
 
 						if(config.usealienwhitelist)
 							for(var/L in all_languages)
 								var/datum/language/lang = all_languages[L]
-								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))))
+								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))||(S && (L in S.secondary_langs))))
 									new_languages += lang
 									languages_available = 1
 
