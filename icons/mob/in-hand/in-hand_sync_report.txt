@@ -14,10 +14,12 @@
  + greyflag
  + medflag
  + mimeflag
+ + ninjaflag
  + ntflag
  + rndflag
  + secflag
  + secflag_old
+ + skrellflag
  + slimeflag
  + syndiflag
  + wizflag
