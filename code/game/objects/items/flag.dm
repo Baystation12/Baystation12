@@ -136,6 +136,10 @@
 	desc = "A flag proudly proclaiming the superior heritage of Vox."
 	icon_state = "voxflag"
 
+/obj/item/flag/machine
+	name = "Synthetics flag"
+	desc = "A flag proudly proclaiming the superior heritage of Synthetics."
+	icon_state = "machineflag"
 
 //Nations/Department flags
 

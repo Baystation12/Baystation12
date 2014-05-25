@@ -17,6 +17,8 @@
  + fire
  + greyflag
  + greyflag_fire
+ + machineflag
+ + machineflag_fire
  + medflag
  + medflag_fire
  + mimeflag
