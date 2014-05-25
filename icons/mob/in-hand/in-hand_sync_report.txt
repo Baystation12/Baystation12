@@ -11,6 +11,7 @@
  + cargoflag
  + cargoflag_old
  + clownflag
+ + fire
  + greyflag
  + medflag
  + mimeflag
