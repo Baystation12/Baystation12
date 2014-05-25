@@ -179,7 +179,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Emergency crate"
 	group = "Engineering"
 
-/datum/supply_packs/evacuation
+/datum/supply_packs/inflatable
 	name = "Inflatable barriers"
 	contains = list(/obj/item/weapon/storage/briefcase/inflatable,
 					/obj/item/weapon/storage/briefcase/inflatable,
