@@ -85,6 +85,7 @@
 		if (prob(mut_prob))
 			var/list/datum/organ/external/candidates = list()
 			for (var/datum/organ/external/O in organs)
+				if(O.status & ORGAN_ROBOT) continue
 				if(!(O.status & ORGAN_MUTATED))
 					candidates |= O
 			if (candidates.len)
