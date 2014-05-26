@@ -151,6 +151,11 @@
 	desc = "A flag proudly proclaiming the superior heritage of Tajaran."
 	icon_state = "tajflag"
 
+/obj/item/flag/species/unathi
+	name = "Unathi flag"
+	desc = "A flag proudly proclaiming the superior heritage of Unathi."
+	icon_state = "unathiflag"
+
 //Nations/Department flags
 
 /obj/item/flag/nation/cargo

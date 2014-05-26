@@ -47,6 +47,7 @@
  + syndiflag
  + syndiflag_fire
  + tajflag
+ + unathiflag
  + voxflag
  + voxflag_fire
  + wizflag
