@@ -14,9 +14,15 @@
  + cargoflag_old
  + clownflag
  + clownflag_fire
+ + cultflag
+ + dionaflag
  + fire
  + greyflag
  + greyflag_fire
+ + greysflag
+ + humanflag
+ + ianflag
+ + kidanflag
  + machineflag
  + machineflag_fire
  + medflag
@@ -40,6 +46,7 @@
  + slimeflag_fire
  + syndiflag
  + syndiflag_fire
+ + tajflag
  + voxflag
  + voxflag_fire
  + wizflag
