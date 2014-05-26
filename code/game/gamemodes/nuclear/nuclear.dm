@@ -194,10 +194,6 @@ proc/issyndicate(mob/living/M as mob)
 	for(var/datum/objective/objective in syndicate.objectives)
 		syndicate.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 		obj_count++
-	for(var/obj/item/weapon/implant/explosive/E in syndicate.current.contents)
-		if (E.implanted)
-			syndicate.current << "The activation code for your explosive implant is <B>[E.phrase]</B>"
-			syndicate.store_memory("The activation code for your explosive implant is <B>[E.phrase]</B>")
 	return
 
 
@@ -245,7 +241,7 @@ proc/issyndicate(mob/living/M as mob)
 	synd_mob.equip_to_slot_or_del(new_helmet, slot_head)
 
 
-	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(synd_mob)
+	var/obj/item/weapon/implant/dexplosive/E = new/obj/item/weapon/implant/dexplosive(synd_mob)
 	E.imp_in = synd_mob
 	E.implanted = 1
 	synd_mob.update_icons()

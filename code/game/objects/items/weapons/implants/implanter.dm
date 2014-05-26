@@ -72,7 +72,14 @@
 	update()
 	return
 
+/obj/item/weapon/implanter/dexplosive
+	name = "implanter (DE)"
 
+/obj/item/weapon/implanter/dexplosive/New()
+	src.imp = new /obj/item/weapon/implant/dexplosive( src )
+	..()
+	update()
+	return
 
 /obj/item/weapon/implanter/explosive
 	name = "implanter (E)"
