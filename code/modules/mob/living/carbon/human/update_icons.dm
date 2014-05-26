@@ -290,7 +290,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		//Robotic limbs are handled in get_icon() so all we worry about are missing or dead limbs.
 		//No icon stored, so we need to start with a basic one.
 		var/datum/organ/external/chest = get_organ("chest")
-		base_icon = chest.get_icon(g)
+		base_icon = chest.get_icon(g,fat)
 
 		for(var/datum/organ/external/part in organs)
 
@@ -355,7 +355,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 		//Skin tone.
 		if(!husk && !hulk)
-			if(species.flags & HAS_SKIN_TONE)
+			if(species.bodyflags & HAS_SKIN_TONE)
 				if(s_tone >= 0)
 					base_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
 				else
