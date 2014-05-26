@@ -50,6 +50,9 @@
 		turbine = locate() in get_step(src, get_dir(inturf, src))
 		if(!turbine)
 			stat |= BROKEN
+		else
+			turbine.stat &= !BROKEN
+			turbine.compressor = src
 
 
 #define COMPFRICTION 5e5
@@ -104,6 +107,9 @@
 		compressor = locate() in get_step(src, get_dir(outturf, src))
 		if(!compressor)
 			stat |= BROKEN
+		else
+			compressor.stat &= !BROKEN
+			compressor.turbine = src
 
 
 #define TURBPRES 9000000

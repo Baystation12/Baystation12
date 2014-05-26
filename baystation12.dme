@@ -61,6 +61,7 @@
 #include "code\ATMOSPHERICS\components\binary_devices\circulator.dm"
 #include "code\ATMOSPHERICS\components\binary_devices\dp_vent_pump.dm"
 #include "code\ATMOSPHERICS\components\binary_devices\passive_gate.dm"
+#include "code\ATMOSPHERICS\components\binary_devices\pipeturbine.dm"
 #include "code\ATMOSPHERICS\components\binary_devices\pump.dm"
 #include "code\ATMOSPHERICS\components\binary_devices\volume_pump.dm"
 #include "code\ATMOSPHERICS\components\trinary_devices\filter.dm"
