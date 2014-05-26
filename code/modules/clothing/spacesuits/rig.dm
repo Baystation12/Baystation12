@@ -431,7 +431,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 60)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/weapon/gun,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.6
-
+	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
 
 //Wizard Rig
 /obj/item/clothing/head/helmet/space/rig/wizard

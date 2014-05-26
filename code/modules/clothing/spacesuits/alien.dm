@@ -203,43 +203,6 @@
 	if (magpulse)
 		usr << "It would be hard to take these off without relaxing your grip first." //theoretically this message should only be seen by the wearer when the claws are equipped.
 
-
-
-//Species-specific Syndicate rigs.
-/obj/item/clothing/head/helmet/space/rig/syndi/tajara
-	icon_state = "rig0-syndie-taj"
-	item_state = "rig0-syndie-taj"
-	_color = "syndie-taj"
-	species_restricted = list("Tajaran")
-
-/obj/item/clothing/suit/space/rig/syndi/tajara
-	item_state = "rig-syndie-taj"
-	icon_state = "rig-syndie-taj"
-	species_restricted = list("Tajaran")
-
-/obj/item/clothing/head/helmet/space/rig/syndi/skrell
-	icon_state = "rig0-syndie-skrell"
-	item_state = "rig0-syndie-skrell"
-	_color = "syndie-skrell"
-	species_restricted = list("Skrell")
-
-/obj/item/clothing/suit/space/rig/syndi/skrell
-	item_state = "rig-syndie-skrell"
-	icon_state = "rig-syndie-skrell"
-	species_restricted = list("Skrell")
-
-/obj/item/clothing/head/helmet/space/rig/syndi/human
-	icon_state = "rig0-syndie-human"
-	item_state = "rig0-syndie-human"
-	_color = "syndie-human"
-	species_restricted = list("Human")
-
-/obj/item/clothing/suit/space/rig/syndi/human
-	item_state = "rig-syndie-human"
-	icon_state = "rig-syndie-human"
-	species_restricted = list("Human")
-	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
-
 ////////////////UNATHI/////////////////////
 
 /obj/item/clothing/suit/space/rig/unathi
@@ -260,17 +223,6 @@
 /obj/item/clothing/head/helmet/space/rig/security/unathi
 	icon_state = "rig0-unathi-sec"
 	item_state = "rig0-unathi-sec"
-	species_restricted = list("Unathi")
-
-/obj/item/clothing/head/helmet/space/rig/syndi/unathi
-	icon_state = "rig0-syndie-unathi"
-	item_state = "rig0-syndie-unathi"
-	_color = "syndie-unathi"
-	species_restricted = list("Unathi")
-
-/obj/item/clothing/suit/space/rig/syndi/unathi
-	item_state = "rig-syndie-unathi"
-	icon_state = "rig-syndie-unathi"
 	species_restricted = list("Unathi")
 
 //Unathi space gear. Huge and restrictive.
