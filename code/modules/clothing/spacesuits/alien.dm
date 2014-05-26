@@ -13,6 +13,76 @@
 	item_color = "rig-taj"
 	species_restricted = list("Tajaran")
 
+/obj/item/clothing/head/helmet/space/rig/security/tajara
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig0-taj-helmet-sec"
+	item_state = "rig0-taj-helmet-sec"
+	item_color = "taj-helmet-sec"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/suit/space/rig/security/tajara
+	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig-taj-sec"
+	item_state = "rig-taj-sec"
+	item_color = "rig-taj-sec"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/head/helmet/space/rig/mining/tajara
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig0-taj-helmet-mining"
+	item_state = "rig0-taj-helmet-mining"
+	item_color = "taj-helmet-mining"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/suit/space/rig/mining/tajara
+	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig-taj-mining"
+	item_state = "rig-taj-mining"
+	item_color = "rig-taj-mining"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/head/helmet/space/rig/atmos/tajara
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig0-taj-helmet-atmos"
+	item_state = "rig0-taj-helmet-atmos"
+	item_color = "taj-helmet-atmos"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/suit/space/rig/atmos/tajara
+	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig-taj-atmos"
+	item_state = "rig-taj-atmos"
+	item_color = "rig-taj-atmos"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/head/helmet/space/rig/medical/tajara
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig0-taj-helmet-medic"
+	item_state = "rig0-taj-helmet-medic"
+	item_color = "taj-helmet-medic"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/suit/space/rig/medical/tajara
+	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig-taj-medic"
+	item_state = "rig-taj-medic"
+	item_color = "rig-taj-medic"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/head/helmet/space/rig/elite/tajara
+	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig0-taj-helmet-elite"
+	item_state = "rig0-taj-helmet-elite"
+	item_color = "taj-helmet-elite"
+	species_restricted = list("Tajaran")
+
+/obj/item/clothing/suit/space/rig/elite/tajara
+	desc = "A special suit that protects against hazardous, low pressure environments. Has radiation shielding. This one doesn't look like it was made for humans."
+	icon_state = "rig-taj-elite"
+	item_state = "rig-taj-elite"
+	item_color = "rig-taj-elite"
+	species_restricted = list("Tajaran")
+
 //Skrell space gear. Sleek like a wetsuit.
 
 /obj/item/clothing/head/helmet/space/skrell
