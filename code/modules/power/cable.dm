@@ -126,9 +126,9 @@
 
 		var/atom/newcable
 		if(src.d1)	// 0-X cables are 1 unit, X-X cables are 2 units long
-			newcable = new/obj/item/weapon/cable_coil(T, 2, cable_color)
+			newcable = new/obj/item/weapon/cable_coil(T, 2, color)
 		else
-			newcable = new/obj/item/weapon/cable_coil(T, 1, cable_color)
+			newcable = new/obj/item/weapon/cable_coil(T, 1, color)
 		newcable.fingerprintslast = user.key
 
 		for(var/mob/O in viewers(src, null))

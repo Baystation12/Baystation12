@@ -133,4 +133,4 @@
 	new /obj/item/clothing/mask/chameleon(src)
 	new /obj/item/clothing/glasses/chameleon(src)
 	new /obj/item/weapon/gun/projectile/chameleon(src)
-	new /obj/item/ammo_magazine/chameleon(src)
+	new /obj/item/ammo_box/magazine/chameleon(src)

@@ -422,10 +422,8 @@
 	desc = "A fake Desert Eagle with a dial on the side to change the gun's disguise."
 	icon_state = "deagle"
 	w_class = 3.0
-	max_shells = 7
-	caliber = ".45"
 	origin_tech = "combat=2;materials=2;syndicate=8"
-	ammo_type = "/obj/item/ammo_casing/chameleon"
+	mag_type = /obj/item/ammo_box/magazine/chameleon
 	var/list/gun_choices = list()
 
 	New()

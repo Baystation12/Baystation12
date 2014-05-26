@@ -177,3 +177,10 @@
 /obj/item/ammo_box/magazine/m762/update_icon()
 	..()
 	icon_state = "[initial(icon_state)]-[round(ammo_count(),10)]"
+
+/obj/item/ammo_box/magazine/chameleon
+	name = "magazine (.45)"
+	icon_state = "45"
+	ammo_type = "/obj/item/ammo_casing/chameleon"
+	max_ammo = 7
+	multiple_sprites = 1
