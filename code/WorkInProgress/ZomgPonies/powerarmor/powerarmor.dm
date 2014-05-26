@@ -3,9 +3,9 @@
  */
 
 /obj/item/clothing/suit/space/powered
-	name = "Powered armor"
+	name = "Powered armor suit"
 	desc = "Not for rookies."
-	icon_state = "swat"
+	icon_state = "power_armour"
 	item_state = "swat"
 	w_class = 4//bulky item
 
@@ -200,10 +200,10 @@
 		..()
 
 /obj/item/clothing/head/space/powered
-	name = "Powered armor"
-	icon_state = "swat"
+	name = "Powered armor helmet"
 	desc = "Not for rookies."
 	flags = FPRINT | TABLEPASS | HEADCOVERSEYES | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE | BLOCKHAIR
+	icon_state = "power_armour_helmet"
 	item_state = "swat"
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
 	var/obj/item/clothing/suit/space/powered/parent
@@ -236,18 +236,18 @@
 
 
 /obj/item/clothing/gloves/powered
-	name = "Powered armor"
-	icon_state = "swat"
+	name = "Powered armor gloves"
 	desc = "Not for rookies."
 	flags = FPRINT | TABLEPASS
-	item_state = "swat"
+	icon_state = "power_armour_gloves"
+	item_state = "power_armour_gloves"
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
 
 /obj/item/clothing/shoes/powered
-	name = "Powered armor"
-	icon_state = "swat"
+	name = "Powered armor boots"
 	desc = "Not for rookies."
 	flags = FPRINT | TABLEPASS
+	icon_state = "power_armour_boots"
 	item_state = "swat"
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
 

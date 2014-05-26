@@ -124,8 +124,8 @@
 
 
 /obj/item/powerarmor/servos
-	name = "Adminbus power armor movement servos"
-	desc = "Made with the rare Badminium molecule."
+	name = "Power armor movement servos"
+	desc = "Help with moving in the the bulky armor."
 	var/toggleslowdown = 9
 
 /obj/item/powerarmor/servos/toggle(sudden = 0)
