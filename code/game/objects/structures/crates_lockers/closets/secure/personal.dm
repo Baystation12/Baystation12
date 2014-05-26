@@ -95,3 +95,25 @@
 	else
 		user << "\red Access Denied"
 	return
+
+/obj/structure/closet/secure_closet/personal/verb/reset()
+	set src in oview(1) // One square distance
+	set category = "Object"
+	set name = "Reset Lock"
+	if(!usr.canmove || usr.stat || usr.restrained()) // Don't use it if you're not able to! Checks for stuns, ghost and restrain
+		return
+	if(ishuman(usr))
+		src.add_fingerprint(usr)
+		if (src.locked || !src.registered_name)
+			usr << "\red You need to unlock it first."
+		else if (src.broken)
+			usr << "\red It appears to be broken."
+		else
+			if (src.opened)
+				if(!src.close())
+					return
+			src.locked = 1
+			src.icon_state = src.icon_locked
+			src.registered_name = null
+			src.desc = "It's a secure locker for personnel. The first card swiped gains control."
+	return

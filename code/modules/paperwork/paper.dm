@@ -316,25 +316,45 @@
 		clown = 1
 
 	if(istype(P, /obj/item/weapon/paper) || istype(P, /obj/item/weapon/photo))
+		if (istype(P, /obj/item/weapon/paper/carbon))
+			var/obj/item/weapon/paper/carbon/C = P
+			if (!C.iscopy && !C.copied)
+				user << "<span class='notice'>Take off the carbon copy first.</span>"
+				add_fingerprint(user)
+				return
 		var/obj/item/weapon/paper_bundle/B = new(src.loc)
 		if (name != "paper")
 			B.name = name
 		else if (P.name != "paper" && P.name != "photo")
 			B.name = P.name
 		user.drop_from_inventory(P)
-		if (user.r_hand == src)
-			user.drop_from_inventory(src)
-			B.loc = user
-			user.r_hand = B
-			B.layer = 20
-		else if (user.l_hand == src)
-			user.drop_from_inventory(src)
-			B.loc = user
-			user.l_hand = B
-			B.layer = 20
-		if(istype(user,/mob/living/carbon/human))
-			user:update_inv_l_hand()
-			user:update_inv_r_hand()
+		if (istype(user, /mob/living/carbon/human))
+			var/mob/living/carbon/human/h_user = user
+			if (h_user.r_hand == src)
+				h_user.drop_from_inventory(src)
+				h_user.put_in_r_hand(B)
+			else if (h_user.l_hand == src)
+				h_user.drop_from_inventory(src)
+				h_user.put_in_l_hand(B)
+			else if (h_user.l_store == src)
+				h_user.drop_from_inventory(src)
+				B.loc = h_user
+				B.layer = 20
+				h_user.l_store = B
+				h_user.update_inv_pockets()
+			else if (h_user.r_store == src)
+				h_user.drop_from_inventory(src)
+				B.loc = h_user
+				B.layer = 20
+				h_user.r_store = B
+				h_user.update_inv_pockets()
+			else if (h_user.head == src)
+				h_user.u_equip(src)
+				h_user.put_in_hands(B)
+			else if (!istype(src.loc, /turf))
+				src.loc = get_turf(h_user)
+				if(h_user.client)	h_user.client.screen -= src
+				h_user.put_in_hands(B)
 		user << "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>"
 		src.loc = B
 		P.loc = B
