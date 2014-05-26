@@ -141,6 +141,12 @@
 	typepath = /obj/item/flag/species/unathi
 	cost = 1000
 
+/datum/storeitem/flag/ian
+	name = "Ian flag"
+	desc = "The banner of Ian, because SQUEEEEE."
+	typepath = /obj/item/flag/ian
+	cost = 1500
+
 /datum/storeitem/banhammer
 	desc = "A banhammer"
 	name = "banhammer"
