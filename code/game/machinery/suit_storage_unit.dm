@@ -1057,152 +1057,64 @@
 			if(helmet) helmet.species_restricted = list("Tajaran")
 			if(suit) suit.species_restricted = list("Tajaran")
 
-	if(target_department == "Engineering")
-
-		if(helmet) helmet.name = "engineering hardsuit helmet"
-		if(suit) suit.name = "engineering hardsuit"
-
-		switch(target_species)
-			if("Human")
-				if(helmet)
-					helmet.icon_state = "rig0-engineering"
-					helmet.item_state = "eng_helm"
-					helmet.item_color = "engineering"
-				if(suit)
-					suit.icon_state = "rig-engineering"
-					suit.item_state = "eng_hardsuit"
-			if("Skrell")
-				return //TODO
-			if("Unathi")
-				return //TODO
-			if("Tajaran")
-				if(helmet)
-					helmet.icon_state = "rig0-taj-helmet"
-					helmet.item_state = "rig0-taj-helmet"
-					helmet.item_color = "taj-helmet"
-				if(suit)
-					suit.icon_state = "rig-taj"
-					suit.item_state = "rig-taj"
-
-	else if(target_department == "Mining")
-
-		if(helmet) helmet.name = "mining hardsuit helmet"
-		if(suit) suit.name = "mining hardsuit"
-
-		switch(target_species)
-			if("Human")
-				if(helmet)
-					helmet.icon_state = "rig0-mining"
-					helmet.item_state = "mining_helm"
-					helmet.item_color = "mining"
-				if(suit)
-					suit.icon_state = "rig-mining"
-					suit.item_state = "mining_hardsuit"
-			if("Skrell")
-				return //TODO
-			if("Unathi")
-				return //TODO
-			if("Tajaran")
-				return //TODO
-
-	else if(target_department == "^%###^%$")
-
-		if(helmet) helmet.name = "blood-red hardsuit helmet"
-		if(suit) suit.name = "blood-red hardsuit"
-
-		switch(target_species)
-			if("Human")
-				if(helmet)
-					helmet.icon_state = "rig0-syndie-human"
-					helmet.item_state = "syndie_helm"
-					helmet.item_color = "syndie-human"
-				if(suit)
-					suit.item_state = "syndie_hardsuit"
-					suit.icon_state = "rig-syndie-human"
-			if("Skrell")
-				if(helmet)
-					helmet.icon_state = "rig0-syndie-skrell"
-					helmet.item_state = "syndie_helm"
-					helmet.item_color = "syndie-skrell"
-				if(suit)
-					suit.item_state = "syndie_hardsuit"
-					suit.icon_state = "rig-syndie-skrell"
-			if("Unathi")
-				if(helmet)
-					helmet.icon_state = "rig0-syndie-unathi"
-					helmet.item_state = "syndie_helm"
-					helmet.item_color = "syndie-unathi"
-				if(suit)
-					suit.item_state = "syndie_hardsuit"
-					suit.icon_state = "rig-syndie-unathi"
-			if("Tajaran")
-				if(helmet)
-					helmet.icon_state = "rig0-syndie-taj"
-					helmet.item_state = "syndie_helm"
-					helmet.item_color = "syndie-taj"
-				if(suit)
-					suit.item_state = "syndie_hardsuit"
-					suit.icon_state = "rig-syndie-taj"
-
-	else if(target_department == "Medical")
-
-		if(helmet) helmet.name = "medical hardsuit helmet"
-		if(suit) suit.name = "medical hardsuit"
-
-		switch(target_species)
-			if("Human")
-				if(helmet)
-					helmet.icon_state = "rig0-medical"
-					helmet.item_state = "medical_helm"
-					helmet.item_color = "medical"
-				if(suit)
-					suit.icon_state = "rig-medical"
-					suit.item_state = "medical_hardsuit"
-			if("Skrell")
-				return //TODO
-			if("Unathi")
-				return //TODO
-			if("Tajaran")
-				return //TODO
-
-	else if(target_department == "Security")
-
-		if(helmet) helmet.name = "security hardsuit helmet"
-		if(suit) suit.name = "security hardsuit"
-
-		switch(target_species)
-			if("Human")
-				if(helmet)
-					helmet.icon_state = "rig0-sec"
-					helmet.item_state = "sec_helm"
-					helmet.item_color = "sec"
-				if(suit)
-					suit.icon_state = "rig-sec"
-					suit.item_state = "sec_hardsuit"
-			if("Skrell")
-				return //TODO
-			if("Unathi")
-				return //TODO
-			if("Tajaran")
-				return //TODO
-
-	else if(target_department == "Atmos")
-
-		if(helmet) helmet.name = "atmospherics hardsuit helmet"
-		if(suit) suit.name = "atmospherics hardsuit"
-
-		switch(target_species)
-			if("Human")
-				if(helmet)
-					helmet.icon_state = "rig0-atmos"
-					helmet.item_state = "atmos_helm"
-					helmet.item_color = "atmos"
-				if(suit)
-					suit.icon_state = "rig-atmos"
-					suit.item_state = "atmos_hardsuit"
-			if("Skrell")
-				return //TODO
-			if("Unathi")
-				return //TODO
-			if("Tajaran")
-				return //TODO
+	switch(target_department)
+		if("Engineering")
+			if(helmet)
+				helmet.name = "engineering hardsuit helmet"
+				helmet.icon_state = "rig0-engineering"
+				helmet.item_state = "eng_helm"
+				helmet.item_color = "engineering"
+			if(suit)
+				suit.name = "engineering hardsuit"
+				suit.icon_state = "rig-engineering"
+				suit.item_state = "eng_hardsuit"
+		if("Mining")
+			if(helmet)
+				helmet.name = "mining hardsuit helmet"
+				helmet.icon_state = "rig0-mining"
+				helmet.item_state = "mining_helm"
+				helmet.item_color = "mining"
+			if(suit)
+				suit.name = "mining hardsuit"
+				suit.icon_state = "rig-mining"
+				suit.item_state = "mining_hardsuit"
+		if("Medical")
+			if(helmet)
+				helmet.name = "medical hardsuit helmet"
+				helmet.icon_state = "rig0-medical"
+				helmet.item_state = "medical_helm"
+				helmet.item_color = "medical"
+			if(suit)
+				suit.name = "medical hardsuit"
+				suit.icon_state = "rig-medical"
+				suit.item_state = "medical_hardsuit"
+		if("Security")
+			if(helmet)
+				helmet.name = "security hardsuit helmet"
+				helmet.icon_state = "rig0-sec"
+				helmet.item_state = "sec_helm"
+				helmet.item_color = "sec"
+			if(suit)
+				suit.name = "security hardsuit"
+				suit.icon_state = "rig-sec"
+				suit.item_state = "sec_hardsuit"
+		if("Atmos")
+			if(helmet)
+				helmet.name = "atmospherics hardsuit helmet"
+				helmet.icon_state = "rig0-atmos"
+				helmet.item_state = "atmos_helm"
+				helmet.item_color = "atmos"
+			if(suit)
+				suit.name = "atmospherics hardsuit"
+				suit.icon_state = "rig-atmos"
+				suit.item_state = "atmos_hardsuit"
+		if("^%###^%$")
+			if(helmet)
+				helmet.name = "blood-red hardsuit helmet"
+				helmet.icon_state = "rig0-syndie"
+				helmet.item_state = "syndie_helm"
+				helmet.item_color = "syndie"
+			if(suit)
+				suit.name = "blood-red hardsuit"
+				suit.item_state = "syndie_hardsuit"
+				suit.icon_state = "rig-syndie"
