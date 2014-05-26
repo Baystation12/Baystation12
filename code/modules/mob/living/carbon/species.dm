@@ -48,17 +48,6 @@
 
 	var/list/abilities = list()	// For species-derived or admin-given powers
 
-	var/uniform_icons = 'icons/mob/uniform.dmi'
-	var/fat_uniform_icons = 'icons/mob/uniform_fat.dmi'
-	var/gloves_icons = 'icons/mob/hands.dmi'
-	var/glasses_icons = 'icons/mob/eyes.dmi'
-	var/shoes_icons = 'icons/mob/feet.dmi'
-	var/head_icons = 'icons/mob/head.dmi'
-	var/belt_icons = 'icons/mob/belt.dmi'
-	var/wear_suit_icons = 'icons/mob/suit.dmi'
-	var/wear_mask_icons = 'icons/mob/mask.dmi'
-	var/back_icons = 'icons/mob/back.dmi'
-
 	var/blood_color = "#A10808" //Red.
 	var/flesh_color = "#FFC896" //Pink.
 
@@ -215,11 +204,9 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	uniform_icons = 'icons/mob/species/vox/uniform.dmi'
-	shoes_icons = 'icons/mob/species/vox/shoes.dmi'
-	wear_mask_icons = 'icons/mob/species/vox/masks.dmi'
-
 	flags = NO_SCAN | IS_WHITELISTED | NO_BLOOD
+
+	flesh_color = "#808D11"
 
 /datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
 
@@ -263,18 +250,11 @@
 	tail = "armalis_tail"
 	icon_template = 'icons/mob/human_races/r_armalis.dmi'
 
-	wear_mask_icons = 'icons/mob/species/vox/armalis/mask.dmi'
-	shoes_icons = 'icons/mob/species/vox/armalis/shoes.dmi'
-	gloves_icons = 'icons/mob/species/vox/armalis/hands.dmi'
+/datum/species/vox/create_organs(var/mob/living/carbon/human/H)
 
-/datum/species/vox/armalis/handle_post_spawn(var/mob/living/carbon/human/H)
-	H.verbs += /mob/living/carbon/human/proc/gut
-	..()
+	..() //create organs first.
 
-/datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
-
-	H.verbs += /mob/living/carbon/human/proc/leap
-
+	//Now apply cortical stack.
 	var/datum/organ/external/affected = H.get_organ("head")
 
 	//To avoid duplicates.
@@ -292,8 +272,6 @@
 		var/datum/game_mode/vox/heist/M = ticker.mode
 		M.cortical_stacks += I
 		M.raiders[H.mind] = I
-
-	return ..()
 
 
 
