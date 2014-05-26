@@ -244,7 +244,7 @@
 
 /obj/item/clothing/suit/space/rig/unathi
 	icon_state = "rig-unathi-engineering"
-	item_state = "rig_unathi-engineering"
+	item_state = "rig-unathi-engineering"
 	species_restricted = list("Unathi")
 
 /obj/item/clothing/suit/space/rig/security/unathi
