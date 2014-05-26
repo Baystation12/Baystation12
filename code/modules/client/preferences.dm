@@ -358,7 +358,7 @@ datum/preferences
 		popup.set_content(dat)
 		popup.open(0)
 
-	proc/SetChoices(mob/user, limit = 14, list/splitJobs = list("Chief Engineer","Head of Security"), width = 610, height = 650)
+	proc/SetChoices(mob/user, limit = 14, list/splitJobs = list("Chief Engineer","Research Director"), width = 610, height = 650)
 		if(!job_master)
 			return
 
