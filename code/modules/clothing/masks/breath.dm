@@ -9,6 +9,11 @@
 	permeability_coefficient = 0.50
 	var/hanging = 0
 	species_fit = list("Vox", "Vox Armalis")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/mask.dmi',
+		"Vox Armalis" = 'icons/mob/species/armalis/mask.dmi',
+		)
+
 
 	verb/toggle()
 		set category = "Object"
@@ -37,4 +42,3 @@
 	icon_state = "medical"
 	item_state = "medical"
 	permeability_coefficient = 0.01
-	species_fit = list("Vox")
