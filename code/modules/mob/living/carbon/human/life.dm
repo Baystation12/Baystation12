@@ -133,12 +133,24 @@
 	var/pressure_difference = abs( pressure - ONE_ATMOSPHERE )
 
 	var/pressure_adjustment_coefficient = 1	//Determins how much the clothing you are wearing protects you in percent.
-	if(wear_suit && (wear_suit.flags & STOPSPRESSUREDMAGE))
-		pressure_adjustment_coefficient -= PRESSURE_SUIT_REDUCTION_COEFFICIENT
+
 	if(head && (head.flags & STOPSPRESSUREDMAGE))
 		pressure_adjustment_coefficient -= PRESSURE_HEAD_REDUCTION_COEFFICIENT
-	pressure_adjustment_coefficient = max(pressure_adjustment_coefficient,0) //So it isn't less than 0
+
+	if(wear_suit && (wear_suit.flags & STOPSPRESSUREDMAGE))
+		pressure_adjustment_coefficient -= PRESSURE_SUIT_REDUCTION_COEFFICIENT
+
+		//Handles breaches in your space suit. 10 suit damage equals a 100% loss of pressure reduction.
+		if(istype(wear_suit,/obj/item/clothing/suit/space))
+			var/obj/item/clothing/suit/space/S = wear_suit
+			if(S.can_breach && S.damage)
+				var/pressure_loss = S.damage * 0.1
+				pressure_adjustment_coefficient += pressure_loss
+
+	pressure_adjustment_coefficient = min(1,max(pressure_adjustment_coefficient,0)) //So it isn't less than 0 or larger than 1.
+
 	pressure_difference = pressure_difference * pressure_adjustment_coefficient
+
 	if(pressure > ONE_ATMOSPHERE)
 		return ONE_ATMOSPHERE + pressure_difference
 	else
