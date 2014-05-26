@@ -207,3 +207,45 @@ NanoTrasen has [mode.loyalists.len] members of the crew in holding, while it inv
 [mode.body_count.len] are believed to have died during the coup.
 <p>Even though the directive was not successfully implemented, NanoTrasen's image will forever be haunted by the fact that its authentication protocol was breached with such magnitude and that a mutiny was the result.</p>
 		"}
+
+	proc/secret_transcript()
+		return {"
+<center><h3>Corporate Rival Threat Assessment</h3></center>
+<center><b>Gilthari Exports Incident Transcript</b></center>
+<center><font color='red'>CONFIDENTIAL: PROPERTY OF NANOTRASEN</font></center>
+<i>Location:</i> Operator's Desk, D Deck, Polumetis Installation<br>
+<i>Time:</i> 16:11, May 24, 2558 (Sol Reckoning)<br>
+<br>
+<br>
+
+<center>\[Start of transcript\]</center>
+<center>\[Sound of an internal airlock door opening\]</center>
+TM: Thank you for coming to see me, Director. I'm afraid this is urgent.<br>
+D: Mr. Mitchell, first you send cryptic messages to my office and then you request to have me come personally to this barely lit closet you call a workstation; all of this to talk about a computer glitch?<br>
+<center>\[Sound of the internal airlock door shutting\]</center>
+TM: Do you remember <b>Mallory</b>?<br>
+D: Who?<br>
+TM: It's not who, it's what. The computer program we planted in the Tau Ceti communications satellite.<br>
+D: What is so important about this computer program?<br>
+TM: We call her an eavesdropper. Captures network traffic, records it, and forwards the stream to the receiver autonomously.<br>
+D: Speak English <i>goddamnit</i>.<br>
+TM: Standard intelligence acquisition package, sir; we bug their satellite and listen. It's like we have their playbook and we know what their moves are going to be on the market before they make them.<br>
+D: So Mallory doesn't work?<br>
+TM: She worked, sir. We've had an ear on NanoTrasen's regional communications for weeks.<br>
+D: Any news about their <b>Phoron refinement process</b>?<br>
+TM: No sir. Our analysts believe they are using a separate channel for their most sensitive data.<br>
+D: So what's the problem?<br>
+TM: The intelligence hasn't been doing us any good. Anything that appears actionable, I send it to the analysts and they make a plan. Thing is, NanoTrasen always sees us coming.<br>
+D: Tim...<br>
+TM: I think they discovered the hack, sir. Case in point, <b>Energine Consolidated Solutions</b>. That subsidiary of ours that was awarded a lease on NanoTrasen's mining platform in Nyx? NanoTrasen acquired them a week before we made the announcement.<br>
+D: They know about they have a bug. <i>They left her on and fed her the information for us to hear</i>, those sneaks. How did they find it?<br>
+TM: Top secret communique came through. I'm not sure what happened. Either Mallory couldn't replicate the encryption scheme and garbled it going out or the transmission was already corrupted to begin with.<br>
+D: Either way the transmission caused NanoTrasen to look at the satellite. They found out about Mallory.<br>
+TM: Precisely sir. There's only so much I can do to cover our tracks from here.<br>
+D: I'm pulling the plug. We have assets in the sector that are capable of a job like this. Thank you for bringing this to my attention.<br>
+<center>\[Computer device chirps\]</center>
+D: One last thing, did you happen to read anything from those secure transmissions?<br>
+TM: Just the subject, 'Directive X'.<br>
+D: Directive X... Now what do you suppose that means?<br>
+<center>\[End of transcript\]</center>
+		"}
