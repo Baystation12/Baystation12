@@ -519,6 +519,10 @@
 		switch(species.breath_type)
 			if("nitrogen")
 				breath.nitrogen -= inhaled_gas_used
+			if("phoron")
+				breath.phoron -= inhaled_gas_used
+			if("C02")
+				breath.carbon_dioxide-= inhaled_gas_used
 			else
 				breath.oxygen -= inhaled_gas_used
 
@@ -551,7 +555,7 @@
 			//scale linearly from 0 to 1 between safe_exhaled_max and safe_exhaled_max*0.7
 			var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
 			
-			//give them some oxyloss, up to the limit - we don't want people falling unconcious until they're pretty close to safe_exhaled_max
+			//give them some oxyloss, up to the limit - we don't want people falling unconcious due to CO2 alone until they're pretty close to safe_exhaled_max.
 			if (getOxyLoss() < 50*ratio)
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 			co2_alert = 1
