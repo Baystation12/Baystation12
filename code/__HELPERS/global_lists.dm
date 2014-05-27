@@ -25,6 +25,7 @@ var/global/list/flag_list = list()					//list of flags during Nations gamemode
 //Languages/species/whitelist.
 var/global/list/all_species[0]
 var/global/list/all_languages[0]
+var/global/list/all_nations[0]
 var/global/list/whitelisted_species = list()
 
 // Posters
@@ -96,6 +97,11 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	for(var/T in paths)
 		var/datum/job/J = new T
 		joblist[J.title] = J
+
+	paths = typesof(/datum/nations)-/datum/nations
+	for(var/T in paths)
+		var/datum/nations/N = new T
+		all_nations[N.name] = N
 
 	//Languages and species.
 	paths = typesof(/datum/language)-/datum/language
