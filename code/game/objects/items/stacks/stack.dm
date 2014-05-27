@@ -168,7 +168,8 @@
 		src = null //dont kill proc after del()
 		if(usr)
 			usr.before_take_item(oldsrc)
-		del(oldsrc)
+			usr.drop_item(src)
+		qdel(oldsrc)
 	return
 
 /obj/item/stack/proc/add_to_stacks(mob/usr as mob)
