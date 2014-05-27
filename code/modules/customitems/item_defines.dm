@@ -529,6 +529,12 @@
 	icon_state = "arjun_chopra"
 	item_state = "arjun_chopra"
 
+/////////////////////////////////// GSTQ - Monogrammed Eyepatch - Edmund Flashman Adler /////////////////////////
+
+/obj/item/clothing/glasses/eyepatch/fluff/edmund
+	name = "Monogrammed Eyepatch"
+	desc = "A black velvet eyepatch monogrammed in dark purple thread with the initials 'E. A.'"
+
 //////////// Hats ////////////
 
 
@@ -646,6 +652,32 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "br_dress"
 	item_state = "br_dress"
+
+//////////////////////////////// Broseph Stylin - Lombardi's Jacket ///////////////////////////
+
+/obj/item/clothing/suit/storage/fluff/lombardi
+	name = "Lombardi's Jacket"
+	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes, a star of life on the back, and has a nametag on the right side of the chest that reads 'Lombardi B-'."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "lombardi_jacket"
+	item_state = "lombardi_jacket"
+
+	verb/toggle()
+		set name = "Toggle Jacket Buttons"
+		set category = "Object"
+		set src in usr
+
+		if(!usr.canmove || usr.stat || usr.restrained())
+			return 0
+
+		switch(icon_state)
+			if("lombardi_jacket")
+				src.icon_state = "lombardi_jacket_open"
+				usr << "You unbutton up the jacket."
+			if("lombardi_jacket_open")
+				src.icon_state = "lombardi_jacket"
+				usr << "You button up the jacket."
+		usr.update_inv_wear_suit()
 
 //////////// Uniforms ////////////
 
