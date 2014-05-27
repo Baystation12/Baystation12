@@ -157,6 +157,19 @@
 	icon_state = "unathiflag"
 
 //Nations/Department flags
+/obj/item/flag/nation
+	density = 1
+	anchored = 1
+
+/obj/item/flag/nation/fire_act()
+	return
+
+/obj/item/flag/nation/Ignite()
+	return
+
+/obj/item/flag/nation/light()
+	return
+
 
 /obj/item/flag/nation/cargo
 	name = "Cargonia flag"
@@ -183,6 +196,10 @@
 	desc = "The flag of the independant, sovereign nation of Atmosia."
 	icon_state = "atmosflag"
 
+/obj/item/flag/nation/command
+	name = "Command flag"
+	desc = "The flag of the independant, sovereign nation of Command."
+	icon_state = "ntflag"
 
 //Antags
 
