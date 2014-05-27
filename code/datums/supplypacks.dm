@@ -97,8 +97,10 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/beanbagammo
 	name = "Beanbag shells"
-	contains = list(/obj/item/weapon/storage/box/beanbags)
-	cost = 10
+	contains = list(/obj/item/weapon/storage/box/beanbags,
+					/obj/item/weapon/storage/box/beanbags,
+					/obj/item/weapon/storage/box/beanbags)
+	cost = 30
 	containertype = /obj/structure/closet/crate
 	containername = "Beanbag shells"
 	group = "Security"
@@ -170,7 +172,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containername = "Emergency crate"
 	group = "Engineering"
 
-/datum/supply_packs/evacuation
+/datum/supply_packs/inflatable
 	name = "Inflatable barriers"
 	contains = list(/obj/item/weapon/storage/briefcase/inflatable,
 					/obj/item/weapon/storage/briefcase/inflatable,
@@ -714,17 +716,10 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/shotgunammo
 	name = "Shotgun shells"
-	contains = list(/obj/item/ammo_casing/shotgun,
-					/obj/item/ammo_casing/shotgun,
-					/obj/item/ammo_casing/shotgun,
-					/obj/item/ammo_casing/shotgun,
-					/obj/item/ammo_casing/shotgun,
-					/obj/item/ammo_casing/shotgun,
-					/obj/item/ammo_casing/shotgun,
-					/obj/item/ammo_casing/shotgun,
-					/obj/item/ammo_casing/shotgun,
-					/obj/item/ammo_casing/shotgun)
-	cost = 20
+	contains = list(/obj/item/weapon/storage/box/shotgunammo,
+					/obj/item/weapon/storage/box/shotgunammo,
+					/obj/item/weapon/storage/box/shotgunammo)
+	cost = 60
 	containertype = /obj/structure/closet/crate/secure
 	containername = "Shotgun shells"
 	access = access_armory
@@ -1123,7 +1118,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					 /obj/item/weapon/folder/red,
 					 /obj/item/weapon/folder/yellow,
 					 /obj/item/weapon/hand_labeler,
-					 /obj/structure/filingcabinet/chestdrawer,
+					 /obj/structure/filingcabinet/chestdrawer{anchored = 0},
 					 /obj/item/weapon/paper_bin)
 	name = "Office supplies"
 	cost = 15
@@ -1191,7 +1186,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	containertype = /obj/structure/closet/crate/hydroponics
 	containername = "Hydroponics tray crate"
 	group = "Hydroponics"
-	contains = list(/obj/machinery/hydroponics)
+	contains = list(/obj/machinery/hydroponics{anchored = 0})
 	access = access_hydroponics
 
 /datum/supply_packs/canister_empty
@@ -1236,9 +1231,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	contains = list(/obj/machinery/portable_atmospherics/canister/phoron)
 
 /datum/supply_packs/canister_sleeping_agent
-	name = "N20 gas canister"
+	name = "N2O gas canister"
 	cost = 40
-	containername = "N20 gas canister crate"
+	containername = "N2O gas canister crate"
 	containertype = /obj/structure/closet/crate/secure/large
 	access = access_atmospherics
 	group = "Engineering"
@@ -1266,9 +1261,9 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 					/obj/item/weapon/circuitboard/pacman)
 
 /datum/supply_packs/pacman_parts
-	name = "P.A.C.M.A.N. type II portable generator parts"
+	name = "Super P.A.C.M.A.N. portable generator parts"
 	cost = 55
-	containername = "P.A.C.M.A.N. type II portable generator construction kit"
+	containername = "Super P.A.C.M.A.N. portable generator construction kit"
 	containertype = /obj/structure/closet/crate/secure
 	group = "Engineering"
 	access = access_tech_storage
