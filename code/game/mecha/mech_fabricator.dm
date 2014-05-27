@@ -758,6 +758,10 @@
 		sleep(10)
 		if(stack && stack.amount)
 			while(src.resources[material] < res_max_amount && stack)
+				if(stack.amount < 0 || !stack)
+					user.drop_item(stack)
+					qdel(stack)
+					break
 				src.resources[material] += amnt
 				stack.use(1)
 				count++
