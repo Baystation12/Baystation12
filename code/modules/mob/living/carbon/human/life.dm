@@ -482,7 +482,8 @@
 		var/safe_pressure_min = 16 // Minimum safe partial pressure of breathable gas in kPa
 		//var/safe_pressure_max = 140 // Maximum safe partial pressure of breathable gas in kPa (Not used for now)
 		var/safe_exhaled_max = 10 // Yes it's an arbitrary value who cares?
-		var/safe_toxins_max = 0.005
+		var/safe_toxins_max = 0.5
+		var/safe_toxins_mask = 5
 		var/SA_para_min = 1
 		var/SA_sleep_min = 5
 		var/inhaled_gas_used = 0
@@ -599,11 +600,18 @@
 			co2overloadtime = 0
 
 		// Too much poison in the air.
-		if(toxins_pp > safe_toxins_max)
+		if(toxins_pp > safe_toxins_max) // Too much toxins
 			var/ratio = (poison/safe_toxins_max) * 10
-			if(reagents)
-				//TODO: Fix Ravensdale's shit, make toxins toxins again instead of phoron.
-				reagents.add_reagent("plasma", Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
+			if(wear_mask)
+				if(wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT)
+					if(poison > safe_toxins_mask)
+						ratio = (poison/safe_toxins_mask) * 10
+					else
+						ratio = 0
+			if(ratio)
+				if(reagents)
+					reagents.add_reagent("plasma", Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))
+				toxins_alert = max(toxins_alert, 1)
 			toxins_alert = max(toxins_alert, 1)
 		else
 			toxins_alert = 0
