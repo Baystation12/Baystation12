@@ -148,6 +148,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Ghost"
 	set desc = "Relinquish your life and enter the land of the dead."
 
+	if(ticker && ticker.mode.name == "nations")
+		usr << "\blue Ghosting is disabled."
+		return
+
 	var/mob/M = src
 
 	if(stat == DEAD)

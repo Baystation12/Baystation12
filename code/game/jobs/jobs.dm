@@ -64,7 +64,8 @@ var/list/command_positions = list(
 	"Head of Security",
 	"Chief Engineer",
 	"Research Director",
-	"Chief Medical Officer"
+	"Chief Medical Officer",
+	"Nanotrasen Representative"
 )
 
 
@@ -72,6 +73,7 @@ var/list/engineering_positions = list(
 	"Chief Engineer",
 	"Station Engineer",
 	"Life Support Specialist",
+	"Mechanic"
 )
 
 
@@ -109,7 +111,8 @@ var/list/civilian_positions = list(
 	"Chaplain",
 	"Assistant",
 	"Clown",
-	"Mime"
+	"Mime",
+	"Barber"
 
 )
 
@@ -119,6 +122,8 @@ var/list/security_positions = list(
 	"Warden",
 	"Detective",
 	"Security Officer",
+	"Customs Officer",
+	"Blueshield"
 )
 
 
