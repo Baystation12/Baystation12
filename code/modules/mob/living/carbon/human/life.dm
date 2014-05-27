@@ -491,10 +491,10 @@
 			if(prob(20))
 				spawn(0) emote("gasp")
 			if(inhale_pp > 0)
-				var/ratio = safe_pressure_min/inhale_pp
+				var/ratio = inhale_pp/safe_pressure_min
 
 				 // Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
-				adjustOxyLoss(min(5*ratio, HUMAN_MAX_OXYLOSS))
+				adjustOxyLoss(min(5*(1 - ratio), HUMAN_MAX_OXYLOSS))
 				failed_last_breath = 1
 				inhaled_gas_used = inhaling*ratio/6
 
