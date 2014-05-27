@@ -8,21 +8,17 @@ datum/game_mode/nations
 
 	var/list/cargonians = list("Quartermaster","Cargo Technician","Shaft Miner")
 
-	var/global/list/atmosia = list()
-	var/global/list/brigston = list()
-	var/global/list/cargonia = list()
-	var/global/list/command = list()
-	var/global/list/medistan = list()
-	var/global/list/scientopia = list()
+
 
 
 /datum/game_mode/nations/post_setup()
 	spawn (rand(waittime_l, waittime_h))
 		remove_flags()
 		spawn(50)
-			spawn_flags()
 			send_intercept()
 			split_teams()
+			spawn_flags()
+			populate_vars()
 
 /datum/game_mode/nations/send_intercept()
 	command_alert("Due to recent and COMPLETELY UNFOUNDED allegations of massive fraud and insider trading \
@@ -98,33 +94,33 @@ datum/game_mode/nations
 				message_admins("[H.name] with [H.mind.assigned_role] could not find any nation to assign!")
 				continue
 
-/datum/game_mode/nations/proc/populate_datums()
+/datum/game_mode/nations/proc/populate_vars()
 	for(var/obj/effect/landmark/nations/N in landmarks_list)
 		switch(N.name)
 			if("Atmosia")
-				var/datum/nations/atmosia/A
-				A.landmark = N
-				continue
+				for(var/obj/item/flag/nation/atmos/A in flag_list)
+					A.startloc = get_turf(N)
+					continue
 			if("Brigston")
-				var/datum/nations/brigston/B
-				B.landmark = N
-				continue
+				for(var/obj/item/flag/nation/sec/B in flag_list)
+					B.startloc = get_turf(N)
+					continue
 			if("Cargonia")
-				var/datum/nations/cargonia/C
-				C.landmark = N
-				continue
+				for(var/obj/item/flag/nation/cargo/C in flag_list)
+					C.startloc = get_turf(N)
+					continue
 			if("Command")
-				var/datum/nations/command/D
-				D.landmark = N
-				continue
+				for(var/obj/item/flag/nation/command/D in flag_list)
+					D.startloc = get_turf(N)
+					continue
 			if("Medistan")
-				var/datum/nations/medistan/M
-				M.landmark = N
-				continue
+				for(var/obj/item/flag/nation/med/M in flag_list)
+					M.startloc = get_turf(N)
+					continue
 			if("Scientopia")
-				var/datum/nations/scientopia/S
-				S.landmark = N
-				continue
+				for(var/obj/item/flag/nation/rnd/S in flag_list)
+					S.startloc = get_turf(N)
+					continue
 
 /mob/proc/respawn_self()
 	set category = "OOC"

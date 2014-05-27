@@ -156,47 +156,34 @@
 	desc = "A flag proudly proclaiming the superior heritage of Unathi."
 	icon_state = "unathiflag"
 
-//Nations/Department flags
-/obj/item/flag/nation
-	density = 1
-	anchored = 1
+//Nation Flags (Able to spawn outside Nations gamemode)
 
-/obj/item/flag/nation/fire_act()
-	return
-
-/obj/item/flag/nation/Ignite()
-	return
-
-/obj/item/flag/nation/light()
-	return
-
-
-/obj/item/flag/nation/cargo
+/obj/item/flag/cargo
 	name = "Cargonia flag"
 	desc = "The flag of the independant, sovereign nation of Cargonia."
 	icon_state = "cargoflag"
 
-/obj/item/flag/nation/med
+/obj/item/flag/med
 	name = "Medistan flag"
 	desc = "The flag of the independant, sovereign nation of Medistan."
 	icon_state = "medflag"
 
-/obj/item/flag/nation/sec
+/obj/item/flag/sec
 	name = "Brigston flag"
 	desc = "The flag of the independant, sovereign nation of Brigston."
 	icon_state = "secflag"
 
-/obj/item/flag/nation/rnd
+/obj/item/flag/rnd
 	name = "Scientopia flag"
 	desc = "The flag of the independant, sovereign nation of Scientopia."
 	icon_state = "rndflag"
 
-/obj/item/flag/nation/atmos
+/obj/item/flag/atmos
 	name = "Atmosia flag"
 	desc = "The flag of the independant, sovereign nation of Atmosia."
 	icon_state = "atmosflag"
 
-/obj/item/flag/nation/command
+/obj/item/flag/command
 	name = "Command flag"
 	desc = "The flag of the independant, sovereign nation of Command."
 	icon_state = "ntflag"
