@@ -60,44 +60,71 @@ datum/game_mode/nations
 	for(var/mob/living/carbon/human/H in player_list)
 		if(H.mind)
 			if(H.mind.assigned_role in engineering_positions)
-				atmosia += H
+				H.mind.nation = "Atmosia"
 				H.verbs += /mob/proc/respawn_self
 				H.verbs -= /mob/living/verb/ghost
 				continue
 			else if(H.mind.assigned_role in medical_positions)
-				medistan += H
+				H.mind.nation = "Medistan"
 				H.verbs += /mob/proc/respawn_self
 				H.verbs -= /mob/living/verb/ghost
 				continue
 			else if(H.mind.assigned_role in science_positions)
-				scientopia += H
+				H.mind.nation = "Scientopia"
 				H.verbs += /mob/proc/respawn_self
 				H.verbs -= /mob/living/verb/ghost
 				continue
 			else if(H.mind.assigned_role in security_positions)
-				brigston += H
+				H.mind.nation = "Brigston"
 				H.verbs += /mob/proc/respawn_self
 				H.verbs -= /mob/living/verb/ghost
 				continue
 			else if(H.mind.assigned_role in cargonians)
-				cargonia += H
+				H.mind.nation = "Cargonia"
 				H.verbs += /mob/proc/respawn_self
 				H.verbs -= /mob/living/verb/ghost
 				continue
 			else if(H.mind.assigned_role in civilian_positions)
-				command += H
+				H.mind.nation = "Command"
 				H.verbs += /mob/proc/respawn_self
 				H.verbs -= /mob/living/verb/ghost
 				continue
 			else if(H.mind.assigned_role == "Captain")
-				command += H
+				H.mind.nation = "Command"
 				H.verbs += /mob/proc/respawn_self
 				H.verbs -= /mob/living/verb/ghost
 				continue
 			else
-				message_admins("[H.name] with [H.mind.assigned_role] could not find any team!")
+				message_admins("[H.name] with [H.mind.assigned_role] could not find any nation to assign!")
 				continue
 
+/datum/game_mode/nations/proc/populate_datums()
+	for(var/obj/effect/landmark/nations/N in landmarks_list)
+		switch(N.name)
+			if("Atmosia")
+				var/datum/nations/atmosia/A
+				A.landmark = N
+				continue
+			if("Brigston")
+				var/datum/nations/brigston/B
+				B.landmark = N
+				continue
+			if("Cargonia")
+				var/datum/nations/cargonia/C
+				C.landmark = N
+				continue
+			if("Command")
+				var/datum/nations/command/D
+				D.landmark = N
+				continue
+			if("Medistan")
+				var/datum/nations/medistan/M
+				M.landmark = N
+				continue
+			if("Scientopia")
+				var/datum/nations/scientopia/S
+				S.landmark = N
+				continue
 
 /mob/proc/respawn_self()
 	set category = "OOC"
