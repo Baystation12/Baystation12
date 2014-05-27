@@ -32,6 +32,9 @@
 	if(istype(I, /obj/item/weapon/disk/nuclear))
 		user << "Central command would kill you if you deep fried that."
 		return
+	if(istype(I, /obj/item/flag))
+		user << "<span class='warning'>That isn't going to fit.</span>"
+		return
 	else
 		user << "<span class='notice'>You put [I] into [src].</span>"
 		on = TRUE
