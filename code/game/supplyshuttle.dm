@@ -241,6 +241,8 @@ var/list/mechtoys = list(
 
 			// Must be in a crate!
 			if(istype(MA,/obj/structure/closet/crate))
+				callHook("sell_crate", list(MA, shuttle))
+
 				points += points_per_crate
 				var/find_slip = 1
 

@@ -14,9 +14,10 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"pAI candidate" = 1, // -- TLE                       // 7
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
-	"ninja" = "true",									 // 10
-	"vox raider" = IS_MODE_COMPILED("heist"),			 // 11
+	"ninja" = "true",                                    // 10
+	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
 	"diona" = 1,                                         // 12
+	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
 )
 
 var/const/MAX_SAVE_SLOTS = 10
