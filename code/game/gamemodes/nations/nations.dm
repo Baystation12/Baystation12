@@ -256,6 +256,9 @@ datum/game_mode/nations
  * Parameters: var/mob/living/carbon/human, var/rank
  */
 /hook/latespawn/proc/give_latejoiners_nations(var/mob/living/carbon/human/H)
+	var/datum/game_mode/nations/mode = get_nations_mode()
+	if (!mode) return 1
+
 	var/list/cargonians = list("Quartermaster","Cargo Technician","Shaft Miner")
 	if(H.mind)
 		if(H.mind.assigned_role in engineering_positions)
@@ -303,3 +306,10 @@ datum/game_mode/nations
 		else
 			message_admins("[H.name] with [H.mind.assigned_role] could not find any nation to assign!")
 			return
+
+
+/proc/get_nations_mode()
+	if(!ticker || !istype(ticker.mode, /datum/game_mode/nations))
+		return null
+
+	return ticker.mode
