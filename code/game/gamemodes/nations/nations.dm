@@ -47,7 +47,7 @@ datum/game_mode/nations
 				new /obj/item/flag/nation/sec(get_turf(N))
 			if("Cargonia")
 				new /obj/item/flag/nation/cargo(get_turf(N))
-			if("Command")
+			if("People's Republic of Commandzakstan")
 				new /obj/item/flag/nation/command(get_turf(N))
 			if("Medistan")
 				new /obj/item/flag/nation/med(get_turf(N))
@@ -89,13 +89,13 @@ datum/game_mode/nations
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in civilian_positions)
-				H.mind.nation = all_nations["Command"]
+				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 				H.verbs += /mob/proc/respawn_self
 				H.verbs -= /mob/living/verb/ghost
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role == "Captain")
-				H.mind.nation = all_nations["Command"]
+				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 				H.verbs += /mob/proc/respawn_self
 				H.verbs -= /mob/living/verb/ghost
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"

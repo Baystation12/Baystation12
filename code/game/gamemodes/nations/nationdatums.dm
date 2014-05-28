@@ -15,7 +15,7 @@
 	flagpath = /obj/item/flag/nation/cargo
 
 /datum/nations/command
-	name = "Command"
+	name = "People's Republic of Commandzakstan"
 	flagpath = /obj/item/flag/nation/command
 
 /datum/nations/medistan

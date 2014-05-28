@@ -58,9 +58,9 @@
 					var/obj/item/flag/nation/N = locate(liege.flagpath)
 					for(var/mob/living/carbon/human/H in player_list)
 						if(H.mind && H.mind.nation)
-							if(H.mind.nation == liege)
+							if(istype(H.mind.nation.flagpath,N))
 								H << "<span class='warning'>You are no longer the liege of [nation.name]!</span>"
-							if(H.mind.nation == nation)
+							if(istype(H.mind.nation.flagpath,src))
 								H << "<span class='warning'>You are no longer vassals of [liege.name]!</span>"
 
 					N.vassals -= nation
@@ -82,10 +82,10 @@
 			//Announce capture/vassalage here.
 			for(var/mob/living/carbon/human/H in player_list)
 				if(H.mind && H.mind.nation)
-					if(H.mind.nation == F.nation)
+					if(istype(H.mind.nation.flagpath,F))
 						H << "<span class='warning'>You have just vassalized [nation.name]! They must now obey any memebrs of your nation!</span>"
 						continue
-					else if(H.mind.nation == nation)
+					else if(istype(H.mind.nation.flagpath,src))
 						H << "<span class='warning'>You are now vassals of [liege.name]! You must now obey the orders of any of their members!</span>"
 						continue
 			//Check for Victory
@@ -132,7 +132,7 @@
 	nation = /datum/nations/atmosia
 
 /obj/item/flag/nation/command
-	name = "Command flag"
-	desc = "The flag of the independant, sovereign nation of Command."
+	name = "People's Republic of Commandzakstan flag"
+	desc = "The flag of the independant, sovereign nation of the People's Republic of Commandzakstan."
 	icon_state = "ntflag"
 	nation = /datum/nations/command
