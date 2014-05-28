@@ -1,10 +1,10 @@
 /datum/event/pda_spam
 	endWhen = 6000
-	var/time_failed = 0
+	var/last_spam_time = 0
 	var/obj/machinery/message_server/useMS
 
 /datum/event/pda_spam/setup()
-	time_failed = world.time
+	last_spam_time = world.time
 	for (var/obj/machinery/message_server/MS in message_servers)
 		if(MS.active)
 			useMS = MS
@@ -20,7 +20,6 @@
 					break
 
 	if(useMS)
-		time_failed = world.time
 		if(prob(2))
 			// /obj/machinery/message_server/proc/send_pda_message(var/recipient = "",var/sender = "",var/message = "")
 			var/obj/item/device/pda/P
@@ -86,7 +85,10 @@
 					"You have won tickets to the newest romantic comedy 16 RULES OF LOVE!",\
 					"You have won tickets to the newest thriller THE CULT OF THE SLEEPING ONE!")
 
-			useMS.send_pda_message("[P.owner]", sender, message)
+			if (useMS.send_pda_message("[P.owner]", sender, message))	//Message been filtered by spam filter.
+				return
+
+			last_spam_time = world.time
 
 			if (prob(50)) //Give the AI an increased chance to intercept the message
 				for(var/mob/living/silicon/ai/ai in mob_list)
@@ -111,6 +113,6 @@
 
 			if(L)
 				L << "\icon[P] <b>Message from [sender] (Unknown / spam?), </b>\"[message]\" (Unable to Reply)"
-	else if(world.time > time_failed + 1200)
+	else if(world.time > last_spam_time + 1200)
 		//if there's no server active for two minutes, give up
 		kill()

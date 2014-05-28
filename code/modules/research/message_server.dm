@@ -1,3 +1,5 @@
+#define MESSAGE_SERVER_SPAM_REJECT 1
+
 var/global/list/obj/machinery/message_server/message_servers = list()
 
 /datum/data_pda_msg
@@ -59,6 +61,9 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/active = 1
 	var/decryptkey = "password"
 
+	var/list/spamfilter = list()
+	var/const/errorcode_spam_rejected = MESSAGE_SERVER_SPAM_REJECT
+
 /obj/machinery/message_server/New()
 	message_servers += src
 	decryptkey = GenerateKey()
@@ -90,6 +95,9 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 /obj/machinery/message_server/proc/send_pda_message(var/recipient = "",var/sender = "",var/message = "")
 	pda_msgs += new/datum/data_pda_msg(recipient,sender,message)
+	for (var/token in spamfilter)
+		if (findtextEx(message,token))
+			return errorcode_spam_rejected
 
 /obj/machinery/message_server/proc/send_rc_message(var/recipient = "",var/sender = "",var/message = "",var/stamp = "", var/id_auth = "", var/priority = 1)
 	rc_msgs += new/datum/data_rc_msg(recipient,sender,message,stamp,id_auth)
