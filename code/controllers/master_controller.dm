@@ -32,13 +32,10 @@ datum/controller/game_controller
 	var/total_cost		= 0
 
 	var/last_thing_processed
-	var/mob/list/expensive_mobs = list()
-	var/rebuild_active_areas = 0
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
 	if(master_controller != src)
-		log_debug("Rebuilding Master Controller")
 		if(istype(master_controller))
 			Recover()
 			del(master_controller)
@@ -179,14 +176,14 @@ datum/controller/game_controller/proc/process()
 
 				//MACHINES
 				timer = world.timeofday
-				process_machines()
+				processMachines()
 				machines_cost = (world.timeofday - timer) / 10
 
 				sleep(breather_ticks)
 
 				//OBJECTS
 				timer = world.timeofday
-				process_objects()
+				processObjects()
 				objects_cost = (world.timeofday - timer) / 10
 
 				sleep(breather_ticks)
@@ -261,52 +258,26 @@ datum/controller/game_controller/proc/process()
 			Disease.process()
 			continue
 
-datum/controller/game_controller/proc/process_machines()
-	var/i = 1
-	while(i<=machines.len)
-		var/obj/machinery/Machine = machines[i]
-		if(Machine)
-			last_thing_processed = Machine.type
-			if(Machine.process() != PROCESS_KILL)
-				if(Machine)
-					i++
+		active_diseases -= Disease
+
+
+/datum/controller/game_controller/proc/processMachines()
+	for (var/obj/machinery/Machinery in machines)
+		if (Machinery && Machinery.loc)
+			last_thing_processed = Machinery.type
+
+			if(Machinery.process() != PROCESS_KILL)
+				if (Machinery) // Why another check?
+					if (Machinery.use_power)
+						Machinery.auto_use_power()
+
 					continue
-		machines.Cut(i,i+1)
 
-	i=1
-	while(i<=active_areas.len)
-		var/area/A = active_areas[i]
-		if(A.powerupdate && A.master == A)
-			A.powerupdate -= 1
-			for(var/area/SubArea in A.related)
-				for(var/obj/machinery/M in SubArea)
-					if(M)
-						if(M.use_power)
-							M.auto_use_power()
+		Machinery.removeAtProcessing()
 
-		if(A.apc.len && A.master == A)
-			i++
-			continue
-
-		A.powerupdate = 0
-		active_areas.Cut(i,i+1)
-
-
-	if(controller_iteration % 150 == 0 || rebuild_active_areas)	//Every 300 seconds we retest every area/machine
-		for(var/area/A in all_areas)
-			if(A == A.master)
-				A.powerupdate += 1
-				active_areas |= A
-		rebuild_active_areas = 0
-
-
-
-
-datum/controller/game_controller/proc/process_objects()
-	var/i = 1
-	while(i<=processing_objects.len)
-		var/obj/Object = processing_objects[i]
-		if(Object)
+/datum/controller/game_controller/proc/processObjects()
+	for (var/obj/Object in processing_objects)
+		if (Object && Object.loc)
 			last_thing_processed = Object.type
 			Object.process()
 			continue

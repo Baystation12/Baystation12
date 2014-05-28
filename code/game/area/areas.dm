@@ -292,6 +292,7 @@
 	return used
 
 /area/proc/clear_usage()
+
 	master.used_equip = 0
 	master.used_light = 0
 	master.used_environ = 0
