@@ -61,42 +61,49 @@ datum/game_mode/nations
 			if(H.mind.assigned_role in engineering_positions)
 				H.mind.nation = all_nations["Atmosia"]
 				H.verbs += /mob/proc/respawn_self
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in medical_positions)
 				H.mind.nation = all_nations["Medistan"]
 				H.verbs += /mob/proc/respawn_self
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in science_positions)
 				H.mind.nation = all_nations["Scientopia"]
 				H.verbs += /mob/proc/respawn_self
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in security_positions)
 				H.mind.nation = all_nations["Brigston"]
 				H.verbs += /mob/proc/respawn_self
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in cargonians)
 				H.mind.nation = all_nations["Cargonia"]
 				H.verbs += /mob/proc/respawn_self
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in civilian_positions)
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 				H.verbs += /mob/proc/respawn_self
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role == "Captain")
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 				H.verbs += /mob/proc/respawn_self
+				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
@@ -140,6 +147,27 @@ datum/game_mode/nations
 /datum/game_mode/nations/declare_completion(var/datum/nations/N)
 	world << "[N.name] has captured all of the station. All glory to [N.name]"
 	victory = 1
+
+/mob/proc/nations_status()
+	set category = "OOC"
+	set name = "Nation Status"
+	set desc = "Information on your allies."
+
+	var/datum/game_mode/nations/mode = get_nations_mode()
+	if (!mode) return
+
+	if(stat!=2) return
+
+	if(mind && mind.nation)
+		var/dat
+		dat += "<h4>Vassalage Status</h4>"
+		for(var/obj/item/flag/nation/N in flag_list)
+			if(N.liege)
+				if(istype(N.liege,mind.nation))
+					dat += "[N.nation.name] is your vassal."
+				if(istype(N.nation, mind.nation))
+					dat += "YOU are a vassal of [N.liege.name]."
+
 
 /mob/proc/respawn_self()
 	set category = "OOC"
@@ -264,42 +292,49 @@ datum/game_mode/nations
 		if(H.mind.assigned_role in engineering_positions)
 			H.mind.nation = all_nations["Atmosia"]
 			H.verbs += /mob/proc/respawn_self
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role in medical_positions)
 			H.mind.nation = all_nations["Medistan"]
 			H.verbs += /mob/proc/respawn_self
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role in science_positions)
 			H.mind.nation = all_nations["Scientopia"]
 			H.verbs += /mob/proc/respawn_self
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role in security_positions)
 			H.mind.nation = all_nations["Brigston"]
 			H.verbs += /mob/proc/respawn_self
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role in cargonians)
 			H.mind.nation = all_nations["Cargonia"]
 			H.verbs += /mob/proc/respawn_self
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role in civilian_positions)
 			H.mind.nation = all_nations["Command"]
 			H.verbs += /mob/proc/respawn_self
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role == "Captain")
 			H.mind.nation = all_nations["Command"]
 			H.verbs += /mob/proc/respawn_self
+			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
