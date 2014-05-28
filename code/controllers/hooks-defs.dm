@@ -19,7 +19,7 @@
 /**
  * LateSpawn hook.
  * Called in newplayer.dm when a humanoid character joins the round after it started.
- * Parameters: var/mob/living/carbon/human, var/rank
+ * Parameters: var/mob/living/carbon/human
  */
 /hook/latespawn
 

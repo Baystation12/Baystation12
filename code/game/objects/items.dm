@@ -134,14 +134,14 @@
 	return
 
 /obj/item/attack_hand(mob/user as mob)
-	if (!user) return
+	if (!user) return 0
 	if (hasorgans(user))
 		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
 		if (user.hand)
 			temp = user:organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
 			user << "<span class='notice'>You try to move your [temp.display_name], but cannot!"
-			return
+			return 0
 
 	if (istype(src.loc, /obj/item/weapon/storage))
 		//If the item is in a storage item, take it out
@@ -152,17 +152,17 @@
 	if (src.loc == user)
 		//canremove==0 means that object may not be removed. You can still wear it. This only applies to clothing. /N
 		if(!src.canremove)
-			return
+			return 0
 		else
 			user.u_equip(src)
 	else
 		if(isliving(src.loc))
-			return
+			return 0
 		user.next_move = max(user.next_move+2,world.time + 2)
 	src.pickup(user)
 	add_fingerprint(user)
 	user.put_in_active_hand(src)
-	return
+	return 1
 
 
 /obj/item/attack_paw(mob/user as mob)

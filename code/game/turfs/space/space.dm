@@ -93,9 +93,17 @@
 			if(istype(A, /obj/item/weapon/disk/nuclear)) // Don't let nuke disks travel Z levels  ... And moving this shit down here so it only fires when they're actually trying to change z-level.
 				del(A) //The disk's Destroy() proc ensures a new one is created
 				return
-
+			if(istype(A, /obj/item/flag/nation)) // Don't letflags travel Z levels  ... And moving this shit down here so it only fires when they're actually trying to change z-level.
+				var/obj/item/flag/nation/N = A
+				N.loc = N.startloc //The flag returns to base.
+				return
 			var/mob/living/MM = null
 			var/fukkendisk = A.GetTypeInAllContents(/obj/item/weapon/disk/nuclear)
+			var/obj/item/flag/nation/fukkenflag = A.GetTypeInAllContents(/obj/item/flag/nation)
+			if(fukkenflag)
+				fukkenflag.loc = fukkenflag.startloc
+				if(isliving(A))
+					A << "<span class='warning'>The flag you were carrying was just returned to it's base. Nice try.</span>"
 			if(fukkendisk)
 				if(isliving(A))
 					MM = A
@@ -115,6 +123,7 @@
 					qdel(fukkendisk)//Make the disk respawn if it is floating on its own
 				return
 
+
 			//Check if it's a mob pulling an object. Have the object transition with the mob if it's not the nuke disk
 			var/obj/was_pulling = null
 			if(isliving(A))
@@ -125,7 +134,13 @@
 						qdel(MM.pulling)
 					else
 						was_pulling = MM.pulling
+						fukkenflag = null
 						fukkendisk = was_pulling.GetTypeInAllContents(/obj/item/weapon/disk/nuclear)
+						fukkenflag = was_pulling.GetTypeInAllContents(/obj/item/flag/nation)
+						if(fukkenflag)
+							fukkenflag.loc = fukkenflag.startloc
+							if(isliving(A))
+								A << "<span class='warning'>The flag you were carrying was just returned to it's base. Nice try.</span>"
 						if(fukkendisk)
 							MM << "<span class='warning'>You think you saw something slip out of [was_pulling], but you couldn't tell where it went...</span>"
 							qdel(fukkendisk)

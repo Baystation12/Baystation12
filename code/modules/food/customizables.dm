@@ -301,6 +301,10 @@
 	if(istype(I, /obj/item/weapon/disk/nuclear))
 		user << "You think about it for a few seconds, then you realize Central Command likely doesn't find nuke disk sandwiches very funny, and so you decide not to turn the nuke disk into a foodstuff."
 		return
+	if(istype(I, /obj/item/flag/nation))
+		user << "That's not going to fit!"
+		return
+
 	else
 		user << "<span class='notice'> You add [I] to [src].</span>"
 		if(istype(I,  /obj/item/weapon/reagent_containers/))

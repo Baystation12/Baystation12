@@ -92,6 +92,9 @@ Implants;
 			return 1
 	return 0
 
+//pre_pre_setup() For when you really don't want certain jobs ingame.
+/datum/game_mode/proc/pre_pre_setup()
+	return 1
 
 ///pre_setup()
 ///Attempts to select players for special roles the mode might have.

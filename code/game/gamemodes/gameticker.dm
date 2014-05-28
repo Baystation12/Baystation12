@@ -103,6 +103,7 @@ var/global/datum/controller/gameticker/ticker
 		return 0
 
 	//Configure mode and assign player to special mode stuff
+	src.mode.pre_pre_setup()
 	job_master.DivideOccupations() //Distribute jobs
 	var/can_continue = src.mode.pre_setup()//Setup special modes
 	if(!can_continue)
@@ -140,7 +141,7 @@ var/global/datum/controller/gameticker/ticker
 			//Deleting Startpoints but we need the ai point to AI-ize people later
 			if (S.name != "AI")
 				del(S)
-		
+
 		// take care of random spesspod spawning
 		var/list/obj/effect/landmark/spacepod/random/L = list()
 		for(var/obj/effect/landmark/spacepod/random/SS in landmarks_list)
@@ -151,7 +152,7 @@ var/global/datum/controller/gameticker/ticker
 			new /obj/spacepod/random(S.loc)
 			for(var/obj/effect/landmark/spacepod/random/R in L)
 				del(R)
-		
+
 		world << "<FONT color='blue'><B>Enjoy the game!</B></FONT>"
 		world << sound('sound/AI/welcome.ogg') // Skie
 		//Holiday Round-start stuff	~Carn

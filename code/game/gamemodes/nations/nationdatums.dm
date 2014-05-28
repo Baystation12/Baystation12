@@ -2,7 +2,6 @@
 	var/name
 	var/flagpath
 
-
 /datum/nations/atmosia
 	name = "Atmosia"
 	flagpath = /obj/item/flag/nation/atmos
@@ -26,11 +25,6 @@
 /datum/nations/scientopia
 	name = "Scientopia"
 	flagpath = /obj/item/flag/nation/rnd
-
-
-
-
-
 
 
 
