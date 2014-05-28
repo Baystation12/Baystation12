@@ -385,9 +385,11 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
+
 		// HACK NEED CHANGING LATER
-		if(health < 0)
+		if(health < config.health_threshold_crit && !reagents.has_reagent("inaprovaline"))
 			losebreath++
+
 		if(losebreath>0) //Suffocating so do not take a breath
 			losebreath--
 			if (prob(10)) //Gasp per 10 ticks? Sounds about right.
@@ -484,8 +486,6 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 			return
 
 		if(!breath || (breath.total_moles() == 0) || suiciding)
-			if(reagents.has_reagent("inaprovaline"))
-				return
 			if(suiciding)
 				adjustOxyLoss(2)//If you are suiciding, you should die a little bit faster
 				failed_last_breath = 1
