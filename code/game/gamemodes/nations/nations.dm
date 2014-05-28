@@ -20,6 +20,7 @@ datum/game_mode/nations
 			split_teams()
 			spawn_flags()
 			populate_vars()
+	return ..()
 
 /datum/game_mode/nations/send_intercept()
 	command_alert("Due to recent and COMPLETELY UNFOUNDED allegations of massive fraud and insider trading \
@@ -29,6 +30,7 @@ datum/game_mode/nations
 					are IMMEDIATELY TERMINATED. Nanotrasen will be unable to send a rescue shuttle to carry you home,\
 					however they remain willing for the time being to continue trading cargo. Have a pleasant \
 					day.", "FINAL TRANSMISSION, CENTCOM COMMAND.")
+
 
 
 /datum/game_mode/nations/proc/remove_flags()
