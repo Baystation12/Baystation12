@@ -548,7 +548,7 @@
 			failed_exhale = 1
 			
 		else if(exhaled_pp > safe_exhaled_max * 0.7)
-			if (!co2_alert || prob(15))
+			if (!co2_alert || prob(1))
 				var/word = pick("dizzy","short of breath","faint","momentarily confused")
 				src << "\red You feel [word]."
 			
@@ -562,7 +562,7 @@
 			failed_exhale = 1
 			
 		if(exhaled_pp > safe_exhaled_max * 0.6)
-			if (prob(1))
+			if (prob(0.3))
 				var/word = pick("a little dizzy","short of breath")
 				src << "\red You feel [word]."
 			
