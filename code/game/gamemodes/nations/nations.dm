@@ -149,6 +149,9 @@ datum/game_mode/nations
 	if (!( ticker ))
 		usr << "\blue <B>The round hasn't started!</B>"
 		return
+	if(stat!=2)
+		usr << "\blue You must be dead to respawn."
+		return
 	if (ticker.mode.name != "nations")
 		usr << "\blue Respawn is disabled."
 		return
@@ -179,7 +182,7 @@ datum/game_mode/nations
 		var/deathtimeseconds = round((deathtime - deathtimeminutes * 600) / 10,1)
 		usr << "You have been dead for[pluralcheck] [deathtimeseconds] seconds."
 		if (deathtime < 9000)
-			usr << "You must wait 10 minutes to respawn!"
+			usr << "You must wait 15 minutes to respawn!"
 			return
 		else
 
@@ -187,7 +190,7 @@ datum/game_mode/nations
 			var/mob/living/carbon/human/new_character = new(pick(latejoin))//The mob being spawned.
 
 			var/datum/data/record/record_found			//Referenced to later to either randomize or not randomize the character.
-			if(mind && !mind.active)	//mind isn't currently in use by someone/something
+			if(mind)	//mind isn't currently in use by someone/something
 				/*Try and locate a record for the person being respawned through data_core.
 				This isn't an exact science but it does the trick more often than not.*/
 				var/id = md5("[real_name][mind.assigned_role]")
@@ -214,7 +217,7 @@ datum/game_mode/nations
 					new_character.real_name = capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
 			new_character.name = new_character.real_name
 
-			if(mind && !mind.active)
+			if(mind)
 				mind.transfer_to(new_character)	//be careful when doing stuff like this! I've already checked the mind isn't in use
 				new_character.mind.special_verbs = list()
 			else

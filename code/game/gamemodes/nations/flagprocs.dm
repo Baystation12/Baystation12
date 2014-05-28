@@ -36,7 +36,7 @@
 /obj/item/flag/nation/attack_hand(mob/user as mob)
 	if(user.mind)
 		if(user.mind.nation)
-			if(user.mind.nation == nation) //Same team as flag
+			if(user.mind.nation.type == nation) //Same team as flag
 				if(loc != startloc)
 					loc = startloc
 					user.visible_message("[user] sends [src] back to base!", "You return [src] to your base!")
@@ -49,7 +49,7 @@
 				if(captured && Adjacent(F.startloc))
 					user << "<span class='warning'>This flag has already been captured by your team!</span>"
 					return
-				if(liege == F.liege)
+				if(liege && liege == F.liege)
 					user << "<span class='warning'>You can't steal your liege's flags!</span>"
 					return
 				else if(..())
@@ -82,10 +82,10 @@
 			//Announce capture/vassalage here.
 			for(var/mob/living/carbon/human/H in player_list)
 				if(H.mind && H.mind.nation)
-					if(H.mind.nation == F.nation)
+					if(H.mind.nation.type == F.nation)
 						H << "<span class='warning'>You have just vassalized [nation.name]! They must now obey any memebrs of your nation!</span>"
 						continue
-					else if(H.mind.nation == nation)
+					else if(H.mind.nation.type == nation)
 						H << "<span class='warning'>You are now vassals of [liege.name]! You must now obey the orders of any of their members!</span>"
 						continue
 			//Check for Victory
