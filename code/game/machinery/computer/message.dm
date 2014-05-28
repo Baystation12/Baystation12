@@ -251,7 +251,8 @@
 					break
 				dat += "<dd>[index]&#09; <a href='?src=\ref[src];deltoken=[index]'>[token]</a><br></dd>"
 			dat += "<hr>"
-			dat += "<a href='?src=\ref[src];addtoken=1'>Add token</a><br>"
+			if (linkedServer.spamfilter.len < linkedServer.spamfilter_limit)
+				dat += "<a href='?src=\ref[src];addtoken=1'>Add token</a><br>"
 
 
 	dat += "</body>"

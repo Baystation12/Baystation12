@@ -48,6 +48,14 @@
 		target << law
 		target.add_ion_law(law)
 
+	if(message_servers)
+		for (var/obj/machinery/message_server/MS in message_servers)
+			var/i
+			for (i = 1, i <= MS.spamfilter.len, i++)
+				MS.spamfilter[i] = pick("kitty","HONK","revolution","malfunction","liberty","freedom","drugs", \
+					"admininstreation","ponies","heresy","meow","Pun Pun","monkey","Ian","moron","pizza","message","spam",\
+					"diector", "Hello", "Hi!"," ","nuke")
+
 /datum/event/ionstorm/tick()
 	if(botEmagChance)
 		for(var/obj/machinery/bot/bot in world)

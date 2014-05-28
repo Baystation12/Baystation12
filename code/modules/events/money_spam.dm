@@ -1,26 +1,26 @@
 /datum/event/pda_spam
-	endWhen = 6000
+	endWhen = 36000
 	var/last_spam_time = 0
 	var/obj/machinery/message_server/useMS
 
 /datum/event/pda_spam/setup()
 	last_spam_time = world.time
-	for (var/obj/machinery/message_server/MS in message_servers)
-		if(MS.active)
-			useMS = MS
-			break
+	pick_message_server()
+
+/datum/event/pda_spam/proc/pick_message_server()
+	if(message_servers)
+		for (var/obj/machinery/message_server/MS in message_servers)
+			if(MS.active)
+				useMS = MS
+				break
 
 /datum/event/pda_spam/tick()
 	if(!useMS || !useMS.active)
 		useMS = null
-		if(message_servers)
-			for (var/obj/machinery/message_server/MS in message_servers)
-				if(MS.active)
-					useMS = MS
-					break
+		pick_message_server()
 
 	if(useMS)
-		if(prob(2))
+		if(prob(5))
 			// /obj/machinery/message_server/proc/send_pda_message(var/recipient = "",var/sender = "",var/message = "")
 			var/obj/item/device/pda/P
 			var/list/viables = list()

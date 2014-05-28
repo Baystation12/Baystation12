@@ -61,7 +61,11 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/active = 1
 	var/decryptkey = "password"
 
-	var/list/spamfilter = list()
+	//Spam filtering stuff
+	var/list/spamfilter = list("You have won", "your prize", "male enhancement", "shitcurity", \
+			"are happy to inform you", "account number", "enter your PIN")
+			//Messages having theese tokens will be rejected by server. Case sensitive
+	var/spamfilter_limit = 10	//Maximal amount of tokens
 	var/const/errorcode_spam_rejected = MESSAGE_SERVER_SPAM_REJECT
 
 /obj/machinery/message_server/New()
