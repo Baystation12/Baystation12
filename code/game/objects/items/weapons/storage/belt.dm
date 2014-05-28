@@ -157,12 +157,6 @@
 		"/obj/item/clothing/mask/luchador"
 		)
 
-/obj/item/weapon/storage/belt/inflatable
-	name = "inflatable duck"
-	desc = "No bother to sink or swim when you can just float!"
-	icon_state = "inflatable"
-	item_state = "inflatable"
-
 /obj/item/weapon/storage/belt/security/tactical
 	name = "combat belt"
 	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
