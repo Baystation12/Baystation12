@@ -21,52 +21,68 @@
 			pulling = null
 			user.pulledby = null
 			user << "\red You lost your grip!"
-	else if(user.pulling)
+		return
+	if(user.pulling)
 		pulling = null
 		user.pulledby = null
-	else if(pulling && (get_dist(src, pulling) > 1))
+		return
+	if(propelled)
+		return
+	if(pulling && (get_dist(src, pulling) > 1))
 		pulling = null
 		user.pulledby = null
-	else if(pulling && (get_dir(src.loc, pulling.loc) == direction))
+		return
+	if(pulling && (get_dir(src.loc, pulling.loc) == direction))
 		user << "\red You cannot go there."
-	else if(pulling && buckled_mob && (buckled_mob == user))
+		return
+	if(pulling && buckled_mob && (buckled_mob == user))
 		user << "\red You cannot drive while being pushed."
-	else
-		// Let's roll
-		driving = 1
-		var/turf/T = null
-		//--1---Move occupant---1--//
-		if(buckled_mob)
-			buckled_mob.buckled = null
-			step(buckled_mob, direction)
-			buckled_mob.buckled = src
-		//--2----Move driver----2--//
-		if(pulling)
-			T = pulling.loc
-			if(get_dist(src, pulling) >= 1)
-				step(pulling, get_dir(pulling.loc, src.loc))
-		//--3--Move wheelchair--3--//
-		step(src, direction)
-		if(buckled_mob) // Make sure it stays beneath the occupant
-			Move(buckled_mob.loc)
-		dir = direction
-		handle_rotation()
-		if(pulling) // Driver
-			if(pulling.loc == src.loc) // We moved onto the wheelchair? Revert!
-				pulling.loc = T
-			else
-				spawn(0)
-				pulling.dir = get_dir(pulling, src) // When everything is right, face the wheelchair
-		driving = 0
+		return
+
+	// Let's roll
+	driving = 1
+	var/turf/T = null
+	//--1---Move occupant---1--//
+	if(buckled_mob)
+		buckled_mob.buckled = null
+		step(buckled_mob, direction)
+		buckled_mob.buckled = src
+	//--2----Move driver----2--//
+	if(pulling)
+		T = pulling.loc
+		if(get_dist(src, pulling) >= 1)
+			step(pulling, get_dir(pulling.loc, src.loc))
+	//--3--Move wheelchair--3--//
+	step(src, direction)
+	if(buckled_mob) // Make sure it stays beneath the occupant
+		Move(buckled_mob.loc)
+	dir = direction
+	handle_rotation()
+	if(pulling) // Driver
+		if(pulling.loc == src.loc) // We moved onto the wheelchair? Revert!
+			pulling.loc = T
+		else
+			spawn(0)
+			if(get_dist(src, pulling) > 1) // We are too far away? Losing control.
+				pulling = null
+				user.pulledby = null
+			pulling.dir = get_dir(pulling, src) // When everything is right, face the wheelchair
+	driving = 0
 
 /obj/structure/stool/bed/chair/wheelchair/Move()
 	..()
 	if(!driving && buckled_mob)
-		buckled_mob.buckled = null
-		buckled_mob.Move(src.loc)
-		buckled_mob.buckled = src
-		if (buckled_mob && (src.loc != buckled_mob.loc))
-			unbuckle()
+		var/mob/living/occupant = buckled_mob
+		occupant.buckled = null
+		occupant.Move(src.loc)
+		occupant.buckled = src
+		if (occupant && (src.loc != occupant.loc))
+			if (propelled)
+				for (var/mob/O in src.loc)
+					if (O != occupant)
+						Bump(O)
+			else
+				unbuckle()
 	handle_rotation()
 
 /obj/structure/stool/bed/chair/wheelchair/attack_hand(mob/user as mob)
@@ -99,6 +115,33 @@
 			pulling.pulledby = null
 			pulling = null
 		return
+
+/obj/structure/stool/bed/chair/wheelchair/Bump(atom/A)
+	..()
+	if(!buckled_mob)	return
+
+	if(propelled || (pulling && (pulling.a_intent == "hurt")))
+		var/mob/living/occupant = buckled_mob
+		unbuckle()
+		occupant.throw_at(A, 3, 2)
+		occupant.apply_effect(6, STUN, 0)
+		occupant.apply_effect(6, WEAKEN, 0)
+		occupant.apply_effect(6, STUTTER, 0)
+		playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
+		if(istype(A, /mob/living))
+			var/mob/living/victim = A
+			victim.apply_effect(6, STUN, 0)
+			victim.apply_effect(6, WEAKEN, 0)
+			victim.apply_effect(6, STUTTER, 0)
+			victim.take_organ_damage(10)
+		if(pulling)
+			occupant.visible_message("<span class='danger'>[pulling] has thrusted \the [name] into \the [A], throwing \the [occupant] out of it!</span>")
+
+			pulling.attack_log += "\[[time_stamp()]\]<font color='red'> Clashed [occupant.name]'s ([occupant.ckey]) [name] into \a [A]</font>"
+			occupant.attack_log += "\[[time_stamp()]\]<font color='orange'> Thrusted into \a [A] by [pulling.name] ([pulling.ckey]) with \the [name]</font>"
+			msg_admin_attack("[pulling.name] ([pulling.ckey]) has thrusted [occupant.name]'s ([occupant.ckey]) [name] into \a [A] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[pulling.x];Y=[pulling.y];Z=[pulling.z]'>JMP</a>)")
+		else
+			occupant.visible_message("<span class='danger'>[occupant] clashed into \the [A]!</span>")
 
 /obj/structure/stool/bed/chair/wheelchair/buckle_mob(mob/M as mob, mob/user as mob)
 	if(M == pulling)
