@@ -59,9 +59,11 @@
 					for(var/mob/living/carbon/human/H in player_list)
 						if(H.mind && H.mind.nation)
 							if(istype(H.mind.nation.flagpath,N))
-								H << "<span class='warning'>You are no longer the liege of [nation.name]!</span>"
+								world << "Stop being liege message works"
+								H.mind.current << "<span class='warning'>You are no longer the liege of [nation.name]!</span>"
 							if(istype(H.mind.nation.flagpath,src))
-								H << "<span class='warning'>You are no longer vassals of [liege.name]!</span>"
+								world << "Stop being vassal message works"
+								H.mind.current << "<span class='warning'>You are no longer vassals of [liege.name]!</span>"
 
 					N.vassals -= nation
 					liege = null
@@ -75,28 +77,30 @@
 	spawn(20)
 		anchored = 1
 		var/obj/item/flag/nation/F = locate(user.mind.nation.flagpath)
-		if(F.loc == F.startloc && Adjacent(F.startloc))
-			captured = 1
-			liege = F.nation
-			F.vassals += nation
-			//Announce capture/vassalage here.
-			for(var/mob/living/carbon/human/H in player_list)
-				if(H.mind && H.mind.nation)
-					if(istype(H.mind.nation.flagpath,F))
-						H << "<span class='warning'>You have just vassalized [nation.name]! They must now obey any memebrs of your nation!</span>"
+		if(F.loc != F.startloc) return
+		for(var/obj/item/flag/S in oview(1,F.startloc))
+			if(src == S)
+				captured = 1
+				liege = F.nation
+				F.vassals += nation
+				//Announce capture/vassalage here.
+				for(var/mob/living/carbon/human/H in player_list)
+					if(H.mind && H.mind.nation)
+						if(istype(H.mind.nation.flagpath,F))
+							world << "Liege message works"
+							H.mind.current << "<span class='warning'>You have just vassalized [nation.name]! They must now obey any memebrs of your nation!</span>"
+							continue
+						else if(istype(H.mind.nation.flagpath,src))
+							world << "Vassalization message works"
+							H.mind.current << "<span class='warning'>You are now vassals of [liege.name]! You must now obey the orders of any of their members!</span>"
+							continue
+				//Check for Victory
+				for(var/obj/item/flag/nation/N in oview(1,F.startloc))
+					if(N.captured && N.liege == F.nation)
 						continue
-					else if(istype(H.mind.nation.flagpath,src))
-						H << "<span class='warning'>You are now vassals of [liege.name]! You must now obey the orders of any of their members!</span>"
-						continue
-			//Check for Victory
-			for(var/obj/item/flag/nation/N in flag_list)
-				if(N == F)
-					continue
-				if(N.captured && (N.liege == F.nation) && N.Adjacent(F.startloc))
-					continue
-				else
-					return
-			ticker.mode.declare_completion(F.nation)
+					else
+						return
+				ticker.mode.declare_completion(F.nation)
 
 
 
