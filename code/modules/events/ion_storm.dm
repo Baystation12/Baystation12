@@ -50,11 +50,12 @@
 
 	if(message_servers)
 		for (var/obj/machinery/message_server/MS in message_servers)
+			MS.spamfilter.Cut()
 			var/i
-			for (i = 1, i <= MS.spamfilter.len, i++)
-				MS.spamfilter[i] = pick("kitty","HONK","revolution","malfunction","liberty","freedom","drugs", \
-					"admininstreation","ponies","heresy","meow","Pun Pun","monkey","Ian","moron","pizza","message","spam",\
-					"diector", "Hello", "Hi!"," ","nuke")
+			for (i = 1, i <= MS.spamfilter_limit, i++)
+				MS.spamfilter += pick("kitty","HONK","rev","malf","liberty","freedom","drugs", "Exodus", \
+					"admin","ponies","heresy","meow","Pun Pun","monkey","Ian","moron","pizza","message","spam",\
+					"diector", "Hello", "Hi!"," ","nuke","crate","dwarf","xeno")
 
 /datum/event/ionstorm/tick()
 	if(botEmagChance)

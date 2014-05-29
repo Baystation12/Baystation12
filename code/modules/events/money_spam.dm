@@ -113,6 +113,6 @@
 
 			if(L)
 				L << "\icon[P] <b>Message from [sender] (Unknown / spam?), </b>\"[message]\" (Unable to Reply)"
-	else if(world.time > last_spam_time + 1200)
-		//if there's no server active for two minutes, give up
+	else if(world.time > last_spam_time + 3000)
+		//if there's no spam managed to get to receiver for five minutes, give up
 		kill()

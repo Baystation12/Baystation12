@@ -919,7 +919,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			return
 		var/send_result = useMS.send_pda_message("[P.owner]","[owner]","[t]")
 		if (send_result)
-			U << "ERROR: Messaging server rejected your message."
+			U << "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'."
 			return
 
 		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
