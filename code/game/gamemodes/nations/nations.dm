@@ -156,8 +156,6 @@ datum/game_mode/nations
 	var/datum/game_mode/nations/mode = get_nations_mode()
 	if (!mode) return
 
-	if(stat!=2) return
-
 	if(mind && mind.nation)
 		var/dat
 		dat += "<h4>Vassalage Status</h4>"

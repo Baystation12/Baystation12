@@ -452,6 +452,22 @@
 					dat += "<tr><td><i>Head not found!</i></td></tr>"
 			dat += "</table>"
 
+		if(ticker.mode.name == "nations")
+			dat += "</table><br><table><tr><td><B>Flags(s)</B></td></tr>"
+			for(var/obj/item/flag/nation/N in world)
+				dat += "<tr><td>[N.name], "
+				var/atom/flag_loc = N.loc
+				while(!istype(flag_loc, /turf))
+					if(istype(flag_loc, /mob))
+						var/mob/M = flag_loc
+						dat += "carried by <a href='?src=\ref[src];adminplayeropts=\ref[M]'>[M.real_name]</a> "
+					if(istype(flag_loc, /obj))
+						var/obj/O = flag_loc
+						dat += "in \a [O.name] "
+					flag_loc = flag_loc.loc
+				dat += "in [flag_loc.loc] at ([flag_loc.x], [flag_loc.y], [flag_loc.z])</td></tr>"
+			dat += "</table>"
+
 		if(ticker.mode.changelings.len)
 			dat += check_role_table("Changelings", ticker.mode.changelings, src)
 
