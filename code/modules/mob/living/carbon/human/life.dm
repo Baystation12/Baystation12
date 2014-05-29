@@ -1983,7 +1983,19 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 					holder.icon_state = "loyalist"
 				if("head_mutineer")
 					holder.icon_state = "mutineer"
-
+			switch(mind.nation.name)
+				if("Atmosia")
+					holder.icon_state = "hudcommand"
+				if("Brigston")
+					holder.icon_state = "hudbrigston"
+				if("Cargonia")
+					holder.icon_state = "hudcargonia"
+				if("People's Republic of Commandzakstan")
+					holder.icon_state = "hudcommand"
+				if("Medistan")
+					holder.icon_state = "hudmedistan"
+				if("Scientopia")
+					holder.icon_state = "hudscientopia"
 
 			hud_list[SPECIALROLE_HUD] = holder
 

@@ -60,6 +60,7 @@ datum/game_mode/nations
 		if(H.mind)
 			if(H.mind.assigned_role in engineering_positions)
 				H.mind.nation = all_nations["Atmosia"]
+				H.hud_updateflag |= 1 << SPECIALROLE_HUD
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -67,6 +68,7 @@ datum/game_mode/nations
 				continue
 			else if(H.mind.assigned_role in medical_positions)
 				H.mind.nation = all_nations["Medistan"]
+				H.hud_updateflag |= 1 << SPECIALROLE_HUD
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -74,6 +76,7 @@ datum/game_mode/nations
 				continue
 			else if(H.mind.assigned_role in science_positions)
 				H.mind.nation = all_nations["Scientopia"]
+				H.hud_updateflag |= 1 << SPECIALROLE_HUD
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -81,6 +84,7 @@ datum/game_mode/nations
 				continue
 			else if(H.mind.assigned_role in security_positions)
 				H.mind.nation = all_nations["Brigston"]
+				H.hud_updateflag |= 1 << SPECIALROLE_HUD
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -88,6 +92,7 @@ datum/game_mode/nations
 				continue
 			else if(H.mind.assigned_role in cargonians)
 				H.mind.nation = all_nations["Cargonia"]
+				H.hud_updateflag |= 1 << SPECIALROLE_HUD
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -95,6 +100,7 @@ datum/game_mode/nations
 				continue
 			else if(H.mind.assigned_role in civilian_positions)
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
+				H.hud_updateflag |= 1 << SPECIALROLE_HUD
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -102,6 +108,7 @@ datum/game_mode/nations
 				continue
 			else if(H.mind.assigned_role == "Captain")
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
+				H.hud_updateflag |= 1 << SPECIALROLE_HUD
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -272,6 +279,7 @@ datum/game_mode/nations
 				data_core.manifest_inject(new_character)
 
 			new_character << "You have been fully respawned. Get back in the fight!."
+			new_character.hud_updateflag |= 1 << SPECIALROLE_HUD
 			return new_character
 
 
@@ -289,6 +297,7 @@ datum/game_mode/nations
 	if(H.mind)
 		if(H.mind.assigned_role in engineering_positions)
 			H.mind.nation = all_nations["Atmosia"]
+			H.hud_updateflag |= 1 << SPECIALROLE_HUD
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -296,6 +305,7 @@ datum/game_mode/nations
 			return
 		else if(H.mind.assigned_role in medical_positions)
 			H.mind.nation = all_nations["Medistan"]
+			H.hud_updateflag |= 1 << SPECIALROLE_HUD
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -303,6 +313,7 @@ datum/game_mode/nations
 			return
 		else if(H.mind.assigned_role in science_positions)
 			H.mind.nation = all_nations["Scientopia"]
+			H.hud_updateflag |= 1 << SPECIALROLE_HUD
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -310,6 +321,7 @@ datum/game_mode/nations
 			return
 		else if(H.mind.assigned_role in security_positions)
 			H.mind.nation = all_nations["Brigston"]
+			H.hud_updateflag |= 1 << SPECIALROLE_HUD
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -317,6 +329,7 @@ datum/game_mode/nations
 			return
 		else if(H.mind.assigned_role in cargonians)
 			H.mind.nation = all_nations["Cargonia"]
+			H.hud_updateflag |= 1 << SPECIALROLE_HUD
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -324,6 +337,7 @@ datum/game_mode/nations
 			return
 		else if(H.mind.assigned_role in civilian_positions)
 			H.mind.nation = all_nations["Command"]
+			H.hud_updateflag |= 1 << SPECIALROLE_HUD
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -331,6 +345,7 @@ datum/game_mode/nations
 			return
 		else if(H.mind.assigned_role == "Captain")
 			H.mind.nation = all_nations["Command"]
+			H.hud_updateflag |= 1 << SPECIALROLE_HUD
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
