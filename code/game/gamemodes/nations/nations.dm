@@ -6,6 +6,7 @@ datum/game_mode/nations
 	required_players_secret = 25
 	var/const/waittime_l = 3000 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 6000 //upper bound on time before intercept arrives (in tenths of seconds)
+	var/kickoff = 0
 	var/victory = 0
 	var/list/cargonians = list("Quartermaster","Cargo Technician","Shaft Miner")
 
@@ -16,6 +17,7 @@ datum/game_mode/nations
 	spawn (rand(waittime_l, waittime_h))
 		remove_flags()
 		spawn(50)
+			kickoff=1
 			send_intercept()
 			split_teams()
 			spawn_flags()
@@ -291,7 +293,9 @@ datum/game_mode/nations
  */
 /hook/latespawn/proc/give_latejoiners_nations(var/mob/living/carbon/human/H)
 	var/datum/game_mode/nations/mode = get_nations_mode()
-	if (!mode) return 1
+	if (!mode) return
+
+	if(!mode.kickoff) return
 
 	var/list/cargonians = list("Quartermaster","Cargo Technician","Shaft Miner")
 	if(H.mind)
