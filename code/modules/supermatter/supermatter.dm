@@ -314,6 +314,8 @@
 			if(is_type_in_list(X, uneatable))	continue
 			if(((X) && (!istype(X,/mob/living/carbon/human))))
 				step_towards(X,src)
+				if(!X:anchored) //unanchored objects pulled twice as fast
+					step_towards(X,src)
 				if(istype(X, /obj/structure/window)) //shatter windows
 					X.ex_act(2.0)
 			else if(istype(X,/mob/living/carbon/human))
@@ -321,7 +323,9 @@
 				if(istype(H.shoes,/obj/item/clothing/shoes/magboots))
 					var/obj/item/clothing/shoes/magboots/M = H.shoes
 					if(M.magpulse)
+						step_towards(H,src) //step just once with magboots
 						continue
+				step_towards(H,src) //step twice
 				step_towards(H,src)
 
 	if(defer_powernet_rebuild != 2)
