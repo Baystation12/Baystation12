@@ -17,8 +17,8 @@
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
 #define MOLES_PHORON_VISIBLE	0.7 //Moles in a standard cell after which phoron is visible
-#define MIN_PHORON_DAMAGE 1
-#define MAX_PHORON_DAMAGE 10
+#define MIN_TOXIN_DAMAGE 1	//This and MAX_TOXIN are for when a mob breathes poisonous air, apparently.
+#define MAX_TOXIN_DAMAGE 10	//This and MIN_TOXIN are for when a mob breathes poisonous air, apparently.
 
 #define BREATH_VOLUME 0.5	//liters in a normal breath
 #define BREATH_MOLES (ONE_ATMOSPHERE * BREATH_VOLUME /(T20C*R_IDEAL_GAS_EQUATION))
