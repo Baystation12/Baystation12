@@ -999,7 +999,7 @@ About the new airlock wires panel:
 				if(4)
 					//drop door bolts
 					if(src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
-						usr << "You can't drop the door bolts - The door bolt dropping wire has been cut."
+						usr << "You can't drop the door bolts - The door bolt control wire has been cut."
 					else if(src.locked!=1)
 						src.locked = 1
 						update_icon()
