@@ -203,8 +203,8 @@
 			else if(prob(50))
 				new_item = new /obj/item/weapon/tank/anesthetic(src.loc)
 			else
-				new_item = new /obj/item/weapon/tank/plasma(src.loc)
-			icon_state = pick("oxygen","oxygen_fr","oxygen_f","plasma","anesthetic")
+				new_item = new /obj/item/weapon/tank/phoron(src.loc)
+			icon_state = pick("oxygen","oxygen_fr","oxygen_f","phoron","anesthetic")
 			additional_desc = "It [pick("gloops","sloshes")] slightly when you shake it."
 		if(13)
 			item_type = "tool"
@@ -224,7 +224,7 @@
 			possible_spawns += /obj/item/stack/sheet/plasteel
 			possible_spawns += /obj/item/stack/sheet/glass
 			possible_spawns += /obj/item/stack/sheet/rglass
-			possible_spawns += /obj/item/stack/sheet/mineral/plasma
+			possible_spawns += /obj/item/stack/sheet/mineral/phoron
 			possible_spawns += /obj/item/stack/sheet/mineral/mythril
 			possible_spawns += /obj/item/stack/sheet/mineral/gold
 			possible_spawns += /obj/item/stack/sheet/mineral/silver
@@ -298,7 +298,7 @@
 			if(prob(50))
 				new_item = new /obj/item/weapon/shard(src.loc)
 			else
-				new_item = new /obj/item/weapon/shard/plasma(src.loc)
+				new_item = new /obj/item/weapon/shard/phoron(src.loc)
 			apply_prefix = 0
 			apply_image_decorations = 0
 			apply_material_decorations = 0
@@ -477,7 +477,7 @@
 		if(prob(30))
 			descriptors.Add("is encircled with bands of [pick("quadrinium","cordite","ferritic-alloy","plasteel","duranium")]")
 		if(prob(30))
-			descriptors.Add("menaces with spikes of [pick("solid plasma","uranium","white pearl","black steel")]")
+			descriptors.Add("menaces with spikes of [pick("solid phoron","uranium","white pearl","black steel")]")
 		if(descriptors.len > 0)
 			decorations = "It "
 			for(var/index=1, index <= descriptors.len, index++)

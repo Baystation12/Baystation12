@@ -117,6 +117,9 @@
 	S["facial_green"]		>> g_facial
 	S["facial_blue"]		>> b_facial
 	S["skin_tone"]			>> s_tone
+	S["skin_red"]			>> r_skin
+	S["skin_green"]			>> g_skin
+	S["skin_blue"]			>> b_skin
 	S["hair_style_name"]	>> h_style
 	S["facial_style_name"]	>> f_style
 	S["eyes_red"]			>> r_eyes
@@ -177,6 +180,9 @@
 	g_facial		= sanitize_integer(g_facial, 0, 255, initial(g_facial))
 	b_facial		= sanitize_integer(b_facial, 0, 255, initial(b_facial))
 	s_tone			= sanitize_integer(s_tone, -185, 34, initial(s_tone))
+	r_skin			= sanitize_integer(r_skin, 0, 255, initial(r_skin))
+	g_skin			= sanitize_integer(g_skin, 0, 255, initial(g_skin))
+	b_skin			= sanitize_integer(b_skin, 0, 255, initial(b_skin))
 	h_style			= sanitize_inlist(h_style, hair_styles_list, initial(h_style))
 	f_style			= sanitize_inlist(f_style, facial_hair_styles_list, initial(f_style))
 	r_eyes			= sanitize_integer(r_eyes, 0, 255, initial(r_eyes))
@@ -228,6 +234,9 @@
 	S["facial_green"]		<< g_facial
 	S["facial_blue"]		<< b_facial
 	S["skin_tone"]			<< s_tone
+	S["skin_red"]			<< r_skin
+	S["skin_green"]			<< g_skin
+	S["skin_blue"]			<< b_skin
 	S["hair_style_name"]	<< h_style
 	S["facial_style_name"]	<< f_style
 	S["eyes_red"]			<< r_eyes

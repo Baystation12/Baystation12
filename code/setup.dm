@@ -16,9 +16,9 @@
 #define MOLES_O2STANDARD MOLES_CELLSTANDARD*O2STANDARD	// O2 standard value (21%)
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
-#define MOLES_PLASMA_VISIBLE	0.7 //Moles in a standard cell after which plasma is visible
-#define MIN_PLASMA_DAMAGE 1
-#define MAX_PLASMA_DAMAGE 10
+#define MOLES_PHORON_VISIBLE	0.7 //Moles in a standard cell after which phoron is visible
+#define MIN_PHORON_DAMAGE 1
+#define MAX_PHORON_DAMAGE 10
 
 #define BREATH_VOLUME 0.5	//liters in a normal breath
 #define BREATH_MOLES (ONE_ATMOSPHERE * BREATH_VOLUME /(T20C*R_IDEAL_GAS_EQUATION))
@@ -112,7 +112,7 @@
 #define FIRE_MINIMUM_TEMPERATURE_TO_EXIST	100+T0C
 #define FIRE_SPREAD_RADIOSITY_SCALE		0.85
 #define FIRE_CARBON_ENERGY_RELEASED	  500000 //Amount of heat released per mole of burnt carbon into the tile
-#define FIRE_PLASMA_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt plasma into the tile
+#define FIRE_PHORON_ENERGY_RELEASED	 3000000 //Amount of heat released per mole of burnt phoron into the tile
 #define FIRE_GROWTH_RATE			40000 //For small fires
 
 #define WATER_BOIL_TEMP 393 */
@@ -121,13 +121,13 @@
 #define CARBON_LIFEFORM_FIRE_RESISTANCE 200+T0C
 #define CARBON_LIFEFORM_FIRE_DAMAGE		4
 
-//Plasma fire properties
-#define PLASMA_MINIMUM_BURN_TEMPERATURE		100+T0C
-#define PLASMA_FLASHPOINT 					246+T0C
-#define PLASMA_UPPER_TEMPERATURE			1370+T0C
-#define PLASMA_MINIMUM_OXYGEN_NEEDED		2
-#define PLASMA_MINIMUM_OXYGEN_PLASMA_RATIO	20
-#define PLASMA_OXYGEN_FULLBURN				10
+//Phoron fire properties
+#define PHORON_MINIMUM_BURN_TEMPERATURE		100+T0C
+#define PHORON_FLASHPOINT 					246+T0C
+#define PHORON_UPPER_TEMPERATURE			1370+T0C
+#define PHORON_MINIMUM_OXYGEN_NEEDED		2
+#define PHORON_MINIMUM_OXYGEN_PHORON_RATIO	20
+#define PHORON_OXYGEN_FULLBURN				10
 
 #define T0C 273.15					// 0degC
 #define T20C 293.15					// 20degC
@@ -206,7 +206,7 @@ var/MAX_EXPLOSION_RANGE = 14
 
 #define BLOCK_GAS_SMOKE_EFFECT 8192	// blocks the effect that chemical clouds would have on a mob --glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
 #define ONESIZEFITSALL 8192
-#define PLASMAGUARD 16384			//Does not get contaminated by plasma.
+#define PHORONGUARD 16384			//Does not get contaminated by phoron.
 
 #define	NOREACT		16384 			//Reagents dont' react inside this container.
 
@@ -228,6 +228,7 @@ var/MAX_EXPLOSION_RANGE = 14
 #define HIDESUITSTORAGE	2	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDEJUMPSUIT	4	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDESHOES		8	//APPLIES ONLY TO THE EXTERIOR SUIT!!
+#define HIDETAIL 		16	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDEMASK	1	//APPLIES ONLY TO HELMETS/MASKS!!
 #define HIDEEARS	2	//APPLIES ONLY TO HELMETS/MASKS!! (ears means headsets and such)
 #define HIDEEYES	4	//APPLIES ONLY TO HELMETS/MASKS!! (eyes means glasses)
@@ -451,6 +452,8 @@ var/list/global_mutations = list() // list of hidden mutation things
 #define CANWEAKEN	2
 #define CANPARALYSE	4
 #define CANPUSH		8
+#define LEAPING		16
+#define PASSEMOTES	32      //Mob has a cortical borer or holders inside of it that need to see emotes.
 #define GODMODE		4096
 #define FAKEDEATH	8192	//Replaces stuff like changeling.changeling_fakedeath
 #define DISFIGURED	16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
@@ -557,7 +560,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 	"Atmospherics", "Security", "HoS Office", "Medbay",
 	"CMO Office", "Chemistry", "Research", "RD Office",
 	"Robotics", "HoP Office", "Library", "Chapel", "Theatre",
-	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics")
+	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics","Drone Fabrication")
 
 #define HOSTILE_STANCE_IDLE 1
 #define HOSTILE_STANCE_ALERT 2
@@ -733,18 +736,19 @@ var/list/RESTRICTED_CAMERA_NETWORKS = list( //Those networks can only be accesse
 #define NO_PAIN 8
 
 #define HAS_SKIN_TONE 16
-#define HAS_LIPS 32
-#define HAS_UNDERWEAR 64
-#define HAS_TAIL 128
+#define HAS_SKIN_COLOR 32
+#define HAS_LIPS 64
+#define HAS_UNDERWEAR 128
+#define HAS_TAIL 256
 
-#define IS_SLOW 256
-#define IS_PLANT 512
-#define IS_WHITELISTED 1024
+#define IS_SLOW 512
+#define IS_PLANT 1024
+#define IS_WHITELISTED 2048
 
-#define RAD_ABSORB 2048
-#define REQUIRE_LIGHT 4096
+#define RAD_ABSORB 4096
+#define REQUIRE_LIGHT 8192
 
-#define IS_SYNTHETIC 8192
+#define IS_SYNTHETIC 16384
 
 //Language flags.
 #define WHITELISTED 1  // Language is available if the speaker is whitelisted.

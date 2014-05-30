@@ -21,7 +21,7 @@
 										"gold"=0,
 										"silver"=0,
 										"diamond"=0,
-										"plasma"=0,
+										"phoron"=0,
 										"uranium"=0,
 										//"bananium"=0 No need to state what it can no longer hold
 										)
@@ -723,8 +723,8 @@
 			type = /obj/item/stack/sheet/mineral/silver
 		if("diamond")
 			type = /obj/item/stack/sheet/mineral/diamond
-		if("plasma")
-			type = /obj/item/stack/sheet/mineral/plasma
+		if("phoron")
+			type = /obj/item/stack/sheet/mineral/phoron
 		if("uranium")
 			type = /obj/item/stack/sheet/mineral/uranium
 		/*if("bananium")
@@ -771,9 +771,9 @@
 			if(src.resources["glass"] >= 3750)
 				var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(src.loc)
 				G.amount = round(src.resources["glass"] / G.perunit)
-			if(src.resources["plasma"] >= 2000)
-				var/obj/item/stack/sheet/mineral/plasma/G = new /obj/item/stack/sheet/mineral/plasma(src.loc)
-				G.amount = round(src.resources["plasma"] / G.perunit)
+			if(src.resources["phoron"] >= 2000)
+				var/obj/item/stack/sheet/mineral/phoron/G = new /obj/item/stack/sheet/mineral/phoron(src.loc)
+				G.amount = round(src.resources["phoron"] / G.perunit)
 			if(src.resources["silver"] >= 2000)
 				var/obj/item/stack/sheet/mineral/silver/G = new /obj/item/stack/sheet/mineral/silver(src.loc)
 				G.amount = round(src.resources["silver"] / G.perunit)
@@ -806,8 +806,8 @@
 			material = "silver"
 		if(/obj/item/stack/sheet/mineral/diamond)
 			material = "diamond"
-		if(/obj/item/stack/sheet/mineral/plasma)
-			material = "plasma"
+		if(/obj/item/stack/sheet/mineral/phoron)
+			material = "phoron"
 		if(/obj/item/stack/sheet/metal)
 			material = "metal"
 		if(/obj/item/stack/sheet/glass)

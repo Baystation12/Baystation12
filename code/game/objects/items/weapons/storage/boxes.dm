@@ -132,7 +132,19 @@
 		new /obj/item/ammo_casing/shotgun/blank(src)
 		new /obj/item/ammo_casing/shotgun/blank(src)
 
+/obj/item/weapon/storage/box/beanbags
+	name = "box of beanbag shells"
+	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 
+	New()
+		..()
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
+		new /obj/item/ammo_casing/shotgun/beanbag(src)
 
 /obj/item/weapon/storage/box/flashbangs
 	name = "box of flashbangs (WARNING)"
@@ -410,7 +422,7 @@
 
 /obj/item/weapon/storage/box/matches
 	name = "matchbox"
-	desc = "A small box of Almost But Not Quite Plasma Premium Matches."
+	desc = "A small box of 'Space-Proof' premium matches."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"

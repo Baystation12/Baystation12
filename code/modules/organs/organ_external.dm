@@ -858,6 +858,11 @@ obj/item/weapon/organ/New(loc, mob/living/carbon/human/H)
 			else
 				base.Blend(rgb(-H.s_tone,  -H.s_tone,  -H.s_tone), ICON_SUBTRACT)
 
+	if(base)
+		//Changing limb's skin color to match owner
+		if(!H.species || H.species.flags & HAS_SKIN_COLOR)
+			base.Blend(rgb(H.r_skin, H.g_skin, H.b_skin), ICON_ADD)
+
 	icon = base
 	dir = SOUTH
 	src.transform = turn(src.transform, rand(70,130))

@@ -68,6 +68,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggleattacklogs,
 	/client/proc/toggledebuglogs,
 	/client/proc/toggleghostwriters,
+	/client/proc/toggledrones,
 	/datum/admins/proc/show_skills,
 	/client/proc/check_customitem_activity,
 	/client/proc/man_up,
@@ -548,9 +549,14 @@ var/list/admin_verbs_mentor = list(
 	set category = "Fun"
 	set name = "Give Spell"
 	set desc = "Gives a spell to a mob."
-	var/obj/effect/proc_holder/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spells
+	var/list/spell_names = list()
+	for(var/v in spells)
+	//	"/obj/effect/proc_holder/spell/" 30 symbols ~Intercross21
+		spell_names.Add(copytext("[v]", 31, 0))
+	var/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spell_names
 	if(!S) return
-	T.spell_list += new S
+	var/path = text2path("/obj/effect/proc_holder/spell/[S]")
+	T.spell_list += new path
 	feedback_add_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] the spell [S].")
 	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the spell [S].", 1)
@@ -559,9 +565,14 @@ var/list/admin_verbs_mentor = list(
 	set category = "Fun"
 	set name = "Give Disease (old)"
 	set desc = "Gives a (tg-style) Disease to a mob."
-	var/datum/disease/D = input("Choose the disease to give to that guy", "ACHOO") as null|anything in diseases
+	var/list/disease_names = list()
+	for(var/v in diseases)
+	//	"/datum/disease/" 15 symbols ~Intercross
+		disease_names.Add(copytext("[v]", 16, 0))
+	var/datum/disease/D = input("Choose the disease to give to that guy", "ACHOO") as null|anything in disease_names
 	if(!D) return
-	T.contract_disease(new D, 1)
+	var/path = text2path("/datum/disease/[D]")
+	T.contract_disease(new path, 1)
 	feedback_add_details("admin_verb","GD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] the disease [D].")
 	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the disease [D].", 1)
@@ -712,6 +723,12 @@ var/list/admin_verbs_mentor = list(
 		M.g_eyes = hex2num(copytext(new_eyes, 4, 6))
 		M.b_eyes = hex2num(copytext(new_eyes, 6, 8))
 
+	var/new_skin = input("Please select body color. This is for Tajaran, Unathi, and Skrell only!", "Character Generation") as color
+	if(new_skin)
+		M.r_skin = hex2num(copytext(new_skin, 2, 4))
+		M.g_skin = hex2num(copytext(new_skin, 4, 6))
+		M.b_skin = hex2num(copytext(new_skin, 6, 8))
+
 	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
 
 	if (new_tone)
@@ -786,6 +803,19 @@ var/list/admin_verbs_mentor = list(
 			src << "<b>Enabled ghost writers.</b>"
 			message_admins("Admin [key_name_admin(usr)] has enabled ghost writers.", 1)
 
+/client/proc/toggledrones()
+	set name = "Toggle maintenance drones"
+	set category = "Server"
+	if(!holder)	return
+	if(config)
+		if(config.allow_drone_spawn)
+			config.allow_drone_spawn = 0
+			src << "<b>Disallowed maint drones.</b>"
+			message_admins("Admin [key_name_admin(usr)] has disabled maint drones.", 1)
+		else
+			config.allow_drone_spawn = 1
+			src << "<b>Enabled maint drones.</b>"
+			message_admins("Admin [key_name_admin(usr)] has enabled maint drones.", 1)
 
 /client/proc/toggledebuglogs()
 	set name = "Toggle Debug Log Messages"

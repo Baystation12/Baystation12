@@ -16,7 +16,7 @@
 	var/locked = 1
 
 	attack_self(mob/user as mob)
-		if (!ishuman(user))
+		if (!ishuman(user) && !istype(user,/mob/living/silicon/robot/drone))
 			return ..(user)
 
 		var/mob/living/carbon/human/H = user
@@ -66,13 +66,17 @@
 			return
 
 		if (href_list["login"])
-			var/obj/item/I = usr.get_active_hand()
-			if (istype(I, /obj/item/device/pda))
-				var/obj/item/device/pda/pda = I
-				I = pda.id
-			if (I && src.check_access(I))
+			if(istype(usr,/mob/living/silicon))
 				src.locked = 0
-				src.last_configurator = I:registered_name
+				src.last_configurator = usr.name
+			else
+				var/obj/item/I = usr.get_active_hand()
+				if (istype(I, /obj/item/device/pda))
+					var/obj/item/device/pda/pda = I
+					I = pda.id
+				if (I && src.check_access(I))
+					src.locked = 0
+					src.last_configurator = I:registered_name
 
 		if (locked)
 			return

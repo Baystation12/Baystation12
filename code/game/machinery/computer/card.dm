@@ -359,7 +359,7 @@
 					t1 += data_core.get_manifest(0) // make it monochrome
 
 				P.info = t1
-				P.name = "paper- 'Crew Manifest'"
+				P.name = text("Crew Manifest ([])", worldtime2text())
 				printing = null
 	if (modify)
 		modify.name = text("[modify.registered_name]'s ID Card ([modify.assignment])")

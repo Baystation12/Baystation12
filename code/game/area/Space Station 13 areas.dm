@@ -936,6 +936,11 @@ var/list/ghostteleportlocs = list()
 //Engineering
 
 /area/engine
+
+	drone_fabrication
+		name = "\improper Drone Fabrication"
+		icon_state = "engine"
+
 	engine_smes
 		name = "Engineering SMES"
 		icon_state = "engine_smes"
@@ -955,6 +960,10 @@ var/list/ghostteleportlocs = list()
 
 	engineering_monitoring
 		name = "\improper Engineering Monitoring Room"
+		icon_state = "engine_monitoring"
+
+	atmos_monitoring
+		name = "\improper Atmospherics Monitoring Room"
 		icon_state = "engine_monitoring"
 
 	engineering
@@ -977,8 +986,16 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Engineering Hallway"
 		icon_state = "engine_hallway"
 
+	engine_hallway
+		name = "\improper Engine Room Hallway"
+		icon_state = "engine_hallway"
+
 	engine_eva
 		name = "\improper Engine EVA"
+		icon_state = "engine_eva"
+
+	engine_eva_maintenance
+		name = "\improper Engine EVA Maintenance"
 		icon_state = "engine_eva"
 
 	workshop
@@ -1344,41 +1361,41 @@ var/list/ghostteleportlocs = list()
 	name = "Hydroponics"
 	icon_state = "hydro"
 
-//Toxins
+//rnd (Research and Development
 
-/area/toxins/lab
+/area/rnd/lab
 	name = "\improper Research and Development"
 	icon_state = "toxlab"
 
-/area/toxins/hallway
+/area/rnd/hallway
 	name = "\improper Research Lab"
 	icon_state = "toxlab"
 
-/area/toxins/rdoffice
+/area/rnd/rdoffice
 	name = "\improper Research Director's Office"
 	icon_state = "head_quarters"
 
-/area/toxins/supermatter
+/area/rnd/supermatter
 	name = "\improper Supermatter Lab"
 	icon_state = "toxlab"
 
-/area/toxins/xenobiology
+/area/rnd/xenobiology
 	name = "\improper Xenobiology Lab"
 	icon_state = "toxlab"
 
-/area/toxins/storage
+/area/rnd/storage
 	name = "\improper Toxins Storage"
 	icon_state = "toxstorage"
 
-/area/toxins/test_area
+/area/rnd/test_area
 	name = "\improper Toxins Test Area"
 	icon_state = "toxtest"
 
-/area/toxins/mixing
+/area/rnd/mixing
 	name = "\improper Toxins Mixing Room"
 	icon_state = "toxmix"
 
-/area/toxins/misc_lab
+/area/rnd/misc_lab
 	name = "\improper Miscellaneous Research"
 	icon_state = "toxmisc"
 
@@ -1894,7 +1911,7 @@ var/list/the_station_areas = list (
 	/area/quartermaster,
 	/area/janitor,
 	/area/hydroponics,
-	/area/toxins,
+	/area/rnd,
 	/area/storage,
 	/area/construction,
 	/area/ai_monitored/storage/eva, //do not try to simplify to "/area/ai_monitored" --rastaf0

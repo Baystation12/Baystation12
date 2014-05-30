@@ -154,6 +154,11 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 		else
 			preview_icon.Blend(rgb(-H.s_tone,  -H.s_tone,  -H.s_tone), ICON_SUBTRACT)
 
+	// Skin color
+	if(H.species.flags & HAS_SKIN_TONE)
+		if(!H.species || H.species.flags & HAS_SKIN_COLOR)
+			preview_icon.Blend(rgb(H.r_skin, H.g_skin, H.b_skin), ICON_ADD)
+
 	var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = H.species ? H.species.eyes : "eyes_s")
 
 	eyes_s.Blend(rgb(H.r_eyes, H.g_eyes, H.b_eyes), ICON_ADD)
@@ -210,7 +215,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 			clothes_s.Blend(new /icon('icons/mob/feet.dmi', "brown"), ICON_UNDERLAY)
 			clothes_s.Blend(new /icon('icons/mob/suit.dmi', "labcoat_open"), ICON_OVERLAY)
 		if("Scientist")
-			clothes_s = new /icon('icons/mob/uniform.dmi', "toxinswhite_s")
+			clothes_s = new /icon('icons/mob/uniform.dmi', "rndswhite_s")
 			clothes_s.Blend(new /icon('icons/mob/feet.dmi', "white"), ICON_UNDERLAY)
 			clothes_s.Blend(new /icon('icons/mob/suit.dmi', "labcoat_tox_open"), ICON_OVERLAY)
 		if("Chemist")

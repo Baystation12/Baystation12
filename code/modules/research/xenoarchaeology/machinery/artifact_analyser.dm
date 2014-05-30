@@ -135,16 +135,16 @@
 			Structure is composed of a carbo-titanium alloy with interlaced reinforcing energy fields, and the contained liquid \
 			resembles proto-plasmic residue supportive of single cellular developmental conditions."
 		if(/obj/machinery/power/supermatter)
-			return "Super dense plasma clump - Appears to have been shaped or hewn, structure is composed of matter 2000% denser than ordinary carbon matter residue.\
-			Potential application as unrefined plasma source."
+			return "Super dense phoron clump - Appears to have been shaped or hewn, structure is composed of matter 2000% denser than ordinary carbon matter residue.\
+			Potential application as unrefined phoron source."
 		if(/obj/machinery/power/supermatter)
-			return "Super dense plasma clump - Appears to have been shaped or hewn, structure is composed of matter 2000% denser than ordinary carbon matter residue.\
-			Potential application as unrefined plasma source."
+			return "Super dense phoron clump - Appears to have been shaped or hewn, structure is composed of matter 2000% denser than ordinary carbon matter residue.\
+			Potential application as unrefined phoron source."
 		if(/obj/structure/constructshell)
 			return "Tribal idol - Item resembles statues/emblems built by superstitious pre-warp civilisations to honour their gods. Material appears to be a \
 			rock/plastcrete composite."
 		if(/obj/machinery/giga_drill)
-			return "Automated mining drill - structure composed of titanium-carbide alloy, with tip and drill lines edged in an alloy of diamond and plasma."
+			return "Automated mining drill - structure composed of titanium-carbide alloy, with tip and drill lines edged in an alloy of diamond and phoron."
 		if(/obj/structure/cult/pylon)
 			return "Tribal pylon - Item resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."
 		if(/obj/mecha/working/hoverpod)
