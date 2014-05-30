@@ -560,8 +560,7 @@
 		if(toxins_pp > safe_toxins_max)
 			var/ratio = (poison/safe_toxins_max) * 10
 			if(reagents)
-				//TODO: Fix Ravensdale's shit, make toxins toxins again instead of phoron.
-				reagents.add_reagent("phoron", Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
+				reagents.add_reagent("toxin", Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
 			phoron_alert = max(phoron_alert, 1)
 		else
 			phoron_alert = 0
