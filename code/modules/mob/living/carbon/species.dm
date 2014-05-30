@@ -19,7 +19,7 @@
 
 	var/breath_type = "oxygen"   // Non-oxygen gas breathed, if any.
 	var/poison_type = "phoron"   // Poisonous air.
-	var/exhale_type = "C02"      // Exhaled gas type.
+	var/exhale_type = "carbon_dioxide"      // Exhaled gas type.
 
 	var/cold_level_1 = 260  // Cold damage level 1 below this point.
 	var/cold_level_2 = 200  // Cold damage level 2 below this point.

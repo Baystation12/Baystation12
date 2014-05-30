@@ -460,7 +460,7 @@
 				inhaling = breath.nitrogen
 			if("phoron")
 				inhaling = breath.phoron
-			if("C02")
+			if("carbon_dioxide")
 				inhaling = breath.carbon_dioxide
 			else
 				inhaling = breath.oxygen
@@ -470,13 +470,13 @@
 				poison = breath.oxygen
 			if("nitrogen")
 				poison = breath.nitrogen
-			if("C02")
+			if("carbon_dioxide")
 				poison = breath.carbon_dioxide
 			else
 				poison = breath.phoron
 
 		switch(species.exhale_type)
-			if("C02")
+			if("carbon_dioxide")
 				exhaling = breath.carbon_dioxide
 			if("oxygen")
 				exhaling = breath.oxygen
@@ -521,7 +521,7 @@
 				breath.nitrogen -= inhaled_gas_used
 			if("phoron")
 				breath.phoron -= inhaled_gas_used
-			if("C02")
+			if("carbon_dioxide")
 				breath.carbon_dioxide-= inhaled_gas_used
 			else
 				breath.oxygen -= inhaled_gas_used
@@ -534,7 +534,7 @@
 					breath.nitrogen += inhaled_gas_used
 				if("phoron")
 					breath.phoron += inhaled_gas_used
-				if("C02")
+				if("CO2")
 					breath.carbon_dioxide += inhaled_gas_used
 
 		// Too much exhaled gas in the air
