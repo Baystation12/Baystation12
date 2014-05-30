@@ -526,7 +526,7 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 				inhaling = breath.nitrogen
 			if("plasma")
 				inhaling = breath.toxins
-			if("C02")
+			if("carbon_dioxide")
 				inhaling = breath.carbon_dioxide
 			else
 				inhaling = breath.oxygen
@@ -536,13 +536,13 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 				poison = breath.oxygen
 			if("nitrogen")
 				poison = breath.nitrogen
-			if("C02")
+			if("carbon_dioxide")
 				poison = breath.carbon_dioxide
 			else
 				poison = breath.toxins
 
 		switch(species.exhale_type)
-			if("C02")
+			if("carbon_dioxide")
 				exhaling = breath.carbon_dioxide
 			if("oxygen")
 				exhaling = breath.oxygen
@@ -585,9 +585,9 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 		switch(species.breath_type)
 			if("nitrogen")
 				breath.nitrogen -= inhaled_gas_used
-			if("phoron")
+			if("plasma")
 				breath.toxins -= inhaled_gas_used
-			if("C02")
+			if("carbon_dioxide")
 				breath.carbon_dioxide-= inhaled_gas_used
 			else
 				breath.oxygen -= inhaled_gas_used
@@ -600,7 +600,7 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 					breath.nitrogen += inhaled_gas_used
 				if("plamsa")
 					breath.toxins += inhaled_gas_used
-				if("C02")
+				if("carbon_dioxide")
 					breath.carbon_dioxide += inhaled_gas_used
 
 		// Too much exhaled gas in the air
