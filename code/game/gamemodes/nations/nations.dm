@@ -114,7 +114,7 @@ datum/game_mode/nations
 				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
-			else if(H.mind.assigned_role == "Captain")
+			else if(H.mind.assigned_role in command_positions)
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 				H.hud_updateflag |= 1 << SPECIALROLE_HUD
 				H.verbs += /mob/proc/respawn_self
@@ -360,7 +360,7 @@ datum/game_mode/nations
 			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
-		else if(H.mind.assigned_role == "Captain")
+		else if(H.mind.assigned_role in command_positions)
 			H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 			H.hud_updateflag |= 1 << SPECIALROLE_HUD
 			H.verbs += /mob/proc/respawn_self
