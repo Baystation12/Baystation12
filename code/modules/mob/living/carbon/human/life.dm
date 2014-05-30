@@ -1985,7 +1985,7 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 					holder.icon_state = "mutineer"
 			switch(mind.nation.name)
 				if("Atmosia")
-					holder.icon_state = "hudcommand"
+					holder.icon_state = "hudatmosia"
 				if("Brigston")
 					holder.icon_state = "hudbrigston"
 				if("Cargonia")
