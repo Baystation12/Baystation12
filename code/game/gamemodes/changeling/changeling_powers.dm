@@ -434,6 +434,7 @@
 
 
 //Fake our own death and fully heal. You will appear to be dead but regenerate fully after a short delay.
+/*
 /mob/verb/honk()
 	set name = "OH HOLY FUCK"
 	set category = "Debug"
@@ -445,7 +446,7 @@
 		if(M == src)
 			yes = 1
 	usr << "[yes ? "\blue" : "\red"] You are [yes ? "" : "not "]in the mob list"
-
+*/
 /mob/proc/changeling_returntolife()
 	set category = "Changeling"
 	set name = "Return To Life (20)"
