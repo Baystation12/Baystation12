@@ -16,6 +16,7 @@
 	var/implant=null
 	var/ckey=null
 	var/mind=null
+	var/languages=null
 
 /datum/dna2/record/proc/GetData()
 	var/list/ser=list("data" = null, "owner" = null, "label" = null, "type" = null, "ue" = 0)
@@ -220,6 +221,7 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "scanner"
 	density = 1
+	circuit = /obj/item/weapon/circuitboard/scan_consolenew
 	var/selected_ui_block = 1.0
 	var/selected_ui_subblock = 1.0
 	var/selected_se_block = 1.0
@@ -241,32 +243,6 @@
 	var/waiting_for_user_input=0 // Fix for #274 (Mash create block injector without answering dialog to make unlimited injectors) - N3X
 
 /obj/machinery/computer/scan_consolenew/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			if (src.stat & BROKEN)
-				user << "\blue The broken glass falls out."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				new /obj/item/weapon/shard( src.loc )
-				var/obj/item/weapon/circuitboard/scan_consolenew/M = new /obj/item/weapon/circuitboard/scan_consolenew( A )
-				for (var/obj/C in src)
-					C.loc = src.loc
-				A.circuit = M
-				A.state = 3
-				A.icon_state = "3"
-				A.anchored = 1
-				del(src)
-			else
-				user << "\blue You disconnect the monitor."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				var/obj/item/weapon/circuitboard/scan_consolenew/M = new /obj/item/weapon/circuitboard/scan_consolenew( A )
-				for (var/obj/C in src)
-					C.loc = src.loc
-				A.circuit = M
-				A.state = 4
-				A.icon_state = "4"
-				A.anchored = 1
-				del(src)
 	if (istype(I, /obj/item/weapon/disk/data)) //INSERT SOME diskS
 		if (!src.disk)
 			user.drop_item()
@@ -276,7 +252,7 @@
 			nanomanager.update_uis(src) // update all UIs attached to src
 			return
 	else
-		src.attack_hand(user)
+		..()
 	return
 
 /obj/machinery/computer/scan_consolenew/ex_act(severity)
@@ -339,13 +315,6 @@
 	I.buf = buffer
 	return 1
 
-/obj/machinery/computer/scan_consolenew/attackby(obj/item/W as obj, mob/user as mob)
-	if ((istype(W, /obj/item/weapon/disk/data)) && (!src.disk))
-		user.drop_item()
-		W.loc = src
-		src.disk = W
-		user << "You insert [W]."
-		nanomanager.update_uis(src) // update all UIs attached to src
 /*
 /obj/machinery/computer/scan_consolenew/process() //not really used right now
 	if(stat & (NOPOWER|BROKEN))

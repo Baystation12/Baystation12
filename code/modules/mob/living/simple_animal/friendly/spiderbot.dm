@@ -19,6 +19,8 @@
 	icon_state = "spiderbot-chassis"
 	icon_living = "spiderbot-chassis"
 	icon_dead = "spiderbot-smashed"
+	universal_speak = 1 //Temp until these are rewritten.
+
 	wander = 0
 
 	health = 10
@@ -33,9 +35,8 @@
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
 
+	var/emagged = 0
 	var/obj/item/held_item = null //Storage for single item they can hold.
-	var/emagged = 0               //IS WE EXPLODEN?
-	var/syndie = 0                //IS WE SYNDICAT? (currently unused)
 	speed = -1                    //Spiderbots gotta go fast.
 	//pass_flags = PASSTABLE      //Maybe griefy?
 	small = 1
