@@ -24,6 +24,7 @@
 /mob/living/carbon/human
 	var/oxygen_alert = 0
 	var/phoron_alert = 0
+	var/co2_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
 	var/prev_gender = null // Debug for plural genders
@@ -462,13 +463,16 @@
 		var/exhaling
 		var/poison
 		var/no_exhale
+		
+		var/failed_inhale = 0
+		var/failed_exhale = 0
 
 		switch(species.breath_type)
 			if("nitrogen")
 				inhaling = breath.nitrogen
 			if("phoron")
 				inhaling = breath.phoron
-			if("C02")
+			if("carbon_dioxide")
 				inhaling = breath.carbon_dioxide
 			else
 				inhaling = breath.oxygen
@@ -478,13 +482,13 @@
 				poison = breath.oxygen
 			if("nitrogen")
 				poison = breath.nitrogen
-			if("C02")
+			if("carbon_dioxide")
 				poison = breath.carbon_dioxide
 			else
 				poison = breath.phoron
 
 		switch(species.exhale_type)
-			if("C02")
+			if("carbon_dioxide")
 				exhaling = breath.carbon_dioxide
 			if("oxygen")
 				exhaling = breath.oxygen
@@ -499,6 +503,7 @@
 		var/toxins_pp = (poison/breath.total_moles())*breath_pressure
 		var/exhaled_pp = (exhaling/breath.total_moles())*breath_pressure
 
+		// Not enough to breathe
 		if(inhale_pp < safe_pressure_min)
 			if(prob(20))
 				spawn(0) emote("gasp")
@@ -506,27 +511,30 @@
 				var/ratio = safe_pressure_min/inhale_pp
 
 				 // Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
+				 // The hell? By definition ratio > 1, and HUMAN_MAX_OXYLOSS = 1... why do we even have this?
 				adjustOxyLoss(min(5*ratio, HUMAN_MAX_OXYLOSS))
-				failed_last_breath = 1
+				failed_inhale = 1
 				inhaled_gas_used = inhaling*ratio/6
 
 			else
 
 				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
-				failed_last_breath = 1
+				failed_inhale = 1
 
 			oxygen_alert = max(oxygen_alert, 1)
 
 		else
 			// We're in safe limits
-			failed_last_breath = 0
-			adjustOxyLoss(-5)
 			inhaled_gas_used = inhaling/6
 			oxygen_alert = 0
 
 		switch(species.breath_type)
 			if("nitrogen")
 				breath.nitrogen -= inhaled_gas_used
+			if("phoron")
+				breath.phoron -= inhaled_gas_used
+			if("carbon_dioxide")
+				breath.carbon_dioxide-= inhaled_gas_used
 			else
 				breath.oxygen -= inhaled_gas_used
 
@@ -538,35 +546,40 @@
 					breath.nitrogen += inhaled_gas_used
 				if("phoron")
 					breath.phoron += inhaled_gas_used
-				if("C02")
+				if("CO2")
 					breath.carbon_dioxide += inhaled_gas_used
 
-		// CO2 does not affect failed_last_breath. So if there was enough oxygen in the air but too much co2,
-		// this will hurt you, but only once per 4 ticks, instead of once per tick.
-
+		// Too much exhaled gas in the air
 		if(exhaled_pp > safe_exhaled_max)
-
-			// If it's the first breath with too much CO2 in it, lets start a counter,
-			// then have them pass out after 12s or so.
-			if(!co2overloadtime)
-				co2overloadtime = world.time
-
-			else if(world.time - co2overloadtime > 120)
-
-				// Lets hurt em a little, let them know we mean business
-				Paralyse(3)
-				adjustOxyLoss(3)
-
-				// They've been in here 30s now, lets start to kill them for their own good!
-				if(world.time - co2overloadtime > 300)
-					adjustOxyLoss(8)
-
-			// Lets give them some chance to know somethings not right though I guess.
-			if(prob(20))
-				spawn(0) emote("cough")
-
+			if (!co2_alert|| prob(15))
+				var/word = pick("extremely dizzy","short of breath","faint","confused")
+				src << "\red <b>You feel [word].</b>"
+			
+			adjustOxyLoss(HUMAN_MAX_OXYLOSS)
+			co2_alert = 1
+			failed_exhale = 1
+			
+		else if(exhaled_pp > safe_exhaled_max * 0.7)
+			if (!co2_alert || prob(1))
+				var/word = pick("dizzy","short of breath","faint","momentarily confused")
+				src << "\red You feel [word]."
+			
+			//scale linearly from 0 to 1 between safe_exhaled_max and safe_exhaled_max*0.7
+			var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
+			
+			//give them some oxyloss, up to the limit - we don't want people falling unconcious due to CO2 alone until they're pretty close to safe_exhaled_max.
+			if (getOxyLoss() < 50*ratio)
+				adjustOxyLoss(HUMAN_MAX_OXYLOSS)
+			co2_alert = 1
+			failed_exhale = 1
+			
+		else if(exhaled_pp > safe_exhaled_max * 0.6)
+			if (prob(0.3))
+				var/word = pick("a little dizzy","short of breath")
+				src << "\red You feel [word]."
+			
 		else
-			co2overloadtime = 0
+			co2_alert = 0
 
 		// Too much poison in the air.
 		if(toxins_pp > safe_toxins_max)
@@ -598,8 +611,16 @@
 					if(prob(20))
 						spawn(0) emote(pick("giggle", "laugh"))
 				SA.moles = 0
-
-		if( (abs(310.15 - breath.temperature) > 50) && !(COLD_RESISTANCE in mutations)) // Hot air hurts :(
+		
+		// Were we able to breathe?
+		if (failed_inhale || failed_exhale)
+			failed_last_breath = 1
+		else
+			failed_last_breath = 0
+			adjustOxyLoss(-5)
+		
+		// Hot air hurts :(
+		if( (abs(310.15 - breath.temperature) > 50) && !(COLD_RESISTANCE in mutations)) 
 
 			if(status_flags & GODMODE)
 				return 1
