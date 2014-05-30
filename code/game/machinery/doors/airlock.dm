@@ -1348,8 +1348,6 @@ About the new airlock wires panel:
 		airlockIndexToFlag = wire_assignments[2]
 		airlockIndexToWireColor = wire_assignments[3]
 		airlockWireColorToIndex = wire_assignments[4]
-
-/proc/CreateRandomAirlockWires()
 	
 	if(src.closeOtherId != null)
 		spawn (5)
