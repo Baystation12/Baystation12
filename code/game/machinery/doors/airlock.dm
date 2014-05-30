@@ -1330,8 +1330,11 @@ About the new airlock wires panel:
 	..()
 	return
 
-/obj/machinery/door/airlock/New()
-	..()
+/obj/machinery/door/airlock/New(var/newloc, var/secured=-1)
+	..(newloc)
+	
+	if (secured != -1)
+		secured_wires = secured
 	
 	//wires
 	if (!secured_wires)
