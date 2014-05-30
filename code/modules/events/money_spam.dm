@@ -15,6 +15,11 @@
 				break
 
 /datum/event/pda_spam/tick()
+	if(world.time > last_spam_time + 3000)
+		//if there's no spam managed to get to receiver for five minutes, give up
+		kill()
+		return
+
 	if(!useMS || !useMS.active)
 		useMS = null
 		pick_message_server()
@@ -113,6 +118,3 @@
 
 			if(L)
 				L << "\icon[P] <b>Message from [sender] (Unknown / spam?), </b>\"[message]\" (Unable to Reply)"
-	else if(world.time > last_spam_time + 3000)
-		//if there's no spam managed to get to receiver for five minutes, give up
-		kill()
