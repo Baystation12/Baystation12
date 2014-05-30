@@ -46,7 +46,6 @@
 
 	var/grav_pulling = 0
 	var/pull_radius = 13
-	var/grav_multiplier = 1
 
 	var/emergency_issued = 0
 
@@ -79,6 +78,7 @@
 
 		gasefficency = 0.125
 
+		pull_radius = 5
 		explosion_power = 3 //3,6,9,12? Or is that too small?
 
 
