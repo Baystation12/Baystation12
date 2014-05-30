@@ -289,6 +289,7 @@
 #include "code\game\gamemodes\mutiny\directives\research_to_ripleys_directive.dm"
 #include "code\game\gamemodes\mutiny\directives\tau_ceti_needs_women_directive.dm"
 #include "code\game\gamemodes\mutiny\directives\terminations_directive.dm"
+#include "code\game\gamemodes\nations\flag_pinpointer.dm"
 #include "code\game\gamemodes\nations\flagprocs.dm"
 #include "code\game\gamemodes\nations\nationdatums.dm"
 #include "code\game\gamemodes\nations\nations.dm"
@@ -1563,6 +1564,6 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\NSS Cyberiad- WIP.dmm"
+#include "maps\cyberiad.dmm"
 #include "maps\RandomZLevels\clown3.dmm"
 // END_INCLUDE

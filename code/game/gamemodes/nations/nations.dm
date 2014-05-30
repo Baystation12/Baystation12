@@ -66,6 +66,7 @@ datum/game_mode/nations
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
+				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in medical_positions)
@@ -74,6 +75,7 @@ datum/game_mode/nations
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
+				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in science_positions)
@@ -82,6 +84,7 @@ datum/game_mode/nations
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
+				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in security_positions)
@@ -90,6 +93,7 @@ datum/game_mode/nations
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
+				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in cargonians)
@@ -98,6 +102,7 @@ datum/game_mode/nations
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
+				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role in civilian_positions)
@@ -106,6 +111,7 @@ datum/game_mode/nations
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
+				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else if(H.mind.assigned_role == "Captain")
@@ -114,6 +120,7 @@ datum/game_mode/nations
 				H.verbs += /mob/proc/respawn_self
 				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
+				H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 				H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 				continue
 			else
@@ -135,7 +142,7 @@ datum/game_mode/nations
 				for(var/obj/item/flag/nation/cargo/C in flag_list)
 					C.startloc = get_turf(N)
 					continue
-			if("Command")
+			if("People's Republic of Commandzakstan")
 				for(var/obj/item/flag/nation/command/D in flag_list)
 					D.startloc = get_turf(N)
 					continue
@@ -293,9 +300,9 @@ datum/game_mode/nations
  */
 /hook/latespawn/proc/give_latejoiners_nations(var/mob/living/carbon/human/H)
 	var/datum/game_mode/nations/mode = get_nations_mode()
-	if (!mode) return
+	if (!mode) return 1
 
-	if(!mode.kickoff) return
+	if(!mode.kickoff) return 1
 
 	var/list/cargonians = list("Quartermaster","Cargo Technician","Shaft Miner")
 	if(H.mind)
@@ -305,6 +312,7 @@ datum/game_mode/nations
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
+			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role in medical_positions)
@@ -313,6 +321,7 @@ datum/game_mode/nations
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
+			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role in science_positions)
@@ -321,6 +330,7 @@ datum/game_mode/nations
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
+			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role in security_positions)
@@ -329,6 +339,7 @@ datum/game_mode/nations
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
+			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role in cargonians)
@@ -337,27 +348,30 @@ datum/game_mode/nations
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
+			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role in civilian_positions)
-			H.mind.nation = all_nations["Command"]
+			H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 			H.hud_updateflag |= 1 << SPECIALROLE_HUD
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
+			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else if(H.mind.assigned_role == "Captain")
-			H.mind.nation = all_nations["Command"]
+			H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 			H.hud_updateflag |= 1 << SPECIALROLE_HUD
 			H.verbs += /mob/proc/respawn_self
 			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
+			H.equip_or_collect(new /obj/item/weapon/pinpointer/advpinpointer/flag(H), slot_r_hand)
 			H << "You are now part of the great sovereign nation of [H.mind.nation.name]!"
 			return
 		else
 			message_admins("[H.name] with [H.mind.assigned_role] could not find any nation to assign!")
-			return
+			return 1
 
 
 /proc/get_nations_mode()
