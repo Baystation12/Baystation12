@@ -32,11 +32,19 @@
 
 //This generates the randomized airlock wire assignments for the game.
 /proc/RandomAirlockWires()
+	var/list/wire_assignments = CreateRandomAirlockWires()
+
+	globalAirlockIndexToFlag = wire_assignments[2]
+	globalAirlockIndexToWireColor = wire_assignments[3]
+	globalAirlockWireColorToIndex = wire_assignments[4]
+	return wire_assignments[1]
+
+/proc/CreateRandomAirlockWires()
 	//to make this not randomize the wires, just set index to 1 and increment it in the flag for loop (after doing everything else).
 	var/list/wires = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-	airlockIndexToFlag = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-	airlockIndexToWireColor = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-	airlockWireColorToIndex = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	var/airlockIndexToFlag = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	var/airlockIndexToWireColor = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	var/airlockWireColorToIndex = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 	var/flagIndex = 1
 	for (var/flag=1, flag<4096, flag+=flag)
 		var/valid = 0
@@ -54,7 +62,7 @@
 				airlockWireColorToIndex[colorIndex] = flagIndex
 				colorList -= colorIndex
 		flagIndex+=1
-	return wires
+	return list(wires, airlockIndexToFlag, airlockIndexToWireColor, airlockWireColorToIndex)
 
 /* Example:
 Airlock wires color -> flag are { 64, 128, 256, 2, 16, 4, 8, 32, 1 }.
@@ -93,6 +101,11 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	normalspeed = 1
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	var/hasShocked = 0 //Prevents multiple shocks from happening
+	var/secured_wires = 0	//for mapping use
+	var/list/airlockIndexToFlag
+	var/list/airlockWireColorToFlag
+	var/list/airlockIndexToWireColor
+	var/list/airlockWireColorToIndex
 
 /obj/machinery/door/airlock/command
 	name = "Airlock"
@@ -1319,6 +1332,22 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/New()
 	..()
+	
+	//wires
+	if (!secured_wires)
+		airlockWireColorToFlag = globalAirlockWireColorToFlag
+		airlockIndexToFlag = globalAirlockIndexToFlag
+		airlockIndexToWireColor = globalAirlockIndexToWireColor
+		airlockWireColorToIndex = globalAirlockWireColorToIndex
+	else
+		var/wire_assignments = CreateRandomAirlockWires()
+		airlockWireColorToFlag = wire_assignments[1]
+		airlockIndexToFlag = wire_assignments[2]
+		airlockIndexToWireColor = wire_assignments[3]
+		airlockWireColorToIndex = wire_assignments[4]
+
+/proc/CreateRandomAirlockWires()
+	
 	if(src.closeOtherId != null)
 		spawn (5)
 			for (var/obj/machinery/door/airlock/A in world)
