@@ -47,9 +47,11 @@ var/list/uplink_items = list()
 	var/list/job = null
 
 /datum/uplink_item/proc/spawn_item(var/turf/loc, var/obj/item/device/uplink/U)
-	U.uses -= max(cost, 0)
-	feedback_add_details("traitor_uplink_items_bought", name)
-	return new item(loc)
+	if(item)
+		U.uses -= max(cost, 0)
+		U.used_TC += cost
+		feedback_add_details("traitor_uplink_items_bought", name)
+		return new item(loc)
 
 /datum/uplink_item/proc/buy(var/obj/item/device/uplink/hidden/U, var/mob/user)
 
@@ -74,7 +76,12 @@ var/list/uplink_items = list()
 		if(ishuman(user))
 			var/mob/living/carbon/human/A = user
 			A.put_in_any_hand_if_possible(I)
-			U.purchase_log += "[user] ([user.ckey]) bought [name] for [cost]."
+
+			if(istype(I,/obj/item/weapon/storage/box/) && I.contents.len>0)
+				for(var/atom/o in I)
+					U.purchase_log += "<BIG>\icon[o]</BIG>"
+			else
+				U.purchase_log += "<BIG>\icon[I]</BIG>"
 
 		U.interact(user)
 		return 1
