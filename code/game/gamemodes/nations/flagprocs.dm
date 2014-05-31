@@ -55,17 +55,19 @@
 				else if(..())
 					captured = 0
 					anchored = 0
-					var/obj/item/flag/nation/N = locate(liege.flagpath)
+					var/obj/item/flag/nation/N = null
+					if(liege)
+						N = locate(liege.flagpath)
 					for(var/mob/living/carbon/human/H in player_list)
-						if(H.mind && H.mind.nation)
-							if(H.mind.nation == liege)
+						if(H.mind && H.mind.nation && liege && nation)
+							if(H.mind.nation.name == liege.name)	//we have to check based on the name var since they will be different instances of the nation datum
 								world << "Stop being liege message works"
-								H.mind.current << "<span class='warning'>You are no longer the liege of [nation.name]!</span>"
-							if(H.mind.nation == nation)
+								H.mind.current << "<span class='warning'>You are no longer the liege of [nation]!</span>"
+							if(H.mind.nation.name == nation.name)
 								world << "Stop being vassal message works"
-								H.mind.current << "<span class='warning'>You are no longer vassals of [liege.name]!</span>"
-
-					N.vassals -= nation
+								H.mind.current << "<span class='warning'>You are no longer vassals of [liege]!</span>"
+					if(N)
+						N.vassals -= nation
 					liege = null
 		else
 			user << "<span class='warning'>You are not part of a nation and therefore cannot pick up any flags!</span>"
@@ -85,21 +87,23 @@
 				F.vassals += nation
 				//Announce capture/vassalage here.
 				for(var/mob/living/carbon/human/H in player_list)
-					if(H.mind && H.mind.nation)
-						if(H.mind.nation==F.nation)
+					if(H.mind && H.mind.nation && F.nation && nation)
+						if(H.mind.nation.name == F.nation.name)
 							world << "Liege message works"
-							H.mind.current << "<span class='warning'>You have just vassalized [nation.name]! They must now obey any memebrs of your nation!</span>"
+							H.mind.current << "<span class='warning'>You have just vassalized [nation]! They must now obey any memebrs of your nation!</span>"
 							continue
-						if(H.mind.nation==nation)
+						if(H.mind.nation.name == nation.name)
 							world << "Vassalization message works"
-							H.mind.current << "<span class='warning'>You are now vassals of [liege.name]! You must now obey the orders of any of their members!</span>"
+							H.mind.current << "<span class='warning'>You are now vassals of [liege]! You must now obey the orders of any of their members!</span>"
 							continue
 				//Check for Victory
 				for(var/obj/item/flag/nation/N in flag_list)
-					if(F.nation == N.nation)
-						continue
-					if(N.captured && N.liege == F.nation)
-						continue
+					if(F.nation && N.nation)
+						if(F.nation.name == N.nation.name)
+							continue
+					if(N.liege && F.nation)
+						if(N.captured && N.liege.name == F.nation.name)
+							continue
 					else
 						return
 				ticker.mode.declare_completion(F.nation)
@@ -111,34 +115,34 @@
 	name = "Cargonia flag"
 	desc = "The flag of the independant, sovereign nation of Cargonia."
 	icon_state = "cargoflag"
-	nation = /datum/nations/cargonia
+	nation = new /datum/nations/cargonia
 
 /obj/item/flag/nation/med
 	name = "Medistan flag"
 	desc = "The flag of the independant, sovereign nation of Medistan."
 	icon_state = "medflag"
-	nation = /datum/nations/medistan
+	nation = new /datum/nations/medistan
 
 /obj/item/flag/nation/sec
 	name = "Brigston flag"
 	desc = "The flag of the independant, sovereign nation of Brigston."
 	icon_state = "secflag"
-	nation = /datum/nations/brigston
+	nation = new /datum/nations/brigston
 
 /obj/item/flag/nation/rnd
 	name = "Scientopia flag"
 	desc = "The flag of the independant, sovereign nation of Scientopia."
 	icon_state = "rndflag"
-	nation = /datum/nations/scientopia
+	nation = new /datum/nations/scientopia
 
 /obj/item/flag/nation/atmos
 	name = "Atmosia flag"
 	desc = "The flag of the independant, sovereign nation of Atmosia."
 	icon_state = "atmosflag"
-	nation = /datum/nations/atmosia
+	nation = new /datum/nations/atmosia
 
 /obj/item/flag/nation/command
 	name = "People's Republic of Commandzakstan flag"
 	desc = "The flag of the independant, sovereign nation of the People's Republic of Commandzakstan."
 	icon_state = "ntflag"
-	nation = /datum/nations/command
+	nation = new /datum/nations/command
