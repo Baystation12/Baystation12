@@ -8,7 +8,8 @@ var/list/swing_hit_sound = list('sound/weapons/genhit1.ogg', 'sound/weapons/genh
 var/list/hiss_sound = list('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
 var/list/page_sound = list('sound/effects/pageturn1.ogg', 'sound/effects/pageturn2.ogg','sound/effects/pageturn3.ogg')
 //var/list/gun_sound = list('sound/weapons/Gunshot.ogg', 'sound/weapons/Gunshot2.ogg','sound/weapons/Gunshot3.ogg','sound/weapons/Gunshot4.ogg')
-var/list/footsteps_sound = list('tauceti/sounds/effects/footsteps.ogg','tauceti/sounds/effects/footsteps2.ogg')
+//var/list/footsteps_sound = list('tauceti/sounds/effects/footsteps.ogg','tauceti/sounds/effects/footsteps2.ogg')
+var/list/footsteps_sound = list('tauceti/sounds/effects/tile1.wav','tauceti/sounds/effects/tile2.wav','tauceti/sounds/effects/tile3.wav','tauceti/sounds/effects/tile4.wav')
 
 /proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff)
 
@@ -34,13 +35,14 @@ var/list/footsteps_sound = list('tauceti/sounds/effects/footsteps.ogg','tauceti/
 var/const/FALLOFF_SOUNDS = 1
 var/const/SURROUND_CAP = 7
 
-/mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff)
+/mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, channel = 0)
 	if(!src.client || ear_deaf > 0)	return
 	soundin = get_sfx(soundin)
 
 	var/sound/S = sound(soundin)
 	S.wait = 0 //No queue
-	S.channel = 0 //Any channel
+	//S.channel = 0 //Any channel
+	S.channel = channel
 	S.volume = vol
 
 	if (vary)
