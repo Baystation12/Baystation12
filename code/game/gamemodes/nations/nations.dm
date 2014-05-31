@@ -4,8 +4,8 @@ datum/game_mode/nations
 	name = "nations"
 	config_tag = "nations"
 	required_players_secret = 25
-	var/const/waittime_l = 3000 //lower bound on time before intercept arrives (in tenths of seconds)
-	var/const/waittime_h = 6000 //upper bound on time before intercept arrives (in tenths of seconds)
+	var/const/waittime_l = 1200 //lower bound on time before intercept arrives (in tenths of seconds)
+	var/const/waittime_h = 3000 //upper bound on time before intercept arrives (in tenths of seconds)
 	var/kickoff = 0
 	var/victory = 0
 	var/list/cargonians = list("Quartermaster","Cargo Technician","Shaft Miner")
@@ -63,6 +63,8 @@ datum/game_mode/nations
 			if(H.mind.assigned_role in engineering_positions)
 				H.mind.nation = all_nations["Atmosia"]
 				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudatmosia")
+				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
 //				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -72,6 +74,8 @@ datum/game_mode/nations
 			else if(H.mind.assigned_role in medical_positions)
 				H.mind.nation = all_nations["Medistan"]
 				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudmedistan")
+				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
 //				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -81,6 +85,8 @@ datum/game_mode/nations
 			else if(H.mind.assigned_role in science_positions)
 				H.mind.nation = all_nations["Scientopia"]
 				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudscientopia")
+				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
 //				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -90,6 +96,8 @@ datum/game_mode/nations
 			else if(H.mind.assigned_role in security_positions)
 				H.mind.nation = all_nations["Brigston"]
 				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudbrigston")
+				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
 //				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -99,6 +107,8 @@ datum/game_mode/nations
 			else if(H.mind.assigned_role in cargonians)
 				H.mind.nation = all_nations["Cargonia"]
 				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcargonia")
+				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
 //				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -108,6 +118,8 @@ datum/game_mode/nations
 			else if(H.mind.assigned_role in civilian_positions)
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcommand")
+				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
 //				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -117,6 +129,8 @@ datum/game_mode/nations
 			else if(H.mind.assigned_role in command_positions)
 				H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 				H.hud_updateflag |= 1 << SPECIALROLE_HUD
+				var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcommand")
+				H.client.images += I
 				H.verbs += /mob/proc/respawn_self
 //				H.verbs += /mob/proc/nations_status
 				H.verbs -= /mob/living/verb/ghost
@@ -163,6 +177,7 @@ datum/game_mode/nations
 /datum/game_mode/nations/declare_completion(var/datum/nations/N)
 	world << "[N.name] has captured all of the station. All glory to [N.name]"
 	victory = 1
+
 
 /*
 /mob/proc/nations_status()
@@ -310,6 +325,8 @@ datum/game_mode/nations
 		if(H.mind.assigned_role in engineering_positions)
 			H.mind.nation = all_nations["Atmosia"]
 			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudatmosia")
+			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
 //			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -319,6 +336,8 @@ datum/game_mode/nations
 		else if(H.mind.assigned_role in medical_positions)
 			H.mind.nation = all_nations["Medistan"]
 			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudmedistan")
+			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
 //			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -328,6 +347,8 @@ datum/game_mode/nations
 		else if(H.mind.assigned_role in science_positions)
 			H.mind.nation = all_nations["Scientopia"]
 			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudscientopia")
+			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
 //			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -337,6 +358,8 @@ datum/game_mode/nations
 		else if(H.mind.assigned_role in security_positions)
 			H.mind.nation = all_nations["Brigston"]
 			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudbrigston")
+			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
 //			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -346,6 +369,8 @@ datum/game_mode/nations
 		else if(H.mind.assigned_role in cargonians)
 			H.mind.nation = all_nations["Cargonia"]
 			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcargonia")
+			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
 //			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -355,6 +380,8 @@ datum/game_mode/nations
 		else if(H.mind.assigned_role in civilian_positions)
 			H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcommand")
+			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
 //			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -364,6 +391,8 @@ datum/game_mode/nations
 		else if(H.mind.assigned_role in command_positions)
 			H.mind.nation = all_nations["People's Republic of Commandzakstan"]
 			H.hud_updateflag |= 1 << SPECIALROLE_HUD
+			var/I = image('icons/mob/hud.dmi', loc = H.mind.current, icon_state = "hudcommand")
+			H.client.images += I
 			H.verbs += /mob/proc/respawn_self
 //			H.verbs += /mob/proc/nations_status
 			H.verbs -= /mob/living/verb/ghost
@@ -373,7 +402,6 @@ datum/game_mode/nations
 		else
 			message_admins("[H.name] with [H.mind.assigned_role] could not find any nation to assign!")
 			return 1
-
 
 /proc/get_nations_mode()
 	if(!ticker || !istype(ticker.mode, /datum/game_mode/nations))
