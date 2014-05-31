@@ -283,5 +283,4 @@
 	for(var/turf/T in range(field_radius, src))
 		if(get_dist(src,T) == field_radius)
 			out.Add(T)
-			world << "	added"
 	return out
