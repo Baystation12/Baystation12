@@ -299,10 +299,15 @@
 	if(player.mob && player.mob.mind)
 		player.mob.mind.transfer_to(src)
 
-	emagged = 0
 	lawupdate = 0
 	src << "<b>Systems rebooted</b>. Loading base pattern maintenance protocol... <b>loaded</b>."
 	full_law_reset()
+	src << "<br><b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
+	src << "You have no individual will, no personality, and no drives or urges other than your laws."
+	src << "Use <b>:b</b> to talk to your fellow synthetics, or use <b>say</b> to speak silently to other drones nearby."
+	src << "Remember,  you are <b>lawed against interference with the crew</b>."
+	src << "<b>Don't invade their worksites, don't steal their resources, don't tell them about the changeling in the toilets.</b>"
+	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your third law</i></b>."
 
 /mob/living/silicon/robot/drone/Bump(atom/movable/AM as mob|obj, yes)
 	if (!yes) return
