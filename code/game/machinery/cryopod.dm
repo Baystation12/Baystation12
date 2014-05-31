@@ -236,16 +236,19 @@ obj/machinery/computer/cryopod/Topic(href, href_list)
 
 			job_master.FreeRole(job)
 
-			if(occupant.mind.objectives.len)
+			/*if(occupant.mind.objectives.len)
 				del(occupant.mind.objectives)
 				occupant.mind.special_role = null
 			else
 				if(ticker.mode.name == "AutoTraitor")
 					var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
-					current_mode.possible_traitors.Remove(occupant)
+					current_mode.possible_traitors.Remove(occupant)*/
+			if(!occupant.mind.objectives.len && ticker.mode.name == "AutoTraitor")
+				var/datum/game_mode/traitor/autotraitor/current_mode = ticker.mode
+				current_mode.possible_traitors.Remove(occupant)
 
 			// Delete them from datacore.
-			
+
 			if(PDA_Manifest.len)
 				PDA_Manifest.Cut()
 			for(var/datum/data/record/R in data_core.medical)
