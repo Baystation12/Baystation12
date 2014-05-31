@@ -1330,11 +1330,8 @@ About the new airlock wires panel:
 	..()
 	return
 
-/obj/machinery/door/airlock/New(var/newloc, var/secured=-1)
-	..(newloc)
-	
-	if (secured != -1)
-		secured_wires = secured
+/obj/machinery/door/airlock/New()
+	..()
 	
 	//wires
 	if (!secured_wires)
@@ -1343,11 +1340,7 @@ About the new airlock wires panel:
 		airlockIndexToWireColor = globalAirlockIndexToWireColor
 		airlockWireColorToIndex = globalAirlockWireColorToIndex
 	else
-		var/wire_assignments = CreateRandomAirlockWires()
-		airlockWireColorToFlag = wire_assignments[1]
-		airlockIndexToFlag = wire_assignments[2]
-		airlockIndexToWireColor = wire_assignments[3]
-		airlockWireColorToIndex = wire_assignments[4]
+		randomize_wires()
 	
 	if(src.closeOtherId != null)
 		spawn (5)
@@ -1355,7 +1348,13 @@ About the new airlock wires panel:
 				if(A.closeOtherId == src.closeOtherId && A != src)
 					src.closeOther = A
 					break
-
+	
+/obj/machinery/door/airlock/proc/randomize_wires()
+	var/wire_assignments = CreateRandomAirlockWires()
+	airlockWireColorToFlag = wire_assignments[1]
+	airlockIndexToFlag = wire_assignments[2]
+	airlockIndexToWireColor = wire_assignments[3]
+	airlockWireColorToIndex = wire_assignments[4]
 
 /obj/machinery/door/airlock/proc/prison_open()
 	src.locked = 0
