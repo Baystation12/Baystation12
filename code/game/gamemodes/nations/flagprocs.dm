@@ -89,11 +89,9 @@
 				for(var/mob/living/carbon/human/H in player_list)
 					if(H.mind && H.mind.nation && F.nation && nation)
 						if(H.mind.nation.name == F.nation.name)
-							world << "Liege message works"
 							H.mind.current << "<span class='warning'>You have just vassalized [nation]! They must now obey any memebrs of your nation!</span>"
 							continue
 						if(H.mind.nation.name == nation.name)
-							world << "Vassalization message works"
 							H.mind.current << "<span class='warning'>You are now vassals of [liege]! You must now obey the orders of any of their members!</span>"
 							continue
 				//Check for Victory
