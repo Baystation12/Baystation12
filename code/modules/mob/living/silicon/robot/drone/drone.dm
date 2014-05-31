@@ -12,6 +12,7 @@
 	braintype = "Robot"
 	lawupdate = 0
 	density = 0
+	small = 1
 
 	// We need to keep track of a few module items so we don't need to do list operations
 	// every time we need them. These get set in New() after the module is chosen.
@@ -298,8 +299,26 @@
 	if(player.mob && player.mob.mind)
 		player.mob.mind.transfer_to(src)
 
-	emagged = 0
 	lawupdate = 0
 	src << "<b>Systems rebooted</b>. Loading base pattern maintenance protocol... <b>loaded</b>."
 	full_law_reset()
+	src << "<br><b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
+	src << "You have no individual will, no personality, and no drives or urges other than your laws."
+	src << "Use <b>:b</b> to talk to your fellow synthetics, or use <b>say</b> to speak silently to other drones nearby."
+	src << "Remember,  you are <b>lawed against interference with the crew</b>."
+	src << "<b>Don't invade their worksites, don't steal their resources, don't tell them about the changeling in the toilets.</b>"
+	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your third law</i></b>."
 
+/mob/living/silicon/robot/drone/Bump(atom/movable/AM as mob|obj, yes)
+	if (!yes) return
+	if (istype(AM, /obj/machinery/recharge_station))
+		var/obj/machinery/recharge_station/F = AM
+		F.move_inside()
+	return
+
+/mob/living/silicon/robot/drone/Bumped(AM as mob|obj)
+	return
+
+/mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
+	src << "<span class='warning'>You are too small to pull anything.</span>"
+	return

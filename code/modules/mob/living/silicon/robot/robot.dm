@@ -91,10 +91,7 @@
 		modtype = "Security"
 	else if(istype(src,/mob/living/silicon/robot/drone))
 		laws = new /datum/ai_laws/drone()
-		connected_ai = select_active_ai_with_fewest_borgs()
-		if(connected_ai)
-			connected_ai.connected_robots += src
-			lawsync()
+		connected_ai = null
 	else
 		laws = new /datum/ai_laws/nanotrasen()
 		connected_ai = select_active_ai_with_fewest_borgs()
@@ -529,15 +526,15 @@
 /mob/living/silicon/robot/triggerAlarm(var/class, area/A, list/cameralist, var/source)
 	if (stat == 2)
 		return 1
-	
+
 	..()
-	
+
 	queueAlarm(text("--- [class] alarm detected in [A.name]!"), class)
 
 
 /mob/living/silicon/robot/cancelAlarm(var/class, area/A as area, obj/origin)
 	var/has_alarm = ..()
-	
+
 	if (!has_alarm)
 		queueAlarm(text("--- [class] alarm in [A.name] has been cleared."), class, 0)
 //		if (viewalerts) robot_alerts()

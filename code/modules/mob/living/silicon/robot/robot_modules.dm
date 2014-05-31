@@ -292,9 +292,9 @@
 		src.modules += new /obj/item/weapon/wirecutters(src)
 		src.modules += new /obj/item/device/multitool(src)
 		src.modules += new /obj/item/device/lightreplacer(src)
-		src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner(src)
 		src.modules += new /obj/item/weapon/gripper(src)
 		src.modules += new /obj/item/weapon/matter_decompiler(src)
+		src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner/drone(src)
 
 		src.emag = new /obj/item/weapon/card/emag(src)
 		src.emag.name = "Cryptographic Sequencer"
@@ -308,7 +308,7 @@
 
 /obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R)
 	var/obj/item/weapon/reagent_containers/spray/cleaner/C = locate() in src.modules
-	C.reagents.add_reagent("cleaner", 10)
+	C.reagents.add_reagent("cleaner", 3)
 
 	for(var/T in stacktypes)
 		var/O = locate(T) in src.modules
