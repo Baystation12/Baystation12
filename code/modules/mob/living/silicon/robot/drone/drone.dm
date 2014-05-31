@@ -11,8 +11,7 @@
 	pass_flags = PASSTABLE
 	braintype = "Robot"
 	lawupdate = 0
-	density = 0
-	small = 1
+	density = 1
 
 	// We need to keep track of a few module items so we don't need to do list operations
 	// every time we need them. These get set in New() after the module is chosen.
@@ -310,7 +309,8 @@
 	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your first law</i></b>."
 
 /mob/living/silicon/robot/drone/Bump(atom/movable/AM as mob|obj, yes)
-	if (!yes) return
+	if (!yes || istype(AM,/mob/living)) return
+	..()
 	if (istype(AM, /obj/machinery/recharge_station))
 		var/obj/machinery/recharge_station/F = AM
 		F.move_inside()
