@@ -12,13 +12,14 @@
 	var/primitive                // Lesser form, if any (ie. monkey for humans)
 	var/tail                     // Name of tail image in species effects icon file.
 	var/language                 // Default racial language, if any.
+	var/secondary_langs = list() // The names of secondary languages that are available to this species.
 	var/attack_verb = "punch"    // Empty hand hurt intent verb.
 	var/punch_damage = 0		 // Extra empty hand attack damage.
 	var/mutantrace               // Safeguard due to old code.
 
 	var/breath_type = "oxygen"   // Non-oxygen gas breathed, if any.
 	var/poison_type = "phoron"   // Poisonous air.
-	var/exhale_type = "C02"      // Exhaled gas type.
+	var/exhale_type = "carbon_dioxide"      // Exhaled gas type.
 
 	var/cold_level_1 = 260  // Cold damage level 1 below this point.
 	var/cold_level_2 = 200  // Cold damage level 2 below this point.
@@ -47,26 +48,6 @@
 	//Used in icon caching.
 	var/race_key = 0
 	var/icon/icon_template
-
-	/* Species-specific sprites, concept stolen from Paradise//vg/.
-	ex:
-	sprite_sheets = list(
-		"held" = 'icons/mob/path',
-		"uniform" = 'icons/mob/path',
-		"suit" = 'icons/mob/path',
-		"belt" = 'icons/mob/path'
-		"head" = 'icons/mob/path',
-		"back" = 'icons/mob/path',
-		"mask" = 'icons/mob/path',
-		"ears" = 'icons/mob/path',
-		"eyes" = 'icons/mob/path',
-		"feet" = 'icons/mob/path',
-		"gloves" = 'icons/mob/path'
-		)
-	If index term exists and icon_override is not set, this sprite sheet will be used.
-	*/
-
-	var/list/sprite_sheets = list()
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 	//This is a basic humanoid limb setup.
@@ -155,6 +136,7 @@
 	icobase = 'icons/mob/human_races/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/r_def_tajaran.dmi'
 	language = "Siik'maas"
+	secondary_langs = list("Siik'tajr")
 	tail = "tajtail"
 	attack_verb = "scratch"
 	punch_damage = 5
@@ -208,22 +190,14 @@
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
 
-	sprite_sheets = list(
-		"suit" = 'icons/mob/species/vox/suit.dmi',
-		"head" = 'icons/mob/species/vox/head.dmi',
-		"mask" = 'icons/mob/species/vox/mask.dmi',
-		"feet" = 'icons/mob/species/vox/feet.dmi',
-		"gloves" = 'icons/mob/species/vox/gloves.dmi'
-		)
+/datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
 
-/datum/species/vox/handle_post_spawn()
-
-	verbs += /mob/living/carbon/human/proc/leap
+	H.verbs += /mob/living/carbon/human/proc/leap
 	..()
 
-/datum/species/vox/armalis/handle_post_spawn()
+/datum/species/vox/armalis/handle_post_spawn(var/mob/living/carbon/human/H)
 
-	verbs += /mob/living/carbon/human/proc/gut
+	H.verbs += /mob/living/carbon/human/proc/gut
 	..()
 
 /datum/species/vox/armalis
@@ -258,14 +232,6 @@
 
 	tail = "armalis_tail"
 	icon_template = 'icons/mob/human_races/r_armalis.dmi'
-
-	sprite_sheets = list(
-		"suit" = 'icons/mob/species/armalis/suit.dmi',
-		"gloves" = 'icons/mob/species/armalis/gloves.dmi',
-		"feet" = 'icons/mob/species/armalis/feet.dmi',
-		"head" = 'icons/mob/species/armalis/head.dmi',
-		"held" = 'icons/mob/species/armalis/held.dmi'
-		)
 
 /datum/species/vox/create_organs(var/mob/living/carbon/human/H)
 

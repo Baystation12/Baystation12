@@ -270,9 +270,13 @@ obj/structure/door_assembly
 				path = text2path("/obj/machinery/door/airlock[glass_type]")
 			else
 				path = text2path("/obj/machinery/door/airlock[airlock_type]")
+			
 			var/obj/machinery/door/airlock/door = new path(src.loc)
+			
 			door.assembly_type = type
 			door.electronics = src.electronics
+			if (istype(electronics, /obj/item/weapon/airlock_electronics/secure))
+				door.randomize_wires()
 			if(src.electronics.one_access)
 				door.req_access = null
 				door.req_one_access = src.electronics.conf_access

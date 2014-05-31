@@ -14,9 +14,10 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"pAI candidate" = 1, // -- TLE                       // 7
 	"cultist" = IS_MODE_COMPILED("cult"),                // 8
 	"infested monkey" = IS_MODE_COMPILED("monkey"),      // 9
-	"ninja" = "true",									 // 10
-	"vox raider" = IS_MODE_COMPILED("heist"),			 // 11
+	"ninja" = "true",                                    // 10
+	"vox raider" = IS_MODE_COMPILED("heist"),            // 11
 	"diona" = 1,                                         // 12
+	"mutineer" = IS_MODE_COMPILED("mutiny"),             // 13
 )
 
 var/const/MAX_SAVE_SLOTS = 10
@@ -561,7 +562,7 @@ datum/preferences
 		return
 
 	proc/SetAntagoptions(mob/user)
-		if(uplinklocation == "")
+		if(uplinklocation == "" || !uplinklocation)
 			uplinklocation = "PDA"
 		var/HTML = "<body>"
 		HTML += "<tt><center>"
@@ -952,11 +953,12 @@ datum/preferences
 					if("language")
 						var/languages_available
 						var/list/new_languages = list("None")
+						var/datum/species/S = all_species[species]
 
 						if(config.usealienwhitelist)
 							for(var/L in all_languages)
 								var/datum/language/lang = all_languages[L]
-								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))))
+								if((!(lang.flags & RESTRICTED)) && (is_alien_whitelisted(user, L)||(!( lang.flags & WHITELISTED ))||(S && (L in S.secondary_langs))))
 									new_languages += lang
 									languages_available = 1
 

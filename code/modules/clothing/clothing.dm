@@ -271,9 +271,12 @@ BLIND     // can't see anything
 	if(hastie && src.loc == user)
 		hastie.attack_hand(user)
 		return
+	
+	if ((ishuman(usr) || ismonkey(usr)) && src.loc == user)	//make it harder to accidentally undress yourself
+		return
+	
 	..()
 
-//This is to ensure people can take off suits when there is an attached accessory
 /obj/item/clothing/under/MouseDrop(obj/over_object as obj)
 	if (ishuman(usr) || ismonkey(usr))
 		//makes sure that the clothing is equipped so that we can't drag it into our hand from miles away.
