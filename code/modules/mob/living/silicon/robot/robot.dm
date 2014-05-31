@@ -100,6 +100,9 @@
 		hands.icon_state = "standard"
 		icon_state = "secborg"
 		modtype = "Security"
+	else if(istype(src,/mob/living/silicon/robot/drone))
+		laws = new /datum/ai_laws/drone()
+		connected_ai = null
 	else
 		if(mmi.alien || alien)
 			laws = new /datum/ai_laws/alienmov()
