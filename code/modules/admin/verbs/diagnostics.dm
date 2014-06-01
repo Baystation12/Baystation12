@@ -140,6 +140,16 @@
 	load_admins()
 	feedback_add_details("admin_verb","RLDA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/reload_mentors()
+	set name = "Reload Mentors"
+	set category = "Debug"
+
+	if(!check_rights(R_SERVER)) return
+	
+	message_admins("[usr] manually reloaded Mentors")
+	world.load_mods()
+
+
 //todo:
 /client/proc/jump_to_dead_group()
 	set name = "Jump to dead group"
