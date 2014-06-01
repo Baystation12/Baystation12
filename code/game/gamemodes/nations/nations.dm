@@ -179,25 +179,39 @@ datum/game_mode/nations
 	victory = 1
 
 
-/*
-/mob/proc/nations_status()
+
+/mob/living/carbon/human/proc/nations_status()
 	set category = "OOC"
 	set name = "Nation Status"
-	set desc = "Information on your allies."
+	set desc = "Information on your nation and your allies."
 
 	var/datum/game_mode/nations/mode = get_nations_mode()
 	if (!mode) return
+	if(!mind) return
+	if(!mind.nation) return
 
-	if(mind && mind.nation)
-		var/dat
-		dat += "<h4>Vassalage Status</h4>"
-		for(var/obj/item/flag/nation/N in flag_list)
+	var/obj/item/flag/nation/F = locate(mind.nation.flagpath)
 
-				if(istype(N.liege,mind.nation))
-					dat += "[N.nation.name] is your vassal."
-				if(istype(N.nation, mind.nation))
-					dat += "YOU are a vassal of [N.liege.name]."
-*/
+	var/dat = "<html><head><title>Nation Status</title></head><body><h1><B>Nation Status</B></h1>"
+
+	dat += "You are part of the nation of <B>[mind.nation.name]</B>.<BR>"
+	dat += "You -cannot- defect to another nation. Doing so or helping<br>"
+	dat += "another nation you are not a vassal of is bannable.<br>"
+
+	dat += "<br><table cellspacing=5><tr><td><B>Liege</B></td><td></td></tr>"
+	if(F.liege)
+		dat += "You are currently the vassal of [F.liege.name] and must obey<br>"
+		dat += "the commands of ANY of their members.<br>"
+	else
+		dat += "You are not currently vassalized by anyone! Protect your flag!<br>"
+
+	dat += "<br><table cellspacing=5><tr><td><B>Vassals</B></td><td></td></tr>"
+	if(F.vassals.len)
+		for(var/datum/nations/V in F.vassals)
+			dat += "[V.name] is your vassal and must obey the commands of ANY of your members."
+	else
+		dat += "You do not currently have any vassals! Capture flags to vassalize!<br>"
+
 
 /mob/proc/respawn_self()
 	set category = "OOC"
