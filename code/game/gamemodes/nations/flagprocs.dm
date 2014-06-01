@@ -37,7 +37,7 @@
 	if(user.mind)
 		if(user.mind.nation)
 			var/obj/item/flag/nation/F = locate(user.mind.nation.flagpath)
-			if(user.mind.nation.type == nation) //Same team as flag
+			if(user.mind.nation == nation) //Same team as flag
 				if(liege && liege == F.liege)
 					user << "<span class='warning'>You can't steal your liege's flags!</span>"
 					return
@@ -61,10 +61,8 @@
 					for(var/mob/living/carbon/human/H in player_list)
 						if(H.mind && H.mind.nation && liege && nation)
 							if(H.mind.nation.name == liege.name)	//we have to check based on the name var since they will be different instances of the nation datum
-								world << "Stop being liege message works"
 								H.mind.current << "<span class='warning'>You are no longer the liege of [nation]!</span>"
 							if(H.mind.nation.name == nation.name)
-								world << "Stop being vassal message works"
 								H.mind.current << "<span class='warning'>You are no longer vassals of [liege]!</span>"
 					if(N)
 						N.vassals -= nation

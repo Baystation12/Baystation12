@@ -115,6 +115,7 @@ Works together with spawning an observer, noted above.
 	var/client/C = U.client
 	for(var/mob/living/carbon/human/target in target_list)
 		C.images += target.hud_list[SPECIALROLE_HUD]
+		C.images += target.hud_list[NATIONS_HUD]
 
 
 /*
