@@ -43,9 +43,6 @@
 				target.client.eye = holder
 				sleep(jaunt_duration)
 				mobloc = get_turf(target.loc)
-				if(get_area(mobloc) == /area/security/armoury/gamma)
-					target << "A strange energy repels you!"
-					mobloc = originalloc
 				animation.loc = mobloc
 				target.canmove = 0
 				sleep(20)
