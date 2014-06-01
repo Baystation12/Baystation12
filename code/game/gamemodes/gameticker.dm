@@ -310,8 +310,14 @@ var/global/datum/controller/gameticker/ticker
 
 		emergency_shuttle.process()
 
-		var/mode_finished = (!post_game && mode.check_finished())
-		var/game_finished = (emergency_shuttle.location == 2 || mode.station_was_nuked)
+		var/game_finished = 0
+		var/mode_finished = 0
+		if (config.continous_rounds)
+			game_finished = (emergency_shuttle.location == 2 || mode.station_was_nuked)
+			mode_finished = (!post_game && mode.check_finished())
+		else
+			game_finished = (mode.check_finished() || (emergency_shuttle.location == 2 && emergency_shuttle.alert == 1))
+			mode_finished = game_finished
 		
 		if(!mode.explosion_in_progress && game_finished && (mode_finished || post_game))
 			current_state = GAME_STATE_FINISHED
