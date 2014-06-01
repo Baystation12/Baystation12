@@ -1,4 +1,4 @@
-s//Simple borg hand.
+//Simple borg hand.
 //Limited use.
 /obj/item/weapon/gripper
 	name = "magnetic gripper"
