@@ -45,7 +45,7 @@
 	var/explosion_point = 1000
 
 	var/grav_pulling = 0
-	var/pull_radius = 13
+	var/pull_radius = 14
 
 	var/emergency_issued = 0
 
@@ -92,6 +92,7 @@
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
+	anchored = 1
 	grav_pulling = 1
 	spawn(100)
 		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
@@ -152,6 +153,8 @@
 
 	if(!env || !removed || !removed.total_moles)
 		damage += max(((power-(1600*POWER_FACTOR)))/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
+	else if (grav_pulling) //If supermatter is detonating, remove all air from the zone
+		env.remove(env.total_moles)
 	else
 		damage_archived = damage
 
@@ -275,7 +278,7 @@
 		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
 		"<span class=\"danger\">You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",\
 		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
-	else
+	else if(!grav_pulling) //To prevent spam, detonating supermatter does not indicate non-mobs being destroyed
 		AM.visible_message("<span class=\"warning\">\The [AM] smacks into \the [src] and rapidly flashes to ash.</span>",\
 		"<span class=\"warning\">You hear a loud crack as you are washed with a wave of heat.</span>")
 
