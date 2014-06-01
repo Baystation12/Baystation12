@@ -129,6 +129,8 @@ Implants;
 		return 1
 	return 0
 
+/datum/game_mode/proc/cleanup()	//the end conditions specified by check_finished() have been met, let's clean up.
+	return
 
 /datum/game_mode/proc/declare_completion()
 	var/clients = 0
