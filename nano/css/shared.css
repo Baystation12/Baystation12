@@ -528,8 +528,30 @@ th.misc
 	margin: 0;
 }
 
+<<<<<<< HEAD
 .fixed .uiIcon16 {
 	float: none;
 	display: inline; /* inline-block */
 	vertical-align: middle;
+}
+/* Damage colors for crew monitoring computer */
+
+.burn
+{
+	color: orange;
+}
+
+.brute
+{
+	color: red;
+}
+
+.toxin
+{
+	color: green;
+}
+
+.oxyloss
+{
+	color: blue;
 }
