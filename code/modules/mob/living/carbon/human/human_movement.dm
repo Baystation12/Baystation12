@@ -22,7 +22,7 @@
 	if(wear_suit)
 		tally += wear_suit.slowdown
 
-	if(!pulledby || (pulledby && !istype(pulledby, /obj/structure/stool/bed/chair/wheelchair)))
+	if(!buckled || (buckled && !istype(buckled, /obj/structure/stool/bed/chair/wheelchair)))
 		if(shoes)
 			tally += shoes.slowdown
 
