@@ -154,6 +154,7 @@
 	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[NATIONS_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 
 	if(istype(src,/mob/living/silicon/robot/drone))
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)

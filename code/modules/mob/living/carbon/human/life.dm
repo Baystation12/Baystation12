@@ -1544,13 +1544,7 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 				see_invisible = SEE_INVISIBLE_LIVING
 
 			if(ticker && ticker.mode.name == "nations")
-				var/list/target_list = list()
-				for(var/mob/living/target in oview(src, 14))
-					if(target.mind&&(target.mind.nation))
-						target_list += target
-				if(target_list.len)
-					assess_targets(target_list, src)
-
+				process_nations()
 
 			if(healths)
 				if (analgesic)
@@ -2020,8 +2014,7 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 		var/image/holder = hud_list[NATIONS_HUD]
 		holder.icon_state = "hudblank"
 
-		if(mind)
-
+		if(mind && mind.nation)
 			switch(mind.nation.name)
 				if("Atmosia")
 					holder.icon_state = "hudatmosia"
@@ -2040,10 +2033,11 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 
 	hud_updateflag = 0
 
-/mob/living/carbon/human/proc/assess_targets(list/target_list, mob/dead/observer/U)
-	var/client/C = U.client
-	for(var/mob/living/carbon/human/target in target_list)
-		C.images += target.hud_list[NATIONS_HUD]
+
+/mob/living/carbon/human/proc/process_nations()
+	var/client/C = client
+	for(var/mob/living/carbon/human/H in oview(src, 14))
+		C.images += H.hud_list[NATIONS_HUD]
 
 
 #undef HUMAN_MAX_OXYLOSS
