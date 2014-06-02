@@ -208,6 +208,16 @@
 
 	flesh_color = "#808D11"
 
+	makeName(var/gender,var/mob/living/carbon/human/H=null)
+		var/sounds = rand(2,8)
+		var/i = 0
+		var/newname = ""
+
+		while(i<=sounds)
+			i++
+			newname += pick(vox_name_syllables)
+		return capitalize(newname)
+
 /datum/species/vox/handle_post_spawn(var/mob/living/carbon/human/H)
 
 	H.verbs += /mob/living/carbon/human/proc/leap
@@ -328,16 +338,6 @@
 	default_mutations=list(M_REMOTE_TALK)
 	default_block_names=list("REMOTETALK")
 
-
-	makeName(var/gender,var/mob/living/carbon/human/H=null)
-		var/sounds = rand(2,8)
-		var/i = 0
-		var/newname = ""
-
-		while(i<=sounds)
-			i++
-			newname += pick(vox_name_syllables)
-		return capitalize(newname)
 
 /datum/species/diona
 	name = "Diona"
