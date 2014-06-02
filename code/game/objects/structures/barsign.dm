@@ -15,8 +15,8 @@
 	if(istype(I, /obj/item/weapon/card/id))
 		var/obj/item/weapon/card/id/card = I
 		if(access_bar in card.GetAccess())
-			var/sign_type = input(user,"What would you like to change the barsign to?") in list("Cancel", "Pink Flamingo", "Magma Sea", "Limbo", "Rusty Axe", "Armok Bar", "Broken Drum", "Mead Bay", "The Damn Wall", "The Cavern", "Cindi Kate", "The Orchard", "The Saucy Clown", "The Clowns Head")
-			if(sign_type == "Cancel")
+			var/sign_type = input(user, "What would you like to change the barsign to?") as null|anything in list("Pink Flamingo", "Magma Sea", "Limbo", "Rusty Axe", "Armok Bar", "Broken Drum", "Mead Bay", "The Damn Wall", "The Cavern", "Cindi Kate", "The Orchard", "The Saucy Clown", "The Clowns Head")
+			if(sign_type == null)
 				return
 			else
 				sign_type = replacetext(lowertext(sign_type), " ", "") // lowercase, strip spaces - along with choices for user options, avoids huge if-else-else
