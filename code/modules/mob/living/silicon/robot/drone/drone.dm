@@ -12,6 +12,7 @@
 	braintype = "Robot"
 	lawupdate = 0
 	density = 1
+	req_access = list(access_engine, access_robotics)
 
 	// We need to keep track of a few module items so we don't need to do list operations
 	// every time we need them. These get set in New() after the module is chosen.
@@ -198,11 +199,15 @@
 
 		if(stat == 2)
 
-			user << "\red You swipe your ID card through [src], attempting to reboot it."
 			if(!config.allow_drone_spawn || emagged || health < -35) //It's dead, Dave.
 				user << "\red The interface is fried, and a distressing burned smell wafts from the robot's interior. You're not rebooting this one."
 				return
 
+			if(!allowed(usr))
+				user << "\red Access denied."
+				return
+			
+			user << "\red You swipe your ID card through [src], attempting to reboot it."
 			var/drones = 0
 			for(var/mob/living/silicon/robot/drone/D in world)
 				if(D.key && D.client)
@@ -220,6 +225,8 @@
 
 			if(allowed(usr))
 				shut_down()
+			else
+				user << "\red Access denied."
 
 		return
 
