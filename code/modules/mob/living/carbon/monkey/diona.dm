@@ -164,11 +164,11 @@
 	set desc = "Grow to a more complex form."
 
 	if(donors.len < 5)
-		src << "You are not yet ready for your growth..."
+		src << "You need more blood in order to ascend to a new state of consciousness..."
 		return
 
 	if(reagents.get_reagent_amount("nutriment") < 5)
-		src << "You have not yet consumed enough to grow..."
+		src << "You need to binge on weeds in order to have the energy to grow..."
 		return
 
 	src.split()
