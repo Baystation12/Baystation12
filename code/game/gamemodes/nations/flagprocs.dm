@@ -37,7 +37,7 @@
 	if(user.mind)
 		if(user.mind.nation)
 			var/obj/item/flag/nation/F = locate(user.mind.nation.flagpath)
-			if(user.mind.nation == nation) //Same team as flag
+			if(istype(user.mind.nation,nation)) //Same team as flag
 				if(liege && liege == F.liege)
 					user << "<span class='warning'>You can't steal your liege's flags!</span>"
 					return
@@ -78,7 +78,7 @@
 		anchored = 1
 		var/obj/item/flag/nation/F = locate(user.mind.nation.flagpath)
 		if(F.loc != F.startloc) return
-		for(var/obj/item/flag/nation/S in oview(1,F.startloc))
+		for(var/obj/item/flag/nation/S in orange(1,F.startloc))
 			if(S == src)
 				captured = 1
 				liege = F.nation
@@ -87,7 +87,7 @@
 				for(var/mob/living/carbon/human/H in player_list)
 					if(H.mind && H.mind.nation && F.nation && nation)
 						if(H.mind.nation.name == F.nation.name)
-							H.mind.current << "<span class='warning'>You have just vassalized [nation]! They must now obey any memebrs of your nation!</span>"
+							H.mind.current << "<span class='warning'>You have just vassalized [nation]! They must now obey any members of your nation!</span>"
 							continue
 						if(H.mind.nation.name == nation.name)
 							H.mind.current << "<span class='warning'>You are now vassals of [liege]! You must now obey the orders of any of their members!</span>"

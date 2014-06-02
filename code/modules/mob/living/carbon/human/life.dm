@@ -2036,7 +2036,7 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 
 /mob/living/carbon/human/proc/process_nations()
 	var/client/C = client
-	for(var/mob/living/carbon/human/H in oview(src, 14))
+	for(var/mob/living/carbon/human/H in view(src, 14))
 		C.images += H.hud_list[NATIONS_HUD]
 
 

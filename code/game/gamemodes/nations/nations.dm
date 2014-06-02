@@ -213,6 +213,13 @@ datum/game_mode/nations
 	else
 		dat += "You do not currently have any vassals! Capture flags to vassalize!<br>"
 	dat += "</table>"
+	dat += "<br><table cellspacing=5><tr><td><B>Geneva Space Convention</B></td><td></td></tr>"
+	dat += "The following are considered OUTLAWED by the Geneva Space Convention and will result"
+	dat += "in severe consequences if used in warfare:<br>"
+	dat += "<B>Scientopia - Large Scale Bombs - Nuclear Warfare"
+	dat += "Atmosia - Using atmos as a weapon - Chemical Warfare"
+	dat += "Medistan - Releasing harmful viruses - Biological Warfare</B>"
+	dat += "</table>"
 
 	dat += "</body></html>"
 	usr << browse(dat, "window=nationstatus;size=400x500")
