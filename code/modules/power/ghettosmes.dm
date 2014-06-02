@@ -1,6 +1,5 @@
-//TODO: el cable coil no desaparece si se queda en 0
 //TODO: en Topic(), el dialogo no pone el Xput_level_max, sino 200k. Ademas se repite. Muy probablemente debido al ..() de topic
-//TODO: attackby de code/defines/obj/weapon.dm/power module
+//DONE: attackby de code/defines/obj/weapon.dm/power module
 //TODO: dangers
 //TODO: mas tests
 
@@ -10,11 +9,8 @@
 	build_path = "/obj/machinery/power/smes/ghetto"
 	board_type = "machine"
 //	origin_tech = "powerstorage=2;engineering=4;programming=4"
-	frame_desc = "Requires 5 batteries, 5 capacitors, and 1 console screen."
-	req_components = list(
-							"/obj/item/weapon/cell" = 5,
-							"/obj/item/weapon/stock_parts/capacitor" = 5,
-							"/obj/item/weapon/stock_parts/console_screen" = 1)
+	frame_desc = "Requires 3 power cells."
+	req_components = list("/obj/item/weapon/cell" = 3)
 
 
 /obj/machinery/power/smes/ghetto
@@ -22,9 +18,13 @@
 	desc = "A rack of batteries connected by a mess of wires posing as a PSU."
 	charge = 0 //you dont really want to make a potato PSU which already is overloaded
 	online = 0
+	chargelevel = 0
+	output = 0
 	var/opened = 0
 	var/input_level_max = 0
 	var/output_level_max = 0
+	var/cells_amount = 0
+	var/capacitors_amount = 0
 
 
 /obj/machinery/power/smes/ghetto/New()
@@ -34,37 +34,47 @@
 	component_parts += new /obj/item/weapon/cell
 	component_parts += new /obj/item/weapon/cell
 	component_parts += new /obj/item/weapon/cell
-	component_parts += new /obj/item/weapon/cell
-	component_parts += new /obj/item/weapon/cell
-	component_parts += new /obj/item/weapon/stock_parts/capacitor
-	component_parts += new /obj/item/weapon/stock_parts/capacitor
-	component_parts += new /obj/item/weapon/stock_parts/capacitor
-	component_parts += new /obj/item/weapon/stock_parts/capacitor
-	component_parts += new /obj/item/weapon/stock_parts/capacitor
-	component_parts += new /obj/item/weapon/stock_parts/console_screen
 	RefreshParts()
 	return
 
 /obj/machinery/power/smes/ghetto/RefreshParts()
+	capacitors_amount = 0
+	cells_amount = 0
 	var/max_level = 0 //for both input and output
-	var/C = 0
 	for(var/obj/item/weapon/stock_parts/capacitor/CP in component_parts)
 		max_level += CP.rating
-	input_level_max = max_level * 20000
-	output_level_max = max_level * 20000
+		capacitors_amount++
+	input_level_max = 50000 + max_level * 20000
+	output_level_max = 50000 + max_level * 20000
+
+	var/C = 0
 	for(var/obj/item/weapon/cell/PC in component_parts)
 		C += PC.maxcharge
+		cells_amount++
 	capacity = C * 50   //Basic cells are such crap. Super cells will make a standard SMES
 
 
+//Modified /vg/code
+/obj/machinery/power/smes/ghetto/proc/make_terminal(const/mob/user)
+	if (user.loc == loc)
+		user << "You must not be on the same tile as the PSU."
+		return 2
 
-/obj/machinery/power/smes/ghetto/proc/make_terminal()
-	// create a terminal object at the same position as original turf loc
-	// wires will attach to this
-	var/tempLoc = get_step(src.loc, WEST)
-	terminal = new/obj/machinery/power/terminal(tempLoc)
-	terminal.dir = EAST
-	terminal.master = src
+	//Direction the terminal will face
+	var/tempDir = get_dir(user, src)
+	switch(tempDir)
+		if (NORTHEAST, SOUTHEAST)
+			tempDir = EAST
+		if (NORTHWEST, SOUTHWEST)
+			tempDir = WEST
+
+	playsound(get_turf(src), 'sound/items/zip.ogg', 100, 1)
+	if(do_after(user, 50))
+		terminal = new /obj/machinery/power/terminal(get_step(src, reverse_direction(tempDir)))
+		terminal.dir = tempDir
+		terminal.master = src
+		return 0
+	return 1
 
 
 /obj/machinery/power/smes/ghetto/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob) //these can only be moved by being reconstructed, solves having to remake the powernet.
@@ -79,30 +89,41 @@
 			user << "You close the maintenance hatch of [src]"
 	if(opened)
 		if(istype(W, /obj/item/weapon/crowbar))
-			playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
-			var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
-			M.state = 2
-			M.icon_state = "box_1"
-			for(var/obj/I in component_parts)
-				if(I.reliability != 100 && crit_fail)
-					I.crit_fail = 1
-				I.loc = src.loc
-			del(src)
-			return 1
+			if (charge < (capacity / 100))
+				if (!online && !chargemode)
+					playsound(get_turf(src), 'sound/items/Crowbar.ogg', 50, 1)
+					var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(src.loc)
+					M.state = 2
+					M.icon_state = "box_1"
+					for(var/obj/I in component_parts)
+						if(I.reliability != 100 && crit_fail)
+							I.crit_fail = 1
+						I.loc = src.loc
+					del(src)
+					return 1
+				else
+					user << "Turn off the [src] before."
+			else
+				user << "Better let [src] discharge before dismantling it."
 		else if(istype(W, /obj/item/weapon/cable_coil) && !terminal)
-			var/obj/item/weapon/cable_coil/coil = W
-			if (coil.amount >= 10)
-				coil.amount -= 10
-				user.visible_message(\
+			var/obj/item/weapon/cable_coil/CC = W
+			if (CC.amount < 10)
+				user << "You need more cables."
+				return
+
+			user << "You start adding cable to the PSU."
+			if (make_terminal(user))
+				return
+
+			CC.use(10)
+			user.visible_message(\
 					"\red [user.name] has added cables to the PSU!",\
 					"You added cables the PSU.")
-				make_terminal()
-				terminal.connect_to_network()
-				src.stat = 0
-			else
-				user << "You need more cables."
+			terminal.connect_to_network()
+			src.stat = 0
+
 		else if(istype(W, /obj/item/weapon/wirecutters) && terminal)
-			var/tempTDir = get_step(src.loc, WEST)
+			var/tempTDir = terminal.loc
 			if(tempTDir:intact)
 				user << "\red You must remove the floor plating in front of the PSU first."
 				return
@@ -119,14 +140,26 @@
 					"\red [user.name] cut the cables and dismantled the power terminal.",\
 					"You cut the cables and dismantle the power terminal.")
 				del(terminal)
-		else  //this else is suspicious as fuck
+		else if ((istype(W, /obj/item/weapon/stock_parts/capacitor) && (capacitors_amount < 5)) || (istype(W, /obj/item/weapon/cell) && (cells_amount < 5)))
+			if (charge < (capacity / 100))
+				if (!online && !chargemode)
+					user.drop_item()
+					component_parts += W
+					W.loc = src
+					RefreshParts()
+					user << "You upgrade the [src] with [W.name]."
+				else
+					user << "Turn off the [src] before."
+			else
+				user << "Better let [src] discharge before putting your hand inside it."
+		else
 			user.set_machine(src)
 			interact(user)
 			return 1
 	return
 
 
-//Yyyyup, a full copypaste to change a couple variables
+//Couple variables changed
 /obj/machinery/power/smes/ghetto/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	if(stat & BROKEN)
 		return
