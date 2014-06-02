@@ -160,7 +160,7 @@
 //Will return 1 on failure
 /obj/machinery/power/smes/proc/make_terminal(const/mob/user)
 	if (user.loc == loc)
-		user << "You must not be on the same tile as the SMES."
+		user << "<span class='warning'>You must not be on the same tile as the SMES.</span>"
 		return 1
 
 	//Direction the terminal will face to
@@ -172,13 +172,13 @@
 			tempDir = WEST
 	var/turf/tempLoc = get_step(src, reverse_direction(tempDir))
 	if (istype(tempLoc, /turf/space))
-		user << "You can't build a terminal on space."
+		user << "<span class='warning'>You can't build a terminal on space.</span>"
 		return 1
 	else if (istype(tempLoc))
 		if(tempLoc.intact)
-			user << "\red You must remove the floor plating first."
+			user << "<span class='warning'>You must remove the floor plating first.</span>"
 			return 1
-	user << "You start adding cable to the SMES."
+	user << "<span class='notice'>You start adding cable to the SMES.</span>"
 	if(do_after(user, 50))
 		terminal = new /obj/machinery/power/terminal(tempLoc)
 		terminal.dir = tempDir
@@ -206,16 +206,16 @@
 	if(istype(W, /obj/item/weapon/screwdriver))
 		if(!open_hatch)
 			open_hatch = 1
-			user << "You open the maintenance hatch of [src]"
+			user << "<span class='notice'>You open the maintenance hatch of [src].</span>"
 		else
 			open_hatch = 0
-			user << "You close the maintenance hatch of [src]"
+			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
 	if (open_hatch)
 		if(istype(W, /obj/item/weapon/cable_coil) && !terminal && !building_terminal)
 			building_terminal = 1
 			var/obj/item/weapon/cable_coil/CC = W
 			if (CC.amount < 10)
-				user << "You need more cables."
+				user << "<span class='warning'>You need more cables.</span>"
 				return
 			if (make_terminal(user))
 				building_terminal = 0
@@ -223,8 +223,8 @@
 			building_terminal = 0
 			CC.use(10)
 			user.visible_message(\
-					"\red [user.name] has added cables to the SMES!",\
-					"You added cables the SMES.")
+					"<span class='notice'>[user.name] has added cables to the SMES.</span>",\
+					"<span class='notice'>You added cables the SMES.</span>")
 			terminal.connect_to_network()
 			stat = 0
 
@@ -233,9 +233,9 @@
 			var/turf/tempTDir = terminal.loc
 			if (istype(tempTDir))
 				if(tempTDir.intact)
-					user << "\red You must remove the floor plating first."
+					user << "<span class='warning'>You must remove the floor plating first.</span>"
 				else
-					user << "You begin to cut the cables..."
+					user << "<span class='notice'>You begin to cut the cables...</span>"
 					playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
 					if(do_after(user, 50))
 						if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
@@ -245,8 +245,8 @@
 							return
 						new /obj/item/weapon/cable_coil(loc,10)
 						user.visible_message(\
-							"\red [user.name] cut the cables and dismantled the power terminal.",\
-							"You cut the cables and dismantle the power terminal.")
+							"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
+							"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 						del(terminal)
 			building_terminal = 0
 
