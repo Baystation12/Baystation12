@@ -207,7 +207,7 @@
 				user << "\red Access denied."
 				return
 			
-			user << "\red You swipe your ID card through [src], attempting to reboot it."
+			user.visible_message("\red \the [user] swipes \his ID card through \the [src], attempting to reboot it.", "\red You swipe your ID card through \the [src], attempting to reboot it.")
 			var/drones = 0
 			for(var/mob/living/silicon/robot/drone/D in world)
 				if(D.key && D.client)
@@ -217,8 +217,7 @@
 			return
 
 		else
-			src << "\red [user] swipes an ID card through your card reader."
-			user << "\red You swipe your ID card through [src], attempting to shut it down."
+			user.visible_message("\red \the [user] swipes \his ID card through \the [src], attempting to shut it down.", "\red You swipe your ID card through \the [src], attempting to shut it down.")
 
 			if(emagged)
 				return
