@@ -27,6 +27,8 @@
 	var/last_output = 0
 	var/last_charge = 0
 	var/last_online = 0
+	var/open_hatch = 0
+	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
 
 /obj/machinery/power/smes/New()
 	..()
@@ -155,6 +157,35 @@
 		updateicon()
 	return
 
+//Will return 1 on failure
+/obj/machinery/power/smes/proc/make_terminal(const/mob/user)
+	if (user.loc == loc)
+		user << "You must not be on the same tile as the SMES."
+		return 1
+
+	//Direction the terminal will face to
+	var/tempDir = get_dir(user, src)
+	switch(tempDir)
+		if (NORTHEAST, SOUTHEAST)
+			tempDir = EAST
+		if (NORTHWEST, SOUTHWEST)
+			tempDir = WEST
+	var/turf/tempLoc = get_step(src, reverse_direction(tempDir))
+	if (istype(tempLoc, /turf/space))
+		user << "You can't build a terminal on space."
+		return 1
+	else if (istype(tempLoc))
+		if(tempLoc.intact)
+			user << "\red You must remove the floor plating first."
+			return 1
+	user << "You start adding cable to the SMES."
+	if(do_after(user, 50))
+		terminal = new /obj/machinery/power/terminal(tempLoc)
+		terminal.dir = tempDir
+		terminal.master = src
+		return 0
+	return 1
+
 
 /obj/machinery/power/smes/add_load(var/amount)
 	if(terminal && terminal.powernet)
@@ -169,11 +200,60 @@
 /obj/machinery/power/smes/attack_hand(mob/user)
 	add_fingerprint(user)
 	ui_interact(user)
-	
-	
+
+
+/obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if(!open_hatch)
+			open_hatch = 1
+			user << "You open the maintenance hatch of [src]"
+		else
+			open_hatch = 0
+			user << "You close the maintenance hatch of [src]"
+	if (open_hatch)
+		if(istype(W, /obj/item/weapon/cable_coil) && !terminal && !building_terminal)
+			building_terminal = 1
+			var/obj/item/weapon/cable_coil/CC = W
+			if (CC.amount < 10)
+				user << "You need more cables."
+				return
+			if (make_terminal(user))
+				building_terminal = 0
+				return
+			building_terminal = 0
+			CC.use(10)
+			user.visible_message(\
+					"\red [user.name] has added cables to the SMES!",\
+					"You added cables the SMES.")
+			terminal.connect_to_network()
+			stat = 0
+
+		else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
+			building_terminal = 1
+			var/turf/tempTDir = terminal.loc
+			if (istype(tempTDir))
+				if(tempTDir.intact)
+					user << "\red You must remove the floor plating first."
+				else
+					user << "You begin to cut the cables..."
+					playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
+					if(do_after(user, 50))
+						if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
+							var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+							s.set_up(5, 1, src)
+							s.start()
+							return
+						new /obj/item/weapon/cable_coil(loc,10)
+						user.visible_message(\
+							"\red [user.name] cut the cables and dismantled the power terminal.",\
+							"You cut the cables and dismantle the power terminal.")
+						del(terminal)
+			building_terminal = 0
+
+
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 
-	if(stat & BROKEN) 
+	if(stat & BROKEN)
 		return
 
 	// this is the data which will be sent to the ui
@@ -190,18 +270,18 @@
 	data["outputLoad"] = round(loaddemand)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "smes.tmpl", "SMES Power Storage Unit", 540, 380)
 		// when the ui is first opened this is the data it will use
-		ui.set_initial_data(data)		
+		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
-		
+
 
 /obj/machinery/power/smes/Topic(href, href_list)
 	..()
@@ -252,9 +332,9 @@
 		output = max(0, min(SMESMAXOUTPUT, output))	// clamp to range
 
 	investigate_log("input/output; [chargelevel>output?"<font color='green'>":"<font color='red'>"][chargelevel]/[output]</font> | Output-mode: [online?"<font color='green'>on</font>":"<font color='red'>off</font>"] | Input-mode: [chargemode?"<font color='green'>auto</font>":"<font color='red'>off</font>"] by [usr.key]","singulo")
-	
+
 	return 1
-	
+
 
 /obj/machinery/power/smes/proc/ion_act()
 	if(src.z == 1)
