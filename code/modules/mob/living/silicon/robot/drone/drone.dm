@@ -22,7 +22,7 @@
 	var/obj/item/weapon/matter_decompiler/decompiler = null
 
 	//Used for self-mailing.
-	var/mail_destination = 0
+	var/mail_destination = ""
 
 	//Used for pulling.
 
