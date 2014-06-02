@@ -213,8 +213,8 @@
 	if(R.dna.species == "Human") //no more xenos losing ears/tentacles
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
 
-	//for(var/datum/language/L in languages)
-	//	H.add_language(L.name)
+	for(var/datum/language/L in R.languages)
+		H.add_language(L.name)
 	H.suiciding = 0
 	src.attempting = 0
 	return 1
@@ -434,7 +434,7 @@
  */
 
 /obj/item/weapon/paper/Cloning
-	name = "paper - 'H-87 Cloning Apparatus Manual"
+	name = "H-87 Cloning Apparatus Manual"
 	info = {"<h4>Getting Started</h4>
 	Congratulations, your station has purchased the H-87 industrial cloning device!<br>
 	Using the H-87 is almost as simple as brain surgery! Simply insert the target humanoid into the scanning chamber and select the scan option to create a new profile!<br>
