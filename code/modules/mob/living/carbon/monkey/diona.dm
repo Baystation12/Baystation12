@@ -239,3 +239,13 @@
 		src << "\green You feel your awareness expand, and realize you know how to understand the creatures around you."
 	else
 		src << "\green The blood seeps into your small form, and you draw out the echoes of memories and personality from it, working them into your budding mind."
+
+
+/mob/living/carbon/monkey/diona/put_in_hands(obj/item/W)
+	W.loc = get_turf(src)
+	W.layer = initial(W.layer)
+	W.dropped()
+
+/mob/living/carbon/monkey/diona/put_in_active_hand(obj/item/W)
+	src << "\red You don't have any hands!"
+	return
