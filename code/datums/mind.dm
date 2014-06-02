@@ -642,11 +642,20 @@ datum/mind
 			switch(href_list["cult"])
 				if("clear")
 					if(src in ticker.mode.cult)
-						ticker.mode.remove_cultist(src)
+						ticker.mode.cult -= src
+						ticker.mode.update_cult_icons_removed(src)
+						special_role = null
+						var/datum/game_mode/cult/cult = ticker.mode
+						if (istype(cult))
+							if(!config.objectives_disabled)
+								cult.memoize_cult_objectives(src)
+						current << "\red <FONT size = 3><B>You have been brainwashed! You are no longer a cultist!</B></FONT>"
+						memory = ""
 						log_admin("[key_name_admin(usr)] has de-cult'ed [current].")
 				if("cultist")
 					if(!(src in ticker.mode.cult))
-						ticker.mode.add_cultist(src)
+						ticker.mode.cult += src
+						ticker.mode.update_cult_icons_added(src)
 						special_role = "Cultist"
 						current << "<font color=\"purple\"><b><i>You catch a glimpse of the Realm of Nar-Sie, The Geometer of Blood. You now see how flimsy the world is, you see that it should be open to the knowledge of Nar-Sie.</b></i></font>"
 						current << "<font color=\"purple\"><b><i>Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back.</b></i></font>"

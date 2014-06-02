@@ -333,9 +333,6 @@ var/list/slot_equipment_priority = list( \
 	return
 */
 
-/mob
-	var/newPlayerType = /mob/new_player
-
 /mob/verb/abandon_mob()
 	set name = "Respawn"
 	set category = "OOC"
@@ -385,12 +382,14 @@ var/list/slot_equipment_priority = list( \
 		log_game("[usr.key] AM failed due to disconnect.")
 		return
 
-	var/mob/newPlayer = new newPlayerType()
+	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
-		del(newPlayer)
+		del(M)
 		return
-	newPlayer.key = key
+
+	M.key = key
+//	M.Login()	//wat
 	return
 
 /client/verb/changes()

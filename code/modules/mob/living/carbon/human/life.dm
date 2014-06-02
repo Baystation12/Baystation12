@@ -321,9 +321,11 @@
 
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
+		
 		// HACK NEED CHANGING LATER
-		if(health < config.health_threshold_crit)
+		if(health < config.health_threshold_crit && !reagents.has_reagent("inaprovaline"))
 			losebreath++
+		
 		if(losebreath>0) //Suffocating so do not take a breath
 			losebreath--
 			if (prob(10)) //Gasp per 10 ticks? Sounds about right.
@@ -431,8 +433,6 @@
 			return
 
 		if(!breath || (breath.total_moles() == 0) || suiciding)
-			if(reagents.has_reagent("inaprovaline"))
-				return
 			if(suiciding)
 				adjustOxyLoss(2)//If you are suiciding, you should die a little bit faster
 				failed_last_breath = 1
@@ -508,7 +508,7 @@
 			if(prob(20))
 				spawn(0) emote("gasp")
 			if(inhale_pp > 0)
-				var/ratio = safe_pressure_min/inhale_pp
+				var/ratio = inhale_pp/safe_pressure_min
 
 				 // Don't fuck them up too fast (space only does HUMAN_MAX_OXYLOSS after all!)
 				 // The hell? By definition ratio > 1, and HUMAN_MAX_OXYLOSS = 1... why do we even have this?

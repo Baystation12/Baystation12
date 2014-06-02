@@ -59,7 +59,7 @@
 
 	Topic(href, href_list)
 		..()
-		if (usr.stat || usr.restrained() || !ishuman(usr))
+		if (usr.stat || usr.restrained() || (!ishuman(usr) && !istype(usr,/mob/living/silicon)))
 			return
 		if (href_list["close"])
 			usr << browse(null, "window=airlock")
