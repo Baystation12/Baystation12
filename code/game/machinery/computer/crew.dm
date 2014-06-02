@@ -16,14 +16,14 @@
 
 /obj/machinery/computer/crew/attack_ai(mob/user)
 	attack_hand(user)
-	interact(user)
+	ui_interact(user)
 
 
 /obj/machinery/computer/crew/attack_hand(mob/user)
 	add_fingerprint(user)
 	if(stat & (BROKEN|NOPOWER))
 		return
-	interact(user)
+	ui_interact(user)
 
 
 /obj/machinery/computer/crew/update_icon()
@@ -54,7 +54,10 @@
 		src.updateDialog()
 		return 1
 
-/obj/machinery/computer/crew/interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/computer/crew/interact(mob/user)
+	ui_interact(user)
+
+/obj/machinery/computer/crew/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	if(stat & (BROKEN|NOPOWER))
 		return
 	user.set_machine(src)

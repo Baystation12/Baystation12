@@ -1,15 +1,6 @@
 <!--
 Crew Monitoring Computer interface
 -->
-<div class="item">
-	<div class="itemLabel">
-		Functions:
-	</div>
-	<div class="itemContent">
-		{{:~link('Refresh', 'refresh', {'update' : 1}, null)}}
-		{{:~link('Close', 'close', {'close' : 1}, null)}}
-	</div>
-</div>
 <table width="100%"><tbody>
 	{{for crewmembers}}
 		{{if sensor_type == 1}}
