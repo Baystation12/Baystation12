@@ -13,13 +13,13 @@
 		ooccolor = query.item[1]
 		UI_style = query.item[2]
 		UI_style_color = query.item[3]
-		UI_style_alpha = query.item[4]
-		be_special = query.item[5]
-		default_slot = query.item[6]
-		toggles = query.item[7]
-		sound = query.item[8]
-		randomslot = query.item[9]
-		volume = query.item[10]
+		UI_style_alpha = text2num(query.item[4])
+		be_special = text2num(query.item[5])
+		default_slot = text2num(query.item[6])
+		toggles = text2num(query.item[7])
+		sound = text2num(query.item[8])
+		randomslot = text2num(query.item[9])
+		volume = text2num(query.item[10])
 
 	//Sanitize
 	ooccolor		= sanitize_hexcolor(ooccolor, initial(ooccolor))
@@ -65,56 +65,56 @@
 		//Character
 		metadata = query.item[4]
 		real_name = query.item[5]
-		be_random_name = query.item[6]
+		be_random_name = text2num(query.item[6])
 		gender = query.item[7]
-		age = query.item[8]
+		age = text2num(query.item[8])
 		species = query.item[9]
 		language = query.item[10]
 
 		//colors to be consolidated into hex strings (requires some work with dna code)
-		r_hair = query.item[11]
-		g_hair = query.item[12]
-		b_hair = query.item[13]
-		r_facial = query.item[14]
-		g_facial = query.item[15]
-		b_facial = query.item[16]
-		s_tone = query.item[17]
-		r_skin = query.item[18]
-		g_skin = query.item[19]
-		b_skin = query.item[20]
+		r_hair = text2num(query.item[11])
+		g_hair = text2num(query.item[12])
+		b_hair = text2num(query.item[13])
+		r_facial = text2num(query.item[14])
+		g_facial = text2num(query.item[15])
+		b_facial = text2num(query.item[16])
+		s_tone = text2num(query.item[17])
+		r_skin = text2num(query.item[18])
+		g_skin = text2num(query.item[19])
+		b_skin = text2num(query.item[20])
 		h_style = query.item[21]
 		f_style = query.item[22]
-		r_eyes = query.item[23]
-		g_eyes = query.item[24]
-		b_eyes = query.item[25]
-		underwear = query.item[26]
-		undershirt = query.item[27]
-		backbag = query.item[28]
+		r_eyes = text2num(query.item[23])
+		g_eyes = text2num(query.item[24])
+		b_eyes = text2num(query.item[25])
+		underwear = text2num(query.item[26])
+		undershirt = text2num(query.item[27])
+		backbag = text2num(query.item[28])
 		b_type = query.item[29]
 
 
 		//Jobs
-		alternate_option = query.item[30]
-		job_civilian_high = query.item[31]
-		job_civilian_med = query.item[32]
-		job_civilian_low = query.item[33]
-		job_medsci_high = query.item[34]
-		job_medsci_med = query.item[35]
-		job_medsci_low = query.item[36]
-		job_engsec_high = query.item[37]
-		job_engsec_med = query.item[38]
-		job_engsec_low = query.item[39]
-		job_karma_high = query.item[40]
-		job_karma_med = query.item[41]
-		job_karma_low = query.item[42]
+		alternate_option = text2num(query.item[30])
+		job_civilian_high = text2num(query.item[31])
+		job_civilian_med = text2num(query.item[32])
+		job_civilian_low = text2num(query.item[33])
+		job_medsci_high = text2num(query.item[34])
+		job_medsci_med = text2num(query.item[35])
+		job_medsci_low = text2num(query.item[36])
+		job_engsec_high = text2num(query.item[37])
+		job_engsec_med = text2num(query.item[38])
+		job_engsec_low = text2num(query.item[39])
+		job_karma_high = text2num(query.item[40])
+		job_karma_med = text2num(query.item[41])
+		job_karma_low = text2num(query.item[42])
 
 		//Miscellaneous
 		flavor_text = query.item[43]
 		med_record = query.item[44]
 		sec_record = query.item[45]
 		gen_record = query.item[46]
-		be_special = query.item[47]
-		disabilities = query.item[48]
+		be_special = text2num(query.item[47])
+		disabilities = text2num(query.item[48])
 		player_alt_titles = params2list(query.item[49])
 		organ_data = params2list(query.item[50])
 
