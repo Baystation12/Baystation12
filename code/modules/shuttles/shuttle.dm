@@ -17,6 +17,13 @@ var/global/datum/shuttle_controller/shuttles
 
 	..()
 
+	//Supply and escape shuttles.
+	locations["Supply"] = 1
+	delays["Supply"] = 0
+	moving["Supply"] = 0
+	areas_offsite["Supply"] = locate(/area/supply/dock)
+	areas_station["Supply"] = locate(/area/supply/station)
+
 	// Admin shuttles.
 	locations["Centcom"] = 1
 	delays["Centcom"] = 0
@@ -104,7 +111,7 @@ var/global/datum/shuttle_controller/shuttles
 
 /datum/shuttle_controller/proc/move_shuttle(var/shuttle_tag,var/area/origin,var/area/destination)
 
-	world << "move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination]."
+	//world << "move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination]."
 	if(!shuttle_tag || isnull(locations[shuttle_tag]))
 		return
 
@@ -115,25 +122,25 @@ var/global/datum/shuttle_controller/shuttles
 
 		var/area/area_going_to
 		if(destination)
-			world << "Using supplied destination [destination]."
+			//world << "Using supplied destination [destination]."
 			area_going_to = destination
 		else
-			world << "Using controller value [(locations[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])]."
+			//world << "Using controller value [(locations[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])]."
 			area_going_to = (locations[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])
 
 		var/area/area_coming_from
 		if(origin)
-			world << "Using supplied origin [origin]."
+			//world << "Using supplied origin [origin]."
 			area_coming_from = origin
 		else
-			world << "Using controller value [(locations[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])]."
+			//world << "Using controller value [(locations[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])]."
 			area_coming_from = (locations[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])
 
-		world << "area_coming_from: [area_coming_from]"
-		world << "area_going_to: [area_going_to]"
+		//world << "area_coming_from: [area_coming_from]"
+		//world << "area_going_to: [area_going_to]"
 
 		if(area_coming_from == area_going_to)
-			world << "cancelling move, shuttle will overlap."
+			//world << "cancelling move, shuttle will overlap."
 			moving[shuttle_tag] = 0
 			return
 
@@ -169,7 +176,7 @@ var/global/datum/shuttle_controller/shuttles
 						M << "\red Sudden acceleration presses you into your chair!"
 						shake_camera(M, 3, 1)
 					else
-						M << "\red The ship lurches beneath you!"
+						M << "\red The floor lurches beneath you!"
 						shake_camera(M, 10, 1)
 			if(istype(M, /mob/living/carbon))
 				if(!M.buckled)
