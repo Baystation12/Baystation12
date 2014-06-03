@@ -1277,6 +1277,7 @@
 #include "code\modules\scripting\Scanner\Tokens.dm"
 #include "code\modules\security levels\keycard authentication.dm"
 #include "code\modules\security levels\security levels.dm"
+#include "code\modules\shuttles\engineering.dm"
 #include "code\modules\supermatter\supermatter.dm"
 #include "code\modules\surgery\appendix.dm"
 #include "code\modules\surgery\bones.dm"
