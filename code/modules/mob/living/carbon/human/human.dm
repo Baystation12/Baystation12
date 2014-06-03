@@ -440,11 +440,16 @@
 	return
 
 // called when something steps onto a human
-// this could be made more general, but for now just handle mulebot
+// this handles mulebots and vehicles
 /mob/living/carbon/human/HasEntered(var/atom/movable/AM)
-	var/obj/machinery/bot/mulebot/MB = AM
-	if(istype(MB))
+	if(istype(AM, /obj/machinery/bot/mulebot))
+		var/obj/machinery/bot/mulebot/MB = AM
 		MB.RunOver(src)
+
+	if(istype(AM, /obj/vehicle))
+		var/obj/vehicle/V = AM
+		V.RunOver(src)
+
 
 //gets assignment from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
