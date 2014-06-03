@@ -1923,7 +1923,7 @@
 
 			//TODO: Generalize admin shuttles, make 'Move Shuttle' adminverb.
 			if("moveminingshuttle")
-				if(shuttle_moving["Mining"] || shuttle_moving["Mining"] == null)
+				if(shuttle_moving["Mining"] || isnull(shuttle_moving["Mining"]))
 					return
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShM")
