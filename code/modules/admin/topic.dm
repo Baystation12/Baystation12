@@ -1920,12 +1920,14 @@
 					ticker.mode.finalize_traitor(A.mind)
 				message_admins("\blue [key_name_admin(usr)] used everyone is a traitor secret. Objective is [objective]", 1)
 				log_admin("[key_name(usr)] used everyone is a traitor secret. Objective is [objective]")
+
+			//TODO: Generalize admin shuttles, make 'Move Shuttle' adminverb.
 			if("moveminingshuttle")
-				if(mining_shuttle_moving)
+				if(shuttle_moving["Mining"] || shuttle_moving["Mining"] == null)
 					return
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShM")
-				move_mining_shuttle()
+				move_shuttle("Mining",locate(/area/shuttle/mining/outpost),locate(/area/shuttle/mining/station))
 				message_admins("\blue [key_name_admin(usr)] moved mining shuttle", 1)
 				log_admin("[key_name(usr)] moved the mining shuttle")
 			if("moveadminshuttle")
