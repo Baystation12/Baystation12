@@ -52,14 +52,14 @@
 
 		cheesy_honkers
 			author = "Assistant Editor Carl Ritz"
-			channel_name = "The Gibson Gazette"
+			channel_name = "The Monthly Memo"
 			message = {"Do cheesy honkers increase risk of having a miscarriage? Several health administrations
 						say so!"}
 			round_time = 60 * 15
 
 		net_block
 			author = "Assistant Editor Carl Ritz"
-			channel_name = "The Gibson Gazette"
+			channel_name = "The Monthly Memo"
 			message = {"Several corporations banding together to block access to 'wetskrell.nt', site administrators
 			claiming violation of net laws."}
 			round_time = 60 * 50
