@@ -1921,33 +1921,20 @@
 				message_admins("\blue [key_name_admin(usr)] used everyone is a traitor secret. Objective is [objective]", 1)
 				log_admin("[key_name(usr)] used everyone is a traitor secret. Objective is [objective]")
 
-			//TODO: Generalize admin shuttles, make 'Move Shuttle' adminverb.
-			if("moveminingshuttle")
-				if(shuttle_moving["Mining"] || isnull(shuttle_moving["Mining"]))
-					return
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShM")
-				move_shuttle("Mining",locate(/area/shuttle/mining/outpost),locate(/area/shuttle/mining/station))
-				message_admins("\blue [key_name_admin(usr)] moved mining shuttle", 1)
-				log_admin("[key_name(usr)] moved the mining shuttle")
-			if("moveadminshuttle")
+			if("moveshuttle")
+
+				if(!shuttles) return // Something is very wrong, the shuttle controller has not been created.
+
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShA")
-				move_admin_shuttle()
-				message_admins("\blue [key_name_admin(usr)] moved the centcom administration shuttle", 1)
-				log_admin("[key_name(usr)] moved the centcom administration shuttle")
-			if("moveferry")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShF")
-				move_ferry()
-				message_admins("\blue [key_name_admin(usr)] moved the centcom ferry", 1)
-				log_admin("[key_name(usr)] moved the centcom ferry")
-			if("movealienship")
-				feedback_inc("admin_secrets_fun_used",1)
-				feedback_add_details("admin_secrets_fun_used","ShX")
-				move_alien_ship()
-				message_admins("\blue [key_name_admin(usr)] moved the alien dinghy", 1)
-				log_admin("[key_name(usr)] moved the alien dinghy")
+
+				var/shuttle_tag = input("Which shuttle do you want to call?") as null|anything in shuttles.locations
+
+				if(shuttle_tag && !shuttles.moving[shuttle_tag])
+					move_shuttle(shuttle_tag)
+					message_admins("\blue [key_name_admin(usr)] moved the [shuttle_tag] shuttle", 1)
+					log_admin("[key_name(usr)] moved the [shuttle_tag] shuttle")
+
 			if("togglebombcap")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","BC")
