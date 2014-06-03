@@ -1931,7 +1931,7 @@
 				var/shuttle_tag = input("Which shuttle do you want to call?") as null|anything in shuttles.locations
 
 				if(shuttle_tag && !shuttles.moving[shuttle_tag])
-					move_shuttle(shuttle_tag)
+					shuttles.move_shuttle(shuttle_tag)
 					message_admins("\blue [key_name_admin(usr)] moved the [shuttle_tag] shuttle", 1)
 					log_admin("[key_name(usr)] moved the [shuttle_tag] shuttle")
 

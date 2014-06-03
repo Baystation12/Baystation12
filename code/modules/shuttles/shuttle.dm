@@ -10,6 +10,9 @@ var/global/datum/shuttle_controller/shuttles
 	var/list/areas_offsite = list()
 	var/list/areas_station = list()
 
+	//Shuttles with multiple destinations don't quite behave in the same way as ferries.
+	var/list/multi_shuttles = list()
+
 /datum/shuttle_controller/New()
 
 	..()
@@ -52,6 +55,138 @@ var/global/datum/shuttle_controller/shuttles
 	areas_offsite["Research"] = locate(/area/shuttle/research/outpost)
 	areas_station["Research"] = locate(/area/shuttle/research/station)
 
+	//Vox Shuttle.
+	var/datum/multi_shuttle/VS = new
+	VS.origin = /area/shuttle/vox/station
+
+	VS.destinations = list(
+		"Fore Starboard Solars" = /area/vox_station/northeast_solars,
+		"Fore Port Solars" = /area/vox_station/northwest_solars,
+		"Aft Starboard Solars" = /area/vox_station/southeast_solars,
+		"Aft Port Solars" = /area/vox_station/southwest_solars,
+		"Mining asteroid" = /area/vox_station/mining
+		)
+
+	VS.announcer = "NSV Icarus"
+	VS.arrival_message = "Attention, Exodus, we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
+	VS.departure_message = "Your guests are pulling away, Exodus - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
+	VS.interim = /area/vox_station/transit
+
+	multi_shuttles["Vox Skipjack"] = VS
+	locations["Vox Skipjack"] = 1
+	delays["Vox Skipjack"] = 10
+	moving["Vox Skipjack"] = 0
+
+	//Nuke Ops shuttle.
+	var/datum/multi_shuttle/MS = new
+	MS.origin = /area/syndicate_station/start
+
+	MS.destinations = list(
+		"NW" = /area/syndicate_station/northwest,
+		"N" = /area/syndicate_station/north,
+		"NE" = /area/syndicate_station/northeast,
+		"SW" = /area/syndicate_station/southwest,
+		"S" = /area/syndicate_station/south,
+		"SE" = /area/syndicate_station/southeast,
+		"Telecomms" = /area/syndicate_station/commssat,
+		"Mining" = /area/syndicate_station/mining
+		)
+
+	multi_shuttles["Syndicate"] = MS
+	locations["Syndicate"] = 1
+	delays["Syndicate"] = 10
+	moving["Syndicate"] = 0
+
+/datum/shuttle_controller/proc/move_shuttle(var/shuttle_tag,var/area/origin,var/area/destination)
+
+	world << "move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination]."
+	if(!shuttle_tag || isnull(locations[shuttle_tag]))
+		return
+
+	if(moving[shuttle_tag] == 1) return
+	moving[shuttle_tag] = 1
+
+	spawn(delays[shuttle_tag]*10)
+
+		var/area/area_going_to
+		if(destination)
+			world << "Using supplied destination [destination]."
+			area_going_to = destination
+		else
+			world << "Using controller value [(locations[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])]."
+			area_going_to = (locations[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])
+
+		var/area/area_coming_from
+		if(origin)
+			world << "Using supplied origin [origin]."
+			area_coming_from = origin
+		else
+			world << "Using controller value [(locations[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])]."
+			area_coming_from = (locations[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])
+
+		world << "area_coming_from: [area_coming_from]"
+		world << "area_going_to: [area_going_to]"
+
+		if(area_coming_from == area_going_to)
+			world << "cancelling move, shuttle will overlap."
+			moving[shuttle_tag] = 0
+			return
+
+		var/list/dstturfs = list()
+		var/throwy = world.maxy
+
+		for(var/turf/T in area_going_to)
+			dstturfs += T
+			if(T.y < throwy)
+				throwy = T.y
+
+		for(var/turf/T in dstturfs)
+			var/turf/D = locate(T.x, throwy - 1, 1)
+			for(var/atom/movable/AM as mob|obj in T)
+				AM.Move(D)
+			if(istype(T, /turf/simulated))
+				del(T)
+
+		for(var/mob/living/carbon/bug in area_going_to)
+			bug.gib()
+
+		for(var/mob/living/simple_animal/pest in area_going_to)
+			pest.gib()
+
+		area_coming_from.move_contents_to(area_going_to)
+
+		locations[shuttle_tag] = !locations[shuttle_tag]
+
+		for(var/mob/M in area_going_to)
+			if(M.client)
+				M << "\red The ship lurches beneath you!"
+				spawn(0)
+					if(M.buckled)
+						shake_camera(M, 3, 1)
+					else
+						shake_camera(M, 10, 1)
+			if(istype(M, /mob/living/carbon))
+				if(!M.buckled)
+					M.Weaken(3)
+
+		moving[shuttle_tag] = 0
+	return
+
+//This is for shuttles with a timer before arrival such as the vox skipjack and the escape shuttle.
+/datum/shuttle_controller/proc/move_shuttle_long(var/shuttle_tag,var/area/departing,var/area/destination,var/area/interim,var/delay)
+
+	move_shuttle(shuttle_tag,locate(departing),locate(interim))
+
+	spawn(1)
+		moving[shuttle_tag] = 1 //So they can't jump out by messing with the console.
+
+	sleep(delay)
+
+	moving[shuttle_tag] = 0
+	move_shuttle(shuttle_tag,locate(interim),locate(destination))
+
+	return
+
 /obj/machinery/computer/shuttle_control
 	name = "shuttle console"
 	icon = 'icons/obj/computer.dmi'
@@ -86,14 +221,14 @@ var/global/datum/shuttle_controller/shuttles
 		return
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
+
 	if(href_list["move"])
 		if (!shuttles.moving[shuttle_tag])
 			usr << "\blue [shuttle_tag] Shuttle recieved message and will be sent shortly."
-			move_shuttle(shuttle_tag)
+			shuttles.move_shuttle(shuttle_tag)
 		else
 			usr << "\blue [shuttle_tag] Shuttle is already moving."
 
-	updateUsrDialog()
 
 /obj/machinery/computer/shuttle_control/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
@@ -103,56 +238,3 @@ var/global/datum/shuttle_controller/shuttles
 		usr << "You short out the console's ID checking system. It's now available to everyone!"
 	else
 		..()
-
-proc/move_shuttle(var/shuttle_tag,var/area/offsite,var/area/station)
-
-	if(!shuttle_tag || isnull(shuttles.locations[shuttle_tag]))
-		return
-
-	if(shuttles.moving[shuttle_tag] == 1) return
-	shuttles.moving[shuttle_tag] = 1
-
-	spawn(shuttles.delays[shuttle_tag]*10)
-
-		var/list/dstturfs = list()
-		var/throwy = world.maxy
-
-		var/area/area_going_to = (shuttles.locations[shuttle_tag] == 1 ? shuttles.areas_station[shuttle_tag] : shuttles.areas_offsite[shuttle_tag])
-		var/area/area_coming_from = (shuttles.locations[shuttle_tag] == 1 ? shuttles.areas_offsite[shuttle_tag] : shuttles.areas_station[shuttle_tag])
-
-		for(var/turf/T in area_going_to)
-			dstturfs += T
-			if(T.y < throwy)
-				throwy = T.y
-
-		for(var/turf/T in dstturfs)
-			var/turf/D = locate(T.x, throwy - 1, 1)
-			for(var/atom/movable/AM as mob|obj in T)
-				AM.Move(D)
-			if(istype(T, /turf/simulated))
-				del(T)
-
-		for(var/mob/living/carbon/bug in area_going_to)
-			bug.gib()
-
-		for(var/mob/living/simple_animal/pest in area_going_to)
-			pest.gib()
-
-		area_coming_from.move_contents_to(area_going_to)
-
-		shuttles.locations[shuttle_tag] = !shuttles.locations[shuttle_tag]
-
-		for(var/mob/M in area_going_to)
-			if(M.client)
-				spawn(0)
-					if(M.buckled)
-						shake_camera(M, 3, 1)
-					else
-						shake_camera(M, 10, 1)
-			if(istype(M, /mob/living/carbon))
-				if(!M.buckled)
-					M.Weaken(3)
-
-		shuttles.moving[shuttle_tag] = 0
-
-	return
