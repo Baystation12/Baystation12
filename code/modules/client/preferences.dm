@@ -30,9 +30,9 @@ var/const/MAX_SAVE_SLOTS = 10
 
 datum/preferences
 	//doohickeys for savefiles
-	var/path
+//	var/path
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
-	var/savefile_version = 0
+//	var/savefile_version = 0
 
 	//non-preference stuff
 	var/warns = 0
@@ -41,7 +41,7 @@ datum/preferences
 	var/last_id
 
 	//game-preferences
-	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
+//	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#b82e00"
 	var/be_special = 0					//Special role selection
 	var/UI_style = "Midnight"
@@ -108,10 +108,10 @@ datum/preferences
 	var/list/organ_data = list()
 
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
-	var/accent = "en-us"
-	var/voice = "m1"
-	var/pitch = 50
-	var/talkspeed = 175
+//	var/accent = "en-us"
+//	var/voice = "m1"
+//	var/pitch = 50
+//	var/talkspeed = 175
 	var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
@@ -137,8 +137,8 @@ datum/preferences
 	if(istype(C))
 		if(!IsGuestKey(C.key))
 //			load_path(C.ckey)
-			if(load_preferences())
-				if(load_character())
+			if(load_preferences(C))
+				if(load_character(C))
 					return
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender)
@@ -153,21 +153,17 @@ datum/preferences
 
 		dat += "<a href='?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Character Settings</a>"
 		dat += "<a href='?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Game Preferences</a>"
-		if(!path)
-			dat += "Please create an account to save your preferences."
-
 		dat += "</center>"
 		dat += "<HR>"
 
 		switch(current_tab)
 			if (0) // Character Settings#
-				if(path)
-					dat += "<center>"
-					dat += "Slot <b>[slot_name]</b> - "
-					dat += "<a href=\"byond://?src=\ref[user];preference=open_load_dialog\">Load slot</a> - "
-					dat += "<a href=\"byond://?src=\ref[user];preference=save\">Save slot</a> - "
-					dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Reload slot</a>"
-					dat += "</center>"
+				dat += "<center>"
+				dat += "Slot <b>[slot_name]</b> - "
+				dat += "<a href=\"byond://?src=\ref[user];preference=open_load_dialog\">Load slot</a> - "
+				dat += "<a href=\"byond://?src=\ref[user];preference=save\">Save slot</a> - "
+				dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Reload slot</a>"
+				dat += "</center>"
 				dat += "<center><h2>Occupation Choices</h2>"
 				dat += "<a href='?_src_=prefs;preference=job;task=menu'>Set Occupation Preferences</a><br></center>"
 				dat += "<h2>Identity</h2>"
@@ -1308,12 +1304,12 @@ datum/preferences
 						toggles ^= CHAT_GHOSTRADIO
 
 					if("save")
-						save_preferences()
-						save_character()
+						save_preferences(user)
+						save_character(user)
 
 					if("reload")
-						load_preferences()
-						load_character()
+						load_preferences(user)
+						load_character(user)
 
 					if("open_load_dialog")
 						if(!IsGuestKey(user.key))
@@ -1323,7 +1319,7 @@ datum/preferences
 						close_load_dialog(user)
 
 					if("changeslot")
-						load_character(text2num(href_list["num"]))
+						load_character(user,text2num(href_list["num"]))
 						close_load_dialog(user)
 
 					if("tab")
@@ -1432,7 +1428,8 @@ datum/preferences
 				character.gender = MALE
 
 	proc/open_load_dialog(mob/user)
-		var/DBQuery/query = dbcon.NewQuery("SELECT slot,real_name FROM character WHERE ckey='[user.key]' ORDER BY slot")
+
+		var/DBQuery/query = dbcon.NewQuery("SELECT slot,real_name FROM characters WHERE ckey='[user.ckey]' ORDER BY slot")
 		if(!query.Execute())
 			var/err = query.ErrorMsg()
 			log_game("SQL ERROR during character slot loading. Error : \[[err]\]\n")
@@ -1445,18 +1442,21 @@ datum/preferences
 		var/name
 
 		for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
-			if(i==query.item[1])
-				name =  query.item[2]
-				query.NextRow()
+			while(query.NextRow())
+				if(i==text2num(query.item[1]))
+					name =  query.item[2]
 			if(!name)	name = "Character[i]"
 			if(i==default_slot)
 				name = "<b>[name]</b>"
 			dat += "<a href='?_src_=prefs;preference=changeslot;num=[i];'>[name]</a><br>"
+			name = null
 
 		dat += "<hr>"
 		dat += "<a href='byond://?src=\ref[user];preference=close_load_dialog'>Close</a><br>"
 		dat += "</center></tt>"
-		user << browse(dat, "window=saves;size=300x390")
-
+//		user << browse(dat, "window=saves;size=300x390")
+		var/datum/browser/popup = new(user, "saves", "<div align='center'>Character Saves</div>", 300, 390)
+		popup.set_content(dat)
+		popup.open(0)
 	proc/close_load_dialog(mob/user)
 		user << browse(null, "window=saves")

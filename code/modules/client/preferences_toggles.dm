@@ -5,7 +5,7 @@
 	set desc = ".Toggle Between seeing all mob speech, and only speech of nearby mobs"
 	prefs.toggles ^= CHAT_GHOSTEARS
 	src << "As a ghost, you will now [(prefs.toggles & CHAT_GHOSTEARS) ? "see all speech in the world" : "only see speech from nearby mobs"]."
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	feedback_add_details("admin_verb","TGE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/verb/toggle_ghost_sight()
@@ -14,7 +14,7 @@
 	set desc = ".Toggle Between seeing all mob emotes, and only emotes of nearby mobs"
 	prefs.toggles ^= CHAT_GHOSTSIGHT
 	src << "As a ghost, you will now [(prefs.toggles & CHAT_GHOSTSIGHT) ? "see all emotes in the world" : "only see emotes from nearby mobs"]."
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	feedback_add_details("admin_verb","TGS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/verb/toggle_ghost_radio()
@@ -23,7 +23,7 @@
 	set desc = ".Toggle between hearing all radio chatter, or only from nearby speakers"
 	prefs.toggles ^= CHAT_GHOSTRADIO
 	src << "As a ghost, you will now [(prefs.toggles & CHAT_GHOSTRADIO) ? "hear all radio chat in the world" : "only hear from nearby speakers"]."
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	feedback_add_details("admin_verb","TGR")
 
 /client/proc/toggle_hear_radio()
@@ -32,7 +32,7 @@
 	set desc = "Toggle seeing radiochatter from radios and speakers"
 	if(!holder) return
 	prefs.toggles ^= CHAT_RADIO
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	usr << "You will [(prefs.toggles & CHAT_RADIO) ? "now" : "no longer"] see radio chatter from radios or speakers"
 	feedback_add_details("admin_verb","THR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -42,7 +42,7 @@
 	set desc = "Toggle hearing a notification when admin PMs are recieved"
 	if(!holder)	return
 	prefs.sound ^= SOUND_ADMINHELP
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	usr << "You will [(prefs.toggles & SOUND_ADMINHELP) ? "now" : "no longer"] hear a sound when adminhelps arrive."
 	feedback_add_details("admin_verb","AHS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -51,7 +51,7 @@
 	set category = "Preferences"
 	set desc ="Toggles seeing deadchat"
 	prefs.toggles ^= CHAT_DEAD
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 
 	if(src.holder)
 		src << "You will [(prefs.toggles & CHAT_DEAD) ? "now" : "no longer"] see deadchat."
@@ -65,7 +65,7 @@
 	set category = "Preferences"
 	set desc = "Toggles seeing prayers"
 	prefs.toggles ^= CHAT_PRAYER
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	src << "You will [(prefs.toggles & CHAT_PRAYER) ? "now" : "no longer"] see prayerchat."
 	feedback_add_details("admin_verb","TP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -74,7 +74,7 @@
 	set category = "Preferences"
 	set desc = "Toggles hearing the GameLobby music"
 	prefs.sound ^= SOUND_LOBBY
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	if(prefs.sound & SOUND_LOBBY)
 		src << "You will now hear music in the game lobby."
 		if(istype(mob, /mob/new_player))
@@ -101,7 +101,7 @@
 	set category = "Preferences"
 	set desc = "Toggles hearing sounds uploaded by admins"
 	prefs.sound ^= SOUND_MIDI
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	if(prefs.sound & SOUND_MIDI)
 		src << "You will now hear any sounds uploaded by admins."
 	else
@@ -116,7 +116,7 @@
 	set category = "Preferences"
 	set desc = "Toggles seeing OutOfCharacter chat"
 	prefs.toggles ^= CHAT_OOC
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	src << "You will [(prefs.toggles & CHAT_OOC) ? "now" : "no longer"] see messages on the OOC channel."
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -126,7 +126,7 @@
 	set category = "Preferences"
 	set desc = "Toggles seeing Local OutOfCharacter chat"
 	prefs.toggles ^= CHAT_LOOC
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	src << "You will [(prefs.toggles & CHAT_LOOC) ? "now" : "no longer"] see messages on the LOOC channel."
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -136,7 +136,7 @@
 	set category = "Preferences"
 	set desc = "Toggles hearing ambient sound effects"
 	prefs.sound ^= SOUND_AMBIENCE
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	if(prefs.sound & SOUND_AMBIENCE)
 		src << "You will now hear ambient sounds."
 	else
@@ -153,7 +153,7 @@
 	var/role_flag = be_special_flags[role]
 	if(!role_flag)	return
 	prefs.be_special ^= role_flag
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	src << "You will [(prefs.be_special & role_flag) ? "now" : "no longer"] be considered for [role] events (where possible)."
 	feedback_add_details("admin_verb","TBeSpecial") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -189,7 +189,7 @@
 		prefs.UI_style = UI_style_new
 		prefs.UI_style_alpha = UI_style_alpha_new
 		prefs.UI_style_color = UI_style_color_new
-		prefs.save_preferences()
+		prefs.save_preferences(src)
 		usr << "UI was saved"
 
 /client/verb/toggle_media()
@@ -198,7 +198,7 @@
 	set desc = "Toggle hearing streaming media (radios, jukeboxes, etc)"
 
 	prefs.sound ^= SOUND_STREAMING
-	prefs.save_preferences()
+	prefs.save_preferences(src)
 	usr << "You will [(prefs.toggles & SOUND_STREAMING) ? "now" : "no longer"] hear streamed media."
 	// Restart.
 	media.stop_music()
