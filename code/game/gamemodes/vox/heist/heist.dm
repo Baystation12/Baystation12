@@ -254,8 +254,9 @@ datum/game_mode/proc/auto_declare_completion_heist()
 	return 1
 
 /datum/game_mode/vox/heist/check_finished()
-	if (!(is_vox_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
-		return 1
+	// DO NOT FORGET TO FIX THIS.
+	//if (!(is_vox_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
+	//	return 1
 	return ..()
 
 /datum/game_mode/vox/heist/proc/is_vox_crew_alive()

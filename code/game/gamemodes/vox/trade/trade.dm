@@ -229,8 +229,8 @@ datum/game_mode/proc/auto_declare_completion_trade()
 	return 1
 
 /datum/game_mode/vox/trade/check_finished()
-	if (!(is_vox_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
-		return 1
+//	if (!(is_vox_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
+//		return 1
 	return ..()
 
 /datum/game_mode/vox/trade/proc/is_vox_crew_alive()
