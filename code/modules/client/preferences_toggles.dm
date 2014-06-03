@@ -85,6 +85,7 @@
 			src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // stop the jamsz
 	feedback_add_details("admin_verb","TLobby") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/*
 /client/verb/togglevoices()
 	set name = "Toggle player voices"
 	set category = "Preferences"
@@ -93,6 +94,7 @@
 	prefs.save_preferences()
 	src << "You will [(prefs.sound & SOUND_VOICES) ? "now" : "no longer"] hear voices of players around you, or your own voice."
 	feedback_add_details("admin_verb","TVoice") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+*/
 
 /client/verb/togglemidis()
 	set name = "Hear/Silence Midis"

@@ -136,7 +136,7 @@ datum/preferences
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 	if(istype(C))
 		if(!IsGuestKey(C.key))
-			load_path(C.ckey)
+//			load_path(C.ckey)
 			if(load_preferences())
 				if(load_character())
 					return
@@ -186,10 +186,6 @@ datum/preferences
 				dat += "<br>"
 				dat += "Species: <a href='?_src_=prefs;preference=species;task=input'>[species]</a><br>"
 				dat += "Secondary Language:<br><a href='?_src_=prefs;preference=language;task=input'>[language]</a><br>"
-/*				dat += "Accent: <a href='?_src_=prefs;preference=accent;task=input'>[accent]</a><br>"
-				dat += "Voice: <a href='?_src_=prefs;preference=voice;task=input'>[voice]</a><br>"
-				dat += "Pitch: <a href='?_src_=prefs;preference=pitch;task=input'>[pitch]</a><br>"
-				dat += "Talking Speed: <a href='?_src_=prefs;preference=talkspeed;task=input'>[talkspeed]</a><br>"*/
 				dat += "Blood Type: <a href='?_src_=prefs;preference=b_type;task=input'>[b_type]</a><br>"
 				dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 		//		dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
@@ -316,7 +312,6 @@ datum/preferences
 				dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 				dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(sound & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(sound & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
-				dat += "<b>Hear player voices:</b> <a href='?_src_=prefs;preference=player_voices'><b>[(sound & SOUND_VOICES) ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Randomized Character Slot:</b> <a href='?_src_=prefs;preference=randomslot'><b>[randomslot ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "Nearest Creatures" : "All Speech"]</b></a><br>"
 				dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "Nearest Creatures" : "All Emotes"]</b></a><br>"
@@ -1124,23 +1119,6 @@ datum/preferences
 							undershirt = undershirt_options.Find(new_undershirt)
 						ShowChoices(user)
 
-					if("accent")
-						var/new_accent = input(user, "Choose your accent. en-us:American, en:British, en-sc:Scottish, mb-de4-en:German, mb-fr1-en:French", "Character Preference") as null|anything in list("en-us", "en", "en-sc","mb-de4-en","mb-fr1-en")
-						if(new_accent)
-							accent = new_accent
-					if("voice")
-						var/new_voice = input(user, "Choose your voice. f:Female, m:Male", "Character Preference") as null|anything in list("f1","m1","f2","m2","f3","m3","f4","m4","f5","m5","m6","m7")
-						if(new_voice)
-							voice = new_voice
-					if("pitch")
-						var/new_pitch = input(user, "Choose your character's voice pitch:\n(0-99) Default is 50.", "Character Preference") as num|null
-						if(new_pitch)
-							pitch = max(min( round(text2num(new_pitch)), 99),0)
-					if("talkspeed")
-						var/new_talkspeed = input(user, "Choose your character's voice talk speed:\n(140-240) Default is 175.", "Character Preference") as num|null
-						if(new_talkspeed)
-							talkspeed = max(min( round(text2num(new_talkspeed)), 240),140)
-
 					if("eyes")
 						var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference") as color|null
 						if(new_eyes)
@@ -1329,9 +1307,6 @@ datum/preferences
 					if("ghost_radio")
 						toggles ^= CHAT_GHOSTRADIO
 
-					if("player_voices")
-						sound ^= SOUND_VOICES
-
 					if("save")
 						save_preferences()
 						save_character()
@@ -1457,20 +1432,26 @@ datum/preferences
 				character.gender = MALE
 
 	proc/open_load_dialog(mob/user)
+		var/DBQuery/query = dbcon.NewQuery("SELECT slot,real_name FROM character WHERE ckey='[user.key]' ORDER BY slot")
+		if(!query.Execute())
+			var/err = query.ErrorMsg()
+			log_game("SQL ERROR during character slot loading. Error : \[[err]\]\n")
+			message_admins("SQL ERROR during character slot loading. Error : \[[err]\]\n")
+			return
+
 		var/dat = "<body>"
 		dat += "<tt><center>"
+		dat += "<b>Select a character slot to load</b><hr>"
+		var/name
 
-		var/savefile/S = new /savefile(path)
-		if(S)
-			dat += "<b>Select a character slot to load</b><hr>"
-			var/name
-			for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
-				S.cd = "/character[i]"
-				S["real_name"] >> name
-				if(!name)	name = "Character[i]"
-				if(i==default_slot)
-					name = "<b>[name]</b>"
-				dat += "<a href='?_src_=prefs;preference=changeslot;num=[i];'>[name]</a><br>"
+		for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
+			if(i==query.item[1])
+				name =  query.item[2]
+				query.NextRow()
+			if(!name)	name = "Character[i]"
+			if(i==default_slot)
+				name = "<b>[name]</b>"
+			dat += "<a href='?_src_=prefs;preference=changeslot;num=[i];'>[name]</a><br>"
 
 		dat += "<hr>"
 		dat += "<a href='byond://?src=\ref[user];preference=close_load_dialog'>Close</a><br>"
