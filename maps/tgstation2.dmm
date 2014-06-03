@@ -6907,7 +6907,7 @@
 "cCQ" = (/obj/structure/table,/obj/machinery/microwave,/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cCR" = (/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cCS" = (/obj/structure/table,/obj/item/clothing/glasses/hud/health,/obj/item/clothing/glasses/hud/health,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/unsimulated/floor{dir = 6; icon_state = "whitegreen"},/area/centcom/holding)
-"cCT" = (/obj/machinery/computer/syndicate_station{req_access_txt = "0"},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
+"cCT" = (/obj/machinery/computer/shuttle_control/multi/syndicate{req_access_txt = "0"},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cCU" = (/obj/structure/table,/obj/machinery/door_control{id = "syndieshutters"; name = "remote shutter control"; req_access_txt = "150"},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cCV" = (/obj/structure/computerframe,/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cCW" = (/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snow"},/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "gravsnow_corner"; dir = 8},/area/syndicate_mothership)
