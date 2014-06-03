@@ -45,7 +45,8 @@
 	name = "standard robot module"
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
+		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/melee/baton(src)
 		src.modules += new /obj/item/weapon/extinguisher(src)
 		src.modules += new /obj/item/weapon/wrench(src)
@@ -94,7 +95,7 @@
 
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/borg/sight/meson(src)
 		src.emag = new /obj/item/borg/stun(src)
 		src.modules += new /obj/item/weapon/rcd/borg(src)
@@ -146,7 +147,7 @@
 	name = "security robot module"
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/borg/sight/hud/sec(src)
 		src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 		src.modules += new /obj/item/weapon/melee/baton(src)
@@ -177,7 +178,7 @@
 	name = "janitorial robot module"
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/weapon/soap/nanotrasen(src)
 		src.modules += new /obj/item/weapon/storage/bag/trash(src)
 		src.modules += new /obj/item/weapon/mop(src)
@@ -199,7 +200,7 @@
 	name = "service robot module"
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
 		src.modules += new /obj/item/weapon/pen/robopen(src)
@@ -236,7 +237,7 @@
 	name = "miner robot module"
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/borg/sight/meson(src)
 		src.emag = new /obj/item/borg/stun(src)
 		src.modules += new /obj/item/weapon/storage/bag/ore(src)
@@ -283,8 +284,8 @@
 		)
 
 	New()
-		//TODO: Replace with shittier flashlight and work out why we can't remove the flash. ~Z
-		..()
+		//TODO: Replace with shittier flashlight ~Z
+		src.modules += new /obj/item/device/flashlight(src)
 		src.modules += new /obj/item/weapon/weldingtool(src)
 		src.modules += new /obj/item/weapon/screwdriver(src)
 		src.modules += new /obj/item/weapon/wrench(src)
