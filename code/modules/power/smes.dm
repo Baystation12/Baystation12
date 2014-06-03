@@ -27,6 +27,8 @@
 	var/last_output = 0
 	var/last_charge = 0
 	var/last_online = 0
+	var/open_hatch = 0
+	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
 
 /obj/machinery/power/smes/New()
 	..()
@@ -83,7 +85,7 @@
 		var/excess = terminal.surplus()
 
 		if(charging)
-			if(excess > 0 && excess >= chargelevel)		// if there's power available, try to charge
+			if(excess >= 0)		// if there's power available, try to charge
 
 				var/load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
 
@@ -155,6 +157,35 @@
 		updateicon()
 	return
 
+//Will return 1 on failure
+/obj/machinery/power/smes/proc/make_terminal(const/mob/user)
+	if (user.loc == loc)
+		user << "<span class='warning'>You must not be on the same tile as the SMES.</span>"
+		return 1
+
+	//Direction the terminal will face to
+	var/tempDir = get_dir(user, src)
+	switch(tempDir)
+		if (NORTHEAST, SOUTHEAST)
+			tempDir = EAST
+		if (NORTHWEST, SOUTHWEST)
+			tempDir = WEST
+	var/turf/tempLoc = get_step(src, reverse_direction(tempDir))
+	if (istype(tempLoc, /turf/space))
+		user << "<span class='warning'>You can't build a terminal on space.</span>"
+		return 1
+	else if (istype(tempLoc))
+		if(tempLoc.intact)
+			user << "<span class='warning'>You must remove the floor plating first.</span>"
+			return 1
+	user << "<span class='notice'>You start adding cable to the SMES.</span>"
+	if(do_after(user, 50))
+		terminal = new /obj/machinery/power/terminal(tempLoc)
+		terminal.dir = tempDir
+		terminal.master = src
+		return 0
+	return 1
+
 
 /obj/machinery/power/smes/add_load(var/amount)
 	if(terminal && terminal.powernet)
@@ -171,6 +202,55 @@
 	ui_interact(user)
 
 
+/obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if(!open_hatch)
+			open_hatch = 1
+			user << "<span class='notice'>You open the maintenance hatch of [src].</span>"
+		else
+			open_hatch = 0
+			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
+	if (open_hatch)
+		if(istype(W, /obj/item/weapon/cable_coil) && !terminal && !building_terminal)
+			building_terminal = 1
+			var/obj/item/weapon/cable_coil/CC = W
+			if (CC.amount < 10)
+				user << "<span class='warning'>You need more cables.</span>"
+				return
+			if (make_terminal(user))
+				building_terminal = 0
+				return
+			building_terminal = 0
+			CC.use(10)
+			user.visible_message(\
+					"<span class='notice'>[user.name] has added cables to the SMES.</span>",\
+					"<span class='notice'>You added cables the SMES.</span>")
+			terminal.connect_to_network()
+			stat = 0
+
+		else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
+			building_terminal = 1
+			var/turf/tempTDir = terminal.loc
+			if (istype(tempTDir))
+				if(tempTDir.intact)
+					user << "<span class='warning'>You must remove the floor plating first.</span>"
+				else
+					user << "<span class='notice'>You begin to cut the cables...</span>"
+					playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
+					if(do_after(user, 50))
+						if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
+							var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+							s.set_up(5, 1, src)
+							s.start()
+							return
+						new /obj/item/weapon/cable_coil(loc,10)
+						user.visible_message(\
+							"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
+							"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
+						del(terminal)
+			building_terminal = 0
+
+
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 
 	if(stat & BROKEN)
@@ -182,7 +262,7 @@
 	data["storedCapacity"] = round(100.0*charge/capacity, 0.1)
 	data["charging"] = charging
 	data["chargeMode"] = chargemode
-	data["chargelevel"] = chargelevel
+	data["chargeLevel"] = chargelevel
 	data["chargeMax"] = SMESMAXCHARGELEVEL
 	data["outputOnline"] = online
 	data["outputLevel"] = output
