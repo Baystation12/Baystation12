@@ -5,7 +5,7 @@
 
 /obj/item/weapon/circuitboard/ghettosmes
 	name = "Circuit board (PSU)"
-	desc = "An APC circuit repurposed into some power storage device"
+	desc = "An APC circuit repurposed into some power storage device controller"
 	build_path = "/obj/machinery/power/smes/ghetto"
 	board_type = "machine"
 //	origin_tech = "powerstorage=2;engineering=4;programming=4"
@@ -20,11 +20,11 @@
 	online = 0
 	chargelevel = 0
 	output = 0
-	var/opened = 0
-	var/input_level_max = 0
-	var/output_level_max = 0
+	input_level_max = 0
+	output_level_max = 0
 	var/cells_amount = 0
 	var/capacitors_amount = 0
+	var/overcharge_percent = 0
 
 
 /obj/machinery/power/smes/ghetto/New()
@@ -51,43 +51,12 @@
 	for(var/obj/item/weapon/cell/PC in component_parts)
 		C += PC.maxcharge
 		cells_amount++
-	capacity = C * 50   //Basic cells are such crap. Super cells will make a standard SMES
-
-
-//Modified /vg/code
-/obj/machinery/power/smes/ghetto/proc/make_terminal(const/mob/user)
-	if (user.loc == loc)
-		user << "You must not be on the same tile as the PSU."
-		return 2
-
-	//Direction the terminal will face
-	var/tempDir = get_dir(user, src)
-	switch(tempDir)
-		if (NORTHEAST, SOUTHEAST)
-			tempDir = EAST
-		if (NORTHWEST, SOUTHWEST)
-			tempDir = WEST
-
-	playsound(get_turf(src), 'sound/items/zip.ogg', 100, 1)
-	if(do_after(user, 50))
-		terminal = new /obj/machinery/power/terminal(get_step(src, reverse_direction(tempDir)))
-		terminal.dir = tempDir
-		terminal.master = src
-		return 0
-	return 1
+	capacity = C * 40   //Basic cells are such crap. Hyper cells needed to get on normal SMES levels.
 
 
 /obj/machinery/power/smes/ghetto/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob) //these can only be moved by being reconstructed, solves having to remake the powernet.
-	if(istype(W, /obj/item/weapon/screwdriver))
-		if(!opened)
-			src.opened = 1
-			//src.icon_state = "smes_t"
-			user << "You open the maintenance hatch of [src]"
-		else
-			src.opened = 0
-			//src.icon_state = "smes"
-			user << "You close the maintenance hatch of [src]"
-	if(opened)
+	..() //SMES attackby for now handles screwdriver, cable coils and wirecutters, no need to repeat that here
+	if(open_hatch)
 		if(istype(W, /obj/item/weapon/crowbar))
 			if (charge < (capacity / 100))
 				if (!online && !chargemode)
@@ -102,44 +71,9 @@
 					del(src)
 					return 1
 				else
-					user << "Turn off the [src] before."
+					user << "<span class='warning'>Turn off the [src] before.</span>"
 			else
-				user << "Better let [src] discharge before dismantling it."
-		else if(istype(W, /obj/item/weapon/cable_coil) && !terminal)
-			var/obj/item/weapon/cable_coil/CC = W
-			if (CC.amount < 10)
-				user << "You need more cables."
-				return
-
-			user << "You start adding cable to the PSU."
-			if (make_terminal(user))
-				return
-
-			CC.use(10)
-			user.visible_message(\
-					"\red [user.name] has added cables to the PSU!",\
-					"You added cables the PSU.")
-			terminal.connect_to_network()
-			src.stat = 0
-
-		else if(istype(W, /obj/item/weapon/wirecutters) && terminal)
-			var/tempTDir = terminal.loc
-			if(tempTDir:intact)
-				user << "\red You must remove the floor plating in front of the PSU first."
-				return
-			user << "You begin to cut the cables..."
-			playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
-			if(do_after(user, 50))
-				if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
-					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-					s.set_up(5, 1, src)
-					s.start()
-					return
-				new /obj/item/weapon/cable_coil(loc,10)
-				user.visible_message(\
-					"\red [user.name] cut the cables and dismantled the power terminal.",\
-					"You cut the cables and dismantle the power terminal.")
-				del(terminal)
+				user << "<span class='warning'>Better let [src] discharge before dismantling it.</span>"
 		else if ((istype(W, /obj/item/weapon/stock_parts/capacitor) && (capacitors_amount < 5)) || (istype(W, /obj/item/weapon/cell) && (cells_amount < 5)))
 			if (charge < (capacity / 100))
 				if (!online && !chargemode)
@@ -147,99 +81,125 @@
 					component_parts += W
 					W.loc = src
 					RefreshParts()
-					user << "You upgrade the [src] with [W.name]."
+					user << "<span class='notice'>You upgrade the [src] with [W.name].</span>"
 				else
-					user << "Turn off the [src] before."
+					user << "<span class='warning'>Turn off the [src] before.</span>"
 			else
-				user << "Better let [src] discharge before putting your hand inside it."
+				user << "<span class='warning'>Better let [src] discharge before putting your hand inside it.</span>"
 		else
 			user.set_machine(src)
 			interact(user)
 			return 1
 	return
 
-
-//Couple variables changed
-/obj/machinery/power/smes/ghetto/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
-	if(stat & BROKEN)
-		return
-
-	// this is the data which will be sent to the ui
-	var/data[0]
-	data["nameTag"] = name_tag
-	data["storedCapacity"] = round(100.0*charge/capacity, 0.1)
-	data["charging"] = charging
-	data["chargeMode"] = chargemode
-	data["chargeLevel"] = chargelevel
-	data["chargeMax"] = input_level_max
-	data["outputOnline"] = online
-	data["outputLevel"] = output
-	data["outputMax"] = output_level_max
-	data["outputLoad"] = round(loaddemand)
-
-	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
-	if (!ui)
-		// the ui does not exist, so we'll create a new() one
-        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
-		ui = new(user, src, ui_key, "smes.tmpl", "SMES Power Storage Unit", 540, 380)
-		// when the ui is first opened this is the data it will use
-		ui.set_initial_data(data)
-		// open the new ui window
-		ui.open()
-		// auto update every Master Controller tick
-		ui.set_auto_update(1)
-
-
-
-/obj/machinery/power/smes/ghetto/Topic(href, href_list)
-	..()
-
-	if (usr.stat || usr.restrained() )
-		return
-	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		if(!istype(usr, /mob/living/silicon/ai))
-			usr << "\red You don't have the dexterity to do this!"
+//This mess of if-elses and magic numbers handles what happens if the engies don't pay attention and let it eat too much charge
+//What happens depends on how much capacity has the ghetto smes and how much it is overcharged.
+//Under 1.2M: 5% of ion_act() per process() tick from 125% and higher overcharges. 1.2M is achieved with 3 high cells.
+//[1.2M-2.4M]: 6% ion_act from 120%. 5% of EMP from 140%.
+//(2.4M-3.6M] :6% ion_act from 115%. 5% of EMP from 130%. Non-hull-breaching explosion at 150%.
+//(3.6M-INFI): 6% ion_act from 115%. 5% of EMP from 125%. Hull-breaching explosion from 140%.
+/obj/machinery/power/smes/ghetto/proc/overcharge_consequences()
+	world << "Proc called"
+	if (capacity < 1.2e6)
+		world << "cap 1.2e6"
+		if (overcharge_percent >= 125)
+			world << "if entered, rolling"
+			if (prob(5))
+				world << "roll success"
+				ion_act()
+	else if (capacity <= 2.4e6)
+		world << "cap 2.4e6"
+		if (overcharge_percent >= 120)
+			world << "if entered"
+			if (prob(6))
+				world << "roll success"
+				ion_act()
+		else
 			return
+		if (overcharge_percent >= 140)
+			world << "second if"
+			if (prob(1))
+				world << "roll success"
+				empulse(src.loc, 3, 8, 1)
+	else if (capacity <= 3.6e6)
+		world << "cap 3.6"
+		if (overcharge_percent >= 115)
+			world << "if entered"
+			if (prob(7))
+				world << "roll success"
+				ion_act()
+		else
+			return
+		if (overcharge_percent >= 130)
+			world << "second if"
+			if (prob(1))
+				world << "roll success"
+				empulse(src.loc, 3, 8, 1)
+		if (overcharge_percent >= 150)
+			world << "third if"
+			if (prob(1))
+				world << "roll success"
+				explosion(src.loc, 0, 1, 3, 5)
+	else //capacity > 3.6e6
+		world << "cap >3.6"
+		if (overcharge_percent >= 115)
+			world << "if entered"
+			if (prob(8))
+				world << "roll success"
+				ion_act()
+		else
+			return
+		if (overcharge_percent >= 125)
+			world << "second if"
+			if (prob(2))
+				world << "roll success"
+				empulse(src.loc, 4, 10, 1)
+		if (overcharge_percent >= 140)
+			world << "third if"
+			if (prob(1))
+				world << "roll success"
+				explosion(src.loc, 1, 3, 5, 8)
 
-//world << "[href] ; [href_list[href]]"
 
-	if (!istype(src.loc, /turf) && !istype(usr, /mob/living/silicon/))
-		return 0 // Do not update ui
+#define SMESRATE 0.05			// rate of internal charge to external power
+/obj/machinery/power/smes/ghetto/process()
+	if(stat & BROKEN)	return
 
-	for(var/area/A in active_areas)
-		A.master.powerupdate = 3
+	//store machine state to see if we need to update the icon overlays
+	var/last_disp = chargedisplay()
+	var/last_chrg = charging
+	var/last_onln = online
 
+	if(terminal)
+		var/excess = terminal.surplus()
 
-	if( href_list["cmode"] )
-		chargemode = !chargemode
-		if(!chargemode)
-			charging = 0
+		if(charging)
+			if(excess >= 0)		// if there's power available, try to charge
+				var/load = min((capacity * 1.5 - charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
+				charge += load * SMESRATE	// increase the charge
+				add_load(load)		// add the load to the terminal side network
+
+			else					// if not enough capacity
+				charging = 0		// stop charging
+
+		else
+			if (chargemode && excess > 0 && excess >= chargelevel)
+				charging = 1
+
+	if(online)		// if outputting
+		lastout = min( charge/SMESRATE, output)		//limit output to that stored
+		charge -= lastout*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
+		add_avail(lastout)				// add output to powernet (smes side)
+		if(charge < 0.0001)
+			online = 0					// stop output if charge falls to zero
+
+	// only update icon if state changed
+	if(last_disp != chargedisplay() || last_chrg != charging || last_onln != online)
 		updateicon()
 
-	else if( href_list["online"] )
-		online = !online
-		updateicon()
-	else if( href_list["input"] )
-		switch( href_list["input"] )
-			if("min")
-				chargelevel = 0
-			if("max")
-				chargelevel = input_level_max		//30000
-			if("set")
-				chargelevel = input(usr, "Enter new input level (0-[input_level_max])", "SMES Input Power Control", chargelevel) as num
-		chargelevel = max(0, min(input_level_max, chargelevel))	// clamp to range
+	overcharge_percent = ((charge / capacity) * 100)
+	if (overcharge_percent > 115) //115% is the minimum overcharge for anything to happen
+		overcharge_consequences()
+	return
 
-	else if( href_list["output"] )
-		switch( href_list["output"] )
-			if("min")
-				output = 0
-			if("max")
-				output = output_level_max		//30000
-			if("set")
-				output = input(usr, "Enter new output level (0-[output_level_max])", "SMES Output Power Control", output) as num
-		output = max(0, min(output_level_max, output))	// clamp to range
-
-	investigate_log("input/output; [chargelevel>output?"<font color='green'>":"<font color='red'>"][chargelevel]/[output]</font> | Output-mode: [online?"<font color='green'>on</font>":"<font color='red'>off</font>"] | Input-mode: [chargemode?"<font color='green'>auto</font>":"<font color='red'>off</font>"] by [usr.key]","singulo")
-
-	return 1
+#undef SMESRATE
