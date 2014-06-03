@@ -184,6 +184,7 @@
 
 	anchored = 1
 	density = 0
+	layer = 2
 	var/health = 15
 	var/obj/effect/alien/weeds/node/linked_node = null
 
@@ -191,6 +192,7 @@
 	icon_state = "weednode"
 	name = "purple sac"
 	desc = "Weird purple octopus-like thing."
+	layer = 3
 	luminosity = NODERANGE
 	var/node_range = NODERANGE
 
@@ -200,10 +202,10 @@
 
 /obj/effect/alien/weeds/New(pos, node)
 	..()
-	linked_node = node
 	if(istype(loc, /turf/space))
 		del(src)
 		return
+	linked_node = node
 	if(icon_state == "weeds")icon_state = pick("weeds", "weeds1", "weeds2")
 	spawn(rand(150, 200))
 		if(src)
@@ -230,15 +232,15 @@ Alien plants should do something if theres a lot of poison
 		del(src)
 		return
 
+	if(!linked_node || (get_dist(linked_node, src) > linked_node.node_range) )
+		return
+	
 	direction_loop:
 		for(var/dirn in cardinal)
 			var/turf/T = get_step(src, dirn)
 
 			if (!istype(T) || T.density || locate(/obj/effect/alien/weeds) in T || istype(T.loc, /area/arrival) || istype(T, /turf/space))
 				continue
-
-			if(!linked_node || get_dist(linked_node, src) > linked_node.node_range)
-				return
 
 	//		if (locate(/obj/movable, T)) // don't propogate into movables
 	//			continue

@@ -21,6 +21,13 @@
 	var/obj/item/weapon/paper/P
 	if(istype(W, /obj/item/weapon/paper))
 		P = W
+		if (istype(P, /obj/item/weapon/paper/carbon))
+			var/obj/item/weapon/paper/carbon/C = P
+			if (!C.iscopy && !C.copied)
+				user << "<span class='notice'>Take off the carbon copy first.</span>"
+				add_fingerprint(user)
+				return
+
 		amount++
 		if(screen == 2)
 			screen = 1
@@ -37,9 +44,18 @@
 		user << "<span class='notice'>You add [(W.name == "photo") ? "the photo" : W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
 		user.drop_from_inventory(W)
 		W.loc = src
-		if(istype(user,/mob/living/carbon/human))
-			user:update_inv_l_hand()
-			user:update_inv_r_hand()
+	else if(istype(W, /obj/item/weapon/lighter))
+		burnpaper(W, user)
+	else if(istype(W, /obj/item/weapon/paper_bundle))
+		user.drop_from_inventory(W)
+		for(var/obj/O in W)
+			O.loc = src
+			O.add_fingerprint(usr)
+			src.amount++
+			if(screen == 2)
+				screen = 1
+		user << "<span class='notice'>You add \the [W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
+		del(W)
 	else
 		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
 			usr << browse("", "window=[name]") //Closes the dialog
@@ -48,6 +64,31 @@
 	update_icon()
 	add_fingerprint(usr)
 	return
+
+
+/obj/item/weapon/paper_bundle/proc/burnpaper(obj/item/weapon/lighter/P, mob/user)
+	var/class = "<span class='warning'>"
+
+	if(P.lit && !user.restrained())
+		if(istype(P, /obj/item/weapon/lighter/zippo))
+			class = "<span class='rose'>"
+
+		user.visible_message("[class][user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!", \
+		"[class]You hold \the [P] up to \the [src], burning it slowly.")
+
+		spawn(20)
+			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
+				user.visible_message("[class][user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.", \
+				"[class]You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.")
+
+				if(user.get_inactive_hand() == src)
+					user.drop_from_inventory(src)
+
+				new /obj/effect/decal/cleanable/ash(src.loc)
+				del(src)
+
+			else
+				user << "\red You must hold \the [P] steady to burn \the [src]."
 
 
 /obj/item/weapon/paper_bundle/examine()
@@ -103,7 +144,7 @@
 
 /obj/item/weapon/paper_bundle/Topic(href, href_list)
 	..()
-	if((src in usr.contents) || (src.loc in usr.contents))
+	if((src in usr.contents) || (istype(src.loc, /obj/item/weapon/folder) && (src.loc in usr.contents)))
 		usr.set_machine(src)
 		if(href_list["next_page"])
 			if(page == amount)
@@ -125,44 +166,18 @@
 			playsound(src.loc, "pageturn", 50, 1)
 		if(href_list["remove"])
 			var/obj/item/weapon/W = src[page]
-			W.loc = usr.loc
-			if(istype(usr,/mob/living/carbon))
-				//Place the item in the user's hand if possible
-				if(!usr.r_hand)
-					W.loc = usr
-					usr.r_hand = W
-					W.layer = 20
-				else if(!usr.l_hand)
-					W.loc = usr
-					usr.l_hand = W
-					W.layer = 20
+			usr.put_in_hands(W)
 			usr << "<span class='notice'>You remove the [W.name] from the bundle.</span>"
-
 			if(amount == 1)
 				var/obj/item/weapon/paper/P = src[1]
-				P.loc = usr.loc
-				if (usr.r_hand == src)
-					usr.drop_from_inventory(src)
-					P.loc = usr
-					usr.r_hand = P
-					P.layer = 20
-				else if (usr.l_hand == src)
-					usr.drop_from_inventory(src)
-					P.loc = usr
-					usr.l_hand = P
-					P.layer = 20
-				if(istype(usr,/mob/living/carbon/human))
-					usr:update_inv_l_hand()
-					usr:update_inv_r_hand()
+				usr.drop_from_inventory(src)
+				usr.put_in_hands(P)
 				del(src)
 			else if(page == amount)
 				screen = 2
 			else if(page == amount+1)
 				page--
 
-			if(istype(usr,/mob/living/carbon/human))
-				usr:update_inv_l_hand()
-				usr:update_inv_r_hand()
 			amount--
 			update_icon()
 	else
@@ -193,10 +208,9 @@
 	usr << "<span class='notice'>You loosen the bundle.</span>"
 	for(var/obj/O in src)
 		O.loc = usr.loc
+		O.layer = initial(O.layer)
+		O.add_fingerprint(usr)
 	usr.drop_from_inventory(src)
-	if(istype(usr,/mob/living/carbon/human))
-		usr:update_inv_l_hand()
-		usr:update_inv_r_hand()
 	del(src)
 	return
 
@@ -220,7 +234,6 @@
 			i++
 		else if(istype(O, /obj/item/weapon/photo))
 			var/obj/item/weapon/photo/Ph = O
-//			img.icon_state = "photo"
 			img = Ph.tiny
 			photo = 1
 			overlays += img

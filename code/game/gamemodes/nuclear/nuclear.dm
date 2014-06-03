@@ -246,9 +246,9 @@
 	synd_mob.equip_to_slot_or_del(new_suit, slot_wear_suit)
 	synd_mob.equip_to_slot_or_del(new_helmet, slot_head)
 
-	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(synd_mob)
-	E.imp_in = synd_mob
-	E.implanted = 1
+//	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(synd_mob)
+//	E.imp_in = synd_mob
+//	E.implanted = 1
 	synd_mob.update_icons()
 	return 1
 
