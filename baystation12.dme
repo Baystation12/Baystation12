@@ -372,7 +372,6 @@
 #include "code\game\machinery\computer\skills.dm"
 #include "code\game\machinery\computer\specops_shuttle.dm"
 #include "code\game\machinery\computer\station_alert.dm"
-#include "code\game\machinery\computer\syndicate_shuttle.dm"
 #include "code\game\machinery\computer\syndicate_specops_shuttle.dm"
 #include "code\game\machinery\doors\airlock.dm"
 #include "code\game\machinery\doors\airlock_electronics.dm"

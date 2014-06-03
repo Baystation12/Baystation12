@@ -5,6 +5,7 @@
 	var/at_origin = 1
 	var/move_time = 240
 	var/cooldown = 200
+	var/last_move = 0
 
 	var/announcer
 	var/arrival_message
@@ -42,9 +43,13 @@
 	if(..(user))
 		return
 	src.add_fingerprint(user)
-	var/dat
 
+	var/datum/multi_shuttle/MS = shuttles.multi_shuttles[shuttle_tag]
+	if(!istype(MS)) return
+
+	var/dat
 	dat = "<center>[shuttle_tag] Ship Control<hr>"
+
 
 	if(shuttles.moving[shuttle_tag])
 		dat += "Location: <font color='red'>Moving</font> <br>"
@@ -52,11 +57,16 @@
 		var/area/areacheck = get_area(src)
 		dat += "Location: [areacheck.name]<br>"
 
-	dat += "<b><A href='?src=\ref[src];toggle_cloak=[1]'>Toggle cloaking field</A></b><br>"
+	if((MS.last_move + MS.cooldown) > world.time)
+		dat += "<font color='red'>Engines charging.</font><br>"
+	else
+		dat += "<font color='green'>Engines ready.</font><br>"
+
+	dat += "<br><b><A href='?src=\ref[src];toggle_cloak=[1]'>Toggle cloaking field</A></b><br>"
 	dat += "<b><A href='?src=\ref[src];move_multi=[1]'>Move ship</A></b><br>"
 	dat += "<b><A href='?src=\ref[src];start=[1]'>Return to base</A></b></center>"
 
-	user << browse("[dat]", "window=[shuttle_tag]shuttlecontrol;size=220x220")
+	user << browse("[dat]", "window=[shuttle_tag]shuttlecontrol;size=300x600")
 
 /obj/machinery/computer/shuttle_control/multi/Topic(href, href_list)
 
@@ -71,6 +81,10 @@
 
 	if (shuttles.moving[shuttle_tag])
 		usr << "\blue [shuttle_tag] vessel is moving."
+		return
+
+	if((MS.last_move + MS.cooldown) > world.time)
+		usr << "\red The ship is inoperable while the engines are charging."
 		return
 
 	if(href_list["start"])

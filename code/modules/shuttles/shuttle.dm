@@ -82,15 +82,20 @@ var/global/datum/shuttle_controller/shuttles
 	MS.origin = /area/syndicate_station/start
 
 	MS.destinations = list(
-		"NW" = /area/syndicate_station/northwest,
-		"N" = /area/syndicate_station/north,
-		"NE" = /area/syndicate_station/northeast,
-		"SW" = /area/syndicate_station/southwest,
-		"S" = /area/syndicate_station/south,
-		"SE" = /area/syndicate_station/southeast,
-		"Telecomms" = /area/syndicate_station/commssat,
-		"Mining" = /area/syndicate_station/mining
+		"Northwest of the station" = /area/syndicate_station/northwest,
+		"North of the station" = /area/syndicate_station/north,
+		"Northeast of the station" = /area/syndicate_station/northeast,
+		"Southwest of the station" = /area/syndicate_station/southwest,
+		"South of the station" = /area/syndicate_station/south,
+		"Southeast of the station" = /area/syndicate_station/southeast,
+		"Telecomms Satellite" = /area/syndicate_station/commssat,
+		"Mining Asteroid" = /area/syndicate_station/mining
 		)
+
+	MS.announcer = "NSV Icarus"
+	MS.arrival_message = "Attention, Exodus, you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
+	MS.departure_message = "Your visitors are on their way out of the system, Exodus, burning delta-v like it's nothing. Good riddance."
+	MS.interim = /area/syndicate_station/transit
 
 	multi_shuttles["Syndicate"] = MS
 	locations["Syndicate"] = 1
@@ -159,11 +164,12 @@ var/global/datum/shuttle_controller/shuttles
 
 		for(var/mob/M in area_going_to)
 			if(M.client)
-				M << "\red The ship lurches beneath you!"
 				spawn(0)
 					if(M.buckled)
+						M << "\red Sudden acceleration presses you into your chair!"
 						shake_camera(M, 3, 1)
 					else
+						M << "\red The ship lurches beneath you!"
 						shake_camera(M, 10, 1)
 			if(istype(M, /mob/living/carbon))
 				if(!M.buckled)
@@ -238,3 +244,6 @@ var/global/datum/shuttle_controller/shuttles
 		usr << "You short out the console's ID checking system. It's now available to everyone!"
 	else
 		..()
+
+/obj/machinery/computer/shuttle_control/bullet_act(var/obj/item/projectile/Proj)
+	visible_message("[Proj] ricochets off [src]!")
