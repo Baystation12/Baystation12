@@ -293,6 +293,10 @@
 		EquipCustomItems(character)
 		character.loc = pick(latejoin)
 		character.lastarea = get_area(loc)
+		// Moving wheelchair if they have one
+		if(character.buckled && istype(character.buckled, /obj/structure/stool/bed/chair/wheelchair))
+			character.buckled.loc = character.loc
+			character.buckled.dir = character.dir
 
 		ticker.mode.latespawn(character)
 
