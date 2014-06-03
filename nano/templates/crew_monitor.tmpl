@@ -1,0 +1,14 @@
+<!--
+Crew Monitoring Computer interface
+-->
+<table width="100%"><tbody>
+	{{for crewmembers}}
+		{{if sensor_type == 1}}
+			<tr><td>{{:name}}</td><td>{{:dead ? "<span class='bad'>Deceased</span>" : "<span class='good'>Living</span>"}}</td><td><span class="neutral">Not Available</span></td></tr>
+		{{else sensor_type == 2}}
+			<tr><td>{{:name}}</td><td>{{:dead ? "<span class='bad'>Deceased</span>" : "<span class='good'>Living</span>"}} (<span class="oxyloss">{{:oxy}}</span>/<span class="toxin">{{:tox}}</span>/<span class="burn">{{:fire}}</span>/<span class="brute">{{:brute}}</span>)</td><td><span class="neutral">Not Available</td></td></tr>
+		{{else sensor_type == 3}}
+			<tr><td>{{:name}}</td><td>{{:dead ? "<span class='bad'>Deceased</span>" : "<span class='good'>Living</span>"}} (<span class="oxyloss">{{:oxy}}</span>/<span class="toxin">{{:tox}}</span>/<span class="burn">{{:fire}}</span>/<span class="brute">{{:brute}}</span>)</td><td>{{:area}}({{:x}}, {{:y}})</td></tr>
+		{{/if}}
+	{{/for}}
+</tbody></table>
