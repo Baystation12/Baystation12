@@ -1430,11 +1430,6 @@ datum/preferences
 	proc/open_load_dialog(mob/user)
 
 		var/DBQuery/query = dbcon.NewQuery("SELECT slot,real_name FROM characters WHERE ckey='[user.ckey]' ORDER BY slot")
-		if(!query.Execute())
-			var/err = query.ErrorMsg()
-			log_game("SQL ERROR during character slot loading. Error : \[[err]\]\n")
-			message_admins("SQL ERROR during character slot loading. Error : \[[err]\]\n")
-			return
 
 		var/dat = "<body>"
 		dat += "<tt><center>"
@@ -1442,6 +1437,11 @@ datum/preferences
 		var/name
 
 		for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
+			if(!query.Execute())
+				var/err = query.ErrorMsg()
+				log_game("SQL ERROR during character slot loading. Error : \[[err]\]\n")
+				message_admins("SQL ERROR during character slot loading. Error : \[[err]\]\n")
+				return
 			while(query.NextRow())
 				if(i==text2num(query.item[1]))
 					name =  query.item[2]

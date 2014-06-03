@@ -115,8 +115,8 @@
 		gen_record = query.item[46]
 		be_special = query.item[47]
 		disabilities = query.item[48]
-		player_alt_titles = text2list(query.item[49],",")
-		organ_data = text2list(query.item[50],",")
+		player_alt_titles = params2list(query.item[49])
+		organ_data = params2list(query.item[50])
 
 		nanotrasen_relation = query.item[51]
 
@@ -176,14 +176,14 @@
 	var/organlist
 	var/playertitlelist
 	if(!isemptylist(organ_data))
-		organlist = tg_list2text(organ_data)
+		organlist = list2params(organ_data)
 	if(!isemptylist(player_alt_titles))
-		playertitlelist = tg_list2text(player_alt_titles)
+		playertitlelist = list2params(player_alt_titles)
 
 	var/DBQuery/firstquery = dbcon.NewQuery("SELECT slot FROM characters WHERE ckey='[C.ckey]' ORDER BY slot")
 	firstquery.Execute()
 	while(firstquery.NextRow())
-		if(firstquery.item[1] == default_slot)
+		if(text2num(firstquery.item[1]) == default_slot)
 			var/DBQuery/query = dbcon.NewQuery("UPDATE characters SET OOC_Notes='[metadata]',real_name='[real_name]',name_is_always_random='[be_random_name]',gender='[gender]',age='[age]',species='[species]',language='[language]',hair_red='[r_hair]',hair_green='[g_hair]',hair_blue='[b_hair]',facial_red='[r_facial]',facial_green='[g_facial]',facial_blue='[b_facial]',skin_tone='[s_tone]',skin_red='[r_skin]',skin_green='[g_skin]',skin_blue='[b_skin]',hair_style_name='[h_style]',facial_style_name='[f_style]',eyes_red='[r_eyes]',eyes_green='[g_eyes]',eyes_blue='[b_eyes]',underwear='[underwear]',undershirt='[undershirt]',backbag='[backbag]',b_type='[b_type]',alternate_option='[alternate_option]',job_civilian_high='[job_civilian_high]',job_civilian_med='[job_civilian_med]',job_civilian_low='[job_civilian_low]',job_medsci_high='[job_medsci_high]',job_medsci_med='[job_medsci_med]',job_medsci_low='[job_medsci_low]',job_engsec_high='[job_engsec_high]',job_engsec_med='[job_engsec_med]',job_engsec_low='[job_engsec_low]',job_karma_high='[job_karma_high]',job_karma_med='[job_karma_med]',job_karma_low='[job_karma_low]',flavor_text='[flavor_text]',med_record='[med_record]',sec_record='[sec_record]',gen_record='[gen_record]',player_alt_titles='[playertitlelist]',be_special='[be_special]',disabilities='[disabilities]',organ_data='[organlist]',nanotrasen_relation='[nanotrasen_relation]' WHERE ckey='[C.ckey]' AND slot='[default_slot]'")
 			if(!query.Execute())
 				var/err = query.ErrorMsg()
@@ -205,7 +205,7 @@
 	while(query.NextRow())
 	var/list/saves = list()
 	for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
-		if(i==query.item[1])
+		if(i==text2num(query.item[1]))
 			saves += i
 
 	if(!saves.len)
