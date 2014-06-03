@@ -1,4 +1,4 @@
-//These lists are populated in /obj/machinery/computer/shuttle_control/New()
+//These lists are populated in /datum/shuttle_controller/New()
 //Shuttle controller is instantiated in master_controller.dm.
 
 var/global/datum/shuttle_controller/shuttles
