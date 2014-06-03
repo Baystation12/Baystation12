@@ -122,7 +122,7 @@ rcd light flash thingy on matter drain
 	mod_pick_name = "recam"
 	uses = 10
 
-/client/proc/reactivate_camera(obj/machinery/camera/C as obj in cameranet.viewpoints)
+/client/proc/reactivate_camera(obj/machinery/camera/C as obj in cameranet.cameras)
 	set name = "Reactivate Camera"
 	set category = "Malfunction"
 	if (istype (C, /obj/machinery/camera))
@@ -143,7 +143,7 @@ rcd light flash thingy on matter drain
 	mod_pick_name = "upgradecam"
 	uses = 10
 
-/client/proc/upgrade_camera(obj/machinery/camera/C as obj in cameranet.viewpoints)
+/client/proc/upgrade_camera(obj/machinery/camera/C as obj in cameranet.cameras)
 	set name = "Upgrade Camera"
 	set category = "Malfunction"
 	if(istype(C))
