@@ -19,7 +19,7 @@ datum/directive/terminations/alien_fraud/get_description()
 	return {"
 		<p>
 			An extensive conspiracy network aimed at defrauding NanoTrasen of large amounts of funds has been uncovered
-			operating within Tau Ceti. Human personnel are not suspected to be involved. Further information is classified.
+			operating within [system_name()]. Human personnel are not suspected to be involved. Further information is classified.
 		</p>
 	"}
 

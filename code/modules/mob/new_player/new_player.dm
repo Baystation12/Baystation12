@@ -443,7 +443,7 @@
 	return client.prefs.gender
 
 /mob/new_player/is_ready()
-	return ready && !!client
+	return ready && ..()
 
 /mob/new_player/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null)
 	return
