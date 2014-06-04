@@ -26,7 +26,7 @@
 	prefs.save_preferences(src)
 	feedback_add_details("admin_verb","TGR")
 
-/client/proc/toggle_hear_radio()
+/client/verb/toggle_hear_radio()
 	set name = "Show/Hide RadioChatter"
 	set category = "Preferences"
 	set desc = "Toggle seeing radiochatter from radios and speakers"
