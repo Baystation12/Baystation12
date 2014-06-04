@@ -21,6 +21,9 @@ datum/directive
 	proc/initialize()
 		return 1
 
+	proc/get_remaining_orders()
+		return ""
+
 /proc/get_directive(type)
 	var/datum/game_mode/mutiny/mode = get_mutiny_mode()
 	if(!mode || !mode.current_directive || !istype(mode.current_directive, text2path("/datum/directive/[type]")))
