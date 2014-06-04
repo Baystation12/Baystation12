@@ -5359,7 +5359,7 @@
 "bZc" = (/obj/machinery/computer/security/engineering{network = list("Engineering","Power Alarms","Atmosphere Alarms","Fire Alarms","Supermatter")},/turf/simulated/floor,/area/engine/engine_monitoring)
 "bZd" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/engine/drone_fabrication)
 "bZe" = (/obj/machinery/computer/station_alert,/turf/simulated/floor,/area/engine/engine_monitoring)
-"bZf" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/machinery/constructable_frame/machine_frame,/obj/machinery/light,/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 10},/area/engine/drone_fabrication)
+"bZf" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/machinery/light,/obj/machinery/mecha_part_fabricator{output_dir = 1},/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 10},/area/engine/drone_fabrication)
 "bZg" = (/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "eng_al_c_snsr"; pixel_x = -25; pixel_y = 0},/obj/item/device/radio/intercom{name = "Station Intercom (General)"; pixel_y = -29},/turf/simulated/floor/plating,/area/engine/engine_airlock)
 "bZh" = (/obj/structure/table,/obj/item/weapon/book/manual/supermatter_engine,/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/engine/engine_airlock)
 "bZi" = (/turf/simulated/floor/plating,/area/engine/engine_airlock)
