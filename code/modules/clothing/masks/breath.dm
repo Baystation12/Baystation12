@@ -43,7 +43,7 @@
 	icon_state = "voxmask"
 	item_state = "voxmask"
 	permeability_coefficient = 0.01
-	species_restricted = ("Vox")
+	species_restricted = list("Vox")
 
 	toggle()
 		set category = "Object"
