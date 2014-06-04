@@ -424,6 +424,10 @@ var/global/datum/controller/occupations/job_master
 							new /obj/item/weapon/storage/box/survival(BPK)
 							H.equip_to_slot_or_del(BPK, slot_back,1)
 
+		//TODO: Generalize this by-species
+		if(H.species && (H.species.name == "Tajaran" || H.species.name == "Unathi"))
+			H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes,1)
+
 		H << "<B>You are the [alt_title ? alt_title : rank].</B>"
 		H << "<b>As the [alt_title ? alt_title : rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
 		if(job.req_admin_notify)
