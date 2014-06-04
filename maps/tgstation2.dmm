@@ -8415,7 +8415,7 @@
 "dfQ" = (/obj/structure/rack,/obj/item/weapon/rcd,/obj/item/weapon/rcd_ammo,/obj/item/weapon/rcd_ammo,/obj/item/weapon/rcd_ammo,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
 "dfR" = (/obj/structure/rack,/obj/item/weapon/tank/nitrogen,/obj/item/weapon/tank/nitrogen,/obj/item/weapon/tank/nitrogen,/obj/item/weapon/tank/nitrogen,/obj/item/weapon/tank/nitrogen,/obj/item/weapon/tank/nitrogen,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
 "dfS" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
-"dfT" = (/obj/structure/cable,/obj/machinery/shieldwallgen{req_access = list(55)},/obj/machinery/light,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
+"dfT" = (/obj/machinery/portable_atmospherics/canister/phoron,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
 "dfU" = (/obj/structure/shuttle/engine/heater,/turf/simulated/shuttle/plating/vox,/area/shuttle/vox/station)
 "dfV" = (/obj/structure/rack,/obj/item/weapon/storage/pneumatic,/obj/item/weapon/harpoon,/obj/item/weapon/harpoon,/obj/item/weapon/harpoon,/obj/item/weapon/harpoon,/obj/item/weapon/tank/nitrogen,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
 "dfW" = (/obj/structure/rack,/obj/item/clothing/tie/storage/black_vest,/obj/item/clothing/suit/space/vox/medic,/obj/item/clothing/head/helmet/space/vox/medic,/obj/item/clothing/mask/breath/vox,/turf/simulated/shuttle/floor4/vox,/area/shuttle/vox/station)
