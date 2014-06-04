@@ -43,6 +43,12 @@ datum/directive/bluespace_contagion/meets_prerequisites()
 datum/directive/bluespace_contagion/directives_complete()
 	return infected.len == 0
 
+datum/directive/bluespace_contagion/get_remaining_orders()
+	var/text = ""
+	for(var/victim in infected)
+		text += "<li>Kill [victim]</li>"
+	return text
+
 /hook/death/proc/infected_killed(mob/living/carbon/human/deceased, gibbed)
 	var/datum/directive/bluespace_contagion/D = get_directive("bluespace_contagion")
 	if(!D) return 1

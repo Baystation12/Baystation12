@@ -49,6 +49,19 @@ datum/directive/ipc_virus/meets_prerequisites()
 datum/directive/ipc_virus/directives_complete()
 	return brains_to_enslave.len == 0 && cyborgs_to_make.len == 0 && ids_to_terminate.len == 0
 
+datum/directive/ipc_virus/get_remaining_orders()
+	var/text = ""
+	for(var/brain in brains_to_enslave)
+		text += "<li>Debrain [brain]</li>"
+
+	for(var/brain in cyborgs_to_make)
+		text += "<li>Borgify [brain]</li>"
+
+	for(var/id in ids_to_terminate)
+		text += "<li>Terminate [id]</li>"
+
+	return text
+
 /hook/debrain/proc/debrain_directive(obj/item/brain/B)
 	var/datum/directive/ipc_virus/D = get_directive("ipc_virus")
 	if (!D) return 1

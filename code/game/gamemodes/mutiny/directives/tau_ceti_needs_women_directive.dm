@@ -43,7 +43,7 @@ datum/directive/tau_ceti_needs_women
 datum/directive/tau_ceti_needs_women/get_description()
 	return {"
 		<p>
-			Recent evidence suggests [get_target_gender()] aptitudes may be effected by radiation from Tau Ceti.
+			Recent evidence suggests [get_target_gender()] aptitudes may be effected by radiation from [system_name()].
 			Effects were measured under laboratory and station conditions. Humans remain more trusted than Xeno. Further information is classified.
 		</p>
 	"}
@@ -74,6 +74,17 @@ datum/directive/tau_ceti_needs_women/meets_prerequisites()
 
 datum/directive/tau_ceti_needs_women/directives_complete()
 	return command_targets.len == count_heads_reassigned() && alien_targets.len == 0
+
+datum/directive/tau_ceti_needs_women/get_remaining_orders()
+	var/text = ""
+	for(var/head in command_targets)
+		if(!command_targets[head])
+			text += "<li>Remove [head] from a Head Role</li>"
+
+	for(var/id in alien_targets)
+		text += "<li>Terminate [id]</li>"
+
+	return text
 
 /hook/reassign_employee/proc/command_reassignments(obj/item/weapon/card/id/id_card)
 	var/datum/directive/tau_ceti_needs_women/D = get_directive("tau_ceti_needs_women")

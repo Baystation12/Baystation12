@@ -510,4 +510,4 @@
 	return client.prefs.gender
 
 /mob/new_player/is_ready()
-	return ready && !!client
+	return ready && ..()

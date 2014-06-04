@@ -15,7 +15,7 @@ datum/directive/terminations/financial_crisis/get_crew_to_terminate()
 datum/directive/terminations/financial_crisis/get_description()
 	return {"
 		<p>
-			Tau Ceti system banks in financial crisis. Local emergency situation ongoing.
+			[system_name()] system banks in financial crisis. Local emergency situation ongoing.
 			NT Funds redistributed, impact upon civilian department expected.
 			Further information is classified.
 		</p>
