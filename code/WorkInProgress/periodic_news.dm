@@ -6,7 +6,7 @@
 		round_time // time of the round at which this should be announced, in seconds
 		message // body of the message
 		author = "NanoTrasen Editor"
-		channel_name = "Tau Ceti Daily"
+		channel_name = "Nyx Nebular News"
 		can_be_redacted = 0
 
 	revolution_inciting_event
@@ -14,14 +14,14 @@
 		paycuts_suspicion
 			round_time = 60*10
 			message = {"Reports have leaked that Nanotrasen Inc. is planning to put paycuts into
-						effect on many of its Research Stations in Tau Ceti. Apparently these research
+						effect on many of its Research Stations in Nyx. Apparently these research
 						stations haven't been able to yield the expected revenue, and thus adjustments
 						have to be made."}
 			author = "Unauthorized"
 
 		paycuts_confirmation
 			round_time = 60*40
-			message = {"Earlier rumours about paycuts on Research Stations in the Tau Ceti system have
+			message = {"Earlier rumours about paycuts on Research Stations in the Nyx system have
 						been confirmed. Shockingly, however, the cuts will only affect lower tier
 						personnel. Heads of Staff will, according to our sources, not be affected."}
 			author = "Unauthorized"
@@ -29,7 +29,7 @@
 		human_experiments
 			round_time = 60*90
 			message = {"Unbelievable reports about human experimentation have reached our ears. According
-			 			to a refugee from one of the Tau Ceti Research Stations, their station, in order
+			 			to a refugee from one of the Nyx Research Stations, their station, in order
 			 			to increase revenue, has refactored several of their facilities to perform experiments
 			 			on live humans, including virology research, genetic manipulation, and \"feeding them
 			 			to the slimes to see what happens\". Allegedly, these test subjects were neither
@@ -43,7 +43,7 @@
 			round_time = 60*20
 			message = {"The new field of research trying to explain several interesting spacetime oddities,
 						also known as \"Bluespace Research\", has reached new heights. Of the several
-						hundred space stations now orbiting in Tau Ceti, fifteen are now specially equipped
+						hundred space stations now orbiting in Nyx, fifteen are now specially equipped
 						to experiment with and research Bluespace effects. Rumours have it some of these
 						stations even sport functional \"travel gates\" that can instantly move a whole research
 						team to an alternate reality."}
@@ -52,20 +52,20 @@
 
 		cheesy_honkers
 			author = "Assistant Editor Carl Ritz"
-			channel_name = "The Gibson Gazette"
+			channel_name = "The Monthly Memo"
 			message = {"Do cheesy honkers increase risk of having a miscarriage? Several health administrations
 						say so!"}
 			round_time = 60 * 15
 
 		net_block
 			author = "Assistant Editor Carl Ritz"
-			channel_name = "The Gibson Gazette"
+			channel_name = "The Monthly Memo"
 			message = {"Several corporations banding together to block access to 'wetskrell.nt', site administrators
 			claiming violation of net laws."}
 			round_time = 60 * 50
 
 		found_ssd
-			channel_name = "Tau Ceti Daily"
+			channel_name = "Nyx Nebular News"
 			author = "Doctor Eric Hanfield"
 
 			message = {"Several people have been found unconscious at their terminals. It is thought that it was due
@@ -77,7 +77,7 @@
 	lotus_tree
 
 		explosions
-			channel_name = "Tau Ceti Daily"
+			channel_name = "Nyx Nebular News"
 			author = "Reporter Leland H. Howards"
 
 			message = {"The newly-christened civillian transport Lotus Tree suffered two very large explosions near the
@@ -91,7 +91,7 @@
 	food_riots
 
 		breaking_news
-			channel_name = "Tau Ceti Daily"
+			channel_name = "Nyx Nebular News"
 			author = "Reporter Ro'kii Ar-Raqis"
 
 			message = {"Breaking news: Food riots have broken out throughout the Refuge asteroid colony in the Tenebrae
@@ -102,7 +102,7 @@
 			round_time = 60 * 10
 
 		more
-			channel_name = "Tau Ceti Daily"
+			channel_name = "Nyx Nebular News"
 			author = "Reporter Ro'kii Ar-Raqis"
 
 			message = {"More on the Refuge food riots: The Refuge Council has condemned NanoTrasen's withdrawal from
