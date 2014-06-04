@@ -30,7 +30,6 @@
 	set name = "Show/Hide RadioChatter"
 	set category = "Preferences"
 	set desc = "Toggle seeing radiochatter from radios and speakers"
-	if(!holder) return
 	prefs.toggles ^= CHAT_RADIO
 	prefs.save_preferences(src)
 	usr << "You will [(prefs.toggles & CHAT_RADIO) ? "now" : "no longer"] see radio chatter from radios or speakers"
