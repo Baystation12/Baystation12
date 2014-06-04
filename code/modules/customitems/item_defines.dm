@@ -946,6 +946,11 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "atmosmagboots0"
 
+/obj/item/clothing/shoes/jackboots/fluff/hal_ishimaru_1	//YankeeSamurai: Hal Ishimaru
+	name = "duty boots"
+	desc = "Eight-inch black leather boots with side zips and NT-approved safety toes."
+
+
 //////////// Sets ////////////
 
 /*
