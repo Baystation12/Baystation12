@@ -55,7 +55,7 @@ datum/directive/ipc_virus/get_remaining_orders()
 		text += "<li>Debrain [brain]</li>"
 
 	for(var/brain in cyborgs_to_make)
-		text += "<li>Borgify [brain]</li>"
+		text += "<li>Enslave [brain] as a Cyborg</li>"
 
 	for(var/id in ids_to_terminate)
 		text += "<li>Terminate [id]</li>"
