@@ -610,7 +610,7 @@ var/list/slot_equipment_priority = list( \
 	return istype(src, /mob/living/silicon) || get_species() == "Machine"
 
 /mob/proc/is_ready()
-	return !!client
+	return client && !!mind
 
 /mob/proc/get_gender()
 	return gender

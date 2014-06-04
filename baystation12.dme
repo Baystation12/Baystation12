@@ -241,6 +241,7 @@
 #include "code\game\gamemodes\mutiny\emergency_authentication_device.dm"
 #include "code\game\gamemodes\mutiny\key_pinpointer.dm"
 #include "code\game\gamemodes\mutiny\mutiny.dm"
+#include "code\game\gamemodes\mutiny\mutiny_admin.dm"
 #include "code\game\gamemodes\mutiny\mutiny_fluff.dm"
 #include "code\game\gamemodes\mutiny\mutiny_hooks.dm"
 #include "code\game\gamemodes\mutiny\directives\alien_fraud_directive.dm"

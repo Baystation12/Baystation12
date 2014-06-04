@@ -1772,6 +1772,14 @@
 					holder.icon_state = "huddeathsquad"
 				if("Ninja")
 					holder.icon_state = "hudninja"
+				if("head_loyalist")
+					holder.icon_state = "loyalist"
+				if("loyalist")
+					holder.icon_state = "loyalist"
+				if("head_mutineer")
+					holder.icon_state = "mutineer"
+				if("mutineer")
+					holder.icon_state = "mutineer"
 
 			hud_list[SPECIALROLE_HUD] = holder
 	hud_updateflag = 0
