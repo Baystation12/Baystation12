@@ -59,7 +59,7 @@
 
 	Topic(href, href_list)
 		..()
-		if (usr.stat || usr.restrained() || !ishuman(usr))
+		if (usr.stat || usr.restrained() || (!ishuman(usr) && !istype(usr,/mob/living/silicon)))
 			return
 		if (href_list["close"])
 			usr << browse(null, "window=airlock")
@@ -109,3 +109,8 @@
 					if (!conf_access.len)
 						conf_access = null
 
+
+/obj/item/weapon/airlock_electronics/secure
+	name = "secure airlock electronics"
+	desc = "designed to be somewhat more resistant to hacking than standard electronics."
+	origin_tech = "programming=3"

@@ -458,36 +458,19 @@
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
 
-		if(S.brute_dam)
-			S.heal_damage(15,0,0,1)
-			if(user != M)
-				user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src]",\
-				"\red You patch some dents on \the [M]'s [S.display_name]",\
-				"You hear a welder.")
-			else
-				user.visible_message("\red \The [user] patches some dents on their [S.display_name] with \the [src]",\
-				"\red You patch some dents on your [S.display_name]",\
-				"You hear a welder.")
-			return
-
 		if(istype(M,/mob/living/carbon/human))
-
 			var/mob/living/carbon/human/H = M
-
 			if(H.species.flags & IS_SYNTHETIC)
-
-				if(H.getBruteLoss() > 0)
-
-					if(M == user)
-						user << "\red You can't repair damage to your own body - it's against OH&S."
-						return
-
-					user.visible_message("\red \The [user] patches some dents on \the [M] with \the [src]",\
-						"\red You patch some of the dents on \the [M].",\
-						"You hear a welder.")
-					H.heal_overall_damage(5,0)
+				if(M == user)
+					user << "\red You can't repair damage to your own body - it's against OH&S."
 					return
 
-		user << "Nothing to fix!"
+		if(S.brute_dam)
+			S.heal_damage(15,0,0,1)
+			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src].")
+			return
+		else
+			user << "Nothing to fix!"
+
 	else
 		return ..()

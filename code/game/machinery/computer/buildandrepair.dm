@@ -201,6 +201,12 @@
 	name = "Circuit board (Mining Shuttle)"
 	build_path = "/obj/machinery/computer/mining_shuttle"
 	origin_tech = "programming=2"
+
+/obj/item/weapon/circuitboard/engineering_shuttle
+	name = "Circuit board (Engineering Shuttle)"
+	build_path = "/obj/machinery/computer/engineering_shuttle"
+	origin_tech = "programming=2"
+
 /obj/item/weapon/circuitboard/research_shuttle
 	name = "Circuit board (Research Shuttle)"
 	build_path = "/obj/machinery/computer/research_shuttle"
@@ -281,14 +287,15 @@
 
 /obj/item/weapon/circuitboard/rdconsole/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I,/obj/item/weapon/screwdriver))
+		user.visible_message("\blue \the [user] adjusts the jumper on the [src]'s access protocol pins.", "\blue You adjust the jumper on the access protocol pins.")
 		if(src.build_path == "/obj/machinery/computer/rdconsole/core")
 			src.name = "Circuit Board (RD Console - Robotics)"
 			src.build_path = "/obj/machinery/computer/rdconsole/robotics"
-			user << "\blue Access protocols succesfully updated."
+			user << "\blue Access protocols set to robotics."
 		else
 			src.name = "Circuit Board (RD Console)"
 			src.build_path = "/obj/machinery/computer/rdconsole/core"
-			user << "\blue Defaulting access protocols."
+			user << "\blue Access protocols set to default."
 	return
 
 /obj/structure/computerframe/attackby(obj/item/P as obj, mob/user as mob)

@@ -480,7 +480,7 @@ client/proc/one_click_antag()
 					break
 
 				new_vox.key = theghost.key
-				new_vox << "\blue You are a Vox Primalis, fresh out of the Shoal. Your ship has arrived at the Tau Ceti system hosting the NSV Exodus... or was it the Luna? NSS? Utopia? Nobody is really sure, but everyong is raring to start pillaging! Your current goal is: \red<B> [input]</B>"
+				new_vox << "\blue You are a Vox Primalis, fresh out of the Shoal. Your ship has arrived at a human-meat system hosting the NSV Exodus... or was it the Luna? NSS? Utopia? Nobody is really sure, who cares about stupid meat-names anyway? Everyone is raring to start pillaging! Your current goal is: \red<B> [input]</B>"
 				new_vox << "\red Don't forget to turn on your nitrogen internals!"
 
 				raiders--
