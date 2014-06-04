@@ -245,7 +245,8 @@ client
 
 		if(ismob(D))
 			body += "<option value='?_src_=vars;give_spell=\ref[D]'>Give Spell</option>"
-			body += "<option value='?_src_=vars;give_disease=\ref[D]'>Give Disease</option>"
+			body += "<option value='?_src_=vars;give_disease2=\ref[D]'>Give Disease</option>"
+			body += "<option value='?_src_=vars;give_disease=\ref[D]'>Give TG-style Disease</option>"
 			body += "<option value='?_src_=vars;godmode=\ref[D]'>Toggle Godmode</option>"
 			body += "<option value='?_src_=vars;build_mode=\ref[D]'>Toggle Build Mode</option>"
 
@@ -268,7 +269,6 @@ client
 				body += "<option value='?_src_=vars;setmutantrace=\ref[D]'>Set Mutantrace</option>"
 				body += "<option value='?_src_=vars;setspecies=\ref[D]'>Set Species</option>"
 				body += "<option value='?_src_=vars;makeai=\ref[D]'>Make AI</option>"
-				body += "<option value='?_src_=vars;makemask=\ref[D]'>Make Mask of Nar'sie</option>"
 				body += "<option value='?_src_=vars;makerobot=\ref[D]'>Make cyborg</option>"
 				body += "<option value='?_src_=vars;makemonkey=\ref[D]'>Make monkey</option>"
 				body += "<option value='?_src_=vars;makealien=\ref[D]'>Make alien</option>"
@@ -494,6 +494,17 @@ client
 			return
 
 		src.give_disease(M)
+		href_list["datumrefresh"] = href_list["give_spell"]
+		
+	else if(href_list["give_disease2"])
+		if(!check_rights(R_ADMIN|R_FUN))	return
+
+		var/mob/M = locate(href_list["give_disease2"])
+		if(!istype(M))
+			usr << "This can only be used on instances of type /mob"
+			return
+
+		src.give_disease2(M)
 		href_list["datumrefresh"] = href_list["give_spell"]
 
 	else if(href_list["ninja"])
@@ -730,18 +741,7 @@ client
 			usr << "Mob doesn't exist anymore"
 			return
 		holder.Topic(href, list("makeai"=href_list["makeai"]))
-		
-		
-	else if(href_list["makemask"])
-		if(!check_rights(R_SPAWN)) return
-		var/mob/currentMob = locate(href_list["makemask"])
-		if(alert("Confirm mob type change?",,"Transform","Cancel") != "Transform")	return
-		if(!currentMob)
-			usr << "Mob doesn't exist anymore"
-			return
-		holder.Topic(href, list("makemask"=href_list["makemask"]))
-		
-		
+
 	else if(href_list["setmutantrace"])
 		if(!check_rights(R_SPAWN))	return
 

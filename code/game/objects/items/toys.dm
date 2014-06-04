@@ -586,3 +586,13 @@
 	w_class = 4.0
 	slot_flags = SLOT_BACK
 */
+
+//This should really be somewhere else but I don't know where. w/e
+/obj/item/weapon/inflatable_duck
+	name = "inflatable duck"
+	desc = "No bother to sink or swim when you can just float!"
+	icon_state = "inflatable"
+	item_state = "inflatable"
+	flags = FPRINT | TABLEPASS
+	icon = 'icons/obj/clothing/belts.dmi'
+	slot_flags = SLOT_BELT

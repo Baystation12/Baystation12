@@ -5,6 +5,10 @@
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)
 
+	//if we can equip the item anyway, don't bother with species_restricted (aslo cuts down on spam)
+	if (!..())
+		return 0
+
 	if(species_restricted && istype(M,/mob/living/carbon/human))
 
 		var/wearable = null
@@ -26,7 +30,7 @@
 				M << "\red Your species cannot wear [src]."
 				return 0
 
-	return ..()
+	return 1
 
 //Ears: headsets, earmuffs and tiny objects
 /obj/item/clothing/ears
@@ -220,7 +224,7 @@ BLIND     // can't see anything
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen)
 	slowdown = 3
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL 
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
@@ -252,7 +256,7 @@ BLIND     // can't see anything
 	if(hastie)
 		hastie.attackby(I, user)
 		return
-	
+
 	if(!hastie && istype(I, /obj/item/clothing/tie))
 		user.drop_item()
 		hastie = I
@@ -265,7 +269,7 @@ BLIND     // can't see anything
 		return
 
 	..()
-	
+
 /obj/item/clothing/under/attack_hand(mob/user as mob)
 	//only forward to the attached accessory if the clothing is equipped (not in a storage)
 	if(hastie && src.loc == user)
@@ -282,7 +286,7 @@ BLIND     // can't see anything
 		//makes sure that the clothing is equipped so that we can't drag it into our hand from miles away.
 		if (!(src.loc == usr))
 			return
-		
+
 		if (!( usr.restrained() ) && !( usr.stat ))
 			switch(over_object.name)
 				if("r_hand")
@@ -310,13 +314,10 @@ BLIND     // can't see anything
 	if(hastie)
 		usr << "\A [hastie] is clipped to it."
 
-/obj/item/clothing/under/verb/toggle()
-	set name = "Toggle Suit Sensors"
-	set category = "Object"
-	set src in usr
+/obj/item/clothing/under/proc/set_sensors(mob/usr as mob)
 	var/mob/M = usr
 	if (istype(M, /mob/dead/)) return
-	if (usr.stat) return
+	if (usr.stat || usr.restrained()) return
 	if(has_sensor >= 2)
 		usr << "The controls are locked."
 		return 0
@@ -326,17 +327,41 @@ BLIND     // can't see anything
 
 	var/list/modes = list("Off", "Binary sensors", "Vitals tracker", "Tracking beacon")
 	var/switchMode = input("Select a sensor mode:", "Suit Sensor Mode", modes[sensor_mode + 1]) in modes
+	if(get_dist(usr, src) > 1)
+		usr << "You have moved too far away."
+		return
 	sensor_mode = modes.Find(switchMode) - 1
 
-	switch(sensor_mode)
-		if(0)
-			usr << "You disable your suit's remote sensing equipment."
-		if(1)
-			usr << "Your suit will now report whether you are live or dead."
-		if(2)
-			usr << "Your suit will now report your vital lifesigns."
-		if(3)
-			usr << "Your suit will now report your vital lifesigns as well as your coordinate position."
+	if (src.loc == usr)
+		switch(sensor_mode)
+			if(0)
+				usr << "You disable your suit's remote sensing equipment."
+			if(1)
+				usr << "Your suit will now report whether you are live or dead."
+			if(2)
+				usr << "Your suit will now report your vital lifesigns."
+			if(3)
+				usr << "Your suit will now report your vital lifesigns as well as your coordinate position."
+	else if (istype(src.loc, /mob))
+		switch(sensor_mode)
+			if(0)
+				for(var/mob/V in viewers(usr, 1))
+					V.show_message("\red [usr] disables [src.loc]'s remote sensing equipment.", 1)
+			if(1)
+				for(var/mob/V in viewers(usr, 1))
+					V.show_message("[usr] turns [src.loc]'s remote sensors to binary.", 1)
+			if(2)
+				for(var/mob/V in viewers(usr, 1))
+					V.show_message("[usr] sets [src.loc]'s sensors to track vitals.", 1)
+			if(3)
+				for(var/mob/V in viewers(usr, 1))
+					V.show_message("[usr] sets [src.loc]'s sensors to maximum.", 1)
+
+/obj/item/clothing/under/verb/toggle()
+	set name = "Toggle Suit Sensors"
+	set category = "Object"
+	set src in usr
+	set_sensors(usr)
 	..()
 
 /obj/item/clothing/under/verb/rollsuit()
@@ -357,7 +382,7 @@ BLIND     // can't see anything
 /obj/item/clothing/under/proc/remove_accessory(mob/user as mob)
 	if(!hastie)
 		return
-	
+
 	hastie.on_removed(user)
 	hastie = null
 

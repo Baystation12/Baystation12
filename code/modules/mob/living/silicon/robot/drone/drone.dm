@@ -11,11 +11,10 @@
 	pass_flags = PASSTABLE
 	braintype = "Robot"
 	lawupdate = 0
-	density = 0
+	density = 1
 
 	// We need to keep track of a few module items so we don't need to do list operations
 	// every time we need them. These get set in New() after the module is chosen.
-
 	var/obj/item/stack/sheet/metal/cyborg/stack_metal = null
 	var/obj/item/stack/sheet/wood/cyborg/stack_wood = null
 	var/obj/item/stack/sheet/glass/cyborg/stack_glass = null
@@ -24,6 +23,8 @@
 
 	//Used for self-mailing.
 	var/mail_destination = 0
+
+	//Used for pulling.
 
 /mob/living/silicon/robot/drone/New()
 
@@ -57,7 +58,6 @@
 	flavor_text = "It's a tiny little repair drone. The casing is stamped with an NT log and the subscript: 'NanoTrasen Recursive Repair Systems: Fixing Tomorrow's Problem, Today!'"
 	updatename()
 	updateicon()
-
 
 //Redefining some robot procs...
 /mob/living/silicon/robot/drone/updatename()
@@ -101,10 +101,27 @@
 		return emote(copytext(message,2))
 	else if(length(message) >= 2)
 		if(copytext(message, 1 ,3) == ":b" || copytext(message, 1 ,3) == ":B")
+
 			if(!is_component_functioning("comms"))
 				src << "\red Your binary communications component isn't functional."
 				return
+
 			robot_talk(trim(copytext(message,3)))
+
+		else if(copytext(message, 1 ,3) == ":d" || copytext(message, 1 ,3) == ":d")
+
+			if(!is_component_functioning("radio"))
+				src << "\red Your radio transmitter isn't functional."
+				return
+
+			for (var/mob/living/S in living_mob_list)
+				if(istype(S, /mob/living/silicon/robot/drone))
+					S << "<i><span class='game say'>Drone Talk, <span class='name'>[name]</span><span class='message'> transmits, \"[message]\"</span></span></i>"
+
+			for (var/mob/M in dead_mob_list)
+				if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain))
+					M << "<i><span class='game say'>Drone Talk, <span class='name'>[name]</span><span class='message'> transmits, \"[message]\"</span></span></i>"
+
 		else
 
 			var/list/listeners = hearers(5,src)
@@ -298,8 +315,35 @@
 	if(player.mob && player.mob.mind)
 		player.mob.mind.transfer_to(src)
 
-	emagged = 0
 	lawupdate = 0
 	src << "<b>Systems rebooted</b>. Loading base pattern maintenance protocol... <b>loaded</b>."
 	full_law_reset()
+	src << "<br><b>You are a maintenance drone, a tiny-brained robotic repair machine</b>."
+	src << "You have no individual will, no personality, and no drives or urges other than your laws."
+	src << "Use <b>:b</b> to talk to your fellow synthetics, or use <b>say</b> to speak silently to other drones nearby."
+	src << "Remember,  you are <b>lawed against interference with the crew</b>."
+	src << "<b>Don't invade their worksites, don't steal their resources, don't tell them about the changeling in the toilets.</b>"
+	src << "<b>If a crewmember has noticed you, <i>you are probably breaking your third law</i></b>."
 
+/mob/living/silicon/robot/drone/Bump(atom/movable/AM as mob|obj, yes)
+	if (!yes || (!istype(AM,/obj/machinery/door) && !istype(AM,/obj/machinery/recharge_station)) ) return
+	..()
+	return
+
+/mob/living/silicon/robot/drone/Bumped(AM as mob|obj)
+	return
+
+/mob/living/silicon/robot/drone/start_pulling(var/atom/movable/AM)
+
+	if(istype(AM,/obj/item/pipe) || istype(AM,/obj/structure/disposalconstruct))
+		..()
+	else if(istype(AM,/obj/item))
+		var/obj/item/O = AM
+		if(O.w_class > 2)
+			src << "<span class='warning'>You are too small to pull that.</span>"
+			return
+		else
+			..()
+	else
+		src << "<span class='warning'>You are too small to pull that.</span>"
+		return
