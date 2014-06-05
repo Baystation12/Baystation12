@@ -58,12 +58,38 @@
 	icon = 'icons/obj/trash.dmi'
 	icon_state = "plasticbag"
 	item_state = "plasticbag"
+	slot_flags = SLOT_HEAD|SLOT_BELT
 
 	w_class = 4
 	max_w_class = 2
 	storage_slots = 21
 	can_hold = list() // any
 	cant_hold = list("/obj/item/weapon/disk/nuclear","/obj/item/flag/nation")
+	var/head = 0
+
+/obj/item/weapon/storage/bag/plasticbag/mob_can_equip(M as mob, slot)
+
+	if(slot==SLOT_HEAD && contents.len)
+		M << "\red You need to empty the bag first!"
+		return 0
+	return ..()
+
+
+/obj/item/weapon/storage/bag/plasticbag/equipped(var/mob/user, var/slot)
+	if(slot==SLOT_HEAD)
+		head = 1
+		processing_objects.Add(src)
+	return
+
+/obj/item/weapon/storage/bag/plasticbag/process()
+	if(is_equipped() && head)
+		if(ishuman(loc))
+			var/mob/living/carbon/human/H = loc
+			H.losebreath += 5
+	else
+		head = 0
+		processing_objects.Remove(src)
+	return
 
 // -----------------------------
 //        Mining Satchel
