@@ -58,7 +58,7 @@
 
 /obj/machinery/embedded_controller/radio/initialize()
 	set_frequency(frequency)
-	var/datum/computer/file/embedded_program/new_prog = new
+	var/datum/computer/file/embedded_program/airlock/new_prog = new
 
 	new_prog.id_tag = id_tag
 	new_prog.tag_exterior_door = tag_exterior_door
