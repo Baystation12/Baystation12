@@ -96,12 +96,10 @@
 	var/shutdown_pump = 0
 	switch(command)
 		if("cycle_ext")
-			state = STATE_WAIT
-			target_state = TARGET_OUTOPEN
+			begin_cycle_out()
 
 		if("cycle_int")
-			state = STATE_WAIT
-			target_state = TARGET_INOPEN
+			begin_cycle_in()
 
 		if("cycle_ext_door")
 			cycleDoors(TARGET_OUTOPEN)
@@ -145,36 +143,44 @@
 
 
 /datum/computer/file/embedded_program/proc/process()
-	if(!state && target_state)
-		switch(target_state)
-			if(TARGET_INOPEN)
-				memory["target_pressure"] = memory["internal_sensor_pressure"]
-			if(TARGET_OUTOPEN)
-				memory["target_pressure"] = memory["external_sensor_pressure"]
+	if(!state)
+		if(target_state)
+			switch(target_state)
+				if(TARGET_INOPEN)
+					memory["target_pressure"] = memory["internal_sensor_pressure"]
+				if(TARGET_OUTOPEN)
+					memory["target_pressure"] = memory["external_sensor_pressure"]
 
-		//lock down the airlock before activating pumps
-		toggleDoor(memory["exterior_status"], tag_exterior_door, 1, "close")
-		toggleDoor(memory["interior_status"], tag_interior_door, 1, "close")
+			//lock down the airlock before activating pumps
+			toggleDoor(memory["exterior_status"], tag_exterior_door, 1, "close")
+			toggleDoor(memory["interior_status"], tag_interior_door, 1, "close")
 
-		var/chamber_pressure = memory["chamber_sensor_pressure"]
-		var/target_pressure = memory["target_pressure"]
+			var/chamber_pressure = memory["chamber_sensor_pressure"]
+			var/target_pressure = memory["target_pressure"]
 
-		if(memory["purge"])
-			target_pressure = 0
+			if(memory["purge"])
+				target_pressure = 0
 
-		if(chamber_pressure <= target_pressure)
-			state = STATE_PRESSURIZE
-			signalPump(tag_airpump, 1, 1, target_pressure)	//send a signal to start pressurizing
+			if(chamber_pressure <= target_pressure)
+				state = STATE_PRESSURIZE
+				signalPump(tag_airpump, 1, 1, target_pressure)	//send a signal to start pressurizing
 
-		else if(chamber_pressure > target_pressure)
-			state = STATE_DEPRESSURIZE
-			signalPump(tag_airpump, 1, 0, target_pressure)	//send a signal to start depressurizing
+			else if(chamber_pressure > target_pressure)
+				state = STATE_DEPRESSURIZE
+				signalPump(tag_airpump, 1, 0, target_pressure)	//send a signal to start depressurizing
 
-		//Check for vacuum - this is set after the pumps so the pumps are aiming for 0
-		if(!memory["target_pressure"])
-			memory["target_pressure"] = ONE_ATMOSPHERE * 0.05
-
-
+			//Check for vacuum - this is set after the pumps so the pumps are aiming for 0
+			if(!memory["target_pressure"])
+				memory["target_pressure"] = ONE_ATMOSPHERE * 0.05
+		else
+			//make sure to return to a sane idle state
+			if(memory["pump_status"] != "off")	//send a signal to stop pumping
+				signalPump(tag_airpump, 0)
+	
+	//the airlock will not allow itself to continue to cycle when any of the doors are forced open.
+	if (state && !check_doors_closed())
+		stop_cycling()
+	
 	switch(state)
 		if(STATE_PRESSURIZE)
 			if(memory["chamber_sensor_pressure"] >= memory["target_pressure"] * 0.95)
@@ -209,6 +215,22 @@
 
 	return 1
 
+//these are here so that subtypes don't have to make so many assuptions about our implementation
+
+/datum/computer/file/embedded_program/proc/begin_cycle_in()
+	state = STATE_WAIT
+	target_state = TARGET_INOPEN
+
+/datum/computer/file/embedded_program/proc/begin_cycle_out()
+	state = STATE_WAIT
+	target_state = TARGET_OUTOPEN
+
+/datum/computer/file/embedded_program/proc/stop_cycling()
+	state = STATE_WAIT
+	target_state = TARGET_NONE
+
+/datum/computer/file/embedded_program/proc/done_cycling()
+	return (state == STATE_WAIT && target_state == TARGET_NONE)
 
 /datum/computer/file/embedded_program/proc/post_signal(datum/signal/signal, comm_line)
 	if(master)
@@ -216,6 +238,8 @@
 	else
 		del(signal)
 
+/datum/computer/file/embedded_program/proc/check_doors_closed()
+	return (memory["interior_status"]["state"] == "closed" && memory["exterior_status"["state"] == "closed")
 
 /datum/computer/file/embedded_program/proc/signalDoor(var/tag, var/command)
 	var/datum/signal/signal = new
@@ -235,7 +259,7 @@
 	)
 	post_signal(signal)
 
-
+//this is called to set the appropriate door state at the end of a cycling process, or for the exterior buttons
 /datum/computer/file/embedded_program/proc/cycleDoors(var/target)
 	switch(target)
 		if(TARGET_OUTOPEN)
