@@ -41,16 +41,8 @@
 	icon_state = "airlock_control_standby"
 	power_channel = ENVIRON
 	density = 0
-
-	// Setup parameters only
+	
 	var/id_tag
-	var/tag_exterior_door
-	var/tag_interior_door
-	var/tag_airpump
-	var/tag_chamber_sensor
-	var/tag_exterior_sensor
-	var/tag_interior_sensor
-	var/tag_secure = 0
 
 	var/frequency = 1379
 	var/datum/radio_frequency/radio_connection
@@ -58,23 +50,6 @@
 
 /obj/machinery/embedded_controller/radio/initialize()
 	set_frequency(frequency)
-	var/datum/computer/file/embedded_program/airlock/new_prog = new
-
-	new_prog.id_tag = id_tag
-	new_prog.tag_exterior_door = tag_exterior_door
-	new_prog.tag_interior_door = tag_interior_door
-	new_prog.tag_airpump = tag_airpump
-	new_prog.tag_chamber_sensor = tag_chamber_sensor
-	new_prog.tag_exterior_sensor = tag_exterior_sensor
-	new_prog.tag_interior_sensor = tag_interior_sensor
-	new_prog.memory["secure"] = tag_secure
-
-	new_prog.master = src
-	program = new_prog
-
-	spawn(10)
-		program.signalDoor(tag_exterior_door, "update")		//signals connected doors to update their status
-		program.signalDoor(tag_interior_door, "update")
 
 /obj/machinery/embedded_controller/radio/update_icon()
 	if(on && program)
