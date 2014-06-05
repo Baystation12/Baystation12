@@ -167,7 +167,7 @@
 		src << "You need more blood in order to ascend to a new state of consciousness..."
 		return
 
-	if(reagents.get_reagent_amount("nutriment") < 5)
+	if(nutrition < 500)
 		src << "You need to binge on weeds in order to have the energy to grow..."
 		return
 
