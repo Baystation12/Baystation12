@@ -169,33 +169,11 @@ var/list/mechtoys = list(
 							eta = round(ticksleft/600,1)
 						else
 							eta = 0
-							send()
-
+							shuttles.move_shuttle("Supply")
+							moving = 0
+							at_station = !at_station
 
 				sleep(processing_interval)
-
-	proc/send()
-		var/area/from
-		var/area/dest
-		var/area/the_shuttles_way
-		switch(at_station)
-			if(1)
-				from = locate(SUPPLY_STATION_AREATYPE)
-				dest = locate(SUPPLY_DOCK_AREATYPE)
-				the_shuttles_way = from
-				at_station = 0
-			if(0)
-				from = locate(SUPPLY_DOCK_AREATYPE)
-				dest = locate(SUPPLY_STATION_AREATYPE)
-				the_shuttles_way = dest
-				at_station = 1
-		moving = 0
-
-		//Do I really need to explain this loop?
-		for(var/mob/living/unlucky_person in the_shuttles_way)
-			unlucky_person.gib()
-
-		from.move_contents_to(dest)
 
 	//Check whether the shuttle is allowed to move
 	proc/can_move()
@@ -521,7 +499,11 @@ var/list/mechtoys = list(
 		else if(supply_shuttle.at_station)
 			supply_shuttle.moving = -1
 			supply_shuttle.sell()
-			supply_shuttle.send()
+			supply_shuttle.moving = 0
+			supply_shuttle.at_station = !supply_shuttle.at_station
+
+			shuttles.move_shuttle("Supply")
+
 			temp = "The supply shuttle has departed.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 		else
 			supply_shuttle.moving = 1

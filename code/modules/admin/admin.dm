@@ -637,10 +637,7 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretsfun=fakeguns'>Make all items look like guns</A><BR>
 			<A href='?src=\ref[src];secretsfun=schoolgirl'>Japanese Animes Mode</A><BR>
 			<A href='?src=\ref[src];secretsfun=eagles'>Egalitarian Station Mode</A><BR>
-			<A href='?src=\ref[src];secretsfun=moveadminshuttle'>Move Administration Shuttle</A><BR>
-			<A href='?src=\ref[src];secretsfun=moveferry'>Move Ferry</A><BR>
-			<A href='?src=\ref[src];secretsfun=movealienship'>Move Alien Dinghy</A><BR>
-			<A href='?src=\ref[src];secretsfun=moveminingshuttle'>Move Mining Shuttle</A><BR>
+			<A href='?src=\ref[src];secretsfun=moveshuttle'>Move a shuttle</A><BR>
 			<A href='?src=\ref[src];secretsfun=blackout'>Break all lights</A><BR>
 			<A href='?src=\ref[src];secretsfun=whiteout'>Fix all lights</A><BR>
 			<A href='?src=\ref[src];secretsfun=friendai'>Best Friend AI</A><BR>
@@ -1127,67 +1124,4 @@ proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
 //
 //ALL DONE
 //*********************************************************************************************************
-//TO-DO:
 //
-//
-
-
-/**********************Administration Shuttle**************************/
-
-var/admin_shuttle_location = 0 // 0 = centcom 13, 1 = station
-
-proc/move_admin_shuttle()
-	var/area/fromArea
-	var/area/toArea
-	if (admin_shuttle_location == 1)
-		fromArea = locate(/area/shuttle/administration/station)
-		toArea = locate(/area/shuttle/administration/centcom)
-	else
-		fromArea = locate(/area/shuttle/administration/centcom)
-		toArea = locate(/area/shuttle/administration/station)
-	fromArea.move_contents_to(toArea)
-	if (admin_shuttle_location)
-		admin_shuttle_location = 0
-	else
-		admin_shuttle_location = 1
-	return
-
-/**********************Centcom Ferry**************************/
-
-var/ferry_location = 0 // 0 = centcom , 1 = station
-
-proc/move_ferry()
-	var/area/fromArea
-	var/area/toArea
-	if (ferry_location == 1)
-		fromArea = locate(/area/shuttle/transport1/station)
-		toArea = locate(/area/shuttle/transport1/centcom)
-	else
-		fromArea = locate(/area/shuttle/transport1/centcom)
-		toArea = locate(/area/shuttle/transport1/station)
-	fromArea.move_contents_to(toArea)
-	if (ferry_location)
-		ferry_location = 0
-	else
-		ferry_location = 1
-	return
-
-/**********************Alien ship**************************/
-
-var/alien_ship_location = 1 // 0 = base , 1 = mine
-
-proc/move_alien_ship()
-	var/area/fromArea
-	var/area/toArea
-	if (alien_ship_location == 1)
-		fromArea = locate(/area/shuttle/alien/mine)
-		toArea = locate(/area/shuttle/alien/base)
-	else
-		fromArea = locate(/area/shuttle/alien/base)
-		toArea = locate(/area/shuttle/alien/mine)
-	fromArea.move_contents_to(toArea)
-	if (alien_ship_location)
-		alien_ship_location = 0
-	else
-		alien_ship_location = 1
-	return
