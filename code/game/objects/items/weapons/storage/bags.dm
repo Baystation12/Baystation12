@@ -69,14 +69,14 @@
 
 /obj/item/weapon/storage/bag/plasticbag/mob_can_equip(M as mob, slot)
 
-	if(slot==SLOT_HEAD && contents.len)
+	if(slot==slot_head && contents.len)
 		M << "\red You need to empty the bag first!"
 		return 0
 	return ..()
 
 
 /obj/item/weapon/storage/bag/plasticbag/equipped(var/mob/user, var/slot)
-	if(slot==SLOT_HEAD)
+	if(slot==slot_head)
 		head = 1
 		processing_objects.Add(src)
 	return
