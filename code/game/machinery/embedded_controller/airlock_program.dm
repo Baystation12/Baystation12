@@ -8,19 +8,6 @@
 #define TARGET_INOPEN		-1
 #define TARGET_OUTOPEN		-2
 
-/datum/computer/file/embedded_program
-	var/list/memory = list()
-	var/obj/machinery/embedded_controller/master
-
-	var/id_tag
-
-/datum/computer/file/embedded_program/proc/receive_user_command(command)
-	return
-
-/datum/computer/file/embedded_program/proc/receive_signal(datum/signal/signal, receive_method, receive_param)
-	return
-
-
 
 /datum/computer/file/embedded_program/airlock
 	var/tag_exterior_door
@@ -74,7 +61,7 @@
 			memory["pump_status"] = "off"
 
 	else if(receive_tag==id_tag)
-		if(istype(master, /obj/machinery/embedded_controller/radio/access_controller))
+		if(istype(master, /obj/machinery/embedded_controller/radio/airlock/access_controller))
 			switch(signal.data["command"])
 				if("cycle_exterior")
 					receive_user_command("cycle_ext_door")
@@ -148,7 +135,7 @@
 		signalPump(tag_airpump, 0)		//send a signal to stop pressurizing
 
 
-/datum/computer/file/embedded_program/airlock/proc/process()
+/datum/computer/file/embedded_program/airlock/process()
 	if(!state)
 		if(target_state)
 			switch(target_state)
@@ -158,8 +145,7 @@
 					memory["target_pressure"] = memory["external_sensor_pressure"]
 
 			//lock down the airlock before activating pumps
-			toggleDoor(memory["exterior_status"], tag_exterior_door, 1, "close")
-			toggleDoor(memory["interior_status"], tag_interior_door, 1, "close")
+			close_doors()
 
 			var/chamber_pressure = memory["chamber_sensor_pressure"]
 			var/target_pressure = memory["target_pressure"]
@@ -184,7 +170,7 @@
 				signalPump(tag_airpump, 0)
 	
 	//the airlock will not allow itself to continue to cycle when any of the doors are forced open.
-	if (state && !check_doors_closed())
+	if (state && !check_doors_secured())
 		stop_cycling()
 	
 	switch(state)
@@ -221,7 +207,7 @@
 
 	return 1
 
-//these are here so that subtypes don't have to make so many assuptions about our implementation
+//these are here so that other types don't have to make so many assuptions about our implementation
 
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_in()
 	state = STATE_WAIT
@@ -231,6 +217,10 @@
 	state = STATE_WAIT
 	target_state = TARGET_OUTOPEN
 
+/datum/computer/file/embedded_program/airlock/proc/close_doors()
+	toggleDoor(memory["interior_status"], tag_interior_door, 1, "close")
+	toggleDoor(memory["exterior_status"], tag_exterior_door, 1, "close")
+
 /datum/computer/file/embedded_program/airlock/proc/stop_cycling()
 	state = STATE_WAIT
 	target_state = TARGET_NONE
@@ -238,21 +228,17 @@
 /datum/computer/file/embedded_program/airlock/proc/done_cycling()
 	return (state == STATE_WAIT && target_state == TARGET_NONE)
 
-/datum/computer/file/embedded_program/airlock/proc/post_signal(datum/signal/signal, comm_line)
-	if(master)
-		master.post_signal(signal, comm_line)
-	else
-		del(signal)
-
-/datum/computer/file/embedded_program/airlock/proc/check_doors_closed()
-	return (memory["interior_status"]["state"] == "closed" && memory["exterior_status"["state"] == "closed")
+//are the doors closed and locked?
+/datum/computer/file/embedded_program/airlock/proc/check_doors_secured()
+	var/ext_closed = (memory["exterior_status"]["state"] == "closed" &&  memory["exterior_status"]["lock"] == "locked")
+	var/int_closed = (memory["interior_status"]["state"] == "closed" &&  memory["interior_status"]["lock"] == "locked")
+	return (ext_closed && int_closed)
 
 /datum/computer/file/embedded_program/airlock/proc/signalDoor(var/tag, var/command)
 	var/datum/signal/signal = new
 	signal.data["tag"] = tag
 	signal.data["command"] = command
 	post_signal(signal)
-
 
 /datum/computer/file/embedded_program/airlock/proc/signalPump(var/tag, var/power, var/direction, var/pressure)
 	var/datum/signal/signal = new

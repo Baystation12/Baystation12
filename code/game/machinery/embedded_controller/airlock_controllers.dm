@@ -12,23 +12,21 @@
 /obj/machinery/embedded_controller/radio/airlock/initialize()
 	..()
 	
-	var/datum/computer/file/embedded_program/airlock/new_prog = new
+	var/datum/computer/file/embedded_program/airlock/new_program = new/datum/computer/file/embedded_program/airlock(src)
 
-	new_prog.id_tag = id_tag
-	new_prog.tag_exterior_door = tag_exterior_door
-	new_prog.tag_interior_door = tag_interior_door
-	new_prog.tag_airpump = tag_airpump
-	new_prog.tag_chamber_sensor = tag_chamber_sensor
-	new_prog.tag_exterior_sensor = tag_exterior_sensor
-	new_prog.tag_interior_sensor = tag_interior_sensor
-	new_prog.memory["secure"] = tag_secure
-
-	new_prog.master = src
-	program = new_prog
+	new_program.tag_exterior_door = tag_exterior_door
+	new_program.tag_interior_door = tag_interior_door
+	new_program.tag_airpump = tag_airpump
+	new_program.tag_chamber_sensor = tag_chamber_sensor
+	new_program.tag_exterior_sensor = tag_exterior_sensor
+	new_program.tag_interior_sensor = tag_interior_sensor
+	new_program.memory["secure"] = tag_secure
+	
+	program = new_program
 
 	spawn(10)
-		program.signalDoor(tag_exterior_door, "update")		//signals connected doors to update their status
-		program.signalDoor(tag_interior_door, "update")
+		new_program.signalDoor(tag_exterior_door, "update")		//signals connected doors to update their status
+		new_program.signalDoor(tag_interior_door, "update")
 
 
 //Advanced airlock controller for when you want a more versatile airlock controller - useful for turning simple access control rooms into airlocks
