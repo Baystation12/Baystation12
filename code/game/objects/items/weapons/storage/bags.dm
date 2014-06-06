@@ -86,7 +86,7 @@
 	if(is_equipped() && head)
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
-			H.losebreath += 5
+			H.losebreath += 1
 	else
 		head = 0
 		storage_slots = 21
