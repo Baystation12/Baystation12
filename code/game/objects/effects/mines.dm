@@ -63,13 +63,13 @@
 	spawn(0)
 		del(src)
 
-/obj/effect/mine/proc/triggerplasma(obj)
+/obj/effect/mine/proc/triggerphoron(obj)
 	for (var/turf/simulated/floor/target in range(1,src))
 		if(!target.blocks_air)
 
 			var/datum/gas_mixture/payload = new
 
-			payload.toxins = 30
+			payload.phoron = 30
 
 			target.zone.air.merge(payload)
 
@@ -96,10 +96,10 @@
 	icon_state = "uglymine"
 	triggerproc = "triggerrad"
 
-/obj/effect/mine/plasma
-	name = "Plasma Mine"
+/obj/effect/mine/phoron
+	name = "Phoron Mine"
 	icon_state = "uglymine"
-	triggerproc = "triggerplasma"
+	triggerproc = "triggerphoron"
 
 /obj/effect/mine/kick
 	name = "Kick Mine"

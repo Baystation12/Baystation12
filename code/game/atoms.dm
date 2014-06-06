@@ -371,17 +371,22 @@ its easier to just keep the beam vertical.
 
 
 /atom/proc/transfer_fingerprints_to(var/atom/A)
+
 	if(!istype(A.fingerprints,/list))
 		A.fingerprints = list()
+
 	if(!istype(A.fingerprintshidden,/list))
 		A.fingerprintshidden = list()
+
+	if(!istype(fingerprintshidden, /list))
+		fingerprintshidden = list()
 
 	//skytodo
 	//A.fingerprints |= fingerprints            //detective
 	//A.fingerprintshidden |= fingerprintshidden    //admin
-	if(fingerprints)
+	if(A.fingerprints && fingerprints)
 		A.fingerprints |= fingerprints.Copy()            //detective
-	if(fingerprintshidden)
+	if(A.fingerprintshidden && fingerprintshidden)
 		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin	A.fingerprintslast = fingerprintslast
 
 

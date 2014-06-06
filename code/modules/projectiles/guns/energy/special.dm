@@ -124,11 +124,11 @@ obj/item/weapon/gun/energy/staff/focus
 	*/
 
 /obj/item/weapon/gun/energy/toxgun
-	name = "plasma pistol"
-	desc = "A specialized firearm designed to fire lethal bolts of toxins."
+	name = "phoron pistol"
+	desc = "A specialized firearm designed to fire lethal bolts of phoron."
 	icon_state = "toxgun"
 	w_class = 3.0
-	origin_tech = "combat=5;plasmatech=4"
+	origin_tech = "combat=5;phorontech=4"
 	ammo_type = list(/obj/item/ammo_casing/energy/toxin)
 
 /obj/item/weapon/gun/energy/sniperrifle

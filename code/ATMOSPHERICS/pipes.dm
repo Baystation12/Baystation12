@@ -884,22 +884,22 @@ obj/machinery/atmospherics/pipe/tank/carbon_dioxide
 
 		..()
 
-obj/machinery/atmospherics/pipe/tank/toxins
+obj/machinery/atmospherics/pipe/tank/phoron
 	icon = 'icons/obj/atmospherics/orange_pipe_tank.dmi'
-	name = "Pressure Tank (Plasma)"
+	name = "Pressure Tank (Phoron)"
 
 	New()
 		air_temporary = new
 		air_temporary.volume = volume
 		air_temporary.temperature = T20C
 
-		air_temporary.toxins = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
+		air_temporary.phoron = (25*ONE_ATMOSPHERE)*(air_temporary.volume)/(R_IDEAL_GAS_EQUATION*air_temporary.temperature)
 
 		..()
 
 obj/machinery/atmospherics/pipe/tank/oxygen_agent_b
 	icon = 'icons/obj/atmospherics/red_orange_pipe_tank.dmi'
-	name = "Pressure Tank (Oxygen + Plasma)"
+	name = "Pressure Tank (Oxygen + Phoron)"
 
 	New()
 		air_temporary = new
@@ -1005,15 +1005,15 @@ obj/machinery/atmospherics/pipe/tank/attackby(var/obj/item/weapon/W as obj, var/
 			var/o2_concentration = parent.air.oxygen/total_moles
 			var/n2_concentration = parent.air.nitrogen/total_moles
 			var/co2_concentration = parent.air.carbon_dioxide/total_moles
-			var/plasma_concentration = parent.air.toxins/total_moles
+			var/phoron_concentration = parent.air.phoron/total_moles
 
-			var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
+			var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+phoron_concentration)
 
 			user << "\blue Pressure: [round(pressure,0.1)] kPa"
 			user << "\blue Nitrogen: [round(n2_concentration*100)]%"
 			user << "\blue Oxygen: [round(o2_concentration*100)]%"
 			user << "\blue CO2: [round(co2_concentration*100)]%"
-			user << "\blue Plasma: [round(plasma_concentration*100)]%"
+			user << "\blue Phoron: [round(phoron_concentration*100)]%"
 			if(unknown_concentration>0.01)
 				user << "\red Unknown: [round(unknown_concentration*100)]%"
 			user << "\blue Temperature: [round(parent.air.temperature-T0C)]&deg;C"

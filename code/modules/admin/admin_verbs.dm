@@ -6,7 +6,7 @@ var/list/admin_verbs_default = list(
 	/client/proc/hide_verbs,			/*hides all our adminverbs*/
 	/client/proc/hide_most_verbs,		/*hides all our hideable adminverbs*/
 	/client/proc/debug_variables,		/*allows us to -see- the variables of any instance in the game. +VAREDIT needed to modify*/
-	/client/proc/check_antagonists,		/*shows all antags*/
+//	/client/proc/check_antagonists,		/*shows all antags*/
 	/client/proc/cmd_mentor_check_new_players
 //	/client/proc/deadchat				/*toggles deadchat on/off*/
 	)
@@ -51,6 +51,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_create_centcom_report,
 	/client/proc/check_words,			/*displays cult-words*/
 	/client/proc/check_ai_laws,			/*shows AI and borg laws*/
+	/client/proc/check_antagonists,
 	/client/proc/admin_memo,			/*admin memo system. show/delete/write. +SERVER needed to delete admin memos of others*/
 	/client/proc/dsay,					/*talk in deadchat using our ckey/fakekey*/
 	/client/proc/toggleprayers,			/*toggles prayers on/off*/
@@ -72,6 +73,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/toggleattacklogs,
 	/client/proc/toggledebuglogs,
 	/client/proc/toggleghostwriters,
+	/client/proc/toggledrones,
 	/datum/admins/proc/show_skills,
 	/client/proc/check_customitem_activity,
 	/client/proc/man_up,
@@ -152,6 +154,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_debug_tog_aliens,
 	/client/proc/air_report,
 	/client/proc/reload_admins,
+	/client/proc/reload_mentors,	
 	/client/proc/restart_controller,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
@@ -261,6 +264,7 @@ var/list/admin_verbs_mod = list(
 	/client/proc/dsay,
 	/datum/admins/proc/show_skills,
 	/datum/admins/proc/show_player_panel,
+	/client/proc/check_antagonists,
 	/client/proc/jobbans,
 	/client/proc/cmd_admin_subtle_message 	/*send an message to somebody as a 'voice in their head'*/
 )
@@ -564,9 +568,14 @@ var/list/admin_verbs_mentor = list(
 	set category = "Fun"
 	set name = "Give Spell"
 	set desc = "Gives a spell to a mob."
-	var/obj/effect/proc_holder/spell/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spells
+	var/list/spell_names = list()
+	for(var/v in spells)
+	//	"/obj/effect/proc_holder/spell/" 30 symbols ~Intercross21
+		spell_names.Add(copytext("[v]", 31, 0))
+	var/S = input("Choose the spell to give to that guy", "ABRAKADABRA") as null|anything in spell_names
 	if(!S) return
-	T.spell_list += new S
+	var/path = text2path("/obj/effect/proc_holder/spell/[S]")
+	T.spell_list += new path
 	feedback_add_details("admin_verb","GS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] the spell [S].")
 	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the spell [S].", 1)
@@ -575,9 +584,14 @@ var/list/admin_verbs_mentor = list(
 	set category = "Fun"
 	set name = "Give Disease (old)"
 	set desc = "Gives a (tg-style) Disease to a mob."
-	var/datum/disease/D = input("Choose the disease to give to that guy", "ACHOO") as null|anything in diseases
+	var/list/disease_names = list()
+	for(var/v in diseases)
+	//	"/datum/disease/" 15 symbols ~Intercross
+		disease_names.Add(copytext("[v]", 16, 0))
+	var/datum/disease/D = input("Choose the disease to give to that guy", "ACHOO") as null|anything in disease_names
 	if(!D) return
-	T.contract_disease(new D, 1)
+	var/path = text2path("/datum/disease/[D]")
+	T.contract_disease(new path, 1)
 	feedback_add_details("admin_verb","GD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_admin("[key_name(usr)] gave [key_name(T)] the disease [D].")
 	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] the disease [D].", 1)
@@ -728,6 +742,12 @@ var/list/admin_verbs_mentor = list(
 		M.g_eyes = hex2num(copytext(new_eyes, 4, 6))
 		M.b_eyes = hex2num(copytext(new_eyes, 6, 8))
 
+	var/new_skin = input("Please select body color. This is for Tajaran, Unathi, and Skrell only!", "Character Generation") as color
+	if(new_skin)
+		M.r_skin = hex2num(copytext(new_skin, 2, 4))
+		M.g_skin = hex2num(copytext(new_skin, 4, 6))
+		M.b_skin = hex2num(copytext(new_skin, 6, 8))
+
 	var/new_tone = input("Please select skin tone level: 1-220 (1=albino, 35=caucasian, 150=black, 220='very' black)", "Character Generation")  as text
 
 	if (new_tone)
@@ -802,6 +822,19 @@ var/list/admin_verbs_mentor = list(
 			src << "<b>Enabled ghost writers.</b>"
 			message_admins("Admin [key_name_admin(usr)] has enabled ghost writers.", 1)
 
+/client/proc/toggledrones()
+	set name = "Toggle maintenance drones"
+	set category = "Server"
+	if(!holder)	return
+	if(config)
+		if(config.allow_drone_spawn)
+			config.allow_drone_spawn = 0
+			src << "<b>Disallowed maint drones.</b>"
+			message_admins("Admin [key_name_admin(usr)] has disabled maint drones.", 1)
+		else
+			config.allow_drone_spawn = 1
+			src << "<b>Enabled maint drones.</b>"
+			message_admins("Admin [key_name_admin(usr)] has enabled maint drones.", 1)
 
 /client/proc/toggledebuglogs()
 	set name = "Toggle Debug Log Messages"

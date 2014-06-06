@@ -604,7 +604,7 @@ datum
 					var/list/all_items = owner.current.get_contents()
 					for(var/obj/item/I in all_items)
 						if(!istype(I, steal_target))	continue//If it's not actually that item.
-						if(I:air_contents:toxins) return 1 //If they got one with plasma
+						if(I:air_contents:phoron) return 1 //If they got one with plasma
 					return 0
 
 

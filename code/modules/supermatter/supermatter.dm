@@ -1,5 +1,8 @@
 
 #define NITROGEN_RETARDATION_FACTOR 4        //Higher == N2 slows reaction more
+#define THERMAL_RELEASE_MODIFIER 10                //Higher == less heat released during reaction
+#define PHORON_RELEASE_MODIFIER 1500                //Higher == less phoron released by reaction
+#define OXYGEN_RELEASE_MODIFIER 750        //Higher == less oxygen released at high temperature/power
 #define THERMAL_RELEASE_MODIFIER 750               //Higher == more heat released during reaction
 #define PLASMA_RELEASE_MODIFIER 1500                //Higher == less plasma released by reaction
 #define OXYGEN_RELEASE_MODIFIER 1500        //Higher == less oxygen released at high temperature/power
@@ -176,7 +179,7 @@
 	removed.temperature = max(0, min(removed.temperature, 10000))
 
 	//Calculate how much gas to release
-	removed.toxins += max(device_energy / PLASMA_RELEASE_MODIFIER, 0)
+	removed.phoron += max(device_energy / PHORON_RELEASE_MODIFIER, 0)
 
 	removed.oxygen += max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
 
