@@ -1857,11 +1857,22 @@ datum
 				..()
 				return
 
+		benazine
+			name = "Benazine"
+			id = "benazine"
+			description = "An innocuous cold medicine, good against Coldingtons. It is also the precursor of the highly addictive stiumlant hyperzine."
+			reagent_state = LIQUID
+			color = "#CCFF00" // rgb: 204, 255, 0
+
+			on_mob_life(var/mob/living/M as mob)
+				..()
+				return
+
 		hyperzine
 			name = "Hyperzine"
 			id = "hyperzine"
-			description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
-			reagent_state = LIQUID
+			description = "Hyperzine is a highly effective, long lasting, muscle stimulant. It is highly addictive."
+			reagent_state = SOLID
 			color = "#CCFF00" // rgb: 204, 255, 0
 
 			on_mob_life(var/mob/living/M as mob)
