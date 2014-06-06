@@ -20,8 +20,9 @@
 	var/state = STATE_WAIT
 	var/target_state = TARGET_NONE
 
-/datum/computer/file/embedded_program/airlock/New()
-	..()
+/datum/computer/file/embedded_program/airlock/New(var/obj/machinery/embedded_controller/M)
+	..(M)
+	
 	memory["chamber_sensor_pressure"] = ONE_ATMOSPHERE
 	memory["external_sensor_pressure"] = 0					//assume vacuum for simple airlock controller
 	memory["internal_sensor_pressure"] = ONE_ATMOSPHERE
@@ -31,6 +32,20 @@
 	memory["target_pressure"] = ONE_ATMOSPHERE
 	memory["purge"] = 0
 	memory["secure"] = 0
+	
+	if (istype(M, /obj/machinery/embedded_controller/radio/airlock))	//if our controller is an airlock controller than we can auto-init our tags
+		var/obj/machinery/embedded_controller/radio/airlock/controller = M
+		tag_exterior_door = controller.tag_exterior_door
+		tag_interior_door = controller.tag_interior_door
+		tag_airpump = controller.tag_airpump
+		tag_chamber_sensor = controller.tag_chamber_sensor
+		tag_exterior_sensor = controller.tag_exterior_sensor
+		tag_interior_sensor = controller.tag_interior_sensor
+		memory["secure"] = controller.tag_secure
+	
+		spawn(10)
+			signalDoor(tag_exterior_door, "update")		//signals connected doors to update their status
+			signalDoor(tag_interior_door, "update")
 
 /datum/computer/file/embedded_program/airlock/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]

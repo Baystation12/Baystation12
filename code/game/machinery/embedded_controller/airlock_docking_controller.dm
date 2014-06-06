@@ -1,49 +1,43 @@
 //a docking port based on an airlock
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller/docking_port
+/obj/machinery/embedded_controller/radio/airlock/docking_port
 	name = "docking port controller"
-	var/datum/computer/file/embedded_program/airlock/docking/airlock_prog
-	var/datum/computer/file/embedded_program/docking/airlock/docking_prog
+	var/datum/computer/file/embedded_program/airlock/docking/airlock_program
+	var/datum/computer/file/embedded_program/docking/airlock/docking_program
+	tag_secure = 1
 
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller/docking_port/initialize()
-	airlock_prog = new/datum/computer/file/embedded_program/airlock/docking(src)
+/obj/machinery/embedded_controller/radio/airlock/docking_port/initialize()
+	..()
+	airlock_program = new/datum/computer/file/embedded_program/airlock/docking(src)
+	docking_program = new/datum/computer/file/embedded_program/docking/airlock(src, airlock_program)
+	program = docking_program
 
-	airlock_prog.tag_exterior_door = tag_exterior_door
-	airlock_prog.tag_interior_door = tag_interior_door
-	airlock_prog.tag_airpump = tag_airpump
-	airlock_prog.tag_chamber_sensor = tag_chamber_sensor
-	airlock_prog.tag_exterior_sensor = tag_exterior_sensor
-	airlock_prog.tag_interior_sensor = tag_interior_sensor
-	airlock_prog.memory["secure"] = 1
-	
-	docking_prog = new/datum/computer/file/embedded_program/docking/airlock/(src, airlock_prog)
-	program = docking_prog
-	
-	spawn(10)
-		airlock_prog.signalDoor(tag_exterior_door, "update")		//signals connected doors to update their status
-		airlock_prog.signalDoor(tag_interior_door, "update")
-
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller/docking_port/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+/obj/machinery/embedded_controller/radio/airlock/docking_port/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
 
 	data = list(
-		"chamber_pressure" = round(airlock_prog.memory["chamber_sensor_pressure"]),
-		"exterior_status" = airlock_prog.memory["exterior_status"],
-		"interior_status" = airlock_prog.memory["interior_status"],
-		"processing" = airlock_prog.memory["processing"],
+		"chamber_pressure" = round(airlock_program.memory["chamber_sensor_pressure"]),
+		"exterior_status" = airlock_program.memory["exterior_status"],
+		"interior_status" = airlock_program.memory["interior_status"],
+		"processing" = airlock_program.memory["processing"],
+		"docking_status" = docking_program.get_docking_status(),
+		"airlock_disabled" = !(docking_program.undocked() || docking_program.override_enabled),
 	)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 
 	if (!ui)
-		ui = new(user, src, ui_key, "simple_airlock_console.tmpl", name, 470, 290)
-
+		ui = new(user, src, ui_key, "docking_airlock_console.tmpl", name, 470, 290)
 		ui.set_initial_data(data)
-
 		ui.open()
-
 		ui.set_auto_update(1)
 
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller/docking_port/Topic(href, href_list)
+/obj/machinery/embedded_controller/radio/airlock/docking_port/Topic(href, href_list)
+	if(..())
+		return
+	
+	usr.set_machine(src)
+	src.add_fingerprint(usr)
+	
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks
 		if("cycle_ext")
@@ -56,6 +50,8 @@
 			clean = 1
 		if("abort")
 			clean = 1
+		if("toggle_override")
+			clean = 1
 
 	if(clean)
 		program.receive_user_command(href_list["command"])
@@ -66,56 +62,56 @@
 
 //A docking controller for an airlock based docking port
 /datum/computer/file/embedded_program/docking/airlock
-	var/datum/computer/file/embedded_program/airlock/docking/airlock_prog
+	var/datum/computer/file/embedded_program/airlock/docking/airlock_program
 
 /datum/computer/file/embedded_program/docking/airlock/New(var/obj/machinery/embedded_controller/M, var/datum/computer/file/embedded_program/airlock/docking/A)
 	..(M)
-	airlock_prog = A
-	airlock_prog.master_prog = src
+	airlock_program = A
+	airlock_program.master_prog = src
 
 /datum/computer/file/embedded_program/docking/airlock/receive_user_command(command)
+	if (command == "toggle_override")
+		if (override_enabled)
+			disable_override()
+		else
+			enable_override()
+		return
+	
 	..(command)
-	airlock_prog.receive_user_command(command)	//pass along to subprograms
+	airlock_program.receive_user_command(command)	//pass along to subprograms
 
 /datum/computer/file/embedded_program/docking/airlock/process()
-	airlock_prog.process()
+	airlock_program.process()
 	..()
 
 /datum/computer/file/embedded_program/docking/airlock/receive_signal(datum/signal/signal, receive_method, receive_param)
-	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id
-	var/command = signal.data["command"]
-	var/recipient = signal.data["recipient"]	//the intended recipient of the docking signal
-	
-	if (recipient == id_tag && command == "enable_override" && receive_tag == tag_target)
-		
-	
+	airlock_program.receive_signal(signal, receive_method, receive_param)	//pass along to subprograms
 	..(signal, receive_method, receive_param)
-	airlock_prog.receive_signal(signal, receive_method, receive_param)	//pass along to subprograms
 
 //tell the docking port to start getting ready for docking - e.g. pressurize
 /datum/computer/file/embedded_program/docking/airlock/prepare_for_docking()
-	airlock_prog.begin_cycle_in()
+	airlock_program.begin_cycle_in()
 
 //are we ready for docking?
 /datum/computer/file/embedded_program/docking/airlock/ready_for_docking()
-	return airlock_prog.done_cycling()
+	return airlock_program.done_cycling()
 
 //we are docked, open the doors or whatever.
 /datum/computer/file/embedded_program/docking/airlock/finish_docking()
-	airlock_prog.open_doors()
+	airlock_program.open_doors()
 
 //tell the docking port to start getting ready for undocking - e.g. close those doors.
 /datum/computer/file/embedded_program/docking/airlock/prepare_for_undocking()
-	airlock_prog.stop_cycling()
-	airlock_prog.close_doors()
+	airlock_program.stop_cycling()
+	airlock_program.close_doors()
 
 //are we ready for undocking?
 /datum/computer/file/embedded_program/docking/airlock/ready_for_undocking()
-	return airlock_prog.check_doors_secured()
+	return airlock_program.check_doors_secured()
 
 /datum/computer/file/embedded_program/docking/airlock/reset()
-	airlock_prog.stop_cycling()
-	airlock_prog.close_doors()
+	airlock_program.stop_cycling()
+	airlock_program.close_doors()
 	..()
 
 //An airlock controller to be used by the airlock-based docking port controller.
@@ -135,3 +131,43 @@
 /datum/computer/file/embedded_program/airlock/docking/cycleDoors(var/target)
 	if (master_prog.undocked() || master_prog.override_enabled)	//only allow the port to be used as an airlock if nothing is docked here or the override is enabled
 		..(target)
+
+/*** DEBUG VERBS ***/
+
+/datum/computer/file/embedded_program/docking/proc/print_state()
+	world << "id_tag: [id_tag]"
+	world << "dock_state: [dock_state]"
+	world << "control_mode: [control_mode]"
+	world << "tag_target: [tag_target]"
+	world << "response_sent: [response_sent]"
+
+/datum/computer/file/embedded_program/docking/post_signal(datum/signal/signal, comm_line)
+	world << "Program [id_tag] sent a message!"
+	print_state()
+	world << "[id_tag] sent command \"[signal.data["command"]]\" to \"[signal.data["recipient"]]\""
+	..(signal)
+
+/obj/machinery/embedded_controller/radio/airlock/docking_port/verb/view_state()
+	set category = "Debug"
+	set src in view(1)
+	src.program:print_state()
+
+/obj/machinery/embedded_controller/radio/airlock/docking_port/verb/spoof_signal(var/command as text, var/sender as text)
+	set category = "Debug"
+	set src in view(1)
+	var/datum/signal/signal = new
+	signal.data["tag"] = sender
+	signal.data["command"] = command
+	signal.data["recipient"] = id_tag
+
+	src.program:receive_signal(signal)
+
+/obj/machinery/embedded_controller/radio/airlock/docking_port/verb/debug_init_dock(var/target as text)
+	set category = "Debug"
+	set src in view(1)
+	src.program:initiate_docking(target)
+
+/obj/machinery/embedded_controller/radio/airlock/docking_port/verb/debug_init_undock()
+	set category = "Debug"
+	set src in view(1)
+	src.program:initiate_undocking()
