@@ -167,7 +167,7 @@ Note: Must be placed west/left of and R&D console to function.
 			if(/obj/item/stack/sheet/glass)
 				g_amount += amount * 3750
 			if(/obj/item/stack/sheet/plasteel)
-				g_amount += amount * 2000
+				plasteel_amount += amount * 2000
 			if(/obj/item/stack/sheet/mineral/gold)
 				gold_amount += amount * 2000
 			if(/obj/item/stack/sheet/mineral/silver)
