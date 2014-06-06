@@ -275,3 +275,12 @@ datum/game_mode/proc/auto_declare_completion_heist()
 	if (!(is_raider_crew_alive()) || (vox_shuttle_location && (vox_shuttle_location == "start")))
 		return 1
 	return ..()
+
+/datum/game_mode/heist/cleanup()
+	//the skipjack and everything in it have left and aren't coming back, so get rid of them.
+	var/area/skipjack = locate(/area/shuttle/vox/station)
+	for (var/mob/living/M in skipjack.contents)
+		//maybe send the player a message that they've gone home/been kidnapped? Someone responsible for vox lore should write that.
+		Del(M)
+	for (var/obj/O in skipjack.contents)
+		Del(O)	//no hiding in lockers or anything
