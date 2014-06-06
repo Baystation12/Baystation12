@@ -109,7 +109,6 @@
 	reagents = R
 	R.my_atom = src
 	R.add_reagent("zombiepowder", 10)
-	R.add_reagent("impedrezene", 25)
 	R.add_reagent("cryptobiolin", 15)
 	..()
 	return
