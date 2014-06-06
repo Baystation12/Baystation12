@@ -781,6 +781,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_lathe.plasteel_amount >= 2000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=plasteel;lathe_ejectsheet_amt=1'>(1 Sheet)</A> "
 			if(linked_lathe.plasteel_amount >= 10000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=plasteel;lathe_ejectsheet_amt=5'>(5 Sheets)</A> "
 			if(linked_lathe.plasteel_amount >= 2000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=plasteel;lathe_ejectsheet_amt=50'>(Max Sheets)</A>"
+			dat += "<BR>"
 			//Gold
 			dat += "* [linked_lathe.gold_amount] cm<sup>3</sup> of Gold || "
 			dat += "Eject: "

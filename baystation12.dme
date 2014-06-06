@@ -1315,6 +1315,7 @@
 #include "code\modules\reagents\reagent_containers\blood_pack.dm"
 #include "code\modules\reagents\reagent_containers\borghydro.dm"
 #include "code\modules\reagents\reagent_containers\dropper.dm"
+#include "code\modules\reagents\reagent_containers\drugs.dm"
 #include "code\modules\reagents\reagent_containers\food.dm"
 #include "code\modules\reagents\reagent_containers\glass.dm"
 #include "code\modules\reagents\reagent_containers\hypospray.dm"
