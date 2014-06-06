@@ -314,15 +314,25 @@
 	deactivate()
 	..()
 
-/obj/machinery/suspension_gen/verb/toggle()
+/obj/machinery/suspension_gen/verb/rotate_ccw()
 	set src in view(1)
-	set name = "Rotate suspension gen (clockwise)"
-	set category = "IC"
+	set name = "Rotate suspension gen (counter-clockwise)"
+	set category = "Object"
 
 	if(anchored)
 		usr << "\red You cannot rotate [src], it has been firmly fixed to the floor."
 	else
 		dir = turn(dir, 90)
+
+/obj/machinery/suspension_gen/verb/rotate_cw()
+	set src in view(1)
+	set name = "Rotate suspension gen (clockwise)"
+	set category = "Object"
+
+	if(anchored)
+		usr << "\red You cannot rotate [src], it has been firmly fixed to the floor."
+	else
+		dir = turn(dir, -90)
 
 /obj/effect/suspension_field
 	name = "energy field"
