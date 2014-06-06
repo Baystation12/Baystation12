@@ -78,6 +78,7 @@
 /obj/item/weapon/storage/bag/plasticbag/equipped(var/mob/user, var/slot)
 	if(slot==slot_head)
 		head = 1
+		storage_slots = 0
 		processing_objects.Add(src)
 	return
 
@@ -88,6 +89,7 @@
 			H.losebreath += 5
 	else
 		head = 0
+		storage_slots = 21
 		processing_objects.Remove(src)
 	return
 
