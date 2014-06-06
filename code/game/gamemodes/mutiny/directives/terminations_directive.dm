@@ -28,6 +28,21 @@ datum/directive/terminations/initialize()
 		accounts_to_suspend["[account.account_number]"] = account.suspended
 		ids_to_terminate.Add(H.wear_id)
 
+datum/directive/terminations/get_remaining_orders()
+	var/text = ""
+	for(var/account_number in accounts_to_suspend)
+		if(!accounts_to_suspend[account_number])
+			text += "<li>Suspend Account #[account_number]</li>"
+
+	for(var/account_number in accounts_to_revoke)
+		if(!accounts_to_revoke[account_number])
+			text += "<li>Revoke Account #[account_number]</li>"
+
+	for(var/id in ids_to_terminate)
+		text += "<li>Terminate [id]</li>"
+
+	return text
+
 /hook/revoke_payroll/proc/payroll_directive(datum/money_account/account)
 	var/datum/directive/terminations/D = get_directive("terminations")
 	if (!D) return 1
