@@ -1873,7 +1873,7 @@ datum
 			id = "hyperzine"
 			description = "Hyperzine is a highly effective, long lasting, muscle stimulant. It is highly addictive."
 			reagent_state = SOLID
-			color = "#CCFF00" // rgb: 204, 255, 0
+			color = "#FFFFFF" // rgb: 255,255,255
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
