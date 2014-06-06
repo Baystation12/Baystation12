@@ -1408,7 +1408,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Miscellaneous Research"
 	icon_state = "toxmisc"
 
-/area/toxins/telesci
+/area/rnd/telesci
 	name = "\improper Telescience Lab"
 	icon_state = "toxmisc"
 
