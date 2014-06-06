@@ -9,11 +9,11 @@
 	src:Topic(href, href_list)
 	return null
 
-/proc/get_area_master(O)
+/proc/get_area_master(const/O)
 	var/area/A = get_area(O)
-	if(A && A.master)
-		A = A.master
-	return A
+
+	if (isarea(A))
+		return A.master
 
 /proc/get_area(O)
 	var/atom/location = O
