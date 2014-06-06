@@ -43,6 +43,8 @@
 	else if(processing)
 		user << "\red The biogenerator is currently processing."
 	else if(istype(O, /obj/item/weapon/storage/bag/plants))
+		var/obj/item/weapon/storage/bag/plants/P = O
+		P.close(user) //Принудительно закрываем окно инвентаря сумки, во избежание бага
 		var/i = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
 			i++
