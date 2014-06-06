@@ -117,7 +117,7 @@
 	return
 
 /mob/proc/unset_machine()
-	if(machine)
+	if(machine && istype(machine, /obj/machinery))
 		machine._using -= src
 		machine = null
 
