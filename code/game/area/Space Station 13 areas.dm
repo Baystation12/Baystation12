@@ -526,6 +526,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Thunderdome (Observer.)"
 	icon_state = "purple"
 
+/area/exploration/methlab
+	name = "\improper Abandoned Drug Lab"
+	icon_state = "green"
+
 //ENEMY
 
 //names are used
