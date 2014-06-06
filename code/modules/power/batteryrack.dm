@@ -1,21 +1,30 @@
-//TODO: en Topic(), el dialogo no pone el Xput_level_max, sino 200k. Ademas se repite. Muy probablemente debido al ..() de topic
 //DONE: attackby de code/defines/obj/weapon.dm/power module
-//TODO: dangers
 //TODO: mas tests
 
-/obj/item/weapon/circuitboard/ghettosmes
+//Boards
+/obj/item/weapon/circuitboard/batteryrack
 	name = "Circuit board (PSU)"
-	desc = "An APC circuit repurposed into some power storage device controller"
-	build_path = "/obj/machinery/power/smes/ghetto"
+	build_path = "/obj/machinery/power/smes/batteryrack"
 	board_type = "machine"
-//	origin_tech = "powerstorage=2;engineering=4;programming=4"
+	origin_tech = "powerstorage=3;engineering=2"
 	frame_desc = "Requires 3 power cells."
 	req_components = list("/obj/item/weapon/cell" = 3)
 
 
-/obj/machinery/power/smes/ghetto
-	name = "unreliable power storage unit"
-	desc = "A rack of batteries connected by a mess of wires posing as a PSU."
+/obj/item/weapon/circuitboard/ghettosmes
+	name = "Circuit board (makeshift PSU)"
+	desc = "An APC circuit repurposed into some power storage device controller"
+	build_path = "/obj/machinery/power/smes/batteryrack/makeshift"
+	board_type = "machine"
+	frame_desc = "Requires 3 power cells."
+	req_components = list("/obj/item/weapon/cell" = 3)
+
+
+//Machines
+//The one that works safely.
+/obj/machinery/power/smes/batteryrack
+	name = "power cell rack PSU"
+	desc = "A rack of power cells working as a PSU."
 	charge = 0 //you dont really want to make a potato PSU which already is overloaded
 	online = 0
 	chargelevel = 0
@@ -24,10 +33,9 @@
 	output_level_max = 0
 	var/cells_amount = 0
 	var/capacitors_amount = 0
-	var/overcharge_percent = 0
 
 
-/obj/machinery/power/smes/ghetto/New()
+/obj/machinery/power/smes/batteryrack/New()
 	..()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/ghettosmes
@@ -37,7 +45,8 @@
 	RefreshParts()
 	return
 
-/obj/machinery/power/smes/ghetto/RefreshParts()
+
+/obj/machinery/power/smes/batteryrack/RefreshParts()
 	capacitors_amount = 0
 	cells_amount = 0
 	var/max_level = 0 //for both input and output
@@ -54,7 +63,7 @@
 	capacity = C * 40   //Basic cells are such crap. Hyper cells needed to get on normal SMES levels.
 
 
-/obj/machinery/power/smes/ghetto/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob) //these can only be moved by being reconstructed, solves having to remake the powernet.
+/obj/machinery/power/smes/batteryrack/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob) //these can only be moved by being reconstructed, solves having to remake the powernet.
 	..() //SMES attackby for now handles screwdriver, cable coils and wirecutters, no need to repeat that here
 	if(open_hatch)
 		if(istype(W, /obj/item/weapon/crowbar))
@@ -92,13 +101,20 @@
 			return 1
 	return
 
+
+//The shitty one that will blow up.
+/obj/machinery/power/smes/batteryrack/makeshift
+	name = "makeshift PSU"
+	desc = "A rack of batteries connected by a mess of wires posing as a PSU."
+	var/overcharge_percent = 0
+
 //This mess of if-elses and magic numbers handles what happens if the engies don't pay attention and let it eat too much charge
 //What happens depends on how much capacity has the ghetto smes and how much it is overcharged.
 //Under 1.2M: 5% of ion_act() per process() tick from 125% and higher overcharges. 1.2M is achieved with 3 high cells.
-//[1.2M-2.4M]: 6% ion_act from 120%. 5% of EMP from 140%.
-//(2.4M-3.6M] :6% ion_act from 115%. 5% of EMP from 130%. Non-hull-breaching explosion at 150%.
-//(3.6M-INFI): 6% ion_act from 115%. 5% of EMP from 125%. Hull-breaching explosion from 140%.
-/obj/machinery/power/smes/ghetto/proc/overcharge_consequences()
+//[1.2M-2.4M]: 6% ion_act from 120%. 1% of EMP from 140%.
+//(2.4M-3.6M] :7% ion_act from 115%. 1% of EMP from 130%. 1% of non-hull-breaching explosion at 150%.
+//(3.6M-INFI): 8% ion_act from 115%. 2% of EMP from 125%. 1% of Hull-breaching explosion from 140%.
+/obj/machinery/power/smes/batteryrack/makeshift/proc/overcharge_consequences()
 	world << "Proc called"
 	if (capacity < 1.2e6)
 		world << "cap 1.2e6"
@@ -162,7 +178,7 @@
 
 
 #define SMESRATE 0.05			// rate of internal charge to external power
-/obj/machinery/power/smes/ghetto/process()
+/obj/machinery/power/smes/batteryrack/makeshift/process()
 	if(stat & BROKEN)	return
 
 	//store machine state to see if we need to update the icon overlays
