@@ -14,7 +14,7 @@
 	body_parts_covered = UPPER_TORSO|LEGS|FEET|ARMS
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency_oxygen)
-	slowdown = 9
+	slowdown = 5
 	var/fuel = 0
 
 	var/list/togglearmor = list(melee = 90, bullet = 70, laser = 60,energy = 40, bomb = 75, bio = 75, rad = 75)
@@ -23,10 +23,10 @@
 	var/helmrequired = 1
 	var/obj/item/clothing/head/space/powered/helm
 
-	var/glovesrequired = 0
+	var/glovesrequired = 1
 	var/obj/item/clothing/gloves/powered/gloves
 
-	var/shoesrequired = 0
+	var/shoesrequired = 1
 	var/obj/item/clothing/shoes/powered/shoes
 	//Adding gloves and shoes as possible armor components. --NEO
 
@@ -252,29 +252,14 @@
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
 
 
-obj/item/clothing/suit/space/powered/spawnable/badmin/New()
+obj/item/clothing/suit/space/powered/spawnable/regular/New()
 	servos = new /obj/item/powerarmor/servos(src)
 	servos.parent = src
 	reactive = new /obj/item/powerarmor/reactive(src)
 	reactive.parent = src
-	atmoseal = new /obj/item/powerarmor/atmoseal/optional/adminbus(src)
+	atmoseal = new /obj/item/powerarmor/atmoseal(src)
 	atmoseal.parent = src
-	power = new /obj/item/powerarmor/power(src)
-	power.parent = src
-
-	verbs += /obj/item/clothing/suit/space/powered/proc/poweron
-
-	var/obj/item/clothing/head/space/powered/helm = new /obj/item/clothing/head/space/powered(src.loc)
-	helm.verbs += /obj/item/clothing/head/space/powered/proc/atmotoggle
-
-obj/item/clothing/suit/space/powered/spawnable/regular/New()
-	servos = new /obj/item/powerarmor/servos(src)
-	servos.parent = src
-	reactive = new /obj/item/powerarmor/reactive/Centcom(src)
-	reactive.parent = src
-	atmoseal = new /obj/item/powerarmor/atmoseal/optional/adminbus(src)
-	atmoseal.parent = src
-	power = new /obj/item/powerarmor/power(src)
+	power = new /obj/item/powerarmor/power/powercell(src)
 	power.parent = src
 
 	verbs += /obj/item/clothing/suit/space/powered/proc/poweron

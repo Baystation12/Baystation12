@@ -78,6 +78,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		switch(return_name)
 			if("metal")
 				return_name = "Metal"
+			if("plasteel")
+				return_name = "Plasteel"
 			if("glass")
 				return_name = "Glass"
 			if("gold")
@@ -169,7 +171,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	else
 		//The construction/deconstruction of the console code.
 		..()
-	
+
 	src.updateUsrDialog()
 	return
 
@@ -366,6 +368,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 									linked_lathe.m_amount = max(0, (linked_lathe.m_amount-being_built.materials[M]))
 								if("$glass")
 									linked_lathe.g_amount = max(0, (linked_lathe.g_amount-being_built.materials[M]))
+								if("$plasteel")
+									linked_lathe.plasteel_amount = max(0, (linked_lathe.plasteel_amount-being_built.materials[M]))
 								if("$gold")
 									linked_lathe.gold_amount = max(0, (linked_lathe.gold_amount-being_built.materials[M]))
 								if("$silver")
@@ -456,6 +460,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if("glass")
 				type = /obj/item/stack/sheet/glass
 				res_amount = "g_amount"
+			if("plasteel")
+				type = /obj/item/stack/sheet/plasteel
+				res_amount = "plasteel_amount"
 			if("gold")
 				type = /obj/item/stack/sheet/mineral/gold
 				res_amount = "gold_amount"
@@ -729,6 +736,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 								if(D.materials[M] > linked_lathe.g_amount) check_materials = 0
 							if("$metal")
 								if(D.materials[M] > linked_lathe.m_amount) check_materials = 0
+							if("$plasteel")
+								if(D.materials[M] > linked_lathe.plasteel_amount) check_materials = 0
 							if("$gold")
 								if(D.materials[M] > linked_lathe.gold_amount) check_materials = 0
 							if("$silver")
@@ -766,6 +775,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_lathe.g_amount >= 18750) dat += "<A href='?src=\ref[src];lathe_ejectsheet=glass;lathe_ejectsheet_amt=5'>(5 Sheets)</A> "
 			if(linked_lathe.g_amount >= 3750) dat += "<A href='?src=\ref[src];lathe_ejectsheet=glass;lathe_ejectsheet_amt=50'>(Max Sheets)</A>"
 			dat += "<BR>"
+			//Plasteel
+			dat += "* [linked_lathe.plasteel_amount] cm<sup>3</sup> of Plasteel || "
+			dat += "Eject: "
+			if(linked_lathe.plasteel_amount >= 2000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=plasteel;lathe_ejectsheet_amt=1'>(1 Sheet)</A> "
+			if(linked_lathe.plasteel_amount >= 10000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=plasteel;lathe_ejectsheet_amt=5'>(5 Sheets)</A> "
+			if(linked_lathe.plasteel_amount >= 2000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=plasteel;lathe_ejectsheet_amt=50'>(Max Sheets)</A>"
 			//Gold
 			dat += "* [linked_lathe.gold_amount] cm<sup>3</sup> of Gold || "
 			dat += "Eject: "

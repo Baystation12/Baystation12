@@ -12,6 +12,7 @@ The currently supporting non-reagent materials:
 - $metal (/obj/item/stack/metal). One sheet = 3750 units.
 - $glass (/obj/item/stack/glass). One sheet = 3750 units.
 - $plasma (/obj/item/stack/plasma). One sheet = 3750 units.
+- $plasteel (/obj/item/stack/sheet/plasteel). One sheet = 3750 units.
 - $silver (/obj/item/stack/silver). One sheet = 3750 units.
 - $gold (/obj/item/stack/gold). One sheet = 3750 units.
 - $uranium (/obj/item/stack/uranium). One sheet = 3750 units.
@@ -1598,6 +1599,100 @@ datum/design/plasmapistol
 	build_type = PROTOLATHE
 	materials = list("$metal" = 5000, "$glass" = 1000, "$plasma" = 3000)
 	build_path = "/obj/item/weapon/gun/energy/toxgun"
+
+/////////////////////////////////////////
+/////////////////Armor///////////////////
+/////////////////////////////////////////
+
+datum/design/powerarmor
+	name = "Powered armor suit"
+	desc = "The frame for Centcom's patented powered armor."
+	id = "powerarmor"
+	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3, "biotech" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 7500, "$plasteel" = 4000)
+	build_path = /obj/item/clothing/suit/space/powered
+
+datum/design/powerarmor_helmet
+	name = "Powered armor helmet"
+	desc = "The frame for Centcom's patented powered armor."
+	id = "powerarmorhelmet"
+	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3, "biotech" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3750, "$glass" = 3750, "$plasteel" = 2000)
+	build_path = /obj/item/clothing/head/space/powered
+
+datum/design/powerarmor_gloves
+	name = "Powered armor gloves"
+	desc = "The frame for Centcom's patented powered armor."
+	id = "powerarmorgloves"
+	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3, "biotech" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 7500, "$plasteel" = 2000)
+	build_path = /obj/item/clothing/gloves/powered
+
+datum/design/powerarmor_boots
+	name = "Powered armor boots"
+	desc = "The frame for Centcom's patented powered armor."
+	id = "powerarmorboots"
+	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3, "biotech" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 7500, "$plasteel" = 2000)
+	build_path = /obj/item/clothing/shoes/powered
+
+datum/design/powerarmor_plasma
+	name = "Powered armor miniaturized plasma generator"
+	desc = "One of the potential power sources for powered armor."
+	id = "powerarmorplasma"
+	req_tech = list("combat" = 3, "engineering" = 3, "powerstorage" = 4, "plasmatech" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 7500, "$plasma" = 4000)
+	build_path = /obj/item/powerarmor/power/plasma
+
+datum/design/powerarmor_cell
+	name = "Powered armor powercell interface"
+	desc = "One of the potential power sources for powered armor."
+	id = "powerarmorcell"
+	req_tech = list("combat" = 3, "engineering" = 3, "powerstorage" = 3, "magnets" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 7500, "$silver" = 4000)
+	build_path = /obj/item/powerarmor/power/powercell
+
+datum/design/powerarmor_nuclear
+	name = "Powered armor miniaturized nuclear generator"
+	desc = "One of the potential power sources for powered armor."
+	id = "powerarmornuclear"
+	req_tech = list("combat" = 3, "engineering" = 3, "powerstorage" = 4, "magnets" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 7500, "$uranium" = 4000)
+	build_path = /obj/item/powerarmor/power/nuclear
+
+datum/design/powerarmor_reactive
+	name = "Powered armor reactive plating"
+	desc = "The core of the power armor's active defenses."
+	id = "powerarmorreactive"
+	req_tech = list("combat" = 3, "engineering" = 3, "powerstorage" = 3, "materials" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 7500, "$diamond" = 4000)
+	build_path = /obj/item/powerarmor/reactive
+
+datum/design/powerarmor_servos
+	name = "Powered armor servos"
+	desc = "This allows the powerarmor to move efficiently."
+	id = "powerarmorservos"
+	req_tech = list("combat" = 3, "engineering" = 3, "powerstorage" = 3, "materials" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 7500, "$plasteel" = 4000)
+	build_path = /obj/item/powerarmor/servos
+
+datum/design/powerarmor_atmoseal
+	name = "Powered armor atmospheric seal"
+	desc = "This keeps the bad stuff out."
+	id = "powerarmoratmoseal"
+	req_tech = list("combat" = 3, "engineering" = 3, "powerstorage" = 3, "materials" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 7500, "$plasteel" = 4000)
+	build_path = /obj/item/powerarmor/atmoseal
 
 /////////////////////////////////////////
 /////////////////Mining//////////////////
