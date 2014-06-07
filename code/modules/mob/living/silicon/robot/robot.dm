@@ -1294,7 +1294,7 @@
 		icon_state = module_sprites[1]
 		return
 
-	if(icontype == "Custom")
+	if(icontype == "Custom" || tc_borg)
 		icon = 'tauceti/icons/mob/robot.dmi'
 	else
 		icon = 'icons/mob/robots.dmi'

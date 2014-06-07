@@ -567,11 +567,11 @@ proc/get_damage_icon_part(damage_state, body_part)
 		var/image/standing = image("icon_state" = "[t_color]_s")
 
 		if(!w_uniform:tc_custom || w_uniform.icon_override || species.sprite_sheets["uniform"])
-			standing.icon = w_uniform:tc_custom
-			standing.icon_state = "[t_color]_mob"
-		else
 			standing.icon	= (w_uniform.icon_override ? w_uniform.icon_override : (species.sprite_sheets["uniform"] ? species.sprite_sheets["uniform"] : 'icons/mob/uniform.dmi'))
-
+		else
+	//		standing.icon = w_uniform:tc_custom
+	//		standing.icon_state = "[t_color]_mob"
+			standing = image("icon" = w_uniform:tc_custom, "icon_state" = "[t_color]_mob")
 		if(w_uniform.blood_DNA)
 			var/image/bloodsies	= image("icon" = 'icons/effects/blood.dmi', "icon_state" = "uniformblood")
 			bloodsies.color		= w_uniform.blood_color
