@@ -482,6 +482,28 @@
 	new_icon = "earth"
 	allowed_types = list("ripley","firefighter")
 
+///////// Salvage crew hardsuit - Cybele Petit - solaruin ///////////////
+
+/obj/item/device/modkit/salvage
+	name = "salvage hardsuit modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit into a salvage hardsuit."
+	to_helmet = /obj/item/clothing/head/helmet/space/rig/medical/fluff/salvage
+	to_suit = /obj/item/clothing/suit/space/rig/medical/fluff/salvage
+
+/obj/item/clothing/head/helmet/space/rig/medical/fluff/salvage
+	name = "Salvage Hardsuit helmet"
+	desc = "An orange hardsuit helmet used by salvage flotillas. Has reinforced plating."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "salvage_helmet"
+	item_state = "salvage_helmet"
+
+/obj/item/clothing/suit/space/rig/medical/fluff/salvage
+	name = "Salvage Hardsuit"
+	desc = "An orange hardsuit used by salvage flotillas. Has reinforced plating."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "salvage_suit"
+	item_state = "salvage_suit"
+
 //////////////////////////////////
 //////////// Clothing ////////////
 //////////////////////////////////
