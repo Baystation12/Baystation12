@@ -22,6 +22,10 @@
 	var/icon_old = null
 	var/pathweight = 1
 
+	//Mining resource generation stuff.
+	var/has_resources
+	var/list/resources
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
