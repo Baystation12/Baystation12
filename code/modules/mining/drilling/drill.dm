@@ -148,7 +148,11 @@
 	else
 		if(!open || active) return ..()
 		if(istype(W,/obj/item/weapon/crowbar))
-			if(storage)
+			if(cell)
+				user << "You pry out \the [cell]."
+				cell.loc = get_turf(src)
+				cell = null
+			else if(storage)
 				user << "You slip the bolt and pry out \the [storage]."
 				storage.loc = get_turf(src)
 				storage = null
@@ -159,11 +163,7 @@
 			else if(cellmount)
 				user << "You yank out a few wires and pry out \the [cellmount]."
 				cellmount.loc = get_turf(src)
-				cellmount.loc = null
-			else if(cell)
-				user << "You pry out \the [cell]."
-				cell.loc = get_turf(src)
-				cell = null
+				cellmount = null
 			else
 				user << "There's nothing inside the drilling rig to remove."
 			return
@@ -171,6 +171,7 @@
 			if(storage)
 				user << "The drill already has a matter bin installed."
 			else
+				user.drop_item()
 				W.loc = src
 				storage = W
 				user << "You install \the [W]."
@@ -179,6 +180,7 @@
 			if(cutter)
 				user << "The drill already has a cutting head installed."
 			else
+				user.drop_item()
 				W.loc = src
 				cutter = W
 				user << "You install \the [W]."
@@ -187,6 +189,7 @@
 			if(cellmount)
 				user << "The drill already has a cell capacitor installed."
 			else
+				user.drop_item()
 				W.loc = src
 				cellmount = W
 				user << "You install \the [W]."
@@ -195,6 +198,7 @@
 			if(cell)
 				user << "The drill already has a cell installed."
 			else
+				user.drop_item()
 				W.loc = src
 				cell = W
 				user << "You install \the [W]."
