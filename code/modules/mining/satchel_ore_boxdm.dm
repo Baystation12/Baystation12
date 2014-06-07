@@ -151,8 +151,4 @@
 		if (istype(O, /obj/item/weapon/ore/strangerock))
 			amt_strange++
 			continue
-		if (istype(O, /obj/item/weapon/ore/clown))
-			amt_clown++
-			continue
-
 	return

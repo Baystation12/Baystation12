@@ -264,3 +264,31 @@ var/global/list/datum/stack_recipe/silver_recipes = list ( \
 	throw_range = 3
 	origin_tech = "materials=4"
 	perunit = 2000
+
+/*
+ * TODO
+ */
+/obj/item/stack/sheet/mineral/platinum
+	name = "platinum"
+	icon_state = "sheet-diamond" //TODO
+	sheettype = "platinum"
+
+/obj/item/stack/sheet/mineral/mhydrogen
+	name = "metallic hydrogen"
+	icon_state = "sheet-diamond" //TODO
+	sheettype = "mhydrogen"
+
+/obj/item/stack/sheet/mineral/tritium
+	name = "tritium"
+	icon_state = "sheet-diamond" //TODO
+	sheettype = "tritium"
+
+/obj/item/stack/sheet/mineral/osmium
+	name = "osmium"
+	icon_state = "sheet-diamond" //TODO
+	sheettype = "osmium"
+
+obj/item/stack/sheet/mineral/iron
+	name = "iron"
+	icon_state = "sheet-gold"
+	sheettype = "iron"

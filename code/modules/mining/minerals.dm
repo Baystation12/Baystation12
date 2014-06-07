@@ -69,4 +69,4 @@ mineral/clown
 	name = "Clown"
 	result_amount = 3
 	spread = 0
-	ore = /obj/item/weapon/ore/clown
+	ore = /obj/item/weapon/ore/slag

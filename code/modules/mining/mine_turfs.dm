@@ -27,6 +27,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	var/obj/item/weapon/last_find
 	var/datum/artifact_find/artifact_find
 
+	has_resources = 1
 
 	New()
 		. = ..()
@@ -392,6 +393,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	temperature = T0C
 	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
+	has_resources = 1
 
 /turf/simulated/floor/plating/airless/asteroid/New()
 	var/proper_name = name
