@@ -811,6 +811,16 @@
 	icon_state = "jeremy_wolf_1"
 	item_color = "jeremy_wolf_1"
 
+//////////////////// PRC Uniform - Ronan Harper - Raptor1628 ///////////////////
+
+/obj/item/clothing/under/rank/security/fluff/ronan_harper
+	name = "PRC Uniform"
+	desc = "A well maintained uniform from one of the many Private Security firms Nanotrasen hires from. The name Harper is printed on the back."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "harper_uniform"
+	item_state = "harper_uniform"
+	item_color = "harper_uniform"
+
 /obj/item/clothing/under/fluff/tian_dress //phaux: Tian Yinhu
 	name = "purple dress"
 	desc = "A nicely tailored purple dress made for the taller woman."
