@@ -214,6 +214,16 @@
 	icon_on = "guessipon"
 	icon_off = "guessip"
 
+///////////////////////////// Ziepes - Janis Godmanis - Red Zippo //////////////////////
+
+/obj/item/weapon/lighter/zippo/fluff/janis_godmanis
+	name = "Red-White-Red Zippo"
+	desc = "A badass zippo that looks like the Austrian flag. Upon closer inspection it is revealed that it's a different shade of red than the Austrian flag.."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "redzippo"
+	icon_on = "redzippoon"
+	icon_off = "redzippo"
+
 /obj/item/weapon/lighter/zippo/fluff/riley_rohtin_1 //rawrtaicho: Riley Rohtin
 	name = "Riley's black zippo"
 	desc = "A black zippo lighter, which holds some form of sentimental value."
@@ -501,6 +511,17 @@
 	desc = "The left one of a pair of black gloves. Wonder where the other one went..."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "chal_appara_1"
+
+//////////// Earpieces ////////////////
+
+////////////////////////// Skrellian Tailwear - Qokkri Xilo - Paradoxon /////////////
+
+/obj/item/clothing/ears/fluff/qokkri
+	name = "Skrellian Tailwear"
+	desc = "An ensemble of sophisticated jewels and bands, most likely belonging to a scientific Skrell."
+	icon_state = "xilobeads"
+	icon = 'icons/obj/custom_items.dmi'
+	item_state = "xilobeads"
 
 //////////// Eye Wear ////////////
 
