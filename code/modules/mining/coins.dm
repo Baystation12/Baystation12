@@ -52,6 +52,10 @@
 	credits = 1000
 
 
+/obj/item/weapon/coin/platinum
+	name = "platinum coin"
+	icon_state = "coin_adamantine"
+
 /obj/item/weapon/coin/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack/cable_coil) )
 		var/obj/item/stack/cable_coil/CC = W
