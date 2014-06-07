@@ -93,7 +93,12 @@
 	var/obj/item/device/assembly_holder/rig = null
 	New()
 		..()
-		reagents.add_reagent("fuel",1000)
+		var/datum/reagents/R = new/datum/reagents(300)
+		reagents = R
+		R.my_atom = src
+		if(!possible_transfer_amounts)
+			src.verbs -= /obj/structure/reagent_dispensers/verb/set_APTFT
+		reagents.add_reagent("fuel",300)
 
 /obj/structure/reagent_dispensers/fueltank/examine()
 	set src in view()
