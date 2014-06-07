@@ -376,8 +376,13 @@
 		stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the [P.name].</i>"
 
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		var/x = rand(-2, 2)
-		var/y = rand(-3, 2)
+		var/{x; y;}
+		if(istype(P, /obj/item/weapon/stamp/captain) || istype(P, /obj/item/weapon/stamp/centcomm))
+			x = rand(-2, 0)
+			y = rand(-1, 2)
+		else
+			x = rand(-2, 2)
+			y = rand(-3, 2)
 		offset_x += x
 		offset_y += y
 		stampoverlay.pixel_x = x
