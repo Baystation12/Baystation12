@@ -38,8 +38,8 @@ Rare minerals:
 
 Deep minerals:
 	phoron
-	xerxium (adamantine)
-	fulgurium (mythril)
+	osmium (platinum)
+	tritium (hydrogen)
 */
 
 /datum/ore_distribution

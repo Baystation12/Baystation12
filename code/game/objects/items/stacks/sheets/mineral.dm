@@ -9,8 +9,6 @@ Mineral Sheets
 		- Silver
 		- Clown
 	Others:
-		- Adamantine
-		- Mythril
 		- Enriched Uranium
 */
 
@@ -150,18 +148,6 @@ var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	icon_state = "sheet-enruranium"
 	origin_tech = "materials=5"
 	perunit = 1000
-
-/obj/item/stack/sheet/mineral/adamantine
-	name = "adamantine"
-	icon_state = "sheet-adamantine"
-	origin_tech = "materials=4"
-	perunit = 2000
-
-/obj/item/stack/sheet/mineral/mythril
-	name = "mythril"
-	icon_state = "sheet-mythril"
-	origin_tech = "materials=4"
-	perunit = 2000
 
 /obj/item/stack/sheet/mineral/platinum
 	name = "platinum"

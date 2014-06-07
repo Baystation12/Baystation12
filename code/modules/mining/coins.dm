@@ -39,18 +39,6 @@
 	name = "uranium coin"
 	icon_state = "coin_uranium"
 
-/obj/item/weapon/coin/clown
-	name = "bananaium coin"
-	icon_state = "coin_clown"
-
-/obj/item/weapon/coin/adamantine
-	name = "adamantine coin"
-	icon_state = "coin_adamantine"
-
-/obj/item/weapon/coin/mythril
-	name = "mythril coin"
-	icon_state = "coin_mythril"
-
 /obj/item/weapon/coin/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/cable_coil) )
 		var/obj/item/weapon/cable_coil/CC = W

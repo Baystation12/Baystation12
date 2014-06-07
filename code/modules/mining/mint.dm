@@ -15,9 +15,6 @@
 	var/amt_iron = 0
 	var/amt_phoron = 0
 	var/amt_uranium = 0
-	var/amt_clown = 0
-	var/amt_adamantine = 0
-	var/amt_mythril = 0
 	var/newCoins = 0   //how many coins the machine made in it's last load
 	var/processing = 0
 	var/chosen = "metal" //which material will be used to make coins
@@ -62,7 +59,7 @@
 				amt_iron += 100 * O.amount
 				del(O)
 
-/obj/machinery/mineral/mint/attack_hand(user as mob) //TODO: Adamantine coins! -Durandan
+/obj/machinery/mineral/mint/attack_hand(user as mob)
 
 	var/dat = "<b>Coin Press</b><br>"
 
@@ -98,16 +95,11 @@
 		dat += text("chosen")
 	else
 		dat += text("<A href='?src=\ref[src];choose=phoron'>Choose</A>")
-	dat += text("<br><font color='#008800'><b>uranium inserted: </b>[amt_uranium]</font> ")
+	dat += text("<br><font color='#008800'><b>Uranium inserted: </b>[amt_uranium]</font> ")
 	if (chosen == "uranium")
 		dat += text("chosen")
 	else
 		dat += text("<A href='?src=\ref[src];choose=uranium'>Choose</A>")
-	dat += text("<br><font color='#888888'><b>Adamantine inserted: </b>[amt_adamantine]</font> ")//I don't even know these color codes, so fuck it.
-	if (chosen == "adamantine")
-		dat += text("chosen")
-	else
-		dat += text("<A href='?src=\ref[src];choose=adamantine'>Choose</A>")
 
 	dat += text("<br><br>Will produce [coinsToProduce] [chosen] coins if enough materials are available.<br>")
 	//dat += text("The dial which controls the number of conins to produce seems to be stuck. A technician has already been dispatched to fix this.")
@@ -213,42 +205,6 @@
 						newCoins++
 						src.updateUsrDialog()
 						sleep(5)
-				if("clown")
-					while(amt_clown > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/weapon/moneybag,output.loc))
-							M = locate(/obj/item/weapon/moneybag,output.loc)
-						else
-							M = new/obj/item/weapon/moneybag(output.loc)
-						new /obj/item/weapon/coin/clown(M)
-						amt_clown -= 20
-						coinsToProduce--
-						newCoins++
-						src.updateUsrDialog()
-						sleep(5);
-				if("adamantine")
-					while(amt_adamantine > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/weapon/moneybag,output.loc))
-							M = locate(/obj/item/weapon/moneybag,output.loc)
-						else
-							M = new/obj/item/weapon/moneybag(output.loc)
-						new /obj/item/weapon/coin/adamantine(M)
-						amt_adamantine -= 20
-						coinsToProduce--
-						newCoins++
-						src.updateUsrDialog()
-						sleep(5);
-				if("mythril")
-					while(amt_adamantine > 0 && coinsToProduce > 0)
-						if (locate(/obj/item/weapon/moneybag,output.loc))
-							M = locate(/obj/item/weapon/moneybag,output.loc)
-						else
-							M = new/obj/item/weapon/moneybag(output.loc)
-						new /obj/item/weapon/coin/mythril(M)
-						amt_mythril -= 20
-						coinsToProduce--
-						newCoins++
-						src.updateUsrDialog()
-						sleep(5);
 			icon_state = "coinpress0"
 			processing = 0;
 			coinsToProduce = temp_coins

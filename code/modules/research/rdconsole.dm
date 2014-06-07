@@ -359,8 +359,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 									linked_lathe.uranium_amount = max(0, (linked_lathe.uranium_amount-being_built.materials[M]))
 								if("$diamond")
 									linked_lathe.diamond_amount = max(0, (linked_lathe.diamond_amount-being_built.materials[M]))
-								if("$clown")
-									linked_lathe.clown_amount = max(0, (linked_lathe.clown_amount-being_built.materials[M]))
 								else
 									linked_lathe.reagents.remove_reagent(M, being_built.materials[M])
 
@@ -719,8 +717,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 								if(D.materials[M] > linked_lathe.uranium_amount) check_materials = 0
 							if("$diamond")
 								if(D.materials[M] > linked_lathe.diamond_amount) check_materials = 0
-							if("$clown")
-								if(D.materials[M] > linked_lathe.clown_amount) check_materials = 0
 					else if (!linked_lathe.reagents.has_reagent(M, D.materials[M]))
 						check_materials = 0
 				if (check_materials)

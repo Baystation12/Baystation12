@@ -359,7 +359,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
-	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 25)//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 25)
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 	New()
