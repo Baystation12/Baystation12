@@ -33,7 +33,7 @@
 	if(temp)
 		left_part = temp
 	else if(src.stat == 2)						// Show some flavor text if the pAI is dead
-		if(rus_language)
+		if(config.rus_language)
 			left_part = "<b><font color=red>ÈRrÖR Ða†Ä ÇÖRrÚþ†Ìoñ</font></b>"	//This file has to be saved as ANSI or this will not display correctly
 		else
 			left_part = "<b><font color=red>3Rr0R Äa†A C0RrU?†ion</font></b>"
