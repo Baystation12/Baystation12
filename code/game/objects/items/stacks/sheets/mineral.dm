@@ -7,9 +7,11 @@ Mineral Sheets
 		- Phoron
 		- Gold
 		- Silver
-		- Clown
-	Others:
 		- Enriched Uranium
+		- Platinum
+		- Metallic Hydrogen
+		- Tritium
+		- Osmium
 */
 
 var/global/list/datum/stack_recipe/sandstone_recipes = list ( \
@@ -46,6 +48,11 @@ var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	new/datum/stack_recipe("plastic bag", /obj/item/weapon/storage/bag/plasticbag, 3, on_floor = 1), \
 	)
 
+var/global/list/datum/stack_recipe/iron_recipes = list ( \
+	new/datum/stack_recipe("iron door", /obj/structure/mineral_door/iron, 20, one_per_turf = 1, on_floor = 1), \
+	null, \
+)
+
 /obj/item/stack/sheet/mineral
 	force = 5.0
 	throwforce = 5
@@ -57,6 +64,18 @@ var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	..()
 	pixel_x = rand(0,4)-4
 	pixel_y = rand(0,4)-4
+
+obj/item/stack/sheet/mineral/iron
+	name = "iron"
+	icon_state = "sheet-silver"
+	origin_tech = "materials=1"
+	sheettype = "iron"
+	color = "#333333"
+	perunit = 3750
+
+obj/item/stack/sheet/mineral/iron/New()
+	..()
+	recipes = iron_recipes
 
 /obj/item/stack/sheet/mineral/sandstone
 	name = "sandstone brick"
@@ -149,22 +168,28 @@ var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	origin_tech = "materials=5"
 	perunit = 1000
 
+//Valuable resource, cargo can sell it.
 /obj/item/stack/sheet/mineral/platinum
 	name = "platinum"
 	icon_state = "sheet-adamantine"
+	origin_tech = "materials=2"
 	sheettype = "platinum"
 	perunit = 2000
 
+//Extremely valuable to Research.
 /obj/item/stack/sheet/mineral/mhydrogen
 	name = "metallic hydrogen"
 	icon_state = "sheet-mythril"
+	origin_tech = "materials=6;powerstorage=5;magnets=5"
 	sheettype = "mhydrogen"
 	perunit = 2000
 
+//Fuel for MRSPACMAN generator.
 /obj/item/stack/sheet/mineral/tritium
 	name = "tritium"
 	icon_state = "sheet-silver"
 	sheettype = "tritium"
+	origin_tech = "materials=5"
 	color = "#777777"
 	perunit = 2000
 
@@ -172,12 +197,6 @@ var/global/list/datum/stack_recipe/plastic_recipes = list ( \
 	name = "osmium"
 	icon_state = "sheet-silver"
 	sheettype = "osmium"
+	origin_tech = "materials=5"
 	color = "#9999FF"
 	perunit = 2000
-
-obj/item/stack/sheet/mineral/iron
-	name = "iron"
-	icon_state = "sheet-silver"
-	sheettype = "iron"
-	color = "#333333"
-	perunit = 3750
