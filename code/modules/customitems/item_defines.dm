@@ -851,6 +851,19 @@
 	item_state = "lillian_dress"
 	item_color = "lillian_dress"
 
+////////////// Accessories /////
+
+//////////////////// Blood Red Pendant - Mewth - Mu'taz Radi ////////////////
+
+/obj/item/clothing/tie/fluff/radi
+	name = "Blood Red Pendant"
+	desc = "A pendant that has been painted a metallic red, it seems to have a ruby in it."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "radi_pendant"
+	flags = FPRINT|TABLEPASS
+	w_class = 2.0
+	slot_flags = 0
+
 //////////// Masks ////////////
 
 /*
@@ -959,6 +972,7 @@
 	flags = FPRINT|TABLEPASS
 	w_class = 2
 	slot_flags = SLOT_MASK
+
 //////////// Shoes ////////////
 
 /obj/item/clothing/shoes/magboots/fluff/susan_harris_1 //sniperyeti: Susan Harris
