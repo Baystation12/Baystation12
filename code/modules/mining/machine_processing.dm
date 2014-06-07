@@ -159,47 +159,37 @@
 			if(!O) continue
 
 			if(ores_processing[metal] == 3 && O.alloy) //Alloying.
-				var/can_make_alloy = 0
-				var/datum/alloy/alloying
 
 				for(var/datum/alloy/A in alloy_data)
-					if(A.metaltag in tick_alloys) continue
+
+					if(A.metaltag in tick_alloys)
+						continue
+
 					tick_alloys += A.metaltag
+					var/enough_metal
 
 					if(!isnull(A.requires[metal]) && ores_stored[metal] >= A.requires[metal]) //We have enough of our first metal, we're off to a good start.
-						alloying = A
-						can_make_alloy = 0
-						var/enough_metal = 1
+
+						enough_metal = 1
 
 						for(var/needs_metal in A.requires)
-
 							//Check if we're alloying the needed metal and have it stored.
 							if(ores_processing[needs_metal] != 3 || ores_stored[needs_metal] < A.requires[needs_metal])
 								enough_metal = 0
 								break
 
-						if(!enough_metal)
-							can_make_alloy = 0
-						else
-							can_make_alloy = 1
-							break
-
-					if(!alloying)
-						sheets++
-						return
-
-					if(!can_make_alloy)
+					if(!enough_metal)
 						continue
 					else
 						var/total
-						for(var/needs_metal in alloying.requires)
-							ores_stored[needs_metal] -= alloying.requires[needs_metal]
-							total += alloying.requires[needs_metal]
-							total = round(total*alloying.product_mod)
+						for(var/needs_metal in A.requires)
+							ores_stored[needs_metal] -= A.requires[needs_metal]
+							total += A.requires[needs_metal]
+							total = max(1,round(total*A.product_mod)) //Always get at least one sheet.
 							sheets += total-1
 
-							for(var/i=0,i<total,i++)
-								new alloying.product(output.loc)
+						for(var/i=0,i<total,i++)
+							new A.product(output.loc)
 
 			else if(ores_processing[metal] == 2 && O.compresses_to) //Compressing.
 
@@ -230,6 +220,7 @@
 				new /obj/item/weapon/ore/slag(output.loc)
 		else
 			continue
+
 	//Grab some more ore to process next tick.
 	for(var/i = 0,i<sheets_per_tick,i++)
 		var/obj/item/weapon/ore/O = locate() in input.loc
