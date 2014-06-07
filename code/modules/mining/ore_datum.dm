@@ -36,7 +36,7 @@
 	oretag = "gold"
 
 /datum/ore/diamond
-	smelts_to = /obj/item/stack/sheet/mineral/diamond
+	compresses_to = /obj/item/stack/sheet/mineral/diamond
 	oretag = "diamond"
 
 /datum/ore/osmium

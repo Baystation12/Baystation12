@@ -61,13 +61,6 @@
 			if (istype(O,/obj/item/stack/sheet/metal))
 				amt_iron += 100 * O.amount
 				del(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/clown))
-				amt_clown += 100 * O.amount
-				del(O)
-			if (istype(O,/obj/item/stack/sheet/mineral/adamantine))
-				amt_adamantine += 100 * O.amount
-				del(O) //Commented out for now. -Durandan
-
 
 /obj/machinery/mineral/mint/attack_hand(user as mob) //TODO: Adamantine coins! -Durandan
 
@@ -110,12 +103,6 @@
 		dat += text("chosen")
 	else
 		dat += text("<A href='?src=\ref[src];choose=uranium'>Choose</A>")
-	if(amt_clown > 0)
-		dat += text("<br><font color='#AAAA00'><b>Bananium inserted: </b>[amt_clown]</font> ")
-		if (chosen == "clown")
-			dat += text("chosen")
-		else
-			dat += text("<A href='?src=\ref[src];choose=clown'>Choose</A>")
 	dat += text("<br><font color='#888888'><b>Adamantine inserted: </b>[amt_adamantine]</font> ")//I don't even know these color codes, so fuck it.
 	if (chosen == "adamantine")
 		dat += text("chosen")
