@@ -207,9 +207,11 @@
 /obj/item/clothing/tie/holster/proc/holster(obj/item/I, mob/user as mob)
 	if(holstered)
 		user << "\red There is already a [holstered] holstered here!"
+		return
 	
 	if (!istype(I, /obj/item/weapon/gun))
 		user << "\red Only guns can be holstered!"
+		return
 	
 	var/obj/item/weapon/gun/W = I
 	if (!can_holster(W))
