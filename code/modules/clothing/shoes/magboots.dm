@@ -4,9 +4,13 @@
 	icon_state = "magboots0"
 	var/magpulse = 0
 	species_restricted = null
-	icon_action_button = "action_blank"
 	action_button_name = "Toggle the magboots"
 //	flags = NOSLIP //disabled by default
+	icon_action_button = "action_magboots"
+	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/shoes.dmi'
+		)
 
 	attack_self(mob/user)
 		if(magpulse)

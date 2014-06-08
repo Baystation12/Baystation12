@@ -6,7 +6,10 @@
 	flags = FPRINT|TABLEPASS|MASKCOVERSMOUTH
 	w_class = 2
 	gas_transfer_coefficient = 0.90
-
+	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/mask.dmi'
+		)
 /obj/item/clothing/mask/muzzle/gag
 	name = "gag"
 	desc = "Stick this in their mouth to stop the noise."
@@ -32,7 +35,10 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 25, rad = 0)
-
+	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/mask.dmi'
+		)
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
 	desc = "Warning: moustache is fake."
