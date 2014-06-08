@@ -99,7 +99,7 @@
 			MS.return_warning = 1
 			return
 
-		shuttles.move_shuttle_long(shuttle_tag,MS.last_departed,MS.origin,MS.interim,MS.move_time)
+		shuttles.jump_shuttle_long(shuttle_tag,MS.last_departed,MS.origin,MS.interim,MS.move_time)
 		MS.last_departed = MS.origin
 		MS.at_origin = 1
 
@@ -124,7 +124,7 @@
 			MS.last_departed = MS.origin
 			MS.at_origin = 0
 
-			shuttles.move_shuttle_long(shuttle_tag,MS.last_departed,MS.destinations[choice],MS.interim,MS.move_time)
+			shuttles.jump_shuttle_long(shuttle_tag,MS.last_departed,MS.destinations[choice],MS.interim,MS.move_time)
 			MS.last_departed = MS.destinations[choice]
 			return
 
@@ -132,7 +132,7 @@
 
 			MS.announce_departure()
 
-		shuttles.move_shuttle(shuttle_tag,locate(MS.last_departed),locate(MS.destinations[choice]))
+		shuttles.jump_shuttle(shuttle_tag,locate(MS.last_departed),locate(MS.destinations[choice]))
 		MS.last_departed = MS.destinations[choice]
 
 	updateUsrDialog()
