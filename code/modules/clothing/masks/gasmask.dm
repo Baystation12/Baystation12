@@ -68,7 +68,7 @@
 	vchange = 1
 	unacidable = 1
 	siemens_coefficient = 0.2
-	species_fit = list()
+	species_fit = list("Vox")
 
 /obj/item/clothing/mask/gas/voice/space_ninja/scar
 	name = "ninja mask"
