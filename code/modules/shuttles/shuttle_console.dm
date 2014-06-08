@@ -1,5 +1,5 @@
 /obj/machinery/computer/shuttle_control
-	name = "shuttle console"
+	name = "shuttle control console"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
 	req_access = list(access_engine)
@@ -11,7 +11,7 @@
 	
 	var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself
 	var/hacked = 0   // Has been emagged, no access restrictions.
-	var/waiting = 0
+	var/wait_for_launch = 0
 
 /obj/machinery/computer/shuttle_control/initialize()
 	//search for our controller, if we have one.
@@ -20,11 +20,21 @@
 			if (C.id_tag == docking_controller_tag && istype(C.program, /datum/computer/file/embedded_program/docking))
 				docking_controller = C.program
 
+/obj/machinery/computer/shuttle_control/process()
+	if (wait_for_launch)
+		if (docking_controller && docking_controller.can_launch())
+			shuttles.jump_shuttle(shuttle_tag)
+			wait_for_launch = 0
+
+/*
 /obj/machinery/computer/shuttle_control/attack_hand(user as mob)
 
 	if(..(user))
 		return
 	src.add_fingerprint(user)
+
+//ui_interact()
+
 	var/dat
 
 	dat = "<center>[shuttle_tag] Shuttle Control<hr>"
@@ -32,12 +42,47 @@
 	if(waiting || shuttles.moving[shuttle_tag])
 		dat += "Location: <font color='red'>Moving</font> <br>"
 	else
-		dat += "Location: [shuttles.locations[shuttle_tag] ? "Offsite" : "Station"] <br>"
+		dat += "Location: [shuttles.location[shuttle_tag] ? "Offsite" : "Station"] <br>"
 
 	dat += "<b><A href='?src=\ref[src];move=[1]'>Send</A></b></center>"
 
 
 	user << browse("[dat]", "window=[shuttle_tag]shuttlecontrol;size=200x150")
+*/
+
+/obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
+	var/data[0]
+
+	var/shuttle_state
+	switch(shuttles.moving[shuttle_tag])
+		if(SHUTTLE_IDLE) shuttle_state = "idle"
+		if(SHUTTLE_WARMUP) shuttle_state = "warmup"
+		if(SHUTTLE_INTRANSIT) shuttle_state = "in_transit"
+
+	if (docking_controller)
+		data = list(
+			"shuttle_state" = shuttle_state,
+			"shuttle_loc" = shuttles.location[shuttle_tag],
+			"has_docking" = 1,
+			"docking_status" = docking_controller.get_docking_status(),
+			"override_enabled" = docking_controller.override_enabled,
+		)
+	else
+		data = list(
+			"shuttle_state" = shuttle_state,
+			"shuttle_loc" = shuttles.location[shuttle_tag],
+			"has_docking" = 0,
+			"docking_status" = null,
+			"override_enabled" = null,
+		)
+
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
+
+	if (!ui)
+		ui = new(user, src, ui_key, "shuttle_control_console.tmpl", "[shuttle_tag] Shuttle Control", 470, 290)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
 
 /obj/machinery/computer/shuttle_control/Topic(href, href_list)
 	if(..())
@@ -48,7 +93,7 @@
 	if(href_list["move"])
 		if (!shuttles.moving[shuttle_tag])
 			usr << "\blue [shuttle_tag] Shuttle recieved message and will be sent shortly."
-			shuttles.move_shuttle(shuttle_tag)
+			wait_for_launch = 1
 		else
 			usr << "\blue [shuttle_tag] Shuttle is already moving."
 
@@ -70,7 +115,7 @@
 	var/list/setup_complete = list()	//so we dont setup the same shuttle repeatedly
 	
 	for (var/obj/machinery/computer/shuttle_control/S in machines)
-		var/location = shuttles.locations[S.shuttle_tag]
+		var/location = shuttles.location[S.shuttle_tag]
 		var/dock_target = shuttles.docking_targets[S.shuttle_tag][location+1]	//damned byond is 1-indexed - don't forget
 		
 		if (!(S.shuttle_tag in setup_complete) && S.docking_controller && dock_target)

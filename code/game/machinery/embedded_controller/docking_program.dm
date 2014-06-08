@@ -10,20 +10,20 @@
 
 /*
 	*** STATE TABLE ***
-	
+
 	MODE_CLIENT|STATE_UNDOCKED		sent a request for docking and now waiting for a reply.
 	MODE_CLIENT|STATE_DOCKING		server told us they are OK to dock, waiting for our docking port to be ready.
 	MODE_CLIENT|STATE_DOCKED		idle - docked as client.
 	MODE_CLIENT|STATE_UNDOCKING		we are either waiting for our docking port to be ready or for the server to give us the OK to undock.
-	
+
 	MODE_SERVER|STATE_UNDOCKED		should never happen.
 	MODE_SERVER|STATE_DOCKING		someone requested docking, we are waiting for our docking port to be ready.
 	MODE_SERVER|STATE_DOCKED		idle - docked as server
 	MODE_SERVER|STATE_UNDOCKING		client requested undocking, we are waiting for our docking port to be ready.
-	
+
 	MODE_NONE|STATE_UNDOCKED		idle - not docked.
 	MODE_NONE|anything else			should never happen.
-	
+
 */
 
 
@@ -32,17 +32,17 @@
 	var/dock_state = STATE_UNDOCKED
 	var/control_mode = MODE_NONE
 	var/response_sent = 0		//so we don't spam confirmation messages
-	
+
 	var/override_enabled = 0	//skips checks for the docking port being ready
 
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id
 	var/command = signal.data["command"]
 	var/recipient = signal.data["recipient"]	//the intended recipient of the docking signal
-	
+
 	if (recipient != id_tag)
 		return	//this signal is not for us
-	
+
 	switch (command)
 		if ("confirm_dock")
 			if (control_mode == MODE_CLIENT && dock_state == STATE_UNDOCKED && receive_tag == tag_target)
@@ -56,7 +56,7 @@
 				response_sent = 0
 			else
 				send_docking_command(tag_target, "abort_dock")	//not expecting confirmation for anything - tell the other guy.
-		
+
 		if ("request_dock")
 			if (control_mode == MODE_NONE && dock_state == STATE_UNDOCKED)
 				control_mode = MODE_SERVER
@@ -64,17 +64,17 @@
 				tag_target = receive_tag
 				if (!override_enabled)
 					prepare_for_docking()
-		
+
 		if ("confirm_undock")
 			if (control_mode == MODE_CLIENT && dock_state == STATE_UNDOCKING && receive_tag == tag_target)
 				send_docking_command(tag_target, "confirm_undock")
 				reset()		//client is done undocking!
-		
+
 		if ("request_undock")
 			if (control_mode == MODE_SERVER && dock_state == STATE_DOCKED && receive_tag == tag_target)
 				dock_state = STATE_UNDOCKING
 				prepare_for_undocking()
-	
+
 		if ("dock_error")
 			if (receive_tag == tag_target)
 				reset()
@@ -86,7 +86,7 @@
 				if (!response_sent)
 					send_docking_command(tag_target, "confirm_dock")	//tell the other guy we're ready
 					response_sent = 1
-				
+
 				if (control_mode == MODE_CLIENT)	//client doesn't need to do anything further
 					dock_state = STATE_DOCKED
 					if (!override_enabled)
@@ -101,10 +101,10 @@
 				else if (control_mode == MODE_SERVER)
 					send_docking_command(tag_target, "confirm_undock")	//tell the client we are OK to undock.
 					reset()		//server is done undocking!
-	
+
 	if (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING)
 		response_sent = 0
-	
+
 	//handle invalid states
 	if (control_mode == MODE_NONE && dock_state != STATE_UNDOCKED)
 		if (tag_target)
@@ -117,19 +117,19 @@
 /datum/computer/file/embedded_program/docking/proc/initiate_docking(var/target)
 	if (dock_state != STATE_UNDOCKED || control_mode == MODE_SERVER)	//must be undocked and not serving another request to begin a new docking handshake
 		return
-	
+
 	tag_target = target
 	control_mode = MODE_CLIENT
-	
+
 	send_docking_command(tag_target, "request_dock")
 
 /datum/computer/file/embedded_program/docking/proc/initiate_undocking()
 	if (dock_state != STATE_DOCKED || control_mode != MODE_CLIENT)		//must be docked and must be client to start undocking
 		return
-	
+
 	dock_state = STATE_UNDOCKING
 	prepare_for_undocking()
-	
+
 	send_docking_command(tag_target, "request_undock")
 
 
@@ -169,14 +169,6 @@
 	tag_target = null
 	response_sent = 0
 
-/datum/computer/file/embedded_program/docking/proc/force_undock()
-	if (tag_target)
-		send_docking_command(tag_target, "dock_error")
-	reset()
-
-/datum/computer/file/embedded_program/docking/proc/docked()
-	return (dock_state == STATE_DOCKED)
-
 /datum/computer/file/embedded_program/docking/proc/undocked()
 	return (dock_state == STATE_UNDOCKED)
 
@@ -198,10 +190,10 @@
 		if (STATE_DOCKING) return "docking"
 		if (STATE_UNDOCKING) return "undocking"
 		if (STATE_DOCKED) return "docked"
-	
-	
 
-	
+
+
+
 #undef STATE_UNDOCKED
 #undef STATE_DOCKING
 #undef STATE_UNDOCKING
