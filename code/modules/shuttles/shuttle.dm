@@ -5,157 +5,46 @@
 #define SHUTTLE_WARMUP		1
 #define SHUTTLE_INTRANSIT	2
 
-var/global/datum/shuttle_controller/shuttles
+var/global/list/shuttles
 
-/datum/shuttle_controller //This isn't really a controller...
-	var/list/location = list()
-	var/list/warmup = list()
-	var/list/moving = list()
-	var/list/areas_offsite = list()
-	var/list/areas_station = list()
-
-	//Shuttles with multiple destinations don't quite behave in the same way as ferries.
-	var/list/multi_shuttles = list()
+/datum/shuttle
+	var/location = 0	//0 = at area_station, 1 = at area_offsite
+	var/warmup_time = 0
+	var/moving_status = SHUTTLE_IDLE	//prevents people from doing things they shouldn't when the shuttle is in transit
+	var/in_use = 0						//prevents people from controlling the shuttle from different consoles at the same time
+	var/area_station
+	var/area_offsite
 	
-	//docking stuff
-	var/list/docking_controller = list()
+	var/docking_controller = null
 	var/list/docking_targets = list()
 
-/datum/shuttle_controller/New()
+/datum/shuttle/proc/short_jump(var/datum/shuttle/shuttle,var/area/origin,var/area/destination)
+	if(moving_status != SHUTTLE_IDLE) return
 
-	..()
+	moving_status = SHUTTLE_WARMUP
+	spawn(warmup_time*10)
+		move(origin, destination)
+		moving_status = SHUTTLE_IDLE
 
-	//Supply and escape shuttles.
-	location["Supply"] = 1
-	warmup["Supply"] = 0
-	moving["Supply"] = SHUTTLE_IDLE
-	areas_offsite["Supply"] = locate(/area/supply/dock)
-	areas_station["Supply"] = locate(/area/supply/station)
-	docking_targets["Supply"] = list(null, null)
+/datum/shuttle/proc/long_jump(var/shuttle_tag,var/area/departing,var/area/destination,var/area/interim,var/travel_time)
+	if(moving_status != SHUTTLE_IDLE) return
 
-	// Admin shuttles.
-	location["Centcom"] = 1
-	warmup["Centcom"] = 0
-	moving["Centcom"] = SHUTTLE_IDLE
-	areas_offsite["Centcom"] = locate(/area/shuttle/transport1/centcom)
-	areas_station["Centcom"] = locate(/area/shuttle/transport1/station)
-	docking_targets["Centcom"] = list(null, null)
+	moving_status = SHUTTLE_WARMUP
 
-	location["Administration"] = 1
-	warmup["Administration"] = 0
-	moving["Administration"] = SHUTTLE_IDLE
-	areas_offsite["Administration"] = locate(/area/shuttle/administration/centcom)
-	areas_station["Administration"] = locate(/area/shuttle/administration/station)
-	docking_targets["Administration"] = list(null, null)
-
-	location["Alien"] = 0
-	warmup["Alien"] = 0
-	moving["Alien"] = SHUTTLE_IDLE
-	areas_offsite["Alien"] = locate(/area/shuttle/alien/base)
-	areas_station["Alien"] = locate(/area/shuttle/alien/mine)
-	docking_targets["Alien"] = list(null, null)
-
-	// Public shuttles.
-	location["Engineering"] = 1
-	warmup["Engineering"] = 10
-	moving["Engineering"] = SHUTTLE_IDLE
-	areas_offsite["Engineering"] = locate(/area/shuttle/constructionsite/site)
-	areas_station["Engineering"] =  locate(/area/shuttle/constructionsite/station)
-	docking_targets["Engineering"] = list(null, null)
-
-	location["Mining"] = 0
-	warmup["Mining"] = 10
-	moving["Mining"] = SHUTTLE_IDLE
-	areas_offsite["Mining"] = locate(/area/shuttle/mining/outpost)
-	areas_station["Mining"] = locate(/area/shuttle/mining/station)
-	docking_targets["Mining"] = list(null, null)
-
-	location["Research"] = 0
-	warmup["Research"] = 10
-	moving["Research"] = SHUTTLE_IDLE
-	areas_offsite["Research"] = locate(/area/shuttle/research/outpost)
-	areas_station["Research"] = locate(/area/shuttle/research/station)
-	docking_targets["Research"] = list("research_dock_airlock", "research_dock_airlock")
-
-	//Vox Shuttle.
-	var/datum/multi_shuttle/VS = new
-	VS.origin = /area/shuttle/vox/station
-
-	VS.destinations = list(
-		"Fore Starboard Solars" = /area/vox_station/northeast_solars,
-		"Fore Port Solars" = /area/vox_station/northwest_solars,
-		"Aft Starboard Solars" = /area/vox_station/southeast_solars,
-		"Aft Port Solars" = /area/vox_station/southwest_solars,
-		"Mining asteroid" = /area/vox_station/mining
-		)
-
-	VS.announcer = "NSV Icarus"
-	VS.arrival_message = "Attention, Exodus, we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
-	VS.departure_message = "Your guests are pulling away, Exodus - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
-	VS.interim = /area/vox_station/transit
-
-	multi_shuttles["Vox Skipjack"] = VS
-	location["Vox Skipjack"] = 1
-	warmup["Vox Skipjack"] = 10
-	moving["Vox Skipjack"] = SHUTTLE_IDLE
-
-	//Nuke Ops shuttle.
-	var/datum/multi_shuttle/MS = new
-	MS.origin = /area/syndicate_station/start
-
-	MS.destinations = list(
-		"Northwest of the station" = /area/syndicate_station/northwest,
-		"North of the station" = /area/syndicate_station/north,
-		"Northeast of the station" = /area/syndicate_station/northeast,
-		"Southwest of the station" = /area/syndicate_station/southwest,
-		"South of the station" = /area/syndicate_station/south,
-		"Southeast of the station" = /area/syndicate_station/southeast,
-		"Telecomms Satellite" = /area/syndicate_station/commssat,
-		"Mining Asteroid" = /area/syndicate_station/mining
-		)
-
-	MS.announcer = "NSV Icarus"
-	MS.arrival_message = "Attention, Exodus, you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
-	MS.departure_message = "Your visitors are on their way out of the system, Exodus, burning delta-v like it's nothing. Good riddance."
-	MS.interim = /area/syndicate_station/transit
-
-	multi_shuttles["Syndicate"] = MS
-	location["Syndicate"] = 1
-	warmup["Syndicate"] = 10
-	moving["Syndicate"] = SHUTTLE_IDLE
-
-
-/datum/shuttle_controller/proc/jump_shuttle(var/shuttle_tag,var/area/origin,var/area/destination)
-	if(moving[shuttle_tag] != SHUTTLE_IDLE) return
-
-	moving[shuttle_tag] = SHUTTLE_WARMUP
-	spawn(warmup[shuttle_tag]*10)
-		move_shuttle(shuttle_tag, origin, destination)
-		moving[shuttle_tag] = SHUTTLE_IDLE
-
-//This is for shuttles with a timer before arrival such as the vox skipjack and the escape shuttle.
-/datum/shuttle_controller/proc/jump_shuttle_long(var/shuttle_tag,var/area/departing,var/area/destination,var/area/interim,var/travel_time)
-	if(moving[shuttle_tag] != SHUTTLE_IDLE) return
-
-	moving[shuttle_tag] = SHUTTLE_WARMUP
-
-	spawn(warmup[shuttle_tag]*10)
-		move_shuttle(shuttle_tag,locate(departing),locate(interim))
+	spawn(warmup_time*10)
+		move(locate(departing),locate(interim))
 
 		sleep(travel_time)
 
-		move_shuttle(shuttle_tag,locate(interim),locate(destination))
+		move(locate(interim),locate(destination))
 
-		moving[shuttle_tag] = SHUTTLE_IDLE
-
-	return
-
+		moving_status = SHUTTLE_IDLE
 
 //just moves the shuttle from A to B, if it can be moved
-/datum/shuttle_controller/proc/move_shuttle(var/shuttle_tag,var/area/origin,var/area/destination)
+/datum/shuttle/proc/move(var/area/origin,var/area/destination)
 
 	//world << "move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination]."
-	if(!shuttle_tag || isnull(location[shuttle_tag]))
+	if(isnull(location))
 		return
 
 	var/area/area_going_to
@@ -163,16 +52,16 @@ var/global/datum/shuttle_controller/shuttles
 		//world << "Using supplied destination [destination]."
 		area_going_to = destination
 	else
-		//world << "Using controller value [(location[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])]."
-		area_going_to = (location[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])
+		//world << "Using controller value [(cur_location[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])]."
+		area_going_to = (location == 1 ? area_station : area_offsite)
 
 	var/area/area_coming_from
 	if(origin)
 		//world << "Using supplied origin [origin]."
 		area_coming_from = origin
 	else
-		//world << "Using controller value [(location[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])]."
-		area_coming_from = (location[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])
+		//world << "Using controller value [(cur_location[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])]."
+		area_coming_from = (location == 1 ? area_offsite : area_station)
 
 	//world << "area_coming_from: [area_coming_from]"
 	//world << "area_going_to: [area_going_to]"
@@ -181,7 +70,7 @@ var/global/datum/shuttle_controller/shuttles
 		//world << "cancelling move, shuttle will overlap."
 		return
 
-	moving[shuttle_tag] = SHUTTLE_INTRANSIT
+	moving_status = SHUTTLE_INTRANSIT
 	
 	var/list/dstturfs = list()
 	var/throwy = world.maxy
@@ -206,7 +95,7 @@ var/global/datum/shuttle_controller/shuttles
 
 	area_coming_from.move_contents_to(area_going_to)
 
-	location[shuttle_tag] = !location[shuttle_tag]
+	location = !location	//this needs to change.
 
 	for(var/mob/M in area_going_to)
 		if(M.client)
@@ -222,3 +111,106 @@ var/global/datum/shuttle_controller/shuttles
 				M.Weaken(3)
 
 	return
+
+
+
+/proc/setup_shuttles()
+	var/datum/shuttle/shuttle
+	
+	//Supply and escape shuttles.
+	shuttle = new/datum/shuttle()
+	shuttle.location = 1
+	shuttle.area_offsite = locate(/area/supply/dock)
+	shuttle.area_station = locate(/area/supply/station)
+	shuttle.docking_targets = list(null, null)
+	shuttles["Supply"] = shuttle
+
+	// Admin shuttles.
+	shuttle = new/datum/shuttle()
+	shuttle.location = 1
+	shuttle.area_offsite = locate(/area/shuttle/transport1/centcom)
+	shuttle.area_station = locate(/area/shuttle/transport1/station)
+	shuttle.docking_targets = list(null, null)
+	shuttles["Centcom"] = shuttle
+
+	shuttle = new/datum/shuttle()
+	shuttle.location = 1
+	shuttle.area_offsite = locate(/area/shuttle/administration/centcom)
+	shuttle.area_station = locate(/area/shuttle/administration/station)
+	shuttle.docking_targets = list(null, null)
+	shuttles["Administration"] = shuttle
+
+	shuttle = new/datum/shuttle()
+	shuttle.area_offsite = locate(/area/shuttle/alien/base)
+	shuttle.area_station = locate(/area/shuttle/alien/mine)
+	shuttle.docking_targets = list(null, null)
+	shuttles["Alien"] = shuttle
+
+	// Public shuttles
+	shuttle = new/datum/shuttle()
+	shuttle.location = 1
+	shuttle.warmup_time = 10
+	shuttle.area_offsite = locate(/area/shuttle/constructionsite/site)
+	shuttle.area_station = locate(/area/shuttle/constructionsite/station)
+	shuttle.docking_targets = list(null, null)
+	shuttles["Engineering"] = shuttle
+
+	shuttle = new/datum/shuttle()
+	shuttle.warmup_time = 10
+	shuttle.area_offsite = locate(/area/shuttle/mining/outpost)
+	shuttle.area_station = locate(/area/shuttle/mining/station)
+	shuttle.docking_targets = list(null, null)
+	shuttles["Mining"] = shuttle
+
+	shuttle = new/datum/shuttle()
+	shuttle.warmup_time = 10
+	shuttle.area_offsite = locate(/area/shuttle/research/outpost)
+	shuttle.area_station = locate(/area/shuttle/research/station)
+	shuttle.docking_targets = list(null, null)
+	shuttles["Research"] = shuttle
+
+	//Vox Shuttle.
+	var/datum/shuttle/multi_shuttle/VS = new/datum/shuttle/multi_shuttle()
+	VS.origin = /area/shuttle/vox/station
+
+	VS.destinations = list(
+		"Fore Starboard Solars" = /area/vox_station/northeast_solars,
+		"Fore Port Solars" = /area/vox_station/northwest_solars,
+		"Aft Starboard Solars" = /area/vox_station/southeast_solars,
+		"Aft Port Solars" = /area/vox_station/southwest_solars,
+		"Mining asteroid" = /area/vox_station/mining
+		)
+
+	VS.announcer = "NSV Icarus"
+	VS.arrival_message = "Attention, Exodus, we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
+	VS.departure_message = "Your guests are pulling away, Exodus - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
+	VS.interim = /area/vox_station/transit
+
+	VS.location = 1
+	VS.warmup_time = 10
+	shuttles["Vox Skipjack"] = VS
+
+	//Nuke Ops shuttle.
+	var/datum/shuttle/multi_shuttle/MS = new/datum/shuttle/multi_shuttle()
+	MS.origin = /area/syndicate_station/start
+
+	MS.destinations = list(
+		"Northwest of the station" = /area/syndicate_station/northwest,
+		"North of the station" = /area/syndicate_station/north,
+		"Northeast of the station" = /area/syndicate_station/northeast,
+		"Southwest of the station" = /area/syndicate_station/southwest,
+		"South of the station" = /area/syndicate_station/south,
+		"Southeast of the station" = /area/syndicate_station/southeast,
+		"Telecomms Satellite" = /area/syndicate_station/commssat,
+		"Mining Asteroid" = /area/syndicate_station/mining
+		)
+
+	MS.announcer = "NSV Icarus"
+	MS.arrival_message = "Attention, Exodus, you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
+	MS.departure_message = "Your visitors are on their way out of the system, Exodus, burning delta-v like it's nothing. Good riddance."
+	MS.interim = /area/syndicate_station/transit
+
+	MS.location = 1
+	MS.warmup_time = 10
+	shuttles["Syndicate"] = MS
+

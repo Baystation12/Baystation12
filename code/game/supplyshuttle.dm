@@ -169,7 +169,8 @@ var/list/mechtoys = list(
 							eta = round(ticksleft/600,1)
 						else
 							eta = 0
-							shuttles.move_shuttle("Supply")
+							var/datum/shuttle/S = shuttles["Supply"]
+							if (istype(S)) S.move()
 							moving = 0
 							at_station = !at_station
 
@@ -502,7 +503,8 @@ var/list/mechtoys = list(
 			supply_shuttle.moving = 0
 			supply_shuttle.at_station = !supply_shuttle.at_station
 
-			shuttles.move_shuttle("Supply")
+			var/datum/shuttle/S = shuttles["Supply"]
+			if (istype(S)) S.move()
 
 			temp = "The supply shuttle has departed.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 		else

@@ -14,7 +14,7 @@ var/global/datum/shuttle_controller/emergency_shuttle/emergency_shuttle
 datum/shuttle_controller/emergency_shuttle
 	var/alert = 0 //0 = emergency, 1 = crew cycle
 
-	location = 0 //0 = somewhere far away (in spess), 1 = at SS13, 2 = returned from SS13
+	var/location = 0 //0 = somewhere far away (in spess), 1 = at SS13, 2 = returned from SS13
 	var/online = 0
 	var/direction = 1 //-1 = going back to central command, 1 = going to SS13, 2 = in transit to centcom (not recalled)
 

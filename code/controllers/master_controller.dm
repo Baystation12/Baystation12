@@ -65,7 +65,7 @@ datum/controller/game_controller/proc/setup()
 	if(!ticker)
 		ticker = new /datum/controller/gameticker()
 
-	if(!shuttles) shuttles = new /datum/shuttle_controller()
+	if(!shuttles) setup_shuttles()
 
 	setup_objects()
 	setupgenetics()
