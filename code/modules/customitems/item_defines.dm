@@ -506,6 +506,30 @@
 		icon_state = "salvage_suit"
 		item_state = "salvage_suit"
 
+//////// Meat Hook - Korom Bhararaya - Matthew951 ////////////////////////
+
+/obj/item/device/kit/fluff/hook
+	name = "hook modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a knife or a butcher's knife into a hook."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "hook_kit"
+
+/obj/item/weapon/kitchenknife/attackby(var/obj/item/O as obj, mob/user as mob)
+	if(istype(O,/obj/item/device/kit/fluff/hook))
+		name = "meat hook"
+		desc = "A sharp, metal hook what sticks into things."
+		icon = 'icons/obj/custom_items.dmi'
+		icon_state = "hook_knife"
+		item_state = "hook_knife"
+
+/obj/item/weapon/butch/attackby(var/obj/item/O as obj, mob/user as mob)
+	if(istype(O,/obj/item/device/kit/fluff/hook))
+		name = "meat hook"
+		desc = "A sharp, metal hook what sticks into things."
+		icon = 'icons/obj/custom_items.dmi'
+		icon_state = "hook_knife"
+		item_state = "hook_knife"
+
 //////////////////////////////////
 //////////// Clothing ////////////
 //////////////////////////////////
