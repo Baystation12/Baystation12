@@ -491,6 +491,8 @@
 	icon_state = "salvage_kit"
 
 /obj/item/clothing/head/helmet/space/rig/medical/attackby(var/obj/item/O as obj, mob/user as mob)
+	..()
+
 	if(istype(O,/obj/item/device/kit/fluff/salvage))
 		name = "Salvage Hardsuit helmet"
 		desc = "An orange hardsuit helmet used by salvage flotillas. Has reinforced plating."
@@ -499,6 +501,8 @@
 		item_state = "salvage_helmet"
 
 /obj/item/clothing/suit/space/rig/medical/attackby(var/obj/item/O as obj, mob/user as mob)
+	..()
+
 	if(istype(O,/obj/item/device/kit/fluff/salvage))
 		name = "Salvage Hardsuit"
 		desc = "An orange hardsuit used by salvage flotillas. Has reinforced plating."
@@ -515,6 +519,8 @@
 	icon_state = "hook_kit"
 
 /obj/item/weapon/kitchenknife/attackby(var/obj/item/O as obj, mob/user as mob)
+	..()
+
 	if(istype(O,/obj/item/device/kit/fluff/hook))
 		name = "meat hook"
 		desc = "A sharp, metal hook what sticks into things."
@@ -523,6 +529,8 @@
 		item_state = "hook_knife"
 
 /obj/item/weapon/butch/attackby(var/obj/item/O as obj, mob/user as mob)
+	..()
+
 	if(istype(O,/obj/item/device/kit/fluff/hook))
 		name = "meat hook"
 		desc = "A sharp, metal hook what sticks into things."
