@@ -490,7 +490,7 @@
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "salvage_kit"
 
-/obj/item/clothing/head/helmet/space/rig/medical/attackby(var/obj/item/O as obj, mob/user as mob)
+/obj/item/clothing/head/helmet/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
 	if(istype(O,/obj/item/device/kit/fluff/salvage))
@@ -500,7 +500,7 @@
 		icon_state = "salvage_helmet"
 		item_state = "salvage_helmet"
 
-/obj/item/clothing/suit/space/rig/medical/attackby(var/obj/item/O as obj, mob/user as mob)
+/obj/item/clothing/suit/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
 	..()
 
 	if(istype(O,/obj/item/device/kit/fluff/salvage))
