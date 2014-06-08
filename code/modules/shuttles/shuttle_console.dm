@@ -1,3 +1,7 @@
+#define STATUS_IDLE
+#define STATUS_LAUNCH
+#define STATUS_ARRIVE
+
 /obj/machinery/computer/shuttle_control
 	name = "shuttle control console"
 	icon = 'icons/obj/computer.dmi'
@@ -7,54 +11,46 @@
 
 	//for mapping
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
+	var/datum/shuttle/shuttle
 	var/docking_controller_tag	//tag of the controller used to coordinate docking
 	
 	var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself
 	var/hacked = 0   // Has been emagged, no access restrictions.
-	var/wait_for_launch = 0
 
 /obj/machinery/computer/shuttle_control/initialize()
+	shuttle = shuttles[shuttle_tag]
+	
 	//search for our controller, if we have one.
 	if (docking_controller_tag)
 		for (var/obj/machinery/embedded_controller/radio/C in machines)	//only radio controllers are supported, for now...
 			if (C.id_tag == docking_controller_tag && istype(C.program, /datum/computer/file/embedded_program/docking))
 				docking_controller = C.program
+	
 
 /obj/machinery/computer/shuttle_control/process()
+	/*
+	switch (launch_status)
+
 	if (wait_for_launch)
 		if (docking_controller && docking_controller.can_launch())
 			shuttles.jump_shuttle(shuttle_tag)
 			wait_for_launch = 0
+	*/
 
-/*
+
 /obj/machinery/computer/shuttle_control/attack_hand(user as mob)
-
 	if(..(user))
 		return
-	src.add_fingerprint(user)
+	//src.add_fingerprint(user)	//shouldn't need fingerprints just for looking at it.
 
-//ui_interact()
+	ui_interact(user)
 
-	var/dat
-
-	dat = "<center>[shuttle_tag] Shuttle Control<hr>"
-
-	if(waiting || shuttles.moving[shuttle_tag])
-		dat += "Location: <font color='red'>Moving</font> <br>"
-	else
-		dat += "Location: [shuttles.location[shuttle_tag] ? "Offsite" : "Station"] <br>"
-
-	dat += "<b><A href='?src=\ref[src];move=[1]'>Send</A></b></center>"
-
-
-	user << browse("[dat]", "window=[shuttle_tag]shuttlecontrol;size=200x150")
-*/
 
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
 
 	var/shuttle_state
-	switch(shuttles.moving[shuttle_tag])
+	switch(shuttle.moving_status)
 		if(SHUTTLE_IDLE) shuttle_state = "idle"
 		if(SHUTTLE_WARMUP) shuttle_state = "warmup"
 		if(SHUTTLE_INTRANSIT) shuttle_state = "in_transit"
@@ -62,7 +58,7 @@
 	if (docking_controller)
 		data = list(
 			"shuttle_state" = shuttle_state,
-			"shuttle_loc" = shuttles.location[shuttle_tag],
+			"shuttle_loc" = shuttle.location,
 			"has_docking" = 1,
 			"docking_status" = docking_controller.get_docking_status(),
 			"override_enabled" = docking_controller.override_enabled,
@@ -70,7 +66,7 @@
 	else
 		data = list(
 			"shuttle_state" = shuttle_state,
-			"shuttle_loc" = shuttles.location[shuttle_tag],
+			"shuttle_loc" = shuttle.location,
 			"has_docking" = 0,
 			"docking_status" = null,
 			"override_enabled" = null,
@@ -84,6 +80,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
+//TODO: Canceling launches
 /obj/machinery/computer/shuttle_control/Topic(href, href_list)
 	if(..())
 		return
@@ -91,9 +88,9 @@
 	src.add_fingerprint(usr)
 
 	if(href_list["move"])
-		if (!shuttles.moving[shuttle_tag])
+		if (shuttle.moving_status == SHUTTLE_IDLE)
 			usr << "\blue [shuttle_tag] Shuttle recieved message and will be sent shortly."
-			wait_for_launch = 1
+			shuttle.short_jump()
 		else
 			usr << "\blue [shuttle_tag] Shuttle is already moving."
 
@@ -114,10 +111,9 @@
 /proc/setup_shuttle_docks()
 	var/list/setup_complete = list()	//so we dont setup the same shuttle repeatedly
 	
-	for (var/obj/machinery/computer/shuttle_control/S in machines)
-		var/location = shuttles.location[S.shuttle_tag]
-		var/dock_target = shuttles.docking_targets[S.shuttle_tag][location+1]	//damned byond is 1-indexed - don't forget
+	for (var/obj/machinery/computer/shuttle_control/SC in machines)
+		var/dock_target = SC.shuttle.docking_targets[SC.shuttle.location+1]	//damned byond is 1-indexed - don't forget
 		
-		if (!(S.shuttle_tag in setup_complete) && S.docking_controller && dock_target)
-			S.docking_controller.initiate_docking(dock_target)
-			setup_complete += S.shuttle_tag
+		if (!(SC.shuttle_tag in setup_complete) && SC.docking_controller && dock_target)
+			SC.docking_controller.initiate_docking(dock_target)
+			setup_complete += SC.shuttle_tag

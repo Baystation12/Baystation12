@@ -69,7 +69,7 @@ datum/controller/game_controller/proc/setup()
 	if(!garbage)
 		garbage = new /datum/controller/garbage_collector()
 
-	if(!shuttles) shuttles = new /datum/shuttle_controller()
+	if(!shuttles) setup_shuttles()
 
 	setup_objects()
 	setupgenetics()

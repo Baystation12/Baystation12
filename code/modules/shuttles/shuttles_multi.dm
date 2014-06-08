@@ -1,5 +1,5 @@
 //This is a holder for things like the Vox and Nuke shuttle.
-/datum/multi_shuttle
+/datum/shuttle/multi_shuttle
 
 	var/cloaked = 1
 	var/at_origin = 1
@@ -17,18 +17,18 @@
 	var/area/origin
 	var/return_warning = 0
 
-/datum/multi_shuttle/New()
+/datum/shuttle/multi_shuttle/New()
 	..()
 	if(origin) last_departed = origin
 
-/datum/multi_shuttle/proc/announce_departure()
+/datum/shuttle/multi_shuttle/proc/announce_departure()
 
 	if(cloaked || isnull(departure_message))
 		return
 
 	command_alert(departure_message,(announcer ? announcer : "Central Command"))
 
-/datum/multi_shuttle/proc/announce_arrival()
+/datum/shuttle/multi_shuttle/proc/announce_arrival()
 
 	if(cloaked || isnull(arrival_message))
 		return
@@ -44,14 +44,14 @@
 		return
 	src.add_fingerprint(user)
 
-	var/datum/multi_shuttle/MS = shuttles.multi_shuttles[shuttle_tag]
+	var/datum/shuttle/multi_shuttle/MS = shuttles[shuttle_tag]
 	if(!istype(MS)) return
 
 	var/dat
 	dat = "<center>[shuttle_tag] Ship Control<hr>"
 
 
-	if(shuttles.moving[shuttle_tag])
+	if(MS.moving_status != SHUTTLE_IDLE)
 		dat += "Location: <font color='red'>Moving</font> <br>"
 	else
 		var/area/areacheck = get_area(src)
@@ -76,10 +76,10 @@
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 
-	var/datum/multi_shuttle/MS = shuttles.multi_shuttles[shuttle_tag]
+	var/datum/shuttle/multi_shuttle/MS = shuttles[shuttle_tag]
 	if(!istype(MS)) return
 
-	if (shuttles.moving[shuttle_tag])
+	if (MS.moving_status != SHUTTLE_IDLE)
 		usr << "\blue [shuttle_tag] vessel is moving."
 		return
 
@@ -99,20 +99,16 @@
 			MS.return_warning = 1
 			return
 
-		shuttles.jump_shuttle_long(shuttle_tag,MS.last_departed,MS.origin,MS.interim,MS.move_time)
+		MS.long_jump(MS.last_departed,MS.origin,MS.interim,MS.move_time)
 		MS.last_departed = MS.origin
 		MS.at_origin = 1
 
 	if(href_list["toggle_cloak"])
 
-		if(!shuttles.multi_shuttles) return
-
 		MS.cloaked = !MS.cloaked
 		usr << "\red Ship stealth systems have been [(MS.cloaked ? "activated. The station will not" : "deactivated. The station will")] be warned of our arrival."
 
 	if(href_list["move_multi"])
-
-		if(!shuttles.multi_shuttles) return
 
 		var/choice = input("Select a destination.") as null|anything in MS.destinations
 		if(!choice) return
@@ -124,7 +120,8 @@
 			MS.last_departed = MS.origin
 			MS.at_origin = 0
 
-			shuttles.jump_shuttle_long(shuttle_tag,MS.last_departed,MS.destinations[choice],MS.interim,MS.move_time)
+			
+			MS.long_jump(MS.last_departed,MS.destinations[choice],MS.interim,MS.move_time)
 			MS.last_departed = MS.destinations[choice]
 			return
 
@@ -132,7 +129,7 @@
 
 			MS.announce_departure()
 
-		shuttles.jump_shuttle(shuttle_tag,locate(MS.last_departed),locate(MS.destinations[choice]))
+		MS.short_jump(locate(MS.last_departed),locate(MS.destinations[choice]))
 		MS.last_departed = MS.destinations[choice]
 
 	updateUsrDialog()
