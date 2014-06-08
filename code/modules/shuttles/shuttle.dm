@@ -12,6 +12,10 @@ var/global/datum/shuttle_controller/shuttles
 
 	//Shuttles with multiple destinations don't quite behave in the same way as ferries.
 	var/list/multi_shuttles = list()
+	
+	//docking stuff
+	var/list/docking_controller = list()
+	var/list/docking_targets = list()
 
 /datum/shuttle_controller/New()
 
@@ -23,6 +27,7 @@ var/global/datum/shuttle_controller/shuttles
 	moving["Supply"] = 0
 	areas_offsite["Supply"] = locate(/area/supply/dock)
 	areas_station["Supply"] = locate(/area/supply/station)
+	docking_targets["Supply"] = list(null, null)
 
 	// Admin shuttles.
 	locations["Centcom"] = 1
@@ -30,18 +35,21 @@ var/global/datum/shuttle_controller/shuttles
 	moving["Centcom"] = 0
 	areas_offsite["Centcom"] = locate(/area/shuttle/transport1/centcom)
 	areas_station["Centcom"] = locate(/area/shuttle/transport1/station)
+	docking_targets["Centcom"] = list(null, null)
 
 	locations["Administration"] = 1
 	delays["Administration"] = 0
 	moving["Administration"] = 0
 	areas_offsite["Administration"] = locate(/area/shuttle/administration/centcom)
 	areas_station["Administration"] = locate(/area/shuttle/administration/station)
+	docking_targets["Administration"] = list(null, null)
 
 	locations["Alien"] = 0
 	delays["Alien"] = 0
 	moving["Alien"] = 0
 	areas_offsite["Alien"] = locate(/area/shuttle/alien/base)
 	areas_station["Alien"] = locate(/area/shuttle/alien/mine)
+	docking_targets["Alien"] = list(null, null)
 
 	// Public shuttles.
 	locations["Engineering"] = 1
@@ -49,18 +57,21 @@ var/global/datum/shuttle_controller/shuttles
 	moving["Engineering"] = 0
 	areas_offsite["Engineering"] = locate(/area/shuttle/constructionsite/site)
 	areas_station["Engineering"] =  locate(/area/shuttle/constructionsite/station)
+	docking_targets["Engineering"] = list(null, null)
 
 	locations["Mining"] = 0
 	delays["Mining"] = 10
 	moving["Mining"] = 0
 	areas_offsite["Mining"] = locate(/area/shuttle/mining/outpost)
 	areas_station["Mining"] = locate(/area/shuttle/mining/station)
+	docking_targets["Mining"] = list(null, null)
 
 	locations["Research"] = 0
 	delays["Research"] = 10
 	moving["Research"] = 0
 	areas_offsite["Research"] = locate(/area/shuttle/research/outpost)
 	areas_station["Research"] = locate(/area/shuttle/research/station)
+	docking_targets["Research"] = list("research_dock_airlock", "research_dock_airlock")
 
 	//Vox Shuttle.
 	var/datum/multi_shuttle/VS = new
@@ -207,8 +218,19 @@ var/global/datum/shuttle_controller/shuttles
 	req_access = list(access_engine)
 	circuit = "/obj/item/weapon/circuitboard/engineering_shuttle"
 
+	//for mapping
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
+	var/docking_controller_tag	//tag of the controller used to coordinate docking
+	
+	var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself
 	var/hacked = 0   // Has been emagged, no access restrictions.
+
+/obj/machinery/computer/shuttle_control/initialize()
+	//search for our controller, if we have one.
+	if (docking_controller_tag)
+		for (var/obj/machinery/embedded_controller/radio/C in machines)	//only radio controllers are supported, for now...
+			if (C.id_tag == docking_controller_tag && istype(C.program, /datum/computer/file/embedded_program/docking))
+				docking_controller = C.program
 
 /obj/machinery/computer/shuttle_control/attack_hand(user as mob)
 
@@ -254,3 +276,15 @@ var/global/datum/shuttle_controller/shuttles
 
 /obj/machinery/computer/shuttle_control/bullet_act(var/obj/item/projectile/Proj)
 	visible_message("[Proj] ricochets off [src]!")
+
+//makes all shuttles docked to something at round start go into the docked state
+/proc/setup_shuttle_docks()
+	var/list/setup_complete = list()	//so we dont setup the same shuttle repeatedly
+	
+	for (var/obj/machinery/computer/shuttle_control/S in machines)
+		var/location = shuttles.locations[S.shuttle_tag]
+		var/dock_target = shuttles.docking_targets[S.shuttle_tag][location+1]	//damned byond is 1-indexed - don't forget
+		
+		if (!(S.shuttle_tag in setup_complete) && S.docking_controller && dock_target)
+			S.docking_controller.initiate_docking(dock_target)
+			setup_complete += S.shuttle_tag
