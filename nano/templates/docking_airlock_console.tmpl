@@ -37,7 +37,7 @@
 				</span>
 			</div>
 		{{else docking_status == "undocked"}}
-			<span class="dark" style="font-weight: bold">NOT IN USE</span>
+			<span class="idle">NOT IN USE</span>
 		{{else}}
 			<span class="bad">ERROR</span>
 			{{:~link('Override', 'alert', {'command' : 'toggle_override'}, null, airlock_disabled ? null : 'redBackground')}}

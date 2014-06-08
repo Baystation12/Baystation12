@@ -1,14 +1,14 @@
 //These lists are populated in /datum/shuttle_controller/New()
 //Shuttle controller is instantiated in master_controller.dm.
 
-#define STATUS_IDLE
-#define STATUS_WARMUP
-#define STATUS_INTRANSIT
+#define SHUTTLE_IDLE		0
+#define SHUTTLE_WARMUP		1
+#define SHUTTLE_INTRANSIT	2
 
 var/global/datum/shuttle_controller/shuttles
 
 /datum/shuttle_controller //This isn't really a controller...
-	var/list/locations = list()
+	var/list/location = list()
 	var/list/warmup = list()
 	var/list/moving = list()
 	var/list/areas_offsite = list()
@@ -26,53 +26,53 @@ var/global/datum/shuttle_controller/shuttles
 	..()
 
 	//Supply and escape shuttles.
-	locations["Supply"] = 1
+	location["Supply"] = 1
 	warmup["Supply"] = 0
-	moving["Supply"] = STATUS_IDLE
+	moving["Supply"] = SHUTTLE_IDLE
 	areas_offsite["Supply"] = locate(/area/supply/dock)
 	areas_station["Supply"] = locate(/area/supply/station)
 	docking_targets["Supply"] = list(null, null)
 
 	// Admin shuttles.
-	locations["Centcom"] = 1
+	location["Centcom"] = 1
 	warmup["Centcom"] = 0
-	moving["Centcom"] = STATUS_IDLE
+	moving["Centcom"] = SHUTTLE_IDLE
 	areas_offsite["Centcom"] = locate(/area/shuttle/transport1/centcom)
 	areas_station["Centcom"] = locate(/area/shuttle/transport1/station)
 	docking_targets["Centcom"] = list(null, null)
 
-	locations["Administration"] = 1
+	location["Administration"] = 1
 	warmup["Administration"] = 0
-	moving["Administration"] = STATUS_IDLE
+	moving["Administration"] = SHUTTLE_IDLE
 	areas_offsite["Administration"] = locate(/area/shuttle/administration/centcom)
 	areas_station["Administration"] = locate(/area/shuttle/administration/station)
 	docking_targets["Administration"] = list(null, null)
 
-	locations["Alien"] = 0
+	location["Alien"] = 0
 	warmup["Alien"] = 0
-	moving["Alien"] = STATUS_IDLE
+	moving["Alien"] = SHUTTLE_IDLE
 	areas_offsite["Alien"] = locate(/area/shuttle/alien/base)
 	areas_station["Alien"] = locate(/area/shuttle/alien/mine)
 	docking_targets["Alien"] = list(null, null)
 
 	// Public shuttles.
-	locations["Engineering"] = 1
+	location["Engineering"] = 1
 	warmup["Engineering"] = 10
-	moving["Engineering"] = STATUS_IDLE
+	moving["Engineering"] = SHUTTLE_IDLE
 	areas_offsite["Engineering"] = locate(/area/shuttle/constructionsite/site)
 	areas_station["Engineering"] =  locate(/area/shuttle/constructionsite/station)
 	docking_targets["Engineering"] = list(null, null)
 
-	locations["Mining"] = 0
+	location["Mining"] = 0
 	warmup["Mining"] = 10
-	moving["Mining"] = STATUS_IDLE
+	moving["Mining"] = SHUTTLE_IDLE
 	areas_offsite["Mining"] = locate(/area/shuttle/mining/outpost)
 	areas_station["Mining"] = locate(/area/shuttle/mining/station)
 	docking_targets["Mining"] = list(null, null)
 
-	locations["Research"] = 0
+	location["Research"] = 0
 	warmup["Research"] = 10
-	moving["Research"] = STATUS_IDLE
+	moving["Research"] = SHUTTLE_IDLE
 	areas_offsite["Research"] = locate(/area/shuttle/research/outpost)
 	areas_station["Research"] = locate(/area/shuttle/research/station)
 	docking_targets["Research"] = list("research_dock_airlock", "research_dock_airlock")
@@ -95,9 +95,9 @@ var/global/datum/shuttle_controller/shuttles
 	VS.interim = /area/vox_station/transit
 
 	multi_shuttles["Vox Skipjack"] = VS
-	locations["Vox Skipjack"] = 1
+	location["Vox Skipjack"] = 1
 	warmup["Vox Skipjack"] = 10
-	moving["Vox Skipjack"] = STATUS_IDLE
+	moving["Vox Skipjack"] = SHUTTLE_IDLE
 
 	//Nuke Ops shuttle.
 	var/datum/multi_shuttle/MS = new
@@ -120,24 +120,24 @@ var/global/datum/shuttle_controller/shuttles
 	MS.interim = /area/syndicate_station/transit
 
 	multi_shuttles["Syndicate"] = MS
-	locations["Syndicate"] = 1
+	location["Syndicate"] = 1
 	warmup["Syndicate"] = 10
-	moving["Syndicate"] = STATUS_IDLE
+	moving["Syndicate"] = SHUTTLE_IDLE
 
 
 /datum/shuttle_controller/proc/jump_shuttle(var/shuttle_tag,var/area/origin,var/area/destination)
-	if(moving[shuttle_tag] != STATUS_IDLE) return
+	if(moving[shuttle_tag] != SHUTTLE_IDLE) return
 
-	moving[shuttle_tag] = STATUS_WARMUP
+	moving[shuttle_tag] = SHUTTLE_WARMUP
 	spawn(warmup[shuttle_tag]*10)
 		move_shuttle(shuttle_tag, origin, destination)
-		moving[shuttle_tag] = STATUS_IDLE
+		moving[shuttle_tag] = SHUTTLE_IDLE
 
 //This is for shuttles with a timer before arrival such as the vox skipjack and the escape shuttle.
 /datum/shuttle_controller/proc/jump_shuttle_long(var/shuttle_tag,var/area/departing,var/area/destination,var/area/interim,var/travel_time)
-	if(moving[shuttle_tag] != STATUS_IDLE) return
+	if(moving[shuttle_tag] != SHUTTLE_IDLE) return
 
-	moving[shuttle_tag] = STATUS_WARMUP
+	moving[shuttle_tag] = SHUTTLE_WARMUP
 
 	spawn(warmup[shuttle_tag]*10)
 		move_shuttle(shuttle_tag,locate(departing),locate(interim))
@@ -146,7 +146,7 @@ var/global/datum/shuttle_controller/shuttles
 
 		move_shuttle(shuttle_tag,locate(interim),locate(destination))
 
-		moving[shuttle_tag] = STATUS_IDLE
+		moving[shuttle_tag] = SHUTTLE_IDLE
 
 	return
 
@@ -155,7 +155,7 @@ var/global/datum/shuttle_controller/shuttles
 /datum/shuttle_controller/proc/move_shuttle(var/shuttle_tag,var/area/origin,var/area/destination)
 
 	//world << "move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination]."
-	if(!shuttle_tag || isnull(locations[shuttle_tag]))
+	if(!shuttle_tag || isnull(location[shuttle_tag]))
 		return
 
 	var/area/area_going_to
@@ -163,16 +163,16 @@ var/global/datum/shuttle_controller/shuttles
 		//world << "Using supplied destination [destination]."
 		area_going_to = destination
 	else
-		//world << "Using controller value [(locations[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])]."
-		area_going_to = (locations[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])
+		//world << "Using controller value [(location[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])]."
+		area_going_to = (location[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])
 
 	var/area/area_coming_from
 	if(origin)
 		//world << "Using supplied origin [origin]."
 		area_coming_from = origin
 	else
-		//world << "Using controller value [(locations[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])]."
-		area_coming_from = (locations[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])
+		//world << "Using controller value [(location[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])]."
+		area_coming_from = (location[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])
 
 	//world << "area_coming_from: [area_coming_from]"
 	//world << "area_going_to: [area_going_to]"
@@ -181,7 +181,7 @@ var/global/datum/shuttle_controller/shuttles
 		//world << "cancelling move, shuttle will overlap."
 		return
 
-	moving[shuttle_tag] = STATUS_INTRANSIT
+	moving[shuttle_tag] = SHUTTLE_INTRANSIT
 	
 	var/list/dstturfs = list()
 	var/throwy = world.maxy
@@ -206,7 +206,7 @@ var/global/datum/shuttle_controller/shuttles
 
 	area_coming_from.move_contents_to(area_going_to)
 
-	locations[shuttle_tag] = !locations[shuttle_tag]
+	location[shuttle_tag] = !location[shuttle_tag]
 
 	for(var/mob/M in area_going_to)
 		if(M.client)

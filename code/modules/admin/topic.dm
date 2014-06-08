@@ -1928,7 +1928,7 @@
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","ShA")
 
-				var/shuttle_tag = input("Which shuttle do you want to call?") as null|anything in shuttles.locations
+				var/shuttle_tag = input("Which shuttle do you want to call?") as null|anything in shuttles.location
 
 				if(shuttle_tag && !shuttles.moving[shuttle_tag])
 					shuttles.jump_shuttle(shuttle_tag)
