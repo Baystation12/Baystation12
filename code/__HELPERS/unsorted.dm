@@ -550,6 +550,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 
 //Will return the location of the turf an atom is ultimatly sitting on
+//isn't this just a null-reference-vulnerable copy of /proc/get_turf()?
 /proc/get_turf_loc(var/atom/movable/M) //gets the location of the turf that the atom is on, or what the atom is in is on, etc
 	//in case they're in a closet or sleeper or something
 	var/atom/loc = M.loc
