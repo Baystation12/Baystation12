@@ -11,18 +11,25 @@ var/global/list/shuttles
 	var/location = 0	//0 = at area_station, 1 = at area_offsite
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE	//prevents people from doing things they shouldn't when the shuttle is in transit
-	var/in_use = 0						//prevents people from controlling the shuttle from different consoles at the same time
+	var/in_use = 0						//this mutex ensures that only one console can be doing things with the shuttle at a time.
 	var/area_station
 	var/area_offsite
 	
-	var/docking_controller = null
-	var/list/docking_targets = list()
+	var/docking_controller_tag	//tag of the controller used to coordinate docking
+	var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself
+	//TODO: change location to a string and use a mapping for area and dock targets.
+	var/dock_target_station
+	var/dock_target_offsite
+	
 
 /datum/shuttle/proc/short_jump(var/datum/shuttle/shuttle,var/area/origin,var/area/destination)
 	if(moving_status != SHUTTLE_IDLE) return
 
 	moving_status = SHUTTLE_WARMUP
 	spawn(warmup_time*10)
+		if (moving_status == SHUTTLE_IDLE) 
+			return	//someone cancelled the launch
+		
 		move(origin, destination)
 		moving_status = SHUTTLE_IDLE
 
@@ -32,6 +39,9 @@ var/global/list/shuttles
 	moving_status = SHUTTLE_WARMUP
 
 	spawn(warmup_time*10)
+		if (moving_status == SHUTTLE_IDLE) 
+			return	//someone cancelled the launch
+		
 		move(locate(departing),locate(interim))
 
 		sleep(travel_time)
@@ -39,6 +49,31 @@ var/global/list/shuttles
 		move(locate(interim),locate(destination))
 
 		moving_status = SHUTTLE_IDLE
+
+
+/datum/shuttle/proc/dock()
+	if (!docking_controller)
+		return
+
+	var/dock_target = current_dock_target()
+	if (!dock_target)
+		return
+
+	docking_controller.initiate_docking(dock_target)
+
+/datum/shuttle/proc/undock()
+	if (!docking_controller)
+		return
+
+	docking_controller.initiate_undocking()
+
+/datum/shuttle/proc/current_dock_target()
+	var/dock_target
+	if (!location)	//station
+		dock_target = dock_target_station
+	else
+		dock_target = dock_target_offsite
+	return dock_target
 
 //just moves the shuttle from A to B, if it can be moved
 /datum/shuttle/proc/move(var/area/origin,var/area/destination)
@@ -115,14 +150,15 @@ var/global/list/shuttles
 
 
 /proc/setup_shuttles()
+	shuttles = list()
+
 	var/datum/shuttle/shuttle
-	
+
 	//Supply and escape shuttles.
 	shuttle = new/datum/shuttle()
 	shuttle.location = 1
 	shuttle.area_offsite = locate(/area/supply/dock)
 	shuttle.area_station = locate(/area/supply/station)
-	shuttle.docking_targets = list(null, null)
 	shuttles["Supply"] = shuttle
 
 	// Admin shuttles.
@@ -130,20 +166,17 @@ var/global/list/shuttles
 	shuttle.location = 1
 	shuttle.area_offsite = locate(/area/shuttle/transport1/centcom)
 	shuttle.area_station = locate(/area/shuttle/transport1/station)
-	shuttle.docking_targets = list(null, null)
 	shuttles["Centcom"] = shuttle
 
 	shuttle = new/datum/shuttle()
 	shuttle.location = 1
 	shuttle.area_offsite = locate(/area/shuttle/administration/centcom)
 	shuttle.area_station = locate(/area/shuttle/administration/station)
-	shuttle.docking_targets = list(null, null)
 	shuttles["Administration"] = shuttle
 
 	shuttle = new/datum/shuttle()
 	shuttle.area_offsite = locate(/area/shuttle/alien/base)
 	shuttle.area_station = locate(/area/shuttle/alien/mine)
-	shuttle.docking_targets = list(null, null)
 	shuttles["Alien"] = shuttle
 
 	// Public shuttles
@@ -152,21 +185,21 @@ var/global/list/shuttles
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/constructionsite/site)
 	shuttle.area_station = locate(/area/shuttle/constructionsite/station)
-	shuttle.docking_targets = list(null, null)
 	shuttles["Engineering"] = shuttle
 
 	shuttle = new/datum/shuttle()
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/mining/outpost)
 	shuttle.area_station = locate(/area/shuttle/mining/station)
-	shuttle.docking_targets = list(null, null)
 	shuttles["Mining"] = shuttle
 
 	shuttle = new/datum/shuttle()
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/research/outpost)
 	shuttle.area_station = locate(/area/shuttle/research/station)
-	shuttle.docking_targets = list(null, null)
+	shuttle.docking_controller_tag = "research_shuttle"
+	shuttle.dock_target_station = "research_dock_airlock"
+	shuttle.dock_target_offsite = "research_outpost_dock"
 	shuttles["Research"] = shuttle
 
 	//Vox Shuttle.
@@ -214,3 +247,33 @@ var/global/list/shuttles
 	MS.warmup_time = 10
 	shuttles["Syndicate"] = MS
 
+
+/proc/setup_shuttle_docks()
+	var/datum/shuttle/shuttle
+	var/list/dock_controller_map = list()	//so we only have to iterate once through each list
+
+	for (var/shuttle_tag in shuttles)
+		shuttle = shuttles[shuttle_tag]
+		if (shuttle.docking_controller_tag)
+			dock_controller_map[shuttle.docking_controller_tag] = shuttle
+
+	//search for the controllers, if we have one.
+	if (dock_controller_map.len)
+		for (var/obj/machinery/embedded_controller/radio/C in machines)	//only radio controllers are supported at the moment
+			if (istype(C.program, /datum/computer/file/embedded_program/docking) && C.id_tag in dock_controller_map)
+				shuttle = dock_controller_map[C.id_tag]
+				shuttle.docking_controller = C.program
+				dock_controller_map -= C.id_tag
+	
+	//sanity check
+	if (dock_controller_map.len)
+		var/dat = ""
+		for (var/dock_tag in dock_controller_map)
+			dat += "\"[dock_tag]\", "
+		world << "/red /b warning: shuttles with docking tags [dat] could not find their controllers!"
+	
+	//makes all shuttles docked to something at round start go into the docked state
+	for (var/shuttle_tag in shuttles)
+		shuttle = shuttles[shuttle_tag]
+		shuttle.dock()
+				

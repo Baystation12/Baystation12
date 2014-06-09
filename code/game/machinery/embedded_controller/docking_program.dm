@@ -23,6 +23,7 @@
 	
 	MODE_NONE|STATE_UNDOCKED		idle - not docked.
 	MODE_NONE|anything else			should never happen.
+	
 */
 
 
@@ -46,10 +47,12 @@
 		if ("confirm_dock")
 			if (control_mode == MODE_CLIENT && dock_state == STATE_UNDOCKED && receive_tag == tag_target)
 				dock_state = STATE_DOCKING
-				prepare_for_docking()
+				if (!override_enabled)
+					prepare_for_docking()
 			else if (control_mode == MODE_SERVER && dock_state == STATE_DOCKING && receive_tag == tag_target)	//client just sent us the confirmation back, we're done with the docking process
 				dock_state = STATE_DOCKED
-				finish_docking()	//server done docking!
+				if (!override_enabled)
+					finish_docking()	//server done docking!
 				response_sent = 0
 			else
 				send_docking_command(tag_target, "abort_dock")	//not expecting confirmation for anything - tell the other guy.
@@ -59,7 +62,8 @@
 				control_mode = MODE_SERVER
 				dock_state = STATE_DOCKING
 				tag_target = receive_tag
-				prepare_for_docking()
+				if (!override_enabled)
+					prepare_for_docking()
 		
 		if ("confirm_undock")
 			if (control_mode == MODE_CLIENT && dock_state == STATE_UNDOCKING && receive_tag == tag_target)
@@ -71,26 +75,9 @@
 				dock_state = STATE_UNDOCKING
 				prepare_for_undocking()
 	
-		if ("abort_dock")
-			if (dock_state == STATE_DOCKING && receive_tag == tag_target)
-				reset()
-		
-		if ("abort_undock")
-			if (dock_state == STATE_UNDOCKING && receive_tag == tag_target)
-				dock_state = STATE_DOCKING	//redock
-				prepare_for_docking()
-		
 		if ("dock_error")
 			if (receive_tag == tag_target)
-				reset()		//something really bad happened
-		
-		if ("enable_override")
-			if (receive_tag == tag_target)
-				override_enabled = 1
-
-		if ("disable_override")
-			if (receive_tag == tag_target)
-				override_enabled = 0
+				reset()
 
 /datum/computer/file/embedded_program/docking/process()
 	switch(dock_state)
@@ -102,7 +89,8 @@
 				
 				if (control_mode == MODE_CLIENT)	//client doesn't need to do anything further
 					dock_state = STATE_DOCKED
-					finish_docking()	//client done docking!
+					if (!override_enabled)
+						finish_docking()	//client done docking!
 					response_sent = 0
 		if (STATE_UNDOCKING)
 			if (ready_for_undocking() || override_enabled)
@@ -165,32 +153,29 @@
 /datum/computer/file/embedded_program/docking/proc/ready_for_undocking()
 	return 1
 
-/datum/computer/file/embedded_program/docking/proc/initiate_abort()
-	switch(dock_state)
-		if (STATE_DOCKING)
-			send_docking_command(tag_target, "abort_dock")
-			reset()
-		if (STATE_UNDOCKING)
-			send_docking_command(tag_target, "abort_undock")
-			dock_state = STATE_DOCKING	//redock
-			prepare_for_docking()
-
 /datum/computer/file/embedded_program/docking/proc/enable_override()
 	override_enabled = 1
-	if (tag_target)
-		send_docking_command(tag_target, "enable_override")
+	//if (tag_target)
+	//	send_docking_command(tag_target, "enable_override")
 
 /datum/computer/file/embedded_program/docking/proc/disable_override()
 	override_enabled = 0
-	if (tag_target)
-		send_docking_command(tag_target, "disable_override")
+	//if (tag_target)
+	//	send_docking_command(tag_target, "disable_override")
 
 /datum/computer/file/embedded_program/docking/proc/reset()
 	dock_state = STATE_UNDOCKED
 	control_mode = MODE_NONE
 	tag_target = null
 	response_sent = 0
-	override_enabled = 0
+
+/datum/computer/file/embedded_program/docking/proc/force_undock()
+	if (tag_target)
+		send_docking_command(tag_target, "dock_error")
+	reset()
+
+/datum/computer/file/embedded_program/docking/proc/docked()
+	return (dock_state == STATE_DOCKED)
 
 /datum/computer/file/embedded_program/docking/proc/undocked()
 	return (dock_state == STATE_UNDOCKED)
@@ -206,6 +191,7 @@
 	signal.data["recipient"] = recipient
 	post_signal(signal)
 
+//this is mostly for NanoUI
 /datum/computer/file/embedded_program/docking/proc/get_docking_status()
 	switch (dock_state)
 		if (STATE_UNDOCKED) return "undocked"

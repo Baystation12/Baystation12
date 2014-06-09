@@ -131,7 +131,7 @@
 	close_door()
 	..()
 
-/*** DEBUG VERBS ***/
+/*** DEBUG VERBS ***
 
 /obj/machinery/embedded_controller/radio/simple_docking_controller/verb/view_state()
 	set category = "Debug"
@@ -157,3 +157,4 @@
 	set category = "Debug"
 	set src in view(1)
 	src.program:initiate_undocking()
+*/

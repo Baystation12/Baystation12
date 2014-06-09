@@ -32,6 +32,8 @@ datum/controller/game_controller
 	var/last_thing_processed
 	var/mob/list/expensive_mobs = list()
 	var/rebuild_active_areas = 0
+	
+	var/list/shuttle_list	//for debugging and VV
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -66,6 +68,7 @@ datum/controller/game_controller/proc/setup()
 		ticker = new /datum/controller/gameticker()
 
 	if(!shuttles) setup_shuttles()
+	shuttle_list = shuttles
 
 	setup_objects()
 	setupgenetics()

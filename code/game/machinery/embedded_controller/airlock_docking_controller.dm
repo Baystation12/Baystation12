@@ -132,7 +132,7 @@
 	if (master_prog.undocked() || master_prog.override_enabled)	//only allow the port to be used as an airlock if nothing is docked here or the override is enabled
 		..(target)
 
-/*** DEBUG VERBS ***/
+/*** DEBUG VERBS ***
 
 /datum/computer/file/embedded_program/docking/proc/print_state()
 	world << "id_tag: [id_tag]"
@@ -171,3 +171,4 @@
 	set category = "Debug"
 	set src in view(1)
 	src.program:initiate_undocking()
+*/
