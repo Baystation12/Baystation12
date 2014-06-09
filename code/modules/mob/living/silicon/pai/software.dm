@@ -33,7 +33,10 @@
 	if(temp)
 		left_part = temp
 	else if(src.stat == 2)						// Show some flavor text if the pAI is dead
-		left_part = "<b><font color=red>ÈRrÖR Ða†Ä ÇÖRrÚþ†Ìoñ</font></b>"	//This file has to be saved as ANSI or this will not display correctly
+		if(config.rus_language)
+			left_part = "<b><font color=red>ÈRrÖR Ða†Ä ÇÖRrÚþ†Ìoñ</font></b>"	//This file has to be saved as ANSI or this will not display correctly
+		else
+			left_part = "<b><font color=red>3Rr0R Äa†A C0RrU?†ion</font></b>"
 		right_part = "<pre>Program index hash not found</pre>"
 
 	else
@@ -438,9 +441,9 @@
 	for (var/ch_name in radio.channels)
 		dat+=radio.text_sec_channel(ch_name, radio.channels[ch_name])
 	dat+={"[radio.text_wires()]</TT></body></html>"}
-	
+
 	return dat
-	
+
 // Crew Manifest
 /mob/living/silicon/pai/proc/softwareManifest()
 	var/dat = ""
@@ -538,7 +541,7 @@
 					return dat
 		dat += {"<b>Bioscan Results for [M]</b>: <br>
 		Overall Status: [M.stat > 1 ? "dead" : "[M.health]% healthy"] <br><br>
-		
+
 		<b>Scan Breakdown</b>: <br>
 		Respiratory: [M.getOxyLoss() > 50 ? "<font color=#FF5555>" : "<font color=#55FF55>"][M.getOxyLoss()]</font><br>
 		Toxicology: [M.getToxLoss() > 50 ? "<font color=#FF5555>" : "<font color=#55FF55>"][M.getToxLoss()]</font><br>
@@ -676,7 +679,7 @@
 			dat += "</li>"
 	dat += "</ul>"
 	dat += "Messages: <hr>"
-	
+
 	dat += "<style>td.a { vertical-align:top; }</style>"
 	dat += "<table>"
 	for(var/index in pda.tnote)
