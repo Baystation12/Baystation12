@@ -23,7 +23,11 @@
 
 	MODE_NONE|STATE_UNDOCKED		idle - not docked.
 	MODE_NONE|anything else			should never happen.
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> ed4fb8d... Shuttles now dock on arrival and departure
 */
 
 
@@ -168,6 +172,14 @@
 	control_mode = MODE_NONE
 	tag_target = null
 	response_sent = 0
+
+/datum/computer/file/embedded_program/docking/proc/force_undock()
+	if (tag_target)
+		send_docking_command(tag_target, "dock_error")
+	reset()
+
+/datum/computer/file/embedded_program/docking/proc/docked()
+	return (dock_state == STATE_DOCKED)
 
 /datum/computer/file/embedded_program/docking/proc/undocked()
 	return (dock_state == STATE_UNDOCKED)

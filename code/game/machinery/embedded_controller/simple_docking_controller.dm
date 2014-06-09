@@ -28,17 +28,17 @@
 /obj/machinery/embedded_controller/radio/simple_docking_controller/Topic(href, href_list)
 	if(..())
 		return
-	
+
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
-	
+
 	var/clean = 0
 	switch(href_list["command"])	//anti-HTML-hacking checks
 		if("force_door")
 			clean = 1
 		if("toggle_override")
 			clean = 1
-	
+
 	if(clean)
 		program.receive_user_command(href_list["command"])
 
@@ -56,24 +56,24 @@
 
 	if (istype(M, /obj/machinery/embedded_controller/radio/simple_docking_controller))
 		var/obj/machinery/embedded_controller/radio/simple_docking_controller/controller = M
-		
+
 		tag_door = controller.tag_door
-			
+
 		spawn(10)
 			signal_door("update")		//signals connected doors to update their status
-		
-	
+
+
 /datum/computer/file/embedded_program/docking/simple/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]
-	
+
 	if(!receive_tag) return
-	
+
 	if(receive_tag==tag_door)
 		memory["door_status"]["state"] = signal.data["door_status"]
 		memory["door_status"]["lock"] = signal.data["lock_status"]
-	
+
 	..(signal, receive_method, receive_param)
-	
+
 /datum/computer/file/embedded_program/docking/simple/receive_user_command(command)
 	switch(command)
 		if("force_door")
