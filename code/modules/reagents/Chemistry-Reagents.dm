@@ -68,10 +68,10 @@ datum
 
 
 				if(method == INGEST)
-					if(prob(1 * addictiveness))
+					if(prob(1 * self.addictiveness))
 						if(prob(1 * volume))
 							var/datum/disease/addiction/A
-							A.addicted_to = src
+							A.addicted_to = self
 							M.contract_disease(new A(0),1)
 				return 1
 
