@@ -109,36 +109,36 @@
 //Nations/Department flags --Nations Gamemode Specific
 /obj/item/flag/nation/cargo
 	name = "Cargonia flag"
-	desc = "The flag of the independant, sovereign nation of Cargonia."
+	desc = "The flag of the independent, sovereign nation of Cargonia."
 	icon_state = "cargoflag"
 	nation = new /datum/nations/cargonia
 
 /obj/item/flag/nation/med
 	name = "Medistan flag"
-	desc = "The flag of the independant, sovereign nation of Medistan."
+	desc = "The flag of the independent, sovereign nation of Medistan."
 	icon_state = "medflag"
 	nation = new /datum/nations/medistan
 
 /obj/item/flag/nation/sec
 	name = "Brigston flag"
-	desc = "The flag of the independant, sovereign nation of Brigston."
+	desc = "The flag of the independent, sovereign nation of Brigston."
 	icon_state = "secflag"
 	nation = new /datum/nations/brigston
 
 /obj/item/flag/nation/rnd
 	name = "Scientopia flag"
-	desc = "The flag of the independant, sovereign nation of Scientopia."
+	desc = "The flag of the independent, sovereign nation of Scientopia."
 	icon_state = "rndflag"
 	nation = new /datum/nations/scientopia
 
 /obj/item/flag/nation/atmos
 	name = "Atmosia flag"
-	desc = "The flag of the independant, sovereign nation of Atmosia."
+	desc = "The flag of the independent, sovereign nation of Atmosia."
 	icon_state = "atmosflag"
 	nation = new /datum/nations/atmosia
 
 /obj/item/flag/nation/command
 	name = "People's Republic of Commandzakstan flag"
-	desc = "The flag of the independant, sovereign nation of the People's Republic of Commandzakstan."
+	desc = "The flag of the independent, sovereign nation of the People's Republic of Commandzakstan."
 	icon_state = "ntflag"
 	nation = new /datum/nations/command
