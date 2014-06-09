@@ -69,10 +69,10 @@ datum
 
 				if(method == INGEST)
 					if(prob(1 * self.addictiveness))
-						if(prob(1 * volume))
-							var/datum/disease/addiction/A
+						if(prob(5 * volume))
+							var/datum/disease/addiction/A = new /datum/disease/addiction
 							A.addicted_to = self
-							M.contract_disease(new A(0),1)
+							M.contract_disease(A,0,1)
 				return 1
 
 			reaction_obj(var/obj/O, var/volume) //By default we transfer a small part of the reagent to the object
