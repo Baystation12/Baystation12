@@ -67,12 +67,16 @@ datum
 								M.reagents.add_reagent(self.id,self.volume/2)
 
 
-				if(method == INGEST)
+				if(method == INGEST && istype(M, /mob/living/carbon))
 					if(prob(1 * self.addictiveness))
 						if(prob(5 * volume))
 							var/datum/disease/addiction/A = new /datum/disease/addiction
 							A.addicted_to = self
-							M.contract_disease(A,0,1)
+							A.name = "[self.name] Addiction"
+							A.cure = self.id
+							M.viruses += A
+							A.affected_mob = M
+							A.holder = M
 				return 1
 
 			reaction_obj(var/obj/O, var/volume) //By default we transfer a small part of the reagent to the object
