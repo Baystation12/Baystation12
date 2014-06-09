@@ -8,11 +8,13 @@
 	cure_chance = 3
 	affected_species = list("Human", "Monkey", "Skrell", "Unathi", "Tajaran", "Kidan", "Grey")
 	var/datum/reagent/addicted_to
+	var/addiction
 	var/addiction_countdown = 1800 // Three minutes
 
 /datum/disease/addiction/New()
 	if(addicted_to)
 		src.name = "[addicted_to.name] Addiction"
+		src.addiction ="[addicted_to.name]"
 		src.cure = addicted_to.id
 		//affected_mob.addictions += addicted_to
 	..()
@@ -26,6 +28,7 @@
 /datum/disease/addiction/process()
 	if(!holder) return
 	var/addict_reagent_present = has_addict_reagent()
+	var/tickcount = 0
 
 	if(affected_mob)
 		for(var/datum/disease/D in affected_mob.viruses)
@@ -38,10 +41,12 @@
 		if(affected_mob.stat < 2) //he's alive
 			if(addict_reagent_present) //he's taken the reagent to which he's addicted
 				stage = 1
+				tickcount++
 				if(prob(20))
-					affected_mob << "\blue You feel a wave of euphoria as [addicted_to.name] surges through your bloodstream..."
-				spawn(addiction_countdown)
+					affected_mob << "\blue You feel a wave of euphoria as [addiction] surges through your bloodstream..."
+				if(tickcount >= 900)
 					stage_act()
+					tickcount = 0
 			else //he's ignored his addiction or hasn't taken the reagent
 				stage_act()
 		else //he's dead.
@@ -76,7 +81,7 @@
 	switch(stage)
 		if(2)
 			if(prob(5))
-				affected_mob << "\red You can't stop thinking about [addicted_to.name]!"
+				affected_mob << "\red You can't stop thinking about [addiction]!"
 			if(affected_mob.sleeping && prob(1))
 				affected_mob << "\blue You feel better."
 				stage--
@@ -85,7 +90,7 @@
 					stage--
 		if(3)
 			if(prob(5))
-				affected_mob << "\red You gotta have some [addicted_to.name]!"
+				affected_mob << "\red You gotta have some [addiction]!"
 			if(affected_mob.sleeping && prob(1))
 				affected_mob << "\blue You feel better."
 				stage--
@@ -94,7 +99,7 @@
 					stage--
 		if(4)
 			if(prob(7))
-				affected_mob << "\red Gotta have some [addicted_to.name]!"
+				affected_mob << "\red Gotta have some [addiction]!"
 				if(prob(10))
 					affected_mob.take_organ_damage(1)
 			if(prob(2))
@@ -112,12 +117,12 @@
 					stage--
 		if(5)
 			if(prob(5))
-				affected_mob << "\red \bold You can't stand not having [addicted_to.name]!"
+				affected_mob << "\red \bold You can't stand not having [addiction]!"
 				if(prob(20))
 					affected_mob.toxloss += 2
 					affected_mob.updatehealth()
 			if(prob(2))
-				affected_mob << "\red \bold [addicted_to.name] calls out to your mind!"
+				affected_mob << "\red \bold [addiction] calls out to your mind!"
 				for(var/mob/O in viewers(affected_mob, null))
 					O.show_message(text("\red [] rakes at their eyes!", affected_mob), 1)
 				affected_mob.eye_blind = 2
