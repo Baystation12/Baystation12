@@ -30,6 +30,7 @@ datum
 		var/mildly_toxic = 0
 		var/overdose = 0
 		var/overdose_dam = 1
+		var/addictiveness = 1
 		//var/list/viruses = list()
 		var/color = "#000000" // rgb: 0, 0, 0 (does not support alpha channels - yet!)
 
@@ -64,6 +65,14 @@ datum
 						if(prob(chance) && !block)
 							if(M.reagents)
 								M.reagents.add_reagent(self.id,self.volume/2)
+
+
+				if(method == INGEST)
+					if(prob(1 * addictiveness))
+						if(prob(1 * volume))
+							var/datum/disease/addiction/A
+							A.addicted_to = src
+							M.contract_disease(new A(0),1)
 				return 1
 
 			reaction_obj(var/obj/O, var/volume) //By default we transfer a small part of the reagent to the object
@@ -579,6 +588,7 @@ datum
 			description = "An illegal chemical compound used as drug."
 			reagent_state = LIQUID
 			color = "#60A584" // rgb: 96, 165, 132
+			addictiveness = 25
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1145,6 +1155,7 @@ datum
 			color = "#C855DC"
 			overdose_dam = 0
 			overdose = 60
+			addictiveness = 5
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1186,6 +1197,7 @@ datum
 			description = "A simple, yet effective painkiller."
 			reagent_state = LIQUID
 			color = "#FAEBD7" //rgb 250, 235, 215
+			addictiveness = 50
 
 		oxycodone
 			name = "Oxycodone"
@@ -1193,6 +1205,7 @@ datum
 			description = "An effective and very addictive painkiller."
 			reagent_state = LIQUID
 			color = "#8A2BE2" // rgb 138, 43, 226
+			addictiveness = 80
 
 		virus_food
 			name = "Virus Food"
@@ -1874,6 +1887,7 @@ datum
 			description = "Hyperzine is a highly effective, long lasting, muscle stimulant. It is highly addictive."
 			reagent_state = SOLID
 			color = "#FFFFFF" // rgb: 255,255,255
+			addictiveness = 80
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -2012,6 +2026,7 @@ datum
 			reagent_state = LIQUID
 			color = "#B31008" // rgb: 139, 166, 233
 			custom_metabolism = 0.05
+			addictiveness = 15
 
 			on_mob_life(var/mob/living/M)
 				if(!M) M = holder.my_atom
@@ -2099,6 +2114,7 @@ datum
 			description = "A highly addictive stimulant extracted from the tobacco plant."
 			reagent_state = LIQUID
 			color = "#181818" // rgb: 24, 24, 24
+			addictiveness = 90
 /*
 		ethanol
 			name = "Ethanol"

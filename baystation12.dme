@@ -109,6 +109,7 @@
 #include "code\datums\uplink_item.dm"
 #include "code\datums\crafting\crafting.dm"
 #include "code\datums\crafting\recipes.dm"
+#include "code\datums\diseases\addiction.dm"
 #include "code\datums\diseases\appendicitis.dm"
 #include "code\datums\diseases\beesease.dm"
 #include "code\datums\diseases\brainrot.dm"
