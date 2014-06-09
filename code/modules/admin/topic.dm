@@ -1373,7 +1373,7 @@
 		show_player_panel(M)
 
 	else if(href_list["adminplayerobservejump"])
-		if(!check_rights(R_MOD,0) && !check_rights(R_ADMIN))	return
+		if(!check_rights(R_MENTOR|R_MOD|R_ADMIN))	return
 
 		var/mob/M = locate(href_list["adminplayerobservejump"])
 
@@ -2709,7 +2709,7 @@
 		if(check_rights(R_ADMIN|R_SERVER))
 			if(href_list["vsc"] == "airflow")
 				vsc.ChangeSettingsDialog(usr,vsc.settings)
-			if(href_list["vsc"] == "plasma")
+			if(href_list["vsc"] == "phoron")
 				vsc.ChangeSettingsDialog(usr,vsc.plc.settings)
 			if(href_list["vsc"] == "default")
 				vsc.SetDefault(usr)

@@ -7,7 +7,7 @@
 		src << "Only administrators may use this command."
 		return
 
-	var/input = input(usr, "Enter the description of the custom event. Be descriptive. To cancel the event, make this blank or hit cancel.", "Custom Event", custom_event_msg) as message|null
+	var/input = sanitize(input(usr, "Enter the description of the custom event. Be descriptive. To cancel the event, make this blank or hit cancel.", "Custom Event", custom_event_msg) as message|null)
 	if(!input || input == "")
 		custom_event_msg = null
 		log_admin("[usr.key] has cleared the custom event text.")

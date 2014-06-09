@@ -16,7 +16,7 @@
 //Plague Dr suit can be found in clothing/suits/bio.dm
 /obj/item/clothing/mask/gas/plaguedoctor
 	name = "plague doctor mask"
-	desc = "A modernised version of the classic design, this mask will not only filter out toxins but it can also be connected to an air supply."
+	desc = "A modernised version of the classic design, this mask will not only filter out phoron but it can also be connected to an air supply."
 	icon = 'icons/obj/clothing/masks.dmi'
 	tc_custom = null
 	icon_state = "plaguedoctor"

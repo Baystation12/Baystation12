@@ -388,11 +388,14 @@
 				if(count == 0)
 					del(src)
 					return
+			if("sensor")
+				if (! target.w_uniform )
+					del(src)
 			if("internal")
-				if ((!( (istype(target.wear_mask, /obj/item/clothing/mask) && istype(target.back, /obj/item/weapon/tank) && !( target.internal )) ) && !( target.internal )))
+				if ((!( (istype(target.wear_mask, /obj/item/clothing/mask) && (istype(target.back, /obj/item/weapon/tank) || istype(target.belt, /obj/item/weapon/tank) || istype(target.s_store, /obj/item/weapon/tank)) && !( target.internal )) ) && !( target.internal )))
 					del(src)
 
-	var/list/L = list( "syringe", "pill", "drink", "dnainjector", "fuel")
+	var/list/L = list( "syringe", "pill", "drink", "dnainjector", "fuel", "sensor", "internal", "tie")
 	if ((item && !( L.Find(place) )))
 		if(isrobot(source) && place != "handcuff")
 			del(src)
@@ -508,6 +511,17 @@
 					return
 				else
 					message = "\red <B>[source] is trying to take off \a [target.w_uniform] from [target]'s body!</B>"
+			if("tie")
+				var/obj/item/clothing/under/suit = target.w_uniform
+				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their accessory ([suit.hastie]) removed by [source.name] ([source.ckey])</font>")
+				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) accessory ([suit.hastie])</font>")
+				if(istype(suit.hastie, /obj/item/clothing/tie/holobadge) || istype(suit.hastie, /obj/item/clothing/tie/medal))
+					for(var/mob/M in viewers(target, null))
+						M.show_message("\red <B>[source] tears off \the [suit.hastie] from [target]'s suit!</B>" , 1)
+					done()
+					return
+				else
+					message = "\red <B>[source] is trying to take off \a [suit.hastie] from [target]'s suit!</B>"
 			if("s_store")
 				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their suit storage item ([target.s_store]) removed by [source.name] ([source.ckey])</font>")
 				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to remove [target.name]'s ([target.ckey]) suit storage item ([target.s_store])</font>")
@@ -537,6 +551,14 @@
 					message = "\red <B>[source] is trying to set on [target]'s internals.</B>"
 			if("splints")
 				message = text("\red <B>[] is trying to remove []'s splints!</B>", source, target)
+			if("sensor")
+				target.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has had their sensors toggled by [source.name] ([source.ckey])</font>")
+				source.attack_log += text("\[[time_stamp()]\] <font color='red'>Attempted to toggle [target.name]'s ([target.ckey]) sensors</font>")
+				var/obj/item/clothing/under/suit = target.w_uniform
+				if (suit.has_sensor >= 2)
+					source << "The controls are locked."
+					return
+				message = "\red <B>[source] is trying to set [target]'s suit sensors!</B>"
 
 		for(var/mob/M in viewers(target, null))
 			M.show_message(message, 1)
@@ -624,6 +646,19 @@ It can still be worn/put on as normal.
 			slot_to_process = slot_wear_suit
 			if (target.wear_suit && target.wear_suit.canremove)
 				strip_item = target.wear_suit
+		if("tie")
+			var/obj/item/clothing/under/suit = target.w_uniform
+			//var/obj/item/clothing/tie/tie = suit.hastie
+			/*if(tie)
+				if (istype(tie,/obj/item/clothing/tie/storage))
+					var/obj/item/clothing/tie/storage/W = tie
+					if (W.hold)
+						W.hold.close(usr)
+				usr.put_in_hands(tie)
+				suit.hastie = null*/
+			suit.hastie.on_removed(usr)
+			suit.hastie = null
+			target.update_inv_w_uniform()
 		if("id")
 			slot_to_process = slot_wear_id
 			if (target.wear_id)
@@ -675,8 +710,20 @@ It can still be worn/put on as normal.
 					O.show_message("\red [source] injects [target] with the DNA Injector!", 1)
 				S.inuse = 0
 		if("pockets")
-			slot_to_process = slot_l_store
-			strip_item = target.l_store		//We'll do both
+			if (!item || (target.l_store && target.r_store))	// Only empty pockets when hand is empty or both pockets are full
+				slot_to_process = slot_l_store
+				strip_item = target.l_store		//We'll do both
+			else if (target.l_store)
+				slot_to_process = slot_r_store
+			else
+				slot_to_process = slot_l_store
+		if("sensor")
+			var/obj/item/clothing/under/suit = target.w_uniform
+			if (suit)
+				if(suit.has_sensor >= 2)
+					source << "The controls are locked."
+				else
+					suit.set_sensors(source)
 		if("internal")
 			if (target.internal)
 				target.internal.add_fingerprint(source)

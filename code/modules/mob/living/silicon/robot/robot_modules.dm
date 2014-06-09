@@ -45,7 +45,8 @@
 	name = "standard robot module"
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
+		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/melee/baton(src)
 		src.modules += new /obj/item/weapon/extinguisher(src)
 		src.modules += new /obj/item/weapon/wrench(src)
@@ -63,7 +64,8 @@
 	name = "medical robot module"
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
+		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/borg/sight/hud/med(src)
 		src.modules += new /obj/item/device/healthanalyzer(src)
 		src.modules += new /obj/item/device/reagent_scanner/adv(src)
@@ -94,7 +96,8 @@
 
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
+		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/borg/sight/meson(src)
 		src.emag = new /obj/item/borg/stun(src)
 		src.modules += new /obj/item/weapon/rcd/borg(src)
@@ -146,7 +149,8 @@
 	name = "security robot module"
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
+		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/borg/sight/hud/sec(src)
 		src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 		src.modules += new /obj/item/weapon/melee/baton(src)
@@ -178,7 +182,8 @@
 	name = "janitorial robot module"
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
+		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/soap/nanotrasen(src)
 		src.modules += new /obj/item/weapon/storage/bag/trash(src)
 		src.modules += new /obj/item/weapon/mop(src)
@@ -200,7 +205,8 @@
 	name = "service robot module"
 
 	New()
-		..()
+		src.modules += new /obj/item/device/flashlight(src)
+		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/drinks/cans/beer(src)
 		src.modules += new /obj/item/weapon/reagent_containers/food/condiment/enzyme(src)
 		src.modules += new /obj/item/weapon/pen/robopen(src)
@@ -239,6 +245,9 @@
 	New()
 		..()
 		src.modules += new /obj/item/borg/sight/hud/miner(src)
+		src.modules += new /obj/item/device/flashlight(src)
+		src.modules += new /obj/item/device/flash(src)
+		src.modules += new /obj/item/borg/sight/meson(src)
 		src.emag = new /obj/item/borg/stun(src)
 		src.modules += new /obj/item/weapon/storage/bag/ore(src)
 		src.modules += new /obj/item/weapon/pickaxe/borgdrill(src)
@@ -251,6 +260,8 @@
 	name = "syndicate robot module"
 
 	New()
+		src.modules += new /obj/item/device/flashlight(src)
+		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/weapon/melee/energy/sword(src)
 		src.modules += new /obj/item/weapon/gun/energy/pulse_rifle/destroyer(src)
 		src.modules += new /obj/item/weapon/card/emag(src)
@@ -260,6 +271,8 @@
 	name = "combat robot module"
 
 	New()
+		src.modules += new /obj/item/device/flashlight(src)
+		src.modules += new /obj/item/device/flash(src)
 		src.modules += new /obj/item/borg/sight/thermal(src)
 		src.modules += new /obj/item/weapon/gun/energy/laser/cyborg(src)
 		src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
@@ -302,3 +315,62 @@
 
 		src.emag.name = "Slime bloodlust pulse emitter"
 		return
+
+/obj/item/weapon/robot_module/drone
+	name = "drone module"
+	var/list/stacktypes = list(
+		/obj/item/stack/sheet/wood/cyborg = 1,
+		/obj/item/stack/sheet/mineral/plastic/cyborg = 1,
+		/obj/item/stack/sheet/rglass/cyborg = 5,
+		/obj/item/stack/tile/wood = 5,
+		/obj/item/stack/rods = 15,
+		/obj/item/stack/tile/plasteel = 15,
+		/obj/item/stack/sheet/metal/cyborg = 20,
+		/obj/item/stack/sheet/glass/cyborg = 20,
+		/obj/item/weapon/cable_coil = 30
+		)
+
+	New()
+		src.modules += new /obj/item/device/flashlight/drone(src)
+		src.modules += new /obj/item/weapon/weldingtool(src)
+		src.modules += new /obj/item/weapon/screwdriver(src)
+		src.modules += new /obj/item/weapon/wrench(src)
+		src.modules += new /obj/item/weapon/crowbar(src)
+		src.modules += new /obj/item/weapon/wirecutters(src)
+		src.modules += new /obj/item/device/multitool(src)
+		src.modules += new /obj/item/device/lightreplacer(src)
+		src.modules += new /obj/item/weapon/gripper(src)
+		src.modules += new /obj/item/weapon/matter_decompiler(src)
+		src.modules += new /obj/item/weapon/reagent_containers/spray/cleaner/drone(src)
+
+		src.emag = new /obj/item/weapon/card/emag(src)
+		src.emag.name = "Cryptographic Sequencer"
+
+		for(var/T in stacktypes)
+			var/obj/item/stack/sheet/W = new T(src)
+			W.amount = stacktypes[T]
+			src.modules += W
+
+		return
+
+/obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R)
+	var/obj/item/weapon/reagent_containers/spray/cleaner/C = locate() in src.modules
+	C.reagents.add_reagent("cleaner", 3)
+
+	for(var/T in stacktypes)
+		var/O = locate(T) in src.modules
+		var/obj/item/stack/sheet/S = O
+
+		if(!S)
+			src.modules -= null
+			S = new T(src)
+			src.modules += S
+			S.amount = 1
+
+		if(S && S.amount < stacktypes[T])
+			S.amount++
+
+	var/obj/item/device/lightreplacer/LR = locate() in src.modules
+	LR.Charge(R)
+
+	return

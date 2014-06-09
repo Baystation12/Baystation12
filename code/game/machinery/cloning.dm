@@ -162,7 +162,7 @@
 	spawn(30)
 		src.eject_wait = 0
 
-	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src)
+	var/mob/living/carbon/human/H = new /mob/living/carbon/human(src, R.dna.species)
 	occupant = H
 
 	if(!R.dna.real_name)	//to prevent null names
@@ -211,8 +211,6 @@
 	H.f_style = "Shaved"
 	if(R.dna.species == "Human") //no more xenos losing ears/tentacles
 		H.h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
-
-	H.set_species(R.dna.species)
 
 	for(var/datum/language/L in R.languages)
 		H.add_language(L.name)
@@ -435,7 +433,7 @@
  */
 
 /obj/item/weapon/paper/Cloning
-	name = "paper - 'H-87 Cloning Apparatus Manual"
+	name = "H-87 Cloning Apparatus Manual"
 	info = {"<h4>Getting Started</h4>
 	Congratulations, your station has purchased the H-87 industrial cloning device!<br>
 	Using the H-87 is almost as simple as brain surgery! Simply insert the target humanoid into the scanning chamber and select the scan option to create a new profile!<br>

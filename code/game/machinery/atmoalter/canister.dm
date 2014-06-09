@@ -34,8 +34,8 @@
 	icon_state = "blue"
 	canister_color = "blue"
 	can_label = 0
-/obj/machinery/portable_atmospherics/canister/toxins
-	name = "Canister \[Toxin (Bio)\]"
+/obj/machinery/portable_atmospherics/canister/phoron
+	name = "Canister \[Phoron\]"
 	icon_state = "orange"
 	canister_color = "orange"
 	can_label = 0
@@ -171,7 +171,7 @@ update_flag
 	else
 		can_label = 0
 
-	if(air_contents.temperature > PLASMA_FLASHPOINT)
+	if(air_contents.temperature > PHORON_FLASHPOINT)
 		air_contents.zburn()
 	return
 
@@ -333,11 +333,11 @@ update_flag
 	
 	return 1
 
-/obj/machinery/portable_atmospherics/canister/toxins/New()
+/obj/machinery/portable_atmospherics/canister/phoron/New()
 
 	..()
 
-	src.air_contents.toxins = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
+	src.air_contents.phoron = (src.maximum_pressure*filled)*air_contents.volume/(R_IDEAL_GAS_EQUATION*air_contents.temperature)
 	air_contents.update_values()
 
 	src.update_icon()

@@ -106,8 +106,8 @@
 	select_name = "goddamn meteor"
 
 /obj/item/ammo_casing/energy/toxin
-	projectile_type = /obj/item/projectile/energy/plasma
-	select_name = "plasma"
+	projectile_type = /obj/item/projectile/energy/phoron
+	select_name = "phoron"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 
 /obj/item/ammo_casing/energy/sniper

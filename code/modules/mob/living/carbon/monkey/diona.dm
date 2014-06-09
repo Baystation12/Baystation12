@@ -2,45 +2,6 @@
   Tiny babby plant critter plus procs.
 */
 
-//Helper object for picking dionaea (and other creatures) up.
-/obj/item/weapon/holder
-	name = "holder"
-	desc = "You shouldn't ever see this."
-
-/obj/item/weapon/holder/diona
-
-	name = "diona nymph"
-	desc = "It's a tiny plant critter."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "nymph"
-	slot_flags = SLOT_HEAD
-	origin_tech = "magnets=3;biotech=5"
-
-/obj/item/weapon/holder/New()
-	..()
-	processing_objects.Add(src)
-
-/obj/item/weapon/holder/Del()
-	processing_objects.Remove(src)
-	..()
-
-/obj/item/weapon/holder/process()
-
-	if(istype(loc,/turf) || !(contents.len))
-
-		for(var/mob/M in contents)
-
-			var/atom/movable/mob_container
-			mob_container = M
-			mob_container.forceMove(get_turf(src))
-			M.reset_view()
-
-		del(src)
-
-/obj/item/weapon/holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	for(var/mob/M in src.contents)
-		M.attackby(W,user)
-
 //Mob defines.
 /mob/living/carbon/monkey/diona
 	name = "diona nymph"
@@ -67,6 +28,7 @@
 			D.attack_hand(M)
 			M << "You scoop up [src]."
 			src << "[M] scoops you up."
+		M.status_flags |= PASSEMOTES
 		return
 
 	..()
@@ -108,6 +70,8 @@
 
 	if(istype(M,/mob/living/carbon/human))
 		M << "You feel your being twine with that of [src] as it merges with your biomass."
+		M.status_flags |= PASSEMOTES
+
 		src << "You feel your being twine with that of [M] as you merge with its biomass."
 		src.loc = M
 		src.verbs += /mob/living/carbon/monkey/diona/proc/split
@@ -127,9 +91,18 @@
 
 	src.loc << "You feel a pang of loss as [src] splits away from your biomass."
 	src << "You wiggle out of the depths of [src.loc]'s biomass and plop to the ground."
+
+	var/mob/living/M = src.loc
+
 	src.loc = get_turf(src)
 	src.verbs -= /mob/living/carbon/monkey/diona/proc/split
 	src.verbs += /mob/living/carbon/monkey/diona/proc/merge
+
+	if(istype(M))
+		for(var/atom/A in M.contents)
+			if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
+				return
+	M.status_flags &= ~PASSEMOTES
 
 /mob/living/carbon/monkey/diona/verb/fertilize_plant()
 
@@ -269,16 +242,16 @@
 		if(client.prefs.muted & MUTE_IC)
 			src << "\red You cannot speak in IC (Muted)."
 			return
-	
+
 	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
-	
+
 
 	if(stat == 2)
 		return say_dead(message)
 
 	var/datum/language/speaking = null
 
-	
+
 
 	if(length(message) >= 2)
 		var/channel_prefix = copytext(message, 1 ,3)
@@ -292,7 +265,7 @@
 	if(speaking)
 		message = trim(copytext(message,3))
 
-	message = capitalize(trim_left(message))	
+	message = capitalize(trim_left(message))
 
 	if(!message || stat)
 		return

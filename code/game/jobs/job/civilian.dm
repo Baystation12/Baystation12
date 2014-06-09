@@ -97,7 +97,9 @@
 			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/hydroponics_fem(H), slot_w_uniform)
 		else
 			H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/hydroponics(H), slot_w_uniform)
-		if(H.backbag == 1)
+		if(H.backbag == 3)
+			H.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_hyd(H), slot_back)
+		else if(H.backbag == 1)
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
 		else
 			H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
