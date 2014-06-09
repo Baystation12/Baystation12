@@ -197,7 +197,43 @@
 					user << "<span class='danger'>The generator already has plenty of plasma.</span>"
 					return
 
-		..()
+	if(!servos)
+		if(istype(W,/obj/item/powerarmor/servos))
+			servos = W
+			W.loc = src
+			servos.parent = src
+			user << "<span class='notice'>You add some servos to the armor.</span>"
+	else
+		user << "<span class='danger'>The armor already contains servos.</span>"
+		return
+	if(!reactive)
+		if(istype(W,/obj/item/powerarmor/reactive))
+			reactive = W
+			W.loc = src
+			reactive.parent = src
+			user << "<span class='notice'>You add some reactive plating to the armor.</span>"
+	else
+		user << "<span class='danger'>The armor already contains reactive plating.</span>"
+		return
+	if(!atmoseal)
+		if(istype(W,/obj/item/powerarmor/atmoseal))
+			atmoseal = W
+			W.loc = src
+			atmoseal.parent = src
+			user << "<span class='notice'>You add an atmospheric seals to the armor.</span>"
+	else
+		user << "<span class='danger'>The armor already contains an atmoseal.</span>"
+		return
+	if(!power)
+		if(istype(W,/obj/item/powerarmor/power))
+			power = W
+			W.loc = src
+			power.parent = src
+			user << "<span class='notice'>You add a power module to the armor.</span>"
+	else
+		user << "<span class='danger'>The armor already contains a power module.</span>"
+		return
+	..()
 
 /obj/item/clothing/head/space/powered
 	name = "Powered armor helmet"
