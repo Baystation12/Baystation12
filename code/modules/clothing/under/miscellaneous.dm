@@ -497,3 +497,10 @@
 	icon_state = "psyamp"
 	item_state = "psyamp"
 	_color = "psyamp"
+
+/obj/item/clothing/under/rebeloutfit
+	name = "Rebel Outfit"
+	desc = "Made in Seattle, 2216."
+	icon_state = "colin_earle"
+	item_state = "colin_earle"
+	_color = "colin_earle"
