@@ -73,6 +73,7 @@ datum
 							var/datum/disease/addiction/A = new /datum/disease/addiction
 							A.addicted_to = self
 							A.name = "[self.name] Addiction"
+							A.addiction ="[self.name]"
 							A.cure = self.id
 							M.viruses += A
 							A.affected_mob = M
