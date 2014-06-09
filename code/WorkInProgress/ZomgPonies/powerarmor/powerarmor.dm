@@ -203,27 +203,18 @@
 			W.loc = src
 			servos.parent = src
 			user << "<span class='notice'>You add some servos to the armor.</span>"
-	else
-		user << "<span class='danger'>The armor already contains servos.</span>"
-		return
 	if(!reactive)
 		if(istype(W,/obj/item/powerarmor/reactive))
 			reactive = W
 			W.loc = src
 			reactive.parent = src
 			user << "<span class='notice'>You add some reactive plating to the armor.</span>"
-	else
-		user << "<span class='danger'>The armor already contains reactive plating.</span>"
-		return
 	if(!atmoseal)
 		if(istype(W,/obj/item/powerarmor/atmoseal))
 			atmoseal = W
 			W.loc = src
 			atmoseal.parent = src
 			user << "<span class='notice'>You add an atmospheric seals to the armor.</span>"
-	else
-		user << "<span class='danger'>The armor already contains an atmoseal.</span>"
-		return
 	if(!power)
 		if(istype(W,/obj/item/powerarmor/power))
 			power = W
@@ -231,7 +222,7 @@
 			power.parent = src
 			user << "<span class='notice'>You add a power module to the armor.</span>"
 	else
-		user << "<span class='danger'>The armor already contains a power module.</span>"
+		user << "<span class='danger'>The armor already contains a module of that type..</span>"
 		return
 	..()
 
