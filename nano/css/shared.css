@@ -177,6 +177,12 @@ h4 {
     color: #ee0000;
     font-weight: bold;
 }
+
+.idle {
+    color: #272727;
+    font-weight: bold;
+}
+
 .redBackground {
 	background: #ea0000;
 }

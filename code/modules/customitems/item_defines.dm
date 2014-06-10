@@ -214,6 +214,16 @@
 	icon_on = "guessipon"
 	icon_off = "guessip"
 
+///////////////////////////// Ziepes - Janis Godmanis - Red Zippo //////////////////////
+
+/obj/item/weapon/lighter/zippo/fluff/janis_godmanis
+	name = "Red-White-Red Zippo"
+	desc = "A badass zippo that looks like the Austrian flag. Upon closer inspection it is revealed that it's a different shade of red than the Austrian flag.."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "redzippo"
+	icon_on = "redzippoon"
+	icon_off = "redzippo"
+
 /obj/item/weapon/lighter/zippo/fluff/riley_rohtin_1 //rawrtaicho: Riley Rohtin
 	name = "Riley's black zippo"
 	desc = "A black zippo lighter, which holds some form of sentimental value."
@@ -472,6 +482,62 @@
 	new_icon = "earth"
 	allowed_types = list("ripley","firefighter")
 
+///////// Salvage crew hardsuit - Cybele Petit - solaruin ///////////////
+
+/obj/item/device/kit/fluff/salvage
+	name = "salvage hardsuit modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a hardsuit into a salvage hardsuit."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "salvage_kit"
+
+/obj/item/clothing/head/helmet/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
+	..()
+
+	if(istype(O,/obj/item/device/kit/fluff/salvage))
+		name = "Salvage Hardsuit helmet"
+		desc = "An orange hardsuit helmet used by salvage flotillas. Has reinforced plating."
+		icon = 'icons/obj/custom_items.dmi'
+		icon_state = "salvage_helmet"
+		item_state = "salvage_helmet"
+
+/obj/item/clothing/suit/space/rig/attackby(var/obj/item/O as obj, mob/user as mob)
+	..()
+
+	if(istype(O,/obj/item/device/kit/fluff/salvage))
+		name = "Salvage Hardsuit"
+		desc = "An orange hardsuit used by salvage flotillas. Has reinforced plating."
+		icon = 'icons/obj/custom_items.dmi'
+		icon_state = "salvage_suit"
+		item_state = "salvage_suit"
+
+//////// Meat Hook - Korom Bhararaya - Matthew951 ////////////////////////
+
+/obj/item/device/kit/fluff/hook
+	name = "hook modification kit"
+	desc = "A kit containing all the needed tools and parts to modify a knife or a butcher's knife into a hook."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "hook_kit"
+
+/obj/item/weapon/kitchenknife/attackby(var/obj/item/O as obj, mob/user as mob)
+	..()
+
+	if(istype(O,/obj/item/device/kit/fluff/hook))
+		name = "meat hook"
+		desc = "A sharp, metal hook what sticks into things."
+		icon = 'icons/obj/custom_items.dmi'
+		icon_state = "hook_knife"
+		item_state = "hook_knife"
+
+/obj/item/weapon/butch/attackby(var/obj/item/O as obj, mob/user as mob)
+	..()
+
+	if(istype(O,/obj/item/device/kit/fluff/hook))
+		name = "meat hook"
+		desc = "A sharp, metal hook what sticks into things."
+		icon = 'icons/obj/custom_items.dmi'
+		icon_state = "hook_knife"
+		item_state = "hook_knife"
+
 //////////////////////////////////
 //////////// Clothing ////////////
 //////////////////////////////////
@@ -501,6 +567,17 @@
 	desc = "The left one of a pair of black gloves. Wonder where the other one went..."
 	icon = 'icons/obj/custom_items.dmi'
 	icon_state = "chal_appara_1"
+
+//////////// Earpieces ////////////////
+
+////////////////////////// Skrellian Tailwear - Qokkri Xilo - Paradoxon /////////////
+
+/obj/item/clothing/ears/fluff/qokkri
+	name = "Skrellian Tailwear"
+	desc = "An ensemble of sophisticated jewels and bands, most likely belonging to a scientific Skrell."
+	icon_state = "xilobeads"
+	icon = 'icons/obj/custom_items.dmi'
+	item_state = "xilobeads"
 
 //////////// Eye Wear ////////////
 
@@ -737,6 +814,16 @@
 	icon_state = "jeremy_wolf_1"
 	item_color = "jeremy_wolf_1"
 
+//////////////////// PRC Uniform - Ronan Harper - Raptor1628 ///////////////////
+
+/obj/item/clothing/under/rank/security/fluff/ronan_harper
+	name = "PRC Uniform"
+	desc = "A well maintained uniform from one of the many Private Security firms Nanotrasen hires from. The name Harper is printed on the back."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "harper_uniform"
+	item_state = "harper_uniform"
+	item_color = "harper_uniform"
+
 /obj/item/clothing/under/fluff/tian_dress //phaux: Tian Yinhu
 	name = "purple dress"
 	desc = "A nicely tailored purple dress made for the taller woman."
@@ -829,6 +916,19 @@
 	icon_state = "lillian_dress"
 	item_state = "lillian_dress"
 	item_color = "lillian_dress"
+
+////////////// Accessories /////
+
+//////////////////// Blood Red Pendant - Mewth - Mu'taz Radi ////////////////
+
+/obj/item/clothing/tie/fluff/radi
+	name = "Blood Red Pendant"
+	desc = "A pendant that has been painted a metallic red, it seems to have a ruby in it."
+	icon = 'icons/obj/custom_items.dmi'
+	icon_state = "radi_pendant"
+	flags = FPRINT|TABLEPASS
+	w_class = 2.0
+	slot_flags = 0
 
 //////////// Masks ////////////
 
@@ -938,6 +1038,7 @@
 	flags = FPRINT|TABLEPASS
 	w_class = 2
 	slot_flags = SLOT_MASK
+
 //////////// Shoes ////////////
 
 /obj/item/clothing/shoes/magboots/fluff/susan_harris_1 //sniperyeti: Susan Harris
