@@ -183,12 +183,14 @@ datum/preferences
 				dat += "Species: <a href='?_src_=prefs;preference=species;task=input'>[species]</a><br>"
 				dat += "Secondary Language:<br><a href='?_src_=prefs;preference=language;task=input'>[language]</a><br>"
 				dat += "Blood Type: <a href='?_src_=prefs;preference=b_type;task=input'>[b_type]</a><br>"
-				dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
+				if(species == "Human")
+					dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 		//		dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
 				dat += "<br><b>Handicaps</b><br>"
 				dat += "\t<a href='?_src_=prefs;preference=disabilities'><b>\[Set Disabilities\]</b></a><br>"
 				dat += "Limbs: <a href='?_src_=prefs;preference=limbs;task=input'>Adjust</a><br>"
-				dat += "Internal Organs: <a href='?_src_=prefs;preference=organs;task=input'>Adjust</a><br>"
+				if(species != "Slime People" && species != "Machine")
+					dat += "Internal Organs: <a href='?_src_=prefs;preference=organs;task=input'>Adjust</a><br>"
 
 				//display limbs below
 				var/ind = 0
@@ -294,8 +296,9 @@ datum/preferences
 				dat += "<br><b>Eyes</b><br>"
 				dat += "<a href='?_src_=prefs;preference=eyes;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font><br>"
 
-				dat += "<br><b>Body Color</b><br>"
-				dat += "<a href='?_src_=prefs;preference=skin;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin)]'><tr><td>__</td></tr></table></font>"
+				if(species == "Unathi" || species == "Tajaran" || species == "Skrell")
+					dat += "<br><b>Body Color</b><br>"
+					dat += "<a href='?_src_=prefs;preference=skin;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin)]'><tr><td>__</td></tr></table></font>"
 
 				dat += "</td></tr></table><hr><center>"
 
