@@ -3,6 +3,7 @@
 	desc = "Used to control a linked teleportation Hub and Station."
 	icon_state = "teleport"
 	circuit = "/obj/item/weapon/circuitboard/teleporter"
+	dir = 4
 	var/obj/item/locked = null
 	var/id = null
 	var/one_time_use = 0 //Used for one-time-use teleport cards (such as clown planet coordinates.)
@@ -11,8 +12,23 @@
 /obj/machinery/computer/teleporter/New()
 	src.id = "[rand(1000, 9999)]"
 	..()
+	underlays.Cut()
+	underlays += image('icons/obj/stationobjs.dmi', icon_state = "telecomp-wires")
 	return
 
+/obj/machinery/computer/teleporter/initialize()
+	var/obj/machinery/teleport/station/station = locate(/obj/machinery/teleport/station, get_step(src, dir))
+	var/obj/machinery/teleport/hub/hub
+	if(station)
+		hub = locate(/obj/machinery/teleport/hub, get_step(station, dir))
+
+	if(istype(station))
+		station.com = hub
+		station.dir = dir
+
+	if(istype(hub))
+		hub.com = src
+		hub.dir = dir
 
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
 	if(istype(I, /obj/item/weapon/card/data/))
@@ -143,10 +159,17 @@
 	name = "teleporter hub"
 	desc = "It's the hub of a teleporting machine."
 	icon_state = "tele0"
+	dir = 4
 	var/accurate = 0
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 2000
+	var/obj/machinery/computer/teleporter/com
+
+/obj/machinery/teleport/hub/New()
+	..()
+	underlays.Cut()
+	underlays += image('icons/obj/stationobjs.dmi', icon_state = "tele-wires")
 
 /obj/machinery/teleport/hub/Bumped(M as mob|obj)
 	spawn()
@@ -156,8 +179,6 @@
 	return
 
 /obj/machinery/teleport/hub/proc/teleport(atom/movable/M as mob|obj)
-	var/atom/l = src.loc
-	var/obj/machinery/computer/teleporter/com = locate(/obj/machinery/computer/teleporter, locate(l.x - 2, l.y, l.z))
 	if (!com)
 		return
 	if (!com.locked)
@@ -271,11 +292,18 @@
 	name = "station"
 	desc = "It's the station thingy of a teleport thingy." //seriously, wtf.
 	icon_state = "controller"
+	dir = 4
 	var/active = 0
 	var/engaged = 0
 	use_power = 1
 	idle_power_usage = 10
 	active_power_usage = 2000
+	var/obj/machinery/teleport/hub/com
+
+/obj/machinery/teleport/station/New()
+	..()
+	overlays.Cut()
+	overlays += image('icons/obj/stationobjs.dmi', icon_state = "controller-wires")
 
 /obj/machinery/teleport/station/attackby(var/obj/item/weapon/W)
 	src.attack_hand()
@@ -296,8 +324,6 @@
 	if(stat & (BROKEN|NOPOWER))
 		return
 
-	var/atom/l = src.loc
-	var/atom/com = locate(/obj/machinery/teleport/hub, locate(l.x + 1, l.y, l.z))
 	if (com)
 		com.icon_state = "tele1"
 		use_power(5000)
@@ -311,8 +337,6 @@
 	if(stat & (BROKEN|NOPOWER))
 		return
 
-	var/atom/l = src.loc
-	var/atom/com = locate(/obj/machinery/teleport/hub, locate(l.x + 1, l.y, l.z))
 	if (com)
 		com.icon_state = "tele0"
 		for(var/mob/O in hearers(src, null))
@@ -329,8 +353,6 @@
 	if(stat & (BROKEN|NOPOWER) || !istype(usr,/mob/living))
 		return
 
-	var/atom/l = src.loc
-	var/obj/machinery/teleport/hub/com = locate(/obj/machinery/teleport/hub, locate(l.x + 1, l.y, l.z))
 	if (com && !active)
 		active = 1
 		for(var/mob/O in hearers(src, null))
@@ -348,7 +370,7 @@
 	..()
 	if(stat & NOPOWER)
 		icon_state = "controller-p"
-		var/obj/machinery/teleport/hub/com = locate(/obj/machinery/teleport/hub, locate(x + 1, y, z))
+
 		if(com)
 			com.icon_state = "tele0"
 	else

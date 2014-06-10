@@ -627,6 +627,10 @@ var/list/ghostteleportlocs = list()
 	name = "Medbay Maintenance"
 	icon_state = "asmaint"
 
+/area/maintenance/engi_shuttle
+	name = "Engineering Shuttle Access"
+	icon_state = "asmaint"
+
 /area/maintenance/asmaint2
 	name = "Science Maintenance"
 	icon_state = "asmaint"
@@ -1457,11 +1461,11 @@ var/list/ghostteleportlocs = list()
 //DJSTATION
 
 /area/djstation
-	name = "\improper Ruskie DJ Station"
+	name = "\improper Listening Post"
 	icon_state = "DJ"
 
 /area/djstation/solars
-	name = "\improper DJ Station Solars"
+	name = "\improper Listening Post Solars"
 	icon_state = "DJ"
 
 //DERELICT
@@ -1551,6 +1555,71 @@ var/list/ghostteleportlocs = list()
 /area/derelict/singularity_engine
 	name = "\improper Derelict Singularity Engine"
 	icon_state = "engine"
+
+//HALF-BUILT STATION (REPLACES DERELICT IN BAYCODE, ABOVE IS LEFT FOR DOWNSTREAM)
+
+/area/shuttle/constructionsite
+	name = "\improper Construction Site Shuttle"
+	icon_state = "yellow"
+
+/area/shuttle/constructionsite/station
+	name = "\improper Construction Site Shuttle"
+
+/area/shuttle/constructionsite/site
+	name = "\improper Construction Site Shuttle"
+
+/area/constructionsite
+	name = "\improper Construction Site"
+	icon_state = "storage"
+
+/area/constructionsite/storage
+	name = "\improper Construction Site Storage Area"
+
+/area/constructionsite/science
+	name = "\improper Construction Site Research"
+
+/area/constructionsite/bridge
+	name = "\improper Construction Site Bridge"
+	icon_state = "bridge"
+
+/area/constructionsite/maintenance
+	name = "\improper Construction Site Maintenance"
+	icon_state = "yellow"
+
+/area/constructionsite/hallway/aft
+	name = "\improper Construction Site Aft Hallway"
+	icon_state = "hallP"
+
+/area/constructionsite/hallway/fore
+	name = "\improper Construction Site Fore Hallway"
+	icon_state = "hallS"
+
+/area/constructionsite/atmospherics
+	name = "\improper Construction Site Atmospherics"
+	icon_state = "green"
+
+/area/constructionsite/medical
+	name = "\improper Construction Site Medbay"
+	icon_state = "medbay"
+
+/area/constructionsite/ai
+	name = "\improper Construction Computer Core"
+	icon_state = "ai"
+
+/area/constructionsite/engineering
+	name = "\improper Construction Site Engine Bay"
+	icon_state = "engine"
+
+/area/solar/constructionsite
+	name = "\improper Construction Site Solars"
+	icon_state = "aft"
+
+//area/constructionsite
+//	name = "\improper Construction Site Shuttle"
+
+//area/constructionsite
+//	name = "\improper Construction Site Shuttle"
+
 
 //Construction
 
