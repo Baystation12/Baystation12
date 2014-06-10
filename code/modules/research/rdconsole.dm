@@ -84,8 +84,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				return_name = "Uranium"
 			if("diamond")
 				return_name = "Diamond"
-			if("clown")
-				return_name = "Bananium"
 	else
 		for(var/R in typesof(/datum/reagent) - /datum/reagent)
 			temp_reagent = null
@@ -361,8 +359,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 									linked_lathe.uranium_amount = max(0, (linked_lathe.uranium_amount-being_built.materials[M]))
 								if("$diamond")
 									linked_lathe.diamond_amount = max(0, (linked_lathe.diamond_amount-being_built.materials[M]))
-								if("$clown")
-									linked_lathe.clown_amount = max(0, (linked_lathe.clown_amount-being_built.materials[M]))
 								else
 									linked_lathe.reagents.remove_reagent(M, being_built.materials[M])
 
@@ -456,9 +452,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if("diamond")
 				type = /obj/item/stack/sheet/mineral/diamond
 				res_amount = "diamond_amount"
-			if("clown")
-				type = /obj/item/stack/sheet/mineral/clown
-				res_amount = "clown_amount"
+
 		if(ispath(type) && hasvar(linked_lathe, res_amount))
 			var/obj/item/stack/sheet/sheet = new type(linked_lathe.loc)
 			var/available_num_sheets = round(linked_lathe.vars[res_amount]/sheet.perunit)
@@ -723,8 +717,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 								if(D.materials[M] > linked_lathe.uranium_amount) check_materials = 0
 							if("$diamond")
 								if(D.materials[M] > linked_lathe.diamond_amount) check_materials = 0
-							if("$clown")
-								if(D.materials[M] > linked_lathe.clown_amount) check_materials = 0
 					else if (!linked_lathe.reagents.has_reagent(M, D.materials[M]))
 						check_materials = 0
 				if (check_materials)
@@ -785,12 +777,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_lathe.diamond_amount >= 10000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=diamond;lathe_ejectsheet_amt=5'>(5 Sheets)</A> "
 			if(linked_lathe.diamond_amount >= 2000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=diamond;lathe_ejectsheet_amt=50'>(Max Sheets)</A>"
 			dat += "<BR>"
-			//Bananium
-			dat += "* [linked_lathe.clown_amount] cm<sup>3</sup> of Bananium || "
-			dat += "Eject: "
-			if(linked_lathe.clown_amount >= 2000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=clown;lathe_ejectsheet_amt=1'>(1 Sheet)</A> "
-			if(linked_lathe.clown_amount >= 10000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=clown;lathe_ejectsheet_amt=5'>(5 Sheets)</A> "
-			if(linked_lathe.clown_amount >= 2000) dat += "<A href='?src=\ref[src];lathe_ejectsheet=clown;lathe_ejectsheet_amt=50'>(Max Sheets)</A>"
 
 		if(3.3) //Protolathe Chemical Storage Submenu
 			dat += "<A href='?src=\ref[src];menu=1.0'>Main Menu</A> || "

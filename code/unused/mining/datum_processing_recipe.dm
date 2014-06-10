@@ -19,5 +19,4 @@ var/list/datum/material_recipe/MATERIAL_RECIPES = list(
 		new/datum/material_recipe("Silver",list(/obj/item/weapon/ore/silver),/obj/item/stack/sheet/mineral/silver),
 		new/datum/material_recipe("Diamond",list(/obj/item/weapon/ore/diamond),/obj/item/stack/sheet/mineral/diamond),
 		new/datum/material_recipe("Phoron",list(/obj/item/weapon/ore/phoron),/obj/item/stack/sheet/mineral/phoron),
-		new/datum/material_recipe("Bananium",list(/obj/item/weapon/ore/clown),/obj/item/stack/sheet/mineral/clown),
 	)
