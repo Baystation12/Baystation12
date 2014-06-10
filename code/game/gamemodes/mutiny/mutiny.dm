@@ -158,7 +158,7 @@ datum/game_mode/mutiny
 
 	proc/unbolt_vault_door()
 		var/obj/machinery/door/airlock/vault = locate(/obj/machinery/door/airlock/vault)
-		vault.locked = 0
+		vault.lock()
 
 	proc/make_secret_transcript()
 		var/obj/machinery/computer/telecomms/server/S = locate(/obj/machinery/computer/telecomms/server)
