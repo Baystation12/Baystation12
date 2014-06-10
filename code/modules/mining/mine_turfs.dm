@@ -27,6 +27,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	var/obj/item/weapon/last_find
 	var/datum/artifact_find/artifact_find
 
+	has_resources = 1
 
 	New()
 		. = ..()
@@ -358,7 +359,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 
 /turf/simulated/mineral/random
 	name = "Mineral deposit"
-	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 25)//Currently, Adamantine won't spawn as it has no uses. -Durandan
+	var/mineralSpawnChanceList = list("Uranium" = 5, "Iron" = 50, "Diamond" = 1, "Gold" = 5, "Silver" = 5, "Phoron" = 25)
 	var/mineralChance = 10  //means 10% chance of this plot changing to a mineral deposit
 
 	New()
@@ -392,6 +393,7 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 	temperature = T0C
 	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
+	has_resources = 1
 
 /turf/simulated/floor/plating/airless/asteroid/New()
 	var/proper_name = name

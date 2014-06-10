@@ -225,7 +225,6 @@
 			possible_spawns += /obj/item/stack/sheet/glass
 			possible_spawns += /obj/item/stack/sheet/rglass
 			possible_spawns += /obj/item/stack/sheet/mineral/phoron
-			possible_spawns += /obj/item/stack/sheet/mineral/mythril
 			possible_spawns += /obj/item/stack/sheet/mineral/gold
 			possible_spawns += /obj/item/stack/sheet/mineral/silver
 			possible_spawns += /obj/item/stack/sheet/mineral/enruranium
