@@ -234,6 +234,7 @@
 	item_state = "swat"
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
 	var/obj/item/clothing/suit/space/powered/parent
+	slowdown = 1
 
 /obj/item/clothing/head/space/powered/proc/atmotoggle()
 	set category = "Object"
@@ -269,6 +270,7 @@
 	icon_state = "power_armour_gloves"
 	item_state = "power_armour_gloves"
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
+	slowdown = 1
 
 /obj/item/clothing/shoes/powered
 	name = "Powered armor boots"
@@ -277,7 +279,7 @@
 	icon_state = "power_armour_boots"
 	item_state = "swat"
 	armor = list(melee = 40, bullet = 30, laser = 20,energy = 15, bomb = 25, bio = 10, rad = 10)
-
+	slowdown = 2
 
 obj/item/clothing/suit/space/powered/spawnable/regular/New()
 	servos = new /obj/item/powerarmor/servos(src)
