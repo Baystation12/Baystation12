@@ -48,16 +48,6 @@
 	
 	return
 
-/obj/machinery/computer/shuttle_control/proc/toggle_override()
-	if (!can_override()) return
-
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
-	
-	if (shuttle.docking_controller.override_enabled)
-		shuttle.docking_controller.disable_override()
-	else
-		shuttle.docking_controller.enable_override()
-
 /obj/machinery/computer/shuttle_control/proc/can_launch()
 	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
 	
@@ -73,13 +63,6 @@
 	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
 	
 	if (shuttle.moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH)
-		return 1
-	return 0
-
-/obj/machinery/computer/shuttle_control/proc/can_override()
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
-	
-	if (shuttle.docking_controller && (!shuttle.docking_controller.override_enabled || !shuttle.in_use))
 		return 1
 	return 0
 
@@ -112,7 +95,7 @@
 	if (!shuttle.docking_controller || !shuttle.current_dock_target())
 		return 1	//shuttles without docking controllers or at locations without docking ports act like old-style shuttles
 
-	return shuttle.docking_controller.override_enabled	//override pretty much lets you do whatever you want
+	return 0
 
 
 /obj/machinery/computer/shuttle_control/Del()
@@ -186,8 +169,6 @@
 		launch_shuttle()
 	else if(href_list["cancel"])
 		cancel_launch()
-	else if(href_list["override"])
-		toggle_override()
 
 
 /obj/machinery/computer/shuttle_control/attackby(obj/item/weapon/W as obj, mob/user as mob)
