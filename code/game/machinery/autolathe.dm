@@ -8,8 +8,8 @@
 	idle_power_usage = 10
 	active_power_usage = 100
 
-	var/list/stored_material =  list("metal" = 0, "glass" = 0, "phoron" = 0, "osmium" = 0)
-	var/list/storage_capacity = list("metal" = 0, "glass" = 0, "phoron" = 0, "osmium" = 0)
+	var/list/stored_material =  list("metal" = 0, "glass" = 0)
+	var/list/storage_capacity = list("metal" = 0, "glass" = 0)
 	var/show_category = "All"
 
 	var/opened = 0
@@ -44,7 +44,9 @@
 	dat += "[material_top]</tr>[material_bottom]</tr></table><hr>"
 	dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[show_category]</a>.</h3></center><table width = '100%'>"
 
+	var/index = 0
 	for(var/datum/autolathe/recipe/R in autolathe_recipes)
+		index++
 		if(R.hidden && !hacked || (show_category != "All" && show_category != R.category))
 			continue
 
@@ -66,7 +68,7 @@
 				material_string += "[R.resources[material]] [material]"
 			material_string += ".<br></td>"
 
-		dat += "<tr><td width = 180><b>[can_make ? "<a href='?src=\ref[src];make=\ref[R]'>" : ""][R.name][can_make ? "</a>" : ""]</b></td><td align = right>[material_string]</tr>"
+		dat += "<tr><td width = 180><b>[can_make ? "<a href='?src=\ref[src];make=[index]'>" : ""][R.name][can_make ? "</a>" : ""]</b></td><td align = right>[material_string]</tr>"
 
 	dat += "</table><hr>"
 
@@ -197,11 +199,11 @@
 
 	if(href_list["make"] && autolathe_recipes)
 
+		var/index = text2num(href_list["make"])
 		var/datum/autolathe/recipe/making
-		for(var/datum/autolathe/recipe/R in autolathe_recipes)
-			if(R == href_list["make"])
-				making = R
-				break
+
+		if(index > 0 && index <= autolathe_recipes.len)
+			making = autolathe_recipes[index]
 
 		//Exploit detection, not sure if necessary after rewrite.
 		if(!making)
@@ -211,6 +213,7 @@
 			return
 
 		busy = 1
+		//This needs some work.
 		use_power(max(2000, making.power_use))
 
 		//Check if we still have the materials.
@@ -228,6 +231,8 @@
 		flick("autolathe_n",src)
 
 		sleep(50)
+
+		busy = 0
 
 		//Sanity check.
 		if(!making || !src) return
@@ -352,10 +357,4 @@
 		tot_rating += MB.rating
 
 	storage_capacity["metal"] = tot_rating  * 25000
-	storage_capacity["glass"] = tot_rating  * 25000
-	storage_capacity["phoron"] = tot_rating * 12500
-	storage_capacity["osmium"] = tot_rating *  7500
-
-
-	//max_m_amount = tot_rating * 2
-	//max_g_amount = tot_rating
+	storage_capacity["glass"] = tot_rating  * 12500
