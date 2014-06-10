@@ -32,11 +32,19 @@
 
 //This generates the randomized airlock wire assignments for the game.
 /proc/RandomAirlockWires()
+	var/list/wire_assignments = CreateRandomAirlockWires()
+
+	globalAirlockIndexToFlag = wire_assignments[2]
+	globalAirlockIndexToWireColor = wire_assignments[3]
+	globalAirlockWireColorToIndex = wire_assignments[4]
+	return wire_assignments[1]
+
+/proc/CreateRandomAirlockWires()
 	//to make this not randomize the wires, just set index to 1 and increment it in the flag for loop (after doing everything else).
 	var/list/wires = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-	airlockIndexToFlag = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-	airlockIndexToWireColor = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-	airlockWireColorToIndex = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	var/airlockIndexToFlag = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	var/airlockIndexToWireColor = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	var/airlockWireColorToIndex = list(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 	var/flagIndex = 1
 	for (var/flag=1, flag<4096, flag+=flag)
 		var/valid = 0
@@ -54,7 +62,7 @@
 				airlockWireColorToIndex[colorIndex] = flagIndex
 				colorList -= colorIndex
 		flagIndex+=1
-	return wires
+	return list(wires, airlockIndexToFlag, airlockIndexToWireColor, airlockWireColorToIndex)
 
 /* Example:
 Airlock wires color -> flag are { 64, 128, 256, 2, 16, 4, 8, 32, 1 }.
@@ -93,6 +101,11 @@ Airlock index -> wire color are { 9, 4, 6, 7, 5, 8, 1, 2, 3 }.
 	normalspeed = 1
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	var/hasShocked = 0 //Prevents multiple shocks from happening
+	var/secured_wires = 0	//for mapping use
+	var/list/airlockIndexToFlag
+	var/list/airlockWireColorToFlag
+	var/list/airlockIndexToWireColor
+	var/list/airlockWireColorToIndex
 
 /obj/machinery/door/airlock/command
 	name = "Airlock"
@@ -373,17 +386,10 @@ About the new airlock wires panel:
 			//one wire for door bolts. Sending a pulse through this drops door bolts if they're not down (whether power's on or not),
 			//raises them if they are down (only if power's on)
 			if(!src.locked)
-				src.locked = 1
-				for(var/mob/M in range(1,src))
-					M << "You hear a click from the bottom of the door."
-				src.updateUsrDialog()
+				src.lock()
 			else
-				if(src.arePowerSystemsOn()) //only can raise bolts if power's on
-					src.locked = 0
-					for(var/mob/M in range(1,src))
-						M << "You hear a click from the bottom of the door."
-					src.updateUsrDialog()
-			update_icon()
+				src.unlock()
+			src.updateUsrDialog()
 
 		if(AIRLOCK_WIRE_BACKUP_POWER1 || AIRLOCK_WIRE_BACKUP_POWER2)
 			//two wires for backup power. Sending a pulse through either one causes a breaker to trip, but this does not disable it unless main power is down too (in which case it is disabled for 1 minute or however long it takes main power to come back, whichever is shorter).
@@ -447,9 +453,7 @@ About the new airlock wires panel:
 			src.updateUsrDialog()
 		if(AIRLOCK_WIRE_DOOR_BOLTS)
 			//Cutting this wire also drops the door bolts, and mending it does not raise them. (This is what happens now, except there are a lot more wires going to door bolts at present)
-			if(src.locked!=1)
-				src.locked = 1
-			update_icon()
+			src.lock()
 			src.updateUsrDialog()
 		if(AIRLOCK_WIRE_BACKUP_POWER1 || AIRLOCK_WIRE_BACKUP_POWER2)
 			//Cutting either one disables the backup door power (allowing it to be crowbarred open, but disabling bolts-raising), but may electocute the user.
@@ -707,7 +711,7 @@ About the new airlock wires panel:
 		t1 += text("Backup Power Output wire is cut.<br>\n")
 
 	if(src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
-		t1 += text("Door bolt drop wire is cut.<br>\n")
+		t1 += text("Door bolt control wire is cut.<br>\n")
 	else if(!src.locked)
 		t1 += text("Door bolts are up. <A href='?src=\ref[];aiDisable=4'>Drop them?</a><br>\n", src)
 	else
@@ -986,10 +990,9 @@ About the new airlock wires panel:
 				if(4)
 					//drop door bolts
 					if(src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
-						usr << "You can't drop the door bolts - The door bolt dropping wire has been cut."
-					else if(src.locked!=1)
-						src.locked = 1
-						update_icon()
+						usr << "You can't drop the door bolts - The door bolt control wire has been cut."
+					else
+						src.lock()
 				if(5)
 					//un-electrify door
 					if(src.isWireCut(AIRLOCK_WIRE_ELECTRIFY))
@@ -1055,15 +1058,11 @@ About the new airlock wires panel:
 				if(4)
 					//raise door bolts
 					if(src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
-						usr << text("The door bolt drop wire is cut - you can't raise the door bolts.<br>\n")
+						usr << text("The door bolt control wire is cut - you can't raise the door bolts.<br>\n")
 					else if(!src.locked)
 						usr << text("The door bolts are already up.<br>\n")
 					else
-						if(src.arePowerSystemsOn())
-							src.locked = 0
-							update_icon()
-						else
-							usr << text("Cannot raise door bolts due to power failure.<br>\n")
+						src.unlock()
 
 				if(5)
 					//electrify door for 30 seconds
@@ -1317,18 +1316,51 @@ About the new airlock wires panel:
 	..()
 	return
 
+/obj/machinery/door/airlock/proc/lock(var/forced=0)
+	if (src.locked) return
+	
+	src.locked = 1
+	for(var/mob/M in range(1,src))
+		M.show_message("You hear a click from the bottom of the door.", 2)
+	update_icon()
+
+/obj/machinery/door/airlock/proc/unlock(var/forced=0)
+	if (!src.locked) return
+	
+	if(forced || src.arePowerSystemsOn()) //only can raise bolts if power's on
+		src.locked = 0
+		for(var/mob/M in range(1,src))
+			M.show_message("You hear a click from the bottom of the door.", 2)
+		update_icon()
+
 /obj/machinery/door/airlock/New()
 	..()
+	
+	//wires
+	if (!secured_wires)
+		airlockWireColorToFlag = globalAirlockWireColorToFlag
+		airlockIndexToFlag = globalAirlockIndexToFlag
+		airlockIndexToWireColor = globalAirlockIndexToWireColor
+		airlockWireColorToIndex = globalAirlockWireColorToIndex
+	else
+		randomize_wires()
+	
 	if(src.closeOtherId != null)
 		spawn (5)
 			for (var/obj/machinery/door/airlock/A in world)
 				if(A.closeOtherId == src.closeOtherId && A != src)
 					src.closeOther = A
 					break
-
+	
+/obj/machinery/door/airlock/proc/randomize_wires()
+	var/wire_assignments = CreateRandomAirlockWires()
+	airlockWireColorToFlag = wire_assignments[1]
+	airlockIndexToFlag = wire_assignments[2]
+	airlockIndexToWireColor = wire_assignments[3]
+	airlockWireColorToIndex = wire_assignments[4]
 
 /obj/machinery/door/airlock/proc/prison_open()
-	src.locked = 0
+	src.unlock()
 	src.open()
-	src.locked = 1
+	src.lock()
 	return

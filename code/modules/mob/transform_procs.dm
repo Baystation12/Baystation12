@@ -181,6 +181,8 @@
 		O.mmi = new /obj/item/device/mmi(O)
 		O.mmi.transfer_identity(src)//Does not transfer key/client.
 
+	callHook("borgify", list(O))
+
 	O.Namepick()
 
 	spawn(0)//To prevent the proc from returning null.
