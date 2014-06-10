@@ -610,17 +610,12 @@ About the new airlock wires panel:
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise
 // The preceding comment was borrowed from the grille's shock script
-/obj/machinery/door/airlock/proc/shock(mob/user, prb)
-	if((stat & (NOPOWER)) || !src.arePowerSystemsOn())		// unpowered, no shock
+/obj/machinery/door/airlock/shock(mob/user, prb)
+	if(!arePowerSystemsOn())
 		return 0
 	if(hasShocked)
 		return 0	//Already shocked someone recently?
-	if(!prob(prb))
-		return 0 //you lucked out, no shock for you
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(5, 1, src)
-	s.start() //sparks always.
-	if(electrocute_mob(user, get_area(src), src))
+	if(..())
 		hasShocked = 1
 		sleep(10)
 		hasShocked = 0
@@ -831,7 +826,7 @@ About the new airlock wires panel:
 	if (src.isElectrified())
 		if (istype(mover, /obj/item))
 			var/obj/item/i = mover
-			if (i.m_amt)
+			if (i.matter["metal"])
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 				s.set_up(5, 1, src)
 				s.start()
@@ -1332,7 +1327,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/New()
 	..()
-	
+
 	//wires
 	if (!secured_wires)
 		airlockWireColorToFlag = globalAirlockWireColorToFlag
@@ -1341,14 +1336,14 @@ About the new airlock wires panel:
 		airlockWireColorToIndex = globalAirlockWireColorToIndex
 	else
 		randomize_wires()
-	
+
 	if(src.closeOtherId != null)
 		spawn (5)
 			for (var/obj/machinery/door/airlock/A in world)
 				if(A.closeOtherId == src.closeOtherId && A != src)
 					src.closeOther = A
 					break
-	
+
 /obj/machinery/door/airlock/proc/randomize_wires()
 	var/wire_assignments = CreateRandomAirlockWires()
 	airlockWireColorToFlag = wire_assignments[1]

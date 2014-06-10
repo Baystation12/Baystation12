@@ -119,7 +119,7 @@
 	w_class = 2.0
 	flags = FPRINT | CONDUCT | TABLEPASS
 	slot_flags = SLOT_BELT
-	m_amt = 2000
+	matter = list("metal" = 2000)
 	var/pictures_max = 10
 	var/pictures_left = 10
 	var/on = 1

@@ -6,7 +6,7 @@
 	item_state = "gun"
 	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
-	m_amt = 2000
+	matter = list("metal" = 2000)
 	w_class = 3.0
 	throwforce = 5
 	throw_speed = 4
@@ -194,7 +194,7 @@
 				playsound(user, fire_sound, 10, 1)
 			else
 				playsound(user, fire_sound, 50, 1)
-			if(istype(in_chamber, /obj/item/projectile/beam/lastertag))		
+			if(istype(in_chamber, /obj/item/projectile/beam/lastertag))
 				user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 				mouthshoot = 0
 				return

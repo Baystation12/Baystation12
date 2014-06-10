@@ -1722,8 +1722,7 @@ datum/design/security_hud
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = 2.0
-	m_amt = 30
-	g_amt = 10
+	matter = list("metal" = 30,"glass" = 10)
 	var/datum/design/blueprint
 
 /obj/item/weapon/disk/design_disk/New()

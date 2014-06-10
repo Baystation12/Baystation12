@@ -1387,7 +1387,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	m_amt = 50
+	matter = list("metal" = 50)
 	attack_verb = list("slashed", "sliced", "cut", "clawed")
 
 // *************************************
