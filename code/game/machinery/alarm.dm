@@ -1248,7 +1248,7 @@ Code shamelessly copied from apc_frame
 	if (!(ndir in cardinal))
 		return
 
-	var/turf/loc = get_turf_loc(usr)
+	var/turf/loc = get_turf(usr)
 	var/area/A = loc.loc
 	if (!istype(loc, /turf/simulated/floor))
 		usr << "\red Air Alarm cannot be placed on this spot."
@@ -1576,7 +1576,7 @@ Code shamelessly copied from apc_frame
 	if (!(ndir in cardinal))
 		return
 
-	var/turf/loc = get_turf_loc(usr)
+	var/turf/loc = get_turf(usr)
 	var/area/A = loc.loc
 	if (!istype(loc, /turf/simulated/floor))
 		usr << "\red Fire Alarm cannot be placed on this spot."
