@@ -24,6 +24,17 @@
 	MODE_NONE|STATE_UNDOCKED		idle - not docked.
 	MODE_NONE|anything else			should never happen.
 	
+	*** Override, what is it? ***
+	
+	The purpose of enabling the override is to prevent the docking program from automatically doing things with the docking port when docking or undocking.
+	Maybe the shuttle is full of plamsa/phoron for some reason, and you don't want the door to automatically open, or the airlock to cycle.
+	This means that the prepare_for_docking/undocking and finish_docking/undocking procs don't get called.
+	
+	The docking controller will still check the state of the docking port, and thus prevent the shuttle from launching unless they force the launch (handling forced
+	launches is not the docking controller's responsibility). In this case it is up to the players to manually get the docking port into a good state to undock 
+	(which usually just means closing and locking the doors).
+	
+	In line with this, docking controllers should prevent players from manually doing things when the override is disabled.
 */
 
 
@@ -68,12 +79,15 @@
 		if ("confirm_undock")
 			if (control_mode == MODE_CLIENT && dock_state == STATE_UNDOCKING && receive_tag == tag_target)
 				send_docking_command(tag_target, "confirm_undock")
+				if (!override_enabled)
+					finish_undocking()
 				reset()		//client is done undocking!
 		
 		if ("request_undock")
 			if (control_mode == MODE_SERVER && dock_state == STATE_DOCKED && receive_tag == tag_target)
 				dock_state = STATE_UNDOCKING
-				prepare_for_undocking()
+				if (!override_enabled)
+					prepare_for_undocking()
 	
 		if ("dock_error")
 			if (receive_tag == tag_target)
@@ -100,7 +114,9 @@
 						response_sent = 1
 				else if (control_mode == MODE_SERVER)
 					send_docking_command(tag_target, "confirm_undock")	//tell the client we are OK to undock.
-					reset()		//server is done undocking!
+				if (!override_enabled)
+					finish_undocking()
+				reset()		//server is done undocking!
 	
 	if (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING)
 		response_sent = 0
@@ -128,7 +144,8 @@
 		return
 	
 	dock_state = STATE_UNDOCKING
-	prepare_for_undocking()
+	if (!override_enabled)
+		prepare_for_undocking()
 	
 	send_docking_command(tag_target, "request_undock")
 
@@ -149,19 +166,19 @@
 /datum/computer/file/embedded_program/docking/proc/prepare_for_undocking()
 	return
 
+//we are docked, open the doors or whatever.
+/datum/computer/file/embedded_program/docking/proc/finish_undocking()
+	return
+
 //are we ready for undocking?
 /datum/computer/file/embedded_program/docking/proc/ready_for_undocking()
 	return 1
 
 /datum/computer/file/embedded_program/docking/proc/enable_override()
 	override_enabled = 1
-	//if (tag_target)
-	//	send_docking_command(tag_target, "enable_override")
 
 /datum/computer/file/embedded_program/docking/proc/disable_override()
 	override_enabled = 0
-	//if (tag_target)
-	//	send_docking_command(tag_target, "disable_override")
 
 /datum/computer/file/embedded_program/docking/proc/reset()
 	dock_state = STATE_UNDOCKED
