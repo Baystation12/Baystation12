@@ -326,7 +326,7 @@
 	desc = "The message: 'Please do not be removing this beaker from the chemistry lab. If lost, return to Nashida Bisha'ra' can be seen etched into the side of this 100 unit beaker."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beakerlarge"
-	g_amt = 5000
+	matter = list("glass" = 5000)
 	volume = 100
 
 /obj/item/weapon/reagent_containers/glass/beaker/fluff/eleanor_stone //Rkf45: Eleanor Stone

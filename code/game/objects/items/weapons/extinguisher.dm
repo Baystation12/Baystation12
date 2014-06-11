@@ -11,7 +11,7 @@
 	throw_speed = 2
 	throw_range = 10
 	force = 10.0
-	m_amt = 90
+	matter = list("metal" = 90)
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 	var/max_water = 50
 	var/last_use = 1.0
@@ -28,7 +28,6 @@
 	throwforce = 2
 	w_class = 2.0
 	force = 3.0
-	m_amt = 0
 	max_water = 30
 	sprite_name = "miniFE"
 
