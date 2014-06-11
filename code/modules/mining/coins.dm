@@ -1,75 +1,3 @@
-/**********************Mineral ores**************************/
-
-/obj/item/weapon/ore
-	name = "Rock"
-	icon = 'icons/obj/mining.dmi'
-	icon_state = "ore2"
-	var/datum/geosample/geologic_data
-
-/obj/item/weapon/ore/uranium
-	name = "Uranium ore"
-	icon_state = "Uranium ore"
-	origin_tech = "materials=5"
-
-/obj/item/weapon/ore/iron
-	name = "Iron ore"
-	icon_state = "Iron ore"
-	origin_tech = "materials=1"
-
-/obj/item/weapon/ore/glass
-	name = "Sand"
-	icon_state = "Glass ore"
-	origin_tech = "materials=1"
-
-	attack_self(mob/living/user as mob) //It's magic I ain't gonna explain how instant conversion with no tool works. -- Urist
-		var/location = get_turf(user)
-		for(var/obj/item/weapon/ore/glass/sandToConvert in location)
-			new /obj/item/stack/sheet/mineral/sandstone(location)
-			del(sandToConvert)
-		new /obj/item/stack/sheet/mineral/sandstone(location)
-		del(src)
-
-/obj/item/weapon/ore/phoron
-	name = "Phoron ore"
-	icon_state = "Phoron ore"
-	origin_tech = "materials=2"
-
-/obj/item/weapon/ore/silver
-	name = "Silver ore"
-	icon_state = "Silver ore"
-	origin_tech = "materials=3"
-
-/obj/item/weapon/ore/gold
-	name = "Gold ore"
-	icon_state = "Gold ore"
-	origin_tech = "materials=4"
-
-/obj/item/weapon/ore/diamond
-	name = "Diamond ore"
-	icon_state = "Diamond ore"
-	origin_tech = "materials=6"
-
-/obj/item/weapon/ore/clown
-	name = "Bananium ore"
-	icon_state = "Clown ore"
-	origin_tech = "materials=4"
-
-/obj/item/weapon/ore/slag
-	name = "Slag"
-	desc = "Completely useless"
-	icon_state = "slag"
-
-/obj/item/weapon/ore/New()
-	pixel_x = rand(0,16)-8
-	pixel_y = rand(0,8)-8
-
-/obj/item/weapon/ore/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/device/core_sampler))
-		var/obj/item/device/core_sampler/C = W
-		C.sample_item(src, user)
-	else
-		return ..()
-
 /*****************************Coin********************************/
 
 /obj/item/weapon/coin
@@ -111,17 +39,9 @@
 	name = "uranium coin"
 	icon_state = "coin_uranium"
 
-/obj/item/weapon/coin/clown
-	name = "bananaium coin"
-	icon_state = "coin_clown"
-
-/obj/item/weapon/coin/adamantine
-	name = "adamantine coin"
+/obj/item/weapon/coin/platinum
+	name = "platinum coin"
 	icon_state = "coin_adamantine"
-
-/obj/item/weapon/coin/mythril
-	name = "mythril coin"
-	icon_state = "coin_mythril"
 
 /obj/item/weapon/coin/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/cable_coil) )
