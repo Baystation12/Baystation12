@@ -5,7 +5,7 @@
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)
 
-	//if we can equip the item anyway, don't bother with species_restricted (aslo cuts down on spam)
+	//if we can't equip the item anyway, don't bother with species_restricted (cuts down on spam)
 	if (!..())
 		return 0
 
