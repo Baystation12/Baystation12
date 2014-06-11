@@ -616,18 +616,6 @@
 	updateDialog()
 	return
 
-/obj/machinery/alarm/proc/shock(mob/user, prb)
-	if((stat & (NOPOWER)))		// unpowered, no shock
-		return 0
-	if(!prob(prb))
-		return 0 //you lucked out, no shock for you
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(5, 1, src)
-	s.start() //sparks always.
-	if (electrocute_mob(user, get_area(src), src))
-		return 1
-	else
-		return 0
 ///////////////
 //END HACKING//
 ///////////////
@@ -964,11 +952,11 @@ table tr:first-child th:first-child { border: none;}
 
 	add_fingerprint(usr)
 	usr.set_machine(src)
-	
+
 	// hrefs that can always be called -walter0o
 	if(href_list["rcon"])
 		var/attempted_rcon_setting = text2num(href_list["rcon"])
-		
+
 		switch(attempted_rcon_setting)
 			if(RCON_NO)
 				rcon_setting = RCON_NO
@@ -978,7 +966,7 @@ table tr:first-child th:first-child { border: none;}
 				rcon_setting = RCON_YES
 			else
 				return
-	
+
 	if(href_list["temperature"])
 		var/list/selected = TLV["temperature"]
 		var/max_temperature = min(selected[3] - T0C, MAX_TEMPERATURE)
@@ -991,7 +979,7 @@ table tr:first-child th:first-child { border: none;}
 
 	// hrefs that need the AA unlocked -walter0o
 	if(!locked || istype(usr, /mob/living/silicon))
-	
+
 		if(href_list["command"])
 			var/device_id = href_list["id_tag"]
 			switch(href_list["command"])
@@ -1004,9 +992,9 @@ table tr:first-child th:first-child { border: none;}
 					"n2o_scrub",
 					"panic_siphon",
 					"scrubbing")
-	
+
 					send_signal(device_id, list(href_list["command"] = text2num(href_list["val"]) ) )
-	
+
 				if("set_threshold")
 					var/env = href_list["env"]
 					var/threshold = text2num(href_list["var"])
@@ -1054,36 +1042,36 @@ table tr:first-child th:first-child { border: none;}
 							selected[2] = selected[4]
 						if(selected[3] > selected[4])
 							selected[3] = selected[4]
-	
+
 					apply_mode()
-	
+
 		if(href_list["screen"])
 			screen = text2num(href_list["screen"])
-	
+
 		if(href_list["atmos_unlock"])
 			switch(href_list["atmos_unlock"])
 				if("0")
 					air_doors_close(1)
 				if("1")
 					air_doors_open(1)
-	
+
 		if(href_list["atmos_alarm"])
 			if (alarm_area.atmosalert(2))
 				apply_danger_level(2)
 			update_icon()
-	
+
 		if(href_list["atmos_reset"])
 			if (alarm_area.atmosalert(0))
 				apply_danger_level(0)
 			update_icon()
-	
+
 		if(href_list["mode"])
 			mode = text2num(href_list["mode"])
 			apply_mode()
-	
+
 	// hrefs that need the AA wires exposed, note that borgs should be in range here too -walter0o
 	if(wiresexposed && Adjacent(usr))
-	
+
 		if (href_list["AAlarmwires"])
 			var/t1 = text2num(href_list["AAlarmwires"])
 			if (!( istype(usr.equipped(), /obj/item/weapon/wirecutters) ))
@@ -1098,7 +1086,7 @@ table tr:first-child th:first-child { border: none;}
 					update_icon()
 					buildstage = 1
 				return
-	
+
 		else if (href_list["pulse"])
 			var/t1 = text2num(href_list["pulse"])
 			if (!istype(usr.equipped(), /obj/item/device/multitool))
@@ -1217,8 +1205,7 @@ Just a object used in constructing air alarms
 	icon_state = "door_electronics"
 	desc = "Looks like a circuit. Probably is."
 	w_class = 2.0
-	m_amt = 50
-	g_amt = 50
+	matter = list("metal" = 50, "glass" = 50)
 
 
 /*
@@ -1545,8 +1532,7 @@ Just a object used in constructing fire alarms
 	icon_state = "door_electronics"
 	desc = "A circuit. It has a label on it, it says \"Can handle heat levels up to 40 degrees celsius!\""
 	w_class = 2.0
-	m_amt = 50
-	g_amt = 50
+	matter = list("metal" = 50, "glass" = 50)
 
 
 /*

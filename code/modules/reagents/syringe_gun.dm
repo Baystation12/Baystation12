@@ -13,7 +13,7 @@
 	force = 4.0
 	var/list/syringes = new/list()
 	var/max_syringes = 1
-	m_amt = 2000
+	matter = list("metal" = 2000)
 
 /obj/item/weapon/gun/syringe/examine()
 	set src in view()
