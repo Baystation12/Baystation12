@@ -8,23 +8,16 @@
 var/global/list/shuttles
 
 /datum/shuttle
-	var/location = 0	//0 = at area_station, 1 = at area_offsite
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE	//prevents people from doing things they shouldn't when the shuttle is in transit
-	var/in_use = 0						//this mutex ensures that only one console can be doing things with the shuttle at a time.
-	var/area_station
-	var/area_offsite
 	
 	var/docking_controller_tag	//tag of the controller used to coordinate docking
 	var/datum/computer/file/embedded_program/docking/docking_controller	//the controller itself
-	//TODO: change location to a string and use a mapping for area and dock targets.
-	var/dock_target_station
-	var/dock_target_offsite
-	
 
-/datum/shuttle/proc/short_jump(var/datum/shuttle/shuttle,var/area/origin,var/area/destination)
+/datum/shuttle/proc/short_jump(var/area/origin,var/area/destination)
 	if(moving_status != SHUTTLE_IDLE) return
 
+	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP
 	spawn(warmup_time*10)
 		if (moving_status == SHUTTLE_IDLE) 
@@ -33,11 +26,11 @@ var/global/list/shuttles
 		move(origin, destination)
 		moving_status = SHUTTLE_IDLE
 
-/datum/shuttle/proc/long_jump(var/shuttle_tag,var/area/departing,var/area/destination,var/area/interim,var/travel_time)
+/datum/shuttle/proc/long_jump(var/area/departing,var/area/destination,var/area/interim,var/travel_time)
 	if(moving_status != SHUTTLE_IDLE) return
 
+	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP
-
 	spawn(warmup_time*10)
 		if (moving_status == SHUTTLE_IDLE) 
 			return	//someone cancelled the launch
@@ -68,40 +61,22 @@ var/global/list/shuttles
 	docking_controller.initiate_undocking()
 
 /datum/shuttle/proc/current_dock_target()
-	var/dock_target
-	if (!location)	//station
-		dock_target = dock_target_station
-	else
-		dock_target = dock_target_offsite
-	return dock_target
+	return null
+
+/datum/shuttle/proc/skip_docking_checks()
+	if (!docking_controller || !current_dock_target())
+		return 1	//shuttles without docking controllers or at locations without docking ports act like old-style shuttles
+	return 0
 
 //just moves the shuttle from A to B, if it can be moved
 /datum/shuttle/proc/move(var/area/origin,var/area/destination)
 
 	//world << "move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination]."
-	if(isnull(location))
-		return
-
-	var/area/area_going_to
-	if(destination)
-		//world << "Using supplied destination [destination]."
-		area_going_to = destination
-	else
-		//world << "Using controller value [(cur_location[shuttle_tag] == 1 ? areas_station[shuttle_tag] : areas_offsite[shuttle_tag])]."
-		area_going_to = (location == 1 ? area_station : area_offsite)
-
-	var/area/area_coming_from
-	if(origin)
-		//world << "Using supplied origin [origin]."
-		area_coming_from = origin
-	else
-		//world << "Using controller value [(cur_location[shuttle_tag] == 1 ? areas_offsite[shuttle_tag] : areas_station[shuttle_tag])]."
-		area_coming_from = (location == 1 ? area_offsite : area_station)
 
 	//world << "area_coming_from: [area_coming_from]"
-	//world << "area_going_to: [area_going_to]"
+	//world << "destination: [destination]"
 
-	if(area_coming_from == area_going_to)
+	if(origin == destination)
 		//world << "cancelling move, shuttle will overlap."
 		return
 
@@ -110,7 +85,7 @@ var/global/list/shuttles
 	var/list/dstturfs = list()
 	var/throwy = world.maxy
 
-	for(var/turf/T in area_going_to)
+	for(var/turf/T in destination)
 		dstturfs += T
 		if(T.y < throwy)
 			throwy = T.y
@@ -122,17 +97,15 @@ var/global/list/shuttles
 		if(istype(T, /turf/simulated))
 			del(T)
 
-	for(var/mob/living/carbon/bug in area_going_to)
+	for(var/mob/living/carbon/bug in destination)
 		bug.gib()
 
-	for(var/mob/living/simple_animal/pest in area_going_to)
+	for(var/mob/living/simple_animal/pest in destination)
 		pest.gib()
 
-	area_coming_from.move_contents_to(area_going_to)
+	origin.move_contents_to(destination)
 
-	location = !location	//this needs to change.
-
-	for(var/mob/M in area_going_to)
+	for(var/mob/M in destination)
 		if(M.client)
 			spawn(0)
 				if(M.buckled)
@@ -152,48 +125,48 @@ var/global/list/shuttles
 /proc/setup_shuttles()
 	shuttles = list()
 
-	var/datum/shuttle/shuttle
+	var/datum/shuttle/ferry/shuttle
 
 	//Supply and escape shuttles.
-	shuttle = new/datum/shuttle()
+	shuttle = new()
 	shuttle.location = 1
 	shuttle.area_offsite = locate(/area/supply/dock)
 	shuttle.area_station = locate(/area/supply/station)
 	shuttles["Supply"] = shuttle
 
 	// Admin shuttles.
-	shuttle = new/datum/shuttle()
+	shuttle = new()
 	shuttle.location = 1
 	shuttle.area_offsite = locate(/area/shuttle/transport1/centcom)
 	shuttle.area_station = locate(/area/shuttle/transport1/station)
 	shuttles["Centcom"] = shuttle
 
-	shuttle = new/datum/shuttle()
+	shuttle = new()
 	shuttle.location = 1
 	shuttle.area_offsite = locate(/area/shuttle/administration/centcom)
 	shuttle.area_station = locate(/area/shuttle/administration/station)
 	shuttles["Administration"] = shuttle
 
-	shuttle = new/datum/shuttle()
+	shuttle = new()
 	shuttle.area_offsite = locate(/area/shuttle/alien/base)
 	shuttle.area_station = locate(/area/shuttle/alien/mine)
 	shuttles["Alien"] = shuttle
 
 	// Public shuttles
-	shuttle = new/datum/shuttle()
+	shuttle = new()
 	shuttle.location = 1
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/constructionsite/site)
 	shuttle.area_station = locate(/area/shuttle/constructionsite/station)
 	shuttles["Engineering"] = shuttle
 
-	shuttle = new/datum/shuttle()
+	shuttle = new()
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/mining/outpost)
 	shuttle.area_station = locate(/area/shuttle/mining/station)
 	shuttles["Mining"] = shuttle
 
-	shuttle = new/datum/shuttle()
+	shuttle = new()
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/research/outpost)
 	shuttle.area_station = locate(/area/shuttle/research/station)
@@ -219,7 +192,6 @@ var/global/list/shuttles
 	VS.departure_message = "Your guests are pulling away, Exodus - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
 	VS.interim = /area/vox_station/transit
 
-	VS.location = 1
 	VS.warmup_time = 10
 	shuttles["Vox Skipjack"] = VS
 
@@ -243,7 +215,6 @@ var/global/list/shuttles
 	MS.departure_message = "Your visitors are on their way out of the system, Exodus, burning delta-v like it's nothing. Good riddance."
 	MS.interim = /area/syndicate_station/transit
 
-	MS.location = 1
 	MS.warmup_time = 10
 	shuttles["Syndicate"] = MS
 

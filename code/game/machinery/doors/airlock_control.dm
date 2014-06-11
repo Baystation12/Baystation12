@@ -53,8 +53,6 @@ obj/machinery/door/airlock/receive_signal(datum/signal/signal)
 
 
 obj/machinery/door/airlock/proc/send_status()
-	if (!can_radio()) return
-	
 	if(radio_connection)
 		var/datum/signal/signal = new
 		signal.transmission_method = 1 //radio signal
