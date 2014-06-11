@@ -52,12 +52,19 @@
 
 		var/can_make = 1
 		var/material_string = ""
+		var/multiplier_string = ""
+		var/max_sheets
 
 		var/comma
 		if(!R.resources || !R.resources.len)
 			material_string = "No resources required.</td>"
 		else
+
+			//Make sure it's buildable and list requires resources.
 			for(var/material in R.resources)
+				var/sheets = round(stored_material[material]/R.resources[material])
+				if(isnull(max_sheets) || max_sheets > sheets)
+					max_sheets = sheets
 
 				if(!isnull(stored_material[material]) && stored_material[material] < R.resources[material])
 					can_make = 0
@@ -68,7 +75,15 @@
 				material_string += "[R.resources[material]] [material]"
 			material_string += ".<br></td>"
 
-		dat += "<tr><td width = 180><b>[can_make ? "<a href='?src=\ref[src];make=[index]'>" : ""][R.name][can_make ? "</a>" : ""]</b></td><td align = right>[material_string]</tr>"
+			//Build list of multipliers for sheets.
+			if(R.is_stack)
+				if(max_sheets && max_sheets > 0)
+					multiplier_string  += "<br>
+					for(var/i = 5;i<max_sheets;i*=2) //5,10,20,40...
+						multiplier_string  += "<a href='?src=\ref[src];make=[index];multiplier=[i]'>\[x[i]\]</a>"
+					multiplier_string += "<a href='?src=\ref[src];make=[index];multiplier=[max_sheets]'>\[x[max_sheets]\]</a>"
+
+		dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=[index];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string]</td><td align = right>[material_string]</tr>"
 
 	dat += "</table><hr>"
 
@@ -106,16 +121,8 @@
 	if (opened)
 		//Dismantle the frame.
 		if(istype(O, /obj/item/weapon/crowbar))
-			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-			var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(loc)
-			M.state = 2
-			M.icon_state = "box_1"
-			for(var/obj/I in component_parts)
-				if(I.reliability != 100 && crit_fail)
-					I.crit_fail = 1
-				I.loc = loc
-			del(src)
-			return 1
+			dismantle()
+			return
 
 	//Resources are being loaded.
 	var/obj/item/eating = O
@@ -200,13 +207,14 @@
 	if(href_list["make"] && autolathe_recipes)
 
 		var/index = text2num(href_list["make"])
+		var/multiplier = text2num(href_list["multiplier"])
 		var/datum/autolathe/recipe/making
 
 		if(index > 0 && index <= autolathe_recipes.len)
 			making = autolathe_recipes[index]
 
 		//Exploit detection, not sure if necessary after rewrite.
-		if(!making)
+		if(!making || multiplier < 0 || multiplier > 100)
 			var/turf/exploit_loc = get_turf(usr)
 			message_admins("[key_name_admin(usr)] tried to exploit an autolathe to duplicate an item! ([exploit_loc ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[exploit_loc.x];Y=[exploit_loc.y];Z=[exploit_loc.z]'>JMP</a>" : "null"])", 0)
 			log_admin("EXPLOIT : [key_name(usr)] tried to exploit an autolathe to duplicate an item!")
@@ -214,18 +222,18 @@
 
 		busy = 1
 		//This needs some work.
-		use_power(max(2000, making.power_use))
+		use_power(max(2000, (making.power_use*multiplier)))
 
 		//Check if we still have the materials.
 		for(var/material in making.resources)
 			if(!isnull(stored_material[material]))
-				if(stored_material[material] < making.resources[material])
+				if(stored_material[material] < (making.resources[material]*multiplier))
 					return
 
 		//Consume materials.
 		for(var/material in making.resources)
 			if(!isnull(stored_material[material]))
-				stored_material[material] = max(0,stored_material[material]-making.resources[material])
+				stored_material[material] = max(0,stored_material[material]-(making.resources[material]*multiplier))
 
 		//Fancy autolathe animation.
 		flick("autolathe_n",src)
@@ -238,7 +246,10 @@
 		if(!making || !src) return
 
 		//Create the desired item.
-		new making.path(get_step(loc, get_dir(src,usr)))
+		var/obj/item/I = new making.path(get_step(loc, get_dir(src,usr)))
+		if(multiplier>1 && istype(I,/obj/item/stack))
+			var/obj/item/stack/S = I
+			S.amount = multiplier
 
 	if(href_list["act"])
 

@@ -8,6 +8,7 @@
 	var/hidden
 	var/category
 	var/power_use = 0
+	var/is_stack
 
 /datum/autolathe/recipe/bucket
 	name = "bucket"
@@ -78,21 +79,25 @@
 	name = "steel sheets"
 	path = /obj/item/stack/sheet/metal
 	category = "General"
+	is_stack = 1
 
 /datum/autolathe/recipe/glass
 	name = "glass sheets"
 	path = /obj/item/stack/sheet/glass
 	category = "General"
+	is_stack = 1
 
 /datum/autolathe/recipe/rglass
 	name = "reinforced glass sheets"
 	path = /obj/item/stack/sheet/rglass
 	category = "General"
+	is_stack = 1
 
 /datum/autolathe/recipe/rods
 	name = "metal rods"
 	path = /obj/item/stack/rods
 	category = "General"
+	is_stack = 1
 
 /datum/autolathe/recipe/knife
 	name = "kitchen knife"
