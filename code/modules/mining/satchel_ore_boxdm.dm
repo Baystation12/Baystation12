@@ -73,8 +73,6 @@
 		dat += text("<br>Diamond ore: [amt_diamond]")
 	if (amt_strange)
 		dat += text("<br>Strange rocks: [amt_strange]")
-	if (amt_clown)
-		dat += text("<br>Bananium ore: [amt_clown]")
 
 	usr << dat
 
@@ -151,8 +149,4 @@
 		if (istype(O, /obj/item/weapon/ore/strangerock))
 			amt_strange++
 			continue
-		if (istype(O, /obj/item/weapon/ore/clown))
-			amt_clown++
-			continue
-
 	return
