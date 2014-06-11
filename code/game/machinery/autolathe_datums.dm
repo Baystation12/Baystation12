@@ -185,17 +185,17 @@
 	category = "Medical"
 
 /datum/autolathe/recipe/shotgun_blanks
-	name = "blanks"
+	name = "ammunition (shotgun, blanks)"
 	path = /obj/item/ammo_casing/shotgun/blank
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/shotgun_beanbag
-	name = "beanbag rounds"
+	name = "ammunition (shotgun, beanbag)"
 	path = /obj/item/ammo_casing/shotgun/beanbag
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_rubber
-	name = "magazine (.45 rubber)"
+	name = "ammunition (rubber)"
 	path = /obj/item/ammo_magazine/c45r
 	category = "Arms and Ammunition"
 
@@ -256,25 +256,25 @@
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_revolver_1
-	name = ""
+	name = "ammunition (.357)"
 	path = /obj/item/ammo_magazine/a357
 	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/magazine_revolver_2
-	name = "magazine (.45)"
+	name = "ammunition (.45)"
 	path = /obj/item/ammo_magazine/c45m
 	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/shotgun
-	name = "shotgun"
+	name = "ammunition (shell, shotgun)"
 	path = /obj/item/ammo_casing/shotgun
 	hidden = 1
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/shotgun_dart
-	name = "shotgun dart"
+	name = "ammunition (dart, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/dart
 	hidden = 1
 	category = "Arms and Ammunition"

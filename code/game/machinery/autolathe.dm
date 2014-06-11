@@ -78,7 +78,7 @@
 			//Build list of multipliers for sheets.
 			if(R.is_stack)
 				if(max_sheets && max_sheets > 0)
-					multiplier_string  += "<br>
+					multiplier_string  += "<br>"
 					for(var/i = 5;i<max_sheets;i*=2) //5,10,20,40...
 						multiplier_string  += "<a href='?src=\ref[src];make=[index];multiplier=[i]'>\[x[i]\]</a>"
 					multiplier_string += "<a href='?src=\ref[src];make=[index];multiplier=[max_sheets]'>\[x[max_sheets]\]</a>"
