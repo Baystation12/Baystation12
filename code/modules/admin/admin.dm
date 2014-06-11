@@ -1099,7 +1099,29 @@ var/global/floorIsLava = 0
 	if(istype(H))
 		H.regenerate_icons()
 
-proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
+
+/*
+	helper proc to test if someone is a mentor or not.  Got tired of writing this same check all over the place.
+*/
+/client/verb/check_mentor()
+	set category = "Admin"
+	set name = "Test ur shit"
+	set desc = "This shouldn't be here"
+
+	src << is_mentor()
+
+/proc/is_mentor(client/C)
+
+	if(!istype(C))
+		return 0
+	if(!C.holder)
+		return 0
+
+	if(C.holder.rights == R_MENTOR)
+		return 1
+	return 0
+
+/proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
 	if(!whom)
 		return "<b>(*null*)</b>"
 	var/mob/M
@@ -1136,7 +1158,7 @@ proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
 
 var/admin_shuttle_location = 0 // 0 = centcom 13, 1 = station
 
-proc/move_admin_shuttle()
+/proc/move_admin_shuttle()
 	var/area/fromArea
 	var/area/toArea
 	if (admin_shuttle_location == 1)
@@ -1156,7 +1178,7 @@ proc/move_admin_shuttle()
 
 var/ferry_location = 0 // 0 = centcom , 1 = station
 
-proc/move_ferry()
+/proc/move_ferry()
 	var/area/fromArea
 	var/area/toArea
 	if (ferry_location == 1)
@@ -1176,7 +1198,7 @@ proc/move_ferry()
 
 var/alien_ship_location = 1 // 0 = base , 1 = mine
 
-proc/move_alien_ship()
+/proc/move_alien_ship()
 	var/area/fromArea
 	var/area/toArea
 	if (alien_ship_location == 1)
