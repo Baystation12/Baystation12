@@ -14,8 +14,13 @@
 	MODE_CLIENT|STATE_UNDOCKED		sent a request for docking and now waiting for a reply.
 	MODE_CLIENT|STATE_DOCKING		server told us they are OK to dock, waiting for our docking port to be ready.
 	MODE_CLIENT|STATE_DOCKED		idle - docked as client.
+<<<<<<< HEAD
 	MODE_CLIENT|STATE_UNDOCKING		we are either waiting for our docking port to be ready or for the server to give us the OK to undock.
 
+=======
+	MODE_CLIENT|STATE_UNDOCKING		we are either waiting for our docking port to be ready or for the server to give us the OK to finish undocking.
+
+>>>>>>> 232e50e... Shuttle console refactoring
 	MODE_SERVER|STATE_UNDOCKED		should never happen.
 	MODE_SERVER|STATE_DOCKING		someone requested docking, we are waiting for our docking port to be ready.
 	MODE_SERVER|STATE_DOCKED		idle - docked as server
@@ -40,9 +45,14 @@
 	The docking controller will still check the state of the docking port, and thus prevent the shuttle from launching unless they force the launch (handling forced
 	launches is not the docking controller's responsibility). In this case it is up to the players to manually get the docking port into a good state to undock
 	(which usually just means closing and locking the doors).
+<<<<<<< HEAD
 
 	In line with this, docking controllers should prevent players from manually doing things when the override is disabled.
 >>>>>>> acec01f... Docking overrides now have a clear purpose
+=======
+
+	In line with this, docking controllers should prevent players from manually doing things when the override is NOT enabled.
+>>>>>>> 232e50e... Shuttle console refactoring
 */
 
 
@@ -104,7 +114,7 @@
 /datum/computer/file/embedded_program/docking/process()
 	switch(dock_state)
 		if (STATE_DOCKING)	//waiting for our docking port to be ready for docking
-			if (ready_for_docking() || override_enabled)
+			if (ready_for_docking())
 				if (!response_sent)
 					send_docking_command(tag_target, "confirm_dock")	//tell the other guy we're ready
 					response_sent = 1
@@ -115,16 +125,17 @@
 						finish_docking()	//client done docking!
 					response_sent = 0
 		if (STATE_UNDOCKING)
-			if (ready_for_undocking() || override_enabled)
+			if (ready_for_undocking())
 				if (control_mode == MODE_CLIENT)
 					if (!response_sent)
 						send_docking_command(tag_target, "request_undock")	//tell the server we want to undock now.
 						response_sent = 1
 				else if (control_mode == MODE_SERVER)
 					send_docking_command(tag_target, "confirm_undock")	//tell the client we are OK to undock.
-				if (!override_enabled)
-					finish_undocking()
-				reset()		//server is done undocking!
+
+					if (!override_enabled)
+						finish_undocking()
+					reset()		//server is done undocking!
 
 	if (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING)
 		response_sent = 0
@@ -155,8 +166,7 @@
 	if (!override_enabled)
 		prepare_for_undocking()
 
-	send_docking_command(tag_target, "request_undock")
-
+	//send_docking_command(tag_target, "request_undock")
 
 //tell the docking port to start getting ready for docking - e.g. pressurize
 /datum/computer/file/embedded_program/docking/proc/prepare_for_docking()
@@ -195,6 +205,7 @@
 	response_sent = 0
 
 /datum/computer/file/embedded_program/docking/proc/force_undock()
+	world << "[id_tag]: forcing undock"
 	if (tag_target)
 		send_docking_command(tag_target, "dock_error")
 	reset()
