@@ -1608,6 +1608,10 @@ var/list/ghostteleportlocs = list()
 	name = "AI Upload Access"
 	icon_state = "ai_foyer"
 
+/area/turret_protected/ai_server_room
+	name = "AI Server Room"
+	icon_state = "ai_server"
+
 /area/turret_protected/ai
 	name = "\improper AI Chamber"
 	icon_state = "ai_chamber"
