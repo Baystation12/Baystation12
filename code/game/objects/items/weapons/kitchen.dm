@@ -159,7 +159,7 @@
 	throwforce = 6.0
 	throw_speed = 3
 	throw_range = 6
-	m_amt = 12000
+	matter = list("metal" = 12000)
 	origin_tech = "materials=1"
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -189,7 +189,7 @@
 	throwforce = 8.0
 	throw_speed = 3
 	throw_range = 6
-	m_amt = 12000
+	matter = list("metal" = 12000)
 	origin_tech = "materials=1"
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -259,7 +259,7 @@
 	throw_range = 5
 	w_class = 3.0
 	flags = FPRINT | TABLEPASS | CONDUCT
-	m_amt = 3000
+	matter = list("metal" = 3000)
 	/* // NOPE
 	var/food_total= 0
 	var/burger_amt = 0
