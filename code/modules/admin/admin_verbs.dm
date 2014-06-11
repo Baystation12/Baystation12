@@ -360,9 +360,16 @@ var/list/admin_verbs_mentor = list(
 	if(istype(mob,/mob/dead/observer))
 		//re-enter
 		var/mob/dead/observer/ghost = mob
-		ghost.can_reenter_corpse = 1			//just in-case.
-		ghost.reenter_corpse()
+		if(!is_mentor(usr.client))
+			ghost.can_reenter_corpse = 1
+		if(ghost.can_reenter_corpse)
+			ghost.reenter_corpse()
+		else
+			ghost << "<font color='red'>Error:  Aghost:  Can't reenter corpse, mentors that use adminHUD while aghosting are not permitted to enter their corpse again</font>"
+			return
+
 		feedback_add_details("admin_verb","P") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 	else if(istype(mob,/mob/new_player))
 		src << "<font color='red'>Error: Aghost: Can't admin-ghost whilst in the lobby. Join or Observe first.</font>"
 	else
