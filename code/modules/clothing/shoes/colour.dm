@@ -84,9 +84,9 @@
 	name = "orange shoes"
 	icon_state = "orange"
 	item_color = "orange"
-	var/chained = null
+	var/obj/item/weapon/handcuffs/chained = null
 
-/obj/item/clothing/shoes/orange/proc/attach_cuffs(/obj/item/weapon/handcuffs/cuffs)
+/obj/item/clothing/shoes/orange/proc/attach_cuffs(var/obj/item/weapon/handcuffs/cuffs)
 	if (src.chained) return
 
 	cuffs.loc = src
@@ -96,7 +96,7 @@
 
 /obj/item/clothing/shoes/orange/proc/remove_cuffs()
 	if (!src.chained) return
-	
+
 	src.chained.loc = get_turf(src)
 	src.slowdown = initial(slowdown)
 	src.icon_state = "orange"
