@@ -56,8 +56,9 @@ obj/item/weapon/gun/energy/laser/retro
 	if(isrobot(src.loc))
 		var/mob/living/silicon/robot/R = src.loc
 		if(R && R.cell)
-			R.cell.use(100)
+			R.cell.use(500)
 			in_chamber = new/obj/item/projectile/beam(src)
+			fire_delay = 12
 			return 1
 	return 0
 
