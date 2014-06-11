@@ -84,22 +84,31 @@
 	name = "orange shoes"
 	icon_state = "orange"
 	item_color = "orange"
+	var/chained = null
+
+/obj/item/clothing/shoes/orange/proc/attach_cuffs(/obj/item/weapon/handcuffs/cuffs)
+	if (src.chained) return
+
+	cuffs.loc = src
+	src.chained = cuffs
+	src.slowdown = 15
+	src.icon_state = "orange1"
+
+/obj/item/clothing/shoes/orange/proc/remove_cuffs()
+	if (!src.chained) return
+	
+	src.chained.loc = get_turf(src)
+	src.slowdown = initial(slowdown)
+	src.icon_state = "orange"
+	src.chained = null
 
 /obj/item/clothing/shoes/orange/attack_self(mob/user as mob)
-	if (src.chained)
-		src.chained = null
-		src.slowdown = SHOES_SLOWDOWN
-		new /obj/item/weapon/handcuffs( user.loc )
-		src.icon_state = "orange"
-	return
-
-/obj/item/clothing/shoes/orange/attackby(H as obj, loc)
 	..()
-	if ((istype(H, /obj/item/weapon/handcuffs) && !( src.chained )))
-		//H = null
-		if (src.icon_state != "orange") return
-		del(H)
-		src.chained = 1
-		src.slowdown = 15
-		src.icon_state = "orange1"
-	return
+	remove_cuffs()
+
+/obj/item/clothing/shoes/orange/attackby(H as obj, mob/user as mob)
+	..()
+	if (istype(H, /obj/item/weapon/handcuffs))
+		attach_cuffs(H)
+
+
