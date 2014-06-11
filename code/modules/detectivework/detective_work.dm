@@ -262,7 +262,7 @@ obj/machinery/computer/forensic_scanning
 						var/obj/item/weapon/paper/P = new(loc)
 						var/list/dossier = files[href_list["identifier"]]
 						P.name = "\improper Database File ([dossier[2]])"
-						P.overlays += "paper_words"
+						P.icon_state = "paper_words"
 						P.info = "<b>Criminal Evidence Database</b><br><br>"
 						P.info += "Consolidated data points: [dossier[2]]<br>"
 						var/print_string = "Fingerprints: Print not complete!<br>"
@@ -338,7 +338,7 @@ obj/machinery/computer/forensic_scanning
 						var/obj/item/weapon/paper/P = new(loc)
 						var/list/outputs = misc[href_list["identifier"]]
 						P.name = "\improper Auxiliary Database File ([outputs[3]])"
-						P.overlays += "paper_words"
+						P.icon_state = "paper_words"
 						P.info = "<b>Auxiliary Evidence Database</b><br><br>"
 						P.info += "<big><b>Consolidated data points:</b> [outputs[3]]</big><br>"
 						var/list/prints = outputs[4]
@@ -433,7 +433,7 @@ obj/machinery/computer/forensic_scanning
 						var/obj/item/weapon/paper/P = new(loc)
 						P.name = "\improper Scan Data ([scan_name])"
 						P.info = "<tt>[scan_data]</tt>"
-						P.overlays += "paper_words"
+						P.icon_state = "paper_words"
 					else
 						temp = "Print Failed: No Data"
 				if("erase")

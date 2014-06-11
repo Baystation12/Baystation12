@@ -80,7 +80,7 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];getmob=\ref[M]'>Get</A> |
 		<A href='?src=\ref[src];sendmob=\ref[M]'>Send To</A>
 		<br><br>
-		<A href='?src=\ref[src];traitor=\ref[M]'>Traitor panel</A> |
+		[check_rights(R_ADMIN|R_MOD,0) ? "<A href='?src=\ref[src];traitor=\ref[M]'>Traitor panel</A> | " : "" ]
 		<A href='?src=\ref[src];narrateto=\ref[M]'>Narrate to</A> |
 		<A href='?src=\ref[src];subtlemessage=\ref[M]'>Subtle message</A>
 	"}
