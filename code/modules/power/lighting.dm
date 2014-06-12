@@ -646,7 +646,7 @@
 	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
 	var/base_state
 	var/switchcount = 0	// number of times switched
-	m_amt = 60
+	matter = list("metal" = 60)
 	var/rigged = 0		// true if rigged to explode
 	var/brightness = 2 //how much light it gives off
 
@@ -656,7 +656,7 @@
 	icon_state = "ltube"
 	base_state = "ltube"
 	item_state = "c_tube"
-	g_amt = 100
+	matter = list("glass" = 100)
 	brightness = 8
 
 /obj/item/weapon/light/tube/large
@@ -670,7 +670,7 @@
 	icon_state = "lbulb"
 	base_state = "lbulb"
 	item_state = "contvapour"
-	g_amt = 100
+	matter = list("glass" = 100)
 	brightness = 5
 
 /obj/item/weapon/light/throw_impact(atom/hit_atom)
@@ -683,7 +683,7 @@
 	icon_state = "fbulb"
 	base_state = "fbulb"
 	item_state = "egg4"
-	g_amt = 100
+	matter = list("glass" = 100)
 	brightness = 5
 
 // update the icon state and description of the light

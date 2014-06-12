@@ -159,7 +159,7 @@
 		user << "\blue You insert the [W] into the [src]"
 
 	else if(istype(W, /obj/item/weapon/wrench))
-	
+
 		if(do_after(user, 20))
 			if(!src) return
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
@@ -171,7 +171,7 @@
 					user.visible_message("[user] unfastens the bolts securing \the [src] to the floor.", "You unfasten the bolts securing \the [src] to the floor.")
 					anchored = 0
 		return
-		
+
 	else if(src.panel_open)
 
 		for(var/datum/data/vending_product/R in product_records)
@@ -600,19 +600,6 @@
 		if (WIRE_SHOOTINV)
 			src.shoot_inventory = !src.shoot_inventory
 
-
-/obj/machinery/vending/proc/shock(mob/user, prb)
-	if(stat & (BROKEN|NOPOWER))		// unpowered, no shock
-		return 0
-	if(!prob(prb))
-		return 0
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(5, 1, src)
-	s.start()
-	if (electrocute_mob(user, get_area(src), src, 0.7))
-		return 1
-	else
-		return 0
 
 /*
  * Vending machine types
