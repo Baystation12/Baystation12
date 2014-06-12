@@ -117,7 +117,7 @@
 	if(C.prefs.toggles & SOUND_ADMINHELP)
 		C << 'sound/effects/adminhelp.ogg'
 
-	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
+	log_admin(html_encode("PM: [key_name(src)]->[key_name(C)]: [sanitize_simple(msg, list("&#255;", "&#1103;"))]"))
 
 	//we don't use message_admins here because the sender/receiver might get it too
 	for(var/client/X in admins)

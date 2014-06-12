@@ -1,11 +1,9 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\sovietstation\not_a_user\defines\procs\command_alert.dm;code\sovietstation\not_a_user\defines\procs\captain_announce.dm;maps\tgstation2.dmm
 LAST_COMPILE_VERSION: 503.1224
-DIR: code code\defines code\defines\procs code\game code\game\machinery\computer code\game\objects code\game\objects\items code\game\objects\items\devices code\game\objects\items\devices\PDA code\modules code\modules\admin code\modules\admin\verbs code\sovietstation code\sovietstation\not_a_user code\sovietstation\not_a_user\__HELPERS code\sovietstation\not_a_user\defines code\sovietstation\not_a_user\defines\procs code\sovietstation\not_a_user\modules code\sovietstation\not_a_user\modules\admin code\sovietstation\not_a_user\modules\admin\verbs maps 
-FILE: maps\tgstation2.dmm
-LAST_COMPILE_TIME: 1402483820
+DIR: code code\modules code\modules\admin code\modules\admin\verbs code\sovietstation code\sovietstation\not_a_user code\sovietstation\not_a_user\__HELPERS code\sovietstation\not_a_user\modules code\sovietstation\not_a_user\modules\admin code\sovietstation\not_a_user\modules\admin\verbs 
+LAST_COMPILE_TIME: 1402587744
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
