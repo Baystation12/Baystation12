@@ -1,6 +1,3 @@
-//DONE: attackby de code/defines/obj/weapon.dm/power module
-//TODO: mas tests
-
 //Boards
 /obj/item/weapon/circuitboard/batteryrack
 	name = "Circuit board (Battery rack PSU)"
@@ -152,7 +149,7 @@
 		overlays += image('icons/obj/power.dmi', "gsmes_outputting")
 	if(charging)
 		overlays += image('icons/obj/power.dmi', "gsmes_charging")
-	if (overcharge_percent > 105)
+	if (overcharge_percent > 100)
 		overlays += image('icons/obj/power.dmi', "gsmes_overcharge")
 	else
 		var/clevel = chargedisplay()
@@ -217,6 +214,7 @@
 	var/last_disp = chargedisplay()
 	var/last_chrg = charging
 	var/last_onln = online
+	var/last_overcharge = overcharge_percent
 
 	if(terminal)
 		var/excess = terminal.surplus()
@@ -241,12 +239,12 @@
 		if(charge < 0.0001)
 			online = 0					// stop output if charge falls to zero
 
-	overcharge_percent = ((charge / capacity) * 100)
+	overcharge_percent = round((charge / capacity) * 100)
 	if (overcharge_percent > 115) //115% is the minimum overcharge for anything to happen
 		overcharge_consequences()
 
 	// only update icon if state changed
-	if(last_disp != chargedisplay() || last_chrg != charging || last_onln != online || overcharge_percent > 100)
+	if(last_disp != chargedisplay() || last_chrg != charging || last_onln != online || ((overcharge_percent > 100) ^ (last_overcharge > 100)))
 		updateicon()
 	return
 
