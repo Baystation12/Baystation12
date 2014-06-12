@@ -129,15 +129,15 @@
 /datum/game_mode/proc/auto_declare_completion_enthralled()
 	if(enthralled.len)
 		var/text = "<FONT size = 2><B>The Enthralled were:</B></FONT>"
-		for(var/datum/mind/enthralled in enthralled)
-			text += "<br>[enthralled.key] was [enthralled.name] ("
-			if(enthralled.current)
-				if(enthralled.current.stat == DEAD)
+		for(var/datum/mind/Mind in enthralled)
+			text += "<br>[Mind.key] was [Mind.name] ("
+			if(Mind.current)
+				if(Mind.current.stat == DEAD)
 					text += "died"
 				else
 					text += "survived"
-				if(enthralled.current.real_name != enthralled.name)
-					text += " as [enthralled.current.real_name]"
+				if(Mind.current.real_name != Mind.name)
+					text += " as [Mind.current.real_name]"
 			else
 				text += "body destroyed"
 			text += ")"
@@ -282,7 +282,7 @@ You are weak to holy things and starlight. Don't go into space and avoid the Cha
 			blood = min(10, H.vessel.get_reagent_amount("blood"))// if they have less than 10 blood, give them the remnant else they get 10 blood
 			src.mind.vampire.bloodtotal += blood
 			src.mind.vampire.bloodusable += blood
-			H.adjustCloneLoss(5) // beep boop 10 damage
+			H.adjustCloneLoss(10) // beep boop 10 damage
 		else
 			blood = min(5, H.vessel.get_reagent_amount("blood"))// The dead only give 5 bloods
 			src.mind.vampire.bloodtotal += blood

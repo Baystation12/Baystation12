@@ -1,5 +1,11 @@
 #!/usr/bin/env python
-import os, argparse, logging
+import os, argparse, logging, sys
+
+# Tell Python where to find BYONDTools.
+# Assuming we're in icons/mob/in-hand
+sys.path.append('../../../tools/BYONDTools')  # For byond
+sys.path.append('../../../tools/BYONDTools/scripts')  # For dmi
+
 from byond.objtree import ObjectTree
 from byond.basetypes import Atom
 from byond.map import Map, MapRenderFlags
@@ -30,7 +36,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-                
+
+ 
 def renderMap(args):
     outfile = args.map + '.{z}.png'
     if args.area:

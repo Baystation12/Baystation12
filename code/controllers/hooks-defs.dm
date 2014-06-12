@@ -17,6 +17,13 @@
 /hook/roundend
 
 /**
+ * LateSpawn hook.
+ * Called in newplayer.dm when a humanoid character joins the round after it started.
+ * Parameters: var/mob/living/carbon/human
+ */
+/hook/latespawn
+
+/**
  * Death hook.
  * Called in death.dm when someone dies.
  * Parameters: var/mob/living/carbon/human, var/gibbed

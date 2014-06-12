@@ -30,6 +30,7 @@ datum
 		var/mildly_toxic = 0
 		var/overdose = 0
 		var/overdose_dam = 1
+		var/addictiveness = 1
 		//var/list/viruses = list()
 		var/color = "#000000" // rgb: 0, 0, 0 (does not support alpha channels - yet!)
 
@@ -64,6 +65,19 @@ datum
 						if(prob(chance) && !block)
 							if(M.reagents)
 								M.reagents.add_reagent(self.id,self.volume/2)
+
+
+				if(method == INGEST && istype(M, /mob/living/carbon))
+					if(prob(1 * self.addictiveness))
+						if(prob(5 * volume))
+							var/datum/disease/addiction/A = new /datum/disease/addiction
+							A.addicted_to = self
+							A.name = "[self.name] Addiction"
+							A.addiction ="[self.name]"
+							A.cure = self.id
+							M.viruses += A
+							A.affected_mob = M
+							A.holder = M
 				return 1
 
 			reaction_obj(var/obj/O, var/volume) //By default we transfer a small part of the reagent to the object
@@ -579,6 +593,7 @@ datum
 			description = "An illegal chemical compound used as drug."
 			reagent_state = LIQUID
 			color = "#60A584" // rgb: 96, 165, 132
+			addictiveness = 25
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -789,7 +804,8 @@ datum
 
 			reaction_turf(var/turf/T, var/volume)
 				src = null
-				if(!istype(T, /turf/space))
+				// Only add one dirt per turf.  Was causing people to crash.
+				if(!istype(T, /turf/space) && !(locate(/obj/effect/decal/cleanable/dirt) in T))
 					new /obj/effect/decal/cleanable/dirt(T)
 
 		chlorine
@@ -1144,6 +1160,7 @@ datum
 			color = "#C855DC"
 			overdose_dam = 0
 			overdose = 60
+			addictiveness = 5
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1185,6 +1202,7 @@ datum
 			description = "A simple, yet effective painkiller."
 			reagent_state = LIQUID
 			color = "#FAEBD7" //rgb 250, 235, 215
+			addictiveness = 50
 
 		oxycodone
 			name = "Oxycodone"
@@ -1192,6 +1210,7 @@ datum
 			description = "An effective and very addictive painkiller."
 			reagent_state = LIQUID
 			color = "#8A2BE2" // rgb 138, 43, 226
+			addictiveness = 80
 
 		virus_food
 			name = "Virus Food"
@@ -1856,12 +1875,24 @@ datum
 				..()
 				return
 
+		benazine
+			name = "Benazine"
+			id = "benazine"
+			description = "An innocuous cold medicine, good against Coldingtons. It is also the precursor of the highly addictive stiumlant hyperzine."
+			reagent_state = LIQUID
+			color = "#CCFF00" // rgb: 204, 255, 0
+
+			on_mob_life(var/mob/living/M as mob)
+				..()
+				return
+
 		hyperzine
 			name = "Hyperzine"
 			id = "hyperzine"
-			description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
-			reagent_state = LIQUID
-			color = "#CCFF00" // rgb: 204, 255, 0
+			description = "Hyperzine is a highly effective, long lasting, muscle stimulant. It is highly addictive."
+			reagent_state = SOLID
+			color = "#FFFFFF" // rgb: 255,255,255
+			addictiveness = 80
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
@@ -1975,7 +2006,10 @@ datum
 
 			on_mob_life(var/mob/living/carbon/M as mob)
 				if(!M) M = holder.my_atom
-				M.status_flags |= FAKEDEATH
+				if(volume >= 1) //Hotfix for Fakedeath never ending.
+					M.status_flags |= FAKEDEATH
+				else
+					M.status_flags &= ~FAKEDEATH
 				M.adjustOxyLoss(0.5*REM)
 				M.adjustToxLoss(0.5*REM)
 				M.Weaken(10)
@@ -1984,11 +2018,11 @@ datum
 				..()
 				return
 
-			Del()
+			/*Del()
 				if(holder && ismob(holder.my_atom))
 					var/mob/M = holder.my_atom
 					M.status_flags &= ~FAKEDEATH
-				..()
+				..()8*/
 
 		mindbreaker
 			name = "Mindbreaker Toxin"
@@ -1997,6 +2031,7 @@ datum
 			reagent_state = LIQUID
 			color = "#B31008" // rgb: 139, 166, 233
 			custom_metabolism = 0.05
+			addictiveness = 15
 
 			on_mob_life(var/mob/living/M)
 				if(!M) M = holder.my_atom
@@ -2084,6 +2119,7 @@ datum
 			description = "A highly addictive stimulant extracted from the tobacco plant."
 			reagent_state = LIQUID
 			color = "#181818" // rgb: 24, 24, 24
+			addictiveness = 90
 /*
 		ethanol
 			name = "Ethanol"

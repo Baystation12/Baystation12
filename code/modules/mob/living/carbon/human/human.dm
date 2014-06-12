@@ -5,7 +5,7 @@
 	voice_name = "unknown"
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
-	var/list/hud_list[9]
+	var/list/hud_list[10]
 	var/datum/species/species //Contains icon generation and language information, set during New().
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 
@@ -88,7 +88,7 @@
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
-
+	hud_list[NATIONS_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 
 	..()
 
@@ -128,6 +128,11 @@
 		if(status_flags & LEAPING)
 			loc = tmob.loc
 			status_flags &= ~LEAPING
+			now_pushing = 0
+			return
+
+		if(istype(tmob,/mob/living/silicon/robot/drone)) //I have no idea why the hell this isn't already happening. How do mice do it?
+			loc = tmob.loc
 			now_pushing = 0
 			return
 

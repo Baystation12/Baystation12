@@ -8,7 +8,9 @@
 	_color = "ba_suit"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
-
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 /obj/item/clothing/under/rank/captain //Alright, technically not a 'civilian' but its better then giving a .dm file for a single define.
 	desc = "It's a blue jumpsuit with some gold markings denoting the rank of \"Captain\"."
@@ -18,6 +20,9 @@
 	_color = "captain"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 
 /obj/item/clothing/under/rank/cargo
@@ -28,6 +33,9 @@
 	_color = "qm"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 
 /obj/item/clothing/under/rank/cargotech
@@ -38,6 +46,9 @@
 	_color = "cargo"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 
 /obj/item/clothing/under/rank/chaplain
@@ -48,6 +59,9 @@
 	_color = "chapblack"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 
 /obj/item/clothing/under/rank/chef
@@ -57,6 +71,9 @@
 	_color = "chef"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 
 /obj/item/clothing/under/rank/clown
@@ -76,6 +93,9 @@
 	_color = "hop"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 /obj/item/clothing/under/rank/head_of_personnel_whimsy
 	desc = "A blue jacket and red tie, with matching red cuffs! Snazzy. Wearing this makes you feel more important than your job title does."
@@ -95,6 +115,9 @@
 	permeability_coefficient = 0.50
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 
 /obj/item/clothing/under/rank/internalaffairs
@@ -105,6 +128,9 @@
 	_color = "internalaffairs"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 
 /obj/item/clothing/under/rank/janitor
@@ -115,6 +141,9 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 
 /obj/item/clothing/under/lawyer
@@ -127,24 +156,36 @@
 	item_state = "lawyer_black"
 	_color = "lawyer_black"
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 /obj/item/clothing/under/lawyer/female
 	icon_state = "black_suit_fem"
 	item_state = "black_suit_fem"
 	_color = "black_suit_fem"
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 /obj/item/clothing/under/lawyer/red
 	icon_state = "lawyer_red"
 	item_state = "lawyer_red"
 	_color = "lawyer_red"
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 /obj/item/clothing/under/lawyer/blue
 	icon_state = "lawyer_blue"
 	item_state = "lawyer_blue"
 	_color = "lawyer_blue"
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 /obj/item/clothing/under/lawyer/bluesuit
 	name = "Blue Suit"
@@ -153,6 +194,9 @@
 	item_state = "bluesuit"
 	_color = "bluesuit"
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 /obj/item/clothing/under/lawyer/purpsuit
 	name = "Purple Suit"
@@ -160,6 +204,9 @@
 	item_state = "lawyer_purp"
 	_color = "lawyer_purp"
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 /obj/item/clothing/under/lawyer/oldman
 	name = "Old Man's Suit"
@@ -168,6 +215,9 @@
 	item_state = "oldman"
 	_color = "oldman"
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 
 /obj/item/clothing/under/librarian
@@ -178,6 +228,9 @@
 	_color = "red_suit"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 
 /obj/item/clothing/under/mime
@@ -197,6 +250,9 @@
 	_color = "miner"
 	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/uniform.dmi'
+		)
 
 /obj/item/clothing/under/barber
 	desc = "It's a barber's uniform."

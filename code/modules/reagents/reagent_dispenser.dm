@@ -172,8 +172,11 @@
 
 
 /obj/structure/reagent_dispensers/fueltank/Move()
-	if (..() && modded)
+	..()
+	if(modded)
 		leak_fuel(amount_per_transfer_from_this)
+	if(rig)
+		rig.process_movement()
 
 /obj/structure/reagent_dispensers/fueltank/proc/leak_fuel(amount)
 	if (reagents.total_volume == 0)
@@ -182,6 +185,23 @@
 	amount = min(amount, reagents.total_volume)
 	reagents.remove_reagent("fuel",amount)
 	new /obj/effect/decal/cleanable/liquid_fuel(src.loc, amount)
+
+/obj/structure/reagent_dispensers/fueltank/HasProximity(atom/movable/AM)
+	if(rig)
+		rig.HasProximity(AM)
+
+/obj/structure/reagent_dispensers/fueltank/Crossed(atom/movable/AM)
+	if(rig)
+		rig.Crossed(AM)
+
+/obj/structure/reagent_dispensers/fueltank/hear_talk(mob/living/M, msg)
+	if(rig)
+		rig.hear_talk(M, msg)
+
+/obj/structure/reagent_dispensers/fueltank/Bump()
+	..()
+	if(rig)
+		rig.process_movement()
 
 /obj/structure/reagent_dispensers/peppertank
 	name = "Pepper Spray Refiller"

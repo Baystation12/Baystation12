@@ -14,16 +14,28 @@ var/global/datum/controller/occupations/job_master
 
 
 	proc/SetupOccupations(var/faction = "Station")
-		occupations = list()
-		var/list/all_jobs = typesof(/datum/job)
-		if(!all_jobs.len)
-			world << "\red \b Error setting up jobs, no job datums found"
-			return 0
-		for(var/J in all_jobs)
-			var/datum/job/job = new J()
-			if(!job)	continue
-			if(job.faction != faction)	continue
-			occupations += job
+		if(no_synthetic)
+			occupations = list()
+			var/list/all_jobs = typesof(/datum/job) -list(/datum/job/ai,/datum/job/cyborg)
+			if(!all_jobs.len)
+				world << "\red \b Error setting up jobs, no job datums found"
+				return 0
+			for(var/J in all_jobs)
+				var/datum/job/job = new J()
+				if(!job)	continue
+				if(job.faction != faction)	continue
+				occupations += job
+		else
+			occupations = list()
+			var/list/all_jobs = typesof(/datum/job)
+			if(!all_jobs.len)
+				world << "\red \b Error setting up jobs, no job datums found"
+				return 0
+			for(var/J in all_jobs)
+				var/datum/job/job = new J()
+				if(!job)	continue
+				if(job.faction != faction)	continue
+				occupations += job
 
 
 		return 1
@@ -249,7 +261,7 @@ var/global/datum/controller/occupations/job_master
 		for(var/mob/new_player/player in player_list)
 			if(player.ready && player.mind && !player.mind.assigned_role)
 				unassigned += player
-				if(player.client.prefs.randomslot) player.client.prefs.random_character()
+				if(player.client.prefs.randomslot) player.client.prefs.random_character(player.client)
 		Debug("DO, Len: [unassigned.len]")
 		if(unassigned.len == 0)	return 0
 
@@ -385,6 +397,10 @@ var/global/datum/controller/occupations/job_master
 				S = locate("start*[rank]") // use old stype
 			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
 				H.loc = S.loc
+			// Moving wheelchair if they have one
+			if(H.buckled && istype(H.buckled, /obj/structure/stool/bed/chair/wheelchair))
+				H.buckled.loc = H.loc
+				H.buckled.dir = H.dir
 
 		var/datum/money_account/M = create_account(H.real_name, rand(50,500)*10, null)
 		if(H.mind)

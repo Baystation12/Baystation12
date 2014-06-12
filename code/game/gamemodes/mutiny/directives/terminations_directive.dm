@@ -22,11 +22,26 @@ datum/directive/terminations/directives_complete()
 	return ids_to_terminate.len == 0
 
 datum/directive/terminations/initialize()
-	for(var/mob/living/carbon/human/A in get_crew_to_terminate())
-		var/datum/money_account/account = A.mind.initial_account
+	for(var/mob/living/carbon/human/H in get_crew_to_terminate())
+		var/datum/money_account/account = H.mind.initial_account
 		accounts_to_revoke["[account.account_number]"] = 0
 		accounts_to_suspend["[account.account_number]"] = account.suspended
-		ids_to_terminate+=A.wear_id
+		ids_to_terminate+=(H.wear_id)
+
+datum/directive/terminations/get_remaining_orders()
+	var/text = ""
+	for(var/account_number in accounts_to_suspend)
+		if(!accounts_to_suspend[account_number])
+			text += "<li>Suspend Account #[account_number]</li>"
+
+	for(var/account_number in accounts_to_revoke)
+		if(!accounts_to_revoke[account_number])
+			text += "<li>Revoke Account #[account_number]</li>"
+
+	for(var/id in ids_to_terminate)
+		text += "<li>Terminate [id]</li>"
+
+	return text
 
 /hook/revoke_payroll/proc/payroll_directive(datum/money_account/account)
 	var/datum/directive/terminations/D = get_directive("terminations")

@@ -14,7 +14,6 @@
 	species_restricted = list("Tajaran")
 
 //Skrell space gear. Sleek like a wetsuit.
-
 /obj/item/clothing/head/helmet/space/skrell
 	name = "Skrellian helmet"
 	desc = "Smoothly contoured and polished to a shine. Still looks like a fishbowl."
@@ -52,10 +51,8 @@
 	_color = "skrell_suit_black"
 
 
-
 // Vox space gear (vaccuum suit, low pressure armour)
 // Can't be equipped by any other species due to bone structure and vox cybernetics.
-
 /obj/item/clothing/suit/space/vox
 	w_class = 3
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank)
@@ -63,12 +60,20 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECITON_TEMPERATURE
-	species_restricted = list("Vox")
+	species_restricted = list("Vox", "Vox Armalis")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/suit.dmi',
+		"Vox Armalis" = 'icons/mob/species/armalis/suit.dmi',
+		)
 
 /obj/item/clothing/head/helmet/space/vox
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 30, bio = 30, rad = 30)
 	flags = HEADCOVERSEYES|STOPSPRESSUREDMAGE
-	species_restricted = list("Vox")
+	species_restricted = list("Vox","Vox Armalis")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/head.dmi',
+		"Vox Armalis" = 'icons/mob/species/armalis/head.dmi',
+		)
 
 /obj/item/clothing/head/helmet/space/vox/pressure
 	name = "alien helmet"
@@ -143,19 +148,25 @@
 	item_state = "gloves-vox"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
-	_color="gloves-vox"
+	_color = "gloves-vox"
 	species_restricted = list("Vox","Vox Armalis")
-	species_fit = list("Vox Armalis")
-
-
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/gloves.dmi',
+		"Vox Armalis" = 'icons/mob/species/armalis/gloves.dmi',
+		)
 /obj/item/clothing/shoes/magboots/vox
 
 	desc = "A pair of heavy, jagged armoured foot pieces, seemingly suitable for a velociraptor."
 	name = "vox magclaws"
 	item_state = "boots-vox"
 	icon_state = "boots-vox"
+
 	species_restricted = list("Vox","Vox Armalis")
-	species_fit = list("Vox Armalis")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/feet.dmi',
+		"Vox Armalis" = 'icons/mob/species/armalis/feet.dmi',
+		)
+
 	action_button_name = "Toggle the magclaws"
 
 /obj/item/clothing/shoes/magboots/vox/attack_self(mob/user)
@@ -192,84 +203,11 @@
 	if (magpulse)
 		usr << "It would be hard to take these off without relaxing your grip first." //theoretically this message should only be seen by the wearer when the claws are equipped.
 
-
-//Vox Armalis gear.
-//Vox Armalis gear.
-/obj/item/clothing/shoes/magboots/vox/armalis
- 	name = "large vox magclaws"
- 	item_state = "boots-armalis"
- 	icon_state = "boots-armalis"
- 	icon_override = 'icons/mob/species/vox/armalis/shoes.dmi'
- 	species_restricted = list("Vox Armalis")
-
-/obj/item/clothing/gloves/yellow/vox/armalis
- 	name = "large insulated gauntlets"
- 	item_state = "gloves-armalis"
- 	icon_state = "gloves-armalis"
- 	icon_override = 'icons/mob/species/vox/armalis/hands.dmi'
- 	species_restricted = list("Vox Armalis")
-
-/obj/item/clothing/mask/breath/vox/armalis
- 	name = "large vox mask"
- 	item_state = "mask-armalis"
- 	icon_state = "mask-armalis"
- 	icon_override = 'icons/mob/species/vox/armalis/mask.dmi'
- 	species_restricted = list("Vox Armalis")
-
-/obj/item/clothing/suit/space/vox/carapace/armalis
-	name = "large alien carapace armour"
-	item_state = "armour-armalis"
-	icon_state = "armour-armalis"
-	icon_override = 'icons/mob/vox.dmi'
-	species_restricted = list("Vox Armalis")
-
-/obj/item/clothing/suit/space/vox/carapace/armalis
-	name = "large alien carapace armour"
-	item_state = "armour-armalis"
-	icon_state = "armour-armalis"
-	icon_override = 'icons/mob/vox.dmi'
-	species_restricted = list("Vox Armalis")
-
-//Species-specific Syndicate rigs.
-/obj/item/clothing/head/helmet/space/rig/syndi/tajara
-	icon_state = "rig0-syndie-taj"
-	item_state = "rig0-syndie-taj"
-	_color = "syndie-taj"
-	species_restricted = list("Tajaran")
-
-/obj/item/clothing/suit/space/rig/syndi/tajara
-	item_state = "rig-syndie-taj"
-	icon_state = "rig-syndie-taj"
-	species_restricted = list("Tajaran")
-
-/obj/item/clothing/head/helmet/space/rig/syndi/skrell
-	icon_state = "rig0-syndie-skrell"
-	item_state = "rig0-syndie-skrell"
-	_color = "syndie-skrell"
-	species_restricted = list("Skrell")
-
-/obj/item/clothing/suit/space/rig/syndi/skrell
-	item_state = "rig-syndie-skrell"
-	icon_state = "rig-syndie-skrell"
-	species_restricted = list("Skrell")
-
-/obj/item/clothing/head/helmet/space/rig/syndi/human
-	icon_state = "rig0-syndie-human"
-	item_state = "rig0-syndie-human"
-	_color = "syndie-human"
-	species_restricted = list("Human")
-
-/obj/item/clothing/suit/space/rig/syndi/human
-	item_state = "rig-syndie-human"
-	icon_state = "rig-syndie-human"
-	species_restricted = list("Human")
-	flags = FPRINT | TABLEPASS | STOPSPRESSUREDMAGE | ONESIZEFITSALL
-
 ////////////////UNATHI/////////////////////
 
 /obj/item/clothing/suit/space/rig/unathi
 	icon_state = "rig-unathi-engineering"
-	item_state = "rig_unathi-engineering"
+	item_state = "rig-unathi-engineering"
 	species_restricted = list("Unathi")
 
 /obj/item/clothing/suit/space/rig/security/unathi
@@ -287,17 +225,7 @@
 	item_state = "rig0-unathi-sec"
 	species_restricted = list("Unathi")
 
-/obj/item/clothing/head/helmet/space/rig/syndi/unathi
-	icon_state = "rig0-syndie-unathi"
-	item_state = "rig0-syndie-unathi"
-	_color = "syndie-unathi"
-	species_restricted = list("Unathi")
-
-/obj/item/clothing/suit/space/rig/syndi/unathi
-	item_state = "rig-syndie-unathi"
-	icon_state = "rig-syndie-unathi"
-	species_restricted = list("Unathi")
-
+//Unathi space gear. Huge and restrictive.
 /obj/item/clothing/head/helmet/space/unathi
 	armor = list(melee = 40, bullet = 30, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 50)
 	heat_protection = HEAD

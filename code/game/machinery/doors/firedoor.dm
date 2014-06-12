@@ -181,7 +181,6 @@
 			return
 
 
-
 /obj/machinery/door/firedoor/proc/latetoggle()
 	if(operating || stat & NOPOWER || !nextstate)
 		return
@@ -195,12 +194,15 @@
 	return
 
 /obj/machinery/door/firedoor/close()
+	..()
 	latetoggle()
-	return ..()
+	layer = 3.1
 
 /obj/machinery/door/firedoor/open()
+	..()
 	latetoggle()
-	return ..()
+	layer = 2.6
+
 
 
 /obj/machinery/door/firedoor/door_animate(animation)

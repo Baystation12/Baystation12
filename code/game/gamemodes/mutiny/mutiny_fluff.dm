@@ -154,7 +154,7 @@ Both keys are required to activate the <b>Emergency Authentication Device (EAD)<
 
 	proc/loyalist_major_victory()
 		return {"
-NanoTrasen has praised the efforts of Captain [mode.head_loyalist] and loyal members of [their(mode.head_loyalist)] crew, who recently managed to put down a mutiny--amid a local interstellar crisis--aboard the <b>[station_name()]</b>, a research station in Tau Ceti.
+NanoTrasen has praised the efforts of Captain [mode.head_loyalist] and loyal members of [their(mode.head_loyalist)] crew, who recently managed to put down a mutiny--amid a local interstellar crisis--aboard the <b>[station_name()]</b>, a research station in [system_name()].
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 Despite the mutiny, the crew was successful in implementing the directive and activating their on-board emergency authentication device.
 [mode.mutineers.len] members of the station's personnel were charged with sedition against the company and if found guilty will be sentenced to life incarceration.
@@ -165,7 +165,7 @@ NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [l
 
 	proc/loyalist_minor_victory()
 		return {"
-NanoTrasen has praised the efforts of Captain [mode.head_loyalist] and loyal members of [their(mode.head_loyalist)] crew, who recently managed to put down a mutiny--amid a local interstellar crisis--aboard the <b>[station_name()]</b>, a research station in Tau Ceti.
+NanoTrasen has praised the efforts of Captain [mode.head_loyalist] and loyal members of [their(mode.head_loyalist)] crew, who recently managed to put down a mutiny--amid a local interstellar crisis--aboard the <b>[station_name()]</b>, a research station in [system_name()].
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 Despite the mutiny, the crew was successful in implementing the directive. Unfortunately, they failed to notify Central Command of their successes due to a breach in the chain of command.
 [mode.mutineers.len] members of the station's personnel were charged with sedition against the Company and if found guilty will be sentenced to life incarceration.
@@ -176,7 +176,7 @@ NanoTrasen will be awarding [mode.loyalists.len] members of the crew with the [l
 
 	proc/no_victory()
 		return {"
-NanoTrasen has been thrust into turmoil following an apparent mutiny by key personnel aboard the <b>[station_name()]</b>, a research station in Tau Ceti.
+NanoTrasen has been thrust into turmoil following an apparent mutiny by key personnel aboard the <b>[station_name()]</b>, a research station in [system_name()].
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 No further information has yet emerged from the station or its crew, who are presumed to be in holding with NanoTrasen investigators.
 NanoTrasen officials refuse to comment.
@@ -187,7 +187,7 @@ Sources indicate that [mode.mutineers.len] members of the station's personnel ar
 
 	proc/mutineer_minor_victory()
 		return {"
-Reports have emerged that an impromptu mutiny has taken place, amid a local interstellar crisis, aboard the <b>[station_name()]</b>, a research station in Tau Ceti.
+Reports have emerged that an impromptu mutiny has taken place, amid a local interstellar crisis, aboard the <b>[station_name()]</b>, a research station in [system_name()].
 The mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 Information at present indicates that the top-secret directive--which has since been retracted--was invalid due to a broken authentication code. Members of the crew, including an unidentified Head of Staff, prevented the directive from being accomplished.
 [mode.mutineers.len] members of the station's personnel were released from interrogations today, following a mutiny investigation.
@@ -198,7 +198,7 @@ NanoTrasen has reprimanded [mode.loyalists.len] members of the crew for failing 
 
 	proc/mutineer_major_victory()
 		return {"
-NanoTrasen has praised the efforts of [mode.head_mutineer.assigned_role] [mode.head_mutineer] and several other members of the crew, who recently seized control of a research station in Tau Ceti--<b>[station_name()]</b>--amid a local interstellar crisis.
+NanoTrasen has praised the efforts of [mode.head_mutineer.assigned_role] [mode.head_mutineer] and several other members of the crew, who recently seized control of a research station in [system_name()]--<b>[station_name()]</b>--amid a local interstellar crisis.
 What appears to have been a "legitimate" mutiny was spurred by a top secret directive sent to the station, presumably in response to the crisis within the system.
 It has been revealed that the directive was invalid and fraudulent. Company officials have not released a statement about the source of the directive.
 Thanks to the efforts of the resistant members of the crew, the directive was not carried out.
@@ -206,4 +206,46 @@ Thanks to the efforts of the resistant members of the crew, the directive was no
 NanoTrasen has [mode.loyalists.len] members of the crew in holding, while it investigates the circumstances that led to the acceptance and initiation of an invalid directive.
 [mode.body_count.len] are believed to have died during the coup.
 <p>Even though the directive was not successfully implemented, NanoTrasen's image will forever be haunted by the fact that its authentication protocol was breached with such magnitude and that a mutiny was the result.</p>
+		"}
+
+	proc/secret_transcript()
+		return {"
+<center><h3>Corporate Rival Threat Assessment</h3></center>
+<center><b>Gilthari Exports Incident Transcript</b></center>
+<center><font color='red'>CONFIDENTIAL: PROPERTY OF NANOTRASEN</font></center>
+<i>Location:</i> Operator's Desk, D Deck, Polumetis Installation<br>
+<i>Time:</i> 16:11, May 24, 2558 (Sol Reckoning)<br>
+<br>
+<br>
+
+<center>\[Start of transcript\]</center>
+<center>\[Sound of an internal airlock door opening\]</center>
+TM: Thank you for coming to see me, Director. I'm afraid this is urgent.<br>
+D: Mr. Mitchell, first you send cryptic messages to my office and then you request to have me come personally to this barely lit closet you call a workstation; all of this to talk about a computer glitch?<br>
+<center>\[Sound of the internal airlock door shutting\]</center>
+TM: Do you remember <b>Mallory</b>?<br>
+D: Who?<br>
+TM: It's not who, it's what. The computer program we planted in the [system_name()] communications satellite.<br>
+D: What is so important about this computer program?<br>
+TM: We call her an eavesdropper. Captures network traffic, records it, and forwards the stream to the receiver autonomously.<br>
+D: Speak English <i>goddamnit</i>.<br>
+TM: Standard intelligence acquisition package, sir; we bug their satellite and listen. It's like we have their playbook and we know what their moves are going to be on the market before they make them.<br>
+D: So Mallory doesn't work?<br>
+TM: She worked, sir. We've had an ear on NanoTrasen's regional communications for weeks.<br>
+D: Any news about their <b>Plasma refinement process</b>?<br>
+TM: No sir. Our analysts believe they are using a separate channel for their most sensitive data.<br>
+D: So what's the problem?<br>
+TM: The intelligence hasn't been doing us any good. Anything that appears actionable, I send it to the analysts and they make a plan. Thing is, NanoTrasen always sees us coming.<br>
+D: Tim...<br>
+TM: I think they discovered the hack, sir. Case in point, <b>Energine Consolidated Solutions</b>. That subsidiary of ours that was awarded a lease on NanoTrasen's mining platform in Nyx? NanoTrasen acquired them a week before we made the announcement.<br>
+D: They know about they have a bug. <i>They left her on and fed her the information for us to hear</i>, those sneaks. How did they find it?<br>
+TM: Top secret communique came through. I'm not sure what happened. Either Mallory couldn't replicate the encryption scheme and garbled it going out or the transmission was already corrupted to begin with.<br>
+D: Either way the transmission caused NanoTrasen to look at the satellite. They found out about Mallory.<br>
+TM: Precisely sir. There's only so much I can do to cover our tracks from here.<br>
+D: I'm pulling the plug. We have assets in the sector that are capable of a job like this. Thank you for bringing this to my attention.<br>
+<center>\[Computer device chirps\]</center>
+D: One last thing, did you happen to read anything from those secure transmissions?<br>
+TM: Just the subject, 'Directive X'.<br>
+D: Directive X... Now what do you suppose that means?<br>
+<center>\[End of transcript\]</center>
 		"}

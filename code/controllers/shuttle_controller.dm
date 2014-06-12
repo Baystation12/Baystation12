@@ -59,7 +59,7 @@ datum/shuttle_controller/proc/recall()
 	if(direction == 1)
 		var/timeleft = timeleft()
 		if(alert == 0)
-			if(timeleft >= 600)
+			if(timeleft >= get_shuttle_arrive_time())
 				return
 			captain_announce("The emergency shuttle has been recalled.")
 			world << sound('sound/AI/shuttlerecalled.ogg')

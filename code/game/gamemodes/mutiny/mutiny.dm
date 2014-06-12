@@ -54,8 +54,9 @@ datum/game_mode/mutiny
 
 	proc/get_directive_candidates()
 		var/list/candidates[0]
-		for(var/T in typesof(/datum/directive) - /datum/directive)
+		for(var/T in (typesof(/datum/directive) - /datum/directive))
 			var/datum/directive/D = new T(src)
+//			world << D.name
 			if (D.meets_prerequisites())
 				candidates+=D
 		return candidates
@@ -86,18 +87,29 @@ datum/game_mode/mutiny
 			"right hand" = slot_r_hand)
 
 	proc/equip_head_loyalist()
-		var/mob/living/carbon/human/H = head_loyalist.current
-		captains_key = new(H)
-		H.equip_in_one_of_slots(captains_key, get_equipment_slots())
-		H.update_icons()
-		H.verbs += /mob/living/carbon/human/proc/recruit_loyalist
+		equip_head(head_loyalist, "loyalist", /mob/living/carbon/human/proc/recruit_loyalist)
 
 	proc/equip_head_mutineer()
-		var/mob/living/carbon/human/H = head_mutineer.current
-		secondary_key = new(H)
-		H.equip_in_one_of_slots(secondary_key, get_equipment_slots())
+		equip_head(head_mutineer, "mutineer", /mob/living/carbon/human/proc/recruit_mutineer)
+
+	proc/equip_head(datum/mind/head, faction, proc/recruitment_verb)
+		var/mob/living/carbon/human/H = head.current
+		H << "You are the Head [capitalize(faction)]!"
+		head.special_role = "head_[faction]"
+
+		var/slots = get_equipment_slots()
+		switch(faction)
+			if("loyalist")
+				if(captains_key) del(captains_key)
+				captains_key = new(H)
+				H.equip_in_one_of_slots(captains_key, slots)
+			if("mutineer")
+				if(secondary_key) del(secondary_key)
+				secondary_key = new(H)
+				H.equip_in_one_of_slots(secondary_key, slots)
+
 		H.update_icons()
-		H.verbs += /mob/living/carbon/human/proc/recruit_mutineer
+		H.verbs += recruitment_verb
 
 	proc/add_loyalist(datum/mind/M)
 		add_faction(M, "loyalist", loyalists)
@@ -148,6 +160,14 @@ datum/game_mode/mutiny
 	proc/unbolt_vault_door()
 		var/obj/machinery/door/airlock/vault = locate(/obj/machinery/door/airlock/vault)
 		vault.locked = 0
+
+	proc/make_secret_transcript()
+		var/obj/machinery/computer/telecomms/server/S = locate(/obj/machinery/computer/telecomms/server)
+		if(!S) return
+
+		var/obj/item/weapon/paper/crumpled/bloody/transcript = new(S.loc)
+		transcript.name = "secret transcript"
+		transcript.info = fluff.secret_transcript()
 
 	proc/can_be_recruited(datum/mind/M, role)
 		if(!M) return 0
@@ -208,65 +228,23 @@ datum/game_mode/mutiny
 
 		return 1
 
-	proc/check_antagonists_ui(admins)
-		var/turf/captains_key_loc = captains_key ? captains_key.get_loc_turf() : "Lost or Destroyed"
-		var/turf/secondary_key_loc = secondary_key ? secondary_key.get_loc_turf() : "Lost or Destroyed"
-		var/txt = {"
-			<h5>Context:</h5>
-			<p>
-				[current_directive.get_description()]
-			</p>
-			<h5>Orders:</h5>
-			<ol>
-				[fluff.get_orders()]
-			</ol>
-			<br>
-			<h5>Authentication:</h5>
-			<b>Captain's Key:</b> [captains_key_loc]
-			<a href='?src=\ref[admins];choice=activate_captains_key'>Activate</a><br>
-			<b>Secondary Key:</b> [secondary_key_loc]
-			<a href='?src=\ref[admins];choice=activate_secondary_key'>Activate</a><br>
-			<b>EAD: [ead ? ead.get_status() : "Lost or Destroyed"]</b>
-			<a href='?src=\ref[admins];choice=activate_ead'>Activate</a><br>
-			<hr>
-		"}
-
-		if(head_loyalist)
-			txt += check_role_table("Head Loyalist", list(head_loyalist), admins, 0)
-
-		var/list/loyal_crew = loyalists - head_loyalist
-		if(loyal_crew.len)
-			txt += check_role_table("Loyalists", loyal_crew, admins, 0)
-
-		if(head_mutineer)
-			txt += check_role_table("Head Mutineer", list(head_mutineer), admins, 0)
-
-		var/list/mutiny_crew = mutineers - head_mutineer
-		if(mutiny_crew.len)
-			txt += check_role_table("Mutineers", mutiny_crew, admins, 0)
-
-		if(body_count.len)
-			txt += check_role_table("Casualties", body_count, admins, 0)
-
-		return txt
-
 /datum/game_mode/mutiny/announce()
 	fluff.announce()
 
 /datum/game_mode/mutiny/pre_setup()
 	var/list/loyalist_candidates = get_head_loyalist_candidates()
 	if(!loyalist_candidates || loyalist_candidates.len == 0)
-		world << "Mutiny mode aborted: no valid candidates for head loyalist."
+		world << "\red Mutiny mode aborted: no valid candidates for head loyalist."
 		return 0
 
 	var/list/mutineer_candidates = get_head_mutineer_candidates()
 	if(!mutineer_candidates || mutineer_candidates.len == 0)
-		world << "Mutiny mode aborted: no valid candidates for head mutineer."
+		world << "\red Mutiny mode aborted: no valid candidates for head mutineer."
 		return 0
 
 	var/list/directive_candidates = get_directive_candidates()
 	if(!directive_candidates || directive_candidates.len == 0)
-		world << "Mutiny mode aborted: no valid candidates for Directive X."
+		world << "\red Mutiny mode aborted: no valid candidates for Directive X."
 		return 0
 
 	head_loyalist = pick(loyalist_candidates)
@@ -276,12 +254,7 @@ datum/game_mode/mutiny
 	return 1
 
 /datum/game_mode/mutiny/post_setup()
-	head_loyalist.current << "You are the Head Loyalist!"
-	head_loyalist.special_role = "head_loyalist"
 	equip_head_loyalist()
-
-	head_mutineer.current << "You are the Head Mutineer!"
-	head_mutineer.special_role = "head_mutineer"
 	equip_head_mutineer()
 
 	loyalists+=head_loyalist
@@ -290,25 +263,12 @@ datum/game_mode/mutiny
 	replace_nuke_with_ead()
 	current_directive.initialize()
 	unbolt_vault_door()
+	make_secret_transcript()
 
 	update_all_icons()
 	spawn(0)
 		reveal_directives()
 	..()
-
-/datum/game_mode/mutiny/check_antagonists_topic(href, href_list[])
-	switch(href_list["choice"])
-		if("activate_captains_key")
-			ead.captains_key = 1
-			return 1
-		if("activate_secondary_key")
-			ead.secondary_key = 1
-			return 1
-		if("activate_ead")
-			ead.activated = 1
-			return 1
-		else
-			return 0
 
 /mob/living/carbon/human/proc/recruit_loyalist()
 	set name = "Recruit Loyalist"

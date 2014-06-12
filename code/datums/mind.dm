@@ -52,7 +52,7 @@ datum/mind
 
 	var/datum/faction/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holder
-
+	var/datum/nations/nation			//associated nation for CTF
 	var/datum/vampire/vampire			//vampire holder
 
 	var/rev_cooldown = 0

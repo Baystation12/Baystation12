@@ -434,6 +434,86 @@
 
 
 //Fake our own death and fully heal. You will appear to be dead but regenerate fully after a short delay.
+/*
+/mob/verb/honk()
+	set name = "OH HOLY FUCK"
+	set category = "Debug"
+	var/yes = 0
+	if(src in mob_list)
+		yes = 1
+	else
+		var/mob/M = locate(src) in mob_list
+		if(M == src)
+			yes = 1
+	usr << "[yes ? "\blue" : "\red"] You are [yes ? "" : "not "]in the mob list"
+*/
+/mob/proc/changeling_returntolife()
+	set category = "Changeling"
+	set name = "Return To Life (20)"
+	var/datum/changeling/changeling = changeling_power(20,1,100,DEAD)
+	if(!changeling)	return
+
+	var/mob/living/carbon/C = src
+	if(changeling_power(20,1,100,DEAD))
+		changeling.chem_charges -= 20
+		dead_mob_list -= C
+		living_mob_list |= C
+		C.stat = CONSCIOUS
+		C.tod = null
+		C.setToxLoss(0)
+		C.setOxyLoss(0)
+		C.setCloneLoss(0)
+		C.setBrainLoss(0)
+		C.SetParalysis(0)
+		C.SetStunned(0)
+		C.SetWeakened(0)
+		C.radiation = 0
+		C.heal_overall_damage(C.getBruteLoss(), C.getFireLoss())
+		C.reagents.clear_reagents()
+		C.germ_level = 0
+		C.next_pain_time = 0
+		C.traumatic_shock = 0
+		if(ishuman(C))
+			var/mob/living/carbon/human/H = C
+			H.vessel.reagent_list = list()
+			H.vessel.add_reagent("blood",560)
+			H.shock_stage = 0
+			spawn(1)
+				H.fixblood()
+			for(var/organ_name in H.organs_by_name)
+				var/datum/organ/external/O = H.organs_by_name[organ_name]
+				for(var/obj/item/weapon/shard/shrapnel/s in O.implants)
+					if(istype(s))
+						O.implants -= s
+						H.contents -= s
+						del(s)
+				O.amputated = 0
+				O.brute_dam = 0
+				O.burn_dam = 0
+				O.damage_state = "00"
+				O.germ_level = 0
+				O.hidden = null
+				O.number_wounds = 0
+				O.open = 0
+				O.perma_injury = 0
+				O.stage = 0
+				O.status = 0
+				O.trace_chemicals = list()
+				O.wounds = list()
+				O.wound_update_accuracy = 1
+			for(var/organ_name in H.internal_organs)
+				var/datum/organ/internal/IO = H.internal_organs[organ_name]
+				IO.damage = 0
+				IO.trace_chemicals = list()
+			H.updatehealth()
+		C << "<span class='notice'>We have regenerated.</span>"
+		C.visible_message("<span class='warning'>[src] appears to wake from the dead, having healed all wounds.</span>")
+		C.status_flags &= ~(FAKEDEATH)
+		C.update_canmove()
+		C.make_changeling()
+	src.verbs -= /mob/proc/changeling_returntolife
+	feedback_add_details("changeling_powers","RJ")
+
 /mob/proc/changeling_fakedeath()
 	set category = "Changeling"
 	set name = "Regenerative Stasis (20)"
@@ -453,80 +533,9 @@
 	C.emote("gasp")
 	C.tod = worldtime2text()
 
-	spawn(rand(800,2000))
-		if(changeling_power(20,1,100,DEAD))
-			// charge the changeling chemical cost for stasis
-			changeling.chem_charges -= 20
-
-			// shut down various types of badness
-			C.setToxLoss(0)
-			C.setOxyLoss(0)
-			C.setCloneLoss(0)
-			C.setBrainLoss(0)
-			C.SetParalysis(0)
-			C.SetStunned(0)
-			C.SetWeakened(0)
-
-			// shut down ongoing problems
-			C.radiation = 0
-			C.nutrition = 400
-			C.bodytemperature = 310
-			C.sdisabilities = 0
-			C.disabilities = 0
-			C.blinded = 0
-
-			// fix blindness and deafness
-			C.eye_blind = 0
-			C.eye_blurry = 0
-			C.ear_deaf = 0
-			C.ear_damage = 0
-
-			// head actual damage numbers
-			C.heal_overall_damage(1000, 1000)
-
-			// get rid of the reagents
-			C.reagents.clear_reagents()
-
-			// cure diseases
-			for(var/datum/disease/D in viruses)
-				D.cure(0)
-
-			// fix all the organs
-			C.restore_all_organs()
-
-			// restore blood
-			if(ishuman(C))
-				var/mob/living/carbon/human/human_mob = C
-				human_mob.restore_blood()
-
-			// remove the character from the list of the dead
-			if(C.stat == 2)
-				dead_mob_list -= src
-				living_mob_list += src
-
-			// make us conscious again
-			C.stat = CONSCIOUS
-
-			// remove the time of death
-			C.tod = null
-
-			// fix all the icons
-			C.regenerate_icons()
-
-			// remove our fake death flag
-			C.status_flags &= ~(FAKEDEATH)
-
-			// let us move again
-			C.update_canmove()
-
-			// re-add out changeling powers
-			C.make_changeling()
-
-			// sending display messages
-			C << "<span class='notice'>We have regenerated.</span>"
-			C.visible_message("<span class='warning'>[src] appears to wake from the dead, having healed all wounds.</span>")
-
-
+	spawn(rand(800,1200))
+		src << "<span class='warning'>We are now ready to regenerate.</span>"
+		src.verbs += /mob/proc/changeling_returntolife
 	feedback_add_details("changeling_powers","FD")
 	return 1
 

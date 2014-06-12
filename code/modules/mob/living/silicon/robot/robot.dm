@@ -102,10 +102,7 @@
 		modtype = "Security"
 	else if(istype(src,/mob/living/silicon/robot/drone))
 		laws = new /datum/ai_laws/drone()
-		connected_ai = select_active_ai_with_fewest_borgs()
-		if(connected_ai)
-			connected_ai.connected_robots += src
-			lawsync()
+		connected_ai = null
 	else
 		if(mmi.alien || alien)
 			laws = new /datum/ai_laws/alienmov()
@@ -157,6 +154,7 @@
 	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
 	hud_list[SPECIALROLE_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[NATIONS_HUD] = image('icons/mob/hud.dmi', src, "hudblank")
 
 	if(istype(src,/mob/living/silicon/robot/drone))
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
@@ -1052,9 +1050,9 @@
 	if(!I || !istype(I, /obj/item/weapon/card/id) || !I.access) //not ID or no access
 		return 0
 	for(var/req in req_access)
-		if(!(req in I.access)) //doesn't have this access
-			return 0
-	return 1
+		if(req in I.access) //have one of the required accesses
+			return 1
+	return 0
 
 /mob/living/silicon/robot/proc/updateicon()
 

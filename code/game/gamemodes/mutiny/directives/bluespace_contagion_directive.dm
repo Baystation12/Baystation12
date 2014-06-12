@@ -1,8 +1,14 @@
 #define INFECTION_COUNT 5
 
 datum/directive/bluespace_contagion
-	var/infection_count = 5
 	var/list/infected = list()
+
+	proc/get_infection_candidates()
+		var/list/candidates[0]
+		for(var/mob/M in player_list)
+			if (!M.is_mechanical() && M.is_ready())
+				candidates+=(M)
+		return candidates
 
 datum/directive/bluespace_contagion/get_description()
 	return {"
@@ -14,13 +20,13 @@ datum/directive/bluespace_contagion/get_description()
 	"}
 
 datum/directive/bluespace_contagion/initialize()
-	var/list/candidates = player_list.Copy()
+	var/list/candidates = get_infection_candidates()
 	var/list/infected_names = list()
 	for(var/i=0, i < INFECTION_COUNT, i++)
 		if(!candidates.len)
 			break
 
-		var/mob/living/carbon/human/candidate = pick(candidates)
+		var/mob/candidate = pick(candidates)
 		candidates-=candidate
 		infected+=candidate
 		infected_names+="[candidate.mind.assigned_role] [candidate.mind.name]"
@@ -31,10 +37,17 @@ datum/directive/bluespace_contagion/initialize()
 		"If no cure arrives after that time, execute the infected.")
 
 datum/directive/bluespace_contagion/meets_prerequisites()
-	return player_list.len >= 7
+	var/list/candidates = get_infection_candidates()
+	return candidates.len >= 7
 
 datum/directive/bluespace_contagion/directives_complete()
 	return infected.len == 0
+
+datum/directive/bluespace_contagion/get_remaining_orders()
+	var/text = ""
+	for(var/victim in infected)
+		text += "<li>Kill [victim]</li>"
+	return text
 
 /hook/death/proc/infected_killed(mob/living/carbon/human/deceased, gibbed)
 	var/datum/directive/bluespace_contagion/D = get_directive("bluespace_contagion")

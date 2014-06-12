@@ -7,12 +7,59 @@
  + cuff_white
 --- Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\left\flags_left.dmi
 +++ Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\right\flags_left.dmi
+ + atmosflag
+ + atmosflag_fire
  + cargoflag
+ + cargoflag_fire
+ + cargoflag_old
  + clownflag
+ + clownflag_fire
+ + cultflag
+ + cultflag_fire
+ + dionaflag
+ + dionaflag_fire
+ + fire
+ + greyflag
+ + greyflag_fire
+ + greysflag
+ + greysflag_fire
+ + humanflag
+ + humanflag_fire
+ + ianflag
+ + ianflag_fire
+ + kidanflag
+ + kidanflag_fire
+ + machineflag
+ + machineflag_fire
  + medflag
+ + medflag_fire
+ + mimeflag
+ + mimeflag_fire
+ + ninjaflag
+ + ninjaflag_fire
  + ntflag
+ + ntflag_fire
+ + ponyflag
+ + ponyflag_fire
+ + rndflag
+ + rndflag_fire
  + secflag
+ + secflag_fire
+ + secflag_old
+ + skrellflag
+ + skrellflag_fire
+ + slimeflag
+ + slimeflag_fire
  + syndiflag
+ + syndiflag_fire
+ + tajflag
+ + tajflag_fire
+ + unathiflag
+ + unathiflag_fire
+ + voxflag
+ + voxflag_fire
+ + wizflag
+ + wizflag_fire
 --- Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\left\guns.dmi
 +++ Z:\Git\Space Station 13\Baystation12\icons\mob\in-hand\right\guns.dmi
  + scythe0

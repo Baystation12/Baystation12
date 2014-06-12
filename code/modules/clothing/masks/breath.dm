@@ -7,8 +7,14 @@
 	w_class = 2
 	gas_transfer_coefficient = 0.10
 	permeability_coefficient = 0.50
+	species_fit = list("Vox")
 	var/hanging = 0
 	species_fit = list("Vox", "Vox Armalis")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/mask.dmi',
+		"Vox Armalis" = 'icons/mob/species/armalis/mask.dmi',
+		)
+
 
 	verb/toggle()
 		set category = "Object"
@@ -20,14 +26,14 @@
 				src.hanging = !src.hanging
 				gas_transfer_coefficient = 1 //gas is now escaping to the turf and vice versa
 				flags &= ~(MASKCOVERSMOUTH | MASKINTERNALS)
-				icon_state = "breathdown"
+				icon_state = "[initial(icon_state)]down"
 				usr << "Your mask is now hanging on your neck."
 
 			else
 				src.hanging = !src.hanging
 				gas_transfer_coefficient = 0.10
 				flags |= MASKCOVERSMOUTH | MASKINTERNALS
-				icon_state = "breath"
+				icon_state = "[initial(icon_state)]"
 				usr << "You pull the mask up to cover your face."
 			usr.update_inv_wear_mask()
 
@@ -38,3 +44,11 @@
 	item_state = "medical"
 	permeability_coefficient = 0.01
 	species_fit = list("Vox")
+
+/obj/item/clothing/mask/breath/vox
+	desc = "A weirdly-shaped breath mask."
+	name = "vox breath mask"
+	icon_state = "voxmask"
+	item_state = "voxmask"
+	permeability_coefficient = 0.01
+	species_restricted = list("Vox")

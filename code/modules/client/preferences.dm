@@ -30,9 +30,9 @@ var/const/MAX_SAVE_SLOTS = 10
 
 datum/preferences
 	//doohickeys for savefiles
-	var/path
+//	var/path
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
-	var/savefile_version = 0
+//	var/savefile_version = 0
 
 	//non-preference stuff
 	var/warns = 0
@@ -41,7 +41,7 @@ datum/preferences
 	var/last_id
 
 	//game-preferences
-	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
+//	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#b82e00"
 	var/be_special = 0					//Special role selection
 	var/UI_style = "Midnight"
@@ -108,10 +108,10 @@ datum/preferences
 	var/list/organ_data = list()
 
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
-	var/accent = "en-us"
-	var/voice = "m1"
-	var/pitch = 50
-	var/talkspeed = 175
+//	var/accent = "en-us"
+//	var/voice = "m1"
+//	var/pitch = 50
+//	var/talkspeed = 175
 	var/flavor_text = ""
 	var/med_record = ""
 	var/sec_record = ""
@@ -136,9 +136,9 @@ datum/preferences
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 	if(istype(C))
 		if(!IsGuestKey(C.key))
-			load_path(C.ckey)
-			if(load_preferences())
-				if(load_character())
+//			load_path(C.ckey)
+			if(load_preferences(C))
+				if(load_character(C))
 					return
 	gender = pick(MALE, FEMALE)
 	real_name = random_name(gender)
@@ -153,21 +153,17 @@ datum/preferences
 
 		dat += "<a href='?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Character Settings</a>"
 		dat += "<a href='?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Game Preferences</a>"
-		if(!path)
-			dat += "Please create an account to save your preferences."
-
 		dat += "</center>"
 		dat += "<HR>"
 
 		switch(current_tab)
 			if (0) // Character Settings#
-				if(path)
-					dat += "<center>"
-					dat += "Slot <b>[slot_name]</b> - "
-					dat += "<a href=\"byond://?src=\ref[user];preference=open_load_dialog\">Load slot</a> - "
-					dat += "<a href=\"byond://?src=\ref[user];preference=save\">Save slot</a> - "
-					dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Reload slot</a>"
-					dat += "</center>"
+				dat += "<center>"
+				dat += "Slot <b>[slot_name]</b> - "
+				dat += "<a href=\"byond://?src=\ref[user];preference=open_load_dialog\">Load slot</a> - "
+				dat += "<a href=\"byond://?src=\ref[user];preference=save\">Save slot</a> - "
+				dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Reload slot</a>"
+				dat += "</center>"
 				dat += "<center><h2>Occupation Choices</h2>"
 				dat += "<a href='?_src_=prefs;preference=job;task=menu'>Set Occupation Preferences</a><br></center>"
 				dat += "<h2>Identity</h2>"
@@ -186,17 +182,15 @@ datum/preferences
 				dat += "<br>"
 				dat += "Species: <a href='?_src_=prefs;preference=species;task=input'>[species]</a><br>"
 				dat += "Secondary Language:<br><a href='?_src_=prefs;preference=language;task=input'>[language]</a><br>"
-/*				dat += "Accent: <a href='?_src_=prefs;preference=accent;task=input'>[accent]</a><br>"
-				dat += "Voice: <a href='?_src_=prefs;preference=voice;task=input'>[voice]</a><br>"
-				dat += "Pitch: <a href='?_src_=prefs;preference=pitch;task=input'>[pitch]</a><br>"
-				dat += "Talking Speed: <a href='?_src_=prefs;preference=talkspeed;task=input'>[talkspeed]</a><br>"*/
 				dat += "Blood Type: <a href='?_src_=prefs;preference=b_type;task=input'>[b_type]</a><br>"
-				dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
+				if(species == "Human")
+					dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
 		//		dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
 				dat += "<br><b>Handicaps</b><br>"
 				dat += "\t<a href='?_src_=prefs;preference=disabilities'><b>\[Set Disabilities\]</b></a><br>"
 				dat += "Limbs: <a href='?_src_=prefs;preference=limbs;task=input'>Adjust</a><br>"
-				dat += "Internal Organs: <a href='?_src_=prefs;preference=organs;task=input'>Adjust</a><br>"
+				if(species != "Slime People" && species != "Machine")
+					dat += "Internal Organs: <a href='?_src_=prefs;preference=organs;task=input'>Adjust</a><br>"
 
 				//display limbs below
 				var/ind = 0
@@ -302,8 +296,9 @@ datum/preferences
 				dat += "<br><b>Eyes</b><br>"
 				dat += "<a href='?_src_=prefs;preference=eyes;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font><br>"
 
-				dat += "<br><b>Body Color</b><br>"
-				dat += "<a href='?_src_=prefs;preference=skin;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin)]'><tr><td>__</td></tr></table></font>"
+				if(species == "Unathi" || species == "Tajaran" || species == "Skrell")
+					dat += "<br><b>Body Color</b><br>"
+					dat += "<a href='?_src_=prefs;preference=skin;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin)]'><tr><td>__</td></tr></table></font>"
 
 				dat += "</td></tr></table><hr><center>"
 
@@ -316,7 +311,6 @@ datum/preferences
 				dat += "-Alpha(transparence): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
 				dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(sound & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(sound & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
-				dat += "<b>Hear player voices:</b> <a href='?_src_=prefs;preference=player_voices'><b>[(sound & SOUND_VOICES) ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Randomized Character Slot:</b> <a href='?_src_=prefs;preference=randomslot'><b>[randomslot ? "Yes" : "No"]</b></a><br>"
 				dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "Nearest Creatures" : "All Speech"]</b></a><br>"
 				dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "Nearest Creatures" : "All Emotes"]</b></a><br>"
@@ -358,7 +352,7 @@ datum/preferences
 		popup.set_content(dat)
 		popup.open(0)
 
-	proc/SetChoices(mob/user, limit = 14, list/splitJobs = list("Chief Engineer","Head of Security"), width = 610, height = 650)
+	proc/SetChoices(mob/user, limit = 14, list/splitJobs = list("Chief Engineer","Research Director"), width = 610, height = 650)
 		if(!job_master)
 			return
 
@@ -1124,23 +1118,6 @@ datum/preferences
 							undershirt = undershirt_options.Find(new_undershirt)
 						ShowChoices(user)
 
-					if("accent")
-						var/new_accent = input(user, "Choose your accent. en-us:American, en:British, en-sc:Scottish, mb-de4-en:German, mb-fr1-en:French", "Character Preference") as null|anything in list("en-us", "en", "en-sc","mb-de4-en","mb-fr1-en")
-						if(new_accent)
-							accent = new_accent
-					if("voice")
-						var/new_voice = input(user, "Choose your voice. f:Female, m:Male", "Character Preference") as null|anything in list("f1","m1","f2","m2","f3","m3","f4","m4","f5","m5","m6","m7")
-						if(new_voice)
-							voice = new_voice
-					if("pitch")
-						var/new_pitch = input(user, "Choose your character's voice pitch:\n(0-99) Default is 50.", "Character Preference") as num|null
-						if(new_pitch)
-							pitch = max(min( round(text2num(new_pitch)), 99),0)
-					if("talkspeed")
-						var/new_talkspeed = input(user, "Choose your character's voice talk speed:\n(140-240) Default is 175.", "Character Preference") as num|null
-						if(new_talkspeed)
-							talkspeed = max(min( round(text2num(new_talkspeed)), 240),140)
-
 					if("eyes")
 						var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference") as color|null
 						if(new_eyes)
@@ -1329,16 +1306,16 @@ datum/preferences
 					if("ghost_radio")
 						toggles ^= CHAT_GHOSTRADIO
 
-					if("player_voices")
-						sound ^= SOUND_VOICES
+					if("ghost_radio")
+						toggles ^= CHAT_GHOSTRADIO
 
 					if("save")
-						save_preferences()
-						save_character()
+						save_preferences(user)
+						save_character(user)
 
 					if("reload")
-						load_preferences()
-						load_character()
+						load_preferences(user)
+						load_character(user)
 
 					if("open_load_dialog")
 						if(!IsGuestKey(user.key))
@@ -1348,7 +1325,7 @@ datum/preferences
 						close_load_dialog(user)
 
 					if("changeslot")
-						load_character(text2num(href_list["num"]))
+						load_character(user,text2num(href_list["num"]))
 						close_load_dialog(user)
 
 					if("tab")
@@ -1438,6 +1415,17 @@ datum/preferences
 		if(disabilities & DISABILITY_FLAG_DEAF)
 			character.sdisabilities|=DEAF
 
+		// Wheelchair necessary?
+		var/datum/organ/external/l_foot = character.get_organ("l_foot")
+		var/datum/organ/external/r_foot = character.get_organ("r_foot")
+		if((!l_foot || l_foot.status & ORGAN_DESTROYED) && (!r_foot || r_foot.status & ORGAN_DESTROYED))
+			var/obj/structure/stool/bed/chair/wheelchair/W = new /obj/structure/stool/bed/chair/wheelchair (character.loc)
+			character.buckled = W
+			character.update_canmove()
+			W.dir = character.dir
+			W.buckled_mob = character
+			W.add_fingerprint(character)
+
 		if(underwear > underwear_m.len || underwear < 1)
 			underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES
 		character.underwear = underwear
@@ -1457,25 +1445,35 @@ datum/preferences
 				character.gender = MALE
 
 	proc/open_load_dialog(mob/user)
+
+		var/DBQuery/query = dbcon.NewQuery("SELECT slot,real_name FROM characters WHERE ckey='[user.ckey]' ORDER BY slot")
+
 		var/dat = "<body>"
 		dat += "<tt><center>"
+		dat += "<b>Select a character slot to load</b><hr>"
+		var/name
 
-		var/savefile/S = new /savefile(path)
-		if(S)
-			dat += "<b>Select a character slot to load</b><hr>"
-			var/name
-			for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
-				S.cd = "/character[i]"
-				S["real_name"] >> name
-				if(!name)	name = "Character[i]"
-				if(i==default_slot)
-					name = "<b>[name]</b>"
-				dat += "<a href='?_src_=prefs;preference=changeslot;num=[i];'>[name]</a><br>"
+		for(var/i=1, i<=MAX_SAVE_SLOTS, i++)
+			if(!query.Execute())
+				var/err = query.ErrorMsg()
+				log_game("SQL ERROR during character slot loading. Error : \[[err]\]\n")
+				message_admins("SQL ERROR during character slot loading. Error : \[[err]\]\n")
+				return
+			while(query.NextRow())
+				if(i==text2num(query.item[1]))
+					name =  query.item[2]
+			if(!name)	name = "Character[i]"
+			if(i==default_slot)
+				name = "<b>[name]</b>"
+			dat += "<a href='?_src_=prefs;preference=changeslot;num=[i];'>[name]</a><br>"
+			name = null
 
 		dat += "<hr>"
 		dat += "<a href='byond://?src=\ref[user];preference=close_load_dialog'>Close</a><br>"
 		dat += "</center></tt>"
-		user << browse(dat, "window=saves;size=300x390")
-
+//		user << browse(dat, "window=saves;size=300x390")
+		var/datum/browser/popup = new(user, "saves", "<div align='center'>Character Saves</div>", 300, 390)
+		popup.set_content(dat)
+		popup.open(0)
 	proc/close_load_dialog(mob/user)
 		user << browse(null, "window=saves")

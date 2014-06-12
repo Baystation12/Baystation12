@@ -194,10 +194,6 @@ proc/issyndicate(mob/living/M as mob)
 	for(var/datum/objective/objective in syndicate.objectives)
 		syndicate.current << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 		obj_count++
-	for(var/obj/item/weapon/implant/explosive/E in syndicate.current.contents)
-		if (E.implanted)
-			syndicate.current << "The activation code for your explosive implant is <B>[E.phrase]</B>"
-			syndicate.store_memory("The activation code for your explosive implant is <B>[E.phrase]</B>")
 	return
 
 
@@ -226,27 +222,26 @@ proc/issyndicate(mob/living/M as mob)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/automatic/pistol(synd_mob), slot_belt)
 	synd_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(synd_mob.back), slot_in_backpack)
 
+	var/obj/item/clothing/suit/space/rig/syndi/new_suit = new(synd_mob)
+	var/obj/item/clothing/head/helmet/space/rig/syndi/new_helmet = new(synd_mob)
+
 	if(synd_mob.species)
+
 		var/race = synd_mob.species.name
 
-		if(race == "Unathi")
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/unathi(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/unathi(synd_mob), slot_head)
-		else if(race == "Tajaran")
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/tajara(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/tajara(synd_mob), slot_head)
-		else if(race == "Skrell")
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/skrell(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/skrell(synd_mob), slot_head)
-		else
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/human(synd_mob), slot_wear_suit)
-			synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/human(synd_mob), slot_head)
-	else
-		synd_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/space/rig/syndi/human(synd_mob), slot_wear_suit)
-		synd_mob.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/rig/syndi/human(synd_mob), slot_head)
+		switch(race)
+			if("Unathi")
+				new_suit.species_restricted = list("Unathi")
+			if("Tajaran")
+				new_suit.species_restricted = list("Tajaran")
+			if("Skrell")
+				new_suit.species_restricted = list("Skrell")
+
+	synd_mob.equip_to_slot_or_del(new_suit, slot_wear_suit)
+	synd_mob.equip_to_slot_or_del(new_helmet, slot_head)
 
 
-	var/obj/item/weapon/implant/explosive/E = new/obj/item/weapon/implant/explosive(synd_mob)
+	var/obj/item/weapon/implant/dexplosive/E = new/obj/item/weapon/implant/dexplosive(synd_mob)
 	E.imp_in = synd_mob
 	E.implanted = 1
 	synd_mob.update_icons()
@@ -337,6 +332,9 @@ proc/issyndicate(mob/living/M as mob)
 	if( syndicates.len || (ticker && istype(ticker.mode,/datum/game_mode/nuclear)) )
 		var/text = "<FONT size = 2><B>The syndicate operatives were:</B></FONT>"
 
+		var/purchases = ""
+		var/TC_uses = 0
+
 		for(var/datum/mind/syndicate in syndicates)
 
 			text += "<br>[syndicate.key] was [syndicate.name] ("
@@ -350,6 +348,14 @@ proc/issyndicate(mob/living/M as mob)
 			else
 				text += "body destroyed"
 			text += ")"
+
+			for(var/obj/item/device/uplink/H in world_uplinks)
+				if(H && H.uplink_owner && H.uplink_owner==syndicate.name)
+					TC_uses += H.used_TC
+					purchases += H.purchase_log
+
+
+		text += "(Syndicates used [TC_uses] TC) [purchases]"
 
 		world << text
 	return 1

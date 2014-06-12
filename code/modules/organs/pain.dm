@@ -91,7 +91,7 @@ mob/living/carbon/human/proc/handle_pain()
 	for(var/datum/organ/external/E in organs)
 		// amputated limbs don't cause pain
 		if(E.amputated) continue
-		if(E.status & ORGAN_DEAD) continue
+		if(E.status & ORGAN_DEAD|ORGAN_ROBOT) continue
 		var/dam = E.get_damage()
 		// make the choice of the organ depend on damage,
 		// but also sometimes use one of the less damaged ones

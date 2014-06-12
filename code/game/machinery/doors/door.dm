@@ -81,6 +81,14 @@
 			else
 				flick("door_deny", src)
 		return
+	if(istype(AM, /obj/structure/stool/bed/chair/wheelchair))
+		var/obj/structure/stool/bed/chair/wheelchair/wheel = AM
+		if(density)
+			if(wheel.pulling && (src.allowed(wheel.pulling)))
+				open()
+			else
+				flick("door_deny", src)
+		return
 	return
 
 
@@ -246,7 +254,7 @@
 	door_animate("closing")
 	src.density = 1
 	explosion_resistance = initial(explosion_resistance)
-	src.layer = 3.1
+	src.layer = 3.0
 	sleep(10)
 	update_icon()
 	if(visible && !glass)

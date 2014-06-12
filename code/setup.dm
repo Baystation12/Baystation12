@@ -689,8 +689,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define SOUND_MIDI		2
 #define SOUND_AMBIENCE	4
 #define SOUND_LOBBY		8
-#define SOUND_VOICES	16
-#define SOUND_STREAMING 32
+#define SOUND_STREAMING 16
 
 #define SOUND_DEFAULT (SOUND_ADMINHELP|SOUND_MIDI|SOUND_AMBIENCE|SOUND_LOBBY|SOUND_STREAMING)
 #define TOGGLES_DEFAULT (CHAT_OOC|CHAT_DEAD|CHAT_GHOSTEARS|CHAT_GHOSTSIGHT|CHAT_PRAYER|CHAT_RADIO|CHAT_ATTACKLOGS|CHAT_LOOC)
@@ -755,6 +754,7 @@ var/list/be_special_flags = list(
 #define IMPTRACK_HUD		7 // tracking implant
 #define SPECIALROLE_HUD 	8 // AntagHUD image
 #define STATUS_HUD_OOC		9 // STATUS_HUD without virus db check for someone being ill.
+#define NATIONS_HUD			10 //Show nations icons during nations gamemode
 
 //Pulse levels, very simplified
 #define PULSE_NONE		0	//so !M.pulse checks would be possible

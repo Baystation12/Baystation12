@@ -14,6 +14,7 @@ Note: Must be placed west/left of and R&D console to function.
 
 	var/max_material_storage = 100000 //All this could probably be done better with a list but meh.
 	var/m_amount = 0.0
+	var/plasteel_amount = 0.0
 	var/g_amount = 0.0
 	var/gold_amount = 0.0
 	var/silver_amount = 0.0
@@ -87,6 +88,9 @@ Note: Must be placed west/left of and R&D console to function.
 			if(g_amount >= 3750)
 				var/obj/item/stack/sheet/glass/G = new /obj/item/stack/sheet/glass(src.loc)
 				G.amount = round(g_amount / G.perunit)
+			if(plasteel_amount >= 2000)
+				var/obj/item/stack/sheet/plasteel/G = new /obj/item/stack/sheet/plasteel(src.loc)
+				G.amount = round(plasteel_amount / G.perunit)
 			if(plasma_amount >= 2000)
 				var/obj/item/stack/sheet/mineral/plasma/G = new /obj/item/stack/sheet/mineral/plasma(src.loc)
 				G.amount = round(plasma_amount / G.perunit)
@@ -162,6 +166,8 @@ Note: Must be placed west/left of and R&D console to function.
 				m_amount += amount * 3750
 			if(/obj/item/stack/sheet/glass)
 				g_amount += amount * 3750
+			if(/obj/item/stack/sheet/plasteel)
+				plasteel_amount += amount * 2000
 			if(/obj/item/stack/sheet/mineral/gold)
 				gold_amount += amount * 2000
 			if(/obj/item/stack/sheet/mineral/silver)

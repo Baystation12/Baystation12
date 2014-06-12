@@ -15,16 +15,16 @@ datum/directive/ipc_virus
 
 	proc/get_ipcs()
 		var/list/machines[0]
-		for(var/mob/living/carbon/human/H in player_list)
-			if (H.species.name == "Machine")
-				machines+=H
+		for(var/mob/M in player_list)
+			if (M.get_species() == "Machine" && M.is_ready())
+				machines+=(M)
 		return machines
 
 	proc/get_roboticists()
 		var/list/roboticists[0]
-		for(var/mob/living/carbon/human/H in player_list)
-			if (roboticist_roles.Find(H.mind.assigned_role))
-				roboticists+=H
+		for(var/mob/M in player_list)
+			if (roboticist_roles.Find(M.mind.assigned_role) && M.is_ready())
+				roboticists+=(M)
 		return roboticists
 
 datum/directive/ipc_virus/initialize()
@@ -37,7 +37,7 @@ datum/directive/ipc_virus/get_description()
 	return {"
 		<p>
 			IPC units have been found to be infected with a violent and undesired virus in Virgus Ferrorus system.
-			Risk to NSS Exodus IPC units has not been assessed. Further information is classified.
+			Risk to [station_name()] IPC units has not been assessed. Further information is classified.
 		</p>
 	"}
 
@@ -48,6 +48,19 @@ datum/directive/ipc_virus/meets_prerequisites()
 
 datum/directive/ipc_virus/directives_complete()
 	return brains_to_enslave.len == 0 && cyborgs_to_make.len == 0 && ids_to_terminate.len == 0
+
+datum/directive/ipc_virus/get_remaining_orders()
+	var/text = ""
+	for(var/brain in brains_to_enslave)
+		text += "<li>Debrain [brain]</li>"
+
+	for(var/brain in cyborgs_to_make)
+		text += "<li>Enslave [brain] as a Cyborg</li>"
+
+	for(var/id in ids_to_terminate)
+		text += "<li>Terminate [id]</li>"
+
+	return text
 
 /hook/debrain/proc/debrain_directive(obj/item/brain/B)
 	var/datum/directive/ipc_virus/D = get_directive("ipc_virus")
