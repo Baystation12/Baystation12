@@ -1096,7 +1096,22 @@ var/global/floorIsLava = 0
 	if(istype(H))
 		H.regenerate_icons()
 
-proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
+
+/*
+	helper proc to test if someone is a mentor or not.  Got tired of writing this same check all over the place.
+*/
+/proc/is_mentor(client/C)
+
+	if(!istype(C))
+		return 0
+	if(!C.holder)
+		return 0
+
+	if(C.holder.rights == R_MENTOR)
+		return 1
+	return 0
+
+/proc/get_options_bar(whom, detail = 2, name = 0, link = 1)
 	if(!whom)
 		return "<b>(*null*)</b>"
 	var/mob/M
