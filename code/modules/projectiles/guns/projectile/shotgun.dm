@@ -66,7 +66,7 @@
 	pumped = 0
 	if(chambered)//We have a shell in the chamber
 		chambered.loc = get_turf(src)//Eject casing
-		chambered.SpinAnimation(10, 1)
+		chambered.SpinAnimation(5, 1)
 		chambered = null
 		if(in_chamber)
 			in_chamber = null
@@ -121,5 +121,15 @@
 			desc = "Omar's coming!"
 
 /obj/item/weapon/gun/projectile/revolver/doublebarrel/attack_self(mob/living/user as mob)
-	user << "<span class = 'notice'>You break open \the [src].</span>"
-	..()
+	var/num_unloaded = 0
+	while (get_ammo() > 0)
+		var/obj/item/ammo_casing/CB
+		CB = magazine.get_round(0)
+		chambered = null
+		CB.loc = get_turf(src.loc)
+		CB.update_icon()
+		num_unloaded++
+	if (num_unloaded)
+		user << "<span class = 'notice'>You break open \the [src] and unload [num_unloaded] shell\s.</span>"
+	else
+		user << "<span class='notice'>[src] is empty.</span>"
