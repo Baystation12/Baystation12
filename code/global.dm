@@ -250,3 +250,6 @@ var/custom_event_msg = null
 //A connection is established on world creation. Ideally, the connection dies when the server restarts (After feedback logging.).
 var/DBConnection/dbcon = new()	//Feedback database (New database)
 var/DBConnection/dbcon_old = new()	//Tgstation database (Old database) - See the files in the SQL folder for information what goes where.
+
+// Reference list for disposal sort junctions. Filled up by sorting junction's New()
+/var/list/tagger_locations = list()

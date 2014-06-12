@@ -106,6 +106,11 @@
 			now_pushing = 0
 			return
 
+		if(istype(tmob,/mob/living/silicon/robot/drone)) //I have no idea why the hell this isn't already happening. How do mice do it?
+			loc = tmob.loc
+			now_pushing = 0
+			return
+
 		//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
 		if((tmob.a_intent == "help" || tmob.restrained()) && (a_intent == "help" || src.restrained()) && tmob.canmove && canmove) // mutual brohugs all around!
 			var/turf/oldloc = loc

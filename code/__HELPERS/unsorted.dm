@@ -493,7 +493,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		return -M
 
 
-/proc/key_name(var/whom, var/include_link = null, var/include_name = 1)
+/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1)
 	var/mob/M
 	var/client/C
 	var/key
@@ -538,7 +538,8 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		else if(M.name)
 			name = M.name
 
-		if(include_link && is_special_character(M))
+
+		if(include_link && is_special_character(M) && highlight_special_characters)
 			. += "/(<font color='#FFA500'>[name]</font>)" //Orange
 		else
 			. += "/([name])"
@@ -550,6 +551,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 
 //Will return the location of the turf an atom is ultimatly sitting on
+//isn't this just a null-reference-vulnerable copy of /proc/get_turf()?
 /proc/get_turf_loc(var/atom/movable/M) //gets the location of the turf that the atom is on, or what the atom is in is on, etc
 	//in case they're in a closet or sleeper or something
 	var/atom/loc = M.loc

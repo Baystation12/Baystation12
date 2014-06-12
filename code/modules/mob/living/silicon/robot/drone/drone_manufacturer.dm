@@ -30,8 +30,8 @@
 	if(ticker.current_state < GAME_STATE_PLAYING)
 		return
 
-	if((stat & NOPOWER || !produce_drones) && icon_state != "drone_fab_nopower")
-		icon_state = "drone_fab_nopower"
+	if(stat & NOPOWER || !produce_drones)
+		if(icon_state != "drone_fab_nopower") icon_state = "drone_fab_nopower"
 		return
 
 	if(drone_progress >= 100)

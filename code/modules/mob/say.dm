@@ -53,17 +53,19 @@
 	if(name != real_name)
 		alt_name = " (died as [real_name])"
 
-	message = src.say_quote(message)
-	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] <span class='message'>[message]</span></span>"
+	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] [pick("complains","moans","whines","laments","blubbers")], <span class='message'>\"[message]\"</span></span>"
 
 	for(var/mob/M in player_list)
 		if(istype(M, /mob/new_player))
 			continue
-		if(M.client && M.client.holder && (M.client.holder.rights & R_ADMIN|R_MOD) && (M.client.prefs.toggles & CHAT_DEAD)) // Show the message to admins/mods with deadchat toggled on
+		if(M.client && M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD))
+			M << rendered
+			continue
+
+		if(M.client && M.client.holder && !is_mentor(M.client) && (M.client.prefs.toggles & CHAT_DEAD) ) // Show the message to admins/mods with deadchat toggled on
 			M << rendered	//Admins can hear deadchat, if they choose to, no matter if they're blind/deaf or not.
 
-		else if(M.client && M.stat == DEAD && (M.client.prefs.toggles & CHAT_DEAD)) // Show the message to regular ghosts with deadchat toggled on.
-			M.show_message(rendered, 2) //Takes into account blindness and such.
+
 	return
 
 /mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)

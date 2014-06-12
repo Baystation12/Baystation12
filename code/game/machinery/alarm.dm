@@ -956,109 +956,29 @@ table tr:first-child th:first-child { border: none;}
 	return output
 
 /obj/machinery/alarm/Topic(href, href_list)
-
-	if(href_list["rcon"])
-		rcon_setting = text2num(href_list["rcon"])
-
-	if ( (get_dist(src, usr) > 1 ))
-		if (!istype(usr, /mob/living/silicon))
-			usr.machine = null
-			usr << browse(null, "window=air_alarm")
-			usr << browse(null, "window=AAlarmwires")
-			return
+	if(..() || !( Adjacent(usr) || istype(usr, /mob/living/silicon)) ) // dont forget calling super in machine Topics -walter0o
+		usr.machine = null
+		usr << browse(null, "window=air_alarm")
+		usr << browse(null, "window=AAlarmwires")
+		return
 
 	add_fingerprint(usr)
-	usr.machine = src
-
-	if(href_list["command"])
-		var/device_id = href_list["id_tag"]
-		switch(href_list["command"])
-			if( "power",
-				"adjust_external_pressure",
-				"set_external_pressure",
-				"checks",
-				"co2_scrub",
-				"tox_scrub",
-				"n2o_scrub",
-				"panic_siphon",
-				"scrubbing")
-
-				send_signal(device_id, list(href_list["command"] = text2num(href_list["val"]) ) )
-
-			if("set_threshold")
-				var/env = href_list["env"]
-				var/threshold = text2num(href_list["var"])
-				var/list/selected = TLV[env]
-				var/list/thresholds = list("lower bound", "low warning", "high warning", "upper bound")
-				var/newval = input("Enter [thresholds[threshold]] for [env]", "Alarm triggers", selected[threshold]) as null|num
-				if (isnull(newval) || ..() || (locked && issilicon(usr)))
-					return
-				if (newval<0)
-					selected[threshold] = -1.0
-				else if (env=="temperature" && newval>5000)
-					selected[threshold] = 5000
-				else if (env=="pressure" && newval>50*ONE_ATMOSPHERE)
-					selected[threshold] = 50*ONE_ATMOSPHERE
-				else if (env!="temperature" && env!="pressure" && newval>200)
-					selected[threshold] = 200
-				else
-					newval = round(newval,0.01)
-					selected[threshold] = newval
-				if(threshold == 1)
-					if(selected[1] > selected[2])
-						selected[2] = selected[1]
-					if(selected[1] > selected[3])
-						selected[3] = selected[1]
-					if(selected[1] > selected[4])
-						selected[4] = selected[1]
-				if(threshold == 2)
-					if(selected[1] > selected[2])
-						selected[1] = selected[2]
-					if(selected[2] > selected[3])
-						selected[3] = selected[2]
-					if(selected[2] > selected[4])
-						selected[4] = selected[2]
-				if(threshold == 3)
-					if(selected[1] > selected[3])
-						selected[1] = selected[3]
-					if(selected[2] > selected[3])
-						selected[2] = selected[3]
-					if(selected[3] > selected[4])
-						selected[4] = selected[3]
-				if(threshold == 4)
-					if(selected[1] > selected[4])
-						selected[1] = selected[4]
-					if(selected[2] > selected[4])
-						selected[2] = selected[4]
-					if(selected[3] > selected[4])
-						selected[3] = selected[4]
-
-				apply_mode()
-
-	if(href_list["screen"])
-		screen = text2num(href_list["screen"])
-
-	if(href_list["atmos_unlock"])
-		switch(href_list["atmos_unlock"])
-			if("0")
-				air_doors_close(1)
-			if("1")
-				air_doors_open(1)
-
-	if(href_list["atmos_alarm"])
-		if (alarm_area.atmosalert(2))
-			apply_danger_level(2)
-		update_icon()
-
-	if(href_list["atmos_reset"])
-		if (alarm_area.atmosalert(0))
-			apply_danger_level(0)
-		update_icon()
-
-	if(href_list["mode"])
-		mode = text2num(href_list["mode"])
-		apply_mode()
-
+	usr.set_machine(src)
+	
+	// hrefs that can always be called -walter0o
+	if(href_list["rcon"])
+		var/attempted_rcon_setting = text2num(href_list["rcon"])
+		
+		switch(attempted_rcon_setting)
+			if(RCON_NO)
+				rcon_setting = RCON_NO
+			if(RCON_AUTO)
+				rcon_setting = RCON_AUTO
+			if(RCON_YES)
+				rcon_setting = RCON_YES
+			else
+				return
+	
 	if(href_list["temperature"])
 		var/list/selected = TLV["temperature"]
 		var/max_temperature = min(selected[3] - T0C, MAX_TEMPERATURE)
@@ -1069,31 +989,126 @@ table tr:first-child th:first-child { border: none;}
 		else
 			target_temperature = input_temperature + T0C
 
-	if (href_list["AAlarmwires"])
-		var/t1 = text2num(href_list["AAlarmwires"])
-		if (!( istype(usr.equipped(), /obj/item/weapon/wirecutters) ))
-			usr << "You need wirecutters!"
-			return
-		if (isWireColorCut(t1))
-			mend(t1)
-		else
-			cut(t1)
-			if (AAlarmwires == 0)
-				usr << "<span class='notice'>You cut last of wires inside [src]</span>"
-				update_icon()
-				buildstage = 1
-			return
-
-	else if (href_list["pulse"])
-		var/t1 = text2num(href_list["pulse"])
-		if (!istype(usr.equipped(), /obj/item/device/multitool))
-			usr << "You need a multitool!"
-			return
-		if (isWireColorCut(t1))
-			usr << "You can't pulse a cut wire."
-			return
-		else
-			pulse(t1)
+	// hrefs that need the AA unlocked -walter0o
+	if(!locked || istype(usr, /mob/living/silicon))
+	
+		if(href_list["command"])
+			var/device_id = href_list["id_tag"]
+			switch(href_list["command"])
+				if( "power",
+					"adjust_external_pressure",
+					"set_external_pressure",
+					"checks",
+					"co2_scrub",
+					"tox_scrub",
+					"n2o_scrub",
+					"panic_siphon",
+					"scrubbing")
+	
+					send_signal(device_id, list(href_list["command"] = text2num(href_list["val"]) ) )
+	
+				if("set_threshold")
+					var/env = href_list["env"]
+					var/threshold = text2num(href_list["var"])
+					var/list/selected = TLV[env]
+					var/list/thresholds = list("lower bound", "low warning", "high warning", "upper bound")
+					var/newval = input("Enter [thresholds[threshold]] for [env]", "Alarm triggers", selected[threshold]) as null|num
+					if (isnull(newval) || ..() || (locked && issilicon(usr)))
+						return
+					if (newval<0)
+						selected[threshold] = -1.0
+					else if (env=="temperature" && newval>5000)
+						selected[threshold] = 5000
+					else if (env=="pressure" && newval>50*ONE_ATMOSPHERE)
+						selected[threshold] = 50*ONE_ATMOSPHERE
+					else if (env!="temperature" && env!="pressure" && newval>200)
+						selected[threshold] = 200
+					else
+						newval = round(newval,0.01)
+						selected[threshold] = newval
+					if(threshold == 1)
+						if(selected[1] > selected[2])
+							selected[2] = selected[1]
+						if(selected[1] > selected[3])
+							selected[3] = selected[1]
+						if(selected[1] > selected[4])
+							selected[4] = selected[1]
+					if(threshold == 2)
+						if(selected[1] > selected[2])
+							selected[1] = selected[2]
+						if(selected[2] > selected[3])
+							selected[3] = selected[2]
+						if(selected[2] > selected[4])
+							selected[4] = selected[2]
+					if(threshold == 3)
+						if(selected[1] > selected[3])
+							selected[1] = selected[3]
+						if(selected[2] > selected[3])
+							selected[2] = selected[3]
+						if(selected[3] > selected[4])
+							selected[4] = selected[3]
+					if(threshold == 4)
+						if(selected[1] > selected[4])
+							selected[1] = selected[4]
+						if(selected[2] > selected[4])
+							selected[2] = selected[4]
+						if(selected[3] > selected[4])
+							selected[3] = selected[4]
+	
+					apply_mode()
+	
+		if(href_list["screen"])
+			screen = text2num(href_list["screen"])
+	
+		if(href_list["atmos_unlock"])
+			switch(href_list["atmos_unlock"])
+				if("0")
+					air_doors_close(1)
+				if("1")
+					air_doors_open(1)
+	
+		if(href_list["atmos_alarm"])
+			if (alarm_area.atmosalert(2))
+				apply_danger_level(2)
+			update_icon()
+	
+		if(href_list["atmos_reset"])
+			if (alarm_area.atmosalert(0))
+				apply_danger_level(0)
+			update_icon()
+	
+		if(href_list["mode"])
+			mode = text2num(href_list["mode"])
+			apply_mode()
+	
+	// hrefs that need the AA wires exposed, note that borgs should be in range here too -walter0o
+	if(wiresexposed && Adjacent(usr))
+	
+		if (href_list["AAlarmwires"])
+			var/t1 = text2num(href_list["AAlarmwires"])
+			if (!( istype(usr.equipped(), /obj/item/weapon/wirecutters) ))
+				usr << "You need wirecutters!"
+				return
+			if (isWireColorCut(t1))
+				mend(t1)
+			else
+				cut(t1)
+				if (AAlarmwires == 0)
+					usr << "<span class='notice'>You cut last of wires inside [src]</span>"
+					update_icon()
+					buildstage = 1
+				return
+	
+		else if (href_list["pulse"])
+			var/t1 = text2num(href_list["pulse"])
+			if (!istype(usr.equipped(), /obj/item/device/multitool))
+				usr << "You need a multitool!"
+				return
+			if (isWireColorCut(t1))
+				usr << "You can't pulse a cut wire."
+				return
+			else
+				pulse(t1)
 
 	updateUsrDialog()
 

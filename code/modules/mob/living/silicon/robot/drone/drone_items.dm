@@ -53,9 +53,12 @@
 	wrapped = null
 	//update_icon()
 
-/obj/item/weapon/gripper/afterattack(atom/target, mob/user as mob)
+/obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	return
 
-	if(!target) //Target is invalid.
+/obj/item/weapon/gripper/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
+
+	if(!target || !flag) //Target is invalid or we are not adjacent.
 		return
 
 	//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
@@ -139,7 +142,12 @@
 		"plastic" = 0
 		)
 
-/obj/item/weapon/matter_decompiler/afterattack(atom/target, mob/user as mob)
+/obj/item/weapon/matter_decompiler/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	return
+
+/obj/item/weapon/matter_decompiler/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, flag, params)
+
+	if(!flag) return //Not adjacent.
 
 	//We only want to deal with using this on turfs. Specific items aren't important.
 	var/turf/T = get_turf(target)
@@ -160,7 +168,7 @@
 			stored_comms["plastic"]++
 			return
 
-		else if(istype(M,/mob/living/silicon/robot/drone) && M.stat == 2 && !M.client)
+		else if(istype(M,/mob/living/silicon/robot/drone) && !M.client)
 
 			var/mob/living/silicon/robot/drone/D = src.loc
 
