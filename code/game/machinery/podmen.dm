@@ -123,9 +123,6 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 
 	if(realName)
 		podman.real_name = realName
-	else
-		podman.real_name = "diona nymph ([rand(100,999)])"
-
 	podman.dna.real_name = podman.real_name
 
 	// Update mode specific HUD icons.

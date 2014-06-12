@@ -23,7 +23,6 @@
 										"diamond"=0,
 										"phoron"=0,
 										"uranium"=0,
-										//"bananium"=0 No need to state what it can no longer hold
 										)
 	var/res_max_amount = 200000
 	var/datum/research/files
@@ -36,6 +35,7 @@
 	var/screen = "main"
 	var/opened = 0
 	var/temp
+	var/output_dir = SOUTH	//the direction relative to the fabber at which completed parts appear.
 	var/list/part_sets = list( //set names must be unique
 	"Robot"=list(
 						/obj/item/robot_parts/robot_suit,
@@ -362,11 +362,11 @@
 
 /obj/machinery/mecha_part_fabricator/proc/build_part(var/obj/item/part)
 	if(!part) return
-	
+
 	 // critical exploit prevention, do not remove unless you replace it -walter0o
 	if( !(locate(part, src.contents)) || !(part.vars.Find("construction_time")) || !(part.vars.Find("construction_cost")) ) // these 3 are the current requirements for an object being buildable by the mech_fabricator
 		return
-	
+
 	src.being_built = new part.type(src)
 	src.desc = "It's building [src.being_built]."
 	src.remove_resources(part)
@@ -378,7 +378,7 @@
 	src.overlays -= "fab-active"
 	src.desc = initial(src.desc)
 	if(being_built)
-		src.being_built.Move(get_step(src,SOUTH))
+		src.being_built.Move(get_step(src,output_dir))
 		src.visible_message("\icon[src] <b>[src]</b> beeps, \"The following has been completed: [src.being_built] is built\".")
 		src.being_built = null
 	src.updateUsrDialog()
@@ -503,7 +503,7 @@
 				src.updateUsrDialog()
 			return
 */
-	if(!silent)	
+	if(!silent)
 		temp = "Updating local R&D database..."
 		src.updateUsrDialog()
 		sleep(30) //only sleep if called by user
@@ -610,24 +610,24 @@
 
 /obj/machinery/mecha_part_fabricator/proc/exploit_prevention(var/obj/Part, mob/user as mob, var/desc_exploit)
 // critical exploit prevention, feel free to improve or replace this, but do not remove it -walter0o
-	
+
 	if(!Part || !user || !istype(Part) || !istype(user)) // sanity
 		return 1
-	
+
 	if( !(locate(Part, src.contents)) || !(Part.vars.Find("construction_time")) || !(Part.vars.Find("construction_cost")) ) // these 3 are the current requirements for an object being buildable by the mech_fabricator
-	
+
 		var/turf/LOC = get_turf(user)
 		message_admins("[key_name_admin(user)] tried to exploit an Exosuit Fabricator to [desc_exploit ? "get the desc of" : "duplicate"] <a href='?_src_=vars;Vars=\ref[Part]'>[Part]</a> ! ([LOC ? "<a href='?_src_=holder;adminplayerobservecoodjump=1;X=[LOC.x];Y=[LOC.y];Z=[LOC.z]'>JMP</a>" : "null"])", 0)
-		log_admin("EXPLOIT : [key_name(user)] tried to exploit an Exosuit Fabricator to [desc_exploit ? "get the desc of" : "duplicate"] [Part] !")		
+		log_admin("EXPLOIT : [key_name(user)] tried to exploit an Exosuit Fabricator to [desc_exploit ? "get the desc of" : "duplicate"] [Part] !")
 		return 1
-	
+
 	return null
 
 /obj/machinery/mecha_part_fabricator/Topic(href, href_list)
 
 	if(..()) // critical exploit prevention, do not remove unless you replace it -walter0o
 		return
-	
+
 	var/datum/topic_input/filter = new /datum/topic_input(href,href_list)
 	if(href_list["part_set"])
 		var/tpart_set = filter.getStr("part_set")
@@ -639,24 +639,24 @@
 				screen = "parts"
 	if(href_list["part"])
 		var/obj/part = filter.getObj("part")
-		
+
 		// critical exploit prevention, do not remove unless you replace it -walter0o
 		if(src.exploit_prevention(part, usr))
 			return
-		
+
 		if(!processing_queue)
 			build_part(part)
 		else
 			add_to_queue(part)
 	if(href_list["add_to_queue"])
 		var/obj/part = filter.getObj("add_to_queue")
-		
+
 		// critical exploit prevention, do not remove unless you replace it -walter0o
 		if(src.exploit_prevention(part, usr))
 			return
-			
+
 		add_to_queue(part)
-		
+
 		return update_queue_on_page()
 	if(href_list["remove_from_queue"])
 		remove_from_queue(filter.getNum("remove_from_queue"))
@@ -695,12 +695,12 @@
 		return update_queue_on_page()
 	if(href_list["part_desc"])
 		var/obj/part = filter.getObj("part_desc")
-		
+
 		// critical exploit prevention, do not remove unless you replace it -walter0o
 		if(src.exploit_prevention(part, usr, 1))
 			return
-		
-		if(part)			
+
+		if(part)
 			temp = {"<h1>[part] description:</h1>
 						[part.desc]<br>
 						<a href='?src=\ref[src];clear_temp=1'>Return</a>
@@ -727,8 +727,6 @@
 			type = /obj/item/stack/sheet/mineral/phoron
 		if("uranium")
 			type = /obj/item/stack/sheet/mineral/uranium
-		/*if("bananium")
-			type = /obj/item/stack/sheet/mineral/clown Sorry, but no more clown mechs, even if you do manage to get to the clown planet.*/
 		else
 			return 0
 	var/result = 0
@@ -786,9 +784,6 @@
 			if(src.resources["diamond"] >= 2000)
 				var/obj/item/stack/sheet/mineral/diamond/G = new /obj/item/stack/sheet/mineral/diamond(src.loc)
 				G.amount = round(src.resources["diamond"] / G.perunit)
-			/*if(src.resources["bananium"] >= 2000)
-				var/obj/item/stack/sheet/mineral/clown/G = new /obj/item/stack/sheet/mineral/clown(src.loc)
-				G.amount = round(src.resources["bananium"] / G.perunit) Sorry, but no bananium allowed*/
 			del(src)
 			return 1
 		else
@@ -812,8 +807,6 @@
 			material = "metal"
 		if(/obj/item/stack/sheet/glass)
 			material = "glass"
-		/*if(/obj/item/stack/sheet/mineral/clown)
-			material = "bananium"*/
 		if(/obj/item/stack/sheet/mineral/uranium)
 			material = "uranium"
 		else

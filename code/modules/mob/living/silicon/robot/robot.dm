@@ -970,9 +970,9 @@
 	if(!I || !istype(I, /obj/item/weapon/card/id) || !I.access) //not ID or no access
 		return 0
 	for(var/req in req_access)
-		if(!(req in I.access)) //doesn't have this access
-			return 0
-	return 1
+		if(req in I.access) //have one of the required accesses
+			return 1
+	return 0
 
 /mob/living/silicon/robot/proc/updateicon()
 
