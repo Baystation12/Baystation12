@@ -18,10 +18,10 @@ RCD
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3.0
-	m_amt = 50000
+	matter = list("metal" = 50000)
 	origin_tech = "engineering=4;materials=2"
 	var/datum/effect/effect/system/spark_spread/spark_system
-	var/matter = 0
+	var/stored_matter = 0
 	var/working = 0
 	var/mode = 1
 	var/canRwall = 0
@@ -29,7 +29,7 @@ RCD
 
 
 	New()
-		desc = "A RCD. It currently holds [matter]/30 matter-units."
+		desc = "A RCD. It currently holds [stored_matter]/30 matter-units."
 		src.spark_system = new /datum/effect/effect/system/spark_spread
 		spark_system.set_up(5, 0, src)
 		spark_system.attach(src)
@@ -39,15 +39,15 @@ RCD
 	attackby(obj/item/weapon/W, mob/user)
 		..()
 		if(istype(W, /obj/item/weapon/rcd_ammo))
-			if((matter + 10) > 30)
+			if((stored_matter + 10) > 30)
 				user << "<span class='notice'>The RCD cant hold any more matter-units.</span>"
 				return
 			user.drop_item()
 			del(W)
-			matter += 10
+			stored_matter += 10
 			playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-			user << "<span class='notice'>The RCD now holds [matter]/30 matter-units.</span>"
-			desc = "A RCD. It currently holds [matter]/30 matter-units."
+			user << "<span class='notice'>The RCD now holds [stored_matter]/30 matter-units.</span>"
+			desc = "A RCD. It currently holds [stored_matter]/30 matter-units."
 			return
 
 
@@ -163,14 +163,14 @@ RCD
 				return 0
 
 /obj/item/weapon/rcd/proc/useResource(var/amount, var/mob/user)
-	if(matter < amount)
+	if(stored_matter < amount)
 		return 0
-	matter -= amount
-	desc = "A RCD. It currently holds [matter]/30 matter-units."
+	stored_matter -= amount
+	desc = "A RCD. It currently holds [stored_matter]/30 matter-units."
 	return 1
 
 /obj/item/weapon/rcd/proc/checkResource(var/amount, var/mob/user)
-	return matter >= amount
+	return stored_matter >= amount
 /obj/item/weapon/rcd/borg/useResource(var/amount, var/mob/user)
 	if(!isrobot(user))
 		return 0
@@ -196,5 +196,4 @@ RCD
 	density = 0
 	anchored = 0.0
 	origin_tech = "materials=2"
-	m_amt = 30000
-	g_amt = 15000
+	matter = list("metal" = 30000,"glass" = 15000)

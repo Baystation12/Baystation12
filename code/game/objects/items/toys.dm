@@ -126,8 +126,9 @@
 	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	w_class = 3.0
-	g_amt = 10
-	m_amt = 10
+
+	matter = list("glass" = 10,"metal" = 10)
+
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
 	var/bullets = 7.0
 
@@ -182,8 +183,9 @@
 	icon_state = "357-7"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	w_class = 1.0
-	g_amt = 10
-	m_amt = 10
+
+	matter = list("metal" = 10,"glass" = 10)
+
 	var/amount_left = 7.0
 
 	update_icon()
