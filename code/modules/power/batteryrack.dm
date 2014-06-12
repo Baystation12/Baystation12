@@ -103,7 +103,7 @@
 					del(src)
 					return 1
 				else
-					user << "<span class='warning'>Turn off the [src] before.</span>"
+					user << "<span class='warning'>Turn off the [src] before dismantling it.</span>"
 			else
 				user << "<span class='warning'>Better let [src] discharge before dismantling it.</span>"
 		else if ((istype(W, /obj/item/weapon/stock_parts/capacitor) && (capacitors_amount < 5)) || (istype(W, /obj/item/weapon/cell) && (cells_amount < 5)))
@@ -115,7 +115,7 @@
 					RefreshParts()
 					user << "<span class='notice'>You upgrade the [src] with [W.name].</span>"
 				else
-					user << "<span class='warning'>Turn off the [src] before.</span>"
+					user << "<span class='warning'>Turn off the [src] before dismantling it.</span>"
 			else
 				user << "<span class='warning'>Better let [src] discharge before putting your hand inside it.</span>"
 		else
