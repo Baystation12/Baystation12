@@ -158,6 +158,9 @@ var/global/list/shuttles
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/constructionsite/site)
 	shuttle.area_station = locate(/area/shuttle/constructionsite/station)
+	shuttle.docking_controller_tag = "engineering_shuttle"
+	shuttle.dock_target_station = "engineering_dock_airlock"
+	shuttle.dock_target_offsite = "engineering_station_airlock"
 	shuttles["Engineering"] = shuttle
 
 	shuttle = new()
