@@ -24,6 +24,20 @@
 	MODE_NONE|STATE_UNDOCKED		idle - not docked.
 	MODE_NONE|anything else			should never happen.
 	
+	*** Docking Signals ***
+	
+	Docking
+	Client sends request_dock
+	When server is ready, sends confirm_dock
+	Client sends confirm_dock back
+	
+	Undocking
+	Client sends request_undock
+	When server is ready, sends confirm_dock
+	Client sends confirm_dock back
+	
+	Note that in both cases each side exchanges confirm_dock before the docking operation is considered done.
+	
 	*** Override, what is it? ***
 	
 	The purpose of enabling the override is to prevent the docking program from automatically doing things with the docking port when docking or undocking.
@@ -45,6 +59,7 @@
 	var/response_sent = 0		//so we don't spam confirmation messages
 	
 	var/override_enabled = 0	//skips checks for the docking port being ready
+	var/received_confirm = 0	//for undocking, whether the client has recieved a confirmation from the server
 
 /datum/computer/file/embedded_program/docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	var/receive_tag = signal.data["tag"]		//for docking signals, this is the sender id
@@ -78,11 +93,12 @@
 		
 		if ("confirm_undock")
 			if (control_mode == MODE_CLIENT && dock_state == STATE_UNDOCKING && receive_tag == tag_target)
-				send_docking_command(tag_target, "confirm_undock")
+				received_confirm = 1
+			else if (control_mode == MODE_SERVER && dock_state == STATE_UNDOCKING && receive_tag == tag_target)
 				if (!override_enabled)
 					finish_undocking()
-				reset()		//client is done undocking!
-		
+				reset()		//server is done undocking!
+
 		if ("request_undock")
 			if (control_mode == MODE_SERVER && dock_state == STATE_DOCKED && receive_tag == tag_target)
 				dock_state = STATE_UNDOCKING
@@ -108,16 +124,15 @@
 					response_sent = 0
 		if (STATE_UNDOCKING)
 			if (ready_for_undocking())
-				if (control_mode == MODE_CLIENT)
-					if (!response_sent)
-						send_docking_command(tag_target, "request_undock")	//tell the server we want to undock now.
-						response_sent = 1
+				if (control_mode == MODE_CLIENT && received_confirm)
+					send_docking_command(tag_target, "confirm_undock")	//tell the server we are done undocking.
+					if (!override_enabled)
+						finish_undocking()
+					reset()		//client is done undocking!
 				else if (control_mode == MODE_SERVER)
 					send_docking_command(tag_target, "confirm_undock")	//tell the client we are OK to undock.
 					
-					if (!override_enabled)
-						finish_undocking()
-					reset()		//server is done undocking!
+
 	
 	if (dock_state != STATE_DOCKING && dock_state != STATE_UNDOCKING)
 		response_sent = 0
@@ -148,7 +163,7 @@
 	if (!override_enabled)
 		prepare_for_undocking()
 	
-	//send_docking_command(tag_target, "request_undock")
+	send_docking_command(tag_target, "request_undock")
 
 //tell the docking port to start getting ready for docking - e.g. pressurize
 /datum/computer/file/embedded_program/docking/proc/prepare_for_docking()
@@ -185,6 +200,7 @@
 	control_mode = MODE_NONE
 	tag_target = null
 	response_sent = 0
+	received_confirm = 0
 
 /datum/computer/file/embedded_program/docking/proc/force_undock()
 	world << "[id_tag]: forcing undock"
