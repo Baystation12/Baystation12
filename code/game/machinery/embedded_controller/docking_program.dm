@@ -28,15 +28,22 @@
 	
 	Docking
 	Client sends request_dock
-	When server is ready, sends confirm_dock
-	Client sends confirm_dock back
+	Server sends confirm_dock to say that yes, we will serve your request
+	When client is ready, sends confirm_dock
+	Server sends confirm_dock back to indicate that docking is complete
 	
 	Undocking
 	Client sends request_undock
-	When server is ready, sends confirm_dock
-	Client sends confirm_dock back
+	When client is ready, sends confirm_undock
+	Server sends confirm_undock back to indicate that docking is complete
 	
 	Note that in both cases each side exchanges confirm_dock before the docking operation is considered done.
+	The client first sends a confirm message to indicate it is ready, and then finally the server will send it's 
+	confirm message to indicate that the operation is complete.
+	
+	Note also that when docking, the server sends an additional confirm message. This is because before docking,
+	the server and client do not have a defined relationship. Before undocking, the server and client are already
+	related to each other, thus the extra confirm message is not needed.
 	
 	*** Override, what is it? ***
 	
@@ -75,13 +82,14 @@
 				dock_state = STATE_DOCKING
 				if (!override_enabled)
 					prepare_for_docking()
-			else if (control_mode == MODE_SERVER && dock_state == STATE_DOCKING && receive_tag == tag_target)	//client just sent us the confirmation back, we're done with the docking process
+			
+			else if (control_mode == MODE_CLIENT && dock_state == STATE_DOCKING && receive_tag == tag_target)
 				dock_state = STATE_DOCKED
 				if (!override_enabled)
-					finish_docking()	//server done docking!
+					finish_docking()	//client done docking!
 				response_sent = 0
-			else
-				send_docking_command(tag_target, "abort_dock")	//not expecting confirmation for anything - tell the other guy.
+			else if (control_mode == MODE_SERVER && dock_state == STATE_DOCKING && receive_tag == tag_target)	//client just sent us the confirmation back, we're done with the docking process
+				received_confirm = 1
 		
 		if ("request_dock")
 			if (control_mode == MODE_NONE && dock_state == STATE_UNDOCKED)
@@ -90,14 +98,15 @@
 				tag_target = receive_tag
 				if (!override_enabled)
 					prepare_for_docking()
+				send_docking_command(tag_target, "confirm_dock")	//acknowledge the request
 		
 		if ("confirm_undock")
 			if (control_mode == MODE_CLIENT && dock_state == STATE_UNDOCKING && receive_tag == tag_target)
-				received_confirm = 1
-			else if (control_mode == MODE_SERVER && dock_state == STATE_UNDOCKING && receive_tag == tag_target)
 				if (!override_enabled)
 					finish_undocking()
-				reset()		//server is done undocking!
+				reset()		//client is done undocking!
+			else if (control_mode == MODE_SERVER && dock_state == STATE_UNDOCKING && receive_tag == tag_target)
+				received_confirm = 1
 
 		if ("request_undock")
 			if (control_mode == MODE_SERVER && dock_state == STATE_DOCKED && receive_tag == tag_target)
@@ -113,24 +122,31 @@
 	switch(dock_state)
 		if (STATE_DOCKING)	//waiting for our docking port to be ready for docking
 			if (ready_for_docking())
-				if (!response_sent)
-					send_docking_command(tag_target, "confirm_dock")	//tell the other guy we're ready
-					response_sent = 1
+				if (control_mode == MODE_CLIENT)
+					if (!response_sent)
+						send_docking_command(tag_target, "confirm_dock")	//tell the server we're ready
+						response_sent = 1
 				
-				if (control_mode == MODE_CLIENT)	//client doesn't need to do anything further
+				else if (control_mode == MODE_SERVER && received_confirm)
+					send_docking_command(tag_target, "confirm_dock")	//tell the client we are done docking.
 					dock_state = STATE_DOCKED
 					if (!override_enabled)
-						finish_docking()	//client done docking!
+						finish_docking()	//server done docking!
 					response_sent = 0
+					received_confirm = 0
+		
 		if (STATE_UNDOCKING)
 			if (ready_for_undocking())
-				if (control_mode == MODE_CLIENT && received_confirm)
-					send_docking_command(tag_target, "confirm_undock")	//tell the server we are done undocking.
+				if (control_mode == MODE_CLIENT)
+					if (!response_sent)
+						send_docking_command(tag_target, "confirm_undock")	//tell the server we are OK to undock.
+						response_sent = 1
+					
+				else if (control_mode == MODE_SERVER && received_confirm)
+					send_docking_command(tag_target, "confirm_undock")	//tell the client we are done undocking.
 					if (!override_enabled)
 						finish_undocking()
-					reset()		//client is done undocking!
-				else if (control_mode == MODE_SERVER)
-					send_docking_command(tag_target, "confirm_undock")	//tell the client we are OK to undock.
+					reset()		//server is done undocking!
 					
 
 	
@@ -203,7 +219,7 @@
 	received_confirm = 0
 
 /datum/computer/file/embedded_program/docking/proc/force_undock()
-	world << "[id_tag]: forcing undock"
+	//world << "[id_tag]: forcing undock"
 	if (tag_target)
 		send_docking_command(tag_target, "dock_error")
 	reset()

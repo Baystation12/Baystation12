@@ -26,9 +26,6 @@
 	if(!origin)
 		origin = (location == 1 ? area_offsite : area_station)
 	
-	if (docking_controller)
-		docking_controller.force_undock()
-	
 	..(origin, destination)
 
 /datum/shuttle/ferry/long_jump(var/area/departing,var/area/destination,var/area/interim,var/travel_time)
@@ -40,12 +37,11 @@
 	if(!departing)
 		departing = (location == 1 ? area_offsite : area_station)
 	
-	if (docking_controller)
-		docking_controller.force_undock()
-	
 	..(departing, destination, interim, travel_time)
 
 /datum/shuttle/ferry/move(var/area/origin,var/area/destination)
+	if (docking_controller && !docking_controller.undocked())
+		docking_controller.force_undock()
 	..(origin, destination)
 	location = !location
 
@@ -113,7 +109,7 @@
 	if (moving_status != SHUTTLE_IDLE)
 		return 0
 	
-	if (in_use && !skip_docking_checks())
+	if (in_use)
 		return 0
 	
 	return 1
@@ -130,12 +126,6 @@
 
 
 
-/*
-	I dont really like how much this manipulates shuttle it's docking controller, as it makes this code
-	depend a lot on their current implementation, and also having var/datum/shuttle/shuttle = shuttles[shuttle_tag] 
-	everywhere is kind of messy. I'm probably going to end up creating a subtype of shuttle called ferry_shuttle 
-	and move a lot of this into there when I get the time.
-*/
 /obj/machinery/computer/shuttle_control
 	name = "shuttle control console"
 	icon = 'icons/obj/computer.dmi'
