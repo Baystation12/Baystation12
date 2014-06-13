@@ -95,7 +95,7 @@
 	
 	process_state = WAIT_ARRIVE
 
-/datum/shuttle/ferry/proc/cancel_launch()
+/datum/shuttle/ferry/proc/cancel_launch(var/obj/machinery/computer/shuttle_control/user)
 	if (!can_cancel()) return
 	
 	moving_status = SHUTTLE_IDLE
@@ -119,9 +119,9 @@
 	return 1
 
 /datum/shuttle/ferry/proc/can_force()
-	if (moving_status != SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
-		return 0
-	return 1
+	if (moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
+		return 1
+	return 0
 
 /datum/shuttle/ferry/proc/can_cancel()
 	if (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH)

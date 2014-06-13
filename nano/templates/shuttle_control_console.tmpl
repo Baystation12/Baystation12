@@ -29,19 +29,6 @@
 				Docking Status:
 			</div>
 			<div class="itemContent">
-<!-- 
-				{{if docking_status == "docked"}}
-					<span class="good">DOCKED</span>
-				{{else docking_status == "docking"}}
-					<span class="average">DOCKING</span>
-				{{else docking_status == "undocking"}}
-					<span class="average">UNDOCKING</span>
-				{{else docking_status == "undocked"}}
-					<span class="idle">UNDOCKED</span>
-				{{else}}
-					<span class="bad">ERROR</span>
-				{{/if}}
--->
 				{{if docking_status == "docked"}}
 					<span class="good">DOCKED</span>
 				{{else docking_status == "docking"}}
@@ -73,6 +60,7 @@
 		<div class="itemContent" style="padding-top: 2px; width: 100%">
 			{{:~link('Launch Shuttle', 'arrowthickstop-1-e', {'move' : '1'}, can_launch? null : 'disabled' , null)}}
 			{{:~link('Cancel Launch', 'cancel', {'cancel' : '1'}, can_cancel? null : 'disabled' , null)}}
+			{{:~link('Force Launch', 'alert', {'force' : '1'}, can_force? null : 'disabled' , can_force? 'redBackground' : null)}}
 		</div>
 	</div>
 </div>
