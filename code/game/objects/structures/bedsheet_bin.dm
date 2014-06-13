@@ -7,7 +7,7 @@ LINEN BINS
 /obj/item/weapon/bedsheet
 	name = "bedsheet"
 	desc = "A surprisingly soft linen bedsheet."
-	icon = 'icons/obj/items.dmi'
+	icon = 'tauceti/icons/obj/bedsheets.dmi'
 	icon_state = "sheet"
 	item_state = "bedsheet"
 	slot_flags = SLOT_BACK //tg
@@ -112,6 +112,29 @@ LINEN BINS
 	icon_state = "sheetbrown"
 	item_color = "brown"
 
+/obj/item/weapon/bedsheet/centcom
+	name = "\improper Centcom bedsheet"
+	desc = "Woven with advanced nanothread for warmth as well as being very decorated, essential for all officials."
+	icon_state = "sheetcentcom"
+	item_color = "centcom"
+
+/obj/item/weapon/bedsheet/syndie
+	name = "syndicate bedsheet"
+	desc = "It has a syndicate emblem and it has an aura of evil."
+	icon_state = "sheetsyndie"
+	item_color = "syndie"
+
+/obj/item/weapon/bedsheet/cult
+	name = "cultist's bedsheet"
+	desc = "You might dream of Nar'Sie if you sleep with this.  It seems rather tattered and glows of an eldritch presence."
+	icon_state = "sheetcult"
+	item_color = "cult"
+
+/obj/item/weapon/bedsheet/wiz
+	name = "wizard's bedsheet"
+	desc = "A special fabric enchanted with magic so you can have an enchanted night.  It even glows!"
+	icon_state = "sheetwiz"
+	item_color = "wiz"
 
 
 
