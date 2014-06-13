@@ -137,14 +137,22 @@ var/global/list/shuttles
 	// Admin shuttles.
 	shuttle = new()
 	shuttle.location = 1
+	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/transport1/centcom)
 	shuttle.area_station = locate(/area/shuttle/transport1/station)
+	shuttle.docking_controller_tag = "centcom_shuttle"
+	shuttle.dock_target_station = "centcom_shuttle_dock_airlock"
+	shuttle.dock_target_offsite = "centcom_shuttle_bay"
 	shuttles["Centcom"] = shuttle
 
 	shuttle = new()
 	shuttle.location = 1
+	shuttle.warmup_time = 10	//want some warmup time so people can cancel.
 	shuttle.area_offsite = locate(/area/shuttle/administration/centcom)
 	shuttle.area_station = locate(/area/shuttle/administration/station)
+	shuttle.docking_controller_tag = "admin_shuttle"
+	shuttle.dock_target_station = "admin_shuttle_dock_airlock"
+	shuttle.dock_target_offsite = "admin_shuttle_bay"
 	shuttles["Administration"] = shuttle
 
 	shuttle = new()
@@ -152,6 +160,11 @@ var/global/list/shuttles
 	shuttle.area_station = locate(/area/shuttle/alien/mine)
 	shuttles["Alien"] = shuttle
 
+	// ERT Shuttle
+
+	//TODO
+	//"specops_dock_airlock"
+	
 	// Public shuttles
 	shuttle = new()
 	shuttle.location = 1
