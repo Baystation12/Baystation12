@@ -33,6 +33,16 @@
 		layer = MOB_LAYER
 		src << text("\blue You have stopped hiding.")
 
+/mob/living/silicon/robot/drone/verb/light()
+	set name = "Light On/Off"
+	set desc = "Activate a low power omnidirectional LED. Toggled on or off."
+	set category = "Drone"
+
+	if(luminosity)
+		SetLuminosity(0)
+		return
+	SetLuminosity(2)
+
 //Actual picking-up event.
 /mob/living/silicon/robot/drone/attack_hand(mob/living/carbon/human/M as mob)
 

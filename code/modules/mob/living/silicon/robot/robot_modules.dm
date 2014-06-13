@@ -232,7 +232,7 @@
 		R.add_reagent("beer2", 50)
 		src.emag.name = "Mickey Finn's Special Brew"
 		return
-	
+
 	add_languages(var/mob/living/silicon/robot/R)
 		//full set of languages
 		R.add_language("Sol Common", 1)
@@ -307,7 +307,6 @@
 		)
 
 	New()
-		src.modules += new /obj/item/device/flashlight/drone(src)
 		src.modules += new /obj/item/weapon/weldingtool(src)
 		src.modules += new /obj/item/weapon/screwdriver(src)
 		src.modules += new /obj/item/weapon/wrench(src)
@@ -328,7 +327,7 @@
 			src.modules += W
 
 		return
-	
+
 	add_languages(var/mob/living/silicon/robot/R)
 		return	//not much ROM to spare in that tiny microprocessor!
 
