@@ -1,11 +1,11 @@
 // BEGIN_INTERNALS
 /*
 MAP_ICON_TYPE: 0
-WINDOW: code\sovietstation\not_a_user\modules\admin\verbs\adminpm.dm;code\sovietstation\not_a_user\modules\admin\verbs\randomverbs.dm;code\sovietstation\not_a_user\modules\admin\verbs\adminhelp.dm;code\sovietstation\not_a_user\modules\admin\admin.dm;code\sovietstation\not_a_user\__HELPERS\text.dm
+WINDOW: maps\sovietstation.dmm;code\modules\power\singularity\emitter.dm;code\modules\projectiles\projectile\beams.dm;code\sovietstation\WorkInProgress\not_a_user\modular_systems\modular_suit.dm;icons\obj\engine.dmi;code\sovietstation\WorkInProgress\not_a_user\supermatter.dm;code\sovietstation\WorkInProgress\not_a_user\supermatter_cutter.dm
 LAST_COMPILE_VERSION: 503.1224
-DIR: code code\modules code\modules\admin code\modules\admin\verbs code\sovietstation code\sovietstation\not_a_user code\sovietstation\not_a_user\__HELPERS code\sovietstation\not_a_user\modules code\sovietstation\not_a_user\modules\admin code\sovietstation\not_a_user\modules\admin\verbs 
-FILE: code\sovietstation\not_a_user\modules\admin\verbs\adminpm.dm
-LAST_COMPILE_TIME: 1402590714
+DIR: code code\modules code\modules\power code\modules\power\singularity code\modules\projectiles code\modules\projectiles\projectile code\sovietstation code\sovietstation\WorkInProgress code\sovietstation\WorkInProgress\not_a_user code\sovietstation\WorkInProgress\not_a_user\modular_systems icons icons\obj maps 
+FILE: code\sovietstation\WorkInProgress\not_a_user\supermatter.dm
+LAST_COMPILE_TIME: 1402732411
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
