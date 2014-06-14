@@ -160,11 +160,6 @@ var/global/list/shuttles
 	shuttle.area_station = locate(/area/shuttle/alien/mine)
 	shuttles["Alien"] = shuttle
 
-	// ERT Shuttle
-
-	//TODO
-	//"specops_dock_airlock"
-	
 	// Public shuttles
 	shuttle = new()
 	shuttle.location = 1
@@ -193,6 +188,19 @@ var/global/list/shuttles
 	shuttle.dock_target_station = "research_dock_airlock"
 	shuttle.dock_target_offsite = "research_outpost_dock"
 	shuttles["Research"] = shuttle
+
+	// ERT Shuttle
+	var/datum/shuttle/ferry/multidock/specops/ERT = new()
+	ERT.location = 0
+	ERT.warmup_time = 10
+	ERT.area_offsite = locate(/area/shuttle/specops/station)	//centcom is the home station, the Exodus is offsite
+	ERT.area_station = locate(/area/shuttle/specops/centcom)
+	ERT.docking_controller_tag = "specops_shuttle_port"
+	ERT.docking_controller_tag_station = "specops_shuttle_port"
+	ERT.docking_controller_tag_offsite = "specops_shuttle_fore"
+	ERT.dock_target_station = "specops_centcom_dock"
+	ERT.dock_target_offsite = "specops_dock_airlock"
+	shuttles["Special Operations"] = ERT
 
 	//Vox Shuttle.
 	var/datum/shuttle/multi_shuttle/VS = new/datum/shuttle/multi_shuttle()
@@ -240,25 +248,45 @@ var/global/list/shuttles
 
 /proc/setup_shuttle_docks()
 	var/datum/shuttle/shuttle
+	var/datum/shuttle/ferry/multidock/multidock
 	var/list/dock_controller_map = list()	//so we only have to iterate once through each list
+	
+	//multidock shuttles
+	var/list/dock_controller_map_station = list()
+	var/list/dock_controller_map_offsite = list()
 
 	for (var/shuttle_tag in shuttles)
 		shuttle = shuttles[shuttle_tag]
 		if (shuttle.docking_controller_tag)
 			dock_controller_map[shuttle.docking_controller_tag] = shuttle
+		if (istype(shuttle, /datum/shuttle/ferry/multidock))
+			multidock = shuttle
+			dock_controller_map_station[multidock.docking_controller_tag_station] = multidock
+			dock_controller_map_offsite[multidock.docking_controller_tag_offsite] = multidock
 
 	//search for the controllers, if we have one.
 	if (dock_controller_map.len)
 		for (var/obj/machinery/embedded_controller/radio/C in machines)	//only radio controllers are supported at the moment
-			if (istype(C.program, /datum/computer/file/embedded_program/docking) && C.id_tag in dock_controller_map)
-				shuttle = dock_controller_map[C.id_tag]
-				shuttle.docking_controller = C.program
-				dock_controller_map -= C.id_tag
+			if (istype(C.program, /datum/computer/file/embedded_program/docking))
+				if (C.id_tag in dock_controller_map)
+					shuttle = dock_controller_map[C.id_tag]
+					shuttle.docking_controller = C.program
+					dock_controller_map -= C.id_tag
+				if (C.id_tag in dock_controller_map_station)
+					multidock = dock_controller_map_station[C.id_tag]
+					if (istype(multidock))
+						multidock.docking_controller_station = C.program
+						dock_controller_map_station -= C.id_tag
+				if (C.id_tag in dock_controller_map_offsite)
+					multidock = dock_controller_map_offsite[C.id_tag]
+					if (istype(multidock))
+						multidock.docking_controller_offsite = C.program
+						dock_controller_map_offsite -= C.id_tag
 	
 	//sanity check
-	if (dock_controller_map.len)
+	if (dock_controller_map.len || dock_controller_map_station.len || dock_controller_map_offsite.len)
 		var/dat = ""
-		for (var/dock_tag in dock_controller_map)
+		for (var/dock_tag in dock_controller_map + dock_controller_map_station + dock_controller_map_offsite)
 			dat += "\"[dock_tag]\", "
 		world << "/red /b warning: shuttles with docking tags [dat] could not find their controllers!"
 	
