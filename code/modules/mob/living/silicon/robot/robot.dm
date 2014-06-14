@@ -1031,7 +1031,7 @@
 		pick_module()
 		return
 	var/dat = "<HEAD><TITLE>Modules</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
-	dat += {"<A HREF='?src=\ref[src];mach_close=robotmod'>Close</A>
+	dat += {"
 	<BR>
 	<BR>
 	<B>Activated Modules</B>
@@ -1061,16 +1061,11 @@
 		else
 			dat += text("[obj]: \[<A HREF=?src=\ref[src];act=\ref[obj]>Activate</A> | <B>Deactivated</B>\]<BR>")
 */
-	src << browse(dat, "window=robotmod&can_close=0")
+	src << browse(dat, "window=robotmod")
 
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	..()
-	if (href_list["mach_close"])
-		var/t1 = text("window=[href_list["mach_close"]]")
-		unset_machine()
-		src << browse(null, t1)
-		return
 
 	if (href_list["showalerts"])
 		robot_alerts()

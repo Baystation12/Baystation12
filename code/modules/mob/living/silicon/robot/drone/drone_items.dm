@@ -267,7 +267,7 @@
 		module = new /obj/item/weapon/robot_module/drone(src)
 
 	var/dat = "<HEAD><TITLE>Drone modules</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
-	dat += {"<A HREF='?src=\ref[src];mach_close=robotmod'>Close</A>
+	dat += {"
 	<BR>
 	<BR>
 	<B>Activated Modules</B>
@@ -310,7 +310,7 @@
 
 	dat += resources
 
-	src << browse(dat, "window=robotmod&can_close=0")
+	src << browse(dat, "window=robotmod")
 
 //Putting the decompiler here to avoid doing list checks every tick.
 /mob/living/silicon/robot/drone/use_power()
