@@ -6936,7 +6936,7 @@
 "cDt" = (/turf/space,/area/vox_station/southwest_solars)
 "cDu" = (/obj/machinery/atmospherics/binary/volume_pump/on{dir = 1},/turf/simulated/floor/plating,/area/engine/reactor_core)
 "cDv" = (/obj/machinery/atmospherics/pipe/simple{_color = "cyan"; icon_state = "intact-c"; level = 2},/turf/simulated/floor/plating,/area/engine/reactor_core)
-"cDw" = (/obj/machinery/power/rad_collector{anchored = 1; dir = 2},/obj/structure/cable,/turf/simulated/floor/plating,/area/engine/reactor_core)
+"cDw" = (/obj/machinery/power/rad_collector{anchored = 0; dir = 2},/obj/structure/cable,/turf/simulated/floor/plating,/area/engine/reactor_core)
 "cDx" = (/obj/machinery/power/rad_collector,/obj/structure/cable,/turf/simulated/floor/plating,/area/engine/reactor_core)
 "cDy" = (/obj/machinery/atmospherics/pipe/simple{_color = "red"; icon_state = "intact-r"; level = 2},/turf/simulated/floor/plating,/area/engine/reactor_core)
 "cDz" = (/obj/machinery/light/small{dir = 8},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 1; frequency = 1379; id_tag = "engineering_west_pump"},/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/plating,/area/engine/engineering)
