@@ -23,7 +23,7 @@
 		if (src.client.handle_spam_prevention(message,MUTE_IC))
 			return
 
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN)) 
+	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 
 	if (stat == 2)
 		return say_dead(message)
@@ -65,7 +65,7 @@
 		if(message_mode != "binary" && !R.is_component_functioning("radio"))
 			src << "\red Your radio isn't functional at this time."
 			return
-			
+
 
 	if(message_mode && message_mode != "general")
 		message = trim(copytext(message,3))
@@ -73,7 +73,7 @@
 	switch(message_mode)
 		if("department")
 			switch(bot_type)
-				if(IS_AI)			
+				if(IS_AI)
 					AI.holopad_talk(message)
 				if(IS_ROBOT)
 					log_say("[key_name(src)] : [message]")
@@ -118,9 +118,9 @@
 						R.radio.talk_into(src,message,message_mode,verb)
 					if(IS_PAI)
 						log_say("[key_name(src)] : [message]")
-						P.radio.talk_into(src,message,message_mode,verb)	
+						P.radio.talk_into(src,message,message_mode,verb)
 				return
-		
+
 
 	return ..(message,null,verb)
 
@@ -167,14 +167,14 @@
 		return
 
 	var/verb = say_quote(message)
-	
+
 
 	var/rendered = "<i><span class='game say'>Robotic Talk, <span class='name'>[name]</span> <span class='message'>[verb], \"[message]\"</span></span></i>"
 
 	for (var/mob/living/S in living_mob_list)
 		if(S.robot_talk_understand && (S.robot_talk_understand == robot_talk_understand)) // This SHOULD catch everything caught by the one below, but I'm not going to change it.
 			if(istype(S , /mob/living/silicon/ai))
-				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
+				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src];trackname=[html_encode(src.name)]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
 				S.show_message(renderedAI, 2)
 			else
 				S.show_message(rendered, 2)
@@ -182,7 +182,7 @@
 
 		else if (S.binarycheck())
 			if(istype(S , /mob/living/silicon/ai))
-				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
+				var/renderedAI = "<i><span class='game say'>Robotic Talk, <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[src];trackname=[html_encode(src.name)]'><span class='name'>[name]</span></a> <span class='message'>[verb], \"[message]\"</span></span></i>"
 				S.show_message(renderedAI, 2)
 			else
 				S.show_message(rendered, 2)
@@ -199,7 +199,7 @@
 		var/message_beep
 		verb = "beeps"
 		message_beep = "beep beep beep"
-		
+
 		rendered = "<i><span class='game say'><span class='name'>[voice_name]</span> <span class='message'>[verb], \"[message_beep]\"</span></span></i>"
 
 		for (var/mob/M in heard)
