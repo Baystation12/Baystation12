@@ -392,6 +392,13 @@
 	desc = "Heavy-duty switching circuits for power control."
 	matter = list("metal" = 50, "glass" = 50)
 
+/obj/item/weapon/module/power_control/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	if (istype(W, /obj/item/device/multitool))
+		var/obj/item/weapon/circuitboard/ghettosmes/newcircuit = new/obj/item/weapon/circuitboard/ghettosmes(user.loc)
+		del(src)
+		user.put_in_hands(newcircuit)
+
+
 /obj/item/weapon/module/id_auth
 	name = "\improper ID authentication module"
 	icon_state = "id_mod"
