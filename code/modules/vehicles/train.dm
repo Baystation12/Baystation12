@@ -35,9 +35,8 @@
 		return 0
 
 /obj/vehicle/train/Bump(atom/Obstacle)
-	if(!istype(Obstacle, /atom/movable) || !anchored)
+	if(!istype(Obstacle, /atom/movable))
 		return
-
 	var/atom/movable/A = Obstacle
 
 	if(!A.anchored)
@@ -47,15 +46,17 @@
 				A.Move(T)
 			else if(!ismob(A))	//always bump objects even if emagged
 				A.Move(T)
-
 	if(istype(A, /mob/living))
 		var/mob/living/M = A
+		var/mob/living/D
 		if(istype(load, /mob/living/carbon/human))
-			load << "\red You hit [M]!"
+			D = load
+			D << "\red You hit [M]!"
 		visible_message("\red [src] knocks over [M]!")
 		M.apply_effects(5, 5)								//knock people down if you hit them
 		if(emagged)											//and do damage if it's emagged
 			M.apply_damages(5 * train_length / move_delay)	// according to how fast the train is going and how heavy it is
+			msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 
 
 //-------------------------------------------
@@ -151,18 +152,22 @@
 
 	return 1
 
-/obj/vehicle/train/proc/unlatch()
+/obj/vehicle/train/proc/unlatch(var/obj/vehicle/train/T)
 	if(!lead && !tow)
 		return 0
 
-	if(tow)
-		tow.lead = null
-		tow.update_stats()
-		tow = null
-	if(lead)
-		lead.tow = null
-		lead.update_stats()
-		lead = null
+	if(T)
+		if(T == tow)
+			tow = null
+		else if(T == lead)
+			lead = null
+	else
+		if(tow)
+			tow.unlatch(src)
+			tow = null
+		if(lead)
+			lead.unlatch(src)
+			lead = null
 
 	update_stats()
 
