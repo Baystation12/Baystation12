@@ -7662,7 +7662,7 @@
 "cRr" = (/obj/structure/table,/obj/machinery/microwave,/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cRs" = (/obj/item/flag/syndi,/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cRt" = (/obj/structure/table,/obj/item/device/flashlight/lamp{pixel_x = 4; pixel_y = 1},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
-"cRu" = (/obj/machinery/computer/syndicate_station{req_access_txt = "0"},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
+"cRu" = (/obj/machinery/computer/shuttle_control/multi/syndicate{req_access_txt = "0"},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cRv" = (/obj/structure/table,/obj/machinery/door_control{id = "syndieshutters"; name = "remote shutter control"; req_access_txt = "150"},/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cRw" = (/obj/structure/computerframe,/turf/simulated/shuttle/floor{icon_state = "floor4"},/area/syndicate_station/start)
 "cRx" = (/turf/unsimulated/floor{icon = 'icons/turf/snow.dmi'; icon_state = "snow"},/turf/unsimulated/floor{tag = "icon-gravsnow_corner (WEST)"; icon = 'icons/turf/snow.dmi'; icon_state = "gravsnow_corner"; dir = 8},/area/syndicate_mothership)
