@@ -1,9 +1,6 @@
 //Module Suit
 /obj/item/clothing/suit/armor/modular
 	name = "Modular Armor"
-//	icon = ''
-	icon_state = "exosuit_mk1"
-	item_state = "exosuit_mk1"
 	w_class = 4
 	flags = FPRINT | TABLEPASS
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
@@ -12,6 +9,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | ARMS
+	var/id = "lol"
 
 	var/list/armor_modules = newlist()
 	var/secured = 1
@@ -47,10 +45,19 @@
 		mod.attach()
 
 	else
-		for(ar/obj/item/modular/module/mod in armor_modules)
+		for(var/obj/item/modular/module/mod in armor_modules)
 			if(mod.attackby(W, user))
 				return
 		..()
+
+/obj/item/clothing/suit/armor/modular/process()
+	if(loc.type == /mob/living/carbon/human)
+		var/mob/living/carbon/human/h_mob = loc
+		var/obj/item/clothing/suit/armor/modular/l = h_mob.wear_suit
+		if(src.id == l.id)
+			h_mob.update_icons()
+			h_mob.overlays += image('code/sovietstation/WorkInProgress/not_a_user/modular_systems/exo-suit.dmi', "exosuit_base")
+
 
 /obj/item/modular/module
 	name = "Module"

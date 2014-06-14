@@ -1286,6 +1286,8 @@
 #include "code\sovietstation\not_a_user\modules\admin\verbs\adminhelp.dm"
 #include "code\sovietstation\not_a_user\modules\admin\verbs\adminpm.dm"
 #include "code\sovietstation\not_a_user\modules\admin\verbs\randomverbs.dm"
+#include "code\sovietstation\WorkInProgress\not_a_user\modular_systems\modular_suit.dm"
+#include "code\sovietstation\WorkInProgress\not_a_user\modular_systems\module_powersystem.dm"
 #include "code\TriDimension\controller.dm"
 #include "code\TriDimension\Movement.dm"
 #include "code\TriDimension\Pipes.dm"
@@ -1355,5 +1357,5 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\tgstation2.dmm"
+#include "maps\sovietstation.dmm"
 // END_INCLUDE
