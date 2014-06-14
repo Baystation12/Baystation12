@@ -3,9 +3,9 @@
 MAP_ICON_TYPE: 0
 WINDOW: maps\sovietstation.dmm;code\modules\power\singularity\emitter.dm;code\modules\projectiles\projectile\beams.dm;code\sovietstation\WorkInProgress\not_a_user\modular_systems\modular_suit.dm;icons\obj\engine.dmi;code\sovietstation\WorkInProgress\not_a_user\supermatter.dm;code\sovietstation\WorkInProgress\not_a_user\supermatter_cutter.dm
 LAST_COMPILE_VERSION: 503.1224
-DIR: code code\modules code\modules\power code\modules\power\singularity code\modules\projectiles code\modules\projectiles\projectile code\sovietstation code\sovietstation\WorkInProgress code\sovietstation\WorkInProgress\not_a_user code\sovietstation\WorkInProgress\not_a_user\modular_systems icons icons\obj maps 
-FILE: code\sovietstation\WorkInProgress\not_a_user\supermatter.dm
-LAST_COMPILE_TIME: 1402732411
+DIR: code code\modules code\modules\projectiles code\modules\projectiles\projectile code\modules\supermatter code\sovietstation code\sovietstation\WorkInProgress code\sovietstation\WorkInProgress\not_a_user code\sovietstation\WorkInProgress\not_a_user\modular_systems icons icons\obj maps 
+FILE: maps\sovietstation.dmm
+LAST_COMPILE_TIME: 1402733470
 AUTO_FILE_DIR: OFF
 */
 // END_INTERNALS
