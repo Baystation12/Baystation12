@@ -121,6 +121,8 @@
 				env.merge(removed)
 
 /obj/machinery/r_n_d/server/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(exchange_parts(user, O))
+		return
 	if (disabled)
 		return
 	if (shocked)

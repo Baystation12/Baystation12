@@ -325,6 +325,165 @@ About the new airlock wires panel:
 	..(user)
 
 
+/*
+/obj/machinery/door/airlock/proc/pulse(var/wireColor)
+	//var/wireFlag = airlockWireColorToFlag[wireColor] //not used in this function
+	var/wireIndex = airlockWireColorToIndex[wireColor]
+	switch(wireIndex)
+		if(AIRLOCK_WIRE_IDSCAN)
+			//Sending a pulse through this flashes the red light on the door (if the door has power).
+			if((src.arePowerSystemsOn()) && (!(stat & NOPOWER)))
+				do_animate("deny")
+		if(AIRLOCK_WIRE_MAIN_POWER1 || AIRLOCK_WIRE_MAIN_POWER2)
+			//Sending a pulse through either one causes a breaker to trip, disabling the door for 10 seconds if backup power is connected, or 1 minute if not (or until backup power comes back on, whichever is shorter).
+			src.loseMainPower()
+		if(AIRLOCK_WIRE_DOOR_BOLTS)
+			//one wire for door bolts. Sending a pulse through this drops door bolts if they're not down (whether power's on or not),
+			//raises them if they are down (only if power's on)
+			if(!src.locked)
+				src.lock()
+			else
+				src.unlock()
+			src.updateUsrDialog()
+
+		if(AIRLOCK_WIRE_BACKUP_POWER1 || AIRLOCK_WIRE_BACKUP_POWER2)
+			//two wires for backup power. Sending a pulse through either one causes a breaker to trip, but this does not disable it unless main power is down too (in which case it is disabled for 1 minute or however long it takes main power to come back, whichever is shorter).
+			src.loseBackupPower()
+		if(AIRLOCK_WIRE_AI_CONTROL)
+			if(src.aiControlDisabled == 0)
+				src.aiControlDisabled = 1
+			else if(src.aiControlDisabled == -1)
+				src.aiControlDisabled = 2
+			src.updateDialog()
+			spawn(10)
+				if(src.aiControlDisabled == 1)
+					src.aiControlDisabled = 0
+				else if(src.aiControlDisabled == 2)
+					src.aiControlDisabled = -1
+				src.updateDialog()
+		if(AIRLOCK_WIRE_ELECTRIFY)
+			//one wire for electrifying the door. Sending a pulse through this electrifies the door for 30 seconds.
+			if(src.secondsElectrified==0)
+				shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
+				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+				src.secondsElectrified = 30
+				spawn(10)
+					//TODO: Move this into process() and make pulsing reset secondsElectrified to 30
+					while (src.secondsElectrified>0)
+						src.secondsElectrified-=1
+						if(src.secondsElectrified<0)
+							src.secondsElectrified = 0
+//						src.updateUsrDialog()  //Commented this line out to keep the airlock from clusterfucking you with electricity. --NeoFite
+						sleep(10)
+		if(AIRLOCK_WIRE_OPEN_DOOR)
+			//tries to open the door without ID
+			//will succeed only if the ID wire is cut or the door requires no access
+			if(!src.requiresID() || src.check_access(null))
+				if(density)	open()
+				else		close()
+		if(AIRLOCK_WIRE_SAFETY)
+			safe = !safe
+			if(!src.density)
+				close()
+			src.updateUsrDialog()
+
+		if(AIRLOCK_WIRE_SPEED)
+			normalspeed = !normalspeed
+			src.updateUsrDialog()
+
+		if(AIRLOCK_WIRE_LIGHT)
+			lights = !lights
+			src.updateUsrDialog()
+
+
+/obj/machinery/door/airlock/proc/cut(var/wireColor)
+	var/wireFlag = airlockWireColorToFlag[wireColor]
+	var/wireIndex = airlockWireColorToIndex[wireColor]
+	wires &= ~wireFlag
+	switch(wireIndex)
+		if(AIRLOCK_WIRE_MAIN_POWER1 || AIRLOCK_WIRE_MAIN_POWER2)
+			//Cutting either one disables the main door power, but unless backup power is also cut, the backup power re-powers the door in 10 seconds. While unpowered, the door may be crowbarred open, but bolts-raising will not work. Cutting these wires may electocute the user.
+			src.loseMainPower()
+			src.shock(usr, 50)
+			src.updateUsrDialog()
+		if(AIRLOCK_WIRE_DOOR_BOLTS)
+			//Cutting this wire also drops the door bolts, and mending it does not raise them. (This is what happens now, except there are a lot more wires going to door bolts at present)
+			src.lock()
+			src.updateUsrDialog()
+		if(AIRLOCK_WIRE_BACKUP_POWER1 || AIRLOCK_WIRE_BACKUP_POWER2)
+			//Cutting either one disables the backup door power (allowing it to be crowbarred open, but disabling bolts-raising), but may electocute the user.
+			src.loseBackupPower()
+			src.shock(usr, 50)
+			src.updateUsrDialog()
+		if(AIRLOCK_WIRE_AI_CONTROL)
+			//one wire for AI control. Cutting this prevents the AI from controlling the door unless it has hacked the door through the power connection (which takes about a minute). If both main and backup power are cut, as well as this wire, then the AI cannot operate or hack the door at all.
+			//aiControlDisabled: If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
+			if(src.aiControlDisabled == 0)
+				src.aiControlDisabled = 1
+			else if(src.aiControlDisabled == -1)
+				src.aiControlDisabled = 2
+			src.updateUsrDialog()
+		if(AIRLOCK_WIRE_ELECTRIFY)
+			//Cutting this wire electrifies the door, so that the next person to touch the door without insulated gloves gets electrocuted.
+			if(src.secondsElectrified != -1)
+				shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
+				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Electrified the [name] at [x] [y] [z]</font>")
+				src.secondsElectrified = -1
+		if (AIRLOCK_WIRE_SAFETY)
+			safe = 0
+			src.updateUsrDialog()
+
+		if(AIRLOCK_WIRE_SPEED)
+			autoclose = 0
+			src.updateUsrDialog()
+
+		if(AIRLOCK_WIRE_LIGHT)
+			lights = 0
+			src.updateUsrDialog()
+
+/obj/machinery/door/airlock/proc/mend(var/wireColor)
+	var/wireFlag = airlockWireColorToFlag[wireColor]
+	var/wireIndex = airlockWireColorToIndex[wireColor] //not used in this function
+	wires |= wireFlag
+	switch(wireIndex)
+		if(AIRLOCK_WIRE_MAIN_POWER1 || AIRLOCK_WIRE_MAIN_POWER2)
+			if((!src.isWireCut(AIRLOCK_WIRE_MAIN_POWER1)) && (!src.isWireCut(AIRLOCK_WIRE_MAIN_POWER2)))
+				src.regainMainPower()
+				src.shock(usr, 50)
+				src.updateUsrDialog()
+		if(AIRLOCK_WIRE_BACKUP_POWER1 || AIRLOCK_WIRE_BACKUP_POWER2)
+			if((!src.isWireCut(AIRLOCK_WIRE_BACKUP_POWER1)) && (!src.isWireCut(AIRLOCK_WIRE_BACKUP_POWER2)))
+				src.regainBackupPower()
+				src.shock(usr, 50)
+				src.updateUsrDialog()
+		if(AIRLOCK_WIRE_AI_CONTROL)
+			//one wire for AI control. Cutting this prevents the AI from controlling the door unless it has hacked the door through the power connection (which takes about a minute). If both main and backup power are cut, as well as this wire, then the AI cannot operate or hack the door at all.
+			//aiControlDisabled: If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
+			if(src.aiControlDisabled == 1)
+				src.aiControlDisabled = 0
+			else if(src.aiControlDisabled == 2)
+				src.aiControlDisabled = -1
+			src.updateUsrDialog()
+		if(AIRLOCK_WIRE_ELECTRIFY)
+			if(src.secondsElectrified == -1)
+				src.secondsElectrified = 0
+
+		if (AIRLOCK_WIRE_SAFETY)
+			safe = 1
+			src.updateUsrDialog()
+
+		if(AIRLOCK_WIRE_SPEED)
+			autoclose = 1
+			if(!src.density)
+				close()
+			src.updateUsrDialog()
+
+		if(AIRLOCK_WIRE_LIGHT)
+			lights = 1
+			src.updateUsrDialog()
+
+*/
+
 /obj/machinery/door/airlock/proc/isElectrified()
 	if(src.secondsElectrified != 0)
 		return 1
@@ -507,7 +666,7 @@ About the new airlock wires panel:
 		t1 += text("Backup Power Output wire is cut.<br>\n")
 
 	if(src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
-		t1 += text("Door bolt drop wire is cut.<br>\n")
+		t1 += text("Door bolt control wire is cut.<br>\n")
 	else if(!src.locked)
 		t1 += text("Door bolts are up. <A href='?src=\ref[];aiDisable=4'>Drop them?</a><br>\n", src)
 	else
@@ -816,15 +975,11 @@ About the new airlock wires panel:
 				if(4)
 					//raise door bolts
 					if(src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
-						usr << text("The door bolt drop wire is cut - you can't raise the door bolts.<br>\n")
+						usr << text("The door bolt control wire is cut - you can't raise the door bolts.<br>\n")
 					else if(!src.locked)
 						usr << text("The door bolts are already up.<br>\n")
 					else
-						if(src.arePowerSystemsOn())
-							src.locked = 0
-							update_icon()
-						else
-							usr << text("Cannot raise door bolts due to power failure.<br>\n")
+						src.unlock()
 
 				if(5)
 					//electrify door for 30 seconds
@@ -1089,6 +1244,23 @@ About the new airlock wires panel:
 	..()
 	return
 
+/obj/machinery/door/airlock/proc/lock(var/forced=0)
+	if (src.locked) return
+
+	src.locked = 1
+	for(var/mob/M in range(1,src))
+		M.show_message("You hear a click from the bottom of the door.", 2)
+	update_icon()
+
+/obj/machinery/door/airlock/proc/unlock(var/forced=0)
+	if (!src.locked) return
+
+	if(forced || src.arePowerSystemsOn()) //only can raise bolts if power's on
+		src.locked = 0
+		for(var/mob/M in range(1,src))
+			M.show_message("You hear a click from the bottom of the door.", 2)
+		update_icon()
+
 /obj/machinery/door/airlock/New()
 	..()
 	wires = new(src)
@@ -1104,7 +1276,7 @@ About the new airlock wires panel:
 
 
 /obj/machinery/door/airlock/proc/prison_open()
-	src.locked = 0
+	src.unlock()
 	src.open()
 	src.locked = 1
 	return

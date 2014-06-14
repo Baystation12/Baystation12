@@ -17,6 +17,6 @@
 				if(istype(door,/obj/machinery/door/airlock/hatch/gamma))
 					return
 				if(istype(door,/obj/machinery/door/airlock))
-					door:locked = 0
+					door:unlock(1)	//forced because it's magic!
 				door.open()
 	return

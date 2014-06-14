@@ -29,10 +29,7 @@
 					<A href='?src=\ref[src];secretsadmin=manifest'>Show Crew Manifest</A><BR>
 					<A href='?src=\ref[src];secretsadmin=DNA'>List DNA (Blood)</A><BR>
 					<A href='?src=\ref[src];secretsadmin=fingerprints'>List Fingerprints</A><BR><BR>
-					<A href='?src=\ref[src];secretsfun=moveadminshuttle'>Move Administration Shuttle</A><BR>
-					<A href='?src=\ref[src];secretsfun=moveferry'>Move Ferry</A><BR>
-					<A href='?src=\ref[src];secretsfun=movealienship'>Move Alien Dinghy</A><BR>
-					<A href='?src=\ref[src];secretsfun=moveminingshuttle'>Move Mining Shuttle</A><BR>
+					<A href='?src=\ref[src];secretsfun=moveshuttle'>Move a shuttle</A><BR>
 					<A href='?src=\ref[src];secretsfun=blackout'>Break all lights</A><BR>
 					<A href='?src=\ref[src];secretsfun=whiteout'>Fix all lights</A><BR>
 					<A href='?src=\ref[src];secretsfun=floorlava'>The floor is lava! (DANGEROUS: extremely lame)</A><BR>

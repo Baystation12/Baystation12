@@ -33,6 +33,8 @@ datum/controller/game_controller
 
 	var/last_thing_processed
 
+	var/list/shuttle_list	//for debugging and VV
+
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
 	if(master_controller != src)
@@ -68,6 +70,9 @@ datum/controller/game_controller/proc/setup()
 
 	if(!garbage)
 		garbage = new /datum/controller/garbage_collector()
+
+	if(!shuttles) setup_shuttles()
+	shuttle_list = shuttles
 
 	setup_objects()
 	setupgenetics()

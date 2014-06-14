@@ -53,6 +53,8 @@ Note: Must be placed west/left of and R&D console to function.
 	max_material_storage = T * 75000
 
 /obj/machinery/r_n_d/protolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if(exchange_parts(user, O))
+		return
 	if (shocked)
 		shock(user,50)
 	if (O.is_open_container())

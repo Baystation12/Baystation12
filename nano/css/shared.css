@@ -174,8 +174,20 @@ h4 {
 	font-weight: bold;
 }
 .bad {
-	color: #ee0000;
-	font-weight: bold;
+    color: #ee0000;
+    font-weight: bold;
+}
+
+.idle {
+    color: #272727;
+    font-weight: bold;
+}
+
+.redBackground {
+	background: #ea0000;
+}
+.yellowBackground {
+	background: #cacc00;
 }
 .highlight {
 	color: #8BA5C4;
