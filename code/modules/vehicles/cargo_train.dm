@@ -11,7 +11,8 @@
 	load_offset_y = 9
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
-	var/lead_engine = 0		//if the engine is the lead engine - set automatically
+	var/lead_engine = 1		//if the engine is the lead engine - set automatically
+	active_engines = 1
 
 /obj/vehicle/train/cargo/trolley
 	name = "cargo train trolley"
@@ -35,8 +36,6 @@
 
 /obj/vehicle/train/cargo/engine/initialize()
 	..()
-	if(!lead)
-		lead_engine = 1
 
 /obj/vehicle/train/cargo/engine/Move()
 	if(on && cell.charge < power_use)
@@ -85,6 +84,11 @@
 
 	..()
 
+/obj/vehicle/train/cargo/trolley/Bump(atom/Obstacle)
+	if(!lead)
+		return //so people can't knock others over by pushing a trolley around
+	..()
+
 //-------------------------------------------
 // Train procs
 //-------------------------------------------
@@ -107,6 +111,7 @@
 		D << "\red \b You ran over [H]!"
 		visible_message("<B>\red \The [src] ran over [H]!</B>")
 		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey]), driven by [D.name] ([D.ckey])</font>")
+		msg_admin_attack("[D.name] ([D.ckey]) ran over [H.name] ([H.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 	else
 		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey])</font>")
 
@@ -184,8 +189,12 @@
 /obj/vehicle/train/cargo/trolley/latch(var/obj/vehicle/train/T)
 	if(..())
 		//if this is a trolley, and is now part of a train, anchor it so it cant be pushed around
-		if(lead || tow)
+		if(lead)
 			anchored = 1
+			lead.anchored = 1
+		if(tow)
+			anchored = 1
+			tow.anchored = 1
 		return 1
 	else
 		return 0
@@ -205,6 +214,8 @@
 		//check if this is not the lead engine
 		if(lead)
 			lead_engine = 0
+		if(tow)
+			tow.anchored = 1
 		return 1
 	else
 		return 0
