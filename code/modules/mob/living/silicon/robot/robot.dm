@@ -559,9 +559,6 @@
 				if(istype(WC))
 					C.brute_damage = WC.brute
 					C.electronics_damage = WC.burn
-				else //This will nominally mean that removing and replacing a power cell will repair the mount, but I don't care at this point. ~Z
-					C.brute_damage = 0
-					C.electronics_damage = 0
 
 				usr << "\blue You install the [W.name]."
 
@@ -599,8 +596,12 @@
 				user << "You close the cover."
 				opened = 0
 				updateicon()
-			else if(mmi && wiresexposed && isWireCut(1) && isWireCut(2) && isWireCut(3) && isWireCut(4) && isWireCut(5))
+			else if(wiresexposed && isWireCut(1) && isWireCut(2) && isWireCut(3) && isWireCut(4) && isWireCut(5))
 				//Cell is out, wires are exposed, remove MMI, produce damaged chassis, baleet original mob.
+				if(!mmi)
+					user << "\The [src] has no brain to remove."
+					return
+
 				user << "You jam the crowbar into the robot and begin levering [mmi]."
 				sleep(30)
 				user << "You damage some parts of the chassis, but eventually manage to rip out [mmi]!"
@@ -660,6 +661,9 @@
 			C.installed = 1
 			C.wrapped = W
 			C.install()
+			//This will mean that removing and replacing a power cell will repair the mount, but I don't care at this point. ~Z
+			C.brute_damage = 0
+			C.electronics_damage = 0
 
 	else if (istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/device/multitool))
 		if (wiresexposed)
