@@ -160,12 +160,11 @@
 	O.gender = gender
 	O.invisibility = 0
 
-
 	if(mind)		//TODO
 		mind.transfer_to(O)
 		if(O.mind.assigned_role == "Cyborg")
 			O.mind.original = O
-		else if(mind&&mind.special_role)
+		else if(mind && mind.special_role)
 			O.mind.store_memory("In case you look at this after being borged, the objectives are only here until I find a way to make them not show up for you, as I can't simply delete them without screwing up round-end reporting. --NeoFite")
 	else
 		O.key = key
@@ -180,7 +179,7 @@
 		else
 			O.mmi = new /obj/item/device/mmi(O)
 
-		O.mmi.transfer_identity(src) //Does not transfer key/client.
+		if(O.mmi) O.mmi.transfer_identity(src) //Does not transfer key/client.
 
 	O.Namepick()
 
