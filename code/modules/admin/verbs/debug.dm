@@ -533,6 +533,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	//log_admin("[key_name(src)] has alienized [M.key].")
 	var/list/dresspacks = list(
 		"strip",
+		"as job...",
 		"Engineer RIG",
 		"CE RIG",
 		"Mining RIG",
@@ -570,6 +571,12 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/dresscode = input("Select dress for [M]", "Robust quick dress shop") as null|anything in dresspacks
 	if (isnull(dresscode))
 		return
+
+	var/datum/job/jobdatum
+	if (dresscode == "as job...")
+		var/jobname = input("Select job", "Robust quick dress shop") as null|anything in get_all_jobs()
+		jobdatum = job_master.GetJob(jobname)
+
 	feedback_add_details("admin_verb","SEQ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	if(dostrip)
 		for (var/obj/item/I in M)
@@ -579,6 +586,12 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	switch(dresscode)
 		if ("strip")
 			//do nothing
+
+		if ("as job...")
+			if(jobdatum)
+				dresscode = "[jobdatum.title]"
+				jobdatum.equip(M)
+
 		if ("standard space gear")
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(M), slot_shoes)
 
