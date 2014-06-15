@@ -269,6 +269,8 @@
 						return // No hands to drive your chair? Tough luck!
 				move_delay += 2
 				return mob.buckled.relaymove(mob,direct)
+			else if(istype(mob.buckled, /obj/structure/stool/bed/chair/cart))
+				return mob.buckled.relaymove(mob,direct)
 
 		//We are now going to move
 		moving = 1
