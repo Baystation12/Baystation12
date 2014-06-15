@@ -207,6 +207,7 @@
 
 	if(!mob.canmove)
 		if (mob.buckled && (istype(mob.buckled, /obj/structure/stool/bed/chair/wheelchair))) // Exception for wheelchairs
+		else if if (mob.buckled && (istype(mob.buckled, /obj/structure/stool/bed/chair/cart)))
 		else	return
 
 	//if(istype(mob.loc, /turf/space) || (mob.flags & NOGRAV))
