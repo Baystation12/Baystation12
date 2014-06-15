@@ -4,12 +4,128 @@
 #define WAIT_FINISH		3
 
 
-/*
-	I dont really like how much this manipulates shuttle it's docking controller, as it makes this code
-	depend a lot on their current implementation, and also having var/datum/shuttle/shuttle = shuttles[shuttle_tag] 
-	everywhere is kind of messy. I'm probably going to end up creating a subtype of shuttle called ferry_shuttle 
-	and move a lot of this into there when I get the time.
-*/
+/datum/shuttle/ferry
+	var/location = 0	//0 = at area_station, 1 = at area_offsite
+	var/process_state = IDLE_STATE
+	
+	//this mutex ensures that only one console is processing the shuttle's controls at a time
+	var/obj/machinery/computer/shuttle_control/in_use = null
+	
+	var/area_station
+	var/area_offsite
+	//TODO: change location to a string and use a mapping for area and dock targets.
+	var/dock_target_station
+	var/dock_target_offsite
+
+/datum/shuttle/ferry/short_jump(var/area/origin,var/area/destination)
+	if(isnull(location))
+		return
+
+	if(!destination)
+		destination = (location == 1 ? area_station : area_offsite)
+	if(!origin)
+		origin = (location == 1 ? area_offsite : area_station)
+	
+	..(origin, destination)
+
+/datum/shuttle/ferry/long_jump(var/area/departing,var/area/destination,var/area/interim,var/travel_time)
+	if(isnull(location))
+		return
+
+	if(!destination)
+		destination = (location == 1 ? area_station : area_offsite)
+	if(!departing)
+		departing = (location == 1 ? area_offsite : area_station)
+	
+	..(departing, destination, interim, travel_time)
+
+/datum/shuttle/ferry/move(var/area/origin,var/area/destination)
+	if (docking_controller && !docking_controller.undocked())
+		docking_controller.force_undock()
+	..(origin, destination)
+	location = !location
+
+/datum/shuttle/ferry/proc/process_shuttle()
+	switch(process_state)
+		if (WAIT_LAUNCH)
+			if (skip_docking_checks() || docking_controller.can_launch())
+				
+				//once you have a transition area, making ferry shuttles have a transition would merely requre replacing this with
+				//if (transition_area) long_jump(...)
+				//else short_jump ()
+				short_jump()
+				
+				process_state = WAIT_ARRIVE
+		if (WAIT_ARRIVE)
+			if (moving_status == SHUTTLE_IDLE)
+				dock()
+				process_state = WAIT_FINISH
+		if (WAIT_FINISH)
+			if (skip_docking_checks() || docking_controller.docked())
+				process_state = IDLE_STATE
+				in_use = null	//release lock
+
+/datum/shuttle/ferry/current_dock_target()
+	var/dock_target
+	if (!location)	//station
+		dock_target = dock_target_station
+	else
+		dock_target = dock_target_offsite
+	return dock_target
+
+
+/datum/shuttle/ferry/proc/launch(var/obj/machinery/computer/shuttle_control/user)
+	if (!can_launch()) return
+	
+	in_use = user	//obtain an exclusive lock on the shuttle
+	
+	process_state = WAIT_LAUNCH
+	undock()
+
+/datum/shuttle/ferry/proc/force_launch(var/obj/machinery/computer/shuttle_control/user)
+	if (!can_force()) return
+	
+	in_use = user	//obtain an exclusive lock on the shuttle
+	
+	short_jump()
+	
+	process_state = WAIT_ARRIVE
+
+/datum/shuttle/ferry/proc/cancel_launch(var/obj/machinery/computer/shuttle_control/user)
+	if (!can_cancel()) return
+	
+	moving_status = SHUTTLE_IDLE
+	process_state = WAIT_FINISH
+	
+	if (docking_controller && !docking_controller.undocked())
+		docking_controller.force_undock()
+	
+	spawn(10)
+		dock()
+	
+	return
+
+/datum/shuttle/ferry/proc/can_launch()
+	if (moving_status != SHUTTLE_IDLE)
+		return 0
+	
+	if (in_use)
+		return 0
+	
+	return 1
+
+/datum/shuttle/ferry/proc/can_force()
+	if (moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
+		return 1
+	return 0
+
+/datum/shuttle/ferry/proc/can_cancel()
+	if (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH)
+		return 1
+	return 0
+
+
+
 /obj/machinery/computer/shuttle_control
 	name = "shuttle control console"
 	icon = 'icons/obj/computer.dmi'
@@ -19,107 +135,29 @@
 	
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
 	var/hacked = 0   // Has been emagged, no access restrictions.
-	
-	var/process_state = IDLE_STATE
+	var/launch_override = 0
 
-/obj/machinery/computer/shuttle_control/proc/launch_shuttle()
-	if (!can_launch()) return
-	
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
-	
-	shuttle.in_use = 1	//obtain an exclusive lock on the shuttle
-	
-	process_state = WAIT_LAUNCH
-	shuttle.undock()
 
-/obj/machinery/computer/shuttle_control/proc/cancel_launch()
-	if (!can_cancel()) return
-
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
-	
-	shuttle.moving_status = SHUTTLE_IDLE
-	process_state = WAIT_FINISH
-	
-	if (shuttle.docking_controller && !shuttle.docking_controller.undocked())
-		shuttle.docking_controller.force_undock()
-	shuttle.dock()
-	
-	shuttle.in_use = 0
-	
-	return
-
-/obj/machinery/computer/shuttle_control/proc/toggle_override()
-	if (!can_override()) return
-
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
-	
-	if (shuttle.docking_controller.override_enabled)
-		shuttle.docking_controller.disable_override()
-	else
-		shuttle.docking_controller.enable_override()
-
-/obj/machinery/computer/shuttle_control/proc/can_launch()
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
-	
-	if (shuttle.moving_status != SHUTTLE_IDLE)
-		return 0
-	
-	if (shuttle.in_use && !skip_checks())
-		return 0
-	
-	return 1
-
-/obj/machinery/computer/shuttle_control/proc/can_cancel()
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
-	
-	if (shuttle.moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH)
-		return 1
-	return 0
-
-/obj/machinery/computer/shuttle_control/proc/can_override()
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
-	
-	if (shuttle.docking_controller && (!shuttle.docking_controller.override_enabled || !shuttle.in_use))
-		return 1
-	return 0
 
 //TODO move this stuff into the shuttle datum itself, instead of manipulating the shuttle's members
 /obj/machinery/computer/shuttle_control/process()
 	if (!shuttles || !(shuttle_tag in shuttles))
 		return
-
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
-
-	switch(process_state)
-		if (WAIT_LAUNCH)
-			if (skip_checks() || shuttle.docking_controller.can_launch())
-				shuttle.short_jump()
-				if (shuttle.docking_controller && !shuttle.docking_controller.undocked())
-					shuttle.docking_controller.force_undock()
-				process_state = WAIT_ARRIVE
-		if (WAIT_ARRIVE)
-			if (shuttle.moving_status == SHUTTLE_IDLE)
-				shuttle.dock()
-				process_state = WAIT_FINISH
-		if (WAIT_FINISH)
-			if (skip_checks() || shuttle.docking_controller.docked())
-				process_state = IDLE_STATE
-				shuttle.in_use = 0	//release lock
-
-/obj/machinery/computer/shuttle_control/proc/skip_checks()
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
-
-	if (!shuttle.docking_controller || !shuttle.current_dock_target())
-		return 1	//shuttles without docking controllers or at locations without docking ports act like old-style shuttles
-
-	return shuttle.docking_controller.override_enabled	//override pretty much lets you do whatever you want
-
+	
+	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
+	if (!istype(shuttle))
+		return
+	
+	if (shuttle.in_use == src)
+		shuttle.process_shuttle()
 
 /obj/machinery/computer/shuttle_control/Del()
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
+	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
+	if (!istype(shuttle))
+		return
 	
-	if (process_state != IDLE_STATE)
-		shuttle.in_use = 0	//shuttle may not dock properly if this gets deleted while in transit, but its not a big deal
+	if (shuttle.in_use == src)
+		shuttle.in_use = null	//shuttle may not dock properly if this gets deleted while in transit, but its not a big deal
 
 /obj/machinery/computer/shuttle_control/attack_hand(user as mob)
 	if(..(user))
@@ -130,7 +168,9 @@
 
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 	var/data[0]
-	var/datum/shuttle/shuttle = shuttles[shuttle_tag]
+	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
+	if (!istype(shuttle))
+		return
 
 	var/shuttle_state
 	switch(shuttle.moving_status)
@@ -139,7 +179,7 @@
 		if(SHUTTLE_INTRANSIT) shuttle_state = "in_transit"
 
 	var/shuttle_status
-	switch (process_state)
+	switch (shuttle.process_state)
 		if(IDLE_STATE)
 			if (shuttle.in_use)
 				shuttle_status = "Busy."
@@ -159,10 +199,10 @@
 		"shuttle_state" = shuttle_state,
 		"has_docking" = shuttle.docking_controller? 1 : 0,
 		"docking_status" = shuttle.docking_controller? shuttle.docking_controller.get_docking_status() : null,
-		"override_enabled" = shuttle.docking_controller? shuttle.docking_controller.override_enabled : null,
-		"can_launch" = can_launch(),
-		"can_cancel" = can_cancel(),
-		"can_override" = can_override(),
+		"docking_override" = shuttle.docking_controller? shuttle.docking_controller.override_enabled : null,
+		"can_launch" = shuttle.can_launch(),
+		"can_cancel" = shuttle.can_cancel(),
+		"can_force" = shuttle.can_force(),
 	)
 
 	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
@@ -181,13 +221,16 @@
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 
+	var/datum/shuttle/ferry/shuttle = shuttles[shuttle_tag]
+	if (!istype(shuttle))
+		return
 	
 	if(href_list["move"])
-		launch_shuttle()
+		shuttle.launch(src)
+	if(href_list["force"])
+		shuttle.force_launch(src)
 	else if(href_list["cancel"])
-		cancel_launch()
-	else if(href_list["override"])
-		toggle_override()
+		shuttle.cancel_launch()
 
 
 /obj/machinery/computer/shuttle_control/attackby(obj/item/weapon/W as obj, mob/user as mob)

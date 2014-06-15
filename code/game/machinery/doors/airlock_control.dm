@@ -1,4 +1,4 @@
-#define AIRLOCK_CONTROL_RANGE 5
+#define AIRLOCK_CONTROL_RANGE 22
 
 // This code allows for airlocks to be controlled externally by setting an id_tag and comm frequency (disables ID access)
 obj/machinery/door/airlock
@@ -53,8 +53,6 @@ obj/machinery/door/airlock/receive_signal(datum/signal/signal)
 
 
 obj/machinery/door/airlock/proc/send_status()
-	if (!can_radio()) return
-	
 	if(radio_connection)
 		var/datum/signal/signal = new
 		signal.transmission_method = 1 //radio signal

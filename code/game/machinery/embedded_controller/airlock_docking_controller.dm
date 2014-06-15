@@ -109,11 +109,6 @@
 /datum/computer/file/embedded_program/docking/airlock/ready_for_undocking()
 	return airlock_program.check_doors_secured()
 
-/datum/computer/file/embedded_program/docking/airlock/reset()
-	airlock_program.stop_cycling()
-	airlock_program.close_doors()
-	..()
-
 //An airlock controller to be used by the airlock-based docking port controller.
 //Same as a regular airlock controller but allows disabling of the regular airlock functions when docking
 /datum/computer/file/embedded_program/airlock/docking
@@ -171,4 +166,5 @@
 	set category = "Debug"
 	set src in view(1)
 	src.program:initiate_undocking()
+
 */
