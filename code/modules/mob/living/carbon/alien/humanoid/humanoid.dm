@@ -401,3 +401,5 @@ In all, this is a lot like the monkey code. /N
 	return
 
 
+/mob/living/carbon/alien/humanoid/canBeHandcuffed()
+	return 1

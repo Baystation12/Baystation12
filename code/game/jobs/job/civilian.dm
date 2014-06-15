@@ -8,8 +8,8 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel"
 	selection_color = "#dddddd"
-	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue)
-	minimal_access = list(access_bar, access_maint_tunnels)
+	access = list(access_hydroponics, access_bar, access_kitchen, access_morgue, access_weapons)
+	minimal_access = list(access_bar, access_maint_tunnels, access_weapons)
 
 
 	equip(var/mob/living/carbon/human/H)
