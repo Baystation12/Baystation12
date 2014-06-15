@@ -51,13 +51,6 @@
 	icon_state = "coin_clown"
 	credits = 1000
 
-/obj/item/weapon/coin/adamantine
-	name = "Adamantine coin"
-	icon_state = "coin_adamantine"
-
-/obj/item/weapon/coin/mythril
-	name = "Mythril coin"
-	icon_state = "coin_mythril"
 
 /obj/item/weapon/coin/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack/cable_coil) )
