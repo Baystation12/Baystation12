@@ -1262,6 +1262,15 @@ datum/design/mrspacman
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/pacman/mrs"
 
+datum/design/batteryrack
+	name = "Cell rack PSU Board"
+	desc = "The circuit board for a power cell rack PSU."
+	id = "batteryrack"
+	req_tech = list("powerstorage" = 3, "engineering" = 2)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = "/obj/item/weapon/circuitboard/batteryrack"
+
 
 /////////////////////////////////////////
 ////////////Medical Tools////////////////
