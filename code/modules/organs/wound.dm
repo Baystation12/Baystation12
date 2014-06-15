@@ -22,7 +22,8 @@
 	var/damage_type = CUT
 
 	// whether this wound needs a bandage/salve to heal at all
-	var/needs_treatment = 0
+	// the maximum amount of damage that this wound can have and still autoheal
+	var/autoheal_cutoff = 15
 
 	// is the wound bandaged?
 	var/tmp/bandaged = 0
@@ -62,37 +63,32 @@
 
 		src.damage = damage
 
-		// initialize with the first stage
-		next_stage()
-
-		// this will ensure the size of the wound matches the damage
-		src.heal_damage(0)
-
-		// make the max_bleeding_stage count from the end of the list rather than the start
-		// this is more robust to changes to the list
 		max_bleeding_stage = src.desc_list.len - max_bleeding_stage
+		
+		// initialize with the appropriate stage
+		src.init_stage(damage)
 
 		bleed_timer += damage
 
 	// returns 1 if there's a next stage, 0 otherwise
-	proc/next_stage()
-		if(current_stage + 1 > src.desc_list.len)
-			return 0
-
-		current_stage++
+	proc/init_stage(var/initial_damage)
+		current_stage = stages.len
+		
+		while(src.current_stage > 1 && src.damage_list[current_stage-1] <= initial_damage / src.amount)
+			src.current_stage--
 
 		src.min_damage = damage_list[current_stage]
 		src.desc = desc_list[current_stage]
-		return 1
 
 	// returns 1 if the wound has started healing
 	proc/started_healing()
 		return (current_stage > 1)
 
 	// checks whether the wound has been appropriately treated
-	// always returns 1 for wounds that don't need to be treated
+	// always returns 1 for wounds that are too minor to need treatment
 	proc/is_treated()
-		if(!needs_treatment) return 1
+		if(src.damage <= autoheal_cutoff)
+			return 1
 
 		if(damage_type == BRUISE || damage_type == CUT)
 			return bandaged
@@ -141,7 +137,7 @@
 		src.damage += damage
 		bleed_timer += damage
 
-		while(src.current_stage > 1 && src.damage_list[current_stage-1] <= src.damage)
+		while(src.current_stage > 1 && src.damage_list[current_stage-1] <= src.damage / src.amount)
 			src.current_stage--
 
 		src.desc = desc_list[current_stage]
@@ -167,92 +163,46 @@
 
 /datum/wound/cut/gaping
 	max_bleeding_stage = 2
-	stages = list("gaping wound" = 50, "large blood soaked clot" = 25, "large clot" = 15, "small angry scar" = 5, \
-				   "small straight scar" = 0)
+	stages = list("gaping wound" = 50, "large blood soaked clot" = 25, "large clot" = 15, "small angry scar" = 5, "small straight scar" = 0)
 
 /datum/wound/cut/gaping_big
 	max_bleeding_stage = 2
 	stages = list("big gaping wound" = 60, "healing gaping wound" = 40, "large angry scar" = 10, "large straight scar" = 0)
 
-	needs_treatment = 1 // this only heals when bandaged
-
 datum/wound/cut/massive
 	max_bleeding_stage = 2
 	stages = list("massive wound" = 70, "massive healing wound" = 50, "massive angry scar" = 10,  "massive jagged scar" = 0)
-
-	needs_treatment = 1 // this only heals when bandaged
 
 /** BRUISES **/
 /datum/wound/bruise
 	stages = list("monumental bruise" = 80, "huge bruise" = 50, "large bruise" = 30,\
 				  "moderate bruise" = 20, "small bruise" = 10, "tiny bruise" = 5)
-
-	needs_treatment = 1 // this only heals when bandaged
-	damage_type = BRUISE
-
-/datum/wound/bruise/monumental
-
-// implement sub-paths by starting at a later stage
-
-/datum/wound/bruise/tiny
-	current_stage = 5
-	needs_treatment = 0
-
-/datum/wound/bruise/small
-	current_stage = 4
-	needs_treatment = 0
-
-/datum/wound/bruise/moderate
-	current_stage = 3
-	needs_treatment = 0
-
-/datum/wound/bruise/large
-	current_stage = 2
-
-/datum/wound/bruise/huge
-	current_stage = 1
+	max_bleeding_stage = 3
+	autoheal_cutoff = 30
 
 /** BURNS **/
 /datum/wound/burn/moderate
 	stages = list("ripped burn" = 10, "moderate burn" = 5, "moderate salved burn" = 2, "fresh skin" = 0)
-
-	needs_treatment = 1 // this only heals when bandaged
-
 	damage_type = BURN
 
 /datum/wound/burn/large
 	stages = list("ripped large burn" = 20, "large burn" = 15, "large salved burn" = 5, "fresh skin" = 0)
-
-	needs_treatment = 1 // this only heals when bandaged
-
 	damage_type = BURN
 
 /datum/wound/burn/severe
 	stages = list("ripped severe burn" = 35, "severe burn" = 30, "severe salved burn" = 10, "burn scar" = 0)
-
-	needs_treatment = 1 // this only heals when bandaged
-
 	damage_type = BURN
 
 /datum/wound/burn/deep
 	stages = list("ripped deep burn" = 45, "deep burn" = 40, "deep salved burn" = 15,  "large burn scar" = 0)
-
-	needs_treatment = 1 // this only heals when bandaged
-
 	damage_type = BURN
-
 
 /datum/wound/burn/carbonised
 	stages = list("carbonised area" = 50, "treated carbonised area" = 20, "massive burn scar" = 0)
-
-	needs_treatment = 1 // this only heals when bandaged
-
 	damage_type = BURN
 
 /datum/wound/internal_bleeding
 	internal = 1
-
 	stages = list("severed vein" = 30, "cut vein" = 20, "damaged vein" = 10, "bruised vein" = 5)
-	max_bleeding_stage = 0
-
-	needs_treatment = 1
+	autoheal_cutoff = 5
+	max_bleeding_stage = 0	//all stages bleed. It's called internal bleeding after all.
