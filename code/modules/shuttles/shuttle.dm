@@ -126,7 +126,7 @@ var/global/list/shuttles
 	shuttles = list()
 
 	var/datum/shuttle/ferry/shuttle
-/*
+
 	//Supply and escape shuttles.
 	shuttle = new()
 	shuttle.location = 1
@@ -179,7 +179,7 @@ var/global/list/shuttles
 	shuttle.dock_target_station = "mining_dock_airlock"
 	shuttle.dock_target_offsite = "mining_outpost_airlock"
 	shuttles["Mining"] = shuttle
-*/
+
 	shuttle = new()
 	shuttle.warmup_time = 10
 	shuttle.area_offsite = locate(/area/shuttle/research/outpost)
@@ -188,7 +188,7 @@ var/global/list/shuttles
 	shuttle.dock_target_station = "research_dock_airlock"
 	shuttle.dock_target_offsite = "research_outpost_dock"
 	shuttles["Research"] = shuttle
-/*
+
 	// ERT Shuttle
 	var/datum/shuttle/ferry/multidock/specops/ERT = new()
 	ERT.location = 0
@@ -201,7 +201,7 @@ var/global/list/shuttles
 	ERT.dock_target_station = "specops_centcom_dock"
 	ERT.dock_target_offsite = "specops_dock_airlock"
 	shuttles["Special Operations"] = ERT
-*/
+
 	//Vox Shuttle.
 	var/datum/shuttle/multi_shuttle/VS = new/datum/shuttle/multi_shuttle()
 	VS.origin = /area/shuttle/vox/station
