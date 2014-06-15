@@ -617,11 +617,10 @@ This function completely restores a damaged organ to perfect condition.
 			//Throw organs around
 			var/lol = pick(cardinal)
 			step(organ,lol)
-			owner.regenerate_icons()
-		return organ
-
 			// OK so maybe your limb just flew off, but if it was attached to a pair of cuffs then hooray! Freedom!
 			release_restraints()
+			owner.regenerate_icons()
+		return organ
 
 /****************************************************
 			   HELPERS
