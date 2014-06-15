@@ -40,6 +40,11 @@
 	..(departing, destination, interim, travel_time)
 
 /datum/shuttle/ferry/move(var/area/origin,var/area/destination)
+	if(!destination)
+		destination = (location == 1 ? area_station : area_offsite)
+	if(!origin)
+		origin = (location == 1 ? area_offsite : area_station)
+
 	if (docking_controller && !docking_controller.undocked())
 		docking_controller.force_undock()
 	..(origin, destination)
