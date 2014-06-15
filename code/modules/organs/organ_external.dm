@@ -236,21 +236,8 @@ This function completely restores a damaged organ to perfect condition.
 				return
 
 	//Creating wound
-	var/datum/wound/W
-	var/size = min( max( 1, damage/10 ) , 6)
-	//Possible types of wound
-	var/list/size_names = list()
-	switch(type)
-		if(CUT)
-			size_names = typesof(/datum/wound/cut/) - /datum/wound/cut/
-		if(BRUISE)
-			size_names = typesof(/datum/wound/bruise/) - /datum/wound/bruise/
-		if(BURN)
-			size_names = typesof(/datum/wound/burn/) - /datum/wound/burn/
-
-	size = min(size,size_names.len)
-	var/wound_type = size_names[size]
-	W = new wound_type(damage)
+	var/wound_type = get_wound_type(type, damage)
+	var/datum/wound/W = new wound_type(damage)
 
 	//Possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
@@ -269,6 +256,25 @@ This function completely restores a damaged organ to perfect condition.
 			break
 	if(W)
 		wounds += W
+
+/datum/organ/external/proc/get_wound_type(var/type = CUT, var/damage)
+	//if you look a the names in the wound's stages list for each wound type you will see the logic behind these values
+	switch(type)
+		if(CUT)
+			if (damage <= 5) return /datum/wound/cut/small
+			if (damage <= 15) return /datum/wound/cut/deep
+			if (damage <= 25) return /datum/wound/cut/flesh
+			if (damage <= 50) return /datum/wound/cut/gaping
+			if (damage <= 60) return /datum/wound/cut/gaping_big
+			return /datum/wound/cut/massive
+		if(BRUISE)
+			return /datum/wound/bruise
+		if(BURN)
+			if (damage <= 5) return /datum/wound/burn/moderate
+			if (damage <= 15) return /datum/wound/burn/large
+			if (damage <= 30) return /datum/wound/burn/severe
+			if (damage <= 40) return /datum/wound/burn/deep
+			if (damage <= 50) return /datum/wound/burn/carbonised
 
 /****************************************************
 			   PROCESSING & UPDATING
@@ -388,15 +394,12 @@ This function completely restores a damaged organ to perfect condition.
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
-
 		// slow healing
 		var/heal_amt = 0
 
-		if (W.damage < 15) //this thing's edges are not in day's travel of each other, what healing?
-			heal_amt += 0.2
-
-		if(W.is_treated() && W.damage < 50) //whoa, not even magical band aid can hold it together
-			heal_amt += 0.3
+		// if damage >= 50 AFTER treatment then it's probably too severe to heal within the timeframe of a round.
+		if (W.is_treated() && W.damage < 50)
+			heal_amt += 0.5
 
 		//we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
 		heal_amt = heal_amt * wound_update_accuracy
