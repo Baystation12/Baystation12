@@ -42,21 +42,18 @@
 	if(!A.anchored)
 		var/turf/T = get_step(A, dir)
 		if(isturf(T))
-			if(!emagged)	//if not emagged, bump people away, else just run over them
-				A.Move(T)
-			else if(!ismob(A))	//always bump objects even if emagged
-				A.Move(T)
-	if(istype(A, /mob/living))
-		var/mob/living/M = A
-		var/mob/living/D
-		if(istype(load, /mob/living/carbon/human))
-			D = load
-			D << "\red You hit [M]!"
-		visible_message("\red [src] knocks over [M]!")
-		M.apply_effects(5, 5)								//knock people down if you hit them
-		if(emagged)											//and do damage if it's emagged
-			M.apply_damages(5 * train_length / move_delay)	// according to how fast the train is going and how heavy it is
-			msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+			A.Move(T)	//bump things away when hit
+
+	if(emagged)
+		if(istype(A, /mob/living))
+			var/mob/living/M = A
+			visible_message("\red [src] knocks over [M]!")
+			M.apply_effects(5, 5)							//knock people down if you hit them
+			M.apply_damages(5 * train_length / move_delay)	// and do damage according to how fast the train is going and how heavy it is			
+			if(istype(load, /mob/living/carbon/human))
+				var/mob/living/D = load
+				D << "\red You hit [M]!"
+				msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 
 
 //-------------------------------------------
@@ -128,9 +125,11 @@
 	if(!istype(T) || !Adjacent(T))
 		return 0
 
+	/* --- commented out until we get directional sprites ---
 	if(dir != T.dir)	//cars need to be inline to latch
 		return 0
-
+	*/
+	
 	var/T_dir = get_dir(src, T)
 
 	if(dir & T_dir) 	//if car is ahead
