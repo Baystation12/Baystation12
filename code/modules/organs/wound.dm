@@ -51,6 +51,7 @@
 	// helper lists
 	var/tmp/list/desc_list = list()
 	var/tmp/list/damage_list = list()
+	
 	New(var/damage)
 
 		created = world.time
@@ -80,9 +81,7 @@
 		src.min_damage = damage_list[current_stage]
 		src.desc = desc_list[current_stage]
 
-	// returns 1 if the wound has started healing
-	proc/started_healing()
-		return (current_stage > 1)
+	proc
 
 	// checks whether the wound has been appropriately treated
 	// always returns 1 for wounds that are too minor to need treatment

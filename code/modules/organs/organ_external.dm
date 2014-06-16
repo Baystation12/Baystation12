@@ -223,11 +223,19 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
 
+	//moved this before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage
+	//Possibly trigger an internal wound, too.
+	var/local_damage = brute_dam + burn_dam + damage
+	if(damage > 15 && type != BURN && local_damage > 30 && prob(damage) && !(status & ORGAN_ROBOT))
+		var/datum/wound/internal_bleeding/I = new (15)
+		wounds += I
+		owner.custom_pain("You feel something rip in your [display_name]!", 1)
+
 	// first check whether we can widen an existing wound
-	if(wounds.len > 0 && prob(max(50+owner.number_wounds*10,100)))
+	if(wounds.len > 0 && prob(max(50+(owner.number_wounds-1)*10,90)))
 		if((type == CUT || type == BRUISE) && damage >= 5)
 			var/datum/wound/W = pick(wounds)
-			if(W.amount == 1 && W.started_healing())
+			if(W.amount == 1)
 				W.open_wound(damage)
 				if(prob(25))
 					owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
@@ -238,13 +246,6 @@ This function completely restores a damaged organ to perfect condition.
 	//Creating wound
 	var/wound_type = get_wound_type(type, damage)
 	var/datum/wound/W = new wound_type(damage)
-
-	//Possibly trigger an internal wound, too.
-	var/local_damage = brute_dam + burn_dam + damage
-	if(damage > 15 && type != BURN && local_damage > 30 && prob(damage) && !(status & ORGAN_ROBOT))
-		var/datum/wound/internal_bleeding/I = new (15)
-		wounds += I
-		owner.custom_pain("You feel something rip in your [display_name]!", 1)
 
 	//Check whether we can add the wound to an existing wound
 	for(var/datum/wound/other in wounds)
