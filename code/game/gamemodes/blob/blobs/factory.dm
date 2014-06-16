@@ -57,7 +57,7 @@
 			factory.spores += src
 		..(loc)
 		return
-	Die()
+	death()
 		..()
 		if(factory)
 			factory.spores -= src
