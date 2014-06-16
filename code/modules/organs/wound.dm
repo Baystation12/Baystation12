@@ -81,10 +81,14 @@
 		src.min_damage = damage_list[current_stage]
 		src.desc = desc_list[current_stage]
 
+	// the amount of damage per wound
+	proc/wound_damage()
+		return src.damage / src.amount
+	
 	// checks whether the wound has been appropriately treated
 	// always returns 1 for wounds that are too minor to need treatment
 	proc/is_treated()
-		if(src.damage / src.amount <= autoheal_cutoff)
+		if(src.wound_damage() <= autoheal_cutoff)
 			return 1
 
 		if(damage_type == BRUISE || damage_type == CUT)
@@ -142,7 +146,7 @@
 		amount -= healed_damage
 		src.damage -= healed_damage
 
-		while(src.damage / src.amount < damage_list[current_stage] && current_stage < src.desc_list.len)
+		while(src.wound_damage() < damage_list[current_stage] && current_stage < src.desc_list.len)
 			current_stage++
 		desc = desc_list[current_stage]
 		src.min_damage = damage_list[current_stage]
@@ -182,7 +186,7 @@
 	
 	proc/bleeding()
 		// internal wounds don't bleed in the sense of this function
-		return ((damage > 30 || bleed_timer > 0) && !(bandaged||clamped) && (damage_type == BRUISE && damage >= 20 || damage_type == CUT && damage >= 5) && current_stage <= max_bleeding_stage && !src.internal)
+		return ((wound_damage() > 30 || bleed_timer > 0) && !(bandaged||clamped) && (damage_type == BRUISE && wound_damage() >= 20 || damage_type == CUT && wound_damage() >= 5) && current_stage <= max_bleeding_stage && !src.internal)
 
 /** CUTS **/
 /datum/wound/cut/small
