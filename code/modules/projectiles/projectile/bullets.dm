@@ -49,6 +49,7 @@
 /obj/item/projectile/bullet/burstbullet//I think this one needs something for the on hit
 	name = "exploding bullet"
 	damage = 20
+	embed = 0
 	edge = 1
 
 
