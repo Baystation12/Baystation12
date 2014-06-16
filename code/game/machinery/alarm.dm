@@ -410,6 +410,15 @@
 				AA.update_icon()
 
 	if(danger_level > 1)
+		if (!(mode == AALARM_MODE_PANIC || mode == AALARM_MODE_CYCLE))
+			var/turf/simulated/location = loc
+			if(istype(location))
+				var/datum/gas_mixture/environment = location.return_air()
+				var/environment_pressure = environment.return_pressure()
+				if (get_danger_level(environment_pressure, TLV["pressure"]) > 1)
+					mode = AALARM_MODE_OFF
+					apply_mode()
+		
 		air_doors_close(0)
 	else
 		air_doors_open(0)
