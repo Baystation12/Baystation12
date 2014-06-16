@@ -1177,9 +1177,11 @@ About the new airlock wires panel:
 		if( !arePowerSystemsOn() || (stat & NOPOWER) || isWireCut(AIRLOCK_WIRE_OPEN_DOOR) )
 			return 0
 	use_power(50)
-	if(istype(src, /obj/machinery/door/airlock/glass))
+	if(forced)
+		playsound(src.loc, 'sound/machines/airlockforced.ogg', 30, 1)
+	else if(istype(src, /obj/machinery/door/airlock/glass))
 		playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
-	if(istype(src, /obj/machinery/door/airlock/clown))
+	else if(istype(src, /obj/machinery/door/airlock/clown))
 		playsound(src.loc, 'sound/items/bikehorn.ogg', 30, 1)
 	else
 		playsound(src.loc, 'sound/machines/airlock.ogg', 30, 1)
@@ -1193,6 +1195,7 @@ About the new airlock wires panel:
 		spawn(5)
 			autoclose()
 	// </worry>
+
 	return ..()
 
 /obj/machinery/door/airlock/close(var/forced=0)
@@ -1229,9 +1232,11 @@ About the new airlock wires panel:
 				location.add_blood(M)
 
 	use_power(50)
-	if(istype(src, /obj/machinery/door/airlock/glass))
+	if(forced)
+		playsound(src.loc, 'sound/machines/airlockforced.ogg', 30, 1)
+	else if(istype(src, /obj/machinery/door/airlock/glass))
 		playsound(src.loc, 'sound/machines/windowdoor.ogg', 30, 1)
-	if(istype(src, /obj/machinery/door/airlock/clown))
+	else if(istype(src, /obj/machinery/door/airlock/clown))
 		playsound(src.loc, 'sound/items/bikehorn.ogg', 30, 1)
 	else
 		playsound(get_turf(src), 'sound/machines/airlock.ogg', 30, 1)
