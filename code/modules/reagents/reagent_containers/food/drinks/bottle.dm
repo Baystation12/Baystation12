@@ -77,7 +77,7 @@
 	armor_duration /= 10
 
 	//Apply the damage!
-	target.apply_damage(force, BRUTE, affecting, armor_block)
+	target.apply_damage(force, BRUTE, affecting, armor_block, sharp=0)
 
 	// You are going to knock someone out for longer if they are not wearing a helmet.
 	if(affecting == "head" && istype(target, /mob/living/carbon/))
@@ -125,6 +125,8 @@
 	throw_range = 5
 	item_state = "beer"
 	attack_verb = list("stabbed", "slashed", "attacked")
+	sharp = 1
+	edge = 0
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
 
 /obj/item/weapon/broken_bottle/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)

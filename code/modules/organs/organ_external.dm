@@ -70,9 +70,9 @@
 	if(prob(probability))
 		droplimb(1)
 	else
-		take_damage(damage, 0, 1, used_weapon = "EMP")
+		take_damage(damage, 0, 1, 1, used_weapon = "EMP")
 
-/datum/organ/external/proc/take_damage(brute, burn, sharp, used_weapon = null, list/forbidden_limbs = list())
+/datum/organ/external/proc/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
 	if((brute <= 0) && (burn <= 0))
 		return 0
 
@@ -95,7 +95,7 @@
 	//If limb took enough damage, try to cut or tear it off
 	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
 		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
-			if( (sharp && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
+			if( (edge && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
 				droplimb(1)
 				return
 
@@ -159,7 +159,7 @@
 				if(possible_points.len)
 					//And pass the pain around
 					var/datum/organ/external/target = pick(possible_points)
-					target.take_damage(brute, burn, sharp, used_weapon, forbidden_limbs + src)
+					target.take_damage(brute, burn, sharp, edge, used_weapon, forbidden_limbs + src)
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
@@ -803,8 +803,8 @@ This function completely restores a damaged organ to perfect condition.
 	else
 		. = new /icon(owner.race_icon, "[icon_name]_[g]")
 
-/datum/organ/external/head/take_damage(brute, burn, sharp, used_weapon = null, list/forbidden_limbs = list())
-	..(brute, burn, sharp, used_weapon, forbidden_limbs)
+/datum/organ/external/head/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
+	..(brute, burn, sharp, edge, used_weapon, forbidden_limbs)
 	if (!disfigured)
 		if (brute_dam > 40)
 			if (prob(50))

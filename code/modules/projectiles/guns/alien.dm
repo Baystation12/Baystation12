@@ -5,6 +5,7 @@
 	name = "alloy spike"
 	desc = "It's about a foot of weird silver metal with a wicked point."
 	sharp = 1
+	edge = 0
 	throwforce = 5
 	w_class = 2
 	icon = 'icons/obj/weapons.dmi'
