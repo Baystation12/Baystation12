@@ -70,25 +70,35 @@
 				else
 					src.DB_job_unlock("Barber",5)
 			if("2")
-				if(karma <30)
+				if(karma <5)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_job_unlock("Nanotrasen Representative",30)
+					src.DB_job_unlock("Brig Physician",5)
 			if("3")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_job_unlock("Customs Officer",30)
+					src.DB_job_unlock("Nanotrasen Representative",30)
 			if("4")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
-					src.DB_job_unlock("Blueshield",30)
+					src.DB_job_unlock("Customs Officer",30)
 			if("5")
 				if(karma <30)
 					usr << "You do not have enough karma!"
 				else
+					src.DB_job_unlock("Blueshield",30)
+			if("6")
+				if(karma <30)
+					usr << "You do not have enough karma!"
+				else
 					src.DB_job_unlock("Mechanic",30)
+			if("7")
+				if(karma <45)
+					usr << "You do not have enough karma!"
+				else
+					src.DB_job_unlock("Magistrate",45)
 
 	if(href_list["KarmaBuy2"])
 		var/karma=verify_karma()

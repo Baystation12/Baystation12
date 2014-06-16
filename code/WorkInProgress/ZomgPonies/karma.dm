@@ -144,10 +144,12 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 /client/proc/karmashopmenu()
 	var/dat = {"<B>Karma Shop</B><br>
 		<a href='?src=\ref[src];KarmaBuy=1'>Unlock Barber -- 5KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=2'>Unlock Nanotrasen Representative -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=3'>Unlock Customs Officer -- 30P</a><br>
-		<a href='?src=\ref[src];KarmaBuy=4'>Unlock Blueshield -- 30KP</a><br>
-		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Mechanic -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=2'>Unlock Brig Physician -- 5KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=3'>Unlock Nanotrasen Representative -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=4'>Unlock Customs Officer -- 30P</a><br>
+		<a href='?src=\ref[src];KarmaBuy=5'>Unlock Blueshield -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=6'>Unlock Mechanic -- 30KP</a><br>
+		<a href='?src=\ref[src];KarmaBuy=7'>Unlock Magistrate -- 45KP</a><br>
 
 		<br>
 		<a href='?src=\ref[src];KarmaBuy2=1'>Unlock Machine People -- 15KP</a><br>
