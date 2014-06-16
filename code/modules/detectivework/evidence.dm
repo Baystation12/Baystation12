@@ -8,13 +8,12 @@
 	item_state = ""
 	w_class = 2
 
-/obj/item/weapon/evidencebag/afterattack(obj/item/I, mob/user as mob, proximity)
-	if(!proximity) return
+/obj/item/weapon/evidencebag/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	if(!in_range(I, user))
 		return
 
-	if(!istype(I) || I.anchored == 1)
-		return ..()
+	if(!istype(I))
+		return
 
 	if(istype(I, /obj/item/weapon/evidencebag))
 		user << "<span class='notice'>You find putting an evidence bag in another evidence bag to be slightly absurd.</span>"
@@ -28,18 +27,18 @@
 		user << "<span class='notice'>[src] already has something inside it.</span>"
 		return ..()
 
-	if(!isturf(I.loc)) //If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
-		if(istype(I.loc,/obj/item/weapon/storage))	//in a container.
-			var/obj/item/weapon/storage/U = I.loc
-			user.client.screen -= I
-			U.contents.Remove(I)
-		else if(user.l_hand == I)					//in a hand
-			user.drop_l_hand()
-		else if(user.r_hand == I)					//in a hand
-			user.drop_r_hand()
-		else
-			return
+	if(istype(src.loc,/obj/item/weapon/storage))	//in a container.
+		return //prevents putting stuff in the bag if it is in another container
+	
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.l_store == src || H.r_store == src)
+			return	//prevents putting stuff in the bag if the bag is in your pocket
 
+	//you better be wearing gloves
+	add_fingerprint(user)
+	I.add_fingerprint(user)
+	
 	user.visible_message("[user] puts [I] into [src]", "You put [I] inside [src].",\
 	"You hear a rustle as someone puts something into a plastic bag.")
 
@@ -67,11 +66,16 @@
 		user.visible_message("[user] takes [I] out of [src]", "You take [I] out of [src].",\
 		"You hear someone rustle around in a plastic bag, and remove something.")
 		overlays.Cut()	//remove the overlays
+		
 		user.put_in_hands(I)
-		w_class = 1
+		
+		//you better be wearing gloves
+		add_fingerprint(user)
+		I.add_fingerprint(user)
+		
+		w_class = initial(w_class)
 		icon_state = "evidenceobj"
 		desc = "An empty evidence bag."
-
 	else
 		user << "[src] is empty."
 		icon_state = "evidenceobj"
