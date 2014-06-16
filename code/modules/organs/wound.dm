@@ -161,6 +161,25 @@
 		src.desc = desc_list[current_stage]
 		src.min_damage = damage_list[current_stage]
 
+	// returns whether this wound can absorb the given amount of damage.
+	// this will prevent large amounts of damage being trapped in less severe wound types
+	proc/can_worsen(damage_type, damage)
+		if (src.damage_type != damage_type)
+			return 0	//incompatible damage types
+		
+		if (src.amount > 1)
+			return 0
+		
+		//with 1.5*, a shallow cut will be able to carry at most 30 damage,
+		//37.5 for a deep cut
+		//52.5 for a flesh wound, etc.
+		var/max_wound_damage = 1.5*src.damage_list[1]
+		if (src.damage + damage > max_wound_damage)
+			return 0
+		
+		return 1
+
+	
 	proc/bleeding()
 		// internal wounds don't bleed in the sense of this function
 		return ((damage > 30 || bleed_timer > 0) && !(bandaged||clamped) && (damage_type == BRUISE && damage >= 20 || damage_type == CUT && damage >= 5) && current_stage <= max_bleeding_stage && !src.internal)
