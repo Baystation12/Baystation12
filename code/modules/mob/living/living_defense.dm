@@ -57,8 +57,8 @@
 		P.on_hit(src,2)
 		return 2
 	if(!P.nodamage)
-		apply_damage((P.damage/(absorb+1)), P.damage_type, def_zone, absorb, 0, P)
-	P.on_hit(src, absorb)
+		apply_damage((P.damage/(absorb+1)), P.damage_type, def_zone, absorb, 0, P, sharp=is_sharp(P), edge=has_edge(P))
+	P.on_hit(src, absorb, def_zone)
 	if(istype(P, /obj/item/projectile/beam/lightning))
 		if(P.damage >= 200)
 			src.dust()
