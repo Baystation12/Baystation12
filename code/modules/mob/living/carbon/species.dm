@@ -12,7 +12,8 @@
 	var/primitive                // Lesser form, if any (ie. monkey for humans)
 	var/tail                     // Name of tail image in species effects icon file.
 	var/language                 // Default racial language, if any.
-	var/attack_verb = "punch"    // Empty hand hurt intent verb.
+	var/unarmed                  //For empty hand harm-intent attack
+	var/unarmed_type = /datum/unarmed_attack
 	var/mutantrace               // Safeguard due to old code.
 
 	var/breath_type = "oxygen"   // Non-oxygen gas breathed, if any.
@@ -54,6 +55,11 @@
 	//Used in icon caching.
 	var/race_key = 0
 	var/icon/icon_template
+
+
+/datum/species/New()
+	unarmed = new unarmed_type()
+
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 	//This is a basic humanoid limb setup.
@@ -120,6 +126,7 @@
 	path = /mob/living/carbon/human/human
 	flags = HAS_LIPS | HAS_UNDERWEAR | CAN_BE_FAT
 	bodyflags = HAS_SKIN_TONE
+	unarmed_type = /datum/unarmed_attack/punch
 
 /datum/species/unathi
 	name = "Unathi"
@@ -128,7 +135,7 @@
 	path = /mob/living/carbon/human/unathi
 	language = "Sinta'unathi"
 	tail = "sogtail"
-	attack_verb = "scratch"
+	unarmed_type = /datum/unarmed_attack/claws
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 
@@ -153,7 +160,7 @@
 	path = /mob/living/carbon/human/tajaran
 	language = "Siik'tajr"
 	tail = "tajtail"
-	attack_verb = "scratch"
+	unarmed_type = /datum/unarmed_attack/claws
 	darksight = 8
 
 	cold_level_1 = 200
@@ -178,6 +185,7 @@
 	path = /mob/living/carbon/human/skrell
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
+	unarmed_type = /datum/unarmed_attack/punch
 
 	flags = HAS_LIPS | HAS_UNDERWEAR
 	bloodflags = BLOOD_GREEN
@@ -191,6 +199,7 @@
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
 	path = /mob/living/carbon/human/vox
 	language = "Vox-pidgin"
+	unarmed_type = /datum/unarmed_attack/claws	//I dont think it will hurt to give vox claws too.
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -234,6 +243,8 @@
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	language = "Vox-pidgin"
 	path = /mob/living/carbon/human/voxarmalis
+	unarmed_type = /datum/unarmed_attack/claws/armalis
+
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
 
@@ -291,7 +302,7 @@
 	deform = 'icons/mob/human_races/r_def_kidan.dmi'
 	path = /mob/living/carbon/human/kidan
 	language = "Chittin"
-	attack_verb = "slash"
+	unarmed_type = /datum/unarmed_attack/claws
 
 	flags = IS_WHITELISTED | HAS_CHITTIN
 	bloodflags = BLOOD_GREEN
@@ -302,9 +313,9 @@
 /datum/species/slime
 	name = "Slime People"
 	language = "Bubblish"
-	attack_verb = "bludgeon"
 	path = /mob/living/carbon/human/slime
 	primitive = /mob/living/carbon/slime/adult
+	unarmed_type = /datum/unarmed_attack/punch
 
 	flags = IS_WHITELISTED | NO_BREATHE | HAS_LIPS | NO_INTORGANS | NO_SCAN
 	bloodflags = BLOOD_SLIME
@@ -324,11 +335,9 @@
 	icobase = 'icons/mob/human_races/r_grey.dmi'
 	deform = 'icons/mob/human_races/r_def_grey.dmi'
 	language = "Grey"
-	attack_verb = "punch"
+	unarmed_type = /datum/unarmed_attack/punch
 	darksight = 5 // BOOSTED from 2
 	eyes = "grey_eyes_s"
-
-	max_hurt_damage = 3 // From 5 (for humans)
 
 	primitive = /mob/living/carbon/monkey // TODO
 
@@ -345,7 +354,7 @@
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	path = /mob/living/carbon/human/diona
 	language = "Rootspeak"
-	attack_verb = "slash"
+	unarmed_type = /datum/unarmed_attack/punch
 	primitive = /mob/living/carbon/monkey/diona
 
 	warning_low_pressure = 50
@@ -389,7 +398,7 @@
 	deform = 'icons/mob/human_races/r_machine.dmi'
 	path = /mob/living/carbon/human/machine
 	language = "Tradeband"
-	max_hurt_damage = 3
+	unarmed_type = /datum/unarmed_attack/punch
 
 	eyes = "blank_eyes"
 	brute_mod = 1.5
@@ -409,3 +418,28 @@
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC | NO_INTORGANS
 
 	flesh_color = "#AAAAAA"
+
+//Species unarmed attacks
+
+/datum/unarmed_attack
+	var/attack_verb = list("attack")	// Empty hand hurt intent verb.
+	var/damage = 0						// Extra empty hand attack damage.
+	var/attack_sound = "punch"
+	var/miss_sound = 'sound/weapons/punchmiss.ogg'
+	var/sharp = 0
+	var/edge = 0
+
+/datum/unarmed_attack/punch
+	attack_verb = list("punch")
+
+/datum/unarmed_attack/claws
+	attack_verb = list("scratch", "claw")
+	attack_sound = 'sound/weapons/slice.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+	damage = 5
+	sharp = 1
+	edge = 1
+
+/datum/unarmed_attack/claws/armalis
+	attack_verb = list("slash", "claw")
+	damage = 10	//they're huge! they should do a little more damage, i'd even go for 15-20 maybe...
