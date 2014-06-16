@@ -189,4 +189,4 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, damaging connectors on [target]'s neck!", \
 		"\red Your hand slips, damaging connectors on [target]'s neck!")
-		target.apply_damage(10, BRUTE, affected)
+		target.apply_damage(10, BRUTE, affected, sharp=1)
