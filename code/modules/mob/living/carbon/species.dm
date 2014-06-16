@@ -354,7 +354,7 @@
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	path = /mob/living/carbon/human/diona
 	language = "Rootspeak"
-	unarmed_type = /datum/unarmed_attack/punch
+	unarmed_type = /datum/unarmed_attack/diona
 	primitive = /mob/living/carbon/monkey/diona
 
 	warning_low_pressure = 50
@@ -431,6 +431,10 @@
 
 /datum/unarmed_attack/punch
 	attack_verb = list("punch")
+
+/datum/unarmed_attack/diona
+	attack_verb = list("lash", "bludgeon")
+	damage = 5
 
 /datum/unarmed_attack/claws
 	attack_verb = list("scratch", "claw")
