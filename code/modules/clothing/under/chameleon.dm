@@ -43,6 +43,13 @@
 		desc = null
 		permeability_coefficient = 0.90
 
+
+		if(A.tc_custom)  //Фикс для нашей одежды
+			icon = A.tc_custom
+			tc_custom = A.tc_custom
+		else
+			icon = A.icon
+			tc_custom = null
 		desc = A.desc
 		name = A.name
 		icon_state = A.icon_state
@@ -95,6 +102,12 @@
 		desc = null
 		permeability_coefficient = 0.90
 
+		if(A.tc_custom)
+			icon = A.tc_custom
+			tc_custom = A.tc_custom
+		else
+			icon = A.icon
+			tc_custom = null
 		desc = A.desc
 		name = A.name
 		icon_state = A.icon_state
@@ -148,6 +161,12 @@
 		desc = null
 		permeability_coefficient = 0.90
 
+		if(A.tc_custom)
+			icon = A.tc_custom
+			tc_custom = A.tc_custom
+		else
+			icon = A.icon
+			tc_custom = null
 		desc = A.desc
 		name = A.name
 		icon_state = A.icon_state
@@ -201,6 +220,12 @@
 		desc = null
 		permeability_coefficient = 0.90
 
+		if(A.tc_custom)
+			icon = A.tc_custom
+			tc_custom = A.tc_custom
+		else
+			icon = A.icon
+			tc_custom = null
 		desc = A.desc
 		name = A.name
 		icon_state = A.icon_state
@@ -250,6 +275,12 @@
 		desc = null
 		permeability_coefficient = 0.90
 
+		if(A.tc_custom)
+			icon = A.tc_custom
+			tc_custom = A.tc_custom
+		else
+			icon = A.icon
+			tc_custom = null
 		desc = A.desc
 		name = A.name
 		icon_state = A.icon_state
@@ -301,14 +332,14 @@
 		desc = null
 		permeability_coefficient = 0.90
 
-		desc = A.desc
-		name = A.name
-		if(A:tc_custom)
+		if(A.tc_custom)
 			icon = A.tc_custom
 			tc_custom = A.tc_custom
 		else
-			icon = 'icons/obj/clothing/uniforms.dmi'
+			icon = A.icon
 			tc_custom = null
+		desc = A.desc
+		name = A.name
 		icon_state = A.icon_state
 		item_state = A.item_state
 		item_color = A.item_color
@@ -322,8 +353,10 @@
 
 /obj/item/clothing/mask/chameleon
 	name = "gas mask"
-	icon_state = "gas_alt"
-	item_state = "gas_alt"
+	icon = 'tauceti/items/clothing/masks/gas_tc.dmi'
+	tc_custom = 'tauceti/items/clothing/masks/gas_tc.dmi'
+	icon_state = "gas_mask_tc"
+	item_state = "gas_mask_tc"
 	desc = "It looks like a plain gask mask, but on closer inspection, it seems to have a small dial inside."
 	origin_tech = "syndicate=3"
 	var/list/clothing_choices = list()
@@ -340,7 +373,10 @@
 	emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
 		name = "gas mask"
 		desc = "It's a gas mask."
-		icon_state = "gas_alt"
+		icon = 'tauceti/items/clothing/masks/gas_tc.dmi'
+		tc_custom = 'tauceti/items/clothing/masks/gas_tc.dmi'
+		item_state = "gas_mask_tc"
+		icon_state = "gas_mask_tc"
 		update_icon()
 		usr.update_inv_wear_mask()
 	verb/change()
@@ -357,6 +393,12 @@
 		desc = null
 		permeability_coefficient = 0.90
 
+		if(A.tc_custom)
+			icon = A.tc_custom
+			tc_custom = A.tc_custom
+		else
+			icon = A.icon
+			tc_custom = null
 		desc = A.desc
 		name = A.name
 		icon_state = A.icon_state
@@ -406,6 +448,12 @@
 		desc = null
 		permeability_coefficient = 0.90
 
+		if(A.tc_custom)
+			icon = A.tc_custom
+			tc_custom = A.tc_custom
+		else
+			icon = A.icon
+			tc_custom = null
 		desc = A.desc
 		name = A.name
 		icon_state = A.icon_state
@@ -456,6 +504,12 @@
 		desc = null
 		permeability_coefficient = 0.90
 
+		if(A.tc_custom)
+			icon = A.tc_custom
+			tc_custom = A.tc_custom
+		else
+			icon = A.icon
+			tc_custom = null
 		desc = A.desc
 		name = A.name
 		icon_state = A.icon_state
