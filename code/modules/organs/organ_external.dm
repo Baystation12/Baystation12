@@ -232,16 +232,22 @@ This function completely restores a damaged organ to perfect condition.
 		owner.custom_pain("You feel something rip in your [display_name]!", 1)
 
 	// first check whether we can widen an existing wound
-	if(wounds.len > 0 && prob(max(50+(owner.number_wounds-1)*10,90)))
+	if(wounds.len > 0 && prob(max(50+(number_wounds-1)*10,90)))
 		if((type == CUT || type == BRUISE) && damage >= 5)
-			var/datum/wound/W = pick(wounds)
-			if(W.amount == 1)
-				W.open_wound(damage)
-				if(prob(25))
-					owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
-					"\red The wound on your [display_name] widens with a nasty ripping voice.",\
-					"You hear a nasty ripping noise, as if flesh is being torn apart.")
-				return
+			//we need to make sure that the wound we are going to worsen is compatible with the type of damage...
+			var/list/compatible_wounds = list()
+			for (var/datum/wound/W in wounds)
+				if (W.can_worsen(type, damage))
+					compatible_wounds += W
+			
+			var/datum/wound/W = pick(compatible_wounds)
+			W.open_wound(damage)
+			if(prob(25))
+				//maybe have a separate message for BRUISE type damage?
+				owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
+				"\red The wound on your [display_name] widens with a nasty ripping voice.",\
+				"You hear a nasty ripping noise, as if flesh is being torn apart.")
+			return
 
 	//Creating wound
 	var/wound_type = get_wound_type(type, damage)
