@@ -3,8 +3,6 @@
 					WOUNDS
 ****************************************************/
 /datum/wound
-	// stages such as "cut", "deep cut", etc.
-	var/list/stages
 	// number representing the current stage
 	var/current_stage = 0
 
@@ -18,35 +16,37 @@
 	// amount of damage the current wound type requires(less means we need to apply the next healing stage)
 	var/min_damage = 0
 
+	// is the wound bandaged?
+	var/bandaged = 0
+	// Similar to bandaged, but works differently
+	var/clamped = 0
+	// is the wound salved?
+	var/salved = 0
+	// is the wound disinfected?
+	var/disinfected = 0
+	var/created = 0
+	// number of wounds of this type
+	var/amount = 1
+	// amount of germs in the wound
+	var/germ_level = 0
+
+	/*  These are defined by the wound type and should not be changed */
+	
+	// stages such as "cut", "deep cut", etc.
+	var/list/stages
+	// internal wounds can only be fixed through surgery
+	var/internal = 0
+	// maximum stage at which bleeding should still happen, counted from the right rather than the left of the list
+	// 1 means all stages except the last should bleed
+	var/max_bleeding_stage = 1
 	// one of CUT, BRUISE, BURN
 	var/damage_type = CUT
-
 	// whether this wound needs a bandage/salve to heal at all
 	// the maximum amount of damage that this wound can have and still autoheal
 	var/autoheal_cutoff = 15
 
-	// is the wound bandaged?
-	var/tmp/bandaged = 0
-	// Similar to bandaged, but works differently
-	var/tmp/clamped = 0
-	// is the wound salved?
-	var/tmp/salved = 0
-	// is the wound disinfected?
-	var/tmp/disinfected = 0
-	var/tmp/created = 0
 
-	// number of wounds of this type
-	var/tmp/amount = 1
 
-	// maximum stage at which bleeding should still happen, counted from the right rather than the left of the list
-	// 1 means all stages except the last should bleed
-	var/max_bleeding_stage = 1
-
-	// internal wounds can only be fixed through surgery
-	var/internal = 0
-
-	// amount of germs in the wound
-	var/germ_level = 0
 
 	// helper lists
 	var/tmp/list/desc_list = list()
@@ -81,18 +81,37 @@
 		src.min_damage = damage_list[current_stage]
 		src.desc = desc_list[current_stage]
 
-	proc
-
 	// checks whether the wound has been appropriately treated
 	// always returns 1 for wounds that are too minor to need treatment
 	proc/is_treated()
-		if(src.damage <= autoheal_cutoff)
+		if(src.damage / src.amount <= autoheal_cutoff)
 			return 1
 
 		if(damage_type == BRUISE || damage_type == CUT)
 			return bandaged
 		else if(damage_type == BURN)
 			return salved
+	
+	
+	// Checks whether other other can be merged into src.
+	proc/can_merge(var/datum/wound/other)
+		if (other.type != src.type) return 0
+		if (other.current_stage != src.current_stage) return 0
+		if (other.damage_type != src.damage_type) return 0
+		if (!(other.is_treated()) != !(src.is_treated())) return 0
+		if (!(other.bandaged) != !(src.bandaged)) return 0
+		if (!(other.clamped) != !(src.clamped)) return 0
+		if (!(other.salved) != !(src.salved)) return 0
+		if (!(other.disinfected) != !(src.disinfected)) return 0
+		//if (other.germ_level != src.germ_level) return 0
+		return 1
+
+	proc/merge_wound(var/datum/wound/other)
+		src.damage += other.damage
+		src.amount += other.amount
+		src.bleed_timer += other.bleed_timer
+		src.germ_level = max(src.germ_level, other.germ_level)
+		src.created = max(src.created, other.created)	//take the newer created time
 
 	// checks if wound is considered open for external infections
 	// untreated cuts (and bleeding bruises) and burns are possibly infectable, chance higher if wound is bigger
