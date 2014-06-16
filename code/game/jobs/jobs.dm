@@ -142,7 +142,8 @@ var/list/whitelisted_positions = list(
 	"Nanotrasen Representative",
 	"Barber",
 	"Mechanic",
-	"Brig Physician"
+	"Brig Physician",
+	"Magistrate"
 )
 
 /proc/guest_jobbans(var/job)
