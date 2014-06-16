@@ -249,10 +249,8 @@ This function completely restores a damaged organ to perfect condition.
 
 	//Check whether we can add the wound to an existing wound
 	for(var/datum/wound/other in wounds)
-		if(other.desc == W.desc)
-			// okay, add it!
-			other.damage += W.damage
-			other.amount += 1
+		if(other.can_merge(W))
+			other.merge_wound(W)
 			W = null // to signify that the wound was added
 			break
 	if(W)
