@@ -59,6 +59,36 @@
 		heal_overall_damage(0, -amount)
 	hud_updateflag |= 1 << HEALTH_HUD
 
+/mob/living/carbon/human/proc/adjustBruteLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
+	if(species && species.brute_mod)
+		amount = amount*species.brute_mod
+
+	if (organ_name in organs_by_name)
+		var/datum/organ/external/O = get_organ(organ_name)
+	
+		if(amount > 0)
+			O.take_damage(amount, 0, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
+		else
+			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
+			O.heal_damage(-amount, 0, internal=0, robo_repair=(O.status & ORGAN_ROBOT))
+	
+	hud_updateflag |= 1 << HEALTH_HUD
+
+/mob/living/carbon/human/proc/adjustFireLossByPart(var/amount, var/organ_name, var/obj/damage_source = null)
+	if(species && species.burn_mod)
+		amount = amount*species.burn_mod
+
+	if (organ_name in organs_by_name)
+		var/datum/organ/external/O = get_organ(organ_name)
+	
+		if(amount > 0)
+			O.take_damage(0, amount, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
+		else
+			//if you don't want to heal robot organs, they you will have to check that yourself before using this proc.
+			O.heal_damage(0, -amount, internal=0, robo_repair=(O.status & ORGAN_ROBOT))
+	
+	hud_updateflag |= 1 << HEALTH_HUD
+
 /mob/living/carbon/human/Stun(amount)
 	if(HULK in mutations)	return
 	..()
@@ -250,10 +280,14 @@ This function restores all organs.
 	switch(damagetype)
 		if(BRUTE)
 			damageoverlaytemp = 20
+			if(species && species.brute_mod)
+				damage = damage*species.brute_mod
 			if(organ.take_damage(damage, 0, sharp, edge, used_weapon))
 				UpdateDamageIcon()
 		if(BURN)
 			damageoverlaytemp = 20
+			if(species && species.burn_mod)
+				damage = damage*species.burn_mod
 			if(organ.take_damage(0, damage, sharp, edge, used_weapon))
 				UpdateDamageIcon()
 
