@@ -64,7 +64,7 @@
 	if(M.melee_damage_upper == 0)	return
 	src.health -= M.melee_damage_upper
 	src.visible_message("\red <B>[M] has [M.attacktext] [src]!</B>")
-	add_logs(M, src, "attacked", admin=0)
+	add_logs(M, src, "attacked")
 	if(prob(10))
 		new /obj/effect/decal/cleanable/oil(src.loc)
 	healthcheck()

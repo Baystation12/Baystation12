@@ -163,7 +163,7 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 			//one wire for electrifying the door. Sending a pulse through this electrifies the door for 30 seconds.
 			if(A.secondsElectrified==0)
 				A.shockedby += text("\[[time_stamp()]\][usr](ckey:[usr.ckey])")
-				add_logs(usr, A, "electrified", admin=0, addition="at [A.x],[A.y],[A.z]")
+				add_logs(usr, A, "electrified", null, addition="at [A.x],[A.y],[A.z]")
 				A.secondsElectrified = 30
 				spawn(10)
 					if(A)
