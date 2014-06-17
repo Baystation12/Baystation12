@@ -39,7 +39,7 @@ var/global/list/hooks = list()
 			if (hascall(hook_handler, "On" + name))
 				var/hook/hook = hooks[name]
 				hook.handlers += hook_handler
-				world.log << "Found hook handler for: " + name
+//				world.log << "Found hook handler for: " + name
 	for (var/hook/hook in hooks)
 		hook.Setup()
 
