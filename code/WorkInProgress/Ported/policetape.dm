@@ -130,7 +130,7 @@
 		spawn(200)
 			src.density = 1
 	else
-		breaktape(null, user)
+		breaktape(/obj/item/weapon/soap, user)//cant be null, and can't be sharp.
 
 /obj/item/tape/attack_paw(mob/user as mob)
 	breaktape(/obj/item/weapon/wirecutters,user)
