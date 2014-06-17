@@ -30,7 +30,7 @@ datum
 		var/mildly_toxic = 0
 		var/overdose = 0
 		var/overdose_dam = 1
-		var/addictiveness = 1
+		var/addictiveness = 0 //switched to zero until time to properly overhaul addiction
 		//var/list/viruses = list()
 		var/color = "#000000" // rgb: 0, 0, 0 (does not support alpha channels - yet!)
 
