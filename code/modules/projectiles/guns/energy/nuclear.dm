@@ -16,14 +16,14 @@
 		switch(mode)
 			if(0)
 				mode = 1
-				charge_cost = 100
+				charge_cost = 1000
 				fire_sound = 'sound/weapons/Laser.ogg'
 				user << "\red [src.name] is now set to kill."
 				projectile_type = "/obj/item/projectile/beam"
 				modifystate = "energykill"
 			if(1)
 				mode = 0
-				charge_cost = 100
+				charge_cost = 1000
 				fire_sound = 'sound/weapons/Taser.ogg'
 				user << "\red [src.name] is now set to stun."
 				projectile_type = "/obj/item/projectile/beam/stun"
