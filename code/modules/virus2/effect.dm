@@ -253,22 +253,24 @@
 						if (!Tx.density)
 							new /obj/effect/decal/cleanable/blood/gibs(Tx,i)
 			if(2)
-				for (var/datum/organ/external/E in H.organs)
-					if(pick(1,0))
-						E.droplimb(1)
-			if(3)
-				if(H.species.name != "Skellington")
-					mob << "<span class = 'warning'> Your necrotic skin ruptures!</span>"
+				if(ishuman(mob))
 					for (var/datum/organ/external/E in H.organs)
 						if(pick(1,0))
-							E.createwound(CUT, pick(2,4))
-					if(prob(30))
-						if(H.species.name != "Skellington")
-							if(H.set_species("Skellington"))
-								mob << "<span class = 'warning'> A massive amount of flesh sloughs off your bones!</span>"
-								H.regenerate_icons()
-				else
-					return
+							E.droplimb(1)
+			if(3)
+				if(ishuman(mob))
+					if(H.species.name != "Skellington")
+						mob << "<span class = 'warning'> Your necrotic skin ruptures!</span>"
+						for (var/datum/organ/external/E in H.organs)
+							if(pick(1,0))
+								E.createwound(CUT, pick(2,4))
+						if(prob(30))
+							if(H.species.name != "Skellington")
+								if(H.set_species("Skellington"))
+									mob << "<span class = 'warning'> A massive amount of flesh sloughs off your bones!</span>"
+									H.regenerate_icons()
+					else
+						return
 
 
 /datum/disease2/effect/fizzle
