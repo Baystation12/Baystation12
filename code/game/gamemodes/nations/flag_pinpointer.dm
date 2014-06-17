@@ -51,7 +51,7 @@
 		else
 			usr << "It is switched off."
 
-/datum/supply_packs/key_pinpointer
+/datum/supply_packs/key_pinpointer_nations
 	name = "Nations Flag Pinpointer crate"
 	contains = list(/obj/item/weapon/pinpointer/advpinpointer/flag)
 	cost = 20
@@ -61,6 +61,5 @@
 	group = "Operations"
 
 	New()
-		// This crate is only accessible during mutiny rounds
 		if (istype(ticker.mode,/datum/game_mode/nations))
 			..()
