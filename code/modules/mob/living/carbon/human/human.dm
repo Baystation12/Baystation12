@@ -1005,6 +1005,11 @@
 		src.verbs -= /mob/living/carbon/human/proc/morph
 		return
 
+	if(!ishuman(src))
+		src.verbs -= /mob/living/carbon/human/proc/morph
+		return
+
+
 	var/new_facial = input("Please select facial hair color.", "Character Generation",rgb(r_facial,g_facial,b_facial)) as color
 	if(new_facial)
 		r_facial = hex2num(copytext(new_facial, 2, 4))
