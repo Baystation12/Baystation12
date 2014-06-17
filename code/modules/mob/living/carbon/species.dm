@@ -12,9 +12,9 @@
 	var/primitive                // Lesser form, if any (ie. monkey for humans)
 	var/tail                     // Name of tail image in species effects icon file.
 	var/language                 // Default racial language, if any.
+	var/unarmed                  //For empty hand harm-intent attack
+	var/unarmed_type = /datum/unarmed_attack
 	var/secondary_langs = list() // The names of secondary languages that are available to this species.
-	var/attack_verb = "punch"    // Empty hand hurt intent verb.
-	var/punch_damage = 0		 // Extra empty hand attack damage.
 	var/mutantrace               // Safeguard due to old code.
 
 	var/breath_type = "oxygen"   // Non-oxygen gas breathed, if any.
@@ -48,6 +48,9 @@
 	//Used in icon caching.
 	var/race_key = 0
 	var/icon/icon_template
+
+/datum/species/New()
+	unarmed = new unarmed_type()
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 	//This is a basic humanoid limb setup.
@@ -102,6 +105,7 @@
 	name = "Human"
 	language = "Sol Common"
 	primitive = /mob/living/carbon/monkey
+	unarmed_type = /datum/unarmed_attack/punch
 
 	flags = HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR
 
@@ -114,8 +118,7 @@
 	deform = 'icons/mob/human_races/r_def_lizard.dmi'
 	language = "Sinta'unathi"
 	tail = "sogtail"
-	attack_verb = "scratch"
-	punch_damage = 5
+	unarmed_type = /datum/unarmed_attack/claws
 	primitive = /mob/living/carbon/monkey/unathi
 	darksight = 3
 
@@ -138,8 +141,7 @@
 	language = "Siik'maas"
 	secondary_langs = list("Siik'tajr")
 	tail = "tajtail"
-	attack_verb = "scratch"
-	punch_damage = 5
+	unarmed_type = /datum/unarmed_attack/claws
 	darksight = 8
 
 	cold_level_1 = 200 //Default 260
@@ -162,6 +164,7 @@
 	deform = 'icons/mob/human_races/r_def_skrell.dmi'
 	language = "Skrellian"
 	primitive = /mob/living/carbon/monkey/skrell
+	unarmed_type = /datum/unarmed_attack/punch
 
 	flags = IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
 
@@ -172,6 +175,7 @@
 	icobase = 'icons/mob/human_races/r_vox.dmi'
 	deform = 'icons/mob/human_races/r_def_vox.dmi'
 	language = "Vox-pidgin"
+	unarmed_type = /datum/unarmed_attack/claws	//I dont think it will hurt to give vox claws too.
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -205,7 +209,7 @@
 	icobase = 'icons/mob/human_races/r_armalis.dmi'
 	deform = 'icons/mob/human_races/r_armalis.dmi'
 	language = "Vox-pidgin"
-	attack_verb = "slash"
+	unarmed_type = /datum/unarmed_attack/claws/armalis
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -225,7 +229,7 @@
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
 
-	flags = NO_SCAN | NO_BLOOD | HAS_TAIL | NO_PAIN | IS_WHITELISTED
+	flags = NO_SCAN | NO_BLOOD | HAS_TAIL | NO_PAIN
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -261,8 +265,7 @@
 	icobase = 'icons/mob/human_races/r_diona.dmi'
 	deform = 'icons/mob/human_races/r_def_plant.dmi'
 	language = "Rootspeak"
-	attack_verb = "slash"
-	punch_damage = 5
+	unarmed_type = /datum/unarmed_attack/diona
 	primitive = /mob/living/carbon/monkey/diona
 
 	warning_low_pressure = 50
@@ -307,7 +310,7 @@
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
 	language = "Tradeband"
-	punch_damage = 2
+	unarmed_type = /datum/unarmed_attack/punch
 
 	eyes = "blank_eyes"
 	brute_mod = 0.5
@@ -328,3 +331,32 @@
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
+
+//Species unarmed attacks
+
+/datum/unarmed_attack
+	var/attack_verb = list("attack")	// Empty hand hurt intent verb.
+	var/damage = 0						// Extra empty hand attack damage.
+	var/attack_sound = "punch"
+	var/miss_sound = 'sound/weapons/punchmiss.ogg'
+	var/sharp = 0
+	var/edge = 0
+	
+/datum/unarmed_attack/punch
+	attack_verb = list("punch")
+
+/datum/unarmed_attack/diona
+	attack_verb = list("lash", "bludgeon")
+	damage = 5
+
+/datum/unarmed_attack/claws
+	attack_verb = list("scratch", "claw")
+	attack_sound = 'sound/weapons/slice.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+	damage = 5
+	sharp = 1
+	edge = 1
+
+/datum/unarmed_attack/claws/armalis
+	attack_verb = list("slash", "claw")
+	damage = 10	//they're huge! they should do a little more damage, i'd even go for 15-20 maybe...

@@ -217,6 +217,7 @@
 	icon = 'icons/obj/shards.dmi'
 	icon_state = "large"
 	sharp = 1
+	edge = 1
 	desc = "Could probably be used as ... a throwing weapon?"
 	w_class = 2.0
 	force = 5.0

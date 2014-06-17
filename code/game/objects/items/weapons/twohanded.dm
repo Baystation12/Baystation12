@@ -109,6 +109,8 @@
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 	force = 5
+	sharp = 1
+	edge = 1
 	w_class = 4.0
 	slot_flags = SLOT_BACK
 	force_unwielded = 10
@@ -154,6 +156,8 @@
 	flags = FPRINT | TABLEPASS | NOSHIELD
 	origin_tech = "magnets=3;syndicate=4"
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	sharp = 1
+	edge = 1
 
 /obj/item/weapon/twohanded/dualsaber/update_icon()
 	icon_state = "dualsaber[wielded]"

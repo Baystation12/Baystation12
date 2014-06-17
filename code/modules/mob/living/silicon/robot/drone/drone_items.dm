@@ -266,10 +266,8 @@
 	if(!module)
 		module = new /obj/item/weapon/robot_module/drone(src)
 
-	var/dat = "<HEAD><TITLE>Drone modules</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
-	dat += {"<A HREF='?src=\ref[src];mach_close=robotmod'>Close</A>
-	<BR>
-	<BR>
+	var/dat = "<HEAD><TITLE>Drone modules</TITLE></HEAD><BODY>\n"
+	dat += {"
 	<B>Activated Modules</B>
 	<BR>
 	Module 1: [module_state_1 ? "<A HREF=?src=\ref[src];mod=\ref[module_state_1]>[module_state_1]<A>" : "No Module"]<BR>
@@ -310,7 +308,7 @@
 
 	dat += resources
 
-	src << browse(dat, "window=robotmod&can_close=0")
+	src << browse(dat, "window=robotmod")
 
 //Putting the decompiler here to avoid doing list checks every tick.
 /mob/living/silicon/robot/drone/use_power()
