@@ -241,13 +241,13 @@ var/list/ai_list = list()
 			for (var/area_name in alarmlist)
 				var/datum/alarm/alarm = alarmlist[area_name]
 				dat += "<NOBR>"
-				
+
 				var/cameratext = ""
 				if (alarm.cameras)
 					for (var/obj/machinery/camera/I in alarm.cameras)
 						cameratext += text("[]<A HREF=?src=\ref[];switchcamera=\ref[]>[]</A>", (cameratext=="") ? "" : " | ", src, I, I.c_tag)
 				dat += text("-- [] ([])", alarm.area.name, (cameratext)? cameratext : "No Camera")
-				
+
 				if (alarm.sources.len > 1)
 					dat += text(" - [] sources", alarm.sources.len)
 				dat += "</NOBR><BR>\n"
@@ -398,23 +398,11 @@ var/list/ai_list = list()
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in mob_list
-/*
-		var/mob/living/silicon/ai/A = locate(href_list["track2"]) in mob_list
-		if(A && target)
-			A.ai_actual_track(target)
-*/
 
-		//Strip off any "(as Derplord)".
-		//If there's a way to do this via a var that doesn't give the AI extra info, please let me know.
-		var/seeking = target.name
-		var/index = findtext(seeking, "(as ")
-		if(index)
-			seeking = copytext(seeking, 1, index-1)
-
-		if(target && html_decode(href_list["trackname"]) == seeking)
+		if(target && (!istype(target, /mob/living/carbon/human) || html_decode(href_list["trackname"]) == target:get_face_name()))
 			ai_actual_track(target)
-		else
-			src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
+
+		src << "\red System error. Cannot locate [html_decode(href_list["trackname"])]."
 		return
 
 	else if (href_list["faketrack"])
@@ -530,24 +518,24 @@ var/list/ai_list = list()
 /mob/living/silicon/ai/triggerAlarm(var/class, area/A, list/cameralist, var/source)
 	if (stat == 2)
 		return 1
-	
+
 	..()
-	
+
 	var/cameratext = ""
 	for (var/obj/machinery/camera/C in cameralist)
 		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
-			
+
 	queueAlarm("--- [class] alarm detected in [A.name]! ([(cameratext)? cameratext : "No Camera"])", class)
-	
+
 	if (viewalerts) ai_alerts()
 
 /mob/living/silicon/ai/cancelAlarm(var/class, area/A as area, var/source)
 	var/has_alarm = ..()
-	
+
 	if (!has_alarm)
 		queueAlarm(text("--- [] alarm in [] has been cleared.", class, A.name), class, 0)
 		if (viewalerts) ai_alerts()
-	
+
 	return has_alarm
 
 /mob/living/silicon/ai/cancel_camera()

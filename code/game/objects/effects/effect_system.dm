@@ -27,24 +27,6 @@ would spawn and follow the beaker, even if it is carried or thrown.
 		reagents.delete()
 	return
 
-
-/obj/effect/effect/water/New()
-	..()
-	//var/turf/T = src.loc
-	//if (istype(T, /turf))
-	//	T.firelevel = 0 //TODO: FIX
-	spawn( 70 )
-		delete()
-		return
-	return
-
-/obj/effect/effect/water/Del()
-	//var/turf/T = src.loc
-	//if (istype(T, /turf))
-	//	T.firelevel = 0 //TODO: FIX
-	..()
-	return
-
 /obj/effect/effect/water/Move(turf/newloc)
 	//var/turf/T = src.loc
 	//if (istype(T, /turf))
