@@ -228,6 +228,7 @@
 	icon = 'icons/obj/shards.dmi'
 	icon_state = "large"
 	sharp = 1
+	edge = 1
 	desc = "Could probably be used as ... a throwing weapon?"
 	w_class = 2.0
 	force = 5.0
@@ -471,6 +472,8 @@
 	icon_state = "hatchet"
 	flags = FPRINT | TABLEPASS | CONDUCT
 	force = 12.0
+	sharp = 1
+	edge = 1
 	w_class = 2.0
 	throwforce = 15.0
 	throw_speed = 4
@@ -496,6 +499,8 @@
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
 	force = 13.0
 	throwforce = 5.0
+	sharp = 1
+	edge = 1
 	throw_speed = 1
 	throw_range = 3
 	w_class = 4.0

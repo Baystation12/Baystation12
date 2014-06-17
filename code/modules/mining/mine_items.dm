@@ -190,6 +190,7 @@ proc/move_mining_shuttle()
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "picking"
+	sharp = 1
 
 	var/excavation_amount = 100
 

@@ -53,11 +53,8 @@
 			signaler.signal()
 
 	var/absorb = run_armor_check(def_zone, P.flag)
-	if(absorb >= 2)
-		P.on_hit(src,2)
-		return 2
 	if(!P.nodamage)
-		apply_damage((P.damage/(absorb+1)), P.damage_type, def_zone, absorb, 0, P)
+		apply_damage(P.damage, P.damage_type, def_zone, absorb, 0, P, sharp=is_sharp(P), edge=has_edge(P))
 	P.on_hit(src, absorb, def_zone)
 	return absorb
 
@@ -72,7 +69,7 @@
 		src.visible_message("\red [src] has been hit by [O].")
 		var/armor = run_armor_check(zone, "melee", "Your armor has protected your [zone].", "Your armor has softened hit to your [zone].")
 		if(armor < 2)
-			apply_damage(O.throwforce*(speed/5), dtype, zone, armor, O.sharp, O)
+			apply_damage(O.throwforce*(speed/5), dtype, zone, armor, O, sharp=is_sharp(O), edge=has_edge(O))
 
 		if(!O.fingerprintslast)
 			return
