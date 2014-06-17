@@ -65,31 +65,27 @@
 /obj/proc/updateUsrDialog()
 	if(in_use)
 		var/is_in_use = 0
-		if(_using.len)
-			var/list/nearby = viewers(1, src)
-			for(var/mob/M in _using.Copy()) // Only check things actually messing with us.
-				if (!M || !M.client || M.machine != src)
-					_using.Remove(M)
-					continue
+		var/list/nearby = viewers(1, src)
+		for(var/mob/M in _using.Copy()) // Only check things actually messing with us.
+			if (!M || !M.client || M.machine != src)
+				_using.Remove(M)
+				continue
 
-				if(!M in nearby) // NOT NEARBY
-					// AIs/Robots can do shit from afar.
-					if (isAI(M) || isrobot(M))
-						is_in_use = 1
-						src.attack_ai(M)
-
-					// check for TK users
-					else if (ishuman(M))
-						if(istype(M.l_hand, /obj/item/tk_grab) || istype(M.r_hand, /obj/item/tk_grab))
-							is_in_use = 1
-							src.attack_hand(M)
-					else
-						// Remove.
-						_using.Remove(M)
-						continue
-				else // EVERYTHING FROM HERE DOWN MUST BE NEARBY
+			if(!M in nearby) // NOT NEARBY
+				// AIs/Robots can do shit from afar.
+				if (istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/living/silicon/robot))
 					is_in_use = 1
-					attack_hand(M)
+					src.attack_ai(M)
+
+				// check for TK users
+				else if (istype(usr, /mob/living/carbon/human))
+					if(istype(usr.l_hand, /obj/item/tk_grab) || istype(usr.r_hand, /obj/item/tk_grab))
+						if(usr.client && usr.machine==src)
+							is_in_use = 1
+							src.attack_hand(usr)
+			else // EVERYTHING FROM HERE DOWN MUST BE NEARBY
+				is_in_use = 1
+				attack_hand(usr)
 		in_use = is_in_use
 
 /obj/proc/updateDialog()
