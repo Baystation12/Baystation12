@@ -116,6 +116,15 @@
 		jobs_all += "<td weight='100'><a href='?src=\ref[src];choice=assign;assign_target=Custom'>Custom</a></td>"
 
 		counter = 0
+		jobs_all += "</tr><tr><td><font color='#A50000'><b>Security</b></font></td>"//Red
+		for(var/job in security_positions)
+			counter++
+			if(counter >= 6)
+				jobs_all += "</tr><tr height='20'><td></td><td></td>"
+				counter = 0
+			jobs_all += "<td height='20' weight='100'><a href='?src=\ref[src];choice=assign;assign_target=[job]'>[replacetext(job, " ", "&nbsp")]</a></td>"
+
+		counter = 0
 		jobs_all += "</tr><tr><td><font color='#FFA500'><b>Engineering</b></font></td>"//Orange
 		for(var/job in engineering_positions)
 			counter++
