@@ -1274,16 +1274,16 @@ proc/is_hot(obj/item/W as obj)
 	return 0
 
 //Whether or not the given item counts as sharp in terms of dealing damage
-/proc/is_sharp(obj/item/W as obj)
-	if (!W) return 0
-	if (W.sharp) return 1
-	if (W.edge) return 1
+/proc/is_sharp(obj/O as obj)
+	if (!O) return 0
+	if (O.sharp) return 1
+	if (O.edge) return 1
 	return 0
 
 //Whether or not the given item counts as cutting with an edge in terms of removing limbs
-/proc/has_edge(obj/item/W as obj)
-	if (!W) return 0
-	if (W.edge) return 1
+/proc/has_edge(obj/O as obj)
+	if (!O) return 0
+	if (O.edge) return 1
 	return 0
 
 //Returns 1 if the given item is capable of popping things like balloons, inflatable barriers, or cutting police tape.
