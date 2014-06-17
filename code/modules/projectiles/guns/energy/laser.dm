@@ -96,7 +96,7 @@ obj/item/weapon/gun/energy/laser/retro
 	fire_sound = 'sound/weapons/laser3.ogg'
 	origin_tech = "combat=5;materials=3;magnets=2;syndicate=2"
 	projectile_type = "/obj/item/projectile/beam/xray"
-	charge_cost = 50
+	charge_cost = 500
 
 
 ////////Laser Tag////////////////////
