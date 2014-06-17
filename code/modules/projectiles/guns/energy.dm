@@ -36,12 +36,15 @@
 
 
 	update_icon()
-		var/ratio = power_supply.charge / power_supply.maxcharge
-		ratio = round(ratio, 0.25) * 100
-		if(modifystate)
-			icon_state = "[modifystate][ratio]"
+		if(cell_type)
+			var/ratio = power_supply.charge / power_supply.maxcharge
+			ratio = round(ratio, 0.25) * 100
+			if(modifystate)
+				icon_state = "[modifystate][ratio]"
+			else
+				icon_state = "[initial(icon_state)][ratio]"
 		else
-			icon_state = "[initial(icon_state)][ratio]"
+			icon_state = "energy0"
 
 
 	attackby(obj/item/weapon/W, mob/user)
