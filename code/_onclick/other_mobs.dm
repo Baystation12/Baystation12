@@ -25,7 +25,6 @@
 // Commented out to prevent overwriting RangedAttack in click.dm ~ Bone White
 /*
 /mob/living/carbon/human/RangedAttack(var/atom/A)
-	world << "Ranged Attack Start! other_mobs"
 	if(!gloves && !mutations.len) return
 	var/obj/item/clothing/gloves/G = gloves
 	if((M_LASER in mutations) && a_intent == "harm")
@@ -45,7 +44,6 @@
 			if(16 to 128)
 				return
 		A.attack_tk(src)
-
 */
 
 /*

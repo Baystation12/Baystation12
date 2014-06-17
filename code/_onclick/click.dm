@@ -302,7 +302,7 @@
 	var/turf/U = get_turf(A)
 	var/obj/structure/cable/cable = locate() in T
 	if(!cable || !istype(cable))
-		src << "No cable"
+		src << "<span class='warning'>There is no cable here to power the gloves.</span>"
 		return
 	if(world.time < G.next_shock)
 		src << "<span class='warning'>[G] aren't ready to shock again!</span>"
