@@ -1,5 +1,5 @@
 /* Toys!
- * ContainsL
+ * Contains:
  *		Balloons
  *		Fake telebeacon
  *		Fake singularity
@@ -7,11 +7,18 @@
  *		Toy crossbow
  *		Toy Tommy Gun
  *		Toy swords
+ *      Toy mechs
  *		Crayons
  *		Snap pops
  *		Water flower
+<<<<<<< HEAD
  *		Toy Nuke
  *		Card Deck -- Ported from /TG/
+=======
+ *      Therapy dolls
+ *      Toddler doll
+ *      Inflatable duck
+>>>>>>> 5d2bba3... Adds paths for therapy dolls
  */
 
 
@@ -953,6 +960,55 @@ obj/item/toy/cards/deck/syndicate/black
 			sleep(135)
 			icon_state = "nuketoyidle"
 
+
+/obj/item/toy/therapy_red
+	name = "red therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is red."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyred"
+	item_state = "egg4" // It's the red egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_purple
+	name = "purple therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is purple."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapypurple"
+	item_state = "egg1" // It's the magenta egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_blue
+	name = "blue therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is blue."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyblue"
+	item_state = "egg2" // It's the blue egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_yellow
+	name = "yellow therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is yellow."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyyellow"
+	item_state = "egg5" // It's the yellow egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_orange
+	name = "orange therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is orange."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyorange"
+	item_state = "egg4" // It's the red one again, lacking an orange item_state and making a new one is pointless
+	w_class = 1
+
+/obj/item/toy/therapy_green
+	name = "green therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is green."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapygreen"
+	item_state = "egg3" // It's the green egg in items_left/righthand
+	w_class = 1
+
 /obj/item/weapon/toddler
 	icon_state = "toddler"
 	name = "toddler"
@@ -960,3 +1016,15 @@ obj/item/toy/cards/deck/syndicate/black
 	force = 5
 	w_class = 4.0
 	slot_flags = SLOT_BACK
+
+
+//This should really be somewhere else but I don't know where. w/e
+
+/obj/item/weapon/inflatable_duck
+	name = "inflatable duck"
+	desc = "No bother to sink or swim when you can just float!"
+	icon_state = "inflatable"
+	item_state = "inflatable"
+	flags = FPRINT | TABLEPASS
+	icon = 'icons/obj/clothing/belts.dmi'
+	slot_flags = SLOT_BELT
