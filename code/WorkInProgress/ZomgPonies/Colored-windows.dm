@@ -36,6 +36,8 @@ var/global/wcCommon
 
 	for(var/A in wsBrigList)
 		for(var/obj/structure/window/W in locate(A))
+			if(istype(W, /obj/structure/window/full/shuttle))
+				continue
 			W.color = wcBrig
 		for(var/obj/machinery/door/window/D in locate(A))
 			D.color = wcBrig
