@@ -14,7 +14,7 @@
 		M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(M), slot_shoes)
 
 /proc/EquipCustomItems(mob/living/carbon/human/M)
-	testing("\[CustomItem\] Checking for custom items for [M.ckey] ([M.real_name])...")
+//	testing("\[CustomItem\] Checking for custom items for [M.ckey] ([M.real_name])...")
 	if(!establish_db_connection())
 		return
 

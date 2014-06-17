@@ -11,7 +11,7 @@
 	assigned_blocks[assigned]=name
 	dna_activity_bounds[assigned]=activity_bounds
 	//Debug message_admins("[name] assigned to block #[assigned].")
-	testing("[name] assigned to block #[assigned].")
+//	testing("[name] assigned to block #[assigned].")
 	return assigned
 
 /proc/setupgenetics()

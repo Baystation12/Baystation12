@@ -135,7 +135,7 @@ turf/New()
 	if(opacity)
 		UpdateAffectingLights()
 	if(luminosity)
-		world.log << "[type] has luminosity at New()"
+//		world.log << "[type] has luminosity at New()"
 		if(light)	world.log << "## WARNING: [type] - Don't set lights up manually during New(), We do it automatically."
 		light = new(src)
 

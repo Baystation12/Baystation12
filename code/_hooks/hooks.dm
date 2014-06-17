@@ -32,7 +32,7 @@ var/global/list/hooks = list()
 	for (var/hook_path in typesof(/hook))
 		var/hook/hook = new hook_path
 		hooks[hook.name] = hook
-		world.log << "Found hook: " + hook.name
+//		world.log << "Found hook: " + hook.name
 	for (var/hook_path in typesof(/hook_handler))
 		var/hook_handler/hook_handler = new hook_path
 		for (var/name in hooks)
