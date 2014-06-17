@@ -6,7 +6,7 @@
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_sound = 'sound/weapons/Taser.ogg'
 	projectile_type = "/obj/item/projectile/beam/stun"
-	cell_type = "/obj/item/weapon/cell/crap"
+	cell_type = "/obj/item/weapon/cell"
 
 /obj/item/weapon/gun/energy/taser/cyborg
 	name = "taser gun"
@@ -52,7 +52,7 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	origin_tech = "combat=3;materials=3;powerstorage=2"
 	charge_cost = 1250
-	projectile_type = "/obj/item/projectile/beam/stun"
+	projectile_type = "/obj/item/projectile/energy/electroderevolver"
 	cell_type = "/obj/item/weapon/cell"
 
 
