@@ -908,8 +908,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 		drop_l_hand()
 		stop_pulling()	//TODO: should be handled elsewhere
 		if(hud_used)	//hud handcuff icons
-			var/obj/screen/inventory/R = hud_used.adding[3]
-			var/obj/screen/inventory/L = hud_used.adding[4]
+			var/obj/screen/inventory/R = hud_used.adding[7]
+			var/obj/screen/inventory/L = hud_used.adding[8]
 			R.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="markus")
 			L.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="gabrielle")
 		if(istype(handcuffed, /obj/item/weapon/handcuffs/pinkcuffs))
@@ -919,8 +919,8 @@ proc/get_damage_icon_part(damage_state, body_part)
 	else
 		overlays_standing[HANDCUFF_LAYER]	= null
 		if(hud_used)
-			var/obj/screen/inventory/R = hud_used.adding[3]
-			var/obj/screen/inventory/L = hud_used.adding[4]
+			var/obj/screen/inventory/R = hud_used.adding[7]
+			var/obj/screen/inventory/L = hud_used.adding[8]
 			R.overlays = null
 			L.overlays = null
 	if(update_icons)   update_icons()
