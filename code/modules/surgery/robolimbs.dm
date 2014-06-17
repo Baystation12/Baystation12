@@ -30,6 +30,8 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if (!hasorgans(target))
+			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		return ..() && !(affected.status & ORGAN_CUT_AWAY)
 
