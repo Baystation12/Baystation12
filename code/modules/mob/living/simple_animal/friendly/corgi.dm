@@ -469,10 +469,47 @@
 	desc = "It's a borgi."
 	icon_state = "borgi"
 	icon_living = "borgi"
+	var/emagged = 0
 
+/mob/living/simple_animal/corgi/Ian/borgi/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	if (istype(O, /obj/item/weapon/card/emag) && !emagged)
+		emagged = 1
+		visible_message("<span class='warning'>[user] swipes a card through [src].</span>", "<span class='notice'>You overload [src]s internal reactor.</span>")
+		spawn (1000)
+			src.explode()
+		return
+	..()
+
+/mob/living/simple_animal/corgi/Ian/borgi/proc/explode()
+	for(var/mob/M in viewers(src, null))
+		if (M.client)
+			M.show_message("\red [src] makes an odd whining noise.")
+	sleep(10)
+	explosion(get_turf(src), 0, 1, 4, 7)
+	Die()
+
+/mob/living/simple_animal/corgi/Ian/borgi/proc/shootAt(var/atom/movable/target)
+	var/turf/T = get_turf(src)
+	var/turf/U = get_turf(target)
+	if (!T || !U)
+		return
+	var/obj/item/projectile/beam/A = new /obj/item/projectile/beam(loc)
+	A.icon = 'icons/effects/genetics.dmi'
+	A.icon_state = "eyelasers"
+	playsound(src.loc, 'sound/weapons/taser2.ogg', 75, 1)
+	A.current = T
+	A.yo = U.y - T.y
+	A.xo = U.x - T.x
+	spawn( 0 )
+		A.process()
+	return
 
 /mob/living/simple_animal/corgi/Ian/borgi/Life()
 	..()
+	if(emagged && prob(25))
+		var/mob/living/carbon/target = locate() in view(10,src)
+		if (target)
+			shootAt(target)
 
 	//spark for no reason
 	if(prob(5))
