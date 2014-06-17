@@ -101,7 +101,7 @@
 			  /mob/living/simple_animal/parrot/proc/perch_player)
 
 
-/mob/living/simple_animal/parrot/Die()
+/mob/living/simple_animal/parrot/death()
 	if(held_item)
 		held_item.loc = src.loc
 		held_item = null

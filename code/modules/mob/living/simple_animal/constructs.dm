@@ -34,7 +34,7 @@
 	for(var/spell in construct_spells)
 		spell_list += new spell(src)
 
-/mob/living/simple_animal/construct/Die()
+/mob/living/simple_animal/construct/death()
 	..()
 	new /obj/item/weapon/ectoplasm (src.loc)
 	for(var/mob/M in viewers(src, null))
