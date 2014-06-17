@@ -65,6 +65,7 @@
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna
 		brainmob.timeofhostdeath = H.timeofdeath
+		brainmob.stat = 0
 		if(brainmob.mind)
 			brainmob.mind.assigned_role = "Positronic Brain"
 		if(H.mind)

@@ -204,3 +204,34 @@
 		H.equip_or_collect(new /obj/item/weapon/stamp(H), slot_in_backpack)
 		H.equip_or_collect(new /obj/item/weapon/stamp/denied(H), slot_in_backpack)
 		return 1
+
+/datum/job/brigdoc
+	title = "Brig Physician"
+	flag = BRIGDOC
+	department_flag = KARMA
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the warden"
+	selection_color = "#ffeeee"
+	access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
+	minimal_access = list(access_medical, access_morgue, access_surgery, access_security, access_sec_doors, access_brig, access_court, access_maint_tunnels)
+
+	equip(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.equip_or_collect(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
+		switch(H.backbag)
+			if(2) H.equip_or_collect(new /obj/item/weapon/storage/backpack/medic(H), slot_back)
+			if(3) H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel_med(H), slot_back)
+			if(4) H.equip_or_collect(new /obj/item/weapon/storage/backpack/satchel(H), slot_back)
+		H.equip_or_collect(new /obj/item/clothing/under/rank/medical(H), slot_w_uniform)
+		H.equip_or_collect(new /obj/item/clothing/suit/storage/fr_jacket(H), slot_wear_suit)
+		H.equip_or_collect(new /obj/item/clothing/shoes/white(H), slot_shoes)
+		H.equip_or_collect(new /obj/item/device/pda/medical(H), slot_wear_pda)
+		H.equip_or_collect(new /obj/item/weapon/storage/firstaid/adv(H), slot_l_hand)
+		H.equip_or_collect(new /obj/item/device/flashlight/pen(H), slot_s_store)
+		if(H.backbag == 1)
+			H.equip_or_collect(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+		else
+			H.equip_or_collect(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+		return 1

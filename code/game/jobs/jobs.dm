@@ -53,6 +53,8 @@ var/const/BLUESHIELD		=(1<<1)
 var/const/CUSTOMS			=(1<<2)
 var/const/BARBER			=(1<<3)
 var/const/MECHANIC			=(1<<4)
+var/const/BRIGDOC			=(1<<5)
+var/const/JUDGE				=(1<<6)
 
 var/list/assistant_occupations = list(
 )
@@ -64,8 +66,7 @@ var/list/command_positions = list(
 	"Head of Security",
 	"Chief Engineer",
 	"Research Director",
-	"Chief Medical Officer",
-	"Nanotrasen Representative"
+	"Chief Medical Officer"
 )
 
 
@@ -112,7 +113,8 @@ var/list/civilian_positions = list(
 	"Assistant",
 	"Clown",
 	"Mime",
-	"Barber"
+	"Barber",
+	"Magistrate"
 
 )
 
@@ -123,7 +125,8 @@ var/list/security_positions = list(
 	"Detective",
 	"Security Officer",
 	"Customs Officer",
-	"Blueshield"
+	"Blueshield",
+	"Brig Physician"
 )
 
 
@@ -138,7 +141,9 @@ var/list/whitelisted_positions = list(
 	"Customs Officer",
 	"Nanotrasen Representative",
 	"Barber",
-	"Mechanic"
+	"Mechanic",
+	"Brig Physician",
+	"Magistrate"
 )
 
 /proc/guest_jobbans(var/job)

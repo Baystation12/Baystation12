@@ -35,7 +35,7 @@
 /obj/machinery/mineral/ore_redemption/proc/process_sheet(obj/item/weapon/ore/O)
 	var/obj/item/stack/sheet/processed_sheet = SmeltMineral(O)
 	if(processed_sheet)
-		var/datum/material/mat = materials.getMaterial(O.material)
+		var/datum/material/mat = materials.getMaterial(O.oretag)
 		mat.stored += processed_sheet.amount //Stack the sheets
 		O.loc = null //Let the old sheet garbage collect
 		while(mat.stored > stack_amt) //Get rid of excessive stackage
@@ -54,8 +54,8 @@
 				process_sheet(O)
 
 /obj/machinery/mineral/ore_redemption/proc/SmeltMineral(var/obj/item/weapon/ore/O)
-	if(O.material)
-		var/datum/material/mat = materials.getMaterial(O.material)
+	if(O.oretag)
+		var/datum/material/mat = materials.getMaterial(O.oretag)
 		var/obj/item/stack/sheet/M = new mat.sheettype(src)
 		points += mat.value
 		return M

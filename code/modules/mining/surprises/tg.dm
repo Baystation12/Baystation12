@@ -84,7 +84,6 @@
 		/obj/item/weapon/dice=3,
 		/obj/item/weapon/staff=2,
 		/obj/effect/decal/cleanable/dirt=3,
-		/obj/item/weapon/coin/mythril=3
 	)
 
 	flags = CONTIGUOUS_WALLS | CONTIGUOUS_FLOORS

@@ -32,28 +32,23 @@
 				{{if docking_status == "docked"}}
 					<span class="good">DOCKED</span>
 				{{else docking_status == "docking"}}
-					<span class="average">DOCKING</span>
+					{{if !docking_override}}
+						<span class="average">DOCKING</span>
+					{{else}}
+						<span class="average">DOCKING-MANUAL</span>
+					{{/if}}
 				{{else docking_status == "undocking"}}
-					<span class="average">UNDOCKING</span>
+					{{if !docking_override}}
+						<span class="average">UNDOCKING</span>
+					{{else}}
+						<span class="average">UNDOCKING-MANUAL</span>
+					{{/if}}
 				{{else docking_status == "undocked"}}
 					<span class="idle">UNDOCKED</span>
 				{{else}}
 					<span class="bad">ERROR</span>
 				{{/if}}
-			</div>
-		</div>
-	</div>
-	<div class="item" style="padding-top: 10px">
-		<div class="item">
-			<div class="itemLabel">
-				Docking Override:
-			</div>
-			<div class="itemContent">
-				{{if override_enabled}}
-					<span class="bad">ENABLED</span>
-				{{else}}
-					<span class="good">SAFE</span>
-				{{/if}}
+
 			</div>
 		</div>
 	</div>
@@ -65,9 +60,7 @@
 		<div class="itemContent" style="padding-top: 2px; width: 100%">
 			{{:~link('Launch Shuttle', 'arrowthickstop-1-e', {'move' : '1'}, can_launch? null : 'disabled' , null)}}
 			{{:~link('Cancel Launch', 'cancel', {'cancel' : '1'}, can_cancel? null : 'disabled' , null)}}
-			{{if has_docking}}
-				{{:~link('Override', 'alert', {'override' : '1'}, can_override? null : 'disabled' , (can_override && override_enabled)? 'redBackground' : null)}}
-			{{/if}}
+			{{:~link('Force Launch', 'alert', {'force' : '1'}, can_force? null : 'disabled' , can_force? 'redBackground' : null)}}
 		</div>
 	</div>
 </div>

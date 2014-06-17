@@ -120,6 +120,8 @@ var/last_chew = 0
 
 	if(O.take_damage(3,0,1,"teeth marks"))
 		H:UpdateDamageIcon()
+		if(prob(10))
+			O.droplimb()
 
 	last_chew = world.time
 

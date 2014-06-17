@@ -25,6 +25,10 @@
 	icon_action_button = "action_welding"
 	siemens_coefficient = 0.9
 	loose = 4
+	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/eyes.dmi'
+		)
 
 /obj/item/clothing/head/welding/attack_self()
 	toggle()

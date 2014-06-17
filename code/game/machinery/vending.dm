@@ -177,7 +177,7 @@
 		return
 
 	else if(istype(W, /obj/item/weapon/wrench))
-	
+
 		if(do_after(user, 20))
 			if(!src) return
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
@@ -189,7 +189,7 @@
 					user.visible_message("[user] unfastens the bolts securing \the [src] to the floor.", "You unfasten the bolts securing \the [src] to the floor.")
 					anchored = 0
 		return
-		
+
 	else if(src.panel_open)
 		for(var/datum/data/vending_product/R in product_records)
 			if(istype(W, R.product_path))
@@ -414,6 +414,7 @@
 		src.add_fingerprint(usr)
 		src.updateUsrDialog()
 	else
+		usr.unset_machine()
 		usr << browse(null, "window=vending")
 		return
 	return

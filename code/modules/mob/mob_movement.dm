@@ -207,6 +207,7 @@
 
 	if(!mob.canmove)
 		if (mob.buckled && (istype(mob.buckled, /obj/structure/stool/bed/chair/wheelchair))) // Exception for wheelchairs
+		else if (mob.buckled && (istype(mob.buckled, /obj/structure/stool/bed/chair/cart)))
 		else	return
 
 	//if(istype(mob.loc, /turf/space) || (mob.flags & NOGRAV))
@@ -268,6 +269,8 @@
 					if((!l_hand || l_hand.status & ORGAN_DESTROYED) && (!r_hand || r_hand.status & ORGAN_DESTROYED))
 						return // No hands to drive your chair? Tough luck!
 				move_delay += 2
+				return mob.buckled.relaymove(mob,direct)
+			else if(istype(mob.buckled, /obj/structure/stool/bed/chair/cart))
 				return mob.buckled.relaymove(mob,direct)
 
 		//We are now going to move

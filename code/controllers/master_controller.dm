@@ -85,6 +85,10 @@ datum/controller/game_controller/proc/setup()
 
 	color_windows_init()
 
+	//Create the mining ore distribution map.
+	var/datum/ore_distribution/O = new()
+	O.populate_distribution_map()
+
 	spawn(0)
 		if(ticker)
 			ticker.pregame()

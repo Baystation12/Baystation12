@@ -22,7 +22,6 @@ Note: Must be placed west/left of and R&D console to function.
 	var/uranium_amount = 0.0
 	var/diamond_amount = 0.0
 	var/clown_amount = 0.0
-	var/adamantine_amount = 0.0
 
 
 /obj/machinery/r_n_d/protolathe/New()
@@ -111,9 +110,6 @@ Note: Must be placed west/left of and R&D console to function.
 			if(clown_amount >= 2000)
 				var/obj/item/stack/sheet/mineral/clown/G = new /obj/item/stack/sheet/mineral/clown(src.loc)
 				G.amount = round(clown_amount / G.perunit)
-			if(adamantine_amount >= 2000)
-				var/obj/item/stack/sheet/mineral/adamantine/G = new /obj/item/stack/sheet/mineral/adamantine(src.loc)
-				G.amount = round(adamantine_amount / G.perunit)
 			del(src)
 			return 1
 		else
@@ -182,8 +178,6 @@ Note: Must be placed west/left of and R&D console to function.
 				diamond_amount += amount * 2000
 			if(/obj/item/stack/sheet/mineral/clown)
 				clown_amount += amount * 2000
-			if(/obj/item/stack/sheet/mineral/adamantine)
-				adamantine_amount += amount * 2000
 	else
 		new stacktype(src.loc, amount)
 	busy = 0

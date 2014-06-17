@@ -134,12 +134,12 @@
 	. = O
 	del(src)
 
-	
+
 /mob/living/carbon/human/make_into_mask(var/should_gib = 0)
 	for(var/t in organs)
 		del(t)
 	return ..(should_gib)
-	
+
 
 /mob/proc/make_into_mask(var/should_gib = 0, var/should_remove_items = 0)
 
@@ -150,18 +150,18 @@
 	if(!should_remove_items)
 		for(var/obj/item/W in src)
 			drop_from_inventory(W)
-		
+
 	var/mob/spirit/mask/new_spirit = new()
-	
+
 	if(mind)
 		new_spirit.mind = mind
 		new_spirit.mind.assigned_role = "Mask"
 		new_spirit.mind.original = new_spirit
-	
+
 	new_spirit.key = key
 	new_spirit.loc=loc
-	
-	if (should_gib)	
+
+	if (should_gib)
 		spawn(0)
 			src.gib() // gib the body
 	else
@@ -171,22 +171,22 @@
 				"You disappear into the shadows, never to be seen again.", \
 				"You hear strange noise, you can't quite place it.")
 			del(src)
-		
+
 	new_spirit << "<font color=\"purple\"><b><i>You are a Mask of Nar'sie now. You are a tiny fragment of the unknowable entity that is the god.</b></i></font>"
 	new_spirit << "<font color=\"purple\"><b><i>Your job is to help your acolytes complete their goals. Be spooky. Do evil.</b></i></font>"
-		
+
 	new_spirit.set_name()
-	
+
 	// let spirits identify cultists
 	if(ticker.mode)
 		ticker.mode.reset_cult_icons_for_spirit(new_spirit)
-	
+
 	// highlander test
 	there_can_be_only_one_mask(new_spirit)
 
 	return new_spirit
-	
-	
+
+
 //human -> robot
 /mob/living/carbon/human/proc/Robotize()
 	if (monkeyizing)
@@ -212,12 +212,11 @@
 	O.gender = gender
 	O.invisibility = 0
 
-
 	if(mind)		//TODO
 		mind.transfer_to(O)
 		if(O.mind.assigned_role == "Cyborg")
 			O.mind.original = O
-		else if(mind.special_role)
+		else if(mind && mind.special_role)
 			O.mind.store_memory("In case you look at this after being borged, the objectives are only here until I find a way to make them not show up for you, as I can't simply delete them without screwing up round-end reporting. --NeoFite")
 	else
 		O.key = key
@@ -229,11 +228,11 @@
 		if(O.mind.role_alt_title == "Android")
 			O.mmi = new /obj/item/device/mmi/posibrain(O)
 		else if(O.mind.role_alt_title == "Robot")
-			O.mmi = new /obj/item/device/mmi/posibrain(O) //Ravensdale wants a circuit based brain for another robot class, this is a placeholder.
+			O.mmi = null //Robots do not have removable brains.
 		else
 			O.mmi = new /obj/item/device/mmi(O)
-			O.mmi.transfer_identity(src)//Does not transfer key/client.
 
+		if(O.mmi) O.mmi.transfer_identity(src) //Does not transfer key/client.
 
 	callHook("borgify", list(O))
 

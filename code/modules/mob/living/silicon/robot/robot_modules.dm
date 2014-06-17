@@ -201,6 +201,12 @@
 		return
 
 
+/obj/item/weapon/robot_module/butler/respawn_consumable(var/mob/living/silicon/robot/R)
+	var/obj/item/weapon/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
+	E.reagents.add_reagent("enzyme", 2)
+	if(src.emag)
+		var/obj/item/weapon/reagent_containers/food/drinks/cans/beer/B = src.emag
+		B.reagents.add_reagent("beer2", 2)
 
 /obj/item/weapon/robot_module/miner
 	name = "miner robot module"
@@ -276,7 +282,6 @@
 		)
 
 	New()
-		src.modules += new /obj/item/device/flashlight/drone(src)
 		src.modules += new /obj/item/weapon/weldingtool(src)
 		src.modules += new /obj/item/weapon/screwdriver(src)
 		src.modules += new /obj/item/weapon/wrench(src)

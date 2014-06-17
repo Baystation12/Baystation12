@@ -8,6 +8,9 @@
 	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/dnainjector,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/suit.dmi'
+		)
 
 	verb/toggle()
 		set name = "Toggle Labcoat Buttons"
@@ -71,6 +74,9 @@
 	icon_state = "labcoat_cmo_open"
 	item_state = "labcoat_cmo"
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/suit.dmi'
+		)
 
 /obj/item/clothing/suit/storage/labcoat/mad
 	name = "The Mad's labcoat"
@@ -78,6 +84,9 @@
 	icon_state = "labgreen_open"
 	item_state = "labgreen"
 	species_fit = list("Vox")
+	sprite_sheets = list(
+		"Vox" = 'icons/mob/species/vox/suit.dmi'
+		)
 
 /obj/item/clothing/suit/storage/labcoat/genetics
 	name = "Geneticist Labcoat"
@@ -85,7 +94,7 @@
 	icon_state = "labcoat_gen_open"
 	species_fit = list("Vox")
 	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/shoes.dmi'
+		"Vox" = 'icons/mob/species/vox/suit.dmi'
 		)
 
 /obj/item/clothing/suit/storage/labcoat/chemist
@@ -94,7 +103,7 @@
 	icon_state = "labcoat_chem_open"
 	species_fit = list("Vox")
 	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/shoes.dmi'
+		"Vox" = 'icons/mob/species/vox/suit.dmi'
 		)
 
 /obj/item/clothing/suit/storage/labcoat/virologist
@@ -104,7 +113,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
 	species_fit = list("Vox")
 	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/shoes.dmi'
+		"Vox" = 'icons/mob/species/vox/suit.dmi'
 		)
 
 /obj/item/clothing/suit/storage/labcoat/science
@@ -113,5 +122,5 @@
 	icon_state = "labcoat_tox_open"
 	species_fit = list("Vox")
 	sprite_sheets = list(
-		"Vox" = 'icons/mob/species/vox/shoes.dmi'
+		"Vox" = 'icons/mob/species/vox/suit.dmi'
 		)

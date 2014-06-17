@@ -337,7 +337,7 @@ display round(lastgen) and plasmatank amount
 /obj/machinery/power/port_gen/pacman/mrs
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
 	icon_state = "portgen2"
-	sheet_path = /obj/item/stack/sheet/mineral/diamond
+	sheet_path = /obj/item/stack/sheet/mineral/tritium
 	power_gen = 40000
 	time_per_sheet = 80
 	board_path = "/obj/item/weapon/circuitboard/pacman/mrs"
