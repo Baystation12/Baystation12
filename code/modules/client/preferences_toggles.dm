@@ -198,7 +198,8 @@
 
 	prefs.sound ^= SOUND_STREAMING
 	prefs.save_preferences(src)
-	usr << "You will [(prefs.toggles & SOUND_STREAMING) ? "now" : "no longer"] hear streamed media."
+	usr << "You will [(prefs.sound & SOUND_STREAMING) ? "now" : "no longer"] hear streamed media."
 	// Restart.
-	media.stop_music()
-	media.update_music()
+	if(media)
+		media.stop_music()
+		media.update_music()
