@@ -303,7 +303,7 @@
 	switch(trap_type)
 		if("sawburst")
 			M << "\red <b>A sawblade shoots out of the ground and strikes you!</b>"
-			M.apply_damage(rand(5,10), BRUTE)
+			M.apply_damage(rand(5,10), BRUTE, sharp=1, edge=1)
 
 			var/atom/myloc = src.loc
 			var/image/flicker = image('code/WorkInProgress/Cael_Aislinn/Jungle/jungle.dmi',"sawblade")

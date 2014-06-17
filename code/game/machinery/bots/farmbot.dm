@@ -441,7 +441,7 @@
 			var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
 			var/datum/organ/external/affecting = human.get_organ(ran_zone(dam_zone))
 			var/armor = human.run_armor_check(affecting, "melee")
-			human.apply_damage(damage,BRUTE,affecting,armor)
+			human.apply_damage(damage,BRUTE,affecting,armor,sharp=1,edge=1)
 
 	else // warning, plants infested with weeds!
 		mode = FARMBOT_MODE_WAITING

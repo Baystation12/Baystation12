@@ -168,7 +168,7 @@
 		newHead.Attach(newHeadPrevious)
 
 		if(die)
-			newHead.Die()
+			newHead.death()
 
 		del(src)
 

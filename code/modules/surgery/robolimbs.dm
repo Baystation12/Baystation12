@@ -85,7 +85,7 @@
 			affected = affected.parent
 			user.visible_message("\red [user]'s hand slips, tearing flesh on [target]'s [affected.display_name]!", \
 			"\red Your hand slips, tearing flesh on [target]'s [affected.display_name]!")
-			target.apply_damage(10, BRUTE, affected)
+			target.apply_damage(10, BRUTE, affected, sharp=1)
 
 
 /datum/surgery_step/limb/prepare
@@ -166,4 +166,4 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, damaging connectors on [target]'s [affected.display_name]!", \
 		"\red Your hand slips, damaging connectors on [target]'s [affected.display_name]!")
-		target.apply_damage(10, BRUTE, affected)
+		target.apply_damage(10, BRUTE, affected, sharp=1)

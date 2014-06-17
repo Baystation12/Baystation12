@@ -70,9 +70,9 @@
 	if(prob(probability))
 		droplimb(1)
 	else
-		take_damage(damage, 0, 1, used_weapon = "EMP")
+		take_damage(damage, 0, 1, 1, used_weapon = "EMP")
 
-/datum/organ/external/proc/take_damage(brute, burn, sharp, used_weapon = null, list/forbidden_limbs = list())
+/datum/organ/external/proc/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
 	if((brute <= 0) && (burn <= 0))
 		return 0
 
@@ -95,7 +95,7 @@
 	//If limb took enough damage, try to cut or tear it off
 	if(body_part != UPPER_TORSO && body_part != LOWER_TORSO) //as hilarious as it is, getting hit on the chest too much shouldn't effectively gib you.
 		if(config.limbs_can_break && brute_dam >= max_damage * config.organ_health_multiplier)
-			if( (sharp && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
+			if( (edge && prob(5 * brute)) || (brute > 20 && prob(2 * brute)) )
 				droplimb(1)
 				return
 
@@ -159,7 +159,7 @@
 				if(possible_points.len)
 					//And pass the pain around
 					var/datum/organ/external/target = pick(possible_points)
-					target.take_damage(brute, burn, sharp, used_weapon, forbidden_limbs + src)
+					target.take_damage(brute, burn, sharp, edge, used_weapon, forbidden_limbs + src)
 
 	// sync the organ's damage with its wounds
 	src.update_damages()
@@ -223,35 +223,7 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/proc/createwound(var/type = CUT, var/damage)
 	if(damage == 0) return
 
-	// first check whether we can widen an existing wound
-	if(wounds.len > 0 && prob(max(50+owner.number_wounds*10,100)))
-		if((type == CUT || type == BRUISE) && damage >= 5)
-			var/datum/wound/W = pick(wounds)
-			if(W.amount == 1 && W.started_healing())
-				W.open_wound(damage)
-				if(prob(25))
-					owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
-					"\red The wound on your [display_name] widens with a nasty ripping voice.",\
-					"You hear a nasty ripping noise, as if flesh is being torn apart.")
-				return
-
-	//Creating wound
-	var/datum/wound/W
-	var/size = min( max( 1, damage/10 ) , 6)
-	//Possible types of wound
-	var/list/size_names = list()
-	switch(type)
-		if(CUT)
-			size_names = typesof(/datum/wound/cut/) - /datum/wound/cut/
-		if(BRUISE)
-			size_names = typesof(/datum/wound/bruise/) - /datum/wound/bruise/
-		if(BURN)
-			size_names = typesof(/datum/wound/burn/) - /datum/wound/burn/
-
-	size = min(size,size_names.len)
-	var/wound_type = size_names[size]
-	W = new wound_type(damage)
-
+	//moved this before the open_wound check so that having many small wounds for example doesn't somehow protect you from taking internal damage
 	//Possibly trigger an internal wound, too.
 	var/local_damage = brute_dam + burn_dam + damage
 	if(damage > 15 && type != BURN && local_damage > 30 && prob(damage) && !(status & ORGAN_ROBOT))
@@ -259,16 +231,55 @@ This function completely restores a damaged organ to perfect condition.
 		wounds += I
 		owner.custom_pain("You feel something rip in your [display_name]!", 1)
 
+	// first check whether we can widen an existing wound
+	if(wounds.len > 0 && prob(max(50+(number_wounds-1)*10,90)))
+		if((type == CUT || type == BRUISE) && damage >= 5)
+			//we need to make sure that the wound we are going to worsen is compatible with the type of damage...
+			var/list/compatible_wounds = list()
+			for (var/datum/wound/W in wounds)
+				if (W.can_worsen(type, damage))
+					compatible_wounds += W
+			
+			var/datum/wound/W = pick(compatible_wounds)
+			W.open_wound(damage)
+			if(prob(25))
+				//maybe have a separate message for BRUISE type damage?
+				owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
+				"\red The wound on your [display_name] widens with a nasty ripping voice.",\
+				"You hear a nasty ripping noise, as if flesh is being torn apart.")
+			return
+
+	//Creating wound
+	var/wound_type = get_wound_type(type, damage)
+	var/datum/wound/W = new wound_type(damage)
+
 	//Check whether we can add the wound to an existing wound
 	for(var/datum/wound/other in wounds)
-		if(other.desc == W.desc)
-			// okay, add it!
-			other.damage += W.damage
-			other.amount += 1
+		if(other.can_merge(W))
+			other.merge_wound(W)
 			W = null // to signify that the wound was added
 			break
 	if(W)
 		wounds += W
+
+/datum/organ/external/proc/get_wound_type(var/type = CUT, var/damage)
+	//if you look a the names in the wound's stages list for each wound type you will see the logic behind these values
+	switch(type)
+		if(CUT)
+			if (damage <= 5) return /datum/wound/cut/small
+			if (damage <= 15) return /datum/wound/cut/deep
+			if (damage <= 25) return /datum/wound/cut/flesh
+			if (damage <= 50) return /datum/wound/cut/gaping
+			if (damage <= 60) return /datum/wound/cut/gaping_big
+			return /datum/wound/cut/massive
+		if(BRUISE)
+			return /datum/wound/bruise
+		if(BURN)
+			if (damage <= 5) return /datum/wound/burn/moderate
+			if (damage <= 15) return /datum/wound/burn/large
+			if (damage <= 30) return /datum/wound/burn/severe
+			if (damage <= 40) return /datum/wound/burn/deep
+			if (damage <= 50) return /datum/wound/burn/carbonised
 
 /****************************************************
 			   PROCESSING & UPDATING
@@ -388,15 +399,12 @@ This function completely restores a damaged organ to perfect condition.
 			if(prob(1 * wound_update_accuracy))
 				owner.custom_pain("You feel a stabbing pain in your [display_name]!",1)
 
-
 		// slow healing
 		var/heal_amt = 0
 
-		if (W.damage < 15) //this thing's edges are not in day's travel of each other, what healing?
-			heal_amt += 0.2
-
-		if(W.is_treated() && W.damage < 50) //whoa, not even magical band aid can hold it together
-			heal_amt += 0.3
+		// if damage >= 50 AFTER treatment then it's probably too severe to heal within the timeframe of a round.
+		if (W.is_treated() && W.wound_damage() < 50)
+			heal_amt += 0.5
 
 		//we only update wounds once in [wound_update_accuracy] ticks so have to emulate realtime
 		heal_amt = heal_amt * wound_update_accuracy
@@ -800,8 +808,8 @@ This function completely restores a damaged organ to perfect condition.
 	else
 		. = new /icon(owner.race_icon, "[icon_name]_[g]")
 
-/datum/organ/external/head/take_damage(brute, burn, sharp, used_weapon = null, list/forbidden_limbs = list())
-	..(brute, burn, sharp, used_weapon, forbidden_limbs)
+/datum/organ/external/head/take_damage(brute, burn, sharp, edge, used_weapon = null, list/forbidden_limbs = list())
+	..(brute, burn, sharp, edge, used_weapon, forbidden_limbs)
 	if (!disfigured)
 		if (brute_dam > 40)
 			if (prob(50))
