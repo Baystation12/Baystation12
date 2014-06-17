@@ -40,45 +40,46 @@ datum
 				var/datum/reagent/self = src
 				src = null										  //of the reagent to the mob on TOUCHING it.
 
-				if(!istype(self.holder.my_atom, /obj/effect/effect/chem_smoke))
-					// If the chemicals are in a smoke cloud, do not try to let the chemicals "penetrate" into the mob's system (balance station 13) -- Doohl
+				if(self.holder)		//for catching rare runtimes
+					if(!istype(self.holder.my_atom, /obj/effect/effect/chem_smoke))
+						// If the chemicals are in a smoke cloud, do not try to let the chemicals "penetrate" into the mob's system (balance station 13) -- Doohl
 
-					if(method == TOUCH)
+						if(method == TOUCH)
 
-						var/chance = 1
-						var/block  = 0
+							var/chance = 1
+							var/block  = 0
 
-						for(var/obj/item/clothing/C in M.get_equipped_items())
-							if(C.permeability_coefficient < chance) chance = C.permeability_coefficient
-							if(istype(C, /obj/item/clothing/suit/bio_suit))
-								// bio suits are just about completely fool-proof - Doohl
-								// kind of a hacky way of making bio suits more resistant to chemicals but w/e
-								if(prob(75))
-									block = 1
+							for(var/obj/item/clothing/C in M.get_equipped_items())
+								if(C.permeability_coefficient < chance) chance = C.permeability_coefficient
+								if(istype(C, /obj/item/clothing/suit/bio_suit))
+									// bio suits are just about completely fool-proof - Doohl
+									// kind of a hacky way of making bio suits more resistant to chemicals but w/e
+									if(prob(75))
+										block = 1
 
-							if(istype(C, /obj/item/clothing/head/bio_hood))
-								if(prob(75))
-									block = 1
+								if(istype(C, /obj/item/clothing/head/bio_hood))
+									if(prob(75))
+										block = 1
 
-						chance = chance * 100
+							chance = chance * 100
 
-						if(prob(chance) && !block)
-							if(M.reagents)
-								M.reagents.add_reagent(self.id,self.volume/2)
+							if(prob(chance) && !block)
+								if(M.reagents)
+									M.reagents.add_reagent(self.id,self.volume/2)
 
 
-				if(method == INGEST && istype(M, /mob/living/carbon))
-					if(prob(1 * self.addictiveness))
-						if(prob(5 * volume))
-							var/datum/disease/addiction/A = new /datum/disease/addiction
-							A.addicted_to = self
-							A.name = "[self.name] Addiction"
-							A.addiction ="[self.name]"
-							A.cure = self.id
-							M.viruses += A
-							A.affected_mob = M
-							A.holder = M
-				return 1
+					if(method == INGEST && istype(M, /mob/living/carbon))
+						if(prob(1 * self.addictiveness))
+							if(prob(5 * volume))
+								var/datum/disease/addiction/A = new /datum/disease/addiction
+								A.addicted_to = self
+								A.name = "[self.name] Addiction"
+								A.addiction ="[self.name]"
+								A.cure = self.id
+								M.viruses += A
+								A.affected_mob = M
+								A.holder = M
+					return 1
 
 			reaction_obj(var/obj/O, var/volume) //By default we transfer a small part of the reagent to the object
 				src = null						//if it can hold reagents. nope!
