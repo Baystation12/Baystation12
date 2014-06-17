@@ -53,11 +53,8 @@
 			signaler.signal()
 
 	var/absorb = run_armor_check(def_zone, P.flag)
-	if(absorb >= 2)
-		P.on_hit(src,2)
-		return 2
 	if(!P.nodamage)
-		apply_damage((P.damage/(absorb+1)), P.damage_type, def_zone, absorb, 0, P, sharp=is_sharp(P), edge=has_edge(P))
+		apply_damage(P.damage, P.damage_type, def_zone, absorb, 0, P, sharp=is_sharp(P), edge=has_edge(P))
 	P.on_hit(src, absorb, def_zone)
 	return absorb
 
