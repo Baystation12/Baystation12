@@ -182,16 +182,7 @@ datum/reagent/paint
 	reaction_turf(var/turf/T, var/volume)
 		if(!istype(T) || istype(T, /turf/space))
 			return
-		var/ind = "[initial(T.icon)][color]"
-		if(!cached_icons[ind])
-			var/icon/overlay = new/icon(initial(T.icon))
-			overlay.Blend(color,ICON_MULTIPLY)
-			overlay.SetIntensity(1.4)
-			T.icon = overlay
-			cached_icons[ind] = T.icon
-		else
-			T.icon = cached_icons[ind]
-		return
+		T.color = color
 
 	red
 		name = "Red Paint"
