@@ -56,7 +56,7 @@
 	desc = "The noise made by rubbing it's antennae together is actually a complex form of communication for Kidan."
 	speech_verb = "rubs it's antenna together"
 	colour = "tajaran"
-	key = "l"
+	key = "4"
 	flags = RESTRICTED
 
 /datum/language/slime
