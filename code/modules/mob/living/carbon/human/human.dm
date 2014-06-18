@@ -565,7 +565,10 @@
 
 /mob/living/carbon/human/Topic(href, href_list)
 	var/pickpocket = 0
+
 	if(!usr.stat && usr.canmove && !usr.restrained() && in_range(src, usr))
+
+		// if looting pockets with gloves, do it quietly
 		if(href_list["pockets"])
 			if(usr:gloves)
 				var/obj/item/clothing/gloves/G = usr:gloves
@@ -601,6 +604,47 @@
 				// Display a warning if the user mocks up
 				src << "<span class='warning'>You feel your [pocket_side] pocket being fumbled with!</span>"
 
+
+		// if looting id with gloves, do it quietly - this allows pickpocket gloves to take/place id stealthily - Bone White
+		if(href_list["item"])
+			var/itemTarget = href_list["item"]
+			if(itemTarget == "id")
+				if(usr:gloves)
+					var/obj/item/clothing/gloves/G = usr:gloves
+					pickpocket = G.pickpocket
+				if(pickpocket)
+					var/obj/item/worn_id = src.wear_id
+					var/obj/item/place_item = usr.get_active_hand() // Item to place in the pocket, if it's empty
+
+					if(worn_id)
+						usr << "<span class='notice'>You try to remove [src]'s ID.</span>"
+					else if(place_item && place_item.mob_can_equip(src, slot_wear_id, 1))
+						usr << "<span class='notice'>You try to place [place_item] onto [src].</span>"
+					else
+						return
+
+					if(do_mob(usr, src, STRIP_DELAY))
+						if(worn_id)
+							u_equip(worn_id)
+							usr.put_in_hands(worn_id)
+						else
+							if(place_item)
+								usr.u_equip(place_item)
+							equip_to_slot_if_possible(place_item, slot_wear_id, 0, 1)
+
+						// Update strip window
+						if(usr.machine == src && in_range(src, usr))
+							show_inv(usr)
+
+
+
+					else if(!pickpocket)
+						// Display a warning if the user mocks up
+						src << "<span class='warning'>You feel your ID slot being fumbled with!</span>"
+
+
+
+
 	if (href_list["refresh"])
 		if((machine)&&(in_range(src, usr)))
 			show_inv(machine)
@@ -615,17 +659,18 @@
 		if(ishuman(usr) && usr:gloves)
 			var/obj/item/clothing/gloves/G = usr:gloves
 			pickpocket = G.pickpocket
-		O.source = usr
-		O.target = src
-		O.item = usr.get_active_hand()
-		O.s_loc = usr.loc
-		O.t_loc = loc
-		O.place = href_list["item"]
-		O.pickpocket = pickpocket //Stealthy
-		requests += O
-		spawn( 0 )
-			O.process()
-			return
+		if(!pickpocket || href_list["item"] != "id")  // Stop the non-stealthy verbose strip if pickpocketing id.
+			O.source = usr
+			O.target = src
+			O.item = usr.get_active_hand()
+			O.s_loc = usr.loc
+			O.t_loc = loc
+			O.place = href_list["item"]
+			O.pickpocket = pickpocket //Stealthy
+			requests += O
+			spawn( 0 )
+				O.process()
+				return
 
 	if (href_list["criminal"])
 		if(hasHUD(usr,"security"))
