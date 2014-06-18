@@ -20,7 +20,7 @@
 		origin = get_location_area(location)
 
 	if (!at_station())	//at centcom
-		supply_shuttle.buy()
+		supply_controller.buy()
 	
 	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP
@@ -40,7 +40,7 @@
 			move(origin, away_area)
 
 		//wait ETA here.
-		arrive_time = world.time + supply_shuttle.movetime
+		arrive_time = world.time + supply_controller.movetime
 		while (world.time <= arrive_time)
 			sleep(5)
 
@@ -50,14 +50,14 @@
 		moving_status = SHUTTLE_IDLE
 		
 		if (!at_station())	//at centcom
-			supply_shuttle.sell()
+			supply_controller.sell()
 
 // returns 1 if the supply shuttle should be prevented from moving because it contains forbidden atoms
 /datum/shuttle/ferry/supply/proc/forbidden_atoms_check()
 	if (!at_station())
 		return 0	//if badmins want to send mobs or a nuke on the supply shuttle from centcom we don't care
 	
-	return supply_shuttle.forbidden_atoms_check(get_location_area())
+	return supply_controller.forbidden_atoms_check(get_location_area())
 
 /datum/shuttle/ferry/supply/proc/at_station()
 	return (!location)

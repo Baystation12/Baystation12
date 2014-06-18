@@ -52,7 +52,7 @@ datum/controller/game_controller/New()
 	if(!syndicate_code_phrase)		syndicate_code_phrase	= generate_code_phrase()
 	if(!syndicate_code_response)	syndicate_code_response	= generate_code_phrase()
 	if(!emergency_shuttle)			emergency_shuttle = new /datum/shuttle_controller/emergency_shuttle()
-	if(!supply_shuttle)				supply_shuttle = new /datum/controller/supply_shuttle()
+//	if(!supply_shuttle)				supply_shuttle = new /datum/controller/supply_shuttle()
 
 datum/controller/game_controller/proc/setup()
 	world.tick_lag = config.Ticklag
