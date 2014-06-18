@@ -224,12 +224,6 @@ turf/proc/update_lumcount(amount, _lcolor, removing = 0)
 	var/blended
 
 	if (_lcolor)
-		if (l_color && _lcolor && l_color != _lcolor && !removing) // Blend colors.
-			var/redblend = min((GetRedPart(l_color)) + (GetRedPart(_lcolor)), 255)
-			var/greenblend = min((GetGreenPart(l_color)) + (GetGreenPart(_lcolor)), 255)
-			var/blueblend = min((GetBluePart(l_color)) + (GetBluePart(_lcolor)), 255)
-			blended = "#[add_zero2(num2hex(redblend), 2)][add_zero2(num2hex(greenblend),2)][add_zero2(num2hex(blueblend),2)]"
-
 		if (removing)
 			colors.Remove(_lcolor) // Remove the color that's leaving us from our list.
 
@@ -237,23 +231,7 @@ turf/proc/update_lumcount(amount, _lcolor, removing = 0)
 				l_color = null // All our color is gone, no color for us.
 			else if (colors && colors.len > 1)
 				var/maxdepth = 3 // Will blend 3 colors, anymore than that and it looks bad or we will get lag on every tile update.
-				var/currentblended
-
-				for (var/i = 0, ++i <= colors.len)
-					if (i > maxdepth)
-						//world << "Maxdepth reached, breaking loop."
-						break
-
-					if (!currentblended)
-						//world << "First iteration, currentblended = [colors[i]]."
-						currentblended = colors[i] // Start with the first of the remaining colors.
-						continue
-
-					var/redblend = min((GetRedPart(currentblended)) + (GetRedPart(colors[i])), 255)
-					var/greenblend = min((GetGreenPart(currentblended)) + (GetGreenPart(colors[i])), 255)
-					var/blueblend = min((GetBluePart(currentblended)) + (GetBluePart(colors[i])), 255)
-					currentblended = "#[add_zero2(num2hex(redblend), 2)][add_zero2(num2hex(greenblend), 2)][add_zero2(num2hex(blueblend), 2)]"
-					//world << "Finished [i] [currentblended]."
+				var/currentblended = MixColors(colors.Copy(1,maxdepth+1))
 
 				if (currentblended)
 					//world << "Ended up with [currentblended]"
@@ -264,6 +242,8 @@ turf/proc/update_lumcount(amount, _lcolor, removing = 0)
 				l_color = colors[colors.len]
 		else // we added a color.
 			colors.Add(_lcolor) // Add the base color to the list.
+			if (l_color && _lcolor && l_color != _lcolor) // Blend colors.
+				blended = MixColors(list(l_color,_lcolor))
 
 			if (blended)
 				l_color = blended // If we had a blended color, this is what we get otherwise.
