@@ -20,6 +20,10 @@
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)
 	return
 
+
+
+// Commented out to prevent overwriting RangedAttack in click.dm ~ Bone White
+/*
 /mob/living/carbon/human/RangedAttack(var/atom/A)
 	if(!gloves && !mutations.len) return
 	var/obj/item/clothing/gloves/G = gloves
@@ -40,6 +44,7 @@
 			if(16 to 128)
 				return
 		A.attack_tk(src)
+*/
 
 /*
 	Animals & All Unspecified

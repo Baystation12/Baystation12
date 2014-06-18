@@ -167,9 +167,9 @@
 	animals lunging, etc.
 */
 /mob/proc/RangedAttack(var/atom/A, var/params)
-	if(!mutations.len) return
 	if(ishuman(src) && (istype(src:gloves, /obj/item/clothing/gloves/yellow/power)) && a_intent == "harm")
 		PowerGlove(A)
+	if(!mutations.len) return
 	if((M_LASER in mutations) && a_intent == "harm")
 		LaserEyes(A) // moved into a proc below
 		return
@@ -302,6 +302,7 @@
 	var/turf/U = get_turf(A)
 	var/obj/structure/cable/cable = locate() in T
 	if(!cable || !istype(cable))
+		src << "<span class='warning'>There is no cable here to power the gloves.</span>"
 		return
 	if(world.time < G.next_shock)
 		src << "<span class='warning'>[G] aren't ready to shock again!</span>"
