@@ -1,9 +1,7 @@
 //These lists are populated in /datum/shuttle_controller/New()
 //Shuttle controller is instantiated in master_controller.dm.
 
-#define SHUTTLE_IDLE		0
-#define SHUTTLE_WARMUP		1
-#define SHUTTLE_INTRANSIT	2
+//shuttle moving state defines are in setup.dm
 
 var/global/list/shuttles
 
@@ -128,7 +126,7 @@ var/global/list/shuttles
 	var/datum/shuttle/ferry/shuttle
 
 	//Supply and escape shuttles.
-	shuttle = new()
+	shuttle = new/datum/shuttle/ferry/supply()
 	shuttle.location = 1
 	shuttle.area_offsite = locate(/area/supply/dock)
 	shuttle.area_station = locate(/area/supply/station)

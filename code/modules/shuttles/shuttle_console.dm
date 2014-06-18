@@ -22,9 +22,9 @@
 		return
 
 	if(!destination)
-		destination = (location == 1 ? area_station : area_offsite)
+		destination = get_location_area(!location)
 	if(!origin)
-		origin = (location == 1 ? area_offsite : area_station)
+		origin = get_location_area(location)
 	
 	..(origin, destination)
 
@@ -33,22 +33,30 @@
 		return
 
 	if(!destination)
-		destination = (location == 1 ? area_station : area_offsite)
+		destination = get_location_area(!location)
 	if(!departing)
-		departing = (location == 1 ? area_offsite : area_station)
+		departing = get_location_area(location)
 	
 	..(departing, destination, interim, travel_time)
 
 /datum/shuttle/ferry/move(var/area/origin,var/area/destination)
 	if(!destination)
-		destination = (location == 1 ? area_station : area_offsite)
+		destination = get_location_area(!location)
 	if(!origin)
-		origin = (location == 1 ? area_offsite : area_station)
-
+		origin = get_location_area(location)
+	
 	if (docking_controller && !docking_controller.undocked())
 		docking_controller.force_undock()
 	..(origin, destination)
 	location = !location
+
+/datum/shuttle/ferry/proc/get_location_area(location_id = null)
+	if (isnull(location_id))
+		location_id = location
+	
+	if (!location_id)
+		return area_station
+	return area_offsite
 
 /datum/shuttle/ferry/proc/process_shuttle()
 	switch(process_state)
