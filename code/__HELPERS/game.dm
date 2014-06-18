@@ -377,15 +377,25 @@ datum/projectile_data
 	return hex2num(copytext(hexa,6,8))
 
 /proc/GetHexColors(const/hexa)
-	var/hex = uppertext(hexa)
-	var/hi1 = text2ascii(hex, 2)
-	var/lo1 = text2ascii(hex, 3)
-	var/hi2 = text2ascii(hex, 4)
-	var/lo2 = text2ascii(hex, 5)
-	var/hi3 = text2ascii(hex, 6)
-	var/lo3 = text2ascii(hex, 7)
 	return list(
-		((hi1 >= 65 ? hi1 - 55 : hi1 - 48) << 4) | (lo1 >= 65 ? lo1 - 55 : lo1 - 48),
-		((hi2 >= 65 ? hi2 - 55 : hi2 - 48) << 4) | (lo2 >= 65 ? lo2 - 55 : lo2 - 48),
-		((hi3 >= 65 ? hi3 - 55 : hi3 - 48) << 4) | (lo3 >= 65 ? lo3 - 55 : lo3 - 48)
+			GetRedPart(hexa),
+			GetGreenPart(hexa),
+			GetBluePart(hexa)
 		)
+
+/proc/MixColors(const/list/colors)
+	var/list/reds = list()
+	var/list/blues = list()
+	var/list/greens = list()
+	var/list/weights = list()
+
+	for (var/i = 0, ++i <= colors.len)
+		reds.Add(GetRedPart(colors[i]))
+		blues.Add(GetBluePart(colors[i]))
+		greens.Add(GetGreenPart(colors[i]))
+		weights.Add(1)
+
+	var/r = mixOneColor(weights, reds)
+	var/g = mixOneColor(weights, greens)
+	var/b = mixOneColor(weights, blues)
+	return rgb(r,g,b)
