@@ -92,7 +92,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 
 /obj/item/seeds/replicapod/proc/request_player()
 	for(var/mob/dead/observer/O in player_list)
-		if(jobban_isbanned(O, "Dionaea"))
+		if(jobban_isbanned(O, "Dionaea") || (!is_alien_whitelisted(src, "Diona") && config.usealienwhitelist))
 			continue
 		if(O.client)
 			if(O.client.prefs.be_special & BE_PLANT)
@@ -101,7 +101,7 @@ Growing it to term with nothing injected will grab a ghost from the observers. *
 /obj/item/seeds/replicapod/proc/question(var/client/C)
 	spawn(0)
 		if(!C)	return
-		var/response = alert(C, "Someone is harvesting a replica pod. Would you like to play as a Dionaea?", "Replica pod harvest", "Yes", "No", "Never for this round.")
+		var/response = alert(C, "Someone is harvesting a diona pod. Would you like to play as a diona?", "Dionaea harvest", "Yes", "No", "Never for this round.")
 		if(!C || ckey)
 			return
 		if(response == "Yes")
