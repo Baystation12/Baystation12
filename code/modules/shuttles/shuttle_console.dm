@@ -136,7 +136,7 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "shuttle"
 	req_access = list(access_engine)
-	circuit = "/obj/item/weapon/circuitboard/engineering_shuttle"
+	circuit = null
 	
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
 	var/hacked = 0   // Has been emagged, no access restrictions.
