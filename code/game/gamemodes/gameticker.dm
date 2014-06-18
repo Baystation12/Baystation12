@@ -129,7 +129,7 @@ var/global/datum/controller/gameticker/ticker
 
 	//here to initialize the random events nicely at round start
 	setup_economy()
-	
+
 	setup_shuttle_docks()
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
@@ -154,7 +154,7 @@ var/global/datum/controller/gameticker/ticker
 	if(admins_number == 0)
 		send2adminirc("Round has started with no admins online.")
 
-	supply_shuttle.process() 		//Start the supply shuttle regenerating points -- TLE
+	supply_controller.process() 		//Start the supply shuttle regenerating points -- TLE
 	master_controller.process()		//Start master_controller.process()
 	lighting_controller.process()	//Start processing DynamicAreaLighting updates
 
@@ -320,7 +320,7 @@ var/global/datum/controller/gameticker/ticker
 		else
 			game_finished = (mode.check_finished() || (emergency_shuttle.location == 2 && emergency_shuttle.alert == 1))
 			mode_finished = game_finished
-		
+
 		if(!mode.explosion_in_progress && game_finished && (mode_finished || post_game))
 			current_state = GAME_STATE_FINISHED
 
@@ -351,17 +351,17 @@ var/global/datum/controller/gameticker/ticker
 						world << "\blue <B>An admin has delayed the round end</B>"
 				else
 					world << "\blue <B>An admin has delayed the round end</B>"
-		
+
 		else if (mode_finished)
 			post_game = 1
-			
+
 			mode.cleanup()
-			
+
 			//call a transfer shuttle vote
 			spawn(50)
 				world << "\red The round has ended!"
 				vote.autotransfer()
-			
+
 		return 1
 
 	proc/getfactionbyname(var/name)

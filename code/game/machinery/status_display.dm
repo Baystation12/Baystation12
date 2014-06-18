@@ -112,7 +112,7 @@
 				var/line1 = "SUPPLY"
 				var/line2 = ""
 				
-				var/datum/shuttle/ferry/supply/shuttle = supply_shuttle.get_shuttle()
+				var/datum/shuttle/ferry/supply/shuttle = supply_controller.get_shuttle()
 				if (!shuttle)
 					line2 = "Error"
 				else if(shuttle.has_eta())
@@ -171,7 +171,7 @@
 		return ""
 
 	proc/get_supply_shuttle_timer()
-		var/datum/shuttle/ferry/supply/shuttle = supply_shuttle.get_shuttle()
+		var/datum/shuttle/ferry/supply/shuttle = supply_controller.get_shuttle()
 		if (!shuttle)
 			return "Error"
 		
