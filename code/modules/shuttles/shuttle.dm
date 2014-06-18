@@ -191,15 +191,15 @@ var/global/list/shuttles
 
 	// ERT Shuttle
 	var/datum/shuttle/ferry/multidock/specops/ERT = new()
-	ERT.location = 0
+	ERT.location = 1
 	ERT.warmup_time = 10
 	ERT.area_offsite = locate(/area/shuttle/specops/station)	//centcom is the home station, the Exodus is offsite
 	ERT.area_station = locate(/area/shuttle/specops/centcom)
 	ERT.docking_controller_tag = "specops_shuttle_port"
 	ERT.docking_controller_tag_station = "specops_shuttle_port"
 	ERT.docking_controller_tag_offsite = "specops_shuttle_fore"
-	ERT.dock_target_station = "specops_centcom_dock"
-	ERT.dock_target_offsite = "specops_dock_airlock"
+	ERT.dock_target_station = "specops_dock_airlock"
+	ERT.dock_target_offsite = "specops_centcom_dock"
 	shuttles["Special Operations"] = ERT
 
 	//Vox Shuttle.
