@@ -240,14 +240,15 @@ This function completely restores a damaged organ to perfect condition.
 				if (W.can_worsen(type, damage))
 					compatible_wounds += W
 			
-			var/datum/wound/W = pick(compatible_wounds)
-			W.open_wound(damage)
-			if(prob(25))
-				//maybe have a separate message for BRUISE type damage?
-				owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
-				"\red The wound on your [display_name] widens with a nasty ripping voice.",\
-				"You hear a nasty ripping noise, as if flesh is being torn apart.")
-			return
+			if (compatible_wounds.len)
+				var/datum/wound/W = pick(compatible_wounds)
+				W.open_wound(damage)
+				if(prob(25))
+					//maybe have a separate message for BRUISE type damage?
+					owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
+					"\red The wound on your [display_name] widens with a nasty ripping voice.",\
+					"You hear a nasty ripping noise, as if flesh is being torn apart.")
+				return
 
 	//Creating wound
 	var/wound_type = get_wound_type(type, damage)
