@@ -142,15 +142,23 @@ var/list/mechtoys = list(
 	var/list/requestlist = list()
 	var/list/supply_packs = list()
 	//shuttle movement
-	var/at_station = 0
 	var/movetime = 1200
-	var/moving = 0
-	var/eta_timeofday
-	var/eta
+	var/shuttle_tag = "Supply"
 
 	New()
 		ordernum = rand(1,9000)
 
+	proc/get_shuttle()
+		if (!shuttles || !(shuttle_tag in shuttles))
+			return null
+		
+		var/datum/shuttle/ferry/supply/shuttle = shuttles[shuttle_tag]
+		
+		if (!istype(shuttle))
+			return null
+		
+		return shuttle
+	
 	//Supply shuttle ticker - handles supply point regenertion and shuttle travelling between centcomm and the station
 	proc/process()
 		for(var/typepath in (typesof(/datum/supply_packs) - /datum/supply_packs))
@@ -163,31 +171,12 @@ var/list/mechtoys = list(
 				if(processing)
 					iteration++
 					points += points_per_process
-
-					if(moving == 1)
-						var/ticksleft = (eta_timeofday - world.timeofday)
-						if(ticksleft > 0)
-							eta = round(ticksleft/600,1)
-						else
-							eta = 0
-							var/datum/shuttle/S = shuttles["Supply"]
-							if (istype(S)) S.move()
-							moving = 0
-							at_station = !at_station
+				
+				var/datum/shuttle/ferry/supply/shuttle = get_shuttle()
+				if (shuttle)
+					shuttle.process_shuttle()
 
 				sleep(processing_interval)
-
-	//Check whether the shuttle is allowed to move
-	proc/can_move()
-		if(moving) return 0
-
-		var/area/shuttle = locate(/area/supply/station)
-		if(!shuttle) return 0
-
-		if(forbidden_atoms_check(shuttle))
-			return 0
-
-		return 1
 
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 	proc/forbidden_atoms_check(atom/A)
@@ -207,11 +196,10 @@ var/list/mechtoys = list(
 
 	//Sellin
 	proc/sell()
-		var/shuttle_at
-		if(at_station)	shuttle_at = SUPPLY_STATION_AREATYPE
-		else			shuttle_at = SUPPLY_DOCK_AREATYPE
+		var/datum/shuttle/ferry/supply/shuttle_datum = get_shuttle()
+		if (!shuttle_datum) return
 
-		var/area/shuttle = locate(shuttle_at)
+		var/area/shuttle = shuttle_datum.get_location_area()
 		if(!shuttle)	return
 
 		var/phoron_count = 0
@@ -259,11 +247,10 @@ var/list/mechtoys = list(
 	proc/buy()
 		if(!shoppinglist.len) return
 
-		var/shuttle_at
-		if(at_station)	shuttle_at = SUPPLY_STATION_AREATYPE
-		else			shuttle_at = SUPPLY_DOCK_AREATYPE
+		var/datum/shuttle/ferry/supply/shuttle_datum = get_shuttle()
+		if (!shuttle_datum) return
 
-		var/area/shuttle = locate(shuttle_at)
+		var/area/shuttle = shuttle_datum.get_location_area()
 		if(!shuttle)	return
 
 		var/list/clear_turfs = list()
@@ -290,7 +277,7 @@ var/list/mechtoys = list(
 			slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
 			slip.info +="Order #[SO.ordernum]<br>"
 			slip.info +="Destination: [station_name]<br>"
-			slip.info +="[supply_shuttle.shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
+			slip.info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
 			slip.info +="CONTENTS:<br><ul>"
 
 			//spawn the stuff, finish generating the manifest while you're at it
@@ -319,7 +306,7 @@ var/list/mechtoys = list(
 			slip.info += "CHECK CONTENTS AND STAMP BELOW THE LINE TO CONFIRM RECEIPT OF GOODS<hr>"
 			if (SP.contraband) slip.loc = null	//we are out of blanks for Form #44-D Ordering Illicit Drugs.
 
-		supply_shuttle.shoppinglist.Cut()
+		shoppinglist.Cut()
 		return
 
 /obj/item/weapon/paper/manifest
@@ -346,9 +333,11 @@ var/list/mechtoys = list(
 	if(temp)
 		dat = temp
 	else
-		dat += {"<BR><B>Supply shuttle</B><HR>
-		Location: [supply_shuttle.moving ? "Moving to station ([supply_shuttle.eta] Mins.)":supply_shuttle.at_station ? "Station":"Dock"]<BR>
-		<HR>Supply points: [supply_shuttle.points]<BR>
+		var/datum/shuttle/ferry/supply/shuttle = supply_shuttle.get_shuttle()
+		if (shuttle)
+			dat += {"<BR><B>Supply shuttle</B><HR>
+			Location: [shuttle.has_eta() ? "Moving to station ([shuttle.eta_minutes()] Mins.)":shuttle.at_station() ? "Docked":"Away"]<BR>
+			<HR>Supply points: [supply_shuttle.points]<BR>
 		<BR>\n<A href='?src=\ref[src];order=categories'>Request items</A><BR><BR>
 		<A href='?src=\ref[src];vieworders=1'>View approved orders</A><BR><BR>
 		<A href='?src=\ref[src];viewrequests=1'>View requests</A><BR><BR>
@@ -471,14 +460,48 @@ var/list/mechtoys = list(
 	if (temp)
 		dat = temp
 	else
-		dat += {"<BR><B>Supply shuttle</B><HR>
-		\nLocation: [supply_shuttle.moving ? "Moving to station ([supply_shuttle.eta] Mins.)":supply_shuttle.at_station ? "Station":"Away"]<BR>
-		<HR>\nSupply points: [supply_shuttle.points]<BR>\n<BR>
-		[supply_shuttle.moving ? "\n*Must be away to order items*<BR>\n<BR>":supply_shuttle.at_station ? "\n*Must be away to order items*<BR>\n<BR>":"\n<A href='?src=\ref[src];order=categories'>Order items</A><BR>\n<BR>"]
-		[supply_shuttle.moving ? "\n*Shuttle already called*<BR>\n<BR>":supply_shuttle.at_station ? "\n<A href='?src=\ref[src];send=1'>Send away</A><BR>\n<BR>":"\n<A href='?src=\ref[src];send=1'>Send to station</A><BR>\n<BR>"]
+		var/datum/shuttle/ferry/supply/shuttle = supply_shuttle.get_shuttle()
+		if (shuttle)
+			dat += "<BR><B>Supply shuttle</B><HR>"
+			dat += "\nLocation: "
+			if (shuttle.has_eta())
+				dat += "In transit ([shuttle.eta_minutes()] Mins.)<BR>"
+			else
+				if (shuttle.at_station())
+					if (shuttle.docking_controller)
+						switch(shuttle.docking_controller.get_docking_status())
+							if ("docked") dat += "Docked at station<BR>"
+							if ("undocked") dat += "Undocked from station<BR>"
+							if ("docking") dat += "Docking with station [shuttle.can_force()? "<span class='warning'><A href='?src=\ref[src];force_send=1'>OVERRIDE</A></span>" : ""]<BR>"
+							if ("undocking") dat += "Undocking from station [shuttle.can_force()? "<span class='warning'><A href='?src=\ref[src];force_send=1'>OVERRIDE</A></span>" : ""]<BR>"
+					else
+						dat += "Station<BR>"
+					
+					if (shuttle.can_launch())
+						dat += "<A href='?src=\ref[src];send=1'>Send away</A>"
+					else if (shuttle.can_cancel())
+						dat += "<A href='?src=\ref[src];cancel_send=1'>Cancel launch</A>"
+					else
+						dat += "*Shuttle is busy*"
+					dat += "<BR>\n<BR>"
+				else
+					dat += "Away<BR>"
+					if (shuttle.can_launch())
+						dat += "<A href='?src=\ref[src];send=1'>Request supply shuttle</A>"
+					else if (shuttle.can_cancel())
+						dat += "<A href='?src=\ref[src];cancel_send=1'>Cancel request</A>"
+					else
+						dat += "*Shuttle is busy*"
+					dat += "<BR>\n<BR>"
+		
+		
+		dat += {"<HR>\nSupply points: [supply_shuttle.points]<BR>\n<BR>
+//		[shuttle.at_station()  ? "\n*Must be away to order items*<BR>\n<BR>":"\n<A href='?src=\ref[src];order=categories'>Order items</A><BR>\n<BR>"]
+		\n<A href='?src=\ref[src];order=categories'>Order items</A><BR>\n<BR>
 		\n<A href='?src=\ref[src];viewrequests=1'>View requests</A><BR>\n<BR>
 		\n<A href='?src=\ref[src];vieworders=1'>View orders</A><BR>\n<BR>
 		\n<A href='?src=\ref[user];mach_close=computer'>Close</A>"}
+		
 
 	user << browse(dat, "window=computer;size=575x450")
 	onclose(user, "computer")
@@ -497,6 +520,10 @@ var/list/mechtoys = list(
 	if(!supply_shuttle)
 		world.log << "## ERROR: Eek. The supply_shuttle controller datum is missing somehow."
 		return
+	var/datum/shuttle/ferry/supply/shuttle = supply_shuttle.get_shuttle()
+	if (!shuttle)
+		world.log << "## ERROR: Eek. The supply/shuttle datum is missing somehow."
+		return
 	if(..())
 		return
 
@@ -505,28 +532,25 @@ var/list/mechtoys = list(
 
 	//Calling the shuttle
 	if(href_list["send"])
-		if(!supply_shuttle.can_move())
-			temp = "For safety reasons the automated supply shuttle cannot transport live organisms, classified nuclear weaponry or homing beacons.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
-
-		else if(supply_shuttle.at_station)
-			supply_shuttle.moving = -1
-			supply_shuttle.sell()
-			supply_shuttle.moving = 0
-			supply_shuttle.at_station = !supply_shuttle.at_station
-
-			var/datum/shuttle/S = shuttles["Supply"]
-			if (istype(S)) S.move()
-
-			temp = "The supply shuttle has departed.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
+		if(shuttle.at_station())
+			if (shuttle.forbidden_atoms_check())
+				temp = "For safety reasons the automated supply shuttle cannot transport live organisms, classified nuclear weaponry or homing beacons.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
+			else
+				shuttle.launch(src)
+				temp = "Initiating launch sequence.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 		else
-			supply_shuttle.moving = 1
-			supply_shuttle.buy()
-			supply_shuttle.eta_timeofday = (world.timeofday + supply_shuttle.movetime) % 864000
-			temp = "The supply shuttle has been called and will arrive in [round(supply_shuttle.movetime/600,1)] minutes.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
+			shuttle.launch(src)
+			temp = "The supply shuttle has been called and will arrive in approximately [round(supply_shuttle.movetime/600,1)] minutes.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 			post_signal("supply")
+	
+	if (href_list["force_send"])
+		shuttle.force_launch(src)
 
+	if (href_list["cancel_send"])
+		shuttle.cancel_launch(src)
+	
 	else if (href_list["order"])
-		if(supply_shuttle.moving) return
+		//if(!shuttle.idle()) return	//this shouldn't be necessary it seems
 		if(href_list["order"] == "categories")
 			//all_supply_groups
 			//Request what?
@@ -651,7 +675,7 @@ var/list/mechtoys = list(
 		temp = "Current requests: <BR><BR>"
 		for(var/S in supply_shuttle.requestlist)
 			var/datum/supply_order/SO = S
-			temp += "#[SO.ordernum] - [SO.object.name] requested by [SO.orderedby]  [supply_shuttle.moving ? "":supply_shuttle.at_station ? "":"<A href='?src=\ref[src];confirmorder=[SO.ordernum]'>Approve</A> <A href='?src=\ref[src];rreq=[SO.ordernum]'>Remove</A>"]<BR>"
+			temp += "#[SO.ordernum] - [SO.object.name] requested by [SO.orderedby]  [shuttle.idle() ? "":shuttle.at_station() ? "":"<A href='?src=\ref[src];confirmorder=[SO.ordernum]'>Approve</A> <A href='?src=\ref[src];rreq=[SO.ordernum]'>Remove</A>"]<BR>"
 
 		temp += "<BR><A href='?src=\ref[src];clearreq=1'>Clear list</A>"
 		temp += "<BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"

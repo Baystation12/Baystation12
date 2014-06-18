@@ -411,9 +411,11 @@
 
 	if(mode==47)
 		var/supplyData[0]
-		supplyData["shuttle_moving"] = supply_shuttle.moving
-		supplyData["shuttle_eta"] = supply_shuttle.eta
-		supplyData["shuttle_loc"] = supply_shuttle.at_station ? "Station" : "Dock"
+		var/datum/shuttle/ferry/supply/shuttle = supply_shuttle.get_shuttle()
+		if (shuttle)
+			supplyData["shuttle_moving"] = shuttle.has_eta()
+			supplyData["shuttle_eta"] = shuttle.eta_minutes()
+			supplyData["shuttle_loc"] = shuttle.at_station() ? "Station" : "Dock"
 		var/supplyOrderCount = 0
 		var/supplyOrderData[0]
 		for(var/S in supply_shuttle.shoppinglist)
