@@ -4,7 +4,7 @@
 #define PLASMA_RELEASE_MODIFIER 1500                //Higher == less plasma released by reaction
 #define OXYGEN_RELEASE_MODIFIER 750        //Higher == less oxygen released at high temperature/power
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
-
+#define DAMAGE_RATE_LIMIT 5 //damage rate cap at power = 900, scales linearly with power
 
 //These would be what you would get at point blank, decreases with distance
 #define DETONATION_RADS 200
@@ -34,6 +34,13 @@
 	var/emergency_point = 700
 	var/emergency_alert = "CRYSTAL DELAMINATION IMMINENT."
 	var/explosion_point = 1000
+
+	l_color = "#8A8A00"
+	var/warning_color = "#B8B800"
+	var/emergency_color = "#D9D900"
+
+	var/grav_pulling = 0
+	var/pull_radius = 14
 
 	var/emergency_issued = 0
 
@@ -83,6 +90,13 @@
 		del src
 		return
 
+//Changes color and luminosity of the light to these values if they were not already set
+/obj/machinery/power/supermatter/proc/shift_light(var/lum, var/clr)
+	if(l_color != clr)
+		l_color = clr
+	if(luminosity != lum)
+		SetLuminosity(lum)
+
 /obj/machinery/power/supermatter/process()
 
 	var/turf/L = loc
@@ -93,29 +107,15 @@
 	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
 		return  //Yeah just stop.
 
-	if(istype(L, /turf/space))	// Stop processing this stuff if we've been ejected.
-		return
-
-	//Ok, get the air from the turf
-	var/datum/gas_mixture/env = L.return_air()
-
-	//Remove gas from surrounding area
-	var/datum/gas_mixture/removed = env.remove(gasefficency * env.total_moles)
-
-	if(!removed || !removed.total_moles)
-		damage += max((power-1600)/10, 0)
-		power = min(power, 1600)
-		return 1
-
-	damage_archived = damage
-	damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
 
 	if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
+
+		shift_light(5, warning_color)
 		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
 			var/stability = num2text(round((damage / explosion_point) * 100))
 
 			if(damage > emergency_point)
-
+				shift_light(7, emergency_color)
 				radio.autosay(addtext(emergency_alert, " Instability: ",stability,"%"), "Supermatter Monitor")
 				lastwarning = world.timeofday
 
@@ -136,10 +136,17 @@
 				mob.apply_effect(rads, IRRADIATE)
 
 			explode()
+	else
+		shift_light(4,initial(l_color))
+	if(grav_pulling)
+		supermatter_pull()
 
-	//Ok, 100% oxygen atmosphere = best reaction
-	//Maxes out at 100% oxygen pressure
-	oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
+	//Ok, get the air from the turf
+	var/datum/gas_mixture/removed = null
+	var/datum/gas_mixture/env = null
+
+	//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We dont want the SM exploding before anyone can react.
+	//We want the cap to scale linearly with power (and explosion_point). Let's aim for a cap of 5 at power = 900 (based on testing, equals roughly 5% per SM alert announcement).
 
 	var/temp_factor = 100
 
@@ -274,3 +281,39 @@
 		var/rads = 500 * sqrt( 1 / (get_dist(l, src) + 1) )
 		l.apply_effect(rads, IRRADIATE)
 
+/obj/machinery/power/supermatter/proc/supermatter_pull()
+
+	//following is adapted from singulo code
+	if(defer_powernet_rebuild != 2)
+		defer_powernet_rebuild = 1
+	// Let's just make this one loop.
+	for(var/atom/X in orange(pull_radius,src))
+		// Movable atoms only
+		if(istype(X, /atom/movable))
+			if(is_type_in_list(X, uneatable))	continue
+			if(((X) && (!istype(X,/mob/living/carbon/human))))
+				step_towards(X,src)
+				if(!X:anchored) //unanchored objects pulled twice as fast
+					step_towards(X,src)
+				if(istype(X, /obj/structure/window)) //shatter windows
+					X.ex_act(2.0)
+			else if(istype(X,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = X
+				if(istype(H.shoes,/obj/item/clothing/shoes/magboots))
+					var/obj/item/clothing/shoes/magboots/M = H.shoes
+					if(M.magpulse)
+						step_towards(H,src) //step just once with magboots
+						continue
+				step_towards(H,src) //step twice
+				step_towards(H,src)
+
+	if(defer_powernet_rebuild != 2)
+		defer_powernet_rebuild = 0
+	return
+
+
+/obj/machinery/power/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow
+	return
+
+/obj/machinery/power/supermatter/RepelAirflowDest(n)
+	return
