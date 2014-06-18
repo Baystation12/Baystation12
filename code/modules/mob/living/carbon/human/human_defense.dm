@@ -231,10 +231,16 @@ emp_act
 		visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [user]!</B>")
 
 	var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].")
+	var/weapon_sharp = is_sharp(I)
+	var/weapon_edge = has_edge(I)
+	if ((weapon_sharp || weapon_edge) && prob(getarmor(def_zone, "melee")))
+		weapon_sharp = 0
+		weapon_edge = 0
+	
 	if(armor >= 2)	return 0
 	if(!I.force)	return 0
 
-	apply_damage(I.force, I.damtype, affecting, armor , is_sharp(I), has_edge(I), I)
+	apply_damage(I.force, I.damtype, affecting, armor , sharp=weapon_sharp, edge=weapon_edge, I)
 
 	var/bloody = 0
 	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (I.force * 2)))
