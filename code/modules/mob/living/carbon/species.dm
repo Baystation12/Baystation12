@@ -397,7 +397,7 @@
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
 	path = /mob/living/carbon/human/machine
-	language = "Tradeband"
+	language = "Trinary"
 	unarmed_type = /datum/unarmed_attack/punch
 
 	eyes = "blank_eyes"

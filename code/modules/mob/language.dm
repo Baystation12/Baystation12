@@ -73,6 +73,12 @@
 	key = "1"
 	flags = RESTRICTED
 
+/datum/language/trinary
+	name = "Trinary"
+	desc = "A modification of binary to allow fuzzy logic. 0 is no, 1 maybe, 2 yes. Credited with giving Machine People the ability to think creatively."
+	key = "l"
+	flags = RESTRICTED
+
 
 // Galactic common languages (systemwide accepted standards).
 /datum/language/trader
