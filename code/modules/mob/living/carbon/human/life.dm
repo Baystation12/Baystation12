@@ -116,6 +116,8 @@
 
 	//Check if we're on fire
 	handle_fire()
+	if(on_fire && fire_stacks > 0)
+		fire_stacks -= 0.5
 
 	//Status updates, death etc.
 	handle_regular_status_updates()		//Optimized a bit
@@ -322,11 +324,11 @@
 
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
-		
+
 		// HACK NEED CHANGING LATER
 		if(health < config.health_threshold_crit && !reagents.has_reagent("inaprovaline"))
 			losebreath++
-		
+
 		if(losebreath>0) //Suffocating so do not take a breath
 			losebreath--
 			if (prob(10)) //Gasp per 10 ticks? Sounds about right.

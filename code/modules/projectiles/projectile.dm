@@ -16,7 +16,7 @@
 	density = 1
 	unacidable = 1
 	anchored = 1 //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
-	flags = FPRINT | TABLEPASS
+//	flags = FPRINT | TABLEPASS
 	pass_flags = PASSTABLE
 	mouse_opacity = 0
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
@@ -114,7 +114,7 @@
 			for(var/mob/living/simple_animal/smart_animal/SA in view(7))
 				SA.fight(firer , M)
 
-		if(A)
+/*		if(A)
 			if (!forcedodge)
 				forcedodge = A.bullet_act(src, def_zone) // searches for return value
 			if(forcedodge == -1) // the bullet passes through a dense object!
@@ -133,7 +133,30 @@
 			density = 0
 			invisibility = 101
 			del(src)
-		return 1
+		return 1 */
+
+		spawn(0)
+			if(A)
+				// We get the location before running A.bullet_act, incase the proc deletes A and makes it null
+				var/turf/new_loc = null
+				if(istype(A, /turf))
+					new_loc = A
+				else
+					new_loc = A.loc
+
+				var/permutation = A.bullet_act(src, def_zone) // searches for return value, could be deleted after run so check A isn't null
+
+				if(permutation == -1 || (forcedodge && !istype(A, /turf)))// the bullet passes through a dense object!
+					bumped = 0 // reset bumped variable!
+					loc = new_loc
+					permutated.Add(A)
+					return 0
+
+				density = 0
+				invisibility = 101
+				del(src)
+				return 0
+		return 1	//с ТГ, работает лучше
 
 
 	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

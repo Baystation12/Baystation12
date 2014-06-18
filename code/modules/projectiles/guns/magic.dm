@@ -1,8 +1,8 @@
 /obj/item/weapon/gun/magic
 	name = "staff of nothing"
 	desc = "This staff is boring to watch because even though it came first you've seen everything it can do in other staves for years."
-	icon = 'icons/obj/gun.dmi'
-	icon_state = "staffofnothing"
+	icon = 'icons/obj/wizard.dmi'
+	icon_state = "staff"
 	item_state = "staff"
 	fire_sound = 'sound/weapons/emitter.ogg'
 	flags =  CONDUCT
@@ -12,12 +12,16 @@
 	var/recharge_rate = 4
 	var/charge_tick = 0
 	var/can_charge = 1
-	var/ammo_type
+	var/ammo_type = /obj/item/ammo_casing/magic
 	origin_tech = null
 	clumsy_check = 0
 
 /obj/item/weapon/gun/magic/afterattack(atom/target as mob, mob/living/user as mob, flag)
 	newshot()
+	var/area/A = get_area(user)
+	if(istype(A, /area/wizard_station))
+		user << "<span class='warning'>You know better than to violate the security of The Den, best wait until you leave to use [src].<span>"
+		return
 	..()
 
 /obj/item/weapon/gun/magic/proc/newshot()

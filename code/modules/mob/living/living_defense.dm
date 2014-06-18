@@ -154,6 +154,9 @@
 	if(G.oxygen < 1)
 		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
 		return
+	if(fire_stacks == 0)
+		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
+		return
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(700, 50, 1)
 
