@@ -184,6 +184,11 @@ datum/reagent/paint
 			return
 		T.color = color
 
+	reaction_obj(var/obj/O, var/volume)
+		..()
+		if(istype(O,/obj/item/weapon/light))
+			O.color = color
+
 	red
 		name = "Red Paint"
 		id = "paint_red"
