@@ -371,60 +371,44 @@ area
 
 		if (color_overlay)
 			overlays.Remove(color_overlay)
-			color_overlay.icon_state = "white"
+			color_overlay.icon_state = "5"
 		else
 			if (l_color)
-				color_overlay = image('icons/effects/effects.dmi', ,"white", 10.1)
+				color_overlay = image('icons/effects/effects.dmi', ,"5", 10.1)
+				//color_overlay = image('icons/effects/effects.dmi', ,"white", 10.1)
 
 		if (istype(color_overlay))
 			color_overlay.color = l_color
 
-			/*
-			if (light < 6)
-				switch (level)
-					if (6)
-						color_overlay.alpha = 140
-					if (5)
-						color_overlay.alpha = 120
-					if (4)
-						color_overlay.alpha = 100
-					if (3)
-						color_overlay.alpha = 80
-					if (2)
-						color_overlay.alpha = 60
-					if (1)
-						color_overlay.alpha = 40
-					if (-INFINITY to 0)
+
+			switch (color_light)
+				if (6)
+					color_overlay.icon_state = "5"
+					//color_overlay.alpha = 180
+				if (5)
+					color_overlay.icon_state = "4"
+					//color_overlay.alpha = 150
+				if (4)
+					color_overlay.icon_state = "3"
+					//color_overlay.alpha = 120
+				if (3)
+					color_overlay.icon_state = "2"
+					//color_overlay.alpha = 90
+				if (2)
+					color_overlay.icon_state = "1"
+					//color_overlay.alpha = 60
+				if (1)
+					color_overlay.icon_state = "1"
+					color_overlay.alpha = 200
+					//color_overlay.alpha = 30
+				if (-INFINITY to 0)
 					//world << "Zero or below, [color_light]."
 					color_overlay.alpha = 0
-					else
-						//world << "Setting the alpha to max... color_light [color_light]."
-						color_overlay.alpha = 140
+				else
+					//world << "Setting the alpha to max... color_light [color_light]."
+					color_overlay.alpha = 180
 
-				color_overlay.blend_mode = BLEND_MULTIPLY
-			*/
-
-			if (1)
-				switch (color_light)
-					if (6)
-						color_overlay.alpha = 140
-					if (5)
-						color_overlay.alpha = 120
-					if (4)
-						color_overlay.alpha = 100
-					if (3)
-						color_overlay.alpha = 80
-					if (2)
-						color_overlay.alpha = 60
-					if (1)
-						color_overlay.alpha = 20
-					if (-INFINITY to 0)
-						//world << "Zero or below, [color_light]."
-						color_overlay.alpha = 0
-					else
-						//world << "Setting the alpha to max... color_light [color_light]."
-						color_overlay.alpha = 180
-			color_overlay.blend_mode = BLEND_MULTIPLY
+			color_overlay.blend_mode = BLEND_ADD
 			if (color_overlay.color)
 				overlays.Add(color_overlay)
 
