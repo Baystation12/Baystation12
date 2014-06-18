@@ -368,22 +368,13 @@ datum/projectile_data
 	return new /datum/projectile_data(src_x, src_y, time, distance, power_x, power_y, dest_x, dest_y)
 
 /proc/GetRedPart(const/hexa)
-	var/hex = uppertext(hexa)
-	var/hi = text2ascii(hex, 2)
-	var/lo = text2ascii(hex, 3)
-	return (((hi >= 65 ? hi - 55 : hi - 48) << 4) | (lo >= 65 ? lo - 55 : lo - 48))
+	return hex2num(copytext(hexa,2,4))
 
 /proc/GetGreenPart(const/hexa)
-	var/hex = uppertext(hexa)
-	var/hi = text2ascii(hex, 4)
-	var/lo = text2ascii(hex, 5)
-	return (((hi >= 65 ? hi - 55 : hi - 48) << 4) | (lo >= 65 ? lo - 55 : lo - 48))
+	return hex2num(copytext(hexa,4,6))
 
 /proc/GetBluePart(const/hexa)
-	var/hex = uppertext(hexa)
-	var/hi = text2ascii(hex, 6)
-	var/lo = text2ascii(hex, 7)
-	return (((hi >= 65 ? hi - 55 : hi - 48) << 4) | (lo >= 65 ? lo - 55 : lo - 48))
+	return hex2num(copytext(hexa,6,8))
 
 /proc/GetHexColors(const/hexa)
 	var/hex = uppertext(hexa)
