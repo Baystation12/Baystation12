@@ -239,28 +239,31 @@ This function completely restores a damaged organ to perfect condition.
 			for (var/datum/wound/W in wounds)
 				if (W.can_worsen(type, damage))
 					compatible_wounds += W
-			
-			var/datum/wound/W = pick(compatible_wounds)
-			W.open_wound(damage)
-			if(prob(25))
-				//maybe have a separate message for BRUISE type damage?
-				owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
-				"\red The wound on your [display_name] widens with a nasty ripping voice.",\
-				"You hear a nasty ripping noise, as if flesh is being torn apart.")
-			return
+
+			if(compatible_wounds.len)
+				var/datum/wound/W = pick(compatible_wounds)
+				W.open_wound(damage)
+				if(prob(25))
+					//maybe have a separate message for BRUISE type damage?
+					owner.visible_message("\red The wound on [owner.name]'s [display_name] widens with a nasty ripping voice.",\
+					"\red The wound on your [display_name] widens with a nasty ripping voice.",\
+					"You hear a nasty ripping noise, as if flesh is being torn apart.")
+				return
 
 	//Creating wound
 	var/wound_type = get_wound_type(type, damage)
-	var/datum/wound/W = new wound_type(damage)
 
-	//Check whether we can add the wound to an existing wound
-	for(var/datum/wound/other in wounds)
-		if(other.can_merge(W))
-			other.merge_wound(W)
-			W = null // to signify that the wound was added
-			break
-	if(W)
-		wounds += W
+	if(wound_type)
+		var/datum/wound/W = new wound_type(damage)
+
+		//Check whether we can add the wound to an existing wound
+		for(var/datum/wound/other in wounds)
+			if(other.can_merge(W))
+				other.merge_wound(W)
+				W = null // to signify that the wound was added
+				break
+		if(W)
+			wounds += W
 
 /datum/organ/external/proc/get_wound_type(var/type = CUT, var/damage)
 	//if you look a the names in the wound's stages list for each wound type you will see the logic behind these values
@@ -279,7 +282,7 @@ This function completely restores a damaged organ to perfect condition.
 			if (damage <= 15) return /datum/wound/burn/large
 			if (damage <= 30) return /datum/wound/burn/severe
 			if (damage <= 40) return /datum/wound/burn/deep
-			if (damage <= 50) return /datum/wound/burn/carbonised
+			return /datum/wound/burn/carbonised
 
 /****************************************************
 			   PROCESSING & UPDATING
