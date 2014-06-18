@@ -347,12 +347,14 @@
 		throw_mode_on()
 
 /mob/living/carbon/proc/throw_mode_off()
-	in_throw_mode = 0
-	throw_icon.icon_state = "act_throw_off"
+	src.in_throw_mode = 0
+	if(src.throw_icon) //in case we don't have the HUD and we use the hotkey
+		src.throw_icon.icon_state = "act_throw_off"
 
 /mob/living/carbon/proc/throw_mode_on()
-	in_throw_mode = 1
-	throw_icon.icon_state = "act_throw_on"
+	src.in_throw_mode = 1
+	if(src.throw_icon)
+		src.throw_icon.icon_state = "act_throw_on"
 
 /mob/proc/throw_item(atom/target)
 	return
