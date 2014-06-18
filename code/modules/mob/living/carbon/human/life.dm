@@ -1472,7 +1472,7 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 						see_invisible = SEE_INVISIBLE_LEVEL_ONE
 					if("shadow")
 						see_in_dark = 8
-						see_invisible = SEE_INVISIBLE_LEVEL_ONE
+						see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
 
 			if(mind && mind.vampire)
 				if((VAMP_VISION in mind.vampire.powers) && !(VAMP_FULL in mind.vampire.powers))
