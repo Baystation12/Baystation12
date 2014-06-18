@@ -385,13 +385,13 @@
 			sight |= SEE_MOBS
 			sight |= SEE_OBJS
 			see_in_dark = 8
-			see_invisible = SEE_INVISIBLE_LEVEL_TWO
+			see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
 		else if (stat != 2)
 			sight |= SEE_MOBS
 			sight &= ~SEE_TURFS
 			sight &= ~SEE_OBJS
 			see_in_dark = 4
-			see_invisible = SEE_INVISIBLE_LEVEL_TWO
+			see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
 
 		if (healths)
 			if (stat != 2)
