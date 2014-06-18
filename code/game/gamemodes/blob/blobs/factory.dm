@@ -107,8 +107,10 @@
 	var/turf/location = get_turf(src)
 
 	// Create the reagents to put into the air, s-acid is yellow and stings a little
-	create_reagents(25)
-	reagents.add_reagent("spore", 25)
+	create_reagents(50)
+	reagents.add_reagent("condensedcapsaicin", 10)
+	reagents.add_reagent("zombiepowder", 25)
+	reagents.add_reagent("impedrezene", 15)
 
 	// Attach the smoke spreader and setup/start it.
 	S.attach(location)
