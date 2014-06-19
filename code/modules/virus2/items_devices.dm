@@ -92,6 +92,7 @@
 	name = "blank GNA disk"
 	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk0"
+	w_class = 1
 	var/datum/disease2/effectholder/effect = null
 	var/list/species = null
 	var/stage = 1
