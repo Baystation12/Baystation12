@@ -1,69 +1,14 @@
-var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
-var/list/genome_prefixes = list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
-
-var/list/spawn_types_animal = list("/mob/living/carbon/slime",\
-"/mob/living/simple_animal/hostile/alien",\
-"/mob/living/simple_animal/hostile/alien/drone",\
-"/mob/living/simple_animal/hostile/alien/sentinel",\
-"/mob/living/simple_animal/hostile/giant_spider",\
-"/mob/living/simple_animal/hostile/giant_spider/hunter",\
-"/mob/living/simple_animal/hostile/giant_spider/nurse",\
-"/mob/living/simple_animal/hostile/creature",\
-"/mob/living/simple_animal/hostile/samak",\
-"/mob/living/simple_animal/hostile/diyaab",\
-"/mob/living/simple_animal/hostile/shantak",\
-"/mob/living/simple_animal/tindalos",\
-"/mob/living/simple_animal/yithian")
-
-var/list/spawn_types_plant = list("/obj/item/seeds/walkingmushroommycelium",\
-"/obj/item/seeds/killertomatoseed",\
-"/obj/item/seeds/shandseed",
-"/obj/item/seeds/mtearseed",
-"/obj/item/seeds/thaadra",\
-"/obj/item/seeds/telriis",\
-"/obj/item/seeds/jurlmah",\
-"/obj/item/seeds/amauri",\
-"/obj/item/seeds/gelthi",\
-"/obj/item/seeds/vale",\
-"/obj/item/seeds/surik")
-
-var/list/all_animal_genesequences = list()
-var/list/all_plant_genesequences = list()
-
+//gene sequence datum
 datum/genesequence
 	var/spawned_type
 	var/spawned_type_text
 	var/list/full_genome_sequence = list()
 
-/proc/create_all_genesequences()
-	//create animal gene sequences
-	while(spawn_types_animal.len && genome_prefixes.len)
-		var/datum/genesequence/new_sequence = new/datum/genesequence()
-		new_sequence.spawned_type_text = pick(spawn_types_animal)
-		new_sequence.spawned_type = text2path(new_sequence.spawned_type_text)
-		spawn_types_animal -= new_sequence.spawned_type
-
-		var/prefixletter = pick(genome_prefixes)
-		genome_prefixes -= prefixletter
-		while(new_sequence.full_genome_sequence.len < 7)
-			new_sequence.full_genome_sequence.Add("[prefixletter][pick(alphabet_uppercase)][pick(alphabet_uppercase)][pick(1,2,3,4,5,6,7,8,9,0)][pick(1,2,3,4,5,6,7,8,9,0)]")
-
-		all_animal_genesequences.Add(new_sequence)
-
-	//create plant gene sequences
-	while(spawn_types_plant.len && genome_prefixes.len)
-		var/datum/genesequence/new_sequence = new/datum/genesequence()
-		new_sequence.spawned_type = pick(spawn_types_plant)
-		spawn_types_plant -= new_sequence.spawned_type
-
-		var/prefixletter = pick(genome_prefixes)
-		genome_prefixes -= prefixletter
-		while(new_sequence.full_genome_sequence.len < 7)
-			new_sequence.full_genome_sequence.Add("[prefixletter][pick(1,2,3,4,5,6,7,8,9,0)][pick(1,2,3,4,5,6,7,8,9,0)][pick(alphabet_uppercase)][pick(alphabet_uppercase)]")
-
-		all_plant_genesequences.Add(new_sequence)
 
 
+#define SCANFOSSIL_RETVAL_WRONGTYPE 1
+#define SCANFOSSIL_RETVAL_NOMOREGENESEQ 2
+#define SCANFOSSIL_RETVAL_SUCCESS 4
 
 /obj/machinery/computer/reconstitutor
 	name = "Flora reconstitution console"
@@ -71,7 +16,7 @@ datum/genesequence
 	icon_state = "dna"
 	circuit = "/obj/item/weapon/circuitboard/reconstitutor"
 	req_access = list(access_heads) //Only used for record deletion right now.
-	var/obj/machinery/clonepod/pod1 = null //Linked cloning pod.
+	var/obj/machinery/clonepod/pod1 = 1 //Linked cloning pod.
 	var/temp = ""
 	var/menu = 1 //Which menu screen to display
 	var/list/records = list()
@@ -86,19 +31,20 @@ datum/genesequence
 	var/list/discovered_genomes = list("! Clear !")
 	var/list/accepted_fossil_types = list(/obj/item/weapon/fossil/plant)
 
+
 /obj/machinery/computer/reconstitutor/New()
-	create_all_genesequences()
 	if(!undiscovered_genesequences)
-		undiscovered_genesequences = all_plant_genesequences.Copy()
+		undiscovered_genesequences = master_controller.all_plant_genesequences.Copy()
 	..()
 
 /obj/machinery/computer/reconstitutor/animal
 	name = "Fauna reconstitution console"
 	accepted_fossil_types = list(/obj/item/weapon/fossil/bone,/obj/item/weapon/fossil/shell,/obj/item/weapon/fossil/skull)
+	pod1 = null
+	circuit = "/obj/item/weapon/circuitboard/reconstitutor/animal"
 
 /obj/machinery/computer/reconstitutor/animal/New()
-	create_all_genesequences()
-	undiscovered_genesequences = all_animal_genesequences.Copy()
+	undiscovered_genesequences = master_controller.all_animal_genesequences.Copy()
 	..()
 
 /obj/machinery/computer/reconstitutor/attackby(obj/item/W, mob/user)
@@ -109,9 +55,9 @@ datum/genesequence
 			if(1)
 				src.visible_message("\red \icon[src] [src] scans the fossil and rejects it.")
 			if(2)
-				visible_message("\red \icon[src] can not extract any more genetic data from new fossils.")
+				visible_message("\red \icon[src] [src] can not extract any more genetic data from new fossils.")
 			if(4)
-				src.visible_message("\blue \icon[src] [user] inserts [W] into [src], the fossil is consumed.")
+				src.visible_message("\blue \icon[src] [user] inserts [W] into [src], the fossil is consumed as [src] extracts genetic data from it.")
 				del(W)
 				updateDialog()
 	else if (istype(W, /obj/item/weapon/storage))
@@ -122,18 +68,18 @@ datum/genesequence
 		var/full = 0
 		for(var/obj/item/weapon/fossil/F in S.contents)
 			switch(scan_fossil(F))
-				if(1)
+				if(SCANFOSSIL_RETVAL_WRONGTYPE)
 					numrejected += 1
-				if(2)
+				if(SCANFOSSIL_RETVAL_NOMOREGENESEQ)
 					full = 1
-				if(4)
+				if(SCANFOSSIL_RETVAL_SUCCESS)
 					numaccepted += 1
 					S.remove_from_storage(F, src) //This will move the item to this item's contents
 					del(F)
 					updateDialog()
 		var/outmsg = "\blue You empty all the fossils from [S] into [src]."
 		if(numaccepted)
-			outmsg += " \blue[numaccepted] fossils were accepted."
+			outmsg += " \blue[numaccepted] fossils were accepted and consumed as [src] extracts genetic data from them."
 		if(numrejected)
 			outmsg += " \red[numrejected] fossils were rejected."
 		if(full)
@@ -159,7 +105,7 @@ datum/genesequence
 
 	if(!pod1)
 		dat += "<b><font color=red>Unable to locate cloning pod.</font></b><br>"
-	else
+	else if(istype(pod1))
 		dat += "<b><font color=green>Cloning pod connected.</font></b><br>"
 
 	dat += "<table border=1>"
@@ -307,7 +253,7 @@ datum/genesequence
 /obj/machinery/computer/reconstitutor/proc/scan_fossil(var/obj/item/weapon/fossil/scan_fossil)
 	//see whether we accept these kind of fossils
 	if(accepted_fossil_types.len && !accepted_fossil_types.Find(scan_fossil.type))
-		return 1
+		return SCANFOSSIL_RETVAL_WRONGTYPE
 
 	//see whether we are going to discover a new sequence, new genome for existing sequence or nothing
 	var/new_genome_prob = discovered_genesequences.len * 50
@@ -317,6 +263,17 @@ datum/genesequence
 		var/newly_discovered_genome = pick(undiscovered_genomes)
 		undiscovered_genomes -= newly_discovered_genome
 		discovered_genomes.Add(newly_discovered_genome)
+
+		//chance to discover a second genome
+		if(prob(75))
+			newly_discovered_genome = pick(undiscovered_genomes)
+			undiscovered_genomes -= newly_discovered_genome
+			discovered_genomes.Add(newly_discovered_genome)
+			//chance to discover a third genome
+			if(prob(50))
+				newly_discovered_genome = pick(undiscovered_genomes)
+				undiscovered_genomes -= newly_discovered_genome
+				discovered_genomes.Add(newly_discovered_genome)
 
 	else if(undiscovered_genesequences.len)
 		//discover new gene sequence
@@ -330,6 +287,33 @@ datum/genesequence
 
 	else
 		//there's no point scanning any more fossils, we've already discovered everything
-		return 2
+		return SCANFOSSIL_RETVAL_NOMOREGENESEQ
 
-	return 4
+	return SCANFOSSIL_RETVAL_SUCCESS
+
+#undef SCANFOSSIL_RETVAL_WRONGTYPE
+#undef SCANFOSSIL_RETVAL_NOMOREGENESEQ
+#undef SCANFOSSIL_RETVAL_SUCCESS
+
+
+/obj/item/weapon/circuitboard/reconstitutor
+	name = "Circuit board (Flora Reconstitution Console)"
+	build_path = "/obj/machinery/computer/reconstitutor"
+	origin_tech = "programming=2;biotech=4;materials=6"
+	frame_desc = "Requires 2 Advanced Scanning Module, 1 Nano Manipulator, 1 Matter Bin and 1 Advanced Capacitor."
+	req_components = list(
+							"/obj/item/weapon/stock_parts/scanning_module/adv" = 2,
+							"/obj/item/weapon/stock_parts/manipulator/nano" = 1,
+							"/obj/item/weapon/stock_parts/matter_bin" = 1,
+							"/obj/item/weapon/stock_parts/capacitor/adv" = 1)
+
+/obj/item/weapon/circuitboard/reconstitutor/animal
+	name = "Circuit board (Fauna Reconstitution Console)"
+	build_path = "/obj/machinery/computer/reconstitutor/animal"
+	origin_tech = "programming=2;biotech=4;materials=6"
+	frame_desc = "Requires 2 Advanced Scanning Module, 1 Nano Manipulator, 1 Matter Bin and 1 Advanced Capacitor."
+	req_components = list(
+							"/obj/item/weapon/stock_parts/scanning_module/adv" = 2,
+							"/obj/item/weapon/stock_parts/manipulator/nano" = 1,
+							"/obj/item/weapon/stock_parts/matter_bin" = 1,
+							"/obj/item/weapon/stock_parts/capacitor/adv" = 1)

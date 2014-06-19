@@ -20,7 +20,7 @@
 			var/damage = round(30/(get_dist(B,get_turf(src))+1))
 			B.health -= damage
 			B.update_icon()
-		
+
 		new/obj/effect/effect/smoke/flashbang(src.loc)
 		del(src)
 		return
@@ -102,7 +102,6 @@
 
 /obj/effect/effect/smoke/flashbang
 	name = "illumination"
-	time_to_live = 10
 	opacity = 0
 	icon_state = "sparks"
 

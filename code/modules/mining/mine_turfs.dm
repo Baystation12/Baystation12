@@ -1,8 +1,5 @@
 /**********************Mineral deposits**************************/
 
-/datum/controller/game_controller
-	var/list/artifact_spawning_turfs = list()
-
 /turf/simulated/mineral //wall piece
 	name = "Rock"
 	icon = 'icons/turf/walls.dmi'

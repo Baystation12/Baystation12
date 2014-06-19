@@ -304,3 +304,6 @@ var/score_dmgestkey = null
 
 // Recall time limit:  2 hours
 var/recall_time_limit=72000
+
+//added for Xenoarchaeology, might be useful for other stuff
+var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
