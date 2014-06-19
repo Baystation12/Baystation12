@@ -506,7 +506,7 @@ var/list/sortMobsOrder = list(	"/mob/living/silicon/ai",
 		return -M
 
 
-/proc/key_name(var/whom, var/include_link = null, var/include_name = 1)
+/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/type = null)
 	var/mob/M
 	var/client/C
 	var/key
@@ -530,7 +530,7 @@ var/list/sortMobsOrder = list(	"/mob/living/silicon/ai",
 
 	if(key)
 		if(include_link && C)
-			. += "<a href='?priv_msg=\ref[C]'>"
+			. += "<a href='?priv_msg=\ref[C];type=[type]'>"
 
 		if(C && C.holder && C.holder.fakekey && !include_name)
 			. += "Administrator"

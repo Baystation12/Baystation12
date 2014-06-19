@@ -42,7 +42,7 @@
 		if(ismob(C)) 		//Old stuff can feed-in mobs instead of clients
 			var/mob/M = C
 			C = M.client
-		cmd_admin_pm(C,null)
+		cmd_admin_pm(C,null, href_list["type"])
 		return
 
 	if(href_list["irc_msg"])
