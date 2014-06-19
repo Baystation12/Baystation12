@@ -80,7 +80,7 @@
 		//mod PMs are maroon
 		//PMs sent from admins and mods display their rank
 		if(holder)
-			if( holder.rights & R_MOD )
+			if( holder.rights & R_MOD && !holder.rights & R_ADMIN )
 				recieve_color = "maroon"
 			else
 				recieve_color = "red"
