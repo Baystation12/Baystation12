@@ -261,11 +261,11 @@ emp_act
 	if ((weapon_sharp || weapon_edge) && prob(getarmor(def_zone, "melee")))
 		weapon_sharp = 0
 		weapon_edge = 0
-	
+
 	if(armor >= 2)	return 0
 	if(!I.force)	return 0
 
-	apply_damage(I.force, I.damtype, affecting, armor , sharp=weapon_sharp, edge=weapon_edge, I)
+	apply_damage(I.force, I.damtype, affecting, armor , sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
 
 	var/bloody = 0
 	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (I.force * 2)))
