@@ -107,6 +107,8 @@
 	icon = 'icons/obj/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
 	var/used = 0
+	var/locked = 0
+	req_access = list(access_medical)
 
 	open()
 		. = ..()
@@ -123,3 +125,12 @@
 			if(!ishuman(usr))	return
 			usr << "\red You can't fold that up anymore.."
 		..()
+
+	attackby(W as obj, mob/user as mob)
+		if(istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))
+			if(src.allowed(user))
+				src.locked = !src.locked
+				user << "The controls are now [src.locked ? "locked." : "unlocked."]"
+			else
+				user << "\red Access denied."
+			return
