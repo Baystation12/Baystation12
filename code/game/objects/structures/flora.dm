@@ -78,6 +78,9 @@
 	icon = 'icons/obj/plants.dmi'
 	icon_state = "plant-26"
 
+/obj/structure/flora/pottedplant/random/New()
+	..()
+	icon_state = "plant-[rand(1, 30)]"
 //newbushes
 
 /obj/structure/flora/ausbushes
