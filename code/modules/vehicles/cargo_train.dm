@@ -1,14 +1,14 @@
 /obj/vehicle/train/cargo/engine
 	name = "cargo train tug"
-	icon = 'icons/obj/aibots.dmi'
-	icon_state = "mulebot1"			//mulebot icons until I get some proper icons
+	icon = 'icons/vehicles/CargoTrain.dmi'
+	icon_state = "engine"			//mulebot icons until I get some proper icons
 	on = 1
 	powered = 1
 	locked = 0
 
 	load_item_visible = 1
 	load_offset_x = 0
-	load_offset_y = 9
+	load_offset_y = 5
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	var/lead_engine = 1		//if the engine is the lead engine - set automatically
@@ -16,15 +16,15 @@
 
 /obj/vehicle/train/cargo/trolley
 	name = "cargo train trolley"
-	icon = 'icons/obj/aibots.dmi'
-	icon_state = "mulebot0"
+	icon = 'icons/vehicles/CargoTrain.dmi'
+	icon_state = "trolley"
 	anchored = 0
 	passenger_allowed = 0
 	locked = 0
 
 	load_item_visible = 1
-	load_offset_x = 0
-	load_offset_y = 9
+	load_offset_x = 1
+	load_offset_y = 7
 
 //-------------------------------------------
 // Standard procs
