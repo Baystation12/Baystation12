@@ -171,12 +171,18 @@ var/list/mechtoys = list(
 				if(processing)
 					iteration++
 					points += points_per_process
-				
-				var/datum/shuttle/ferry/supply/shuttle = get_shuttle()
-				if (shuttle)
-					shuttle.process_shuttle()
 
 				sleep(processing_interval)
+		
+		spawn(0)
+			set background = 1
+			while(1)
+				if(processing)
+					var/datum/shuttle/ferry/supply/shuttle = get_shuttle()
+					if (shuttle && shuttle.in_use)
+						shuttle.process_shuttle()
+				
+				sleep(10)
 
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 	proc/forbidden_atoms_check(atom/A)
@@ -496,7 +502,6 @@ var/list/mechtoys = list(
 		
 		
 		dat += {"<HR>\nSupply points: [supply_controller.points]<BR>\n<BR>
-//		[shuttle.at_station()  ? "\n*Must be away to order items*<BR>\n<BR>":"\n<A href='?src=\ref[src];order=categories'>Order items</A><BR>\n<BR>"]
 		\n<A href='?src=\ref[src];order=categories'>Order items</A><BR>\n<BR>
 		\n<A href='?src=\ref[src];viewrequests=1'>View requests</A><BR>\n<BR>
 		\n<A href='?src=\ref[src];vieworders=1'>View orders</A><BR>\n<BR>
@@ -675,7 +680,7 @@ var/list/mechtoys = list(
 		temp = "Current requests: <BR><BR>"
 		for(var/S in supply_controller.requestlist)
 			var/datum/supply_order/SO = S
-			temp += "#[SO.ordernum] - [SO.object.name] requested by [SO.orderedby]  [shuttle.idle() ? "":shuttle.at_station() ? "":"<A href='?src=\ref[src];confirmorder=[SO.ordernum]'>Approve</A> <A href='?src=\ref[src];rreq=[SO.ordernum]'>Remove</A>"]<BR>"
+			temp += "#[SO.ordernum] - [SO.object.name] requested by [SO.orderedby] <A href='?src=\ref[src];confirmorder=[SO.ordernum]'>Approve</A> <A href='?src=\ref[src];rreq=[SO.ordernum]'>Remove</A><BR>"
 
 		temp += "<BR><A href='?src=\ref[src];clearreq=1'>Clear list</A>"
 		temp += "<BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
