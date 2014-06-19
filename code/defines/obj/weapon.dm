@@ -695,3 +695,21 @@
 	icon_state = "capacitor"
 	desc = "A debug item for research."
 	origin_tech = "materials=8;programming=8;magnets=8;powerstorage=8;bluespace=8;combat=8;biotech=8;syndicate=8"
+
+/obj/item/weapon/fan
+	name = "desk fan"
+	icon = 'icons/obj/decorations.dmi'
+	icon_state = "fan"
+	desc = "A smal desktop fan. Button seems to be stuck in the 'on' position."
+
+/obj/item/weapon/newton
+	name = "newton cradle"
+	icon = 'icons/obj/decorations.dmi'
+	icon_state = "newton"
+	desc = "A device bored paper pushers use to remind themselves that the time did not stop yet. Contains gravity."
+
+/obj/item/weapon/balltoy
+	name = "ball toy"
+	icon = 'icons/obj/decorations.dmi'
+	icon_state = "rollball"
+	desc = "A device bored paper pushers use to remind themselves that the time did not stop yet."
