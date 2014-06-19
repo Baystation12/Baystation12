@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 29/05/2012 15:03:05
 
 
-//Baseline portable generator. Has all the default handling. Not intended to be used on it's own (since it generates unlimited power).
+//PACMAN variant that can run on the small plasma tanks.
 /obj/machinery/power/port_gen/pacman2
 	name = "Pacman II"
 	desc = "P.A.C.M.A.N. type II portable generator. Uses liquid phoron as a fuel source."

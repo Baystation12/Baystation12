@@ -3,7 +3,16 @@
 #define THERMAL_RELEASE_MODIFIER 10                //Higher == less heat released during reaction
 #define PHORON_RELEASE_MODIFIER 1500                //Higher == less phoron released by reaction
 #define OXYGEN_RELEASE_MODIFIER 750        //Higher == less oxygen released at high temperature/power
+#define THERMAL_RELEASE_MODIFIER 750               //Higher == more heat released during reaction
+#define PLASMA_RELEASE_MODIFIER 1500                //Higher == less plasma released by reaction
+#define OXYGEN_RELEASE_MODIFIER 1500        //Higher == less oxygen released at high temperature/power
 #define REACTION_POWER_MODIFIER 1.1                //Higher == more overall power
+
+//Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
+#define POWER_FACTOR 0.35              //Obtained from testing. Aiming to make the ideal running output (600 kW) run the SM to ~85% of the safety level.
+
+#define CHARGING_FACTOR 0.55
+#define DAMAGE_RATE_LIMIT 5                 //damage rate cap at power = 900, scales linearly with power
 
 
 //These would be what you would get at point blank, decreases with distance
@@ -34,6 +43,9 @@
 	var/emergency_point = 700
 	var/emergency_alert = "CRYSTAL DELAMINATION IMMINENT."
 	var/explosion_point = 1000
+
+	var/grav_pulling = 0
+	var/pull_radius = 14
 
 	var/emergency_issued = 0
 
@@ -66,6 +78,7 @@
 
 		gasefficency = 0.125
 
+		pull_radius = 5
 		explosion_power = 3 //3,6,9,12? Or is that too small?
 
 
@@ -79,6 +92,9 @@
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
+	anchored = 1
+	grav_pulling = 1
+	spawn(100)
 		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
 		del src
 		return
@@ -92,9 +108,6 @@
 
 	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
 		return  //Yeah just stop.
-
-	if(istype(L, /turf/space))	// Stop processing this stuff if we've been ejected.
-		return
 
 	if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
@@ -123,72 +136,87 @@
 
 			explode()
 
+	if(grav_pulling)
+		supermatter_pull()
+
 	//Ok, get the air from the turf
-	var/datum/gas_mixture/env = L.return_air()
+	var/datum/gas_mixture/removed = null
+	var/datum/gas_mixture/env = null
 
-	//Remove gas from surrounding area
-	var/datum/gas_mixture/removed = env.remove(gasefficency * env.total_moles)
+	//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We dont want the SM exploding before anyone can react.
+	//We want the cap to scale linearly with power (and explosion_point). Let's aim for a cap of 5 at power = 900 (based on testing, equals roughly 5% per SM alert announcement).
+	var/damage_inc_limit = (power/900)*(explosion_point/1000)*DAMAGE_RATE_LIMIT
 
-	if(!removed || !removed.total_moles)
-		damage += max((power-1600)/10, 0)
-		power = min(power, 1600)
-		return 1
+	if(!istype(L, /turf/space))
+		env = L.return_air()
+		removed = env.remove(gasefficency * env.total_moles)	//Remove gas from surrounding area
 
-	if (!removed)
-		return 1
-
-	damage_archived = damage
-	damage = max( damage + ( (removed.temperature - 800) / 150 ) , 0 )
-	//Ok, 100% oxygen atmosphere = best reaction
-	//Maxes out at 100% oxygen pressure
-	oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
-
-	var/temp_factor = 100
-
-	if(oxygen > 0.8)
-		// with a perfect gas mix, make the power less based on heat
-		icon_state = "[base_icon_state]_glow"
+	if(!env || !removed || !removed.total_moles)
+		damage += max(((power-(1600*POWER_FACTOR)))/10, 0)	//exciting the supermatter in a vacuum means the internal energy is mostly locked inside.
+	else if (grav_pulling) //If supermatter is detonating, remove all air from the zone
+		env.remove(env.total_moles)
 	else
-		// in normal mode, base the produced energy around the heat
-		temp_factor = 60
-		icon_state = base_icon_state
+		damage_archived = damage
 
-	power = max( (removed.temperature * temp_factor / T0C) * oxygen + power, 0) //Total laser power plus an overload
+		damage = max( damage + min( ( (removed.temperature - 800) / 150 ), damage_inc_limit ) , 0 )
+		//Ok, 100% oxygen atmosphere = best reaction
+		//Maxes out at 100% oxygen pressure
+		oxygen = max(min((removed.oxygen - (removed.nitrogen * NITROGEN_RETARDATION_FACTOR)) / MOLES_CELLSTANDARD, 1), 0)
 
-	//We've generated power, now let's transfer it to the collectors for storing/usage
-	transfer_energy()
+		var/temp_factor = 100
 
-	var/device_energy = power * REACTION_POWER_MODIFIER
+		if(oxygen > 0.8)
+			// with a perfect gas mix, make the power less based on heat
+			icon_state = "[base_icon_state]_glow"
+		else
+			// in normal mode, base the produced energy around the heat
+			temp_factor = 60
+			icon_state = base_icon_state
 
-	//To figure out how much temperature to add each tick, consider that at one atmosphere's worth
-	//of pure oxygen, with all four lasers firing at standard energy and no N2 present, at room temperature
-	//that the device energy is around 2140. At that stage, we don't want too much heat to be put out
-	//Since the core is effectively "cold"
+		power = max( (removed.temperature * temp_factor / T0C) * oxygen + power, 0) //Total laser power plus an overload
 
-	//Also keep in mind we are only adding this temperature to (efficiency)% of the one tile the rock
-	//is on. An increase of 4*C @ 25% efficiency here results in an increase of 1*C / (#tilesincore) overall.
-	removed.temperature += (device_energy / THERMAL_RELEASE_MODIFIER)
+		//We've generated power, now let's transfer it to the collectors for storing/usage
+		transfer_energy()
 
-	removed.temperature = max(0, min(removed.temperature, 2500))
+		var/device_energy = power * REACTION_POWER_MODIFIER
 
-	//Calculate how much gas to release
-	removed.phoron += max(device_energy / PHORON_RELEASE_MODIFIER, 0)
+		//To figure out how much temperature to add each tick, consider that at one atmosphere's worth
+		//of pure oxygen, with all four lasers firing at standard energy and no N2 present, at room temperature
+		//that the device energy is around 2140. At that stage, we don't want too much heat to be put out
+		//Since the core is effectively "cold"
 
-	removed.oxygen += max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
+		//Also keep in mind we are only adding this temperature to (efficiency)% of the one tile the rock
+		//is on. An increase of 4*C @ 25% efficiency here results in an increase of 1*C / (#tilesincore) overall.
 
-	removed.update_values()
+		var/thermal_power = THERMAL_RELEASE_MODIFIER
 
-	env.merge(removed)
+		//This shouldn't be necessary. If the number of moles is low, then heat_capacity should be tiny.
+		//if(removed.total_moles < 35) thermal_power += 750   //If you don't add coolant, you are going to have a bad time.
+
+		removed.temperature += ((device_energy * thermal_power) / removed.heat_capacity())
+
+		removed.temperature = max(0, min(removed.temperature, 10000))
+
+		//Calculate how much gas to release
+		removed.phoron += max(device_energy / PHORON_RELEASE_MODIFIER, 0)
+
+		removed.oxygen += max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
+
+		removed.update_values()
+
+		env.merge(removed)
 
 	for(var/mob/living/carbon/human/l in view(src, min(7, round(power ** 0.25)))) // If they can see it without mesons on.  Bad on them.
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
 			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
 
-	for(var/mob/living/l in range(src, round((power / 100) ** 0.25)))
+	//adjusted range so that a power of 600 (pretty high) results in 8 tiles, roughly the distance from the core to the engine monitoring room.
+	//at power of 1210 this becomes 9 tiles --> increases very very slowly.
+	for(var/mob/living/l in range(src, round((power / 0.146484375) ** 0.25)))
 		var/rads = (power / 10) * sqrt( 1 / get_dist(l, src) )
 		l.apply_effect(rads, IRRADIATE)
 
-	power -= (power/500)**3
+	power -= (power/500)**3		//energy losses due to radiation
 
 	return 1
 
@@ -201,7 +229,7 @@
 
 
 	if(Proj.flag != "bullet")
-		power += Proj.damage * config_bullet_energy
+		power += Proj.damage * config_bullet_energy	* CHARGING_FACTOR
 	else
 		damage += Proj.damage * config_bullet_energy
 	return 0
@@ -231,7 +259,7 @@
 /obj/machinery/power/supermatter/proc/transfer_energy()
 	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
 		if(get_dist(R, src) <= 15) // Better than using orange() every process
-			R.receive_pulse(power)
+			R.receive_pulse(power * POWER_FACTOR)
 	return
 
 /obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
@@ -250,7 +278,7 @@
 		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
 		"<span class=\"danger\">You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",\
 		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
-	else
+	else if(!grav_pulling) //To prevent spam, detonating supermatter does not indicate non-mobs being destroyed
 		AM.visible_message("<span class=\"warning\">\The [AM] smacks into \the [src] and rapidly flashes to ash.</span>",\
 		"<span class=\"warning\">You hear a loud crack as you are washed with a wave of heat.</span>")
 
@@ -276,3 +304,40 @@
 		var/rads = 500 * sqrt( 1 / (get_dist(l, src) + 1) )
 		l.apply_effect(rads, IRRADIATE)
 
+
+/obj/machinery/power/supermatter/proc/supermatter_pull()
+
+	//following is adapted from singulo code
+	if(defer_powernet_rebuild != 2)
+		defer_powernet_rebuild = 1
+	// Let's just make this one loop.
+	for(var/atom/X in orange(pull_radius,src))
+		// Movable atoms only
+		if(istype(X, /atom/movable))
+			if(is_type_in_list(X, uneatable))	continue
+			if(((X) && (!istype(X,/mob/living/carbon/human))))
+				step_towards(X,src)
+				if(!X:anchored) //unanchored objects pulled twice as fast
+					step_towards(X,src)
+				if(istype(X, /obj/structure/window)) //shatter windows
+					X.ex_act(2.0)
+			else if(istype(X,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = X
+				if(istype(H.shoes,/obj/item/clothing/shoes/magboots))
+					var/obj/item/clothing/shoes/magboots/M = H.shoes
+					if(M.magpulse)
+						step_towards(H,src) //step just once with magboots
+						continue
+				step_towards(H,src) //step twice
+				step_towards(H,src)
+
+	if(defer_powernet_rebuild != 2)
+		defer_powernet_rebuild = 0
+	return
+
+
+/obj/machinery/power/supermatter/GotoAirflowDest(n) //Supermatter not pushed around by airflow
+	return
+
+/obj/machinery/power/supermatter/RepelAirflowDest(n)
+	return

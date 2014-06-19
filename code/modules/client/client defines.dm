@@ -18,6 +18,7 @@
 	var/area			= null
 	var/time_died_as_mouse = null //when the client last died as a mouse
 
+	var/adminhelped = 0
 
 		///////////////
 		//SOUND STUFF//
@@ -31,6 +32,10 @@
 	var/next_allowed_topic_time = 10
 	// comment out the line below when debugging locally to enable the options & messages menu
 	//control_freak = 1
+
+	var/received_irc_pm = -99999
+	var/irc_admin			//IRC admin that spoke with them last.
+	var/mute_irc = 0
 
 
 		////////////////////////////////////

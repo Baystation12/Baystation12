@@ -33,7 +33,7 @@
 	installed = -1
 	uninstall()
 
-/datum/robot_component/proc/take_damage(brute, electronics, sharp)
+/datum/robot_component/proc/take_damage(brute, electronics, sharp, edge)
 	if(installed != 1) return
 
 	brute_damage += brute
@@ -52,12 +52,11 @@
 /datum/robot_component/proc/is_powered()
 	return (installed == 1) && (brute_damage + electronics_damage < max_damage) && (!energy_consumption || powered)
 
-
-/datum/robot_component/proc/consume_power()
+/datum/robot_component/proc/update_power_state()
 	if(toggled == 0)
 		powered = 0
 		return
-	if(owner.cell.charge >= energy_consumption)
+	if(owner.cell && owner.cell.charge >= energy_consumption)
 		owner.cell.use(energy_consumption)
 		powered = 1
 	else
@@ -74,6 +73,10 @@
 	energy_consumption = 2
 	external_type = /obj/item/robot_parts/robot_component/actuator
 	max_damage = 50
+
+//A fixed and much cleaner implementation of /tg/'s special snowflake code.
+/datum/robot_component/actuator/is_powered()
+	return (installed == 1) && (brute_damage + electronics_damage < max_damage)
 
 /datum/robot_component/cell
 	name = "power cell"
@@ -132,7 +135,8 @@
 	icon_state = "working"
 	construction_time = 200
 	construction_cost = list("metal"=5000)
-
+	var/brute = 0
+	var/burn = 0
 
 // TODO: actual icons ;)
 /obj/item/robot_parts/robot_component/binary_communication_device
@@ -167,7 +171,7 @@
 	w_class = 2.0
 	throw_speed = 5
 	throw_range = 10
-	m_amt = 200
+	matter = list("metal" = 200)
 	origin_tech = "magnets=1;biotech=1"
 	var/mode = 1;
 

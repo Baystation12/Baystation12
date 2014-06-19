@@ -16,7 +16,7 @@
 	if(!reagents.total_volume)
 		if(M == usr)
 			usr << "<span class='notice'>You finish eating \the [src].</span>"
-		usr.visible_message("<span class='notice'>[usr] finishes eating \the [src].</span>")
+		M.visible_message("<span class='notice'>[M] finishes eating \the [src].</span>")
 		usr.drop_from_inventory(src)	//so icons update :[
 
 		if(trash)
@@ -37,9 +37,15 @@
 		M.drop_from_inventory(src)	//so icons update :[
 		del(src)
 		return 0
+
 	if(istype(M, /mob/living/carbon))
-		if(M == user)								//If you're eating it yourself.
-			var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
+		var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
+		if(M == user)								//If you're eating it yourself
+			if(istype(M,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				if(H.species.flags & IS_SYNTHETIC)
+					H << "\red You have a monitor for a head, where do you think you're going to put that?"
+					return
 			if (fullness <= 50)
 				M << "\red You hungrily chew out a piece of [src] and gobble it!"
 			if (fullness > 50 && fullness <= 150)
@@ -52,8 +58,14 @@
 				M << "\red You cannot force any more of [src] to go down your throat."
 				return 0
 		else
+			if(istype(M,/mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				if(H.species.flags & IS_SYNTHETIC)
+					H << "\red They have a monitor for a head, where do you think you're going to put that?"
+					return
+
 			if(!istype(M, /mob/living/carbon/slime))		//If you're feeding it to someone else.
-				var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
+
 				if (fullness <= (550 * (1 + M.overeatduration / 1000)))
 					for(var/mob/O in viewers(world.view, user))
 						O.show_message("\red [user] attempts to feed [M] [src].", 1)

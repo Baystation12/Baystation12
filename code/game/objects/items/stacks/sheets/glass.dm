@@ -15,10 +15,17 @@
 	desc = "HOLY SHEET! That is a lot of glass."
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
-	g_amt = 3750
+	matter = list("glass" = 3750)
 	origin_tech = "materials=1"
 	var/created_window = /obj/structure/window/basic
 
+/obj/item/stack/sheet/glass/cyborg
+	name = "glass"
+	desc = "HOLY SHEET! That is a lot of glass."
+	singular_name = "glass sheet"
+	icon_state = "sheet-glass"
+	matter = null
+	created_window = /obj/structure/window/basic
 
 /obj/item/stack/sheet/glass/attack_self(mob/user as mob)
 	construct_window(user)
@@ -116,8 +123,9 @@
 	desc = "Glass which seems to have rods or something stuck in them."
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
-	g_amt = 3750
-	m_amt = 1875
+
+	matter = list("metal" = 1875,"glass" = 3750)
+
 	origin_tech = "materials=2"
 
 /obj/item/stack/sheet/rglass/cyborg
@@ -125,8 +133,6 @@
 	desc = "Glass which seems to have rods or something stuck in them."
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
-	g_amt = 0
-	m_amt = 0
 
 /obj/item/stack/sheet/rglass/attack_self(mob/user as mob)
 	construct_window(user)
@@ -285,11 +291,14 @@
 		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
+
+			if(H.species.flags & IS_SYNTHETIC)
+				return
+
 			if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
 				var/datum/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
 				if(affecting.status & ORGAN_ROBOT)
 					return
-
 				H.Weaken(3)
 				if(affecting.take_damage(5, 0))
 					H.UpdateDamageIcon()
@@ -307,7 +316,7 @@
 	desc = "A very strong and very resistant sheet of a phoron-glass alloy."
 	singular_name = "phoron glass sheet"
 	icon_state = "sheet-phoronglass"
-	g_amt = 7500
+	matter = list("glass" = 7500)
 	origin_tech = "materials=3;phoron=2"
 	created_window = /obj/structure/window/phoronbasic
 
@@ -339,8 +348,8 @@
 	desc = "Phoron glass which seems to have rods or something stuck in them."
 	singular_name = "reinforced phoron glass sheet"
 	icon_state = "sheet-phoronrglass"
-	g_amt = 7500
-	m_amt = 1875
+	matter = list("glass" = 7500,"metal" = 1875)
+
 	origin_tech = "materials=4;phoron=2"
 	created_window = /obj/structure/window/phoronreinforced
 

@@ -23,6 +23,9 @@
 	var/stamps		//The (text for the) stamps on the paper.
 	var/fields		//Amount of user created fields
 	var/list/stamped
+	var/ico[0]      //Icons and
+	var/offset_x[0] //offsets stored for later
+	var/offset_y[0] //usage by the photocopier
 	var/rigged = 0
 	var/spam_flag = 0
 
@@ -36,6 +39,7 @@
 	..()
 	pixel_y = rand(-8, 8)
 	pixel_x = rand(-9, 9)
+	stamps = ""
 	spawn(2)
 		update_icon()
 		updateinfolinks()
@@ -103,6 +107,12 @@
 		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
 		onclose(usr, "[name]")
 	return
+
+/obj/item/weapon/paper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if(user.zone_sel.selecting == "eyes")
+		user.visible_message("<span class='notice'>You show the paper to [M]. </span>", \
+			"<span class='notice'> [user] holds up a paper and shows it to [M]. </span>")
+		M << examine()
 
 /obj/item/weapon/paper/proc/addtofield(var/id, var/text, var/links = 0)
 	var/locid = 0
@@ -182,6 +192,13 @@
 		t = replacetext(t, "\[/small\]", "</font>")
 		t = replacetext(t, "\[list\]", "<ul>")
 		t = replacetext(t, "\[/list\]", "</ul>")
+		t = replacetext(t, "\[table\]", "<table border=1 cellspacing=0 cellpadding=3 style='border: 1px solid black;'>")
+		t = replacetext(t, "\[/table\]", "</td></tr></table>")
+		t = replacetext(t, "\[grid\]", "<table>")
+		t = replacetext(t, "\[/grid\]", "</td></tr></table>")
+		t = replacetext(t, "\[row\]", "</td><tr>")
+		t = replacetext(t, "\[cell\]", "<td>")
+		t = replacetext(t, "\[logo\]", "<img src = http://baystation12.net/wiki/logo.png>")
 
 		t = "<font face=\"[deffont]\" color=[P.colour]>[t]</font>"
 	else // If it is a crayon, and he still tries to use these, make them empty!
@@ -191,6 +208,11 @@
 		t = replacetext(t, "\[/small\]", "")
 		t = replacetext(t, "\[list\]", "")
 		t = replacetext(t, "\[/list\]", "")
+		t = replacetext(t, "\[table\]", "")
+		t = replacetext(t, "\[/table\]", "")
+		t = replacetext(t, "\[row\]", "")
+		t = replacetext(t, "\[cell\]", "")
+		t = replacetext(t, "\[logo\]", "")
 
 		t = "<font face=\"[crayonfont]\" color=[P.colour]><b>[t]</b></font>"
 
@@ -274,7 +296,7 @@
 
 		if((!in_range(src, usr) && loc != usr && !( istype(loc, /obj/item/weapon/clipboard) ) && loc.loc != usr && usr.get_active_hand() != i)) // Some check to see if he's allowed to write
 			return
-
+/*
 		t = checkhtml(t)
 
 		// check for exploits
@@ -284,7 +306,8 @@
 				log_admin("PAPER: [usr] ([usr.ckey]) tried to use forbidden word in [src]: [bad].")
 				message_admins("PAPER: [usr] ([usr.ckey]) tried to use forbidden word in [src]: [bad].")
 				return
-
+*/
+		t = html_encode(t)
 		t = replacetext(t, "\n", "<BR>")
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
 
@@ -305,7 +328,53 @@
 	if(user.mind && (user.mind.assigned_role == "Clown"))
 		clown = 1
 
-	if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
+	if(istype(P, /obj/item/weapon/paper) || istype(P, /obj/item/weapon/photo))
+		if (istype(P, /obj/item/weapon/paper/carbon))
+			var/obj/item/weapon/paper/carbon/C = P
+			if (!C.iscopy && !C.copied)
+				user << "<span class='notice'>Take off the carbon copy first.</span>"
+				add_fingerprint(user)
+				return
+		var/obj/item/weapon/paper_bundle/B = new(src.loc)
+		if (name != "paper")
+			B.name = name
+		else if (P.name != "paper" && P.name != "photo")
+			B.name = P.name
+		user.drop_from_inventory(P)
+		if (istype(user, /mob/living/carbon/human))
+			var/mob/living/carbon/human/h_user = user
+			if (h_user.r_hand == src)
+				h_user.drop_from_inventory(src)
+				h_user.put_in_r_hand(B)
+			else if (h_user.l_hand == src)
+				h_user.drop_from_inventory(src)
+				h_user.put_in_l_hand(B)
+			else if (h_user.l_store == src)
+				h_user.drop_from_inventory(src)
+				B.loc = h_user
+				B.layer = 20
+				h_user.l_store = B
+				h_user.update_inv_pockets()
+			else if (h_user.r_store == src)
+				h_user.drop_from_inventory(src)
+				B.loc = h_user
+				B.layer = 20
+				h_user.r_store = B
+				h_user.update_inv_pockets()
+			else if (h_user.head == src)
+				h_user.u_equip(src)
+				h_user.put_in_hands(B)
+			else if (!istype(src.loc, /turf))
+				src.loc = get_turf(h_user)
+				if(h_user.client)	h_user.client.screen -= src
+				h_user.put_in_hands(B)
+		user << "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>"
+		src.loc = B
+		P.loc = B
+		B.amount++
+		B.update_icon()
+
+	else if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
 		if ( istype(P, /obj/item/weapon/pen/robopen) && P:mode == 2 )
 			P:RenamePaper(user,src)
 		else
@@ -320,14 +389,26 @@
 		stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the [P.name].</i>"
 
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		stampoverlay.pixel_x = rand(-2, 2)
-		stampoverlay.pixel_y = rand(-3, 2)
+		var/{x; y;}
+		if(istype(P, /obj/item/weapon/stamp/captain) || istype(P, /obj/item/weapon/stamp/centcomm))
+			x = rand(-2, 0)
+			y = rand(-1, 2)
+		else
+			x = rand(-2, 2)
+			y = rand(-3, 2)
+		offset_x += x
+		offset_y += y
+		stampoverlay.pixel_x = x
+		stampoverlay.pixel_y = y
 
 		if(istype(P, /obj/item/weapon/stamp/clown))
 			if(!clown)
 				user << "<span class='notice'>You are totally unable to use the stamp. HONK!</span>"
 				return
 
+		if(!ico)
+			ico = new
+		ico += "paper_[P.icon_state]"
 		stampoverlay.icon_state = "paper_[P.icon_state]"
 
 		if(!stamped)

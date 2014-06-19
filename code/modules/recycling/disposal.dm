@@ -367,7 +367,7 @@
 			return
 
 		use_power = 1
-		
+
 		if(mode != 1)		// if off or ready, no need to charge
 			return
 
@@ -401,7 +401,11 @@
 
 		var/wrapcheck = 0
 		var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
-											// travels through the pipes.
+													// travels through the pipes.
+		//Hacky test to get drones to mail themselves through disposals.
+		for(var/mob/living/silicon/robot/drone/D in src)
+			wrapcheck = 1
+
 		for(var/obj/item/smallDelivery/O in src)
 			wrapcheck = 1
 
@@ -449,9 +453,10 @@
 
 				AM.loc = src.loc
 				AM.pipe_eject(0)
-				spawn(1)
-					if(AM)
-						AM.throw_at(target, 5, 1)
+				if(!istype(AM,/mob/living/silicon/robot/drone)) //Poor drones kept smashing windows and taking system damage being fired out of disposals. ~Z
+					spawn(1)
+						if(AM)
+							AM.throw_at(target, 5, 1)
 
 			H.vent_gas(loc)
 			del(H)
@@ -482,11 +487,13 @@
 	var/datum/gas_mixture/gas = null	// gas used to flush, will appear at exit point
 	var/active = 0	// true if the holder is moving, otherwise inactive
 	dir = 0
-	var/count = 1000	//*** can travel 1000 steps before going inactive (in case of loops)
+	var/count = 2048	//*** can travel 2048 steps before going inactive (in case of loops)
 	var/has_fat_guy = 0	// true if contains a fat person
-	var/destinationTag = 0 // changes if contains a delivery container
+	var/destinationTag = "" // changes if contains a delivery container
 	var/tomail = 0 //changes if contains wrapped package
 	var/hasmob = 0 //If it contains a mob
+
+	var/partialTag = "" //set by a partial tagger the first time round, then put in destinationTag if it goes through again.
 
 
 	// initialize a holder from the contents of a disposal unit
@@ -496,7 +503,7 @@
 		//Check for any living mobs trigger hasmob.
 		//hasmob effects whether the package goes to cargo or its tagged destination.
 		for(var/mob/living/M in D)
-			if(M && M.stat != 2)
+			if(M && M.stat != 2 && !istype(M,/mob/living/silicon/robot/drone))
 				hasmob = 1
 
 		//Checks 1 contents level deep. This means that players can be sent through disposals...
@@ -504,7 +511,7 @@
 		for(var/obj/O in D)
 			if(O.contents)
 				for(var/mob/living/M in O.contents)
-					if(M && M.stat != 2)
+					if(M && M.stat != 2 && !istype(M,/mob/living/silicon/robot/drone))
 						hasmob = 1
 
 		// now everything inside the disposal gets put into the holder
@@ -521,6 +528,10 @@
 			if(istype(AM, /obj/item/smallDelivery) && !hasmob)
 				var/obj/item/smallDelivery/T = AM
 				src.destinationTag = T.sortTag
+			//Drones can mail themselves through maint.
+			if(istype(AM, /mob/living/silicon/robot/drone))
+				var/mob/living/silicon/robot/drone/drone = AM
+				src.destinationTag = drone.mail_destination
 
 
 	// start the movement process
@@ -544,7 +555,8 @@
 		while(active)
 			if(hasmob && prob(3))
 				for(var/mob/living/H in src)
-					H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
+					if(!istype(H,/mob/living/silicon/robot/drone)) //Drones use the mailing code to move through the disposal system,
+						H.take_overall_damage(20, 0, "Blunt Trauma")//horribly maim any living creature jumping down disposals.  c'est la vie
 
 			if(has_fat_guy && prob(2)) // chance of becoming stuck per segment if contains a fat guy
 				active = 0
@@ -598,10 +610,30 @@
 		del(other)
 
 
+	proc/settag(var/new_tag)
+		destinationTag = new_tag
+
+	proc/setpartialtag(var/new_tag)
+		if(partialTag == new_tag)
+			destinationTag = new_tag
+			partialTag = ""
+		else
+			partialTag = new_tag
+
+
 	// called when player tries to move while in a pipe
 	relaymove(mob/user as mob)
-		if (user.stat)
+
+		if(!istype(user,/mob/living))
 			return
+
+		var/mob/living/U = user
+
+		if (U.stat || U.last_special <= world.time)
+			return
+
+		U.last_special = world.time+100
+
 		if (src.loc)
 			for (var/mob/M in hearers(src.loc.loc))
 				M << "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>"
@@ -882,6 +914,10 @@
 			if("pipe-d")
 				C.ptype = 12
 ///// Z-Level stuff
+			if("pipe-tagger")
+				C.ptype = 13
+			if("pipe-tagger-partial")
+				C.ptype = 14
 		src.transfer_fingerprints_to(C)
 		C.dir = dir
 		C.density = 0
@@ -1061,39 +1097,31 @@
 			else
 				return mask & (~setbit)
 
-//a three-way junction that sorts objects
-/obj/structure/disposalpipe/sortjunction
 
-	icon_state = "pipe-j1s"
-	var/sortType = 0	//Look at the list called TAGGERLOCATIONS in setup.dm
-	var/posdir = 0
-	var/negdir = 0
-	var/sortdir = 0
+/obj/structure/disposalpipe/tagger
+	name = "package tagger"
+	icon_state = "pipe-tagger"
+	var/sort_tag = ""
+	var/partial = 0
 
 	proc/updatedesc()
-		desc = "An underfloor disposal pipe with a package sorting mechanism."
-		if(sortType>0)
-			var/tag = uppertext(TAGGERLOCATIONS[sortType])
-			desc += "\nIt's tagged with [tag]"
+		desc = initial(desc)
+		if(sort_tag)
+			desc += "\nIt's tagging objects with the '[sort_tag]' tag."
 
-	proc/updatedir()
-		posdir = dir
-		negdir = turn(posdir, 180)
-
-		if(icon_state == "pipe-j1s")
-			sortdir = turn(posdir, -90)
+	proc/updatename()
+		if(sort_tag)
+			name = "[initial(name)] ([sort_tag])"
 		else
-			icon_state = "pipe-j2s"
-			sortdir = turn(posdir, 90)
-
-		dpdir = sortdir | posdir | negdir
+			name = initial(name)
 
 	New()
-		..()
-		updatedir()
+		. = ..()
+		dpdir = dir | turn(dir, 180)
+		if(sort_tag) tagger_locations |= sort_tag
+		updatename()
 		updatedesc()
 		update()
-		return
 
 	attackby(var/obj/item/I, var/mob/user)
 		if(..())
@@ -1102,13 +1130,84 @@
 		if(istype(I, /obj/item/device/destTagger))
 			var/obj/item/device/destTagger/O = I
 
-			if(O.currTag > 0)// Tag set
-				sortType = O.currTag
+			if(O.currTag)// Tag set
+				sort_tag = O.currTag
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
-				var/tag = uppertext(TAGGERLOCATIONS[O.currTag])
-				user << "\blue Changed filter to [tag]"
+				user << "\blue Changed tag to '[sort_tag]'."
+				updatename()
 				updatedesc()
 
+	transfer(var/obj/structure/disposalholder/H)
+		if(sort_tag)
+			if(partial)
+				H.setpartialtag(sort_tag)
+			else
+				H.settag(sort_tag)
+		return ..()
+
+/obj/structure/disposalpipe/tagger/partial //needs two passes to tag
+	name = "partial package tagger"
+	icon_state = "pipe-tagger-partial"
+	partial = 1
+
+//a three-way junction that sorts objects
+/obj/structure/disposalpipe/sortjunction
+	name = "sorting junction"
+	icon_state = "pipe-j1s"
+	desc = "An underfloor disposal pipe with a package sorting mechanism."
+
+	var/sortType = ""
+	var/posdir = 0
+	var/negdir = 0
+	var/sortdir = 0
+
+	proc/updatedesc()
+		desc = initial(desc)
+		if(sortType)
+			desc += "\nIt's filtering objects with the '[sortType]' tag."
+
+	proc/updatename()
+		if(sortType)
+			name = "[initial(name)] ([sortType])"
+		else
+			name = initial(name)
+
+	proc/updatedir()
+		posdir = dir
+		negdir = turn(posdir, 180)
+
+		if(icon_state == "pipe-j1s")
+			sortdir = turn(posdir, -90)
+		else if(icon_state == "pipe-j2s")
+			sortdir = turn(posdir, 90)
+
+		dpdir = sortdir | posdir | negdir
+
+	New()
+		. = ..()
+		if(sortType) tagger_locations |= sortType
+
+		updatedir()
+		updatename()
+		updatedesc()
+		update()
+
+	attackby(var/obj/item/I, var/mob/user)
+		if(..())
+			return
+
+		if(istype(I, /obj/item/device/destTagger))
+			var/obj/item/device/destTagger/O = I
+
+			if(O.currTag)// Tag set
+				sortType = O.currTag
+				playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
+				user << "\blue Changed filter to '[sortType]'."
+				updatename()
+				updatedesc()
+
+	proc/divert_check(var/checkTag)
+		return sortType == checkTag
 
 	// next direction to move
 	// if coming in from negdir, then next is primary dir or sortdir
@@ -1116,11 +1215,9 @@
 	// if coming in from sortdir, go to posdir
 
 	nextdir(var/fromdir, var/sortTag)
-		//var/flipdir = turn(fromdir, 180)
 		if(fromdir != sortdir)	// probably came from the negdir
-
-			if(src.sortType == sortTag) //if destination matches filtered type...
-				return sortdir		// exit through sortdirection
+			if(divert_check(sortTag))
+				return sortdir
 			else
 				return posdir
 		else				// came from sortdir
@@ -1146,71 +1243,30 @@
 
 		return P
 
+//a three-way junction that filters all wrapped and tagged items
+/obj/structure/disposalpipe/sortjunction/wildcard
+	name = "wildcard sorting junction"
+	desc = "An underfloor disposal pipe which filters all wrapped and tagged items."
 
-//a three-way junction that sorts objects destined for the mail office mail table (tomail = 1)
-/obj/structure/disposalpipe/wrapsortjunction
+	divert_check(var/checkTag)
+		return checkTag != ""
 
-	desc = "An underfloor disposal pipe which sorts wrapped and unwrapped objects."
-	icon_state = "pipe-j1s"
-	var/posdir = 0
-	var/negdir = 0
-	var/sortdir = 0
+//junction that filters all untagged items
+/obj/structure/disposalpipe/sortjunction/untagged
+	name = "untagged sorting junction"
+	desc = "An underfloor disposal pipe which filters all untagged items."
 
-	New()
-		..()
-		posdir = dir
-		if(icon_state == "pipe-j1s")
-			sortdir = turn(posdir, -90)
-			negdir = turn(posdir, 180)
-		else
-			icon_state = "pipe-j2s"
-			sortdir = turn(posdir, 90)
-			negdir = turn(posdir, 180)
-		dpdir = sortdir | posdir | negdir
+	divert_check(var/checkTag)
+		return checkTag == ""
 
-		update()
-		return
+/obj/structure/disposalpipe/sortjunction/flipped //for easier and cleaner mapping
+	icon_state = "pipe-j2s"
 
+/obj/structure/disposalpipe/sortjunction/wildcard/flipped
+	icon_state = "pipe-j2s"
 
-	// next direction to move
-	// if coming in from negdir, then next is primary dir or sortdir
-	// if coming in from posdir, then flip around and go back to posdir
-	// if coming in from sortdir, go to posdir
-
-	nextdir(var/fromdir, var/istomail)
-		//var/flipdir = turn(fromdir, 180)
-		if(fromdir != sortdir)	// probably came from the negdir
-
-			if(istomail) //if destination matches filtered type...
-				return sortdir		// exit through sortdirection
-			else
-				return posdir
-		else				// came from sortdir
-							// so go with the flow to positive direction
-			return posdir
-
-	transfer(var/obj/structure/disposalholder/H)
-		var/nextdir = nextdir(H.dir, H.tomail)
-		H.dir = nextdir
-		var/turf/T = H.nextloc()
-		var/obj/structure/disposalpipe/P = H.findpipe(T)
-
-		if(P)
-			// find other holder in next loc, if inactive merge it with current
-			var/obj/structure/disposalholder/H2 = locate() in P
-			if(H2 && !H2.active)
-				H.merge(H2)
-
-			H.loc = P
-		else			// if wasn't a pipe, then set loc to turf
-			H.loc = T
-			return null
-
-		return P
-
-
-
-
+/obj/structure/disposalpipe/sortjunction/untagged/flipped
+	icon_state = "pipe-j2s"
 
 //a trunk joining to a disposal bin or outlet on the same turf
 /obj/structure/disposalpipe/trunk
@@ -1372,8 +1428,9 @@
 			for(var/atom/movable/AM in H)
 				AM.loc = src.loc
 				AM.pipe_eject(dir)
-				spawn(5)
-					AM.throw_at(target, 3, 1)
+				if(!istype(AM,/mob/living/silicon/robot/drone)) //Drones keep smashing windows from being fired out of chutes. Bad for the station. ~Z
+					spawn(5)
+						AM.throw_at(target, 3, 1)
 			H.vent_gas(src.loc)
 			del(H)
 

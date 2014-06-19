@@ -126,8 +126,9 @@
 	flags =  FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BELT
 	w_class = 3.0
-	g_amt = 10
-	m_amt = 10
+
+	matter = list("glass" = 10,"metal" = 10)
+
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
 	var/bullets = 7.0
 
@@ -182,8 +183,9 @@
 	icon_state = "357-7"
 	flags = FPRINT | TABLEPASS| CONDUCT
 	w_class = 1.0
-	g_amt = 10
-	m_amt = 10
+
+	matter = list("metal" = 10,"glass" = 10)
+
 	var/amount_left = 7.0
 
 	update_icon()
@@ -586,3 +588,13 @@
 	w_class = 4.0
 	slot_flags = SLOT_BACK
 */
+
+//This should really be somewhere else but I don't know where. w/e
+/obj/item/weapon/inflatable_duck
+	name = "inflatable duck"
+	desc = "No bother to sink or swim when you can just float!"
+	icon_state = "inflatable"
+	item_state = "inflatable"
+	flags = FPRINT | TABLEPASS
+	icon = 'icons/obj/clothing/belts.dmi'
+	slot_flags = SLOT_BELT

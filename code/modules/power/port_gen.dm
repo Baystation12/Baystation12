@@ -42,7 +42,7 @@ display round(lastgen) and phorontank amount
 
 //Baseline portable generator. Has all the default handling. Not intended to be used on it's own (since it generates unlimited power).
 /obj/machinery/power/port_gen
-	name = "Portable Generator"
+	name = "Placeholder Generator"	//seriously, don't use this. It can't be anchored without VV magic.
 	desc = "A portable generator for emergency backup power"
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
@@ -93,6 +93,7 @@ display round(lastgen) and phorontank amount
 	else
 		usr << "\blue The generator is off."
 
+//A power generator that runs on solid plasma sheets.
 /obj/machinery/power/port_gen/pacman
 	name = "P.A.C.M.A.N.-type Portable Generator"
 	var/sheets = 0
@@ -337,7 +338,7 @@ display round(lastgen) and phorontank amount
 /obj/machinery/power/port_gen/pacman/mrs
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
 	icon_state = "portgen2"
-	sheet_path = /obj/item/stack/sheet/mineral/diamond
+	sheet_path = /obj/item/stack/sheet/mineral/tritium
 	power_gen = 40000
 	time_per_sheet = 80
 	board_path = "/obj/item/weapon/circuitboard/pacman/mrs"

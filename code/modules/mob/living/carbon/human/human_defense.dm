@@ -52,7 +52,8 @@ emp_act
 				return -1 // complete projectile permutation
 
 	if(check_shields(P.damage, "the [P.name]"))
-		P.on_hit(src, 2)
+		P.on_hit(src, 2, def_zone)
+		handle_suit_punctures(P.damage_type, P.damage)
 		return 2
 
 //BEGIN BOOK'S TASER NERF.
@@ -232,7 +233,7 @@ emp_act
 	if(armor >= 2)	return 0
 	if(!I.force)	return 0
 
-	apply_damage(I.force, I.damtype, affecting, armor , is_sharp(I), I)
+	apply_damage(I.force, I.damtype, affecting, armor , is_sharp(I), has_edge(I), I)
 
 	var/bloody = 0
 	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (I.force * 2)))
@@ -296,3 +297,14 @@ emp_act
 	if(w_uniform)
 		w_uniform.add_blood(source)
 		update_inv_w_uniform(0)
+
+/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage)
+
+	if(!wear_suit) return
+	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
+	if(damtype != BURN && damtype != BRUTE) return
+
+	var/obj/item/clothing/suit/space/SS = wear_suit
+	var/penetrated_dam = max(0,(damage - max(0,(SS.breach_threshold - SS.damage))))
+
+	if(penetrated_dam) SS.create_breaches(damtype, penetrated_dam)

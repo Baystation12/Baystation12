@@ -19,6 +19,8 @@
 	maxHealth = 30
 	health = 30
 
+	universal_speak =1
+
 	stop_automated_movement = 1
 	animate_movement = SYNC_STEPS
 
@@ -166,7 +168,7 @@
 		newHead.Attach(newHeadPrevious)
 
 		if(die)
-			newHead.Die()
+			newHead.death()
 
 		del(src)
 

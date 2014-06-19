@@ -22,7 +22,7 @@
 	if(loc)
 		environment = loc.return_air()
 
-	if (stat != DEAD) 
+	if (stat != DEAD)
 		if(!istype(src,/mob/living/carbon/monkey/diona)) //still breathing
 			//First, resolve location and get a breath
 			if(air_master.current_cycle%4==2)
@@ -79,7 +79,7 @@
 		if(prob(1))
 			emote(pick("scratch","jump","roll","tail"))
 	updatehealth()
-	
+
 
 /mob/living/carbon/monkey/calculate_affecting_pressure(var/pressure)
 	..()
@@ -174,9 +174,9 @@
 			for (var/ID in virus2)
 				var/datum/disease2/disease/V = virus2[ID]
 				V.cure(src)
-		
+
 		for(var/obj/effect/decal/cleanable/O in view(1,src))
-			if(istype(O,/obj/effect/decal/cleanable/blood)) 
+			if(istype(O,/obj/effect/decal/cleanable/blood))
 				var/obj/effect/decal/cleanable/blood/B = O
 				if(B.virus2.len)
 					for (var/ID in B.virus2)
@@ -364,7 +364,7 @@
 			var/ratio = (breath.phoron/safe_phoron_max) * 10
 			//adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))	//Limit amount of damage toxin exposure can do per second
 			if(reagents)
-				reagents.add_reagent("phoron", Clamp(ratio, MIN_PHORON_DAMAGE, MAX_PHORON_DAMAGE))
+				reagents.add_reagent("toxin", Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
 			phoron_alert = max(phoron_alert, 1)
 		else
 			phoron_alert = 0
@@ -397,9 +397,18 @@
 		if(!environment)
 			return
 
-		if(abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.phoron < MOLES_PHORON_VISIBLE)
-			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp		
-		
+		//Moved these vars here for use in the fuck-it-skip-processing check.
+		var/pressure = environment.return_pressure()
+		var/adjusted_pressure = calculate_affecting_pressure(pressure) //Returns how much pressure actually affects the mob.
+
+		if(adjusted_pressure < WARNING_HIGH_PRESSURE && adjusted_pressure > WARNING_LOW_PRESSURE && abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.phoron < MOLES_PHORON_VISIBLE)
+
+			//Hopefully should fix the walk-inside-still-pressure-warning issue.
+			if(pressure_alert)
+				pressure_alert = 0
+
+			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
+
 		var/environment_heat_capacity = environment.heat_capacity()
 		if(istype(get_turf(src), /turf/space))
 			var/turf/heat_turf = get_turf(src)
@@ -414,9 +423,6 @@
 			bodytemperature += 0.1*(environment.temperature - bodytemperature)*environment_heat_capacity/(environment_heat_capacity + 270000)
 
 		//Account for massive pressure differences
-
-		var/pressure = environment.return_pressure()
-		var/adjusted_pressure = calculate_affecting_pressure(pressure) //Returns how much pressure actually affects the mob.
 		switch(adjusted_pressure)
 			if(HAZARD_HIGH_PRESSURE to INFINITY)
 				adjustBruteLoss( min( ( (adjusted_pressure / HAZARD_HIGH_PRESSURE) -1 )*PRESSURE_DAMAGE_COEFFICIENT , MAX_HIGH_PRESSURE_DAMAGE) )
@@ -468,7 +474,7 @@
 				adjustToxLoss(-1)
 				adjustOxyLoss(-1)
 
-		if(reagents && reagents.reagent_list.len) 
+		if(reagents && reagents.reagent_list.len)
 			reagents.metabolize(src,alien)
 
 		if (drowsyness)

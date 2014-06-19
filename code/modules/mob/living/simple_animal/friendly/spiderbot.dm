@@ -19,6 +19,8 @@
 	icon_state = "spiderbot-chassis"
 	icon_living = "spiderbot-chassis"
 	icon_dead = "spiderbot-smashed"
+	universal_speak = 1 //Temp until these are rewritten.
+
 	wander = 0
 
 	health = 10
@@ -33,9 +35,8 @@
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
 
+	var/emagged = 0
 	var/obj/item/held_item = null //Storage for single item they can hold.
-	var/emagged = 0               //IS WE EXPLODEN?
-	var/syndie = 0                //IS WE SYNDICAT? (currently unused)
 	speed = -1                    //Spiderbots gotta go fast.
 	//pass_flags = PASSTABLE      //Maybe griefy?
 	small = 1
@@ -161,7 +162,7 @@
 			M.show_message("\red [src] makes an odd warbling noise, fizzles, and explodes.")
 	explosion(get_turf(loc), -1, -1, 3, 5)
 	eject_brain()
-	Die()
+	death()
 
 /mob/living/simple_animal/spiderbot/proc/update_icon()
 	if(mmi)
@@ -199,7 +200,7 @@
 
 	..()
 
-/mob/living/simple_animal/spiderbot/Die()
+/mob/living/simple_animal/spiderbot/death()
 
 	living_mob_list -= src
 	dead_mob_list += src

@@ -16,7 +16,6 @@ The currently supporting non-reagent materials:
 - $gold (/obj/item/stack/gold). One sheet = 3750 units.
 - $uranium (/obj/item/stack/uranium). One sheet = 3750 units.
 - $diamond (/obj/item/stack/diamond). One sheet = 3750 units.
-- $clown (/obj/item/stack/clown). One sheet = 3750 units. ("Bananium")
 (Insert new ones here)
 
 Don't add new keyword/IDs if they are made from an existing one (such as rods which are made from metal). Only add raw materials.
@@ -222,6 +221,15 @@ datum/design/robocontrol
 	build_type = IMPRINTER
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/robotics"
+
+datum/design/dronecontrol
+	name = "Circuit Design (Drone Control Console)"
+	desc = "Allows for the construction of circuit boards used to build a Drone Control console."
+	id = "dronecontrol"
+	req_tech = list("programming" = 4)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = "/obj/item/weapon/circuitboard/drone_control"
 
 datum/design/clonecontrol
 	name = "Circuit Design (Cloning Machine Console)"
@@ -1254,6 +1262,15 @@ datum/design/mrspacman
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/pacman/mrs"
 
+datum/design/batteryrack
+	name = "Cell rack PSU Board"
+	desc = "The circuit board for a power cell rack PSU."
+	id = "batteryrack"
+	req_tech = list("powerstorage" = 3, "engineering" = 2)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = "/obj/item/weapon/circuitboard/batteryrack"
+
 
 /////////////////////////////////////////
 ////////////Medical Tools////////////////
@@ -1713,8 +1730,7 @@ datum/design/security_hud
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = 2.0
-	m_amt = 30
-	g_amt = 10
+	matter = list("metal" = 30,"glass" = 10)
 	var/datum/design/blueprint
 
 /obj/item/weapon/disk/design_disk/New()

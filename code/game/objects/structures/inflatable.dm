@@ -110,7 +110,7 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(!istype(W)) return
 
-		if (is_sharp(W))
+		if (can_puncture(W))
 			visible_message("\red <b>[user] pierces [src] with [W]!</b>")
 			deflate(1)
 		if(W.damtype == BRUTE || W.damtype == BURN)
@@ -145,6 +145,9 @@
 		set name = "Deflate"
 		set category = "Object"
 		set src in oview(1)
+
+		if(isobserver(usr)) //to stop ghosts from deflating
+			return
 
 		deflate()
 

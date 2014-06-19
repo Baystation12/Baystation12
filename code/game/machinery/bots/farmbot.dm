@@ -441,7 +441,7 @@
 			var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
 			var/datum/organ/external/affecting = human.get_organ(ran_zone(dam_zone))
 			var/armor = human.run_armor_check(affecting, "melee")
-			human.apply_damage(damage,BRUTE,affecting,armor)
+			human.apply_damage(damage,BRUTE,affecting,armor,sharp=1,edge=1)
 
 	else // warning, plants infested with weeds!
 		mode = FARMBOT_MODE_WAITING
@@ -540,10 +540,9 @@
 	var/obj/item/weapon/farmbot_arm_assembly/A = new /obj/item/weapon/farmbot_arm_assembly
 
 	A.loc = src.loc
-	A.layer = 20
 	user << "You add the robot arm to the [src]"
 	src.loc = A //Place the water tank into the assembly, it will be needed for the finished bot
-
+	user.u_equip(S)
 	del(S)
 
 /obj/item/weapon/farmbot_arm_assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -552,18 +551,21 @@
 		src.build_step++
 		user << "You add the plant analyzer to [src]!"
 		src.name = "farmbot assembly"
+		user.u_equip(W)
 		del(W)
 
 	else if(( istype(W, /obj/item/weapon/reagent_containers/glass/bucket)) && (src.build_step == 1))
 		src.build_step++
 		user << "You add a bucket to [src]!"
 		src.name = "farmbot assembly with bucket"
+		user.u_equip(W)
 		del(W)
 
 	else if(( istype(W, /obj/item/weapon/minihoe)) && (src.build_step == 2))
 		src.build_step++
 		user << "You add a minihoe to [src]!"
 		src.name = "farmbot assembly with bucket and minihoe"
+		user.u_equip(W)
 		del(W)
 
 	else if((isprox(W)) && (src.build_step == 3))
@@ -575,6 +577,7 @@
 			S.tank = wTank
 		S.loc = get_turf(src)
 		S.name = src.created_name
+		user.u_equip(W)
 		del(W)
 		del(src)
 
@@ -587,3 +590,6 @@
 			return
 
 		src.created_name = t
+
+/obj/item/weapon/farmbot_arm_assembly/attack_hand(mob/user as mob)
+	return //it's a converted watertank, no you cannot pick it up and put it in your backpack

@@ -13,6 +13,7 @@
 	a_intent = "harm"
 	stop_automated_movement = 1
 	status_flags = CANPUSH
+	universal_speak = 1
 	attack_sound = 'sound/weapons/punch1.ogg'
 	min_oxy = 0
 	max_oxy = 0
@@ -33,7 +34,7 @@
 	for(var/spell in construct_spells)
 		spell_list += new spell(src)
 
-/mob/living/simple_animal/construct/Die()
+/mob/living/simple_animal/construct/death()
 	..()
 	new /obj/item/weapon/ectoplasm (src.loc)
 	for(var/mob/M in viewers(src, null))
@@ -167,6 +168,10 @@
 				M.show_message("\red [user] gently taps [src] with [O]. ")
 
 
+/mob/living/simple_animal/construct/armoured/Life()
+	weakened = 0
+	..()
+
 /mob/living/simple_animal/construct/armoured/bullet_act(var/obj/item/projectile/P)
 	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
 		var/reflectchance = 80 - round(P.damage/3)
@@ -242,8 +247,7 @@
 	construct_spells = list(/obj/effect/proc_holder/spell/aoe_turf/conjure/construct/lesser,
 							/obj/effect/proc_holder/spell/aoe_turf/conjure/wall,
 							/obj/effect/proc_holder/spell/aoe_turf/conjure/floor,
-							/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone,
-							/obj/effect/proc_holder/spell/targeted/projectile/magic_missile)
+							/obj/effect/proc_holder/spell/aoe_turf/conjure/soulstone,)
 
 
 /////////////////////////////Behemoth/////////////////////////

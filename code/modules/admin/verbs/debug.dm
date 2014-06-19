@@ -968,6 +968,89 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		if(SMES.anchored)
 			SMES.chargemode = 1
 
+/client/proc/setup_supermatter_engine()
+	set category = "Debug"
+	set name = "Setup supermatter"
+	set desc = "Sets up the supermatter engine"
+
+	if(!check_rights(R_DEBUG|R_ADMIN))      return
+
+	var/response = alert("Are you sure? This will start up the engine. Should only be used during debug!",,"Setup Completely","Setup except coolant","No")
+
+	if(response == "No")
+		return
+
+	var/found_the_pump = 0
+	var/obj/machinery/power/supermatter/SM
+
+	for(var/obj/machinery/M in world)
+		if(!M)
+			continue
+		if(!M.loc)
+			continue
+		if(!M.loc.loc)
+			continue
+
+		if(istype(M.loc.loc,/area/engine/engine_room))
+			if(istype(M,/obj/machinery/power/rad_collector))
+				var/obj/machinery/power/rad_collector/Rad = M
+				Rad.anchored = 1
+				Rad.connect_to_network()
+
+				var/obj/item/weapon/tank/phoron/Phoron = new/obj/item/weapon/tank/phoron(Rad)
+
+				Phoron.air_contents.phoron = 29.1154	//This is a full tank if you filled it from a canister
+				Rad.P = Phoron
+
+				Phoron.loc = Rad
+
+				if(!Rad.active)
+					Rad.toggle_power()
+				Rad.update_icon()
+
+			else if(istype(M,/obj/machinery/atmospherics/binary/pump))	//Turning on every pump.
+				var/obj/machinery/atmospherics/binary/pump/Pump = M
+				if(Pump.name == "Engine Feed" && response == "Setup Completely")
+					found_the_pump = 1
+					Pump.air2.nitrogen = 3750	//The contents of 2 canisters.
+					Pump.air2.temperature = 50
+					Pump.air2.update_values()
+				Pump.on=1
+				Pump.target_pressure = 4500
+				Pump.update_icon()
+
+			else if(istype(M,/obj/machinery/power/supermatter))
+				SM = M
+				spawn(50)
+					SM.power = 320
+
+			else if(istype(M,/obj/machinery/power/smes))	//This is the SMES inside the engine room.  We don't need much power.
+				var/obj/machinery/power/smes/SMES = M
+				SMES.chargemode = 1
+				SMES.chargelevel = 200000
+				SMES.output = 75000
+
+		else if(istype(M.loc.loc,/area/engine/engine_smes))	//Set every SMES to charge and spit out 300,000 power between the 4 of them.
+			if(istype(M,/obj/machinery/power/smes))
+				var/obj/machinery/power/smes/SMES = M
+				SMES.chargemode = 1
+				SMES.chargelevel = 200000
+				SMES.output = 75000
+
+	if(!found_the_pump && response == "Setup Completely")
+		src << "\red Unable to locate air supply to fill up with coolant, adding some coolant around the supermatter"
+		var/turf/simulated/T = SM.loc
+		T.zone.air.nitrogen += 450
+		T.zone.air.temperature = 50
+		T.zone.air.update_values()
+
+
+	log_admin("[key_name(usr)] setup the supermatter engine [response == "Setup except coolant" ? "without coolant" : ""]")
+	message_admins("\blue [key_name_admin(usr)] setup the supermatter engine  [response == "Setup except coolant" ? "without coolant": ""]", 1)
+	return
+
+
+
 /client/proc/cmd_debug_mob_lists()
 	set category = "Debug"
 	set name = "Debug Mob Lists"

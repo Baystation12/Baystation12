@@ -2,45 +2,6 @@
   Tiny babby plant critter plus procs.
 */
 
-//Helper object for picking dionaea (and other creatures) up.
-/obj/item/weapon/holder
-	name = "holder"
-	desc = "You shouldn't ever see this."
-
-/obj/item/weapon/holder/diona
-
-	name = "diona nymph"
-	desc = "It's a tiny plant critter."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "nymph"
-	slot_flags = SLOT_HEAD
-	origin_tech = "magnets=3;biotech=5"
-
-/obj/item/weapon/holder/New()
-	..()
-	processing_objects.Add(src)
-
-/obj/item/weapon/holder/Del()
-	//Hopefully this will stop the icon from remaining on human mobs.
-	if(istype(loc,/mob/living))
-		var/mob/living/A = src.loc
-		src.loc = null
-		A.update_icons()
-	processing_objects.Remove(src)
-	..()
-
-/obj/item/weapon/holder/process()
-	if(!loc) del(src)
-
-	if(istype(loc,/turf) || !(contents.len))
-		for(var/mob/M in contents)
-			M.loc = get_turf(src)
-		del(src)
-
-/obj/item/weapon/holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	for(var/mob/M in src.contents)
-		M.attackby(W,user)
-
 //Mob defines.
 /mob/living/carbon/monkey/diona
 	name = "diona nymph"
@@ -67,6 +28,7 @@
 			D.attack_hand(M)
 			M << "You scoop up [src]."
 			src << "[M] scoops you up."
+		M.status_flags |= PASSEMOTES
 		return
 
 	..()
@@ -108,6 +70,8 @@
 
 	if(istype(M,/mob/living/carbon/human))
 		M << "You feel your being twine with that of [src] as it merges with your biomass."
+		M.status_flags |= PASSEMOTES
+
 		src << "You feel your being twine with that of [M] as you merge with its biomass."
 		src.loc = M
 		src.verbs += /mob/living/carbon/monkey/diona/proc/split
@@ -127,9 +91,18 @@
 
 	src.loc << "You feel a pang of loss as [src] splits away from your biomass."
 	src << "You wiggle out of the depths of [src.loc]'s biomass and plop to the ground."
+
+	var/mob/living/M = src.loc
+
 	src.loc = get_turf(src)
 	src.verbs -= /mob/living/carbon/monkey/diona/proc/split
 	src.verbs += /mob/living/carbon/monkey/diona/proc/merge
+
+	if(istype(M))
+		for(var/atom/A in M.contents)
+			if(istype(A,/mob/living/simple_animal/borer) || istype(A,/obj/item/weapon/holder))
+				return
+	M.status_flags &= ~PASSEMOTES
 
 /mob/living/carbon/monkey/diona/verb/fertilize_plant()
 
@@ -188,7 +161,7 @@
 		return
 
 	src.split()
-	src.visible_message("\red [src] begins to shift and quiver, and erupts in a shower of shed bark and twigs!","\red You begin to shift and quiver, then erupt in a shower of shed bark and twigs, attaining your adult form!")
+	src.visible_message("\red [src] begins to shift and quiver, and erupts in a shower of shed bark as it splits into a tangle of nearly a dozen new dionaea.","\red You begin to shift and quiver, feeling your awareness splinter. All at once, we consume our stored nutrients to surge with growth, splitting into a tangle of at least a dozen new dionaea. We have attained our gestalt form.")
 
 	var/mob/living/carbon/human/adult = new(get_turf(src.loc))
 	adult.set_species("Diona")
@@ -252,3 +225,51 @@
 		src << "\green You feel your awareness expand, and realize you know how to understand the creatures around you."
 	else
 		src << "\green The blood seeps into your small form, and you draw out the echoes of memories and personality from it, working them into your budding mind."
+
+
+/mob/living/carbon/monkey/diona/say_understands(var/mob/other,var/datum/language/speaking = null)
+
+	if (istype(other, /mob/living/carbon/human) && !speaking)
+		if(languages.len >= 2) // They have sucked down some blood.
+			return 1
+	return ..()
+
+/mob/living/carbon/monkey/diona/say(var/message)
+	var/verb = "says"
+	var/message_range = world.view
+
+	if(client)
+		if(client.prefs.muted & MUTE_IC)
+			src << "\red You cannot speak in IC (Muted)."
+			return
+
+	message =  trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+
+
+	if(stat == 2)
+		return say_dead(message)
+
+	var/datum/language/speaking = null
+
+
+
+	if(length(message) >= 2)
+		var/channel_prefix = copytext(message, 1 ,3)
+		if(languages.len)
+			for(var/datum/language/L in languages)
+				if(lowertext(channel_prefix) == ":[L.key]")
+					verb = L.speech_verb
+					speaking = L
+					break
+
+	if(speaking)
+		message = trim(copytext(message,3))
+
+	message = capitalize(trim_left(message))
+
+	if(!message || stat)
+		return
+
+
+
+	..(message, speaking, verb, null, null, message_range, null)

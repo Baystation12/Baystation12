@@ -5,7 +5,7 @@
 	icon_state = "deliverycloset"
 	var/obj/wrapped = null
 	density = 1
-	var/sortTag = 0
+	var/sortTag = ""
 	flags = FPRINT | NOBLUDGEON
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
@@ -23,8 +23,7 @@
 			var/obj/item/device/destTagger/O = W
 
 			if(src.sortTag != O.currTag)
-				var/tag = uppertext(TAGGERLOCATIONS[O.currTag])
-				user << "\blue *[tag]*"
+				user << "\blue *[O.currTag]*"
 				src.sortTag = O.currTag
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
 
@@ -44,7 +43,7 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "deliverycrateSmall"
 	var/obj/item/wrapped = null
-	var/sortTag = 0
+	var/sortTag = ""
 	flags = FPRINT
 
 
@@ -54,7 +53,7 @@
 			if(ishuman(user))
 				user.put_in_hands(wrapped)
 			else
-				wrapped.loc = get_turf_loc(src)
+				wrapped.loc = get_turf(src)
 
 		del(src)
 		return
@@ -64,8 +63,7 @@
 			var/obj/item/device/destTagger/O = W
 
 			if(src.sortTag != O.currTag)
-				var/tag = uppertext(TAGGERLOCATIONS[O.currTag])
-				user << "\blue *[tag]*"
+				user << "\blue *[O.currTag]*"
 				src.sortTag = O.currTag
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 100, 1)
 
@@ -98,6 +96,8 @@
 		if(target.anchored)
 			return
 		if(target in user)
+			return
+		if(user in target) //no wrapping closets that you are inside - it's not physically possible
 			return
 
 		user.attack_log += text("\[[time_stamp()]\] <font color='blue'>Has used [src.name] on \ref[target]</font>")
@@ -159,11 +159,6 @@
 	desc = "Used to set the destination of properly wrapped packages."
 	icon_state = "dest_tagger"
 	var/currTag = 0
-	//The whole system for the sorttype var is determined based on the order of this list,
-	//disposals must always be 1, since anything that's untagged will automatically go to disposals, or sorttype = 1 --Superxpdude
-
-	//If you don't want to fuck up disposals, add to this list, and don't change the order.
-	//If you insist on changing the order, you'll have to change every sort junction to reflect the new order. --Pete
 
 	w_class = 2
 	item_state = "electronic"
@@ -171,16 +166,16 @@
 	slot_flags = SLOT_BELT
 
 	proc/openwindow(mob/user as mob)
-		var/dat = "<tt><center><h1><b>TagMaster 2.2</b></h1></center>"
+		var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
 
 		dat += "<table style='width:100%; padding:4px;'><tr>"
-		for (var/i = 1, i <= TAGGERLOCATIONS.len, i++)
-			dat += "<td><a href='?src=\ref[src];nextTag=[i]'>[TAGGERLOCATIONS[i]]</a></td>"
+		for(var/i = 1, i <= tagger_locations.len, i++)
+			dat += "<td><a href='?src=\ref[src];nextTag=[tagger_locations[i]]'>[tagger_locations[i]]</a></td>"
 
 			if (i%4==0)
 				dat += "</tr><tr>"
 
-		dat += "</tr></table><br>Current Selection: [currTag ? TAGGERLOCATIONS[currTag] : "None"]</tt>"
+		dat += "</tr></table><br>Current Selection: [currTag ? currTag : "None"]</tt>"
 
 		user << browse(dat, "window=destTagScreen;size=450x350")
 		onclose(user, "destTagScreen")
@@ -191,9 +186,8 @@
 
 	Topic(href, href_list)
 		src.add_fingerprint(usr)
-		if(href_list["nextTag"])
-			var/n = text2num(href_list["nextTag"])
-			src.currTag = n
+		if(href_list["nextTag"] && href_list["nextTag"] in tagger_locations)
+			src.currTag = href_list["nextTag"]
 		openwindow(usr)
 
 /obj/machinery/disposal/deliveryChute

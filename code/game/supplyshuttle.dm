@@ -37,8 +37,8 @@ var/list/mechtoys = list(
 //SUPPLY PACKS MOVED TO /code/defines/obj/supplypacks.dm
 
 /obj/structure/plasticflaps //HOW DO YOU CALL THOSE THINGS ANYWAY
-	name = "\improper Plastic flaps"
-	desc = "I definitely cant get past those. No way."
+	name = "\improper plastic flaps"
+	desc = "Completely impassable - or are they?"
 	icon = 'icons/obj/stationobjs.dmi' //Change this.
 	icon_state = "plasticflaps"
 	density = 0
@@ -56,7 +56,7 @@ var/list/mechtoys = list(
 
 	else if(istype(A, /mob/living)) // You Shall Not Pass!
 		var/mob/living/M = A
-		if(!M.lying && !istype(M, /mob/living/carbon/monkey) && !istype(M, /mob/living/carbon/slime) && !istype(M, /mob/living/simple_animal/mouse))  //If your not laying down, or a small creature, no pass.
+		if(!M.lying && !istype(M, /mob/living/carbon/monkey) && !istype(M, /mob/living/carbon/slime) && !istype(M, /mob/living/simple_animal/mouse) && !istype(M, /mob/living/silicon/robot/drone))  //If your not laying down, or a small creature, no pass.
 			return 0
 	return ..()
 
@@ -134,7 +134,8 @@ var/list/mechtoys = list(
 	var/points_per_process = 1
 	var/points_per_slip = 2
 	var/points_per_crate = 5
-	var/phoron_per_point = 2 // 2 phoron for 1 point
+	var/points_per_platinum = 5 // 5 points per sheet
+	var/points_per_phoron = 5
 	//control
 	var/ordernum
 	var/list/shoppinglist = list()
@@ -169,33 +170,12 @@ var/list/mechtoys = list(
 							eta = round(ticksleft/600,1)
 						else
 							eta = 0
-							send()
-
+							var/datum/shuttle/S = shuttles["Supply"]
+							if (istype(S)) S.move()
+							moving = 0
+							at_station = !at_station
 
 				sleep(processing_interval)
-
-	proc/send()
-		var/area/from
-		var/area/dest
-		var/area/the_shuttles_way
-		switch(at_station)
-			if(1)
-				from = locate(SUPPLY_STATION_AREATYPE)
-				dest = locate(SUPPLY_DOCK_AREATYPE)
-				the_shuttles_way = from
-				at_station = 0
-			if(0)
-				from = locate(SUPPLY_DOCK_AREATYPE)
-				dest = locate(SUPPLY_STATION_AREATYPE)
-				the_shuttles_way = dest
-				at_station = 1
-		moving = 0
-
-		//Do I really need to explain this loop?
-		for(var/mob/living/unlucky_person in the_shuttles_way)
-			unlucky_person.gib()
-
-		from.move_contents_to(dest)
 
 	//Check whether the shuttle is allowed to move
 	proc/can_move()
@@ -235,12 +215,15 @@ var/list/mechtoys = list(
 		if(!shuttle)	return
 
 		var/phoron_count = 0
+		var/plat_count = 0
 
 		for(var/atom/movable/MA in shuttle)
 			if(MA.anchored)	continue
 
 			// Must be in a crate!
 			if(istype(MA,/obj/structure/closet/crate))
+				callHook("sell_crate", list(MA, shuttle))
+
 				points += points_per_crate
 				var/find_slip = 1
 
@@ -258,10 +241,19 @@ var/list/mechtoys = list(
 					if(istype(A, /obj/item/stack/sheet/mineral/phoron))
 						var/obj/item/stack/sheet/mineral/phoron/P = A
 						phoron_count += P.amount
+
+					// Sell platinum
+					if(istype(A, /obj/item/stack/sheet/mineral/platinum))
+						var/obj/item/stack/sheet/mineral/platinum/P = A
+						plat_count += P.amount
+
 			del(MA)
 
 		if(phoron_count)
-			points += Floor(phoron_count / phoron_per_point)
+			points += phoron_count * points_per_phoron
+
+		if(plat_count)
+			points += plat_count * points_per_platinum
 
 	//Buyin
 	proc/buy()
@@ -497,36 +489,8 @@ var/list/mechtoys = list(
 		user << "\blue Special supplies unlocked."
 		hacked = 1
 		return
-	if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			if (stat & BROKEN)
-				user << "\blue The broken glass falls out."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( loc )
-				new /obj/item/weapon/shard( loc )
-				var/obj/item/weapon/circuitboard/supplycomp/M = new /obj/item/weapon/circuitboard/supplycomp( A )
-				for (var/obj/C in src)
-					C.loc = loc
-				A.circuit = M
-				A.state = 3
-				A.icon_state = "3"
-				A.anchored = 1
-				del(src)
-			else
-				user << "\blue You disconnect the monitor."
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( loc )
-				var/obj/item/weapon/circuitboard/supplycomp/M = new /obj/item/weapon/circuitboard/supplycomp( A )
-				if(can_order_contraband)
-					M.contraband_enabled = 1
-				for (var/obj/C in src)
-					C.loc = loc
-				A.circuit = M
-				A.state = 4
-				A.icon_state = "4"
-				A.anchored = 1
-				del(src)
 	else
-		attack_hand(user)
+		..()
 	return
 
 /obj/machinery/computer/supplycomp/Topic(href, href_list)
@@ -547,7 +511,12 @@ var/list/mechtoys = list(
 		else if(supply_shuttle.at_station)
 			supply_shuttle.moving = -1
 			supply_shuttle.sell()
-			supply_shuttle.send()
+			supply_shuttle.moving = 0
+			supply_shuttle.at_station = !supply_shuttle.at_station
+
+			var/datum/shuttle/S = shuttles["Supply"]
+			if (istype(S)) S.move()
+
 			temp = "The supply shuttle has departed.<BR><BR><A href='?src=\ref[src];mainmenu=1'>OK</A>"
 		else
 			supply_shuttle.moving = 1

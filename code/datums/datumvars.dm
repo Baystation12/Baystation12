@@ -245,7 +245,8 @@ client
 
 		if(ismob(D))
 			body += "<option value='?_src_=vars;give_spell=\ref[D]'>Give Spell</option>"
-			body += "<option value='?_src_=vars;give_disease=\ref[D]'>Give Disease</option>"
+			body += "<option value='?_src_=vars;give_disease2=\ref[D]'>Give Disease</option>"
+			body += "<option value='?_src_=vars;give_disease=\ref[D]'>Give TG-style Disease</option>"
 			body += "<option value='?_src_=vars;godmode=\ref[D]'>Toggle Godmode</option>"
 			body += "<option value='?_src_=vars;build_mode=\ref[D]'>Toggle Build Mode</option>"
 
@@ -493,6 +494,17 @@ client
 			return
 
 		src.give_disease(M)
+		href_list["datumrefresh"] = href_list["give_spell"]
+		
+	else if(href_list["give_disease2"])
+		if(!check_rights(R_ADMIN|R_FUN))	return
+
+		var/mob/M = locate(href_list["give_disease2"])
+		if(!istype(M))
+			usr << "This can only be used on instances of type /mob"
+			return
+
+		src.give_disease2(M)
 		href_list["datumrefresh"] = href_list["give_spell"]
 
 	else if(href_list["ninja"])

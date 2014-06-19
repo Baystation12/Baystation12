@@ -10,7 +10,7 @@
 	anchored = 0
 	density = 0
 	pressure_resistance = 5*ONE_ATMOSPHERE
-	m_amt = 1850
+	matter = list("metal" = 1850)
 	level = 2
 	var/ptype = 0
 	// 0=straight, 1=bent, 2=junction-j1, 3=junction-j2, 4=junction-y, 5=trunk, 6=disposal bin, 7=outlet, 8=inlet
@@ -73,6 +73,12 @@
 				base_state = "pipe-d"
 				dpdir = dir
 ///// Z-Level stuff
+			if(13)
+				base_state = "pipe-tagger"
+				dpdir = dir | flip
+			if(14)
+				base_state = "pipe-tagger-partial"
+				dpdir = dir | flip
 
 
 ///// Z-Level stuff
@@ -83,7 +89,7 @@
 			icon_state = base_state
 
 		if(invisibility)				// if invisible, fade icon
-			icon -= rgb(0,0,0,128)
+			alpha = 128
 
 	// hide called by levelupdate if turf intact status changes
 	// change visibility status and force update of icon
@@ -147,14 +153,20 @@
 				return /obj/structure/disposaloutlet
 			if(8)
 				return /obj/machinery/disposal/deliveryChute
-			if(9,10)
+			if(9)
 				return /obj/structure/disposalpipe/sortjunction
+			if(10)
+				return /obj/structure/disposalpipe/sortjunction/flipped
 ///// Z-Level stuff
 			if(11)
 				return /obj/structure/disposalpipe/up
 			if(12)
 				return /obj/structure/disposalpipe/down
 ///// Z-Level stuff
+			if(13)
+				return /obj/structure/disposalpipe/tagger
+			if(14)
+				return /obj/structure/disposalpipe/tagger/partial
 		return
 
 
@@ -176,6 +188,12 @@
 				nicetype = "delivery chute"
 			if(9, 10)
 				nicetype = "sorting pipe"
+				ispipe = 1
+			if(13)
+				nicetype = "tagging pipe"
+				ispipe = 1
+			if(14)
+				nicetype = "partial tagging pipe"
 				ispipe = 1
 			else
 				nicetype = "pipe"

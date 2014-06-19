@@ -11,22 +11,26 @@
 	density = 1
 	anchored = 1
 	use_power = 0
-	var/output = 50000
-	var/lastout = 0
-	var/loaddemand = 0
-	var/capacity = 5e6
-	var/charge = 1e6
-	var/charging = 0
-	var/chargemode = 0
-	var/chargecount = 0
-	var/chargelevel = 50000
-	var/online = 1
+	var/output = 50000		//Amount of power it tries to output
+	var/lastout = 0			//Amount of power it actually outputs to the powernet
+	var/loaddemand = 0		//For use in restore()
+	var/capacity = 5e6		//Maximum amount of power it can hold
+	var/charge = 1e6		//Current amount of power it holds
+	var/charging = 0		//1 if it's actually charging, 0 if not
+	var/chargemode = 0		//1 if it's trying to charge, 0 if not.
+	//var/chargecount = 0
+	var/chargelevel = 50000	//Amount of power it tries to charge from powernet
+	var/online = 1			//1 if it's outputting power, 0 if not.
 	var/name_tag = null
 	var/obj/machinery/power/terminal/terminal = null
 	//Holders for powerout event.
 	var/last_output = 0
 	var/last_charge = 0
 	var/last_online = 0
+	var/open_hatch = 0
+	var/building_terminal = 0 //Suggestions about how to avoid clickspam building several terminals accepted!
+	var/input_level_max = SMESMAXCHARGELEVEL
+	var/output_level_max = SMESMAXOUTPUT
 
 /obj/machinery/power/smes/New()
 	..()
@@ -71,7 +75,6 @@
 
 
 /obj/machinery/power/smes/process()
-
 	if(stat & BROKEN)	return
 
 	//store machine state to see if we need to update the icon overlays
@@ -84,19 +87,18 @@
 
 		if(charging)
 			if(excess >= 0)		// if there's power available, try to charge
-
 				var/load = min((capacity-charge)/SMESRATE, chargelevel)		// charge at set rate, limited to spare capacity
-
 				charge += load * SMESRATE	// increase the charge
-
 				add_load(load)		// add the load to the terminal side network
 
 			else					// if not enough capcity
 				charging = 0		// stop charging
-				chargecount  = 0
+				//chargecount  = 0
 
 		else
-			if(chargemode)
+			if (chargemode && excess > 0 && excess >= chargelevel)
+				charging = 1
+		/*	if(chargemode)
 				if(chargecount > rand(3,6))
 					charging = 1
 					chargecount = 0
@@ -106,15 +108,12 @@
 				else
 					chargecount = 0
 			else
-				chargecount = 0
+				chargecount = 0   */
 
 	if(online)		// if outputting
 		lastout = min( charge/SMESRATE, output)		//limit output to that stored
-
 		charge -= lastout*SMESRATE		// reduce the storage (may be recovered in /restore() if excessive)
-
 		add_avail(lastout)				// add output to powernet (smes side)
-
 		if(charge < 0.0001)
 			online = 0					// stop output if charge falls to zero
 
@@ -155,6 +154,35 @@
 		updateicon()
 	return
 
+//Will return 1 on failure
+/obj/machinery/power/smes/proc/make_terminal(const/mob/user)
+	if (user.loc == loc)
+		user << "<span class='warning'>You must not be on the same tile as the [src].</span>"
+		return 1
+
+	//Direction the terminal will face to
+	var/tempDir = get_dir(user, src)
+	switch(tempDir)
+		if (NORTHEAST, SOUTHEAST)
+			tempDir = EAST
+		if (NORTHWEST, SOUTHWEST)
+			tempDir = WEST
+	var/turf/tempLoc = get_step(src, reverse_direction(tempDir))
+	if (istype(tempLoc, /turf/space))
+		user << "<span class='warning'>You can't build a terminal on space.</span>"
+		return 1
+	else if (istype(tempLoc))
+		if(tempLoc.intact)
+			user << "<span class='warning'>You must remove the floor plating first.</span>"
+			return 1
+	user << "<span class='notice'>You start adding cable to the [src].</span>"
+	if(do_after(user, 50))
+		terminal = new /obj/machinery/power/terminal(tempLoc)
+		terminal.dir = tempDir
+		terminal.master = src
+		return 0
+	return 1
+
 
 /obj/machinery/power/smes/add_load(var/amount)
 	if(terminal && terminal.powernet)
@@ -169,11 +197,62 @@
 /obj/machinery/power/smes/attack_hand(mob/user)
 	add_fingerprint(user)
 	ui_interact(user)
-	
-	
+
+
+/obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if(!open_hatch)
+			open_hatch = 1
+			user << "<span class='notice'>You open the maintenance hatch of [src].</span>"
+		else
+			open_hatch = 0
+			user << "<span class='notice'>You close the maintenance hatch of [src].</span>"
+	if (open_hatch)
+		if(istype(W, /obj/item/weapon/cable_coil) && !terminal && !building_terminal)
+			building_terminal = 1
+			var/obj/item/weapon/cable_coil/CC = W
+			if (CC.amount < 10)
+				user << "<span class='warning'>You need more cables.</span>"
+				building_terminal = 0
+				return
+			if (make_terminal(user))
+				building_terminal = 0
+				return
+			building_terminal = 0
+			CC.use(10)
+			user.visible_message(\
+					"<span class='notice'>[user.name] has added cables to the [src].</span>",\
+					"<span class='notice'>You added cables to the [src].</span>")
+			terminal.connect_to_network()
+			stat = 0
+
+		else if(istype(W, /obj/item/weapon/wirecutters) && terminal && !building_terminal)
+			building_terminal = 1
+			var/turf/tempTDir = terminal.loc
+			if (istype(tempTDir))
+				if(tempTDir.intact)
+					user << "<span class='warning'>You must remove the floor plating first.</span>"
+				else
+					user << "<span class='notice'>You begin to cut the cables...</span>"
+					playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
+					if(do_after(user, 50))
+						if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
+							var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+							s.set_up(5, 1, src)
+							s.start()
+							building_terminal = 0
+							return
+						new /obj/item/weapon/cable_coil(loc,10)
+						user.visible_message(\
+							"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
+							"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
+						del(terminal)
+			building_terminal = 0
+
+
 /obj/machinery/power/smes/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
 
-	if(stat & BROKEN) 
+	if(stat & BROKEN)
 		return
 
 	// this is the data which will be sent to the ui
@@ -183,25 +262,25 @@
 	data["charging"] = charging
 	data["chargeMode"] = chargemode
 	data["chargeLevel"] = chargelevel
-	data["chargeMax"] = SMESMAXCHARGELEVEL
+	data["chargeMax"] = input_level_max
 	data["outputOnline"] = online
 	data["outputLevel"] = output
-	data["outputMax"] = SMESMAXOUTPUT
+	data["outputMax"] = output_level_max
 	data["outputLoad"] = round(loaddemand)
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)	
+	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
         // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "smes.tmpl", "SMES Power Storage Unit", 540, 380)
 		// when the ui is first opened this is the data it will use
-		ui.set_initial_data(data)		
+		ui.set_initial_data(data)
 		// open the new ui window
 		ui.open()
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
-		
+
 
 /obj/machinery/power/smes/Topic(href, href_list)
 	..()
@@ -236,25 +315,25 @@
 			if("min")
 				chargelevel = 0
 			if("max")
-				chargelevel = SMESMAXCHARGELEVEL		//30000
+				chargelevel = input_level_max
 			if("set")
-				chargelevel = input(usr, "Enter new input level (0-[SMESMAXCHARGELEVEL])", "SMES Input Power Control", chargelevel) as num
-		chargelevel = max(0, min(SMESMAXCHARGELEVEL, chargelevel))	// clamp to range
+				chargelevel = input(usr, "Enter new input level (0-[input_level_max])", "SMES Input Power Control", chargelevel) as num
+		chargelevel = max(0, min(input_level_max, chargelevel))	// clamp to range
 
 	else if( href_list["output"] )
 		switch( href_list["output"] )
 			if("min")
 				output = 0
 			if("max")
-				output = SMESMAXOUTPUT		//30000
+				output = output_level_max
 			if("set")
-				output = input(usr, "Enter new output level (0-[SMESMAXOUTPUT])", "SMES Output Power Control", output) as num
-		output = max(0, min(SMESMAXOUTPUT, output))	// clamp to range
+				output = input(usr, "Enter new output level (0-[output_level_max])", "SMES Output Power Control", output) as num
+		output = max(0, min(output_level_max, output))	// clamp to range
 
 	investigate_log("input/output; [chargelevel>output?"<font color='green'>":"<font color='red'>"][chargelevel]/[output]</font> | Output-mode: [online?"<font color='green'>on</font>":"<font color='red'>off</font>"] | Input-mode: [chargemode?"<font color='green'>auto</font>":"<font color='red'>off</font>"] by [usr.key]","singulo")
-	
+
 	return 1
-	
+
 
 /obj/machinery/power/smes/proc/ion_act()
 	if(src.z == 1)
@@ -267,7 +346,7 @@
 			smoke.set_up(3, 0, src.loc)
 			smoke.attach(src)
 			smoke.start()
-			explosion(src.loc, -1, 0, 1, 3, 0)
+			explosion(src.loc, -1, 0, 1, 3, 1, 0)
 			del(src)
 			return
 		if(prob(15)) //Power drain

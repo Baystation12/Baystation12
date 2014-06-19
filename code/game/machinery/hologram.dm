@@ -33,6 +33,9 @@ var/const/HOLOPAD_MODE = 0
 	name = "\improper AI holopad"
 	desc = "It's a floor-mounted device for projecting holographic images. It is activated remotely."
 	icon_state = "holopad0"
+
+	layer = TURF_LAYER+0.1 //Preventing mice and drones from sneaking under them.
+
 	var/mob/living/silicon/ai/master//Which AI, if any, is controlling the object? Only one AI may control a hologram at any time.
 	var/last_request = 0 //to prevent request spam. ~Carn
 	var/holo_range = 5 // Change to change how far the AI can move away from the holopad before deactivating.
@@ -78,13 +81,13 @@ var/const/HOLOPAD_MODE = 0
 
 /*This is the proc for special two-way communication between AI and holopad/people talking near holopad.
 For the other part of the code, check silicon say.dm. Particularly robot talk.*/
-/obj/machinery/hologram/holopad/hear_talk(mob/living/M, text)
+/obj/machinery/hologram/holopad/hear_talk(mob/living/M, text, verb)
 	if(M&&hologram&&master)//Master is mostly a safety in case lag hits or something.
 		if(!master.say_understands(M))//The AI will be able to understand most mobs talking through the holopad.
 			text = stars(text)
 		var/name_used = M.GetVoice()
 		//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
-		var/rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> <span class='message'>[M.say_quote(text)]</span></span></i>"
+		var/rendered = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [verb], <span class='message'>\"[text]\"</span></span></i>"
 		master.show_message(rendered, 2)
 	return
 

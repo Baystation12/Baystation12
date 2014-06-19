@@ -17,7 +17,9 @@ REAGENT SCANNER
 	slot_flags = SLOT_BELT
 	w_class = 2
 	item_state = "electronic"
-	m_amt = 150
+
+	matter = list("metal" = 150)
+
 	origin_tech = "magnets=1;engineering=1"
 
 /obj/item/device/t_scanner/attack_self(mob/user)
@@ -71,7 +73,7 @@ REAGENT SCANNER
 	w_class = 2.0
 	throw_speed = 5
 	throw_range = 10
-	m_amt = 200
+	matter = list("metal" = 200)
 	origin_tech = "magnets=1;biotech=1"
 	var/mode = 1;
 
@@ -174,13 +176,14 @@ REAGENT SCANNER
 		if(M:vessel)
 			var/blood_volume = round(M:vessel.get_reagent_amount("blood"))
 			var/blood_percent =  blood_volume / 560
+			var/blood_type = M.dna.b_type
 			blood_percent *= 100
-			if(blood_volume <= 500)
-				user.show_message("\red <b>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl")
+			if(blood_volume <= 500 && blood_volume > 336)
+				user.show_message("\red <b>Warning: Blood Level LOW: [blood_percent]% [blood_volume]cl.\blue Type: [blood_type]")
 			else if(blood_volume <= 336)
-				user.show_message("\red <b>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl")
+				user.show_message("\red <b>Warning: Blood Level CRITICAL: [blood_percent]% [blood_volume]cl.\blue Type: [blood_type]")
 			else
-				user.show_message("\blue Blood Level Normal: [blood_percent]% [blood_volume]cl")
+				user.show_message("\blue Blood Level Normal: [blood_percent]% [blood_volume]cl. Type: [blood_type]")
 		user.show_message("\blue Subject's pulse: <font color='[H.pulse == PULSE_THREADY || H.pulse == PULSE_NONE ? "red" : "blue"]'>[H.get_pulse(GETPULSE_TOOL)] bpm.</font>")
 	src.add_fingerprint(user)
 	return
@@ -208,8 +211,9 @@ REAGENT SCANNER
 	throwforce = 5
 	throw_speed = 4
 	throw_range = 20
-	m_amt = 30
-	g_amt = 20
+
+	matter = list("metal" = 30,"glass" = 20)
+
 	origin_tech = "magnets=1;engineering=1"
 
 /obj/item/device/analyzer/attack_self(mob/user as mob)
@@ -278,8 +282,9 @@ REAGENT SCANNER
 	throwforce = 5
 	throw_speed = 4
 	throw_range = 20
-	m_amt = 30
-	g_amt = 20
+
+	matter = list("metal" = 30,"glass" = 20)
+
 	origin_tech = "magnets=2;biotech=2"
 	var/details = 0
 	var/recent_fail = 0
@@ -351,8 +356,8 @@ REAGENT SCANNER
 	throwforce = 5
 	throw_speed = 4
 	throw_range = 20
-	m_amt = 30
-	g_amt = 20
+	matter = list("metal" = 30,"glass" = 20)
+
 	origin_tech = "magnets=2;biotech=2"
 	var/details = 0
 	var/recent_fail = 0

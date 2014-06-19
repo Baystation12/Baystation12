@@ -1,8 +1,7 @@
 /obj
-	//var/datum/module/mod		//not used
-	var/m_amt = 0	// metal
-	var/g_amt = 0	// glass
-	var/w_amt = 0	// waster amounts
+	//Used to store information about the contents of the object.
+	var/list/matter
+
 	var/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
 	var/reliability = 100	//Used by SOME devices to determine how reliable they are.
 	var/crit_fail = 0
@@ -10,7 +9,8 @@
 	animate_movement = 2
 	var/throwforce = 1
 	var/list/attack_verb = list() //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
-	var/sharp = 0 // whether this object cuts
+	var/sharp = 0		// whether this object cuts
+	var/edge = 0		// whether this object is more likely to dismember
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
 
 	var/damtype = "brute"

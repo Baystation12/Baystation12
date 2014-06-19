@@ -32,6 +32,8 @@ datum/controller/game_controller
 	var/last_thing_processed
 	var/mob/list/expensive_mobs = list()
 	var/rebuild_active_areas = 0
+	
+	var/list/shuttle_list	//for debugging and VV
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -65,6 +67,9 @@ datum/controller/game_controller/proc/setup()
 	if(!ticker)
 		ticker = new /datum/controller/gameticker()
 
+	if(!shuttles) setup_shuttles()
+	shuttle_list = shuttles
+
 	setup_objects()
 	setupgenetics()
 	setupfactions()
@@ -75,6 +80,10 @@ datum/controller/game_controller/proc/setup()
 
 	for(var/i=0, i<max_secret_rooms, i++)
 		make_mining_asteroid_secret()
+
+	//Create the mining ore distribution map.
+	var/datum/ore_distribution/O = new()
+	O.populate_distribution_map()
 
 	spawn(0)
 		if(ticker)
@@ -254,6 +263,10 @@ datum/controller/game_controller/proc/process_diseases()
 		active_diseases.Cut(i,i+1)
 
 datum/controller/game_controller/proc/process_machines()
+	process_machines_process()
+	process_machines_power()
+	process_machines_rebuild()
+datum/controller/game_controller/proc/process_machines_process()
 	var/i = 1
 	while(i<=machines.len)
 		var/obj/machinery/Machine = machines[i]
@@ -265,7 +278,8 @@ datum/controller/game_controller/proc/process_machines()
 					continue
 		machines.Cut(i,i+1)
 
-	i=1
+datum/controller/game_controller/proc/process_machines_power()
+	var/i=1
 	while(i<=active_areas.len)
 		var/area/A = active_areas[i]
 		if(A.powerupdate && A.master == A)
@@ -275,7 +289,7 @@ datum/controller/game_controller/proc/process_machines()
 					if(M)
 						if(M.use_power)
 							M.auto_use_power()
-			
+
 		if(A.apc.len && A.master == A)
 			i++
 			continue
@@ -283,7 +297,7 @@ datum/controller/game_controller/proc/process_machines()
 		A.powerupdate = 0
 		active_areas.Cut(i,i+1)
 
-
+datum/controller/game_controller/proc/process_machines_rebuild()
 	if(controller_iteration % 150 == 0 || rebuild_active_areas)	//Every 300 seconds we retest every area/machine
 		for(var/area/A in all_areas)
 			if(A == A.master)
@@ -291,8 +305,6 @@ datum/controller/game_controller/proc/process_machines()
 				active_areas |= A
 		rebuild_active_areas = 0
 
-	
-		
 
 datum/controller/game_controller/proc/process_objects()
 	var/i = 1

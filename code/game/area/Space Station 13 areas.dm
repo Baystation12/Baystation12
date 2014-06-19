@@ -627,6 +627,10 @@ var/list/ghostteleportlocs = list()
 	name = "Medbay Maintenance"
 	icon_state = "asmaint"
 
+/area/maintenance/engi_shuttle
+	name = "Engineering Shuttle Access"
+	icon_state = "asmaint"
+
 /area/maintenance/asmaint2
 	name = "Science Maintenance"
 	icon_state = "asmaint"
@@ -936,6 +940,11 @@ var/list/ghostteleportlocs = list()
 //Engineering
 
 /area/engine
+
+	drone_fabrication
+		name = "\improper Drone Fabrication"
+		icon_state = "engine"
+
 	engine_smes
 		name = "Engineering SMES"
 		icon_state = "engine_smes"
@@ -955,6 +964,10 @@ var/list/ghostteleportlocs = list()
 
 	engineering_monitoring
 		name = "\improper Engineering Monitoring Room"
+		icon_state = "engine_monitoring"
+
+	atmos_monitoring
+		name = "\improper Atmospherics Monitoring Room"
 		icon_state = "engine_monitoring"
 
 	engineering
@@ -977,8 +990,16 @@ var/list/ghostteleportlocs = list()
 		name = "\improper Engineering Hallway"
 		icon_state = "engine_hallway"
 
+	engine_hallway
+		name = "\improper Engine Room Hallway"
+		icon_state = "engine_hallway"
+
 	engine_eva
 		name = "\improper Engine EVA"
+		icon_state = "engine_eva"
+
+	engine_eva_maintenance
+		name = "\improper Engine EVA Maintenance"
 		icon_state = "engine_eva"
 
 	workshop
@@ -1382,11 +1403,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Miscellaneous Research"
 	icon_state = "toxmisc"
 
-/area/rnd/telesci
-	name = "\improper Telescience Lab"
-	icon_state = "toxmisc"
-
-/area/rnd/server
+/area/toxins/server
 	name = "\improper Server Room"
 	icon_state = "server"
 
@@ -1444,11 +1461,11 @@ var/list/ghostteleportlocs = list()
 //DJSTATION
 
 /area/djstation
-	name = "\improper Ruskie DJ Station"
+	name = "\improper Listening Post"
 	icon_state = "DJ"
 
 /area/djstation/solars
-	name = "\improper DJ Station Solars"
+	name = "\improper Listening Post Solars"
 	icon_state = "DJ"
 
 //DERELICT
@@ -1539,6 +1556,71 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Derelict Singularity Engine"
 	icon_state = "engine"
 
+//HALF-BUILT STATION (REPLACES DERELICT IN BAYCODE, ABOVE IS LEFT FOR DOWNSTREAM)
+
+/area/shuttle/constructionsite
+	name = "\improper Construction Site Shuttle"
+	icon_state = "yellow"
+
+/area/shuttle/constructionsite/station
+	name = "\improper Construction Site Shuttle"
+
+/area/shuttle/constructionsite/site
+	name = "\improper Construction Site Shuttle"
+
+/area/constructionsite
+	name = "\improper Construction Site"
+	icon_state = "storage"
+
+/area/constructionsite/storage
+	name = "\improper Construction Site Storage Area"
+
+/area/constructionsite/science
+	name = "\improper Construction Site Research"
+
+/area/constructionsite/bridge
+	name = "\improper Construction Site Bridge"
+	icon_state = "bridge"
+
+/area/constructionsite/maintenance
+	name = "\improper Construction Site Maintenance"
+	icon_state = "yellow"
+
+/area/constructionsite/hallway/aft
+	name = "\improper Construction Site Aft Hallway"
+	icon_state = "hallP"
+
+/area/constructionsite/hallway/fore
+	name = "\improper Construction Site Fore Hallway"
+	icon_state = "hallS"
+
+/area/constructionsite/atmospherics
+	name = "\improper Construction Site Atmospherics"
+	icon_state = "green"
+
+/area/constructionsite/medical
+	name = "\improper Construction Site Medbay"
+	icon_state = "medbay"
+
+/area/constructionsite/ai
+	name = "\improper Construction Computer Core"
+	icon_state = "ai"
+
+/area/constructionsite/engineering
+	name = "\improper Construction Site Engine Bay"
+	icon_state = "engine"
+
+/area/solar/constructionsite
+	name = "\improper Construction Site Solars"
+	icon_state = "aft"
+
+//area/constructionsite
+//	name = "\improper Construction Site Shuttle"
+
+//area/constructionsite
+//	name = "\improper Construction Site Shuttle"
+
+
 //Construction
 
 /area/construction
@@ -1594,6 +1676,10 @@ var/list/ghostteleportlocs = list()
 /area/turret_protected/ai_upload_foyer
 	name = "AI Upload Access"
 	icon_state = "ai_foyer"
+
+/area/turret_protected/ai_server_room
+	name = "AI Server Room"
+	icon_state = "ai_server"
 
 /area/turret_protected/ai
 	name = "\improper AI Chamber"

@@ -160,7 +160,7 @@
 //Machine Frame Circuit Boards
 /*Common Parts: Parts List: Ignitor, Timer, Infra-red laser, Infra-red sensor, t_scanner, Capacitor, Valve, sensor unit,
 micro-manipulator, console screen, beaker, Microlaser, matter bin, power cells.
-Note: Once everything is added to the public areas, will add m_amt and g_amt to circuit boards since autolathe won't be able
+Note: Once everything is added to the public areas, will add materials to circuit boards since autolathe won't be able
 to destroy them and players will be able to make replacements.
 */
 /obj/item/weapon/circuitboard/destructive_analyzer

@@ -11,11 +11,12 @@
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "syringe_0"
 	icon_state = "0"
-	g_amt = 150
+	matter = list("glass" = 150)
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = null //list(5,10,15)
 	volume = 15
 	w_class = 1
+	sharp = 1
 	var/mode = SYRINGE_DRAW
 
 	on_reagent_change()
@@ -140,11 +141,23 @@
 					return
 
 				if(ismob(target) && target != user)
+
 					var/time = 30 //Injecting through a hardsuit takes longer due to needing to find a port.
+
 					if(istype(target,/mob/living/carbon/human))
+
 						var/mob/living/carbon/human/H = target
-						if(H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space))
-							time = 60
+						if(H.wear_suit)
+							if(istype(H.wear_suit,/obj/item/clothing/suit/space))
+								time = 60
+							else if(!H.can_inject(user, 1))
+								return
+
+					else if(isliving(target))
+
+						var/mob/living/M = target
+						if(!M.can_inject(user, 1))
+							return
 
 					for(var/mob/O in viewers(world.view, user))
 						if(time == 30)

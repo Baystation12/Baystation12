@@ -124,7 +124,6 @@
 		/obj/item/stack/sheet/mineral/phoron,
 		/obj/item/stack/sheet/mineral/uranium,
 		/obj/item/stack/sheet/mineral/diamond,
-		/obj/item/stack/sheet/mineral/clown,
 		/obj/item/stack/sheet/plasteel,
 		/obj/item/stack/rods
 		)

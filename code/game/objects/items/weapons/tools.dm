@@ -24,7 +24,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	m_amt = 150
+	matter = list("metal" = 150)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
@@ -44,8 +44,7 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	g_amt = 0
-	m_amt = 75
+	matter = list("metal" = 75)
 	attack_verb = list("stabbed")
 
 	suicide_act(mob/user)
@@ -103,9 +102,11 @@
 	throw_speed = 2
 	throw_range = 9
 	w_class = 2.0
-	m_amt = 80
+	matter = list("metal" = 80)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("pinched", "nipped")
+	sharp = 1
+	edge = 1
 
 /obj/item/weapon/wirecutters/New()
 	if(prob(50))
@@ -141,8 +142,7 @@
 	w_class = 2.0
 
 	//Cost to make in the autolathe
-	m_amt = 70
-	g_amt = 30
+	matter = list("metal" = 70, "glass" = 30)
 
 	//R&D tech level
 	origin_tech = "engineering=1"
@@ -357,6 +357,8 @@
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		var/datum/organ/internal/eyes/E = H.internal_organs["eyes"]
+		if(H.species.flags & IS_SYNTHETIC)
+			return
 		switch(safety)
 			if(1)
 				usr << "\red Your eyes sting a little."
@@ -393,24 +395,21 @@
 /obj/item/weapon/weldingtool/largetank
 	name = "Industrial Welding Tool"
 	max_fuel = 40
-	m_amt = 70
-	g_amt = 60
+	matter = list("metal" = 70, "glass" = 60)
 	origin_tech = "engineering=2"
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "Upgraded Welding Tool"
 	max_fuel = 80
 	w_class = 3.0
-	m_amt = 70
-	g_amt = 120
+	matter = list("metal" = 70, "glass" = 120)
 	origin_tech = "engineering=3"
 
 /obj/item/weapon/weldingtool/experimental
 	name = "Experimental Welding Tool"
 	max_fuel = 40
 	w_class = 3.0
-	m_amt = 70
-	g_amt = 120
+	matter = list("metal" = 70, "glass" = 120)
 	origin_tech = "engineering=4;phoron=3"
 	var/last_gen = 0
 
@@ -437,7 +436,7 @@
 	throwforce = 7.0
 	item_state = "crowbar"
 	w_class = 2.0
-	m_amt = 50
+	matter = list("metal" = 50)
 	origin_tech = "engineering=1"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 
@@ -447,22 +446,28 @@
 	item_state = "crowbar_red"
 
 /obj/item/weapon/weldingtool/attack(mob/M as mob, mob/user as mob)
+
 	if(hasorgans(M))
+
 		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
+
 		if (!S) return
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
 			return ..()
+
+		if(istype(M,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+			if(H.species.flags & IS_SYNTHETIC)
+				if(M == user)
+					user << "\red You can't repair damage to your own body - it's against OH&S."
+					return
+
 		if(S.brute_dam)
 			S.heal_damage(15,0,0,1)
-			if(user != M)
-				user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src]",\
-				"\red You patch some dents on \the [M]'s [S.display_name]",\
-				"You hear a welder.")
-			else
-				user.visible_message("\red \The [user] patches some dents on their [S.display_name] with \the [src]",\
-				"\red You patch some dents on your [S.display_name]",\
-				"You hear a welder.")
+			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src].")
+			return
 		else
 			user << "Nothing to fix!"
+
 	else
 		return ..()
