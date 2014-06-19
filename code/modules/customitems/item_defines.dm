@@ -724,7 +724,7 @@
 	item_color = "jane_sid_suit"
 	has_sensor = 2
 	sensor_mode = 3
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 //Suit roll-down toggle.
 /obj/item/clothing/under/fluff/jane_sidsuit/verb/toggle_zipper()

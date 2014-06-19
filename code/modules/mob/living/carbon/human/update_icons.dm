@@ -276,7 +276,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		//Icon is cached, use existing icon.
 		base_icon = human_icon_cache[icon_key]
 
-		//log_debug("Retrieved cached mob icon ([icon_key] \icon[human_icon_cache[icon_key]]) for [src].")
+	//	log_debug("Retrieved cached mob icon ([icon_key] \icon[human_icon_cache[icon_key]]) for [src].")
 
 	else
 
@@ -287,7 +287,7 @@ proc/get_damage_icon_part(damage_state, body_part)
 		//No icon stored, so we need to start with a basic one.
 
 		//var/datum/organ/external/chest = get_organ("chest")
-		base_icon = chest.get_icon(g)
+		base_icon = chest.get_icon(g, fat)
 
 		for(var/datum/organ/external/part in organs)
 

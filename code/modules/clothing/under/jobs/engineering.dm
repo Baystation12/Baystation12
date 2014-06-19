@@ -31,3 +31,4 @@
 	icon_state = "robotics"
 	item_state = "robotics"
 	item_color = "robotics"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL

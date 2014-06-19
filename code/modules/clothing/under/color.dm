@@ -102,6 +102,7 @@
 	desc = "lightpurple"
 	icon_state = "lightpurple"
 	item_color = "lightpurple"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/lightgreen
 	name = "lightgreen"

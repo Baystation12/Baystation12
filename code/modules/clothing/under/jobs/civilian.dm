@@ -24,6 +24,7 @@
 	icon_state = "qm"
 	item_state = "lb_suit"
 	item_color = "qm"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/cargotech
@@ -75,7 +76,7 @@
 	icon_state = "hopwhimsy"
 	item_state = "hopwhimsy"
 	item_color = "hopwhimsy"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/hydroponics
@@ -94,7 +95,7 @@
 	icon_state = "internalaffairs"
 	item_state = "internalaffairs"
 	item_color = "internalaffairs"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 
 /obj/item/clothing/under/rank/janitor
@@ -116,25 +117,25 @@
 	icon_state = "lawyer_black"
 	item_state = "lawyer_black"
 	item_color = "lawyer_black"
-
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/lawyer/female
 	icon_state = "black_suit_fem"
 	item_state = "black_suit_fem"
 	item_color = "black_suit_fem"
-
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/lawyer/red
 	icon_state = "lawyer_red"
 	item_state = "lawyer_red"
 	item_color = "lawyer_red"
-
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/lawyer/blue
 	icon_state = "lawyer_blue"
 	item_state = "lawyer_blue"
 	item_color = "lawyer_blue"
-
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/lawyer/bluesuit
 	name = "Blue Suit"
@@ -142,13 +143,14 @@
 	icon_state = "bluesuit"
 	item_state = "bluesuit"
 	item_color = "bluesuit"
-
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/lawyer/purpsuit
 	name = "Purple Suit"
 	icon_state = "lawyer_purp"
 	item_state = "lawyer_purp"
 	item_color = "lawyer_purp"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/lawyer/oldman
 	name = "Old Man's Suit"
@@ -156,7 +158,7 @@
 	icon_state = "oldman"
 	item_state = "oldman"
 	item_color = "oldman"
-
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/librarian
 	name = "sensible suit"
@@ -164,6 +166,7 @@
 	icon_state = "red_suit"
 	item_state = "red_suit"
 	item_color = "red_suit"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/mime
 	name = "mime's outfit"
@@ -179,3 +182,4 @@
 	icon_state = "miner"
 	item_state = "miner"
 	item_color = "miner"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL

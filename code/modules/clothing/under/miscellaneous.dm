@@ -4,6 +4,7 @@
 	icon_state = "red_pyjamas"
 	item_color = "red_pyjamas"
 	item_state = "w_suit"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/pj/blue
 	name = "blue pj's"
@@ -11,6 +12,7 @@
 	icon_state = "blue_pyjamas"
 	item_color = "blue_pyjamas"
 	item_state = "w_suit"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/captain_fly
 	name = "rogue captains uniform"
@@ -61,6 +63,7 @@
 	icon_state = "vice"
 	item_state = "gy_suit"
 	item_color = "vice"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/rank/centcom_officer
 	desc = "It's a jumpsuit worn by CentCom Officers."
@@ -117,6 +120,7 @@
 	desc = "Johnny~~"
 	icon_state = "johnny"
 	item_color = "johnny"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/rainbow
 	name = "rainbow"
@@ -124,6 +128,7 @@
 	icon_state = "rainbow"
 	item_state = "rainbow"
 	item_color = "rainbow"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/cloud
 	name = "cloud"
@@ -186,6 +191,7 @@
 	icon_state = "red_suit"
 	item_state = "r_suit"
 	item_color = "red_suit"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/blackskirt
 	name = "black skirt"
@@ -316,18 +322,21 @@
 	desc = "A preppy blue skirt with a white blouse."
 	icon_state = "plaid_blue"
 	item_color = "plaid_blue"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/dress/plaid_red
 	name = "red plaid skirt"
 	desc = "A preppy red skirt with a white blouse."
 	icon_state = "plaid_red"
 	item_color = "plaid_red"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/dress/plaid_purple
 	name = "blue purple skirt"
 	desc = "A preppy purple skirt with a white blouse."
 	icon_state = "plaid_purple"
 	item_color = "plaid_purple"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 //wedding stuff
 
