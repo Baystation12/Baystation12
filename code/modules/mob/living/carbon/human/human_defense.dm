@@ -91,7 +91,7 @@ emp_act
 
 	var/datum/organ/external/organ = get_organ(check_zone(def_zone))
 
-	var/armor = checkarmor(organ, "bullet")
+	var/armor = getarmor_organ(organ, "bullet")
 
 	if((P.embed && prob(20 + max(P.damage - armor, -10))) && P.damage_type == BRUTE)
 		var/obj/item/weapon/shard/shrapnel/SP = new()
@@ -113,19 +113,20 @@ emp_act
 
 	if(def_zone)
 		if(isorgan(def_zone))
-			return checkarmor(def_zone, type)
-		var/datum/organ/external/affecting = get_organ(ran_zone(def_zone))
-		return checkarmor(affecting, type)
+			return getarmor_organ(def_zone, type)
+		var/datum/organ/external/affecting = get_organ(def_zone)
+		return getarmor_organ(affecting, type)
 		//If a specific bodypart is targetted, check how that bodypart is protected and return the value.
 
 	//If you don't specify a bodypart, it checks ALL your bodyparts for protection, and averages out the values
 	for(var/datum/organ/external/organ in organs)
-		armorval += checkarmor(organ, type)
+		armorval += getarmor_organ(organ, type)
 		organnum++
 	return (armorval/max(organnum, 1))
 
 
-/mob/living/carbon/human/proc/checkarmor(var/datum/organ/external/def_zone, var/type)
+//this proc returns the armour value for a particular external organ.
+/mob/living/carbon/human/proc/getarmor_organ(var/datum/organ/external/def_zone, var/type)
 	if(!type)	return 0
 	var/protection = 0
 	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform)
@@ -230,10 +231,16 @@ emp_act
 		visible_message("\red <B>[src] has been attacked in the [hit_area] with [I.name] by [user]!</B>")
 
 	var/armor = run_armor_check(affecting, "melee", "Your armor has protected your [hit_area].", "Your armor has softened hit to your [hit_area].")
+	var/weapon_sharp = is_sharp(I)
+	var/weapon_edge = has_edge(I)
+	if ((weapon_sharp || weapon_edge) && prob(getarmor(def_zone, "melee")))
+		weapon_sharp = 0
+		weapon_edge = 0
+	
 	if(armor >= 2)	return 0
 	if(!I.force)	return 0
 
-	apply_damage(I.force, I.damtype, affecting, armor , is_sharp(I), has_edge(I), I)
+	apply_damage(I.force, I.damtype, affecting, armor , sharp=weapon_sharp, edge=weapon_edge, I)
 
 	var/bloody = 0
 	if(((I.damtype == BRUTE) || (I.damtype == HALLOSS)) && prob(25 + (I.force * 2)))
