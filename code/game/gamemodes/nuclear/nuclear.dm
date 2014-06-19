@@ -186,6 +186,8 @@
 
 
 /datum/game_mode/proc/forge_syndicate_objectives(var/datum/mind/syndicate)
+	if (config.objectives_disabled)
+		return
 	var/datum/objective/nuclear/syndobj = new
 	syndobj.owner = syndicate
 	syndicate.objectives += syndobj
