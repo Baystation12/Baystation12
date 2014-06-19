@@ -160,7 +160,7 @@
 
 			chambered.BB.on_hit(M)
 			if (chambered.BB.damage_type != HALLOSS)
-				user.apply_damage(chambered.BB.damage*2.5, chambered.BB.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [chambered.BB]")
+				user.apply_damage(chambered.BB.damage*2.5, chambered.BB.damage_type, "head", used_weapon = "Point blank shot in the mouth with \a [chambered.BB]", sharp=1)
 				user.death()
 			else
 				user << "<span class = 'notice'>Ow...</span>"

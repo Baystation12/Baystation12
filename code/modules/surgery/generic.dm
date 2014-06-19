@@ -35,8 +35,9 @@
 	max_duration = 110
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 0 && target_zone != "mouth"
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 0 && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -74,8 +75,9 @@
 	max_duration = 120
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 0 && target_zone != "mouth"
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 0 && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -114,10 +116,9 @@
 	max_duration = 110
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		if(isslime(target))
-			return 0
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 0 && target_zone != "mouth"
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 0 && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -153,8 +154,9 @@
 	max_duration = 60
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open && (affected.status & ORGAN_BLEEDING)
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open && (affected.status & ORGAN_BLEEDING)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -187,8 +189,9 @@
 	max_duration = 40
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 1 && !(affected.status & ORGAN_BLEEDING)
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 1 && !(affected.status & ORGAN_BLEEDING)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -228,7 +231,7 @@
 			msg = "\red [user]'s hand slips, damaging several organs in [target]'s lower abdomen with \the [tool]"
 			self_msg = "\red Your hand slips, damaging several organs in [target]'s lower abdomen with \the [tool]!"
 		user.visible_message(msg, self_msg)
-		target.apply_damage(12, BRUTE, affected)
+		target.apply_damage(12, BRUTE, affected, sharp=1)
 
 /datum/surgery_step/generic/cauterize
 	allowed_tools = list(
@@ -242,8 +245,9 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open && target_zone != "mouth"
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open && target_zone != "mouth"
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)

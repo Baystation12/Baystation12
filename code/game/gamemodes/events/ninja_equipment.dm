@@ -1367,17 +1367,20 @@ It is possible to destroy the net by the occupant or someone else.
 				playsound(M.loc, 'sound/effects/sparks4.ogg', 50, 1)
 				anim(M.loc,M,'icons/mob/mob.dmi',,"phaseout",,M.dir)
 
-			M.loc = pick(holdingfacility)//Throw mob in to the holding facility.
-			M << "\red You appear in a strange place!"
+			if(holdingfacility.len)
+				M.loc = pick(holdingfacility)//Throw mob in to the holding facility.
+				spawn(0)
+					var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+					spark_system.set_up(5, 0, M.loc)
+					spark_system.start()
+					playsound(M.loc, 'sound/effects/phasein.ogg', 25, 1)
+					playsound(M.loc, 'sound/effects/sparks2.ogg', 50, 1)
+					anim(M.loc,M,'icons/mob/mob.dmi',,"phasein",,M.dir)
+					del(src)//Wait for everything to finish, delete the net. Else it will stop everything once net is deleted, including the spawn(0).
+			else
+				M.loc = null
 
-			spawn(0)
-				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-				spark_system.set_up(5, 0, M.loc)
-				spark_system.start()
-				playsound(M.loc, 'sound/effects/phasein.ogg', 25, 1)
-				playsound(M.loc, 'sound/effects/sparks2.ogg', 50, 1)
-				anim(M.loc,M,'icons/mob/mob.dmi',,"phasein",,M.dir)
-				del(src)//Wait for everything to finish, delete the net. Else it will stop everything once net is deleted, including the spawn(0).
+			M << "\red You appear in a strange place!"
 
 			for(var/mob/O in viewers(src, 3))
 				O.show_message(text("[] vanished!", M), 1, text("You hear sparks flying!"), 2)

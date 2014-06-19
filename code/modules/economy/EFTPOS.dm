@@ -51,6 +51,9 @@
 		stampoverlay.icon_state = "paper_stamp-cent"
 		if(!R.stamped)
 			R.stamped = new
+		R.offset_x += 0
+		R.offset_y += 0
+		R.ico += "paper_stamp-cent"
 		R.stamped += /obj/item/weapon/stamp
 		R.overlays += stampoverlay
 		R.stamps += "<HR><i>This paper has been stamped by the EFTPOS device.</i>"

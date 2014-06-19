@@ -184,6 +184,29 @@
 /mob/living/carbon/human/proc/GetSpecialVoice()
 	return special_voice
 
+
+/* 
+   ***Deprecated***
+   let this be handled at the hear_say or hear_radio proc
+   This is left in for robot speaking when humans gain binary channel access until I get around to rewriting
+   robot_talk() proc.
+   There is no language handling build into it however there is at the /mob level so we accept the call
+   for it but just ignore it.
+*/
+
+/mob/living/carbon/human/say_quote(var/message, var/datum/language/speaking = null)
+	var/verb = "says"
+	var/ending = copytext(message, length(message))
+	if(ending=="!")
+		verb=pick("exclaims","shouts","yells")
+	else if(ending=="?")
+		verb="asks"
+
+	return verb
+
+	
+
+
 /mob/living/carbon/human/proc/handle_speech_problems(var/message)
 	var/list/returns[3]
 	var/verb = "says"

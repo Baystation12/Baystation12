@@ -75,7 +75,7 @@
 		factory.spores += src
 	..()
 
-/mob/living/simple_animal/hostile/blobspore/Die()
+/mob/living/simple_animal/hostile/blobspore/death()
 // On death, create a small smoke of harmful gas (s-Acid)
 	var/datum/effect/effect/system/smoke_spread/chem/S = new
 	var/turf/location = get_turf(src)

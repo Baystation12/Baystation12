@@ -80,6 +80,7 @@
 					p.loc = src.loc
 					p.update_icon()
 					p.icon_state = "paper_words"
+					p.name = bundle.name
 					p.pixel_y = rand(-8, 8)
 					p.pixel_x = rand(-9, 9)
 					sleep(15*j)

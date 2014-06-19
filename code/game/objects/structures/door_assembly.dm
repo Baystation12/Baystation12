@@ -206,21 +206,19 @@ obj/structure/door_assembly
 	else if(istype(W, /obj/item/weapon/airlock_electronics) && state == 1 && W:icon_state != "door_electronics_smoked")
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		user.visible_message("[user] installs the electronics into the airlock assembly.", "You start to install electronics into the airlock assembly.")
-		user.drop_item()
-		W.loc = src
 
 		if(do_after(user, 40))
 			if(!src) return
+			user.drop_item()
+			W.loc = src
 			user << "\blue You installed the airlock electronics!"
 			src.state = 2
 			src.name = "Near finished Airlock Assembly"
 			src.electronics = W
-		else
-			W.loc = src.loc
 
 	else if(istype(W, /obj/item/weapon/crowbar) && state == 2 )
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
-		user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to install electronics into the airlock assembly.")
+		user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove the electronics from the airlock assembly.")
 
 		if(do_after(user, 40))
 			if(!src) return

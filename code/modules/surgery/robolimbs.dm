@@ -30,8 +30,9 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && !(affected.status & ORGAN_CUT_AWAY)
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return !(affected.status & ORGAN_CUT_AWAY)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -64,8 +65,9 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.status & ORGAN_CUT_AWAY && affected.open < 3 && !(affected.status & ORGAN_ATTACHABLE)
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.status & ORGAN_CUT_AWAY && affected.open < 3 && !(affected.status & ORGAN_ATTACHABLE)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -85,7 +87,7 @@
 			affected = affected.parent
 			user.visible_message("\red [user]'s hand slips, tearing flesh on [target]'s [affected.display_name]!", \
 			"\red Your hand slips, tearing flesh on [target]'s [affected.display_name]!")
-			target.apply_damage(10, BRUTE, affected)
+			target.apply_damage(10, BRUTE, affected, sharp=1)
 
 
 /datum/surgery_step/limb/prepare
@@ -100,8 +102,9 @@
 	max_duration = 70
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 3
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 3
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -134,12 +137,13 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/obj/item/robot_parts/p = tool
-		if (p.part)
-			if (!(target_zone in p.part))
-				return 0
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.status & ORGAN_ATTACHABLE
+		if(..())
+			var/obj/item/robot_parts/p = tool
+			if (p.part)
+				if (!(target_zone in p.part))
+					return 0
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.status & ORGAN_ATTACHABLE
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -166,4 +170,4 @@
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		user.visible_message("\red [user]'s hand slips, damaging connectors on [target]'s [affected.display_name]!", \
 		"\red Your hand slips, damaging connectors on [target]'s [affected.display_name]!")
-		target.apply_damage(10, BRUTE, affected)
+		target.apply_damage(10, BRUTE, affected, sharp=1)

@@ -82,7 +82,7 @@
 
 
 	if(health < 1)
-		Die()
+		death()
 
 	if(health > maxHealth)
 		health = maxHealth
@@ -405,13 +405,11 @@
 	statpanel("Status")
 	stat(null, "Health: [round((health / maxHealth) * 100)]%")
 
-/mob/living/simple_animal/proc/Die()
-	living_mob_list -= src
-	dead_mob_list += src
+/mob/living/simple_animal/death()
 	icon_state = icon_dead
 	stat = DEAD
 	density = 0
-	return
+	return ..()
 
 /mob/living/simple_animal/ex_act(severity)
 	if(!blinded)

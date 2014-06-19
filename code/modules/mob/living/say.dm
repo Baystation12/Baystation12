@@ -103,7 +103,7 @@ var/list/department_radio_keys = list(
 				var/obj/O = I
 				hearturfs += O.locs[1]
 				objects |= O
-		
+
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && M.client && (M.client.prefs.toggles & CHAT_GHOSTEARS))
 				listening |= M
@@ -113,7 +113,8 @@ var/list/department_radio_keys = list(
 
 		for(var/obj/O in objects)
 			spawn(0)
-				O.hear_talk(src, message, verb, speaking)	
+				if(O) //It's possible that it could be deleted in the meantime.
+					O.hear_talk(src, message, verb, speaking)
 
 	var/speech_bubble_test = say_test(message)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
