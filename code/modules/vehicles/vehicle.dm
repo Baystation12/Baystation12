@@ -36,7 +36,7 @@
 	//spawn the cell you want in each vehicle
 
 /obj/vehicle/Move()
-	if(world.timeofday > l_move_time + move_delay)
+	if(world.time > l_move_time + move_delay)
 		if(on && powered && cell.charge < power_use)
 			turn_off()
 
