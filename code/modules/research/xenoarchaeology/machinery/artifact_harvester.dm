@@ -12,6 +12,7 @@
 	var/obj/item/weapon/anobattery/inserted_battery
 	var/obj/machinery/artifact/cur_artifact
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
+	var/last_process = 0
 
 /obj/machinery/artifact_harvester/New()
 	..()
@@ -74,8 +75,9 @@
 		return
 
 	if(harvesting > 0)
-		//gain a bit of charge
-		inserted_battery.stored_charge += 0.5
+		//charge at 33% consumption rate
+		inserted_battery.stored_charge += (last_process - last_process) / 3
+		last_process = world.time
 
 		//check if we've finished
 		if(inserted_battery.stored_charge >= inserted_battery.capacity)
@@ -135,7 +137,7 @@
 			mundane++
 			break
 
-		if(analysed.being_used)
+		if(analysed && analysed.being_used)
 			var/message = "<b>[src]</b> states, \"Cannot harvest. Too much interference.\""
 			src.visible_message(message)
 		else if(articount == 1 && !mundane)
@@ -162,6 +164,7 @@
 					icon_state = "incubator_on"
 					var/message = "<b>[src]</b> states, \"Beginning artifact energy harvesting.\""
 					src.visible_message(message)
+					last_process = world.time
 
 					//duplicate the artifact's effect datum
 					if(!inserted_battery.battery_effect)
