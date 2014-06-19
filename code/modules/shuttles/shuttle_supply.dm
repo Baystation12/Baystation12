@@ -6,6 +6,8 @@
 /datum/shuttle/ferry/supply
 	var/away_location = 1	//the location to hide at while pretending to be in-transit
 	var/arrive_time = 0
+	var/late_chance = 80
+	var/max_late_time = 300
 
 /datum/shuttle/ferry/supply/short_jump(var/area/origin,var/area/destination)
 	if(moving_status != SHUTTLE_IDLE) 
@@ -47,6 +49,10 @@
 		if (destination != away_area)
 			move(away_area, destination)
 
+		//late
+		if (prob(late_chance))
+			sleep(rand(0,max_late_time))
+		
 		moving_status = SHUTTLE_IDLE
 		
 		if (!at_station())	//at centcom
