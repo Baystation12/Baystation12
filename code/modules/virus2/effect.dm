@@ -785,7 +785,7 @@ var/list/compatible_mobs = list(/mob/living/carbon/human, /mob/living/carbon/mon
 	name = "Watery Eyes"
 	stage = 1
 	activate(var/mob/living/carbon/mob,var/multiplier)
-		mob << "<span class='warning'Your eyes sting and water!</span>"
+		mob << "<span class='warning'>Your eyes sting and water!</span>"
 
 /datum/disease2/effect/wheeze
 	name = "Wheezing"
