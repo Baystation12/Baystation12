@@ -293,6 +293,7 @@
 						var/splint = ""
 						var/internal_bleeding = ""
 						var/lung_ruptured = ""
+						var/infection = ""
 						for(var/datum/wound/W in e.wounds) if(W.internal)
 							internal_bleeding = "<br>Internal bleeding"
 							break
@@ -308,6 +309,13 @@
 							robot = "Prosthetic:"
 						if(e.open)
 							open = "Open:"
+						switch (e.germ_level)
+							if (150 to 500)
+								infection = "Infection - Minor:"
+							if (500 to INFECTION_LEVEL_TWO)
+								infection = "Infection - Severe:"
+							if (INFECTION_LEVEL_TWO to INFINITY)
+								infection = "Infection - Septic:"
 
 						var/unknown_body = 0
 						for(var/I in e.implants)

@@ -28,6 +28,9 @@
 	var/heat_level_1 = 360  // Heat damage level 1 above this point.
 	var/heat_level_2 = 400  // Heat damage level 2 above this point.
 	var/heat_level_3 = 1000 // Heat damage level 2 above this point.
+	
+	var/body_temperature = 310.15	//non-IS_SYNTHETIC species will try to stabilize at this temperature. (also affects temperature processing)
+	var/synth_temp_gain = 0			//IS_SYNTHETIC species will gain this much temperature every second
 
 	var/darksight = 2
 	var/hazard_high_pressure = HAZARD_HIGH_PRESSURE   // Dangerously high pressure.
@@ -279,6 +282,8 @@
 	heat_level_2 = 3000
 	heat_level_3 = 4000
 
+	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
+
 	flags = IS_WHITELISTED | NO_BREATHE | REQUIRE_LIGHT | NO_SCAN | IS_PLANT | RAD_ABSORB | NO_BLOOD | IS_SLOW | NO_PAIN
 
 	blood_color = "#004400"
@@ -326,6 +331,8 @@
 	heat_level_1 = 2000
 	heat_level_2 = 3000
 	heat_level_3 = 4000
+	
+	synth_temp_gain = 6.7 //round(40 / BODYTEMP_COLD_DIVISOR, 0.1)	//this should cause IPCs to stabilize at ~60 C in a 20 C environment. Based on some CPU operating temperatures
 
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
 

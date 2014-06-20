@@ -40,8 +40,6 @@
 
 	var/obj/item/hidden = null
 	var/list/implants = list()
-	// INTERNAL germs inside the organ, this is BAD if it's greater 0
-	var/germ_level = 0
 
 	// how often wounds should be updated, a higher number means less often
 	var/wound_update_accuracy = 1
@@ -345,7 +343,7 @@ This function completely restores a damaged organ to perfect condition.
 		//Syncing germ levels with external wounds
 		for(var/datum/wound/W in wounds)
 			//Open wounds can become infected
-			if (owner.germ_level > W.germ_level && W.can_infect())
+			if (owner.germ_level > W.germ_level && W.infection_check())
 				W.germ_level++
 			
 			//Infected wounds raise the organ's germ level
@@ -356,12 +354,17 @@ This function completely restores a damaged organ to perfect condition.
 		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
 		if (antibiotics > 5)
 			if (prob(4*antibiotics)) germ_level--
+		
+		if(germ_level > INFECTION_LEVEL_ONE)
+			//having an infection raises your body temperature
+			var/temperature_increase = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/INFECTION_LEVEL_TWO, 1)
+			owner.bodytemperature += temperature_increase
 			
-		if(germ_level > GANGREN_LEVEL_ONE && prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
-			germ_level += 1
-			owner.adjustToxLoss(1)
+			if(prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
+				germ_level += 1
+				owner.adjustToxLoss(1)
 			
-		if(germ_level > GANGREN_LEVEL_TWO && antibiotics < 30)	//overdosing is necessary to stop severe infections
+		if(germ_level > INFECTION_LEVEL_TWO && antibiotics < 30)	//overdosing is necessary to stop severe infections
 			germ_level++
 			owner.adjustToxLoss(1)
 
@@ -691,9 +694,9 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/proc/get_damage()	//returns total damage
 	return max(brute_dam + burn_dam - perma_injury, perma_injury)	//could use health?
 
-/datum/organ/external/proc/is_infected()
+/datum/organ/external/proc/has_infected_wound()
 	for(var/datum/wound/W in wounds)
-		if(W.germ_level > 100)
+		if(W.germ_level > 150)
 			return 1
 	return 0
 

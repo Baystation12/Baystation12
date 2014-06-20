@@ -5,6 +5,9 @@
 	var/list/datum/autopsy_data/autopsy_data = list()
 	var/list/trace_chemicals = list() // traces of chemicals in the organ,
 									  // links chemical IDs to number of ticks for which they'll stay in the blood
+									  
+	var/germ_level = 0		// INTERNAL germs inside the organ, this is BAD if it's greater than INFECTION_LEVEL_ONE
+	
 	proc/process()
 		return 0
 
@@ -82,7 +85,7 @@
 				//Moving makes open wounds get infected much faster
 				if (E.wounds.len)
 					for(var/datum/wound/W in E.wounds)
-						if (W.can_infect())
+						if (W.infection_check())
 							W.germ_level += 1
 
 			//Special effects for limbs.

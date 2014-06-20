@@ -674,20 +674,27 @@
 			else
 				loc_temp = environment.temperature
 
-			if(adjusted_pressure < species.warning_low_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.phoron < MOLES_PHORON_VISIBLE)
+			if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1 && environment.phoron < MOLES_PHORON_VISIBLE)
 				return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
 
 			//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection
-			if(loc_temp < species.cold_level_1)			//Place is colder than we are
+			var/temp_adj = 0
+			if(loc_temp < bodytemperature)			//Place is colder than we are
 				var/thermal_protection = get_cold_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 				if(thermal_protection < 1)
-					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR), BODYTEMP_COOLING_MAX)
-					bodytemperature += amt
-			else if (loc_temp > species.heat_level_1)			//Place is hotter than we are
+					temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_COLD_DIVISOR)	//this will be negative
+			else if (loc_temp > bodytemperature)			//Place is hotter than we are
 				var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 				if(thermal_protection < 1)
-					var/amt = min((1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR), BODYTEMP_HEATING_MAX)
-					bodytemperature += amt
+					temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
+			
+			//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
+			var/relative_density = environment.total_moles() / MOLES_CELLSTANDARD
+			temp_adj *= relative_density
+			
+			if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
+			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
+			bodytemperature += temp_adj
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 		if(bodytemperature > species.heat_level_1)
@@ -738,12 +745,8 @@
 				bodytemperature += 0.5 * TEMPERATURE_DAMAGE_COEFFICIENT //Synthetics suffer overheating in a vaccuum. ~Z
 
 		else
-
-			if(species && species.flags & IS_SYNTHETIC)
-				bodytemperature += 1 * TEMPERATURE_DAMAGE_COEFFICIENT
-
 			if( !(COLD_RESISTANCE in mutations))
-				adjustBruteLoss( LOW_PRESSURE_DAMAGE )
+				apply_damage(LOW_PRESSURE_DAMAGE, BRUTE, used_weapon = "Low Pressure")
 				pressure_alert = -2
 			else
 				pressure_alert = -1
@@ -770,23 +773,27 @@
 		temp_change = (temperature - current)
 		return temp_change
 	*/
-
-	proc/stabilize_temperature_from_calories()
-		var/body_temperature_difference = 310.15 - bodytemperature
+	
+	proc/stabilize_body_temperature()
+		if (species && species.flags & IS_SYNTHETIC)
+			bodytemperature += species.synth_temp_gain		//that CPU/posibrain just keeps putting out heat.
+			return
+	
+		var/body_temperature_difference = species.body_temperature - bodytemperature
 		if (abs(body_temperature_difference) < 0.5)
 			return //fuck this precision
 		switch(bodytemperature)
-			if(-INFINITY to 260.15) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
+			if(-INFINITY to species.cold_level_1) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
 				if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
 					nutrition -= 2
 				var/recovery_amt = max((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
 //				log_debug("Cold. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
 				bodytemperature += recovery_amt
-			if(260.15 to 360.15)
+			if(species.cold_level_1 to species.heat_level_1)
 				var/recovery_amt = body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR
 //				log_debug("Norm. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
 				bodytemperature += recovery_amt
-			if(360.15 to INFINITY) //360.15 is 310.15 + 50, the temperature where you start to feel effects.
+			if(species.heat_level_1 to INFINITY) //360.15 is 310.15 + 50, the temperature where you start to feel effects.
 				//We totally need a sweat system cause it totally makes sense...~
 				var/recovery_amt = min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
 //				log_debug("Hot. Difference = [body_temperature_difference]. Recovering [recovery_amt]")
@@ -1087,7 +1094,7 @@
 		else				//ALIVE. LIGHTS ARE ON
 			updatehealth()	//TODO
 			if(!in_stasis)
-				stabilize_temperature_from_calories()	//Body temperature adjusts itself
+				stabilize_body_temperature()	//Body temperature adjusts itself
 				handle_organs()	//Optimized.
 				handle_blood()
 
