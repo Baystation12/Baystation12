@@ -59,7 +59,7 @@
 	if ((proj_sharp || proj_edge) && prob(getarmor(def_zone, P.flag)))
 		proj_sharp = 0
 		proj_edge = 0
-	
+
 	if(!P.nodamage)
 		apply_damage(P.damage, P.damage_type, def_zone, absorb, 0, P, sharp=proj_sharp, edge=proj_edge)
 	P.on_hit(src, absorb, def_zone)
@@ -168,10 +168,13 @@
 	var/oxy=0
 	var/turf/T=loc
 	if(istype(T))
+		if(istype(T,/turf/space))
+			ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
+			return 1
 		var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
 		if(G)
 			oxy=G.oxygen
-	if(oxy < 1 || fire_stacks <= 0)
+	if(oxy < 10 || fire_stacks <= 0)
 		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
 		return 1
 	var/turf/location = get_turf(src)
