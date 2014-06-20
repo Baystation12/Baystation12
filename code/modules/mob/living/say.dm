@@ -487,11 +487,6 @@ var/list/department_radio_keys = list(
 			del(B)
 		*/
 
-	//talking items
-	for(var/obj/item/weapon/O in view(3,src))
-		if(O.listening_to_players)
-			O.catchMessage(message, src)
-
 	log_say("[name]/[key] : [message]")
 
 /obj/effect/speech_bubble
