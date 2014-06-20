@@ -61,73 +61,174 @@
 	if(config && config.log_hrefs && href_logfile)
 		href_logfile << "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>"
 
-	if(href_list["KarmaBuy"])
-		var/karma=verify_karma()
-		switch(href_list["KarmaBuy"])
-			if("1")
-				if(karma <5)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Barber",5)
-			if("2")
-				if(karma <5)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Brig Physician",5)
-			if("3")
-				if(karma <30)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Nanotrasen Representative",30)
-			if("4")
-				if(karma <30)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Customs Officer",30)
-			if("5")
-				if(karma <30)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Blueshield",30)
-			if("6")
-				if(karma <30)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Mechanic",30)
-			if("7")
-				if(karma <45)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_job_unlock("Magistrate",45)
+	switch(href_list["karmashop"])
+		if("tab")
+			karma_tab = text2num(href_list["tab"])
+			karmashopmenu()
+			return
+		if("shop")
+			if(href_list["KarmaBuy"])
+				var/karma=verify_karma()
+				switch(href_list["KarmaBuy"])
+					if("1")
+						if(karma <5)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Barber",5)
+							return
+					if("2")
+						if(karma <5)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Brig Physician",5)
+							return
+					if("3")
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Nanotrasen Representative",30)
+							return
+					if("4")
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Customs Officer",30)
+							return
+					if("5")
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Blueshield",30)
+							return
+					if("6")
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Mechanic",30)
+							return
+					if("7")
+						if(karma <45)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Magistrate",45)
+							return
+			if(href_list["KarmaBuy2"])
+				var/karma=verify_karma()
+				switch(href_list["KarmaBuy2"])
+					if("1")
+						if(karma <15)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_species_unlock("Machine",15)
+							return
+					if("2")
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_species_unlock("Kidan",30)
+							return
+					if("3")
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_species_unlock("Grey",30)
+							return
+					if("4")
+						if(karma <45)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_species_unlock("Vox",45)
+							return
+					if("5")
+						if(karma <45)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_species_unlock("Slime People",45)
+							return
+			if(href_list["KarmaBuy3"])
+				var/karma=verify_karma()
+				switch(href_list["KarmaBuy3"])
+					if("1")
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Tajaran Ambassador",30)
+							return
+					if("2")
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Unathi Ambassador",30)
+							return
+					if("3")
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Skrell Ambassador",30)
+							return
+					if("4")
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Diona Ambassador",30)
+							return
+					if("5")
+						if(!is_alien_whitelisted(usr,"Kidan"))
+							usr << "You need to have unlocked Kidan first!"
+							return
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Kidan Ambassador",30)
+							return
+					if("6")
+						if(!is_alien_whitelisted(usr,"Slime People"))
+							usr << "You need to have unlocked Slime People first!"
+							return
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Slime People Ambassador",30)
+							return
+					if("7")
+						if(!is_alien_whitelisted(usr,"Grey"))
+							usr << "You need to have unlocked Grey first!"
+							return
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Grey Ambassador",30)
+							return
+					if("8")
+						if(!is_alien_whitelisted(usr,"Vox"))
+							usr << "You need to have unlocked Vox first!"
+							return
+						if(karma <30)
+							usr << "You do not have enough karma!"
+							return
+						else
+							src.DB_job_unlock("Vox Ambassador",30)
+							return
 
-	if(href_list["KarmaBuy2"])
-		var/karma=verify_karma()
-		switch(href_list["KarmaBuy2"])
-			if("1")
-				if(karma <15)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_species_unlock("Machine",15)
-			if("2")
-				if(karma <30)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_species_unlock("Kidan",30)
-			if("3")
-				if(karma <30)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_species_unlock("Grey",30)
-			if("4")
-				if(karma <45)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_species_unlock("Vox",45)
-			if("5")
-				if(karma <45)
-					usr << "You do not have enough karma!"
-				else
-					src.DB_species_unlock("Slime People",45)
 
 	switch(href_list["_src_"])
 		if("holder")	hsrc = holder

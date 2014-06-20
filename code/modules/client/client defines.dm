@@ -50,7 +50,7 @@
 
 	var/karma = 0
 	var/karma_spent = 0
-
+	var/karma_tab = 0
 	/////////////////////////////////////////////
 	// /vg/: MEDIAAAAAAAA
 	// Set on login.
