@@ -28,8 +28,9 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && !(affected.status & ORGAN_CUT_AWAY)
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return !(affected.status & ORGAN_CUT_AWAY)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts peeling back tattered flesh where [target]'s head used to be with \the [tool].", \
@@ -61,8 +62,9 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.status & ORGAN_CUT_AWAY && affected.open < 3 && !(affected.status & ORGAN_ATTACHABLE)
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.status & ORGAN_CUT_AWAY && affected.open < 3 && !(affected.status & ORGAN_ATTACHABLE)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -94,8 +96,9 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 3
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 3
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] is stapling and suturing flesh into place in [target]'s esophagal and vocal region with \the [tool].", \
@@ -128,8 +131,9 @@
 	max_duration = 70
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.open == 4
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.open == 4
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts adjusting area around [target]'s neck with \the [tool].", \
@@ -162,8 +166,9 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/head = target.get_organ(target_zone)
-		return ..() && head.status & ORGAN_ATTACHABLE
+		if(..())
+			var/datum/organ/external/head = target.get_organ(target_zone)
+			return head.status & ORGAN_ATTACHABLE
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("[user] starts attaching [tool] to [target]'s reshaped neck.", \

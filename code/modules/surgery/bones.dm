@@ -15,6 +15,8 @@
 	max_duration = 60
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if (!hasorgans(target))
+			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		return affected.open == 2 && affected.stage == 0
 
@@ -47,6 +49,8 @@
 	max_duration = 70
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if (!hasorgans(target))
+			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		return affected.name != "head" && affected.open == 2 && affected.stage == 1
 
@@ -84,6 +88,8 @@
 	max_duration = 70
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if (!hasorgans(target))
+			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		return affected.name == "head" && affected.open == 2 && affected.stage == 1
 
@@ -118,6 +124,8 @@
 	max_duration = 60
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if (!hasorgans(target))
+			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		return affected.open == 2 && affected.stage == 2
 

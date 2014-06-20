@@ -212,6 +212,11 @@ datum/preferences
 
 			preview_icon.Blend(temp, ICON_OVERLAY)
 
+		//Tail
+		if(current_species && (current_species.flags & HAS_TAIL))
+			var/icon/temp = new/icon("icon" = 'icons/effects/species.dmi', "icon_state" = "[current_species.tail]_s")
+			preview_icon.Blend(temp, ICON_OVERLAY)
+		
 		// Skin color
 		if(current_species && (current_species.flags & HAS_SKIN_COLOR))
 			preview_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)

@@ -293,6 +293,7 @@
 	var/max_pill_count = 20
 
 /obj/machinery/chem_master/New()
+	..()
 	var/datum/reagents/R = new/datum/reagents(100)
 	reagents = R
 	R.my_atom = src

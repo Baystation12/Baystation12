@@ -16,9 +16,11 @@
 	Note that this proc can be overridden, and is in the case of screen objects.
 */
 /atom/Click(location,control,params)
-	usr.ClickOn(src, params)
+	if(src)
+		usr.ClickOn(src, params)
 /atom/DblClick(location,control,params)
-	usr.DblClickOn(src,params)
+	if(src)
+		usr.DblClickOn(src,params)
 
 /*
 	Standard mob ClickOn()

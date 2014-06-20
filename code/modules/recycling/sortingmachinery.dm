@@ -234,20 +234,8 @@
 	flush()
 		flushing = 1
 		flick("intake-closing", src)
-		var/deliveryCheck = 0
 		var/obj/structure/disposalholder/H = new()	// virtual holder object which actually
 													// travels through the pipes.
-		for(var/obj/structure/bigDelivery/O in src)
-			deliveryCheck = 1
-			if(O.sortTag == 0)
-				O.sortTag = 1
-		for(var/obj/item/smallDelivery/O in src)
-			deliveryCheck = 1
-			if (O.sortTag == 0)
-				O.sortTag = 1
-		if(deliveryCheck == 0)
-			H.destinationTag = 1
-
 		air_contents = new()		// new empty gas resv.
 
 		sleep(10)
