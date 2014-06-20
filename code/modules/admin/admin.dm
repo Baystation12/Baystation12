@@ -8,7 +8,7 @@ var/global/nologevent = 0
 	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	log_adminwarn(msg)
 	for(var/client/C in admins)
-		if(R_ADMIN & C.holder.rights)
+		if(R_SERVER & C.holder.rights)
 			C << msg
 
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
