@@ -72,12 +72,18 @@
 			if(E.status & ORGAN_BROKEN && !(E.status & ORGAN_SPLINTED) )
 				broken = 1
 
+			if (!lying && world.time - l_move_time < 15)
 			//Moving around with fractured ribs won't do you any good
-			if (broken && E.internal_organs && prob(15))
-				if (!lying && world.time - l_move_time < 15)
+				if (broken && E.internal_organs && prob(15))
 					var/datum/organ/internal/I = pick(E.internal_organs)
 					custom_pain("You feel broken bones moving in your [E.display_name]!", 1)
 					I.take_damage(rand(3,5))
+				
+				//Moving makes open wounds get infected much faster
+				if (E.wounds.len)
+					for(var/datum/wound/W in E.wounds)
+						if (W.can_infect())
+							W.germ_level += 1
 
 			//Special effects for limbs.
 			if(E.name in list("l_hand","l_arm","r_hand","r_arm"))

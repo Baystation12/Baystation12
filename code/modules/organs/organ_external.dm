@@ -295,7 +295,10 @@ This function completely restores a damaged organ to perfect condition.
 	if(last_dam != brute_dam + burn_dam) // Process when we are fully healed up.
 		last_dam = brute_dam + burn_dam
 		return 1
-	last_dam = brute_dam + burn_dam
+	else
+		last_dam = brute_dam + burn_dam
+	if(germ_level > GANGREN_LEVEL_ONE)
+		return 1
 	return 0
 
 /datum/organ/external/process()
@@ -331,31 +334,34 @@ This function completely restores a damaged organ to perfect condition.
 	return
 
 //Updating germ levels. Handles organ germ levels and necrosis.
-#define GANGREN_LEVEL_ONE		100
-#define GANGREN_LEVEL_TWO		1000
-#define GANGREN_LEVEL_TERMINAL	2500
-#define GERM_TRANSFER_AMOUNT	germ_level/500
+//#define GERM_TRANSFER_AMOUNT	germ_level/500
 /datum/organ/external/proc/update_germs()
 
-	if(status & ORGAN_ROBOT|ORGAN_DESTROYED) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
+	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
 		germ_level = 0
 		return
 
-	if(germ_level > 0 && owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
+	if(owner.bodytemperature >= 170)	//cryo stops germs from moving and doing their bad stuffs
 		//Syncing germ levels with external wounds
 		for(var/datum/wound/W in wounds)
-			if(!W.bandaged && !W.salved)
-				W.germ_level = max(W.germ_level, germ_level)	//Wounds get all the germs
-				if (W.germ_level > germ_level)	//Badly infected wounds raise internal germ levels
-					germ_level++
-
-		if(germ_level > GANGREN_LEVEL_ONE && prob(round(germ_level/100)))
-			germ_level++
-			owner.adjustToxLoss(1)
+			//Open wounds can become infected
+			if (owner.germ_level > W.germ_level && W.can_infect())
+				W.germ_level++
+			
+			//Infected wounds raise the organ's germ level
+			W.germ_level = max(W.germ_level, germ_level)	//Wounds get all the germs
+			if (W.germ_level > germ_level)	//Badly infected wounds raise internal germ levels
+				germ_level++
 
 		if(germ_level > GANGREN_LEVEL_TWO)
 			germ_level++
 			owner.adjustToxLoss(1)
+		
+		else if(germ_level > GANGREN_LEVEL_ONE && prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
+			germ_level += 1
+			owner.adjustToxLoss(1)
+
+
 /*
 		if(germ_level > GANGREN_LEVEL_TERMINAL)
 			if (!(status & ORGAN_DEAD))
