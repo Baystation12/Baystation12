@@ -353,12 +353,13 @@ This function completely restores a damaged organ to perfect condition.
 			if (W.germ_level > germ_level)	//Badly infected wounds raise internal germ levels
 				germ_level++
 
+		if(germ_level > GANGREN_LEVEL_ONE && prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
+			germ_level += 1
+			if (prob(50))
+				owner.adjustToxLoss(1)
+			
 		if(germ_level > GANGREN_LEVEL_TWO)
 			germ_level++
-			owner.adjustToxLoss(1)
-		
-		else if(germ_level > GANGREN_LEVEL_ONE && prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
-			germ_level += 1
 			owner.adjustToxLoss(1)
 
 

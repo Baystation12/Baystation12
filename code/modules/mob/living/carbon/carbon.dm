@@ -2,8 +2,8 @@
 	..()
 	
 	// Increase germ_level regularly
-	if(germ_level < GERM_LEVEL_AMBIENT)	//if you're just standing there, you shouldn't get more germs beyond an ambient level
-		germ_level++	//increase by 1 per second
+	if(germ_level < GERM_LEVEL_AMBIENT && prob(80))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
+		germ_level++
 
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
@@ -16,7 +16,7 @@
 			src.bodytemperature += 2
 			
 		// Moving around increases germ_level faster
-		if(germ_level < GERM_LEVEL_MOVE_CAP && prob(1))
+		if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
 			germ_level++
 
 /mob/living/carbon/relaymove(var/mob/user, direction)
