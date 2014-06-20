@@ -93,7 +93,7 @@
 		user.drop_item()
 		W.loc=src
 		user << "You cram \the [W] into the nozzle of \the [src]."
-		message_admins("[user]/[user.ckey] has crammed \a [W] into a [src].")
+		msg_admin_attack("[user]/[user.ckey] has crammed \a [W] into a [src].")
 
 
 /obj/item/weapon/extinguisher/afterattack(atom/target, mob/user , flag)

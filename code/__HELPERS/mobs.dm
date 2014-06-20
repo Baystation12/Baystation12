@@ -118,5 +118,5 @@ proc/add_logs(mob/target, mob/user, what_done, var/object=null, var/addition=nul
 	if(target.client)
 		if(what_done in ignore) return
 		if(target == user)return
-		message_admins("[user.name][ismob(user) ? "([user.ckey])" : ""] [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition](<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
+		msg_admin_attack("[user.name][ismob(user) ? "([user.ckey])" : ""] [what_done] [target.name][ismob(target) ? "([target.ckey])" : ""][object ? " with [object]" : " "][addition](<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
 
