@@ -102,26 +102,49 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 
 	//send this msg to all admins
 	var/admin_number_afk = 0
+	var/list/modholders = list()
+	var/list/adminholders = list()
+	var/list/debugholders = list()
 	for(var/client/X in admins)
-		switch(selected_type)
-			if("Question")
-				if(R_MOD & X.holder.rights)
-					if(X.is_afk())
-						admin_number_afk++
+		if(R_MOD & X.holder.rights)
+			if(X.is_afk())
+				admin_number_afk++
+			modholders += X
+		if(R_ADMIN & X.holder.rights)
+			if(X.is_afk())
+				admin_number_afk++
+			adminholders += X
+		if(R_DEBUG & X.holder.rights)
+			if(X.is_afk())
+				admin_number_afk++
+			debugholders += X
+
+	switch(selected_type)
+		if("Question")
+			if(modholders.len)
+				for(var/client/X in modholders)
 					if(X.prefs.sound & SOUND_ADMINHELP)
 						X << 'sound/effects/adminhelp.ogg'
 					X << msg
-			else if("Player Complaint")
-				if(R_ADMIN & X.holder.rights)
-					if(X.is_afk())
-						admin_number_afk++
+			else
+				for(var/client/X in adminholders)
 					if(X.prefs.sound & SOUND_ADMINHELP)
 						X << 'sound/effects/adminhelp.ogg'
 					X << msg
-			else if("Bug Report")
-				if(R_DEBUG & X.holder.rights)
-					if(X.is_afk())
-						admin_number_afk++
+		else if("Player Complaint")
+			if(adminholders.len)
+				for(var/client/X in adminholders)
+					if(X.prefs.sound & SOUND_ADMINHELP)
+						X << 'sound/effects/adminhelp.ogg'
+					X << msg
+		else if("Bug Report")
+			if(debugholders.len)
+				for(var/client/X in debugholders)
+					if(X.prefs.sound & SOUND_ADMINHELP)
+						X << 'sound/effects/adminhelp.ogg'
+					X << msg
+			else
+				for(var/client/X in adminholders)
 					if(X.prefs.sound & SOUND_ADMINHELP)
 						X << 'sound/effects/adminhelp.ogg'
 					X << msg

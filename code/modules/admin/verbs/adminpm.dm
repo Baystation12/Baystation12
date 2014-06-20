@@ -178,6 +178,18 @@
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
 
+
+	var/list/modholders = list()
+	var/list/adminholders = list()
+	var/list/debugholders = list()
+	for(var/client/X in admins)
+		if(R_MOD & X.holder.rights)
+			modholders += X
+		if(R_ADMIN & X.holder.rights)
+			adminholders += X
+		if(R_DEBUG & X.holder.rights)
+			debugholders += X
+
 	//we don't use message_admins here because the sender/receiver might get it too
 	for(var/client/X in admins)
 		//check client/X is an admin and isn't the sender or recipient
@@ -188,11 +200,15 @@
 				if("Question")
 					if(X.holder.rights & (R_MOD|R_MENTOR))
 						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
+					else if(!modholders.len && X.holder.rights & R_ADMIN)
+						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
 				if("Player Complaint")
 					if(X.holder.rights & R_ADMIN)
 						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
 				if("Bug Report")
 					if(X.holder.rights & R_DEBUG)
+						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
+					else if(!debugholders.len && X.holder.rights & R_ADMIN)
 						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
 				else
 					if((X.holder.rights & R_ADMIN) || (X.holder.rights & (R_MOD|R_MENTOR)) )
