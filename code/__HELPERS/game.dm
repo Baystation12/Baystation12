@@ -28,8 +28,12 @@
 	return 0
 
 /proc/in_range(source, user)
-	if(get_dist(source, user) <= 1)
-		return 1
+	if(source:pixel_x != 0 || source:pixel_y != 0 || source:pixel_z != 0) // Placed on the wall, assumably.
+		if(get_dist(source, user) < 1)
+			return 1
+	else
+		if(get_dist(source, user) <= 1)
+			return 1
 
 	return 0 //not in range and not telekinetic
 
