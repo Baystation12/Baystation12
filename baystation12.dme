@@ -1250,6 +1250,7 @@
 #include "code\modules\research\xenoarchaeology\finds\finds_defines.dm"
 #include "code\modules\research\xenoarchaeology\finds\finds_fossils.dm"
 #include "code\modules\research\xenoarchaeology\finds\finds_misc.dm"
+#include "code\modules\research\xenoarchaeology\finds\finds_special.dm"
 #include "code\modules\research\xenoarchaeology\finds\finds_talkingitem.dm"
 #include "code\modules\research\xenoarchaeology\genetics\prehistoric_animals.dm"
 #include "code\modules\research\xenoarchaeology\genetics\prehistoric_plants.dm"
