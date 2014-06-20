@@ -8,7 +8,7 @@
 
 	var/list/Lines = list()
 
-	if(holder)
+	if(holder && R_ADMIN & holder.rights)
 		for(var/client/C in clients)
 			var/entry = "\t[C.key]"
 			if(C.holder && C.holder.fakekey)
@@ -54,6 +54,11 @@
 	if(holder)
 		for(var/client/C in admins)
 			if(R_ADMIN & C.holder.rights || (!R_MOD & C.holder.rights && !R_MENTOR & C.holder.rights))
+
+				if(C.holder.fakekey && !R_ADMIN & holder.rights)		//Mentors/Mods can't see stealthmins
+					continue
+
+
 				msg += "\t[C] is a [C.holder.rank]"
 
 				if(C.holder.fakekey)
@@ -76,15 +81,15 @@
 				modmsg += "\t[C] is a [C.holder.rank]"
 
 				if(isobserver(C.mob))
-					msg += " - Observing"
+					modmsg += " - Observing"
 				else if(istype(C.mob,/mob/new_player))
-					msg += " - Lobby"
+					modmsg += " - Lobby"
 				else
-					msg += " - Playing"
+					modmsg += " - Playing"
 
 				if(C.is_afk())
-					msg += " (AFK)"
-				msg += "\n"
+					modmsg += " (AFK)"
+				modmsg += "\n"
 				num_mods_online++
 	else
 		for(var/client/C in admins)
@@ -97,5 +102,5 @@
 				modmsg += "\t[C] is a [C.holder.rank]\n"
 				num_mods_online++
 
-	msg = "<b>Current Admins ([num_admins_online]):</b>\n" + msg + "\n<b> Current [config.mods_are_mentors ? "Mentors" : "Moderators"]([num_mods_online]):</b>\n" + modmsg
+	msg = "<b>Current Admins ([num_admins_online]):</b>\n" + msg + "\n<b> Current Mentors ([num_mods_online]):</b>\n" + modmsg
 	src << msg
