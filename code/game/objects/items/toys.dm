@@ -1,14 +1,18 @@
 /* Toys!
- * ContainsL
+ * Contains:
  *		Balloons
  *		Fake telebeacon
  *		Fake singularity
  *		Toy gun
  *		Toy crossbow
  *		Toy swords
+ *      Toy mechs
  *		Crayons
  *		Snap pops
  *		Water flower
+ *      Therapy dolls
+ *      Toddler doll
+ *      Inflatable duck
  */
 
 
@@ -579,6 +583,55 @@
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 
+/obj/item/toy/therapy_red
+	name = "red therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is red."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyred"
+	item_state = "egg4" // It's the red egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_purple
+	name = "purple therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is purple."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapypurple"
+	item_state = "egg1" // It's the magenta egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_blue
+	name = "blue therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is blue."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyblue"
+	item_state = "egg2" // It's the blue egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_yellow
+	name = "yellow therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is yellow."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyyellow"
+	item_state = "egg5" // It's the yellow egg in items_left/righthand
+	w_class = 1
+
+/obj/item/toy/therapy_orange
+	name = "orange therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is orange."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapyorange"
+	item_state = "egg4" // It's the red one again, lacking an orange item_state and making a new one is pointless
+	w_class = 1
+
+/obj/item/toy/therapy_green
+	name = "green therapy doll"
+	desc = "A toy for therapeutic and recreational purposes. This one is green."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "therapygreen"
+	item_state = "egg3" // It's the green egg in items_left/righthand
+	w_class = 1
+
+
 /* NYET.
 /obj/item/weapon/toddler
 	icon_state = "toddler"
@@ -590,6 +643,7 @@
 */
 
 //This should really be somewhere else but I don't know where. w/e
+
 /obj/item/weapon/inflatable_duck
 	name = "inflatable duck"
 	desc = "No bother to sink or swim when you can just float!"
