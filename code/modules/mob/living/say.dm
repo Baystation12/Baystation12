@@ -302,8 +302,9 @@ var/list/department_radio_keys = list(
 					if(C:r_ear) devices += C:r_ear
 				if(issilicon(src))
 					var/mob/living/silicon/Ro=src
-					if(Ro:radio)
-						devices += Ro:radio
+					if(!isAI(Ro))
+						if(Ro:radio)
+							devices += Ro:radio
 					else
 						warning("[src] has no radio!")
 				message_range = 1

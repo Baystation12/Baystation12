@@ -203,9 +203,9 @@
 		if(C.eye in hear_and_objects)
 			hear += C.mob
 
-		else if(C.mob.loc in hear_and_objects)
+		else if(C.mob && C.mob.loc in hear_and_objects)
 			hear += C.mob
-		else if(C.mob.loc.loc in hear_and_objects)
+		else if(C.mob && C.mob.loc.loc in hear_and_objects)
 			hear += C.mob
 	return hear
 
