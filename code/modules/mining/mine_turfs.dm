@@ -1,9 +1,6 @@
 /**********************Mineral deposits**************************/
 
 
-datum/controller/game_controller/var/list/artifact_spawning_turfs = list()
-var/list/artifact_spawn = list() // Runtime fix for geometry loading before controller is instantiated.
-
 /turf/simulated/mineral //wall piece
 	name = "Rock"
 	icon = 'icons/turf/walls.dmi'
@@ -479,6 +476,12 @@ var/list/artifact_spawn = list() // Runtime fix for geometry loading before cont
 		if(S.collection_mode)
 			for(var/obj/item/weapon/ore/O in contents)
 				O.attackby(W,user)
+				return
+	else if(istype(W,/obj/item/weapon/storage/bag/fossils))
+		var/obj/item/weapon/storage/bag/fossils/S = W
+		if(S.collection_mode)
+			for(var/obj/item/weapon/fossil/F in contents)
+				F.attackby(W,user)
 				return
 
 	else

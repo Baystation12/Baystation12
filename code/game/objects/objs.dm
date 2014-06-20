@@ -121,6 +121,8 @@
 
 
 /obj/proc/hear_talk(mob/M as mob, text)
+	if(talking_atom)
+		talking_atom.catchMessage(text, M)
 /*
 	var/mob/mo = locate(/mob) in src
 	if(mo)
