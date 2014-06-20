@@ -112,9 +112,9 @@
 						adminhelp(reply)													//sender has left, adminhelp instead
 				return
 
-	recieve_message = "<font color='[recieve_color]'>[type] from-<b>[recieve_pm_type][key_name(src, C, C.holder ? 1 : 0)]</b>: [msg]</font>"
+	recieve_message = "<font color='[recieve_color]'>[type] from-<b>[recieve_pm_type][key_name(src, C, C.holder ? 1 : 0, type)]</b>: [msg]</font>"
 	C << recieve_message
-	src << "<font color='blue'>[send_pm_type][type] to-<b>[key_name(C, src, holder ? 1 : 0)]</b>: [msg]</font>"
+	src << "<font color='blue'>[send_pm_type][type] to-<b>[key_name(C, src, holder ? 1 : 0, type)]</b>: [msg]</font>"
 
 	/*if(holder && !C.holder)
 		C.last_pm_recieved = world.time
@@ -187,16 +187,16 @@
 			switch(type)
 				if("Question")
 					if(X.holder.rights & (R_MOD|R_MENTOR))
-						X << "<B><font color='blue'>[type]: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)]:</B> \blue [msg]</font>" //inform X
+						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
 				if("Player Complaint")
 					if(X.holder.rights & R_ADMIN)
-						X << "<B><font color='blue'>[type]: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)]:</B> \blue [msg]</font>" //inform X
+						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
 				if("Bug Report")
 					if(X.holder.rights & R_DEBUG)
-						X << "<B><font color='blue'>[type]: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)]:</B> \blue [msg]</font>" //inform X
+						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
 				else
 					if((X.holder.rights & R_ADMIN) || (X.holder.rights & (R_MOD|R_MENTOR)) )
-						X << "<B><font color='blue'>[type]: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)]:</B> \blue [msg]</font>" //inform X
+						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
 
 /client/proc/cmd_admin_irc_pm()
 	if(prefs.muted & MUTE_ADMINHELP)
