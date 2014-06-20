@@ -297,7 +297,7 @@ This function completely restores a damaged organ to perfect condition.
 		return 1
 	else
 		last_dam = brute_dam + burn_dam
-	if(germ_level > GANGREN_LEVEL_ONE)
+	if(germ_level)
 		return 1
 	return 0
 
@@ -353,12 +353,15 @@ This function completely restores a damaged organ to perfect condition.
 			if (W.germ_level > germ_level)	//Badly infected wounds raise internal germ levels
 				germ_level++
 
+		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+		if (antibiotics > 5)
+			if (prob(4*antibiotics)) germ_level--
+			
 		if(germ_level > GANGREN_LEVEL_ONE && prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
 			germ_level += 1
-			if (prob(50))
-				owner.adjustToxLoss(1)
+			owner.adjustToxLoss(1)
 			
-		if(germ_level > GANGREN_LEVEL_TWO)
+		if(germ_level > GANGREN_LEVEL_TWO && antibiotics < 30)	//overdosing is necessary to stop severe infections
 			germ_level++
 			owner.adjustToxLoss(1)
 
