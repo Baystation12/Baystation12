@@ -1361,14 +1361,11 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 
 			if(druggy)
 				druggy = max(druggy-1, 0)
-/*
-			// Increase germ_level regularly
-			if(prob(40))
-				germ_level += 1
+
 			// If you're dirty, your gloves will become dirty, too.
 			if(gloves && germ_level > gloves.germ_level && prob(10))
 				gloves.germ_level += 1
-*/
+
 		return 1
 
 	proc/handle_regular_hud_updates()
