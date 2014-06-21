@@ -31,7 +31,7 @@
 /datum/reagent/antidepressant/citalopram
 	name = "Citalopram"
 	id = "citalopram"
-	description = "Stabilizes the mind a little."
+	description = "Stabilizes the mind a little, reducing hallucinations."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 	custom_metabolism = 0.01
@@ -39,6 +39,7 @@
 
 	on_mob_life(var/mob/living/M as mob)
 		if(!M) M = holder.my_atom
+				M.hallucination -= 10
 		if(src.volume <= 0.1) if(data != -1)
 			data = -1
 			M << "\red Your mind feels a little less stable.."
