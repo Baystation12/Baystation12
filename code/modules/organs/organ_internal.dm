@@ -11,6 +11,7 @@
 	var/min_broken_damage = 30
 	var/parent_organ = "chest"
 	var/robotic = 0 //For being a robot
+	var/germ_level = 0
 
 /datum/organ/internal/proc/rejuvenate()
 	damage=0
@@ -41,11 +42,7 @@
 	var/datum/organ/internal/eyes/E
 	var/datum/organ/internal/heart/H
 	if (!silent)
-		if(istype(E))
-			owner.custom_pain("Your eyes burn like mad!", 1)
-		if(istype(H))
-			owner.custom_pain("You feel a sudden, stabbing pain inside of your [parent.display_name]!", 1)
-		else owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
+		owner.custom_pain("Something inside your [parent.display_name] hurts a lot.", 1)
 
 /datum/organ/internal/proc/emp_act(severity)
 	switch(robotic)
@@ -102,7 +99,7 @@
 				owner.drip(10)
 			if(prob(4))
 				spawn owner.emote("me", 1, "gasps for air!")
-				owner.losebreath += 5
+				owner.losebreath += 15
 
 /datum/organ/internal/liver
 	name = "liver"

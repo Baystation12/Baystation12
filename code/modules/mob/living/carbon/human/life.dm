@@ -381,9 +381,6 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
 		if(species && (species.flags & NO_BREATHE)) return
 
-		var/datum/organ/internal/lungs/L = internal_organs["lungs"]
-		L.process()
-
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
 
@@ -1162,12 +1159,6 @@ var/global/list/brutefireloss_overlays = list("1" = image("icon" = 'icons/mob/sc
 		if(species && species.flags & NO_INTORGANS) return
 
 		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
-
-		var/datum/organ/internal/liver/liver = internal_organs["liver"]
-		liver.process()
-
-		var/datum/organ/internal/eyes/eyes = internal_organs["eyes"]
-		eyes.process()
 
 		updatehealth()
 

@@ -311,11 +311,11 @@
 							open = "Open:"
 						switch (e.germ_level)
 							if (150 to 500)
-								infection = "Infection - Minor:"
+								infection = "Light Infection:"
 							if (500 to INFECTION_LEVEL_TWO)
-								infection = "Infection - Severe:"
+								infection = "Serious Infection:"
 							if (INFECTION_LEVEL_TWO to INFINITY)
-								infection = "Infection - Septic:"
+								infection = "Septic:"
 
 						var/unknown_body = 0
 						for(var/I in e.implants)
