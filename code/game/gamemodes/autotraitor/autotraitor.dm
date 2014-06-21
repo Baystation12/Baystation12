@@ -183,16 +183,7 @@
 			//message_admins("The probability of a new traitor is [traitor_prob]%")
 			if(prob(traitor_prob))
 				message_admins("New traitor roll passed.  Making a new Traitor.")
-				forge_traitor_objectives(character.mind)
-				equip_traitor(character)
-				traitors += character.mind
-				character << "\red <B>You are the traitor.</B>"
-				character.mind.special_role = "traitor"
-				var/obj_count = 1
-				character << "\blue Your current objectives:"
-				for(var/datum/objective/objective in character.mind.objectives)
-					character << "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
-					obj_count++
+				character.mind.make_Tratior()	//TEMP: Add proper checks for loyalty here. uc_guy
 			//else
 				//message_admins("New traitor roll failed.  No new traitor.")
 	//else
