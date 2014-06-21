@@ -2,6 +2,14 @@
 	name = "clothing"
 	var/list/species_restricted = null //Only these species can wear this kit.
 
+/obj/item/clothing/New()
+	. = ..()
+	clothing_list += src
+
+/obj/item/clothing/Del()
+	clothing_list -= src
+	return ..()
+
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)
 
@@ -274,10 +282,10 @@ BLIND     // can't see anything
 	if(hastie && src.loc == user)
 		hastie.attack_hand(user)
 		return
-	
+
 	if ((ishuman(usr) || ismonkey(usr)) && src.loc == user)	//make it harder to accidentally undress yourself
 		return
-	
+
 	..()
 
 /obj/item/clothing/under/MouseDrop(obj/over_object as obj)

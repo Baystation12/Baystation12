@@ -18,6 +18,7 @@ var/global/list/surgery_steps = list()				//list of all surgery steps  |BS12
 var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
 var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
 var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
+var/global/list/clothing_list = list()					//list of all /obj/item/clothing instances in the world
 
 //Languages/species/whitelist.
 var/global/list/all_species[0]
@@ -100,7 +101,7 @@ var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Al
 	for(var/T in paths)
 		var/datum/language/L = new T
 		all_languages[L.name] = L
-	
+
 	for (var/language_name in all_languages)
 		var/datum/language/L = all_languages[language_name]
 		language_keys[":[lowertext(L.key)]"] = L
