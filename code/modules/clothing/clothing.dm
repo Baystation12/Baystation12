@@ -2,6 +2,14 @@
 	name = "clothing"
 	var/list/species_restricted = null //Only these species can wear this kit.
 
+/obj/item/clothing/New()
+	. = ..()
+	clothing_list += src
+
+/obj/item/clothing/Del()
+	clothing_list -= src
+	return ..()
+
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot)
 
@@ -280,6 +288,35 @@ BLIND     // can't see anything
 		return
 
 	..()
+
+/obj/item/clothing/under/attack_hand(mob/user as mob)
+	//only forward to the attached accessory if the clothing is equipped (not in a storage)
+	if(hastie && src.loc == user)
+		hastie.attack_hand(user)
+		return
+
+	if ((ishuman(usr) || ismonkey(usr)) && src.loc == user)	//make it harder to accidentally undress yourself
+		return
+
+	..()
+
+/obj/item/clothing/under/MouseDrop(obj/over_object as obj)
+	if (ishuman(usr) || ismonkey(usr))
+		//makes sure that the clothing is equipped so that we can't drag it into our hand from miles away.
+		if (!(src.loc == usr))
+			return
+
+		if (!( usr.restrained() ) && !( usr.stat ))
+			switch(over_object.name)
+				if("r_hand")
+					usr.u_equip(src)
+					usr.put_in_r_hand(src)
+				if("l_hand")
+					usr.u_equip(src)
+					usr.put_in_l_hand(src)
+			src.add_fingerprint(usr)
+			return
+	return
 
 /obj/item/clothing/under/examine()
 	set src in view()

@@ -108,13 +108,7 @@
 
 
 /obj/machinery/computer/crew/proc/scan()
-	for(var/obj/item/clothing/under/C in world)
+	for(var/obj/item/clothing/under/C in clothing_list)
 		if((C.has_sensor) && (istype(C.loc, /mob/living/carbon/human)))
-			var/check = 0
-			for(var/O in src.tracked)
-				if(O == C)
-					check = 1
-					break
-			if(!check)
-				src.tracked.Add(C)
+			tracked |= C
 	return 1
