@@ -56,6 +56,7 @@
 				msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 
 
+
 //-------------------------------------------
 // Interaction procs
 //-------------------------------------------
@@ -82,14 +83,10 @@
 		return
 
 	if(istype(C,/obj/vehicle/train))
-		if(latch(C))
-			user << "\blue You successfully connect the [C] to [src]."
-		else
-			user << "\red You were unable to connect the [C] to [src]."
-		return
-
-	if(!load(C))
-		user << "\red You were unable to load [C] on [src]."
+		latch(C)
+	else
+		if(!load(C))
+			user << "\red You were unable to load [C] on [src]."
 
 /obj/vehicle/train/attack_hand(mob/user as mob)
 	if(!user.canmove || user.stat || user.restrained() || !Adjacent(user))
@@ -106,22 +103,53 @@
 
 /obj/vehicle/train/verb/unlatch_v()
 	set name = "Unlatch"
+	set desc = "Unhitches this train from the one in front of it."
 	set category = "Object"
 	set src in view(1)
 
 	if(!usr.canmove || usr.stat || usr.restrained() || !Adjacent(usr))
 		return
 
-	if(unlatch())
-		usr << "\blue You unlatch [src]."
-	else
-		usr << "\red [src] is already unlatched."
+	unattach(usr)
 
 
 //-------------------------------------------
 // Latching/unlatching procs
 //-------------------------------------------
-/obj/vehicle/train/proc/latch(var/obj/vehicle/train/T)
+
+//attempts to attach src as a follower of the train T
+/obj/vehicle/train/proc/attach_to(obj/vehicle/train/T, mob/user)
+	if (get_dist(src, T) > 1)
+		user << "\red [src] is too far away from [T] to hitch them together."
+		return
+
+	if (lead)
+		user << "\red [src] is already hitched to something."
+		return
+	
+	if (T.tow)
+		user << "\red [T] is already towing something."
+		return
+	
+	//latch with src as the follower
+	lead = T
+	T.tow = src
+	
+	update_stats()
+
+
+//detaches the train from whatever is towing it
+/obj/vehicle/train/proc/unattach(mob/user)
+	if (!lead)
+		user << "\red [src] is not hitched to anything."
+		return
+	
+	lead.tow = null
+	lead.update_stats()
+	
+	lead = null
+
+/obj/vehicle/train/proc/latch(mob/user, obj/vehicle/train/T)
 	if(!istype(T) || !Adjacent(T))
 		return 0
 
@@ -130,49 +158,18 @@
 		return 0
 	*/
 	
-	var/T_dir = get_dir(src, T)
+	var/T_dir = get_dir(src, T)	//figure out where T is wrt src
 
-	if(dir & T_dir) 	//if car is ahead
-		if(!lead && !T.tow)
-			lead = T
-			T.tow = src
-		else
-			return 0
-	else if(reverse_direction(dir) & T_dir)	//else if car is behind
-		if(!tow && !T.lead)
-			tow = T
-			T.lead = src
-		else
-			return 0
-	else
+	if(dir == T_dir) 	//if car is ahead
+		src.attach_to(T, user)
+	else if(reverse_direction(dir) == T_dir)	//else if car is behind
+		T.attach_to(src, user)
+
+//returns 1 if this is the lead car of the train
+/obj/vehicle/train/proc/is_train_head()
+	if (lead) 
 		return 0
-
-	update_stats()
-
 	return 1
-
-/obj/vehicle/train/proc/unlatch(var/obj/vehicle/train/T)
-	if(!lead && !tow)
-		return 0
-
-	if(T)
-		if(T == tow)
-			tow = null
-		else if(T == lead)
-			lead = null
-	else
-		if(tow)
-			tow.unlatch(src)
-			tow = null
-		if(lead)
-			lead.unlatch(src)
-			lead = null
-
-	update_stats()
-
-	return 1
-
-
 
 //-------------------------------------------------------
 // Stat update procs
@@ -182,10 +179,10 @@
 // size of the train, to limit super long trains.
 //-------------------------------------------------------
 /obj/vehicle/train/update_stats()
-	if(!tow)
-		update_train_stats()
+	if(tow)
+		return tow.update_stats()	//take us to the very end
 	else
-		return tow.update_stats()
+		update_train_stats()		//we're at the end
 
 /obj/vehicle/train/proc/update_train_stats()
 	if(powered && on)
@@ -195,10 +192,10 @@
 
 	train_length = 1
 
-	if(tow)
+	if(istype(tow))
 		active_engines += tow.active_engines
 		train_length += tow.train_length
 
 	//update the next section of train ahead of us
-	if(lead)
+	if(istype(lead))
 		lead.update_train_stats()
