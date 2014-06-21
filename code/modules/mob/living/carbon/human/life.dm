@@ -716,17 +716,17 @@
 			if(status_flags & GODMODE)	return 1	//godmode
 			switch(bodytemperature)
 				if(species.heat_level_1 to species.heat_level_2)
-					//I'm thinking it might be better to use adjustFireloss here instead of apply_damage so that damage is spread evenly across organs, instead of being dealt mostly to the chest
+					//I'm thinking it might be better to use adjustFireLoss here instead of apply_damage so that damage is spread evenly across organs, instead of being dealt mostly to the chest
 					//apply_damage(HEAT_DAMAGE_LEVEL_1, BURN, used_weapon = "High Body Temperature")
-					adjustFireloss(HEAT_DAMAGE_LEVEL_1)
+					adjustFireLoss(HEAT_DAMAGE_LEVEL_1)
 					fire_alert = max(fire_alert, 2)
 				if(species.heat_level_2 to species.heat_level_3)
 					//apply_damage(HEAT_DAMAGE_LEVEL_2, BURN, used_weapon = "High Body Temperature")
-					adjustFireloss(HEAT_DAMAGE_LEVEL_2)
+					adjustFireLoss(HEAT_DAMAGE_LEVEL_2)
 					fire_alert = max(fire_alert, 2)
 				if(species.heat_level_3 to INFINITY)
 					//apply_damage(HEAT_DAMAGE_LEVEL_3, BURN, used_weapon = "High Body Temperature")
-					adjustFireloss(HEAT_DAMAGE_LEVEL_3)
+					adjustFireLoss(HEAT_DAMAGE_LEVEL_3)
 					fire_alert = max(fire_alert, 2)
 
 		else if(bodytemperature < species.cold_level_1)
@@ -735,17 +735,17 @@
 			if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 				switch(bodytemperature)
 					if(species.cold_level_2 to species.cold_level_1)
-						//I'm thinking it might be better to use adjustFireloss here instead of apply_damage so that damage is spread evenly across organs, instead of being dealt mostly to the chest
+						//I'm thinking it might be better to use adjustFireLoss here instead of apply_damage so that damage is spread evenly across organs, instead of being dealt mostly to the chest
 						//apply_damage(COLD_DAMAGE_LEVEL_1, BURN, used_weapon = "Low Body Temperature")
-						adjustFireloss(COLD_DAMAGE_LEVEL_1)
+						adjustFireLoss(COLD_DAMAGE_LEVEL_1)
 						fire_alert = max(fire_alert, 1)
 					if(species.cold_level_3 to species.cold_level_2)
 						//apply_damage(COLD_DAMAGE_LEVEL_2, BURN, used_weapon = "Low Body Temperature")
-						adjustFireloss(COLD_DAMAGE_LEVEL_2)
+						adjustFireLoss(COLD_DAMAGE_LEVEL_2)
 						fire_alert = max(fire_alert, 1)
 					if(-INFINITY to species.cold_level_3)
 						//apply_damage(COLD_DAMAGE_LEVEL_3, BURN, used_weapon = "Low Body Temperature")
-						adjustFireloss(COLD_DAMAGE_LEVEL_3)
+						adjustFireLoss(COLD_DAMAGE_LEVEL_3)
 						fire_alert = max(fire_alert, 1)
 
 		// Account for massive pressure differences.  Done by Polymorph
