@@ -478,6 +478,8 @@
 #include "code\game\objects\items\devices\uplinks.dm"
 #include "code\game\objects\items\devices\violin.dm"
 #include "code\game\objects\items\devices\whistle.dm"
+#include "code\game\objects\items\devices\laptops\laptop.dm"
+#include "code\game\objects\items\devices\laptops\medical.dm"
 #include "code\game\objects\items\devices\PDA\cart.dm"
 #include "code\game\objects\items\devices\PDA\chatroom.dm"
 #include "code\game\objects\items\devices\PDA\PDA.dm"
@@ -1354,5 +1356,5 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\tgstation2.dmm"
+#include "maps\test2.dmm"
 // END_INCLUDE
