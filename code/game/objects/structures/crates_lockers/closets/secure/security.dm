@@ -29,6 +29,7 @@
 		new /obj/item/clothing/suit/armor/captain(src)
 		new /obj/item/weapon/melee/telebaton(src)
 		new /obj/item/clothing/under/dress/dress_cap(src)
+		new /obj/item/clothing/under/rank/capcamsole(src)
 		return
 
 
@@ -82,6 +83,8 @@
 		new /obj/item/clothing/shoes/leather(src)
 		new /obj/item/clothing/shoes/white(src)
 		new /obj/item/clothing/under/rank/head_of_personnel_whimsy(src)
+		new /obj/item/clothing/under/rank/goodman_shirt(src)
+		new /obj/item/clothing/suit/goodman_jacket(src)
 		return
 
 

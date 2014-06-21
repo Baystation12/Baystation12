@@ -113,7 +113,7 @@
 	desc = "A jumpsuit with owl wings. Photorealistic owl feathers! Twooooo!"
 	icon_state = "owl"
 	item_color = "owl"
-	flags = FPRINT | TABLEPASS
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/johnny
 	name = "johnny~~ jumpsuit"
@@ -156,6 +156,7 @@
 	icon_state = "green_suit"
 	item_state = "dg_suit"
 	item_color = "green_suit"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/gimmick/rank/head_of_personnel/suit
 	name = "head of personnel's suit"
@@ -163,6 +164,7 @@
 	icon_state = "teal_suit"
 	item_state = "g_suit"
 	item_color = "teal_suit"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/suit_jacket
 	name = "black suit"
@@ -304,18 +306,21 @@
 	desc = "Feminine fashion for the style concious captain."
 	icon_state = "dress_cap"
 	item_color = "dress_cap"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/dress/dress_hop
 	name = "head of personal dress uniform"
 	desc = "Feminine fashion for the style concious HoP."
 	icon_state = "dress_hop"
 	item_color = "dress_hop"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/dress/dress_hr
 	name = "human resources director uniform"
 	desc = "Superior class for the nosy H.R. Director."
 	icon_state = "huresource"
 	item_color = "huresource"
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
 
 /obj/item/clothing/under/dress/plaid_blue
 	name = "blue plaid skirt"
