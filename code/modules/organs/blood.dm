@@ -183,6 +183,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 			this.icon_state = pick(iconL)
 			this.blood_DNA = list()
 			this.blood_DNA[dna.unique_enzymes] = dna.b_type
+			for (var/ID in virus2)
+				var/datum/disease2/disease/V = virus2[ID]
+				this.virus2[ID] = V.getcopy()
 		else
 			for(var/obj/effect/decal/cleanable/blood/drip/green/G in nums)
 				del G
@@ -201,6 +204,9 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 			this.icon_state = pick(iconL)
 			this.blood_DNA = list()
 			this.blood_DNA[dna.unique_enzymes] = dna.b_type
+			for (var/ID in virus2)
+				var/datum/disease2/disease/V = virus2[ID]
+				this.virus2[ID] = V.getcopy()
 		else
 			for(var/obj/effect/decal/cleanable/blood/drip/G in nums)
 				del G
