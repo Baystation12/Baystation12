@@ -13,7 +13,7 @@
 
 /obj/structure/bookcase
 	name = "bookcase"
-	icon = 'icons/obj/library.dmi'
+	icon = 'tauceti/icons/obj/objects.dmi'
 	icon_state = "book-0"
 	anchored = 1
 	density = 1

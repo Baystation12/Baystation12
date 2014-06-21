@@ -499,7 +499,9 @@ proc/get_damage_icon_part(damage_state, body_part)
 
 	if(dna)
 		switch(dna.mutantrace)
-			if("golem","slime","shadow","adamantine")
+			if("slime")
+				overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_[species.name]_s")
+			if("golem","shadow","adamantine")
 				overlays_standing[MUTANTRACE_LAYER]	= image("icon" = 'icons/effects/genetics.dmi', "icon_state" = "[dna.mutantrace][fat]_[gender]_s")
 			else
 				overlays_standing[MUTANTRACE_LAYER]	= null

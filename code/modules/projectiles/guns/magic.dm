@@ -19,6 +19,9 @@
 /obj/item/weapon/gun/magic/afterattack(atom/target as mob, mob/living/user as mob, flag)
 	newshot()
 	var/area/A = get_area(user)
+	if(user.mind.special_role != "Wizard")
+		user << "<span class='warning'>You have no idea how to use [src].<span>"
+		return
 	if(istype(A, /area/wizard_station))
 		user << "<span class='warning'>You know better than to violate the security of The Den, best wait until you leave to use [src].<span>"
 		return
