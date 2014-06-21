@@ -308,11 +308,11 @@
 
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
-		
+
 		// HACK NEED CHANGING LATER
 		if(health < config.health_threshold_crit && !reagents.has_reagent("inaprovaline"))
 			losebreath++
-		
+
 		if(losebreath>0) //Suffocating so do not take a breath
 			losebreath--
 			if (prob(10)) //Gasp per 10 ticks? Sounds about right.
@@ -1487,21 +1487,21 @@
 			for (var/ID in virus2)
 				var/datum/disease2/disease/V = virus2[ID]
 				V.cure(src)
+		if(life_tick % 3) //don't spam checks over all objects in view every tick.
+			for(var/obj/effect/decal/cleanable/O in view(1,src))
+				if(istype(O,/obj/effect/decal/cleanable/blood))
+					var/obj/effect/decal/cleanable/blood/B = O
+					if(B.virus2.len)
+						for (var/ID in B.virus2)
+							var/datum/disease2/disease/V = B.virus2[ID]
+							infect_virus2(src,V.getcopy())
 
-		for(var/obj/effect/decal/cleanable/O in view(1,src))
-			if(istype(O,/obj/effect/decal/cleanable/blood))
-				var/obj/effect/decal/cleanable/blood/B = O
-				if(B.virus2.len)
-					for (var/ID in B.virus2)
-						var/datum/disease2/disease/V = B.virus2[ID]
-						infect_virus2(src,V)
-
-			else if(istype(O,/obj/effect/decal/cleanable/mucus))
-				var/obj/effect/decal/cleanable/mucus/M = O
-				if(M.virus2.len)
-					for (var/ID in M.virus2)
-						var/datum/disease2/disease/V = M.virus2[ID]
-						infect_virus2(src,V)
+				else if(istype(O,/obj/effect/decal/cleanable/mucus))
+					var/obj/effect/decal/cleanable/mucus/M = O
+					if(M.virus2.len)
+						for (var/ID in M.virus2)
+							var/datum/disease2/disease/V = M.virus2[ID]
+							infect_virus2(src,V.getcopy())
 
 
 		if(virus2.len)
