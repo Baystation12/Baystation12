@@ -39,7 +39,7 @@
 
 	on_mob_life(var/mob/living/M as mob)
 		if(!M) M = holder.my_atom
-				M.hallucination -= 10
+				M.hallucination = max(0, M.hallucination - 10)
 		if(src.volume <= 0.1) if(data != -1)
 			data = -1
 			M << "\red Your mind feels a little less stable.."
