@@ -65,19 +65,10 @@
 		else
 			E.process()
 			number_wounds += E.number_wounds
-			//Robotic limb malfunctions
-			var/malfunction = 0
-			if (E.status & ORGAN_ROBOT && prob(E.brute_dam + E.burn_dam))
-				malfunction = 1
-
-			//Broken limbs hurt too
-			var/broken = 0
-			if(E.status & ORGAN_BROKEN && !(E.status & ORGAN_SPLINTED) )
-				broken = 1
 
 			if (!lying && world.time - l_move_time < 15)
 			//Moving around with fractured ribs won't do you any good
-				if (broken && E.internal_organs && prob(15))
+				if (E.is_broken() && E.internal_organs && prob(15))
 					var/datum/organ/internal/I = pick(E.internal_organs)
 					custom_pain("You feel broken bones moving in your [E.display_name]!", 1)
 					I.take_damage(rand(3,5))
@@ -88,36 +79,13 @@
 						if (W.infection_check())
 							W.germ_level += 1
 
-			//Special effects for limbs.
-			if(E.name in list("l_hand","l_arm","r_hand","r_arm"))
-				var/obj/item/c_hand		//Getting what's in this hand
-				var/hand
-				if(E.name == "l_hand" || E.name == "l_arm")
-					c_hand = l_hand
-					hand = "left hand"
-				if(E.name == "r_hand" || E.name == "r_arm")
-					c_hand = r_hand
-					hand = "right hand"
-				if (c_hand)
-
-					if(broken)
-						u_equip(c_hand)
-						var/emote_scream = pick("screams in pain and", "let's out a sharp hiss and", "cries out and")
-						emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ] drops what they were holding in their [hand]!")
-					if(malfunction)
-						u_equip(c_hand)
-						emote("me", 1, "drops what they were holding, their [hand] malfunctioning!")
-						var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-						spark_system.set_up(5, 0, src)
-						spark_system.attach(src)
-						spark_system.start()
-						spawn(10)
-							del(spark_system)
-
-			else if(E.name in list("l_leg","l_foot","r_leg","r_foot") && !lying)
+			if(E.name in list("l_leg","l_foot","r_leg","r_foot") && !lying)
 				if (!E.is_usable() || malfunction || (broken && !(E.status & ORGAN_SPLINTED)))
 					leg_tally--			// let it fail even if just foot&leg
 
+	for(var/datum/organ/internal/I in internal_organs)
+		I.process()
+	
 	// standing is poor
 	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(5))
 		if(species && species.flags & NO_PAIN)

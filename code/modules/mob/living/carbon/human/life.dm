@@ -316,9 +316,6 @@
 		if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) return
 		if(species && (species.flags & NO_BREATHE || species.flags & IS_SYNTHETIC)) return
 
-		var/datum/organ/internal/lungs/L = internal_organs["lungs"]
-		L.process()
-
 		var/datum/gas_mixture/environment = loc.return_air()
 		var/datum/gas_mixture/breath
 		
@@ -1076,12 +1073,6 @@
 			jitteriness = max(0, jitteriness - 3)
 
 		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
-
-		var/datum/organ/internal/liver/liver = internal_organs["liver"]
-		liver.process()
-
-		var/datum/organ/internal/eyes/eyes = internal_organs["eyes"]
-		eyes.process()
 
 		updatehealth()
 

@@ -328,6 +328,7 @@ This function completely restores a damaged organ to perfect condition.
 	if(!(status & ORGAN_BROKEN))
 		perma_injury = 0
 
+	//Infections
 	update_germs()
 	return
 
@@ -352,23 +353,22 @@ This function completely restores a damaged organ to perfect condition.
 				germ_level++
 
 		var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
-		if (antibiotics > 5)
+		if (germ_level > 0 && antibiotics > 5)
 			if (prob(4*antibiotics)) germ_level--
 		
 		if(germ_level > INFECTION_LEVEL_ONE)
 			//having an infection raises your body temperature
 			var/temperature_increase = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/INFECTION_LEVEL_TWO, 1)
-			owner.bodytemperature += temperature_increase
+			if (owner.bodytemperature < temperature_increase)
+				owner.bodytemperature++
 			
 			if(prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
 				germ_level += 1
 				owner.adjustToxLoss(1)
-			
+		
 		if(germ_level > INFECTION_LEVEL_TWO && antibiotics < 30)	//overdosing is necessary to stop severe infections
 			germ_level++
 			owner.adjustToxLoss(1)
-
-
 /*
 		if(germ_level > GANGREN_LEVEL_TERMINAL)
 			if (!(status & ORGAN_DEAD))
@@ -713,6 +713,36 @@ This function completely restores a damaged organ to perfect condition.
 /datum/organ/external/proc/is_usable()
 	return !(status & (ORGAN_DESTROYED|ORGAN_MUTATED|ORGAN_DEAD))
 
+/datum/organ/external/proc/is_broken()
+	return ((status & ORGAN_BROKEN) && !(status & ORGAN_SPLINTED))
+
+/datum/organ/external/proc/is_malfunctioning()
+	return ((status & ORGAN_ROBOT) && prob(E.brute_dam + E.burn_dam))
+
+//for arms and hands
+/datum/organ/external/proc/process_grasp(var/obj/item/c_hand, var/hand_name)
+	if (!c_hand)
+		return
+	
+	if(is_broken())
+		owner.u_equip(c_hand)
+		var/emote_scream = pick("screams in pain and", "lets out a sharp cry and", "cries out and")
+		owner.emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ] drops what they were holding in their [hand_name]!")
+	if(is_malfunctioning())
+		owner.u_equip(c_hand)
+		owner.emote("me", 1, "drops what they were holding, their [hand_name] malfunctioning!")
+		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		spark_system.set_up(5, 0, src)
+		spark_system.attach(src)
+		spark_system.start()
+		spawn(10)
+			del(spark_system)
+
+//legs
+//returns 1 if this organ can support standing
+/datum/organ/external/proc/can_support_standing()
+	if (!E.is_usable() || malfunction || (broken && !(E.status & ORGAN_SPLINTED)))
+
 /****************************************************
 			   ORGAN DEFINES
 ****************************************************/
@@ -741,6 +771,10 @@ This function completely restores a damaged organ to perfect condition.
 	max_damage = 50
 	min_broken_damage = 20
 	body_part = ARM_LEFT
+	
+	process()
+		..()
+		process_grasp(owner.l_hand, "left hand")
 
 /datum/organ/external/l_leg
 	name = "l_leg"
@@ -758,6 +792,10 @@ This function completely restores a damaged organ to perfect condition.
 	max_damage = 50
 	min_broken_damage = 20
 	body_part = ARM_RIGHT
+	
+	process()
+		..()
+		process_grasp(owner.r_hand, "right hand")
 
 /datum/organ/external/r_leg
 	name = "r_leg"
@@ -793,6 +831,10 @@ This function completely restores a damaged organ to perfect condition.
 	max_damage = 30
 	min_broken_damage = 15
 	body_part = HAND_RIGHT
+	
+	process()
+		..()
+		process_grasp(owner.r_hand, "right hand")
 
 /datum/organ/external/l_hand
 	name = "l_hand"
@@ -801,6 +843,10 @@ This function completely restores a damaged organ to perfect condition.
 	max_damage = 30
 	min_broken_damage = 15
 	body_part = HAND_LEFT
+	
+	process()
+		..()
+		process_grasp(owner.l_hand, "left hand")
 
 /datum/organ/external/head
 	name = "head"
