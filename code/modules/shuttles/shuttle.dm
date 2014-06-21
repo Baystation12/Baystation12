@@ -208,12 +208,12 @@ var/global/list/shuttles
 	VS.origin = /area/shuttle/vox/station
 
 	VS.destinations = list(
-		"NSS Cyberiad" = /area/vox_station/northwest_solars
+		"NGS Cyberiad" = /area/vox_station/northwest_solars
 		)
 
 	VS.announcer = "NSV Icarus"
-	VS.arrival_message = "Attention, Exodus, we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
-	VS.departure_message = "Your guests are pulling away, Exodus - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
+	VS.arrival_message = "Attention, Cyberiad, we just tracked a small target bypassing our defensive perimeter. Can't fire on it without hitting the station - you've got incoming visitors, like it or not."
+	VS.departure_message = "Your guests are pulling away, Cyberiad - moving too fast for us to draw a bead on them. Looks like they're heading out of the system at a rapid clip."
 	VS.interim = /area/vox_station/transit
 
 	VS.warmup_time = 10
