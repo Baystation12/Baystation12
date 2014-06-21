@@ -7,6 +7,7 @@
 	flags = FPRINT | TABLEPASS | CONDUCT
 	slot_flags = SLOT_BACK
 	hitsound = 'sound/weapons/smash.ogg'
+	w_class = 3
 
 	pressure_resistance = ONE_ATMOSPHERE*5
 
