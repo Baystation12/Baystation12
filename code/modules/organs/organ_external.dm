@@ -357,12 +357,14 @@ This function completely restores a damaged organ to perfect condition.
 		
 		if(germ_level >= INFECTION_LEVEL_ONE)
 			//having an infection raises your body temperature
-			var/temperature_increase = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/INFECTION_LEVEL_THREE, 1)
-			if (owner.bodytemperature < temperature_increase)
+			var/fever_temperature = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/INFECTION_LEVEL_THREE, 1) + owner.species.body_temperature
+			if (owner.bodytemperature < fever_temperature)
+				//world << "fever: [owner.bodytemperature] < [fever_temperature], raising temperature."
 				owner.bodytemperature++
 			
 			if(prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
-				germ_level++
+				if (prob(5))
+					germ_level++
 				owner.adjustToxLoss(1)
 		
 		if(germ_level >= INFECTION_LEVEL_TWO)
