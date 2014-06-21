@@ -1,5 +1,4 @@
 import hashlib, ast, os
-from time import clock
 import operator as op
 
 def md5sum(filename):
@@ -26,9 +25,6 @@ def eval_expr(expr):
     -5.0
     """
     return eval_(ast.parse(expr).body[0].value)  # Module(body=[Expr(value=...)])
-
-def getElapsed(start):
-    return '%d:%02d:%02d.%03d' % reduce(lambda ll, b : divmod(ll[0], b) + ll[1:], [((clock() - start) * 1000,), 1000, 60, 60])
 
 def eval_(node):
     if isinstance(node, ast.Num):  # <number>
