@@ -1,7 +1,7 @@
 /obj/vehicle
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
-	layer = 2.9
+	layer = OBJ_LAYER - 0.1 //so it sits below objects
 	density = 1
 	anchored = 1
 	animate_movement=1
