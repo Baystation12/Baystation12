@@ -44,13 +44,12 @@
 		feedback_add_details("admin_verb","PRISON") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_subtle_message(mob/M as mob in mob_list)
-	set category = "Special Verbs"
+	set category = "Event"
 	set name = "Subtle Message"
 
 	if(!ismob(M))	return
-	if (!holder)
-		src << "Only administrators may use this command."
-		return
+
+	if(!check_rights(R_SERVER|R_EVENT))	return
 
 	var/msg = input("Message:", text("Subtle PM to [M.key]")) as text
 
@@ -97,12 +96,10 @@
 
 
 /client/proc/cmd_admin_world_narrate() // Allows administrators to fluff events a little easier -- TLE
-	set category = "Special Verbs"
+	set category = "Event"
 	set name = "Global Narrate"
 
-	if (!holder)
-		src << "Only administrators may use this command."
-		return
+	if(!check_rights(R_SERVER|R_EVENT))	return
 
 	var/msg = input("Message:", text("Enter the text you wish to appear to everyone:")) as text
 
@@ -114,12 +111,10 @@
 	feedback_add_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_direct_narrate(var/mob/M)	// Targetted narrate -- TLE
-	set category = "Special Verbs"
+	set category = "Event"
 	set name = "Direct Narrate"
 
-	if(!holder)
-		src << "Only administrators may use this command."
-		return
+	if(!check_rights(R_SERVER|R_EVENT))	return
 
 	if(!M)
 		M = input("Direct narrate to who?", "Active Players") as null|anything in get_mob_with_client_list()
@@ -669,11 +664,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	feedback_add_details("admin_verb","REJU") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_create_centcom_report()
-	set category = "Special Verbs"
+	set category = "Event"
 	set name = "Create Command Report"
-	if(!holder)
-		src << "Only administrators may use this command."
-		return
+
+	if(!check_rights(R_SERVER|R_EVENT))	return
+
 	var/input = input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null
 	var/customname = input(usr, "Pick a title for the report.", "Title") as text|null
 	if(!input)
@@ -727,7 +722,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	feedback_add_details("admin_verb","LFS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_explosion(atom/O as obj|mob|turf in world)
-	set category = "Special Verbs"
+	set category = "Event"
 	set name = "Explosion"
 
 	if(!check_rights(R_DEBUG|R_EVENT))	return
@@ -1033,11 +1028,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 
 /client/proc/toggle_random_events()
-	set category = "Server"
+	set category = "Event"
 	set name = "Toggle random events on/off"
 
 	set desc = "Toggles random events such as meteors, black holes, blob (but not space dust) on/off"
-	if(!check_rights(R_SERVER))	return
+	if(!check_rights(R_SERVER|R_EVENT))	return
 
 	if(!config.allow_random_events)
 		config.allow_random_events = 1

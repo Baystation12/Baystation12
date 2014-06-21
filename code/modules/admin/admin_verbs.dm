@@ -585,7 +585,7 @@ var/list/admin_verbs_mod = list(
 	message_admins("\blue [key_name_admin(usr)] gave [key_name(T)] a [(greater)? "greater":"lesser"] disease2 with infection chance [D.infectionchance].", 1)
 
 /client/proc/make_sound(var/obj/O in world) // -- TLE
-	set category = "Special Verbs"
+	set category = "Event"
 	set name = "Make Sound"
 	set desc = "Display a message to everyone who can hear the target"
 	if(O)
@@ -601,13 +601,13 @@ var/list/admin_verbs_mod = list(
 
 /client/proc/togglebuildmodeself()
 	set name = "Toggle Build Mode Self"
-	set category = "Special Verbs"
+	set category = "Event"
 	if(src.mob)
 		togglebuildmode(src.mob)
 	feedback_add_details("admin_verb","TBMS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/object_talk(var/msg as text) // -- TLE
-	set category = "Special Verbs"
+	set category = "Event"
 	set name = "oSay"
 	set desc = "Display a message to everyone who can hear the target"
 	if(mob.control_object)
