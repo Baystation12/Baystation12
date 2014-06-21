@@ -371,3 +371,20 @@
 	icon_state = "swim_red"
 	_color = "swim_red"
 	siemens_coefficient = 1
+
+/obj/item/clothing/suit/mercy_hoodie
+	name = "Mercy Robe"
+	desc = "Pure white robes, that have an aura of kindness and mercy"
+	icon_state = "mercy_hoodie"
+	item_state = "mercy_hoodie"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	allowed = list(/obj/item/weapon/storage/bible, /obj/item/weapon/nullrod, /obj/item/weapon/reagent_containers/food/drinks/bottle/holywater, /obj/item/weapon/storage/fancy/candle_box, /obj/item/candle, /obj/item/weapon/tank/emergency_oxygen)
+
+/obj/item/clothing/head/mercy_hood
+	name = "Mercy Hood"
+	desc = "A pure white hood."
+	icon_state = "mercy_hood"
+	item_state = "mercy_hood"
+	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
+	siemens_coefficient = 0.9
+	loose = 2
