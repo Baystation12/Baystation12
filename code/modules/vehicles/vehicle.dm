@@ -1,7 +1,7 @@
 /obj/vehicle
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
-	layer = MOB_LAYER
+	layer = 2.9
 	density = 1
 	anchored = 1
 	animate_movement=1
@@ -23,6 +23,7 @@
 	var/obj/item/weapon/cell/cell
 	var/power_use = 5	//set this to adjust the amount of power the vehicle uses per move
 
+	var/standing_mob = 0		//if a mob loaded on the vehicle should be standing
 	var/atom/movable/load		//all vehicles can take a load, since they should all be a least drivable
 	var/load_item_visible = 1	//set if the loaded item should be overlayed on the vehicle sprite
 	var/load_offset_x = 0		//pixel_x offset for item overlay
@@ -46,6 +47,10 @@
 			if(on && powered)
 				cell.use(power_use)
 		anchored = init_anc
+		
+		if(load)
+			load.loc = loc
+			load.dir = dir
 
 		return 1
 	else
@@ -262,49 +267,24 @@
 		crate.close()
 
 	C.loc = loc
-	sleep(2)
-	if(C.loc != loc) //To prevent you from going onto more than one train.
-		return 0
-	C.loc = src
+	C.dir = dir
+	C.anchored = 1
 
 	load = C
 
 	if(load_item_visible)
 		C.pixel_x += load_offset_x
 		C.pixel_y += load_offset_y
-		C.layer = layer
-
-		overlays += C
-
-		//we can set these back now since we have already cloned the icon into the overlay
-		C.pixel_x = initial(C.pixel_x)
-		C.pixel_y = initial(C.pixel_y)
-		C.layer = initial(C.layer)
 
 	if(ismob(C))
 		var/mob/M = C
-		if(M.client)
-			M.client.perspective = EYE_PERSPECTIVE
-			M.client.eye = src
+		M.buckled = src
+		M.update_canmove()
 
 	return 1
 
 
 /obj/vehicle/proc/unload(var/mob/user, var/direction, var/exception = 0)
-	if(!load)
-		// in case non-load items end up in contents, dump everything else too
-		for(var/atom/movable/AM in src)
-			AM.loc = get_turf(src)
-			AM.pixel_x = initial(AM.pixel_x)
-			AM.pixel_y = initial(AM.pixel_y)
-			AM.layer = initial(AM.layer)
-			if(ismob(AM))
-				var/mob/M = AM
-				if(M.client)
-					M.client.perspective = MOB_PERSPECTIVE
-					M.client.eye = src
-		return 0
-
 	var/turf/dest = null
 
 	//find a turf to unload to
@@ -332,41 +312,20 @@
 		return 0
 
 
-	if(exception)	//for handling any players that end up in src.contents that are trying to climb off
-		user.loc = dest
-		user.pixel_x = initial(user.pixel_x)
-		user.pixel_y = initial(user.pixel_y)
-		user.layer = initial(user.layer)
-
-		if(ismob(user))
-			var/mob/M = user
-			if(M.client)
-				M.client.perspective = MOB_PERSPECTIVE
-				M.client.eye = src
-
-		src.contents -= user
-
-		return 1
-
-	overlays.Cut()
-
 	load.loc = dest
-
-	/*
+	load.dir = get_dir(loc, dest)
+	load.anchored = initial(load.anchored)
 	load.pixel_x = initial(load.pixel_x)
 	load.pixel_y = initial(load.pixel_y)
 	load.layer = initial(load.layer)
-	*/
 
 	if(ismob(load))
 		var/mob/M = load
-		if(M.client)
-			M.client.perspective = MOB_PERSPECTIVE
-			M.client.eye = src
+		M.buckled = null
+		M.anchored = initial(M.anchored)
+		M.update_canmove()
 
 	load = null
-
-	unload() //recursive check for anything left in contents
 
 	return 1
 
