@@ -213,7 +213,7 @@
 		removed.temperature = max(0, min(removed.temperature, 10000))
 
 		//Calculate how much gas to release
-		removed.phoron += max(device_energy / PHORON_RELEASE_MODIFIER, 0)
+		removed.toxins += max(device_energy / PLASMA_RELEASE_MODIFIER, 0)
 
 		removed.oxygen += max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
 
