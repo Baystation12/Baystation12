@@ -333,7 +333,6 @@ This function completely restores a damaged organ to perfect condition.
 	return
 
 //Updating germ levels. Handles organ germ levels and necrosis.
-//#define GERM_TRANSFER_AMOUNT	germ_level/500
 /datum/organ/external/proc/update_germs()
 
 	if(status & (ORGAN_ROBOT|ORGAN_DESTROYED)) //Robotic limbs shouldn't be infected, nor should nonexistant limbs.
@@ -356,34 +355,41 @@ This function completely restores a damaged organ to perfect condition.
 		if (germ_level > 0 && antibiotics > 5)
 			if (prob(4*antibiotics)) germ_level--
 		
-		if(germ_level > INFECTION_LEVEL_ONE)
+		if(germ_level >= INFECTION_LEVEL_ONE)
 			//having an infection raises your body temperature
-			var/temperature_increase = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/INFECTION_LEVEL_TWO, 1)
+			var/temperature_increase = (owner.species.heat_level_1 - owner.species.body_temperature - 1)* min(germ_level/INFECTION_LEVEL_THREE, 1)
 			if (owner.bodytemperature < temperature_increase)
 				owner.bodytemperature++
 			
 			if(prob(round(germ_level/10)))	//aiming for a light infection to become serious after 40 minutes, standing still
-				germ_level += 1
+				germ_level++
 				owner.adjustToxLoss(1)
 		
-		if(germ_level > INFECTION_LEVEL_TWO && antibiotics < 30)	//overdosing is necessary to stop severe infections
-			germ_level++
-			owner.adjustToxLoss(1)
-/*
-		if(germ_level > GANGREN_LEVEL_TERMINAL)
+		if(germ_level >= INFECTION_LEVEL_TWO)
+			//spread the infection
+			for (var/datum/organ/internal/I in internal_organs)
+				if (I.germ_level < germ_level)
+					I.germ_level++
+			
+			if (children)	//To child organs
+				for (var/datum/organ/external/child in children)
+					if (child.germ_level < germ_level && !(child.status & ORGAN_ROBOT))
+						if (child.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
+							child.germ_level++
+			
+			if (parent)
+				if (parent.germ_level < germ_level && !(parent.status & ORGAN_ROBOT))
+					if (parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30))
+						parent.germ_level++
+		
+		if(germ_level >= INFECTION_LEVEL_THREE && antibiotics < 30)	//overdosing is necessary to stop severe infections
 			if (!(status & ORGAN_DEAD))
 				status |= ORGAN_DEAD
 				owner << "<span class='notice'>You can't feel your [display_name] anymore...</span>"
-				owner.update_body(1)
-			if (prob(10))	//Spreading the fun
-				if (children)	//To child organs
-					for (var/datum/organ/external/child in children)
-						if (!(child.status & (ORGAN_DEAD|ORGAN_DESTROYED|ORGAN_ROBOT)))
-							child.germ_level += round(GERM_TRANSFER_AMOUNT)
-				if (parent)
-					if (!(parent.status & (ORGAN_DEAD|ORGAN_DESTROYED|ORGAN_ROBOT)))
-						parent.germ_level += round(GERM_TRANSFER_AMOUNT)
-*/
+			
+			germ_level++
+			owner.adjustToxLoss(1)
+
 
 //Updating wounds. Handles wound natural I had some free spachealing, internal bleedings and infections
 /datum/organ/external/proc/update_wounds()
@@ -717,7 +723,7 @@ This function completely restores a damaged organ to perfect condition.
 	return ((status & ORGAN_BROKEN) && !(status & ORGAN_SPLINTED))
 
 /datum/organ/external/proc/is_malfunctioning()
-	return ((status & ORGAN_ROBOT) && prob(E.brute_dam + E.burn_dam))
+	return ((status & ORGAN_ROBOT) && prob(brute_dam + burn_dam))
 
 //for arms and hands
 /datum/organ/external/proc/process_grasp(var/obj/item/c_hand, var/hand_name)
@@ -727,7 +733,7 @@ This function completely restores a damaged organ to perfect condition.
 	if(is_broken())
 		owner.u_equip(c_hand)
 		var/emote_scream = pick("screams in pain and", "lets out a sharp cry and", "cries out and")
-		owner.emote("me", 1, "[(species && species.flags & NO_PAIN) ? "" : emote_scream ] drops what they were holding in their [hand_name]!")
+		owner.emote("me", 1, "[(owner.species && owner.species.flags & NO_PAIN) ? "" : emote_scream ] drops what they were holding in their [hand_name]!")
 	if(is_malfunctioning())
 		owner.u_equip(c_hand)
 		owner.emote("me", 1, "drops what they were holding, their [hand_name] malfunctioning!")
@@ -738,10 +744,6 @@ This function completely restores a damaged organ to perfect condition.
 		spawn(10)
 			del(spark_system)
 
-//legs
-//returns 1 if this organ can support standing
-/datum/organ/external/proc/can_support_standing()
-	if (!E.is_usable() || malfunction || (broken && !(E.status & ORGAN_SPLINTED)))
 
 /****************************************************
 			   ORGAN DEFINES

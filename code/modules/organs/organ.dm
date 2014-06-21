@@ -49,13 +49,18 @@
 	if(damage_this_tick > last_dam)
 		force_process = 1
 	last_dam = damage_this_tick
-	if(!force_process && !bad_external_organs.len)
-		return
 	if(force_process)
 		bad_external_organs.Cut()
 		for(var/datum/organ/external/Ex in organs)
 			bad_external_organs += Ex
-			
+	
+	//processing internal organs is pretty cheap, do that first.
+	for(var/datum/organ/internal/I in internal_organs)
+		I.process()
+	
+	if(!force_process && !bad_external_organs.len)
+		return
+	
 	for(var/datum/organ/external/E in bad_external_organs)
 		if(!E)
 			continue
@@ -80,11 +85,8 @@
 							W.germ_level += 1
 
 			if(E.name in list("l_leg","l_foot","r_leg","r_foot") && !lying)
-				if (!E.is_usable() || malfunction || (broken && !(E.status & ORGAN_SPLINTED)))
+				if (!E.is_usable() || E.is_malfunctioning() || (E.is_broken() && !(E.status & ORGAN_SPLINTED)))
 					leg_tally--			// let it fail even if just foot&leg
-
-	for(var/datum/organ/internal/I in internal_organs)
-		I.process()
 	
 	// standing is poor
 	if(leg_tally <= 0 && !paralysis && !(lying || resting) && prob(5))

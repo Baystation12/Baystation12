@@ -21,9 +21,23 @@ datum/event/organ_failure/start()
 	while(severity > 0 && candidates.len)
 		var/mob/living/carbon/human/C = candidates[1]
 
-		// Bruise one of their organs
-		var/O = pick(C.internal_organs)
-		var/datum/organ/internal/I = C.internal_organs[O]
-		I.damage = I.min_bruised_damage
-		candidates.Remove(C)
+		var/acute = prob(15)
+		if (prob(75))
+			//internal organ infection
+			var/O = pick(C.internal_organs)
+			var/datum/organ/internal/I = C.internal_organs[O]
+			
+			if (acute)
+				I.germ_level = max(INFECTION_LEVEL_TWO, I.germ_level)
+			else
+				I.germ_level = max(rand(INFECTION_LEVEL_ONE,INFECTION_LEVEL_ONE*2), I.germ_level)
+		else
+			//external organ infection
+			var/datum/organ/external/O = pick(C.organs)
+			
+			if (acute)
+				O.germ_level = max(INFECTION_LEVEL_TWO, O.germ_level)
+			else
+				O.germ_level = max(rand(INFECTION_LEVEL_ONE,INFECTION_LEVEL_ONE*2), O.germ_level)
+
 		severity--

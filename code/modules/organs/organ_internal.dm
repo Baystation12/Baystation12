@@ -10,7 +10,6 @@
 	var/min_broken_damage = 30
 	var/parent_organ = "chest"
 	var/robotic = 0 //For being a robot
-	var/germ_level = 0
 
 /datum/organ/internal/proc/rejuvenate()
 	damage=0
@@ -22,6 +21,7 @@
 	return damage >= min_broken_damage
 
 
+
 /datum/organ/internal/New(mob/living/carbon/human/H)
 	..()
 	var/datum/organ/external/E = H.organs_by_name[src.parent_organ]
@@ -30,6 +30,33 @@
 	E.internal_organs += src
 	H.internal_organs[src.name] = src
 	src.owner = H
+
+/datum/organ/internal/process()
+
+	//Process infections
+	if (!germ_level)
+		return
+
+	var/antibiotics = owner.reagents.get_reagent_amount("spaceacillin")
+	
+	if (germ_level > 0 && antibiotics > 5)
+		if (prob(4*antibiotics)) germ_level--
+		if (antibiotics > 30) germ_level--
+	
+	if (germ_level >= INFECTION_LEVEL_ONE/2)
+		if(prob(round(germ_level/6)))	//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
+			germ_level++
+		if(prob(1))
+			take_damage(1,silent=0)
+	
+	if (germ_level >= INFECTION_LEVEL_TWO)
+		var/datum/organ/external/parent = owner.get_organ(parent_organ)
+		if (parent.germ_level < germ_level && ( parent.germ_level < INFECTION_LEVEL_ONE*2 || prob(30) ))
+			parent.germ_level++
+		
+		if (prob(5))	//about once every 20 seconds
+			take_damage(1,silent=prob(30))
+
 
 /datum/organ/internal/proc/take_damage(amount, var/silent=0)
 	if(src.robotic == 2)
