@@ -135,6 +135,8 @@
 	lead = T
 	T.tow = src
 	
+	user << "\blue You hitch [src] to [T]."
+	
 	update_stats()
 
 
@@ -147,6 +149,7 @@
 	lead.tow = null
 	lead.update_stats()
 	
+	user << "\blue You unhitch [src] from [lead]."
 	lead = null
 
 /obj/vehicle/train/proc/latch(mob/user, obj/vehicle/train/T)

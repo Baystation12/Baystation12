@@ -356,6 +356,7 @@
 				switchcount = L.switchcount
 				rigged = L.rigged
 				brightness = L.brightness
+				l_color = L.color
 				on = has_power()
 				update()
 
@@ -514,6 +515,7 @@
 	L.status = status
 	L.rigged = rigged
 	L.brightness = src.brightness
+	L.color = l_color
 
 	// light item inherits the switchcount, then zero it
 	L.switchcount = switchcount
@@ -539,6 +541,7 @@
 	L.status = status
 	L.rigged = rigged
 	L.brightness = brightness
+	L.color = l_color
 
 	// light item inherits the switchcount, then zero it
 	L.switchcount = switchcount

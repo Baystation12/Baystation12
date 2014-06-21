@@ -7,6 +7,8 @@
 /datum/surgery_step/cavity
 	priority = 1
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+		if(!hasorgans(target))
+			return 0
 		var/datum/organ/external/affected = target.get_organ(target_zone)
 		return affected.open == 2 && !(affected.status & ORGAN_BLEEDING) && (target_zone != "chest" || target.op_stage.ribcage == 2)
 
@@ -41,8 +43,9 @@
 	max_duration = 80
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && !affected.cavity && !affected.hidden
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return !affected.cavity && !affected.hidden
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -76,8 +79,9 @@
 	max_duration = 80
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		return ..() && affected.cavity
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return affected.cavity
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -106,11 +110,9 @@
 	max_duration = 100
 
 	can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		if(isslime(target))
-			return 0
-		var/datum/organ/external/affected = target.get_organ(target_zone)
-		var/can_fit = !affected.hidden && affected.cavity && tool.w_class <= get_max_wclass(affected)
-		return ..() && can_fit
+		if(..())
+			var/datum/organ/external/affected = target.get_organ(target_zone)
+			return !affected.hidden && affected.cavity && tool.w_class <= get_max_wclass(affected)
 
 	begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/datum/organ/external/affected = target.get_organ(target_zone)
@@ -185,7 +187,7 @@
 				affected.implants -= obj
 
 				target.hud_updateflag |= 1 << IMPLOYAL_HUD
-				
+
 				//Handle possessive brain borers.
 				if(istype(obj,/mob/living/simple_animal/borer))
 					var/mob/living/simple_animal/borer/worm = obj

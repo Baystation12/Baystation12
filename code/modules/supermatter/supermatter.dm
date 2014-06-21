@@ -44,6 +44,10 @@
 	var/emergency_alert = "CRYSTAL DELAMINATION IMMINENT."
 	var/explosion_point = 1000
 
+	l_color = "#8A8A00"
+	var/warning_color = "#B8B800"
+	var/emergency_color = "#D9D900"
+
 	var/grav_pulling = 0
 	var/pull_radius = 14
 
@@ -99,6 +103,13 @@
 		del src
 		return
 
+//Changes color and luminosity of the light to these values if they were not already set
+/obj/machinery/power/supermatter/proc/shift_light(var/lum, var/clr)
+	if(l_color != clr)
+		l_color = clr
+	if(luminosity != lum)
+		SetLuminosity(lum)
+
 /obj/machinery/power/supermatter/process()
 
 	var/turf/L = loc
@@ -109,12 +120,15 @@
 	if(!istype(L)) 	//We are in a crate or somewhere that isn't turf, if we return to turf resume processing but for now.
 		return  //Yeah just stop.
 
+
 	if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
+
+		shift_light(5, warning_color)
 		if((world.timeofday - lastwarning) / 10 >= WARNING_DELAY)
 			var/stability = num2text(round((damage / explosion_point) * 100))
 
 			if(damage > emergency_point)
-
+				shift_light(7, emergency_color)
 				radio.autosay(addtext(emergency_alert, " Instability: ",stability,"%"), "Supermatter Monitor")
 				lastwarning = world.timeofday
 
@@ -135,7 +149,8 @@
 				mob.apply_effect(rads, IRRADIATE)
 
 			explode()
-
+	else
+		shift_light(4,initial(l_color))
 	if(grav_pulling)
 		supermatter_pull()
 
