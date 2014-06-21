@@ -200,8 +200,8 @@
 	user.show_message("\t Damage Specifics: <font color='#FFA500'>[BU]</font> - <font color='red'>[BR]</font>")
 	if(M.tod && M.stat == DEAD)
 		user.show_message("\blue Time of Disable: [M.tod]")
-
-	if (istype(M, var/mob/living/silicon/robot))
+	
+	if (istype(M, /mob/living/silicon/robot))
 		var/mob/living/silicon/robot/H = M
 		var/list/damaged = H.get_damaged_components(1,1,1)
 		user.show_message("\blue Localized Damage:",1)
@@ -220,8 +220,7 @@
 			user.show_message("\red \t ERROR: INTERNAL SYSTEMS COMPROMISED",1)
 	
 	if (ishuman(M) && (M:species.flags & IS_SYNTHETIC))
-		user.show_message("\blue Operating Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)", 1)
-		
+		var/mob/living/carbon/human/H = M
 		var/list/damaged = H.get_damaged_organs(1,1)
 		user.show_message("\blue Localized Damage, Brute/Electronics:",1)
 		if(length(damaged)>0)
@@ -232,6 +231,8 @@
 				(org.burn_dam > 0)	?	"<font color='#FFA500'>[org.burn_dam]</font>"	:0),1)
 		else
 			user.show_message("\blue \t Components are OK.",1)
-		
+	
+	user.show_message("\blue Operating Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)", 1)
+	
 	src.add_fingerprint(user)
 	return

@@ -322,17 +322,17 @@
 	burn_mod = 1
 
 	warning_low_pressure = 50
-	hazard_low_pressure = 10
+	hazard_low_pressure = 0
 
 	cold_level_1 = 50
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 2000
-	heat_level_2 = 3000
-	heat_level_3 = 4000
+	heat_level_1 = 500		//gives them about 25 seconds in space before taking damage
+	heat_level_2 = 1000
+	heat_level_3 = 2000
 	
-	synth_temp_gain = 6.7 //round(40 / BODYTEMP_COLD_DIVISOR, 0.1)	//this should cause IPCs to stabilize at ~60 C in a 20 C environment. Based on some CPU operating temperatures
+	synth_temp_gain = 10 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
 
