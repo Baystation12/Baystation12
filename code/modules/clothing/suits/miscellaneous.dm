@@ -372,19 +372,29 @@
 	_color = "swim_red"
 	siemens_coefficient = 1
 
-/obj/item/clothing/suit/mercy_hoodie
+/obj/item/clothing/suit/storage/mercy_hoodie
 	name = "Mercy Robe"
-	desc = "Pure white robes, that have an aura of kindness and mercy"
+	desc = " A soft white robe made of a synthetic fiber that provides improved protection against biohazards. Possessing multiple overlapping layers, yet light enough to allow complete freedom of movement, it denotes its wearer as a master physician."
 	icon_state = "mercy_hoodie"
 	item_state = "mercy_hoodie"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	allowed = list(/obj/item/weapon/storage/bible, /obj/item/weapon/nullrod, /obj/item/weapon/reagent_containers/food/drinks/bottle/holywater, /obj/item/weapon/storage/fancy/candle_box, /obj/item/candle, /obj/item/weapon/tank/emergency_oxygen)
+	w_class = 4//bulky item
+	gas_transfer_coefficient = 0.01
+	permeability_coefficient = 0.01
+	flags = FPRINT | TABLEPASS | ONESIZEFITSALL
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	allowed = list(/obj/item/weapon/tank/emergency_oxygen,/obj/item/weapon/pen,/obj/item/device/flashlight/pen)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 20)
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
+	siemens_coefficient = 0.9
 
 /obj/item/clothing/head/mercy_hood
 	name = "Mercy Hood"
-	desc = "A pure white hood."
+	desc = "A soft white hood made of a synthetic fiber that provides improved protection against biohazards. Its elegant design allows a clear field of vision."
 	icon_state = "mercy_hood"
 	item_state = "mercy_hood"
-	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|BLOCKHAIR
+	permeability_coefficient = 0.01
+	flags = FPRINT|TABLEPASS|HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 20)
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES
 	siemens_coefficient = 0.9
-	loose = 2
+	loose = 7

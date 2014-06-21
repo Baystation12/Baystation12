@@ -174,6 +174,17 @@
 							"<span class='suicide'>[user] is slitting \his stomach open with the [src.name]! It looks like \he's trying to commit seppuku.</span>")
 		return (BRUTELOSS)
 
+/obj/item/weapon/kitchenknife/combat
+	name = "combat knife"
+	force = 15.0
+	throwforce = 10.0
+	origin_tech = "materials=2;combat=2"
+	desc = "A razor sharp knife, built from advanced alloys, designed for quick, melee killing. Also not half bad as a kitchen knife."
+	slot_flags = SLOT_BELT
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "combatknife"
+
+
 /obj/item/weapon/kitchenknife/ritual
 	name = "ritual knife"
 	desc = "The unearthly energies that once powered this blade are now dormant."
