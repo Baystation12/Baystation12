@@ -392,7 +392,7 @@ datum/mind
 				crystals = suplink.uses
 			if (suplink)
 				text += "|<a href='?src=\ref[src];common=takeuplink'>take</a>"
-				if (usr.client.holder.rights & R_FUN)
+				if (usr.client.holder.rights & (R_SERVER|R_EVENT))
 					text += ", <a href='?src=\ref[src];common=crystals'>[crystals]</a> crystals"
 				else
 					text += ", [crystals] crystals"
@@ -1059,7 +1059,7 @@ datum/mind
 					take_uplink()
 					memory = null//Remove any memory they may have had.
 				if("crystals")
-					if (usr.client.holder.rights & R_FUN)
+					if (usr.client.holder.rights & (R_SERVER|R_EVENT))
 						var/obj/item/device/uplink/hidden/suplink = find_syndicate_uplink()
 						var/crystals
 						if (suplink)

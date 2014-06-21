@@ -29,7 +29,7 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 				if("buildmode","build")			rights |= R_BUILDMODE
 				if("admin")						rights |= R_ADMIN
 				if("ban")						rights |= R_BAN
-				if("fun")						rights |= R_FUN
+				if("event")						rights |= R_EVENT
 				if("server")					rights |= R_SERVER
 				if("debug")						rights |= R_DEBUG
 				if("permissions","rights")		rights |= R_PERMISSIONS
@@ -41,7 +41,6 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 				if("sound","sounds")			rights |= R_SOUNDS
 				if("spawn","create")			rights |= R_SPAWN
 				if("mod")						rights |= R_MOD
-				if("mentor")				rights |= R_MENTOR
 
 		admin_ranks[rank] = rights
 		previous_rights = rights

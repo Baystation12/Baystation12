@@ -1073,7 +1073,7 @@
 		H.corgize()
 
 	else if(href_list["forcespeech"])
-		if(!check_rights(R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		var/mob/M = locate(href_list["forcespeech"])
 		if(!ismob(M))
@@ -1132,7 +1132,7 @@
 		message_admins("\blue [key_name_admin(usr)] sent [key_name_admin(M)] to the prison station.", 1)
 
 	else if(href_list["tdome1"])
-		if(!check_rights(R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		if(alert(usr, "Confirm?", "Message", "Yes", "No") != "Yes")
 			return
@@ -1161,7 +1161,7 @@
 		message_admins("[key_name_admin(usr)] has sent [key_name_admin(M)] to the thunderdome. (Team 1)", 1)
 
 	else if(href_list["tdome2"])
-		if(!check_rights(R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		if(alert(usr, "Confirm?", "Message", "Yes", "No") != "Yes")
 			return
@@ -1190,7 +1190,7 @@
 		message_admins("[key_name_admin(usr)] has sent [key_name_admin(M)] to the thunderdome. (Team 2)", 1)
 
 	else if(href_list["tdomeadmin"])
-		if(!check_rights(R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		if(alert(usr, "Confirm?", "Message", "Yes", "No") != "Yes")
 			return
@@ -1212,7 +1212,7 @@
 		message_admins("[key_name_admin(usr)] has sent [key_name_admin(M)] to the thunderdome. (Admin.)", 1)
 
 	else if(href_list["tdomeobserve"])
-		if(!check_rights(R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		if(alert(usr, "Confirm?", "Message", "Yes", "No") != "Yes")
 			return
@@ -1245,7 +1245,7 @@
 		message_admins("[key_name_admin(usr)] has sent [key_name_admin(M)] to the thunderdome. (Observer.)", 1)
 
 	else if(href_list["aroomwarp"])
-		if(!check_rights(R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		if(alert(usr, "Confirm?", "Message", "Yes", "No") != "Yes")
 			return
@@ -1474,7 +1474,7 @@
 		src.owner << "(<a href='?src=\ref[usr];priv_msg=\ref[M]'>PM</a>) (<A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>PP</A>) (<A HREF='?_src_=vars;Vars=\ref[M]'>VV</A>) (<A HREF='?src=\ref[src];subtlemessage=\ref[M]'>SM</A>) (<A HREF='?src=\ref[src];adminplayerobservejump=\ref[M]'>JMP</A>) (<A HREF='?src=\ref[src];secretsadmin=check_antagonist'>CA</A>)"
 
 	else if(href_list["adminspawncookie"])
-		if(!check_rights(R_ADMIN|R_FUN))	return
+		if(!check_rights(R_ADMIN|R_EVENT))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["adminspawncookie"])
 		if(!ishuman(H))
@@ -1498,7 +1498,7 @@
 		H << "\blue Your prayers have been answered!! You received the <b>best cookie</b>!"
 
 	else if(href_list["BlueSpaceArtillery"])
-		if(!check_rights(R_ADMIN|R_FUN))	return
+		if(!check_rights(R_ADMIN|R_EVENT))	return
 
 		var/mob/living/M = locate(href_list["BlueSpaceArtillery"])
 		if(!isliving(M))
@@ -1712,15 +1712,15 @@
 				removed_paths += dirty_path
 				continue
 			else if(ispath(path, /obj/item/weapon/gun/energy/pulse_rifle))
-				if(!check_rights(R_FUN,0))
+				if(!check_rights((R_SERVER|R_EVENT),0))
 					removed_paths += dirty_path
 					continue
 			else if(ispath(path, /obj/item/weapon/melee/energy/blade))//Not an item one should be able to spawn./N
-				if(!check_rights(R_FUN,0))
+				if(!check_rights((R_SERVER|R_EVENT),0))
 					removed_paths += dirty_path
 					continue
 			else if(ispath(path, /obj/effect/anomaly/bhole))
-				if(!check_rights(R_FUN,0))
+				if(!check_rights((R_SERVER|R_EVENT),0))
 					removed_paths += dirty_path
 					continue
 			paths += path
@@ -1814,7 +1814,7 @@
 		return
 
 	else if(href_list["secretsfun"])
-		if(!check_rights(R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		var/ok = 0
 		switch(href_list["secretsfun"])

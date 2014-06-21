@@ -465,7 +465,7 @@ As such, it's hard-coded for now. No reason for it not to be, really.
 //=======//CURRENT GHOST VERB//=======//
 
 /client/proc/send_space_ninja()
-	set category = "Fun"
+	set category = "Event"
 	set name = "Spawn Space Ninja"
 	set desc = "Spawns a space ninja for when you need a teenager with attitude."
 	set popup_menu = 0

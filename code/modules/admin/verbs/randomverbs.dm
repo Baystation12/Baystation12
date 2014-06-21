@@ -73,7 +73,7 @@
 
 	var/age = alert(src, "Age check", "Show accounts yonger then _____ days","7", "30" , "All")
 
-	if(age == "All") 
+	if(age == "All")
 		age = 9999999
 	else
 		age = text2num(age)
@@ -86,7 +86,7 @@
 			continue
 		if(C.player_age < age)
 			msg += "[key_name_admin(C)]: account is [C.player_age] days old<br>"
-	
+
 	if(missing_ages)
 		src << "Some accounts did not have proper ages set in their clients.  This function requires database to be present"
 
@@ -202,7 +202,7 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 
 
 /client/proc/cmd_admin_add_random_ai_law()
-	set category = "Fun"
+	set category = "Event"
 	set name = "Add Random AI Law"
 	if(!holder)
 		src << "Only administrators may use this command."
@@ -624,7 +624,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	message_admins("Admin [key_name_admin(usr)] has [action] on joining the round if they use AntagHUD", 1)
 
 /client/proc/cmd_admin_add_freeform_ai_law()
-	set category = "Fun"
+	set category = "Event"
 	set name = "Add Custom AI law"
 	if(!holder)
 		src << "Only administrators may use this command."
@@ -730,7 +730,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Special Verbs"
 	set name = "Explosion"
 
-	if(!check_rights(R_DEBUG|R_FUN))	return
+	if(!check_rights(R_DEBUG|R_EVENT))	return
 
 	var/devastation = input("Range of total devastation. -1 to none", text("Input"))  as num|null
 	if(devastation == null) return
@@ -758,7 +758,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Special Verbs"
 	set name = "EM Pulse"
 
-	if(!check_rights(R_DEBUG|R_FUN))	return
+	if(!check_rights(R_DEBUG|R_EVENT))	return
 
 	var/heavy = input("Range of heavy pulse.", text("Input"))  as num|null
 	if(heavy == null) return
@@ -780,7 +780,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Special Verbs"
 	set name = "Gib"
 
-	if(!check_rights(R_ADMIN|R_FUN))	return
+	if(!check_rights(R_ADMIN|R_EVENT))	return
 
 	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
 	if(confirm != "Yes") return
@@ -799,7 +799,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 /client/proc/cmd_admin_gib_self()
 	set name = "Gibself"
-	set category = "Fun"
+	set category = "Event"
 
 	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
 	if(confirm == "Yes")
@@ -999,11 +999,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 
 /client/proc/everyone_random()
-	set category = "Fun"
+	set category = "Event"
 	set name = "Make Everyone Random"
 	set desc = "Make everyone have a random appearance. You can only use this before rounds!"
 
-	if(!check_rights(R_FUN))	return
+	if(!check_rights(R_SERVER|R_EVENT))	return
 
 	if (ticker && ticker.mode)
 		usr << "Nope you can't do this, the game's already started. This only works before rounds!"

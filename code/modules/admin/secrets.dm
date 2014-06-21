@@ -61,7 +61,7 @@
 					<BR>
 					"}
 		if (1)
-			if(check_rights(R_FUN,0))
+			if(check_rights((R_EVENT|R_SERVER),0))
 				dat += {"
 					<B>'Random' Events</B><BR>
 					<BR>
@@ -98,7 +98,7 @@
 
 
 		if (2)
-			if(check_rights(R_FUN,0))
+			if(check_rights((R_SERVER|R_EVENT),0))
 				dat += {"
 					<B>Fun Secrets</B><BR>
 					<BR>

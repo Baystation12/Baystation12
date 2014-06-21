@@ -656,7 +656,7 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define R_BUILDMODE		1
 #define R_ADMIN			2
 #define R_BAN			4
-#define R_FUN			8
+#define R_EVENT			8
 #define R_SERVER		16
 #define R_DEBUG			32
 #define R_POSSESS		64
@@ -667,9 +667,8 @@ var/list/TAGGERLOCATIONS = list("Disposals",
 #define R_SOUNDS		2048
 #define R_SPAWN			4096
 #define R_MOD			8192
-#define R_MENTOR		16384
 
-#define R_MAXPERMISSION 16384 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
+#define R_MAXPERMISSION 8192 //This holds the maximum value for a permission. It is used in iteration, so keep it updated.
 
 #define R_HOST			65535
 

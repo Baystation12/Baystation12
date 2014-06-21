@@ -121,7 +121,7 @@ var/global/Holiday = null
 //Allows GA and GM to set the Holiday variable
 /client/proc/Set_Holiday(T as text|null)
 	set name = ".Set Holiday"
-	set category = "Fun"
+	set category = "Event"
 	set desc = "Force-set the Holiday variable to make the game think it's a certain day."
 	if(!check_rights(R_SERVER))	return
 

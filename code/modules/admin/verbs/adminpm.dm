@@ -198,7 +198,7 @@
 		if(X.key!=key && X.key!=C.key)
 			switch(type)
 				if("Question")
-					if(X.holder.rights & (R_MOD|R_MENTOR))
+					if(X.holder.rights & R_MOD)
 						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
 					else if(!modholders.len && X.holder.rights & R_ADMIN)
 						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
@@ -211,7 +211,7 @@
 					else if(!debugholders.len && X.holder.rights & R_ADMIN)
 						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
 				else
-					if((X.holder.rights & R_ADMIN) || (X.holder.rights & (R_MOD|R_MENTOR)) )
+					if((X.holder.rights & R_ADMIN) || (X.holder.rights & R_MOD) )
 						X << "<B><font color='blue'>[type]: [key_name(src, X, 0, type)]-&gt;[key_name(C, X, 0, type)]:</B> \blue [msg]</font>" //inform X
 
 /client/proc/cmd_admin_irc_pm()

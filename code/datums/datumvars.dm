@@ -505,7 +505,7 @@ client
 		href_list["datumrefresh"] = href_list["mob_player_panel"]
 
 	else if(href_list["give_spell"])
-		if(!check_rights(R_ADMIN|R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		var/mob/M = locate(href_list["give_spell"])
 		if(!istype(M))
@@ -516,7 +516,7 @@ client
 		href_list["datumrefresh"] = href_list["give_spell"]
 
 	else if(href_list["give_disease"])
-		if(!check_rights(R_ADMIN|R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		var/mob/M = locate(href_list["give_disease"])
 		if(!istype(M))
@@ -525,9 +525,9 @@ client
 
 		src.give_disease(M)
 		href_list["datumrefresh"] = href_list["give_spell"]
-		
+
 	else if(href_list["give_disease2"])
-		if(!check_rights(R_ADMIN|R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		var/mob/M = locate(href_list["give_disease2"])
 		if(!istype(M))
@@ -603,7 +603,7 @@ client
 			usr.client.cmd_assume_direct_control(M)
 
 	else if(href_list["make_skeleton"])
-		if(!check_rights(R_FUN))	return
+		if(!check_rights(R_SERVER|R_EVENT))	return
 
 		var/mob/living/carbon/human/H = locate(href_list["make_skeleton"])
 		if(!istype(H))
@@ -687,7 +687,7 @@ client
 						message_admins("\blue [key_name(usr)] has added [amount] units of [chosen] to \the [A]")
 
 	else if(href_list["explode"])
-		if(!check_rights(R_DEBUG|R_FUN))	return
+		if(!check_rights(R_DEBUG|R_EVENT))	return
 
 		var/atom/A = locate(href_list["explode"])
 		if(!isobj(A) && !ismob(A) && !isturf(A))
@@ -698,7 +698,7 @@ client
 		href_list["datumrefresh"] = href_list["explode"]
 
 	else if(href_list["emp"])
-		if(!check_rights(R_DEBUG|R_FUN))	return
+		if(!check_rights(R_DEBUG|R_EVENT))	return
 
 		var/atom/A = locate(href_list["emp"])
 		if(!isobj(A) && !ismob(A) && !isturf(A))
@@ -801,8 +801,8 @@ client
 			usr << "Mob doesn't exist anymore"
 			return
 		holder.Topic(href, list("makeai"=href_list["makeai"]))
-		
-		
+
+
 	else if(href_list["makemask"])
 		if(!check_rights(R_SPAWN)) return
 		var/mob/currentMob = locate(href_list["makemask"])
@@ -811,8 +811,8 @@ client
 			usr << "Mob doesn't exist anymore"
 			return
 		holder.Topic(href, list("makemask"=href_list["makemask"]))
-		
-		
+
+
 	else if(href_list["setmutantrace"])
 		if(!check_rights(R_SPAWN))	return
 
@@ -955,7 +955,7 @@ client
 		M.regenerate_icons()
 
 	else if(href_list["adjustDamage"] && href_list["mobToDamage"])
-		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		if(!check_rights(R_DEBUG|R_ADMIN|R_EVENT))	return
 
 		var/mob/living/L = locate(href_list["mobToDamage"])
 		if(!istype(L)) return

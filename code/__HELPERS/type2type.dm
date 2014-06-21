@@ -317,7 +317,7 @@ proc/tg_text2list(text, glue=",", assocglue=";")
 	if(rights & R_BUILDMODE)	. += "[seperator]+BUILDMODE"
 	if(rights & R_ADMIN)		. += "[seperator]+ADMIN"
 	if(rights & R_BAN)			. += "[seperator]+BAN"
-	if(rights & R_FUN)			. += "[seperator]+FUN"
+	if(rights & R_EVENT)		. += "[seperator]+EVENT"
 	if(rights & R_SERVER)		. += "[seperator]+SERVER"
 	if(rights & R_DEBUG)		. += "[seperator]+DEBUG"
 	if(rights & R_POSSESS)		. += "[seperator]+POSSESS"
@@ -328,7 +328,6 @@ proc/tg_text2list(text, glue=",", assocglue=";")
 	if(rights & R_SOUNDS)		. += "[seperator]+SOUND"
 	if(rights & R_SPAWN)		. += "[seperator]+SPAWN"
 	if(rights & R_MOD)			. += "[seperator]+MODERATOR"
-	if(rights & R_MENTOR)		. += "[seperator]+MENTOR"
 	return .
 
 /proc/ui_style2icon(ui_style)
