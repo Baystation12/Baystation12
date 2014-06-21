@@ -5,8 +5,8 @@ Created on Sep 21, 2013
 '''
 import os
 
-from .map import Map, Tile, MapRenderFlags
-from .objtree import ObjectTree
+from byond.map import Map, Tile, MapRenderFlags
+from byond.objtree import ObjectTree
 
 def GetFilesFromDME(dmefile='baystation12.dme', ext='.dm'):
     filesInDME=[]
@@ -30,7 +30,7 @@ def GetFilesFromDME(dmefile='baystation12.dme', ext='.dm'):
                     if c == '"':
                         inString = not inString
                         if not inString:
-                            filepath = os.path.join(rootdir, filename)
+                            filepath = os.path.join(rootdir, filename.replace('\\',os.sep))
                             if filepath.endswith(ext):
                                 filesInDME += [filepath]
                             filename = ''
