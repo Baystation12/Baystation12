@@ -40,7 +40,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/jumptoturf,			/*allows us to jump to a specific turf*/
 	/client/proc/admin_call_shuttle,	/*allows us to call the emergency shuttle*/
 	/client/proc/admin_cancel_shuttle,	/*allows us to cancel the emergency shuttle, sending it back to centcomm*/
-	/client/proc/cmd_admin_create_centcom_report,
 	/client/proc/check_words,			/*displays cult-words*/
 	/client/proc/check_ai_laws,			/*shows AI and borg laws*/
 	/client/proc/admin_memo,			/*admin memo system. show/delete/write. +SERVER needed to delete admin memos of others*/
@@ -58,7 +57,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_mod_say,
 	/datum/admins/proc/show_player_info,
 	/client/proc/free_slot,			/*frees slot for chosen job*/
-	/client/proc/cmd_admin_change_custom_event,
 	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/toggleattacklogs,
 	/client/proc/toggledebuglogs,
@@ -93,10 +91,12 @@ var/list/admin_verbs_event = list(
 	/client/proc/toggle_random_events,
 	/client/proc/editappear,
 	/client/proc/toggle_random_events,
+	/client/proc/cmd_admin_change_custom_event,
 	/datum/admins/proc/access_news_network,	/*allows access of newscasters*/
 	/client/proc/cmd_admin_direct_narrate,	/*send text directly to a player with no padding. Useful for narratives and fluff-text*/
 	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
 	/client/proc/response_team, // Response Teams admin verb
+	/client/proc/cmd_admin_create_centcom_report,
 	/client/proc/gib_money // /vg/
 	)
 
@@ -130,6 +130,9 @@ var/list/admin_verbs_server = list(
 	/client/proc/cmd_admin_direct_narrate,	/*send text directly to a player with no padding. Useful for narratives and fluff-text*/
 	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
 	/client/proc/toggle_random_events,
+	/client/proc/one_click_antag,
+	/client/proc/cmd_admin_change_custom_event,
+	/client/proc/cmd_admin_create_centcom_report,
 	/client/proc/response_team // Response Teams admin verb
 
 	)

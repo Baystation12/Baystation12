@@ -363,7 +363,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	feedback_add_details("admin_verb","MPWN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_debug_tog_aliens()
-	set category = "Server"
+	set category = "Event"
 	set name = "Toggle Aliens"
 
 	aliens_allowed = !aliens_allowed

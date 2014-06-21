@@ -693,7 +693,7 @@ var/global/nologevent = 0
 	feedback_add_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleAI()
-	set category = "Server"
+	set category = "Event"
 	set desc="People can't be AI"
 	set name="Toggle AI"
 	config.allow_ai = !( config.allow_ai )
@@ -720,7 +720,7 @@ var/global/nologevent = 0
 	feedback_add_details("admin_verb","TR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggle_aliens()
-	set category = "Server"
+	set category = "Event"
 	set desc="Toggle alien mobs"
 	set name="Toggle Aliens"
 	aliens_allowed = !aliens_allowed
@@ -730,7 +730,7 @@ var/global/nologevent = 0
 
 
 /datum/admins/proc/toggle_space_ninja()
-	set category = "Server"
+	set category = "Event"
 	set desc="Toggle space ninjas spawning."
 	set name="Toggle Space Ninjas"
 	toggle_space_ninja = !toggle_space_ninja
