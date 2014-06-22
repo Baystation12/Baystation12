@@ -12,7 +12,6 @@
 	load_offset_y = 9
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
-	var/lead_engine = 1		//if the engine is the lead engine - set automatically
 	active_engines = 1
 
 /obj/vehicle/train/cargo/trolley
@@ -43,9 +42,10 @@
 	if(on && cell.charge < power_use)
 		turn_off()
 		update_stats()
-		if(load && lead_engine)
+		if(load && is_train_head())
 			load << "The drive motor briefly whines, then crawls to a stop."
-	if(lead_engine && !on)
+	
+	if(is_train_head() && !on)
 		return 0
 
 	return ..()
@@ -108,7 +108,7 @@
 /obj/vehicle/train/cargo/engine/RunOver(var/mob/living/carbon/human/H)
 	..()
 
-	if(lead_engine && istype(load, /mob/living/carbon/human))
+	if(is_train_head() && istype(load, /mob/living/carbon/human))
 		var/mob/living/carbon/human/D = load
 		D << "\red \b You ran over [H]!"
 		visible_message("<B>\red \The [src] ran over [H]!</B>")
@@ -158,7 +158,7 @@
 	if(user != load)
 		return 0
 
-	if(lead_engine)
+	if(is_train_head())
 		if(direction == reverse_direction(dir))
 			return 0
 		if(Move(get_step(src, direction)))
@@ -166,24 +166,6 @@
 		return 0
 	else
 		return ..()
-
-
-/obj/vehicle/train/cargo/engine/verb/start_engine()
-	set name = "Start engine"
-	set category = "Object"
-	set src in view(1)
-
-	if(on)
-		usr << "The engine is already running."
-		return
-
-	if(turn_on())
-		usr << "You start [src]."
-	else
-		if(cell.charge < power_use)
-			usr << "[src] is out of power."
-		else
-			usr << "[src] won't start."
 
 /obj/vehicle/train/cargo/engine/verb/climb_down(mob/user as mob)
 	set name = "Exit vehicle"
@@ -196,54 +178,53 @@
 		return
 	
 	unload(user)
+
+
+/obj/vehicle/train/cargo/engine/verb/start_engine()
+	set name = "Start engine"
+	set category = "Object"
+	set src in view(1)
+
+	if(on)
+		usr << "The engine is already running."
+		return
+
+	turn_on()
+	if (on)
+		usr << "You start [src]'s engine."
+	else
+		if(cell.charge < power_use)
+			usr << "[src] is out of power."
+		else
+			usr << "[src]'s engine won't start."
+
+/obj/vehicle/train/cargo/engine/verb/stop_engine()
+	set name = "Stop engine"
+	set category = "Object"
+	set src in view(1)
 	
+	if(!on)
+		usr << "The engine is already stopped."
+		return
+
+	turn_off()
+	if (!on)
+		usr << "You stop [src]'s engine."
 
 //-------------------------------------------
 // Latching/unlatching procs
 //-------------------------------------------
-/obj/vehicle/train/cargo/trolley/latch(var/obj/vehicle/train/T)
-	if(..())
-		//if this is a trolley, and is now part of a train, anchor it so it cant be pushed around
-		if(lead)
-			anchored = 1
-			lead.anchored = 1
-		if(tow)
-			anchored = 1
-			tow.anchored = 1
-		return 1
-	else
-		return 0
+/obj/vehicle/train/cargo/trolley/attach_to(obj/vehicle/train/T, mob/user)
+	..()
+	if (lead)
+		//This is now part of a train, anchor it so it cant be pushed around
+		anchored = 1
 
-/obj/vehicle/train/cargo/trolley/unlatch()
-	if(..())
-		//if this carraige isn't part of a train anymore; unanchor it so it can be pushed around
-		if(!tow && !lead)
-			anchored = 0
-		return 1
-	else
-		return 0
-
-
-/obj/vehicle/train/cargo/engine/latch(var/obj/vehicle/train/T)
-	if(..())
-		//check if this is not the lead engine
-		if(lead)
-			lead_engine = 0
-		if(tow)
-			tow.anchored = 1
-		return 1
-	else
-		return 0
-
-/obj/vehicle/train/cargo/engine/unlatch()
-	if(..())
-		//check if this is now the lead engine
-		if(!lead)
-			lead_engine = 1
-		return 1
-	else
-		return 0
-
+/obj/vehicle/train/cargo/trolley/unattach(mob/user)
+	..()
+	if (!lead && !tow)
+		//if this carriage isn't part of a train anymore; unanchor it so it can be pushed around
+		anchored = 0
 
 //-------------------------------------------
 // Loading/unloading procs
@@ -277,13 +258,11 @@
 /obj/vehicle/train/cargo/engine/update_train_stats()
 	..()
 
-	speed_calc()
+	update_move_delay()
 
-	if(!lead) //check if this is the lead engine
-		lead_engine = 1
 
-/obj/vehicle/train/cargo/engine/proc/speed_calc()
-	if(!lead_engine)
+/obj/vehicle/train/cargo/engine/proc/update_move_delay()
+	if(!is_train_head())
 		move_delay = initial(move_delay)		//so that engines that have been turned off don't lag behind
 	else
 		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines)	//limits base overweight so you cant overspeed trains
