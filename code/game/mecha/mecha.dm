@@ -987,7 +987,7 @@
 		return
 	var/passed
 	if(src.dna)
-		if (user.stat || !ishuman(user))
+		if (user.stat || ishuman(user))
 			if(user.dna.unique_enzymes==src.dna)
 				passed = 1
 	else if(src.operation_allowed(user))
